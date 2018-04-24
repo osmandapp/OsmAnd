@@ -15,7 +15,7 @@
     <string name="map_widget_time">Temps per arribar-hi</string>
     <string name="show_cameras">Radars</string>
     <string name="show_traffic_warnings">Notificacions de trànsit</string>
-    <string name="route_updated_loc_found">La ruta es tornarà a calcular quan es determini la localització</string>
+    <string name="route_updated_loc_found">En espera del posicionament per tornar a calcular la ruta</string>
     <string name="starting_point_too_far">El punt d\'inici és massa lluny de la carretera més propera.</string>
     <string name="osmand_parking_time_limit_title">Indica el temps límit d\'aparcament</string>
     <string name="osmand_parking_choose_type">Tria el tipus d\'aparcament</string>
@@ -26,18 +26,18 @@
     <string name="map_widget_compass">Brúixola</string>
     <string name="bg_service_interval">Defineix el temps de despertament:</string>
     <string name="avoid_toll_roads">Evita vies de peatge</string>
-    <string name="continue_follow_previous_route_auto">La navegació anterior no ha estat finalitzada. Desitgeu continuar-la? (%1$s segons)</string>
+    <string name="continue_follow_previous_route_auto">Voleu continuar la navegació anterior que encara no havia finalitzat? (%1$s segons)</string>
     <string name="osmand_parking_hours">Hores</string>
     <string name="osmand_parking_minutes">Minuts</string>
     <string name="osmand_parking_position_description_add_time">El cotxe està aparcat a</string>
     <string name="use_compass_navigation_descr">Usa la brúixola quan no es pugui determinar la direcció altrament.</string>
     <string name="use_compass_navigation">Usa la brúixola</string>
     <string name="shared_location">Localització compartida</string>
-    <string name="osmand_parking_position_description">Localització del vostre cotxe aparcat. %1$s</string>
+    <string name="osmand_parking_position_description">Localització del vostre vehicle aparcat. %1$s</string>
     <string name="gpxup_public">Públic</string>
     <string name="gpxup_private">Privat</string>
     <string name="layer_map_appearance">Configura la pantalla</string>
-    <string name="screen_is_locked">Per desbloquejar la pantalla premeu la icona de bloqueig</string>
+    <string name="screen_is_locked">Premeu la icona de bloqueig per desbloquejar la pantalla</string>
     <string name="map_widget_lock_screen">Bloqueja la pantalla</string>
     <string name="map_widget_next_turn">Proper gir</string>
     <string name="map_widget_next_turn_small">Proper gir (petit)</string>
@@ -59,7 +59,7 @@
     <string name="osmand_parking_plugin_description">El connector de localització d\'aparcament us permet recordar on està aparcat el vostre cotxe i quant temps li queda (si l\'aparcament té una limitació de temps).
 \nTant la situació com el temps que us queda es mostren al tauler de l\'OsmAnd així com al giny en el mapa. Es pot afegir una alarma al vostre calendari d\'Android com a recordatori.</string>
     <string name="osmand_parking_plugin_name">Posició d\'aparcament</string>
-    <string name="context_menu_item_add_parking_point">Marca com a posició d\'aparcament</string>
+    <string name="context_menu_item_add_parking_point">Marca com a lloc d\'aparcament</string>
     <string name="context_menu_item_delete_parking_point">Suprimeix un marcador d\'aparcament</string>
     <string name="gpxup_identifiable">Identificable</string>
     <string name="route_roundabout">Rotonda: preneu la %1$d sortida i continueu</string>
@@ -146,7 +146,7 @@
     <string name="use_fluorescent_overlays_descr">Utilitza colors fluorescents per mostrar traces i rutes.</string>
     <string name="local_openstreetmap_uploading">S\'està pujant…</string>
     <string name="show_warnings_descr">Configureu els advertiments de trànsit (límits de velocitat, cues, bandes rugoses, túnels), avisos de radars i informació dels carrils.</string>
-    <string name="osmand_parking_add_event">Afegeix un avís a l\'aplicació Calendari</string>
+    <string name="osmand_parking_add_event">Afegeix un avís a Calendari</string>
     <string name="rendering_attr_noPolygons_description">Fes transparents totes les característiques d\'àrees de sòl al mapa.</string>
     <string name="edit_filter_create_message">S\'ha creat el filtre {0}</string>
     <string name="email">e-mail</string>
@@ -195,7 +195,7 @@ S\'ocuparà una memòria de {1} MB
     <string name="show_lanes">Carrils</string>
     <string name="avoid_ferries">Evita els ferris</string>
     <string name="avoid_in_routing_descr">Evita les carreteres de peatge, les no pavimentades i els ferris.</string>
-    <string name="osmand_parking_warning_text">S\'ha afegit una notificació al vostre Calendari per retirar el vostre cotxe. Es mantindrà fins que l\'elimineu manualment.</string>
+    <string name="osmand_parking_warning_text">S\'ha afegit una notificació a la vostra agenda perquè traieu el vostre cotxe. Hi seguirà fins que l\'elimineu manualment.</string>
     <string name="route_kl">Mantingueu-vos a l\'esquerra i continueu</string>
     <string name="route_kr">Mantingueu-vos a la dreta i continueu</string>
     <string name="test_voice_prompts">Prova els indicadors de veu</string>
@@ -526,7 +526,7 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="use_trackball_descr">Utilitzeu el ratolí de bola per moure el mapa.</string>
     <string name="use_trackball">Utilitza el ratolí de bola</string>
     <string name="process_navigation_service">Servei de navegació de l\'OsmAnd</string>
-    <string name="osmand_parking_position_description_add">Per recollir el cotxe a:</string>
+    <string name="osmand_parking_position_description_add">Per rectirar el vehicle a:</string>
     <string name="live_monitoring_interval">Interval de seguiment en viu</string>
     <string name="live_monitoring_interval_descr">Especifiqueu l\'interval de seguiment en línia.</string>
     <string name="live_monitoring_url">Adreça web de seguiment en viu</string>
@@ -2420,7 +2420,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="fonts_header">Tipus de lletra</string>
     <string name="osmand_extended_description_part2">Navegació GPS • Podeu triar el mode desconnectat (no hi hauran càrrecs de roaming si sou a l\'estranger) o el mode en línia (més àgil) • El guiatge de veu gir-a-gir us dirigeix pel camí (veus enregistrades i sintètiques) • La ruta es tornarà a calcular si us desvieu de la proposta anterior • Les indicacions de carril, els noms de carrer i el temps d\'arribada estimat us ajudaran pel camí • Per fer el vostre viatge més segur, els canvis entre mode diürn i nocturn són automàtics • Podeu activar la indicació dels límits de velocitat i d\'advertiments si els supereu • L\'escala del mapa s\'ajusta a la vostra velocitat • Podeu cercar destinacions per adreça, per tipus (p. ex.: aparcament, restaurant, hotel, gasolinera, museu), o per les coordenades geogràfiques • Gestiona els punts de pas en el vostre itinerari • Podeu enregistrar el vostre trajecte o pujar una traça GPX i seguir-la</string>
     <string name="osmand_extended_description_part4">El connector de mapes d\'esquí d\'OsmAnd us permet veure les pistes segons la seva dificultat i d\'altres informacions addicionals, com ara la ubicació dels ascensors i altres equipaments.</string>
-    <string name="osmand_extended_description_part5">Ciclisme • Podreu trobar les vies de ciclisme en el mapa • La navegació GPS en mode ciclisme genera la vostra ruta utilitzant vies de ciclisme • Podreu veure la vostra velocitat i altitud • L\'opció d\'enregistrar traces GPX us permet també compartir-les • El connector addicional Via us permet activar les corbes de nivell i l\'ombrejat de relleu</string>
+    <string name="osmand_extended_description_part5">Ciclisme • Podreu trobar les vies de ciclisme en el mapa • La navegació GPS en mode ciclisme genera la vostra ruta utilitzant vies de ciclisme • Podreu veure la vostra velocitat i altitud • L\'opció d\'enregistrar traces GPX us permet també compartir-les • Amb un connector podreu activar les corbes de nivell i l\'ombrejat de relleu</string>
     <string name="osmand_extended_description_part6">A peu, fent senderisme, o visitant una ciutat • El mapa mostra les rutes per vianants i de senderisme • La Viquipèdia, en el vostre idioma preferit, us pot ajudar molt visitant una ciutat • Parades de transport públic (autobús, tramvia, tren), incloent-hi noms de línia, suport per la navegació en una ciutat nova • La navegació GPS en mode de vianants genera la vostra ruta per camins • Podeu baixar i seguir una traça GPX o enregistrar i compartir les vostres</string>
     <string name="osmand_extended_description_part7">"Col·laboreu amb Openstreetmap (OSM) • Informant de dades errònies • Pujant traces GPX a OSM directament des de l\'aplicació • Afegint PDIs i penjar-los a OSM directament  (o més tard si no esteu connectats)"</string>
     <string name="analyze_on_map">Analitza en el mapa</string>
@@ -2449,7 +2449,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="quick_action_add_first_intermediate_desc">Prement aquest botó d\'acció afegireu el punt central de la pantalla com primera destinació intermèdia.</string>
     <string name="depth_contour_descr">Isòbates i fondàries nàutiques puntuals.</string>
     <string name="shared_string_paused">En pausa</string>
-    <string name="osmand_extended_description_part3">Mapa • Mostra els PDIs (punts d\'interès) al vostre voltant • Ajusta l\'orientació del mapa a la vostra direcció del moviment (o al nord) • Mostra on sou i com esteu orientat • Compartiu la vostra ubicació perquè els vostres amics us puguin trobar • Manté els vostres llocs més importants a Preferits • Permet escollir com es mostren els noms al mapa: en anglès, llengues locals o amb ortografia fonètica • Mostra representacions especialitzades disponibles a la xarxa, imatges de satèl·lit (Bing), diferents superposicions com traces GPX d\'exploració/navegació i capes addicionals amb un grau transparència variable</string>
+    <string name="osmand_extended_description_part3">Mapa • Mostra els PDIs (punts d\'interès) al vostre voltant • Ajusta l\'orientació del mapa a la vostra direcció del moviment (o al nord) • Mostra on sou i com esteu orientat • Compartiu la vostra ubicació perquè els vostres amics us puguin trobar • Manté els vostres llocs més importants a \'Preferits\' • Us permet escollir com es mostrar els noms al mapa: en anglès, la lenga local o amb ortografia fonètica • Mostra representacions especialitzades disponibles a la xarxa, imatges de satèl·lit (Bing), diferents superposicions com traces GPX d\'exploració/navegació i capes addicionals amb un grau transparència variable</string>
     <string name="osmand_plus_extended_description_part2">Navegació • Funciona en línia (ràpid) o sense connexió (sense càrrecs de roaming quan sigueu a l\'estranger) • Indicacions de veu a cada gir (amb missatges gravats i sintetitzats) • Orientació opcional del carril, visualització del nom de la via i el temps estimat d\'arribada • Admet punts de pas intermedis • Revisió automàtica de la ruta quan us aparteu de la ruta proposada • Cerca de llocs per adreça, tipus (per exemple: restaurant, hotel, gasolinera, museu) o coordenades geogràfiques</string>
     <string name="osmand_plus_extended_description_part1">OsmAnd + (OSM Automated Navigation Directions) és una aplicació per consulta de mapes i de navegació, amb accés a les dades obertes d\'OpenStreetMap (OSM), d\'abast mundial i gran qualitat. Navegueu amb indicacions visuals i de veu, mostrant PDIs (punts d\'interès), creant i gestionant traces GPX, disposant de corbes de nivell i cotes puntuals, seleccioneu la navegació per vehicle, bicicleta o vianant, editeu OSM i molt més. OsmAnd + és la versió de pagament de l\'aplicació. En comprar-la, recolzareu el projecte, finançant el desenvolupament de noves característiques i rebreu les darreres actualitzacions. Característiques principals:</string>
     <string name="type_city_town">Introduïu el poble o ciutat</string>
@@ -2461,7 +2461,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="select_street">Selecciona el carrer</string>
     <string name="shared_string_in_name">inclou %1$s</string>
     <string name="type_address">Indiqueu l\'adreça</string>
-    <string name="osmand_plus_extended_description_part4">Utilitza les dades d\'OSM i de la Viquipèdia • Informació de qualitat dels millors projectes col·laboratius del món • Les dades OSM estan disponibles per país o regió • Els PDI\'s de la Viquipèdia són perfectes per fer turisme • Baixades il·limitades i gratuïtes, directament des de l\'aplicació • Mapes vectorials compactes en local que s\'actualitzen un cop al mes, com a mínim • Selecció entre les dades completes d\'una regió o només la xarxa viària (Exemple: tot el Japó ocupa 700 MB però només són 200 MB per a la xarxa viària)</string>
+    <string name="osmand_plus_extended_description_part4">Utilitza les dades d\'OSM i de la Viquipèdia • Informació de qualitat dels millors projectes col·laboratius del món • Les dades OSM estan disponibles per país o regió • Els PDI\'s de la Viquipèdia són perfectes per fer turisme • Baixades il·limitades i gratuïtes, directament des de l\'aplicació • Mapes vectorials compactes en local que s\'actualitzen un cop al mes, com a mínim • Selecció entre les dades completes d\'una regió o només la xarxa viària (Exemple: tot el Japó ocupa 700 MB però només 200 MB per a la xarxa viària)</string>
     <string name="osmand_plus_extended_description_part5">"Característiques de seguretat • Canvi automàtic entre el mode diürn/nocturn (opcional) • Indicacions del límit de velocitat i notificació d\'excés (opcional) • Escala en funció de la velocitat  (opcional) • Si compartiu la vostra ubicació, els vostres amics us podran trobar"</string>
     <string name="osmand_plus_extended_description_part6">Característiques per ciclistes i vianants • Visualització de vies per vianants, senderisme i carrils bici, ideal per activitats a l\'aire lliure • Representació i navegació a mida per ciclistes i vianants • Indicació opcional de les parades del transport públic (autobús, tramvia, tren), incloent-hi noms de línia • Enregistrament opcional del trajecte en un fitxer GPX local o a un servei a la xarxa • Indicació opcional de la velocitat i l\'altitud • Visualització de corbes de nivell i ombrejat de relleu (requereix connector)</string>
     <string name="osmand_plus_extended_description_part7">"Col·laboreu directament amb OSM • Notifiqueu errors en les dades • Pugeu traces GPX directament a OSM des de l\'aplicació • Afegiu PDIs i pugeu-los OSM (o feu-ho més tard si no esteu connectats) • Registre opcional del trajecte,  també en segon pla (mentre el dispositiu està bloquejat) OsmAnd és de codi obert i es desenvolupa activament . Tothom pot recolzar l\'aplicació informant d\'errors, millorant les traduccions o programant noves característiques. El projecte està en plena efervescència i millora contínua per aquestes vies de desenvolupament i interacció amb l\'usuari. L\'avenç del projecte també es basa en les aportacions econòmiques i la col·laboració en les proves de noves funcionalitats."</string>
@@ -2845,4 +2845,5 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="purchase_dialog_title">Seleccioneu un pla</string>
     <string name="purchase_dialog_travel_description">Per llegir articles de viatge fora de línia, us cal comprar un dels elements següents.</string>
     <string name="purchase_dialog_subtitle">Seleccioneu l\'element adient:</string>
+    <string name="travel_guide">Guia de viatges</string>
     </resources>
