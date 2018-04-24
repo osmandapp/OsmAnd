@@ -88,14 +88,14 @@ public class WikivoyageWebViewClient extends WebViewClient implements RegionCall
 			if (articleId != 0) {
 				WikivoyageArticleDialogFragment.showInstance(app, fragmentManager, articleId, lang);
 			} else {
-				warnAboutExternalLoad(url);
+				warnAboutExternalLoad(url, context, nightMode);
 			}
 			return true;
 		} else if (url.contains(WIKI_DOMAIN)) {
 			String articleName = getArticleNameFromUrl(url, getLang(url));
 			getWikiArticle(articleName, url);
 		} else if (url.startsWith(PAGE_PREFIX_HTTP) || url.startsWith(PAGE_PREFIX_HTTPS)) {
-			warnAboutExternalLoad(url);
+			warnAboutExternalLoad(url, context, nightMode);
 		} else if (url.startsWith(PREFIX_GEO)) {
 			if (article != null) {
 				List<GPXUtilities.WptPt> points = article.getGpxFile().getPoints();
@@ -157,7 +157,7 @@ public class WikivoyageWebViewClient extends WebViewClient implements RegionCall
 		return articleName;
 	}
 
-	private void warnAboutExternalLoad(final String url) {
+	private static void warnAboutExternalLoad(final String url, final Context context, final boolean nightMode) {
 		new AlertDialog.Builder(context)
 				.setTitle(url)
 				.setMessage(R.string.online_webpage_warning)
@@ -186,7 +186,7 @@ public class WikivoyageWebViewClient extends WebViewClient implements RegionCall
 			WikivoyageArticleWikiLinkFragment.showInstance(fragmentManager, regionName == null ?
 					"" : regionName, url);
 		} else {
-			articleSearchTask = new WikiArticleSearchTask(name, indexes, (MapActivity) context);
+			articleSearchTask = new WikiArticleSearchTask(name, indexes, (MapActivity) context, nightMode, url);
 			articleSearchTask.execute();
 		}
 
@@ -266,12 +266,17 @@ public class WikivoyageWebViewClient extends WebViewClient implements RegionCall
 		private String name;
 		private List<AmenityIndexRepositoryBinary> indexes;
 		private WeakReference<MapActivity> weakContext;
+		private boolean isNightMode;
+		private String url;
 
-		WikiArticleSearchTask(String articleName, List<AmenityIndexRepositoryBinary> indexes, MapActivity context) {
+		WikiArticleSearchTask(String articleName, List<AmenityIndexRepositoryBinary> indexes,
+							  MapActivity context, boolean isNightMode, String url) {
 			name = articleName;
 			this.indexes = indexes;
 			weakContext = new WeakReference<>(context);
 			dialog = createProgressDialog();
+			this.isNightMode = isNightMode;
+			this.url = url;
 		}
 
 		@Override
@@ -309,7 +314,7 @@ public class WikivoyageWebViewClient extends WebViewClient implements RegionCall
 				if (!found.isEmpty()) {
 					WikipediaDialogFragment.showInstance(activity, found.get(0));
 				} else {
-					Toast.makeText(activity, R.string.wiki_article_not_found, Toast.LENGTH_LONG).show();
+					warnAboutExternalLoad(url, weakContext.get(), isNightMode);
 				}
 			}
 		}
