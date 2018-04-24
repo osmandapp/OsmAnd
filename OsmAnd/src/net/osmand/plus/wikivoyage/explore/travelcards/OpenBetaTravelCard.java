@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.dialogs.ChoosePlanDialogFragment;
+import net.osmand.plus.chooseplan.ChoosePlanDialogFragment;
 
 public class OpenBetaTravelCard extends BaseTravelCard {
 

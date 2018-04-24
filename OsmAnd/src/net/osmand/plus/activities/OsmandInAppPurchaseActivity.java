@@ -1,10 +1,12 @@
 package net.osmand.plus.activities;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
@@ -16,8 +18,6 @@ import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseTaskType;
 
 import org.apache.commons.logging.Log;
-
-import static net.osmand.plus.OsmandApplication.SHOW_PLUS_VERSION_INAPP_PARAM;
 
 @SuppressLint("Registered")
 public class OsmandInAppPurchaseActivity extends AppCompatActivity implements InAppPurchaseListener {
@@ -74,20 +74,21 @@ public class OsmandInAppPurchaseActivity extends AppCompatActivity implements In
 		}
 	}
 
-	public void purchaseFullVersion() {
-		OsmandApplication app = getMyApplication();
-		if (Version.isFreeVersion(app)) {
-			if (app.getRemoteBoolean(SHOW_PLUS_VERSION_INAPP_PARAM, true)) {
+	public static void purchaseFullVersion(@NonNull final Activity activity) {
+		OsmandApplication app = (OsmandApplication) activity.getApplication();
+		if (app != null && Version.isFreeVersion(app)) {
+			if (app.isPlusVersionInApp()) {
+				InAppPurchaseHelper purchaseHelper = app.getInAppPurchaseHelper();
 				if (purchaseHelper != null) {
-					app.logEvent(this, "in_app_purchase_redirect");
-					purchaseHelper.purchaseFullVersion(this);
+					app.logEvent(activity, "in_app_purchase_redirect");
+					purchaseHelper.purchaseFullVersion(activity);
 				}
 			} else {
-				app.logEvent(this, "paid_version_redirect");
+				app.logEvent(activity, "paid_version_redirect");
 				Intent intent = new Intent(Intent.ACTION_VIEW,
 						Uri.parse(Version.getUrlWithUtmRef(app, "net.osmand.plus")));
 				try {
-					startActivity(intent);
+					activity.startActivity(intent);
 				} catch (ActivityNotFoundException e) {
 					LOG.error("ActivityNotFoundException", e);
 				}
@@ -95,10 +96,14 @@ public class OsmandInAppPurchaseActivity extends AppCompatActivity implements In
 		}
 	}
 
-	public void purchaseDepthContours() {
-		if (purchaseHelper != null) {
-			getMyApplication().logEvent(this, "depth_contours_purchase_redirect");
-			purchaseHelper.purchaseDepthContours(this);
+	public static void purchaseDepthContours(@NonNull final Activity activity) {
+		OsmandApplication app = (OsmandApplication) activity.getApplication();
+		if (app != null) {
+			InAppPurchaseHelper purchaseHelper = app.getInAppPurchaseHelper();
+			if (purchaseHelper != null) {
+				app.logEvent(activity, "depth_contours_purchase_redirect");
+				purchaseHelper.purchaseDepthContours(activity);
+			}
 		}
 	}
 
