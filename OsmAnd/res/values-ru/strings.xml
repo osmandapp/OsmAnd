@@ -2909,4 +2909,6 @@
     <string name="monthly_map_updates">Обновления карт: <b>ежемесячные</b></string>
     <string name="daily_map_updates">Обновления карт: <b>ежедневные, ежечасные</b></string>
     <string name="in_app_purchase_desc_ex">После покупки этот план станет доступен для вас навсегда.</string>
+    <string name="travel_guide">"Путеводитель "</string>
+    <string name="travel_guide_description">Просматривайте путеводители Викигида по самым интересным местам на планете внутри Osmand без подключения к интернету.</string>
     </resources>
