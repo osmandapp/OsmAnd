@@ -2216,7 +2216,7 @@ Długość %2$s</string>
     <string name="shared_string_status">Status</string>
     <string name="add_time_span">Dodaj przedział czasowy</string>
     <string name="road_blocked">Droga zablokowana</string>
-    <string name="switch_start_finish">Odwróć kolejność</string>
+    <string name="switch_start_finish">Odwróć punkt początkowy i cel podróży</string>
     <string name="rendering_attr_hideIcons_name">Ikony użytecznych miejsc</string>
     <string name="rec_split">Dzielenie nagrań</string>
     <string name="rec_split_title">Dzielenie rejestrowanych nagrań</string>
@@ -3061,4 +3061,16 @@ Reprezentuje obszar: %1$s x %2$s</string>
     
     <string name="unlimited_downloads">Nieograniczone pobrania</string>
     <string name="images_cache">Pamięć podręczna obrazów</string>
+    <string name="travel_guide">Przewodnik podróży</string>
+    <string name="travel_guide_description">Przeglądaj przewodniki Wikipodróży po najciekawszych miejscach na świecie w aplikacji OsmAnd bez połączenia z internetem.</string>
+    <string name="in_app_purchase">Zakupy w aplikacji</string>
+    <string name="in_app_purchase_desc">Płatność jednorazowa</string>
+    <string name="in_app_purchase_desc_ex">Raz zakupiony, będzie stale dla ciebie dostępny.</string>
+    <string name="purchase_unlim_title">Kup - %1$s</string>
+    <string name="purchase_subscription_title">Subskrybuj - %1$s</string>
+
+    <string name="unlock_all_features">Odblokowanie wszystkich funkcji OsmAnd</string>
+
+    <string name="purchase_dialog_title">Wybierz plan</string>
+    <string name="purchase_dialog_subtitle">Wybierz odpowiedni element:</string>
     </resources>
