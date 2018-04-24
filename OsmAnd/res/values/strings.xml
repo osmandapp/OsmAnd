@@ -2854,4 +2854,12 @@
     <string name="toast_empty_name_error">Location has no name</string>
     <string name="tunnel_warning">Tunnel ahead</string>
     <string name="show_tunnels">Tunnels</string>
+    <string name="download_wikipedia_description">Download the Wikipedia articles for %1$s to read them offline.</string>
+    <string name="download_wikipedia_label">Download Wikipedia data</string>
+    <string name="open_in_browser_wiki">Open article online</string>
+    <string name="open_in_browser_wiki_description">View this article in a browser.</string>
+    <string name="download_wiki_region_placeholder">this region</string>
+    <string name="wiki_article_search_text">Searching for the necessary wiki article</string>
+    <string name="wiki_article_not_found">Article not found</string>
+    <string name="how_to_open_wiki_title">How to open Wikipedia articles?</string>
 </resources>

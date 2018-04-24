@@ -850,7 +850,20 @@ public class ResourceManager {
 		}
 		return map;
 	}
-	
+
+	public List<AmenityIndexRepositoryBinary> getWikiAmenityRepository(double lat, double lon) {
+		List<AmenityIndexRepositoryBinary> repos = new ArrayList<>();
+		for (String filename : amenityRepositories.keySet()) {
+			if (filename.contains("_wiki")
+					|| filename.contains(IndexConstants.BINARY_WIKI_MAP_INDEX_EXT)) {
+				AmenityIndexRepository repository = amenityRepositories.get(filename);
+				if (repository.checkContains(lat, lon) && repository instanceof AmenityIndexRepositoryBinary) {
+					repos.add((AmenityIndexRepositoryBinary) repository);
+				}
+			}
+		}
+		return repos;
+	}
 	
 	////////////////////////////////////////////// Working with address ///////////////////////////////////////////
 	

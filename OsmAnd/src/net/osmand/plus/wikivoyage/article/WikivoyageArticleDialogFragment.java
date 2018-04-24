@@ -248,6 +248,14 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 	}
 
 	@Override
+	public void onPause() {
+		super.onPause();
+		if (webViewClient != null) {
+			webViewClient.stopRunningAsyncTasks();
+		}
+	}
+
+	@Override
 	public void onResume() {
 		super.onResume();
 		OsmandSettings settings = getMyApplication().getSettings();
