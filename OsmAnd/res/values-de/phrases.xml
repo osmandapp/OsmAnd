@@ -3824,7 +3824,7 @@
 <string name="poi_aerialway_zip_line">Seilrutsche</string>
 
 	<string name="poi_via_ferrata">Klettersteig</string>
-	<string name="poi_cable_number">Kabel Anzahl</string>
+	<string name="poi_cable_number">Kabelnummer</string>
 	<string name="poi_via_ferrata_scale">Schwierigkeitsgrad</string>
 
 </resources>
