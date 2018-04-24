@@ -3191,4 +3191,7 @@
 
 <string name="poi_refugee_no">"Errefuxiatuak: ez "</string>
 
+	<string name="poi_service_car">Kotxe zerbitzua</string>
+
+<string name="synonyms_poi_nightclub">Disco;Disko</string>
 	</resources>
