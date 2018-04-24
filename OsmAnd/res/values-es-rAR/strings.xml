@@ -893,34 +893,21 @@ Lon %2$s</string>
     <string name="osmand_plus_play_title_30_chars">Navegación y Mapas OsmAnd+</string>
     <string name="osmand_plus_short_description_80_chars">Visor y navegador móvil global de mapas OSM con y sin conexión</string>
     <string name="osmand_plus_long_description_1000_chars">"OsmAnd+ (OSM Automated Navigation Directions, y en español, Guía de Navegación Automatizada de OSM), es un software de navegación de código abierto con acceso a una amplia variedad de datos globales de OpenStreetMap (OSM). Todos los datos del mapa (vectores y teselas), pueden ser almacenados en la memoria del teléfono para su uso sin conexión. Ofrece funcionalidades de rutas con y sin conexión, incluyendo guía de giro-a-giro por voz. 
-\n
 \n 
 \n OsmAnd+ es la versión de pago de la aplicación, comprándola das soporte al proyecto, financias el desarrollo de nuevas funciones, y recibes las últimas actualizaciones. 
-\n
 \n 
 \n Algunas de las funciones fundamentales: 
-\n
 \n - Completa funcionalidad sin conexión (guarda los mapas vectoriales o teselas descargados en el almacenamiento del dispositivo) 
-\n
 \n - Mapas mundiales vectoriales compactos disponibles 
-\n
 \n - Descarga ilimitada de mapas de países o regiones directamente desde la aplicación 
-\n
 \n - Posibilidad de superponer varias capas de mapa, como GPX o rutas de navegación, Puntos de Interés, favoritos, curvas de nivel, paradas de transporte público, mapas adicionales con transparencia personalizable 
-\n
 \n - Búsqueda sin conexión de direcciones y lugares (PDI) 
-\n
 \n - Rutas sin conexión para distancias de rango medio 
 \n
-\n 
 \n - Modos de automóvil, bicicleta y peatón con opcional: 
-\n
 \n  - Cambio automático de vista día/noche 
-\n
 \n  - Ampliación del mapa según la velocidad 
-\n
 \n  - Alineación del mapa, según brújula o dirección del movimiento 
-\n
 \n  - Indicación de carriles, mostrar límites de velocidad, voces grabadas y sintetizadas"</string>
     
     <string name="filterpoi_activity">Crear filtro PDI</string>
@@ -2551,7 +2538,7 @@ Lon %2$s</string>
 \n • La ruta se recalcula al salirse de la misma  
 \n
 \n • Puedes buscar destinos por dirección, tipo (por ejemplo: estacionamientos, restaurantes, hoteles, estaciones de servicio, museos), o por coordenada geográfica"</string>
-    <string name="osmand_plus_extended_description_part3">Mapa 
+    <string name="osmand_plus_extended_description_part3">Vista del mapa 
 \n • Muestra tu ubicación y orientación 
 \n • (Opcional) Ajusta el mapa a la dirección del movimiento (o la brújula) 
 \n • Guarda lugares importantes en Favoritos 
@@ -2570,13 +2557,19 @@ Lon %2$s</string>
 \n • (Opcional) Muestra los límites de velocidad y obtén un aviso al excederte 
 \n • (Opcional) Acercamiento del mapa dependiente a la velocidad 
 \n • Comparte la ubicación para que tus amigos te encuentren</string>
-    <string name="osmand_plus_extended_description_part6">Funciones de ciclismo y peatón • Visualización de caminos para caminar, senderismo y ciclismo,ideal para actividades al aire libre • Navegación especial y modos de visualización para bicicletas y peatones • (Opcional) Paradas de transporte público (colectivo, tranvía, tren) incluyendo nombres de líneas • (Opcional) Graba el viaje en forma local en un archivo GPX o con un servicio en línea • (Opcional) Muestra la velocidad y altitud • Mediante un complemento adicional, puedes activar la visualización de las curvas de nivel y el sombreado de colinas</string>
+    <string name="osmand_plus_extended_description_part6">Funciones de ciclismo y peatón 
+\n• Visualización de caminos para caminar, senderismo y ciclismo,ideal para actividades al aire libre 
+\n• Navegación especial y modos de visualización para bicicletas y peatones 
+\n• (Opcional) Paradas de transporte público (colectivo, tranvía, tren) incluyendo nombres de líneas 
+\n• (Opcional) Graba el viaje en forma local en un archivo GPX o con un servicio en línea 
+\n• (Opcional) Muestra la velocidad y altitud 
+\n• Mediante un complemento adicional, puedes activar la visualización de las curvas de nivel y el sombreado de colinas</string>
     <string name="osmand_plus_extended_description_part7">"Contribuye con OSM 
 \n • Informa sobre problemas de datos en el mapa 
 \n • Sube trazas GPX a OSM directamente desde la aplicación 
 \n • Añade PDI y súbelos directamente a OSM (o más tarde, si no estás conectado) 
 \n • (Opcional) Grabación del viaje en segundo plano (mientras el dispositivo está bloqueado) 
-\n
+\n 
 \n  OsmAnd es un software de código abierto y se desarrolla activamente. Puedes contribuir con la aplicación al informar sobre errores, mejorar las traducciones, desarrollar nuevas funciones o la interacción del usuario. El progreso del proyecto también depende de contribuciones financieras para desarrollar y probar nuevas funcionalidades."</string>
     <string name="osmand_plus_extended_description_part8">Cobertura y calidad aproximada del mapa: 
 \n • Europa Occidental: **** 
