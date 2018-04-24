@@ -157,6 +157,9 @@ public class WikivoyageWebViewClient extends WebViewClient implements RegionCall
 	}
 
 	private static void warnAboutExternalLoad(final String url, final Context context, final boolean nightMode) {
+		if (context == null) {
+			return;
+		}
 		new AlertDialog.Builder(context)
 				.setTitle(url)
 				.setMessage(R.string.online_webpage_warning)
@@ -302,13 +305,12 @@ public class WikivoyageWebViewClient extends WebViewClient implements RegionCall
 		protected void onCancelled(){
 			dialog = null;
 			indexes.clear();
-			weakContext.clear();
 		}
 
 		@Override
 		protected void onPostExecute(List<Amenity> found) {
 			MapActivity activity = weakContext.get();
-			if (!activity.isActivityDestroyed() && dialog != null) {
+			if (activity != null && !activity.isActivityDestroyed() && dialog != null) {
 				dialog.dismiss();
 				if (!found.isEmpty()) {
 					WikipediaDialogFragment.showInstance(activity, found.get(0));
@@ -320,7 +322,7 @@ public class WikivoyageWebViewClient extends WebViewClient implements RegionCall
 
 		private ProgressDialog createProgressDialog() {
 			MapActivity activity = weakContext.get();
-			if (!activity.isActivityDestroyed()) {
+			if (activity != null && !activity.isActivityDestroyed()) {
 				ProgressDialog dialog = new ProgressDialog(activity);
 				dialog.setCancelable(false);
 				dialog.setMessage(activity.getString(R.string.wiki_article_search_text));
