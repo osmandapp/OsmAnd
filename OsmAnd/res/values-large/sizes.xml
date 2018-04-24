@@ -101,6 +101,7 @@
 	<dimen name="default_sub_text_size_small">12sp</dimen>
 	<dimen name="welcome_header_text_size">27sp</dimen>
 	<dimen name="text_button_text_size">22sp</dimen>
+	<dimen name="travel_card_primary_text_size">22sp</dimen>
 
 	<dimen name="dialog_header_text_size">24sp</dimen>
 

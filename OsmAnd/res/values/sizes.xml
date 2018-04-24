@@ -176,6 +176,7 @@
 	<dimen name="default_sub_text_size_small">10sp</dimen>
 	<dimen name="welcome_header_text_size">23sp</dimen>
 	<dimen name="text_button_text_size">15sp</dimen>
+	<dimen name="travel_card_primary_text_size">15sp</dimen>
 
 	<dimen name="default_split_segments_overview">13sp</dimen>
 	<dimen name="default_split_segments_data">13sp</dimen>
@@ -290,6 +291,8 @@
 	<dimen name="wikivoyage_search_icon_margin_left">14dp</dimen>
 	<dimen name="wikivoyage_search_icon_margin_right">22dp</dimen>
 	<dimen name="wikivoyage_search_divider_margin_start">64dp</dimen>
+
+	<dimen name="wikivoyage_explore_card_image_height">144dp</dimen>
 
 	<dimen name="text_button_letter_spacing" format="float">0.01</dimen>
 </resources>

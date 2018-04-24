@@ -9,8 +9,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ImageView.ScaleType;
 
 import net.osmand.plus.R;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.wikivoyage.explore.WikivoyageExploreDialogFragment;
 
 public class WikivoyageWelcomeDialogFragment extends WikivoyageBaseDialogFragment {
@@ -20,6 +22,8 @@ public class WikivoyageWelcomeDialogFragment extends WikivoyageBaseDialogFragmen
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+		final boolean portrait = AndroidUiHelper.isOrientationPortrait(getActivity());
+
 		View mainView = inflate(R.layout.fragment_wikivoyage_welcome_dialog, container);
 
 		ImageView backBtn = (ImageView) mainView.findViewById(R.id.back_button);
@@ -32,7 +36,9 @@ public class WikivoyageWelcomeDialogFragment extends WikivoyageBaseDialogFragmen
 		});
 
 		int imgId = nightMode ? R.drawable.img_start_screen_travel_night : R.drawable.img_start_screen_travel_day;
-		((ImageView) mainView.findViewById(R.id.main_image)).setImageResource(imgId);
+		ImageView mainImage = (ImageView) mainView.findViewById(R.id.main_image);
+		mainImage.setScaleType(portrait ? ScaleType.CENTER_CROP : ScaleType.CENTER_INSIDE);
+		mainImage.setImageResource(imgId);
 
 		mainView.findViewById(R.id.continue_button).setOnClickListener(new View.OnClickListener() {
 			@Override
