@@ -1,23 +1,24 @@
-package net.osmand.plus.dialogs;
+package net.osmand.plus.chooseplan;
 
 import android.app.Activity;
 import android.app.Dialog;
-import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.ColorRes;
+import android.support.annotation.DrawableRes;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.AppCompatImageView;
 import android.text.TextUtils;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.LinearLayout;
@@ -29,10 +30,8 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
-import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
-import net.osmand.plus.download.DownloadValidationManager;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseTaskType;
@@ -42,98 +41,17 @@ import net.osmand.plus.widgets.TextViewEx;
 
 import org.apache.commons.logging.Log;
 
-import static net.osmand.plus.OsmandApplication.SHOW_PLUS_VERSION_INAPP_PARAM;
-
-public class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment implements InAppPurchaseListener {
+public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment implements InAppPurchaseListener {
 	public static final String TAG = ChoosePlanDialogFragment.class.getSimpleName();
 	private static final Log LOG = PlatformUtil.getLog(ChoosePlanDialogFragment.class);
-
-	private static final String PLAN_TYPE_KEY = "plan_type";
 
 	private OsmandApplication app;
 	private InAppPurchaseHelper purchaseHelper;
 
 	private boolean nightMode;
-	private PlanType planType;
 
 	private View osmLiveCardButton;
 	private View planTypeCardButton;
-
-	public enum PlanType {
-		FREE_VERSION_BANNER(
-				new OsmAndFeature[]{
-						OsmAndFeature.DAILY_MAP_UPDATES,
-						OsmAndFeature.UNLIMITED_DOWNLOADS,
-						OsmAndFeature.WIKIPEDIA_OFFLINE,
-						OsmAndFeature.WIKIVOYAGE_OFFLINE,
-						OsmAndFeature.CONTOUR_LINES_HILLSHADE_MAPS,
-						OsmAndFeature.SEA_DEPTH_MAPS,
-						OsmAndFeature.UNLOCK_ALL_FEATURES,
-						OsmAndFeature.DONATION_TO_OSM,
-				},
-				new OsmAndFeature[]{
-						OsmAndFeature.DAILY_MAP_UPDATES,
-						OsmAndFeature.UNLIMITED_DOWNLOADS,
-				},
-				new OsmAndFeature[]{
-						OsmAndFeature.WIKIPEDIA_OFFLINE,
-						OsmAndFeature.WIKIVOYAGE_OFFLINE,
-						OsmAndFeature.UNLIMITED_DOWNLOADS,
-						OsmAndFeature.MONTHLY_MAP_UPDATES,
-				},
-				new OsmAndFeature[]{});
-
-		private final OsmAndFeature[] osmLiveFeatures;
-		private final OsmAndFeature[] planTypeFeatures;
-		private final OsmAndFeature[] selectedOsmLiveFeatures;
-		private final OsmAndFeature[] selectedPlanTypeFeatures;
-
-		PlanType(OsmAndFeature[] osmLiveFeatures, OsmAndFeature[] selectedOsmLiveFeatures,
-				 OsmAndFeature[] planTypeFeatures, OsmAndFeature[] selectedPlanTypeFeatures) {
-			this.osmLiveFeatures = osmLiveFeatures;
-			this.planTypeFeatures = planTypeFeatures;
-			this.selectedOsmLiveFeatures = selectedOsmLiveFeatures;
-			this.selectedPlanTypeFeatures = selectedPlanTypeFeatures;
-		}
-
-		public OsmAndFeature[] getOsmLiveFeatures() {
-			return osmLiveFeatures;
-		}
-
-		public OsmAndFeature[] getPlanTypeFeatures() {
-			return planTypeFeatures;
-		}
-
-		public OsmAndFeature[] getSelectedOsmLiveFeatures() {
-			return selectedOsmLiveFeatures;
-		}
-
-		public OsmAndFeature[] getSelectedPlanTypeFeatures() {
-			return selectedPlanTypeFeatures;
-		}
-
-		public boolean hasSelectedOsmLiveFeature(OsmAndFeature feature) {
-			if (selectedOsmLiveFeatures != null) {
-				for (OsmAndFeature f : selectedOsmLiveFeatures) {
-					if (feature == f) {
-						return true;
-					}
-				}
-			}
-			return false;
-		}
-
-		public boolean hasSelectedPlanTypeFeature(OsmAndFeature feature) {
-			if (selectedPlanTypeFeatures != null) {
-				for (OsmAndFeature f : selectedPlanTypeFeatures) {
-					if (feature == f) {
-						return true;
-					}
-				}
-			}
-			return false;
-		}
-	}
 
 	public enum OsmAndFeature {
 		WIKIVOYAGE_OFFLINE(R.string.wikivoyage_offline),
@@ -180,24 +98,33 @@ public class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment implement
 		}
 	}
 
+	public boolean hasSelectedOsmLiveFeature(OsmAndFeature feature) {
+		if (getSelectedOsmLiveFeatures() != null) {
+			for (OsmAndFeature f : getSelectedOsmLiveFeatures()) {
+				if (feature == f) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	public boolean hasSelectedPlanTypeFeature(OsmAndFeature feature) {
+		if (getSelectedPlanTypeFeatures() != null) {
+			for (OsmAndFeature f : getSelectedPlanTypeFeatures()) {
+				if (feature == f) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
 		app = getMyApplication();
 		purchaseHelper = app.getInAppPurchaseHelper();
-
-		Bundle args = getArguments();
-		if (args == null) {
-			args = savedInstanceState;
-		}
-		if (args != null) {
-			String planTypeStr = args.getString(PLAN_TYPE_KEY);
-			if (!TextUtils.isEmpty(planTypeStr)) {
-				planType = PlanType.valueOf(planTypeStr);
-			}
-		}
-
 		nightMode = isNightMode(getMapActivity() != null);
 	}
 
@@ -222,18 +149,18 @@ public class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment implement
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		Context ctx = getContext();
-		if (planType == null || ctx == null) {
+		if (ctx == null) {
 			return null;
 		}
 		View view = inflate(R.layout.purchase_dialog_fragment, container);
 
-		view.findViewById(R.id.button_back).setOnClickListener(new View.OnClickListener() {
+		view.findViewById(R.id.button_back).setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				dismiss();
 			}
 		});
-		view.findViewById(R.id.button_later).setOnClickListener(new View.OnClickListener() {
+		view.findViewById(R.id.button_later).setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				dismiss();
@@ -243,13 +170,8 @@ public class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment implement
 		ViewGroup infoContainer = (ViewGroup) view.findViewById(R.id.info_container);
 		TextViewEx infoDescription = (TextViewEx) view.findViewById(R.id.info_description);
 		ViewGroup cardsContainer = (ViewGroup) view.findViewById(R.id.cards_container);
-
-		switch (planType) {
-			case FREE_VERSION_BANNER: {
-				infoDescription.setText(getString(R.string.free_version_message,
-						DownloadValidationManager.MAXIMUM_AVAILABLE_FREE_DOWNLOADS));
-				break;
-			}
+		if (!TextUtils.isEmpty(getInfoDescription())) {
+			infoDescription.setText(getInfoDescription());
 		}
 		cardsContainer.addView(buildOsmLiveCard(ctx, cardsContainer));
 		cardsContainer.addView(buildPlanTypeCard(ctx, cardsContainer));
@@ -260,6 +182,29 @@ public class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment implement
 	protected int getStatusBarColor() {
 		return nightMode ? R.color.status_bar_wikivoyage_dark : R.color.status_bar_wikivoyage_light;
 	}
+
+	public OsmandApplication getOsmandApplication() {
+		return app;
+	}
+
+	public abstract OsmAndFeature[] getOsmLiveFeatures();
+
+	public abstract OsmAndFeature[] getPlanTypeFeatures();
+
+	public abstract OsmAndFeature[] getSelectedOsmLiveFeatures();
+
+	public abstract OsmAndFeature[] getSelectedPlanTypeFeatures();
+
+	public abstract String getInfoDescription();
+
+	@DrawableRes
+	public abstract int getPlanTypeHeaderImageId();
+
+	public abstract String getPlanTypeHeaderTitle();
+
+	public abstract String getPlanTypeHeaderDescription();
+
+	public abstract void setPlanTypeButtonClickListener(View button);
 
 	private View inflate(@LayoutRes int layoutId, @Nullable ViewGroup container) {
 		int themeRes = nightMode ? R.style.OsmandDarkTheme_DarkActionbar : R.style.OsmandLightTheme_DarkActionbar_LightStatusBar;
@@ -275,9 +220,9 @@ public class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment implement
 		headerDescr.setText(R.string.osm_live_subscription);
 		ViewGroup rowsContainer = (ViewGroup) cardView.findViewById(R.id.rows_container);
 		View featureRowDiv = null;
-		for (OsmAndFeature feature : planType.getOsmLiveFeatures()) {
+		for (OsmAndFeature feature : getOsmLiveFeatures()) {
 			String featureName = feature.toHumanString(ctx);
-			View featureRow = inflate(planType.hasSelectedOsmLiveFeature(feature)
+			View featureRow = inflate(hasSelectedOsmLiveFeature(feature)
 					? R.layout.purchase_dialog_card_selected_row : R.layout.purchase_dialog_card_row, cardView);
 			TextViewEx titleView = (TextViewEx) featureRow.findViewById(R.id.title);
 			titleView.setText(featureName);
@@ -321,7 +266,7 @@ public class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment implement
 				buttonTitle.setVisibility(View.VISIBLE);
 				buttonSubtitle.setVisibility(View.VISIBLE);
 				progressBar.setVisibility(View.GONE);
-				osmLiveCardButton.setOnClickListener(new View.OnClickListener() {
+				osmLiveCardButton.setOnClickListener(new OnClickListener() {
 					@Override
 					public void onClick(View v) {
 						subscript();
@@ -345,15 +290,27 @@ public class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment implement
 
 	private ViewGroup buildPlanTypeCard(@NonNull Context ctx, ViewGroup container) {
 		ViewGroup cardView = (ViewGroup) inflate(R.layout.purchase_dialog_card, container);
-		TextView headerTitle = (TextView) cardView.findViewById(R.id.header_title);
-		TextView headerDescr = (TextView) cardView.findViewById(R.id.header_descr);
-		headerTitle.setText(R.string.osmand_unlimited);
-		headerDescr.setText(R.string.in_app_purchase);
+		AppCompatImageView headerImageView = (AppCompatImageView) cardView.findViewById(R.id.header_img);
+		TextView headerTitleView = (TextView) cardView.findViewById(R.id.header_title);
+		TextView headerDescrView = (TextView) cardView.findViewById(R.id.header_descr);
+		int headerImageId = getPlanTypeHeaderImageId();
+		if (headerImageId != 0) {
+			headerImageView.setImageDrawable(getIcon(headerImageId, 0));
+		}
+		String headerTitle = getPlanTypeHeaderTitle();
+		if (!TextUtils.isEmpty(headerTitle)) {
+			headerTitleView.setText(headerTitle);
+		}
+		String headerDescr = getPlanTypeHeaderDescription();
+		if (!TextUtils.isEmpty(headerDescr)) {
+			headerDescrView.setText(headerDescr);
+		}
+
 		ViewGroup rowsContainer = (ViewGroup) cardView.findViewById(R.id.rows_container);
 		View featureRow = null;
-		for (OsmAndFeature feature : planType.getPlanTypeFeatures()) {
+		for (OsmAndFeature feature : getPlanTypeFeatures()) {
 			String featureName = feature.toHumanString(ctx);
-			featureRow = inflate(planType.hasSelectedPlanTypeFeature(feature)
+			featureRow = inflate(hasSelectedPlanTypeFeature(feature)
 					? R.layout.purchase_dialog_card_selected_row : R.layout.purchase_dialog_card_row, cardView);
 			TextViewEx titleView = (TextViewEx) featureRow.findViewById(R.id.title);
 			titleView.setText(featureName);
@@ -393,47 +350,9 @@ public class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment implement
 				buttonTitle.setVisibility(View.VISIBLE);
 				buttonSubtitle.setVisibility(View.VISIBLE);
 				progressBar.setVisibility(View.GONE);
-				planTypeCardButton.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						purchaseFullVersion();
-						dismiss();
-					}
-				});
+				setPlanTypeButtonClickListener(planTypeCardButton);
 			}
 		}
-	}
-
-	public void purchaseFullVersion() {
-		if (app.getRemoteBoolean(SHOW_PLUS_VERSION_INAPP_PARAM, true)) {
-			app.logEvent(getActivity(), "in_app_purchase_redirect_from_banner");
-		} else {
-			app.logEvent(getActivity(), "paid_version_redirect_from_banner");
-		}
-		if (Version.isFreeVersion(app)) {
-			if (app.getRemoteBoolean(SHOW_PLUS_VERSION_INAPP_PARAM, true)) {
-				InAppPurchaseHelper purchaseHelper = app.getInAppPurchaseHelper();
-				if (purchaseHelper != null) {
-					app.logEvent(getActivity(), "in_app_purchase_redirect");
-					purchaseHelper.purchaseFullVersion(getActivity());
-				}
-			} else {
-				app.logEvent(getActivity(), "paid_version_redirect");
-				Intent intent = new Intent(Intent.ACTION_VIEW,
-						Uri.parse(Version.getUrlWithUtmRef(app, "net.osmand.plus")));
-				try {
-					startActivity(intent);
-				} catch (ActivityNotFoundException e) {
-					LOG.error("ActivityNotFoundException", e);
-				}
-			}
-		}
-	}
-
-	@Override
-	public void onSaveInstanceState(Bundle outState) {
-		super.onSaveInstanceState(outState);
-		outState.putString(PLAN_TYPE_KEY, planType.name());
 	}
 
 	@Nullable
@@ -498,21 +417,29 @@ public class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment implement
 	}
 
 	public static void showFreeVersionInstance(@NonNull FragmentManager fm) {
-		PlanType planType = PlanType.FREE_VERSION_BANNER;
-		showInstance(fm, planType);
+		try {
+			ChoosePlanFreeBannerDialogFragment fragment = new ChoosePlanFreeBannerDialogFragment();
+			fragment.show(fm, ChoosePlanFreeBannerDialogFragment.TAG);
+		} catch (RuntimeException e) {
+			LOG.error("showFreeVersionInstance", e);
+		}
 	}
 
-	private static void showInstance(@NonNull FragmentManager fm, PlanType planType) {
+	public static void showWikipediaInstance(@NonNull FragmentManager fm) {
 		try {
-			Bundle args = new Bundle();
-			args.putString(PLAN_TYPE_KEY, planType.name());
-
-			ChoosePlanDialogFragment fragment = new ChoosePlanDialogFragment();
-			fragment.setArguments(args);
-			fragment.show(fm, TAG);
-
+			ChoosePlanWikipediaDialogFragment fragment = new ChoosePlanWikipediaDialogFragment();
+			fragment.show(fm, ChoosePlanWikipediaDialogFragment.TAG);
 		} catch (RuntimeException e) {
-			LOG.error("showInstance", e);
+			LOG.error("showWikipediaInstance", e);
+		}
+	}
+
+	public static void showSeaDepthMapsInstance(@NonNull FragmentManager fm) {
+		try {
+			ChoosePlanSeaDepthMapsDialogFragment fragment = new ChoosePlanSeaDepthMapsDialogFragment();
+			fragment.show(fm, ChoosePlanSeaDepthMapsDialogFragment.TAG);
+		} catch (RuntimeException e) {
+			LOG.error("showSeaDepthMapsInstance", e);
 		}
 	}
 }

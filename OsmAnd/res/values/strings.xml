@@ -9,7 +9,9 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
-	<string name="travel_card_update_descr">We prepared updates and fixes in the Wikivoyage data, update the file to see them.</string>
+    <string name="paid_app">Paid application</string>
+    <string name="paid_plugin">Paid plugin</string>
+    <string name="travel_card_update_descr">We prepared updates and fixes in the Wikivoyage data, update the file to see them.</string>
 	<string name="travel_card_download_descr">Download this Wikivoyage travel guides file to view articles about places around the world without an internet connection.</string>
 	<string name="update_is_available">Update is available</string>
 	<string name="download_file">Download file</string>

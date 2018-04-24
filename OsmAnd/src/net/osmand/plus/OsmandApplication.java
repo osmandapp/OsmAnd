@@ -79,7 +79,7 @@ public class OsmandApplication extends MultiDexApplication {
 	public static final String EXCEPTION_PATH = "exception.log"; //$NON-NLS-1$
 	private static final org.apache.commons.logging.Log LOG = PlatformUtil.getLog(OsmandApplication.class);
 
-	public static final String SHOW_PLUS_VERSION_INAPP_PARAM = "show_plus_version_inapp";
+	private static final String SHOW_PLUS_VERSION_INAPP_PARAM = "show_plus_version_inapp";
 
 	final AppInitializer appInitializer = new AppInitializer(this);
 	OsmandSettings osmandSettings = null;
@@ -88,6 +88,7 @@ public class OsmandApplication extends MultiDexApplication {
 	private final OsmAndTaskManager taskManager = new OsmAndTaskManager(this);
 	private final IconsCache iconsCache = new IconsCache(this);
 	Handler uiHandler;
+	private boolean plusVersionInApp;
 
 	NavigationService navigationService;
 
@@ -167,6 +168,7 @@ public class OsmandApplication extends MultiDexApplication {
 //			targetPointsHelper.clearPointToNavigate(false);
 //		}
 		initExternalLibs();
+		plusVersionInApp = getRemoteBoolean(SHOW_PLUS_VERSION_INAPP_PARAM, true);
 		startApplication();
 		System.out.println("Time to start application " + (System.currentTimeMillis() - timeToStart) + " ms. Should be less < 800 ms");
 		timeToStart = System.currentTimeMillis();
@@ -174,6 +176,10 @@ public class OsmandApplication extends MultiDexApplication {
 		System.out.println("Time to init plugins " + (System.currentTimeMillis() - timeToStart) + " ms. Should be less < 800 ms");
 
 		SearchUICore.setDebugMode(OsmandPlugin.isDevelopment());
+	}
+
+	public boolean isPlusVersionInApp() {
+		return plusVersionInApp;
 	}
 
 	public boolean isExternalStorageDirectoryReadOnly() {
@@ -863,7 +869,7 @@ public class OsmandApplication extends MultiDexApplication {
 			osmandSettings.DRIVING_REGION.set(drg);
 		}
 	}
-	
+
 	public void logEvent(Activity ctx, String event) {
 		try {
 			if (Version.isGooglePlayEnabled(this) && Version.isFreeVersion(this)

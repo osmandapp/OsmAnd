@@ -25,6 +25,7 @@ import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.LocalIndexHelper.LocalIndexType;
 import net.osmand.plus.activities.LocalIndexInfo;
+import net.osmand.plus.chooseplan.ChoosePlanDialogFragment;
 import net.osmand.plus.download.CityItem;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadActivityType;
@@ -333,10 +334,10 @@ public class ItemViewHolder {
 					switch (clickAction) {
 						case ASK_FOR_FULL_VERSION_PURCHASE:
 							context.getMyApplication().logEvent(context, "in_app_purchase_show_from_wiki_context_menu");
-							context.purchaseFullVersion();
+							ChoosePlanDialogFragment.showWikipediaInstance(context.getSupportFragmentManager());
 							break;
 						case ASK_FOR_DEPTH_CONTOURS_PURCHASE:
-							context.purchaseDepthContours();
+							ChoosePlanDialogFragment.showSeaDepthMapsInstance(context.getSupportFragmentManager());
 							break;
 						case ASK_FOR_SEAMARKS_PLUGIN:
 							context.startActivity(new Intent(context, context.getMyApplication().getAppCustomization()
