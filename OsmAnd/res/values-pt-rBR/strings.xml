@@ -317,7 +317,7 @@
 	<string name="save_track_to_gpx_descrp">trilha serão salvas no diretório de trilhas durante a navegação</string>
 	<string name="save_track_interval_globally">Intervalo de registro</string>
 	<string name="save_track_interval">Intervalo de registro durante a navegação</string>
-	<string name="save_track_interval_descr">Escolher o intervalo de registro para a gravação de trilha durante a navegação</string>
+	<string name="save_track_interval_descr">Escolher o intervalo de registro para a gravação de trilha durante a navegação.</string>
 	<string name="voice_provider_descr">Selecione a voz para instruções de navegação</string>
 	<string name="voice_provider">Instruções por voz</string>
 	
@@ -2275,7 +2275,7 @@ Pôr do Sol: %2$s</string>
     <string name="route_is_calculated">Rota calculada</string>
     <string name="do_not_show_startup_messages">Não exibir mensagens ao iniciar</string>
     <string name="do_not_show_startup_messages_desc">Não exiba mensagens de promoções do aplicativo e eventos locais especiais.</string>
-    <string name="shared_string_record">Registro</string>
+    <string name="shared_string_record">Gravar</string>
     <string name="save_track_min_speed">Velocidade mínima para registro</string>
     <string name="save_track_precision">Precisão mínima para registro</string>
     <string name="coords_format_descr">Formato para as coordenadas geográficas.</string>
