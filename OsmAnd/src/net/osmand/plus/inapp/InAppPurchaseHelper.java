@@ -1,5 +1,6 @@
 package net.osmand.plus.inapp;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -26,29 +27,29 @@ import net.osmand.util.Algorithms;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class InAppHelper {
+public class InAppPurchaseHelper {
 	// Debug tag, for logging
-	static final String TAG = "InAppHelper";
+	private static final String TAG = InAppPurchaseHelper.class.getSimpleName();
 	boolean mDebugLog = false;
 
-	private static boolean mSubscribedToLiveUpdates = false;
-	private static boolean mFullVersionPurchased = false;
-	private static boolean mDepthContoursPurchased = false;
-	private static String mLiveUpdatesPrice;
-	private static long lastValidationCheckTime;
-	private static String mFullVersionPrice;
-	private static String mDepthContoursPrice;
+	private long lastValidationCheckTime;
+	private String liveUpdatesPrice;
+	private String fullVersionPrice;
+	private String depthContoursPrice;
 
 	public static final String SKU_FULL_VERSION_PRICE = "osmand_full_version_price";
+
 	private static final String SKU_LIVE_UPDATES_FULL = "osm_live_subscription_2";
 	private static final String SKU_LIVE_UPDATES_FREE = "osm_free_live_subscription_2";
 	private static final String SKU_DEPTH_CONTOURS_FULL = "net.osmand.seadepth_plus";
 	private static final String SKU_DEPTH_CONTOURS_FREE = "net.osmand.seadepth";
+
 	public static String SKU_LIVE_UPDATES;
 	public static String SKU_DEPTH_CONTOURS;
 
@@ -58,27 +59,25 @@ public class InAppHelper {
 
 	// The helper object
 	private IabHelper mHelper;
-	private boolean stopAfterResult = false;
-	private boolean isDeveloperVersion = false;
-	private boolean forceRequestInventory = false;
+	private boolean isDeveloperVersion;
 	private String token = "";
-	private boolean inventoryRequesting = false;
-	private boolean stopRequested = false;
+	private InAppPurchaseTaskType activeTask;
+	private boolean processingTask = false;
 
 	private OsmandApplication ctx;
-	private List<InAppListener> listeners = new ArrayList<>();
+	private List<InAppPurchaseListener> listeners = new ArrayList<>();
 
 	/* base64EncodedPublicKey should be YOUR APPLICATION'S PUBLIC KEY
- 	 * (that you got from the Google Play developer console). This is not your
- 	 * developer public key, it's the *app-specific* public key.
- 	 *
- 	 * Instead of just storing the entire literal string here embedded in the
- 	 * program,  construct the key at runtime from pieces or
- 	 * use bit manipulation (for example, XOR with some other string) to hide
- 	 * the actual key.  The key itself is not secret information, but we don't
- 	 * want to make it easy for an attacker to replace the public key with one
- 	 * of their own and then fake messages from the server.
- 	 */
+	 * (that you got from the Google Play developer console). This is not your
+	 * developer public key, it's the *app-specific* public key.
+	 *
+	 * Instead of just storing the entire literal string here embedded in the
+	 * program,  construct the key at runtime from pieces or
+	 * use bit manipulation (for example, XOR with some other string) to hide
+	 * the actual key.  The key itself is not secret information, but we don't
+	 * want to make it easy for an attacker to replace the public key with one
+	 * of their own and then fake messages from the server.
+	 */
 	private static final String BASE64_ENCODED_PUBLIC_KEY = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAgk8cEx" +
 			"UO4mfEwWFLkQnX1Tkzehr4SnXLXcm2Osxs5FTJPEgyTckTh0POKVMrxeGLn0KoTY2NTgp1U/inp" +
 			"wccWisPhVPEmw9bAVvWsOkzlyg1kv03fJdnAXRBSqDDPV6X8Z3MtkPVqZkupBsxyIllEILKHK06" +
@@ -86,60 +85,64 @@ public class InAppHelper {
 			"I+ftJO46a1XkNh1dO2anUiQ8P/H4yOTqnMsXF7biyYuiwjXPOcy0OMhEHi54Dq6Mr3u5ZALOAkc" +
 			"YTjh1H/ZgqIHy5ZluahINuDE76qdLYMXrDMQIDAQAB";
 
-	public interface InAppListener {
-		void onError(String error);
+	public interface InAppPurchaseListener {
+		void onError(InAppPurchaseTaskType taskType, String error);
 
 		void onGetItems();
 
 		void onItemPurchased(String sku);
 
-		void showProgress();
+		void showProgress(InAppPurchaseTaskType taskType);
 
-		void dismissProgress();
+		void dismissProgress(InAppPurchaseTaskType taskType);
+	}
+
+	public enum InAppPurchaseTaskType {
+		REQUEST_INVENTORY,
+		PURCHASE_FULL_VERSION,
+		PURCHASE_LIVE_UPDATES,
+		PURCHASE_DEPTH_CONTOURS
 	}
 
 	public interface InAppRunnable {
-		void run(InAppHelper helper);
+		// return true if done and false if async task started
+		boolean run(InAppPurchaseHelper helper);
 	}
 
 	public String getToken() {
 		return token;
 	}
 
-	public static boolean isSubscribedToLiveUpdates() {
-		return mSubscribedToLiveUpdates;
+	public InAppPurchaseTaskType getActiveTask() {
+		return activeTask;
 	}
 
-	public static boolean isFullVersionPurchased() {
-		return mFullVersionPurchased;
+	public boolean isSubscribedToLiveUpdates() {
+		return ctx.getSettings().LIVE_UPDATES_PURCHASED.get();
 	}
 
-	public static boolean isDepthContoursPurchased() {
-		return mDepthContoursPurchased;
+	public String getLiveUpdatesPrice() {
+		return liveUpdatesPrice;
 	}
 
-	public static String getLiveUpdatesPrice() {
-		return mLiveUpdatesPrice;
+	public String getFullVersionPrice() {
+		return fullVersionPrice;
 	}
 
-	public static String getDepthContoursPrice() {
-		return mDepthContoursPrice;
+	public String getDepthContoursPrice() {
+		return depthContoursPrice;
 	}
 
-	public static String getFullVersionPrice() {
-		return mFullVersionPrice;
-	}
-
-	public static String getSkuLiveUpdates() {
+	public String getSkuLiveUpdates() {
 		return SKU_LIVE_UPDATES;
 	}
 
-	public static boolean hasPrices(OsmandApplication app) {
-		return !Algorithms.isEmpty(mLiveUpdatesPrice)
-				&& (!Version.isFreeVersion(app) || !Algorithms.isEmpty(mFullVersionPrice));
+	public boolean hasPrices() {
+		return !Algorithms.isEmpty(liveUpdatesPrice)
+				&& (!Version.isFreeVersion(ctx) || !Algorithms.isEmpty(fullVersionPrice));
 	}
 
-	public static void initialize(OsmandApplication ctx) {
+	private void initialize() {
 		if (SKU_LIVE_UPDATES == null) {
 			if (Version.isFreeVersion(ctx)) {
 				SKU_LIVE_UPDATES = SKU_LIVE_UPDATES_FREE;
@@ -156,26 +159,22 @@ public class InAppHelper {
 		}
 	}
 
-	public InAppHelper(OsmandApplication ctx, boolean forceRequestInventory) {
+	public InAppPurchaseHelper(OsmandApplication ctx) {
 		this.ctx = ctx;
-		this.forceRequestInventory = forceRequestInventory;
-
-		isDeveloperVersion = Version.isDeveloperVersion(ctx);
-		if (isDeveloperVersion) {
-			mSubscribedToLiveUpdates = true;
-			mFullVersionPurchased = true;
-			mDepthContoursPurchased = true;
+		this.isDeveloperVersion = Version.isDeveloperVersion(ctx);
+		if (this.isDeveloperVersion) {
 			ctx.getSettings().LIVE_UPDATES_PURCHASED.set(true);
 			ctx.getSettings().FULL_VERSION_PURCHASED.set(true);
 			ctx.getSettings().DEPTH_CONTOURS_PURCHASED.set(true);
 		}
+		initialize();
 	}
 
-	public static boolean isInAppIntentoryRead() {
+	public boolean hasInventory() {
 		return lastValidationCheckTime != 0;
 	}
 
-	public static boolean isPurchased(OsmandApplication ctx, String inAppSku) {
+	public boolean isPurchased(String inAppSku) {
 		OsmandSettings settings = ctx.getSettings();
 		if (inAppSku.equals(SKU_FULL_VERSION_PRICE)) {
 			return settings.FULL_VERSION_PURCHASED.get();
@@ -187,11 +186,18 @@ public class InAppHelper {
 		return false;
 	}
 
-	public void exec(final @NonNull InAppRunnable runnable) {
-		this.stopAfterResult = true;
+	private void exec(final @NonNull InAppPurchaseTaskType taskType, final @NonNull InAppRunnable runnable) {
+		if (isDeveloperVersion || !Version.isGooglePlayEnabled(ctx)) {
+			return;
+		}
+
+		if (processingTask) {
+			logError("Already processing task: " + taskType + ". Exit.");
+			return;
+		}
 
 		// Create the helper, passing it our context and the public key to verify signatures with
-		logDebug("Creating InAppHelper.");
+		logDebug("Creating InAppPurchaseHelper.");
 		mHelper = new IabHelper(ctx, BASE64_ENCODED_PUBLIC_KEY);
 
 		// enable debug logging (for a production application, you should set this to false).
@@ -201,6 +207,8 @@ public class InAppHelper {
 		// will be called once setup completes.
 		logDebug("Starting setup.");
 		try {
+			processingTask = true;
+			activeTask = taskType;
 			mHelper.startSetup(new IabHelper.OnIabSetupFinishedListener() {
 				public void onIabSetupFinished(IabResult result) {
 					logDebug("Setup finished.");
@@ -208,166 +216,165 @@ public class InAppHelper {
 					if (!result.isSuccess()) {
 						// Oh noes, there was a problem.
 						//complain("Problem setting up in-app billing: " + result);
-						notifyError(result.getMessage());
-						if (stopAfterResult) {
-							stop();
-						}
+						notifyError(taskType, result.getMessage());
+						stop(true);
 						return;
 					}
 
 					// Have we been disposed of in the meantime? If so, quit.
-					if (mHelper == null) return;
+					if (mHelper == null) {
+						stop(true);
+						return;
+					}
 
-					runnable.run(InAppHelper.this);
+					processingTask = !runnable.run(InAppPurchaseHelper.this);
 				}
 			});
 		} catch (Exception e) {
 			logError("exec Error", e);
-			if (stopAfterResult) {
-				stop();
-			}
+			stop(true);
 		}
 	}
 
-	public void start(final boolean stopAfterResult) {
-		this.stopAfterResult = stopAfterResult;
+	public boolean needRequestInventory() {
+		return !ctx.getSettings().BILLING_PURCHASE_TOKEN_SENT.get()
+				|| System.currentTimeMillis() - lastValidationCheckTime > PURCHASE_VALIDATION_PERIOD_MSEC;
+	}
 
-		// Create the helper, passing it our context and the public key to verify signatures with
-		logDebug("Creating InAppHelper.");
-		mHelper = new IabHelper(ctx, BASE64_ENCODED_PUBLIC_KEY);
-
-		// enable debug logging (for a production application, you should set this to false).
-		mHelper.enableDebugLogging(false);
-
-		// Start setup. This is asynchronous and the specified listener
-		// will be called once setup completes.
-		logDebug("Starting setup.");
-		try {
-			mHelper.startSetup(new IabHelper.OnIabSetupFinishedListener() {
-				public void onIabSetupFinished(IabResult result) {
-					logDebug("Setup finished.");
-
-					if (!result.isSuccess()) {
-						// Oh noes, there was a problem.
-						//complain("Problem setting up in-app billing: " + result);
-						notifyError(result.getMessage());
-						if (stopAfterResult) {
-							stop();
-						}
-						return;
-					}
-
-					// Have we been disposed of in the meantime? If so, quit.
-					if (mHelper == null) return;
-
-					// IAB is fully set up. Now, let's get an inventory of stuff we own if needed.
-					if (forceRequestInventory || (!isDeveloperVersion &&
-							(!mSubscribedToLiveUpdates
-									|| !ctx.getSettings().BILLING_PURCHASE_TOKEN_SENT.get()
-									|| System.currentTimeMillis() - lastValidationCheckTime > PURCHASE_VALIDATION_PERIOD_MSEC))) {
-
-						logDebug("Setup successful. Querying inventory.");
-						List<String> skus = new ArrayList<>();
-						skus.add(SKU_LIVE_UPDATES);
-						skus.add(SKU_DEPTH_CONTOURS);
-						skus.add(SKU_FULL_VERSION_PRICE);
-						try {
-							inventoryRequesting = true;
-							mHelper.queryInventoryAsync(true, skus, mGotInventoryListener);
-						} catch (Exception e) {
-							inventoryRequesting = false;
-							logError("queryInventoryAsync Error", e);
-							notifyDismissProgress();
-							if (stopAfterResult) {
-								stop();
-							}
-						}
-					} else {
-						notifyDismissProgress();
-						if (stopAfterResult) {
-							stop();
-						}
-					}
+	public void requestInventory() {
+		notifyShowProgress(InAppPurchaseTaskType.REQUEST_INVENTORY);
+		exec(InAppPurchaseTaskType.REQUEST_INVENTORY, new InAppRunnable() {
+			@Override
+			public boolean run(InAppPurchaseHelper helper) {
+				logDebug("Setup successful. Querying inventory.");
+				List<String> skus = new ArrayList<>();
+				skus.add(SKU_LIVE_UPDATES);
+				skus.add(SKU_DEPTH_CONTOURS);
+				skus.add(SKU_FULL_VERSION_PRICE);
+				try {
+					mHelper.queryInventoryAsync(true, skus, mGotInventoryListener);
+					return false;
+				} catch (Exception e) {
+					logError("queryInventoryAsync Error", e);
+					notifyDismissProgress(InAppPurchaseTaskType.REQUEST_INVENTORY);
+					stop(true);
 				}
-			});
-		} catch (Exception e) {
-			logError("start Error", e);
-			if (stopAfterResult) {
-				stop();
+				return true;
 			}
-		}
+		});
+	}
+
+	public void purchaseFullVersion(final Activity activity) {
+		notifyShowProgress(InAppPurchaseTaskType.PURCHASE_FULL_VERSION);
+		exec(InAppPurchaseTaskType.PURCHASE_FULL_VERSION, new InAppRunnable() {
+			@Override
+			public boolean run(InAppPurchaseHelper helper) {
+				try {
+					mHelper.launchPurchaseFlow(activity,
+							SKU_FULL_VERSION_PRICE, RC_REQUEST, mPurchaseFinishedListener);
+					return false;
+				} catch (Exception e) {
+					complain("Cannot launch full version purchase!");
+					logError("purchaseFullVersion Error", e);
+					stop(true);
+				}
+				return true;
+			}
+		});
+	}
+
+	public void purchaseLiveUpdates(Activity activity, String email, String userName,
+									String countryDownloadName, boolean hideUserName) {
+		notifyShowProgress(InAppPurchaseTaskType.PURCHASE_LIVE_UPDATES);
+		new LiveUpdatesPurchaseTask(activity, email, userName, countryDownloadName, hideUserName)
+				.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
+	}
+
+	public void purchaseDepthContours(final Activity activity) {
+		notifyShowProgress(InAppPurchaseTaskType.PURCHASE_DEPTH_CONTOURS);
+		exec(InAppPurchaseTaskType.PURCHASE_DEPTH_CONTOURS, new InAppRunnable() {
+			@Override
+			public boolean run(InAppPurchaseHelper helper) {
+				try {
+					mHelper.launchPurchaseFlow(activity,
+							SKU_DEPTH_CONTOURS, RC_REQUEST, mPurchaseFinishedListener);
+					return false;
+				} catch (Exception e) {
+					complain("Cannot launch depth contours purchase!");
+					logError("purchaseDepthContours Error", e);
+					stop(true);
+				}
+				return true;
+			}
+		});
 	}
 
 	// Listener that's called when we finish querying the items and subscriptions we own
 	private QueryInventoryFinishedListener mGotInventoryListener = new QueryInventoryFinishedListener() {
 		public void onQueryInventoryFinished(IabResult result, Inventory inventory) {
 			logDebug("Query inventory finished.");
-			inventoryRequesting = false;
 
 			// Have we been disposed of in the meantime? If so, quit.
-			if (mHelper == null) return;
+			if (mHelper == null) {
+				stop(true);
+				return;
+			}
 
 			// Is it a failure?
-			if (result.isFailure() || stopRequested) {
+			if (result.isFailure()) {
 				logError("Failed to query inventory: " + result);
-				notifyError(result.getMessage());
-				if (stopAfterResult || stopRequested) {
-					stop();
-				}
+				notifyError(InAppPurchaseTaskType.REQUEST_INVENTORY, result.getMessage());
+				stop(true);
 				return;
 			}
 
 			logDebug("Query inventory was successful.");
 
-            /*
+			/*
 			 * Check for items we own. Notice that for each purchase, we check
-             * the developer payload to see if it's correct! See
-             * verifyDeveloperPayload().
-             */
+			 * the developer payload to see if it's correct! See
+			 * verifyDeveloperPayload().
+			 */
 
 			// Do we have the live updates?
 			Purchase liveUpdatesPurchase = inventory.getPurchase(SKU_LIVE_UPDATES);
-			mSubscribedToLiveUpdates = isDeveloperVersion || (liveUpdatesPurchase != null && liveUpdatesPurchase.getPurchaseState() == 0);
-			if (mSubscribedToLiveUpdates) {
-				ctx.getSettings().LIVE_UPDATES_PURCHASED.set(true);
-			}
+			boolean subscribedToLiveUpdates = (liveUpdatesPurchase != null && liveUpdatesPurchase.getPurchaseState() == 0);
+			//subscribedToLiveUpdates = false;
+			ctx.getSettings().LIVE_UPDATES_PURCHASED.set(subscribedToLiveUpdates);
 
 			Purchase fullVersionPurchase = inventory.getPurchase(SKU_FULL_VERSION_PRICE);
-			mFullVersionPurchased = isDeveloperVersion || (fullVersionPurchase != null && fullVersionPurchase.getPurchaseState() == 0);
-			if (mFullVersionPurchased) {
+			boolean fullVersionPurchased = (fullVersionPurchase != null && fullVersionPurchase.getPurchaseState() == 0);
+			if (fullVersionPurchased) {
 				ctx.getSettings().FULL_VERSION_PURCHASED.set(true);
 			}
 
 			Purchase depthContoursPurchase = inventory.getPurchase(SKU_DEPTH_CONTOURS);
-			mDepthContoursPurchased = isDeveloperVersion || (depthContoursPurchase != null && depthContoursPurchase.getPurchaseState() == 0);
-			if (mDepthContoursPurchased) {
+			boolean depthContoursPurchased = (depthContoursPurchase != null && depthContoursPurchase.getPurchaseState() == 0);
+			if (depthContoursPurchased) {
 				ctx.getSettings().DEPTH_CONTOURS_PURCHASED.set(true);
 			}
 
 			lastValidationCheckTime = System.currentTimeMillis();
-			logDebug("User " + (mSubscribedToLiveUpdates ? "HAS" : "DOES NOT HAVE")
+			logDebug("User " + (subscribedToLiveUpdates ? "HAS" : "DOES NOT HAVE")
 					+ " live updates purchased.");
 
 			if (inventory.hasDetails(SKU_LIVE_UPDATES)) {
 				SkuDetails liveUpdatesDetails = inventory.getSkuDetails(SKU_LIVE_UPDATES);
-				mLiveUpdatesPrice = liveUpdatesDetails.getPrice();
+				liveUpdatesPrice = liveUpdatesDetails.getPrice();
 			}
-
-			if (inventory.hasDetails(SKU_DEPTH_CONTOURS)) {
-				SkuDetails depthContoursDetails = inventory.getSkuDetails(SKU_DEPTH_CONTOURS);
-				mDepthContoursPrice = depthContoursDetails.getPrice();
-			}
-
 			if (inventory.hasDetails(SKU_FULL_VERSION_PRICE)) {
 				SkuDetails fullPriceDetails = inventory.getSkuDetails(SKU_FULL_VERSION_PRICE);
-				mFullVersionPrice = fullPriceDetails.getPrice();
+				fullVersionPrice = fullPriceDetails.getPrice();
 			}
-
+			if (inventory.hasDetails(SKU_DEPTH_CONTOURS)) {
+				SkuDetails depthContoursDetails = inventory.getSkuDetails(SKU_DEPTH_CONTOURS);
+				depthContoursPrice = depthContoursDetails.getPrice();
+			}
 			OsmandSettings settings = ctx.getSettings();
 			settings.INAPPS_READ.set(true);
 
 			boolean needSendToken = false;
-			if (!isDeveloperVersion && liveUpdatesPurchase != null) {
+			if (liveUpdatesPurchase != null) {
 				if ((Algorithms.isEmpty(settings.BILLING_USER_ID.get()) || Algorithms.isEmpty(settings.BILLING_USER_TOKEN.get()))
 						&& !Algorithms.isEmpty(liveUpdatesPurchase.getDeveloperPayload())) {
 					String payload = liveUpdatesPurchase.getDeveloperPayload();
@@ -390,11 +397,9 @@ public class InAppHelper {
 			final OnRequestResultListener listener = new OnRequestResultListener() {
 				@Override
 				public void onResult(String result) {
-					notifyDismissProgress();
+					notifyDismissProgress(InAppPurchaseTaskType.REQUEST_INVENTORY);
 					notifyGetItems();
-					if (stopAfterResult || stopRequested) {
-						stop();
-					}
+					stop(true);
 					logDebug("Initial inapp query finished");
 				}
 			};
@@ -407,159 +412,107 @@ public class InAppHelper {
 		}
 	};
 
-	public void purchaseFullVersion(final Activity activity) {
-		if (mHelper == null) {
-			//complain("In-app hepler is not initialized!");
-			notifyError("In-app hepler is not initialized!");
-			if (stopAfterResult) {
-				stop();
-			}
-			return;
+	@SuppressLint("StaticFieldLeak")
+	private class LiveUpdatesPurchaseTask extends AsyncTask<Void, Void, String> {
+
+		private WeakReference<Activity> activity;
+
+		private String email;
+		private String userName;
+		private String countryDownloadName;
+		private boolean hideUserName;
+
+		private String userId;
+
+		LiveUpdatesPurchaseTask(Activity activity, String email, String userName,
+								String countryDownloadName, boolean hideUserName) {
+			this.activity = new WeakReference<>(activity);
+
+			this.email = email;
+			this.userName = userName;
+			this.countryDownloadName = countryDownloadName;
+			this.hideUserName = hideUserName;
 		}
 
-		logDebug("Launching purchase flow for full version");
-		if (mHelper != null) {
+		@Override
+		protected String doInBackground(Void... params) {
+			userId = ctx.getSettings().BILLING_USER_ID.get();
 			try {
-				mHelper.launchPurchaseFlow(activity,
-						SKU_FULL_VERSION_PRICE, RC_REQUEST, mPurchaseFinishedListener);
+				Map<String, String> parameters = new HashMap<>();
+				parameters.put("visibleName", hideUserName ? "" : userName);
+				parameters.put("preferredCountry", countryDownloadName);
+				parameters.put("email", email);
+				if (Algorithms.isEmpty(userId)) {
+					parameters.put("status", "new");
+				}
+
+				return AndroidNetworkUtils.sendRequest(ctx,
+						"http://download.osmand.net/subscription/register.php",
+						parameters, "Requesting userId...", true, true);
+
 			} catch (Exception e) {
-				complain("Cannot launch full version purchase!");
-				logError("purchaseFullVersion Error", e);
-				if (stopAfterResult) {
-					stop();
-				}
+				logError("sendRequest Error", e);
+				return null;
 			}
 		}
-	}
 
-	public void purchaseDepthContours(final Activity activity) {
-		if (mHelper == null) {
-			//complain("In-app hepler is not initialized!");
-			notifyError("In-app hepler is not initialized!");
-			if (stopAfterResult) {
-				stop();
-			}
-			return;
-		}
-
-		logDebug("Launching purchase flow for sea depth contours");
-		if (mHelper != null) {
-			try {
-				mHelper.launchPurchaseFlow(activity,
-						SKU_DEPTH_CONTOURS, RC_REQUEST, mPurchaseFinishedListener);
-			} catch (Exception e) {
-				complain("Cannot launch depth contours purchase!");
-				logError("purchaseDepthContours Error", e);
-				if (stopAfterResult) {
-					stop();
-				}
-			}
-		}
-	}
-
-	public void purchaseLiveUpdates(final Activity activity, final String email, final String userName,
-									final String countryDownloadName, final boolean hideUserName) {
-		try {
-			if (mHelper == null || !mHelper.subscriptionsSupported()) {
-				complain("Subscriptions not supported on your device yet. Sorry!");
-				notifyError("Subscriptions not supported on your device yet. Sorry!");
-				if (stopAfterResult) {
-					stop();
-				}
+		@Override
+		protected void onPostExecute(String response) {
+			logDebug("Response=" + response);
+			if (response == null) {
+				complain("Cannot retrieve userId from server.");
+				notifyDismissProgress(InAppPurchaseTaskType.PURCHASE_LIVE_UPDATES);
+				notifyError(InAppPurchaseTaskType.PURCHASE_LIVE_UPDATES, "Cannot retrieve userId from server.");
+				stop(true);
 				return;
-			}
-		} catch (Exception e) {
-			logError("purchaseLiveUpdates Error", e);
-			if (stopAfterResult) {
-				stop();
-			}
-			return;
-		}
 
-		notifyShowProgress();
-
-		new AsyncTask<Void, Void, String>() {
-
-			private String userId;
-
-			@Override
-			protected String doInBackground(Void... params) {
-				userId = ctx.getSettings().BILLING_USER_ID.get();
+			} else {
 				try {
-					Map<String, String> parameters = new HashMap<>();
-					parameters.put("visibleName", hideUserName ? "" : userName);
-					parameters.put("preferredCountry", countryDownloadName);
-					parameters.put("email", email);
-					if (Algorithms.isEmpty(userId)) {
-						parameters.put("status", "new");
-					}
-
-					return AndroidNetworkUtils.sendRequest(ctx,
-							"http://download.osmand.net/subscription/register.php",
-							parameters, "Requesting userId...", true, true);
-
-				} catch (Exception e) {
-					logError("sendRequest Error", e);
-					return null;
+					JSONObject obj = new JSONObject(response);
+					userId = obj.getString("userid");
+					ctx.getSettings().BILLING_USER_ID.set(userId);
+					token = obj.getString("token");
+					ctx.getSettings().BILLING_USER_TOKEN.set(token);
+					logDebug("UserId=" + userId);
+				} catch (JSONException e) {
+					String message = "JSON parsing error: "
+							+ (e.getMessage() == null ? "unknown" : e.getMessage());
+					complain(message);
+					notifyDismissProgress(InAppPurchaseTaskType.PURCHASE_LIVE_UPDATES);
+					notifyError(InAppPurchaseTaskType.PURCHASE_LIVE_UPDATES, message);
+					stop(true);
 				}
 			}
 
-			@Override
-			protected void onPostExecute(String response) {
-				logDebug("Response=" + response);
-				if (response == null) {
-					complain("Cannot retrieve userId from server.");
-					notifyDismissProgress();
-					notifyError("Cannot retrieve userId from server.");
-					if (stopAfterResult) {
-						stop();
-					}
-					return;
-
-				} else {
-					try {
-						JSONObject obj = new JSONObject(response);
-						userId = obj.getString("userid");
-						ctx.getSettings().BILLING_USER_ID.set(userId);
-						token = obj.getString("token");
-						ctx.getSettings().BILLING_USER_TOKEN.set(token);
-						logDebug("UserId=" + userId);
-					} catch (JSONException e) {
-						String message = "JSON parsing error: "
-								+ (e.getMessage() == null ? "unknown" : e.getMessage());
-						complain(message);
-						notifyDismissProgress();
-						notifyError(message);
-						if (stopAfterResult) {
-							stop();
-						}
-					}
-				}
-
-				notifyDismissProgress();
-				if (!Algorithms.isEmpty(userId)) {
-					logDebug("Launching purchase flow for live updates subscription for userId=" + userId);
-					String payload = userId + " " + token;
-					if (mHelper != null) {
+			notifyDismissProgress(InAppPurchaseTaskType.PURCHASE_LIVE_UPDATES);
+			if (!Algorithms.isEmpty(userId)) {
+				logDebug("Launching purchase flow for live updates subscription for userId=" + userId);
+				final String payload = userId + " " + token;
+				exec(InAppPurchaseTaskType.PURCHASE_LIVE_UPDATES, new InAppRunnable() {
+					@Override
+					public boolean run(InAppPurchaseHelper helper) {
 						try {
-							mHelper.launchPurchaseFlow(activity,
-									SKU_LIVE_UPDATES, IabHelper.ITEM_TYPE_SUBS,
-									RC_REQUEST, mPurchaseFinishedListener, payload);
+							Activity a = activity.get();
+							if (a != null) {
+								mHelper.launchPurchaseFlow(a,
+										SKU_LIVE_UPDATES, IabHelper.ITEM_TYPE_SUBS,
+										RC_REQUEST, mPurchaseFinishedListener, payload);
+								return false;
+							} else {
+								stop(true);
+							}
 						} catch (Exception e) {
 							logError("launchPurchaseFlow Error", e);
-							if (stopAfterResult) {
-								stop();
-							}
+							stop(true);
 						}
+						return true;
 					}
-				} else {
-					notifyError("Empty userId");
-					if (stopAfterResult) {
-						stop();
-					}
-				}
+				});
+			} else {
+				notifyError(InAppPurchaseTaskType.PURCHASE_LIVE_UPDATES,"Empty userId");
+				stop(true);
 			}
-		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
+		}
 	}
 
 	public boolean onActivityResultHandled(int requestCode, int resultCode, Intent data) {
@@ -590,15 +543,16 @@ public class InAppHelper {
 			logDebug("Purchase finished: " + result + ", purchase: " + purchase);
 
 			// if we were disposed of in the meantime, quit.
-			if (mHelper == null) return;
+			if (mHelper == null) {
+				stop(true);
+				return;
+			}
 
 			if (result.isFailure()) {
 				complain("Error purchasing: " + result);
-				notifyDismissProgress();
-				notifyError("Error purchasing: " + result);
-				if (stopAfterResult) {
-					stop();
-				}
+				notifyDismissProgress(activeTask);
+				notifyError(activeTask, "Error purchasing: " + result);
+				stop(true);
 				return;
 			}
 
@@ -611,58 +565,61 @@ public class InAppHelper {
 					@Override
 					public void onResult(String result) {
 						showToast(ctx.getString(R.string.osm_live_thanks));
-						mSubscribedToLiveUpdates = true;
 						ctx.getSettings().LIVE_UPDATES_PURCHASED.set(true);
 
-						notifyDismissProgress();
+						notifyDismissProgress(InAppPurchaseTaskType.PURCHASE_LIVE_UPDATES);
 						notifyItemPurchased(SKU_LIVE_UPDATES);
-						if (stopAfterResult) {
-							stop();
-						}
+						stop(true);
 					}
 				});
-			}
-			if (purchase.getSku().equals(SKU_FULL_VERSION_PRICE)) {
+
+			} else if (purchase.getSku().equals(SKU_FULL_VERSION_PRICE)) {
 				// bought full version
 				logDebug("Full version purchased.");
 				showToast(ctx.getString(R.string.full_version_thanks));
-				mFullVersionPurchased = true;
 				ctx.getSettings().FULL_VERSION_PURCHASED.set(true);
 
-				notifyDismissProgress();
+				notifyDismissProgress(InAppPurchaseTaskType.PURCHASE_FULL_VERSION);
 				notifyItemPurchased(SKU_FULL_VERSION_PRICE);
-				if (stopAfterResult) {
-					stop();
-				}
-			}
-			if (purchase.getSku().equals(SKU_DEPTH_CONTOURS)) {
+				stop(true);
+
+			} else if (purchase.getSku().equals(SKU_DEPTH_CONTOURS)) {
 				// bought sea depth contours
 				logDebug("Sea depth contours purchased.");
 				showToast(ctx.getString(R.string.sea_depth_thanks));
-				mDepthContoursPurchased = true;
 				ctx.getSettings().DEPTH_CONTOURS_PURCHASED.set(true);
 				ctx.getSettings().getCustomRenderBooleanProperty("depthContours").set(true);
 
-				notifyDismissProgress();
+				notifyDismissProgress(InAppPurchaseTaskType.PURCHASE_DEPTH_CONTOURS);
 				notifyItemPurchased(SKU_DEPTH_CONTOURS);
-				if (stopAfterResult) {
-					stop();
-				}
+				stop(true);
+
+			} else {
+				notifyDismissProgress(activeTask);
+				stop(true);
 			}
 		}
 	};
 
 	// Do not forget call stop() when helper is not needed anymore
 	public void stop() {
+		stop(false);
+	}
+
+	private void stop(boolean taskDone) {
 		logDebug("Destroying helper.");
 		if (mHelper != null) {
-			if (!inventoryRequesting) {
-				stopRequested = false;
+			if (taskDone) {
+				processingTask = false;
+			}
+			if (!processingTask) {
+				activeTask = null;
 				mHelper.dispose();
 				mHelper = null;
-			} else {
-				stopRequested = true;
 			}
+		} else {
+			processingTask = false;
+			activeTask = null;
 		}
 	}
 
@@ -739,46 +696,46 @@ public class InAppHelper {
 		}
 	}
 
-	private void notifyError(String message) {
-		for (InAppListener l : listeners) {
-			l.onError(message);
+	private void notifyError(InAppPurchaseTaskType taskType, String message) {
+		for (InAppPurchaseListener l : listeners) {
+			l.onError(taskType, message);
 		}
 	}
 
 	private void notifyGetItems() {
-		for (InAppListener l : listeners) {
+		for (InAppPurchaseListener l : listeners) {
 			l.onGetItems();
 		}
 	}
 
 	private void notifyItemPurchased(String sku) {
-		for (InAppListener l : listeners) {
+		for (InAppPurchaseListener l : listeners) {
 			l.onItemPurchased(sku);
 		}
 	}
 
-	private void notifyShowProgress() {
-		for (InAppListener l : listeners) {
-			l.showProgress();
+	private void notifyShowProgress(InAppPurchaseTaskType taskType) {
+		for (InAppPurchaseListener l : listeners) {
+			l.showProgress(taskType);
 		}
 	}
 
-	private void notifyDismissProgress() {
-		for (InAppListener l : listeners) {
-			l.dismissProgress();
+	private void notifyDismissProgress(InAppPurchaseTaskType taskType) {
+		for (InAppPurchaseListener l : listeners) {
+			l.dismissProgress(taskType);
 		}
 	}
 
-	public void addListener(InAppListener listener) {
+	public void addListener(InAppPurchaseListener listener) {
 		this.listeners.add(listener);
 	}
 
-	public void removeListener(InAppListener listener) {
+	public void removeListener(InAppPurchaseListener listener) {
 		this.listeners.remove(listener);
 	}
 
 	private void complain(String message) {
-		logError("**** InAppHelper Error: " + message);
+		logError("**** InAppPurchaseHelper Error: " + message);
 		showToast(message);
 	}
 
@@ -787,7 +744,9 @@ public class InAppHelper {
 	}
 
 	private void logDebug(String msg) {
-		if (mDebugLog) Log.d(TAG, msg);
+		if (mDebugLog) {
+			Log.d(TAG, msg);
+		}
 	}
 
 	private void logError(String msg) {

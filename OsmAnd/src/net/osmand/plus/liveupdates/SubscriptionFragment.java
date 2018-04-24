@@ -3,6 +3,8 @@ package net.osmand.plus.liveupdates;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.AppCompatCheckBox;
 import android.view.LayoutInflater;
@@ -22,9 +24,11 @@ import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.OsmandInAppPurchaseActivity;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
-import net.osmand.plus.inapp.InAppHelper;
-import net.osmand.plus.inapp.InAppHelper.InAppListener;
+import net.osmand.plus.inapp.InAppPurchaseHelper;
+import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
+import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseTaskType;
 import net.osmand.plus.liveupdates.CountrySelectionFragment.CountryItem;
 import net.osmand.plus.liveupdates.CountrySelectionFragment.OnFragmentInteractionListener;
 import net.osmand.util.Algorithms;
@@ -35,7 +39,7 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-public class SubscriptionFragment extends BaseOsmAndDialogFragment implements InAppListener, OnFragmentInteractionListener {
+public class SubscriptionFragment extends BaseOsmAndDialogFragment implements InAppPurchaseListener, OnFragmentInteractionListener {
 
 	public static final String TAG = "SubscriptionFragment";
 	private static final String EDIT_MODE_ID = "edit_mode_id";
@@ -59,10 +63,11 @@ public class SubscriptionFragment extends BaseOsmAndDialogFragment implements In
 		this.editMode = editMode;
 	}
 
-	public InAppHelper getInAppHelper() {
+	@Nullable
+	public InAppPurchaseHelper getInAppPurchaseHelper() {
 		Activity activity = getActivity();
-		if (activity instanceof OsmLiveActivity) {
-			return ((OsmLiveActivity) activity).getInAppHelper();
+		if (activity instanceof OsmandInAppPurchaseActivity) {
+			return ((OsmandInAppPurchaseActivity) activity).getPurchaseHelper();
 		} else {
 			return null;
 		}
@@ -103,13 +108,8 @@ public class SubscriptionFragment extends BaseOsmAndDialogFragment implements In
 	}
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
-
-		InAppHelper helper = getInAppHelper();
-		if (helper != null) {
-			helper.addListener(this);
-		}
 
 		String userName = settings.BILLING_USER_NAME.get();
 		String email = settings.BILLING_USER_EMAIL.get();
@@ -214,8 +214,8 @@ public class SubscriptionFragment extends BaseOsmAndDialogFragment implements In
 			saveChangesButton.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					InAppHelper helper = getInAppHelper();
-					if (helper != null && applySettings(userNameEdit.getText().toString().trim(),
+					InAppPurchaseHelper purchaseHelper = getInAppPurchaseHelper();
+					if (purchaseHelper != null && applySettings(userNameEdit.getText().toString().trim(),
 							emailEdit.getText().toString().trim(), hideUserNameCheckbox.isChecked())) {
 
 						final Map<String, String> parameters = new HashMap<>();
@@ -224,16 +224,16 @@ public class SubscriptionFragment extends BaseOsmAndDialogFragment implements In
 						parameters.put("email", settings.BILLING_USER_EMAIL.get());
 						parameters.put("cemail", prevEmail);
 						parameters.put("userid", settings.BILLING_USER_ID.get());
-						parameters.put("token", helper.getToken());
+						parameters.put("token", purchaseHelper.getToken());
 
-						showProgress();
+						showProgress(null);
 
 						AndroidNetworkUtils.sendRequestAsync(getMyApplication(),
 								"http://download.osmand.net/subscription/update.php",
 								parameters, "Sending data...", true, true, new AndroidNetworkUtils.OnRequestResultListener() {
 									@Override
 									public void onResult(String result) {
-										dismissProgress();
+										dismissProgress(null);
 										OsmandApplication app = getMyApplication();
 										if (result != null) {
 											try {
@@ -283,12 +283,12 @@ public class SubscriptionFragment extends BaseOsmAndDialogFragment implements In
 			subscribeButton.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					InAppHelper helper = getInAppHelper();
-					if (helper != null) {
+					InAppPurchaseHelper purchaseHelper = getInAppPurchaseHelper();
+					if (purchaseHelper != null) {
 						if (applySettings(userNameEdit.getText().toString().trim(),
 								emailEdit.getText().toString().trim(), hideUserNameCheckbox.isChecked())) {
 
-							helper.purchaseLiveUpdates(getActivity(),
+							purchaseHelper.purchaseLiveUpdates(getActivity(),
 									settings.BILLING_USER_EMAIL.get(),
 									settings.BILLING_USER_NAME.get(),
 									settings.BILLING_USER_COUNTRY_DOWNLOAD_NAME.get(),
@@ -309,12 +309,26 @@ public class SubscriptionFragment extends BaseOsmAndDialogFragment implements In
 	}
 
 	@Override
+	public void onResume() {
+		super.onResume();
+		InAppPurchaseHelper purchaseHelper = getInAppPurchaseHelper();
+		if (purchaseHelper != null) {
+			purchaseHelper.addListener(this);
+		}
+	}
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		InAppPurchaseHelper purchaseHelper = getInAppPurchaseHelper();
+		if (purchaseHelper != null) {
+			purchaseHelper.removeListener(this);
+		}
+	}
+
+	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		InAppHelper helper = getInAppHelper();
-		if (helper != null) {
-			helper.removeListener(this);
-		}
 		if (dlg != null && dlg.isShowing()) {
 			dlg.hide();
 		}
@@ -350,7 +364,7 @@ public class SubscriptionFragment extends BaseOsmAndDialogFragment implements In
 	}
 
 	@Override
-	public void onError(String error) {
+	public void onError(InAppPurchaseTaskType taskType, String error) {
 	}
 
 	@Override
@@ -365,7 +379,7 @@ public class SubscriptionFragment extends BaseOsmAndDialogFragment implements In
 	}
 
 	@Override
-	public void showProgress() {
+	public void showProgress(InAppPurchaseTaskType taskType) {
 		if (dlg != null) {
 			dlg.dismiss();
 		}
@@ -377,7 +391,7 @@ public class SubscriptionFragment extends BaseOsmAndDialogFragment implements In
 	}
 
 	@Override
-	public void dismissProgress() {
+	public void dismissProgress(InAppPurchaseTaskType taskType) {
 		if (dlg != null) {
 			dlg.dismiss();
 			dlg = null;
@@ -402,8 +416,9 @@ public class SubscriptionFragment extends BaseOsmAndDialogFragment implements In
 		}
 		if (view != null) {
 			TextView priceTextView = (TextView) view.findViewById(R.id.priceTextView);
-			if (InAppHelper.getLiveUpdatesPrice() != null) {
-				priceTextView.setText(InAppHelper.getLiveUpdatesPrice());
+			InAppPurchaseHelper purchaseHelper = getInAppPurchaseHelper();
+			if (purchaseHelper.getLiveUpdatesPrice() != null) {
+				priceTextView.setText(purchaseHelper.getLiveUpdatesPrice());
 			}
 		}
 	}

@@ -14,7 +14,7 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.inapp.InAppHelper;
+import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.liveupdates.OsmLiveActivity;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarControllerType;
@@ -109,7 +109,8 @@ public class DiscountHelper {
 
 			if (url.startsWith(INAPP_PREFIX) && url.length() > INAPP_PREFIX.length()) {
 				String inAppSku = url.substring(INAPP_PREFIX.length());
-				if (InAppHelper.isPurchased(app, inAppSku)) {
+				InAppPurchaseHelper purchaseHelper = app.getInAppPurchaseHelper();
+				if (purchaseHelper != null && purchaseHelper.isPurchased(inAppSku)) {
 					return;
 				}
 			}
@@ -210,15 +211,11 @@ public class DiscountHelper {
 
 	private static void openUrl(final MapActivity mapActivity, String url) {
 		if (url.startsWith(INAPP_PREFIX)) {
-			if (url.contains(InAppHelper.SKU_FULL_VERSION_PRICE)) {
-				mapActivity.execInAppTask(new InAppHelper.InAppRunnable() {
-					@Override
-					public void run(InAppHelper helper) {
-						mapActivity.getMyApplication().logEvent(mapActivity, "in_app_purchase_redirect");
-						helper.purchaseFullVersion(mapActivity);
-					}
-				});
-			} else if (url.contains(InAppHelper.SKU_LIVE_UPDATES)){
+			if (url.contains(InAppPurchaseHelper.SKU_FULL_VERSION_PRICE)) {
+				OsmandApplication app = mapActivity.getMyApplication();
+				app.logEvent(mapActivity, "in_app_purchase_redirect");
+				app.getInAppPurchaseHelper().purchaseFullVersion(mapActivity);
+			} else if (url.contains(InAppPurchaseHelper.SKU_LIVE_UPDATES)){
 				Intent intent = new Intent(mapActivity, OsmLiveActivity.class);
 				intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 				intent.putExtra(OsmLiveActivity.OPEN_SUBSCRIPTION_INTENT_PARAM, true);

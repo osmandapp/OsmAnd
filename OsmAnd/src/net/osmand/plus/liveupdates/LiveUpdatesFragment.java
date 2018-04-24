@@ -10,10 +10,10 @@ import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBar;
@@ -45,10 +45,12 @@ import net.osmand.plus.Version;
 import net.osmand.plus.activities.LocalIndexHelper;
 import net.osmand.plus.activities.LocalIndexInfo;
 import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
+import net.osmand.plus.activities.OsmandInAppPurchaseActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.download.ui.AbstractLoadLocalIndexTask;
-import net.osmand.plus.inapp.InAppHelper;
-import net.osmand.plus.inapp.InAppHelper.InAppListener;
+import net.osmand.plus.inapp.InAppPurchaseHelper;
+import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
+import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseTaskType;
 import net.osmand.plus.resources.IncrementalChangesManager;
 import net.osmand.util.Algorithms;
 
@@ -73,7 +75,7 @@ import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceUpdateFreq
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.runLiveUpdate;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.setAlarmForPendingIntent;
 
-public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppListener {
+public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppPurchaseListener {
 	public static final int TITLE = R.string.live_updates;
 	private static final int SUBSCRIPTION_SETTINGS = 5;
 	public static final Comparator<LocalIndexInfo> LOCAL_INDEX_INFO_COMPARATOR = new Comparator<LocalIndexInfo>() {
@@ -90,10 +92,11 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppList
 	private ProgressBar progressBar;
 	private boolean processing;
 
-	public InAppHelper getInAppHelper() {
+	@Nullable
+	public InAppPurchaseHelper getInAppPurchaseHelper() {
 		Activity activity = getActivity();
-		if (activity instanceof OsmLiveActivity) {
-			return ((OsmLiveActivity) activity).getInAppHelper();
+		if (activity instanceof OsmandInAppPurchaseActivity) {
+			return ((OsmandInAppPurchaseActivity) activity).getPurchaseHelper();
 		} else {
 			return null;
 		}
@@ -121,7 +124,8 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppList
 		listView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
 			@Override
 			public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-				if (!processing && InAppHelper.isSubscribedToLiveUpdates()) {
+				InAppPurchaseHelper purchaseHelper = getInAppPurchaseHelper();
+				if (!processing && purchaseHelper != null && purchaseHelper.isSubscribedToLiveUpdates()) {
 					final FragmentManager fragmentManager = getChildFragmentManager();
 					LiveUpdatesSettingsDialogFragment
 							.createInstance(adapter.getChild(groupPosition, childPosition).getFileName())
@@ -143,7 +147,8 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppList
 			listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 				@Override
 				public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-					if (position == 0 && !processing && InAppHelper.isSubscribedToLiveUpdates()) {
+					InAppPurchaseHelper purchaseHelper = getInAppPurchaseHelper();
+					if (position == 0 && !processing && purchaseHelper != null && purchaseHelper.isSubscribedToLiveUpdates()) {
 						SubscriptionFragment subscriptionFragment = new SubscriptionFragment();
 						subscriptionFragment.setEditMode(true);
 						subscriptionFragment.show(getChildFragmentManager(), SubscriptionFragment.TAG);
@@ -207,17 +212,17 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppList
 	@Override
 	public void onResume() {
 		super.onResume();
-		InAppHelper helper = getInAppHelper();
-		if (helper != null) {
-			enableProgress();
-			helper.addListener(this);
-			helper.start(false);
+		InAppPurchaseHelper purchaseHelper = getInAppPurchaseHelper();
+		if (purchaseHelper != null) {
+			if (purchaseHelper.getActiveTask() == InAppPurchaseTaskType.REQUEST_INVENTORY) {
+				enableProgress();
+			}
+			purchaseHelper.addListener(this);
 		}
 		if (((OsmLiveActivity) getActivity()).shouldOpenSubscription()) {
 			SubscriptionFragment subscriptionFragment = new SubscriptionFragment();
 			subscriptionFragment.show(getChildFragmentManager(), SubscriptionFragment.TAG);
 		}
-
 	}
 
 	@Override
@@ -227,11 +232,11 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppList
 	}
 
 	@Override
-	public void onDestroy() {
-		super.onDestroy();
-		InAppHelper helper = getInAppHelper();
-		if (helper != null) {
-			helper.removeListener(this);
+	public void onPause() {
+		super.onPause();
+		InAppPurchaseHelper purchaseHelper = getInAppPurchaseHelper();
+		if (purchaseHelper != null) {
+			purchaseHelper.removeListener(this);
 		}
 	}
 
@@ -383,7 +388,8 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppList
 					@Override
 					public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 						if (isChecked) {
-							if (InAppHelper.isSubscribedToLiveUpdates()) {
+							InAppPurchaseHelper purchaseHelper = getInAppPurchaseHelper();
+							if (purchaseHelper != null && purchaseHelper.isSubscribedToLiveUpdates()) {
 								switchOnLiveUpdates(settings);
 							} else {
 								liveUpdatesSwitch.setChecked(false);
@@ -578,7 +584,8 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppList
 				descriptionTextView.setText(context.getString(R.string.last_map_change, lastCheckString));
 			}
 
-			if (!fragment.isProcessing() && InAppHelper.isSubscribedToLiveUpdates()) {
+			InAppPurchaseHelper purchaseHelper = fragment.getInAppPurchaseHelper();
+			if (!fragment.isProcessing() && purchaseHelper != null && purchaseHelper.isSubscribedToLiveUpdates()) {
 				final View.OnClickListener clickListener = new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
@@ -673,14 +680,14 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppList
 	}
 
 	@Override
-	public void onError(String error) {
+	public void onError(InAppPurchaseTaskType taskType, String error) {
 		disableProgress();
 	}
 
 	@Override
 	public void onGetItems() {
-		getSettings().LIVE_UPDATES_PURCHASED.set(InAppHelper.isSubscribedToLiveUpdates());
-		if (!InAppHelper.isSubscribedToLiveUpdates()) {
+		InAppPurchaseHelper purchaseHelper = getInAppPurchaseHelper();
+		if (purchaseHelper != null && !purchaseHelper.isSubscribedToLiveUpdates()) {
 			getSettings().IS_LIVE_UPDATES_ON.set(false);
 			adapter.enableLiveUpdates(false);
 		}
@@ -689,18 +696,19 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppList
 
 	@Override
 	public void onItemPurchased(String sku) {
-		if (InAppHelper.getSkuLiveUpdates().equals(sku)) {
+		InAppPurchaseHelper purchaseHelper = getInAppPurchaseHelper();
+		if (purchaseHelper != null && purchaseHelper.getSkuLiveUpdates().equals(sku)) {
 			updateSubscriptionHeader();
 		}
 	}
 
 	@Override
-	public void showProgress() {
+	public void showProgress(InAppPurchaseTaskType taskType) {
 		enableProgress();
 	}
 
 	@Override
-	public void dismissProgress() {
+	public void dismissProgress(InAppPurchaseTaskType taskType) {
 		disableProgress();
 	}
 }

@@ -1,5 +1,6 @@
 package net.osmand.plus.activities;
 
+import android.annotation.SuppressLint;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;
@@ -11,7 +12,8 @@ import android.view.ViewGroup;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 
-public class OsmandActionBarActivity extends AppCompatActivity {
+@SuppressLint("Registered")
+public class OsmandActionBarActivity extends OsmandInAppPurchaseActivity {
 
 	protected boolean haveHomeButton = true;
 
@@ -50,8 +52,4 @@ public class OsmandActionBarActivity extends AppCompatActivity {
 			setupHomeButton();
 		}
     }
-
-	public OsmandApplication getMyApplication() {
-		return (OsmandApplication) getApplication();
-	}
 }

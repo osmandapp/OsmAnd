@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <LinearLayout
-    android:id="@+id/freeVersionBanner"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:osmand="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/freeVersionBanner"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/osmo_header_dark"
@@ -18,220 +17,63 @@
         android:paddingTop="@dimen/list_header_padding">
 
         <LinearLayout
+            android:id="@+id/bannerTopLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/list_content_padding"
+            android:paddingRight="@dimen/list_content_padding">
 
             <LinearLayout
-                android:id="@+id/bannerTopLayout"
+                android:id="@+id/freeVersionBannerTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingLeft="@dimen/list_content_padding"
-                android:paddingRight="@dimen/list_content_padding">
-
-                <LinearLayout
-                    android:id="@+id/freeVersionBannerTitle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="4dp">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/free_version_title"/>
-
-                    <TextView
-                        android:id="@+id/downloadsLeftTextView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        tools:text="@string/downloads_left_template"/>
-                </LinearLayout>
+                android:padding="4dp">
 
                 <TextView
-                    android:id="@+id/freeVersionDescriptionTextView"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_margin="4dp"
-                    tools:text="@string/free_version_message"/>
+                    android:layout_weight="1"
+                    android:text="@string/free_version_title"/>
 
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="8dp"
-                    android:layout_margin="4dp">
-
-                    <ProgressBar
-                        android:id="@+id/downloadsLeftProgressBar"
-                        style="@android:style/Widget.ProgressBar.Horizontal"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:max="10"
-                        android:progressDrawable="@drawable/number_of_downloads_progress_bar_drawable"
-                        android:saveEnabled="false"
-                        tools:progress="6"/>
-
-                    <LinearLayout
-                        android:id="@+id/marksLinearLayout"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="horizontal"/>
-                </FrameLayout>
-
+                <TextView
+                    android:id="@+id/downloadsLeftTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="@string/downloads_left_template"/>
             </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/priceInfoLayout"
+            <TextView
+                android:id="@+id/freeVersionDescriptionTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/list_content_padding"
-                android:orientation="vertical">
+                android:layout_margin="4dp"
+                tools:text="@string/free_version_message"/>
 
-                <View
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="8dp"
+                android:layout_margin="4dp">
+
+                <ProgressBar
+                    android:id="@+id/downloadsLeftProgressBar"
+                    style="@android:style/Widget.ProgressBar.Horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/dashboard_divider_dark"
-                    android:visibility="visible"/>
+                    android:layout_height="match_parent"
+                    android:max="10"
+                    android:progressDrawable="@drawable/number_of_downloads_progress_bar_drawable"
+                    android:saveEnabled="false"
+                    tools:progress="6"/>
 
                 <LinearLayout
-                    android:id="@+id/fullVersionLayout"
+                    android:id="@+id/marksLinearLayout"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/list_content_padding"
-                    android:orientation="horizontal"
-                    android:visibility="visible">
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"/>
+            </FrameLayout>
 
-                    <android.support.v7.widget.AppCompatImageView
-                        android:layout_width="54dp"
-                        android:layout_height="32dp"
-                        android:scaleType="center"
-                        android:src="@drawable/ic_action_osmand_logo"
-                        android:tint="@color/osmand_orange"/>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="@dimen/list_content_padding"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/fullVersionTitle"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="@string/osmand_unlimited"
-                            android:textSize="@dimen/default_list_text_size_large"
-                            android:textStyle="bold"/>
-
-                        <TextView
-                            android:id="@+id/fullVersionDescription"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="6dp"
-                            android:text="@string/osmand_plus_banner_desc"/>
-
-                        <ProgressBar
-                            android:id="@+id/fullVersionProgress"
-                            android:layout_width="32dp"
-                            android:layout_height="32dp"
-                            android:layout_marginTop="16dp"
-                            android:indeterminate="true"
-                            android:visibility="gone"/>
-
-                        <android.support.v7.widget.AppCompatButton
-                            android:id="@+id/fullVersionButton"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="12dp"
-                            android:background="@drawable/blue_button_drawable"
-                            android:paddingBottom="4dp"
-                            android:paddingLeft="14dp"
-                            android:paddingRight="14dp"
-                            android:paddingTop="4dp"
-                            android:textColor="@color/color_white"
-                            android:visibility="visible"
-                            tools:text="GET FOR 5 EUR"/>
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-                <View
-                    android:id="@+id/osmLiveLayoutTopDivider"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginLeft="54dp"
-                    android:layout_marginTop="@dimen/list_content_padding"
-                    android:background="@color/dashboard_divider_dark"
-                    android:visibility="visible"/>
-
-                <LinearLayout
-                    android:id="@+id/osmLiveLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/list_content_padding"
-                    android:layout_marginBottom="@dimen/list_content_padding"
-                    android:orientation="horizontal">
-
-                    <android.support.v7.widget.AppCompatImageView
-                        android:layout_width="54dp"
-                        android:layout_height="32dp"
-                        android:scaleType="center"
-                        android:src="@drawable/ic_action_osm_live"
-                        android:tint="@color/osmand_orange"/>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="@dimen/list_content_padding"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/osmLiveTitle"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="@string/osm_live_subscription"
-                            android:textSize="@dimen/default_list_text_size_large"
-                            android:textStyle="bold"/>
-
-                        <TextView
-                            android:id="@+id/osmLiveDescription"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="6dp"
-                            android:text="@string/osm_live_banner_desc"/>
-
-                        <ProgressBar
-                            android:id="@+id/osmLiveProgress"
-                            android:layout_width="32dp"
-                            android:layout_height="32dp"
-                            android:layout_marginTop="16dp"
-                            android:indeterminate="true"
-                            android:visibility="gone"/>
-
-                        <android.support.v7.widget.AppCompatButton
-                            android:id="@+id/osmLiveButton"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="12dp"
-                            android:background="@drawable/blue_button_drawable"
-                            android:paddingBottom="4dp"
-                            android:paddingLeft="14dp"
-                            android:paddingRight="14dp"
-                            android:paddingTop="4dp"
-                            android:textColor="@color/color_white"
-                            tools:text="GET FOR 1,5 EUR PER MONTH"/>
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-      
         </LinearLayout>
 
     </ScrollView>
 
 </LinearLayout>
-
-    

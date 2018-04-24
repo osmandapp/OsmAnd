@@ -21,7 +21,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/action_bar_height"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <android.support.v7.widget.AppCompatImageView
@@ -33,6 +33,17 @@
                     android:src="@drawable/ic_arrow_back"
                     android:tint="@color/icon_color"/>
 
+                <net.osmand.plus.widgets.TextViewEx
+                    android:id="@+id/title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/list_header_padding"
+                    android:text="@string/purchase_dialog_title"
+                    android:textColor="?attr/dialog_title_color"
+                    android:textSize="@dimen/dialog_header_text_size"
+                    osmand:typeface="@string/font_roboto_medium"/>
+
             </LinearLayout>
 
             <LinearLayout
@@ -42,16 +53,6 @@
                 android:layout_marginLeft="@dimen/list_content_padding_large"
                 android:layout_marginRight="@dimen/list_content_padding_large"
                 android:orientation="vertical">
-
-                <net.osmand.plus.widgets.TextViewEx
-                    android:id="@+id/title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/title_padding"
-                    android:text="@string/purchase_dialog_title"
-                    android:textColor="?attr/dialog_title_color"
-                    android:textSize="@dimen/title_text_size"
-                    osmand:typeface="@string/font_roboto_medium"/>
 
                 <LinearLayout
                     android:id="@+id/info_container"
@@ -69,16 +70,6 @@
                         tools:text="@string/purchase_dialog_travel_description"/>
 
                 </LinearLayout>
-
-                <net.osmand.plus.widgets.TextViewEx
-                    android:id="@+id/subtitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/list_content_padding_large"
-                    android:text="@string/purchase_dialog_subtitle"
-                    android:textColor="?attr/dialog_description_color"
-                    android:textSize="@dimen/default_list_text_size"
-                    osmand:typeface="@string/font_roboto_medium"/>
 
             </LinearLayout>
 

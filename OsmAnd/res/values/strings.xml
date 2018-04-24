@@ -23,7 +23,7 @@
     
     <string name="unlimited_downloads">Unlimited downloads</string>
     <string name="wikipedia_offline">Wikipedia offline</string>
-    <string name="contour_lines_sea_depth">Contour lines + Sea depth</string>
+    <string name="contour_lines_hillshade_maps">Contour lines &amp; Hillshade maps</string>
     <string name="unlock_all_features">Unlock all OsmAnd features</string>
 
     <string name="purchase_dialog_title">Choose plan</string>

@@ -976,6 +976,8 @@ public class OsmandSettings {
 	public final OsmandPreference<Integer> DISCOUNT_TOTAL_SHOW = new IntPreference("discount_total_show", 0).makeGlobal();
 	public final OsmandPreference<Long> DISCOUNT_SHOW_DATETIME_MS = new LongPreference("show_discount_datetime_ms", 0).makeGlobal();
 
+	public final OsmandPreference<Boolean> TRAVEL_ARTICLES_PURCHASED = new BooleanPreference("travel_articles_purchased", false).makeGlobal();
+
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<String> USER_OSM_BUG_NAME =
 			new StringPreference("user_osm_bug_name", "NoName/OsmAnd").makeGlobal();

@@ -1,5 +1,6 @@
 package net.osmand.plus.download.ui;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.res.Resources;
@@ -41,8 +42,9 @@ import net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType;
 import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.DownloadValidationManager;
 import net.osmand.plus.download.IndexItem;
-import net.osmand.plus.inapp.InAppHelper;
-import net.osmand.plus.inapp.InAppHelper.InAppListener;
+import net.osmand.plus.inapp.InAppPurchaseHelper;
+import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
+import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseTaskType;
 import net.osmand.util.Algorithms;
 
 import org.json.JSONException;
@@ -55,7 +57,7 @@ import java.util.List;
 import java.util.Map;
 
 public class DownloadResourceGroupFragment extends DialogFragment implements DownloadEvents,
-		InAppListener, OnChildClickListener {
+		InAppPurchaseListener, OnChildClickListener {
 	public static final int RELOAD_ID = 0;
 	public static final int SEARCH_ID = 1;
 	public static final String TAG = "RegionDialogFragment";
@@ -67,6 +69,7 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 	protected DownloadResourceGroupAdapter listAdapter;
 	private DownloadResourceGroup group;
 	private DownloadActivity activity;
+	private InAppPurchaseHelper purchaseHelper;
 	private Toolbar toolbar;
 	private View searchView;
 	private View restorePurchasesView;
@@ -75,6 +78,7 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		purchaseHelper = getDownloadActivity().getPurchaseHelper();
 		boolean isLightTheme = getMyApplication().getSettings().OSMAND_THEME.get() == OsmandSettings.OSMAND_LIGHT_THEME;
 		int themeId = isLightTheme ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme;
 		setStyle(STYLE_NO_FRAME, themeId);
@@ -152,7 +156,7 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 	}
 
 	private void addRestorePurchasesRow() {
-		if (!openAsDialog() && !InAppHelper.isInAppIntentoryRead()) {
+		if (!openAsDialog() && purchaseHelper != null && !purchaseHelper.hasInventory()) {
 			restorePurchasesView = activity.getLayoutInflater().inflate(R.layout.restore_purchases_list_footer, null);
 			((ImageView) restorePurchasesView.findViewById(R.id.icon)).setImageDrawable(
 					getMyApplication().getIconsCache().getThemedIcon(R.drawable.ic_action_reset_to_default_dark));
@@ -160,7 +164,7 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 				@Override
 				public void onClick(View v) {
 					restorePurchasesView.findViewById(R.id.progressBar).setVisibility(View.VISIBLE);
-					activity.startInAppHelper();
+					purchaseHelper.requestInventory();
 				}
 			});
 			listView.addFooterView(restorePurchasesView);
@@ -205,7 +209,7 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 			}
 		}
 		if (restorePurchasesView != null && restorePurchasesView.findViewById(R.id.container).getVisibility() == View.GONE
-				&& !InAppHelper.isInAppIntentoryRead()) {
+				&& purchaseHelper != null && !purchaseHelper.hasInventory()) {
 			if (worldBaseMapItem != null && worldBaseMapItem.isDownloaded()) {
 				restorePurchasesView.findViewById(R.id.container).setVisibility(View.VISIBLE);
 			}
@@ -260,6 +264,7 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 		alertDialog.show();
 	}
 
+	@SuppressLint("StaticFieldLeak")
 	private void doSubscribe(final String email) {
 		new AsyncTask<Void, Void, String>() {
 
@@ -329,7 +334,7 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 	}
 
 	@Override
-	public void onError(String error) {
+	public void onError(InAppPurchaseTaskType taskType, String error) {
 	}
 
 	@Override
@@ -346,11 +351,11 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 	}
 
 	@Override
-	public void showProgress() {
+	public void showProgress(InAppPurchaseTaskType taskType) {
 	}
 
 	@Override
-	public void dismissProgress() {
+	public void dismissProgress(InAppPurchaseTaskType taskType) {
 		if (restorePurchasesView != null && restorePurchasesView.findViewById(R.id.container).getVisibility() == View.VISIBLE) {
 			restorePurchasesView.findViewById(R.id.progressBar).setVisibility(View.GONE);
 		}
