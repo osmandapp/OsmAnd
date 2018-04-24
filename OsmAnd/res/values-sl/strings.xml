@@ -2616,9 +2616,9 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="save_poi_too_many_uppercase">V imenu je več velikih črk. Ali želite nadaljevati?</string>
     <string name="restart_search">Ponovno začni iskanje</string>
     <string name="increase_search_radius">Povečaj območje iskanja</string>
-    <string name="nothing_found">Ni najdenih zadetkov</string>
+    <string name="nothing_found">Ni zadetkov</string>
     <string name="nothing_found_descr">Poskusite zamenjati iskalni niz ali pa povečajte obseg iskanja.</string>
-    <string name="quick_action_showhide_osmbugs_title">Pokaži/Skrij Opombe OSM</string>
+    <string name="quick_action_showhide_osmbugs_title">Preklopi vidnost opomb OSM</string>
     <string name="quick_action_osmbugs_show">Pokaži Opombe OSM</string>
     <string name="quick_action_osmbugs_hide">Skrij Opombe OSM</string>
     <string name="sorted_by_distance">Razvrščeno po razdalji</string>
@@ -2634,17 +2634,15 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="mapillary">Mapillary</string>
     <string name="shared_string_install">Namesti</string>
     <string name="improve_coverage_mapillary">Izboljšajte slikovno pokritost prek sistema Mapillary</string>
-    <string name="improve_coverage_install_mapillary_desc">Uporabite lahko lastne fotografije ali posnetke in jih dodate na to mesto na zemljevidu.
-\n
-\nZa tovrstno sodelovanje mora biti nameščen program Mapillary prek Google Play.</string>
+    <string name="improve_coverage_install_mapillary_desc">Za dodajanje lastnih fotografij tega kraja namestite program Mapillary.</string>
     <string name="online_photos">Spletne fotografije</string>
     <string name="no_photos_descr">Za to mesto še ni objavljenih fotografij.</string>
-    <string name="mapillary_action_descr">Sodelujete lahko s posnetki ulic za to mesto prek programa Mapillary.</string>
-    <string name="mapillary_widget_descr">Omogoča hitro posodobitev območja prek sistema Mapillary.</string>
+    <string name="mapillary_action_descr">Prispevajte posnetke ulic za to mesto prek programa Mapillary.</string>
+    <string name="mapillary_widget_descr">Omogoča hitre prispevke v Mapillary.</string>
     <string name="mapillary_descr">Spletne fotografije ulic za vsakogar. Odkrijte mesta, sodelujte in zajemite svet.</string>
     <string name="plugin_mapillary_descr">Fotografije ulic za vsakogar. Odkrijte mesta, sodelujte in zajemite svet.</string>
     <string name="private_access_routing_req">Ciljno mesto je znotraj območja z zasebnim dostopom. Ali želite omogočiti dostop do zasebnih poti za to vodenje?</string>
-    <string name="quick_action_showhide_osmbugs_descr">S pritiskom na gumb dejanj se pokažejo ali skrijejo opombe OSM na zemljevidu.</string>
+    <string name="quick_action_showhide_osmbugs_descr">S pritiskom na ta gumb se pokažejo ali skrijejo opombe OSM na zemljevidu.</string>
     <string name="animate_my_location">Animiraj trenutno mesto</string>
     <string name="animate_my_location_desc">Omogoči animiranje trenutnega mesta med navigacijo.</string>
     <string name="quick_action_auto_zoom_desc">S pritiskom na gumb dejanj se preklopi prikaz samodejnega približevanja zemljevida glede na hitrost gibanja.</string>
@@ -2680,7 +2678,7 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="shared_string_reload">Ponovno naloži</string>
     <string name="mapillary_menu_descr_tile_cache">Ponovno posodobi sličice zemljevida.</string>
     <string name="mapillary_menu_title_tile_cache">Predpomnilnik sličic</string>
-    <string name="wrong_user_name">Napačno uporabniško ime!</string>
+    <string name="wrong_user_name">Napačno uporabniško ime</string>
     <string name="shared_string_to">Za</string>
     <string name="mapillary_menu_date_from">Od</string>
     <string name="mapillary_menu_descr_dates">Pogled le dodanih slik</string>
@@ -2688,9 +2686,9 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="mapillary_menu_edit_text_hint">Uporabniško ime</string>
     <string name="mapillary_menu_descr_username">Pogled le dodane s strani</string>
     <string name="mapillary_menu_title_username">Uporabniško ime</string>
-    <string name="mapillary_menu_filter_description">Slike je mogoče filtrirati po datumu in uporabniku. Filtri so dejavni le pri največjem približanju.</string>
+    <string name="mapillary_menu_filter_description">Slike je mogoče filtrirati po datumu in uporabniku. Filtri so dejavni le pri največji povečavi.</string>
     <string name="store_tracks_in_monthly_directories">Shrani zabeležene sledi v mapah, razdeljenih po mesecih</string>
-    <string name="store_tracks_in_monthly_directories_descrp">Sledi so shranjene v podmape, poimenovane kot mesečni zapis datuma (na primer 2017-01).</string>
+    <string name="store_tracks_in_monthly_directories_descrp">Sledi so shranjene v podmape, poimenovane po mesecu zapisa (npr. 2018-01).</string>
     <string name="average">Povprečje</string>
     <string name="of">%1$d od %2$d</string>
     <string name="ascent_descent">Vzpon/Spust</string>
@@ -2703,7 +2701,7 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="osmand_plus_extended_description_part4">Uporaba podatkov OSM in Wikipedije • Kakovostni podatki dveh najboljših sodelovalnih projektov na svetu • Podatki OSM so na voljo po državah ali regijah • Točke POI prek Wikipedije so odličen pripomoček za ogledovanje znamenitosti • Neomejeni prejemi posodobitev neposredno iz programa • Skrčeni vektorski zemljevidi za delo brez povezave se posodabljajo vsaj enkrat mesečno • Možnost izbire med popolnimi podatki območja ali pa zgolj cestnega omrežja (primer: zemljevid Japonske zasede 700 MB, japonsko cestno omrežje pa zgolj 200 MB)</string>
     <string name="min_max">Najmanj/Največ</string>
     <string name="osmand_extended_description_part8">OsmAnd je odprtokodni program, ki je v neprestanem razvoju. Vsakdo lahko sodeluje pri razvoju z objavljanjem hroščev, pregledom prevodov in razvojem programske opreme. Pri programu sodeluje živahna odprtokodna skupnost, ki jo sestavljajo posamezniki s celega sveta. Napredek razvoja je odvisen tudi od donacij za programiranje in preizkušanje programske opreme. Ocena kakovosti in pokritosti zemljevidov: • Zahodna Evropa: **** • Vzhodna Evropa: *** • Rusija: *** • Severna Amerika: *** • Južna Amerika: ** • Azija: ** • Japonska in Koreja: *** • Bližnji vzhod: ** • Afrika: ** • Antarktika: * Večina zemljevidov držav je na voljo za prejem! Uporabite zanesljiv navigacijski sistem za različne države – Francijo, Nemčijo, Mehiko, Združeno kraljestvo, Španijo, Nizozemsko, Združene države, Rusijo, Brazilijo in mnoge druge.</string>
-    <string name="quick_action_resume_pause_navigation">Nadaljuj/Ustavi navigacijo</string>
+    <string name="quick_action_resume_pause_navigation">Ustavi/Nadaljuj navigacijo</string>
     <string name="quick_action_start_stop_navigation">Začni/Končaj navigacijo</string>
     <string name="release_2_7">• Vstavek Mapillary za slikovno podporo ulic 
 \n 
@@ -2760,7 +2758,7 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="show_direction">Kazalec smeri</string>
     <string name="sort_by">Razvrsti po</string>
     
-    <string name="do_not_use_animations">Ne uporabljaj animacij</string>
+    <string name="do_not_use_animations">Brez animacij</string>
     <string name="do_not_use_animations_descr">Onemogoči predvajanje animacij v programu.</string>
     <string name="keep_showing_on_map">Prikazuj na zemljevidu</string>
     <string name="exit_without_saving">Ali želite končati brez shranjevanja?</string>
@@ -2792,7 +2790,7 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="routing_attr_avoid_ice_roads_fords_name">Izogni se zaledenelim cestam in plitvinam</string>
     <string name="routing_attr_avoid_ice_roads_fords_description">Izogni se zaledenelim cestam in plitvinam.</string>
     <string name="use_location">Uporabi položaj</string>
-    <string name="add_location_as_first_point_descr">Dodajte trenutno mesto kot prvo točko za načrtovanje poti.</string>
+    <string name="add_location_as_first_point_descr">Dodajte trenutno mesto kot začetno točko za načrtovanje poti.</string>
     <string name="my_location">Moja trenutna točka</string>
     <string name="shared_string_finish">Cilj</string>
     <string name="plan_route">Planiranje poti</string>
@@ -2801,7 +2799,7 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="is_saved">je shranjeno</string>
     <string name="marker_save_as_track">Shrani kot sled</string>
     <string name="move_to_history">Premakni v zgodovino</string>
-    <string name="group_will_be_removed_after_restart">Skupina bo po ponovnem zagonu programa odstranjena.</string>
+    <string name="group_will_be_removed_after_restart">Skupina bo odstranjena ob ponovnem zagonu programa.</string>
     <string name="map_orientation_change_in_accordance_with_speed">Prag usmerjenosti zemljevida</string>
     <string name="all_markers_moved_to_history">Vse označbe zemljevida so premaknjene med zgodovino</string>
     <string name="marker_moved_to_history">Označbe zemljevida so premaknjene med zgodovino</string>
@@ -2917,7 +2915,7 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="map_import_error">Uvoz zemljevida je spodletel</string>
     <string name="map_imported_successfully">Zemljevid je uvožen.</string>
     <string name="distance_farthest">Razdalja: najdlje najprej</string>
-    <string name="distance_nearest">Razdalja: najbližje najprej</string>
+    <string name="distance_nearest">Razdalja: Najbližje najprej</string>
     <string name="enter_lon">Vpišite zemljepisno širino</string>
     <string name="enter_lat">Vpišite zemljepisno dolžino</string>
     <string name="enter_lat_and_lon">Vpišite zemljepisno širino in dolžino</string>
