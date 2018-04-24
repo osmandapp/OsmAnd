@@ -13,6 +13,8 @@ import net.osmand.plus.dialogs.ChoosePlanDialogFragment;
 
 public class OpenBetaTravelCard extends BaseTravelCard {
 
+	public static final int TYPE = 0;
+
 	private FragmentManager fragmentManager;
 
 	public OpenBetaTravelCard(OsmandApplication app, boolean nightMode, FragmentManager fragmentManager) {
@@ -37,14 +39,14 @@ public class OpenBetaTravelCard extends BaseTravelCard {
 		}
 	}
 
-	class OpenBetaTravelVH extends RecyclerView.ViewHolder {
+	public static class OpenBetaTravelVH extends RecyclerView.ViewHolder {
 
 		final TextView title;
 		final TextView description;
 		final TextView button;
 		final ImageView backgroundImage;
 
-		OpenBetaTravelVH(final View itemView) {
+		public OpenBetaTravelVH(final View itemView) {
 			super(itemView);
 			title = (TextView) itemView.findViewById(R.id.title);
 			description = (TextView) itemView.findViewById(R.id.description);
@@ -55,6 +57,6 @@ public class OpenBetaTravelCard extends BaseTravelCard {
 
 	@Override
 	public int getCardType() {
-		return 0;
+		return TYPE;
 	}
 }
