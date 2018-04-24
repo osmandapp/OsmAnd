@@ -2942,7 +2942,7 @@
     <string name="select_travel_book">Velg reisebok</string>
     <string name="shared_string_travel_book">Reisebok</string>
     <string name="download_images">Last ned bilder</string>
-    <string name="wikipedia_offline">Wikipedia nettfrakoblet</string>
+    <string name="wikipedia_offline">Wikipedia er nede</string>
     <string name="contour_lines_sea_depth">Koter + havdybde</string>
     <string name="in_app_purchase_desc">Engangsbetaling</string>
     <string name="purchase_unlim_title">Kjøp - %1$s</string>
@@ -2951,5 +2951,12 @@
 
     <string name="purchase_dialog_title">Velg plan</string>
     <string name="dayly_map_updates">Kartoppdateringer: Hver dag</string>
-    <string name="wikivoyage_offline">Wikivoyage nettfrakoblet</string>
+    <string name="wikivoyage_offline">Wikivoyage er nede</string>
+    <string name="travel_guide">Reiseguide</string>
+    <string name="monthly_map_updates">Kartoppdateringer: <b>hver måned</b></string>
+    <string name="daily_map_updates">Kartoppdateringer: <b>hver dag, hver time</b></string>
+    <string name="in_app_purchase">Kjøp som finner sted inne i programmet</string>
+    <string name="in_app_purchase_desc_ex">Når først kjøpt, vil det alltid være tilgjengelig for deg.</string>
+    <string name="purchase_subscription_title">Abonner - %1$s</string>
+
     </resources>

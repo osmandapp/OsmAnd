@@ -4,8 +4,8 @@
 		<nine-patch android:src="@drawable/bg_card_shadow_cr3dp"/>
 	</item>
 	<item>
-		<shape android:shape="rectangle">
-			<solid android:color="@color/wikivoyage_active_light"/>
+		<shape>
+			<solid android:color="?attr/wikivoyage_card_bg_color"/>
 			<corners android:radius="3dp"/>
 		</shape>
 	</item>

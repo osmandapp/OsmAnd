@@ -2772,4 +2772,22 @@
     <string name="hillshade_layer_disabled">מפת ההצללה מושבתת</string>
     <string name="app_mode_hiking">טיול רגלי</string>
     <string name="quick_action_duplicates">שם הפעולה המהירה כבר נמצא בשימוש, הוא הוחלף בשם %1$s כדי להמנע מכפילות.</string>
+    <string name="monthly_map_updates">עדכוני מפה: <b>כל חודש</b></string>
+    <string name="daily_map_updates">עדכוני מפה: <b>כל יום, כל שעה</b></string>
+    <string name="in_app_purchase">רכישות בתוך היישומון</string>
+    <string name="in_app_purchase_desc">תשלום חד־פעמי</string>
+    <string name="in_app_purchase_desc_ex">לאחר הרכישה, הזמינות אליך תהיה לצמיתות.</string>
+    <string name="purchase_unlim_title">רכישה - %1$s</string>
+    <string name="purchase_subscription_title">הרשמה - %1$s</string>
+
+    <string name="wikivoyage_offline">ויקימסע בלתי מקוון</string>
+    
+    <string name="unlimited_downloads">הורדות ללא הגבלה</string>
+    <string name="wikipedia_offline">ויקיפדיה בלתי מקוונת</string>
+    <string name="contour_lines_sea_depth">קווי מתאר + עומק הים</string>
+    <string name="unlock_all_features">שחרור כל התכונות של OsmAnd</string>
+
+    <string name="android_19_location_disabled">החל מגרסה 4.4 של Android ‏(KitKat) לא ניתן להוריד ולעדכן מפות לתיקיית האחסון הקודמת (%s). להחליף למקום האחסון שהותר ולהעתיק את כל הקבצים של OsmAnd לשם?
+\n הערה 1: הקבצים הקודמים שלך יישארו כמו שהם (ניתן יהיה למחוק אותם ידנית).
+\n הערה 2: במיקום האחסון החדש לא תהיה אפשרות לשתף קבצים בין OsmAnd לבין OsmAnd+‎.</string>
     </resources>

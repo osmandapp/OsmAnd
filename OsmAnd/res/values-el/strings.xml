@@ -38,7 +38,7 @@
 	<string name="day_night_info">Πληρ. Ημέρας/Νύχτας</string>
 	
 	<string name="map_widget_vector_attributes">Χαρακτηριστικά απεικόνισης</string>
-	<string name="map_widget_renderer">Στυλ χάρτη</string>
+	<string name="map_widget_renderer">Μορφή χάρτη</string>
 	
 	
 	
@@ -249,7 +249,7 @@
 	<string name="no_info">Καμία πληροφορία</string>
 	<string name="direction_style_sidewise">Πλαγίως (8 τομείς)</string>
 	<string name="direction_style_clockwise">Δεξιόστροφα (12 τομείς)</string>
-	<string name="settings_direction_style">Στυλ Κατεύθυνσης</string>
+	<string name="settings_direction_style">Τρόπος Κατεύθυνσης</string>
 	<string name="settings_direction_style_descr">Επιλέξτε μορφή έκφρασης των σχετικών κατευθύνσεων κατά την κίνηση.</string>
 	<string name="auto_announce_on">Έναρξη αυτόματης εκφώνησης</string>
 	<string name="auto_announce_off">Διακοπή αυτόματης εκφώνησης</string>
@@ -1481,7 +1481,7 @@
 	<string name="dash_download_msg">Έχετε κατεβάσει %1$s χάρτες</string>
     <string name="dash_download_new_one">Λήψη Νέου Χάρτη</string>
     <string name="map_locale">Γλώσσα χάρτη</string>
-    <string name="rendering_attr_roadStyle_name">Στυλ δρόμου</string>
+    <string name="rendering_attr_roadStyle_name">Μορφή δρόμου</string>
     <string name="rendering_value_default_name">Προκαθορισμένο</string>
     <string name="rendering_value_orange_name">Πορτοκαλί</string>
     <string name="traffic_warning_railways">Διασταύρωση σιδηροτροχιάς</string>
