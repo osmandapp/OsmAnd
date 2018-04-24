@@ -434,4 +434,27 @@
 	<string name="poi_electricity_combined_charging">Polnilna postaja</string>
 	<string name="poi_charging_station_filter">Polnilna postaja</string>
 
+	<string name="poi_tactile_paving">Taktilni tlak</string>
+	<string name="poi_service_general">Storitev</string>
+	<string name="poi_self_service">Samopostrežna</string>
+	<string name="poi_automated">Samodejna</string>
+	<string name="poi_covered">Pokrita</string>
+	<string name="poi_ferry_terminal_cargo">Tovor</string>
+	<string name="poi_bicycle_parking_type">Vrsta</string>
+	<string name="poi_aerialway_heating">Ogrevanje</string>
+	<string name="poi_pump">Črpalka</string>
+	<string name="poi_telescope_type">Vrsta</string>
+	<string name="poi_animal_training_type">Vrsta</string>
+	<string name="poi_embassy_type">Vrsta</string>
+	<string name="poi_city_capital">Glavno mesto</string>
+	<string name="poi_healthcare_alternative_types">Specializacija</string>
+	<string name="poi_archaeological_site_type">Vrsta</string>
+	<string name="poi_star_rating">Število zvezdic</string>
+	<string name="poi_religion_type">Vera</string>
+	<string name="poi_information_type">Vrsta</string>
+	<string name="poi_information_contents">Vsebina</string>
+	<string name="poi_clock_option">Dodatno</string>
+	<string name="poi_fee">Plačilo</string>
+	<string name="poi_smoking">Kajenje</string>
+	<string name="poi_delivery">Dostava</string>
 	</resources>
