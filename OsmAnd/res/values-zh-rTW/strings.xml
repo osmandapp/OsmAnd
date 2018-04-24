@@ -3023,4 +3023,25 @@
 
     <string name="monthly_map_updates">地圖更新：<b>每月</b></string>
     <string name="daily_map_updates">地圖更新：<b>每天、每小時</b></string>
-    </resources>
+    <string name="paid_app">付費應用程式</string>
+    <string name="paid_plugin">付費外掛程式</string>
+    <string name="travel_card_update_descr">我們準備了在維基導遊資料的更新與修復，更新檔案以檢視它們。</string>
+	<string name="travel_card_download_descr">下載這份維基導遊旅遊指南以在沒有網路連線時檢視世界各地的旅遊文章。</string>
+	<string name="update_is_available">有可用的更新</string>
+	<string name="download_file">下載檔案</string>
+    <string name="start_editing_card_image_text">人人可編輯的自由的旅行指南。</string>
+    <string name="welcome_to_open_beta_description">基於維基導遊的旅行。在開放測試期間，您有機會免費評估所有的功能。在測試週期結束後，旅遊功能只會提供給 OsmAnd 無限的訂閱者與 OsmAnd+ 的擁有者</string>
+    <string name="start_editing_card_description">您可以在維基導遊上編輯任何文章，我們也希望您這麼做。我們需要您的知識、您的經驗、您的才華與您的關注</string>
+    <string name="start_editing">開始編輯</string>
+    <string name="get_unlimited_access">取得無限制的存取</string>
+    <string name="welcome_to_open_beta">歡迎來到開放測試！</string>
+    <string name="contour_lines_hillshade_maps">等高線與丘陵陰影地圖</string>
+    <string name="download_wikipedia_description">下載 %1$s 的維基百科文章以供離線閱讀。</string>
+    <string name="download_wikipedia_label">下載維基百科資料</string>
+    <string name="open_in_browser_wiki">線上開啟文章</string>
+    <string name="open_in_browser_wiki_description">在瀏覽器中檢視此文章。</string>
+    <string name="download_wiki_region_placeholder">這個區域</string>
+    <string name="wiki_article_search_text">搜尋需要的維基文章</string>
+    <string name="wiki_article_not_found">找不到文章</string>
+    <string name="how_to_open_wiki_title">如何開啟維基百科文章？</string>
+</resources>
