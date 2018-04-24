@@ -31,6 +31,7 @@ import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.ui.AbstractLoadLocalIndexTask;
 import net.osmand.plus.helpers.AvoidSpecificRoads;
 import net.osmand.plus.helpers.WaypointHelper;
+import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.liveupdates.LiveUpdatesHelper;
 import net.osmand.plus.mapmarkers.MapMarkersDbHelper;
 import net.osmand.plus.monitoring.LiveMonitoringHelper;
@@ -421,6 +422,7 @@ public class AppInitializer implements IProgress {
 			e.printStackTrace();
 		}
 		app.applyTheme(app);
+		app.inAppPurchaseHelper = startupInit(new InAppPurchaseHelper(app), InAppPurchaseHelper.class);
 		app.poiTypes = startupInit(MapPoiTypes.getDefaultNoInit(), MapPoiTypes.class);
 		app.routingHelper = startupInit(new RoutingHelper(app), RoutingHelper.class);
 		app.resourceManager = startupInit(new ResourceManager(app), ResourceManager.class);

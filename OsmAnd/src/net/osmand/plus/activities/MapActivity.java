@@ -92,7 +92,8 @@ import net.osmand.plus.helpers.ExternalApiHelper;
 import net.osmand.plus.helpers.ImportHelper;
 import net.osmand.plus.helpers.ImportHelper.ImportGpxBottomSheetDialogFragment;
 import net.osmand.plus.helpers.WakeLockHelper;
-import net.osmand.plus.inapp.InAppHelper;
+import net.osmand.plus.inapp.InAppPurchaseHelper;
+import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseTaskType;
 import net.osmand.plus.mapcontextmenu.AdditionalActionsBottomSheetDialogFragment;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.MapContextMenuFragment;
@@ -204,7 +205,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	private boolean permissionGranted;
 
 	private boolean mIsDestroyed = false;
-	private InAppHelper inAppHelper;
+	private InAppPurchaseHelper inAppPurchaseHelper;
 	private Timer splashScreenTimer;
 
 	private ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
@@ -1214,8 +1215,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		if (atlasMapRendererView != null) {
 			atlasMapRendererView.handleOnDestroy();
 		}
-		if (inAppHelper != null) {
-			inAppHelper.stop();
+		if (inAppPurchaseHelper != null) {
+			inAppPurchaseHelper.stop();
 		}
 		mIsDestroyed = true;
 	}
@@ -1513,7 +1514,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		if (inAppHelper != null && inAppHelper.onActivityResultHandled(requestCode, resultCode, data)) {
+		if (inAppPurchaseHelper != null && inAppPurchaseHelper.onActivityResultHandled(requestCode, resultCode, data)) {
 			return;
 		}
 		for (ActivityResultListener listener : activityResultListeners) {
@@ -1919,44 +1920,5 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		START_POINT_SELECTION,
 		DESTINATION_SELECTION,
 		INTERMEDIATE_SELECTION
-	}
-
-	public InAppHelper execInAppTask(@NonNull InAppHelper.InAppRunnable runnable) {
-		if (inAppHelper != null) {
-			inAppHelper.stop();
-		}
-		if (Version.isGooglePlayEnabled(app)) {
-			inAppHelper = new InAppHelper(getMyApplication(), false);
-			inAppHelper.addListener(new InAppHelper.InAppListener() {
-				@Override
-				public void onError(String error) {
-					inAppHelper = null;
-				}
-
-				@Override
-				public void onGetItems() {
-					inAppHelper = null;
-				}
-
-				@Override
-				public void onItemPurchased(String sku) {
-					inAppHelper = null;
-				}
-
-				@Override
-				public void showProgress() {
-
-				}
-
-				@Override
-				public void dismissProgress() {
-
-				}
-			});
-			inAppHelper.exec(runnable);
-			return inAppHelper;
-		} else {
-			return null;
-		}
 	}
 }

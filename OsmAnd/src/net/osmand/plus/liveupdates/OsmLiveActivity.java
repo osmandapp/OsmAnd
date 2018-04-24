@@ -15,10 +15,8 @@ import android.view.MenuItem;
 import net.osmand.AndroidNetworkUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.R;
-import net.osmand.plus.Version;
 import net.osmand.plus.download.AbstractDownloadActivity;
-import net.osmand.plus.download.DownloadIndexesThread;
-import net.osmand.plus.inapp.InAppHelper;
+import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 
 import org.apache.commons.logging.Log;
 
@@ -28,31 +26,20 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
 
-public class OsmLiveActivity extends AbstractDownloadActivity implements DownloadIndexesThread.DownloadEvents {
+public class OsmLiveActivity extends AbstractDownloadActivity implements DownloadEvents {
 	private final static Log LOG = PlatformUtil.getLog(OsmLiveActivity.class);
 	public final static String OPEN_SUBSCRIPTION_INTENT_PARAM = "open_subscription_intent_param";
+
 	private LiveUpdatesFragmentPagerAdapter pagerAdapter;
-	private InAppHelper inAppHelper;
 	private boolean openSubscription;
 	private GetLastUpdateDateTask getLastUpdateDateTask;
 	private static final String URL = "https://osmand.net/api/osmlive_status";
-
-	public InAppHelper getInAppHelper() {
-		return inAppHelper;
-	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		getMyApplication().applyTheme(this);
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_livie_updates);
-
-		if (Version.isGooglePlayEnabled(getMyApplication())) {
-			inAppHelper = new InAppHelper(getMyApplication(), false);
-		}
-		if (Version.isDeveloperVersion(getMyApplication())) {
-			inAppHelper = null;
-		}
 
 		Intent intent = getIntent();
 		if (intent != null && intent.getExtras() != null) {
@@ -83,17 +70,6 @@ public class OsmLiveActivity extends AbstractDownloadActivity implements Downloa
 	}
 
 	@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		// Pass on the activity result to the helper for handling
-		if (inAppHelper == null || !inAppHelper.onActivityResultHandled(requestCode, resultCode, data)) {
-			// not handled, so handle it ourselves (here's where you'd
-			// perform any handling of activity results not related to in-app
-			// billing...
-			super.onActivityResult(requestCode, resultCode, data);
-		}
-	}
-
-	@Override
 	protected void onPause() {
 		super.onPause();
 		getMyApplication().getDownloadThread().resetUiActivity(this);
@@ -102,17 +78,17 @@ public class OsmLiveActivity extends AbstractDownloadActivity implements Downloa
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		if (inAppHelper != null) {
-			inAppHelper.stop();
-		}
 		if (getLastUpdateDateTask != null) {
 			getLastUpdateDateTask.cancel(true);
 		}
 	}
 
+	public boolean isInAppPurchaseAllowed() {
+		return true;
+	}
+
 	@Override
 	public void newDownloadIndexes() {
-
 	}
 
 	@Override

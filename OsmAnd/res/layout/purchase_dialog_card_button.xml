@@ -13,10 +13,18 @@
         android:background="?attr/selectableItemBackground"
         android:minHeight="@dimen/card_button_min_size"
         android:orientation="vertical"
+        android:gravity="center"
         android:paddingBottom="@dimen/list_header_padding"
         android:paddingLeft="@dimen/list_content_padding"
         android:paddingRight="@dimen/list_content_padding"
         android:paddingTop="@dimen/list_header_padding">
+
+        <ProgressBar
+            android:id="@+id/card_button_progress"
+            android:layout_width="@dimen/card_button_progress_size"
+            android:layout_height="@dimen/card_button_progress_size"
+            android:indeterminate="true"
+            android:visibility="gone"/>
 
         <net.osmand.plus.widgets.TextViewEx
             android:id="@+id/card_button_title"

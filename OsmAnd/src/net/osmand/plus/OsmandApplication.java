@@ -19,7 +19,6 @@ import android.support.multidex.MultiDex;
 import android.support.multidex.MultiDexApplication;
 import android.support.v7.app.AlertDialog;
 import android.text.format.DateFormat;
-import android.util.Log;
 import android.view.View;
 import android.view.accessibility.AccessibilityManager;
 import android.widget.ImageView;
@@ -46,7 +45,7 @@ import net.osmand.plus.dialogs.RateUsBottomSheetDialog;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.helpers.AvoidSpecificRoads;
 import net.osmand.plus.helpers.WaypointHelper;
-import net.osmand.plus.inapp.InAppHelper;
+import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.mapcontextmenu.other.RoutePreferencesMenu;
 import net.osmand.plus.mapmarkers.MapMarkersDbHelper;
 import net.osmand.plus.monitoring.LiveMonitoringHelper;
@@ -120,6 +119,7 @@ public class OsmandApplication extends MultiDexApplication {
 	GeocodingLookupService geocodingLookupService;
 	QuickSearchHelper searchUICore;
 	TravelDbHelper travelDbHelper;
+	InAppPurchaseHelper inAppPurchaseHelper;
 
 	RoutingConfiguration.Builder defaultRoutingConfig;
 	private Locale preferredLocale = null;
@@ -166,7 +166,6 @@ public class OsmandApplication extends MultiDexApplication {
 //		if(!osmandSettings.FOLLOW_THE_ROUTE.get()) {
 //			targetPointsHelper.clearPointToNavigate(false);
 //		}
-		InAppHelper.initialize(this);
 		initExternalLibs();
 		startApplication();
 		System.out.println("Time to start application " + (System.currentTimeMillis() - timeToStart) + " ms. Should be less < 800 ms");
@@ -394,6 +393,10 @@ public class OsmandApplication extends MultiDexApplication {
 
 	public TravelDbHelper getTravelDbHelper() {
 		return travelDbHelper;
+	}
+
+	public InAppPurchaseHelper getInAppPurchaseHelper() {
+		return inAppPurchaseHelper;
 	}
 
 	public CommandPlayer getPlayer() {
