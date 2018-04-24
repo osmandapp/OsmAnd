@@ -52,7 +52,7 @@ public class WikivoyageArticleWikiLinkFragment extends MenuBottomSheetDialogFrag
 				wikiRegion = args.getString(WIKI_REGION);
 			}
 		}
-		items.add(new TitleItem("How to open Wikipedia articles?"));
+		items.add(new TitleItem(getString(R.string.how_to_open_wiki_title)));
 
 		BaseBottomSheetItem wikiLinkitem = new TitleItem.Builder().setTitle(articleUrl)
 				.setTitleColorId(nightMode
