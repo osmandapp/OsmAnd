@@ -2972,4 +2972,39 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="shared_string_travel_book">Reisebuch</string>
     <string name="images_cache">Bilder-Cache</string>
     <string name="download_images">Bilder herunterladen</string>
+    <string name="travel_card_update_descr">Wir haben Updates und Korrekturen in den Wikivoyage-Daten vorbereitet, aktualisieren Sie die Datei, um sie zu sehen.</string>
+	<string name="travel_card_download_descr">Laden Sie diese Wikivoyage Reiseführer-Datei herunter, um Artikel über Orte auf der ganzen Welt ohne Internetverbindung zu lesen zu können.</string>
+	<string name="update_is_available">Aktualisierung verfügbar</string>
+	<string name="download_file">Datei herunterladen</string>
+    <string name="start_editing_card_image_text">Der freie weltweite Reiseführer, den jeder bearbeiten kann.</string>
+    <string name="welcome_to_open_beta_description">Reisen basiert auf Wikivoyage. Während des Open Beta-Tests haben Sie die Möglichkeit, alle Funktionen kostenlos zu testen. Nach Ablauf der Beta-Phase steht Travel den Abonnenten von OsmAnd Unlimited und den Besitzern von OsmAnd+ zur Verfügung</string>
+    <string name="start_editing_card_description">Sie können jeden Artikel über Wikivoyage bearbeiten und wir hoffen, dass Sie das tun. Wir brauchen Ihr Wissen, Ihre Erfahrung, Ihr Talent und Ihre Aufmerksamkeit</string>
+    <string name="start_editing">Bearbeitung starten</string>
+    <string name="get_unlimited_access">Erhalten Sie unbegrenzten Zugang</string>
+    <string name="welcome_to_open_beta">Willkommen zur Open Beta!</string>
+    <string name="travel_guide">Reiseführer</string>
+    <string name="travel_guide_description">Stöbern Sie in den Wikivoyage-Führern zu den interessantesten Orten der Welt in OsmAnd ohne Internetverbindung.</string>
+    <string name="monthly_map_updates">Kartenaktualisierungen: <b>jeden Monat</b></string>
+    <string name="daily_map_updates">Kartenaktualisierungen: <b>jeden Tag, jede Stunde</b></string>
+    <string name="in_app_purchase">In-App-Kauf</string>
+    <string name="in_app_purchase_desc">Einmalige Zahlung</string>
+    <string name="in_app_purchase_desc_ex">Nach dem Kauf steht es Ihnen dauerhaft zur Verfügung.</string>
+    <string name="purchase_unlim_title">Kaufen - %1$s</string>
+    <string name="purchase_subscription_title">Abonnieren - %1$s</string>
+
+    <string name="wikivoyage_offline">Wikivoyage offline</string>
+
+    <string name="unlimited_downloads">Unbegrenzte Downloads</string>
+    <string name="wikipedia_offline">Wikipedia offline</string>
+    <string name="contour_lines_hillshade_maps">Höhenlinien &amp; Hillshade-Karten</string>
+    <string name="unlock_all_features">Alle OsmAnd-Funktionen freischalten</string>
+
+    <string name="purchase_dialog_title">Plan auswählen</string>
+    <string name="download_wikipedia_description">Laden Sie die Wikipedia-Artikel für %1$s herunter, um sie offline zu lesen.</string>
+    <string name="download_wikipedia_label">Wikipedia-Daten herunterladen</string>
+    <string name="open_in_browser_wiki">Artikel online öffnen</string>
+    <string name="open_in_browser_wiki_description">Sehen Sie sich diesen Artikel in einem Browser an.</string>
+    <string name="download_wiki_region_placeholder">diese Region</string>
+    <string name="wiki_article_search_text">Suche nach dem benötigten Wiki-Artikel</string>
+    <string name="wiki_article_not_found">Artikel nicht gefunden</string>
     </resources>
