@@ -31,8 +31,8 @@ public class ExploreTabFragment extends BaseOsmAndFragment {
 
 		ArrayList<BaseTravelCard> items = new ArrayList<>();
 
-		BaseTravelCard openBetaTravelCard = new OpenBetaTravelCard(app, nightMode, getFragmentManager());
-		BaseTravelCard startEditingTravelCard = new StartEditingTravelCard(app, nightMode);
+		OpenBetaTravelCard openBetaTravelCard = new OpenBetaTravelCard(app, nightMode, getFragmentManager());
+		StartEditingTravelCard startEditingTravelCard = new StartEditingTravelCard(app, nightMode);
 		items.add(openBetaTravelCard);
 		items.add(startEditingTravelCard);
 
