@@ -6,20 +6,11 @@
 	android:gravity="center"
 	android:orientation="vertical">
 
-	<ScrollView
-		android:id="@+id/scroll_view"
+	<android.support.v7.widget.RecyclerView
+		android:id="@+id/recycler_view"
 		android:layout_width="match_parent"
-		android:layout_height="match_parent">
-
-		<LinearLayout
-			android:id="@+id/cards_list"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:orientation="vertical"
-			android:paddingBottom="@dimen/map_markers_recycler_view_padding_bottom">
-
-		</LinearLayout>
-
-	</ScrollView>
+		android:layout_height="match_parent"
+		android:clipToPadding="false"
+		android:paddingBottom="@dimen/map_markers_recycler_view_padding_bottom"/>
 
 </LinearLayout>

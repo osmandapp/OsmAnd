@@ -4,44 +4,45 @@ import android.graphics.drawable.Drawable;
 import android.support.annotation.ColorInt;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
+import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
-import android.view.ViewGroup;
+import android.support.v7.widget.RecyclerView;
 
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
 
 public abstract class BaseTravelCard {
 
-	protected static final int INVALID_POSITION = -1;
-
 	protected OsmandApplication app;
-
-	protected int position = INVALID_POSITION;
 	protected boolean nightMode;
 
-	public abstract void inflate(OsmandApplication app, ViewGroup container, boolean nightMode);
+	public BaseTravelCard(OsmandApplication app, boolean nightMode) {
+		this.app = app;
+		this.nightMode = nightMode;
+	}
+
+	public abstract void bindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder);
+
+	public abstract int getCardType();
 
 	@ColorInt
 	protected int getResolvedColor(@ColorRes int colorId) {
 		return ContextCompat.getColor(app, colorId);
 	}
 
-	protected Drawable getIcon(@DrawableRes int drawableRes, @ColorRes int color) {
-		return app.getIconsCache().getIcon(drawableRes, color);
+	protected Drawable getContentIcon(@DrawableRes int icon) {
+		return getColoredIcon(icon, R.color.icon_color);
 	}
 
-	protected Drawable getIcon(@DrawableRes int drawableRes) {
-		return app.getIconsCache().getIcon(drawableRes);
+	protected Drawable getActiveIcon(@DrawableRes int icon) {
+		return getColoredIcon(icon, R.color.wikivoyage_active_light, R.color.wikivoyage_active_dark);
 	}
 
-	protected Drawable getIcon(int iconId, int colorLightId, int colorDarkId) {
-		return app.getIconsCache().getIcon(iconId, nightMode ? colorLightId : colorDarkId);
+	protected Drawable getColoredIcon(@DrawableRes int icon, @ColorRes int colorLight, @ColorRes int colorDark) {
+		return getColoredIcon(icon, nightMode ? colorDark : colorLight);
 	}
 
-	protected void onLeftButtonClickAction() {
-
-	}
-
-	protected void onRightButtonClickAction() {
-
+	protected Drawable getColoredIcon(@DrawableRes int icon, @ColorRes int color) {
+		return app.getIconsCache().getIcon(icon, color);
 	}
 }

@@ -3,6 +3,8 @@ package net.osmand.plus.wikivoyage.explore;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,18 +29,16 @@ public class ExploreTabFragment extends BaseOsmAndFragment {
 
 		final View mainView = inflater.inflate(R.layout.fragment_explore_tab, container, false);
 
-		LinearLayout linearLayout = (LinearLayout) mainView.findViewById(R.id.cards_list);
+
 		ArrayList<BaseTravelCard> items = new ArrayList<>();
 
-		BaseTravelCard openBetaTravelCard = new OpenBetaTravelCard(app, getFragmentManager(), nightMode);
+		BaseTravelCard openBetaTravelCard = new OpenBetaTravelCard(app, nightMode, getFragmentManager());
 		BaseTravelCard startEditingTravelCard = new StartEditingTravelCard(app, nightMode);
 		items.add(openBetaTravelCard);
 		items.add(startEditingTravelCard);
 
-		for (BaseTravelCard item : items) {
-			item.inflate(app, linearLayout, nightMode);
-		}
-
+		final RecyclerView rv = (RecyclerView) mainView.findViewById(R.id.recycler_view);
+		rv.setLayoutManager(new LinearLayoutManager(getContext()));
 		return mainView;
 	}
 }
