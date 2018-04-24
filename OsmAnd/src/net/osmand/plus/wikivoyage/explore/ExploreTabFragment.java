@@ -29,7 +29,6 @@ public class ExploreTabFragment extends BaseOsmAndFragment {
 
 		final View mainView = inflater.inflate(R.layout.fragment_explore_tab, container, false);
 
-
 		ArrayList<BaseTravelCard> items = new ArrayList<>();
 
 		BaseTravelCard openBetaTravelCard = new OpenBetaTravelCard(app, nightMode, getFragmentManager());
