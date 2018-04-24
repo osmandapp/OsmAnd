@@ -9,6 +9,10 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+	<string name="travel_card_update_descr">We prepared updates and fixes in the Wikivoyage data, update the file to see them.</string>
+	<string name="travel_card_download_descr">Download this Wikivoyage travel guides file to view articles about places around the world without an internet connection.</string>
+	<string name="update_is_available">Update is available</string>
+	<string name="download_file">Download file</string>
     <string name="start_editing_card_image_text">The free worldwide travel guide that anyone can edit.</string>
     <string name="welcome_to_open_beta_description">Travel is based on Wikivoyage. During open beta testing you have the opportunity to evaluate all the features for free. After the end of the beta period, Travel will be available to subscribers of OsmAnd Unlimited and the owners of OsmAnd+</string>
     <string name="start_editing_card_description">You can edit any article on Wikivoyage, and we hope that you do. We need your knowledge, your experience, your talent, and your attention</string>
