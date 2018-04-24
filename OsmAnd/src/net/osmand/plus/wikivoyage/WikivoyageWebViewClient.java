@@ -201,10 +201,10 @@ public class WikivoyageWebViewClient extends WebViewClient implements RegionCall
 
 	public void stopRunningAsyncTasks() {
 		if (articleSearchTask != null && articleSearchTask.getStatus() == AsyncTask.Status.RUNNING) {
-			articleSearchTask.cancel(true);
+			articleSearchTask.cancel(false);
 		}
 		if (fetchRegionTask != null && fetchRegionTask.getStatus() == AsyncTask.Status.RUNNING) {
-			fetchRegionTask.cancel(true);
+			fetchRegionTask.cancel(false);
 		}
 	}
 
