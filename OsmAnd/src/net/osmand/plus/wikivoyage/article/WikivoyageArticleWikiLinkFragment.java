@@ -7,24 +7,17 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
-import android.view.ContextThemeWrapper;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
-import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
-import net.osmand.plus.base.bottomsheetmenu.simpleitems.DescriptionItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerHalfItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleDividerItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.mapcontextmenu.WikipediaDialogFragment;
-import net.osmand.plus.osmedit.OsmEditsFragment;
 
 public class WikivoyageArticleWikiLinkFragment extends MenuBottomSheetDialogFragment {
 

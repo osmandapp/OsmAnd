@@ -15,7 +15,6 @@ import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.Toast;
 
 import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.data.Amenity;
