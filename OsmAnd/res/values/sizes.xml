@@ -291,5 +291,7 @@
 	<dimen name="wikivoyage_search_icon_margin_right">22dp</dimen>
 	<dimen name="wikivoyage_search_divider_margin_start">64dp</dimen>
 
+	<dimen name="wikivoyage_explore_card_image_height">144dp</dimen>
+
 	<dimen name="text_button_letter_spacing" format="float">0.01</dimen>
 </resources>
