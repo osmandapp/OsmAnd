@@ -18,7 +18,7 @@
 		<LinearLayout
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:background="@color/wikivoyage_start_editing_background"
+			android:background="@color/wikivoyage_start_editing_image_background"
 			android:orientation="horizontal">
 
 			<TextView
@@ -68,6 +68,7 @@
 			android:layout_height="@dimen/bottom_sheet_title_height"
 			android:layout_gravity="center"
 			android:gravity="center"
+			android:background="?attr/selectableItemBackground"
 			android:textColor="?attr/color_dialog_buttons"
 			android:textSize="@dimen/default_desc_text_size"
 			osmand:typeface="@string/font_roboto_medium"
