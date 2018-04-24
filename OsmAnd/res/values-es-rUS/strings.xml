@@ -3001,7 +3001,7 @@ Lon %2$s</string>
     <string name="purchase_dialog_travel_description">Para leer artículos de viajes sin conexión, necesita comprar uno de los siguientes elementos.</string>
     <string name="purchase_dialog_subtitle">Elegir el elemento adecuado:</string>
     <string name="travel_guide_description">Explora las guías de Wikiviajes de los lugares más interesantes del planeta dentro de OsmAnd sin una conexión a internet.</string>
-    <string name="travel_guide">Guía de viajes</string>
+    <string name="travel_guide">Guía turística</string>
     <string name="monthly_map_updates">Actualizaciones del mapa: <b>cada mes</b></string>
     <string name="daily_map_updates">Actualizaciones del mapa: <b>cada día, cada hora</b></string>
     <string name="in_app_purchase">Compra en la aplicación</string>
@@ -3017,4 +3017,23 @@ Lon %2$s</string>
     <string name="contour_lines_sea_depth">Curvas de nivel + Profundidad náutica</string>
     <string name="unlock_all_features">Desbloquear todas las características de OsmAnd</string>
 
-    </resources>
+    <string name="travel_card_update_descr">Hemos preparado actualizaciones y correcciones en los datos de Wikiviajes, actualiza el archivo para verlas.</string>
+	<string name="travel_card_download_descr">Descarga este archivo sobre guías turísticas de Wikiviajes para ver artículos sobre lugares alrededor del mundo, sin una conexión a Internet.</string>
+	<string name="update_is_available">Actualización disponible</string>
+	<string name="download_file">Descargar archivo</string>
+    <string name="start_editing_card_image_text">La guía turística libre global que cualquiera puede editar.</string>
+    <string name="welcome_to_open_beta_description">Los viajes se basan en Wikiviajes. Durante las pruebas beta abiertas, tiene la oportunidad de evaluar todas las características de forma gratuita. Una vez finalizado el período beta, «Viajes» estará disponible para los suscriptores de «OsmAnd ilimitado» y los propietarios de «OsmAnd+»</string>
+    <string name="start_editing_card_description">Puedes editar cualquier artículo en Wikiviajes y esperamos que lo hagas. Necesitamos tu conocimiento, experiencia, talento y atención</string>
+    <string name="start_editing">Comenzar edición</string>
+    <string name="get_unlimited_access">Obtén acceso ilimitado</string>
+    <string name="welcome_to_open_beta">Bienvenid@, a la beta abierta!</string>
+    <string name="contour_lines_hillshade_maps">Curvas de nivel y mapas de sombreado</string>
+    <string name="download_wikipedia_description">Descarga los artículos de Wikipedia por %1$s para leerlos sin conexión.</string>
+    <string name="download_wikipedia_label">Descargar datos de Wikipedia</string>
+    <string name="open_in_browser_wiki">Abrir artículo en línea</string>
+    <string name="open_in_browser_wiki_description">Ver artículo en el navegador.</string>
+    <string name="download_wiki_region_placeholder">esta región</string>
+    <string name="wiki_article_search_text">Buscando el artículo wiki necesario</string>
+    <string name="wiki_article_not_found">Artículo no encontrado</string>
+    <string name="how_to_open_wiki_title">¿Cómo abrir artículos de Wikipedia?</string>
+</resources>
