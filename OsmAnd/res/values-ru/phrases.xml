@@ -3783,4 +3783,17 @@
 	<string name="poi_cable_number">Количество тросов</string>
 	<string name="poi_via_ferrata_scale">Сложность</string>
 
+	<string name="poi_glacier_type">Тип ледника</string>
+
+	<string name="poi_glacier_type_icecap">Ледниковый покров</string>
+	<string name="poi_glacier_type_icefield">Ледниковое поле</string>
+	<string name="poi_glacier_type_plateau">Плато</string>
+	<string name="poi_glacier_type_valley">Долинный ледник</string>
+	<string name="poi_glacier_type_mountain">Горный</string>
+	<string name="poi_glacier_type_hanging">Висячий</string>
+	<string name="poi_glacier_type_rock">Rock</string>
+	<string name="poi_glacier_type_shelf">Шельфовый</string>
+	<string name="poi_glacier_type_remnant">Останец</string>
+	<string name="poi_glacier_type_ice_tongue">Ледяной язык</string>
+
 	</resources>

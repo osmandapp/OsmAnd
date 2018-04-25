@@ -105,6 +105,7 @@
 	<string name="poi_socket_cee_blue_output_filter">CEE blue output</string>
 	<string name="poi_socket_schuko_output_filter">Schuko output</string>
 	<string name="poi_service_car">Car service</string>
+	<string name="poi_glacier_type">Glacier type</string>
 
 <!--  categories -->
 	<string name="poi_shop">Store</string>
@@ -3802,5 +3803,19 @@
 	<string name="poi_via_ferrata">Via ferrata</string>
 	<string name="poi_cable_number">Cable number</string>
 	<string name="poi_via_ferrata_scale">Difficulty</string>
+
+	<string name="poi_glacier_type_icecap">Icecap</string>
+	<string name="poi_glacier_type_icefield">Icefield</string>
+	<string name="poi_glacier_type_plateau">Plateau</string>
+	<string name="poi_glacier_type_valley">Valley</string>
+	<string name="poi_glacier_type_outlet">Outlet</string>
+	<string name="poi_glacier_type_tidewater">Tidewater</string>
+	<string name="poi_glacier_type_mountain">Mountain</string>
+	<string name="poi_glacier_type_hanging">Hanging</string>
+	<string name="poi_glacier_type_icefall">Icefall</string>
+	<string name="poi_glacier_type_rock">Rock</string>
+	<string name="poi_glacier_type_shelf">Shelf</string>
+	<string name="poi_glacier_type_remnant">Remnant</string>
+	<string name="poi_glacier_type_ice_tongue">Ice tongue</string>
 
 </resources>
