@@ -34,10 +34,7 @@ public class ArticleTravelCard extends BaseTravelCard {
 	public ArticleTravelCard(OsmandApplication app, boolean nightMode, TravelArticle article, FragmentManager fragmentManager) {
 		super(app, nightMode);
 		this.article = article;
-		int colorId = app.getSettings().isLightContent()
-				? R.color.wikivoyage_active_light : R.color.wikivoyage_active_dark;
-		IconsCache ic = app.getIconsCache();
-		readIcon = ic.getIcon(R.drawable.ic_action_read_article, colorId);
+		readIcon = getActiveIcon(R.drawable.ic_action_read_article);
 		this.fragmentManager = fragmentManager;
 	}
 

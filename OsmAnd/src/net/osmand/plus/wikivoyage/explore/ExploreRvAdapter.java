@@ -10,6 +10,7 @@ import android.widget.TextView;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.wikivoyage.data.TravelArticle;
 import net.osmand.plus.wikivoyage.explore.travelcards.ArticleTravelCard;
 import net.osmand.plus.wikivoyage.explore.travelcards.OpenBetaTravelCard;
 import net.osmand.plus.wikivoyage.explore.travelcards.StartEditingTravelCard;
@@ -35,27 +36,22 @@ public class ExploreRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 	@NonNull
 	@Override
 	public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-		View itemView = null;
-		int layoutId = 0;
 		if (viewType == OpenBetaTravelCard.TYPE) {
-			layoutId = R.layout.wikivoyage_open_beta_card;
-			itemView = LayoutInflater.from(parent.getContext()).inflate(layoutId, parent, false);
+			View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.wikivoyage_open_beta_card, parent, false);
 			return new OpenBetaTravelCard.OpenBetaTravelVH(itemView);
 		}
 		if (viewType == StartEditingTravelCard.TYPE) {
-			layoutId = R.layout.wikivoyage_start_editing_card;
-			itemView = LayoutInflater.from(parent.getContext()).inflate(layoutId, parent, false);
+			View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.wikivoyage_start_editing_card, parent, false);
 			return new StartEditingTravelCard.StartEditingTravelVH(itemView);
 
 		}
 		if (viewType == ArticleTravelCard.TYPE) {
-			layoutId = ArticleTravelCard.USE_ALTERNATIVE_CARD ? R.layout.wikivoyage_article_card_alternative : R.layout.wikivoyage_article_card;
-			itemView = LayoutInflater.from(parent.getContext()).inflate(layoutId, parent, false);
+			int layoutId = ArticleTravelCard.USE_ALTERNATIVE_CARD ? R.layout.wikivoyage_article_card_alternative : R.layout.wikivoyage_article_card;
+			View itemView = LayoutInflater.from(parent.getContext()).inflate(layoutId, parent, false);
 			return new ArticleTravelCard.ArticleTravelVH(itemView);
 		}
 		if (viewType == HEADER_TYPE) {
-			layoutId = R.layout.wikivoyage_list_header;
-			itemView = LayoutInflater.from(parent.getContext()).inflate(layoutId, parent, false);
+			View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.wikivoyage_list_header, parent, false);
 			return new HeaderVH(itemView);
 		}
 		return null;
@@ -63,23 +59,24 @@ public class ExploreRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
 	@Override
 	public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int position) {
+		Object object = getItem(position);
 		if (viewHolder instanceof HeaderVH) {
 			final HeaderVH holder = (HeaderVH) viewHolder;
-			holder.title.setText((String) getItem(position));
-			holder.description.setText(String.valueOf(items.size() - 3));
+			holder.title.setText((String) object);
+			holder.description.setText(String.valueOf(getArticleItemCount()));
 		} else if (viewHolder instanceof ArticleTravelCard.ArticleTravelVH) {
-			if (getItem(position) instanceof ArticleTravelCard) {
-				ArticleTravelCard articleTravelCard = (ArticleTravelCard) getItem(position);
+			if (object instanceof ArticleTravelCard) {
+				ArticleTravelCard articleTravelCard = (ArticleTravelCard) object;
 				articleTravelCard.bindViewHolder(viewHolder);
 			}
 		} else if (viewHolder instanceof OpenBetaTravelCard.OpenBetaTravelVH) {
-			if (getItem(position) instanceof OpenBetaTravelCard) {
-				OpenBetaTravelCard openBetaTravelCard = (OpenBetaTravelCard) getItem(position);
+			if (object instanceof OpenBetaTravelCard) {
+				OpenBetaTravelCard openBetaTravelCard = (OpenBetaTravelCard) object;
 				openBetaTravelCard.bindViewHolder(viewHolder);
 			}
 		} else if (viewHolder instanceof StartEditingTravelCard.StartEditingTravelVH) {
-			if (getItem(position) instanceof StartEditingTravelCard) {
-				StartEditingTravelCard startEditingTravelCard = (StartEditingTravelCard) getItem(position);
+			if (object instanceof StartEditingTravelCard) {
+				StartEditingTravelCard startEditingTravelCard = (StartEditingTravelCard) object;
 				startEditingTravelCard.bindViewHolder(viewHolder);
 			}
 		}
@@ -87,17 +84,18 @@ public class ExploreRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
 	@Override
 	public int getItemViewType(int position) {
-		if (getItem(position) instanceof String) {
+		Object object = getItem(position);
+		if (object instanceof String) {
 			return HEADER_TYPE;
 		}
-		if (getItem(position) instanceof OpenBetaTravelCard) {
-			return ((OpenBetaTravelCard) getItem(position)).getCardType();
+		if (object instanceof OpenBetaTravelCard) {
+			return ((OpenBetaTravelCard) object).getCardType();
 		}
-		if (getItem(position) instanceof StartEditingTravelCard) {
-			return ((StartEditingTravelCard) getItem(position)).getCardType();
+		if (object instanceof StartEditingTravelCard) {
+			return ((StartEditingTravelCard) object).getCardType();
 		}
-		if (getItem(position) instanceof ArticleTravelCard) {
-			return ((ArticleTravelCard) getItem(position)).getCardType();
+		if (object instanceof ArticleTravelCard) {
+			return ((ArticleTravelCard) object).getCardType();
 		}
 		return -1;
 	}
@@ -105,6 +103,16 @@ public class ExploreRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 	@Override
 	public int getItemCount() {
 		return items.size();
+	}
+
+	public int getArticleItemCount() {
+		int count = 0;
+		for (Object o : items) {
+			if (o instanceof TravelArticle) {
+				count++;
+			}
+		}
+		return count;
 	}
 
 	private Object getItem(int position) {

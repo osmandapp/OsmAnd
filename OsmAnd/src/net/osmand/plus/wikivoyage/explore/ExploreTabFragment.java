@@ -26,35 +26,31 @@ import java.util.List;
 
 public class ExploreTabFragment extends BaseOsmAndFragment {
 
-	boolean nightMode;
 
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		final OsmandApplication app = getMyApplication();
-		nightMode = !getSettings().isLightContent();
 		final View mainView = inflater.inflate(R.layout.fragment_explore_tab, container, false);
-
-
-		ExploreRvAdapter adapter = new ExploreRvAdapter(app);
-
+		ExploreRvAdapter adapter = new ExploreRvAdapter(getMyApplication());
 		final RecyclerView rv = (RecyclerView) mainView.findViewById(R.id.recycler_view);
 		rv.setLayoutManager(new LinearLayoutManager(getContext()));
 		adapter.setItems(getItems());
 		rv.setAdapter(adapter);
+
 		return mainView;
 	}
 
 	private List<Object> getItems() {
-		List<Object> items = new LinkedList<>();
-		List<TravelArticle> savedArticles = getMyApplication().getTravelDbHelper().searchPopular();
+		final OsmandApplication app = getMyApplication();
+		boolean nightMode = !getSettings().isLightContent();
+		List<Object> items = new ArrayList<>();
+		List<TravelArticle> savedArticles = app.getTravelDbHelper().searchPopular();
+		items.add(new OpenBetaTravelCard(app, nightMode, getFragmentManager()));
+		items.add(new StartEditingTravelCard(app, nightMode));
 		if (!savedArticles.isEmpty()) {
-			items.add(new OpenBetaTravelCard(getMyApplication(), nightMode, getFragmentManager()));
-			items.add(new StartEditingTravelCard(getMyApplication(), nightMode));
 			items.add(getString(R.string.popular_destinations));
-
 			for (TravelArticle article : savedArticles) {
-				items.add(new ArticleTravelCard(getMyApplication(), nightMode, article, getFragmentManager()));
+				items.add(new ArticleTravelCard(app, nightMode, article, getFragmentManager()));
 			}
 		}
 		return items;
