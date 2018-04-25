@@ -63,6 +63,7 @@ public class ExploreRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 			holder.description.setText(String.valueOf(getArticleItemCount()));
 		} else if (viewHolder instanceof ArticleTravelVH && item instanceof ArticleTravelCard) {
 			ArticleTravelCard articleTravelCard = (ArticleTravelCard) item;
+			articleTravelCard.setLastItem(position == getItemCount() - 1);
 			articleTravelCard.bindViewHolder(viewHolder);
 		} else if (viewHolder instanceof OpenBetaTravelVH && item instanceof OpenBetaTravelCard) {
 			OpenBetaTravelCard openBetaTravelCard = (OpenBetaTravelCard) item;
