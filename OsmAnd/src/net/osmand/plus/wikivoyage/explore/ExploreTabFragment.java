@@ -37,15 +37,6 @@ public class ExploreTabFragment extends BaseOsmAndFragment {
 
 
 		ExploreRvAdapter adapter = new ExploreRvAdapter(app);
-		adapter.setListener(new ExploreRvAdapter.Listener() {
-			@Override
-			public void openArticle(TravelArticle article) {
-				FragmentManager fm = getFragmentManager();
-				if (fm != null) {
-					WikivoyageArticleDialogFragment.showInstance(app, fm, article.getCityId(), article.getLang());
-				}
-			}
-		});
 
 		final RecyclerView rv = (RecyclerView) mainView.findViewById(R.id.recycler_view);
 		rv.setLayoutManager(new LinearLayoutManager(getContext()));
