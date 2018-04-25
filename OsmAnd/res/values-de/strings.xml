@@ -3010,4 +3010,5 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="paid_app">Bezahlte Anwendung</string>
     <string name="paid_plugin">Bezahltes Plugin</string>
     <string name="how_to_open_wiki_title">Wie öffnet man Wikipedia-Artikel?</string>
-</resources>
+<string name="popular_destinations">Beliebte Reiseziele</string>
+    </resources>
