@@ -2,7 +2,6 @@ package net.osmand.plus.download.ui;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBar;
@@ -22,11 +21,11 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.base.OsmAndListFragment;
+import net.osmand.plus.chooseplan.ChoosePlanDialogFragment;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.IndexItem;
-import net.osmand.plus.liveupdates.OsmLiveActivity;
 import net.osmand.util.Algorithms;
 
 import java.util.Comparator;
@@ -166,10 +165,10 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		if (listAdapter.isShowOsmLiveBanner() && position == 0) {
-			Intent intent = new Intent(getMyActivity(), OsmLiveActivity.class);
-			intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-			intent.putExtra(OsmLiveActivity.OPEN_SUBSCRIPTION_INTENT_PARAM, true);
-			getMyActivity().startActivity(intent);
+			DownloadActivity activity = getMyActivity();
+			if (activity != null) {
+				ChoosePlanDialogFragment.showOsmLiveInstance(activity.getSupportFragmentManager());
+			}
 		} else {
 			final IndexItem e = (IndexItem) getListAdapter().getItem(position);
 			ItemViewHolder vh = (ItemViewHolder) v.getTag();

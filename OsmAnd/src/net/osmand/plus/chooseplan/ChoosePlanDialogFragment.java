@@ -173,8 +173,14 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 		if (!TextUtils.isEmpty(getInfoDescription())) {
 			infoDescription.setText(getInfoDescription());
 		}
-		cardsContainer.addView(buildOsmLiveCard(ctx, cardsContainer));
-		cardsContainer.addView(buildPlanTypeCard(ctx, cardsContainer));
+		ViewGroup osmLiveCard = buildOsmLiveCard(ctx, cardsContainer);
+		if (osmLiveCard != null) {
+			cardsContainer.addView(osmLiveCard);
+		}
+		ViewGroup planTypeCard = buildPlanTypeCard(ctx, cardsContainer);
+		if (planTypeCard != null) {
+			cardsContainer.addView(planTypeCard);
+		}
 		return view;
 	}
 
@@ -203,6 +209,10 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 	public abstract String getPlanTypeHeaderTitle();
 
 	public abstract String getPlanTypeHeaderDescription();
+
+	public abstract String getPlanTypeButtonTitle();
+
+	public abstract String getPlanTypeButtonDescription();
 
 	public abstract void setPlanTypeButtonClickListener(View button);
 
@@ -289,6 +299,9 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 	}
 
 	private ViewGroup buildPlanTypeCard(@NonNull Context ctx, ViewGroup container) {
+		if (getPlanTypeFeatures().length == 0) {
+			return null;
+		}
 		ViewGroup cardView = (ViewGroup) inflate(R.layout.purchase_dialog_card, container);
 		AppCompatImageView headerImageView = (AppCompatImageView) cardView.findViewById(R.id.header_img);
 		TextView headerTitleView = (TextView) cardView.findViewById(R.id.header_title);
@@ -335,12 +348,8 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 			ProgressBar progressBar = (ProgressBar) planTypeCardButton.findViewById(R.id.card_button_progress);
 			TextViewEx buttonTitle = (TextViewEx) planTypeCardButton.findViewById(R.id.card_button_title);
 			TextViewEx buttonSubtitle = (TextViewEx) planTypeCardButton.findViewById(R.id.card_button_subtitle);
-			if (!purchaseHelper.hasPrices()) {
-				buttonTitle.setText(getString(R.string.purchase_unlim_title, getString(R.string.full_version_price)));
-			} else {
-				buttonTitle.setText(getString(R.string.purchase_unlim_title, purchaseHelper.getFullVersionPrice()));
-			}
-			buttonSubtitle.setText(R.string.in_app_purchase_desc);
+			buttonTitle.setText(getPlanTypeButtonTitle());
+			buttonSubtitle.setText(getPlanTypeButtonDescription());
 			if (progress) {
 				buttonTitle.setVisibility(View.GONE);
 				buttonSubtitle.setVisibility(View.GONE);
@@ -434,12 +443,39 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 		}
 	}
 
+	public static void showWikivoyageInstance(@NonNull FragmentManager fm) {
+		try {
+			ChoosePlanWikivoyageDialogFragment fragment = new ChoosePlanWikivoyageDialogFragment();
+			fragment.show(fm, ChoosePlanWikivoyageDialogFragment.TAG);
+		} catch (RuntimeException e) {
+			LOG.error("showWikivoyageInstance", e);
+		}
+	}
+
 	public static void showSeaDepthMapsInstance(@NonNull FragmentManager fm) {
 		try {
 			ChoosePlanSeaDepthMapsDialogFragment fragment = new ChoosePlanSeaDepthMapsDialogFragment();
 			fragment.show(fm, ChoosePlanSeaDepthMapsDialogFragment.TAG);
 		} catch (RuntimeException e) {
 			LOG.error("showSeaDepthMapsInstance", e);
+		}
+	}
+
+	public static void showHillshadeSrtmPluginInstance(@NonNull FragmentManager fm) {
+		try {
+			ChoosePlanHillshadeSrtmDialogFragment fragment = new ChoosePlanHillshadeSrtmDialogFragment();
+			fragment.show(fm, ChoosePlanHillshadeSrtmDialogFragment.TAG);
+		} catch (RuntimeException e) {
+			LOG.error("showHillshadeSrtmPluginInstance", e);
+		}
+	}
+
+	public static void showOsmLiveInstance(@NonNull FragmentManager fm) {
+		try {
+			ChoosePlanOsmLiveBannerDialogFragment fragment = new ChoosePlanOsmLiveBannerDialogFragment();
+			fragment.show(fm, ChoosePlanOsmLiveBannerDialogFragment.TAG);
+		} catch (RuntimeException e) {
+			LOG.error("showOsmLiveInstance", e);
 		}
 	}
 }
