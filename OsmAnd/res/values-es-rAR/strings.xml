@@ -2032,7 +2032,7 @@ Lon %2$s</string>
     <string name="map_marker">Marcador del mapa</string>
     <string name="select_map_markers">Elegir marcadores del mapa</string>
     <string name="add_points_to_map_markers_q">¿Añadir todos los puntos a marcadores del mapa?</string>
-    <string name="shared_string_add_to_map_markers">Añadir a marcadores del mapa</string>
+    <string name="shared_string_add_to_map_markers">Añadir a «Marcadores del mapa»</string>
     <string name="consider_turning_polygons_off">Se recomienda ocultar la visualización de polígonos.</string>
     <string name="map_marker_1st">Primer marcador del mapa</string>
     <string name="map_marker_2nd">Segundo marcador del mapa</string>
@@ -2969,7 +2969,7 @@ Lon %2$s</string>
     <string name="shared_string_read">Leer</string>
     <string name="shared_string_contents">Contenido</string>
     <string name="article_removed">Artículo borrado</string>
-    <string name="download_maps_travel">Mapas de viaje</string>
+    <string name="download_maps_travel">Mapas turísticos</string>
     <string name="shared_string_wikivoyage">Wikiviajes</string>
     <string name="index_item_world_wikivoyage">Artículos de Wikiviajes en todo el mundo</string>
     <string name="online_webpage_warning">Esta página sólo está disponible en línea. ¿Deseas abrirla en un navegador web?</string>
