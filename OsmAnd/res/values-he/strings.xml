@@ -2791,4 +2791,19 @@
 \n הערה 1: הקבצים הקודמים שלך יישארו כמו שהם (ניתן יהיה למחוק אותם ידנית).
 \n הערה 2: במיקום האחסון החדש לא תהיה אפשרות לשתף קבצים בין OsmAnd לבין OsmAnd+‎.</string>
     <string name="osmand_extended_description_part1">OsmAnd ‏(OSM Automated Navigation Directions - ניווט והכוונה אוטומטיים) הוא יישומון מפה וניווט עם גישה לנתוני OpenStreetMap (OSM) החופשיים, הבינלאומיים באיכות גבוהה. ניתן ליהנות מניווט קולי וחזותי, צפייה בנקודות עניין וניהול מסלולי GPX, שימוש בתחזית קווי מתאר ופרטי גובה (בעזרת תוסף), בחירה בין מצבי נהיגה, רכיבה והליכה, עריכת OSM ועוד פינוקים רבים וטובים.</string>
+    <string name="paid_app">יישומון בתשלום</string>
+    <string name="paid_plugin">תוסף בתשלום</string>
+    <string name="travel_card_update_descr">הכנו עדכונים ותיקונים לנתוני ויקימסע, יש לעדכן את הקובץ כדי לצפות בהם.</string>
+	<string name="travel_card_download_descr">יש להוריד את קובץ הדרכות הטיולים של ויקימסע כדי לצפות בערבים על מקומות מסביב לעולם ללא חיבור לאינטרנט.</string>
+	<string name="update_is_available">קיים עדכון</string>
+	<string name="download_file">הורדת קובץ</string>
+    <string name="start_editing_card_image_text">מדריך הטיולים המקוון שכל אחד יכול לערוך.</string>
+    <string name="welcome_to_open_beta_description">הטיול מבוסס על ויקימסע. במהלך הבטא הפתוחה יש לך את ההזדמנות להעריך את כל התכונות בחינם. לאחר סיום תקופת הבטא, בתכונת הטיול תהיה זמינה לנרשמי OsmAnd ללא הגבלה ולבעלי OsmAnd+‎</string>
+    <string name="start_editing_card_description">ניתן לערוך כל ערך בויקימסע, ואנו מקווים שבחירתך תהיה לעשות זאת. אנו זקוקים לידע, לניסיון ולתשומת הלב שלך</string>
+    <string name="start_editing">להתחיל בעריכה</string>
+    <string name="get_unlimited_access">קבלת גישה בלתי מוגבלת</string>
+    <string name="welcome_to_open_beta">ברוך בואך לבטא הפתוחה!</string>
+    <string name="travel_guide">מדריך טיולים</string>
+    <string name="travel_guide_description">ניתן לעיין במדריכים של ויקימסע כדי למצוא את המקומות המעניינים ביותר ברחבי העולם בתוך OsmAnd ללא חיבור לאינטרנט.</string>
+    <string name="contour_lines_hillshade_maps">קווי מתאר ומפות הצללה</string>
     </resources>
