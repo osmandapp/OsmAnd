@@ -3580,4 +3580,7 @@
 <string name="synonyms_poi_fuel">Čerpací stanice</string>
 
 	<string name="synonyms_poi_nightclub">Diskotéka</string>
+	<string name="poi_water_purification_none">Žádné</string>
+	<string name="poi_water_purification_chlorine">Chlór</string>
+	<string name="poi_water_purification_reverse_osmosis">Reverzní osmóza</string>
 	</resources>
