@@ -2965,4 +2965,5 @@
     <string name="travel_guide_description">Bla gjennom Wikivoyage-guider i OsmAnd til de mest interessante stedene på planeten og uten en internettforbindelse.</string>
     <string name="purchase_dialog_travel_description">For å lese reiseartikler frakoblet, må du kjøpe ett av følgende elementer.</string>
     <string name="purchase_dialog_subtitle">Velg passende element:</string>
-    </resources>
+    <string name="travel_card_download_descr">Last ned denne Wikivoyage-reiseguidefilen for å se artikler om steder rundt om i verden og uten en internettforbindelse.</string>
+	</resources>
