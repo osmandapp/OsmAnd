@@ -35,7 +35,6 @@ public class ExploreTabFragment extends BaseOsmAndFragment {
 	private static final int DOWNLOAD_UPDATE_CARD_POSITION = 0;
 
 	private ExploreRvAdapter adapter = new ExploreRvAdapter();
-	private PopularDestinationsSearchTask popularDestinationsSearchTask;
 	private StartEditingTravelCard startEditingTravelCard;
 	private ProgressBar progressBar;
 
@@ -84,7 +83,7 @@ public class ExploreTabFragment extends BaseOsmAndFragment {
 	}
 
 	private void addPopularDestinations(OsmandApplication app, boolean nightMode) {
-		popularDestinationsSearchTask = new PopularDestinationsSearchTask(app.getTravelDbHelper(), getMyActivity(), adapter, nightMode, startEditingTravelCard, progressBar);
+		PopularDestinationsSearchTask popularDestinationsSearchTask = new PopularDestinationsSearchTask(app.getTravelDbHelper(), getMyActivity(), adapter, nightMode, startEditingTravelCard, progressBar);
 		popularDestinationsSearchTask.execute();
 	}
 
