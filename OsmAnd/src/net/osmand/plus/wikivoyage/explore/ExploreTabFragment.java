@@ -43,11 +43,11 @@ public class ExploreTabFragment extends BaseOsmAndFragment {
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		final View mainView = inflater.inflate(R.layout.fragment_explore_tab, container, false);
+		progressBar = (ProgressBar) mainView.findViewById(R.id.progressBar);
+		final RecyclerView rv = (RecyclerView) mainView.findViewById(R.id.recycler_view);
 
 		adapter.setItems(generateItems());
 
-		final RecyclerView rv = (RecyclerView) mainView.findViewById(R.id.recycler_view);
-		progressBar = (ProgressBar) mainView.findViewById(R.id.progressBar);
 		rv.setLayoutManager(new LinearLayoutManager(getContext()));
 		rv.setAdapter(adapter);
 
