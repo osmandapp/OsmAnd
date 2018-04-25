@@ -75,7 +75,7 @@
 <string name="poi_second_hand">سمساری</string>
 <string name="poi_ship_chandler">کشتی</string>
 <string name="poi_sports">لوازم ورزشی</string>
-<string name="poi_stationery">فروشگاه لوازم التحریر</string>
+<string name="poi_stationery">فروشگاه نوشت افزار</string>
 <string name="poi_tableware">فروشگاه کارد و چنگال</string>
 <string name="poi_ticket">فروشگاه بلیط</string>
 <string name="poi_tobacco">دخانیات</string>
@@ -204,7 +204,7 @@
 <string name="poi_post_office">اداره پست</string>
 <string name="poi_post_box">صندوق پست</string>
 <string name="poi_telephone">تلفن</string>
-<string name="poi_communication_tower">برج ارتباطات</string>
+<string name="poi_communication_tower">برج ارتباطی</string>
 <string name="poi_telephone_exchange">خدمات تلفن</string>
 
 <string name="poi_recycling">بازیافت</string>
@@ -269,7 +269,7 @@
 <string name="poi_baby_hatch">زایشگاه</string>
 <string name="poi_veterinary">دامپزشکی</string>
 <string name="poi_sanatorium">بیمارستان مسلولین</string>
-<string name="poi_healthcare_alternative">طب گیاهی</string>
+<string name="poi_healthcare_alternative">طب سنتی</string>
 <string name="poi_audiologist">شنوایی سنجی</string>
 <string name="poi_blood_bank">سازمان انتقال خون</string>
 <string name="poi_healthcare_centre">مرکز پزشکی</string>
@@ -385,7 +385,7 @@
 <string name="poi_zoo">باغ وحش</string>
 <string name="poi_theme_park">شهربازی</string>
 
-<string name="poi_attraction">جاذبه های گردشگری</string>
+<string name="poi_attraction">جاذبه گردشگری</string>
 <string name="poi_attraction_amusement_ride">سواری تفریحی</string>
 <string name="poi_attraction_animal">حیوانات (جاذبه)</string>
 <string name="poi_attraction_big_wheel">چرخ فلک بزرگ</string>
@@ -799,7 +799,7 @@
 	<string name="poi_operational_status">وضعیت عملیاتی</string>
 	<string name="poi_water_supply_type">منبع آب</string>
 	<string name="poi_water_purification">تصفیه آب</string>
-	<string name="poi_emergency">اضطراری</string>
+	<string name="poi_emergency">اورژانس</string>
 	<string name="poi_transportation">حمل و نقل</string>
 	<string name="poi_road_obstacle">مانع جاده</string>
 	<string name="poi_filling_station">پمپ بنزین</string>
@@ -857,7 +857,7 @@
 	<string name="poi_level">طبقه</string>
 	<string name="poi_social_facility_type">نوع</string>
 	<string name="poi_animal_shelter_purpose">کاربری</string>
-	<string name="poi_man_made">ساخت انسان</string>
+	<string name="poi_man_made">سازه انسانی</string>
 	<string name="poi_finance">مالی</string>
 	<string name="poi_fashion">فروشگاه مد</string>
 	<string name="poi_free_flying">فروشگاه لوازم پرواز آزاد</string>
@@ -922,4 +922,60 @@
 	<string name="poi_tomb_mausoleum">نوع: مقبره</string>
 	<string name="poi_tomb_pyramid">نوع: هرم</string>
 
+	<string name="poi_service">خدمات</string>
+	<string name="poi_residential">منطقهٔ مسکونی</string>
+	<string name="poi_wiki_place">ویکی‌پدیا</string>
+	<string name="poi_wiki_lang_en">ویکی انگلیسی</string>
+	<string name="poi_wiki_lang_ar">ویکی عربی</string>
+	<string name="poi_wiki_lang_be">ویکی بلاروسی</string>
+	<string name="poi_wiki_lang_bg">ویکی بلغاری</string>
+	<string name="poi_wiki_lang_de">ویکی آلمانی</string>
+	<string name="poi_wiki_lang_el">ویکی یونانی</string>
+	<string name="poi_wiki_lang_es">ویکی اسپانیایی</string>
+	<string name="poi_wiki_lang_fr">ویکی فرانسوی</string>
+	<string name="poi_wiki_lang_he">ویکی عبری</string>
+	<string name="poi_wiki_lang_id">ویکی اندونزیایی</string>
+	<string name="poi_wiki_lang_it">ویکی ایتالیایی</string>
+	<string name="poi_wiki_lang_ja">ویکی ژاپنی</string>
+	<string name="poi_wiki_lang_ko">ویکی کره‌ای</string>
+	<string name="poi_wiki_lang_no">ویکی نروژی</string>
+	<string name="poi_wiki_lang_pt">ویکی پرتغالی</string>
+	<string name="poi_wiki_lang_ru">ویکی روسی</string>
+	<string name="poi_wiki_lang_tr">ویکی ترکی</string>
+	<string name="poi_wiki_lang_fa">ویکی فارسی</string>
+	<string name="poi_description">توضیحات</string>
+	<string name="poi_operator">گرداننده</string>
+	<string name="poi_generator_source_coal">منبع انرژی: زغال‌سنگ</string>
+	<string name="poi_generator_source_nuclear">منبع انرژی: هسته‌ای</string>
+	<string name="poi_generator_source_solar">منبع انرژی: خورشیدی</string>
+	<string name="poi_generator_source_hydro">منبع انرژی: برقابی</string>
+	<string name="poi_generator_source_wind">منبع انرژی: باد</string>
+	<string name="poi_generator_source_geothermal">منبع انرژی: زمین گرمایی</string>
+	<string name="poi_generator_source_oil">منبع انرژی: نفت</string>
+	<string name="poi_generator_source_diesel">منبع انرژی: گازوئیل</string>
+
+	<string name="poi_int_name">نام بین‌المللی</string>
+	<string name="poi_nat_name">نام ملی</string>
+	<string name="poi_reg_name">نام منطقه‌ای</string>
+	<string name="poi_loc_name">نام محلی</string>
+	<string name="poi_old_name">نام قدیمی</string>
+	<string name="poi_alt_name">نام دیگر</string>
+
+	<string name="poi_male_yes">آقایان</string>
+	<string name="poi_male_no">برای آقایان ممنوع</string>
+	<string name="poi_female_yes">بانوان</string>
+	<string name="poi_female_no">برای بانوان ممنوع</string>
+	<string name="poi_architect_name">معمار</string>
+
+	<string name="poi_blind_description">توضیحات برای نابینایان</string>
+	<string name="poi_deaf_description">توضیحات برای ناشنوایان</string>
+
+	<string name="poi_artist_name">هنرمند</string>
+	<string name="poi_fitness_station">ایستگاه تناسب اندام</string>
+
+	<string name="poi_fitness_centre">باشگاه تناسب اندام</string>
+	<string name="poi_official_name">نام رسمی</string>
+
+	<string name="poi_emergency_yes">اورژانس: بله</string>
+	<string name="poi_emergency_no">اورژانس: خیر</string>
 	</resources>
