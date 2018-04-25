@@ -12,6 +12,7 @@
 		android:layout_height="match_parent"
 		android:clipToPadding="false"
 		android:paddingBottom="@dimen/map_markers_recycler_view_padding_bottom"
+		android:scrollbars="vertical"
 		tools:listitem="@layout/wikivoyage_article_card"/>
 
 </LinearLayout>
