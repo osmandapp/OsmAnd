@@ -7,16 +7,16 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.OsmandInAppPurchaseActivity;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 
-public class ChoosePlanSeaDepthMapsDialogFragment extends ChoosePlanDialogFragment {
-	public static final String TAG = ChoosePlanSeaDepthMapsDialogFragment.class.getSimpleName();
+public class ChoosePlanHillshadeSrtmDialogFragment extends ChoosePlanDialogFragment {
+	public static final String TAG = ChoosePlanHillshadeSrtmDialogFragment.class.getSimpleName();
 
 	private final OsmAndFeature[] osmLiveFeatures = {
 			OsmAndFeature.CONTOUR_LINES_HILLSHADE_MAPS,
 			OsmAndFeature.SEA_DEPTH_MAPS,
-			OsmAndFeature.WIKIPEDIA_OFFLINE,
-			OsmAndFeature.WIKIVOYAGE_OFFLINE,
 			OsmAndFeature.DAILY_MAP_UPDATES,
 			OsmAndFeature.UNLIMITED_DOWNLOADS,
+			OsmAndFeature.WIKIPEDIA_OFFLINE,
+			OsmAndFeature.WIKIVOYAGE_OFFLINE,
 			OsmAndFeature.UNLOCK_ALL_FEATURES,
 			OsmAndFeature.DONATION_TO_OSM,
 	};
@@ -26,7 +26,7 @@ public class ChoosePlanSeaDepthMapsDialogFragment extends ChoosePlanDialogFragme
 	};
 
 	private final OsmAndFeature[] planTypeFeatures = {
-			OsmAndFeature.SEA_DEPTH_MAPS,
+			OsmAndFeature.CONTOUR_LINES_HILLSHADE_MAPS,
 	};
 	private final OsmAndFeature[] selectedPlanTypeFeatures = {};
 
@@ -57,26 +57,26 @@ public class ChoosePlanSeaDepthMapsDialogFragment extends ChoosePlanDialogFragme
 
 	@Override
 	public int getPlanTypeHeaderImageId() {
-		return R.drawable.img_logo_38dp_sea_depth;
+		return R.drawable.img_logo_38dp_contour_lines;
 	}
 
 	@Override
 	public String getPlanTypeHeaderTitle() {
-		return getString(R.string.index_item_depth_contours_osmand_ext);
+		return getString(R.string.srtm_plugin_name);
 	}
 
 	@Override
 	public String getPlanTypeHeaderDescription() {
-		return getString(R.string.in_app_purchase);
+		return getString(R.string.paid_plugin);
 	}
 
 	@Override
 	public String getPlanTypeButtonTitle() {
 		InAppPurchaseHelper purchaseHelper = getOsmandApplication().getInAppPurchaseHelper();
 		if (purchaseHelper == null || !purchaseHelper.hasPrices()) {
-			return getString(R.string.purchase_unlim_title, getString(R.string.sea_depth_maps_price));
+			return getString(R.string.purchase_unlim_title, getString(R.string.srtm_plugin_price));
 		} else {
-			return getString(R.string.purchase_unlim_title, purchaseHelper.getDepthContoursPrice());
+			return getString(R.string.purchase_unlim_title, purchaseHelper.getContourLinesPrice());
 		}
 	}
 
@@ -92,7 +92,7 @@ public class ChoosePlanSeaDepthMapsDialogFragment extends ChoosePlanDialogFragme
 			public void onClick(View v) {
 				Activity activity = getActivity();
 				if (activity != null) {
-					OsmandInAppPurchaseActivity.purchaseDepthContours(activity);
+					OsmandInAppPurchaseActivity.purchaseSrtmPlugin(activity);
 				}
 			}
 		});

@@ -33,7 +33,7 @@ public class OpenBetaTravelCard extends BaseTravelCard {
 			holder.button.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					ChoosePlanDialogFragment.showFreeVersionInstance(fragmentManager);
+					ChoosePlanDialogFragment.showWikivoyageInstance(fragmentManager);
 				}
 			});
 		}

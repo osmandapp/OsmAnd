@@ -9,13 +9,17 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.Toast;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseTaskType;
+import net.osmand.plus.srtmplugin.SRTMPlugin;
 
 import org.apache.commons.logging.Log;
 
@@ -104,6 +108,16 @@ public class OsmandInAppPurchaseActivity extends AppCompatActivity implements In
 				app.logEvent(activity, "depth_contours_purchase_redirect");
 				purchaseHelper.purchaseDepthContours(activity);
 			}
+		}
+	}
+
+	public static void purchaseSrtmPlugin(@NonNull final Activity activity) {
+		OsmandPlugin plugin = OsmandPlugin.getPlugin(SRTMPlugin.class);
+		if(plugin == null || plugin.getInstallURL() == null) {
+			Toast.makeText(activity.getApplicationContext(),
+					activity.getString(R.string.activate_srtm_plugin), Toast.LENGTH_LONG).show();
+		} else {
+			activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(plugin.getInstallURL())));
 		}
 	}
 
