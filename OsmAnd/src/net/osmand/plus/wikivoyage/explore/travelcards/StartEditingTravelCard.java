@@ -14,6 +14,8 @@ import net.osmand.plus.R;
 
 public class StartEditingTravelCard extends BaseTravelCard {
 
+	public static final int TYPE = 1;
+
 	public StartEditingTravelCard(OsmandApplication app, boolean nightMode) {
 		super(app, nightMode);
 	}
@@ -39,14 +41,14 @@ public class StartEditingTravelCard extends BaseTravelCard {
 		}
 	}
 
-	class StartEditingTravelVH extends RecyclerView.ViewHolder {
+	public static class StartEditingTravelVH extends RecyclerView.ViewHolder {
 
 		final TextView title;
 		final TextView description;
 		final TextView button;
 		final ImageView backgroundImage;
 
-		StartEditingTravelVH(final View itemView) {
+		public StartEditingTravelVH(final View itemView) {
 			super(itemView);
 			title = (TextView) itemView.findViewById(R.id.title);
 			description = (TextView) itemView.findViewById(R.id.description);
@@ -57,6 +59,6 @@ public class StartEditingTravelCard extends BaseTravelCard {
 
 	@Override
 	public int getCardType() {
-		return 1;
+		return TYPE;
 	}
 }
