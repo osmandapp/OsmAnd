@@ -38,16 +38,6 @@ public class ExploreTabFragment extends BaseOsmAndFragment {
 		return mainView;
 	}
 
-	/**
-	 * Cards order:
-	 * - Download/Update
-	 * - Open Beta
-	 * - Edit Wiki
-	 * - Popular Destinations
-	 * - Maps you need
-	 *
-	 * @return list of generated items.
-	 */
 	private List<Object> generateItems() {
 		final List<Object> items = new ArrayList<>();
 		final OsmandApplication app = getMyApplication();
