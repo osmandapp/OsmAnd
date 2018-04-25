@@ -11,6 +11,8 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.download.DownloadOsmandIndexesHelper.AssetIndexItem;
 import net.osmand.util.MapUtils;
 
+import org.apache.commons.logging.Log;
+
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
@@ -22,8 +24,6 @@ import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-
-import org.apache.commons.logging.Log;
 
 public class DownloadResources extends DownloadResourceGroup {
 	public boolean isDownloadedFromInternet = false;
@@ -39,6 +39,7 @@ public class DownloadResources extends DownloadResourceGroup {
 	public static final String WORLD_SEAMARKS_NAME = "World_seamarks";
 	public static final String WORLD_SEAMARKS_OLD_KEY = "world_seamarks_basemap";
 	public static final String WORLD_SEAMARKS_OLD_NAME = "World_seamarks_basemap";
+	public static final String WORLD_WIKIVOYAGE_NAME = "world_wikivoyage";
 	private static final Log LOG = PlatformUtil.getLog(DownloadResources.class);
 
 	
