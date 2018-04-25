@@ -2965,4 +2965,60 @@
 	<string name="poi_office_nursing_service">Omvårdnad</string>
 	<string name="poi_office_midwife">Barnmorskemottagning</string>
 
+	<string name="poi_fire_hydrant_diameter">Brandpostddiameter</string>
+	<string name="poi_fire_hydrant_pressure">Brandposttryck</string>
+	<string name="poi_fire_hydrant_count">Antal brandposter</string>
+	<string name="poi_fire_hydrant_flow_capacity">Brandpostens flödeskapacitet</string>
+	<string name="poi_fire_hydrant_position_sidewalk">Trottoar</string>
+	<string name="poi_fire_hydrant_position_green">Grön</string>
+	<string name="poi_fire_hydrant_position_lane">Körfält</string>
+	<string name="poi_fire_hydrant_position_parking_lot">Parkeringsplats</string>
+	<string name="poi_fire_hydrant_position_street">Gata</string>
+	<string name="poi_fire_hydrant_position_underground">Underjord</string>
+	<string name="poi_fire_hydrant_style_wsh">Brandpoststil: wsh</string>
+	<string name="poi_fire_hydrant_style_water_source_main">Huvud</string>
+	<string name="poi_fire_hydrant_style_water_source_pond">Damm</string>
+	<string name="poi_fire_hydrant_style_water_source_stream">Vattendrag</string>
+	<string name="poi_fire_hydrant_style_water_source_cistern">Cistern</string>
+	<string name="poi_in_service_yes">I tjänst: Ja</string>
+
+	<string name="poi_street_cabinet_power">Skåptyp: el</string>
+	<string name="poi_street_cabinet_telecom">Skåptyp: telekom</string>
+	<string name="poi_street_cabinet_cable_tv">Skåptyp: kabel-tv</string>
+	<string name="poi_street_cabinet_gas">Skåptyp: gas</string>
+	<string name="poi_street_cabinet_postal_service">Skåptyp: posttjänster</string>
+	<string name="poi_street_cabinet_waste">Skåptyp: avfall</string>
+	<string name="poi_street_cabinet_water_management">Skåptyp: vattenhantering</string>
+	<string name="poi_street_cabinet_street_lighting">Skåptyp: gatubelysning</string>
+
+	<string name="poi_military_checkpoint">Militär vägspärr</string>
+
+	<string name="poi_bicycle_parking_lockers">Skåp</string>
+	<string name="poi_bicycle_parking_tree">Cykelträd</string>
+	<string name="poi_bicycle_parking_streetpod">Streetpod</string>
+
+	<string name="poi_depth">Djup</string>
+
+	<string name="poi_salt_yes">Salt</string>
+	<string name="poi_salt_no">Salt: nej</string>
+	<string name="poi_wheelchair_designated">Designerat</string>
+	<string name="poi_spoil_heap">Slagghög</string>
+	
+	<string name="poi_summer_camp">Sommarläger</string>
+	<string name="poi_recreation_center">Fritidsområde</string>
+
+	<string name="poi_crossing_activation_automatic">Aktivering: automatiskt</string>
+	<string name="poi_crossing_activation_local">Aktivering: lokal</string>
+	<string name="poi_crossing_activation_remote">Aktivering: fjärr</string>
+	<string name="poi_crossing_barrier_no">Korsningshinder: nej</string>
+	<string name="poi_crossing_barrier_yes">Korsningshinder</string>
+	<string name="poi_crossing_barrier_full">Korsningshinder: full</string>
+	<string name="poi_crossing_barrier_half">Korsningshinder: halvt</string>
+	<string name="poi_crossing_barrier_double_half">Korsningshinder: dubbel halv</string>
+	<string name="poi_crossing_bell_yes">Korsning med ljud</string>
+	<string name="poi_crossing_bell_no">Korsning med ljud: nej</string>
+	<string name="poi_crossing_light_yes">Korsning med ljussignaler</string>
+	<string name="poi_crossing_light_no">Korsning med ljussignaler: nej</string>
+	<string name="poi_crossing_on_demand_yes">Korsande vid behov</string>
+	<string name="poi_crossing_on_demand_no">Korsning vid behov: nej</string>
 	</resources>
