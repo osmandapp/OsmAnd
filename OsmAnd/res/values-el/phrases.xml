@@ -354,4 +354,25 @@
 	<string name="poi_traffic_calming_chicane">Επιβραδυντής (απότομη στροφή)</string>
 	<string name="poi_traffic_calming_rumble_strip">Λωρίδα τραχειάς επιφάνειας</string>
 	<string name="poi_traffic_calming_table">Επιβραδυντής (πίνακας)</string>
+	<string name="poi_traffic_signals">Κόκκινο φανάρι</string>
+
+	<string name="poi_car_repair">Επισκευή οχήματος</string>
+	<string name="poi_taxi">Πιάτσα ταξί</string>
+
+	<string name="poi_aerodrome">Αεροδρόμιο</string>
+	<string name="poi_helipad">Ελικοδρόμιο</string>
+	<string name="poi_runway">Αεροδιάδρομος</string>
+	<string name="poi_bicycle_rental">Ενοικίαση ποδηλάτων</string>
+	<string name="poi_bicycle_parking">Στάθμευση ποδηλάτων</string>
+
+	<string name="poi_tunnel">Σήραγγα</string>
+	<string name="poi_bridge">Γέφυρα</string>
+
+	<string name="poi_speed_camera">Κάμερα ταχύτητας</string>
+	<string name="poi_power_substation">Υποσταθμός</string>
+	<string name="poi_power_transformer">Μετασχηματιστής</string>
+	<string name="poi_power_plant">Ηλεκτρικός σταθμός</string>
+	<string name="poi_post_office">Ταχυδρομείο</string>
+	<string name="poi_post_box">Γραμματοκιβώτιο</string>
+	<string name="poi_telephone">Τηλέφωνο</string>
 	</resources>
