@@ -83,11 +83,12 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 				case UNLOCK_ALL_FEATURES:
 				case DONATION_TO_OSM:
 					return false;
+				case SEA_DEPTH_MAPS:
+					return ctx.getSettings().DEPTH_CONTOURS_PURCHASED.get();
 				case WIKIVOYAGE_OFFLINE:
 					return ctx.getSettings().TRAVEL_ARTICLES_PURCHASED.get();
 				case CONTOUR_LINES_HILLSHADE_MAPS:
-					boolean srtmEnabled = OsmandPlugin.getEnabledPlugin(SRTMPlugin.class) != null;
-					return srtmEnabled && ctx.getSettings().DEPTH_CONTOURS_PURCHASED.get();
+					return OsmandPlugin.getEnabledPlugin(SRTMPlugin.class) != null;
 			}
 			return false;
 		}
@@ -234,6 +235,15 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 			String featureName = feature.toHumanString(ctx);
 			View featureRow = inflate(hasSelectedOsmLiveFeature(feature)
 					? R.layout.purchase_dialog_card_selected_row : R.layout.purchase_dialog_card_row, cardView);
+			AppCompatImageView imgView = (AppCompatImageView) featureRow.findViewById(R.id.img);
+			AppCompatImageView imgPurchasedView = (AppCompatImageView) featureRow.findViewById(R.id.img_purchased);
+			if (feature.isFeaturePurchased(app)) {
+				imgView.setVisibility(View.GONE);
+				imgPurchasedView.setVisibility(View.VISIBLE);
+			} else {
+				imgView.setVisibility(View.VISIBLE);
+				imgPurchasedView.setVisibility(View.GONE);
+			}
 			TextViewEx titleView = (TextViewEx) featureRow.findViewById(R.id.title);
 			titleView.setText(featureName);
 			featureRowDiv = featureRow.findViewById(R.id.div);
@@ -325,6 +335,15 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 			String featureName = feature.toHumanString(ctx);
 			featureRow = inflate(hasSelectedPlanTypeFeature(feature)
 					? R.layout.purchase_dialog_card_selected_row : R.layout.purchase_dialog_card_row, cardView);
+			AppCompatImageView imgView = (AppCompatImageView) featureRow.findViewById(R.id.img);
+			AppCompatImageView imgPurchasedView = (AppCompatImageView) featureRow.findViewById(R.id.img_purchased);
+			if (feature.isFeaturePurchased(app)) {
+				imgView.setVisibility(View.GONE);
+				imgPurchasedView.setVisibility(View.VISIBLE);
+			} else {
+				imgView.setVisibility(View.VISIBLE);
+				imgPurchasedView.setVisibility(View.GONE);
+			}
 			TextViewEx titleView = (TextViewEx) featureRow.findViewById(R.id.title);
 			titleView.setText(featureName);
 			rowsContainer.addView(featureRow);
