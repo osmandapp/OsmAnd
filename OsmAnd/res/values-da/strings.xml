@@ -2096,7 +2096,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
 \n 
 \n • Konfigurer hvordan og hvilket indhold der vises på betjeningspanelet 
 \n 
-\n • Forbigå betjeningspanel hvis der ønskes menubaserede kontrol 
+\n • Forbigå betjeningspanel hvis der ønskes menubaseret kontrol 
 \n 
 \n • Hent kort, områder ved at trykke direkte på verdenskortet 
 \n 
@@ -2104,7 +2104,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
 \n 
 \n • Forbedret IP og OSM redigeringsfunktionalitet 
 \n 
-\n • Administration af kortfilers nedlastningsstruktur og grænseflade er omarbejdet 
+\n • Hentning af kortfiler, struktur og grænseflade er omarbejdet 
 \n 
 \n og mere…</string>
     <string name="osm_save_offline">Gem offline</string>
@@ -3092,7 +3092,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="in_app_purchase">Køb i appen</string>
     <string name="in_app_purchase_desc">Engangsbetaling</string>
     <string name="purchase_unlim_title">Køb - %1$s</string>
-    <string name="purchase_subscription_title">Tilmeld - %1$s</string>
+    <string name="purchase_subscription_title">Abonner - %1$s</string>
 
     <string name="wikivoyage_offline">Wikivoyage er offline</string>
     
@@ -3112,7 +3112,7 @@ Repræsenterer område: %1$s x %2$s</string>
 	<string name="update_is_available">Opdatering er tilgængelig</string>
 	<string name="download_file">Hent fil</string>
     <string name="start_editing_card_image_text">Den fri rejseguide for verden, som alle kan redigere.</string>
-    <string name="welcome_to_open_beta_description">Guider er baseret på Wikivoyage. Under den åbne betatest er der mulighed for at evaluere alle funktioner gratis. Efter udgangen af beta-perioden, vil guider være tilgængelige for abonnenter af OsmAnd ubegrænset og ejerne af OsmAnd +</string>
+    <string name="welcome_to_open_beta_description">Guider er baseret på Wikivoyage. Under den åbne betatest er der mulighed for at evaluere alle funktioner gratis. Efter udgangen af beta-perioden, vil guider være tilgængelige for abonnenter af OsmAnd ubegrænset og ejerne af OsmAnd+</string>
     <string name="start_editing_card_description">Rediger en artikel på Wikivoyage, og vi håber, at du gør. Vi har brug for din viden, erfaring, talent og opmærksomhed</string>
     <string name="start_editing">Begynd redigering</string>
     <string name="get_unlimited_access">Få ubegrænset adgang</string>
@@ -3121,7 +3121,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="download_wikipedia_description">Hent Wikipedia-artikler for %1$s og læs dem offline.</string>
     <string name="download_wikipedia_label">Hent Wikipedia-data</string>
     <string name="open_in_browser_wiki">Åbn artiklen online</string>
-    <string name="open_in_browser_wiki_description">Se artikelen i en browser.</string>
+    <string name="open_in_browser_wiki_description">Se artikel i en browser.</string>
     <string name="download_wiki_region_placeholder">denne region</string>
     <string name="wiki_article_search_text">Søger efter den nødvendige wiki-artikel</string>
     <string name="wiki_article_not_found">Artikel ikke fundet</string>
