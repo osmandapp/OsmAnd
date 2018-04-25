@@ -64,7 +64,7 @@ public class ExploreTabFragment extends BaseOsmAndFragment {
 		popularDestinationsSearchTask.execute();
 	}
 
-	private static class PopularDestinationsSearchTask extends AsyncTask<ExploreRvAdapter, TravelDbHelper, List<TravelArticle>> {
+	private static class PopularDestinationsSearchTask extends AsyncTask<Void, TravelDbHelper, List<TravelArticle>> {
 
 		private TravelDbHelper travelDbHelper;
 		private WeakReference<OsmandActionBarActivity> weakContext;
@@ -84,14 +84,14 @@ public class ExploreTabFragment extends BaseOsmAndFragment {
 		}
 
 		@Override
-		protected void onPreExecute() {
-			super.onPreExecute();
-			weakProgressBar.get().setVisibility(View.VISIBLE);
+		protected List<TravelArticle> doInBackground(Void... voids) {
+			return travelDbHelper.searchPopular();
 		}
 
 		@Override
-		protected List<TravelArticle> doInBackground(ExploreRvAdapter... exploreRvAdapters) {
-			return travelDbHelper.searchPopular();
+		protected void onPreExecute() {
+			super.onPreExecute();
+			weakProgressBar.get().setVisibility(View.VISIBLE);
 		}
 
 		@Override
