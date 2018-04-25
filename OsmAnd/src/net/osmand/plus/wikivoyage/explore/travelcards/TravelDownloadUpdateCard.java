@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -26,8 +27,8 @@ public class TravelDownloadUpdateCard extends BaseTravelCard {
 
 	@Override
 	public void bindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder) {
-		if (viewHolder instanceof CardViewHolder) {
-			CardViewHolder holder = (CardViewHolder) viewHolder;
+		if (viewHolder instanceof DownloadUpdateVH) {
+			DownloadUpdateVH holder = (DownloadUpdateVH) viewHolder;
 			holder.title.setText(getTitle());
 			holder.icon.setImageDrawable(getIcon());
 			holder.description.setText(getDescription());
@@ -116,14 +117,14 @@ public class TravelDownloadUpdateCard extends BaseTravelCard {
 	}
 
 	private void onSecondaryBtnClick() {
-
+		Toast.makeText(app, "Secondary button", Toast.LENGTH_SHORT).show();
 	}
 
 	private void onPrimaryBtnClick() {
-
+		Toast.makeText(app, "Primary button", Toast.LENGTH_SHORT).show();
 	}
 
-	public class CardViewHolder extends RecyclerView.ViewHolder {
+	public static class DownloadUpdateVH extends RecyclerView.ViewHolder {
 
 		final TextView title;
 		final ImageView icon;
@@ -137,7 +138,7 @@ public class TravelDownloadUpdateCard extends BaseTravelCard {
 		final TextView primaryButton;
 
 		@SuppressWarnings("RedundantCast")
-		public CardViewHolder(View itemView) {
+		public DownloadUpdateVH(View itemView) {
 			super(itemView);
 			title = (TextView) itemView.findViewById(R.id.title);
 			icon = (ImageView) itemView.findViewById(R.id.icon);
