@@ -2955,11 +2955,14 @@
     <string name="travel_guide">Reiseguide</string>
     <string name="monthly_map_updates">Kartoppdateringer: <b>hver måned</b></string>
     <string name="daily_map_updates">Kartoppdateringer: <b>hver dag, hver time</b></string>
-    <string name="in_app_purchase">Kjøp som finner sted inne i programmet</string>
+    <string name="in_app_purchase">Kjøp i programmet</string>
     <string name="in_app_purchase_desc_ex">Når først kjøpt, vil det alltid være tilgjengelig for deg.</string>
     <string name="purchase_subscription_title">Abonner - %1$s</string>
 
     <string name="paid_app">Betalt program</string>
     <string name="paid_plugin">Betalt tillegg</string>
     <string name="contour_lines_hillshade_maps">Kart for koter og relieffskygger</string>
+    <string name="travel_guide_description">Bla gjennom Wikivoyage-guider i OsmAnd til de mest interessante stedene på planeten og uten en internettforbindelse.</string>
+    <string name="purchase_dialog_travel_description">For å lese reiseartikler frakoblet, må du kjøpe ett av følgende elementer.</string>
+    <string name="purchase_dialog_subtitle">Velg passende element:</string>
     </resources>
