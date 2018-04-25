@@ -2966,4 +2966,5 @@
     <string name="purchase_dialog_travel_description">For å lese reiseartikler frakoblet, må du kjøpe ett av følgende elementer.</string>
     <string name="purchase_dialog_subtitle">Velg passende element:</string>
     <string name="travel_card_download_descr">Last ned denne Wikivoyage-reiseguidefilen for å se artikler om steder rundt om i verden og uten en internettforbindelse.</string>
-	</resources>
+	<string name="popular_destinations">Populære reisemål</string>
+    </resources>
