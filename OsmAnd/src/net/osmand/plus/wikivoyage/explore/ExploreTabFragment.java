@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -29,6 +30,7 @@ public class ExploreTabFragment extends BaseOsmAndFragment {
 	private ExploreRvAdapter adapter = new ExploreRvAdapter();
 	private PopularDestinationsSearchTask popularDestinationsSearchTask;
 	private StartEditingTravelCard startEditingTravelCard;
+	private ProgressBar progressBar;
 
 	@Nullable
 	@Override
@@ -38,6 +40,7 @@ public class ExploreTabFragment extends BaseOsmAndFragment {
 		adapter.setItems(generateItems());
 
 		final RecyclerView rv = (RecyclerView) mainView.findViewById(R.id.recycler_view);
+		progressBar = (ProgressBar) mainView.findViewById(R.id.progressBar);
 		rv.setLayoutManager(new LinearLayoutManager(getContext()));
 		rv.setAdapter(adapter);
 
@@ -57,44 +60,42 @@ public class ExploreTabFragment extends BaseOsmAndFragment {
 	}
 
 	private void addPopularDestinations(OsmandApplication app, boolean nightMode) {
-		popularDestinationsSearchTask = new PopularDestinationsSearchTask(app.getTravelDbHelper(), getMyActivity(), adapter, nightMode, startEditingTravelCard);
+		popularDestinationsSearchTask = new PopularDestinationsSearchTask(app.getTravelDbHelper(), getMyActivity(), adapter, nightMode, startEditingTravelCard, progressBar);
 		popularDestinationsSearchTask.execute();
 	}
 
-	private static class PopularDestinationsSearchTask extends AsyncTask<ExploreRvAdapter, TravelDbHelper, List<Object>> {
+	private static class PopularDestinationsSearchTask extends AsyncTask<ExploreRvAdapter, TravelDbHelper, List<TravelArticle>> {
 
 		private TravelDbHelper travelDbHelper;
 		private WeakReference<OsmandActionBarActivity> weakContext;
 		private WeakReference<ExploreRvAdapter> weakAdapter;
 		private WeakReference<StartEditingTravelCard> weakStartEditingTravelCard;
 		private boolean nightMode;
+		private View progressBar;
 
 		PopularDestinationsSearchTask(TravelDbHelper travelDbHelper,
-		                              OsmandActionBarActivity context, ExploreRvAdapter adapter, boolean nightMode, StartEditingTravelCard startEditingTravelCard) {
+		                              OsmandActionBarActivity context, ExploreRvAdapter adapter, boolean nightMode, StartEditingTravelCard startEditingTravelCard, View progressBar) {
 			this.travelDbHelper = travelDbHelper;
 			weakContext = new WeakReference<>(context);
 			weakAdapter = new WeakReference<>(adapter);
 			weakStartEditingTravelCard = new WeakReference<>(startEditingTravelCard);
 			this.nightMode = nightMode;
+			this.progressBar = progressBar;
 		}
 
 		@Override
-		protected List<Object> doInBackground(ExploreRvAdapter... exploreRvAdapters) {
-			List<TravelArticle> articles = travelDbHelper.searchPopular();
-			List<Object> items = new ArrayList<>();
-			if (!articles.isEmpty()) {
-				OsmandActionBarActivity activity = weakContext.get();
-				if (activity != null) {
-					for (TravelArticle article : articles) {
-						items.add(new ArticleTravelCard(activity.getMyApplication(), nightMode, article, activity.getSupportFragmentManager()));
-					}
-				}
-			}
-			return items;
+		protected void onPreExecute() {
+			super.onPreExecute();
+			progressBar.setVisibility(View.VISIBLE);
 		}
 
 		@Override
-		protected void onPostExecute(List<Object> items) {
+		protected List<TravelArticle> doInBackground(ExploreRvAdapter... exploreRvAdapters) {
+			return travelDbHelper.searchPopular();
+		}
+
+		@Override
+		protected void onPostExecute(List<TravelArticle> items) {
 			OsmandActionBarActivity activity = weakContext.get();
 			ExploreRvAdapter adapter = weakAdapter.get();
 
@@ -102,10 +103,17 @@ public class ExploreTabFragment extends BaseOsmAndFragment {
 			StartEditingTravelCard startEditingTravelCard = weakStartEditingTravelCard.get();
 
 			adapterItems.remove(startEditingTravelCard);
-			adapterItems.add(activity.getResources().getString(R.string.popular_destinations));
-			adapterItems.addAll(items);
-			adapterItems.add(startEditingTravelCard);
 
+			if (!items.isEmpty()) {
+				if (activity != null) {
+					adapterItems.add(activity.getResources().getString(R.string.popular_destinations));
+					for (TravelArticle article : items) {
+						adapterItems.add(new ArticleTravelCard(activity.getMyApplication(), nightMode, article, activity.getSupportFragmentManager()));
+					}
+				}
+			}
+			progressBar.setVisibility(View.GONE);
+			adapterItems.add(startEditingTravelCard);
 			adapter.notifyDataSetChanged();
 		}
 	}
