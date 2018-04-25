@@ -210,7 +210,7 @@ public class TravelDbHelper {
 			TravelArticle travelArticle;
 			SQLiteCursor cursor = conn.rawQuery("SELECT * FROM "
 					+ ARTICLES_TABLE_NAME
-					+ " WHERE title IN (SELECT title FROM "
+					+ " WHERE article_id IN (SELECT article_id FROM "
 					+ ARTICLES_TABLE_NAME
 					+ " ORDER BY RANDOM() LIMIT 100) LIMIT 100", null);
 			if (cursor.moveToFirst()) {
