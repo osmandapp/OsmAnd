@@ -30,6 +30,7 @@ public class ArticleTravelCard extends BaseTravelCard {
 	private TravelArticle article;
 	private final Drawable readIcon;
 	private FragmentManager fragmentManager;
+	private boolean isLastItem;
 
 	public ArticleTravelCard(OsmandApplication app, boolean nightMode, TravelArticle article, FragmentManager fragmentManager) {
 		super(app, nightMode);
@@ -73,6 +74,8 @@ public class ArticleTravelCard extends BaseTravelCard {
 			holder.itemView.setOnClickListener(readClickListener);
 			holder.leftButton.setCompoundDrawablesWithIntrinsicBounds(readIcon, null, null, null);
 			updateSaveButton(holder);
+			holder.divider.setVisibility(isLastItem ? View.GONE : View.VISIBLE);
+			holder.shadow.setVisibility(isLastItem ? View.VISIBLE : View.GONE);
 		}
 	}
 
@@ -122,6 +125,10 @@ public class ArticleTravelCard extends BaseTravelCard {
 			divider = itemView.findViewById(R.id.divider);
 			shadow = itemView.findViewById(R.id.shadow);
 		}
+	}
+
+	public void setLastItem(boolean lastItem) {
+		isLastItem = lastItem;
 	}
 
 	@Override
