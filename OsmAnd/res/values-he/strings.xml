@@ -200,9 +200,13 @@
 	<string name="online_map_settings_descr">הגדרת מקורות אריחי מפה מקוונים או שמורים.</string>
 	
 	
-	<string name="osmand_rastermaps_plugin_description">הצגת תצורה להגדרת מגוון של אריחים מפה מקוונים או שמורים כמפת בסיס או כשכבת על / תחת. ניתן להכין מפות אלה באופן בלתי מקוון ואז להעתיק אותן לתיקייה של OsmAnd.</string>
+	<string name="osmand_rastermaps_plugin_description">עם התוסף הזה ניתן לגשת למגוון סוגים של מפות מקוונות (נקראות גם אריחים או מעובדות), מאריחים מוגדרים מראש של OpenStreetMap (כמו למשל Mapnik) עד תמונות לוויין ושכבות מיוחדות כגון מפות מזג אוויר, מפות אקלים, מפות גאולוגיות, מפות הצללה ועוד.
+\n
+\nכל אחת מהמפות האלה יכולה לשמש בתור המפה הראשית (בסיס) שתוצג במסך המפה של OsmAnd או כשכבה מעל או מתחת למפת בסיס אחרת (כמו המפות התקניות הבלתי מקוונות של OsmAnd). כדי שניתן היה לראות את המפות שמתחת, ניתן להסתיר פריטים מסוימים במפות הווקטורים של OsmAnd דרך התפריט ‚הגדרת מפה’ לפי דרישתך.
+\n
+\nמפות אריחים ניתן להוריד ישירות ממקורות מקוונים או שניתן להכין אותן לשימוש בלתי מקוון (ולהעתיק אותן לתיקיית הנתונים של OsmAnd) כמסד נתונים מסוג SQLite אותו ניתן לייצר על ידי מגוון כלי צד־שלישי להכנת מפות.</string>
 	<string name="osmand_background_plugin_description">הצגת הגדרות להפעלת מעקב וניווט במצב רקע על ידי השכמת התקן ה־GPS מדי פעם בפעם (בזמן שהמסך כבוי).</string>
-	<string name="osmand_accessibility_description">הצגת הגדרות לתכונות נגישות מיוחדות.</string>
+	<string name="osmand_accessibility_description">תוסף זה הופך את תכונות הנגישות של ההתקן לזמינות ישירות ב־OsmAnd. התוסף מאפשר להגדיר את מהירות הדיבור של מנגנון הטקסט לדיבור, להגדיר ניווט בעזרת חצים על המסך, להשתמש בכדור מעקב לשליטה בתקריב או משוב של טקסט לדיבור, למשל לצורך הכרזה על המיקום שלך אוטומטית.</string>
 	
 	
 	
@@ -677,14 +681,14 @@
 	<string name="transport_stops">תחנות</string>
 	<string name="transport_Routes">מסלולים</string>
 	<string name="add_new_rule">הוספת כלל חדש</string>
-	<string name="transport_search_after">מסלול עוקב</string>	
-	<string name="transport_search_before">מסלול קודם</string>
+	<string name="transport_search_after">תכנית מסלול עוקבת</string>	
+	<string name="transport_search_before">תכנית מסלול קודמת</string>
 	<string name="transport_finish_search">סיום החיפוש</string>
 	<string name="transport_stop_to_go_out">נא לבחור בתחנת הירידה</string>
 	<string name="transport_to_go_after">מרחק קודם</string>
 	<string name="transport_to_go_before">מרחק עוקב</string>
 	<string name="transport_stops_to_pass">תחנות לעבור</string>
-	<string name="transport_route_distance">מרחק המסלול</string>
+	<string name="transport_route_distance">מרחק תכנית המסלול</string>
 	<string name="transport">תחבורה</string>
 	<string name="shared_string_ok">אישור</string>
 	<string name="show_transport_over_map_description">הצגת תחנות תחבורה ציבורית במפה.</string>
@@ -1114,7 +1118,7 @@
     <string name="plugin_distance_point">נקודה</string>
     <string name="gpx_file_name">קובץ שם ה־GPX</string>
     <string name="gpx_saved_sucessfully">קובץ ה־GPX נשמר אל {0}</string>
-    <string name="osmand_distance_planning_plugin_description">תוסף זה מספק וידג׳ט על המסך שמאפשר ליצור נתיבים על ידי לחיצה על המפה או להשתמש או לשנות קובץ GPX קיים, לטובת תכנון טיול ומדידת את המרחק בין הנקודות. ניתן לשמור את התוצאות בקובץ GPX, בו ניתן להשתמש לאחר מכן להנחיה.</string>
+    <string name="osmand_distance_planning_plugin_description">תוסף זה מספק וידג׳ט על המפה שמאפשר ליצור נתיבים על ידי לחיצה על המפה או להשתמש או לשנות קובץ GPX קיים, לטובת תכנון טיול ומדידת מרחק בין נקודות. ניתן לשמור את התוצאות בקובץ GPX, בו ניתן להשתמש לאחר מכן להנחיה.</string>
     <string name="osmand_distance_planning_plugin_name">מחשבון מרחק וכלי תכנון</string>
     <string name="shared_string_do_not_show_again">לא להציג שוב</string>
     <string name="distance_measurement_start_editing">להתחיל בעריכה</string>
@@ -2806,4 +2810,52 @@
     <string name="travel_guide">מדריך טיולים</string>
     <string name="travel_guide_description">ניתן לעיין במדריכים של ויקימסע כדי למצוא את המקומות המעניינים ביותר ברחבי העולם בתוך OsmAnd ללא חיבור לאינטרנט.</string>
     <string name="contour_lines_hillshade_maps">קווי מתאר ומפות הצללה</string>
+    <string name="popular_destinations">יעדים נפוצים</string>
+    <string name="release_2_8">\\022 סמני מפה שנבנו מחדש עם קווי הנחיה ותכנון מסלול
+\n
+\n • כלי מדידת מרחק המציע תכונת הצמדה לתוואי הדרך ושמירת נקודות כמסלול
+\n
+\n • OsmAnd חי: תיקוני באגים, נתונים חדשים בשרת כל חצי דקה, העדכונים מוטמעים בניווט
+\n
+\n</string>
+    <string name="release_2_9">\\022 תפריט ההקשר עודכן: הצגה כאשר נקודת העניין נפתחת / נסגרת
+\n
+\n • תפריט תעבורה: כל המסלולים הזמינים מופיעים למעלה
+\n
+\n • ויקיפדיה: נוסף כפתור לפתוח את הערך המקורי, תצוגת הערכים עודכנה
+\n
+\n • נתיב: נוספה אפשרות להחליף את נקודות ההתחלה והסיום בנגיעה אחת
+\n
+\n • הערות: הוספת מיון לפי סוג ותאריך
+\n
+\n • עריכת OSM: הצגת סמל ושם של קטגוריית נקודת העניין, הצגת פעולות שהושלמו
+\n
+\n • מסך הוספת נקודות ציון מהיר ליצירה מהירה של סמנים
+\n
+\n • זיהוי סימני עצור נחשב כעת להנחיית נהיגה
+\n
+\n • אלגוריתם חדש מספק ערכי עליה/ירידה משמעותיים למסלולי GPX
+\n
+\n • זמן טיול רגלי בהתחשבות בתנאי שטח (עליות - לפי כלל נייסמית׳)
+\n
+\n</string>
+    <string name="release_2_5">\\022 סמלים תומכי מגע על המפה
+\n
+\n • סינון בחיפוש רב עצמה של נקודות עניין: חיפוש מסעדות לפי סוג מטבח או מתחם לינה עם אמצעי נוחות מסוימים
+\n
+\n • סגנון מפה טופולוגית חדש לרוכבי אופניים ומטפסי הרים
+\n
+\n • הקלטת טיולים מורחבת
+\n
+\n • שיפור התרעות ניווט (Android Wear)
+\n
+\n • שיפורים ותיקוני באגים נוספים
+\n
+\n ועוד…</string>
+    <string name="osm_live_header">מינוי זה מאפשר לך לקבל עדכונים שעתיים של כל המפות ברחבי העולם. חלק מההכנסה חוזר אל קהילת OSM והוא מוענק לכל תורם OSM. אם OsmAnd ו־OSM נושאים חן בעיניך וברצונך לתמוך ולהיתמך על ידיהם, זו הדרך המושלמת לעשות זאת.</string>
+    <string name="record_plugin_description">תוסף זה מפעיל את התכונה להקלטת ולשמירת המסלולים שלך על ידי נגיעה באופן ידני בווידג׳ט רישום ה־GPX במסך המפה, או גם לערוך רישום של כל נתיבי הניווט שלך לקובץ GPX.
+\n
+\nניתן לשתף נתיבים מוקלטים עם חבריך או להשתמש בהם כתרומה ל־OSM. אתלטים יכולים להשתמש במסלולים מוקלטים כדי לעקוב אחר האימונים שלהם. ניתן לבצע ניתוח מסלול בסיסי ישירות ב־OsmAnd, כמו זמני הקפה, מהירות ממוצעת וכו׳, כמו כן, ניתן לנתח את המסלולים בשלב מאוחר יותר על ידי כלי ניתוח מיוחדים מגורמי צד־שלישי.</string>
+    <string name="watch">צפייה</string>
+    <string name="save_global_track_interval_descr">נא לבחור מרווח בין הקלטות כלליות של מסלול (מופעל דרך וידג׳ט ה־GPX על המפה).</string>
     </resources>
