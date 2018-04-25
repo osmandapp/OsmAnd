@@ -831,7 +831,11 @@ public class OsmandApplication extends MultiDexApplication {
 		}
 		serviceIntent.putExtra(NavigationService.USAGE_INTENT, intent);
 		serviceIntent.putExtra(NavigationService.USAGE_OFF_INTERVAL, interval);
-		startService(serviceIntent);
+		if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+			startForegroundService(serviceIntent);
+		} else {
+			startService(serviceIntent);
+		}
 		//getNotificationHelper().showNotifications();
 	}
 
