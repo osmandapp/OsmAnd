@@ -3050,4 +3050,7 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="wiki_article_search_text">Chirchende s\'artìculu de Wikipedia netzessàriu</string>
     <string name="wiki_article_not_found">Artìculu non agatadu</string>
     <string name="how_to_open_wiki_title">Comente abèrrere sos artìculos de Wikipedia?</string>
-</resources>
+<string name="popular_destinations">Destinatziones popolares</string>
+    <string name="paid_app">Aplicatzione a pagamentu</string>
+    <string name="paid_plugin">Estensione a pagamentu</string>
+    </resources>
