@@ -1,6 +1,5 @@
 package net.osmand.plus.srtmplugin;
 
-import android.content.Intent;
 import android.view.View;
 import android.widget.ArrayAdapter;
 
@@ -11,8 +10,8 @@ import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.PluginActivity;
 import net.osmand.plus.activities.SettingsActivity;
+import net.osmand.plus.chooseplan.ChoosePlanDialogFragment;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadResources;
@@ -135,9 +134,12 @@ public class ContourLinesMenu {
 						}
 					});
 				} else if (itemId == R.string.srtm_plugin_name) {
+					ChoosePlanDialogFragment.showHillshadeSrtmPluginInstance(mapActivity.getSupportFragmentManager());
+					/*
 					Intent intent = new Intent(mapActivity, PluginActivity.class);
 					intent.putExtra(PluginActivity.EXTRA_PLUGIN_ID, plugin.getId());
 					mapActivity.startActivity(intent);
+					*/
 					closeDashboard(mapActivity);
 				} else if (contourWidthProp != null && itemId == contourWidthName.hashCode()) {
 					plugin.selectPropertyValue(mapActivity, contourWidthProp, widthPref, new Runnable() {
