@@ -20,7 +20,6 @@ import java.util.List;
 public class ExploreRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
 	private static final int HEADER_TYPE = 3;
-	private static final int ITEM_TYPE = 4;
 
 	private final OsmandSettings settings;
 
@@ -36,8 +35,6 @@ public class ExploreRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 	@NonNull
 	@Override
 	public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-		boolean header = viewType == HEADER_TYPE;
-		RecyclerView.ViewHolder holder = null;
 		View itemView = null;
 		int layoutId = 0;
 		if (viewType == OpenBetaTravelCard.TYPE) {
