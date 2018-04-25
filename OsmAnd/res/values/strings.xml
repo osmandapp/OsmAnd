@@ -1591,6 +1591,7 @@
     <string name="layer_hillshade">Hillshade layer</string>
     <string name="map_widget_gps_info">GPS info</string>
     <string name="access_arrival_time">Arrival time</string>
+    <string name="access_intermediate_arrival_time">Intermediate arrival time</string>
     <string name="item_checked">checked</string>
     <string name="item_unchecked">unchecked</string>
     <string name="prefer_motorways">Prefer motorways</string>
@@ -1693,6 +1694,7 @@
     <string name="arrived_at_intermediate_point">You have arrived at your intermediate destination</string>
     <string name="context_menu_item_intermediate_point">Add as intermediate destination</string>
     <string name="map_widget_intermediate_distance">Intermediate destination</string>
+    <string name="map_widget_intermediate_time">Intermediate time</string>
     <string name="ending_point_too_far">Ending point too far from nearest road.</string>
     <string name="add_tag">Add Tag</string>
     <string name="btn_advanced_mode">Advanced Mode…</string>

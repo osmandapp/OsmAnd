@@ -700,6 +700,10 @@ public class RoutingHelper {
 		return route.getLeftTime(lastFixedLocation);
 	}
 
+	public int getLeftTimeNextIntermediate() {
+		return route.getLeftTimeToNextIntermediate(lastFixedLocation);
+	}
+
 	public OsmandSettings getSettings() {
 		return settings;
 	}
