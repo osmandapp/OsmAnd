@@ -252,7 +252,7 @@ public class InAppPurchaseHelper {
 	}
 
 	public boolean needRequestInventory() {
-		return !ctx.getSettings().BILLING_PURCHASE_TOKEN_SENT.get()
+		return (ctx.getSettings().LIVE_UPDATES_PURCHASED.get() && !ctx.getSettings().BILLING_PURCHASE_TOKEN_SENT.get())
 				|| System.currentTimeMillis() - lastValidationCheckTime > PURCHASE_VALIDATION_PERIOD_MSEC;
 	}
 
