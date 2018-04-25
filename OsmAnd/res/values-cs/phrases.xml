@@ -3583,4 +3583,13 @@
 	<string name="poi_water_purification_none">Žádné</string>
 	<string name="poi_water_purification_chlorine">Chlór</string>
 	<string name="poi_water_purification_reverse_osmosis">Reverzní osmóza</string>
+	<string name="poi_water_supply_water_well">Studna</string>
+	<string name="poi_water_supply_pipeline">Potrubí</string>
+	<string name="poi_water_supply_running_water">Tekoucí voda</string>
+	<string name="poi_water_supply_borehole">Vrt</string>
+	<string name="poi_water_supply_water_tank">Vodní nádrž</string>
+	<string name="poi_water_supply_bottled_water">Balená voda</string>
+
+	<string name="poi_water_place_access_community">Komunita</string>
+	<string name="poi_water_place_access_family">Rodina</string>
 	</resources>
