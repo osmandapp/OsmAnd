@@ -2967,4 +2967,6 @@
     <string name="purchase_dialog_subtitle">Velg passende element:</string>
     <string name="travel_card_download_descr">Last ned denne Wikivoyage-reiseguidefilen for å se artikler om steder rundt om i verden og uten en internettforbindelse.</string>
 	<string name="popular_destinations">Populære reisemål</string>
-    </resources>
+    <string name="download_wikipedia_label">Last ned Wikipedia-data</string>
+    <string name="how_to_open_wiki_title">Hvordan åpne Wikipedia-artikler?</string>
+</resources>
