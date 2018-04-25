@@ -108,7 +108,7 @@ public class ExploreRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 	public int getArticleItemCount() {
 		int count = 0;
 		for (Object o : items) {
-			if (o instanceof TravelArticle) {
+			if (o instanceof ArticleTravelCard) {
 				count++;
 			}
 		}
