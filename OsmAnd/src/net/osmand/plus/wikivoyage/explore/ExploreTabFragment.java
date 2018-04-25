@@ -70,8 +70,8 @@ public class ExploreTabFragment extends BaseOsmAndFragment {
 		private WeakReference<OsmandActionBarActivity> weakContext;
 		private WeakReference<ExploreRvAdapter> weakAdapter;
 		private WeakReference<StartEditingTravelCard> weakStartEditingTravelCard;
+		private WeakReference<View> weakProgressBar;
 		private boolean nightMode;
-		private View progressBar;
 
 		PopularDestinationsSearchTask(TravelDbHelper travelDbHelper,
 		                              OsmandActionBarActivity context, ExploreRvAdapter adapter, boolean nightMode, StartEditingTravelCard startEditingTravelCard, View progressBar) {
@@ -79,14 +79,14 @@ public class ExploreTabFragment extends BaseOsmAndFragment {
 			weakContext = new WeakReference<>(context);
 			weakAdapter = new WeakReference<>(adapter);
 			weakStartEditingTravelCard = new WeakReference<>(startEditingTravelCard);
+			weakProgressBar = new WeakReference<>(progressBar);
 			this.nightMode = nightMode;
-			this.progressBar = progressBar;
 		}
 
 		@Override
 		protected void onPreExecute() {
 			super.onPreExecute();
-			progressBar.setVisibility(View.VISIBLE);
+			weakProgressBar.get().setVisibility(View.VISIBLE);
 		}
 
 		@Override
@@ -112,7 +112,7 @@ public class ExploreTabFragment extends BaseOsmAndFragment {
 					}
 				}
 			}
-			progressBar.setVisibility(View.GONE);
+			weakProgressBar.get().setVisibility(View.GONE);
 			adapterItems.add(startEditingTravelCard);
 			adapter.notifyDataSetChanged();
 		}
