@@ -70,9 +70,6 @@ public class TravelDbHelper {
 			ARTICLES_COL_AGGREGATED_PART_OF +
 			" FROM " + ARTICLES_TABLE_NAME;
 
-	private static final String POPULAR_ARTICLES_TABLE_SELECT = "SELECT *" +
-			" FROM " + ARTICLES_TABLE_NAME + " ORDER BY RANDOM() LIMIT 100";
-
 	private static final String SEARCH_TABLE_NAME = "wikivoyage_search";
 	private static final String SEARCH_COL_SEARCH_TERM = "search_term";
 	private static final String SEARCH_COL_CITY_ID = "city_id";
@@ -208,7 +205,7 @@ public class TravelDbHelper {
 		SQLiteConnection conn = openConnection();
 		if (conn != null) {
 			TravelArticle travelArticle;
-			SQLiteCursor cursor = conn.rawQuery(POPULAR_ARTICLES_TABLE_SELECT, null);
+			SQLiteCursor cursor = conn.rawQuery("SELECT * FROM " + ARTICLES_TABLE_NAME + " ORDER BY RANDOM() LIMIT 100", null);
 			if (cursor.moveToFirst()) {
 				do {
 					travelArticle = readArticle(cursor);
