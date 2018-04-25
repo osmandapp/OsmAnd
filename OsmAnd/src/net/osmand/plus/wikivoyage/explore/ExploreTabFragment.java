@@ -23,7 +23,6 @@ import net.osmand.plus.wikivoyage.explore.travelcards.OpenBetaTravelCard;
 import net.osmand.plus.wikivoyage.explore.travelcards.StartEditingTravelCard;
 import net.osmand.plus.wikivoyage.explore.travelcards.TravelDownloadUpdateCard;
 
-import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,8 +31,6 @@ public class ExploreTabFragment extends BaseOsmAndFragment {
 	private static final int DOWNLOAD_UPDATE_CARD_POSITION = 0;
 
 	private ExploreRvAdapter adapter = new ExploreRvAdapter();
-
-	private AddDownloadUpdateCardTask addDownloadUpdateCardTask;
 
 	@Nullable
 	@Override
@@ -49,19 +46,6 @@ public class ExploreTabFragment extends BaseOsmAndFragment {
 		return mainView;
 	}
 
-	@Override
-	public void onDestroyView() {
-		cancelAddDownloadUpdateCardTask();
-		super.onDestroyView();
-	}
-
-	private void cancelAddDownloadUpdateCardTask() {
-		if (addDownloadUpdateCardTask != null) {
-			addDownloadUpdateCardTask.cancel(true);
-			addDownloadUpdateCardTask = null;
-		}
-	}
-
 	private List<Object> generateItems() {
 		final List<Object> items = new ArrayList<>();
 		final OsmandApplication app = getMyApplication();
@@ -75,9 +59,19 @@ public class ExploreTabFragment extends BaseOsmAndFragment {
 		return items;
 	}
 
-	private void addDownloadUpdateCard(boolean nightMode) {
-		addDownloadUpdateCardTask = new AddDownloadUpdateCardTask(getMyApplication(), adapter, nightMode);
-		addDownloadUpdateCardTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+	private void addDownloadUpdateCard(final boolean nightMode) {
+		final OsmandApplication app = getMyApplication();
+		new CheckWorldWikivoyageTask(app, new CheckWorldWikivoyageTask.Callback() {
+			@Override
+			public void onCheckFinished(boolean worldWikivoyageDownloaded) {
+				if (!worldWikivoyageDownloaded && adapter != null) {
+					TravelDownloadUpdateCard card = new TravelDownloadUpdateCard(app, nightMode, true);
+					if (adapter.addItem(DOWNLOAD_UPDATE_CARD_POSITION, card)) {
+						adapter.notifyDataSetChanged();
+					}
+				}
+			}
+		}).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
 	private void addPopularDestinations(@NonNull List<Object> items, boolean nightMode) {
@@ -91,23 +85,19 @@ public class ExploreTabFragment extends BaseOsmAndFragment {
 		}
 	}
 
-	private static class AddDownloadUpdateCardTask extends AsyncTask<Void, Void, TravelDownloadUpdateCard> {
+	private static class CheckWorldWikivoyageTask extends AsyncTask<Void, Void, Boolean> {
 
 		private OsmandApplication app;
-		private WeakReference<ExploreRvAdapter> adapterWr;
+		private Callback callback;
 
-		private boolean nightMode;
-
-		AddDownloadUpdateCardTask(OsmandApplication app, ExploreRvAdapter adapter, boolean nightMode) {
+		CheckWorldWikivoyageTask(OsmandApplication app, Callback callback) {
 			this.app = app;
-			this.adapterWr = new WeakReference<>(adapter);
-			this.nightMode = nightMode;
+			this.callback = callback;
 		}
 
 		@Override
-		protected TravelDownloadUpdateCard doInBackground(Void... voids) {
+		protected Boolean doInBackground(Void... voids) {
 			final boolean[] worldWikivoyageDownloaded = new boolean[1];
-
 			new LocalIndexHelper(app).getLocalTravelFiles(new AbstractLoadLocalIndexTask() {
 				@Override
 				public void loadFile(LocalIndexInfo... loaded) {
@@ -118,25 +108,19 @@ public class ExploreTabFragment extends BaseOsmAndFragment {
 					}
 				}
 			});
-
-			if (!worldWikivoyageDownloaded[0] && !isCancelled()) {
-				TravelDownloadUpdateCard card = new TravelDownloadUpdateCard(app, nightMode, true);
-				return card;
-			}
-
-			return null;
+			return worldWikivoyageDownloaded[0];
 		}
 
 		@Override
-		protected void onPostExecute(TravelDownloadUpdateCard card) {
-			if (!isCancelled() && card != null) {
-				ExploreRvAdapter adapter = adapterWr.get();
-				if (adapter != null) {
-					if (adapter.addItem(DOWNLOAD_UPDATE_CARD_POSITION, card)) {
-						adapter.notifyItemInserted(DOWNLOAD_UPDATE_CARD_POSITION);
-					}
-				}
+		protected void onPostExecute(Boolean worldWikivoyageDownloaded) {
+			if (callback != null) {
+				callback.onCheckFinished(worldWikivoyageDownloaded);
 			}
+			callback = null;
+		}
+
+		interface Callback {
+			void onCheckFinished(boolean worldWikivoyageDownloaded);
 		}
 	}
 }
