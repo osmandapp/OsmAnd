@@ -7,6 +7,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.OsmandInAppPurchaseActivity;
 import net.osmand.plus.download.DownloadValidationManager;
+import net.osmand.plus.inapp.InAppPurchaseHelper;
 
 public class ChoosePlanFreeBannerDialogFragment extends ChoosePlanDialogFragment {
 	public static final String TAG = ChoosePlanFreeBannerDialogFragment.class.getSimpleName();
@@ -77,6 +78,21 @@ public class ChoosePlanFreeBannerDialogFragment extends ChoosePlanDialogFragment
 		} else {
 			return getString(R.string.paid_app);
 		}
+	}
+
+	@Override
+	public String getPlanTypeButtonTitle() {
+		InAppPurchaseHelper purchaseHelper = getOsmandApplication().getInAppPurchaseHelper();
+		if (purchaseHelper == null || !purchaseHelper.hasPrices()) {
+			return getString(R.string.purchase_unlim_title, getString(R.string.full_version_price));
+		} else {
+			return getString(R.string.purchase_unlim_title, purchaseHelper.getFullVersionPrice());
+		}
+	}
+
+	@Override
+	public String getPlanTypeButtonDescription() {
+		return getString(R.string.in_app_purchase_desc);
 	}
 
 	@Override

@@ -127,6 +127,7 @@
 		android:layout_marginRight="@dimen/bottom_sheet_content_margin_small">
 
 		<FrameLayout
+			android:id="@+id/secondary_btn_container"
 			android:layout_width="0dp"
 			android:layout_height="wrap_content"
 			android:layout_weight="1"
@@ -156,6 +157,7 @@
 			android:layout_height="match_parent"/>
 
 		<FrameLayout
+			android:id="@+id/primary_btn_container"
 			android:layout_width="0dp"
 			android:layout_height="wrap_content"
 			android:layout_weight="1"

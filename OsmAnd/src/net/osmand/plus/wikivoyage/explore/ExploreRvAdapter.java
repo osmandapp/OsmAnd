@@ -15,6 +15,8 @@ import net.osmand.plus.wikivoyage.explore.travelcards.OpenBetaTravelCard;
 import net.osmand.plus.wikivoyage.explore.travelcards.OpenBetaTravelCard.OpenBetaTravelVH;
 import net.osmand.plus.wikivoyage.explore.travelcards.StartEditingTravelCard;
 import net.osmand.plus.wikivoyage.explore.travelcards.StartEditingTravelCard.StartEditingTravelVH;
+import net.osmand.plus.wikivoyage.explore.travelcards.TravelDownloadUpdateCard;
+import net.osmand.plus.wikivoyage.explore.travelcards.TravelDownloadUpdateCard.DownloadUpdateVH;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +43,9 @@ public class ExploreRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 						: R.layout.wikivoyage_article_card;
 				return new ArticleTravelVH(inflate(parent, layoutId));
 
+			case TravelDownloadUpdateCard.TYPE:
+				return new DownloadUpdateVH(inflate(parent, R.layout.travel_download_update_card));
+
 			case HEADER_TYPE:
 				return new HeaderVH(inflate(parent, R.layout.wikivoyage_list_header));
 
@@ -62,15 +67,13 @@ public class ExploreRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 			holder.title.setText((String) item);
 			holder.description.setText(String.valueOf(getArticleItemCount()));
 		} else if (viewHolder instanceof ArticleTravelVH && item instanceof ArticleTravelCard) {
-			ArticleTravelCard articleTravelCard = (ArticleTravelCard) item;
-			articleTravelCard.setLastItem(position == getLastArticleItemIndex());
-			articleTravelCard.bindViewHolder(viewHolder);
+			((ArticleTravelCard) item).bindViewHolder(viewHolder);
 		} else if (viewHolder instanceof OpenBetaTravelVH && item instanceof OpenBetaTravelCard) {
-			OpenBetaTravelCard openBetaTravelCard = (OpenBetaTravelCard) item;
-			openBetaTravelCard.bindViewHolder(viewHolder);
+			((OpenBetaTravelCard) item).bindViewHolder(viewHolder);
 		} else if (viewHolder instanceof StartEditingTravelVH && item instanceof StartEditingTravelCard) {
-			StartEditingTravelCard startEditingTravelCard = (StartEditingTravelCard) item;
-			startEditingTravelCard.bindViewHolder(viewHolder);
+			((StartEditingTravelCard) item).bindViewHolder(viewHolder);
+		} else if (viewHolder instanceof DownloadUpdateVH && item instanceof TravelDownloadUpdateCard) {
+			((TravelDownloadUpdateCard) item).bindViewHolder(viewHolder);
 		}
 	}
 
@@ -85,6 +88,8 @@ public class ExploreRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 			return ((StartEditingTravelCard) object).getCardType();
 		} else if (object instanceof ArticleTravelCard) {
 			return ((ArticleTravelCard) object).getCardType();
+		} else if (object instanceof TravelDownloadUpdateCard) {
+			return ((TravelDownloadUpdateCard) object).getCardType();
 		}
 		return -1;
 	}
@@ -94,7 +99,7 @@ public class ExploreRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 		return items.size();
 	}
 
-	private int getArticleItemCount() {
+	public int getArticleItemCount() {
 		int count = 0;
 		for (Object o : items) {
 			if (o instanceof ArticleTravelCard) {
@@ -102,16 +107,6 @@ public class ExploreRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 			}
 		}
 		return count;
-	}
-
-	private int getLastArticleItemIndex() {
-		for (int i = items.size() - 1; i > 0; i--) {
-			Object o = items.get(i);
-			if (o instanceof ArticleTravelCard) {
-				return i;
-			}
-		}
-		return 0;
 	}
 
 	private Object getItem(int position) {
@@ -126,6 +121,14 @@ public class ExploreRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 	public void setItems(List<Object> items) {
 		this.items.clear();
 		this.items.addAll(items);
+	}
+
+	public boolean addItem(int position, Object item) {
+		if (position >= 0 && position <= items.size()) {
+			items.add(position, item);
+			return true;
+		}
+		return false;
 	}
 
 	static class HeaderVH extends RecyclerView.ViewHolder {

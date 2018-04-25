@@ -199,6 +199,12 @@ public class LocalIndexHelper {
 		return result;
 	}
 
+	public List<LocalIndexInfo> getLocalTravelFiles(AbstractLoadLocalIndexTask loadTask) {
+		List<LocalIndexInfo> result = new ArrayList<>();
+		loadTravelData(app.getAppPath(IndexConstants.WIKIVOYAGE_INDEX_DIR), result, loadTask);
+		return result;
+	}
+
 	public List<LocalIndexInfo> getLocalFullMaps(AbstractLoadLocalIndexTask loadTask) {
 		Map<String, String> loadedMaps = app.getResourceManager().getIndexFileNames();
 		List<LocalIndexInfo> result = new ArrayList<>();

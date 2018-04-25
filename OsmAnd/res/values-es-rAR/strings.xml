@@ -3024,4 +3024,7 @@ Lon %2$s</string>
     <string name="wiki_article_search_text">Buscando el artículo wiki necesario</string>
     <string name="wiki_article_not_found">Artículo no encontrado</string>
     <string name="how_to_open_wiki_title">¿Cómo abrir artículos de Wikipedia?</string>
-</resources>
+<string name="popular_destinations">Destinos populares</string>
+    <string name="paid_app">Aplicación de pago</string>
+    <string name="paid_plugin">Complemento de pago</string>
+    </resources>

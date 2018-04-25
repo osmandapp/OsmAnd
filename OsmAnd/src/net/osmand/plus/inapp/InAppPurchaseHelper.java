@@ -42,6 +42,7 @@ public class InAppPurchaseHelper {
 	private String liveUpdatesPrice;
 	private String fullVersionPrice;
 	private String depthContoursPrice;
+	private String contourLinesPrice;
 
 	public static final String SKU_FULL_VERSION_PRICE = "osmand_full_version_price";
 
@@ -49,9 +50,12 @@ public class InAppPurchaseHelper {
 	private static final String SKU_LIVE_UPDATES_FREE = "osm_free_live_subscription_2";
 	private static final String SKU_DEPTH_CONTOURS_FULL = "net.osmand.seadepth_plus";
 	private static final String SKU_DEPTH_CONTOURS_FREE = "net.osmand.seadepth";
+	private static final String SKU_CONTOUR_LINES_FULL = "net.osmand.contourlines_plus";
+	private static final String SKU_CONTOUR_LINES_FREE = "net.osmand.contourlines";
 
 	public static String SKU_LIVE_UPDATES;
 	public static String SKU_DEPTH_CONTOURS;
+	public static String SKU_CONTOUR_LINES;
 
 	private static final long PURCHASE_VALIDATION_PERIOD_MSEC = 1000 * 60 * 60 * 24; // daily
 	// (arbitrary) request code for the purchase flow
@@ -133,6 +137,10 @@ public class InAppPurchaseHelper {
 		return depthContoursPrice;
 	}
 
+	public String getContourLinesPrice() {
+		return contourLinesPrice;
+	}
+
 	public String getSkuLiveUpdates() {
 		return SKU_LIVE_UPDATES;
 	}
@@ -155,6 +163,13 @@ public class InAppPurchaseHelper {
 				SKU_DEPTH_CONTOURS = SKU_DEPTH_CONTOURS_FREE;
 			} else {
 				SKU_DEPTH_CONTOURS = SKU_DEPTH_CONTOURS_FULL;
+			}
+		}
+		if (SKU_CONTOUR_LINES == null) {
+			if (Version.isFreeVersion(ctx)) {
+				SKU_CONTOUR_LINES = SKU_CONTOUR_LINES_FREE;
+			} else {
+				SKU_CONTOUR_LINES = SKU_CONTOUR_LINES_FULL;
 			}
 		}
 	}
@@ -237,7 +252,7 @@ public class InAppPurchaseHelper {
 	}
 
 	public boolean needRequestInventory() {
-		return !ctx.getSettings().BILLING_PURCHASE_TOKEN_SENT.get()
+		return (ctx.getSettings().LIVE_UPDATES_PURCHASED.get() && !ctx.getSettings().BILLING_PURCHASE_TOKEN_SENT.get())
 				|| System.currentTimeMillis() - lastValidationCheckTime > PURCHASE_VALIDATION_PERIOD_MSEC;
 	}
 
@@ -250,6 +265,7 @@ public class InAppPurchaseHelper {
 				List<String> skus = new ArrayList<>();
 				skus.add(SKU_LIVE_UPDATES);
 				skus.add(SKU_DEPTH_CONTOURS);
+				skus.add(SKU_CONTOUR_LINES);
 				skus.add(SKU_FULL_VERSION_PRICE);
 				try {
 					mHelper.queryInventoryAsync(true, skus, mGotInventoryListener);
@@ -369,6 +385,10 @@ public class InAppPurchaseHelper {
 			if (inventory.hasDetails(SKU_DEPTH_CONTOURS)) {
 				SkuDetails depthContoursDetails = inventory.getSkuDetails(SKU_DEPTH_CONTOURS);
 				depthContoursPrice = depthContoursDetails.getPrice();
+			}
+			if (inventory.hasDetails(SKU_CONTOUR_LINES)) {
+				SkuDetails contourLinesDetails = inventory.getSkuDetails(SKU_CONTOUR_LINES);
+				contourLinesPrice = contourLinesDetails.getPrice();
 			}
 			OsmandSettings settings = ctx.getSettings();
 			settings.INAPPS_READ.set(true);

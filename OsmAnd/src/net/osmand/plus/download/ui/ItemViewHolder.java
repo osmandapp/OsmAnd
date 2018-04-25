@@ -5,7 +5,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AlertDialog;
@@ -21,7 +20,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import net.osmand.map.WorldRegion;
-import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.LocalIndexHelper.LocalIndexType;
 import net.osmand.plus.activities.LocalIndexInfo;
@@ -34,7 +32,6 @@ import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.download.ui.LocalIndexesFragment.LocalIndexOperationTask;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
-import net.osmand.plus.srtmplugin.SRTMPlugin;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -346,13 +343,7 @@ public class ItemViewHolder {
 									context.getString(R.string.activate_seamarks_plugin), Toast.LENGTH_SHORT).show();
 							break;
 						case ASK_FOR_SRTM_PLUGIN_PURCHASE:
-							OsmandPlugin plugin = OsmandPlugin.getPlugin(SRTMPlugin.class);
-							if(plugin == null || plugin.getInstallURL() == null) {
-								Toast.makeText(context.getApplicationContext(),
-										context.getString(R.string.activate_srtm_plugin), Toast.LENGTH_LONG).show();
-							} else {
-								context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(plugin.getInstallURL())));
-							}
+							ChoosePlanDialogFragment.showHillshadeSrtmPluginInstance(context.getSupportFragmentManager());
 							break;
 						case ASK_FOR_SRTM_PLUGIN_ENABLE:
 							context.startActivity(new Intent(context, context.getMyApplication().getAppCustomization()
