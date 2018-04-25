@@ -227,9 +227,9 @@ S\'ocuparà una memòria de {1} MB
     <string name="search_position_address">Adreça…</string>
     <string name="search_position_undefined">Indefinida</string>
     
-    <string name="context_menu_item_search">Cerca prop d\'aquí</string>
+    <string name="context_menu_item_search">Cerca pel voltant</string>
     <string name="shared_string_save_as_gpx">Desa com una nova traça GPX</string>
-    <string name="route_successfully_saved_at">La ruta s\'ha desat correctament com a «%1$s».</string>
+    <string name="route_successfully_saved_at">La ruta s\'ha desat com a «%1$s».</string>
     <string name="filename_input">Nom del fitxer: </string>
     <string name="shared_string_save">Desa</string>
     <string name="show_more_map_detail">Mostra més detalls al mapa</string>
@@ -258,19 +258,19 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="search_position_favorites">Preferits…</string>
     <string name="search_position_map_view">Centre del mapa actual</string>
     <string name="select_search_position">Cerca prop de:</string>
-    <string name="local_index_upload_gpx_description">Pugeu els fitxers GPX per la comunitat d\'OSM. Es faran servir per millorar els mapes.</string>
-    <string name="local_index_items_uploaded">%1$d de %2$d ítem(s) s\'han penjat amb èxit.</string>
+    <string name="local_index_upload_gpx_description">Pugeu fitxers GPX per la comunitat d\'OSM, millorant els mapes.</string>
+    <string name="local_index_items_uploaded">S\'han pujat %1$d de %2$d ítem(s).</string>
     <string name="local_index_mi_upload_gpx">Envia a OSM</string>
-    <string name="favourites_delete_multiple_succesful">S\'ha suprimit amb èxit el(s) punt(s) preferit(s).</string>
+    <string name="favourites_delete_multiple_succesful">S\'han suprimit els punts preferits.</string>
     <string name="favorite_friends_category">Amics</string>
     <string name="favorite_places_category">Llocs</string>
     <string name="shared_string_others">Altres</string>
     <string name="shared_string_name">Nom</string>
     <string name="favourites_edit_dialog_category">Categoria</string>
     <string name="local_index_installed">Versió local</string>
-    <string name="local_index_items_backuped">S\'ha desactivat amb èxit %1$d de %2$d ítem(s).</string>
-    <string name="local_index_items_deleted">S\'ha suprimit amb èxit %1$d de %2$d ítem(s).</string>
-    <string name="local_index_items_restored">S\'ha activat amb èxit %1$d de %2$d ítem(s).</string>
+    <string name="local_index_items_backuped">S\'ha(n) desactivat %1$d de %2$d element(s).</string>
+    <string name="local_index_items_deleted">S\'ha(n) suprimit %1$d de %2$d ítem(s).</string>
+    <string name="local_index_items_restored">S\'ha(n) activat %1$d de %2$d ítem(s).</string>
     <string name="local_index_descr_title">Gestioneu els fitxers de mapes.</string>
     <string name="local_index_mi_restore">Activa</string>
     <string name="local_index_mi_backup">Desactiva</string>
@@ -342,14 +342,14 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
 \n
 \nPremeu contínuament per veure les opcions"</string>
     <string name="local_index_no_items_to_do">No hi ha ítems per %1$s</string>
-    <string name="internet_connection_required_for_online_route">S\'ha seleccionat un servei de navegació en línia però no hi ha cap connexió a Internet disponible.</string>
+    <string name="internet_connection_required_for_online_route">S\'ha seleccionat un servei de navegació en línia però no esteu connectat a Internet.</string>
     <string name="tts_missing_language_data_title">Falten dades</string>
     <string name="voice_stream_notification">Àudio d\'avís</string>
     <string name="voice_stream_music">Àudio de multimèdia/música</string>
     <string name="shared_string_none">Cap</string>
     <string name="tile_source_already_installed">El mapa ja està instal·lat, s\'actualitzarà \'Configuració\'.</string>
     <string name="select_tile_source_to_install">Seleccioneu els mapes (de tessel·les) per instal·lar o actualitzar.</string>
-    <string name="internet_not_available">Per realitzar l\'operació cal una connexió a Internet que ara no està disponible.</string>
+    <string name="internet_not_available">No es pot realitzar l\'operació sense una connexió a Internet.</string>
     <string name="level_to_switch_vector_raster_descr">Nivell mínim de zoom per utilitzar mapes vectorials.</string>
     <string name="level_to_switch_vector_raster">Nivell mínim de zoom pels vectors</string>
     <string name="error_doing_search">Error en la cerca fora de línia.</string>
@@ -429,7 +429,7 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="file_can_not_be_renamed">No s\'ha pogut canviar el nom al fitxer.</string>
     <string name="shared_string_rename">Canvia el nom</string>
     <string name="file_with_name_already_exist">Ja existeix un fitxer amb el mateix nom.</string>
-    <string name="show_more_map_detail_descr">Mostra més detalls als mapes de vectors (carreteres,etc.) des dels nivells inferiors de zoom.</string>
+    <string name="show_more_map_detail_descr">Mostra alguns detalls dels mapes vectorials (carreteres,etc.) ja des dels zooms inferiors.</string>
     <string name="gpx_option_destination_point">Utilitza la destinació actual</string>
     <string name="install_more">Instal·la\'n més…</string>
     <string name="km_h">km/h</string>
@@ -532,7 +532,7 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="live_monitoring_url">Adreça web de seguiment en viu</string>
     <string name="gpx_monitoring_disabled_warn">Registreu traces amb el giny GPX o amb la configuració «Enregistrament del trajecte».</string>
     <string name="pref_overlay">Capa de fons/Cap superposada</string>
-    <string name="map_version_changed_info">El servidor conté fitxers de mapes que no són compatibles amb la versió actual de l\'aplicació. Per descarregar-los i usar-los actualitzeu a l\'última versió.</string>
+    <string name="map_version_changed_info">Baixeu la nova versió de l\'aplicació per poder obrir els nous arxius de mapes.</string>
     <string name="local_index_action_do">Estas a punt de %1$s %2$s element(s). Continuar?</string>
     <string name="warning_tile_layer_not_downloadable">L\'aplicació no pot baixar la capa del mapa %1$s, si us plau proveu a reinstal·lar-la.</string>
     <string name="layer_overlay">Mapa sobreposat…</string>
@@ -634,15 +634,15 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="city_type_hamlet">Llogaret</string>
     <string name="city_type_village">Vila</string>
     <string name="favorite_delete_multiple">Esteu a punt de suprimir %1$d preferits i %2$d grups de preferits. N\'esteu segurs?</string>
-    <string name="basemap_missing">No es troba el mapa base mundial (cobreix tot el món però amb poc detall). És recomanable que us baixeu el fitxer World_basemap_x.obf per gaudir d\'una perspectiva global.</string>
+    <string name="basemap_missing">Baixeu el mapa base mundial per tenir una vista que abasti tot el món a gran escala.</string>
     <string name="vector_data_missing">Baixeu («fora de línia») dades per utilitzar mapes sense connexió.</string>
-    <string name="tts_missing_language_data">No hi ha dades instal·lades per la llengua seleccionada. Voleu anar al Market per instal·lar-ne?</string>
+    <string name="tts_missing_language_data">Voleu anar a la botiga d\'aplicacions per baixar el llenguatge seleccionat?</string>
     <string name="gpx_option_from_start_point">Passa per tota la traça sencera</string>
     <string name="switch_to_vector_map_to_see">Hi ha un mapa de vectors fora de línia per aquesta localització.
 \n\t\n\tPer activar-lo aneu a «Menú» → «Configuració del mapa» → «Font de mapes…» → «Mapes de vectors fora de línia».</string>
     <string name="overlay_transparency_descr">Modifiqueu l\'opacitat de la capa superposada.</string>
     <string name="overlay_transparency">Opacitat de la capa superposada</string>
-    <string name="layer_underlay">Mapa de base…</string>
+    <string name="layer_underlay">Posant el mapa de fons…</string>
     <string name="preferred_locale">Llengua de visualització</string>
     <string name="add_waypoint_dialog_added">La fita «{0}» de la traça GPX afegida</string>
     <string name="add_waypoint_dialog_title">Afegeix una fita a la traça GPX enregistrada</string>
@@ -670,7 +670,7 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="poi_filter_emergency">Emergències</string>
     <string name="poi_filter_restaurants">Restaurants</string>
     <string name="osm_editing_plugin_description">"Amb aquest connector d\'OsmAnd es pot fer contribucions a OSM com la creació o modificació de PDIs d\'OSM,  obrir o comentar anotacions OSM o contribuir amb fitxers GPX registrats. OSM és un projecte de cartografia global, de domini públic i gestionat per una comunitat. Per més detalls dirigiu-vos a  https://openstreetmap.org. La participació activa és d\'agrair i aquestes contribucions es poden directament des OsmAnd, si heu indicat les vostres credencials personals d\'OSM a l\'aplicació."</string>
-    <string name="tts_language_not_supported">La llengua seleccionada no està suportada per el motor de TTS (text a veu) d\'Android instal·lat. Voleu anar al Market per veure altres motors TTS? Altrament s\'usarà la llengua del TTS per defecte.</string>
+    <string name="tts_language_not_supported">La llengua seleccionada no està suportada per el motor de TTS (text a veu) d\'Android instal·lat. Voleu buscar altres motors TTS a la botiga d\'aplicacions? Altrament s\'usarà la llengua del TTS per defecte.</string>
     <string name="send_location_way_choose_title">Comparteix l\'ubicació usant</string>
     <string name="old_map_index_is_not_supported">Format de mapa «{0}» obsolet, no s\'admet</string>
     <string name="select_max_zoom_preload_area">Selecciona el màxim zoom per precarregar</string>

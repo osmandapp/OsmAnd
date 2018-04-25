@@ -671,8 +671,8 @@
 	<string name="poi_industrial">Area industriale</string>
 	<string name="poi_bell_tower">Torre campanaria</string>
 	<string name="poi_water_transport">Trasporto su acqua</string>
-		<string name="poi_bicycle_transport">Trasporto su bici</string>
-		<string name="poi_aerialway_transport">Trasporto aereo</string>
+		<string name="poi_bicycle_transport">Trasporto in bici</string>
+		<string name="poi_aerialway_transport">Trasporto a fune</string>
 		<string name="poi_node_networks">Nodo ciclistico/pedonale</string>
 		<string name="poi_hiking_routes">Percorso pedonale</string>
 		<string name="poi_power">Energia</string>
@@ -921,7 +921,7 @@
 	<string name="poi_notary">Notaio</string>
 	<string name="poi_pitch">Piazzola</string>
 	<string name="poi_leisure_track">Pista sportiva</string>
-	<string name="poi_raceway">Pista motorsport</string>
+	<string name="poi_raceway">Circuito</string>
 	<string name="poi_sport_multi">Multi sport</string>
 	<string name="poi_tourism_yes">Oggetto turistico</string>
 	<string name="poi_attraction_animal">Animale (attrazione)</string>
@@ -2431,4 +2431,8 @@
 	<string name="poi_socket_schuko_output_filter">Uscita Schuko</string>
 
 <string name="poi_operational_status">Stato delle operazioni</string>
+	<string name="poi_via_ferrata">Via ferrata</string>
+	<string name="poi_via_ferrata_scale">Difficoltà</string>
+
+<string name="poi_boat_sharing">Condivisione di barche</string>
 	</resources>

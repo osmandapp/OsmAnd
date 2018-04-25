@@ -2966,4 +2966,13 @@
     <string name="purchase_dialog_travel_description">For å lese reiseartikler frakoblet, må du kjøpe ett av følgende elementer.</string>
     <string name="purchase_dialog_subtitle">Velg passende element:</string>
     <string name="travel_card_download_descr">Last ned denne Wikivoyage-reiseguidefilen for å se artikler om steder rundt om i verden og uten en internettforbindelse.</string>
-	</resources>
+	<string name="popular_destinations">Populære reisemål</string>
+    <string name="download_wikipedia_label">Last ned Wikipedia-data</string>
+    <string name="how_to_open_wiki_title">Hvordan åpne Wikipedia-artikler?</string>
+<string name="download_wikipedia_description">Last ned Wikipedia-artiklene for %1$s slik at du kan lese dem frakoblet.</string>
+    <string name="open_in_browser_wiki">Åpne nettbasert artikkel</string>
+    <string name="open_in_browser_wiki_description">Se denne artikkelen i en nettleser.</string>
+    <string name="download_wiki_region_placeholder">denne regionen</string>
+    <string name="wiki_article_search_text">Søker etter den nødvendige wiki-artikkelen</string>
+    <string name="wiki_article_not_found">Artikkel ikke funnet</string>
+    </resources>

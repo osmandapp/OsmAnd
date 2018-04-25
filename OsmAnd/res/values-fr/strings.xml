@@ -1854,7 +1854,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="lang_bn">Bengali</string>
     <string name="lang_nv">Navajo</string>
     <string name="lang_th">Thaïlandais</string>
-    <string name="lang_nn">Norvégien</string>
+    <string name="lang_nn">Norvégien Nynorsk</string>
     <string name="archive_wikipedia_data">Le format de vos données Wikipédia hors-ligne est obsolète. Souhaitez-vous archiver ces données ?</string>
     <string name="lang_te">Télougou</string>
     <string name="restart_is_required">Redémarrez l\'application pour prendre en compte vos modifications.</string>
@@ -1880,7 +1880,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="lang_ta">Tamoul</string>
     <string name="lang_ml">Malayâlam</string>
     <string name="lang_os">Ossète</string>
-    <string name="lang_nb">Norvégien (Bokmål)</string>
+    <string name="lang_nb">Norvégien Bokmål</string>
     <string name="lang_vo">Volapük</string>
     <string name="lang_new">Néwari / Népal Bhasa</string>
     <string name="lang_ceb">Cébouano</string>
@@ -3167,4 +3167,9 @@ représentant la zone : %1$s x %2$s</string>
     <string name="download_wiki_region_placeholder">cette région</string>
     <string name="wiki_article_not_found">Article introuvable</string>
     <string name="how_to_open_wiki_title">Comment ouvrir les articles Wikipedia ?</string>
-</resources>
+<string name="paid_app">Application payante</string>
+    <string name="paid_plugin">Greffon payant</string>
+    <string name="popular_destinations">Destinations populaires</string>
+    <string name="welcome_to_open_beta_description">Travel est basé sur Wikivoyage. Durant la phase beta vous pouvez évaluer toutes les fonctionnalités gratuitement. En fin de période beta, Travel sera accessible aux abonnés OsmAnd ainsi qu\'aux propriétaires d\'OsmAnd+</string>
+    <string name="wiki_article_search_text">Recherche de l\'article Wiki</string>
+    </resources>

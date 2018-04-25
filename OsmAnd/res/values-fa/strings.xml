@@ -3059,7 +3059,7 @@
     <string name="shared_string_total">کل</string>
     <string name="nothing_found_in_radius">تا این شعاع چیزی پیدا نشد:</string>
     <string name="waypoints_removed_from_map_markers">نقاط بین‌راهی از نشانه‌های نقشه حذف شد</string>
-    <string name="shared_string_travel">سفر</string>
+    <string name="shared_string_travel">مسافرت</string>
     <string name="shared_string_result">نتیجه</string>
     <string name="use_two_digits_longitude">استفاده از طول جغرافیایی دورقمی</string>
     <string name="saved_articles">مقاله‌های ذخیره‌شده</string>
@@ -3085,10 +3085,10 @@
     <string name="select_travel_book">انتخاب کتاب سفر</string>
     <string name="shared_string_travel_book">کتاب سفر</string>
     <string name="purchase_dialog_title">انتخاب طرح</string>
-    <string name="purchase_dialog_travel_description">برای مطالعهٔ آفلاین مقاله‌های سفر، باید یکی از موارد زیر را بخرید.</string>
+    <string name="purchase_dialog_travel_description">برای مطالعهٔ آفلاین مقاله‌های «مسافرت»، باید یکی از موارد زیر را بخرید.</string>
     <string name="purchase_dialog_subtitle">مورد مناسبی را انتخاب کنید:</string>
     <string name="travel_guide_description">با استفاده از OsmAnd و بدون نیاز به اینترنت در مقالات ویکی‌سفر بگردید و راهنمای سفر به جذاب‌ترین نقاط جهان را مطالعه کنید.</string>
-    <string name="travel_guide">راهنمای سفر</string>
+    <string name="travel_guide">راهنمای مسافرت</string>
     <string name="in_app_purchase">خرید درون‌برنامه‌ای</string>
     <string name="in_app_purchase_desc">یک بار پرداخت</string>
     <string name="in_app_purchase_desc_ex">با یک بار خرید، همیشه در اختیارتان خواهد بود.</string>
@@ -3104,4 +3104,27 @@
 
     <string name="monthly_map_updates">به‌روزرسانی نقشه: <b>ماهانه</b></string>
     <string name="daily_map_updates">به‌روزرسانی نقشه: <b>روزانه، ساعتی</b></string>
+    <string name="paid_app">برنامهٔ پولی</string>
+    <string name="paid_plugin">افزونهٔ پولی</string>
+    <string name="travel_card_update_descr">داده‌های ویکی‌سفر را به‌روز و اصلاح کرده‌ایم. برای استفاده از آن‌ها فایل را به‌روز کنید.</string>
+	<string name="travel_card_download_descr">برای اینکه بتوانید مقاله‌های راهنمای سفر به مناطق مختلف جهان را بدون نیاز به اینترنت ببینید این فایل راهنمای مسافرت از ویکی‌سفر را دانلود کنید.</string>
+	<string name="update_is_available">به‌روزرسانی وجود دارد</string>
+	<string name="download_file">دانلود فایل</string>
+    <string name="start_editing_card_image_text">راهنمای جهانی مسافرت رایگان است و همه می‌توانند آن را ویرایش کنند.</string>
+    <string name="welcome_to_open_beta_description">«مسافرت» بر اساس ویکی‌سفر ساخته شده. در دورهٔ آزمایش همگانیِ نسخهٔ بتا می‌توانید همهٔ قابلیت‌های آن را به‌رایگان ارزیابی کنید. با پایان دورهٔ آزمایشی، «مسافرت» در اختیار مشترکان نسخهٔ نامحدود OsmAnd و دارندگان OsmAnd+‎ خواهد بود.</string>
+    <string name="start_editing_card_description">شما می‌توانید همهٔ مقالات ویکی‌سفر را ویرایش کنید و امیدواریم این کار را بکنید. 
+\nما به دانش، تجربه، استعداد و توجه شما نیازمندیم.</string>
+    <string name="start_editing">شروع ویرایش</string>
+    <string name="get_unlimited_access">گرفتن دسترسی نامحدود</string>
+    <string name="welcome_to_open_beta">به ارزیابی همگانی نسخهٔ بتا خوش آمدید!</string>
+    <string name="contour_lines_hillshade_maps">نقشه‌های منحنی‌های تراز و سایه‌تپه‌ها</string>
+    <string name="download_wikipedia_description">با پرداخت %1$s مقاله‌های ویکی‌سفر را دانلود کنید تا آن‌ها را آفلاین بخوانید.</string>
+    <string name="download_wikipedia_label">دریافت داده‌های ویکی‌پدیا</string>
+    <string name="open_in_browser_wiki">بازکردن مقالهٔ آنلاین</string>
+    <string name="open_in_browser_wiki_description">این مقاله را با مرورگر مشاهده کنید.</string>
+    <string name="download_wiki_region_placeholder">این منطقه</string>
+    <string name="wiki_article_search_text">جست‌وجو به‌دنبال مقالهٔ موردنیاز</string>
+    <string name="wiki_article_not_found">مقاله پیدا نشد</string>
+    <string name="how_to_open_wiki_title">چگونه مقاله‌های ویکی‌پدیا را باز کنیم؟</string>
+<string name="popular_destinations">مقصدهای محبوب</string>
     </resources>

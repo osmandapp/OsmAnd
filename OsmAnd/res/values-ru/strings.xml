@@ -2930,4 +2930,7 @@
     <string name="wiki_article_search_text">Поиск нужной статьи в вики</string>
     <string name="wiki_article_not_found">Статья не найдена</string>
     <string name="how_to_open_wiki_title">Как открыть статьи Википедии?</string>
-</resources>
+<string name="popular_destinations">Популярные направления</string>
+    <string name="paid_app">Платное приложение</string>
+    <string name="paid_plugin">Платный плагин</string>
+    </resources>
