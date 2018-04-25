@@ -428,6 +428,7 @@
 	<color name="wikivoyage_primary_text_light">#212121</color>
 	<color name="wikivoyage_primary_text_dark">#cccccc</color>
 	<color name="wikivoyage_secondary_text">#727272</color>
-	<color name="wikivoyage_start_editing_image_background">#339966</color>
+	<color name="wikivoyage_start_editing_card_image_background">#339966</color>
+	<color name="wikivoyage_open_beta_card_image_background">#008bf8</color>
 
 </resources>

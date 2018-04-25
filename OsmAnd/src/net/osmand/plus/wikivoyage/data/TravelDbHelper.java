@@ -199,6 +199,24 @@ public class TravelDbHelper {
 		return list;
 	}
 
+	@NonNull
+	public List<TravelArticle> searchPopular() {
+		List<TravelArticle> res = new ArrayList<>();
+		SQLiteConnection conn = openConnection();
+		if (conn != null) {
+			TravelArticle travelArticle;
+			SQLiteCursor cursor = conn.rawQuery("SELECT * FROM " + ARTICLES_TABLE_NAME + " ORDER BY RANDOM() LIMIT 100", null);
+			if (cursor.moveToFirst()) {
+				do {
+					travelArticle = readArticle(cursor);
+					res.add(travelArticle);
+				} while (cursor.moveToNext());
+			}
+			cursor.close();
+		}
+		return res;
+	}
+
 	private void sortSearchResults(final String searchQuery, List<WikivoyageSearchResult> list) {
 		Collections.sort(list, new Comparator<WikivoyageSearchResult>() {
 			@Override
