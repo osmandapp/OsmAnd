@@ -38,11 +38,11 @@ public class OpeningHoursParser {
 	static {
 		DateFormatSymbols dateFormatSymbols = DateFormatSymbols.getInstance(Locale.US);
 		monthsStr = dateFormatSymbols.getShortMonths();
-		daysStr = getTwoLettersStringArray(dateFormatSymbols.getShortWeekdays());
+		daysStr = getLettersStringArray(dateFormatSymbols.getShortWeekdays(), 2);
 		
 		dateFormatSymbols = DateFormatSymbols.getInstance();
 		localMothsStr = dateFormatSymbols.getShortMonths();
-		localDaysStr = getTwoLettersStringArray(dateFormatSymbols.getShortWeekdays());
+		localDaysStr = getLettersStringArray(dateFormatSymbols.getShortWeekdays(), 3);
 
 		additionalStrings.put("off", "off");
 		additionalStrings.put("is_open", "Open");
@@ -75,12 +75,12 @@ public class OpeningHoursParser {
 	 */
 	private static String endOfDay = "24:00";
 
-	private static String[] getTwoLettersStringArray(String[] strings) {
+	private static String[] getLettersStringArray(String[] strings, int letters) {
 		String[] newStrings = new String[strings.length];
 		for (int i = 0; i < strings.length; i++) {
 			if (strings[i] != null) {
-				if (strings[i].length() > 3) {
-					newStrings[i] = Algorithms.capitalizeFirstLetter(strings[i].substring(0, 3));
+				if (strings[i].length() > letters) {
+					newStrings[i] = Algorithms.capitalizeFirstLetter(strings[i].substring(0, letters));
 				} else {
 					newStrings[i] = Algorithms.capitalizeFirstLetter(strings[i]);
 				}

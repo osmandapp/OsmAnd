@@ -8,8 +8,10 @@ import net.osmand.Collator;
 import net.osmand.CollatorStringMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.IndexConstants;
+import net.osmand.Location;
 import net.osmand.OsmAndCollator;
 import net.osmand.PlatformUtil;
+import net.osmand.data.LatLon;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.OsmandApplication;
@@ -17,6 +19,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
 import net.osmand.util.Algorithms;
+import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
 
@@ -205,7 +208,11 @@ public class TravelDbHelper {
 		SQLiteConnection conn = openConnection();
 		if (conn != null) {
 			TravelArticle travelArticle;
-			SQLiteCursor cursor = conn.rawQuery("SELECT * FROM " + ARTICLES_TABLE_NAME + " ORDER BY RANDOM() LIMIT 100", null);
+			SQLiteCursor cursor = conn.rawQuery("SELECT * FROM "
+					+ ARTICLES_TABLE_NAME
+					+ " WHERE article_id IN (SELECT article_id FROM "
+					+ ARTICLES_TABLE_NAME
+					+ " ORDER BY RANDOM() LIMIT 100) LIMIT 100", null);
 			if (cursor.moveToFirst()) {
 				do {
 					travelArticle = readArticle(cursor);

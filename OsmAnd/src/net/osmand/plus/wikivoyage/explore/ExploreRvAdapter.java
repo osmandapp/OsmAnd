@@ -68,6 +68,10 @@ public class ExploreRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 			holder.description.setText(String.valueOf(getArticleItemCount()));
 		} else if (viewHolder instanceof ArticleTravelVH && item instanceof ArticleTravelCard) {
 			((ArticleTravelCard) item).bindViewHolder(viewHolder);
+			ArticleTravelCard articleTravelCard = (ArticleTravelCard) item;
+			articleTravelCard.setLastItem(position == getLastArticleItemIndex());
+			articleTravelCard.bindViewHolder(viewHolder);
+			((ArticleTravelCard) item).bindViewHolder(viewHolder);
 		} else if (viewHolder instanceof OpenBetaTravelVH && item instanceof OpenBetaTravelCard) {
 			((OpenBetaTravelCard) item).bindViewHolder(viewHolder);
 		} else if (viewHolder instanceof StartEditingTravelVH && item instanceof StartEditingTravelCard) {
@@ -107,6 +111,16 @@ public class ExploreRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 			}
 		}
 		return count;
+	}
+
+	private int getLastArticleItemIndex() {
+		for (int i = items.size() - 1; i > 0; i--) {
+			Object o = items.get(i);
+			if (o instanceof ArticleTravelCard) {
+				return i;
+			}
+		}
+		return 0;
 	}
 
 	private Object getItem(int position) {

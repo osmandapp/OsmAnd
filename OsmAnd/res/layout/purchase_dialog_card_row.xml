@@ -23,6 +23,16 @@
             android:src="@drawable/ic_action_plus"
             android:tint="?attr/wikivoyage_active_color"/>
 
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/img_purchased"
+            android:layout_width="@dimen/standard_icon_size"
+            android:layout_height="@dimen/standard_icon_size"
+            android:layout_marginLeft="@dimen/list_content_padding"
+            android:layout_marginRight="@dimen/dialog_content_margin"
+            android:layout_gravity="center"
+            android:src="@drawable/img_feature_purchased"
+            android:visibility="gone"/>
+
         <net.osmand.plus.widgets.TextViewEx
             android:id="@+id/title"
             android:layout_width="wrap_content"
