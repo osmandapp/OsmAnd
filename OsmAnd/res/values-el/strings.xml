@@ -2955,4 +2955,28 @@
     <string name="contour_lines_sea_depth">"Ισοϋψείς γραμμές + Βάθη θάλασσας "</string>
     <string name="unlock_all_features">Ξεκλείδωμα όλων των χαρακτηριστικών του OsmAnd</string>
 
-    </resources>
+    <string name="popular_destinations">Δημοφιλείς προορισμοί</string>
+    <string name="paid_app">Εφαρμογή επί πληρωμή</string>
+    <string name="paid_plugin">Πρόσθετο επί πληρωμή</string>
+    <string name="travel_card_update_descr">Προετοιμάσαμε ενημερώσεις και διορθώσεις στα δεδομένα βικιταξιδιών, ενημερώστε το αρχείο για να τις δείτε.</string>
+	<string name="travel_card_download_descr">Κατεβάστε το αρχείο με τους οδηγούς ταξιδιών των βικιταξιδιών για να προβάλετε τα άρθρα για μέρη σε όλον τον κόσμο χωρίς σύνδεση διαδικτύου.</string>
+	<string name="update_is_available">Υπάρχει διαθέσιμη ενημέρωση</string>
+	<string name="download_file">Λήψη αρχείου</string>
+    <string name="start_editing_card_image_text">Ο ελεύθερος παγκόσμιος ταξιδιωτικός οδηγός που οποιοσδήποτε μπορεί να επεξεργαστεί.</string>
+    <string name="welcome_to_open_beta_description">"Το Travelβασίζεται στα βικιταξίδια.  Κατά τη διάρκεια του βήτα ελέγχου έχετε τη δυνατότητα να αξιολογήσετε όλα τα χαρακτηριστικά δωρεάν. Μετά το τέλος της περιόδου βήτα, το Travel θα είναι διαθέσιμο στους συνδρομητές του απεριόριστου OsmAnd και στους κατόχους του OsmAnd+"</string>
+    <string name="start_editing_card_description">Μπορείτε να επεξεργαστείτε οποιοδήποτε άρθρο στο βικιταξίδια και ελπίζουμε να το κάνετε. Χρειαζόμαστε τη γνώση σας, την εμπειρία σας, το ταλέντο σας και την προσοχή σας</string>
+    <string name="start_editing">Έναρξη επεξεργασίας</string>
+    <string name="get_unlimited_access">Πάρτε απεριόριστη πρόσβαση</string>
+    <string name="welcome_to_open_beta">Καλώς ήλθατε, στην ανοικτή βήτα!</string>
+    <string name="travel_guide">Οδηγός ταξιδιού</string>
+    <string name="travel_guide_description">Εξερευνήστε τους οδηγούς των βικιταξιδιών στα πιο ενδιαφέροντα μέρη στον πλανήτη μέσα στο OsmAnd χωρίς σύνδεση διαδικτύου.</string>
+    <string name="contour_lines_hillshade_maps">Χάρτες ισοϋψών γραμμών &amp; σκίασης αναγλύφου</string>
+    <string name="download_wikipedia_description">Λήψη των άρθρων της βικιπαίδειας για %1$s για να τα διαβάσετε χωρίς σύνδεση.</string>
+    <string name="download_wikipedia_label">Λήψη δεδομένων βικιπαίδειας</string>
+    <string name="open_in_browser_wiki">Άνοιγμα άρθρου διαδικτυακά</string>
+    <string name="open_in_browser_wiki_description">Προβολή αυτού του άρθρου σε πλοηγητή.</string>
+    <string name="download_wiki_region_placeholder">αυτής της περιοχής</string>
+    <string name="wiki_article_search_text">Αναζήτηση για το απαραίτητο άρθρο βίκι</string>
+    <string name="wiki_article_not_found">Δεν βρέθηκε το άρθρο</string>
+    <string name="how_to_open_wiki_title">Πώς να ανοίξετε τα άρθρα της βικιπαίδειας;</string>
+</resources>
