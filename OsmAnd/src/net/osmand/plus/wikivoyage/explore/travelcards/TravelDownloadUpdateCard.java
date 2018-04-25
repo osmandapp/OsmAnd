@@ -35,8 +35,8 @@ public class TravelDownloadUpdateCard extends BaseTravelCard {
 			holder.fileIcon.setImageDrawable(getFileIcon());
 			holder.fileTitle.setText(getFileTitle());
 			holder.fileDescription.setText(getFileDescription());
-			boolean primaryBtnVisible = updatePrimaryButton(holder.primaryButton);
-			boolean secondaryBtnVisible = updateSecondaryButton(holder.secondaryBtn);
+			boolean primaryBtnVisible = updatePrimaryButton(holder);
+			boolean secondaryBtnVisible = updateSecondaryButton(holder);
 			holder.buttonsDivider.setVisibility(primaryBtnVisible && secondaryBtnVisible ? View.VISIBLE : View.GONE);
 		}
 	}
@@ -81,11 +81,11 @@ public class TravelDownloadUpdateCard extends BaseTravelCard {
 	/**
 	 * @return true if button is visible, false otherwise.
 	 */
-	private boolean updateSecondaryButton(TextView btn) {
+	private boolean updateSecondaryButton(DownloadUpdateVH vh) {
 		if (loadingInProgress || !download) {
-			btn.setText(loadingInProgress ? R.string.shared_string_cancel : R.string.later);
-			btn.setVisibility(View.VISIBLE);
-			btn.setOnClickListener(new View.OnClickListener() {
+			vh.secondaryBtn.setText(loadingInProgress ? R.string.shared_string_cancel : R.string.later);
+			vh.secondaryBtn.setVisibility(View.VISIBLE);
+			vh.secondaryBtn.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
 					onSecondaryBtnClick();
@@ -93,18 +93,18 @@ public class TravelDownloadUpdateCard extends BaseTravelCard {
 			});
 			return true;
 		}
-		btn.setVisibility(View.GONE);
+		vh.secondaryBtnContainer.setVisibility(View.GONE);
 		return false;
 	}
 
 	/**
 	 * @return true if button is visible, false otherwise.
 	 */
-	private boolean updatePrimaryButton(TextView btn) {
+	private boolean updatePrimaryButton(DownloadUpdateVH vh) {
 		if (!loadingInProgress) {
-			btn.setText(download ? R.string.shared_string_download : R.string.shared_string_update);
-			btn.setVisibility(View.VISIBLE);
-			btn.setOnClickListener(new View.OnClickListener() {
+			vh.primaryButton.setText(download ? R.string.shared_string_download : R.string.shared_string_update);
+			vh.primaryButton.setVisibility(View.VISIBLE);
+			vh.primaryButton.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
 					onPrimaryBtnClick();
@@ -112,7 +112,7 @@ public class TravelDownloadUpdateCard extends BaseTravelCard {
 			});
 			return true;
 		}
-		btn.setVisibility(View.GONE);
+		vh.primaryBtnContainer.setVisibility(View.GONE);
 		return false;
 	}
 
@@ -133,8 +133,10 @@ public class TravelDownloadUpdateCard extends BaseTravelCard {
 		final TextView fileTitle;
 		final TextView fileDescription;
 		final ProgressBar progressBar;
+		final View secondaryBtnContainer;
 		final TextView secondaryBtn;
 		final View buttonsDivider;
+		final View primaryBtnContainer;
 		final TextView primaryButton;
 
 		@SuppressWarnings("RedundantCast")
@@ -147,8 +149,10 @@ public class TravelDownloadUpdateCard extends BaseTravelCard {
 			fileTitle = (TextView) itemView.findViewById(R.id.file_title);
 			fileDescription = (TextView) itemView.findViewById(R.id.file_description);
 			progressBar = (ProgressBar) itemView.findViewById(R.id.progress_bar);
+			secondaryBtnContainer = itemView.findViewById(R.id.secondary_btn_container);
 			secondaryBtn = (TextView) itemView.findViewById(R.id.secondary_button);
 			buttonsDivider = itemView.findViewById(R.id.buttons_divider);
+			primaryBtnContainer = itemView.findViewById(R.id.primary_btn_container);
 			primaryButton = (TextView) itemView.findViewById(R.id.primary_button);
 		}
 	}
