@@ -22,6 +22,7 @@ public class TravelDownloadUpdateCard extends BaseTravelCard {
 
 	private boolean download;
 	private boolean loadingInProgress;
+	private int progress;
 
 	private ClickListener listener;
 
@@ -40,6 +41,10 @@ public class TravelDownloadUpdateCard extends BaseTravelCard {
 
 	public void setLoadingInProgress(boolean loadingInProgress) {
 		this.loadingInProgress = loadingInProgress;
+	}
+
+	public void setProgress(int progress) {
+		this.progress = progress;
 	}
 
 	public void setListener(ClickListener listener) {
@@ -71,6 +76,7 @@ public class TravelDownloadUpdateCard extends BaseTravelCard {
 				holder.fileTitle.setText(getFileTitle());
 				holder.fileDescription.setText(getFileDescription());
 				holder.progressBar.setVisibility(loadingInProgress ? View.VISIBLE : View.GONE);
+				holder.progressBar.setProgress(progress < 0 ? 0 : progress);
 			}
 			boolean primaryBtnVisible = updatePrimaryButton(holder);
 			boolean secondaryBtnVisible = updateSecondaryButton(holder);

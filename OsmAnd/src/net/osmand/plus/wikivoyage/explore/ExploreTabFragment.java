@@ -20,6 +20,7 @@ import net.osmand.plus.activities.OsmandActionBarActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadResources;
+import net.osmand.plus.download.DownloadValidationManager;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.download.ui.AbstractLoadLocalIndexTask;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
@@ -37,13 +38,14 @@ import java.util.List;
 
 public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIndexesThread.DownloadEvents {
 
-	private static final int DOWNLOAD_UPDATE_CARD_POSITION = 0;
-
 	private ExploreRvAdapter adapter = new ExploreRvAdapter();
+
 	private StartEditingTravelCard startEditingTravelCard;
 	private TravelDownloadUpdateCard downloadUpdateCard;
 
 	private boolean nightMode;
+
+	private IndexItem indexItem;
 
 	private boolean worldWikivoyageDownloaded;
 	private boolean downloadIndexesRequested;
@@ -82,50 +84,61 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIn
 			downloadIndexesRequested = false;
 			final OsmandApplication app = getMyApplication();
 
-			IndexItem wikivoyageItem = app.getDownloadThread().getIndexes().getWorldWikivoyageItem();
-			boolean outdated = wikivoyageItem != null && wikivoyageItem.isOutdated();
+			indexItem = app.getDownloadThread().getIndexes().getWorldWikivoyageItem();
+			boolean outdated = indexItem != null && indexItem.isOutdated();
 
 			if (!worldWikivoyageDownloaded || outdated) {
 				downloadUpdateCard = new TravelDownloadUpdateCard(app, nightMode, !outdated);
 				downloadUpdateCard.setListener(new TravelDownloadUpdateCard.ClickListener() {
 					@Override
 					public void onPrimaryButtonClick() {
-						if (downloadUpdateCard.isDownload()) {
-							if (app.getSettings().isInternetConnectionAvailable()) {
-								Toast.makeText(app, "Download", Toast.LENGTH_SHORT).show();
-							} else {
-								Toast.makeText(app, app.getString(R.string.no_index_file_to_download), Toast.LENGTH_SHORT).show();
-							}
+						if (app.getSettings().isInternetConnectionAvailable()) {
+							new DownloadValidationManager(app).startDownload(getMyActivity(), indexItem);
+							downloadUpdateCard.setLoadingInProgress(true);
+							adapter.updateDownloadUpdateCard();
 						} else {
-							Toast.makeText(app, "Update", Toast.LENGTH_SHORT).show();
+							Toast.makeText(app, app.getString(R.string.no_index_file_to_download), Toast.LENGTH_SHORT).show();
 						}
 					}
 
 					@Override
 					public void onSecondaryButtonClick() {
 						if (downloadUpdateCard.isLoadingInProgress()) {
-							Toast.makeText(app, "Cancel", Toast.LENGTH_SHORT).show();
+							app.getDownloadThread().cancelDownload(indexItem);
+							downloadUpdateCard.setLoadingInProgress(false);
+							adapter.updateDownloadUpdateCard();
 						} else if (!downloadUpdateCard.isDownload()) {
-							Toast.makeText(app, "Later", Toast.LENGTH_SHORT).show();
+							adapter.removeDownloadUpdateCard();
 						}
 					}
 				});
-				downloadUpdateCard.setIndexItem(wikivoyageItem);
-				if (adapter.addItem(DOWNLOAD_UPDATE_CARD_POSITION, downloadUpdateCard)) {
-					adapter.notifyDataSetChanged();
-				}
+				downloadUpdateCard.setIndexItem(indexItem);
+				adapter.setDownloadUpdateCard(downloadUpdateCard);
 			}
 		}
 	}
 
 	@Override
 	public void downloadInProgress() {
-
+		DownloadIndexesThread downloadThread = getMyApplication().getDownloadThread();
+		IndexItem current = downloadThread.getCurrentDownloadingItem();
+		if (downloadUpdateCard != null
+				&& current != null
+				&& (!current.isDownloaded() || current.isOutdated())
+				&& indexItem != null
+				&& current == indexItem) {
+			downloadUpdateCard.setProgress(downloadThread.getCurrentDownloadingItemProgress());
+			adapter.updateDownloadUpdateCard();
+		}
 	}
 
 	@Override
 	public void downloadHasFinished() {
-
+		IndexItem current = getMyApplication().getDownloadThread().getCurrentDownloadingItem();
+		if (downloadUpdateCard != null && current != null && indexItem != null && current == indexItem) {
+			downloadUpdateCard.setLoadingInProgress(false);
+			adapter.removeDownloadUpdateCard();
+		}
 	}
 
 	private List<BaseTravelCard> generateItems() {
