@@ -5,7 +5,6 @@
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:layout_gravity="center_horizontal"
-	android:layout_marginBottom="@dimen/list_content_padding"
 	android:layout_marginTop="@dimen/list_content_padding"
 	android:layout_marginLeft="@dimen/text_margin_small"
 	android:layout_marginRight="@dimen/text_margin_small"
@@ -20,7 +19,7 @@
 		<LinearLayout
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:background="@color/wikivoyage_start_editing_card_image_background"
+			android:background="@drawable/travel_card_start_editing_image_bg"
 			android:orientation="horizontal">
 
 			<TextView
@@ -35,6 +34,7 @@
 				android:layout_marginTop="42dp"
 				android:layout_weight="1"
 				android:textColor="@color/primary_text_dark"
+				android:textSize="@dimen/default_list_text_size"
 				tools:text="@string/start_editing_card_image_text" />
 
 			<ImageView

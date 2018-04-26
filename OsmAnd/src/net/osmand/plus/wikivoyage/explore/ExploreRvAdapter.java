@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import net.osmand.plus.R;
@@ -65,7 +66,14 @@ public class ExploreRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 		if (viewHolder instanceof HeaderVH && item instanceof String) {
 			final HeaderVH holder = (HeaderVH) viewHolder;
 			holder.title.setText((String) item);
-			holder.description.setText(String.valueOf(getArticleItemCount()));
+			if (getArticleItemCount() > 0) {
+				holder.description.setText(String.valueOf(getArticleItemCount()));
+				holder.description.setVisibility(View.VISIBLE);
+				holder.progressBar.setVisibility(View.GONE);
+			} else {
+				holder.progressBar.setVisibility(View.VISIBLE);
+				holder.description.setVisibility(View.INVISIBLE);
+			}
 		} else if (viewHolder instanceof ArticleTravelVH && item instanceof ArticleTravelCard) {
 			((ArticleTravelCard) item).bindViewHolder(viewHolder);
 			ArticleTravelCard articleTravelCard = (ArticleTravelCard) item;
@@ -149,11 +157,13 @@ public class ExploreRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
 		final TextView title;
 		final TextView description;
+		final ProgressBar progressBar;
 
 		HeaderVH(View itemView) {
 			super(itemView);
 			title = (TextView) itemView.findViewById(R.id.title);
 			description = (TextView) itemView.findViewById(R.id.description);
+			progressBar = (ProgressBar) itemView.findViewById(R.id.progressBar);
 		}
 	}
 }
