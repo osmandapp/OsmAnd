@@ -13,6 +13,7 @@ import android.widget.ProgressBar;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.Version;
 import net.osmand.plus.activities.LocalIndexHelper;
 import net.osmand.plus.activities.LocalIndexInfo;
 import net.osmand.plus.activities.OsmandActionBarActivity;
@@ -33,6 +34,7 @@ import java.util.List;
 public class ExploreTabFragment extends BaseOsmAndFragment {
 
 	private static final int DOWNLOAD_UPDATE_CARD_POSITION = 0;
+	private static final int OPEN_BETA_CARD_POSITION = 1;
 
 	private ExploreRvAdapter adapter = new ExploreRvAdapter();
 	private StartEditingTravelCard startEditingTravelCard;
@@ -59,8 +61,8 @@ public class ExploreTabFragment extends BaseOsmAndFragment {
 		final boolean nightMode = !getSettings().isLightContent();
 
 		addDownloadUpdateCard(nightMode);
+		addOpenBetaTravelCard(nightMode);
 		startEditingTravelCard = new StartEditingTravelCard(app, nightMode);
-		items.add(new OpenBetaTravelCard(app, nightMode, getFragmentManager()));
 		items.add(startEditingTravelCard);
 		addPopularDestinations(app, nightMode);
 
@@ -80,6 +82,14 @@ public class ExploreTabFragment extends BaseOsmAndFragment {
 				}
 			}
 		}).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+	}
+
+	private void addOpenBetaTravelCard(final boolean nightMode) {
+		final OsmandApplication app = getMyApplication();
+		if ((Version.isFreeVersion(app) && !app.getSettings().LIVE_UPDATES_PURCHASED.get()
+				&& !app.getSettings().FULL_VERSION_PURCHASED.get())) {
+			adapter.addItem(OPEN_BETA_CARD_POSITION, new OpenBetaTravelCard(app, nightMode, getFragmentManager()));
+		}
 	}
 
 	private void addPopularDestinations(OsmandApplication app, boolean nightMode) {
@@ -160,23 +170,22 @@ public class ExploreTabFragment extends BaseOsmAndFragment {
 		protected void onPostExecute(List<TravelArticle> items) {
 			OsmandActionBarActivity activity = weakContext.get();
 			ExploreRvAdapter adapter = weakAdapter.get();
-
-			List<Object> adapterItems = adapter.getItems();
 			StartEditingTravelCard startEditingTravelCard = weakStartEditingTravelCard.get();
+			if (activity != null && adapter != null && startEditingTravelCard != null && !items.isEmpty()) {
+				List<Object> adapterItems = adapter.getItems();
 
-			adapterItems.remove(startEditingTravelCard);
-
-			if (!items.isEmpty()) {
-				if (activity != null) {
-					adapterItems.add(activity.getResources().getString(R.string.popular_destinations));
-					for (TravelArticle article : items) {
-						adapterItems.add(new ArticleTravelCard(activity.getMyApplication(), nightMode, article, activity.getSupportFragmentManager()));
-					}
+				if (adapterItems.contains(startEditingTravelCard)) {
+					adapterItems.remove(startEditingTravelCard);
 				}
+				adapterItems.add(activity.getResources().getString(R.string.popular_destinations));
+				for (TravelArticle article : items) {
+					adapterItems.add(new ArticleTravelCard(activity.getMyApplication(), nightMode, article, activity.getSupportFragmentManager()));
+				}
+
+				weakProgressBar.get().setVisibility(View.GONE);
+				adapterItems.add(startEditingTravelCard);
+				adapter.notifyDataSetChanged();
 			}
-			weakProgressBar.get().setVisibility(View.GONE);
-			adapterItems.add(startEditingTravelCard);
-			adapter.notifyDataSetChanged();
 		}
 	}
 }
