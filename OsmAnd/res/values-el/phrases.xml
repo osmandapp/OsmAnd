@@ -375,4 +375,38 @@
 	<string name="poi_post_office">Ταχυδρομείο</string>
 	<string name="poi_post_box">Γραμματοκιβώτιο</string>
 	<string name="poi_telephone">Τηλέφωνο</string>
+	<string name="poi_glacier_type">Τύπος παγετώνα</string>
+
+<string name="poi_fuel_svo">Αμιγές φυτικό λάδι (SVO)</string>
+	<string name="poi_railway_buffer_stop">Προσκρουστήρας σιδηροδρόμου</string>
+	<string name="poi_aeroway_terminal">Τερματικός αεροδρομίου</string>
+	<string name="poi_aeroway_gate">Πύλη αεροδρομίου</string>
+
+	<string name="poi_slipway">Σχάρα καθέλκυσης</string>
+	<string name="poi_ferry_terminal">Τερματικός πορθμείου</string>
+	<string name="poi_lighthouse">Φάρος</string>
+
+	<string name="poi_aerialway_station">Σταθμός εναέριου σιδηροδρόμου</string>
+	<string name="poi_aerialway_cable_car">Εναέριος σιδηρόδρομος</string>
+	<string name="poi_aerialway_gondola">Γόνδολα</string>
+	<string name="poi_aerialway_chair_lift">Τηλεκάθισμα</string>
+	<string name="poi_turning_circle">Κύκλος στροφής</string>
+	<string name="poi_motorway_junction">Διασταύρωση αυτοκινητοδρόμου</string>
+	<string name="poi_junction">Διασταύρωση</string>
+	<string name="poi_rest_area">Χώρος ανάπαυσης</string>
+
+	<string name="poi_water_well">Πηγάδι</string>
+	<string name="poi_standpipe">Σωλήνας ανύψωσης νερού</string>
+	<string name="poi_water_works">Υδραγωγείο</string>
+	<string name="poi_wastewater_plant">Εγκατάσταση αποβλήτων</string>
+	<string name="poi_water_tower">Πύργος υδροδεξαμενής</string>
+	<string name="poi_waterway_turning_point">Σημείο καμπής διαύλου</string>
+	<string name="poi_weir">Υδατοφράκτης</string>
+	<string name="poi_dam">Φράγμα</string>
+	<string name="poi_watermill">Υδρόμυλος</string>
+	<string name="poi_breakwater">Κυματοθραύστης</string>
+	<string name="poi_groyne">Πρόβολος</string>
+
+	<string name="poi_power_generator">Ηλεκτρική γεννήτρια</string>
+	<string name="poi_power_tower">Ηλεκτρικός πυλώνας</string>
 	</resources>
