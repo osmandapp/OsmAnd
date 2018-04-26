@@ -22,6 +22,7 @@ import net.osmand.plus.download.ui.AbstractLoadLocalIndexTask;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
 import net.osmand.plus.wikivoyage.data.TravelDbHelper;
 import net.osmand.plus.wikivoyage.explore.travelcards.ArticleTravelCard;
+import net.osmand.plus.wikivoyage.explore.travelcards.BaseTravelCard;
 import net.osmand.plus.wikivoyage.explore.travelcards.HeaderTravelCard;
 import net.osmand.plus.wikivoyage.explore.travelcards.OpenBetaTravelCard;
 import net.osmand.plus.wikivoyage.explore.travelcards.StartEditingTravelCard;
@@ -56,8 +57,8 @@ public class ExploreTabFragment extends BaseOsmAndFragment {
 		return mainView;
 	}
 
-	private List<Object> generateItems() {
-		final List<Object> items = new ArrayList<>();
+	private List<BaseTravelCard> generateItems() {
+		final List<BaseTravelCard> items = new ArrayList<>();
 		final OsmandApplication app = getMyApplication();
 
 		addDownloadUpdateCard();
@@ -91,7 +92,7 @@ public class ExploreTabFragment extends BaseOsmAndFragment {
 		popularDestinationsSearchTask.execute();
 	}
 
-	private void addOpenBetaTravelCard(List<Object> items, final boolean nightMode) {
+	private void addOpenBetaTravelCard(List<BaseTravelCard> items, final boolean nightMode) {
 		final OsmandApplication app = getMyApplication();
 		if ((Version.isFreeVersion(app) && !app.getSettings().LIVE_UPDATES_PURCHASED.get()
 				&& !app.getSettings().FULL_VERSION_PURCHASED.get())) {
@@ -167,7 +168,7 @@ public class ExploreTabFragment extends BaseOsmAndFragment {
 			StartEditingTravelCard startEditingTravelCard = weakStartEditingTravelCard.get();
 
 			if (activity != null && adapter != null && startEditingTravelCard != null) {
-				List<Object> adapterItems = adapter.getItems();
+				List<BaseTravelCard> adapterItems = adapter.getItems();
 
 				if (adapterItems.contains(startEditingTravelCard)) {
 					adapterItems.remove(startEditingTravelCard);
