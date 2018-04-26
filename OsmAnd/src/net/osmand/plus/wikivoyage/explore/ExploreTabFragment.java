@@ -38,9 +38,13 @@ public class ExploreTabFragment extends BaseOsmAndFragment {
 	private StartEditingTravelCard startEditingTravelCard;
 	private ProgressBar progressBar;
 
+	private boolean nightMode;
+
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+		nightMode = !getMyApplication().getSettings().isLightContent();
+
 		final View mainView = inflater.inflate(R.layout.fragment_explore_tab, container, false);
 		progressBar = (ProgressBar) mainView.findViewById(R.id.progressBar);
 		final RecyclerView rv = (RecyclerView) mainView.findViewById(R.id.recycler_view);
@@ -56,18 +60,17 @@ public class ExploreTabFragment extends BaseOsmAndFragment {
 	private List<Object> generateItems() {
 		final List<Object> items = new ArrayList<>();
 		final OsmandApplication app = getMyApplication();
-		final boolean nightMode = !getSettings().isLightContent();
 
-		addDownloadUpdateCard(nightMode);
+		addDownloadUpdateCard();
 		startEditingTravelCard = new StartEditingTravelCard(app, nightMode);
 		items.add(new OpenBetaTravelCard(app, nightMode, getFragmentManager()));
 		items.add(startEditingTravelCard);
-		addPopularDestinations(app, nightMode);
+		addPopularDestinations(app);
 
 		return items;
 	}
 
-	private void addDownloadUpdateCard(final boolean nightMode) {
+	private void addDownloadUpdateCard() {
 		final OsmandApplication app = getMyApplication();
 		new CheckWorldWikivoyageTask(app, new CheckWorldWikivoyageTask.Callback() {
 			@Override
@@ -82,8 +85,10 @@ public class ExploreTabFragment extends BaseOsmAndFragment {
 		}).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
-	private void addPopularDestinations(OsmandApplication app, boolean nightMode) {
-		PopularDestinationsSearchTask popularDestinationsSearchTask = new PopularDestinationsSearchTask(app.getTravelDbHelper(), getMyActivity(), adapter, nightMode, startEditingTravelCard, progressBar);
+	private void addPopularDestinations(OsmandApplication app) {
+		PopularDestinationsSearchTask popularDestinationsSearchTask = new PopularDestinationsSearchTask(
+				app.getTravelDbHelper(), getMyActivity(), adapter, nightMode, startEditingTravelCard, progressBar
+		);
 		popularDestinationsSearchTask.execute();
 	}
 
@@ -136,7 +141,7 @@ public class ExploreTabFragment extends BaseOsmAndFragment {
 		private boolean nightMode;
 
 		PopularDestinationsSearchTask(TravelDbHelper travelDbHelper,
-		                              OsmandActionBarActivity context, ExploreRvAdapter adapter, boolean nightMode, StartEditingTravelCard startEditingTravelCard, View progressBar) {
+									  OsmandActionBarActivity context, ExploreRvAdapter adapter, boolean nightMode, StartEditingTravelCard startEditingTravelCard, View progressBar) {
 			this.travelDbHelper = travelDbHelper;
 			weakContext = new WeakReference<>(context);
 			weakAdapter = new WeakReference<>(adapter);
