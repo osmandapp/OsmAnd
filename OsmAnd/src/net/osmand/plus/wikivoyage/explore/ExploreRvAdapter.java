@@ -6,12 +6,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import net.osmand.plus.R;
 import net.osmand.plus.wikivoyage.explore.travelcards.ArticleTravelCard;
 import net.osmand.plus.wikivoyage.explore.travelcards.ArticleTravelCard.ArticleTravelVH;
+import net.osmand.plus.wikivoyage.explore.travelcards.HeaderTravelCard;
+import net.osmand.plus.wikivoyage.explore.travelcards.HeaderTravelCard.HeaderTravelVH;
 import net.osmand.plus.wikivoyage.explore.travelcards.OpenBetaTravelCard;
 import net.osmand.plus.wikivoyage.explore.travelcards.OpenBetaTravelCard.OpenBetaTravelVH;
 import net.osmand.plus.wikivoyage.explore.travelcards.StartEditingTravelCard;
@@ -23,8 +23,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ExploreRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-
-	private static final int HEADER_TYPE = 3;
 
 	private final List<Object> items = new ArrayList<>();
 
@@ -47,8 +45,8 @@ public class ExploreRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 			case TravelDownloadUpdateCard.TYPE:
 				return new DownloadUpdateVH(inflate(parent, R.layout.travel_download_update_card));
 
-			case HEADER_TYPE:
-				return new HeaderVH(inflate(parent, R.layout.wikivoyage_list_header));
+			case HeaderTravelCard.TYPE:
+				return new HeaderTravelVH(inflate(parent, R.layout.wikivoyage_list_header));
 
 			default:
 				throw new RuntimeException("Unsupported view type: " + viewType);
@@ -63,20 +61,14 @@ public class ExploreRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 	@Override
 	public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int position) {
 		Object item = getItem(position);
-		if (viewHolder instanceof HeaderVH && item instanceof String) {
-			final HeaderVH holder = (HeaderVH) viewHolder;
-			holder.title.setText((String) item);
-			if (getArticleItemCount() > 0) {
-				holder.description.setText(String.valueOf(getArticleItemCount()));
-				holder.description.setVisibility(View.VISIBLE);
-				holder.progressBar.setVisibility(View.GONE);
-			} else {
-				holder.progressBar.setVisibility(View.VISIBLE);
-				holder.description.setVisibility(View.INVISIBLE);
-			}
+		if (viewHolder instanceof HeaderTravelVH && item instanceof HeaderTravelCard) {
+			HeaderTravelCard headerTravelCard = (HeaderTravelCard) item;
+			headerTravelCard.setArticleItemCount(getArticleItemCount());
+			headerTravelCard.bindViewHolder(viewHolder);
 		} else if (viewHolder instanceof ArticleTravelVH && item instanceof ArticleTravelCard) {
-			((ArticleTravelCard) item).bindViewHolder(viewHolder);
-			((ArticleTravelCard) item).setLastItem(position == getLastArticleItemIndex());
+			ArticleTravelCard articleTravelCard = (ArticleTravelCard) item;
+			articleTravelCard.setLastItem(position == getLastArticleItemIndex());
+			articleTravelCard.bindViewHolder(viewHolder);
 		} else if (viewHolder instanceof OpenBetaTravelVH && item instanceof OpenBetaTravelCard) {
 			((OpenBetaTravelCard) item).bindViewHolder(viewHolder);
 		} else if (viewHolder instanceof StartEditingTravelVH && item instanceof StartEditingTravelCard) {
@@ -89,8 +81,8 @@ public class ExploreRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 	@Override
 	public int getItemViewType(int position) {
 		Object object = getItem(position);
-		if (object instanceof String) {
-			return HEADER_TYPE;
+		if (object instanceof HeaderTravelCard) {
+			return ((HeaderTravelCard) object).getCardType();
 		} else if (object instanceof OpenBetaTravelCard) {
 			return ((OpenBetaTravelCard) object).getCardType();
 		} else if (object instanceof StartEditingTravelCard) {
@@ -148,19 +140,5 @@ public class ExploreRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 			return true;
 		}
 		return false;
-	}
-
-	static class HeaderVH extends RecyclerView.ViewHolder {
-
-		final TextView title;
-		final TextView description;
-		final ProgressBar progressBar;
-
-		HeaderVH(View itemView) {
-			super(itemView);
-			title = (TextView) itemView.findViewById(R.id.title);
-			description = (TextView) itemView.findViewById(R.id.description);
-			progressBar = (ProgressBar) itemView.findViewById(R.id.progressBar);
-		}
 	}
 }

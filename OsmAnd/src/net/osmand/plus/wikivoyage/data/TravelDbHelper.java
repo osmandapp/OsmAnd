@@ -222,7 +222,7 @@ public class TravelDbHelper {
 			cursor.close();
 		}
 
-		sortPopularArticles(res);
+		sortArticlesByDistance(res);
 
 		return res;
 	}
@@ -247,7 +247,7 @@ public class TravelDbHelper {
 		});
 	}
 
-	private void sortPopularArticles(List<TravelArticle> list) {
+	private void sortArticlesByDistance(List<TravelArticle> list) {
 		Location location = application.getLocationProvider().getLastKnownLocation();
 		if (location != null) {
 			final LatLon loc = new LatLon(location.getLatitude(), location.getLongitude());

@@ -22,6 +22,7 @@ import net.osmand.plus.download.ui.AbstractLoadLocalIndexTask;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
 import net.osmand.plus.wikivoyage.data.TravelDbHelper;
 import net.osmand.plus.wikivoyage.explore.travelcards.ArticleTravelCard;
+import net.osmand.plus.wikivoyage.explore.travelcards.HeaderTravelCard;
 import net.osmand.plus.wikivoyage.explore.travelcards.OpenBetaTravelCard;
 import net.osmand.plus.wikivoyage.explore.travelcards.StartEditingTravelCard;
 import net.osmand.plus.wikivoyage.explore.travelcards.TravelDownloadUpdateCard;
@@ -63,7 +64,7 @@ public class ExploreTabFragment extends BaseOsmAndFragment {
 		startEditingTravelCard = new StartEditingTravelCard(app, nightMode);
 		addOpenBetaTravelCard(items, nightMode);
 		items.add(startEditingTravelCard);
-		items.add(getString(R.string.popular_destinations));
+		items.add(new HeaderTravelCard(app, nightMode, getString(R.string.popular_destinations)));
 		addPopularDestinations(app);
 
 		return items;
