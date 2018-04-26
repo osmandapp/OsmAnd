@@ -142,11 +142,19 @@ public class TravelDownloadUpdateCard extends BaseTravelCard {
 	}
 
 	private void onSecondaryBtnClick() {
-		Toast.makeText(app, "Secondary button", Toast.LENGTH_SHORT).show();
+		if (loadingInProgress) {
+			Toast.makeText(app, "Cancel", Toast.LENGTH_SHORT).show();
+		} else if (!download) {
+			Toast.makeText(app, "Later", Toast.LENGTH_SHORT).show();
+		}
 	}
 
 	private void onPrimaryBtnClick() {
-		Toast.makeText(app, "Primary button", Toast.LENGTH_SHORT).show();
+		if (download) {
+			Toast.makeText(app, "Download", Toast.LENGTH_SHORT).show();
+		} else {
+			Toast.makeText(app, "Update", Toast.LENGTH_SHORT).show();
+		}
 	}
 
 	public static class DownloadUpdateVH extends RecyclerView.ViewHolder {
