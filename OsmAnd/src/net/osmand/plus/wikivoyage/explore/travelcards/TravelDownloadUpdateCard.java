@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -24,10 +23,28 @@ public class TravelDownloadUpdateCard extends BaseTravelCard {
 	private boolean download;
 	private boolean loadingInProgress;
 
+	private ClickListener listener;
+
 	@Nullable
 	private IndexItem indexItem;
 
 	private DateFormat dateFormat;
+
+	public boolean isDownload() {
+		return download;
+	}
+
+	public boolean isLoadingInProgress() {
+		return loadingInProgress;
+	}
+
+	public void setLoadingInProgress(boolean loadingInProgress) {
+		this.loadingInProgress = loadingInProgress;
+	}
+
+	public void setListener(ClickListener listener) {
+		this.listener = listener;
+	}
 
 	public void setIndexItem(@Nullable IndexItem indexItem) {
 		this.indexItem = indexItem;
@@ -53,6 +70,7 @@ public class TravelDownloadUpdateCard extends BaseTravelCard {
 				holder.fileIcon.setImageDrawable(getFileIcon());
 				holder.fileTitle.setText(getFileTitle());
 				holder.fileDescription.setText(getFileDescription());
+				holder.progressBar.setVisibility(loadingInProgress ? View.VISIBLE : View.GONE);
 			}
 			boolean primaryBtnVisible = updatePrimaryButton(holder);
 			boolean secondaryBtnVisible = updateSecondaryButton(holder);
@@ -113,7 +131,9 @@ public class TravelDownloadUpdateCard extends BaseTravelCard {
 			vh.secondaryBtn.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					onSecondaryBtnClick();
+					if (listener != null) {
+						listener.onSecondaryButtonClick();
+					}
 				}
 			});
 			return true;
@@ -132,7 +152,9 @@ public class TravelDownloadUpdateCard extends BaseTravelCard {
 			vh.primaryButton.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					onPrimaryBtnClick();
+					if (listener != null) {
+						listener.onPrimaryButtonClick();
+					}
 				}
 			});
 			return true;
@@ -141,20 +163,11 @@ public class TravelDownloadUpdateCard extends BaseTravelCard {
 		return false;
 	}
 
-	private void onSecondaryBtnClick() {
-		if (loadingInProgress) {
-			Toast.makeText(app, "Cancel", Toast.LENGTH_SHORT).show();
-		} else if (!download) {
-			Toast.makeText(app, "Later", Toast.LENGTH_SHORT).show();
-		}
-	}
+	public interface ClickListener {
 
-	private void onPrimaryBtnClick() {
-		if (download) {
-			Toast.makeText(app, "Download", Toast.LENGTH_SHORT).show();
-		} else {
-			Toast.makeText(app, "Update", Toast.LENGTH_SHORT).show();
-		}
+		void onPrimaryButtonClick();
+
+		void onSecondaryButtonClick();
 	}
 
 	public static class DownloadUpdateVH extends RecyclerView.ViewHolder {
