@@ -14,6 +14,7 @@ import android.widget.ProgressBar;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
+import net.osmand.plus.Version;
 import net.osmand.plus.activities.LocalIndexHelper;
 import net.osmand.plus.activities.LocalIndexInfo;
 import net.osmand.plus.activities.OsmandActionBarActivity;
@@ -38,9 +39,13 @@ public class ExploreTabFragment extends BaseOsmAndFragment {
 	private ExploreRvAdapter adapter = new ExploreRvAdapter();
 	private StartEditingTravelCard startEditingTravelCard;
 
+	private boolean nightMode;
+
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+		nightMode = !getMyApplication().getSettings().isLightContent();
+
 		final View mainView = inflater.inflate(R.layout.fragment_explore_tab, container, false);
 		final RecyclerView rv = (RecyclerView) mainView.findViewById(R.id.recycler_view);
 
@@ -55,19 +60,22 @@ public class ExploreTabFragment extends BaseOsmAndFragment {
 	private List<Object> generateItems() {
 		final List<Object> items = new ArrayList<>();
 		final OsmandApplication app = getMyApplication();
-		final boolean nightMode = !getSettings().isLightContent();
 
+		addDownloadUpdateCard();
+		startEditingTravelCard = new StartEditingTravelCard(app, nightMode);
+		items.add(new OpenBetaTravelCard(app, nightMode, getFragmentManager()));
+		items.add(startEditingTravelCard);
+		addPopularDestinations(app);
 		addDownloadUpdateCard(nightMode);
 		addOpenBetaTravelCard(items, nightMode);
 		startEditingTravelCard = new StartEditingTravelCard(app, nightMode);
 		items.add(startEditingTravelCard);
 		items.add(getString(R.string.popular_destinations));
 		addPopularDestinations(app, nightMode);
-
 		return items;
 	}
 
-	private void addDownloadUpdateCard(final boolean nightMode) {
+	private void addDownloadUpdateCard() {
 		final OsmandApplication app = getMyApplication();
 		new CheckWorldWikivoyageTask(app, new CheckWorldWikivoyageTask.Callback() {
 			@Override
@@ -82,6 +90,12 @@ public class ExploreTabFragment extends BaseOsmAndFragment {
 		}).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
+	private void addPopularDestinations(OsmandApplication app) {
+		PopularDestinationsSearchTask popularDestinationsSearchTask = new PopularDestinationsSearchTask(
+				app.getTravelDbHelper(), getMyActivity(), adapter, nightMode, startEditingTravelCard, progressBar
+		);
+		popularDestinationsSearchTask.execute();
+	}
 	private void addOpenBetaTravelCard(List<Object> items, final boolean nightMode) {
 		final OsmandApplication app = getMyApplication();
 		if ((Version.isFreeVersion(app) && !app.getSettings().LIVE_UPDATES_PURCHASED.get()
@@ -89,12 +103,6 @@ public class ExploreTabFragment extends BaseOsmAndFragment {
 			items.add(new OpenBetaTravelCard(app, nightMode, getFragmentManager()));
 		}
 	}
-
-	private void addPopularDestinations(OsmandApplication app, boolean nightMode) {
-		PopularDestinationsSearchTask popularDestinationsSearchTask = new PopularDestinationsSearchTask(app.getTravelDbHelper(), getMyActivity(), adapter, nightMode, startEditingTravelCard);
-		popularDestinationsSearchTask.execute();
-	}
-
 	private static class CheckWorldWikivoyageTask extends AsyncTask<Void, Void, Boolean> {
 
 		private OsmandApplication app;
@@ -143,7 +151,7 @@ public class ExploreTabFragment extends BaseOsmAndFragment {
 		private boolean nightMode;
 
 		PopularDestinationsSearchTask(TravelDbHelper travelDbHelper,
-		                              OsmandActionBarActivity context, ExploreRvAdapter adapter, boolean nightMode, StartEditingTravelCard startEditingTravelCard) {
+									  OsmandActionBarActivity context, ExploreRvAdapter adapter, boolean nightMode, StartEditingTravelCard startEditingTravelCard, View progressBar) {
 			this.travelDbHelper = travelDbHelper;
 			weakContext = new WeakReference<>(context);
 			weakAdapter = new WeakReference<>(adapter);
