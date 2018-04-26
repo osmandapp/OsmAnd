@@ -242,7 +242,11 @@ public class WikivoyageWebViewClient extends WebViewClient implements RegionCall
 							break;
 						}
 						if(osmandRegions.contain(b, x31, y31)) {
-							return osmandRegions.getLocaleName(osmandRegions.getDownloadName(b), false);
+							String downloadName = osmandRegions.getDownloadName(b);
+							if (downloadName == null) {
+								return "";
+							}
+							return osmandRegions.getLocaleName(downloadName, false);
 						}
 					}
 				}
