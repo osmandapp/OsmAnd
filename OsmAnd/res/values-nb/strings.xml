@@ -2774,7 +2774,20 @@
 \n • Last opp GPX-spor til OSM direkte fra programmet
 \n • Legg til interessepunkter og last dem opp direkte til OSM (eller senere hvis frakoblet)
 \n</string>
-    <string name="osmand_plus_extended_description_part8">Omtrentlig kartdekning og kvalitet: • Vesteuropa: **** • Østeuropa: *** • Russland: *** • Nordamerika: *** • Søramerika: ** • Asia: ** • Japan &amp; Korea: *** • Midtøsten: ** • Afrika: ** • Antarktis: * De fleste landene i verden kan lastes ned! Fra Afghanistan til Zimbabwe, fra Australia til USA. Argentina, Brasil, Canada, Frankrike, Tyskland, Mexico, Storbritannia, Spania, …</string>
+    <string name="osmand_plus_extended_description_part8">Omtrentlig kartdekning og kvalitet:
+\n • Vest-Europa: ****
+\n • Øst-Europa: ***
+\n • Russland: ***
+\n • Nord-Amerika: ***
+\n • Sør-Amerika: **
+\n • Asia: **
+\n • Japan &amp; Korea: ***
+\n • Midtøsten: **
+\n • Afrika: **
+\n • Antarktis: *
+\n De fleste landene i verden kan lastes ned.
+\n Fra Afghanistan til Zimbabwe, fra Australia til USA. Argentina, Brasil, Canada, Frankrike, Tyskland, Mexico, Storbritannia, Spania, …
+\n</string>
     <string name="rendering_attr_noPolygons_description">Gjør alle landarealelementer på kartet gjennomsiktige.</string>
     <string name="search_offline_geo_error">Kunne ikke tolke geo-hensikt \"%s\".</string>
     <string name="foot">ft</string>
@@ -2946,12 +2959,12 @@
 \n • Del din posisjon slik at dine venner kan finne deg
 \n</string>
     <string name="osmand_plus_extended_description_part6">"Sykkel- og fotgjengerfunksjoner
-\n• Visning av gang- vandring- og sykkelstier, flott for utendørsaktiviteter
-\n• Spesielle ruteplanleggings- og visningsmoduser for syklister og fotgjengere
-\n• Visning av stoppesteder for offentlig transport (buss, trikk, tog) inkludert linjenavn (alternativ)
-\n• Turopptak til lokal GPX-fil eller nettbasert tjeneste (alternativ)
-\n• Hastighet- og høydevisning  (alternativ)
-\n• Visning av koter og relieffskygger (via programtillegg)"</string>
+\n • Visning av gang-, vandring- og sykkelstier, flott for utendørsaktiviteter
+\n • Spesielle ruteplanleggings- og visningsmoduser for syklister og fotgjengere
+\n • Visning av stoppesteder for offentlig transport (buss, trikk, tog) inkludert linjenavn (alternativ)
+\n • Turopptak til lokal GPX-fil eller nettbasert tjeneste (alternativ)
+\n • Hastighet- og høydevisning  (alternativ)
+\n • Visning av koter og relieffskygger (via programtillegg)"</string>
     <string name="live_monitoring_url_descr">Angi nettadressen med parametersyntaks: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}.</string>
     <string name="wikivoyage_download_pics_descr">Bilder i artiklene kan lastes ned og vises og lagres på enheten, så det er tilgang til dem mens du er nettfrakoblet. Innstillingen kan endres i Utforsk &gt; Alternativer.</string>
     <string name="shared_string_dont">Ikke</string>
