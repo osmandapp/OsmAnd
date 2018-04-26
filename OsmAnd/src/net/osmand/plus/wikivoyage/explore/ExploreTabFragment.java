@@ -17,7 +17,9 @@ import net.osmand.plus.activities.LocalIndexHelper;
 import net.osmand.plus.activities.LocalIndexInfo;
 import net.osmand.plus.activities.OsmandActionBarActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadResources;
+import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.download.ui.AbstractLoadLocalIndexTask;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
 import net.osmand.plus.wikivoyage.data.TravelDbHelper;
@@ -32,7 +34,7 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ExploreTabFragment extends BaseOsmAndFragment {
+public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIndexesThread.DownloadEvents {
 
 	private static final int DOWNLOAD_UPDATE_CARD_POSITION = 0;
 
@@ -40,6 +42,9 @@ public class ExploreTabFragment extends BaseOsmAndFragment {
 	private StartEditingTravelCard startEditingTravelCard;
 
 	private boolean nightMode;
+
+	private boolean worldWikivoyageDownloaded;
+	private boolean downloadIndexesRequested;
 
 	@Nullable
 	@Override
@@ -57,11 +62,52 @@ public class ExploreTabFragment extends BaseOsmAndFragment {
 		return mainView;
 	}
 
+	@Override
+	public void onResume() {
+		super.onResume();
+		getMyApplication().getDownloadThread().setUiActivity(this);
+	}
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		getMyApplication().getDownloadThread().resetUiActivity(this);
+	}
+
+	@Override
+	public void newDownloadIndexes() {
+		if (downloadIndexesRequested) {
+			downloadIndexesRequested = false;
+			OsmandApplication app = getMyApplication();
+
+			IndexItem wikivoyageItem = app.getDownloadThread().getIndexes().getWorldWikivoyageItem();
+			boolean outdated = wikivoyageItem != null && wikivoyageItem.isOutdated();
+
+			if (!worldWikivoyageDownloaded || outdated) {
+				TravelDownloadUpdateCard card = new TravelDownloadUpdateCard(app, nightMode, !outdated);
+				card.setIndexItem(wikivoyageItem);
+				if (adapter.addItem(DOWNLOAD_UPDATE_CARD_POSITION, card)) {
+					adapter.notifyDataSetChanged();
+				}
+			}
+		}
+	}
+
+	@Override
+	public void downloadInProgress() {
+
+	}
+
+	@Override
+	public void downloadHasFinished() {
+
+	}
+
 	private List<BaseTravelCard> generateItems() {
 		final List<BaseTravelCard> items = new ArrayList<>();
 		final OsmandApplication app = getMyApplication();
 
-		addDownloadUpdateCard();
+		runWorldWikivoyageFileCheck();
 		startEditingTravelCard = new StartEditingTravelCard(app, nightMode);
 		addOpenBetaTravelCard(items, nightMode);
 		items.add(startEditingTravelCard);
@@ -71,17 +117,14 @@ public class ExploreTabFragment extends BaseOsmAndFragment {
 		return items;
 	}
 
-	private void addDownloadUpdateCard() {
+	private void runWorldWikivoyageFileCheck() {
 		final OsmandApplication app = getMyApplication();
 		new CheckWorldWikivoyageTask(app, new CheckWorldWikivoyageTask.Callback() {
 			@Override
 			public void onCheckFinished(boolean worldWikivoyageDownloaded) {
-				if (!worldWikivoyageDownloaded && adapter != null) {
-					TravelDownloadUpdateCard card = new TravelDownloadUpdateCard(app, nightMode, true);
-					if (adapter.addItem(DOWNLOAD_UPDATE_CARD_POSITION, card)) {
-						adapter.notifyDataSetChanged();
-					}
-				}
+				ExploreTabFragment.this.worldWikivoyageDownloaded = worldWikivoyageDownloaded;
+				downloadIndexesRequested = true;
+				app.getDownloadThread().runReloadIndexFilesSilent();
 			}
 		}).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
