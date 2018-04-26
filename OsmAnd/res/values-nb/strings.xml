@@ -1845,28 +1845,28 @@
     <string name="rendering_attr_contourWidth_description">Kotebredde</string>
     <string name="rendering_attr_contourWidth_name">Kotebredde</string>
     <string name="srtm_paid_version_msg">Overvei å betale for kote-programtillegget for å støtte videre utvikling.</string>
-    <string name="osmand_long_description_1000_chars">OsmAnd (OSM Automated Navigation Directions) 
-\n 
-\nOsmAnd er et navigeringsprogram med åpen kildekode og med tilgang til et bredt mangfold av globale data fra OpenStreetMap (OSM). Alle kartdata (vektor- eller fliskart) kan lagres på telefonens minnekort for nettfrakoblet bruk. Frakoblet og nettbasert rutefunksjon tilbys også, inkludert talebaserte anvisninger. 
-\n 
-\nNoen av kjernefunksjonene: 
-\n - Fullstendig nettfrakoblet funksjonalitet (lagre nedlastede vektor- eller fliskart i enhetens lagringsmedium) 
-\n - Kompakte frakoblede vektorkart fra hele verden tilgjengelige 
-\n - Last ned lands- eller regionkart direkte fra programmet 
-\n - Overlegg av flere kartlag mulig, som GPX og navigeringsspor, interessepunkter, favoritter, koter, stoppesteder for offentlig transport, ytterligere kart med egendefinert gjennomsiktighet 
-\n - Frakoblet søk etter adresser og steder (interessepunkter) 
-\n - Frakoblet ruteplanlegging for middels avstander 
-\n - Bil, sykkel eller fotgjengermoduser med valgfri: 
-\n - Automatisk skifting mellom dag/natt-visning 
-\n - Fartsavhengig kart-zooming 
-\n - Kartjustering etter kompass- eller bevegelsesretning 
-\n - Filhenvisning, fartsgrensevisning, innspilte og TTS-tale 
-\n 
-\nBegrensninger i gratisversjonen av OsmAnd: 
-\n - Antall kartnedlastinger er begrenset 
-\n - Ingen nettfrakoblet tilgang til interessepunkter fra Wikipedia 
-\n 
-\nOsmAnd utvikles aktivt, og prosjektet vårt og dets videre framdrift avhenger av finansielle bidrag for å drive utviklingen og testingen av nye funksjoner. Overvei å kjøpe OsmAnd+ eller støtte spesifikke nye funksjoner eller bidra med en generell donasjon på https://osmand.net.</string>
+    <string name="osmand_long_description_1000_chars">OsmAnd (OSM Automated Navigation Directions)
+\n
+\n OsmAnd er et navigeringsprogram med åpen kildekode og med tilgang til et bredt mangfold av globale data fra OpenStreetMap (OSM). Alle kartdata (vektor- eller fliskart) kan lagres på telefonens minnekort for nettfrakoblet bruk. Frakoblet og nettbasert rutefunksjon tilbys også, inkludert talebaserte anvisninger.
+\n
+\n Noen av kjernefunksjonene:
+\n - Fullstendig nettfrakoblet funksjonalitet (lagre nedlastede vektor- eller fliskart i enhetens lagringsmedium)
+\n - Kompakte frakoblede vektorkart fra hele verden tilgjengelige
+\n - Last ned lands- eller regionkart direkte fra programmet
+\n - Overlegg av flere kartlag mulig, som GPX og navigeringsspor, interessepunkter, favoritter, koter, stoppesteder for offentlig transport, ytterligere kart med egendefinert gjennomsiktighet
+\n - Frakoblet søk etter adresser og steder (interessepunkter)
+\n - Frakoblet ruteplanlegging for middels avstander
+\n - Bil, sykkel eller fotgjengermoduser med valgfri:
+\n - Automatisk skifting mellom dag/natt-visning
+\n - Fartsavhengig kart-zooming
+\n - Kartjustering etter kompass- eller bevegelsesretning
+\n - Filhenvisning, fartsgrensevisning, innspilte og TTS-tale
+\n
+\n Begrensninger i gratisversjonen av OsmAnd:
+\n - Antall kartnedlastinger er begrenset
+\n - Ingen nettfrakoblet tilgang til interessepunkter fra Wikipedia
+\n
+\n OsmAnd utvikles aktivt, og prosjektet vårt og dets videre framdrift avhenger av finansielle bidrag for å drive utviklingen og testingen av nye funksjoner. Overvei å kjøpe OsmAnd+ eller støtte spesifikke nye funksjoner eller bidra med en generell donasjon på https://osmand.net.</string>
 	<string name="upload_osm_note_description">Du kan laste opp ditt OSM-notat anonymt eller ved å bruke din profil hos OpenStreetmap.org.</string>
     <string name="gpx_no_tracks_title">Du har ingen spor ennå</string>
     <string name="gpx_no_tracks_title_folder">Legg til spor i mappen</string>
@@ -2182,27 +2182,35 @@
     <string name="points_delete_multiple">Du skal slette %1$d punkt(er). Er du sikker?</string>
     <string name="average_speed">Gjennomsnittshastighet</string>
     <string name="select_gpx_folder">Velg spor-mappe</string>
-    <string name="osmand_extended_description_part1">OsmAnd (OSM Automated Navigation Directions) er et kart- og navigeringsprogram med tilgang til gratis, verdensomspennende og høykvalitets data fra OpenStreetMap (OSM). Gled deg over tale og visuell navigering, visning av interessepunkter, oppretting og behandling av GPX-spor, bruk av kotevisualisering og høydeinformasjon (gjennom programtillegg), et valg mellom kjøring, sykling, fotgjenger-modus, OSM-redigering og mye mer.</string>
-    <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OSM Automated Navigation Directions) 
-\n 
-\nOsmAnd+ er et navigeringsprogram med åpen kildekode og med tilgang til et bredt mangfold av globale data fra OpenStreetMap (OSM). Alle kartdata (vektor- eller fliskart) kan lagres på telefonens minnekort for nettfrakoblet bruk. Frakoblet og nettbasert rutefunksjon tilbys også, inkludert talebaserte anvisninger. 
-\n 
-\nOsmAnd+ er betalingsversjonen, ved å kjøpe den støtter du prosjektet, finansierer utviklingen av nye funksjoner, og mottar de siste oppdateringene. 
-\n 
-\nNoen av kjernefunksjonene: 
-\n - Fullstendig nettfrakoblet funksjonalitet (lagre nedlastede vektor- eller fliskart i enhetens lagringsmedium) 
-\n - Kompakte frakoblede vektorkart fra hele verden tilgjengelige 
-\n - Ubegrenset nedlasting av lands- eller regionkart direkte fra programmet 
-\n - Frakoblede Wikipedia-funksjoner (last ned Wikipedia-interessepunkter), flott for sightseeing 
-\n - Overlegg av flere kartlag mulig, som GPX og navigeringsspor, interessepunkter, favoritter, koter, stoppesteder for offentlig transport, ytterligere kart med egendefinert gjennomsiktighet 
-\n - Frakoblet søk etter adresser og steder (interessepunkter) 
-\n - Frakoblet ruteplanlegging for middels avstander 
-\n - Bil, sykkel eller fotgjengermoduser med valgfri: 
-\n - Automatisk skifting mellom dag/natt-visning 
-\n - Fartsavhengig kart-zooming 
-\n - Kartjustering etter kompass- eller bevegelsesretning 
-\n - Filhenvisning, fartsgrensevisning, innspilte og TTS-tale</string>
-    <string name="osmand_plus_extended_description_part1">OsmAnd+ (OSM Automated Navigation Directions) er et kart- og navigeringsprogram med tilgang til gratis, verdensomspennende og høykvalitets data fra OpenStreetMap (OSM). Gled deg over tale og visuell navigering, visning av interessepunkter, oppretting og behandling av GPX-spor, bruk av kotevisualisering og høydeinformasjon, et valg mellom kjøring, sykling, fotgjenger-modus, OSM-redigering og mye mer. OsmAnd+ er betalingsversjonen, ved å kjøpe den støtter du prosjektet, finansierer utviklingen av nye funksjoner, og mottar de siste oppdateringene. Noen av hovedfunksjonene:</string>
+    <string name="osmand_extended_description_part1">OsmAnd (OSM Automated Navigation Directions) er et kart- og navigeringsprogram med tilgang til gratis, verdensomspennende og høykvalitets data fra OpenStreetMap (OSM).
+\n
+\n Gled deg over tale og visuell navigering, visning av interessepunkter, oppretting og behandling av GPX-spor, bruk av kotevisualisering og høydeinformasjon (gjennom programtillegg), et valg mellom kjøring, sykling, fotgjenger-modus, OSM-redigering og mye mer.</string>
+    <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OSM Automated Navigation Directions)
+\n
+\n OsmAnd+ er et navigeringsprogram med åpen kildekode og med tilgang til et bredt mangfold av globale data fra OpenStreetMap (OSM). Alle kartdata (vektor- eller fliskart) kan lagres på telefonens minnekort for nettfrakoblet bruk. Frakoblet og nettbasert rutefunksjon tilbys også, inkludert talebaserte anvisninger.
+\n
+\n OsmAnd+ er betalingsversjonen, ved å kjøpe den støtter du prosjektet, finansierer utviklingen av nye funksjoner, og mottar de siste oppdateringene.
+\n
+\n Noen av kjernefunksjonene:
+\n - Fullstendig nettfrakoblet funksjonalitet (lagre nedlastede vektor- eller fliskart i enhetens lagringsmedium)
+\n - Kompakte frakoblede vektorkart fra hele verden tilgjengelige
+\n - Ubegrenset nedlasting av lands- eller regionkart direkte fra programmet
+\n - Frakoblede Wikipedia-funksjoner (last ned Wikipedia-interessepunkter), flott for sightseeing
+\n - Overlegg av flere kartlag mulig, som GPX og navigeringsspor, interessepunkter, favoritter, koter, stoppesteder for offentlig transport, ytterligere kart med egendefinert gjennomsiktighet
+\n - Frakoblet søk etter adresser og steder (interessepunkter)
+\n - Frakoblet ruteplanlegging for middels avstander
+\n - Bil, sykkel eller fotgjengermoduser med valgfri:
+\n - Automatisk skifting mellom dag/natt-visning
+\n - Fartsavhengig kart-zooming
+\n - Kartjustering etter kompass- eller bevegelsesretning
+\n - Filhenvisning, fartsgrensevisning, innspilte og TTS-tale
+\n</string>
+    <string name="osmand_plus_extended_description_part1">OsmAnd+ (OSM Automated Navigation Directions) er et kart- og navigeringsprogram med tilgang til gratis, verdensomspennende og høykvalitets data fra OpenStreetMap (OSM).
+\n Gled deg over tale og visuell navigering, visning av interessepunkter, oppretting og behandling av GPX-spor, bruk av kotevisualisering og høydeinformasjon, et valg mellom kjøring, sykling, fotgjenger-modus, OSM-redigering og mye mer.
+\n
+\n OsmAnd+ er betalingsversjonen, ved å kjøpe den støtter du prosjektet, finansierer utviklingen av nye funksjoner, og mottar de siste oppdateringene.
+\n
+\n Noen av hovedfunksjonene:</string>
     <string name="quick_action_map_source_switch">Kartkilden er endret til \"%s\".</string>
     <string name="quick_action_map_source_action">Legg til kartkilde</string>
     <string name="quick_action_map_source_title">Kartkilder</string>
@@ -2753,9 +2761,19 @@
     <string name="shared_string_total">Totalt</string>
     <string name="osm_recipient_stat">Redigeringer %1$s, tilsammen %2$s mBTC</string>
     <string name="save_track_to_gpx_globally_descr">Generell posisjonslogging til GPX-fil kan skrus av eller på ved bruk av GPX-loggingsminiprogrammet på kartskjermen.</string>
-    <string name="osmand_extended_description_part4">Ski - OsmAnd-skikarttillegget gjør det mulig å se skiløyper med vanskelighetsgrad og ytterligere informasjon, som hvor heisene og andre fasiliteter finnes.</string>
-    <string name="osmand_extended_description_part5">Sykling • Du kan finne sykkelstier på kartet • GPS-navigering i sykkelmodus lager ruten din ved hjelp av sykkelstier • Du kan se hastigheten din og antall høydemeter • GPX-opptaksalternativet lar deg ta opp turen og dele den • Via et ekstra tillegg kan du aktivere visning av koter og relieffskygger</string>
-    <string name="osmand_extended_description_part7">Bidra til OSM • Rapporter datafeil • Last opp GPX-spor direkte fra programmet • Legg til interessepunkter og last dem opp til OSM (eller senere hvis du er frakoblet)</string>
+    <string name="osmand_extended_description_part4">Ski
+\n OsmAnd-skikarttillegget gjør det mulig å se skiløyper med vanskelighetsgrad og ytterligere informasjon, som hvor heisene og andre fasiliteter finnes.</string>
+    <string name="osmand_extended_description_part5">Sykling
+\n • Du kan finne sykkelstier på kartet
+\n • GPS-navigering i sykkelmodus lager ruten din ved hjelp av sykkelstier
+\n • Du kan se hastigheten din og antall høydemeter
+\n • GPX-opptaksalternativet lar deg ta opp turen og dele den
+\n • Via et ekstra tillegg kan du aktivere visning av koter og relieffskygger</string>
+    <string name="osmand_extended_description_part7">Bidra til OSM
+\n • Rapporter datafeil
+\n • Last opp GPX-spor til OSM direkte fra programmet
+\n • Legg til interessepunkter og last dem opp direkte til OSM (eller senere hvis frakoblet)
+\n</string>
     <string name="osmand_plus_extended_description_part8">Omtrentlig kartdekning og kvalitet: • Vesteuropa: **** • Østeuropa: *** • Russland: *** • Nordamerika: *** • Søramerika: ** • Asia: ** • Japan &amp; Korea: *** • Midtøsten: ** • Afrika: ** • Antarktis: * De fleste landene i verden kan lastes ned! Fra Afghanistan til Zimbabwe, fra Australia til USA. Argentina, Brasil, Canada, Frankrike, Tyskland, Mexico, Storbritannia, Spania, …</string>
     <string name="rendering_attr_noPolygons_description">Gjør alle landarealelementer på kartet gjennomsiktige.</string>
     <string name="search_offline_geo_error">Kunne ikke tolke geo-hensikt \"%s\".</string>
@@ -2910,21 +2928,23 @@
 \nSpor som er tatt opp kan deles med dine venner eller brukes som OSM-bidrag. Idrettsutøvere kan bruke innspilte spor til å følge treningen sin. Noe grunnleggende sporingsanalyse kan utføres direkte i OsmAnd, som rundetider, gjennomsnittshastighet etc., og spor kan selvfølgelig også analyseres senere i spesielle tredjeparts analyseprogrammer.</string>
     <string name="osmand_development_plugin_description">Dette programtillegget viser innstillinger for utvikling og feilrettingsfunksjoner, for testing eller simulering av veivisning, skjermtegningsytelse, eller stemmeanvisning. Disse innstillingene er ment for utviklere, og trengs ikke for vanlige brukere.</string>
     <string name="osmand_extended_description_part2">GPS-navigering
-\n• Du kan velge mellom frakoblet modus (ingen roaming-kostnader når du er utenlands) eller nettbasert modus (raskere)
-\n• Taleveiledning sving-for-sving leder deg langs veien (innspilt og syntetisert tale)
-\n• Ruten blir beregnet på nytt når du avviker fra den
-\n• Filanvisning, gatenavn, og estimert ankomsttid hjelper deg underveis
-\n• For å gjøre turen din tryggere, skifter dag/natt-modus automatisk
-\n• Du kan velge å vise fartsgrenser, og få påminnelser hvis de overskrides
-\n• Kart-zooming tilpasser seg hastigheten din
-\n• Søk reisemål etter adresse, etter type (f.eks. parkering, restaurant, hotell, bensinstasjon, museum), eller med geografiske koordinater
-\n• Støtter mellomliggende punkter på ruten
-\n• Du kan ta opp ditt eget, eller laste opp et GPX-spor og følge det</string>
+\n • Du kan velge mellom frakoblet modus (ingen roaming-kostnader når du er utenlands) eller nettbasert modus (raskere)
+\n • Taleveiledning sving-for-sving leder deg langs veien (innspilt og syntetisert tale)
+\n • Ruten blir beregnet på nytt når du avviker fra den
+\n • Filanvisning, gatenavn, og estimert ankomsttid hjelper deg underveis
+\n • For å gjøre turen din tryggere, skifter dag/natt-modus automatisk
+\n • Du kan velge å vise fartsgrenser, og få påminnelser hvis de overskrides
+\n • Kart-zooming tilpasser seg hastigheten din
+\n • Søk reisemål etter adresse, type (f.eks. parkering, restaurant, hotell, bensinstasjon, museum) eller geografiske koordinater
+\n • Støtter mellomliggende punkter på ruten
+\n • Du kan ta opp ditt eget, eller laste opp et GPX-spor og følge det
+\n</string>
     <string name="osmand_plus_extended_description_part5">Sikkerhetsfunksjoner
-\n• Valgfri automatisert bytte av dag/natt -visning
-\n• Valgfri visning av fartsgrenser, med påminnelse hvis du bryter dem
-\n• Valgfri fartsavhengig forstørrelse
-\n• Del din plassering slik at dine venner finner deg</string>
+\n • Valgfri automatisert skifte av dag/natt-visning
+\n • Valgfri visning av fartsgrenser, med påminnelse hvis du overskrider dem
+\n • Valgfri fartsavhengig zoom
+\n • Del din posisjon slik at dine venner kan finne deg
+\n</string>
     <string name="osmand_plus_extended_description_part6">"Sykkel- og fotgjengerfunksjoner
 \n• Visning av gang- vandring- og sykkelstier, flott for utendørsaktiviteter
 \n• Spesielle ruteplanleggings- og visningsmoduser for syklister og fotgjengere
