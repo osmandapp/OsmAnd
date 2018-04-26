@@ -76,10 +76,7 @@ public class ExploreRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 			}
 		} else if (viewHolder instanceof ArticleTravelVH && item instanceof ArticleTravelCard) {
 			((ArticleTravelCard) item).bindViewHolder(viewHolder);
-			ArticleTravelCard articleTravelCard = (ArticleTravelCard) item;
-			articleTravelCard.setLastItem(position == getLastArticleItemIndex());
-			articleTravelCard.bindViewHolder(viewHolder);
-			((ArticleTravelCard) item).bindViewHolder(viewHolder);
+			((ArticleTravelCard) item).setLastItem(position == getLastArticleItemIndex());
 		} else if (viewHolder instanceof OpenBetaTravelVH && item instanceof OpenBetaTravelCard) {
 			((OpenBetaTravelCard) item).bindViewHolder(viewHolder);
 		} else if (viewHolder instanceof StartEditingTravelVH && item instanceof StartEditingTravelCard) {
