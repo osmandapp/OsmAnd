@@ -2284,16 +2284,16 @@ L\'espai disponible és només de {2} MB.</string>
     <string name="quick_action_take_audio_note_descr">Si premeu el botó de l\'acció s\'afegirà una nota d\'àudio a la posició del centre de la pantalla.</string>
     <string name="quick_action_take_video_note_descr">"Si premeu el botó de l\'acció  s\'afegirà una nota de vídeo a la posició del centre de la pantalla."</string>
     <string name="quick_action_take_photo_note_descr">Si premeu el botó de l\'acció s\'afegirà una nota fotogràfica a la posició del centre de la pantalla.</string>
-    <string name="quick_action_add_osm_bug_descr">Si premeu el botó de l\'acció s\'afegirà una nota OSM situada al centre de la pantalla.</string>
-    <string name="quick_action_add_poi_descr">Si premeu el botó de l\'acció s\'afegirà un PDI a la posició del centre de la pantalla.</string>
-    <string name="quick_action_navigation_voice_descr">Si premeu el botó de l\'acció s\'activarà o es desactivarà la veu d\'orientació durant la navegació.</string>
-    <string name="quick_action_add_parking_descr">Si premeu el botó de l\'acció s\'afegirà un lloc d\'aparcament a la posició del centre de la pantalla.</string>
+    <string name="quick_action_add_osm_bug_descr">Si premeu aquest botó d\'acció s\'afegirà una nota OSM al centre de la pantalla.</string>
+    <string name="quick_action_add_poi_descr">Si premeu aquest botó d\'acció s\'afegirà un PDI al centre de la pantalla.</string>
+    <string name="quick_action_navigation_voice_descr">Si premeu aquest botó d\'acció s\'activarà o es desactivarà la veu d\'orientació durant la navegació.</string>
+    <string name="quick_action_add_parking_descr">Si premeu aquest botó d\'acció s\'afegirà un posició d\'aparcament al centre de la pantalla.</string>
     <string name="favorite_autofill_toast_text">" s\'ha desat a "</string>
     <string name="favorite_empty_place_name">Lloc</string>
     <string name="quick_action_duplicates">El nom d\'acció directa indicat ja s\'està utilitzant, s\'ha canviat pel de %1$s per evitar duplicats.</string>
     <string name="quick_action_duplicate">El nom de l\'acció directa està duplicat</string>
-    <string name="quick_action_showhide_favorites_descr">Si premeu el botó de l\'acció mostrarà o amagarà els punts preferits al mapa.</string>
-    <string name="quick_action_showhide_poi_descr">Si premeu el botó de l\'acció mostrarà o amagarà els PDI al mapa.</string>
+    <string name="quick_action_showhide_favorites_descr">Si premeu aquest botó d\'acció es mostraran o s\'amagaran els punts preferits en el mapa.</string>
+    <string name="quick_action_showhide_poi_descr">Si premeu aquest botó d\'acció es mostraran o s\'amagaran els PDIs en el mapa.</string>
     <string name="quick_action_showhide_favorites_title">Mostra/amaga preferits</string>
     <string name="quick_action_favorites_show">Mostra preferits</string>
     <string name="quick_action_favorites_hide">Amaga preferits</string>
@@ -2338,7 +2338,7 @@ L\'espai disponible és només de {2} MB.</string>
 Proporcioneu el codi complet</string>
     <string name="navigate_point_olc_info_area">OLC complet vàlid 
 Abasta l\'àrea: %1$s x %2$s</string>
-    <string name="quick_action_page_list_descr">Prement el botó d\'acció es mostra la pàgina següent seguint la llista.</string>
+    <string name="quick_action_page_list_descr">Prement aquest botó d\'acció es mostra la pàgina següent seguint la llista.</string>
     <string name="auto_split_recording_title">Divisió automàtica de les gravacions un cop aturades</string>
 	<string name="auto_split_recording_descr">Comença un nou segment desprès de 6 min d\'interrupció, una traça nova si es superen les 2 hores o un nou fitxer si encara dura més i ha canviat la data.</string>
     <string name="release_2_6">\\u2022 Nova opció: botó d\'acció ràpida 
@@ -2846,4 +2846,23 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="purchase_dialog_travel_description">Per llegir articles de viatge fora de línia, us cal comprar un dels elements següents.</string>
     <string name="purchase_dialog_subtitle">Seleccioneu l\'element adient:</string>
     <string name="travel_guide">Guia de viatges</string>
-    </resources>
+    <string name="popular_destinations">Destinacions populars</string>
+    <string name="travel_card_update_descr">Hem preparat actualitzacions i correccions en les dades de Viquiviatges, actualitzeu el fitxer per a consultar-les.</string>
+	<string name="travel_card_download_descr">Baixeu aquest arxiu de guies de viatge de Viquiviatges per poder consultar articles relatius a llocs del vostre voltant sense connexió a internet.</string>
+	<string name="update_is_available">Actualització disponible</string>
+	<string name="download_file">Baixa el fitxer</string>
+    <string name="start_editing_card_image_text">La guia de viatges de tot el món oberta que qualsevol pot editar.</string>
+    <string name="start_editing_card_description">Podeu editar qualsevol article a Viquiviatges, i així ho esperem. Ens cal el vostre coneixement, experiència, destresa i dots d\'observació</string>
+    <string name="start_editing">Comença l\'edició</string>
+    <string name="get_unlimited_access">Assoliu accés il·limitat</string>
+    <string name="welcome_to_open_beta">Benvingut a la beta oberta!</string>
+    <string name="monthly_map_updates">Actualitzacions del mapa: <b>cada mes</b></string>
+    <string name="daily_map_updates">Actualitzacions del mapa: <b>cada dia, cada hora</b></string>
+    <string name="download_wikipedia_description">Baixeu els articles de la Viquipèdia per %1$s per llegir-los fora de línia.</string>
+    <string name="download_wikipedia_label">Baixa dades de la Viquipèdia</string>
+    <string name="open_in_browser_wiki">Obre l\'article en línia</string>
+    <string name="open_in_browser_wiki_description">Consulta aquest article en un navegador.</string>
+    <string name="download_wiki_region_placeholder">aquesta regió</string>
+    <string name="wiki_article_not_found">L\'article no s\'ha trobat</string>
+    <string name="how_to_open_wiki_title">Com obrir els articles de la Viquipèdia?</string>
+</resources>
