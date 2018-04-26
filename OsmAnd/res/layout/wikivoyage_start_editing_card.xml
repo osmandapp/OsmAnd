@@ -5,7 +5,7 @@
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:layout_gravity="center_horizontal"
-	android:layout_marginTop="@dimen/list_content_padding"
+	android:layout_marginTop="@dimen/content_padding_small"
 	android:layout_marginLeft="@dimen/text_margin_small"
 	android:layout_marginRight="@dimen/text_margin_small"
 	android:background="@drawable/travel_card_bg">
@@ -69,7 +69,8 @@
 			android:layout_width="match_parent"
 			android:layout_height="@dimen/bottom_sheet_title_height"
 			android:layout_gravity="center"
-			android:gravity="center"
+			android:gravity="center_horizontal"
+			android:paddingTop="@dimen/wikivoyage_travel_card_button_padding"
 			android:background="?attr/selectableItemBackground"
 			android:textColor="?attr/color_dialog_buttons"
 			android:textSize="@dimen/default_desc_text_size"
