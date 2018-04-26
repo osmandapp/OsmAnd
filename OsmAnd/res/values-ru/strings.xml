@@ -1668,7 +1668,7 @@
     <string name="arrival_distance_factor_at_last">На последних метрах</string>
     
     <string name="rendering_attr_alpineHiking_name">Пеший горный туризм по шкале (SAC)</string>
-    <string name="rendering_attr_hikingRoutesOSMC_name">Визуализация пути согласно трассам OSMC</string>
+    <string name="rendering_attr_hikingRoutesOSMC_name">Наложение туристических меток</string>
     <string name="rendering_attr_coloredBuildings_name">Цветовая маркировка зданий по типу</string>
     <string name="rendering_attr_publicTransportMode_name">Маршруты автобусов, троллейбусов и маршруток</string>
     <string name="rendering_value_browse_map_name">Обзор карты</string>
