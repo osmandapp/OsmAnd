@@ -5,8 +5,7 @@
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:layout_gravity="center_horizontal"
-	android:layout_marginBottom="@dimen/list_content_padding"
-	android:layout_marginTop="@dimen/list_content_padding"
+	android:layout_marginTop="@dimen/content_padding_small"
 	android:layout_marginLeft="@dimen/text_margin_small"
 	android:layout_marginRight="@dimen/text_margin_small"
 	android:background="@drawable/travel_card_bg"
@@ -17,12 +16,12 @@
 		android:layout_height="@dimen/wikivoyage_explore_card_image_height"
 		android:layout_gravity="center_horizontal"
 		android:orientation="vertical"
-		android:background="@color/wikivoyage_open_beta_card_image_background">
+		android:background="@drawable/travel_card_open_beta_image_bg">
 
 		<ImageView
 			android:id="@+id/background_image"
 			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
+			android:layout_height="match_parent"
 			android:contentDescription="@string/welcome_to_open_beta"
 			tools:src="@drawable/img_help_wikivoyage_articles" />
 	</LinearLayout>
@@ -37,6 +36,8 @@
 			android:layout_marginRight="@dimen/list_content_padding"
 			android:layout_marginStart="@dimen/list_content_padding"
 			android:layout_marginTop="@dimen/bottom_sheet_icon_margin"
+			android:textSize="@dimen/empty_state_text_size"
+			android:textColor="?attr/wikivoyage_primary_text_color"
 			tools:text="@string/welcome_to_open_beta" />
 
 		<TextView
@@ -62,7 +63,8 @@
 			android:layout_height="@dimen/bottom_sheet_title_height"
 			android:layout_gravity="center"
 			android:background="?attr/selectableItemBackground"
-			android:gravity="center"
+			android:gravity="center_horizontal"
+			android:paddingTop="@dimen/wikivoyage_travel_card_button_padding"
 			android:textColor="?attr/color_dialog_buttons"
 			android:textSize="@dimen/default_desc_text_size"
 			osmand:typeface="@string/font_roboto_medium"

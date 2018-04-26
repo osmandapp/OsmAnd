@@ -9,10 +9,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.Version;
 import net.osmand.plus.activities.LocalIndexHelper;
 import net.osmand.plus.activities.LocalIndexInfo;
 import net.osmand.plus.activities.OsmandActionBarActivity;
@@ -22,6 +22,8 @@ import net.osmand.plus.download.ui.AbstractLoadLocalIndexTask;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
 import net.osmand.plus.wikivoyage.data.TravelDbHelper;
 import net.osmand.plus.wikivoyage.explore.travelcards.ArticleTravelCard;
+import net.osmand.plus.wikivoyage.explore.travelcards.BaseTravelCard;
+import net.osmand.plus.wikivoyage.explore.travelcards.HeaderTravelCard;
 import net.osmand.plus.wikivoyage.explore.travelcards.OpenBetaTravelCard;
 import net.osmand.plus.wikivoyage.explore.travelcards.StartEditingTravelCard;
 import net.osmand.plus.wikivoyage.explore.travelcards.TravelDownloadUpdateCard;
@@ -36,7 +38,6 @@ public class ExploreTabFragment extends BaseOsmAndFragment {
 
 	private ExploreRvAdapter adapter = new ExploreRvAdapter();
 	private StartEditingTravelCard startEditingTravelCard;
-	private ProgressBar progressBar;
 
 	private boolean nightMode;
 
@@ -46,7 +47,6 @@ public class ExploreTabFragment extends BaseOsmAndFragment {
 		nightMode = !getMyApplication().getSettings().isLightContent();
 
 		final View mainView = inflater.inflate(R.layout.fragment_explore_tab, container, false);
-		progressBar = (ProgressBar) mainView.findViewById(R.id.progressBar);
 		final RecyclerView rv = (RecyclerView) mainView.findViewById(R.id.recycler_view);
 
 		adapter.setItems(generateItems());
@@ -57,14 +57,15 @@ public class ExploreTabFragment extends BaseOsmAndFragment {
 		return mainView;
 	}
 
-	private List<Object> generateItems() {
-		final List<Object> items = new ArrayList<>();
+	private List<BaseTravelCard> generateItems() {
+		final List<BaseTravelCard> items = new ArrayList<>();
 		final OsmandApplication app = getMyApplication();
 
 		addDownloadUpdateCard();
 		startEditingTravelCard = new StartEditingTravelCard(app, nightMode);
-		items.add(new OpenBetaTravelCard(app, nightMode, getFragmentManager()));
+		addOpenBetaTravelCard(items, nightMode);
 		items.add(startEditingTravelCard);
+		items.add(new HeaderTravelCard(app, nightMode, getString(R.string.popular_destinations)));
 		addPopularDestinations(app);
 
 		return items;
@@ -87,9 +88,16 @@ public class ExploreTabFragment extends BaseOsmAndFragment {
 
 	private void addPopularDestinations(OsmandApplication app) {
 		PopularDestinationsSearchTask popularDestinationsSearchTask = new PopularDestinationsSearchTask(
-				app.getTravelDbHelper(), getMyActivity(), adapter, nightMode, startEditingTravelCard, progressBar
-		);
+				app.getTravelDbHelper(), getMyActivity(), adapter, nightMode, startEditingTravelCard);
 		popularDestinationsSearchTask.execute();
+	}
+
+	private void addOpenBetaTravelCard(List<BaseTravelCard> items, final boolean nightMode) {
+		final OsmandApplication app = getMyApplication();
+		if ((Version.isFreeVersion(app) && !app.getSettings().LIVE_UPDATES_PURCHASED.get()
+				&& !app.getSettings().FULL_VERSION_PURCHASED.get())) {
+			items.add(new OpenBetaTravelCard(app, nightMode, getFragmentManager()));
+		}
 	}
 
 	private static class CheckWorldWikivoyageTask extends AsyncTask<Void, Void, Boolean> {
@@ -137,16 +145,14 @@ public class ExploreTabFragment extends BaseOsmAndFragment {
 		private WeakReference<OsmandActionBarActivity> weakContext;
 		private WeakReference<ExploreRvAdapter> weakAdapter;
 		private WeakReference<StartEditingTravelCard> weakStartEditingTravelCard;
-		private WeakReference<View> weakProgressBar;
 		private boolean nightMode;
 
 		PopularDestinationsSearchTask(TravelDbHelper travelDbHelper,
-									  OsmandActionBarActivity context, ExploreRvAdapter adapter, boolean nightMode, StartEditingTravelCard startEditingTravelCard, View progressBar) {
+		                              OsmandActionBarActivity context, ExploreRvAdapter adapter, boolean nightMode, StartEditingTravelCard startEditingTravelCard) {
 			this.travelDbHelper = travelDbHelper;
 			weakContext = new WeakReference<>(context);
 			weakAdapter = new WeakReference<>(adapter);
 			weakStartEditingTravelCard = new WeakReference<>(startEditingTravelCard);
-			weakProgressBar = new WeakReference<>(progressBar);
 			this.nightMode = nightMode;
 		}
 
@@ -156,32 +162,24 @@ public class ExploreTabFragment extends BaseOsmAndFragment {
 		}
 
 		@Override
-		protected void onPreExecute() {
-			super.onPreExecute();
-			weakProgressBar.get().setVisibility(View.VISIBLE);
-		}
-
-		@Override
 		protected void onPostExecute(List<TravelArticle> items) {
 			OsmandActionBarActivity activity = weakContext.get();
 			ExploreRvAdapter adapter = weakAdapter.get();
-
-			List<Object> adapterItems = adapter.getItems();
 			StartEditingTravelCard startEditingTravelCard = weakStartEditingTravelCard.get();
 
-			adapterItems.remove(startEditingTravelCard);
+			if (activity != null && adapter != null && startEditingTravelCard != null) {
+				List<BaseTravelCard> adapterItems = adapter.getItems();
 
-			if (!items.isEmpty()) {
-				if (activity != null) {
-					adapterItems.add(activity.getResources().getString(R.string.popular_destinations));
-					for (TravelArticle article : items) {
-						adapterItems.add(new ArticleTravelCard(activity.getMyApplication(), nightMode, article, activity.getSupportFragmentManager()));
-					}
+				if (adapterItems.contains(startEditingTravelCard)) {
+					adapterItems.remove(startEditingTravelCard);
 				}
+				for (TravelArticle article : items) {
+					adapterItems.add(new ArticleTravelCard(activity.getMyApplication(), nightMode, article, activity.getSupportFragmentManager()));
+				}
+
+				adapterItems.add(startEditingTravelCard);
+				adapter.notifyDataSetChanged();
 			}
-			weakProgressBar.get().setVisibility(View.GONE);
-			adapterItems.add(startEditingTravelCard);
-			adapter.notifyDataSetChanged();
 		}
 	}
 }
