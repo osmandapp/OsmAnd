@@ -2131,7 +2131,7 @@
     <string name="city_type_district">Distrito</string>
     <string name="city_type_neighbourhood">Barrio</string>
     <string name="map_widget_search">Buscar</string>
-	<string name="shared_string_is_open_24_7">Abierto 24/7</string>
+	<string name="shared_string_is_open_24_7">Abierto 24x7</string>
     <string name="storage_directory_card">Tarjeta de memoria</string>
     <string name="coords_format">Formato de coordenadas</string>
     <string name="coords_format_descr">Formato de las coordenadas geográficas.</string>
@@ -2990,7 +2990,7 @@
     <string name="welcome_to_open_beta_description">Los viajes se basan en Wikiviajes. Durante las pruebas beta abiertas, tiene la oportunidad de evaluar todas las características de forma gratuita. Una vez finalizado el período beta, «Viajes» estará disponible para los suscriptores de «OsmAnd ilimitado» y los propietarios de «OsmAnd+»</string>
     <string name="start_editing_card_description">Puedes editar cualquier artículo en Wikiviajes y esperamos que lo hagas. Necesitamos tu conocimiento, experiencia, talento y atención</string>
     <string name="start_editing">Comenzar edición</string>
-    <string name="get_unlimited_access">Obtén acceso ilimitado</string>
+    <string name="get_unlimited_access">Obtenga acceso ilimitado</string>
     <string name="welcome_to_open_beta">Bienvenid@, a la beta abierta!</string>
     <string name="contour_lines_hillshade_maps">Curvas de nivel y mapas de sombreado</string>
     <string name="download_wikipedia_description">Descarga los artículos de Wikipedia por %1$s para leerlos sin conexión.</string>
