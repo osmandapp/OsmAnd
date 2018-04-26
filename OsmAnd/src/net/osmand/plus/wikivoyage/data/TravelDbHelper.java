@@ -208,11 +208,10 @@ public class TravelDbHelper {
 		SQLiteConnection conn = openConnection();
 		if (conn != null) {
 			TravelArticle travelArticle;
-			SQLiteCursor cursor = conn.rawQuery("SELECT * FROM "
-					+ ARTICLES_TABLE_NAME
-					+ " WHERE article_id IN (SELECT article_id FROM "
-					+ ARTICLES_TABLE_NAME
-					+ " ORDER BY RANDOM() LIMIT 100) LIMIT 100", null);
+			String lang = application.getLanguage();
+			SQLiteCursor cursor = conn.rawQuery("SELECT * FROM wikivoyage_articles"
+					+ " WHERE title IN (SELECT title FROM popular_articles WHERE lang = ?"
+					+ " ORDER BY RANDOM()) ORDER BY RANDOM() LIMIT 100", new String[]{lang});
 			if (cursor.moveToFirst()) {
 				do {
 					travelArticle = readArticle(cursor);
