@@ -686,7 +686,7 @@
 \nVšechny tyto mapy mohou být použity jako hlavní (základní) mapa na obrazovce OsmAnd nebo jako překryvná popř. podkladová mapa k jiné základní mapě (např. standardní OsmAnd off-line mapě). Pro zlepšení viditelnosti podkladových map je možné vypnout některé objekty z vektorových map OsmAnd, přes menu \'Nastavení mapy\'.
 \n
 \nDlaždicové mapy můžete získat přímo z on-line zdrojů nebo si je můžete připravit pro off-line použití (zkopírovat ručně do datového adresáře OsmAnd) jako SQLite databázi, která může být vytvořena mnoha programy pro přípravu map.</string>
-    <string name="osmand_background_plugin_description">Zobrazí nastavení na povolení záznamu trasy a navigace v úsporném režimu (při vypnuté obrazovce) pravidelným probouzením GPS zařízení.</string>
+    <string name="osmand_background_plugin_description">Zobrazení nastavení pro zapnutí záznamu trasy a navigace na pozadí s pravidelným probouzením GPS zařízení (s vypnutou obrazovkou).</string>
     <string name="osmand_accessibility_description">Tento modul zobrazí nastavení pro speciální funkce ulehčení přístupu přímo v OsmAnd. Například je možné měnit rychlost TTS hlasu, použít trackball na přibližování nebo například použít hlasové předčítání pro oznamování polohy.</string>
     <string name="osmand_development_plugin_description">Tento modul zobrazí nastavení vývojových a ladících funkcí, jako jsou simulace navigace, informace o rychlosti vykreslování nebo hlasová oznámení. Tato nastavení jsou určené pro vývojáře a nejsou potřebné pro běžné použití.</string>
     <string name="plugins_screen">Správce modulů</string>
@@ -899,9 +899,9 @@ Proporcionální paměť %4$s MB (limit Androidu %5$s MB, Dalvik %6$s MB).</stri
     <string name="index_srtm_ele">Vrstevnice</string>
     <string name="download_select_map_types">Ostatní mapy</string>
     <string name="audionotes_plugin_name">Modul zvukové/video poznámky</string>
-    <string name="srtm_plugin_description">Tento modul poskytuje zobrazení vrstevnic a vrstvy stínování kopců, které mohou být zobrazené na standardních OsmAnd mapách. Tato funkce je vhodná především pro sportovce, turisty, chodce a vůbec všechny, které zajímá profil terénu. (Upozorňujeme, že data vrstevnic a stínování jsou oddělené, jejich stažení je umožněno po aktivaci pluginu)
-\n
-\nCelosvětová výšková data (mezi 70 stupni severní šířky a 70 stupni jižní šířky) se zakládají na měřeních SRTM (Shuttle Radar Topography Mission) a ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), snímkovací přístroj na palubě satelitu Terra, vlajkového satelitu Systému pozorování Země NASA. ASTER je společným projektem NASA, japonského ministerstva hospodářství, obchodu a průmyslu (METI) a Japan Space Systems (J-spacesystems).</string>
+    <string name="srtm_plugin_description">Tento modul poskytuje zobrazení vrstevnic a vrstvy stínování kopců, které mohou být zobrazené na standardních OsmAnd mapách. Tato funkce je vhodná především pro sportovce, turisty, chodce a vůbec všechny, které zajímá profil terénu. (Upozorňujeme, že data vrstevnic a stínování jsou oddělené, jejich stažení je umožněno po aktivaci pluginu) 
+\n 
+\nCelosvětová výšková data (mezi 70° severní šířky a 70° jižní šířky) se zakládají na měřeních SRTM (Shuttle Radar Topography Mission) a ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), snímkovací přístroj na palubě satelitu Terra, vlajkového satelitu Systému pozorování Země NASA. ASTER je společným projektem NASA, japonského ministerstva hospodářství, obchodu a průmyslu (METI) a Japan Space Systems (J-spacesystems).</string>
     <string name="srtm_plugin_name">Vrstevnice</string>
     <string name="download_srtm_maps">Vrstevnice</string>
     <string name="audionotes_location_not_defined">GPS pozice pro záznam zvukové poznámky ještě není známa. Pokud chcete použít specifickou lokaci použijte \"Možnosti bodu\".</string>
@@ -944,9 +944,9 @@ Proporcionální paměť %4$s MB (limit Androidu %5$s MB, Dalvik %6$s MB).</stri
     <string name="srtm_paid_version_title">Modul Vrstevnice</string>
     <string name="shared_string_control_stop">Zastavit</string>
     <string name="dropbox_plugin_description">Modul Dropbox vám umožňuje synchronizovat trasy, audio a video poznámky s vaším účtem Dropbox.</string>
-    <string name="osmand_srtm_long_description_1000_chars">Tento modul poskytuje zobrazení vrstevnic a vrstvy stínování kopců, které mohou být zobrazené na standardních OsmAnd mapách. Tato funkce je vhodná především pro sportovce, turisty, chodce a vůbec všechny, které zajímá profil terénu.
-\n
-\nCelosvětová výšková data (mezi 70 stupni severní šířky a 70 stupni jižní šířky) se zakládají na měřeních SRTM (Shuttle Radar Topography Mission) a ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), snímkovací přístroj na palubě satelitu Terra, vlajkového satelitu Systému pozorování Země NASA. ASTER je společným projektem NASA, japonského ministerstva hospodářství, obchodu a průmyslu (METI) a Japan Space Systems (J-spacesystems).</string>
+    <string name="osmand_srtm_long_description_1000_chars">Tento modul poskytuje zobrazení vrstevnic a vrstvy stínování kopců, které mohou být zobrazené na standardních OsmAnd mapách. Tato funkce je vhodná především pro sportovce, turisty, chodce a vůbec všechny, které zajímá profil terénu. 
+\n 
+\nCelosvětová výšková data (mezi 70° severní šířky a 70° jižní šířky) se zakládají na měřeních SRTM (Shuttle Radar Topography Mission) a ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), snímkovací přístroj na palubě satelitu Terra, vlajkového satelitu Systému pozorování Země NASA. ASTER je společným projektem NASA, japonského ministerstva hospodářství, obchodu a průmyslu (METI) a Japan Space Systems (J-spacesystems).</string>
     <string name="stop_routing_confirm">Opravdu chcete zastavit navigaci?</string>
     <string name="clear_dest_confirm">Opravdu chcete smazat svůj cíl (a mezicíle)?</string>
     <string name="recording_context_menu_show">Zobrazit</string>
@@ -1027,7 +1027,7 @@ Proporcionální paměť %4$s MB (limit Androidu %5$s MB, Dalvik %6$s MB).</stri
     <string name="context_menu_item_destination_point">Nastavit jako cíl</string>
     <string name="please_select_address">Zvolte nejprve město nebo ulici</string>
     <string name="search_street_in_neighborhood_cities">Hledat ulice v okolních obcích</string>
-    <string name="intermediate_items_sort_return">Mezicíle byly uspořádány podle optimálního pořadí na cestě ze současné pozice do cíle.</string>
+    <string name="intermediate_items_sort_return">Pořadí mezicílů optimalizováno na cestě do cíle.</string>
     <string name="intermediate_items_sort_by_distance">Utřídit ode dveří ke dveřím</string>
     <string name="osb_author_or_password_not_specified">Prosím zadejte v \'Nastavení\' uživatelské jméno a heslo pro vstup do OSM</string>
     <string name="clear_intermediate_points">Smazat mezicíle</string>
@@ -2015,7 +2015,7 @@ Délka %2$s</string>
     <string name="shared_string_move_down">Posunout ↓</string>
     <string name="finish_navigation">Dokončit navigaci</string>
     <string name="avoid_road">Vyhnout se cestě</string>
-    <string name="storage_directory_readonly_desc">Aktuálně vybraná složka je pouze pro čtení. Úložiště bylo dočasně přesunuto do interní paměti. Prosím zvolte použitelnou složku.</string>
+    <string name="storage_directory_readonly_desc">Přepnuto do interní paměti, protože aktuálně vybraná složka je pouze pro čtení. Prosím zvolte složku v zapisovatelné paměti.</string>
     <string name="storage_directory_shared">Sdílená paměť</string>
     <string name="shared_string_topbar">Horní panel</string>
     <string name="full_report">Celý výpis</string>
@@ -2477,9 +2477,9 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="shared_string_overview">Přehled</string>
     <string name="select_street">Vyberte ulici</string>
     <string name="shared_string_in_name">v %1$s</string>
-    <string name="quick_action_add_destination_desc">Tlačítko akce přidá cíl do středu obrazovky. Z předchozího nastaveného cíle se stává poslední mezicíl.</string>
-    <string name="quick_action_replace_destination_desc">Tlačítko akce nahradí cíl bodem ve středu obrazovky.</string>
-    <string name="quick_action_add_first_intermediate_desc">Tlačítko akce přidá první mezicíl do středu obrazovky.</string>
+    <string name="quick_action_add_destination_desc">Stisk tohoto tlačítka přidá střed obrazovky jako nový cíl navádění, z dříve nastaveného cíle se stává poslední mezicíl.</string>
+    <string name="quick_action_replace_destination_desc">Stisk tohoto tlačítka přidá střed obrazovky jako nový cíl navádění. Pokud byl dříve nastaven jiný cíl, bude nahrazen.</string>
+    <string name="quick_action_add_first_intermediate_desc">Stisk tohoto tlačítka přidá střed obrazovky jako nový mezicíl.</string>
     <string name="no_overlay">Bez překryvné vrstvy</string>
     <string name="no_underlay">Bez podkladové vrstvy</string>
     <string name="subscribe_email_error">Chyba</string>
@@ -2494,7 +2494,7 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="analyze_on_map">Analyzovat na mapě</string>
     <string name="shared_string_visible">Viditelné</string>
     <string name="shared_string_paused">Pozastaveno</string>
-    <string name="route_is_too_long_v2">Tato cesta může být příliš dlouhá pro výpočet. Pokud do 10 minut nebude nalezen žádný výsledek, přidejte prosím na trasu mezicíle.</string>
+    <string name="route_is_too_long_v2">Pokud do 10 minut nebude nalezen žádný výsledek této dlouhé trasy, přidejte prosím na trasu mezicíle.</string>
     <string name="save_poi_too_many_uppercase">Název obsahuje příliš mnoho velkých písmen. Chcete pokračovat?</string>
     <string name="mapillary">Mapillary</string>
     <string name="private_access_routing_req">Váš cíl se nachází v oblasti se soukromým přístupem. Chcete povolit přístup k soukromým silnicím pro tuto cestu?</string>
@@ -2682,7 +2682,7 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="looking_for_tracks_with_waypoints">Hledání tras s trasovými body</string>
     <string name="shared_string_more_without_dots">Více</string>
     <string name="appearance_on_the_map">Vzhled na mapě</string>
-    <string name="add_track_to_markers_descr">Zvolte trasu, jejíž body má OsmAnd přidat jako značky. (Zobrazují se jen trasy s trasovými body.)</string>
+    <string name="add_track_to_markers_descr">Pokud vyberete trasu která obsahuje body trasy, mohou být tyto body přidány jako značky.</string>
     <string name="add_favourites_group_to_markers_descr">Vyberte kategorii oblíbených, kterou chcete přidat k značkám.</string>
     <string name="track_waypoints">Body trasy</string>
     <string name="favourites_group">Kategorie oblíbených</string>
@@ -2791,7 +2791,9 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="last_intermediate_dest_description">Přidá poslední zastávku na cestě</string>
     <string name="first_intermediate_dest_description">Přidá první zastávku na cestě</string>
     <string name="subsequent_dest_description">Přesunout cíl nahoru a vytvořit cíl</string>
-    <string name="osmand_extended_description_part1">OsmAnd (OSM Automated Navigation Directions) je mapová a navigační aplikace s přístupem k volným a kvalitním celosvětovým údajům z OpenStreetMap (OSM). Využívejte hlasovou a optickou navigaci, zobrazení POI (bodů zájmu), vytváření a správu GPX tras, znázornění vrstevnic a nadmořské výšky (pomocí doplňkového modulu), výběr z režimů auto, cyklista a pěší, editaci OSM a mnoho dalšího.</string>
+    <string name="osmand_extended_description_part1">OsmAnd (OSM Automated Navigation Directions) je mapová a navigační aplikace s přístupem k volným a kvalitním celosvětovým údajům z OpenStreetMap (OSM). 
+\n
+\nVyužívejte hlasovou a optickou navigaci, zobrazení POI (bodů zájmu), vytváření a správu GPX tras, znázornění vrstevnic a nadmořské výšky (pomocí doplňkového modulu), výběr z režimů auto, cyklista a pěší, editaci OSM a mnoho dalšího.</string>
     <string name="toast_empty_name_error">Místo nemá žádný název</string>
     <string name="tunnel_warning">Blíží se tunel</string>
     <string name="show_tunnels">Tunely</string>
@@ -2818,7 +2820,18 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="distance_farthest">Vzdálenost: Nejvzdálenější jako první</string>
     <string name="distance_nearest">Vzdálenost: Nejbližší jako první</string>
     <string name="rendering_attr_whiteWaterSports_name">Divoká voda</string>
-    <string name="osmand_extended_description_part2">GPS navigace • Můžete si vybrat mezi offline režimem (bez roamingových poplatků v zahraničí) a online režimem (rychlejší) • Hlasová navigace vás povede krok za krokem vaší cestou (nahraný nebo syntetizovaný hlas) • Při každém odchýlení se trasa přepočítá • Pomůže vám navádění do jízdních pruhů, zobrazení názvů ulic a předpokládaný čas příjezdu • Pro větší bezpečí se aplikace automaticky přepíná mezi denním a nočním režimem • Můžete si zapnout zobrazování rychlostních limitů a upozornění při jejich překročení • Přiblížení mapy se přizpůsobí rychlosti pohybu • Můžete hledat cíle podle adresy, typu (např. parkoviště, restaurace, hotel, čerpací stanice, muzeum) či podle geografických souřadnic • Do svého itineráře můžete přidávat mezicíle • Můžete si zaznamenat nebo nahrát GPX trasu a následovat ji</string>
+    <string name="osmand_extended_description_part2">GPS navigace 
+\n• Můžete si vybrat mezi offline režimem (bez roamingových poplatků v zahraničí) a online režimem (rychlejší) 
+\n• Hlasová navigace vás povede krok za krokem vaší cestou (nahraný nebo syntetizovaný hlas) 
+\n• Při každém odchýlení se trasa přepočítá
+\n• Pomůže vám navádění do jízdních pruhů, zobrazení názvů ulic a předpokládaný čas příjezdu 
+\n• Pro větší bezpečí se aplikace automaticky přepíná mezi denním a nočním režimem 
+\n• Můžete si zapnout zobrazování rychlostních limitů a upozornění při jejich překročení
+\n• Přiblížení mapy se přizpůsobí rychlosti pohybu 
+\n• Můžete hledat cíle podle adresy, typu (např. parkoviště, restaurace, hotel, čerpací stanice, muzeum) či podle geografických souřadnic 
+\n• Do svého itineráře můžete přidávat mezicíle 
+\n• Můžete si zaznamenat nebo nahrát GPX trasu a následovat ji
+\n</string>
     <string name="osmand_extended_description_part3">Mapa • Zobrazuje POI (body zájmu) ve vašem okolí • Mapa se otáčí podle směru vašeho pohybu (nebo podle kompasu) • Ukazuje, kde jste a kterým směrem se díváte • Svoji polohu můžete sdílet se svými přáteli • Důležitá místa si můžete uložit do složky \'Moje místa\' • Můžete si vybrat, jak se na mapě budou zobrazovat názvy: V angličtině, v místním jazyce nebo ve fonetickém přepisu • Zobrazuje specializované online dlaždice, satelitní mapy (z Bingu), různé překryvné informace jako navigační GPX trasy a další vrstvy s volitelnou průhledností</string>
     <string name="osmand_extended_description_part4">OsmAnd plugin Lyžařský mapový pohled zobrazuje lyžařské trasy podle stupně obtížnosti a také další informace jako polohy vleků a dalších zařízení.</string>
     <string name="osmand_extended_description_part5">Cyklistika • Na mapě najdete cyklostezky • GPS navigace v režimu Cyklista vytvoří trasu podél cyklostezek • Vidíte svoji rychlost a nadmořskou výšku • Pomocí funkce GPX záznam si svůj výlet uložíte a můžete sdílet • Pomocí dalších pluginů si můžete na mapě zobrazit vrstevnice a stínování kopců</string>
@@ -2879,4 +2892,5 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="shared_string_explore">Prozkoumat</string>
     <string name="shared_string_contents">Obsah</string>
     <string name="index_item_world_wikivoyage">Celosvětové články Wikivoyage</string>
+    <string name="contour_lines_hillshade_maps">Vrstevnice &amp; stínování terénu</string>
     </resources>

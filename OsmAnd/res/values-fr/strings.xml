@@ -2615,8 +2615,11 @@ représentant la zone : %1$s x %2$s</string>
     <string name="right_side_navigation">Conduite à droite</string>
     <string name="driving_region_automatic">Automatique</string>
     <string name="do_not_send_anonymous_app_usage_desc">OsmAnd collecte des informations sur les écrans affichés lors de l\'utilisation de l\'application. Votre position n\'est jamais collectée, ni aucune des données saisies par l\'utilisateur dans l\'application comme les zones affichées, les recherches ou les téléchargements réalisés.</string>
-    <string name="osmand_extended_description_part1">OsmAnd (OSM Automated Navigation Directions) est une application de visualisation de cartes et de navigation utilisant les données gratuites couvrant le monde entier du projet OpenStreetMap (OSM). Profitez d\'un guidage vocal comme visuel; Découvrez des points d\'intérêt; Créez et gérez des traces GPX; Installez des greffons pour visualiser l\'altitude et les courbes de niveaux; Utilisez les modes Conduite, Piéton, Cycliste; Contribuez à l\'amélioration des cartes OSM et bien plus encore.</string>
-    <string name="osmand_extended_description_part4">Le greffon OsmAnd ski maps permet de visualiser les pistes de ski avec leur niveau de difficulté et d\'autres informations utiles comme l\'emplacement et le type des remontées mécaniques.</string>
+    <string name="osmand_extended_description_part1">OsmAnd (OSM Automated Navigation Directions) est une application de visualisation de cartes et de navigation utilisant les données gratuites couvrant le monde entier du projet OpenStreetMap (OSM).
+\n
+\nProfitez d\'un guidage vocal comme visuel; Découvrez des points d\'intérêt; Créez et gérez des traces GPX; Installez des greffons pour visualiser l\'altitude et les courbes de niveaux; Utilisez les modes Conduite, Piéton, Cycliste; Contribuez à l\'amélioration des cartes OSM et bien plus encore.</string>
+    <string name="osmand_extended_description_part4">Ski
+\nLe greffon OsmAnd ski maps permet de visualiser les pistes de ski avec leur niveau de difficulté et d\'autres informations utiles comme l\'emplacement et le type des remontées mécaniques.</string>
     <string name="osmand_extended_description_part7">Contribuez à OpenStreetMap (OSM)
 \n • Signalez des anomalies
 \n • Envoyez des traces GPX vers OSM directement depuis l\'application
@@ -2650,7 +2653,9 @@ représentant la zone : %1$s x %2$s</string>
     <string name="analyze_on_map">Analyser sur la carte</string>
     <string name="osmand_plus_extended_description_part1">OsmAnd+ (OpenStreetMap Automated Navigation and Directions) est une application de visualisation de cartes et de navigation utilisant les données gratuites couvrant le monde entier du projet OpenStreetMap. Bénéficiez d\'un guidage vocal comme visuel; découvrez des points d\'intérêt; créez et gérez des traces GPX; installez des greffons pour visualiser l\'altitude et les courbes de niveaux; utilisez les modes Automobile, Piéton, Cycliste; contribuez à l\'amélioration des cartes et bien plus encore ! 
 \n 
-\nOsmAnd+ est la version payante de l\'application, en l\'achetant vous supportez le projet, financez le développement de nouvelles fonctionnalités, et recevez les dernières mises à jour :</string>
+\nOsmAnd+ est la version payante de l\'application, en l\'achetant vous supportez le projet, financez le développement de nouvelles fonctionnalités, et recevez les dernières mises à jour.
+\n
+\nQuelques-unes des fonctionnalités :</string>
     <string name="sea_depth_thanks">Merci d\'avoir acheté le greffon Lignes de sonde marines</string>
     <string name="index_item_depth_contours_osmand_ext">Lignes de sonde marines</string>
     <string name="index_item_depth_points_southern_hemisphere">Lignes de sonde marines pour l\'hémisphère sud</string>
@@ -2875,20 +2880,20 @@ représentant la zone : %1$s x %2$s</string>
 \n• Ajout d\'étapes sur votre itinéraire 
 \n• Recalcule automatique de la route si vous vous écartez de l\'itinéraire 
 \n• Recherchez des lieux par adresse, par type (par exemple : restaurant, hôtel, station-service, musée) ou par coordonnées géographiques</string>
-    <string name="osmand_plus_extended_description_part3">Affichage de la carte :
-\n• Affichez votre position et votre orientation
-\n• Orientez la carte au choix selon la boussole ou selon la direction de votre déplacement
-\n• Enregistrez les lieux importants pour vous comme favoris
-\n• Affichez les point d\'intérêts aux alentours
-\n• Affichez des tuiles spécialisées en ligne, la vue satellite (source : Bing) et de nombreuses autres couches comme des traces GPX avec une transparence personnalisable
-\n• Affichez les noms de lieux en anglais, en langue locale ou en phonétique.</string>
+    <string name="osmand_plus_extended_description_part3">Affichage de la carte : 
+\n• Affichez votre position et votre orientation 
+\n• Orientez la carte au choix selon la boussole ou selon la direction de votre déplacement 
+\n• Enregistrez les lieux importants pour vous comme favoris 
+\n• Affichez les point d\'intérêts aux alentours 
+\n• Affichez des tuiles spécialisées en ligne, la vue satellite (source : Bing) et de nombreuses autres couches comme des traces GPX avec une transparence personnalisable 
+\n• Affichez les noms de lieux en anglais, en langue locale ou en phonétique</string>
     <string name="osmand_plus_extended_description_part4">Utilisez les données d\'OpenStreetMap et de Wikipédia : 
 \n• Informations de haute qualité provenant de l\'un des meilleurs projets collaboratifs au monde 
 \n• Données disponibles par pays ou région 
 \n• Points d\'intérêt de Wikipédia, idéal pour les visites 
 \n• Téléchargements gratuits illimités, directement à partir de l\'application 
 \n• Cartes vectorielles compactes et mises à jour au moins une fois par mois 
-\n• Sélection entre les données régionales complètes ou le réseau routier uniquement (par exemple: 700 Mo pour la carte intégrale du Japon et 200 Mo uniquement pour la carte du réseau routier japonnais).</string>
+\n• Sélection entre les données régionales complètes ou le réseau routier uniquement (par exemple: 700 Mo pour la carte intégrale du Japon et 200 Mo uniquement pour la carte du réseau routier japonnais)</string>
     <string name="today">Aujourd\'hui</string>
     <string name="yesterday">Hier</string>
     <string name="map_orientation_change_in_accordance_with_speed">Pilotage de l\'orientation de la carte</string>
