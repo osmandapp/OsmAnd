@@ -3008,4 +3008,12 @@
     <string name="download_wiki_region_placeholder">denne regionen</string>
     <string name="wiki_article_search_text">Søker etter den nødvendige wiki-artikkelen</string>
     <string name="wiki_article_not_found">Artikkel ikke funnet</string>
+    <string name="osmand_plus_extended_description_part2">Navigering
+\n • Virker i nettbasert modus (rask) eller frakoblet modus (ingen roaming-kostnader når du er utenlands)
+\n • Taleveiledning sving-for-sving (innspilt og syntetisert tale)
+\n • Valgfri filanvisning, gatenavnvisning og estimert ankomsttid
+\n • Støtter mellomliggende punkter på ruten
+\n • Ruten blir automatisk beregnet på nytt når du avviker fra den
+\n • Søk steder etter adresse, etter type (f.eks. restaurant, hotell, bensinstasjon, museum), eller med geografiske koordinater
+\n</string>
     </resources>
