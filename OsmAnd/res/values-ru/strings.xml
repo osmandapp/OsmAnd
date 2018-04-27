@@ -75,7 +75,7 @@
     <string name="quick_action_add_first_intermediate">Добавить первую промежуточную точку</string>
     <string name="quick_action_add_destination_desc">Нажатие этой кнопки действия добавит пункт назначения по центру экрана, любой ранее выбранный пункт назначения станет последним промежуточным пунктом.</string>
     <string name="quick_action_replace_destination_desc">Нажатие этой кнопки действия установит пункт назначения по центру экрана, заменив ранее выбранный пункт назначения (если такой был).</string>
-    <string name="quick_action_add_first_intermediate_desc">Нажатие этой кнопки действия сдобавит по центру экрана первую промежуточную точку маршрута.</string>
+    <string name="quick_action_add_first_intermediate_desc">Нажатие этой кнопки действия добавит по центру экрана первую промежуточную точку маршрута.</string>
     <string name="no_overlay">Нет покрытия</string>
     <string name="no_underlay">Нет подложки</string>
     <string name="routing_attr_relief_smoothness_factor_hills_name">Холмистый</string>
@@ -2718,7 +2718,7 @@
     <string name="show_number_pad">Показать цифровую панель</string>
     <string name="tap_on_map_to_hide_interface_descr">Нажатие на карте переключает кнопки управления и виджеты.</string>
     
-    <string name="import_gpx_file_description">могут быть импортированы как избранные точки или как трек-файл.</string>
+    <string name="import_gpx_file_description">могут быть импортированы как избранные точки или как трек файл.</string>
     <string name="shared_string_more_without_dots">Больше</string>
     <string name="import_as_gpx">Импортировать как файл GPX</string>
     <string name="import_as_favorites">Импортировать как избранные</string>
@@ -2936,7 +2936,7 @@
     <string name="distance_nearest">Расстояние: сначала ближний</string>
     <string name="group_deleted">Группа удалена</string>
     <string name="clear_all_intermediates">Очистить все промежуточные точки</string>
-    <string name="use_two_digits_longitude">Использовать две цифры долготы</string>
+    <string name="use_two_digits_longitude">Использовать двузначную долготу</string>
     <string name="shared_string_travel">Путеводитель</string>
     <string name="waypoints_removed_from_map_markers">Путевые точки удалены из маркеров карты</string>
     <string name="nothing_found_in_radius">Ничего не найдено в радиусе:</string>
@@ -2957,11 +2957,12 @@
     <string name="show_images">Показать изображения</string>
     <string name="shared_string_only_with_wifi">Только по WiFi</string>
     <string name="wikivoyage_download_pics">Скачать изображения</string>
-    <string name="wikivoyage_download_pics_descr">Мы можем загружать и показывать изображения в статьях и хранить их на устройстве, таким образом они будут доступны вам в автономном режиме. Вы всегда можете изменить настройку в Обозреватель &gt; Параметры.</string>
+    <string name="wikivoyage_download_pics_descr">Изображения из статей можно загрузить для использования в автономном режиме.
+\nВы всегда можете изменить настройку в \"Обозреватель\" → \"Параметры\".</string>
     <string name="shared_string_wifi_only">Только WiFi</string>
     <string name="select_travel_book">Выберите дневник путешествий</string>
     <string name="shared_string_travel_book">Дневник путешествий</string>
-    <string name="online_webpage_warning">Эта страница доступна только онлайн. Вы хотите открыть ее в браузере?</string>
+    <string name="online_webpage_warning">Страница доступна только онлайн. Открыть ее в браузере?</string>
     <string name="download_images">Скачать изображения</string>
     <string name="shared_string_dont">Нет</string>
     <string name="shared_string_do">Выполнить</string>
@@ -2981,7 +2982,7 @@
     <string name="unlock_all_features">Разблокировать все функции OsmAnd</string>
 
     <string name="monthly_map_updates">Обновления карт: <b>ежемесячные</b></string>
-    <string name="daily_map_updates">Обновления карт: <b>ежедневные, ежечасные</b></string>
+    <string name="daily_map_updates">Обновления карт: <b>ежечасные</b></string>
     <string name="in_app_purchase_desc_ex">После покупки этот план станет доступен для вас навсегда.</string>
     <string name="travel_guide">"Путеводитель "</string>
     <string name="travel_guide_description">Просматривайте путеводители Викигида по самым интересным местам на планете внутри Osmand без подключения к интернету.</string>
