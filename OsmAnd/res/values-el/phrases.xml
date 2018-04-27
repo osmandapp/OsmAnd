@@ -292,7 +292,7 @@
 	<string name="poi_mountain_pass">Ορεινό πέρασμα</string>
 	<string name="poi_gate">Πύλη</string>
 	<string name="poi_city_wall">Τείχη πόλης</string>
-	<string name="poi_lift_gate">Πύλη ανύψωσης</string>
+	<string name="poi_lift_gate">Πύλη αναβατήρα</string>
 	<string name="poi_toll_booth">Διόδια</string>
 	<string name="poi_border_control">Συνοριακός έλεγχος</string>
 	<string name="poi_traffic_calming_bump">Σαμαράκι</string>
@@ -389,7 +389,7 @@
 	<string name="poi_aerialway_station">Σταθμός εναέριου σιδηροδρόμου</string>
 	<string name="poi_aerialway_cable_car">Εναέριος σιδηρόδρομος</string>
 	<string name="poi_aerialway_gondola">Γόνδολα</string>
-	<string name="poi_aerialway_chair_lift">Τηλεκάθισμα</string>
+	<string name="poi_aerialway_chair_lift">Αναβατήρας καρέκλας</string>
 	<string name="poi_turning_circle">Κύκλος στροφής</string>
 	<string name="poi_motorway_junction">Διασταύρωση αυτοκινητοδρόμου</string>
 	<string name="poi_junction">Διασταύρωση</string>
@@ -410,7 +410,7 @@
 	<string name="poi_power_generator">Ηλεκτρική γεννήτρια</string>
 	<string name="poi_power_tower">Ηλεκτρικός πυλώνας</string>
 	<string name="poi_traffic_calming_choker">Σαμαράκι (στραγγαλιστής)</string>
-	<string name="poi_aerialway_pylon">Πυλώνας εναέριου αναβατόριου</string>
+	<string name="poi_aerialway_pylon">Πυλώνας εναέριου αναβατήρα</string>
 
 	<string name="poi_power_cable_distribution_cabinet">Ερμάριο καλωδιακής διανομής</string>
 	<string name="poi_communication_tower">Πύργος επικοινωνιών</string>
@@ -463,7 +463,7 @@
 	<string name="poi_recycling_computers">Υπολογιστές</string>
 	<string name="poi_recycling_tyres">Ελαστικά οχημάτων</string>
 	<string name="poi_recycling_tv_monitor">Τηλεοράσεις, οθόνες</string>
-	<string name="poi_recycling_tetrapak">Tetrapak</string>
+	<string name="poi_recycling_tetrapak">Τετραπακ</string>
 	<string name="poi_recycling_rubble">Μπάζα</string>
 	<string name="poi_recycling_cds">CDs</string>
 	<string name="poi_recycling_waste_oil">Χρησιμοποιημένο λάδι</string>
@@ -472,4 +472,44 @@
 	<string name="poi_recycling_printer_cartridges">Φυσίγγια εκτυπωτή</string>
 	<string name="poi_recycling_sheet_metal">Φύλλο μετάλλου</string>
 	<string name="poi_recycling_foil">Φύλλο</string>
+	<string name="poi_aerialway_t_bar">Αναβατήρες τύπου Τ</string>
+	<string name="poi_aerialway_j_bar">Αναβατήρες τύπου J</string>
+	<string name="poi_aerialway_platter">Αναβατήρες πιάτου</string>
+	<string name="poi_aerialway_mixed_lift">Μικτοί αναβατήρες</string>
+	<string name="poi_aerialway_drag_lift">Συρόμενος αναβατήρας</string>
+	<string name="poi_aerialway_rope_tow">Αναβατήρες συρματόσχοινου</string>
+	<string name="poi_aerialway_goods">Αναβατήρες αγαθών</string>
+	<string name="poi_aerialway_magic_carpet">Αναβατήρας χαλιού</string>
+	<string name="poi_boatyard">Ναυπηγείο</string>
+	<string name="poi_lock_gate">Θύρα δεξαμενής</string>
+	<string name="poi_recycling_paint">Χρώμα</string>
+	<string name="poi_recycling_styrofoam">Αφρός πολυστυρενίου</string>
+	<string name="poi_recycling_drugs">Φάρμακα</string>
+	<string name="poi_recycling_compost">Κοπρόχωμα</string>
+	<string name="poi_recycling_hardcore">Χαλίκια</string>
+	<string name="poi_recycling_christmas_trees">Χριστουγεννιάτικα δένδρα</string>
+	<string name="poi_recycling_light_bulbs">Ηλεκτρικοί λαμπτήρες</string>
+	<string name="poi_recycling_chipboard">Μοριοσανίδα</string>
+	<string name="poi_recycling_polyester">Πολυεστέρας</string>
+	<string name="poi_recycling_plasterboard">Γυψοσανίδα</string>
+	<string name="poi_recycling_animal_waste">Ζωικά απόβλητα</string>
+	<string name="poi_recycling_fridge_and_freezer">Ψυγείο και καταψύκτης</string>
+	<string name="poi_recycling_furniture">Έπιπλα</string>
+	<string name="poi_recycling_diapers">Πάνες</string>
+	<string name="poi_recycling_car_batteries">Μπαταρίες οχημάτων</string>
+	<string name="poi_recycling_cars">Αυτοκίνητα</string>
+	<string name="poi_recycling_bicycles">Ποδήλατα</string>
+
+	<string name="poi_landfill">Χωματερή</string>
+	<string name="poi_landfill_waste_nuclear">Πυρηνικά απόβλητα</string>
+	<string name="poi_waste_disposal">Διάθεση απορριμμάτων</string>
+	<string name="poi_waste_basket">Σκουπιδοτενεκές</string>
+
+	<string name="poi_skiing">Χιονοδρομία</string>
+	<string name="poi_ski_rental">Ενοικίαση χιονοπέδιλων</string>
+
+	<string name="poi_ski_resort">Θέρετρο χιονοδρομιών</string>
+	<string name="poi_bridge_movable_lift">Τύπος μετακινήσιμης γέφυρας: αναβατήρας</string>
+	<string name="poi_boat_jetski_rental_yes">Τζετ σκι: ναι</string>
+	<string name="poi_boat_jetski_rental_no">Τζετ σκι: όχι</string>
 	</resources>
