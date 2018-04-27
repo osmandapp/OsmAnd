@@ -3803,4 +3803,21 @@
 	<string name="poi_cable_number">Numer przewodu</string>
 	<string name="poi_via_ferrata_scale">Trudność</string>
 
+<string name="poi_glacier_type">Typ lodowca</string>
+
+<string name="poi_glacier_type_icecap">Czapa lodowa</string>
+	<string name="poi_glacier_type_icefield">Pole lodowe</string>
+	<string name="poi_glacier_type_plateau">Płaskowyż</string>
+	<string name="poi_glacier_type_valley">Dolina</string>
+	<string name="poi_glacier_type_tidewater">Woda odpływowa</string>
+	<string name="poi_glacier_type_mountain">Góra</string>
+	<string name="poi_glacier_type_hanging">Wiszący</string>
+	<string name="poi_glacier_type_icefall">Lodospad</string>
+	<string name="poi_glacier_type_rock">Skała</string>
+	<string name="poi_glacier_type_ice_tongue">Jęzor lodowcowy</string>
+
+	<string name="poi_glacier_ele_top">Najwyższy punkt</string>
+	<string name="poi_glacier_ele_bottom">Najniższy punkt</string>
+	<string name="poi_glacier_slope">Średnie nachylenie</string>
+
 </resources>
