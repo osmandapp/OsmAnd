@@ -2411,7 +2411,7 @@
     
     <string name="anonymous_user_hint">En anonym bruker kan ikke: 
 \n- Opprette grupper; 
-\n- Synkronisere grupper og enheter med serveren; 
+\n- Synkronisere grupper og enheter med tjeneren; 
 \n- Behandle grupper og enheter i et personlig dashbord på nettstedet.</string>
     <string name="simulate_initial_startup">Simuler første programstart</string>
     <string name="audionotes_plugin_description">Programtillegget for Audio/video-notater tilbyr funksjoner for å ta lyd/video/bilde-notater på en tur, enten ved bruk av en knapp på kartskjermen eller direkte i kontekstmenyen for enhver posisjon på kartet.</string>
