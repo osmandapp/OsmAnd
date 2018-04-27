@@ -186,7 +186,7 @@
     <string name="world_ski_missing">Para mostrar mapas de esqui, o mapa off-line especial precisa ser baixado</string>
     <string name="nautical_maps_missing">Para mostrar mapas náuticos, o mapa off-line especial precisa ser baixado</string>
 	<string name="edit_group">Editar grupo</string>
-    <string name="parking_place">Lugar de estacionamento</string>
+    <string name="parking_place">Vaga de estacionamento</string>
     <string name="remove_the_tag">REMOVER A ETIQUETA</string>
     <string name="gps_status">Situação do GPS</string>
     <string name="version_settings_descr">Baixar versões noturnas</string>
@@ -196,7 +196,8 @@
     <string name="track_points">Pontos da trilha</string>
 	<string name="osmand_srtm_long_description_1000_chars">"Este complemento fornece curva de nível e camada de sombra de colinas (relevo) por cima do mapa padrão do OsmAnd. Esta funcionalidade será muito apreciada por atletas, viajantes e alguém interessado na estrutura de relevo da paisagem.\n\nOs dados globais (entre as latitudes 70º norte e 70º sul) são baseados em medições do SRTM (Shuttle Radar Topography Mission) e ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), um instrumento de imagens da Terra, o principal satélite do Sistema de Observação da Terra da NASA. ASTER é um esforço conjunto da NASA, do Ministério Japonês da Economia, Comércio e Indústria (METI) e do Sistema Espacial Japonês (J-spacesystems). "</string>
 	<string name="srtm_plugin_description">"Este complemento fornece camadas de curvas de nível e de sombras das colinas (relevo) por cima do mapa padrão do OsmAnd. Esta funcionalidade será muito apreciada por atletas, viajantes e alguém interessado na estrutura de relevo da paisagem.\n\nOs dados globais (entre as latitudes 70º norte e 70º sul) são baseados em medições do SRTM (Shuttle Radar Topography Mission) e ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), um instrumento de imagens da Terra, o principal satélite do Sistema de Observação da Terra da NASA. ASTER é um esforço conjunto da NASA, do Ministério Japonês da Economia, Comércio e Indústria (METI) e do Sistema Espacial Japonês (J-spacesystems). "</string>
-	<string name="osmand_parking_plugin_description">O complemento de posição de estacionamento memoriza facilmente onde seu carro está estacionado e quanto tempo resta (se o estacionamento for de tempo limitado).\nVocê pode encontrar o seu lugar e tempo de estacionamento no painel de instrumentos e no widget do mapa. Pode ser adicionado um evento no calendário, se você quiser um lembrete.</string>
+	<string name="osmand_parking_plugin_description">O plugin de posição de estacionamento grava onde seu carro está estacionado e quanto tempo resta (se o estacionamento for de tempo limitado).
+\nVocê pode encontrar o seu lugar e tempo de estacionamento no painel de instrumentos e no widget do mapa. Pode ser adicionado um evento no calendário, se você quiser um lembrete.</string>
 	<string name="osm_editing_plugin_description">Este complemento do OsmAnd pode ser usado para fazer contribuições ao OSM como criar ou modificar POI, abertura ou comentários de erros do OSM e contribuir com arquivos GPX gravados. OSM é um projeto de mapeamento mundial dirigido pela comunidade e de domínio público. Para mais detalhes, consulte https://openstreetmap.org. Participação ativa é apreciada e as contribuições podem ser feitas diretamente do OsmAnd, se você especificar suas credenciais pessoais de OSM no app.</string>
 	<string name="osmand_development_plugin_description">Este complemento exibe configurações de desenvolvimento e recursos de depuração como testar ou simular o roteamento, o desempenho de renderização de tela ou instruções de voz. Essas configurações são destinadas a desenvolvedores e não são necessárias para o usuário comum.</string>
 	<string name="proxy_pref_descr">Configurar proxy</string>
@@ -949,8 +950,8 @@ Pôr do Sol: %2$s</string>
 	<string name="osmand_parking_event">Pegar o carro no estacionamento</string>
 	<string name="osmand_parking_warning">Alerta</string>
 	<string name="osmand_parking_warning_text">Notificação para buscar seu carro foi adicionada ao seu calendário. Ela permanecerá até que você a apague manualmente.</string>    
-	<string name="osmand_parking_time_limit_title">Definir o limite de tempo de estacionamento</string>
-	<string name="osmand_parking_delete_confirm">Você quer apagar o marcardor da posição de estacionamento?</string>
+	<string name="osmand_parking_time_limit_title">Definir limite de tempo</string>
+	<string name="osmand_parking_delete_confirm">Quer apagar o marcardor da posição de estacionamento?</string>
 	<string name="osmand_parking_delete">Apagar um marcador de estacionamento</string>
 	<string name="osmand_parking_choose_type">Escolher o tipo de estacionamento</string>
 	<string name="osmand_parking_no_lim_text">Tempo ilimitado</string>
@@ -961,9 +962,9 @@ Pôr do Sol: %2$s</string>
 	<string name="osmand_parking_position_description_add">Buscar o carro em:</string>
 	<string name="osmand_parking_pm">PM</string>
 	<string name="osmand_parking_am">AM</string>
-	<string name="osmand_parking_position_name">Local de estacionamento</string>
+	<string name="osmand_parking_position_name">Vaga de estacionamento</string>
 	<string name="context_menu_item_add_parking_point">Marcar local de estacionamento</string>
-	<string name="context_menu_item_delete_parking_point">Apagar um marcador de estacionamento</string>
+	<string name="context_menu_item_delete_parking_point">Apagar marcador de estacionamento</string>
 	<string name="gpxup_public">Público</string>
 	<string name="gpxup_identifiable">Identificável</string>
 	<string name="gpxup_trackable">Rastreável</string>
@@ -1853,7 +1854,7 @@ Pôr do Sol: %2$s</string>
     <string name="whats_new">O que há de novo</string>
     <string name="rendering_attr_hideProposed_name">Objetos propostos</string>
     <string name="world_map_download_descr">Mapa-base mundial (abrangendo o mundo inteiro em pequenos zooms) está faltando ou desatualizado. Por favor, considere baixá-lo para uma visão global.</string>
-    <string name="map_downloaded_descr">O mapa de %1$s foi baixado, você pode começar a usá-lo.</string>
+    <string name="map_downloaded_descr">Agora você pode usar o mapa baixado %1$s.</string>
     <string name="go_to_map">Exibir o mapa</string>
     <string name="simulate_initial_startup_descr">Define o sinalizador indicando a primeira inicialização do app, mantém todas as outras configurações inalteradas.</string>
     <string name="simulate_initial_startup">Simular primeiro início do app</string>
@@ -2016,7 +2017,7 @@ Pôr do Sol: %2$s</string>
     <string name="shared_string_email_address">Endereço de e-mail</string>
     <string name="shared_string_status">Estado</string>
     <string name="shared_string_save_changes">Salvar alterações</string>
-    <string name="find_parking">Encontrar estacionamento</string>
+    <string name="find_parking">Achar estacionamento</string>
     <string name="show_polygons">Mostrar polígonos de áreas</string>
     
     <string name="add_points_to_map_markers_q">Você quer adicionar todos os pontos aos marcadores de mapa?</string>
@@ -2188,8 +2189,8 @@ Pôr do Sol: %2$s</string>
     <string name="measurement_tool">Medir distância</string>
     <string name="quick_action_resume_pause_navigation">Retomar/pausar navegação</string>
     <string name="quick_action_resume_pause_navigation_descr">Toque neste botão para pausar ou retomar a navegação.</string>
-    <string name="quick_action_start_stop_navigation">Começar/parar navegação</string>
-    <string name="quick_action_start_stop_navigation_descr">Toque neste botão para começar ou parar a navegação.</string>
+    <string name="quick_action_start_stop_navigation">Iniciar/parar navegação</string>
+    <string name="quick_action_start_stop_navigation_descr">Toque neste botão para iniciar ou parar a navegação.</string>
     <string name="store_tracks_in_monthly_directories">Armazenar trilhas gravadas em pastas mensais</string>
     <string name="store_tracks_in_monthly_directories_descrp">Armazenar trilhas gravadas em subpastas por mês gravado (como 2017-01).</string>
     <string name="shared_string_reset">Redefinir</string>
@@ -2579,7 +2580,7 @@ Pôr do Sol: %2$s</string>
     <string name="quick_action_navigation_voice_off">Voz desligada</string>
     <string name="quick_action_navigation_voice_on">Voz ligada</string>
     <string name="quick_action_add_gpx">Adicionar ponto de passagem GPX</string>
-    <string name="quick_action_add_parking">Adicionar lugar de estacionamento</string>
+    <string name="quick_action_add_parking">Marcar estacionamento</string>
     <string name="quick_action_new_action">Adicionar ação</string>
     <string name="quick_action_edit_action">Editar ação</string>
     <string name="quick_action_add_favorite">Adicionar favorito</string>

@@ -2574,7 +2574,7 @@
 	<string name="poi_futsal">Futsal</string>
 	<string name="poi_squash">Squash</string>
 	<string name="poi_parking_garage_boxes">Box de garagem</string>
-	<string name="poi_parking_carports">Estacionamento coberto</string>
+	<string name="poi_parking_carports">Cobertura de veículos</string>
 
 	<string name="poi_dojo">Dojô</string>
 
@@ -3843,5 +3843,19 @@
 	<string name="poi_via_ferrata">Via ferrata</string>
 	<string name="poi_cable_number">Número do cabo</string>
 	<string name="poi_via_ferrata_scale">Dificuldade</string>
+
+<string name="poi_glacier_type">Tipo de geleira</string>
+
+<string name="poi_glacier_type_icecap">Calota de gelo</string>
+	<string name="poi_glacier_type_icefield">Campo de gelo</string>
+	<string name="poi_glacier_type_plateau">Planalto</string>
+	<string name="poi_glacier_type_valley">Vale</string>
+	<string name="poi_glacier_type_outlet">Saída</string>
+	<string name="poi_glacier_type_tidewater">Água de maré</string>
+	<string name="poi_glacier_type_mountain">Montanha</string>
+	<string name="poi_glacier_type_ice_tongue">Língua de gelo</string>
+
+	<string name="poi_glacier_ele_top">Ponto culminante</string>
+	<string name="poi_glacier_slope">Inclinação média</string>
 
 </resources>
