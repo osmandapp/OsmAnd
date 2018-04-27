@@ -3910,4 +3910,24 @@
 	<string name="poi_service_vehicle_muffler_yes">Lyddæmper</string>
 	<string name="poi_service_vehicle_alignment_yes">Justering</string>
 	<string name="poi_service_vehicle_transmission_repair_yes">Reparation af transmission</string>
-	</resources>
+	<string name="poi_glacier_type">Gletsjer type</string>
+
+<string name="poi_glacier_type_icecap">Iskappe</string>
+	<string name="poi_glacier_type_icefield">Isfelt</string>
+	<string name="poi_glacier_type_plateau">Plateau</string>
+	<string name="poi_glacier_type_valley">Dal</string>
+	<string name="poi_glacier_type_outlet">Udløb</string>
+	<string name="poi_glacier_type_tidewater">Tidevand</string>
+	<string name="poi_glacier_type_mountain">Bjerg</string>
+	<string name="poi_glacier_type_hanging">Hængende</string>
+	<string name="poi_glacier_type_icefall">Isvandfald</string>
+	<string name="poi_glacier_type_rock">Klippe</string>
+	<string name="poi_glacier_type_shelf">Hylde</string>
+	<string name="poi_glacier_type_remnant">Rest</string>
+	<string name="poi_glacier_type_ice_tongue">Istunge</string>
+
+	<string name="poi_glacier_ele_top">Højeste punkt</string>
+	<string name="poi_glacier_ele_bottom">Laveste punkt</string>
+	<string name="poi_glacier_slope">Gennemsnitlig hældning</string>
+
+</resources>

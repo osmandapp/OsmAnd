@@ -3811,4 +3811,24 @@
 	<string name="poi_cable_number">Fjöldi víra</string>
 	<string name="poi_via_ferrata_scale">Erfiðleikastig</string>
 
+<string name="poi_glacier_type">Tegund jökuls</string>
+
+<string name="poi_glacier_type_icecap">Hveljökull</string>
+	<string name="poi_glacier_type_icefield">Jökulbreiða</string>
+	<string name="poi_glacier_type_plateau">Jökulslétta</string>
+	<string name="poi_glacier_type_valley">Daljökull</string>
+	<string name="poi_glacier_type_outlet">Jökultunga</string>
+	<string name="poi_glacier_type_tidewater">Jökull þar sem sjávarfalla gætir</string>
+	<string name="poi_glacier_type_mountain">Hlíðarjökull</string>
+	<string name="poi_glacier_type_hanging">Hengijökull</string>
+	<string name="poi_glacier_type_icefall">Ísfall</string>
+	<string name="poi_glacier_type_rock">Grjótjökull</string>
+	<string name="poi_glacier_type_shelf">Jökulþilja</string>
+	<string name="poi_glacier_type_remnant">Jökulleifar</string>
+	<string name="poi_glacier_type_ice_tongue">Skriðjökull</string>
+
+	<string name="poi_glacier_ele_top">Hæsti punktur</string>
+	<string name="poi_glacier_ele_bottom">Lægsti punktur</string>
+	<string name="poi_glacier_slope">Meðalhalli</string>
+
 </resources>

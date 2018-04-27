@@ -3082,4 +3082,18 @@
     <string name="images_cache">Кэш выяў</string>
     <string name="delete_search_history">Выдаліць гісторыю пошукаў</string>
     <string name="show_images">Паказаць выявы</string>
+    <string name="popular_destinations">Папулярныя напрамкі</string>
+    <string name="paid_app">Платнае прыкладанне</string>
+    <string name="paid_plugin">Платны плагін</string>
+    <string name="travel_card_update_descr">Мы падрыхтавалі абнаўленні і выпраўленні даных Wikivoyage, абнавіце файл, каб убачыць іх.</string>
+	<string name="travel_card_download_descr">Спампуйце файл даведніка Wikivoyage для прагляду артыкулаў аб мясцінах па ўсім свеце без Інтэрнэт-падлучэння.</string>
+	<string name="update_is_available">Абнаўленне даступнае</string>
+	<string name="download_file">Спампаваць файл</string>
+    <string name="start_editing_card_image_text">Бясплатны сусветны турыстычны даведнік, які можа рэдагаваць кожны.</string>
+    <string name="welcome_to_open_beta_description">Падарожжа на аснове Wikivoyage. Падчас адкрытага бэта-тэставання ў вас ёсць магчымасць выкарыстоўваць усе функцыі бясплатна. Пасля завяршэння бэта-перыяду даведнік будзе даступны падпішчыкам OsmAnd Unlimited і ўладальнікам OsmAnd+</string>
+    <string name="start_editing_card_description">Вы можаце рэдагаваць любы артыкул на Wikivoyage, і мы спадзяемся, што вы зробіце гэта. Нам патрэбны вашы веды, ваш вопыт, ваш талент і ваша ўвага</string>
+    <string name="start_editing">Пачаць рэдагаваньне</string>
+    <string name="get_unlimited_access">Атрымаць неабмежаваны доступ</string>
+    <string name="welcome_to_open_beta">Вітаем у адкрытым бэта-тэставанні!</string>
+    <string name="travel_guide">Турыстычны даведнік</string>
     </resources>

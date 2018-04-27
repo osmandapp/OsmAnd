@@ -71,6 +71,24 @@ public class DownloadResources extends DownloadResourceGroup {
 		return worldMap;
 	}
 
+	public IndexItem getWorldWikivoyageItem() {
+		String groupId = DownloadResourceGroupType.TRAVEL_GROUP.getDefaultId() + "#" +
+				DownloadResourceGroupType.WIKIVOYAGE_MAPS.getDefaultId() + "#" +
+				DownloadResourceGroupType.WIKIVOYAGE_HEADER.getDefaultId();
+		DownloadResourceGroup wikivoyageHeader = getSubGroupById(groupId);
+		if (wikivoyageHeader != null) {
+			List<IndexItem> items = wikivoyageHeader.getIndividualResources();
+			if (items != null) {
+				for (IndexItem ii : items) {
+					if (ii.getBasename().equalsIgnoreCase(DownloadResources.WORLD_WIKIVOYAGE_NAME)) {
+						return ii;
+					}
+				}
+			}
+		}
+		return null;
+	}
+
 	public IndexItem getIndexItem(String fileName) {
 		IndexItem res = null;
 		if (rawResources == null) {

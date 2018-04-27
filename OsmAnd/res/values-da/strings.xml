@@ -507,31 +507,51 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="local_index_gpx_info_show">\n\nLangt tryk for valgmuligheder</string>
 	
 	<string name="osmand_long_description_1000_chars">"OsmAnd (OSM Automated Navigation Directions) 
-\n 
-\nOsmAnd er et open source-navigationsprogram med adgang til en lang række af globale OpenStreetMap (OSM)-data. Alle kortdata (vektorkort eller kortbrikker) kan gemmes på enhedens hukommelseskort til offline-brug. OsmAnd tilbyder også offline- og online-rutefunktionalitet inklusive sving-for-sving-talevejledning.
 \n
+\nOsmAnd er et open source-navigationsprogram med adgang til en lang række af globale OpenStreetMap (OSM)-data. Alle kortdata (vektorkort eller kortbrikker) kan gemmes på enhedens hukommelseskort til offline-brug. OsmAnd tilbyder også offline- og online-rutefunktionalitet inklusive sving-for-sving-talevejledning. 
+\n 
 \nNogle af hovedfunktionerne: 
-\n - Komplet offlinefunktionalitet (gemme hentede vektorkort eller kortbrikker i enhedens lager)
-\n - Kompakte offlinevektorkort for hele verden er tilgængelige
+\n - Komplet offlinefunktionalitet (gemme hentede vektorkort eller kortbrikker i enhedens lager) 
+\n - Kompakte offlinevektorkort for hele verden er tilgængelige 
 \n - Kort for enkelte lande eller områder kan hentes direkte fra OsmAnd 
 \n - Overlejring af flere kortlag er muligt, som fx GPX- eller navigationsspor, interessepunkter (IP), favoritter, konturlinjer, stoppesteder for kollektiv trafik og flere kort med modificerebar gennemsigtighed 
-\n - Offlinesøgning efter adresser og steder (interessepunkter, IP)
-\n - Offlineruteplanlægning for mellemlange afstande
+\n
+\n - Offlinesøgning efter adresser og steder (interessepunkter, IP) 
+\n - Offlineruteplanlægning for mellemlange afstande 
 \n - Bil-, cykel- og fodgængertilstand med: 
 \n   - valgfri automatisk dag/nat-tilstandsskift 
 \n   - valgfri automatisk zoom efter hastighed 
 \n   - valgfri automatisk kortrotation efter kompas eller bevægelsesretning 
 \n   - valgfri vognbaneassistent 
 \n   - visning af hastighedsgrænser 
-\n   - optagede stemmer og talesyntesestemmer (tekst-til-tale)
-\n 
+\n   - optagede stemmer og talesyntesestemmer (tekst-til-tale) 
+\n
 \n Begrænsninger i den gratis version af OsmAnd: 
 \n - Antallet af kort der kan hentes er begrænset 
-\n - Ingen adgang til Wikipedia-interessepunkter offline
-\n 
+\n - Ingen adgang til Wikipedia-interessepunkter offline 
+\n
 \nOsmAnd bliver aktivt udviklet. Projektet og den videre udvikling afhænger af økonomiske bidrag til at drive udviklingen og test af nye funktioner. Overvej at købe OsmAnd+, betale for en specifik ny funktion eller lave en generel donation på osmand.net."</string>
     
-    <string name="osmand_plus_long_description_1000_chars">"OsmAnd+ (OSM Automated Navigation Directions) OsmAnd+ er et open source-navigationsprogram med adgang til en bred vifte af globale OpenStreetMap (OSM)-data. Alle kortdata (vektor eller kortbrikker) kan gemmes på enhedens hukommelseskort til offline-brug. OsmAnd tilbyder også offline og online ruteplanlægningsfunktionalitet, herunder sving-for-sving-talevejledning. OsmAnd+ er den betalte programversion; ved at købe den støtter man projektet, finansierer udviklingen af nye funktioner, og modtager de seneste opdateringer. Nogle af hovedfunktionerne: - Komplet offline-funktionalitet (gem hentede vektor- eller brikkort på enhedens hukommelsseskort) - Kompakte offline vektorkort for hele verden - Ubegrænset hentning af lande- eller områdekort direkte fra OsmAnd - Offline Wikipedia-funktioner (hent Wikipedia-interessepunkter (IP)), fantastisk til sightseeing - Overlejring af flere kortlag mulige, såsom GPX- eller navigationsspor, seværdigheder, favoritter, højdekurver, stoppesteder for kollektiv trafik, ekstra kort med brugerdefinerbar gennemsigtighed - Offline-søgning efter adresser og steder (IP) - Offline-ruteplanlægning til mediumafstande - Bil-, cykel- og fodgængertilstande med: - valgfri automatisk dag/nat-visning - valgfri hastighedsafhængig kortzoom - valgfri korttilpasning i henhold til kompas- eller bevægelsesretning - valgfri vognbanevejledning, visning af hastighedsgrænser,  optagede stemmer eller TTS-stemmer"</string>
+    <string name="osmand_plus_long_description_1000_chars">"OsmAnd+ (OSM Automated Navigation Directions)
+\n
+\n OsmAnd+ er et open source-navigationsprogram med adgang til en bred vifte af globale OpenStreetMap (OSM)-data. Alle kortdata (vektor eller kortbrikker) kan gemmes på enhedens hukommelseskort til offline-brug. OsmAnd tilbyder også offline og online ruteplanlægningsfunktionalitet, herunder sving-for-sving-talevejledning.
+\n
+\n OsmAnd+ er den betalte programversion; ved at købe den støtter man projektet, finansierer udviklingen af nye funktioner, og modtager de seneste opdateringer.
+\n
+\n Nogle af hovedfunktionerne:
+\n - Komplet offline-funktionalitet (gem hentede vektor- eller brikkort på enhedens hukommelsseskort)
+\n - Kompakte offline vektorkort for hele verden
+\n - Ubegrænset hentning af lande- eller områdekort direkte fra OsmAnd
+\n - Offline Wikipedia-funktioner (hent Wikipedia-interessepunkter (IP)), fantastisk til sightseeing
+\n - Overlejring af flere kortlag mulige, såsom GPX- eller navigationsspor, seværdigheder, favoritter, højdekurver, stoppesteder for kollektiv trafik, ekstra kort med brugerdefinerbar gennemsigtighed
+\n
+\n - Offline-søgning efter adresser og steder (IP)
+\n - Offline-ruteplanlægning til mediumafstande
+\n - Bil-, cykel- og fodgængertilstande med:
+\n - valgfri automatisk dag/nat-visning
+\n - valgfri hastighedsafhængig kortzoom
+\n - valgfri korttilpasning i henhold til kompas- eller bevægelsesretning
+\n - valgfri vognbanevejledning, visning af hastighedsgrænser,  optagede stemmer eller TTS-stemmer"</string>
     
 
 
@@ -2096,7 +2116,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
 \n 
 \n • Konfigurer hvordan og hvilket indhold der vises på betjeningspanelet 
 \n 
-\n • Forbigå betjeningspanel hvis der ønskes menubaserede kontrol 
+\n • Forbigå betjeningspanel hvis der ønskes menubaseret kontrol 
 \n 
 \n • Hent kort, områder ved at trykke direkte på verdenskortet 
 \n 
@@ -2104,7 +2124,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
 \n 
 \n • Forbedret IP og OSM redigeringsfunktionalitet 
 \n 
-\n • Administration af kortfilers nedlastningsstruktur og grænseflade er omarbejdet 
+\n • Hentning af kortfiler, struktur og grænseflade er omarbejdet 
 \n 
 \n og mere…</string>
     <string name="osm_save_offline">Gem offline</string>
@@ -2652,27 +2672,121 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="do_not_show_startup_messages_desc">Vis ikke rabatter &amp; særlige lokale hændelsesmeddelelser.</string>
     <string name="right_side_navigation">Højrekørsel</string>
     <string name="driving_region_automatic">Automatisk</string>
-    <string name="osmand_extended_description_part1">OsmAnd (OSM Automated Navigation Directions) er et kort- og navigationsprogram med adgang til gratis og verdensomspændende OpenStreetMap (OSM)-data af høj kvalitet. Nyd visuel og stemmenavigation, visning af IP\'er (interessepunkter), oprettelse og administration af GPX-spor, brug af højdekurvevisualisering og højdeinfo (via udvidelse), et valg mellem bil-, cykel- og fodgængertilstand, OSM-redigering og meget mere.</string>
-    <string name="osmand_extended_description_part7">Bidrag til OSM. • Rapporter fejl i data • Overfør GPX-spor til OSM direkte • Tilføj IP\'er og overfør dem direkte til OSM (eller senere, hvis offline)</string>
+    <string name="osmand_extended_description_part1">OsmAnd (OSM Automated Navigation Directions) er et kort- og navigationsprogram med adgang til gratis og verdensomspændende OpenStreetMap (OSM)-data af høj kvalitet.
+\n
+\nNyd visuel og stemmenavigation, visning af IP\'er (interessepunkter), oprettelse og administration af GPX-spor, brug af højdekurvevisualisering og højdeinfo (via udvidelse), et valg mellem bil-, cykel- og fodgængertilstand, OSM-redigering og meget mere.</string>
+    <string name="osmand_extended_description_part7">Bidrag til OSM
+\n • Rapporter fejl i data
+\n • Overfør GPX-spor til OSM direkte
+\n • Tilføj IP\'er og overfør dem direkte til OSM (eller senere, hvis offline)</string>
     <string name="osmand_extended_description_part8">OsmAnd er open source og bliver aktivt udviklet. Alle kan bidrage til anvendelsen ved at rapportere fejl, forbedring af oversættelser eller kodning af nye funktioner. Projektet er i en levende kontinuerlig forbedring af alle disse former for udvikling og brugerinteraktion. Projektets fremdrift er også afhængig af finansielle bidrag til finansiering af kodning og afprøvning af nye funktionaliteter. 
-\n  Anslået kortdækning og kvalitet:   • Vesteuropa: ****   • Østeuropa: ***   • Rusland: ***   • Nordamerika: ***   • Sydamerika: **   • Asien: **   • Japan og Korea: ***   • Mellemøsten: **   • Afrika: **   • Antarktis: *   De fleste lande i verden kan hentes!   Få pålidelig navigation - det være sig Frankrig, Tyskland, Mexico, Storbritannien, Spanien, Holland, USA, Rusland, Brasilien eller andre.</string>
-    <string name="osmand_plus_extended_description_part7">Bidrag direkte til OSM   • Rapporter fejl i data   • Overfør GPX-spor direkte til OSM   • Tilføj IP\'er og overfør dem direkte til OSM (eller senere, hvis offline)   • Valgfri turoptagelse også i baggrundstilstand (mens enheden er i dvaletilstand)
+\n  Anslået kortdækning og kvalitet: 
+\n • Vesteuropa: ****  
+\n • Østeuropa: ***  
+\n • Rusland: ***  
+\n • Nordamerika: ***  
+\n • Sydamerika: **  
+\n • Asien: **  
+\n • Japan og Korea: ***  
+\n • Mellemøsten: **   • Afrika: **  
+\n • Antarktis: *  
+\n De fleste lande i verden kan hentes!  
+\n Få pålidelig navigation - det være sig Frankrig, Tyskland, Mexico, Storbritannien, Spanien, Holland, USA, Rusland, Brasilien eller andre.</string>
+    <string name="osmand_plus_extended_description_part7">Bidrag direkte til OSM  
+\n • Rapporter fejl i data  
+\n • Overfør GPX-spor direkte til OSM  
+\n • Tilføj IP\'er og overfør dem direkte til OSM (eller senere, hvis offline)  
+\n • Valgfri turoptagelse også i baggrundstilstand (mens enheden er i dvaletilstand) 
 \n  OsmAnd er open source og bliver aktivt udviklet. Alle kan bidrage til anvendelsen ved at rapportere fejl, forbedring af oversættelser eller kodning af nye funktioner. Projektet er i en levende kontinuerlig forbedring af alle disse former for udvikling og brugerinteraktion. Projektets fremdrift er også afhængig af finansielle bidrag til finansiering af kodning og afprøvning af nye funktionaliteter.</string>
-    <string name="osmand_extended_description_part2">"GPS-navigation • Vælg mellem offline (ingen roamingtakster i udlandet) eller online (hurtigere) tilstand  • Sving-for-sving stemmevejledning (indspillet og syntetiseret stemmer)  • Rutens genberegnes ved afvigelse   • Banevejledning, gadenavne, og forventet ankomsttidspunkt vil hjælpe undervejs  • For at gøre -rejsen mere sikker, skifter dag-/nat-tilstand automatisk  • Vælg at vise hastighedsgrænser, og få påmindelser, hvis de overskrides  • Kortzoom tilpasser sig hastigheden  • Søg destination efter adresse, efter type (fx: parkering, restaurant, hotel, tankstation, museum), eller ved geografiskekoordinater  • Understøtter mellemliggende punkter på ruten  • Optag eller overfør et GPX-spor og følg det"</string>
-    <string name="osmand_extended_description_part3">Kort • Viser IP\'er (interessepunkter) i nærheden • Justerer kortet til bevægelsesretning (eller kompas) • Viser hvor man er og hvad der kigges på • Del placering, så andre kan finde dig • Gem vigtige steder i \'Favoritter\' • Giver mulighed for at vælge, hvordan navne vises på kortet: på engelsk, lokal eller fonetisk stavemåde • Viser specialiserede online kortbrikkerr, satellitvisning (fra Bing), forskellige overlejringer som touring/navigation GPX-spor og yderligere lag med tilpasselig gennemsigtighed</string>
-    <string name="osmand_extended_description_part4">Skikort udvidelsen viser skiløjper med angivelse af sværhedsgrad og yderligere oplysninger, såsom placering af lifte og andre faciliteter.</string>
-    <string name="osmand_extended_description_part5">"Cykling  • Find cykelstier på kortet  • GPS-navigation i cykeltilstand laver ruten ved hjælp af cykelstier • Se hastighed og højde • GPX optagelse kan optage turen og dele den • Via ekstra udvidelser kan der aktiveres højdekurver og relieflag"</string>
-    <string name="osmand_extended_description_part6">Gåture, vandring, byrundtur • Kortet viser gang- og vandrestier • Wikipedia på det foretrukne sprog kan fortælle en masse i løbet af en byrundtur • Offentlig transport (busser, sporvogne, tog), herunder linjenavne, hjælper til at navigere i en ny by • GPS-navigation i fodgængertilstand laver ruten ved hjælp af gangstier • Hent og følg en GPX-rute eller optag og del egne ruter</string>
+    <string name="osmand_extended_description_part2">GPS-navigation
+\n • Vælg mellem offline (ingen roamingtakster i udlandet) eller online (hurtigere) tilstand 
+\n • Sving-for-sving stemmevejledning (indspillet og syntetiseret stemmer) 
+\n • Rutens genberegnes ved afvigelse  
+\n • Banevejledning, gadenavne, og forventet ankomsttidspunkt vil hjælpe undervejs 
+\n • For at gøre rejsen mere sikker, skifter dag-/nat-tilstand automatisk 
+\n • Vælg at vise hastighedsgrænser, og få påmindelser, hvis de overskrides 
+\n • Kortzoom tilpasser sig hastigheden 
+\n • Søg destination efter adresse, efter type (fx: parkering, restaurant, hotel, tankstation, museum), eller ved geografiskekoordinater 
+\n • Understøtter mellemliggende punkter på ruten 
+\n • Optag eller overfør et GPX-spor og følg det</string>
+    <string name="osmand_extended_description_part3">Kort
+\n • Viser IP\'er (interessepunkter) i nærheden
+\n • Justerer kortet til bevægelsesretning (eller kompas)
+\n • Viser hvor man er og hvad der kigges på
+\n • Del placering, så andre kan finde dig
+\n • Gem vigtige steder i \'Favoritter\'
+\n • Giver mulighed for at vælge, hvordan navne vises på kortet: på engelsk, lokal eller fonetisk stavemåde .
+\n• Viser specialiserede online kortbrikkerr, satellitvisning (fra Bing), forskellige overlejringer som touring/navigation GPX-spor og yderligere lag med tilpasselig gennemsigtighed</string>
+    <string name="osmand_extended_description_part4">Skikort 
+\nUdvidelsen viser skiløjper med angivelse af sværhedsgrad og yderligere oplysninger, såsom placering af lifte og andre faciliteter.</string>
+    <string name="osmand_extended_description_part5">Cykling 
+\n • Find cykelstier på kortet 
+\n • GPS-navigation i cykeltilstand laver ruten ved hjælp af cykelstier
+\n • Se hastighed og højde
+\n • GPX optagelse kan optage turen og dele den
+\n • Via ekstra udvidelser kan der aktiveres højdekurver og relieflag</string>
+    <string name="osmand_extended_description_part6">Gåture, vandring, byrundtur
+\n • Kortet viser gang- og vandrestier
+\n • Wikipedia på det foretrukne sprog kan fortælle en masse i løbet af en byrundtur
+\n • Offentlig transport (busser, sporvogne, tog), herunder linjenavne, hjælper til at navigere i en ny by
+\n • GPS-navigation i fodgængertilstand laver ruten ved hjælp af gangstier
+\n • Hent og følg en GPX-rute eller optag og del egne ruter</string>
     <string name="osmand_plus_extended_description_part1">OsmAnd (OSM Automated Navigation Directions) er et kort- og navigationsprogram med adgang til fri, verdensomspændende, og højkvalitet data fra OpenStreetMap (OSM). 
 \n Nyd stemme og optisk navigation, visning af IP\'er (interessepunkter), opret og administrere GPX-spor, ved hjælp af højdekurvevisualisering og højdeinfo, vælg mellem bilkørsel, cykling, fodgænger tilstand, OSM redigering og meget mere. 
+\n
 \n OsmAnd+ er den betalte programversion. Ved køb støttes projektet og udvikling af nye funktioner, og modtager de seneste opdateringer. 
+\n
 \n Nogle af de vigtigste funktioner:</string>
-    <string name="osmand_plus_extended_description_part2">Navigation   • Arbejder online (hurtig) eller offline (ingen roamingtakster, i udlandet)   • Sving-for-sving stemmevejledning (indspillede og syntetiseret stemmer)   • Valgfri vognbaneskift, gadenavn visning, og forventet ankomsttidspunkt   • Understøtter mellemliggende punkter på ruten   • Automatisk genberegning, ved afvigelse fra ruten   • Søg efter steder efter adresse, efter type (fx: restaurant, hotel, tankstation, museum), eller ved geografiske koordinater</string>
-    <string name="osmand_plus_extended_description_part3">Kortvisning   • Vis position og orientering   • Juster eventuelt kortet efter kompas eller bevægelsesretning   • Gem de vigtigste steder som foretrukne   • Vis IP\'er (interessepunkt) i nærheden   • Vis specialiserede online kortbrikker, satellitvisning (fra Bing), forskellige overlejringer som touring/navigation GPX-spor og yderligere lag med justerbar gennemsigtighed   • Vis valgfrit stednavne på engelsk, lokal eller fonetisk stavemåde</string>
-    <string name="osmand_plus_extended_description_part4">"Brug OSM og Wikipedia data   • Information af høj kvalitet fra de bedste samarbejdsprojekter i verden   • OSM data til hvert land eller område   • Wikipedia IP\'er, fantastisk til sightseeing   • Ubegrænset gratis hentning, direkte fra OsmAnd   • Kompakte offline vektorkort opdateret mindst en gang om måneden  • Vælg mellem komplette områdedata eller kun veje (Eksempel: hele Japan er 700 MB eller 200 MB for vejnettet, der er en del heraf)"</string>
-    <string name="osmand_plus_extended_description_part5">Sikkerhedsfunktioner   • Valgfri automatisk skift til dag-/natvisning   • Valgfri visning af hastighedsgrænse med påmindelse ved overskridelse   • Valgfri hastighedsafhængig zoom   • Del placering, så dine venner kan finde dig</string>
-    <string name="osmand_plus_extended_description_part6">Cykel og fodgænger-funktioner   • Visning af gang-, vandre- og cykelstier, fantastisk til udendørsaktiviteter   • Særlige navigations- og visningstilstande for cyklister og fodgængere   • Valgfrie stoppesteder for offentlig transport (bus, sporvogn, tog), herunder også linjenavne   • Valgfri ruteoptagelse til lokal GPX-fil eller online tjeneste   • Valgfri hastigheds og højdevisning   • Visning af højdekurver og relieflag (med ekstra udvidelse)</string>
-    <string name="osmand_plus_extended_description_part8">Anslået kortdækning og kvalitet: • Vesteuropa: **** • Østeuropa: *** • Rusland: *** • Nordamerika: *** • Sydamerika: ** • Asien: ** • Japan &amp; Korea: *** • Mellemøsten: ** • Afrika: ** • Antarktis: * De fleste lande i verden kan hentes! Fra Afghanistan til Zimbabwe, fra Australien til USA. Argentina, Brasilien, Canada, Frankrig, Tyskland, Mexico, Storbritannien, Spanien, …</string>
+    <string name="osmand_plus_extended_description_part2">"Navigation
+\n  • Arbejder online (hurtig) eller offline (ingen roamingtakster, i udlandet)
+\n  • Sving-for-sving stemmevejledning (indspillede og syntetiseret stemmer)
+\n  • Valgfri vognbaneskift, gadenavn visning, og forventet ankomsttidspunkt
+\n  • Understøtter mellemliggende punkter på ruten
+\n  • Automatisk genberegning, ved afvigelse fra ruten
+\n  • Søg efter steder efter adresse, efter type (fx: restaurant, hotel, tankstation, museum), eller ved geografiske koordinater
+\n "</string>
+    <string name="osmand_plus_extended_description_part3">Kortvisning  
+\n • Vis position og orientering  
+\n • Juster eventuelt kortet efter kompas eller bevægelsesretning  
+\n • Gem de vigtigste steder som foretrukne  
+\n • Vis IP\'er (interessepunkt) i nærheden  
+\n • Vis specialiserede online kortbrikker, satellitvisning (fra Bing), forskellige overlejringer som touring/navigation GPX-spor og yderligere lag med justerbar gennemsigtighed  
+\n • Vis valgfrit stednavne på engelsk, lokal eller fonetisk stavemåde</string>
+    <string name="osmand_plus_extended_description_part4">Brug OSM og Wikipedia data  
+\n • Information af høj kvalitet fra de bedste samarbejdsprojekter i verden  
+\n • OSM data til hvert land eller område  
+\n • Wikipedia IP\'er, fantastisk til sightseeing  
+\n • Ubegrænset gratis hentning, direkte fra OsmAnd  
+\n • Kompakte offline vektorkort opdateret mindst en gang om måneden 
+\n
+\n • Vælg mellem komplette områdedata eller kun veje (Eksempel: hele Japan er 700 MB eller 200 MB for vejnettet, der er en del heraf)</string>
+    <string name="osmand_plus_extended_description_part5">Sikkerhedsfunktioner  
+\n • Valgfri automatisk skift til dag-/natvisning  
+\n • Valgfri visning af hastighedsgrænse med påmindelse ved overskridelse 
+\n • Valgfri hastighedsafhængig zoom  
+\n • Del placering, så dine venner kan finde dig</string>
+    <string name="osmand_plus_extended_description_part6">"Cykel og fodgænger-funktioner
+\n  • Visning af gang-, vandre- og cykelstier, fantastisk til udendørsaktiviteter
+\n  • Særlige navigations- og visningstilstande for cyklister og fodgængere
+\n  • Valgfrie stoppesteder for offentlig transport (bus, sporvogn, tog), herunder også linjenavne
+\n  • Valgfri ruteoptagelse til lokal GPX-fil eller online tjeneste
+\n  • Valgfri hastigheds og højdevisning
+\n  • Visning af højdekurver og relieflag (med ekstra udvidelse)
+\n "</string>
+    <string name="osmand_plus_extended_description_part8">Anslået kortdækning og kvalitet:
+\n • Vesteuropa: ****
+\n • Østeuropa: ***
+\n • Rusland: ***
+\n • Nordamerika: ***
+\n • Sydamerika: **
+\n • Asien: **
+\n • Japan &amp; Korea: ***
+\n • Mellemøsten: **
+\n • Afrika: **
+\n • Antarktis: *
+\n De fleste lande i verden kan hentes!
+\n Fra Afghanistan til Zimbabwe, fra Australien til USA. Argentina, Brasilien, Canada, Frankrig, Tyskland, Mexico, Storbritannien, Spanien, …
+\n</string>
     <string name="fonts_header">Skrifttyper for kort</string>
     <string name="restore_purchases">Gendan køb</string>
     <string name="shared_string_visible">Synlig</string>
@@ -3092,7 +3206,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="in_app_purchase">Køb i appen</string>
     <string name="in_app_purchase_desc">Engangsbetaling</string>
     <string name="purchase_unlim_title">Køb - %1$s</string>
-    <string name="purchase_subscription_title">Tilmeld - %1$s</string>
+    <string name="purchase_subscription_title">Abonner - %1$s</string>
 
     <string name="wikivoyage_offline">Wikivoyage er offline</string>
     
@@ -3112,7 +3226,7 @@ Repræsenterer område: %1$s x %2$s</string>
 	<string name="update_is_available">Opdatering er tilgængelig</string>
 	<string name="download_file">Hent fil</string>
     <string name="start_editing_card_image_text">Den fri rejseguide for verden, som alle kan redigere.</string>
-    <string name="welcome_to_open_beta_description">Guider er baseret på Wikivoyage. Under den åbne betatest er der mulighed for at evaluere alle funktioner gratis. Efter udgangen af beta-perioden, vil guider være tilgængelige for abonnenter af OsmAnd ubegrænset og ejerne af OsmAnd +</string>
+    <string name="welcome_to_open_beta_description">Guider er baseret på Wikivoyage. Under den åbne betatest er der mulighed for at evaluere alle funktioner gratis. Efter udgangen af beta-perioden, vil guider være tilgængelige for abonnenter af OsmAnd ubegrænset og ejerne af OsmAnd+</string>
     <string name="start_editing_card_description">Rediger en artikel på Wikivoyage, og vi håber, at du gør. Vi har brug for din viden, erfaring, talent og opmærksomhed</string>
     <string name="start_editing">Begynd redigering</string>
     <string name="get_unlimited_access">Få ubegrænset adgang</string>
@@ -3121,7 +3235,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="download_wikipedia_description">Hent Wikipedia-artikler for %1$s og læs dem offline.</string>
     <string name="download_wikipedia_label">Hent Wikipedia-data</string>
     <string name="open_in_browser_wiki">Åbn artiklen online</string>
-    <string name="open_in_browser_wiki_description">Se artikelen i en browser.</string>
+    <string name="open_in_browser_wiki_description">Se artikel i en browser.</string>
     <string name="download_wiki_region_placeholder">denne region</string>
     <string name="wiki_article_search_text">Søger efter den nødvendige wiki-artikel</string>
     <string name="wiki_article_not_found">Artikel ikke fundet</string>

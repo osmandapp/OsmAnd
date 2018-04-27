@@ -221,6 +221,9 @@ public class TravelDbHelper {
 			}
 			cursor.close();
 		}
+
+		sortArticlesByDistance(res);
+
 		return res;
 	}
 
@@ -242,6 +245,27 @@ public class TravelDbHelper {
 				return 0;
 			}
 		});
+	}
+
+	private void sortArticlesByDistance(List<TravelArticle> list) {
+		Location location = application.getLocationProvider().getLastKnownLocation();
+		if (location != null) {
+			final LatLon loc = new LatLon(location.getLatitude(), location.getLongitude());
+			Collections.sort(list, new Comparator<TravelArticle>() {
+				@Override
+				public int compare(TravelArticle article1, TravelArticle article2) {
+					int d1 = (int) MapUtils.getDistance(loc, article1.getLat(), article1.getLon());
+					int d2 = (int) MapUtils.getDistance(loc, article2.getLat(), article2.getLon());
+					if (d1 > d2) {
+						return 1;
+					} else if (d1 == d2) {
+						return 0;
+					} else {
+						return -1;
+					}
+				}
+			});
+		}
 	}
 
 	private Collection<WikivoyageSearchResult> groupSearchResultsByCityId(List<WikivoyageSearchResult> res) {

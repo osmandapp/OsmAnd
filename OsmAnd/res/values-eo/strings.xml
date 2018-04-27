@@ -1050,7 +1050,7 @@ Lon: %2$s</string>
     <string name="cancel_navigation">Ĉesigi navigadon</string>
     <string name="clear_destination">Forviŝi celpunkton</string>
     <string name="street_name">Strat-nomo</string>
-    <string name="download_using_mobile_internet">Nuntempe vi ne konektas tra vifion. Ĉu vi volas uzi estantan interretan konekton por elŝuti?</string>
+    <string name="download_using_mobile_internet">Nuntempe vi ne konektas tra vifio. Ĉu vi volas uzi estantan interretan konekton por elŝuti?</string>
     <string name="hno">Dom-numero</string>
     <string name="website">Retejo</string>
     <string name="phone">Telefono</string>

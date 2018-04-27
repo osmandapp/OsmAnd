@@ -12,14 +12,14 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.AsyncTask.Status;
-import android.os.Build;
 import android.os.StatFs;
 import android.support.annotation.UiThread;
-import android.support.v7.app.AlertDialog;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationCompat.Builder;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.Toast;
+
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.map.WorldRegion;
@@ -52,7 +52,7 @@ public class DownloadIndexesThread {
 	private static final int NOTIFICATION_ID = 45;
 	private OsmandApplication app;
 
-	private DownloadEvents uiActivity = null;
+	private Set<DownloadEvents> uiCallbacks = new HashSet<>();
 	private DatabaseHelper dbHelper;
 	private DownloadFileHelper downloadFileHelper;
 	private List<BasicProgressAsyncTask<?, ?, ?, ?>> currentRunningTask = Collections.synchronizedList(new ArrayList<BasicProgressAsyncTask<?, ?, ?, ?>>());
@@ -87,19 +87,19 @@ public class DownloadIndexesThread {
 
 	/// UI notifications methods
 	public void setUiActivity(DownloadEvents uiActivity) {
-		this.uiActivity = uiActivity;
+		uiCallbacks.add(uiActivity);
 	}
 
 	public void resetUiActivity(DownloadEvents uiActivity) {
-		if (this.uiActivity == uiActivity) {
-			this.uiActivity = null;
-		}
+		uiCallbacks.remove(uiActivity);
 	}
 	
 	@UiThread
 	protected void downloadInProgress() {
-		if (uiActivity != null) {
-			uiActivity.downloadInProgress();
+		for (DownloadEvents uiActivity : uiCallbacks) {
+			if (uiActivity != null) {
+				uiActivity.downloadInProgress();
+			}
 		}
 		updateNotification();
 	}
@@ -151,8 +151,10 @@ public class DownloadIndexesThread {
 
 	@UiThread
 	protected void downloadHasFinished() {
-		if (uiActivity != null) {
-			uiActivity.downloadHasFinished();
+		for (DownloadEvents uiActivity : uiCallbacks) {
+			if (uiActivity != null) {
+				uiActivity.downloadHasFinished();
+			}
 		}
 		updateNotification();
 	}
@@ -186,8 +188,10 @@ public class DownloadIndexesThread {
 	
 	@UiThread
 	protected void newDownloadIndexes() {
-		if (uiActivity != null) {
-			uiActivity.newDownloadIndexes();
+		for (DownloadEvents uiActivity : uiCallbacks) {
+			if (uiActivity != null) {
+				uiActivity.newDownloadIndexes();
+			}
 		}
 	}
 
@@ -254,8 +258,10 @@ public class DownloadIndexesThread {
 				return;
 			}	
 		}
-		if(uiActivity instanceof Activity) {
-			app.logEvent((Activity) uiActivity, "download_files");
+		for (DownloadEvents uiActivity : uiCallbacks) {
+			if(uiActivity instanceof Activity) {
+				app.logEvent((Activity) uiActivity, "download_files");
+			}
 		}
 		for(IndexItem item : items) {
 			if (!item.equals(currentDownloadingItem) && !indexItemDownloading.contains(item)) {
@@ -454,10 +460,12 @@ public class DownloadIndexesThread {
 			currentRunningTask.add(this);
 			super.onPreExecute();
 			downloadFileHelper.setInterruptDownloading(false);
-			if (uiActivity instanceof Activity) {
-				View mainView = ((Activity) uiActivity).findViewById(R.id.MainLayout);
-				if (mainView != null) {
-					mainView.setKeepScreenOn(true);
+			for (DownloadEvents uiActivity : uiCallbacks) {
+				if (uiActivity instanceof Activity) {
+					View mainView = ((Activity) uiActivity).findViewById(R.id.MainLayout);
+					if (mainView != null) {
+						mainView.setKeepScreenOn(true);
+					}
 				}
 			}
 			startTask(ctx.getString(R.string.shared_string_downloading) + ctx.getString(R.string.shared_string_ellipsis), -1);
@@ -468,10 +476,12 @@ public class DownloadIndexesThread {
 			if (result != null && result.length() > 0) {
 				Toast.makeText(ctx, result, Toast.LENGTH_LONG).show();
 			}
-			if (uiActivity instanceof Activity) {
-				View mainView = ((Activity) uiActivity).findViewById(R.id.MainLayout);
-				if (mainView != null) {
-					mainView.setKeepScreenOn(false);
+			for (DownloadEvents uiActivity : uiCallbacks) {
+				if (uiActivity instanceof Activity) {
+					View mainView = ((Activity) uiActivity).findViewById(R.id.MainLayout);
+					if (mainView != null) {
+						mainView.setKeepScreenOn(false);
+					}
 				}
 			}
 			currentRunningTask.remove(this);

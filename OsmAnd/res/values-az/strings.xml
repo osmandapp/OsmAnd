@@ -2119,4 +2119,11 @@
     <string name="delete_search_history">Axtarış tarixçəsini sil</string>
     <string name="download_images">Şəkilləri endir</string>
     <string name="article_removed">Məqalə silindi</string>
+    <string name="purchase_unlim_title">Al - %1$s</string>
+    <string name="purchase_subscription_title">Abunə ol - %1$s</string>
+
+    <string name="unlimited_downloads">Limitsiz endirmələr</string>
+    <string name="unlock_all_features">Bütün OsmAnd xüsusiyyətlərini aç</string>
+
+    <string name="purchase_dialog_title">Plan seçin</string>
     </resources>

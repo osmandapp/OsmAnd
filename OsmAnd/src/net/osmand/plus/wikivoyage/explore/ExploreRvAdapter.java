@@ -6,11 +6,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import net.osmand.plus.R;
 import net.osmand.plus.wikivoyage.explore.travelcards.ArticleTravelCard;
 import net.osmand.plus.wikivoyage.explore.travelcards.ArticleTravelCard.ArticleTravelVH;
+import net.osmand.plus.wikivoyage.explore.travelcards.BaseTravelCard;
+import net.osmand.plus.wikivoyage.explore.travelcards.HeaderTravelCard;
+import net.osmand.plus.wikivoyage.explore.travelcards.HeaderTravelCard.HeaderTravelVH;
 import net.osmand.plus.wikivoyage.explore.travelcards.OpenBetaTravelCard;
 import net.osmand.plus.wikivoyage.explore.travelcards.OpenBetaTravelCard.OpenBetaTravelVH;
 import net.osmand.plus.wikivoyage.explore.travelcards.StartEditingTravelCard;
@@ -23,9 +25,9 @@ import java.util.List;
 
 public class ExploreRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-	private static final int HEADER_TYPE = 3;
+	private static final int DOWNLOAD_UPDATE_CARD_POSITION = 0;
 
-	private final List<Object> items = new ArrayList<>();
+	private final List<BaseTravelCard> items = new ArrayList<>();
 
 	@NonNull
 	@Override
@@ -46,8 +48,8 @@ public class ExploreRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 			case TravelDownloadUpdateCard.TYPE:
 				return new DownloadUpdateVH(inflate(parent, R.layout.travel_download_update_card));
 
-			case HEADER_TYPE:
-				return new HeaderVH(inflate(parent, R.layout.wikivoyage_list_header));
+			case HeaderTravelCard.TYPE:
+				return new HeaderTravelVH(inflate(parent, R.layout.wikivoyage_list_header));
 
 			default:
 				throw new RuntimeException("Unsupported view type: " + viewType);
@@ -61,41 +63,23 @@ public class ExploreRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
 	@Override
 	public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int position) {
-		Object item = getItem(position);
-		if (viewHolder instanceof HeaderVH && item instanceof String) {
-			final HeaderVH holder = (HeaderVH) viewHolder;
-			holder.title.setText((String) item);
-			holder.description.setText(String.valueOf(getArticleItemCount()));
+		BaseTravelCard item = getItem(position);
+		if (viewHolder instanceof HeaderTravelVH && item instanceof HeaderTravelCard) {
+			HeaderTravelCard headerTravelCard = (HeaderTravelCard) item;
+			headerTravelCard.setArticleItemCount(getArticleItemCount());
+			headerTravelCard.bindViewHolder(viewHolder);
 		} else if (viewHolder instanceof ArticleTravelVH && item instanceof ArticleTravelCard) {
-			((ArticleTravelCard) item).bindViewHolder(viewHolder);
 			ArticleTravelCard articleTravelCard = (ArticleTravelCard) item;
 			articleTravelCard.setLastItem(position == getLastArticleItemIndex());
 			articleTravelCard.bindViewHolder(viewHolder);
-			((ArticleTravelCard) item).bindViewHolder(viewHolder);
-		} else if (viewHolder instanceof OpenBetaTravelVH && item instanceof OpenBetaTravelCard) {
-			((OpenBetaTravelCard) item).bindViewHolder(viewHolder);
-		} else if (viewHolder instanceof StartEditingTravelVH && item instanceof StartEditingTravelCard) {
-			((StartEditingTravelCard) item).bindViewHolder(viewHolder);
-		} else if (viewHolder instanceof DownloadUpdateVH && item instanceof TravelDownloadUpdateCard) {
-			((TravelDownloadUpdateCard) item).bindViewHolder(viewHolder);
+		} else {
+			item.bindViewHolder(viewHolder);
 		}
 	}
 
 	@Override
 	public int getItemViewType(int position) {
-		Object object = getItem(position);
-		if (object instanceof String) {
-			return HEADER_TYPE;
-		} else if (object instanceof OpenBetaTravelCard) {
-			return ((OpenBetaTravelCard) object).getCardType();
-		} else if (object instanceof StartEditingTravelCard) {
-			return ((StartEditingTravelCard) object).getCardType();
-		} else if (object instanceof ArticleTravelCard) {
-			return ((ArticleTravelCard) object).getCardType();
-		} else if (object instanceof TravelDownloadUpdateCard) {
-			return ((TravelDownloadUpdateCard) object).getCardType();
-		}
-		return -1;
+		return getItem(position).getCardType();
 	}
 
 	@Override
@@ -105,7 +89,7 @@ public class ExploreRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
 	public int getArticleItemCount() {
 		int count = 0;
-		for (Object o : items) {
+		for (BaseTravelCard o : items) {
 			if (o instanceof ArticleTravelCard) {
 				count++;
 			}
@@ -115,7 +99,7 @@ public class ExploreRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
 	private int getLastArticleItemIndex() {
 		for (int i = items.size() - 1; i > 0; i--) {
-			Object o = items.get(i);
+			BaseTravelCard o = items.get(i);
 			if (o instanceof ArticleTravelCard) {
 				return i;
 			}
@@ -123,21 +107,25 @@ public class ExploreRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 		return 0;
 	}
 
-	private Object getItem(int position) {
+	private BaseTravelCard getItem(int position) {
 		return items.get(position);
 	}
 
 	@NonNull
-	public List<Object> getItems() {
+	public List<BaseTravelCard> getItems() {
 		return items;
 	}
 
-	public void setItems(List<Object> items) {
+	public void setItems(List<BaseTravelCard> items) {
 		this.items.clear();
 		this.items.addAll(items);
 	}
 
-	public boolean addItem(int position, Object item) {
+	private void removeItem(int position) {
+		items.remove(position);
+	}
+
+	public boolean addItem(int position, BaseTravelCard item) {
 		if (position >= 0 && position <= items.size()) {
 			items.add(position, item);
 			return true;
@@ -145,15 +133,23 @@ public class ExploreRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 		return false;
 	}
 
-	static class HeaderVH extends RecyclerView.ViewHolder {
+	public void setDownloadUpdateCard(TravelDownloadUpdateCard card) {
+		if (addItem(DOWNLOAD_UPDATE_CARD_POSITION, card)) {
+			notifyDataSetChanged();
+		}
+	}
 
-		final TextView title;
-		final TextView description;
+	public void updateDownloadUpdateCard() {
+		notifyItemChanged(DOWNLOAD_UPDATE_CARD_POSITION);
+	}
 
-		HeaderVH(View itemView) {
-			super(itemView);
-			title = (TextView) itemView.findViewById(R.id.title);
-			description = (TextView) itemView.findViewById(R.id.description);
+	public void removeDownloadUpdateCard() {
+		if (items.size() > DOWNLOAD_UPDATE_CARD_POSITION) {
+			BaseTravelCard card = getItem(DOWNLOAD_UPDATE_CARD_POSITION);
+			if (card.getCardType() == TravelDownloadUpdateCard.TYPE) {
+				removeItem(DOWNLOAD_UPDATE_CARD_POSITION);
+				notifyItemRemoved(DOWNLOAD_UPDATE_CARD_POSITION);
+			}
 		}
 	}
 }

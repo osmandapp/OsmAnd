@@ -1367,7 +1367,7 @@
 	<string name="poi_piste_difficulty_freeride">Freeride</string>
 	<string name="poi_piste_grooming_classic">Clássica</string>
 	<string name="poi_piste_grooming_classic_skating">Clássica+patinagem</string>
-	<string name="poi_piste_grooming_backcountry">freeride</string>
+	<string name="poi_piste_grooming_backcountry">Em área isolada</string>
 	<string name="poi_route_train_ref">Trem</string>
 	<string name="poi_garden_type_residential">Jardim residencial</string>
 	<string name="poi_garden_type_community">Jardim comunitário</string>
@@ -2128,8 +2128,8 @@
 	<string name="poi_tents_no">Tendas não permitidas</string>
 	<string name="poi_openfire_yes">Fogueira permitida</string>
 	<string name="poi_openfire_no">Fogueira proibida</string>
-	<string name="poi_scout_yes">Acampamento de escoteiros: sim</string>
-	<string name="poi_scout_no">Acampamento de escoteiros: não</string>
+	<string name="poi_scout_yes">Sim</string>
+	<string name="poi_scout_no">Não</string>
 	<string name="poi_group_only_yes">Apenas grupos: sim</string>
 	<string name="poi_group_only_no">Apenas grupos: não</string>
 	<string name="poi_washing_machine_yes">Máquina de lavar roupa: sim</string>
@@ -2319,14 +2319,14 @@
 	<string name="poi_material_marble">Material: mármore</string>
 	<string name="poi_material_aluminium">Material: alumínio</string>
 
-	<string name="poi_site_type_megalith">Tipo: megálito</string>
-	<string name="poi_site_type_tumulus">Tipo: túmulo</string>
-	<string name="poi_site_type_fortification">Tipo: fortificação</string>
-	<string name="poi_site_type_settlement">Tipo: assentamento</string>
-	<string name="poi_site_type_city">Tipo: cidade</string>
-	<string name="poi_site_type_necropolis">Tipo: necrópole</string>
-	<string name="poi_site_type_petroglyph">Tipo: petróglifo</string>
-	<string name="poi_site_type_earthwork">Tipo: terraplenagem</string>
+	<string name="poi_site_type_megalith">Megálito</string>
+	<string name="poi_site_type_tumulus">Túmulo</string>
+	<string name="poi_site_type_fortification">Fortificação</string>
+	<string name="poi_site_type_settlement">Povoamento</string>
+	<string name="poi_site_type_city">Cidade</string>
+	<string name="poi_site_type_necropolis">Necrópole</string>
+	<string name="poi_site_type_petroglyph">Petróglifo</string>
+	<string name="poi_site_type_earthwork">Obra na terra</string>
 	<string name="poi_megalith_type_menhir">Tipo de megálito: menir</string>
 	<string name="poi_megalith_type_dolmen">Tipo de megálito: dólmen</string>
 	<string name="poi_megalith_type_nuraghe">Tipo de megálito: nurague</string>
@@ -2389,8 +2389,8 @@
 	<string name="poi_fitness_station">Academia ao ar livre</string>
 
 	<string name="poi_castle_type_castrum">Tipo de castelo: castra</string>
-	<string name="poi_backcountry_yes">Acampamento em zona isolada</string>
-	<string name="poi_backcountry_no">Acampamento em zona isolada: não</string>
+	<string name="poi_backcountry_yes">Sim</string>
+	<string name="poi_backcountry_no">Não</string>
 	<string name="poi_ramp_stroller_yes">Rampa para rodas: sim</string>
 	<string name="poi_ramp_stroller_no">Rampa para rodas: não</string>
 	<string name="poi_step_count">Quantidade de degraus</string>
@@ -2467,37 +2467,37 @@
 	<string name="poi_wiki_lang_my">Wiki em birmanês</string>
 	<string name="poi_aerialway_length">Comprimento</string>
 
-	<string name="poi_health_specialty_general_yes">Especialidade médica: clínica geral</string>
-	<string name="poi_health_specialty_ophthalmology_yes">Especialidade médica: oftalmologia</string>
-	<string name="poi_health_specialty_gynaecology_yes">Especialidade médica: ginecologia</string>
-	<string name="poi_health_specialty_internal_medicine_yes">Especialidade médica: medicina interna</string>
-	<string name="poi_health_specialty_orthopaedics_yes">Especialidade médica: ortopedia</string>
-	<string name="poi_health_specialty_otolaryngology_yes">Especialidade médica: otorrinolaringologia</string>
-	<string name="poi_health_specialty_paediatrics_yes">Especialidade médica: pediatria</string>
+	<string name="poi_health_specialty_general_yes">Clínica geral</string>
+	<string name="poi_health_specialty_ophthalmology_yes">Oftalmologia</string>
+	<string name="poi_health_specialty_gynaecology_yes">Ginecologia</string>
+	<string name="poi_health_specialty_internal_medicine_yes">Medicina interna</string>
+	<string name="poi_health_specialty_orthopaedics_yes">Ortopedia</string>
+	<string name="poi_health_specialty_otolaryngology_yes">Otorrinolaringologia</string>
+	<string name="poi_health_specialty_paediatrics_yes">Pediatria</string>
 	<string name="poi_health_specialty_paediatrics_no">Especialidade médica: sem pediatria</string>
-	<string name="poi_health_specialty_dermatology_yes">Especialidade médica: dermatologia</string>
-	<string name="poi_health_specialty_urology_yes">Especialidade médica: urologia</string>
-	<string name="poi_health_specialty_surgery_yes">Especialidade médica: cirurgia geral</string>
-	<string name="poi_health_specialty_radiology_yes">Especialidade médica: radiologia</string>
-	<string name="poi_health_specialty_psychiatry_yes">Especialidade médica: psiquiatria</string>
-	<string name="poi_health_specialty_neurology_yes">Especialidade médica: neurologia</string>
-	<string name="poi_health_specialty_dermatovenereology_yes">Especialidade médica: dermatovenereología</string>
-	<string name="poi_health_specialty_cardiology_yes">Especialidade médica: cardiologia</string>
-	<string name="poi_health_specialty_trauma_yes">Especialidade médica: traumatologia</string>
-	<string name="poi_health_specialty_biology_yes">Especialidade médica: bioclínica</string>
-	<string name="poi_health_specialty_osteopathy_yes">Especialidade médica: osteopatia</string>
-	<string name="poi_health_specialty_anaesthetics_yes">Especialidade médica: anestesia</string>
-	<string name="poi_health_specialty_pulmonology_yes">Especialidade médica: pneumologia</string>
-	<string name="poi_health_specialty_dental_oral_maxillo_facial_surgery_yes">Especialidade médica: cirurgia dental, oral e maxilofacial</string>
-	<string name="poi_health_specialty_maternity_yes">Especialidade médica: maternidade</string>
+	<string name="poi_health_specialty_dermatology_yes">Dermatologia</string>
+	<string name="poi_health_specialty_urology_yes">Urologia</string>
+	<string name="poi_health_specialty_surgery_yes">Cirurgia geral</string>
+	<string name="poi_health_specialty_radiology_yes">Radiologia</string>
+	<string name="poi_health_specialty_psychiatry_yes">Psiquiatria</string>
+	<string name="poi_health_specialty_neurology_yes">Neurologia</string>
+	<string name="poi_health_specialty_dermatovenereology_yes">Dermatovenereología</string>
+	<string name="poi_health_specialty_cardiology_yes">Cardiologia</string>
+	<string name="poi_health_specialty_trauma_yes">Traumatologia</string>
+	<string name="poi_health_specialty_biology_yes">Bioclínica</string>
+	<string name="poi_health_specialty_osteopathy_yes">Osteopatia</string>
+	<string name="poi_health_specialty_anaesthetics_yes">Anestesia</string>
+	<string name="poi_health_specialty_pulmonology_yes">Pneumologia</string>
+	<string name="poi_health_specialty_dental_oral_maxillo_facial_surgery_yes">Cirurgia dental, oral e maxilofacial</string>
+	<string name="poi_health_specialty_maternity_yes">Maternidade</string>
 	<string name="poi_health_specialty_emergency_medicine_yes">Emergência e urgência</string>
 	<string name="poi_health_specialty_emergency_medicine_no">Sem emergência e urgência</string>
-	<string name="poi_health_specialty_plastic_surgery_yes">Especialidade médica: cirurgia plástica</string>
-	<string name="poi_health_specialty_orthodontics_yes">Especialidade médica: ortodontia</string>
-	<string name="poi_health_specialty_physiotherapy_yes">Especialidade médica: psicoterapia</string>
-	<string name="poi_health_specialty_biochemistry_yes">Especialidade médica: bioquímica</string>
-	<string name="poi_health_specialty_occupational_yes">Especialidade médica: terapia ocupacional</string>
-	<string name="poi_health_specialty_child_psychiatry_yes">Especialidade médica: psiquiatria infantil</string>
+	<string name="poi_health_specialty_plastic_surgery_yes">Cirurgia plástica</string>
+	<string name="poi_health_specialty_orthodontics_yes">Ortodontia</string>
+	<string name="poi_health_specialty_physiotherapy_yes">Psicoterapia</string>
+	<string name="poi_health_specialty_biochemistry_yes">Bioquímica</string>
+	<string name="poi_health_specialty_occupational_yes">Terapia ocupacional</string>
+	<string name="poi_health_specialty_child_psychiatry_yes">Psiquiatria infantil</string>
 	<string name="poi_health_specialty_physiatry_yes">Especialidade médica: fisiatria</string>
 	<string name="poi_health_specialty_maxillofacial_surgery_yes">Especialidade médica: cirugia maxilofacial</string>
 	<string name="poi_health_specialty_diagnostic_radiology_yes">Especialidade médica: radiologia diagnóstica</string>
@@ -2555,7 +2555,7 @@
 	<string name="poi_fireworks">Loja de fogos de artifício</string>
 
 	<string name="poi_memorial_fassade_decoration">Decoração da fachada</string>
-	<string name="poi_site_type_hut_circle">Tipo: círculo de cabana</string>
+	<string name="poi_site_type_hut_circle">Círculo de cabana</string>
 	<string name="poi_fortification_type_ring_ditch">Tipo de fortificação: vala circular</string>
 
 	<string name="poi_fitness_centre">Academia de ginástica</string>
@@ -2574,7 +2574,7 @@
 	<string name="poi_futsal">Futsal</string>
 	<string name="poi_squash">Squash</string>
 	<string name="poi_parking_garage_boxes">Box de garagem</string>
-	<string name="poi_parking_carports">Estacionamento coberto</string>
+	<string name="poi_parking_carports">Cobertura de veículos</string>
 
 	<string name="poi_dojo">Dojô</string>
 
@@ -2696,7 +2696,7 @@
 	<string name="poi_payment_toll_type">Tipo de pagamento</string>
 	<string name="poi_traffic_signals_sound">Som</string>
 	<string name="poi_highway_crossing_type">Tipo</string>
-	<string name="poi_tactile_paving">Pavimentação tátil</string>
+	<string name="poi_tactile_paving">Pavimento tátil</string>
 	<string name="poi_service_general">Serviço</string>
 	<string name="poi_self_service">Self-service</string>
 	<string name="poi_automated">Automatizado</string>
@@ -2788,7 +2788,7 @@
 	<string name="poi_brushless">Sem bucha</string>
 	<string name="poi_pump">Bomba</string>
 	<string name="poi_scout_camp">Acampamento de escoteiros</string>
-	<string name="poi_backcountry">Interior</string>
+	<string name="poi_backcountry">Acampamento em área isolada</string>
 	<string name="poi_piste_difficulty">Dificuldade da pista</string>
 	<string name="poi_piste_grooming">Preparação de pista</string>
 	<string name="poi_smoking">Fumantes</string>
@@ -2815,7 +2815,7 @@
 	<string name="poi_vacuum_cleaner_filter">Aspirador de pó</string>
 	<string name="poi_free_flying_characteristic">Característica</string>
 	<string name="poi_cafeteria">Cafetaria</string>
-	<string name="poi_zoo_type">Tipo</string>
+	<string name="poi_zoo_type">Tipo de zoológico</string>
 	<string name="poi_motorcycle_services">Serviços</string>
 	<string name="poi_motorcycle_type">Tipo de motocicleta</string>
 	<string name="poi_animal_shelter_type">Animais aceitos</string>
@@ -3843,5 +3843,19 @@
 	<string name="poi_via_ferrata">Via ferrata</string>
 	<string name="poi_cable_number">Número do cabo</string>
 	<string name="poi_via_ferrata_scale">Dificuldade</string>
+
+<string name="poi_glacier_type">Tipo de geleira</string>
+
+<string name="poi_glacier_type_icecap">Calota de gelo</string>
+	<string name="poi_glacier_type_icefield">Campo de gelo</string>
+	<string name="poi_glacier_type_plateau">Planalto</string>
+	<string name="poi_glacier_type_valley">Vale</string>
+	<string name="poi_glacier_type_outlet">Saída</string>
+	<string name="poi_glacier_type_tidewater">Água de maré</string>
+	<string name="poi_glacier_type_mountain">Montanha</string>
+	<string name="poi_glacier_type_ice_tongue">Língua de gelo</string>
+
+	<string name="poi_glacier_ele_top">Ponto culminante</string>
+	<string name="poi_glacier_slope">Inclinação média</string>
 
 </resources>
