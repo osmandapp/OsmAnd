@@ -18,7 +18,6 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.Location;
@@ -63,6 +62,7 @@ import net.osmand.plus.views.MapControlsLayer;
 import net.osmand.plus.views.MapTileLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.wikivoyage.WikivoyageWelcomeDialogFragment;
+import net.osmand.plus.wikivoyage.data.TravelDbHelper;
 import net.osmand.plus.wikivoyage.explore.WikivoyageExploreDialogFragment;
 import net.osmand.router.GeneralRouter;
 
@@ -772,10 +772,12 @@ public class MapActivityActions implements DialogProvider {
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
 						MapActivity.clearPrevActivityIntent();
-						if (settings.WIKIVOYAGE_FIRST_ACCESS.get()) {
+						TravelDbHelper travelDbHelper = getMyApplication().getTravelDbHelper();
+						travelDbHelper.initTravelBooks();
+						if (travelDbHelper.getSelectedTravelBook() == null) {
 							WikivoyageWelcomeDialogFragment.showInstance(mapActivity.getSupportFragmentManager());
 						} else {
-							getMyApplication().getTravelDbHelper().initTravelBooks();
+							
 							WikivoyageExploreDialogFragment.showInstance(mapActivity.getSupportFragmentManager());
 						}
 						return true;
