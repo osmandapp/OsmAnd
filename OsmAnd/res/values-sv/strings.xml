@@ -2798,7 +2798,7 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="quick_action_auto_zoom_desc">Knackning på åtgärdsknappen kommer att slå på/av automatisk zoomkarta enligt din hastighet.</string>
     <string name="quick_action_auto_zoom_on">Aktivera autozoom karta</string>
     <string name="quick_action_auto_zoom_off">Inaktivera autozoom karta</string>
-    <string name="quick_action_add_first_intermediate">Lägg till första mellantiden</string>
+    <string name="quick_action_add_first_intermediate">Lägg till första mellanliggande</string>
     <string name="quick_action_add_destination_desc">Knackning på åtgärdsknappen kommer att lägga till en destination från skärmens mitt. Tidigare inställda destinationen blir den sista mellanliggande destinationen.</string>
     <string name="quick_action_replace_destination_desc">Knackning på åtgärdsknappen kommer att ersätta destinationen med skärmens mittläge.</string>
     <string name="quick_action_add_first_intermediate_desc">Knackning på åtgärdsknappen kommer att lägga en första mellanliggande punkt från skärmens mittpunkt.</string>
@@ -2944,4 +2944,5 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="use_two_digits_longitude">Använd två siffror longitud</string>
     <string name="shared_string_travel">Resor</string>
     <string name="waypoints_removed_from_map_markers">Waypoints tas bort från kartmarkörer</string>
+    <string name="total_donations">Donationer totalt</string>
     </resources>
