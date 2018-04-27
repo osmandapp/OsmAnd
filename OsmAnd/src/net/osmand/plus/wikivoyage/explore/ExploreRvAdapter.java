@@ -8,9 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import net.osmand.plus.R;
-import net.osmand.plus.wikivoyage.explore.travelcards.BaseTravelCard;
 import net.osmand.plus.wikivoyage.explore.travelcards.ArticleTravelCard;
 import net.osmand.plus.wikivoyage.explore.travelcards.ArticleTravelCard.ArticleTravelVH;
+import net.osmand.plus.wikivoyage.explore.travelcards.BaseTravelCard;
 import net.osmand.plus.wikivoyage.explore.travelcards.HeaderTravelCard;
 import net.osmand.plus.wikivoyage.explore.travelcards.HeaderTravelCard.HeaderTravelVH;
 import net.osmand.plus.wikivoyage.explore.travelcards.OpenBetaTravelCard;
@@ -24,6 +24,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ExploreRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+
+	private static final int DOWNLOAD_UPDATE_CARD_POSITION = 0;
 
 	private final List<BaseTravelCard> items = new ArrayList<>();
 
@@ -119,11 +121,35 @@ public class ExploreRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 		this.items.addAll(items);
 	}
 
+	private void removeItem(int position) {
+		items.remove(position);
+	}
+
 	public boolean addItem(int position, BaseTravelCard item) {
 		if (position >= 0 && position <= items.size()) {
 			items.add(position, item);
 			return true;
 		}
 		return false;
+	}
+
+	public void setDownloadUpdateCard(TravelDownloadUpdateCard card) {
+		if (addItem(DOWNLOAD_UPDATE_CARD_POSITION, card)) {
+			notifyDataSetChanged();
+		}
+	}
+
+	public void updateDownloadUpdateCard() {
+		notifyItemChanged(DOWNLOAD_UPDATE_CARD_POSITION);
+	}
+
+	public void removeDownloadUpdateCard() {
+		if (items.size() > DOWNLOAD_UPDATE_CARD_POSITION) {
+			BaseTravelCard card = getItem(DOWNLOAD_UPDATE_CARD_POSITION);
+			if (card.getCardType() == TravelDownloadUpdateCard.TYPE) {
+				removeItem(DOWNLOAD_UPDATE_CARD_POSITION);
+				notifyItemRemoved(DOWNLOAD_UPDATE_CARD_POSITION);
+			}
+		}
 	}
 }

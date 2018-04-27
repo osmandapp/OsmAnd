@@ -20,6 +20,7 @@ import net.osmand.plus.activities.OsmandActionBarActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadResources;
+import net.osmand.plus.download.DownloadValidationManager;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.download.ui.AbstractLoadLocalIndexTask;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
@@ -37,16 +38,18 @@ import java.util.List;
 
 public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIndexesThread.DownloadEvents {
 
-	private static final int DOWNLOAD_UPDATE_CARD_POSITION = 0;
-
 	private ExploreRvAdapter adapter = new ExploreRvAdapter();
+
 	private StartEditingTravelCard startEditingTravelCard;
 	private TravelDownloadUpdateCard downloadUpdateCard;
 
 	private boolean nightMode;
 
+	private IndexItem indexItem;
+
 	private boolean worldWikivoyageDownloaded;
 	private boolean downloadIndexesRequested;
+	private boolean downloadUpdateCardAdded;
 
 	@Nullable
 	@Override
@@ -80,52 +83,79 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIn
 	public void newDownloadIndexes() {
 		if (downloadIndexesRequested) {
 			downloadIndexesRequested = false;
-			final OsmandApplication app = getMyApplication();
-
-			IndexItem wikivoyageItem = app.getDownloadThread().getIndexes().getWorldWikivoyageItem();
-			boolean outdated = wikivoyageItem != null && wikivoyageItem.isOutdated();
-
-			if (!worldWikivoyageDownloaded || outdated) {
-				downloadUpdateCard = new TravelDownloadUpdateCard(app, nightMode, !outdated);
-				downloadUpdateCard.setListener(new TravelDownloadUpdateCard.ClickListener() {
-					@Override
-					public void onPrimaryButtonClick() {
-						if (downloadUpdateCard.isDownload()) {
-							if (app.getSettings().isInternetConnectionAvailable()) {
-								Toast.makeText(app, "Download", Toast.LENGTH_SHORT).show();
-							} else {
-								Toast.makeText(app, app.getString(R.string.no_index_file_to_download), Toast.LENGTH_SHORT).show();
-							}
-						} else {
-							Toast.makeText(app, "Update", Toast.LENGTH_SHORT).show();
-						}
-					}
-
-					@Override
-					public void onSecondaryButtonClick() {
-						if (downloadUpdateCard.isLoadingInProgress()) {
-							Toast.makeText(app, "Cancel", Toast.LENGTH_SHORT).show();
-						} else if (!downloadUpdateCard.isDownload()) {
-							Toast.makeText(app, "Later", Toast.LENGTH_SHORT).show();
-						}
-					}
-				});
-				downloadUpdateCard.setIndexItem(wikivoyageItem);
-				if (adapter.addItem(DOWNLOAD_UPDATE_CARD_POSITION, downloadUpdateCard)) {
-					adapter.notifyDataSetChanged();
-				}
-			}
+			indexItem = getMyApplication().getDownloadThread().getIndexes().getWorldWikivoyageItem();
+			addDownloadUpdateCard(false);
 		}
 	}
 
 	@Override
 	public void downloadInProgress() {
-
+		DownloadIndexesThread downloadThread = getMyApplication().getDownloadThread();
+		IndexItem current = downloadThread.getCurrentDownloadingItem();
+		indexItem = downloadThread.getIndexes().getWorldWikivoyageItem();
+		if (current != null
+				&& indexItem != null
+				&& current == indexItem
+				&& (!current.isDownloaded() || current.isOutdated())) {
+			addDownloadUpdateCard(true);
+			downloadUpdateCard.setProgress(downloadThread.getCurrentDownloadingItemProgress());
+			adapter.updateDownloadUpdateCard();
+		}
 	}
 
 	@Override
 	public void downloadHasFinished() {
+		IndexItem current = getMyApplication().getDownloadThread().getCurrentDownloadingItem();
+		if (downloadUpdateCard != null && current != null && indexItem != null && current == indexItem) {
+			downloadUpdateCard.setLoadingInProgress(false);
+			removeDownloadUpdateCard();
+		}
+	}
 
+	private void addDownloadUpdateCard(boolean loadingInProgress) {
+		if (downloadUpdateCardAdded) {
+			return;
+		}
+
+		final OsmandApplication app = getMyApplication();
+
+		boolean outdated = indexItem != null && indexItem.isOutdated();
+
+		if (!worldWikivoyageDownloaded || outdated) {
+			downloadUpdateCard = new TravelDownloadUpdateCard(app, nightMode, !outdated);
+			downloadUpdateCard.setLoadingInProgress(loadingInProgress);
+			downloadUpdateCard.setListener(new TravelDownloadUpdateCard.ClickListener() {
+				@Override
+				public void onPrimaryButtonClick() {
+					if (app.getSettings().isInternetConnectionAvailable()) {
+						new DownloadValidationManager(app).startDownload(getMyActivity(), indexItem);
+						downloadUpdateCard.setLoadingInProgress(true);
+						adapter.updateDownloadUpdateCard();
+					} else {
+						Toast.makeText(app, app.getString(R.string.no_index_file_to_download), Toast.LENGTH_SHORT).show();
+					}
+				}
+
+				@Override
+				public void onSecondaryButtonClick() {
+					if (downloadUpdateCard.isLoadingInProgress()) {
+						app.getDownloadThread().cancelDownload(indexItem);
+						downloadUpdateCard.setLoadingInProgress(false);
+						adapter.updateDownloadUpdateCard();
+					} else if (!downloadUpdateCard.isDownload()) {
+						removeDownloadUpdateCard();
+					}
+				}
+			});
+			downloadUpdateCard.setIndexItem(indexItem);
+			adapter.setDownloadUpdateCard(downloadUpdateCard);
+			downloadUpdateCardAdded = true;
+		}
+	}
+
+	private void removeDownloadUpdateCard() {
+		adapter.removeDownloadUpdateCard();
+		downloadUpdateCardAdded = false;
 	}
 
 	private List<BaseTravelCard> generateItems() {
@@ -148,8 +178,16 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIn
 			@Override
 			public void onCheckFinished(boolean worldWikivoyageDownloaded) {
 				ExploreTabFragment.this.worldWikivoyageDownloaded = worldWikivoyageDownloaded;
-				downloadIndexesRequested = true;
-				app.getDownloadThread().runReloadIndexFilesSilent();
+				DownloadIndexesThread downloadThread = app.getDownloadThread();
+				if (!downloadThread.getIndexes().isDownloadedFromInternet) {
+					downloadIndexesRequested = true;
+					app.getDownloadThread().runReloadIndexFilesSilent();
+				} else {
+					indexItem = downloadThread.getIndexes().getWorldWikivoyageItem();
+					IndexItem current = downloadThread.getCurrentDownloadingItem();
+					boolean loadingInProgress = current != null && indexItem != null && current == indexItem;
+					addDownloadUpdateCard(loadingInProgress);
+				}
 			}
 		}).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
