@@ -72,19 +72,16 @@ public class DownloadResources extends DownloadResourceGroup {
 	}
 
 	public IndexItem getWorldWikivoyageItem() {
-		DownloadResourceGroup travelGroup = getSubGroupById(DownloadResourceGroupType.TRAVEL_GROUP.getDefaultId());
-		if (travelGroup != null) {
-			DownloadResourceGroup wikivoyageMaps = travelGroup.getSubGroupById(DownloadResourceGroupType.WIKIVOYAGE_MAPS.getDefaultId());
-			if (wikivoyageMaps != null) {
-				DownloadResourceGroup wikivoyageHeader = wikivoyageMaps.getSubGroupById(DownloadResourceGroupType.WIKIVOYAGE_HEADER.getDefaultId());
-				if (wikivoyageHeader != null) {
-					List<IndexItem> items = wikivoyageHeader.getIndividualResources();
-					if (items != null) {
-						for (IndexItem ii : items) {
-							if (ii.getBasename().equalsIgnoreCase(DownloadResources.WORLD_WIKIVOYAGE_NAME)) {
-								return ii;
-							}
-						}
+		String groupId = DownloadResourceGroupType.TRAVEL_GROUP.getDefaultId() + "#" +
+				DownloadResourceGroupType.WIKIVOYAGE_MAPS.getDefaultId() + "#" +
+				DownloadResourceGroupType.WIKIVOYAGE_HEADER.getDefaultId();
+		DownloadResourceGroup wikivoyageHeader = getSubGroupById(groupId);
+		if (wikivoyageHeader != null) {
+			List<IndexItem> items = wikivoyageHeader.getIndividualResources();
+			if (items != null) {
+				for (IndexItem ii : items) {
+					if (ii.getBasename().equalsIgnoreCase(DownloadResources.WORLD_WIKIVOYAGE_NAME)) {
+						return ii;
 					}
 				}
 			}

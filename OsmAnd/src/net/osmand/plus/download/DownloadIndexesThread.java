@@ -52,7 +52,7 @@ public class DownloadIndexesThread {
 	private static final int NOTIFICATION_ID = 45;
 	private OsmandApplication app;
 
-	private Set<DownloadEvents> uiCallbacks = new HashSet<>();
+	private DownloadEvents uiActivity = null;
 	private DatabaseHelper dbHelper;
 	private DownloadFileHelper downloadFileHelper;
 	private List<BasicProgressAsyncTask<?, ?, ?, ?>> currentRunningTask = Collections.synchronizedList(new ArrayList<BasicProgressAsyncTask<?, ?, ?, ?>>());
@@ -87,19 +87,19 @@ public class DownloadIndexesThread {
 
 	/// UI notifications methods
 	public void setUiActivity(DownloadEvents uiActivity) {
-		uiCallbacks.add(uiActivity);
+		this.uiActivity = uiActivity;
 	}
 
 	public void resetUiActivity(DownloadEvents uiActivity) {
-		uiCallbacks.remove(uiActivity);
+		if (this.uiActivity == uiActivity) {
+			this.uiActivity = null;
+		}
 	}
-	
+
 	@UiThread
 	protected void downloadInProgress() {
-		for (DownloadEvents uiActivity : uiCallbacks) {
-			if (uiActivity != null) {
-				uiActivity.downloadInProgress();
-			}
+		if (uiActivity != null) {
+			uiActivity.downloadInProgress();
 		}
 		updateNotification();
 	}
@@ -151,10 +151,8 @@ public class DownloadIndexesThread {
 
 	@UiThread
 	protected void downloadHasFinished() {
-		for (DownloadEvents uiActivity : uiCallbacks) {
-			if (uiActivity != null) {
-				uiActivity.downloadHasFinished();
-			}
+		if (uiActivity != null) {
+			uiActivity.downloadHasFinished();
 		}
 		updateNotification();
 	}
@@ -188,10 +186,8 @@ public class DownloadIndexesThread {
 	
 	@UiThread
 	protected void newDownloadIndexes() {
-		for (DownloadEvents uiActivity : uiCallbacks) {
-			if (uiActivity != null) {
-				uiActivity.newDownloadIndexes();
-			}
+		if (uiActivity != null) {
+			uiActivity.newDownloadIndexes();
 		}
 	}
 
@@ -258,10 +254,8 @@ public class DownloadIndexesThread {
 				return;
 			}	
 		}
-		for (DownloadEvents uiActivity : uiCallbacks) {
-			if(uiActivity instanceof Activity) {
-				app.logEvent((Activity) uiActivity, "download_files");
-			}
+		if (uiActivity instanceof Activity) {
+			app.logEvent((Activity) uiActivity, "download_files");
 		}
 		for(IndexItem item : items) {
 			if (!item.equals(currentDownloadingItem) && !indexItemDownloading.contains(item)) {
@@ -460,12 +454,10 @@ public class DownloadIndexesThread {
 			currentRunningTask.add(this);
 			super.onPreExecute();
 			downloadFileHelper.setInterruptDownloading(false);
-			for (DownloadEvents uiActivity : uiCallbacks) {
-				if (uiActivity instanceof Activity) {
-					View mainView = ((Activity) uiActivity).findViewById(R.id.MainLayout);
-					if (mainView != null) {
-						mainView.setKeepScreenOn(true);
-					}
+			if (uiActivity instanceof Activity) {
+				View mainView = ((Activity) uiActivity).findViewById(R.id.MainLayout);
+				if (mainView != null) {
+					mainView.setKeepScreenOn(true);
 				}
 			}
 			startTask(ctx.getString(R.string.shared_string_downloading) + ctx.getString(R.string.shared_string_ellipsis), -1);
@@ -476,12 +468,10 @@ public class DownloadIndexesThread {
 			if (result != null && result.length() > 0) {
 				Toast.makeText(ctx, result, Toast.LENGTH_LONG).show();
 			}
-			for (DownloadEvents uiActivity : uiCallbacks) {
-				if (uiActivity instanceof Activity) {
-					View mainView = ((Activity) uiActivity).findViewById(R.id.MainLayout);
-					if (mainView != null) {
-						mainView.setKeepScreenOn(false);
-					}
+			if (uiActivity instanceof Activity) {
+				View mainView = ((Activity) uiActivity).findViewById(R.id.MainLayout);
+				if (mainView != null) {
+					mainView.setKeepScreenOn(false);
 				}
 			}
 			currentRunningTask.remove(this);

@@ -199,3 +199,75 @@ td {
     display: none;
     overflow: hidden;
 }
+
+.nightmode > h1 {
+    color: #a3a3a3;
+}
+
+.nightmode > h2 {
+    color: #cccccc;
+    font-weight:100;
+}
+
+.nightmode > h2 {
+    color: #cccccc;
+    border-bottom: 1px solid #2d3133;
+}
+
+.nightmode > h3 {
+    color: #727272;
+}
+
+.nightmode > p {
+    color: #cccccc;
+}
+
+.nightmode > ul {
+    color: #cccccc;
+}
+
+.nightmode > a {
+    color: #d28521;
+}
+
+.nightmode > a {
+    color: #d28521;
+}
+
+.nightmode > .geo {
+    color: #d28521;
+    background-color: #222526;
+    border: 1px solid #2d3133;
+    border-radius: 4px;
+    padding: 10px 10px 10px 10px;
+    color: #d28521;
+    font-size: 0.9em;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.nightmode > a {
+    color: #d28521;
+    text-decoration-color: #854f08;
+    word-wrap: break-word;
+}
+
+.nightmode > .external, .free {
+    color: #d28521;
+    text-decoration-color: #854f08;
+    word-wrap: break-word;
+}
+
+.nightmode {
+    max-width: 100% !important;
+    /* overflow-x: hidden; hide scroll bar */
+    display: block;
+    padding-top: 7%;
+    padding-bottom: 0;
+    padding-left: 7%;
+    padding-right: 7%;
+    font-family: sans-serif;
+    background-color: #17191a;
+}

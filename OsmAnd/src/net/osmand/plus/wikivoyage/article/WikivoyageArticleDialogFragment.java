@@ -30,6 +30,7 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.WikivoyageShowImages;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.TrackActivity;
+import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.wikivoyage.WikivoyageBaseDialogFragment;
 import net.osmand.plus.wikivoyage.WikivoyageShowPicturesDialogFragment;
 import net.osmand.plus.wikivoyage.WikivoyageWebViewClient;
@@ -40,6 +41,8 @@ import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragment {
 
@@ -321,22 +324,26 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 		if (langs == null) {
 			return;
 		}
-
 		final PopupMenu popup = new PopupMenu(view.getContext(), view, Gravity.END);
-		for (final String lang : langs) {
+		Map<String, String> names = new HashMap<>();
+		for (String n : langs) {
+			names.put(n, FileNameTranslationHelper.getVoiceName(getContext(), n));
+		}
+		for (final Map.Entry<String, String> e : names.entrySet()) {
+			final String lang = e.getValue();
+			final String langKey = e.getKey();
 			MenuItem item = popup.getMenu().add(lang);
 			item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 				@Override
 				public boolean onMenuItemClick(MenuItem item) {
-					if (!selectedLang.equals(lang)) {
-						selectedLang = lang;
+					if (!selectedLang.equals(langKey)) {
+						selectedLang = langKey;
 						populateArticle();
 					}
 					return true;
 				}
 			});
 		}
-
 		popup.show();
 	}
 
@@ -408,7 +415,10 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 			String url = TravelArticle.getImageUrl(imageTitle, false);
 			sb.append("<div class=\"title-image\" style=\"background-image: url(").append(url).append(")\"></div>");
 		}
-		sb.append("<div class=\"main\">\n");
+
+		String nightModeClass = nightMode?"nightmode":"";
+
+		sb.append("<div class=\"main "+nightModeClass+"\">\n");
 		sb.append("<h1>").append(article.getTitle()).append("</h1>");
 		sb.append(article.getContent());
 		sb.append(FOOTER_INNER);

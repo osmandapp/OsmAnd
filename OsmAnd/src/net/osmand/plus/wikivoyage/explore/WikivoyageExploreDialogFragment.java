@@ -24,13 +24,14 @@ import net.osmand.PicassoUtils;
 import net.osmand.plus.LockableViewPager;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.wikivoyage.WikivoyageBaseDialogFragment;
 import net.osmand.plus.wikivoyage.search.WikivoyageSearchDialogFragment;
 
 import java.util.Arrays;
 import java.util.List;
 
-public class WikivoyageExploreDialogFragment extends WikivoyageBaseDialogFragment {
+public class WikivoyageExploreDialogFragment extends WikivoyageBaseDialogFragment implements DownloadIndexesThread.DownloadEvents {
 
 	public static final String TAG = "WikivoyageExploreDialogFragment";
 
@@ -143,6 +144,27 @@ public class WikivoyageExploreDialogFragment extends WikivoyageBaseDialogFragmen
 					savedArticlesTabFragment.updateAdapter();
 				}
 			}
+		}
+	}
+
+	@Override
+	public void newDownloadIndexes() {
+		if (exploreTabFragment != null) {
+			exploreTabFragment.newDownloadIndexes();
+		}
+	}
+
+	@Override
+	public void downloadInProgress() {
+		if (exploreTabFragment != null) {
+			exploreTabFragment.downloadInProgress();
+		}
+	}
+
+	@Override
+	public void downloadHasFinished() {
+		if (exploreTabFragment != null) {
+			exploreTabFragment.downloadHasFinished();
 		}
 	}
 
