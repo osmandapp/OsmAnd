@@ -149,17 +149,23 @@ public class WikivoyageExploreDialogFragment extends WikivoyageBaseDialogFragmen
 
 	@Override
 	public void newDownloadIndexes() {
-		exploreTabFragment.newDownloadIndexes();
+		if (exploreTabFragment != null) {
+			exploreTabFragment.newDownloadIndexes();
+		}
 	}
 
 	@Override
 	public void downloadInProgress() {
-		exploreTabFragment.downloadInProgress();
+		if (exploreTabFragment != null) {
+			exploreTabFragment.downloadInProgress();
+		}
 	}
 
 	@Override
 	public void downloadHasFinished() {
-		exploreTabFragment.downloadHasFinished();
+		if (exploreTabFragment != null) {
+			exploreTabFragment.downloadHasFinished();
+		}
 	}
 
 	private ColorStateList createBottomNavColorStateList() {
