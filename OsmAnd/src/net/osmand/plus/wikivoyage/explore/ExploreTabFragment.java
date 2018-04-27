@@ -68,18 +68,6 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIn
 	}
 
 	@Override
-	public void onResume() {
-		super.onResume();
-		getMyApplication().getDownloadThread().setUiActivity(this);
-	}
-
-	@Override
-	public void onPause() {
-		super.onPause();
-		getMyApplication().getDownloadThread().resetUiActivity(this);
-	}
-
-	@Override
 	public void newDownloadIndexes() {
 		if (downloadIndexesRequested) {
 			downloadIndexesRequested = false;

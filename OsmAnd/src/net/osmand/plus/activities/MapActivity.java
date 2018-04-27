@@ -93,10 +93,8 @@ import net.osmand.plus.helpers.ImportHelper;
 import net.osmand.plus.helpers.ImportHelper.ImportGpxBottomSheetDialogFragment;
 import net.osmand.plus.helpers.WakeLockHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
-import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseTaskType;
 import net.osmand.plus.mapcontextmenu.AdditionalActionsBottomSheetDialogFragment;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
-import net.osmand.plus.mapcontextmenu.MapContextMenuFragment;
 import net.osmand.plus.mapcontextmenu.builders.cards.dialogs.ContextMenuCardDialogFragment;
 import net.osmand.plus.mapcontextmenu.other.DestinationReachedMenu;
 import net.osmand.plus.mapcontextmenu.other.MapRouteInfoMenu;
@@ -1613,13 +1611,10 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	// DownloadEvents
 	@Override
 	public void newDownloadIndexes() {
-		FirstUsageWizardFragment wizardFragment = getFirstUsageWizardFragment();
-		if (wizardFragment != null) {
-			wizardFragment.newDownloadIndexes();
-		}
-		WeakReference<MapContextMenuFragment> fragmentRef = getContextMenu().findMenuFragment();
-		if (fragmentRef != null) {
-			fragmentRef.get().newDownloadIndexes();
+		for (Fragment fragment : getSupportFragmentManager().getFragments()) {
+			if (fragment instanceof DownloadEvents) {
+				((DownloadEvents) fragment).newDownloadIndexes();
+			}
 		}
 		if (dashboardOnMap.isVisible()) {
 			dashboardOnMap.onNewDownloadIndexes();
@@ -1629,13 +1624,10 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	@Override
 	public void downloadInProgress() {
-		FirstUsageWizardFragment wizardFragment = getFirstUsageWizardFragment();
-		if (wizardFragment != null) {
-			wizardFragment.downloadInProgress();
-		}
-		WeakReference<MapContextMenuFragment> fragmentRef = getContextMenu().findMenuFragment();
-		if (fragmentRef != null) {
-			fragmentRef.get().downloadInProgress();
+		for (Fragment fragment : getSupportFragmentManager().getFragments()) {
+			if (fragment instanceof DownloadEvents) {
+				((DownloadEvents) fragment).downloadInProgress();
+			}
 		}
 		if (dashboardOnMap.isVisible()) {
 			dashboardOnMap.onDownloadInProgress();
@@ -1644,13 +1636,10 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	@Override
 	public void downloadHasFinished() {
-		FirstUsageWizardFragment wizardFragment = getFirstUsageWizardFragment();
-		if (wizardFragment != null) {
-			wizardFragment.downloadHasFinished();
-		}
-		WeakReference<MapContextMenuFragment> fragmentRef = getContextMenu().findMenuFragment();
-		if (fragmentRef != null) {
-			fragmentRef.get().downloadHasFinished();
+		for (Fragment fragment : getSupportFragmentManager().getFragments()) {
+			if (fragment instanceof DownloadEvents) {
+				((DownloadEvents) fragment).downloadHasFinished();
+			}
 		}
 		if (dashboardOnMap.isVisible()) {
 			dashboardOnMap.onDownloadHasFinished();
