@@ -166,8 +166,11 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIn
 		startEditingTravelCard = new StartEditingTravelCard(app, nightMode);
 		addOpenBetaTravelCard(items, nightMode);
 		items.add(startEditingTravelCard);
-		items.add(new HeaderTravelCard(app, nightMode, getString(R.string.popular_destinations)));
-		addPopularDestinations(app);
+
+		if (app.getTravelDbHelper().getSelectedTravelBook() != null) {
+			items.add(new HeaderTravelCard(app, nightMode, getString(R.string.popular_destinations)));
+			addPopularDestinations(app);
+		}
 
 		return items;
 	}
@@ -200,8 +203,7 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIn
 
 	private void addOpenBetaTravelCard(List<BaseTravelCard> items, final boolean nightMode) {
 		final OsmandApplication app = getMyApplication();
-		if ((Version.isFreeVersion(app) && !app.getSettings().LIVE_UPDATES_PURCHASED.get()
-				&& !app.getSettings().FULL_VERSION_PURCHASED.get())) {
+		if (!Version.isPaidVersion(app)) {
 			items.add(new OpenBetaTravelCard(app, nightMode, getFragmentManager()));
 		}
 	}
