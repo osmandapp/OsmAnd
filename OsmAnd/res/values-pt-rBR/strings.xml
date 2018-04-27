@@ -166,7 +166,7 @@
 \n\nAtivando esta mudança na visão do estilo de mapa de \'Inverno e esqui\', mostrando todas as características da paisagem em condições invernais. Essa visão pode ser revertida desativando aqui ou alterando o \'Estilo de mapa\' em \'Configurar mapa\' quando desejado. "</string>
 	<string name="audionotes_plugin_name">Notas de áudio/vídeo</string>
 	<string name="audionotes_plugin_description">O complemento de notas de áudio/vídeo fornece a funcionalidade para tomar notas de áudio/fotografia/vídeo durante uma viagem, usando um botão na tela do mapa ou diretamente do menu de contexto para qualquer posição no mapa.</string>
-	<string name="osmand_parking_plugin_name">Posição de estacionamento</string>
+	<string name="osmand_parking_plugin_name">Marcar estacionamento</string>
 	<string name="osmand_distance_planning_plugin_name">Calculadora de distância e ferramenta de planeamento</string>
 	<string name="osmand_distance_planning_plugin_description">Este complemento fornece um widget da tela mapa permitindo criar caminhos tocando no mapa, ou usar ou modificar arquivos GPX existentes, para planejar uma viagem e medir a distância entre pontos. Os resultados podem ser salvos como um arquivo GPX, que mais tarde pode ser usado para orientação.</string>
 	<string name="shared_string_accessibility">Acessibilidade</string>
@@ -1806,22 +1806,22 @@ Pôr do Sol: %2$s</string>
     <string name="access_from_map">Acessar a partir do mapa</string>
     <string name="show_on_start_description">\'Desligado\' lança diretamente para a tela do mapa.</string>
     <string name="copied_to_clipboard">Copiado para a área de transferência</string>
-    <string name="release_2_2">\\022 Nova interface do usuário sensível ao contexto, ao tocar locais no mapa ou em outras telas
-\n
-\n • Tela do mapa agora é lançada diretamente, a menos que \'Mostrar painel de controle no início\' esteja selecionado
-\n
-\n • Configure quais e de que forma os cartões são exibidos no painel de controle
-\n
-\n • Desative o painel de controle, se preferir um controle baseado em menus
-\n
-\n • Para baixar mapas, as regiões podem ser selecionadas diretamente, tocando no mapa do mundo
-\n
-\n • Pesquisa por \'Pontos de interesse\' agora oferece suporte a consultas mais específicas
-\n
-\n • Melhoria nos \'Pontos de interesse\' e funcionalidades de edição OSM
-\n
-\n • Reformulação de estrutura e de interface para baixar dados de mapa.
-\n
+    <string name="release_2_2">• Nova interface do usuário sensível ao contexto, ao tocar locais no mapa ou em outras telas 
+\n 
+\n • Tela do mapa agora é lançada diretamente, a menos que \'Mostrar painel de controle no início\' esteja selecionado 
+\n 
+\n • Configure quais e de que forma os cartões são exibidos no painel de controle 
+\n 
+\n • Desative o painel de controle, se preferir um controle baseado em menus 
+\n 
+\n • Para baixar mapas, as regiões podem ser selecionadas diretamente, tocando no mapa do mundo 
+\n 
+\n • Pesquisa por \'Pontos de interesse\' agora oferece suporte a consultas mais específicas 
+\n 
+\n • Melhoria nos \'Pontos de interesse\' e funcionalidades de edição OSM 
+\n 
+\n • Reformulação de estrutura e de interface para baixar dados de mapa. 
+\n 
 \n e mais…</string>
     <string name="access_from_map_description">O botão menu abre o painel de controle, não o menu.</string>
     <string name="osm_save_offline">Salvar offline</string>
@@ -2187,7 +2187,7 @@ Pôr do Sol: %2$s</string>
     <string name="show_on_map_after_saving">Mostrar no mapa após salvar</string>
     <string name="measurement_tool_action_bar">Procurar no mapa e adicionar pontos</string>
     <string name="measurement_tool">Medir distância</string>
-    <string name="quick_action_resume_pause_navigation">Retomar/pausar navegação</string>
+    <string name="quick_action_resume_pause_navigation">Pausar/voltar navegação</string>
     <string name="quick_action_resume_pause_navigation_descr">Toque neste botão para pausar ou retomar a navegação.</string>
     <string name="quick_action_start_stop_navigation">Iniciar/parar navegação</string>
     <string name="quick_action_start_stop_navigation_descr">Toque neste botão para iniciar ou parar a navegação.</string>
@@ -2204,7 +2204,7 @@ Pôr do Sol: %2$s</string>
     <string name="mapillary_menu_edit_text_hint">Digite o nome de usuário</string>
     <string name="mapillary_menu_descr_username">Ver somente imagens adicionadas por</string>
     <string name="mapillary_menu_title_username">Nome de usuário</string>
-    <string name="mapillary_menu_filter_description">Você pode filtrar imagens por quem submeteu ou por data. Os filtros só se aplicam para ampliação bem próxima.</string>
+    <string name="mapillary_menu_filter_description">Você pode filtrar imagens por quem submeteu ou por data. Os filtros só se aplicam para um zoom bem próximo.</string>
     <string name="shared_string_permissions">Permissões</string>
     <string name="import_gpx_failed_descr">O OsmAnd não pôde importar o arquivo. Favor verificar se o OsmAnd tem permissão para ler arquivo de sua localização.</string>
     <string name="distance_moving">Distância corrigida</string>
@@ -2265,10 +2265,10 @@ Pôr do Sol: %2$s</string>
     <string name="nearest_cities">Cidades mais próximas</string>
     <string name="select_city">Selecionar cidade</string>
     <string name="select_postcode">Selecionar código postal</string>
-    <string name="quick_action_auto_zoom">Ampliação/redução do mapa automática ligar/desligar</string>
+    <string name="quick_action_auto_zoom">Zoom automático do mapa ligar/desligar</string>
     <string name="quick_action_auto_zoom_desc">Tocar no botão de ação irá ligar/desligar a ampliação/redução automática do mapa de acordo com sua velocidade.</string>
-    <string name="quick_action_auto_zoom_on">Ativar ampliação do mapa automática</string>
-    <string name="quick_action_auto_zoom_off">Desativar ampliação do mapa automática</string>
+    <string name="quick_action_auto_zoom_on">Ativar zoom automático do mapa</string>
+    <string name="quick_action_auto_zoom_off">Desativar zoom automático do mapa</string>
     <string name="quick_action_add_destination">Adicionar destino</string>
     <string name="quick_action_replace_destination">Substituir destino</string>
     <string name="quick_action_add_first_intermediate">Adicione o primeiro intermediário</string>
@@ -2840,4 +2840,5 @@ Pôr do Sol: %2$s</string>
     <string name="select_travel_book">Selecione livro de viagens</string>
     <string name="shared_string_travel_book">Livro de viagens</string>
     <string name="download_images">Baixar imagens</string>
+    <string name="popular_destinations">Destinos populares</string>
     </resources>
