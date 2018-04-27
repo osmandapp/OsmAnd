@@ -132,8 +132,8 @@ public class TravelDownloadUpdateCard extends BaseTravelCard {
 	 */
 	private boolean updateSecondaryButton(DownloadUpdateVH vh) {
 		if (loadingInProgress || !download) {
+			vh.secondaryBtnContainer.setVisibility(View.VISIBLE);
 			vh.secondaryBtn.setText(loadingInProgress ? R.string.shared_string_cancel : R.string.later);
-			vh.secondaryBtn.setVisibility(View.VISIBLE);
 			vh.secondaryBtn.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
@@ -153,8 +153,8 @@ public class TravelDownloadUpdateCard extends BaseTravelCard {
 	 */
 	private boolean updatePrimaryButton(DownloadUpdateVH vh) {
 		if (!loadingInProgress) {
+			vh.primaryBtnContainer.setVisibility(View.VISIBLE);
 			vh.primaryButton.setText(download ? R.string.shared_string_download : R.string.shared_string_update);
-			vh.primaryButton.setVisibility(View.VISIBLE);
 			vh.primaryButton.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
