@@ -9,19 +9,24 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.Version;
 import net.osmand.plus.activities.LocalIndexHelper;
 import net.osmand.plus.activities.LocalIndexInfo;
 import net.osmand.plus.activities.OsmandActionBarActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadResources;
+import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.download.ui.AbstractLoadLocalIndexTask;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
 import net.osmand.plus.wikivoyage.data.TravelDbHelper;
 import net.osmand.plus.wikivoyage.explore.travelcards.ArticleTravelCard;
+import net.osmand.plus.wikivoyage.explore.travelcards.BaseTravelCard;
+import net.osmand.plus.wikivoyage.explore.travelcards.HeaderTravelCard;
 import net.osmand.plus.wikivoyage.explore.travelcards.OpenBetaTravelCard;
 import net.osmand.plus.wikivoyage.explore.travelcards.StartEditingTravelCard;
 import net.osmand.plus.wikivoyage.explore.travelcards.TravelDownloadUpdateCard;
@@ -30,15 +35,18 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ExploreTabFragment extends BaseOsmAndFragment {
+public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIndexesThread.DownloadEvents {
 
 	private static final int DOWNLOAD_UPDATE_CARD_POSITION = 0;
 
 	private ExploreRvAdapter adapter = new ExploreRvAdapter();
 	private StartEditingTravelCard startEditingTravelCard;
-	private ProgressBar progressBar;
+	private TravelDownloadUpdateCard downloadUpdateCard;
 
 	private boolean nightMode;
+
+	private boolean worldWikivoyageDownloaded;
+	private boolean downloadIndexesRequested;
 
 	@Nullable
 	@Override
@@ -46,7 +54,6 @@ public class ExploreTabFragment extends BaseOsmAndFragment {
 		nightMode = !getMyApplication().getSettings().isLightContent();
 
 		final View mainView = inflater.inflate(R.layout.fragment_explore_tab, container, false);
-		progressBar = (ProgressBar) mainView.findViewById(R.id.progressBar);
 		final RecyclerView rv = (RecyclerView) mainView.findViewById(R.id.recycler_view);
 
 		adapter.setItems(generateItems());
@@ -57,39 +64,108 @@ public class ExploreTabFragment extends BaseOsmAndFragment {
 		return mainView;
 	}
 
-	private List<Object> generateItems() {
-		final List<Object> items = new ArrayList<>();
+	@Override
+	public void onResume() {
+		super.onResume();
+		getMyApplication().getDownloadThread().setUiActivity(this);
+	}
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		getMyApplication().getDownloadThread().resetUiActivity(this);
+	}
+
+	@Override
+	public void newDownloadIndexes() {
+		if (downloadIndexesRequested) {
+			downloadIndexesRequested = false;
+			final OsmandApplication app = getMyApplication();
+
+			IndexItem wikivoyageItem = app.getDownloadThread().getIndexes().getWorldWikivoyageItem();
+			boolean outdated = wikivoyageItem != null && wikivoyageItem.isOutdated();
+
+			if (!worldWikivoyageDownloaded || outdated) {
+				downloadUpdateCard = new TravelDownloadUpdateCard(app, nightMode, !outdated);
+				downloadUpdateCard.setListener(new TravelDownloadUpdateCard.ClickListener() {
+					@Override
+					public void onPrimaryButtonClick() {
+						if (downloadUpdateCard.isDownload()) {
+							if (app.getSettings().isInternetConnectionAvailable()) {
+								Toast.makeText(app, "Download", Toast.LENGTH_SHORT).show();
+							} else {
+								Toast.makeText(app, app.getString(R.string.no_index_file_to_download), Toast.LENGTH_SHORT).show();
+							}
+						} else {
+							Toast.makeText(app, "Update", Toast.LENGTH_SHORT).show();
+						}
+					}
+
+					@Override
+					public void onSecondaryButtonClick() {
+						if (downloadUpdateCard.isLoadingInProgress()) {
+							Toast.makeText(app, "Cancel", Toast.LENGTH_SHORT).show();
+						} else if (!downloadUpdateCard.isDownload()) {
+							Toast.makeText(app, "Later", Toast.LENGTH_SHORT).show();
+						}
+					}
+				});
+				downloadUpdateCard.setIndexItem(wikivoyageItem);
+				if (adapter.addItem(DOWNLOAD_UPDATE_CARD_POSITION, downloadUpdateCard)) {
+					adapter.notifyDataSetChanged();
+				}
+			}
+		}
+	}
+
+	@Override
+	public void downloadInProgress() {
+
+	}
+
+	@Override
+	public void downloadHasFinished() {
+
+	}
+
+	private List<BaseTravelCard> generateItems() {
+		final List<BaseTravelCard> items = new ArrayList<>();
 		final OsmandApplication app = getMyApplication();
 
-		addDownloadUpdateCard();
+		runWorldWikivoyageFileCheck();
 		startEditingTravelCard = new StartEditingTravelCard(app, nightMode);
-		items.add(new OpenBetaTravelCard(app, nightMode, getFragmentManager()));
+		addOpenBetaTravelCard(items, nightMode);
 		items.add(startEditingTravelCard);
+		items.add(new HeaderTravelCard(app, nightMode, getString(R.string.popular_destinations)));
 		addPopularDestinations(app);
 
 		return items;
 	}
 
-	private void addDownloadUpdateCard() {
+	private void runWorldWikivoyageFileCheck() {
 		final OsmandApplication app = getMyApplication();
 		new CheckWorldWikivoyageTask(app, new CheckWorldWikivoyageTask.Callback() {
 			@Override
 			public void onCheckFinished(boolean worldWikivoyageDownloaded) {
-				if (!worldWikivoyageDownloaded && adapter != null) {
-					TravelDownloadUpdateCard card = new TravelDownloadUpdateCard(app, nightMode, true);
-					if (adapter.addItem(DOWNLOAD_UPDATE_CARD_POSITION, card)) {
-						adapter.notifyDataSetChanged();
-					}
-				}
+				ExploreTabFragment.this.worldWikivoyageDownloaded = worldWikivoyageDownloaded;
+				downloadIndexesRequested = true;
+				app.getDownloadThread().runReloadIndexFilesSilent();
 			}
 		}).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
 	private void addPopularDestinations(OsmandApplication app) {
 		PopularDestinationsSearchTask popularDestinationsSearchTask = new PopularDestinationsSearchTask(
-				app.getTravelDbHelper(), getMyActivity(), adapter, nightMode, startEditingTravelCard, progressBar
-		);
+				app.getTravelDbHelper(), getMyActivity(), adapter, nightMode, startEditingTravelCard);
 		popularDestinationsSearchTask.execute();
+	}
+
+	private void addOpenBetaTravelCard(List<BaseTravelCard> items, final boolean nightMode) {
+		final OsmandApplication app = getMyApplication();
+		if ((Version.isFreeVersion(app) && !app.getSettings().LIVE_UPDATES_PURCHASED.get()
+				&& !app.getSettings().FULL_VERSION_PURCHASED.get())) {
+			items.add(new OpenBetaTravelCard(app, nightMode, getFragmentManager()));
+		}
 	}
 
 	private static class CheckWorldWikivoyageTask extends AsyncTask<Void, Void, Boolean> {
@@ -137,16 +213,14 @@ public class ExploreTabFragment extends BaseOsmAndFragment {
 		private WeakReference<OsmandActionBarActivity> weakContext;
 		private WeakReference<ExploreRvAdapter> weakAdapter;
 		private WeakReference<StartEditingTravelCard> weakStartEditingTravelCard;
-		private WeakReference<View> weakProgressBar;
 		private boolean nightMode;
 
 		PopularDestinationsSearchTask(TravelDbHelper travelDbHelper,
-									  OsmandActionBarActivity context, ExploreRvAdapter adapter, boolean nightMode, StartEditingTravelCard startEditingTravelCard, View progressBar) {
+									  OsmandActionBarActivity context, ExploreRvAdapter adapter, boolean nightMode, StartEditingTravelCard startEditingTravelCard) {
 			this.travelDbHelper = travelDbHelper;
 			weakContext = new WeakReference<>(context);
 			weakAdapter = new WeakReference<>(adapter);
 			weakStartEditingTravelCard = new WeakReference<>(startEditingTravelCard);
-			weakProgressBar = new WeakReference<>(progressBar);
 			this.nightMode = nightMode;
 		}
 
@@ -156,32 +230,24 @@ public class ExploreTabFragment extends BaseOsmAndFragment {
 		}
 
 		@Override
-		protected void onPreExecute() {
-			super.onPreExecute();
-			weakProgressBar.get().setVisibility(View.VISIBLE);
-		}
-
-		@Override
 		protected void onPostExecute(List<TravelArticle> items) {
 			OsmandActionBarActivity activity = weakContext.get();
 			ExploreRvAdapter adapter = weakAdapter.get();
-
-			List<Object> adapterItems = adapter.getItems();
 			StartEditingTravelCard startEditingTravelCard = weakStartEditingTravelCard.get();
 
-			adapterItems.remove(startEditingTravelCard);
+			if (activity != null && adapter != null && startEditingTravelCard != null) {
+				List<BaseTravelCard> adapterItems = adapter.getItems();
 
-			if (!items.isEmpty()) {
-				if (activity != null) {
-					adapterItems.add(activity.getResources().getString(R.string.popular_destinations));
-					for (TravelArticle article : items) {
-						adapterItems.add(new ArticleTravelCard(activity.getMyApplication(), nightMode, article, activity.getSupportFragmentManager()));
-					}
+				if (adapterItems.contains(startEditingTravelCard)) {
+					adapterItems.remove(startEditingTravelCard);
 				}
+				for (TravelArticle article : items) {
+					adapterItems.add(new ArticleTravelCard(activity.getMyApplication(), nightMode, article, activity.getSupportFragmentManager()));
+				}
+
+				adapterItems.add(startEditingTravelCard);
+				adapter.notifyDataSetChanged();
 			}
-			weakProgressBar.get().setVisibility(View.GONE);
-			adapterItems.add(startEditingTravelCard);
-			adapter.notifyDataSetChanged();
 		}
 	}
 }
