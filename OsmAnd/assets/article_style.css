@@ -250,6 +250,14 @@ td {
 
 .nightmode > a {
     color: #d28521;
+    text-decoration-color: #854f08;
+    word-wrap: break-word;
+}
+
+.nightmode > .external, .free {
+    color: #d28521;
+    text-decoration-color: #854f08;
+    word-wrap: break-word;
 }
 
 .nightmode {
