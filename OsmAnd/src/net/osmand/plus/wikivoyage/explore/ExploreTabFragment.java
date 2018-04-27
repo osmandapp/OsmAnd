@@ -184,7 +184,9 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIn
 					app.getDownloadThread().runReloadIndexFilesSilent();
 				} else {
 					indexItem = downloadThread.getIndexes().getWorldWikivoyageItem();
-					addDownloadUpdateCard(false);
+					IndexItem current = downloadThread.getCurrentDownloadingItem();
+					boolean loadingInProgress = current != null && indexItem != null && current == indexItem;
+					addDownloadUpdateCard(loadingInProgress);
 				}
 			}
 		}).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
