@@ -17,21 +17,19 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/title"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="fill_horizontal"
-                android:layout_weight="1"
-                android:paddingTop="22dp"
-                android:paddingLeft="@dimen/list_content_padding"
-                android:paddingStart="@dimen/list_content_padding"
-                android:paddingRight="@dimen/list_content_padding"
-                android:paddingEnd="@dimen/list_content_padding"
-                android:text="@string/wikivoyage_download_pics"
-                android:textColor="?android:attr/textColorPrimary"
-                android:textStyle="bold"
-                android:textSize="@dimen/dialog_header_text_size"/>
+			<TextView
+				android:id="@+id/title"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginBottom="@dimen/list_content_padding"
+				android:layout_marginEnd="@dimen/list_content_padding"
+				android:layout_marginLeft="@dimen/list_content_padding"
+				android:layout_marginRight="@dimen/list_content_padding"
+				android:layout_marginStart="@dimen/list_content_padding"
+				android:layout_marginTop="@dimen/bottom_sheet_icon_margin"
+				android:textSize="@dimen/empty_state_text_size"
+				android:textColor="?attr/wikivoyage_primary_text_color"
+				android:text="@string/wikivoyage_download_pics" />
 
         </LinearLayout>
 
