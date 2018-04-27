@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -40,6 +41,7 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIn
 
 	private ExploreRvAdapter adapter = new ExploreRvAdapter();
 	private StartEditingTravelCard startEditingTravelCard;
+	private TravelDownloadUpdateCard downloadUpdateCard;
 
 	private boolean nightMode;
 
@@ -78,15 +80,38 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIn
 	public void newDownloadIndexes() {
 		if (downloadIndexesRequested) {
 			downloadIndexesRequested = false;
-			OsmandApplication app = getMyApplication();
+			final OsmandApplication app = getMyApplication();
 
 			IndexItem wikivoyageItem = app.getDownloadThread().getIndexes().getWorldWikivoyageItem();
 			boolean outdated = wikivoyageItem != null && wikivoyageItem.isOutdated();
 
 			if (!worldWikivoyageDownloaded || outdated) {
-				TravelDownloadUpdateCard card = new TravelDownloadUpdateCard(app, nightMode, !outdated);
-				card.setIndexItem(wikivoyageItem);
-				if (adapter.addItem(DOWNLOAD_UPDATE_CARD_POSITION, card)) {
+				downloadUpdateCard = new TravelDownloadUpdateCard(app, nightMode, !outdated);
+				downloadUpdateCard.setListener(new TravelDownloadUpdateCard.ClickListener() {
+					@Override
+					public void onPrimaryButtonClick() {
+						if (downloadUpdateCard.isDownload()) {
+							if (app.getSettings().isInternetConnectionAvailable()) {
+								Toast.makeText(app, "Download", Toast.LENGTH_SHORT).show();
+							} else {
+								Toast.makeText(app, app.getString(R.string.no_index_file_to_download), Toast.LENGTH_SHORT).show();
+							}
+						} else {
+							Toast.makeText(app, "Update", Toast.LENGTH_SHORT).show();
+						}
+					}
+
+					@Override
+					public void onSecondaryButtonClick() {
+						if (downloadUpdateCard.isLoadingInProgress()) {
+							Toast.makeText(app, "Cancel", Toast.LENGTH_SHORT).show();
+						} else if (!downloadUpdateCard.isDownload()) {
+							Toast.makeText(app, "Later", Toast.LENGTH_SHORT).show();
+						}
+					}
+				});
+				downloadUpdateCard.setIndexItem(wikivoyageItem);
+				if (adapter.addItem(DOWNLOAD_UPDATE_CARD_POSITION, downloadUpdateCard)) {
 					adapter.notifyDataSetChanged();
 				}
 			}
@@ -191,7 +216,7 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIn
 		private boolean nightMode;
 
 		PopularDestinationsSearchTask(TravelDbHelper travelDbHelper,
-		                              OsmandActionBarActivity context, ExploreRvAdapter adapter, boolean nightMode, StartEditingTravelCard startEditingTravelCard) {
+									  OsmandActionBarActivity context, ExploreRvAdapter adapter, boolean nightMode, StartEditingTravelCard startEditingTravelCard) {
 			this.travelDbHelper = travelDbHelper;
 			weakContext = new WeakReference<>(context);
 			weakAdapter = new WeakReference<>(adapter);
