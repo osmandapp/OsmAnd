@@ -31,7 +31,7 @@
 				android:layout_marginLeft="@dimen/list_content_padding"
 				android:layout_marginRight="@dimen/list_content_padding"
 				android:layout_marginStart="@dimen/list_content_padding"
-				android:layout_marginTop="40dp"
+				android:layout_marginTop="@dimen/wikivoyage_start_editing_card_text_image_padding"
 				android:layout_weight="1"
 				android:textColor="@color/primary_text_dark"
 				android:textSize="@dimen/default_list_text_size"
