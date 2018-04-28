@@ -512,4 +512,61 @@
 	<string name="poi_bridge_movable_lift">Τύπος μετακινήσιμης γέφυρας: αναβατήρας</string>
 	<string name="poi_boat_jetski_rental_yes">Τζετ σκι: ναι</string>
 	<string name="poi_boat_jetski_rental_no">Τζετ σκι: όχι</string>
+	<string name="poi_power_pole">Ηλεκτρικός στύλος</string>
+
+	<string name="poi_residential">Περιοχή κατοικιών</string>
+	<string name="poi_industrial">Βιομηχανική περιοχή</string>
+	<string name="poi_landuse_railway">Σιδηροδρομική περιοχή</string>
+	<string name="poi_commercial">Εμπορική χρήση γης</string>
+	<string name="poi_retail">Λιανική χρήση γης</string>
+
+	<string name="poi_quarry">Λατομείο</string>
+	<string name="poi_vineyard">Αμπελώνας</string>
+	<string name="poi_orchard">Οπωρώνας</string>
+	<string name="poi_allotments">Μικρός κήπος</string>
+	<string name="poi_forest">Ανθρωποσυντηρούμενο δάσος</string>
+	<string name="poi_farmyard">Αγρόκτημα</string>
+	<string name="poi_meadow">Λιβάδι</string>
+	<string name="poi_basin">Λεκάνη</string>
+
+	<string name="poi_canal">Κανάλι</string>
+	<string name="poi_pier">Προβλήτα</string>
+	<string name="poi_surveillance">Παρακολούθηση</string>
+	<string name="poi_observatory">Αστεροσκοπείο</string>
+	<string name="poi_astronomical_observatory">Αστρονομικό</string>
+	<string name="poi_tower">Πύργος</string>
+	<string name="poi_mast">Ιστός</string>
+	<string name="poi_monitoring_station">Σταθμός παρακολούθησης</string>
+	<string name="poi_radar">Ραντάρ</string>
+	<string name="poi_crane">Γερανός</string>
+	<string name="poi_construction">Κατασκευή</string>
+	<string name="poi_brownfield">Εγκαταλελειμμένη εγκατάσταση</string>
+	<string name="poi_works">Εργοστάσιο</string>
+	<string name="poi_mineshaft">Σήραγγα ορυχείου</string>
+	<string name="poi_adit">Στοά προσπέλασης</string>
+	<string name="poi_petroleum_well">Πετρελαιοπηγή</string>
+	<string name="poi_survey_point">Σημείο μέτρησης</string>
+	<string name="poi_windmill">Ανεμόμυλος</string>
+	<string name="poi_salt_pond">Δεξαμενή άλατος</string>
+	<string name="poi_reservoir">Ταμιευτήρας</string>
+	<string name="poi_cricket_nets">Δίχτυα κρίκετ</string>
+	<string name="poi_gasometer">Μετρητής αερίου</string>
+	<string name="poi_silo">Σιλό</string>
+	<string name="poi_bunker_silo">Ταφροειδής σιρός</string>
+	<string name="poi_storage_tank">Δεξαμενή αποθήκευσης</string>
+
+	<string name="poi_college">Κολέγιο</string>
+	<string name="poi_driving_school">Σχολή οδηγών</string>
+	<string name="poi_kindergarten">Νηπιαγωγείο</string>
+	<string name="poi_school">Σχολείο</string>
+	<string name="poi_training">Μονάδα κατάρτισης</string>
+	<string name="poi_university">Πανεπιστήμιο</string>
+
+	<string name="poi_social_facility">Μονάδα κοινωνικής πρόνοιας</string>
+	<string name="poi_courthouse">Δικαστήριο</string>
+	<string name="poi_prison">Φυλακή</string>
+	<string name="poi_register_office">Ληξιαρχείο</string>
+	<string name="poi_embassy">Πρεσβεία</string>
+	<string name="poi_government">Κυβέρνηση</string>
+	<string name="poi_bailiff">Δικαστικός επιμελητής</string>
 	</resources>
