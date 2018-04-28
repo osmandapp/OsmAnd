@@ -136,18 +136,24 @@ public class WikivoyageExploreDialogFragment extends WikivoyageBaseDialogFragmen
 				return false;
 			}
 		});
+		updateSearchVisibility();
 		populateData();
 		return mainView;
 	}
 	
 	protected void onDataLoaded() {
 		mainView.findViewById(R.id.progress_bar).setVisibility(View.GONE);
+		updateSearchVisibility();
 		if(exploreTabFragment != null) {
 			exploreTabFragment.populateData();
 		}
 		if(savedArticlesTabFragment != null) {
 			savedArticlesTabFragment.savedArticlesUpdated();
 		}
+	}
+
+	private void updateSearchVisibility() {
+		mainView.findViewById(R.id.search_box).setVisibility(getMyApplication().getTravelDbHelper().getSelectedTravelBook() == null ? View.GONE : View.VISIBLE);
 	}
 
 	public void populateData() {

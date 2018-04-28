@@ -72,6 +72,7 @@
 		<FrameLayout
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
+			android:id="@+id/search_box"
 			android:layout_marginLeft="@dimen/text_margin_small"
 			android:layout_marginRight="@dimen/text_margin_small"
 			android:background="@drawable/wikivoyage_search_card_bg">
