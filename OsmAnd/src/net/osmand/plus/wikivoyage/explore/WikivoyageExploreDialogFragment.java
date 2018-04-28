@@ -145,6 +145,9 @@ public class WikivoyageExploreDialogFragment extends WikivoyageBaseDialogFragmen
 		if(exploreTabFragment != null) {
 			exploreTabFragment.populateData();
 		}
+		if(savedArticlesTabFragment != null) {
+			savedArticlesTabFragment.savedArticlesUpdated();
+		}
 	}
 
 	public void populateData() {
