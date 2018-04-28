@@ -91,8 +91,9 @@ public class WikivoyageWebViewClient extends WebViewClient implements RegionCall
 			}
 			return true;
 		} else if (url.contains(WIKI_DOMAIN)) {
-			String articleName = getArticleNameFromUrl(url, getLang(url));
-			getWikiArticle(articleName, url);
+			String lang = getLang(url);
+			String articleName = getArticleNameFromUrl(url, lang);
+			getWikiArticle(articleName, lang, url);
 		} else if (url.startsWith(PAGE_PREFIX_HTTP) || url.startsWith(PAGE_PREFIX_HTTPS)) {
 			warnAboutExternalLoad(url, context, nightMode);
 		} else if (url.startsWith(PREFIX_GEO)) {
@@ -181,14 +182,14 @@ public class WikivoyageWebViewClient extends WebViewClient implements RegionCall
 		}
 	}
 
-	private void getWikiArticle(String name, String url) {
+	private void getWikiArticle(String name, String lang, String url) {
 		List<AmenityIndexRepositoryBinary> indexes = app.getResourceManager()
 				.getWikiAmenityRepository(article.getLat(), article.getLon());
 		if (indexes.isEmpty()) {
 			WikivoyageArticleWikiLinkFragment.showInstance(fragmentManager, regionName == null ?
 					"" : regionName, url);
 		} else {
-			articleSearchTask = new WikiArticleSearchTask(name, indexes, (MapActivity) context, nightMode, url);
+			articleSearchTask = new WikiArticleSearchTask(name, lang, indexes, (MapActivity) context, nightMode, url);
 			articleSearchTask.execute();
 		}
 
@@ -274,10 +275,12 @@ public class WikivoyageWebViewClient extends WebViewClient implements RegionCall
 		private WeakReference<MapActivity> weakContext;
 		private boolean isNightMode;
 		private String url;
+		private String lang;
 
-		WikiArticleSearchTask(String articleName, List<AmenityIndexRepositoryBinary> indexes,
+		WikiArticleSearchTask(String articleName, String lang, List<AmenityIndexRepositoryBinary> indexes,
 							  MapActivity context, boolean isNightMode, String url) {
 			name = articleName;
+			this.lang = lang;
 			this.indexes = indexes;
 			weakContext = new WeakReference<>(context);
 			dialog = createProgressDialog();
@@ -317,7 +320,7 @@ public class WikivoyageWebViewClient extends WebViewClient implements RegionCall
 			if (activity != null && !activity.isActivityDestroyed() && dialog != null) {
 				dialog.dismiss();
 				if (!found.isEmpty()) {
-					WikipediaDialogFragment.showInstance(activity, found.get(0));
+					WikipediaDialogFragment.showInstance(activity, found.get(0), lang);
 				} else {
 					warnAboutExternalLoad(url, weakContext.get(), isNightMode);
 				}

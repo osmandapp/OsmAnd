@@ -271,22 +271,26 @@ public class WikipediaDialogFragment extends DialogFragment {
 		return (OsmandApplication) getActivity().getApplication();
 	}
 
-	public static boolean showInstance(AppCompatActivity activity, Amenity amenity) {
+	public static boolean showInstance(AppCompatActivity activity, Amenity amenity, String lang) {
 		try {
 			if (!amenity.getType().isWiki()) {
 				return false;
 			}
 			OsmandApplication app = (OsmandApplication) activity.getApplication();
-			String lang = app.getSettings().MAP_PREFERRED_LOCALE.get();
 
 			WikipediaDialogFragment wikipediaDialogFragment = new WikipediaDialogFragment();
 			wikipediaDialogFragment.setAmenity(amenity);
-			wikipediaDialogFragment.setLanguage(lang);
+			wikipediaDialogFragment.setLanguage(lang == null ?
+					app.getSettings().MAP_PREFERRED_LOCALE.get() : lang);
 			wikipediaDialogFragment.setRetainInstance(true);
 			wikipediaDialogFragment.show(activity.getSupportFragmentManager(), TAG);
 			return true;
 		} catch (RuntimeException e) {
 			return false;
 		}
+	}
+
+	public static boolean showInstance(AppCompatActivity activity, Amenity amenity) {
+		return showInstance(activity, amenity, null);
 	}
 }
