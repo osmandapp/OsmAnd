@@ -47,7 +47,6 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIn
 	private IndexItem indexItem;
 
 	private boolean downloadIndexesRequested;
-	private boolean downloadUpdateCardAdded;
 
 	@Nullable
 	@Override
@@ -120,7 +119,7 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIn
 		DownloadIndexesThread downloadThread = getMyApplication().getDownloadThread();
 		IndexItem current = downloadThread.getCurrentDownloadingItem();
 		indexItem = downloadThread.getIndexes().getWikivoyageItem(getWikivoyageFileName());
-		if (current != null
+		if (current != null && downloadUpdateCard != null
 				&& indexItem != null
 				&& current == indexItem
 				&& (!current.isDownloaded() || current.isOutdated())) {
@@ -140,10 +139,9 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIn
 	}
 
 	private void addDownloadUpdateCard(boolean loadingInProgress) {
-		if (downloadUpdateCardAdded) {
+		if(downloadUpdateCard != null) {
 			return;
 		}
-
 		final OsmandApplication app = getMyApplication();
 
 		boolean outdated = indexItem != null && indexItem.isOutdated();
@@ -176,7 +174,6 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIn
 			});
 			downloadUpdateCard.setIndexItem(indexItem);
 			adapter.setDownloadUpdateCard(downloadUpdateCard);
-			downloadUpdateCardAdded = true;
 		}
 	}
 
@@ -188,7 +185,7 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIn
 
 	private void removeDownloadUpdateCard() {
 		adapter.removeDownloadUpdateCard();
-		downloadUpdateCardAdded = false;
+		downloadUpdateCard = null;
 	}
 
 
