@@ -110,7 +110,9 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIn
 			downloadIndexesRequested = false;
 			indexItem = getMyApplication().getDownloadThread().getIndexes()
 					.getWikivoyageItem(getWikivoyageFileName());
-			addDownloadUpdateCard(false);
+			if(downloadUpdateCard == null) {
+				addDownloadUpdateCard(false);
+			}
 		}
 	}
 
@@ -123,7 +125,6 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIn
 				&& indexItem != null
 				&& current == indexItem
 				&& (!current.isDownloaded() || current.isOutdated())) {
-			addDownloadUpdateCard(true);
 			downloadUpdateCard.setProgress(downloadThread.getCurrentDownloadingItemProgress());
 			adapter.updateDownloadUpdateCard();
 		}
@@ -139,9 +140,9 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIn
 	}
 
 	private void addDownloadUpdateCard(boolean loadingInProgress) {
-		if(downloadUpdateCard != null) {
-			return;
-		}
+//		if(downloadUpdateCard != null) {
+//			return;
+//		}
 		final OsmandApplication app = getMyApplication();
 
 		boolean outdated = indexItem != null && indexItem.isOutdated();
