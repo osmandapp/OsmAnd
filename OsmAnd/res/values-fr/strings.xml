@@ -209,8 +209,8 @@
     <string name="install_more">Installer plus…</string>
 
 
-    <string name="level_to_switch_vector_raster_descr">Utiliser les cartes vectorielles à partir de ce niveau de zoom.</string>
-    <string name="level_to_switch_vector_raster">Niveau de zoom vectoriel</string>
+    <string name="level_to_switch_vector_raster_descr">Utiliser les cartes matricielles (raster) à partir de ce niveau de zoom.</string>
+    <string name="level_to_switch_vector_raster">Niveau de zoom vectoriel minimal</string>
 
 
     <string name="create_poi_link_to_osm_doc"><u>OSM en ligne</u> classification des cartes en images</string>
