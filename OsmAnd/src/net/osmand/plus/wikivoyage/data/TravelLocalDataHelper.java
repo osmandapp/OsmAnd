@@ -36,7 +36,7 @@ public class TravelLocalDataHelper {
 
 	void refreshCachedData() {
 		historyMap = dbHelper.getAllHistoryMap();
-		savedArticles = dbHelper.getSavedArticles();
+		savedArticles = dbHelper.readSavedArticles();
 	}
 
 	public List<WikivoyageSearchHistoryItem> getAllHistory() {
@@ -356,7 +356,7 @@ public class TravelLocalDataHelper {
 		}
 
 		@NonNull
-		List<TravelArticle> getSavedArticles() {
+		List<TravelArticle> readSavedArticles() {
 			List<TravelArticle> res = new ArrayList<>();
 			String travelBook = getSelectedTravelBookName();
 			if (travelBook == null) {
