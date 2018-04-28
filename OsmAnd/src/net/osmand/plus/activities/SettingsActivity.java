@@ -1,30 +1,19 @@
 package net.osmand.plus.activities;
 
 
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.preference.Preference;
+import android.preference.Preference.OnPreferenceClickListener;
+import android.preference.PreferenceCategory;
+import android.preference.PreferenceScreen;
+
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
-import net.osmand.plus.development.OsmandDevelopmentPlugin;
-import android.app.Activity;
-import android.app.Dialog;
-import android.content.Context;
-import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
-import android.os.Bundle;
-import android.preference.Preference;
-import android.preference.PreferenceCategory;
-import android.preference.PreferenceScreen;
-import android.preference.Preference.OnPreferenceClickListener;
-import android.support.v7.widget.Toolbar;
-import android.util.DisplayMetrics;
-import android.util.TypedValue;
-import android.view.View;
-import android.view.WindowManager;
-import android.widget.LinearLayout;
-import android.widget.ScrollView;
-import android.widget.TextView;
+import net.osmand.plus.liveupdates.OsmLiveActivity;
 
 public class SettingsActivity extends SettingsBaseActivity {
 
@@ -38,6 +27,7 @@ public class SettingsActivity extends SettingsBaseActivity {
 
 	private Preference general;
 	private Preference routing;
+	private Preference subscription;
 
 
 	@Override
@@ -49,8 +39,10 @@ public class SettingsActivity extends SettingsBaseActivity {
 		general = (Preference) screen.findPreference("general_settings");
 		general.setOnPreferenceClickListener(this);
 		routing = (Preference) screen.findPreference("routing_settings");
-		routing .setOnPreferenceClickListener(this);
-		
+		routing.setOnPreferenceClickListener(this);
+		subscription = (Preference) screen.findPreference("subscription_settings");
+		subscription.setOnPreferenceClickListener(this);
+
 		getToolbar().setTitle(Version.getFullVersion(getMyApplication()));
 		
 		Intent intent = getIntent();
@@ -98,6 +90,11 @@ public class SettingsActivity extends SettingsBaseActivity {
 			return true;
 		} else if (preference == routing) {
 			startActivity(new Intent(this, SettingsNavigationActivity.class));
+			return true;
+		} else if (preference == subscription) {
+			Intent intent = new Intent(this, OsmLiveActivity.class);
+			intent.putExtra(OsmLiveActivity.SHOW_SETTINGS_ONLY_INTENT_PARAM, true);
+			startActivity(intent);
 			return true;
 		} else {
 			super.onPreferenceClick(preference);

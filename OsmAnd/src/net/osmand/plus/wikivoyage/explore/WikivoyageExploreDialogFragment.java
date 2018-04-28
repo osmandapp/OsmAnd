@@ -3,6 +3,7 @@ package net.osmand.plus.wikivoyage.explore;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.ColorStateList;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -26,10 +27,13 @@ import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.wikivoyage.WikivoyageBaseDialogFragment;
+import net.osmand.plus.wikivoyage.data.TravelDbHelper;
 import net.osmand.plus.wikivoyage.search.WikivoyageSearchDialogFragment;
 
+import java.lang.ref.WeakReference;
 import java.util.Arrays;
 import java.util.List;
+
 
 public class WikivoyageExploreDialogFragment extends WikivoyageBaseDialogFragment implements DownloadIndexesThread.DownloadEvents {
 
@@ -40,6 +44,8 @@ public class WikivoyageExploreDialogFragment extends WikivoyageBaseDialogFragmen
 
 	private ExploreTabFragment exploreTabFragment;
 	private SavedArticlesTabFragment savedArticlesTabFragment;
+
+	private View mainView;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -71,7 +77,7 @@ public class WikivoyageExploreDialogFragment extends WikivoyageBaseDialogFragmen
 			savedArticlesTabFragment = new SavedArticlesTabFragment();
 		}
 
-		final View mainView = inflate(R.layout.fragment_wikivoyage_explore_dialog, container);
+		this.mainView = inflate(R.layout.fragment_wikivoyage_explore_dialog, container);
 
 		setupToolbar((Toolbar) mainView.findViewById(R.id.toolbar));
 
@@ -131,7 +137,32 @@ public class WikivoyageExploreDialogFragment extends WikivoyageBaseDialogFragmen
 			}
 		});
 
+		updateSearchVisibility();
+		populateData();
+
 		return mainView;
+	}
+
+	protected void onDataLoaded() {
+		mainView.findViewById(R.id.progress_bar).setVisibility(View.GONE);
+		updateSearchVisibility();
+		if (exploreTabFragment != null) {
+			exploreTabFragment.populateData();
+		}
+		if (savedArticlesTabFragment != null) {
+			savedArticlesTabFragment.savedArticlesUpdated();
+		}
+	}
+
+	private void updateSearchVisibility() {
+		mainView.findViewById(R.id.search_box).setVisibility(
+				getMyApplication().getTravelDbHelper().getSelectedTravelBook() == null ? View.GONE : View.VISIBLE
+		);
+	}
+
+	public void populateData() {
+		mainView.findViewById(R.id.progress_bar).setVisibility(View.VISIBLE);
+		new LoadWikivoyageData(this).execute();
 	}
 
 	@Override
@@ -181,6 +212,31 @@ public class WikivoyageExploreDialogFragment extends WikivoyageBaseDialogFragmen
 			return true;
 		} catch (RuntimeException e) {
 			return false;
+		}
+	}
+
+	private static class LoadWikivoyageData extends AsyncTask<Void, Void, Void> {
+
+		private WeakReference<WikivoyageExploreDialogFragment> weakReference;
+		private TravelDbHelper travelDbHelper;
+
+		LoadWikivoyageData(WikivoyageExploreDialogFragment fragment) {
+			travelDbHelper = fragment.getMyApplication().getTravelDbHelper();
+			weakReference = new WeakReference<>(fragment);
+		}
+
+		@Override
+		protected Void doInBackground(Void... params) {
+			travelDbHelper.loadDataForSelectedTravelBook();
+			return null;
+		}
+
+		@Override
+		protected void onPostExecute(Void result) {
+			WikivoyageExploreDialogFragment fragment = weakReference.get();
+			if (fragment != null && fragment.isResumed()) {
+				fragment.onDataLoaded();
+			}
 		}
 	}
 

@@ -90,6 +90,7 @@ public class TravelDbHelper {
 
 	private File selectedTravelBook = null;
 	private List<File> existingTravelBooks = new ArrayList<>();
+	private List<TravelArticle> popularArticles = new ArrayList<TravelArticle>();
 
 	public TravelDbHelper(OsmandApplication application) {
 		this.application = application;
@@ -119,7 +120,11 @@ public class TravelDbHelper {
 		} else {
 			selectedTravelBook = null;
 		}
+	}
+
+	public void loadDataForSelectedTravelBook() {
 		localDataHelper.refreshCachedData();
+		loadPopularArticles();
 	}
 
 	public File getSelectedTravelBook() {
@@ -145,7 +150,6 @@ public class TravelDbHelper {
 			connection = application.getSQLiteAPI().openByAbsolutePath(f.getAbsolutePath(), true);
 			selectedTravelBook = f;
 			application.getSettings().SELECTED_TRAVEL_BOOK.set(selectedTravelBook.getName());
-			localDataHelper.refreshCachedData();
 		}
 	}
 
@@ -205,7 +209,12 @@ public class TravelDbHelper {
 	}
 
 	@NonNull
-	public List<TravelArticle> searchPopular() {
+	public List<TravelArticle> getPopularArticles() {
+		return popularArticles;
+	}
+
+	@NonNull
+	public List<TravelArticle> loadPopularArticles() {
 		List<TravelArticle> res = new ArrayList<>();
 		SQLiteConnection conn = openConnection();
 		if (conn != null) {
@@ -214,7 +223,7 @@ public class TravelDbHelper {
 					+ ARTICLES_TABLE_NAME
 					+ " WHERE article_id IN (SELECT article_id FROM "
 					+ ARTICLES_TABLE_NAME
-					+ " ORDER BY RANDOM() LIMIT 100) LIMIT 100", null);
+					+ " ORDER BY RANDOM() LIMIT 20) LIMIT 20", null);
 			if (cursor.moveToFirst()) {
 				do {
 					travelArticle = readArticle(cursor);
@@ -223,9 +232,8 @@ public class TravelDbHelper {
 			}
 			cursor.close();
 		}
-
 		sortArticlesByDistance(res);
-
+		popularArticles = res;
 		return res;
 	}
 
@@ -362,22 +370,23 @@ public class TravelDbHelper {
 			cursor.close();
 		}
 		LinkedHashMap<WikivoyageSearchResult, List<WikivoyageSearchResult>> res = new LinkedHashMap<>();
-		parts = parts == null ? new String[]{} : parts;
-		for (String header : parts) {
-			WikivoyageSearchResult searchResult = headerObjs.get(header);
-			List<WikivoyageSearchResult> results = navMap.get(header);
-			if (results != null) {
-				Collections.sort(results, new Comparator<WikivoyageSearchResult>() {
-					@Override
-					public int compare(WikivoyageSearchResult o1, WikivoyageSearchResult o2) {
-						return collator.compare(o1.articleTitles.get(0), o2.articleTitles.get(0));
-					}
-				});
-				WikivoyageSearchResult emptyResult = new WikivoyageSearchResult();
-				emptyResult.articleTitles.add(header);
-				emptyResult.cityId = -1;
-				searchResult = searchResult != null ? searchResult : emptyResult;
-				res.put(searchResult, results);
+		if (parts != null) {
+			for (String header : parts) {
+				WikivoyageSearchResult searchResult = headerObjs.get(header);
+				List<WikivoyageSearchResult> results = navMap.get(header);
+				if (results != null) {
+					Collections.sort(results, new Comparator<WikivoyageSearchResult>() {
+						@Override
+						public int compare(WikivoyageSearchResult o1, WikivoyageSearchResult o2) {
+							return collator.compare(o1.articleTitles.get(0), o2.articleTitles.get(0));
+						}
+					});
+					WikivoyageSearchResult emptyResult = new WikivoyageSearchResult();
+					emptyResult.articleTitles.add(header);
+					emptyResult.cityId = -1;
+					searchResult = searchResult != null ? searchResult : emptyResult;
+					res.put(searchResult, results);
+				}
 			}
 		}
 		return res;

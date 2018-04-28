@@ -154,6 +154,10 @@ public class WikivoyageOptionsBottomSheetDialogFragment extends MenuBottomSheetD
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						dbHelper.selectTravelBook(list.get(which));
+						Fragment parent = getParentFragment();
+						if (parent != null && parent instanceof WikivoyageExploreDialogFragment) {
+							((WikivoyageExploreDialogFragment) parent).populateData();
+						}
 					}
 				})
 				.setNegativeButton(R.string.shared_string_dismiss, null)

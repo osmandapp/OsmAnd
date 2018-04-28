@@ -34,10 +34,9 @@ public class TravelLocalDataHelper {
 		dbHelper = new WikivoyageLocalDataDbHelper(app);
 	}
 
-	public void refreshCachedData() {
+	void refreshCachedData() {
 		historyMap = dbHelper.getAllHistoryMap();
-		savedArticles = dbHelper.getSavedArticles();
-		notifySavedUpdated();
+		savedArticles = dbHelper.readSavedArticles();
 	}
 
 	public List<WikivoyageSearchHistoryItem> getAllHistory() {
@@ -115,7 +114,7 @@ public class TravelLocalDataHelper {
 			savedArticles.add(article);
 			dbHelper.addSavedArticle(article);
 			notifySavedUpdated();
-		}
+		} 
 	}
 
 	public void removeArticleFromSaved(@NonNull TravelArticle article) {
@@ -357,7 +356,7 @@ public class TravelLocalDataHelper {
 		}
 
 		@NonNull
-		List<TravelArticle> getSavedArticles() {
+		List<TravelArticle> readSavedArticles() {
 			List<TravelArticle> res = new ArrayList<>();
 			String travelBook = getSelectedTravelBookName();
 			if (travelBook == null) {

@@ -1,9 +1,10 @@
 package net.osmand.plus.wikivoyage.explore;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,7 +15,6 @@ import android.widget.Toast;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
-import net.osmand.plus.activities.OsmandActionBarActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadValidationManager;
@@ -29,11 +29,12 @@ import net.osmand.plus.wikivoyage.explore.travelcards.StartEditingTravelCard;
 import net.osmand.plus.wikivoyage.explore.travelcards.TravelDownloadUpdateCard;
 
 import java.io.File;
-import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIndexesThread.DownloadEvents {
+
+	private static final String WORLD_WIKIVOYAGE_FILE_NAME = "World_wikivoyage.sqlite";
 
 	private ExploreRvAdapter adapter = new ExploreRvAdapter();
 
@@ -44,9 +45,7 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIn
 
 	private IndexItem indexItem;
 
-	private File selectedTravelBook;
 	private boolean downloadIndexesRequested;
-	private boolean downloadUpdateCardAdded;
 
 	@Nullable
 	@Override
@@ -56,7 +55,7 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIn
 		final View mainView = inflater.inflate(R.layout.fragment_explore_tab, container, false);
 		final RecyclerView rv = (RecyclerView) mainView.findViewById(R.id.recycler_view);
 
-		adapter.setItems(generateItems());
+		populateData();
 
 		rv.setLayoutManager(new LinearLayoutManager(getContext()));
 		rv.setAdapter(adapter);
@@ -64,15 +63,53 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIn
 		return mainView;
 	}
 
+	public void populateData() {
+		final List<BaseTravelCard> items = new ArrayList<>();
+		final OsmandApplication app = getMyApplication();
+
+		startEditingTravelCard = new StartEditingTravelCard(app, nightMode);
+		addOpenBetaTravelCard(items, nightMode);
+		if (app.getTravelDbHelper().getSelectedTravelBook() != null) {
+			items.add(new HeaderTravelCard(app, nightMode, getString(R.string.popular_destinations)));
+			List<TravelArticle> popularArticles = app.getTravelDbHelper().getPopularArticles();
+			FragmentActivity activity = getActivity();
+			if (activity != null) {
+				for (TravelArticle article : popularArticles) {
+					items.add(new ArticleTravelCard(getMyApplication(), nightMode, article,
+							activity.getSupportFragmentManager()));
+				}
+			}
+		}
+		items.add(startEditingTravelCard);
+		adapter.setItems(items);
+
+		checkToAddDownloadTravelCard();
+	}
+
+	private void checkToAddDownloadTravelCard() {
+		final OsmandApplication app = getMyApplication();
+		final DownloadIndexesThread downloadThread = app.getDownloadThread();
+
+		if (!downloadThread.getIndexes().isDownloadedFromInternet) {
+			downloadIndexesRequested = true;
+			downloadThread.runReloadIndexFilesSilent();
+		} else {
+			indexItem = downloadThread.getIndexes().getWikivoyageItem(getWikivoyageFileName());
+			IndexItem current = downloadThread.getCurrentDownloadingItem();
+			boolean loadingInProgress = current != null && indexItem != null && current == indexItem;
+			addDownloadUpdateCard(loadingInProgress);
+		}
+	}
+
 	@Override
 	public void newDownloadIndexes() {
 		if (downloadIndexesRequested) {
 			downloadIndexesRequested = false;
-			if (selectedTravelBook != null) {
-				indexItem = getMyApplication().getDownloadThread().getIndexes()
-						.getWikivoyageItem(selectedTravelBook.getName());
+			indexItem = getMyApplication().getDownloadThread().getIndexes()
+					.getWikivoyageItem(getWikivoyageFileName());
+			if (downloadUpdateCard == null) {
+				addDownloadUpdateCard(false);
 			}
-			addDownloadUpdateCard(false);
 		}
 	}
 
@@ -80,14 +117,11 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIn
 	public void downloadInProgress() {
 		DownloadIndexesThread downloadThread = getMyApplication().getDownloadThread();
 		IndexItem current = downloadThread.getCurrentDownloadingItem();
-		if (selectedTravelBook != null) {
-			indexItem = downloadThread.getIndexes().getWikivoyageItem(selectedTravelBook.getName());
-		}
-		if (current != null
+		indexItem = downloadThread.getIndexes().getWikivoyageItem(getWikivoyageFileName());
+		if (current != null && downloadUpdateCard != null
 				&& indexItem != null
 				&& current == indexItem
 				&& (!current.isDownloaded() || current.isOutdated())) {
-			addDownloadUpdateCard(true);
 			downloadUpdateCard.setProgress(downloadThread.getCurrentDownloadingItemProgress());
 			adapter.updateDownloadUpdateCard();
 		}
@@ -95,22 +129,26 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIn
 
 	@Override
 	public void downloadHasFinished() {
-		IndexItem current = getMyApplication().getDownloadThread().getCurrentDownloadingItem();
-		if (downloadUpdateCard != null && current != null && indexItem != null && current == indexItem) {
+		final OsmandApplication app = getMyApplication();
+		File targetFile = indexItem.getTargetFile(app);
+		if (downloadUpdateCard != null && indexItem != null && targetFile.exists()) {
 			downloadUpdateCard.setLoadingInProgress(false);
 			removeDownloadUpdateCard();
+			TravelDbHelper travelDbHelper = app.getTravelDbHelper();
+			travelDbHelper.initTravelBooks();
+			travelDbHelper.selectTravelBook(targetFile);
+			Fragment parent = getParentFragment();
+			if (parent != null && parent instanceof WikivoyageExploreDialogFragment) {
+				((WikivoyageExploreDialogFragment) parent).populateData();
+			}
 		}
 	}
 
 	private void addDownloadUpdateCard(boolean loadingInProgress) {
-		if (downloadUpdateCardAdded) {
-			return;
-		}
-
 		final OsmandApplication app = getMyApplication();
 
 		boolean outdated = indexItem != null && indexItem.isOutdated();
-
+		File selectedTravelBook = app.getTravelDbHelper().getSelectedTravelBook();
 		if (selectedTravelBook == null || outdated) {
 			downloadUpdateCard = new TravelDownloadUpdateCard(app, nightMode, !outdated);
 			downloadUpdateCard.setLoadingInProgress(loadingInProgress);
@@ -139,104 +177,24 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIn
 			});
 			downloadUpdateCard.setIndexItem(indexItem);
 			adapter.setDownloadUpdateCard(downloadUpdateCard);
-			downloadUpdateCardAdded = true;
 		}
+	}
+
+	@NonNull
+	private String getWikivoyageFileName() {
+		File selectedTravelBook = getMyApplication().getTravelDbHelper().getSelectedTravelBook();
+		return selectedTravelBook == null ? WORLD_WIKIVOYAGE_FILE_NAME : selectedTravelBook.getName();
 	}
 
 	private void removeDownloadUpdateCard() {
 		adapter.removeDownloadUpdateCard();
-		downloadUpdateCardAdded = false;
-	}
-
-	private List<BaseTravelCard> generateItems() {
-		final List<BaseTravelCard> items = new ArrayList<>();
-		final OsmandApplication app = getMyApplication();
-
-		checkSelectedTravelBook();
-		startEditingTravelCard = new StartEditingTravelCard(app, nightMode);
-		addOpenBetaTravelCard(items, nightMode);
-		items.add(startEditingTravelCard);
-
-		if (app.getTravelDbHelper().getSelectedTravelBook() != null) {
-			items.add(new HeaderTravelCard(app, nightMode, getString(R.string.popular_destinations)));
-			addPopularDestinations(app);
-		}
-
-		return items;
-	}
-
-	private void checkSelectedTravelBook() {
-		final OsmandApplication app = getMyApplication();
-		final DownloadIndexesThread downloadThread = app.getDownloadThread();
-		selectedTravelBook = app.getTravelDbHelper().getSelectedTravelBook();
-
-		if (!downloadThread.getIndexes().isDownloadedFromInternet) {
-			downloadIndexesRequested = true;
-			downloadThread.runReloadIndexFilesSilent();
-		} else {
-			if (selectedTravelBook != null) {
-				indexItem = downloadThread.getIndexes().getWikivoyageItem(selectedTravelBook.getName());
-			}
-			IndexItem current = downloadThread.getCurrentDownloadingItem();
-			boolean loadingInProgress = current != null && indexItem != null && current == indexItem;
-			addDownloadUpdateCard(loadingInProgress);
-		}
-	}
-
-	private void addPopularDestinations(OsmandApplication app) {
-		PopularDestinationsSearchTask popularDestinationsSearchTask = new PopularDestinationsSearchTask(
-				app.getTravelDbHelper(), getMyActivity(), adapter, nightMode, startEditingTravelCard);
-		popularDestinationsSearchTask.execute();
+		downloadUpdateCard = null;
 	}
 
 	private void addOpenBetaTravelCard(List<BaseTravelCard> items, final boolean nightMode) {
 		final OsmandApplication app = getMyApplication();
 		if (!Version.isPaidVersion(app)) {
 			items.add(new OpenBetaTravelCard(app, nightMode, getFragmentManager()));
-		}
-	}
-
-	private static class PopularDestinationsSearchTask extends AsyncTask<Void, TravelDbHelper, List<TravelArticle>> {
-
-		private TravelDbHelper travelDbHelper;
-		private WeakReference<OsmandActionBarActivity> weakContext;
-		private WeakReference<ExploreRvAdapter> weakAdapter;
-		private WeakReference<StartEditingTravelCard> weakStartEditingTravelCard;
-		private boolean nightMode;
-
-		PopularDestinationsSearchTask(TravelDbHelper travelDbHelper,
-									  OsmandActionBarActivity context, ExploreRvAdapter adapter, boolean nightMode, StartEditingTravelCard startEditingTravelCard) {
-			this.travelDbHelper = travelDbHelper;
-			weakContext = new WeakReference<>(context);
-			weakAdapter = new WeakReference<>(adapter);
-			weakStartEditingTravelCard = new WeakReference<>(startEditingTravelCard);
-			this.nightMode = nightMode;
-		}
-
-		@Override
-		protected List<TravelArticle> doInBackground(Void... voids) {
-			return travelDbHelper.searchPopular();
-		}
-
-		@Override
-		protected void onPostExecute(List<TravelArticle> items) {
-			OsmandActionBarActivity activity = weakContext.get();
-			ExploreRvAdapter adapter = weakAdapter.get();
-			StartEditingTravelCard startEditingTravelCard = weakStartEditingTravelCard.get();
-
-			if (activity != null && adapter != null && startEditingTravelCard != null) {
-				List<BaseTravelCard> adapterItems = adapter.getItems();
-
-				if (adapterItems.contains(startEditingTravelCard)) {
-					adapterItems.remove(startEditingTravelCard);
-				}
-				for (TravelArticle article : items) {
-					adapterItems.add(new ArticleTravelCard(activity.getMyApplication(), nightMode, article, activity.getSupportFragmentManager()));
-				}
-
-				adapterItems.add(startEditingTravelCard);
-				adapter.notifyDataSetChanged();
-			}
 		}
 	}
 }

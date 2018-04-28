@@ -147,13 +147,7 @@ public class WikivoyageArticleNavigationFragment extends MenuBottomSheetDialogFr
 	}
 
 	private void sendResults(long cityId) {
-		Fragment fragment = getTargetFragment();
-		if (fragment != null) {
-			Intent intent = new Intent();
-			intent.putExtra(CITY_ID_KEY, cityId);
-			intent.putExtra(SELECTED_LANG_KEY, selectedLang);
-			fragment.onActivityResult(getTargetRequestCode(), OPEN_ARTICLE_REQUEST_CODE, intent);
-		}
+		WikivoyageArticleDialogFragment.showInstance(getMyApplication(), getFragmentManager(), cityId, selectedLang);
 	}
 
 	public static boolean showInstance(@NonNull FragmentManager fm,

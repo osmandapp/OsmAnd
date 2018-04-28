@@ -46,13 +46,4 @@
 
 	</LinearLayout>
 
-	<ProgressBar
-		android:id="@+id/progressBar"
-		style="?android:attr/progressBarStyleHorizontal"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:background="?attr/wikivoyage_card_bg_color"
-		android:indeterminate="true"
-		android:visibility="gone" />
-
 </LinearLayout>
