@@ -3125,10 +3125,10 @@
     <string name="article_removed">已移除文章</string>
     <string name="shared_string_dont">不要</string>
     <string name="shared_string_do">做</string>
-    <string name="shared_string_only_with_wifi">只有對 WiFi</string>
+    <string name="shared_string_only_with_wifi">只有在 WiFi</string>
     <string name="wikivoyage_download_pics">下載照片</string>
     <string name="wikivoyage_download_pics_descr">我們可以在文章中下載和顯示圖像，並將它們存儲在裝置上，所以當您在離線時會存取它們。您隨時可以在「探索」&gt;「選項」中更改設定。</string>
-    <string name="shared_string_wifi_only">只有 WiFi</string>
+    <string name="shared_string_wifi_only">只有在 Wi-Fi</string>
     <string name="select_travel_book">選擇旅遊書籍</string>
     <string name="shared_string_travel_book">旅遊書籍</string>
     <string name="online_webpage_warning">此頁面僅在線上狀態提供。您想在網頁瀏覽器中開啟它嗎？</string>
@@ -3157,7 +3157,7 @@
     <string name="unlock_all_features">解鎖所有 OsmAnd 功能</string>
 
     <string name="monthly_map_updates">地圖更新：<b>每月</b></string>
-    <string name="daily_map_updates">地圖更新：<b>每天、每小時</b></string>
+    <string name="daily_map_updates">地圖更新：<b>每小時</b></string>
     <string name="paid_app">付費應用程式</string>
     <string name="paid_plugin">付費外掛程式</string>
     <string name="travel_card_update_descr">我們準備了在維基導遊資料的更新與修復，更新檔案以檢視它們。</string>
