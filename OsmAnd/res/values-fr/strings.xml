@@ -909,7 +909,27 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
 
     <string name="snap_to_road_descr">Déplacer la position sur la route en cours de navigation.</string>
     <string name="snap_to_road">Déplacer sur la route</string>
-    <string name="osmand_long_description_1000_chars">OsmAnd (OSM Automated Navigation Directions) OsmAnd est un logiciel libre de navigation exploitant une grande variété de données issues OpenStreetMap (OSM). Toutes les données (cartes vectorielles ou à base de tuiles) peuvent être stockées dans la mémoire du téléphone pour un usage hors-ligne. OsmAnd permet également le routage en ligne et hors-ligne avec des instructions vocales pas à pas. Fonctionnalités principales : - Fonctionne complètement hors-ligne (stockage des cartes téléchargées au format vectoriel ou tuile dans le périphérique de stockage) - Cartes hors-lignes compactes disponibles pour le monde entier - Téléchargement des cartes pour un pays ou une région directement depuis l\'application - Possibilité de superposer plusieurs couches, telles que des traces GPX ou de navigation, des points d\'intérêt (PI), des favoris, des courbes de niveau, les arrêts de transport public, et bien d\'autres cartes avec une transparence personnalisable - Recherche hors-ligne d\'adresses et de lieux (PI) - Navigation hors-ligne pour distances moyennes - Mode voiture, vélo et piéton avec : - Option de vue jour/nuit automatique - Option de zoom automatique lors des déplacements - Orientation automatique de la carte (fixe, boussole, cap) Limitations de la version gratuite de OsmAnd : - Nombre de téléchargement de cartes limité - Pas d\'accès aux points d\'intérêt Wikipédia hors-ligne. OsmAnd est activement développé et notre projet et ses progrès futurs dépendent des contributions financières pour financer le développement et le test de nouvelles fonctionnalités. Veuillez considérer l\'achat d\'OsmAnd+, le financement d\'une fonctionnalité spécifique ou une donation sur osmand.net.</string>
+    <string name="osmand_long_description_1000_chars">OsmAnd (OSM Automated Navigation Directions)
+\n
+\nOsmAnd est un logiciel libre de navigation par satellites utilisant les données du projet OpenStreetMap (OSM). Toutes les données (cartes vectorielles ou à base de tuiles) peuvent être stockées dans la mémoire de l\'appareil pour un usage hors-ligne. OsmAnd permet également le suivi d\'itinéraires en ligne et hors-ligne en fournissant des instructions visuelles et vocales pas à pas.
+\n
+\nFonctionnalités principales :
+\n- Fonctionne complètement hors-ligne
+\n- Cartes hors-lignes dans un format compact (vectoriel) disponibles pour le monde entier
+\n- Téléchargement des cartes pour un pays ou une région directement depuis l\'application
+\n- Possibilité de superposer plusieurs couches, telles que des traces GPX ou de navigation, des points d\'intérêt (PI), des favoris, des courbes de niveaux, les arrêts de transport public et bien d\'autres cartes avec une transparence personnalisable
+\n- Recherche hors-ligne d\'adresses et de lieux (PI)
+\n- Navigation hors-ligne sur des distances moyennes
+\n- Mode voiture, vélo et piéton
+\n- Option de vue jour/nuit automatique
+\n- Option de zoom automatique adapté à la vitesse de déplacement
+\n- Orientation automatique de la carte (fixe, boussole, direction du déplacement).
+\n
+\nLimitations de cette version gratuite d\'OsmAnd :
+\n- Nombre limité de téléchargements
+\n- Pas d\'accès aux points d\'intérêt Wikipédia hors-ligne.
+\n
+\nOsmAnd et le développement de nouvelles fonctionnalités dépendent de vos contributions. Vous pouvez acheté la version payante OsmAnd+ ou faire un don en vous rendant sur https://osmand.net.</string>
     <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OpenStreetMap Automated Navigation and Directions) est un logiciel open source de navigation basé sur les données cartographiques d\'OpenStreetMap. Toutes les données (cartes vectorielles ou à base de tuiles) peuvent être stockées sur l\'appareil pour un usage hors-ligne. En plus de la consultation des cartes, OsmAnd permet la navigation grâce à des instructions détaillées à l\'écran et à un guidage vocal.
 \n
 \nOsmAnd+, version payante de l\'application, n\'est pas limitée en nombre de téléchargements et permet d\'obtenir de nouvelles cartes, des mises à jour de cartes existantes ou encore des greffons et d\'autres données (courbes de niveaux, ...). En achetant OsmAnd+ vous supportez le projet et financez le développement de nouvelles fonctionnalités.
@@ -2370,7 +2390,7 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="osmand_plus_banner_desc">Téléchargements illimités des cartes, des mises à jour et des données pour le greffon Wikipédia.</string>
     <string name="donation_to_osm">Faire un don à la communauté OpenStreetMap</string>
     <string name="osm_live_subscription_desc">L\'abonnement permet de bénéficier des mises à jour horaires, quotidiennes, hebdomadaires et de télécharger de nouvelles cartes sans limite.</string>
-    <string name="osm_live_payment_desc">Le coût de l\'abonnement sera prélevé chaque mois. Vous avez la possibilité d\'annuler votre abonnement sur Google Play.</string>
+    <string name="osm_live_payment_desc">Abonnement mensuel. Vous pouvez l\'annuler à tout moment sur Google Play.</string>
     <string name="donation_to_osm_desc">Une partie de votre don sera reversée aux contributeurs OSM qui mettent à jour OpenStreetMap. Le coût de l\'abonnement reste identique.</string>
     <string name="driving_region_australia">Australie</string>
     <string name="lang_kab">Kabyle</string>
@@ -2662,7 +2682,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="index_item_depth_points_northern_hemisphere">Lignes de sonde marines pour l\'hémisphère nord</string>
     <string name="download_depth_countours">Lignes de sonde marines</string>
     <string name="nautical_maps">Cartes marines</string>
-    <string name="depth_contour_descr">Cartes contenant des lignes et des points de sonde indiquant la profondeur d\'eau.</string>
+    <string name="depth_contour_descr">Profondeur d\'eau, lignes et points de sonde, balisage maritime.</string>
     <string name="subscribe_email_error">Erreur</string>
     <string name="subscribe_email_desc">Inscrivez-vous à notre lettre d\'information et téléchargez 3 cartes supplémentaires gratuitement !</string>
     <string name="no_overlay">Sans sur-couche</string>
@@ -2674,7 +2694,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="quick_action_add_destination_desc">Appuyez sur ce bouton pour définir le centre de la carte comme nouvelle destination. L\'ancienne destination deviendra la dernière étape.</string>
     <string name="quick_action_replace_destination_desc">Appuyez sur ce bouton pour utiliser le centre de la carte comme destination en remplaçant la destination précédente.</string>
     <string name="quick_action_auto_zoom">Zoom automatique de la carte Actif / Inactif</string>
-    <string name="quick_action_auto_zoom_desc">Appuyez sur ce bouton pour activer ou désactiver le zoom automatique de la carte en fonction de votre vitesse.</string>
+    <string name="quick_action_auto_zoom_desc">Appuyez sur ce bouton pour activer ou désactiver le zoom automatique de la carte adapté à votre vitesse.</string>
     <string name="quick_action_auto_zoom_on">Activer le zoom automatique</string>
     <string name="quick_action_auto_zoom_off">Désactiver le zoom automatique</string>
     <string name="shared_string_paused">Mis en pause</string>
@@ -2722,7 +2742,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="nothing_found">Aucun résultat</string>
     <string name="increase_search_radius">Augmenter le rayon de recherche</string>
     <string name="nothing_found_descr">Modifiez la requête ou augmentez le rayon de recherche</string>
-    <string name="private_access_routing_req">Votre destination se situe dans une zone privée. Souhaitez-vous autoriser l\'accès aux zones privées pour cet itinéraire ?</string>
+    <string name="private_access_routing_req">Votre destination est située dans une zone privée. Souhaitez-vous autoriser l\'accès aux zones privées pour cet itinéraire ?</string>
     <string name="osmand_extended_description_part2">Navigation GPS
 \n • Vous pouvez naviguer en mode hors connexion (sans aucun frais de communication) ou en mode connecté
 \n • Guidage vocal pas-à-pas (voix enregistrées ou de synthèse)
@@ -2791,7 +2811,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="rendering_value_translucent_pink_name">Rose translucide</string>
     <string name="quick_action_resume_pause_navigation">Suspendre / Reprendre la Navigation</string>
     <string name="quick_action_resume_pause_navigation_descr">Appuyez sur ce bouton pour suspendre la navigation ou la reprendre après l\'avoir suspendue.</string>
-    <string name="quick_action_show_navigation_finish_dialog">Afficher la fenêtre de fin de navigation</string>
+    <string name="quick_action_show_navigation_finish_dialog">Afficher la fenêtre \"Navigation terminée\"</string>
     <string name="quick_action_start_stop_navigation">Démarrer / Arrêter la Navigation</string>
     <string name="quick_action_start_stop_navigation_descr">Appuyez sur ce bouton pour démarrer la navigation ou l\'arrêter lorsqu\'elle est en cours.</string>
     <string name="mappilary_no_internet_desc">Vous devez être connectés à Internet pour afficher les photos Mapillary.</string>
@@ -2913,7 +2933,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="marker_show_distance_descr">Sélectionnez comment indiquer sur la carte la distance et la direction des marques :</string>
     <string name="map_orientation_change_in_accordance_with_speed_descr">Indiquez ci-dessous à quelle vitesse l\'orientation doit basculer de \'Sens du déplacement\' à \'Boussole\'.</string>
     <string name="passed">Dernière utilisation : %1$s</string>
-    <string name="show_guide_line">Afficher les lignes de guidage</string>
+    <string name="show_guide_line">Afficher les indications de direction</string>
     <string name="show_arrows_on_the_map">Afficher les flèches sur la carte</string>
     <string name="show_passed">Afficher les visités</string>
     <string name="hide_passed">Masquer les visités</string>
@@ -2934,7 +2954,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="coordinates_format">Format des coordonnées</string>
     <string name="use_system_keyboard">Utiliser le clavier système</string>
     <string name="fast_coordinates_input_descr">Définissez le format des coordonnées (ce format est modifiable plus tard dans \'Options\').</string>
-    <string name="fast_coordinates_input">Saisie rapide des coordonnées</string>
+    <string name="fast_coordinates_input">Saisie rapide de coordonnées</string>
     <string name="routing_attr_avoid_ice_roads_fords_name">Éviter les routes sur glace, les fjords</string>
     <string name="routing_attr_avoid_ice_roads_fords_description">Éviter les routes sur glace et les fjords.</string>
     <string name="make_round_trip">Faire une boucle</string>
@@ -2942,7 +2962,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="osn_modify_dialog_error">Une erreur s\'est produite : la note n\'a pas été enregistrée</string>
     <string name="osn_modify_dialog_title">Modifier la note</string>
     <string name="context_menu_item_modify_note">Modifier la note OSM</string>
-    <string name="make_round_trip_descr">Copie le point de départ en tant que destination.</string>
+    <string name="make_round_trip_descr">Copier le Départ en tant que Destination.</string>
     <string name="rendering_value_darkyellow_name">Jaune foncé</string>
     <string name="show_map">Afficher la carte</string>
     <string name="route_is_calculated">Itinéraire calculé</string>
@@ -2962,12 +2982,12 @@ représentant la zone : %1$s x %2$s</string>
 	<string name="shared_string_back">Précédent</string>
 	<string name="view">Afficher</string>
 	<string name="waypoints_added_to_map_markers">Étapes ajoutées comme marques</string>
-	<string name="import_gpx_file_description">peut être importé comme Favoris ou comme Fichier d\'itinéraire.</string>
+	<string name="import_gpx_file_description">peut être importé comme Favoris ou Fichier de trace.</string>
     <string name="import_as_gpx">Importer comme fichier GPX</string>
     <string name="import_as_favorites">Importer comme Favoris</string>
     <string name="import_file">Importer fichier</string>
 	<string name="tap_on_map_to_hide_interface_descr">Un appui sur la carte bascule les boutons et gadgets.</string>
-    <string name="tap_on_map_to_hide_interface">Mode plein écran</string>
+    <string name="tap_on_map_to_hide_interface">Mode plein-écran</string>
     
     <string name="mark_passed">Marquer comme visité</string>
     <string name="rename_marker">Renommer la marque</string>
@@ -2994,10 +3014,10 @@ représentant la zone : %1$s x %2$s</string>
     <string name="empty_state_markers_history_desc">Les marques visitées s\'afficheront sur cet écran.</string>
     <string name="shared_string_two">Deux</string>
     <string name="shared_string_one">Une</string>
-    <string name="show_guide_line_descr">Afficher des instructions de guidage de votre position vers la marque active.</string>
+    <string name="show_guide_line_descr">Afficher les instructions de guidage de votre position vers les marques actives.</string>
     <string name="show_arrows_descr">Afficher une ou deux flèches indiquant la direction vers les marques actives.</string>
     <string name="distance_indication_descr">Indiquez comment afficher la distance avec les marques actives.</string>
-    <string name="active_markers_descr">Sélectionnez le nombre d\'indicateurs de direction à afficher.</string>
+    <string name="active_markers_descr">Sélectionnez le nombre de marques actives à afficher.</string>
     <string name="shared_string_more_without_dots">Plus</string>
     <string name="looking_for_tracks_with_waypoints">Rechercher des traces avec points de passage</string>
     <string name="empty_state_osm_edits">Créer et modifier des éléments OSM</string>
@@ -3031,9 +3051,9 @@ représentant la zone : %1$s x %2$s</string>
     <string name="context_menu_points_of_group">Tous les points du groupe</string>
     <string name="open_from">Ouvre à</string>
     <string name="open_till">Ouvert jusqu\'à</string>
-    <string name="will_close_at">Fermera à</string>
-    <string name="will_open_at">Ouvrira à</string>
-    <string name="will_open_on">Ouvrira à</string>
+    <string name="will_close_at">Ferme à</string>
+    <string name="will_open_at">Ouvre à</string>
+    <string name="will_open_on">Ouvre à</string>
     <string name="additional_actions">Actions supplémentaires</string>
     <string name="shared_string_actions">Actions</string>
     <string name="shared_string_marker">Marque</string>
@@ -3044,7 +3064,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="winter_and_ski_renderer">Hiver et ski</string>
     <string name="touring_view_renderer">Vue grand tourisme (contrastée et détaillée)</string>
     <string name="nautical_renderer">Maritime</string>
-<string name="will_open_tomorrow_at">Sera ouvert demain à</string>
+<string name="will_open_tomorrow_at">Ouvre demain à</string>
     <string name="release_2_9">\\022 Menu contextuel : affichage des horaires d\'ouverture des points d\'intérêt 
 \n 
 \n • Menu Transport : les itinéraires possibles sont maintenant en haut 
@@ -3079,16 +3099,16 @@ représentant la zone : %1$s x %2$s</string>
     <string name="tunnel_warning">En approche d\'un tunnel</string>
     <string name="show_tunnels">Tunnels</string>
 <string name="shared_string_current">Actuel</string>
-    <string name="last_intermediate_dest_description">Ajoute comme dernière étape à l\'itinéraire</string>
-    <string name="first_intermediate_dest_description">Ajoute comme première étape à l\'itinéraire</string>
-    <string name="subsequent_dest_description">Monter et créer comme destination</string>
+    <string name="last_intermediate_dest_description">Ajoute une étape</string>
+    <string name="first_intermediate_dest_description">Ajoute comme première étape</string>
+    <string name="subsequent_dest_description">Monter et définir comme destination</string>
     <string name="make_as_start_point">Utiliser comme Point de départ</string>
     <string name="map_import_error">Erreur d\'import de la carte</string>
     <string name="map_imported_successfully">Carte importée</string>
     <string name="enter_the_file_name">Saisissez le nom du fichier.</string>
     <string name="dd_mm_ss_format">DD°MM′SS″</string>
 	<string name="dd_dddddd_format">DD.DDDDDD°</string>
-	<string name="transport_nearby_routes">PROCHE</string>
+	<string name="transport_nearby_routes">A proximité</string>
     <string name="dd_ddddd_format">DD.DDDDD°</string>
 	<string name="dd_mm_mmmm_format">DD°MM.MMMM′</string>
 	<string name="dd_mm_mmm_format">DD°MM.MMM′</string>
@@ -3108,7 +3128,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="clear_all_intermediates">Effacer toutes les étapes</string>
     <string name="select_waypoints_category_description">Vous pouvez ajouter tous les points de la trace ou sélectionner des catégories différentes.</string>
     <string name="shared_string_total">Total</string>
-    <string name="nothing_found_in_radius">Rien n\'a été trouvé dans le rayon :</string>
+    <string name="nothing_found_in_radius">Aucun résultat :</string>
     <string name="waypoints_removed_from_map_markers">Étape retirée des marques</string>
     <string name="shared_string_travel">Voyage</string>
     <string name="shared_string_result">Résultat</string>
@@ -3125,7 +3145,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="images_cache">Cache d\'images</string>
     <string name="delete_search_history">Supprimer l\'historique de recherche</string>
     <string name="show_images">Afficher les images</string>
-    <string name="online_webpage_warning">Cette page est uniquement accessible en ligne, souhaitez-vous l’ouvrir dans un navigateur web ?</string>
+    <string name="online_webpage_warning">Page accessible uniquement en ligne, souhaitez-vous l’ouvrir dans un navigateur web ?</string>
     <string name="shared_string_dont">Ne pas faire</string>
     <string name="shared_string_do">Faire</string>
     <string name="shared_string_only_with_wifi">Seulement en Wifi</string>
@@ -3137,7 +3157,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="download_images">Téléchargez les images</string>
     <string name="purchase_dialog_title">Sélectionnez un plan</string>
     <string name="purchase_dialog_subtitle">Sélectionnez l\'élément adapté :</string>
-    <string name="purchase_dialog_travel_description">Pour lire des articles de voyage hors ligne, vous devez acheter l\'un des éléments suivants.</string>
+    <string name="purchase_dialog_travel_description">Pour lire des articles de voyage hors ligne, achetez l\'un des éléments suivants :</string>
     <string name="travel_guide_description">Consultez les guides Wikivoyage des lieux les plus intéressants au monde depuis OsmAnd et sans connexion Internet.</string>
     <string name="travel_guide">Guide de voyage</string>
     <string name="in_app_purchase">Achat via l\'application</string>
@@ -3152,8 +3172,8 @@ représentant la zone : %1$s x %2$s</string>
     <string name="contour_lines_sea_depth">Courbes de niveaux + Lignes de sonde marines</string>
     <string name="unlock_all_features">Activez toutes les fonctionnalités d\'OsmAnd</string>
 
-    <string name="monthly_map_updates">Mises à jour des cartes : <b>tous les mois</b></string>
-    <string name="daily_map_updates">Mises à jour des cartes : <b>tous les jours, toutes les heures</b></string>
+    <string name="monthly_map_updates">Mise à jour des cartes : <b>Tous les mois</b></string>
+    <string name="daily_map_updates">Mise à jour des cartes : <b>Toutes les heures</b></string>
     <string name="in_app_purchase_desc_ex">La validité de votre achat sera permanente.</string>
     <string name="travel_card_update_descr">Nous avons effectué des mises à jour et des corrections pour les données Wikivoyage, téléchargez le fichier pour les consulter.</string>
 	<string name="travel_card_download_descr">Télécharger ce fichier Wikivoyage pour afficher des articles sur les lieux sans connexion Internet.</string>
