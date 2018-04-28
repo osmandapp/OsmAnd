@@ -888,30 +888,28 @@
 
 
     <string name="osmand_short_description_80_chars">Mapy dla całego świata i nawigacja działająca w oparciu o stacjonarne jak i sieciowe mapy OSM</string>
-    <string name="osmand_long_description_1000_chars">"
- OsmAnd (OSM Automatyczne Nawigowanie Do celu)
-
-OsmAnd jest otwarto-źródłowym programem do nawigacji z dostępem do szerokiej gamy globalnych map OpenStreetMap (OSM). Wszystkie dane map (wektorowe lub kafelkowe) mogą być przechowywane na karcie pamięci telefonu do użytku offline. OsmAnd oferuje również nawigację w trybie offline i online zawierającą zapowiedzi głosowe.
-
- Niektóre z podstawowych funkcji:
- - Funkcjonowanie w trybie offline (przechowuje pobrane mapy wektorowe lub kafelkowe w pamięci urządzenia)
- - Dostępne kompaktowe mapy w trybie offline dla całego świata
- - Pobieranie map kraju lub regionu bezpośrednio z aplikacji
- - Możliwość nakładania kilku warstw map, takich jak GPX lub tras nawigacji, ciekawe miejsc, ulubionych, poziomic, przystanków komunikacji miejskiej, dodatkowych map z konfigurowalną przejrzystością
- - Wyszukiwanie offline adresów i Użytecznych Miejsc (UM)
- - Wyznaczanie w trybie offline tras na średnich dystansach
- - Tryby samochodowy, rowerowy i pieszy z:
- - opcjonalnym automatycznym przełączaniem widoku dzień/noc
- - opcjonalnym skalowaniem map w zależności od prędkości
- - opcjonalnym obracaniem map według kompasu lub kierunku ruchu
- - opcjonalnym wyświetlaniem wskazywania pasów, ograniczeń prędkości, głosami nagranymi i syntetyzowanymi (TTS)
-
- Ograniczenia w tej bezpłatnej wersji OsmAnd:
- - Limitowana liczba pobrań mapy
- - Brak dostępu do Użytecznych Miejsc z Wikipedii w trybie offline
-
- OsmAnd jest aktywnie rozwijany i dalszy rozwój jest uzależniony od wkładu pieniężnego na finansowanie rozwoju i testowania nowych funkcjonalności. Proszę rozważyć zakup OsmAnd+, lub finansowanie konkretnych nowych funkcji lub dokonania ogólnej darowizny na osmand.net.
- "</string>
+    <string name="osmand_long_description_1000_chars">"OsmAnd (OSM Automatyczne Nawigowanie Do celu)
+\n
+\nOsmAnd jest otwarto-źródłowym programem do nawigacji z dostępem do szerokiej gamy globalnych map OpenStreetMap (OSM). Wszystkie dane map (wektorowe lub kafelkowe) mogą być przechowywane na karcie pamięci telefonu do użytku offline. OsmAnd oferuje również nawigację w trybie offline i online zawierającą zapowiedzi głosowe.
+\n
+\n Niektóre z podstawowych funkcji:
+\n - Funkcjonowanie w trybie offline (przechowuje pobrane mapy wektorowe lub kafelkowe w pamięci urządzenia)
+\n - Dostępne kompaktowe mapy w trybie offline dla całego świata
+\n - Pobieranie map kraju lub regionu bezpośrednio z aplikacji
+\n - Możliwość nakładania kilku warstw map, takich jak GPX lub tras nawigacji, ciekawe miejsc, ulubionych, poziomic, przystanków komunikacji miejskiej, dodatkowych map z konfigurowalną przejrzystością
+\n - Wyszukiwanie offline adresów i Użytecznych Miejsc (UM)
+\n - Wyznaczanie w trybie offline tras na średnich dystansach
+\n - Tryby samochodowy, rowerowy i pieszy z opcjonalnym:
+\n  - automatycznym przełączaniem widoku dzień/noc
+\n  - skalowaniem map w zależności od prędkości
+\n  - obracaniem map według kompasu lub kierunku ruchu
+\n  - wyświetlaniem wskazywania pasów, ograniczeń prędkości, głosami nagranymi i syntetyzowanymi (TTS)
+\n
+\n Ograniczenia w tej bezpłatnej wersji OsmAnd:
+\n - Limitowana liczba pobrań mapy
+\n - Brak dostępu do Użytecznych Miejsc z Wikipedii w trybie offline
+\n
+\n OsmAnd jest aktywnie rozwijany i dalszy rozwój jest uzależniony od wkładu pieniężnego na finansowanie rozwoju i testowania nowych funkcjonalności. Proszę rozważyć zakup OsmAnd+, lub finansowanie konkretnych nowych funkcji lub dokonania ogólnej darowizny na https://osmand.net."</string>
     <string name="osmand_plus_short_description_80_chars">OsmAnd to aplikacja open source do nawigacji obsługująca mapy offline i online</string>
     <string name="avoid_motorway">Autostrad</string>
     <string name="snap_to_road_descr">Przyciąga położenie do dróg podczas nawigowania.</string>
@@ -1120,7 +1118,7 @@ OsmAnd jest otwarto-źródłowym programem do nawigacji z dostępem do szerokiej
     <string name="local_openstreetmap_act_title">Modyfikacje OSM</string>
     <string name="shared_string_more_actions">Więcej czynności</string>
     <string name="favourites_list_activity">Wybieranie ulubionego miejsca</string>
-    <string name="download_using_mobile_internet">Nie nawiązano połączenia za pośrednictwem Wi-Fi. Kontynuować pobieranie używając obecnego połączenia?</string>
+    <string name="download_using_mobile_internet">Brak połączenia z Wi-Fi. Użyć do pobierania obecnego połączenia z Internetem?</string>
     <string name="clear_destination">Usuń cel trasy</string>
     <string name="cancel_navigation">Zatrzymaj nawigację</string>
     <string name="cancel_route">Odrzucenie trasy</string>
@@ -1280,9 +1278,9 @@ OsmAnd jest otwarto-źródłowym programem do nawigacji z dostępem do szerokiej
     <string name="copying_osmand_files_descr">Kopiowanie plików OsmAnd do nowego położenia (%s)…</string>
     <string name="copying_osmand_files">Kopiowanie plików danych OsmAnd…</string>
     
-    <string name="android_19_location_disabled">"Od wersji 4.4 KitKat nie można pobierać ani aktualizować map do poprzedniego katalogu przechowywania (%s). Zmienić  położenie przechowywania na prawidłowe i skopiować do niego wszystkie pliki?
-\n Uwaga 1: stare pliki pozostaną nienaruszone (mogą być usunięte ręcznie).
-\n Uwaga 2: w nowym położeniu nie będzie możliwe współdzielenie tych samych plików pomiędzy OsmAnd i OsmAnd+."</string>
+    <string name="android_19_location_disabled">Od wersji 4.4 KitKat nie można pobierać ani aktualizować map do dawnego katalogu przechowywania (%s). Skopiować wszystkie pliki OsmAnd do nowej lokalizacji przechowywania? 
+\n Uwaga 1: stare pliki pozostaną nienaruszone (mogą być usunięte ręcznie). 
+\n Uwaga 2: w nowym położeniu nie będzie możliwe współdzielenie tych samych plików pomiędzy OsmAnd i OsmAnd+.</string>
     <string name="routing_attr_prefer_motorway_name">Preferuj autostrady</string>
     <string name="routing_attr_prefer_motorway_description">Preferuj autostrady.</string>
     
@@ -1860,7 +1858,7 @@ Długość %2$s</string>
     <string name="lang_ht">Haitański</string>
     <string name="lang_gl">Galicyjski</string>
     <string name="lang_et">Estoński</string>
-    <string name="archive_wikipedia_data">Posiadasz stare niezgodne dane Wikipedii. Czy chcesz je zarchiwizować?</string>
+    <string name="archive_wikipedia_data">Posiadasz stare niezgodne dane Wikipedii. Zarchiwizować je?</string>
     <string name="download_wikipedia_files">Pobrać dodatkowe dane Wikipedii (%1$s MB)?</string>
     <string name="gps_network_not_enabled">Usługa lokalizacji nie jest włączona. Włączyć ją?</string>
     <string name="disable_recording_once_app_killed_descrp">Po zakończeniu działania aplikacji wstrzymuje rejestrowanie śladu (ikona działania w tle znika z paska powiadomień)</string>
@@ -2199,7 +2197,7 @@ Długość %2$s</string>
     <string name="map_marker_2nd">Drugi znacznik mapy</string>
     <string name="shared_string_toolbar">Pasek narzędzi</string>
     <string name="shared_string_widgets">Widżety</string>
-    <string name="add_points_to_map_markers_q">Dodać wszystkie punkty do znaczników mapy?</string>
+    <string name="add_points_to_map_markers_q">Dodać wszystkie punkty jako znaczniki mapy?</string>
     <string name="shared_string_add_to_map_markers">Dodaj znacznik mapy</string>
     <string name="select_map_markers">Wybierz znacznik mapy</string>
     <string name="shared_string_reverse_order">Odwróć kolejność</string>
@@ -2368,7 +2366,7 @@ Długość %2$s</string>
     <string name="skip_map_downloading">Pomiń pobieranie map</string>
     <string name="first_usage_greeting">Otrzymuj wskazówki dojazdu i odkrywaj nowe miejsca bez połączenia z Internetem</string>
     <string name="search_another_country">Proszę wybrać inny region</string>
-    <string name="skip_map_downloading_desc">Nie zainstalowano map w trybie offline. Można wybrać mapę z listy lub pobrać mapy później za pośrednictwem polecenia menu - %1$s.</string>
+    <string name="skip_map_downloading_desc">Nie zainstalowano map w trybie offline. Można wybrać mapę z listy lub pobrać mapy później za pośrednictwem polecenia \"Menu - %1$s\".</string>
     <string name="get_it">Pobierz</string>
     <string name="get_for">Pobierz na %1$s</string>
     <string name="get_for_month">Pobierz na %1$s miesięcy</string>
@@ -2390,9 +2388,9 @@ Długość %2$s</string>
     <string name="no_update_info">Pomijanie aktualizacji</string>
     <string name="update_all_maps_now">Uaktualnić wszystkie mapy?</string>
     <string name="clear_tile_data">Wyczyść wszystkie kafelki</string>
-    <string name="osm_live_payment_desc">Opłaty za subskrypcję pobierane będą co miesiąc. Zawsze można z niej zrezygnować za pośrednictwem Google Play.</string>
+    <string name="osm_live_payment_desc">Opłata za subskrypcję na miesiąc. Anuluj ją w Google Play w dowolnym momencie.</string>
     <string name="donation_to_osm">Dotacja dla społeczności OpenStreetMap</string>
-    <string name="donation_to_osm_desc">Część z dotacji zostanie przekazana użytkownikom OSM, którzy wprowadzają zmiany na mapie OpenStreetMap. Koszt subskrypcji pozostaje taki sam.</string>
+    <string name="donation_to_osm_desc">Część z dotacji jest przekazywana użytkownikom OSM, którzy wprowadzają zmiany na mapie OpenStreetMap. Koszt subskrypcji pozostaje taki sam.</string>
     <string name="osm_live_subscription_desc">Subskrypcje pozwalają na cogodzinne, codzienne i cotygodniowe uaktualnienia i nieograniczone liczbą pobieranie map całego świata.</string>
     <string name="driving_region_australia">Australia</string>
     <string name="lang_kab">Kabylski</string>
@@ -2401,7 +2399,7 @@ Długość %2$s</string>
     <string name="save_filter">Zapisz filtr</string>
     <string name="delete_filter">Usuń filtr</string>
     <string name="new_filter">Nowy filtr</string>
-    <string name="new_filter_desc">Proszę wprowadzić nazwę nowego filtra. Zostanie on dodany do karty kategorii.</string>
+    <string name="new_filter_desc">Proszę wprowadzić nazwę nowego filtra. Zostanie on dodany do karty \"Kategorie\".</string>
     <string name="selected_categories">Wybrane kategorie</string>
     <string name="create_custom_poi">Tworzenie własnego filtra</string>
     <string name="custom_search">Własne wyszukiwanie</string>
@@ -2631,7 +2629,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="do_not_show_startup_messages">Ukrywanie wiadomości podczas uruchamiania</string>
     <string name="do_not_show_startup_messages_desc">Nie wyświetlaj rabatów na program i wiadomości specjalnych o wydarzeniach lokalnych.</string>
     <string name="parking_options">Opcje parkowania</string>
-    <string name="full_version_thanks">Dziękujemy za zakup pełnej wersji OsmAnd!</string>
+    <string name="full_version_thanks">Dziękujemy za zakup pełnej wersji OsmAnd.</string>
     <string name="right_side_navigation">Ruch prawostronny</string>
     <string name="driving_region_automatic">Automatyczny</string>
     <string name="restore_purchases">Przywróć zakupy</string>
@@ -2666,11 +2664,9 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="analyze_on_map">Analizuj na mapie</string>
     <string name="fonts_header">Czcionki mapy</string>
     <string name="shared_string_paused">Wstrzymano</string>
-    <string name="osmand_extended_description_part1">"
- OsmAnd (OSM Automatyczne Nawigowanie Do celu) mapą i aplikacją nawigacji z dostępem do darmowych światowych wysokiej jakości danych OpenStreetMap (OSM).
-
- Rozkoszuj się głosową i optyczną nawigacją, przeglądaniem użytecznych miejsc (ang. POI), tworzeniem i zarządzaniem śladami GPX, wyświetlaniem poziomic i informacji o wysokości (przez zewnętrzną wtyczkę), wyborem między trybami samochodowym, rowerowym i pieszym, edycją OSM i więcej.
- "</string>
+    <string name="osmand_extended_description_part1">OsmAnd (OSM Automatyczne Nawigowanie Do celu) mapą i aplikacją nawigacji z dostępem do darmowych światowych wysokiej jakości danych OpenStreetMap (OSM).
+\n
+\nRozkoszuj się głosową i optyczną nawigacją, przeglądaniem użytecznych miejsc (ang. POI), tworzeniem i zarządzaniem śladami GPX, wyświetlaniem poziomic i informacji o wysokości (przez zewnętrzną wtyczkę), wyborem między trybami samochodowym, rowerowym i pieszym, edycją OSM i więcej.</string>
     <string name="select_street">Wybierz ulicę</string>
     <string name="shared_string_in_name">w %1$s</string>
     <string name="shared_string_overview">Podsumowanie</string>
@@ -2700,10 +2696,10 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="route_is_too_long_v2">Proszę dodać punkty pośrednie, jeżeli nie otrzymasz wyniku dla tej długiej trasy w ciągu 10 minut.</string>
     <string name="save_poi_too_many_uppercase">Nazwa zawiera zbyt wiele wielkich liter. Czy chcesz kontynuować?</string>
     <string name="shared_string_plugin">Wtyczka</string>
-    <string name="srtm_menu_download_descr">Aby wyświetlić poziomice na mapie, należy pobrać mapę poziomic tego obszaru.</string>
+    <string name="srtm_menu_download_descr">Pobierz mapę \"Poziomice\" do użycia dla tego obszaru.</string>
     <string name="hide_from_zoom_level">Ukrywanie od stopnia przybliżenia</string>
     <string name="hillshade_purchase_header">Zainstaluj wtyczkę \"Poziomice\", by pokazać je na mapie</string>
-    <string name="hillshade_menu_download_descr">Aby wyświetlić cieniowanie rzeźby terenu, należy pobrać specjalny podkład dla tego regionu.</string>
+    <string name="hillshade_menu_download_descr">Pobierz mapę \"Cieniowanie Rzeźby Terenu\" dla tego regionu.</string>
     <string name="srtm_purchase_header">Aby wyświetlić poziomice na mapie, należy zakupić i zainstalować wtyczkę \'Poziomice\'</string>
     <string name="quick_action_showhide_osmbugs_title">Przełącz wyświetlanie uwag OSM</string>
     <string name="quick_action_osmbugs_show">Pokaż uwagi OSM</string>
@@ -2712,7 +2708,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
 \n
 \nJest możliwe pobranie map większości krajów na świecie! Od Afganistanu po Zimbabwe, przez Australię po USA. Argentyna, Brazylia, Kanada, Francja, Niemcy, Polska, Meksyk, Wielka Brytania, Hiszpania…</string>
     <string name="sorted_by_distance">Posortowane wg odległości</string>
-    <string name="quick_action_showhide_osmbugs_descr">Naciśnięcie przycisku wyświetla lub ukrywa uwago OSM na mapie.</string>
+    <string name="quick_action_showhide_osmbugs_descr">Naciśnięcie przycisku wyświetla lub ukrywa uwagi OSM na mapie.</string>
     <string name="restart_search">Rozpocznij ponownie wyszukiwanie</string>
     <string name="increase_search_radius">Zwiększ promień wyszukiwania</string>
     <string name="nothing_found">Nic nie odnaleziono</string>
@@ -2903,7 +2899,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="show_guide_line_descr">Wyświetla na mapie linię łączącą aktualne położenie z położeniem aktywnego znacznika.</string>
     <string name="show_arrows_descr">Wyświetla na mapie jedną lub dwie strzałki wskazujące kierunek do aktywnych znaczników.</string>
     <string name="distance_indication_descr">Wybiera sposób wyświetlania odległości od aktywnego znacznika.</string>
-    <string name="active_markers_descr">Wybiera liczbę wyświetlanych wskaźników kierunku.</string>
+    <string name="active_markers_descr">Wybiera liczbę wyświetlanych aktywnych znaczników.</string>
     <string name="looking_for_tracks_with_waypoints">Wyszukiwanie śladów z punktami</string>
     <string name="shared_string_more_without_dots">Więcej</string>
     <string name="appearance_on_the_map">Wygląd na mapie</string>
@@ -2957,8 +2953,8 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="nautical_renderer">Żeglarstwo</string>
 <string name="make_as_start_point">Ustal jako punkt początkowy</string>
     <string name="shared_string_current">Aktualne</string>
-    <string name="last_intermediate_dest_description">Dodaje ostatni cel pośredni na trasie</string>
-    <string name="first_intermediate_dest_description">Dodaje pierwszy cel pośredni na trasie</string>
+    <string name="last_intermediate_dest_description">Dodaje cel pośredni</string>
+    <string name="first_intermediate_dest_description">Dodaje pierwszy cel pośredni</string>
     <string name="show_closed_notes">Wyświetl zamknięte uwagi</string>
     <string name="switch_osm_notes_visibility_desc">Przełącza wyświetlanie uwag OSM na mapie.</string>
     <string name="gpx_file_desc">GPX - odpowiedni do eksportowania danych do JOSM i innych edytorów OSM.</string>
@@ -2981,7 +2977,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="shared_string_right">Z prawej</string>
     <string name="shared_string_left">Z lewej</string>
     <string name="show_number_pad">Wyświetl klawiaturę numeryczną</string>
-    <string name="subsequent_dest_description">Przesuń cel w górę i utwórz cel</string>
+    <string name="subsequent_dest_description">Przesuń cel w górę i utwórz go</string>
     <string name="empty_state_markers_history_desc">Na tym ekranie zostaną wyświetlone znaczniki oznaczone jako pominięte.</string>
     <string name="mark_passed">Oznacz jako pominięty</string>
     <string name="enter_lon">Wprowadź długość geograficzną</string>
@@ -2998,7 +2994,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
 	<string name="north_abbreviation">Pn.</string>
 	<string name="optional_point_name">Dodatkowa nazwa punktu</string>
     <string name="transport_nearby_routes_within">Trasy w pobliżu</string>
-    <string name="transport_nearby_routes">W POBLIŻU</string>
+    <string name="transport_nearby_routes">W pobliżu</string>
     <string name="enter_the_file_name">Proszę wprowadzić nazwę pliku.</string>
     <string name="map_import_error">Błąd importowania mapy</string>
     <string name="map_imported_successfully">Zaimportowano mapę</string>
@@ -3029,7 +3025,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="rendering_attr_whiteWaterSports_name">Sporty spływowe</string>
     <string name="group_deleted">Usunięto grupę</string>
     <string name="clear_all_intermediates">Wyczyść wszystkie punkty pośrednie</string>
-    <string name="nothing_found_in_radius">Nie odnaleziono niczego w promieniu:</string>
+    <string name="nothing_found_in_radius">Nic nie znaleziono:</string>
     <string name="select_waypoints_category_description">Można dodać wszystkie punkty pośrednie trasy lub wybrać osobne kategorie.</string>
     <string name="shared_string_total">Łącznie</string>
     <string name="shared_string_travel">Podróż</string>
@@ -3048,15 +3044,16 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="shared_string_do">Tak</string>
     <string name="shared_string_only_with_wifi">Tylko z WiFi</string>
     <string name="wikivoyage_download_pics">Pobierz zdjęcia</string>
-    <string name="wikivoyage_download_pics_descr">Możemy pobierać i pokazywać obrazy w artykułach i przechowywać je na urządzeniu, żebyś miał do nich dostęp w trybie offline. Możesz zawsze zmienić ustawienia w Przeglądaj &gt; Opcje.</string>
-    <string name="shared_string_wifi_only">Tylko WiFi</string>
+    <string name="wikivoyage_download_pics_descr">Obrazy z artykułów mogą być pobrane w celu użycia w trybie offline.
+\nMożesz zawsze zmienić ustawienia w \"Przeglądaj\" → \"Opcje\".</string>
+    <string name="shared_string_wifi_only">Tylko przez Wi-Fi</string>
     <string name="select_travel_book">Wybierz podręcznik podróży</string>
     <string name="shared_string_travel_book">Podręcznik podróży</string>
-    <string name="online_webpage_warning">Ta strona jest dostępna tylko w trybie online. Czy chcesz ją otworzyć w przeglądarce internetowej?</string>
+    <string name="online_webpage_warning">Strona jest dostępna tylko w trybie online. Otworzyć ją w przeglądarce internetowej?</string>
     <string name="delete_search_history">Usuń historię wyszukiwania</string>
     <string name="download_images">Pobieranie obrazów</string>
     <string name="monthly_map_updates">Uaktualnienia map: <b>każdego miesiąca</b></string>
-    <string name="daily_map_updates">Uaktualnienia map: <b>każdego dnia, o każdej godzinie</b></string>
+    <string name="daily_map_updates">Uaktualnienia map: <b>co godzinę</b></string>
     <string name="wikivoyage_offline">Wikipodróże offline</string>
     
     <string name="unlimited_downloads">Nieograniczone pobrania</string>
@@ -3086,4 +3083,6 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="start_editing">Rozpocznij edycję</string>
     <string name="get_unlimited_access">Uzyskaj nieograniczony dostęp</string>
     <string name="welcome_to_open_beta">Witaj w otwartej wersji beta!</string>
+    <string name="wikipedia_offline">Wikipedia offline</string>
+    <string name="index_item_world_wikivoyage">Światowe artykuły Wikipodróży</string>
     </resources>
