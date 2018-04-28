@@ -11,6 +11,7 @@ import android.support.annotation.DrawableRes;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.AppCompatImageView;
@@ -36,6 +37,7 @@ import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseTaskType;
 import net.osmand.plus.liveupdates.OsmLiveActivity;
+import net.osmand.plus.liveupdates.SubscriptionFragment;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
 import net.osmand.plus.widgets.TextViewEx;
 
@@ -52,6 +54,10 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 
 	private View osmLiveCardButton;
 	private View planTypeCardButton;
+
+	public interface ChoosePlanDialogListener {
+		void onChoosePlanDialogDismissed();
+	}
 
 	public enum OsmAndFeature {
 		WIKIVOYAGE_OFFLINE(R.string.wikivoyage_offline),
@@ -132,15 +138,16 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 	@NonNull
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
+		Activity ctx = requireActivity();
 		int themeId = nightMode ? R.style.OsmandDarkTheme_DarkActionbar : R.style.OsmandLightTheme_DarkActionbar_LightStatusBar;
-		Dialog dialog = new Dialog(getContext(), themeId);
+		Dialog dialog = new Dialog(ctx, themeId);
 		Window window = dialog.getWindow();
 		if (window != null) {
 			if (!getSettings().DO_NOT_USE_ANIMATIONS.get()) {
 				window.getAttributes().windowAnimations = R.style.Animations_Alpha;
 			}
 			if (Build.VERSION.SDK_INT >= 21) {
-				window.setStatusBarColor(ContextCompat.getColor(getContext(), getStatusBarColor()));
+				window.setStatusBarColor(ContextCompat.getColor(ctx, getStatusBarColor()));
 			}
 		}
 		return dialog;
@@ -188,6 +195,15 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 	@ColorRes
 	protected int getStatusBarColor() {
 		return nightMode ? R.color.status_bar_wikivoyage_dark : R.color.status_bar_wikivoyage_light;
+	}
+
+	@Override
+	public void dismiss() {
+		super.dismiss();
+		Activity activity = getActivity();
+		if (activity != null && activity instanceof ChoosePlanDialogListener) {
+			((ChoosePlanDialogListener) activity).onChoosePlanDialogDismissed();
+		}
 	}
 
 	public OsmandApplication getOsmandApplication() {
@@ -298,13 +314,17 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 	}
 
 	private void subscript() {
-		Activity ctx = getActivity();
+		FragmentActivity ctx = getActivity();
 		if (ctx != null) {
-			app.logEvent(ctx, "click_subscribe_live_osm");
-			Intent intent = new Intent(ctx, OsmLiveActivity.class);
-			intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-			intent.putExtra(OsmLiveActivity.OPEN_SUBSCRIPTION_INTENT_PARAM, true);
-			ctx.startActivity(intent);
+			if (ctx instanceof OsmLiveActivity) {
+				SubscriptionFragment subscriptionFragment = new SubscriptionFragment();
+				subscriptionFragment.show(ctx.getSupportFragmentManager(), SubscriptionFragment.TAG);
+			} else {
+				Intent intent = new Intent(ctx, OsmLiveActivity.class);
+				intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+				intent.putExtra(OsmLiveActivity.OPEN_SUBSCRIPTION_INTENT_PARAM, true);
+				ctx.startActivity(intent);
+			}
 		}
 	}
 

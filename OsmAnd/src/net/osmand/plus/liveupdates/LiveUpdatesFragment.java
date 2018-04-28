@@ -88,6 +88,7 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppPurc
 	private ExpandableListView listView;
 	private LocalIndexesAdapter adapter;
 	private AsyncTask<Void, LocalIndexInfo, List<LocalIndexInfo>> loadLocalIndexesTask;
+	private boolean showSettingsOnly;
 
 	private ProgressBar progressBar;
 	private boolean processing;
@@ -110,6 +111,9 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppPurc
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setHasOptionsMenu(true);
+		if (getActivity() instanceof OsmLiveActivity) {
+			showSettingsOnly = ((OsmLiveActivity) getActivity()).isShowSettingOnly();
+		}
 	}
 
 	@Override
@@ -119,7 +123,9 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppPurc
 		listView = (ExpandableListView) view.findViewById(android.R.id.list);
 
 		View bottomShadowView = inflater.inflate(R.layout.card_bottom_divider, listView, false);
-		listView.addFooterView(bottomShadowView);
+		if (!showSettingsOnly) {
+			listView.addFooterView(bottomShadowView);
+		}
 		adapter = new LocalIndexesAdapter(this);
 		listView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
 			@Override
@@ -158,7 +164,9 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppPurc
 		}
 		listView.setAdapter(adapter);
 
-		loadLocalIndexesTask = new LoadLocalIndexTask(adapter, this).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		if (!showSettingsOnly) {
+			loadLocalIndexesTask = new LoadLocalIndexTask(adapter, this).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		}
 		return view;
 	}
 
@@ -169,14 +177,20 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppPurc
 			if (getSettings().LIVE_UPDATES_PURCHASED.get()) {
 				ImageView statusIcon = (ImageView) subscriptionHeader.findViewById(R.id.statusIcon);
 				TextView statusTextView = (TextView) subscriptionHeader.findViewById(R.id.statusTextView);
+				TextView regionNameHeaderTextView = (TextView) subscriptionHeader.findViewById(R.id.regionHeaderTextView);
 				TextView regionNameTextView = (TextView) subscriptionHeader.findViewById(R.id.regionTextView);
 				statusTextView.setText(getString(R.string.osm_live_active));
 				statusIcon.setImageDrawable(getMyApplication().getIconsCache().getThemedIcon(R.drawable.ic_action_done));
-
+				regionNameHeaderTextView.setText(R.string.osm_live_support_region);
 				String countryName = getSettings().BILLING_USER_COUNTRY.get();
 				if (Algorithms.isEmpty(countryName)) {
-					WorldRegion world = getMyApplication().getRegions().getWorldRegion();
-					countryName = world.getLocaleName();
+					if (getSettings().BILLING_USER_COUNTRY_DOWNLOAD_NAME.get().equals(OsmandSettings.BILLING_USER_DONATION_NONE_PARAMETER)) {
+						regionNameHeaderTextView.setText(R.string.default_buttons_support);
+						countryName = getString(R.string.osmand_team);
+					} else {
+						WorldRegion world = getMyApplication().getRegions().getWorldRegion();
+						countryName = world.getLocaleName();
+					}
 				}
 				regionNameTextView.setText(countryName);
 
@@ -228,7 +242,9 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppPurc
 	@Override
 	public void onDestroyView() {
 		super.onDestroyView();
-		loadLocalIndexesTask.cancel(true);
+		if (loadLocalIndexesTask != null) {
+			loadLocalIndexesTask.cancel(true);
+		}
 	}
 
 	@Override
@@ -461,7 +477,9 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppPurc
 
 		@Override
 		public int getChildrenCount(int groupPosition) {
-			if (groupPosition == SHOULD_UPDATE_GROUP_POSITION) {
+			if (showSettingsOnly) {
+				return 0;
+			}else if (groupPosition == SHOULD_UPDATE_GROUP_POSITION) {
 				return dataShouldUpdate.size();
 			} else if (groupPosition == SHOULD_NOT_UPDATE_GROUP_POSITION) {
 				return dataShouldNotUpdate.size();
@@ -483,7 +501,11 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppPurc
 
 		@Override
 		public int getGroupCount() {
-			return dataShouldNotUpdate.size() == 0 ? 1 : 2;
+			if (showSettingsOnly) {
+				return 0;
+			} else {
+				return dataShouldNotUpdate.size() == 0 ? 1 : 2;
+			}
 		}
 
 		@Override
