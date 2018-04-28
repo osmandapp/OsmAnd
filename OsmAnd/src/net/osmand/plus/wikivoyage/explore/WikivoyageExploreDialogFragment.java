@@ -165,32 +165,6 @@ public class WikivoyageExploreDialogFragment extends WikivoyageBaseDialogFragmen
 		new LoadWikivoyageData(this).execute();
 	}
 
-	private static class LoadWikivoyageData extends AsyncTask<Void, Void, Void> {
-
-		private WeakReference<WikivoyageExploreDialogFragment> weakReference;
-		private TravelDbHelper travelDbHelper;
-
-		LoadWikivoyageData(WikivoyageExploreDialogFragment fragment) {
-			travelDbHelper = fragment.getMyApplication().getTravelDbHelper();
-			weakReference = new WeakReference<WikivoyageExploreDialogFragment>(fragment);
-		}
-
-		@Override
-		protected Void doInBackground(Void... params) {
-			travelDbHelper.loadDataForSelectedTravelBook();
-			return null;
-		}
-
-		@Override
-		protected void onPostExecute(Void result) {
-			WikivoyageExploreDialogFragment option = weakReference.get();
-			if (option != null && option.isResumed()) {
-				option.onDataLoaded();
-			}
-		}
-
-	}
-
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
@@ -238,6 +212,31 @@ public class WikivoyageExploreDialogFragment extends WikivoyageBaseDialogFragmen
 			return true;
 		} catch (RuntimeException e) {
 			return false;
+		}
+	}
+
+	private static class LoadWikivoyageData extends AsyncTask<Void, Void, Void> {
+
+		private WeakReference<WikivoyageExploreDialogFragment> weakReference;
+		private TravelDbHelper travelDbHelper;
+
+		LoadWikivoyageData(WikivoyageExploreDialogFragment fragment) {
+			travelDbHelper = fragment.getMyApplication().getTravelDbHelper();
+			weakReference = new WeakReference<>(fragment);
+		}
+
+		@Override
+		protected Void doInBackground(Void... params) {
+			travelDbHelper.loadDataForSelectedTravelBook();
+			return null;
+		}
+
+		@Override
+		protected void onPostExecute(Void result) {
+			WikivoyageExploreDialogFragment fragment = weakReference.get();
+			if (fragment != null && fragment.isResumed()) {
+				fragment.onDataLoaded();
+			}
 		}
 	}
 
