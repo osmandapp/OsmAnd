@@ -497,18 +497,17 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 	protected void closeFragment() {
 		int backStackEntryCount = getFragmentManager().getBackStackEntryCount();
 		int pop = -1;
-		for(int i = 0; i < backStackEntryCount; i++) {
+		for(int i = backStackEntryCount - 1; i >= 0; i--) {
 			BackStackEntry entry = getFragmentManager().getBackStackEntryAt(i);
 			if(!TAG.equals(entry.getName())) {
 				pop = i;
+				break;
 			}
-			
 		}
 		if(pop == -1) {
 			dismiss();
 		} else {
 			getFragmentManager().popBackStackImmediate(pop, 0);
 		}
-//		getFragmentManager().popBackStackImmediate(WikivoyageExploreDialogFragment.TAG, 0);
 	}
 }
