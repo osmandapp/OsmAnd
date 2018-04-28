@@ -109,7 +109,7 @@ public class WikivoyageArticleNavigationFragment extends MenuBottomSheetDialogFr
 			@Override
 			public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
 				WikivoyageSearchResult articleItem = (WikivoyageSearchResult) listAdapter.getGroup(groupPosition);
-				if (articleItem.getCityId() == -1) {
+				if (articleItem.getCityId() == UNDEFINED) {
 					Toast.makeText(getContext(), R.string.wiki_article_not_found, Toast.LENGTH_LONG).show();
 				} else {
 					sendResults(articleItem.getCityId());
