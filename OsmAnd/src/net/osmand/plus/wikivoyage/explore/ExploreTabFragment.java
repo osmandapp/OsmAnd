@@ -46,7 +46,6 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIn
 
 	private IndexItem indexItem;
 
-	private File selectedTravelBook;
 	private boolean downloadIndexesRequested;
 	private boolean downloadUpdateCardAdded;
 
@@ -72,7 +71,6 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIn
 		final List<BaseTravelCard> items = new ArrayList<>();
 		final OsmandApplication app = getMyApplication();
 
-		checkSelectedTravelBook();
 		startEditingTravelCard = new StartEditingTravelCard(app, nightMode);
 		addOpenBetaTravelCard(items, nightMode);
 		if (app.getTravelDbHelper().getSelectedTravelBook() != null) {
@@ -86,6 +84,23 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIn
 		}
 		items.add(startEditingTravelCard);
 		adapter.setItems(items);
+		
+		checkToAddDownloadTravelCard();
+	}
+	
+	private void checkToAddDownloadTravelCard() {
+		final OsmandApplication app = getMyApplication();
+		final DownloadIndexesThread downloadThread = app.getDownloadThread();
+
+		if (!downloadThread.getIndexes().isDownloadedFromInternet) {
+			downloadIndexesRequested = true;
+			downloadThread.runReloadIndexFilesSilent();
+		} else {
+			indexItem = downloadThread.getIndexes().getWikivoyageItem(getWikivoyageFileName());
+			IndexItem current = downloadThread.getCurrentDownloadingItem();
+			boolean loadingInProgress = current != null && indexItem != null && current == indexItem;
+			addDownloadUpdateCard(loadingInProgress);
+		}
 	}
 	
 	
@@ -132,7 +147,7 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIn
 		final OsmandApplication app = getMyApplication();
 
 		boolean outdated = indexItem != null && indexItem.isOutdated();
-
+		File selectedTravelBook = app.getTravelDbHelper().getSelectedTravelBook();
 		if (selectedTravelBook == null || outdated) {
 			downloadUpdateCard = new TravelDownloadUpdateCard(app, nightMode, !outdated);
 			downloadUpdateCard.setLoadingInProgress(loadingInProgress);
@@ -167,6 +182,7 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIn
 
 	@NonNull
 	private String getWikivoyageFileName() {
+		File selectedTravelBook = getMyApplication().getTravelDbHelper().getSelectedTravelBook();
 		return selectedTravelBook == null ? WORLD_WIKIVOYAGE_FILE_NAME : selectedTravelBook.getName();
 	}
 
@@ -176,21 +192,7 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIn
 	}
 
 
-	private void checkSelectedTravelBook() {
-		final OsmandApplication app = getMyApplication();
-		final DownloadIndexesThread downloadThread = app.getDownloadThread();
-		selectedTravelBook = app.getTravelDbHelper().getSelectedTravelBook();
-
-		if (!downloadThread.getIndexes().isDownloadedFromInternet) {
-			downloadIndexesRequested = true;
-			downloadThread.runReloadIndexFilesSilent();
-		} else {
-			indexItem = downloadThread.getIndexes().getWikivoyageItem(getWikivoyageFileName());
-			IndexItem current = downloadThread.getCurrentDownloadingItem();
-			boolean loadingInProgress = current != null && indexItem != null && current == indexItem;
-			addDownloadUpdateCard(loadingInProgress);
-		}
-	}
+	
 
 	private void addOpenBetaTravelCard(List<BaseTravelCard> items, final boolean nightMode) {
 		final OsmandApplication app = getMyApplication();
