@@ -45,7 +45,6 @@ public class WikivoyageWelcomeDialogFragment extends WikivoyageBaseDialogFragmen
 			public void onClick(View v) {
 				FragmentActivity activity = getActivity();
 				if (activity != null) {
-					getMyApplication().getTravelDbHelper().initTravelBooks();
 					WikivoyageExploreDialogFragment.showInstance(activity.getSupportFragmentManager());
 					dismiss();
 				}
