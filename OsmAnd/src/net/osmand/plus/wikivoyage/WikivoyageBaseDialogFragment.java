@@ -22,6 +22,9 @@ import android.view.Window;
 
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
+import net.osmand.plus.wikivoyage.explore.WikivoyageExploreDialogFragment;
+
+import static android.support.v4.app.FragmentManager.POP_BACK_STACK_INCLUSIVE;
 
 public class WikivoyageBaseDialogFragment extends BaseOsmAndDialogFragment {
 
@@ -89,7 +92,7 @@ public class WikivoyageBaseDialogFragment extends BaseOsmAndDialogFragment {
 		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				dismiss();
+				getFragmentManager().popBackStackImmediate(WikivoyageExploreDialogFragment.TAG, 0);
 			}
 		});
 	}
