@@ -1833,7 +1833,7 @@
     <string name="notes_by_date">Σημειώσεις κατά ημερομηνία</string>
     <string name="download_maps_travel">Ταξιδιωτικοί χάρτες</string>
     <string name="article_removed">Το άρθρο αφαιρέθηκε</string>
-    <string name="wikivoyage_search_hint">Αναζήτηση: Χώρα, Πόλη, Επαρχία</string>
+    <string name="wikivoyage_search_hint">Αναζήτηση: Χώρα, πόλη, επαρχία</string>
     <string name="shared_string_read">Ανάγνωση</string>
     <string name="saved_articles">Αποθηκευμένα άρθρα</string>
     <string name="shared_string_explore">Εξερεύνηση</string>
@@ -1842,7 +1842,7 @@
     <string name="use_two_digits_longitude">Χρήση γεωγραφικού μήκους με δύο αριθμούς</string>
     <string name="shared_string_travel">Ταξίδι</string>
     <string name="waypoints_removed_from_map_markers">Τα σημεία διαδρομής αφαιρέθηκαν από τους δείκτες χάρτη</string>
-    <string name="nothing_found_in_radius">Τίποτα δεν βρέθηκε μέσα στην ακτίνα:</string>
+    <string name="nothing_found_in_radius">Κανένα αποτέλεσμα:</string>
     <string name="select_waypoints_category_description">Μπορείτε να προσθέσετε όλα τα σημεία διαδρομής του ίχνους, ή να επιλέξετε ξεχωριστές κατηγορίες.</string>
     <string name="shared_string_total">Σύνολο</string>
     <string name="clear_all_intermediates">Καθαρισμός όλων των ενδιάμεσων σημείων</string>
@@ -1864,15 +1864,15 @@
 	<string name="north_abbreviation">Β</string>
 	<string name="optional_point_name">Προαιρετικό όνομα σημείου</string>
     <string name="transport_nearby_routes_within">Κοντινές διαδρομές</string>
-    <string name="transport_nearby_routes">ΚΟΝΤΙΝΕΣ</string>
+    <string name="transport_nearby_routes">Κοντινές</string>
     <string name="enter_the_file_name">Εισάγετε το όνομα του αρχείου.</string>
     <string name="map_import_error">Σφάλμα εισαγωγής χάρτη</string>
     <string name="map_imported_successfully">Ο χάρτης εισήχθη</string>
     <string name="make_as_start_point">Κάντε αυτό το σημείο εκκίνησης</string>
     <string name="shared_string_current">Τρέχον</string>
-    <string name="last_intermediate_dest_description">Προσθέτει την τελευταία στάση κατά μήκος της διαδρομής</string>
-    <string name="first_intermediate_dest_description">Προσθέτει την πρώτη στάση στη διαδρομή</string>
-    <string name="subsequent_dest_description">Προαγωγή προορισμού και δημιουργία προορισμού</string>
+    <string name="last_intermediate_dest_description">Προσθέτει ενδιάμεση στάση</string>
+    <string name="first_intermediate_dest_description">Προσθέτει αρχική στάση</string>
+    <string name="subsequent_dest_description">Προαγωγή προορισμού και δημιουργία του</string>
     <string name="show_closed_notes">Εμφάνιση κλειστών σημειώσεων</string>
     <string name="switch_osm_notes_visibility_desc">Εμφάνιση/Απόκρυψη σημειώσεων OSM στον χάρτη.</string>
     <string name="gpx_file_desc">GPX - κατάλληλο για εξαγωγή σε JOSM ή σε άλλους επεξεργαστές OSM.</string>
@@ -1903,10 +1903,10 @@
     <string name="empty_state_markers_history_desc">Οι δείκτες που σημειώθηκαν ως περασμένοι, θα εμφανιστούν στην οθόνη.</string>
     <string name="shared_string_two">Δύο</string>
     <string name="shared_string_one">Ένα</string>
-    <string name="show_guide_line_descr">Εμφάνιση γραμμών οδηγού από τη θέση σας προς τις ενεργές τοποθεσίες δείκτη.</string>
+    <string name="show_guide_line_descr">Εμφάνιση γραμμής κατεύθυνσης από τη θέση σας προς τις ενεργές τοποθεσίες δείκτη.</string>
     <string name="show_arrows_descr">Εμφάνιση ενός ή δύο τόξων που δείχνουν την κατεύθυνση προς τους ενεργούς δείκτες.</string>
     <string name="distance_indication_descr">Επιλέξτε πώς θα εμφανίζεται η απόσταση προς τους ενεργούς δείκτες.</string>
-    <string name="active_markers_descr">Επιλέξτε τον αριθμό των δεικτών κατεύθυνσης που θα εμφανιστούν.</string>
+    <string name="active_markers_descr">Επιλέξτε τον αριθμό των ενεργών δεικτών που θα εμφανιστούν.</string>
     <string name="digits_quantity">Αριθμός δεκαδικών ψηφίων</string>
     <string name="shared_string_right">Δεξιά</string>
     <string name="shared_string_left">Αριστερά</string>
@@ -1938,7 +1938,7 @@
     <string name="osn_modify_dialog_error">Έγινε εξαίρεση: Η σημείωση δεν τροποποιήθηκε</string>
     <string name="osn_modify_dialog_title">Τροποποίηση σημείωσης</string>
     <string name="context_menu_item_modify_note">Τροποποίηση σημείωσης OSM</string>
-    <string name="make_round_trip_descr">Αντιγραφή του σημείου εκκίνησης ως προορισμού.</string>
+    <string name="make_round_trip_descr">Προσθήκη αντιγράφου του σημείου εκκίνησης ως προορισμού.</string>
     <string name="make_round_trip">Εκτέλεση ταξιδιού μ΄επιστροφή</string>
     <string name="shared_string_markers">Δείκτες</string>
     <string name="coordinates_format">Μορφή συντεταγμένων</string>
@@ -1959,7 +1959,7 @@
     <string name="marker_save_as_track">Αποθήκευση ως ίχνους</string>
     <string name="move_to_history">Μετακίνηση στο ιστορικό</string>
     <string name="group_will_be_removed_after_restart">Η ομάδα θα φύγει την επόμενη φορά που θα ξεκινήσετε την εφαρμογή.</string>
-    <string name="show_guide_line">Εμφάνιση γραμμών οδηγού</string>
+    <string name="show_guide_line">Εμφάνιση γραμμών κατεύθυνσης</string>
     <string name="show_arrows_on_the_map">Εμφάνιση βελών στον χάρτη</string>
     <string name="show_passed">Εμφάνιση των περασμένων</string>
     <string name="hide_passed">Απόκρυψη των περασμένων</string>
@@ -2002,7 +2002,7 @@
     <string name="measurement_tool">Μέτρηση απόστασης</string>
     <string name="quick_action_resume_pause_navigation">Παύση/συνέχιση πλοήγησης</string>
     <string name="quick_action_resume_pause_navigation_descr">Πατήστε αυτό το πλήκτρο για να σταματήσετε ή να συνεχίσετε την πλοήγηση.</string>
-    <string name="quick_action_show_navigation_finish_dialog">Να εμφανίζεται ο διάλογος ολοκληρωμένης πλοήγησης</string>
+    <string name="quick_action_show_navigation_finish_dialog">Να εμφανίζεται ο διάλογος \'η πλοήγηση ολοκληρώθηκε\'</string>
     <string name="quick_action_start_stop_navigation">Έναρξη/στάση πλοήγησης</string>
     <string name="quick_action_start_stop_navigation_descr">Πατήστε αυτό το πλήκτρο για εκκίνηση και τερματισμό της πλοήγησης.</string>
     <string name="store_tracks_in_monthly_directories">Αποθήκευση των καταγεγραμμένων ιχνών σε μηνιαίους φακέλους</string>
@@ -2027,7 +2027,7 @@
     <string name="mapillary_descr">Διαδικτυακές φωτογραφίες επιπέδου δρόμου για όλους. Ανακαλύψτε θέσεις, συνεργαστείτε, κατακτήστε τον κόσμο.</string>
     <string name="mapillary">Mapillary</string>
     <string name="plugin_mapillary_descr">Φωτογραφίες επιπέδου δρόμου για όλους. Ανακαλύψτε θέσεις, συνεργαστείτε, κατακτήστε τον κόσμο.</string>
-    <string name="private_access_routing_req">Ο προορισμός σας βρίσκεται σε περιοχή με ιδιωτική πρόσβαση. Θέλετε να επιτρέψετε πρόσβαση σε ιδιωτικούς δρόμους για αυτό το ταξίδι;</string>
+    <string name="private_access_routing_req">Ο προορισμός σας βρίσκεται σε περιοχή με ιδιωτική πρόσβαση. Να παραβιαστούν οι ιδιωτικοί δρόμοι για αυτό το ταξίδι;</string>
     <string name="restart_search">Επανεκκίνηση αναζήτησης</string>
     <string name="increase_search_radius">Αύξηση ακτίνας αναζήτησης</string>
     <string name="nothing_found_descr">Τροποποίηση ερωτήματος αναζήτησης ή αύξηση ακτίνας αναζήτησης.</string>
@@ -2213,7 +2213,7 @@
     <string name="shared_string_notifications">Ειδοποιήσεις</string>
     <string name="shared_string_continue">Συνέχεια</string>
     <string name="shared_string_pause">Παύση</string>
-    <string name="online_webpage_warning">Αυτή η σελίδα είναι διαθέσιμη μόνο διαδικτυακά. Θέλετε να την ανοίξετε σε έναν περιηγητή ιστού;</string>
+    <string name="online_webpage_warning">Η σελίδα είναι διαθέσιμη μόνο διαδικτυακά. Να ανοιχθεί με έναν πλοηγητή ιστού;</string>
     <string name="release_2_9">\\022 Ενημερώθηκε το μενού περιβάλλοντος: Εμφάνιση όταν το ΣΕ ανοίγει/κλείνει
 \n
 \n • Μενού μεταφοράς: όλες οι διαθέσιμες διαδρομές είναι τώρα στην κορυφή
@@ -2357,7 +2357,8 @@
     <string name="shared_string_do">Κάντε</string>
     <string name="shared_string_only_with_wifi">Μόνο με ασύρματη σύνδεση</string>
     <string name="wikivoyage_download_pics">Κατέβασμα εικόνων</string>
-    <string name="wikivoyage_download_pics_descr">Μπορούμε να κατεβάσουμε και να εμφανίσουμε εικόνες στα άρθρα και να τις αποθηκεύσουμε στη συσκευή, έτσι θα τις προσπελάσετε χωρίς σύνδεση. Μπορείτε πάντα να αλλάξετε τη ρύθμιση στο Εξερεύνηση &gt; Επιλογές.</string>
+    <string name="wikivoyage_download_pics_descr">Εικόνες από άρθρα μπορούν να κατέβουν για χρήση χωρίς σύνδεση.
+\n Μπορείτε πάντα να αλλάξετε τη ρύθμιση σε \'Εξερεύνηση\' → \'Επιλογές\'.</string>
     <string name="shared_string_wifi_only">Μόνο ασύρματα</string>
     <string name="select_travel_book">Επιλογή ταξιδιωτικού βιβλίου</string>
     <string name="shared_string_travel_book">Ταξιδιωτικό βιβλίο</string>
@@ -3076,10 +3077,10 @@
     <string name="tunnel_warning">Προσέγγιση σήραγγας</string>
     <string name="show_tunnels">Σήραγγες</string>
 <string name="purchase_dialog_title">Επιλογή σχεδίου</string>
-    <string name="purchase_dialog_travel_description">Για να διαβάσετε ταξιδιωτικά άρθρα χωρίς σύνδεση, χρειάζεται να αγοράσετε ένα από τα παρακάτω στοιχεία.</string>
+    <string name="purchase_dialog_travel_description">Αγοράσετε ένα από τα παρακάτω για να διαβάσετε ταξιδιωτικά άρθρα χωρίς σύνδεση:</string>
     <string name="purchase_dialog_subtitle">Επιλέξτε κατάλληλο στοιχείο:</string>
     <string name="monthly_map_updates">Ενημερώσεις χαρτών: <b>κάθε μήνα</b></string>
-    <string name="daily_map_updates">Ενημερώσεις χαρτών: <b>κάθε ημέρα, κάθε ώρα</b></string>
+    <string name="daily_map_updates">Ενημερώσεις χαρτών: <b>κάθε ώρα</b></string>
     <string name="in_app_purchase">Αγορά μέσω της εφαρμογής</string>
     <string name="in_app_purchase_desc">Εφάπαξ πληρωμή</string>
     <string name="in_app_purchase_desc_ex">Μόλις αγοραστεί, θα είναι μονίμως διαθέσιμη για σας.</string>
