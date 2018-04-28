@@ -1194,7 +1194,7 @@
     <string name="shared_string_map">Kart</string>
     <string name="shared_string_favorite">Favoritt</string>
     <string name="shared_string_favorites">Favoritter</string>
-    <string name="shared_string_add_to_favorites">Legg til i \'Mine favoritter\'</string>
+    <string name="shared_string_add_to_favorites">Legg til i \'Favoritter\'</string>
     <string name="shared_string_my_location">Min posisjon</string>
     <string name="shared_string_my_places">Mine steder</string>
     <string name="shared_string_my_favorites">Favoritter</string>
@@ -1746,7 +1746,7 @@
     <string name="save_filter">Lagre filter</string>
     <string name="delete_filter">Slett filter</string>
     <string name="new_filter">Nytt filter</string>
-    <string name="new_filter_desc">Angi et navn for det nye filteret. Dette blir lagt til i kategorifanen.</string>
+    <string name="new_filter_desc">Angi et navn for det nye filteret. Dette blir lagt til i fanen \'Kategorier\'.</string>
     <string name="selected_categories">Valgte kategorier</string>
     <string name="create_custom_poi">Opprett egendefinert filter</string>
     <string name="custom_search">Egendefinert søk</string>
@@ -1938,7 +1938,7 @@
     <string name="simulate_your_location_descr">Simuler din posisjon ved bruk av en beregnet rute eller et GPX-spor som er tatt opp.</string>
     <string name="av_locations_descr">GPX-fil med plasseringsnotater.</string>
     <string name="rendering_attr_currentTrackColor_description">GPX-farge</string>
-    <string name="archive_wikipedia_data">Du har gammel, inkompatibel Wikipediadata. Vil du arkivere det?</string>
+    <string name="archive_wikipedia_data">Du har gamle, inkompatible Wikipediadata. Arkivere disse?</string>
     <string name="download_wikipedia_files">Laste ned ytterligere Wikipedia-data (%1$s MB)?</string>
     <string name="gps_network_not_enabled">Posisjonstjeneste ikke aktivert. Slå den på?</string>
     <string name="disable_recording_once_app_killed">Forhindre uavhengig logging</string>
@@ -2966,7 +2966,8 @@
 \n • Hastighet- og høydevisning  (alternativ)
 \n • Visning av koter og relieffskygger (via programtillegg)"</string>
     <string name="live_monitoring_url_descr">Angi nettadressen med parametersyntaks: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}.</string>
-    <string name="wikivoyage_download_pics_descr">Bilder i artiklene kan lastes ned og vises og lagres på enheten, så det er tilgang til dem mens du er nettfrakoblet. Innstillingen kan endres i Utforsk &gt; Alternativer.</string>
+    <string name="wikivoyage_download_pics_descr">Bilder fra artikler kan lastes ned for bruk i frakoblet modus.
+\n Innstillingen kan endres i \'Utforsk\' → \'Alternativer\'.</string>
     <string name="shared_string_dont">Ikke</string>
     <string name="shared_string_do">Gjør</string>
     <string name="shared_string_only_with_wifi">Kun på Wi-Fi</string>
