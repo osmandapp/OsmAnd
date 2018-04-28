@@ -177,9 +177,9 @@
     <string name="installing_new_resources">Dépaquetage de nouvelles données…</string>
     <string name="internet_connection_required_for_online_route">Vous avez sélectionné un moteur de calcul d\'itinéraire en ligne, mais il n\'y a aucune connexion Internet.</string>
     <string name="tts_language_not_supported_title">Langue non disponible</string>
-    <string name="tts_language_not_supported">La langue sélectionnée n\'est pas disponible dans le moteur de synthèse vocale installé. Voulez-vous allez sur Google Play et chercher d\'autres moteurs de synthèse vocale ? Sinon la langue par défaut sera utilisée.</string>
+    <string name="tts_language_not_supported">La langue sélectionnée n\'est pas disponible dans le moteur de synthèse vocale installé. Voulez-vous rechercher d\'autres moteurs de synthèse vocale sur Google Play ? Sinon la langue par défaut sera utilisée.</string>
     <string name="tts_missing_language_data_title">Données manquantes</string>
-    <string name="tts_missing_language_data">La langue sélectionnée n\'est pas installée. Souhaitez-vous l\'installer depuis Google Play ?</string>
+    <string name="tts_missing_language_data">Souhaitez-vous installer la langue sélectionnée depuis Google Play ?</string>
     <string name="gpx_option_reverse_route">Inverser l\'itinéraire GPX</string>
     <string name="gpx_option_destination_point">Utiliser la destination en cours</string>
     <string name="gpx_option_from_start_point">Suivre l\'ensemble de la trace</string>
@@ -209,7 +209,7 @@
     <string name="install_more">Installer plus…</string>
 
 
-    <string name="level_to_switch_vector_raster_descr">Niveau de zoom minimum pour l\'utilisation des cartes vectorielles.</string>
+    <string name="level_to_switch_vector_raster_descr">Utiliser les cartes vectorielles à partir de ce niveau de zoom.</string>
     <string name="level_to_switch_vector_raster">Niveau de zoom vectoriel</string>
 
 
@@ -292,7 +292,7 @@
     <string name="osmand_net_previously_installed">Toutes les anciennes données hors-ligne peuvent être utilisées par la nouvelle application mais les favoris doivent être exportés de l\'ancienne application puis réimportés dans la nouvelle.</string>
     <string name="build_installed">Version {0} installée avec succès ({1}).</string>
     <string name="downloading_build">Téléchargement de l\'application…</string>
-    <string name="install_selected_build">Souhaitez-vous réellement installer OsmAnd - {0} sur {1} {2} MB ?</string>
+    <string name="install_selected_build">Installer OsmAnd - {0} sur {1} {2} Mo ?</string>
     <string name="loading_builds_failed">Le chargement des versions disponibles a échoué.</string>
     <string name="loading_builds">Chargement des versions disponibles…</string>
     <string name="select_build_to_install">Sélectionnez la version d\'OsmAnd à installer</string>
@@ -372,7 +372,7 @@
     <string name="poi_namefinder_query_empty">Saisissez votre recherche de point d\'intérêt</string>
     <string name="any_poi">Tout</string>
     
-    <string name="thanks_yandex_traffic">Merci à Yandex de fournir des informations sur le trafic.</string>
+    <string name="thanks_yandex_traffic">Merci à Yandex pour les informations de trafic.</string>
     <string name="layer_yandex_traffic">Trafic Yandex</string>
     <string name="layer_route">Route</string>
     <string name="shared_string_favorites">Favoris</string>
@@ -479,13 +479,13 @@
     <string name="search_offline_address">Hors-ligne</string>
     <string name="search_online_address">Internet</string>
     <string name="max_level_download_tile">Niveau de zoom maximum</string>
-    <string name="max_level_download_tile_descr">Sélectionnez un niveau de zoom maximum pour le téléchargement des cartes (tuiles) en ligne</string>
+    <string name="max_level_download_tile_descr">Ne pas télécharger les cartes (tuiles) en ligne en dessous de ce niveau de zoom.</string>
     <string name="route_general_information">Distance totale : %1$s, Durée estimée : %2$d h %3$d min.</string>
     <string name="router_service_descr">Sélectionnez un service de navigation, hors-ligne ou en ligne</string>
     <string name="router_service">Service de navigation</string>
     <string name="sd_dir_not_accessible">Le dossier contenant les données sur la carte mémoire est inaccessible !</string>
     <string name="download_question">Voulez-vous télécharger {0} - {1} ?</string>
-    <string name="download_question_exist">Les données pour {0} existent déjà ({1}). Voulez-vous les mettre à jour ({2}) ?</string>
+    <string name="download_question_exist">Des données pour {0} existent déjà ({1}). Souhaitez-vous les mettre à jour ({2}) ?</string>
     <string name="address">Adresse</string>
     <string name="shared_string_download_successful">Téléchargement terminé</string>
 
@@ -673,7 +673,7 @@
     <string name="left_side_navigation_descr">Activer dans les pays où l\'on conduit à gauche.</string>
 
     <string name="unknown_from_location">Point de départ inconnu</string>
-    <string name="confirm_interrupt_download">Souhaitez-vous annuler le téléchargement ?</string>
+    <string name="confirm_interrupt_download">Annuler le téléchargement ?</string>
     <string name="basemap_was_selected_to_download">La carte mondiale de base, requise pour le bon fonctionnement de l\'application, est sélectionnée pour téléchargement.</string>
 
     <string name="map_online_plugin_is_not_installed">Activez le greffon \"Cartes en ligne\" pour sélectionner différentes sources de cartes</string>
@@ -806,7 +806,7 @@
     <string name="osmand_parking_warning">Avertissement</string>
     <string name="osmand_parking_warning_text">Un rappel pour récupérer votre véhicule a été ajouté à votre agenda. Il y restera jusqu\'à ce que vous le supprimiez manuellement.</string>
     <string name="osmand_parking_time_limit_title">Indiquez la durée de stationnement autorisée</string>
-    <string name="osmand_parking_delete_confirm">Voulez-vous supprimer l\'emplacement de stationnement du véhicule ?</string>
+    <string name="osmand_parking_delete_confirm">Supprimer l\'emplacement de stationnement ?</string>
     <string name="osmand_parking_delete">Supprimer l\'emplacement de stationnement</string>
     <string name="osmand_parking_choose_type">Type de stationnement</string>
     <string name="osmand_parking_lim_text">Temps limité</string>
@@ -930,19 +930,21 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
 \n- Pas d\'accès aux points d\'intérêt Wikipédia hors-ligne.
 \n
 \nOsmAnd et le développement de nouvelles fonctionnalités dépendent de vos contributions. Vous pouvez acheté la version payante OsmAnd+ ou faire un don en vous rendant sur https://osmand.net.</string>
-    <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OpenStreetMap Automated Navigation and Directions) est un logiciel open source de navigation basé sur les données cartographiques d\'OpenStreetMap. Toutes les données (cartes vectorielles ou à base de tuiles) peuvent être stockées sur l\'appareil pour un usage hors-ligne. En plus de la consultation des cartes, OsmAnd permet la navigation grâce à des instructions détaillées à l\'écran et à un guidage vocal.
+    <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OpenStreetMap Automated Navigation and Directions)
 \n
-\nOsmAnd+, version payante de l\'application, n\'est pas limitée en nombre de téléchargements et permet d\'obtenir de nouvelles cartes, des mises à jour de cartes existantes ou encore des greffons et d\'autres données (courbes de niveaux, ...). En achetant OsmAnd+ vous supportez le projet et financez le développement de nouvelles fonctionnalités.
-\n
-\nFonctionnalités principales :
+\nOsmAnd+ est un logiciel open source de navigation utilisant les données cartographiques d\'OpenStreetMap. Toutes les données (cartes vectorielles ou à base de tuiles) peuvent être stockées sur l\'appareil pour un usage hors-ligne. En plus de la consultation des cartes, OsmAnd permet la navigation grâce à des instructions détaillées à l\'écran et à un guidage vocal. 
+\n 
+\nOsmAnd+, version payante de l\'application, n\'est pas limitée en nombre de téléchargements et permet d\'obtenir de nouvelles cartes, des mises à jour de cartes existantes ou encore des greffons et d\'autres données (courbes de niveaux, ...). En achetant OsmAnd+ vous contribuez au projet et financez le développement de nouvelles fonctionnalités. 
+\n 
+\nFonctionnalités principales : 
 \n- Fonctionne complètement hors-ligne (après téléchargement des cartes sur l\'appareil)
-\n- Téléchargement illimité des cartes pour un pays ou une région directement depuis l\'application
-\n- Points d\'intérêt Wikipédia hors-ligne, idéal pour les visites touristiques
-\n- Possibilité de superposer plusieurs couches, telles que des traces, des points d\'intérêt, des favoris, des courbes de niveau, les transports public et bien d\'autres cartes (pistes de ski, chemins de randonnée, circuits à vélo, balisage maritime ...) avec une transparence personnalisable
-\n- Recherche hors-ligne d\'adresses et de points d\'intérêt
-\n- Navigation hors-ligne sur des itinéraires de moyenne distance
-\n- Plusieurs modes de navigation : voiture, cycliste et piéton
-\n- Options : vue jour/nuit automatique, zoom automatique en fonction de la vitesse, plusieurs modes d\'orientation de la carte (fixe ou suivant le déplacement), affichage des voies de circulation, guidage vocal par voix enregistrées ou par synthèse vocale.</string>
+\n- Téléchargement illimité des cartes pour un pays ou une région directement depuis l\'application 
+\n- Points d\'intérêt Wikipédia hors-ligne, idéal pour les visites touristiques 
+\n- Possibilité de superposer plusieurs couches, telles que des traces, des points d\'intérêt, des favoris, des courbes de niveau, les transports public et bien d\'autres cartes (pistes de ski, chemins de randonnée, circuits à vélo, balisage maritime ...) avec une transparence personnalisable 
+\n- Recherche hors-ligne d\'adresses et de points d\'intérêt 
+\n- Navigation hors-ligne sur des itinéraires de moyenne distance 
+\n- Plusieurs modes de navigation : voiture, cycliste et piéton 
+\n- Options : vue jour/nuit automatique, zoom automatique adaptée à la vitesse, plusieurs modes d\'orientation de la carte (fixe ou suivant le déplacement), affichage des voies de circulation, guidage vocal par voix enregistrées ou par synthèse vocale.</string>
 
 
     <string name="avoid_motorway">Éviter les autoroutes</string>
@@ -981,7 +983,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="rendering_attr_roadColors_name">Thème de couleurs pour les routes</string>
     <string name="zxing_barcode_scanner_not_found">L’application ZXing Barcode Scanner n\'est pas installée. Souhaitez-vous l\'installer depuis Google Play ?</string>
     <string name="close_changeset">Clôturer les modifications</string>
-    <string name="background_service_is_enabled_question">Le service OsmAnd s\'exécute toujours en tâche de fond. Voulez-vous également l\'arrêter ?</string>
+    <string name="background_service_is_enabled_question">Le service OsmAnd s\'exécute toujours en tâche de fond. Souhaitez-vous également l\'arrêter ?</string>
 
     <string name="safe_mode_description">Exécuter l\'application en mode sûr (utiliser le code Android plus lent plutôt que le code natif).</string>
     <string name="safe_mode">Mode sûr</string>
@@ -1043,7 +1045,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="recording_is_recorded">Audio/vidéo en cours d\'enregistrement. Pour l\'arrêter, appuyez sur le bouton Arrêter du gadget.</string>
     <string name="recording_playing">La note audio de l\'enregistrement spécifié est en cours de lecture.\n%1$s</string>
     <string name="recording_open_external_player">Ouvrir dans un lecteur externe</string>
-    <string name="recording_delete_confirm">Voulez-vous supprimer cet enregistrement ?</string>
+    <string name="recording_delete_confirm">Supprimer cet enregistrement ?</string>
     <string name="recording_unavailable">non disponible</string>
     <string name="recording_context_menu_arecord">Prendre une note audio</string>
     <string name="recording_context_menu_vrecord">Prendre une note vidéo</string>
@@ -1258,8 +1260,9 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="disable_complex_routing">Désactiver le routage complexe</string>
     <string name="guidance_preferences_descr">Paramètres de navigation</string>
     <string name="routing_preferences_descr">Paramètres d\'itinéraire</string>
-    <string name="android_19_location_disabled">Depuis Android 4.4 (KitKat), vous ne pouvez plus télécharger et mettre à jour les cartes dans le dossier (%s) utilisé jusqu\'à présent. Voulez-vous utiliser le nouveau dossier et y copier l\'ensemble des fichiers OsmAnd ?
-\n Note 1 : Les anciens fichiers seront conservés (mais vous pouvez les supprimer manuellement)\n Note 2 : En raison de ce nouveau dossier de stockage, il ne sera plus possible de partager des fichiers entre OsmAnd et OsmAnd+.</string>
+    <string name="android_19_location_disabled">A partir d\'Android 4.4 (KitKat), vous ne pouvez plus télécharger et mettre à jour les cartes dans le dossier (%s). Voulez-vous copier l\'ensemble des fichiers OsmAnd dans un nouveau dossier ? 
+\n Note 1 : Les anciens fichiers seront conservés (mais vous pouvez les supprimer manuellement)
+\n Note 2 : En raison de ce nouveau dossier de stockage, il ne sera plus possible de partager des fichiers entre OsmAnd et OsmAnd+.</string>
 
     <string name="copying_osmand_one_file_descr">Copie du fichier (%s) vers le nouvel emplacement…</string>
     <string name="copying_osmand_files_descr">Copie des fichiers de données OsmAnd vers la nouvelle destination (%s)…</string>
@@ -1290,7 +1293,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="use_displayed_track_for_navigation">Souhaitez-vous suivre la trace affichée à l\'écran ?</string>
 
     <string name="gpx_option_calculate_first_last_segment">Calculer un itinéraire OsmAnd pour le début et la fin de l\'itinéraire</string>
-    <string name="calculate_osmand_route_without_internet">Calculer un itinéraire OsmAnd hors-ligne</string>
+    <string name="calculate_osmand_route_without_internet">Calcul de l\'itinéraire hors-ligne</string>
     <string name="index_name_italy">Europe - Italie</string>
     <string name="index_name_gb">Europe - Grande-Bretagne</string>
     <string name="index_name_canada">Amérique du Nord - Canada</string>
@@ -1448,7 +1451,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="gpx_file_is_empty">Vider la trace GPX</string>
 
     <string name="shared_string_my_tracks">Mes traces</string>
-    <string name="shared_string_my_favorites">Mes favoris</string>
+    <string name="shared_string_my_favorites">Favoris</string>
     <string name="shared_string_my_places">Favoris</string>
 
     <string name="selected_gpx_info_show">\n\nAppui long pour afficher sur la carte</string>
@@ -1663,7 +1666,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="map_locale">Langue de la carte</string>
     <string name="rendering_attr_transportStops_name">Arrêts de transports en commun</string>
     <string name="voices">Guidage vocal</string>
-    <string name="dash_download_msg_none">Souhaitez-vous télécharger des cartes hors-ligne ?</string>
+    <string name="dash_download_msg_none">Télécharger des cartes hors-ligne ?</string>
     <string name="dash_download_msg">Vous avez téléchargé %1$s carte(s)</string>
     <string name="dash_download_new_one">Télécharger une nouvelle carte</string>
     <string name="dash_download_manage">Gérer</string>
@@ -1791,7 +1794,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="delay_to_start_navigation_descr">Indiquez le délai d\'affichage de l\'itinéraire détaillé, avant de démarrer la navigation.</string>
     <string name="shared_string_go">Aller</string>
 
-    <string name="confirmation_to_clear_history">Souhaitez-vous effacer l\'historique ?</string>
+    <string name="confirmation_to_clear_history">Effacer l\'historique ?</string>
     <string name="local_osm_changes_upload_all_confirm">%1$d modification(s) vont être envoyée(s) vers OSM. Confirmez-vous cet envoi ?</string>
     <string name="delay_to_start_navigation">Démarrer la navigation après</string>
     
@@ -1829,7 +1832,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="storage_directory_default">Mémoire interne</string>
     <string name="storage_directory">Stockage de la carte</string>
     <string name="shared_string_copy">Copier</string>
-    <string name="application_dir_change_warning3">Souhaitez-vous aussi qu\'OsmAnd copie ses fichiers de données vers la nouvelle destination ?</string>
+    <string name="application_dir_change_warning3">Copier les fichiers vers la nouvelle destination ?</string>
     <string name="rendering_attr_hideHouseNumbers_name">Numérotation des bâtiments</string>
     
     <string name="routing_attr_avoid_borders_description">Éviter de franchir les frontières entre pays.</string>
@@ -1853,7 +1856,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="gps_network_not_enabled">Le service de localisation est arrêté. Souhaitez-vous l’activer ?</string>
     <string name="disable_recording_once_app_killed_descrp">Met en pause l\'enregistrement de la trace GPX lors de l\'arrêt d\'OsmAnd (via les applications récentes) et supprime l\'icône OsmAnd de la barre de notification Android.</string>
     <string name="disable_recording_once_app_killed">Interdire la journalisation autonome</string>
-    <string name="download_wikipedia_files">Souhaitez-vous télécharger les données Wikipédia (%1$s MB) ?</string>
+    <string name="download_wikipedia_files">Télécharger des données Wikipédia supplémentaires (%1$s Mo) ?</string>
     <string name="lang_ms">Malaisien</string>
     <string name="lang_ht">Haïtien</string>
     <string name="lang_gl">Galicien</string>
@@ -1875,7 +1878,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="lang_nv">Navajo</string>
     <string name="lang_th">Thaïlandais</string>
     <string name="lang_nn">Norvégien Nynorsk</string>
-    <string name="archive_wikipedia_data">Le format de vos données Wikipédia hors-ligne est obsolète. Souhaitez-vous archiver ces données ?</string>
+    <string name="archive_wikipedia_data">Le format des données Wikipédia est obsolète. Souhaitez-vous les archiver ?</string>
     <string name="lang_te">Télougou</string>
     <string name="restart_is_required">Redémarrez l\'application pour prendre en compte vos modifications.</string>
     <string name="rendering_attr_currentTrackColor_name">Couleur des traces GPX</string>
@@ -2261,12 +2264,12 @@ Actuellement seuls {2} Mo sont disponibles.</string>
     <string name="map_markers_other">Autres marques</string>
     <string name="map_marker_1st">Première marque</string>
     <string name="map_marker_2nd">Seconde marque</string>
-    <string name="add_points_to_map_markers_q">Souhaitez-vous créer tous les points comme marques ?</string>
+    <string name="add_points_to_map_markers_q">Ajouter tous les points comme marques ?</string>
     <string name="shared_string_add_to_map_markers">Ajouter comme marque</string>
     <string name="select_map_markers">Sélectionner les marques</string>
     <string name="show_map_markers_description">Activer la fonction marques</string>
-    <string name="clear_active_markers_q">Souhaitez-vous supprimer toutes les marques actives ?</string>
-    <string name="clear_markers_history_q">Souhaitez-vous effacer l\'historique des marques ?</string>
+    <string name="clear_active_markers_q">Supprimer toutes les marques actives ?</string>
+    <string name="clear_markers_history_q">Effacer l\'Historique des marques ?</string>
     <string name="active_markers">Marques actives</string>
     <string name="map_markers">Marques</string>
     <string name="map_marker">Marque</string>
@@ -2339,7 +2342,7 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="share_history_subject">partagé via OsmAnd</string>
     
     <string name="back_to_search">Retour à la recherche</string>
-    <string name="confirmation_to_delete_history_items">Souhaitez-vous supprimer les éléments sélectionnés de l\'historique ?</string>
+    <string name="confirmation_to_delete_history_items">Supprimer les éléments sélectionnés de l\'Historique ?</string>
     <string name="show_something_on_map">Afficher %1$s sur la carte</string>
     <string name="route_stops_before">%1$s arrêts avant</string>
     <string name="coords_search">Recherche par coordonnées</string>
@@ -2358,7 +2361,7 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
 \n • Autres améliorations et corrections d\'anomalies 
 \n 
 \n et bien plus encore…"</string>
-    <string name="update_all_maps_now">Souhaitez-vous mettre à jour toutes les cartes maintenant ?</string>
+    <string name="update_all_maps_now">Mettre à jour toutes les cartes maintenant ?</string>
     <string name="clear_tile_data">Supprimer toutes les tuiles</string>
     <string name="replace_favorite_confirmation">Êtes-vous sûr de vouloir remplacer le favori %1$s ?</string>
     <string name="shared_string_change">Modifier</string>
@@ -2386,7 +2389,7 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="get_for_month">Obtenir pour %1$s mois</string>
     <string name="si_mi_meters">Miles / Mètres</string>
     <string name="get_it">Obtenir</string>
-    <string name="osm_live_banner_desc">Obtenez le téléchargement illimité des cartes et des mises à jour plus régulières (chaque semaine, chaque jour, chaque heure; au lieu de chaque mois).</string>
+    <string name="osm_live_banner_desc">Obtenez le téléchargement illimité des cartes ainsi que des mises à jour plus régulières (chaque semaine, chaque jour, chaque heure; au lieu de chaque mois).</string>
     <string name="osmand_plus_banner_desc">Téléchargements illimités des cartes, des mises à jour et des données pour le greffon Wikipédia.</string>
     <string name="donation_to_osm">Faire un don à la communauté OpenStreetMap</string>
     <string name="osm_live_subscription_desc">L\'abonnement permet de bénéficier des mises à jour horaires, quotidiennes, hebdomadaires et de télécharger de nouvelles cartes sans limite.</string>
@@ -2514,7 +2517,7 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="quick_action_add_category">Ajouter une catégorie</string>
     <string name="quick_action_add_configure_map">Paramétrer la carte</string>
     <string name="quick_action_add_navigation">Navigation</string>
-    <string name="quick_action_fav_name_descr">Si cette zone est vide, OsmAnd utilisera l\'adresse ou le nom du lieu.</string>
+    <string name="quick_action_fav_name_descr">Laisser vide pour utiliser automatiquement l\'adresse ou le nom du lieu.</string>
     <string name="quick_action_bug_message">Message</string>
     <string name="quick_action_category_descr">Vous pouvez indiquer une catégorie pour ce favori.</string>
     <string name="quick_action_gpx_category_descr">Vous pouvez indiquer une catégorie optionnelle</string>
@@ -2534,21 +2537,21 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="quick_action_map_source_action">Ajouter une source de carte</string>
     <string name="quick_action_map_source_switch">La source de la carte a été modifiée pour \"%s\".</string>
     <string name="quick_action_btn_tutorial_title">Déplacer le bouton</string>
-    <string name="quick_action_btn_tutorial_descr">Appui long pour déplacer le bouton sur l\'écran</string>
-<string name="quick_action_add_marker_descr">Un appui sur ce bouton d\'action ajoutera une marque au centre de la carte.</string>
+    <string name="quick_action_btn_tutorial_descr">Appui long pour déplacer le bouton sur l\'écran.</string>
+<string name="quick_action_add_marker_descr">Un appui sur ce bouton d\'action ajoute une marque au centre de la carte.</string>
     <string name="quick_action_add_gpx_descr">Un appui sur ce bouton d\'action ajoutera une étape GPX au centre de la carte.</string>
-    <string name="quick_action_take_audio_note_descr">Un appui sur ce bouton d\'action ajoutera une note Audio au centre de la carte.</string>
-    <string name="quick_action_take_video_note_descr">Un appui sur ce bouton d\'action ajoutera une note Vidéo au centre de la carte.</string>
-    <string name="quick_action_take_photo_note_descr">Un appui sur ce bouton d\'action ajoutera une note Photo au centre de la carte.</string>
-    <string name="quick_action_add_osm_bug_descr">Un appui sur ce bouton d\'action ajoutera une note OSM au centre de la carte.</string>
-    <string name="quick_action_add_poi_descr">Un appui sur ce bouton d\'action ajoutera un point d\'intérêt au centre de la carte.</string>
-    <string name="quick_action_navigation_voice_descr">Un appui sur ce bouton activera ou désactivera le Guidage vocal pendant la navigation.</string>
-    <string name="quick_action_add_parking_descr">Un appui sur ce bouton ajoutera un emplacement de stationnement au centre de la carte.</string>
-    <string name="quick_action_showhide_favorites_descr">Un appui sur ce bouton affichera ou masquera les favoris sur la carte.</string>
-    <string name="quick_action_showhide_poi_descr">Un appui sur ce bouton affichera ou masquera les points d\'intérêt sur la carte.</string>
+    <string name="quick_action_take_audio_note_descr">Un appui sur ce bouton d\'action ajouter une note Audio au centre de la carte.</string>
+    <string name="quick_action_take_video_note_descr">Un appui sur ce bouton d\'action ajoute une note Vidéo au centre de la carte.</string>
+    <string name="quick_action_take_photo_note_descr">Un appui sur ce bouton d\'action ajoute une note Photo au centre de la carte.</string>
+    <string name="quick_action_add_osm_bug_descr">Un appui sur ce bouton d\'action ajoute une note OSM au centre de la carte.</string>
+    <string name="quick_action_add_poi_descr">Un appui sur ce bouton d\'action ajoute un point d\'intérêt au centre de la carte.</string>
+    <string name="quick_action_navigation_voice_descr">Un appui sur ce bouton active ou désactive le Guidage vocal pendant la navigation.</string>
+    <string name="quick_action_add_parking_descr">Un appui sur ce bouton ajoute un emplacement de stationnement au centre de la carte.</string>
+    <string name="quick_action_showhide_favorites_descr">Un appui sur ce bouton affiche ou masque les favoris sur la carte.</string>
+    <string name="quick_action_showhide_poi_descr">Un appui sur ce bouton affiche ou masque les points d\'intérêt sur la carte.</string>
     <string name="quick_action_interim_dialog">Afficher une fenêtre intermédiaire</string>
     <string name="quick_action_add_create_items">Créer des éléments</string>
-    <string name="quick_action_bug_descr">Ce texte sera renseigné automatiquement dans la zone de commentaire.</string>
+    <string name="quick_action_bug_descr">Ce message est ajouté en commentaire.</string>
     <string name="quick_action_map_overlay_switch">La sur-couche de la carte est désormais \"%s\".</string>
     <string name="quick_action_map_underlay_switch">La sous-couche de la carte est désormais \"%s\".</string>
     <string name="navigate_point_olc">Ouvrir un code d\'emplacement</string>
@@ -2560,7 +2563,7 @@ Merci d\'indiquer un code long</string>
 représentant la zone : %1$s x %2$s</string>
     <string name="auto_split_recording_title">Découper automatiquement les enregistrements</string>
 	<string name="auto_split_recording_descr">Débuter un nouveau segment après une interruption de 6 min, une nouvelle trace après 2 h ou un nouveau fichier en cas de changement de date.</string>
-    <string name="quick_action_page_list_descr">Un appui sur ce bouton d\'action fera défiler la liste ci-dessous.</string>
+    <string name="quick_action_page_list_descr">Un appui sur ce bouton d\'action fera défiler la liste.</string>
     <string name="release_2_6">\\022 Nouvelle fonctionnalité : Bouton d\'action rapide 
 \n 
 \n • Réponses plus rapides aux gestes sur l\'écran 
@@ -2664,12 +2667,13 @@ représentant la zone : %1$s x %2$s</string>
 \n • Partage de votre position afin qu\'on puisse vous rejoindre rapidement</string>
     <string name="restore_purchases">Restaurer vos achats</string>
     <string name="shared_string_visible">Visible</string>
-    <string name="osmand_plus_extended_description_part7">Contribuez facilement à l\'amélioration d\'OpenStreetMap :
-\n • Signalez des erreurs de donnée
-\n • Envoyez des traces GPX à OpenStreetMap depuis l\'application
-\n • Ajoutez des points d\'intérêt et envoyez les à OpenStreetMap (immédiatement si vous êtes en ligne ou plus tard si vous êtes hors-ligne)
-\n • Enregistrez vos itinéraires en arrière-plan (pendant que votre appareil est en veille).
-\nOsmAnd est une application open source très active. Toutes les contributions sont bienvenues que ce soit en signalant des bugs, en participant à la traduction ou en développant de nouvelles fonctionnalités. Grâce aux interactions entre les utilisateurs et les développeurs l\'application est en évolution permanente. Le projet est bien sûr ouvert à toute contribution financière pour accélérer encore son développement.</string>
+    <string name="osmand_plus_extended_description_part7">Contribuez concrètement à l\'amélioration d\'OpenStreetMap : 
+\n • Signalez des erreurs de donnée 
+\n • Envoyez des traces GPX à OpenStreetMap depuis l\'application 
+\n • Ajoutez des points d\'intérêt et envoyez-les à OpenStreetMap (immédiatement si vous êtes en ligne ou plus tard si vous êtes hors-ligne) 
+\n • Enregistrez vos itinéraires en arrière-plan (pendant que votre appareil est en veille). 
+\n
+\nOsmAnd est une application open source très active. Toutes les contributions sont bienvenues que ce soit en signalant des bugs, en participant à la traduction ou en développant de nouvelles fonctionnalités. Grâce aux interactions entre les utilisateurs et les développeurs l\'application est en évolution permanente. Le projet est bien sûr ouvert à toute participation financière pour accélérer encore son développement.</string>
     <string name="analyze_on_map">Analyser sur la carte</string>
     <string name="osmand_plus_extended_description_part1">OsmAnd+ (OpenStreetMap Automated Navigation and Directions) est une application de visualisation de cartes et de navigation utilisant les données gratuites couvrant le monde entier du projet OpenStreetMap. Bénéficiez d\'un guidage vocal comme visuel; découvrez des points d\'intérêt; créez et gérez des traces GPX; installez des greffons pour visualiser l\'altitude et les courbes de niveaux; utilisez les modes Automobile, Piéton, Cycliste; contribuez à l\'amélioration des cartes et bien plus encore ! 
 \n 
@@ -3150,7 +3154,8 @@ représentant la zone : %1$s x %2$s</string>
     <string name="shared_string_do">Faire</string>
     <string name="shared_string_only_with_wifi">Seulement en Wifi</string>
     <string name="wikivoyage_download_pics">Recevoir les images</string>
-    <string name="wikivoyage_download_pics_descr">Vous pouvez télécharger et afficher les images des articles hors ligne. Pour modifier ce paramétrage, allez dans Explorer &gt; Options.</string>
+    <string name="wikivoyage_download_pics_descr">Vous pouvez télécharger les images des articles pour un usage hors ligne.
+\nPour modifier ce paramétrage, allez dans : Explorer &gt; Options.</string>
     <string name="shared_string_wifi_only">Wifi seulement</string>
     <string name="select_travel_book">Sélectionnez un carnet de voyage</string>
     <string name="shared_string_travel_book">Carnet de voyage</string>
