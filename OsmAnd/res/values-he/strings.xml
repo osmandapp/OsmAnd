@@ -3116,4 +3116,6 @@
     <string name="map_widget_magnetic_bearing">תכווין מגנטי</string>
     <string name="map_widget_bearing">תכווין יחסי</string>
     <string name="rendering_value_walkingRoutesOSMC_name">צבע לפי סימול הליכת שטח של OSMC</string>
+    <string name="osmand_team">צוות OsmAnd</string>
+    <string name="empty_state_markers_history">היסטוריה</string>
     </resources>
