@@ -1,5 +1,8 @@
 package net.osmand.plus.download;
 
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapDataObject;
@@ -39,7 +42,6 @@ public class DownloadResources extends DownloadResourceGroup {
 	public static final String WORLD_SEAMARKS_NAME = "World_seamarks";
 	public static final String WORLD_SEAMARKS_OLD_KEY = "world_seamarks_basemap";
 	public static final String WORLD_SEAMARKS_OLD_NAME = "World_seamarks_basemap";
-	public static final String WORLD_WIKIVOYAGE_NAME = "world_wikivoyage";
 	private static final Log LOG = PlatformUtil.getLog(DownloadResources.class);
 
 	
@@ -71,7 +73,8 @@ public class DownloadResources extends DownloadResourceGroup {
 		return worldMap;
 	}
 
-	public IndexItem getWorldWikivoyageItem() {
+	@Nullable
+	public IndexItem getWikivoyageItem(@NonNull String fileName) {
 		String groupId = DownloadResourceGroupType.TRAVEL_GROUP.getDefaultId() + "#" +
 				DownloadResourceGroupType.WIKIVOYAGE_MAPS.getDefaultId() + "#" +
 				DownloadResourceGroupType.WIKIVOYAGE_HEADER.getDefaultId();
@@ -80,7 +83,7 @@ public class DownloadResources extends DownloadResourceGroup {
 			List<IndexItem> items = wikivoyageHeader.getIndividualResources();
 			if (items != null) {
 				for (IndexItem ii : items) {
-					if (ii.getBasename().equalsIgnoreCase(DownloadResources.WORLD_WIKIVOYAGE_NAME)) {
+					if (ii.getFileName().equals(fileName)) {
 						return ii;
 					}
 				}
