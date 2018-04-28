@@ -362,7 +362,8 @@ public class TravelDbHelper {
 			cursor.close();
 		}
 		LinkedHashMap<WikivoyageSearchResult, List<WikivoyageSearchResult>> res = new LinkedHashMap<>();
-		for (String header : navMap.keySet()) {
+		parts = parts == null ? new String[]{} : parts;
+		for (String header : parts) {
 			WikivoyageSearchResult searchResult = headerObjs.get(header);
 			List<WikivoyageSearchResult> results = navMap.get(header);
 			if (results != null) {
