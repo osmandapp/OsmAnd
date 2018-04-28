@@ -9,6 +9,7 @@
     <dimen name="card_row_min_height">48dp</dimen>
 	<dimen name="card_button_min_size">58dp</dimen>
 	<dimen name="card_button_progress_size">32dp</dimen>
+	<dimen name="card_padding">12dp</dimen>
 
 	<dimen name="widget_turn_lane_size">36dp</dimen>
 	<dimen name="widget_turn_lane_border">6dp</dimen>

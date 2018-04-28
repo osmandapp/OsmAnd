@@ -6,8 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/list_header_padding"
-    android:layout_marginLeft="@dimen/list_content_padding"
-    android:layout_marginRight="@dimen/list_content_padding"
+    android:layout_marginLeft="@dimen/card_padding"
+    android:layout_marginRight="@dimen/card_padding"
     android:background="@drawable/dialog_active_card_bg"
     android:orientation="vertical">
 
@@ -43,7 +43,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/list_content_padding">
+        android:layout_margin="@dimen/card_padding">
 
         <include layout="@layout/purchase_dialog_card_button"/>
 
