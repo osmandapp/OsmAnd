@@ -1,19 +1,20 @@
 package net.osmand.plus.wikivoyage.explore;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
-import net.osmand.plus.activities.OsmandActionBarActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadValidationManager;
@@ -28,7 +29,6 @@ import net.osmand.plus.wikivoyage.explore.travelcards.StartEditingTravelCard;
 import net.osmand.plus.wikivoyage.explore.travelcards.TravelDownloadUpdateCard;
 
 import java.io.File;
-import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -63,8 +63,6 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIn
 		return mainView;
 	}
 
-
-
 	public void populateData() {
 		final List<BaseTravelCard> items = new ArrayList<>();
 		final OsmandApplication app = getMyApplication();
@@ -74,18 +72,20 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIn
 		if (app.getTravelDbHelper().getSelectedTravelBook() != null) {
 			items.add(new HeaderTravelCard(app, nightMode, getString(R.string.popular_destinations)));
 			List<TravelArticle> popularArticles = app.getTravelDbHelper().getPopularArticles();
-			for (TravelArticle article : popularArticles) {
-				items.add(new ArticleTravelCard(getMyApplication(), nightMode, article, 
-						getActivity().getSupportFragmentManager()));
+			FragmentActivity activity = getActivity();
+			if (activity != null) {
+				for (TravelArticle article : popularArticles) {
+					items.add(new ArticleTravelCard(getMyApplication(), nightMode, article,
+							activity.getSupportFragmentManager()));
+				}
 			}
-
 		}
 		items.add(startEditingTravelCard);
 		adapter.setItems(items);
-		
+
 		checkToAddDownloadTravelCard();
 	}
-	
+
 	private void checkToAddDownloadTravelCard() {
 		final OsmandApplication app = getMyApplication();
 		final DownloadIndexesThread downloadThread = app.getDownloadThread();
@@ -100,8 +100,6 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIn
 			addDownloadUpdateCard(loadingInProgress);
 		}
 	}
-	
-	
 
 	@Override
 	public void newDownloadIndexes() {
@@ -109,7 +107,7 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIn
 			downloadIndexesRequested = false;
 			indexItem = getMyApplication().getDownloadThread().getIndexes()
 					.getWikivoyageItem(getWikivoyageFileName());
-			if(downloadUpdateCard == null) {
+			if (downloadUpdateCard == null) {
 				addDownloadUpdateCard(false);
 			}
 		}
@@ -131,13 +129,18 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIn
 
 	@Override
 	public void downloadHasFinished() {
-		File targetFile = indexItem.getTargetFile(getMyApplication());
+		final OsmandApplication app = getMyApplication();
+		File targetFile = indexItem.getTargetFile(app);
 		if (downloadUpdateCard != null && indexItem != null && targetFile.exists()) {
 			downloadUpdateCard.setLoadingInProgress(false);
 			removeDownloadUpdateCard();
-			getMyApplication().getTravelDbHelper().initTravelBooks();
-			getMyApplication().getTravelDbHelper().selectTravelBook(targetFile);
-			((WikivoyageExploreDialogFragment)getParentFragment()).populateData();
+			TravelDbHelper travelDbHelper = app.getTravelDbHelper();
+			travelDbHelper.initTravelBooks();
+			travelDbHelper.selectTravelBook(targetFile);
+			Fragment parent = getParentFragment();
+			if (parent != null && parent instanceof WikivoyageExploreDialogFragment) {
+				((WikivoyageExploreDialogFragment) parent).populateData();
+			}
 		}
 	}
 
@@ -188,14 +191,10 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIn
 		downloadUpdateCard = null;
 	}
 
-
-	
-
 	private void addOpenBetaTravelCard(List<BaseTravelCard> items, final boolean nightMode) {
 		final OsmandApplication app = getMyApplication();
 		if (!Version.isPaidVersion(app)) {
 			items.add(new OpenBetaTravelCard(app, nightMode, getFragmentManager()));
 		}
 	}
-
 }

@@ -121,7 +121,7 @@ public class TravelDbHelper {
 			selectedTravelBook = null;
 		}
 	}
-	
+
 	public void loadDataForSelectedTravelBook() {
 		localDataHelper.refreshCachedData();
 		loadPopularArticles();
@@ -212,7 +212,7 @@ public class TravelDbHelper {
 	public List<TravelArticle> getPopularArticles() {
 		return popularArticles;
 	}
-	
+
 	@NonNull
 	public List<TravelArticle> loadPopularArticles() {
 		List<TravelArticle> res = new ArrayList<>();

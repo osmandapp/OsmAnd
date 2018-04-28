@@ -3,7 +3,6 @@ package net.osmand.plus.wikivoyage.explore.travelcards;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import net.osmand.plus.OsmandApplication;
@@ -15,7 +14,6 @@ public class HeaderTravelCard extends BaseTravelCard {
 
 	private int articleItemCount;
 	private String title;
-
 
 	public HeaderTravelCard(OsmandApplication app, boolean nightMode, String title) {
 		super(app, nightMode);
@@ -57,4 +55,3 @@ public class HeaderTravelCard extends BaseTravelCard {
 		return TYPE;
 	}
 }
-
