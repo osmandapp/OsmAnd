@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
 	<string name="av_locations">Allugamientos</string>
 	<string name="plugin_settings">Complementos</string>
 	<string name="no_updates_available">Nun hai anovamientos disponibles</string>
@@ -534,7 +535,7 @@ L\'allugamientu y tiempu son visibles nel cuadru de mandos d\'OsmAnd tamién nel
     <string name="shared_string_favorites">Favoritos</string>
     <string name="shared_string_address">Direición</string>
     <string name="shared_string_add">Amestar</string>
-    <string name="shared_string_add_to_favorites">Amestar a favoritos</string>
+    <string name="shared_string_add_to_favorites">Amestar a «Favoritos»</string>
     <string name="record_plugin_name">Grabación de viaxe</string>
 	<string name="audionotes_plugin_description">El complementu de notes d\'audiu/videu apurre la funcionalidá de facer notes d\'audiu/semeyes/videu nun viaxe, usando un botón na pantalla\'l mapa o direutamente dende\'l menú contestual pa cualesquier posición nel mapa.</string>
     <string name="free">%1$s llibre</string>
@@ -636,7 +637,7 @@ L\'allugamientu y tiempu son visibles nel cuadru de mandos d\'OsmAnd tamién nel
     <string name="location_not_found">Nun s\'alcontró l\'allugamientu</string>
     <string name="search_location">Guetando allugamientu…</string>
     <string name="update_all_maps_now">¿Quies anovar agora tolos mapes?</string>
-    <string name="confirmation_to_delete_history_items">¿Quies desaniciar del historial los elementos esbillaos?</string>
+    <string name="confirmation_to_delete_history_items">¿Desaniciar del «Historial» los elementos esbillaos?</string>
     <string name="looking_up_address">Guetando direición</string>
     <string name="specified_directiory_not_writeable">Nun pudieron crease los mapes nel direutoriu especificáu</string>
     <string name="map_preferred_locale_descr">Llingua preferida pa les etiquetes del mapa (si nun ta disponible, camudaráse a inglés o nomes llocales).</string>
@@ -715,25 +716,25 @@ Puntos</string>
     <string name="simulate_your_location_descr">Simular la posición usando una ruta calculada o una traza GPX grabada.</string>
     <string name="disable_recording_once_app_killed_descrp">Posaráse\'l rexistru de GPX cuando s\'amortie l\'aplicación (per aplicaciones recientes). (La indicación de fondu d\'OsmAnd desapaecerá de la barra d\'avisos d\'Android).</string>
     <string name="restore_purchases">Restaurar merques</string>
-    <string name="fonts_header">Fontes pal mapa</string>
+    <string name="fonts_header">Tipografía del mapa</string>
     <string name="right_side_navigation">Conducción pela derecha</string>
     <string name="driving_region_automatic">Automáticu</string>
     <string name="do_not_send_anonymous_app_usage">Nun unviar estadístiques anónimes d\'usu de l\'aplicación</string>
-    <string name="do_not_send_anonymous_app_usage_desc">Osmand recueye información tocante a les partes qu\'abres de l\'aplicación. Enxamás s\'unvia\'l to allugamientu, nin nada qu\'introduzas n\'aplicación o nos detalles de les árees que veas, guetes o baxes.</string>
+    <string name="do_not_send_anonymous_app_usage_desc">Osmand recueye información tocante a les partes qu\'abres de l\'aplicación. Enxamás s\'unvia\'l to allugamientu, nin nada qu\'introduzas n\'aplicación o nos detalles de les árees que veas, guetes o descargues.</string>
     <string name="do_not_show_startup_messages">Nun amosar los mensaxes nel aniciu</string>
     <string name="do_not_show_startup_messages_desc">Nun amosar descuentos de l\'aplicación nin mensaxes especiales d\'actividaes llocales.</string>
     <string name="parking_options">Opciones d\'aparcamientu</string>
-    <string name="full_version_thanks">¡Gracies por mercar la versión completa d\'OsmAnd!</string>
+    <string name="full_version_thanks">Gracies por mercar la versión de pagu d\'OsmAnd.</string>
     <string name="routing_attr_relief_smoothness_factor_hills_name">Pindio</string>
     <string name="routing_attr_relief_smoothness_factor_plains_name">Menos pindio</string>
     <string name="routing_attr_relief_smoothness_factor_more_plains_name">Plano</string>
     <string name="routing_attr_driving_style_speed_name">Les rutes más curties</string>
     <string name="routing_attr_driving_style_balance_name">Equilibráu</string>
     <string name="routing_attr_driving_style_safety_name">Preferir estraes secundaries</string>
-    <string name="relief_smoothness_factor_descr">Terrén preferíu: llanu o pindiu.</string>
+    <string name="relief_smoothness_factor_descr">Terrén preferíu: Llanu o pindiu.</string>
     <string name="shared_string_slope">Cuesta</string>
     <string name="add_new_folder">Añadir carpeta nueva</string>
-    <string name="points_delete_multiple_succesful">Puntu(os) desaniciáu(os) correutamente.</string>
+    <string name="points_delete_multiple_succesful">Puntu(os) desaniciáu(os).</string>
     <string name="points_delete_multiple">Vas desaniciar %1$d puntu(os). ¿Tas seguru?</string>
     <string name="route_points_category_name">Xiros a pasar con esta ruta</string>
     <string name="track_points_category_name">Puntos destacaos d\'esta ruta</string>
@@ -743,8 +744,8 @@ Puntos</string>
     <string name="shared_string_time_moving">Tiempu moviéndose</string>
     <string name="shared_string_time_span">Duración temporal</string>
     <string name="shared_string_max">Máx.</string>
-    <string name="shared_string_start_time">Hora d\'aniciu</string>
-    <string name="shared_string_end_time">Hora final</string>
+    <string name="shared_string_start_time">Salida</string>
+    <string name="shared_string_end_time">Llegada</string>
     <string name="shared_string_color">Color</string>
     <string name="select_gpx_folder">Escueye la carpeta de traces</string>
     <string name="file_can_not_be_moved">El ficheru nun puede movese.</string>
@@ -790,27 +791,25 @@ Puntos</string>
     <string name="mapillary_image">Imaxe de Mapillary</string>
     <string name="open_mapillary">Abrir Mapillary</string>
     <string name="shared_string_install">Instalar</string>
-    <string name="improve_coverage_install_mapillary_desc">Pues facer les tos propies semeyes o series de semeyes y axuntales a esti allugamientu.
-\n
-\nPa facelo precises instalar l\'aplicación Mapillary dende la Google Play Store.</string>
+    <string name="improve_coverage_install_mapillary_desc">Instala Mapillary p\\\'añadir una o más fotos nesti llugar del mapa.</string>
     <string name="online_photos">Semeyes en llinia</string>
     <string name="shared_string_add_photos">Amestar semeyes</string>
     <string name="no_photos_descr">Nun tenemos semeyes pa esti llugar.</string>
-    <string name="mapillary_action_descr">Collabora coles tos vistes dende la cai d\'esti allugamientu per Mapillary.</string>
+    <string name="mapillary_action_descr">Ufre la to vista d\'esti allugamientu dende la cai usando Mapillary.</string>
     <string name="mapillary_widget">Widget de Mapillary</string>
-    <string name="mapillary_widget_descr">Permítete collaborar aína con Mapillary.</string>
+    <string name="mapillary_widget_descr">Permite collaborar aína con Mapillary.</string>
     <string name="mapillary_descr">Semeyes en llinia a nivel de cai. Escubri llugares, collabora o captura\'l mundu.</string>
     <string name="mapillary">Mapillary</string>
     <string name="plugin_mapillary_descr">Semeyes a nivel de cai pa tol mundu. Descubri llugares, collabora y captura\'l mundu.</string>
-    <string name="private_access_routing_req">El to destín allúgase nun área con accesu priváu. ¿Quies permitir l\'accesu a les carreteres privaes nesti viaxe?</string>
+    <string name="private_access_routing_req">El destín allúgase nun área con accesu priváu. ¿Usar les carreteres privaes nesti viaxe?</string>
     <string name="restart_search">Reaniciar gueta</string>
     <string name="increase_search_radius">Aumentar radiu de gueta</string>
-    <string name="nothing_found">Nun s\'alcontró nada :(</string>
+    <string name="nothing_found">Nun s\'alcontró nada</string>
     <string name="nothing_found_descr">Cambia la consulta de gueta o aumenta\'l radiu.</string>
-    <string name="quick_action_showhide_osmbugs_title">Amosar/anubrir notes d\'OSM</string>
+    <string name="quick_action_showhide_osmbugs_title">Conmutar les Notes d\'OSM</string>
     <string name="quick_action_osmbugs_show">Amosar notes d\'OSM</string>
     <string name="quick_action_osmbugs_hide">Anubrir notes d\'OSM</string>
-    <string name="quick_action_showhide_osmbugs_descr">Calcando nel botón d\'aición amosaránse o anubriránse les notes d\'OSM nel mapa.</string>
+    <string name="quick_action_showhide_osmbugs_descr">Tocando nesti botón d\'aición amuésense o anúbrense les Notes d\'OSM nel mapa.</string>
     <string name="sorted_by_distance">Ordenóse pela distancia</string>
     <string name="search_favorites">Guetar favoritos</string>
     <string name="hide_from_zoom_level">Anubrir del nivel de zoom</string>
@@ -822,7 +821,7 @@ Puntos</string>
     <string name="change_color">Camudar color</string>
     <string name="edit_name">Editar nome</string>
     <string name="animate_my_location">Animar la mio posición</string>
-    <string name="animate_my_location_desc">Activa l\'animación de la mio posición demientres navego.</string>
+    <string name="animate_my_location_desc">Activa l\'animación de movimientu nel mapa de «Mio posición» demientres navego.</string>
     <string name="shared_string_overview">Previsualización</string>
     <string name="select_street">Esbillar cai</string>
     <string name="shared_string_in_name">en %1$s</string>
@@ -880,7 +879,7 @@ Puntos</string>
     <string name="shared_string_permissions">Permisos</string>
     <string name="import_gpx_failed_descr">OsmAnd nun pudo importar el ficheru. Comprueba si OsmAnd tien permisu pa lleer el ficheru dende\'l so allugamientu.</string>
     <string name="distance_moving">Distancia correxida</string>
-    <string name="wrong_user_name">¡Nome d\\\'usuariu incorreutu!</string>
+    <string name="wrong_user_name">Nome d\\\'usuariu incorreutu</string>
     <string name="shared_string_to">A</string>
     <string name="mapillary_menu_date_from">Dende</string>
     <string name="mapillary_menu_descr_dates">Ver namái les imaxes añadíes</string>
@@ -888,15 +887,15 @@ Puntos</string>
     <string name="mapillary_menu_edit_text_hint">Escribe\\\'l nome d\\\'usuariu</string>
     <string name="mapillary_menu_descr_username">Ver namái les imaxes añadíes por</string>
     <string name="mapillary_menu_title_username">Nome del usuariu</string>
-    <string name="mapillary_menu_filter_description">Pueden filtriase les imaxes pol remitente o pola data. Los filtros aplíquense solo nes escales cercanes.</string>
+    <string name="mapillary_menu_filter_description">Puedes filtriar les imaxes pol remitente o pola data. Los filtros aplíquense solo nes escales cercanes.</string>
     
     <string name="map_widget_ruler_control">Regla de radiu</string>
     <string name="improve_coverage_mapillary">Ameyorar la cobertura de fotos con Mapillary</string>
-    <string name="hillshade_menu_download_descr">Pa ver la solombra del relieve nel mapa, necesites descargar la superposición de solombra del relieve d\'esta rexón.</string>
-    <string name="hillshade_purchase_header">Pa ver la solombra del relieve nel mapa, necesites comprar ya instalar el complementu Curves de Nivel</string>
-    <string name="srtm_menu_download_descr">Pa ver les curves de nivel nel mapa, necesites descargar el mapa de curves de nivel d\'esta rexón.</string>
+    <string name="hillshade_menu_download_descr">"Descarga\'l  mapa de «Superposición de solombra» pa dar relieve a esta fastera."</string>
+    <string name="hillshade_purchase_header">Instala\'l complementu «Curves de Nivel» pa veles nel mapa</string>
+    <string name="srtm_menu_download_descr">Descarga\'l mapa de «Curves de nivel» pa usalu nesta fastera.</string>
     <string name="store_tracks_in_monthly_directories">Almacenar les traces grabaes en carpetes mensuales</string>
-    <string name="store_tracks_in_monthly_directories_descrp">Almacenar les traces grabaes en subcarpetes por mes de grabación (como 2017 - 01).</string>
+    <string name="store_tracks_in_monthly_directories_descrp">Almacenar les traces grabaes en subcarpetes por mes de grabación (como 2018 - 01).</string>
     <string name="shared_string_reset">Reaniciar</string>
     <string name="shared_string_reload">Recargar</string>
     <string name="mapillary_menu_descr_tile_cache">Recargar los mosaicos pa ver los datos actualizaos.</string>
@@ -911,17 +910,17 @@ Puntos</string>
     <string name="no_overlay">Ensin superposición</string>
     <string name="no_underlay">Ensin fondu</string>
     <string name="subscribe_email_desc"/>
-    <string name="depth_contour_descr">Conxuntu de mapes que contienen la batimetría y puntos náuticos.</string>
-    <string name="sea_depth_thanks">¡Gracies por comprar les curves de fondura marina!</string>
+    <string name="depth_contour_descr">Ver les llinies de batimetría y puntos náuticos.</string>
+    <string name="sea_depth_thanks">¡Gracies por comprar les «Curves de fondura náutica»</string>
     <string name="shared_string_markers">Marcadores</string>
     <string name="coordinates_format">Formatu de coordenaes</string>
     <string name="use_system_keyboard">Usar el tecláu del sistema</string>
-    <string name="fast_coordinates_input_descr">Escueyi\'l formatu d\'entrada de coordenaes. Siempre puedes cambialo tocando en Opciones.</string>
+    <string name="fast_coordinates_input_descr">Escueyi\'l formatu d\'entrada de coordenaes. Siempre puedes cambialo tocando en «Opciones».</string>
     <string name="fast_coordinates_input">Entrada rápida de coordenaes</string>
     <string name="routing_attr_avoid_ice_roads_fords_name">Evitar les estraes con xelu, vaos</string>
     <string name="routing_attr_avoid_ice_roads_fords_description">Evitar les estraes de xelu y vaos.</string>
     <string name="use_location">Usar posición</string>
-    <string name="add_location_as_first_point_descr">Añade la to posición como primer puntu pa planificar la ruta perfeuta.</string>
+    <string name="add_location_as_first_point_descr">Añade la to posición como puntu de salida pa planificar la ruta perfeuta.</string>
     <string name="my_location">La mio posición</string>
     <string name="shared_string_finish">Acabar</string>
     <string name="plan_route">Planificar ruta</string>
@@ -931,12 +930,12 @@ Puntos</string>
     <string name="marker_save_as_track_descr">Esportar los marcadores a un ficheru que puedes indicar equí:</string>
     <string name="marker_save_as_track">Guardar como traza</string>
     <string name="move_to_history">Mover al historial</string>
-    <string name="group_will_be_removed_after_restart">El grupu desaniciaráse nel siguiente reaniciu de la app.</string>
-    <string name="show_guide_line">Ver les llinies de guia</string>
+    <string name="group_will_be_removed_after_restart">El grupu desapaecerá la siguiente vez qu\'anicies la app.</string>
+    <string name="show_guide_line">Ver les llinies de direición</string>
     <string name="show_arrows_on_the_map">Ver fleches nel mapa</string>
     <string name="show_passed">Ver pasaos</string>
     <string name="hide_passed">Tapecer pasaos</string>
-    <string name="remove_from_map_markers">Quitar de los Marcadores de mapa</string>
+    <string name="remove_from_map_markers">Quitar de los marcadores de mapa</string>
     <string name="descendingly">descendiente</string>
     <string name="ascendingly">ascendiente</string>
     <string name="date_added">Añadióse la data</string>
@@ -954,7 +953,7 @@ Puntos</string>
 	<string name="wrong_format">Formatu incorreutu</string>
     <string name="shared_string_road">Estrada</string>
     <string name="show_map">Ver el mapa</string>
-    <string name="route_is_calculated">Calculóse la ruta</string>
+    <string name="route_is_calculated">Ruta calculada</string>
     <string name="round_trip">Trayectu circular</string>
     <string name="shared_string_right">Derecha</string>
     <string name="shared_string_left">Izquierda</string>
@@ -962,24 +961,24 @@ Puntos</string>
     <string name="shared_string_paste">Pegar</string>
     <string name="coordinate_input_accuracy_description">Camudar automáticamente al campu siguiente tres introducir %1$d díxitos decimales.</string>
     <string name="coordinate_input_accuracy">%1$d cifres</string>
-    <string name="go_to_next_field">Dir al siguiente campu</string>
+    <string name="go_to_next_field">Siguiente campu</string>
     <string name="rename_marker">Cambiar nome del marcador</string>
     <string name="tap_on_map_to_hide_interface_descr">Una toque nel mapa alterna los botones de control y los complementos.</string>
     <string name="tap_on_map_to_hide_interface">Mou de pantalla completa</string>
     
     <string name="mark_passed">Marcar como pasáu</string>
-    <string name="import_gpx_file_description">pueden importase como puntos de favoritos, o como ficheru de traza.</string>
+    <string name="import_gpx_file_description">puede importase como favoritu, o como ficheru de traza.</string>
     <string name="import_as_gpx">Importar como ficheru GPX</string>
-    <string name="import_as_favorites">Importar como favoritos</string>
+    <string name="import_as_favorites">Importar como favoritu</string>
     <string name="import_file">Importar ficheru</string>
 	<string name="waypoints_added_to_map_markers">Puntos de ruta añadíos a los marcadores del mapa</string>
 	<string name="plan_route_no_markers_toast">Hai qu\'amestar polo menos un marcador pa usar esta función.</string>
-    <string name="osn_modify_dialog_error">Hebo una esceición: nun se camudó la nota</string>
+    <string name="osn_modify_dialog_error">Hebo una esceición: Nun se camudó la nota</string>
     <string name="empty_state_av_notes">¡Toma notes!</string>
     <string name="yesterday">Ayeri</string>
     <string name="this_year">Esti añu</string>
     <string name="move_all_to_history">Mover too al historial</string>
-    <string name="do_not_use_animations">Nun usar animaciones</string>
+    <string name="do_not_use_animations">Ensin animaciones</string>
     <string name="keep_showing_on_map">Siguir amosando nel mapa</string>
     <string name="exit_without_saving">¿Colar ensin guardar?</string>
     <string name="line">Llinia</string>
@@ -1045,17 +1044,13 @@ Puntos</string>
     <string name="context_menu_points_of_group">Tolos puntos del grupu</string>
     <string name="open_from">Abierto dende les</string>
     <string name="open_till">Abierto hasta les</string>
-    <string name="will_close_at">Zarrará a les</string>
-    <string name="will_open_at">Abrirá a les</string>
-    <string name="will_open_on">Abrirá a les</string>
+    <string name="will_close_at">Zarra a les</string>
+    <string name="will_open_at">Abre a les</string>
+    <string name="will_open_on">Abre a les</string>
     <string name="additional_actions">Más aiciones</string>
     <string name="av_locations_selected_desc">Ficheru GPX con coordenaes y datos de les notes esbillaes.</string>
     <string name="av_locations_all_desc">Ficheru GPX con coordenaes y datos de toles notes.</string>
-    <string name="release_3_0">\\022 La detección de señales de stop agora considera la direición de conducción 
-\n 
-\n • Nuevu algoritmu qu\\\'ufre valores significativos d\\\'ascensu y descensu pa les traces GPX. 
-\n 
-\n • La duración de la caminata tien en cuenta lo pindio del terrén (regla de Naismith).
+    <string name="release_3_0">\\022
 \n
 \n</string>
     <string name="modify_the_search_query">Cambiar la consulta de la gueta.</string>
@@ -1076,20 +1071,20 @@ Puntos</string>
     <string name="looking_for_tracks_with_waypoints">Buscando traces con puntos de ruta</string>
     <string name="shared_string_more_without_dots">Más</string>
     <string name="appearance_on_the_map">Apariencia nel mapa</string>
-    <string name="add_track_to_markers_descr">Seleiciona una traza p\\\'añadir los puntos de ruta a los marcadores. (Sólo se ven les traces con puntos de ruta)</string>
+    <string name="add_track_to_markers_descr">Los puntos de ruta pueden añadise a los marcadores seleicionando una de les traces que los tengan.</string>
     <string name="add_favourites_group_to_markers_descr">Seleiciona una categoría favorita p\\\'amestala a los marcadores.</string>
     <string name="track_waypoints">Puntos de ruta de la traza</string>
     <string name="favourites_group">Categoría de favoritos</string>
     <string name="add_group">Amestar un grupu</string>
     <string name="add_group_descr">Puedes importar grupos dende favoritos o de puntos de ruta d\\\'una traza.</string>
     <string name="empty_state_markers_active">¡Crea marcadores de mapa!</string>
-    <string name="empty_state_markers_active_desc">Da un toque llargu o curtiu en llugares, llueu toca nel botón de bandera de marcador.</string>
+    <string name="empty_state_markers_active_desc">Da un toque llargu o curtiu en «Llugares», llueu toca nel botón de bandera de marcador.</string>
     <string name="empty_state_markers_groups">Importar grupos</string>
     <string name="empty_state_markers_groups_desc">Puedes importar grupos de favoritos o puntos de ruta d\\\'una traza como marcadores.</string>
     <string name="empty_state_markers_history">\@string/shared_string_history</string>
     <string name="shared_string_two">Dos</string>
     <string name="shared_string_one">Un</string>
-    <string name="show_guide_line_descr">Amosar llinies de guia dende la to posición a la del marcador activu.</string>
-    <string name="show_arrows_descr">Amosar una o dos fleches indicando la direición a los marcadores activos.</string>
+    <string name="show_guide_line_descr">Amosar llinies de direición dende la to posición a les de marcadores activos.</string>
+    <string name="show_arrows_descr">Ver una o dos fleches qu\'indiquen la direición a los marcadores activos.</string>
     <string name="osmand_parking_am">AM</string>
     </resources>
