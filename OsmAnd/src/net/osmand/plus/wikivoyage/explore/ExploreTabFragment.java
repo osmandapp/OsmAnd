@@ -14,15 +14,11 @@ import android.widget.Toast;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
-import net.osmand.plus.activities.LocalIndexHelper;
-import net.osmand.plus.activities.LocalIndexInfo;
 import net.osmand.plus.activities.OsmandActionBarActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.download.DownloadIndexesThread;
-import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.DownloadValidationManager;
 import net.osmand.plus.download.IndexItem;
-import net.osmand.plus.download.ui.AbstractLoadLocalIndexTask;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
 import net.osmand.plus.wikivoyage.data.TravelDbHelper;
 import net.osmand.plus.wikivoyage.explore.travelcards.ArticleTravelCard;
@@ -32,6 +28,7 @@ import net.osmand.plus.wikivoyage.explore.travelcards.OpenBetaTravelCard;
 import net.osmand.plus.wikivoyage.explore.travelcards.StartEditingTravelCard;
 import net.osmand.plus.wikivoyage.explore.travelcards.TravelDownloadUpdateCard;
 
+import java.io.File;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
@@ -47,7 +44,7 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIn
 
 	private IndexItem indexItem;
 
-	private boolean worldWikivoyageDownloaded;
+	private File selectedTravelBook;
 	private boolean downloadIndexesRequested;
 	private boolean downloadUpdateCardAdded;
 
@@ -71,7 +68,10 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIn
 	public void newDownloadIndexes() {
 		if (downloadIndexesRequested) {
 			downloadIndexesRequested = false;
-			indexItem = getMyApplication().getDownloadThread().getIndexes().getWorldWikivoyageItem();
+			if (selectedTravelBook != null) {
+				indexItem = getMyApplication().getDownloadThread().getIndexes()
+						.getWikivoyageItem(selectedTravelBook.getName());
+			}
 			addDownloadUpdateCard(false);
 		}
 	}
@@ -80,7 +80,9 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIn
 	public void downloadInProgress() {
 		DownloadIndexesThread downloadThread = getMyApplication().getDownloadThread();
 		IndexItem current = downloadThread.getCurrentDownloadingItem();
-		indexItem = downloadThread.getIndexes().getWorldWikivoyageItem();
+		if (selectedTravelBook != null) {
+			indexItem = downloadThread.getIndexes().getWikivoyageItem(selectedTravelBook.getName());
+		}
 		if (current != null
 				&& indexItem != null
 				&& current == indexItem
@@ -109,7 +111,7 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIn
 
 		boolean outdated = indexItem != null && indexItem.isOutdated();
 
-		if (!worldWikivoyageDownloaded || outdated) {
+		if (selectedTravelBook == null || outdated) {
 			downloadUpdateCard = new TravelDownloadUpdateCard(app, nightMode, !outdated);
 			downloadUpdateCard.setLoadingInProgress(loadingInProgress);
 			downloadUpdateCard.setListener(new TravelDownloadUpdateCard.ClickListener() {
@@ -150,7 +152,7 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIn
 		final List<BaseTravelCard> items = new ArrayList<>();
 		final OsmandApplication app = getMyApplication();
 
-		runWorldWikivoyageFileCheck();
+		checkSelectedTravelBook();
 		startEditingTravelCard = new StartEditingTravelCard(app, nightMode);
 		addOpenBetaTravelCard(items, nightMode);
 		items.add(startEditingTravelCard);
@@ -163,24 +165,22 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIn
 		return items;
 	}
 
-	private void runWorldWikivoyageFileCheck() {
+	private void checkSelectedTravelBook() {
 		final OsmandApplication app = getMyApplication();
-		new CheckWorldWikivoyageTask(app, new CheckWorldWikivoyageTask.Callback() {
-			@Override
-			public void onCheckFinished(boolean worldWikivoyageDownloaded) {
-				ExploreTabFragment.this.worldWikivoyageDownloaded = worldWikivoyageDownloaded;
-				DownloadIndexesThread downloadThread = app.getDownloadThread();
-				if (!downloadThread.getIndexes().isDownloadedFromInternet) {
-					downloadIndexesRequested = true;
-					app.getDownloadThread().runReloadIndexFilesSilent();
-				} else {
-					indexItem = downloadThread.getIndexes().getWorldWikivoyageItem();
-					IndexItem current = downloadThread.getCurrentDownloadingItem();
-					boolean loadingInProgress = current != null && indexItem != null && current == indexItem;
-					addDownloadUpdateCard(loadingInProgress);
-				}
+		final DownloadIndexesThread downloadThread = app.getDownloadThread();
+		selectedTravelBook = app.getTravelDbHelper().getSelectedTravelBook();
+
+		if (!downloadThread.getIndexes().isDownloadedFromInternet) {
+			downloadIndexesRequested = true;
+			downloadThread.runReloadIndexFilesSilent();
+		} else {
+			if (selectedTravelBook != null) {
+				indexItem = downloadThread.getIndexes().getWikivoyageItem(selectedTravelBook.getName());
 			}
-		}).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+			IndexItem current = downloadThread.getCurrentDownloadingItem();
+			boolean loadingInProgress = current != null && indexItem != null && current == indexItem;
+			addDownloadUpdateCard(loadingInProgress);
+		}
 	}
 
 	private void addPopularDestinations(OsmandApplication app) {
@@ -193,45 +193,6 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIn
 		final OsmandApplication app = getMyApplication();
 		if (!Version.isPaidVersion(app)) {
 			items.add(new OpenBetaTravelCard(app, nightMode, getFragmentManager()));
-		}
-	}
-
-	private static class CheckWorldWikivoyageTask extends AsyncTask<Void, Void, Boolean> {
-
-		private OsmandApplication app;
-		private Callback callback;
-
-		CheckWorldWikivoyageTask(OsmandApplication app, Callback callback) {
-			this.app = app;
-			this.callback = callback;
-		}
-
-		@Override
-		protected Boolean doInBackground(Void... voids) {
-			final boolean[] worldWikivoyageDownloaded = new boolean[1];
-			new LocalIndexHelper(app).getLocalTravelFiles(new AbstractLoadLocalIndexTask() {
-				@Override
-				public void loadFile(LocalIndexInfo... loaded) {
-					for (LocalIndexInfo lii : loaded) {
-						if (lii.getBaseName().toLowerCase().equals(DownloadResources.WORLD_WIKIVOYAGE_NAME)) {
-							worldWikivoyageDownloaded[0] = true;
-						}
-					}
-				}
-			});
-			return worldWikivoyageDownloaded[0];
-		}
-
-		@Override
-		protected void onPostExecute(Boolean worldWikivoyageDownloaded) {
-			if (callback != null) {
-				callback.onCheckFinished(worldWikivoyageDownloaded);
-			}
-			callback = null;
-		}
-
-		interface Callback {
-			void onCheckFinished(boolean worldWikivoyageDownloaded);
 		}
 	}
 
