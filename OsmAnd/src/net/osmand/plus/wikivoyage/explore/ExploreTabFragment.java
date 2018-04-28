@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
-
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
@@ -132,17 +131,17 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIn
 
 	@Override
 	public void downloadHasFinished() {
-		IndexItem current = getMyApplication().getDownloadThread().getCurrentDownloadingItem();
-		if (downloadUpdateCard != null && current != null && indexItem != null && current == indexItem) {
+		File targetFile = indexItem.getTargetFile(getMyApplication());
+		if (downloadUpdateCard != null && indexItem != null && targetFile.exists()) {
 			downloadUpdateCard.setLoadingInProgress(false);
 			removeDownloadUpdateCard();
+			getMyApplication().getTravelDbHelper().initTravelBooks();
+			getMyApplication().getTravelDbHelper().selectTravelBook(targetFile);
+			((WikivoyageExploreDialogFragment)getParentFragment()).populateData();
 		}
 	}
 
 	private void addDownloadUpdateCard(boolean loadingInProgress) {
-//		if(downloadUpdateCard != null) {
-//			return;
-//		}
 		final OsmandApplication app = getMyApplication();
 
 		boolean outdated = indexItem != null && indexItem.isOutdated();
