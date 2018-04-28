@@ -30,9 +30,7 @@ public class HeaderTravelCard extends BaseTravelCard {
 			if (articleItemCount > 0) {
 				holder.description.setText(String.valueOf(articleItemCount));
 				holder.description.setVisibility(View.VISIBLE);
-				holder.progressBar.setVisibility(View.GONE);
 			} else {
-				holder.progressBar.setVisibility(View.VISIBLE);
 				holder.description.setVisibility(View.INVISIBLE);
 			}
 		}
@@ -42,13 +40,11 @@ public class HeaderTravelCard extends BaseTravelCard {
 
 		final TextView title;
 		final TextView description;
-		final ProgressBar progressBar;
 
 		public HeaderTravelVH(View itemView) {
 			super(itemView);
 			title = (TextView) itemView.findViewById(R.id.title);
 			description = (TextView) itemView.findViewById(R.id.description);
-			progressBar = (ProgressBar) itemView.findViewById(R.id.progressBar);
 		}
 	}
 

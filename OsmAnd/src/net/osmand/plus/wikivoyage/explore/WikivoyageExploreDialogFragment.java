@@ -3,6 +3,7 @@ package net.osmand.plus.wikivoyage.explore;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.ColorStateList;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -18,7 +19,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import net.osmand.AndroidUtils;
 import net.osmand.PicassoUtils;
 import net.osmand.plus.LockableViewPager;
@@ -26,10 +26,13 @@ import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.wikivoyage.WikivoyageBaseDialogFragment;
+import net.osmand.plus.wikivoyage.data.TravelDbHelper;
 import net.osmand.plus.wikivoyage.search.WikivoyageSearchDialogFragment;
 
+import java.lang.ref.WeakReference;
 import java.util.Arrays;
 import java.util.List;
+
 
 public class WikivoyageExploreDialogFragment extends WikivoyageBaseDialogFragment implements DownloadIndexesThread.DownloadEvents {
 
@@ -40,6 +43,8 @@ public class WikivoyageExploreDialogFragment extends WikivoyageBaseDialogFragmen
 
 	private ExploreTabFragment exploreTabFragment;
 	private SavedArticlesTabFragment savedArticlesTabFragment;
+
+	private View mainView;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -53,6 +58,7 @@ public class WikivoyageExploreDialogFragment extends WikivoyageBaseDialogFragmen
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+		
 		FragmentManager childFm = getChildFragmentManager();
 		List<Fragment> fragments = childFm.getFragments();
 		if (fragments != null) {
@@ -71,7 +77,7 @@ public class WikivoyageExploreDialogFragment extends WikivoyageBaseDialogFragmen
 			savedArticlesTabFragment = new SavedArticlesTabFragment();
 		}
 
-		final View mainView = inflate(R.layout.fragment_wikivoyage_explore_dialog, container);
+		this.mainView = inflate(R.layout.fragment_wikivoyage_explore_dialog, container);
 
 		setupToolbar((Toolbar) mainView.findViewById(R.id.toolbar));
 
@@ -130,9 +136,46 @@ public class WikivoyageExploreDialogFragment extends WikivoyageBaseDialogFragmen
 				return false;
 			}
 		});
-
+		populateData();
 		return mainView;
 	}
+	
+	protected void onDataLoaded() {
+		mainView.findViewById(R.id.progress_bar).setVisibility(View.GONE);
+		if(exploreTabFragment != null) {
+			exploreTabFragment.populateData();
+		}
+	}
+
+	public void populateData() {
+		mainView.findViewById(R.id.progress_bar).setVisibility(View.VISIBLE);
+		new LoadWikivoyageData(this).execute();
+	}
+	
+	private static class LoadWikivoyageData extends AsyncTask<Void, Void, Void> {
+		
+		private WeakReference<WikivoyageExploreDialogFragment> weakReference;
+		private TravelDbHelper travelDbHelper;
+
+		public LoadWikivoyageData(WikivoyageExploreDialogFragment fragment) {
+			travelDbHelper = fragment.getMyApplication().getTravelDbHelper();
+			weakReference = new WeakReference<WikivoyageExploreDialogFragment>(fragment);
+		}
+
+		@Override
+		protected Void doInBackground(Void... params) {
+			travelDbHelper.loadDataForSelectedTravelBook();
+			return null;
+		}
+		@Override
+		protected void onPostExecute(Void result) {
+			WikivoyageExploreDialogFragment option = weakReference.get();
+			if(option != null && option.isResumed()) {
+				option.onDataLoaded();
+			}
+		}
+		
+	};
 
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -202,4 +245,5 @@ public class WikivoyageExploreDialogFragment extends WikivoyageBaseDialogFragmen
 			return fragments.size();
 		}
 	}
+
 }

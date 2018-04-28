@@ -58,13 +58,37 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIn
 		final View mainView = inflater.inflate(R.layout.fragment_explore_tab, container, false);
 		final RecyclerView rv = (RecyclerView) mainView.findViewById(R.id.recycler_view);
 
-		adapter.setItems(generateItems(), false);
+		populateData();
 
 		rv.setLayoutManager(new LinearLayoutManager(getContext()));
 		rv.setAdapter(adapter);
 
 		return mainView;
 	}
+
+
+
+	public void populateData() {
+		final List<BaseTravelCard> items = new ArrayList<>();
+		final OsmandApplication app = getMyApplication();
+
+		checkSelectedTravelBook();
+		startEditingTravelCard = new StartEditingTravelCard(app, nightMode);
+		addOpenBetaTravelCard(items, nightMode);
+		if (app.getTravelDbHelper().getSelectedTravelBook() != null) {
+			items.add(new HeaderTravelCard(app, nightMode, getString(R.string.popular_destinations)));
+			List<TravelArticle> popularArticles = app.getTravelDbHelper().getPopularArticles();
+			for (TravelArticle article : popularArticles) {
+				items.add(new ArticleTravelCard(getMyApplication(), nightMode, article, 
+						getActivity().getSupportFragmentManager()));
+			}
+
+		}
+		items.add(startEditingTravelCard);
+		adapter.setItems(items);
+	}
+	
+	
 
 	@Override
 	public void newDownloadIndexes() {
@@ -151,22 +175,6 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIn
 		downloadUpdateCardAdded = false;
 	}
 
-	private List<BaseTravelCard> generateItems() {
-		final List<BaseTravelCard> items = new ArrayList<>();
-		final OsmandApplication app = getMyApplication();
-
-		checkSelectedTravelBook();
-		startEditingTravelCard = new StartEditingTravelCard(app, nightMode);
-		addOpenBetaTravelCard(items, nightMode);
-		items.add(startEditingTravelCard);
-
-		if (app.getTravelDbHelper().getSelectedTravelBook() != null) {
-			items.add(new HeaderTravelCard(app, nightMode, getString(R.string.popular_destinations)));
-			addPopularDestinations(app);
-		}
-
-		return items;
-	}
 
 	private void checkSelectedTravelBook() {
 		final OsmandApplication app = getMyApplication();
@@ -184,12 +192,6 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIn
 		}
 	}
 
-	private void addPopularDestinations(OsmandApplication app) {
-		PopularDestinationsSearchTask popularDestinationsSearchTask = new PopularDestinationsSearchTask(
-				app.getTravelDbHelper(), getMyActivity(), adapter, nightMode, startEditingTravelCard);
-		popularDestinationsSearchTask.execute();
-	}
-
 	private void addOpenBetaTravelCard(List<BaseTravelCard> items, final boolean nightMode) {
 		final OsmandApplication app = getMyApplication();
 		if (!Version.isPaidVersion(app)) {
@@ -197,47 +199,4 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIn
 		}
 	}
 
-	private static class PopularDestinationsSearchTask extends AsyncTask<Void, TravelDbHelper, List<TravelArticle>> {
-
-		private TravelDbHelper travelDbHelper;
-		private WeakReference<OsmandActionBarActivity> weakContext;
-		private WeakReference<ExploreRvAdapter> weakAdapter;
-		private WeakReference<StartEditingTravelCard> weakStartEditingTravelCard;
-		private boolean nightMode;
-
-		PopularDestinationsSearchTask(TravelDbHelper travelDbHelper,
-									  OsmandActionBarActivity context, ExploreRvAdapter adapter, boolean nightMode, StartEditingTravelCard startEditingTravelCard) {
-			this.travelDbHelper = travelDbHelper;
-			weakContext = new WeakReference<>(context);
-			weakAdapter = new WeakReference<>(adapter);
-			weakStartEditingTravelCard = new WeakReference<>(startEditingTravelCard);
-			this.nightMode = nightMode;
-		}
-
-		@Override
-		protected List<TravelArticle> doInBackground(Void... voids) {
-			return travelDbHelper.searchPopular();
-		}
-
-		@Override
-		protected void onPostExecute(List<TravelArticle> items) {
-			OsmandActionBarActivity activity = weakContext.get();
-			ExploreRvAdapter adapter = weakAdapter.get();
-			StartEditingTravelCard startEditingTravelCard = weakStartEditingTravelCard.get();
-
-			if (activity != null && adapter != null && startEditingTravelCard != null) {
-				List<BaseTravelCard> adapterItems = adapter.getItems();
-
-				if (adapterItems.contains(startEditingTravelCard)) {
-					adapterItems.remove(startEditingTravelCard);
-				}
-				for (TravelArticle article : items) {
-					adapterItems.add(new ArticleTravelCard(activity.getMyApplication(), nightMode, article, activity.getSupportFragmentManager()));
-				}
-
-				adapterItems.add(startEditingTravelCard);
-				adapter.notifyDataSetChanged();
-			}
-		}
-	}
 }

@@ -61,6 +61,13 @@
 			</LinearLayout>
 
 		</android.support.v7.widget.Toolbar>
+		<ProgressBar
+			android:id="@+id/progress_bar"
+			android:layout_width="match_parent"
+			style="?android:attr/progressBarStyleHorizontal"
+			android:indeterminate="true"
+			android:layout_height="wrap_content" />
+			
 
 		<FrameLayout
 			android:layout_width="match_parent"
