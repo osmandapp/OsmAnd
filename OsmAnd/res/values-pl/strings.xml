@@ -66,7 +66,7 @@
     <string name="favorite_places_category">Miejsca</string>
     <string name="shared_string_others">Inne</string>
     <string name="shared_string_no_thanks">Niepotrzebne</string>
-    <string name="basemap_missing">Nie zainstalowano podstawowej mapy świata. Proszę pobrać plik World_basemap_x.obf, aby wyświetlać mapę poglądową całego świata.</string>
+    <string name="basemap_missing">Pobierz podstawową mapę świata, by uzyskać poglądowe pokrycie całego świata na niskich stopniach przybliżenia.</string>
     <string name="vector_data_missing">Pobierz dane (\"offline\") by używać map offline.</string>
     <string name="local_index_gpx_info_show">"
 \n
@@ -108,7 +108,7 @@
     <string name="installing_new_resources">Rozpakowywanie nowych danych…</string>
     <string name="internet_connection_required_for_online_route">Wybrano sieciową usługę nawigacyjną, ale nie nawiązano połączenia sieciowego.</string>
     <string name="tts_language_not_supported_title">Nieobsługiwany język</string>
-    <string name="tts_language_not_supported">Wybrany język nie jest obsługiwany przez zainstalowany moduł syntezy mowy. Odwiedzić Android Market, w poszukiwaniu innego mechanizmu syntezy mowy? W przeciwnym przypadku zostanie użyty aktualny język.</string>
+    <string name="tts_language_not_supported">Wybrany język nie jest obsługiwany przez zainstalowany moduł syntezy mowy (TTS). Poszukać innego mechanizmu syntezy mowy w sklepie? W przeciwnym przypadku zostanie użyty aktualny język.</string>
     <string name="tts_missing_language_data_title">Brakujące dane</string>
     <string name="tts_missing_language_data">Brak danych dla wybranego języka. Czy chcesz odwiedzić Android Market, by zainstalować?</string>
     <string name="gpx_option_reverse_route">Odwróć kierunek GPX</string>
@@ -223,10 +223,10 @@
     <string name="specified_dir_doesnt_exist">Nie można odnaleźć wskazanego katalogu.</string>
     <string name="application_dir">Katalog przechowywania danych</string>
 
-    <string name="osmand_net_previously_installed">Wszystkie dane offline starej, zainstalowanej aplikacji będą obsługiwane przez nową wersję, ale punkty ulubione powinny być wyeksportowane w starej aplikacji i zaimportowane w nowej.</string>
+    <string name="osmand_net_previously_installed">Wszystkie dane offline starej, zainstalowanej aplikacji będą obsługiwane przez nową wersję, ale punkty ulubione muszą być wyeksportowane w starej aplikacji i zaimportowane w nowej.</string>
     <string name="build_installed">Zainstalowano kompilację {0} ({1}).</string>
     <string name="downloading_build">Pobieranie kompilacji…</string>
-    <string name="install_selected_build">Kontynuować instalację OsmAnd - {0} z {1} {2} MB ?</string>
+    <string name="install_selected_build">Zainstalować OsmAnd - {0} z {1} {2} MB ?</string>
     <string name="loading_builds_failed">Nie udało się pobrać listy kompilacji OsmAnd</string>
     <string name="loading_builds">Wczytywanie listy kompilacji OsmAnd…</string>
     <string name="select_build_to_install">Wybieranie wersji do zainstalowania</string>
@@ -427,7 +427,7 @@
     <string name="router_service">Usługa nawigacyjna</string>
     <string name="sd_dir_not_accessible">Katalog przechowywania danych na karcie pamięci jest niedostępny!</string>
     <string name="download_question">Pobrać {0} - {1} ?</string>
-    <string name="download_question_exist">Dane offline {0} już istnieją ({1}). Czy chcesz je uaktualnić ({2})?</string>
+    <string name="download_question_exist">Dane offline {0} już istnieją ({1}). Uaktualnić ({2})?</string>
     <string name="address">Adres</string>
     <string name="shared_string_download_successful">Zakończono pobieranie</string>
 
@@ -624,7 +624,7 @@
 
     <string name="unknown_from_location">Nie ustalono jeszcze położenia początkowego</string>
     <string name="confirm_interrupt_download">Anulować pobieranie pliku?</string>
-    <string name="basemap_was_selected_to_download">Do pobrania została wybrana mapa bazowa wymagana do prawidłowego funkcjonowania programu.</string>
+    <string name="basemap_was_selected_to_download">Mapa bazowa została wybrana do pobierania, aby aplikacja mogła działać.</string>
 
     <string name="map_online_plugin_is_not_installed">Aktywuj wtyczkę \"Mapy online\", aby wybrać inne źródła mapy</string>
     <string name="map_online_data">Mapy online i kafelki</string>
@@ -783,7 +783,7 @@
     <string name="address_search_desc">Wyszukiwanie adresu</string>
     <string name="navpoint_search_desc">Współrzędne</string>
     <string name="transport_search_desc">Wyszukiwanie transportu publicznego</string>
-    <string name="favourites_search_desc">Wyszukaj w ulubionych</string>
+    <string name="favourites_search_desc">Sposób szukania ulubionych</string>
 
     <string name="rendering_attr_noPolygons_description">Ukryj wszystkie elementy mapy będące terenami ziemnymi.</string>
     <string name="rendering_attr_noPolygons_name">Wielokąty</string>
@@ -2556,7 +2556,7 @@ Długość %2$s</string>
 Podaj pełny kod</string>
     <string name="navigate_point_olc_info_area">Poprawny pełny OLC
 Reprezentuje obszar: %1$s x %2$s</string>
-    <string name="quick_action_page_list_descr">Naciśnięcie przycisku czynności wyświetli poniższą listę.</string>
+    <string name="quick_action_page_list_descr">Naciśnięcie przycisku wyświetli poniższą listę.</string>
     <string name="auto_split_recording_title">Automatyczne dzielenie nagrań po przerwie</string>
 	<string name="auto_split_recording_descr">Rozpoczyna nowy segment po 6 min przerwy, nową trasę po 2 h i nowy plik po dłuższej przerwie, jeżeli data ulegnie zmianie.</string>
     <string name="release_2_6">• Nowa funkcja: przycisk szybkiej czynności 
@@ -2672,19 +2672,17 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="shared_string_overview">Podsumowanie</string>
     <string name="animate_my_location">Animowanie położenia</string>
     <string name="animate_my_location_desc">Włącza animację aktualnego położenia na mapie.</string>
-    <string name="osmand_extended_description_part2">"
- Nawigacja GPS
- • Możesz wybrać pomiędzy trybem offline (brak kosztów roamingu za granicą) lub online (szybciej)
- • Podpowiedzi głosowe zakręt-za-zakrętem poprowadzą cię do celu (nagrane lub syntetyzowane głosy)
- • Ponowne wyznaczanie trasy po zboczeniu z niej
- • Informacje o pasach, nazwach ulic i przybliżonym czasie przybycia pomogą ci w trasie
- • Aby zwiększyć twoje bezpieczeństwo, motyw dzienny/nocny przełącza się automatycznie
- • Możesz skonfigurować wyświetlanie limitów prędkości i ostrzeżeń o jej przekroczeniu
- • Mapa skaluje się do twojej prędkości
- • Możesz wyszukiwać miejsc po adresie, rodzaju (np. parking, restauracja, hotel, stacja benzynowa, muzeum) lub po współrzędnych geograficznych
- • Wsparcie dla celów pośrednich trasy
- • Możesz zarejestrować lub wysłać trasę GPX i podążać za nią
- "</string>
+    <string name="osmand_extended_description_part2">Nawigacja GPS
+\n • Możesz wybrać pomiędzy trybem offline (brak kosztów roamingu za granicą) lub online (szybciej)
+\n • Podpowiedzi głosowe zakręt-za-zakrętem poprowadzą cię do celu (nagrane lub syntetyzowane głosy)
+\n • Ponowne wyznaczanie trasy po zboczeniu z niej
+\n • Informacje o pasach, nazwach ulic i przybliżonym czasie przybycia pomogą ci w trasie
+\n • Aby zwiększyć twoje bezpieczeństwo, motyw dzienny/nocny przełącza się automatycznie
+\n • Możesz skonfigurować wyświetlanie limitów prędkości i ostrzeżeń o jej przekroczeniu
+\n • Mapa skaluje się do twojej prędkości
+\n • Możesz wyszukiwać miejsc po adresie, rodzaju (np. parking, restauracja, hotel, stacja benzynowa, muzeum) lub współrzędnych geograficznych
+\n • Wsparcie dla celów pośrednich trasy
+\n • Możesz zarejestrować lub wysłać trasę GPX i podążać za nią</string>
     <string name="favorite_group_name">Nazwa grupy</string>
     <string name="change_color">Zmień kolor</string>
     <string name="edit_name">Zmień nazwę</string>
@@ -2694,7 +2692,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="routing_attr_allow_private_name">Uwzględnianie prywatnych obszarów</string>
     <string name="routing_attr_allow_private_description">Zezwala na dostęp do prywatnych obszarów.</string>
     <string name="route_is_too_long_v2">Proszę dodać punkty pośrednie, jeżeli nie otrzymasz wyniku dla tej długiej trasy w ciągu 10 minut.</string>
-    <string name="save_poi_too_many_uppercase">Nazwa zawiera zbyt wiele wielkich liter. Czy chcesz kontynuować?</string>
+    <string name="save_poi_too_many_uppercase">Nazwa zawiera zbyt wiele wielkich liter. Kontynuować?</string>
     <string name="shared_string_plugin">Wtyczka</string>
     <string name="srtm_menu_download_descr">Pobierz mapę \"Poziomice\" do użycia dla tego obszaru.</string>
     <string name="hide_from_zoom_level">Ukrywanie od stopnia przybliżenia</string>
@@ -2780,7 +2778,11 @@ Reprezentuje obszar: %1$s x %2$s</string>
     
     <string name="save_route_point">Zapisz punkt trasy</string>
     <string name="route_point_one">Punkt 1 trasy</string>
-<string name="osmand_extended_description_part7">Pomagaj rozwijać OSM • Raportowanie o błędach danych • Przesyłaj bezpośrednio z aplikacji ślady GPX do OSM • Dodawaj miejsca POI i przesyłaj je bezpośrednio do OSM (lub później, jeśli jesteś offline)</string>
+<string name="osmand_extended_description_part7">Pomagaj rozwijać OSM
+\n • Raportowanie o błędach danych
+\n • Przesyłaj bezpośrednio z aplikacji ślady GPX do OSM
+\n • Dodawaj Użyteczne Miejsca (POI) i przesyłaj je bezpośrednio do OSM (lub później, jeśli jesteś offline)
+\n</string>
     <string name="live_monitoring_max_interval_to_send">Bufor czasowy do śledzenia online</string>
     <string name="live_monitoring_max_interval_to_send_desrc">Określ bufor czasu, który umożliwia przechowywanie lokalizacji bez połączenia</string>
     <string name="mappilary_no_internet_desc">Potrzebujesz połączenia z Internetem, aby oglądać zdjęcia z Mapillary.</string>
@@ -3042,7 +3044,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="shared_string_wikivoyage">Wikipodróże</string>
     <string name="shared_string_dont">Nie</string>
     <string name="shared_string_do">Tak</string>
-    <string name="shared_string_only_with_wifi">Tylko z WiFi</string>
+    <string name="shared_string_only_with_wifi">Tylko przez Wi-Fi</string>
     <string name="wikivoyage_download_pics">Pobierz zdjęcia</string>
     <string name="wikivoyage_download_pics_descr">Obrazy z artykułów mogą być pobrane w celu użycia w trybie offline.
 \nMożesz zawsze zmienić ustawienia w \"Przeglądaj\" → \"Opcje\".</string>
@@ -3085,4 +3087,50 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="welcome_to_open_beta">Witaj w otwartej wersji beta!</string>
     <string name="wikipedia_offline">Wikipedia offline</string>
     <string name="index_item_world_wikivoyage">Światowe artykuły Wikipodróży</string>
-    </resources>
+    <string name="osmand_extended_description_part3">Mapa
+\n • Pokazuje Użyteczne Miejsca (POI) wokół ciebie
+\n • Dostosowuje mapę do kierunku ruchu (lub kompasu)
+\n • Pokazuje gdzie jesteś i gdzie patrzysz
+\n • Udostępnia twoją lokalizację, żeby twoi znajomi mogli cię znaleźć
+\n • Zachowuje twoje najważniejsze miejsca w \"Ulubionych\"
+\n • Pozwala wybrać sposób wyświetlania nazw na mapach: Po angielsku, w jeżykach lokalnych lub zapisem fonetycznym
+\n • Wyświetla specjalistyczne kafelki online, widok satelitarny (z Binga), różne nakładki takie jak podróżnicze/nawigacyjne trasy GPX i dodadtkowe warstwy o konfigurowalnej przezroczystości
+\n</string>
+    <string name="osmand_extended_description_part4">Narciarska:
+\n Wtyczka map narciarskich OsmAnd umożliwia oglądanie tras narciarskich o różnym stopniu trudności oraz dodatkowe informacje, takie jak lokalizacje wyciągów i innych obiektów.</string>
+    <string name="osmand_extended_description_part5">Rowerowa
+\n • Możesz znaleźć drogi rowerowe na mapie
+\n • Nawigacja GPS w trybie rowerowym tworzy trasę używając dróg rowerowych
+\n • Możesz zobaczyć swoją prędkość i wysokość
+\n • Opcja nagrywania GPX umożliwia nagranie podróży i podzielenie się nią
+\n • Za pomocą dodatkowej wtyczki możesz włączyć poziomice i cieniowanie terenu</string>
+    <string name="osmand_extended_description_part6">Spacery, wędrówki, zwiedzanie miast
+\n • Mapa pokazuje ci trasy piesze
+\n • Wikipedia w wybranym przez ciebie języku powie ci wiele podczas wycieczki po mieście
+\n • Przystanki komunikacji publicznej (autobusy, tramwaje, pociągi), w tym nazwy linii, pomogą ci się poruszać w nowym mieście
+\n • Nawigacja GPS w trybie pieszym tworzy trasę używając dróg pieszych
+\n • Możesz wysłać i śledzić trasę GPX lub nagrać i udostępnić swoją własną
+\n</string>
+    <string name="osmand_extended_description_part8">OsmAnd jest aktywnie rozwijanym oprogramowaniem open-source. Każdy może wnieść wkład w aplikację zgłaszając błędy, poprawiając tłumaczenia i kodując nowe funkcje. Projekt jest w stanie ciągłego udoskonalania dzięki tym formom interakcji między twórcami a użytkownikami. Postępy projektu zależą również od wkładów finansowych fundujących kodowanie i testowanie nowych funkcjonalności.
+\nPrzybliżone pokrycie i dokładność map:
+\n • Europa Zachodnia: ****
+\n • Europa Wschodnia: ***
+\n • Rosja: ***
+\n • Ameryka Północna: ***
+\n • Ameryka Południowa: **
+\n • Azja: **
+\n • Japonia i Korea: ***
+\n • Środkowy Wschód: **
+\n • Afryka: **
+\n • Antarktyda: *
+\nWiększość krajów na świecie jest dostępna do pobrania!
+\nUzyskaj niezawodną nawigację w swoim kraju - Francji, Polsce, Meksyku, Wielkiej Brytanii, Hiszpanii, Holandii, USA, Rosji, Brazylii i każdym innym.</string>
+    <string name="download_wikipedia_description">Pobierz artykuły Wikipedii dla %1$s, by czytać je offline.</string>
+    <string name="download_wikipedia_label">Pobierz dane z Wikipedii</string>
+    <string name="open_in_browser_wiki">Otwórz artykuł online</string>
+    <string name="open_in_browser_wiki_description">Pokaż ten artykuł w przeglądarce.</string>
+    <string name="download_wiki_region_placeholder">ten region</string>
+    <string name="wiki_article_search_text">Wyszukiwanie niezbędnych artykułów wiki</string>
+    <string name="wiki_article_not_found">Nie znaleziono artykułu</string>
+    <string name="how_to_open_wiki_title">Jak otworzyć artykuły z Wikipedii?</string>
+</resources>
