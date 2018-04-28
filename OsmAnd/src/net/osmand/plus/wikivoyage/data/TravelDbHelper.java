@@ -32,9 +32,11 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import gnu.trove.map.hash.TLongObjectHashMap;
 
@@ -295,7 +297,7 @@ public class TravelDbHelper {
 	}
 
 	@NonNull
-	public LinkedHashMap<String, List<WikivoyageSearchResult>> getNavigationMap(final TravelArticle article) {
+	public LinkedHashMap<WikivoyageSearchResult, List<WikivoyageSearchResult>> getNavigationMap(final TravelArticle article) {
 		String lang = article.getLang();
 		String title = article.getTitle();
 		if (TextUtils.isEmpty(lang) || TextUtils.isEmpty(title)) {
@@ -315,6 +317,8 @@ public class TravelDbHelper {
 		}
 		Map<String, List<WikivoyageSearchResult>> navMap = new HashMap<>();
 		SQLiteConnection conn = openConnection();
+		Set<String> headers = null;
+		Map<String, WikivoyageSearchResult> headerObjs = new HashMap<>();
 		if (conn != null) {
 			List<String> params = new ArrayList<>();
 			StringBuilder query = new StringBuilder("SELECT a.city_id, a.title, a.lang, a.is_part_of " +
@@ -322,6 +326,12 @@ public class TravelDbHelper {
 			params.add(title);
 			params.add(lang);
 			if (parts != null && parts.length > 0) {
+				headers = new HashSet<>(Arrays.asList(parts));
+				headers.add(title);
+				query.append("UNION SELECT a.city_id, a.title, a.lang, a.is_part_of " +
+						"FROM wikivoyage_articles a WHERE title = ? and lang = ? ");
+				params.add(parts[0]);
+				params.add(lang);
 				for (String part : parts) {
 					query.append("UNION SELECT a.city_id, a.title, a.lang, a.is_part_of " +
 							"FROM wikivoyage_articles a WHERE is_part_of = ? and lang = ? ");
@@ -329,7 +339,6 @@ public class TravelDbHelper {
 					params.add(lang);
 				}
 			}
-
 			SQLiteCursor cursor = conn.rawQuery(query.toString(), params.toArray(new String[params.size()]));
 			if (cursor.moveToFirst()) {
 				do {
@@ -344,18 +353,18 @@ public class TravelDbHelper {
 						navMap.put(rs.isPartOf.get(0), l);
 					}
 					l.add(rs);
+					String key = rs.getArticleTitles().get(0);
+					if (headers != null && headers.contains(key)) {
+						headerObjs.put(key, rs);
+					}
 				} while (cursor.moveToNext());
 			}
 			cursor.close();
 		}
-		LinkedHashMap<String, List<WikivoyageSearchResult>> res = new LinkedHashMap<>();
-		List<String> partsList = new ArrayList<>();
-		if (parts != null) {
-			partsList.addAll(Arrays.asList(parts));
-		}
-		partsList.add(title);
-		for (String part : partsList) {
-			List<WikivoyageSearchResult> results = navMap.get(part);
+		LinkedHashMap<WikivoyageSearchResult, List<WikivoyageSearchResult>> res = new LinkedHashMap<>();
+		for (String header : navMap.keySet()) {
+			WikivoyageSearchResult searchResult = headerObjs.get(header);
+			List<WikivoyageSearchResult> results = navMap.get(header);
 			if (results != null) {
 				Collections.sort(results, new Comparator<WikivoyageSearchResult>() {
 					@Override
@@ -363,7 +372,11 @@ public class TravelDbHelper {
 						return collator.compare(o1.articleTitles.get(0), o2.articleTitles.get(0));
 					}
 				});
-				res.put(part, results);
+				WikivoyageSearchResult emptyResult = new WikivoyageSearchResult();
+				emptyResult.articleTitles.add(header);
+				emptyResult.cityId = -1;
+				searchResult = searchResult != null ? searchResult : emptyResult;
+				res.put(searchResult, results);
 			}
 		}
 		return res;

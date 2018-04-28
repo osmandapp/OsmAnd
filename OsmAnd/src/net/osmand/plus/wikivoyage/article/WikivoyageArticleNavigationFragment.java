@@ -17,6 +17,7 @@ import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
@@ -77,7 +78,7 @@ public class WikivoyageArticleNavigationFragment extends MenuBottomSheetDialogFr
 		}
 		parentsList = new ArrayList<>(Arrays.asList(article.getAggregatedPartOf().split(",")));
 
-		LinkedHashMap<String, List<WikivoyageSearchResult>> navigationMap = getMyApplication().getTravelDbHelper().getNavigationMap(article);
+		LinkedHashMap<WikivoyageSearchResult, List<WikivoyageSearchResult>> navigationMap = getMyApplication().getTravelDbHelper().getNavigationMap(article);
 
 		items.add(new TitleItem(getString(R.string.shared_string_navigation)));
 
@@ -107,10 +108,12 @@ public class WikivoyageArticleNavigationFragment extends MenuBottomSheetDialogFr
 		expListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
 			@Override
 			public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
-				if (!expListView.isGroupExpanded(groupPosition)) {
-					expListView.expandGroup(groupPosition);
+				WikivoyageSearchResult articleItem = (WikivoyageSearchResult) listAdapter.getGroup(groupPosition);
+				if (articleItem.getCityId() == -1) {
+					Toast.makeText(getContext(), "Article not found.", Toast.LENGTH_LONG).show();
 				} else {
-					expListView.collapseGroup(groupPosition);
+					sendResults(articleItem.getCityId());
+					dismiss();
 				}
 				return true;
 			}
@@ -177,13 +180,13 @@ public class WikivoyageArticleNavigationFragment extends MenuBottomSheetDialogFr
 
 		private Context context;
 
-		private LinkedHashMap<String, List<WikivoyageSearchResult>> navigationMap;
-		private List<String> headers;
+		private LinkedHashMap<WikivoyageSearchResult, List<WikivoyageSearchResult>> navigationMap;
+		private List<WikivoyageSearchResult> headers;
 
 		private Drawable itemGroupIcon;
 		private Drawable itemChildIcon;
 
-		ExpandableListAdapter(Context context, LinkedHashMap<String, List<WikivoyageSearchResult>> navigationMap) {
+		ExpandableListAdapter(Context context, LinkedHashMap<WikivoyageSearchResult, List<WikivoyageSearchResult>> navigationMap) {
 			this.context = context;
 			this.navigationMap = navigationMap;
 			headers = new ArrayList<>(navigationMap.keySet());
@@ -264,7 +267,7 @@ public class WikivoyageArticleNavigationFragment extends MenuBottomSheetDialogFr
 		@Override
 		public View getGroupView(final int groupPosition, final boolean isExpanded,
 								 View convertView, ViewGroup parent) {
-			String groupTitle = (String) getGroup(groupPosition);
+			String groupTitle = ((WikivoyageSearchResult) getGroup(groupPosition)).getArticleTitles().get(0);
 			boolean selected = parentsList.contains(groupTitle) || article.getTitle().equals(groupTitle);
 			if (convertView == null) {
 				convertView = LayoutInflater.from(context)
