@@ -4,8 +4,8 @@
 	<string name="watch">Ver</string>
 	<string name="rendering_attr_pisteGrooming_name">Pista de preparação</string>
     <string name="routing_attr_no_new_routing_name">Evitar regras de roteamento da v1.9</string>
-    <string name="navigate_point_northing">Ao norte</string>
-    <string name="navigate_point_easting">Ao leste</string>
+    <string name="navigate_point_northing">Norte (N)</string>
+    <string name="navigate_point_easting">Leste (E)</string>
     <string name="home_button">Início</string>
     <string name="first_time_msg">Obrigado por usar OsmAnd. Para usufruir de todos os recursos do aplicativo, você precisa de alguns dados regionais off-line, que você pode baixar em \'Configurações\' → \'Gerenciar mapas\'. Depois, você poderá procurar por um endereço, um Ponto de Interesse (POI) ou um meio de transporte público.</string>    
 	<string name="favorite_home_category">Casa</string>
@@ -2841,4 +2841,7 @@ Pôr do Sol: %2$s</string>
     <string name="shared_string_travel_book">Livro de viagens</string>
     <string name="download_images">Baixar imagens</string>
     <string name="popular_destinations">Destinos populares</string>
-    </resources>
+    <string name="welcome_to_open_beta">Bem-vindo ao Open Beta!</string>
+    <string name="wiki_article_not_found">Artigo não encontrado</string>
+    <string name="how_to_open_wiki_title">Como se abre artigos da Wikipedia?</string>
+</resources>
