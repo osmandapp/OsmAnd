@@ -3058,4 +3058,5 @@ Lon %2$s</string>
 <string name="popular_destinations">Destinos populares</string>
     <string name="paid_app">Aplicación de pago</string>
     <string name="paid_plugin">Complemento de pago</string>
+    <string name="osmand_team">Equipo de OsmAnd</string>
     </resources>
