@@ -10,6 +10,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentManager.BackStackEntry;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
@@ -22,7 +23,6 @@ import android.webkit.JavascriptInterface;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.TextView;
-
 import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
@@ -37,6 +37,7 @@ import net.osmand.plus.wikivoyage.WikivoyageWebViewClient;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
 import net.osmand.plus.wikivoyage.data.TravelDbHelper;
 import net.osmand.plus.wikivoyage.data.TravelLocalDataHelper;
+import net.osmand.plus.wikivoyage.explore.WikivoyageExploreDialogFragment;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -490,5 +491,24 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 			WikivoyageArticleNavigationFragment.showInstance(fm,
 					WikivoyageArticleDialogFragment.this, cityId, selectedLang);
 		}
+	}
+	
+	@Override
+	protected void closeFragment() {
+		int backStackEntryCount = getFragmentManager().getBackStackEntryCount();
+		int pop = -1;
+		for(int i = 0; i < backStackEntryCount; i++) {
+			BackStackEntry entry = getFragmentManager().getBackStackEntryAt(i);
+			if(!TAG.equals(entry.getName())) {
+				pop = i;
+			}
+			
+		}
+		if(pop == -1) {
+			dismiss();
+		} else {
+			getFragmentManager().popBackStackImmediate(pop, 0);
+		}
+//		getFragmentManager().popBackStackImmediate(WikivoyageExploreDialogFragment.TAG, 0);
 	}
 }

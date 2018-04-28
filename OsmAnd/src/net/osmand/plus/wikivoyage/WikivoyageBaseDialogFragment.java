@@ -90,8 +90,12 @@ public class WikivoyageBaseDialogFragment extends BaseOsmAndDialogFragment {
 		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				getFragmentManager().popBackStackImmediate(WikivoyageExploreDialogFragment.TAG, 0);
+				closeFragment();
 			}
 		});
+	}
+	
+	protected void closeFragment() {
+		dismiss();
 	}
 }
