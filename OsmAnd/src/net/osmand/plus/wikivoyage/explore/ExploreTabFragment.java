@@ -35,6 +35,8 @@ import java.util.List;
 
 public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIndexesThread.DownloadEvents {
 
+	private static final String WORLD_WIKIVOYAGE_FILE_NAME = "World_wikivoyage.sqlite";
+
 	private ExploreRvAdapter adapter = new ExploreRvAdapter();
 
 	private StartEditingTravelCard startEditingTravelCard;
@@ -56,7 +58,7 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIn
 		final View mainView = inflater.inflate(R.layout.fragment_explore_tab, container, false);
 		final RecyclerView rv = (RecyclerView) mainView.findViewById(R.id.recycler_view);
 
-		adapter.setItems(generateItems());
+		adapter.setItems(generateItems(), false);
 
 		rv.setLayoutManager(new LinearLayoutManager(getContext()));
 		rv.setAdapter(adapter);
@@ -68,10 +70,8 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIn
 	public void newDownloadIndexes() {
 		if (downloadIndexesRequested) {
 			downloadIndexesRequested = false;
-			if (selectedTravelBook != null) {
-				indexItem = getMyApplication().getDownloadThread().getIndexes()
-						.getWikivoyageItem(selectedTravelBook.getName());
-			}
+			indexItem = getMyApplication().getDownloadThread().getIndexes()
+					.getWikivoyageItem(getWikivoyageFileName());
 			addDownloadUpdateCard(false);
 		}
 	}
@@ -80,9 +80,7 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIn
 	public void downloadInProgress() {
 		DownloadIndexesThread downloadThread = getMyApplication().getDownloadThread();
 		IndexItem current = downloadThread.getCurrentDownloadingItem();
-		if (selectedTravelBook != null) {
-			indexItem = downloadThread.getIndexes().getWikivoyageItem(selectedTravelBook.getName());
-		}
+		indexItem = downloadThread.getIndexes().getWikivoyageItem(getWikivoyageFileName());
 		if (current != null
 				&& indexItem != null
 				&& current == indexItem
@@ -143,6 +141,11 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIn
 		}
 	}
 
+	@NonNull
+	private String getWikivoyageFileName() {
+		return selectedTravelBook == null ? WORLD_WIKIVOYAGE_FILE_NAME : selectedTravelBook.getName();
+	}
+
 	private void removeDownloadUpdateCard() {
 		adapter.removeDownloadUpdateCard();
 		downloadUpdateCardAdded = false;
@@ -174,9 +177,7 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIn
 			downloadIndexesRequested = true;
 			downloadThread.runReloadIndexFilesSilent();
 		} else {
-			if (selectedTravelBook != null) {
-				indexItem = downloadThread.getIndexes().getWikivoyageItem(selectedTravelBook.getName());
-			}
+			indexItem = downloadThread.getIndexes().getWikivoyageItem(getWikivoyageFileName());
 			IndexItem current = downloadThread.getCurrentDownloadingItem();
 			boolean loadingInProgress = current != null && indexItem != null && current == indexItem;
 			addDownloadUpdateCard(loadingInProgress);
