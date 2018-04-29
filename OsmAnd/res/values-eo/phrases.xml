@@ -359,7 +359,7 @@
 	<string name="poi_wayside_cross">Krucifikso apudvoja</string>
 	<string name="poi_geyser">Gejsero</string>
 	<string name="poi_club_linux">Linuksa klubejo</string>
-	<string name="poi_glacier">Glacirivero</string>
+	<string name="poi_glacier">Glaciejo</string>
 	<string name="poi_stone">Roko</string>
 	<string name="poi_aerialway_station">Kablovoja stacio</string>
 	<string name="poi_aerialway_cable_car">Telfero unu-vagoneta (ir-reira)</string>
@@ -3834,5 +3834,25 @@
 <string name="poi_via_ferrata">Via ferrata (fera grimp-vojo)</string>
 	<string name="poi_cable_number">Nombro da ŝnuregoj</string>
 	<string name="poi_via_ferrata_scale">Malfacileco</string>
+
+<string name="poi_glacier_type">Speco de glaciejo</string>
+
+<string name="poi_glacier_type_icecap">glaci-ĉapo</string>
+	<string name="poi_glacier_type_icefield">glaci-kampo</string>
+	<string name="poi_glacier_type_plateau">glaci-ebenaĵo</string>
+	<string name="poi_glacier_type_valley">valo</string>
+	<string name="poi_glacier_type_outlet">glaci-rivero</string>
+	<string name="poi_glacier_type_tidewater">glaci-rivero (atinganta maron)</string>
+	<string name="poi_glacier_type_mountain">monto</string>
+	<string name="poi_glacier_type_hanging">pendanta</string>
+	<string name="poi_glacier_type_icefall">glaci-falo</string>
+	<string name="poi_glacier_type_rock">roko</string>
+	<string name="poi_glacier_type_shelf">glacieja breto</string>
+	<string name="poi_glacier_type_remnant">izolata glaciejo</string>
+	<string name="poi_glacier_type_ice_tongue">glaci-lango</string>
+
+	<string name="poi_glacier_ele_top">Plej alta punkto</string>
+	<string name="poi_glacier_ele_bottom">Plej malalta punkto</string>
+	<string name="poi_glacier_slope">Mezuma klineco</string>
 
 </resources>
