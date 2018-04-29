@@ -47,7 +47,7 @@
     <string name="av_video_format">قالب خروجی ویدئو</string>
     <string name="av_settings">تنظیمات صدا/ویدئو</string>
     <string name="av_use_external_recorder">استفاده از ضبط‌کنندهٔ سیستم</string>
-    <string name="av_use_external_camera_descr">برای عکس‌گرفتن از برنامهٔ خود دستگاه استفاده کن.</string>
+    <string name="av_use_external_camera_descr">برای عکس‌گرفتن از برنامهٔ خود دستگاه استفاده شود.</string>
     <string name="av_use_external_camera">از برنامهٔ دوربین استفاده کن</string>
     <string name="av_settings_descr">تنظیمات صدا و ویدئو را پیکربندی کنید.</string>
     <string name="recording_error">در حین ضبط خطایی رخ داد</string>
@@ -118,14 +118,14 @@
 	<string name="map_widget_next_turn_small">پیچ بعدی (کوچک)</string>
 	<string name="map_widget_next_next_turn">دومین پیچ بعدی</string>
 	<string name="map_widget_mini_route">نقشه مسیر کوچک</string>
-	<string name="avoid_in_routing_title">اجتناب از…</string>
-	<string name="avoid_in_routing_descr">از جاده‌های دارای عوارضی، جاده‌های روسازی‌نشده و گذرگاه‌های آبی اجتناب شود.</string>
+	<string name="avoid_in_routing_title">پرهیز از…</string>
+	<string name="avoid_in_routing_descr">از جاده‌های دارای عوارضی، جاده‌های روسازی‌نشده و گذرگاه‌های آبی پرهیز شود.</string>
 	
 	
 	<string name="bg_service_screen_lock_toast">صفحه قفل شد</string>
 	<string name="show_cameras">دوربین‌های کنترل سرعت</string>
 	<string name="show_traffic_warnings">هشدارهای ترافیکی</string>
-	<string name="avoid_toll_roads">اجتناب از جاد‌ه‌های دارای عوارضی</string>
+	<string name="avoid_toll_roads">پرهیز از جاد‌ه‌های دارای عوارضی</string>
 	<string name="continue_follow_previous_route_auto">راهبری ناتمام قبلی را ادامه می‌دهید؟ (%1$s ثانیه)</string>
 	<string name="route_updated_loc_found">در انتظار دریافت موقعیت برای محاسبهٔ مسیر</string>
 	<string name="osmand_parking_hours">ساعت</string>
@@ -185,7 +185,7 @@
     <string name="max_speed_none">هیچ‌کدام</string>
     <string name="dropbox_plugin_name">افزونهٔ دراپ‌باکس</string>
     
-    <string name="av_use_external_recorder_descr">برای ویدئو از ضبط‌کنندهٔ خود دستگاه استفاده کن.</string>
+    <string name="av_use_external_recorder_descr">برای ویدئو از ضبط‌کنندهٔ خود دستگاه استفاده شود.</string>
     <string name="recording_open_external_player">بازکردن پخش‌کنندهٔ خارجی</string>
     <string name="recording_unavailable">موجود نیست</string>
     <string name="map_widget_distancemeasurement">اندازه‌گیری مسافت</string>
@@ -282,7 +282,7 @@
 	<string name="choose_city">انتخاب شهر یا کدپستی</string>
 	<string name="ChooseCountry">انتخاب کشور</string>
 	<string name="show_view_angle">جهت نگاه‌کردن را نشان بده</string>
-	<string name="map_view_3d_descr">حالت سه‌بعدی نقشه را فعال کن.</string>
+	<string name="map_view_3d_descr">حالت سه‌بعدی نقشه فعال شود.</string>
 	<string name="map_view_3d">نمایش سه‌بعدی نقشه</string>
 	<string name="map_source">منبع نقشه</string>
 	<string name="use_internet">استفاده از اینترنت</string>
@@ -290,7 +290,7 @@
 	
 	
 	<string name="show_gps_coordinates_text">مختصات GPS را روی نقشه نشان بده</string>
-	<string name="use_internet_to_download_tile">دانلود کاشی‌های ناموجود نقشه</string>
+	<string name="use_internet_to_download_tile">کاشی‌های از قلم افتادهٔ نقشه دانلود شود</string>
 	<string name="app_description">برنامهٔ راهبری</string>
 	<string name="shared_string_exit">خروج</string>
 	
@@ -572,9 +572,9 @@
     <string name="map_widget_monitoring_services">خدمات ثبت و ضبط</string>
 	
     <string name="show_warnings_descr">پیکربندی‌های مربوط به هشدارهای ترافیکی (مانند محدودیت‌های سرعت، توقف‌های اجباری، سرعتگیرها، تونل‌ها)، هشدارهای دوربین کنترل سرعت و اطلاعات خط عبوری را انجام دهید.</string>
-	<string name="use_compass_navigation_descr">اگر جهت شناسایی نمی‌شود از قطب‌نما استفاده کن.</string>
-	<string name="avoid_motorway">اجتناب از آزادراه‌ها</string>
-	<string name="snap_to_road_descr">در طول راهبری، موقعیت را به جاده‌ها بچسبان.</string>
+	<string name="use_compass_navigation_descr">اگر جهت شناسایی نمی‌شود از قطب‌نما استفاده شود.</string>
+	<string name="avoid_motorway">پرهیز از آزادراه‌ها</string>
+	<string name="snap_to_road_descr">در هنگام راهبری، موقعیت را به جاده‌ها بچسبان.</string>
 	<string name="snap_to_road">چسبیدن به راه</string>
 	<string name="osmand_play_title_30_chars">نقشه و مسیریابی با OsmAnd</string>
 	<string name="osmand_short_description_80_chars">برنامهٔ همراه برای مشاهدهٔ نقشه جهانی و راهبری با نقشه‌های آفلاین و آنلاین OSM</string>
@@ -608,7 +608,7 @@
     <string name="recording_delete_confirm">این مورد ضبط‌شده را پاک می‌کنید؟</string>
     <string name="recording_description">در حال ضبط %1$s %3$s %2$s</string>
     <string name="osmand_srtm_short_description_80_chars">افزونهٔ OsmAnd برای منحنی‌های تراز آفلاین</string>
-    <string name="use_magnetic_sensor_descr">برای مقدار قطب‌نما به‌جای حسگر جهتی از حسگر مغناطیسی استفاده کن.</string>
+    <string name="use_magnetic_sensor_descr">برای مقدار قطب‌نما به‌جای حسگر جهتی از حسگر مغناطیسی استفاده می‌کند.</string>
     <string name="show_poi_over_map">نشان‌دادن لایهٔ نقاط POI</string>
 	<string name="show_poi_over_map_description">لایهٔ آخرین نقاط POI که انتخاب کرده بودم را روی نقشه نشان بده.</string>
 	
@@ -617,7 +617,7 @@
 	<string name="additional_settings">تنظیمات دیگر</string>
 	<string name="update_tile">به‌روزرسانی نقشه</string>
 	
-	<string name="use_online_routing_descr">برای محاسبهٔ مسیر از اینترنت استفاده کن.</string>
+	<string name="use_online_routing_descr">برای محاسبهٔ مسیر از اینترنت استفاده شود.</string>
 	<string name="use_online_routing">استفاده از مسیریابی آنلاین</string>
 	<string name="error_occurred_saving_gpx">خطا در هنگام ذخیره‌کردن GPX</string>
 	<string name="loading_poi_obj">بارگیری POI…</string>
@@ -676,7 +676,7 @@
 	<string name="av_camera_focus_continuous">دوربین، پیوسته وضوح را تنظیم می‌کند</string>
 	<string name="choose_intersected_street">تقاطع را انتخاب کنید</string>
 	<string name="osm_settings">ویرایش نقشهٔ OSM</string>
-	<string name="save_current_track_descr">مسیر جاری را همین الآن روی کارت حافظه ذخیره کن.</string>
+	<string name="save_current_track_descr">مسیر جاری همین حالا روی کارت حافظه ذخیره شود.</string>
 	<string name="save_current_track">ذخیرهٔ مسیر GPX جاری</string>
 	<string name="save_track_interval">بازهٔ زمانی ثبت داده‌ها در هنگام راهبری</string>
 	<string name="save_track_interval_descr">مشخص کنید برای ضبط مسیر در هنگام راهبری، داده‌ها با چه فاصلهٔ زمانی از هم دریافت شوند.</string>
@@ -689,8 +689,8 @@
     <string name="local_osm_changes_backup_successful">فایل تغییرات OSM ایجاد شد %1$s</string>
     <string name="safe_mode">حالت ایمن</string>
     <string name="show_lanes">خطوط عبوری</string>
-	<string name="avoid_unpaved">اجتناب از راه‌های روسازی‌نشده</string>
-	<string name="avoid_ferries">اجتناب از گذرگاه‌های آبی</string>
+	<string name="avoid_unpaved">پرهیز از راه‌های روسازی‌نشده</string>
+	<string name="avoid_ferries">پرهیز از گذرگاه‌های آبی</string>
 	
 	<string name="map_widget_fluorescent">مسیرهای شب‌نما</string>
 	<string name="bg_service_sleep_mode_off">اجراکردن
@@ -764,7 +764,7 @@
 	<string name="rotate_map_compass_opt">در جهت قطب‌نما</string>
 	<string name="rotate_map_bearing_opt">در جهت حرکت</string>
 	<string name="amenity_type_user_defined">تعریف کاربر</string>
-	<string name="profile_settings">تنظیمات هر پروفایل</string>
+	<string name="profile_settings">تنظیمات مخصوص به پروفایلِ</string>
 	<string name="osmand_service">حالت پس‌زمینه</string>
 	<string name="osmand_service_descr">زمانی که صفحه خاموش است OsmAnd در پس‌زمینه در حال اجرا می‌ماند.</string>
 	
@@ -827,7 +827,7 @@
 	<string name="tile_source_already_installed">نقشه قبلاً نصب شده است، تنظیمات به‌روز خواهد شد.</string>
 	<string name="internet_not_available">برای انجام این عملیات باید به اینترنت وصل باشید.</string>
 	<string name="install_more">نصب بیشتر…</string>
-	<string name="level_to_switch_vector_raster_descr">در زوم‌های فراتر از این سطح، از نقشه‌های رَستر استفاده کن.</string>
+	<string name="level_to_switch_vector_raster_descr">در زوم‌های فراتر از این سطح، از نقشه‌های رَستر استفاده شود.</string>
 	
 	<string name="error_doing_search">خطا در جست‌وجوی آفلاین.</string>
 	
@@ -864,7 +864,7 @@
 	
 	
     <string name="speak_speed_limit">سرعت مجاز</string>
-    <string name="speak_cameras">دوربینهای کنترل سرعت</string>
+    <string name="speak_cameras">دوربین‌های کنترل سرعت</string>
 	<string name="speak_traffic_warnings">هشدارهای ترافیکی</string>
 	
     <string name="osmand_distance_planning_plugin_description">این افزونه، یک ابزارک روی صفحهٔ نقشه می‌گذارد که به‌وسیلهٔ آن می‌توانید با رسم‌کردن مسیر روی نقشه برای سفرتان طرح‌ریزی کنید یا مسافت بین نقاط را اندازه بگیرید. رسم مسیر با زدن روی صفحه امکان‌پذیر است. همچنین می‌توانید از فایل‌های GPX موجود استفاده کنید یا آن‌ها را تغییر دهید. کار نهایی نیز به‌صورت فایل GPX قابل ذخیره‌سازی است تا بعداً از آن برای راهنمایی استفاده کنید.</string>
@@ -1011,7 +1011,7 @@
 	<string name="poi_context_menu_website">نشان‌دادن وبسایت این مکان</string>
 	<string name="poi_context_menu_call">نشان‌دادن تلفن این مکان</string>
 	<string name="use_high_res_maps">نمایش با تفکیک‌پذیری بالا</string>
-	<string name="use_high_res_maps_descr">کاشی‌های نقشه را در نمایشگرهای با تراکمِ بالا نکِش و محو یا کدر نکن.</string>
+	<string name="use_high_res_maps_descr">کاشی‌های نقشه در نمایشگرهای با تراکمِ بالا کشیده، محو یا کدر نشود.</string>
 	
 	<string name="context_menu_item_search_transport">جست‌وجو در حمل‌ونقل عمومی</string>
 	<string name="transport_searching_transport">نتایج حمل‌ونقل (بدون مقصد):</string>
@@ -1195,7 +1195,7 @@
 	
 	<string name="send_location_email_pattern">برای مشاهدهٔ مکان، پیوند اینترنتی %1$s یا پیوند اندرویدی %2$s را باز کنید</string>
 	<string name="amenity_type_geocache">Geocache</string>
-	<string name="continuous_rendering_descr">به‌جای نمایش یکبارهٔ تصویر از رندرینگ مستمر استفاده کن.</string>
+	<string name="continuous_rendering_descr">به‌جای نمایش یکبارهٔ تصویر از رندرینگ پیوسته استفاده شود.</string>
 	<string name="renderer_load_sucess">رندرکننده بارگذاری شد</string>
 	<string name="renderer_load_exception">خطایی رخ داد: رندرکننده بارگذاری نشد</string>
 	<string name="renderers">رسم‌کنندهٔ بُرداری</string>
@@ -1318,14 +1318,14 @@
 	<string name="routing_attr_prefer_motorway_description">آزادراه‌ها را ترجیح می‌دهم.</string>
 	
 	
-	<string name="routing_attr_avoid_toll_name">اجتناب از مسیرهای دارای عوارضی</string>
-	<string name="routing_attr_avoid_toll_description">اجتناب از مسیرهای دارای عوارضی.</string>
-	<string name="routing_attr_avoid_unpaved_name">اجتناب از مسیرهای خاکی</string>
-	<string name="routing_attr_avoid_unpaved_description">از راه‌های روسازی‌نشده اجتناب کن.</string>
-	<string name="routing_attr_avoid_ferries_name">اجتناب از گذرگاه‌های آبی</string>
-	<string name="routing_attr_avoid_ferries_description">از گذرگاه‌های آبی اجتناب شود.</string>
-	<string name="routing_attr_avoid_motorway_name">اجتناب از آزادراه‌ها</string>
-	<string name="routing_attr_avoid_motorway_description">از آزادراه‌ها اجتناب کن.</string>
+	<string name="routing_attr_avoid_toll_name">پرهیز از مسیرهای دارای عوارضی</string>
+	<string name="routing_attr_avoid_toll_description">از مسیرهای دارای عوارضی پرهیز شود.</string>
+	<string name="routing_attr_avoid_unpaved_name">پرهیز از مسیرهای خاکی</string>
+	<string name="routing_attr_avoid_unpaved_description">از راه‌های روسازی‌نشده پرهیز شود.</string>
+	<string name="routing_attr_avoid_ferries_name">پرهیز از گذرگاه‌های آبی</string>
+	<string name="routing_attr_avoid_ferries_description">از گذرگاه‌های آبی را پرهیز شود.</string>
+	<string name="routing_attr_avoid_motorway_name">پرهیز از آزادراه‌ها</string>
+	<string name="routing_attr_avoid_motorway_description">از آزادراه‌ها پرهیز شود.</string>
 	<string name="routing_attr_weight_name">وزن مجاز</string>
 	<string name="routing_attr_weight_description">وزن مجاز خودرو در راه‌ها چقدر است.</string>
     <string name="select_gpx">انتخاب فایل GPX…</string>
@@ -1699,10 +1699,10 @@
     <string name="dash_download_new_one">دانلود نقشهٔ جدید</string>
     <string name="dash_download_msg">شما %1$s نقشه دانلود کرده‌اید</string>
     <string name="dash_download_msg_none">نقشه‌های آفلاین را دانلود می‌کنید؟</string>
-    <string name="routing_attr_no_new_routing_description">از قوائد مسیریابی معرفی‌شده در نسخهٔ ۱٫۹ استفاده نکن.</string>
+    <string name="routing_attr_no_new_routing_description">از قوائد مسیریابی معرفی‌شده در نسخهٔ ۱٫۹ استفاده نشود.</string>
     <string name="rendering_value_americanRoadAtlas_name">اطلس راه‌های آمریکایی</string>
     
-    <string name="impassable_road">اجتناب از راه‌های…</string>
+    <string name="impassable_road">پرهیز از راه‌های…</string>
     <string name="rendering_attr_trainLightrailRoutes_name">مسیرهای قطار</string>
     <string name="rendering_attr_tramRoutes_name">مسیرهای تراموا</string>
     <string name="rendering_attr_shareTaxiRoutes_name">به‌اشتراک‌گذاری مسیرهای تاکسی</string>
@@ -1919,16 +1919,16 @@
     <string name="faq_item">سؤالات رایج</string>
     <string name="faq_item_description">سؤالاتی که زیاد پرسیده شده است</string>
     <string name="map_viewing_item">مرور نقشه</string>
-    <string name="routing_attr_avoid_stairs_name">اجتناب از راه‌پله</string>
-	<string name="routing_attr_avoid_stairs_description">از راه‌پله‌ها اجتناب کن.</string>
-	<string name="routing_attr_avoid_borders_name">اجتناب از گذرگاه‌های مرزی</string>
-	<string name="routing_attr_avoid_borders_description">از مسیرهایی که مرز را رد می‌کنند و به کشور دیگری وارد می‌شوند اجتناب کن.</string>
+    <string name="routing_attr_avoid_stairs_name">پرهیز از پله‌ها</string>
+	<string name="routing_attr_avoid_stairs_description">از پله پرهیز شود.</string>
+	<string name="routing_attr_avoid_borders_name">پرهیز از گذرگاه‌های مرزی</string>
+	<string name="routing_attr_avoid_borders_description">از مسیرهایی که مرز را رد می‌کنند و به کشور دیگری وارد می‌شوند پرهیز شود.</string>
 	<string name="routing_attr_height_name">ارتفاع مجاز</string>
 	<string name="routing_attr_height_description">ارتفاع مجاز خودرو در راه‌ها چقدر است.</string>
     <string name="download_wikipedia_maps">ویکی‌پدیا</string>
-    <string name="rendering_attr_alpineHiking_description">راه‌ها را براساس مقیاس SAC رسم کن.</string>
+    <string name="rendering_attr_alpineHiking_description">راه‌ها بر اساس مقیاس SAC رسم شوند.</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">لایهٔ نمادهای پیاده‌گردی</string>
-    <string name="rendering_attr_hikingRoutesOSMC_description">راه‌ها را بر اساس مسیرهای OSMC رسم کن.</string>
+    <string name="rendering_attr_hikingRoutesOSMC_description">راه‌ها بر اساس مسیرهای OSMC رسم شوند.</string>
 
 	<string name="map_widget_battery">میزان شارژ باطری</string>
     <string name="change_markers_position">تغییردادن موقعیت نشانه</string>
@@ -1956,7 +1956,7 @@
     <string name="osm_live_payment_desc">هزینهٔ اشتراک ماهانه است. هر زمان که خواستید، اشتراک خود را در گوگل‌پلی لغو کنید.</string>
     <string name="donation_to_osm">کمک مالی به OpenStreetMap</string>
     <string name="donation_to_osm_desc">بخشی از کمک‌های مالی را به مشترکینی می‌دهیم که به تغییرات OpenStreetMap کمک می‌کنند. هزینهٔ اشتراک تغییری نمی‌کند.</string>
-    <string name="osm_live_subscription_desc">این اشتراک، به‌روزرسانی‌های ساعتی، روزانه و هفتگی و همچنین دانلود نامحدود همهٔ نقشه‌ها در سراسر دنیا را فعال می‌کند.</string>
+    <string name="osm_live_subscription_desc">این اشتراک، به‌روزرسانی‌های ساعتی، روزانه و هفتگی و نیز امکان دانلود نامحدود همهٔ نقشه‌ها را فعال می‌کند.</string>
     <string name="get_it">دریافت</string>
     <string name="get_for">خرید با %1$s</string>
     <string name="get_for_month">خرید با ماهی %1$s</string>
@@ -2023,7 +2023,7 @@
     <string name="access_disable_wrong_direction_recalc">با حرکت خلاف جهت، مسیر تازه پیدا نکن</string>
     <string name="access_disable_wrong_direction_recalc_descr">با حرکت در خلاف جهت مسیر، مسیریابی مجدد نمی‌کند.</string>
     <string name="access_smart_autoannounce">اعلام هوشمند خودکار</string>
-    <string name="access_smart_autoannounce_descr">فقط اگر جهتم از سمت نقطهٔ مقصد منحرف شد، اعلام کن.</string>
+    <string name="access_smart_autoannounce_descr">فقط اگر جهتم از سمت نقطهٔ مقصد منحرف شد، اعلام شود.</string>
     <string name="access_autoannounce_period">بازهٔ زمانی اعلام خودکار</string>
     <string name="access_autoannounce_period_descr">کمترین فاصلهٔ زمانی بین اعلام پیام‌ها.</string>
     <string name="access_default_color">رنگ پیش‌فرض</string>
@@ -2050,7 +2050,7 @@
     <string name="shared_string_move_up">به ↑</string>
     <string name="shared_string_move_down">به ↓</string>
     <string name="finish_navigation">پایان راهبری</string>
-    <string name="avoid_road">اجتناب از این جاده</string>
+    <string name="avoid_road">پرهیز از این راه</string>
     <string name="storage_directory_readonly_desc">پوشهٔ ذخیره‌سازی به حافظهٔ داخلی تغییر کرد، زیرا پوشهٔ انتخاب‌شده فقط‌خواندنی است. لطفاً پوشه‌ای را انتخاب کنید که ذخیره‌سازی در آن مجاز باشد.</string>
     <string name="storage_directory_shared">حافظهٔ اشتراکی</string>
     <string name="shared_string_topbar">نوار بالا</string>
@@ -2270,7 +2270,7 @@
     <string name="n_items_removed">حذف شدند</string>
     <string name="starting_point">مبدأ</string>
     <string name="shared_string_not_selected">انتخاب نشده</string>
-    <string name="rec_split_desc">هنگامی که فضای استفاده‌شده افزون بر فضای ذخیره‌سازی می‌شود، کلیپ‌ها را جایگزین کن.</string>
+    <string name="rec_split_desc">هنگامی که فضای استفاده‌شده افزون بر فضای ذخیره‌سازی می‌شود، کلیپ‌ها جایگزین شود.</string>
     <string name="rec_split_clip_length_desc">مدت‌زمان کلیپ‌های ضبط‌شده را مشخص کنید.</string>
     <string name="rec_split_storage_size">حجم فضای ذخیره‌سازی</string>
     <string name="rec_split_storage_size_desc">مقدار فضای قابل‌تصرف برای همهٔ کلیپ‌های ضبط‌شده را مشخص کنید.</string>
@@ -2278,7 +2278,7 @@
     <string name="available_maps">نقشه‌های موجود</string>
     <string name="select_voice_provider">راهنمای صوتی را انتخاب کنید</string>
     <string name="select_voice_provider_descr">راهنمای صوتی زبان خودتان را انتخاب یا دانلود کنید.</string>
-    <string name="impassable_road_desc">جاده‌هایی را انتخاب نمایید که می‌خواهید در مسیریابی از آن‌ها اجتناب کنید.</string>
+    <string name="impassable_road_desc">جاده‌هایی که می‌خواهید در مسیریابی نباشند را انتخاب کنید.</string>
     <string name="no_location_permission">برنامه اجازهٔ دسترسی به موقعیت مکانی ندارد.</string>
     <string name="no_camera_permission">برنامه اجازهٔ دسترسی به دوربین ندارد.</string>
     <string name="no_microphone_permission">برنامه اجازهٔ دسترسی به میکروفون ندارد.</string>
@@ -2575,8 +2575,8 @@
     <string name="coordinates_format">قالب مختصات</string>
     <string name="use_system_keyboard">استفاده از صفحه‌کلید سیستم</string>
     <string name="fast_coordinates_input_descr">قالب مختصات ورودی را انتخاب کنید. هر زمان که بخواهید از طریق تنظیمات قابل‌تغییر است.</string>
-    <string name="routing_attr_avoid_ice_roads_fords_name">اجتناب از گُدارها و راه‌های یخی</string>
-    <string name="routing_attr_avoid_ice_roads_fords_description">از راه‌های یخی و گُدارها اجتناب شود.</string>
+    <string name="routing_attr_avoid_ice_roads_fords_name">پرهیز از گُدارها و راه‌های یخی</string>
+    <string name="routing_attr_avoid_ice_roads_fords_description">از راه‌های یخی و گُدارها پرهیز شود.</string>
     <string name="use_location">استفاده از موقعیت</string>
     <string name="add_location_as_first_point_descr">برای طراحی یک مسیر کامل موقعیتتان را به‌عنوان نقطهٔ شروع اضافه کنید.</string>
     <string name="my_location">موقعیت من</string>
@@ -2668,7 +2668,7 @@
     <string name="download_depth_countours">منحنی‌های تراز عمق دریا</string>
     <string name="do_not_send_anonymous_app_usage">آمار ناشناس مربوط به کارکرد برنامه را ارسال نکن</string>
     <string name="do_not_send_anonymous_app_usage_desc">‏OsmAnd دربارهٔ قسمت‌هایی از برنامه که باز می‌کنید، اطلاعاتی جمع‌آوری می‌کند. موقعیت شما هرگز ارسال نمی‌شود و همچنین هر چیزی که در برنامه بنویسید یا جزئیات مناطقی که مشاهده، جست‌وجو یا دانلود می‌کنید، ارسال نمی‌شود.</string>
-    <string name="do_not_show_startup_messages_desc">تخفیف‌های برنامه و اخبار اتفاقاتِ ویژهٔ محلی را نشان نده.</string>
+    <string name="do_not_show_startup_messages_desc">تخفیف‌های برنامه و اخبار اتفاقاتِ ویژهٔ محلی را نشان نمی‌دهد.</string>
     <string name="routing_attr_relief_smoothness_factor_more_plains_name">هموار</string>
     <string name="route_points_category_name">نقاطی که در این مسیر بر سر راهتان است</string>
     <string name="shared_string_time_moving">مدت حرکت</string>
@@ -2705,8 +2705,8 @@
     <string name="hillshade_layer_disabled">لایهٔ تپه‌سایه غیرفعال شد</string>
     <string name="srtm_plugin_disabled">منحنی‌های تراز غیرفعال شد</string>
     <string name="av_locations">مکان‌ها</string>
-    <string name="routing_attr_avoid_shuttle_train_name">اجتناب از قطار خطی</string>
-    <string name="routing_attr_avoid_shuttle_train_description">از قطار خطی اجتناب کن</string>
+    <string name="routing_attr_avoid_shuttle_train_name">پرهیز از قطار خطی</string>
+    <string name="routing_attr_avoid_shuttle_train_description">از قطار خطی پرهیز کن</string>
     <string name="traffic_warning_hazard">خطر</string>
     <string name="rendering_value_boldOutline_name">لبهٔ برجسته</string>
     <string name="lang_ceb">سِبوانو</string>
