@@ -2844,4 +2844,34 @@ Pôr do Sol: %2$s</string>
     <string name="welcome_to_open_beta">Bem-vindo ao Open Beta!</string>
     <string name="wiki_article_not_found">Artigo não encontrado</string>
     <string name="how_to_open_wiki_title">Como se abre artigos da Wikipedia?</string>
-</resources>
+<string name="osmand_team">Equipe OsmAnd</string>
+    <string name="paid_app">Aplicativo pago</string>
+    <string name="paid_plugin">Plugin pago</string>
+    <string name="travel_card_update_descr">Preparamos atualizações e correções nos dados Wikivoyage. Atualize o arquivo para vê-los.</string>
+	<string name="update_is_available">Atualização está disponível</string>
+	<string name="download_file">Baixar arquivo</string>
+    <string name="start_editing_card_image_text">O guia livre de viagens do mundo que qualquer um pode editar.</string>
+    <string name="start_editing">Comece a editar</string>
+    <string name="get_unlimited_access">Obtenha acesso ilimitado</string>
+    <string name="travel_guide">Guia de Viagem</string>
+    <string name="travel_guide_description">Explore os guias Wikivoyage para os lugares mais interessantes do planeta no OsmAnd sem precisar de conexão com a internet.</string>
+    <string name="monthly_map_updates">Atualizações de mapa: <b>mensal</b></string>
+    <string name="daily_map_updates">Atualizações de mapa: <b>a cada hora</b></string>
+    <string name="in_app_purchase">Compra no aplicativo</string>
+    <string name="in_app_purchase_desc">Pagamento uma só vez</string>
+    <string name="in_app_purchase_desc_ex">Uma vez adquirido, ele sempre será disponível para você.</string>
+    <string name="purchase_unlim_title">Comprar - %1$s</string>
+    <string name="purchase_subscription_title">Assinar - %1$s</string>
+
+    <string name="wikivoyage_offline">Wikivoyage offline</string>
+
+    <string name="unlimited_downloads">Downloads ilimitados</string>
+    <string name="wikipedia_offline">Wikipédia offline</string>
+    <string name="contour_lines_hillshade_maps">Mapas de curvas de nível e sombras de relevo</string>
+    <string name="purchase_dialog_title">Escolher plano</string>
+    <string name="purchase_dialog_subtitle">Escolha o item adequado:</string>
+    <string name="download_wikipedia_label">Baixar dados da Wikipédia</string>
+    <string name="open_in_browser_wiki">Abrir artigo online</string>
+    <string name="open_in_browser_wiki_description">Ver este artigo no navegador.</string>
+    <string name="download_wiki_region_placeholder">esta região</string>
+    </resources>
