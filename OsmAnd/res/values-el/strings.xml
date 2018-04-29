@@ -591,7 +591,7 @@
 	<string name="osmand_net_previously_installed">Όλα τα δεδομένα χωρίς σύνδεση στην παλιά εγκατεστημένη εφαρμογή θα υποστηρίζονται από τη νέα εφαρμογή, αλλά τα αγαπημένα σημεία θα πρέπει να εξαχθούν από την παλιά εφαρμογή και στη συνέχεια να εισαχθούν στη νέα.</string>
 	<string name="build_installed">Η δόμηση {0} εγκαταστάθηκε ({1}).</string>
 	<string name="downloading_build">Λήψη build…</string>
-	<string name="install_selected_build">Θέλετε να εγκαταστήσετε το OsmAnd - {0} από {1} {2} MB ;</string>
+	<string name="install_selected_build">Εγκατάσταση του OsmAnd - {0} από {1} {2} MB ;</string>
 	<string name="loading_builds_failed">Η ανάκτηση της λίστας των OsmAnd builds απέτυχε</string>
 	<string name="loading_builds">Φόρτωση OsmAnd builds…</string>
 	<string name="select_build_to_install">Επιλέξτε ένα από τα OsmAnd builds προς εγκατάσταση</string>
@@ -775,7 +775,7 @@
 	<string name="router_service">Υπηρεσία πλοήγησης</string>
 	<string name="sd_dir_not_accessible">Ο κατάλογος αποθήκευσης δεδομένων στην κάρτα μνήμης δεν είναι προσβάσιμος!</string>
 	<string name="download_question">Λήψη {0} - {1} ;</string>
-	<string name="download_question_exist">Δεδομένα χωρίς σύνδεση για {0} υπάρχουν ήδη ({1}). Θέλετε να τα ενημερώσετε ({2}) ?</string>
+	<string name="download_question_exist">Δεδομένα χωρίς σύνδεση για {0} υπάρχουν ήδη ({1}). Να ενημερωθούν ({2}) ?</string>
 	<string name="address">Διεύθυνση</string>
 	<string name="downloading_list_indexes">Λήψη λίστας διαθέσιμων περιοχών…</string>
 	<string name="list_index_files_was_not_loaded">Ο κατάλογος των περιοχών δεν έχει ανακτηθεί από το https://osmand.net.</string>
@@ -1295,7 +1295,7 @@
     <string name="gpx_wpt">Σημείο διαδρομής</string>
     <string name="gpx_info_subtracks">"Υποΐχνη: %1$s "</string>
 	<string name="gpx_info_waypoints">"Σημεία διαδρομής: %1$s "</string>
-	<string name="gpx_timespan">Χρονικό διάστημα: %1$s</string>
+	<string name="gpx_timespan">Χρονική διάρκεια: %1$s</string>
 	<string name="gpx_timemoving">Χρόνος σε κίνηση: %1$s</string>
     <string name="gpx_selection_segment_title">Τμήμα</string>
     <string name="gpx_selection_track">%1$s
@@ -2472,7 +2472,7 @@
     <string name="poi_deleted_localy">Τα ΣΕ θα διαγραφούν μόλις στείλετε τις αλλαγές σας</string>
     <string name="confirm_download_roadmaps">Ο χάρτης μόνο δρόμων δεν χρειάζεται, επειδή έχετε τον τυπικό (πλήρη) χάρτη. Να κατέβει οπωσδήποτε;</string>
     <string name="first_usage_item_description">Πώς να κατεβάσετε χάρτες, ορίστε βασικές ρυθμίσεις.</string>
-    <string name="only_download_over_wifi">Κατέβασμα μόνο ασύρματα</string>
+    <string name="only_download_over_wifi">Λήψη μόνο με Wi-Fi</string>
     <string name="add_time_span">Προσθήκη χρονικού διαστήματος</string>
     <string name="road_blocked">Κλειστός δρόμος</string>
     <string name="shared_string_select">Επιλέξτε</string>
@@ -2948,7 +2948,7 @@
     <string name="feedback">Ανατροφοδότηση</string>
     <string name="contact_us">Επαφή</string>
     <string name="map_legend">Υπόμνημα χάρτη</string>
-    <string name="save_poi_too_many_uppercase">Το όνομα περιέχει υπερβολικά πολλά κεφαλαία γράμματα. Θέλετε να συνεχίσετε;</string>
+    <string name="save_poi_too_many_uppercase">Το όνομα περιέχει υπερβολικά πολλά κεφαλαία γράμματα. Συνέχεια;</string>
     <string name="save_poi_without_poi_type_message">Θέλετε πραγματικά να αποθηκεύσετε ΣΕ χωρίς τύπο;</string>
     <string name="poi_context_menu_modify_osm_change">Τροποποίηση αλλαγής OSM</string>
     <string name="use_dashboard_btn">Χρήση πίνακα</string>
@@ -3001,18 +3001,18 @@
     <string name="quick_action_add_gpx_descr">Το πάτημα αυτού του πλήκτρου ενέργειας θα προσθέσει ένα ενδιάμεσο σημείο στο μέσο της οθόνης.</string>
     <string name="quick_action_take_audio_note_descr">Το πάτημα αυτού του πλήκτρου ενέργειας θα προσθέσει μια σημείωση ήχου στο μέσο της οθόνης.</string>
     <string name="quick_action_take_video_note_descr">Το πάτημα αυτού του πλήκτρου ενέργειας θα προσθέσει μια σημείωση βίντεο στο μέσο της οθόνης.</string>
-    <string name="quick_action_take_photo_note_descr">Το πάτημα αυτού του πλήκτρου ενέργειας θα προσθέσει μια φωτογραφία στο μέσο της οθόνης.</string>
+    <string name="quick_action_take_photo_note_descr">Το πάτημα αυτού του πλήκτρου ενέργειας θα προσθέσει μια σημείωση φωτογραφίας στο μέσο της οθόνης.</string>
     <string name="quick_action_add_osm_bug_descr">Το πάτημα αυτού του πλήκτρου ενέργειας θα προσθέσει μια σημείωση OSM στο μέσο της οθόνης.</string>
     <string name="quick_action_add_poi_descr">Το πάτημα αυτού του πλήκτρου ενέργειας θα προσθέσει ένα ΣΕ στο μέσο της οθόνης.</string>
-    <string name="quick_action_navigation_voice_descr">Το πάτημα αυτού του πλήκτρου ενέργειας θα απενεργοποιήσει ή θα ενεργοποιήσει τη φωνητική καθοδήγηση κατά την πλοήγηση.</string>
-    <string name="quick_action_add_parking_descr">Το πάτημα αυτού του πλήκτρου ενέργειας θα προσθέσει μια θέση στάθμευσης στο μέσο της οθόνης.</string>
+    <string name="quick_action_navigation_voice_descr">Το πάτημα αυτού του πλήκτρου ενέργειας απενεργοποιεί ή ενεργοποιεί τη φωνητική καθοδήγηση κατά την πλοήγηση.</string>
+    <string name="quick_action_add_parking_descr">Το πάτημα αυτού του πλήκτρου ενέργειας προσθέτει μια θέση στάθμευσης στο μέσο της οθόνης.</string>
     <string name="quick_action_interim_dialog">Εμφάνιση ενδιάμεσου διαλόγου</string>
     <string name="favorite_autofill_toast_text">" αποθηκεύτηκε στο "</string>
     <string name="favorite_empty_place_name">Μέρος</string>
     <string name="quick_action_duplicates">Το συγκεκριμένο όνομα γρήγορης ενέργειας χρησιμοποιείται ήδη, αλλάχτηκε σε %1$s προς αποφυγή διπλασιασμού.</string>
     <string name="quick_action_duplicate">Διπλό όνομα γρήγορης ενέργειας</string>
-    <string name="quick_action_showhide_favorites_descr">Το πάτημα αυτού του πλήκτρου ενέργειας θα εμφανίσει ή θα κρύψει τα αγαπημένα σημεία στον χάρτη.</string>
-    <string name="quick_action_showhide_poi_descr">Το πάτημα αυτού του πλήκτρου ενέργειας θα εμφανίσει ή θα κρύψει τα ΣΕ στον χάρτη.</string>
+    <string name="quick_action_showhide_favorites_descr">Το πάτημα αυτού του πλήκτρου ενέργειας εμφανίζει ή κρύβει τα αγαπημένα σημεία στον χάρτη.</string>
+    <string name="quick_action_showhide_poi_descr">Το πάτημα αυτού του πλήκτρου ενέργειας εμφανίζει ή κρύβει τα ΣΕ στον χάρτη.</string>
     <string name="quick_action_showhide_favorites_title">Εμφάνιση/απόκρυψη αγαπημένων</string>
     <string name="quick_action_favorites_show">Εμφάνιση αγαπημένων</string>
     <string name="quick_action_favorites_hide">Απόκρυψη αγαπημένων</string>
@@ -3024,13 +3024,13 @@
     <string name="quick_action_add_configure_map">Διαμόρφωση χάρτη</string>
     <string name="quick_action_add_navigation">Πλοήγηση</string>
     <string name="quick_action_fav_name_descr">Αφήστε το κενό για αυτόματη χρήση της διεύθυνσης ή του ονόματος μέρους.</string>
-    <string name="quick_action_bug_descr">Αυτό το μήνυμα θα συμπληρωθεί αυτόματα στο πεδίο σχολίων.</string>
+    <string name="quick_action_bug_descr">Αυτό το μήνυμα περιλαμβάνεται στο πεδίο σχολίων.</string>
     <string name="quick_action_bug_message">Μήνυμα</string>
     <string name="quick_action_category_descr">Επιλογή κατηγορίας αποθήκευσης αγαπημένου.</string>
     <string name="quick_action_gpx_category_descr">Επιλογή προαιρετικής κατηγορίας.</string>
     <string name="quick_action_poi_list">Κατάλογος ΣΕ</string>
     <string name="quick_action_sh_poi_descr">Μπορείτε να προσθέσετε μία ή περισσότερες κατηγορίες ΣΕ που θα εμφανίζονται στον χάρτη.</string>
-    <string name="quick_action_page_list_descr">"Το  πάτημα αυτού του πλήκτρου ενέργειας θα σελιδοποιήσει τον παρακάτω κατάλογο."</string>
+    <string name="quick_action_page_list_descr">"Το  πάτημα αυτού του πλήκτρου ενέργειας σελιδοποιεί τον παρακάτω κατάλογο."</string>
     <string name="quick_action_map_style_action">Προσθήκη μορφής χάρτη</string>
     <string name="quick_action_empty_param_error">Οι παράμετροι δεν πρέπει να είναι κενοί</string>
     <string name="quick_action_map_styles">Μορφές χάρτη</string>
@@ -3047,7 +3047,7 @@
     <string name="quick_action_map_source_action">Προσθήκη πηγής χάρτη</string>
     <string name="quick_action_map_source_switch">Η πηγή χάρτη έχει αλλαχθεί σε \"%s\".</string>
     <string name="quick_action_btn_tutorial_title">Αλλαγή θέσης πλήκτρου</string>
-    <string name="quick_action_btn_tutorial_descr">Παρατεταμένο πάτημα και μεταφορά του πλήκτρου για αλλαγή της θέσης του στην οθόνη.</string>
+    <string name="quick_action_btn_tutorial_descr">Παρατεταμένο πάτημα και μεταφορά του πλήκτρου αλλάζει τη θέση του στην οθόνη.</string>
     <string name="shared_string_action_name">Όνομα ενέργειας</string>
     <string name="mappilary_no_internet_desc">Θα πρέπει να είσαστε συνδεμένοι με το διαδίκτυο για να προβάλετε φωτογραφίες από το Mapillary.</string>
     <string name="retry">Ξαναπροσπαθήστε</string>
@@ -3118,4 +3118,5 @@
     <string name="wiki_article_search_text">Αναζήτηση για το απαραίτητο άρθρο βίκι</string>
     <string name="wiki_article_not_found">Δεν βρέθηκε το άρθρο</string>
     <string name="how_to_open_wiki_title">Πώς να ανοίξετε τα άρθρα της βικιπαίδειας;</string>
-</resources>
+<string name="osmand_team">Ομάδα OsmAnd</string>
+    </resources>
