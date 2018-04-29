@@ -569,4 +569,44 @@
 	<string name="poi_embassy">Πρεσβεία</string>
 	<string name="poi_government">Κυβέρνηση</string>
 	<string name="poi_bailiff">Δικαστικός επιμελητής</string>
+	<string name="poi_greenfield">Παρθένα γη</string>
+	<string name="poi_prosecutor">Εισαγγελέας</string>
+	<string name="poi_pension_fund">Ταμείο συντάξεων</string>
+	<string name="poi_migration">Μετανάστευση</string>
+	<string name="poi_tax_inspection">Φορολογική επιθεώρηση</string>
+	<string name="poi_office_administrative">Γραφείο διοίκησης</string>
+	<string name="poi_customs">Τελωνεία</string>
+	<string name="poi_country">Ύπαιθρος</string>
+	<string name="poi_city">Πόλη</string>
+	<string name="poi_capital">Πρωτεύουσα</string>
+	<string name="poi_town">Κωμόπολη</string>
+	<string name="poi_village">Χωριό</string>
+	<string name="poi_hamlet">Μικρό χωριό</string>
+	<string name="poi_isolated_dwelling">Απομονωμένη κατοικία</string>
+	<string name="poi_suburb">Προάστιο</string>
+	<string name="poi_quarter">Συνοικία</string>
+	<string name="poi_neighbourhood">Γειτονιά</string>
+	<string name="poi_locality">Κοινότητα</string>
+	<string name="poi_place_allotments">Μικροί κήποι</string>
+	<string name="poi_place_farm">Αγρόκτημα</string>
+
+
+	<string name="poi_pharmacy">Φαρμακείο</string>
+	<string name="poi_hospital">Νοσοκομείο</string>
+	<string name="poi_doctors">Γιατροί</string>
+	<string name="poi_clinic">Κλινική</string>
+	<string name="poi_first_aid">Πρώτες βοήθειες</string>
+	<string name="poi_dentist">Οδοντίατρος</string>
+	<string name="poi_nursing_home">Γηροκομείο</string>
+	<string name="poi_baby_hatch">Βρεφοδόχος</string>
+	<string name="poi_veterinary">Κτηνίατρος</string>
+	<string name="poi_sanatorium">Σανατόριο</string>
+	<string name="poi_healthcare_alternative">Εναλλακτική ιατρική</string>
+	<string name="poi_audiologist">ακουολόγος</string>
+	<string name="poi_blood_bank">Τράπεζα αίματος</string>
+	<string name="poi_healthcare_centre">Ιατρικό κέντρο</string>
+	<string name="poi_midwife">Μαία</string>
+	<string name="poi_occupational_therapist">Εργασιοθεραπευτής</string>
+	<string name="poi_optometrist">Οπτικός</string>
+	<string name="poi_physiotherapist">Φυσιοθερπευτής</string>
 	</resources>
