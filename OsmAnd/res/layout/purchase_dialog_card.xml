@@ -7,7 +7,7 @@
     android:layout_marginBottom="@dimen/list_header_padding"
     android:layout_marginLeft="@dimen/card_padding"
     android:layout_marginRight="@dimen/card_padding"
-    android:background="@drawable/dialog_card_bg"
+    android:background="?attr/wikivoyage_travel_card_bg"
     android:orientation="vertical">
 
     <include layout="@layout/purchase_dialog_card_header"/>

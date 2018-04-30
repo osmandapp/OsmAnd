@@ -206,9 +206,9 @@ public class TravelDownloadUpdateCard extends BaseTravelCard {
 	@DrawableRes
 	private int getPrimaryBtnBgRes(boolean enabled) {
 		if (enabled) {
-			return R.drawable.wikivoyage_primary_btn_bg;
+			return nightMode ? R.drawable.wikivoyage_primary_btn_bg_dark : R.drawable.wikivoyage_primary_btn_bg_light;
 		}
-		return R.drawable.wikivoyage_secondary_btn_bg;
+		return nightMode ? R.drawable.wikivoyage_secondary_btn_bg_dark : R.drawable.wikivoyage_secondary_btn_bg_light;
 	}
 
 	@ColorRes
