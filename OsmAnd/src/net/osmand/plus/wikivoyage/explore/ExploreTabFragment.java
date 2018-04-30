@@ -38,7 +38,6 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIn
 
 	private ExploreRvAdapter adapter = new ExploreRvAdapter();
 
-	private StartEditingTravelCard startEditingTravelCard;
 	private TravelDownloadUpdateCard downloadUpdateCard;
 
 	private boolean nightMode;
@@ -67,7 +66,6 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIn
 		final List<BaseTravelCard> items = new ArrayList<>();
 		final OsmandApplication app = getMyApplication();
 
-		startEditingTravelCard = new StartEditingTravelCard(app, nightMode);
 		addOpenBetaTravelCard(items, nightMode);
 		if (app.getTravelDbHelper().getSelectedTravelBook() != null) {
 			items.add(new HeaderTravelCard(app, nightMode, getString(R.string.popular_destinations)));
@@ -80,7 +78,7 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIn
 				}
 			}
 		}
-		items.add(startEditingTravelCard);
+		items.add(new StartEditingTravelCard(app, nightMode));
 		adapter.setItems(items);
 
 		checkToAddDownloadTravelCard();
