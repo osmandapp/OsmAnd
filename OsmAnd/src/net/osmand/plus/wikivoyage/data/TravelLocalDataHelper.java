@@ -36,8 +36,7 @@ public class TravelLocalDataHelper {
 
 	void refreshCachedData() {
 		historyMap = dbHelper.getAllHistoryMap();
-		savedArticles.clear();
-		savedArticles.addAll(dbHelper.readSavedArticles());
+		savedArticles = dbHelper.readSavedArticles();
 	}
 
 	public List<WikivoyageSearchHistoryItem> getAllHistory() {
