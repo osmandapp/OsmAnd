@@ -32,6 +32,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
+import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
@@ -89,11 +90,10 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 				case WIKIPEDIA_OFFLINE:
 				case UNLOCK_ALL_FEATURES:
 				case DONATION_TO_OSM:
+				case WIKIVOYAGE_OFFLINE:
 					return false;
 				case SEA_DEPTH_MAPS:
-					return ctx.getSettings().DEPTH_CONTOURS_PURCHASED.get();
-				case WIKIVOYAGE_OFFLINE:
-					return ctx.getSettings().TRAVEL_ARTICLES_PURCHASED.get();
+					return InAppPurchaseHelper.isDepthContoursPurchased(ctx);
 				case CONTOUR_LINES_HILLSHADE_MAPS:
 					return OsmandPlugin.getEnabledPlugin(SRTMPlugin.class) != null;
 			}

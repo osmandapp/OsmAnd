@@ -12,6 +12,7 @@ import net.osmand.map.OsmandRegions;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.download.DownloadOsmandIndexesHelper.AssetIndexItem;
+import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
@@ -321,7 +322,7 @@ public class DownloadResources extends DownloadResourceGroup {
 				continue;
 			}
 			if (ii.getType() == DownloadActivityType.DEPTH_CONTOUR_FILE) {
-				if (app.getSettings().DEPTH_CONTOURS_PURCHASED.get() || nauticalMaps.size() == 0) {
+				if (InAppPurchaseHelper.isDepthContoursPurchased(app) || nauticalMaps.size() == 0) {
 					nauticalMaps.addItem(ii);
 				}
 				continue;

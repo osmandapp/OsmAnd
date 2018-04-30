@@ -26,6 +26,7 @@ import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.IndexItem;
+import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.util.Algorithms;
 
 import java.util.Comparator;
@@ -92,7 +93,7 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 				getMyApplication().getResourceManager().getOsmandRegions();
 		OsmandSettings settings = getMyApplication().getSettings();
 		listAdapter = new UpdateIndexAdapter(a, R.layout.download_index_list_item, indexItems,
-				!settings.LIVE_UPDATES_PURCHASED.get() || settings.SHOULD_SHOW_FREE_VERSION_BANNER.get());
+				!InAppPurchaseHelper.isSubscribedToLiveUpdates(getMyApplication()) || settings.SHOULD_SHOW_FREE_VERSION_BANNER.get());
 		listAdapter.sort(new Comparator<IndexItem>() {
 			@Override
 			public int compare(IndexItem indexItem, IndexItem indexItem2) {

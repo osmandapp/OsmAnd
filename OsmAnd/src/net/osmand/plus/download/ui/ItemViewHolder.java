@@ -32,6 +32,7 @@ import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.download.ui.LocalIndexesFragment.LocalIndexOperationTask;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
+import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -129,7 +130,7 @@ public class ItemViewHolder {
 		nauticalPluginDisabled = context.isNauticalPluginDisabled();
 		freeVersion = context.isFreeVersion();
 		srtmNeedsInstallation = context.isSrtmNeedsInstallation();
-		depthContoursPurchased = context.getMyApplication().getSettings().DEPTH_CONTOURS_PURCHASED.get();
+		depthContoursPurchased = InAppPurchaseHelper.isDepthContoursPurchased(context.getMyApplication());
 	}
 
 	public void bindIndexItem(final IndexItem indexItem) {
@@ -314,10 +315,10 @@ public class ItemViewHolder {
 			}
 
 		} else if (indexItem.getType() == DownloadActivityType.WIKIPEDIA_FILE && freeVersion
-				&& !context.getMyApplication().getSettings().FULL_VERSION_PURCHASED.get()) {
+				&& !InAppPurchaseHelper.isFullVersionPurchased(context.getMyApplication())) {
 			clickAction = RightButtonAction.ASK_FOR_FULL_VERSION_PURCHASE;
 		} else if (indexItem.getType() == DownloadActivityType.DEPTH_CONTOUR_FILE
-				&& !context.getMyApplication().getSettings().DEPTH_CONTOURS_PURCHASED.get()) {
+				&& !InAppPurchaseHelper.isDepthContoursPurchased(context.getMyApplication())) {
 			clickAction = RightButtonAction.ASK_FOR_DEPTH_CONTOURS_PURCHASE;
 		}
 		return clickAction;
