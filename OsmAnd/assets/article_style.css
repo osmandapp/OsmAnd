@@ -11,10 +11,10 @@ body {
     max-width: 100% !important;
     /* overflow-x: hidden; hide scroll bar */
     display: block;
-    margin-top: 7%;
-    margin-bottom: 0;
-    margin-left: 7%;
-    margin-right: 7%;
+    padding-top: 7%;
+    padding-bottom: 0;
+    padding-left: 7%;
+    padding-right: 7%;
     background-color: white;
     font-family: sans-serif;
 }
@@ -260,14 +260,34 @@ td {
     word-wrap: break-word;
 }
 
+.nightmode > body {
+    color: #17191a;
+}
+
 .nightmode {
     max-width: 100% !important;
     /* overflow-x: hidden; hide scroll bar */
     display: block;
-    padding-top: 7%;
+    /* margin-top: 7%;
     padding-bottom: 0;
     padding-left: 7%;
-    padding-right: 7%;
+    padding-right: 7%; 
+    */
     font-family: sans-serif;
     background-color: #17191a;
+}
+
+
+.nightmode > .nav-bar {
+    background-color: #222526;
+    font-size: 1.1em;
+    font-family: sans-serif;
+    color: #222526;
+    word-wrap: break-word;
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    font-weight: normal;
+    line-height: 1.6em;
 }

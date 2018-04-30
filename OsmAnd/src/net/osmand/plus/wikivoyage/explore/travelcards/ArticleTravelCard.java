@@ -12,11 +12,9 @@ import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.RequestCreator;
 
-import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.widgets.tools.CropCircleTransformation;
-import net.osmand.plus.widgets.tools.CropRectTransformation;
 import net.osmand.plus.wikivoyage.WikivoyageUtils;
 import net.osmand.plus.wikivoyage.article.WikivoyageArticleDialogFragment;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
@@ -25,7 +23,6 @@ import net.osmand.plus.wikivoyage.data.TravelLocalDataHelper;
 public class ArticleTravelCard extends BaseTravelCard {
 
 	public static final int TYPE = 2;
-	public static final boolean USE_ALTERNATIVE_CARD = false;
 
 	private TravelArticle article;
 	private final Drawable readIcon;
@@ -46,7 +43,7 @@ public class ArticleTravelCard extends BaseTravelCard {
 			RequestCreator rc = Picasso.get()
 					.load(TravelArticle.getImageUrl(article.getImageTitle(), false));
 			WikivoyageUtils.setupNetworkPolicy(app.getSettings(), rc);
-			rc.transform(USE_ALTERNATIVE_CARD ? new CropRectTransformation() : new CropCircleTransformation())
+			rc.transform(new CropCircleTransformation())
 					.into(holder.icon, new Callback() {
 						@Override
 						public void onSuccess() {

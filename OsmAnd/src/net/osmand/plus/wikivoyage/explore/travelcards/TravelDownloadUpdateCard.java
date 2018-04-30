@@ -1,6 +1,8 @@
 package net.osmand.plus.wikivoyage.explore.travelcards;
 
 import android.graphics.drawable.Drawable;
+import android.support.annotation.ColorRes;
+import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
@@ -181,8 +183,11 @@ public class TravelDownloadUpdateCard extends BaseTravelCard {
 	 */
 	private boolean updatePrimaryButton(DownloadUpdateVH vh) {
 		if (!loadingInProgress) {
+			boolean enabled = isInternetAvailable();
 			vh.primaryBtnContainer.setVisibility(View.VISIBLE);
-			vh.primaryButton.setEnabled(isInternetAvailable());
+			vh.primaryBtnContainer.setBackgroundResource(getPrimaryBtnBgRes(enabled));
+			vh.primaryButton.setTextColor(getResolvedColor(getPrimaryBtnTextColorRes(enabled)));
+			vh.primaryButton.setEnabled(enabled);
 			vh.primaryButton.setText(download ? R.string.shared_string_download : R.string.shared_string_update);
 			vh.primaryButton.setOnClickListener(new View.OnClickListener() {
 				@Override
@@ -196,6 +201,22 @@ public class TravelDownloadUpdateCard extends BaseTravelCard {
 		}
 		vh.primaryBtnContainer.setVisibility(View.GONE);
 		return false;
+	}
+
+	@DrawableRes
+	private int getPrimaryBtnBgRes(boolean enabled) {
+		if (enabled) {
+			return R.drawable.wikivoyage_primary_btn_bg;
+		}
+		return R.drawable.wikivoyage_secondary_btn_bg;
+	}
+
+	@ColorRes
+	private int getPrimaryBtnTextColorRes(boolean enabled) {
+		if (enabled) {
+			return nightMode ? R.color.wikivoyage_primary_btn_text_dark : R.color.wikivoyage_primary_btn_text_light;
+		}
+		return R.color.wikivoyage_secondary_text;
 	}
 
 	public interface ClickListener {
