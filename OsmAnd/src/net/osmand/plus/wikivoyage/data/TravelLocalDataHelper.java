@@ -22,7 +22,7 @@ public class TravelLocalDataHelper {
 	private WikivoyageLocalDataDbHelper dbHelper;
 
 	private TLongObjectHashMap<WikivoyageSearchHistoryItem> historyMap;
-	private List<TravelArticle> savedArticles;
+	private List<TravelArticle> savedArticles = new ArrayList<>();
 
 	private Listener listener;
 
@@ -36,7 +36,8 @@ public class TravelLocalDataHelper {
 
 	void refreshCachedData() {
 		historyMap = dbHelper.getAllHistoryMap();
-		savedArticles = dbHelper.readSavedArticles();
+		savedArticles.clear();
+		savedArticles.addAll(dbHelper.readSavedArticles());
 	}
 
 	public List<WikivoyageSearchHistoryItem> getAllHistory() {
@@ -114,7 +115,7 @@ public class TravelLocalDataHelper {
 			savedArticles.add(article);
 			dbHelper.addSavedArticle(article);
 			notifySavedUpdated();
-		} 
+		}
 	}
 
 	public void removeArticleFromSaved(@NonNull TravelArticle article) {
