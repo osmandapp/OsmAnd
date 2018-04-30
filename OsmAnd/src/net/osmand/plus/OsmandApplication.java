@@ -878,8 +878,8 @@ public class OsmandApplication extends MultiDexApplication {
 		try {
 			if (Version.isGooglePlayEnabled(this) && Version.isFreeVersion(this)
 					&& !osmandSettings.DO_NOT_SEND_ANONYMOUS_APP_USAGE.get()
-					&& !osmandSettings.FULL_VERSION_PURCHASED.get()
-					&& !osmandSettings.LIVE_UPDATES_PURCHASED.get()) {
+					&& !InAppPurchaseHelper.isFullVersionPurchased(this)
+					&& !InAppPurchaseHelper.isSubscribedToLiveUpdates(this)) {
 				Class<?> cl = Class.forName("com.google.firebase.analytics.FirebaseAnalytics");
 				Method mm = cl.getMethod("getInstance", Context.class);
 				Object inst = mm.invoke(null, ctx == null ? this : ctx);

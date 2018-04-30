@@ -6,6 +6,8 @@ import java.net.URLEncoder;
 import android.content.pm.PackageInfo;
 import 	android.content.pm.PackageManager;
 
+import net.osmand.plus.inapp.InAppPurchaseHelper;
+
 public class Version {
 	
 	private final String appVersion; 
@@ -121,14 +123,18 @@ public class Version {
 
 	public static boolean isPaidVersion(OsmandApplication ctx) {
 		return !isFreeVersion(ctx)
-				|| ctx.getSettings().FULL_VERSION_PURCHASED.get()
-				|| ctx.getSettings().LIVE_UPDATES_PURCHASED.get();
+				|| InAppPurchaseHelper.isFullVersionPurchased(ctx)
+				|| InAppPurchaseHelper.isSubscribedToLiveUpdates(ctx);
 	}
 	
 	public static boolean isDeveloperVersion(OsmandApplication ctx){
 		return getAppName(ctx).contains("~") || ctx.getPackageName().equals(FREE_DEV_VERSION_NAME);
 	}
-	
+
+	public static boolean isDeveloperBuild(OsmandApplication ctx){
+		return getAppName(ctx).contains("~");
+	}
+
 	public static String getVersionForTracker(OsmandApplication ctx) {
 		String v = Version.getAppName(ctx);
 		if(Version.isProductionVersion(ctx)){

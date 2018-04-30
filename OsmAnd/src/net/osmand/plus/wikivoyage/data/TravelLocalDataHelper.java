@@ -22,7 +22,7 @@ public class TravelLocalDataHelper {
 	private WikivoyageLocalDataDbHelper dbHelper;
 
 	private TLongObjectHashMap<WikivoyageSearchHistoryItem> historyMap;
-	private List<TravelArticle> savedArticles;
+	private List<TravelArticle> savedArticles = new ArrayList<>();
 
 	private Listener listener;
 
@@ -114,7 +114,7 @@ public class TravelLocalDataHelper {
 			savedArticles.add(article);
 			dbHelper.addSavedArticle(article);
 			notifySavedUpdated();
-		} 
+		}
 	}
 
 	public void removeArticleFromSaved(@NonNull TravelArticle article) {

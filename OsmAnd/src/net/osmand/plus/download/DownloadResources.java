@@ -12,6 +12,7 @@ import net.osmand.map.OsmandRegions;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.download.DownloadOsmandIndexesHelper.AssetIndexItem;
+import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
@@ -75,21 +76,24 @@ public class DownloadResources extends DownloadResourceGroup {
 
 	@Nullable
 	public IndexItem getWikivoyageItem(@NonNull String fileName) {
-		String groupId = DownloadResourceGroupType.TRAVEL_GROUP.getDefaultId() + "#" +
-				DownloadResourceGroupType.WIKIVOYAGE_MAPS.getDefaultId() + "#" +
-				DownloadResourceGroupType.WIKIVOYAGE_HEADER.getDefaultId();
-		DownloadResourceGroup wikivoyageHeader = getSubGroupById(groupId);
-		if (wikivoyageHeader != null) {
-			List<IndexItem> items = wikivoyageHeader.getIndividualResources();
-			if (items != null) {
-				for (IndexItem ii : items) {
-					if (ii.getFileName().equals(fileName)) {
-						return ii;
-					}
+		List<IndexItem> items = getWikivoyageItems();
+		if (items != null) {
+			for (IndexItem ii : items) {
+				if (ii.getFileName().equals(fileName)) {
+					return ii;
 				}
 			}
 		}
 		return null;
+	}
+
+	@Nullable
+	public List<IndexItem> getWikivoyageItems() {
+		String groupId = DownloadResourceGroupType.TRAVEL_GROUP.getDefaultId() + "#" +
+				DownloadResourceGroupType.WIKIVOYAGE_MAPS.getDefaultId() + "#" +
+				DownloadResourceGroupType.WIKIVOYAGE_HEADER.getDefaultId();
+		DownloadResourceGroup header = getSubGroupById(groupId);
+		return header == null ? null : header.getIndividualResources();
 	}
 
 	public IndexItem getIndexItem(String fileName) {
@@ -321,7 +325,7 @@ public class DownloadResources extends DownloadResourceGroup {
 				continue;
 			}
 			if (ii.getType() == DownloadActivityType.DEPTH_CONTOUR_FILE) {
-				if (app.getSettings().DEPTH_CONTOURS_PURCHASED.get() || nauticalMaps.size() == 0) {
+				if (InAppPurchaseHelper.isDepthContoursPurchased(app) || nauticalMaps.size() == 0) {
 					nauticalMaps.addItem(ii);
 				}
 				continue;

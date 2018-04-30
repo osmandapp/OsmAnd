@@ -58,6 +58,7 @@ import net.osmand.plus.download.ui.DownloadResourceGroupFragment;
 import net.osmand.plus.download.ui.LocalIndexesFragment;
 import net.osmand.plus.download.ui.UpdatesIndexFragment;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
+import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseTaskType;
 import net.osmand.plus.openseamapsplugin.NauticalMapsPlugin;
@@ -403,8 +404,8 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 	}
 
 	public static boolean shouldShowFreeVersionBanner(OsmandApplication application) {
-		return (Version.isFreeVersion(application) && !application.getSettings().LIVE_UPDATES_PURCHASED.get()
-				&& !application.getSettings().FULL_VERSION_PURCHASED.get())
+		return (Version.isFreeVersion(application) && !InAppPurchaseHelper.isSubscribedToLiveUpdates(application)
+				&& !InAppPurchaseHelper.isFullVersionPurchased(application))
 				|| application.getSettings().SHOULD_SHOW_FREE_VERSION_BANNER.get();
 	}
 	

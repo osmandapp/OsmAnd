@@ -1,5 +1,7 @@
 package net.osmand.plus.wikivoyage.explore;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -10,7 +12,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -38,7 +39,6 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIn
 
 	private ExploreRvAdapter adapter = new ExploreRvAdapter();
 
-	private StartEditingTravelCard startEditingTravelCard;
 	private TravelDownloadUpdateCard downloadUpdateCard;
 
 	private boolean nightMode;
@@ -67,7 +67,6 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIn
 		final List<BaseTravelCard> items = new ArrayList<>();
 		final OsmandApplication app = getMyApplication();
 
-		startEditingTravelCard = new StartEditingTravelCard(app, nightMode);
 		addOpenBetaTravelCard(items, nightMode);
 		if (app.getTravelDbHelper().getSelectedTravelBook() != null) {
 			items.add(new HeaderTravelCard(app, nightMode, getString(R.string.popular_destinations)));
@@ -80,7 +79,7 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIn
 				}
 			}
 		}
-		items.add(startEditingTravelCard);
+		items.add(new StartEditingTravelCard(app, nightMode));
 		adapter.setItems(items);
 
 		checkToAddDownloadTravelCard();
@@ -150,17 +149,21 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIn
 		boolean outdated = indexItem != null && indexItem.isOutdated();
 		File selectedTravelBook = app.getTravelDbHelper().getSelectedTravelBook();
 		if (selectedTravelBook == null || outdated) {
+			boolean showOtherMaps = false;
+			if (selectedTravelBook == null) {
+				List<IndexItem> items = app.getDownloadThread().getIndexes().getWikivoyageItems();
+				showOtherMaps = items != null && items.size() > 1;
+			}
 			downloadUpdateCard = new TravelDownloadUpdateCard(app, nightMode, !outdated);
+			downloadUpdateCard.setShowOtherMapsBtn(showOtherMaps);
 			downloadUpdateCard.setLoadingInProgress(loadingInProgress);
 			downloadUpdateCard.setListener(new TravelDownloadUpdateCard.ClickListener() {
 				@Override
 				public void onPrimaryButtonClick() {
-					if (app.getSettings().isInternetConnectionAvailable()) {
+					if (indexItem != null) {
 						new DownloadValidationManager(app).startDownload(getMyActivity(), indexItem);
 						downloadUpdateCard.setLoadingInProgress(true);
 						adapter.updateDownloadUpdateCard();
-					} else {
-						Toast.makeText(app, app.getString(R.string.no_index_file_to_download), Toast.LENGTH_SHORT).show();
 					}
 				}
 
@@ -172,6 +175,14 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIn
 						adapter.updateDownloadUpdateCard();
 					} else if (!downloadUpdateCard.isDownload()) {
 						removeDownloadUpdateCard();
+					} else if (downloadUpdateCard.isShowOtherMapsBtn()) {
+						Activity activity = getActivity();
+						if (activity != null) {
+							Intent newIntent = new Intent(activity,
+									getMyApplication().getAppCustomization().getDownloadActivity());
+							newIntent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+							activity.startActivity(newIntent);
+						}
 					}
 				}
 			});

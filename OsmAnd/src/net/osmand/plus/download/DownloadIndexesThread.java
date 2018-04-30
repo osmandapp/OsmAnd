@@ -32,6 +32,7 @@ import net.osmand.plus.Version;
 import net.osmand.plus.base.BasicProgressAsyncTask;
 import net.osmand.plus.download.DownloadFileHelper.DownloadFileShowWarning;
 import net.osmand.plus.helpers.DatabaseHelper;
+import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.util.Algorithms;
 
@@ -563,8 +564,8 @@ public class DownloadIndexesThread {
 		
 		private boolean validateNotExceedsFreeLimit(IndexItem item) {
 			boolean exceed = Version.isFreeVersion(app)
-					&& !app.getSettings().LIVE_UPDATES_PURCHASED.get()
-					&& !app.getSettings().FULL_VERSION_PURCHASED.get()
+					&& !InAppPurchaseHelper.isSubscribedToLiveUpdates(app)
+					&& !InAppPurchaseHelper.isFullVersionPurchased(app)
 					&& DownloadActivityType.isCountedInDownloads(item)
 					&& downloads.get() >= DownloadValidationManager.MAXIMUM_AVAILABLE_FREE_DOWNLOADS;
 			if(exceed) {

@@ -130,8 +130,7 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppPurc
 		listView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
 			@Override
 			public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-				InAppPurchaseHelper purchaseHelper = getInAppPurchaseHelper();
-				if (!processing && purchaseHelper != null && purchaseHelper.isSubscribedToLiveUpdates()) {
+				if (!processing && InAppPurchaseHelper.isSubscribedToLiveUpdates(getMyApplication())) {
 					final FragmentManager fragmentManager = getChildFragmentManager();
 					LiveUpdatesSettingsDialogFragment
 							.createInstance(adapter.getChild(groupPosition, childPosition).getFileName())
@@ -153,8 +152,7 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppPurc
 			listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 				@Override
 				public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-					InAppPurchaseHelper purchaseHelper = getInAppPurchaseHelper();
-					if (position == 0 && !processing && purchaseHelper != null && purchaseHelper.isSubscribedToLiveUpdates()) {
+					if (position == 0 && !processing && InAppPurchaseHelper.isSubscribedToLiveUpdates(getMyApplication())) {
 						SubscriptionFragment subscriptionFragment = new SubscriptionFragment();
 						subscriptionFragment.setEditMode(true);
 						subscriptionFragment.show(getChildFragmentManager(), SubscriptionFragment.TAG);
@@ -174,7 +172,7 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppPurc
 		if (getActivity() instanceof OsmLiveActivity) {
 			View subscriptionBanner = subscriptionHeader.findViewById(R.id.subscription_banner);
 			View subscriptionInfo = subscriptionHeader.findViewById(R.id.subscription_info);
-			if (getSettings().LIVE_UPDATES_PURCHASED.get()) {
+			if (InAppPurchaseHelper.isSubscribedToLiveUpdates(getMyApplication())) {
 				ImageView statusIcon = (ImageView) subscriptionHeader.findViewById(R.id.statusIcon);
 				TextView statusTextView = (TextView) subscriptionHeader.findViewById(R.id.statusTextView);
 				TextView regionNameHeaderTextView = (TextView) subscriptionHeader.findViewById(R.id.regionHeaderTextView);
@@ -267,7 +265,9 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppPurc
 	@SuppressWarnings("deprecation")
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-		if (getSettings().LIVE_UPDATES_PURCHASED.get() && !Version.isDeveloperVersion(getMyApplication())) {
+		if (InAppPurchaseHelper.isSubscribedToLiveUpdates(getMyApplication())
+				&& !Version.isDeveloperVersion(getMyApplication())) {
+
 			ActionBar actionBar = getMyActivity().getSupportActionBar();
 			if (actionBar != null) {
 				actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
@@ -404,8 +404,7 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppPurc
 					@Override
 					public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 						if (isChecked) {
-							InAppPurchaseHelper purchaseHelper = getInAppPurchaseHelper();
-							if (purchaseHelper != null && purchaseHelper.isSubscribedToLiveUpdates()) {
+							if (InAppPurchaseHelper.isSubscribedToLiveUpdates(getMyApplication())) {
 								switchOnLiveUpdates(settings);
 							} else {
 								liveUpdatesSwitch.setChecked(false);
@@ -606,8 +605,7 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppPurc
 				descriptionTextView.setText(context.getString(R.string.last_map_change, lastCheckString));
 			}
 
-			InAppPurchaseHelper purchaseHelper = fragment.getInAppPurchaseHelper();
-			if (!fragment.isProcessing() && purchaseHelper != null && purchaseHelper.isSubscribedToLiveUpdates()) {
+			if (!fragment.isProcessing() && InAppPurchaseHelper.isSubscribedToLiveUpdates(context)) {
 				final View.OnClickListener clickListener = new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
@@ -708,8 +706,7 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppPurc
 
 	@Override
 	public void onGetItems() {
-		InAppPurchaseHelper purchaseHelper = getInAppPurchaseHelper();
-		if (purchaseHelper != null && !purchaseHelper.isSubscribedToLiveUpdates()) {
+		if (!InAppPurchaseHelper.isSubscribedToLiveUpdates(getMyApplication())) {
 			getSettings().IS_LIVE_UPDATES_ON.set(false);
 			adapter.enableLiveUpdates(false);
 		}
