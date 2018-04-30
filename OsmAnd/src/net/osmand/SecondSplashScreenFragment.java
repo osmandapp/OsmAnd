@@ -19,6 +19,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.inapp.InAppPurchaseHelper;
 
 public class SecondSplashScreenFragment extends Fragment {
 	public static final String TAG = "SecondSplashScreenFragment";
@@ -99,15 +100,15 @@ public class SecondSplashScreenFragment extends Fragment {
 		logoLayoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
 		ImageView text = new ImageView(activity);
 		if (Version.isFreeVersion(app)) {
-			if (settings.LIVE_UPDATES_PURCHASED.get()) {
+			if (InAppPurchaseHelper.isSubscribedToLiveUpdates(app)) {
 				text.setImageDrawable(getResources().getDrawable(R.drawable.image_text_osmand_osmlive));
-			} else if (settings.FULL_VERSION_PURCHASED.get()) {
+			} else if (InAppPurchaseHelper.isFullVersionPurchased(app)) {
 				text.setImageDrawable(getResources().getDrawable(R.drawable.image_text_osmand_inapp));
 			} else {
 				text.setImageDrawable(getResources().getDrawable(R.drawable.image_text_osmand));
 			}
 		} else if (Version.isPaidVersion(app) || Version.isDeveloperVersion(app)) {
-			if (settings.LIVE_UPDATES_PURCHASED.get()) {
+			if (InAppPurchaseHelper.isSubscribedToLiveUpdates(app)) {
 				text.setImageDrawable(getResources().getDrawable(R.drawable.image_text_osmand_plus_osmlive));
 			} else {
 				text.setImageDrawable(getResources().getDrawable(R.drawable.image_text_osmand_plus));

@@ -121,8 +121,16 @@ public class InAppPurchaseHelper {
 		return activeTask;
 	}
 
-	public boolean isSubscribedToLiveUpdates() {
-		return ctx.getSettings().LIVE_UPDATES_PURCHASED.get();
+	public static boolean isSubscribedToLiveUpdates(@NonNull OsmandApplication ctx) {
+		return Version.isDeveloperBuild(ctx) || ctx.getSettings().LIVE_UPDATES_PURCHASED.get();
+	}
+
+	public static boolean isFullVersionPurchased(@NonNull OsmandApplication ctx) {
+		return Version.isDeveloperBuild(ctx) || ctx.getSettings().FULL_VERSION_PURCHASED.get();
+	}
+
+	public static boolean isDepthContoursPurchased(@NonNull OsmandApplication ctx) {
+		return Version.isDeveloperBuild(ctx) || ctx.getSettings().DEPTH_CONTOURS_PURCHASED.get();
 	}
 
 	public String getLiveUpdatesPrice() {
@@ -176,12 +184,7 @@ public class InAppPurchaseHelper {
 
 	public InAppPurchaseHelper(OsmandApplication ctx) {
 		this.ctx = ctx;
-		this.isDeveloperVersion = Version.isDeveloperVersion(ctx);
-		if (this.isDeveloperVersion) {
-			ctx.getSettings().LIVE_UPDATES_PURCHASED.set(true);
-			ctx.getSettings().FULL_VERSION_PURCHASED.set(true);
-			ctx.getSettings().DEPTH_CONTOURS_PURCHASED.set(true);
-		}
+		isDeveloperVersion = Version.isDeveloperVersion(ctx);
 		initialize();
 	}
 
@@ -192,11 +195,11 @@ public class InAppPurchaseHelper {
 	public boolean isPurchased(String inAppSku) {
 		OsmandSettings settings = ctx.getSettings();
 		if (inAppSku.equals(SKU_FULL_VERSION_PRICE)) {
-			return settings.FULL_VERSION_PURCHASED.get();
+			return isFullVersionPurchased(ctx);
 		} else if (inAppSku.equals(SKU_LIVE_UPDATES_FULL) || inAppSku.equals(SKU_LIVE_UPDATES_FREE)) {
-			return settings.LIVE_UPDATES_PURCHASED.get();
+			return isSubscribedToLiveUpdates(ctx);
 		} else if (inAppSku.equals(SKU_DEPTH_CONTOURS_FULL) || inAppSku.equals(SKU_DEPTH_CONTOURS_FREE)) {
-			return settings.DEPTH_CONTOURS_PURCHASED.get();
+			return isDepthContoursPurchased(ctx);
 		}
 		return false;
 	}
@@ -252,7 +255,7 @@ public class InAppPurchaseHelper {
 	}
 
 	public boolean needRequestInventory() {
-		return (ctx.getSettings().LIVE_UPDATES_PURCHASED.get() && !ctx.getSettings().BILLING_PURCHASE_TOKEN_SENT.get())
+		return (isSubscribedToLiveUpdates(ctx) && !ctx.getSettings().BILLING_PURCHASE_TOKEN_SENT.get())
 				|| System.currentTimeMillis() - lastValidationCheckTime > PURCHASE_VALIDATION_PERIOD_MSEC;
 	}
 
@@ -355,7 +358,9 @@ public class InAppPurchaseHelper {
 			// Do we have the live updates?
 			Purchase liveUpdatesPurchase = inventory.getPurchase(SKU_LIVE_UPDATES);
 			boolean subscribedToLiveUpdates = (liveUpdatesPurchase != null && liveUpdatesPurchase.getPurchaseState() == 0);
-			//subscribedToLiveUpdates = false;
+			if (!subscribedToLiveUpdates && ctx.getSettings().LIVE_UPDATES_PURCHASED.get()) {
+				ctx.getSettings().LIVE_UPDATES_PURCHASE_CANCELLED_TIME.set(System.currentTimeMillis());
+			}
 			ctx.getSettings().LIVE_UPDATES_PURCHASED.set(subscribedToLiveUpdates);
 
 			Purchase fullVersionPurchase = inventory.getPurchase(SKU_FULL_VERSION_PRICE);

@@ -48,6 +48,7 @@ import net.osmand.plus.dashboard.DashChooseAppDirFragment.ChooseAppDirFragment;
 import net.osmand.plus.dashboard.DashChooseAppDirFragment.MoveFilesToDifferentDirectory;
 import net.osmand.plus.dialogs.ConfigureMapMenu;
 import net.osmand.plus.download.DownloadActivity;
+import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.render.RenderingRulesStorage;
 
@@ -495,8 +496,10 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 		misc.addPreference(createCheckBoxPreference(settings.DO_NOT_USE_ANIMATIONS, R.string.do_not_use_animations, R.string.do_not_use_animations_descr));
 		misc.addPreference(createCheckBoxPreference(settings.MAP_EMPTY_STATE_ALLOWED, R.string.tap_on_map_to_hide_interface, R.string.tap_on_map_to_hide_interface_descr));
 		misc.addPreference(createCheckBoxPreference(settings.DO_NOT_SHOW_STARTUP_MESSAGES, R.string.do_not_show_startup_messages, R.string.do_not_show_startup_messages_desc));
-		if (Version.isGooglePlayEnabled(getMyApplication()) && Version.isFreeVersion(getMyApplication())
-				&& !settings.FULL_VERSION_PURCHASED.get() && !settings.LIVE_UPDATES_PURCHASED.get()) {
+		OsmandApplication app = getMyApplication();
+		if (Version.isGooglePlayEnabled(getMyApplication()) && Version.isFreeVersion(app)
+				&& !InAppPurchaseHelper.isFullVersionPurchased(app)
+				&& !InAppPurchaseHelper.isSubscribedToLiveUpdates(app)) {
 			misc.addPreference(createCheckBoxPreference(settings.DO_NOT_SEND_ANONYMOUS_APP_USAGE, R.string.do_not_send_anonymous_app_usage, R.string.do_not_send_anonymous_app_usage_desc));
 		}
 	}
