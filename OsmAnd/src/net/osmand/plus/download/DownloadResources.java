@@ -76,21 +76,24 @@ public class DownloadResources extends DownloadResourceGroup {
 
 	@Nullable
 	public IndexItem getWikivoyageItem(@NonNull String fileName) {
-		String groupId = DownloadResourceGroupType.TRAVEL_GROUP.getDefaultId() + "#" +
-				DownloadResourceGroupType.WIKIVOYAGE_MAPS.getDefaultId() + "#" +
-				DownloadResourceGroupType.WIKIVOYAGE_HEADER.getDefaultId();
-		DownloadResourceGroup wikivoyageHeader = getSubGroupById(groupId);
-		if (wikivoyageHeader != null) {
-			List<IndexItem> items = wikivoyageHeader.getIndividualResources();
-			if (items != null) {
-				for (IndexItem ii : items) {
-					if (ii.getFileName().equals(fileName)) {
-						return ii;
-					}
+		List<IndexItem> items = getWikivoyageItems();
+		if (items != null) {
+			for (IndexItem ii : items) {
+				if (ii.getFileName().equals(fileName)) {
+					return ii;
 				}
 			}
 		}
 		return null;
+	}
+
+	@Nullable
+	public List<IndexItem> getWikivoyageItems() {
+		String groupId = DownloadResourceGroupType.TRAVEL_GROUP.getDefaultId() + "#" +
+				DownloadResourceGroupType.WIKIVOYAGE_MAPS.getDefaultId() + "#" +
+				DownloadResourceGroupType.WIKIVOYAGE_HEADER.getDefaultId();
+		DownloadResourceGroup header = getSubGroupById(groupId);
+		return header == null ? null : header.getIndividualResources();
 	}
 
 	public IndexItem getIndexItem(String fileName) {

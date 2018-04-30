@@ -3,6 +3,7 @@ package net.osmand.plus.wikivoyage.explore.travelcards;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.StringRes;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -21,6 +22,7 @@ public class TravelDownloadUpdateCard extends BaseTravelCard {
 	public static final int TYPE = 50;
 
 	private boolean download;
+	private boolean showOtherMapsBtn;
 	private boolean loadingInProgress;
 	private int progress;
 
@@ -33,6 +35,14 @@ public class TravelDownloadUpdateCard extends BaseTravelCard {
 
 	public boolean isDownload() {
 		return download;
+	}
+
+	public boolean isShowOtherMapsBtn() {
+		return showOtherMapsBtn;
+	}
+
+	public void setShowOtherMapsBtn(boolean showOtherMapsBtn) {
+		this.showOtherMapsBtn = showOtherMapsBtn;
 	}
 
 	public boolean isLoadingInProgress() {
@@ -131,9 +141,9 @@ public class TravelDownloadUpdateCard extends BaseTravelCard {
 	 * @return true if button is visible, false otherwise.
 	 */
 	private boolean updateSecondaryButton(DownloadUpdateVH vh) {
-		if (loadingInProgress || !download) {
+		if (loadingInProgress || !download || showOtherMapsBtn) {
 			vh.secondaryBtnContainer.setVisibility(View.VISIBLE);
-			vh.secondaryBtn.setText(loadingInProgress ? R.string.shared_string_cancel : R.string.later);
+			vh.secondaryBtn.setText(getSecondaryBtnTextId());
 			vh.secondaryBtn.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
@@ -146,6 +156,17 @@ public class TravelDownloadUpdateCard extends BaseTravelCard {
 		}
 		vh.secondaryBtnContainer.setVisibility(View.GONE);
 		return false;
+	}
+
+	@StringRes
+	private int getSecondaryBtnTextId() {
+		if (loadingInProgress) {
+			return R.string.shared_string_cancel;
+		}
+		if (!download) {
+			return R.string.later;
+		}
+		return R.string.download_select_map_types;
 	}
 
 	/**
