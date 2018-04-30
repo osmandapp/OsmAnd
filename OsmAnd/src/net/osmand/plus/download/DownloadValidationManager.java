@@ -17,6 +17,7 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
+import net.osmand.plus.inapp.InAppPurchaseHelper;
 
 import java.io.File;
 import java.text.MessageFormat;
@@ -154,8 +155,8 @@ public class DownloadValidationManager {
 	}
 
 	protected void downloadFilesCheck_1_FreeVersion(FragmentActivity context, IndexItem[] items) {
-		if (Version.isFreeVersion(getMyApplication()) && !app.getSettings().LIVE_UPDATES_PURCHASED.get()
-				&& !app.getSettings().FULL_VERSION_PURCHASED.get()) {
+		if (Version.isFreeVersion(getMyApplication()) && !InAppPurchaseHelper.isSubscribedToLiveUpdates(app)
+				&& !InAppPurchaseHelper.isFullVersionPurchased(app)) {
 			int total = settings.NUMBER_OF_FREE_DOWNLOADS.get();
 			if (total > MAXIMUM_AVAILABLE_FREE_DOWNLOADS) {
 				if (context instanceof FragmentActivity) {

@@ -40,10 +40,7 @@ public class ExploreRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 				return new StartEditingTravelVH(inflate(parent, R.layout.wikivoyage_start_editing_card));
 
 			case ArticleTravelCard.TYPE:
-				int layoutId = ArticleTravelCard.USE_ALTERNATIVE_CARD
-						? R.layout.wikivoyage_article_card_alternative
-						: R.layout.wikivoyage_article_card;
-				return new ArticleTravelVH(inflate(parent, layoutId));
+				return new ArticleTravelVH(inflate(parent, R.layout.wikivoyage_article_card));
 
 			case TravelDownloadUpdateCard.TYPE:
 				return new DownloadUpdateVH(inflate(parent, R.layout.travel_download_update_card));

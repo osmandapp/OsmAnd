@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import net.osmand.AndroidUtils;
 import net.osmand.PicassoUtils;
 import net.osmand.plus.LockableViewPager;
@@ -58,7 +59,6 @@ public class WikivoyageExploreDialogFragment extends WikivoyageBaseDialogFragmen
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		
 		FragmentManager childFm = getChildFragmentManager();
 		List<Fragment> fragments = childFm.getFragments();
 		if (fragments != null) {
@@ -136,55 +136,34 @@ public class WikivoyageExploreDialogFragment extends WikivoyageBaseDialogFragmen
 				return false;
 			}
 		});
+
 		updateSearchVisibility();
 		populateData();
+
 		return mainView;
 	}
-	
+
 	protected void onDataLoaded() {
 		mainView.findViewById(R.id.progress_bar).setVisibility(View.GONE);
 		updateSearchVisibility();
-		if(exploreTabFragment != null) {
+		if (exploreTabFragment != null) {
 			exploreTabFragment.populateData();
 		}
-		if(savedArticlesTabFragment != null) {
+		if (savedArticlesTabFragment != null) {
 			savedArticlesTabFragment.savedArticlesUpdated();
 		}
 	}
 
 	private void updateSearchVisibility() {
-		mainView.findViewById(R.id.search_box).setVisibility(getMyApplication().getTravelDbHelper().getSelectedTravelBook() == null ? View.GONE : View.VISIBLE);
+		mainView.findViewById(R.id.search_box).setVisibility(
+				getMyApplication().getTravelDbHelper().getSelectedTravelBook() == null ? View.GONE : View.VISIBLE
+		);
 	}
 
 	public void populateData() {
 		mainView.findViewById(R.id.progress_bar).setVisibility(View.VISIBLE);
 		new LoadWikivoyageData(this).execute();
 	}
-	
-	private static class LoadWikivoyageData extends AsyncTask<Void, Void, Void> {
-		
-		private WeakReference<WikivoyageExploreDialogFragment> weakReference;
-		private TravelDbHelper travelDbHelper;
-
-		public LoadWikivoyageData(WikivoyageExploreDialogFragment fragment) {
-			travelDbHelper = fragment.getMyApplication().getTravelDbHelper();
-			weakReference = new WeakReference<WikivoyageExploreDialogFragment>(fragment);
-		}
-
-		@Override
-		protected Void doInBackground(Void... params) {
-			travelDbHelper.loadDataForSelectedTravelBook();
-			return null;
-		}
-		@Override
-		protected void onPostExecute(Void result) {
-			WikivoyageExploreDialogFragment option = weakReference.get();
-			if(option != null && option.isResumed()) {
-				option.onDataLoaded();
-			}
-		}
-		
-	};
 
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -236,6 +215,31 @@ public class WikivoyageExploreDialogFragment extends WikivoyageBaseDialogFragmen
 		}
 	}
 
+	private static class LoadWikivoyageData extends AsyncTask<Void, Void, Void> {
+
+		private WeakReference<WikivoyageExploreDialogFragment> weakReference;
+		private TravelDbHelper travelDbHelper;
+
+		LoadWikivoyageData(WikivoyageExploreDialogFragment fragment) {
+			travelDbHelper = fragment.getMyApplication().getTravelDbHelper();
+			weakReference = new WeakReference<>(fragment);
+		}
+
+		@Override
+		protected Void doInBackground(Void... params) {
+			travelDbHelper.loadDataForSelectedTravelBook();
+			return null;
+		}
+
+		@Override
+		protected void onPostExecute(Void result) {
+			WikivoyageExploreDialogFragment fragment = weakReference.get();
+			if (fragment != null && fragment.isResumed()) {
+				fragment.onDataLoaded();
+			}
+		}
+	}
+
 	private class ViewPagerAdapter extends FragmentPagerAdapter {
 
 		private final List<BaseOsmAndFragment> fragments = Arrays.asList(exploreTabFragment, savedArticlesTabFragment);
@@ -254,5 +258,4 @@ public class WikivoyageExploreDialogFragment extends WikivoyageBaseDialogFragmen
 			return fragments.size();
 		}
 	}
-
 }

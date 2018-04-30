@@ -3846,16 +3846,22 @@
 
 <string name="poi_glacier_type">Tipo de geleira</string>
 
-<string name="poi_glacier_type_icecap">Calota de gelo</string>
+<string name="poi_glacier_type_icecap">Calota glaciar</string>
 	<string name="poi_glacier_type_icefield">Campo de gelo</string>
 	<string name="poi_glacier_type_plateau">Planalto</string>
 	<string name="poi_glacier_type_valley">Vale</string>
 	<string name="poi_glacier_type_outlet">Saída</string>
-	<string name="poi_glacier_type_tidewater">Água de maré</string>
+	<string name="poi_glacier_type_tidewater">Costeiro</string>
 	<string name="poi_glacier_type_mountain">Montanha</string>
 	<string name="poi_glacier_type_ice_tongue">Língua de gelo</string>
 
 	<string name="poi_glacier_ele_top">Ponto culminante</string>
 	<string name="poi_glacier_slope">Inclinação média</string>
 
-</resources>
+<string name="poi_glacier_type_hanging">Suspenso</string>
+	<string name="poi_glacier_type_icefall">Regenerado</string>
+	<string name="poi_glacier_type_rock">Rocha</string>
+	<string name="poi_glacier_type_shelf">Plataforma</string>
+	<string name="poi_glacier_type_remnant">Remanescente</string>
+	<string name="poi_glacier_ele_bottom">Ponto mais baixo</string>
+	</resources>

@@ -11,7 +11,7 @@
     <string name="quick_action_showhide_osmbugs_title">Показать/скрыть заметки OSM</string>
     <string name="quick_action_osmbugs_show">Показать заметки OSM</string>
     <string name="quick_action_osmbugs_hide">Скрыть заметки OSM</string>
-    <string name="quick_action_showhide_osmbugs_descr">Нажатие на кнопку действия отобразит/скроет заметки OSM с карты.</string>
+    <string name="quick_action_showhide_osmbugs_descr">Нажатие на кнопку действия отобразит или скроет заметки OSM на карте.</string>
     <string name="sorted_by_distance">Отсортировано по расстоянию</string>
     <string name="search_favorites">Поиск в избранных</string>
     <string name="hillshade_menu_download_descr">Скачайте карту \"Затенение рельефа\" для затенения этого региона.</string>
@@ -3008,4 +3008,5 @@
 <string name="popular_destinations">Популярные направления</string>
     <string name="paid_app">Платное приложение</string>
     <string name="paid_plugin">Платный плагин</string>
+    <string name="osmand_team">Команда OsmAnd</string>
     </resources>

@@ -36,6 +36,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
+import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.plus.resources.AsyncLoadingThread.MapLoadRequest;
@@ -581,7 +582,7 @@ public class ResourceManager {
 		collectFiles(appPath, IndexConstants.BINARY_MAP_INDEX_EXT, files);
 		renameRoadsFiles(files, roadsPath);
 		collectFiles(roadsPath, IndexConstants.BINARY_MAP_INDEX_EXT, files);
-		if (!Version.isFreeVersion(context) || context.getSettings().FULL_VERSION_PURCHASED.get()) {
+		if (!Version.isFreeVersion(context) || InAppPurchaseHelper.isFullVersionPurchased(context)) {
 			collectFiles(context.getAppPath(IndexConstants.WIKI_INDEX_DIR), IndexConstants.BINARY_MAP_INDEX_EXT, files);
 		}
 		if (OsmandPlugin.getEnabledPlugin(SRTMPlugin.class) != null) {
@@ -618,7 +619,7 @@ public class ResourceManager {
 				}
 				boolean wikiMap = (f.getName().contains("_wiki") || f.getName().contains(IndexConstants.BINARY_WIKI_MAP_INDEX_EXT));
 				boolean srtmMap = f.getName().contains(IndexConstants.BINARY_SRTM_MAP_INDEX_EXT);
-				if (mapReader == null || (Version.isFreeVersion(context) && wikiMap && !context.getSettings().FULL_VERSION_PURCHASED.get())) {
+				if (mapReader == null || (Version.isFreeVersion(context) && wikiMap && !InAppPurchaseHelper.isFullVersionPurchased(context))) {
 					warnings.add(MessageFormat.format(context.getString(R.string.version_index_is_not_supported), f.getName())); //$NON-NLS-1$
 				} else {
 					if (mapReader.isBasemap()) {

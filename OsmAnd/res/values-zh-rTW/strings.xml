@@ -162,7 +162,7 @@
     <string name="osmand_parking_warning">警示</string>
     <string name="osmand_parking_warning_text">您的取車通知已加到您的行事曆中。它會一直保留在那裡，直到您手動刪除它。</string>
     <string name="osmand_parking_time_limit_title">設定停車時限</string>
-    <string name="osmand_parking_delete_confirm">您要刪除停車位置標記嗎？</string>
+    <string name="osmand_parking_delete_confirm">要刪除停車位置標記嗎？</string>
     <string name="osmand_parking_delete">刪除停車位置標記</string>
     <string name="osmand_parking_choose_type">選擇停車場種類</string>
     <string name="osmand_parking_lim_text">時限</string>
@@ -202,7 +202,7 @@
     <string name="address_search_desc">地址查尋</string>
     <string name="navpoint_search_desc">座標查尋</string>
     <string name="transport_search_desc">公共交通查尋</string>
-    <string name="favourites_search_desc">我的收藏查尋</string>
+    <string name="favourites_search_desc">搜尋收藏的方式</string>
 
     <string name="offline_navigation_not_available">OsmAnd 離線導航，暫時不能使用。</string>
     <string name="left_side_navigation">靠左行駛</string>
@@ -211,7 +211,7 @@
     <string name="unknown_from_location">起始標點尚未決定</string>
     <string name="unknown_location">未知地理位置</string>
     <string name="modify_transparency">調整透明度(0 - 透明, 255 - 不透明)</string>
-    <string name="confirm_interrupt_download">您要取消下載中的檔案嗎？</string>
+    <string name="confirm_interrupt_download">要檔案下載嗎？</string>
     <string name="first_time_msg">感謝您使用 OsmAnd。透過「設定」-&gt;「管理地圖檔案」下載地區的資料供離線使用，以便檢視地圖，位置的地址、查看 POI、尋找大眾運輸工具等等。</string>
     <string name="basemap_was_selected_to_download">選擇底圖進行下載，使應用程式運行。</string>
     <string name="select_index_file_to_download">找不到任何資料。如果您不能在您的區域找到，您可以自行製作(參閱 https://osmand.net)。</string>
@@ -350,7 +350,7 @@
     <string name="index_name_tts_voice">提示語音 (TTS-合成語音，優先)</string>
     <string name="amenity_type_osmwiki">維基百科 (離線)</string>
     <string name="amenity_type_user_defined">使用者定義</string>
-    <string name="fav_export_confirmation">我的收藏已有上次匯出的檔，要取代它嗎？</string>
+    <string name="fav_export_confirmation">我的收藏已有上次匯出的檔案。要取代它嗎？</string>
     <string name="profile_settings">配置個別設定</string>
     <string name="settings_preset">預置設定檔</string>
     <string name="settings_preset_descr">檢視地圖和導航設定，記住每個使用設定檔。在這裡設定您的預置設定檔。</string>
@@ -472,9 +472,9 @@
     <string name="installing_new_resources">安裝新資料…</string>
     <string name="internet_connection_required_for_online_route">選用線上導航服務，但是您沒有連接到網際網路。</string>
     <string name="tts_language_not_supported_title">未支援的語言</string>
-    <string name="tts_language_not_supported">選用的語言 Android TTS 引擎未支援，您要到商場找其它引擎嗎？否則使用預設的 TTS 語言。</string>
+    <string name="tts_language_not_supported">選用的語言 Android TTS 引擎未支援，要到商店中尋找其它引擎嗎？否則將會使用預設的 TTS 語言。</string>
     <string name="tts_missing_language_data_title">資料遺失</string>
-    <string name="tts_missing_language_data">您要轉到商場下載所選擇的語言嗎？</string>
+    <string name="tts_missing_language_data">要轉到商店下載所選擇的語言嗎？</string>
     <string name="gpx_option_reverse_route">反轉 GPX 方向</string>
     <string name="gpx_option_destination_point">使用目前的目的地</string>
     <string name="gpx_option_from_start_point">沿著整條軌跡往前</string>
@@ -577,7 +577,7 @@
     <string name="osmand_net_previously_installed">舊版應用程式已安裝的所有離線資料，在新版都會受到支援，但我的收藏內的標點，必須從舊版程式匯出，然後再匯入新版程式。</string>
     <string name="build_installed">編譯 {0} 已安裝({1})。</string>
     <string name="downloading_build">正在下載編譯…</string>
-    <string name="install_selected_build">您要安裝 OsmAnd - {0} 之中的 {1} {2} MB？</string>
+    <string name="install_selected_build">要安裝 OsmAnd - {0} 之中的 {1} {2} MB？</string>
     <string name="loading_builds_failed">檢索 OsmAnd 編譯列表失敗</string>
     <string name="loading_builds">正在載入 OsmAnd 編譯…</string>
     <string name="select_build_to_install">選擇 OsmAnd 編譯安裝</string>
@@ -761,7 +761,7 @@
     <string name="router_service">導航服務</string>
     <string name="sd_dir_not_accessible">該資料在記憶卡上的存儲資料夾無法存取！</string>
     <string name="download_question">下載 {0} - {1}？</string>
-    <string name="download_question_exist">離線資料 {0} 已存在 ({1})。您要更新 ({2}) 嗎？</string>
+    <string name="download_question_exist">離線資料 {0} 已存在 ({1})。要更新 ({2}) 嗎？</string>
     <string name="address">地址</string>
     <string name="downloading_list_indexes">正在下載可用的地區清單…</string>
     <string name="list_index_files_was_not_loaded">無法由 https://osmand.net 取得地區列表。</string>
@@ -962,7 +962,7 @@
     <string name="cancel_route">排除路線</string>
     <string name="cancel_navigation">停止導航</string>
     <string name="clear_destination">清除目的地</string>
-    <string name="download_using_mobile_internet">Wi-Fi 現在並未連線。您想使用目前的連線，連接到網路進行下載嗎？</string>
+    <string name="download_using_mobile_internet">並未連線至 Wi-Fi。使用目前的連線進行下載嗎？</string>
     <string name="street_name">街道名稱</string>
     <string name="hno">門牌號碼</string>
     <string name="monitoring_settings">旅程錄製</string>
@@ -1021,7 +1021,7 @@
     <string name="recording_camera_not_available">相機失效</string>
     <string name="recording_playing">從已指定的錄音開始播放音訊。\n%1$s</string>
     <string name="recording_open_external_player">開啟外部播放</string>
-    <string name="recording_delete_confirm">您想刪除此錄製嗎？</string>
+    <string name="recording_delete_confirm">刪除此錄製嗎？</string>
     <string name="recording_unavailable">無法使用</string>
     <string name="recording_context_menu_arecord">錄取音訊附註</string>
     <string name="destination_point">目的地 %1$s</string>
@@ -1068,7 +1068,7 @@
     <string name="safe_mode_description">在安全模式下執行應用程式(使用較慢的 Android 而非原生碼)。</string>
     <string name="safe_mode">安全模式</string>
     <string name="native_library_not_running">應用程式是在安全模式中執行(在「設定」裡停用)。</string>
-    <string name="background_service_is_enabled_question">OsmAnd 服務仍在背景執行，您想要中止嗎？</string>
+    <string name="background_service_is_enabled_question">OsmAnd 服務仍在背景執行。也要中止它嗎？</string>
     <string name="osmand_play_title_30_chars">OsmAnd 地圖和導航</string>
     <string name="osmand_plus_play_title_30_chars">OsmAnd+ 地圖和導航</string>
     <string name="native_app_allocated_memory_descr">本機記憶體總計由應用程式 %1$s MB (Dalvik %2$s MB，其它 %3$s MB)，比例記憶體 %4$s MB (Android 限制 %5$s MB，Dalvik %6$s MB)分配佔用。</string>
@@ -1206,9 +1206,9 @@
     <string name="copying_osmand_files_descr">複製 OsmAnd 資料檔到新的目的地 (%s)…</string>
     <string name="copying_osmand_files">複製 OsmAnd 資料檔案…</string>
     <string name="calculate_osmand_route_gpx">離線的 OsmAnd 路線計算</string>
-    <string name="android_19_location_disabled">由於 Android 4.4 (KitKat) 版本，您無法下載和更新地圖於之前的存儲檔案夾 (%s)。您是否想變更到允許的存儲位置並複製所有的 OsmAnd 檔案到那裡？
-\n注意 1：您舊的檔案將保持不變（但可以手動刪除）。
-\n注意 2：在新的存儲位置，它不可能在 OsmAnd 和 OsmAnd+ 兩者之間共用檔案。</string>
+    <string name="android_19_location_disabled">由於 Android 4.4 (KitKat) 版本，您無法下載和更新地圖於舊的儲存資料夾 (%s)。複製所有的 OsmAnd 檔案到新的儲存位置嗎？ 
+\n注意 1：您舊的檔案將保持不變（但可以手動刪除）。 
+\n注意 2：在新的儲存位置，它不可能在 OsmAnd 和 OsmAnd+ 兩者之間共用檔案。</string>
     <string name="routing_attr_prefer_motorway_name">高速公路優先</string>
     <string name="routing_attr_prefer_motorway_description">高速公路優先。</string>
     
@@ -1230,7 +1230,7 @@
     <string name="route_preferences">優先路線</string>
     <string name="route_info">路線資訊</string>
     <string name="keep_and_add_destination_point">增加為隨後的目的地</string>
-    <string name="use_displayed_track_for_navigation">您想使用顯示的軌跡用於導航嗎？</string>
+    <string name="use_displayed_track_for_navigation">使用顯示的軌跡用於導航嗎？</string>
     <string name="calculate_osmand_route_without_internet">離線計算的 OsmAnd 路段</string>
     <string name="gpx_option_calculate_first_last_segment">OsmAnd 預估最初和最後路段的路線</string>
 
@@ -1595,7 +1595,7 @@
     <string name="map_locale">地圖上的語言</string>
     <string name="rendering_attr_transportStops_name">公車站牌</string>
     <string name="voices">提示語音</string>
-    <string name="dash_download_msg_none">您想要下載離線地圖嗎？</string>
+    <string name="dash_download_msg_none">要下載離線地圖嗎？</string>
     <string name="dash_download_msg">您已下載了 %1$s 的地圖</string>
     <string name="dash_download_new_one">下載新的地圖</string>
     <string name="dash_download_manage">管理</string>
@@ -1731,10 +1731,10 @@
     <string name="shared_string_more_actions">更多的動作</string>
     <string name="shared_string_map">地圖</string>
     <string name="shared_string_favorites">我的收藏</string>
-    <string name="shared_string_add_to_favorites">加到「我的收藏」</string>
+    <string name="shared_string_add_to_favorites">新增至「收藏」</string>
     <string name="shared_string_my_location">我的位置</string>
     <string name="shared_string_my_places">我的地點</string>
-    <string name="shared_string_my_favorites">我的收藏</string>
+    <string name="shared_string_my_favorites">收藏</string>
     <string name="shared_string_my_tracks">我的軌跡</string>
     <string name="shared_string_currently_recording_track">錄製軌跡</string>
     <string name="shared_string_audio">音訊</string>
@@ -1766,7 +1766,7 @@
     <string name="delay_to_start_navigation">導航後開始轉向建議…</string>
     <string name="shared_string_go">執行</string>
 
-    <string name="confirmation_to_clear_history">您想要清除過去的記錄嗎？</string>
+    <string name="confirmation_to_clear_history">清除過去的記錄嗎？</string>
     <string name="local_osm_changes_upload_all_confirm">您要上傳 %1$d 以更改 OSM。您確定嗎？</string>
     
     <string name="osm_changes_added_to_local_edits">OSM 的變更已加到本機更改設定</string>
@@ -1794,7 +1794,7 @@
     <string name="index_name_netherlands">歐洲 - 荷蘭</string>
     <string name="rendering_value__name">預設</string>
     <string name="rendering_value_highContrastRoads_name">高對比道路</string>
-    <string name="application_dir_change_warning3">您想要 OsmAnd 將資料檔案，複製到新的目的地嗎？</string>
+    <string name="application_dir_change_warning3">您想要 OsmAnd 將資料檔案複製到新的目的地嗎？</string>
     <string name="specified_directiory_not_writeable">在指定的目錄不能建立地圖</string>
     <string name="copying_osmand_file_failed">複製檔案時失敗</string>
     <string name="storage_directory_external">外部存儲器</string>
@@ -1824,11 +1824,11 @@
     <string name="download_wikipedia_maps">維基百科</string>
     <string name="shared_string_import2osmand">匯入到 OsmAnd</string>
     <string name="local_recordings_delete_all_confirm">您要刪除 %1$d 的註解。您確定嗎？</string>
-    <string name="gps_network_not_enabled">未啟用位置服務，您想要開啟它嗎？</string>
+    <string name="gps_network_not_enabled">未啟用位置服務。要開啟它嗎？</string>
     <string name="disable_recording_once_app_killed">預防單獨的日誌記錄</string>
     <string name="disable_recording_once_app_killed_descrp">當應用程式被停止，將暫停 GPX 日誌記錄 (藉由新的應用程式)。(OsmAnd 背景標示，從通知列消失。)</string>
-    <string name="archive_wikipedia_data">您已有舊的且不相容的維基百科資料，您想要將其存檔嗎？</string>
-    <string name="download_wikipedia_files">您想要下載所增加的維基百科資料 (%1$s MB) 嗎？</string>
+    <string name="archive_wikipedia_data">您已有舊的且不相容的維基百科資料。要將其封存嗎？</string>
+    <string name="download_wikipedia_files">要下載所增加的維基百科資料 (%1$s MB) 嗎？</string>
     <string name="lang_vo">沃拉普克語</string>
     <string name="lang_th">泰語</string>
     <string name="lang_te">泰盧固語</string>
@@ -2179,12 +2179,12 @@
     <string name="shared_string_reverse_order">順序相反</string>
     
     <string name="show_map_markers_description">啟動地圖標記功能。</string>
-    <string name="clear_active_markers_q">您想要移除所有的活動標記嗎？</string>
-    <string name="clear_markers_history_q">您想清除地圖標記歷史記錄嗎？</string>
+    <string name="clear_active_markers_q">移除所有的活動標記嗎？</string>
+    <string name="clear_markers_history_q">清除地圖標記歷史記錄嗎？</string>
     <string name="active_markers">活動標記</string>
     <string name="map_markers">地圖標記</string>
     <string name="map_marker">地圖標記</string>
-    <string name="add_points_to_map_markers_q">您想要將所有的標點都加到地圖標記嗎？</string>
+    <string name="add_points_to_map_markers_q">新增所有的標點到地圖標記嗎？</string>
     <string name="shared_string_add_to_map_markers">增加地圖標記</string>
     <string name="consider_turning_polygons_off">建議關閉多邊形的著色演算。</string>
     
@@ -2314,7 +2314,7 @@
     <string name="share_history_subject">"透過 OsmAnd  分享"</string>
     <string name="lang_hsb">索布語 (上游)</string>
     <string name="back_to_search">返回查詢</string>
-    <string name="confirmation_to_delete_history_items">您要從「歷程」移除已選取的項目嗎？</string>
+    <string name="confirmation_to_delete_history_items">自「歷程」移除已選取的項目嗎？</string>
     <string name="show_something_on_map">在地圖上顯示 %1$s</string>
     <string name="dist_away_from_my_location">查詢 %1$s 路線</string>
     
@@ -2341,7 +2341,7 @@
     <string name="replace_favorite_confirmation">您確定您想要替換收藏的 %1$s 嗎？</string>
     <string name="shared_string_change">更換</string>
     <string name="get_started">開始</string>
-    <string name="update_all_maps_now">您現在想要更新所有地圖？</string>
+    <string name="update_all_maps_now">現在要更新所有地圖嗎？</string>
     <string name="clear_tile_data">清除所有圖磚</string>
     <string name="skip_map_downloading">跳過下載中地圖</string>
     <string name="skip_map_downloading_desc">您沒有安裝離線地圖。您可以從清單中選取一個地圖或稍後透過「選單 - %1$s」下載地圖。</string>
@@ -2366,7 +2366,7 @@
     <string name="get_for_month">每個月獲得 %1$s</string>
     <string name="no_update_info_desc">不要檢查新版本或 OsmAnd 相關的折扣。</string>
     <string name="get_it">獲得</string>
-    <string name="osm_live_payment_desc">每個月會收取認購費用。您可以在 Google Play 隨時取消您的訂購。</string>
+    <string name="osm_live_payment_desc">每個月會收取訂閱費用。您隨時都能在 Google Play 取消。</string>
     <string name="donation_to_osm">捐贈給 OpenStreetMap 的社群</string>
     <string name="osm_live_subscription_desc">啟用認購可每小時、每天、每週的更新以及世界各地所有的地圖無限制的下載。</string>
     <string name="driving_region_australia">澳洲</string>
@@ -2381,7 +2381,7 @@
     <string name="save_filter">儲存篩選</string>
     <string name="delete_filter">刪除篩選</string>
     <string name="new_filter">新的篩選</string>
-    <string name="new_filter_desc">請輸入新的篩選名稱，這會加到您的類別標籤裡。</string>
+    <string name="new_filter_desc">請輸入新的篩選名稱，這會加到您的「類別」分頁裡。</string>
     <string name="translit_names">音譯名稱</string>
     <string name="search_hint">輸入城市、地址、POI 名稱</string>
     <string name="translit_name_if_miss">如果 %1$s 的名稱缺失則音譯</string>
@@ -2405,7 +2405,7 @@
     <string name="shared_string_record">記錄</string>
     <string name="gpx_logging_no_data">沒有資料</string>
     <string name="christmas_desc">預知聖誕節和新年假期，您可以選擇顯示與聖誕節關聯的 POI：聖誕樹、市場等等。</string>
-    <string name="donation_to_osm_desc">您捐款的一部分將發送給向 OpenStreetMap 提交更改的 OSM 使用者。訂閱的成本保持不變。</string>
+    <string name="donation_to_osm_desc">您捐款的一部分會發送給向 OpenStreetMap 提交更改的 OSM 使用者。訂閱的成本保持不變。</string>
     
     
     <string name="shared_string_notifications">通知</string>
@@ -2501,7 +2501,7 @@
     <string name="quick_action_btn_tutorial_title">更改按鈕位置</string>
     <string name="quick_action_btn_tutorial_descr">長按並拖動在螢幕上的按鈕改變位置。</string>
     <string name="quick_action_fav_name_descr">保留為空白則自動使用地址或地點名稱。</string>
-<string name="quick_action_bug_descr">此訊息會在注解欄中自動填寫。</string>
+<string name="quick_action_bug_descr">此訊息會包含在註解欄。</string>
     <string name="quick_action_interim_dialog">顯示臨時的對話方塊</string>
     <string name="configure_screen_quick_action">快速動作</string>
 
@@ -2511,22 +2511,22 @@
     <string name="dialog_add_action_title">增加動作</string>
     <string name="quick_actions_delete">刪除動作</string>
     <string name="quick_actions_delete_text">您確定要刪除動作 \"%s\" 嗎？</string>
-    <string name="quick_action_add_marker_descr">輕點這個動作按鈕將會在螢幕中央的位置增加一個地圖記號。</string>
+    <string name="quick_action_add_marker_descr">輕點這個動作按鈕會在螢幕中央的位置增加一個地圖記號。</string>
     <string name="quick_action_add_gpx_descr">輕點這個動作按鈕將會在螢幕中間增加一個 GPX 航點。</string>
-    <string name="quick_action_take_audio_note_descr">輕點這個動作按鈕將會在螢幕中間增加一個音訊注解。</string>
-    <string name="quick_action_take_video_note_descr">輕點這個動作按鈕將會在螢幕中間增加一個視訊注解。</string>
-    <string name="quick_action_take_photo_note_descr">輕點這個動作按鈕將會在螢幕中間增加一個照片注解。</string>
-    <string name="quick_action_add_osm_bug_descr">輕點這個動作按鈕將會在螢幕中間增加一個 OSM 註解。</string>
-    <string name="quick_action_add_poi_descr">輕點這個動作按鈕將會在螢幕中間增加一個 POI。</string>
+    <string name="quick_action_take_audio_note_descr">輕點這個動作按鈕會在螢幕中間增加一個音訊注解。</string>
+    <string name="quick_action_take_video_note_descr">輕點這個動作按鈕會在螢幕中間增加一個視訊注解。</string>
+    <string name="quick_action_take_photo_note_descr">輕點這個動作按鈕會在螢幕中間增加一個照片注解。</string>
+    <string name="quick_action_add_osm_bug_descr">輕點這個動作按鈕會在螢幕中間增加一個 OSM 註解。</string>
+    <string name="quick_action_add_poi_descr">輕點這個動作按鈕會在螢幕中間增加一個 POI。</string>
     <string name="navigate_point_olc">打開位置編碼(OLC)</string>
     <string name="navigate_point_olc_info_invalid">無效的 OLC
 </string>
-    <string name="quick_action_navigation_voice_descr">輕點這個動作按鈕將會停用或啟用導航期間的語音導引。</string>
-    <string name="quick_action_add_parking_descr">輕點這個動作按鈕將會在螢幕中間增加一個停車位置。</string>
+    <string name="quick_action_navigation_voice_descr">輕點這個動作按鈕會停用或啟用導航期間的語音導引。</string>
+    <string name="quick_action_add_parking_descr">輕點這個動作按鈕會在螢幕中間增加一個停車位置。</string>
     <string name="quick_action_duplicates">指定的快速動作名稱已在使用中，已更改為 %1$s 以避免重複。</string>
     <string name="quick_action_duplicate">快速動作的名稱重複</string>
-    <string name="quick_action_showhide_favorites_descr">輕點這個動作按鈕將會在地圖上顯示或隱藏我的收藏標點。</string>
-    <string name="quick_action_showhide_poi_descr">輕點這個動作按鈕將會在地圖上顯示或隱藏 POI。</string>
+    <string name="quick_action_showhide_favorites_descr">輕點這個動作按鈕會在地圖上顯示或隱藏我的收藏標點。</string>
+    <string name="quick_action_showhide_poi_descr">輕點這個動作按鈕會在地圖上顯示或隱藏 POI。</string>
     <string name="quick_action_map_overlay_switch">地圖上圖層已更改為 \"%s\"。</string>
     <string name="quick_action_map_underlay_switch">地圖底層已更改為 \"%s\"。</string>
     <string name="shared_string_action_name">動作名稱</string>
@@ -2607,7 +2607,7 @@
     <string name="do_not_send_anonymous_app_usage">不要傳送匿名的應用程式使用統計</string>
     <string name="do_not_show_startup_messages">不要在啟動時顯示訊息</string>
     <string name="do_not_show_startup_messages_desc">不要顯示應用程式折扣和當地特有的事件訊息。</string>
-    <string name="do_not_send_anonymous_app_usage_desc">OsmAnd 收集您開了應用程式哪些部件的資訊。絕不會傳送您所在的位置，也沒有您向應用程式輸入的任何內容或您所查看區域的詳細資料、搜尋或下載。</string>
+    <string name="do_not_send_anonymous_app_usage_desc">OsmAnd 蒐集您開了應用程式哪些元件的資訊。絕不會傳送您所在的位置，也沒有您向應用程式輸入的任何內容或您所查看區域的詳細資料、搜尋或下載。</string>
     <string name="select_street">選擇街道</string>
     <string name="shared_string_in_name">在 %1$s</string>
     <string name="type_address">輸入地址</string>
@@ -2624,7 +2624,7 @@
     <string name="no_overlay">無上圖層</string>
     <string name="no_underlay">無下圖層</string>
     <string name="subscribe_email_error">錯誤</string>
-    <string name="sea_depth_thanks">感謝您購買航海等深線</string>
+    <string name="sea_depth_thanks">感謝您購買「航海等深線」</string>
     <string name="index_item_depth_contours_osmand_ext">航海等深線</string>
     <string name="index_item_depth_points_southern_hemisphere">南半球航海等深線</string>
     <string name="index_item_depth_points_northern_hemisphere">北半球航海等深線</string>
@@ -2755,11 +2755,11 @@
 \n
 \n
 \n一些主要特點：</string>
-    <string name="quick_action_auto_zoom_desc">輕點這個動作按鈕的開啟/關閉將會根據您的速度自動縮放地圖。</string>
+    <string name="quick_action_auto_zoom_desc">輕點這個動作按鈕的開啟/關閉會根據您的速度自動縮放地圖。</string>
     <string name="shared_string_overview">概要</string>
     <string name="quick_action_replace_destination_desc">輕點此動作按鈕，會在螢幕中央新增路線的目的地，替換先前所選擇的目的地(如果有的話)。</string>
     <string name="quick_action_add_first_intermediate_desc">輕點此動作按鈕，會在螢幕中央做出第一個中轉地點。</string>
-    <string name="depth_contour_descr">海洋等深線和航海標點地圖。</string>
+    <string name="depth_contour_descr">海洋等深線和海洋標記。</string>
     <string name="quick_action_add_destination_desc">輕點此動作按鈕，會在螢幕中央做出路線的目的地，任何之前所選擇的目的地，將成為最後的中轉地點。</string>
     <string name="subscribe_email_desc">訂閱我們有關應用程式折扣的郵寄名單並獲得三次以上的地圖下載！</string>
     <string name="animate_my_location">動畫我的位置</string>
@@ -2767,7 +2767,7 @@
     <string name="favorite_group_name">群組名稱</string>
     <string name="change_color">更改顏色</string>
     <string name="edit_name">編輯名稱</string>
-    <string name="save_poi_too_many_uppercase">名稱中包含太多的大寫字母。您想要繼續嗎？</string>
+    <string name="save_poi_too_many_uppercase">名稱中包含太多的大寫字母。要繼續嗎？</string>
     <string name="route_is_too_long_v2">如果在十分鐘內沒有沒有找到路線，請增加中轉地點。</string>
     <string name="display_zoom_level">顯示縮放級別：%1$s</string>
     <string name="srtm_color_scheme">色調配置</string>
@@ -2786,7 +2786,7 @@
     <string name="quick_action_osmbugs_hide">隱藏 OSM 註解</string>
     <string name="search_favorites">搜尋我的收藏</string>
     <string name="quick_action_showhide_osmbugs_descr">輕點這個動作按鈕會在地圖上顯示或隱藏 OSM 註解。</string>
-    <string name="private_access_routing_req">您的目的地位處私人通路的區域。您想為這次旅程進入這條路私人道路嗎？</string>
+    <string name="private_access_routing_req">您的目的地位處私人通路的區域。這次旅程要進入這條路私人道路嗎？</string>
     <string name="restart_search">重新開始搜尋</string>
     <string name="increase_search_radius">增加搜尋半徑</string>
     <string name="nothing_found">没有找到</string>
@@ -2845,7 +2845,7 @@
     <string name="rendering_value_translucent_pink_name">半透明粉紅色</string>
     <string name="quick_action_resume_pause_navigation">暫停/繼續導航</string>
     <string name="quick_action_resume_pause_navigation_descr">輕點此按鈕以暫停或繼續導航。</string>
-    <string name="quick_action_show_navigation_finish_dialog">顯示導航完成對話方塊</string>
+    <string name="quick_action_show_navigation_finish_dialog">顯示「導航完成」對話方塊</string>
     <string name="quick_action_start_stop_navigation">開始/停止導航</string>
     <string name="quick_action_start_stop_navigation_descr">輕點此按鈕以開始或停止導航。</string>
     <string name="live_monitoring_max_interval_to_send">用於線上追蹤的緩衝時間</string>
@@ -2918,7 +2918,7 @@
     <string name="ascendingly">遞增</string>
     <string name="date_added">日期已加入</string>
     <string name="order_by">順序依照：</string>
-    <string name="show_guide_line">顯示引導線路</string>
+    <string name="show_guide_line">顯示方向線</string>
     <string name="show_arrows_on_the_map">在地圖上顯示箭頭</string>
     <string name="show_passed">顯示已經過的</string>
     <string name="hide_passed">隱藏已經過的</string>
@@ -2947,12 +2947,12 @@
     <string name="osn_modify_dialog_error">發生異常：該註解未被修改</string>
     <string name="osn_modify_dialog_title">修改註解</string>
     <string name="context_menu_item_modify_note">修改 OSM 註解</string>
-    <string name="release_2_8">\\022 完全重做地圖標記偕同指標和路線規劃 
+    <string name="release_2_8">\\022 完全重做地圖標記偕同方向線和路線規劃 
 \n 
 \n • 測量距離工具嵌入快照於道路樣貌和儲存標點為軌跡 
 \n 
-\n • OsmAnd Live：修復錯誤，每30分鐘伺服器上最新的資料，更新應用到導航裡
-\n
+\n • OsmAnd Live：修復錯誤，每30分鐘伺服器上最新的資料，更新應用到導航裡 
+\n 
 \n</string>
     <string name="rendering_value_darkyellow_name">暗黃色</string>
     <string name="show_map">顯示地圖</string>
@@ -2966,7 +2966,7 @@
     <string name="shared_string_back">返回</string>
     <string name="view">檢視</string>
 	<string name="waypoints_added_to_map_markers">航點已加入到地圖標記</string>
-	<string name="import_gpx_file_description">可以匯入為我的收藏，或作為軌跡檔案。</string>
+	<string name="import_gpx_file_description">可以匯入為我的收藏或軌跡檔案。</string>
     <string name="import_as_gpx">匯入為 GPX 檔案</string>
     <string name="import_as_favorites">匯入為我的收藏</string>
     <string name="import_file">匯入檔案</string>
@@ -2998,9 +2998,9 @@
     <string name="shared_string_two">二</string>
     <string name="shared_string_one">一</string>
     <string name="distance_indication_descr">選擇如何顯示活動標記的距離。</string>
-    <string name="active_markers_descr">選擇要顯示方向指標的數量。</string>
+    <string name="active_markers_descr">選擇要顯示活躍標記的數量。</string>
     <string name="empty_state_markers_history_desc">標記為已通過的標點將顯現在此螢幕上。</string>
-    <string name="show_guide_line_descr">從您的位置顯示指引路線到活動標記位置。</string>
+    <string name="show_guide_line_descr">顯示指引路線到活動標記位置。</string>
     <string name="show_arrows_descr">顯示一個或兩個箭頭指示方向到活動標記。</string>
     <string name="shared_string_more_without_dots">更多</string>
     <string name="looking_for_tracks_with_waypoints">尋找軌跡跟航點</string>
@@ -3032,9 +3032,9 @@
     <string name="context_menu_points_of_group">群組的全部標點</string>
     <string name="open_from">開始營業從</string>
     <string name="open_till">營業至</string>
-    <string name="will_close_at">將結束于</string>
-    <string name="will_open_at">將營業于</string>
-    <string name="will_open_on">將營業于</string>
+    <string name="will_close_at">結束於</string>
+    <string name="will_open_at">營業於</string>
+    <string name="will_open_on">營業於</string>
     <string name="what_is_here">這裡的內容：</string>
     <string name="pick_up_till">取得直到</string>
     <string name="additional_actions">輔助的操作</string>
@@ -3067,7 +3067,7 @@
 \n
 \n • 地形（上坡）察覺登山健行時間（尼史密夫定律）
 \n</string>
-    <string name="will_open_tomorrow_at">會明天開幕於</string>
+    <string name="will_open_tomorrow_at">明天營業於</string>
     <string name="copy_location_name">複製標點/POI 名稱</string>
     <string name="toast_empty_name_error">位置沒有名稱</string>
 <string name="show_closed_notes">顯示已關閉的註解</string>
@@ -3083,9 +3083,9 @@
     <string name="tunnel_warning">前方有隧道</string>
     <string name="show_tunnels">隧道</string>
 <string name="shared_string_current">目前</string>
-    <string name="last_intermediate_dest_description">新增沿著路線的終點站</string>
-    <string name="first_intermediate_dest_description">新增在路線上的第一站</string>
-    <string name="subsequent_dest_description">向上移動目標，並建立目的地</string>
+    <string name="last_intermediate_dest_description">新增中轉站</string>
+    <string name="first_intermediate_dest_description">新增起點站</string>
+    <string name="subsequent_dest_description">向上移動目的地，並建立它</string>
     <string name="make_as_start_point">以此作為起點</string>
     <string name="map_import_error">地圖匯入錯誤</string>
     <string name="map_imported_successfully">地圖已匯入</string>
@@ -3112,7 +3112,7 @@
     <string name="clear_all_intermediates">清除所有中轉地點</string>
     <string name="select_waypoints_category_description">您可以增加所有軌跡的航點，或選擇個別的類別。</string>
     <string name="shared_string_total">總計</string>
-    <string name="nothing_found_in_radius">在半徑內沒找到任何東西：</string>
+    <string name="nothing_found_in_radius">找不到任何東西：</string>
     <string name="shared_string_travel">旅行</string>
     <string name="waypoints_removed_from_map_markers">已從地圖標記移除航點</string>
     <string name="use_two_digits_longitude">使用兩位數的經度</string>
@@ -3127,7 +3127,8 @@
     <string name="shared_string_do">做</string>
     <string name="shared_string_only_with_wifi">只有在 WiFi</string>
     <string name="wikivoyage_download_pics">下載照片</string>
-    <string name="wikivoyage_download_pics_descr">我們可以在文章中下載和顯示圖像，並將它們存儲在裝置上，所以當您在離線時會存取它們。您隨時可以在「探索」&gt;「選項」中更改設定。</string>
+    <string name="wikivoyage_download_pics_descr">文章中的圖片可以下載以供離線使用。
+\n 您隨時可以在「探索」&gt;「選項」中更改設定。</string>
     <string name="shared_string_wifi_only">只有在 Wi-Fi</string>
     <string name="select_travel_book">選擇旅遊書籍</string>
     <string name="shared_string_travel_book">旅遊書籍</string>
@@ -3141,7 +3142,7 @@
     <string name="travel_guide_description">在沒有網路連線的狀況下，瀏覽維基導遊來找到全世界你最感興趣的地點。</string>
     <string name="travel_guide">旅遊指南</string>
     <string name="purchase_dialog_title">選擇計畫</string>
-    <string name="purchase_dialog_travel_description">要離線閱讀旅由文章，您必須購買以下的其中一樣物品。</string>
+    <string name="purchase_dialog_travel_description">購買以下的其中一樣的東西以離線閱讀旅遊指南：</string>
     <string name="purchase_dialog_subtitle">選擇適合的物品：</string>
     <string name="in_app_purchase">應用程式內購買</string>
     <string name="in_app_purchase_desc">一次性付款</string>
@@ -3180,4 +3181,5 @@
     <string name="wiki_article_not_found">找不到文章</string>
     <string name="how_to_open_wiki_title">如何開啟維基百科文章？</string>
 <string name="popular_destinations">人氣目的地</string>
+    <string name="osmand_team">OsmAnd 團隊</string>
     </resources>

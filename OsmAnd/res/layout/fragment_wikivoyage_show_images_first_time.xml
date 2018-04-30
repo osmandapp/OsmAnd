@@ -7,15 +7,16 @@
               android:background="?attr/bottom_menu_view_bg"
               android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+	<ImageView
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="@dimen/list_content_padding"
+		android:paddingEnd="@dimen/list_content_padding"
+		android:paddingLeft="@dimen/list_content_padding"
+		android:paddingRight="@dimen/list_content_padding"
+		android:paddingStart="@dimen/list_content_padding"
+		android:src="@drawable/img_help_wikivoyage_show_image"
+		android:contentDescription="@string/wikivoyage_download_pics" />
 
 			<TextView
 				android:id="@+id/title"
@@ -26,12 +27,10 @@
 				android:layout_marginLeft="@dimen/list_content_padding"
 				android:layout_marginRight="@dimen/list_content_padding"
 				android:layout_marginStart="@dimen/list_content_padding"
-				android:layout_marginTop="@dimen/bottom_sheet_icon_margin"
+				android:layout_marginTop="@dimen/list_content_padding"
 				android:textSize="@dimen/empty_state_text_size"
 				android:textColor="?attr/wikivoyage_primary_text_color"
 				android:text="@string/wikivoyage_download_pics" />
-
-        </LinearLayout>
 
         <TextView
             android:id="@+id/description"
@@ -39,7 +38,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="fill_horizontal"
             android:layout_marginBottom="@dimen/dialog_content_margin"
-            android:layout_marginTop="@dimen/list_header_padding"
             android:paddingLeft="@dimen/list_content_padding"
             android:paddingStart="@dimen/list_content_padding"
             android:paddingRight="@dimen/list_content_padding"
@@ -135,7 +133,5 @@
 			</FrameLayout>
 
 		</LinearLayout>
-
-	</LinearLayout>
 
 </LinearLayout>

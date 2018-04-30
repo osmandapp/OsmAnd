@@ -209,8 +209,8 @@
     <string name="install_more">Installer plus…</string>
 
 
-    <string name="level_to_switch_vector_raster_descr">Utiliser les cartes vectorielles à partir de ce niveau de zoom.</string>
-    <string name="level_to_switch_vector_raster">Niveau de zoom vectoriel</string>
+    <string name="level_to_switch_vector_raster_descr">Utiliser les cartes matricielles (raster) à partir de ce niveau de zoom.</string>
+    <string name="level_to_switch_vector_raster">Niveau de zoom vectoriel minimal</string>
 
 
     <string name="create_poi_link_to_osm_doc"><u>OSM en ligne</u> classification des cartes en images</string>
@@ -3202,4 +3202,5 @@ représentant la zone : %1$s x %2$s</string>
     <string name="popular_destinations">Destinations populaires</string>
     <string name="welcome_to_open_beta_description">Travel est basé sur Wikivoyage. Durant la phase beta vous pouvez évaluer toutes les fonctionnalités gratuitement. En fin de période beta, Travel sera accessible aux abonnés OsmAnd ainsi qu\'aux propriétaires d\'OsmAnd+</string>
     <string name="wiki_article_search_text">Recherche de l\'article Wiki</string>
+    <string name="osmand_team">Équipe OsmAnd</string>
     </resources>
