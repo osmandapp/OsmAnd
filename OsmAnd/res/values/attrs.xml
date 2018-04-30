@@ -81,6 +81,13 @@
 		<attr name="wikivoyage_primary_btn_text_color" format="reference"/>
 		<attr name="wikivoyage_welcome_bg_color" format="reference"/>
 		<attr name="wikivoyage_primary_text_color" format="reference"/>
+
+		<attr name="wikivoyage_travel_card_bg" format="reference"/>
+		<attr name="wikivoyage_travel_card_stroke_bg" format="reference"/>
+		<attr name="wikivoyage_secondary_btn_bg" format="reference"/>
+		<attr name="wikivoyage_primary_btn_bg" format="reference"/>
+
+		<attr name="purchase_dialog_active_card_bg" format="reference"/>
     </declare-styleable>
 
     <declare-styleable name="PagerSlidingTabStrip">

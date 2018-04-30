@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+	<item>
+		<nine-patch android:src="@drawable/bg_card_shadow_cr3dp"/>
+	</item>
+	<item>
+		<shape>
+			<stroke android:color="@color/wikivoyage_active_light" android:width="1dp"/>
+			<solid android:color="@color/wikivoyage_card_bg_light"/>
+			<corners android:radius="3dp"/>
+		</shape>
+	</item>
+</layer-list>
