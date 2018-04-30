@@ -12,6 +12,7 @@ import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.RequestCreator;
 
+import net.osmand.PicassoUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.widgets.tools.CropCircleTransformation;
@@ -40,21 +41,28 @@ public class ArticleTravelCard extends BaseTravelCard {
 	public void bindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder) {
 		if (viewHolder instanceof ArticleTravelVH) {
 			final ArticleTravelVH holder = (ArticleTravelVH) viewHolder;
+			final String url = TravelArticle.getImageUrl(article.getImageTitle(), false);
+			Boolean cached = PicassoUtils.isCached(url);
+
 			RequestCreator rc = Picasso.get()
-					.load(TravelArticle.getImageUrl(article.getImageTitle(), false));
+					.load(url);
 			WikivoyageUtils.setupNetworkPolicy(app.getSettings(), rc);
 			rc.transform(new CropCircleTransformation())
 					.into(holder.icon, new Callback() {
 						@Override
 						public void onSuccess() {
 							holder.icon.setVisibility(View.VISIBLE);
+							PicassoUtils.setCached(url, true);
 						}
 
 						@Override
 						public void onError(Exception e) {
 							holder.icon.setVisibility(View.GONE);
+							PicassoUtils.setCached(url, false);
 						}
 					});
+
+			holder.icon.setVisibility(cached != null && cached ? View.VISIBLE : View.GONE);
 			holder.title.setText(article.getTitle());
 			holder.content.setText(article.getPartialContent());
 			holder.partOf.setText(article.getGeoDescription());

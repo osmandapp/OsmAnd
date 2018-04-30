@@ -143,6 +143,12 @@ public class WikivoyageExploreDialogFragment extends WikivoyageBaseDialogFragmen
 		return mainView;
 	}
 
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		PicassoUtils.clearCachedMap();
+	}
+
 	protected void onDataLoaded() {
 		mainView.findViewById(R.id.progress_bar).setVisibility(View.GONE);
 		updateSearchVisibility();

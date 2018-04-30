@@ -10,6 +10,8 @@ import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import okhttp3.Cache;
 import okhttp3.OkHttpClient;
@@ -27,6 +29,8 @@ public class PicassoUtils {
 	private static LruCache memoryCache;
 
 	private static boolean initialized;
+
+	private static Map<String, Boolean> cached = new HashMap<>();
 
 	public static void setupPicasso(@NonNull Context context) {
 		if (!initialized) {
@@ -57,6 +61,19 @@ public class PicassoUtils {
 				e.printStackTrace();
 			}
 		}
+		cached.clear();
+	}
+
+	public static Boolean isCached(@NonNull String key) {
+		return cached.get(key);
+	}
+
+	public static void setCached(@NonNull String key, boolean val) {
+		cached.put(key, val);
+	}
+
+	public static void clearCachedMap() {
+		cached.clear();
 	}
 
 	public static long getDiskCacheSizeBytes() throws IOException {
