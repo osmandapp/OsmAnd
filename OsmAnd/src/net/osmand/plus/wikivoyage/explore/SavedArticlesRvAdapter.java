@@ -21,7 +21,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.widgets.tools.CropCircleTransformation;
-import net.osmand.plus.widgets.tools.CropRectTransformation;
 import net.osmand.plus.wikivoyage.WikivoyageUtils;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
 import net.osmand.plus.wikivoyage.data.TravelLocalDataHelper;
@@ -33,8 +32,6 @@ public class SavedArticlesRvAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
 	private static final int HEADER_TYPE = 0;
 	private static final int ITEM_TYPE = 1;
-
-	private static final boolean USE_ALTERNATIVE_CARD = false;
 
 	private final OsmandApplication app;
 	private final OsmandSettings settings;
@@ -65,9 +62,7 @@ public class SavedArticlesRvAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 	@Override
 	public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 		boolean header = viewType == HEADER_TYPE;
-		int layoutId = header
-				? R.layout.wikivoyage_list_header
-				: USE_ALTERNATIVE_CARD ? R.layout.wikivoyage_article_card_alternative : R.layout.wikivoyage_article_card;
+		int layoutId = header ? R.layout.wikivoyage_list_header : R.layout.wikivoyage_article_card;
 		View itemView = LayoutInflater.from(parent.getContext()).inflate(layoutId, parent, false);
 		return header ? new HeaderVH(itemView) : new ItemVH(itemView);
 	}
@@ -85,7 +80,7 @@ public class SavedArticlesRvAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 			RequestCreator rc = Picasso.get()
 					.load(TravelArticle.getImageUrl(article.getImageTitle(), false));
 			WikivoyageUtils.setupNetworkPolicy(settings, rc);
-			rc.transform(USE_ALTERNATIVE_CARD ? new CropRectTransformation() : new CropCircleTransformation())
+			rc.transform(new CropCircleTransformation())
 					.into(holder.icon, new Callback() {
 						@Override
 						public void onSuccess() {
