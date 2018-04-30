@@ -75,11 +75,17 @@ public class SQLiteAPIImpl implements SQLiteAPI {
 				public void close() {
 					c.close();
 				}
+				
+				public boolean isNull(int ind) {
+					return c.isNull(ind);
+				}
+
 
 				@Override
 				public double getDouble(int ind) {
 					return c.getDouble(ind);
 				}
+				
 
 				@Override
 				public long getLong(int ind) {
