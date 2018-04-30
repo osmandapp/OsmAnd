@@ -3,6 +3,7 @@ package net.osmand.plus.chooseplan;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -56,7 +57,7 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 	private View planTypeCardButton;
 
 	public interface ChoosePlanDialogListener {
-		void onChoosePlanDialogDismissed();
+		void onChoosePlanDialogDismiss();
 	}
 
 	public enum OsmAndFeature {
@@ -198,11 +199,11 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 	}
 
 	@Override
-	public void dismiss() {
-		super.dismiss();
+	public void onDismiss(DialogInterface dialog) {
+		super.onDismiss(dialog);
 		Activity activity = getActivity();
 		if (activity != null && activity instanceof ChoosePlanDialogListener) {
-			((ChoosePlanDialogListener) activity).onChoosePlanDialogDismissed();
+			((ChoosePlanDialogListener) activity).onChoosePlanDialogDismiss();
 		}
 	}
 

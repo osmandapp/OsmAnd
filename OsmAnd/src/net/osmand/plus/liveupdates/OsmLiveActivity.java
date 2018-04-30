@@ -35,12 +35,10 @@ public class OsmLiveActivity extends AbstractDownloadActivity implements Downloa
 	private final static Log LOG = PlatformUtil.getLog(OsmLiveActivity.class);
 	public final static String OPEN_SUBSCRIPTION_INTENT_PARAM = "open_subscription_intent_param";
 	public final static String SHOW_SETTINGS_ONLY_INTENT_PARAM = "show_settings_only_intent_param";
-	public final static String CHOOSE_PLAN_DIALOG_DISMISSED_KEY = "choose_plan_dialog_dismissed_key";
 
 	private LiveUpdatesFragmentPagerAdapter pagerAdapter;
 	private boolean openSubscription;
 	private boolean showSettingOnly;
-	private boolean choosePlanDialogDismissed;
 	private GetLastUpdateDateTask getLastUpdateDateTask;
 	private static final String URL = "https://osmand.net/api/osmlive_status";
 
@@ -57,7 +55,6 @@ public class OsmLiveActivity extends AbstractDownloadActivity implements Downloa
 		} else if (savedInstanceState != null) {
 			openSubscription = savedInstanceState.getBoolean(OPEN_SUBSCRIPTION_INTENT_PARAM, false);
 			showSettingOnly = savedInstanceState.getBoolean(SHOW_SETTINGS_ONLY_INTENT_PARAM, false);
-			choosePlanDialogDismissed = savedInstanceState.getBoolean(CHOOSE_PLAN_DIALOG_DISMISSED_KEY, false);
 		}
 
 		ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
@@ -89,8 +86,7 @@ public class OsmLiveActivity extends AbstractDownloadActivity implements Downloa
 	@Override
 	protected void onResume() {
 		super.onResume();
-		if (!getMyApplication().getSettings().LIVE_UPDATES_PURCHASED.get() && showSettingOnly
-				&& !choosePlanDialogDismissed) {
+		if (!getMyApplication().getSettings().LIVE_UPDATES_PURCHASED.get() && showSettingOnly) {
 			ChoosePlanDialogFragment.showOsmLiveInstance(getSupportFragmentManager());
 		}
 	}
@@ -114,12 +110,11 @@ public class OsmLiveActivity extends AbstractDownloadActivity implements Downloa
 		super.onSaveInstanceState(outState);
 		outState.putBoolean(OPEN_SUBSCRIPTION_INTENT_PARAM, openSubscription);
 		outState.putBoolean(SHOW_SETTINGS_ONLY_INTENT_PARAM, showSettingOnly);
-		outState.putBoolean(CHOOSE_PLAN_DIALOG_DISMISSED_KEY, choosePlanDialogDismissed);
 	}
 
 	@Override
-	public void onChoosePlanDialogDismissed() {
-		choosePlanDialogDismissed = true;
+	public void onChoosePlanDialogDismiss() {
+		finish();
 	}
 
 	public boolean isShowSettingOnly() {
