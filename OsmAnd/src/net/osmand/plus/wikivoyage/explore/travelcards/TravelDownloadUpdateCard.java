@@ -107,6 +107,10 @@ public class TravelDownloadUpdateCard extends BaseTravelCard {
 		return app.getString(download ? R.string.download_file : R.string.update_is_available);
 	}
 
+	private boolean isInternetAvailable() {
+		return app.getSettings().isInternetConnectionAvailable();
+	}
+
 	private Drawable getIcon() {
 		int id = download ? R.drawable.travel_card_download_icon : R.drawable.travel_card_update_icon;
 		return ContextCompat.getDrawable(app, id);
@@ -114,6 +118,9 @@ public class TravelDownloadUpdateCard extends BaseTravelCard {
 
 	@NonNull
 	private String getDescription() {
+		if (!isInternetAvailable()) {
+			return app.getString(R.string.no_index_file_to_download);
+		}
 		return app.getString(download ? R.string.travel_card_download_descr : R.string.travel_card_update_descr);
 	}
 
@@ -175,6 +182,7 @@ public class TravelDownloadUpdateCard extends BaseTravelCard {
 	private boolean updatePrimaryButton(DownloadUpdateVH vh) {
 		if (!loadingInProgress) {
 			vh.primaryBtnContainer.setVisibility(View.VISIBLE);
+			vh.primaryButton.setEnabled(isInternetAvailable());
 			vh.primaryButton.setText(download ? R.string.shared_string_download : R.string.shared_string_update);
 			vh.primaryButton.setOnClickListener(new View.OnClickListener() {
 				@Override

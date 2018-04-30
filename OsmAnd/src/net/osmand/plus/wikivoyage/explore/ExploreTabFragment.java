@@ -12,7 +12,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -161,12 +160,10 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIn
 			downloadUpdateCard.setListener(new TravelDownloadUpdateCard.ClickListener() {
 				@Override
 				public void onPrimaryButtonClick() {
-					if (app.getSettings().isInternetConnectionAvailable()) {
+					if (indexItem != null) {
 						new DownloadValidationManager(app).startDownload(getMyActivity(), indexItem);
 						downloadUpdateCard.setLoadingInProgress(true);
 						adapter.updateDownloadUpdateCard();
-					} else {
-						Toast.makeText(app, app.getString(R.string.no_index_file_to_download), Toast.LENGTH_SHORT).show();
 					}
 				}
 
