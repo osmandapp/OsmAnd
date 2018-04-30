@@ -3859,4 +3859,22 @@
 
 <string name="poi_glacier_type">冰河類型</string>
 
+<string name="poi_glacier_type_icecap">冰冠</string>
+	<string name="poi_glacier_type_icefield">冰原</string>
+	<string name="poi_glacier_type_plateau">高原</string>
+	<string name="poi_glacier_type_valley">山谷</string>
+	<string name="poi_glacier_type_outlet">商店</string>
+	<string name="poi_glacier_type_tidewater">低窪地</string>
+	<string name="poi_glacier_type_mountain">山脈</string>
+	<string name="poi_glacier_type_hanging">懸冰</string>
+	<string name="poi_glacier_type_icefall">冰瀑</string>
+	<string name="poi_glacier_type_rock">岩石</string>
+	<string name="poi_glacier_type_shelf">沙洲</string>
+	<string name="poi_glacier_type_remnant">殘餘</string>
+	<string name="poi_glacier_type_ice_tongue">冰舌</string>
+
+	<string name="poi_glacier_ele_top">最高點</string>
+	<string name="poi_glacier_ele_bottom">最低點</string>
+	<string name="poi_glacier_slope">平均坡度</string>
+
 </resources>
