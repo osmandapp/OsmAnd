@@ -1916,7 +1916,7 @@
     <string name="mark_to_delete">Отметить для удаления</string>
     <string name="welcome_text">OsmAnd обеспечивает глобальный автономный просмотр карт и автономную навигацию.</string>
     <string name="osm_changes_added_to_local_edits">OSM изменения добавлены в локальную базу данных</string>
-    <string name="confirm_usage_speed_cameras">Во многих странах (Германия, Франция, Италия и другие) использование предупреждения о камерах контроля скорости не допускается законом. Osmand не несет никакой ответственности, если Вы нарушите закон. Пожалуйста, нажмите \" Да \" только если вы имеете право использовать эту функцию.</string>
+    <string name="confirm_usage_speed_cameras">Во многих странах (Германия, Франция, Италия и другие) использование предупреждения о камерах контроля скорости не допускается законом. OsmAnd не несет никакой ответственности, если Вы нарушите закон. Пожалуйста, нажмите \" Да \" только если вы имеете право использовать эту функцию.</string>
     <string name="agps_info">Информация A-GPS</string>
     <string name="agps_data_last_downloaded">Последние загруженные данные A-GPS от: %1$s</string>
     <string name="shared_string_message">Сообщение</string>
@@ -2567,7 +2567,7 @@
     <string name="of">%1$d из %2$d</string>
     <string name="shared_string_list">Список</string>
     <string name="shared_string_groups">Группы</string>
-    <string name="passed">Последнее использование: %1$s</string>
+    <string name="passed">Использовано: %1$s</string>
     <string name="make_active">Сделать активным</string>
     <string name="today">Сегодня</string>
     <string name="yesterday">Вчера</string>
@@ -2641,7 +2641,7 @@
     <string name="shared_string_road">Дорога</string>
     <string name="show_guide_line">Показывать направляющие линии</string>
     <string name="rendering_value_darkyellow_name">Темно-желтый</string>
-    <string name="osmand_extended_description_part8">Osmand это активно развивающийся проект с открытым исходным кодом. Благодаря открытости каждый может внести свой вклад в приложение сообщая об ошибках, улучшая перевод или кодируя новые функции. Проект находится в оживленном состоянии непрерывного совершенствования всеми этими формами взаимодействия разработчиков и пользователей. Прогресс проекта также зависит от денежных взносов для финансирования написания и тестирования новых функций.
+    <string name="osmand_extended_description_part8">OsmAnd это активно развивающийся проект с открытым исходным кодом. Благодаря открытости каждый может внести свой вклад в приложение сообщая об ошибках, улучшая перевод или кодируя новые функции. Проект находится в оживленном состоянии непрерывного совершенствования всеми этими формами взаимодействия разработчиков и пользователей. Прогресс проекта также зависит от денежных взносов для финансирования написания и тестирования новых функций.
 \n Примерная карта покрытия и качество: 
 \n • Западная Европа: ****
 \n • Восточная Европа: ***
@@ -2950,15 +2950,15 @@
     <string name="download_maps_travel">Карты путешествий</string>
     <string name="shared_string_wikivoyage">Викигид</string>
     <string name="article_removed">Статья удалена</string>
-    <string name="shared_string_explore">Обозреватель</string>
+    <string name="shared_string_explore">Исследовать</string>
     <string name="index_item_world_wikivoyage">Статьи путеводителя Викигида</string>
     <string name="images_cache">"Кэш изображений "</string>
     <string name="delete_search_history">"Удалить историю поиска "</string>
     <string name="show_images">Показать изображения</string>
     <string name="shared_string_only_with_wifi">Только по WiFi</string>
-    <string name="wikivoyage_download_pics">Скачать изображения</string>
+    <string name="wikivoyage_download_pics">Показывать изображения</string>
     <string name="wikivoyage_download_pics_descr">Изображения из статей можно загрузить для использования в автономном режиме.
-\nВы всегда можете изменить настройку в \"Обозреватель\" → \"Параметры\".</string>
+\nВы всегда можете изменить настройку в \"Исследовать\" → \"Параметры\".</string>
     <string name="shared_string_wifi_only">Только WiFi</string>
     <string name="select_travel_book">Выберите дневник путешествий</string>
     <string name="shared_string_travel_book">Дневник путешествий</string>
@@ -2985,7 +2985,7 @@
     <string name="daily_map_updates">Обновления карт: <b>ежечасные</b></string>
     <string name="in_app_purchase_desc_ex">После покупки этот план станет доступен для вас навсегда.</string>
     <string name="travel_guide">"Путеводитель "</string>
-    <string name="travel_guide_description">Просматривайте путеводители Викигида по самым интересным местам на планете внутри Osmand без подключения к интернету.</string>
+    <string name="travel_guide_description">Просматривайте путеводители Викигида по самым интересным местам на планете внутри OsmAnd без подключения к интернету.</string>
     <string name="travel_card_update_descr">Мы подготовили обновления и исправления в данных Викигида, обновите файл, чтобы увидеть их.</string>
 	<string name="travel_card_download_descr">Скачайте этот файл путеводителей Викигида для просмотра статей о местах по всему миру без подключения к Интернету.</string>
 	<string name="update_is_available">Доступно обновление</string>

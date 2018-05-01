@@ -200,41 +200,30 @@ td {
     overflow: hidden;
 }
 
-.nightmode > h1 {
+.nightmode > h1, .nightmode > div > h1 {
     color: #a3a3a3;
 }
 
-.nightmode > h2 {
+.nightmode > h2, .nightmode > div > h2 {
     color: #cccccc;
+    border-bottom: 1px solid #2d3133;
     font-weight:100;
 }
 
-.nightmode > h2 {
-    color: #cccccc;
-    border-bottom: 1px solid #2d3133;
-}
-
-.nightmode > h3 {
+.nightmode > h3, .nightmode > div > h3  {
     color: #727272;
 }
 
-.nightmode > p {
+
+.nightmode > div > p, .nightmode >  p {
     color: #cccccc;
 }
 
-.nightmode > ul {
+.nightmode > ul, .nightmode > div > ul  {
     color: #cccccc;
 }
 
-.nightmode > a {
-    color: #d28521;
-}
-
-.nightmode > a {
-    color: #d28521;
-}
-
-.nightmode > .geo {
+.nightmode > .geo, .nightmode > div > .geo, .nightmode > div > ul > .geo, .nightmode > a > .geo {
     color: #d28521;
     background-color: #222526;
     border: 1px solid #2d3133;
@@ -248,7 +237,7 @@ td {
     display: inline-block;
 }
 
-.nightmode > a {
+.nightmode > a, .nightmode > div > a, .nightmode > div > ul > a {
     color: #d28521;
     text-decoration-color: #854f08;
     word-wrap: break-word;
@@ -278,7 +267,21 @@ td {
 }
 
 
-.nightmode > .nav-bar {
+.nightmode > .nav, .bar {
+    background-color: #222526;
+    font-size: 1.1em;
+    font-family: sans-serif;
+    color: #222526;
+    word-wrap: break-word;
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    font-weight: normal;
+    line-height: 1.6em;
+}
+
+.nightmode > .nav-bar, .nightmode > div > .nav-bar,  {
     background-color: #222526;
     font-size: 1.1em;
     font-family: sans-serif;
