@@ -1072,7 +1072,7 @@
     <string name="shared_string_my_location">My Position</string>
     <string name="shared_string_my_places">My Places</string>
     <string name="shared_string_my_favorites">Favorites</string>
-    <string name="shared_string_my_tracks">My Tracks</string>
+    <string name="shared_string_my_tracks">Tracks</string>
     <string name="shared_string_currently_recording_track">Currently recording track</string>
     <string name="shared_string_audio">Audio</string>
     <string name="shared_string_video">Video</string>
@@ -1236,7 +1236,7 @@
     <string name="traffic_warning_calming">Traffic calming</string>
     <string name="traffic_warning_speed_camera">Speed camera</string>
     <string name="traffic_warning">Traffic warning</string>
-    <string name="speak_favorites">Nearby Favorites</string>
+    <string name="speak_favorites">Nearby favorites</string>
     <string name="speak_poi">Nearby POI</string>
     <string name="way_alarms">Traffic warnings</string>
     <string name="background_service_is_enabled_question">OsmAnd background service still running. Stop it, too?</string>
@@ -2805,9 +2805,9 @@
     <string name="quick_action_duplicate">Quick action name duplicate</string>
     <string name="quick_action_showhide_favorites_descr">Tapping this action button shows or hides the favorite points on the map.</string>
     <string name="quick_action_showhide_poi_descr">Tapping this action button shows or hides POIs on the map.</string>
-    <string name="quick_action_showhide_favorites_title">Show/hide Favorites</string>
-    <string name="quick_action_favorites_show">Show Favorites</string>
-    <string name="quick_action_favorites_hide">Hide Favorites</string>
+    <string name="quick_action_showhide_favorites_title">Show/hide favorites</string>
+    <string name="quick_action_favorites_show">Show favorites</string>
+    <string name="quick_action_favorites_hide">Hide favorites</string>
     <string name="quick_action_showhide_poi_title">Show/hide POI</string>
     <string name="quick_action_poi_show">Show %1$s</string>
     <string name="quick_action_poi_hide">Hide %1$s</string>
