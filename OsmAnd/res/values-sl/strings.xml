@@ -80,7 +80,7 @@
     <string name="context_menu_item_first_intermediate_point">Dodaj kot prvi vmesni cilj</string>
     <string name="context_menu_item_last_intermediate_point">Dodaj kot zadnji vmesni cilj</string>
     <string name="add_as_last_destination_point">Dodaj kot zadnji vmesni cilj</string>
-    <string name="add_as_first_destination_point">Dodaj kot prvo vmesni cilj</string>
+    <string name="add_as_first_destination_point">Dodaj kot prvi vmesni cilj</string>
     <string name="replace_destination_point">Zamenjaj cilj</string>
     <string name="new_destination_point_dialog">Ciljna točka je že določena:</string>
     <string name="context_menu_item_intermediate_point">Dodaj kot vmesni cilj</string>
@@ -599,7 +599,7 @@ Omogoča tudi dodajanje opomb v koledar za prikaz opomnikov ob daljših časih p
     
     
     <string name="osb_comment_dialog_success">Opomba je bila uspešno dodana</string>
-    <string name="osb_comment_dialog_error">Prišlo je do napake: opomba ni bila dodana</string>
+    <string name="osb_comment_dialog_error">Opombe ni mogoče dodati</string>
     
     
     
@@ -732,7 +732,7 @@ Omogoča tudi dodajanje opomb v koledar za prikaz opomnikov ob daljših časih p
     <string name="internet_not_available">To opravilo zahteva vzpostavljeno povezavo z internetom, ki pa ni na voljo.</string>
     <string name="install_more">Namesti več …</string>
     <string name="create_poi_link_to_osm_doc">Določitev <u>spletnega OSM</u> s slikami.</string>
-    <string name="error_doing_search">Med iskanjem v načinu brez povezave je prišlo do napake.</string>
+    <string name="error_doing_search">Iskanja v načinu brez povezave ni mogoče izvesti.</string>
     <string name="search_offline_geo_error">Ni mogoče razčleniti namena »%s«.</string>
     <string name="search_osm_offline">Poišči mesto na zemljevidu</string>
 
@@ -787,7 +787,7 @@ Omogoča tudi dodajanje opomb v koledar za prikaz opomnikov ob daljših časih p
     <string name="continuous_rendering_descr">Izvaja stalno izrisovanje namesto slike-po-sliko.</string>
     <string name="rendering_exception">Med izrisovanjem izbranega področja je prišlo do napake</string>
     <string name="renderer_load_sucess">Izrisovalnik je bil uspešno naložen</string>
-    <string name="renderer_load_exception">Prišlo je do izjemne napake: izrisovalnik ni bil naložen</string>
+    <string name="renderer_load_exception">Izrisovalnika ni mogoče naložiti</string>
     <string name="renderers">Vektorski izrisovalnik</string>
     <string name="renderers_descr">Izberite videz izrisovalnika.</string>
     <string name="poi_context_menu_website">Pokaži spletišče POI</string>
@@ -1967,7 +1967,7 @@ ZŠ (β) %2$s</string>
     
     <string name="shared_string_qr_code">Koda QR</string>
     <string name="map_downloaded">Zemljevid je prejet</string>
-    <string name="map_downloaded_descr">Zemljevid %1$s je prejet in je pripravljen za uporabo.</string>
+    <string name="map_downloaded_descr">Zemljevid %1$s je pripravljen za uporabo.</string>
     <string name="go_to_map">Pokaži zemljevid</string>
     <string name="simulate_initial_startup">Simuliraj prvi zagon programa</string>
     <string name="share_geo">geo:</string>
@@ -2037,9 +2037,9 @@ ZŠ (β) %2$s</string>
 	<string name="osn_reopen_dialog_title">Ponovno odpri opombo</string>
 	<string name="osn_close_dialog_title">Zapri opombo</string>
 	<string name="osn_add_dialog_success">Opomba je uspešno ustvarjena</string>
-	<string name="osn_add_dialog_error">Prišlo je do napake: opomba ni bila ustvarjena</string>
+	<string name="osn_add_dialog_error">Opombe ni mogoče ustvariti</string>
 	<string name="osn_close_dialog_success">Opomba je uspešno zaprta</string>
-	<string name="osn_close_dialog_error">Prišlo je do napake: opomba ni zaprta</string>
+	<string name="osn_close_dialog_error">Opombe ni mogoče zapreti</string>
 	<string name="shared_string_commit">Uveljavi</string>
 	
     <string name="rendering_attr_currentTrackColor_description">Barva GPX</string>
@@ -2378,7 +2378,7 @@ Del prihodka se vrne skupnosti OSM in se izplačuje za vsako opravljeno dejavnos
     <string name="save_track_min_speed">Najmanjša hitrost beleženja</string>
     <string name="save_track_min_speed_descr">Filter: nastavitev najmanjše hitrosti beleženja točk na zemljevidu.</string>
     <string name="save_track_min_distance">Beleženje najmanjšega zaznavanja gibanja</string>
-    <string name="save_track_min_distance_descr">Filter: nastavitev najmanjše razdalje beleženja točk na zemljevidu.</string>
+    <string name="save_track_min_distance_descr">Filter: nastavitev najmanjše razdalje med točkami za ločeno beleženje na zemljevidu.</string>
     <string name="save_track_precision">Najmanjša natančnost beleženja</string>
     <string name="save_track_precision_descr">Filter: nastavitev najmanjše natančnosti beleženja točk na zemljevidu.</string>
     
@@ -2578,7 +2578,7 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="routing_attr_relief_smoothness_factor_name">Izbor razgibanosti terena</string>
     <string name="do_not_send_anonymous_app_usage">Ne pošiljaj statističnih podatkov uporabe programa</string>
     <string name="do_not_send_anonymous_app_usage_desc">Pošiljajo se le splošni podatki o načinu uporabe programa. Geolokacijski podatki, podatki shranjenih zemljevidov in vpisanih točk ter drugi podatki uporabnika se nikoli ne shranjujejo na strežnikih.</string>
-    <string name="do_not_show_startup_messages">Ne prikazuj sporočil ob zagunu</string>
+    <string name="do_not_show_startup_messages">Ob zagonu ne prikazuj sporočil</string>
     <string name="do_not_show_startup_messages_desc">Onemogoči prikazovanje sporočil o popustih programa in posebnih sporočila o dogodkih.</string>
     <string name="parking_options">Možnosti parkiranja</string>
     <string name="full_version_thanks">Zahvaljujemo se vam za nakup polne različice programa OsmAnd!</string>
@@ -2763,7 +2763,13 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="keep_showing_on_map">Prikazuj na zemljevidu</string>
     <string name="exit_without_saving">Ali želite končati brez shranjevanja?</string>
     <string name="osmand_plus_extended_description_part1">"OsmAnd+ (OSM Automated Navigation Directions) je navigacijski program, ki kot vir podatkov uporablja visoko kakovostne  zemljevide OpenStreetMap (OSM). Program podpira glasovno in vizualno navigacijo, iskanje in ogledovanje točk POI (zanimive točke), ustvarjanje in upravljanje s sledmi GPX, izohipse in senčenje terena, podatke o poti, različne profile za pripravo poti in še veliko, veliko več. OsmAnd+ je plačljiva različica programa. Z nakupom podpirate projekt, omogočate razvoj novih zmožnosti in si pridobite možnost prejemanja najnovejših posodobitev. Glavne značilnosti programa so:"</string>
-    <string name="osmand_plus_extended_description_part2">Navigacija • Deluje prek širokopasovne povezave (hitro) ali brez povezave (ni dodatnih stroškov na poti) • Glasovno vodenje od zavoja-do-zavoja (posneti in sintetizirani glasovi) • Izbirno vodenje po pasovih, prikaz imen ulic in pričakovanega časa prihoda • Podpora vmesnim točkam na poti • Samodejno preusmerjanje in preračunavanje poti ob nepričakovani spremembi poti • Iskanje mest po naslovu, po vrsti (na primer: restavracija, hotel, bencinska črpalka, muzej) ali po koordinatah</string>
+    <string name="osmand_plus_extended_description_part2">Navigacija
+\n• Deluje prek širokopasovne povezave (hitro) ali brez povezave (ni dodatnih stroškov na poti)
+\n• Glasovno vodenje od zavoja-do-zavoja (posneti in sintetizirani glasovi)
+\n• Izbirno vodenje po pasovih, prikaz imen ulic in pričakovanega časa prihoda
+\n• Podpora vmesnim točkam na poti
+\n• Samodejno preusmerjanje in preračunavanje poti ob nepričakovani spremembi poti
+\n• Iskanje mest po naslovu, po vrsti (na primer: restavracija, hotel, bencinska črpalka, muzej) ali po koordinatah</string>
     <string name="osmand_plus_extended_description_part3">Pregledovanje zemljevida • Prikaz trenutnega mesta in usmerjenost • Izbirno prilagajanje po kompasu oziroma po smeri gibanja • Shranjevanje priljubljenih točk • Prikaz točk POI (točke zanimivosti) v bližini • Prikaz spletnih satelitskih sličic (Bing), različne prekrivne plasti kot so potovalne/navigacijske sledi GPX • Izbirno prikazovanje imen v krajevnem zapisu, angleško ali fonetično</string>
     <string name="osmand_plus_extended_description_part6">Možnosti za pešce in kolesarje • Pregledovanje pešpoti, kolesarskih poti in označenih kolovozov • Poseben način prikazovanja z dodatnimi pogledi • Izbirni prikaz postajališč javnega prometa (avtobus, trolejbus, vlak), vključno z imeni prog • Možnost beleženja poti v krajevno datoteko GPX ali pošiljanje na spletno mesto • Prikaz hitrosti in nadmorske višine • Prikaz izohips in senčenja hribovitosti pokrajine (prek dodatnega vstavka)</string>
     <string name="osmand_plus_extended_description_part7">Neposredno objavljanje na OSM • Objavljanje poročil o hroščih • Pošiljanje sledi GPX neposredno na OSM • Dodajanje točk POI • Izbirno beleženje tudi v stanju pripravljenosti naprave Program OsmAnd je odprtokoden, zato lahko vsak sodeluje pri razvoju. Zaželena je pomoč pri objavljanju hroščev, pregledovanje prevodov in pri razvoju novih možnosti programa. Trenutno je skupnost zelo živa. Napredovanje projekta se zanaša tudi na finančne donacije za nove zmožnosti in preizkušanje delovanja.</string>
@@ -2930,11 +2936,11 @@ Koda predstavlja območje: %1$s x %2$s</string>
 	<string name="north_abbreviation">N</string>
 	<string name="optional_point_name">Izbirno ime točke</string>
     <string name="transport_nearby_routes_within">Poti blizu v</string>
-    <string name="transport_nearby_routes">BLIZU</string>
+    <string name="transport_nearby_routes">Blizu</string>
     <string name="make_as_start_point">Označi kot začetno točko</string>
     <string name="shared_string_current">Trenutno</string>
-    <string name="last_intermediate_dest_description">Doda zadnji postanek na poti</string>
-    <string name="first_intermediate_dest_description">Doda prvi postanek na poti</string>
+    <string name="last_intermediate_dest_description">Doda vmesni postanek na poti</string>
+    <string name="first_intermediate_dest_description">Doda začetni postanek na poti</string>
     <string name="subsequent_dest_description">Premakni cilj više in ustvari nov cilj</string>
     <string name="show_closed_notes">Pokaži zaprta sporočila</string>
     <string name="switch_osm_notes_visibility_desc">Pokaži/Skrij sporočila na zemljevidu.</string>
@@ -2981,10 +2987,20 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="use_two_digits_longitude">Uporabi dvoštevilčno geografsko dolžino</string>
     <string name="shared_string_travel">Potovanje</string>
     <string name="waypoints_removed_from_map_markers">Vmesne točke so odstranjene iz označb zemljevida</string>
-    <string name="nothing_found_in_radius">Ni zadetkov znotraj radija:</string>
+    <string name="nothing_found_in_radius">Ni zadetkov iskanja:</string>
     <string name="select_waypoints_category_description">Dodati je mogoče vse vmesne točke sledi, ali pa ločene kategorije.</string>
     <string name="shared_string_total">Skupaj</string>
     <string name="clear_all_intermediates">Počisti vse vmesne točke</string>
     <string name="group_deleted">Skupina je izbrisana.</string>
     <string name="rendering_attr_whiteWaterSports_name">Vodni športi</string>
+    <string name="osmand_team">Skupina OsmAnd</string>
+    <string name="popular_destinations">Priljubljeni cilji</string>
+    <string name="paid_app">Plačljiv program</string>
+    <string name="paid_plugin">Plačljiv vstavek</string>
+    <string name="travel_card_update_descr">Na voljo so posodobitve podatkov WikiVoyage.</string>
+	<string name="update_is_available">Na voljo je posodobitev</string>
+	<string name="download_file">Prejmi datoteko</string>
+    <string name="get_unlimited_access">Pridobitev neomejenega dostopa</string>
+    <string name="travel_guide">Popotniški vodnik WikiVoyage</string>
+    <string name="monthly_map_updates">Posodobitve zemljevida: <b>vsak mesec</b></string>
     </resources>
