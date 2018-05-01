@@ -300,13 +300,13 @@
 
     <string name="search_osm_offline">Søk geografisk posisjon</string>
     <string name="system_locale">System</string>
-    <string name="preferred_locale_descr">Velg visningsspråk (start OsmAnd på nytt etter endring).</string>
+    <string name="preferred_locale_descr">Velg visningsspråk (trer i kraft når OsmAnd startes på nytt).</string>
     <string name="preferred_locale">Visningsspråk</string>
 
 
     <string name="shared_string_next">Neste</string>
     <string name="shared_string_previous">Forrige</string>
-    <string name="unit_of_length_descr">Endre lengdeenhet.</string>
+    <string name="unit_of_length_descr">Endre måleenhet for avstand.</string>
     <string name="unit_of_length">Lengdeenhet</string>
     <string name="si_km_m">Kilometer/meter</string>
     <string name="send_location_way_choose_title">Del posisjon ved bruk av</string>
@@ -380,7 +380,7 @@
     <string name="rotate_map_compass_opt">Kompassretning</string>
     <string name="rotate_map_bearing_opt">Bevegelsesretning</string>
     <string name="rotate_map_none_opt">Ingen rotasjon (nord alltid oppover)</string>
-    <string name="rotate_map_to_bearing_descr">Velg kartskjermjusteringen.</string>
+    <string name="rotate_map_to_bearing_descr">Velg kartskjermjustering.</string>
     <string name="rotate_map_to_bearing">Kartorientering</string>
     <string name="show_route">Rutedetaljer</string>
     <string name="fav_imported_sucessfully">Favoritter er importert</string>
@@ -389,9 +389,9 @@
     <string name="no_fav_to_save">Ingen favorittpunkter å lagre</string>
     <string name="shared_string_import">Importer</string>
 
-    <string name="error_occurred_loading_gpx">Feil oppstod under lasting av GPX</string>
+    <string name="error_occurred_loading_gpx">Kunne ikke laste GPX</string>
     <string name="send_report">Send rapport</string>
-    <string name="none_region_found">Ingen nettfrakoblede data for regioner funnet på minnekort. Last ned regioner fra internett.</string>
+    <string name="none_region_found">Kunne ikke finne nedlastede kart på minnekort.</string>
     <string name="layer_route">Rute</string>
     
     <string name="layer_poi">Interessepunktoverlegg…</string>
@@ -454,7 +454,7 @@
 
 
     <string name="downloading_list_indexes">Laster ned liste over tilgjengelige regioner…</string>
-    <string name="list_index_files_was_not_loaded">Listen over regioner ble ikke hentet fra https://osmand.net.</string>
+    <string name="list_index_files_was_not_loaded">Kunne ikke hente liste over regioner fra https://osmand.net.</string>
 
     <string name="fav_points_edited">Favorittpunkt ble redigert</string>
     <string name="fav_points_not_exist">Ingen favorittpunkter finnes</string>
@@ -854,7 +854,7 @@
     <string name="voice_is_not_available_title">Ingen taleveiledning valgt</string>
     <string name="select_max_zoom_preload_area">Velg maksimum zoom å forhåndslaste</string>
     <string name="voice_data_initializing">Initialiserer taledata…</string>
-    <string name="update_poi_is_not_available_for_zoom">Oppdatering av interessepunkter er ikke tilgjengelig ved lave zoomnivåer</string>
+    <string name="update_poi_is_not_available_for_zoom">Å zoome inn lar deg oppdatere interessepunkter</string>
     <string name="arrived_at_destination">Du har ankommet ditt reisemål</string>
 
 
@@ -959,7 +959,7 @@
 
     <string name="gpx_option_destination_point">Bruk gjeldende mål</string>
 
-    <string name="error_doing_search">Feil i nettfrakoblet søk.</string>
+    <string name="error_doing_search">Kunne ikke utføre (nett)frakoblet søk.</string>
     <string name="send_location">Send posisjon</string>
     <string name="amenity_type_administrative">Administrative</string>
 
@@ -1082,7 +1082,7 @@
     <string name="route_tsll">Ta litt til venstre og fortsett</string>
     <string name="route_tu">Ta U-sving og fortsett</string>
     <string name="first_time_download">Last ned regioner</string>
-    <string name="search_poi_location">Søker etter signal…</string>
+    <string name="search_poi_location">Venter på signal…</string>
     <string name="update_poi_no_offline_poi_index">Ingen offline interessepunktdata tilgjengelig for dette området</string>
     <string name="loading_poi_obj">Laster interessepunkt…</string>
     <string name="converting_names">Konverterer lokale/engelske navn…</string>
@@ -1154,7 +1154,7 @@
     <string name="sd_unmounted">Minnekort er ikke tilgjengelig.
 \nDu vil ikke kunne se kart eller finne ting.</string>
     <string name="sd_mounted_ro">Minnekort er skrivebeskyttet.
-\nDu kan bare se det forhåndslastede kartet og kan ikke laste ned fra internett.</string>
+\nDet er nå bare mulig å se det forhåndslastede kartet, ikke laste ned nye områder.</string>
     <string name="transport_finish_search">Avslutt søk</string>
     <string name="transport_stop_to_go_out">Velg stoppested for avstigning</string>
     <string name="failed_op">feilet</string>
@@ -1282,7 +1282,7 @@
     
     <string name="poi_context_menu_website">Vis nettside til interessepunkt</string>
     <string name="transport_context_menu">Søk etter transport ved stoppested</string>
-    <string name="use_trackball_descr">Bruk styrekule til å bevege kartet.</string>
+    <string name="use_trackball_descr">Bruk en styrekuleenhet til å bevege kartet.</string>
     <string name="use_trackball">Bruk styrekule</string>
     <string name="reading_indexes">Leser lokale data…</string>
     <string name="osb_author_dialog_password">OSM-passord (valgfritt)</string>
@@ -1682,7 +1682,7 @@
     <string name="voice_data_unavailable">Valgte taledata er ikke tilgjengelig</string>
     <string name="voice_data_corrupted">Spesifisert taledata er ødelagt</string>
     <string name="voice_data_not_supported">Taledataversjon som ikke støttes</string>
-    <string name="background_router_service_descr">Kjører OsmAnd i bakgrunnen for å spore posisjonen din mens skjermen er slått av.</string>
+    <string name="background_router_service_descr">Sporer posisjonen din mens skjermen er slått av.</string>
     <string name="share_fav_subject">Favoritter delt via OsmAnd</string>
     <string name="import_file_favourites">Lagre data som GPX-fil eller importere rutepunkter til Favoritter?</string>
     <string name="coords_format_descr">Format for geografiske koordinater.</string>
@@ -2218,7 +2218,7 @@
     <string name="quick_action_map_styles">Kartstiler</string>
     <string name="quick_action_map_style_action">Legg til en kartstil</string>
     <string name="quick_action_poi_list">Interessepunktliste</string>
-    <string name="quick_action_sh_poi_descr">Du kan legge til en eller flere interessepunktkategorier som skal vises på kartet.</string>
+    <string name="quick_action_sh_poi_descr">Legg til en eller flere interessepunktkategorier som skal vises på kartet.</string>
     <string name="quick_action_category_descr">Velg kategorien til å lagre favoritten i.</string>
     <string name="quick_action_add_navigation">Navigering</string>
     <string name="quick_action_add_configure_map">Kartinnstilling</string>
@@ -2323,7 +2323,7 @@
     <string name="empty_state_my_tracks">Legg til og ta opp spor</string>
     <string name="empty_state_my_tracks_desc">Ta opp eller importer spor som skal vises.</string>
     <string name="empty_state_favourites">Legg til favoritter</string>
-    <string name="empty_state_favourites_desc">Legg til favoritter på kartet eller importer dem fra en fil.</string>
+    <string name="empty_state_favourites_desc">Importer eller marker favoritter på kartet.</string>
     <string name="import_track">Importer spor</string>
     <string name="import_track_desc">Filen %1$s inneholder ingen rutepunkter, importere den som et spor?</string>
     <string name="move_point">Flytt punkt</string>
@@ -2460,7 +2460,7 @@
     <string name="tts_missing_language_data">Gå til markedet for å laste ned valgt språk?</string>
     <string name="gpx_option_reverse_route">Snu GPX-retning</string>
     <string name="gpx_option_from_start_point">Passer langs hele sporet</string>
-    <string name="warning_tile_layer_not_downloadable">Programmet kan ikke laste ned kartlaget %1$s, prøv å installere det på nytt.</string>
+    <string name="warning_tile_layer_not_downloadable">Programmet kan ikke laste ned kartlaget %1$s, å installere det på nytt kan hjelpe.</string>
     <string name="downloading_build">Laster ned byggversjon…</string>
     <string name="install_selected_build">Installer OsmAnd - {0} av {1} {2} MB?</string>
     <string name="loading_builds_failed">Innhenting av liste over OsmAnd-byggversjoner mislyktes</string>
@@ -2469,21 +2469,21 @@
     <string name="gps_status_app_not_found">GPS-statusprogram er ikke installert. Søke i marked?</string>
     <string name="continuous_rendering">Kontinuerlig opptegning</string>
     <string name="continuous_rendering_descr">Vis kontinuerlig opptegning istedenfor hele bildet på én gang.</string>
-    <string name="rendering_exception">Feil oppstod under opptegning av valgt område</string>
+    <string name="rendering_exception">Kunne ikke tegne valgt område</string>
     <string name="renderer_load_sucess">Kartgenerator lastet</string>
-    <string name="error_reading_gpx">Feil ved lesing av GPX-data</string>
+    <string name="error_reading_gpx">Kunne ikke lese GPX-data</string>
     <string name="any_poi">Alle</string>
     <string name="thanks_yandex_traffic">Takk til Yandex for trafikkinfo.</string>
     <string name="layer_yandex_traffic">Yandex-trafikk</string>
     <string name="background_service_provider">Stedsbestemmelsestjeneste</string>
     <string name="off_router_service_no_gps_available">Bakgrunnsnavigeringen krever aktivert stedsbestemmelsestjeneste.</string>
-    <string name="opening_hours_not_supported">Åpningstider-formatet støtter ikke redigering</string>
+    <string name="opening_hours_not_supported">Åpningstid-format kan ikke endres</string>
     <string name="update_poi_error_loading">Feil ved innlasting av data fra tjener</string>
     <string name="auth_failed">Identitetsbekreftelse mislyktes</string>
-    <string name="error_occurred_saving_gpx">Feil under lagring av GPX</string>
-    <string name="error_calculating_route">Feil under ruteberegning</string>
-    <string name="error_calculating_route_occured">Feil oppstod under ruteberegning</string>
-    <string name="empty_route_calculated">Feil: Beregnet rute er tom</string>
+    <string name="error_occurred_saving_gpx">Kunne ikke lagre GPX-spor</string>
+    <string name="error_calculating_route">Kunne ikke beregne rute</string>
+    <string name="error_calculating_route_occured">Kunne ikke beregne rute</string>
+    <string name="empty_route_calculated">Beregnet rute er tom</string>
     <string name="new_route_calculated_dist">Ny rute beregnet, distanse</string>
     <string name="saving_gpx_tracks">Lagrer GPX-spor til SD-kort…</string>
     <string name="data_settings_descr">Angi språk, last ned/gjeninnlast data.</string>
@@ -2529,7 +2529,7 @@
     <string name="favorite_autofill_toast_text">" er lagret i "</string>
     <string name="quick_action_showhide_favorites_descr">Trykking på denne handlingsknappen viser eller skjuler favorittpunktene på kartet.</string>
     <string name="quick_action_add_create_items">Opprett elementer</string>
-    <string name="quick_action_fav_name_descr">La stå tomt for å bruke adressen eller stedsnavnet automatisk.</string>
+    <string name="quick_action_fav_name_descr">La stå tomt for å bruke adressen eller stedsnavnet.</string>
     <string name="quick_action_bug_descr">Denne meldingen inkluderes i kommentarfeltet.</string>
     <string name="mappilary_no_internet_desc">Du må være koblet til internett for å vise bilder fra Mapillary.</string>
     <string name="hillshade_menu_download_descr">Last ned relieffskyggeoverleggskartet for å se relieffskygger for denne regionen.</string>
@@ -2632,13 +2632,13 @@
     <string name="use_high_res_maps_descr">Ikke strekk (og gjør uskarpe) kartfliser på høyoppløselige skjermer.</string>
     <string name="gpx_files_not_found">Finner ingen GPX-filer i spormappen</string>
     <string name="poi_namefinder_query_empty">Skriv for å finne interessepunkt</string>
-    <string name="background_service_wait_int_descr">Sett maksimal ventetid for hver bakgrunns-posisjonsbestemmelse.</string>
+    <string name="background_service_wait_int_descr">Setter høyeste tillatte ventetid for hver bakgrunns-posisjonsbestemmelse.</string>
     <string name="background_service_wait_int">Maksimal ventetid for posisjonsbestemmelse</string>
     <string name="background_service_int_descr">Still inn vekkingsintervall som brukes av bakgrunnstjenesten.</string>
-    <string name="background_service_provider_descr">Velg stedsbestemmelsestjeneste brukt av bakgrunnstjenesten.</string>
+    <string name="background_service_provider_descr">Velg stedsbestemmelsesmetode brukt av bakgrunnstjenesten.</string>
     <string name="transport_search_after">Etterfølgende rute</string>
     <string name="transport_search_before">Tidligere rute</string>
-    <string name="update_poi_error_local">Feil under oppdatering av lokal interessepunktsliste</string>
+    <string name="update_poi_error_local">Kunne ikke oppdatere lokal interessepunktliste</string>
     <string name="search_osm_nominatim">Nettbasert søk med OSM Nominatim</string>
     <string name="opening_changeset">Åpner endringssett…</string>
     <string name="closing_changeset">Lukker endringssett…</string>
@@ -2689,9 +2689,9 @@
     <string name="si_mi_feet">Eng. mil/fot</string>
     <string name="si_mi_yard">Eng. mil/yard</string>
     <string name="add_waypoint_dialog_added">GPX-rutepunkt \'\'{0}\'\' lagt til</string>
-    <string name="renderer_load_exception">Unntak oppstod: Kartgeneratoren er ikke lastet</string>
+    <string name="renderer_load_exception">Kunne ikke laste kartgeneratoren</string>
     <string name="poi_action_succeded_template">Handling {0} fullført.</string>
-    <string name="poi_error_unexpected_template">Uventet feil under utføring av handling {0}.</string>
+    <string name="poi_error_unexpected_template">Kunne ikke utføre handling {0}.</string>
     <string name="commit_poi">Send inn interessepunkt</string>
     <string name="poi_deleted_localy">Interessepunkt blir slettet når du laster opp endringene dine</string>
     <string name="only_download_over_wifi">Kun nedlasting over Wi-Fi</string>
@@ -2710,7 +2710,7 @@
     <string name="nautical_renderer">Nautisk</string>
 <string name="day_off_label">stengt (fridag)</string>
     <string name="copy_location_name">Kopier punkt/interessepunkt-navn</string>
-    <string name="toast_empty_name_error">Sted har ikke noe navn</string>
+    <string name="toast_empty_name_error">Sted uten navn</string>
 <string name="osc_file_desc">OSC - egnet for eksport til OpenStreetMap.</string>
     <string name="shared_string_current">Gjeldende</string>
     <string name="last_intermediate_dest_description">Legger til mellomliggende stopp</string>
@@ -3005,7 +3005,7 @@
     <string name="how_to_open_wiki_title">Hvordan åpne Wikipedia-artikler?</string>
 <string name="download_wikipedia_description">Last ned Wikipedia-artiklene for %1$s slik at du kan lese dem frakoblet.</string>
     <string name="open_in_browser_wiki">Åpne nettbasert artikkel</string>
-    <string name="open_in_browser_wiki_description">Se denne artikkelen i en nettleser.</string>
+    <string name="open_in_browser_wiki_description">Se artikkel i en nettleser.</string>
     <string name="download_wiki_region_placeholder">denne regionen</string>
     <string name="wiki_article_search_text">Søker etter den nødvendige wiki-artikkelen</string>
     <string name="wiki_article_not_found">Artikkel ikke funnet</string>
