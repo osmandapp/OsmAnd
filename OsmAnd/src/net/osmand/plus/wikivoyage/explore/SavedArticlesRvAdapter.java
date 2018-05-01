@@ -16,6 +16,7 @@ import com.squareup.picasso.Picasso;
 import com.squareup.picasso.RequestCreator;
 
 import net.osmand.AndroidUtils;
+import net.osmand.PicassoUtils;
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
@@ -76,22 +77,29 @@ public class SavedArticlesRvAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 		} else {
 			final ItemVH holder = (ItemVH) viewHolder;
 			TravelArticle article = (TravelArticle) getItem(position);
+			final String url = TravelArticle.getImageUrl(article.getImageTitle(), false);
+			Boolean cached = PicassoUtils.isCached(url);
 			boolean lastItem = position == getItemCount() - 1;
+
 			RequestCreator rc = Picasso.get()
-					.load(TravelArticle.getImageUrl(article.getImageTitle(), false));
+					.load(url);
 			WikivoyageUtils.setupNetworkPolicy(settings, rc);
 			rc.transform(new CropCircleTransformation())
 					.into(holder.icon, new Callback() {
 						@Override
 						public void onSuccess() {
 							holder.icon.setVisibility(View.VISIBLE);
+							PicassoUtils.setCached(url, true);
 						}
 
 						@Override
 						public void onError(Exception e) {
 							holder.icon.setVisibility(View.GONE);
+							PicassoUtils.setCached(url, false);
 						}
 					});
+
+			holder.icon.setVisibility(cached != null && cached ? View.VISIBLE : View.GONE);
 			holder.title.setText(article.getTitle());
 			holder.content.setText(article.getContent());
 			holder.partOf.setText(article.getGeoDescription());

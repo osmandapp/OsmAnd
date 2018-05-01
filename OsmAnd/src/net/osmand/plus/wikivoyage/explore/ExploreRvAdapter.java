@@ -116,6 +116,7 @@ public class ExploreRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 	public void setItems(List<BaseTravelCard> items) {
 		this.items.clear();
 		this.items.addAll(items);
+		notifyDataSetChanged();
 	}
 
 	private void removeItem(int position) {
