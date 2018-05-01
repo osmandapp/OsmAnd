@@ -1400,7 +1400,7 @@
     <string name="share_menu_location">Del posisjon</string>
     <string name="shared_string_send">Send</string>
     <string name="map_downloaded">Kart lastet ned</string>
-    <string name="map_downloaded_descr">Kartet over %1$s er klar for bruk.</string>
+    <string name="map_downloaded_descr">Kartet over %1$s er klart for bruk.</string>
     <string name="go_to_map">Vis kart</string>
     <string name="downloads">Nedlastinger</string>
     <string name="value_downloaded_of_max">%1$.1f av %2$.1f MB</string>
