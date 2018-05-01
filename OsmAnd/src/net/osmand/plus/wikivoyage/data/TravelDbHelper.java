@@ -235,7 +235,8 @@ public class TravelDbHelper {
 		if (conn == null) {
 			return res;
 		}
-		SQLiteCursor cursor = conn.rawQuery(POP_ARTICLES_TABLE_SELECT, null);
+		String LANG_WHERE = " WHERE " + ARTICLES_COL_LANG + " = '" + language + "'";
+		SQLiteCursor cursor = conn.rawQuery(POP_ARTICLES_TABLE_SELECT + LANG_WHERE, null);
 		if (cursor.moveToFirst()) {
 			do {
 				PopularArticle travelArticle = PopularArticle.readArticle(cursor);
@@ -247,8 +248,8 @@ public class TravelDbHelper {
 		cursor.close();
 		sortPopArticlesByDistance(popReadArticles);
 		StringBuilder bld = new StringBuilder();
-		bld.append(ARTICLES_TABLE_SELECT).append(" WHERE "+ARTICLES_COL_LANG+" = '"+language+"'"
-				+ " and "+ARTICLES_COL_CITY_ID+" IN (");
+		bld.append(ARTICLES_TABLE_SELECT).append(LANG_WHERE)
+				.append(" and ").append(ARTICLES_COL_CITY_ID).append(" IN (");
 		for (int i = 0; i < popReadArticles.size() && i < POPULAR_LIMIT; i++) {
 			if (i > 0) {
 				bld.append(", ");
