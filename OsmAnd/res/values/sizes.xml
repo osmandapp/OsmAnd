@@ -294,6 +294,8 @@
 	<dimen name="wikivoyage_search_divider_margin_start">64dp</dimen>
 	<dimen name="wikivoyage_travel_card_button_padding">16dp</dimen>
 	<dimen name="wikivoyage_start_editing_card_text_image_padding">40dp</dimen>
+	<dimen name="wikivoyage_show_images_dialog_buttons_height">44dp</dimen>
+	<dimen name="wikivoyage_show_images_dialog_shadow_height">16dp</dimen>
 
 	<dimen name="wikivoyage_explore_card_image_height">144dp</dimen>
 
