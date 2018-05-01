@@ -17,7 +17,7 @@
 	<string name="travel_card_download_descr">Download these Wikivoyage travel guides to view articles about places around the world without a connection to the Internet.</string>
 	<string name="update_is_available">Update available</string>
 	<string name="download_file">Download file</string>
-    <string name="start_editing_card_image_text">The libre worldwide travel guide anyone can edit.</string>
+    <string name="start_editing_card_image_text">The free worldwide travel guide anyone can edit.</string>
     <string name="welcome_to_open_beta_description">Travel is based on Wikivoyage. Test all features during open beta testing, for free. Afterwards, Travel will be available to subscribers of OsmAnd Unlimited and owners of OsmAnd+</string>
     <string name="start_editing_card_description">You can and should edit any article on Wikivoyage. Share knowledge, experience, talent, and your attention</string>
     <string name="start_editing">Start editing</string>
@@ -159,7 +159,7 @@
     <string name="empty_state_markers_active_desc">Long or short tap \'Places\', then tap the marker flag button.</string>
     <string name="empty_state_markers_groups">Import groups</string>
     <string name="empty_state_markers_groups_desc">Import favorite groups or track waypoints as markers.</string>
-    <string name="empty_state_markers_history" translatable="false">@string/shared_string_history</string>
+    <string name="empty_state_markers_history">@string/shared_string_history</string>
     <string name="empty_state_markers_history_desc">Markers marked as passed will appear on this screen.</string>
     <string name="shared_string_two">Two</string>
     <string name="shared_string_one">One</string>
@@ -385,12 +385,12 @@
     <string name="relief_smoothness_factor_descr">Preferred terrain: Flat or hilly.</string>
     <string name="shared_string_slope">Slope</string>
     <string name="add_new_folder">Add new folder</string>
-    <string name="points_delete_multiple_succesful">Points deleted.</string>
-    <string name="points_delete_multiple">You are going to delete %1$d points. Are you sure?</string>
+    <string name="points_delete_multiple_succesful">Point(s) deleted.</string>
+    <string name="points_delete_multiple">You are going to delete %1$d point(s). Are you sure?</string>
     <string name="route_points_category_name">Turns to pass on this route</string>
     <string name="track_points_category_name">Prominent points on this route</string>
     <string name="gpx_track">Track</string>
-    <string name="max_speed">Max speed</string>
+    <string name="max_speed">Maximum speed</string>
     <string name="average_speed">Average speed</string>
     <string name="shared_string_time_moving">Time moving</string>
     <string name="shared_string_time_span">Time span</string>
@@ -497,11 +497,11 @@
 	and more…
     </string>
     <string name="rendering_attr_contourColorScheme_description">Contour lines color scheme</string>
-    <string name="save_track_min_speed">Logging min speed</string>
+    <string name="save_track_min_speed">Logging minimum speed</string>
     <string name="save_track_min_speed_descr">Filter: No logging of points below this speed.</string>
-    <string name="save_track_min_distance">Logging min displacement</string>
-    <string name="save_track_min_distance_descr">Filter: Set min distance from a point to log a new one.</string>
-    <string name="save_track_precision">Logging min accuracy</string>
+    <string name="save_track_min_distance">Logging minimum displacement</string>
+    <string name="save_track_min_distance_descr">Filter: Set minimum distance from a point to log a new one.</string>
+    <string name="save_track_precision">Logging minimum accuracy</string>
     <string name="save_track_precision_descr">Filter: No logging unless this accuracy is reached.</string>
     <string name="christmas_poi">Christmas POI</string>
     <string name="christmas_desc">Anticipating Christmas and New Year holidays, you can choose to display the POI associated with Christmas: Christmas trees, markets, etc.</string>
@@ -1100,7 +1100,7 @@
 	</string>
     <string name="plugin_touringview_name">Touring map view</string>
     <string name="plugin_touringview_descr">Activating this view changes OsmAnd\'s map style to \'Touring view\', this is a special high-detail view for travelers and professional drivers.
-		\n\nThis view provides, at any given map zoom, the max amount of travel details available in the map data (particularly roads, tracks, paths, and orientation marks).
+		\n\nThis view provides, at any given map zoom, the maximum amount of travel details available in the map data (particularly roads, tracks, paths, and orientation marks).
 		\n\nIt also clearly depicts all types of roads unambiguously by color coding, which is useful when e.g. driving large vehicles.
 		\n\nAnd it provides special touring options like showing bicycle routes or Alpine mountain routes.
 		\n\nA special map download is not needed, the view is created from our standard maps.
@@ -1145,6 +1145,7 @@
     <string name="nautical_maps_missing">In order to display nautical maps, the special offline map needs to be downloaded</string>
     <string name="edit_group">Edit group</string>
     <string name="parking_place">Parking spot</string>
+    <string name="remove_the_tag">REMOVE THE TAG</string>
     <string name="gps_status">GPS status</string>
     <string name="version_settings_descr">Download nightly builds.</string>
     <string name="version_settings">Builds</string>
@@ -1339,7 +1340,7 @@
     <string name="gpx_info_start_time">Start time: %1$tF,  %1$tT </string>
     <string name="gpx_info_end_time">End time: %1$tF,  %1$tT </string>
     <string name="gpx_info_average_speed">Average speed: %1$s </string>
-    <string name="gpx_info_maximum_speed">Max speed: %1$s </string>
+    <string name="gpx_info_maximum_speed">Maximum speed: %1$s </string>
     <string name="gpx_info_avg_altitude">Average altitude: %1$s</string>
     <string name="gpx_info_diff_altitude">Altitude range: %1$s</string>
     <string name="gpx_info_asc_altitude">Descent/ascent: %1$s</string>
@@ -1495,14 +1496,14 @@
     <string name="local_index_tile_data_zooms">Zooms downloaded: %1$s</string>
     <string name="local_index_tile_data_expire">Expire (minutes): %1$s</string>
     <string name="local_index_tile_data_downloadable">Downloadable: %1$s</string>
-    <string name="local_index_tile_data_maxzoom">Max zoom: %1$s</string>
-    <string name="local_index_tile_data_minzoom">Min zoom: %1$s</string>
+    <string name="local_index_tile_data_maxzoom">Maximum zoom: %1$s</string>
+    <string name="local_index_tile_data_minzoom">Minimum zoom: %1$s</string>
     <string name="local_index_tile_data_name">Tile data: %1$s</string>
     <string name="edit_tilesource_successfully">Tilesource %1$s was saved</string>
     <string name="edit_tilesource_elliptic_tile">Elliptic mercator</string>
-    <string name="edit_tilesource_maxzoom">Max zoom</string>
+    <string name="edit_tilesource_maxzoom">Maximum zoom</string>
     <string name="edit_tilesource_expiration_time">Expire (minutes)</string>
-    <string name="edit_tilesource_minzoom">Min zoom</string>
+    <string name="edit_tilesource_minzoom">Minimum zoom</string>
     <string name="edit_tilesource_url_to_load">URL</string>
     <string name="edit_tilesource_choose_existing">Choose existing…</string>
     <string name="maps_define_edit">Define/Edit…</string>
@@ -1723,7 +1724,7 @@
     <string name="osmand_long_description_1000_chars">
 		OsmAnd (OSM Automated Navigation Directions)\n\n
 
-		OsmAnd is a copyleft, libre software navigation app with access to a wide variety of global OpenStreetMap (OSM) data. All map data (vector or tile maps) can be stored on the phone memory card for offline usage. Offline and online routing functionality is also offered, including turn-by-turn voice guidance.\n\n
+		OsmAnd is an open source software navigation app with access to a wide variety of global OpenStreetMap (OSM) data. All map data (vector or tile maps) can be stored on the phone memory card for offline usage. Offline and online routing functionality is also offered, including turn-by-turn voice guidance.\n\n
 
 		Some of the core features:\n
 		- Complete offline functionality (store downloaded vector or tile maps in the device storage)\n
@@ -1738,7 +1739,7 @@
 		-  Map alignment according to compass or direction of motion\n
 		-  Lane guidance, speed limit display, recorded and TTS voices\n\n
 
-		Limitations of this gratis version of OsmAnd:\n
+		Limitations of this free version of OsmAnd:\n
 		- Number of map downloads limited\n
 		- No offline access to Wikipedia POIs\n\n
 
@@ -1799,7 +1800,7 @@
         • Add POIs and directly upload them to OSM (or later if offline)\n
     </string>
     <string name="osmand_extended_description_part8">
-        OsmAnd is actively developed copyleft, libre software. Everyone can contribute to the app by reporting bugs, improving translations or coding new features. Additionally the project relies on financial contributions to fund coding and testing of new functionalities.\n
+        OsmAnd is actively developed open source software. Everyone can contribute to the app by reporting bugs, improving translations or coding new features. Additionally the project relies on financial contributions to fund coding and testing of new functionalities.\n
         Approximate map coverage and quality:\n
         • Western Europe: ****\n
         • Eastern Europe: ***\n
@@ -1819,7 +1820,7 @@
     <string name="osmand_plus_long_description_1000_chars">
 		OsmAnd+ (OSM Automated Navigation Directions)\n\n
 
-		OsmAnd+ is a copyleft, libre software navigation app with access to a wide variety of global OpenStreetMap (OSM) data. All map data (vector or tile maps) can be stored on the phone memory card for offline use. Offline and online routing functionality is also offered, including turn-by-turn voice guidance.\n\n
+		OsmAnd+ is an open source software navigation app with access to a wide variety of global OpenStreetMap (OSM) data. All map data (vector or tile maps) can be stored on the phone memory card for offline use. Offline and online routing functionality is also offered, including turn-by-turn voice guidance.\n\n
 
 		OsmAnd+ is the paid app version, by buying it you support the project, fund the development of new features, and receive the latest updates.\n\n
 
@@ -1895,7 +1896,7 @@
         • Upload GPX tracks to OSM directly from the app\n
         • Add POIs and directly upload them to OSM (or later if offline)\n
         • Optional trip recording also in background mode (while device is in sleep mode)\n
-        OsmAnd is actively developed copyleft, libre software. Everyone can contribute to the app by reporting bugs, improving translations or coding new features. Additionally the project relies on financial contributions to fund coding and testing of new functionalities.\n
+        OsmAnd is actively developed open source software. Everyone can contribute to the app by reporting bugs, improving translations or coding new features. Additionally the project relies on financial contributions to fund coding and testing of new functionalities.\n
     </string>
     <string name="osmand_plus_extended_description_part8">
         Approximate map coverage and quality:\n
@@ -2002,7 +2003,7 @@
     <string name="rendering_attr_noPolygons_name">Polygons</string>
     <string name="rendering_attr_appMode_name">Rendering mode</string>
     <string name="rendering_attr_appMode_description">Optimize map for</string>
-    <!-- string name="rendering_attr_contourLines_description">Select min zoom level to display in map if available. Separate contour data needed.</string -->
+    <!-- string name="rendering_attr_contourLines_description">Select minimum zoom level to display in map if available. Separate contour data needed.</string -->
     <string name="rendering_attr_contourLines_description">Display from zoom level (requires contour data):</string>
     <string name="rendering_attr_contourLines_name">Show contour lines</string>
     <string name="rendering_attr_hmRendered_description">Increase amount of map detail shown.</string>
@@ -2125,7 +2126,7 @@
     <string name="gpx_monitoring_disabled_warn">Log track using GPX widget or via \'Trip recording\' settings.</string>
     <string name="show_current_gpx_title">Show current track</string>
     <string name="free_version_message">This free OsmAnd version is limited to %1$s map downloads (to add or update maps) and does not support offline Wikipedia articles.</string>
-    <string name="free_version_title">Gratis version</string>
+    <string name="free_version_title">Free version</string>
     <string name="poi_context_menu_showdescription">Show POI description.</string>
     <string name="index_name_north_america">North America</string>
     <string name="index_name_netherlands">Europe - Netherlands</string>
@@ -2280,7 +2281,7 @@
     <string name="internet_not_available">Unable to perform operation without a connection to the Internet.</string>
     <string name="install_more">Install more…</string>
     <string name="level_to_switch_vector_raster_descr">Use raster maps for anything beyond this level.</string>
-    <string name="level_to_switch_vector_raster">Min vector zoom level</string>
+    <string name="level_to_switch_vector_raster">Minimum vector zoom level</string>
     <string name="create_poi_link_to_osm_doc"><u>Online OSM</u> map classification with images.</string>
     <string name="error_doing_search">Could not perform offline search.</string>
     <string name="search_offline_geo_error">Could not parse geo intent \'%s\'.</string>
@@ -2366,7 +2367,7 @@
     <string name="fast_route_mode_descr">Enable to calculate fastest route or disable for fuel-saving route.</string>
     <string name="tiles_to_download_estimated_size">At zoom {0} download {1} tiles ({2} MB)</string>
     <string name="shared_string_download_map">Download map</string>
-    <string name="select_max_zoom_preload_area">Select max zoom to preload</string>
+    <string name="select_max_zoom_preload_area">Select maximum zoom to preload</string>
     <string name="maps_could_not_be_downloaded">This map could not be downloaded</string>
     <string name="continuous_rendering">Continuous rendering</string>
     <string name="continuous_rendering_descr">Display continuous rendering instead of image-at-once.</string>
@@ -2421,10 +2422,10 @@
     <string name="layer_map">Map source…</string>
     <string name="menu_layers">Map layers</string>
     <string name="context_menu_item_search_poi">Search POI</string>
-    <string name="use_trackball_descr">Use a rolling ball device to move the map.</string>
+    <string name="use_trackball_descr">Use a trackball device to move the map.</string>
     <string name="use_trackball">Use trackball</string>
     <string name="background_service_wait_int_descr">Sets highest waiting time allowed for each background position fix.</string>
-    <string name="background_service_wait_int">Max wait for fix</string>
+    <string name="background_service_wait_int">Maximum wait for fix</string>
     <string name="where_am_i">Where am I?</string>
     <string name="process_navigation_service">OsmAnd navigation service</string>
     <string name="network_provider">Network</string>
@@ -2432,7 +2433,7 @@
     <string name="int_seconds">seconds</string>
     <string name="int_min">min.</string>
     <string name="background_service_int_descr">Set wake-up interval used by the background service.</string>
-    <string name="background_service_provider_descr">Select tracking method used by the background service.</string>
+    <string name="background_service_provider_descr">Select location method used by the background service.</string>
     <string name="background_service_provider">Location provider</string>
     <string name="background_router_service_descr">Tracks your position while the screen is off.</string>
     <string name="background_router_service">Run OsmAnd in background</string>
@@ -2702,8 +2703,8 @@
     <string name="downloads_left_template">%1$s downloads left</string>
     <string name="roads">Roads</string>
     <string name="downloading_number_of_files">Downloading - %1$d file</string>
-    <string name="show_free_version_banner">Show gratis version banner</string>
-    <string name="show_free_version_banner_description">Display the gratis version banner even in the paid version.</string>
+    <string name="show_free_version_banner">Show free version banner</string>
+    <string name="show_free_version_banner_description">Display the free version banner even in the paid version.</string>
     <string name="buy">Buy</string>
     <string name="activate_seamarks_plugin">Please activate \'Seamarks\' plugin</string>
     <string name="activate_srtm_plugin">Please activate \'SRTM\' plugin</string>
