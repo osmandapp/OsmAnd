@@ -56,6 +56,7 @@ import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.download.ui.ActiveDownloadsDialogFragment;
 import net.osmand.plus.download.ui.DownloadResourceGroupFragment;
 import net.osmand.plus.download.ui.LocalIndexesFragment;
+import net.osmand.plus.download.ui.SearchDialogFragment;
 import net.osmand.plus.download.ui.UpdatesIndexFragment;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
@@ -79,6 +80,8 @@ import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import static net.osmand.plus.download.ui.SearchDialogFragment.SHOW_WIKI_KEY;
+
 public class DownloadActivity extends AbstractDownloadActivity implements DownloadEvents,
 		OnRequestPermissionsResultCallback {
 	private static final Log LOG = PlatformUtil.getLog(DownloadActivity.class);
@@ -100,6 +103,7 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 	public static final String LOCAL_TAB = "local";
 	public static final String DOWNLOAD_TAB = "download";
 	public static final String UPDATES_TAB = "updates";
+	public static final String REGION_TO_SEARCH = "search_region";
 	public static final MessageFormat formatGb = new MessageFormat("{0, number,#.##} GB", Locale.US);
 	public static final MessageFormat formatMb = new MessageFormat("{0, number,##.#} MB", Locale.US);
 	public static final MessageFormat formatKb = new MessageFormat("{0, number,##.#} kB", Locale.US);
@@ -193,6 +197,11 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 
 		final Intent intent = getIntent();
 		if (intent != null && intent.getExtras() != null) {
+			String region = getIntent().getStringExtra(REGION_TO_SEARCH);
+			if (region != null && !region.isEmpty()) {
+				showDialog(this, SearchDialogFragment.createInstance(region,
+						getIntent().getBooleanExtra(SHOW_WIKI_KEY, false)));
+			}
 			filter = intent.getExtras().getString(FILTER_KEY);
 			filterCat = intent.getExtras().getString(FILTER_CAT);
 			filterGroup = intent.getExtras().getString(FILTER_GROUP);

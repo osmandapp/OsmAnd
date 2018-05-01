@@ -3,7 +3,6 @@ package net.osmand.plus.wikivoyage.data;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
-
 import net.osmand.Collator;
 import net.osmand.CollatorStringMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
@@ -45,7 +44,9 @@ public class TravelDbHelper {
 	private static final Log LOG = PlatformUtil.getLog(TravelDbHelper.class);
 
 	private static final String ARTICLES_TABLE_NAME = "wikivoyage_articles";
+	private static final String POPULAR_TABLE_NAME = "popular_articles";
 	private static final String ARTICLES_COL_ID = "article_id";
+	private static final String ARTICLES_POP_INDEX = "popularity_index";
 	private static final String ARTICLES_COL_TITLE = "title";
 	private static final String ARTICLES_COL_CONTENT = "content_gz";
 	private static final String ARTICLES_COL_IS_PART_OF = "is_part_of";
@@ -74,12 +75,23 @@ public class TravelDbHelper {
 			ARTICLES_COL_CONTENTS_JSON + ", " +
 			ARTICLES_COL_AGGREGATED_PART_OF +
 			" FROM " + ARTICLES_TABLE_NAME;
+	
+	private static final String POP_ARTICLES_TABLE_SELECT = "SELECT " +
+			ARTICLES_COL_TITLE + ", " +
+			ARTICLES_COL_LAT + ", " +
+			ARTICLES_COL_LON + ", " +
+			ARTICLES_COL_CITY_ID + ", " +
+			ARTICLES_COL_LANG + ", " +
+			ARTICLES_POP_INDEX +
+			" FROM " + POPULAR_TABLE_NAME;
 
 	private static final String SEARCH_TABLE_NAME = "wikivoyage_search";
 	private static final String SEARCH_COL_SEARCH_TERM = "search_term";
 	private static final String SEARCH_COL_CITY_ID = "city_id";
 	private static final String SEARCH_COL_ARTICLE_TITLE = "article_title";
 	private static final String SEARCH_COL_LANG = "lang";
+
+	private static final int POPULAR_LIMIT = 25;
 
 	private final OsmandApplication application;
 
@@ -91,7 +103,8 @@ public class TravelDbHelper {
 	private File selectedTravelBook = null;
 	private List<File> existingTravelBooks = new ArrayList<>();
 	private List<TravelArticle> popularArticles = new ArrayList<TravelArticle>();
-
+	
+	
 	public TravelDbHelper(OsmandApplication application) {
 		this.application = application;
 		collator = OsmAndCollator.primaryCollator();
@@ -216,22 +229,42 @@ public class TravelDbHelper {
 	@NonNull
 	public List<TravelArticle> loadPopularArticles() {
 		List<TravelArticle> res = new ArrayList<>();
+		String language = application.getLanguage();
+		List<PopularArticle> popReadArticles = new ArrayList<>();
 		SQLiteConnection conn = openConnection();
-		if (conn != null) {
-			TravelArticle travelArticle;
-			SQLiteCursor cursor = conn.rawQuery("SELECT * FROM "
-					+ ARTICLES_TABLE_NAME
-					+ " WHERE article_id IN (SELECT article_id FROM "
-					+ ARTICLES_TABLE_NAME
-					+ " ORDER BY RANDOM() LIMIT 20) LIMIT 20", null);
-			if (cursor.moveToFirst()) {
-				do {
-					travelArticle = readArticle(cursor);
-					res.add(travelArticle);
-				} while (cursor.moveToNext());
-			}
-			cursor.close();
+		if (conn == null) {
+			return res;
 		}
+		String LANG_WHERE = " WHERE " + ARTICLES_COL_LANG + " = '" + language + "'";
+		SQLiteCursor cursor = conn.rawQuery(POP_ARTICLES_TABLE_SELECT + LANG_WHERE, null);
+		if (cursor.moveToFirst()) {
+			do {
+				PopularArticle travelArticle = PopularArticle.readArticle(cursor);
+				if (language.equals(travelArticle.lang)) {
+					popReadArticles.add(travelArticle);
+				}
+			} while (cursor.moveToNext());
+		}
+		cursor.close();
+		sortPopArticlesByDistance(popReadArticles);
+		StringBuilder bld = new StringBuilder();
+		bld.append(ARTICLES_TABLE_SELECT).append(LANG_WHERE)
+				.append(" and ").append(ARTICLES_COL_CITY_ID).append(" IN (");
+		for (int i = 0; i < popReadArticles.size() && i < POPULAR_LIMIT; i++) {
+			if (i > 0) {
+				bld.append(", ");
+			}
+			bld.append(popReadArticles.get(i).cityId);
+		}
+		bld.append(")");
+		cursor = conn.rawQuery(bld.toString(), null);
+		if (cursor.moveToFirst()) {
+			do {
+				TravelArticle travelArticle = readArticle(cursor);
+				res.add(travelArticle);
+			} while (cursor.moveToNext());
+		}
+		cursor.close();
 		sortArticlesByDistance(res);
 		popularArticles = res;
 		return res;
@@ -264,15 +297,21 @@ public class TravelDbHelper {
 			Collections.sort(list, new Comparator<TravelArticle>() {
 				@Override
 				public int compare(TravelArticle article1, TravelArticle article2) {
-					int d1 = (int) MapUtils.getDistance(loc, article1.getLat(), article1.getLon());
-					int d2 = (int) MapUtils.getDistance(loc, article2.getLat(), article2.getLon());
-					if (d1 > d2) {
-						return 1;
-					} else if (d1 == d2) {
-						return 0;
-					} else {
-						return -1;
-					}
+					return Double.compare(MapUtils.getDistance(loc, article1.getLat(), article1.getLon()), MapUtils.getDistance(loc, article2.getLat(), article2.getLon()));
+				}
+			});
+		}
+	}
+	
+	private void sortPopArticlesByDistance(List<PopularArticle> list) {
+		Location location = application.getLocationProvider().getLastKnownLocation();
+		if (location != null) {
+			final LatLon loc = new LatLon(location.getLatitude(), location.getLongitude());
+			Collections.sort(list, new Comparator<PopularArticle>() {
+				@Override
+				public int compare(PopularArticle article1, PopularArticle article2) {
+					return Double.compare(MapUtils.getDistance(loc, article1.lat, article1.lon), 
+							MapUtils.getDistance(loc, article2.lat, article2.lon));
 				}
 			});
 		}
@@ -463,11 +502,11 @@ public class TravelDbHelper {
 			LOG.error(e.getMessage(), e);
 		}
 		res.isPartOf = cursor.getString(3);
-		res.lat = cursor.getDouble(4);
-		res.lon = cursor.getDouble(5);
+		res.lat = cursor.isNull(4) ? Double.NaN : cursor.getDouble(4);
+		res.lon = cursor.isNull(5) ? Double.NaN : cursor.getDouble(5);
 		res.imageTitle = cursor.getString(6);
 		res.cityId = cursor.getLong(8);
-		res.originalId = cursor.getLong(9);
+		res.originalId = cursor.isNull(9) ? 0 : cursor.getLong(9);
 		res.lang = cursor.getString(10);
 		res.contentsJson = cursor.getString(11);
 		res.aggregatedPartOf = cursor.getString(12);
@@ -500,5 +539,29 @@ public class TravelDbHelper {
 			GPXUtilities.writeGpxFile(file, gpx, application);
 		}
 		return file;
+	}
+	
+	private static class PopularArticle {
+		long cityId;
+		String title;
+		String lang;
+		int popIndex;
+		double lat;
+		double lon;
+		
+		public boolean isLocationSpecified() {
+			return !Double.isNaN(lat) && !Double.isNaN(lon);
+		}
+		
+		public static PopularArticle readArticle(SQLiteCursor cursor) {
+			PopularArticle res = new PopularArticle();
+			res.title = cursor.getString(0);
+			res.lat = cursor.isNull(1) ? Double.NaN : cursor.getDouble(1);
+			res.lon = cursor.isNull(2) ? Double.NaN : cursor.getDouble(2);
+			res.cityId = cursor.getLong(3);
+			res.lang = cursor.getString(4);
+			res.popIndex = cursor.isNull(5) ? 0 : cursor.getInt(5);
+			return res;
+		}
 	}
 }

@@ -87,7 +87,7 @@
                 android:layout_marginLeft="@dimen/card_padding"
                 android:layout_marginRight="@dimen/card_padding"
                 android:layout_marginTop="4dp"
-                android:background="@drawable/wikivoyage_search_card_bg">
+                android:background="?attr/wikivoyage_travel_card_bg">
 
                 <net.osmand.plus.widgets.TextViewEx
                     android:id="@+id/button_later"

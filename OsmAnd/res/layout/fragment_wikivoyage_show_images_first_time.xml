@@ -62,7 +62,7 @@
 				android:layout_marginEnd="@dimen/bottom_sheet_content_margin_small"
 				android:layout_marginRight="@dimen/bottom_sheet_content_margin_small"
 				android:layout_weight="1"
-				android:background="@drawable/wikivoyage_secondary_btn_bg">
+				android:background="?attr/wikivoyage_secondary_btn_bg">
 
 				<net.osmand.plus.widgets.TextViewEx
 					android:id="@+id/button_no"
@@ -88,7 +88,7 @@
 				android:layout_marginEnd="@dimen/bottom_sheet_content_margin_small"
 				android:layout_marginRight="@dimen/bottom_sheet_content_margin_small"
 				android:layout_weight="1"
-				android:background="@drawable/wikivoyage_secondary_btn_bg">
+				android:background="?attr/wikivoyage_secondary_btn_bg">
 
 				<net.osmand.plus.widgets.TextViewEx
 					android:id="@+id/button_wifi"
@@ -112,7 +112,7 @@
 				android:layout_width="0dp"
 				android:layout_height="wrap_content"
 				android:layout_weight="1"
-				android:background="@drawable/wikivoyage_primary_btn_bg">
+				android:background="?attr/wikivoyage_primary_btn_bg">
 
 				<net.osmand.plus.widgets.TextViewEx
 					android:id="@+id/button_yes"

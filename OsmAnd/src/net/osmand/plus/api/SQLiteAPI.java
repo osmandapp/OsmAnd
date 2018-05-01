@@ -49,6 +49,8 @@ public interface SQLiteAPI {
 		
 		byte[] getBlob(int ind);
 		
+		boolean isNull(int ind);
+		
 		void close();
 
 		
