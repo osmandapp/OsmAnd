@@ -102,7 +102,8 @@ public class WikivoyageShowPicturesDialogFragment extends BottomSheetDialogFragm
 			final int statusBarHeight = AndroidUtils.getStatusBarHeight(activity);
 			final int contentHeight = screenHeight - statusBarHeight
 					- AndroidUtils.getNavBarHeight(activity)
-					- getResources().getDimensionPixelSize(R.dimen.bottom_sheet_descr_height);
+					- getResources().getDimensionPixelSize(R.dimen.wikivoyage_show_images_dialog_buttons_height)
+					- getResources().getDimensionPixelSize(R.dimen.wikivoyage_show_images_dialog_shadow_height);
 
 			mainView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
 				@Override
