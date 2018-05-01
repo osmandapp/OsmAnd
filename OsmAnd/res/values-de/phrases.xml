@@ -3796,7 +3796,7 @@
 
 <string name="poi_water_utility">Büro der Wasserversorgung</string>
 
-	<string name="poi_service_car">Dienstleistung</string>
+	<string name="poi_service_car">Autodienst</string>
 
 <string name="poi_service_vehicle_car_repair_yes">Autowerkstatt</string>
 	<string name="poi_service_vehicle_oil_change_yes">Ölwechsel</string>
@@ -3826,5 +3826,23 @@
 	<string name="poi_via_ferrata">Klettersteig</string>
 	<string name="poi_cable_number">Kabelnummer</string>
 	<string name="poi_via_ferrata_scale">Schwierigkeitsgrad</string>
+
+<string name="poi_glacier_type">Gletschertyp</string>
+
+<string name="poi_glacier_type_icecap">Eiskappe</string>
+	<string name="poi_glacier_type_icefield">Eisfeld</string>
+	<string name="poi_glacier_type_plateau">Hochebene</string>
+	<string name="poi_glacier_type_valley">Tal</string>
+	<string name="poi_glacier_type_outlet">Mündung</string>
+	<string name="poi_glacier_type_tidewater">Gezeitenwasser</string>
+	<string name="poi_glacier_type_mountain">Berg</string>
+	<string name="poi_glacier_type_icefall">Gletscherbruch</string>
+	<string name="poi_glacier_type_rock">Fels</string>
+	<string name="poi_glacier_type_shelf">Schelf</string>
+	<string name="poi_glacier_type_ice_tongue">Eiszunge</string>
+
+	<string name="poi_glacier_ele_top">Höchster Punkt</string>
+	<string name="poi_glacier_ele_bottom">Tiefster Punkt</string>
+	<string name="poi_glacier_slope">Durchschnittliche Steigung</string>
 
 </resources>
