@@ -232,18 +232,19 @@ public class TravelDbHelper {
 		String language = application.getLanguage();
 		List<PopularArticle> popReadArticles = new ArrayList<>();
 		SQLiteConnection conn = openConnection();
-		if (conn != null) {
-			SQLiteCursor cursor = conn.rawQuery(POP_ARTICLES_TABLE_SELECT, null);
-			if (cursor.moveToFirst()) {
-				do {
-					PopularArticle travelArticle = PopularArticle.readArticle(cursor);
-					if(language.equals(travelArticle.lang)) {
-						popReadArticles.add(travelArticle);
-					}
-				} while (cursor.moveToNext());
-			}
-			cursor.close();
+		if (conn == null) {
+			return res;
 		}
+		SQLiteCursor cursor = conn.rawQuery(POP_ARTICLES_TABLE_SELECT, null);
+		if (cursor.moveToFirst()) {
+			do {
+				PopularArticle travelArticle = PopularArticle.readArticle(cursor);
+				if (language.equals(travelArticle.lang)) {
+					popReadArticles.add(travelArticle);
+				}
+			} while (cursor.moveToNext());
+		}
+		cursor.close();
 		sortPopArticlesByDistance(popReadArticles);
 		StringBuilder bld = new StringBuilder();
 		bld.append(ARTICLES_TABLE_SELECT).append(" WHERE "+ARTICLES_COL_LANG+" = '"+language+"'"
@@ -255,7 +256,7 @@ public class TravelDbHelper {
 			bld.append(popReadArticles.get(i).cityId);
 		}
 		bld.append(")");
-		SQLiteCursor cursor = conn.rawQuery(bld.toString(), null);
+		cursor = conn.rawQuery(bld.toString(), null);
 		if (cursor.moveToFirst()) {
 			do {
 				TravelArticle travelArticle = readArticle(cursor);
