@@ -140,13 +140,13 @@ public class MapMultiSelectionMenuFragment extends Fragment implements MultiSele
 				}
 			});
 		}
-		listView.setAdapter(listAdapter);
 		View headerView = inflater.inflate(R.layout.menu_obj_selection_header, listView, false);
 		if (!menu.isLandscapeLayout()) {
 			AndroidUtils.setBackground(getContext(), headerView, !menu.isLight(), R.color.ctx_menu_bg_light, R.color.ctx_menu_bg_dark);
 		}
 		headerView.setOnClickListener(null);
 		listView.addHeaderView(headerView);
+		listView.setAdapter(listAdapter);
 
 		view.findViewById(R.id.divider).setBackgroundColor(ContextCompat.getColor(getContext(), menu.isLight()
 				? R.color.multi_selection_menu_divider_light : R.color.multi_selection_menu_divider_dark));
