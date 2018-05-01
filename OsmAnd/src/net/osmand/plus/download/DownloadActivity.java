@@ -80,6 +80,8 @@ import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import static net.osmand.plus.download.ui.SearchDialogFragment.SHOW_WIKI_KEY;
+
 public class DownloadActivity extends AbstractDownloadActivity implements DownloadEvents,
 		OnRequestPermissionsResultCallback {
 	private static final Log LOG = PlatformUtil.getLog(DownloadActivity.class);
@@ -138,11 +140,6 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 		accessibilityAssistant = new AccessibilityAssistant(this);
 
 		setContentView(R.layout.download);
-		// Search for the region from Wikivoyage article
-		String region = getIntent() == null ? "" : getIntent().getStringExtra(REGION_TO_SEARCH);
-		if (region != null && !region.isEmpty()) {
-			showDialog(this, SearchDialogFragment.createInstance(region, true));
-		}
 		//noinspection ConstantConditions
 		getSupportActionBar().setTitle(R.string.shared_string_map);
 		final View downloadProgressLayout = findViewById(R.id.downloadProgressLayout);
@@ -200,6 +197,11 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 
 		final Intent intent = getIntent();
 		if (intent != null && intent.getExtras() != null) {
+			String region = getIntent().getStringExtra(REGION_TO_SEARCH);
+			if (region != null && !region.isEmpty()) {
+				showDialog(this, SearchDialogFragment.createInstance(region,
+						getIntent().getBooleanExtra(SHOW_WIKI_KEY, false)));
+			}
 			filter = intent.getExtras().getString(FILTER_KEY);
 			filterCat = intent.getExtras().getString(FILTER_CAT);
 			filterGroup = intent.getExtras().getString(FILTER_GROUP);

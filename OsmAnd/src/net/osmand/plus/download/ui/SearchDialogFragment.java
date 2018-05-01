@@ -65,7 +65,7 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 
 	public static final String TAG = "SearchDialogFragment";
 	private static final String SEARCH_TEXT_DLG_KEY = "search_text_dlg_key";
-	private static final String SHOW_WIKI_KEY = "show_wiki_key";
+	public static final String SHOW_WIKI_KEY = "show_wiki_key";
 	private boolean showWiki;
 	private ListView listView;
 	private SearchListAdapter listAdapter;
