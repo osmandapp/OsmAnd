@@ -20,6 +20,8 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.mapcontextmenu.WikipediaDialogFragment;
 
+import static net.osmand.plus.download.ui.SearchDialogFragment.SHOW_WIKI_KEY;
+
 public class WikivoyageArticleWikiLinkFragment extends MenuBottomSheetDialogFragment {
 
 	public static final String TAG = WikivoyageArticleWikiLinkFragment.class.getSimpleName();
@@ -76,6 +78,7 @@ public class WikivoyageArticleWikiLinkFragment extends MenuBottomSheetDialogFrag
 								.getDownloadActivity());
 						newIntent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 						newIntent.putExtra(DownloadActivity.REGION_TO_SEARCH, wikiRegion);
+						newIntent.putExtra(SHOW_WIKI_KEY, true);
 						mapActivity.startActivity(newIntent);
 						dismiss();
 					}
