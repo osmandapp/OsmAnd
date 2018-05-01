@@ -40,7 +40,6 @@ import net.osmand.plus.wikivoyage.WikivoyageWebViewClient;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
 import net.osmand.plus.wikivoyage.data.TravelDbHelper;
 import net.osmand.plus.wikivoyage.data.TravelLocalDataHelper;
-import net.osmand.plus.wikivoyage.explore.WikivoyageExploreDialogFragment;
 import net.osmand.util.Algorithms;
 
 import java.io.BufferedWriter;
@@ -53,8 +52,7 @@ import java.util.List;
 import java.util.Map;
 
 import static net.osmand.plus.OsmandSettings.WikivoyageShowImages.OFF;
-import static net.osmand.plus.OsmandSettings.WikivoyageShowImages.ON;
-import static net.osmand.plus.OsmandSettings.WikivoyageShowImages.WIFI;
+
 
 public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragment {
 
