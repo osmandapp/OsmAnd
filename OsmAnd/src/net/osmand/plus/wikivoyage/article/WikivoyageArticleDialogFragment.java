@@ -47,9 +47,12 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import static net.osmand.plus.OsmandSettings.WikivoyageShowImages.OFF;
 
@@ -73,7 +76,7 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 			"	Android.showNavigation();" +
 			"}" +
 			"</script>" +
-			"</head><body>\n";
+			"</head>";
 	private static final String FOOTER_INNER = "<script>var coll = document.getElementsByTagName(\"H2\");" +
 			"var i;" +
 			"for (i = 0; i < coll.length; i++) {" +
@@ -399,6 +402,10 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 	@NonNull
 	private String createHtmlContent(@NonNull TravelArticle article) {
 		StringBuilder sb = new StringBuilder(HEADER_INNER);
+		String[] rtlLanguages = new String[]{"ar","dv","he","iw","fa","nqo","ps","sd","ug","ur","yi"};
+		Set<String> rtls = new HashSet<>(Arrays.asList(rtlLanguages));
+		String bodyTag = rtls.contains(article.getLang()) ? "<body dir=\"rtl\">\n" : "<body>\n";
+		sb.append(bodyTag);
 
 		String imageTitle = article.getImageTitle();
 		if (!TextUtils.isEmpty(article.getAggregatedPartOf())) {
