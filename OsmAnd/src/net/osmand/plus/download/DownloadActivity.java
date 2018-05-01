@@ -138,9 +138,10 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 		accessibilityAssistant = new AccessibilityAssistant(this);
 
 		setContentView(R.layout.download);
+		// Search for the region from Wikivoyage article
 		String region = getIntent() == null ? "" : getIntent().getStringExtra(REGION_TO_SEARCH);
 		if (region != null && !region.isEmpty()) {
-			showDialog(this, SearchDialogFragment.createInstance(region));
+			showDialog(this, SearchDialogFragment.createInstance(region, true));
 		}
 		//noinspection ConstantConditions
 		getSupportActionBar().setTitle(R.string.shared_string_map);
