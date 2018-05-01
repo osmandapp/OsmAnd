@@ -436,9 +436,9 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 			sb.append("<div class=\"title-image\" style=\"background-image: url(").append(url).append(")\"></div>");
 		}
 
-		String nightModeClass = nightMode?"nightmode":"";
+		String nightModeClass = nightMode ? " nightmode" : "";
 
-		sb.append("<div class=\"main "+nightModeClass+"\">\n");
+		sb.append("<div class=\"main" + nightModeClass + "\">\n");
 		sb.append("<h1>").append(article.getTitle()).append("</h1>");
 		sb.append(article.getContent());
 		sb.append(FOOTER_INNER);
