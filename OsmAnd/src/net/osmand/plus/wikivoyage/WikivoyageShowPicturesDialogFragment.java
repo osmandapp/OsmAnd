@@ -3,6 +3,8 @@ package net.osmand.plus.wikivoyage;
 import android.app.Activity;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.ColorRes;
+import android.support.annotation.DrawableRes;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,9 +27,11 @@ public class WikivoyageShowPicturesDialogFragment extends BottomSheetDialogFragm
 
 	public static final int SHOW_PICTURES_CHANGED_REQUEST_CODE = 1;
 
+	protected boolean nightMode;
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
+		nightMode=!getMyApplication().getSettings().isLightContent();
 		View view = inflater.inflate(R.layout.fragment_wikivoyage_show_images_first_time, container, false);
 		view.findViewById(R.id.button_no).setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -69,7 +73,7 @@ public class WikivoyageShowPicturesDialogFragment extends BottomSheetDialogFragm
 			});
 		}
 
-		setupHeight(view);
+		setupHeightAndBackground(view);
 
 		return view;
 	}
@@ -95,15 +99,14 @@ public class WikivoyageShowPicturesDialogFragment extends BottomSheetDialogFragm
 		}
 	}
 
-	protected void setupHeight(final View mainView) {
+	protected void setupHeightAndBackground(final View mainView) {
 		final Activity activity = getActivity();
 		if (activity != null) {
 			final int screenHeight = AndroidUtils.getScreenHeight(activity);
 			final int statusBarHeight = AndroidUtils.getStatusBarHeight(activity);
 			final int contentHeight = screenHeight - statusBarHeight
 					- AndroidUtils.getNavBarHeight(activity)
-					- getResources().getDimensionPixelSize(R.dimen.wikivoyage_show_images_dialog_buttons_height)
-					- getResources().getDimensionPixelSize(R.dimen.wikivoyage_show_images_dialog_shadow_height);
+					- getResources().getDimensionPixelSize(R.dimen.wikivoyage_show_images_dialog_buttons_height);
 
 			mainView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
 				@Override
@@ -113,6 +116,15 @@ public class WikivoyageShowPicturesDialogFragment extends BottomSheetDialogFragm
 						contentView.getLayoutParams().height = contentHeight;
 						contentView.requestLayout();
 					}
+
+					// 8dp is the shadow height
+					boolean showTopShadow = screenHeight - statusBarHeight - mainView.getHeight() >= AndroidUtils.dpToPx(activity, 8);
+					if (AndroidUiHelper.isOrientationPortrait(activity)) {
+						mainView.setBackgroundResource(showTopShadow ? getPortraitBgResId() : getBgColorId());
+					} else {
+						mainView.setBackgroundResource(showTopShadow ? getLandscapeTopsidesBgResId() : getLandscapeSidesBgResId());
+					}
+
 					ViewTreeObserver obs = mainView.getViewTreeObserver();
 					if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
 						obs.removeOnGlobalLayoutListener(this);
@@ -122,5 +134,25 @@ public class WikivoyageShowPicturesDialogFragment extends BottomSheetDialogFragm
 				}
 			});
 		}
+	}
+
+	@DrawableRes
+	protected int getPortraitBgResId() {
+		return nightMode ? R.drawable.bg_bottom_menu_dark : R.drawable.bg_bottom_menu_light;
+	}
+
+	@DrawableRes
+	protected int getLandscapeTopsidesBgResId() {
+		return nightMode ? R.drawable.bg_bottom_sheet_topsides_landscape_dark : R.drawable.bg_bottom_sheet_topsides_landscape_light;
+	}
+
+	@DrawableRes
+	protected int getLandscapeSidesBgResId() {
+		return nightMode ? R.drawable.bg_bottom_sheet_sides_landscape_dark : R.drawable.bg_bottom_sheet_sides_landscape_light;
+	}
+
+	@ColorRes
+	protected int getBgColorId() {
+		return nightMode ? R.color.bg_color_dark : R.color.bg_color_light;
 	}
 }
