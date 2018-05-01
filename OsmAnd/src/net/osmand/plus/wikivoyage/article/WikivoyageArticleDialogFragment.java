@@ -435,14 +435,7 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 		sb.append("<h1>").append(article.getTitle()).append("</h1>");
 		sb.append(article.getContent());
 		sb.append(FOOTER_INNER);
-		List<OsmandPlugin> pluginList = OsmandPlugin.getEnabledPlugins();
-		boolean development = false;
-		for (OsmandPlugin plugin : pluginList) {
-			if (plugin instanceof OsmandDevelopmentPlugin) {
-				development = true;
-			}
-		}
-		if (development) {
+		if (OsmandPlugin.getEnabledPlugin(OsmandDevelopmentPlugin.class) != null) {
 			writeOutHTML(sb);
 		}
 		return sb.toString();
