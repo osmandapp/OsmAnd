@@ -42,7 +42,7 @@ public class WikivoyageShowPicturesDialogFragment extends BottomSheetDialogFragm
 		});
 		TextView buttonDownload = view.findViewById(R.id.button_download);
 		if (getMyApplication().getSettings().isWifiConnected()) {
-			buttonDownload.setText(R.string.shared_string_do);
+			buttonDownload.setText(R.string.shared_string_only_with_wifi);
 			buttonDownload.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
@@ -55,7 +55,7 @@ public class WikivoyageShowPicturesDialogFragment extends BottomSheetDialogFragm
 				}
 			});
 		} else {
-			buttonDownload.setText(R.string.shared_string_only_with_wifi);
+			buttonDownload.setText(R.string.shared_string_do);
 			buttonDownload.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
@@ -100,7 +100,9 @@ public class WikivoyageShowPicturesDialogFragment extends BottomSheetDialogFragm
 		if (activity != null) {
 			final int screenHeight = AndroidUtils.getScreenHeight(activity);
 			final int statusBarHeight = AndroidUtils.getStatusBarHeight(activity);
-			final int contentHeight = getContentHeight(screenHeight - statusBarHeight - AndroidUtils.getNavBarHeight(activity));
+			final int contentHeight = screenHeight - statusBarHeight
+					- AndroidUtils.getNavBarHeight(activity)
+					- getResources().getDimensionPixelSize(R.dimen.bottom_sheet_descr_height);
 
 			mainView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
 				@Override
@@ -119,11 +121,5 @@ public class WikivoyageShowPicturesDialogFragment extends BottomSheetDialogFragm
 				}
 			});
 		}
-	}
-
-	private int getContentHeight(int availableScreenHeight) {
-		return availableScreenHeight
-				- AndroidUtils.dpToPx(getContext(), 1) // divider height
-				- getResources().getDimensionPixelSize(R.dimen.bottom_sheet_descr_height);
 	}
 }
