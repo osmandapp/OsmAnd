@@ -17,6 +17,7 @@ import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerHalfItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleDividerItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
+import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.mapcontextmenu.WikipediaDialogFragment;
 
 public class WikivoyageArticleWikiLinkFragment extends MenuBottomSheetDialogFragment {
@@ -74,6 +75,7 @@ public class WikivoyageArticleWikiLinkFragment extends MenuBottomSheetDialogFrag
 						Intent newIntent = new Intent(mapActivity, mapActivity.getMyApplication().getAppCustomization()
 								.getDownloadActivity());
 						newIntent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+						newIntent.putExtra(DownloadActivity.REGION_TO_SEARCH, wikiRegion);
 						mapActivity.startActivity(newIntent);
 						dismiss();
 					}

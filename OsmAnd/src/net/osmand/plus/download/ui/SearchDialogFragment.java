@@ -464,9 +464,9 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 						if (g.getType() == DownloadResourceGroupType.REGION_MAPS) {
 							if (g.getIndividualResources() != null) {
 								for (IndexItem item : g.getIndividualResources()) {
-									if (item.getType() == DownloadActivityType.NORMAL_FILE) {
+									if (item.getType() == DownloadActivityType.NORMAL_FILE
+											|| item.getType() == DownloadActivityType.WIKIPEDIA_FILE) {
 										filter.add(item);
-										break;
 									}
 								}
 							}

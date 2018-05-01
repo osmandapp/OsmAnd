@@ -56,6 +56,7 @@ import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.download.ui.ActiveDownloadsDialogFragment;
 import net.osmand.plus.download.ui.DownloadResourceGroupFragment;
 import net.osmand.plus.download.ui.LocalIndexesFragment;
+import net.osmand.plus.download.ui.SearchDialogFragment;
 import net.osmand.plus.download.ui.UpdatesIndexFragment;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
@@ -100,6 +101,7 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 	public static final String LOCAL_TAB = "local";
 	public static final String DOWNLOAD_TAB = "download";
 	public static final String UPDATES_TAB = "updates";
+	public static final String REGION_TO_SEARCH = "search_region";
 	public static final MessageFormat formatGb = new MessageFormat("{0, number,#.##} GB", Locale.US);
 	public static final MessageFormat formatMb = new MessageFormat("{0, number,##.#} MB", Locale.US);
 	public static final MessageFormat formatKb = new MessageFormat("{0, number,##.#} kB", Locale.US);
@@ -136,6 +138,10 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 		accessibilityAssistant = new AccessibilityAssistant(this);
 
 		setContentView(R.layout.download);
+		String region = getIntent() == null ? "" : getIntent().getStringExtra(REGION_TO_SEARCH);
+		if (region != null && !region.isEmpty()) {
+			showDialog(this, SearchDialogFragment.createInstance(region));
+		}
 		//noinspection ConstantConditions
 		getSupportActionBar().setTitle(R.string.shared_string_map);
 		final View downloadProgressLayout = findViewById(R.id.downloadProgressLayout);
