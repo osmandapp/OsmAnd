@@ -426,7 +426,7 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 			}
 		}
 		String url = TravelArticle.getImageUrl(imageTitle, false);
-		if (!TextUtils.isEmpty(imageTitle) && (getSettings().WIKIVOYAGE_SHOW_IMAGES.get() != OFF) &&
+		if (!TextUtils.isEmpty(imageTitle) && getSettings().WIKIVOYAGE_SHOW_IMAGES.get() != OFF &&
 				!url.startsWith(EMPTY_URL)) {
 			sb.append("<div class=\"title-image\" style=\"background-image: url(").append(url).append(")\"></div>");
 		}
