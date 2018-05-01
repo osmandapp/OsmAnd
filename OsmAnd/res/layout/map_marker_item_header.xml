@@ -54,6 +54,7 @@
 		android:layout_height="0dp"
 		android:layout_weight="1"
 		android:background="?attr/bg_color"
+		android:visibility="gone"
 		android:orientation="vertical">
 
 		<TextView
