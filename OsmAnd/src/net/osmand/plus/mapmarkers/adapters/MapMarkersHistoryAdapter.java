@@ -192,6 +192,7 @@ public class MapMarkersHistoryAdapter extends RecyclerView.Adapter<RecyclerView.
 			}
 			dateViewHolder.disableGroupSwitch.setVisibility(View.GONE);
 			dateViewHolder.title.setText(dateString);
+			dateViewHolder.articleDescription.setVisibility(View.GONE);
 		}
 	}
 
