@@ -159,8 +159,8 @@
     <string name="lang_es_us">İspanca (Amerika)</string>
     <string name="lang_es_ar">İspanca (Argentina)</string>
     <string name="lang_th">Tayca</string>
-    <string name="download_wikipedia_files">Əlavə Vikipediya məlumatları endirmək istəyirsiniz (%1$s MB) ?</string>
-    <string name="gps_network_not_enabled">Məkan xidməti aktiv deyil. Onu aktivləşdirmək istəyirsiniz?</string>
+    <string name="download_wikipedia_files">Əlavə Vikipediya məlumatları endirilsin (%1$s MB) ?</string>
+    <string name="gps_network_not_enabled">Məkan xidməti aktiv deyil. Aktivləşdirilsin?</string>
     <string name="shared_string_wikipedia">Vikipediya</string>
     <string name="local_indexes_cat_wiki">Vikipediya</string>
     <string name="shared_string_show_details">Detalları göstər</string>
@@ -189,7 +189,7 @@
     <string name="welcome_header">Xoş gəlmisiniz</string>
     <string name="mark_to_delete">Silmək üçün işarələ</string>
     
-    <string name="confirmation_to_clear_history">Tarixçəni təmizləmək istəyirsiniz?</string>
+    <string name="confirmation_to_clear_history">Tarixçə təmizlənsin?</string>
     <string name="shared_string_go">Get</string>
     <string name="osm_edits">OSM düzəlişləri</string>
     <string name="osmand_parking_hour">s</string>
@@ -238,7 +238,7 @@
     <string name="shared_string_control_stop">Dayandır</string>
     <string name="shared_string_more">Daha çox…</string>
     <string name="shared_string_do_not_show_again">Yenidən göstərmə</string>
-    <string name="shared_string_remember_my_choice">Seçimimi xatırla</string>
+    <string name="shared_string_remember_my_choice">Seçimi xatırla</string>
     <string name="shared_string_refresh">Yenilə</string>
     <string name="shared_string_download">Endir</string>
     <string name="shared_string_downloading">Endirilir</string>
@@ -254,10 +254,10 @@
     <string name="shared_string_favorites">Favoritlər</string>
     <string name="shared_string_address">Ünvan</string>
     <string name="shared_string_add">Əlavə et</string>
-    <string name="shared_string_add_to_favorites">“Favoritlərim”ə əlavə et</string>
+    <string name="shared_string_add_to_favorites">“Favoritlər”ə əlavə et</string>
     <string name="shared_string_my_location">Mövqeyim</string>
     <string name="shared_string_my_places">Yerlərim</string>
-    <string name="shared_string_my_favorites">Favoritlərim</string>
+    <string name="shared_string_my_favorites">Favoritlər</string>
     <string name="shared_string_audio">Səs</string>
     <string name="shared_string_video">Video</string>
     <string name="shared_string_photo">Şəkil</string>
@@ -278,7 +278,7 @@
     <string name="settings_privacy">Məxfilik</string>
     <string name="rendering_value__name">Standart</string>
     <string name="rendering_value_default_name">Standart</string>
-    <string name="dash_download_msg_none">Oflayn xəritələri endirmək istəyirsiniz?</string>
+    <string name="dash_download_msg_none">Oflayn xəritələr endirilsin?</string>
     <string name="dash_download_msg">%1$s endirilmiş xəritəniz var</string>
     <string name="dash_download_new_one">Yeni xəritə endir</string>
     <string name="dash_download_manage">İdarə et</string>
@@ -823,7 +823,7 @@
     <string name="rendering_attr_contourWidth_name">Kontur xəttinin genişliyi</string>
     <string name="legacy_search">Köhnə axtarış</string>
     <string name="show_legacy_search">Köhnə axtarışı göstər</string>
-    <string name="upload_osm_note_description">OSM qeydinizi anonim və ya OpenStreetMap.org profilinizi istifadə edərək yükləyə bilərsiniz.</string>
+    <string name="upload_osm_note_description">OSM qeydinizi anonim və ya OpenStreetMap.org profilinizi istifadə edərək yükləyin.</string>
     <string name="wiki_around">Yaxındakı Vikipediya məqalələri</string>
     <string name="search_map_hint">Şəhər və ya ölkə axtarın</string>
     <string name="upload_poi">POI yüklə</string>
@@ -850,12 +850,12 @@
     <string name="no_inet_connection_desc_map">Xəritələri endirmək üçün lazımdır.</string>
     <string name="allow_access_location">Məkan girişinə icazə ver</string>
     <string name="search_my_location">Mövqeyimi tap</string>
-    <string name="update_all_maps_now">Bütün xəritələri indi yeniləmək istəyirsiniz?</string>
+    <string name="update_all_maps_now">Bütün xəritələr indi yenilənsin?</string>
     <string name="replace_favorite_confirmation">%1$s favoritini əvəz etmək istəyirsiniz?</string>
     <string name="rendering_attr_hideOverground_name">Yerüstü obyektlər</string>
     <string name="coords_search">Koordinatlarla axtar</string>
     <string name="advanced_coords_search">Təkmil koordinat axtarışı</string>
-    <string name="confirmation_to_delete_history_items">Seçilən elementləri “Tarixçə”dən silmək istəyirsiniz?</string>
+    <string name="confirmation_to_delete_history_items">Seçilən elementlər “Tarixçə”dən silinsin?</string>
     <string name="dist_away_from_my_location">%1$s uzaqda axtar</string>
     <string name="shared_string_from">buradan:</string>
     <string name="city_type_district">Rayon</string>
@@ -927,13 +927,13 @@
     <string name="lang_id">İndonezcə</string>
     <string name="lang_ko">Koreyaca</string>
     <string name="route_descr_select_destination">Təyinat nöqtəsi seçin</string>
-    <string name="routing_attr_avoid_toll_description">Pullu yollardan yayın.</string>
+    <string name="routing_attr_avoid_toll_description">Pullu yollardan yayın</string>
     <string name="routing_attr_avoid_unpaved_name">Asfaltsız yollardan yayın</string>
     <string name="routing_attr_avoid_unpaved_description">Asfaltsız yollardan yayın.</string>
     <string name="routing_attr_avoid_ferries_name">Bərələrdən yayın</string>
-    <string name="routing_attr_avoid_ferries_description">Bərələrdən yayın.</string>
+    <string name="routing_attr_avoid_ferries_description">Bərələrdən yayın</string>
     <string name="routing_attr_avoid_motorway_name">Avtomagistrallardan yayın</string>
-    <string name="routing_attr_avoid_motorway_description">Avtomagistrallardan yayın.</string>
+    <string name="routing_attr_avoid_motorway_description">Avtomagistrallardan yayın</string>
     <string name="android_19_location_disabled">Android 4.4 (KitKat) versiyasından bu yana xəritələri əvvəlki saxlama qovluğuna (%s) endirə və yeniləyə bilməzsiniz. İcazə verilən saxlama yerinə keçmək və bütün OsmAnd fayllarını ora kopyalamaq istəyirsiniz?
 \n Qeyd 1: Köhnə fayllarınıza toxunulmayacaq (amma əllə silmək olar).
 \n Qeyd 2: Yeni saxlama yerində OsmAnd və OsmAnd+ arasında fayl paylaşmaq mümkün olmayacaq.</string>
@@ -1275,7 +1275,7 @@
     <string name="rendering_value_blue_name">Mavi</string>
     <string name="rendering_value_translucent_blue_name">Şəffaf mavi</string>
     <string name="restart_is_required">Bütün dəyişikliklərin tətbiq edilməsi üçün proqramı əllə yenidən başladın.</string>
-    <string name="archive_wikipedia_data">Uyğunsuz köhnə Vikipediya məlumatlarınız var. Arxivləmək istəyirsiniz?</string>
+    <string name="archive_wikipedia_data">Uyğunsuz köhnə Vikipediya məlumatlarınız var. Arxivlənsin?</string>
     <string name="read_full_article">Tam məqaləni oxu (onlayn)</string>
     <string name="edit_filter_save_as_menu_item">Fərqli saxla</string>
     <string name="av_camera_focus">Kamera fokus növü</string>
@@ -1361,7 +1361,7 @@
     <string name="gpx_add_track">İz əlavə et</string>
     <string name="storage_place_description">OsmAnd-ın məlumat saxlama yeri (xəritələr, izlər və s.): %1$s.</string>
     <string name="shared_string_save_as_gpx">Yeni GPX izi olaraq saxla</string>
-    <string name="shared_string_my_tracks">İzlərim</string>
+    <string name="shared_string_my_tracks">İzlər</string>
     <string name="shared_string_currently_recording_track">Hazırkı qeyd edilən iz</string>
     <string name="track_segments">İz seqmentləri</string>
     <string name="track_points">İz nöqtələri</string>
@@ -1419,9 +1419,9 @@
     <string name="keep_and_add_destination_point">Sonrakı təyinat nöqtəsi kimi əlavə et</string>
     <string name="route_info">Marşrut məlumatı</string>
     <string name="routing_attr_prefer_motorway_name">Avtomagistralları üstün tut</string>
-    <string name="routing_attr_prefer_motorway_description">Avtomagistralları üstün tut.</string>
+    <string name="routing_attr_prefer_motorway_description">Avtomagistralları üstün tut</string>
     <string name="routing_attr_avoid_stairs_name">Pilləkənlərdən yayın</string>
-    <string name="routing_attr_avoid_stairs_description">Pilləkənlərdən yayın.</string>
+    <string name="routing_attr_avoid_stairs_description">Pilləkənlərdən yayın</string>
     <string name="routing_attr_avoid_borders_name">Sərhəd keçidlərindən yayın</string>
     <string name="routing_attr_avoid_borders_description">Başqa ölkə ilə sərhəd kəsişmələrindən yayın.</string>
     <string name="routing_attr_weight_description">Marşrutlarda icazə veriləcək nəqliyyat vasitəsinin çəkisini təyin edin.</string>
@@ -1582,8 +1582,8 @@
     <string name="shared_string_add_to_map_markers">Xəritə işarələrinə əlavə et</string>
     <string name="select_map_markers">Xəritə işarələri seç</string>
     <string name="show_map_markers_description">Xəritə işarələri xüsusiyyətini aktivləşdir.</string>
-    <string name="clear_active_markers_q">Bütün aktiv işarələri silmək istəyirsiniz?</string>
-    <string name="clear_markers_history_q">Xəritə işarələri tarixçəsini təmizləmək istəyirsiniz?</string>
+    <string name="clear_active_markers_q">Bütün aktiv işarələr silinsin?</string>
+    <string name="clear_markers_history_q">Xəritə işarələri tarixçəsi təmizlənsin?</string>
     <string name="active_markers">Aktiv işarələr</string>
     <string name="map_markers">Xəritə işarələri</string>
     <string name="map_marker">Xəritə işarəsi</string>
@@ -1769,7 +1769,7 @@
     <string name="go_to_next_field">Növbəti sahə</string>
     <string name="rename_marker">İşarəni yenidən adlandır</string>
     <string name="import_as_gpx">GPX fayl kimi idxal et</string>
-    <string name="import_as_favorites">Favoritlər kimi idxal et</string>
+    <string name="import_as_favorites">Favorit kimi idxal et</string>
     <string name="import_file">Fayl idxal et</string>
 	<string name="wrong_input">Yanlış daxiletmə</string>
 	<string name="waypoints_added_to_map_markers">Yol nöqtələri xəritə işarələrinə əlavə edildi</string>
@@ -1937,7 +1937,7 @@
     <string name="subsequent_dest_description">Təyinat nöqtəsini yuxarı daşı və təyinat nöqtəsi yarat</string>
     <string name="empty_state_av_notes">Qeydlər yaradın!</string>
     <string name="empty_state_av_notes_desc">Widget və ya kontekst menyusunu istifadə edərək xəritədəki hər nöqtəyə səs, video və ya şəkil qeydi əlavə edin.</string>
-    <string name="import_gpx_file_description">favoritlər kimi və ya iz faylı kimi idxal edilə bilər.</string>
+    <string name="import_gpx_file_description">favorit və ya iz faylı kimi idxal edilə bilər.</string>
     <string name="plan_route_no_markers_toast">Bu funksiyanı istifadə etmək üçün ən azı bir işarə əlavə etməlisiniz.</string>
     <string name="osn_modify_dialog_error">İstisna hal baş verdi: Qeyd dəyişdirilmədi</string>
     <string name="map_orientation_change_in_accordance_with_speed_descr">Xəritə istiqamətinin “Hərəkət istiqaməti”ndən “Kompas istiqaməti”nə keçmə sürətini seçin.</string>
@@ -1947,7 +1947,7 @@
     <string name="add_point_after">Sonrasına nöqtə əlavə et</string>
     <string name="improve_coverage_mapillary">Mapillary ilə şəkil əhatə dairəni yaxşılaşdır</string>
     <string name="mapillary_widget">Mapillary widget-i</string>
-    <string name="install_selected_build">{1} tarixli OsmAnd - {0} quraşdırmaq istəyirsiniz ({2} MB) ?</string>
+    <string name="install_selected_build">{1} tarixli OsmAnd - {0} quraşdırılsın ({2} MB) ?</string>
     <string name="navigate_point_olc">Açıq məkan kodu (OLC)</string>
     <string name="navigate_point_olc_info_invalid">Yanlış OLC
 \n</string>
@@ -2023,7 +2023,7 @@
     <string name="native_app_allocated_memory_descr">Proqram tərəfindən ayrılan ümumi yaddaş %1$s MB (Dalvik %2$s MB, digər %3$s MB). Proporsional yaddaş %4$s MB (Android limiti %5$s MB, Dalvik %6$s MB).</string>
     <string name="native_app_allocated_memory">Ümumi yerli yaddaş</string>
     <string name="transport_nearby_routes_within">Yaxında marşrutlar</string>
-    <string name="transport_nearby_routes">YAXIN</string>
+    <string name="transport_nearby_routes">Yaxın</string>
     <string name="east_abbreviation">Ş</string>
 	<string name="west_abbreviation">Q</string>
 	<string name="south_abbreviation">C</string>
@@ -2110,7 +2110,7 @@
     <string name="waypoints_removed_from_map_markers">Yol nöqtələri xəritə işarələrindən silindi</string>
     <string name="nothing_found_in_radius">Bu radiusda heç nə tapılmadı:</string>
     <string name="shared_string_total">Cəmi</string>
-    <string name="wikivoyage_search_hint">Axtar: ölkə, şəhər, əyalət</string>
+    <string name="wikivoyage_search_hint">Axtar: Ölkə, şəhər, əyalət</string>
     <string name="shared_string_read">Oxu</string>
     <string name="saved_articles">Saxlanan məqalələr</string>
     <string name="shared_string_only_with_wifi">Yalnız Wi-Fi ilə</string>
