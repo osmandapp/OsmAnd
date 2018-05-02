@@ -57,6 +57,10 @@ public class WikipediaDialogFragment extends BaseOsmAndDialogFragment {
 			"</head>";
 	private static final String FOOTER_INNER = "</body></html>";
 
+	private static final int MENU_ITEM_NO_ID = 0;
+	private static final int MENU_ITEM_SHOW_ID = 1;
+	private static final int MENU_ITEM_WIFI_ID = 2;
+
 	private WebView contentWebView;
 	private TextView articleToolbarText;
 	private TextView readFullArticleButton;
@@ -327,39 +331,35 @@ public class WikipediaDialogFragment extends BaseOsmAndDialogFragment {
 		toolbar.setNavigationIcon(getIcon(R.drawable.ic_arrow_back, R.color.icon_color));
 		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
 		Menu menu = toolbar.getMenu();
-		MenuItem itemShow = menu.add(R.string.shared_string_show);
-		itemShow.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+
+		MenuItem.OnMenuItemClickListener itemClickListener = new MenuItem.OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
 				OsmandApplication app = getMyApplication();
 				if (app != null) {
-					app.getSettings().WIKIVOYAGE_SHOW_IMAGES.set(OsmandSettings.WikivoyageShowImages.ON);
+					int itemId = item.getItemId();
+					if (itemId == MENU_ITEM_SHOW_ID) {
+						app.getSettings().WIKIVOYAGE_SHOW_IMAGES.set(OsmandSettings.WikivoyageShowImages.ON);
+						return true;
+					} else if (itemId == MENU_ITEM_WIFI_ID) {
+						app.getSettings().WIKIVOYAGE_SHOW_IMAGES.set(OsmandSettings.WikivoyageShowImages.WIFI);
+						return true;
+					} else if (itemId == MENU_ITEM_NO_ID) {
+						app.getSettings().WIKIVOYAGE_SHOW_IMAGES.set(OsmandSettings.WikivoyageShowImages.OFF);
+						return true;
+					}
 				}
-				return true;
+				return false;
 			}
-		});
-		MenuItem itemWifi = menu.add(R.string.shared_string_only_with_wifi);
-		itemWifi.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-			@Override
-			public boolean onMenuItemClick(MenuItem item) {
-				OsmandApplication app = getMyApplication();
-				if (app != null) {
-					app.getSettings().WIKIVOYAGE_SHOW_IMAGES.set(OsmandSettings.WikivoyageShowImages.WIFI);
-				}
-				return true;
-			}
-		});
-		MenuItem itemNo = menu.add(R.string.shared_string_dont);
-		itemNo.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-			@Override
-			public boolean onMenuItemClick(MenuItem item) {
-				OsmandApplication app = getMyApplication();
-				if (app != null) {
-					app.getSettings().WIKIVOYAGE_SHOW_IMAGES.set(OsmandSettings.WikivoyageShowImages.OFF);
-				}
-				return true;
-			}
-		});
+		};
+
+		MenuItem itemShow = menu.add(0,MENU_ITEM_SHOW_ID,0,R.string.shared_string_show);
+		itemShow.setOnMenuItemClickListener(itemClickListener);
+		MenuItem itemWifi = menu.add(0,MENU_ITEM_WIFI_ID,0,R.string.shared_string_only_with_wifi);
+		itemWifi.setOnMenuItemClickListener(itemClickListener);
+		MenuItem itemNo = menu.add(0,MENU_ITEM_NO_ID,0,R.string.shared_string_dont);
+		itemNo.setOnMenuItemClickListener(itemClickListener);
+
 		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {

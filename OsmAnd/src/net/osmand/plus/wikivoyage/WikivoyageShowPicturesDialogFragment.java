@@ -59,7 +59,7 @@ public class WikivoyageShowPicturesDialogFragment extends BottomSheetDialogFragm
 				}
 			});
 		} else {
-			buttonDownload.setText(R.string.shared_string_do);
+			buttonDownload.setText(R.string.shared_string_show);
 			buttonDownload.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
