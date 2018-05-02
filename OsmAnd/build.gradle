@@ -97,6 +97,9 @@ android {
 			res.srcDirs = ["res"]
 			assets.srcDirs = ["assets"]
 		}
+		debug {
+			manifest.srcFile "AndroidManifest-debug.xml"
+		}
 		free {
 			manifest.srcFile "AndroidManifest-free.xml"
 		}
