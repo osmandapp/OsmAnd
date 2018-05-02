@@ -114,7 +114,7 @@
 	
 	<string name="offline_navigation_not_available">ניווט בלתי מקוון ב־OsmAnd אינו זמין נכון לעכשיו.</string>
 	<string name="left_side_navigation">כיוון תנועה שמאלי</string>
-	<string name="left_side_navigation_descr">יש לבחור עבור מדינות בהן נוהגים משמאל (לא תקף לישראל).</string>
+	<string name="left_side_navigation_descr">מדינות בהן נוהגים בצד השמאלי של הדרך (לא תקף לישראל).</string>
 	
 	<string name="unknown_from_location">נקודת ההתחלה לא נקבעה עדיין</string>
 	<string name="unknown_location">המיקום עדיין לא ידוע</string>
@@ -347,7 +347,7 @@
 	
 	<string name="user_password">הססמה שלך ב־OSM</string>
 	<string name="osmand_service">מצב רקע</string>
-	<string name="osmand_service_descr">OsmAnd נשאר פעיל ברקע בזמן שהמסך כבוי.</string>
+	<string name="osmand_service_descr">OsmAnd פועל ברקע בזמן שהמסך כבוי.</string>
 	
 	
 	
@@ -482,7 +482,7 @@
 	<string name="voice_stream_voice_call">שמע שיחה (גם כדי להפריע לרמקולי ה־BT של האוטו)</string>
 	<string name="voice_stream_notification">שמע להתרעה</string>
 	<string name="voice_stream_music">שמע למוזיקה/מדיה</string>
-	<string name="warning_tile_layer_not_downloadable">ליישומון אין אפשרות להוריד את שכבת המפה %1$s, נא לנסות להתקין אותו מחדש.</string>
+	<string name="warning_tile_layer_not_downloadable">ליישומון אין אפשרות להוריד את שכבת המפה %1$s, התקנה מחדש עשויה לסייע.</string>
 	<string name="overlay_transparency_descr">שינוי שקיפות שכבת העל.</string>
 	<string name="overlay_transparency">שקיפות שכבת העל</string>
 	<string name="map_transparency_descr">שינוי שקיפות מפת הבסיס.</string>
@@ -504,11 +504,11 @@
 	
 	
 	
-	<string name="create_poi_link_to_osm_doc">סיווג מפה לפי <u>OSM מקוון</u> עם תמונות.</string><string name="error_doing_search">שגיאה בחיפוש הבלתי מקוון.</string>
+	<string name="create_poi_link_to_osm_doc">סיווג מפה לפי <u>OSM מקוון</u> עם תמונות.</string><string name="error_doing_search">לא ניתן לחפש באופן בלתי מקוון.</string>
 	<string name="search_offline_geo_error">לא ניתן לנתח את הפריט הגאוגרפי ‚%s’.</string>
-	<string name="search_osm_offline">חיפוש כתובת באמצעות המפה הבלתי מקוונת</string>
+	<string name="search_osm_offline">חיפוש לפי מיקום גאוגרפי</string>
 	<string name="system_locale">מערכת</string>
-	<string name="preferred_locale_descr">נא לבחור את שפת התצוגה (יש להפעיל את OsmAnd מחדש לאחר השינוי).</string>
+	<string name="preferred_locale_descr">נא לבחור את שפת התצוגה (תחול לאחר הפעלה מחדש של OsmAnd).</string>
 	<string name="preferred_locale">שפת התצוגה</string>
 	
 	
@@ -524,7 +524,7 @@
 	
 	<string name="shared_string_next">הבא</string>
 	<string name="shared_string_previous">הקודם</string>
-	<string name="unit_of_length_descr">שינוי יחידות האורך.</string>
+	<string name="unit_of_length_descr">שינוי היחידות שבהן מודדים מרחק.</string>
 	<string name="unit_of_length">יחידות אורך</string>
 	<string name="si_mi_feet">מיילים/רגל</string>
 	<string name="si_mi_yard">מיילים/יארדים</string>
@@ -620,10 +620,10 @@
 	<string name="maps_could_not_be_downloaded">לא ניתן להוריד מפה זאת</string>
 	<string name="continuous_rendering">עיבוד תמונה רציף</string>
 	<string name="continuous_rendering_descr">הצגת עיבוד תמונה רציף במקום תמונה אחת בכל פעם.</string>
-	<string name="rendering_exception">אירעה שגיאה בעת עיבוד האיזור הנבחר</string>
+	<string name="rendering_exception">לא ניתן לצייר את השטח הנבחר</string>
 	<string name="show_point_options">שימוש במיקום…</string>
 	<string name="renderer_load_sucess">תכונת העיבוד נטענה</string>
-	<string name="renderer_load_exception">אירעה חריגה: תכונת העיבוד לא נטענה</string>
+	<string name="renderer_load_exception">לא ניתן לטעון את מנגנון העיבוד</string>
 	<string name="renderers">תכונת עיבוד וקטורים</string>
 	<string name="renderers_descr">נא לבחור את הופעת תכונת העיבוד.</string>
 	<string name="poi_context_menu_website">הצגת אתר הנ״ע</string>
@@ -645,7 +645,7 @@
 	
 	<string name="gpx_files_not_found">לא נמצאו קובצי GPX בתיקיית המסלולים</string>
 	<string name="layer_gpx_layer">דרך ה־GPX…</string>
-	<string name="error_reading_gpx">שגיאה בקריאת נתוני ה־GPX</string>
+	<string name="error_reading_gpx">לא ניתן לקרוא את נתוני ה־GPX</string>
 	<string name="vector_data">מפות וקטוריות בלתי מקוונות</string>
 	<string name="transport_context_menu">חיפוש תחבורה בתחנה</string>
 	
@@ -664,9 +664,9 @@
 	<string name="no_fav_to_save">אין נקודות מועדפות לשמירה</string>
 	<string name="shared_string_import">יבוא</string>
 	
-	<string name="error_occurred_loading_gpx">אירעה שגיאה במהלך טעינת ה־GPX</string>
+	<string name="error_occurred_loading_gpx">לא ניתן לטעון את ה־GPX</string>
 	<string name="send_report">שליחת דיווח</string>
-	<string name="none_region_found">לא נמצאו נתונים בלתי מקוונים לאזורים בכרטיס הזיכרון. יש להוריד אזורים מהאינטרנט.</string>
+	<string name="none_region_found">לא ניתן למצוא מפות שהתקבלו בכרטיס הזיכרון.</string>
 	<string name="poi_namefinder_query_empty">יש להקליד כדי למצוא נ״ע</string>
 	<string name="any_poi">כלשהי</string>
 	
@@ -699,7 +699,7 @@
 	<string name="menu_layers">הגדרת תצוגה</string>
 	<string name="context_menu_item_search_poi">חיפוש נ״ע</string>
 	
-	<string name="use_trackball_descr">יש להשתמש בכדור מעקב כדי להזיז את המפה.</string>
+	<string name="use_trackball_descr">יש להשתמש בהתקן עם כדור מעקב כדי להזיז את המפה.</string>
 	<string name="where_am_i">איפה אני?</string>
 	<string name="update_poi_success">נתוני הנ״ע עודכנו ({0} נטענו)</string>
 	<string name="use_trackball">שימוש בכדור המעקב</string>
@@ -710,16 +710,16 @@
 	<string name="int_min">דקות</string>
 	<string name="background_service_int_descr">הגדרת הפסקות שינה שמשמשות את שירות מצב הרקע.</string>
 	<string name="background_service_int">הפרשי התעוררות GPS</string>
-	<string name="update_poi_error_local">אירעה שגיאה בעת עדכון רשימת הנ״ע המקומית</string>
-	<string name="update_poi_error_loading">אירעה שגיאה בעת טעינת הנתונים מהשרת</string>
+	<string name="update_poi_error_local">לא ניתן לעדכן את רשימת הנ״ע המקומית</string>
+	<string name="update_poi_error_loading">לא ניתן לטעון נתונים מהשרת</string>
 	<string name="update_poi_no_offline_poi_index">לא נמצאו נתוני נ״ע בלתי מקוונים עבור אזור זה</string>
-	<string name="update_poi_is_not_available_for_zoom">עדכון נ״ע אינו זמין עבור רמות תקריב קטנות</string>
+	<string name="update_poi_is_not_available_for_zoom">התקרבות למפה מאפשר עדכון נקודות עניין</string>
 	<string name="context_menu_item_update_poi">עדכון נ״ע</string>
 	<string name="context_menu_item_update_map_confirm">לעדכן את הנתונים המקומיים שלך מהאינטרנט?</string>
 	<string name="search_history_city">עיר:\n {0}</string>
-	<string name="background_service_provider_descr">נא לבחור את ספק המיקום שמשמש להפעלה במצב רקע.</string>
+	<string name="background_service_provider_descr">נא לבחור שיטת מיקום בה נעשה שימוש על ידי שירות הרקע.</string>
 	<string name="background_service_provider">ספק מיקום</string>
-	<string name="background_router_service_descr">הפעלת OsmAnd ברקע כדי לעקוב אחר המיקום שלך כשהמסך כבוי.</string>
+	<string name="background_router_service_descr">מעקב אחר המיקום שלך כשהמסך כבוי.</string>
 	<string name="background_router_service">הפעלת OsmAnd ברקע</string>
 	<string name="off_router_service_no_gps_available">שירות הניווט ברקע דורש הפעלה של ספק מיקום.</string>
 	<string name="hide_poi_filter">הסתרת מסנן</string>
@@ -735,8 +735,8 @@
 	<string name="voice_data_unavailable">נתוני הקול שצוינו אינם זמינים</string>
 	<string name="sd_unmounted">כרטיס הזיכרון אינו נגיש.
 \nלא תהיה לך אפשרות לצפות במפות או לחפש דברים.</string>
-	<string name="sd_mounted_ro">כרטיס הזיכרון שלך הוא לקריאה בלבד.
-\nניתן לצפות אך ורק במפות שנטענו מראש ולא ניתן להוריד מהאינטרנט.</string>
+	<string name="sd_mounted_ro">כרטיס הזיכרון הוא לקריאה בלבד. 
+\nמעכשיו ניתן לצפות במפות שנטענו מראש בלבד, מבלי לטעון אזורים חדשים.</string>
 	<string name="unzipping_file">הקובץ נפרס…</string>
 	<string name="route_tr">לפנות ימינה ולהמשיך</string>
 	<string name="route_tshr">לפנות ימינה בחדות ולהמשיך</string>
@@ -748,7 +748,7 @@
 	<string name="route_head">לפניך</string>
 	<string name="first_time_continue">בהמשך</string>
 	<string name="first_time_download">הורדת אזורים</string>
-	<string name="search_poi_location">מתבצע חיפוש אחר אות…</string>
+	<string name="search_poi_location">בהמתנה לאות…</string>
 	<string name="search_near_map">חיפוש ליד מרכז המפה הנוכחי</string>
 	<string name="search_nearby">חיפוש בסביבה</string>
 	<string name="map_orientation_default">כמו ההתקן</string>
@@ -756,7 +756,7 @@
 	<string name="map_orientation_landscape">לרוחב</string>
 	<string name="map_screen_orientation">כיוון המסך</string>
 	<string name="map_screen_orientation_descr">לאורך, לרוחב או לפי ההתקן.</string>
-	<string name="opening_hours_not_supported">אין תמיכה בעריכת תבנית שעות הפתיחה</string>
+	<string name="opening_hours_not_supported">לא ניתן לשנות את תבנית שעות הפתיחה</string>
 	<string name="search_history_int_streets">צומת: {0} x {1} ב־{2}</string>
 	<string name="search_history_building">בניין: {0}, {1}, {2}</string>
 	<string name="favorite">מועדף</string>
@@ -785,7 +785,7 @@
 	
 	
 	<string name="downloading_list_indexes">רשימת האזורים הזמינה מתקבלת…</string>
-	<string name="list_index_files_was_not_loaded">רשימת האזורים לא התקבלה מ־https://osmand.net.</string>
+	<string name="list_index_files_was_not_loaded">לא ניתן לקבל רשימת אזורים מ־https://osmand.net.</string>
 	
 	<string name="fav_points_edited">הנקודה המועדפת נערכה</string>
 	<string name="fav_points_not_exist">לא קיימות נקודות מועדפות</string>
@@ -798,7 +798,7 @@
 	<string name="opening_hours">שעות הפתיחה</string>
 	<string name="background_service_wait_int">זמן ההמתנה המרבי לתיקון</string>
 	
-	<string name="background_service_wait_int_descr">הגדרת זמן ההמתנה המרבי לכל תיקון במיקום ברקע.</string>
+	<string name="background_service_wait_int_descr">הגדרת זמן ההמתנה המרבי המורשה לכל תיקון במיקום ברקע.</string>
 	<string name="opening_changeset">ערכת השינויים נפתחת…</string>
 	<string name="closing_changeset">ערכת השינויים נסגרת…</string>
 	<string name="commiting_node">המפרק נשלח…</string>
@@ -812,10 +812,10 @@
 	<string name="loading_cities">הערים נטענות…</string>
 	
 	<string name="poi">נ״ע</string>
-	<string name="error_occurred_saving_gpx">אירעה שגיאה בעת שמירת ה־GPX</string>
-	<string name="error_calculating_route">חישוב המסלול נכשל</string>
-	<string name="error_calculating_route_occured">אירעה שגיאה בעת חישוב המסלול</string>
-	<string name="empty_route_calculated">שגיאה: המסלול שחושב ריק</string>					
+	<string name="error_occurred_saving_gpx">לא ניתן לשמור מסלול GPX</string>
+	<string name="error_calculating_route">לא ניתן לחשב מסלול</string>
+	<string name="error_calculating_route_occured">לא ניתן לחשב מסלול</string>
+	<string name="empty_route_calculated">המסלול שחושב ריק</string>					
 	<string name="new_route_calculated_dist">המסלול החדש חושב, מרחק</string>
 	<string name="arrived_at_destination">הגעת ליעדך</string>
 	<string name="invalid_locations">נקודות ציון שגויות</string>
@@ -950,7 +950,7 @@
 	<string name="poi_action_add">הוספה</string>
 	<string name="poi_action_change">שינוי</string>
 	<string name="poi_action_succeded_template">הפעולה {0} הושלמה.</string>
-	<string name="poi_error_unexpected_template">אירעה שגיאה בלתי צפויה בעת ביצוע הפעולה {0}.</string>
+	<string name="poi_error_unexpected_template">לא ניתן לבצע פעולה {0}.</string>
 	<string name="poi_error_io_error_template">אירעה שגיאת קלט/פלט בעת ביצוע הפעולה {0}.</string>
 	<string name="poi_error_info_not_loaded">המידע על המפרק לא נטען</string>
 	<string name="poi_dialog_opening_hours">פתיחה</string>
@@ -1908,7 +1908,7 @@
     <string name="quick_action_add_create_items">יצירת פריטים</string>
     <string name="quick_action_add_configure_map">הגדרת מפה</string>
     <string name="quick_action_add_navigation">ניווט</string>
-    <string name="quick_action_fav_name_descr">יש להשאיר ריק כדי להשתמש בכתובת או בשם המקום אוטומטית.</string>
+    <string name="quick_action_fav_name_descr">יש להשאיר ריק כדי להשתמש בכתובת או בשם המקום.</string>
     <string name="quick_action_bug_descr">הודעה זו מתווספת לשדה ההערה.</string>
     <string name="quick_action_bug_message">הודעה</string>
     <string name="quick_action_category_descr">נא לבחור את הקטגוריה בה יישמר המועדף.</string>
@@ -1917,7 +1917,7 @@
     <string name="quick_action_sh_poi_descr">ניתן להוסיף קטגוריה אחת או יותר של נקודות עניין להצגה במפה.</string>
     <string name="quick_action_page_list_descr">נגיעה בכפתור הפעולה מובילה לסריקת הרשימה שלהלן.</string>
     <string name="quick_action_map_style_action">הוספת סגנון מפה</string>
-    <string name="quick_action_empty_param_error">פרמטרים לא אמורים להיות ריקים</string>
+    <string name="quick_action_empty_param_error">מילוי כל המשתנים</string>
     <string name="quick_action_map_styles">סגנונות מפה</string>
     <string name="quick_action_map_overlay">החלפת שכבה מעל למפה</string>
     <string name="quick_action_map_overlay_title">שכבות מעל למפה</string>
@@ -1946,7 +1946,7 @@
     <string name="empty_state_my_tracks">הוספה והקלטה של מסלולים</string>
     <string name="empty_state_my_tracks_desc">יש להקליט או לייבא מסלולים כדי לצפות.</string>
     <string name="empty_state_favourites">הוספת מועדפים</string>
-    <string name="empty_state_favourites_desc">הוספת מועדפים במפה או ייבוא שלהם מקובץ.</string>
+    <string name="empty_state_favourites_desc">ייבוא או סימון מועדפים על המפה.</string>
     <string name="import_track">ייבוא מסלול</string>
     <string name="import_track_desc">הקובץ %1$s אינו מכיל נקודות דרך, לייבא אותו כמסלול?</string>
     <string name="move_point">הזזת נקודה</string>
@@ -2657,7 +2657,7 @@
     <string name="will_open_tomorrow_at">פתיחה מחר ב־</string>
     <string name="rendering_attr_hidePOILabels_name">תוויות נ״ע</string>
     <string name="copy_location_name">העתקת שם נקודה/נ״ע</string>
-    <string name="toast_empty_name_error">למיקום אין שם</string>
+    <string name="toast_empty_name_error">מיקום ללא שם</string>
 <string name="enter_the_file_name">נא להזין את שם הקובץ.</string>
     <string name="map_import_error">שגיאת ייבוא למפה</string>
     <string name="map_imported_successfully">המפה יובאה</string>
@@ -2995,7 +2995,7 @@
     <string name="download_wikipedia_description">ניתן להוריד את הערכים בוויקיפדיה על %1$s כדי לקרוא אותם ללא חיבור לאינטרנט.</string>
     <string name="download_wikipedia_label">הורדת נתונים מוויקיפדיה</string>
     <string name="open_in_browser_wiki">פתיחת ערך באופן מקוון</string>
-    <string name="open_in_browser_wiki_description">הצגת הערך הזה בדפדפן.</string>
+    <string name="open_in_browser_wiki_description">הצגת ערך בדפדפן.</string>
     <string name="download_wiki_region_placeholder">אזור זה</string>
     <string name="wiki_article_search_text">מתבצע חיפוש אחר ערך הוויקי הנדרש</string>
     <string name="wiki_article_not_found">הערך לא נמצא</string>
@@ -3044,19 +3044,19 @@
 \n • ניווט GPS במצב הליכה בונה את המסלול שלך באמצעות שבילי הליכה 
 \n • העלאה ומעקב אחר מסלולי GPX או הקלטה ושיתוף מסלולים משלך 
 \n</string>
-    <string name="osmand_extended_description_part8">OsmAnd הוא יישומון בקוד פתוח שנמצא בהליכי פיתוח פעילים. כולם יכולים לתרום ליישומון על ידי דיווח על באגים, שיפור התרגומים או פיתוח תכונות חדשות. המיזם נמצא במצב שוקק חיים עם שיפורים מתמידים בכל הנוגע להשקה עם המתכנתים והמשתמשים. התקדמות המיזם תלוי גם בתרומות כלכליות כדי לממן פיתוח ובדיקות של תכונות חדשות.
-\n כיסוי ואיכות משוערכים של המפות:
-\n • מערב אירופה: ****
-\n • מזרח אירופה: ***
-\n • רוסיה: ***
-\n • צפון אמריקה: ***
-\n • דרום אמריקה: **
-\n • אסיה: **
-\n • יפן וקוריאה: ***
-\n • המזרח התיכון: **
-\n • אפריקה: **
-\n • אנטארקטיקה: *
-\n רוב המדינות מסביב לעולם זמינות להורדה!
+    <string name="osmand_extended_description_part8">OsmAnd הוא יישומון בהליכי פיתוח פעילים בקוד פתוח. כולם יכולים לתרום ליישומון על ידי דיווח על באגים, שיפור התרגומים או פיתוח תכונות חדשות. בנוסף, המיזם תלוי גם בתרומות כלכליות כדי לממן פיתוח ובדיקות של תכונות חדשות. 
+\n כיסוי ואיכות משוערים של המפות: 
+\n • מערב אירופה: **** 
+\n • מזרח אירופה: *** 
+\n • רוסיה: *** 
+\n • צפון אמריקה: *** 
+\n • דרום אמריקה: ** 
+\n • אסיה: ** 
+\n • יפן וקוריאה: *** 
+\n • המזרח התיכון: ** 
+\n • אפריקה: ** 
+\n • אנטארקטיקה: * 
+\n רוב המדינות מסביב לעולם זמינות להורדה! 
 \n ניתן לקבל נווט אמין למדינה שלך - בין אם זו ישראל, צרפת, גרמניה, מקסיקו, אנגליה, ספרד, הולנד, ארה״ב, רוסיה, ברזיל או כל מדינה אחרת.</string>
     <string name="release_2_4">\\022 חיפוש טקסט חופשי חדש ועצמתי במיוחד
 \n
