@@ -121,7 +121,7 @@ public class WikipediaDialogFragment extends BaseOsmAndDialogFragment {
 		readFullArticleButton = (TextView) mainView.findViewById(R.id.read_full_article);
 		readFullArticleButton.setBackgroundResource(darkMode ? R.drawable.bt_round_long_night : R.drawable.bt_round_long_day);
 		readFullArticleButton.setTextColor(buttonColorStateList);
-		readFullArticleButton.setCompoundDrawablesWithIntrinsicBounds(getActiveIcon(R.drawable.ic_world_globe_dark), null, null, null);
+		readFullArticleButton.setCompoundDrawablesWithIntrinsicBounds(getIcon(R.drawable.ic_world_globe_dark), null, null, null);
 		readFullArticleButton.setCompoundDrawablePadding((int) getResources().getDimension(R.dimen.content_padding_small));
 		int paddingLeft = (int) getResources().getDimension(R.dimen.wikipedia_button_left_padding);
 		int paddingRight = (int) getResources().getDimension(R.dimen.dialog_content_margin);
@@ -268,6 +268,11 @@ public class WikipediaDialogFragment extends BaseOsmAndDialogFragment {
 			});
 		}
 		optionsMenu.show();
+	}
+
+	private Drawable getIcon(int resId) {
+		int colorId = darkMode ? R.color.ctx_menu_controller_button_text_color_dark_n : R.color.ctx_menu_controller_button_text_color_light_n;
+		return getIcon(resId, colorId);
 	}
 
 	private Drawable getActiveIcon(int resId) {
