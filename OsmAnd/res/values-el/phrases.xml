@@ -637,4 +637,17 @@
 	<string name="poi_financial">Γραφείο οικονομικών</string>
 	<string name="poi_political_party">Γραφείο πολιτικού κόμματος</string>
 	<string name="poi_notary">Συμβολαιογράφος</string>
+	<string name="poi_foundation">Ίδρυμα</string>
+	<string name="poi_tax_advisor">Φοροτεχνικό γραφείο</string>
+
+	<string name="poi_stadium">Στάδιο</string>
+	<string name="poi_sports_centre">Αθλητικό κέντρο</string>
+	<string name="poi_golf_course">Γήπεδο γκολφ</string>
+	<string name="poi_ice_rink">Παγοδρόμιο</string>
+	<string name="poi_pitch">Γήπεδο</string>
+	<string name="poi_leisure_track">Αθλητικός στίβος</string>
+	<string name="poi_running_track">Στίβος δρόμου</string>
+	<string name="poi_horse_track">Ιππόδρομος</string>
+	<string name="poi_raceway">Πίστα αγώνων αυτοκινήτου</string>
+	<string name="poi_archery">Τοξοβολία</string>
 	</resources>

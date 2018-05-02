@@ -3001,4 +3001,6 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="wiki_article_not_found">Grein fannst ekki</string>
     <string name="how_to_open_wiki_title">Hvernig á að opna Wikipedia-greinar?</string>
 <string name="osmand_team">OsmAnd-teymið</string>
+    <string name="maps_you_need_descr">Þú last greinar: %1$s. Miðað við það, stingum við upp á að þú sækir þessi landakort:</string>
+    <string name="maps_you_need">Kort sem þú þarft</string>
     </resources>
