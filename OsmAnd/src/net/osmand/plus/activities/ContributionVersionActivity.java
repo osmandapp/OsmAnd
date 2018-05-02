@@ -110,6 +110,7 @@ public class ContributionVersionActivity extends OsmandListActivity {
 		} else if(operationId == INSTALL_BUILD){
 			if(currentSelectedBuild != null){
 				Intent intent = new Intent(Intent.ACTION_VIEW);
+				intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION); 
 	            intent.setDataAndType(Uri.fromFile(pathToDownload), "application/vnd.android.package-archive");
 	            startActivityForResult(intent, ACTIVITY_TO_INSTALL);
 	            updateInstalledApp(false, currentSelectedBuild.date);
