@@ -416,7 +416,7 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 				if (aggregatedPartOfArrayOrig.length > 0) {
 					for (int i = 0; i <  aggregatedPartOfArrayOrig.length ; i++) {
 						if (i > 0) {
-					    		sb.append(" • ").append(aggregatedPartOfArrayOrig[i]);
+					    		sb.append("  •  ").append(aggregatedPartOfArrayOrig[i]);
 						} else {
 						   if (!TextUtils.isEmpty(current)) {
 							sb.append("<span class=\"nav-bar-current\">").append(current).append("</span>");

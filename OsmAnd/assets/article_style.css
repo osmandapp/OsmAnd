@@ -48,7 +48,11 @@ body {
 
 .content {
     display: none;
-    /* overflow: hidden; */
+    overflow: hidden;
+    /*
+    padding-left: 7%;
+    padding-right: 7%;
+    */
 }
 
 .nightmode {
@@ -62,8 +66,8 @@ body {
     background-color: var(--topbar-bg-color-day);
     padding-left: 16px;
     padding-right: 16px;
-    padding-top: 8px;
-    padding-bottom: 8px;
+    padding-top: 12px;
+    padding-bottom: 12px;
     font-size: var(--main-text-font-size);
     font-weight: normal;
     line-height: var(--main-text-line-height);
@@ -86,8 +90,8 @@ body {
     word-wrap: break-word;
     padding-left: 16px;
     padding-right: 16px;
-    padding-top: 8px;
-    padding-bottom: 8px;
+    padding-top: 12px;
+    padding-bottom: 12px;
     font-weight: normal;
     line-height: var(--main-text-line-height);
 }
