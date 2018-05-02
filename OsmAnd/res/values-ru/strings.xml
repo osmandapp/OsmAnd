@@ -2987,7 +2987,7 @@
     <string name="travel_guide">"Путеводитель "</string>
     <string name="travel_guide_description">Просматривайте путеводители Викигида по самым интересным местам на планете внутри OsmAnd без подключения к интернету.</string>
     <string name="travel_card_update_descr">Мы подготовили обновления и исправления в данных Викигида, обновите файл, чтобы увидеть их.</string>
-	<string name="travel_card_download_descr">Скачайте этот файл путеводителей Викигида для просмотра статей о местах по всему миру без подключения к Интернету.</string>
+	<string name="travel_card_download_descr">Скачайте эти путеводители Викигида для просмотра статей о местах по всему миру без подключения к Интернету.</string>
 	<string name="update_is_available">Доступно обновление</string>
 	<string name="download_file">Скачать файл</string>
     <string name="start_editing_card_image_text">Свободный всемирный путеводитель, который может редактировать каждый.</string>
@@ -3009,4 +3009,6 @@
     <string name="paid_app">Платное приложение</string>
     <string name="paid_plugin">Платный плагин</string>
     <string name="osmand_team">Команда OsmAnd</string>
+    <string name="maps_you_need_descr">Вы читали статьи: %1$s. Исходя из этого, мы рекомендуем вам скачать эти карты:</string>
+    <string name="maps_you_need">Нужные вам карты</string>
     </resources>

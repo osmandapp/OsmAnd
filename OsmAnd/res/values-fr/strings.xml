@@ -1683,7 +1683,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="routing_attr_no_new_routing_name">Ne pas utiliser le calcul d\'itinéraire de la version 1.9</string>
     <string name="speak_pedestrian">Passages piétons</string>
 
-    <string name="avoid_roads_msg">Vous pouvez générer un itinéraire alternatif en sélectionnant les routes à éviter</string>
+    <string name="avoid_roads_msg">Générez un itinéraire alternatif en sélectionnant les routes à éviter</string>
     <string name="navigation_over_track">Démarrer la navigation en suivant cette trace ?</string>
     <string name="save_track_to_gpx_globally_headline">Enregistrement de traces à la demande</string>
 
@@ -2206,7 +2206,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="shared_string_widgets">Widgets</string>
     <string name="consider_turning_polygons_off">Il est recommandé de désactiver le rendu des polygones.</string>
     <string name="upload_anonymously">Envoyer de manière anonyme</string>
-<string name="upload_osm_note_description">Vous pouvez envoyer vos Notes OSM anonymement ou avec votre compte OpenStreetMap.org.</string>
+<string name="upload_osm_note_description">Envoyez vos Notes OSM anonymement ou avec votre compte OpenStreetMap.org.</string>
     <string name="upload_osm_note">Envoyer la note OSM</string>
     <string name="download_files_error_not_enough_space">Espace insuffisant !
 Cette opération requiert temporairement {3} Mo et {1} Mo seront utilisés de manière permanente.
@@ -2802,7 +2802,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="mapillary_menu_title_tile_cache">Cache des tuiles</string>
     <string name="mapillary_menu_descr_dates">Afficher uniquement les images ajoutées</string>
     <string name="mapillary_menu_descr_username">Afficher uniquement les images ajoutées par</string>
-    <string name="mapillary_menu_filter_description">Vous pouvez filtrer les images par date ou nom d\'utilisateur, le filtre n\'est appliqué qu\'après avoir zoomé.</string>
+    <string name="mapillary_menu_filter_description">Filtrer les images par date ou nom d\'utilisateur. Le filtre n\'est appliqué qu\'après avoir zoomé.</string>
     <string name="shared_string_reset">Réinitialiser</string>
     <string name="average">Moyenne</string>
     <string name="ascent_descent">Croissant / Décroissant</string>
@@ -2855,7 +2855,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="add_point_after">Ajouter un point après</string>
     <string name="shared_string_options">Options</string>
     <string name="measurement_tool_snap_to_road_descr">OsmAnd va relier les points pour établir un itinéraire adapté au profil sélectionné.</string>
-    <string name="measurement_tool_save_as_new_track_descr">Vous pouvez enregistrer les points soit comme points de passage soit comme ligne.</string>
+    <string name="measurement_tool_save_as_new_track_descr">Enregistrez les points soit comme points de passage soit comme ligne.</string>
     <string name="choose_navigation_type">Sélectionnez le type de navigation</string>
     <string name="add_route_points">Ajouter des points à la route</string>
     <string name="add_line">Ajouter une ligne</string>
@@ -3009,11 +3009,11 @@ représentant la zone : %1$s x %2$s</string>
     <string name="track_waypoints">Points de passage</string>
     <string name="favourites_group">Catégorie de favoris</string>
     <string name="add_group">Ajouter un groupe</string>
-    <string name="add_group_descr">Vous pouvez importer des groupes depuis les favoris ou les points de passage.</string>
+    <string name="add_group_descr">Importez des groupes depuis des favoris ou des points de passage.</string>
     <string name="empty_state_markers_active">Ajoutez des marques sur la carte !</string>
     <string name="empty_state_markers_active_desc">Sélectionnez des emplacements sur la carte puis appuyez sur le drapeau de marque.</string>
     <string name="empty_state_markers_groups">Importer des groupes</string>
-    <string name="empty_state_markers_groups_desc">Vous pouvez importer des groupes de favoris ou des points de passage comme marques.</string>
+    <string name="empty_state_markers_groups_desc">Importez des groupes de favoris ou des points de passage comme marques.</string>
     <string name="empty_state_markers_history">\@string/shared_string_history</string>
     <string name="empty_state_markers_history_desc">Les marques visitées s\'afficheront sur cet écran.</string>
     <string name="shared_string_two">Deux</string>
@@ -3130,7 +3130,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="rendering_attr_whiteWaterSports_name">Sports d\'eau douce</string>
     <string name="group_deleted">Groupe supprimé</string>
     <string name="clear_all_intermediates">Effacer toutes les étapes</string>
-    <string name="select_waypoints_category_description">Vous pouvez ajouter tous les points de la trace ou sélectionner des catégories différentes.</string>
+    <string name="select_waypoints_category_description">Ajouter tous les points de la trace ou Sélectionner des catégories différentes.</string>
     <string name="shared_string_total">Total</string>
     <string name="nothing_found_in_radius">Aucun résultat :</string>
     <string name="waypoints_removed_from_map_markers">Étape retirée des marques</string>
@@ -3163,7 +3163,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="purchase_dialog_title">Sélectionnez un plan</string>
     <string name="purchase_dialog_subtitle">Sélectionnez l\'élément adapté :</string>
     <string name="purchase_dialog_travel_description">Pour lire des articles de voyage hors ligne, achetez l\'un des éléments suivants :</string>
-    <string name="travel_guide_description">Consultez les guides Wikivoyage des lieux les plus intéressants au monde depuis OsmAnd et sans connexion Internet.</string>
+    <string name="travel_guide_description">Guides des lieux les plus intéressants au monde depuis OsmAnd et sans connexion Internet.</string>
     <string name="travel_guide">Guide Wikivoyage</string>
     <string name="in_app_purchase">Achat via l\'application</string>
     <string name="in_app_purchase_desc">Paiement unique</string>
@@ -3180,12 +3180,12 @@ représentant la zone : %1$s x %2$s</string>
     <string name="monthly_map_updates">Mise à jour des cartes : <b>Tous les mois</b></string>
     <string name="daily_map_updates">Mise à jour des cartes : <b>Toutes les heures</b></string>
     <string name="in_app_purchase_desc_ex">La validité de votre achat sera permanente.</string>
-    <string name="travel_card_update_descr">Nous avons effectué des mises à jour et des corrections pour les données Wikivoyage, téléchargez le fichier pour les consulter.</string>
-	<string name="travel_card_download_descr">Télécharger ce fichier Wikivoyage pour afficher des articles sur les lieux sans connexion Internet.</string>
+    <string name="travel_card_update_descr">Mise à jour disponible, téléchargez les données Wikivoyage et profitez.</string>
+	<string name="travel_card_download_descr">Téléchargez ces guides Wikivoyage pour afficher des articles sur les lieux sans connexion Internet.</string>
 	<string name="update_is_available">Mise à jour disponible</string>
 	<string name="download_file">Télécharger le fichier</string>
     <string name="start_editing_card_image_text">Le guide de voyage mondial et gratuit que chacun peut améliorer.</string>
-    <string name="start_editing_card_description">Vous pouvez contribuer aux articles sur Wikivoyage et nous espérons que vous le ferez pour partager vos connaissances, vos expériences et votre talent</string>
+    <string name="start_editing_card_description">Vous pouvez contribuer aux articles sur Wikivoyage et ainsi partager vos connaissances, vos expériences et votre talent</string>
     <string name="start_editing">Démarrer les modifications</string>
     <string name="get_unlimited_access">Obtenir un accès illimité</string>
     <string name="welcome_to_open_beta">Bienvenue dans cette bêta ouverte !</string>
@@ -3200,7 +3200,9 @@ représentant la zone : %1$s x %2$s</string>
 <string name="paid_app">Application payante</string>
     <string name="paid_plugin">Greffon payant</string>
     <string name="popular_destinations">Destinations populaires</string>
-    <string name="welcome_to_open_beta_description">Travel est basé sur Wikivoyage. Durant la phase beta vous pouvez évaluer toutes les fonctionnalités gratuitement. En fin de période beta, Travel sera accessible aux abonnés OsmAnd ainsi qu\'aux propriétaires d\'OsmAnd+</string>
+    <string name="welcome_to_open_beta_description">Travel s’appuie sur Wikivoyage. Durant la phase bêta, évaluez toutes les fonctionnalités gratuitement. Plus tard, Travel sera accessible aux abonnés OsmAnd ainsi qu\'aux propriétaires d\'OsmAnd+</string>
     <string name="wiki_article_search_text">Recherche de l\'article Wiki</string>
     <string name="osmand_team">Équipe OsmAnd</string>
+    <string name="maps_you_need_descr">Vous avez lu les articles : %1$s, c\'est pourquoi nous vous conseillons de télécharger les cartes suivantes :</string>
+    <string name="maps_you_need">Cartes conseillées</string>
     </resources>
