@@ -3120,4 +3120,6 @@
     <string name="rendering_value_walkingRoutesOSMC_name">צבע לפי סימול הליכת שטח של OSMC</string>
     <string name="osmand_team">צוות OsmAnd</string>
     <string name="empty_state_markers_history">היסטוריה</string>
+    <string name="maps_you_need_descr">קראת את הערכים: %1$s. על סמך הערכים שקראת נוכל להציע לך להוריד את המפות:</string>
+    <string name="maps_you_need">מפות שדרושות לך</string>
     </resources>
