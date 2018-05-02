@@ -9,6 +9,8 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="maps_you_need_descr">You read articles: %1$s. Based on this, we suggest you download these maps:</string>
+    <string name="maps_you_need">Maps you need</string>
     <string name="osmand_team">OsmAnd team</string>
     <string name="popular_destinations">Popular destinations</string>
     <string name="paid_app">Paid app</string>
