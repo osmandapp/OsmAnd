@@ -103,6 +103,8 @@ public class TravelLocalDataHelper {
 			saved.aggregatedPartOf = article.aggregatedPartOf;
 			saved.imageTitle = article.imageTitle;
 			saved.content = article.getPartialContent();
+			saved.lat = article.lat;
+			saved.lon = article.lon;
 			savedArticles.add(saved);
 			dbHelper.addSavedArticle(saved);
 			notifySavedUpdated();
@@ -153,7 +155,7 @@ public class TravelLocalDataHelper {
 
 	private static class WikivoyageLocalDataDbHelper {
 
-		private static final int DB_VERSION = 3;
+		private static final int DB_VERSION = 4;
 		private static final String DB_NAME = "wikivoyage_local_data";
 
 		private static final String HISTORY_TABLE_NAME = "wikivoyage_search_history";
@@ -189,6 +191,8 @@ public class TravelLocalDataHelper {
 		private static final String BOOKMARKS_COL_IMAGE_TITLE = "image_title";
 		private static final String BOOKMARKS_COL_PARTIAL_CONTENT = "partial_content";
 		private static final String BOOKMARKS_COL_TRAVEL_BOOK = "travel_book";
+		private static final String BOOKMARKS_COL_LAT = "lat";
+		private static final String BOOKMARKS_COL_LON = "lon";
 
 		private static final String BOOKMARKS_TABLE_CREATE = "CREATE TABLE IF NOT EXISTS " +
 				BOOKMARKS_TABLE_NAME + " (" +
@@ -198,7 +202,9 @@ public class TravelLocalDataHelper {
 				BOOKMARKS_COL_IS_PART_OF + " TEXT, " +
 				BOOKMARKS_COL_IMAGE_TITLE + " TEXT, " +
 				BOOKMARKS_COL_PARTIAL_CONTENT + " TEXT, " +
-				BOOKMARKS_COL_TRAVEL_BOOK + " TEXT);";
+				BOOKMARKS_COL_TRAVEL_BOOK + " TEXT, " +
+				BOOKMARKS_COL_LAT + " double, " +
+				BOOKMARKS_COL_LON + " double);";
 
 		private static final String BOOKMARKS_TABLE_SELECT = "SELECT " +
 				BOOKMARKS_COL_CITY_ID + ", " +
@@ -206,7 +212,9 @@ public class TravelLocalDataHelper {
 				BOOKMARKS_COL_LANG + ", " +
 				BOOKMARKS_COL_IS_PART_OF + ", " +
 				BOOKMARKS_COL_IMAGE_TITLE + ", " +
-				BOOKMARKS_COL_PARTIAL_CONTENT +
+				BOOKMARKS_COL_PARTIAL_CONTENT + ", " +
+				BOOKMARKS_COL_LAT + ", " +
+				BOOKMARKS_COL_LON +
 				" FROM " + BOOKMARKS_TABLE_NAME;
 
 		private final OsmandApplication context;
@@ -252,6 +260,10 @@ public class TravelLocalDataHelper {
 					conn.execSQL("UPDATE " + HISTORY_TABLE_NAME + " SET " + HISTORY_COL_TRAVEL_BOOK + " = ?", args);
 					conn.execSQL("UPDATE " + BOOKMARKS_TABLE_NAME + " SET " + BOOKMARKS_COL_TRAVEL_BOOK + " = ?", args);
 				}
+			}
+			if (oldVersion < 4) {
+				conn.execSQL("ALTER TABLE " + BOOKMARKS_TABLE_NAME + " ADD " + BOOKMARKS_COL_LAT + " double");
+				conn.execSQL("ALTER TABLE " + BOOKMARKS_TABLE_NAME + " ADD " + BOOKMARKS_COL_LON + " double");
 			}
 		}
 
@@ -388,9 +400,10 @@ public class TravelLocalDataHelper {
 			SQLiteConnection conn = openConnection(false);
 			if (conn != null) {
 				try {
-					conn.execSQL("INSERT INTO " + BOOKMARKS_TABLE_NAME + " VALUES (?, ?, ?, ?, ?, ?, ?)",
+					conn.execSQL("INSERT INTO " + BOOKMARKS_TABLE_NAME + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
 							new Object[]{article.cityId, article.title, article.lang,
-									article.aggregatedPartOf, article.imageTitle, article.content, travelBook});
+									article.aggregatedPartOf, article.imageTitle, article.content,
+									travelBook, article.lat, article.lon});
 				} finally {
 					conn.close();
 				}
@@ -446,6 +459,8 @@ public class TravelLocalDataHelper {
 			res.aggregatedPartOf = cursor.getString(3);
 			res.imageTitle = cursor.getString(4);
 			res.content = cursor.getString(5);
+			res.lat = cursor.getDouble(6);
+			res.lon = cursor.getDouble(7);
 
 			return res;
 		}
