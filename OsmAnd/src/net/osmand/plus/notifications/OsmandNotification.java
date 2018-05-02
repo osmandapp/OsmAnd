@@ -1,13 +1,14 @@
 package net.osmand.plus.notifications;
 
+import android.annotation.SuppressLint;
 import android.app.Notification;
+import android.app.NotificationChannel;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.NotificationCompat.Builder;
 import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.app.NotificationCompat;
-
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
 
@@ -57,12 +58,13 @@ public abstract class OsmandNotification {
 		this.top = top;
 	}
 
+	@SuppressLint("InlinedApi")
 	protected Builder createBuilder(boolean wearable) {
 		Intent contentIntent = new Intent(app, MapActivity.class);
 		PendingIntent contentPendingIntent = PendingIntent.getActivity(app, 0, contentIntent,
 				PendingIntent.FLAG_UPDATE_CURRENT);
 
-		Builder builder = new Builder(app)
+		Builder builder = new Builder(app, NotificationChannel.DEFAULT_CHANNEL_ID)
 				.setVisibility(android.support.v4.app.NotificationCompat.VISIBILITY_PUBLIC)
 				.setPriority(top ? NotificationCompat.PRIORITY_HIGH : getPriority())
 				.setOngoing(ongoing && !wearable)
