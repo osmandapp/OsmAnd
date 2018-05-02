@@ -2595,14 +2595,14 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="select_city">Aukeratu hiria</string>
     <string name="select_postcode">Aukeratu posta-kodea</string>
     <string name="quick_action_auto_zoom">Maparen zoom automatikoa bai/ez</string>
-    <string name="quick_action_auto_zoom_desc">Ekintza-botoi hau sakatzean abiaduraren araberako maparen zoom automatikoa gaitu edo desgaituko da.</string>
+    <string name="quick_action_auto_zoom_desc">Ekintza-botoi hau sakatzea abiaduraren araberako maparen zoom automatikoa gaitu edo desgaitzen du.</string>
     <string name="quick_action_auto_zoom_on">Gaitu maparen zoom automatikoa</string>
     <string name="quick_action_auto_zoom_off">Desgaitu maparen zoom automatikoa</string>
     <string name="quick_action_add_destination">Gehitu helburua</string>
     <string name="quick_action_replace_destination">Ordeztu helburua</string>
     <string name="quick_action_add_first_intermediate">Gehitu lehen tartekoa</string>
-    <string name="quick_action_add_destination_desc">"Ekintza-botoi hau sakatzean pantailaren erdiko puntua bihurtuko da bidaiaren helburua. Aurretik beste helburu bat balego balego,  hura tarteko helburu bihurtuko da."</string>
-    <string name="quick_action_replace_destination_desc">Ekintza-botoi hau sakatzean pantailaren erdiko puntua ibilbide berriaren helburu gisa markatuko da, aurretik helbururik balego ordeztu egingo da.</string>
+    <string name="quick_action_add_destination_desc">"Ekintza-botoi hau sakatzeak pantailaren erdiko puntua bihurtzen du da bidaiaren helburua. Aurretik beste helburu bat balego balego,  hura tarteko helburu bihurtzen da."</string>
+    <string name="quick_action_replace_destination_desc">Ekintza-botoi hau sakatzeak pantailaren erdiko puntua ibilbide berriaren helburu gisa markatzen da, aurretik helbururik balego ordeztu egingo da.</string>
     <string name="quick_action_add_first_intermediate_desc">Ekintza-botoi hau sakatzean pantailaren erdiko puntua tarteko lehen helburua bihurtuko da.</string>
     <string name="no_overlay">Gain-azalik ez</string>
     <string name="no_underlay">Azpi-azalik ez</string>
@@ -2625,7 +2625,7 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="osmand_extended_description_part2">GPS nabigazioa • Lineaz kanpo (Ibiltaritza kargurik ez atzerrian zaudenean) edo konektatuta (azkarragoa) aritzea erabaki dezakezu • Biraz-birako ahots gidaketa bidean daramakizu (grabatutako eta sintetizatutako ahotsak) • Ibilbidea berregin egiten da bidetik ateratzen bazara • Erraien gida, kaleen izenak, eta heltzeko orduaren estimazioa bidean lagunduko zaituzte • Bidaia seguruagoa egiteko, egun/gau moduak automatikoki aldatzen dira • Abiadura muga bistaratzea aukeratu dezakezu, eta gainditzen baduzu abisuak jasotzea • Maparen zooma abiadurara egokitzen da • Helbidea, mota (adib. aparkalekua, jatetxea, hotela, gasolindegia, museoa) edo koordenatu geografikoen arabera bilatu ditzakezu helburuak • Ibilbidean tarteko puntuentzat euskarria du • Zure ibilbidea grabatu dezakezu edo GPX lorratz bat kargatu eta jarraitu dezakezu</string>
     <string name="shared_string_overview">Ikuspegi orokorra</string>
     <string name="select_street">Aukeratu kalea</string>
-    <string name="private_access_routing_req">Zure helburua sarbide pribatu duen gune batean dago. Errepide pribatuetara sarbidea baimendu nahi duzu bidai honetan?</string>
+    <string name="private_access_routing_req">Zure helburua sarbide pribatu duen gune batean dago. Errepide pribatuetara sartu nahi duzu bidai honetan?</string>
     <string name="restart_search">Berrasi bilaketa</string>
     <string name="increase_search_radius">Handitu bilaketaren erradioa</string>
     <string name="nothing_found">Ez da ezer aurkitu</string>
@@ -2633,7 +2633,7 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="quick_action_showhide_osmbugs_title">Txandakatu OSM oharrak</string>
     <string name="quick_action_osmbugs_show">Erakutsi OSM oharrak</string>
     <string name="quick_action_osmbugs_hide">Ezkutatu OSM oharrak</string>
-    <string name="quick_action_showhide_osmbugs_descr">Ekintza-botoi hau sakatzean OSM oharrak erakutsi edo ezkutatuko dira mapan.</string>
+    <string name="quick_action_showhide_osmbugs_descr">Ekintza-botoi hau sakatzeak OSM oharrak erakutsi edo ezkutatzen ditu mapan.</string>
     <string name="sorted_by_distance">Distantziaren arabera ordenatuta</string>
     <string name="search_favorites">Bilatu gogokoak</string>
     <string name="hide_from_zoom_level">Ezkutatu zoom mailatik</string>
@@ -2662,7 +2662,7 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="mapillary_menu_edit_text_hint">Idatzi erabiltzaile-izena</string>
     <string name="mapillary_menu_descr_username">Ikusi erabiltzaile honek gehitutako argazkiak:</string>
     <string name="mapillary_menu_title_username">Erabiltzaile-izena</string>
-    <string name="mapillary_menu_filter_description">Argazkiak igorlearen eta dataren arabera iragazi ditzakezu. Iragazkiak zoom hurbilean bakarrik erabiltzen dira.</string>
+    <string name="mapillary_menu_filter_description">Iragazi argazkiak igorlearen eta dataren arabera. Zoom hurbilean bakarrik.</string>
     <string name="map_widget_ruler_control">Erradioaren erregela</string>
     <string name="shared_string_permissions">Baimenak</string>
     <string name="import_gpx_failed_descr">OsmAnd-ek ezin du fitxategia inportatu. Egiaztatu OsmAndek fitxategia dagoen tokian irakurtzeko baimenak dituen.</string>
@@ -2724,7 +2724,7 @@ Area honi dagokio: %1$s x %2$s</string>
 \nOsmAnd librea da eta garapen aktiboan dago. Edonork egin ditzake ekarpenak, arazoen berri emanez, itzulpenak hobetuz, edo ezaugarri berriak programatuz. Proiektuak dohaintza behar ditu funtzio berriak programatu eta probatzeko.</string>
     <string name="quick_action_resume_pause_navigation">Pausatu/jarraitu nabigazioa</string>
     <string name="quick_action_resume_pause_navigation_descr">Sakatu botoi hau nabigazioa pausatzeko edo jarraitzeko.</string>
-    <string name="quick_action_show_navigation_finish_dialog">Erakutsi nabigazioa amaituta elkarrizketa-koadroa</string>
+    <string name="quick_action_show_navigation_finish_dialog">Erakutsi \'nabigazioa amaituta\' elkarrizketa-koadroa</string>
     <string name="quick_action_start_stop_navigation">Hasi/amaitu nabigazioa</string>
     <string name="quick_action_start_stop_navigation_descr">Sakatu botoi hau nabigazioa hasi edo amaitzeko.</string>
     <string name="live_monitoring_max_interval_to_send">Lineako jarraipenaren denbora-bufferra</string>
@@ -2762,7 +2762,7 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="do_not_use_animations_descr">Aplikazioaren animazioak desgaitzen ditu.</string>
     <string name="keep_showing_on_map">Jarraitu mapan erakusten</string>
     <string name="exit_without_saving">Irten gorde gabe?</string>
-    <string name="measurement_tool_save_as_new_track_descr">Puntuak puntu ala lerro gisa gorde ditzakezu.</string>
+    <string name="measurement_tool_save_as_new_track_descr">Gorde puntuak puntu ala lerro gisa.</string>
     <string name="measurement_tool_snap_to_road_descr">OsmAndek puntuak hautatutako profilaren ibilbideekin lotuko ditu.</string>
     <string name="choose_navigation_type">Hautatu nabigazio profila</string>
     <string name="add_route_points">Gehitu ibilbide-puntuak</string>
@@ -2833,16 +2833,16 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="track_waypoints">Lorratzaren bide-puntuak</string>
     <string name="favourites_group">Gogokoak kategoria</string>
     <string name="add_group">Gehitu talde bat</string>
-    <string name="add_group_descr">Taldeak inportatu ditzakezu gogokoetatik eta lorratzaren bide-puntuetatik.</string>
+    <string name="add_group_descr">"Inportatu taldeak  gogokoetatik eta lorratzaren bide-puntuetatik."</string>
     <string name="empty_state_markers_active">Sortu mapa-markatzaileak!</string>
     <string name="empty_state_markers_active_desc">Sakatu labur edo luze \'Tokiak\', gero sakatu markatzaile-bandera botoian.</string>
     <string name="empty_state_markers_groups">Inportatu taldeak</string>
-    <string name="empty_state_markers_groups_desc">Gogokoen taldeak edo lorratzen bide-puntuak markatzaile gisa inportatu ditzakezu.</string>
+    <string name="empty_state_markers_groups_desc">Inportatu gogokoen taldeak edo lorratzen bide-puntuak markatzaile gisa.</string>
     <string name="empty_state_markers_history">\@string/shared_string_history</string>
     <string name="empty_state_markers_history_desc">Pasatutako gisa markatutako markatzaileak pantaila honetan agertzen dira.</string>
     <string name="shared_string_two">Bi</string>
     <string name="shared_string_one">Bat</string>
-    <string name="show_guide_line_descr">Bistaratu gida-lerroak zure kokalekutik markatzaile aktiboen kokalekuetara.</string>
+    <string name="show_guide_line_descr">Bistaratu norabide-lerroa zure kokalekutik markatzaile aktiboen kokalekuetara.</string>
     <string name="show_arrows_descr">Bistaratu gezi bat edo bi markatzaile aktiboetara norabidea adierazteko.</string>
     <string name="distance_indication_descr">Hautatu nola bistaratu markatzaile aktiboetara distantzia.</string>
     <string name="active_markers_descr">Hautatu bistaratutako norabide adierazle kopurua.</string>
@@ -2870,7 +2870,7 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="route_is_calculated">Ibilbidea kalkulatuta</string>
     <string name="round_trip">Ibilbide ziklikoa</string>
     <string name="plan_route_no_markers_toast">Gutxienez markatzaile bat gehitu behar duzu funtzio hau erabiltzeko.</string>
-    <string name="osn_modify_dialog_error">Salbuespena gertatu da: Oharra ez da aldatu</string>
+    <string name="osn_modify_dialog_error">Ezin izan da oharra aldatu</string>
     <string name="osn_modify_dialog_title">Aldatu oharra</string>
     <string name="context_menu_item_modify_note">Aldatu OSM oharra</string>
     <string name="make_round_trip_descr">Gehitu hasiera puntuaren kopia helburu gisa.</string>
@@ -2897,7 +2897,7 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="marker_save_as_track">Gorde lorratz gisa</string>
     <string name="move_to_history">Eraman historialera</string>
     <string name="group_will_be_removed_after_restart">Taldea ez da egongo da aplikazioa berrabiarazten denean.</string>
-    <string name="show_guide_line">Erakutsi gida-lerroak</string>
+    <string name="show_guide_line">Erakutsi norabide lerroak</string>
     <string name="show_arrows_on_the_map">Erakutsi geziak mapan</string>
     <string name="show_passed">Erakutsi pasatutakoak</string>
     <string name="hide_passed">Ezkutatu pasatutakoak</string>
@@ -2947,13 +2947,13 @@ Area honi dagokio: %1$s x %2$s</string>
 \n
 \n
 \n</string>
-    <string name="will_open_tomorrow_at">Bihar irekiko du ordu honetan:</string>
+    <string name="will_open_tomorrow_at">Bihar irekiko du ordu honetan</string>
     <string name="copy_location_name">Kopiatu puntuaren / POI-aren izena</string>
     <string name="toast_empty_name_error">Kokalekuak ez du izenik</string>
 <string name="shared_string_current">Unekoa</string>
-    <string name="last_intermediate_dest_description">Ibilbideko azken geldialdia gehitzen du</string>
-    <string name="first_intermediate_dest_description">Ibilbideko lehen geldialdia gehitzen du</string>
-    <string name="subsequent_dest_description">Mugitu helburua gora, eta sortu helburua</string>
+    <string name="last_intermediate_dest_description">Tarteko geldialdia gehitzen du</string>
+    <string name="first_intermediate_dest_description">Lehen geldialdia gehitzen du</string>
+    <string name="subsequent_dest_description">Mugitu helburua gora, eta sortu</string>
     <string name="show_closed_notes">Erakutsi itxitako oharrak</string>
     <string name="switch_osm_notes_visibility_desc">Erakutsi/ezkutatu OSM oharrak mapan.</string>
     <string name="gpx_file_desc">GPX - JOSM edo bestelako OSM editoreentzat esportatzeko egokia.</string>
@@ -2970,8 +2970,8 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="enter_the_file_name">Idatzi fitxategiaren izena.</string>
     <string name="map_import_error">Maparen inportazio errorea</string>
     <string name="map_imported_successfully">Mapa inportatu da</string>
-    <string name="transport_nearby_routes_within">Zure inguruko ibilbideak</string>
-    <string name="transport_nearby_routes">INGURUAN</string>
+    <string name="transport_nearby_routes_within">Inguruko ibilbideak</string>
+    <string name="transport_nearby_routes">Inguruan</string>
     <string name="distance_farthest">Distantzia: Urrunena lehenbizi</string>
     <string name="distance_nearest">Distantzia: Hurbilena lehenbizi</string>
     <string name="enter_lon">Sartu longitudea</string>
@@ -2990,41 +2990,41 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="group_deleted">Taldea ezabatuta</string>
     <string name="rendering_attr_whiteWaterSports_name">Ur arinetako kirolak</string>
     <string name="clear_all_intermediates">Garbitu tarteko puntu guztiak</string>
-    <string name="select_waypoints_category_description">Lorratzaren bide-puntu guztiak gehitu ditzakezu, edo hainbat kategoriak hautatu.</string>
+    <string name="select_waypoints_category_description">Gehitu lorratzaren bide-puntu guztiak, edo hainbat hautatu kategoria.</string>
     <string name="shared_string_total">Guztira</string>
-    <string name="nothing_found_in_radius">Ez da ezer aurkitu erradioan:</string>
+    <string name="nothing_found_in_radius">Ez da ezer aurkitu:</string>
     <string name="shared_string_dont">Ez</string>
     <string name="shared_string_do">Bai</string>
     <string name="shared_string_only_with_wifi">Soilik Wi-Fi bidez</string>
     <string name="wikivoyage_download_pics">Deskargatu irudiak</string>
-    <string name="wikivoyage_download_pics_descr">Artikuluetako irudiak deskargatu eta erakutsi ditzakegu eta gailuan gorde, lineaz kanpo ikus ditzazun. Ezarpen hau aldatzeko zoaz Arakatu &gt; Aukerak atalera.</string>
+    <string name="wikivoyage_download_pics_descr">Artikuluetako irudiak deskargatu daitezke konexiorik gabe erabiltzeko. Ezarpen hau aldatzeko zoaz Arakatu &gt; Aukerak atalera.</string>
     <string name="shared_string_wifi_only">Soilik Wi-Fi</string>
     <string name="select_travel_book">Hautatu bidai liburua</string>
     <string name="shared_string_travel_book">Bidai liburua</string>
-    <string name="online_webpage_warning">Orri hau sarean besterik ez dago eskuragarri. Web nabigatzaile batean ireki nahi duzu?</string>
+    <string name="online_webpage_warning">Orria sarean besterik ez dago eskuragarri. Web nabigatzaile batean ireki nahi duzu?</string>
     <string name="images_cache">Irudien cache-a</string>
     <string name="delete_search_history">Ezabatu bilaketa historiala</string>
     <string name="download_images">Deskargatu irudiak</string>
     <string name="download_maps_travel">Bidai mapak</string>
     <string name="shared_string_wikivoyage">Wikivoyage</string>
     <string name="article_removed">Artikulua kenduta</string>
-    <string name="wikivoyage_search_hint">Bilatu: Herrialdea, Hiria, Probintzia</string>
+    <string name="wikivoyage_search_hint">Bilatu: Herrialdea, hiria, probintzia</string>
     <string name="shared_string_read">Irakurri</string>
     <string name="saved_articles">Gordetako artikuluak</string>
     <string name="shared_string_explore">Arakatu</string>
     <string name="shared_string_contents">Edukiak</string>
     <string name="shared_string_result">Emaitza</string>
-    <string name="use_two_digits_longitude">Erabili bi digituko longitudea</string>
+    <string name="use_two_digits_longitude">Erabili digitu bikoitzeko longitudea</string>
     <string name="shared_string_travel">Bidaia</string>
     <string name="waypoints_removed_from_map_markers">Bide-puntuak mapa markatzaileetatik kendu dira</string>
     <string name="index_item_world_wikivoyage">Mundu osoko Wikivoyage artikuluak</string>
-    <string name="travel_guide_description">Arakatu Wikivoyage gidak planetako leku interesgarrienetara OsmAnd-en bertan eta Internet konexiorik gabe.</string>
-    <string name="travel_guide">Bidai gida</string>
+    <string name="travel_guide_description">Planetako leku interesgarrienetarako gidak, OsmAnd-en bertan eta Internet konexiorik gabe.</string>
+    <string name="travel_guide">Wikivoyage bidai gida</string>
     <string name="purchase_dialog_title">Hautatu plana</string>
-    <string name="purchase_dialog_travel_description">Bidai-artikuluak konexiorik gabe irakurtzeko, honako hauetako bat eroi behar duzu.</string>
+    <string name="purchase_dialog_travel_description">Erosi hauetako bat bidai-artikuluak konexiorik gabe irakurtzeko:</string>
     <string name="purchase_dialog_subtitle">Hautatu elementu egokia:</string>
     <string name="monthly_map_updates">Mapen eguneraketak: <b>Hilero</b></string>
-    <string name="daily_map_updates">Mepen eguneraketak: <b>egunero, orduero</b></string>
+    <string name="daily_map_updates">Mapen eguneraketak: <b>Egunero, orduero</b></string>
     <string name="in_app_purchase">Aplikazio barneko erosketa</string>
     <string name="in_app_purchase_desc">Ordainketa bakarra</string>
     <string name="in_app_purchase_desc_ex">Behin erosita, beti izango duzu eskuragarri.</string>
@@ -3038,4 +3038,14 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="contour_lines_sea_depth">Sestra-kurbak + Itsaso-sakonera</string>
     <string name="unlock_all_features">Desblokeatu OsmAnd-en ezaugarri guztiak</string>
 
+    <string name="osmand_team">OsmAnd taldea</string>
+    <string name="popular_destinations">Ohiko helburuak</string>
+    <string name="paid_app">Ordainpeko aplikazioa</string>
+    <string name="paid_plugin">Ordainpeko gehigarria</string>
+    <string name="travel_card_update_descr">Wikivoyage datu berriak eskuragarri, eguneratu erabiltzeko.</string>
+	<string name="update_is_available">Eguneraketa eskuragarri</string>
+	<string name="download_file">Deskargatu fitxategia</string>
+    <string name="start_editing">Hasi edizioa</string>
+    <string name="get_unlimited_access">Eskuratu muga gabeko sarbidea</string>
+    <string name="download_wikipedia_label">Deskargatu Wikipediako datuak</string>
     </resources>

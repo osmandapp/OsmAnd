@@ -166,7 +166,7 @@
 \n\nAtivando esta mudança na visão do estilo de mapa de \'Inverno e esqui\', mostrando todas as características da paisagem em condições invernais. Essa visão pode ser revertida desativando aqui ou alterando o \'Estilo de mapa\' em \'Configurar mapa\' quando desejado. "</string>
 	<string name="audionotes_plugin_name">Notas de áudio/vídeo</string>
 	<string name="audionotes_plugin_description">O complemento de notas de áudio/vídeo fornece a funcionalidade para tomar notas de áudio/fotografia/vídeo durante uma viagem, usando um botão na tela do mapa ou diretamente do menu de contexto para qualquer posição no mapa.</string>
-	<string name="osmand_parking_plugin_name">Marcar estacionamento</string>
+	<string name="osmand_parking_plugin_name">Estacionamento</string>
 	<string name="osmand_distance_planning_plugin_name">Calculadora de distância e ferramenta de planeamento</string>
 	<string name="osmand_distance_planning_plugin_description">Este complemento fornece um widget da tela mapa permitindo criar caminhos tocando no mapa, ou usar ou modificar arquivos GPX existentes, para planejar uma viagem e medir a distância entre pontos. Os resultados podem ser salvos como um arquivo GPX, que mais tarde pode ser usado para orientação.</string>
 	<string name="shared_string_accessibility">Acessibilidade</string>
@@ -951,7 +951,7 @@ Pôr do Sol: %2$s</string>
 	<string name="osmand_parking_warning">Alerta</string>
 	<string name="osmand_parking_warning_text">Notificação para buscar seu carro foi adicionada ao seu calendário. Ela permanecerá até que você a apague manualmente.</string>    
 	<string name="osmand_parking_time_limit_title">Definir limite de tempo</string>
-	<string name="osmand_parking_delete_confirm">Quer apagar o marcardor da posição de estacionamento?</string>
+	<string name="osmand_parking_delete_confirm">Apagar o marcardor da posição de estacionamento?</string>
 	<string name="osmand_parking_delete">Apagar um marcador de estacionamento</string>
 	<string name="osmand_parking_choose_type">Escolher o tipo de estacionamento</string>
 	<string name="osmand_parking_no_lim_text">Tempo ilimitado</string>
@@ -1486,7 +1486,7 @@ Pôr do Sol: %2$s</string>
 	<string name="update_poi_error_local">Erro ao atualizar a lista local de POI</string>
 	<string name="update_poi_error_loading">Erro ao carregar dados do servidor</string>
 	<string name="update_poi_no_offline_poi_index">Não há dados de POI off-line para esta região</string>
-	<string name="update_poi_is_not_available_for_zoom">Atualização de POIs não está disponível para níveis de zoom afastados</string>
+	<string name="update_poi_is_not_available_for_zoom">Aproximar zoom permite atualizar POIs</string>
 	<string name="context_menu_item_update_poi">Atualizar POI</string>
 	<string name="context_menu_item_update_map_confirm">Atualizar dados locais da Internet?</string>
 	<string name="search_history_city">Cidade: {0}</string>
@@ -1978,7 +1978,7 @@ Pôr do Sol: %2$s</string>
     <string name="select_voice_provider_descr">Selecione ou baixe a instrução por voz para o seu idioma.</string>
     <string name="last_update">Última atualização: %s</string>
 
-    <string name="update_time">Tempo de atualização</string>
+    <string name="update_time">Quando atualizar</string>
 <string name="updates_size">Tamanho da atualização</string>
 <string name="rec_split">Dividir gravação</string>
     <string name="rec_split_title">Usar o separador de gravação</string>
@@ -2507,8 +2507,8 @@ Pôr do Sol: %2$s</string>
     <string name="open_from">Aberto a partir das</string>
     <string name="open_till">Aberto até</string>
     <string name="will_close_at">Fechará às</string>
-    <string name="will_open_at">Abrirá às</string>
-    <string name="will_open_on">Abrirá aos/às</string>
+    <string name="will_open_at">Abre às</string>
+    <string name="will_open_on">Abrirá às</string>
     <string name="additional_actions">Ações adicionais</string>
     <string name="av_locations_selected_desc">Arquivo GPX com coordenadas e dados das notas selecionadas.</string>
     <string name="shared_string_actions">Ações</string>
@@ -2745,7 +2745,7 @@ Pôr do Sol: %2$s</string>
     <string name="osm_edits_export_desc">Selecione o tipo de exportação: notas OSM, POI, ou ambos.</string>
     <string name="all_data">Todos os dados</string>
     <string name="osm_notes">Notas OSM</string>
-    <string name="will_open_tomorrow_at">Abrirá amanhã às</string>
+    <string name="will_open_tomorrow_at">Abre amanhã às</string>
     <string name="rendering_attr_hidePOILabels_name">Rótulos POI</string>
     <string name="day_off_label">desligado</string>
     <string name="winter_and_ski_renderer">Inverno e esqui</string>
@@ -2848,7 +2848,7 @@ Pôr do Sol: %2$s</string>
     <string name="paid_app">Aplicativo pago</string>
     <string name="paid_plugin">Plugin pago</string>
     <string name="travel_card_update_descr">Preparamos atualizações e correções nos dados Wikivoyage. Atualize o arquivo para vê-los.</string>
-	<string name="update_is_available">Atualização está disponível</string>
+	<string name="update_is_available">Atualização disponível</string>
 	<string name="download_file">Baixar arquivo</string>
     <string name="start_editing_card_image_text">O guia livre de viagens do mundo que qualquer um pode editar.</string>
     <string name="start_editing">Comece a editar</string>
@@ -2874,4 +2874,10 @@ Pôr do Sol: %2$s</string>
     <string name="open_in_browser_wiki">Abrir artigo online</string>
     <string name="open_in_browser_wiki_description">Ver este artigo no navegador.</string>
     <string name="download_wiki_region_placeholder">esta região</string>
+    <string name="unlock_all_features">Desbloquear todos os recursos OsmAnd</string>
+
+    <string name="purchase_dialog_travel_description">Adquira um dos seguintes itens para ler artigos de viagem offline:</string>
+    <string name="shared_string_dont">Não</string>
+    <string name="shared_string_do">Sim</string>
+    <string name="shared_string_only_with_wifi">Só com Wi-Fi</string>
     </resources>
