@@ -415,7 +415,7 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 				sb.append("<div class=\"nav-bar"+nightModeClass+"\" onClick=\"showNavigation()\">");
 				if (aggregatedPartOfArrayOrig.length > 0) {
 					for (int i = 0; i <  aggregatedPartOfArrayOrig.length ; i++) {
-						if (i > 1) {
+						if (i > 0) {
 					    		sb.append(" • ").append(aggregatedPartOfArrayOrig[i]);
 						} else {
 						   if (!TextUtils.isEmpty(current)) {
