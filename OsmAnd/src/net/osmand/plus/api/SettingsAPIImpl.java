@@ -15,7 +15,7 @@ public class SettingsAPIImpl implements SettingsAPI {
 
 	@Override
 	public Object getPreferenceObject(String key) {
-		return app.getSharedPreferences(key, Context.MODE_WORLD_READABLE);
+		return app.getSharedPreferences(key, Context.MODE_PRIVATE);
 	}
 
 	@Override
