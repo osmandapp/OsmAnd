@@ -3,27 +3,19 @@ package net.osmand.plus.mapcontextmenu;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.customtabs.CustomTabsIntent;
 import android.support.design.widget.AppBarLayout;
-import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.PopupMenu;
-import android.text.Html;
-import android.text.Spannable;
-import android.text.SpannableString;
 import android.text.TextUtils;
-import android.text.method.LinkMovementMethod;
-import android.text.style.RelativeSizeSpan;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -32,29 +24,22 @@ import android.view.ViewGroup;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.data.Amenity;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
-import net.osmand.plus.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
-import net.osmand.plus.wikivoyage.data.TravelArticle;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
-import static net.osmand.plus.OsmandSettings.WikivoyageShowImages.OFF;
 
 public class WikipediaDialogFragment extends DialogFragment {
 
@@ -68,10 +53,12 @@ public class WikipediaDialogFragment extends DialogFragment {
 	private static final String FOOTER_INNER = "</body></html>";
 
 	private View mainView;
+	private WebView contentWebView;
+
 	private boolean darkMode;
 	private Amenity amenity;
 	private String lang;
-	WebView contentWebView;
+
 	public void setAmenity(Amenity amenity) {
 		this.amenity = amenity;
 	}
@@ -162,10 +149,10 @@ public class WikipediaDialogFragment extends DialogFragment {
 	@NonNull
 	private String createHtmlContent(@NonNull String article) {
 		StringBuilder sb = new StringBuilder(HEADER_INNER);
-
 		String nightModeClass = darkMode ? " nightmode" : "";
-
-		sb.append("<div class=\"main" + nightModeClass + "\">\n");
+		sb.append("<div class=\"main");
+		sb.append(nightModeClass);
+		sb.append("\">\n");
 		sb.append(article);
 		sb.append(FOOTER_INNER);
 		return sb.toString();
@@ -224,16 +211,10 @@ public class WikipediaDialogFragment extends DialogFragment {
 	}
 
 	public static void showFullArticle(Context context, Uri uri, boolean nightMode) {
-		if (Build.VERSION.SDK_INT > Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
-			CustomTabsIntent customTabsIntent = new CustomTabsIntent.Builder()
-					.setToolbarColor(ContextCompat.getColor(context, nightMode ? R.color.actionbar_dark_color : R.color.actionbar_light_color))
-					.build();
-			customTabsIntent.launchUrl(context, uri);
-		} else {
-			Intent i = new Intent(Intent.ACTION_VIEW);
-			i.setData(uri);
-			context.startActivity(i);
-		}
+		CustomTabsIntent customTabsIntent = new CustomTabsIntent.Builder()
+				.setToolbarColor(ContextCompat.getColor(context, nightMode ? R.color.actionbar_dark_color : R.color.actionbar_light_color))
+				.build();
+		customTabsIntent.launchUrl(context, uri);
 	}
 
 	private void showPopupLangMenu(View view, final String langSelected) {

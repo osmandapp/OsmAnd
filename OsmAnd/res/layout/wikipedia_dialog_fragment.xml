@@ -9,7 +9,6 @@
     android:background="?attr/wikivoyage_bg_color"
     android:orientation="vertical">
 
-
     <android.support.design.widget.AppBarLayout
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
@@ -40,7 +39,8 @@
                         style="@style/Widget.AppCompat.ActionButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        tools:src="@drawable/ic_arrow_back"/>
+                        tools:src="@drawable/ic_arrow_back"
+						android:contentDescription="@string/shared_string_back" />
 
                     <View
                         android:layout_width="0dp"
