@@ -12,7 +12,7 @@
     <string name="av_settings">Indstillinger for audio og video </string>
     <string name="recording_error">Optagelse mislykkedes</string>
     <string name="recording_camera_not_available">Kameraet er ikke tilgængeligt</string>
-    <string name="recording_is_recorded">Audio/video optages. For at stoppe tryk på AV modulet.</string>
+    <string name="recording_is_recorded">Optagelse af lyd/video. Stop ved at trykke på AV modulet.</string>
     <string name="recording_playing">Den valgte optagelsen bliver afspillet.
 \n%1$s</string>
     <string name="recording_open_external_player">Åbn ekstern afspiller</string>
@@ -298,7 +298,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="online_map_settings_descr">Konfigurer online- eller cachelagrede kilder til kortbrikker.</string>
 
 
-    <string name="osmand_background_plugin_description">Viser indstillinger til at aktivere sporing og navigation i baggrunden ved periodisk at vække GPS-enheden (med slukket skærm).</string>
+    <string name="osmand_background_plugin_description">Viser indstillinger til at aktivere baggrundssporing og navigation ved periodisk at vække GPS-enheden (med slukket skærm).</string>
     <string name="osmand_accessibility_description">Udvidelsen gør tilgængelighedsfunktioner tilgængelige direkte i OsmAnd. Det letter fx justering af hastigheden for talesyntese, konfiguration af skærmnavigation med styrekryds (D-pad), brug af en styrekugle til zoomstyring, eller tekst-til-tale-tilbagemeldinger, fx til at sige din position højt.</string>
 	
 	
@@ -609,7 +609,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="voice_stream_voice_call">Telefonopkald lyd (afbryder også Bluetooth bilradio)</string>
     <string name="voice_stream_notification">Meddelelselyd</string>
     <string name="voice_stream_music">Medie-/musiklyd</string>
-    <string name="warning_tile_layer_not_downloadable">Programmet kan ikke hente kortlaget %1$s, prøv at installere igen.</string>
+    <string name="warning_tile_layer_not_downloadable">Kan ikke hente kortlaget %1$s, at geninstallere kan hjælpe.</string>
     <string name="overlay_transparency_descr">Ændr gennemsigtigheden for overlejring.</string>
     <string name="overlay_transparency">Overlejrings-gennemsigtighed</string>
     <string name="map_transparency_descr">Ændr gennemsigtigheden for grundkort.</string>
@@ -635,12 +635,12 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="search_offline_geo_error">Kunne ikke fortolke geografisk hensigt \'%s\'.</string>
     <string name="search_osm_offline">Søg efter geografisk placering</string>
     <string name="system_locale">System</string>
-    <string name="preferred_locale_descr">Vælg sprog (genstart efter skift).</string>
+    <string name="preferred_locale_descr">Vælg sprog (træder i kraft ved genstart).</string>
     <string name="preferred_locale">Sprog</string>
     <string name="incomplete_locale">ufuldstændig</string>
 
 
-    <string name="unit_of_length_descr">Ændr enhed for længde.</string>
+    <string name="unit_of_length_descr">Ændr enhed for afstand.</string>
     <string name="unit_of_length">Længdeenheder</string>
     <string name="si_mi_feet">Engelske mil og fod</string>
     <string name="si_mi_yard">Engelske mil og yards</string>
@@ -727,7 +727,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="rendering_exception">Det skete en fejl under optegning af det valgte område</string>
     <string name="show_point_options">Brug placering…</string>
     <string name="renderer_load_sucess">Kortgenerator indlæst</string>
-    <string name="renderer_load_exception">Der opstod en undtagelse: kortgenerator ikke indlæst</string>
+    <string name="renderer_load_exception">Kunne ikke indlæse kortgenerator</string>
     <string name="renderers">Vektor-optegning</string>
     <string name="renderers_descr">Vælg udseende på optegning.</string>
     <string name="poi_context_menu_website">Vis hjemmeside (IP)</string>
@@ -769,7 +769,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
 
     <string name="error_occurred_loading_gpx">Kunne ikke indlæse GPX</string>
     <string name="send_report">Send rapport</string>
-    <string name="none_region_found">Ingen offline-data for områderne er fundet på hukommelseskortet. Hent områder fra internettet.</string>
+    <string name="none_region_found">Kunne ikke finde nogen kort på hukommelseskortet.</string>
     <string name="poi_namefinder_query_empty">Skriv for at finde interessepunkt</string>
     <string name="any_poi">Alle</string>
     
@@ -784,7 +784,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
 
     <string name="use_trackball_descr">Brug en trackball for at flytte kortet.</string>
     <string name="use_trackball">Brug trackball</string>
-    <string name="background_service_wait_int_descr">Indstil den maksimale ventetid mellem hver positionssøgning i baggrunden.</string>
+    <string name="background_service_wait_int_descr">Indstil den højeste tilladte ventetid for hver positionssøgning i baggrunden.</string>
     <string name="background_service_wait_int">Maks ventetid på låsning</string>
 
     <string name="where_am_i">Hvor er jeg?</string>
@@ -794,7 +794,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="background_service_int">GPS vågn-op interval</string>
     <string name="background_service_provider_descr">Vælg placeringsudbyder som bruges af baggrundstjenesten.</string>
     <string name="background_service_provider">Placeringsudbyder</string>
-    <string name="background_router_service_descr">Kør OsmAnd i baggrunden for at spore positionen, mens skærmen er slukket.</string>
+    <string name="background_router_service_descr">Spor positionen, mens skærmen er slukket.</string>
     <string name="background_router_service">Kør OsmAnd i baggrunden</string>
     <string name="off_router_service_no_gps_available">Baggrund navigationstjenesten kræver en placeringsudbyder for kunne aktiveres.</string>
     <string name="hide_poi_filter">Skjul filter</string>
@@ -839,7 +839,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
 	<string name="sd_unmounted">Hukommelseskort ikke tilgængelig. 
 \nKort kan ikke vises.</string>
 	<string name="sd_mounted_ro">Hukommelseskortet er skrivebeskyttet. 
-\nKun det forudindlæste kort kan vises og nye kort kan ikke hente fra internettet.</string>
+\nDet er kun muligt at se det forudindlæste kort, ikke at hente nye områder.</string>
     <string name="unzipping_file">Udpakker fil…</string>
     <string name="route_tr">Drej til højre og kør</string>
     <string name="route_tshr">Drej skarpt til højre og kør</string>
@@ -894,7 +894,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="voice_data_not_supported">Ikke understøttet version af taledata</string>
     <string name="voice_data_corrupted">De angivne taledata er fejlbehæftet</string>
     <string name="voice_data_unavailable">De valgte taledata er ikke tilgængelig</string>
-    <string name="opening_hours_not_supported">Åbningstider format understøtter ikke redigering</string>
+    <string name="opening_hours_not_supported">Åbningstider format kan ikke ændres</string>
     <string name="transport_stop_to_go_out">Vælg stoppestedet for afstigning</string>
     <string name="transport_stops_to_pass">stoppesteder der skal passeres</string>
     <string name="show_transport_over_map_description">Vis stoppesteder for kollektivtrafik på kortet.</string>
@@ -1078,7 +1078,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
 
     <string name="local_openstreetmap_act_title">OSM-modifikationer</string>
 
-    <string name="download_using_mobile_internet">Wi-Fi er i øjeblikket ikke tilsluttet. Skal der fortsættets med den nuværende forbindelse til internettet?</string>
+    <string name="download_using_mobile_internet">Ikke forbundet til Wi-Fi. Brug den aktuelle forbindelse til internettet for at hente?</string>
     <string name="cancel_navigation">Stop navigation</string>
     <string name="cancel_route">Annuller rute</string>
     <string name="clear_destination">Slet destinationen</string>
@@ -1228,8 +1228,8 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="copying_osmand_one_file_descr">Kopierer fil (%s) til den ny placering…</string>
     <string name="copying_osmand_files_descr">Kopierer datafiler til ny placering (%s)…</string>
     <string name="copying_osmand_files">Kopierer datafiler…</string>
-    <string name="android_19_location_disabled">Siden Android version 4.4 (KitKat) kan man ikke hente og opdatere kort på den tidligere lagerplacering (%s). Ønsker du at skifte til den tilladte lagerplacering og kopiere alle OsmAnd-datafiler dertil?
-\n Note 1: De gamle datafiler forbliver urørte (men kan slettes manuelt).
+    <string name="android_19_location_disabled">Siden Android version 4.4 (KitKat) kan man ikke hente og opdatere kort på den gamle lagerplacering (%s). Kopier alle OsmAnd-datafiler til den nye lagerplacering? 
+\n Note 1: De gamle datafiler forbliver urørte (men kan slettes manuelt). 
 \n Note 2: På den nye placering vil det ikke være muligt at dele filer mellem OsmAnd og OsmAnd+.</string>
     <string name="routing_attr_prefer_motorway_name">Foretræk motorveje</string>
     <string name="routing_attr_prefer_motorway_description">Foretræk motorveje</string>
@@ -2054,7 +2054,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="plugins_menu_group">Udvidelser</string>
     <string name="first_usage_item">Første anvendelse</string>
     <string name="first_usage_item_description">Sådan hentes kort og angives grundlæggende indstillinger.</string>
-    <string name="navigation_item_description">Opsætning af navigation.</string>
+    <string name="navigation_item_description">Konfiguration af navigation.</string>
     <string name="faq_item">OSS</string>
     <string name="faq_item_description">Ofte stillede spørgsmål</string>
     <string name="map_viewing_item">Kortvisning</string>
@@ -2667,18 +2667,18 @@ Repræsenterer område: %1$s x %2$s</string>
 \n • Rapporter fejl i data
 \n • Overfør GPX-spor til OSM direkte
 \n • Tilføj IP\'er og overfør dem direkte til OSM (eller senere, hvis offline)</string>
-    <string name="osmand_extended_description_part8">OsmAnd er open source og bliver aktivt udviklet. Alle kan bidrage til anvendelsen ved at rapportere fejl, forbedring af oversættelser eller kodning af nye funktioner. Projektet er i en levende kontinuerlig forbedring af alle disse former for udvikling og brugerinteraktion. Projektets fremdrift er også afhængig af finansielle bidrag til finansiering af kodning og afprøvning af nye funktionaliteter. 
+    <string name="osmand_extended_description_part8">OsmAnd er aktivt udviklet open source software. Alle kan bidrage ved at rapportere programfejl, forbedre oversættelser eller kodning af nye funktioner. Derudover projektet er afhængig af økonomiske bidrag til kodning og test af nye funktionaliteter. 
 \n  Anslået kortdækning og kvalitet: 
-\n • Vesteuropa: ****  
-\n • Østeuropa: ***  
-\n • Rusland: ***  
-\n • Nordamerika: ***  
-\n • Sydamerika: **  
-\n • Asien: **  
-\n • Japan og Korea: ***  
-\n • Mellemøsten: **   • Afrika: **  
-\n • Antarktis: *  
-\n De fleste lande i verden kan hentes!  
+\n • Vesteuropa: ****   
+\n • Østeuropa: ***   
+\n • Rusland: ***   
+\n • Nordamerika: ***   
+\n • Sydamerika: **   
+\n • Asien: **   
+\n • Japan og Korea: ***   
+\n • Mellemøsten: **   • Afrika: **   
+\n • Antarktis: *   
+\n De fleste lande i verden kan hentes!   
 \n Få pålidelig navigation - det være sig Frankrig, Tyskland, Mexico, Storbritannien, Spanien, Holland, USA, Rusland, Brasilien eller andre.</string>
     <string name="osmand_plus_extended_description_part7">Bidrag direkte til OSM  
 \n • Rapporter fejl i data  
@@ -2838,7 +2838,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="increase_search_radius">Øg søgeradius</string>
     <string name="nothing_found">Fandt intet</string>
     <string name="nothing_found_descr">Ændr søgningen eller øg søgeradius.</string>
-    <string name="private_access_routing_req">Destinationen ligger i et privat område. Giv adgang til de private veje for denne tur?</string>
+    <string name="private_access_routing_req">Destinationen ligger i et område med privat adgang. Tillad uautoriseret adgang til private veje for denne tur?</string>
     <string name="mapillary">Mapillary</string>
     <string name="mapillary_widget">Mapillary-modul</string>
     <string name="mapillary_widget_descr">Tillader hurtige bidrag til Mapillary.</string>
@@ -3213,7 +3213,7 @@ Repræsenterer område: %1$s x %2$s</string>
 	<string name="update_is_available">Opdatering er tilgængelig</string>
 	<string name="download_file">Hent fil</string>
     <string name="start_editing_card_image_text">Den gratis verdensomspændende rejseguide, som alle kan redigere.</string>
-    <string name="welcome_to_open_beta_description">Guider er baseret på Wikivoyage. Under den åbne betatest er der mulighed for at evaluere alle funktioner gratis. Efter udgangen af beta-perioden, vil guider være tilgængelige for abonnenter af OsmAnd ubegrænset og ejerne af OsmAnd+</string>
+    <string name="welcome_to_open_beta_description">Rejseguide er baseret på Wikivoyage. Test alle funktionerne i den åbne beta gratis. Bagefter vil Rejseguide være tilgængelig for abonnenter af OsmAnd ubegrænset og ejere af OsmAnd+</string>
     <string name="start_editing_card_description">Du kan og bør redigere en artikel på Wikivoyage. Del viden, erfaringer, talent og din opmærksomhed</string>
     <string name="start_editing">Begynd redigering</string>
     <string name="get_unlimited_access">Få ubegrænset adgang</string>
@@ -3228,4 +3228,6 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="wiki_article_not_found">Artikel ikke fundet</string>
     <string name="how_to_open_wiki_title">Hvordan åbner man Wikipedia artikler?</string>
 <string name="osmand_team">OsmAnd team</string>
+    <string name="maps_you_need_descr">Du læser artikler: %1$s. Vi foreslår at hente disse kort:</string>
+    <string name="maps_you_need">Kort du har brug for</string>
     </resources>
