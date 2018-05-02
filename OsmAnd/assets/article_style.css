@@ -48,7 +48,7 @@ body {
 
 .content {
     display: none;
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 
 .nightmode {
@@ -146,9 +146,8 @@ h2 {
     border-bottom: 1px solid #2d3133;
     font-weight: 100;
 }
+
 h2.active {
-    padding-left: content;
-    color: var(--main-text-color-day);
     border-bottom: 0px;
 }
 
@@ -159,10 +158,11 @@ h2.active {
 }
 
 h2.active:after {
+    color: #222526;
     transform: rotate(-135deg);
     -webkit-transform: rotate(-135deg);
     position: absolute;
-    right: 1em;
+    right: 7%;
 }
 
 h2:after {
@@ -177,7 +177,7 @@ h2:after {
     transform: rotate(45deg);
     -webkit-transform: rotate(45deg);
     position: absolute;
-    right: 1em;
+    right: 7%;
 }
 
 h3 {
@@ -188,7 +188,6 @@ h3 {
     font-weight: bold;
     margin-top: 5%;
     margin-bottom: 3%;
-    padding-left: content;
     line-height: var(--main-text-line-height);
 }
 
