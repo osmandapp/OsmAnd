@@ -136,6 +136,7 @@ public class WikipediaDialogFragment extends BaseOsmAndDialogFragment {
 		contentWebView = (WebView) mainView.findViewById(R.id.content_web_view);
 		WebSettings webSettings = contentWebView.getSettings();
 		webSettings.setJavaScriptEnabled(true);
+		contentWebView.setWebViewClient(new WikipediaWebViewClient(getActivity(), darkMode));
 
 		return mainView;
 	}
