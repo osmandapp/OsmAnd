@@ -20,6 +20,7 @@ import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,6 +33,7 @@ import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.data.Amenity;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
@@ -137,6 +139,7 @@ public class WikipediaDialogFragment extends BaseOsmAndDialogFragment {
 		WebSettings webSettings = contentWebView.getSettings();
 		webSettings.setJavaScriptEnabled(true);
 		contentWebView.setWebViewClient(new WikipediaWebViewClient(getActivity(), darkMode));
+		updateWebSettings();
 
 		return mainView;
 	}
@@ -299,6 +302,23 @@ public class WikipediaDialogFragment extends BaseOsmAndDialogFragment {
 		}
 	}
 
+	private void updateWebSettings() {
+		OsmandSettings.WikivoyageShowImages showImages = getSettings().WIKIVOYAGE_SHOW_IMAGES.get();
+		WebSettings webSettings = contentWebView.getSettings();
+		switch (showImages) {
+			case ON:
+				webSettings.setCacheMode(WebSettings.LOAD_DEFAULT);
+				break;
+			case OFF:
+				webSettings.setCacheMode(WebSettings.LOAD_CACHE_ONLY);
+				break;
+			case WIFI:
+				webSettings.setCacheMode(getMyApplication().getSettings().isWifiConnected() ?
+						WebSettings.LOAD_DEFAULT : WebSettings.LOAD_CACHE_ONLY);
+				break;
+		}
+	}
+
 	public static boolean showInstance(AppCompatActivity activity, Amenity amenity) {
 		return showInstance(activity, amenity, null);
 	}
@@ -306,6 +326,40 @@ public class WikipediaDialogFragment extends BaseOsmAndDialogFragment {
 	protected void setupToolbar(Toolbar toolbar) {
 		toolbar.setNavigationIcon(getIcon(R.drawable.ic_arrow_back, R.color.icon_color));
 		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
+		Menu menu = toolbar.getMenu();
+		MenuItem itemShow = menu.add(R.string.shared_string_show);
+		itemShow.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+			@Override
+			public boolean onMenuItemClick(MenuItem item) {
+				OsmandApplication app = getMyApplication();
+				if (app != null) {
+					app.getSettings().WIKIVOYAGE_SHOW_IMAGES.set(OsmandSettings.WikivoyageShowImages.ON);
+				}
+				return true;
+			}
+		});
+		MenuItem itemWifi = menu.add(R.string.shared_string_only_with_wifi);
+		itemWifi.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+			@Override
+			public boolean onMenuItemClick(MenuItem item) {
+				OsmandApplication app = getMyApplication();
+				if (app != null) {
+					app.getSettings().WIKIVOYAGE_SHOW_IMAGES.set(OsmandSettings.WikivoyageShowImages.WIFI);
+				}
+				return true;
+			}
+		});
+		MenuItem itemNo = menu.add(R.string.shared_string_dont);
+		itemNo.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+			@Override
+			public boolean onMenuItemClick(MenuItem item) {
+				OsmandApplication app = getMyApplication();
+				if (app != null) {
+					app.getSettings().WIKIVOYAGE_SHOW_IMAGES.set(OsmandSettings.WikivoyageShowImages.OFF);
+				}
+				return true;
+			}
+		});
 		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
