@@ -72,8 +72,6 @@ body {
     word-wrap: break-word;
     white-space: nowrap;
     overflow-x: auto;
-    direction: rtl;
-
 }
 
 .nav-bar-current {
