@@ -2,7 +2,7 @@
     /* Colors for main part of texts */
     --main-text-color-day: #212121;
     --main-text-color-night: #cccccc;
-    
+
     /* Colors for headline and description text */
     --headline-text-color-day: #454545;
     --headline-text-color-night: #999999;
@@ -20,6 +20,10 @@
     --main-text-font-size: 1.1em;
     --main-text-line-height: 1.6em;
     --headers-font-size: 1.2em;
+
+    /* Background colors */
+    --background-color-day: #ffffff;
+    --background-color-night: #17191a;
 }
 
 body {
@@ -38,7 +42,7 @@ body {
     padding-bottom: 0;
     padding-left: 7%;
     padding-right: 7%;
-    background-color: white;
+    background-color: var(--background-color-day);
     font-family: sans-serif;
 }
 
@@ -51,7 +55,7 @@ body {
     max-width: 100% !important;
     display: block;
     font-family: sans-serif;
-    background-color: #17191a;
+    background-color: var(--background-color-night);
 }
 
 .nav-bar {
