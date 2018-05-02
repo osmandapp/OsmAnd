@@ -7,6 +7,10 @@ body {
     font-size: 1em;
 }
 
+.nightmode > body {
+    color: #17191a;
+}
+
 .main {
     max-width: 100% !important;
     /* overflow-x: hidden; hide scroll bar */
@@ -17,6 +21,13 @@ body {
     padding-right: 7%;
     background-color: white;
     font-family: sans-serif;
+}
+
+.nightmode {
+    max-width: 100% !important;
+    display: block;
+    font-family: sans-serif;
+    background-color: #17191a;
 }
 
 .nav-bar {
@@ -37,6 +48,34 @@ body {
     color: #2f7af5;
 }
 
+.nightmode > .nav-bar {
+    background-color: #222526;
+    font-size: 1.1em;
+    font-family: sans-serif;
+    color: #222526;
+    word-wrap: break-word;
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    font-weight: normal;
+    line-height: 1.6em;
+}
+
+.nightmode > .nav-bar, .nightmode > div > .nav-bar,  {
+    background-color: #222526;
+    font-size: 1.1em;
+    font-family: sans-serif;
+    color: #222526;
+    word-wrap: break-word;
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    font-weight: normal;
+    line-height: 1.6em;
+}
+
 .title-image {
     width: 100%;
     height: 30%;
@@ -48,13 +87,17 @@ body {
 }
 
 h1 {
-  font-size: 2em;
-  color: #212121;
-  font-family: RobotoSlab-Regular;
-  letter-spacing: 0.02em;
-  word-wrap: break-word;
-  padding-top: 5%;
-  font-weight: normal;
+    font-size: 2em;
+    color: #212121;
+    font-family: RobotoSlab-Regular;
+    letter-spacing: 0.02em;
+    word-wrap: break-word;
+    padding-top: 5%;
+    font-weight: normal;
+}
+
+.nightmode > h1, .nightmode > div > h1 {
+    color: #a3a3a3;
 }
 
 h2 {
@@ -69,6 +112,12 @@ h2 {
     letter-spacing: 0.015em;
     border-bottom: 1px solid #eaecf0;
     width: 100%;
+}
+
+.nightmode > h2, .nightmode > div > h2 {
+    color: #cccccc;
+    border-bottom: 1px solid #2d3133;
+    font-weight:100;
 }
 
 h2.active:after {
@@ -110,10 +159,18 @@ h3 {
     line-height: 1.6em;
 }
 
+.nightmode > h3, .nightmode > div > h3  {
+    color: #727272;
+}
+
 p {
     font-family: sans-serif;
     font-size: 1.1em;
     line-height: 1.6em;
+}
+
+.nightmode > div > p, .nightmode >  p {
+    color: #cccccc;
 }
 
 ul {
@@ -131,6 +188,10 @@ li {
     padding-bottom: 1%;
 }
 
+.nightmode > ul, .nightmode > div > ul  {
+    color: #cccccc;
+}
+
 .toc {
     font-size: 1.1em;
 }
@@ -140,15 +201,24 @@ img {
     width: 100%;
 }
 
-a {
+a, a.external, a.free, a.text {
     color: #237bff;
     text-decoration-color: #a3c8ff;
     word-wrap: break-word;
+    background-color: #fafafa;
 }
 
-external-free {
+.nightmode > a, .nightmode > div > a {
+    color: #d28521;
+    text-decoration-color: #854f08;
     word-wrap: break-word;
-    background-color: black;
+}
+
+.nightmode > a.external, .nightmode > a.free, .nightmode > a.text {
+    color: #d28521;
+    text-decoration-color: #854f08;
+    word-wrap: break-word;
+    background-color: #222526;
 }
 
 pre {
@@ -159,12 +229,30 @@ pre {
     word-wrap: break-word;
 }
 
+.nightmode > pre {
+    color: #727272;
+}
+
 .geo {
     background-color: #fafafa;
     border: 1px solid #e6e6e6;
     border-radius: 4px;
     padding: 10px 10px 10px 10px;
     color: #237bff;
+    font-size: 0.9em;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.nightmode > .geo, .nightmode > div > .geo, .nightmode > div > ul > .geo, .nightmode > a > .geo {
+    color: #d28521;
+    background-color: #222526;
+    border: 1px solid #2d3133;
+    border-radius: 4px;
+    padding: 10px 10px 10px 10px;
+    color: #d28521;
     font-size: 0.9em;
     font-weight: bold;
     text-align: center;
@@ -200,97 +288,5 @@ td {
     overflow: hidden;
 }
 
-.nightmode > h1, .nightmode > div > h1 {
-    color: #a3a3a3;
-}
-
-.nightmode > h2, .nightmode > div > h2 {
-    color: #cccccc;
-    border-bottom: 1px solid #2d3133;
-    font-weight:100;
-}
-
-.nightmode > h3, .nightmode > div > h3  {
-    color: #727272;
-}
 
 
-.nightmode > div > p, .nightmode >  p {
-    color: #cccccc;
-}
-
-.nightmode > ul, .nightmode > div > ul  {
-    color: #cccccc;
-}
-
-.nightmode > .geo, .nightmode > div > .geo, .nightmode > div > ul > .geo, .nightmode > a > .geo {
-    color: #d28521;
-    background-color: #222526;
-    border: 1px solid #2d3133;
-    border-radius: 4px;
-    padding: 10px 10px 10px 10px;
-    color: #d28521;
-    font-size: 0.9em;
-    font-weight: bold;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-}
-
-.nightmode > a, .nightmode > div > a, .nightmode > div > ul > a {
-    color: #d28521;
-    text-decoration-color: #854f08;
-    word-wrap: break-word;
-}
-
-.nightmode > .external, .free {
-    color: #d28521;
-    text-decoration-color: #854f08;
-    word-wrap: break-word;
-}
-
-.nightmode > body {
-    color: #17191a;
-}
-
-.nightmode {
-    max-width: 100% !important;
-    /* overflow-x: hidden; hide scroll bar */
-    display: block;
-    /* margin-top: 7%;
-    padding-bottom: 0;
-    padding-left: 7%;
-    padding-right: 7%; 
-    */
-    font-family: sans-serif;
-    background-color: #17191a;
-}
-
-
-.nightmode > .nav, .bar {
-    background-color: #222526;
-    font-size: 1.1em;
-    font-family: sans-serif;
-    color: #222526;
-    word-wrap: break-word;
-    padding-left: 16px;
-    padding-right: 16px;
-    padding-top: 8px;
-    padding-bottom: 8px;
-    font-weight: normal;
-    line-height: 1.6em;
-}
-
-.nightmode > .nav-bar, .nightmode > div > .nav-bar,  {
-    background-color: #222526;
-    font-size: 1.1em;
-    font-family: sans-serif;
-    color: #222526;
-    word-wrap: break-word;
-    padding-left: 16px;
-    padding-right: 16px;
-    padding-top: 8px;
-    padding-bottom: 8px;
-    font-weight: normal;
-    line-height: 1.6em;
-}

@@ -406,13 +406,13 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 		Set<String> rtls = new HashSet<>(Arrays.asList(rtlLanguages));
 		String bodyTag = rtls.contains(article.getLang()) ? "<body dir=\"rtl\">\n" : "<body>\n";
 		sb.append(bodyTag);
-
+		String nightModeClass = nightMode ? " nightmode" : "";
 		String imageTitle = article.getImageTitle();
 		if (!TextUtils.isEmpty(article.getAggregatedPartOf())) {
 			String[] aggregatedPartOfArrayOrig = article.getAggregatedPartOf().split(",");
 			if (aggregatedPartOfArrayOrig.length > 0) {
 				String current = aggregatedPartOfArrayOrig[0];
-				sb.append("<div class=\"nav-bar\" onClick=\"showNavigation()\">");
+				sb.append("<div class=\"nav-bar"+nightModeClass+"\" onClick=\"showNavigation()\">");
 				if (aggregatedPartOfArrayOrig.length > 1) {
 					String[] aggregatedPartOfArray = new String[aggregatedPartOfArrayOrig.length - 1];
 					for (int i = 0; i < aggregatedPartOfArrayOrig.length - 1; i++) {
@@ -433,10 +433,10 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 		String url = TravelArticle.getImageUrl(imageTitle, false);
 		if (!TextUtils.isEmpty(imageTitle) && getSettings().WIKIVOYAGE_SHOW_IMAGES.get() != OFF &&
 				!url.startsWith(EMPTY_URL)) {
-			sb.append("<div class=\"title-image\" style=\"background-image: url(").append(url).append(")\"></div>");
+			sb.append("<div class=\"title-image"+nightModeClass+"\" style=\"background-image: url(").append(url).append(")\"></div>");
 		}
 
-		String nightModeClass = nightMode ? " nightmode" : "";
+
 
 		sb.append("<div class=\"main" + nightModeClass + "\">\n");
 		sb.append("<h1>").append(article.getTitle()).append("</h1>");

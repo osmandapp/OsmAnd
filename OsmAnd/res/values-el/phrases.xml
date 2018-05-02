@@ -609,4 +609,32 @@
 	<string name="poi_occupational_therapist">Εργασιοθεραπευτής</string>
 	<string name="poi_optometrist">Οπτικός</string>
 	<string name="poi_physiotherapist">Φυσιοθερπευτής</string>
+	<string name="poi_podiatrist">Ποδίατρος</string>
+	<string name="poi_psychotherapist">Ψυχοθεραπευτής</string>
+	<string name="poi_healthcare_rehabilitation">Αποκατάσταση</string>
+	<string name="poi_speech_therapist">Λογοθεραπευτής</string>
+	<string name="poi_healthcare_yes">Ιατρική μονάδα</string>
+	<string name="poi_paediatrics">Παιδιατρική</string>
+
+	<string name="poi_company">Εταιρεία</string>
+	<string name="poi_insurance">Ασφάλεια</string>
+	<string name="poi_estate_agent">Κτηματομεσίτης</string>
+	<string name="poi_lawyer">Δικηγόρος</string>
+	<string name="poi_office_telecommunication">Γραφείο τηλεπικοινωνιών</string>
+	<string name="poi_ngo">ΜΚΟ</string>
+	<string name="poi_townhall">Δημαρχείο</string>
+	<string name="poi_employment_agency">Γραφείο ευρέσεως εργασίας</string>
+	<string name="poi_research">Γραφείο μελετών</string>
+	<string name="poi_it">Γραφείο πληροφορικής</string>
+	<string name="poi_newspaper">Γραφείο εφημερίδας</string>
+	<string name="poi_architect">Αρχιτεκτονικό γραφείο</string>
+	<string name="poi_advertising_agency">Διαφημιστική εταιρία</string>
+	<string name="poi_educational_institution">Εκπαιδευτικό ίδρυμα</string>
+	<string name="poi_studio">Στούντιο</string>
+	<string name="poi_bookmaker">Πράκτορας στοιχημάτων</string>
+	<string name="poi_office_religion">Θρησκευτικό γραφείο</string>
+	<string name="poi_association">Γραφείο σύνδεσης</string>
+	<string name="poi_financial">Γραφείο οικονομικών</string>
+	<string name="poi_political_party">Γραφείο πολιτικού κόμματος</string>
+	<string name="poi_notary">Συμβολαιογράφος</string>
 	</resources>
