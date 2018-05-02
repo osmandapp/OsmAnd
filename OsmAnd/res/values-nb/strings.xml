@@ -2996,7 +2996,7 @@
     <string name="paid_app">Betalt program</string>
     <string name="paid_plugin">Betalt tillegg</string>
     <string name="contour_lines_hillshade_maps">Kart for koter og relieffskygger</string>
-    <string name="travel_guide_description">Guider i OsmAnd til de mest interessante stedene på planeten, uten å ha en internettforbindelse.</string>
+    <string name="travel_guide_description">Guider til de mest spennende stedene, inne i OsmAnd, uten å ha internettforbindelse.</string>
     <string name="purchase_dialog_travel_description">Kjøp én av følgende for å lese reiseartikler i frakoblet modus:</string>
     <string name="purchase_dialog_subtitle">Velg passende element:</string>
     <string name="travel_card_download_descr">Last ned disse Wikivoyage-reiseguidene for å se artikler om steder rundt om i verden uten å ha en internettforbindelse.</string>
@@ -3010,8 +3010,8 @@
     <string name="wiki_article_search_text">Søker etter den nødvendige wiki-artikkelen</string>
     <string name="wiki_article_not_found">Artikkel ikke funnet</string>
     <string name="osmand_plus_extended_description_part2">Navigering
-\n • Virker i nettbasert modus (rask) eller frakoblet modus (ingen roaming-kostnader når du er utenlands)
-\n • Taleveiledning sving-for-sving (innspilt og syntetisert tale)
+\n • Virker i nettbasert modus (raskt), eller frakoblet modus (ingen gjestings-kostnader når du er utenlands)
+\n • Taleveiledning sving-for-sving (innspilt og synteisert tale)
 \n • Valgfri filanvisning, gatenavnvisning og estimert ankomsttid
 \n • Støtter mellomliggende punkter på ruten
 \n • Ruten blir automatisk beregnet på nytt når du avviker fra den
@@ -3047,4 +3047,57 @@
 \n De fleste landene i verden kan lastes ned.
 \n Få pålitelig navigering i ditt land - det være seg Frankrike, Tyskland, Mexico, Storbritannia, Spania, Nederland, USA, Russland, Brasil eller andre.</string>
     <string name="osmand_team">OsmAnd-laget</string>
+    <string name="plugin_touringview_descr">"Aktivering av denne visningen endrer OsmAnds kartstil til \"Turvisning, dette er et spesielt høydetaljskart for dem på reisefot og folk i transportbransjen. 
+\n
+\nDenne visningen gir, uansett forstørrelsesnivå, høyest antall reisedetaljer tilgjengelig i kartdataen (i særdeleshet veier, småveier, stier  og orienteringsmerker). 
+\n
+\nDet viser også alle typer veier, klart adskilt med fargemerking, som er nyttig når du kjører for eksempel store kjøretøy. 
+\n
+\nDet gir også spesielle turvalg, som visning av sykkelveier eller fjellruter. 
+\n
+\nMan trenger ikke å laste ned noe ekstra, visningen lages basert på standardkart. 
+\n
+\nDenne visningen kan tilbakestilles enten ved å deaktivere den igjen her, eller å endre \"Kartstil\" under \"Sett opp kart\" man ønsker."</string>
+    <string name="plugin_nautical_descr">Dette programtillegget beriker OsmAnds kart og navigasjonsprogram til også å tjene som sjøkart, for båt, seiling eller andre typer vannsport.
+\n
+\nDette spesielle karttillegget for OsmAnd gir alle sjømerker, for innom-, og utenskjærs bruk. Beskrivelsen av hvert av dem gir detaljer nok til å identifisere dem og deres mening (kategori, form, farge, sekvens, referanse, osv.).
+\n
+\nFor å gå tilbake til OsmAnds mer konvensjonelle kartstiler, enten skru av dette tillegget igjen, eller endre \"Kartstil\" under \"Sett opp kart\" som du ønsker.</string>
+    <string name="plugin_ski_descr">Dette programtillegget for OsmAnd, gir deg detaljer om skibakker og løyper verden over, fjellskiløyper, taubaner og skiheiser. Ruter og løyper vises fargekodet etter vanskelighetsgrad, og tegnes i en spesiell \"Vinter\"-kartstil som ligner et snødekt landskap.
+\n
+\nAktivering av denne visningen endrer kartstilen til \"Vinter og ski\", som viser alle landskapsfunksjoner i vinterforhold. Dette kan endres tilbake ved å enten skru av tillegget her, eller endre \"Kartstil\" under \"Sett opp kart\", som du ønsker.</string>
+    <string name="osmand_distance_planning_plugin_description">Dette programtillegget tilbyr et miniprogram for kartskjermen der du kan opprette stier ved å trykke på kartet, eller ved å endre eksisterende GPX-filer, for å planlegge en tur og måle avstanden mellom punkter. Resultatet kan lagres som en GPX-fil, som senere kan brukes for veiledning.</string>
+    <string name="osm_editing_plugin_description">Via dette programtillegget kan OsmAnd brukes til å sende inn OSM-bidrag, som opprettelse eller endring av OSM-POI-objekter, åpning eller kommentering av OSM-notater, og bidrag til GPX-spor. OSM er et verdensomspennende kartprosjekt i offentlig eiendom. For detaljer, se https://openstreetmap.org. Aktiv deltagelse verdsettes, og bidrag kan gjøres direkte fra OsmAnd, hvis du angir din personlige OSM-innloggingsinfo i programmet.</string>
+    <string name="osmand_extended_description_part3">Kart
+\n • Viser POI-er (interessepunkter) rundt deg
+\n • Orienterer kartet i fartsretning (eller etter kompass)
+\n • Viser din plassering og retningen du ser i
+\n • Del din plassering slik at dine venner kan finne deg
+\n • Beholder dine viktigste steder i \"Favoritter\"
+\n • Tillater deg å velge hvordan du vil vise navn i kartet: På engelsk, lokale navn, eller fonetisk staving
+\n • Viser spesialiserte nettbaserte flis, satellittvisning (fra Bing), forskjellige overleggslag, som tur/navigasjon-GPX-spor og ytterligere lag med tilpassbar gjennomsiktighet
+\n</string>
+    <string name="osmand_plus_extended_description_part3">Kartvisning
+\n • Vis din posisjon og retning
+\n • Valgfri rotasjon av kartet mot kompass eller fartsretning
+\n • Lagre dine viktigste steder som favoritter
+\n • Vis POI-er (interessepunkter) rundt deg
+\n • Vis spesialiserte nettbaserte fil, satellittvisning (fra Bing), forskjellige overleggslag, som tur/navigasjons-GPX-spor og ytterligere lag med tilpassbar gjennomsiktighet
+\n • Valgfri visning av stedsnavn på Engelsk, lokal, eller fonetisk staving
+\n</string>
+    <string name="osmand_plus_extended_description_part4">Bruk OSM- og WIkipedia-data
+\n • Høykvalitetsinfo fra de beste samarbeidsprosjektene i verden
+\n • OSM-data tilgjengelig per land eller region
+\n • Wikipedia POI-er, topp hvis du er turist på utkikk etter serverdigheter
+\n • Ubegrensede gratis nedlastinger, direkte fra programmet
+\n • Kompakte frakoblede vektorbaserte kart, oppdatert minst én gang i måneden
+\n
+\n • Valg mellom helhetlig regiondata, eller kun veinettverk (Eksempelvis er hele Japan 700 MB, og veinettverket er 200 MB)</string>
+    <string name="osmand_plus_extended_description_part7">Bidra direkte til OSM
+\n • Rapporter datafeil
+\n • Last opp GPX-spor til OSM direkte fra programmet
+\n • Legg til POI-er og last dem opp direkte til OSM (eller senere hvis du ikke har nett)
+\n • Valgfri turopptaksmodus i bakgrunnen (mens enheten er i dvalemodus)
+\n OsmAnd er aktivt utviklet fri programvare. Alle kan bidra til programmet ved å rapportere feil, forbedre oversettelser, eller kode nye funksjoner. Ytterligere avhenger prosjektet av finansielle bidrag for å støtte koding og testing av ny funksjonalitet.
+\n</string>
     </resources>
