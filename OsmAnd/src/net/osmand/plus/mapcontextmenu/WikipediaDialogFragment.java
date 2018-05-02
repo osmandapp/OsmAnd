@@ -112,22 +112,42 @@ public class WikipediaDialogFragment extends BaseOsmAndDialogFragment {
 				R.color.ctx_menu_controller_button_text_color_light_n, R.color.ctx_menu_controller_button_text_color_light_p,
 				R.color.ctx_menu_controller_button_text_color_dark_n, R.color.ctx_menu_controller_button_text_color_dark_p);
 
+		ColorStateList selectedLangColorStateList = AndroidUtils.createPressedColorStateList(
+				getContext(), darkMode,
+				R.color.icon_color, R.color.wikivoyage_active_light,
+				R.color.icon_color, R.color.wikivoyage_active_dark
+		);
+
 		readFullArticleButton = (TextView) mainView.findViewById(R.id.read_full_article);
 		readFullArticleButton.setBackgroundResource(darkMode ? R.drawable.bt_round_long_night : R.drawable.bt_round_long_day);
 		readFullArticleButton.setTextColor(buttonColorStateList);
-		readFullArticleButton.setCompoundDrawablesWithIntrinsicBounds(getIcon(R.drawable.ic_world_globe_dark), null, null, null);
+		readFullArticleButton.setCompoundDrawablesWithIntrinsicBounds(getActiveIcon(R.drawable.ic_world_globe_dark), null, null, null);
 		readFullArticleButton.setCompoundDrawablePadding((int) getResources().getDimension(R.dimen.content_padding_small));
+		int paddingLeft = (int) getResources().getDimension(R.dimen.wikipedia_button_left_padding);
+		int paddingRight = (int) getResources().getDimension(R.dimen.dialog_content_margin);
+		readFullArticleButton.setPadding(paddingLeft, 0, paddingRight, 0);
 
-		selectLanguageTextView = mainView.findViewById(R.id.select_language_text_view);
-		selectLanguageTextView.setTextColor(buttonColorStateList);
-		selectLanguageTextView.setCompoundDrawablesWithIntrinsicBounds(getIcon(R.drawable.ic_action_map_language), null, null, null);
-		selectLanguageTextView.setCompoundDrawablePadding((int) getResources().getDimension(R.dimen.context_menu_padding_margin_small));
-		selectLanguageTextView.setBackgroundResource(darkMode ? R.drawable.wikipedia_select_lang_bg_dark : R.drawable.wikipedia_select_lang_bg_light);
+		selectLanguageTextView = (TextView) mainView.findViewById(R.id.select_language_text_view);
+		selectLanguageTextView.setTextColor(selectedLangColorStateList);
+		selectLanguageTextView.setCompoundDrawablesWithIntrinsicBounds(getSelectedLangIcon(), null, null, null);
+		selectLanguageTextView.setBackgroundResource(darkMode
+				? R.drawable.wikipedia_select_lang_bg_dark_n : R.drawable.wikipedia_select_lang_bg_light_n);
+
 		contentWebView = (WebView) mainView.findViewById(R.id.content_web_view);
 		WebSettings webSettings = contentWebView.getSettings();
 		webSettings.setJavaScriptEnabled(true);
 
 		return mainView;
+	}
+
+	@NonNull
+	private Drawable getSelectedLangIcon() {
+		Drawable normal = getIcon(R.drawable.ic_action_map_language, R.color.icon_color);
+		if (Build.VERSION.SDK_INT >= 21) {
+			Drawable active = getActiveIcon(R.drawable.ic_action_map_language);
+			return AndroidUtils.createPressedStateListDrawable(normal, active);
+		}
+		return normal;
 	}
 
 	@NonNull
@@ -188,7 +208,7 @@ public class WikipediaDialogFragment extends BaseOsmAndDialogFragment {
 				}
 			});
 
-			selectLanguageTextView.setText(langSelected);
+			selectLanguageTextView.setText(Algorithms.capitalizeFirstLetter(langSelected));
 			selectLanguageTextView.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
@@ -249,8 +269,8 @@ public class WikipediaDialogFragment extends BaseOsmAndDialogFragment {
 		optionsMenu.show();
 	}
 
-	private Drawable getIcon(int resId) {
-		int colorId = darkMode ? R.color.ctx_menu_controller_button_text_color_dark_n : R.color.ctx_menu_controller_button_text_color_light_n;
+	private Drawable getActiveIcon(int resId) {
+		int colorId = darkMode ? R.color.wikivoyage_active_dark : R.color.wikivoyage_active_light;
 		return getIcon(resId, colorId);
 	}
 
