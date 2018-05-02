@@ -86,13 +86,13 @@ public class WikipediaDialogFragment extends BaseOsmAndDialogFragment {
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 		int themeId = darkMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme_LightStatusBar;
 		Dialog dialog = new Dialog(getContext(), themeId);
-		if (!getSettings().DO_NOT_USE_ANIMATIONS.get()) {
-			Window window = dialog.getWindow();
-			if (window != null) {
+		Window window = dialog.getWindow();
+		if (window != null) {
+			if (!getSettings().DO_NOT_USE_ANIMATIONS.get()) {
 				window.getAttributes().windowAnimations = R.style.Animations_Alpha;
-				if (Build.VERSION.SDK_INT >= 21) {
-					window.setStatusBarColor(getResolvedColor(getStatusBarColor()));
-				}
+			}
+			if (Build.VERSION.SDK_INT >= 21) {
+				window.setStatusBarColor(getResolvedColor(getStatusBarColor()));
 			}
 		}
 		return dialog;
@@ -113,12 +113,8 @@ public class WikipediaDialogFragment extends BaseOsmAndDialogFragment {
 				R.color.ctx_menu_controller_button_text_color_dark_n, R.color.ctx_menu_controller_button_text_color_dark_p);
 
 		readFullArticleButton = (TextView) mainView.findViewById(R.id.read_full_article);
-
 		readFullArticleButton.setBackgroundResource(darkMode ? R.drawable.bt_round_long_night : R.drawable.bt_round_long_day);
 		readFullArticleButton.setTextColor(buttonColorStateList);
-		int paddingLeft = (int) getResources().getDimension(R.dimen.wikipedia_button_left_padding);
-		int paddingRight = (int) getResources().getDimension(R.dimen.dialog_content_margin);
-		readFullArticleButton.setPadding(paddingLeft, 0, paddingRight, 0);
 		readFullArticleButton.setCompoundDrawablesWithIntrinsicBounds(getIcon(R.drawable.ic_world_globe_dark), null, null, null);
 		readFullArticleButton.setCompoundDrawablePadding((int) getResources().getDimension(R.dimen.content_padding_small));
 
