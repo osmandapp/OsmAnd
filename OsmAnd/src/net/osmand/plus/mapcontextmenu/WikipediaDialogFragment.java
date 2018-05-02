@@ -1,53 +1,65 @@
 package net.osmand.plus.mapcontextmenu;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.ColorInt;
+import android.support.annotation.ColorRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.customtabs.CustomTabsIntent;
-import android.support.design.widget.AppBarLayout;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.PopupMenu;
-import android.text.Html;
-import android.text.Spannable;
-import android.text.SpannableString;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
-import android.text.method.LinkMovementMethod;
-import android.text.style.RelativeSizeSpan;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
+import android.view.Window;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
 import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
+import net.osmand.IndexConstants;
 import net.osmand.data.Amenity;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.util.Algorithms;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
-public class WikipediaDialogFragment extends DialogFragment {
+
+public class WikipediaDialogFragment extends BaseOsmAndDialogFragment {
 
 	public static final String TAG = "WikipediaDialogFragment";
 
-	private View mainView;
+	private static final String HEADER_INNER = "<html><head>\n" +
+			"<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />\n" +
+			"<meta http-equiv=\"cleartype\" content=\"on\" />\n" +
+			"<link href=\"article_style.css\" type=\"text/css\" rel=\"stylesheet\"/>\n" +
+			"</head>";
+	private static final String FOOTER_INNER = "</body></html>";
+
+	private WebView contentWebView;
+	private TextView articleToolbarText;
+	private TextView readFullArticleButton;
+	private TextView selectLanguageTextView;
+
 	private boolean darkMode;
 	private Amenity amenity;
 	private String lang;
@@ -72,80 +84,71 @@ public class WikipediaDialogFragment extends DialogFragment {
 	@NonNull
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
-		Dialog dialog = new Dialog(getContext(), getTheme());
-		if (!getMyApplication().getSettings().DO_NOT_USE_ANIMATIONS.get()) {
-			dialog.getWindow().getAttributes().windowAnimations = R.style.Animations_Alpha;
+		int themeId = darkMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme_LightStatusBar;
+		Dialog dialog = new Dialog(getContext(), themeId);
+		Window window = dialog.getWindow();
+		if (window != null) {
+			if (!getSettings().DO_NOT_USE_ANIMATIONS.get()) {
+				window.getAttributes().windowAnimations = R.style.Animations_Alpha;
+			}
+			if (Build.VERSION.SDK_INT >= 21) {
+				window.setStatusBarColor(getResolvedColor(getStatusBarColor()));
+			}
 		}
 		return dialog;
 	}
 
+	@SuppressLint("SetJavaScriptEnabled")
 	@Nullable
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		mainView = inflater.inflate(R.layout.wikipedia_dialog_fragment, container, false);
+		View mainView = inflater.inflate(R.layout.wikipedia_dialog_fragment, container, false);
 
-		mainView.setBackgroundColor(ContextCompat.getColor(getContext(), darkMode ? R.color.ctx_menu_bottom_view_bg_dark : R.color.ctx_menu_bottom_view_bg_light));
+		setupToolbar((Toolbar) mainView.findViewById(R.id.toolbar));
 
-		AppBarLayout appBarLayout = (AppBarLayout) mainView.findViewById(R.id.app_bar);
-		appBarLayout.setBackgroundColor(ContextCompat.getColor(getContext(), darkMode ? R.color.ctx_menu_buttons_bg_dark: R.color.ctx_menu_buttons_bg_light));
-
-		int toolbarTextColor = ContextCompat.getColor(getContext(), R.color.dashboard_subheader_text_light);
-
-		ImageButton backButton = (ImageButton) mainView.findViewById(R.id.back_button);
-		backButton.setImageDrawable(getMyApplication().getIconsCache().getPaintedIcon(R.drawable.ic_arrow_back, toolbarTextColor));
-		backButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				dismiss();
-			}
-		});
-
-		TextView titleTextView = (TextView) mainView.findViewById(R.id.title_text_view);
-		titleTextView.setTextColor(toolbarTextColor);
+		articleToolbarText = (TextView) mainView.findViewById(R.id.title_text_view);
 
 		ColorStateList buttonColorStateList = AndroidUtils.createPressedColorStateList(getContext(), darkMode,
 				R.color.ctx_menu_controller_button_text_color_light_n, R.color.ctx_menu_controller_button_text_color_light_p,
 				R.color.ctx_menu_controller_button_text_color_dark_n, R.color.ctx_menu_controller_button_text_color_dark_p);
 
-		final TextView readFullArticleButton = (TextView) mainView.findViewById(R.id.read_full_article);
-		CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams) readFullArticleButton.getLayoutParams();
-		params.setBehavior(new CoordinatorLayout.Behavior() {
-			@Override
-			public boolean layoutDependsOn(CoordinatorLayout parent, View child, View dependency) {
-				return dependency instanceof AppBarLayout;
-			}
-
-			@Override
-			public boolean onDependentViewChanged(CoordinatorLayout parent, View child, View dependency) {
-				if (dependency instanceof AppBarLayout) {
-					int readFullArticleButtonHeight = child.getMeasuredHeight();
-					if (readFullArticleButtonHeight != 0) {
-						CoordinatorLayout.LayoutParams lp = (CoordinatorLayout.LayoutParams) child.getLayoutParams();
-						int viewBottomMargin = lp.bottomMargin;
-						int distanceToScroll = child.getHeight() + viewBottomMargin;
-						float ratio = dependency.getY() / readFullArticleButtonHeight;
-						child.setTranslationY(-distanceToScroll * ratio);
-					}
-				}
-				return true;
-			}
-		});
-		readFullArticleButton.setLayoutParams(params);
+		readFullArticleButton = (TextView) mainView.findViewById(R.id.read_full_article);
 		readFullArticleButton.setBackgroundResource(darkMode ? R.drawable.bt_round_long_night : R.drawable.bt_round_long_day);
 		readFullArticleButton.setTextColor(buttonColorStateList);
-		int paddingLeft = (int) getResources().getDimension(R.dimen.wikipedia_button_left_padding);
-		int paddingRight = (int) getResources().getDimension(R.dimen.dialog_content_margin);
-		readFullArticleButton.setPadding(paddingLeft, 0, paddingRight, 0);
 		readFullArticleButton.setCompoundDrawablesWithIntrinsicBounds(getIcon(R.drawable.ic_world_globe_dark), null, null, null);
 		readFullArticleButton.setCompoundDrawablePadding((int) getResources().getDimension(R.dimen.content_padding_small));
 
-		final TextView selectLanguageTextView = mainView.findViewById(R.id.select_language_text_view);
+		selectLanguageTextView = mainView.findViewById(R.id.select_language_text_view);
 		selectLanguageTextView.setTextColor(buttonColorStateList);
 		selectLanguageTextView.setCompoundDrawablesWithIntrinsicBounds(getIcon(R.drawable.ic_action_map_language), null, null, null);
 		selectLanguageTextView.setCompoundDrawablePadding((int) getResources().getDimension(R.dimen.context_menu_padding_margin_small));
 		selectLanguageTextView.setBackgroundResource(darkMode ? R.drawable.wikipedia_select_lang_bg_dark : R.drawable.wikipedia_select_lang_bg_light);
+		contentWebView = (WebView) mainView.findViewById(R.id.content_web_view);
+		WebSettings webSettings = contentWebView.getSettings();
+		webSettings.setJavaScriptEnabled(true);
 
 		return mainView;
+	}
+
+	@NonNull
+	private String getBaseUrl() {
+		File wikivoyageDir = getMyApplication().getAppPath(IndexConstants.WIKIVOYAGE_INDEX_DIR);
+		if (new File(wikivoyageDir, "article_style.css").exists()) {
+			return "file://" + wikivoyageDir.getAbsolutePath() + "/";
+		}
+		return "file:///android_asset/";
+	}
+
+	@NonNull
+	private String createHtmlContent(@NonNull String article) {
+		StringBuilder sb = new StringBuilder(HEADER_INNER);
+		String nightModeClass = darkMode ? " nightmode" : "";
+		sb.append("<div class=\"main");
+		sb.append(nightModeClass);
+		sb.append("\">\n");
+		sb.append(article);
+		sb.append(FOOTER_INNER);
+		return sb.toString();
 	}
 
 	@Override
@@ -176,9 +179,8 @@ public class WikipediaDialogFragment extends DialogFragment {
 
 			final String langSelected = lng;
 			final String title = amenity.getName(langSelected);
-			((TextView) mainView.findViewById(R.id.title_text_view)).setText(title);
-
-			mainView.findViewById(R.id.read_full_article).setOnClickListener(new View.OnClickListener() {
+			articleToolbarText.setText(title);
+			readFullArticleButton.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
 					String article = "https://" + langSelected.toLowerCase() + ".wikipedia.org/wiki/" + title.replace(' ', '_');
@@ -186,7 +188,6 @@ public class WikipediaDialogFragment extends DialogFragment {
 				}
 			});
 
-			final TextView selectLanguageTextView = mainView.findViewById(R.id.select_language_text_view);
 			selectLanguageTextView.setText(langSelected);
 			selectLanguageTextView.setOnClickListener(new View.OnClickListener() {
 				@Override
@@ -196,29 +197,15 @@ public class WikipediaDialogFragment extends DialogFragment {
 			});
 
 			String content = amenity.getDescription(langSelected);
-
-			TextView articleTextView = (TextView) mainView.findViewById(R.id.content);
-			Spannable spannableContent = new SpannableString(Html.fromHtml(content));
-			int length = spannableContent.length();
-			spannableContent.setSpan(new RelativeSizeSpan(1.2f), 0, length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-			int contentTextColor = ContextCompat.getColor(getContext(), darkMode ? R.color.ctx_menu_bottom_view_text_color_dark : R.color.ctx_menu_bottom_view_text_color_light);
-			articleTextView.setTextColor(contentTextColor);
-			articleTextView.setText(spannableContent);
-			articleTextView.setMovementMethod(LinkMovementMethod.getInstance());
+			contentWebView.loadDataWithBaseURL(getBaseUrl(), createHtmlContent(content), "text/html", "UTF-8", null);
 		}
 	}
 
 	public static void showFullArticle(Context context, Uri uri, boolean nightMode) {
-		if (Build.VERSION.SDK_INT > Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
-			CustomTabsIntent customTabsIntent = new CustomTabsIntent.Builder()
-					.setToolbarColor(ContextCompat.getColor(context, nightMode ? R.color.actionbar_dark_color : R.color.actionbar_light_color))
-					.build();
-			customTabsIntent.launchUrl(context, uri);
-		} else {
-			Intent i = new Intent(Intent.ACTION_VIEW);
-			i.setData(uri);
-			context.startActivity(i);
-		}
+		CustomTabsIntent customTabsIntent = new CustomTabsIntent.Builder()
+				.setToolbarColor(ContextCompat.getColor(context, nightMode ? R.color.actionbar_dark_color : R.color.actionbar_light_color))
+				.build();
+		customTabsIntent.launchUrl(context, uri);
 	}
 
 	private void showPopupLangMenu(View view, final String langSelected) {
@@ -264,11 +251,7 @@ public class WikipediaDialogFragment extends DialogFragment {
 
 	private Drawable getIcon(int resId) {
 		int colorId = darkMode ? R.color.ctx_menu_controller_button_text_color_dark_n : R.color.ctx_menu_controller_button_text_color_light_n;
-		return getMyApplication().getIconsCache().getIcon(resId, colorId);
-	}
-
-	private OsmandApplication getMyApplication() {
-		return (OsmandApplication) getActivity().getApplication();
+		return getIcon(resId, colorId);
 	}
 
 	public static boolean showInstance(AppCompatActivity activity, Amenity amenity, String lang) {
@@ -292,5 +275,26 @@ public class WikipediaDialogFragment extends DialogFragment {
 
 	public static boolean showInstance(AppCompatActivity activity, Amenity amenity) {
 		return showInstance(activity, amenity, null);
+	}
+
+	protected void setupToolbar(Toolbar toolbar) {
+		toolbar.setNavigationIcon(getIcon(R.drawable.ic_arrow_back, R.color.icon_color));
+		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
+		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				dismiss();
+			}
+		});
+	}
+
+	@ColorRes
+	protected int getStatusBarColor() {
+		return darkMode ? R.color.status_bar_wikivoyage_article_dark : R.color.status_bar_wikivoyage_article_light;
+	}
+
+	@ColorInt
+	protected int getResolvedColor(@ColorRes int colorId) {
+		return ContextCompat.getColor(getContext(), colorId);
 	}
 }

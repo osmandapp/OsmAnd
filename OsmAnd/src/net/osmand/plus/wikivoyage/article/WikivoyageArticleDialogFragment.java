@@ -413,19 +413,16 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 			if (aggregatedPartOfArrayOrig.length > 0) {
 				String current = aggregatedPartOfArrayOrig[0];
 				sb.append("<div class=\"nav-bar"+nightModeClass+"\" onClick=\"showNavigation()\">");
-				if (aggregatedPartOfArrayOrig.length > 1) {
-					String[] aggregatedPartOfArray = new String[aggregatedPartOfArrayOrig.length - 1];
-					for (int i = 0; i < aggregatedPartOfArrayOrig.length - 1; i++) {
-						aggregatedPartOfArray[i] = aggregatedPartOfArrayOrig[aggregatedPartOfArrayOrig.length - i - 1];
+				if (aggregatedPartOfArrayOrig.length > 0) {
+					for (int i = 0; i <  aggregatedPartOfArrayOrig.length ; i++) {
+						if (i > 0) {
+					    		sb.append("&nbsp;&nbsp;•&nbsp;&nbsp;").append(aggregatedPartOfArrayOrig[i]);
+						} else {
+						   if (!TextUtils.isEmpty(current)) {
+							sb.append("<span class=\"nav-bar-current\">").append(current).append("</span>");
+						   }
+						}
 					}
-					String navBarString = TextUtils.join(" • ", aggregatedPartOfArray);
-					sb.append(navBarString);
-				}
-				if (!TextUtils.isEmpty(current)) {
-					if (aggregatedPartOfArrayOrig.length > 1) {
-						sb.append(" • ");
-					}
-					sb.append("<span class=\"nav-bar-current\">").append(current).append("</span>");
 				}
 				sb.append("</div>");
 			}
