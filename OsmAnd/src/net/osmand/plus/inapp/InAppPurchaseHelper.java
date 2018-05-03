@@ -128,7 +128,8 @@ public class InAppPurchaseHelper {
 		if (Version.isDeveloperBuild(app)) {
 			return 1000 * 60 * 60; // 1 hour (test)
 		} else {
-			return SUBSCRIPTION_HOLDING_TIME_MSEC;
+			return 1000 * 60 * 60; // 1 hour (test)
+			//return SUBSCRIPTION_HOLDING_TIME_MSEC;
 		}
 	}
 
