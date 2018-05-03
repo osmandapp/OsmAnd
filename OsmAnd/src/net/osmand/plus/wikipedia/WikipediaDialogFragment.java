@@ -62,13 +62,6 @@ public class WikipediaDialogFragment extends WikiArticleBaseDialogFragment {
 		this.lang = lang;
 	}
 
-	@Override
-	public void onCreate(@Nullable Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		int themeId = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
-		setStyle(STYLE_NO_FRAME, themeId);
-	}
-
 	@SuppressLint("SetJavaScriptEnabled")
 	@Nullable
 	@Override
