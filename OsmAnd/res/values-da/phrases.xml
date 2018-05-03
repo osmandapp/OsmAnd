@@ -3920,7 +3920,7 @@
 	<string name="poi_glacier_type_tidewater">Tidevand</string>
 	<string name="poi_glacier_type_mountain">Bjerg</string>
 	<string name="poi_glacier_type_hanging">Hængende</string>
-	<string name="poi_glacier_type_icefall">Isvandfald</string>
+	<string name="poi_glacier_type_icefall">Isfald</string>
 	<string name="poi_glacier_type_rock">Klippe</string>
 	<string name="poi_glacier_type_shelf">Hylde</string>
 	<string name="poi_glacier_type_remnant">Rest</string>

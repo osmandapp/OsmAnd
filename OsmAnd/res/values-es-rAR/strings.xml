@@ -3038,4 +3038,6 @@ Lon %2$s</string>
     <string name="paid_app">Aplicación de pago</string>
     <string name="paid_plugin">Complemento de pago</string>
     <string name="osmand_team">Equipo de OsmAnd</string>
+    <string name="maps_you_need_descr">Lees artículos: %1$s. En base a esto, le sugerimos que descargue estos mapas:</string>
+    <string name="maps_you_need">Mapas que necesitas</string>
     </resources>

@@ -40,7 +40,7 @@
 	<uses-feature android:name="com.sec.feature.spen_usp" android:required="false"/>
 
 <!-- com.getkeepsafe.taptargetview, studio.carbonylgroup.textfieldboxes, android.support.customtabs -->
-	<uses-sdk android:targetSdkVersion="23" android:minSdkVersion="15"
+	<uses-sdk android:targetSdkVersion="26" android:minSdkVersion="15"
 		tools:overrideLibrary=""/>
 
 	<supports-screens android:resizeable="true" android:smallScreens="true" android:normalScreens="true" android:largeScreens="true"

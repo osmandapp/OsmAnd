@@ -1,6 +1,8 @@
 package net.osmand.plus.api;
 
 import net.osmand.plus.OsmandApplication;
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
@@ -12,10 +14,12 @@ public class SQLiteAPIImpl implements SQLiteAPI {
 		this.app = app;
 	}
 
+	@SuppressLint("InlinedApi")
 	@Override
 	public SQLiteConnection getOrCreateDatabase(String name, boolean readOnly) {
 		android.database.sqlite.SQLiteDatabase db = app.openOrCreateDatabase(name,
-				readOnly ? SQLiteDatabase.OPEN_READONLY : (SQLiteDatabase.OPEN_READWRITE | SQLiteDatabase.ENABLE_WRITE_AHEAD_LOGGING), null);
+				Context.MODE_PRIVATE |
+						(readOnly ? 0 : Context.MODE_ENABLE_WRITE_AHEAD_LOGGING), null);
 		if(db == null) {
 			return null;
 		}

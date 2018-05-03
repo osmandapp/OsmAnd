@@ -1197,6 +1197,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	//	}
 		wakeLockHelper.onStop(this);
 		getMyApplication().getNotificationHelper().removeNotifications();
+		onPauseActivity();
 		super.onStop();
 	}
 
@@ -1244,6 +1245,18 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	@Override
 	protected void onPause() {
+		super.onPause();
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+			if (!isInMultiWindowMode()) {
+				onPauseActivity();
+			}
+		} else {
+			onPauseActivity();
+		}
+
+	}
+
+	private void onPauseActivity() {
 		mapView.setOnDrawMapListener(null);
 		cancelSplashScreenTimer();
 		app.getMapMarkersHelper().removeListener(this);
@@ -1252,7 +1265,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		if (atlasMapRendererView != null) {
 			atlasMapRendererView.handleOnPause();
 		}
-		super.onPause();
 		app.getLocationProvider().pauseAllUpdates();
 		app.getDaynightHelper().stopSensorIfNeeded();
 		settings.APPLICATION_MODE.removeListener(applicationModeListener);
