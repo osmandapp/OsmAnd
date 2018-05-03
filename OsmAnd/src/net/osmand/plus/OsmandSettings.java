@@ -717,8 +717,8 @@ public class OsmandSettings {
 	public final CommonPreference<Boolean> SHOW_LINES_TO_FIRST_MARKERS = new BooleanPreference("show_lines_to_first_markers", false).makeProfile();
 	public final CommonPreference<Boolean> SHOW_ARROWS_TO_FIRST_MARKERS = new BooleanPreference("show_arrows_to_first_markers", false).makeProfile();
 
-	public final CommonPreference<Boolean> WIKIVOYAGE_SHOW_IMAGES_ASKED = new BooleanPreference("wikivoyage_show_images_asked", false).makeGlobal();
-	public final CommonPreference<WikivoyageShowImages> WIKIVOYAGE_SHOW_IMAGES = new EnumIntPreference<>("wikivoyage_show_imgs", WikivoyageShowImages.OFF, WikivoyageShowImages.values()).makeGlobal();
+	public final CommonPreference<Boolean> WIKI_ARTICLE_SHOW_IMAGES_ASKED = new BooleanPreference("wikivoyage_show_images_asked", false).makeGlobal();
+	public final CommonPreference<WikiArticleShowImages> WIKI_ARTICLE_SHOW_IMAGES = new EnumIntPreference<>("wikivoyage_show_imgs", WikiArticleShowImages.OFF, WikiArticleShowImages.values()).makeGlobal();
 
 	public final CommonPreference<Boolean> SELECT_MARKER_ON_SINGLE_TAP = new BooleanPreference("select_marker_on_single_tap", false).makeProfile();
 
@@ -3315,14 +3315,14 @@ public class OsmandSettings {
 		EMPTY
 	}
 
-	public enum WikivoyageShowImages {
+	public enum WikiArticleShowImages {
 		ON(R.string.shared_string_on),
 		OFF(R.string.shared_string_off),
 		WIFI(R.string.shared_string_wifi_only);
 
 		public final int name;
 
-		WikivoyageShowImages(int name) {
+		WikiArticleShowImages(int name) {
 			this.name = name;
 		}
 	}

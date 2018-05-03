@@ -263,10 +263,10 @@ public class PrecalculatedRouteDirection {
 		minSpeed = ctx.getRouter().getMinDefaultSpeed();
 		maxSpeed = ctx.getRouter().getMaxDefaultSpeed();
 		if(ind1 == -1) {
-			throw new IllegalArgumentException();
+			return null;
 		}
 		if(ind2 == -1) {
-			throw new IllegalArgumentException();
+			return null;
 		}
 		PrecalculatedRouteDirection routeDirection = new PrecalculatedRouteDirection(this, ind1, ind2);
 		routeDirection.startPoint = calc(ctx.startX, ctx.startY);

@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
     <string name="download_hillshade_maps">Տարածքի մգեցված ռելիեֆով քարտեզներ (Hillshades)</string>
     
     <string name="local_indexes_cat_av">Ձայնա/Տեսանյութեր</string>
@@ -2741,4 +2742,30 @@
     <string name="toast_empty_name_error">Դիրքը անուն չունի</string>
     <string name="tunnel_warning">Առջևում թունել է</string>
     <string name="show_tunnels">Թունելներ</string>
-</resources>
+<string name="maps_you_need">Ձեզ անհրաժեշտ քարտեզները</string>
+    <string name="osmand_team">OsmAnd-ի թիմը</string>
+    <string name="popular_destinations">Հանրահայտ վայրեր</string>
+    <string name="paid_app">Վճարովի հավելված</string>
+    <string name="paid_plugin">Վճարովի plugin</string>
+    <string name="travel_card_update_descr">Մատչելի են նոր Վիքիուղեցույցի տվյալները, թարմացրեք այն և վայելեք.</string>
+	<string name="update_is_available">Թարմացում է հասանելի</string>
+	<string name="download_file">Ներբեռնել ֆայլը</string>
+    <string name="start_editing">Սկսել խմբագրելը</string>
+    <string name="get_unlimited_access">Ստանալ անսահմանափակ մուտք</string>
+    <string name="welcome_to_open_beta">Բարի գալուստ բաց բետա տարբերակ</string>
+    <string name="monthly_map_updates">Քարտեզի թարմացումները`<b>ամսական</b></string>
+    <string name="daily_map_updates">Քարտեզի թարմացումները`<b>ամեն ժամ</b></string>
+    <string name="in_app_purchase">Գնում հավելվածում</string>
+    <string name="in_app_purchase_desc">Մեկանգամյա վճարում</string>
+    <string name="in_app_purchase_desc_ex">Մի անգամ գնելուց հետո այն մշտապես մատչելի կլինի ձեզ համար:</string>
+    <string name="purchase_unlim_title">Գնել - %1$s</string>
+    <string name="purchase_subscription_title">Բաժանորդագրվել - %1$s</string>
+
+    <string name="wikivoyage_offline">Վիքիուղեցույցը անցանց ռեժիմում</string>
+
+    <string name="unlimited_downloads">Անսահմանափակ ներբեռնում</string>
+    <string name="wikipedia_offline">Վիքիպեդիա (անցանց)</string>
+    <string name="unlock_all_features">Ստանալ OsmAnd բոլոր գործառույթները</string>
+
+    <string name="purchase_dialog_title">Ընտրեք Փաթեթ</string>
+    </resources>

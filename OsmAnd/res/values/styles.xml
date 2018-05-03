@@ -217,6 +217,13 @@
         <item name="wikivoyage_primary_btn_text_color">@color/wikivoyage_primary_btn_text_light</item>
         <item name="wikivoyage_welcome_bg_color">@color/wikivoyage_welcome_bg_light</item>
         <item name="wikivoyage_primary_text_color">@color/wikivoyage_primary_text_light</item>
+
+        <item name="wikivoyage_travel_card_bg">@drawable/travel_card_bg_light</item>
+        <item name="wikivoyage_travel_card_stroke_bg">@drawable/travel_card_stroke_bg_light</item>
+        <item name="wikivoyage_secondary_btn_bg">@drawable/wikivoyage_secondary_btn_bg_light</item>
+        <item name="wikivoyage_primary_btn_bg">@drawable/wikivoyage_primary_btn_bg_light</item>
+        <item name="purchase_dialog_active_card_bg">@drawable/dialog_active_card_bg_light</item>
+
     </style>
 
     <style name="OverflowMenuButton" parent="@style/Widget.AppCompat.ActionButton.Overflow">
@@ -422,6 +429,13 @@
         <item name="wikivoyage_primary_btn_text_color">@color/wikivoyage_primary_btn_text_dark</item>
         <item name="wikivoyage_welcome_bg_color">@color/wikivoyage_welcome_bg_dark</item>
         <item name="wikivoyage_primary_text_color">@color/wikivoyage_primary_text_dark</item>
+
+        <item name="wikivoyage_travel_card_bg">@drawable/travel_card_bg_dark</item>
+        <item name="wikivoyage_travel_card_stroke_bg">@drawable/travel_card_stroke_bg_dark</item>
+        <item name="wikivoyage_secondary_btn_bg">@drawable/wikivoyage_secondary_btn_bg_dark</item>
+        <item name="wikivoyage_primary_btn_bg">@drawable/wikivoyage_primary_btn_bg_dark</item>
+        <item name="purchase_dialog_active_card_bg">@drawable/dialog_active_card_bg_dark</item>
+
     </style>
 
     <style name="FreeVersionBanner" parent="OsmandDarkTheme">

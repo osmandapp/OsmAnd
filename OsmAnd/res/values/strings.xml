@@ -12,22 +12,24 @@
     <string name="purchase_cancelled_dialog_title">You have cancel OsmAnd Live subscription</string>
     <string name="purchase_cancelled_dialog_descr">Renew subscription to continue use the all features:</string>
 
+    <string name="maps_you_need_descr">You read articles: %1$s. Based on this, we suggest you download these maps:</string>
+    <string name="maps_you_need">Maps you need</string>
     <string name="osmand_team">OsmAnd team</string>
     <string name="popular_destinations">Popular destinations</string>
     <string name="paid_app">Paid app</string>
     <string name="paid_plugin">Paid plugin</string>
-    <string name="travel_card_update_descr">We prepared updates and fixes in the Wikivoyage data, update the file to see them.</string>
-	<string name="travel_card_download_descr">Download this Wikivoyage travel guides file to view articles about places around the world without an internet connection.</string>
-	<string name="update_is_available">Update is available</string>
+    <string name="travel_card_update_descr">New Wikivoyage data available, update it to enjoy.</string>
+	<string name="travel_card_download_descr">Download these Wikivoyage travel guides to view articles about places around the world without a connection to the Internet.</string>
+	<string name="update_is_available">Update available</string>
 	<string name="download_file">Download file</string>
-    <string name="start_editing_card_image_text">The free worldwide travel guide that anyone can edit.</string>
-    <string name="welcome_to_open_beta_description">Travel is based on Wikivoyage. During open beta testing you have the opportunity to evaluate all the features for free. After the end of the beta period, Travel will be available to subscribers of OsmAnd Unlimited and the owners of OsmAnd+</string>
-    <string name="start_editing_card_description">You can edit any article on Wikivoyage, and we hope that you do. We need your knowledge, your experience, your talent, and your attention</string>
+    <string name="start_editing_card_image_text">The free worldwide travel guide anyone can edit.</string>
+    <string name="welcome_to_open_beta_description">Travel is based on Wikivoyage. Test all features during open beta testing, for free. Afterwards, Travel will be available to subscribers of OsmAnd Unlimited and owners of OsmAnd+</string>
+    <string name="start_editing_card_description">You can and should edit any article on Wikivoyage. Share knowledge, experience, talent, and your attention</string>
     <string name="start_editing">Start editing</string>
     <string name="get_unlimited_access">Get unlimited access</string>
-    <string name="welcome_to_open_beta">Welcome, to the open beta!</string>
-    <string name="travel_guide">Travel Guide</string>
-    <string name="travel_guide_description">Browse the Wikivoyage guides to the most interesting places on the planet inside OsmAnd without an internet connection.</string>
+    <string name="welcome_to_open_beta">Welcome to the open beta</string>
+    <string name="travel_guide">Wikivoyage Travel Guide</string>
+    <string name="travel_guide_description">Guides to the most interesting places on the planet, inside OsmAnd, without a connection to the Internet.</string>
     <string name="monthly_map_updates">Map updates: <b>Every month</b></string>
     <string name="daily_map_updates">Map updates: <b>Every hour</b></string>
     <string name="in_app_purchase">In-app purchase</string>
@@ -72,7 +74,7 @@
     <string name="shared_string_travel">Travel</string>
     <string name="waypoints_removed_from_map_markers">Waypoints removed from map markers</string>
     <string name="nothing_found_in_radius">Could not find anything:</string>
-    <string name="select_waypoints_category_description">You can add all of the track\'s waypoints, or select separate categories.</string>
+    <string name="select_waypoints_category_description">Add all of the track\'s waypoints, or select separate categories.</string>
     <string name="shared_string_total">Total</string>
     <string name="clear_all_intermediates">Clear all intermediate points</string>
     <string name="group_deleted">Group deleted</string>
@@ -157,11 +159,11 @@
     <string name="track_waypoints">Track waypoints</string>
     <string name="favourites_group">Favorites category</string>
     <string name="add_group">Add a group</string>
-    <string name="add_group_descr">You can import groups from favorites or track waypoints.</string>
+    <string name="add_group_descr">Import groups from favorites or track waypoints.</string>
     <string name="empty_state_markers_active">Create map markers!</string>
     <string name="empty_state_markers_active_desc">Long or short tap \'Places\', then tap the marker flag button.</string>
     <string name="empty_state_markers_groups">Import groups</string>
-    <string name="empty_state_markers_groups_desc">You can import favorite groups or track waypoints as markers.</string>
+    <string name="empty_state_markers_groups_desc">Import favorite groups or track waypoints as markers.</string>
     <string name="empty_state_markers_history">@string/shared_string_history</string>
     <string name="empty_state_markers_history_desc">Markers marked as passed will appear on this screen.</string>
     <string name="shared_string_two">Two</string>
@@ -197,7 +199,7 @@
     <string name="route_is_calculated">Route calculated</string>
     <string name="round_trip">Round trip</string>
     <string name="plan_route_no_markers_toast">You must add at least one marker to use this function.</string>
-    <string name="osn_modify_dialog_error">Exception occurred: The note was not modified</string>
+    <string name="osn_modify_dialog_error">Could not modify note</string>
     <string name="osn_modify_dialog_title">Modify note</string>
     <string name="context_menu_item_modify_note">Modify OSM note</string>
     <string name="make_round_trip_descr">Add copy of starting point as destination.</string>
@@ -263,7 +265,7 @@
     <string name="add_point_after">Add point after</string>
     <string name="shared_string_options">Options</string>
     <string name="measurement_tool_snap_to_road_descr">OsmAnd will connect the points with routes for the selected profile.</string>
-    <string name="measurement_tool_save_as_new_track_descr">You can save the points either as route points or as a line.</string>
+    <string name="measurement_tool_save_as_new_track_descr">Save the points either as route points or as a line.</string>
     <string name="choose_navigation_type">Select navigation profile</string>
     <string name="none_point_error">Please add at least one point.</string>
     <string name="enter_gpx_name">GPX file name:</string>
@@ -289,7 +291,7 @@
     <string name="mapillary_menu_edit_text_hint">Type username</string>
     <string name="mapillary_menu_descr_username">View only images added by</string>
     <string name="mapillary_menu_title_username">Username</string>
-    <string name="mapillary_menu_filter_description">You can filter images by submitter or by date. Filters only apply for closeup zoom.</string>
+    <string name="mapillary_menu_filter_description">Filter images by submitter or by date. Only active in closeup zoom.</string>
     <string name="map_widget_ruler_control">Radius ruler</string>
     <string name="shared_string_permissions">Permissions</string>
     <string name="import_gpx_failed_descr">OsmAnd cannot import the file. Please check if OsmAnd has permission to read file from its location.</string>
@@ -375,7 +377,7 @@
     <string name="driving_region_automatic">Automatic</string>
     <string name="do_not_send_anonymous_app_usage">Don\'t send anonymous app usage statistics</string>
     <string name="do_not_send_anonymous_app_usage_desc">OsmAnd collects info about which parts of the app you open. Your location is never sent, nor is anything you enter into the app or details of areas you view, search, or download.</string>
-    <string name="do_not_show_startup_messages">Don\'t show messages at startup</string>
+    <string name="do_not_show_startup_messages">Don\'t show startup messages</string>
     <string name="do_not_show_startup_messages_desc">Don\'t show app discounts &amp; special local event messages.</string>
     <string name="parking_options">Parking options</string>
     <string name="full_version_thanks">Thank you for purchasing the paid version of OsmAnd.</string>
@@ -393,7 +395,7 @@
     <string name="route_points_category_name">Turns to pass on this route</string>
     <string name="track_points_category_name">Prominent points on this route</string>
     <string name="gpx_track">Track</string>
-    <string name="max_speed">Max speed</string>
+    <string name="max_speed">Maximum speed</string>
     <string name="average_speed">Average speed</string>
     <string name="shared_string_time_moving">Time moving</string>
     <string name="shared_string_time_span">Time span</string>
@@ -470,7 +472,7 @@
     <string name="show_legacy_search_desc">Add the legacy search to the drawer list.</string>
     <string name="routing_attr_allow_motorway_name">Allow motorways</string>
     <string name="routing_attr_allow_motorway_description">Allow motorways.</string>
-    <string name="upload_osm_note_description">You can upload your OSM Note anonymously or by using your OpenStreetMap.org profile.</string>
+    <string name="upload_osm_note_description">Upload your OSM Note anonymously or by using your OpenStreetMap.org profile.</string>
     <string name="wiki_around">Nearby Wikipedia articles</string>
     <string name="search_map_hint">Search city or region</string>
     <string name="route_roundabout_short">Take %1$d exit and go</string>
@@ -503,7 +505,7 @@
     <string name="save_track_min_speed">Logging minimum speed</string>
     <string name="save_track_min_speed_descr">Filter: No logging of points below this speed.</string>
     <string name="save_track_min_distance">Logging minimum displacement</string>
-    <string name="save_track_min_distance_descr">Filter: Set minimum distance a point to log a new one.</string>
+    <string name="save_track_min_distance_descr">Filter: Set minimum distance from a point to log a new one.</string>
     <string name="save_track_precision">Logging minimum accuracy</string>
     <string name="save_track_precision_descr">Filter: No logging unless this accuracy is reached.</string>
     <string name="christmas_poi">Christmas POI</string>
@@ -722,7 +724,7 @@
     <string name="data_is_not_available">Data not available</string>
     <string name="shared_string_remove">Remove</string>
     <string name="shared_string_read_more">Read more</string>
-    <string name="clear_updates_proposition_message">"You can remove downloaded updates and get back to the original map edition"</string>
+    <string name="clear_updates_proposition_message">"Remove downloaded updates and get back to the original map edition"</string>
     <string name="add_time_span">Add time span</string>
     <string name="road_blocked">Road blocked</string>
     <string name="shared_string_select">Select</string>
@@ -795,13 +797,13 @@
     <string name="osn_reopen_dialog_title">Reopen note</string>
     <string name="osn_close_dialog_title">Close note</string>
     <string name="osn_add_dialog_success">Note created</string>
-    <string name="osn_add_dialog_error">Exception occurred: Note was not created</string>
+    <string name="osn_add_dialog_error">Could not create note</string>
     <string name="osn_close_dialog_success">Note closed</string>
-    <string name="osn_close_dialog_error">Exception occurred: Note not closed</string>
+    <string name="osn_close_dialog_error">Could not close note</string>
     <string name="osb_author_dialog_password">OSM password (optional)</string>
     <string name="osb_comment_dialog_message">Message</string>
     <string name="osb_comment_dialog_author">Author name</string>
-    <string name="osb_comment_dialog_error">Exception occurred: Comment not added</string>
+    <string name="osb_comment_dialog_error">Could not add comment</string>
     <string name="osb_comment_dialog_success">Comment added</string>
     <string name="shared_string_commit">Commit</string>
     <string name="context_menu_item_delete_waypoint">Delete GPX waypoint?</string>
@@ -821,7 +823,7 @@
     <string name="world_map_download_descr">World basemap (covering the whole world at low zoom level) missing or outdated. Please consider downloading it for a global overview.</string>
     <string name="shared_string_qr_code">QR code</string>
     <string name="map_downloaded">Map downloaded</string>
-    <string name="map_downloaded_descr">You can now use the downloaded %1$s map.</string>
+    <string name="map_downloaded_descr">The %1$s map is ready for use.</string>
     <string name="go_to_map">Show map</string>
     <string name="simulate_initial_startup_descr">"Sets the flag indicating first app startup, keeps all other settings unchanged."</string>
     <string name="simulate_initial_startup">Simulate first app start</string>
@@ -1052,7 +1054,7 @@
     <string name="shared_string_more">More…</string>
     <string name="shared_string_more_actions">More actions</string>
     <string name="shared_string_do_not_show_again">Do not show again</string>
-    <string name="shared_string_remember_my_choice">Remember my choice</string>
+    <string name="shared_string_remember_my_choice">Remember choice</string>
     <string name="shared_string_refresh">Refresh</string>
     <string name="shared_string_download">Download</string>
     <string name="shared_string_downloading">Downloading</string>
@@ -1075,7 +1077,7 @@
     <string name="shared_string_my_location">My Position</string>
     <string name="shared_string_my_places">My Places</string>
     <string name="shared_string_my_favorites">Favorites</string>
-    <string name="shared_string_my_tracks">My Tracks</string>
+    <string name="shared_string_my_tracks">Tracks</string>
     <string name="shared_string_currently_recording_track">Currently recording track</string>
     <string name="shared_string_audio">Audio</string>
     <string name="shared_string_video">Video</string>
@@ -1158,7 +1160,7 @@
     <string name="settings_privacy">Privacy</string>
     <string name="points">Points</string>
     <string name="navigation_over_track">Start navigation along track?</string>
-    <string name="avoid_roads_msg">You can trigger an alternative route by selecting roads to avoid</string>
+    <string name="avoid_roads_msg">Trigger an alternative route by selecting roads to avoid</string>
     <string name="speak_pedestrian">Pedestrian crosswalks</string>
     <string name="rendering_attr_roadStyle_name">Road style</string>
     <string name="rendering_attr_roadStyle_description">Road style</string>
@@ -1239,7 +1241,7 @@
     <string name="traffic_warning_calming">Traffic calming</string>
     <string name="traffic_warning_speed_camera">Speed camera</string>
     <string name="traffic_warning">Traffic warning</string>
-    <string name="speak_favorites">Nearby Favorites</string>
+    <string name="speak_favorites">Nearby favorites</string>
     <string name="speak_poi">Nearby POI</string>
     <string name="way_alarms">Traffic warnings</string>
     <string name="background_service_is_enabled_question">OsmAnd background service still running. Stop it, too?</string>
@@ -1410,7 +1412,7 @@
     <string name="lang_lv">Latvian</string>
     <string name="lang_lt">Lithuanian</string>
     <string name="lang_mr">Marathi</string>
-    <string name="lang_no">Norwegian</string>
+    <string name="lang_no">Norwegian Bokmål</string>
     <string name="lang_fa">Persian</string>
     <string name="lang_pl">Polish</string>
     <string name="lang_pt">Portuguese</string>
@@ -1442,21 +1444,21 @@
     <string name="route_preferences">Route preferences</string>
     <string name="route_info">Route info</string>
     <string name="routing_attr_prefer_motorway_name">Prefer motorways</string>
-    <string name="routing_attr_prefer_motorway_description">Prefer motorways.</string>
+    <string name="routing_attr_prefer_motorway_description">Prefer motorways</string>
     <string name="routing_attr_avoid_toll_name">Avoid toll roads</string>
-    <string name="routing_attr_avoid_toll_description">Avoid toll roads.</string>
+    <string name="routing_attr_avoid_toll_description">Avoid toll roads</string>
     <string name="routing_attr_avoid_unpaved_name">Avoid unpaved roads</string>
     <string name="routing_attr_avoid_unpaved_description">Avoid unpaved roads.</string>
     <string name="routing_attr_avoid_ferries_name">Avoid ferries</string>
-    <string name="routing_attr_avoid_ferries_description">Avoid ferries.</string>
+    <string name="routing_attr_avoid_ferries_description">Avoid ferries</string>
     <string name="routing_attr_avoid_motorway_name">Avoid motorways</string>
-    <string name="routing_attr_avoid_motorway_description">Avoid motorways.</string>
+    <string name="routing_attr_avoid_motorway_description">Avoid motorways</string>
     <string name="routing_attr_avoid_stairs_name">Avoid stairs</string>
-    <string name="routing_attr_avoid_stairs_description">Avoid stairs.</string>
+    <string name="routing_attr_avoid_stairs_description">Avoid stairs</string>
     <string name="routing_attr_avoid_borders_name">Avoid border crossing</string>
-    <string name="routing_attr_avoid_borders_description">Avoid crossing a border into another country.</string>
+    <string name="routing_attr_avoid_borders_description">Avoid crossing national borders</string>
     <string name="routing_attr_weight_name">Weight limit</string>
-    <string name="routing_attr_weight_description">Specify vehicle weight to be permitted on routes.</string>
+    <string name="routing_attr_weight_description">Specify permitted vehicle weight limit on routes.</string>
     <string name="routing_attr_height_name">Height limit</string>
     <string name="routing_attr_height_description">Specify vehicle height to be permitted on routes.</string>
     <string name="android_19_location_disabled">Since Android version 4.4 (KitKat) you cannot download and update maps to the old storage folder (%s). Copy all OsmAnd files to new storage location?
@@ -1484,7 +1486,7 @@
     <string name="app_mode_aircraft">Aircraft</string>
     <string name="local_osm_changes_delete_all_confirm">You are going to delete %1$d OSM changes. Are you sure?</string>
     <string name="animate_routing_route_not_calculated">Please calculate the route first</string>
-    <string name="animate_routing_route">Simulate using calculated route </string>
+    <string name="animate_routing_route">Simulate using calculated route</string>
     <string name="animate_routing_gpx">Simulate using GPX track</string>
     <string name="route_is_too_long_v2">Please add intermediate destinations if no path is found for this long route within 10 mins.</string>
     <string name="auto_zoom_none">No auto zoom</string>
@@ -1504,9 +1506,9 @@
     <string name="local_index_tile_data_name">Tile data: %1$s</string>
     <string name="edit_tilesource_successfully">Tilesource %1$s was saved</string>
     <string name="edit_tilesource_elliptic_tile">Elliptic mercator</string>
-    <string name="edit_tilesource_maxzoom">Max zoom</string>
+    <string name="edit_tilesource_maxzoom">Maximum zoom</string>
     <string name="edit_tilesource_expiration_time">Expire (minutes)</string>
-    <string name="edit_tilesource_minzoom">Min zoom</string>
+    <string name="edit_tilesource_minzoom">Minimum zoom</string>
     <string name="edit_tilesource_url_to_load">URL</string>
     <string name="edit_tilesource_choose_existing">Choose existing…</string>
     <string name="maps_define_edit">Define/Edit…</string>
@@ -1548,8 +1550,8 @@
     <string name="intermediate_items_sort_return">Optimized order of intermediate destinations en-route to the destination.</string>
     <string name="intermediate_items_sort_by_distance">Sort door-to-door</string>
     <string name="local_osm_changes_backup_successful">OSM change file was generated %1$s</string>
-    <string name="local_osm_changes_backup_failed">Backup OSM changes failed</string>
-    <string name="local_osm_changes_backup">Backup as OSM change</string>
+    <string name="local_osm_changes_backup_failed">Could not back up OSM changes</string>
+    <string name="local_osm_changes_backup">Back up as OSM change</string>
     <string name="delete_point">Delete Point</string>
     <string name="plugin_distance_point_time">time</string>
     <string name="plugin_distance_point_hdop">accuracy</string>
@@ -1566,7 +1568,7 @@
     <string name="distance_measurement_finish_editing">Finish editing</string>
     <string name="distance_measurement_finish_subtrack">Begin a new subtrack</string>
     <string name="distance_measurement_clear_route">Clear all points</string>
-    <string name="distance_measurement_load_gpx">Open existing GPX</string>
+    <string name="distance_measurement_load_gpx">Open existing GPX track</string>
     <string name="wait_current_task_finished">Please wait until current task is finished</string>
     <string name="use_kalman_filter_compass_descr">Reduces noise in compass readings but adds inertia.</string>
     <string name="use_kalman_filter_compass">Use Kalman filter</string>
@@ -1582,9 +1584,9 @@
     <string name="download_using_mobile_internet">Not connected to Wi-Fi. Use current connection to the Internet to download?</string>
     <string name="street_name">Street name</string>
     <string name="hno">House number</string>
-    <string name="website">Web site</string>
+    <string name="website">Website</string>
     <string name="phone">Phone</string>
-    <string name="osmand_background_plugin_description">Shows settings for turning on tracking and navigation in background mode by periodically waking up the GPS device (with the screen off).</string>
+    <string name="osmand_background_plugin_description">Shows settings for turning on background tracking and navigation by periodically waking up the GPS device (with the screen off).</string>
     <string name="contribution_activity">Install version</string>
     <string name="choose_osmand_theme_descr">Choose how the app looks.</string>
     <string name="choose_osmand_theme">App theme</string>
@@ -1625,15 +1627,15 @@
     <string name="av_widget_action">Default widget action</string>
     <string name="av_video_format_descr">Select the video output format.</string>
     <string name="av_video_format">Video output format</string>
-    <string name="av_use_external_recorder_descr">Use the system recorder for video.</string>
+    <string name="av_use_external_recorder_descr">Use system recorder for video.</string>
     <string name="av_use_external_recorder">Use system recorder</string>
     <string name="av_use_external_camera_descr">Use the system app for photos.</string>
     <string name="av_use_external_camera">Use camera app</string>
     <string name="av_settings_descr">Configure audio and video settings.</string>
-    <string name="av_settings">Audio/video settings </string>
-    <string name="recording_error">Error occurred while recording </string>
-    <string name="recording_camera_not_available">Camera is not available</string>
-    <string name="recording_is_recorded">Audio/video is being recorded. To stop it tap the AV widget.</string>
+    <string name="av_settings">Audio/video settings</string>
+    <string name="recording_error">Recording failed</string>
+    <string name="recording_camera_not_available">Camera not available</string>
+    <string name="recording_is_recorded">Recording Audio/video. Stop by tapping the AV widget.</string>
     <string name="recording_playing">An audio from the specified recording is being played.\n%1$s</string>
     <string name="recording_open_external_player">Open external player</string>
     <string name="recording_delete_confirm">Delete this recording?</string>
@@ -1755,22 +1757,22 @@
     </string>
     <string name="osmand_extended_description_part2">
         GPS navigation\n
-        • You can choose between offline (no roaming charges when you are abroad) or online (faster) mode\n
+        • Choose between offline (no roaming charges when you are abroad) or online (faster) mode\n
         • Turn-by-turn voice guidance leads you along the way (recorded and synthesized voices)\n
         • The route gets rebuilt whenever you deviate from it\n
         • Lane guidance, street names, and estimated time of arrival will help along the way\n
         • To make your trip safer, day/night mode switches automatically\n
-        • You can choose to show speed limits, and get reminders if you exceed it\n
+        • Show speed limits, and get reminders if you exceed it\n
         • Map zoom adjusts to your speed\n
-        • You can search for destinations by address, type (e.g: parking, restaurant, hotel, gas station, museum), or geographical coordinates\n
+        • Search for destinations by address, type (e.g: Parking, restaurant, hotel, gas station, museum), or geographical coordinates\n
         • Supports intermediate points on your itinerary\n
-        • You can record your own or upload a GPX track and follow it\n
+        • Record your own or upload a GPX track and follow it\n
     </string>
     <string name="osmand_extended_description_part3">
         Map\n
         • Displays POIs (point of interests) around you\n
         • Adjusts the map to your direction of motion (or compass)\n
-        • Shows where you are and where you are looking at\n
+        • Shows your location and the direction you are looking in\n
         • Share your location so that your friends can find you\n
         • Keeps your most important places in \'Favorites\'\n
         • Allows you to choose how to display names on the map: In English, local, or phonetic spelling\n
@@ -1782,9 +1784,9 @@
     </string>
     <string name="osmand_extended_description_part5">
         Cycling\n
-        • You can find cycling paths on the map\n
+        • Find cycling paths on the map\n
         • GPS navigation in cycling mode builds your route using cycling paths\n
-        • You can see your speed and altitude\n
+        • See your speed and altitude\n
         • GPX recording option enables you to record your trip and share it\n
         • Via an additional plugin you can enable contour lines and hillshading
     </string>
@@ -1794,7 +1796,7 @@
         • Wikipedia in your preferred language can tell you a lot during a city tour\n
         • Public transport stops (bus, tram, train),  including line names, help to navigate in a new city\n
         • GPS navigation in pedestrian mode builds your route using walking paths\n
-        • You can upload and follow a GPX route or record and share your own\n
+        • Upload and follow a GPX route or record and share your own\n
     </string>
     <string name="osmand_extended_description_part7">
         Contribute to OSM\n
@@ -1803,7 +1805,7 @@
         • Add POIs and directly upload them to OSM (or later if offline)\n
     </string>
     <string name="osmand_extended_description_part8">
-        OsmAnd is open-source and actively being developed. Everyone can contribute to the app by reporting bugs, improving translations or coding new features. The project is in a lively state of continuous improvement by all these forms of developer and user interaction. The project progress also relies on financial contributions to fund coding and testing of new functionalities.\n
+        OsmAnd is actively developed open source software. Everyone can contribute to the app by reporting bugs, improving translations or coding new features. Additionally the project relies on financial contributions to fund coding and testing of new functionalities.\n
         Approximate map coverage and quality:\n
         • Western Europe: ****\n
         • Eastern Europe: ***\n
@@ -1856,7 +1858,7 @@
         • Optional lane guidance, street name display, and estimated time of arrival\n
         • Supports intermediate points on your itinerary\n
         • Automatic re-routing whenever you deviate from the route\n
-        • Search for places by address, by type (e.g: restaurant, hotel, gas station, museum), or by geographical coordinates\n
+        • Search for places by address, by type (e.g: Restaurant, hotel, gas station, museum), or by geographical coordinates\n
     </string>
     <string name="osmand_plus_extended_description_part3">
         Map Viewing\n
@@ -1894,12 +1896,12 @@
         • Display of contour lines and hillshading (via additional plugin)
     </string>
     <string name="osmand_plus_extended_description_part7">
-        Directly Contribute to OSM\n
+        Contribute directly to OSM\n
         • Report data bugs\n
         • Upload GPX tracks to OSM directly from the app\n
         • Add POIs and directly upload them to OSM (or later if offline)\n
         • Optional trip recording also in background mode (while device is in sleep mode)\n
-        OsmAnd is open-source software in active development. Everyone can contribute to the app by reporting bugs, improving translations or coding new features or user interaction. The project progress also relies on financial contributions for coding and testing new functionality.
+        OsmAnd is actively developed open source software. Everyone can contribute to the app by reporting bugs, improving translations or coding new features. Additionally the project relies on financial contributions to fund coding and testing of new functionalities.\n
     </string>
     <string name="osmand_plus_extended_description_part8">
         Approximate map coverage and quality:\n
@@ -2019,10 +2021,10 @@
     <string name="transport_search_desc">Public transport search</string>
     <string name="favourites_search_desc">A way to search for favorites</string>
     <string name="offline_navigation_not_available">OsmAnd offline navigation is temporarily not available.</string>
-    <string name="left_side_navigation">Left-hand driving</string>
-    <string name="left_side_navigation_descr">Select for countries with left-hand traffic.</string>
+    <string name="left_side_navigation">Left-hand traffic</string>
+    <string name="left_side_navigation_descr">For countries where people drive on the left side of the road.</string>
     <string name="local_index_description">Tap any existing item to see more details, long-tap to deactivate or delete. Current data on device (%1$s free):</string>
-    <string name="unknown_from_location">Starting point is not yet determined</string>
+    <string name="unknown_from_location">Starting point not yet determined</string>
     <string name="unknown_location">Position not yet known</string>
     <string name="modify_transparency">Modify transparency (0 - transparent, 255 - opaque)</string>
     <string name="confirm_interrupt_download">Cancel file download?</string>
@@ -2042,7 +2044,7 @@
     <string name="play_commands_of_currently_selected_voice">Select a voice and test by playing prompts</string>
     <string name="native_rendering">Native rendering</string>
     <string name="test_voice_prompts">Test voice prompts</string>
-    <string name="switch_to_raster_map_to_see">No offline vector map present for this location. You can download one in \'Settings\' (\'Manage map files\'), or switch to the \'Online maps\' plugin.</string>
+    <string name="switch_to_raster_map_to_see">No offline vector map present for this location. Download one in \'Settings\' (\'Manage map files\'), or switch to the \'Online maps\' plugin.</string>
     <string name="send_files_to_osm">Send GPX files to OSM?</string>
     <string name="gpx_visibility_txt">Visibility</string>
     <string name="gpx_tags_txt">Tags</string>
@@ -2162,7 +2164,7 @@
     <string name="open_street_map_login_descr">Needed for openstreetmap.org submissions.</string>
     <string name="user_password">Your OSM password</string>
     <string name="osmand_service">Background mode</string>
-    <string name="osmand_service_descr">OsmAnd keeps running in the background while the screen is off.</string>
+    <string name="osmand_service_descr">OsmAnd runs in the background with the screen off.</string>
     <string name="download_files_not_enough_space">There is not enough free space to download %1$s MB (free: %2$s).</string>
     <string name="use_transparent_map_theme">Transparent theme</string>
     <string name="native_library_not_supported">Native library not supported on this device.</string>
@@ -2268,7 +2270,7 @@
     <string name="voice_stream_voice_call">Phone call audio (also to interrupt car BT stereos)</string>
     <string name="voice_stream_notification">Notification audio</string>
     <string name="voice_stream_music">Media/music audio</string>
-    <string name="warning_tile_layer_not_downloadable">The app cannot download map layer %1$s, please try to reinstall it.</string>
+    <string name="warning_tile_layer_not_downloadable">The app cannot download the map layer %1$s, reinstalling it might help.</string>
     <string name="overlay_transparency_descr">Modify the overlay transparency.</string>
     <string name="overlay_transparency">Overlay transparency</string>
     <string name="map_transparency_descr">Modify the base map transparency.</string>
@@ -2284,16 +2286,16 @@
     <string name="internet_not_available">Unable to perform operation without a connection to the Internet.</string>
     <string name="install_more">Install more…</string>
     <string name="level_to_switch_vector_raster_descr">Use raster maps for anything beyond this level.</string>
-    <string name="level_to_switch_vector_raster">Min. vector zoom level</string>
+    <string name="level_to_switch_vector_raster">Minimum vector zoom level</string>
     <string name="create_poi_link_to_osm_doc"><u>Online OSM</u> map classification with images.</string>
-    <string name="error_doing_search">Error in offline search.</string>
+    <string name="error_doing_search">Could not perform offline search.</string>
     <string name="search_offline_geo_error">Could not parse geo intent \'%s\'.</string>
-    <string name="search_osm_offline">Search geo location</string>
+    <string name="search_osm_offline">Search by geo location</string>
     <string name="system_locale">System</string>
-    <string name="preferred_locale_descr">Select display language (please restart OsmAnd after changing).</string>
+    <string name="preferred_locale_descr">Select display language (takes effect when OsmAnd is restarted).</string>
     <string name="preferred_locale">Display language</string>
     <string name="incomplete_locale">incomplete</string>
-    <string name="unit_of_length_descr">Change units of length.</string>
+    <string name="unit_of_length_descr">Change what distance is measured in.</string>
     <string name="unit_of_length">Units of length</string>
     <string name="si_mi_feet">Miles/feet</string>
     <string name="si_mi_yard">Miles/yards</string>
@@ -2374,10 +2376,10 @@
     <string name="maps_could_not_be_downloaded">This map could not be downloaded</string>
     <string name="continuous_rendering">Continuous rendering</string>
     <string name="continuous_rendering_descr">Display continuous rendering instead of image-at-once.</string>
-    <string name="rendering_exception">Error occurred while rendering selected area</string>
+    <string name="rendering_exception">Could not draw selected area</string>
     <string name="show_point_options">Use location…</string>
     <string name="renderer_load_sucess">Renderer loaded</string>
-    <string name="renderer_load_exception">Exception occurred: Renderer not loaded</string>
+    <string name="renderer_load_exception">Could not load renderer</string>
     <string name="renderers">Vector renderer</string>
     <string name="renderers_descr">Choose the rendering appearance.</string>
     <string name="poi_context_menu_website">Show POI website</string>
@@ -2395,15 +2397,15 @@
     <!-- string name="map_route_by_gpx">Navigate using GPX</string-->
     <string name="gpx_files_not_found">No GPX files found in the tracks folder</string>
     <string name="layer_gpx_layer">GPX track…</string>
-    <string name="error_reading_gpx">Error reading GPX data</string>
+    <string name="error_reading_gpx">Could not read GPX data</string>
     <string name="vector_data">Offline vector maps</string>
     <string name="transport_context_menu">Search transport at stop</string>
     <string name="poi_context_menu_modify">Modify POI</string>
     <string name="poi_context_menu_delete">Delete POI</string>
     <string name="rotate_map_compass_opt">Compass direction</string>
     <string name="rotate_map_bearing_opt">Movement direction</string>
-    <string name="rotate_map_none_opt">Do not rotate (north always upwards)</string>
-    <string name="rotate_map_to_bearing_descr">Select the map screen alignment.</string>
+    <string name="rotate_map_none_opt">No rotation (north always upwards)</string>
+    <string name="rotate_map_to_bearing_descr">Select map screen alignment.</string>
     <string name="rotate_map_to_bearing">Map orientation</string>
     <string name="show_route">Route details</string>
     <string name="fav_imported_sucessfully">Favorites imported</string>
@@ -2412,9 +2414,9 @@
     <string name="fav_saved_sucessfully">Favorites saved to {0}</string>
     <string name="no_fav_to_save">No favorite points to save</string>
     <string name="share_fav_subject">Favorites shared via OsmAnd</string>
-    <string name="error_occurred_loading_gpx">Error occurred while loading GPX</string>
+    <string name="error_occurred_loading_gpx">Could not load GPX</string>
     <string name="send_report">Send report</string>
-    <string name="none_region_found">No offline data for regions found on memory card. Download regions from the Internet.</string>
+    <string name="none_region_found">Could not find any downloaded maps on memory card.</string>
     <string name="poi_namefinder_query_empty">Type to find a POI</string>
     <string name="any_poi">Any</string>
     <string name="thanks_yandex_traffic">Thanks to Yandex for traffic info.</string>
@@ -2425,9 +2427,9 @@
     <string name="layer_map">Map source…</string>
     <string name="menu_layers">Map layers</string>
     <string name="context_menu_item_search_poi">Search POI</string>
-    <string name="use_trackball_descr">Use trackball to move the map.</string>
+    <string name="use_trackball_descr">Use a trackball device to move the map.</string>
     <string name="use_trackball">Use trackball</string>
-    <string name="background_service_wait_int_descr">Set the maximum waiting time for each background position fix.</string>
+    <string name="background_service_wait_int_descr">Sets highest waiting time allowed for each background position fix.</string>
     <string name="background_service_wait_int">Maximum wait for fix</string>
     <string name="where_am_i">Where am I?</string>
     <string name="process_navigation_service">OsmAnd navigation service</string>
@@ -2436,9 +2438,9 @@
     <string name="int_seconds">seconds</string>
     <string name="int_min">min.</string>
     <string name="background_service_int_descr">Set wake-up interval used by the background service.</string>
-    <string name="background_service_provider_descr">Select the location provider used by the background service.</string>
+    <string name="background_service_provider_descr">Select location method used by the background service.</string>
     <string name="background_service_provider">Location provider</string>
-    <string name="background_router_service_descr">Runs OsmAnd in the background to track your position while screen is off.</string>
+    <string name="background_router_service_descr">Tracks your position while the screen is off.</string>
     <string name="background_router_service">Run OsmAnd in background</string>
     <string name="off_router_service_no_gps_available">The background navigation service requires a location provider to be turned on.</string>
     <string name="hide_poi_filter">Hide filter</string>
@@ -2451,7 +2453,7 @@
     <string name="voice_data_corrupted">Specified voice data is corrupted</string>
     <string name="voice_data_unavailable">Selected voice data is not available</string>
     <string name="sd_unmounted">Memory card not accessible.\nYou won\'t be able to see maps or find things.</string>
-    <string name="sd_mounted_ro">Memory card read-only.\nYou can only see the preloaded map and can\'t download from the Internet.</string>
+    <string name="sd_mounted_ro">Memory card read-only.\nIt is now only possible to see the preloaded map, not download new areas.</string>
     <string name="unzipping_file">Unzipping file…</string>
     <string name="route_tr">Turn right and go</string>
     <string name="route_tshr">Turn sharply right and go</string>
@@ -2463,7 +2465,7 @@
     <string name="route_head">Head</string>
     <string name="first_time_continue">Later</string>
     <string name="first_time_download">Download regions</string>
-    <string name="search_poi_location">Searching for signal…</string>
+    <string name="search_poi_location">Awaiting signal…</string>
     <string name="search_near_map">Search near current map center</string>
     <string name="search_nearby">Search nearby</string>
     <string name="map_orientation_default">Same as device</string>
@@ -2471,7 +2473,7 @@
     <string name="map_orientation_landscape">Landscape</string>
     <string name="map_screen_orientation">Screen orientation</string>
     <string name="map_screen_orientation_descr">Portrait, landscape, or device.</string>
-    <string name="opening_hours_not_supported">Opening hours format is not supported for editing</string>
+    <string name="opening_hours_not_supported">Opening hours format can not be changed</string>
     <string name="add_new_rule">Add new rule</string>
     <string name="transport_Routes">Routes</string>
     <string name="transport_Stop">Stop</string>
@@ -2489,10 +2491,10 @@
     <string name="show_transport_over_map">Show transport stops</string>
     <string name="hello">OsmAnd navigation app</string>
     <string name="update_poi_success">POI data was updated ({0} were loaded)</string>
-    <string name="update_poi_error_local">Error updating local POI list</string>
-    <string name="update_poi_error_loading">Error while loading data from server</string>
+    <string name="update_poi_error_local">Could not update local POI list</string>
+    <string name="update_poi_error_loading">Could not load data from server</string>
     <string name="update_poi_no_offline_poi_index">No offline POI data available for this area</string>
-    <string name="update_poi_is_not_available_for_zoom">Updating POIs is not available for small zoom levels</string>
+    <string name="update_poi_is_not_available_for_zoom">Zooming in lets you update POIs</string>
     <string name="context_menu_item_update_poi">Update POI</string>
     <string name="context_menu_item_update_map_confirm">Update local data from the Internet?</string>
     <string name="search_history_city">City: {0}</string>
@@ -2519,7 +2521,7 @@
     <string name="download_question_exist">Offline data for {0} already exists ({1}). Update it ({2})?</string>
     <string name="address">Address</string>
     <string name="downloading_list_indexes">Downloading list of available regions…</string>
-    <string name="list_index_files_was_not_loaded">The list of regions was not retrieved from https://osmand.net.</string>
+    <string name="list_index_files_was_not_loaded">Could not fetch list of regions from https://osmand.net.</string>
     <string name="fav_points_edited">Favorite point was edited</string>
     <string name="fav_points_not_exist">No favorite points exist</string>
     <string name="update_existing">Replace</string>
@@ -2534,16 +2536,16 @@
     <string name="loading_poi_obj">Loading POI…</string>
     <string name="auth_failed">Authorization failed</string>
     <string name="failed_op">failed</string>
-    <string name="converting_names">Converting native/English names…</string>
+    <string name="converting_names">Converting local/English names…</string>
     <string name="loading_streets_buildings">Loading streets/buildings…</string>
     <string name="loading_postcodes">Loading postcodes…</string>
     <string name="loading_streets">Loading streets…</string>
     <string name="loading_cities">Loading cities…</string>
     <string name="poi">POI</string>
-    <string name="error_occurred_saving_gpx">Error while saving GPX</string>
-    <string name="error_calculating_route">Error calculating route</string>
-    <string name="error_calculating_route_occured">Error occurred while calculating route</string>
-    <string name="empty_route_calculated">Error: Calculated route is empty</string>
+    <string name="error_occurred_saving_gpx">Could not save GPX track</string>
+    <string name="error_calculating_route">Could not calculate route</string>
+    <string name="error_calculating_route_occured">Could not calculate route</string>
+    <string name="empty_route_calculated">Calculated route is empty</string>
     <string name="new_route_calculated_dist">New route calculated, distance</string>
     <string name="arrived_at_destination">You have arrived at your destination</string>
     <string name="invalid_locations">Invalid coordinates</string>
@@ -2631,7 +2633,7 @@
     <string name="poi_action_change">change</string>
     <string name="poi_action_delete">delete</string>
     <string name="poi_action_succeded_template">Action {0} completed.</string>
-    <string name="poi_error_unexpected_template">Unexpected error while performing action {0}.</string>
+    <string name="poi_error_unexpected_template">Could not perform action {0}.</string>
     <string name="poi_error_io_error_template">I/O error while performing action {0}.</string>
     <string name="poi_error_info_not_loaded">Info about node was not loaded</string>
     <string name="poi_dialog_opening_hours">Open</string>
@@ -2730,7 +2732,7 @@
     <string name="plugins_menu_group">Plugins</string>
     <string name="first_usage_item">First use</string>
     <string name="first_usage_item_description">How to download maps, set basic settings.</string>
-    <string name="navigation_item_description">Setup navigation.</string>
+    <string name="navigation_item_description">Set up navigation.</string>
     <string name="planning_trip_item">Planning a trip</string>
     <string name="faq_item">FAQ</string>
     <string name="faq_item_description">Frequently asked questions</string>
@@ -2809,8 +2811,8 @@
     <string name="quick_action_showhide_favorites_descr">Tapping this action button shows or hides the favorite points on the map.</string>
     <string name="quick_action_showhide_poi_descr">Tapping this action button shows or hides POIs on the map.</string>
     <string name="quick_action_showhide_favorites_title">Show/hide favorites</string>
-    <string name="quick_action_favorites_show">Show Favorites</string>
-    <string name="quick_action_favorites_hide">Hide Favorites</string>
+    <string name="quick_action_favorites_show">Show favorites</string>
+    <string name="quick_action_favorites_hide">Hide favorites</string>
     <string name="quick_action_showhide_poi_title">Show/hide POI</string>
     <string name="quick_action_poi_show">Show %1$s</string>
     <string name="quick_action_poi_hide">Hide %1$s</string>
@@ -2818,16 +2820,16 @@
     <string name="quick_action_add_create_items">Create items</string>
     <string name="quick_action_add_configure_map">Configure map</string>
     <string name="quick_action_add_navigation">Navigation</string>
-    <string name="quick_action_fav_name_descr">Leave blank to use the address or place name automatically.</string>
+    <string name="quick_action_fav_name_descr">Leave blank to use the address or place name.</string>
     <string name="quick_action_bug_descr">This message is included in the comment field.</string>
     <string name="quick_action_bug_message">Message</string>
     <string name="quick_action_category_descr">Select the category to save the favorite in.</string>
     <string name="quick_action_gpx_category_descr">Select an optional category.</string>
     <string name="quick_action_poi_list">POI list</string>
-    <string name="quick_action_sh_poi_descr">You can add one or more POI categories to display on the map.</string>
+    <string name="quick_action_sh_poi_descr">Add one or more POI categories to display on the map.</string>
     <string name="quick_action_page_list_descr">Tapping this action button pages through the list below.</string>
     <string name="quick_action_map_style_action">Add a map style</string>
-    <string name="quick_action_empty_param_error">Parameters should not be empty</string>
+    <string name="quick_action_empty_param_error">Fill out all parameters</string>
     <string name="quick_action_map_styles">Map styles</string>
     <string name="quick_action_map_overlay">Change map overlay</string>
     <string name="quick_action_map_overlay_title">Map overlays</string>
@@ -2842,7 +2844,7 @@
     <string name="quick_action_map_source_action">Add map source</string>
     <string name="quick_action_map_source_switch">The map source has been changed to \"%s\".</string>
     <string name="quick_action_btn_tutorial_title">Change button position</string>
-    <string name="quick_action_btn_tutorial_descr">Long-taping and dragggin the button changes its position on the screen.</string>
+    <string name="quick_action_btn_tutorial_descr">Long-tapping and dragging the button changes its position on the screen.</string>
     <string name="shared_string_action_name">Action name</string>
     <string name="mappilary_no_internet_desc">You need to be connected to the Internet to view photos from Mapillary.</string>
     <string name="retry">Retry</string>
@@ -2856,7 +2858,7 @@
     <string name="empty_state_my_tracks">Add and Record Tracks</string>
     <string name="empty_state_my_tracks_desc">Record or import tracks to view.</string>
     <string name="empty_state_favourites">Add Favorites</string>
-    <string name="empty_state_favourites_desc">Add favorites on the map or import them from a file.</string>
+    <string name="empty_state_favourites_desc">Import or mark favorites on the map.</string>
     <string name="import_track">Import track</string>
     <string name="import_track_desc">File %1$s does not contain waypoints, import it as a track?</string>
     <string name="move_point">Move Point</string>
@@ -2868,13 +2870,13 @@
     <string name="touring_view_renderer">Touring view (contrast and details)</string>
     <string name="nautical_renderer">Nautical</string>
     <string name="copy_location_name">Copy Point/POI name</string>
-    <string name="toast_empty_name_error">Location has no name</string>
+    <string name="toast_empty_name_error">Unnamed location</string>
     <string name="tunnel_warning">Tunnel ahead</string>
     <string name="show_tunnels">Tunnels</string>
     <string name="download_wikipedia_description">Download the Wikipedia articles for %1$s to read them offline.</string>
     <string name="download_wikipedia_label">Download Wikipedia data</string>
     <string name="open_in_browser_wiki">Open article online</string>
-    <string name="open_in_browser_wiki_description">View this article in a browser.</string>
+    <string name="open_in_browser_wiki_description">View article in a web browser.</string>
     <string name="download_wiki_region_placeholder">this region</string>
     <string name="wiki_article_search_text">Searching for the necessary wiki article</string>
     <string name="wiki_article_not_found">Article not found</string>

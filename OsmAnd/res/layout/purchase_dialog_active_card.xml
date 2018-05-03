@@ -8,7 +8,7 @@
     android:layout_marginBottom="@dimen/list_header_padding"
     android:layout_marginLeft="@dimen/card_padding"
     android:layout_marginRight="@dimen/card_padding"
-    android:background="@drawable/dialog_active_card_bg"
+    android:background="?attr/purchase_dialog_active_card_bg"
     android:orientation="vertical">
 
     <include layout="@layout/purchase_dialog_card_header"/>

@@ -3,6 +3,7 @@ package net.osmand.plus.download;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Notification;
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.ActivityNotFoundException;
@@ -19,11 +20,11 @@ import android.support.v4.app.NotificationCompat.Builder;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.Toast;
-
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.map.WorldRegion;
 import net.osmand.map.WorldRegion.RegionParams;
+import net.osmand.plus.NotificationHelper;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.OsmandPreference;
@@ -113,7 +114,10 @@ public class DownloadIndexesThread {
 			Intent contentIntent = new Intent(app, DownloadActivity.class);
 			PendingIntent contentPendingIntent = PendingIntent.getActivity(app, 0, contentIntent,
 					PendingIntent.FLAG_UPDATE_CURRENT);
-			Builder bld = new NotificationCompat.Builder(app);
+			if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+				app.getNotificationHelper().createNotificationChannel();
+		    }
+			Builder bld = new NotificationCompat.Builder(app, NotificationHelper.NOTIFICATION_CHANEL_ID);
 			String msg = Version.getAppName(app);
 			if(!isFinished) {
 				msg = task.getDescription();

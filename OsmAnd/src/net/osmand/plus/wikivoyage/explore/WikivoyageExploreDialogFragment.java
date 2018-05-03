@@ -26,7 +26,7 @@ import net.osmand.plus.LockableViewPager;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.download.DownloadIndexesThread;
-import net.osmand.plus.wikivoyage.WikivoyageBaseDialogFragment;
+import net.osmand.plus.wikivoyage.WikiBaseDialogFragment;
 import net.osmand.plus.wikivoyage.data.TravelDbHelper;
 import net.osmand.plus.wikivoyage.search.WikivoyageSearchDialogFragment;
 
@@ -35,7 +35,7 @@ import java.util.Arrays;
 import java.util.List;
 
 
-public class WikivoyageExploreDialogFragment extends WikivoyageBaseDialogFragment implements DownloadIndexesThread.DownloadEvents {
+public class WikivoyageExploreDialogFragment extends WikiBaseDialogFragment implements DownloadIndexesThread.DownloadEvents {
 
 	public static final String TAG = "WikivoyageExploreDialogFragment";
 
@@ -44,8 +44,6 @@ public class WikivoyageExploreDialogFragment extends WikivoyageBaseDialogFragmen
 
 	private ExploreTabFragment exploreTabFragment;
 	private SavedArticlesTabFragment savedArticlesTabFragment;
-
-	private View mainView;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -77,7 +75,7 @@ public class WikivoyageExploreDialogFragment extends WikivoyageBaseDialogFragmen
 			savedArticlesTabFragment = new SavedArticlesTabFragment();
 		}
 
-		this.mainView = inflate(R.layout.fragment_wikivoyage_explore_dialog, container);
+		View mainView = inflate(R.layout.fragment_wikivoyage_explore_dialog, container);
 
 		setupToolbar((Toolbar) mainView.findViewById(R.id.toolbar));
 
@@ -137,43 +135,34 @@ public class WikivoyageExploreDialogFragment extends WikivoyageBaseDialogFragmen
 			}
 		});
 
-		updateSearchVisibility();
-		populateData();
-
 		return mainView;
 	}
 
-	protected void onDataLoaded() {
-		mainView.findViewById(R.id.progress_bar).setVisibility(View.GONE);
-		updateSearchVisibility();
-		if (exploreTabFragment != null) {
-			exploreTabFragment.populateData();
-		}
-		if (savedArticlesTabFragment != null) {
-			savedArticlesTabFragment.savedArticlesUpdated();
-		}
+	@Override
+	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+		super.onViewCreated(view, savedInstanceState);
+		updateSearchBarVisibility();
+		populateData();
 	}
 
-	private void updateSearchVisibility() {
-		mainView.findViewById(R.id.search_box).setVisibility(
-				getMyApplication().getTravelDbHelper().getSelectedTravelBook() == null ? View.GONE : View.VISIBLE
-		);
-	}
-
-	public void populateData() {
-		mainView.findViewById(R.id.progress_bar).setVisibility(View.VISIBLE);
-		new LoadWikivoyageData(this).execute();
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		PicassoUtils.clearCachedMap();
 	}
 
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 		if (requestCode == WikivoyageOptionsBottomSheetDialogFragment.REQUEST_CODE) {
-			if (resultCode == WikivoyageOptionsBottomSheetDialogFragment.DOWNLOAD_IMAGES_CHANGED
-					|| resultCode == WikivoyageOptionsBottomSheetDialogFragment.CACHE_CLEARED) {
-				if (savedArticlesTabFragment != null) {
-					savedArticlesTabFragment.updateAdapter();
-				}
+			switch (resultCode) {
+				case WikivoyageOptionsBottomSheetDialogFragment.DOWNLOAD_IMAGES_CHANGED:
+				case WikivoyageOptionsBottomSheetDialogFragment.CACHE_CLEARED:
+					invalidateTabAdapters();
+					break;
+				case WikivoyageOptionsBottomSheetDialogFragment.TRAVEL_BOOK_CHANGED:
+					populateData();
+					break;
 			}
 		}
 	}
@@ -196,6 +185,46 @@ public class WikivoyageExploreDialogFragment extends WikivoyageBaseDialogFragmen
 	public void downloadHasFinished() {
 		if (exploreTabFragment != null) {
 			exploreTabFragment.downloadHasFinished();
+		}
+	}
+
+	public void populateData() {
+		switchProgressBarVisibility(true);
+		new LoadWikivoyageData(this).execute();
+	}
+
+	private void onDataLoaded() {
+		switchProgressBarVisibility(false);
+		updateSearchBarVisibility();
+		if (exploreTabFragment != null) {
+			exploreTabFragment.populateData();
+		}
+		if (savedArticlesTabFragment != null) {
+			savedArticlesTabFragment.savedArticlesUpdated();
+		}
+	}
+
+	private void updateSearchBarVisibility() {
+		View view = getView();
+		if (view != null) {
+			boolean show = getMyApplication().getTravelDbHelper().getSelectedTravelBook() != null;
+			view.findViewById(R.id.search_box).setVisibility(show ? View.VISIBLE : View.GONE);
+		}
+	}
+
+	private void switchProgressBarVisibility(boolean show) {
+		View view = getView();
+		if (view != null) {
+			view.findViewById(R.id.progress_bar).setVisibility(show ? View.VISIBLE : View.GONE);
+		}
+	}
+
+	private void invalidateTabAdapters() {
+		if (exploreTabFragment != null) {
+			exploreTabFragment.invalidateAdapter();
+		}
+		if (savedArticlesTabFragment != null) {
+			savedArticlesTabFragment.invalidateAdapter();
 		}
 	}
 

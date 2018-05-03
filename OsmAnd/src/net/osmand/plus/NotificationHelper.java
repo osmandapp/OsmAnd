@@ -1,19 +1,23 @@
 package net.osmand.plus;
 
-import android.app.Notification;
-import android.support.v4.app.NotificationCompat.Builder;
-import android.support.v4.app.NotificationManagerCompat;
+import java.util.ArrayList;
+import java.util.List;
 
 import net.osmand.plus.notifications.GpxNotification;
 import net.osmand.plus.notifications.NavigationNotification;
 import net.osmand.plus.notifications.OsmandNotification;
 import net.osmand.plus.notifications.OsmandNotification.NotificationType;
-
-import java.util.ArrayList;
-import java.util.List;
+import android.annotation.TargetApi;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.content.Context;
+import android.support.v4.app.NotificationCompat.Builder;
+import android.support.v4.app.NotificationManagerCompat;
 
 public class NotificationHelper {
 
+	public static final String NOTIFICATION_CHANEL_ID = "osmand_background_service";
 	private OsmandApplication app;
 
 	private NavigationNotification navigationNotification;
@@ -126,6 +130,19 @@ public class NotificationHelper {
 	public void removeNotifications() {
 		for (OsmandNotification notification : all) {
 			notification.removeNotification();
+		}
+	}
+
+	@TargetApi(26)
+	public void createNotificationChannel() {
+		if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+			NotificationChannel channel = new NotificationChannel(NOTIFICATION_CHANEL_ID,
+					app.getString(R.string.osmand_service), NotificationManager.IMPORTANCE_LOW);
+			channel.enableVibration(false);
+			channel.setDescription(app.getString(R.string.osmand_service_descr));
+			NotificationManager mNotificationManager = (NotificationManager) app
+					.getSystemService(Context.NOTIFICATION_SERVICE);
+			mNotificationManager.createNotificationChannel(channel);
 		}
 	}
 }

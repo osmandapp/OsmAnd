@@ -4,8 +4,18 @@
               xmlns:tools="http://schemas.android.com/tools"
               xmlns:osmand="http://schemas.android.com/apk/res-auto"
               android:layout_gravity="bottom"
-              android:background="?attr/bottom_menu_view_bg"
               android:orientation="vertical">
+
+	<ScrollView
+		android:id="@+id/scroll_view"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content">
+
+		<LinearLayout
+			android:id="@+id/scrollable_items_container"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="vertical">
 
 	<ImageView
 		android:layout_width="match_parent"
@@ -44,10 +54,13 @@
             android:paddingEnd="@dimen/list_content_padding"
             android:text="@string/wikivoyage_download_pics_descr"
             android:textSize="16sp"/>
+		</LinearLayout>
+
+	</ScrollView>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/wikivoyage_show_images_dialog_buttons_height"
             android:paddingLeft="@dimen/list_header_padding"
             android:paddingStart="@dimen/list_header_padding"
             android:paddingRight="@dimen/list_header_padding"
@@ -62,7 +75,7 @@
 				android:layout_marginEnd="@dimen/bottom_sheet_content_margin_small"
 				android:layout_marginRight="@dimen/bottom_sheet_content_margin_small"
 				android:layout_weight="1"
-				android:background="@drawable/wikivoyage_secondary_btn_bg">
+				android:background="?attr/wikivoyage_secondary_btn_bg">
 
 				<net.osmand.plus.widgets.TextViewEx
 					android:id="@+id/button_no"
@@ -85,13 +98,11 @@
 			<FrameLayout
 				android:layout_width="0dp"
 				android:layout_height="wrap_content"
-				android:layout_marginEnd="@dimen/bottom_sheet_content_margin_small"
-				android:layout_marginRight="@dimen/bottom_sheet_content_margin_small"
 				android:layout_weight="1"
-				android:background="@drawable/wikivoyage_secondary_btn_bg">
+				android:background="?attr/wikivoyage_primary_btn_bg">
 
 				<net.osmand.plus.widgets.TextViewEx
-					android:id="@+id/button_wifi"
+					android:id="@+id/button_download"
 					android:layout_width="match_parent"
 					android:layout_height="@dimen/wikivoyage_card_button_height"
 					android:layout_gravity="center"
@@ -100,35 +111,11 @@
 					android:gravity="center"
 					android:letterSpacing="@dimen/text_button_letter_spacing"
 					android:maxLines="1"
-					android:text="@string/shared_string_only_with_wifi"
-					android:textColor="?attr/wikivoyage_active_color"
-					android:textSize="@dimen/text_button_text_size"
-					osmand:typeface="@string/font_roboto_medium"
-					tools:ignore="UnusedAttribute" />
-
-			</FrameLayout>
-
-			<FrameLayout
-				android:layout_width="0dp"
-				android:layout_height="wrap_content"
-				android:layout_weight="1"
-				android:background="@drawable/wikivoyage_primary_btn_bg">
-
-				<net.osmand.plus.widgets.TextViewEx
-					android:id="@+id/button_yes"
-					android:layout_width="match_parent"
-					android:layout_height="@dimen/wikivoyage_card_button_height"
-					android:layout_gravity="center"
-					android:background="?attr/selectableItemBackgroundBorderless"
-					android:ellipsize="end"
-					android:gravity="center"
-					android:letterSpacing="@dimen/text_button_letter_spacing"
-					android:maxLines="1"
-					android:text="@string/shared_string_do"
 					android:textColor="?attr/wikivoyage_primary_btn_text_color"
 					android:textSize="@dimen/text_button_text_size"
 					osmand:typeface="@string/font_roboto_medium"
-					tools:ignore="UnusedAttribute" />
+					tools:ignore="UnusedAttribute"
+					tools:text="@string/shared_string_do" />
 
 			</FrameLayout>
 

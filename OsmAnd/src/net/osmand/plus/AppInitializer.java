@@ -150,7 +150,7 @@ public class AppInitializer implements IProgress {
 		}
 		startPrefs = app.getSharedPreferences(
 				getLocalClassName(app.getAppCustomization().getMapActivity().getName()),
-				Context.MODE_WORLD_WRITEABLE);
+				Context.MODE_PRIVATE);
 		if(!startPrefs.contains(NUMBER_OF_STARTS)) {
 			startPrefs.edit().putInt(NUMBER_OF_STARTS, 1).commit();
 		} else {
@@ -241,18 +241,18 @@ public class AppInitializer implements IProgress {
 
 	public boolean checkPreviousRunsForExceptions(Activity activity, boolean writeFileSize) {
 		initVariables();
-		long size = activity.getPreferences(Context.MODE_WORLD_READABLE).getLong(EXCEPTION_FILE_SIZE, 0);
+		long size = activity.getPreferences(Context.MODE_PRIVATE).getLong(EXCEPTION_FILE_SIZE, 0);
 		final File file = app.getAppPath(OsmandApplication.EXCEPTION_PATH);
 		if (file.exists() && file.length() > 0) {
 			if (size != file.length() && !firstTime) {
 				if (writeFileSize) {
-					activity.getPreferences(Context.MODE_WORLD_WRITEABLE).edit().putLong(EXCEPTION_FILE_SIZE, file.length()).commit();
+					activity.getPreferences(Context.MODE_PRIVATE).edit().putLong(EXCEPTION_FILE_SIZE, file.length()).commit();
 				}
 				return true;
 			}
 		} else {
 			if (size > 0) {
-				activity.getPreferences(Context.MODE_WORLD_WRITEABLE).edit().putLong(EXCEPTION_FILE_SIZE, 0).commit();
+				activity.getPreferences(Context.MODE_PRIVATE).edit().putLong(EXCEPTION_FILE_SIZE, 0).commit();
 			}
 		}
 		return false;
@@ -262,7 +262,7 @@ public class AppInitializer implements IProgress {
 	public void checkVectorIndexesDownloaded(final Activity ctx) {
 		OsmandApplication app = (OsmandApplication)ctx.getApplication();
 		MapRenderRepositories maps = app.getResourceManager().getRenderer();
-		SharedPreferences pref = ctx.getPreferences(Context.MODE_WORLD_WRITEABLE);
+		SharedPreferences pref = ctx.getPreferences(Context.MODE_PRIVATE);
 		boolean check = pref.getBoolean(VECTOR_INDEXES_CHECK, true);
 		// do not show each time
 		if (check && new Random().nextInt() % 5 == 1) {
@@ -285,7 +285,7 @@ public class AppInitializer implements IProgress {
 			builder.setNeutralButton(R.string.shared_string_no_thanks, new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					ctx.getPreferences(Context.MODE_WORLD_WRITEABLE).edit().putBoolean(VECTOR_INDEXES_CHECK, false).commit();
+					ctx.getPreferences(Context.MODE_PRIVATE).edit().putBoolean(VECTOR_INDEXES_CHECK, false).commit();
 				}
 			});
 			builder.setNegativeButton(R.string.first_time_continue, null);

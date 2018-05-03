@@ -22,9 +22,8 @@ import android.view.Window;
 
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
-import net.osmand.plus.wikivoyage.explore.WikivoyageExploreDialogFragment;
 
-public class WikivoyageBaseDialogFragment extends BaseOsmAndDialogFragment {
+public class WikiBaseDialogFragment extends BaseOsmAndDialogFragment {
 
 	protected boolean nightMode;
 
