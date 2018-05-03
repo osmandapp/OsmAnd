@@ -34,6 +34,7 @@ import net.osmand.plus.wikivoyage.explore.travelcards.HeaderTravelCard;
 import net.osmand.plus.wikivoyage.explore.travelcards.OpenBetaTravelCard;
 import net.osmand.plus.wikivoyage.explore.travelcards.StartEditingTravelCard;
 import net.osmand.plus.wikivoyage.explore.travelcards.TravelDownloadUpdateCard;
+import net.osmand.plus.wikivoyage.explore.travelcards.TravelNeededMapsCard;
 
 import java.io.File;
 import java.io.IOException;
@@ -153,6 +154,7 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIn
 		this.mainIndexItem = mainIndexItem;
 		this.neededIndexItems = neededIndexItems;
 		addDownloadUpdateCard();
+		addNeededMapsCard();
 	}
 
 	private void addDownloadUpdateCard() {
@@ -206,6 +208,12 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIn
 			});
 			downloadUpdateCard.setIndexItem(mainIndexItem);
 			adapter.setDownloadUpdateCard(downloadUpdateCard);
+		}
+	}
+
+	private void addNeededMapsCard() {
+		if (!neededIndexItems.isEmpty()) {
+			adapter.setNeededMapsCard(new TravelNeededMapsCard(getMyApplication(), nightMode, neededIndexItems));
 		}
 	}
 

@@ -12,7 +12,7 @@
     <string name="purchase_cancelled_dialog_title">You have cancel OsmAnd Live subscription</string>
     <string name="purchase_cancelled_dialog_descr">Renew subscription to continue use the all features:</string>
 
-    <string name="maps_you_need_descr">You read articles: %1$s. Based on this, we suggest you download these maps:</string>
+    <string name="maps_you_need_descr">Based on the articles you saved, we recommend you to download following maps:</string>
     <string name="maps_you_need">Maps you need</string>
     <string name="osmand_team">OsmAnd team</string>
     <string name="popular_destinations">Popular destinations</string>
