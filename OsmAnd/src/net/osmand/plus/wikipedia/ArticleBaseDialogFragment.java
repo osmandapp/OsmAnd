@@ -3,6 +3,7 @@ package net.osmand.plus.wikipedia;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -14,9 +15,12 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.wikivoyage.WikivoyageBaseDialogFragment;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
-public class ArticleBaseDialogFragment extends WikivoyageBaseDialogFragment {
+public abstract class ArticleBaseDialogFragment extends WikivoyageBaseDialogFragment {
 
 	protected static final String HEADER_INNER = "<html><head>\n" +
 			"<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />\n" +
@@ -128,18 +132,23 @@ public class ArticleBaseDialogFragment extends WikivoyageBaseDialogFragment {
 		return nightMode ? R.color.status_bar_wikivoyage_article_dark : R.color.status_bar_wikivoyage_article_light;
 	}
 
-	protected void showPopupLangMenu(View view, final String langSelected) {
-	}
+	protected abstract void showPopupLangMenu(View view, final String langSelected);
 
-	protected void populateArticle() {
-	}
+	protected abstract void populateArticle();
 
 	@NonNull
-	protected String createHtmlContent() {
-		return "";
-	}
+	protected abstract String createHtmlContent();
 
 	protected void writeOutHTML(StringBuilder sb) {
+		File file = new File(getMyApplication().getAppPath(IndexConstants.WIKIVOYAGE_INDEX_DIR), "page.html");
+		BufferedWriter writer = null;
+		try {
+			writer = new BufferedWriter(new FileWriter(file));
+			writer.write(sb.toString());
+			writer.close();
+		} catch (IOException e) {
+			Log.w("ArticleDialog", e.getMessage(), e);
+		}
 	}
 
 }

@@ -354,18 +354,6 @@ public class WikivoyageArticleDialogFragment extends ArticleBaseDialogFragment {
 		return sb.toString();
 	}
 
-	protected void writeOutHTML(StringBuilder sb) {
-		File file = new File(getMyApplication().getAppPath(IndexConstants.WIKIVOYAGE_INDEX_DIR), "page.html");
-		BufferedWriter writer = null;
-		try {
-			writer = new BufferedWriter(new FileWriter(file));
-			writer.write(sb.toString());
-			writer.close();
-		} catch (IOException e) {
-			Log.w("ArticleDialog", e.getMessage(), e);
-		}
-	}
-
 	public static boolean showInstance(@NonNull OsmandApplication app,
 									   @NonNull FragmentManager fm,
 									   long cityId,
