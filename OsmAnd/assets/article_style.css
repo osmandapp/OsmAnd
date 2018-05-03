@@ -24,6 +24,15 @@
     /* Background colors */
     --background-color-day: #ffffff;
     --background-color-night: #17191a;
+
+    /* Divider colors */
+    --divider-color-day: #eaecf0;
+    --divider-color-night: #2d3133;
+}
+
+@font-face {
+    font-family: RobotoSlab-Regular;
+    src: url("fonts/RobotoSlab-Regular.ttf")
 }
 
 body {
@@ -138,7 +147,7 @@ h2 {
     word-wrap: break-word;
     line-height: var(--main-text-line-height);
     letter-spacing: 0.015em;
-    border-bottom: 1px solid #eaecf0;
+    border-bottom: 1px solid var(--divider-color-day);
     padding-top: 0%;
     padding-bottom: 5%;
     padding-left: content;
@@ -147,12 +156,13 @@ h2 {
 
 .nightmode h2 {
     color: var(--headline-text-color-night);
-    border-bottom: 1px solid #2d3133;
+    border-bottom: 1px solid var(--divider-color-night);
     font-weight: 100;
 }
 
 h2.active {
     border-bottom: 0px;
+    color: var(--main-text-color-day);
 }
 
 .nightmode h2.active {
@@ -235,7 +245,7 @@ p {
 ul, dl {
     /* font-size: var(--main-text-font-size); */
     color: var(--main-text-color-day);
-    font-size: var(--main-text-font-size);
+    font-size: inherit;
     list-style-type: disc;
     line-height: var(--main-text-line-height);
     margin-left: 5%;
@@ -243,6 +253,7 @@ ul, dl {
 }
 
 li {
+    font-size: inherit;
     font-family: sans-serif;
     padding-top: 1%;
     padding-bottom: 1%;
@@ -306,7 +317,7 @@ a.geo {
 .nightmode a.geo {
     color: var(--link-text-color-night);
     background-color: var(--topbar-bg-color-night);
-    border: 1px solid #2d3133;
+    border: 1px solid var(--divider-color-night);
     border-radius: 4px;
     padding: 10px 10px 10px 10px;
     color: var(--link-text-color-night);
@@ -315,11 +326,6 @@ a.geo {
     text-align: center;
     text-decoration: none;
     display: inline-block;
-}
-
-@font-face {
-    font-family: RobotoSlab-Regular;
-    src: url("fonts/RobotoSlab-Regular.ttf")
 }
 
 td {
@@ -338,4 +344,14 @@ td {
     color: var(--description-text-color);
     font-style: italic;
     text-align: center;
+}
+
+hr {
+    color: var(--divider-color-day);
+    background-color: var(--divider-color-day);
+}
+
+.nighmode hr {
+    color: var(--divider-color-night);
+    background-color: var(--divider-color-night);
 }
