@@ -113,6 +113,18 @@ public abstract class ArticleBaseDialogFragment extends WikivoyageBaseDialogFrag
 		return "file:///android_asset/";
 	}
 
+	protected void writeOutHTML(StringBuilder sb) {
+		File file = new File(getMyApplication().getAppPath(IndexConstants.WIKIVOYAGE_INDEX_DIR), "page.html");
+		BufferedWriter writer = null;
+		try {
+			writer = new BufferedWriter(new FileWriter(file));
+			writer.write(sb.toString());
+			writer.close();
+		} catch (IOException e) {
+			Log.w("ArticleDialog", e.getMessage(), e);
+		}
+	}
+
 	protected void moveToAnchor(String id, String title) {
 		contentWebView.loadUrl("javascript:scrollAnchor(\"" + id + "\", \"" + title.trim() + "\")");
 	}
@@ -138,17 +150,4 @@ public abstract class ArticleBaseDialogFragment extends WikivoyageBaseDialogFrag
 
 	@NonNull
 	protected abstract String createHtmlContent();
-
-	protected void writeOutHTML(StringBuilder sb) {
-		File file = new File(getMyApplication().getAppPath(IndexConstants.WIKIVOYAGE_INDEX_DIR), "page.html");
-		BufferedWriter writer = null;
-		try {
-			writer = new BufferedWriter(new FileWriter(file));
-			writer.write(sb.toString());
-			writer.close();
-		} catch (IOException e) {
-			Log.w("ArticleDialog", e.getMessage(), e);
-		}
-	}
-
 }
