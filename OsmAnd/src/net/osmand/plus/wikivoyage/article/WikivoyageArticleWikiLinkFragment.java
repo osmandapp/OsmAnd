@@ -18,7 +18,7 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerHalfItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleDividerItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.download.DownloadActivity;
-import net.osmand.plus.mapcontextmenu.WikipediaDialogFragment;
+import net.osmand.plus.wikipedia.WikipediaDialogFragment;
 
 import static net.osmand.plus.download.ui.SearchDialogFragment.SHOW_WIKI_KEY;
 

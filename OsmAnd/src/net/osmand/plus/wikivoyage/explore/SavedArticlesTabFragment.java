@@ -64,8 +64,6 @@ public class SavedArticlesTabFragment extends BaseOsmAndFragment implements Trav
 	@Override
 	public void onResume() {
 		super.onResume();
-		adapter.setItems(getItems());
-		adapter.notifyDataSetChanged();
 		dataHelper.setListener(this);
 	}
 
@@ -84,7 +82,7 @@ public class SavedArticlesTabFragment extends BaseOsmAndFragment implements Trav
 		diffRes.dispatchUpdatesTo(adapter);
 	}
 
-	public void updateAdapter() {
+	public void invalidateAdapter() {
 		if (adapter != null) {
 			adapter.notifyDataSetChanged();
 		}

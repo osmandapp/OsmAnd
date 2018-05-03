@@ -29,6 +29,7 @@
 				android:layout_height="match_parent"
 				android:layout_weight="1"
 				android:ellipsize="end"
+				android:maxLines="1"
 				android:gravity="center_vertical"
 				android:textSize="@dimen/dialog_header_text_size"
 				osmand:typeface="@string/font_roboto_medium" />
