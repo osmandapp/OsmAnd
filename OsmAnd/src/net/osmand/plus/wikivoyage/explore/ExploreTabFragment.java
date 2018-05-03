@@ -2,6 +2,7 @@ package net.osmand.plus.wikivoyage.explore;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -10,15 +11,19 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadIndexesThread;
+import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.DownloadValidationManager;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
@@ -31,6 +36,8 @@ import net.osmand.plus.wikivoyage.explore.travelcards.StartEditingTravelCard;
 import net.osmand.plus.wikivoyage.explore.travelcards.TravelDownloadUpdateCard;
 
 import java.io.File;
+import java.io.IOException;
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,6 +51,7 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIn
 	private TravelDownloadUpdateCard downloadUpdateCard;
 
 	private IndexItem mainIndexItem;
+	private List<IndexItem> neededIndexItems;
 	private boolean waitForIndexes;
 
 	@Nullable
@@ -138,8 +146,12 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIn
 	}
 
 	private void checkDownloadIndexes() {
-		DownloadIndexesThread downloadThread = getMyApplication().getDownloadThread();
-		mainIndexItem = downloadThread.getIndexes().getWikivoyageItem(getWikivoyageFileName());
+		new ProcessIndexItemsTask(this).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+	}
+
+	private void addIndexItemCards(IndexItem mainIndexItem, List<IndexItem> neededIndexItems) {
+		this.mainIndexItem = mainIndexItem;
+		this.neededIndexItems = neededIndexItems;
 		addDownloadUpdateCard();
 	}
 
@@ -206,5 +218,54 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIn
 	private void removeDownloadUpdateCard() {
 		adapter.removeDownloadUpdateCard();
 		downloadUpdateCard = null;
+	}
+
+	private static class ProcessIndexItemsTask extends AsyncTask<Void, Void, Pair<IndexItem, List<IndexItem>>> {
+
+		private static DownloadActivityType[] types = new DownloadActivityType[]{
+				DownloadActivityType.NORMAL_FILE,
+				DownloadActivityType.WIKIPEDIA_FILE
+		};
+
+		private OsmandApplication app;
+		private WeakReference<ExploreTabFragment> weakFragment;
+
+		private String fileName;
+
+		ProcessIndexItemsTask(ExploreTabFragment fragment) {
+			app = fragment.getMyApplication();
+			weakFragment = new WeakReference<>(fragment);
+			fileName = fragment.getWikivoyageFileName();
+		}
+
+		@Override
+		protected Pair<IndexItem, List<IndexItem>> doInBackground(Void... voids) {
+			IndexItem mainItem = app.getDownloadThread().getIndexes().getWikivoyageItem(fileName);
+
+			List<IndexItem> neededItems = new ArrayList<>();
+			for (TravelArticle article : app.getTravelDbHelper().getLocalDataHelper().getSavedArticles()) {
+				LatLon latLon = new LatLon(article.getLat(), article.getLon());
+				try {
+					for (DownloadActivityType type : types) {
+						IndexItem item = DownloadResources.findSmallestIndexItemAt(app, latLon, type);
+						if (item != null) {
+							neededItems.add(item);
+						}
+					}
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+
+			return new Pair<>(mainItem, neededItems);
+		}
+
+		@Override
+		protected void onPostExecute(Pair<IndexItem, List<IndexItem>> res) {
+			ExploreTabFragment fragment = weakFragment.get();
+			if (fragment != null && fragment.isResumed()) {
+				fragment.addIndexItemCards(res.first, res.second);
+			}
+		}
 	}
 }
