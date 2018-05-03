@@ -724,7 +724,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="maps_could_not_be_downloaded">Kortet kunne ikke hentes</string>
     <string name="continuous_rendering">Kontinuerlig kortoptegning</string>
     <string name="continuous_rendering_descr">Vis kontinuerlig optegning i stedet for hele kortet på en gang.</string>
-    <string name="rendering_exception">Det skete en fejl under optegning af det valgte område</string>
+    <string name="rendering_exception">Kunne ikke optegne det valgte område</string>
     <string name="show_point_options">Brug placering…</string>
     <string name="renderer_load_sucess">Kortgenerator indlæst</string>
     <string name="renderer_load_exception">Kunne ikke indlæse kortgenerator</string>
@@ -792,7 +792,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="int_seconds">sekunder</string>
     <string name="background_service_int_descr">Indstil vågn-op interval som anvendes af baggrundstjenesten.</string>
     <string name="background_service_int">GPS vågn-op interval</string>
-    <string name="background_service_provider_descr">Vælg placeringsudbyder som bruges af baggrundstjenesten.</string>
+    <string name="background_service_provider_descr">Vælg placeringsmetode som bruges af baggrundstjenesten.</string>
     <string name="background_service_provider">Placeringsudbyder</string>
     <string name="background_router_service_descr">Spor positionen, mens skærmen er slukket.</string>
     <string name="background_router_service">Kør OsmAnd i baggrunden</string>
@@ -904,7 +904,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="update_poi_error_local">Kunne ikke opdatere lokal interessepunkt-liste</string>
     <string name="update_poi_error_loading">Kunne ikke indlæse data fra server</string>
     <string name="update_poi_no_offline_poi_index">Ingen offline interessepunkt-data til rådighed for området</string>
-    <string name="update_poi_is_not_available_for_zoom">Opdatering af interessepunkter ikke tilgængelig ved lave zoomniveauer</string>
+    <string name="update_poi_is_not_available_for_zoom">Ved at zoome ind kan interessepunkter opdateres</string>
     <string name="context_menu_item_update_poi">Opdater interessepunkt</string>
     <string name="context_menu_item_update_map_confirm">Opdater lokale data fra internettet?</string>
     <string name="search_history_city">By: {0}</string>
@@ -2572,7 +2572,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="quick_action_map_source_action">Tilføj en kortkilde</string>
     <string name="quick_action_map_source_switch">Kortkilde er ændret til \"%s\".</string>
     <string name="quick_action_btn_tutorial_title">Ændr knapplacering</string>
-    <string name="quick_action_btn_tutorial_descr">Tryk langt og træk på knappen for at ændre dens placering på skærmen.</string>
+    <string name="quick_action_btn_tutorial_descr">Tryk langt og træk knappen skifter dens placering på skærmen.</string>
 <string name="quick_action_interim_dialog">Vis en midlertidig dialogboks</string>
     <string name="shared_string_action_name">Genvejsnavn</string>
 <string name="navigate_point_olc">Open Location Code (OLC)</string>
@@ -2680,12 +2680,12 @@ Repræsenterer område: %1$s x %2$s</string>
 \n • Antarktis: *   
 \n De fleste lande i verden kan hentes!   
 \n Få pålidelig navigation - det være sig Frankrig, Tyskland, Mexico, Storbritannien, Spanien, Holland, USA, Rusland, Brasilien eller andre.</string>
-    <string name="osmand_plus_extended_description_part7">Bidrag direkte til OSM  
-\n • Rapporter fejl i data  
-\n • Overfør GPX-spor direkte til OSM  
-\n • Tilføj IP\'er og overfør dem direkte til OSM (eller senere, hvis offline)  
+    <string name="osmand_plus_extended_description_part7">Bidrag direkte til OSM   
+\n • Rapporter fejl i data   
+\n • Overfør GPX-spor direkte til OSM   
+\n • Tilføj IP\'er og overfør dem direkte til OSM (eller senere, hvis offline)   
 \n • Valgfri turoptagelse også i baggrundstilstand (mens enheden er i dvaletilstand) 
-\n  OsmAnd er open source og bliver aktivt udviklet. Alle kan bidrage til anvendelsen ved at rapportere fejl, forbedring af oversættelser eller kodning af nye funktioner. Projektet er i en levende kontinuerlig forbedring af alle disse former for udvikling og brugerinteraktion. Projektets fremdrift er også afhængig af finansielle bidrag til finansiering af kodning og afprøvning af nye funktionaliteter.</string>
+\n  OsmAnd er aktivt udviklet Open source-software. Alle kan bidrage ved rapporterer programfejl, forbedre oversættelser eller kodning nye funktioner. Derudover er projektet afhængig af økonomiske bidrag til finansiering af kodning og afprøvning af nye funktionaliteter</string>
     <string name="osmand_extended_description_part2">GPS-navigation
 \n • Vælg mellem offline (ingen roamingtakster i udlandet) eller online (hurtigere) tilstand 
 \n • Sving-for-sving stemmevejledning (indspillet og syntetiseret stemmer) 
@@ -2793,8 +2793,8 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="quick_action_add_destination">Tilføj destination</string>
     <string name="quick_action_replace_destination">Udskift destination</string>
     <string name="quick_action_add_first_intermediate">Tilføj første mellemliggende punkt</string>
-    <string name="quick_action_add_destination_desc">Tryk på genvejen for at tilføje en destination på skærmens centrum. Den tidligere destination bliver den sidste mellemliggende destination.</string>
-    <string name="quick_action_replace_destination_desc">Tryk på genvejen for at erstatte destinationen med skærmens centrum.</string>
+    <string name="quick_action_add_destination_desc">Tryk på genvejen tilføjer en destination på skærmens centrum, enhver tidligere valgt destination bliver den sidste mellemliggende destination.</string>
+    <string name="quick_action_replace_destination_desc">Tryk på genvejen tilføjer en destinationen til skærmens centrum og erstatter den tidligere valgte destination (hvis nogen).</string>
     <string name="quick_action_add_first_intermediate_desc">Tryk på genvejen for at tilføje et første mellemliggende punkt på skærmens centrum.</string>
     <string name="quick_action_auto_zoom">Auto kortzoom til/fra</string>
     <string name="quick_action_auto_zoom_desc">Tryk på genvejsknappen skifter den hastighedafhænige kortzoom til/fra.</string>
@@ -2965,7 +2965,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="ascendingly">stigende</string>
     <string name="date_added">Dato tilføjet</string>
     <string name="order_by">Sorter efter:</string>
-    <string name="show_guide_line">Vis hjælpelinjer</string>
+    <string name="show_guide_line">Vis retningsbestemte linjer</string>
     <string name="show_arrows_on_the_map">Vis pile på kortet</string>
     <string name="show_passed">Vis passerede</string>
     <string name="hide_passed">Skjul passerede</string>
@@ -3031,7 +3031,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="go_to_next_field">Næste felt</string>
     <string name="shared_string_two">To</string>
     <string name="shared_string_one">En</string>
-    <string name="show_guide_line_descr">Vis hjælpelinjer på kortet fra din placering til de aktive markører.</string>
+    <string name="show_guide_line_descr">Vis retningsbestemt linje fra position til de aktive markørplaceringer.</string>
     <string name="show_arrows_descr">Vis en eller to pile der angiver retningen til de aktive markører.</string>
     <string name="distance_indication_descr">Vælg hvordan afstanden til de aktive markører skal vises.</string>
     <string name="active_markers_descr">Vælg antallet af aktive markører der vises.</string>
@@ -3144,7 +3144,7 @@ Repræsenterer område: %1$s x %2$s</string>
 	<string name="south_abbreviation">S</string>
 	<string name="north_abbreviation">N</string>
 	<string name="optional_point_name">Valgfrit punktnavn</string>
-    <string name="transport_nearby_routes_within">Ruter i nærheden inden for</string>
+    <string name="transport_nearby_routes_within">Nærliggende ruter</string>
     <string name="transport_nearby_routes">Nær</string>
     <string name="enter_the_file_name">Indtast filnavnet.</string>
     <string name="map_import_error">Fejl ved import af kort</string>
@@ -3203,7 +3203,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="unlock_all_features">Lås op for alle funktioner i OsmAnd</string>
 
     <string name="travel_guide">Wikivoyage rejseguide</string>
-    <string name="travel_guide_description">Gennemse Wikivoyage til de mest interessante steder på kloden via OsmAnd og uden en internetforbindelse.</string>
+    <string name="travel_guide_description">Rejseguider til de mest interessante steder på kloden via OsmAnd og uden en internetforbindelse.</string>
     <string name="in_app_purchase_desc_ex">Når engang købt, vil det være permanent tilgængelig.</string>
     <string name="paid_app">Betalt program</string>
     <string name="paid_plugin">Betalt udvidelse</string>
@@ -3222,7 +3222,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="download_wikipedia_description">Hent Wikipedia-artikler for %1$s og læs dem offline.</string>
     <string name="download_wikipedia_label">Hent Wikipedia-data</string>
     <string name="open_in_browser_wiki">Åbn artiklen online</string>
-    <string name="open_in_browser_wiki_description">Se artikel i en browser.</string>
+    <string name="open_in_browser_wiki_description">Se artikel i en webbrowser.</string>
     <string name="download_wiki_region_placeholder">denne region</string>
     <string name="wiki_article_search_text">Søger efter den nødvendige wiki-artikel</string>
     <string name="wiki_article_not_found">Artikel ikke fundet</string>
