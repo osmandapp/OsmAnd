@@ -25,7 +25,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.mapcontextmenu.WikipediaDialogFragment;
+import net.osmand.plus.wikipedia.WikipediaDialogFragment;
 import net.osmand.plus.resources.AmenityIndexRepositoryBinary;
 import net.osmand.plus.wikivoyage.article.WikivoyageArticleDialogFragment;
 import net.osmand.plus.wikivoyage.article.WikivoyageArticleWikiLinkFragment;

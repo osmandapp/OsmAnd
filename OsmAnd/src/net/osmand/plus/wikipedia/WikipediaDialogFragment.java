@@ -1,4 +1,4 @@
-package net.osmand.plus.mapcontextmenu;
+package net.osmand.plus.wikipedia;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
@@ -6,10 +6,7 @@ import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.ColorInt;
-import android.support.annotation.ColorRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.customtabs.CustomTabsIntent;
@@ -24,51 +21,38 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
-import net.osmand.IndexConstants;
 import net.osmand.data.Amenity;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
-import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.util.Algorithms;
 
-import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
 
-public class WikipediaDialogFragment extends BaseOsmAndDialogFragment {
+public class WikipediaDialogFragment extends WikiArticleBaseDialogFragment {
 
 	public static final String TAG = "WikipediaDialogFragment";
-
-	private static final String HEADER_INNER = "<html><head>\n" +
-			"<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />\n" +
-			"<meta http-equiv=\"cleartype\" content=\"on\" />\n" +
-			"<link href=\"article_style.css\" type=\"text/css\" rel=\"stylesheet\"/>\n" +
-			"</head>";
-	private static final String FOOTER_INNER = "</body></html>";
 
 	private static final int MENU_ITEM_NO_ID = 0;
 	private static final int MENU_ITEM_SHOW_ID = 1;
 	private static final int MENU_ITEM_WIFI_ID = 2;
 
-	private WebView contentWebView;
-	private TextView articleToolbarText;
 	private TextView readFullArticleButton;
-	private TextView selectLanguageTextView;
 
-	private boolean darkMode;
 	private Amenity amenity;
 	private String lang;
+	private String title;
+	private String article;
 
 	public void setAmenity(Amenity amenity) {
 		this.amenity = amenity;
@@ -76,32 +60,6 @@ public class WikipediaDialogFragment extends BaseOsmAndDialogFragment {
 
 	public void setLanguage(String lang) {
 		this.lang = lang;
-	}
-
-	@Override
-	public void onCreate(@Nullable Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		OsmandApplication app = getMyApplication();
-		darkMode = app.getDaynightHelper().isNightMode() || !app.getSettings().isLightContent();
-		int themeId = darkMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
-		setStyle(STYLE_NO_FRAME, themeId);
-	}
-
-	@NonNull
-	@Override
-	public Dialog onCreateDialog(Bundle savedInstanceState) {
-		int themeId = darkMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme_LightStatusBar;
-		Dialog dialog = new Dialog(getContext(), themeId);
-		Window window = dialog.getWindow();
-		if (window != null) {
-			if (!getSettings().DO_NOT_USE_ANIMATIONS.get()) {
-				window.getAttributes().windowAnimations = R.style.Animations_Alpha;
-			}
-			if (Build.VERSION.SDK_INT >= 21) {
-				window.setStatusBarColor(getResolvedColor(getStatusBarColor()));
-			}
-		}
-		return dialog;
 	}
 
 	@SuppressLint("SetJavaScriptEnabled")
@@ -114,18 +72,18 @@ public class WikipediaDialogFragment extends BaseOsmAndDialogFragment {
 
 		articleToolbarText = (TextView) mainView.findViewById(R.id.title_text_view);
 
-		ColorStateList buttonColorStateList = AndroidUtils.createPressedColorStateList(getContext(), darkMode,
+		ColorStateList buttonColorStateList = AndroidUtils.createPressedColorStateList(getContext(), nightMode,
 				R.color.ctx_menu_controller_button_text_color_light_n, R.color.ctx_menu_controller_button_text_color_light_p,
 				R.color.ctx_menu_controller_button_text_color_dark_n, R.color.ctx_menu_controller_button_text_color_dark_p);
 
 		ColorStateList selectedLangColorStateList = AndroidUtils.createPressedColorStateList(
-				getContext(), darkMode,
+				getContext(), nightMode,
 				R.color.icon_color, R.color.wikivoyage_active_light,
 				R.color.icon_color, R.color.wikivoyage_active_dark
 		);
 
 		readFullArticleButton = (TextView) mainView.findViewById(R.id.read_full_article);
-		readFullArticleButton.setBackgroundResource(darkMode ? R.drawable.bt_round_long_night : R.drawable.bt_round_long_day);
+		readFullArticleButton.setBackgroundResource(nightMode ? R.drawable.bt_round_long_night : R.drawable.bt_round_long_day);
 		readFullArticleButton.setTextColor(buttonColorStateList);
 		readFullArticleButton.setCompoundDrawablesWithIntrinsicBounds(getIcon(R.drawable.ic_world_globe_dark), null, null, null);
 		readFullArticleButton.setCompoundDrawablePadding((int) getResources().getDimension(R.dimen.content_padding_small));
@@ -133,47 +91,30 @@ public class WikipediaDialogFragment extends BaseOsmAndDialogFragment {
 		int paddingRight = (int) getResources().getDimension(R.dimen.dialog_content_margin);
 		readFullArticleButton.setPadding(paddingLeft, 0, paddingRight, 0);
 
-		selectLanguageTextView = (TextView) mainView.findViewById(R.id.select_language_text_view);
-		selectLanguageTextView.setTextColor(selectedLangColorStateList);
-		selectLanguageTextView.setCompoundDrawablesWithIntrinsicBounds(getSelectedLangIcon(), null, null, null);
-		selectLanguageTextView.setBackgroundResource(darkMode
+		selectedLangTv = (TextView) mainView.findViewById(R.id.select_language_text_view);
+		selectedLangTv.setTextColor(selectedLangColorStateList);
+		selectedLangTv.setCompoundDrawablesWithIntrinsicBounds(getSelectedLangIcon(), null, null, null);
+		selectedLangTv.setBackgroundResource(nightMode
 				? R.drawable.wikipedia_select_lang_bg_dark_n : R.drawable.wikipedia_select_lang_bg_light_n);
 
 		contentWebView = (WebView) mainView.findViewById(R.id.content_web_view);
 		WebSettings webSettings = contentWebView.getSettings();
 		webSettings.setJavaScriptEnabled(true);
-		contentWebView.setWebViewClient(new WikipediaWebViewClient(getActivity(), darkMode));
+		contentWebView.setWebViewClient(new WikipediaWebViewClient(getActivity(), nightMode));
 		updateWebSettings();
 
 		return mainView;
 	}
 
+	@Override
 	@NonNull
-	private Drawable getSelectedLangIcon() {
-		Drawable normal = getIcon(R.drawable.ic_action_map_language, R.color.icon_color);
-		if (Build.VERSION.SDK_INT >= 21) {
-			Drawable active = getActiveIcon(R.drawable.ic_action_map_language);
-			return AndroidUtils.createPressedStateListDrawable(normal, active);
-		}
-		return normal;
-	}
-
-	@NonNull
-	private String getBaseUrl() {
-		File wikivoyageDir = getMyApplication().getAppPath(IndexConstants.WIKIVOYAGE_INDEX_DIR);
-		if (new File(wikivoyageDir, "article_style.css").exists()) {
-			return "file://" + wikivoyageDir.getAbsolutePath() + "/";
-		}
-		return "file:///android_asset/";
-	}
-
-	@NonNull
-	private String createHtmlContent(@NonNull String article) {
+	protected String createHtmlContent() {
 		StringBuilder sb = new StringBuilder(HEADER_INNER);
-		String nightModeClass = darkMode ? " nightmode" : "";
+		String nightModeClass = nightMode ? " nightmode" : "";
 		sb.append("<div class=\"main");
 		sb.append(nightModeClass);
 		sb.append("\">\n");
+		sb.append("<h1>").append(title).append("</h1>");
 		sb.append(article);
 		sb.append(FOOTER_INNER);
 		return sb.toString();
@@ -181,7 +122,7 @@ public class WikipediaDialogFragment extends BaseOsmAndDialogFragment {
 
 	@Override
 	public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-		populateWiki();
+		populateArticle();
 	}
 
 	@Override
@@ -193,7 +134,8 @@ public class WikipediaDialogFragment extends BaseOsmAndDialogFragment {
 		super.onDestroyView();
 	}
 
-	private void populateWiki() {
+	@Override
+	protected void populateArticle() {
 		if (amenity != null) {
 			String preferredLanguage = lang;
 			if (TextUtils.isEmpty(preferredLanguage)) {
@@ -206,26 +148,25 @@ public class WikipediaDialogFragment extends BaseOsmAndDialogFragment {
 			}
 
 			final String langSelected = lng;
-			final String title = amenity.getName(langSelected);
+			article = amenity.getDescription(langSelected);
+			title = amenity.getName(langSelected);
 			articleToolbarText.setText(title);
 			readFullArticleButton.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
 					String article = "https://" + langSelected.toLowerCase() + ".wikipedia.org/wiki/" + title.replace(' ', '_');
-					showFullArticle(getContext(), Uri.parse(article), darkMode);
+					showFullArticle(getContext(), Uri.parse(article), nightMode);
 				}
 			});
 
-			selectLanguageTextView.setText(Algorithms.capitalizeFirstLetter(langSelected));
-			selectLanguageTextView.setOnClickListener(new View.OnClickListener() {
+			selectedLangTv.setText(Algorithms.capitalizeFirstLetter(langSelected));
+			selectedLangTv.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
-					showPopupLangMenu(selectLanguageTextView, langSelected);
+					showPopupLangMenu(selectedLangTv, langSelected);
 				}
 			});
-
-			String content = amenity.getDescription(langSelected);
-			contentWebView.loadDataWithBaseURL(getBaseUrl(), createHtmlContent(content), "text/html", "UTF-8", null);
+			contentWebView.loadDataWithBaseURL(getBaseUrl(), createHtmlContent(), "text/html", "UTF-8", null);
 		}
 	}
 
@@ -236,7 +177,8 @@ public class WikipediaDialogFragment extends BaseOsmAndDialogFragment {
 		customTabsIntent.launchUrl(context, uri);
 	}
 
-	private void showPopupLangMenu(View view, final String langSelected) {
+	@Override
+	protected void showPopupLangMenu(View view, final String langSelected) {
 		final PopupMenu optionsMenu = new PopupMenu(getContext(), view, Gravity.RIGHT);
 		Set<String> namesSet = new TreeSet<>();
 		namesSet.addAll(amenity.getNames("content", "en"));
@@ -258,7 +200,7 @@ public class WikipediaDialogFragment extends BaseOsmAndDialogFragment {
 				@Override
 				public boolean onMenuItemClick(MenuItem item) {
 					setLanguage(langSelected);
-					populateWiki();
+					populateArticle();
 					return true;
 				}
 			});
@@ -269,7 +211,7 @@ public class WikipediaDialogFragment extends BaseOsmAndDialogFragment {
 				@Override
 				public boolean onMenuItemClick(MenuItem item) {
 					setLanguage(e.getKey());
-					populateWiki();
+					populateArticle();
 					return true;
 				}
 			});
@@ -278,12 +220,7 @@ public class WikipediaDialogFragment extends BaseOsmAndDialogFragment {
 	}
 
 	private Drawable getIcon(int resId) {
-		int colorId = darkMode ? R.color.ctx_menu_controller_button_text_color_dark_n : R.color.ctx_menu_controller_button_text_color_light_n;
-		return getIcon(resId, colorId);
-	}
-
-	private Drawable getActiveIcon(int resId) {
-		int colorId = darkMode ? R.color.wikivoyage_active_dark : R.color.wikivoyage_active_light;
+		int colorId = nightMode ? R.color.ctx_menu_controller_button_text_color_dark_n : R.color.ctx_menu_controller_button_text_color_light_n;
 		return getIcon(resId, colorId);
 	}
 
@@ -306,32 +243,15 @@ public class WikipediaDialogFragment extends BaseOsmAndDialogFragment {
 		}
 	}
 
-	private void updateWebSettings() {
-		OsmandSettings.WikivoyageShowImages showImages = getSettings().WIKIVOYAGE_SHOW_IMAGES.get();
-		WebSettings webSettings = contentWebView.getSettings();
-		switch (showImages) {
-			case ON:
-				webSettings.setCacheMode(WebSettings.LOAD_DEFAULT);
-				break;
-			case OFF:
-				webSettings.setCacheMode(WebSettings.LOAD_CACHE_ONLY);
-				break;
-			case WIFI:
-				webSettings.setCacheMode(getMyApplication().getSettings().isWifiConnected() ?
-						WebSettings.LOAD_DEFAULT : WebSettings.LOAD_CACHE_ONLY);
-				break;
-		}
-	}
-
 	public static boolean showInstance(AppCompatActivity activity, Amenity amenity) {
 		return showInstance(activity, amenity, null);
 	}
 
 	protected void setupToolbar(Toolbar toolbar) {
-		toolbar.setNavigationIcon(getIcon(R.drawable.ic_arrow_back, R.color.icon_color));
-		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
-		Menu menu = toolbar.getMenu();
+		super.setupToolbar(toolbar);
+		toolbar.setOverflowIcon(getIcon(R.drawable.ic_overflow_menu_white, R.color.icon_color));
 
+		Menu menu = toolbar.getMenu();
 		MenuItem.OnMenuItemClickListener itemClickListener = new MenuItem.OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
@@ -339,13 +259,13 @@ public class WikipediaDialogFragment extends BaseOsmAndDialogFragment {
 				if (app != null) {
 					int itemId = item.getItemId();
 					if (itemId == MENU_ITEM_SHOW_ID) {
-						app.getSettings().WIKIVOYAGE_SHOW_IMAGES.set(OsmandSettings.WikivoyageShowImages.ON);
+						app.getSettings().WIKI_ARTICLE_SHOW_IMAGES.set(OsmandSettings.WikiArticleShowImages.ON);
 						return true;
 					} else if (itemId == MENU_ITEM_WIFI_ID) {
-						app.getSettings().WIKIVOYAGE_SHOW_IMAGES.set(OsmandSettings.WikivoyageShowImages.WIFI);
+						app.getSettings().WIKI_ARTICLE_SHOW_IMAGES.set(OsmandSettings.WikiArticleShowImages.WIFI);
 						return true;
 					} else if (itemId == MENU_ITEM_NO_ID) {
-						app.getSettings().WIKIVOYAGE_SHOW_IMAGES.set(OsmandSettings.WikivoyageShowImages.OFF);
+						app.getSettings().WIKI_ARTICLE_SHOW_IMAGES.set(OsmandSettings.WikiArticleShowImages.OFF);
 						return true;
 					}
 				}
@@ -353,28 +273,11 @@ public class WikipediaDialogFragment extends BaseOsmAndDialogFragment {
 			}
 		};
 
-		MenuItem itemShow = menu.add(0,MENU_ITEM_SHOW_ID,0,R.string.shared_string_show);
+		MenuItem itemShow = menu.add(0, MENU_ITEM_SHOW_ID, 0, R.string.shared_string_show);
 		itemShow.setOnMenuItemClickListener(itemClickListener);
-		MenuItem itemWifi = menu.add(0,MENU_ITEM_WIFI_ID,0,R.string.shared_string_only_with_wifi);
+		MenuItem itemWifi = menu.add(0, MENU_ITEM_WIFI_ID, 0, R.string.shared_string_only_with_wifi);
 		itemWifi.setOnMenuItemClickListener(itemClickListener);
-		MenuItem itemNo = menu.add(0,MENU_ITEM_NO_ID,0,R.string.shared_string_dont);
+		MenuItem itemNo = menu.add(0, MENU_ITEM_NO_ID, 0, R.string.shared_string_dont);
 		itemNo.setOnMenuItemClickListener(itemClickListener);
-
-		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				dismiss();
-			}
-		});
-	}
-
-	@ColorRes
-	protected int getStatusBarColor() {
-		return darkMode ? R.color.status_bar_wikivoyage_article_dark : R.color.status_bar_wikivoyage_article_light;
-	}
-
-	@ColorInt
-	protected int getResolvedColor(@ColorRes int colorId) {
-		return ContextCompat.getColor(getContext(), colorId);
 	}
 }

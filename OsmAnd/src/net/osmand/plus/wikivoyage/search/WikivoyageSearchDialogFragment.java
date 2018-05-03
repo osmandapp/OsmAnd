@@ -20,7 +20,7 @@ import android.widget.ProgressBar;
 import net.osmand.ResultMatcher;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.wikivoyage.WikivoyageBaseDialogFragment;
+import net.osmand.plus.wikivoyage.WikiBaseDialogFragment;
 import net.osmand.plus.wikivoyage.article.WikivoyageArticleDialogFragment;
 import net.osmand.plus.wikivoyage.data.TravelLocalDataHelper;
 import net.osmand.plus.wikivoyage.data.WikivoyageSearchHistoryItem;
@@ -29,7 +29,7 @@ import net.osmand.plus.wikivoyage.data.WikivoyageSearchResult;
 import java.util.ArrayList;
 import java.util.List;
 
-public class WikivoyageSearchDialogFragment extends WikivoyageBaseDialogFragment {
+public class WikivoyageSearchDialogFragment extends WikiBaseDialogFragment {
 
 	public static final String TAG = "WikivoyageSearchDialogFragment";
 

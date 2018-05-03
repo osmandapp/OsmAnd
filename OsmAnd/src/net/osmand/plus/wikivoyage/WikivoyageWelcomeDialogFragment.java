@@ -15,7 +15,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.wikivoyage.explore.WikivoyageExploreDialogFragment;
 
-public class WikivoyageWelcomeDialogFragment extends WikivoyageBaseDialogFragment {
+public class WikivoyageWelcomeDialogFragment extends WikiBaseDialogFragment {
 
 	public static final String TAG = WikivoyageWelcomeDialogFragment.class.getSimpleName();
 
