@@ -1,4 +1,4 @@
-package net.osmand.plus.mapcontextmenu;
+package net.osmand.plus.wikipedia;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;

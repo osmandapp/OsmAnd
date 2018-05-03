@@ -1,4 +1,4 @@
-package net.osmand.plus.mapcontextmenu;
+package net.osmand.plus.wikipedia;
 
 import android.content.Context;
 import android.content.DialogInterface;
