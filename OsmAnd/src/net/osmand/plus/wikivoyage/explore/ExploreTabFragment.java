@@ -55,49 +55,10 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIn
 		final View mainView = inflater.inflate(R.layout.fragment_explore_tab, container, false);
 		final RecyclerView rv = (RecyclerView) mainView.findViewById(R.id.recycler_view);
 
-		populateData();
-
 		rv.setLayoutManager(new LinearLayoutManager(getContext()));
 		rv.setAdapter(adapter);
 
 		return mainView;
-	}
-
-	public void populateData() {
-		final List<BaseTravelCard> items = new ArrayList<>();
-		final OsmandApplication app = getMyApplication();
-
-		addOpenBetaTravelCard(items, nightMode);
-		if (app.getTravelDbHelper().getSelectedTravelBook() != null) {
-			items.add(new HeaderTravelCard(app, nightMode, getString(R.string.popular_destinations)));
-			List<TravelArticle> popularArticles = app.getTravelDbHelper().getPopularArticles();
-			FragmentActivity activity = getActivity();
-			if (activity != null) {
-				for (TravelArticle article : popularArticles) {
-					items.add(new ArticleTravelCard(getMyApplication(), nightMode, article,
-							activity.getSupportFragmentManager()));
-				}
-			}
-		}
-		items.add(new StartEditingTravelCard(app, nightMode));
-		adapter.setItems(items);
-
-		checkToAddDownloadTravelCard();
-	}
-
-	private void checkToAddDownloadTravelCard() {
-		final OsmandApplication app = getMyApplication();
-		final DownloadIndexesThread downloadThread = app.getDownloadThread();
-
-		if (!downloadThread.getIndexes().isDownloadedFromInternet) {
-			downloadIndexesRequested = true;
-			downloadThread.runReloadIndexFilesSilent();
-		} else {
-			indexItem = downloadThread.getIndexes().getWikivoyageItem(getWikivoyageFileName());
-			IndexItem current = downloadThread.getCurrentDownloadingItem();
-			boolean loadingInProgress = current != null && indexItem != null && current == indexItem;
-			addDownloadUpdateCard(loadingInProgress);
-		}
 	}
 
 	@Override
@@ -140,6 +101,49 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIn
 			if (parent != null && parent instanceof WikivoyageExploreDialogFragment) {
 				((WikivoyageExploreDialogFragment) parent).populateData();
 			}
+		}
+	}
+
+	public void invalidateAdapter() {
+		if (adapter != null) {
+			adapter.notifyDataSetChanged();
+		}
+	}
+
+	public void populateData() {
+		final List<BaseTravelCard> items = new ArrayList<>();
+		final OsmandApplication app = getMyApplication();
+
+		addOpenBetaTravelCard(items, nightMode);
+		if (app.getTravelDbHelper().getSelectedTravelBook() != null) {
+			items.add(new HeaderTravelCard(app, nightMode, getString(R.string.popular_destinations)));
+			List<TravelArticle> popularArticles = app.getTravelDbHelper().getPopularArticles();
+			FragmentActivity activity = getActivity();
+			if (activity != null) {
+				for (TravelArticle article : popularArticles) {
+					items.add(new ArticleTravelCard(getMyApplication(), nightMode, article,
+							activity.getSupportFragmentManager()));
+				}
+			}
+		}
+		items.add(new StartEditingTravelCard(app, nightMode));
+		adapter.setItems(items);
+
+		checkToAddDownloadTravelCard();
+	}
+
+	private void checkToAddDownloadTravelCard() {
+		final OsmandApplication app = getMyApplication();
+		final DownloadIndexesThread downloadThread = app.getDownloadThread();
+
+		if (!downloadThread.getIndexes().isDownloadedFromInternet) {
+			downloadIndexesRequested = true;
+			downloadThread.runReloadIndexFilesSilent();
+		} else {
+			indexItem = downloadThread.getIndexes().getWikivoyageItem(getWikivoyageFileName());
+			IndexItem current = downloadThread.getCurrentDownloadingItem();
+			boolean loadingInProgress = current != null && indexItem != null && current == indexItem;
+			addDownloadUpdateCard(loadingInProgress);
 		}
 	}
 

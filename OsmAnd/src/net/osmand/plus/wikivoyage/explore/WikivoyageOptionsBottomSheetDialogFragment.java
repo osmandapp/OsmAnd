@@ -36,6 +36,7 @@ public class WikivoyageOptionsBottomSheetDialogFragment extends MenuBottomSheetD
 	public static final int REQUEST_CODE = 0;
 	public static final int DOWNLOAD_IMAGES_CHANGED = 1;
 	public static final int CACHE_CLEARED = 2;
+	public static final int TRAVEL_BOOK_CHANGED = 3;
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
@@ -154,10 +155,7 @@ public class WikivoyageOptionsBottomSheetDialogFragment extends MenuBottomSheetD
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						dbHelper.selectTravelBook(list.get(which));
-						Fragment parent = getParentFragment();
-						if (parent != null && parent instanceof WikivoyageExploreDialogFragment) {
-							((WikivoyageExploreDialogFragment) parent).populateData();
-						}
+						sendResult(TRAVEL_BOOK_CHANGED);
 					}
 				})
 				.setNegativeButton(R.string.shared_string_dismiss, null)

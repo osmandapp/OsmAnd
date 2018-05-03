@@ -175,12 +175,24 @@ public class WikivoyageExploreDialogFragment extends WikivoyageBaseDialogFragmen
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 		if (requestCode == WikivoyageOptionsBottomSheetDialogFragment.REQUEST_CODE) {
-			if (resultCode == WikivoyageOptionsBottomSheetDialogFragment.DOWNLOAD_IMAGES_CHANGED
-					|| resultCode == WikivoyageOptionsBottomSheetDialogFragment.CACHE_CLEARED) {
-				if (savedArticlesTabFragment != null) {
-					savedArticlesTabFragment.updateAdapter();
-				}
+			switch (resultCode) {
+				case WikivoyageOptionsBottomSheetDialogFragment.DOWNLOAD_IMAGES_CHANGED:
+				case WikivoyageOptionsBottomSheetDialogFragment.CACHE_CLEARED:
+					invalidateTabAdapters();
+					break;
+				case WikivoyageOptionsBottomSheetDialogFragment.TRAVEL_BOOK_CHANGED:
+					populateData();
+					break;
 			}
+		}
+	}
+
+	private void invalidateTabAdapters() {
+		if (exploreTabFragment != null) {
+			exploreTabFragment.invalidateAdapter();
+		}
+		if (savedArticlesTabFragment != null) {
+			savedArticlesTabFragment.invalidateAdapter();
 		}
 	}
 
