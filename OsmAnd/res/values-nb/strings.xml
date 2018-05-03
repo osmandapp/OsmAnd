@@ -3085,14 +3085,14 @@
 \n • Vis spesialiserte nettbaserte fil, satellittvisning (fra Bing), forskjellige overleggslag, som tur/navigasjons-GPX-spor og ytterligere lag med tilpassbar gjennomsiktighet
 \n • Valgfri visning av stedsnavn på Engelsk, lokal, eller fonetisk staving
 \n</string>
-    <string name="osmand_plus_extended_description_part4">Bruk OSM- og WIkipedia-data
+    <string name="osmand_plus_extended_description_part4">Bruk OSM- og Wikipedia-data
 \n • Høykvalitetsinfo fra de beste samarbeidsprosjektene i verden
 \n • OSM-data tilgjengelig per land eller region
-\n • Wikipedia POI-er, topp hvis du er turist på utkikk etter serverdigheter
+\n • Wikipedia-interessepunkter, topp hvis du er turist på utkikk etter severdigheter
 \n • Ubegrensede gratis nedlastinger, direkte fra programmet
 \n • Kompakte frakoblede vektorbaserte kart, oppdatert minst én gang i måneden
 \n
-\n • Valg mellom helhetlig regiondata, eller kun veinettverk (Eksempelvis er hele Japan 700 MB, og veinettverket er 200 MB)</string>
+\n • Valg mellom komplette regiondata eller kun veinettverk (Eksempelvis er hele Japan 700 MB, og veinettverket er 200 MB)</string>
     <string name="osmand_plus_extended_description_part7">Bidra direkte til OSM
 \n • Rapporter datafeil
 \n • Last opp GPX-spor til OSM direkte fra programmet
