@@ -3182,4 +3182,6 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="paid_app">Aplicatzione a pagamentu</string>
     <string name="paid_plugin">Estensione a pagamentu</string>
     <string name="osmand_team">Grupu de traballu de OsmAnd</string>
+    <string name="maps_you_need_descr">As lèghidu sos artìculos: %1$s. Pro custa resone, ti cunsigiamus de iscarrigare custas mapas:</string>
+    <string name="maps_you_need">Mapas cunsigiadas</string>
     </resources>
