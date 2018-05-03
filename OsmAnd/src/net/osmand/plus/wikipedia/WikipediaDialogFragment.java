@@ -26,13 +26,17 @@ import android.webkit.WebView;
 import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
+import net.osmand.IndexConstants;
 import net.osmand.data.Amenity;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.util.Algorithms;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -117,6 +121,9 @@ public class WikipediaDialogFragment extends WikiArticleBaseDialogFragment {
 		sb.append("<h1>").append(title).append("</h1>");
 		sb.append(article);
 		sb.append(FOOTER_INNER);
+		if (OsmandPlugin.getEnabledPlugin(OsmandDevelopmentPlugin.class) != null) {
+			writeOutHTML(sb, new File(getMyApplication().getAppPath(IndexConstants.WIKIVOYAGE_INDEX_DIR), "page.html"));
+		}
 		return sb.toString();
 	}
 
