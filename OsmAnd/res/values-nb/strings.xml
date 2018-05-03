@@ -109,7 +109,7 @@
     <string name="left_side_navigation">Venstrekjøring</string>
     <string name="left_side_navigation_descr">For land hvor det kjøres på venstre side av veien.</string>
 
-    <string name="unknown_from_location">Startpunkt ennå ikke bestemt</string>
+    <string name="unknown_from_location">Startpunkt ikke bestemt enda</string>
     <string name="unknown_location">Posisjon ennå ikke kjent</string>
     <string name="local_indexes_cat_tile">Nettbaserte kart og hurtigbufrede fliskart</string>
     <string name="local_indexes_cat_map">Standardkart (vektor)</string>
@@ -618,8 +618,8 @@
     <string name="local_index_tile_data_maxzoom">Maksimum zoom: %1$s</string>
     <string name="local_index_tile_data_minzoom">Minimum zoom: %1$s</string>
     <string name="edit_tilesource_maxzoom">Maksimum-zoom</string>
-    <string name="edit_tilesource_minzoom">Minimum-zoom</string>
-    <string name="edit_tilesource_url_to_load">URL</string>
+    <string name="edit_tilesource_minzoom">Minste forstørrelse</string>
+    <string name="edit_tilesource_url_to_load">Nettadresse</string>
     <string name="edit_tilesource_choose_existing">Velg eksisterende…</string>
     <string name="maps_define_edit">Definer/rediger…</string>
     
@@ -848,7 +848,7 @@
     <string name="voice_stream_notification">Varslingslyd</string>
     <string name="voice_stream_music">Media-/musikklyd</string>
     <string name="level_to_switch_vector_raster_descr">Bruk rasterkart for alt utover dette nivået.</string>
-    <string name="level_to_switch_vector_raster">Minimum vektor-zoomnivå</string>
+    <string name="level_to_switch_vector_raster">Minste vektorielle forstørrelsesnivå</string>
     <string name="incomplete_locale">ufullstendig</string>
     <string name="context_menu_item_add_waypoint">Legg til GPX-rutepunkt</string>
     <string name="voice_is_not_available_title">Ingen taleveiledning valgt</string>
@@ -1300,7 +1300,7 @@
     <string name="rendering_attr_pisteRoutes_name">Skibakker</string>
     <string name="rendering_attr_pisteGrooming_name">Løypepreparering</string>
     
-    <string name="routing_attr_avoid_borders_description">Unngå å krysse nasjonalgrenser</string>
+    <string name="routing_attr_avoid_borders_description">Unngå å krysse riksgrenser</string>
     <string name="shared_string_import2osmand">Importer til OsmAnd</string>
     <string name="read_full_article">Les hele artikkelen (på nett)</string>
     <string name="shared_string_show_details">Vis detaljer</string>
@@ -1867,7 +1867,7 @@
 \n - Ingen nettfrakoblet tilgang til interessepunkter fra Wikipedia
 \n
 \n OsmAnd utvikles aktivt, og prosjektet vårt og dets videre framdrift avhenger av finansielle bidrag for å drive utviklingen og testingen av nye funksjoner. Overvei å kjøpe OsmAnd+ eller støtte spesifikke nye funksjoner eller bidra med en generell donasjon på https://osmand.net.</string>
-	<string name="upload_osm_note_description">Last opp ditt OSM-notat anonymt eller ved å bruke din profil hos OpenStreetmap.org.</string>
+	<string name="upload_osm_note_description">Last opp ditt OSM-notat anonymt eller ved å bruke din profil hos OpenStreetMap.org</string>
     <string name="gpx_no_tracks_title">Du har ingen spor ennå</string>
     <string name="gpx_no_tracks_title_folder">Legg til spor i mappen</string>
     <string name="gpx_add_track">Legg til spor</string>
@@ -1876,7 +1876,7 @@
     <string name="save_track_min_speed">Minimumshastighet for logging</string>
     <string name="save_track_min_speed_descr">Filter: Ingen logging av punkter under denne hastigheten.</string>
     <string name="save_track_min_distance">Minsteavstand for logging</string>
-    <string name="save_track_min_distance_descr">Filter: Angi minste avstand fra et punkt for å logge et nytt punkt.</string>
+    <string name="save_track_min_distance_descr">Filter: Angi minste avstand fra et punkt for å logge et nytt.</string>
     <string name="save_track_precision">Minimumsnøyaktighet for logging</string>
     <string name="save_track_precision_descr">Filter: Ingen logging med mindre denne nøyaktigheten er nådd.</string>
     <string name="christmas_desc">I anledning jul og nyttår kan du velge å vise interessepunkter knyttet til julen: juletrær, markeder, etc.</string>
@@ -2050,7 +2050,7 @@
     <string name="av_use_external_recorder">Bruk systemopptaker</string>
     <string name="av_use_external_camera_descr">Bruk systemprogrammet til foto.</string>
     <string name="av_use_external_camera">Bruk kameraprogram</string>
-    <string name="recording_error">Opptak feilet</string>
+    <string name="recording_error">Opptak mislyktes</string>
     <string name="recording_camera_not_available">Kamera ikke tilgjengelig</string>
     <string name="recording_is_recorded">Tar opp lyd/video. Stopp ved å trykke A/V-modulen.</string>
     <string name="recording_playing">Lyd fra det angitte opptaket spilles av.
@@ -2218,7 +2218,7 @@
     <string name="quick_action_map_styles">Kartstiler</string>
     <string name="quick_action_map_style_action">Legg til en kartstil</string>
     <string name="quick_action_poi_list">Interessepunktliste</string>
-    <string name="quick_action_sh_poi_descr">Legg til en eller flere interessepunktkategorier som skal vises på kartet.</string>
+    <string name="quick_action_sh_poi_descr">Legg til én eller flere interessepunktkategorier som skal vises på kartet.</string>
     <string name="quick_action_category_descr">Velg kategorien til å lagre favoritten i.</string>
     <string name="quick_action_add_navigation">Navigering</string>
     <string name="quick_action_add_configure_map">Kartinnstilling</string>
@@ -2318,7 +2318,7 @@
     <string name="add_point_after">Legg til punkt etter</string>
     <string name="shared_string_options">Alternativer</string>
     <string name="measurement_tool_snap_to_road_descr">OsmAnd vil forbinde punktene med ruter for den valgte profilen.</string>
-    <string name="measurement_tool_save_as_new_track_descr">Lagre punktene enten som rutepunkter eller som en linje.</string>
+    <string name="measurement_tool_save_as_new_track_descr">Lagre punktene enten som rutepunkter eller som linje.</string>
     <string name="choose_navigation_type">Velg navigeringsprofil</string>
     <string name="empty_state_my_tracks">Legg til og ta opp spor</string>
     <string name="empty_state_my_tracks_desc">Ta opp eller importer spor som skal vises.</string>
@@ -3005,12 +3005,12 @@
     <string name="how_to_open_wiki_title">Hvordan åpne Wikipedia-artikler?</string>
 <string name="download_wikipedia_description">Last ned Wikipedia-artiklene for %1$s slik at du kan lese dem frakoblet.</string>
     <string name="open_in_browser_wiki">Åpne nettbasert artikkel</string>
-    <string name="open_in_browser_wiki_description">Se artikkel i en nettleser.</string>
+    <string name="open_in_browser_wiki_description">Vis artikkel i en nettleser.</string>
     <string name="download_wiki_region_placeholder">denne regionen</string>
     <string name="wiki_article_search_text">Søker etter den nødvendige wiki-artikkelen</string>
     <string name="wiki_article_not_found">Artikkel ikke funnet</string>
     <string name="osmand_plus_extended_description_part2">Navigering
-\n • Virker i nettbasert modus (rask), eller frakoblet modus (ingen gjestings-kostnader når du er utenlands)
+\n • Virker i nettbasert modus (raskt), eller frakoblet modus (ingen gjestings-kostnader når du er utenlands)
 \n • Taleveiledning sving-for-sving (innspilt og syntetisert tale)
 \n • Valgfri filanvisning, gatenavnvisning og estimert ankomsttid
 \n • Støtter mellomliggende punkter på ruten
