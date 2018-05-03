@@ -39,14 +39,12 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIn
 	private static final String WORLD_WIKIVOYAGE_FILE_NAME = "World_wikivoyage.sqlite";
 
 	private ExploreRvAdapter adapter = new ExploreRvAdapter();
+	private boolean nightMode;
 
 	private TravelDownloadUpdateCard downloadUpdateCard;
 
-	private boolean nightMode;
-
-	private IndexItem indexItem;
-
-	private boolean downloadIndexesRequested;
+	private IndexItem mainIndexItem;
+	private boolean waitForIndexes;
 
 	@Nullable
 	@Override
@@ -64,35 +62,32 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIn
 
 	@Override
 	public void newDownloadIndexes() {
-		if (downloadIndexesRequested) {
-			downloadIndexesRequested = false;
-			indexItem = getMyApplication().getDownloadThread().getIndexes()
-					.getWikivoyageItem(getWikivoyageFileName());
-			if (downloadUpdateCard == null) {
-				addDownloadUpdateCard(false);
-			}
+		if (waitForIndexes) {
+			waitForIndexes = false;
+			checkDownloadIndexes();
 		}
 	}
 
 	@Override
 	public void downloadInProgress() {
-		DownloadIndexesThread downloadThread = getMyApplication().getDownloadThread();
-		IndexItem current = downloadThread.getCurrentDownloadingItem();
-		indexItem = downloadThread.getIndexes().getWikivoyageItem(getWikivoyageFileName());
-		if (current != null && downloadUpdateCard != null
-				&& indexItem != null
-				&& current == indexItem
-				&& (!current.isDownloaded() || current.isOutdated())) {
-			downloadUpdateCard.setProgress(downloadThread.getCurrentDownloadingItemProgress());
-			adapter.updateDownloadUpdateCard();
+		if (mainIndexItem != null) {
+			DownloadIndexesThread downloadThread = getMyApplication().getDownloadThread();
+			IndexItem current = downloadThread.getCurrentDownloadingItem();
+			if (downloadUpdateCard != null
+					&& current != null
+					&& current == mainIndexItem
+					&& (!current.isDownloaded() || current.isOutdated())) {
+				downloadUpdateCard.setProgress(downloadThread.getCurrentDownloadingItemProgress());
+				adapter.updateDownloadUpdateCard();
+			}
 		}
 	}
 
 	@Override
 	public void downloadHasFinished() {
 		final OsmandApplication app = getMyApplication();
-		File targetFile = indexItem.getTargetFile(app);
-		if (downloadUpdateCard != null && indexItem != null && targetFile.exists()) {
+		File targetFile = mainIndexItem.getTargetFile(app);
+		if (downloadUpdateCard != null && mainIndexItem != null && targetFile.exists()) {
 			downloadUpdateCard.setLoadingInProgress(false);
 			removeDownloadUpdateCard();
 			TravelDbHelper travelDbHelper = app.getTravelDbHelper();
@@ -133,43 +128,46 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIn
 		items.add(new StartEditingTravelCard(app, nightMode));
 		adapter.setItems(items);
 
-		checkToAddDownloadTravelCard();
-	}
-
-	private void checkToAddDownloadTravelCard() {
-		final OsmandApplication app = getMyApplication();
 		final DownloadIndexesThread downloadThread = app.getDownloadThread();
-
 		if (!downloadThread.getIndexes().isDownloadedFromInternet) {
-			downloadIndexesRequested = true;
+			waitForIndexes = true;
 			downloadThread.runReloadIndexFilesSilent();
 		} else {
-			indexItem = downloadThread.getIndexes().getWikivoyageItem(getWikivoyageFileName());
-			IndexItem current = downloadThread.getCurrentDownloadingItem();
-			boolean loadingInProgress = current != null && indexItem != null && current == indexItem;
-			addDownloadUpdateCard(loadingInProgress);
+			checkDownloadIndexes();
 		}
 	}
 
-	private void addDownloadUpdateCard(boolean loadingInProgress) {
-		final OsmandApplication app = getMyApplication();
+	private void checkDownloadIndexes() {
+		DownloadIndexesThread downloadThread = getMyApplication().getDownloadThread();
+		mainIndexItem = downloadThread.getIndexes().getWikivoyageItem(getWikivoyageFileName());
+		addDownloadUpdateCard();
+	}
 
-		boolean outdated = indexItem != null && indexItem.isOutdated();
+	private void addDownloadUpdateCard() {
+		final OsmandApplication app = getMyApplication();
+		final DownloadIndexesThread downloadThread = app.getDownloadThread();
+
+		boolean outdated = mainIndexItem != null && mainIndexItem.isOutdated();
 		File selectedTravelBook = app.getTravelDbHelper().getSelectedTravelBook();
+
 		if (selectedTravelBook == null || outdated) {
+			IndexItem current = downloadThread.getCurrentDownloadingItem();
+			boolean loadingInProgress = mainIndexItem != null && current != null && mainIndexItem == current;
+
 			boolean showOtherMaps = false;
 			if (selectedTravelBook == null) {
-				List<IndexItem> items = app.getDownloadThread().getIndexes().getWikivoyageItems();
+				List<IndexItem> items = downloadThread.getIndexes().getWikivoyageItems();
 				showOtherMaps = items != null && items.size() > 1;
 			}
+
 			downloadUpdateCard = new TravelDownloadUpdateCard(app, nightMode, !outdated);
 			downloadUpdateCard.setShowOtherMapsBtn(showOtherMaps);
 			downloadUpdateCard.setLoadingInProgress(loadingInProgress);
 			downloadUpdateCard.setListener(new TravelDownloadUpdateCard.ClickListener() {
 				@Override
 				public void onPrimaryButtonClick() {
-					if (indexItem != null) {
-						new DownloadValidationManager(app).startDownload(getMyActivity(), indexItem);
+					if (mainIndexItem != null) {
+						new DownloadValidationManager(app).startDownload(getMyActivity(), mainIndexItem);
 						downloadUpdateCard.setLoadingInProgress(true);
 						adapter.updateDownloadUpdateCard();
 					}
@@ -178,7 +176,7 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIn
 				@Override
 				public void onSecondaryButtonClick() {
 					if (downloadUpdateCard.isLoadingInProgress()) {
-						app.getDownloadThread().cancelDownload(indexItem);
+						downloadThread.cancelDownload(mainIndexItem);
 						downloadUpdateCard.setLoadingInProgress(false);
 						adapter.updateDownloadUpdateCard();
 					} else if (!downloadUpdateCard.isDownload()) {
@@ -194,7 +192,7 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIn
 					}
 				}
 			});
-			downloadUpdateCard.setIndexItem(indexItem);
+			downloadUpdateCard.setIndexItem(mainIndexItem);
 			adapter.setDownloadUpdateCard(downloadUpdateCard);
 		}
 	}
