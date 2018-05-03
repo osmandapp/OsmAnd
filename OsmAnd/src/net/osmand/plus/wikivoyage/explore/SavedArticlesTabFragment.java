@@ -3,6 +3,7 @@ package net.osmand.plus.wikivoyage.explore;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.util.DiffUtil;
 import android.support.v7.widget.LinearLayoutManager;
@@ -45,8 +46,9 @@ public class SavedArticlesTabFragment extends BaseOsmAndFragment implements Trav
 		adapter.setListener(new SavedArticlesRvAdapter.Listener() {
 			@Override
 			public void openArticle(TravelArticle article) {
-				FragmentManager fm = getActivity().getSupportFragmentManager();
-				if (fm != null) {
+				FragmentActivity activity = getActivity();
+				if (activity != null) {
+					FragmentManager fm = activity.getSupportFragmentManager();
 					WikivoyageArticleDialogFragment.showInstance(app, fm, article.getCityId(), article.getLang());
 				}
 			}
