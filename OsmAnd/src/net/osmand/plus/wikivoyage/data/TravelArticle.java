@@ -96,7 +96,8 @@ public class TravelArticle {
 
 		int firstParagraphStart = content.indexOf(pOpened);
 		int firstParagraphEnd = content.indexOf(pClosed);
-		if (firstParagraphStart == -1 || firstParagraphEnd == -1) {
+		if (firstParagraphStart == -1 || firstParagraphEnd == -1
+				|| firstParagraphEnd < firstParagraphStart) {
 			return null;
 		}
 		int pClosedLength = pClosed.length();
