@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -29,12 +28,11 @@ import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.OsmandSettings.WikivoyageShowImages;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.TrackActivity;
 import net.osmand.plus.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
-import net.osmand.plus.wikivoyage.WikivoyageBaseDialogFragment;
+import net.osmand.plus.wikipedia.ArticleBaseDialogFragment;
 import net.osmand.plus.wikivoyage.WikivoyageShowPicturesDialogFragment;
 import net.osmand.plus.wikivoyage.WikivoyageWebViewClient;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
@@ -50,14 +48,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import static net.osmand.plus.OsmandSettings.WikivoyageShowImages.OFF;
 
 
-public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragment {
+public class WikivoyageArticleDialogFragment extends ArticleBaseDialogFragment {
 
 	public static final String TAG = "WikivoyageArticleDialogFragment";
 
@@ -67,66 +64,6 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 	private static final String LANGS_KEY = "langs_key";
 	private static final String SELECTED_LANG_KEY = "selected_lang_key";
 
-	private static final String HEADER_INNER = "<html><head>\n" +
-			"<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />\n" +
-			"<meta http-equiv=\"cleartype\" content=\"on\" />\n" +
-			"<link href=\"article_style.css\" type=\"text/css\" rel=\"stylesheet\"/>\n" +
-			"<script type=\"text/javascript\">" +
-			"function showNavigation() {" +
-			"	Android.showNavigation();" +
-			"}" +
-			"</script>" +
-			"</head>";
-	private static final String FOOTER_INNER = "<script>var coll = document.getElementsByTagName(\"H2\");" +
-			"var i;" +
-			"for (i = 0; i < coll.length; i++) {" +
-			"  coll[i].addEventListener(\"click\", function() {" +
-			"    this.classList.toggle(\"active\");" +
-			"    var content = this.nextElementSibling;" +
-			"    if (content.style.display === \"block\") {" +
-			"      content.style.display = \"none\";" +
-			"    } else {" +
-			"      content.style.display = \"block\";" +
-			"    }" +
-			"  });" +
-			"}" +
-			"document.addEventListener(\"DOMContentLoaded\", function(event) {\n" +
-			"    document.querySelectorAll('img').forEach(function(img) {\n" +
-			"        img.onerror = function() {\n" +
-			"            this.style.display = 'none';\n" +
-			"            var caption = img.parentElement.nextElementSibling;\n" +
-			"            if (caption.className == \"thumbnailcaption\") {\n" +
-			"                caption.style.display = 'none';\n" +
-			"            }\n" +
-			"        };\n" +
-			"    })\n" +
-			"});" +
-			"function scrollAnchor(id, title) {" +
-			"openContent(title);" +
-			"window.location.hash = id;}\n" +
-			"function openContent(id) {\n" +
-			"    var doc = document.getElementById(id).parentElement;\n" +
-			"    doc.classList.toggle(\"active\");\n" +
-			"    var content = doc.nextElementSibling;\n" +
-			"    content.style.display = \"block\";\n" +
-			"    collapseActive(doc);" +
-			"}" +
-			"function collapseActive(doc) {" +
-			"    var coll = document.getElementsByTagName(\"H2\");" +
-			"    var i;" +
-			"    for (i = 0; i < coll.length; i++) {" +
-			"        var item = coll[i];" +
-			"        if (item != doc && item.classList.contains(\"active\")) {" +
-			"            item.classList.toggle(\"active\");" +
-			"            var content = item.nextElementSibling;" +
-			"            if (content.style.display === \"block\") {" +
-			"                content.style.display = \"none\";" +
-			"            }" +
-			"        }" +
-			"    }" +
-			"}</script>"
-			+ "</body></html>";
-
 	private static final String EMPTY_URL = "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4//";
 
 	private long cityId = NO_VALUE;
@@ -135,11 +72,8 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 	private TravelArticle article;
 
 	private TextView trackButton;
-	private TextView selectedLangTv;
 	private TextView saveBtn;
-	private WebView contentWebView;
 
-	private TextView articleToolbarText;
 	private WikivoyageWebViewClient webViewClient;
 
 	@SuppressLint({"SetJavaScriptEnabled", "AddJavascriptInterface"})
@@ -174,7 +108,7 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 		selectedLangTv.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				showPopupLangMenu(v);
+				showPopupLangMenu(v, selectedLang);
 			}
 		});
 
@@ -289,28 +223,6 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 		}
 	}
 
-	@Override
-	protected int getStatusBarColor() {
-		return nightMode ? R.color.status_bar_wikivoyage_article_dark : R.color.status_bar_wikivoyage_article_light;
-	}
-
-	private void updateWebSettings() {
-		WikivoyageShowImages showImages = getSettings().WIKIVOYAGE_SHOW_IMAGES.get();
-		WebSettings webSettings = contentWebView.getSettings();
-		switch (showImages) {
-			case ON:
-				webSettings.setCacheMode(WebSettings.LOAD_DEFAULT);
-				break;
-			case OFF:
-				webSettings.setCacheMode(WebSettings.LOAD_CACHE_ONLY);
-				break;
-			case WIFI:
-				webSettings.setCacheMode(getMyApplication().getSettings().isWifiConnected() ?
-						WebSettings.LOAD_DEFAULT : WebSettings.LOAD_CACHE_ONLY);
-				break;
-		}
-	}
-
 	private void updateSaveButton() {
 		if (article != null) {
 			final TravelLocalDataHelper helper = getMyApplication().getTravelDbHelper().getLocalDataHelper();
@@ -335,7 +247,8 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 		}
 	}
 
-	private void showPopupLangMenu(View view) {
+	@Override
+	protected void showPopupLangMenu(View view, String langSelected) {
 		if (langs == null) {
 			return;
 		}
@@ -362,7 +275,7 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 		popup.show();
 	}
 
-	private void populateArticle() {
+	protected void populateArticle() {
 		if (cityId == NO_VALUE || langs == null) {
 			Bundle args = getArguments();
 			if (args != null) {
@@ -392,15 +305,11 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 
 		updateSaveButton();
 		selectedLangTv.setText(Algorithms.capitalizeFirstLetter(selectedLang));
-		contentWebView.loadDataWithBaseURL(getBaseUrl(), createHtmlContent(article), "text/html", "UTF-8", null);
-	}
-
-	private void moveToAnchor(String id, String title) {
-		contentWebView.loadUrl("javascript:scrollAnchor(\"" + id + "\", \"" + title.trim() + "\")");
+		contentWebView.loadDataWithBaseURL(getBaseUrl(), createHtmlContent(), "text/html", "UTF-8", null);
 	}
 
 	@NonNull
-	private String createHtmlContent(@NonNull TravelArticle article) {
+	protected String createHtmlContent() {
 		StringBuilder sb = new StringBuilder(HEADER_INNER);
 		String[] rtlLanguages = new String[]{"ar","dv","he","iw","fa","nqo","ps","sd","ug","ur","yi"};
 		Set<String> rtls = new HashSet<>(Arrays.asList(rtlLanguages));
@@ -445,7 +354,7 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 		return sb.toString();
 	}
 
-	private void writeOutHTML(StringBuilder sb) {
+	protected void writeOutHTML(StringBuilder sb) {
 		File file = new File(getMyApplication().getAppPath(IndexConstants.WIKIVOYAGE_INDEX_DIR), "page.html");
 		BufferedWriter writer = null;
 		try {
@@ -455,25 +364,6 @@ public class WikivoyageArticleDialogFragment extends WikivoyageBaseDialogFragmen
 		} catch (IOException e) {
 			Log.w("ArticleDialog", e.getMessage(), e);
 		}
-	}
-
-	@NonNull
-	private String getBaseUrl() {
-		File wikivoyageDir = getMyApplication().getAppPath(IndexConstants.WIKIVOYAGE_INDEX_DIR);
-		if (new File(wikivoyageDir, "article_style.css").exists()) {
-			return "file://" + wikivoyageDir.getAbsolutePath() + "/";
-		}
-		return "file:///android_asset/";
-	}
-
-	@NonNull
-	private Drawable getSelectedLangIcon() {
-		Drawable normal = getContentIcon(R.drawable.ic_action_map_language);
-		if (Build.VERSION.SDK_INT >= 21) {
-			Drawable active = getActiveIcon(R.drawable.ic_action_map_language);
-			return AndroidUtils.createPressedStateListDrawable(normal, active);
-		}
-		return normal;
 	}
 
 	public static boolean showInstance(@NonNull OsmandApplication app,
