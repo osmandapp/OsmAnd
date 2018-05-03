@@ -3050,13 +3050,13 @@
     <string name="plugin_touringview_descr">"Aktivering av denne visningen endrer OsmAnds kartstil til \"Turvisning, dette er et spesielt høydetaljskart for dem på reisefot og folk i transportbransjen. 
 \n
 \nDenne visningen gir, uansett forstørrelsesnivå, høyest antall reisedetaljer tilgjengelig i kartdataen (i særdeleshet veier, småveier, stier  og orienteringsmerker). 
-\n
+\n 
 \nDet viser også alle typer veier, klart adskilt med fargemerking, som er nyttig når du kjører for eksempel store kjøretøy. 
 \n
 \nDet gir også spesielle turvalg, som visning av sykkelveier eller fjellruter. 
-\n
+\n 
 \nMan trenger ikke å laste ned noe ekstra, visningen lages basert på standardkart. 
-\n
+\n 
 \nDenne visningen kan tilbakestilles enten ved å deaktivere den igjen her, eller å endre \"Kartstil\" under \"Sett opp kart\" man ønsker."</string>
     <string name="plugin_nautical_descr">Dette programtillegget beriker OsmAnds kart og navigasjonsprogram til også å tjene som sjøkart, for båt, seiling eller andre typer vannsport.
 \n
