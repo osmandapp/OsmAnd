@@ -31,7 +31,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
-import net.osmand.plus.wikipedia.ArticleBaseDialogFragment;
 import net.osmand.util.Algorithms;
 
 import java.util.HashMap;
@@ -40,7 +39,7 @@ import java.util.Set;
 import java.util.TreeSet;
 
 
-public class WikipediaDialogFragment extends ArticleBaseDialogFragment {
+public class WikipediaDialogFragment extends WikiArticleBaseDialogFragment {
 
 	public static final String TAG = "WikipediaDialogFragment";
 
@@ -267,13 +266,13 @@ public class WikipediaDialogFragment extends ArticleBaseDialogFragment {
 				if (app != null) {
 					int itemId = item.getItemId();
 					if (itemId == MENU_ITEM_SHOW_ID) {
-						app.getSettings().WIKIVOYAGE_SHOW_IMAGES.set(OsmandSettings.WikivoyageShowImages.ON);
+						app.getSettings().WIKI_ARTICLE_SHOW_IMAGES.set(OsmandSettings.WikiArticleShowImages.ON);
 						return true;
 					} else if (itemId == MENU_ITEM_WIFI_ID) {
-						app.getSettings().WIKIVOYAGE_SHOW_IMAGES.set(OsmandSettings.WikivoyageShowImages.WIFI);
+						app.getSettings().WIKI_ARTICLE_SHOW_IMAGES.set(OsmandSettings.WikiArticleShowImages.WIFI);
 						return true;
 					} else if (itemId == MENU_ITEM_NO_ID) {
-						app.getSettings().WIKIVOYAGE_SHOW_IMAGES.set(OsmandSettings.WikivoyageShowImages.OFF);
+						app.getSettings().WIKI_ARTICLE_SHOW_IMAGES.set(OsmandSettings.WikiArticleShowImages.OFF);
 						return true;
 					}
 				}

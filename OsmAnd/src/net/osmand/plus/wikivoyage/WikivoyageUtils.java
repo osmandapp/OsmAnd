@@ -8,7 +8,7 @@ import net.osmand.plus.OsmandSettings;
 public class WikivoyageUtils {
 
 	public static void setupNetworkPolicy(OsmandSettings settings, RequestCreator rc) {
-		switch (settings.WIKIVOYAGE_SHOW_IMAGES.get()) {
+		switch (settings.WIKI_ARTICLE_SHOW_IMAGES.get()) {
 			case ON:
 				break;
 			case OFF:

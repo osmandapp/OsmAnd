@@ -13,7 +13,6 @@ import android.support.v4.app.FragmentManager.BackStackEntry;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -32,7 +31,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.TrackActivity;
 import net.osmand.plus.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
-import net.osmand.plus.wikipedia.ArticleBaseDialogFragment;
+import net.osmand.plus.wikipedia.WikiArticleBaseDialogFragment;
 import net.osmand.plus.wikivoyage.WikivoyageShowPicturesDialogFragment;
 import net.osmand.plus.wikivoyage.WikivoyageWebViewClient;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
@@ -40,10 +39,7 @@ import net.osmand.plus.wikivoyage.data.TravelDbHelper;
 import net.osmand.plus.wikivoyage.data.TravelLocalDataHelper;
 import net.osmand.util.Algorithms;
 
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -51,10 +47,10 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import static net.osmand.plus.OsmandSettings.WikivoyageShowImages.OFF;
+import static net.osmand.plus.OsmandSettings.WikiArticleShowImages.OFF;
 
 
-public class WikivoyageArticleDialogFragment extends ArticleBaseDialogFragment {
+public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragment {
 
 	public static final String TAG = "WikivoyageArticleDialogFragment";
 
@@ -211,14 +207,14 @@ public class WikivoyageArticleDialogFragment extends ArticleBaseDialogFragment {
 	public void onResume() {
 		super.onResume();
 		OsmandSettings settings = getMyApplication().getSettings();
-		if (!settings.WIKIVOYAGE_SHOW_IMAGES_ASKED.get()) {
+		if (!settings.WIKI_ARTICLE_SHOW_IMAGES_ASKED.get()) {
 			FragmentActivity activity = getActivity();
 			FragmentManager fm = getFragmentManager();
 			if (activity != null && fm != null) {
 				WikivoyageShowPicturesDialogFragment fragment = new WikivoyageShowPicturesDialogFragment();
 				fragment.setTargetFragment(this, WikivoyageShowPicturesDialogFragment.SHOW_PICTURES_CHANGED_REQUEST_CODE);
 				fragment.show(fm, WikivoyageShowPicturesDialogFragment.TAG);
-				settings.WIKIVOYAGE_SHOW_IMAGES_ASKED.set(true);
+				settings.WIKI_ARTICLE_SHOW_IMAGES_ASKED.set(true);
 			}
 		}
 	}
@@ -337,7 +333,7 @@ public class WikivoyageArticleDialogFragment extends ArticleBaseDialogFragment {
 			}
 		}
 		String url = TravelArticle.getImageUrl(imageTitle, false);
-		if (!TextUtils.isEmpty(imageTitle) && getSettings().WIKIVOYAGE_SHOW_IMAGES.get() != OFF &&
+		if (!TextUtils.isEmpty(imageTitle) && getSettings().WIKI_ARTICLE_SHOW_IMAGES.get() != OFF &&
 				!url.startsWith(EMPTY_URL)) {
 			sb.append("<div class=\"title-image"+nightModeClass+"\" style=\"background-image: url(").append(url).append(")\"></div>");
 		}
@@ -349,7 +345,7 @@ public class WikivoyageArticleDialogFragment extends ArticleBaseDialogFragment {
 		sb.append(article.getContent());
 		sb.append(FOOTER_INNER);
 		if (OsmandPlugin.getEnabledPlugin(OsmandDevelopmentPlugin.class) != null) {
-			writeOutHTML(sb);
+			writeOutHTML(sb, new File(getMyApplication().getAppPath(IndexConstants.WIKIVOYAGE_INDEX_DIR), "page.html"));
 		}
 		return sb.toString();
 	}

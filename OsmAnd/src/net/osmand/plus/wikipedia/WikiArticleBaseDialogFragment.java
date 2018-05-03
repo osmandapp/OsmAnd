@@ -20,7 +20,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public abstract class ArticleBaseDialogFragment extends WikivoyageBaseDialogFragment {
+public abstract class WikiArticleBaseDialogFragment extends WikivoyageBaseDialogFragment {
 
 	protected static final String HEADER_INNER = "<html><head>\n" +
 			"<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />\n" +
@@ -88,7 +88,7 @@ public abstract class ArticleBaseDialogFragment extends WikivoyageBaseDialogFrag
 
 
 	protected void updateWebSettings() {
-		OsmandSettings.WikivoyageShowImages showImages = getSettings().WIKIVOYAGE_SHOW_IMAGES.get();
+		OsmandSettings.WikiArticleShowImages showImages = getSettings().WIKI_ARTICLE_SHOW_IMAGES.get();
 		WebSettings webSettings = contentWebView.getSettings();
 		switch (showImages) {
 			case ON:
@@ -113,8 +113,7 @@ public abstract class ArticleBaseDialogFragment extends WikivoyageBaseDialogFrag
 		return "file:///android_asset/";
 	}
 
-	protected void writeOutHTML(StringBuilder sb) {
-		File file = new File(getMyApplication().getAppPath(IndexConstants.WIKIVOYAGE_INDEX_DIR), "page.html");
+	protected void writeOutHTML(StringBuilder sb, File file) {
 		BufferedWriter writer = null;
 		try {
 			writer = new BufferedWriter(new FileWriter(file));
