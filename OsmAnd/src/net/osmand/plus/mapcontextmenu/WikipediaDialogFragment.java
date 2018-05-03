@@ -330,8 +330,9 @@ public class WikipediaDialogFragment extends BaseOsmAndDialogFragment {
 	protected void setupToolbar(Toolbar toolbar) {
 		toolbar.setNavigationIcon(getIcon(R.drawable.ic_arrow_back, R.color.icon_color));
 		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
-		Menu menu = toolbar.getMenu();
+		toolbar.setOverflowIcon(getIcon(R.drawable.ic_overflow_menu_white, R.color.icon_color));
 
+		Menu menu = toolbar.getMenu();
 		MenuItem.OnMenuItemClickListener itemClickListener = new MenuItem.OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
