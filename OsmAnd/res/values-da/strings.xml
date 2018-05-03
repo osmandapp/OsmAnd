@@ -2,14 +2,14 @@
 <resources>
     <string name="srtm_paid_version_msg">Overvej at betale for \'Højdekurve\' udvidelsen for at støtte videre udvikling.</string>
     <string name="av_def_action_video">Optag video</string>
-    <string name="av_def_action_audio">Optag audio</string>
+    <string name="av_def_action_audio">Optag lyd</string>
     <string name="av_widget_action_descr">Vælg standard modulhandling.</string>
     <string name="av_widget_action">Standard modulhandling</string>
     <string name="av_video_format_descr">Vælg videoformat.</string>
     <string name="av_use_external_recorder_descr">Brug systemoptager for video.</string>
     <string name="av_use_external_recorder">Brug systemoptager</string>
-    <string name="av_settings_descr">Konfigurer audio- og videoindstillinger.</string>
-    <string name="av_settings">Indstillinger for audio og video </string>
+    <string name="av_settings_descr">Konfigurer lyd- og videoindstillinger.</string>
+    <string name="av_settings">Indstillinger for lyd og video</string>
     <string name="recording_error">Optagelse mislykkedes</string>
     <string name="recording_camera_not_available">Kameraet er ikke tilgængeligt</string>
     <string name="recording_is_recorded">Optagelse af lyd/video. Stop ved at trykke på AV modulet.</string>
@@ -28,7 +28,7 @@
     <string name="recording_context_menu_play">Afspil</string>
     <string name="recording_description">Optagelse %1$s %3$s %2$s</string>
     <string name="recording_default_name">Optager</string>
-    <string name="map_widget_av_notes">Audio-/videonoter</string>
+    <string name="map_widget_av_notes">lyd-/videonoter</string>
     <string name="osmand_srtm_short_description_80_chars">Udvidelse for offline højdekurver</string>
     <string name="osmand_srtm_long_description_1000_chars">"Udvidelsen giver både en højdekurver overlejring og reliefskygger, der vises ovenpå OsmAnds standard kort. Funktionaliteten er meget værdsat af sportsfolk, vandrere, og enhver interesseret i en relief struktur af landskabet. 
 \n
@@ -37,9 +37,9 @@
     <string name="map_widget_distancemeasurement">Afstandsmåling</string>
     <string name="audionotes_location_not_defined">Placering der skal tilknyttes til noten er ikke defineret endnu. \'Brug placering …\' til at knytte en note til den angivne placering.</string>
 
-    <string name="map_widget_audionotes">Audionoter</string>
-    <string name="audionotes_plugin_description">Audio-/videonoter udvidelse giver funktionalitet til at tage audio-/foto-/videonoter under en tur, enten ved hjælp en knap på skærmen, eller direkte fra kontekstmenuen for en position på kortet.</string>
-    <string name="audionotes_plugin_name">Audio-/videonoter</string>
+    <string name="map_widget_audionotes">Lydnoter</string>
+    <string name="audionotes_plugin_description">Lyd-/videonoter udvidelse giver funktionalitet til at tage lyd-/foto-/videonoter under en tur, enten ved hjælp en knap på skærmen, eller direkte fra kontekstmenuen for en position på kortet.</string>
+    <string name="audionotes_plugin_name">Lyd-/videonoter</string>
     <string name="index_srtm_parts">dele</string>
     <string name="index_srtm_ele">Højdekurver</string>
     <string name="srtm_plugin_description">"Udvidelsen giver både en højdekurver overlejring og et reliefskygger, der vises ovenpå OsmAnds standard kort. Funktionaliteten er meget værdsat af sportsfolk, vandrere, og enhver interesseret i en relief struktur af landskabet.(Bemærk, at højdekurver og/eller relieflag er separate, yderligere data er tilgængelige efter aktivering af udvidelse.) 
@@ -67,7 +67,7 @@
     <string name="no_buildings_found">Ingen bygninger fundet.</string>
     <string name="incremental_search_city">Søg efter by trinvist</string>
     <string name="search_villages_and_postcodes">Søg flere landsbyer/postnummer</string>
-    <string name="dropbox_plugin_description">Dropbox udvidelsen gør det muligt at synkronisere spor og audio-/videonoter med en Dropbox-konto.</string>
+    <string name="dropbox_plugin_description">Dropbox udvidelsen gør det muligt at synkronisere spor og lyd-/videonoter med en Dropbox-konto.</string>
     <string name="rendering_attr_showRoadMaps_description">Vælg, hvornår der skal vises kort kun med veje:</string>
     <string name="rendering_attr_showRoadMaps_name">Kort kun med veje</string>
     <string name="safe_mode_description">Kør program i fejlsikret tilstand (for langsommere Android i stedet for oprindelige kode).</string>
@@ -92,7 +92,7 @@
     <string name="add_as_first_destination_point">Tilføj som første mellemliggende destination</string>
     <string name="replace_destination_point">Udskift destinationen</string>
     <string name="new_destination_point_dialog">Destinationen er allerede sat:</string>
-    <string name="local_indexes_cat_av">Audio-/Videodata</string>
+    <string name="local_indexes_cat_av">Lyd-/videodata</string>
     <string name="stop_routing_confirm">Stop navigationen?</string>
     <string name="clear_dest_confirm">Slet destinationen (og mellemliggende destinationer)?</string>
     <string name="precise_routing_mode_descr">Beregn præcise ruter uden fejl. Stadig begrænset af afstand og langsom.</string>
@@ -604,7 +604,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="gpx_option_from_start_point">Passere langs hele sporet</string>
 	<string name="switch_to_vector_map_to_see">Offline vektor-kort er tilgængelig for denne placering.
 \n\nFor at anvende aktiver \'Menu\' → \'Konfigurer kort\' → \'Vælg kortkilde…\' → \'Offline vektor-kort\'.</string>
-    <string name="choose_audio_stream">Audiokanal for talevejledning</string>
+    <string name="choose_audio_stream">Lydkanal for talevejledning</string>
     <string name="choose_audio_stream_descr">Vælg højttaler til at afspille talevejledning.</string>
     <string name="voice_stream_voice_call">Telefonopkald lyd (afbryder også Bluetooth bilradio)</string>
     <string name="voice_stream_notification">Meddelelselyd</string>
@@ -1775,7 +1775,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="shared_string_my_places">Foretrukne</string>
 
 
-    <string name="shared_string_audio">Audio</string>
+    <string name="shared_string_audio">Lyd</string>
     <string name="shared_string_video">Video</string>
     <string name="shared_string_photo">Foto</string>
 
@@ -2150,8 +2150,8 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="av_video_quality_high">Højeste kvalitet</string>
     <string name="av_video_quality">Videokvalitet</string>
     <string name="av_video_quality_descr">Vælg videokvalitet.</string>
-    <string name="av_audio_format">Audioformat</string>
-    <string name="av_audio_format_descr">Vælg audioformat.</string>
+    <string name="av_audio_format">Lydformat</string>
+    <string name="av_audio_format_descr">Vælg lydformat.</string>
     <string name="av_audio_bitrate">Audio bitrate</string>
     <string name="av_audio_bitrate_descr">Vælg audio bitrate.</string>
     <string name="shared_string_near">I nærheden af</string>
@@ -2364,18 +2364,18 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="lang_hsb">Øvresorbisk</string>
     <string name="share_history_subject">delt via OsmAnd</string>
     
-    <string name="release_2_4">"• Ny meget stærk fritekstsøgning 
-\n
-\n  • Integration med bilens lydsystem og telefon via Bluetooth 
-\n
-\n  • Forbedret rutevejledning, talevejledning og angivelse af svingbaner 
-\n
-\n • Forbedret transportlag med rutekort 
-\n
-\n  • Tilføjet flere sprog og understøtter nu regionale sprog 
-\n
-\n  • Mange andre forbedringer og fejlrettelser 
+    <string name="release_2_4">"\\022 Ny meget stærk fritekstsøgning 
 \n 
+\n  • Integration med bilens lydsystem og telefon via Bluetooth 
+\n 
+\n  • Forbedret rutevejledning, talevejledning og angivelse af svingbaner 
+\n 
+\n • Forbedret transportlag med rutekort 
+\n 
+\n  • Tilføjet flere sprog og understøtter nu regionale sprog 
+\n 
+\n  • Mange andre forbedringer og fejlrettelser 
+\n
 \n  og mere…"</string>
     <string name="show_something_on_map">Vis %1$s på kortet</string>
     <string name="dist_away_from_my_location">Søg %1$s væk</string>
