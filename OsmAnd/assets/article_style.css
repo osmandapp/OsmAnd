@@ -337,7 +337,16 @@ td {
     width: 100% !important;
 }
 
-.thumbnailcaption {
+.thumbnailcaption, thumbcaption {
+    padding-top: 3%;
+    width: 100%;
+    font-size: var(--main-text-font-size);
+    color: var(--description-text-color);
+    font-style: italic;
+    text-align: center;
+}
+
+.nightmode .thumbnailcaption, .nightmode .thumbcaption {
     padding-top: 3%;
     width: 100%;
     font-size: var(--main-text-font-size);
@@ -353,7 +362,7 @@ hr {
     background-color: var(--divider-color-day);
 }
 
-.nighmode hr {
+.nightmode hr {
     border: none;
     height: 1px;
     color: var(--divider-color-night);
