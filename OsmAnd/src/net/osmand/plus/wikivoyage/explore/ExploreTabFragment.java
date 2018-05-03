@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -114,15 +115,18 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIn
 		final List<BaseTravelCard> items = new ArrayList<>();
 		final OsmandApplication app = getMyApplication();
 
-		addOpenBetaTravelCard(items, nightMode);
+		if (!Version.isPaidVersion(app)) {
+			items.add(new OpenBetaTravelCard(app, nightMode, getFragmentManager()));
+		}
 		if (app.getTravelDbHelper().getSelectedTravelBook() != null) {
-			items.add(new HeaderTravelCard(app, nightMode, getString(R.string.popular_destinations)));
-			List<TravelArticle> popularArticles = app.getTravelDbHelper().getPopularArticles();
 			FragmentActivity activity = getActivity();
 			if (activity != null) {
+				items.add(new HeaderTravelCard(app, nightMode, getString(R.string.popular_destinations)));
+
+				FragmentManager fm = activity.getSupportFragmentManager();
+				List<TravelArticle> popularArticles = app.getTravelDbHelper().getPopularArticles();
 				for (TravelArticle article : popularArticles) {
-					items.add(new ArticleTravelCard(getMyApplication(), nightMode, article,
-							activity.getSupportFragmentManager()));
+					items.add(new ArticleTravelCard(app, nightMode, article, fm));
 				}
 			}
 		}
@@ -204,12 +208,5 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIn
 	private void removeDownloadUpdateCard() {
 		adapter.removeDownloadUpdateCard();
 		downloadUpdateCard = null;
-	}
-
-	private void addOpenBetaTravelCard(List<BaseTravelCard> items, final boolean nightMode) {
-		final OsmandApplication app = getMyApplication();
-		if (!Version.isPaidVersion(app)) {
-			items.add(new OpenBetaTravelCard(app, nightMode, getFragmentManager()));
-		}
 	}
 }
