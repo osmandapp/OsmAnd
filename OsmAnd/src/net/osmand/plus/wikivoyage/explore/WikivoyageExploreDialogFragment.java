@@ -26,7 +26,7 @@ import net.osmand.plus.LockableViewPager;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.download.DownloadIndexesThread;
-import net.osmand.plus.wikivoyage.WikivoyageBaseDialogFragment;
+import net.osmand.plus.wikivoyage.WikiBaseDialogFragment;
 import net.osmand.plus.wikivoyage.data.TravelDbHelper;
 import net.osmand.plus.wikivoyage.search.WikivoyageSearchDialogFragment;
 
@@ -35,7 +35,7 @@ import java.util.Arrays;
 import java.util.List;
 
 
-public class WikivoyageExploreDialogFragment extends WikivoyageBaseDialogFragment implements DownloadIndexesThread.DownloadEvents {
+public class WikivoyageExploreDialogFragment extends WikiBaseDialogFragment implements DownloadIndexesThread.DownloadEvents {
 
 	public static final String TAG = "WikivoyageExploreDialogFragment";
 

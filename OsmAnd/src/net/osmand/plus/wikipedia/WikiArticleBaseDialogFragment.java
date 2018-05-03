@@ -1,25 +1,11 @@
 package net.osmand.plus.wikipedia;
 
-import android.app.Dialog;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
-import android.os.Bundle;
-import android.support.annotation.ColorInt;
 import android.support.annotation.ColorRes;
-import android.support.annotation.DrawableRes;
-import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.ContextThemeWrapper;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.Window;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.TextView;
@@ -28,14 +14,14 @@ import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
-import net.osmand.plus.base.BaseOsmAndDialogFragment;
+import net.osmand.plus.wikivoyage.WikiBaseDialogFragment;
 
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public abstract class WikiArticleBaseDialogFragment extends BaseOsmAndDialogFragment {
+public abstract class WikiArticleBaseDialogFragment extends WikiBaseDialogFragment {
 
 	protected static final String HEADER_INNER = "<html><head>\n" +
 			"<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />\n" +
@@ -101,73 +87,6 @@ public abstract class WikiArticleBaseDialogFragment extends BaseOsmAndDialogFrag
 	protected TextView selectedLangTv;
 	protected TextView articleToolbarText;
 
-	protected boolean nightMode;
-
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		nightMode = isNightMode(false);
-	}
-
-	@NonNull
-	@Override
-	public Dialog onCreateDialog(Bundle savedInstanceState) {
-		int themeId = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme_LightStatusBar;
-		Dialog dialog = new Dialog(getContext(), themeId);
-		Window window = dialog.getWindow();
-		if (window != null) {
-			if (!getSettings().DO_NOT_USE_ANIMATIONS.get()) {
-				window.getAttributes().windowAnimations = R.style.Animations_Alpha;
-			}
-			if (Build.VERSION.SDK_INT >= 21) {
-				window.setStatusBarColor(getResolvedColor(getStatusBarColor()));
-			}
-		}
-		return dialog;
-	}
-
-	@Override
-	public void show(FragmentManager manager, String tag) {
-		FragmentTransaction ft = manager.beginTransaction();
-		ft.add(this, tag);
-		ft.addToBackStack(tag);
-		ft.commit();
-	}
-
-	@Override
-	protected Drawable getContentIcon(int id) {
-		return getIcon(id, R.color.icon_color);
-	}
-
-	protected Drawable getActiveIcon(@DrawableRes int iconId) {
-		return getIcon(iconId, nightMode ? R.color.wikivoyage_active_dark : R.color.wikivoyage_active_light);
-	}
-
-	@ColorInt
-	protected int getResolvedColor(@ColorRes int colorId) {
-		return ContextCompat.getColor(getContext(), colorId);
-	}
-
-	protected View inflate(@LayoutRes int layoutId, @Nullable ViewGroup container) {
-		int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
-		return LayoutInflater.from(new ContextThemeWrapper(getContext(), themeRes))
-				.inflate(layoutId, container, false);
-	}
-
-	protected void setupToolbar(Toolbar toolbar) {
-		toolbar.setNavigationIcon(getContentIcon(R.drawable.ic_arrow_back));
-		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
-		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				closeFragment();
-			}
-		});
-	}
-
-	protected void closeFragment() {
-		dismiss();
-	}
 
 	protected void updateWebSettings() {
 		OsmandSettings.WikiArticleShowImages showImages = getSettings().WIKI_ARTICLE_SHOW_IMAGES.get();
@@ -220,6 +139,7 @@ public abstract class WikiArticleBaseDialogFragment extends BaseOsmAndDialogFrag
 		return normal;
 	}
 
+	@Override
 	@ColorRes
 	protected int getStatusBarColor() {
 		return nightMode ? R.color.status_bar_wikivoyage_article_dark : R.color.status_bar_wikivoyage_article_light;
