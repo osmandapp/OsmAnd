@@ -2240,7 +2240,7 @@
     <string name="map_marker_1st">اولین نشانهٔ نقشه</string>
     <string name="map_marker_2nd">دومین نشانهٔ نقشه</string>
     <string name="shared_string_toolbar">نوار ابزار</string>
-    <string name="shared_string_widgets">ویجت‌ها</string>
+    <string name="shared_string_widgets">ابزارک‌ها</string>
     <string name="add_points_to_map_markers_q">همهٔ نقاط را به نشانه‌های نقشه اضافه می‌کنید؟</string>
     <string name="shared_string_add_to_map_markers">افزودن به نشانه‌های نقشه</string>
     <string name="select_map_markers">انتخاب نشانه‌های نقشه</string>
@@ -2573,7 +2573,7 @@
     <string name="make_round_trip_descr">نقطهٔ شروع را به‌عنوان مقصد هم در نظر بگیر.</string>
     <string name="make_round_trip">ایجاد سفر رفت‌وبرگشتی</string>
     <string name="coordinates_format">قالب مختصات</string>
-    <string name="use_system_keyboard">استفاده از صفحه‌کلید سیستم</string>
+    <string name="use_system_keyboard">صفحه‌کلید سیستم</string>
     <string name="fast_coordinates_input_descr">قالب مختصات ورودی را انتخاب کنید. هر زمان که بخواهید از طریق تنظیمات قابل‌تغییر است.</string>
     <string name="routing_attr_avoid_ice_roads_fords_name">پرهیز از گُدارها و راه‌های یخی</string>
     <string name="routing_attr_avoid_ice_roads_fords_description">از راه‌های یخی و گُدارها پرهیز شود.</string>
@@ -3022,7 +3022,7 @@
     <string name="show_arrows_descr">با یک یا دو پیکان، سمت قرارگیری نشانه‌های فعال روی نقشه را نمایش می‌دهد.</string>
     <string name="distance_indication_descr">مشخص کنید که مسافت شما تا نشانه‌های فعال چگونه نشان داده شود.</string>
     <string name="active_markers_descr">تعداد نشانه‌های فعال روی نقشه را مشخص کنید.</string>
-    <string name="appearance_on_the_map">ظاهر بر روی نقشه</string>
+    <string name="appearance_on_the_map">تنظیمات ظاهری</string>
     <string name="add_track_to_markers_descr">مسیری را انتخاب کنید تا نقاط بین‌راهیِ آن به نشانه‌ها اضافه شود.</string>
     <string name="add_favourites_group_to_markers_descr">یک گروه از نقاط برگزیده را انتخاب کنید تا به نشانه‌ها اضافه شود.</string>
     <string name="track_waypoints">نقاط بین‌راهی مسیر</string>
@@ -3042,7 +3042,7 @@
     <string name="shared_string_edited">ویرایش شد</string>
     <string name="shared_string_added">افزوده شد</string>
     <string name="marker_activated">نشانهٔ %s فعال شد.</string>
-    <string name="one_tap_active_descr">یکی از نشانه‌ها را روی نقشه انتخاب کنید و بدون بازکردن منوی زمینه، آن را به بالاترین مکان در میان نشانه‌های فعال ببرید.</string>
+    <string name="one_tap_active_descr">یکی از نشانه‌های روی نقشه لمس کنید تا بدون نیاز به بازکردن منوی زمینه، آن را در صدر نشانه‌های فعال قرار دهید.</string>
     <string name="one_tap_active">فعال‌کردن با یک بار لمس</string>
     <string name="empty_state_av_notes">یادداشت بگذارید!</string>
     <string name="empty_state_av_notes_desc">با استفاده از ابزارک یا منوی زمینه، برای هر نقطه‌ای روی نقشه یادداشت صوتی، عکسی یا ویدئویی بگذارید.</string>
@@ -3126,7 +3126,7 @@
     <string name="enter_the_file_name">نام فایل را بنویسید.</string>
     <string name="enter_lon">ورود طول جغرافیایی</string>
     <string name="enter_lat">ورود عرض جغرافیایی</string>
-    <string name="enter_lat_and_lon">واردکردن طول و عرض جغرافیایی</string>
+    <string name="enter_lat_and_lon">طول و عرض جغرافیایی را وارد کنید</string>
 	<string name="distance_farthest">فاصله: اول دورترین</string>
     <string name="distance_nearest">فاصله: اول نزدیک‌ترین</string>
     <string name="dd_mm_ss_format">DD°MM′SS″</string>
@@ -3138,7 +3138,7 @@
 	<string name="west_abbreviation">W</string>
 	<string name="south_abbreviation">S</string>
 	<string name="north_abbreviation">N</string>
-	<string name="optional_point_name">نام اختیاری نقطه</string>
+	<string name="optional_point_name">نام نقطه (اختیاری)</string>
     <string name="transport_nearby_routes_within">مسیرهای نزدیک در</string>
     <string name="transport_nearby_routes">نزدیک</string>
     <string name="group_deleted">گروه حذف شد</string>
@@ -3150,7 +3150,7 @@
     <string name="waypoints_removed_from_map_markers">نقاط بین‌راهی از نشانه‌های نقشه حذف شد</string>
     <string name="shared_string_travel">مسافرت</string>
     <string name="shared_string_result">نتیجه</string>
-    <string name="use_two_digits_longitude">استفاده از طول جغرافیایی با ارقام مضاعف</string>
+    <string name="use_two_digits_longitude">طول جغرافیایی دورقمی</string>
     <string name="saved_articles">مقاله‌های ذخیره‌شده</string>
     <string name="wikivoyage_search_hint">جست‌وجو: کشور، استان، شهرستان</string>
     <string name="shared_string_read">مطالعه</string>
