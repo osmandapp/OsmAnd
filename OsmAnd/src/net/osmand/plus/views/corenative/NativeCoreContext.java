@@ -12,6 +12,7 @@ import net.osmand.core.jni.ObfsCollection;
 import net.osmand.core.jni.QIODeviceLogSink;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
 import android.content.Context;
 import android.util.DisplayMetrics;
@@ -60,7 +61,7 @@ public class NativeCoreContext {
 				
 				ObfsCollection obfsCollection = new ObfsCollection();
 				obfsCollection.addDirectory(directory.getAbsolutePath(), false);
-				if(OsmandPlugin.getEnabledPlugin(SRTMPlugin.class) != null) {
+				if(OsmandPlugin.getEnabledPlugin(SRTMPlugin.class) != null || InAppPurchaseHelper.isSubscribedToLiveUpdates(app)) {
 					obfsCollection.addDirectory(app.getAppPath(IndexConstants.SRTM_INDEX_DIR).getAbsolutePath(), false);
 				}
 

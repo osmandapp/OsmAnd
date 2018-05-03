@@ -309,24 +309,6 @@ public class SubscriptionFragment extends BaseOsmAndDialogFragment implements In
 	}
 
 	@Override
-	public void onResume() {
-		super.onResume();
-		InAppPurchaseHelper purchaseHelper = getInAppPurchaseHelper();
-		if (purchaseHelper != null) {
-			purchaseHelper.addListener(this);
-		}
-	}
-
-	@Override
-	public void onPause() {
-		super.onPause();
-		InAppPurchaseHelper purchaseHelper = getInAppPurchaseHelper();
-		if (purchaseHelper != null) {
-			purchaseHelper.removeListener(this);
-		}
-	}
-
-	@Override
 	public void onDestroy() {
 		super.onDestroy();
 		if (dlg != null && dlg.isShowing()) {

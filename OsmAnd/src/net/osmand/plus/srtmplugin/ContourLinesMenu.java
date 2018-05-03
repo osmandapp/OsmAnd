@@ -17,6 +17,7 @@ import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.DownloadValidationManager;
 import net.osmand.plus.download.IndexItem;
+import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.render.RenderingRuleProperty;
 
 import java.io.IOException;
@@ -47,7 +48,7 @@ public class ContourLinesMenu {
 		final OsmandApplication app = mapActivity.getMyApplication();
 		final OsmandSettings settings = app.getSettings();
 		final SRTMPlugin plugin = OsmandPlugin.getPlugin(SRTMPlugin.class);
-		final boolean srtmEnabled = OsmandPlugin.getEnabledPlugin(SRTMPlugin.class) != null;
+		final boolean srtmEnabled = OsmandPlugin.getEnabledPlugin(SRTMPlugin.class) != null || InAppPurchaseHelper.isSubscribedToLiveUpdates(app);
 
 		final RenderingRuleProperty contourLinesProp = app.getRendererRegistry().getCustomRenderingRuleProperty(CONTOUR_LINES_ATTR);
 		final RenderingRuleProperty colorSchemeProp = app.getRendererRegistry().getCustomRenderingRuleProperty(CONTOUR_LINES_SCHEME_ATTR);

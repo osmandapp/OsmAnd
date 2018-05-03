@@ -32,7 +32,6 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
-import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
@@ -276,9 +275,6 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 		cardDescription.setText(R.string.osm_live_payment_desc);
 
 		osmLiveCardButton = cardView.findViewById(R.id.card_button);
-		InAppPurchaseHelper purchaseHelper = app.getInAppPurchaseHelper();
-		boolean requestingInventory = purchaseHelper != null && purchaseHelper.getActiveTask() == InAppPurchaseTaskType.REQUEST_INVENTORY;
-		setupOsmLiveCardButton(requestingInventory);
 
 		return cardView;
 	}
@@ -288,7 +284,7 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 			ProgressBar progressBar = (ProgressBar) osmLiveCardButton.findViewById(R.id.card_button_progress);
 			TextViewEx buttonTitle = (TextViewEx) osmLiveCardButton.findViewById(R.id.card_button_title);
 			TextViewEx buttonSubtitle = (TextViewEx) osmLiveCardButton.findViewById(R.id.card_button_subtitle);
-			if (!purchaseHelper.hasPrices()) {
+			if (purchaseHelper == null || !purchaseHelper.hasPrices()) {
 				buttonTitle.setText(getString(R.string.purchase_subscription_title, getString(R.string.osm_live_default_price)));
 			} else {
 				buttonTitle.setText(getString(R.string.purchase_subscription_title, purchaseHelper.getLiveUpdatesPrice()));
@@ -376,9 +372,6 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 		cardDescription.setText(R.string.in_app_purchase_desc_ex);
 
 		planTypeCardButton = cardView.findViewById(R.id.card_button);
-		InAppPurchaseHelper purchaseHelper = app.getInAppPurchaseHelper();
-		boolean requestingInventory = purchaseHelper != null && purchaseHelper.getActiveTask() == InAppPurchaseTaskType.REQUEST_INVENTORY;
-		setupPlanTypeCardButton(requestingInventory);
 
 		return cardView;
 	}
@@ -420,6 +413,14 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			mapActivity.disableDrawer();
+		}
+
+		boolean requestingInventory = purchaseHelper != null && purchaseHelper.getActiveTask() == InAppPurchaseTaskType.REQUEST_INVENTORY;
+		if (osmLiveCardButton != null) {
+			setupOsmLiveCardButton(requestingInventory);
+		}
+		if (planTypeCardButton != null) {
+			setupPlanTypeCardButton(requestingInventory);
 		}
 	}
 
