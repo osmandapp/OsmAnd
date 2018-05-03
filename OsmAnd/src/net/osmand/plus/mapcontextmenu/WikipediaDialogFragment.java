@@ -55,7 +55,55 @@ public class WikipediaDialogFragment extends BaseOsmAndDialogFragment {
 			"<meta http-equiv=\"cleartype\" content=\"on\" />\n" +
 			"<link href=\"article_style.css\" type=\"text/css\" rel=\"stylesheet\"/>\n" +
 			"</head>";
-	private static final String FOOTER_INNER = "</body></html>";
+	private static final String FOOTER_INNER = "<script>var coll = document.getElementsByTagName(\"H2\");" +
+			"var i;" +
+			"for (i = 0; i < coll.length; i++) {" +
+			"  coll[i].addEventListener(\"click\", function() {" +
+			"    this.classList.toggle(\"active\");" +
+			"    var content = this.nextElementSibling;" +
+			"    if (content.style.display === \"block\") {" +
+			"      content.style.display = \"none\";" +
+			"    } else {" +
+			"      content.style.display = \"block\";" +
+			"    }" +
+			"  });" +
+			"}" +
+			"document.addEventListener(\"DOMContentLoaded\", function(event) {\n" +
+			"    document.querySelectorAll('img').forEach(function(img) {\n" +
+			"        img.onerror = function() {\n" +
+			"            this.style.display = 'none';\n" +
+			"            var caption = img.parentElement.nextElementSibling;\n" +
+			"            if (caption.className == \"thumbnailcaption\") {\n" +
+			"                caption.style.display = 'none';\n" +
+			"            }\n" +
+			"        };\n" +
+			"    })\n" +
+			"});" +
+			"function scrollAnchor(id, title) {" +
+			"openContent(title);" +
+			"window.location.hash = id;}\n" +
+			"function openContent(id) {\n" +
+			"    var doc = document.getElementById(id).parentElement;\n" +
+			"    doc.classList.toggle(\"active\");\n" +
+			"    var content = doc.nextElementSibling;\n" +
+			"    content.style.display = \"block\";\n" +
+			"    collapseActive(doc);" +
+			"}" +
+			"function collapseActive(doc) {" +
+			"    var coll = document.getElementsByTagName(\"H2\");" +
+			"    var i;" +
+			"    for (i = 0; i < coll.length; i++) {" +
+			"        var item = coll[i];" +
+			"        if (item != doc && item.classList.contains(\"active\")) {" +
+			"            item.classList.toggle(\"active\");" +
+			"            var content = item.nextElementSibling;" +
+			"            if (content.style.display === \"block\") {" +
+			"                content.style.display = \"none\";" +
+			"            }" +
+			"        }" +
+			"    }" +
+			"}</script>"
+			+ "</body></html>";
 
 	private static final int MENU_ITEM_NO_ID = 0;
 	private static final int MENU_ITEM_SHOW_ID = 1;
@@ -69,6 +117,7 @@ public class WikipediaDialogFragment extends BaseOsmAndDialogFragment {
 	private boolean darkMode;
 	private Amenity amenity;
 	private String lang;
+	private String title;
 
 	public void setAmenity(Amenity amenity) {
 		this.amenity = amenity;
@@ -174,6 +223,7 @@ public class WikipediaDialogFragment extends BaseOsmAndDialogFragment {
 		sb.append("<div class=\"main");
 		sb.append(nightModeClass);
 		sb.append("\">\n");
+		sb.append("<h1>").append(title).append("</h1>");
 		sb.append(article);
 		sb.append(FOOTER_INNER);
 		return sb.toString();
@@ -206,7 +256,7 @@ public class WikipediaDialogFragment extends BaseOsmAndDialogFragment {
 			}
 
 			final String langSelected = lng;
-			final String title = amenity.getName(langSelected);
+			title = amenity.getName(langSelected);
 			articleToolbarText.setText(title);
 			readFullArticleButton.setOnClickListener(new View.OnClickListener() {
 				@Override
