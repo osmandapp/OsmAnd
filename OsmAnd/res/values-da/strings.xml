@@ -3228,6 +3228,6 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="wiki_article_not_found">Artikel ikke fundet</string>
     <string name="how_to_open_wiki_title">Hvordan åbner man Wikipedia artikler?</string>
 <string name="osmand_team">OsmAnd team</string>
-    <string name="maps_you_need_descr">Du læser artikler: %1$s. Vi foreslår at hente disse kort:</string>
+    <string name="maps_you_need_descr">Baseret på artikler der er gemt, anbefales det at downloade følgende kort:</string>
     <string name="maps_you_need">Kort du har brug for</string>
     </resources>
