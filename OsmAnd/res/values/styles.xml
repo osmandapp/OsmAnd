@@ -179,6 +179,7 @@
         <item name="android:actionMenuTextColor">@color/color_white</item>
         <item name="actionOverflowButtonStyle">@style/OverflowMenuButton</item>
 
+        <item name="circle_dialog_bg">@drawable/circle_dialog_bg_light</item>
         <item name="dialog_inactive_text_color">@color/icon_color_light</item>
         <item name="secondary_icon_color">@color/icon_color_light</item>
         <item name="primary_icon_color">@color/icon_color</item>
@@ -197,8 +198,11 @@
 
         <item name="coordinate_input_edit_text_normal">@color/coordinate_input_edit_text_normal_light</item>
 
+        <item name="dialog_bg_color">@color/dialog_bg_color_light</item>
+        <item name="dialog_transparent_bg_color">@color/dialog_transparent_bg_color_light</item>
         <item name="dialog_title_color">@color/dialog_title_color_light</item>
         <item name="dialog_description_color">@color/dialog_description_color_light</item>
+        <item name="dialog_text_description_color">@color/dialog_text_description_color</item>
         <item name="card_description_text_color">@color/card_description_text_color_light</item>
 
         <item name="wikivoyage_bg_color">@color/wikivoyage_bg_light</item>
@@ -405,8 +409,12 @@
 
         <item name="coordinate_input_edit_text_normal">@color/coordinate_input_edit_text_normal_dark</item>
 
+        <item name="circle_dialog_bg">@drawable/circle_dialog_bg_night</item>
+        <item name="dialog_bg_color">@color/dialog_bg_color_night</item>
+        <item name="dialog_transparent_bg_color">@color/dialog_transparent_bg_color_night</item>
         <item name="dialog_title_color">@color/dialog_title_color_dark</item>
         <item name="dialog_description_color">@color/dialog_description_color_dark</item>
+        <item name="dialog_text_description_color">@color/dialog_text_description_color_night</item>
         <item name="card_description_text_color">@color/card_description_text_color_dark</item>
 
         <item name="wikivoyage_bg_color">@color/wikivoyage_bg_dark</item>

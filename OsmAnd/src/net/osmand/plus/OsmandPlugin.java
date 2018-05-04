@@ -9,6 +9,7 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Build;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.View;
 
@@ -21,6 +22,7 @@ import net.osmand.plus.activities.TabActivity.TabItem;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.development.OsmandDevelopmentPlugin;
+import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.mapillary.MapillaryPlugin;
@@ -73,7 +75,7 @@ public abstract class OsmandPlugin {
 	/**
 	 * Initialize plugin runs just after creation
 	 */
-	public boolean init(OsmandApplication app, Activity activity) {
+	public boolean init(@NonNull OsmandApplication app, @Nullable Activity activity) {
 		return true;
 	}
 
@@ -127,7 +129,7 @@ public abstract class OsmandPlugin {
 	public void clearContextMenuRows() {
 	}
 
-	public static void initPlugins(OsmandApplication app) {
+	public static void initPlugins(@NonNull OsmandApplication app) {
 		OsmandSettings settings = app.getSettings();
 		Set<String> enabledPlugins = settings.getEnabledPlugins();
 
@@ -136,15 +138,15 @@ public abstract class OsmandPlugin {
 
 		allPlugins.add(new OsmandRasterMapsPlugin(app));
 		allPlugins.add(new OsmandMonitoringPlugin(app));
-		checkMarketPlugin(app, new SRTMPlugin(app), true, SRTM_PLUGIN_COMPONENT_PAID, SRTM_PLUGIN_COMPONENT);
+		checkMarketPlugin(app, enabledPlugins, new SRTMPlugin(app), true, SRTM_PLUGIN_COMPONENT_PAID, SRTM_PLUGIN_COMPONENT);
 
 		// ? questionable - definitely not market plugin
-//		checkMarketPlugin(app, new TouringViewPlugin(app), false, TouringViewPlugin.COMPONENT, null);
-		checkMarketPlugin(app, new NauticalMapsPlugin(app), false, NauticalMapsPlugin.COMPONENT, null);
-		checkMarketPlugin(app, new SkiMapsPlugin(app), false, SkiMapsPlugin.COMPONENT, null);
+//		checkMarketPlugin(app, enabledPlugins, new TouringViewPlugin(app), false, TouringViewPlugin.COMPONENT, null);
+		checkMarketPlugin(app, enabledPlugins, new NauticalMapsPlugin(app), false, NauticalMapsPlugin.COMPONENT, null);
+		checkMarketPlugin(app, enabledPlugins, new SkiMapsPlugin(app), false, SkiMapsPlugin.COMPONENT, null);
 
 		allPlugins.add(new AudioVideoNotesPlugin(app));
-		checkMarketPlugin(app, new ParkingPositionPlugin(app), false, ParkingPositionPlugin.PARKING_PLUGIN_COMPONENT, null);
+		checkMarketPlugin(app, enabledPlugins, new ParkingPositionPlugin(app), false, ParkingPositionPlugin.PARKING_PLUGIN_COMPONENT, null);
 		allPlugins.add(new AccessibilityPlugin(app));
 		allPlugins.add(new OsmEditingPlugin(app));
 		allPlugins.add(new OsmandDevelopmentPlugin(app));
@@ -166,28 +168,33 @@ public abstract class OsmandPlugin {
 		}
 	}
 
-	private static void checkMarketPlugin(OsmandApplication app, OsmandPlugin srtm, boolean paid, String id, String id2) {
+	private static void checkMarketPlugin(@NonNull OsmandApplication app, @NonNull Set<String> enabledPlugins,
+										  @NonNull OsmandPlugin plugin, boolean paid, String id, String id2) {
 		boolean marketEnabled = Version.isMarketEnabled(app);
-		boolean pckg = isPackageInstalled(id, app) ||
-				isPackageInstalled(id2, app);
+		boolean pckg = isPackageInstalled(id, app) || isPackageInstalled(id2, app)
+				|| InAppPurchaseHelper.isSubscribedToLiveUpdates(app);
 		if ((Version.isDeveloperVersion(app) || !Version.isProductionVersion(app)) && !paid) {
 			// for test reasons
 			marketEnabled = false;
 		}
 		if (pckg || (!marketEnabled && !paid)) {
-			if (pckg && !app.getSettings().getPlugins().contains("-" + srtm.getId())) {
-				srtm.setActive(true);
+			if (pckg && !app.getSettings().getPlugins().contains("-" + plugin.getId())) {
+				plugin.setActive(true);
 			}
-			allPlugins.add(srtm);
+			allPlugins.add(plugin);
 		} else {
 			if (marketEnabled) {
-				srtm.setInstallURL(Version.getUrlWithUtmRef(app, id));
-				allPlugins.add(srtm);
+				plugin.setActive(false);
+				if (!app.getSettings().getPlugins().contains("-" + plugin.getId())) {
+					enabledPlugins.remove(plugin.getId());
+				}
+				plugin.setInstallURL(Version.getUrlWithUtmRef(app, id));
+				allPlugins.add(plugin);
 			}
 		}
 	}
 
-	public static boolean enablePlugin(Activity activity, OsmandApplication app, OsmandPlugin plugin, boolean enable) {
+	public static boolean enablePlugin(@Nullable Activity activity, OsmandApplication app, OsmandPlugin plugin, boolean enable) {
 		if (enable) {
 			if (!plugin.init(app, activity)) {
 				plugin.setActive(false);
@@ -200,7 +207,7 @@ public abstract class OsmandPlugin {
 			plugin.setActive(false);
 		}
 		app.getSettings().enablePlugin(plugin.getId(), enable);
-		if (activity instanceof MapActivity) {
+		if (activity != null && activity instanceof MapActivity) {
 			final MapActivity mapActivity = (MapActivity) activity;
 			plugin.updateLayers(mapActivity.getMapView(), mapActivity);
 			mapActivity.getDashboard().refreshDashboardFragments();

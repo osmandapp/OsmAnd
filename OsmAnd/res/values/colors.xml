@@ -3,6 +3,11 @@
 
 	<color name="feature_purchased_bg">#78cc5c</color>
 
+	<color name="dialog_bg_color_light">#f0f0f0</color>
+	<color name="dialog_bg_color_night">#17191a</color>
+	<color name="dialog_transparent_bg_color_light">#14f0f0f0</color>
+	<color name="dialog_transparent_bg_color_night">#1417191a</color>
+
 	<color name="dialog_title_color_light">#212121</color>
 	<color name="dialog_title_color_dark">#cccccc</color>
 	<color name="dialog_description_color_light">#212121</color>
@@ -10,6 +15,7 @@
 	<color name="dialog_divider_light">#e6e6e6</color>
 	<color name="dialog_divider_dark">#2d3133</color>
 	<color name="dialog_text_description_color">#727272</color>
+	<color name="dialog_text_description_color_night">#808080</color>
 	<color name="card_description_text_color_light">#b3b3b3</color>
 	<color name="card_description_text_color_dark">#4d4d4d</color>
 
@@ -431,5 +437,8 @@
 	<color name="wikivoyage_secondary_text">#727272</color>
 	<color name="wikivoyage_start_editing_card_image_background">#339966</color>
 	<color name="wikivoyage_open_beta_card_image_background">#008bf8</color>
+
+	<color name="wiki_webview_background_light">#ffffff</color>
+	<color name="wiki_webview_background_dark">#17191a</color>
 
 </resources>

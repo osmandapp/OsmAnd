@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.R;
+import net.osmand.plus.Version;
 import net.osmand.plus.activities.LocalIndexHelper.LocalIndexType;
 import net.osmand.plus.activities.LocalIndexInfo;
 import net.osmand.plus.chooseplan.ChoosePlanDialogFragment;
@@ -50,7 +51,6 @@ public class ItemViewHolder {
 	private boolean srtmDisabled;
 	private boolean srtmNeedsInstallation;
 	private boolean nauticalPluginDisabled;
-	private boolean freeVersion;
 	private boolean depthContoursPurchased;
 
 	protected final DownloadActivity context;
@@ -128,9 +128,9 @@ public class ItemViewHolder {
 	private void initAppStatusVariables() {
 		srtmDisabled = context.isSrtmDisabled();
 		nauticalPluginDisabled = context.isNauticalPluginDisabled();
-		freeVersion = context.isFreeVersion();
 		srtmNeedsInstallation = context.isSrtmNeedsInstallation();
-		depthContoursPurchased = InAppPurchaseHelper.isDepthContoursPurchased(context.getMyApplication());
+		depthContoursPurchased = InAppPurchaseHelper.isDepthContoursPurchased(context.getMyApplication())
+				|| InAppPurchaseHelper.isSubscribedToLiveUpdates(context.getMyApplication());
 	}
 
 	public void bindIndexItem(final IndexItem indexItem) {
@@ -314,11 +314,10 @@ public class ItemViewHolder {
 				clickAction = RightButtonAction.ASK_FOR_SRTM_PLUGIN_ENABLE;
 			}
 
-		} else if (indexItem.getType() == DownloadActivityType.WIKIPEDIA_FILE && freeVersion
-				&& !InAppPurchaseHelper.isFullVersionPurchased(context.getMyApplication())) {
+		} else if (indexItem.getType() == DownloadActivityType.WIKIPEDIA_FILE
+				&& !Version.isPaidVersion(context.getMyApplication())) {
 			clickAction = RightButtonAction.ASK_FOR_FULL_VERSION_PURCHASE;
-		} else if (indexItem.getType() == DownloadActivityType.DEPTH_CONTOUR_FILE
-				&& !InAppPurchaseHelper.isDepthContoursPurchased(context.getMyApplication())) {
+		} else if (indexItem.getType() == DownloadActivityType.DEPTH_CONTOUR_FILE && !depthContoursPurchased) {
 			clickAction = RightButtonAction.ASK_FOR_DEPTH_CONTOURS_PURCHASE;
 		}
 		return clickAction;

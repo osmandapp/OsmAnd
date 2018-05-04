@@ -8,6 +8,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
@@ -19,9 +21,12 @@ import net.osmand.plus.Version;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseTaskType;
+import net.osmand.plus.liveupdates.OsmLiveRestartBottomSheetDialogFragment;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
 
 import org.apache.commons.logging.Log;
+
+import java.util.List;
 
 @SuppressLint("Registered")
 public class OsmandInAppPurchaseActivity extends AppCompatActivity implements InAppPurchaseListener {
@@ -64,7 +69,7 @@ public class OsmandInAppPurchaseActivity extends AppCompatActivity implements In
 		deinitInAppPurchaseHelper();
 
 		if (purchaseHelper != null) {
-			purchaseHelper.addListener(this);
+			purchaseHelper.setUiActivity(this);
 			if (purchaseHelper.needRequestInventory()) {
 				purchaseHelper.requestInventory();
 			}
@@ -73,7 +78,7 @@ public class OsmandInAppPurchaseActivity extends AppCompatActivity implements In
 
 	private void deinitInAppPurchaseHelper() {
 		if (purchaseHelper != null) {
-			purchaseHelper.removeListener(this);
+			purchaseHelper.resetUiActivity(this);
 			purchaseHelper.stop();
 		}
 	}
@@ -141,26 +146,86 @@ public class OsmandInAppPurchaseActivity extends AppCompatActivity implements In
 	@Override
 	public void onError(InAppPurchaseTaskType taskType, String error) {
 		onInAppPurchaseError(taskType, error);
+		fireInAppPurchaseErrorOnFragments(getSupportFragmentManager(), taskType, error);
+	}
+
+	public void fireInAppPurchaseErrorOnFragments(@NonNull FragmentManager fragmentManager,
+												  InAppPurchaseTaskType taskType, String error) {
+		List<Fragment> fragments = fragmentManager.getFragments();
+		for (Fragment f : fragments) {
+			if (f instanceof InAppPurchaseListener && f.isAdded()) {
+				((InAppPurchaseListener) f).onError(taskType, error);
+			}
+		}
 	}
 
 	@Override
 	public void onGetItems() {
 		onInAppPurchaseGetItems();
+		fireInAppPurchaseGetItemsOnFragments(getSupportFragmentManager());
+	}
+
+	public void fireInAppPurchaseGetItemsOnFragments(@NonNull FragmentManager fragmentManager) {
+		List<Fragment> fragments = fragmentManager.getFragments();
+		for (Fragment f : fragments) {
+			if (f instanceof InAppPurchaseListener && f.isAdded()) {
+				((InAppPurchaseListener) f).onGetItems();
+			}
+		}
 	}
 
 	@Override
 	public void onItemPurchased(String sku) {
+		if (purchaseHelper != null && purchaseHelper.getSkuLiveUpdates().equals(sku)) {
+			getMyApplication().logEvent(this, "live_osm_subscription_purchased");
+
+			OsmLiveRestartBottomSheetDialogFragment fragment = new OsmLiveRestartBottomSheetDialogFragment();
+			fragment.setUsedOnMap(this instanceof MapActivity);
+			fragment.show(getSupportFragmentManager(), OsmLiveRestartBottomSheetDialogFragment.TAG);
+		}
 		onInAppPurchaseItemPurchased(sku);
+		fireInAppPurchaseItemPurchasedOnFragments(getSupportFragmentManager(), sku);
+	}
+
+	public void fireInAppPurchaseItemPurchasedOnFragments(@NonNull FragmentManager fragmentManager, String sku) {
+		List<Fragment> fragments = fragmentManager.getFragments();
+		for (Fragment f : fragments) {
+			if (f instanceof InAppPurchaseListener && f.isAdded()) {
+				((InAppPurchaseListener) f).onItemPurchased(sku);
+			}
+		}
 	}
 
 	@Override
 	public void showProgress(InAppPurchaseTaskType taskType) {
 		showInAppPurchaseProgress(taskType);
+		fireInAppPurchaseShowProgressOnFragments(getSupportFragmentManager(), taskType);
+	}
+
+	public void fireInAppPurchaseShowProgressOnFragments(@NonNull FragmentManager fragmentManager,
+														 InAppPurchaseTaskType taskType) {
+		List<Fragment> fragments = fragmentManager.getFragments();
+		for (Fragment f : fragments) {
+			if (f instanceof InAppPurchaseListener && f.isAdded()) {
+				((InAppPurchaseListener) f).showProgress(taskType);
+			}
+		}
 	}
 
 	@Override
 	public void dismissProgress(InAppPurchaseTaskType taskType) {
 		dismissInAppPurchaseProgress(taskType);
+		fireInAppPurchaseDismissProgressOnFragments(getSupportFragmentManager(), taskType);
+	}
+
+	public void fireInAppPurchaseDismissProgressOnFragments(@NonNull FragmentManager fragmentManager,
+														 InAppPurchaseTaskType taskType) {
+		List<Fragment> fragments = fragmentManager.getFragments();
+		for (Fragment f : fragments) {
+			if (f instanceof InAppPurchaseListener && f.isAdded()) {
+				((InAppPurchaseListener) f).dismissProgress(taskType);
+			}
+		}
 	}
 
 	public void onInAppPurchaseError(InAppPurchaseTaskType taskType, String error) {

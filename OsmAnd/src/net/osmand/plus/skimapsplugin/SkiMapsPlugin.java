@@ -1,6 +1,7 @@
 package net.osmand.plus.skimapsplugin;
 
 import android.app.Activity;
+import android.support.annotation.NonNull;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
@@ -45,7 +46,7 @@ public class SkiMapsPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public boolean init(final OsmandApplication app, final Activity activity) {
+	public boolean init(@NonNull final OsmandApplication app, final Activity activity) {
 		if(activity != null) {
 			// called from UI 
 			previousRenderer = app.getSettings().RENDERER.get(); 

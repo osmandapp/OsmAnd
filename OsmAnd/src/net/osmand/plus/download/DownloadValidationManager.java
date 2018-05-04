@@ -155,14 +155,12 @@ public class DownloadValidationManager {
 	}
 
 	protected void downloadFilesCheck_1_FreeVersion(FragmentActivity context, IndexItem[] items) {
-		if (Version.isFreeVersion(getMyApplication()) && !InAppPurchaseHelper.isSubscribedToLiveUpdates(app)
-				&& !InAppPurchaseHelper.isFullVersionPurchased(app)) {
+		if (!Version.isPaidVersion(app)) {
 			int total = settings.NUMBER_OF_FREE_DOWNLOADS.get();
 			if (total > MAXIMUM_AVAILABLE_FREE_DOWNLOADS) {
-				if (context instanceof FragmentActivity) {
-					FragmentActivity activity = context;
+				if (context != null) {
 					new InstallPaidVersionDialogFragment()
-							.show(activity.getSupportFragmentManager(), InstallPaidVersionDialogFragment.TAG);
+							.show(context.getSupportFragmentManager(), InstallPaidVersionDialogFragment.TAG);
 				}
 			} else {
 				downloadFilesCheck_2_Internet(context, items);

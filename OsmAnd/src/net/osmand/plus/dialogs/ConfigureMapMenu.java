@@ -42,6 +42,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivityLayers;
 import net.osmand.plus.activities.PluginActivity;
 import net.osmand.plus.activities.SettingsActivity;
+import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.openseamapsplugin.NauticalMapsPlugin;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
@@ -90,6 +91,7 @@ public class ConfigureMapMenu {
 	}
 
 	public ContextMenuAdapter createListAdapter(final MapActivity ma) {
+		OsmandApplication app = ma.getMyApplication();
 		ContextMenuAdapter adapter = new ContextMenuAdapter();
 		adapter.setDefaultLayoutId(R.layout.list_item_icon_and_menu);
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
@@ -101,13 +103,14 @@ public class ConfigureMapMenu {
 				ma.getDashboard().updateListAdapter(createListAdapter(ma));
 			}
 		});
-		RenderingRulesStorage renderer = ma.getMyApplication().getRendererRegistry().getCurrentSelectedRenderer();
+		RenderingRulesStorage renderer = app.getRendererRegistry().getCurrentSelectedRenderer();
 		List<RenderingRuleProperty> customRules = new ArrayList<>();
-		boolean hasDepthContours = ma.getMyApplication().getResourceManager().hasDepthContours();
+		boolean useDepthContours = app.getResourceManager().hasDepthContours()
+				&& (InAppPurchaseHelper.isSubscribedToLiveUpdates(app) || InAppPurchaseHelper.isDepthContoursPurchased(app));
 		if (renderer != null) {
 			for (RenderingRuleProperty p : renderer.PROPS.getCustomRules()) {
 				if (!RenderingRuleStorageProperties.UI_CATEGORY_HIDDEN.equals(p.getCategory())
-						&& (hasDepthContours || !p.getAttrName().equals("depthContours"))) {
+						&& (useDepthContours || !p.getAttrName().equals("depthContours"))) {
 					customRules.add(p);
 				}
 			}
@@ -471,7 +474,8 @@ public class ConfigureMapMenu {
 
 		OsmandPlugin.registerLayerContextMenu(activity.getMapView(), adapter, activity);
 		app.getAppCustomization().prepareLayerContextMenu(activity, adapter);
-		boolean srtmDisabled = OsmandPlugin.getEnabledPlugin(SRTMPlugin.class) == null;
+		boolean srtmDisabled = OsmandPlugin.getEnabledPlugin(SRTMPlugin.class) == null
+				&& !InAppPurchaseHelper.isSubscribedToLiveUpdates(app);
 		if (srtmDisabled) {
 			SRTMPlugin srtmPlugin = OsmandPlugin.getPlugin(SRTMPlugin.class);
 			if (srtmPlugin != null) {

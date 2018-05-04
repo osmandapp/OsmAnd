@@ -567,9 +567,7 @@ public class DownloadIndexesThread {
 		}
 		
 		private boolean validateNotExceedsFreeLimit(IndexItem item) {
-			boolean exceed = Version.isFreeVersion(app)
-					&& !InAppPurchaseHelper.isSubscribedToLiveUpdates(app)
-					&& !InAppPurchaseHelper.isFullVersionPurchased(app)
+			boolean exceed = !Version.isPaidVersion(app)
 					&& DownloadActivityType.isCountedInDownloads(item)
 					&& downloads.get() >= DownloadValidationManager.MAXIMUM_AVAILABLE_FREE_DOWNLOADS;
 			if(exceed) {

@@ -215,54 +215,26 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 	@Override
 	public void onInAppPurchaseError(InAppPurchaseTaskType taskType, String error) {
 		visibleBanner.updateFreeVersionBanner();
-		for (WeakReference<Fragment> ref : fragSet) {
-			Fragment f = ref.get();
-			if (f instanceof InAppPurchaseListener && f.isAdded()) {
-				((InAppPurchaseListener) f).onError(taskType, error);
-			}
-		}
 	}
 
 	@Override
 	public void onInAppPurchaseGetItems() {
 		visibleBanner.updateFreeVersionBanner();
-		for (WeakReference<Fragment> ref : fragSet) {
-			Fragment f = ref.get();
-			if (f instanceof InAppPurchaseListener && f.isAdded()) {
-				((InAppPurchaseListener) f).onGetItems();
-			}
-		}
+		initAppStatusVariables();
 	}
 
 	@Override
 	public void onInAppPurchaseItemPurchased(String sku) {
 		visibleBanner.updateFreeVersionBanner();
-		for (WeakReference<Fragment> ref : fragSet) {
-			Fragment f = ref.get();
-			if (f instanceof InAppPurchaseListener && f.isAdded()) {
-				((InAppPurchaseListener) f).onItemPurchased(sku);
-			}
-		}
+		initAppStatusVariables();
 	}
 
 	@Override
 	public void showInAppPurchaseProgress(InAppPurchaseTaskType taskType) {
-		for (WeakReference<Fragment> ref : fragSet) {
-			Fragment f = ref.get();
-			if (f instanceof InAppPurchaseListener && f.isAdded()) {
-				((InAppPurchaseListener) f).showProgress(taskType);
-			}
-		}
 	}
 
 	@Override
 	public void dismissInAppPurchaseProgress(InAppPurchaseTaskType taskType) {
-		for (WeakReference<Fragment> ref : fragSet) {
-			Fragment f = ref.get();
-			if (f instanceof InAppPurchaseListener && f.isAdded()) {
-				((InAppPurchaseListener) f).dismissProgress(taskType);
-			}
-		}
 	}
 
 	public DownloadIndexesThread getDownloadThread() {
@@ -413,8 +385,7 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 	}
 
 	public static boolean shouldShowFreeVersionBanner(OsmandApplication application) {
-		return (Version.isFreeVersion(application) && !InAppPurchaseHelper.isSubscribedToLiveUpdates(application)
-				&& !InAppPurchaseHelper.isFullVersionPurchased(application))
+		return !Version.isPaidVersion(application)
 				|| application.getSettings().SHOULD_SHOW_FREE_VERSION_BANNER.get();
 	}
 	
@@ -732,7 +703,8 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 	}
 
 	public void initAppStatusVariables() {
-		srtmDisabled = OsmandPlugin.getEnabledPlugin(SRTMPlugin.class) == null;
+		srtmDisabled = OsmandPlugin.getEnabledPlugin(SRTMPlugin.class) == null
+				&& !InAppPurchaseHelper.isSubscribedToLiveUpdates(getMyApplication());
 		nauticalPluginDisabled = OsmandPlugin.getEnabledPlugin(NauticalMapsPlugin.class) == null;
 		freeVersion = Version.isFreeVersion(getMyApplication());
 		OsmandPlugin srtmPlugin = OsmandPlugin.getPlugin(SRTMPlugin.class);

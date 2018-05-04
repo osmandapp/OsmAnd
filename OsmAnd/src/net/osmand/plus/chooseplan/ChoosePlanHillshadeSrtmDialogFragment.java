@@ -93,6 +93,7 @@ public class ChoosePlanHillshadeSrtmDialogFragment extends ChoosePlanDialogFragm
 				Activity activity = getActivity();
 				if (activity != null) {
 					OsmandInAppPurchaseActivity.purchaseSrtmPlugin(activity);
+					dismiss();
 				}
 			}
 		});

@@ -34,6 +34,7 @@ import net.osmand.plus.wikivoyage.explore.travelcards.HeaderTravelCard;
 import net.osmand.plus.wikivoyage.explore.travelcards.OpenBetaTravelCard;
 import net.osmand.plus.wikivoyage.explore.travelcards.StartEditingTravelCard;
 import net.osmand.plus.wikivoyage.explore.travelcards.TravelDownloadUpdateCard;
+import net.osmand.plus.wikivoyage.explore.travelcards.TravelNeededMapsCard;
 
 import java.io.File;
 import java.io.IOException;
@@ -93,17 +94,19 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIn
 
 	@Override
 	public void downloadHasFinished() {
-		final OsmandApplication app = getMyApplication();
-		File targetFile = mainIndexItem.getTargetFile(app);
-		if (downloadUpdateCard != null && mainIndexItem != null && targetFile.exists()) {
-			downloadUpdateCard.setLoadingInProgress(false);
-			removeDownloadUpdateCard();
-			TravelDbHelper travelDbHelper = app.getTravelDbHelper();
-			travelDbHelper.initTravelBooks();
-			travelDbHelper.selectTravelBook(targetFile);
-			Fragment parent = getParentFragment();
-			if (parent != null && parent instanceof WikivoyageExploreDialogFragment) {
-				((WikivoyageExploreDialogFragment) parent).populateData();
+		if (mainIndexItem != null) {
+			final OsmandApplication app = getMyApplication();
+			File targetFile = mainIndexItem.getTargetFile(app);
+			if (downloadUpdateCard != null && targetFile.exists()) {
+				downloadUpdateCard.setLoadingInProgress(false);
+				removeDownloadUpdateCard();
+				TravelDbHelper travelDbHelper = app.getTravelDbHelper();
+				travelDbHelper.initTravelBooks();
+				travelDbHelper.selectTravelBook(targetFile);
+				Fragment parent = getParentFragment();
+				if (parent != null && parent instanceof WikivoyageExploreDialogFragment) {
+					((WikivoyageExploreDialogFragment) parent).populateData();
+				}
 			}
 		}
 	}
@@ -153,6 +156,7 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIn
 		this.mainIndexItem = mainIndexItem;
 		this.neededIndexItems = neededIndexItems;
 		addDownloadUpdateCard();
+		addNeededMapsCard();
 	}
 
 	private void addDownloadUpdateCard() {
@@ -206,6 +210,12 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIn
 			});
 			downloadUpdateCard.setIndexItem(mainIndexItem);
 			adapter.setDownloadUpdateCard(downloadUpdateCard);
+		}
+	}
+
+	private void addNeededMapsCard() {
+		if (!neededIndexItems.isEmpty()) {
+			adapter.setNeededMapsCard(new TravelNeededMapsCard(getMyApplication(), nightMode, neededIndexItems));
 		}
 	}
 

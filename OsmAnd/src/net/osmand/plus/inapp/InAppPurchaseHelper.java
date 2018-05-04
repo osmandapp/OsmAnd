@@ -11,6 +11,7 @@ import net.osmand.AndroidNetworkUtils;
 import net.osmand.AndroidNetworkUtils.OnRequestResultListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.inapp.util.IabHelper;
@@ -36,7 +37,9 @@ import java.util.Map;
 public class InAppPurchaseHelper {
 	// Debug tag, for logging
 	private static final String TAG = InAppPurchaseHelper.class.getSimpleName();
-	boolean mDebugLog = false;
+	boolean mDebugLog = true;
+
+	public static final long SUBSCRIPTION_HOLDING_TIME_MSEC = 1000 * 60;// * 60 * 24 * 3; // 3 days
 
 	private long lastValidationCheckTime;
 	private String liveUpdatesPrice;
@@ -69,7 +72,7 @@ public class InAppPurchaseHelper {
 	private boolean processingTask = false;
 
 	private OsmandApplication ctx;
-	private List<InAppPurchaseListener> listeners = new ArrayList<>();
+	private InAppPurchaseListener uiActivity = null;
 
 	/* base64EncodedPublicKey should be YOUR APPLICATION'S PUBLIC KEY
 	 * (that you got from the Google Play developer console). This is not your
@@ -193,7 +196,6 @@ public class InAppPurchaseHelper {
 	}
 
 	public boolean isPurchased(String inAppSku) {
-		OsmandSettings settings = ctx.getSettings();
 		if (inAppSku.equals(SKU_FULL_VERSION_PRICE)) {
 			return isFullVersionPurchased(ctx);
 		} else if (inAppSku.equals(SKU_LIVE_UPDATES_FULL) || inAppSku.equals(SKU_LIVE_UPDATES_FREE)) {
@@ -358,10 +360,23 @@ public class InAppPurchaseHelper {
 			// Do we have the live updates?
 			Purchase liveUpdatesPurchase = inventory.getPurchase(SKU_LIVE_UPDATES);
 			boolean subscribedToLiveUpdates = (liveUpdatesPurchase != null && liveUpdatesPurchase.getPurchaseState() == 0);
-			if (!subscribedToLiveUpdates && ctx.getSettings().LIVE_UPDATES_PURCHASED.get()) {
-				ctx.getSettings().LIVE_UPDATES_PURCHASE_CANCELLED_TIME.set(System.currentTimeMillis());
+			OsmandPreference<Long> subscriptionCancelledTime = ctx.getSettings().LIVE_UPDATES_PURCHASE_CANCELLED_TIME;
+			if (!subscribedToLiveUpdates) {
+				if (subscriptionCancelledTime.get() == 0) {
+					subscriptionCancelledTime.set(System.currentTimeMillis());
+					ctx.getSettings().LIVE_UPDATES_PURCHASE_CANCELLED_FIRST_DLG_SHOWN.set(false);
+					ctx.getSettings().LIVE_UPDATES_PURCHASE_CANCELLED_SECOND_DLG_SHOWN.set(false);
+				} else if (System.currentTimeMillis() - subscriptionCancelledTime.get() > SUBSCRIPTION_HOLDING_TIME_MSEC
+						&& ctx.getSettings().LIVE_UPDATES_PURCHASED.get()) {
+					ctx.getSettings().LIVE_UPDATES_PURCHASED.set(false);
+					if (!isDepthContoursPurchased(ctx)) {
+						ctx.getSettings().getCustomRenderBooleanProperty("depthContours").set(false);
+					}
+				}
+			} else {
+				subscriptionCancelledTime.set(0L);
+				ctx.getSettings().LIVE_UPDATES_PURCHASED.set(true);
 			}
-			ctx.getSettings().LIVE_UPDATES_PURCHASED.set(subscribedToLiveUpdates);
 
 			Purchase fullVersionPurchase = inventory.getPurchase(SKU_FULL_VERSION_PRICE);
 			boolean fullVersionPurchased = (fullVersionPurchase != null && fullVersionPurchase.getPurchaseState() == 0);
@@ -589,8 +604,8 @@ public class InAppPurchaseHelper {
 				sendToken(purchase.getToken(), new OnRequestResultListener() {
 					@Override
 					public void onResult(String result) {
-						showToast(ctx.getString(R.string.osm_live_thanks));
 						ctx.getSettings().LIVE_UPDATES_PURCHASED.set(true);
+						ctx.getSettings().getCustomRenderBooleanProperty("depthContours").set(true);
 
 						notifyDismissProgress(InAppPurchaseTaskType.PURCHASE_LIVE_UPDATES);
 						notifyItemPurchased(SKU_LIVE_UPDATES);
@@ -722,41 +737,44 @@ public class InAppPurchaseHelper {
 	}
 
 	private void notifyError(InAppPurchaseTaskType taskType, String message) {
-		for (InAppPurchaseListener l : listeners) {
-			l.onError(taskType, message);
+		if (uiActivity != null) {
+			uiActivity.onError(taskType, message);
 		}
 	}
 
 	private void notifyGetItems() {
-		for (InAppPurchaseListener l : listeners) {
-			l.onGetItems();
+		if (uiActivity != null) {
+			uiActivity.onGetItems();
 		}
 	}
 
 	private void notifyItemPurchased(String sku) {
-		for (InAppPurchaseListener l : listeners) {
-			l.onItemPurchased(sku);
+		if (uiActivity != null) {
+			uiActivity.onItemPurchased(sku);
 		}
 	}
 
 	private void notifyShowProgress(InAppPurchaseTaskType taskType) {
-		for (InAppPurchaseListener l : listeners) {
-			l.showProgress(taskType);
+		if (uiActivity != null) {
+			uiActivity.showProgress(taskType);
 		}
 	}
 
 	private void notifyDismissProgress(InAppPurchaseTaskType taskType) {
-		for (InAppPurchaseListener l : listeners) {
-			l.dismissProgress(taskType);
+		if (uiActivity != null) {
+			uiActivity.dismissProgress(taskType);
 		}
 	}
 
-	public void addListener(InAppPurchaseListener listener) {
-		this.listeners.add(listener);
+	/// UI notifications methods
+	public void setUiActivity(InAppPurchaseListener uiActivity) {
+		this.uiActivity = uiActivity;
 	}
 
-	public void removeListener(InAppPurchaseListener listener) {
-		this.listeners.remove(listener);
+	public void resetUiActivity(InAppPurchaseListener uiActivity) {
+		if (this.uiActivity == uiActivity) {
+			this.uiActivity = null;
+		}
 	}
 
 	private void complain(String message) {

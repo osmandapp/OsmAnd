@@ -10,6 +10,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentManager.BackStackEntry;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
@@ -159,6 +160,8 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 		contentWebView.addJavascriptInterface(new WikivoyageArticleWebAppInterface(), "Android");
 		webViewClient = new WikivoyageWebViewClient(getActivity(), getFragmentManager(), nightMode);
 		contentWebView.setWebViewClient(webViewClient);
+		contentWebView.setBackgroundColor(ContextCompat.getColor(getMyApplication(),
+				nightMode ? R.color.wiki_webview_background_dark : R.color.wiki_webview_background_light));
 
 		return mainView;
 	}
@@ -253,7 +256,8 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 		for (String n : langs) {
 			names.put(n, FileNameTranslationHelper.getVoiceName(getContext(), n));
 		}
-		for (final Map.Entry<String, String> e : names.entrySet()) {
+		Map<String, String> sortedNames = AndroidUtils.sortByValue(names);
+		for (final Map.Entry<String, String> e : sortedNames.entrySet()) {
 			final String lang = e.getValue();
 			final String langKey = e.getKey();
 			MenuItem item = popup.getMenu().add(lang);

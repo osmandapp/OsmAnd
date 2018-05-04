@@ -11,7 +11,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
-import net.osmand.plus.base.bottomsheetmenu.simpleitems.DescriptionItem;
+import net.osmand.plus.base.bottomsheetmenu.simpleitems.ShortDescriptionItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 
 public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
@@ -28,7 +28,7 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 	public void createMenuItems(Bundle savedInstanceState) {
 		items.add(new TitleItem(getString(R.string.shared_string_save_as_gpx)));
 
-		items.add(new DescriptionItem(getString(R.string.measurement_tool_save_as_new_track_descr)));
+		items.add(new ShortDescriptionItem(getString(R.string.measurement_tool_save_as_new_track_descr)));
 
 		if (Build.VERSION.SDK_INT >= 18) {
 			final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;

@@ -20,6 +20,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OsmandActionBarActivity;
+import net.osmand.plus.activities.OsmandInAppPurchaseActivity;
 
 public class BaseOsmAndFragment extends Fragment implements TransitionAnimator {
 	private IconsCache iconsCache;
@@ -126,6 +127,15 @@ public class BaseOsmAndFragment extends Fragment implements TransitionAnimator {
 
 	protected OsmandActionBarActivity getMyActivity() {
 		return (OsmandActionBarActivity) getActivity();
+	}
+
+	protected OsmandInAppPurchaseActivity getInAppPurchaseActivity() {
+		Activity activity = getActivity();
+		if (activity instanceof OsmandInAppPurchaseActivity) {
+			return (OsmandInAppPurchaseActivity) getActivity();
+		} else {
+			return null;
+		}
 	}
 
 	protected IconsCache getIconsCache() {
