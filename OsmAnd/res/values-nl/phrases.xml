@@ -180,7 +180,7 @@
 	<string name="poi_city">Stad</string>
 	<string name="poi_hamlet">Gehucht</string>
 	<string name="poi_village">Dorp</string>
-	<string name="poi_town">Gemeente</string>
+	<string name="poi_town">Plaats</string>
 	<string name="poi_suburb">Buitenwijk</string>
 	<string name="poi_isolated_dwelling">Geïsoleerde woning</string>
 	<string name="poi_neighbourhood">Buurt</string>
@@ -1433,7 +1433,7 @@
 
 	<string name="poi_payment_coins_yes">Muntstukken</string>
 	<string name="poi_payment_coins_no">Betaling met munten niet mogelijk</string>
-	<string name="poi_payment_coins_0.5">Betaling met € 0.50 munten mogelijk</string>
+	<string name="poi_payment_coins_0.5">€ 0,50-munten</string>
 	<string name="poi_payment_coins_50c12">€ 0.50, € 1, en € 2 munten</string>
 	<string name="poi_payment_telephone_cards_yes">Telefoonkaarten</string>
 	<string name="poi_payment_telephone_cards_no">Telefoonkaarten niet mogelijk</string>
@@ -1643,8 +1643,8 @@
 	<string name="poi_payment_wire_transfer_no">Bankoverschrijving niet geaccepteerd</string>
 	<string name="poi_payment_sms_yes">Betaling via SMS</string>
 	<string name="poi_payment_sms_no">SMS-betaling niet geaccepteerd</string>
-	<string name="poi_payment_ov_chipkaart_yes">OV-Chipkaart</string>
-	<string name="poi_payment_ov_chipkaart_no">OV-shitkaart niet geaccepteerd</string>
+	<string name="poi_payment_ov_chipkaart_yes">OV-chipkaart</string>
+	<string name="poi_payment_ov_chipkaart_no">OV-chipkaart niet geaccepteerd</string>
 	<string name="poi_events_venue">Evenementenhal</string>
 
 	<string name="poi_diet_vegetarian_filter_yes">Vegetarisch</string>
@@ -1672,7 +1672,7 @@
 	<string name="poi_diet_lactose_free_only">Geheel lactosevrij</string>
 	<string name="poi_diet_lactose_free_yes">Lactosevrij</string>
 	<string name="poi_diet_lactose_free_no">Lactosevrij dieet: nee</string>
-	<string name="poi_diet_pescetarian_yes">Pesco-vegetarisch</string>
+	<string name="poi_diet_pescetarian_yes">Pescotarisch</string>
 
 	<string name="poi_drive_in_yes">Ja</string>
 	<string name="poi_drive_in_no">Drive-in: nee</string>
@@ -1795,7 +1795,7 @@
 	<string name="poi_memorial_fassade_decoration">Geveldecoratie</string>
 
 	<string name="poi_inscription">Inscriptie</string>
-	<string name="poi_historic_quarry">Historische weg</string>
+	<string name="poi_historic_quarry">Historische groeve</string>
 
 	<string name="poi_resource_aggregate">Aggregaat</string>
 	<string name="poi_resource_antimony">Antimoon</string>
@@ -1848,9 +1848,9 @@
 	<string name="poi_resource_zircon">Zirconium</string>
 
 	<string name="poi_wetland_wet_meadow">Nat grasland</string>
-	<string name="poi_wetland_bog">Moeras</string>
+	<string name="poi_wetland_bog">Veen</string>
 	<string name="poi_wetland_marsh">Moeras</string>
-	<string name="poi_wetland_reedbed">Rietkraag</string>
+	<string name="poi_wetland_reedbed">Rietland</string>
 	<string name="poi_wetland_swamp">Moeras</string>
 	<string name="poi_wetland_saltern">Zoutpan</string>
 	<string name="poi_wetland_tidalflat">Getijdenvlakte</string>
@@ -1896,7 +1896,7 @@
 
 	<string name="poi_architect_name">Architect</string>
 
-	<string name="poi_architecture_modern">Kunstwerk: modern</string>
+	<string name="poi_architecture_modern">Architectuur: modern</string>
 	<string name="poi_tunnel_waterway">Watertunnel</string>
 	<string name="poi_tunnel_car">Wegtunnel</string>
 	<string name="poi_tunnel_pedestrian">Voetgangerstunnel</string>
@@ -1924,12 +1924,12 @@
 	<string name="poi_surface_wood">Oppervlak: hout</string>
 	<string name="poi_surface_gravel">Oppervlak: grind</string>
 	<string name="poi_surface_fine_gravel">Oppervlak: fijn grind</string>
-	<string name="poi_surface_compacted">Oppervalk: verhard</string>
+	<string name="poi_surface_compacted">Oppervlak: verdicht</string>
 	<string name="poi_surface_sand">Oppervlak: zand</string>
 	<string name="poi_surface_grass">Oppervlak: gras</string>
 	<string name="poi_surface_metal">Oppervlak: metaal</string>
 	<string name="poi_surface_stone">Oppervlak: steen</string>
-	<string name="poi_surface_pebblestone">Oppervlak: kieelsteen</string>
+	<string name="poi_surface_pebblestone">Oppervlak: kiezelstenen</string>
 	<string name="poi_surface_paving_stones">Oppervlak: geplaveid</string>
 	<string name="poi_surface_concrete">Oppervlak: beton</string>
 	<string name="poi_surface_asphalt">Oppervlak: asfalt</string>
@@ -2252,8 +2252,8 @@
 	<string name="poi_payment_paypal_no">PayPal niet geaccepteerd</string>
 	<string name="poi_payment_u_key_yes">U-Key</string>
 	<string name="poi_payment_u_key_no">U-Key niet geaccepteerd</string>
-	<string name="poi_payment_gift_card_yes">Cadeaubonnen</string>
-	<string name="poi_payment_gift_card_no">Cadeaubonnen niet geaccepteerd</string>
+	<string name="poi_payment_gift_card_yes">Cadeaukaarten</string>
+	<string name="poi_payment_gift_card_no">Cadeaukaarten niet geaccepteerd</string>
 	<string name="poi_payment_golden_crown_yes">Golden Crown</string>
 	<string name="poi_payment_golden_crown_no">Golden Crown-kaarten niet geaccepteerd</string>
 	<string name="poi_payment_pro100_yes">PRO100</string>
@@ -2267,12 +2267,12 @@
 	<string name="poi_description_payment">Betaling beschrijving</string>
 
 	<string name="poi_memorial_plaque">Gedenkplaat</string>
-	<string name="poi_resource_dimension_stone">Afmetingen steen</string>
-	<string name="poi_wetland_fen">Moeras</string>
+	<string name="poi_resource_dimension_stone">Natuursteen</string>
+	<string name="poi_wetland_fen">Laagveen</string>
 	<string name="poi_wetland_palsa_bog">Palsa-veen</string>
 	<string name="poi_beach_shingle">Grind</string>
 	<string name="poi_shelter_type_lean_to">Aanbouw</string>
-	<string name="poi_shelter_type_field_shelter">Veld-hut</string>
+	<string name="poi_shelter_type_field_shelter">Veldhut</string>
 	<string name="poi_shelter_type_tent">Onderdaktype: tent</string>
 	<string name="poi_shelter_type_abandoned">Onderdaktype: verlaten</string>
 
@@ -2492,4 +2492,37 @@
 	<string name="poi_faa">FAA-code</string>
 	
 	<string name="poi_climbing_style">Klimstijl</string>
+	<string name="poi_glacier_type">Soort gletsjer</string>
+
+<string name="synonyms_poi_fuel">Tankstation;Benzinestation;Benzinetankstation;Benzinepomp</string>
+
+	<string name="poi_wiki_lang_sh">Servo-Kroatische wiki</string>
+	<string name="poi_animal_shelter_wildlife">Wilde dieren</string>
+	<string name="poi_memorial_stele">Stele</string>
+	<string name="poi_resource_chromite">Chromiet</string>
+	<string name="poi_shelter_type_rock_shelter">Abri</string>
+	<string name="poi_artwork_type_stele">Kunstwerk: stele</string>
+	<string name="poi_architecture_stalinist_neoclassicism">Architectuur: Stalinistisch neoclassicisme</string>
+	<string name="poi_architecture_eclectic">Architectuur: eclectisch</string>
+	<string name="poi_architecture_new_objectivity">Architectuur: nieuwe zakelijkheid</string>
+	<string name="poi_architecture_contemporary">Architectuur: hedendaags</string>
+	<string name="poi_architecture_constructivism">Architectuur: constructivisme</string>
+	<string name="poi_architecture_umgebinde">Architectuur: umgebinde</string>
+	<string name="poi_architecture_timber_frame">Architectuur: vakwerk</string>
+	<string name="poi_architecture_art_nouveau">Architectuur: jugendstil</string>
+	<string name="poi_architecture_neoclassicism">Architectuur: neoclassicisme</string>
+	<string name="poi_architecture_victorian">Architectuur: Victoriaans</string>
+	<string name="poi_architecture_brutalism">Architectuur: brutalisme</string>
+	<string name="poi_architecture_classicism">Architectuur: classicisme</string>
+	<string name="poi_architecture_gothic">Architectuur: gotisch</string>
+	<string name="poi_architecture_oldrussian">Architectuur: Oudrussisch</string>
+	<string name="poi_architecture_baroque">Architectuur: barok</string>
+	<string name="poi_architecture_postconstructivism">Architectuur: postconstructivisme</string>
+	<string name="poi_architecture_wilhelminian_style">Architectuur: wilhelminische stijl</string>
+	<string name="poi_architecture_renaissance">Architectuur: renaissance</string>
+	<string name="poi_architecture_romanesque">Architectuur: romaans</string>
+
+	<string name="poi_surface_unpaved">Oppervlak: onverhard</string>
+	<string name="poi_surface_paved">Oppervlak: verhard</string>
+	<string name="poi_surface_sett">Oppervlak: kasseien</string>
 	</resources>
