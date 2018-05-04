@@ -169,7 +169,7 @@ public class OsmLiveCancelledDialog extends BaseOsmAndDialogFragment implements 
 	}
 
 	@Override
-	public void onItemPurchased(String sku) {
+	public void onItemPurchased(String sku, boolean active) {
 	}
 
 	@Override

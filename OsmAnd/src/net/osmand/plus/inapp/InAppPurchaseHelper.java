@@ -97,7 +97,7 @@ public class InAppPurchaseHelper {
 
 		void onGetItems();
 
-		void onItemPurchased(String sku);
+		void onItemPurchased(String sku, boolean active);
 
 		void showProgress(InAppPurchaseTaskType taskType);
 
@@ -604,11 +604,16 @@ public class InAppPurchaseHelper {
 				sendToken(purchase.getToken(), new OnRequestResultListener() {
 					@Override
 					public void onResult(String result) {
+						boolean active = ctx.getSettings().LIVE_UPDATES_PURCHASED.get();
 						ctx.getSettings().LIVE_UPDATES_PURCHASED.set(true);
 						ctx.getSettings().getCustomRenderBooleanProperty("depthContours").set(true);
 
+						ctx.getSettings().LIVE_UPDATES_PURCHASE_CANCELLED_TIME.set(0L);
+						ctx.getSettings().LIVE_UPDATES_PURCHASE_CANCELLED_FIRST_DLG_SHOWN.set(false);
+						ctx.getSettings().LIVE_UPDATES_PURCHASE_CANCELLED_SECOND_DLG_SHOWN.set(false);
+
 						notifyDismissProgress(InAppPurchaseTaskType.PURCHASE_LIVE_UPDATES);
-						notifyItemPurchased(SKU_LIVE_UPDATES);
+						notifyItemPurchased(SKU_LIVE_UPDATES, active);
 						stop(true);
 					}
 				});
@@ -620,7 +625,7 @@ public class InAppPurchaseHelper {
 				ctx.getSettings().FULL_VERSION_PURCHASED.set(true);
 
 				notifyDismissProgress(InAppPurchaseTaskType.PURCHASE_FULL_VERSION);
-				notifyItemPurchased(SKU_FULL_VERSION_PRICE);
+				notifyItemPurchased(SKU_FULL_VERSION_PRICE, false);
 				stop(true);
 
 			} else if (purchase.getSku().equals(SKU_DEPTH_CONTOURS)) {
@@ -631,7 +636,7 @@ public class InAppPurchaseHelper {
 				ctx.getSettings().getCustomRenderBooleanProperty("depthContours").set(true);
 
 				notifyDismissProgress(InAppPurchaseTaskType.PURCHASE_DEPTH_CONTOURS);
-				notifyItemPurchased(SKU_DEPTH_CONTOURS);
+				notifyItemPurchased(SKU_DEPTH_CONTOURS, false);
 				stop(true);
 
 			} else {
@@ -748,9 +753,9 @@ public class InAppPurchaseHelper {
 		}
 	}
 
-	private void notifyItemPurchased(String sku) {
+	private void notifyItemPurchased(String sku, boolean active) {
 		if (uiActivity != null) {
-			uiActivity.onItemPurchased(sku);
+			uiActivity.onItemPurchased(sku, active);
 		}
 	}
 

@@ -715,7 +715,7 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppPurc
 	}
 
 	@Override
-	public void onItemPurchased(String sku) {
+	public void onItemPurchased(String sku, boolean active) {
 		InAppPurchaseHelper purchaseHelper = getInAppPurchaseHelper();
 		if (purchaseHelper != null && purchaseHelper.getSkuLiveUpdates().equals(sku)) {
 			updateSubscriptionHeader();
@@ -723,7 +723,7 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppPurc
 
 		OsmandInAppPurchaseActivity activity = getInAppPurchaseActivity();
 		if (activity != null) {
-			activity.fireInAppPurchaseItemPurchasedOnFragments(getChildFragmentManager(), sku);
+			activity.fireInAppPurchaseItemPurchasedOnFragments(getChildFragmentManager(), sku, active);
 		}
 	}
 

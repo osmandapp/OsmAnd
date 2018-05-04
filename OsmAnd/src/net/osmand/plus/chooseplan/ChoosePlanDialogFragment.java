@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.ColorRes;
@@ -39,8 +38,6 @@ import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseTaskType;
-import net.osmand.plus.liveupdates.OsmLiveActivity;
-import net.osmand.plus.liveupdates.SubscriptionFragment;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
 import net.osmand.plus.widgets.TextViewEx;
 
@@ -84,6 +81,9 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 		}
 
 		public boolean isFeaturePurchased(OsmandApplication ctx) {
+			if (InAppPurchaseHelper.isSubscribedToLiveUpdates(ctx)) {
+				return true;
+			}
 			switch (this) {
 				case DAILY_MAP_UPDATES:
 				case DONATION_TO_OSM:
@@ -447,7 +447,7 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 	}
 
 	@Override
-	public void onItemPurchased(String sku) {
+	public void onItemPurchased(String sku, boolean active) {
 	}
 
 	@Override
