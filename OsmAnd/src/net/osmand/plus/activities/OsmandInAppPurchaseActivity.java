@@ -175,23 +175,26 @@ public class OsmandInAppPurchaseActivity extends AppCompatActivity implements In
 	}
 
 	@Override
-	public void onItemPurchased(String sku) {
+	public void onItemPurchased(String sku, boolean active) {
 		if (purchaseHelper != null && purchaseHelper.getSkuLiveUpdates().equals(sku)) {
 			getMyApplication().logEvent(this, "live_osm_subscription_purchased");
 
-			OsmLiveRestartBottomSheetDialogFragment fragment = new OsmLiveRestartBottomSheetDialogFragment();
-			fragment.setUsedOnMap(this instanceof MapActivity);
-			fragment.show(getSupportFragmentManager(), OsmLiveRestartBottomSheetDialogFragment.TAG);
+			if (!active) {
+				OsmLiveRestartBottomSheetDialogFragment fragment = new OsmLiveRestartBottomSheetDialogFragment();
+				fragment.setUsedOnMap(this instanceof MapActivity);
+				fragment.show(getSupportFragmentManager(), OsmLiveRestartBottomSheetDialogFragment.TAG);
+			}
 		}
 		onInAppPurchaseItemPurchased(sku);
-		fireInAppPurchaseItemPurchasedOnFragments(getSupportFragmentManager(), sku);
+		fireInAppPurchaseItemPurchasedOnFragments(getSupportFragmentManager(), sku, active);
 	}
 
-	public void fireInAppPurchaseItemPurchasedOnFragments(@NonNull FragmentManager fragmentManager, String sku) {
+	public void fireInAppPurchaseItemPurchasedOnFragments(@NonNull FragmentManager fragmentManager,
+														  String sku, boolean active) {
 		List<Fragment> fragments = fragmentManager.getFragments();
 		for (Fragment f : fragments) {
 			if (f instanceof InAppPurchaseListener && f.isAdded()) {
-				((InAppPurchaseListener) f).onItemPurchased(sku);
+				((InAppPurchaseListener) f).onItemPurchased(sku, active);
 			}
 		}
 	}
