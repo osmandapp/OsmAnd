@@ -242,7 +242,8 @@ p {
     color: var(--main-text-color-night);
 }
 
-ul, dl {
+/* Lists */
+ul, dl, ol {
     /* font-size: var(--main-text-font-size); */
     color: var(--main-text-color-day);
     font-size: inherit;
@@ -259,14 +260,9 @@ li {
     padding-bottom: 1%;
 }
 
-.nightmode ul, .nightmode dl  {
+.nightmode ul, .nightmode dl, .nightmode ol  {
     color: #cccccc;
 }
-
-.toc {
-    font-size: var(--main-text-font-size);
-}
-
 
 img {
     width: 100%;
@@ -327,10 +323,47 @@ a.geo {
     text-decoration: none;
     display: inline-block;
 }
-
-td {
-    display: inline-block;
+/* Tables */
+table {
+    display: block;
+    overflow-y: scroll;
     word-wrap: break-word;
+    color: var(--main-text-color-day);
+    border: 1px solid var(--divider-color-day);
+    background: var(--divider-color-day);
+    margin-left: 0% !important;
+    margin-right: 0% !important;
+    margin-bottom: 7% !important;
+    font-size: inherit;
+}
+
+.nightmode table {
+    color: var(--main-text-color-night);
+    border: 1px solid var(--background-color-night);
+    background: var(--divider-color-night) !important;
+}
+
+
+td, tr, th {
+    border: 1px solid var(--divider-color-day);
+    color: var(--main-text-color-night);
+    background: var(--divider-color-day);
+}
+
+.nightmode td, .nightmode tr, .nightmode th {
+    color: var(--main-text-color-night);
+    border: 1px solid var(--background-color-night);
+    background: var(--divider-color-night) !important;
+}
+
+.toc, .toc td, .toc tr {
+    border: 0px solid;
+    background: var(--background-color-day);
+}
+
+.nightmode .toc, .toc td, .toc tr {
+    border: 0px solid;
+    background: var(--background-color-night) !important;
 }
 
 .thumb-tright, .thumbinner {
