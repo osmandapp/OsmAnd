@@ -1,4 +1,4 @@
-package net.osmand.plus.wikivoyage;
+package net.osmand.plus.wikipedia;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
