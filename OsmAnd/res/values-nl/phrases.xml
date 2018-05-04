@@ -2525,4 +2525,6 @@
 	<string name="poi_surface_unpaved">Oppervlak: onverhard</string>
 	<string name="poi_surface_paved">Oppervlak: verhard</string>
 	<string name="poi_surface_sett">Oppervlak: kasseien</string>
+	<string name="poi_animal_shelter_horse">"Paarden "</string>
+	<string name="poi_animal_shelter_mammal">Zoogdieren</string>
 	</resources>
