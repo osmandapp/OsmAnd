@@ -673,7 +673,7 @@
     <string name="osm_live_hide_user_name">Do not show my name in reports</string>
     <string name="osm_live_support_region">Support region</string>
     <string name="osm_live_month_cost">Month cost</string>
-    <string name="osm_live_month_cost_desc">Monthly payment.</string>
+    <string name="osm_live_month_cost_desc">Monthly payment</string>
     <string name="osm_live_active">Active</string>
     <string name="osm_live_not_active">Inactive</string>
     <string name="osm_live_enter_email">Please enter a valid e-mail address</string>
