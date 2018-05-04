@@ -10,10 +10,11 @@
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
     <string name="shared_string_restart">Restart</string>
+    <string name="show_images">Show images</string>
     <string name="purchase_cancelled_dialog_title">You have cancel OsmAnd Live subscription</string>
     <string name="purchase_cancelled_dialog_descr">Renew subscription to continue use the all features:</string>
 
-    <string name="maps_you_need_descr">You read articles: %1$s. Based on this, we suggest you download these maps:</string>
+    <string name="maps_you_need_descr">Based on the articles you saved, we recommend you to download following maps:</string>
     <string name="maps_you_need">Maps you need</string>
     <string name="osmand_team">OsmAnd team</string>
     <string name="popular_destinations">Popular destinations</string>
@@ -673,7 +674,7 @@
     <string name="osm_live_hide_user_name">Do not show my name in reports</string>
     <string name="osm_live_support_region">Support region</string>
     <string name="osm_live_month_cost">Month cost</string>
-    <string name="osm_live_month_cost_desc">Monthly payment.</string>
+    <string name="osm_live_month_cost_desc">Monthly payment</string>
     <string name="osm_live_active">Active</string>
     <string name="osm_live_not_active">Inactive</string>
     <string name="osm_live_enter_email">Please enter a valid e-mail address</string>

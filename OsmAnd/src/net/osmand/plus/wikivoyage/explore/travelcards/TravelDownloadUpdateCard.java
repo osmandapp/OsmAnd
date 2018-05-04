@@ -128,7 +128,7 @@ public class TravelDownloadUpdateCard extends BaseTravelCard {
 
 	@NonNull
 	private String getFileTitle() {
-		return indexItem == null ? "" : indexItem.getBasename().replace("_", " ");
+		return indexItem == null ? "" : indexItem.getVisibleName(app, app.getRegions(), false);
 	}
 
 	@NonNull
