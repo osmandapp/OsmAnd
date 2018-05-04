@@ -39,7 +39,7 @@ public class InAppPurchaseHelper {
 	private static final String TAG = InAppPurchaseHelper.class.getSimpleName();
 	boolean mDebugLog = true;
 
-	private static final long SUBSCRIPTION_HOLDING_TIME_MSEC = 1000 * 60 * 60 * 24 * 3; // 3 days
+	public static final long SUBSCRIPTION_HOLDING_TIME_MSEC = 1000 * 60;// * 60 * 24 * 3; // 3 days
 
 	private long lastValidationCheckTime;
 	private String liveUpdatesPrice;
@@ -122,15 +122,6 @@ public class InAppPurchaseHelper {
 
 	public InAppPurchaseTaskType getActiveTask() {
 		return activeTask;
-	}
-
-	public static long getSubscriptionHoldingTime(OsmandApplication app) {
-		if (Version.isDeveloperBuild(app)) {
-			return 1000 * 60 * 60; // 1 hour (test)
-		} else {
-			return 1000 * 60 * 60; // 1 hour (test)
-			//return SUBSCRIPTION_HOLDING_TIME_MSEC;
-		}
 	}
 
 	public static boolean isSubscribedToLiveUpdates(@NonNull OsmandApplication ctx) {
@@ -371,12 +362,16 @@ public class InAppPurchaseHelper {
 			boolean subscribedToLiveUpdates = (liveUpdatesPurchase != null && liveUpdatesPurchase.getPurchaseState() == 0);
 			OsmandPreference<Long> subscriptionCancelledTime = ctx.getSettings().LIVE_UPDATES_PURCHASE_CANCELLED_TIME;
 			if (!subscribedToLiveUpdates) {
-				if (ctx.getSettings().LIVE_UPDATES_PURCHASED.get()) {
+				if (subscriptionCancelledTime.get() == 0) {
 					subscriptionCancelledTime.set(System.currentTimeMillis());
 					ctx.getSettings().LIVE_UPDATES_PURCHASE_CANCELLED_FIRST_DLG_SHOWN.set(false);
 					ctx.getSettings().LIVE_UPDATES_PURCHASE_CANCELLED_SECOND_DLG_SHOWN.set(false);
-				} else if (System.currentTimeMillis() - subscriptionCancelledTime.get() > getSubscriptionHoldingTime(ctx)) {
+				} else if (System.currentTimeMillis() - subscriptionCancelledTime.get() > SUBSCRIPTION_HOLDING_TIME_MSEC
+						&& ctx.getSettings().LIVE_UPDATES_PURCHASED.get()) {
 					ctx.getSettings().LIVE_UPDATES_PURCHASED.set(false);
+					if (!isDepthContoursPurchased(ctx)) {
+						ctx.getSettings().getCustomRenderBooleanProperty("depthContours").set(false);
+					}
 				}
 			} else {
 				subscriptionCancelledTime.set(0L);
@@ -609,8 +604,8 @@ public class InAppPurchaseHelper {
 				sendToken(purchase.getToken(), new OnRequestResultListener() {
 					@Override
 					public void onResult(String result) {
-						showToast(ctx.getString(R.string.osm_live_thanks));
 						ctx.getSettings().LIVE_UPDATES_PURCHASED.set(true);
+						ctx.getSettings().getCustomRenderBooleanProperty("depthContours").set(true);
 
 						notifyDismissProgress(InAppPurchaseTaskType.PURCHASE_LIVE_UPDATES);
 						notifyItemPurchased(SKU_LIVE_UPDATES);

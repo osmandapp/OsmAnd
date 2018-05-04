@@ -9,6 +9,7 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="shared_string_restart">Restart</string>
     <string name="purchase_cancelled_dialog_title">You have cancel OsmAnd Live subscription</string>
     <string name="purchase_cancelled_dialog_descr">Renew subscription to continue use the all features:</string>
 
@@ -677,7 +678,7 @@
     <string name="osm_live_not_active">Inactive</string>
     <string name="osm_live_enter_email">Please enter a valid e-mail address</string>
     <string name="osm_live_enter_user_name">Please enter public name</string>
-    <string name="osm_live_thanks">Thank you for subscribing to live updates</string>
+    <string name="osm_live_thanks">Thank you for supporting OsmAnd!\nTo activate all new features you need to restart OsmAnd.</string>
     <string name="osm_live_region_desc">Part of your donation will be sent to OSM users who submit changes to the map in that region.</string>
     <string name="osm_live_subscription_settings">Subscription settings</string>
     <string name="osm_live_ask_for_purchase">Please purchase a subscription to OsmAnd Live first</string>

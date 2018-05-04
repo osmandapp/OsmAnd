@@ -109,8 +109,8 @@ public class ChoosePlanFreeBannerDialogFragment extends ChoosePlanDialogFragment
 						app.logEvent(getActivity(), "paid_version_redirect_from_banner");
 					}
 					OsmandInAppPurchaseActivity.purchaseFullVersion(activity);
+					dismiss();
 				}
-				dismiss();
 			}
 		});
 	}

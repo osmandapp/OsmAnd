@@ -136,11 +136,6 @@ public class ContourLinesMenu {
 					});
 				} else if (itemId == R.string.srtm_plugin_name) {
 					ChoosePlanDialogFragment.showHillshadeSrtmPluginInstance(mapActivity.getSupportFragmentManager());
-					/*
-					Intent intent = new Intent(mapActivity, PluginActivity.class);
-					intent.putExtra(PluginActivity.EXTRA_PLUGIN_ID, plugin.getId());
-					mapActivity.startActivity(intent);
-					*/
 					closeDashboard(mapActivity);
 				} else if (contourWidthProp != null && itemId == contourWidthName.hashCode()) {
 					plugin.selectPropertyValue(mapActivity, contourWidthProp, widthPref, new Runnable() {

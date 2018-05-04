@@ -170,7 +170,7 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppPurc
 	}
 
 	public void updateSubscriptionHeader() {
-		if (getActivity() instanceof OsmLiveActivity) {
+		if (getActivity() instanceof OsmLiveActivity && subscriptionHeader != null) {
 			View subscriptionBanner = subscriptionHeader.findViewById(R.id.subscription_banner);
 			View subscriptionInfo = subscriptionHeader.findViewById(R.id.subscription_info);
 			if (InAppPurchaseHelper.isSubscribedToLiveUpdates(getMyApplication())) {

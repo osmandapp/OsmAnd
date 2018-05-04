@@ -17,7 +17,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithCompoundButton;
-import net.osmand.plus.base.bottomsheetmenu.simpleitems.DescriptionItem;
+import net.osmand.plus.base.bottomsheetmenu.simpleitems.ShortDescriptionItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 
@@ -53,7 +53,7 @@ public class SelectWptCategoriesBottomSheetDialogFragment extends MenuBottomShee
 
 		items.add(new TitleItem(getGpxName(gpxFile)));
 
-		items.add(new DescriptionItem(getString(R.string.select_waypoints_category_description)));
+		items.add(new ShortDescriptionItem(getString(R.string.select_waypoints_category_description)));
 
 		final BottomSheetItemWithCompoundButton[] selectAllItem = new BottomSheetItemWithCompoundButton[1];
 		selectAllItem[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()

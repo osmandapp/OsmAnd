@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import net.osmand.IndexConstants;
 import net.osmand.plus.ApplicationMode;
@@ -55,7 +56,7 @@ public class NauticalMapsPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public boolean init(final OsmandApplication app, final Activity activity) {
+	public boolean init(@NonNull final OsmandApplication app, final Activity activity) {
 		if(activity != null) {
 			addBoatProfile(true);
 			// called from UI 

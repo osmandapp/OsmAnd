@@ -37,6 +37,8 @@ import net.osmand.plus.widgets.TextViewEx;
 
 import org.apache.commons.logging.Log;
 
+import static net.osmand.plus.inapp.InAppPurchaseHelper.SUBSCRIPTION_HOLDING_TIME_MSEC;
+
 public class OsmLiveCancelledDialog extends BaseOsmAndDialogFragment implements InAppPurchaseListener {
 	public static final String TAG = OsmLiveCancelledDialog.class.getSimpleName();
 	private static final Log LOG = PlatformUtil.getLog(OsmLiveCancelledDialog.class);
@@ -246,7 +248,7 @@ public class OsmLiveCancelledDialog extends BaseOsmAndDialogFragment implements 
 		boolean secondTimeShown = settings.LIVE_UPDATES_PURCHASE_CANCELLED_SECOND_DLG_SHOWN.get();
 		return cancelledTime > 0
 				&& (!firstTimeShown
-					|| (System.currentTimeMillis() - cancelledTime > InAppPurchaseHelper.getSubscriptionHoldingTime(app)
+					|| (System.currentTimeMillis() - cancelledTime > SUBSCRIPTION_HOLDING_TIME_MSEC
 						&& !secondTimeShown));
 	}
 

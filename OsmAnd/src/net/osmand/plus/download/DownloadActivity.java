@@ -220,12 +220,13 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 	@Override
 	public void onInAppPurchaseGetItems() {
 		visibleBanner.updateFreeVersionBanner();
-
+		initAppStatusVariables();
 	}
 
 	@Override
 	public void onInAppPurchaseItemPurchased(String sku) {
 		visibleBanner.updateFreeVersionBanner();
+		initAppStatusVariables();
 	}
 
 	@Override
@@ -702,7 +703,8 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 	}
 
 	public void initAppStatusVariables() {
-		srtmDisabled = OsmandPlugin.getEnabledPlugin(SRTMPlugin.class) == null;
+		srtmDisabled = OsmandPlugin.getEnabledPlugin(SRTMPlugin.class) == null
+				&& !InAppPurchaseHelper.isSubscribedToLiveUpdates(getMyApplication());
 		nauticalPluginDisabled = OsmandPlugin.getEnabledPlugin(NauticalMapsPlugin.class) == null;
 		freeVersion = Version.isFreeVersion(getMyApplication());
 		OsmandPlugin srtmPlugin = OsmandPlugin.getPlugin(SRTMPlugin.class);

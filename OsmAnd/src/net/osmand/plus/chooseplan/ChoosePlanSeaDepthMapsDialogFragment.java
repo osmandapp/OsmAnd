@@ -93,6 +93,7 @@ public class ChoosePlanSeaDepthMapsDialogFragment extends ChoosePlanDialogFragme
 				Activity activity = getActivity();
 				if (activity != null) {
 					OsmandInAppPurchaseActivity.purchaseDepthContours(activity);
+					dismiss();
 				}
 			}
 		});

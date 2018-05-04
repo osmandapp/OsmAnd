@@ -31,7 +31,9 @@ import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
@@ -84,13 +86,14 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 		public boolean isFeaturePurchased(OsmandApplication ctx) {
 			switch (this) {
 				case DAILY_MAP_UPDATES:
+				case DONATION_TO_OSM:
+				case UNLOCK_ALL_FEATURES:
+					return false;
 				case MONTHLY_MAP_UPDATES:
 				case UNLIMITED_DOWNLOADS:
 				case WIKIPEDIA_OFFLINE:
-				case UNLOCK_ALL_FEATURES:
-				case DONATION_TO_OSM:
 				case WIKIVOYAGE_OFFLINE:
-					return false;
+					return !Version.isFreeVersion(ctx) || InAppPurchaseHelper.isFullVersionPurchased(ctx);
 				case SEA_DEPTH_MAPS:
 					return InAppPurchaseHelper.isDepthContoursPurchased(ctx);
 				case CONTOUR_LINES_HILLSHADE_MAPS:
@@ -312,16 +315,13 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 
 	private void subscript() {
 		FragmentActivity ctx = getActivity();
-		if (ctx != null) {
-			if (ctx instanceof OsmLiveActivity) {
-				SubscriptionFragment subscriptionFragment = new SubscriptionFragment();
-				subscriptionFragment.show(ctx.getSupportFragmentManager(), SubscriptionFragment.TAG);
-			} else {
-				Intent intent = new Intent(ctx, OsmLiveActivity.class);
-				intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-				intent.putExtra(OsmLiveActivity.OPEN_SUBSCRIPTION_INTENT_PARAM, true);
-				ctx.startActivity(intent);
-			}
+		if (ctx != null && purchaseHelper != null) {
+			OsmandSettings settings = app.getSettings();
+			purchaseHelper.purchaseLiveUpdates(ctx,
+					settings.BILLING_USER_EMAIL.get(),
+					settings.BILLING_USER_NAME.get(),
+					settings.BILLING_USER_COUNTRY_DOWNLOAD_NAME.get(),
+					settings.BILLING_HIDE_USER_NAME.get());
 		}
 	}
 
