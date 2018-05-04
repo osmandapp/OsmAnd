@@ -65,7 +65,7 @@ public class WikivoyageWebViewClient extends WebViewClient implements RegionCall
 	private static final String PREFIX_GEO = "geo:";
 	private static final String PAGE_PREFIX_HTTP = "http://";
 	private static final String PAGE_PREFIX_HTTPS = "https://";
-	private static final String WIKIVOAYAGE_DOMAIN = ".wikivoyage.com/wiki/";
+	private static final String WIKIVOAYAGE_DOMAIN = ".wikivoyage.org/wiki/";
 	private static final String WIKI_DOMAIN = ".wikipedia.org/wiki/";
 	private FetchWikiRegion fetchRegionTask;
 	private WikiArticleSearchTask articleSearchTask;
