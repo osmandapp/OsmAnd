@@ -3,7 +3,6 @@ package net.osmand.plus.chooseplan;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.ColorRes;
@@ -31,8 +30,6 @@ import net.osmand.plus.chooseplan.ChoosePlanDialogFragment.OsmAndFeature;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseTaskType;
-import net.osmand.plus.liveupdates.OsmLiveActivity;
-import net.osmand.plus.liveupdates.SubscriptionFragment;
 import net.osmand.plus.widgets.TextViewEx;
 
 import org.apache.commons.logging.Log;
@@ -222,16 +219,13 @@ public class OsmLiveCancelledDialog extends BaseOsmAndDialogFragment implements 
 
 	private void subscript() {
 		FragmentActivity ctx = getActivity();
-		if (ctx != null) {
-			if (ctx instanceof OsmLiveActivity) {
-				SubscriptionFragment subscriptionFragment = new SubscriptionFragment();
-				subscriptionFragment.show(ctx.getSupportFragmentManager(), SubscriptionFragment.TAG);
-			} else {
-				Intent intent = new Intent(ctx, OsmLiveActivity.class);
-				intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-				intent.putExtra(OsmLiveActivity.OPEN_SUBSCRIPTION_INTENT_PARAM, true);
-				ctx.startActivity(intent);
-			}
+		if (ctx != null && purchaseHelper != null) {
+			OsmandSettings settings = app.getSettings();
+			purchaseHelper.purchaseLiveUpdates(ctx,
+					settings.BILLING_USER_EMAIL.get(),
+					settings.BILLING_USER_NAME.get(),
+					settings.BILLING_USER_COUNTRY_DOWNLOAD_NAME.get(),
+					settings.BILLING_HIDE_USER_NAME.get());
 		}
 	}
 
