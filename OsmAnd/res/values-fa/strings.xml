@@ -2067,12 +2067,13 @@
     <string name="osm_live_hide_user_name">اسم من را در گزارش‌ها نشان نده</string>
     <string name="osm_live_support_region">منطقهٔ تحت پوشش</string>
     <string name="osm_live_month_cost">هزینهٔ ماهانه</string>
-    <string name="osm_live_month_cost_desc">پرداخت ماهیانه.</string>
+    <string name="osm_live_month_cost_desc">پرداخت ماهیانه</string>
     <string name="osm_live_active">فعال</string>
     <string name="osm_live_not_active">غیرفعال</string>
     <string name="osm_live_enter_email">لطفاً یک نشانی ایمیل معتبر وارد کنید</string>
     <string name="osm_live_enter_user_name">لطفاً نام کاربری را وارد کنید</string>
-    <string name="osm_live_thanks">سپاسگزاریم که مشترک به‌روزرسانی‌های پویا شدید</string>
+    <string name="osm_live_thanks">سپاسگزاریم که حامی OsmAnd هستید!
+\n برنامه را دوباره راه‌اندازی کنید تا همهٔ قابلیت‌های جدید فعال شود.</string>
     <string name="osm_live_region_desc">بخشی از کمک‌های مالی شما به کاربرانی پرداخت می‌شود که این منطقه از نقشه را سروسامان می‌دهند.</string>
     <string name="osm_live_subscription_settings">تنظیمات اشتراک</string>
     <string name="quick_action_auto_zoom">زوم خودکار روشن/خاموش</string>
@@ -3219,4 +3220,9 @@
     <string name="maps_you_need_descr">این مقالات را خوانده‌اید: %1$s
 \nبر همین اساس پیشنهاد می‌کنیم این نقشه‌ها را دانلود کنید:</string>
     <string name="maps_you_need">نقشه‌هایی که لازم دارید</string>
+    <string name="shared_string_restart">راه‌اندازی مجدد</string>
+    <string name="show_images">نمایش تصاویر</string>
+    <string name="purchase_cancelled_dialog_title">اشتراک به‌روزرسانی پویای OsmAnd را لغو کردید</string>
+    <string name="purchase_cancelled_dialog_descr">اشتراکتان را تجدید کنید تا از همهٔ قابلیت‌ها بهره‌مند شوید:</string>
+
     </resources>
