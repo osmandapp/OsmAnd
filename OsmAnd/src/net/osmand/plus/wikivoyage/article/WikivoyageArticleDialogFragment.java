@@ -253,7 +253,8 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 		for (String n : langs) {
 			names.put(n, FileNameTranslationHelper.getVoiceName(getContext(), n));
 		}
-		for (final Map.Entry<String, String> e : names.entrySet()) {
+		Map<String, String> sortedNames = AndroidUtils.sortByValue(names);
+		for (final Map.Entry<String, String> e : sortedNames.entrySet()) {
 			final String lang = e.getValue();
 			final String langKey = e.getKey();
 			MenuItem item = popup.getMenu().add(lang);
