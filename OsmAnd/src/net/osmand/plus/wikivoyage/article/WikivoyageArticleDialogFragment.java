@@ -161,7 +161,7 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 		webViewClient = new WikivoyageWebViewClient(getActivity(), getFragmentManager(), nightMode);
 		contentWebView.setWebViewClient(webViewClient);
 		contentWebView.setBackgroundColor(ContextCompat.getColor(getMyApplication(),
-				nightMode ? R.color.wikivoyage_webview_background_dark : R.color.wikivoyage_webview_background_light));
+				nightMode ? R.color.wiki_webview_background_dark : R.color.wiki_webview_background_light));
 
 		return mainView;
 	}
