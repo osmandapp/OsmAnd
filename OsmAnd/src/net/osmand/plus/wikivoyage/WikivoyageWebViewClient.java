@@ -80,7 +80,8 @@ public class WikivoyageWebViewClient extends WebViewClient implements RegionCall
 
 	@Override
 	public boolean shouldOverrideUrlLoading(WebView view, String url) {
-		if (url.contains(WIKIVOAYAGE_DOMAIN)) {
+		boolean isWebPage = url.startsWith(PAGE_PREFIX_HTTP) || url.startsWith(PAGE_PREFIX_HTTPS);
+		if (url.contains(WIKIVOAYAGE_DOMAIN) && isWebPage) {
 			String lang = getLang(url);
 			String articleName = getArticleNameFromUrl(url, lang);
 			long articleId = app.getTravelDbHelper().getArticleId(articleName, lang);
@@ -90,11 +91,11 @@ public class WikivoyageWebViewClient extends WebViewClient implements RegionCall
 				warnAboutExternalLoad(url, context, nightMode);
 			}
 			return true;
-		} else if (url.contains(WIKI_DOMAIN)) {
+		} else if (url.contains(WIKI_DOMAIN) && isWebPage) {
 			String lang = getLang(url);
 			String articleName = getArticleNameFromUrl(url, lang);
 			getWikiArticle(articleName, lang, url);
-		} else if (url.startsWith(PAGE_PREFIX_HTTP) || url.startsWith(PAGE_PREFIX_HTTPS)) {
+		} else if (isWebPage) {
 			warnAboutExternalLoad(url, context, nightMode);
 		} else if (url.startsWith(PREFIX_GEO)) {
 			if (article != null) {
