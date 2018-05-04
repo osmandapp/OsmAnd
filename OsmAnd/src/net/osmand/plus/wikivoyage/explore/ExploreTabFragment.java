@@ -94,17 +94,19 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIn
 
 	@Override
 	public void downloadHasFinished() {
-		final OsmandApplication app = getMyApplication();
-		File targetFile = mainIndexItem.getTargetFile(app);
-		if (downloadUpdateCard != null && mainIndexItem != null && targetFile.exists()) {
-			downloadUpdateCard.setLoadingInProgress(false);
-			removeDownloadUpdateCard();
-			TravelDbHelper travelDbHelper = app.getTravelDbHelper();
-			travelDbHelper.initTravelBooks();
-			travelDbHelper.selectTravelBook(targetFile);
-			Fragment parent = getParentFragment();
-			if (parent != null && parent instanceof WikivoyageExploreDialogFragment) {
-				((WikivoyageExploreDialogFragment) parent).populateData();
+		if (mainIndexItem != null) {
+			final OsmandApplication app = getMyApplication();
+			File targetFile = mainIndexItem.getTargetFile(app);
+			if (downloadUpdateCard != null && targetFile.exists()) {
+				downloadUpdateCard.setLoadingInProgress(false);
+				removeDownloadUpdateCard();
+				TravelDbHelper travelDbHelper = app.getTravelDbHelper();
+				travelDbHelper.initTravelBooks();
+				travelDbHelper.selectTravelBook(targetFile);
+				Fragment parent = getParentFragment();
+				if (parent != null && parent instanceof WikivoyageExploreDialogFragment) {
+					((WikivoyageExploreDialogFragment) parent).populateData();
+				}
 			}
 		}
 	}
