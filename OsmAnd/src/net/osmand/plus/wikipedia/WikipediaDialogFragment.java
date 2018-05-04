@@ -35,7 +35,6 @@ import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
-import net.osmand.plus.wikivoyage.WikipediaOptionsBottomSheetDialogFragment;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
