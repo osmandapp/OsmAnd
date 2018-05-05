@@ -2141,7 +2141,7 @@
     <string name="si_min_km">דקות לקילומטר</string>
     <string name="si_min_m">דקות למיל</string>
     <string name="si_nm_h">מיל ימי לשעה (קשר)</string>
-    <string name="nm_h">nmi/שע׳</string>
+    <string name="nm_h">קשר</string>
     <string name="m_s">מ/שנ׳</string>
     <string name="shared_string_trip_recording">הקלטת טיול</string>
     <string name="shared_string_navigation">ניווט</string>
