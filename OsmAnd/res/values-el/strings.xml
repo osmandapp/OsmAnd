@@ -2563,7 +2563,7 @@
     <string name="region_maps">Χάρτες περιφερειών</string>
     <string name="hillshade_layer_disabled">Απενεργοποιημένη στρώση σκίασης ανάγλυφου</string>
     <string name="nm">ναυτικό μίλι</string>
-    <string name="nm_h">ναυτικά μίλια/ώρα</string>
+    <string name="nm_h">κόμβοι</string>
     <string name="favourites_edit_dialog_title">Πληροφορίες αγαπημένων</string>
     <string name="simulate_your_location_stop_descr">Παύση προσομοίωσης της θέσης σας.</string>
     <string name="simulate_your_location_descr">Προσομοίωση της θέσης σας χρησιμοποιώντας υπολογισμένη διαδρομή ή καταγεγραμμένο ίχνος GPX.</string>
