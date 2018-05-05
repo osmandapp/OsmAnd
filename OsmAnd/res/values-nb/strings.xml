@@ -2477,7 +2477,7 @@
     <string name="layer_yandex_traffic">Yandex-trafikk</string>
     <string name="background_service_provider">Stedsbestemmelsestjeneste</string>
     <string name="off_router_service_no_gps_available">Bakgrunnsnavigeringen krever aktivert stedsbestemmelsestjeneste.</string>
-    <string name="opening_hours_not_supported">Åpningstid-format kan ikke endres</string>
+    <string name="opening_hours_not_supported">Åpningstidsformat kan ikke endres</string>
     <string name="update_poi_error_loading">Feil ved innlasting av data fra tjener</string>
     <string name="auth_failed">Identitetsbekreftelse mislyktes</string>
     <string name="error_occurred_saving_gpx">Kunne ikke lagre GPX-spor</string>
