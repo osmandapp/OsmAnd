@@ -1818,7 +1818,7 @@ Lon %2$s</string>
     <string name="si_min_km">Minutos por kilómetro</string>
     <string name="si_min_m">Minutos por milla</string>
     <string name="si_nm_h">Millas náuticas por hora (nudos)</string>
-    <string name="nm_h">nmi/h</string>
+    <string name="nm_h">kn</string>
     <string name="min_mile">min/m</string>
     <string name="min_km">min/km</string>
     <string name="m_s">m/s</string>
