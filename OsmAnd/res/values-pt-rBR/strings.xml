@@ -2591,7 +2591,7 @@ Pôr do Sol: %2$s</string>
     <string name="quick_favorites_name_preset">Nome do preset</string>
     <string name="quick_action_add_marker_descr">Tocar no botão de ação adicionará um marcador de mapa no local do centro da tela.</string>
     <string name="quick_action_add_parking_descr">Tocar no botão de ação adicionará um lugar de estacionamento no local do centro da tela.</string>
-    <string name="release_3_0">\\022 
+    <string name="release_3_0">• 
 \n
 \n</string>
     <string name="route_points_category_name">Converte como visitado nesta rota</string>
@@ -2815,7 +2815,7 @@ Pôr do Sol: %2$s</string>
     <string name="shared_string_explore">Explorar</string>
     <string name="shared_string_contents">Conteúdos</string>
     <string name="index_item_world_wikivoyage">Artigos Wikivoyage mundiais</string>
-    <string name="release_2_9">\\022 Menu de contexto atualizado: Mostra quando o POI abre ou fecha
+    <string name="release_2_9">• Menu de contexto atualizado: Mostra quando o POI abre ou fecha
 \n
 \n • Menu Transporte: todas as rotas disponíveis estão agora no topo
 \n
