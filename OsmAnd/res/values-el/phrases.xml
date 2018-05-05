@@ -837,8 +837,8 @@
 	<string name="poi_denomination_mahayana">Μαχαγιάνα</string>
 
 	<string name="poi_internet_access_wlan">Πρόσβαση διαδικτύου: ασύρματο τοπικό δίκτυο</string>
-	<string name="poi_internet_access_terminal">Πρόσβαση διαδικτύου: τερματικός</string>
-	<string name="poi_internet_access_wired">Πρόσβαση διαδικτύου: ασύρματη</string>
+	<string name="poi_internet_access_terminal">Πρόσβαση διαδικτύου: τερματικό</string>
+	<string name="poi_internet_access_wired">Πρόσβαση διαδικτύου: ενσύρματη</string>
 	<string name="poi_internet_access_public">Πρόσβαση διαδικτύου: δημόσια</string>
 	<string name="poi_internet_access_service">Πρόσβαση διαδικτύου: υπηρεσία</string>
 	<string name="poi_internet_access_yes">Πρόσβαση διαδικτύου: ναι</string>
