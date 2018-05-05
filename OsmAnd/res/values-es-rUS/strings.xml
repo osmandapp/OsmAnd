@@ -78,7 +78,7 @@ Lon %2$s</string>
     <string name="shared_string_help">Ayuda</string>
     <string name="shared_string_settings">Ajustes</string>
     <string name="shared_string_history">Historial</string>
-    <string name="shared_string_select_on_map">Eligir en el mapa</string>
+    <string name="shared_string_select_on_map">Elegir en el mapa</string>
     <string name="shared_string_select_all">Marcar todo</string>
     <string name="shared_string_deselect">Desmarcar</string>
     <string name="shared_string_deselect_all">Desmarcar todo</string>
@@ -414,7 +414,7 @@ Lon %2$s</string>
     <string name="index_name_gb">Europa - Gran Bretaña</string>
     <string name="keep_and_add_destination_point">Añadir como último destino</string>
     <string name="select_gpx">Elegir GPX…</string>
-    <string name="route_descr_select_destination">Eligir destino</string>
+    <string name="route_descr_select_destination">Elegir destino</string>
     <string name="route_preferences">Preferencias de la ruta</string>
     <string name="route_info">Información de la ruta</string>
     <string name="routing_attr_prefer_motorway_name">Preferir autopistas</string>
@@ -719,8 +719,8 @@ Lon %2$s</string>
     <string name="choose_osmand_theme_descr">Elige el aspecto de la aplicación.</string>
     <string name="choose_osmand_theme">Tema</string>
     <string name="accessibility_options">Opciones de accesibilidad</string>
-    <string name="select_address_activity">Eligir dirección</string>
-    <string name="favourites_list_activity">Eligir favorito</string>
+    <string name="select_address_activity">Elegir dirección</string>
+    <string name="favourites_list_activity">Elegir favorito</string>
     <string name="local_openstreetmap_act_title">Cambios OSM</string>
     <string name="layer_hillshade">Capa de sombreado</string>
     <string name="map_widget_gps_info">Información GPS</string>
