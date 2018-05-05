@@ -1258,7 +1258,7 @@
     <string name="osm_live_not_active">לא פעיל</string>
     <string name="osm_live_enter_email">נא להזין כתובת דוא״ל חוקית</string>
     <string name="osm_live_enter_user_name">נא להקליד שם פומבי</string>
-    <string name="osm_live_month_cost_desc">תשלום חודשי.</string>
+    <string name="osm_live_month_cost_desc">תשלום חודשי</string>
     <string name="store_tracks_in_monthly_directories">אחסון המסלולים המוקלטים בתיקיות לפי חודש</string>
     <string name="shared_string_reset">איפוס</string>
     <string name="shared_string_reload">רענון</string>
@@ -2091,7 +2091,8 @@
     <string name="osm_live_hide_user_name">לא להציג את השם שלי בדוחות</string>
     <string name="osm_live_support_region">אזור תמיכה</string>
     <string name="osm_live_month_cost">עלות חודשית</string>
-    <string name="osm_live_thanks">תודה לך על שנרשמת לעדכונים חיים</string>
+    <string name="osm_live_thanks">תודה לך על התמיכה ב־OsmAnd!
+\nכדי להפעיל את כל התכונות החדשות עליך להפעיל את OsmAnd מחדש.</string>
     <string name="osm_live_region_desc">חלק מהתרומות שלך תישלחנה למשתמשי OSM שעורכים שינויים במפה באזור הזה.</string>
     <string name="osm_live_subscription_settings">הגדרות מינוי</string>
     <string name="select_map_marker">בחירת סמן מפה</string>
@@ -3120,6 +3121,10 @@
     <string name="rendering_value_walkingRoutesOSMC_name">צבע לפי סימול הליכת שטח של OSMC</string>
     <string name="osmand_team">צוות OsmAnd</string>
     <string name="empty_state_markers_history">היסטוריה</string>
-    <string name="maps_you_need_descr">קראת את הערכים: %1$s. על סמך הערכים שקראת נוכל להציע לך להוריד את המפות:</string>
+    <string name="maps_you_need_descr">על סמך הערכים ששמרת, נוכל להמליץ לך להוריד את המפות הבאות:</string>
     <string name="maps_you_need">מפות שדרושות לך</string>
+    <string name="shared_string_restart">הפעלה מחדש</string>
+    <string name="purchase_cancelled_dialog_title">ביטלת את המינוי ל־OsmAnd חי</string>
+    <string name="purchase_cancelled_dialog_descr">יש לחדש את המינוי כדי להמשיך להשתמש בכל התכונות הבאות:</string>
+
     </resources>
