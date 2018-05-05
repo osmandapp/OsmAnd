@@ -2299,19 +2299,19 @@
 	<string name="poi_sculptor">Beeldhouwer</string>
 
 	<string name="poi_building_type_church">Type gebouw: kerk</string>
-	<string name="poi_building_type_chapel">Type gebouw: Kapel</string>
+	<string name="poi_building_type_chapel">Type gebouw: kapel</string>
 	<string name="poi_building_type_mosque">Type gebouw: moskee</string>
 	<string name="poi_building_type_temple">Type gebouw: tempel</string>
 	<string name="poi_building_type_cathedral">Type gebouw: kathedraal</string>
 	<string name="poi_building_type_monastery">Type gebouw: klooster</string>
-	<string name="poi_building_type_basilica">Type gebouw: Basiliek</string>
+	<string name="poi_building_type_basilica">Type gebouw: basiliek</string>
 	<string name="poi_building_type_synagogue">Type gebouw: synagoge</string>
 	<string name="poi_building_type_shrine">Type gebouw: schrijn</string>
 
 	<string name="poi_cross">Kruis</string>
 	<string name="poi_summit_cross">Kruis op de top: ja</string>
 
-	<string name="poi_prison_camp">Voormalig gevangeniskamp</string>
+	<string name="poi_prison_camp">Voormalig gevangenenkamp</string>
 	<string name="poi_concentration_camp">Type: concentratiekamp</string>
 	<string name="poi_pow_camp">Type: krijgsgevangenenkamp</string>
 	<string name="poi_labor_camp">Type: werkkamp</string>
@@ -2527,4 +2527,44 @@
 	<string name="poi_surface_sett">Oppervlak: kasseien</string>
 	<string name="poi_animal_shelter_horse">"Paarden "</string>
 	<string name="poi_animal_shelter_mammal">Zoogdieren</string>
+	<string name="poi_historic_stone">Historische steen</string>
+	<string name="poi_stone_type_conciliation_cross">Type: moordkruis</string>
+	<string name="poi_stone_type_coat_of_arms">Type: wapen</string>
+
+	<string name="poi_material_wood">Materiaal: hout</string>
+	<string name="poi_material_metal">Materiaal: metaal</string>
+	<string name="poi_material_reinforced_concrete">Materiaal: gewapend beton</string>
+	<string name="poi_material_concrete">Materiaal: beton</string>
+	<string name="poi_material_steel">Materiaal: staal</string>
+	<string name="poi_material_stone">Materiaal: steen</string>
+	<string name="poi_material_masonry">Materiaal: metselwerk</string>
+	<string name="poi_material_brick">Materiaal: baksteen</string>
+	<string name="poi_material_plastic">Materiaal: kunststof</string>
+	<string name="poi_material_sandstone">Materiaal: zandsteen</string>
+	<string name="poi_material_granite_stone">Materiaal: graniet</string>
+	<string name="poi_material_metal_wood">Materiaal: metaal;hout</string>
+	<string name="poi_material_glass">Materiaal: glas</string>
+	<string name="poi_material_bronze">Materiaal: brons</string>
+	<string name="poi_material_earth">Materiaal: aarde</string>
+	<string name="poi_material_composite">Materiaal: composiet</string>
+	<string name="poi_material_limestone">Materiaal: kalksteen</string>
+	<string name="poi_material_marble">Materiaal: marmer</string>
+	<string name="poi_material_aluminium">Materiaal: aluminium</string>
+
+	<string name="poi_site_type_megalith">Megaliet</string>
+	<string name="poi_site_type_tumulus">Grafheuvel</string>
+	<string name="poi_site_type_fortification">Fortificatie</string>
+	<string name="poi_site_type_settlement">Nederzetting</string>
+	<string name="poi_site_type_city">Stad</string>
+	<string name="poi_site_type_hut_circle">Huttencirkel</string>
+	<string name="poi_site_type_necropolis">Necropolis</string>
+	<string name="poi_site_type_petroglyph">Petroglief</string>
+	<string name="poi_site_type_earthwork">Grondwerk</string>
+	<string name="poi_megalith_type_menhir">Soort megaliet: menhir</string>
+	<string name="poi_megalith_type_dolmen">Soort megaliet: hunebed</string>
+	<string name="poi_megalith_type_nuraghe">Soort megaliet: nuraghe</string>
+	<string name="poi_megalith_type_stone_circle">Soort megaliet: steencirkel</string>
+	<string name="poi_megalith_type_passage_grave">Soort megaliet: ganggraf</string>
+	<string name="poi_concentration_camp_gulag">Type: Goelag</string>
+
 	</resources>
