@@ -3108,4 +3108,20 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="wikipedia_offline">"Wikipedia offline "</string>
     <string name="unlock_all_features">Sblocca tutte le funzioni di OsmAnd</string>
 
+    <string name="show_images">Mostra immagini</string>
+    <string name="purchase_cancelled_dialog_title">Hai cancellato la sottoscrizione a OsmAnd Live</string>
+    <string name="purchase_cancelled_dialog_descr">Rinnova la sottoscrizione per continuare a usare tutte le funzionalità:</string>
+
+    <string name="maps_you_need_descr">In base agli articoli che hai salvato, ti raccomandiamo di scaricare le seguenti mappe:</string>
+    <string name="maps_you_need">Mappe di cui necessiti</string>
+    <string name="osmand_team">Team OsmAnd</string>
+    <string name="travel_card_update_descr">Nuovi dati Wikivoyage disponibili, aggiorna per utilizzarli.</string>
+	<string name="travel_guide_description">Guide dei luoghi più interessanti del pianeta, integrata in OsmAnd, senza connessione a Internet.</string>
+    <string name="contour_lines_hillshade_maps">Mappe Isoipse e Ombreggiamento dei rilievi.</string>
+    <string name="purchase_dialog_title">Scegli il piano</string>
+    <string name="purchase_dialog_travel_description">Acquista uno dei seguenti articoli di viaggio da leggere offline:</string>
+    <string name="purchase_dialog_subtitle">Scegli uno degli oggetti disponibili:</string>
+    <string name="wikivoyage_download_pics_descr">Immagini dagli articoli possono essere per l\'uso offline.
+\n Puoi sempre modificare le impostazioni in \'Esplora\' → \'Opzioni\'.</string>
+    <string name="delete_search_history">Cancella la cronologia di ricerca</string>
     </resources>
