@@ -1818,7 +1818,7 @@ Lon %2$s</string>
     <string name="si_min_km">Minutos por kilómetro</string>
     <string name="si_min_m">Minutos por milla</string>
     <string name="si_nm_h">Millas náuticas por hora (nudos)</string>
-    <string name="nm_h">nmi/h</string>
+    <string name="nm_h">kn</string>
     <string name="min_mile">min/m</string>
     <string name="min_km">min/km</string>
     <string name="m_s">m/s</string>
@@ -2059,12 +2059,13 @@ Lon %2$s</string>
     <string name="osm_live_hide_user_name">Ocultar mi nombre en los informes</string>
     <string name="osm_live_support_region">Región soportada</string>
     <string name="osm_live_month_cost">Coste mensual</string>
-    <string name="osm_live_month_cost_desc">Pago mensual.</string>
+    <string name="osm_live_month_cost_desc">Pago mensual</string>
     <string name="osm_live_active">Activo</string>
     <string name="osm_live_not_active">Inactivo</string>
     <string name="osm_live_enter_email">Ingresa un correo electrónico válido</string>
     <string name="osm_live_enter_user_name">Ingresa un nombre público</string>
-    <string name="osm_live_thanks">Gracias por suscribirte a las actualizaciones en vivo</string>
+    <string name="osm_live_thanks">¡Gracias por apoyar a OsmAnd!
+\nPara activar todas las nuevas características debes reiniciar OsmAnd.</string>
     <string name="osm_live_region_desc">Parte de tu donación se enviará a los usuarios de OSM que realicen cambios en el mapa de esa región.</string>
     <string name="osm_live_subscription_settings">Ajustes de suscripción</string>
     <string name="osm_live_ask_for_purchase">Primero compra una suscripción a OsmAnd Live</string>
@@ -3038,6 +3039,10 @@ Lon %2$s</string>
     <string name="paid_app">Aplicación de pago</string>
     <string name="paid_plugin">Complemento de pago</string>
     <string name="osmand_team">Equipo de OsmAnd</string>
-    <string name="maps_you_need_descr">Lees artículos: %1$s. En base a esto, le sugerimos que descargue estos mapas:</string>
+    <string name="maps_you_need_descr">Basado en los artículos guardados, recomendamos que descargue los siguientes mapas:</string>
     <string name="maps_you_need">Mapas que necesitas</string>
+    <string name="shared_string_restart">Reiniciar</string>
+    <string name="purchase_cancelled_dialog_title">Has cancelado la suscripción de OsmAnd Live</string>
+    <string name="purchase_cancelled_dialog_descr">Renueva la suscripción para continuar usando todas las funciones:</string>
+
     </resources>
