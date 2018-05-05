@@ -3845,4 +3845,6 @@
 	<string name="poi_glacier_ele_bottom">Tiefster Punkt</string>
 	<string name="poi_glacier_slope">Durchschnittliche Steigung</string>
 
-</resources>
+<string name="poi_glacier_type_hanging">Hängt</string>
+	<string name="poi_glacier_type_remnant">Überrest</string>
+	</resources>
