@@ -2694,26 +2694,26 @@ Pôr do Sol: %2$s</string>
     <string name="osmand_plus_extended_description_part6">Recursos de ciclismo e pedestre • Visualização de caminhos a pé, pistas de caminhadas e ciclovias, ideal para atividades ao ar livre • Roteamento e modos de exibição especiais para bicicleta e pedestres • Paradas de transporte público opcionais (ônibus, troleibus, trem) incluindo nomes de linhas • Gravação opcional de viagem para arquivo GPX local ou serviço on-line • Exibição opcional de velocidade e altitudes • Exibição de curvas de nível e sombreamento de relevo (via plugin adicional)</string>
     <string name="shared_string_without_name">Sem nome</string>
     <string name="empty_state_markers_history">\@string/shared_string_history</string>
-    <string name="release_2_6">\\022 Novo recurso: Botão de ação rápida
-\n
-\n • Resposta a gesto de toque de tela melhorada (por exemplo, deslocamento de tela e zoom simultâneos)
-\n
-\n • Novas fontes de mapas cobrindo mais localidades
-\n
-\n • Suporte TTS para variantes de idiomas regionais (e sotaques)
-\n
-\n • Melhorias de visibilidade em vários estilos de mapas e Wikipédia
-\n
-\n • Suporte ao Open Location Code (OLC)
-\n
-\n • Exibe elevação, inclinação e perfil de velocidade para trilhas GPX gravadas e rotas calculadas
-\n
-\n • Definição de \"estilo de condução\" e melhorias de lógica em roteamento de bicicleta
-\n
-\n • Configurações para usar dados de altitude em roteamento de bicicleta
-\n
-\n • Várias outras melhorias e correções de bugs
-\n
+    <string name="release_2_6">\\u0020\\u2022 Novo recurso: Botão de ação rápida 
+\n 
+\n • Resposta a gesto de toque de tela melhorada (por exemplo, deslocamento de tela e zoom simultâneos) 
+\n 
+\n • Novas fontes de mapas cobrindo mais localidades 
+\n 
+\n • Suporte TTS para variantes de idiomas regionais (e sotaques) 
+\n 
+\n • Melhorias de visibilidade em vários estilos de mapas e Wikipédia 
+\n 
+\n • Suporte ao Open Location Code (OLC) 
+\n 
+\n • Exibe elevação, inclinação e perfil de velocidade para trilhas GPX gravadas e rotas calculadas 
+\n 
+\n • Definição de \"estilo de condução\" e melhorias de lógica em roteamento de bicicleta 
+\n 
+\n • Configurações para usar dados de altitude em roteamento de bicicleta 
+\n 
+\n • Várias outras melhorias e correções de bugs 
+\n 
 \n e muito mais…</string>
     <string name="osmand_plus_extended_description_part8">Cobertura de mapa e qualidade aproximada: • Europa Ocidental: **** • Europa Oriental: *** • Rússia: *** • América do Norte: *** • América do Sul: ** • Ásia: ** • Japão e Coreia: *** • Oriente Médio: ** • África: ** • Antártica: * A maioria dos países ao redor do globo disponível como downloads! Do Afeganistão ao Zimbabué, da Austrália aos Estados Unidos. Argentina, Brasil, Canadá, França, Alemanha, México, Reino Unido, Espanha,…</string>
     <string name="release_2_5">\\022 Ícones de toque sobre a mapa
@@ -2880,4 +2880,24 @@ Pôr do Sol: %2$s</string>
     <string name="shared_string_dont">Não</string>
     <string name="shared_string_do">Sim</string>
     <string name="shared_string_only_with_wifi">Só com Wi-Fi</string>
+    <string name="shared_string_restart">Reiniciar</string>
+    <string name="purchase_cancelled_dialog_descr">Renove a assinatura para continuar a usar todos os recursos:</string>
+
+    <string name="maps_you_need_descr">Baseado nos artigos que você salvou, recomendamos você baixar os seguintes mapas:</string>
+    <string name="maps_you_need">Mapas que você precisa</string>
+    <string name="travel_card_download_descr">Baixe estes guias de viagem Wikivoyage para ver os artigos sobre lugares ao redor do mundo sem uma conexão à Internet.</string>
+	<string name="welcome_to_open_beta_description">Travel baseia-se no Wikivoyage. Teste todos os recursos durante o teste beta aberto, de graça. Depois, Travel estará disponível para assinantes OsmAnd Unlimited e proprietários de OsmAnd+.</string>
+    <string name="release_2_3">• OSM Live. Apoie colaboradores do mapa desenvolvedores e obtenha atualizações de mapa a cada hora. 
+\n
+\n • Marcadores de mapa. Uma nova maneira de selecionar rapidamente lugares no mapa.
+\n
+\n • Mapas OSM mais detalhados com símbolo rodoviário específico do país e muitos novos recursos de mapa.
+\n
+\n • Melhor aparência da preparação de rota. 
+\n
+\n • Muitas melhorias no menu de contexto do mapa tais como pesquisa de endereços contextual.
+\n
+\n e muito mais…</string>
+    <string name="download_wikipedia_description">Baixe artigos da Wikipédia por %1$s para lê-los offline.</string>
+    <string name="wiki_article_search_text">Procurando o artigo wiki necessário</string>
     </resources>
