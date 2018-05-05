@@ -354,7 +354,7 @@
 	<string name="user_password">Κωδικός OSM</string>
 	
 	<string name="osmand_service">Κατάσταση παρασκηνίου</string>
-	<string name="osmand_service_descr">Το OsmAnd εξακολουθεί να εκτελείται στο παρασκήνιο ενώ η οθόνη είναι σβηστή.</string>
+	<string name="osmand_service_descr">Το OsmAnd εκτελείται στο παρασκήνιο με την οθόνη σβηστή.</string>
 	
 	
 	
@@ -486,7 +486,7 @@
 	<string name="voice_stream_voice_call">Ήχος κλήσης τηλεφώνου (επίσης για διακοπή στερεοφωνικών αυτοκινήτου μπλουτούθ)</string>
 	<string name="voice_stream_notification">Ήχος ειδοποίησης</string>
 	<string name="voice_stream_music">Ήχος πολυμέσων/μουσικής</string>
-	<string name="warning_tile_layer_not_downloadable">Η εφαρμογή δεν μπορεί να κάνει λήψη της στρώσης χάρτη %1$s, παρακαλούμε προσπαθήστε να το εγκαταστήσετε ξανά.</string>
+	<string name="warning_tile_layer_not_downloadable">Η εφαρμογή δεν μπορεί να κατεβάσει τη στρώση χάρτη %1$s, η επανεγκατάστασή της μπορεί να βοηθήσει.</string>
 	<string name="overlay_transparency_descr">Τροποποίηση διαφάνειας επικάλυψης.</string>
 	<string name="overlay_transparency">Διαφάνεια επικάλυψης</string>
 	<string name="map_transparency_descr">Τροποποίηση διαφάνειας βασικού χάρτη.</string>
@@ -502,16 +502,16 @@
 	<string name="internet_not_available">Αδυναμία εκτέλεσης λειτουργίας χωρίς διαδικτυακή σύνδεση.</string>
 	<string name="install_more">Εγκατάσταση περισσότερων…</string>
 	<string name="level_to_switch_vector_raster_descr">Χρήση χαρτών εικονογραφίας για ο,τιδήποτε κάτω από αυτό το επίπεδο.</string>
-	<string name="level_to_switch_vector_raster">Ελαχ. κλιμ. διανυσματικών</string>
+	<string name="level_to_switch_vector_raster">Ελάχιστο επίπεδο εστίασης διανύσματος</string>
 	
 	
 	
 	
-	<string name="error_doing_search">Προέκυψε σφάλμα κατά την αναζήτηση χωρίς σύνδεση.</string>
+	<string name="error_doing_search">Αδυναμία εκτέλεσης αναζήτησης χωρίς σύνδεση.</string>
 	<string name="search_offline_geo_error">Αδυναμία ανάλυσης της γεωγρ πρόθεσης \'%s\'.</string>
-	<string name="search_osm_offline">Αναζήτηση γεωγραφικής τοποθεσίας</string>
+	<string name="search_osm_offline">Αναζήτηση κατά γεωγραφική τοποθεσία</string>
 	<string name="system_locale">Σύστημα</string>
-	<string name="preferred_locale_descr">Επιλέξτε γλώσσα εμφάνισης (επανεκκινήστε τον OsmAnd μετά την αλλαγή).</string>
+	<string name="preferred_locale_descr">Επιλέξτε γλώσσα εμφάνισης (λαμβάνει χώρα όταν επανεκκινεί το OsmAnd).</string>
 	<string name="preferred_locale">Γλώσσα εμφάνισης</string>
 	
 	
@@ -527,7 +527,7 @@
 	
 	<string name="shared_string_next">Επόμενο</string>
 	<string name="shared_string_previous">Προηγούμενο</string>
-	<string name="unit_of_length_descr">Αλλαγή μονάδων μήκους.</string>
+	<string name="unit_of_length_descr">Αλλαγή απόστασης που μετριέται.</string>
 	<string name="unit_of_length">Μονάδες μήκους</string>
 	<string name="si_mi_feet">Μίλια/πόδια</string>
 	<string name="si_mi_yard">Μίλια/γιάρδες</string>
@@ -618,10 +618,10 @@
 	<string name="maps_could_not_be_downloaded">Αυτός ο χάρτης δεν μπορεί να ληφθεί</string>
 	<string name="continuous_rendering">Συνεχής απεικόνιση</string>
 	<string name="continuous_rendering_descr">Εμφάνιση συνεχούς απεικόνισης αντί για εικόνα με τη μία.</string>
-	<string name="rendering_exception">Προέκυψε σφάλμα κατά την απεικόνιση της επιλεγμένης περιοχής</string>
+	<string name="rendering_exception">Αδυναμία σχεδίασης της επιλεγμένης περιοχής</string>
 	<string name="show_point_options">Χρήση τοποθεσίας …</string>
 	<string name="renderer_load_sucess">Ο απεικονιστής φορτώθηκε</string>
-	<string name="renderer_load_exception">Παρουσιάστηκε εξαίρεση: ο απεικονιστής δεν φορτώθηκε</string>
+	<string name="renderer_load_exception">Αδυναμία φόρτωσης απεικονιστή</string>
 	<string name="renderers">Απεικονιστής διανυσμάτων</string>
 	<string name="renderers_descr">Επιλέξτε εμφάνιση απεικόνισης.</string>
 	<string name="poi_context_menu_website">Εμφάνιση ιστοσελίδας ΣΕ</string>
@@ -643,7 +643,7 @@
 	
 	<string name="gpx_files_not_found">Δεν βρέθηκαν αρχεία GPX στον κατάλογο ιχνών</string>
 	<string name="layer_gpx_layer">Ίχνος GPX…</string>
-	<string name="error_reading_gpx">Σφάλμα ανάγνωσης δεδομένων GPX</string>
+	<string name="error_reading_gpx">Αδυναμία ανάγνωσης δεδομένων GPX</string>
 	<string name="vector_data">Διανυσματικοί χάρτες χωρίς σύνδεση</string>
 	<string name="transport_context_menu">Αναζήτηση μέσου μεταφοράς στη στάση</string>
 	
@@ -652,7 +652,7 @@
 	<string name="poi_context_menu_delete">Διαγραφή ΣΕ</string>
 	<string name="rotate_map_compass_opt">Κατεύθυνση πυξίδας</string>
 	<string name="rotate_map_bearing_opt">Κατεύθυνση κίνησης</string>
-	<string name="rotate_map_none_opt">Χωρίς περιστροφή (ο βορράς πάντα επάνω)</string>
+	<string name="rotate_map_none_opt">Χωρίς περιστροφή (ο βορράς πάντα προς τα πάνω)</string>
 	<string name="rotate_map_to_bearing_descr">Επιλέξτε τη στοίχιση οθόνης χάρτη.</string>
 	<string name="rotate_map_to_bearing">Προσανατολισμός χάρτη</string>
 	<string name="show_route">Λεπτομέρειες διαδρομής</string>
@@ -660,9 +660,9 @@
 	<string name="fav_file_to_load_not_found">Δεν βρέθηκε αρχείο GPX που να περιέχει αγαπημένα στο {0}</string>
 	<string name="fav_saved_sucessfully">Τα αγαπημένα αποθηκεύτηκαν στο {0}</string>
 	<string name="no_fav_to_save">Δεν υπάρχουν αγαπημένα σημεία προς αποθήκευση</string>
-	<string name="error_occurred_loading_gpx">Σφάλμα κατά τη φόρτωση GPX</string>
+	<string name="error_occurred_loading_gpx">Αδυναμία φόρτωσης του GPX</string>
 	<string name="send_report">Αποστολή αναφοράς</string>
-	<string name="none_region_found">Δεν υπάρχουν δεδομένα περιοχών χωρίς σύνδεση στην κάρτα μνήμης. Λήψη περιοχών από το διαδίκτυο.</string>
+	<string name="none_region_found">Αδυναμία εύρεσης κατεβασμένων χαρτών στην κάρτα μνήμης.</string>
 	<string name="poi_namefinder_query_empty">Πληκτρολογήστε για να βρείτε ΣΕ</string>
 	<string name="any_poi">Οποιοδήποτε</string>
 	
@@ -678,7 +678,7 @@
 	
 	<string name="use_trackball_descr">Χρήση ιχνόσφαιρας για μετακίνηση του χάρτη.</string>
 	<string name="use_trackball">Χρήση του trackball</string>
-	<string name="background_service_wait_int_descr">Ορίστε τον μέγιστο χρόνο αναμονής για κάθε διόρθωση θέσης παρασκηνίου.</string>
+	<string name="background_service_wait_int_descr">Ορίστε τον μέγιστο επιτρεπόμενο χρόνο αναμονής για κάθε διόρθωση θέσης παρασκηνίου.</string>
 	<string name="background_service_wait_int">Μέγιστη αναμονή για εύρεση</string>
 	
 	<string name="where_am_i">Πού είμαι;</string>
@@ -689,9 +689,9 @@
 	<string name="int_min">λεπτ.</string>
 	<string name="background_service_int_descr">Ορισμός διαστήματος αφύπνισης χρησιμοποιούμενο από την υπηρεσία παρασκηνίου.</string>
 	<string name="background_service_int">Διάστημα αφύπνισης GPS</string>
-	<string name="background_service_provider_descr">Επιλέξτε παροχέα τοποθεσίας που χρησιμοποιείται από την υπηρεσία παρασκηνίου.</string>
+	<string name="background_service_provider_descr">Επιλέξτε μέθοδο τοποθεσίας που χρησιμοποιείται από την υπηρεσία παρασκηνίου.</string>
 	<string name="background_service_provider">Πάροχος τοποθεσίας</string>
-	<string name="background_router_service_descr">Εκτελεί το OsmAnd στο παρασκήνιο για να παρακολουθείτε τη θέση σας, ενώ η οθόνη είναι απενεργοποιημένη.</string>
+	<string name="background_router_service_descr">Εντοπίζει τη θέση σας, ενώ η οθόνη είναι σβηστή.</string>
 	<string name="background_router_service">Εκτέλεση OsmAnd στο παρασκήνιο</string>
 	<string name="off_router_service_no_gps_available">Η υπηρεσία πλοήγησης παρασκηνίου απαιτεί έναν πάροχο τοποθεσίας που να είναι ενεργοποιημένος.</string>
 	<string name="hide_poi_filter">Απόκρυψη φίλτρου</string>
@@ -708,8 +708,8 @@
 	
 	<string name="sd_unmounted">Η κάρτα μνήμης δεν είναι προσβάσιμη.
 \nΔεν μπορείτε να δείτε χάρτες ή να αναζητήσετε διάφορα.</string>
-	<string name="sd_mounted_ro">Η κάρτα μνήμης είναι μόνο για ανάγνωση.
-\nΜπορείτε μόνο να δείτε τον προφορτωμένο χάρτη αλλά δεν μπορείτε να τον κατεβάσετε από το διαδίκτυο.</string>
+	<string name="sd_mounted_ro">Η κάρτα μνήμης είναι μόνο για ανάγνωση. 
+\nΜπορείτε μόνο να δείτε τον προφορτωμένο χάρτη, αλλά όχι να κατεβάσετε νέες περιοχές.</string>
 	<string name="unzipping_file">Αποσυμπίεση αρχείου…</string>
 	<string name="route_tr">Στρίψτε δεξιά και προχωρήστε</string>
 	<string name="route_tshr">Στρίψτε κλειστά δεξιά και προχωρήστε</string>
@@ -721,7 +721,7 @@
 	<string name="route_head">Προχωρήστε</string>
 	<string name="first_time_continue">Αργότερα</string>
 	<string name="first_time_download">Λήψη περιοχών</string>
-	<string name="search_poi_location">Αναζήτηση σήματος…</string>
+	<string name="search_poi_location">Αναμονή σήματος…</string>
 	<string name="search_near_map">Αναζήτηση κοντά στο τρέχον κέντρο του χάρτη</string>
 	<string name="search_nearby">Αναζήτηση στη γύρω περιοχή</string>
 	<string name="map_orientation_default">Το ίδιο με τη συσκευή</string>
@@ -729,7 +729,7 @@
 	<string name="map_orientation_landscape">Τοπίο</string>
 	<string name="map_screen_orientation">Προσανατολισμός οθόνης</string>
 	<string name="map_screen_orientation_descr">Πορτρέτο, τοπίο, ή συσκευή.</string>
-	<string name="opening_hours_not_supported">Η μορφή των ωρών λειτουργίας δεν υποστηρίζεται για επεξεργασία</string>
+	<string name="opening_hours_not_supported">Η μορφή των ωρών λειτουργίας δεν μπορεί να αλλαχθεί</string>
 	<string name="add_new_rule">Προσθήκη νέου κανόνα</string>
 	<string name="transport_Routes">Δρομολόγια</string>
 	<string name="transport_Stop">Στάση</string>
@@ -748,10 +748,10 @@
 	<string name="show_transport_over_map">Εμφάνιση στάσεων ΜΜΜ</string>
 	<string name="hello">Εφαρμογή πλοήγησης OsmAnd</string>
 	<string name="update_poi_success">Τα δεδομένα ΣΕ ενημερώθηκαν ({0} είχαν φορτωθεί)</string>
-	<string name="update_poi_error_local">Σφάλμα ενημέρωσης τοπικής λίστας Σημ Ενδ</string>
-	<string name="update_poi_error_loading">Σφάλμα φόρτωσης δεδομένων από τον εξυπηρετητή</string>
+	<string name="update_poi_error_local">Αδυναμία ενημέρωσης τοπικής λίστας ΣΕ</string>
+	<string name="update_poi_error_loading">Αδυναμία φόρτωσης δεδομένων από τον διακομιστή</string>
 	<string name="update_poi_no_offline_poi_index">Δεν υπάρχουν διαθέσιμα δεδομένα ΣΕ για αυτή την περιοχή</string>
-	<string name="update_poi_is_not_available_for_zoom">Η ενημέρωση των ΣΕ δεν είναι διαθέσιμη για μικρές κλίμακες εστίασης</string>
+	<string name="update_poi_is_not_available_for_zoom">Με εστίαση μπορείτε να ενημερώσετε τα ΣΕ</string>
 	<string name="context_menu_item_update_poi">Ενημέρωση ΣΕ</string>
 	<string name="context_menu_item_update_map_confirm">Ενημέρωση τοπικών δεδομένων μέσω διαδικτύου;</string>
 	<string name="search_history_city">Πόλη: {0}</string>
@@ -778,7 +778,7 @@
 	<string name="download_question_exist">Δεδομένα χωρίς σύνδεση για {0} υπάρχουν ήδη ({1}). Να ενημερωθούν ({2}) ?</string>
 	<string name="address">Διεύθυνση</string>
 	<string name="downloading_list_indexes">Λήψη λίστας διαθέσιμων περιοχών…</string>
-	<string name="list_index_files_was_not_loaded">Ο κατάλογος των περιοχών δεν έχει ανακτηθεί από το https://osmand.net.</string>
+	<string name="list_index_files_was_not_loaded">Αδυναμία προσκόμισης καταλόγου περιοχών από το https://osmand.net.</string>
 	
 	<string name="fav_points_edited">Το αγαπημένο σημείο έχει επεξεργαστεί</string>
 	<string name="fav_points_not_exist">Δεν υπάρχουν αγαπημένα σημεία</string>
@@ -795,17 +795,17 @@
 	<string name="loading_poi_obj">Φόρτωση ΣΕ…</string>
 	<string name="auth_failed">Αποτυχία εξουσιοδότησης</string>
 	<string name="failed_op">απέτυχε</string>
-	<string name="converting_names">Μετατροπή εγγενών/Αγγλικών ονομάτων…</string>
+	<string name="converting_names">Μετατροπή τοπικών/αγγλικών ονομάτων…</string>
 	<string name="loading_streets_buildings">Φόρτωση δρόμων/κτηρίων…</string>
 	<string name="loading_postcodes">Φόρτωση ταχυδρομικών κωδικών…</string>
 	<string name="loading_streets">Φόρτωση δρόμων…</string>
 	<string name="loading_cities">Φόρτωση πόλεων…</string>
 	
 	<string name="poi">Σημ Ενδ</string>
-	<string name="error_occurred_saving_gpx">Σφάλμα κατά την αποθήκευση του GPX</string>
-	<string name="error_calculating_route">Σφάλμα υπολογισμού διαδρομής</string>
-	<string name="error_calculating_route_occured">Προέκυψε σφάλμα κατά τον υπολογισμό διαδρομής</string>
-	<string name="empty_route_calculated">Σφάλμα: Η υπολογισμένη διαδρομή είναι κενή</string>					
+	<string name="error_occurred_saving_gpx">Αδυναμία αποθήκευσης του ίχνους GPX</string>
+	<string name="error_calculating_route">Αδυναμία υπολογισμού διαδρομής</string>
+	<string name="error_calculating_route_occured">Αδυναμία υπολογισμού διαδρομής</string>
+	<string name="empty_route_calculated">Η υπολογισμένη διαδρομή είναι κενή</string>					
 	<string name="new_route_calculated_dist">Υπολογίστηκε νέα διαδρομή, απόσταση</string>
 	<string name="arrived_at_destination">Φτάσατε στον προορισμό σας</string>
 	<string name="invalid_locations">Άκυρες συντεταγμένες</string>
@@ -930,7 +930,7 @@
 	<string name="poi_action_add">προσθήκη</string>
 	<string name="poi_action_change">αλλαγή</string>
 	<string name="poi_action_succeded_template">Η ενέργεια {0} ολοκληρώθηκε.</string>
-	<string name="poi_error_unexpected_template">Αναπάντεχο σφάλμα κατά την εκτέλεση της ενέργειας {0}.</string>
+	<string name="poi_error_unexpected_template">Αδυναμία εκτέλεσης της ενέργειας {0}.</string>
 	<string name="poi_error_io_error_template">Σφάλμα εισόδου/εξόδου κατά την εκτέλεση της δράσης {0}.</string>
 	<string name="poi_error_info_not_loaded">Δεν φορτώθηκαν πληροφορίες σχετικά με τον κόμβο</string>
 	<string name="poi_dialog_opening_hours">Άνοιγμα</string>
@@ -3025,16 +3025,16 @@
     <string name="quick_action_add_create_items">Δημιουργία στοιχείων</string>
     <string name="quick_action_add_configure_map">Διαμόρφωση χάρτη</string>
     <string name="quick_action_add_navigation">Πλοήγηση</string>
-    <string name="quick_action_fav_name_descr">Αφήστε το κενό για αυτόματη χρήση της διεύθυνσης ή του ονόματος μέρους.</string>
+    <string name="quick_action_fav_name_descr">Αφήστε κενό για χρήση της διεύθυνσης ή του ονόματος μέρους.</string>
     <string name="quick_action_bug_descr">Αυτό το μήνυμα περιλαμβάνεται στο πεδίο σχολίων.</string>
     <string name="quick_action_bug_message">Μήνυμα</string>
     <string name="quick_action_category_descr">Επιλογή κατηγορίας αποθήκευσης αγαπημένου.</string>
     <string name="quick_action_gpx_category_descr">Επιλογή προαιρετικής κατηγορίας.</string>
     <string name="quick_action_poi_list">Κατάλογος ΣΕ</string>
-    <string name="quick_action_sh_poi_descr">Μπορείτε να προσθέσετε μία ή περισσότερες κατηγορίες ΣΕ που θα εμφανίζονται στον χάρτη.</string>
+    <string name="quick_action_sh_poi_descr">Προσθέσετε μία ή περισσότερες κατηγορίες ΣΕ που θα εμφανίζονται στον χάρτη.</string>
     <string name="quick_action_page_list_descr">"Το  πάτημα αυτού του πλήκτρου ενέργειας σελιδοποιεί τον παρακάτω κατάλογο."</string>
     <string name="quick_action_map_style_action">Προσθήκη μορφής χάρτη</string>
-    <string name="quick_action_empty_param_error">Οι παράμετροι δεν πρέπει να είναι κενοί</string>
+    <string name="quick_action_empty_param_error">Συμπληρώστε όλες τις παραμέτρους</string>
     <string name="quick_action_map_styles">Μορφές χάρτη</string>
     <string name="quick_action_map_overlay">Αλλαγή επιστρώματος χάρτη</string>
     <string name="quick_action_map_overlay_title">Επιστρώματα χάρτη</string>
@@ -3063,7 +3063,7 @@
     <string name="empty_state_my_tracks">Προσθήκη και καταγραφή ιχνών</string>
     <string name="empty_state_my_tracks_desc">Καταγραφή ή εισαγωγή ιχνών για προβολή.</string>
     <string name="empty_state_favourites">Προσθήκη αγαπημένων</string>
-    <string name="empty_state_favourites_desc">Προσθήκη αγαπημένων στον χάρτη και εισαγωγή τους από αρχείο.</string>
+    <string name="empty_state_favourites_desc">Εισαγωγή ή σημείωση αγαπημένων στον χάρτη.</string>
     <string name="import_track">Εισαγωγή ίχνους</string>
     <string name="import_track_desc">Το αρχείο %1$s δεν περιέχει σημεία διαδρομής, να εισαχθεί ως ίχνος;</string>
     <string name="move_point">Μετακίνηση σημείου</string>
@@ -3075,7 +3075,7 @@
     <string name="touring_view_renderer">Προβολή περιήγησης (αντίθεση και λεπτομέρειες)</string>
     <string name="nautical_renderer">Ναυτικός</string>
     <string name="copy_location_name">Αντιγραφή ονόματος σημείου/ΣΕ</string>
-    <string name="toast_empty_name_error">Η τοποθεσία δεν έχει όνομα</string>
+    <string name="toast_empty_name_error">Ανώνυμη τοποθεσία</string>
     <string name="tunnel_warning">Προσέγγιση σήραγγας</string>
     <string name="show_tunnels">Σήραγγες</string>
 <string name="purchase_dialog_title">Επιλογή σχεδίου</string>
@@ -3115,7 +3115,7 @@
     <string name="download_wikipedia_description">Λήψη των άρθρων της βικιπαίδειας για %1$s για να τα διαβάσετε χωρίς σύνδεση.</string>
     <string name="download_wikipedia_label">Λήψη δεδομένων βικιπαίδειας</string>
     <string name="open_in_browser_wiki">Άνοιγμα άρθρου διαδικτυακά</string>
-    <string name="open_in_browser_wiki_description">Προβολή αυτού του άρθρου σε πλοηγητή.</string>
+    <string name="open_in_browser_wiki_description">Προβολή άρθρου σε πλοηγητή.</string>
     <string name="download_wiki_region_placeholder">αυτής της περιοχής</string>
     <string name="wiki_article_search_text">Αναζήτηση για το απαραίτητο άρθρο βίκι</string>
     <string name="wiki_article_not_found">Δεν βρέθηκε το άρθρο</string>
