@@ -257,7 +257,7 @@
     <string name="si_min_km">Minutoj en kilometro</string>
     <string name="si_min_m">Minutoj en mejlo</string>
     <string name="si_nm_h">Marmejloj en horo (nodoj)</string>
-    <string name="nm_h">nodoj</string>
+    <string name="nm_h">kn</string>
     <string name="min_mile">min/m</string>
     <string name="min_km">min/km</string>
     <string name="shared_string_trip_recording">Registrado de kurso</string>
