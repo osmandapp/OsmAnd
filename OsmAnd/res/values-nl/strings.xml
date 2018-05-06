@@ -1626,7 +1626,7 @@ Wil je een nieuwe map maken op de toegestane locatie en de OsmAnd-bestanden daar
 	
 	<string name="coordinates">Coördinaten</string>
 	<string name="map_update">Updates beschikbaar voor %1$s kaart(en)</string>
-	<string name="everything_up_to_date">Alle bestanden zijn up-to-date</string>
+	<string name="everything_up_to_date">Alle bestanden zijn bijgewerkt</string>
     <string name="use_opengl_render">Gebruik OpenGL</string>
     <string name="use_opengl_render_descr">Gebruik snelle, hardware-gebaseerde OpenGL weergave (werkt niet op alle apparaten)</string>
     <string name="error_avoid_specific_road">Er is geen alternatieve weg gevonden</string>
@@ -2744,17 +2744,17 @@ We slaan geen locatiegegevens, zoektermen of andere gebruikersgegevens op.</stri
 \n • Afrika: ** 
 \n • Antarctica: * 
 \n Voor bijna elk land ter wereld kunt u de kaart downloaden.</string>
-    <string name="osmand_plus_extended_description_part8">Indicatie van compleetheid en kwaliteit van de kaart:
-\n • West-Europa: ****
-\n • Oost-Europa: ***
-\n • Rusland: ***
-\n • Noord-Amerika: ***
-\n • Zuid-Amerika: **
-\n • Azië: **
-\n • Japan &amp; Korea: ***
-\n • Midden-Oosten: **
-\n • Afrika: **
-\n • Antarctica: * Van bijna alle landen is een kaart te downloaden: van Afghanistan tot Zimbabwe, Australie tot de VS, Nederland, Duitsland, Spanje, Japan, …</string>
+    <string name="osmand_plus_extended_description_part8">Indicatie van compleetheid en kwaliteit van de kaart: 
+\n • West-Europa: **** 
+\n • Oost-Europa: *** 
+\n • Rusland: *** 
+\n • Noord-Amerika: *** 
+\n • Zuid-Amerika: ** 
+\n • Azië: ** 
+\n • Japan &amp; Korea: *** 
+\n • Midden-Oosten: ** 
+\n • Afrika: ** 
+\n • Antarctica: * Van bijna alle landen is een kaart te downloaden: van Afghanistan tot Zimbabwe, Australië tot de VS, Nederland, Duitsland, Spanje, Japan, …</string>
     <string name="save_poi_too_many_uppercase">Naam bevat erg veel hoofdletters, toch doorgaan?</string>
     <string name="search_favorites">Zoek favorieten</string>
     <string name="quick_action_showhide_osmbugs_title">Toon/verberg OSM-opmerkingen</string>
@@ -3065,7 +3065,7 @@ We slaan geen locatiegegevens, zoektermen of andere gebruikersgegevens op.</stri
     <string name="distance_nearest">Afstand: van dichtbij naar ver</string>
     <string name="enter_lon">Lengtegraad invoeren</string>
     <string name="enter_lat">"Breedtegraad invoeren "</string>
-    <string name="enter_lat_and_lon">"Lengte- en Breedtegraad invoeren "</string>
+    <string name="enter_lat_and_lon">"Lengte- en breedtegraad invoeren "</string>
 	<string name="dd_mm_ss_format">GG°MM′SS″</string>
 	<string name="dd_dddddd_format">GG.GGGGGG°</string>
 	<string name="dd_ddddd_format">GG.GGGGG°</string>
