@@ -715,7 +715,7 @@
     <string name="background_service_provider">Источник позиционирования</string>
     <string name="background_router_service_descr">Запускает OsmAnd в фоновом режиме для отслеживания вашего местоположения при выключенном экране.</string>
     <string name="background_router_service">Запуск приложения в фоновом режиме</string>
-    <string name="off_router_service_no_gps_available">Сервис маршрутизации OsmAnd включен, если выключить позиционирование, он перестанет вести по маршруту.</string>
+    <string name="off_router_service_no_gps_available">Для работы службы фоновой навигации необходимо включить геолокацию.</string>
     <string name="routing_settings_descr">Укажите настройки для навигации.</string>
     <string name="routing_settings">Навигация</string>
     <string name="hide_poi_filter">Скрыть фильтр</string>
