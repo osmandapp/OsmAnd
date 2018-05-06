@@ -5,8 +5,8 @@
 
 	<color name="dialog_bg_color_light">#f0f0f0</color>
 	<color name="dialog_bg_color_night">#17191a</color>
-	<color name="dialog_transparent_bg_color_light">#14f0f0f0</color>
-	<color name="dialog_transparent_bg_color_night">#1417191a</color>
+	<color name="dialog_transparent_bg_color_light">#eaf0f0f0</color>
+	<color name="dialog_transparent_bg_color_night">#ea17191a</color>
 
 	<color name="dialog_title_color_light">#212121</color>
 	<color name="dialog_title_color_dark">#cccccc</color>

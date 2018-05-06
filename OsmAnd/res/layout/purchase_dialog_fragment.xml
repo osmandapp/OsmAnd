@@ -93,7 +93,7 @@
                     android:id="@+id/button_later"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="?attr/selectableItemBackground"
+                    android:background="?attr/selectableItemBackgroundBorderless"
                     android:gravity="center"
                     android:letterSpacing="@dimen/text_button_letter_spacing"
                     android:minHeight="@dimen/dialog_button_height"

@@ -3,6 +3,8 @@ package net.osmand.plus.chooseplan;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.ColorRes;
@@ -73,6 +75,7 @@ public class OsmLiveCancelledDialog extends BaseOsmAndDialogFragment implements 
 		Dialog dialog = new Dialog(ctx, themeId);
 		Window window = dialog.getWindow();
 		if (window != null) {
+			window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 			if (!getSettings().DO_NOT_USE_ANIMATIONS.get()) {
 				window.getAttributes().windowAnimations = R.style.Animations_Alpha;
 			}
@@ -240,16 +243,21 @@ public class OsmLiveCancelledDialog extends BaseOsmAndDialogFragment implements 
 		long cancelledTime = settings.LIVE_UPDATES_PURCHASE_CANCELLED_TIME.get();
 		boolean firstTimeShown = settings.LIVE_UPDATES_PURCHASE_CANCELLED_FIRST_DLG_SHOWN.get();
 		boolean secondTimeShown = settings.LIVE_UPDATES_PURCHASE_CANCELLED_SECOND_DLG_SHOWN.get();
+		return true;
+		/*
 		return cancelledTime > 0
 				&& (!firstTimeShown
 					|| (System.currentTimeMillis() - cancelledTime > SUBSCRIPTION_HOLDING_TIME_MSEC
 						&& !secondTimeShown));
+						*/
 	}
 
 	public static void showInstance(@NonNull FragmentManager fm) {
 		try {
-			OsmLiveCancelledDialog fragment = new OsmLiveCancelledDialog();
-			fragment.show(fm, OsmLiveCancelledDialog.TAG);
+			if (fm.findFragmentByTag(OsmLiveCancelledDialog.TAG) == null) {
+				OsmLiveCancelledDialog fragment = new OsmLiveCancelledDialog();
+				fragment.show(fm, OsmLiveCancelledDialog.TAG);
+			}
 		} catch (RuntimeException e) {
 			LOG.error("showInstance", e);
 		}
