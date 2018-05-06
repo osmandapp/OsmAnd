@@ -853,7 +853,7 @@ public class ResourceManager {
 	}
 
 	public AmenityIndexRepositoryBinary getWikiRepositoryByRegionName(String name) {
-		if (name == null)
+		if (name == null || name.isEmpty())
 			return null;
 		for (String filename : amenityRepositories.keySet()) {
 			if ((filename.contains("_wiki")
