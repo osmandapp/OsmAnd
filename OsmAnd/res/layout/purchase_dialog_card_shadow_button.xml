@@ -4,7 +4,7 @@
              xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="match_parent"
              android:layout_height="wrap_content"
-             android:background="?attr/wikivoyage_primary_btn_bg">
+             android:background="?attr/purchase_dialog_shadow_btn_bg">
 
     <LinearLayout
         android:id="@+id/card_button"
