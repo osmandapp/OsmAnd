@@ -852,18 +852,8 @@ public class ResourceManager {
 		return map;
 	}
 
-	public AmenityIndexRepositoryBinary getWikiRepositoryByRegionName(List<String> regionNames) {
-		if (regionNames == null || regionNames.isEmpty())
-			return null;
-		for (String regionName : regionNames) {
-			AmenityIndexRepository repository = amenityRepositories.get(Algorithms
-					.capitalizeFirstLetterAndLowercase(regionName) +
-					IndexConstants.BINARY_WIKI_MAP_INDEX_EXT);
-			if (repository != null && repository instanceof AmenityIndexRepositoryBinary) {
-				return (AmenityIndexRepositoryBinary) repository;
-			}
-		}
-		return null;
+	public AmenityIndexRepositoryBinary getWikiRepositoryByRegionName(String filename) {
+		return (AmenityIndexRepositoryBinary) amenityRepositories.get(filename);
 	}
 	
 	////////////////////////////////////////////// Working with address ///////////////////////////////////////////
