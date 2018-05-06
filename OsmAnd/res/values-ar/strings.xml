@@ -1975,7 +1975,7 @@
     <string name="transport_route_distance">مسافة المسلك</string>
     <string name="update_poi_error_local">خطأ تحيين القائمة المحلية للPOI</string>
     <string name="context_menu_item_update_poi">تحديث POI</string>
-    <string name="upload_osm_note_description">يمكنك رفع ملاحظات OSM الخاصة بك بصفة مخفية أو استخدام حسابك على openstreetmap.org .</string>
+    <string name="upload_osm_note_description">يمكنك رفع ملاحظات OSM الخاصة بك بصفة مجهولة أو استخدام حسابك على openstreetmap.org.</string>
     <string name="add_points_to_map_markers_q">هل تريد اضافة جميع النقاط الى العلامات الموضعية؟</string>
     <string name="clear_markers_history_q">هل تريد مسح جميع محفوظات العلامات الموضعية؟</string>
     <string name="rendering_attr_showMtbRoutes_name">اظهر طرق MTB</string>
@@ -2370,7 +2370,7 @@
     
     <string name="upload_poi">رفع POI</string>
     <string name="route_calculation">حساب المسار</string>
-    <string name="gpx_no_tracks_title">ليس لديك مسارات بعد</string>
+    <string name="gpx_no_tracks_title">ليس لديك أية مسارات بعد</string>
     <string name="rendering_value_fine_name">غرامة</string>
     <string name="route_roundabout_short">خذ المخرج %1$d ثم واصل</string>
     <string name="release_2_5">/022 رموز قابلة للنقر عليها على الخريطة
@@ -2402,10 +2402,10 @@
     <string name="lang_sr_latn">الصربية (اللاتينية)</string>
     <string name="lang_zh_hk">الصينية (هونج كونج)</string>
     <string name="rendering_attr_hideWaterPolygons_description">ماء</string>
-    <string name="rendering_attr_contourWidth_description">عرض الخطوط الكنتورية</string>
-    <string name="rendering_attr_contourWidth_name">عرض الخطوط الكنتورية</string>
-    <string name="rendering_attr_contourDensity_description">كثافة الخطوط الكنتورية</string>
-    <string name="rendering_attr_contourDensity_name">كثافة الخطوط الكنتورية</string>
+    <string name="rendering_attr_contourWidth_description">عرض الخطوط المحيطية</string>
+    <string name="rendering_attr_contourWidth_name">عرض الخطوط المحيطية</string>
+    <string name="rendering_attr_contourDensity_description">كثافة الخطوط المحيطية</string>
+    <string name="rendering_attr_contourDensity_name">كثافة الخطوط المحيطية</string>
     <string name="rendering_value_high_name">عالية</string>
     <string name="rendering_value_medium_w_name">متوسطة</string>
     <string name="rendering_value_low_name">منخفض</string>
@@ -2519,11 +2519,11 @@
     <string name="file_can_not_be_moved">لا يمكن نقل الملف.</string>
     <string name="total_distance">المسافة الإجمالية</string>
     <string name="lang_ber">البربرية</string>
-    <string name="points_delete_multiple_succesful">تم حذف النقاط بنجاح.</string>
+    <string name="points_delete_multiple_succesful">تم حذف النقاط.</string>
     <string name="points_delete_multiple">أنت بصدد حذف %1$d نقطة. هل أنت متأكد ؟</string>
     <string name="shared_string_max">أقصى</string>
-    <string name="shared_string_start_time">ساعة البداية</string>
-    <string name="shared_string_end_time">ساعة النهاية</string>
+    <string name="shared_string_start_time">ساعة الإنطلاق</string>
+    <string name="shared_string_end_time">ساعة الوصول</string>
     <string name="routing_attr_driving_style_name">نوع السياقة</string>
     <string name="altitude_descent">منحدر</string>
     <string name="altitude_ascent">مرتفع</string>
@@ -2553,11 +2553,11 @@
     <string name="quick_action_replace_destination">تبديل الوجهة</string>
     <string name="subscribe_email_error">خطأ</string>
     <string name="nautical_maps">الخرائط البحرية</string>
-    <string name="fonts_header">خطوط للخريطة</string>
+    <string name="fonts_header">خطوط الخريطة</string>
     <string name="right_side_navigation">القيادة اليمنى</string>
     <string name="driving_region_automatic">آلي</string>
     <string name="parking_options">خيارات مواقف السيارات</string>
-    <string name="full_version_thanks">شكرا لكم لاقتناء النسخة الكاملة من أوسماند !</string>
+    <string name="full_version_thanks">شكرا لكم لاقتناء النسخة الكاملة من أوسماند.</string>
     <string name="routing_attr_driving_style_speed_name">طرق أقصر</string>
     <string name="routing_attr_driving_style_safety_name">تفضيل الشوارع الجانبية</string>
     <string name="gpx_track">المسار</string>
@@ -2634,12 +2634,12 @@
     <string name="index_item_depth_points_southern_hemisphere">نقاط العمق البحري في نصف الكرة الجنوبي</string>
     <string name="index_item_depth_points_northern_hemisphere">نقاط العمق البحري في نصف الكرة الشمالي</string>
     <string name="download_depth_countours">معالم العمق البحري</string>
-    <string name="do_not_send_anonymous_app_usage_desc">التطبيق يقوم بجمع معلومات حول أجزاء من التطبيقات التي تفتحها. الموقع الخاص بك لا يرسل ابدأ، ولا أي شيء تقوم بادخاله في التطبيق أو أي تفاصيل لمناطق رأيتها ، بحثت عنها أو نزلتها.</string>
-    <string name="do_not_show_startup_messages_desc">يمنع عرض الخصومات على التطبيق واعلانات الأحداث المحلية المميزة.</string>
+    <string name="do_not_send_anonymous_app_usage_desc">التطبيق يقوم بجمع معلومات حول أجزاء من التطبيقات التي تفتحها. الموقع الخاص بك لا يرسل ابدأ، ولا أي شيء تقوم بإدخاله في التطبيق أو أي تفاصيل لمناطق رأيتها ، بحثت عنها أو نزلتها.</string>
+    <string name="do_not_show_startup_messages_desc">منع عرض الخصومات على التطبيق وإعلانات الأحداث المحلية المميزة.</string>
     <string name="routing_attr_relief_smoothness_factor_plains_name">أقل تضاريس</string>
     <string name="routing_attr_relief_smoothness_factor_more_plains_name">مسطحة</string>
     <string name="routing_attr_driving_style_balance_name">متوازنة</string>
-    <string name="relief_smoothness_factor_descr">التضاريس المفضلة: مسطحة أو تلال.</string>
+    <string name="relief_smoothness_factor_descr">التضاريس المفضلة : مسطحة أو تلال.</string>
     <string name="shared_string_slope">منحدر</string>
     <string name="shared_string_move">انتقل</string>
     <string name="routing_attr_height_obstacles_description">استخدام بيانات ارتفاع التضاريس المتاحة من طرف ASTER ،SRTM، وEU-DEM.</string>
@@ -2931,4 +2931,42 @@
     <string name="shared_string_wikivoyage">ويكي سفر</string>
     <string name="select_travel_book">إختيار كتاب للسفر</string>
     <string name="shared_string_travel_book">كتاب السفر</string>
-    </resources>
+    <string name="purchase_cancelled_dialog_title">لقد قمت بإلغاء اشتراك OsmAnd Live</string>
+    <string name="maps_you_need">خرائط قد تحتاجها</string>
+    <string name="osmand_team">فريق OsmAnd</string>
+    <string name="popular_destinations">الوجهات الشعبية</string>
+    <string name="travel_card_update_descr">بيانات ويكي سفر جديدة متوفرة، قم بتحديثها للتمتع بها.</string>
+	<string name="update_is_available">تحديث متوفر</string>
+	<string name="download_file">تنزيل الملف</string>
+    <string name="start_editing">إبداء التحرير</string>
+    <string name="get_unlimited_access">تحصل على نفاذ بلا حدود</string>
+    <string name="welcome_to_open_beta">مرحبا بكم على النسخة التجريبية المفتوحة</string>
+    <string name="travel_guide">دليل ويكي سفر</string>
+    <string name="monthly_map_updates">تحديثات الخرائط : <b>كل شهر</b></string>
+    <string name="daily_map_updates">تحديثات الخرائط : <b>كل ساعة</b></string>
+    <string name="purchase_unlim_title">شراء - %1$s</string>
+    <string name="purchase_subscription_title">الإشتراك في - %1$s</string>
+
+    <string name="wikivoyage_offline">ويكي سفر من دون إتصال</string>
+
+    <string name="unlimited_downloads">تنزيلات بلا حدود</string>
+    <string name="wikipedia_offline">ويكيبيديا بدون إتصال</string>
+    <string name="contour_lines_hillshade_maps">الخطوط المحيطية و الخرائط الظلية</string>
+    <string name="shared_string_only_with_wifi">على الواي فاي فقط</string>
+    <string name="wikivoyage_download_pics">تنزيل الصور</string>
+    <string name="shared_string_wifi_only">على الواي فاي فقط</string>
+    <string name="download_images">تنزيل الصور</string>
+    <string name="article_removed">تم حذف المقال</string>
+    <string name="shared_string_read">قراءة</string>
+    <string name="saved_articles">المقالات المحفوظة</string>
+    <string name="shared_string_contents">المحتويات</string>
+    <string name="pick_up_till">إستعادة السيارة قبل</string>
+    <string name="show_number_pad">إظهار لوحة الأرقام</string>
+    <string name="index_item_world_wikivoyage">المقالات العالمية لويكي سفر</string>
+    <string name="download_wikipedia_label">تنزيل بيانات ويكيبيديا</string>
+    <string name="open_in_browser_wiki">فتح المقالة على الويب</string>
+    <string name="open_in_browser_wiki_description">عرض المقالة على متصفح الويب.</string>
+    <string name="download_wiki_region_placeholder">هذه المنطقة</string>
+    <string name="wiki_article_not_found">لم يتم العثور على المقالة</string>
+    <string name="how_to_open_wiki_title">بأي طريقة تود فتح مقالات ويكيبيديا ؟</string>
+</resources>
