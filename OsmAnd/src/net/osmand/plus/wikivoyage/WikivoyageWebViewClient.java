@@ -45,7 +45,7 @@ import static android.support.v4.app.FragmentManager.POP_BACK_STACK_INCLUSIVE;
 
 
 interface RegionCallback {
-	void onRegionFound(String s);
+	void onRegionFound(String[] s);
 }
 /**
  * Custom WebView client to handle the internal links.
@@ -61,6 +61,7 @@ public class WikivoyageWebViewClient extends WebViewClient implements RegionCall
 	private TravelArticle article;
 	private boolean nightMode;
 	private String regionName;
+	private String regionDownloadName;
 
 	private static final String PREFIX_GEO = "geo:";
 	private static final String PAGE_PREFIX_HTTP = "http://";
@@ -184,21 +185,43 @@ public class WikivoyageWebViewClient extends WebViewClient implements RegionCall
 	}
 
 	private void getWikiArticle(String name, String lang, String url) {
-		List<AmenityIndexRepositoryBinary> indexes = app.getResourceManager()
-				.getWikiAmenityRepository(article.getLat(), article.getLon());
-		if (indexes.isEmpty()) {
-			WikivoyageArticleWikiLinkFragment.showInstance(fragmentManager, regionName == null ?
-					"" : regionName, url);
-		} else {
-			articleSearchTask = new WikiArticleSearchTask(name, lang, indexes, (MapActivity) context, nightMode, url);
-			articleSearchTask.execute();
-		}
+		articleSearchTask = new WikiArticleSearchTask(article, name, regionName, fragmentManager,
+				lang, regionDownloadName, (MapActivity) context, nightMode, url);
+		articleSearchTask.execute();
 
 	}
 
 	@Override
-	public void onRegionFound(String s) {
-		regionName = s;
+	public void onRegionFound(String[] s) {
+		if (s != null) {
+			regionDownloadName = s[0];
+			regionName = s[1];
+		}
+	}
+
+	private static String getDownloadName(double lat, double lon, OsmandRegions regions) {
+		String downloadName = null;
+		if (regions != null) {
+			int x31 = MapUtils.get31TileNumberX(lon);
+			int y31 = MapUtils.get31TileNumberY(lat);
+			List<BinaryMapDataObject> dataObjects = null;
+			try {
+				dataObjects = regions.query(x31, y31);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			if (dataObjects != null) {
+				for (BinaryMapDataObject b : dataObjects) {
+					if (regions.contain(b, x31, y31)) {
+						downloadName = regions.getDownloadName(b);
+						if (downloadName != null && !downloadName.isEmpty()) {
+							break;
+						}
+					}
+				}
+			}
+		}
+		return downloadName;
 	}
 
 	public void stopRunningAsyncTasks() {
@@ -210,7 +233,7 @@ public class WikivoyageWebViewClient extends WebViewClient implements RegionCall
 		}
 	}
 
-	private static class FetchWikiRegion extends AsyncTask<Void, Void, String> {
+	private static class FetchWikiRegion extends AsyncTask<Void, Void, String[]> {
 
 		private RegionCallback callback;
 		private OsmandRegions osmandRegions;
@@ -225,35 +248,11 @@ public class WikivoyageWebViewClient extends WebViewClient implements RegionCall
 		}
 
 		@Override
-		protected String doInBackground(Void... voids) {
-			if (osmandRegions != null) {
-				int x31 = MapUtils.get31TileNumberX(lon);
-				int y31 = MapUtils.get31TileNumberY(lat);
-				List<BinaryMapDataObject> dataObjects = null;
-				try {
-					if (isCancelled()) {
-						return null;
-					}
-					dataObjects = osmandRegions.query(x31, y31);
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-				if (dataObjects != null) {
-					for (BinaryMapDataObject b : dataObjects) {
-						if (isCancelled()) {
-							break;
-						}
-						if(osmandRegions.contain(b, x31, y31)) {
-							String downloadName = osmandRegions.getDownloadName(b);
-							if (downloadName == null) {
-								return "";
-							}
-							return osmandRegions.getLocaleName(downloadName, false);
-						}
-					}
-				}
-			}
-			return "";
+		protected String[] doInBackground(Void... voids) {
+			String downloadName = getDownloadName(lat, lon, osmandRegions);
+			downloadName = downloadName == null ? "" : downloadName;
+			return new String[]{downloadName,
+					osmandRegions.getLocaleName(downloadName, false)};
 		}
 
 		@Override
@@ -262,7 +261,7 @@ public class WikivoyageWebViewClient extends WebViewClient implements RegionCall
 		}
 
 		@Override
-		protected void onPostExecute(String result) {
+		protected void onPostExecute(String[] result) {
 			if (callback != null) {
 				callback.onRegionFound(result);
 			}
@@ -272,21 +271,33 @@ public class WikivoyageWebViewClient extends WebViewClient implements RegionCall
 	private static class WikiArticleSearchTask extends AsyncTask<Void, Void, List<Amenity>> {
 		private ProgressDialog dialog;
 		private String name;
-		private List<AmenityIndexRepositoryBinary> indexes;
+		private String regionDownloadName;
+		private String regionName;
+		private OsmandRegions regions;
 		private WeakReference<MapActivity> weakContext;
+		private WeakReference<OsmandApplication> applicationReference;
 		private boolean isNightMode;
 		private String url;
 		private String lang;
+		private TravelArticle article;
+		private FragmentManager fragmentManager;
 
-		WikiArticleSearchTask(String articleName, String lang, List<AmenityIndexRepositoryBinary> indexes,
-							  MapActivity context, boolean isNightMode, String url) {
+		WikiArticleSearchTask(TravelArticle article, String articleName, String regionName, FragmentManager fragmentManager,
+							  String lang, String regionDownloadName,
+							  MapActivity context, boolean nightMode, String url) {
+			this.fragmentManager = fragmentManager;
+			this.regionName = regionName;
 			name = articleName;
 			this.lang = lang;
-			this.indexes = indexes;
 			weakContext = new WeakReference<>(context);
+			OsmandApplication app = (OsmandApplication) context.getApplication();
+			applicationReference = new WeakReference<>(app);
+			regions = app.getRegions();
 			dialog = createProgressDialog();
-			this.isNightMode = isNightMode;
+			this.isNightMode = nightMode;
 			this.url = url;
+			this.regionDownloadName = regionDownloadName;
+			this.article = article;
 		}
 
 		@Override
@@ -298,21 +309,24 @@ public class WikivoyageWebViewClient extends WebViewClient implements RegionCall
 
 		@Override
 		protected List<Amenity> doInBackground(Void... voids) {
-			List<Amenity> found = new ArrayList<>();
-			for (AmenityIndexRepositoryBinary repo : indexes) {
-				if (isCancelled()) {
-					break;
-				}
-				found.addAll(repo.searchAmenitiesByName(0, 0, 0, 0,
-						Integer.MAX_VALUE, Integer.MAX_VALUE, name, null));
+			if (regionDownloadName == null && article != null && !isCancelled()) {
+				regionDownloadName = getDownloadName(article.getLat(), article.getLon(), regions);
 			}
-			return found;
+			OsmandApplication application = applicationReference.get();
+			if (application != null && !isCancelled()) {
+				AmenityIndexRepositoryBinary index = application.getResourceManager()
+						.getWikiRepositoryByRegionName(regionDownloadName);
+				if (index != null && !isCancelled()) {
+					return new ArrayList<>(index.searchAmenitiesByName(0, 0, 0, 0,
+							Integer.MAX_VALUE, Integer.MAX_VALUE, name, null));
+				}
+			}
+			return null;
 		}
 
 		@Override
 		protected void onCancelled(){
 			dialog = null;
-			indexes.clear();
 		}
 
 		@Override
@@ -320,7 +334,10 @@ public class WikivoyageWebViewClient extends WebViewClient implements RegionCall
 			MapActivity activity = weakContext.get();
 			if (activity != null && !activity.isActivityDestroyed() && dialog != null) {
 				dialog.dismiss();
-				if (!found.isEmpty()) {
+				if (found == null) {
+					WikivoyageArticleWikiLinkFragment.showInstance(fragmentManager, regionName == null ?
+							"" : regionName, url);
+				} else if (!found.isEmpty()) {
 					WikipediaDialogFragment.showInstance(activity, found.get(0), lang);
 				} else {
 					warnAboutExternalLoad(url, weakContext.get(), isNightMode);

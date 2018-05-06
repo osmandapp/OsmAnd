@@ -852,18 +852,20 @@ public class ResourceManager {
 		return map;
 	}
 
-	public List<AmenityIndexRepositoryBinary> getWikiAmenityRepository(double lat, double lon) {
-		List<AmenityIndexRepositoryBinary> repos = new ArrayList<>();
+	public AmenityIndexRepositoryBinary getWikiRepositoryByRegionName(String name) {
+		if (name == null)
+			return null;
 		for (String filename : amenityRepositories.keySet()) {
-			if (filename.contains("_wiki")
-					|| filename.contains(IndexConstants.BINARY_WIKI_MAP_INDEX_EXT)) {
+			if ((filename.contains("_wiki")
+					|| filename.contains(IndexConstants.BINARY_WIKI_MAP_INDEX_EXT))
+					&& filename.toLowerCase().contains(name)) {
 				AmenityIndexRepository repository = amenityRepositories.get(filename);
-				if (repository.checkContains(lat, lon) && repository instanceof AmenityIndexRepositoryBinary) {
-					repos.add((AmenityIndexRepositoryBinary) repository);
+				if (repository != null && repository instanceof AmenityIndexRepositoryBinary) {
+					return (AmenityIndexRepositoryBinary) repository;
 				}
 			}
 		}
-		return repos;
+		return null;
 	}
 	
 	////////////////////////////////////////////// Working with address ///////////////////////////////////////////
