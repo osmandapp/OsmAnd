@@ -18,7 +18,6 @@ import android.webkit.WebViewClient;
 
 import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.data.Amenity;
-import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.map.OsmandRegions;
 import net.osmand.plus.GPXUtilities;
@@ -55,7 +54,6 @@ interface RegionCallback {
 public class WikivoyageWebViewClient extends WebViewClient implements RegionCallback {
 
 	private static final String TAG = WikivoyageWebViewClient.class.getSimpleName();
-	public static final int COUNTRY_LEVEL = 2;
 
 	private OsmandApplication app;
 	private FragmentManager fragmentManager;
