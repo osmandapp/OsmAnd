@@ -852,17 +852,15 @@ public class ResourceManager {
 		return map;
 	}
 
-	public AmenityIndexRepositoryBinary getWikiRepositoryByRegionName(String name) {
-		if (name == null || name.isEmpty())
+	public AmenityIndexRepositoryBinary getWikiRepositoryByRegionName(List<String> regionNames) {
+		if (regionNames == null || regionNames.isEmpty())
 			return null;
-		for (String filename : amenityRepositories.keySet()) {
-			if ((filename.contains("_wiki")
-					|| filename.contains(IndexConstants.BINARY_WIKI_MAP_INDEX_EXT))
-					&& filename.toLowerCase().contains(name)) {
-				AmenityIndexRepository repository = amenityRepositories.get(filename);
-				if (repository != null && repository instanceof AmenityIndexRepositoryBinary) {
-					return (AmenityIndexRepositoryBinary) repository;
-				}
+		for (String regionName : regionNames) {
+			AmenityIndexRepository repository = amenityRepositories.get(Algorithms
+					.capitalizeFirstLetterAndLowercase(regionName) +
+					IndexConstants.BINARY_WIKI_MAP_INDEX_EXT);
+			if (repository != null && repository instanceof AmenityIndexRepositoryBinary) {
+				return (AmenityIndexRepositoryBinary) repository;
 			}
 		}
 		return null;
