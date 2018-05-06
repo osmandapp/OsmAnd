@@ -327,7 +327,7 @@
 	<string name="proxy_port_descr">Configurar o número da porta do seu proxy (p. ex. 8118)</string>
 	
     <string name="monitoring_settings">Gravação de viagem</string>
-    <string name="monitoring_settings_descr">Configurar como gravar suas viagens</string>
+    <string name="monitoring_settings_descr">Configurar como gravar suas viagens.</string>
     <string name="gpx_option_calculate_first_last_segment">Calcular rota para o primeiro e último segmento</string>
     <string name="use_displayed_track_for_navigation">Você quer usar a trilha apresentada para navegação?</string>
     <string name="routing_attr_prefer_motorway_name">Preferir Autoestradas</string>
@@ -2481,7 +2481,7 @@ Pôr do Sol: %2$s</string>
     <string name="access_tree_list">Lista-árvore</string>
     <string name="no_map_markers_found">Por favor, adicione marcadores de mapa pelo mapa</string>
     <string name="no_waypoints_found">Não há pontos de passagem encontrados</string>
-    <string name="storage_permission_restart_is_required">Agora o aplicativo tem permissão para gravar no armazenamento externo. Reiniciar o aplicativo manualmente é necessário.</string>
+    <string name="storage_permission_restart_is_required">O aplicativo agora pode gravar no armazenamento externo, mas precisa ser reiniciado para tal.</string>
     <string name="shared_string_move_up">Mover para cima</string>
     <string name="shared_string_move_down">Mover para baixo</string>
     <string name="finish_navigation">Finalizar a navegação</string>
@@ -2621,7 +2621,12 @@ Pôr do Sol: %2$s</string>
     <string name="navigate_point_olc_info_area">OLC completo válido 
 \nRepresenta área: %1$s x %2$s</string>
     <string name="route_is_too_long_v2">Esta rota pode ser muito longa para calcular. Por favor, adicione destinos intermediários se nenhum resultado for encontrado dentro de 10 minutos.</string>
-    <string name="osmand_extended_description_part5">Ciclismo • Você pode encontrar caminhos de bicicleta no mapa • Navegação por GPS no modo ciclismo constrói a sua rota utilizando caminhos de bicicleta • Você pode ver a sua velocidade e altitude • Opção de gravação GPX permite-lhe gravar a sua viagem e compartilhá-la • Através de plugin adicionais você pode ativar a exibição de curvas de nível e sombreamento de relevo</string>
+    <string name="osmand_extended_description_part5">Ciclismo
+\n • Encontre caminhos de bicicleta no mapa
+\n • Navegação por GPS no modo ciclismo constrói a sua rota utilizando caminhos de bicicleta
+\n • Ver a sua velocidade e altitude
+\n • Opção de gravação GPX permite-lhe gravar a sua viagem e compartilhá-la
+\n • Através de plugin adicionais, você pode ativar curvas de nível e sombreamento de relevo</string>
     <string name="osmand_extended_description_part6">Passeio, caminhada, turismo pela cidade • O mapa mostra caminhos para passeios e caminhadas • A Wikipédia no seu idioma preferido pode dizer muito durante um turismo pela cidade • Paradas de transportes públicos (ônibus, troleibus, trem) incluindo nomes de linha, ajuda a navegar em uma nova cidade • Navegação GPS em modo pedestre constrói a sua rota usando caminhos para pedestres • Você pode fazer o upload e seguir uma rota GPX ou gravar e compartilhar a sua própria rota</string>
     <string name="osmand_extended_description_part7">Contribua para o OSM • Comunique falha de dados • Carregue trilhas GPX diretamente do app • Adicione POIs e carregue-os diretamente ao OSM (ou mais tarde se off-line)</string>
     <string name="osmand_plus_extended_description_part5">Recursos de segurança • Alternância de exibição dia/noite automatizada opcional • Exibição de limite de velocidade opcional, com lembrete se você ultrapassá-lo • Zoom dependente da velocidade opcional • Compartilhe sua localização para que seus amigos possam encontrar você</string>
@@ -2685,7 +2690,7 @@ Pôr do Sol: %2$s</string>
     <string name="waypoint_one">Ponto de Passagem 1</string>
     <string name="route_point_one">Ponto de Rota 1</string>
     <string name="empty_state_my_tracks">Adicionar e Gravar Trilhas</string>
-    <string name="empty_state_my_tracks_desc">Gravar ou importar trilhas para ver.</string>
+    <string name="empty_state_my_tracks_desc">Grave e importe trilhas para ver.</string>
     <string name="empty_state_favourites">Adicionar Favoritos</string>
     <string name="empty_state_favourites_desc">Adicionar favoritos no mapa ou importá-los de um arquivo.</string>
     <string name="import_track">Importar trilha</string>
