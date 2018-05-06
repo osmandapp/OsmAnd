@@ -243,13 +243,10 @@ public class OsmLiveCancelledDialog extends BaseOsmAndDialogFragment implements 
 		long cancelledTime = settings.LIVE_UPDATES_PURCHASE_CANCELLED_TIME.get();
 		boolean firstTimeShown = settings.LIVE_UPDATES_PURCHASE_CANCELLED_FIRST_DLG_SHOWN.get();
 		boolean secondTimeShown = settings.LIVE_UPDATES_PURCHASE_CANCELLED_SECOND_DLG_SHOWN.get();
-		return true;
-		/*
 		return cancelledTime > 0
 				&& (!firstTimeShown
 					|| (System.currentTimeMillis() - cancelledTime > SUBSCRIPTION_HOLDING_TIME_MSEC
 						&& !secondTimeShown));
-						*/
 	}
 
 	public static void showInstance(@NonNull FragmentManager fm) {
