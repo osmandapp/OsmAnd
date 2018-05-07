@@ -258,7 +258,7 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIn
 				try {
 					for (DownloadActivityType type : types) {
 						IndexItem item = DownloadResources.findSmallestIndexItemAt(app, latLon, type);
-						if (item != null) {
+						if (item != null && !item.isDownloaded()) {
 							neededItems.add(item);
 						}
 					}

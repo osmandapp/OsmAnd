@@ -244,56 +244,30 @@ public class WikivoyageWebViewClient extends WebViewClient implements RegionCall
 			OsmandApplication application = applicationReference.get();
 			List<Amenity> results = new ArrayList<>();
 			if (application != null && !isCancelled()) {
-				List<IndexItem> items = null;
+				IndexItem item = null;
 				try {
-					items = DownloadResources.findIndexItemsAt(application,
-							new LatLon(article.getLat(), article.getLon()), DownloadActivityType.WIKIPEDIA_FILE, true);
+					item = DownloadResources.findSmallestIndexItemAt(application,
+							new LatLon(article.getLat(), article.getLon()), DownloadActivityType.WIKIPEDIA_FILE);
 				} catch (IOException e) {
 					Log.e(TAG, e.getMessage(), e);
 				}
-				List<String> downloadedItems = new ArrayList<>();
-				if (items != null) {
-					Collections.sort(items, new Comparator<IndexItem>() {
-						@Override
-						public int compare(IndexItem indexItem, IndexItem thatItem) {
-							return (int) (indexItem.getContentSize() - thatItem.getContentSize());
-						}
-					});
-					for (IndexItem i : items) {
-						if (isCancelled()) {
-							break;
-						}
-						if (i.isDownloaded()) {
-							downloadedItems.add(i.getFileName()
-									.replace("_" + IndexConstants.BINARY_MAP_VERSION, "")
-									.replace(ZIP_EXT, ""));
-						}
-					}
+				String filename = null;
+				if (item != null && item.isDownloaded()) {
+					filename = getFilenameFromIndex(item.getFileName());
 				}
-				List<AmenityIndexRepositoryBinary> repos = new ArrayList<>();
-				for (String s : downloadedItems) {
-					if (isCancelled()) {
-						break;
-					}
-					AmenityIndexRepositoryBinary repository = application.getResourceManager()
-							.getAmenityRepositoryByFileName(s);
-					if (repository != null) {
-						repos.add(repository);
-					}
-				}
-				if (repos.isEmpty()) {
-					if (regionName == null || regionName.isEmpty()) {
-						regionName = (items == null || items.isEmpty()) ? "" :
-								getRegionName(items.get(0), application.getRegions());
+				AmenityIndexRepositoryBinary repository = application.getResourceManager()
+							.getAmenityRepositoryByFileName(filename == null ? "" : filename);
+				if (repository == null) {
+					if ((regionName == null || regionName.isEmpty()) && item != null) {
+						regionName = (getRegionName(item.getFileName(),	application.getRegions()));
 						callback.onRegionFound(regionName);
 					}
 					return null;
-				}
-				for (AmenityIndexRepositoryBinary repo : repos) {
+				} else {
 					if (isCancelled()) {
-						break;
+						return null;
 					}
-					results.addAll(repo.searchAmenitiesByName(0, 0, 0, 0,
+					results.addAll(repository.searchAmenitiesByName(0, 0, 0, 0,
 							Integer.MAX_VALUE, Integer.MAX_VALUE, name, null));
 				}
 			}
@@ -326,9 +300,15 @@ public class WikivoyageWebViewClient extends WebViewClient implements RegionCall
 			}
 		}
 
-		private String getRegionName(IndexItem indexItem, OsmandRegions osmandRegions) {
-			if (osmandRegions != null) {
-				String regionName = indexItem.getFileName()
+		private String getFilenameFromIndex(String fileName) {
+			return fileName
+					.replace("_" + IndexConstants.BINARY_MAP_VERSION, "")
+					.replace(ZIP_EXT, "");
+		}
+
+		private String getRegionName(String filename, OsmandRegions osmandRegions) {
+			if (osmandRegions != null && filename != null) {
+				String regionName = filename
 						.replace("_" + IndexConstants.BINARY_MAP_VERSION, "")
 						.replace(IndexConstants.BINARY_WIKI_MAP_INDEX_EXT_ZIP, "")
 						.toLowerCase();
