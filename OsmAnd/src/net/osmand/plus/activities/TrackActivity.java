@@ -3,6 +3,7 @@ package net.osmand.plus.activities;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
@@ -246,72 +247,7 @@ public class TrackActivity extends TabActivity {
 
 			setViewPagerAdapter(mViewPager, new ArrayList<TabActivity.TabItem>());
 			slidingTabLayout.setViewPager(mViewPager);
-			new AsyncTask<Void, Void, GPXFile>() {
-
-				protected void onPreExecute() {
-					setSupportProgressBarIndeterminateVisibility(true);
-				}
-
-				@Override
-				protected GPXFile doInBackground(Void... params) {
-					long startTime = System.currentTimeMillis();
-					GPXFile result;
-					if (file == null) {
-						result = getMyApplication().getSavingTrackHelper().getCurrentGpx();
-					} else {
-						SelectedGpxFile selectedGpxFile = getMyApplication().getSelectedGpxHelper().getSelectedFileByPath(file.getAbsolutePath());
-						if (selectedGpxFile != null && selectedGpxFile.getGpxFile() != null) {
-							result = selectedGpxFile.getGpxFile();
-						} else {
-							result = GPXUtilities.loadGPXFile(TrackActivity.this, file);
-						}
-					}
-					if (result != null) {
-						result.addGeneralTrack();
-						long timeout = 200 - (System.currentTimeMillis() - startTime);
-						if (timeout > 0) {
-							try {
-								Thread.sleep(timeout);
-							} catch (InterruptedException e) {
-								// ignore
-							}
-						}
-					}
-					return result;
-				}
-
-				protected void onPostExecute(GPXFile result) {
-					setSupportProgressBarIndeterminateVisibility(false);
-
-					if (!stopped) {
-						setGpx(result);
-						setGpxDataItem(file != null ? getMyApplication().getGpxDatabase().getItem(file) : null);
-
-						for (WeakReference<Fragment> f : fragList) {
-							Fragment frag = f.get();
-							if (frag instanceof TrackSegmentFragment) {
-								((TrackSegmentFragment) frag).updateContent();
-							} else if (frag instanceof SplitSegmentDialogFragment) {
-								((SplitSegmentDialogFragment) frag).updateContent();
-							} else if (frag instanceof TrackPointFragment) {
-								((TrackPointFragment) frag).setContent();
-							}
-						}
-						((OsmandFragmentPagerAdapter) mViewPager.getAdapter()).addTab(
-								getTabIndicator(R.string.gpx_track, TrackSegmentFragment.class));
-						if (isHavingWayPoints() || isHavingRoutePoints()) {
-							((OsmandFragmentPagerAdapter) mViewPager.getAdapter()).addTab(
-									getTabIndicator(R.string.points, TrackPointFragment.class));
-							if (openPointsTab) {
-								mViewPager.setCurrentItem(1, false);
-							}
-						} else {
-							slidingTabLayout.setVisibility(View.GONE);
-							getSupportActionBar().setElevation(AndroidUtils.dpToPx(getMyApplication(), 4f));
-						}
-					}
-				}
-			}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
+			new GPXFileLoaderTask(this).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
 		}
 	}
 
@@ -394,5 +330,96 @@ public class TrackActivity extends TabActivity {
 
 	public GpxDataItem getGpxDataItem() {
 		return gpxDataItem;
+	}
+
+	private static class GPXFileLoaderTask extends AsyncTask<Void, Void, GPXFile> {
+
+		private OsmandApplication app;
+		private WeakReference<TrackActivity> activityRef;
+		private File file;
+
+		private TrackActivity getTrackActivity() {
+			return activityRef.get();
+		}
+
+		GPXFileLoaderTask(@NonNull TrackActivity activity) {
+			this.activityRef = new WeakReference<>(activity);
+			app = activity.getMyApplication();
+			file = activity.file;
+		}
+
+		protected void onPreExecute() {
+			TrackActivity activity = getTrackActivity();
+			if (activity != null) {
+				activity.setSupportProgressBarIndeterminateVisibility(true);
+			}
+		}
+
+		@Override
+		protected GPXFile doInBackground(Void... params) {
+			long startTime = System.currentTimeMillis();
+			GPXFile result;
+			if (file == null) {
+				result = app.getSavingTrackHelper().getCurrentGpx();
+			} else {
+				SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(file.getAbsolutePath());
+				if (selectedGpxFile != null && selectedGpxFile.getGpxFile() != null) {
+					result = selectedGpxFile.getGpxFile();
+				} else {
+					result = GPXUtilities.loadGPXFile(app, file);
+				}
+			}
+			if (result != null) {
+				result.addGeneralTrack();
+				long timeout = 200 - (System.currentTimeMillis() - startTime);
+				if (timeout > 0) {
+					try {
+						Thread.sleep(timeout);
+					} catch (InterruptedException e) {
+						// ignore
+					}
+				}
+			}
+			return result;
+		}
+
+		protected void onPostExecute(GPXFile result) {
+			TrackActivity activity = getTrackActivity();
+			if (activity != null) {
+				activity.setSupportProgressBarIndeterminateVisibility(false);
+
+				if (!activity.stopped) {
+					activity.setGpx(result);
+					activity.setGpxDataItem(file != null ? app.getGpxDatabase().getItem(file) : null);
+
+					for (WeakReference<Fragment> f : activity.fragList) {
+						Fragment frag = f.get();
+						if (frag instanceof TrackSegmentFragment) {
+							((TrackSegmentFragment) frag).updateContent();
+						} else if (frag instanceof SplitSegmentDialogFragment) {
+							((SplitSegmentDialogFragment) frag).updateContent();
+						} else if (frag instanceof TrackPointFragment) {
+							((TrackPointFragment) frag).setContent();
+						}
+					}
+					OsmandFragmentPagerAdapter pagerAdapter = (OsmandFragmentPagerAdapter) activity.mViewPager.getAdapter();
+					if (pagerAdapter != null) {
+						pagerAdapter.addTab(activity.getTabIndicator(R.string.gpx_track, TrackSegmentFragment.class));
+						if (activity.isHavingWayPoints() || activity.isHavingRoutePoints()) {
+							pagerAdapter.addTab(activity.getTabIndicator(R.string.points, TrackPointFragment.class));
+							if (activity.openPointsTab) {
+								activity.mViewPager.setCurrentItem(1, false);
+							}
+						} else {
+							activity.slidingTabLayout.setVisibility(View.GONE);
+							ActionBar actionBar = activity.getSupportActionBar();
+							if (actionBar != null) {
+								actionBar.setElevation(AndroidUtils.dpToPx(app, 4f));
+							}
+						}
+					}
+				}
+			}
+		}
 	}
 }
