@@ -15,7 +15,6 @@ import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
@@ -53,10 +52,12 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIn
 	private TravelDownloadUpdateCard downloadUpdateCard;
 	private TravelNeededMapsCard neededMapsCard;
 
+	private IndexItem currentDownloadingIndexItem;
 	private IndexItem mainIndexItem;
-	private List<IndexItem> neededIndexItems;
+	private List<IndexItem> neededIndexItems = new ArrayList<>();
 	private boolean waitForIndexes;
 
+	@SuppressWarnings("RedundantCast")
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -81,35 +82,26 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIn
 
 	@Override
 	public void downloadInProgress() {
-		if (mainIndexItem != null) {
-			DownloadIndexesThread downloadThread = getMyApplication().getDownloadThread();
-			IndexItem current = downloadThread.getCurrentDownloadingItem();
-			if (downloadUpdateCard != null
-					&& current != null
-					&& current == mainIndexItem
-					&& (!current.isDownloaded() || current.isOutdated())) {
-				downloadUpdateCard.setProgress(downloadThread.getCurrentDownloadingItemProgress());
-				adapter.updateDownloadUpdateCard();
-			}
+		IndexItem current = getMyApplication().getDownloadThread().getCurrentDownloadingItem();
+		if (current != null && current != currentDownloadingIndexItem) {
+			currentDownloadingIndexItem = current;
+			removeRedundantCards();
 		}
+		adapter.updateDownloadUpdateCard();
+		adapter.updateNeededMapsCard();
 	}
 
 	@Override
 	public void downloadHasFinished() {
-		if (mainIndexItem != null) {
-			final OsmandApplication app = getMyApplication();
-			File targetFile = mainIndexItem.getTargetFile(app);
-			if (downloadUpdateCard != null && targetFile.exists()) {
-				downloadUpdateCard.setLoadingInProgress(false);
-				removeDownloadUpdateCard();
-				TravelDbHelper travelDbHelper = app.getTravelDbHelper();
-				travelDbHelper.initTravelBooks();
-				travelDbHelper.selectTravelBook(targetFile);
-				Fragment parent = getParentFragment();
-				if (parent != null && parent instanceof WikivoyageExploreDialogFragment) {
-					((WikivoyageExploreDialogFragment) parent).populateData();
-				}
+		TravelDbHelper travelDbHelper = getMyApplication().getTravelDbHelper();
+		if (travelDbHelper.getSelectedTravelBook() == null) {
+			getMyApplication().getTravelDbHelper().initTravelBooks();
+			Fragment parent = getParentFragment();
+			if (parent != null && parent instanceof WikivoyageExploreDialogFragment) {
+				((WikivoyageExploreDialogFragment) parent).populateData();
 			}
+		} else {
+			removeRedundantCards();
 		}
 	}
 
@@ -150,13 +142,30 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIn
 		}
 	}
 
+	private void removeRedundantCards() {
+		if (mainIndexItem != null && mainIndexItem.isDownloaded() && !mainIndexItem.isOutdated()) {
+			removeDownloadUpdateCard();
+		}
+		boolean allMapsDownloaded = true;
+		for (IndexItem item : neededIndexItems) {
+			if (!item.isDownloaded()) {
+				allMapsDownloaded = false;
+				break;
+			}
+		}
+		if (allMapsDownloaded) {
+			removeNeededMapsCard();
+		}
+	}
+
 	private void checkDownloadIndexes() {
 		new ProcessIndexItemsTask(this).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
 	private void addIndexItemCards(IndexItem mainIndexItem, List<IndexItem> neededIndexItems) {
 		this.mainIndexItem = mainIndexItem;
-		this.neededIndexItems = neededIndexItems;
+		this.neededIndexItems.clear();
+		this.neededIndexItems.addAll(neededIndexItems);
 		addDownloadUpdateCard();
 		addNeededMapsCard();
 	}
@@ -169,9 +178,6 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIn
 		File selectedTravelBook = app.getTravelDbHelper().getSelectedTravelBook();
 
 		if (selectedTravelBook == null || outdated) {
-			IndexItem current = downloadThread.getCurrentDownloadingItem();
-			boolean loadingInProgress = mainIndexItem != null && current != null && mainIndexItem == current;
-
 			boolean showOtherMaps = false;
 			if (selectedTravelBook == null) {
 				List<IndexItem> items = downloadThread.getIndexes().getWikivoyageItems();
@@ -180,22 +186,19 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIn
 
 			downloadUpdateCard = new TravelDownloadUpdateCard(app, nightMode, !outdated);
 			downloadUpdateCard.setShowOtherMapsBtn(showOtherMaps);
-			downloadUpdateCard.setLoadingInProgress(loadingInProgress);
 			downloadUpdateCard.setListener(new TravelDownloadUpdateCard.ClickListener() {
 				@Override
 				public void onPrimaryButtonClick() {
 					if (mainIndexItem != null) {
 						new DownloadValidationManager(app).startDownload(getMyActivity(), mainIndexItem);
-						downloadUpdateCard.setLoadingInProgress(true);
 						adapter.updateDownloadUpdateCard();
 					}
 				}
 
 				@Override
 				public void onSecondaryButtonClick() {
-					if (downloadUpdateCard.isLoadingInProgress()) {
+					if (downloadUpdateCard.isLoading()) {
 						downloadThread.cancelDownload(mainIndexItem);
-						downloadUpdateCard.setLoadingInProgress(false);
 						adapter.updateDownloadUpdateCard();
 					} else if (!downloadUpdateCard.isDownload()) {
 						removeDownloadUpdateCard();
@@ -217,19 +220,22 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIn
 
 	private void addNeededMapsCard() {
 		if (!neededIndexItems.isEmpty()) {
-			neededMapsCard = new TravelNeededMapsCard(getMyApplication(), nightMode, neededIndexItems);
+			final OsmandApplication app = getMyApplication();
+
+			neededMapsCard = new TravelNeededMapsCard(app, nightMode, neededIndexItems);
 			neededMapsCard.setListener(new TravelNeededMapsCard.CardListener() {
 				@Override
 				public void onPrimaryButtonClick() {
-					if (!neededMapsCard.isDownloadingAll()) {
-						Toast.makeText(getContext(), "Download all", Toast.LENGTH_SHORT).show();
-					}
+					IndexItem[] items = neededIndexItems.toArray(new IndexItem[neededIndexItems.size()]);
+					new DownloadValidationManager(app).startDownload(getMyActivity(), items);
+					adapter.updateNeededMapsCard();
 				}
 
 				@Override
 				public void onSecondaryButtonClick() {
 					if (neededMapsCard.isDownloading()) {
-						Toast.makeText(getContext(), "Cancel", Toast.LENGTH_SHORT).show();
+						app.getDownloadThread().cancelDownload(neededIndexItems);
+						adapter.updateNeededMapsCard();
 					} else {
 						removeNeededMapsCard();
 					}

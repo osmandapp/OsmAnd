@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import net.osmand.plus.OsmandApplication;
@@ -24,6 +25,7 @@ public class TravelNeededMapsCard extends BaseTravelCard {
 	private List<IndexItem> items;
 
 	private Drawable downloadIcon;
+	private Drawable cancelIcon;
 
 	private CardListener listener;
 
@@ -36,26 +38,49 @@ public class TravelNeededMapsCard extends BaseTravelCard {
 		downloadThread = app.getDownloadThread();
 		this.items = items;
 		downloadIcon = getActiveIcon(R.drawable.ic_action_import);
+		cancelIcon = getActiveIcon(R.drawable.ic_action_remove_dark);
 	}
 
 	@Override
 	public void bindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder) {
 		if (viewHolder instanceof NeededMapsVH) {
 			NeededMapsVH holder = (NeededMapsVH) viewHolder;
+
 			holder.description.setText(isInternetAvailable()
 					? R.string.maps_you_need_descr : R.string.no_index_file_to_download);
 			adjustChildCount(holder.itemsContainer);
+
 			for (int i = 0; i < items.size(); i++) {
-				boolean lastItem = i == items.size() - 1;
 				IndexItem item = items.get(i);
+				boolean downloading = downloadThread.isDownloading(item);
+				boolean currentDownloading = downloading && downloadThread.getCurrentDownloadingItem() == item;
+				boolean lastItem = i == items.size() - 1;
 				View view = holder.itemsContainer.getChildAt(i);
+
 				((ImageView) view.findViewById(R.id.icon))
 						.setImageDrawable(getActiveIcon(item.getType().getIconResource()));
-				((TextView) view.findViewById(R.id.title)).setText(item.getVisibleName(app, app.getRegions(), false));
+				((TextView) view.findViewById(R.id.title))
+						.setText(item.getVisibleName(app, app.getRegions(), false));
 				((TextView) view.findViewById(R.id.description)).setText(getItemDescription(item));
-				((ImageView) view.findViewById(R.id.icon_action)).setImageDrawable(downloadIcon);
+
+				ImageView iconAction = (ImageView) view.findViewById(R.id.icon_action);
+				iconAction.setVisibility(item.isDownloaded() ? View.GONE : View.VISIBLE);
+				if (!item.isDownloaded()) {
+					iconAction.setImageDrawable(downloading ? cancelIcon : downloadIcon);
+				}
+
+				ProgressBar progressBar = (ProgressBar) view.findViewById(R.id.progress_bar);
+				progressBar.setVisibility(downloading ? View.VISIBLE : View.GONE);
+				if (currentDownloading) {
+					int progress = downloadThread.getCurrentDownloadingItemProgress();
+					progressBar.setProgress(progress < 0 ? 0 : progress);
+				} else {
+					progressBar.setProgress(0);
+				}
+
 				view.findViewById(R.id.divider).setVisibility(lastItem ? View.GONE : View.VISIBLE);
 			}
+
 			boolean primaryBtnVisible = updatePrimaryButton(holder);
 			boolean secondaryBtnVisible = updateSecondaryButton(holder);
 			holder.buttonsDivider.setVisibility(primaryBtnVisible && secondaryBtnVisible ? View.VISIBLE : View.GONE);
@@ -104,7 +129,7 @@ public class TravelNeededMapsCard extends BaseTravelCard {
 	 * @return true if button is visible, false otherwise.
 	 */
 	private boolean updatePrimaryButton(NeededMapsVH vh) {
-		if (!isDownloadingAll()) {
+		if (showPrimaryButton()) {
 			boolean enabled = isInternetAvailable();
 			vh.primaryBtnContainer.setVisibility(View.VISIBLE);
 			vh.primaryBtnContainer.setBackgroundResource(getPrimaryBtnBgRes(enabled));
@@ -134,13 +159,13 @@ public class TravelNeededMapsCard extends BaseTravelCard {
 		return false;
 	}
 
-	public boolean isDownloadingAll() {
+	private boolean showPrimaryButton() {
 		for (IndexItem item : items) {
-			if (!downloadThread.isDownloading(item)) {
-				return false;
+			if (!item.isDownloaded() && !downloadThread.isDownloading(item)) {
+				return true;
 			}
 		}
-		return true;
+		return false;
 	}
 
 	private String getItemDescription(IndexItem item) {
