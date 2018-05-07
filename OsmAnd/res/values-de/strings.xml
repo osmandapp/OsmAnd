@@ -2893,11 +2893,11 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="shared_string_finish">Beenden</string>
     <string name="use_system_keyboard">Gerätetastatur verwenden</string>
     <string name="marker_moved_to_active">Kartenmarkierung auf Karte verschoben</string>
-    <string name="release_2_8">• Komplett überarbeitete Kartenmarkierungen mit Richtungslinien und Routenplanung
-\n
-\n• Entfernungsmesser leistet Ausrichten auf Straße und Speichern als Track
-\n
-\n• Fehlerkorrekturen, alle 30 Minuten neue Daten auf dem Server, Aktualisierungen in der Navigation implementiert
+    <string name="release_2_8">• Komplett überarbeitete Kartenmarkierungen mit Richtungsanzeiger und Routenplanung 
+\n 
+\n• Entfernungsmesser leistet Ausrichten auf Straße und Speichern als Track 
+\n 
+\n• Fehlerkorrekturen, alle 30 Minuten neue Daten auf dem Server, Aktualisierungen in der Navigation implementiert 
 \n 
 \n</string>
 	<string name="release_2_9">• Erkennung von Stoppschildern jetzt nach Fahrtrichtung 
