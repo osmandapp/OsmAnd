@@ -185,6 +185,9 @@ public class WikivoyageWebViewClient extends WebViewClient implements RegionCall
 	}
 
 	private void getWikiArticle(String name, String lang, String url) {
+		if (article == null) {
+			return;
+		}
 		articleSearchTask = new WikiArticleSearchTask(this, article, name, regionName, fragmentManager,
 				lang, (MapActivity) context, nightMode, url);
 		articleSearchTask.execute();
