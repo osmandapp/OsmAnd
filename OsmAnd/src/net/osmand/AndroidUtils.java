@@ -87,6 +87,12 @@ public class AndroidUtils {
 
 	}
 
+	public static ColorStateList createBottomNavColorStateList(Context ctx, boolean nightMode) {
+		return AndroidUtils.createCheckedColorStateList(ctx, nightMode,
+				R.color.icon_color, R.color.wikivoyage_active_light,
+				R.color.icon_color, R.color.wikivoyage_active_dark);
+	}
+
 	public static String trimExtension(String src) {
 		if (src != null) {
 			int index = src.lastIndexOf('.');

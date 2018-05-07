@@ -111,7 +111,7 @@ public class WikivoyageExploreDialogFragment extends WikiBaseDialogFragment impl
 		viewPager.setSwipeLocked(true);
 		viewPager.setAdapter(new ViewPagerAdapter(childFm));
 
-		final ColorStateList navColorStateList = createBottomNavColorStateList();
+		final ColorStateList navColorStateList = AndroidUtils.createBottomNavColorStateList(getContext(), nightMode);
 		final BottomNavigationView bottomNav = (BottomNavigationView) mainView.findViewById(R.id.bottom_navigation);
 		bottomNav.setItemIconTintList(navColorStateList);
 		bottomNav.setItemTextColor(navColorStateList);
@@ -226,12 +226,6 @@ public class WikivoyageExploreDialogFragment extends WikiBaseDialogFragment impl
 		if (savedArticlesTabFragment != null) {
 			savedArticlesTabFragment.invalidateAdapter();
 		}
-	}
-
-	private ColorStateList createBottomNavColorStateList() {
-		return AndroidUtils.createCheckedColorStateList(getContext(), nightMode,
-				R.color.icon_color, R.color.wikivoyage_active_light,
-				R.color.icon_color, R.color.wikivoyage_active_dark);
 	}
 
 	public static boolean showInstance(FragmentManager fm) {

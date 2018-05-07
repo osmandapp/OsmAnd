@@ -1,8 +1,6 @@
 package net.osmand.plus.wikivoyage.explore.travelcards;
 
 import android.graphics.drawable.Drawable;
-import android.support.annotation.ColorRes;
-import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
@@ -25,8 +23,6 @@ public class TravelDownloadUpdateCard extends BaseTravelCard {
 
 	private boolean download;
 	private boolean showOtherMapsBtn;
-	private boolean loadingInProgress;
-	private int progress;
 
 	private ClickListener listener;
 
@@ -47,18 +43,6 @@ public class TravelDownloadUpdateCard extends BaseTravelCard {
 		this.showOtherMapsBtn = showOtherMapsBtn;
 	}
 
-	public boolean isLoadingInProgress() {
-		return loadingInProgress;
-	}
-
-	public void setLoadingInProgress(boolean loadingInProgress) {
-		this.loadingInProgress = loadingInProgress;
-	}
-
-	public void setProgress(int progress) {
-		this.progress = progress;
-	}
-
 	public void setListener(ClickListener listener) {
 		this.listener = listener;
 	}
@@ -76,8 +60,9 @@ public class TravelDownloadUpdateCard extends BaseTravelCard {
 	@Override
 	public void bindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder) {
 		if (viewHolder instanceof DownloadUpdateVH) {
+			boolean loading = isLoading();
 			DownloadUpdateVH holder = (DownloadUpdateVH) viewHolder;
-			holder.title.setText(getTitle());
+			holder.title.setText(getTitle(loading));
 			holder.icon.setImageDrawable(getIcon());
 			holder.description.setText(getDescription());
 			if (indexItem == null) {
@@ -87,11 +72,16 @@ public class TravelDownloadUpdateCard extends BaseTravelCard {
 				holder.fileIcon.setImageDrawable(getFileIcon());
 				holder.fileTitle.setText(getFileTitle());
 				holder.fileDescription.setText(getFileDescription());
-				holder.progressBar.setVisibility(loadingInProgress ? View.VISIBLE : View.GONE);
-				holder.progressBar.setProgress(progress < 0 ? 0 : progress);
+				holder.progressBar.setVisibility(loading ? View.VISIBLE : View.GONE);
+				if (isLoadingInProgress()) {
+					int progress = app.getDownloadThread().getCurrentDownloadingItemProgress();
+					holder.progressBar.setProgress(progress < 0 ? 0 : progress);
+				} else {
+					holder.progressBar.setProgress(0);
+				}
 			}
-			boolean primaryBtnVisible = updatePrimaryButton(holder);
-			boolean secondaryBtnVisible = updateSecondaryButton(holder);
+			boolean primaryBtnVisible = updatePrimaryButton(holder, loading);
+			boolean secondaryBtnVisible = updateSecondaryButton(holder, loading);
 			holder.buttonsDivider.setVisibility(primaryBtnVisible && secondaryBtnVisible ? View.VISIBLE : View.GONE);
 		}
 	}
@@ -102,15 +92,11 @@ public class TravelDownloadUpdateCard extends BaseTravelCard {
 	}
 
 	@NonNull
-	private String getTitle() {
-		if (loadingInProgress) {
+	private String getTitle(boolean loading) {
+		if (loading) {
 			return app.getString(R.string.shared_string_downloading) + "...";
 		}
 		return app.getString(download ? R.string.download_file : R.string.update_is_available);
-	}
-
-	private boolean isInternetAvailable() {
-		return app.getSettings().isInternetConnectionAvailable();
 	}
 
 	private Drawable getIcon() {
@@ -149,10 +135,10 @@ public class TravelDownloadUpdateCard extends BaseTravelCard {
 	/**
 	 * @return true if button is visible, false otherwise.
 	 */
-	private boolean updateSecondaryButton(DownloadUpdateVH vh) {
-		if (loadingInProgress || !download || showOtherMapsBtn) {
+	private boolean updateSecondaryButton(DownloadUpdateVH vh, boolean loading) {
+		if (loading || !download || showOtherMapsBtn) {
 			vh.secondaryBtnContainer.setVisibility(View.VISIBLE);
-			vh.secondaryBtn.setText(getSecondaryBtnTextId());
+			vh.secondaryBtn.setText(getSecondaryBtnTextId(loading));
 			vh.secondaryBtn.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
@@ -168,8 +154,8 @@ public class TravelDownloadUpdateCard extends BaseTravelCard {
 	}
 
 	@StringRes
-	private int getSecondaryBtnTextId() {
-		if (loadingInProgress) {
+	private int getSecondaryBtnTextId(boolean loading) {
+		if (loading) {
 			return R.string.shared_string_cancel;
 		}
 		if (!download) {
@@ -181,8 +167,8 @@ public class TravelDownloadUpdateCard extends BaseTravelCard {
 	/**
 	 * @return true if button is visible, false otherwise.
 	 */
-	private boolean updatePrimaryButton(DownloadUpdateVH vh) {
-		if (!loadingInProgress) {
+	private boolean updatePrimaryButton(DownloadUpdateVH vh, boolean loading) {
+		if (!loading) {
 			boolean enabled = isInternetAvailable();
 			vh.primaryBtnContainer.setVisibility(View.VISIBLE);
 			vh.primaryBtnContainer.setBackgroundResource(getPrimaryBtnBgRes(enabled));
@@ -203,20 +189,13 @@ public class TravelDownloadUpdateCard extends BaseTravelCard {
 		return false;
 	}
 
-	@DrawableRes
-	private int getPrimaryBtnBgRes(boolean enabled) {
-		if (enabled) {
-			return nightMode ? R.drawable.wikivoyage_primary_btn_bg_dark : R.drawable.wikivoyage_primary_btn_bg_light;
-		}
-		return nightMode ? R.drawable.wikivoyage_secondary_btn_bg_dark : R.drawable.wikivoyage_secondary_btn_bg_light;
+	public boolean isLoading() {
+		return indexItem != null && app.getDownloadThread().isDownloading(indexItem);
 	}
 
-	@ColorRes
-	private int getPrimaryBtnTextColorRes(boolean enabled) {
-		if (enabled) {
-			return nightMode ? R.color.wikivoyage_primary_btn_text_dark : R.color.wikivoyage_primary_btn_text_light;
-		}
-		return R.color.wikivoyage_secondary_text;
+	private boolean isLoadingInProgress() {
+		IndexItem current = app.getDownloadThread().getCurrentDownloadingItem();
+		return indexItem != null && current != null && indexItem == current;
 	}
 
 	public interface ClickListener {
