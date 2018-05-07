@@ -2893,4 +2893,26 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="shared_string_contents">Obsah</string>
     <string name="index_item_world_wikivoyage">Celosvětové články Wikivoyage</string>
     <string name="contour_lines_hillshade_maps">Vrstevnice &amp; stínování terénu</string>
-    </resources>
+    <string name="shared_string_restart">Restartovat</string>
+    <string name="show_images">Zobrazit obrázky</string>
+    <string name="purchase_cancelled_dialog_descr">Obnovit předplatné, pro pokračování využití všech funkcí:</string>
+
+    <string name="maps_you_need_descr">Na základě článků, které jste uložili, doporučujeme vám stáhnout následující mapy:</string>
+    <string name="maps_you_need">Potřebné mapy</string>
+    <string name="osmand_team">OsmAnd tým</string>
+    <string name="popular_destinations">Oblíbené cíle</string>
+    <string name="update_is_available">Je dostupná aktualizace</string>
+	<string name="download_file">Stáhnout soubor</string>
+    <string name="start_editing">Začít s úpravami</string>
+    <string name="get_unlimited_access">Získejte neomezený přístup</string>
+    <string name="monthly_map_updates">Aktualizace Map: <b>Každý měsíc</b></string>
+    <string name="daily_map_updates">Aktualizace Map: <b>Každou hodinu</b></string>
+    <string name="download_wikipedia_description">Stáhnout články Wikipedie pro %1$s a číst je v režimu offline.</string>
+    <string name="download_wikipedia_label">Stahování dat z Wikipedie</string>
+    <string name="open_in_browser_wiki">Otevřít článek online</string>
+    <string name="open_in_browser_wiki_description">Zobrazit článek ve webovém prohlížeči.</string>
+    <string name="download_wiki_region_placeholder">tato oblast</string>
+    <string name="wiki_article_search_text">Hledání potřebného wiki článku</string>
+    <string name="wiki_article_not_found">Článek nebyl nalezen</string>
+    <string name="how_to_open_wiki_title">Jak otevřít články Wikipedie?</string>
+</resources>
