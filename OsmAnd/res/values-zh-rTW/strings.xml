@@ -484,7 +484,7 @@
     <string name="voice_stream_voice_call">通話音訊 (也會中斷汽車 BT 音響)</string>
     <string name="voice_stream_notification">通知音訊</string>
     <string name="voice_stream_music">多媒體/音樂音訊</string>
-    <string name="warning_tile_layer_not_downloadable">應用程式無法下載 %1$s 圖層，請嘗試重新安裝。</string>
+    <string name="warning_tile_layer_not_downloadable">應用程式無法下載 %1$s 圖層，重新安裝可能會有所幫助。</string>
     <string name="overlay_transparency_descr">修改上圖層的透明度。</string>
     <string name="overlay_transparency">上圖層透明度</string>
     <string name="map_transparency_descr">修改底圖的透明度。</string>
@@ -503,9 +503,9 @@
     <string name="level_to_switch_vector_raster">最小向量縮放比級別</string>
 
 
-    <string name="error_doing_search">在離線查尋時錯誤。</string>
+    <string name="error_doing_search">無法執行離線查尋。</string>
     <string name="search_offline_geo_error">無法解析地理含義 \'%s\'。</string>
-    <string name="search_osm_offline">查尋地理位置</string>
+    <string name="search_osm_offline">按地理位置查尋</string>
     <string name="system_locale">系統</string>
     <string name="preferred_locale_descr">選擇顯示語言（在更改後，請重新啟動 OsmAnd )。</string>
     <string name="preferred_locale">顯示語言</string>
@@ -607,7 +607,7 @@
     <string name="rendering_exception">在演算已選擇的地區時發生錯誤</string>
     <string name="show_point_options">使用位置 …</string>
     <string name="renderer_load_sucess">著色演算器已載入</string>
-    <string name="renderer_load_exception">發生異常：著色演算器未能載入</string>
+    <string name="renderer_load_exception">無法載入著色演算器</string>
     <string name="renderers">向量著色演算器</string>
     <string name="renderers_descr">選擇著色演算外觀。</string>
     <string name="poi_context_menu_website">顯示 POI 網站</string>
@@ -629,7 +629,7 @@
     
     <string name="gpx_files_not_found">在 /tracks 資料夾找不到 GPX 檔案</string>
     <string name="layer_gpx_layer">GPX 軌跡…</string>
-    <string name="error_reading_gpx">讀取 GPX 資料錯誤</string>
+    <string name="error_reading_gpx">無法讀取 GPX 資料</string>
     <string name="vector_data">離線向量地圖</string>
     <string name="transport_context_menu">查尋公車站牌</string>
 
@@ -638,7 +638,7 @@
     <string name="poi_context_menu_delete">刪除 POI</string>
     <string name="rotate_map_compass_opt">羅盤方向</string>
     <string name="rotate_map_bearing_opt">行進方向</string>
-    <string name="rotate_map_none_opt">不旋轉(正北永遠朝上)</string>
+    <string name="rotate_map_none_opt">不旋轉（正北永遠朝上）</string>
     <string name="rotate_map_to_bearing_descr">選擇地圖畫面對準方式。</string>
     <string name="rotate_map_to_bearing">地圖方位</string>
     <string name="show_route">導航路線資訊</string>
@@ -646,9 +646,9 @@
     <string name="fav_file_to_load_not_found">在 {0} 裡未找到包括我的收藏的 GPX 檔案</string>
     <string name="fav_saved_sucessfully">我的收藏已存到 {0}</string>
     <string name="no_fav_to_save">沒有我的收藏標點要儲存</string>
-    <string name="error_occurred_loading_gpx">在載入 GPX 時發生錯誤</string>
+    <string name="error_occurred_loading_gpx">無法載入 GPX</string>
     <string name="send_report">傳送報告</string>
-    <string name="none_region_found">在記憶卡上沒有該地區的離線資料，從網路下載資料。</string>
+    <string name="none_region_found">在記憶卡上找不到任何已下載的地圖。</string>
     <string name="poi_namefinder_query_empty">輸入以查尋 POI</string>
     <string name="any_poi">任何</string>
     
@@ -662,7 +662,7 @@
     <string name="menu_layers">地圖圖層</string>
     <string name="context_menu_item_search_poi">查尋 POI</string>
 
-    <string name="use_trackball_descr">使用軌跡球移動地圖。</string>
+    <string name="use_trackball_descr">使用軌跡球裝置移動地圖。</string>
     <string name="use_trackball">使用軌跡球</string>
     <string name="background_service_wait_int_descr">為每個背景定位設定最大的等待時間。</string>
     <string name="background_service_wait_int">定位等待時間</string>
@@ -677,7 +677,7 @@
     <string name="background_service_int">GPS 喚醒間隔</string>
     <string name="background_service_provider_descr">選擇位置提供者，使用於背景服務。</string>
     <string name="background_service_provider">位置提供</string>
-    <string name="background_router_service_descr">當螢幕關閉時，讓 OsmAnd 在背景執行，追蹤您的位置。</string>
+    <string name="background_router_service_descr">在螢幕關閉時追蹤您的位置。</string>
     <string name="background_router_service">在背景執行 OsmAnd</string>
     <string name="off_router_service_no_gps_available">背景導航服務，需要提供一個已開啟的位置。</string>
     <string name="hide_poi_filter">隱藏篩選器</string>
@@ -694,8 +694,8 @@
 
     <string name="sd_unmounted">記憶卡卡無法存取。
 \n您將無法看到地圖或查尋地點。</string>
-    <string name="sd_mounted_ro">記憶卡是唯讀模式。
-\n您只能看預載的地圖且無法由網路下載。</string>
+    <string name="sd_mounted_ro">記憶卡是唯讀模式。 
+\n現在只能看預載的地圖，而沒有下載新的區域。</string>
     <string name="unzipping_file">解壓縮檔案…</string>
     <string name="route_tr">右轉後直行</string>
     <string name="route_tshr">向右急轉後直行</string>
@@ -707,7 +707,7 @@
     <string name="route_head">前方</string>
     <string name="first_time_continue">隨後</string>
     <string name="first_time_download">下載地區</string>
-    <string name="search_poi_location">搜尋訊號中…</string>
+    <string name="search_poi_location">正在等待訊號…</string>
     <string name="search_near_map">查尋目前地圖中心附近</string>
     <string name="search_nearby">在附近查尋</string>
     <string name="map_orientation_default">與裝置一樣</string>
@@ -715,7 +715,7 @@
     <string name="map_orientation_landscape">橫向</string>
     <string name="map_screen_orientation">螢幕方向</string>
     <string name="map_screen_orientation_descr">直豎、橫向或依裝置。</string>
-    <string name="opening_hours_not_supported">開啟時間的格式不支援編輯</string>
+    <string name="opening_hours_not_supported">開啟中的時間格式無法更改</string>
     <string name="add_new_rule">新增新規則</string>
     <string name="transport_Routes">導航路線</string>
     <string name="transport_Stop">停靠點</string>
@@ -734,8 +734,8 @@
     <string name="show_transport_over_map">顯示公車站牌</string>
     <string name="hello">OsmAnd 導航應用程式</string>
     <string name="update_poi_success">已更新 POI 資料(已載入{0}個)</string>
-    <string name="update_poi_error_local">更新裝置端的 POI 清單錯誤</string>
-    <string name="update_poi_error_loading">由伺服器載入資料時發生錯誤</string>
+    <string name="update_poi_error_local">無法更新裝置端的 POI 清單</string>
+    <string name="update_poi_error_loading">無法從伺服器載入資料</string>
     <string name="update_poi_no_offline_poi_index">該地區無可用的離線 POI 資料</string>
     <string name="update_poi_is_not_available_for_zoom">更新的興趣點無法用於小的縮放級別</string>
     <string name="context_menu_item_update_poi">更新 POI</string>
@@ -764,7 +764,7 @@
     <string name="download_question_exist">離線資料 {0} 已存在 ({1})。要更新 ({2}) 嗎？</string>
     <string name="address">地址</string>
     <string name="downloading_list_indexes">正在下載可用的地區清單…</string>
-    <string name="list_index_files_was_not_loaded">無法由 https://osmand.net 取得地區列表。</string>
+    <string name="list_index_files_was_not_loaded">無法從 https://osmand.net 取得地區清單。</string>
 
     <string name="fav_points_edited">我的收藏標點已被更改</string>
     <string name="fav_points_not_exist">沒有我的收藏標點存在</string>
@@ -781,17 +781,17 @@
     <string name="loading_poi_obj">正在載入 POI…</string>
     <string name="auth_failed">授權失敗</string>
     <string name="failed_op">失敗</string>
-    <string name="converting_names">本地/英文名稱轉換中…</string>
+    <string name="converting_names">正在轉換本地/英文名稱…</string>
     <string name="loading_streets_buildings">正在載入道路/建築物…</string>
     <string name="loading_postcodes">正在載入郵遞區號…</string>
     <string name="loading_streets">正在載入街道…</string>
     <string name="loading_cities">正在載入縣市…</string>
 
     <string name="poi">POI</string>
-    <string name="error_occurred_saving_gpx">儲存 GPX 時錯誤</string>
-    <string name="error_calculating_route">計算路線時錯誤</string>
-    <string name="error_calculating_route_occured">計算路線時發生錯誤</string>
-    <string name="empty_route_calculated">錯誤：計算路線是空的</string>
+    <string name="error_occurred_saving_gpx">無法儲存 GPX 軌跡</string>
+    <string name="error_calculating_route">無法計算路線</string>
+    <string name="error_calculating_route_occured">無法計算路線</string>
+    <string name="empty_route_calculated">計算的路線是空的</string>
     <string name="new_route_calculated_dist">重新計算路程，距離有</string>
     <string name="arrived_at_destination">您已經抵達目的地</string>
     <string name="invalid_locations">座標的無效</string>
@@ -915,7 +915,7 @@
     <string name="poi_action_add">新增</string>
     <string name="poi_action_change">更改</string>
     <string name="poi_action_succeded_template">動作 {0} 已完成。</string>
-    <string name="poi_error_unexpected_template">在進行 {0} 動作時出現意外錯誤。</string>
+    <string name="poi_error_unexpected_template">無法執行 {0} 動作。</string>
     <string name="poi_error_io_error_template">當執行 {0} 動作時出現 I/O 錯誤。</string>
     <string name="poi_error_info_not_loaded">節點的資訊未載入</string>
     <string name="poi_dialog_opening_hours">營業</string>
@@ -2008,7 +2008,7 @@
     <string name="plugins_menu_group">外掛元件</string>
     <string name="first_usage_item">首次使用</string>
     <string name="first_usage_item_description">如何下載地圖、設置基本設定。</string>
-    <string name="navigation_item_description">設置導航。</string>
+    <string name="navigation_item_description">設定導航。</string>
     <string name="faq_item">常見問題</string>
     <string name="faq_item_description">常見的問題</string>
     <string name="map_viewing_item">地圖檢視</string>
