@@ -231,7 +231,7 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIn
 					if (neededMapsCard.isDownloading()) {
 						Toast.makeText(getContext(), "Cancel", Toast.LENGTH_SHORT).show();
 					} else {
-						Toast.makeText(getContext(), "Later", Toast.LENGTH_SHORT).show();
+						removeNeededMapsCard();
 					}
 				}
 			});
@@ -248,6 +248,11 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIn
 	private void removeDownloadUpdateCard() {
 		adapter.removeDownloadUpdateCard();
 		downloadUpdateCard = null;
+	}
+
+	private void removeNeededMapsCard() {
+		adapter.removeNeededMapsCard();
+		neededMapsCard = null;
 	}
 
 	private static class ProcessIndexItemsTask extends AsyncTask<Void, Void, Pair<IndexItem, List<IndexItem>>> {
