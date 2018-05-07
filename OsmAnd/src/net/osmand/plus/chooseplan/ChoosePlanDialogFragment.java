@@ -306,7 +306,6 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 					@Override
 					public void onClick(View v) {
 						subscript();
-						dismiss();
 					}
 				});
 			}
@@ -448,6 +447,7 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 
 	@Override
 	public void onItemPurchased(String sku, boolean active) {
+		dismiss();
 	}
 
 	@Override
