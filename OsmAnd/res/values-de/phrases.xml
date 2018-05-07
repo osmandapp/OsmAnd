@@ -3831,7 +3831,7 @@
 
 <string name="poi_glacier_type_icecap">Eiskappe</string>
 	<string name="poi_glacier_type_icefield">Eisfeld</string>
-	<string name="poi_glacier_type_plateau">Hochebene</string>
+	<string name="poi_glacier_type_plateau">Plateau</string>
 	<string name="poi_glacier_type_valley">Tal</string>
 	<string name="poi_glacier_type_outlet">Mündung</string>
 	<string name="poi_glacier_type_tidewater">Gezeitenwasser</string>
