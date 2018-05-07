@@ -1806,21 +1806,21 @@ Pôr do Sol: %2$s</string>
     <string name="access_from_map">Acessar a partir do mapa</string>
     <string name="show_on_start_description">\'Desligado\' lança diretamente para a tela do mapa.</string>
     <string name="copied_to_clipboard">Copiado para a área de transferência</string>
-    <string name="release_2_2">• Nova interface do usuário sensível ao contexto, ao tocar locais no mapa ou em outras telas 
+    <string name="release_2_2">\\u0020\\u2022 Nova interface do usuário sensível ao contexto, ao tocar locais no mapa ou em outras telas
 \n 
-\n • Tela do mapa agora é lançada diretamente, a menos que \'Mostrar painel de controle no início\' esteja selecionado 
+\n • Tela do mapa agora é lançada diretamente, a menos que \'Mostrar painel de controle no início\' esteja selecionado
 \n 
-\n • Configure quais e de que forma os cartões são exibidos no painel de controle 
+\n • Configure quais e de que forma os cartões são exibidos no painel de controle
 \n 
-\n • Desative o painel de controle, se preferir um controle baseado em menus 
+\n • Desative o painel de controle, se preferir um controle baseado em menus
 \n 
-\n • Para baixar mapas, as regiões podem ser selecionadas diretamente, tocando no mapa do mundo 
+\n • Para baixar mapas, as regiões podem ser selecionadas diretamente, tocando no mapa do mundo
 \n 
-\n • Pesquisa por \'Pontos de interesse\' agora oferece suporte a consultas mais específicas 
+\n • Pesquisa por \'Pontos de interesse\' agora oferece suporte a consultas mais específicas
 \n 
-\n • Melhoria nos \'Pontos de interesse\' e funcionalidades de edição OSM 
+\n • Melhoria nos \'Pontos de interesse\' e funcionalidades de edição OSM
 \n 
-\n • Reformulação de estrutura e de interface para baixar dados de mapa. 
+\n • Reformulação de estrutura e de interface para baixar dados de mapa
 \n 
 \n e mais…</string>
     <string name="access_from_map_description">O botão menu abre o painel de controle, não o menu.</string>
@@ -2595,21 +2595,21 @@ Pôr do Sol: %2$s</string>
 \n
 \n</string>
     <string name="route_points_category_name">Converte como visitado nesta rota</string>
-    <string name="release_2_7">\\022 Mapillary plugin com imagens ao nível da rua
-\n
+    <string name="release_2_7">\\u0020\\u2022 Mapillary plugin com imagens ao nível da rua
+\n 
 \n• Widget de régua para medição de distância
-\n
+\n 
 \n• Intervalos de divisão GPX, com informações detalhadas sobre o seu trajeto
-\n
+\n 
 \n• Outras melhorias e correções de bugs
-\n
+\n 
 \n</string>
-    <string name="release_2_8">\\022 Marcadores de mapa completamente reformulado com as linhas de guia e planejamento de rota
-\n
+    <string name="release_2_8">\\u0020\\u2022 Marcadores de mapa completamente reformulado com as linhas direcionais e planejamento de rota
+\n 
 \n • Ferramenta de medição de distância oferecendo recurso de alinhar com estrada e salvar pontos como trajeto
-\n
+\n 
 \n • OsmAnd Live: correções de bugs, novos dados no servidor a cada 30 minutos, atualizações implementadas para a navegação
-\n
+\n 
 \n</string>
     <string name="download_files_error_not_enough_space">Não há espaço suficiente! O espaço de armazenamento necessário é {3} MB temporariamente, {1} MB permanentemente. O espaço disponível é de apenas {2} MB.</string>
     <string name="download_files_question_space_with_temp">Baixar {0} arquivo(s)? O espaço de armazenamento usado é de {3} MB temporariamente, {1} MB permanentemente. (Espaço disponível é de {2} MB.)</string>
@@ -2694,40 +2694,40 @@ Pôr do Sol: %2$s</string>
     <string name="osmand_plus_extended_description_part6">Recursos de ciclismo e pedestre • Visualização de caminhos a pé, pistas de caminhadas e ciclovias, ideal para atividades ao ar livre • Roteamento e modos de exibição especiais para bicicleta e pedestres • Paradas de transporte público opcionais (ônibus, troleibus, trem) incluindo nomes de linhas • Gravação opcional de viagem para arquivo GPX local ou serviço on-line • Exibição opcional de velocidade e altitudes • Exibição de curvas de nível e sombreamento de relevo (via plugin adicional)</string>
     <string name="shared_string_without_name">Sem nome</string>
     <string name="empty_state_markers_history">\@string/shared_string_history</string>
-    <string name="release_2_6">\\u0020\\u2022 Novo recurso: Botão de ação rápida 
+    <string name="release_2_6">\\u0020\\u2022 Novo recurso: Botão de ação rápida
 \n 
-\n • Resposta a gesto de toque de tela melhorada (por exemplo, deslocamento de tela e zoom simultâneos) 
+\n • Resposta a gesto de toque de tela melhorada (p. ex., deslocamento de tela e zoom simultâneos)
 \n 
-\n • Novas fontes de mapas cobrindo mais localidades 
+\n • Novas fontes de mapas cobrindo mais localidades
 \n 
-\n • Suporte TTS para variantes de idiomas regionais (e sotaques) 
+\n • Suporte TTS para variantes de idiomas regionais (e sotaques)
 \n 
-\n • Melhorias de visibilidade em vários estilos de mapas e Wikipédia 
+\n • Melhorias de visibilidade em vários estilos de mapas e Wikipédia
 \n 
-\n • Suporte ao Open Location Code (OLC) 
+\n • Suporte ao Open Location Code (OLC)
 \n 
-\n • Exibe elevação, inclinação e perfil de velocidade para trilhas GPX gravadas e rotas calculadas 
+\n • Exibe elevação, inclinação e perfil de velocidade para trilhas GPX gravadas e rotas calculadas
 \n 
-\n • Definição de \"estilo de condução\" e melhorias de lógica em roteamento de bicicleta 
+\n • Definição de \"estilo de condução\" e melhorias de lógica em roteamento de bicicleta
 \n 
-\n • Configurações para usar dados de altitude em roteamento de bicicleta 
+\n • Configurações para usar dados de altitude em roteamento de bicicleta
 \n 
-\n • Várias outras melhorias e correções de bugs 
+\n • Várias outras melhorias e correções de bugs
 \n 
 \n e muito mais…</string>
     <string name="osmand_plus_extended_description_part8">Cobertura de mapa e qualidade aproximada: • Europa Ocidental: **** • Europa Oriental: *** • Rússia: *** • América do Norte: *** • América do Sul: ** • Ásia: ** • Japão e Coreia: *** • Oriente Médio: ** • África: ** • Antártica: * A maioria dos países ao redor do globo disponível como downloads! Do Afeganistão ao Zimbabué, da Austrália aos Estados Unidos. Argentina, Brasil, Canadá, França, Alemanha, México, Reino Unido, Espanha,…</string>
-    <string name="release_2_5">\\022 Ícones de toque sobre a mapa
-\n
+    <string name="release_2_5">\\u0020\\u2022 Ícones de toque sobre a mapa
+\n 
 \n • Filtro de pesquisa de POI robusto: Pesquise, por ex., restaurantes por cozinha, ou áreas de campismo com instalações específicas
-\n
+\n 
 \n • Novo estilo de mapa topográfico para ciclistas e caminhantes
-\n
+\n 
 \n • Gravação de viagem melhorado
-\n
+\n 
 \n • Notificações de navegação melhorados (Android Wear)
-\n
+\n 
 \n • Outras melhorias e correções de bugs
-\n
+\n 
 \n e muito mais…</string>
     <string name="lang_lo">Laociano</string>
     <string name="show_closed_notes">Mostrar notas encerradas</string>
@@ -2780,60 +2780,60 @@ Pôr do Sol: %2$s</string>
     <string name="shared_string_total">Total</string>
     <string name="clear_all_intermediates">Limpar todos os pontos intermédios</string>
     <string name="group_deleted">Grupo excluído</string>
-    <string name="nothing_found_in_radius">Nada encontrado dentro do raio:</string>
+    <string name="nothing_found_in_radius">Nada encontrado:</string>
     <string name="osmand_extended_description_part1">OsmAnd (sigla em inglês de Direções de Navegação Automatizada do OSM) é um aplicativo de mapa e navegação com acesso a dados livres, mundiais e de alta qualidade do OpenStreetMap (OSM). Poderá usar o navegador visual e por voz, exibir POIs (pontos de interesse), criar e gerenciar trilhas GPX, usar (através de plugin) curvas de nível e dados de altitude, escolher entre os modos motorista, ciclista e pedestre, editar o OSM e muito mais.</string>
     <string name="use_two_digits_longitude">"Use longitude com dois dígitos "</string>
     <string name="shared_string_travel">Viagem</string>
     <string name="waypoints_removed_from_map_markers">Pontos de passagem removidos dos marcadores de mapa</string>
     <string name="shared_string_result">Resultado</string>
-    <string name="release_2_4">\\022 Novo pesquisa de texto livre robusta
-\n
+    <string name="release_2_4">\\u0020\\u2022 Nova pesquisa de texto livre robusta
+\n 
 \n • Integração sistema áudio do carro / alto-falante de telefone via Bluetooth
-\n
+\n 
 \n • Guia de rota, comando de voz, e indicação de mudança de faixa melhorados
-\n
+\n 
 \n • Camada de transporte com renderização de rota melhorado
-\n
+\n 
 \n • Mais traduções adicionados e mais suporte regionalizado
-\n
+\n 
 \n • Muitas outras melhorias e correções de bugs
-\n
+\n 
 \n e muito mais…</string>
     <string name="osmand_plus_extended_description_part2">Navegação • Funciona on-line (rápido) ou offline (sem custo de roaming quando estiver no exterior) • Orientação por voz passo-a-passo (vozes gravadas e sintetizadas) • Orientação de faixas opcional, exibição do nome da rua e tempo estimado de chegada • Suporta pontos intermediários do seu itinerário • Correção de rota automático sempre que você sair da rota • Busque lugares por endereço, pelo tipo (ex.: restaurante, hotel, posto de gasolina, museu), ou por coordenadas geográficas</string>
     <string name="osmand_plus_extended_description_part3">Visualização de mapa • Exiba sua posição e orientação • Opcionalmente alinhe a tela de acordo com a bússola ou a direção de seu movimento • Salve seus lugares mais importantes como Favoritos • Exiba POIs (pontos de interesse) próximos • Exiba imagens online especializadas, vista de satélite (do Bing), diferentes camadas como trilhas de navegação GPX e camadas adicionais com transparência personalizável • Opcionalmente exiba nomes de lugares em inglês, língua local ou fonético</string>
     <string name="osmand_plus_extended_description_part4">Use dados OSM e da Wikipédia • Informações de alta qualidade dos melhores projetos colaborativos do mundo • Dados OSM disponíveis por país ou região • POIs da Wikipédia, ótimo para visitas turísticas • Downloads grátis ilimitados, diretamente do aplicativo • Mapas vetoriais offline compactos e atualizados mensalmente • Seleção entre região completa ou apenas rede rodoviária (Exemplo: Japão inteiro tem 700 MB ou apenas 200 MB para rede rodoviária)</string>
-    <string name="online_webpage_warning">Esta página só está disponível online. Você deseja abri-la em um navegador da web?</string>
+    <string name="online_webpage_warning">Página disponível só online. Abrir num navegador web?</string>
     <string name="images_cache">Cache de imagens</string>
     <string name="delete_search_history">Apagar histórico de pesquisa</string>
     <string name="show_images">Mostrar imagens</string>
     <string name="download_maps_travel">Mapas de viagem</string>
     <string name="shared_string_wikivoyage">Wikivoyage</string>
     <string name="article_removed">Artigo excluído</string>
-    <string name="wikivoyage_search_hint">Pesquisar: País, Cidade, Estado</string>
+    <string name="wikivoyage_search_hint">Pesquisar: País, cidade, estado</string>
     <string name="shared_string_read">Ler</string>
     <string name="saved_articles">Artigos salvos</string>
     <string name="shared_string_explore">Explorar</string>
     <string name="shared_string_contents">Conteúdos</string>
     <string name="index_item_world_wikivoyage">Artigos Wikivoyage mundiais</string>
-    <string name="release_2_9">• Menu de contexto atualizado: Mostra quando o POI abre ou fecha
-\n
-\n • Menu Transporte: todas as rotas disponíveis estão agora no topo
-\n
+    <string name="release_2_9">\\u0020\\u2022 Menu de contexto atualizado: Mostra quando o POI abre ou fecha 
+\n 
+\n • Menu Transporte: todas as rotas disponíveis estão agora no topo 
+\n 
 \n • Wikipedia: adiciona o botão para abrir o artigo original, atualiza a aparência de artigos 
-\n
-\n • Rota: adiciona a possibilidade de trocar pontos de início e fim em um toque
-\n
-\n • Notas: adiciona classificação por tipo e data
-\n
-\n • Edições OSM: mostra um ícone e um nome de categoria do POI, exibe ações concluídas
-\n
-\n • Nova tela de entrada rápida de coordenadas para criação rápida de marcadores
-\n
-\n • Detecção de sinais de PARE agora considera direção de condução
-\n
-\n • Novo algoritmo proporcionando melhores valores de subida ou descida para trilhas GPX
-\n
-\n • Terreno (subida) leva em conta tempo de caminhada (Regra de Naismith)
+\n 
+\n • Rota: adiciona a possibilidade de trocar pontos de início e fim em um toque 
+\n 
+\n • Notas: adiciona classificação por tipo e data 
+\n 
+\n • Edições OSM: mostra um ícone e um nome de categoria do POI, exibe ações concluídas 
+\n 
+\n • Nova tela de entrada rápida de coordenadas para criação rápida de marcadores 
+\n 
+\n • Detecção de sinais de PARE agora considera direção de condução 
+\n 
+\n • Novo algoritmo proporcionando melhores valores de subida ou descida para trilhas GPX 
+\n 
+\n • Terreno (subida) leva em conta tempo de caminhada (Regra de Naismith) 
 \n</string>
     <string name="wikivoyage_download_pics">Baixar fotos</string>
     <string name="shared_string_wifi_only">Somente WiFi</string>
@@ -2841,19 +2841,19 @@ Pôr do Sol: %2$s</string>
     <string name="shared_string_travel_book">Livro de viagens</string>
     <string name="download_images">Baixar imagens</string>
     <string name="popular_destinations">Destinos populares</string>
-    <string name="welcome_to_open_beta">Bem-vindo ao Open Beta!</string>
+    <string name="welcome_to_open_beta">Bem-vindo ao Open Beta</string>
     <string name="wiki_article_not_found">Artigo não encontrado</string>
     <string name="how_to_open_wiki_title">Como se abre artigos da Wikipedia?</string>
 <string name="osmand_team">Equipe OsmAnd</string>
     <string name="paid_app">Aplicativo pago</string>
     <string name="paid_plugin">Plugin pago</string>
-    <string name="travel_card_update_descr">Preparamos atualizações e correções nos dados Wikivoyage. Atualize o arquivo para vê-los.</string>
+    <string name="travel_card_update_descr">Novos dados Wikivoyage estão disponíveis. Atualize para aproveitar.</string>
 	<string name="update_is_available">Atualização disponível</string>
 	<string name="download_file">Baixar arquivo</string>
-    <string name="start_editing_card_image_text">O guia livre de viagens do mundo que qualquer um pode editar.</string>
+    <string name="start_editing_card_image_text">O guia livre de viagens mundial que qualquer um pode editar.</string>
     <string name="start_editing">Comece a editar</string>
     <string name="get_unlimited_access">Obtenha acesso ilimitado</string>
-    <string name="travel_guide">Guia de Viagem</string>
+    <string name="travel_guide">Guia de Viagem Wikivoyage</string>
     <string name="travel_guide_description">Explore os guias Wikivoyage para os lugares mais interessantes do planeta no OsmAnd sem precisar de conexão com a internet.</string>
     <string name="monthly_map_updates">Atualizações de mapa: <b>mensal</b></string>
     <string name="daily_map_updates">Atualizações de mapa: <b>a cada hora</b></string>
@@ -2887,16 +2887,16 @@ Pôr do Sol: %2$s</string>
     <string name="maps_you_need">Mapas que você precisa</string>
     <string name="travel_card_download_descr">Baixe estes guias de viagem Wikivoyage para ver os artigos sobre lugares ao redor do mundo sem uma conexão à Internet.</string>
 	<string name="welcome_to_open_beta_description">Travel baseia-se no Wikivoyage. Teste todos os recursos durante o teste beta aberto, de graça. Depois, Travel estará disponível para assinantes OsmAnd Unlimited e proprietários de OsmAnd+.</string>
-    <string name="release_2_3">• OSM Live. Apoie colaboradores do mapa desenvolvedores e obtenha atualizações de mapa a cada hora. 
-\n
-\n • Marcadores de mapa. Uma nova maneira de selecionar rapidamente lugares no mapa.
-\n
-\n • Mapas OSM mais detalhados com símbolo rodoviário específico do país e muitos novos recursos de mapa.
-\n
+    <string name="release_2_3">\\u0020\\u2022 OSM Live. Apoie colaboradores do mapa desenvolvedores e obtenha atualizações de mapa a cada hora. 
+\n 
+\n • Marcadores de mapa. Uma nova maneira de selecionar rapidamente lugares no mapa. 
+\n 
+\n • Mapas OSM mais detalhados com símbolo rodoviário específico do país e muitos novos recursos de mapa. 
+\n 
 \n • Melhor aparência da preparação de rota. 
-\n
-\n • Muitas melhorias no menu de contexto do mapa tais como pesquisa de endereços contextual.
-\n
+\n 
+\n • Muitas melhorias no menu de contexto do mapa tais como pesquisa de endereços contextual. 
+\n 
 \n e muito mais…</string>
     <string name="download_wikipedia_description">Baixe artigos da Wikipédia por %1$s para lê-los offline.</string>
     <string name="wiki_article_search_text">Procurando o artigo wiki necessário</string>

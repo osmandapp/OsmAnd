@@ -9,116 +9,104 @@
     android:clickable="true"
     android:orientation="vertical">
 
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fillViewport="true">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-        <LinearLayout
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="wrap_content">
 
             <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:id="@+id/button_close"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:padding="@dimen/list_content_padding">
 
-                <FrameLayout
-                    android:id="@+id/button_close"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    android:padding="@dimen/list_content_padding">
-
-                    <android.support.v7.widget.AppCompatImageView
-                        android:id="@+id/button_close_img"
-                        android:layout_width="@dimen/standard_icon_size"
-                        android:layout_height="@dimen/standard_icon_size"
-                        android:background="?attr/circle_dialog_bg"
-                        android:src="@drawable/ic_action_remove_small"
-                        android:tint="@color/icon_color"/>
-
-                </FrameLayout>
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginBottom="@dimen/title_padding"
-                    android:layout_marginTop="@dimen/list_header_padding"
-                    android:src="@drawable/img_help_osmand_live"/>
+                <android.support.v7.widget.AppCompatImageView
+                    android:id="@+id/button_close_img"
+                    android:layout_width="@dimen/standard_icon_size"
+                    android:layout_height="@dimen/standard_icon_size"
+                    android:background="?attr/circle_dialog_bg"
+                    android:src="@drawable/ic_action_remove_small"
+                    android:tint="@color/icon_color"/>
 
             </FrameLayout>
 
-            <LinearLayout
+            <ImageView
                 android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="@dimen/title_padding"
+                android:layout_marginTop="@dimen/list_header_padding"
+                android:src="@drawable/img_help_osmand_live"/>
+
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/list_content_padding_large"
+            android:layout_marginRight="@dimen/list_content_padding_large"
+            android:orientation="vertical">
+
+            <net.osmand.plus.widgets.TextViewEx
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="@string/purchase_cancelled_dialog_title"
+                android:textColor="?attr/dialog_title_color"
+                android:textSize="@dimen/dialog_header_text_size"
+                osmand:typeface="@string/font_roboto_medium"/>
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="@dimen/title_padding"
+                android:layout_weight="1"
+                android:fillViewport="true">
+
+                <net.osmand.plus.widgets.TextViewEx
+                    android:id="@+id/info_description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:lineSpacingMultiplier="@dimen/text_button_line_spacing_multiplier"
+                    android:textColor="?attr/dialog_text_description_color"
+                    android:textSize="@dimen/default_list_text_size"
+                    osmand:typeface="@string/font_roboto_regular"
+                    tools:text="@string/purchase_cancelled_dialog_descr"/>
+
+            </ScrollView>
+
+            <net.osmand.plus.widgets.TextViewEx
+                android:id="@+id/inapp_descr"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/list_content_padding_large"
                 android:layout_marginRight="@dimen/list_content_padding_large"
-                android:orientation="vertical">
+                android:layout_marginTop="@dimen/title_padding"
+                android:gravity="center"
+                android:text="@string/osm_live_payment_desc"
+                android:textColor="?attr/card_description_text_color"
+                android:textSize="@dimen/default_desc_text_size"
+                osmand:typeface="@string/font_roboto_regular"/>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/title_padding"
-                    android:orientation="vertical">
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/card_padding"
+                android:layout_marginTop="@dimen/card_padding">
 
-                    <net.osmand.plus.widgets.TextViewEx
-                        android:id="@+id/title"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:text="@string/purchase_cancelled_dialog_title"
-                        android:textColor="?attr/dialog_title_color"
-                        android:textSize="@dimen/dialog_header_text_size"
-                        osmand:typeface="@string/font_roboto_medium"/>
+                <include layout="@layout/purchase_dialog_card_shadow_button"/>
 
-                    <net.osmand.plus.widgets.TextViewEx
-                        android:id="@+id/info_description"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/title_padding"
-                        android:textColor="?attr/dialog_text_description_color"
-                        android:textSize="@dimen/default_list_text_size"
-                        android:lineSpacingMultiplier="@dimen/text_button_line_spacing_multiplier"
-                        osmand:typeface="@string/font_roboto_regular"
-                        tools:text="@string/purchase_cancelled_dialog_descr"/>
+            </FrameLayout>
 
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:id="@+id/cards_container"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"/>
-
-                <net.osmand.plus.widgets.TextViewEx
-                    android:id="@+id/inapp_descr"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/list_content_padding_large"
-                    android:layout_marginRight="@dimen/list_content_padding_large"
-                    android:layout_marginTop="@dimen/list_header_padding"
-                    android:gravity="center"
-                    android:text="@string/osm_live_payment_desc"
-                    android:textColor="?attr/card_description_text_color"
-                    android:textSize="@dimen/default_desc_text_size"
-                    osmand:typeface="@string/font_roboto_regular"/>
-
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/card_padding"
-                    android:layout_marginTop="@dimen/card_padding">
-
-                    <include layout="@layout/purchase_dialog_card_button"/>
-
-                </FrameLayout>
-            </LinearLayout>
         </LinearLayout>
 
-    </ScrollView>
+    </LinearLayout>
 
 </LinearLayout>

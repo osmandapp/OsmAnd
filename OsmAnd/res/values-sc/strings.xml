@@ -1948,7 +1948,7 @@ Lon %2$s</string>
     <string name="si_min_km">Minutos pro chilòmetru</string>
     <string name="si_min_m">Minutos pro mìgliu</string>
     <string name="si_nm_h">Mìglios nàuticos pro ora (knots)</string>
-    <string name="nm_h">nmi/h</string>
+    <string name="nm_h">nodos</string>
     <string name="min_mile">min/m</string>
     <string name="min_km">min/km</string>
     <string name="m_s">m/s</string>

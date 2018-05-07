@@ -3124,4 +3124,26 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="wikivoyage_download_pics_descr">Immagini dagli articoli possono essere per l\'uso offline.
 \n Puoi sempre modificare le impostazioni in \'Esplora\' → \'Opzioni\'.</string>
     <string name="delete_search_history">Cancella la cronologia di ricerca</string>
-    </resources>
+    <string name="shared_string_restart">Riavvia</string>
+    <string name="download_images">Scarica immagini</string>
+    <string name="download_maps_travel">Mappe turistiche</string>
+    <string name="shared_string_wikivoyage">Wikivoyage</string>
+    <string name="article_removed">Articolo rimosso</string>
+    <string name="wikivoyage_search_hint">Cerca: Nazione, città, pronvincia</string>
+    <string name="shared_string_read">Leggi</string>
+    <string name="saved_articles">Articoli salvati</string>
+    <string name="shared_string_explore">Esplora</string>
+    <string name="shared_string_contents">Contenuti</string>
+    <string name="shared_string_result">Risultato</string>
+    <string name="rendering_attr_whiteWaterSports_name">Sport d’acqua dolce</string>
+    <string name="index_item_world_wikivoyage">Articoli di Wikivoyage da tutto il mondo</string>
+    <string name="lang_lo">Laotiano</string>
+    <string name="download_wikipedia_description">Scarica gli articoli di Wikipedia per %1$s così da poterli leggere senza una connessione dati.</string>
+    <string name="download_wikipedia_label">Scarica dati di Wikipedia</string>
+    <string name="open_in_browser_wiki">Apri articolo online</string>
+    <string name="open_in_browser_wiki_description">Vedi articolo in un browser web.</string>
+    <string name="download_wiki_region_placeholder">questa regione</string>
+    <string name="wiki_article_search_text">Sto cercando il necessario articolo Wiki</string>
+    <string name="wiki_article_not_found">Articolo non trovato</string>
+    <string name="how_to_open_wiki_title">Come aprire gli articoli di Wikipedia?</string>
+</resources>
