@@ -1996,7 +1996,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="si_min_km">Minutter pr. kilometer</string>
     <string name="si_min_m">Minutter pr. engelsk mil</string>
     <string name="si_nm_h">Sømil i timen (knob)</string>
-    <string name="nm_h">nmi/t</string>
+    <string name="nm_h">kn</string>
     <string name="min_mile">minutter/engelsk mil</string>
     <string name="min_km">min/km</string>
     <string name="m_s">m/s</string>
@@ -2259,12 +2259,13 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="osm_live_hide_user_name">Vis ikke navn i rapporter</string>
     <string name="osm_live_support_region">Understøttet område</string>
     <string name="osm_live_month_cost">Månedlige omkostninger</string>
-    <string name="osm_live_month_cost_desc">Månedlig betaling.</string>
+    <string name="osm_live_month_cost_desc">Månedlig betaling</string>
     <string name="osm_live_active">Aktiv</string>
     <string name="osm_live_not_active">Inaktiv</string>
     <string name="osm_live_enter_email">Angiv en gyldig e-mailadresse</string>
     <string name="osm_live_enter_user_name">Indtast offentligt navn</string>
-    <string name="osm_live_thanks">Tak for at abonnere på live opdateringer</string>
+    <string name="osm_live_thanks">Tak for støtte til OsmAnd!
+\nFor at aktivere alle nye funktioner, er det nødvendigt at genstarte OsmAnd.</string>
     <string name="osm_live_region_desc">En del af donationen vil blive sendt til OSM-brugere, som indsender ændringer til kortet i det pågældende område.</string>
     <string name="osm_live_subscription_settings">Indstillinger for abonnement</string>
     <string name="osm_live_ask_for_purchase">Køb først OsnAnd Live-abonnement</string>
@@ -2331,9 +2332,9 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="access_no_destination">Destination ikke angivet</string>
     <string name="use_osm_live_routing_description">Aktiver navigation for OsmAnd Live ændringer.</string>
 	<string name="use_osm_live_routing">OsmAnd Live navigation</string>
-    <string name="access_direction_audio_feedback">Retning med lyd-indikation</string>
+    <string name="access_direction_audio_feedback">Anvisninger med lyd</string>
     <string name="access_direction_audio_feedback_descr">"Indikerer retning til målpunkt  med lyd."</string>
-    <string name="access_direction_haptic_feedback">Retning med haptisk indikation</string>
+    <string name="access_direction_haptic_feedback">Anvisninger med vibration</string>
     <string name="access_direction_haptic_feedback_descr">"Indikerer retning til målpunkt  med vibrationer."</string>
     <string name="follow_us">Følg os</string>
     <string name="move_marker_bottom_sheet_title">Flyt kortet for at ændre markør-position</string>
@@ -3228,6 +3229,11 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="wiki_article_not_found">Artikel ikke fundet</string>
     <string name="how_to_open_wiki_title">Hvordan åbner man Wikipedia artikler?</string>
 <string name="osmand_team">OsmAnd team</string>
-    <string name="maps_you_need_descr">Baseret på artikler der er gemt, anbefales det at downloade følgende kort:</string>
-    <string name="maps_you_need">Kort du har brug for</string>
+    <string name="maps_you_need_descr">Baseret på artikler der er gemt, anbefales det at hente følgende kort:</string>
+    <string name="maps_you_need">Kort der er brug for</string>
+    <string name="shared_string_restart">Genstart</string>
+    <string name="show_images">Vis billeder</string>
+    <string name="purchase_cancelled_dialog_title">OsmAnd Live-abonnement er annulleret</string>
+    <string name="purchase_cancelled_dialog_descr">Forny abonnement for at fortsætte med at bruge alle funktioner:</string>
+
     </resources>
