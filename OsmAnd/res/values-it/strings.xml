@@ -3057,7 +3057,7 @@ Rappresenta l\'area: %1$s x %2$s</string>
 	<string name="north_abbreviation">N</string>
 	<string name="optional_point_name">Nome del punto facoltativo</string>
     <string name="transport_nearby_routes_within">Percorsi vicini in</string>
-    <string name="transport_nearby_routes">VICINO</string>
+    <string name="transport_nearby_routes">Vicino</string>
     <string name="enter_the_file_name">Immetti il nome del file.</string>
     <string name="map_import_error">Errore importazione mappa</string>
     <string name="map_imported_successfully">Mappa importata</string>
@@ -3089,7 +3089,7 @@ Rappresenta l\'area: %1$s x %2$s</string>
 	<string name="download_file">Scarica file</string>
     <string name="start_editing_card_image_text">La guida turistica libera in tutto il mondo che chiunque può modificare.</string>
     <string name="welcome_to_open_beta_description">Il viaggio è basato su Wikivoyage. Valuta tutte le caratteristiche durante il beta test aperto, gratuitamente. Dopo, Travel sarà disponibile per gli abbonati di OsmAnd Unlimited e per i proprietari di OsmAnd+</string>
-    <string name="start_editing_card_description">È possibile modificare qualsiasi articolo su Wikivoyage, e speriamo di farlo. Abbiamo bisogno di vostra conoscenza, l\'esperienza, il tuo talento e l\'attenzione</string>
+    <string name="start_editing_card_description">Puoi e dovresti editare qualsiasi articolo su Wikivoyage. Condividi conoscenza, esperienza, talento e la tua attenzione</string>
     <string name="start_editing">Iniza a modificare</string>
     <string name="get_unlimited_access">Ottieni l\'accesso illimitato</string>
     <string name="welcome_to_open_beta">Benvenuti alla open beta</string>
@@ -3117,7 +3117,7 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="osmand_team">Team OsmAnd</string>
     <string name="travel_card_update_descr">Nuovi dati Wikivoyage disponibili, aggiorna per utilizzarli.</string>
 	<string name="travel_guide_description">Guide dei luoghi più interessanti del pianeta, integrata in OsmAnd, senza connessione a Internet.</string>
-    <string name="contour_lines_hillshade_maps">Mappe Isoipse e Ombreggiamento dei rilievi.</string>
+    <string name="contour_lines_hillshade_maps">Linee Isoipse e Ombreggiamento dei rilievi</string>
     <string name="purchase_dialog_title">Scegli il piano</string>
     <string name="purchase_dialog_travel_description">Acquista uno dei seguenti articoli di viaggio da leggere offline:</string>
     <string name="purchase_dialog_subtitle">Scegli uno degli oggetti disponibili:</string>
