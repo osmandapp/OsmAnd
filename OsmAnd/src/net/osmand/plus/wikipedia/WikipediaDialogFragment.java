@@ -38,7 +38,9 @@ import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
@@ -54,6 +56,7 @@ public class WikipediaDialogFragment extends WikiArticleBaseDialogFragment {
 	private String lang;
 	private String title;
 	private String article;
+	private String langSelected;
 
 	public void setAmenity(Amenity amenity) {
 		this.amenity = amenity;
@@ -131,6 +134,10 @@ public class WikipediaDialogFragment extends WikiArticleBaseDialogFragment {
 	@NonNull
 	protected String createHtmlContent() {
 		StringBuilder sb = new StringBuilder(HEADER_INNER);
+		String[] rtlLanguages = new String[]{"ar", "dv", "he", "iw", "fa", "nqo", "ps", "sd", "ug", "ur", "yi"};
+		Set<String> rtls = new HashSet<>(Arrays.asList(rtlLanguages));
+		String bodyTag = rtls.contains(langSelected) ? "<body dir=\"rtl\">\n" : "<body>\n";
+		sb.append(bodyTag);
 		String nightModeClass = nightMode ? " nightmode" : "";
 		sb.append("<div class=\"main");
 		sb.append(nightModeClass);
@@ -166,12 +173,11 @@ public class WikipediaDialogFragment extends WikiArticleBaseDialogFragment {
 				preferredLanguage = getMyApplication().getLanguage();
 			}
 
-			String lng = amenity.getContentLanguage("content", preferredLanguage, "en");
-			if (Algorithms.isEmpty(lng)) {
-				lng = "en";
+			langSelected = amenity.getContentLanguage("content", preferredLanguage, "en");
+			if (Algorithms.isEmpty(langSelected)) {
+				langSelected = "en";
 			}
 
-			final String langSelected = lng;
 			article = amenity.getDescription(langSelected);
 			title = amenity.getName(langSelected);
 			articleToolbarText.setText(title);
