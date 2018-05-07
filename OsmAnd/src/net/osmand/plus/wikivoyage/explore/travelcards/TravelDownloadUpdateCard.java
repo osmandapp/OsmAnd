@@ -1,8 +1,6 @@
 package net.osmand.plus.wikivoyage.explore.travelcards;
 
 import android.graphics.drawable.Drawable;
-import android.support.annotation.ColorRes;
-import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
@@ -197,22 +195,6 @@ public class TravelDownloadUpdateCard extends BaseTravelCard {
 		}
 		vh.primaryBtnContainer.setVisibility(View.GONE);
 		return false;
-	}
-
-	@DrawableRes
-	private int getPrimaryBtnBgRes(boolean enabled) {
-		if (enabled) {
-			return nightMode ? R.drawable.wikivoyage_primary_btn_bg_dark : R.drawable.wikivoyage_primary_btn_bg_light;
-		}
-		return nightMode ? R.drawable.wikivoyage_secondary_btn_bg_dark : R.drawable.wikivoyage_secondary_btn_bg_light;
-	}
-
-	@ColorRes
-	private int getPrimaryBtnTextColorRes(boolean enabled) {
-		if (enabled) {
-			return nightMode ? R.color.wikivoyage_primary_btn_text_dark : R.color.wikivoyage_primary_btn_text_light;
-		}
-		return R.color.wikivoyage_secondary_text;
 	}
 
 	public interface ClickListener {

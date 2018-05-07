@@ -49,4 +49,20 @@ public abstract class BaseTravelCard {
 	protected boolean isInternetAvailable() {
 		return app.getSettings().isInternetConnectionAvailable();
 	}
+
+	@DrawableRes
+	protected int getPrimaryBtnBgRes(boolean enabled) {
+		if (enabled) {
+			return nightMode ? R.drawable.wikivoyage_primary_btn_bg_dark : R.drawable.wikivoyage_primary_btn_bg_light;
+		}
+		return nightMode ? R.drawable.wikivoyage_secondary_btn_bg_dark : R.drawable.wikivoyage_secondary_btn_bg_light;
+	}
+
+	@ColorRes
+	protected int getPrimaryBtnTextColorRes(boolean enabled) {
+		if (enabled) {
+			return nightMode ? R.color.wikivoyage_primary_btn_text_dark : R.color.wikivoyage_primary_btn_text_light;
+		}
+		return R.color.wikivoyage_secondary_text;
+	}
 }
