@@ -1094,17 +1094,17 @@ Niektoré z hlavných funkcií:
     <string name="android_19_location_disabled">Od Androidu verzie 4.4 (KitKat) nie je možné sťahovať a aktualizovať mapy v pôvodnom úložnom priečinku (%s). Chcete ho zmeniť na vhodné nové úložisko a skopírovať tam všetky súbory?
 \n Poznámka 1: pôvodné súbory zostanú nedotknuté (môžete ich neskôr vymazať ručne).\n Poznámka 2: v novom úložisku nebude možné zdieľať súbory medzi OsmAnd a OsmAnd+.</string>
     <string name="routing_attr_prefer_motorway_name">Uprednostniť diaľnice</string>
-    <string name="routing_attr_prefer_motorway_description">Uprednostniť diaľnice.</string>
+    <string name="routing_attr_prefer_motorway_description">Uprednostniť diaľnice</string>
     
     
     <string name="routing_attr_avoid_toll_name">Vyhnúť sa spoplatneným cestám</string>
-    <string name="routing_attr_avoid_toll_description">Vyhnúť sa spoplatneným cestám.</string>
+    <string name="routing_attr_avoid_toll_description">Vyhnúť sa spoplatneným cestám</string>
     <string name="routing_attr_avoid_unpaved_name">Vyhnúť sa nespevneným cestám</string>
     <string name="routing_attr_avoid_unpaved_description">Vyhnúť sa nespevneným cestám.</string>
     <string name="routing_attr_avoid_ferries_name">Vyhnúť sa trajektom</string>
-    <string name="routing_attr_avoid_ferries_description">Vyhnúť sa trajektom.</string>
+    <string name="routing_attr_avoid_ferries_description">Vyhnúť sa trajektom</string>
     <string name="routing_attr_avoid_motorway_name">Vyhnúť sa diaľniciam</string>
-    <string name="routing_attr_avoid_motorway_description">Vyhnúť sa diaľniciam.</string>
+    <string name="routing_attr_avoid_motorway_description">Vyhnúť sa diaľniciam</string>
     <string name="routing_attr_weight_name">Hmotnostný limit</string>
     <string name="routing_attr_weight_description">Zadajte hmotnosť vozidla, ktorá musí byť povolená na cestách.</string>
     <string name="select_gpx">Vybrať GPX…</string>
@@ -1938,7 +1938,7 @@ Dĺžka %2$s</string>
     <string name="use_drawer_btn">Použiť menu</string>
     <string name="please_specify_poi_type_only_from_list">Prosím zadajte správny typ POI alebo ho preskočte.</string>
     <string name="routing_attr_avoid_stairs_name">Vyhnúť sa schodom</string>
-	<string name="routing_attr_avoid_stairs_description">Vyhnúť sa schodom.</string>
+	<string name="routing_attr_avoid_stairs_description">Vyhnúť sa schodom</string>
 	<string name="routing_attr_avoid_borders_name">Vyhnúť sa hraničným priechodom</string>
 	
 	
