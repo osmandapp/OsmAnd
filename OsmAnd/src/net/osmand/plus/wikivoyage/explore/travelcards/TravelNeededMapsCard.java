@@ -28,6 +28,7 @@ public class TravelNeededMapsCard extends BaseTravelCard {
 	private Drawable cancelIcon;
 
 	private CardListener listener;
+	private View.OnClickListener onItemClickListener;
 
 	public void setListener(CardListener listener) {
 		this.listener = listener;
@@ -39,6 +40,14 @@ public class TravelNeededMapsCard extends BaseTravelCard {
 		this.items = items;
 		downloadIcon = getActiveIcon(R.drawable.ic_action_import);
 		cancelIcon = getActiveIcon(R.drawable.ic_action_remove_dark);
+		onItemClickListener = new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				if (listener != null) {
+					listener.onIndexItemClick((IndexItem) view.getTag());
+				}
+			}
+		};
 	}
 
 	@Override
@@ -56,6 +65,13 @@ public class TravelNeededMapsCard extends BaseTravelCard {
 				boolean currentDownloading = downloading && downloadThread.getCurrentDownloadingItem() == item;
 				boolean lastItem = i == items.size() - 1;
 				View view = holder.itemsContainer.getChildAt(i);
+
+				if (item.isDownloaded()) {
+					view.setOnClickListener(null);
+				} else {
+					view.setTag(item);
+					view.setOnClickListener(onItemClickListener);
+				}
 
 				((ImageView) view.findViewById(R.id.icon))
 						.setImageDrawable(getActiveIcon(item.getType().getIconResource()));
@@ -177,6 +193,8 @@ public class TravelNeededMapsCard extends BaseTravelCard {
 		void onPrimaryButtonClick();
 
 		void onSecondaryButtonClick();
+
+		void onIndexItemClick(IndexItem item);
 	}
 
 	public static class NeededMapsVH extends RecyclerView.ViewHolder {

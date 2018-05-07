@@ -52,6 +52,7 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIn
 	private TravelDownloadUpdateCard downloadUpdateCard;
 	private TravelNeededMapsCard neededMapsCard;
 
+	private DownloadValidationManager downloadManager;
 	private IndexItem currentDownloadingIndexItem;
 	private IndexItem mainIndexItem;
 	private List<IndexItem> neededIndexItems = new ArrayList<>();
@@ -61,6 +62,7 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIn
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+		downloadManager = new DownloadValidationManager(getMyApplication());
 		nightMode = !getMyApplication().getSettings().isLightContent();
 
 		final View mainView = inflater.inflate(R.layout.fragment_explore_tab, container, false);
@@ -190,7 +192,7 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIn
 				@Override
 				public void onPrimaryButtonClick() {
 					if (mainIndexItem != null) {
-						new DownloadValidationManager(app).startDownload(getMyActivity(), mainIndexItem);
+						downloadManager.startDownload(getMyActivity(), mainIndexItem);
 						adapter.updateDownloadUpdateCard();
 					}
 				}
@@ -227,7 +229,7 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIn
 				@Override
 				public void onPrimaryButtonClick() {
 					IndexItem[] items = neededIndexItems.toArray(new IndexItem[neededIndexItems.size()]);
-					new DownloadValidationManager(app).startDownload(getMyActivity(), items);
+					downloadManager.startDownload(getMyActivity(), items);
 					adapter.updateNeededMapsCard();
 				}
 
@@ -239,6 +241,17 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIn
 					} else {
 						removeNeededMapsCard();
 					}
+				}
+
+				@Override
+				public void onIndexItemClick(IndexItem item) {
+					DownloadIndexesThread downloadThread = app.getDownloadThread();
+					if (downloadThread.isDownloading(item)) {
+						downloadThread.cancelDownload(item);
+					} else {
+						downloadManager.startDownload(getMyActivity(), item);
+					}
+					adapter.updateNeededMapsCard();
 				}
 			});
 			adapter.setNeededMapsCard(neededMapsCard);
