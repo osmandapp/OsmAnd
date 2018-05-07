@@ -283,6 +283,22 @@ public class DownloadIndexesThread {
 		}
 	}
 
+	public void cancelDownload(List<IndexItem> items) {
+		if (items != null) {
+			boolean updateProgress = false;
+			for (IndexItem item : items) {
+				if (currentDownloadingItem == item) {
+					downloadFileHelper.setInterruptDownloading(true);
+				} else {
+					indexItemDownloading.remove(item);
+					updateProgress = true;
+				}
+			}
+			if (updateProgress) {
+				downloadInProgress();
+			}
+		}
+	}
 
 	public IndexItem getCurrentDownloadingItem() {
 		return currentDownloadingItem;
