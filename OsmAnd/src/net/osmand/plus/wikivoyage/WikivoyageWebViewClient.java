@@ -300,6 +300,10 @@ public class WikivoyageWebViewClient extends WebViewClient implements RegionCall
 
 		@Override
 		protected void onCancelled() {
+			MapActivity activity = weakContext.get();
+			if (activity != null && !activity.isActivityDestroyed() && dialog != null) {
+				dialog.dismiss();
+			}
 			dialog = null;
 			callback = null;
 		}
