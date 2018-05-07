@@ -89,11 +89,6 @@ body {
     overflow-x: auto;
 }
 
-.nav-bar-current {
-    color: #237bff;
-    color: var(--link-text-color-day);
-}
-
 .nav-bar.nightmode {
     background-color: #222526;
     background-color: var(--topbar-bg-color-night);
@@ -110,6 +105,16 @@ body {
     font-weight: normal;
     line-height: 1.6em;
     line-height: var(--main-text-line-height);
+}
+
+.nav-bar-current {
+    color: #237bff;
+    color: var(--link-text-color-day);
+}
+
+.nightmode .nav-bar-current {
+    color: #ff8800;
+    color: var(--link-text-color-night);
 }
 
 .title-image {
