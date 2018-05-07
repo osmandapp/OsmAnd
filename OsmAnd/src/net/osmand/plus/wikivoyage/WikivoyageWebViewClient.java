@@ -59,6 +59,7 @@ interface RegionCallback {
 public class WikivoyageWebViewClient extends WebViewClient implements RegionCallback {
 
 	private static final String TAG = WikivoyageWebViewClient.class.getSimpleName();
+	private static final String ZIP_EXT = ".zip";
 
 	private OsmandApplication app;
 	private FragmentManager fragmentManager;
@@ -214,7 +215,8 @@ public class WikivoyageWebViewClient extends WebViewClient implements RegionCall
 		private TravelArticle article;
 		private FragmentManager fragmentManager;
 
-		WikiArticleSearchTask(RegionCallback callback, TravelArticle article, String articleName, String regionName, FragmentManager fragmentManager,
+		WikiArticleSearchTask(RegionCallback callback, TravelArticle article, String articleName,
+							  String regionName, FragmentManager fragmentManager,
 							  String lang, MapActivity context, boolean nightMode, String url) {
 			this.fragmentManager = fragmentManager;
 			this.regionName = regionName;
@@ -264,7 +266,7 @@ public class WikivoyageWebViewClient extends WebViewClient implements RegionCall
 						if (i.isDownloaded()) {
 							downloadedItems.add(i.getFileName()
 									.replace("_" + IndexConstants.BINARY_MAP_VERSION, "")
-									.replace(".zip", ""));
+									.replace(ZIP_EXT, ""));
 						}
 					}
 				}
