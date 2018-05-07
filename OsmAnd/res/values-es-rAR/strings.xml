@@ -589,7 +589,7 @@ Lon %2$s</string>
     <string name="gpx_option_calculate_first_last_segment">Calcular la ruta OsmAnd para el primer y último segmento de ruta</string>
     <string name="use_displayed_track_for_navigation">¿Usar la traza mostrada para la navegación?</string>
     <string name="routing_attr_avoid_ferries_name">Evitar ferris/transbordadores</string>
-    <string name="routing_attr_avoid_ferries_description">Evita usar ferris/transbordadores</string>
+    <string name="routing_attr_avoid_ferries_description">Evita usar ferris</string>
     <string name="android_19_location_disabled">Desde la versión Android 4.4 (KitKat), no es posible descargar ni actualizar los mapas en la carpeta de almacenamiento antigua (%s). ¿Copiar todos los archivos de OsmAnd a la nueva ubicación de almacenamiento? 
 \n Nota 1: Los archivos antiguos permanecerán intactos (pero pueden ser borrados manualmente). 
 \n Nota 2: En la nueva ubicación de almacenamiento será imposible compartir archivos entre OsmAnd y OsmAnd+.</string>
@@ -635,9 +635,9 @@ Lon %2$s</string>
     <string name="local_index_tile_data_name">Datos de teselas: %1$s</string>
     <string name="edit_tilesource_successfully">Fuente de teselas «%1$s» guardada</string>
     <string name="edit_tilesource_elliptic_tile">Mercator elíptica</string>
-    <string name="edit_tilesource_maxzoom">Máximo zoom</string>
+    <string name="edit_tilesource_maxzoom">Zoom máximo</string>
     <string name="edit_tilesource_expiration_time">Expira (minutos)</string>
-    <string name="edit_tilesource_minzoom">Mínimo zoom</string>
+    <string name="edit_tilesource_minzoom">Zoom mínimo</string>
     <string name="edit_tilesource_url_to_load">URL</string>
     <string name="edit_tilesource_choose_existing">Elegir existente…</string>
     <string name="maps_define_edit">Definir/Editar…</string>
@@ -678,7 +678,7 @@ Lon %2$s</string>
     <string name="intermediate_items_sort_return">Orden optimizado de los destinos intermedios en ruta hacia el destino.</string>
     <string name="intermediate_items_sort_by_distance">Ordenar puerta a puerta</string>
     <string name="local_osm_changes_backup_successful">Archivo de cambios OSM «%1$s» generado</string>
-    <string name="local_osm_changes_backup_failed">No se pudo realizar una copia de seguridad de los cambios de OSM</string>
+    <string name="local_osm_changes_backup_failed">No se pudo realizar la copia de seguridad de los cambios de OSM</string>
     <string name="local_osm_changes_backup">Copia de seguridad como cambio de OSM</string>
     <string name="delete_point">Borrar punto</string>
     <string name="plugin_distance_point_time">tiempo</string>
@@ -855,25 +855,42 @@ Lon %2$s</string>
     <string name="osmand_short_description_80_chars">Visor y navegador móvil global de mapas OSM con y sin conexión</string>
     <string name="osmand_long_description_1000_chars">"OsmAnd (OSM Automated Navigation Directions, y en español, Guía de Navegación Automatizada de OSM) 
 \n
+\n 
 \nOsmAnd es un software de navegación de código abierto con acceso a una amplia variedad de datos globales de OpenStreetMap (OSM). Todos los datos del mapa (vectores y teselas) pueden ser almacenados en la memoria del teléfono para su uso sin conexión. También ofrece funcionalidades de rutas con y sin conexión, incluyendo indicaciones giro-a-giro por voz. 
 \n
+\n 
 \n Algunas de las funciones fundamentales: 
-\n - Completa funcionalidad sin conexión (almacena los mapas vectoriales o teselas descargados en la memoria del dispositivo) 
-\n - Mapas vectoriales compactos disponibles de todo el planeta 
-\n - Descarga de mapas por país o región directamente desde la aplicación 
-\n - Posibilidad de superponer varias capas de mapa, como GPX o rutas de navegación, Puntos de Interés (PDI), favoritos, curvas de nivel, paradas de transporte público, mapas adicionales con transparencia personalizable 
-\n - Búsqueda sin conexión de direcciones y lugares (PDI) 
-\n - Rutas sin conexión para distancias de rango medio 
-\n - Modos de automóvil, bicicleta y peatón con opcional: 
-\n  - Cambio automático de vista día/noche 
-\n  - Zoom del mapa según la velocidad 
-\n  - Alineación del mapa, según brújula o dirección del movimiento 
-\n  - Indicación de carriles, mostrar límites de velocidad, voces grabadas y sintetizadas 
 \n
+\n - Completa funcionalidad sin conexión (almacena los mapas vectoriales o teselas descargados en la memoria del dispositivo) 
+\n
+\n - Mapas vectoriales compactos disponibles de todo el planeta 
+\n
+\n - Descarga de mapas por país o región directamente desde la aplicación 
+\n
+\n - Posibilidad de superponer varias capas de mapa, como GPX o rutas de navegación, Puntos de Interés (PDI), favoritos, curvas de nivel, paradas de transporte público, mapas adicionales con transparencia personalizable 
+\n
+\n - Búsqueda sin conexión de direcciones y lugares (PDI) 
+\n
+\n - Navegación sin conexión para distancias de rango medio 
+\n
+\n - Modos de automóvil, bicicleta y peatón con opcional: 
+\n
+\n  - Cambio automático de vista día/noche 
+\n
+\n  - Zoom del mapa según la velocidad 
+\n
+\n  - Alineación del mapa, según la brújula o dirección del movimiento 
+\n
+\n  - Indicación de carriles, visualización de límites de velocidad, voces grabadas y sintetizadas 
+\n
+\n 
 \n Limitaciones de la versión gratuita de OsmAnd: 
-\n - Límite del número de mapas descargados 
+\n
+\n - Limitado número de mapas descargados 
+\n
 \n - Sin acceso a los PDI descargados de Wikipedia. 
 \n
+\n 
 \n Los PDI de OsmAnd están siendo desarrollados activamente. Nuestro proyecto y su continuo progreso, se basa en contribuciones económicas para desarrollar y probar nuevas funcionalidades. Por favor, considera comprar OsmAnd+, financiar nuevas funciones o hacer una donación general en https://osmand.net."</string>
     
     <string name="osmand_plus_play_title_30_chars">Navegación y Mapas OsmAnd+</string>
@@ -908,7 +925,7 @@ Lon %2$s</string>
     <string name="layer_map_appearance">Configurar pantalla</string>
     <string name="show_lanes">Carriles</string>
     <string name="avoid_unpaved">Evitar caminos sin pavimentar</string>
-    <string name="avoid_ferries">Evitar ferris/transbordadores</string>
+    <string name="avoid_ferries">Evitar ferris</string>
     <string name="avoid_in_routing_title">Evitar…</string>
     <string name="avoid_in_routing_descr">Evita caminos con peajes, sin pavimentar, transbordadores y otros.</string>
     <string name="map_widget_fluorescent">Rutas fluorescentes</string>
@@ -1271,7 +1288,7 @@ Lon %2$s</string>
     <string name="internet_not_available">Imposible realizar la operación sin una conexión a Internet.</string>
     <string name="install_more">Instalar más…</string>
     <string name="level_to_switch_vector_raster_descr">Usar mapas vectoriales, más allá de este nivel.</string>
-    <string name="level_to_switch_vector_raster">Mínimo nivel de zoom vectorial</string>
+    <string name="level_to_switch_vector_raster">Nivel mínimo de zoom vectorial</string>
     <string name="create_poi_link_to_osm_doc"><u>OSM en línea</u> clasificación de mapa con imágenes.</string>
     <string name="error_doing_search">No se pudo realizar la búsqueda sin conexión.</string>
     <string name="search_offline_geo_error">No se pudo analizar el filtro «%s».</string>
@@ -1336,7 +1353,7 @@ Lon %2$s</string>
     
     <string name="osmand_routing_experimental">La navegación sin conexión de OsmAnd es una característica experimental y no funciona para distancias mayores a 20 km. 
 \n 
-\nLa navegación cambió temporalmente al servicio en línea CloudMade.</string>
+\nNavegación cambiada temporalmente al servicio en línea CloudMade.</string>
     <string name="specified_dir_doesnt_exist">No se puede encontrar la carpeta indicada.</string>
     <string name="osmand_net_previously_installed">Todos los datos sin conexión en la versión vieja de OsmAnd son compatibles con la nueva versión, pero los puntos favoritos deben exportarse desde la versión vieja y luego, importarse en la nueva.</string>
     <string name="build_installed">Compilación {0} instalada ({1}).</string>
@@ -1447,7 +1464,7 @@ Lon %2$s</string>
     <string name="sd_unmounted">Tarjeta de memoria inaccesible. 
 \nNo podrás ver mapas ni encontrar cosas.</string>
     <string name="sd_mounted_ro">Tarjeta de memoria en sólo lectura. 
-\nAhora, sólo es posible ver el mapa precargado y no se pueden descargar nuevas áreas.</string>
+\nAhora, sólo es posible ver el mapa precargado y no pueden descargarse nuevas áreas.</string>
     <string name="unzipping_file">Descomprimiendo archivo…</string>
     <string name="route_tr">Gira a la derecha en</string>
     <string name="route_tshr">Gira fuerte a la derecha en</string>
@@ -2545,7 +2562,7 @@ Lon %2$s</string>
 \n • Elije entre datos completos de la región o sólo la red de rutas (Ejemplo: Todo Japón tiene 700 MB o sólo 200 MB para la red de rutas)</string>
     <string name="osmand_plus_extended_description_part5">Funciones de seguridad 
 \n • (Opcional) La vista día/noche se alterna automáticamente 
-\n • (Opcional) Muestra los límites de velocidad y obtén un aviso al excederte 
+\n • (Opcional) Visualización del límite de velocidad, con aviso al excederte 
 \n • (Opcional) Zoom del mapa según la velocidad 
 \n • Comparte la ubicación para que tus amigos puedan encontrarte</string>
     <string name="osmand_plus_extended_description_part6">Funciones de ciclismo y peatón
@@ -2819,7 +2836,7 @@ Lon %2$s</string>
     <string name="wrong_input">Entrada incorrecta</string>
     <string name="enter_new_name">Ingresar nuevo nombre</string>
     <string name="shared_string_back">Atrás</string>
-    <string name="view">Vista</string>
+    <string name="view">Ver</string>
 	<string name="waypoints_added_to_map_markers">Puntos de referencia añadidos en «Marcadores del mapa»</string>
 	<string name="import_gpx_file_description">puede importarse como favorito, o como archivo de traza.</string>
     <string name="import_as_gpx">Importar como archivo GPX</string>
@@ -2873,8 +2890,7 @@ Lon %2$s</string>
     <string name="by_date">Por fecha</string>
     <string name="by_type">Por tipo</string>
     <string name="modify_the_search_query">Modificar la consulta de búsqueda.</string>
-    <string name="release_3_0">\\022 
-\n
+    <string name="release_3_0">• 
 \n</string>
     <string name="av_locations_selected_desc">Archivo GPX con coordenadas y datos de las notas elegidas.</string>
     <string name="av_locations_all_desc">Archivo GPX con coordenadas y datos de todas las notas.</string>
