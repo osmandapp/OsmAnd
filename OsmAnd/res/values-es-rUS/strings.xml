@@ -3016,13 +3016,13 @@ Lon %2$s</string>
     <string name="contour_lines_sea_depth">Curvas de nivel + Profundidad náutica</string>
     <string name="unlock_all_features">Desbloquear todas las características de OsmAnd</string>
 
-    <string name="travel_card_update_descr">Nuevos datos de Wikivoyage disponibles, actualiza para disfrutar de ellos.</string>
+    <string name="travel_card_update_descr">Nuevos datos disponibles de Wikiviajes, actualiza para disfrutar de ellos.</string>
 	<string name="travel_card_download_descr">Descarga estas guías turísticas de Wikiviajes para ver artículos sobre lugares alrededor del mundo, sin una conexión a Internet.</string>
 	<string name="update_is_available">Actualización disponible</string>
 	<string name="download_file">Descargar archivo</string>
     <string name="start_editing_card_image_text">La guía turística libre global que cualquiera puede editar.</string>
     <string name="welcome_to_open_beta_description">Los viajes se basan en Wikiviajes. Prueba todas las características durante las pruebas beta abiertas, de forma gratuita. Una vez finalizado este período, «Viajes» estará disponible para los suscriptores de «OsmAnd ilimitado» y los propietarios de «OsmAnd+»</string>
-    <string name="start_editing_card_description">Puedes y debes editar cualquier artículo en Wikivoyage. Comparte tu conocimiento, experiencia, talento y atención</string>
+    <string name="start_editing_card_description">Puedes y debes editar cualquier artículo en Wikiviajes. Comparte tu conocimiento, experiencia, talento y atención</string>
     <string name="start_editing">Comenzar edición</string>
     <string name="get_unlimited_access">Obtener acceso ilimitado</string>
     <string name="welcome_to_open_beta">Bienvenido a la beta abierta</string>
