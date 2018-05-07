@@ -143,6 +143,13 @@ public class ExploreRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 		}
 	}
 
+	public void updateNeededMapsCard() {
+		int pos = getNeededMapsCardPosition();
+		if (neededMapsCardExists(pos)) {
+			notifyItemChanged(pos);
+		}
+	}
+
 	public void removeNeededMapsCard() {
 		int pos = getNeededMapsCardPosition();
 		if (neededMapsCardExists(pos)) {
