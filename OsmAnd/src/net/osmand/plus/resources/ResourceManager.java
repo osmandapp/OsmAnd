@@ -852,7 +852,7 @@ public class ResourceManager {
 		return map;
 	}
 
-	public AmenityIndexRepositoryBinary getWikiRepositoryByRegionName(String filename) {
+	public AmenityIndexRepositoryBinary getAmenityRepositoryByFileName(String filename) {
 		return (AmenityIndexRepositoryBinary) amenityRepositories.get(filename);
 	}
 	
