@@ -45,4 +45,8 @@ public abstract class BaseTravelCard {
 	protected Drawable getColoredIcon(@DrawableRes int icon, @ColorRes int color) {
 		return app.getIconsCache().getIcon(icon, color);
 	}
+
+	protected boolean isInternetAvailable() {
+		return app.getSettings().isInternetConnectionAvailable();
+	}
 }

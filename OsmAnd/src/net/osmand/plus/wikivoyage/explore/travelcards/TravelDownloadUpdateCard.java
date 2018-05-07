@@ -109,10 +109,6 @@ public class TravelDownloadUpdateCard extends BaseTravelCard {
 		return app.getString(download ? R.string.download_file : R.string.update_is_available);
 	}
 
-	private boolean isInternetAvailable() {
-		return app.getSettings().isInternetConnectionAvailable();
-	}
-
 	private Drawable getIcon() {
 		int id = download ? R.drawable.travel_card_download_icon : R.drawable.travel_card_update_icon;
 		return ContextCompat.getDrawable(app, id);
