@@ -9,6 +9,7 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="download_all">Download all</string>
     <string name="shared_string_restart">Restart</string>
     <string name="show_images">Show images</string>
     <string name="purchase_cancelled_dialog_title">You have cancel OsmAnd Live subscription</string>

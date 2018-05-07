@@ -15,6 +15,7 @@ import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
@@ -50,6 +51,7 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIn
 	private boolean nightMode;
 
 	private TravelDownloadUpdateCard downloadUpdateCard;
+	private TravelNeededMapsCard neededMapsCard;
 
 	private IndexItem mainIndexItem;
 	private List<IndexItem> neededIndexItems;
@@ -215,7 +217,25 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIn
 
 	private void addNeededMapsCard() {
 		if (!neededIndexItems.isEmpty()) {
-			adapter.setNeededMapsCard(new TravelNeededMapsCard(getMyApplication(), nightMode, neededIndexItems));
+			neededMapsCard = new TravelNeededMapsCard(getMyApplication(), nightMode, neededIndexItems);
+			neededMapsCard.setListener(new TravelNeededMapsCard.CardListener() {
+				@Override
+				public void onPrimaryButtonClick() {
+					if (!neededMapsCard.isDownloadingAll()) {
+						Toast.makeText(getContext(), "Download all", Toast.LENGTH_SHORT).show();
+					}
+				}
+
+				@Override
+				public void onSecondaryButtonClick() {
+					if (neededMapsCard.isDownloading()) {
+						Toast.makeText(getContext(), "Cancel", Toast.LENGTH_SHORT).show();
+					} else {
+						Toast.makeText(getContext(), "Later", Toast.LENGTH_SHORT).show();
+					}
+				}
+			});
+			adapter.setNeededMapsCard(neededMapsCard);
 		}
 	}
 
