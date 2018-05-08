@@ -2998,7 +2998,7 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="open_in_browser_wiki">Opna greinina á netinu</string>
     <string name="open_in_browser_wiki_description">Skoða grein í vafra.</string>
     <string name="download_wiki_region_placeholder">þetta svæði</string>
-    <string name="wiki_article_search_text">Leita að nauðsynlegri wiki-grein</string>
+    <string name="wiki_article_search_text">Leita að samsvarandi wiki-grein</string>
     <string name="wiki_article_not_found">Grein fannst ekki</string>
     <string name="how_to_open_wiki_title">Hvernig á að opna Wikipedia-greinar?</string>
 <string name="osmand_team">OsmAnd-teymið</string>
@@ -3009,4 +3009,10 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="purchase_cancelled_dialog_title">Þú hefur hætt áskrift að OsmAnd Live</string>
     <string name="purchase_cancelled_dialog_descr">Endurnýjaðu áskriftina til að nýta þér allra eiginleikanna:</string>
 
+    <string name="open_wikipedia_link_online">Opna Wikipedia-tengil á netinu</string>
+    <string name="open_wikipedia_link_online_description">OsmAnd mun endurbeina þér í vafrann og opna tengilinn í gegnum netið.</string>
+    <string name="read_wikipedia_offline_description">Fáðu áskrift að OsmAnd Live til að lesa Wikipedia- og Wikivoyage-greinar án nettengingar.</string>
+    <string name="how_to_open_link">Hvernig á að opna tengil?</string>
+    <string name="read_wikipedia_offline">Lesa Wikipedia ónettengt</string>
+    <string name="download_all">Sækja allt</string>
     </resources>
