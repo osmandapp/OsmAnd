@@ -231,7 +231,7 @@
 \n這些地圖可以被用來作為主要的（基本）地圖，以便在 OsmAnd 地圖螢幕上顯示，或作為上層又或另外基本地圖的底層（如 OsmAnd 標準的離線地圖）。為了使任何的底層地圖可以看見，OsmAnd 向量地圖可以容易的根據需要透過 \'組態地圖\' 選單來隱藏某些構成。 
 \n 
 \n地圖圖磚可以直接透過線上資料來源獲得，或者可以使用準備好的離線地圖（手動複製到 OsmAnd 的資料檔案夾中） 作為一個 SQLite 資料庫，可以透過各種的第三方地圖編制工具產生。</string>
-    <string name="osmand_background_plugin_description">透過週期性的喚醒 GPS 裝置，在背景模式下(螢幕關閉)顯示設定，以開啟追蹤與導航。</string>
+    <string name="osmand_background_plugin_description">透過週期性的喚醒 GPS 裝置，在背景（螢幕關閉）顯示設定，以開啟追蹤與導航。</string>
     <string name="osmand_accessibility_description">這個外掛元件，讓裝置在 OsmAnd 可以便利的直接用無障礙功能，例如調整 TTS 語音的語音速率、組態螢幕導航方位、使用軌跡球作為縮放控制，或文字轉語音的回應，例如自動告知您的位置。</string>
 
 
