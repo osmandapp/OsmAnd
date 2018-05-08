@@ -270,7 +270,7 @@ Er is nu {2} MB beschikbaar</string>
   <string name="tts_missing_language_data_title">Ontbrekende gegevens</string>
   <string name="tts_missing_language_data">Geen gegevens voor de geselecteerde taal geïnstalleerd. Wil je naar de Play-store gaan om deze te installeren?</string>
   <string name="gpx_option_reverse_route">Keer richting van GPX-track om</string>
-  <string name="gpx_option_destination_point">Gebruik huidige Bestemming</string>
+  <string name="gpx_option_destination_point">Huidige bestemming gebruiken</string>
   <string name="gpx_option_from_start_point">Volg de gehele track</string>
   <string name="switch_to_vector_map_to_see">Offline vectorkaart aanwezig voor deze locatie.
 \n\t\n\tOm deze te gebruiken, kies \'Menu\' → \'Kaart instellen\' → \'Kaartbron…\' → \'Offline vectorkaarten\'.</string>
@@ -428,8 +428,8 @@ Er is nu {2} MB beschikbaar</string>
   <string name="unknown_location">Positie nog niet bekend</string>
   
   <string name="context_menu_item_search_transport">Zoek Openbaar Vervoer</string>
-  <string name="transport_searching_transport">Openbaar Vervoer-resultaten (geen bestemming):</string>
-  <string name="transport_searching_route">Openbaar Vervoer-resultaten ({0} naar bestemming):</string>
+  <string name="transport_searching_transport">Ov-resultaten (geen bestemming):</string>
+  <string name="transport_searching_route">Ov-resultaten ({0} naar bestemming):</string>
   
   <string name="transport_search_again">Opnieuw Openbaar Vervoer zoeken</string>
   
@@ -584,7 +584,7 @@ Er is nu {2} MB beschikbaar</string>
   <string name="only_show">Toon route</string>
   <string name="follow">Start navigatie</string>
   <string name="recalculate_route_to_your_location">Soort vervoer:</string>
-  <string name="mark_final_location_first">Kies eerst een Bestemming</string>
+  <string name="mark_final_location_first">Kies eerst een bestemming</string>
   <string name="get_directions">Routebeschrijving</string>
   
   <string name="opening_hours">Openingstijden</string>
@@ -606,7 +606,7 @@ Er is nu {2} MB beschikbaar</string>
   <string name="error_calculating_route_occured">Fout bij routeberekening</string>
   <string name="empty_route_calculated">Fout: berekende route is leeg</string>
   <string name="new_route_calculated_dist">Nieuwe route berekend, afstand</string>
-  <string name="arrived_at_destination">De Bestemming is bereikt</string>
+  <string name="arrived_at_destination">De bestemming is bereikt</string>
   <string name="invalid_locations">Coördinaten zijn ongeldig!</string>
   <string name="go_back_to_osmand">Ga terug naar de OsmAnd-kaart</string>
   <string name="loading_data">Gegevens worden geladen…</string>
@@ -1348,8 +1348,8 @@ Wil je een nieuwe map maken op de toegestane locatie en de OsmAnd-bestanden daar
    	<string name="keep_informing_never">Alleen handmatig (druk op de pijl)</string>
     <string name="keep_informing_descr">Herhaal de aanwijzingen regelmatig</string>
     <string name="keep_informing">Herhaal de aanwijzingen</string>
-	<string name="arrival_distance">Aankondigen van de Bestemming</string>
-    <string name="arrival_distance_descr">Wanneer melden dat de Bestemming bereikt is?</string>
+	<string name="arrival_distance">Aankondigen van de bestemming</string>
+    <string name="arrival_distance_descr">Wanneer melden dat de bestemming bereikt is?</string>
     
         
     
@@ -1540,7 +1540,7 @@ Wil je een nieuwe map maken op de toegestane locatie en de OsmAnd-bestanden daar
     <string name="arrival_distance_factor_early">Vroegtijdig</string>
     <string name="arrival_distance_factor_normally">Op tijd</string>
     <string name="arrival_distance_factor_late">Laat</string>
-    <string name="arrival_distance_factor_at_last">Een paar meter voor de Bestemming</string>
+    <string name="arrival_distance_factor_at_last">Een paar meter voor de bestemming</string>
     
 <string name="av_camera_pic_size">Foto-formaat</string>
 	<string name="av_camera_pic_size_descr">Kies de grootte van de Foto\'s</string>
