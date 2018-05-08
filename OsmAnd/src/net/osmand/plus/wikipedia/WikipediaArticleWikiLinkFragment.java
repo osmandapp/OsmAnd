@@ -28,17 +28,13 @@ public class WikipediaArticleWikiLinkFragment extends MenuBottomSheetDialogFragm
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		Context ctx = getContext();
+		final Context ctx = getContext();
 		if (ctx == null) {
 			return;
 		}
-		if (savedInstanceState != null) {
-			articleUrl = savedInstanceState.getString(ARTICLE_URL_KEY);
-		} else {
-			Bundle args = getArguments();
-			if (args != null) {
-				articleUrl = args.getString(ARTICLE_URL_KEY);
-			}
+		Bundle args = getArguments();
+		if (args != null) {
+			articleUrl = args.getString(ARTICLE_URL_KEY);
 		}
 
 		BaseBottomSheetItem wikiLinkitem = new BottomSheetItemWithDescription.Builder()
@@ -47,7 +43,7 @@ public class WikipediaArticleWikiLinkFragment extends MenuBottomSheetDialogFragm
 				.setLayoutId(R.layout.bottom_sheet_item_title_with_descr)
 				.create();
 		items.add(wikiLinkitem);
-		items.add(new TitleDividerItem(getContext()));
+		items.add(new TitleDividerItem(ctx));
 
 		Drawable osmandLiveIcon = getIcon(R.drawable.ic_action_subscription_osmand_live, 0);
 
@@ -62,14 +58,14 @@ public class WikipediaArticleWikiLinkFragment extends MenuBottomSheetDialogFragm
 				.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						WikipediaDialogFragment.showFullArticle(getContext(), Uri.parse(articleUrl), nightMode);
+						WikipediaDialogFragment.showFullArticle(ctx, Uri.parse(articleUrl), nightMode);
 						dismiss();
 					}
 				})
 				.create();
 		items.add(wikiArticleOnlineItem);
 
-		items.add(new DividerHalfItem(getContext()));
+		items.add(new DividerHalfItem(ctx));
 
 		BaseBottomSheetItem wikiArticleOfflineItem = new BottomSheetItemWithDescription.Builder()
 				.setDescription(getString(R.string.read_wikipedia_offline_description))
@@ -88,12 +84,6 @@ public class WikipediaArticleWikiLinkFragment extends MenuBottomSheetDialogFragm
 				})
 				.create();
 		items.add(wikiArticleOfflineItem);
-	}
-
-	@Override
-	public void onSaveInstanceState(Bundle outState) {
-		super.onSaveInstanceState(outState);
-		outState.putString(ARTICLE_URL_KEY, articleUrl);
 	}
 
 	@Override
