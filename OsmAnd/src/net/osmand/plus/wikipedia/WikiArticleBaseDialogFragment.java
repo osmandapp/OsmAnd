@@ -20,6 +20,9 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 public abstract class WikiArticleBaseDialogFragment extends WikiBaseDialogFragment {
 
@@ -82,6 +85,7 @@ public abstract class WikiArticleBaseDialogFragment extends WikiBaseDialogFragme
 			"    }" +
 			"}</script>"
 			+ "</body></html>";
+	protected static final Set<String> rtlLanguages = new HashSet<>(Arrays.asList("ar","dv","he","iw","fa","nqo","ps","sd","ug","ur","yi"));
 
 	protected WebView contentWebView;
 	protected TextView selectedLangTv;

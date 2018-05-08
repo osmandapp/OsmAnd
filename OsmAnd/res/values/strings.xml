@@ -9,6 +9,11 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="open_wikipedia_link_online">Open wikipedia link online</string>
+    <string name="open_wikipedia_link_online_description">OsmAnd will redirect you to the browser and open the link online.</string>
+    <string name="read_wikipedia_offline_description">Get OsmAnd Live subscription to read Wikipedia and Wikivoyage articles offline.</string>
+    <string name="how_to_open_link">How to open link?</string>
+    <string name="read_wikipedia_offline">Read Wikipedia offline</string>
     <string name="download_all">Download all</string>
     <string name="shared_string_restart">Restart</string>
     <string name="show_images">Show images</string>
