@@ -164,6 +164,7 @@ h2 {
     line-height: 1.6em;
     line-height: var(--main-text-line-height);
     letter-spacing: 0.015em;
+    border-bottom: #eaecf0;
     border-bottom: 1px solid var(--divider-color-day);
     padding-top: 0%;
     padding-bottom: 5%;
@@ -174,6 +175,7 @@ h2 {
 .nightmode h2 {
     color: #999999;
     color: var(--headline-text-color-night);
+    border-bottom: #2d3133;
     border-bottom: 1px solid var(--divider-color-night);
     font-weight: 100;
 }
