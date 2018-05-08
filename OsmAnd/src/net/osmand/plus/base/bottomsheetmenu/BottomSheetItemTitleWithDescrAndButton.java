@@ -24,22 +24,34 @@ public class BottomSheetItemTitleWithDescrAndButton extends BottomSheetItemWithD
 	private TextView textButtonTV;
 
 	public BottomSheetItemTitleWithDescrAndButton(View customView,
-	                                              @LayoutRes int layoutId,
-	                                              Object tag,
-	                                              boolean disabled,
-	                                              View.OnClickListener onClickListener,
-	                                              int position,
-	                                              Drawable icon,
-	                                              String title,
-	                                              @ColorRes int titleColorId,
-	                                              CharSequence description,
-	                                              @ColorRes int descriptionColorId,
-	                                              String buttonTitle,
-	                                              View.OnClickListener onButtonClickListener,
-	                                              Drawable leftCompoundDrawable,
-	                                              Drawable rightCompoundDrawable,
-	                                              @ColorRes int buttonTextColor) {
-		super(customView, layoutId, tag, disabled, onClickListener, position, icon, title, titleColorId, description, descriptionColorId);
+												  @LayoutRes int layoutId,
+												  Object tag,
+												  boolean disabled,
+												  View.OnClickListener onClickListener,
+												  int position,
+												  Drawable icon,
+												  String title,
+												  @ColorRes int titleColorId,
+												  CharSequence description,
+												  @ColorRes int descriptionColorId,
+												  int descriptionMaxLines,
+												  String buttonTitle,
+												  View.OnClickListener onButtonClickListener,
+												  Drawable leftCompoundDrawable,
+												  Drawable rightCompoundDrawable,
+												  @ColorRes int buttonTextColor) {
+		super(customView,
+				layoutId,
+				tag,
+				disabled,
+				onClickListener,
+				position,
+				icon,
+				title,
+				titleColorId,
+				description,
+				descriptionColorId,
+				descriptionMaxLines);
 		this.buttonTitle = buttonTitle;
 		this.onButtonClickListener = onButtonClickListener;
 		this.leftCompoundDrawable = leftCompoundDrawable;
@@ -112,6 +124,7 @@ public class BottomSheetItemTitleWithDescrAndButton extends BottomSheetItemWithD
 					titleColorId,
 					description,
 					descriptionColorId,
+					descriptionMaxLines,
 					buttonTitle,
 					onButtonClickListener,
 					leftCompoundDrawable,
