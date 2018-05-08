@@ -298,7 +298,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 							WikipediaArticleHelper wikipediaArticleHelper = new WikipediaArticleHelper(mapActivity, mapActivity.getSupportFragmentManager(), !light);
 							wikipediaArticleHelper.getWikiArticle(amenity, text);
 						} else {
-							WikipediaArticleWikiLinkFragment.showInstance(mapActivity.getSupportFragmentManager(),  text);
+							WikipediaArticleWikiLinkFragment.showInstance(mapActivity.getSupportFragmentManager(), text);
 						}
 					} else {
 						WikipediaDialogFragment.showInstance(mapActivity, amenity, text);

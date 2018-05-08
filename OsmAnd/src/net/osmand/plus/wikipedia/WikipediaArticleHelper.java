@@ -132,7 +132,6 @@ public class WikipediaArticleHelper implements RegionCallback {
 						item = DownloadResources.findSmallestIndexItemAt(application,
 								amenityArticle.getLocation(), DownloadActivityType.WIKIPEDIA_FILE);
 					}
-
 				} catch (IOException e) {
 					Log.e(TAG, e.getMessage(), e);
 				}
@@ -257,7 +256,6 @@ public class WikipediaArticleHelper implements RegionCallback {
 			articleName = url.replace(PAGE_PREFIX_HTTPS + lang + domain, "")
 					.replaceAll("_", " ");
 		}
-
 		try {
 			articleName = URLDecoder.decode(articleName, "UTF-8");
 		} catch (UnsupportedEncodingException e) {
@@ -279,17 +277,12 @@ public class WikipediaArticleHelper implements RegionCallback {
 		new AlertDialog.Builder(context)
 				.setTitle(url)
 				.setMessage(R.string.online_webpage_warning)
-				.
-						setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
-							@Override
-
-
-							public void onClick(DialogInterface dialog, int which) {
-								WikipediaDialogFragment.showFullArticle(context, Uri.parse(url), nightMode);
-
-							}
-
-						})
+				.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						WikipediaDialogFragment.showFullArticle(context, Uri.parse(url), nightMode);
+					}
+				})
 				.setNegativeButton(R.string.shared_string_cancel, null)
 				.show();
 	}
