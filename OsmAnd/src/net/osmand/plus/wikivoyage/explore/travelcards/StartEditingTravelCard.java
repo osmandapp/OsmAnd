@@ -1,5 +1,6 @@
 package net.osmand.plus.wikivoyage.explore.travelcards;
 
+import android.content.Context;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.customtabs.CustomTabsIntent;
@@ -16,8 +17,11 @@ public class StartEditingTravelCard extends BaseTravelCard {
 
 	public static final int TYPE = 1;
 
-	public StartEditingTravelCard(OsmandApplication app, boolean nightMode) {
+	private Context context;
+
+	public StartEditingTravelCard(OsmandApplication app, Context context, boolean nightMode) {
 		super(app, nightMode);
+		this.context = context;
 	}
 
 	@Override
@@ -35,7 +39,7 @@ public class StartEditingTravelCard extends BaseTravelCard {
 							.setToolbarColor(ContextCompat.getColor(app, nightMode ? R.color.actionbar_dark_color : R.color.actionbar_light_color))
 							.build();
 					String text = "https://" + app.getLanguage().toLowerCase() + ".m.wikivoyage.org";
-					customTabsIntent.launchUrl(app, Uri.parse(text));
+					customTabsIntent.launchUrl(context, Uri.parse(text));
 				}
 			});
 		}
