@@ -3191,4 +3191,9 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="purchase_cancelled_dialog_descr">Rinnova s\'abbonamentu tuo pro sighire a impreare totu sas funtzionalidades:</string>
 
     <string name="download_all">Iscàrriga totu</string>
+    <string name="open_wikipedia_link_online">Aberi su ligàmene de wikipedia in lìnia</string>
+    <string name="open_wikipedia_link_online_description">OsmAnd at a abèrrere su ligàmene in lìnia in s\'esploradore tuo.</string>
+    <string name="read_wikipedia_offline_description">Abbona·ti a OsmAnd Live pro lèghere sos artìculos de Wikipedia e Wikivoyage chene connessione.</string>
+    <string name="how_to_open_link">Comente abèrrere su ligàmene?</string>
+    <string name="read_wikipedia_offline">Leghe Wikipedia chene connessione</string>
     </resources>
