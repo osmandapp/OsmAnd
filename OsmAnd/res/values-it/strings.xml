@@ -33,7 +33,7 @@
     <string name="fav_export_confirmation">Esistono file con preferiti già esportati. Vuoi sostituirli?</string>
     <string name="profile_settings">Impostazioni specifiche del profilo</string>
     <string name="settings_preset">Profilo predefinito</string>
-    <string name="settings_preset_descr">Seleziona un profilo d\'uso con impostazioni per la mappa e la navigazione personalizzate.</string>
+    <string name="settings_preset_descr">Le impostazioni di navigazione e di visualizzazione della mappa vengono ricordate per ciascun profilo di utilizzo. Impostare qui il profilo predefinito.</string>
 
 
     <string name="routing_settings">Navigazione</string>
@@ -1024,7 +1024,7 @@ Memoria in proporzione %4$s MB (limite di Android %5$s MB, Dalvik %6$s MB).</str
     <string name="av_def_action_picture">Scatta una foto</string>
     <string name="recording_context_menu_precord">Scatta una foto</string>
     <string name="recording_photo_description">Foto %1$s %2$s</string>
-    <string name="stop_routing_confirm">Sei sicuro di voler fermare la navigazione?</string>
+    <string name="stop_routing_confirm">Sei sicuro di voler interrompere la navigazione?</string>
     <string name="clear_dest_confirm">Sei sicuro di voler eliminare la tua destinazione (e le destinazioni intermedie)?</string>
     <string name="precise_routing_mode_descr">Abilita per calcolare percorsi precisi senza intoppi. È lento e limitato in distanza.</string>
     <string name="precise_routing_mode">Calcolo della rotta preciso (alfa)</string>
@@ -1045,7 +1045,7 @@ Memoria in proporzione %4$s MB (limite di Android %5$s MB, Dalvik %6$s MB).</str
     <string name="av_def_action_choose">Seleziona su richiesta</string>
     <string name="item_checked">segnato</string>
     <string name="item_unchecked">non segnato</string>
-    <string name="access_arrival_time">Orario arrivo</string>
+    <string name="access_arrival_time">Orario di arrivo</string>
     <string name="map_widget_gps_info">Informazioni GPS</string>
     <string name="layer_hillshade">Livello ombreggiatura rilievi</string>
     <string name="osmand_play_title_30_chars">OsmAnd Mappe &amp; Navigazione</string>
@@ -1069,7 +1069,7 @@ Memoria in proporzione %4$s MB (limite di Android %5$s MB, Dalvik %6$s MB).</str
     <string name="local_openstreetmap_act_title">Modifiche OSM</string>
     <string name="download_using_mobile_internet">La connessione WiFi non è attualmente attiva. Vuoi continuare a scaricare con la connessione internet attuale?</string>
     <string name="cancel_route">Cancella il percorso</string>
-    <string name="cancel_navigation">Ferma la navigazione</string>
+    <string name="cancel_navigation">Interrompere la navigazione</string>
     <string name="clear_destination">Cancella la destinazione</string>
     <string name="other_location">Altra</string>
     <string name="files_limit">hai ancora %1$d file</string>
