@@ -36,6 +36,7 @@ public class BottomSheetItemWithCompoundButton extends BottomSheetItemWithDescri
 											 @ColorRes int titleColorId,
 											 CharSequence description,
 											 @ColorRes int descriptionColorId,
+											 int descriptionMaxLines,
 											 boolean checked,
 											 ColorStateList buttonTintList,
 											 OnCheckedChangeListener onCheckedChangeListener) {
@@ -49,7 +50,8 @@ public class BottomSheetItemWithCompoundButton extends BottomSheetItemWithDescri
 				title,
 				titleColorId,
 				description,
-				descriptionColorId);
+				descriptionColorId,
+				descriptionMaxLines);
 		this.checked = checked;
 		this.buttonTintList = buttonTintList;
 		this.onCheckedChangeListener = onCheckedChangeListener;
@@ -102,6 +104,7 @@ public class BottomSheetItemWithCompoundButton extends BottomSheetItemWithDescri
 					titleColorId,
 					description,
 					descriptionColorId,
+					descriptionMaxLines,
 					checked,
 					buttonTintList,
 					onCheckedChangeListener);

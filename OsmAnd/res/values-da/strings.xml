@@ -3237,4 +3237,9 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="purchase_cancelled_dialog_descr">Forny abonnement for at fortsætte med at bruge alle funktioner:</string>
 
     <string name="download_all">Hent alt</string>
+    <string name="open_wikipedia_link_online">Åbn Wikipedia link online</string>
+    <string name="open_wikipedia_link_online_description">Omdirigering til webbrowser og åbner linket online.</string>
+    <string name="read_wikipedia_offline_description">Få OsmAnd Live-abonnement til at læse Wikipedia og Wikivoyage artikler offline.</string>
+    <string name="how_to_open_link">Hvordan linket åbnes?</string>
+    <string name="read_wikipedia_offline">Læs Wikipedia offline</string>
     </resources>

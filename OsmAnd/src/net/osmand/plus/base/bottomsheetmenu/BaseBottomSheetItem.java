@@ -13,6 +13,7 @@ public class BaseBottomSheetItem {
 
 	public static final int INVALID_POSITION = -1;
 	public static final int INVALID_ID = -1;
+	public static final int INVALID_VALUE = -1;
 
 	protected View view;
 	@LayoutRes
