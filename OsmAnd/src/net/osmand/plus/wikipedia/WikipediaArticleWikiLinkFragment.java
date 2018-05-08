@@ -23,10 +23,8 @@ public class WikipediaArticleWikiLinkFragment extends MenuBottomSheetDialogFragm
 	public static final String TAG = WikivoyageArticleWikiLinkFragment.class.getSimpleName();
 
 	public static final String ARTICLE_URL_KEY = "article_url";
-	private static final String WIKI_REGION = "region";
 
 	private String articleUrl;
-	private String wikiRegion;
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
@@ -36,19 +34,17 @@ public class WikipediaArticleWikiLinkFragment extends MenuBottomSheetDialogFragm
 		}
 		if (savedInstanceState != null) {
 			articleUrl = savedInstanceState.getString(ARTICLE_URL_KEY);
-			wikiRegion = savedInstanceState.getString(WIKI_REGION);
 		} else {
 			Bundle args = getArguments();
 			if (args != null) {
 				articleUrl = args.getString(ARTICLE_URL_KEY);
-				wikiRegion = args.getString(WIKI_REGION);
 			}
 		}
 
 		BaseBottomSheetItem wikiLinkitem = new BottomSheetItemWithDescription.Builder()
 				.setDescription(articleUrl)
 				.setTitle(getString(R.string.how_to_open_link))
-				.setLayoutId(R.layout.bottom_sheet_item_with_descr)
+				.setLayoutId(R.layout.bottom_sheet_item_title_with_descr)
 				.create();
 		items.add(wikiLinkitem);
 		items.add(new TitleDividerItem(getContext()));
@@ -62,7 +58,7 @@ public class WikipediaArticleWikiLinkFragment extends MenuBottomSheetDialogFragm
 				.setDescription(getString(R.string.open_wikipedia_link_online_description))
 				.setIcon(viewOnlineIcon)
 				.setTitle(getString(R.string.open_wikipedia_link_online))
-				.setLayoutId(R.layout.bottom_sheet_item_title_with_descr)
+				.setLayoutId(R.layout.bottom_sheet_item_with_descr_and_icon)
 				.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
@@ -79,7 +75,7 @@ public class WikipediaArticleWikiLinkFragment extends MenuBottomSheetDialogFragm
 				.setDescription(getString(R.string.read_wikipedia_offline_description))
 				.setIcon(osmandLiveIcon)
 				.setTitle(getString(R.string.read_wikipedia_offline))
-				.setLayoutId(R.layout.bottom_sheet_item_title_with_descr)
+				.setLayoutId(R.layout.bottom_sheet_item_with_descr_and_icon)
 				.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
@@ -98,7 +94,6 @@ public class WikipediaArticleWikiLinkFragment extends MenuBottomSheetDialogFragm
 	public void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
 		outState.putString(ARTICLE_URL_KEY, articleUrl);
-		outState.putString(WIKI_REGION, wikiRegion);
 	}
 
 	@Override
@@ -112,12 +107,10 @@ public class WikipediaArticleWikiLinkFragment extends MenuBottomSheetDialogFragm
 	}
 
 	public static boolean showInstance(@NonNull FragmentManager fm,
-	                                   @NonNull String region,
 	                                   @NonNull String articleUrl) {
 		try {
 			Bundle args = new Bundle();
 			args.putString(ARTICLE_URL_KEY, articleUrl);
-			args.putString(WIKI_REGION, region);
 			WikipediaArticleWikiLinkFragment fragment = new WikipediaArticleWikiLinkFragment();
 
 			fragment.setArguments(args);
