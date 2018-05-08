@@ -3128,4 +3128,10 @@
     <string name="purchase_cancelled_dialog_descr">יש לחדש את המינוי כדי להמשיך להשתמש בכל התכונות הבאות:</string>
 
     <string name="download_all">להוריד הכול</string>
+    <string name="open_wikipedia_link_online">פתיחת הקישור של ויקיפדיה בדפדפן</string>
+    <string name="open_wikipedia_link_online_description">OsmAnd יפנה אותך לדפדפן ויפתח את הקישור.</string>
+    <string name="read_wikipedia_offline_description">עליך לערוך מינוי ל־OsmAnd חי כדי לקרוא ערכים מוויקיפדיה ומוויקימסע ללא חיבור לאינטרנט.</string>
+    <string name="how_to_open_link">כיצד לפתוח קישור?</string>
+    <string name="read_wikipedia_offline">קריאת ויקיפדיה ללא חיבור לאינטרנט</string>
+    <string name="edit_tilesource_elliptic_tile">היטל כדורי</string>
     </resources>
