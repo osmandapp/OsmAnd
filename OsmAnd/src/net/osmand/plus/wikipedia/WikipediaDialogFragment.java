@@ -38,9 +38,7 @@ import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
@@ -134,9 +132,7 @@ public class WikipediaDialogFragment extends WikiArticleBaseDialogFragment {
 	@NonNull
 	protected String createHtmlContent() {
 		StringBuilder sb = new StringBuilder(HEADER_INNER);
-		String[] rtlLanguages = new String[]{"ar", "dv", "he", "iw", "fa", "nqo", "ps", "sd", "ug", "ur", "yi"};
-		Set<String> rtls = new HashSet<>(Arrays.asList(rtlLanguages));
-		String bodyTag = rtls.contains(langSelected) ? "<body dir=\"rtl\">\n" : "<body>\n";
+		String bodyTag = rtlLanguages.contains(langSelected) ? "<body dir=\"rtl\">\n" : "<body>\n";
 		sb.append(bodyTag);
 		String nightModeClass = nightMode ? " nightmode" : "";
 		sb.append("<div class=\"main");
