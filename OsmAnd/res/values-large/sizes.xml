@@ -212,4 +212,6 @@
 	<dimen name="wikivoyage_start_editing_card_text_image_padding">60dp</dimen>
 	<dimen name="wikivoyage_show_images_dialog_buttons_height">66dp</dimen>
 
+	<dimen name="wikilink_bottom_sheet_padding">21dp</dimen>
+
 </resources>
