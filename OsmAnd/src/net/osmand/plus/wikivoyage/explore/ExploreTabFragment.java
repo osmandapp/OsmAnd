@@ -21,6 +21,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.chooseplan.ChoosePlanDialogFragment;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadResources;
@@ -228,8 +229,7 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIn
 			neededMapsCard.setListener(new TravelNeededMapsCard.CardListener() {
 				@Override
 				public void onPrimaryButtonClick() {
-					IndexItem[] items = neededIndexItems.toArray(new IndexItem[neededIndexItems.size()]);
-					downloadManager.startDownload(getMyActivity(), items);
+					downloadManager.startDownload(getMyActivity(), getAllItemsForDownload());
 					adapter.updateNeededMapsCard();
 				}
 
@@ -245,17 +245,35 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIn
 
 				@Override
 				public void onIndexItemClick(IndexItem item) {
-					DownloadIndexesThread downloadThread = app.getDownloadThread();
-					if (downloadThread.isDownloading(item)) {
-						downloadThread.cancelDownload(item);
+					if (item.getType() == DownloadActivityType.WIKIPEDIA_FILE && !Version.isPaidVersion(app)) {
+						FragmentManager fm = getFragmentManager();
+						if (fm != null) {
+							ChoosePlanDialogFragment.showWikipediaInstance(fm);
+						}
 					} else {
-						downloadManager.startDownload(getMyActivity(), item);
+						DownloadIndexesThread downloadThread = app.getDownloadThread();
+						if (downloadThread.isDownloading(item)) {
+							downloadThread.cancelDownload(item);
+						} else if (!item.isDownloaded()) {
+							downloadManager.startDownload(getMyActivity(), item);
+						}
+						adapter.updateNeededMapsCard();
 					}
-					adapter.updateNeededMapsCard();
 				}
 			});
 			adapter.setNeededMapsCard(neededMapsCard);
 		}
+	}
+
+	private IndexItem[] getAllItemsForDownload() {
+		boolean paidVersion = Version.isPaidVersion(getMyApplication());
+		ArrayList<IndexItem> res = new ArrayList<>();
+		for (IndexItem item : neededIndexItems) {
+			if (!item.isDownloaded() && (paidVersion || item.getType() != DownloadActivityType.WIKIPEDIA_FILE)) {
+				res.add(item);
+			}
+		}
+		return res.toArray(new IndexItem[res.size()]);
 	}
 
 	@NonNull

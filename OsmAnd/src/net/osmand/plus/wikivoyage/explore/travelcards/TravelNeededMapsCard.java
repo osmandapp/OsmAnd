@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -12,6 +13,8 @@ import android.widget.TextView;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.Version;
+import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.IndexItem;
 
@@ -59,6 +62,8 @@ public class TravelNeededMapsCard extends BaseTravelCard {
 					? R.string.maps_you_need_descr : R.string.no_index_file_to_download);
 			adjustChildCount(holder.itemsContainer);
 
+			boolean paidVersion = Version.isPaidVersion(app);
+
 			for (int i = 0; i < items.size(); i++) {
 				IndexItem item = items.get(i);
 				boolean downloading = downloadThread.isDownloading(item);
@@ -80,9 +85,17 @@ public class TravelNeededMapsCard extends BaseTravelCard {
 				((TextView) view.findViewById(R.id.description)).setText(getItemDescription(item));
 
 				ImageView iconAction = (ImageView) view.findViewById(R.id.icon_action);
-				iconAction.setVisibility(item.isDownloaded() ? View.GONE : View.VISIBLE);
-				if (!item.isDownloaded()) {
-					iconAction.setImageDrawable(downloading ? cancelIcon : downloadIcon);
+				Button buttonAction = (Button) view.findViewById(R.id.button_action);
+				if (item.isDownloaded()) {
+					iconAction.setVisibility(View.GONE);
+					buttonAction.setVisibility(View.GONE);
+				} else {
+					boolean showBtn = !paidVersion && item.getType() == DownloadActivityType.WIKIPEDIA_FILE;
+					iconAction.setVisibility(showBtn ? View.GONE : View.VISIBLE);
+					buttonAction.setVisibility(showBtn ? View.VISIBLE : View.GONE);
+					if (!showBtn) {
+						iconAction.setImageDrawable(downloading ? cancelIcon : downloadIcon);
+					}
 				}
 
 				ProgressBar progressBar = (ProgressBar) view.findViewById(R.id.progress_bar);
