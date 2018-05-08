@@ -3044,4 +3044,12 @@
     <string name="how_to_open_link">¿Cómo abrir un enlace?</string>
     <string name="read_wikipedia_offline">Leer la Wikipedia sin conexión</string>
     <string name="download_all">Descargar todo</string>
+    <string name="hide_full_description">Ocultar descripción completa</string>
+    <string name="show_full_description">Mostrar descripción completa</string>
+    <string name="nautical_render_descr">Estilo para navegación marítima y fluvial. Características principales: boyas, faros, líneas y balizas de navegación fluvial, puertos, servicios marítimos, contornos de profundidad.</string>
+    <string name="ski_map_render_descr">Estilo para esquiar. Características principales: pistas de esquí, vías aéreas y otras características de esquí en una manera adecuada. Menos objetos cartográficos secundarios que distraen la atención.</string>
+    <string name="light_rs_render_descr">Estilo simple y con contraste para la navegación con coche. Cuidadoso con los ojos en el modo nocturno. Características principales: curvas de nivel, carreteras con contraste estilo naranja, menos objetos cartográficos secundarios que distraen.</string>
+    <string name="topo_render_descr">Estilo de contraste diseñado principalmente para senderismo, trekking y ciclismo en la naturaleza. Buena legibilidad con iluminación exterior compleja. Características principales: contraste en carreteras y objetos naturales, diferentes tipos de rutas, curvas de nivel con ajustes avanzados, más detalles en los niveles de zoom correspondientes que en el estilo predeterminado. La opción de integridad de la superficie le permite distinguir entre carreteras con diferente calidad de superficie. No hay modo nocturno.</string>
+    <string name="mapnik_render_descr">Estilo de renderizado predeterminado con el viejo estilo mapnik. Características clave: los colores son similares al estilo Mapnik.</string>
+    <string name="default_render_descr">Estilo de uso general. Renderizado simplificado para tener mapas más limpios en las ciudades pobladas. Características principales: curvas de nivel, rutas, calidad de la superficie, restricciones de acceso, emblemas de carreteras, representación de caminos según escala SAC, características de deportes de aguas bravas.</string>
     </resources>
