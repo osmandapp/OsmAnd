@@ -2998,7 +2998,7 @@
     <string name="open_in_browser_wiki">פתיחת ערך באופן מקוון</string>
     <string name="open_in_browser_wiki_description">הצגת ערך בדפדפן.</string>
     <string name="download_wiki_region_placeholder">אזור זה</string>
-    <string name="wiki_article_search_text">מתבצע חיפוש אחר ערך הוויקי הנדרש</string>
+    <string name="wiki_article_search_text">מתבצע חיפוש אחר ערך הוויקי המתאים</string>
     <string name="wiki_article_not_found">הערך לא נמצא</string>
     <string name="how_to_open_wiki_title">כיצד לפתוח ערכים בוויקיפדיה?</string>
 <string name="release_2_2">\\022 מנשק חדש מוכוון הקשר לנגיעה במקומות במפה ובמסכים אחרים
@@ -3127,4 +3127,5 @@
     <string name="purchase_cancelled_dialog_title">ביטלת את המינוי ל־OsmAnd חי</string>
     <string name="purchase_cancelled_dialog_descr">יש לחדש את המינוי כדי להמשיך להשתמש בכל התכונות הבאות:</string>
 
+    <string name="download_all">להוריד הכול</string>
     </resources>
