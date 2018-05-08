@@ -16,7 +16,6 @@ import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerHalfItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleDividerItem;
-import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.wikipedia.WikipediaDialogFragment;
 
@@ -48,12 +47,13 @@ public class WikivoyageArticleWikiLinkFragment extends MenuBottomSheetDialogFrag
 				wikiRegion = args.getString(WIKI_REGION);
 			}
 		}
-		items.add(new TitleItem(getString(R.string.how_to_open_wiki_title)));
 
-		BaseBottomSheetItem wikiLinkitem = new TitleItem.Builder().setTitle(articleUrl)
-				.setTitleColorId(nightMode
+		BaseBottomSheetItem wikiLinkitem = new BottomSheetItemWithDescription.Builder()
+				.setDescription(articleUrl)
+				.setDescriptionColorId(nightMode
 						? R.color.wikivoyage_contents_parent_icon_dark : R.color.wikivoyage_contents_parent_icon_light)
-				.setLayoutId(R.layout.bottom_sheet_item_title)
+				.setTitle(getString(R.string.how_to_open_wiki_title))
+				.setLayoutId(R.layout.bottom_sheet_item_title_with_descr)
 				.create();
 		items.add(wikiLinkitem);
 		items.add(new TitleDividerItem(getContext()));
@@ -69,7 +69,7 @@ public class WikivoyageArticleWikiLinkFragment extends MenuBottomSheetDialogFrag
 				getString(R.string.download_wiki_region_placeholder) : wikiRegion))
 				.setIcon(downloadIcon)
 				.setTitle(getString(R.string.download_wikipedia_label))
-				.setLayoutId(R.layout.bottom_sheet_item_with_descr_56dp)
+				.setLayoutId(R.layout.bottom_sheet_item_in_frame_with_descr_and_icon)
 				.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
@@ -92,7 +92,7 @@ public class WikivoyageArticleWikiLinkFragment extends MenuBottomSheetDialogFrag
 				.setDescription(getString(R.string.open_in_browser_wiki_description))
 				.setIcon(viewOnlineIcon)
 				.setTitle(getString(R.string.open_in_browser_wiki))
-				.setLayoutId(R.layout.bottom_sheet_item_with_descr_56dp)
+				.setLayoutId(R.layout.bottom_sheet_item_in_frame_with_descr_and_icon)
 				.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
@@ -109,11 +109,6 @@ public class WikivoyageArticleWikiLinkFragment extends MenuBottomSheetDialogFrag
 		super.onSaveInstanceState(outState);
 		outState.putString(ARTICLE_URL_KEY, articleUrl);
 		outState.putString(WIKI_REGION, wikiRegion);
-	}
-
-	@Override
-	protected boolean useScrollableItemsContainer() {
-		return false;
 	}
 
 	@Override

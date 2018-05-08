@@ -42,11 +42,8 @@ import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 import static net.osmand.plus.OsmandSettings.WikiArticleShowImages.OFF;
 
@@ -311,9 +308,7 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 	@NonNull
 	protected String createHtmlContent() {
 		StringBuilder sb = new StringBuilder(HEADER_INNER);
-		String[] rtlLanguages = new String[]{"ar","dv","he","iw","fa","nqo","ps","sd","ug","ur","yi"};
-		Set<String> rtls = new HashSet<>(Arrays.asList(rtlLanguages));
-		String bodyTag = rtls.contains(article.getLang()) ? "<body dir=\"rtl\">\n" : "<body>\n";
+		String bodyTag = rtlLanguages.contains(article.getLang()) ? "<body dir=\"rtl\">\n" : "<body>\n";
 		sb.append(bodyTag);
 		String nightModeClass = nightMode ? " nightmode" : "";
 		String imageTitle = article.getImageTitle();
