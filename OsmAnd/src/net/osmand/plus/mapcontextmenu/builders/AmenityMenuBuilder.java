@@ -295,7 +295,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 				public void onClick(View v) {
 					if (text.contains(".wikipedia.org/w")) {
 						if (Version.isPaidVersion(app)) {
-							WikipediaArticleHelper wikipediaArticleHelper = new WikipediaArticleHelper(mapActivity, mapActivity.getSupportFragmentManager(), !light);
+							WikipediaArticleHelper wikipediaArticleHelper = new WikipediaArticleHelper(mapActivity, !light);
 							wikipediaArticleHelper.getWikiArticle(amenity, text);
 						} else {
 							WikipediaArticleWikiLinkFragment.showInstance(mapActivity.getSupportFragmentManager(), text);

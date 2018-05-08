@@ -57,7 +57,7 @@ public class WikivoyageWebViewClient extends WebViewClient {
 		fragmentManager = fm;
 		this.context = context;
 		this.nightMode = nightMode;
-		wikipediaArticleHelper = new WikipediaArticleHelper(context, fragmentManager, nightMode);
+		wikipediaArticleHelper = new WikipediaArticleHelper((MapActivity) context, nightMode);
 	}
 
 	@Override

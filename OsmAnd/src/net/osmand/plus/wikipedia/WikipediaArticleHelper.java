@@ -7,10 +7,9 @@ import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
 import android.util.Log;
 
+import net.osmand.CallbackWithObject;
 import net.osmand.IndexConstants;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
@@ -32,11 +31,8 @@ import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.List;
 
-interface RegionCallback {
-	void onRegionFound(String s);
-}
 
-public class WikipediaArticleHelper implements RegionCallback {
+public class WikipediaArticleHelper {
 
 	private static final String TAG = WikipediaArticleHelper.class.getSimpleName();
 	private static final String ZIP_EXT = ".zip";
@@ -46,73 +42,47 @@ public class WikipediaArticleHelper implements RegionCallback {
 	private static final String WIKI_DOMAIN = ".wikipedia.org/wiki/";
 
 	private WikiArticleSearchTask articleSearchTask;
-	private FragmentManager fragmentManager;
-	private Context context;
+	private MapActivity mapActivity;
 
 	private String regionName;
 	private boolean nightMode;
 
-	public WikipediaArticleHelper(FragmentActivity context, FragmentManager fm, boolean nightMode) {
-		fragmentManager = fm;
-		this.context = context;
+	public WikipediaArticleHelper(MapActivity mapActivity, boolean nightMode) {
+		this.mapActivity = mapActivity;
 		this.nightMode = nightMode;
 	}
 
-	@Override
-	public void onRegionFound(String s) {
-		regionName = s;
-	}
-
 	public static class WikiArticleSearchTask extends AsyncTask<Void, Void, List<Amenity>> {
+
 		private ProgressDialog dialog;
-		private RegionCallback callback;
+		private CallbackWithObject<String> callback;
 		private String name;
 		private String regionName;
-		private WeakReference<MapActivity> weakContext;
-		private WeakReference<OsmandApplication> applicationReference;
+		private WeakReference<MapActivity> weakMapActivity;
 		private boolean isNightMode;
 		private String url;
 		private String lang;
-		private TravelArticle travelArticle;
-		private Amenity amenityArticle;
-		private FragmentManager fragmentManager;
+		private Object article;
 
-		WikiArticleSearchTask(RegionCallback callback, TravelArticle travelArticle, String articleName,
-		                      String regionName, FragmentManager fragmentManager,
-		                      String lang, MapActivity context, boolean nightMode, String url) {
-			this.fragmentManager = fragmentManager;
+		WikiArticleSearchTask(Object article,
+		                      String regionName,
+		                      MapActivity mapActivity,
+		                      boolean nightMode,
+		                      String url,
+		                      final CallbackWithObject<String> callback) {
+			this.article = article;
 			this.regionName = regionName;
-			name = articleName;
-			this.lang = lang;
-			weakContext = new WeakReference<>(context);
-			OsmandApplication app = (OsmandApplication) context.getApplication();
-			applicationReference = new WeakReference<>(app);
-			dialog = createProgressDialog();
+			weakMapActivity = new WeakReference<>(mapActivity);
 			this.isNightMode = nightMode;
 			this.url = url;
-			this.travelArticle = travelArticle;
 			this.callback = callback;
-		}
-
-		WikiArticleSearchTask(RegionCallback callback, Amenity amenityArticle, String articleName,
-		                      String regionName, FragmentManager fragmentManager,
-		                      String lang, MapActivity context, boolean nightMode, String url) {
-			this.fragmentManager = fragmentManager;
-			this.regionName = regionName;
-			name = articleName;
-			this.lang = lang;
-			weakContext = new WeakReference<>(context);
-			OsmandApplication app = (OsmandApplication) context.getApplication();
-			applicationReference = new WeakReference<>(app);
-			dialog = createProgressDialog();
-			this.isNightMode = nightMode;
-			this.url = url;
-			this.amenityArticle = amenityArticle;
-			this.callback = callback;
+			dialog = createProgressDialog(mapActivity);
 		}
 
 		@Override
 		protected void onPreExecute() {
+			lang = getLang(url);
+			name = getArticleNameFromUrl(url, lang);
 			if (dialog != null) {
 				dialog.show();
 			}
@@ -120,17 +90,22 @@ public class WikipediaArticleHelper implements RegionCallback {
 
 		@Override
 		protected List<Amenity> doInBackground(Void... voids) {
-			OsmandApplication application = applicationReference.get();
+			MapActivity activity = weakMapActivity.get();
+			OsmandApplication application = activity.getMyApplication();
 			List<Amenity> results = new ArrayList<>();
 			if (application != null && !isCancelled()) {
 				IndexItem item = null;
 				try {
-					if (travelArticle != null) {
-						item = DownloadResources.findSmallestIndexItemAt(application,
-								new LatLon(travelArticle.getLat(), travelArticle.getLon()), DownloadActivityType.WIKIPEDIA_FILE);
-					} else if (amenityArticle != null) {
-						item = DownloadResources.findSmallestIndexItemAt(application,
-								amenityArticle.getLocation(), DownloadActivityType.WIKIPEDIA_FILE);
+					if (article != null) {
+						if (article instanceof TravelArticle) {
+							TravelArticle travelArticle = (TravelArticle) article;
+							item = DownloadResources.findSmallestIndexItemAt(application,
+									new LatLon(travelArticle.getLat(), travelArticle.getLon()), DownloadActivityType.WIKIPEDIA_FILE);
+						} else if (article instanceof Amenity) {
+							Amenity amenityArticle = (Amenity) article;
+							item = DownloadResources.findSmallestIndexItemAt(application,
+									amenityArticle.getLocation(), DownloadActivityType.WIKIPEDIA_FILE);
+						}
 					}
 				} catch (IOException e) {
 					Log.e(TAG, e.getMessage(), e);
@@ -144,7 +119,7 @@ public class WikipediaArticleHelper implements RegionCallback {
 				if (repository == null) {
 					if ((regionName == null || regionName.isEmpty()) && item != null) {
 						regionName = (getRegionName(item.getFileName(), application.getRegions()));
-						callback.onRegionFound(regionName);
+						callback.processResult(regionName);
 					}
 					return null;
 				} else {
@@ -160,7 +135,7 @@ public class WikipediaArticleHelper implements RegionCallback {
 
 		@Override
 		protected void onCancelled() {
-			MapActivity activity = weakContext.get();
+			MapActivity activity = weakMapActivity.get();
 			if (activity != null && !activity.isActivityDestroyed() && dialog != null) {
 				dialog.dismiss();
 			}
@@ -170,73 +145,64 @@ public class WikipediaArticleHelper implements RegionCallback {
 
 		@Override
 		protected void onPostExecute(List<Amenity> found) {
-			MapActivity activity = weakContext.get();
+			MapActivity activity = weakMapActivity.get();
 			if (activity != null && !activity.isActivityDestroyed() && dialog != null) {
 				dialog.dismiss();
 				if (found == null) {
-					WikivoyageArticleWikiLinkFragment.showInstance(fragmentManager, regionName == null ?
+					WikivoyageArticleWikiLinkFragment.showInstance(activity.getSupportFragmentManager(), regionName == null ?
 							"" : regionName, url);
 				} else if (!found.isEmpty()) {
 					WikipediaDialogFragment.showInstance(activity, found.get(0), lang);
 				} else {
-					warnAboutExternalLoad(url, weakContext.get(), isNightMode);
+					warnAboutExternalLoad(url, weakMapActivity.get(), isNightMode);
 				}
 			}
 		}
+	}
 
-		private String getFilenameFromIndex(String fileName) {
-			return fileName
+	private static String getFilenameFromIndex(String fileName) {
+		return fileName
+				.replace("_" + IndexConstants.BINARY_MAP_VERSION, "")
+				.replace(ZIP_EXT, "");
+	}
+
+	private static String getRegionName(String filename, OsmandRegions osmandRegions) {
+		if (osmandRegions != null && filename != null) {
+			String regionName = filename
 					.replace("_" + IndexConstants.BINARY_MAP_VERSION, "")
-					.replace(ZIP_EXT, "");
+					.replace(IndexConstants.BINARY_WIKI_MAP_INDEX_EXT_ZIP, "")
+					.toLowerCase();
+			return osmandRegions.getLocaleName(regionName, false);
 		}
-
-		private String getRegionName(String filename, OsmandRegions osmandRegions) {
-			if (osmandRegions != null && filename != null) {
-				String regionName = filename
-						.replace("_" + IndexConstants.BINARY_MAP_VERSION, "")
-						.replace(IndexConstants.BINARY_WIKI_MAP_INDEX_EXT_ZIP, "")
-						.toLowerCase();
-				return osmandRegions.getLocaleName(regionName, false);
-			}
-			return "";
-		}
-
-		private ProgressDialog createProgressDialog() {
-			MapActivity activity = weakContext.get();
-			if (activity != null && !activity.isActivityDestroyed()) {
-				ProgressDialog dialog = new ProgressDialog(activity);
-				dialog.setCancelable(false);
-				dialog.setMessage(activity.getString(R.string.wiki_article_search_text));
-				return dialog;
-			}
-			return null;
-		}
+		return "";
 	}
 
-	public void getWikiArticle(TravelArticle article, String url) {
+	private static ProgressDialog createProgressDialog(MapActivity activity) {
+		if (activity != null && !activity.isActivityDestroyed()) {
+			ProgressDialog dialog = new ProgressDialog(activity);
+			dialog.setCancelable(false);
+			dialog.setMessage(activity.getString(R.string.wiki_article_search_text));
+			return dialog;
+		}
+		return null;
+	}
+
+	public void getWikiArticle(Object article, String url) {
 		if (article == null) {
 			return;
 		}
-		String lang = getLang(url);
-		String articleName = getArticleNameFromUrl(url, lang);
-		articleSearchTask = new WikiArticleSearchTask(this, article, articleName, regionName, fragmentManager,
-				lang, (MapActivity) context, nightMode, url);
-		articleSearchTask.execute();
-	}
-
-	public void getWikiArticle(Amenity article, String url) {
-		if (article == null) {
-			return;
-		}
-		String lang = getLang(url);
-		String articleName = getArticleNameFromUrl(url, lang);
-		articleSearchTask = new WikiArticleSearchTask(this, article, articleName, regionName, fragmentManager,
-				lang, (MapActivity) context, nightMode, url);
+		articleSearchTask = new WikiArticleSearchTask(article, regionName, mapActivity, nightMode, url, new CallbackWithObject<String>() {
+			@Override
+			public boolean processResult(String s) {
+				regionName = s;
+				return true;
+			}
+		});
 		articleSearchTask.execute();
 	}
 
 	@NonNull
-	public String getLang(String url) {
+	public static String getLang(String url) {
 		if (url.startsWith(PAGE_PREFIX_HTTP)) {
 			return url.substring(url.startsWith(PAGE_PREFIX_HTTP) ? PAGE_PREFIX_HTTP.length() : 0, url.indexOf("."));
 		} else if (url.startsWith(PAGE_PREFIX_HTTPS)) {
@@ -245,7 +211,7 @@ public class WikipediaArticleHelper implements RegionCallback {
 		return "";
 	}
 
-	public String getArticleNameFromUrl(String url, String lang) {
+	public static String getArticleNameFromUrl(String url, String lang) {
 		String domain = url.contains(WIKIVOAYAGE_DOMAIN) ? WIKIVOAYAGE_DOMAIN : WIKI_DOMAIN;
 		String articleName = "";
 
