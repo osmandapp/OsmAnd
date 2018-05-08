@@ -2410,7 +2410,7 @@
     
     
     <string name="routing_attr_height_obstacles_name">Usar datos de elevación</string>
-    <string name="routing_attr_height_obstacles_description">Usa datos de elevación del terreno provistos por SRTM, ASTER y UR-DEM.</string>
+    <string name="routing_attr_height_obstacles_description">Usa datos de elevación del terreno proporcionados por SRTM, ASTER y UR-DEM.</string>
 
     <string name="rendering_attr_depthContours_description">Mostrar curvas y puntos de profundidad.</string>
     <string name="rendering_attr_depthContours_name">Curvas de profundidad náuticas</string>
