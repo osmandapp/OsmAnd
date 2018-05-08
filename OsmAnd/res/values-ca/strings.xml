@@ -185,11 +185,11 @@ S\'ocuparà una memòria de {1} MB
     <string name="osmand_parking_event">Traieu el cotxe de l\'aparcament</string>
     <string name="rendering_attr_appMode_description">Optimitza el mapa per</string>
     <string name="play_commands_of_currently_selected_voice">Selecciona una veu i comprova les indicacions en funcionament</string>
-    <string name="zoom_by_trackball_descr">Canvia el zoom del mapa amb moviments horitzontals del ratolí de bola.</string>
+    <string name="zoom_by_trackball_descr">Canvia el zoom del mapa seguint el desplaçament horitzontal del ratolí de bola.</string>
     <string name="zoom_by_trackball">Utilitza el ratolí de bola per controlar el zoom</string>
     <string name="local_openstreetmap_were_uploaded">Es van penjar {0} PDI/notes</string>
-    <string name="local_openstreetmap_settings">PDIs/Notes d\'OSM desades localment</string>
-    <string name="local_openstreetmap_settings_descr">Mostra i gestiona els PDI/notes d\'OSM a la base de dades local.</string>
+    <string name="local_openstreetmap_settings">PDIs/Notes d\'OSM desades al dispositiu</string>
+    <string name="local_openstreetmap_settings_descr">Mostra i gestiona els PDI/notes d\'OSM anotats a la base de dades del dispositiu.</string>
     <string name="day_night_info">Informació de dia/nit</string>
     
     <string name="show_lanes">Carrils</string>
@@ -244,7 +244,7 @@ S\'ocuparà una memòria de {1} MB
     <string name="offline_edition">Edició fora de línia</string>
     <string name="offline_edition_descr">Utilitza sempre l\'edició fora de línia.</string>
     <string name="local_openstreetmap_descr_title">Edició asincrònica de l\'OSM:</string>
-    <string name="accessibility_mode_descr">Activa les característiques d\'accessibilitat.</string>
+    <string name="accessibility_mode_descr">Activa les funcions per a usuaris amb discapacitats.</string>
     <string name="update_poi_does_not_change_indexes">Els canvis realitzats en els PDI a l\'aplicació no afecten els fitxers de mapa baixats, els canvis es desen en un fitxer local.</string>
     <string name="global_app_allocated_memory_descr">Memòria assignada %1$s MB (límit de l\'Android %2$s MB, Dalvik %3$s MB).</string>
     <string name="global_app_allocated_memory">Memòria assignada</string>
@@ -364,7 +364,7 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="osmand_plus_long_description_1000_chars">"OsmAnd+ (OSM Automated Navigation Directions) L\'OsmAnd+ és una aplicació de navegació de codi obert amb accés a una gran varietat de dades de la col·lecció oberta de mapes OpenStreetMap. Totes les dades, incloent mapes de tessel·les i de vectors, poden emmagatzemar-se a la targeta de memòria del telèfon pel seu ús fora de línia. L\'OsmAnd també té la funcionalitat de càlcul de rutes tant en línia com fora de línia, incloent a més l\'orientació per veu. L\'OsmAnd+ és la versió de pagament; comprant-la estareu donant suport al projecte, ajudareu al desenvolupament de noves funcions i rebreu les darreres actualitzacions. Algunes de les característiques centrals són: - Funcionalitat completa fora de línia (desa en el dispositiu d\'emmagatzemament  els mapes vectorials i de mosaic baixats) - Mapes de vectors compactes de tot el món per usar fora de línia - Baixada il·limitada de mapes nacionals o regionals directament des de l\'aplicació - Disponibilitat fora de línia dels PDI baixats prèviament de Viquipèdia, és genial per fer turisme - Diverses capes de mapes alhora, com traces GPX o de navegació, PDIs, favorits, parades de transport públic, etc. amb nivell d\'opacitat personalitzada - Cerca fora de línia d\'adreces i llocs - Càlcul de rutes fora de línia per distàncies \'abast mitjà - Modalitats cotxe, bicicleta i vianant - Canvi automàtic de vista diürna a nocturna, opcional - Ampliació automàtica del mapa segons la velocitat, opcional - Alineació automàtica del mapa segons la brúixola o la direcció del moviment, opcional - Indicació de carril, velocitat màxima permesa, veus enregistrades i/o sintetitzades"</string>
     <string name="rendering_attr_contourLines_description">Seleccioneu el nivell mínim de zoom per mostrar el mapa si està disponible. Caldrà el fitxer SRTM separat:</string>
     <string name="osmand_development_plugin_description">Aquest connector mostra la configuració de característiques per al desenvolupament i depuració com la verificació o simulació de rutes, el rendiment del renderitzat o les indicacions de veu. Aquestes configuracions s\'adrecen a desenvolupadors i no són d\'utilitat per a un usuari normal.</string>
-    <string name="accessibility_default">En consonància amb la configuració global del sistema</string>
+    <string name="accessibility_default">En consonància amb la configuració del sistema Android</string>
     <string name="zoomIs">El nivell de zoom és</string>
     <string name="settings_direction_style_descr">Trieu l\'estil per indicar direccions relatives mentre s\'està en moviment.</string>
     <string name="index_name_other">Mapes mundials i temàtics</string>
