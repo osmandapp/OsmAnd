@@ -177,7 +177,7 @@ Er is nu {2} MB beschikbaar</string>
   <string name="pref_overlay">Bovenlaag / onderlaag</string>
   <string name="pref_raster_map">Kaartbron-instellingen</string>
   <string name="pref_vector_map">Vectorkaart-instellingen</string>
-  <string name="delete_confirmation_msg">Verwijder %1$s?</string>
+  <string name="delete_confirmation_msg">%1$s verwijderen?</string>
   <string name="city_type_suburb">Buitenwijk</string>
   <string name="city_type_hamlet">Gehucht</string>
   <string name="city_type_village">Dorp</string>
@@ -1596,7 +1596,7 @@ Wil je een nieuwe map maken op de toegestane locatie en de OsmAnd-bestanden daar
     <string name="map_widget_top">Statusbalk</string>
 	<string name="map_widget_right">Widgets Rechter Kolom</string>
 	<string name="map_widget_left">Widgets Linker Kolom</string>
-	<string name="configure_map">Kaart-instellingen</string>
+	<string name="configure_map">Kaart instellen</string>
     <string name="search_radius_proximity">Binnen</string>
     
     
@@ -1790,7 +1790,7 @@ Wil je een nieuwe map maken op de toegestane locatie en de OsmAnd-bestanden daar
 	<string name="shared_string_favorites">Favorieten</string>
 	<string name="shared_string_add_to_favorites">Aan Favorieten toevoegen</string>
 	
-	<string name="shared_string_my_places">Mijn Plaatsen</string>
+	<string name="shared_string_my_places">Mijn plaatsen</string>
 	
 	
 	
@@ -2240,7 +2240,7 @@ Lengtegraad:\t\t%2$s</string>
     <string name="osm_live_enter_email">Voer een geldig emailadres in</string>
     <string name="osm_live_enter_user_name">Voer je Openbare Naam in</string>
     <string name="osm_live_thanks">Bedankt voor je OSM Live Abonnement!</string>
-    <string name="osm_live_region_desc">Een gedeelte van je betaling gaat naar OSM-Bijdragers in deze regio.</string>
+    <string name="osm_live_region_desc">Een gedeelte van je betaling gaat naar OSM-bijdragers in deze regio.</string>
     <string name="osm_live_subscription_settings">Abonnementsgegevens</string>
     <string name="osm_live_ask_for_purchase">Neem alsjeblieft eerst een OsmAnd Live Abonnement</string>
 
@@ -2827,7 +2827,7 @@ We slaan geen locatiegegevens, zoektermen of andere gebruikersgegevens op.</stri
     <string name="none_point_error">Voeg minstens een punt toe.</string>
     <string name="enter_gpx_name">GPX bestandsnaam:</string>
     <string name="show_on_map_after_saving">Toon op kaart na opslaan</string>
-    <string name="measurement_tool">Meet afstand</string>
+    <string name="measurement_tool">Afstand meten</string>
     <string name="quick_action_start_stop_navigation">Start/stop navigatie</string>
     <string name="average">Gemiddeld</string>
     <string name="of">%1$d van de %2$d</string>
