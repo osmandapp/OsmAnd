@@ -3176,7 +3176,7 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="open_in_browser_wiki">Aberi un\'artìculu in lìnia</string>
     <string name="open_in_browser_wiki_description">Leghe custu artìculu in un\'esploradore (browser) web.</string>
     <string name="download_wiki_region_placeholder">custa regione</string>
-    <string name="wiki_article_search_text">Chirchende s\'artìculu de Wikipedia netzessàriu</string>
+    <string name="wiki_article_search_text">Chirchende s\'artìculu de Wikipedia currispondente</string>
     <string name="wiki_article_not_found">Artìculu non agatadu</string>
     <string name="how_to_open_wiki_title">Comente abèrrere sos artìculos de Wikipedia?</string>
 <string name="popular_destinations">Destinatziones popolares</string>
@@ -3190,4 +3190,5 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="purchase_cancelled_dialog_title">As iscantzelladu s\'abbonamentu tuo a OsmAnd Live</string>
     <string name="purchase_cancelled_dialog_descr">Rinnova s\'abbonamentu tuo pro sighire a impreare totu sas funtzionalidades:</string>
 
+    <string name="download_all">Iscàrriga totu</string>
     </resources>
