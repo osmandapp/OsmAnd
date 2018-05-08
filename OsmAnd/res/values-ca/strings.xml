@@ -2029,7 +2029,7 @@ L\'espai disponible és només de {2} MB.</string>
 \n
 \n i encara més…</string>
     <string name="osm_live_subscription">Subscripció a OsmAnd Live</string>
-    <string name="osm_live_email_desc">Cal proporcionar-vos informació d\'aportacions.</string>
+    <string name="osm_live_email_desc">Per informar-vos d\'aportacions.</string>
     <string name="osm_live_support_region">Zona de suport</string>
     <string name="osm_live_thanks">Us agraïm haver-vos subscrit a les actualitzacions en directe</string>
     <string name="osm_live_region_desc">Una part del vostre donatiu s\'enviarà als usuaris d\'OSM que enviïn modificacions del mapa a aquesta regió.</string>
@@ -2433,7 +2433,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="subscribe_email_desc">Subscriviu-vos a la nostra llista de correu sobre descomptes a la aplicació i aconseguiu 3 baixades de mapa addicionals!</string>
     <string name="no_overlay">Sense superposició</string>
     <string name="no_underlay">Sense sots-posició</string>
-    <string name="sea_depth_thanks">Us agraïm la compra de les isòbates</string>
+    <string name="sea_depth_thanks">Us agraïm la compra d\' \'Isòbates\'</string>
     <string name="index_item_depth_contours_osmand_ext">Isòbates</string>
     <string name="index_item_depth_points_southern_hemisphere">Fondària marina puntual a l\'hemisferi sud</string>
     <string name="index_item_depth_points_northern_hemisphere">Fondària marina puntual a l\'hemisferi nord</string>
@@ -2527,7 +2527,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="mapillary_menu_edit_text_hint">Indiqueu el nom d\'usuari</string>
     <string name="mapillary_menu_descr_username">Mostra només les imatges afegides per</string>
     <string name="mapillary_menu_title_username">Nom d\'usuari</string>
-    <string name="mapillary_menu_filter_description">Podeu filtrar les imatges per remitent o per data. El filtres només s\'apliquen en apropar-se.</string>
+    <string name="mapillary_menu_filter_description">Filtreu les imatges per remitent o per data. Només s\'aplicarà en apropar-se.</string>
     <string name="shared_string_reset">Restableix</string>
     <string name="store_tracks_in_monthly_directories">Emmagatzema les traces enregistrades en carpetes mensuals</string>
     <string name="store_tracks_in_monthly_directories_descrp">Emmagatzema les traces enregistrades en sub-carpetes segons el mes d\'enregistrament (tipus 2018-01).</string>
@@ -2624,7 +2624,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="date_added">S\'ha afegit la data</string>
     <string name="order_by">Ordena segons:</string>
     <string name="marker_show_distance_descr">Seleccioneu com indicar la distància i direcció vers els marcadors de mapa a la pantalla del mapa:</string>
-    <string name="show_guide_line">Mostra les línies guia</string>
+    <string name="show_guide_line">Mostra les línies de direcció</string>
     <string name="show_arrows_on_the_map">Mostra fletxes sobre el mapa</string>
     <string name="show_passed">Mostra ja passat</string>
     <string name="hide_passed">Amaga ja passat</string>
@@ -2707,7 +2707,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="show_guide_line_descr">Mostra línies guia des de la vostra ubicació a les dels marcadors actius.</string>
     <string name="show_arrows_descr">Mostra una o dues fletxes indicant la direcció dels marcadors actius.</string>
     <string name="distance_indication_descr">Seleccioneu com indicar la distància als marcadors actius.</string>
-    <string name="active_markers_descr">Trieu quants indicadors de direcció es mostren.</string>
+    <string name="active_markers_descr">Trieu quants indicadors actius voleu veure.</string>
     <string name="shared_string_more_without_dots">Més</string>
     <string name="looking_for_tracks_with_waypoints">Recerca de traces amb fites</string>
     <string name="empty_state_osm_edits">Crea o modifica objectes OSM</string>
@@ -2889,10 +2889,15 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="wikivoyage_offline">Viquiviatges sense connexió</string>
 
     <string name="unlimited_downloads">Baixades il·limitades</string>
-    <string name="wikipedia_offline">Viquipèdia sense conneió</string>
+    <string name="wikipedia_offline">Viquipèdia sense connexió</string>
     <string name="contour_lines_hillshade_maps">Mapes amb corbes de nivell i ombrejat de relleu</string>
     <string name="unlock_all_features">Desbloca totes les funcions de OsmAnd</string>
 
     <string name="shared_string_wikivoyage">"Viquiviatges "</string>
     <string name="index_item_world_wikivoyage">Articles de Viquiviatges d\'arreu</string>
+    <string name="open_wikipedia_link_online">Obre l\'enllaç en línia de Viquipèdia</string>
+    <string name="open_wikipedia_link_online_description">OsmAnd us portarà al navegador i obrirà l\'enllaç en línia.</string>
+    <string name="how_to_open_link">Com obrir l\'enllaç?</string>
+    <string name="read_wikipedia_offline">Consulta la Viquipèdia en local</string>
+    <string name="download_all">Baixa-ho tot</string>
     </resources>
