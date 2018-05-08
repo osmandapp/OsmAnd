@@ -3045,7 +3045,7 @@ Lon %2$s</string>
     <string name="purchase_cancelled_dialog_descr">Renueva la suscripción para continuar usando todas las funciones:</string>
 
     <string name="open_wikipedia_link_online">Abrir enlace de Wikipedia en línea</string>
-    <string name="open_wikipedia_link_online_description">OsmAnd abrirá el navegador para el enlace en línea.</string>
+    <string name="open_wikipedia_link_online_description">OsmAnd abrirá el navegador para ver el enlace en línea.</string>
     <string name="read_wikipedia_offline_description">Obtén una suscripción de OsmAnd Live para leer artículos de Wikipedia y Wikiviajes, sin conexión.</string>
     <string name="how_to_open_link">¿Cómo abrir un enlace?</string>
     <string name="read_wikipedia_offline">Leer la Wikipedia sin conexión</string>
