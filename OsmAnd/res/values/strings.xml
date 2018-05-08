@@ -9,6 +9,14 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="hide_full_description">Hide full description</string>
+    <string name="show_full_description">Show full description</string>
+    <string name="nautical_render_descr">Style for marine and river navigation. Key features: buoys, lighthouses, water navigation lines and marks, harbours, seamark services, depth contours.</string>
+    <string name="ski_map_render_descr">Style for skiing. Key features: renders pistes, aerial ways and other ski features in a convenient way. Less distracting secondary map objects.</string>
+    <string name="light_rs_render_descr">Simple and contrast style for car navigation. Gentle for the eyes in the night mode. Key features: contour lines, contrast orange styled roads, less distracting secondary map objects.</string>
+    <string name="topo_render_descr">Contrast style designed primarily for nature hiking, trekking and cycling. Good readability in complex external lighting. Key features: contrast roads and natural objects, different types of routes, contour lines with advanced settings, more details at corresponding zoom levels than "default" style. "Surface integrity" option allows you distinguish between roads with different surface quality. No night mode.</string>
+    <string name="mapnik_render_descr">Old mapnik-style default rendering style. Key features: colours are similar to Mapnik style.</string>
+    <string name="default_render_descr">General purpose style. Simplified rendering to have cleaner maps in the populated cities. Key features: contour lines, routes, surface quality, access restrictions, road shields, paths rendering according to SAC scale, whitewater sports features.</string>
     <string name="open_wikipedia_link_online">Open wikipedia link online</string>
     <string name="open_wikipedia_link_online_description">OsmAnd will redirect you to the browser and open the link online.</string>
     <string name="read_wikipedia_offline_description">Get OsmAnd Live subscription to read Wikipedia and Wikivoyage articles offline.</string>
