@@ -3202,7 +3202,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="paid_plugin">Greffon payant</string>
     <string name="popular_destinations">Destinations populaires</string>
     <string name="welcome_to_open_beta_description">Travel s’appuie sur Wikivoyage. Durant la phase bêta, évaluez toutes les fonctionnalités gratuitement. Plus tard, Travel sera accessible aux abonnés OsmAnd ainsi qu\'aux propriétaires d\'OsmAnd+</string>
-    <string name="wiki_article_search_text">Recherche de l\'article Wiki</string>
+    <string name="wiki_article_search_text">Recherche de l\'article Wiki correspondant</string>
     <string name="osmand_team">Équipe OsmAnd</string>
     <string name="maps_you_need_descr">Vous avez enregistré des articles, nous vous conseillons aussi de télécharger les cartes suivantes :</string>
     <string name="maps_you_need">Cartes conseillées</string>
@@ -3210,4 +3210,10 @@ représentant la zone : %1$s x %2$s</string>
     <string name="purchase_cancelled_dialog_title">Vous n\'êtes plus abonné à OsmAnd Live</string>
     <string name="purchase_cancelled_dialog_descr">Renouvelez votre abonnement pour continuer à utiliser toutes les fonctionnalités :</string>
 
+    <string name="open_wikipedia_link_online">Ouvrir le lien Wikipedia</string>
+    <string name="open_wikipedia_link_online_description">Le lien s\'ouvrira dans votre navigateur Internet.</string>
+    <string name="read_wikipedia_offline_description">Abonnez vous à OsmAnd Live pour consulter les articles Wikipedia et Wikivoyage hors-ligne.</string>
+    <string name="how_to_open_link">Comment ouvrir ce lien ?</string>
+    <string name="read_wikipedia_offline">Lisez Wikipedia hors-ligne</string>
+    <string name="download_all">Télécharger tout</string>
     </resources>
