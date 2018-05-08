@@ -10,8 +10,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 
 public class StartEditingTravelCard extends BaseTravelCard {
 
@@ -19,8 +19,8 @@ public class StartEditingTravelCard extends BaseTravelCard {
 
 	private Context context;
 
-	public StartEditingTravelCard(OsmandApplication app, Context context, boolean nightMode) {
-		super(app, nightMode);
+	public StartEditingTravelCard(Context context, boolean nightMode) {
+		super(((MapActivity) context).getMyApplication(), nightMode);
 		this.context = context;
 	}
 
