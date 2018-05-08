@@ -3212,7 +3212,7 @@
     <string name="open_in_browser_wiki">بازکردن مقالهٔ آنلاین</string>
     <string name="open_in_browser_wiki_description">این مقاله را در مرورگر اینترنت مشاهده کنید.</string>
     <string name="download_wiki_region_placeholder">این منطقه</string>
-    <string name="wiki_article_search_text">جست‌وجو به‌دنبال مقالهٔ موردنیاز</string>
+    <string name="wiki_article_search_text">جست‌وجو به‌دنبال مقالهٔ همخوان</string>
     <string name="wiki_article_not_found">مقاله پیدا نشد</string>
     <string name="how_to_open_wiki_title">چگونه مقاله‌های ویکی‌پدیا را باز کنیم؟</string>
 <string name="popular_destinations">مقصدهای محبوب</string>
@@ -3225,4 +3225,5 @@
     <string name="purchase_cancelled_dialog_title">اشتراک به‌روزرسانی پویای OsmAnd را لغو کردید</string>
     <string name="purchase_cancelled_dialog_descr">اشتراکتان را تجدید کنید تا از همهٔ قابلیت‌ها بهره‌مند شوید:</string>
 
+    <string name="download_all">دانلود همه</string>
     </resources>
