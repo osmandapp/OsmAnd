@@ -1,5 +1,6 @@
 package net.osmand.plus.wikivoyage.explore.travelcards;
 
+import android.app.Activity;
 import android.content.Context;
 import android.net.Uri;
 import android.support.annotation.NonNull;
@@ -10,8 +11,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
 
 public class StartEditingTravelCard extends BaseTravelCard {
 
@@ -19,8 +20,8 @@ public class StartEditingTravelCard extends BaseTravelCard {
 
 	private Context context;
 
-	public StartEditingTravelCard(Context context, boolean nightMode) {
-		super(((MapActivity) context).getMyApplication(), nightMode);
+	public StartEditingTravelCard(OsmandApplication app, Activity context, boolean nightMode) {
+		super(app, nightMode);
 		this.context = context;
 	}
 
