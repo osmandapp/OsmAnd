@@ -56,13 +56,14 @@ public class WikipediaArticleHelper {
 
 		private ProgressDialog dialog;
 		private CallbackWithObject<String> callback;
-		private String name;
-		private String regionName;
 		private WeakReference<MapActivity> weakMapActivity;
-		private boolean isNightMode;
+
+		private Object article;
+		private String regionName;
 		private String url;
 		private String lang;
-		private Object article;
+		private String name;
+		private boolean isNightMode;
 
 		WikiArticleSearchTask(Object article,
 		                      String regionName,
