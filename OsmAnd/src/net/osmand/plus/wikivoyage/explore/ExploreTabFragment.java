@@ -133,7 +133,7 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIn
 				}
 			}
 		}
-		items.add(new StartEditingTravelCard(app, nightMode));
+		items.add(new StartEditingTravelCard(app, getMyActivity(), nightMode));
 		adapter.setItems(items);
 
 		final DownloadIndexesThread downloadThread = app.getDownloadThread();
