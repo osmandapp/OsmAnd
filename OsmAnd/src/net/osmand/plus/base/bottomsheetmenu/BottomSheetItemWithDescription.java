@@ -16,6 +16,7 @@ public class BottomSheetItemWithDescription extends SimpleBottomSheetItem {
 	protected CharSequence description;
 	@ColorRes
 	private int descriptionColorId = INVALID_ID;
+	private int descriptionMaxLines = INVALID_VALUE;
 
 	private TextView descriptionTv;
 
@@ -29,10 +30,12 @@ public class BottomSheetItemWithDescription extends SimpleBottomSheetItem {
 										  String title,
 										  @ColorRes int titleColorId,
 										  CharSequence description,
-										  @ColorRes int descriptionColorId) {
+										  @ColorRes int descriptionColorId,
+										  int descriptionMaxLines) {
 		super(customView, layoutId, tag, disabled, onClickListener, position, icon, title, titleColorId);
 		this.description = description;
 		this.descriptionColorId = descriptionColorId;
+		this.descriptionMaxLines = descriptionMaxLines;
 	}
 
 	protected BottomSheetItemWithDescription() {
@@ -44,6 +47,11 @@ public class BottomSheetItemWithDescription extends SimpleBottomSheetItem {
 		descriptionTv.setText(description);
 	}
 
+	public void setDescriptionMaxLines(int maxLines) {
+		this.descriptionMaxLines = maxLines;
+		descriptionTv.setMaxLines(maxLines);
+	}
+
 	@Override
 	public void inflate(OsmandApplication app, ViewGroup container, boolean nightMode) {
 		super.inflate(app, container, nightMode);
@@ -53,6 +61,9 @@ public class BottomSheetItemWithDescription extends SimpleBottomSheetItem {
 			if (descriptionColorId != INVALID_ID) {
 				descriptionTv.setTextColor(ContextCompat.getColor(app, descriptionColorId));
 			}
+			if (descriptionMaxLines != INVALID_VALUE) {
+				descriptionTv.setMaxLines(descriptionMaxLines);
+			}
 		}
 	}
 
@@ -61,6 +72,7 @@ public class BottomSheetItemWithDescription extends SimpleBottomSheetItem {
 		protected CharSequence description;
 		@ColorRes
 		protected int descriptionColorId = INVALID_ID;
+		protected int descriptionMaxLines = INVALID_POSITION;
 
 		public Builder setDescription(CharSequence description) {
 			this.description = description;
@@ -69,6 +81,11 @@ public class BottomSheetItemWithDescription extends SimpleBottomSheetItem {
 
 		public Builder setDescriptionColorId(@ColorRes int descriptionColorId) {
 			this.descriptionColorId = descriptionColorId;
+			return this;
+		}
+
+		public Builder setDescriptionMaxLines(int maxLines) {
+			this.descriptionMaxLines = maxLines;
 			return this;
 		}
 
@@ -83,7 +100,8 @@ public class BottomSheetItemWithDescription extends SimpleBottomSheetItem {
 					title,
 					titleColorId,
 					description,
-					descriptionColorId);
+					descriptionColorId,
+					descriptionMaxLines);
 		}
 	}
 }
