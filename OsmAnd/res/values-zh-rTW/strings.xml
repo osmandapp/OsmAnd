@@ -3191,4 +3191,10 @@
 
     <string name="maps_you_need_descr">根據您已儲存的文章，我們建議您下載下面的地圖：</string>
     <string name="maps_you_need">您需要的地圖</string>
+    <string name="open_wikipedia_link_online">線上開啟維基百科連結</string>
+    <string name="open_wikipedia_link_online_description">OsmAnd 會將您重新引導到瀏覽器並在線上打開連結。</string>
+    <string name="read_wikipedia_offline_description">獲得 OsmAnd Live 訂閱可以離線閱讀維基百科和維基導遊文章。</string>
+    <string name="how_to_open_link">如何開啟連結？</string>
+    <string name="read_wikipedia_offline">離線閱讀維基百科</string>
+    <string name="download_all">全部下載</string>
     </resources>
