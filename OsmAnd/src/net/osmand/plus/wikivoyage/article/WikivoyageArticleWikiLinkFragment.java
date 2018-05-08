@@ -69,7 +69,7 @@ public class WikivoyageArticleWikiLinkFragment extends MenuBottomSheetDialogFrag
 				getString(R.string.download_wiki_region_placeholder) : wikiRegion))
 				.setIcon(downloadIcon)
 				.setTitle(getString(R.string.download_wikipedia_label))
-				.setLayoutId(R.layout.bottom_sheet_item_with_descr_and_icon)
+				.setLayoutId(R.layout.bottom_sheet_item_in_frame_with_descr_and_icon)
 				.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
@@ -92,7 +92,7 @@ public class WikivoyageArticleWikiLinkFragment extends MenuBottomSheetDialogFrag
 				.setDescription(getString(R.string.open_in_browser_wiki_description))
 				.setIcon(viewOnlineIcon)
 				.setTitle(getString(R.string.open_in_browser_wiki))
-				.setLayoutId(R.layout.bottom_sheet_item_with_descr_and_icon)
+				.setLayoutId(R.layout.bottom_sheet_item_in_frame_with_descr_and_icon)
 				.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {

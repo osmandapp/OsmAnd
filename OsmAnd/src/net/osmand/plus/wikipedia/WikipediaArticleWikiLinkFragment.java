@@ -54,7 +54,7 @@ public class WikipediaArticleWikiLinkFragment extends MenuBottomSheetDialogFragm
 				.setDescription(getString(R.string.open_wikipedia_link_online_description))
 				.setIcon(viewOnlineIcon)
 				.setTitle(getString(R.string.open_wikipedia_link_online))
-				.setLayoutId(R.layout.bottom_sheet_item_with_descr_and_icon)
+				.setLayoutId(R.layout.bottom_sheet_item_in_frame_with_descr_and_icon)
 				.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
@@ -71,7 +71,7 @@ public class WikipediaArticleWikiLinkFragment extends MenuBottomSheetDialogFragm
 				.setDescription(getString(R.string.read_wikipedia_offline_description))
 				.setIcon(osmandLiveIcon)
 				.setTitle(getString(R.string.read_wikipedia_offline))
-				.setLayoutId(R.layout.bottom_sheet_item_with_descr_and_icon)
+				.setLayoutId(R.layout.bottom_sheet_item_in_frame_with_descr_and_icon)
 				.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
