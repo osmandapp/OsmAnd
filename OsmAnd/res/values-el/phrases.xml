@@ -989,4 +989,32 @@
 	<string name="poi_craft_sculptor">Γλύπτης</string>
 	<string name="poi_craft_shoemaker">Υποδηματοποιός</string>
 	<string name="poi_craft_stand_builder">Κατασκευαστής πάγκων</string>
+	<string name="poi_craft_stonemason">Λιθοδόμος</string>
+	<string name="poi_craft_sun_protection">Αντιηλιακή προστασία</string>
+	<string name="poi_craft_sweep">Καπνοκαθαριστής</string>
+	<string name="poi_craft_tailor">Ράφτης</string>
+	<string name="poi_craft_tiler">Πλακάς</string>
+	<string name="poi_craft_tinsmith">Λευκοσιδηρουργός</string>
+	<string name="poi_craft_upholsterer">Ταπετσέρης</string>
+	<string name="poi_craft_watchmaker">Ωρολογοποιός</string>
+	<string name="poi_craft_window_construction">Κατασκευές παραθύρων</string>
+
+	<string name="poi_funeral_directors">Εργολάβοι κηδειών</string>
+	<string name="poi_craft_computer">Υπολογιστές</string>
+	<string name="poi_beauty">Ινστιτούτο αισθητικής</string>
+	<string name="poi_beauty_salon_nails">Μανικιούρ</string>
+	<string name="poi_hairdresser">Κομμωτής</string>
+	<string name="poi_massage">Μαλάξεις</string>
+	<string name="poi_tattoo">Τατουάζ</string>
+	<string name="poi_dry_cleaning">Στεγνό καθάρισμα</string>
+	<string name="poi_laundry">Πλυντήριο</string>
+	<string name="poi_car_rental">Ενοικιάσεις αυτοκινήτων</string>
+	<string name="poi_car_sharing">Μερισμός οχήματος</string>
+	<string name="poi_boat_sharing">Μερισμός σκάφους</string>
+	<string name="poi_dock">Αποβάθρα</string>
+	<string name="poi_cutline">Γραμμή αποκοπής</string>
+	<string name="poi_toilets">Δημόσια τουαλέτα</string>
+	<string name="poi_shower">Ντουζιέρα</string>
+	<string name="poi_sauna">Σάουνα</string>
+	<string name="poi_brothel">Οίκος ανοχής</string>
 	</resources>
