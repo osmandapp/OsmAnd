@@ -22,7 +22,6 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
@@ -43,7 +42,6 @@ import net.osmand.plus.activities.MapActivityLayers;
 import net.osmand.plus.activities.PluginActivity;
 import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
-import net.osmand.plus.openseamapsplugin.NauticalMapsPlugin;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.render.RendererRegistry;
@@ -500,53 +498,8 @@ public class ConfigureMapMenu {
 					@Override
 					public boolean onContextMenuClick(final ArrayAdapter<ContextMenuItem> ad, int itemId,
 													  final int pos, boolean isChecked, int[] viewCoordinates) {
-						AlertDialog.Builder bld = new AlertDialog.Builder(activity);
-						bld.setTitle(R.string.renderers);
-						final OsmandApplication app = activity.getMyApplication();
-						final ArrayList<String> items = new ArrayList<>(app.getRendererRegistry().getRendererNames());
-						boolean nauticalPluginDisabled = OsmandPlugin.getEnabledPlugin(NauticalMapsPlugin.class) == null;
-						final List<String> visibleNamesList = new ArrayList<>();
-						int selected = -1;
-						final String selectedName = app.getRendererRegistry().getCurrentSelectedRenderer().getName();
-						int i = 0;
-						Iterator<String> iterator = items.iterator();
-						while (iterator.hasNext()) {
-							String item = iterator.next();
-							if (nauticalPluginDisabled && item.equals(RendererRegistry.NAUTICAL_RENDER)) {
-								iterator.remove();
-							} else {
-								if (item.equals(selectedName)) {
-									selected = i;
-								}
-								String translation = RendererRegistry.getTranslatedRendererName(activity, item);
-								visibleNamesList.add(translation != null ? translation
-										: item.replace('_', ' ').replace('-', ' '));
-								i++;
-							}
-						}
-
-						bld.setSingleChoiceItems(visibleNamesList.toArray(new String[visibleNamesList.size()]), selected, new DialogInterface.OnClickListener() {
-
-							@Override
-							public void onClick(DialogInterface dialog, int which) {
-								String renderer = items.get(which);
-								RenderingRulesStorage loaded = app.getRendererRegistry().getRenderer(renderer);
-								if (loaded != null) {
-									OsmandMapTileView view = activity.getMapView();
-									view.getSettings().RENDERER.set(renderer);
-									app.getRendererRegistry().setCurrentSelectedRender(loaded);
-									refreshMapComplete(activity);
-								} else {
-									Toast.makeText(app, R.string.renderer_load_exception, Toast.LENGTH_SHORT).show();
-								}
-								adapter.getItem(pos).setDescription(getRenderDescr(activity));
-								activity.getDashboard().refreshContent(true);
-								dialog.dismiss();
-							}
-
-						});
-						bld.setNegativeButton(R.string.shared_string_dismiss, null);
-						bld.show();
+						new SelectMapStyleBottomSheetDialogFragment().show(activity.getSupportFragmentManager(),
+								SelectMapStyleBottomSheetDialogFragment.TAG);
 						return false;
 					}
 				}).createItem());

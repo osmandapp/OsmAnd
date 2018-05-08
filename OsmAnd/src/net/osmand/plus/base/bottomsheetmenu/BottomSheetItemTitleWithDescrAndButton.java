@@ -97,7 +97,7 @@ public class BottomSheetItemTitleWithDescrAndButton extends BottomSheetItemWithD
 			return this;
 		}
 
-		public BottomSheetItemTitleWithDescrAndButton.Builder setonButtonClickListener(View.OnClickListener onButtonClickListener) {
+		public BottomSheetItemTitleWithDescrAndButton.Builder setOnButtonClickListener(View.OnClickListener onButtonClickListener) {
 			this.onButtonClickListener = onButtonClickListener;
 			return this;
 		}
