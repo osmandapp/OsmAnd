@@ -3050,7 +3050,6 @@
     <string name="notes_by_date">یادداشت‌ها بر اساس تاریخ</string>
     <string name="by_date">بر اساس تاریخ</string>
     <string name="by_type">بر اساس نوع</string>
-    <string name="empty_state_markers_history">\@string/shared_string_history</string>
     <string name="modify_the_search_query">عبارت جست‌وجوشده را اصلاح کنید.</string>
     <string name="release_3_0">\\022 
 \n

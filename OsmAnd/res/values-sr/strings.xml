@@ -1756,7 +1756,6 @@
     <string name="osc_file_desc">ОСЦ - погодно за извоз у OpenStreetMap.</string>
     <string name="osc_file">ОСЦ фајл</string>
     <string name="osm_edits_export_desc">Одаберити тип извоза: ОСМ белешке, тачке од интереса или оба.</string>
-    <string name="empty_state_markers_history"/>
     <string name="lang_ml">Малајалам</string>
     <string name="lang_lo">Лаоски</string>
     <string name="lang_vo">Волапук</string>

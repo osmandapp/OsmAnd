@@ -2651,7 +2651,6 @@
     <string name="by_date">Ըստ ամսաթվի</string>
     <string name="by_type">Ըստ տեսակի</string>
     <string name="looking_for_tracks_with_waypoints">Տրեկների որոնում ճանապարհային կետեր հետ</string>
-    <string name="empty_state_markers_history">\@string/shared_string_history (պատմությունը)</string>
     <string name="show_guide_line_descr">Ցուցադրել ուղեցույցները ձեր գտնվելու վայրից մինչև ակտիվ մարկերներ:</string>
     <string name="show_arrows_descr">Ցուցադրել մեկ կամ երկու նետ, նշելով ակտիվ մարկերների ուղղությունը:</string>
     <string name="distance_indication_descr">Ընտրեք, թե ինչպես ցուցադրեք հեռավորությունը մինչև ակտիվ մարկերներին:</string>

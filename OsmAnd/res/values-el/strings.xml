@@ -1899,7 +1899,6 @@
     <string name="empty_state_markers_active_desc">Πατήστε παρατεταμένα ή σύντομα \'Μέρη\', έπειτα πατήστε το πλήκτρο σημαίας δείκτη.</string>
     <string name="empty_state_markers_groups">Εισαγωγή ομάδων</string>
     <string name="empty_state_markers_groups_desc">Εισάγετε ομάδες αγαπημένων ή σημεία διαδρομής ίχνους ως δείκτες.</string>
-    <string name="empty_state_markers_history">\@string/shared_string_history</string>
     <string name="empty_state_markers_history_desc">Οι δείκτες που σημειώθηκαν ως περασμένοι, θα εμφανιστούν στην οθόνη.</string>
     <string name="shared_string_two">Δύο</string>
     <string name="shared_string_one">Ένα</string>

@@ -2747,7 +2747,6 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="empty_state_markers_active_desc">Tryck långt eller kort på platser, tryck sedan på flaggknappen.</string>
     <string name="empty_state_markers_groups">Importera grupper</string>
     <string name="empty_state_markers_groups_desc">Du kan importera Favoritgrupper eller spåra waypoints som markörer.</string>
-    <string name="empty_state_markers_history">\@string/shared_string_history</string>
     <string name="empty_state_markers_history_desc">Markörer markerade som godkända visas på denna skärm.</string>
     <string name="shared_string_two">Två</string>
     <string name="shared_string_one">En</string>

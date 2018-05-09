@@ -2759,7 +2759,6 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="add_group">Pridėti grupę</string>
     <string name="empty_state_markers_active">Sukurk žemėlapio žymeklius!</string>
     <string name="empty_state_markers_groups">Importuoti grupes</string>
-    <string name="empty_state_markers_history">\@string/shared_string_history</string>
     <string name="shared_string_two">Du</string>
     <string name="shared_string_one">Vienas</string>
     <string name="distance_indication_descr">Pasirinkti, kaip rodyti atstumą iki aktyvių žymeklių.</string>

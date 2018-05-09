@@ -107,7 +107,6 @@
     <string name="empty_state_markers_active_desc">Tekan lama atau sebentar pada tempat, lalu ketuk tombol tanda petik.</string>
     <string name="empty_state_markers_groups">Impor beberap grup</string>
     <string name="empty_state_markers_groups_desc">Kamu bisa impor grup favorit atau trek titik arah sebagai penanda.</string>
-    <string name="empty_state_markers_history">\@string/bagikan_string_riwayat</string>
     <string name="empty_state_markers_history_desc">Penanda yang ditandai sebagai yang telah dilewati akan muncul di layar ini.</string>
     <string name="shared_string_two">Dua</string>
     <string name="shared_string_one">Satu</string>

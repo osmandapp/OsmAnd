@@ -1760,7 +1760,6 @@
     <string name="favourites_group">Favoritlər kateqoriyası</string>
     <string name="empty_state_markers_active">Xəritə işarələri yarat!</string>
     <string name="empty_state_markers_active_desc">“Yerlər”ə uzun və ya qısa basın, sonra bayraq düyməsinə toxunun.</string>
-    <string name="empty_state_markers_history">\@string/shared_string_history</string>
     <string name="digits_quantity">Onluq rəqəmlərin sayı</string>
     <string name="show_number_pad">Rəqəm panelini göstər</string>
     <string name="shared_string_paste">Əlavə et</string>
