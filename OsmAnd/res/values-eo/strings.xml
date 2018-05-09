@@ -3005,4 +3005,12 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="purchase_cancelled_dialog_title">Vi rezignis pri abono al OsmAnd-Live</string>
     <string name="purchase_cancelled_dialog_descr">Reaboni por plue uzi ĉiujn eblojn:</string>
 
+    <string name="hide_full_description">Kaŝi plenan priskribon</string>
+    <string name="show_full_description">Montri plenan priskribon</string>
+    <string name="nautical_render_descr">Stilo por mara kaj rivera navigado. Ĉefaj eblaĵoj: buoj, lumturoj, linioj kaj markoj por akv-navigado, havenoj, profundec-kurboj.</string>
+    <string name="ski_map_render_descr">Stilo por skiado. Ĉefaj eblaĵoj: oportuna vidigo de skivojoj kaj telferoj; malpli absorbaj malpli gravaj objektoj.</string>
+    <string name="light_rs_render_descr">Simpla kaj kontrasta stilo por aŭt-navigado. Agrabla por okuloj dum nokto. Ĉefaj eblaĵoj: konturoj, kontrastaj oranĝkoloraj vojoj, malpli absorbaj malpli gravaj objektoj.</string>
+    <string name="topo_render_descr">Kontrasta stilo speciale por turisma marŝado kaj biciklado. Dece legebla ĉe maloportuna ekstera lumo. Ĉefaj eblaĵoj: kontrastaj vojoj kaj naturaj objektoj, diversaj specoj de kursoj, agordeblaj nivel-kurboj, pli da detaloj ĉe difinita skal-nivelo ol sur la norma map-stilo. Agordo por kvalito de voja pavimo. Sen nokta reĝimo.</string>
+    <string name="mapnik_render_descr">Malnova bildigada map-stilo de Mapnik. Ĉefa eblaĵo: koloroj similaj al tiuj de Mapnik.</string>
+    <string name="default_render_descr">Ĝenerala map-stilo. Simpligita bildigado por pli klaraj mapoj en dense loĝitaj urboj. Ĉefaj eblaĵoj: nivel-kurboj, vojoj, kvalito de vojoj, aliraj limigoj, ŝoseaj numeroj, turismaj kursoj laŭ SAC-skalo, objektoj por rapid-akvaj sportoj.</string>
     </resources>
