@@ -1081,7 +1081,6 @@ Puntos</string>
     <string name="empty_state_markers_active_desc">Da un toque llargu o curtiu en «Llugares», llueu toca nel botón de bandera de marcador.</string>
     <string name="empty_state_markers_groups">Importar grupos</string>
     <string name="empty_state_markers_groups_desc">Puedes importar grupos de favoritos o puntos de ruta d\\\'una traza como marcadores.</string>
-    <string name="empty_state_markers_history">\@string/shared_string_history</string>
     <string name="shared_string_two">Dos</string>
     <string name="shared_string_one">Un</string>
     <string name="show_guide_line_descr">Amosar llinies de direición dende la to posición a les de marcadores activos.</string>

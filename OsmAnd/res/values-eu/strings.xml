@@ -2838,7 +2838,6 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="empty_state_markers_active_desc">Sakatu labur edo luze \'Tokiak\', gero sakatu markatzaile-bandera botoian.</string>
     <string name="empty_state_markers_groups">Inportatu taldeak</string>
     <string name="empty_state_markers_groups_desc">Inportatu gogokoen taldeak edo lorratzen bide-puntuak markatzaile gisa.</string>
-    <string name="empty_state_markers_history">\@string/shared_string_history</string>
     <string name="empty_state_markers_history_desc">Pasatutako gisa markatutako markatzaileak pantaila honetan agertzen dira.</string>
     <string name="shared_string_two">Bi</string>
     <string name="shared_string_one">Bat</string>

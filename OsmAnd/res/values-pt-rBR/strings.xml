@@ -2693,7 +2693,6 @@ Pôr do Sol: %2$s</string>
     <string name="osm_recipients_label">Destinatários OSM</string>
     <string name="osmand_plus_extended_description_part6">Recursos de ciclismo e pedestre • Visualização de caminhos a pé, pistas de caminhadas e ciclovias, ideal para atividades ao ar livre • Roteamento e modos de exibição especiais para bicicleta e pedestres • Paradas de transporte público opcionais (ônibus, troleibus, trem) incluindo nomes de linhas • Gravação opcional de viagem para arquivo GPX local ou serviço on-line • Exibição opcional de velocidade e altitudes • Exibição de curvas de nível e sombreamento de relevo (via plugin adicional)</string>
     <string name="shared_string_without_name">Sem nome</string>
-    <string name="empty_state_markers_history">\@string/shared_string_history</string>
     <string name="release_2_6">\\022 Novo recurso: Botão de ação rápida
 \n
 \n • Resposta a gesto de toque de tela melhorada (por exemplo, deslocamento de tela e zoom simultâneos)

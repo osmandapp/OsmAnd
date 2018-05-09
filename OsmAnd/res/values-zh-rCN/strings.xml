@@ -2699,7 +2699,6 @@
     <string name="empty_state_markers_active_desc">长按或短按位置, 然后点击标记标志按钮。</string>
     <string name="empty_state_markers_groups">导入组群</string>
     <string name="empty_state_markers_groups_desc">你可以导入收藏组或轨迹航点作为标记。</string>
-    <string name="empty_state_markers_history">\@string/shared_string_history</string>
     <string name="empty_state_markers_history_desc">标记为已通过的标记将显示在此屏幕上。</string>
     <string name="shared_string_two">二</string>
     <string name="shared_string_one">一</string>

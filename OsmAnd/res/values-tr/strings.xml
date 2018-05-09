@@ -2320,7 +2320,6 @@
     <string name="empty_state_markers_active">Harita işaretleyicileri oluştur!</string>
     <string name="empty_state_markers_active_desc">Yerler üzerinde uzun veya kısa basıp, sonra bayrak butonuna bas.</string>
     <string name="empty_state_markers_groups">Grupları al</string>
-    <string name="empty_state_markers_history">\@string/shared_string_history</string>
     <string name="shared_string_two">İki</string>
     <string name="shared_string_one">Bir</string>
     <string name="active_markers_descr">Kaç tane yön göstergesi görüntüleneceğini seçin.</string>

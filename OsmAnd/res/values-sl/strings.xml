@@ -2866,7 +2866,6 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="empty_state_markers_active">Ustvarjanje označb zemljevida</string>
     <string name="empty_state_markers_active_desc">Ob dolgem pritisku na zemljevid se izriše označba, s ponovnim pa se doda še zastavica.</string>
     <string name="empty_state_markers_groups_desc">Uvoziti je mogoče skupine priljubljenih in vmesnih točk kot označbe na zemljevidu.</string>
-    <string name="empty_state_markers_history">\@string/shared_string_history</string>
     <string name="empty_state_markers_history_desc">Označbe, označene kot dosežene, bodo prikazane na tem zaslonu.</string>
     <string name="shared_string_two">Dve</string>
     <string name="shared_string_one">Ena</string>

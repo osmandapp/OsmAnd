@@ -2848,7 +2848,6 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="empty_state_markers_active_desc">Koppints hosszan vagy röviden a helyekre, majd koppints a jelölőzászló gombjára.</string>
     <string name="empty_state_markers_groups">Csoportok importálása</string>
     <string name="empty_state_markers_groups_desc">Importálhatsz jelölőket kedvencek csoportokból, vagy nyomvonal útpontokból.</string>
-    <string name="empty_state_markers_history">\@string/shared_string_history</string>
     <string name="shared_string_two">Kettő</string>
     <string name="shared_string_one">Egy</string>
     <string name="show_guide_line_descr">Segédvonalat jelenít meg az aktuális pozíciódtól az aktív térképjelölőkig.</string>
