@@ -2590,7 +2590,7 @@
     <string name="download_wikipedia_label">Преузми податке са Википедије</string>
     <string name="open_in_browser_wiki_description">Погледај чланак у веб читачу.</string>
     <string name="download_wiki_region_placeholder">ова регија</string>
-    <string name="wiki_article_search_text">Претражујем за обавезни вики чланак</string>
+    <string name="wiki_article_search_text">Претражујем одговарајући вики чланак</string>
     <string name="wiki_article_not_found">Чланак није нађен</string>
     <string name="how_to_open_wiki_title">Како да отворите чланке са Википедије?</string>
 <string name="welcome_to_open_beta_description">Путовање је базирано на Wikivoyage-у. Тестирајте све функционалности бесплатно. После тога, Путовање ће бити доступно само претплатницима на OsmAnd Unlimited и власницима OsmAnd+-а</string>
@@ -2801,4 +2801,26 @@
     <string name="quick_favorites_name_preset">Унапред постављено име</string>
     <string name="import_track_desc">Фајл %1$s не садржи пролазне тачке, да га увезем као путању?</string>
     <string name="touring_view_renderer">Туристички преглед (контраст и детаљи)</string>
+    <string name="hide_full_description">Сакриј цео опис</string>
+    <string name="show_full_description">Прикажи цео опис</string>
+    <string name="nautical_render_descr">Стил за речно и морско навођење. Главне одлике: бове, светионици, водени путеви и ознаке, поморске ознаке, изобате.</string>
+    <string name="ski_map_render_descr">Стил за скијање. Главне одлике: исцртавање стаза, ваздушних путева и остали скијашких објеката на лак начин. Остали објекти на карти мање одвраћају пажњу.</string>
+    <string name="light_rs_render_descr">Једноставан стил са контрастом за навођење у колима. Пријатан за очи ноћу. Главне одлике: изохипсе, наранџасти путеви са добрим контрастом, остали објекти на карти мање одвраћају пажњу.</string>
+    <string name="topo_render_descr">Контрастни стил примарно намењен шетању и пешачењу у природи и бициклистима. Добра читљивост у тешким спољним условима осветљености. Главне одлике: добар контраст за путеве и природне објекте, различити типови путања, изохипсе са напредним подешавањима, више детаља на истим нивоима увећања у односу на основни стил. Опција интегритета подлоге Вам омогућава да разликујете путеве са различитим квалитетима подлога. Нема ноћног режима.</string>
+    <string name="mapnik_render_descr">Стари Мапник стил исцртавања. Главне одлике: боје су сличне као у Мапник стилу.</string>
+    <string name="default_render_descr">Стил опште намене. Упрошћено исцртавање да карте буду јасније у већим градовима. Главне одлике: изохипсе, путање, квалитет подлоге, забране приступа, блокаде пута, исцртавање путева по SAC алпској скали, објекти за спортове на брзацима.</string>
+    <string name="open_wikipedia_link_online">Отвори википедија везу са интернетом</string>
+    <string name="open_wikipedia_link_online_description">OsmAnd ће сад да Вас преусмери на веб читач и отвориће чланак на интернету.</string>
+    <string name="read_wikipedia_offline_description">Да бисте читали чланке са Википедије и Wikivoyage-а, претплатите се на OsmAnd Live.</string>
+    <string name="how_to_open_link">Како да отворим везу?</string>
+    <string name="read_wikipedia_offline">Читај Википедију ван мреже</string>
+    <string name="download_all">Преузми све</string>
+    <string name="shared_string_restart">Поново покрени</string>
+    <string name="native_app_allocated_memory_descr">Укупно меморије које је алоцирала апликација %1$s MB (Далвик %2$s MB, остало %3$s MB). Пропорционално меморије %4$s MB (Андроид лимит %5$s MB, Далвик %6$s MB).</string>
+    <string name="rendering_attr_noPolygons_description">Начини провидним све ваздушне одлике терена.</string>
+    <string name="show_more_map_detail_descr">Приказуј неке детаље векторских карти (путеви итд.) већ на мањим зумовима.</string>
+    <string name="old_map_index_is_not_supported">Стари формат података карте \'\'{0}\'\' није подржан</string>
+    <string name="background_service_wait_int_descr">Поставља најдуже дозвољено време чекања за поправљање положаја у позадини.</string>
+    <string name="background_service_int_descr">Одаберите интервал буђења за позадински сервис.</string>
+    <string name="background_service_provider">Провајдер положаја</string>
     </resources>
