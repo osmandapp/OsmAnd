@@ -3050,4 +3050,12 @@ Lon %2$s</string>
     <string name="how_to_open_link">¿Cómo abrir un enlace?</string>
     <string name="read_wikipedia_offline">Leer la Wikipedia sin conexión</string>
     <string name="download_all">Descargar todo</string>
+    <string name="hide_full_description">Ocultar descripción completa</string>
+    <string name="show_full_description">Mostrar descripción completa</string>
+    <string name="nautical_render_descr">Estilo para navegación marítima y fluvial. Características principales: boyas, faros, líneas y balizas de navegación fluvial, puertos, servicios marítimos, curvas de profundidad.</string>
+    <string name="ski_map_render_descr">Estilo para esquiar. Características principales: pistas de esquí, pistas aéreas y otras características de esquí de una manera conveniente. Menos objetos cartográficos secundarios que distraen la atención.</string>
+    <string name="light_rs_render_descr">Estilo simple y de contraste para la navegación en automóvil. Suave para los ojos en el modo nocturno. Características principales: curvas de nivel, caminos de estilo naranja contrastante, objetos cartográficos secundarios menos molestos.</string>
+    <string name="topo_render_descr">Estilo de contraste diseñado principalmente para caminatas en la naturaleza, trekking y ciclismo. Buena legibilidad en iluminación exterior compleja. Características principales: contraste de caminos y objetos naturales, diferentes tipos de rutas, curvas de nivel con ajustes avanzados, mayor detalle en los niveles de zoom correspondientes que en el estilo predefinido. La opción de integridad de la superficie permite distinguir entre caminos con diferente calidad de superficie. Sin modo nocturno.</string>
+    <string name="mapnik_render_descr">Estilo de visualización antiguo predefinido de Mapnik. Características: los colores son similares al estilo Mapnik.</string>
+    <string name="default_render_descr">Estilo de uso general. Visualización simplificada para tener mapas más limpios en las ciudades pobladas. Características principales: curvas de nivel, recorridos, calidad de la superficie, restricciones de acceso, escudos, visualización de caminos según escala SAC, características de los deportes acuáticos.</string>
     </resources>
