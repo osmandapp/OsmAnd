@@ -19,13 +19,16 @@ import net.osmand.plus.wikivoyage.explore.travelcards.StartEditingTravelCard;
 import net.osmand.plus.wikivoyage.explore.travelcards.StartEditingTravelCard.StartEditingTravelVH;
 import net.osmand.plus.wikivoyage.explore.travelcards.TravelDownloadUpdateCard;
 import net.osmand.plus.wikivoyage.explore.travelcards.TravelDownloadUpdateCard.DownloadUpdateVH;
+import net.osmand.plus.wikivoyage.explore.travelcards.TravelNeededMapsCard;
+import net.osmand.plus.wikivoyage.explore.travelcards.TravelNeededMapsCard.NeededMapsVH;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ExploreRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-	private static final int DOWNLOAD_UPDATE_CARD_POSITION = 0;
+	private static final int FIRST_POSITION = 0;
+	private static final int SECOND_POSITION = 1;
 
 	private final List<BaseTravelCard> items = new ArrayList<>();
 
@@ -47,6 +50,9 @@ public class ExploreRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
 			case HeaderTravelCard.TYPE:
 				return new HeaderTravelVH(inflate(parent, R.layout.wikivoyage_list_header));
+
+			case TravelNeededMapsCard.TYPE:
+				return new NeededMapsVH(inflate(parent, R.layout.travel_needed_maps_card));
 
 			default:
 				throw new RuntimeException("Unsupported view type: " + viewType);
@@ -131,23 +137,64 @@ public class ExploreRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 		return false;
 	}
 
+	public void setNeededMapsCard(TravelNeededMapsCard card) {
+		if (addItem(getNeededMapsCardPosition(), card)) {
+			notifyDataSetChanged();
+		}
+	}
+
+	public void updateNeededMapsCard() {
+		int pos = getNeededMapsCardPosition();
+		if (neededMapsCardExists(pos)) {
+			notifyItemChanged(pos);
+		}
+	}
+
+	public void removeNeededMapsCard() {
+		int pos = getNeededMapsCardPosition();
+		if (neededMapsCardExists(pos)) {
+			removeItem(pos);
+			notifyItemRemoved(pos);
+		}
+	}
+
+	private int getNeededMapsCardPosition() {
+		if (downloadUpdateCardExists(FIRST_POSITION)) {
+			return SECOND_POSITION;
+		}
+		return FIRST_POSITION;
+	}
+
+	private boolean neededMapsCardExists(int position) {
+		return items.size() > position && items.get(position).getCardType() == TravelNeededMapsCard.TYPE;
+	}
+
 	public void setDownloadUpdateCard(TravelDownloadUpdateCard card) {
-		if (addItem(DOWNLOAD_UPDATE_CARD_POSITION, card)) {
+		if (addItem(getDownloadUpdateCardPosition(), card)) {
 			notifyDataSetChanged();
 		}
 	}
 
 	public void updateDownloadUpdateCard() {
-		notifyItemChanged(DOWNLOAD_UPDATE_CARD_POSITION);
+		int pos = getDownloadUpdateCardPosition();
+		if (downloadUpdateCardExists(pos)) {
+			notifyItemChanged(pos);
+		}
 	}
 
 	public void removeDownloadUpdateCard() {
-		if (items.size() > DOWNLOAD_UPDATE_CARD_POSITION) {
-			BaseTravelCard card = getItem(DOWNLOAD_UPDATE_CARD_POSITION);
-			if (card.getCardType() == TravelDownloadUpdateCard.TYPE) {
-				removeItem(DOWNLOAD_UPDATE_CARD_POSITION);
-				notifyItemRemoved(DOWNLOAD_UPDATE_CARD_POSITION);
-			}
+		int pos = getDownloadUpdateCardPosition();
+		if (downloadUpdateCardExists(pos)) {
+			removeItem(pos);
+			notifyItemRemoved(pos);
 		}
+	}
+
+	private int getDownloadUpdateCardPosition() {
+		return FIRST_POSITION;
+	}
+
+	private boolean downloadUpdateCardExists(int position) {
+		return items.size() > position && items.get(position).getCardType() == TravelDownloadUpdateCard.TYPE;
 	}
 }

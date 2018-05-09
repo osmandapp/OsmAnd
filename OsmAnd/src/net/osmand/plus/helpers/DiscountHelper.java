@@ -110,7 +110,8 @@ public class DiscountHelper {
 			if (url.startsWith(INAPP_PREFIX) && url.length() > INAPP_PREFIX.length()) {
 				String inAppSku = url.substring(INAPP_PREFIX.length());
 				InAppPurchaseHelper purchaseHelper = app.getInAppPurchaseHelper();
-				if (purchaseHelper != null && purchaseHelper.isPurchased(inAppSku)) {
+				if (purchaseHelper != null
+						&& (purchaseHelper.isPurchased(inAppSku) || InAppPurchaseHelper.isSubscribedToLiveUpdates(app))) {
 					return;
 				}
 			}
@@ -214,7 +215,10 @@ public class DiscountHelper {
 			if (url.contains(InAppPurchaseHelper.SKU_FULL_VERSION_PRICE)) {
 				OsmandApplication app = mapActivity.getMyApplication();
 				app.logEvent(mapActivity, "in_app_purchase_redirect");
-				app.getInAppPurchaseHelper().purchaseFullVersion(mapActivity);
+				InAppPurchaseHelper purchaseHelper = app.getInAppPurchaseHelper();
+				if (purchaseHelper != null) {
+					purchaseHelper.purchaseFullVersion(mapActivity);
+				}
 			} else if (url.contains(InAppPurchaseHelper.SKU_LIVE_UPDATES)){
 				Intent intent = new Intent(mapActivity, OsmLiveActivity.class);
 				intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);

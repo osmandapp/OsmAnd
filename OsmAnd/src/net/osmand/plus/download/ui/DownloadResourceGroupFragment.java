@@ -345,9 +345,8 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 	}
 
 	@Override
-	public void onItemPurchased(String sku) {
+	public void onItemPurchased(String sku, boolean active) {
 		getMyApplication().getDownloadThread().runReloadIndexFilesSilent();
-		//reloadData();
 	}
 
 	@Override

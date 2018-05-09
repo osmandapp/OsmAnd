@@ -78,7 +78,7 @@ Lon %2$s</string>
     <string name="shared_string_help">Ayuda</string>
     <string name="shared_string_settings">Ajustes</string>
     <string name="shared_string_history">Historial</string>
-    <string name="shared_string_select_on_map">Eligir en el mapa</string>
+    <string name="shared_string_select_on_map">Elegir en el mapa</string>
     <string name="shared_string_select_all">Marcar todo</string>
     <string name="shared_string_deselect">Desmarcar</string>
     <string name="shared_string_deselect_all">Desmarcar todo</string>
@@ -414,7 +414,7 @@ Lon %2$s</string>
     <string name="index_name_gb">Europa - Gran Bretaña</string>
     <string name="keep_and_add_destination_point">Añadir como último destino</string>
     <string name="select_gpx">Elegir GPX…</string>
-    <string name="route_descr_select_destination">Eligir destino</string>
+    <string name="route_descr_select_destination">Elegir destino</string>
     <string name="route_preferences">Preferencias de la ruta</string>
     <string name="route_info">Información de la ruta</string>
     <string name="routing_attr_prefer_motorway_name">Preferir autopistas</string>
@@ -589,7 +589,7 @@ Lon %2$s</string>
     <string name="gpx_option_calculate_first_last_segment">Calcular la ruta OsmAnd para el primer y último segmento de ruta</string>
     <string name="use_displayed_track_for_navigation">¿Usar la traza mostrada para la navegación?</string>
     <string name="routing_attr_avoid_ferries_name">Evitar ferris/transbordadores</string>
-    <string name="routing_attr_avoid_ferries_description">Evita usar ferris/transbordadores</string>
+    <string name="routing_attr_avoid_ferries_description">Evita usar ferris</string>
     <string name="android_19_location_disabled">Desde la versión Android 4.4 (KitKat), no es posible descargar ni actualizar los mapas en la carpeta de almacenamiento antigua (%s). ¿Copiar todos los archivos de OsmAnd a la nueva ubicación de almacenamiento? 
 \n Nota 1: Los archivos antiguos permanecerán intactos (pero pueden ser borrados manualmente). 
 \n Nota 2: En la nueva ubicación de almacenamiento será imposible compartir archivos entre OsmAnd y OsmAnd+.</string>
@@ -635,9 +635,9 @@ Lon %2$s</string>
     <string name="local_index_tile_data_name">Datos de teselas: %1$s</string>
     <string name="edit_tilesource_successfully">Fuente de teselas «%1$s» guardada</string>
     <string name="edit_tilesource_elliptic_tile">Mercator elíptica</string>
-    <string name="edit_tilesource_maxzoom">Máximo zoom</string>
+    <string name="edit_tilesource_maxzoom">Zoom máximo</string>
     <string name="edit_tilesource_expiration_time">Expira (minutos)</string>
-    <string name="edit_tilesource_minzoom">Mínimo zoom</string>
+    <string name="edit_tilesource_minzoom">Zoom mínimo</string>
     <string name="edit_tilesource_url_to_load">URL</string>
     <string name="edit_tilesource_choose_existing">Elegir existente…</string>
     <string name="maps_define_edit">Definir/Editar…</string>
@@ -678,7 +678,7 @@ Lon %2$s</string>
     <string name="intermediate_items_sort_return">Orden optimizado de los destinos intermedios en ruta hacia el destino.</string>
     <string name="intermediate_items_sort_by_distance">Ordenar puerta a puerta</string>
     <string name="local_osm_changes_backup_successful">Archivo de cambios OSM «%1$s» generado</string>
-    <string name="local_osm_changes_backup_failed">No se pudo realizar una copia de seguridad de los cambios de OSM</string>
+    <string name="local_osm_changes_backup_failed">No se pudo realizar la copia de seguridad de los cambios de OSM</string>
     <string name="local_osm_changes_backup">Copia de seguridad como cambio de OSM</string>
     <string name="delete_point">Borrar punto</string>
     <string name="plugin_distance_point_time">tiempo</string>
@@ -719,8 +719,8 @@ Lon %2$s</string>
     <string name="choose_osmand_theme_descr">Elige el aspecto de la aplicación.</string>
     <string name="choose_osmand_theme">Tema</string>
     <string name="accessibility_options">Opciones de accesibilidad</string>
-    <string name="select_address_activity">Eligir dirección</string>
-    <string name="favourites_list_activity">Eligir favorito</string>
+    <string name="select_address_activity">Elegir dirección</string>
+    <string name="favourites_list_activity">Elegir favorito</string>
     <string name="local_openstreetmap_act_title">Cambios OSM</string>
     <string name="layer_hillshade">Capa de sombreado</string>
     <string name="map_widget_gps_info">Información GPS</string>
@@ -855,24 +855,43 @@ Lon %2$s</string>
     <string name="osmand_short_description_80_chars">Visor y navegador móvil global de mapas OSM con y sin conexión</string>
     <string name="osmand_long_description_1000_chars">"OsmAnd (OSM Automated Navigation Directions, y en español, Guía de Navegación Automatizada de OSM) 
 \n
+\n 
 \nOsmAnd es un software de navegación de código abierto con acceso a una amplia variedad de datos globales de OpenStreetMap (OSM). Todos los datos del mapa (vectores y teselas) pueden ser almacenados en la memoria del teléfono para su uso sin conexión. También ofrece funcionalidades de rutas con y sin conexión, incluyendo indicaciones giro-a-giro por voz. 
 \n
+\n 
 \n Algunas de las funciones fundamentales: 
+\n
 \n - Completa funcionalidad sin conexión (almacena los mapas vectoriales o teselas descargados en la memoria del dispositivo) 
+\n
 \n - Mapas vectoriales compactos disponibles de todo el planeta 
+\n
 \n - Descarga de mapas por país o región directamente desde la aplicación 
+\n
 \n - Posibilidad de superponer varias capas de mapa, como GPX o rutas de navegación, Puntos de Interés (PDI), favoritos, curvas de nivel, paradas de transporte público, mapas adicionales con transparencia personalizable 
+\n
 \n - Búsqueda sin conexión de direcciones y lugares (PDI) 
-\n - Rutas sin conexión para distancias de rango medio 
+\n
+\n - Navegación sin conexión para distancias de rango medio 
+\n
 \n - Modos de automóvil, bicicleta y peatón con opcional: 
+\n
 \n  - Cambio automático de vista día/noche 
+\n
 \n  - Zoom del mapa según la velocidad 
-\n  - Alineación del mapa, según brújula o dirección del movimiento 
-\n  - Indicación de carriles, mostrar límites de velocidad, voces grabadas y sintetizadas 
+\n
+\n  - Alineación del mapa, según la brújula o dirección del movimiento 
+\n
+\n  - Indicación de carriles, visualización de límites de velocidad, voces grabadas y sintetizadas 
+\n
+\n 
 \n
 \n Limitaciones de la versión gratuita de OsmAnd: 
-\n - Límite del número de mapas descargados 
+\n
+\n - Limitado número de mapas descargados 
+\n
 \n - Sin acceso a los PDI descargados de Wikipedia. 
+\n
+\n 
 \n
 \n Los PDI de OsmAnd están siendo desarrollados activamente. Nuestro proyecto y su continuo progreso, se basa en contribuciones económicas para desarrollar y probar nuevas funcionalidades. Por favor, considera comprar OsmAnd+, financiar nuevas funciones o hacer una donación general en https://osmand.net."</string>
     
@@ -908,7 +927,7 @@ Lon %2$s</string>
     <string name="layer_map_appearance">Configurar pantalla</string>
     <string name="show_lanes">Carriles</string>
     <string name="avoid_unpaved">Evitar caminos sin pavimentar</string>
-    <string name="avoid_ferries">Evitar ferris/transbordadores</string>
+    <string name="avoid_ferries">Evitar ferris</string>
     <string name="avoid_in_routing_title">Evitar…</string>
     <string name="avoid_in_routing_descr">Evita caminos con peajes, sin pavimentar, transbordadores y otros.</string>
     <string name="map_widget_fluorescent">Rutas fluorescentes</string>
@@ -1271,7 +1290,7 @@ Lon %2$s</string>
     <string name="internet_not_available">Imposible realizar la operación sin una conexión a Internet.</string>
     <string name="install_more">Instalar más…</string>
     <string name="level_to_switch_vector_raster_descr">Usar mapas vectoriales, más allá de este nivel.</string>
-    <string name="level_to_switch_vector_raster">Mínimo nivel de zoom vectorial</string>
+    <string name="level_to_switch_vector_raster">Nivel mínimo de zoom vectorial</string>
     <string name="create_poi_link_to_osm_doc"><u>OSM en línea</u> clasificación de mapa con imágenes.</string>
     <string name="error_doing_search">No se pudo realizar la búsqueda sin conexión.</string>
     <string name="search_offline_geo_error">No se pudo analizar el filtro «%s».</string>
@@ -1336,7 +1355,7 @@ Lon %2$s</string>
     
     <string name="osmand_routing_experimental">La navegación sin conexión de OsmAnd es una característica experimental y no funciona para distancias mayores a 20 km. 
 \n 
-\nLa navegación cambió temporalmente al servicio en línea CloudMade.</string>
+\nNavegación cambiada temporalmente al servicio en línea CloudMade.</string>
     <string name="specified_dir_doesnt_exist">No se puede encontrar la carpeta indicada.</string>
     <string name="osmand_net_previously_installed">Todos los datos sin conexión en la versión vieja de OsmAnd son compatibles con la nueva versión, pero los puntos favoritos deben exportarse desde la versión vieja y luego, importarse en la nueva.</string>
     <string name="build_installed">Compilación {0} instalada ({1}).</string>
@@ -1447,7 +1466,7 @@ Lon %2$s</string>
     <string name="sd_unmounted">Tarjeta de memoria inaccesible.
 \nNo podrás ver mapas ni encontrar cosas.</string>
     <string name="sd_mounted_ro">Tarjeta de memoria en sólo lectura. 
-\nAhora, sólo es posible ver el mapa precargado y no se pueden descargar nuevas áreas.</string>
+\nAhora, sólo es posible ver el mapa precargado y no pueden descargarse nuevas áreas.</string>
     <string name="unzipping_file">Descomprimiendo archivo…</string>
     <string name="route_tr">Gira a la derecha en</string>
     <string name="route_tshr">Gira fuerte a la derecha en</string>
@@ -1818,7 +1837,7 @@ Lon %2$s</string>
     <string name="si_min_km">Minutos por kilómetro</string>
     <string name="si_min_m">Minutos por milla</string>
     <string name="si_nm_h">Millas náuticas por hora (nudos)</string>
-    <string name="nm_h">nmi/h</string>
+    <string name="nm_h">kn</string>
     <string name="min_mile">min/m</string>
     <string name="min_km">min/km</string>
     <string name="m_s">m/s</string>
@@ -2059,12 +2078,13 @@ Lon %2$s</string>
     <string name="osm_live_hide_user_name">Ocultar mi nombre en los informes</string>
     <string name="osm_live_support_region">Región soportada</string>
     <string name="osm_live_month_cost">Coste mensual</string>
-    <string name="osm_live_month_cost_desc">Pago mensual.</string>
+    <string name="osm_live_month_cost_desc">Pago mensual</string>
     <string name="osm_live_active">Activo</string>
     <string name="osm_live_not_active">Inactivo</string>
     <string name="osm_live_enter_email">Ingresa un correo electrónico válido</string>
     <string name="osm_live_enter_user_name">Ingresa un nombre público</string>
-    <string name="osm_live_thanks">Gracias por suscribirte a las actualizaciones en vivo</string>
+    <string name="osm_live_thanks">¡Gracias por apoyar a OsmAnd! 
+\nPara activar todas las características nuevas, debes reiniciar OsmAnd.</string>
     <string name="osm_live_region_desc">Parte de tu donación se enviará a los usuarios de OSM que realicen cambios en el mapa de esa región.</string>
     <string name="osm_live_subscription_settings">Ajustes de suscripción</string>
     <string name="osm_live_ask_for_purchase">Primero compra una suscripción a OsmAnd Live</string>
@@ -2526,7 +2546,7 @@ Lon %2$s</string>
 \n • (Opcional) Guía de carriles, nombres de calles y tiempo estimado al destino 
 \n • Soporta puntos intermedios en el itinerario 
 \n • La ruta se recalcula al salirse de la misma  
-\n • Busca destinos por dirección, por tipo (por ejemplo: Restaurantes, hoteles, gasolineras, museos), o por coordenada geográfica
+\n • Busca destinos por dirección, por tipo (por ejemplo: Restaurantes, hoteles, gasolineras, museos), o por coordenada geográfica 
 \n"</string>
     <string name="osmand_plus_extended_description_part3">Vista del mapa 
 \n • Muestra tu ubicación y orientación 
@@ -2544,7 +2564,7 @@ Lon %2$s</string>
 \n • Elije entre datos completos de la región o sólo la red de rutas (Ejemplo: Todo Japón tiene 700 MB o sólo 200 MB para la red de rutas)</string>
     <string name="osmand_plus_extended_description_part5">Funciones de seguridad 
 \n • (Opcional) La vista día/noche se alterna automáticamente 
-\n • (Opcional) Muestra los límites de velocidad y obtén un aviso al excederte 
+\n • (Opcional) Visualización del límite de velocidad, con aviso al excederte 
 \n • (Opcional) Zoom del mapa según la velocidad 
 \n • Comparte la ubicación para que tus amigos puedan encontrarte</string>
     <string name="osmand_plus_extended_description_part6">Funciones de ciclismo y peatón
@@ -2559,8 +2579,8 @@ Lon %2$s</string>
 \n • Sube trazas GPX a OSM directamente desde la aplicación 
 \n • Añade PDI y súbelos directamente a OSM (o más tarde, si no estás conectado) 
 \n • (Opcional) Grabación del viaje en modo reposo (mientras el dispositivo está bloqueado) 
-\n 
-\n  OsmAnd es un software de código abierto, activamente desarrollado. Cualquiera puede contribuir con la aplicación informando sobre errores, mejorando las traducciones o desarrollando nuevas funciones. Además, el proyecto también depende de contribuciones financieras para desarrollar y probar nuevas funcionalidades.
+\n
+\n  OsmAnd es un software de código abierto, activamente desarrollado. Cualquiera puede contribuir con la aplicación informando sobre errores, mejorando las traducciones o desarrollando nuevas funciones. Además, el proyecto también depende de contribuciones financieras para desarrollar y probar nuevas funcionalidades. 
 \n"</string>
     <string name="osmand_plus_extended_description_part8">Cobertura y calidad aproximada del mapa: 
 \n • Europa Occidental: **** 
@@ -2818,7 +2838,7 @@ Lon %2$s</string>
     <string name="enter_new_name">Ingresar nuevo nombre</string>
     <string name="shared_string_back">Atrás</string>
     <string name="wrong_format">Formato incorrecto</string>
-    <string name="view">Vista</string>
+    <string name="view">Ver</string>
 	<string name="waypoints_added_to_map_markers">Puntos de referencia añadidos en «Marcadores del mapa»</string>
 	<string name="import_gpx_file_description">puede importarse como favorito, o como archivo de traza.</string>
     <string name="import_as_gpx">Importar como archivo GPX</string>
@@ -2871,8 +2891,7 @@ Lon %2$s</string>
     <string name="by_date">Por fecha</string>
     <string name="by_type">Por tipo</string>
     <string name="modify_the_search_query">Modificar la consulta de búsqueda.</string>
-    <string name="release_3_0">\\022 
-\n
+    <string name="release_3_0">• 
 \n</string>
     <string name="what_is_here">Aquí hay:</string>
     <string name="parked_at">estacionado a las</string>
@@ -3014,13 +3033,13 @@ Lon %2$s</string>
     <string name="contour_lines_sea_depth">Curvas de nivel + Profundidad náutica</string>
     <string name="unlock_all_features">Desbloquear todas las características de OsmAnd</string>
 
-    <string name="travel_card_update_descr">Nuevos datos de Wikivoyage disponibles, actualiza para disfrutar de ellos.</string>
+    <string name="travel_card_update_descr">Nuevos datos disponibles de Wikiviajes, actualiza para disfrutar de ellos.</string>
 	<string name="travel_card_download_descr">Descarga estas guías turísticas de Wikiviajes para ver artículos sobre lugares alrededor del mundo, sin una conexión a Internet.</string>
 	<string name="update_is_available">Actualización disponible</string>
 	<string name="download_file">Descargar archivo</string>
     <string name="start_editing_card_image_text">La guía turística libre global que cualquiera puede editar.</string>
     <string name="welcome_to_open_beta_description">Los viajes se basan en Wikiviajes. Prueba todas las características durante las pruebas beta abiertas, de forma gratuita. Una vez finalizado este período, «Viajes» estará disponible para los suscriptores de «OsmAnd ilimitado» y los propietarios de «OsmAnd+»</string>
-    <string name="start_editing_card_description">Puedes y debes editar cualquier artículo en Wikivoyage. Comparte tu conocimiento, experiencia, talento y atención</string>
+    <string name="start_editing_card_description">Puedes y debes editar cualquier artículo en Wikiviajes. Comparte tu conocimiento, experiencia, talento y atención</string>
     <string name="start_editing">Comenzar edición</string>
     <string name="get_unlimited_access">Obtener acceso ilimitado</string>
     <string name="welcome_to_open_beta">Bienvenido a la beta abierta</string>
@@ -3030,11 +3049,31 @@ Lon %2$s</string>
     <string name="open_in_browser_wiki">Abrir artículo en línea</string>
     <string name="open_in_browser_wiki_description">Ver el artículo en un navegador web.</string>
     <string name="download_wiki_region_placeholder">esta región</string>
-    <string name="wiki_article_search_text">Buscando el artículo wiki necesario</string>
+    <string name="wiki_article_search_text">Buscando el artículo wiki correspondiente</string>
     <string name="wiki_article_not_found">Artículo no encontrado</string>
     <string name="how_to_open_wiki_title">¿Cómo abrir artículos de Wikipedia?</string>
 <string name="popular_destinations">Destinos populares</string>
     <string name="paid_app">Aplicación de pago</string>
     <string name="paid_plugin">Complemento de pago</string>
     <string name="osmand_team">Equipo de OsmAnd</string>
+    <string name="maps_you_need_descr">Basado en los artículos guardados, recomendamos que descargue los siguientes mapas:</string>
+    <string name="maps_you_need">Mapas que necesitas</string>
+    <string name="shared_string_restart">Reiniciar</string>
+    <string name="purchase_cancelled_dialog_title">Has cancelado la suscripción de OsmAnd Live</string>
+    <string name="purchase_cancelled_dialog_descr">Renueva la suscripción para continuar usando todas las funciones:</string>
+
+    <string name="open_wikipedia_link_online">Abrir enlace de Wikipedia en línea</string>
+    <string name="open_wikipedia_link_online_description">OsmAnd abrirá el navegador para ver el enlace en línea.</string>
+    <string name="read_wikipedia_offline_description">Obtén una suscripción de OsmAnd Live para leer artículos de Wikipedia y Wikiviajes, sin conexión.</string>
+    <string name="how_to_open_link">¿Cómo abrir un enlace?</string>
+    <string name="read_wikipedia_offline">Leer la Wikipedia sin conexión</string>
+    <string name="download_all">Descargar todo</string>
+    <string name="hide_full_description">Ocultar descripción completa</string>
+    <string name="show_full_description">Mostrar descripción completa</string>
+    <string name="nautical_render_descr">Estilo para navegación marítima y fluvial. Características principales: boyas, faros, líneas y balizas de navegación fluvial, puertos, servicios marítimos, curvas de profundidad.</string>
+    <string name="ski_map_render_descr">Estilo para esquiar. Características principales: pistas de esquí, pistas aéreas y otras características de esquí de una manera conveniente. Menos objetos cartográficos secundarios que distraen la atención.</string>
+    <string name="light_rs_render_descr">Estilo simple y de contraste para la navegación en automóvil. Suave para los ojos en el modo nocturno. Características principales: curvas de nivel, caminos de estilo naranja contrastante, objetos cartográficos secundarios menos molestos.</string>
+    <string name="topo_render_descr">Estilo de contraste diseñado principalmente para caminatas en la naturaleza, trekking y ciclismo. Buena legibilidad en iluminación exterior compleja. Características principales: contraste de caminos y objetos naturales, diferentes tipos de rutas, curvas de nivel con ajustes avanzados, mayor detalle en los niveles de zoom correspondientes que en el estilo predefinido. La opción de integridad de la superficie permite distinguir entre caminos con diferente calidad de superficie. Sin modo nocturno.</string>
+    <string name="mapnik_render_descr">Estilo de visualización antiguo predefinido de Mapnik. Características: los colores son similares al estilo Mapnik.</string>
+    <string name="default_render_descr">Estilo de uso general. Visualización simplificada para tener mapas más limpios en las ciudades pobladas. Características principales: curvas de nivel, recorridos, calidad de la superficie, restricciones de acceso, escudos, visualización de caminos según escala SAC, características de los deportes acuáticos.</string>
     </resources>

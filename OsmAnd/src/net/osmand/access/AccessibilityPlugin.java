@@ -7,6 +7,7 @@ import java.util.Map;
 import android.app.Activity;
 import android.media.AudioManager;
 import android.media.SoundPool;
+import android.support.annotation.NonNull;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
@@ -29,7 +30,7 @@ public class AccessibilityPlugin extends OsmandPlugin {
 	}
 	
 	@Override
-	public boolean init(final OsmandApplication app, Activity activity) {
+	public boolean init(@NonNull final OsmandApplication app, Activity activity) {
 		sounds = new SoundPool(1, AudioManager.STREAM_MUSIC, 0);
 		if (sounds != null) {
 			soundIcons.put(DIRECTION_NOTIFICATION, loadSoundIcon("sounds/direction_notification.ogg"));

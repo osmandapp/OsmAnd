@@ -15,7 +15,7 @@ import android.webkit.WebView;
 import net.osmand.PicassoUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.OsmandSettings.WikivoyageShowImages;
+import net.osmand.plus.OsmandSettings.WikiArticleShowImages;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
@@ -36,11 +36,12 @@ public class WikivoyageOptionsBottomSheetDialogFragment extends MenuBottomSheetD
 	public static final int REQUEST_CODE = 0;
 	public static final int DOWNLOAD_IMAGES_CHANGED = 1;
 	public static final int CACHE_CLEARED = 2;
+	public static final int TRAVEL_BOOK_CHANGED = 3;
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
 		final OsmandApplication app = getMyApplication();
-		final OsmandSettings.CommonPreference<WikivoyageShowImages> showImagesPref = app.getSettings().WIKIVOYAGE_SHOW_IMAGES;
+		final OsmandSettings.CommonPreference<WikiArticleShowImages> showImagesPref = app.getSettings().WIKI_ARTICLE_SHOW_IMAGES;
 		final TravelDbHelper dbHelper = app.getTravelDbHelper();
 
 		items.add(new TitleItem(getString(R.string.shared_string_options)));
@@ -75,7 +76,7 @@ public class WikivoyageOptionsBottomSheetDialogFragment extends MenuBottomSheetD
 					@Override
 					public void onClick(View v) {
 						final PopupMenu popup = new PopupMenu(v.getContext(), v, Gravity.END);
-						for (final WikivoyageShowImages showImages : WikivoyageShowImages.values()) {
+						for (final WikiArticleShowImages showImages : WikiArticleShowImages.values()) {
 							MenuItem item = popup.getMenu().add(getString(showImages.name));
 							item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 								@Override
@@ -154,10 +155,7 @@ public class WikivoyageOptionsBottomSheetDialogFragment extends MenuBottomSheetD
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						dbHelper.selectTravelBook(list.get(which));
-						Fragment parent = getParentFragment();
-						if (parent != null && parent instanceof WikivoyageExploreDialogFragment) {
-							((WikivoyageExploreDialogFragment) parent).populateData();
-						}
+						sendResult(TRAVEL_BOOK_CHANGED);
 					}
 				})
 				.setNegativeButton(R.string.shared_string_dismiss, null)

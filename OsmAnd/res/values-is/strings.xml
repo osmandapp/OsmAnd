@@ -118,7 +118,7 @@
     <string name="si_min_km">mínútur á kílómetra</string>
     <string name="si_min_m">mínútur á mílu</string>
     <string name="si_nm_h">Sjómílur á klukkustund (hnútar)</string>
-    <string name="nm_h">sml/klst</string>
+    <string name="nm_h">hnútar</string>
     <string name="min_mile">min/m</string>
     <string name="min_km">min/km</string>
     <string name="m_s">m/sek</string>
@@ -1462,7 +1462,7 @@ og leiðsögn</string>
     <string name="full_report">Full skýrsla</string>
     <string name="osm_live_hide_user_name">Ekki birta nafnið mitt í skýrslum</string>
     <string name="osm_live_month_cost">Mánaðarlegur kostnaður</string>
-    <string name="osm_live_month_cost_desc">Mánaðarleg greiðsla.</string>
+    <string name="osm_live_month_cost_desc">Mánaðarleg greiðsla</string>
     <string name="select_map_marker">Veldu kortamerki</string>
     <string name="map_markers_other">Önnur kortamerki</string>
     <string name="map_marker_1st">Fyrsta kortamerki</string>
@@ -2204,7 +2204,8 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="access_smart_autoannounce">Snjallar sjálfvirkar tilkynningar</string>
     <string name="access_autoannounce_period">Tímabil sjálfvirka tilkynninga</string>
     <string name="access_autoannounce_period_descr">Lágmarkstími á milli tilkynninga.</string>
-    <string name="osm_live_thanks">Takk fyrir að vera áskrifandi að síuppfærslum</string>
+    <string name="osm_live_thanks">Takk fyrir stuðning þinn við OsmAnd!
+\nTil að virkja alla nýja eiginleika þarftu að endurræsa OsmAnd.</string>
     <string name="delay_to_start_navigation">Hefja beygju-fyrir-beygju leiðsögn eftir…</string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd-viðbót fyrir hæðarlínur án nettengingar</string>
     
@@ -2996,10 +2997,21 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="open_in_browser_wiki">Opna greinina á netinu</string>
     <string name="open_in_browser_wiki_description">Skoða grein í vafra.</string>
     <string name="download_wiki_region_placeholder">þetta svæði</string>
-    <string name="wiki_article_search_text">Leita að nauðsynlegri wiki-grein</string>
+    <string name="wiki_article_search_text">Leita að samsvarandi wiki-grein</string>
     <string name="wiki_article_not_found">Grein fannst ekki</string>
     <string name="how_to_open_wiki_title">Hvernig á að opna Wikipedia-greinar?</string>
 <string name="osmand_team">OsmAnd-teymið</string>
-    <string name="maps_you_need_descr">Þú last greinar: %1$s. Miðað við það, stingum við upp á að þú sækir þessi landakort:</string>
+    <string name="maps_you_need_descr">Miðað við þær greinar sem þú hefur lesið, stingum við upp á að þú sækir þessi landakort:</string>
     <string name="maps_you_need">Kort sem þú þarft</string>
+    <string name="shared_string_restart">Byrja aftur</string>
+    <string name="show_images">Birta myndir</string>
+    <string name="purchase_cancelled_dialog_title">Þú hefur hætt áskrift að OsmAnd Live</string>
+    <string name="purchase_cancelled_dialog_descr">Endurnýjaðu áskriftina til að nýta þér allra eiginleikanna:</string>
+
+    <string name="open_wikipedia_link_online">Opna Wikipedia-tengil á netinu</string>
+    <string name="open_wikipedia_link_online_description">OsmAnd mun endurbeina þér í vafrann og opna tengilinn í gegnum netið.</string>
+    <string name="read_wikipedia_offline_description">Fáðu áskrift að OsmAnd Live til að lesa Wikipedia- og Wikivoyage-greinar án nettengingar.</string>
+    <string name="how_to_open_link">Hvernig á að opna tengil?</string>
+    <string name="read_wikipedia_offline">Lesa Wikipedia ónettengt</string>
+    <string name="download_all">Sækja allt</string>
     </resources>

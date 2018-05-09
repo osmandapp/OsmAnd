@@ -325,7 +325,9 @@ public class DownloadResources extends DownloadResourceGroup {
 				continue;
 			}
 			if (ii.getType() == DownloadActivityType.DEPTH_CONTOUR_FILE) {
-				if (InAppPurchaseHelper.isDepthContoursPurchased(app) || nauticalMaps.size() == 0) {
+				if (InAppPurchaseHelper.isDepthContoursPurchased(app)
+						|| InAppPurchaseHelper.isSubscribedToLiveUpdates(app)
+						|| nauticalMaps.size() == 0) {
 					nauticalMaps.addItem(ii);
 				}
 				continue;
@@ -427,7 +429,7 @@ public class DownloadResources extends DownloadResourceGroup {
 	}
 
 	/**
-	 * @return smallest index item, if there are no downloaded index items; null otherwise.
+	 * @return smallest index item, if there are no downloaded index items; Downloaded item otherwise.
 	 */
 	@Nullable
 	public static IndexItem findSmallestIndexItemAt(OsmandApplication app, LatLon latLon, DownloadActivityType type) throws IOException {
@@ -435,7 +437,7 @@ public class DownloadResources extends DownloadResourceGroup {
 		List<IndexItem> items = findIndexItemsAt(app, latLon, type, true);
 		for (IndexItem item : items) {
 			if (item.isDownloaded()) {
-				return null;
+				return item;
 			}
 			if (res == null) {
 				res = item;

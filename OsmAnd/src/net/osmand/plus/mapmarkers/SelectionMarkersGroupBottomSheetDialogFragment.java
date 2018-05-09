@@ -7,7 +7,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
-import net.osmand.plus.base.bottomsheetmenu.simpleitems.DescriptionItem;
+import net.osmand.plus.base.bottomsheetmenu.simpleitems.ShortDescriptionItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 
 public class SelectionMarkersGroupBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
@@ -24,7 +24,7 @@ public class SelectionMarkersGroupBottomSheetDialogFragment extends MenuBottomSh
 	public void createMenuItems(Bundle savedInstanceState) {
 		items.add(new TitleItem(getString(R.string.add_group)));
 
-		items.add(new DescriptionItem(getString(R.string.add_group_descr)));
+		items.add(new ShortDescriptionItem(getString(R.string.add_group_descr)));
 
 		BaseBottomSheetItem favoritesItem = new SimpleBottomSheetItem.Builder()
 				.setIcon(getContentIcon(R.drawable.ic_action_fav_dark))

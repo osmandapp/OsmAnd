@@ -85,7 +85,7 @@
 <string name="poi_variety_store">فروشگاه کوچک</string>
 <string name="poi_video">کلوب فیلم</string>
 <string name="poi_window_blind">در و پنجره سازی</string>
-<string name="poi_department_store">بخش فروش</string>
+<string name="poi_department_store">فروشگاه چندمنظوره</string>
 <string name="poi_electronics">فروشگاه های لوازم الکترونیکی</string>
 <string name="poi_car">فروشگاه ماشین</string>
 <string name="poi_car_parts">فروشگاه قطعات خودرو</string>
@@ -149,7 +149,7 @@
 <string name="poi_halt">ایستگاه راه آهن</string>
 <string name="poi_subway_entrance">ورودی مترو</string>
 <string name="poi_subway_station">ایستگاه مترو</string>
-<string name="poi_taxi">ایستگاه تاکسی</string>
+<string name="poi_taxi">تاکسی</string>
 
 <string name="poi_aerodrome">فرودگاه</string>
 <string name="poi_helipad">جایگاه هلیکوپتر</string>
@@ -687,7 +687,7 @@
 	<string name="poi_embassy_type">نوع سفارت</string>
 	<string name="poi_city_capital">پایتخت</string>
 	<string name="poi_healthcare_alternative_types">نوع درمانگاه تخصصی</string>
-	<string name="poi_free_flying_characteristics">مشخصات منطقه پروازی</string>
+	<string name="poi_free_flying_characteristics">مشخصات پرواز آزاد</string>
 	<string name="poi_archaeological_site_type">مرکز باستان شناسی</string>
 	<string name="poi_religion_type">دین</string>
 	<string name="poi_denomination">مذهب</string>
@@ -767,7 +767,7 @@
 
 	<string name="poi_fireplace">شومینه</string>
 	<string name="poi_seasonal">فصلی</string>
-	<string name="poi_water_characteristic">ویژگی آب</string>
+	<string name="poi_water_characteristic">مشخصات آب</string>
 	<string name="poi_beach_surface_type">نوع سطح ساحل</string>
 	<string name="poi_diet">نوع خوراک</string>
 	<string name="poi_massage_type">نوع ماساژ</string>
@@ -786,7 +786,7 @@
 	<string name="poi_power_supply">پست برق</string>
 	<string name="poi_medical_system">نظام پزشکی</string>
 	<string name="poi_home_visit">خانه دیدنی</string>
-	<string name="poi_dish">دیش</string>
+	<string name="poi_dish">سبک غذا</string>
 	<string name="poi_payment_transport_type">نوع پرداخت (حمل و نقل)</string>
 	<string name="poi_social_facility_for">گروه هدف</string>
 	<string name="poi_compressed_air_filter">کپسول هوا</string>
@@ -978,4 +978,29 @@
 
 	<string name="poi_emergency_yes">اورژانس: بله</string>
 	<string name="poi_emergency_no">اورژانس: خیر</string>
+	<string name="poi_free_flying_characteristic">مشخصات</string>
+	<string name="poi_tower">برج</string>
+	<string name="poi_water_characteristic_mineral">معدنی</string>
+	<string name="poi_payment_telephone_cards_yes">کارت تلفن</string>
+	<string name="poi_payment_telephone_cards_no">کارت تلفن قبول نمی‌کند</string>
+	<string name="poi_sport_free_flying">پرواز آزاد (ورزش)</string>
+
+	<string name="poi_free_flying_site_landing">فرود</string>
+	<string name="poi_free_flying_site_toplanding">فرود بر بلندی</string>
+	<string name="poi_free_flying_site_training">آموزشی</string>
+	<string name="poi_free_flying_official_yes">رسمی: بله</string>
+	<string name="poi_free_flying_official_no">رسمی: خیر</string>
+	<string name="poi_free_flying_paragliding_yes">پاراگلایدر سواری</string>
+	<string name="poi_free_flying_paragliding_no">پاراگلایدر سواری: خیر</string>
+	<string name="poi_free_flying_site_orientation_n">جهت سایت پرواز آزاد: شمال</string>
+	<string name="poi_free_flying_site_orientation_ne">جهت سایت پرواز آزاد: شمال شرقی</string>
+	<string name="poi_free_flying_site_orientation_e">جهت سایت پرواز آزاد: شرق</string>
+	<string name="poi_free_flying_site_orientation_se">جهت سایت پرواز آزاد: جنوب شرقی</string>
+	<string name="poi_free_flying_site_orientation_s">جهت سایت پرواز آزاد: جنوب</string>
+	<string name="poi_free_flying_site_orientation_sw">جهت سایت پرواز آزاد: جنوب غربی</string>
+	<string name="poi_free_flying_site_orientation_w">جهت سایت پرواز آزاد: غرب</string>
+	<string name="poi_free_flying_site_orientation_nw">جهت سایت پرواز آزاد: شمال غربی</string>
+	<string name="poi_free_flying_no_flight_time">بدون زمان پرواز (پرواز آزاد)</string>
+	<string name="poi_wiki_link">ویکی‌پدیا</string>
+
 	</resources>

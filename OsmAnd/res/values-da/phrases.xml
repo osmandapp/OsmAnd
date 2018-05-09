@@ -3923,7 +3923,7 @@
 	<string name="poi_glacier_type_icefall">Isfald</string>
 	<string name="poi_glacier_type_rock">Klippe</string>
 	<string name="poi_glacier_type_shelf">Hylde</string>
-	<string name="poi_glacier_type_remnant">Rest</string>
+	<string name="poi_glacier_type_remnant">Rester</string>
 	<string name="poi_glacier_type_ice_tongue">Istunge</string>
 
 	<string name="poi_glacier_ele_top">Højeste punkt</string>

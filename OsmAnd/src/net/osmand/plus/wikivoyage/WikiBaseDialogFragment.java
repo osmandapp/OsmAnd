@@ -22,9 +22,8 @@ import android.view.Window;
 
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
-import net.osmand.plus.wikivoyage.explore.WikivoyageExploreDialogFragment;
 
-public class WikivoyageBaseDialogFragment extends BaseOsmAndDialogFragment {
+public class WikiBaseDialogFragment extends BaseOsmAndDialogFragment {
 
 	protected boolean nightMode;
 
@@ -54,9 +53,8 @@ public class WikivoyageBaseDialogFragment extends BaseOsmAndDialogFragment {
 	@Override
 	public void show(FragmentManager manager, String tag) {
 		FragmentTransaction ft = manager.beginTransaction();
-		ft.add(this, tag);
 		ft.addToBackStack(tag);
-		ft.commit();
+		show(ft, tag);
 	}
 
 	@Override

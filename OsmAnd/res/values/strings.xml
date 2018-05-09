@@ -9,7 +9,26 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
-    <string name="maps_you_need_descr">You read articles: %1$s. Based on this, we suggest you download these maps:</string>
+    <string name="hide_full_description">Hide full description</string>
+    <string name="show_full_description">Show full description</string>
+    <string name="nautical_render_descr">Style for marine and river navigation. Key features: buoys, lighthouses, water navigation lines and marks, harbours, seamark services, depth contours.</string>
+    <string name="ski_map_render_descr">Style for skiing. Key features: renders pistes, aerial ways and other ski features in a convenient way. Less distracting secondary map objects.</string>
+    <string name="light_rs_render_descr">Simple and contrast style for car navigation. Gentle for the eyes in the night mode. Key features: contour lines, contrast orange styled roads, less distracting secondary map objects.</string>
+    <string name="topo_render_descr">Contrast style designed primarily for nature hiking, trekking and cycling. Good readability in complex external lighting. Key features: contrast roads and natural objects, different types of routes, contour lines with advanced settings, more details at corresponding zoom levels than "default" style. "Surface integrity" option allows you distinguish between roads with different surface quality. No night mode.</string>
+    <string name="mapnik_render_descr">Old mapnik-style default rendering style. Key features: colours are similar to Mapnik style.</string>
+    <string name="default_render_descr">General purpose style. Simplified rendering to have cleaner maps in the populated cities. Key features: contour lines, routes, surface quality, access restrictions, road shields, paths rendering according to SAC scale, whitewater sports features.</string>
+    <string name="open_wikipedia_link_online">Open wikipedia link online</string>
+    <string name="open_wikipedia_link_online_description">OsmAnd will redirect you to the browser and open the link online.</string>
+    <string name="read_wikipedia_offline_description">Get OsmAnd Live subscription to read Wikipedia and Wikivoyage articles offline.</string>
+    <string name="how_to_open_link">How to open link?</string>
+    <string name="read_wikipedia_offline">Read Wikipedia offline</string>
+    <string name="download_all">Download all</string>
+    <string name="shared_string_restart">Restart</string>
+    <string name="show_images">Show images</string>
+    <string name="purchase_cancelled_dialog_title">You have cancel OsmAnd Live subscription</string>
+    <string name="purchase_cancelled_dialog_descr">Renew subscription to continue use the all features:</string>
+
+    <string name="maps_you_need_descr">Based on the articles you saved, we recommend you to download following maps:</string>
     <string name="maps_you_need">Maps you need</string>
     <string name="osmand_team">OsmAnd team</string>
     <string name="popular_destinations">Popular destinations</string>
@@ -668,12 +687,12 @@
     <string name="osm_live_hide_user_name">Do not show my name in reports</string>
     <string name="osm_live_support_region">Support region</string>
     <string name="osm_live_month_cost">Month cost</string>
-    <string name="osm_live_month_cost_desc">Monthly payment.</string>
+    <string name="osm_live_month_cost_desc">Monthly payment</string>
     <string name="osm_live_active">Active</string>
     <string name="osm_live_not_active">Inactive</string>
     <string name="osm_live_enter_email">Please enter a valid e-mail address</string>
     <string name="osm_live_enter_user_name">Please enter public name</string>
-    <string name="osm_live_thanks">Thank you for subscribing to live updates</string>
+    <string name="osm_live_thanks">Thank you for supporting OsmAnd!\nTo activate all new features you need to restart OsmAnd.</string>
     <string name="osm_live_region_desc">Part of your donation will be sent to OSM users who submit changes to the map in that region.</string>
     <string name="osm_live_subscription_settings">Subscription settings</string>
     <string name="osm_live_ask_for_purchase">Please purchase a subscription to OsmAnd Live first</string>
@@ -846,7 +865,7 @@
     <string name="si_min_km">Minutes per kilometer</string>
     <string name="si_min_m">Minutes per mile</string>
     <string name="si_nm_h">Nautical miles per hour (knots)</string>
-    <string name="nm_h">nmi/h</string>
+    <string name="nm_h">kn</string>
     <string name="min_mile">min/m</string>
     <string name="min_km">min/km</string>
     <string name="m_s">m/s</string>
@@ -2874,7 +2893,7 @@
     <string name="open_in_browser_wiki">Open article online</string>
     <string name="open_in_browser_wiki_description">View article in a web browser.</string>
     <string name="download_wiki_region_placeholder">this region</string>
-    <string name="wiki_article_search_text">Searching for the necessary wiki article</string>
+    <string name="wiki_article_search_text">Searching for the corresponding wiki article</string>
     <string name="wiki_article_not_found">Article not found</string>
     <string name="how_to_open_wiki_title">How to open Wikipedia articles?</string>
 </resources>

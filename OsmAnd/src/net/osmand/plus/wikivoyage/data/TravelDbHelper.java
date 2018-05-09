@@ -3,6 +3,7 @@ package net.osmand.plus.wikivoyage.data;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
+
 import net.osmand.Collator;
 import net.osmand.CollatorStringMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
@@ -116,23 +117,36 @@ public class TravelDbHelper {
 	}
 
 	public void initTravelBooks() {
-		File[] possibleFiles = application.getAppPath(IndexConstants.WIKIVOYAGE_INDEX_DIR).listFiles();
+		List<File> files = getPossibleFiles();
 		String travelBook = application.getSettings().SELECTED_TRAVEL_BOOK.get();
 		existingTravelBooks.clear();
-		if (possibleFiles != null && possibleFiles.length > 0) {
-			for (File f : possibleFiles) {
-				if (f.getName().endsWith(IndexConstants.BINARY_WIKIVOYAGE_MAP_INDEX_EXT)) {
-					existingTravelBooks.add(f);
-					if (selectedTravelBook == null) {
-						selectedTravelBook = f;
-					} else if (Algorithms.objectEquals(travelBook, f.getName())) {
-						selectedTravelBook = f;
-					}
+		if (files != null && !files.isEmpty()) {
+			for (File f : files) {
+				existingTravelBooks.add(f);
+				if (selectedTravelBook == null) {
+					selectedTravelBook = f;
+				} else if (Algorithms.objectEquals(travelBook, f.getName())) {
+					selectedTravelBook = f;
 				}
 			}
 		} else {
 			selectedTravelBook = null;
 		}
+	}
+
+	@Nullable
+	private List<File> getPossibleFiles() {
+		File[] files = application.getAppPath(IndexConstants.WIKIVOYAGE_INDEX_DIR).listFiles();
+		if (files != null) {
+			List<File> res = new ArrayList<>();
+			for (File file : files) {
+				if (file.getName().endsWith(IndexConstants.BINARY_WIKIVOYAGE_MAP_INDEX_EXT)) {
+					res.add(file);
+				}
+			}
+			return res;
+		}
+		return null;
 	}
 
 	public void loadDataForSelectedTravelBook() {

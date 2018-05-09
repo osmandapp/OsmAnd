@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
   <string name="asap">Швидко</string>
   
   <string name="route_roundabout">Круговий рух : %1$d з’їзд</string>
@@ -2178,7 +2179,7 @@
     <string name="shared_string_not_selected">Не вибрано</string>
     <string name="rec_split_clip_length">Тривалість кліпу</string>
     <string name="nm">мор.м.</string>
-    <string name="nm_h">мор.м./год</string>
+    <string name="nm_h">вузл</string>
     <string name="update_time">Час оновлення</string>
     <string name="updates_size">Розмір оновлення</string>
     <string name="weekly">Щотижня</string>

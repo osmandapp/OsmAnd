@@ -37,6 +37,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
@@ -169,7 +170,7 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppPurc
 	}
 
 	public void updateSubscriptionHeader() {
-		if (getActivity() instanceof OsmLiveActivity) {
+		if (getActivity() instanceof OsmLiveActivity && subscriptionHeader != null) {
 			View subscriptionBanner = subscriptionHeader.findViewById(R.id.subscription_banner);
 			View subscriptionInfo = subscriptionHeader.findViewById(R.id.subscription_info);
 			if (InAppPurchaseHelper.isSubscribedToLiveUpdates(getMyApplication())) {
@@ -229,7 +230,6 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppPurc
 			if (purchaseHelper.getActiveTask() == InAppPurchaseTaskType.REQUEST_INVENTORY) {
 				enableProgress();
 			}
-			purchaseHelper.addListener(this);
 		}
 		if (((OsmLiveActivity) getActivity()).shouldOpenSubscription()) {
 			SubscriptionFragment subscriptionFragment = new SubscriptionFragment();
@@ -242,15 +242,6 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppPurc
 		super.onDestroyView();
 		if (loadLocalIndexesTask != null) {
 			loadLocalIndexesTask.cancel(true);
-		}
-	}
-
-	@Override
-	public void onPause() {
-		super.onPause();
-		InAppPurchaseHelper purchaseHelper = getInAppPurchaseHelper();
-		if (purchaseHelper != null) {
-			purchaseHelper.removeListener(this);
 		}
 	}
 
@@ -702,6 +693,11 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppPurc
 	@Override
 	public void onError(InAppPurchaseTaskType taskType, String error) {
 		disableProgress();
+
+		OsmandInAppPurchaseActivity activity = getInAppPurchaseActivity();
+		if (activity != null) {
+			activity.fireInAppPurchaseErrorOnFragments(getChildFragmentManager(), taskType, error);
+		}
 	}
 
 	@Override
@@ -711,23 +707,43 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppPurc
 			adapter.enableLiveUpdates(false);
 		}
 		disableProgress();
+
+		OsmandInAppPurchaseActivity activity = getInAppPurchaseActivity();
+		if (activity != null) {
+			activity.fireInAppPurchaseGetItemsOnFragments(getChildFragmentManager());
+		}
 	}
 
 	@Override
-	public void onItemPurchased(String sku) {
+	public void onItemPurchased(String sku, boolean active) {
 		InAppPurchaseHelper purchaseHelper = getInAppPurchaseHelper();
 		if (purchaseHelper != null && purchaseHelper.getSkuLiveUpdates().equals(sku)) {
 			updateSubscriptionHeader();
+		}
+
+		OsmandInAppPurchaseActivity activity = getInAppPurchaseActivity();
+		if (activity != null) {
+			activity.fireInAppPurchaseItemPurchasedOnFragments(getChildFragmentManager(), sku, active);
 		}
 	}
 
 	@Override
 	public void showProgress(InAppPurchaseTaskType taskType) {
 		enableProgress();
+
+		OsmandInAppPurchaseActivity activity = getInAppPurchaseActivity();
+		if (activity != null) {
+			activity.fireInAppPurchaseShowProgressOnFragments(getChildFragmentManager(), taskType);
+		}
 	}
 
 	@Override
 	public void dismissProgress(InAppPurchaseTaskType taskType) {
 		disableProgress();
+
+		OsmandInAppPurchaseActivity activity = getInAppPurchaseActivity();
+		if (activity != null) {
+			activity.fireInAppPurchaseDismissProgressOnFragments(getChildFragmentManager(), taskType);
+		}
 	}
 }

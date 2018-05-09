@@ -3,6 +3,7 @@ package net.osmand.plus.srtmplugin;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -19,6 +20,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.dashboard.DashboardOnMap;
+import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.util.Algorithms;
@@ -62,7 +64,11 @@ public class SRTMPlugin extends OsmandPlugin {
 	public int getAssetResourceName() {
 		return R.drawable.contour_lines;
 	}
-	
+
+	@Override
+	public boolean needsInstallation() {
+		return super.needsInstallation() && !InAppPurchaseHelper.isSubscribedToLiveUpdates(app);
+	}
 
 	@Override
 	public String getDescription() {
@@ -79,7 +85,7 @@ public class SRTMPlugin extends OsmandPlugin {
 		return "feature_articles/contour-lines-plugin.html";
 	}
 	@Override
-	public boolean init(final OsmandApplication app, Activity activity) {
+	public boolean init(@NonNull final OsmandApplication app, Activity activity) {
 		OsmandSettings settings = app.getSettings();
 		CommonPreference<String> pref = settings.getCustomRenderProperty("contourLines");
 		if(pref.get().equals("")) {

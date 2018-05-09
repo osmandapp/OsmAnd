@@ -10,7 +10,7 @@
         android:id="@+id/card_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/selectableItemBackground"
+        android:background="?attr/selectableItemBackgroundBorderless"
         android:minHeight="@dimen/card_button_min_size"
         android:orientation="vertical"
         android:gravity="center"

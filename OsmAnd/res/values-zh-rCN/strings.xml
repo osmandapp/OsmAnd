@@ -2769,4 +2769,22 @@
     <string name="dayly_map_updates">地图更新：每日</string>
     <string name="unlimited_downloads">无限下载</string>
     <string name="wikipedia_offline">离线维基百科</string>
-    </resources>
+    <string name="open_wikipedia_link_online">在线打开维基百科链接</string>
+    <string name="open_wikipedia_link_online_description">OsmAnd 会将您重定向至浏览器并在线打开链接。</string>
+    <string name="read_wikipedia_offline_description">获取 OsmAnd Live 订阅以离线阅读维基百科和 Wikivoyage 文章。</string>
+    <string name="how_to_open_link">如何打开链接？</string>
+    <string name="read_wikipedia_offline">离线阅读维基百科</string>
+    <string name="download_all">下载全部</string>
+    <string name="shared_string_restart">重新开始</string>
+    <string name="show_images">显示图像</string>
+    <string name="purchase_cancelled_dialog_title">您已取消 OsmAnd Live 订阅</string>
+    <string name="purchase_cancelled_dialog_descr">续订以继续使用以下全部功能：</string>
+
+    <string name="maps_you_need_descr">基于您保存的文章，我们推荐您下载下列地图：</string>
+    <string name="maps_you_need">您需要的地图</string>
+    <string name="osmand_team">OsmAnd 团队</string>
+    <string name="popular_destinations">热门目的地</string>
+    <string name="paid_app">付费应用</string>
+    <string name="paid_plugin">付费插件</string>
+    <string name="travel_card_update_descr">新的 Wikivoyage 数据可用，请更新以继续享用。</string>
+	</resources>

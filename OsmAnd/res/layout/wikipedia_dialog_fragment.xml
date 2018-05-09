@@ -29,6 +29,7 @@
 				android:layout_height="match_parent"
 				android:layout_weight="1"
 				android:ellipsize="end"
+				android:maxLines="1"
 				android:gravity="center_vertical"
 				android:textSize="@dimen/dialog_header_text_size"
 				osmand:typeface="@string/font_roboto_medium" />
@@ -52,6 +53,15 @@
 				tools:ignore="UnusedAttribute"
 				tools:text="En"
 				tools:textColor="?attr/wikivoyage_active_color" />
+
+			<android.support.v7.widget.AppCompatImageView
+				android:id="@+id/options_button"
+				style="@style/Widget.AppCompat.ActionButton"
+				android:layout_width="48dp"
+				android:layout_height="match_parent"
+				android:layout_gravity="top"
+				android:contentDescription="@string/shared_string_options"
+				tools:src="@drawable/ic_overflow_menu_white"/>
 
             </LinearLayout>
 

@@ -17,7 +17,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
-import net.osmand.plus.mapcontextmenu.WikipediaDialogFragment;
+import net.osmand.plus.wikipedia.WikipediaDialogFragment;
 import net.osmand.plus.mapcontextmenu.builders.AmenityMenuBuilder;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.resources.TransportIndexRepository;

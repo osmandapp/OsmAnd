@@ -7,7 +7,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
-import net.osmand.plus.base.bottomsheetmenu.simpleitems.DescriptionItem;
+import net.osmand.plus.base.bottomsheetmenu.simpleitems.ShortDescriptionItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.osmedit.OsmEditsFragment.ExportTypesDef;
 
@@ -36,7 +36,7 @@ public class ExportOptionsBottomSheetDialogFragment extends MenuBottomSheetDialo
 
 		items.add(new TitleItem(getString(R.string.shared_string_export)));
 
-		items.add(new DescriptionItem(getString(R.string.osm_edits_export_desc)));
+		items.add(new ShortDescriptionItem(getString(R.string.osm_edits_export_desc)));
 
 		BaseBottomSheetItem poiItem = new BottomSheetItemWithDescription.Builder()
 				.setDescription(String.valueOf(poiCount))

@@ -3060,8 +3060,8 @@ Reprezentuje obszar: %1$s x %2$s</string>
     
     <string name="unlimited_downloads">Nieograniczone pobrania</string>
     <string name="images_cache">Pamięć podręczna obrazów</string>
-    <string name="travel_guide">Przewodnik podróży</string>
-    <string name="travel_guide_description">Przeglądaj przewodniki Wikipodróży po najciekawszych miejscach na świecie w aplikacji OsmAnd bez połączenia z internetem.</string>
+    <string name="travel_guide">Przewodnik wikipodróży</string>
+    <string name="travel_guide_description">Przewodniki po najciekawszych miejscach na świecie w aplikacji OsmAnd, bez połączenia z Internetem.</string>
     <string name="in_app_purchase">Zakupy w aplikacji</string>
     <string name="in_app_purchase_desc">Płatność jednorazowa</string>
     <string name="in_app_purchase_desc_ex">Raz zakupiony, będzie stale dla ciebie dostępny.</string>
@@ -3075,8 +3075,8 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="popular_destinations">Popularne cele podróży</string>
     <string name="paid_app">Aplikacja płatna</string>
     <string name="paid_plugin">Wtyczka płatna</string>
-    <string name="travel_card_update_descr">Przygotowaliśmy aktualizacje i poprawki w danych Wikipodróży, zaktualizuj plik, aby je zobaczyć.</string>
-	<string name="travel_card_download_descr">Pobierz ten plik z przewodnikami podróży Wikipodróże, aby wyświetlić artykuły o miejscach na całym świecie bez połączenia z Internetem.</string>
+    <string name="travel_card_update_descr">Dostępne są nowe dane Wikipodróży, zaktualizuj je, aby cieszyć się nimi.</string>
+	<string name="travel_card_download_descr">Pobierz te przewodniki podróży Wikipodróże, aby wyświetlić artykuły o miejscach na całym świecie bez połączenia z Internetem.</string>
 	<string name="update_is_available">Aktualizacja jest dostępna</string>
 	<string name="download_file">Pobierz plik</string>
     <string name="start_editing_card_image_text">Bezpłatny przewodnik po świecie, który każdy może edytować.</string>
@@ -3084,7 +3084,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="start_editing_card_description">Możesz edytować dowolny artykuł na Wikipodóżach i mamy nadzieję, że to zrobisz. Potrzebujemy Twojej wiedzy, doświadczenia, talentu i uwagi</string>
     <string name="start_editing">Rozpocznij edycję</string>
     <string name="get_unlimited_access">Uzyskaj nieograniczony dostęp</string>
-    <string name="welcome_to_open_beta">Witaj w otwartej wersji beta!</string>
+    <string name="welcome_to_open_beta">Witamy w otwartej wersji beta</string>
     <string name="wikipedia_offline">Wikipedia offline</string>
     <string name="index_item_world_wikivoyage">Światowe artykuły Wikipodróży</string>
     <string name="osmand_extended_description_part3">Mapa
@@ -3133,4 +3133,12 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="wiki_article_search_text">Wyszukiwanie niezbędnych artykułów wiki</string>
     <string name="wiki_article_not_found">Nie znaleziono artykułu</string>
     <string name="how_to_open_wiki_title">Jak otworzyć artykuły z Wikipedii?</string>
-</resources>
+<string name="shared_string_restart">Uruchom ponownie</string>
+    <string name="show_images">Wyświetl obrazy</string>
+    <string name="purchase_cancelled_dialog_title">Anulowano subskrypcję OsmAnd Live</string>
+    <string name="purchase_cancelled_dialog_descr">Proszę przedłużyć subskrypcję, aby kontynuować korzystanie z wszystkich funkcji:</string>
+
+    <string name="maps_you_need_descr">Na podstawie zapisanych artykułów, zalecamy pobranie poniższych map:</string>
+    <string name="maps_you_need">Mapy, które potrzebujesz</string>
+    <string name="osmand_team">Zespół OsmAnd</string>
+    </resources>

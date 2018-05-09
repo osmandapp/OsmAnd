@@ -283,6 +283,22 @@ public class DownloadIndexesThread {
 		}
 	}
 
+	public void cancelDownload(List<IndexItem> items) {
+		if (items != null) {
+			boolean updateProgress = false;
+			for (IndexItem item : items) {
+				if (currentDownloadingItem == item) {
+					downloadFileHelper.setInterruptDownloading(true);
+				} else {
+					indexItemDownloading.remove(item);
+					updateProgress = true;
+				}
+			}
+			if (updateProgress) {
+				downloadInProgress();
+			}
+		}
+	}
 
 	public IndexItem getCurrentDownloadingItem() {
 		return currentDownloadingItem;
@@ -567,9 +583,7 @@ public class DownloadIndexesThread {
 		}
 		
 		private boolean validateNotExceedsFreeLimit(IndexItem item) {
-			boolean exceed = Version.isFreeVersion(app)
-					&& !InAppPurchaseHelper.isSubscribedToLiveUpdates(app)
-					&& !InAppPurchaseHelper.isFullVersionPurchased(app)
+			boolean exceed = !Version.isPaidVersion(app)
 					&& DownloadActivityType.isCountedInDownloads(item)
 					&& downloads.get() >= DownloadValidationManager.MAXIMUM_AVAILABLE_FREE_DOWNLOADS;
 			if(exceed) {

@@ -76,6 +76,7 @@ import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.base.FailSafeFuntions;
 import net.osmand.plus.base.MapViewTrackingUtilities;
+import net.osmand.plus.chooseplan.OsmLiveCancelledDialog;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.dialogs.ErrorBottomSheetDialog;
 import net.osmand.plus.dialogs.RateUsBottomSheetDialog;
@@ -203,7 +204,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	private boolean permissionGranted;
 
 	private boolean mIsDestroyed = false;
-	private InAppPurchaseHelper inAppPurchaseHelper;
 	private Timer splashScreenTimer;
 
 	private ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
@@ -785,9 +785,13 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			getSupportFragmentManager().beginTransaction()
 					.add(R.id.fragmentContainer, new FirstUsageWelcomeFragment(),
 							FirstUsageWelcomeFragment.TAG).commitAllowingStateLoss();
-		} else if (!isFirstScreenShowing() && XMasDialogFragment.shouldShowXmasDialog(app)) {
-			SecondSplashScreenFragment.SHOW = false;
-			new XMasDialogFragment().show(getSupportFragmentManager(), XMasDialogFragment.TAG);
+		} else if (!isFirstScreenShowing()) {
+			if (XMasDialogFragment.shouldShowXmasDialog(app)) {
+				SecondSplashScreenFragment.SHOW = false;
+				new XMasDialogFragment().show(getSupportFragmentManager(), XMasDialogFragment.TAG);
+			} else if (OsmLiveCancelledDialog.shouldShowDialog(app)) {
+				OsmLiveCancelledDialog.showInstance(getSupportFragmentManager());
+			}
 		}
 		FirstUsageWelcomeFragment.SHOW = false;
 
@@ -863,6 +867,10 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			}
 		}
 		return null;
+	}
+
+	public boolean isInAppPurchaseAllowed() {
+		return true;
 	}
 
 	private void dismissSecondSplashScreen() {
@@ -1214,9 +1222,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		if (atlasMapRendererView != null) {
 			atlasMapRendererView.handleOnDestroy();
 		}
-		if (inAppPurchaseHelper != null) {
-			inAppPurchaseHelper.stop();
-		}
 		mIsDestroyed = true;
 	}
 
@@ -1524,9 +1529,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		if (inAppPurchaseHelper != null && inAppPurchaseHelper.onActivityResultHandled(requestCode, resultCode, data)) {
-			return;
-		}
 		for (ActivityResultListener listener : activityResultListeners) {
 			if (listener.processResult(requestCode, resultCode, data)) {
 				removeActivityResultListener(listener);
@@ -1534,6 +1536,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			}
 		}
 		OsmandPlugin.onMapActivityResult(requestCode, resultCode, data);
+		super.onActivityResult(requestCode, resultCode, data);
 	}
 
 	public void refreshMap() {

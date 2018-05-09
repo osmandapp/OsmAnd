@@ -876,10 +876,8 @@ public class OsmandApplication extends MultiDexApplication {
 
 	public void logEvent(Activity ctx, String event) {
 		try {
-			if (Version.isGooglePlayEnabled(this) && Version.isFreeVersion(this)
-					&& !osmandSettings.DO_NOT_SEND_ANONYMOUS_APP_USAGE.get()
-					&& !InAppPurchaseHelper.isFullVersionPurchased(this)
-					&& !InAppPurchaseHelper.isSubscribedToLiveUpdates(this)) {
+			if (Version.isGooglePlayEnabled(this) && !Version.isPaidVersion(this)
+					&& !osmandSettings.DO_NOT_SEND_ANONYMOUS_APP_USAGE.get()) {
 				Class<?> cl = Class.forName("com.google.firebase.analytics.FirebaseAnalytics");
 				Method mm = cl.getMethod("getInstance", Context.class);
 				Object inst = mm.invoke(null, ctx == null ? this : ctx);

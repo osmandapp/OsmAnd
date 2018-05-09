@@ -16,7 +16,7 @@ import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandSettings.WikivoyageShowImages;
+import net.osmand.plus.OsmandSettings.WikiArticleShowImages;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BottomSheetDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -38,7 +38,7 @@ public class WikivoyageShowPicturesDialogFragment extends BottomSheetDialogFragm
 			public void onClick(View v) {
 				OsmandApplication app = getMyApplication();
 				if (app != null) {
-					app.getSettings().WIKIVOYAGE_SHOW_IMAGES.set(WikivoyageShowImages.OFF);
+					app.getSettings().WIKI_ARTICLE_SHOW_IMAGES.set(WikiArticleShowImages.OFF);
 				}
 				sendResult();
 				dismiss();
@@ -52,20 +52,20 @@ public class WikivoyageShowPicturesDialogFragment extends BottomSheetDialogFragm
 				public void onClick(View v) {
 					OsmandApplication app = getMyApplication();
 					if (app != null) {
-						app.getSettings().WIKIVOYAGE_SHOW_IMAGES.set(WikivoyageShowImages.WIFI);
+						app.getSettings().WIKI_ARTICLE_SHOW_IMAGES.set(WikiArticleShowImages.WIFI);
 					}
 					sendResult();
 					dismiss();
 				}
 			});
 		} else {
-			buttonDownload.setText(R.string.shared_string_do);
+			buttonDownload.setText(R.string.shared_string_show);
 			buttonDownload.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
 					OsmandApplication app = getMyApplication();
 					if (app != null) {
-						app.getSettings().WIKIVOYAGE_SHOW_IMAGES.set(WikivoyageShowImages.ON);
+						app.getSettings().WIKI_ARTICLE_SHOW_IMAGES.set(WikiArticleShowImages.ON);
 					}
 					sendResult();
 					dismiss();

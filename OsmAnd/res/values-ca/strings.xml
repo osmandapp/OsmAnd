@@ -185,11 +185,11 @@ S\'ocuparà una memòria de {1} MB
     <string name="osmand_parking_event">Traieu el cotxe de l\'aparcament</string>
     <string name="rendering_attr_appMode_description">Optimitza el mapa per</string>
     <string name="play_commands_of_currently_selected_voice">Selecciona una veu i comprova les indicacions en funcionament</string>
-    <string name="zoom_by_trackball_descr">Canvia el zoom del mapa amb moviments horitzontals del ratolí de bola.</string>
+    <string name="zoom_by_trackball_descr">Canvia el zoom del mapa seguint el desplaçament horitzontal del ratolí de bola.</string>
     <string name="zoom_by_trackball">Utilitza el ratolí de bola per controlar el zoom</string>
     <string name="local_openstreetmap_were_uploaded">Es van penjar {0} PDI/notes</string>
-    <string name="local_openstreetmap_settings">PDIs/Notes d\'OSM desades localment</string>
-    <string name="local_openstreetmap_settings_descr">Mostra i gestiona els PDI/notes d\'OSM a la base de dades local.</string>
+    <string name="local_openstreetmap_settings">PDIs/Notes d\'OSM desades al dispositiu</string>
+    <string name="local_openstreetmap_settings_descr">Mostra i gestiona els PDI/notes d\'OSM anotats a la base de dades del dispositiu.</string>
     <string name="day_night_info">Informació de dia/nit</string>
     
     <string name="show_lanes">Carrils</string>
@@ -244,7 +244,7 @@ S\'ocuparà una memòria de {1} MB
     <string name="offline_edition">Edició fora de línia</string>
     <string name="offline_edition_descr">Utilitza sempre l\'edició fora de línia.</string>
     <string name="local_openstreetmap_descr_title">Edició asincrònica de l\'OSM:</string>
-    <string name="accessibility_mode_descr">Activa les característiques d\'accessibilitat.</string>
+    <string name="accessibility_mode_descr">Activa les funcions per a usuaris amb discapacitats.</string>
     <string name="update_poi_does_not_change_indexes">Els canvis realitzats en els PDI a l\'aplicació no afecten els fitxers de mapa baixats, els canvis es desen en un fitxer local.</string>
     <string name="global_app_allocated_memory_descr">Memòria assignada %1$s MB (límit de l\'Android %2$s MB, Dalvik %3$s MB).</string>
     <string name="global_app_allocated_memory">Memòria assignada</string>
@@ -295,7 +295,7 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="system_locale">Sistema</string>
     <string name="shared_string_next">Endavant</string>
     <string name="shared_string_previous">Enrere</string>
-    <string name="unit_of_length_descr">Canvia les unitats de longitud.</string>
+    <string name="unit_of_length_descr">Canvia com es mesura la distància.</string>
     <string name="unit_of_length">Unitats de longitud</string>
     <string name="si_mi_feet">Milles/peus</string>
     <string name="si_mi_yard">Milles/iardes</string>
@@ -364,7 +364,7 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="osmand_plus_long_description_1000_chars">"OsmAnd+ (OSM Automated Navigation Directions) L\'OsmAnd+ és una aplicació de navegació de codi obert amb accés a una gran varietat de dades de la col·lecció oberta de mapes OpenStreetMap. Totes les dades, incloent mapes de tessel·les i de vectors, poden emmagatzemar-se a la targeta de memòria del telèfon pel seu ús fora de línia. L\'OsmAnd també té la funcionalitat de càlcul de rutes tant en línia com fora de línia, incloent a més l\'orientació per veu. L\'OsmAnd+ és la versió de pagament; comprant-la estareu donant suport al projecte, ajudareu al desenvolupament de noves funcions i rebreu les darreres actualitzacions. Algunes de les característiques centrals són: - Funcionalitat completa fora de línia (desa en el dispositiu d\'emmagatzemament  els mapes vectorials i de mosaic baixats) - Mapes de vectors compactes de tot el món per usar fora de línia - Baixada il·limitada de mapes nacionals o regionals directament des de l\'aplicació - Disponibilitat fora de línia dels PDI baixats prèviament de Viquipèdia, és genial per fer turisme - Diverses capes de mapes alhora, com traces GPX o de navegació, PDIs, favorits, parades de transport públic, etc. amb nivell d\'opacitat personalitzada - Cerca fora de línia d\'adreces i llocs - Càlcul de rutes fora de línia per distàncies \'abast mitjà - Modalitats cotxe, bicicleta i vianant - Canvi automàtic de vista diürna a nocturna, opcional - Ampliació automàtica del mapa segons la velocitat, opcional - Alineació automàtica del mapa segons la brúixola o la direcció del moviment, opcional - Indicació de carril, velocitat màxima permesa, veus enregistrades i/o sintetitzades"</string>
     <string name="rendering_attr_contourLines_description">Seleccioneu el nivell mínim de zoom per mostrar el mapa si està disponible. Caldrà el fitxer SRTM separat:</string>
     <string name="osmand_development_plugin_description">Aquest connector mostra la configuració de característiques per al desenvolupament i depuració com la verificació o simulació de rutes, el rendiment del renderitzat o les indicacions de veu. Aquestes configuracions s\'adrecen a desenvolupadors i no són d\'utilitat per a un usuari normal.</string>
-    <string name="accessibility_default">En consonància amb la configuració global del sistema</string>
+    <string name="accessibility_default">En consonància amb la configuració del sistema Android</string>
     <string name="zoomIs">El nivell de zoom és</string>
     <string name="settings_direction_style_descr">Trieu l\'estil per indicar direccions relatives mentre s\'està en moviment.</string>
     <string name="index_name_other">Mapes mundials i temàtics</string>
@@ -516,14 +516,14 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="fav_imported_sucessfully">Els preferits s\'han importat</string>
     <string name="fav_file_to_load_not_found">El fitxer GPX que conté els preferits no s\'ha trobat a {0}</string>
     <string name="fav_saved_sucessfully">Els preferits s\'han desat a {0}</string>
-    <string name="error_occurred_loading_gpx">S\'ha produït un error en carregar el GPX</string>
+    <string name="error_occurred_loading_gpx">No s\'ha pogut carregar el GPX</string>
     <string name="send_report">Envia un informe</string>
-    <string name="none_region_found">No s\'ha trobat dades de les regions a la targeta de memòria. Cal que us baixeu les regions des d\'Internet.</string>
+    <string name="none_region_found">No s\'ha pogut trobar cap mapa baixat a la targeta de memòria.</string>
     <string name="layer_yandex_traffic">Trànsit Yandex</string>
     <string name="layer_route">Ruta</string>
     <string name="shared_string_favorites">Preferits</string>
     <string name="menu_layers">Defineix la visualització</string>
-    <string name="use_trackball_descr">Utilitzeu el ratolí de bola per moure el mapa.</string>
+    <string name="use_trackball_descr">Utilitzeu un ratolí de bola per moure el mapa.</string>
     <string name="use_trackball">Utilitza el ratolí de bola</string>
     <string name="process_navigation_service">Servei de navegació de l\'OsmAnd</string>
     <string name="osmand_parking_position_description_add">Per rectirar el vehicle a:</string>
@@ -553,10 +553,10 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="continuous_rendering">Dibuixat continu</string>
     <string name="use_high_res_maps">Pantalla d\'alta resolució</string>
     <string name="voice">Veu enregistrada</string>
-    <string name="error_reading_gpx">S\'ha produït un error en llegir les dades del GPX</string>
-    <string name="thanks_yandex_traffic">Gracies a Yandex per informació del transit.</string>
+    <string name="error_reading_gpx">No s\'han pogut llegir les dades GPX</string>
+    <string name="thanks_yandex_traffic">Gràcies a Yandex per la informació del trànsit.</string>
     <string name="no_fav_to_save">Cap punt preferit per desar</string>
-    <string name="background_router_service_descr">Executa OsmAnd en segon pla per seguir la teva posició mentre la pantalla està inactiva.</string>
+    <string name="background_router_service_descr">Registreu la vostra posició mentre la pantalla està inactiva.</string>
     <string name="voice_data_not_supported">Versió no suportada de les dades de veu</string>
     <string name="voice_data_corrupted">Les dades se veu especificades estan corruptes</string>
     <string name="sd_unmounted">No es pot accedir a la targeta de memòria.
@@ -567,7 +567,7 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="map_orientation_default">El mateix que el dispositiu</string>
     <string name="add_new_rule">Afegir nova regla</string>
     <string name="update_poi_no_offline_poi_index">No hi ha dades PDI fora de linía per a aquesta area</string>
-    <string name="update_poi_error_local">Error actualitzant la llista de PDIs</string>
+    <string name="update_poi_error_local">"No s\'ha pogut  actualitzar la llista local de PDIs"</string>
     <string name="max_level_download_tile">Max. zooms en linía</string>
     <string name="router_service">Servei de navegació</string>
     <string name="downloading_list_indexes">Baixant llista de les regions disponibles…</string>
@@ -616,7 +616,7 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="continuous_rendering_descr">Mostra la renderització contínua en lloc d\'una imatge de cop.</string>
     <string name="uploading_data">Penjant les dades…</string>
     <string name="search_nothing_found">No s\'ha trobat res</string>
-    <string name="list_index_files_was_not_loaded">No s\'ha recuperat la llista de les regions des de https://osmand.net.</string>
+    <string name="list_index_files_was_not_loaded">No s\'ha pogut buscar la llista de regions de https://osmand.net.</string>
     <string name="failed_op">fallada</string>
     <string name="error_occurred_saving_gpx">S\'ha produït un error en desar el GPX</string>
     <string name="osm_settings_descr">Especifiqueu els paràmetres d\'Openstreetmap.org (OSM) que calen per les trameses a OSM.</string>
@@ -656,7 +656,7 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="voice_is_not_available_title">Cap guiatge de veu seleccionat</string>
     <string name="daynight_descr">Indiqueu el criteri de commutació entre el mode nocturn i el diürn.</string>
     <string name="maps_could_not_be_downloaded">Aquest mapa podria no haver-se baixat</string>
-    <string name="rendering_exception">Ha ocorregut un error mentres s\'estava renderitzant l\'àrea seleccionada</string>
+    <string name="rendering_exception">No s\'ha pogut dibuixar l\'àrea seleccionada</string>
     <string name="show_point_options">Utilitza la ubicació…</string>
     <string name="renderer_load_sucess">El renderitzador s\'ha carregat</string>
     <string name="fav_points_not_exist">No hi ha punts preferits</string>
@@ -681,8 +681,8 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     
     
     <string name="voice_data_unavailable">Les dades de veu seleccionades no estan disponibles</string>
-    <string name="search_poi_location">Cercant senyal…</string>
-    <string name="opening_hours_not_supported">Format d\'horaris d\'obertura no suportat per a l\'edició</string>
+    <string name="search_poi_location">Esperant el senyal…</string>
+    <string name="opening_hours_not_supported">El format d\'horaris d\'obertura no es pot modificar</string>
     <string name="transport_to_go_after">prioritza distancia</string>
     <string name="hello">Aplicació de navegació OsmAnd</string>
     <string name="osmand_rastermaps_plugin_description">"Amb aquest connector podeu accedir a diferents tipus de mapa (anomenats mosaic o ràster), des de les tessel·les predefinides d\'OpenStreetMap (com Mapnik) a imatges de satèl·lit i capes específiques com mapes meteorològics, climàtics, geològics, de relleu, etc. 
@@ -712,13 +712,15 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="poi_filter_sightseeing">Vistes panoràmiques</string>
     <string name="poi_filter_car_aid">Assistència a vehicles</string>
     <string name="create_poi_link_to_osm_doc">Llegenda del mapa <u>OSM en línia</u> amb imatges.</string>
-    <string name="osmand_routing_experimental">La navegació fora de línia de l\'OsmAnd és una característica experimental i no funciona per distàncies superiors als 20Km.\n\nEl servei de navegació s\'ha desviat temporalment cap a CloudMade en línia.</string>
-    <string name="renderer_load_exception">S\'ha produït una excepció: Renderitzador no carregat</string>
+    <string name="osmand_routing_experimental">La navegació fora de línia de l\'OsmAnd és una característica experimental i no funciona per distàncies superiors als 20 km.
+\n
+\nLa navegació s\'ha desviat temporalment cap a CloudMade en línia.</string>
+    <string name="renderer_load_exception">No s\'ha pogut carregar el renderitzador</string>
     <string name="context_menu_item_search_transport">Cerca de transports públics</string>
     <string name="transport_search_again">Reinicia la cerca de transport</string>
     <string name="no_vector_map_loaded">Els mapes de vectors no s\'han carregat</string>
     <string name="gpx_files_not_found">No s\'ha trobat cap fitxer GPX a la carpeta de traces</string>
-    <string name="rotate_map_to_bearing_descr">Seleccioneu l\'alineació de la pantalla del mapa.</string>
+    <string name="rotate_map_to_bearing_descr">Seleccioneu l\'orientació del mapa.</string>
     <string name="background_service_int">Interval d\'activació del GPS</string>
     <string name="voice_provider_descr">Trieu el guiatge de veu en la navegació.</string>
     <string name="voice_provider">Guiatge per veu</string>
@@ -763,7 +765,7 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="mark_point">Objectiu</string>
     <string name="edit_filter_delete_message">El filtre {0} s\'ha eliminat</string>
     <string name="update_poi_success">Les dades dels PDI s\'han actualitzat (se n\'han carregat {0})</string>
-    <string name="update_poi_error_loading">S\'ha produït un error quan s\'estava carregant les dades des del servidor</string>
+    <string name="update_poi_error_loading">No s\'han pogut carregar les dades del servidor</string>
     <string name="update_poi_is_not_available_for_zoom">L\'actualització dels PDI no està disponible pels nivells de zoom més petits</string>
     <string name="context_menu_item_update_map_confirm">Voleu actualitzar les dades locals des d\'Internet?</string>
     <string name="search_history_building">Edificis: {0}, {1}, {2}</string>
@@ -859,8 +861,8 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="download_srtm_maps">Dades de corbes de nivell</string>
     <string name="incomplete_locale">incomplet</string>
     <string name="use_high_res_maps_descr">No ampliïs (ni difuminis) les tessel·les del mapa en pantalles d\'alta densitat.</string>
-    <string name="sd_mounted_ro">La targeta de memòria només és de lectura.
-\nPodeu visualitzar el mapa precarregat i però no podeu baixar-ne des d\'Internet.</string>
+    <string name="sd_mounted_ro">La targeta de memòria només és de lectura. 
+\nNomés es poden veure els mapes ja carregats, però no baixar noves zones.</string>
     <string name="map_orientation_portrait">Vertical</string>
     <string name="map_screen_orientation_descr">Vertical, apaïsat, o segons el dispositiu.</string>
     <string name="opening_changeset">S\'estan obrint les modificacions…</string>
@@ -889,7 +891,7 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="loading_builds_failed">L\'obtenció del llistat de versions de l\'OsmAnd ha fallat</string>
     <string name="contribution_activity">Activitat especial per la versió dels col·laboradors</string>
     <string name="transport_context_menu">Cerca transport a la parada</string>
-    <string name="background_service_wait_int_descr">Establiu el temps màxim d\'espera per a cada correcció de la posició en segon pla.</string>
+    <string name="background_service_wait_int_descr">Establiu el temps màxim d\'espera permès per a cada correcció de la posició en segon pla.</string>
     <string name="background_service_wait_int">Espera màxima per corregir</string>
     <string name="local_indexes_cat_av">Dades d\'àudio/vídeo</string>
     <string name="stop_routing_confirm">Esteu segur què voleu aturar la navegació?</string>
@@ -1069,28 +1071,28 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="map_widget_fps_info">Info depuració FPS</string>
     <string name="intermediate_items_sort_return">S\'han reordenat les fites per optimitzar la ruta que les inclou des de la ubicació actual fins a la destinació.</string>
     <string name="osmand_distance_planning_plugin_description">Aquest connector proporciona un giny de la pantalla del mapa que permet crear itineraris en prémer sobre el mapa o bé amb l\'ús o la modificació de fitxers GPX existents, per planificar un trajecte o mesurar la distància entre punts. Els resultats es poden desar com un fitxer GPX que podreu usar més endavant com una referència.</string>
-    <string name="android_19_location_disabled">"Des de la versió 4.4 d\'Android (KitKat) no es pot baixar i actualitzar després els mapes a la mateixa carpeta (%s). Voleu canviar-la a un altre lloc permès i copiar-hi tots els fitxers de l\'OsmAnd?
-\n Nota 1: Els vostres fitxers obsolets  quedaran intactes (els podeu esborrar manualment).
+    <string name="android_19_location_disabled">"Des de la versió 4.4 d\'Android (KitKat) no podeu baixar i actualitzar els mapes en l\'antiga carpeta (%s). Voleu copiar tots els fitxers de l\'OsmAnd a la nova destinació? 
+\n Nota 1: Els vostres fitxers obsolets  quedaran intactes (els podeu esborrar manualment). 
 \n Nota 2: En el nou lloc d\'emmagatzemament no serà possible compartir fitxers entre l\'OsmAnd i l\'OsmAnd+."</string>
     <string name="copying_osmand_one_file_descr">S\'està copiant el fitxer (%s) a la nova destinació…</string>
     <string name="copying_osmand_files_descr">S\'estan copiant els fitxers de dades de l\'OsmAnd a la nova destinació (%s)…</string>
     <string name="copying_osmand_files">S\'estan copiant fitxers de dades de l\'OsmAnd…</string>
-    <string name="calculate_osmand_route_gpx">Calcula una ruta fora de línia amb l\'OsmAnd</string>
+    <string name="calculate_osmand_route_gpx">Càlcul d\'una ruta sense línia amb l\'OsmAnd</string>
     <string name="app_mode_truck">Camió</string>
     <string name="routing_attr_prefer_motorway_name">Preferència per autopistes</string>
-    <string name="routing_attr_prefer_motorway_description">Preferència per autopistes.</string>
+    <string name="routing_attr_prefer_motorway_description">Preferència per autopistes</string>
     
     
     <string name="routing_attr_avoid_toll_name">Evita vies de peatge</string>
-    <string name="routing_attr_avoid_toll_description">Evita les vies de peatge.</string>
+    <string name="routing_attr_avoid_toll_description">Evita les vies de peatge</string>
     <string name="routing_attr_avoid_unpaved_name">Evita les vies sense pavimentar</string>
     <string name="routing_attr_avoid_unpaved_description">Evita les vies sense pavimentar.</string>
     <string name="routing_attr_avoid_ferries_name">Evita transbordadors</string>
-    <string name="routing_attr_avoid_ferries_description">Evita els transbordadors.</string>
+    <string name="routing_attr_avoid_ferries_description">Evita els transbordadors</string>
     <string name="routing_attr_avoid_motorway_name">Evita autopistes</string>
-    <string name="routing_attr_avoid_motorway_description">Evita les autopistes.</string>
+    <string name="routing_attr_avoid_motorway_description">Evita autopistes</string>
     <string name="routing_attr_weight_name">Límit de pes</string>
-    <string name="routing_attr_weight_description">Especifiqueu el pes del vehicle que les rutes han d\'admetre.</string>
+    <string name="routing_attr_weight_description">Especifica el límit de pes permès del vehicle a les rutes.</string>
     <string name="background_service_int_descr">Trieu l\'interval d\'activació que seguirà el servei en segon pla.</string>
     <string name="av_photo_play_sound_descr">Trieu si voleu reproduir un so en fer fotos.</string>
     <string name="av_camera_focus_continuous">La càmera intenta enfocar de manera contínua</string>
@@ -1629,7 +1631,7 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="shared_string_copy">Copia</string>
     <string name="rendering_attr_hideHouseNumbers_name">Numeració de finques</string>
     
-    <string name="routing_attr_avoid_borders_description">Evita creuar la frontera a un altre país.</string>
+    <string name="routing_attr_avoid_borders_description">Evita creuar les fronteres</string>
     <string name="routing_attr_height_name">Límit d\'alçada</string>
     <string name="routing_attr_height_description">Indiqueu l\'alçada del vehicle que les rutes han d\'admetre.</string>
     <string name="use_fast_recalculation">Recàlcul intel·ligent de la ruta</string>
@@ -1904,7 +1906,7 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="use_drawer_btn">Utilitza el menú</string>
     <string name="please_specify_poi_type_only_from_list">Especifiqueu el tipus de PDI adient o deixeu-ho buit.</string>
     <string name="routing_attr_avoid_stairs_name">Evita les escales</string>
-	<string name="routing_attr_avoid_stairs_description">Evita les escales.</string>
+	<string name="routing_attr_avoid_stairs_description">Evita les escales</string>
 	<string name="routing_attr_avoid_borders_name">Evita els pasos fronterers</string>
 	<string name="rendering_attr_horseRoutes_name">Rutes a cavall</string>
     <string name="no_address_found">No s\'ha determinat cap adreça</string>
@@ -1963,7 +1965,7 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="reports_for">Informe per</string>
 <string name="shared_string_select">Selecciona</string>
     <string name="shared_string_remove">Esborra</string>
-    <string name="clear_updates_proposition_message">Podeu esborrar les actualitzacions baixades i tornar a l\'edició original del mapa</string>
+    <string name="clear_updates_proposition_message">Esborra les actualitzacions baixades i torna a la versió anterior del mapa</string>
     <string name="road_blocked">Via tallada</string>
     <string name="rendering_attr_hideUnderground_name">Elements soterrats</string>
     <string name="data_is_not_available">No es disposa de dades</string>
@@ -1989,7 +1991,7 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="osm_live_hide_user_name">No mostris el meu nom en els informes</string>
     <string name="osm_live_user_public_name">Nom públic</string>
     <string name="osm_live_month_cost">Cost mensual</string>
-    <string name="osm_live_month_cost_desc">Pagament mensual.</string>
+    <string name="osm_live_month_cost_desc">Pagament mensual</string>
     <string name="osm_live_active">Activa</string>
     <string name="osm_live_not_active">Desactiva</string>
     <string name="osm_live_enter_email">Introduïu una adreça d\'e-mail vàlida</string>
@@ -2027,7 +2029,7 @@ L\'espai disponible és només de {2} MB.</string>
 \n
 \n i encara més…</string>
     <string name="osm_live_subscription">Subscripció a OsmAnd Live</string>
-    <string name="osm_live_email_desc">Cal proporcionar-vos informació d\'aportacions.</string>
+    <string name="osm_live_email_desc">Per informar-vos d\'aportacions.</string>
     <string name="osm_live_support_region">Zona de suport</string>
     <string name="osm_live_thanks">Us agraïm haver-vos subscrit a les actualitzacions en directe</string>
     <string name="osm_live_region_desc">Una part del vostre donatiu s\'enviarà als usuaris d\'OSM que enviïn modificacions del mapa a aquesta regió.</string>
@@ -2052,7 +2054,7 @@ L\'espai disponible és només de {2} MB.</string>
 <string name="no_map_markers_found">Afegiu els marcadors de mapa amb el mapa</string>
     <string name="osm_live_header">"Aquesta subscripció permet actualitzacions horàries de tots els mapes del món. Part dels ingressos es retornen a la comunitat OSM en retribuir cada contribució OSM. Si aprecieu OsmAnd  i OSM i els voleu recolzar mentre l\'utilitzeu, aquesta és la via perfecta per fer-ho."</string>
     
-    <string name="upload_osm_note_description">Podeu pujar la vostra nota OSM anònimament o utilitzant el vostre perfil a OpenStreetMap.org.</string>
+    <string name="upload_osm_note_description">Pugeu la vostra nota OSM anònimament o utilitzant el vostre perfil a OpenStreetMap.org.</string>
     <string name="add_time_span">Afegeix un lapse de temps</string>
     <string name="rec_split">Divisió d\'enregistrament</string>
     <string name="rec_split_title">Utilitza divisió d\'enregistrament</string>
@@ -2166,12 +2168,12 @@ L\'espai disponible és només de {2} MB.</string>
     <string name="si_mi_meters">Milles/metres</string>
     <string name="get_for">Obteniu-lo per %1$s</string>
     <string name="get_for_month">Obteniu-lo per %1$s al mes</string>
-    <string name="osm_live_banner_desc">Obteniu nous mapes i actualitzacions sense límit més sovint d\'un cop al mes: cada hora, dia o setmana.</string>
+    <string name="osm_live_banner_desc">Obteniu nous mapes i actualitzacions sense límit més d\'un cop al mes: Cada hora, dia o setmana.</string>
     <string name="osmand_plus_banner_desc">Baixada il·limitada de mapes, actualitzacions i el connector Viquipèdia.</string>
     <string name="get_it">Obteniu-lo</string>
-    <string name="osm_live_payment_desc">El cost de subscripció es carregarà mensualment. Podeu cancel·lar la subscripció a Google Play quan vulgueu.</string>
+    <string name="osm_live_payment_desc">La subscripció es carregar mensualment. Cancel·leu-la amb Google Play quan ho desitgeu.</string>
     <string name="donation_to_osm">Donació a la comunitat OpenStreetMap</string>
-    <string name="donation_to_osm_desc">"Part de la vostra donació s\'enviarà als usuaris d\'OSM que facin edicions a OpenStreetMaps.  El cost de la subscripció és el mateix."</string>
+    <string name="donation_to_osm_desc">"Part de la vostra donació s\'envia als usuaris d\'OSM que facin edicions a OpenStreetMaps.  El cost de la subscripció és el mateix."</string>
     <string name="osm_live_subscription_desc">La subscripció permet actualitzacions setmanals, diàries i horàries i baixades sense limitació de qualsevol mapa del món.</string>
     <string name="driving_region_australia">Austràlia</string>
     <string name="lang_kab">Cabil</string>
@@ -2180,7 +2182,7 @@ L\'espai disponible és només de {2} MB.</string>
     <string name="save_filter">Desa el filtre</string>
     <string name="delete_filter">Esborra el filtre</string>
     <string name="new_filter">Filtre nou</string>
-    <string name="new_filter_desc">Introduïu un nom pel nou filtre amb el que s\'afegirà a la vostra pestanya de categories.</string>
+    <string name="new_filter_desc">Introduïu un nom pel nou filtre amb el que s\'afegirà a la vostra pestanya \'Categories\'.</string>
     <string name="selected_categories">Categories seleccionades</string>
     <string name="create_custom_poi">Crea filtre personalitzat</string>
     <string name="custom_search">Cerca personalitzada</string>
@@ -2409,7 +2411,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="full_version_thanks">Us agraïm la compra de la versió de pagament d\'OsmAnd.</string>
     <string name="do_not_send_anonymous_app_usage">No enviïs anònimament les estadístiques d\'ús de l\'aplicació</string>
     <string name="do_not_send_anonymous_app_usage_desc">OsmAnd recull informació respecte com utilitzeu l\'aplicació. No s\'envia mai la vostra localització, tampoc les entrades que feu ni els detalls de les zones que consulteu, cerqueu o baixeu.</string>
-    <string name="do_not_show_startup_messages">No mostris missatges en engegar</string>
+    <string name="do_not_show_startup_messages">No mostris missatges inicials</string>
     <string name="do_not_show_startup_messages_desc">No mostris descomptes de l\'aplicació ni missatges d\'esdeveniments locals destacats.</string>
     <string name="parking_options">Opcions d\'aparcament</string>
     <string name="right_side_navigation">Conducció per la dreta</string>
@@ -2431,22 +2433,22 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="subscribe_email_desc">Subscriviu-vos a la nostra llista de correu sobre descomptes a la aplicació i aconseguiu 3 baixades de mapa addicionals!</string>
     <string name="no_overlay">Sense superposició</string>
     <string name="no_underlay">Sense sots-posició</string>
-    <string name="sea_depth_thanks">Us agraïm la compra de les isòbates</string>
+    <string name="sea_depth_thanks">Us agraïm la compra d\' \'Isòbates\'</string>
     <string name="index_item_depth_contours_osmand_ext">Isòbates</string>
     <string name="index_item_depth_points_southern_hemisphere">Fondària marina puntual a l\'hemisferi sud</string>
     <string name="index_item_depth_points_northern_hemisphere">Fondària marina puntual a l\'hemisferi nord</string>
     <string name="download_depth_countours">Isòbates</string>
     <string name="nautical_maps">Cartes nàutiques</string>
     <string name="quick_action_auto_zoom">Escala automàtica del mapa activa/desactiva</string>
-    <string name="quick_action_auto_zoom_desc">Prement aquest botó d\'acció commutareu l\'escala automàtica del mapa en funció de la vostra velocitat.</string>
+    <string name="quick_action_auto_zoom_desc">Prement aquest botó d\'acció commuteu l\'escala automàtica del mapa segons la vostra velocitat.</string>
     <string name="quick_action_auto_zoom_on">Activa l\'escala automàtica del mapa</string>
     <string name="quick_action_auto_zoom_off">Desactiva l\'escala automàtica del mapa</string>
     <string name="quick_action_add_destination">Afegeix destinació</string>
     <string name="quick_action_replace_destination">Substitueix destinació</string>
     <string name="quick_action_add_first_intermediate">Afegeix primer intermedi</string>
-    <string name="quick_action_add_destination_desc">Prement aquest botó d\'acció convertireu el punt central de la pantalla en el nou destí i qualsevol destinació anterior esdevindrà la darrera destinació intermèdia.</string>
-    <string name="quick_action_replace_destination_desc">Prement aquest botó d\'acció agafareu el punt central de la pantalla com el nou destí, substituint la destinació anterior (si n\'hi havia).</string>
-    <string name="quick_action_add_first_intermediate_desc">Prement aquest botó d\'acció afegireu el punt central de la pantalla com primera destinació intermèdia.</string>
+    <string name="quick_action_add_destination_desc">Prement aquest botó d\'acció convertiu el punt central de la pantalla en el nou destí i qualsevol destinació anterior esdevé la darrera destinació intermèdia.</string>
+    <string name="quick_action_replace_destination_desc">Prement aquest botó d\'acció agafeu el punt central de la pantalla com el nou destí, substituint la destinació anterior (si n\'hi ha).</string>
+    <string name="quick_action_add_first_intermediate_desc">Prement aquest botó d\'acció afegiu el punt central de la pantalla com primera destinació intermèdia.</string>
     <string name="depth_contour_descr">Isòbates i fondàries nàutiques puntuals.</string>
     <string name="shared_string_paused">En pausa</string>
     <string name="osmand_extended_description_part3">Mapa • Mostra els PDIs (punts d\'interès) al vostre voltant • Ajusta l\'orientació del mapa a la vostra direcció del moviment (o al nord) • Mostra on sou i com esteu orientat • Compartiu la vostra ubicació perquè els vostres amics us puguin trobar • Manté els vostres llocs més importants a \'Preferits\' • Us permet escollir com es mostrar els noms al mapa: en anglès, la lenga local o amb ortografia fonètica • Mostra representacions especialitzades disponibles a la xarxa, imatges de satèl·lit (Bing), diferents superposicions com traces GPX d\'exploració/navegació i capes addicionals amb un grau transparència variable</string>
@@ -2487,10 +2489,10 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="quick_action_showhide_osmbugs_title">Commuta Notes OSM</string>
     <string name="quick_action_osmbugs_show">Mostra notes OSM</string>
     <string name="quick_action_osmbugs_hide">Amaga notes OSM</string>
-    <string name="quick_action_showhide_osmbugs_descr">Prement aquest botó d\'acció es mostraran o ocultaran Notes OSM al mapa.</string>
+    <string name="quick_action_showhide_osmbugs_descr">Prement aquest botó d\'acció es mostren o s\'amaguen notes OSM al mapa.</string>
     <string name="sorted_by_distance">Ordenat per distància</string>
     <string name="search_favorites">Cerca a preferits</string>
-    <string name="private_access_routing_req">La vostra destinació és dins una zona amb accés privat. Voleu admetre l\'accés per vies privades en aquest trajecte?</string>
+    <string name="private_access_routing_req">La vostra destinació és dins una zona amb accés privat. Voleu creuar vies privades en aquest trajecte?</string>
     <string name="restart_search">Reprèn la cerca</string>
     <string name="increase_search_radius">Augmenta el radi de cerca</string>
     <string name="nothing_found">No s\'ha trobat res</string>
@@ -2525,7 +2527,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="mapillary_menu_edit_text_hint">Indiqueu el nom d\'usuari</string>
     <string name="mapillary_menu_descr_username">Mostra només les imatges afegides per</string>
     <string name="mapillary_menu_title_username">Nom d\'usuari</string>
-    <string name="mapillary_menu_filter_description">Podeu filtrar les imatges per remitent o per data. El filtres només s\'apliquen en apropar-se.</string>
+    <string name="mapillary_menu_filter_description">Filtreu les imatges per remitent o per data. Només s\'aplicarà en apropar-se.</string>
     <string name="shared_string_reset">Restableix</string>
     <string name="store_tracks_in_monthly_directories">Emmagatzema les traces enregistrades en carpetes mensuals</string>
     <string name="store_tracks_in_monthly_directories_descrp">Emmagatzema les traces enregistrades en sub-carpetes segons el mes d\'enregistrament (tipus 2018-01).</string>
@@ -2539,7 +2541,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="min_max">Mín/Màx</string>
     <string name="quick_action_resume_pause_navigation">Atura/continua la navegació</string>
     <string name="quick_action_resume_pause_navigation_descr">Premeu aquest botó per aturar o reprendre la navegació.</string>
-    <string name="quick_action_show_navigation_finish_dialog">Mostra el diàleg de finalització de la navegació</string>
+    <string name="quick_action_show_navigation_finish_dialog">Mostra el diàleg \'Navegació finalitzada\'</string>
     <string name="quick_action_start_stop_navigation">Inicia/atura la navegació</string>
     <string name="quick_action_start_stop_navigation_descr">Premeu aquest botó per iniciar o per aturar la navegació.</string>
     <string name="release_2_7">\\022 Connector Mapillary amb imatges a nivell de carrer
@@ -2580,7 +2582,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="add_point_after">Afegeix un punt després de</string>
     <string name="shared_string_options">Opcions</string>
     <string name="measurement_tool_snap_to_road_descr">OsmAnd enllaçarà els punts amb rutes segons el perfil seleccionat.</string>
-    <string name="measurement_tool_save_as_new_track_descr">Podeu desar els punts, ja sigui com a punts de la ruta o com una línia.</string>
+    <string name="measurement_tool_save_as_new_track_descr">Desa els punts, ja sigui com a punts de la ruta o com una línia.</string>
     <string name="choose_navigation_type">Escolliu el perfil de navegació</string>
     <string name="add_route_points">Afegeix punts de la ruta</string>
     <string name="add_line">Afegeix una línia</string>
@@ -2622,7 +2624,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="date_added">S\'ha afegit la data</string>
     <string name="order_by">Ordena segons:</string>
     <string name="marker_show_distance_descr">Seleccioneu com indicar la distància i direcció vers els marcadors de mapa a la pantalla del mapa:</string>
-    <string name="show_guide_line">Mostra les línies guia</string>
+    <string name="show_guide_line">Mostra les línies de direcció</string>
     <string name="show_arrows_on_the_map">Mostra fletxes sobre el mapa</string>
     <string name="show_passed">Mostra ja passat</string>
     <string name="hide_passed">Amaga ja passat</string>
@@ -2648,7 +2650,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="make_round_trip_descr">Afegeix una còpia de punt d\'inici com a destinació.</string>
     <string name="make_round_trip">Fes un trajecte tancat</string>
     
-    <string name="osn_modify_dialog_error">S\'ha produït una excepció: la nota no s\'ha modificat</string>
+    <string name="osn_modify_dialog_error">La nota no s\'ha pogut modificar</string>
     <string name="osn_modify_dialog_title">Modifica nota</string>
     <string name="context_menu_item_modify_note">Modifica nota d\'OSM</string>
     <string name="release_2_8">\\022 Marcadors revisats totalment amb orientacions i planificació de la ruta 
@@ -2670,9 +2672,9 @@ Abasta l\'àrea: %1$s x %2$s</string>
 	<string name="shared_string_back">Enrere</string>
 	<string name="view">Visualització</string>
 	<string name="waypoints_added_to_map_markers">Fites afegides als marcadors</string>
-	<string name="import_gpx_file_description">es poden importar com Preferits o com una traça.</string>
+	<string name="import_gpx_file_description">es pot importar com preferit o com un fitxer de traça.</string>
     <string name="import_as_gpx">Importa com un arxiu GPX</string>
-    <string name="import_as_favorites">Importa com punts Preferits</string>
+    <string name="import_as_favorites">Importa com preferit</string>
     <string name="import_file">Importa fitxer</string>
 	<string name="tap_on_map_to_hide_interface_descr">Prement el mapa canvien els botons de control i els ginys.</string>
     <string name="tap_on_map_to_hide_interface">Mode de pantalla completa</string>
@@ -2693,7 +2695,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="track_waypoints">Fites de la traça</string>
     <string name="favourites_group">Categoria de preferits</string>
     <string name="add_group">Afegeix un grup</string>
-    <string name="add_group_descr">Podeu importar grups des de preferits o des de fites d\'una traça.</string>
+    <string name="add_group_descr">Importa grups des de preferits o des de fites d\'una traça.</string>
     <string name="empty_state_markers_active">Creeu marcadors de mapa!</string>
     <string name="empty_state_markers_active_desc">Premeu molt o poc temps a \'Llocs\' i després el botó seleccionador.</string>
     <string name="empty_state_markers_groups">Importa grups</string>
@@ -2704,7 +2706,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="show_guide_line_descr">Mostra línies guia des de la vostra ubicació a les dels marcadors actius.</string>
     <string name="show_arrows_descr">Mostra una o dues fletxes indicant la direcció dels marcadors actius.</string>
     <string name="distance_indication_descr">Seleccioneu com indicar la distància als marcadors actius.</string>
-    <string name="active_markers_descr">Trieu quants indicadors de direcció es mostren.</string>
+    <string name="active_markers_descr">Trieu quants indicadors actius voleu veure.</string>
     <string name="shared_string_more_without_dots">Més</string>
     <string name="looking_for_tracks_with_waypoints">Recerca de traces amb fites</string>
     <string name="empty_state_osm_edits">Crea o modifica objectes OSM</string>
@@ -2733,9 +2735,9 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="context_menu_points_of_group">Tots els punts del grup</string>
     <string name="open_from">Obert des de</string>
     <string name="open_till">Obert fins a</string>
-    <string name="will_close_at">Es tancarà a</string>
-    <string name="will_open_at">S\'obrirà a</string>
-    <string name="will_open_on">S\'obrirà a les</string>
+    <string name="will_close_at">Tanca a les</string>
+    <string name="will_open_at">Obre a les</string>
+    <string name="will_open_on">Obre a les</string>
     <string name="additional_actions">Accions addicionals</string>
     <string name="av_locations_selected_desc">Arxiu GPX amb coordenades i dades de les notes seleccionades.</string>
     <string name="av_locations_all_desc">Fitxer GPX amb coordenades i dades de totes les notes.</string>
@@ -2746,7 +2748,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="total_donations">Total de donacions</string>
 <string name="shared_string_without_name">Sense nom</string>
     <string name="lang_lo">laosià</string>
-    <string name="will_open_tomorrow_at">S\'obrirà demà a les</string>
+    <string name="will_open_tomorrow_at">Obre demà a les</string>
     <string name="rendering_attr_hidePOILabels_name">Etiquetes PDI</string>
     <string name="day_off_label">tancat</string>
     <string name="winter_and_ski_renderer">Hivern i esquí</string>
@@ -2767,9 +2769,9 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="tunnel_warning">Túnel encarat</string>
     <string name="show_tunnels">Túnels</string>
 <string name="shared_string_current">Actual</string>
-    <string name="last_intermediate_dest_description">Afegeix la darrera parada seguint la ruta</string>
-    <string name="first_intermediate_dest_description">Afegeix la primera parada de la ruta</string>
-    <string name="subsequent_dest_description">Desplaça amunt la destinació, i crea un destí</string>
+    <string name="last_intermediate_dest_description">Afegeix una parada intermèdia</string>
+    <string name="first_intermediate_dest_description">Afegeix la primera parada</string>
+    <string name="subsequent_dest_description">Desplaça amunt la destinació, i crea-la</string>
     <string name="release_2_9">"\\022 Actualitzat el menú contextual: Mostra quan el PDI s\'obre / tanca 
 \n 
 \n• Menú de transport: totes les rutes disponibles ara són a la part superior 
@@ -2809,19 +2811,19 @@ Abasta l\'àrea: %1$s x %2$s</string>
 	<string name="north_abbreviation">N</string>
 	<string name="optional_point_name">"Nom opcional del punt "</string>
     <string name="transport_nearby_routes_within">Rutes a prop de</string>
-    <string name="transport_nearby_routes">A PROP</string>
+    <string name="transport_nearby_routes">A prop</string>
     <string name="enter_the_file_name">Introduïu el nom del fitxer.</string>
     <string name="map_import_error">Error d\'importació del mapa</string>
     <string name="map_imported_successfully">S\'ha importat el mapa</string>
     <string name="clear_all_intermediates">Esborra tots els punts intermedis</string>
     <string name="group_deleted">S\'ha esborrat el grup</string>
-    <string name="select_waypoints_category_description">Podeu agrupar les fites de totes les traces, o seleccionar categories concretes.</string>
+    <string name="select_waypoints_category_description">Agrupeu les fites de totes les traces, o seleccioneu-ne diferents categories.</string>
     <string name="shared_string_total">Total</string>
-    <string name="nothing_found_in_radius">No s\'ha trobat res dins el radi:</string>
-    <string name="use_two_digits_longitude">Longitud amb dos dígits</string>
+    <string name="nothing_found_in_radius">No s\'ha pogut trobat res:</string>
+    <string name="use_two_digits_longitude">Utilitza una longitud de dos dígits</string>
     <string name="shared_string_travel">Viatge</string>
     <string name="waypoints_removed_from_map_markers">Fites eliminades dels marcadors de mapa</string>
-    <string name="wikivoyage_search_hint">Cerca: País, Ciutat, Província</string>
+    <string name="wikivoyage_search_hint">Cerca: País, ciutat, província</string>
     <string name="shared_string_read">Llegit</string>
     <string name="saved_articles">Articles desats</string>
     <string name="shared_string_explore">Explora</string>
@@ -2829,34 +2831,35 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="shared_string_result">Resultat</string>
     <string name="shared_string_dont">No</string>
     <string name="shared_string_do">Fes</string>
-    <string name="shared_string_only_with_wifi">Només amb wi-fi</string>
+    <string name="shared_string_only_with_wifi">Només per wi-fi</string>
     <string name="wikivoyage_download_pics">Baixa les imatges</string>
-    <string name="wikivoyage_download_pics_descr">Es poden baixar i mostrar imatges dels articles i desar-les al dispositiu, així seran accessibles encara que no hi hagi connexió. Sempre podeu canviar la configuració a Exploració &gt; Opcions.</string>
-    <string name="shared_string_wifi_only">Només wi-fi</string>
+    <string name="wikivoyage_download_pics_descr">Es poden baixar imatges dels articles per accedir-hi sense connexió. 
+\nSempre podeu canviar la configuració a \'Exploració\' → \'Opcions\'.</string>
+    <string name="shared_string_wifi_only">Només per wi-fi</string>
     <string name="select_travel_book">Seleccioneu una guia de viatges</string>
     <string name="shared_string_travel_book">Guia de viatges</string>
-    <string name="online_webpage_warning">"Aquesta pàgina només es pot consultar en línia.  Voleu obrir-la en un navegador?"</string>
+    <string name="online_webpage_warning">"La pàgina només es pot consultar en línia.  La voleu obrir en un navegador?"</string>
     <string name="images_cache">Memòria cau d\'imatges</string>
     <string name="delete_search_history">Esborra l\'historial de cerca</string>
     <string name="download_images">Baixa imatges</string>
     <string name="download_maps_travel">Mapes de viatge</string>
     <string name="article_removed">Article esborrat</string>
     <string name="purchase_dialog_title">Seleccioneu un pla</string>
-    <string name="purchase_dialog_travel_description">Per llegir articles de viatge fora de línia, us cal comprar un dels elements següents.</string>
+    <string name="purchase_dialog_travel_description">Compreu un dels elements següents per llegir articles de viatge sense connexió:</string>
     <string name="purchase_dialog_subtitle">Seleccioneu l\'element adient:</string>
-    <string name="travel_guide">Guia de viatges</string>
+    <string name="travel_guide">Guia de viatges Viquiviatges</string>
     <string name="popular_destinations">Destinacions populars</string>
-    <string name="travel_card_update_descr">Hem preparat actualitzacions i correccions en les dades de Viquiviatges, actualitzeu el fitxer per a consultar-les.</string>
-	<string name="travel_card_download_descr">Baixeu aquest arxiu de guies de viatge de Viquiviatges per poder consultar articles relatius a llocs del vostre voltant sense connexió a internet.</string>
+    <string name="travel_card_update_descr">Hi ha noves dades de Viquiviatges, actualitzeu-les per aprofitar-les.</string>
+	<string name="travel_card_download_descr">Baixeu aquestes guies de viatge de Viquiviatges per poder consultar articles relatius a llocs del vostre voltant sense una connexió a internet.</string>
 	<string name="update_is_available">Actualització disponible</string>
 	<string name="download_file">Baixa el fitxer</string>
     <string name="start_editing_card_image_text">La guia de viatges de tot el món oberta que qualsevol pot editar.</string>
-    <string name="start_editing_card_description">Podeu editar qualsevol article a Viquiviatges, i així ho esperem. Ens cal el vostre coneixement, experiència, destresa i dots d\'observació</string>
+    <string name="start_editing_card_description">Podeu editar, i ho hauríeu de fer, qualsevol article a Viquiviatges. Compartiu el vostre coneixement, experiència, destresa i dots d\'observació</string>
     <string name="start_editing">Comença l\'edició</string>
     <string name="get_unlimited_access">Assoliu accés il·limitat</string>
-    <string name="welcome_to_open_beta">Benvingut a la beta oberta!</string>
-    <string name="monthly_map_updates">Actualitzacions del mapa: <b>cada mes</b></string>
-    <string name="daily_map_updates">Actualitzacions del mapa: <b>cada dia, cada hora</b></string>
+    <string name="welcome_to_open_beta">Benvingut a la beta oberta</string>
+    <string name="monthly_map_updates">Actualitzacions del mapa: <b>Cada mes</b></string>
+    <string name="daily_map_updates">Actualitzacions del mapa: <b>Cada hora</b></string>
     <string name="download_wikipedia_description">Baixeu els articles de la Viquipèdia per %1$s per llegir-los fora de línia.</string>
     <string name="download_wikipedia_label">Baixa dades de la Viquipèdia</string>
     <string name="open_in_browser_wiki">Obre l\'article en línia</string>
@@ -2864,4 +2867,36 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="download_wiki_region_placeholder">aquesta regió</string>
     <string name="wiki_article_not_found">L\'article no s\'ha trobat</string>
     <string name="how_to_open_wiki_title">Com obrir els articles de la Viquipèdia?</string>
-</resources>
+<string name="shared_string_restart">Reinicia</string>
+    <string name="show_images">Mostra les imatges</string>
+    <string name="purchase_cancelled_dialog_title">Heu cancel·lat la subscripció OsmAnd Live</string>
+    <string name="purchase_cancelled_dialog_descr">Renoveu la subscripció per continuar utilitzant totes les funcions:</string>
+
+    <string name="maps_you_need_descr">En base als articles que heu desat, recomanem que us baixeu els següents mapes:</string>
+    <string name="maps_you_need">Mapes que us calen</string>
+    <string name="osmand_team">Equip OsmAnd</string>
+    <string name="paid_app">Aplicació de pagament</string>
+    <string name="paid_plugin">Connector de pagament</string>
+    <string name="welcome_to_open_beta_description">Viatge es basa en Viquiviatges. Proveu totes les funcions durant la fase oberta de proves, de franc. Després, Viatge estarà disponible per als subscriptors de OsmAnd Il·limitat i els propietaris de OsmAnd+</string>
+    <string name="travel_guide_description">Guies dels llocs més interessants del planeta, dins OsmAnd, sense cap connexió a Internet.</string>
+    <string name="in_app_purchase">Compres des de l\'aplicació</string>
+    <string name="in_app_purchase_desc">Pagament únic</string>
+    <string name="in_app_purchase_desc_ex">Un cop comprada, estarà permanentment a la vostra disposició.</string>
+    <string name="purchase_unlim_title">Compra - %1$s</string>
+    <string name="purchase_subscription_title">Subscriu - %1$s</string>
+
+    <string name="wikivoyage_offline">Viquiviatges sense connexió</string>
+
+    <string name="unlimited_downloads">Baixades il·limitades</string>
+    <string name="wikipedia_offline">Viquipèdia sense connexió</string>
+    <string name="contour_lines_hillshade_maps">Mapes amb corbes de nivell i ombrejat de relleu</string>
+    <string name="unlock_all_features">Desbloca totes les funcions de OsmAnd</string>
+
+    <string name="shared_string_wikivoyage">"Viquiviatges "</string>
+    <string name="index_item_world_wikivoyage">Articles de Viquiviatges d\'arreu</string>
+    <string name="open_wikipedia_link_online">Obre l\'enllaç en línia de Viquipèdia</string>
+    <string name="open_wikipedia_link_online_description">OsmAnd us portarà al navegador i obrirà l\'enllaç en línia.</string>
+    <string name="how_to_open_link">Com obrir l\'enllaç?</string>
+    <string name="read_wikipedia_offline">Consulta la Viquipèdia en local</string>
+    <string name="download_all">Baixa-ho tot</string>
+    </resources>

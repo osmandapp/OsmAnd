@@ -582,10 +582,10 @@ public class ResourceManager {
 		collectFiles(appPath, IndexConstants.BINARY_MAP_INDEX_EXT, files);
 		renameRoadsFiles(files, roadsPath);
 		collectFiles(roadsPath, IndexConstants.BINARY_MAP_INDEX_EXT, files);
-		if (!Version.isFreeVersion(context) || InAppPurchaseHelper.isFullVersionPurchased(context)) {
+		if (Version.isPaidVersion(context)) {
 			collectFiles(context.getAppPath(IndexConstants.WIKI_INDEX_DIR), IndexConstants.BINARY_MAP_INDEX_EXT, files);
 		}
-		if (OsmandPlugin.getEnabledPlugin(SRTMPlugin.class) != null) {
+		if (OsmandPlugin.getEnabledPlugin(SRTMPlugin.class) != null || InAppPurchaseHelper.isSubscribedToLiveUpdates(context)) {
 			collectFiles(context.getAppPath(IndexConstants.SRTM_INDEX_DIR), IndexConstants.BINARY_MAP_INDEX_EXT, files);
 		}
 		
@@ -619,7 +619,7 @@ public class ResourceManager {
 				}
 				boolean wikiMap = (f.getName().contains("_wiki") || f.getName().contains(IndexConstants.BINARY_WIKI_MAP_INDEX_EXT));
 				boolean srtmMap = f.getName().contains(IndexConstants.BINARY_SRTM_MAP_INDEX_EXT);
-				if (mapReader == null || (Version.isFreeVersion(context) && wikiMap && !InAppPurchaseHelper.isFullVersionPurchased(context))) {
+				if (mapReader == null || (!Version.isPaidVersion(context) && wikiMap)) {
 					warnings.add(MessageFormat.format(context.getString(R.string.version_index_is_not_supported), f.getName())); //$NON-NLS-1$
 				} else {
 					if (mapReader.isBasemap()) {
@@ -852,18 +852,8 @@ public class ResourceManager {
 		return map;
 	}
 
-	public List<AmenityIndexRepositoryBinary> getWikiAmenityRepository(double lat, double lon) {
-		List<AmenityIndexRepositoryBinary> repos = new ArrayList<>();
-		for (String filename : amenityRepositories.keySet()) {
-			if (filename.contains("_wiki")
-					|| filename.contains(IndexConstants.BINARY_WIKI_MAP_INDEX_EXT)) {
-				AmenityIndexRepository repository = amenityRepositories.get(filename);
-				if (repository.checkContains(lat, lon) && repository instanceof AmenityIndexRepositoryBinary) {
-					repos.add((AmenityIndexRepositoryBinary) repository);
-				}
-			}
-		}
-		return repos;
+	public AmenityIndexRepositoryBinary getAmenityRepositoryByFileName(String filename) {
+		return (AmenityIndexRepositoryBinary) amenityRepositories.get(filename);
 	}
 	
 	////////////////////////////////////////////// Working with address ///////////////////////////////////////////
