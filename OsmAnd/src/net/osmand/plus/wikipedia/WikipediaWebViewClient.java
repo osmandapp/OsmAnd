@@ -28,28 +28,11 @@ public class WikipediaWebViewClient extends WebViewClient {
 	@Override
 	public boolean shouldOverrideUrlLoading(WebView view, String url) {
 		if (url.startsWith(PAGE_PREFIX_HTTP) || url.startsWith(PAGE_PREFIX_HTTPS)) {
-			warnAboutExternalLoad(url, context, nightMode);
+			WikiArticleHelper.warnAboutExternalLoad(url, context, nightMode);
 		} else {
 			Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
 			context.startActivity(i);
 		}
 		return true;
-	}
-
-	private static void warnAboutExternalLoad(final String url, final Context context, final boolean nightMode) {
-		if (context == null) {
-			return;
-		}
-		new AlertDialog.Builder(context)
-				.setTitle(url)
-				.setMessage(R.string.online_webpage_warning)
-				.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						WikipediaDialogFragment.showFullArticle(context, Uri.parse(url), nightMode);
-					}
-				})
-				.setNegativeButton(R.string.shared_string_cancel, null)
-				.show();
 	}
 }
