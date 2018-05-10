@@ -3,7 +3,6 @@ package net.osmand.plus.wikivoyage.data;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.Size;
-import android.text.Html;
 import android.text.TextUtils;
 
 import net.osmand.plus.GPXUtilities.GPXFile;
@@ -16,8 +15,6 @@ public class TravelArticle {
 	private static final String IMAGE_ROOT_URL = "https://upload.wikimedia.org/wikipedia/commons/";
 	private static final String THUMB_PREFIX = "320px-";
 	private static final String REGULAR_PREFIX = "800px-";
-
-	private static final int PARTIAL_CONTENT_PHRASES = 3;
 
 	String id;
 	String title;
@@ -83,49 +80,6 @@ public class TravelArticle {
 
 	public String getAggregatedPartOf() {
 		return aggregatedPartOf;
-	}
-
-	@Nullable
-	public String getPartialContent() {
-		if (content == null) {
-			return null;
-		}
-
-		String pOpened = "<p>";
-		String pClosed = "</p>";
-
-		int firstParagraphStart = content.indexOf(pOpened);
-		int firstParagraphEnd = content.indexOf(pClosed);
-		if (firstParagraphStart == -1 || firstParagraphEnd == -1
-				|| firstParagraphEnd < firstParagraphStart) {
-			return null;
-		}
-		int pClosedLength = pClosed.length();
-		String firstParagraphHtml = content.substring(firstParagraphStart, firstParagraphEnd + pClosedLength);
-		while (firstParagraphHtml.length() == (pOpened.length() + pClosedLength)
-				&& (firstParagraphEnd + pClosedLength) < content.length()) {
-			firstParagraphStart = content.indexOf(pOpened, firstParagraphEnd);
-			firstParagraphEnd = firstParagraphStart == -1 ? -1 : content.indexOf(pClosed, firstParagraphStart);
-			if (firstParagraphStart != -1 && firstParagraphEnd != -1) {
-				firstParagraphHtml = content.substring(firstParagraphStart, firstParagraphEnd + pClosedLength);
-			} else {
-				break;
-			}
-		}
-
-		String firstParagraphText = Html.fromHtml(firstParagraphHtml).toString().trim();
-		String[] phrases = firstParagraphText.split("\\. ");
-
-		StringBuilder res = new StringBuilder();
-		int limit = Math.min(phrases.length, PARTIAL_CONTENT_PHRASES);
-		for (int i = 0; i < limit; i++) {
-			res.append(phrases[i]);
-			if (i < limit - 1) {
-				res.append(". ");
-			}
-		}
-
-		return res.toString();
 	}
 
 	@Nullable

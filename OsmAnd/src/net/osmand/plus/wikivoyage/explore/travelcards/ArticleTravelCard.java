@@ -16,6 +16,7 @@ import net.osmand.PicassoUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.widgets.tools.CropCircleTransformation;
+import net.osmand.plus.wikipedia.WikiArticleHelper;
 import net.osmand.plus.wikivoyage.WikivoyageUtils;
 import net.osmand.plus.wikivoyage.article.WikivoyageArticleDialogFragment;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
@@ -64,7 +65,7 @@ public class ArticleTravelCard extends BaseTravelCard {
 
 			holder.icon.setVisibility(cached != null && cached ? View.VISIBLE : View.GONE);
 			holder.title.setText(article.getTitle());
-			holder.content.setText(article.getPartialContent());
+			holder.content.setText(WikiArticleHelper.getPartialContent(article.getContent()));
 			holder.partOf.setText(article.getGeoDescription());
 			holder.leftButton.setText(app.getString(R.string.shared_string_read));
 			View.OnClickListener readClickListener = new View.OnClickListener() {

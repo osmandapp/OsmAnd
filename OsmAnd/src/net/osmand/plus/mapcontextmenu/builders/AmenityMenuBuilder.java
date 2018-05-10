@@ -397,10 +397,8 @@ public class AmenityMenuBuilder extends MenuBuilder {
 
 					final String langSelected = lng;
 					String content = amenity.getDescription(langSelected);
-					vl = (content != null) ? Html.fromHtml(content).toString() : "";
-					if (vl.length() > 300) {
-						vl = vl.substring(0, 300);
-					}
+					vl = (content != null) ? WikiArticleHelper.getPartialContent(content) : "";
+					vl = vl == null ? "" : vl;
 					hasWiki = true;
 					isWiki = true;
 					needLinks = false;

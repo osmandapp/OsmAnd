@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
+import net.osmand.plus.wikipedia.WikiArticleHelper;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -102,7 +103,7 @@ public class TravelLocalDataHelper {
 			saved.lang = article.lang;
 			saved.aggregatedPartOf = article.aggregatedPartOf;
 			saved.imageTitle = article.imageTitle;
-			saved.content = article.getPartialContent();
+			saved.content = WikiArticleHelper.getPartialContent(article.getContent());
 			saved.lat = article.lat;
 			saved.lon = article.lon;
 			savedArticles.add(saved);
