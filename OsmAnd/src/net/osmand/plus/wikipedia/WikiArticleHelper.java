@@ -47,6 +47,8 @@ public class WikiArticleHelper {
 	private MapActivity mapActivity;
 
 	private boolean nightMode;
+	private static final String P_OPENED = "<p>";
+	private static final String P_CLOSED = "</p>";
 
 	public WikiArticleHelper(MapActivity mapActivity, boolean nightMode) {
 		this.mapActivity = mapActivity;
@@ -241,23 +243,19 @@ public class WikiArticleHelper {
 			return null;
 		}
 
-		String pOpened = "<p>";
-		String pClosed = "</p>";
-
-		int firstParagraphStart = content.indexOf(pOpened);
-		int firstParagraphEnd = content.indexOf(pClosed);
+		int firstParagraphStart = content.indexOf(P_OPENED);
+		int firstParagraphEnd = content.indexOf(P_CLOSED);
 		if (firstParagraphStart == -1 || firstParagraphEnd == -1
 				|| firstParagraphEnd < firstParagraphStart) {
 			return null;
 		}
-		int pClosedLength = pClosed.length();
-		String firstParagraphHtml = content.substring(firstParagraphStart, firstParagraphEnd + pClosedLength);
-		while (firstParagraphHtml.length() == (pOpened.length() + pClosedLength)
-				&& (firstParagraphEnd + pClosedLength) < content.length()) {
-			firstParagraphStart = content.indexOf(pOpened, firstParagraphEnd);
-			firstParagraphEnd = firstParagraphStart == -1 ? -1 : content.indexOf(pClosed, firstParagraphStart);
+		String firstParagraphHtml = content.substring(firstParagraphStart, firstParagraphEnd + P_CLOSED.length());
+		while (firstParagraphHtml.length() == (P_OPENED.length() + P_CLOSED.length())
+				&& (firstParagraphEnd + P_CLOSED.length()) < content.length()) {
+			firstParagraphStart = content.indexOf(P_OPENED, firstParagraphEnd);
+			firstParagraphEnd = firstParagraphStart == -1 ? -1 : content.indexOf(P_CLOSED, firstParagraphStart);
 			if (firstParagraphStart != -1 && firstParagraphEnd != -1) {
-				firstParagraphHtml = content.substring(firstParagraphStart, firstParagraphEnd + pClosedLength);
+				firstParagraphHtml = content.substring(firstParagraphStart, firstParagraphEnd + P_CLOSED.length());
 			} else {
 				break;
 			}
