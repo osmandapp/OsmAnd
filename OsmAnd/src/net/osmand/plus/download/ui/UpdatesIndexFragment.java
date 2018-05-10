@@ -2,6 +2,7 @@ package net.osmand.plus.download.ui;
 
 import android.app.Activity;
 import android.content.Context;
+import android.icu.text.Collator;
 import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBar;
@@ -15,7 +16,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-
 import net.osmand.map.OsmandRegions;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
@@ -94,11 +94,12 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 		OsmandSettings settings = getMyApplication().getSettings();
 		listAdapter = new UpdateIndexAdapter(a, R.layout.download_index_list_item, indexItems,
 				!InAppPurchaseHelper.isSubscribedToLiveUpdates(getMyApplication()) || settings.SHOULD_SHOW_FREE_VERSION_BANNER.get());
+		final Collator collator = Collator.getInstance();
 		listAdapter.sort(new Comparator<IndexItem>() {
 			@Override
 			public int compare(IndexItem indexItem, IndexItem indexItem2) {
-				return indexItem.getVisibleName(getMyApplication(), osmandRegions)
-						.compareTo(indexItem2.getVisibleName(getMyApplication(), osmandRegions));
+				return collator.compare(indexItem.getVisibleName(getMyApplication(), osmandRegions), 
+						indexItem2.getVisibleName(getMyApplication(), osmandRegions));
 			}
 		});
 		setListAdapter(listAdapter);
