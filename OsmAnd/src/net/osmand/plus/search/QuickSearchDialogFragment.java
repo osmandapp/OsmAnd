@@ -1685,7 +1685,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 					if (!hasRegionCollection && resultListener != null) {
 						resultListener.publish(getResultCollection(), append);
 					}
-					if (SearchUICore.isDebugMode()) {
+					if (SearchUICore.isDebugMode() && getResultCollection() != null) {
 						LOG.info("UI >> API results shown <" + phrase + "> API=<" + searchApi + "> Results=" + getResultCollection().getCurrentSearchResults().size());
 					}
 				}
