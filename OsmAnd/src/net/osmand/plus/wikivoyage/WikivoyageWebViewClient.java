@@ -19,7 +19,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.wikipedia.WikipediaArticleHelper;
+import net.osmand.plus.wikipedia.WikiArticleHelper;
 import net.osmand.plus.wikipedia.WikipediaDialogFragment;
 import net.osmand.plus.wikivoyage.article.WikivoyageArticleDialogFragment;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
@@ -50,7 +50,7 @@ public class WikivoyageWebViewClient extends WebViewClient {
 	private static final String PAGE_PREFIX_HTTPS = "https://";
 	private static final String WIKIVOAYAGE_DOMAIN = ".wikivoyage.org/wiki/";
 	private static final String WIKI_DOMAIN = ".wikipedia.org/wiki/";
-	private WikipediaArticleHelper wikipediaArticleHelper;
+	private WikiArticleHelper wikiArticleHelper;
 
 
 	public WikivoyageWebViewClient(FragmentActivity context, FragmentManager fm, boolean nightMode) {
@@ -58,26 +58,26 @@ public class WikivoyageWebViewClient extends WebViewClient {
 		fragmentManager = fm;
 		this.context = context;
 		this.nightMode = nightMode;
-		wikipediaArticleHelper = new WikipediaArticleHelper((MapActivity) context, nightMode);
+		wikiArticleHelper = new WikiArticleHelper((MapActivity) context, nightMode);
 	}
 
 	@Override
 	public boolean shouldOverrideUrlLoading(WebView view, String url) {
 		boolean isWebPage = url.startsWith(PAGE_PREFIX_HTTP) || url.startsWith(PAGE_PREFIX_HTTPS);
 		if (url.contains(WIKIVOAYAGE_DOMAIN) && isWebPage) {
-			String lang = WikipediaArticleHelper.getLang(url);
-			String articleName = WikipediaArticleHelper.getArticleNameFromUrl(url, lang);
+			String lang = WikiArticleHelper.getLang(url);
+			String articleName = WikiArticleHelper.getArticleNameFromUrl(url, lang);
 			long articleId = app.getTravelDbHelper().getArticleId(articleName, lang);
 			if (articleId != 0) {
 				WikivoyageArticleDialogFragment.showInstance(app, fragmentManager, articleId, lang);
 			} else {
-				warnAboutExternalLoad(url, context, nightMode);
+				WikiArticleHelper.warnAboutExternalLoad(url, context, nightMode);
 			}
 			return true;
 		} else if (url.contains(WIKI_DOMAIN) && isWebPage) {
-			wikipediaArticleHelper.showWikiArticle(new LatLon(article.getLat(), article.getLon()), url);
+			wikiArticleHelper.showWikiArticle(new LatLon(article.getLat(), article.getLon()), url);
 		} else if (isWebPage) {
-			warnAboutExternalLoad(url, context, nightMode);
+			WikiArticleHelper.warnAboutExternalLoad(url, context, nightMode);
 		} else if (url.startsWith(PREFIX_GEO)) {
 			if (article != null) {
 				List<GPXUtilities.WptPt> points = article.getGpxFile().getPoints();
@@ -122,30 +122,13 @@ public class WikivoyageWebViewClient extends WebViewClient {
 		return true;
 	}
 
-	private static void warnAboutExternalLoad(final String url, final Context context, final boolean nightMode) {
-		if (context == null) {
-			return;
-		}
-		new AlertDialog.Builder(context)
-				.setTitle(url)
-				.setMessage(R.string.online_webpage_warning)
-				.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						WikipediaDialogFragment.showFullArticle(context, Uri.parse(url), nightMode);
-					}
-				})
-				.setNegativeButton(R.string.shared_string_cancel, null)
-				.show();
-	}
-
 	public void setArticle(TravelArticle article) {
 		this.article = article;
 	}
 
 	public void stopRunningAsyncTasks() {
-		if (wikipediaArticleHelper != null) {
-			wikipediaArticleHelper.stopSearchAsyncTask();
+		if (wikiArticleHelper != null) {
+			wikiArticleHelper.stopSearchAsyncTask();
 		}
 	}
 }

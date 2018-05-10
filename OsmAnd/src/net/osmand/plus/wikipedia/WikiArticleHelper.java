@@ -30,9 +30,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class WikipediaArticleHelper {
+public class WikiArticleHelper {
 
-	private static final String TAG = WikipediaArticleHelper.class.getSimpleName();
+	private static final String TAG = WikiArticleHelper.class.getSimpleName();
 	private static final String ZIP_EXT = ".zip";
 	private static final String PAGE_PREFIX_HTTP = "http://";
 	private static final String PAGE_PREFIX_HTTPS = "https://";
@@ -44,7 +44,7 @@ public class WikipediaArticleHelper {
 
 	private boolean nightMode;
 
-	public WikipediaArticleHelper(MapActivity mapActivity, boolean nightMode) {
+	public WikiArticleHelper(MapActivity mapActivity, boolean nightMode) {
 		this.mapActivity = mapActivity;
 		this.nightMode = nightMode;
 	}
@@ -214,7 +214,7 @@ public class WikipediaArticleHelper {
 		}
 	}
 
-	private static void warnAboutExternalLoad(final String url, final Context context, final boolean nightMode) {
+	public static void warnAboutExternalLoad(final String url, final Context context, final boolean nightMode) {
 		if (context == null) {
 			return;
 		}

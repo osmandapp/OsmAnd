@@ -35,7 +35,7 @@ import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
-import net.osmand.plus.wikipedia.WikipediaArticleHelper;
+import net.osmand.plus.wikipedia.WikiArticleHelper;
 import net.osmand.plus.wikipedia.WikipediaArticleWikiLinkFragment;
 import net.osmand.plus.wikipedia.WikipediaDialogFragment;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
@@ -295,8 +295,8 @@ public class AmenityMenuBuilder extends MenuBuilder {
 				public void onClick(View v) {
 					if (text.contains(".wikipedia.org/w")) {
 						if (Version.isPaidVersion(app)) {
-							WikipediaArticleHelper wikipediaArticleHelper = new WikipediaArticleHelper(mapActivity, !light);
-							wikipediaArticleHelper.showWikiArticle(amenity.getLocation(), text);
+							WikiArticleHelper wikiArticleHelper = new WikiArticleHelper(mapActivity, !light);
+							wikiArticleHelper.showWikiArticle(amenity.getLocation(), text);
 						} else {
 							WikipediaArticleWikiLinkFragment.showInstance(mapActivity.getSupportFragmentManager(), text);
 						}
