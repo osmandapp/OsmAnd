@@ -400,7 +400,7 @@ public class SearchUICore {
 		return this.phrase;
 	}
 
-	public SearchResultCollection search(final String text, final boolean delayedExecution, final ResultMatcher<SearchResult> matcher) {
+	public void search(final String text, final boolean delayedExecution, final ResultMatcher<SearchResult> matcher) {
 		final int request = requestNumber.incrementAndGet();
 		final SearchPhrase phrase = this.phrase.generateNewPhrase(text, searchSettings);
 		this.phrase = phrase;
@@ -504,7 +504,6 @@ public class SearchUICore {
 				}
 			}
 		});
-		return null;
 	}
 
 
