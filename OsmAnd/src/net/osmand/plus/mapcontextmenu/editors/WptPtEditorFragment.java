@@ -164,7 +164,7 @@ public class WptPtEditorFragment extends PointEditorFragment {
 
 		MapContextMenu menu = getMapActivity().getContextMenu();
 
-		if (menu.getLatLon() != null) {
+		if (menu.getLatLon() != null && menu.isActive()) {
 
 			LatLon latLon = new LatLon(wpt.getLatitude(), wpt.getLongitude());
 
