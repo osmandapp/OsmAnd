@@ -535,13 +535,13 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 		} else if (id.equals(settings.PREFERRED_LOCALE.getId())) {
 			// restart application to update locale
 			getMyApplication().checkPreferredLocale();
-			restartApp();
+			getMyApplication().restartApp(this);
 		} else if (id.equals(settings.OSMAND_THEME.getId())) {
-			restartApp();
+			getMyApplication().restartApp(this);
 		} else if (id.equals(settings.METRIC_SYSTEM.getId())) {
 			settings.METRIC_SYSTEM_CHANGED_MANUALLY.set(true);
 		} else if (id.equals(settings.DO_NOT_USE_ANIMATIONS.getId())) {
-			restartApp();
+			getMyApplication().restartApp(this);
 		} else {
 			updateAllSettings();
 		}
@@ -549,21 +549,7 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 	}
 
 
-	private void restartApp() {
-		AlertDialog.Builder bld = new AlertDialog.Builder(this);
-		bld.setMessage(R.string.restart_is_required);
-		bld.setPositiveButton(R.string.shared_string_ok, new OnClickListener() {
-
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				android.os.Process.killProcess(android.os.Process.myPid());
-//				Intent intent = getIntent();
-//				finish();
-//				startActivity(intent);				
-			}
-		});
-		bld.show();
-	}
+	
 
 
 	private void warnAboutChangingStorage(final String newValue) {

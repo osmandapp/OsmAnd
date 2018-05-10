@@ -7,6 +7,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.DialogInterface.OnClickListener;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Configuration;
@@ -988,5 +989,18 @@ public class OsmandApplication extends MultiDexApplication {
 			e.printStackTrace();
 		}
 		return defaultValue;
+	}
+
+	public void restartApp(Context ctx) {
+		AlertDialog.Builder bld = new AlertDialog.Builder(ctx);
+		bld.setMessage(R.string.restart_is_required);
+		bld.setPositiveButton(R.string.shared_string_ok, new OnClickListener() {
+
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				android.os.Process.killProcess(android.os.Process.myPid());
+			}
+		});
+		bld.show();
 	}
 }
