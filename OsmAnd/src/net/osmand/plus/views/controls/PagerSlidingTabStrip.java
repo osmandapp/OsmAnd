@@ -29,6 +29,7 @@ import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.NonNull;
 import android.support.v4.util.Pair;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPager;
@@ -61,7 +62,7 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 	}
 
 	public interface CustomTabProvider {
-		public View getCustomTabView(ViewGroup parent, int position);
+		public View getCustomTabView(@NonNull ViewGroup parent, int position);
 		public void select(View tab);
 		public void deselect(View tab);
 	}

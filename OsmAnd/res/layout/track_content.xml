@@ -17,10 +17,17 @@
         android:layout_height="0dp"
         android:layout_weight="1">
 
-        <android.support.v4.view.ViewPager
+        <net.osmand.plus.LockableViewPager
             android:id="@+id/pager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:src="?attr/bottom_nav_shadow"
+            android:scaleType="fitXY"/>
 
     </FrameLayout>
 
@@ -30,6 +37,7 @@
         android:layout_height="wrap_content"
         android:background="?attr/wikivoyage_card_bg_color"
         android:visibility="gone"
+        app:elevation="0dp"
         tools:visibility="visible"
         app:itemBackground="?attr/wikivoyage_card_bg_color"
         app:menu="@menu/track_bottom_navigation"

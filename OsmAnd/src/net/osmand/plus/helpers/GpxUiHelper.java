@@ -14,10 +14,10 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.AppCompatCheckBox;
 import android.support.v7.widget.ListPopupWindow;
 import android.support.v7.widget.SwitchCompat;
 import android.text.SpannableString;
@@ -1180,10 +1180,12 @@ public class GpxUiHelper {
 		return values;
 	}
 
-	public static OrderedLineDataSet createGPXElevationDataSet(OsmandApplication ctx, LineChart mChart,
-															   GPXTrackAnalysis analysis,
-															   GPXDataSetAxisType axisType,
-															   boolean useRightAxis, boolean drawFilled) {
+	public static OrderedLineDataSet createGPXElevationDataSet(@NonNull OsmandApplication ctx,
+															   @NonNull LineChart mChart,
+															   @NonNull GPXTrackAnalysis analysis,
+															   @NonNull GPXDataSetAxisType axisType,
+															   boolean useRightAxis,
+															   boolean drawFilled) {
 		OsmandSettings settings = ctx.getSettings();
 		OsmandSettings.MetricsConstants mc = settings.METRIC_SYSTEM.get();
 		boolean useFeet = (mc == OsmandSettings.MetricsConstants.MILES_AND_FEET) || (mc == OsmandSettings.MetricsConstants.MILES_AND_YARDS);
@@ -1265,10 +1267,12 @@ public class GpxUiHelper {
 		return dataSet;
 	}
 
-	public static OrderedLineDataSet createGPXSpeedDataSet(OsmandApplication ctx, LineChart mChart,
-														   GPXTrackAnalysis analysis,
-														   GPXDataSetAxisType axisType,
-														   boolean useRightAxis, boolean drawFilled) {
+	public static OrderedLineDataSet createGPXSpeedDataSet(@NonNull OsmandApplication ctx,
+														   @NonNull LineChart mChart,
+														   @NonNull GPXTrackAnalysis analysis,
+														   @NonNull GPXDataSetAxisType axisType,
+														   boolean useRightAxis,
+														   boolean drawFilled) {
 		OsmandSettings settings = ctx.getSettings();
 		boolean light = settings.isLightContent();
 
@@ -1412,11 +1416,13 @@ public class GpxUiHelper {
 		return dataSet;
 	}
 
-	public static OrderedLineDataSet createGPXSlopeDataSet(OsmandApplication ctx, LineChart mChart,
-														   GPXTrackAnalysis analysis,
-														   GPXDataSetAxisType axisType,
-														   List<Entry> eleValues,
-														   boolean useRightAxis, boolean drawFilled) {
+	public static OrderedLineDataSet createGPXSlopeDataSet(@NonNull OsmandApplication ctx,
+														   @NonNull LineChart mChart,
+														   @NonNull GPXTrackAnalysis analysis,
+														   @NonNull GPXDataSetAxisType axisType,
+														   @Nullable List<Entry> eleValues,
+														   boolean useRightAxis,
+														   boolean drawFilled) {
 		if (axisType == GPXDataSetAxisType.TIME) {
 			return null;
 		}

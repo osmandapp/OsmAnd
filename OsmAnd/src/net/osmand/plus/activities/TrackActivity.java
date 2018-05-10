@@ -26,6 +26,7 @@ import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.LockableViewPager;
 import net.osmand.plus.OsmAndAppCustomization;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
@@ -53,7 +54,7 @@ public class TrackActivity extends TabActivity {
 	private File file = null;
 	private GPXFile gpxFile;
 	private GpxDataItem gpxDataItem;
-	ViewPager mViewPager;
+	private LockableViewPager viewPager;
 	private long modifiedTime = -1;
 	private List<GpxDisplayGroup> displayGroups;
 	private List<GpxDisplayGroup> originalGroups = new ArrayList<>();
@@ -240,8 +241,9 @@ public class TrackActivity extends TabActivity {
 		super.onResume();
 		stopped = false;
 
-		mViewPager = (ViewPager) findViewById(R.id.pager);
-		setViewPagerAdapter(mViewPager, new ArrayList<TabActivity.TabItem>());
+		viewPager = (LockableViewPager) findViewById(R.id.pager);
+		viewPager.setSwipeLocked(true);
+		setViewPagerAdapter(viewPager, new ArrayList<TabActivity.TabItem>());
 		new GPXFileLoaderTask(this).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
 	}
 
@@ -332,13 +334,13 @@ public class TrackActivity extends TabActivity {
 				((TrackPointFragment) frag).setContent();
 			}
 		}
-		OsmandFragmentPagerAdapter pagerAdapter = (OsmandFragmentPagerAdapter) mViewPager.getAdapter();
+		OsmandFragmentPagerAdapter pagerAdapter = (OsmandFragmentPagerAdapter) viewPager.getAdapter();
 		if (pagerAdapter != null) {
 			pagerAdapter.addTab(getTabIndicator(R.string.gpx_track, TrackSegmentFragment.class));
 			if (isHavingWayPoints() || isHavingRoutePoints()) {
 				pagerAdapter.addTab(getTabIndicator(R.string.points, TrackPointFragment.class));
 				if (openPointsTab) {
-					mViewPager.setCurrentItem(1, false);
+					viewPager.setCurrentItem(1, false);
 				}
 			}
 
@@ -361,8 +363,8 @@ public class TrackActivity extends TabActivity {
 								position = 1;
 								break;
 						}
-						if (position != -1 && position != mViewPager.getCurrentItem()) {
-							mViewPager.setCurrentItem(position);
+						if (position != -1 && position != viewPager.getCurrentItem()) {
+							viewPager.setCurrentItem(position);
 							return true;
 						}
 						return false;

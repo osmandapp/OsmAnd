@@ -708,7 +708,7 @@ public class SplitSegmentDialogFragment extends DialogFragment {
 		return (OsmandApplication) getActivity().getApplication();
 	}
 
-	public static boolean showInstance(TrackActivity trackActivity) {
+	public static boolean showInstance(@NonNull TrackActivity trackActivity) {
 		try {
 			SplitSegmentDialogFragment fragment = new SplitSegmentDialogFragment();
 			fragment.show(trackActivity.getSupportFragmentManager(), TAG);
