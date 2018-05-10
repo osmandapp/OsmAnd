@@ -30,7 +30,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
-
 import net.osmand.AndroidUtils;
 import net.osmand.Location;
 import net.osmand.core.android.MapRendererContext;
@@ -53,6 +52,7 @@ import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.other.MapRouteInfoMenu;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu;
+import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 
@@ -84,7 +84,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 	private SeekBar transparencyBar;
 	private LinearLayout transparencyBarLayout;
 	private static CommonPreference<Integer> transparencySetting;
-	private boolean isTransparencyBarEnabled = true;
+	private boolean isTransparencyBarEnabled;
 	private OsmandSettings settings;
 
 	private MapRouteInfoMenu mapRouteInfoMenu;
@@ -980,12 +980,14 @@ public class MapControlsLayer extends OsmandMapLayer {
 		});
 
 		LayerTransparencySeekbarMode seekbarMode = settings.LAYER_TRANSPARENCY_SEEKBAR_MODE.get();
-		if (seekbarMode == LayerTransparencySeekbarMode.OVERLAY && settings.MAP_OVERLAY.get() != null) {
-			showTransparencyBar(settings.MAP_OVERLAY_TRANSPARENCY);
-			setTransparencyBarEnabled(true);
-		} else if (seekbarMode == LayerTransparencySeekbarMode.UNDERLAY && settings.MAP_UNDERLAY.get() != null) {
-			showTransparencyBar(settings.MAP_TRANSPARENCY);
-			setTransparencyBarEnabled(true);
+		if (OsmandPlugin.getEnabledPlugin(OsmandRasterMapsPlugin.class) != null) {
+			if (seekbarMode == LayerTransparencySeekbarMode.OVERLAY && settings.MAP_OVERLAY.get() != null) {
+				showTransparencyBar(settings.MAP_OVERLAY_TRANSPARENCY);
+				setTransparencyBarEnabled(true);
+			} else if (seekbarMode == LayerTransparencySeekbarMode.UNDERLAY && settings.MAP_UNDERLAY.get() != null) {
+				showTransparencyBar(settings.MAP_TRANSPARENCY);
+				setTransparencyBarEnabled(true);
+			}
 		}
 	}
 
