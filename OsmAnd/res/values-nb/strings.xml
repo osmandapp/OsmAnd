@@ -3101,4 +3101,23 @@
 \n</string>
     <string name="hide_full_description">Skjul full beskrivelse</string>
     <string name="show_full_description">Vis full beskrivelse</string>
+    <string name="nautical_render_descr">Nautisk navigasjonsstil. Nøkkelfunksjoner: Bøyer, fyr, elver, sjø-leier og -merker, havner, sjømerketjenester, dybdekonturer.</string>
+    <string name="ski_map_render_descr">Skistil. Nøkkelfunksjoner: Tegner bakker, heiser og andre skifunksjoner på en nyttig måte. Mindre distraherende sekundære kartobjekter.</string>
+    <string name="light_rs_render_descr">Enkel og kontrastrik stil for bilnavigering. Snill mot øyene i nattmodus. Nøkkelfunksjoner: Konturlinjer, kontrasterende oransje veier, mindre distraherende sekundære kartobjekter.</string>
+    <string name="topo_render_descr">Kontraststil designet primært for turgåing, ekskursjoner og sykling i naturen. God lesbarhet i komplekst eksternt lys. Nøkkelfunksjoner: Kontrasterende veier og naturlige objekter, forskjellige typer ruter, konturlinjer med avanserte innstillinger, flere detaljer i tilhørende forstørrelsesnivå enn forvalgt stil. Overflatevalg tillater visning av forskjeller i veioverflate. Inget nattmodus.</string>
+    <string name="mapnik_render_descr">Gammel forvalgt opptegning i \'Mapnik\'-stil. Nøkkelfunksjoner: Farger ligner \'Mapnik\'-stilen.</string>
+    <string name="touring_view_render_descr">Høydetaljsstil i reiseøyemed. Inkluderer alle oppsettsvalg for forvalgt stil, i tillegg til: VIsning av så mye detaljer som mulig, i særdeleshet alle veier, stier og andre måter å reise. Klar visuell forskjell mellom alle typer veier, noe som minner om mange reiseatlas. Høykontrastfargedrakt for utendørsbruk, dag og nattmodus.</string>
+    <string name="default_render_descr">Gjengs allbruksstil. Forenklet renere opptegning i tettbebygde byer. Nøkkelfunksjoner: Konturlinjer, ruter, veikvalitet, tilgangsbegrensninger, veinummerering, stiopptegning i henhold til SAC-skala, raftingsfunksjoner.</string>
+    <string name="open_wikipedia_link_online">Åpne Wikipedia-lenke på nett</string>
+    <string name="open_wikipedia_link_online_description">Lenken vil åpnes i en nettleser.</string>
+    <string name="read_wikipedia_offline_description">Skaff OsmAnd Live-abonnement for å lese Wikipedia og Wikivoyage-artikler på nett.</string>
+    <string name="how_to_open_link">Hvordan åpne lenken?</string>
+    <string name="read_wikipedia_offline">Les Wikipedia frakoblet</string>
+    <string name="download_all">Last ned alt</string>
+    <string name="shared_string_restart">Omstart</string>
+    <string name="purchase_cancelled_dialog_title">Du har kansellert ditt OsmAnd Live-abonnement</string>
+    <string name="purchase_cancelled_dialog_descr">Forny abonnement for å fortsette å bruke alle funksjonene:</string>
+
+    <string name="maps_you_need_descr">Basert på artiklene du har lagret, anbefales du å laste ned følgende kart:</string>
+    <string name="maps_you_need">Kart du trenger</string>
     </resources>
