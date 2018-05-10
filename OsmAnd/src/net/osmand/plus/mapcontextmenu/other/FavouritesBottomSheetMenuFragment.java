@@ -76,7 +76,7 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 		title[0] = (BottomSheetItemTitleWithDescrAndButton) new BottomSheetItemTitleWithDescrAndButton.Builder()
 				.setButtonIcons(null, getIconForButton())
 				.setButtonTitle(getTextForButton(sortByDist))
-				.setonButtonClickListener(new View.OnClickListener() {
+				.setOnButtonClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
 						sortFavourites();

@@ -2835,7 +2835,6 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="release_3_0">\\022 
 \n
 \n</string>
-    <string name="empty_state_markers_history">\@string/shared_string_history</string>
     <string name="what_is_here">Tie ĉi:</string>
     <string name="parked_at">parkumita je</string>
     <string name="pick_up_till">Reprenu ĝis</string>
@@ -2996,7 +2995,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="open_in_browser_wiki">Malfermi artikolon enrete</string>
     <string name="open_in_browser_wiki_description">Vidigi artikolon en foliumilo.</string>
     <string name="download_wiki_region_placeholder">tiu ĉi regiono</string>
-    <string name="wiki_article_search_text">Serĉado de necesajn artikolojn en vikio</string>
+    <string name="wiki_article_search_text">Serĉi rilatan artikolon en Vikipedio</string>
     <string name="wiki_article_not_found">Ne trovis artikolon</string>
     <string name="how_to_open_wiki_title">Kiel malfermi artikolojn de Vikipedio?</string>
 <string name="maps_you_need_descr">Surbaze de artikoloj, kiujn vi konservis, ni proponas al vi elŝuti la jenajn mapojn:</string>
@@ -3005,4 +3004,18 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="purchase_cancelled_dialog_title">Vi rezignis pri abono al OsmAnd-Live</string>
     <string name="purchase_cancelled_dialog_descr">Reaboni por plue uzi ĉiujn eblojn:</string>
 
+    <string name="hide_full_description">Kaŝi plenan priskribon</string>
+    <string name="show_full_description">Montri plenan priskribon</string>
+    <string name="nautical_render_descr">Stilo por mara kaj rivera navigado. Ĉefaj eblaĵoj: buoj, lumturoj, linioj kaj markoj por akv-navigado, havenoj, profundec-kurboj.</string>
+    <string name="ski_map_render_descr">Stilo por skiado. Ĉefaj eblaĵoj: oportuna vidigo de skivojoj kaj telferoj; malpli absorbaj malpli gravaj objektoj.</string>
+    <string name="light_rs_render_descr">Simpla kaj kontrasta stilo por aŭt-navigado. Agrabla por okuloj dum nokto. Ĉefaj eblaĵoj: konturoj, kontrastaj oranĝkoloraj vojoj, malpli absorbaj malpli gravaj objektoj.</string>
+    <string name="topo_render_descr">Kontrasta stilo speciale por turisma marŝado kaj biciklado. Dece legebla ĉe maloportuna ekstera lumo. Ĉefaj eblaĵoj: kontrastaj vojoj kaj naturaj objektoj, diversaj specoj de kursoj, agordeblaj nivel-kurboj, pli da detaloj ĉe difinita skal-nivelo ol sur la norma map-stilo. Agordo por kvalito de voja pavimo. Sen nokta reĝimo.</string>
+    <string name="mapnik_render_descr">Malnova bildigada map-stilo de Mapnik. Ĉefa eblaĵo: koloroj similaj al tiuj de Mapnik.</string>
+    <string name="default_render_descr">Ĝenerala map-stilo. Simpligita bildigado por pli klaraj mapoj en dense loĝitaj urboj. Ĉefaj eblaĵoj: nivel-kurboj, vojoj, kvalito de vojoj, aliraj limigoj, ŝoseaj numeroj, turismaj kursoj laŭ SAC-skalo, objektoj por rapid-akvaj sportoj.</string>
+    <string name="open_wikipedia_link_online">Malfermi Vikipedian ligilon enrete</string>
+    <string name="open_wikipedia_link_online_description">OsmAnd aldirektos vin al la foliumilo por malfermi la ligilon enrete.</string>
+    <string name="read_wikipedia_offline_description">Akiru abonon al OsmAnd-Live por legi artikolojn de Vikipedio kaj Vikivojaĝo eksterrete.</string>
+    <string name="how_to_open_link">Kiel malfermi ligilon?</string>
+    <string name="read_wikipedia_offline">Legi Vikipedion eksterrete</string>
+    <string name="download_all">Elŝuti ĉiujn</string>
     </resources>

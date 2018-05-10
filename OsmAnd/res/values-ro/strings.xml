@@ -1942,7 +1942,6 @@
     <string name="empty_state_markers_active_desc">Atinge lung sau scurt pe locații, apoi atinge butonul pentru steagul marcajului.</string>
     <string name="empty_state_markers_groups">Importă grupuri</string>
     <string name="empty_state_markers_groups_desc">Puteți importa grupuri favorite sau puncte intermediare de trackuri ca marcaje.</string>
-    <string name="empty_state_markers_history">\@string/shared_string_history</string>
     <string name="empty_state_markers_history_desc">Marcajele marcate ca trecute vor apărea pe această fereastră.</string>
     <string name="shared_string_two">Două</string>
     <string name="shared_string_one">Una</string>

@@ -185,11 +185,11 @@ S\'ocuparà una memòria de {1} MB
     <string name="osmand_parking_event">Traieu el cotxe de l\'aparcament</string>
     <string name="rendering_attr_appMode_description">Optimitza el mapa per</string>
     <string name="play_commands_of_currently_selected_voice">Selecciona una veu i comprova les indicacions en funcionament</string>
-    <string name="zoom_by_trackball_descr">Canvia el zoom del mapa amb moviments horitzontals del ratolí de bola.</string>
+    <string name="zoom_by_trackball_descr">Canvia el zoom del mapa seguint el desplaçament horitzontal del ratolí de bola.</string>
     <string name="zoom_by_trackball">Utilitza el ratolí de bola per controlar el zoom</string>
     <string name="local_openstreetmap_were_uploaded">Es van penjar {0} PDI/notes</string>
-    <string name="local_openstreetmap_settings">PDIs/Notes d\'OSM desades localment</string>
-    <string name="local_openstreetmap_settings_descr">Mostra i gestiona els PDI/notes d\'OSM a la base de dades local.</string>
+    <string name="local_openstreetmap_settings">PDIs/Notes d\'OSM desades al dispositiu</string>
+    <string name="local_openstreetmap_settings_descr">Mostra i gestiona els PDI/notes d\'OSM anotats a la base de dades del dispositiu.</string>
     <string name="day_night_info">Informació de dia/nit</string>
     
     <string name="show_lanes">Carrils</string>
@@ -208,7 +208,7 @@ S\'ocuparà una memòria de {1} MB
     <string name="index_name_south_america">Amèrica del Sud</string>
     <string name="index_name_europe">Europa</string>
     <string name="index_name_tts_voice">Indicadors de veu (sintetitzats amb TTS, recomanat)</string>
-    <string name="native_library_not_supported">La llibreria nativa no està suportada en aquest dispositiu.</string>
+    <string name="native_library_not_supported">La llibreria nadiua no s\'admet en aquest dispositiu.</string>
     <string name="init_native_library">S\'està inicialitzant la llibreria nativa…</string>
     
     <string name="pref_vector_rendering">Opcions específiques de renderització dels vectors</string>
@@ -244,7 +244,7 @@ S\'ocuparà una memòria de {1} MB
     <string name="offline_edition">Edició fora de línia</string>
     <string name="offline_edition_descr">Utilitza sempre l\'edició fora de línia.</string>
     <string name="local_openstreetmap_descr_title">Edició asincrònica de l\'OSM:</string>
-    <string name="accessibility_mode_descr">Activa les característiques d\'accessibilitat.</string>
+    <string name="accessibility_mode_descr">Activa les funcions per a usuaris amb discapacitats.</string>
     <string name="update_poi_does_not_change_indexes">Els canvis realitzats en els PDI a l\'aplicació no afecten els fitxers de mapa baixats, els canvis es desen en un fitxer local.</string>
     <string name="global_app_allocated_memory_descr">Memòria assignada %1$s MB (límit de l\'Android %2$s MB, Dalvik %3$s MB).</string>
     <string name="global_app_allocated_memory">Memòria assignada</string>
@@ -291,7 +291,7 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="installing_new_resources">S\'estan descomprimint dades noves…</string>
     <string name="tts_language_not_supported_title">La llengua no està suportada</string>
     <string name="gpx_option_reverse_route">Inverteix la direcció del GPX</string>
-    <string name="search_osm_offline">Cerca l\'adreça utilitzant mapes fora de línia</string>
+    <string name="search_osm_offline">Cerca per ubicació geogràfica</string>
     <string name="system_locale">Sistema</string>
     <string name="shared_string_next">Endavant</string>
     <string name="shared_string_previous">Enrere</string>
@@ -352,7 +352,7 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="internet_not_available">No es pot realitzar l\'operació sense una connexió a Internet.</string>
     <string name="level_to_switch_vector_raster_descr">Nivell mínim de zoom per utilitzar mapes vectorials.</string>
     <string name="level_to_switch_vector_raster">Nivell mínim de zoom pels vectors</string>
-    <string name="error_doing_search">Error en la cerca fora de línia.</string>
+    <string name="error_doing_search">No s\'ha pogut fer la cerca sense connexió.</string>
     <string name="amenity_type_healthcare">Serveis mèdics</string>
     <string name="amenity_type_man_made">Construccions</string>
     <string name="amenity_type_office">Oficines</string>
@@ -364,7 +364,7 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="osmand_plus_long_description_1000_chars">"OsmAnd+ (OSM Automated Navigation Directions) L\'OsmAnd+ és una aplicació de navegació de codi obert amb accés a una gran varietat de dades de la col·lecció oberta de mapes OpenStreetMap. Totes les dades, incloent mapes de tessel·les i de vectors, poden emmagatzemar-se a la targeta de memòria del telèfon pel seu ús fora de línia. L\'OsmAnd també té la funcionalitat de càlcul de rutes tant en línia com fora de línia, incloent a més l\'orientació per veu. L\'OsmAnd+ és la versió de pagament; comprant-la estareu donant suport al projecte, ajudareu al desenvolupament de noves funcions i rebreu les darreres actualitzacions. Algunes de les característiques centrals són: - Funcionalitat completa fora de línia (desa en el dispositiu d\'emmagatzemament  els mapes vectorials i de mosaic baixats) - Mapes de vectors compactes de tot el món per usar fora de línia - Baixada il·limitada de mapes nacionals o regionals directament des de l\'aplicació - Disponibilitat fora de línia dels PDI baixats prèviament de Viquipèdia, és genial per fer turisme - Diverses capes de mapes alhora, com traces GPX o de navegació, PDIs, favorits, parades de transport públic, etc. amb nivell d\'opacitat personalitzada - Cerca fora de línia d\'adreces i llocs - Càlcul de rutes fora de línia per distàncies \'abast mitjà - Modalitats cotxe, bicicleta i vianant - Canvi automàtic de vista diürna a nocturna, opcional - Ampliació automàtica del mapa segons la velocitat, opcional - Alineació automàtica del mapa segons la brúixola o la direcció del moviment, opcional - Indicació de carril, velocitat màxima permesa, veus enregistrades i/o sintetitzades"</string>
     <string name="rendering_attr_contourLines_description">Seleccioneu el nivell mínim de zoom per mostrar el mapa si està disponible. Caldrà el fitxer SRTM separat:</string>
     <string name="osmand_development_plugin_description">Aquest connector mostra la configuració de característiques per al desenvolupament i depuració com la verificació o simulació de rutes, el rendiment del renderitzat o les indicacions de veu. Aquestes configuracions s\'adrecen a desenvolupadors i no són d\'utilitat per a un usuari normal.</string>
-    <string name="accessibility_default">En consonància amb la configuració global del sistema</string>
+    <string name="accessibility_default">En consonància amb la configuració del sistema Android</string>
     <string name="zoomIs">El nivell de zoom és</string>
     <string name="settings_direction_style_descr">Trieu l\'estil per indicar direccions relatives mentre s\'està en moviment.</string>
     <string name="index_name_other">Mapes mundials i temàtics</string>
@@ -534,14 +534,14 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="pref_overlay">Capa de fons/Cap superposada</string>
     <string name="map_version_changed_info">Baixeu la nova versió de l\'aplicació per poder obrir els nous arxius de mapes.</string>
     <string name="local_index_action_do">Estas a punt de %1$s %2$s element(s). Continuar?</string>
-    <string name="warning_tile_layer_not_downloadable">L\'aplicació no pot baixar la capa del mapa %1$s, si us plau proveu a reinstal·lar-la.</string>
+    <string name="warning_tile_layer_not_downloadable">L\'aplicació no pot baixar la capa del mapa %1$s, si la reinstal·leu es podria arreglar.</string>
     <string name="layer_overlay">Mapa sobreposat…</string>
     <string name="map_overlay">Mapa superposat</string>
     <string name="choose_auto_follow_route_descr">Temps de sincronització del mapa seguint la nova posició.</string>
     <string name="map_underlay">Mapa de fons</string>
     <string name="map_underlay_descr">Escolliu el mapa de fons.</string>
     <string name="map_overlay_descr">Escolliu el mapa superposat.</string>
-    <string name="preferred_locale_descr">Seleccioneu la llengua (reinicieu l\'OsmAnd després de canviar-la).</string>
+    <string name="preferred_locale_descr">Seleccioneu la llengua de visualització (s\'actualitzarà quan reinicieu l\'OsmAnd).</string>
     <string name="foot">peu</string>
     <string name="km">km</string>
     <string name="poi_filter_food_shop">Alimentació</string>
@@ -574,7 +574,7 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="get_directions">Direccions</string>
     <string name="loading_poi_obj">S\'està carregant el PDI…</string>
     <string name="loading_streets">S\'estan carregant els carrers…</string>
-    <string name="error_calculating_route">S\'ha produït un error en calcular la ruta</string>
+    <string name="error_calculating_route">No s\'ha pogut calcular la ruta</string>
     <string name="loading_postcodes">S\'estan carregant els codis postals…</string>
     <string name="arrived_at_destination">Heu arribat a la vostra destinació</string>
     <string name="invalid_locations">Coordenades no vàlides</string>
@@ -618,7 +618,7 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="search_nothing_found">No s\'ha trobat res</string>
     <string name="list_index_files_was_not_loaded">No s\'ha pogut buscar la llista de regions de https://osmand.net.</string>
     <string name="failed_op">fallada</string>
-    <string name="error_occurred_saving_gpx">S\'ha produït un error en desar el GPX</string>
+    <string name="error_occurred_saving_gpx">No s\'ha pogut desar la traça GPX</string>
     <string name="osm_settings_descr">Especifiqueu els paràmetres d\'Openstreetmap.org (OSM) que calen per les trameses a OSM.</string>
     <string name="search_address_building">Edifici</string>
     <string name="search_address_building_option">Edifici</string>
@@ -754,8 +754,8 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="mark_final_location_first">Primer de tot cal que seleccioneu una destinació</string>
     <string name="auth_failed">Ha fallat l\'autorització</string>
     <string name="loading_streets_buildings">S\'estan carregant els carrers/edificis…</string>
-    <string name="error_calculating_route_occured">S\'ha produït un error en calcular la ruta</string>
-    <string name="empty_route_calculated">S\'ha produït un error: la ruta calculada és buida</string>
+    <string name="error_calculating_route_occured">No s\'ha pogut calcular la ruta</string>
+    <string name="empty_route_calculated">La ruta calculada és buida</string>
     <string name="go_back_to_osmand">Torna enrere al mapa de l\'OsmAnd</string>
     <string name="reading_indexes">S\'estan llegint les dades locals…</string>
     <string name="use_online_routing_descr">Utilitzeu Internet per calcular una ruta.</string>
@@ -766,7 +766,7 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="edit_filter_delete_message">El filtre {0} s\'ha eliminat</string>
     <string name="update_poi_success">Les dades dels PDI s\'han actualitzat (se n\'han carregat {0})</string>
     <string name="update_poi_error_loading">No s\'han pogut carregar les dades del servidor</string>
-    <string name="update_poi_is_not_available_for_zoom">L\'actualització dels PDI no està disponible pels nivells de zoom més petits</string>
+    <string name="update_poi_is_not_available_for_zoom">Acostar el zoom us permet actualitzar els PDIs</string>
     <string name="context_menu_item_update_map_confirm">Voleu actualitzar les dades locals des d\'Internet?</string>
     <string name="search_history_building">Edificis: {0}, {1}, {2}</string>
     <string name="choose_building">Trieu l\'edifici</string>
@@ -979,7 +979,7 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
 \n * Premeu en el giny de mesura per veure més accions.</string>
     <string name="av_def_action_choose">Selecciona sota demanda</string>
     <string name="background_service_provider">Proveïdor de la ubicació</string>
-    <string name="converting_names">S\'estan convertint els noms nadius / en anglès…</string>
+    <string name="converting_names">S\'estan convertint els noms nadius/anglesos …</string>
     <string name="save_track_interval_descr">Trieu l\'interval d\'enregistrament de traces a desar durant la navegació.</string>
     <string name="incremental_search_street">Cerca de carrers progressiva</string>
     <string name="incremental_search_building">Cerca progressiva d\'edificis</string>
@@ -1101,7 +1101,7 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="av_camera_focus_edof">Profunditat de camp estesa (EDOF)</string>
     <string name="av_camera_focus_descr">Trieu el mode d\'enfocament de la càmera interna.</string>
     <string name="av_camera_focus">Tipus d\'enfocament</string>
-    <string name="poi_error_unexpected_template">S\'ha produït un error inesperat en fer l\'acció {0}.</string>
+    <string name="poi_error_unexpected_template">No s\'ha pogut fer l\'acció {0}.</string>
     
     <string name="map_tile_source_descr">Trieu l\'origen de les tessel·les, sigui en línia o de la memòria cau.</string>
     <string name="previous_run_crashed">La darrera execució de l\'OsmAnd ha fallat. El fitxer log és a {0}. Si us plau informeu del problema i adjunteu el fitxer log.</string>
@@ -1718,7 +1718,8 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="try_again">Torneu-ho a provar</string>
     <string name="error_message_pattern">Error: {0}</string>
     <string name="no_updates_available">No hi ha actualitzacions disponibles</string>
-    <string name="we_really_care_about_your_opinion">Valorem molt la vostra opinió i ens és important disposar dels vostres comentaris.</string>
+    <string name="we_really_care_about_your_opinion">Ens interessa la vostra opinió i els vostres comentaris són importants per nosaltres.
+\n</string>
     <string name="rendering_value_boldOutline_name">Contorn destacat</string>
     <string name="traffic_warning_hazard">Perill informat</string>
     <string name="dahboard_options_dialog_title">Configura el tauler</string>
@@ -2699,8 +2700,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="empty_state_markers_active">Creeu marcadors de mapa!</string>
     <string name="empty_state_markers_active_desc">Premeu molt o poc temps a \'Llocs\' i després el botó seleccionador.</string>
     <string name="empty_state_markers_groups">Importa grups</string>
-    <string name="empty_state_markers_groups_desc">Importa grups de preferits o a fites de la traça com marcadors.</string>
-    <string name="empty_state_markers_history">\@string/shared_string_history</string>
+    <string name="empty_state_markers_groups_desc">Podeu importar com marcadors a grups de preferits o a fites de la traça.</string>
     <string name="empty_state_markers_history_desc">Els marcadors marcats com a aprovats apareixeran en aquesta pantalla.</string>
     <string name="shared_string_two">Dos</string>
     <string name="shared_string_one">Un</string>
@@ -2900,4 +2900,8 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="how_to_open_link">Com obrir l\'enllaç?</string>
     <string name="read_wikipedia_offline">Consulta la Viquipèdia en local</string>
     <string name="download_all">Baixa-ho tot</string>
+    <string name="hide_full_description">Amaga la descripció completa</string>
+    <string name="show_full_description">Mostra la descripció completa</string>
+    <string name="nautical_render_descr">Estil per la navegació marina i fluvial. Principals característiques: boies, fars, línies i balises de navegació aquàtica, ports, serveis marítims, isòbates.</string>
+    <string name="ski_map_render_descr">Estil per l\'esquí. Principals característiques: representació de pistes, vies aèries i altres característiques d\'esquí de forma adient. Menys objectes secundaris del mapa que distreguin.</string>
     </resources>

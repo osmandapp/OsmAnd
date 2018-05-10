@@ -163,6 +163,10 @@ public class AndroidUtils {
 		return null;
 	}
 
+	public static ColorStateList createCheckedColorStateList(Context ctx, @ColorRes int normal, @ColorRes int checked) {
+		return createCheckedColorStateList(ctx, false, normal, checked, 0, 0);
+	}
+
 	public static ColorStateList createCheckedColorStateList(Context ctx, boolean night,
 															 @ColorRes int lightNormal, @ColorRes int lightChecked,
 															 @ColorRes int darkNormal, @ColorRes int darkChecked) {

@@ -97,7 +97,7 @@
     <string name="day_night_info_description">日出：%1$s \n日落：%2$s</string>
     <string name="day_night_info">日/夜資訊</string>
     
-    <string name="map_widget_vector_attributes">著色演算屬性</string>
+    <string name="map_widget_vector_attributes">繪製屬性</string>
     <string name="map_widget_renderer">地圖樣式</string>
 
 
@@ -190,7 +190,7 @@
     <string name="route_kr">靠右行走</string>
     <string name="rendering_attr_noPolygons_description">讓地圖上所有的陸地區域特徵具透明性。</string>
     <string name="rendering_attr_noPolygons_name">多邊形</string>
-    <string name="rendering_attr_appMode_name">著色演算模式</string>
+    <string name="rendering_attr_appMode_name">繪製模式</string>
     <string name="rendering_attr_appMode_description">為地圖最佳化</string>
     <string name="rendering_attr_contourLines_description">顯示縮放比級別(需要等高線資料)：</string>
     <string name="rendering_attr_contourLines_name">顯示等高線</string>
@@ -206,7 +206,7 @@
 
     <string name="offline_navigation_not_available">OsmAnd 離線導航，暫時不能使用。</string>
     <string name="left_side_navigation">靠左行駛</string>
-    <string name="left_side_navigation_descr">選擇靠左通行的國家。</string>
+    <string name="left_side_navigation_descr">給那些在道路左側行駛的國家。</string>
 
     <string name="unknown_from_location">起始標點尚未決定</string>
     <string name="unknown_location">未知地理位置</string>
@@ -235,7 +235,7 @@
     <string name="osmand_accessibility_description">這個外掛元件，讓裝置在 OsmAnd 可以便利的直接用無障礙功能，例如調整 TTS 語音的語音速率、組態螢幕導航方位、使用軌跡球作為縮放控制，或文字轉語音的回應，例如自動告知您的位置。</string>
 
 
-    <string name="osmand_development_plugin_description">這個外掛元件顯示開發與除錯功能的設定，如測試或模擬路線、著色演算效能或語音提示。這些設定適用于開發人員，普通使用者並不需要。</string>
+    <string name="osmand_development_plugin_description">這個外掛元件顯示開發與除錯功能的設定，如測試或模擬路線、繪製效能或語音提示。這些設定適用于開發人員，普通使用者並不需要。</string>
     <string name="plugins_screen">外掛元件管理</string>
 
     <string name="prefs_plugins_descr">啟動外掛元件進階的設定和更多的附加功能。</string>
@@ -244,7 +244,7 @@
     <string name="vector_maps_may_display_faster_on_some_devices">向量地圖一般而言顯示速度更快，但可能在某些裝置上無法使用。</string>
     <string name="play_commands_of_currently_selected_voice">選擇一個語音並以播放提示測試</string>
     <string name="debugging_and_development">OsmAnd 開發</string>
-    <string name="native_rendering">原生著色演算</string>
+    <string name="native_rendering">原生繪製</string>
     <string name="test_voice_prompts">測試語音提示</string>
     <string name="switch_to_raster_map_to_see">該地區目前沒有離線向量地圖，在「設定」(「管理地圖檔案」)，或切換到「線上地圖」外掛元件下載。</string>
     <string name="send_files_to_osm">傳送 GPX 檔案到 OSM 嗎？</string>
@@ -465,8 +465,8 @@
     <string name="search_offline_clear_search">新的查尋</string>
     <string name="map_text_size_descr">選擇地圖上名稱的文字大小。</string>
     <string name="map_text_size">地圖字型大小</string>
-    <string name="trace_rendering">著色演算除錯資訊</string>
-    <string name="trace_rendering_descr">顯示著色演算效能。</string>
+    <string name="trace_rendering">繪製除錯資訊</string>
+    <string name="trace_rendering_descr">顯示繪製效能。</string>
 
 
     <string name="installing_new_resources">安裝新資料…</string>
@@ -507,13 +507,13 @@
     <string name="search_offline_geo_error">無法解析地理含義 \'%s\'。</string>
     <string name="search_osm_offline">按地理位置查尋</string>
     <string name="system_locale">系統</string>
-    <string name="preferred_locale_descr">選擇顯示語言（在更改後，請重新啟動 OsmAnd )。</string>
+    <string name="preferred_locale_descr">選擇顯示語言（在 OsmAnd 重新啟動時生效 )。</string>
     <string name="preferred_locale">顯示語言</string>
 
 
     <string name="shared_string_next">下一頁</string>
     <string name="shared_string_previous">上一頁</string>
-    <string name="unit_of_length_descr">更改長度單位。</string>
+    <string name="unit_of_length_descr">改變所測量的距離。</string>
     <string name="unit_of_length">長度單位</string>
     <string name="si_mi_feet">英哩/英呎</string>
     <string name="si_mi_yard">英哩/碼</string>
@@ -602,14 +602,14 @@
     <string name="shared_string_download_map">下載地圖</string>
     <string name="select_max_zoom_preload_area">選擇要預載的最大縮放級別</string>
     <string name="maps_could_not_be_downloaded">此地圖無法下載</string>
-    <string name="continuous_rendering">連續著色演算</string>
-    <string name="continuous_rendering_descr">顯示連續著色演算代替立即圖像。</string>
-    <string name="rendering_exception">在演算已選擇的地區時發生錯誤</string>
+    <string name="continuous_rendering">連續繪製</string>
+    <string name="continuous_rendering_descr">顯示連續繪製代替立即圖像。</string>
+    <string name="rendering_exception">無法繪出已選擇的地區</string>
     <string name="show_point_options">使用位置 …</string>
     <string name="renderer_load_sucess">著色演算器已載入</string>
     <string name="renderer_load_exception">無法載入著色演算器</string>
     <string name="renderers">向量著色演算器</string>
-    <string name="renderers_descr">選擇著色演算外觀。</string>
+    <string name="renderers_descr">選擇繪製外觀。</string>
     <string name="poi_context_menu_website">顯示 POI 網站</string>
     <string name="poi_context_menu_call">顯示 POI 的電話</string>
     <string name="website">網站</string>
@@ -664,7 +664,7 @@
 
     <string name="use_trackball_descr">使用軌跡球裝置移動地圖。</string>
     <string name="use_trackball">使用軌跡球</string>
-    <string name="background_service_wait_int_descr">為每個背景定位設定最大的等待時間。</string>
+    <string name="background_service_wait_int_descr">設定每個背景定位所允許最長的等待時間。</string>
     <string name="background_service_wait_int">定位等待時間</string>
 
     <string name="where_am_i">我在那兒？</string>
@@ -675,7 +675,7 @@
     <string name="int_min">分</string>
     <string name="background_service_int_descr">設定使用在背景服務的喚醒間隔。</string>
     <string name="background_service_int">GPS 喚醒間隔</string>
-    <string name="background_service_provider_descr">選擇位置提供者，使用於背景服務。</string>
+    <string name="background_service_provider_descr">按背景服務選擇位置方法的使用。</string>
     <string name="background_service_provider">位置提供</string>
     <string name="background_router_service_descr">在螢幕關閉時追蹤您的位置。</string>
     <string name="background_router_service">在背景執行 OsmAnd</string>
@@ -737,7 +737,7 @@
     <string name="update_poi_error_local">無法更新裝置端的 POI 清單</string>
     <string name="update_poi_error_loading">無法從伺服器載入資料</string>
     <string name="update_poi_no_offline_poi_index">該地區無可用的離線 POI 資料</string>
-    <string name="update_poi_is_not_available_for_zoom">更新的興趣點無法用於小的縮放級別</string>
+    <string name="update_poi_is_not_available_for_zoom">放大時讓您更新 POI</string>
     <string name="context_menu_item_update_poi">更新 POI</string>
     <string name="context_menu_item_update_map_confirm">要從網路更新裝置端的資料嗎？</string>
     <string name="search_history_city">縣市：{0}</string>
@@ -1186,7 +1186,7 @@
     <string name="app_mode_motorcycle">機車</string>
     <string name="app_mode_boat">船</string>
     <string name="app_mode_aircraft">飛行器</string>
-    <string name="map_widget_map_rendering">地圖著色演算</string>
+    <string name="map_widget_map_rendering">地圖繪製</string>
     <string name="app_modes_choose_descr">在應用程式中選擇已有的使用設定檔。</string>
     <string name="app_modes_choose">應用程式設定檔</string>
     <string name="amenity_type_seamark">航線標識</string>
@@ -1583,8 +1583,8 @@
     <string name="home_button">首頁</string>
     <string name="error_avoid_specific_road">沒發現支道</string>
     <string name="everything_up_to_date">全部都是最新的檔案</string>
-    <string name="use_opengl_render">使用 OpenGL 著色演算</string>
-    <string name="use_opengl_render_descr">使用硬體加速 OpenGL 著色演算（可能會使用更多的電量，或不適用於非常舊的裝置)。</string>
+    <string name="use_opengl_render">使用 OpenGL 繪製</string>
+    <string name="use_opengl_render_descr">使用硬體加速 OpenGL 繪製（可能會使用更多的電量，或不適用於非常舊的裝置)。</string>
     <string name="no_internet_connection">無法下載，請檢查您的網路連線。</string>
     <string name="download_tab_downloads">全部下載</string>
     <string name="download_tab_updates">可更新</string>
@@ -2186,7 +2186,7 @@
     <string name="map_marker">地圖標記</string>
     <string name="add_points_to_map_markers_q">新增所有的標點到地圖標記嗎？</string>
     <string name="shared_string_add_to_map_markers">增加地圖標記</string>
-    <string name="consider_turning_polygons_off">建議關閉多邊形的著色演算。</string>
+    <string name="consider_turning_polygons_off">建議關閉多邊形的繪製。</string>
     
     <string name="map_marker_1st">第一個地圖標記</string>
     <string name="map_marker_2nd">第二個地圖標記</string>
@@ -2664,12 +2664,12 @@
 \n• 任選的旅程錄製到裝置端 GPX 檔案或線上服務
 \n• 任選的速度和高度顯示
 \n• 顯示等高線和地形陰影（須有額外的外掛程式）</string>
-    <string name="osmand_plus_extended_description_part7">直接貢獻 OSM
-\n• 回報地圖錯誤
-\n• 直接從應用程式上傳 GPX 軌跡到 OSM
-\n• 新增 POI 並直接上傳至 OSM（如果是離線使用則會在稍後上傳）
-\n• 可選的旅程錄製而且在背景模式（當裝置處於休眠模式下）
-\nOsmAnd 開放原始碼，且正在積極的開發。每個人都可以透過回報錯誤、改進翻譯或編寫新功能，為應用程式做出貢獻。專案的開發進度、編寫程式碼和測試新的功能又或著使用者互相交流，還是要依靠提供資金捐款資助。</string>
+    <string name="osmand_plus_extended_description_part7">直接貢獻給 OSM 
+\n• 回報地圖錯誤 
+\n• 直接從應用程式上傳 GPX 軌跡到 OSM 
+\n• 新增 POI 並直接上傳至 OSM（如果是離線使用則會在稍後上傳） 
+\n• 可選的旅程錄製而且在背景模式（當裝置處於休眠模式下） 
+\nOsmAnd 是正在積極開發的開放原始碼。每個人都可以透過回報錯誤、改進翻譯或編寫新功能，為應用程式做出貢獻。此外，該專案依靠提供資金捐款資助編寫程式碼和測試新的功能。</string>
     <string name="osmand_extended_description_part1">OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式可以免費的存取，有世界各地和高品質的 OpenStreetMap（OSM）資料。
 \n
 \n享有語音和視覺的導航，檢視 POI（興趣點），建立和管理 GPX 軌跡，使用視覺化的等高線和海拔資訊（透過外掛元件），能在汽車駕駛、騎自行車和步行模式之間選擇、OSM 編輯和更多。</string>
@@ -2995,8 +2995,7 @@
     <string name="empty_state_markers_active">建立地圖標記！</string>
     <string name="empty_state_markers_active_desc">長按或點一下「地點」，然後點擊標記標誌按鈕。</string>
     <string name="empty_state_markers_groups">匯入群組</string>
-    <string name="empty_state_markers_groups_desc">匯入我的收藏群組或軌跡航點作為標記。</string>
-    <string name="empty_state_markers_history">\@string/shared_string_history</string>
+    <string name="empty_state_markers_groups_desc">您可以匯入我的收藏群組或軌跡航點作為標記。</string>
     <string name="shared_string_two">二</string>
     <string name="shared_string_one">一</string>
     <string name="distance_indication_descr">選擇如何顯示活動標記的距離。</string>
@@ -3179,7 +3178,7 @@
     <string name="open_in_browser_wiki">線上開啟文章</string>
     <string name="open_in_browser_wiki_description">在瀏覽器中檢視文章。</string>
     <string name="download_wiki_region_placeholder">這個區域</string>
-    <string name="wiki_article_search_text">搜尋需要的維基文章</string>
+    <string name="wiki_article_search_text">搜尋相應的維基文章</string>
     <string name="wiki_article_not_found">找不到文章</string>
     <string name="how_to_open_wiki_title">如何開啟維基百科文章？</string>
 <string name="popular_destinations">人氣目的地</string>
@@ -3197,4 +3196,10 @@
     <string name="how_to_open_link">如何開啟連結？</string>
     <string name="read_wikipedia_offline">離線閱讀維基百科</string>
     <string name="download_all">全部下載</string>
+    <string name="hide_full_description">隱藏完整說明</string>
+    <string name="show_full_description">顯示完整說明</string>
+    <string name="nautical_render_descr">海洋和河流導航的樣式。主要功能：浮標、燈塔、水域航行線和標記、港口、海洋標記服務、海洋等深線。</string>
+    <string name="ski_map_render_descr">滑雪樣式。主要功能：以便捷的方式呈現滑雪道、航拍方式和其他滑雪特點。減少分散注意力的次要地圖物件。</string>
+    <string name="light_rs_render_descr">給汽車導航的簡單和對比樣式。在夜間模式下呵護雙眼。主要功能：等高線、橙色對比樣式的道路、減少分散注意力的次要地圖物件。</string>
+    <string name="mapnik_render_descr">舊 mapnik 樣式預設的繪製樣式。主要功能：顏色類似於 Mapnik 樣式。</string>
     </resources>

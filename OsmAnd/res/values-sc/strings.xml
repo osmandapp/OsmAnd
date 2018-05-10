@@ -2994,7 +2994,6 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="empty_state_markers_active_desc">Marca logos in sa mapa cun un\'incarcu curtzu o longu in \"Logos\" e, a pustis, incarchende su butone cun sa bandera de sos marcadores.</string>
     <string name="empty_state_markers_groups">Importa grupos</string>
     <string name="empty_state_markers_groups_desc">Importa grupos de preferidos o puntos de coladòrgiu de una rasta comente marcadores.</string>
-    <string name="empty_state_markers_history">\@string/shared_string_history</string>
     <string name="empty_state_markers_history_desc">Sos marcadores sinnados comente colados ant a aparire in custu ischermu.</string>
     <string name="shared_string_two">Duos</string>
     <string name="shared_string_one">Unu</string>
@@ -3168,7 +3167,7 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="welcome_to_open_beta_description">Sa modalidade Biàgiu est basada in subra de Wikivoyage. Proa totu sas funtzionalidades suas pro su tempus chi at a durare sa beta aberta, de badas. A pustis de sa fine de custu perìodu, imbetzes, at a èssere disponìbile petzi pro abbonados a OsmAnd Unlimited e a chie tenet OsmAnd+</string>
     <string name="start_editing_card_description">Podes acontzare cale si siat artìculu in Wikivoyage. Cumpartzi connoschèntzias, esperièntzias, talentu e s\'atentzione tua</string>
     <string name="start_editing">Incumintza a modificare</string>
-    <string name="get_unlimited_access">Otènne s’atzessu illimitadu</string>
+    <string name="get_unlimited_access">Otene s’atzessu illimitadu</string>
     <string name="welcome_to_open_beta">Bene bènnidu a sa beta aberta</string>
     <string name="contour_lines_hillshade_maps">Curvas de livellu e mapas de umbradura de sos rilievos</string>
     <string name="download_wikipedia_description">Iscàrriga sos artìculos de Wikipedia pro %1$s pro los lèghere chene lìnia.</string>
@@ -3196,4 +3195,12 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="read_wikipedia_offline_description">Abbona·ti a OsmAnd Live pro lèghere sos artìculos de Wikipedia e Wikivoyage chene connessione.</string>
     <string name="how_to_open_link">Comente abèrrere su ligàmene?</string>
     <string name="read_wikipedia_offline">Leghe Wikipedia chene connessione</string>
+    <string name="hide_full_description">Istichi sa descritzione intrea</string>
+    <string name="show_full_description">Ammustra sa descritzione intrea</string>
+    <string name="nautical_render_descr">Istile pro su nàvigu marìtimu e de sos rios. Caraterìsticas printzipales: pidagnos, fatos, lìnias e edifìtzios nàuticos, portos, servìtzios marìtimos, curvas de livellu marinas.</string>
+    <string name="ski_map_render_descr">Istile pro s\'iscì. Caraterìsticas printzipales: pistas de iscì, funivias e àteras istruturas pro s\'iscì in una manera conveniente. Prus pagos ogetos de mapa secondàrios chi distraent.</string>
+    <string name="light_rs_render_descr">Istile simple e cun cuntrastu artu pro su nàvigu in màchina. Gentile pro sos ogros in sa modalidade noturna. Caraterìsticas printzipales: lìnias de livellu, istradas cun cuntrastu artu in colore arantzu, prus pagos ogetos de mapa secondàrios chi distraent.</string>
+    <string name="topo_render_descr">Istile cun cuntrastu artu disinnadu primariamente pro escursionismu o tziclismu. Legibilidade bona un\'illuminatzione esterna cumplessa. Caraterìsticas printzipales: istradas e ogetos naturales in cuntrastu artu, castas diferentes de àndalas, curvas de livellu cun impostatziones avantzadas, prus minujas in sos livellos de ismanniamentu currispondentes chi in s\'istile predefinidu. S\'optzione de integridade de sa superfìtzie ti permitit de distìnghere intre sas istradas cun calidades de sas superfìtzies diferentes. Peruna modalidade noturna.</string>
+    <string name="mapnik_render_descr">Istile betzu de renderizatzione simigiante a cussu de Mapnik. Caraterìsticas printzipales: sos colores sunt simigiantes a s\'istile de Mapnik.</string>
+    <string name="default_render_descr">Istile de impreu generale. Renderizatzione semplificada pro tènnere mapas prus netas in sas tzitades populosas. Caraterìsticas printzipales: curvas de livellu, àndalas, calidades de sas superfìtzies, restritziones de atzessu, iscudos istradales, rapresentatzione de sas camineras sighende s\'iscala SAC, funtzionalidades pro sos isports de abba durche.</string>
     </resources>
