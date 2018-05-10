@@ -362,6 +362,7 @@ a.geo {
     text-decoration: none;
     display: inline-block;
 }
+
 /* Tables */
 table {
     display: block;
@@ -385,10 +386,10 @@ table {
     background: var(--divider-color-night) !important;
 }
 
-
 td, tr, th {
     border: 1px solid var(--divider-color-day);
-    color: #cccccc; color: var(--main-text-color-night);
+    color: #cccccc; 
+    color: var(--main-text-color-night);
     background: #eaecf0;
     background: var(--divider-color-day);
 }
@@ -402,12 +403,14 @@ td, tr, th {
 
 .toc, .toc td, .toc tr {
     border: 0px solid;
+    background: #ffffff;
     background: var(--background-color-day);
 }
 
-.nightmode .toc, .toc td, .toc tr {
+.nightmode .toc, .nightmode .toc td, .nightmode .toc tr {
     border: 0px solid;
-    background: var(--background-color-night) !important;
+    background: #17191a;
+    background: var(--background-color-night);
 }
 
 .thumb-tright, .thumbinner {
