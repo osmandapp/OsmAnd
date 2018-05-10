@@ -7,7 +7,7 @@ import android.location.LocationManager;
 import android.os.PowerManager.WakeLock;
 
 public class OnNavigationServiceAlarmReceiver extends BroadcastReceiver {
-		@Override
+	@Override
 	public void onReceive(Context context, Intent intent) {
 		final WakeLock lock = NavigationService.getLock(context);
 		final NavigationService service = ((OsmandApplication) context.getApplicationContext()).getNavigationService();
@@ -38,4 +38,4 @@ public class OnNavigationServiceAlarmReceiver extends BroadcastReceiver {
 		}
 	}
 
-	}
+}
