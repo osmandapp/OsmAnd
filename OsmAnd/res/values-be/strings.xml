@@ -3126,13 +3126,13 @@
     <string name="popular_destinations">Папулярныя напрамкі</string>
     <string name="paid_app">Платнае прыкладанне</string>
     <string name="paid_plugin">Платны плагін</string>
-    <string name="travel_card_update_descr">Мы падрыхтавалі абнаўленні і выпраўленні даных Wikivoyage, абнавіце файл, каб убачыць іх.</string>
-	<string name="travel_card_download_descr">Спампуйце файл даведніка Wikivoyage для прагляду артыкулаў аб мясцінах па ўсім свеце без Інтэрнэт-падлучэння.</string>
+    <string name="travel_card_update_descr">Дастуныя новыя даныя Wikivoyage, абнавіце іх.</string>
+	<string name="travel_card_download_descr">Спампуйце гэтыя даведнікі Wikivoyage для прагляду артыкулаў аб мясцінах па ўсім свеце без Інтэрнэту.</string>
 	<string name="update_is_available">Абнаўленне даступнае</string>
 	<string name="download_file">Спампаваць файл</string>
     <string name="start_editing_card_image_text">Бясплатны сусветны турыстычны даведнік, які можа рэдагаваць кожны.</string>
-    <string name="welcome_to_open_beta_description">Падарожжа на аснове Wikivoyage. Падчас адкрытага бэта-тэставання ў вас ёсць магчымасць выкарыстоўваць усе функцыі бясплатна. Пасля завяршэння бэта-перыяду даведнік будзе даступны падпішчыкам OsmAnd Unlimited і ўладальнікам OsmAnd+</string>
-    <string name="start_editing_card_description">Вы можаце рэдагаваць любы артыкул на Wikivoyage, і мы спадзяемся, што вы зробіце гэта. Нам патрэбны вашы веды, ваш вопыт, ваш талент і ваша ўвага</string>
+    <string name="welcome_to_open_beta_description">Падарожжа на аснове Wikivoyage. Тэстуйце усе функцыі бясплатна падчас адкрытага бэта-тэставання. Потым даведнік будзе даступны падпішчыкам OsmAnd Unlimited і ўладальнікам OsmAnd+</string>
+    <string name="start_editing_card_description">Вам можна і варта рэдагаваць любы артыкул на Wikivoyage. Дзяліцеся ведамі, вопытам, талентам і вашай ўвагай</string>
     <string name="start_editing">Пачаць рэдагаваньне</string>
     <string name="get_unlimited_access">Атрымаць неабмежаваны доступ</string>
     <string name="welcome_to_open_beta">Вітаем у адкрытым бэта-тэставанні!</string>
@@ -3181,4 +3181,18 @@
     <string name="maps_you_need_descr">На падставе захаваных вамі артыкулаў, мы прапануем спампаваць вам наступныя мапы:</string>
     <string name="maps_you_need">Патрэбныя вам мапы</string>
     <string name="contour_lines_hillshade_maps">Контупныя лініі і зацяненне рэльефу</string>
+    <string name="hide_full_description">Схаваць поўнае апісанне</string>
+    <string name="show_full_description">Паказаць поўнае апісанне</string>
+    <string name="nautical_render_descr">Стыль для марской і рачной навігацыі. Асноўныя магчымасці: буі, маякі, водныя навігацыйныя лініі і адзнакі, гавані, марскія паслугі, контуры глыбіні.</string>
+    <string name="ski_map_render_descr">Стыль для катання на лыжах. Асноўныя магчымасці: адмалёўка трас, паветраных ліній і іншых лыжных аб\'ектаў. Менш другасных аб\'ектаў мапы, што адцягваюць увагу.</string>
+    <string name="light_rs_render_descr">Просты і кантрастны стыль для аўтамабільнай навігацыі. Пяшчотны для вачэй начны рэжым. Асноўныя магчымасці: контурныя лініі, кантрастныя памаранчавыя дарогі, менш другасных аб\'ектаў, што адцягваюць увагу.</string>
+    <string name="topo_render_descr">Кантрастны стыль, прызначаны ў першую чаргу для шпацыру на прыродзе, пахода і катання на ровары. Добрая чытальнасць пры складаным вонкавым асвятленні. Асноўныя магчамасці: кантрастныя дарогі і прыродныя аб\'екты, розныя тыпы маршрутаў, контурныя лініі з пашыранымі наладамі, больш падрабязная інфармацыя на адпаведных узроўнях маштабавання, чым у агаданым стылі. Опцыя цэласнасці паверхні дазваляе адрозніваць дарогі з рознай якасцю паверхні. Без начнога рэжыму.</string>
+    <string name="mapnik_render_descr">Стары агаданы стыль адмалёўкі. Асноўныя магчымасці: колеры падобныя на стыль Mapnik.</string>
+    <string name="default_render_descr">Стыль агульнага прызначэння. Спрошчаная адмалёўка, каб мець чыстыя карты ў населеных пунктах. Асноўныя магчымасці: контурныя лініі, якаць паверхні, абмежаванні доступу, дарожныя шчыты, адмалёўка шляхоў па шкале SAC, аб\'екты водных сплаваў.</string>
+    <string name="open_wikipedia_link_online">Адкрыць Вікіпедыя-спасылку анлайн</string>
+    <string name="open_wikipedia_link_online_description">OsmAnd перанакіруе вас у браўзер і адкрые спасылку анлайн.</string>
+    <string name="read_wikipedia_offline_description">Атрымайце падпіску на OsmAnd Live, каб чытаць артыкулы Вікіпедыі і Wikivoyage аўтаномна.</string>
+    <string name="how_to_open_link">Як адкрыць спасылку?</string>
+    <string name="read_wikipedia_offline">Чытаць Вікіпедыю аўтаномна</string>
+    <string name="download_all">Спампаваць усё</string>
     </resources>

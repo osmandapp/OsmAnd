@@ -1,5 +1,6 @@
 package net.osmand.plus;
 
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import net.osmand.IndexConstants;
@@ -314,7 +315,7 @@ public class GPXDatabase {
 		return false;
 	}
 
-	public boolean updateSplit(GpxDataItem item, int splitType, double splitInterval) {
+	public boolean updateSplit(@NonNull GpxDataItem item, int splitType, double splitInterval) {
 		SQLiteConnection db = openConnection(false);
 		if (db != null){
 			try {

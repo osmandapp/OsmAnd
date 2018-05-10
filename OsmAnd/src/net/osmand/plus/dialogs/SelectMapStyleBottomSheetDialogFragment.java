@@ -40,7 +40,7 @@ public class SelectMapStyleBottomSheetDialogFragment extends MenuBottomSheetDial
 	public static final String TAG = SelectMapStyleBottomSheetDialogFragment.class.getSimpleName();
 
 	private static final String SELECTED_STYLE_KEY = "selected_style";
-	private static final int COLLAPSED_DESCRIPTION_LINES = 3;
+	private static final int COLLAPSED_DESCRIPTION_LINES = 2;
 
 	private boolean descriptionExpanded;
 

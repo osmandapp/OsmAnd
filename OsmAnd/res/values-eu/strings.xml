@@ -3203,7 +3203,15 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="open_in_browser_wiki">Ireki artikulua linean</string>
     <string name="open_in_browser_wiki_description">Ikusi artikulua web nabigatzailean.</string>
     <string name="download_wiki_region_placeholder">eskualde hau</string>
-    <string name="wiki_article_search_text">Wiki artikuluaren bila</string>
+    <string name="wiki_article_search_text">Dagokion Wiki artikuluaren bila</string>
     <string name="wiki_article_not_found">Ez da artikulua aurkitu</string>
     <string name="how_to_open_wiki_title">Nola ireki Wikipedia artikuluak?</string>
-</resources>
+<string name="hide_full_description">Ezkutatu deskripzio osoa</string>
+    <string name="show_full_description">Erakutsi deskripzio osoa</string>
+    <string name="open_wikipedia_link_online">Ireki Wikipedia esteka sarean</string>
+    <string name="open_wikipedia_link_online_description">OsmAnd aplikazioak nabigatzailera eramango zaitu eta sareko esteka ireki.</string>
+    <string name="read_wikipedia_offline_description">Eskuratu OsmAnd Live harpidetza Wikipedia eta Wikivoyage artikuluak lineaz kanpo irakurtzeko.</string>
+    <string name="how_to_open_link">Nola ireki esteka bat?</string>
+    <string name="read_wikipedia_offline">Irakurri Wikipedia sarean</string>
+    <string name="download_all">Deskargatu dena</string>
+    </resources>

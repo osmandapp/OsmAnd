@@ -1208,7 +1208,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			public boolean searchFinished(SearchPhrase phrase) {
 				SearchResultCollection res = getResultCollection();
 				if (SearchUICore.isDebugMode()) {
-					LOG.info("UI >> Nearest cities found: " + (res != null ? res.getCurrentSearchResults().size() : 0));
+					LOG.info("UI >> Nearest cities found: " + getSearchResultCollectionFormattedSize(res));
 				}
 
 				final OsmandSettings settings = app.getSettings();
@@ -1665,11 +1665,11 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 					boolean append = getResultCollection() != null;
 					if (append) {
 						if (SearchUICore.isDebugMode()) {
-							LOG.info("UI >> Appending API results <" + phrase + "> API=<" + searchApi + "> Result collection=" + getResultCollection().getCurrentSearchResults().size());
+							LOG.info("UI >> Appending API results <" + phrase + "> API=<" + searchApi + "> Result collection=" + getSearchResultCollectionFormattedSize(getResultCollection()));
 						}
 						getResultCollection().addSearchResults(apiResults, true, true);
 						if (SearchUICore.isDebugMode()) {
-							LOG.info("UI >> API results appended <" + phrase + "> API=<" + searchApi + "> Result collection=" + getResultCollection().getCurrentSearchResults().size());
+							LOG.info("UI >> API results appended <" + phrase + "> API=<" + searchApi + "> Result collection=" + getSearchResultCollectionFormattedSize(getResultCollection()));
 						}
 					} else {
 						if (SearchUICore.isDebugMode()) {
@@ -1679,14 +1679,14 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 						resCollection.addSearchResults(apiResults, true, true);
 						setResultCollection(resCollection);
 						if (SearchUICore.isDebugMode()) {
-							LOG.info("UI >> API results assigned <" + phrase + "> API=<" + searchApi + "> Result collection=" + getResultCollection().getCurrentSearchResults().size());
+							LOG.info("UI >> API results assigned <" + phrase + "> API=<" + searchApi + "> Result collection=" + getSearchResultCollectionFormattedSize(getResultCollection()));
 						}
 					}
 					if (!hasRegionCollection && resultListener != null) {
 						resultListener.publish(getResultCollection(), append);
 					}
 					if (SearchUICore.isDebugMode()) {
-						LOG.info("UI >> API results shown <" + phrase + "> API=<" + searchApi + "> Results=" + getResultCollection().getCurrentSearchResults().size());
+						LOG.info("UI >> API results shown <" + phrase + "> API=<" + searchApi + "> Results=" + getSearchResultCollectionFormattedSize(getResultCollection()));
 					}
 				}
 			}
@@ -1702,32 +1702,36 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			public void run() {
 				if (!paused && !cancelPrev) {
 					if (SearchUICore.isDebugMode()) {
-						LOG.info("UI >> Showing region results <" + phrase + "> Region=<" + region.getFile().getName() + "> Results=" + regionResultCollection.getCurrentSearchResults().size());
+						LOG.info("UI >> Showing region results <" + phrase + "> Region=<" + region.getFile().getName() + "> Results=" + getSearchResultCollectionFormattedSize(regionResultCollection));
 					}
 					if (getResultCollection() != null) {
 						if (SearchUICore.isDebugMode()) {
-							LOG.info("UI >> Combining region results <" + phrase + "> Region=<" + region.getFile().getName() + "> Result collection=" + getResultCollection().getCurrentSearchResults().size());
+							LOG.info("UI >> Combining region results <" + phrase + "> Region=<" + region.getFile().getName() + "> Result collection=" + getSearchResultCollectionFormattedSize(getResultCollection()));
 						}
 						SearchResultCollection resCollection =
 								getResultCollection().combineWithCollection(regionResultCollection, true, true);
 						if (SearchUICore.isDebugMode()) {
-							LOG.info("UI >> Region results combined <" + phrase + "> Region=<" + region.getFile().getName() + "> Result collection=" + resCollection.getCurrentSearchResults().size());
+							LOG.info("UI >> Region results combined <" + phrase + "> Region=<" + region.getFile().getName() + "> Result collection=" + getSearchResultCollectionFormattedSize(resCollection));
 						}
 						if (resultListener != null) {
 							resultListener.publish(resCollection, true);
 						}
 						if (SearchUICore.isDebugMode()) {
-							LOG.info("UI >> Region results shown <" + phrase + "> Region=<" + region.getFile().getName() + "> Results=" + resCollection.getCurrentSearchResults().size());
+							LOG.info("UI >> Region results shown <" + phrase + "> Region=<" + region.getFile().getName() + "> Results=" + getSearchResultCollectionFormattedSize(resCollection));
 						}
 					} else if (resultListener != null) {
 						resultListener.publish(regionResultCollection, false);
 						if (SearchUICore.isDebugMode()) {
-							LOG.info("UI >> Region results shown <" + phrase + "> Region=<" + region.getFile().getName() + "> Results=" + regionResultCollection.getCurrentSearchResults().size());
+							LOG.info("UI >> Region results shown <" + phrase + "> Region=<" + region.getFile().getName() + "> Results=" + getSearchResultCollectionFormattedSize(regionResultCollection));
 						}
 					}
 				}
 			}
 		});
+	}
+
+	private String getSearchResultCollectionFormattedSize(@Nullable SearchResultCollection resultCollection) {
+		return resultCollection != null ? String.valueOf(resultCollection.getCurrentSearchResults().size()) : "empty";
 	}
 
 	public void completeQueryWithObject(SearchResult sr) {

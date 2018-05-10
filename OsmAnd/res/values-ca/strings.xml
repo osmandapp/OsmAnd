@@ -2328,7 +2328,7 @@ L\'espai disponible és només de {2} MB.</string>
     <string name="quick_action_map_source_action">Afegeix origen del mapa</string>
     <string name="quick_action_map_source_switch">L\'origen del mapa s\'ha canviat al de \"%s\".</string>
     <string name="quick_action_btn_tutorial_title">Modifica la posició del botó</string>
-    <string name="quick_action_btn_tutorial_descr">Premeu contínuament i arrossegueu el botó per canviar-li la posició per la pantalla.</string>
+    <string name="quick_action_btn_tutorial_descr">Si premeu i arrossegueu alhora, el botó canvia la seva posició a la pantalla.</string>
 <string name="quick_action_interim_dialog">Mostra un diàleg provisional</string>
     <string name="quick_action_sh_poi_descr">Podeu afegir una o més categories de PDI per mostrar-les al mapa.</string>
     <string name="shared_string_action_name">Nom de l\'acció</string>
@@ -2590,7 +2590,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="empty_state_my_tracks">Afegeix i enregistra traces</string>
     <string name="empty_state_my_tracks_desc">Enregistra o importa traces per veure.</string>
     <string name="empty_state_favourites">Afegeix als preferits</string>
-    <string name="empty_state_favourites_desc">Afegeix preferits des del mapa o importa\'ls des d\'un fitxer.</string>
+    <string name="empty_state_favourites_desc">Afegiu preferits al mapa o importeu-los.</string>
     <string name="import_track">Importa traça</string>
     <string name="import_track_desc">El fitxer %1$s no conté fites, voleu importar-lo com una traça?</string>
     <string name="move_point">Mou punt</string>
@@ -2756,7 +2756,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="touring_view_renderer">Visualització de moviment (contrast i detalls)</string>
     <string name="nautical_renderer">Nàutica</string>
     <string name="copy_location_name">Còpia Punt/PDI nom</string>
-    <string name="toast_empty_name_error">La ubicació no té cap nom</string>
+    <string name="toast_empty_name_error">Ubicació sense nom</string>
 <string name="show_closed_notes">Mostra notes amagades</string>
     <string name="switch_osm_notes_visibility_desc">Mostra/Amaga notes OSM en el mapa.</string>
     <string name="gpx_file_desc">GPX - adient per exportar-lo a JOSM o a altres editors d\'OSM.</string>
@@ -2864,7 +2864,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="download_wikipedia_description">Baixeu els articles de la Viquipèdia per %1$s per llegir-los fora de línia.</string>
     <string name="download_wikipedia_label">Baixa dades de la Viquipèdia</string>
     <string name="open_in_browser_wiki">Obre l\'article en línia</string>
-    <string name="open_in_browser_wiki_description">Consulta aquest article en un navegador.</string>
+    <string name="open_in_browser_wiki_description">Consulta l\'article en un navegador.</string>
     <string name="download_wiki_region_placeholder">aquesta regió</string>
     <string name="wiki_article_not_found">L\'article no s\'ha trobat</string>
     <string name="how_to_open_wiki_title">Com obrir els articles de la Viquipèdia?</string>
@@ -2904,4 +2904,6 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="show_full_description">Mostra la descripció completa</string>
     <string name="nautical_render_descr">Estil per la navegació marina i fluvial. Principals característiques: boies, fars, línies i balises de navegació aquàtica, ports, serveis marítims, isòbates.</string>
     <string name="ski_map_render_descr">Estil per l\'esquí. Principals característiques: representació de pistes, vies aèries i altres característiques d\'esquí de forma adient. Menys objectes secundaris del mapa que distreguin.</string>
+    <string name="light_rs_render_descr">"Estil senzill i contrastat per navegació amb el cotxe. En mode nocturn té cura de la vista.  Principals característiques: corbes de nivell, vies contrastades d\'estil ataronjat, menys objectes secundaris al mapa que puguin distreure."</string>
+    <string name="wiki_article_search_text">Buscant el corresponent article a la wiki</string>
     </resources>

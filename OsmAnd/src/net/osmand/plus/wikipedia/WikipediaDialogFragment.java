@@ -120,6 +120,7 @@ public class WikipediaDialogFragment extends WikiArticleBaseDialogFragment {
 		contentWebView = (WebView) mainView.findViewById(R.id.content_web_view);
 		WebSettings webSettings = contentWebView.getSettings();
 		webSettings.setJavaScriptEnabled(true);
+		webSettings.setTextZoom((int) (getResources().getConfiguration().fontScale * 100f));
 		contentWebView.setWebViewClient(new WikipediaWebViewClient(getActivity(), nightMode));
 		updateWebSettings();
 		contentWebView.setBackgroundColor(ContextCompat.getColor(getMyApplication(),

@@ -1559,7 +1559,7 @@
 	<string name="poi_direction_all">الاتجاه: الكل</string>
 
 <string name="poi_direction_exit">الاتجاه: مخرج</string>
-	<string name="poi_piste_grooming">تعبيد الطريق الثلجي</string>
+	<string name="poi_piste_grooming">مسار زحلقة</string>
 	<string name="poi_animal_shelter_type">الحيوانات مسموح بها</string>
 	<string name="poi_animal_shelter_purpose">الغرض</string>
 
