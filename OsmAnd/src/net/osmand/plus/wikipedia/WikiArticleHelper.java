@@ -7,6 +7,8 @@ import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.text.Html;
 import android.util.Log;
 
 import net.osmand.IndexConstants;
@@ -33,6 +35,8 @@ import java.util.List;
 public class WikiArticleHelper {
 
 	private static final String TAG = WikiArticleHelper.class.getSimpleName();
+
+	private static final int PARTIAL_CONTENT_PHRASES = 3;
 	private static final String ZIP_EXT = ".zip";
 	private static final String PAGE_PREFIX_HTTP = "http://";
 	private static final String PAGE_PREFIX_HTTPS = "https://";
@@ -229,5 +233,49 @@ public class WikiArticleHelper {
 				})
 				.setNegativeButton(R.string.shared_string_cancel, null)
 				.show();
+	}
+
+	@Nullable
+	public static String getPartialContent(String content) {
+		if (content == null) {
+			return null;
+		}
+
+		String pOpened = "<p>";
+		String pClosed = "</p>";
+
+		int firstParagraphStart = content.indexOf(pOpened);
+		int firstParagraphEnd = content.indexOf(pClosed);
+		if (firstParagraphStart == -1 || firstParagraphEnd == -1
+				|| firstParagraphEnd < firstParagraphStart) {
+			return null;
+		}
+		int pClosedLength = pClosed.length();
+		String firstParagraphHtml = content.substring(firstParagraphStart, firstParagraphEnd + pClosedLength);
+		while (firstParagraphHtml.length() == (pOpened.length() + pClosedLength)
+				&& (firstParagraphEnd + pClosedLength) < content.length()) {
+			firstParagraphStart = content.indexOf(pOpened, firstParagraphEnd);
+			firstParagraphEnd = firstParagraphStart == -1 ? -1 : content.indexOf(pClosed, firstParagraphStart);
+			if (firstParagraphStart != -1 && firstParagraphEnd != -1) {
+				firstParagraphHtml = content.substring(firstParagraphStart, firstParagraphEnd + pClosedLength);
+			} else {
+				break;
+			}
+		}
+
+		String firstParagraphText = Html.fromHtml(firstParagraphHtml.replaceAll("(<(/)(a|img)>)|(<(a|img).+?>)|(<div.+?/div>)", ""))
+				.toString().trim();
+		String[] phrases = firstParagraphText.split("\\. ");
+
+		StringBuilder res = new StringBuilder();
+		int limit = Math.min(phrases.length, PARTIAL_CONTENT_PHRASES);
+		for (int i = 0; i < limit; i++) {
+			res.append(phrases[i]);
+			if (i < limit - 1) {
+				res.append(". ");
+			}
+		}
+
+		return res.toString();
 	}
 }
