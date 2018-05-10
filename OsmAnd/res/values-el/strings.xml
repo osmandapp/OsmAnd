@@ -1899,7 +1899,6 @@
     <string name="empty_state_markers_active_desc">Πατήστε παρατεταμένα ή σύντομα \'Μέρη\', έπειτα πατήστε το πλήκτρο σημαίας δείκτη.</string>
     <string name="empty_state_markers_groups">Εισαγωγή ομάδων</string>
     <string name="empty_state_markers_groups_desc">Εισάγετε ομάδες αγαπημένων ή σημεία διαδρομής ίχνους ως δείκτες.</string>
-    <string name="empty_state_markers_history">\@string/shared_string_history</string>
     <string name="empty_state_markers_history_desc">Οι δείκτες που σημειώθηκαν ως περασμένοι, θα εμφανιστούν στην οθόνη.</string>
     <string name="shared_string_two">Δύο</string>
     <string name="shared_string_one">Ένα</string>
@@ -3118,7 +3117,7 @@
     <string name="open_in_browser_wiki">Άνοιγμα άρθρου διαδικτυακά</string>
     <string name="open_in_browser_wiki_description">Προβολή άρθρου σε πλοηγητή.</string>
     <string name="download_wiki_region_placeholder">αυτής της περιοχής</string>
-    <string name="wiki_article_search_text">Αναζήτηση για το απαραίτητο άρθρο βίκι</string>
+    <string name="wiki_article_search_text">Αναζήτηση για το αντίστοιχο άρθρο βίκι</string>
     <string name="wiki_article_not_found">Δεν βρέθηκε το άρθρο</string>
     <string name="how_to_open_wiki_title">Πώς να ανοίξετε τα άρθρα της βικιπαίδειας;</string>
 <string name="osmand_team">Ομάδα OsmAnd</string>
@@ -3128,4 +3127,18 @@
 
     <string name="maps_you_need_descr">Με βάση τα άρθρα που αποθηκεύσατε, σας συνιστούμε να κατεβάσετε τους παρακάτω χάρτες:</string>
     <string name="maps_you_need">Χάρτες που χρειάζεστε</string>
+    <string name="hide_full_description">Απόκρυψη πλήρους περιγραφής</string>
+    <string name="show_full_description">Εμφάνιση πλήρους περιγραφής</string>
+    <string name="nautical_render_descr">Μορφή για πλοήγηση σε θάλασσες και ποτάμια. Κύρια χαρακτηριστικά: σημαδούρες, φάροι, γραμμές και σημάδια υδάτινης πλοήγησης, λιμάνια, υπηρεσίες θαλάσσιων σημάνσεων, ισοβαθείς καμπύλες.</string>
+    <string name="ski_map_render_descr">Μορφή για χιονοδρομίες. Βασικά χαρακτηριστικά: παρουσιάζει πίστες, εναέριες οδοί και άλλα χαρακτηριστικά χιονοδρομίας με εύχρηστο τρόπο. Μικρότερη απόσπαση προσοχής από δευτερεύοντα αντικείμενα του χάρτη.</string>
+    <string name="light_rs_render_descr">Για πλοήγηση αυτοκινήτου απλή και με αντίθεση μορφή. Ήπια για τα μάτια στην κατάσταση νύχτας. Βασικά χαρακτηριστικά: ισοϋψείς γραμμές, δρόμοι με πορτοκαλή αντίθεση, μικρότερη απόσπαση προσοχής από δευτερεύοντα αντικείμενα του χάρτη.</string>
+    <string name="topo_render_descr">Η μορφή με αντίθεση σχεδιάστηκε κυρίως για πεζοπορία στη φύση, περπάτημα και ποδηλασία. Καλή αναγνωσιμότητα σε σύνθετο εξωτερικό φωτισμό. Βασικά χαρακτηριστικά: δρόμοι με αντίθεση και φυσικά αντικείμενα, διάφοροι τύποι διαδρομών, ισοϋψείς γραμμές με προχωρημένες ρυθμίσεις, περισσότερες λεπτομέρειες στα επίπεδα αντίστοιχης εστίασης από την προεπιλεγμένη μορφή. Η επιλογή ακεραιότητας επιφάνειας σας επιτρέπει να διακρίνετε δρόμους με διαφορετική επιφανειακή ποιότητα. Χωρίς κατάσταση νύχτας.</string>
+    <string name="mapnik_render_descr">Μορφή απόδοσης προεπιλεγμένης μορφής παλιού mapnik. Βασικά χαρακτηριστικά: παρόμοια χρώματα με τη μορφή Mapnik.</string>
+    <string name="default_render_descr">Μορφή γενικού σκοπού. Απλοποιημένη απόδοση για να έχετε πιο καθαρούς χάρτες στις πολυπληθείς πόλεις. Βασικά χαρακτηριστικά: ισοϋψείς γραμμές, διαδρομές, επιφανειακή ποιότητα, περιορισμοί πρόσβασης, πινακίδες δρόμων, τα μονοπάτια αποδίδονται σύμφωνα με την κλίμακα SAC, χαρακτηριστικά αθλημάτων με ορμητικό νερό.</string>
+    <string name="open_wikipedia_link_online">Άνοιγμα διαδικτυακού συνδέσμου βικιπαίδειας</string>
+    <string name="open_wikipedia_link_online_description">Το OsmAnd θα σας ανακατευθύνει στον πλοηγητή και θα ανοίξει διαδικτυακά τον σύνδεσμο.</string>
+    <string name="read_wikipedia_offline_description">Εγγραφείτε στο OsmAnd Live για να διαβάσετε χωρίς σύνδεση άρθρα στη βικιπαίδεια και το βικιταξίδια.</string>
+    <string name="how_to_open_link">Πώς να ανοίξετε τον σύνδεσμο;</string>
+    <string name="read_wikipedia_offline">Ανάγνωση της βικιπαίδειας χωρίς σύνδεση</string>
+    <string name="download_all">Λήψη όλων</string>
     </resources>

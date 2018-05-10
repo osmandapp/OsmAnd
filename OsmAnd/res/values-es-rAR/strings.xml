@@ -854,36 +854,36 @@ Lon %2$s</string>
     <string name="osmand_play_title_30_chars">Navegación y Mapas OsmAnd</string>
     <string name="osmand_short_description_80_chars">Visor y navegador móvil global de mapas OSM con y sin conexión</string>
     <string name="osmand_long_description_1000_chars">"OsmAnd (OSM Automated Navigation Directions, y en español, Guía de Navegación Automatizada de OSM) 
-\n
+\n 
 \nOsmAnd es un software de navegación de código abierto con acceso a una amplia variedad de datos globales de OpenStreetMap (OSM). Todos los datos del mapa (vectores y teselas) pueden ser almacenados en la memoria del teléfono para su uso sin conexión. También ofrece funcionalidades de rutas con y sin conexión, incluyendo indicaciones giro-a-giro por voz. 
-\n
+\n 
 \n Algunas de las funciones fundamentales: 
-\n - Completa funcionalidad sin conexión (almacena los mapas vectoriales o teselas descargados en la memoria del dispositivo) 
+\n - Completa funcionalidad sin conexión (almacena los mapas vectoriales o teselas descargados en la memoria del dispositivo)
 \n - Mapas vectoriales compactos disponibles de todo el planeta 
 \n - Descarga de mapas por país o región directamente desde la aplicación 
 \n - Posibilidad de superponer varias capas de mapa, como GPX o rutas de navegación, Puntos de Interés (PDI), favoritos, curvas de nivel, paradas de transporte público, mapas adicionales con transparencia personalizable 
 \n - Búsqueda sin conexión de direcciones y lugares (PDI) 
 \n - Navegación sin conexión para distancias de rango medio 
 \n - Modos de automóvil, bicicleta y peatón con opcional: 
-\n  - Cambio automático de vista día/noche 
+\n  - Cambio automático de modo diurno/nocturno 
 \n  - Zoom del mapa según la velocidad 
 \n  - Alineación del mapa, según la brújula o dirección del movimiento 
 \n  - Indicación de carriles, visualización de límites de velocidad, voces grabadas y sintetizadas 
-\n 
+\n
 \n Limitaciones de la versión gratuita de OsmAnd: 
 \n - Limitado número de mapas descargados 
 \n - Sin acceso a los PDI descargados de Wikipedia. 
-\n 
+\n
 \n Los PDI de OsmAnd están siendo desarrollados activamente. Nuestro proyecto y su continuo progreso, se basa en contribuciones económicas para desarrollar y probar nuevas funcionalidades. Por favor, considera comprar OsmAnd+, financiar nuevas funciones o hacer una donación general en https://osmand.net."</string>
     
     <string name="osmand_plus_play_title_30_chars">Navegación y Mapas OsmAnd+</string>
     <string name="osmand_plus_short_description_80_chars">Visor y navegador móvil global de mapas OSM con y sin conexión</string>
     <string name="osmand_plus_long_description_1000_chars">"OsmAnd+ (OSM Automated Navigation Directions, y en español, Guía de Navegación Automatizada de OSM) 
-\n
+\n 
 \nOsmAnd+ es un software de navegación de código abierto con acceso a una amplia variedad de datos globales de OpenStreetMap (OSM). Todos los datos del mapa (vectores y teselas), pueden ser almacenados en la memoria del teléfono para su uso sin conexión. Ofrece funcionalidades de rutas con y sin conexión, incluyendo guía de giro-a-giro por voz. 
-\n
+\n 
 \n OsmAnd+ es la versión de pago de la aplicación, comprándola das soporte al proyecto, financias el desarrollo de nuevas funciones, y recibes las últimas actualizaciones. 
-\n
+\n 
 \n Algunas de las funciones fundamentales: 
 \n - Completa funcionalidad sin conexión (guarda los mapas vectoriales o teselas descargados en el almacenamiento del dispositivo) 
 \n - Mapas mundiales vectoriales compactos disponibles 
@@ -892,7 +892,7 @@ Lon %2$s</string>
 \n - Búsqueda sin conexión de direcciones y lugares (PDI) 
 \n - Rutas sin conexión para distancias de rango medio 
 \n - Modos de automóvil, bicicleta y peatón con opcional: 
-\n  - Cambio automático de vista día/noche 
+\n  - Cambio automático de modo diurno/nocturno 
 \n  - Zoom del mapa según la velocidad 
 \n  - Alineación del mapa, según brújula o dirección del movimiento 
 \n  - Indicación de carriles, mostrar límites de velocidad, voces grabadas y sintetizadas"</string>
@@ -902,7 +902,7 @@ Lon %2$s</string>
     <string name="select_navigation_mode">Elegir modo de transporte</string>
     <string name="day_night_info_description">Alba: %1$s
 \nOcaso: %2$s</string>
-    <string name="day_night_info">Información día/noche</string>
+    <string name="day_night_info">Información diurna/nocturna</string>
     
     <string name="map_widget_renderer">Estilo del mapa</string>
     <string name="layer_map_appearance">Configurar pantalla</string>
@@ -1349,11 +1349,11 @@ Lon %2$s</string>
     <string name="voice_is_not_available_msg">Las indicaciones por voz no están disponibles, vaya a «Ajustes» → «Ajustes de navegación» → «Indicaciones por voz» y elige o descarga un paquete de indicaciones por voz.</string>
     <string name="voice_is_not_available_title">No se eligieron indicaciones por voz</string>
     <string name="daynight_mode_day">Día</string>
-    <string name="daynight_mode_night">Noche</string>
+    <string name="daynight_mode_night">Nocturno</string>
     <string name="daynight_mode_auto">Alba/ocaso</string>
     <string name="daynight_mode_sensor">Sensor de luz</string>
     <string name="daynight_descr">Elige el motivo de cambio entre el modo nocturno y diurno.</string>
-    <string name="daynight">Modo día/noche</string>
+    <string name="daynight">Modo diurno/nocturno</string>
     <string name="download_files_question">¿Descargar {0} archivo(s) ({1} MB)?</string>
     <string name="items_were_selected">{0} elemento(s) seleccionado(s)</string>
     <string name="filter_existing_indexes">Descargados</string>
@@ -2472,12 +2472,12 @@ Lon %2$s</string>
 \n • La guía por voz giro-a-giro lo guía a lo largo del camino (voces grabadas y sintetizadas) 
 \n • La ruta se recalcula al salirse de la misma 
 \n • Guía de carriles, nombres de calles y tiempo estimado al destino, lo ayudará a lo largo de la ruta 
-\n • Para hacer su viaje seguro, los modos día/noche se alternan automáticamente 
+\n • Para hacer su viaje seguro, los modos diurno/nocturno se alternan automáticamente 
 \n • Muestra los límites de velocidad y obtiene un aviso al excederte del mismo 
 \n • El zoom del mapa se ajusta a la velocidad 
 \n • Busca destinos por dirección, por tipo (por ejemplo: estacionamientos, restaurantes, hoteles, estaciones de servicio, museos), o por coordenadas geográficas 
 \n • Soporta puntos intermedios en el itinerario 
-\n • Graba tu viaje o sube una traza GPX y síguela
+\n • Graba tu viaje o sube una traza GPX y síguela 
 \n</string>
     <string name="osmand_extended_description_part3">Mapa 
 \n • Muestra PDI (puntos de interés) a tu alrededor 
@@ -2544,7 +2544,7 @@ Lon %2$s</string>
 \n • Mapas vectoriales reducidos sin conexión, actualizados al menos una vez cada mes 
 \n • Elije entre datos completos de la región o sólo la red de rutas (Ejemplo: Todo Japón tiene 700 MB o sólo 200 MB para la red de rutas)</string>
     <string name="osmand_plus_extended_description_part5">Funciones de seguridad 
-\n • (Opcional) La vista día/noche se alterna automáticamente 
+\n • (Opcional) El modo diurno/nocturno se alterna automáticamente 
 \n • (Opcional) Visualización del límite de velocidad, con aviso al excederte 
 \n • (Opcional) Zoom del mapa según la velocidad 
 \n • Comparte la ubicación para que tus amigos puedan encontrarte</string>
@@ -2856,7 +2856,6 @@ Lon %2$s</string>
     <string name="distance_indication_descr">Elige cómo mostrar la distancia a los marcadores activos.</string>
     <string name="active_markers_descr">Elige el número de marcadores activos a mostrar.</string>
     <string name="appearance_on_the_map">Aspecto en el mapa</string>
-    <string name="empty_state_markers_history">\@string/shared_string_history</string>
     <string name="looking_for_tracks_with_waypoints">Búsqueda de trazas con puntos de referencia</string>
     <string name="shared_string_more_without_dots">Más</string>
     <string name="empty_state_osm_edits">Crear o modificar objetos OSM</string>
@@ -3045,9 +3044,17 @@ Lon %2$s</string>
     <string name="purchase_cancelled_dialog_descr">Renueva la suscripción para continuar usando todas las funciones:</string>
 
     <string name="open_wikipedia_link_online">Abrir enlace de Wikipedia en línea</string>
-    <string name="open_wikipedia_link_online_description">OsmAnd abrirá el navegador para el enlace en línea.</string>
+    <string name="open_wikipedia_link_online_description">OsmAnd abrirá el navegador para ver el enlace en línea.</string>
     <string name="read_wikipedia_offline_description">Obtén una suscripción de OsmAnd Live para leer artículos de Wikipedia y Wikiviajes, sin conexión.</string>
     <string name="how_to_open_link">¿Cómo abrir un enlace?</string>
     <string name="read_wikipedia_offline">Leer la Wikipedia sin conexión</string>
     <string name="download_all">Descargar todo</string>
+    <string name="hide_full_description">Ocultar descripción completa</string>
+    <string name="show_full_description">Mostrar descripción completa</string>
+    <string name="nautical_render_descr">Estilo para navegación marítima y fluvial. Características principales: boyas, faros, líneas y balizas de navegación fluvial, puertos, servicios marítimos, curvas de profundidad.</string>
+    <string name="ski_map_render_descr">Estilo para esquiar. Características principales: pistas de esquí, pistas aéreas y otras características de esquí de una manera conveniente. Menos objetos cartográficos secundarios que distraen la atención.</string>
+    <string name="light_rs_render_descr">Estilo simple y de contraste para la navegación en automóvil. Suave para los ojos en el modo nocturno. Características principales: curvas de nivel, caminos de estilo naranja contrastante, objetos cartográficos secundarios menos molestos.</string>
+    <string name="topo_render_descr">Estilo de contraste diseñado principalmente para caminatas en la naturaleza, trekking y ciclismo. Buena legibilidad en iluminación exterior compleja. Características principales: contraste de caminos y objetos naturales, diferentes tipos de rutas, curvas de nivel con ajustes avanzados, mayor detalle en los niveles de zoom correspondientes que en el estilo predefinido. La opción de integridad de la superficie permite distinguir entre caminos con diferente calidad de superficie. Sin modo nocturno.</string>
+    <string name="mapnik_render_descr">Estilo de visualización antiguo predefinido de Mapnik. Características: los colores son similares al estilo Mapnik.</string>
+    <string name="default_render_descr">Estilo de uso general. Visualización simplificada para tener mapas más limpios en las ciudades pobladas. Características principales: curvas de nivel, recorridos, calidad de la superficie, restricciones de acceso, escudos, visualización de caminos según escala SAC, características de los deportes acuáticos.</string>
     </resources>

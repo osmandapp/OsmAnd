@@ -284,6 +284,27 @@ public class RendererRegistry {
 		return null;
 	}
 
+	@NonNull
+	public static String getRendererDescription(@NonNull Context ctx, @NonNull String key) {
+		switch (key) {
+			case DEFAULT_RENDER:
+				return ctx.getString(R.string.default_render_descr);
+			case TOURING_VIEW:
+				return ctx.getString(R.string.touring_view_render_descr);
+			case MAPNIK_RENDER:
+				return ctx.getString(R.string.mapnik_render_descr);
+			case TOPO_RENDER:
+				return ctx.getString(R.string.topo_render_descr);
+			case LIGHTRS_RENDER:
+				return ctx.getString(R.string.light_rs_render_descr);
+			case WINTER_SKI_RENDER:
+				return ctx.getString(R.string.ski_map_render_descr);
+			case NAUTICAL_RENDER:
+				return ctx.getString(R.string.nautical_render_descr);
+		}
+		return "No description provided"; // FIXME
+	}
+
 	public RenderingRulesStorage getCurrentSelectedRenderer() {
 		if(currentSelectedRender == null){
 			return defaultRender();

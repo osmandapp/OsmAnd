@@ -3128,4 +3128,18 @@
     <string name="purchase_cancelled_dialog_descr">יש לחדש את המינוי כדי להמשיך להשתמש בכל התכונות הבאות:</string>
 
     <string name="download_all">להוריד הכול</string>
+    <string name="open_wikipedia_link_online">פתיחת הקישור של ויקיפדיה בדפדפן</string>
+    <string name="open_wikipedia_link_online_description">OsmAnd יפנה אותך לדפדפן ויפתח את הקישור.</string>
+    <string name="read_wikipedia_offline_description">עליך לערוך מינוי ל־OsmAnd חי כדי לקרוא ערכים מוויקיפדיה ומוויקימסע ללא חיבור לאינטרנט.</string>
+    <string name="how_to_open_link">כיצד לפתוח קישור?</string>
+    <string name="read_wikipedia_offline">קריאת ויקיפדיה ללא חיבור לאינטרנט</string>
+    <string name="edit_tilesource_elliptic_tile">היטל כדורי</string>
+    <string name="hide_full_description">הסתרת התיאור המלא</string>
+    <string name="show_full_description">הצגת התיאור המלא</string>
+    <string name="nautical_render_descr">סגנון לניווט בים ובנהרות. תכונות מפתח: מצופים, מגדלורים, קווים וסימונים לניווט במים, מעגנים, שירותי סימונים ימיים, קווי מתאר לתיאור עומק.</string>
+    <string name="ski_map_render_descr">סגנון גלישת סקי. תכונות מפתח: מסלולי גלישה, דרכים אוויריות ותכונות סקי נוספות בדרך נוחה. עצמים משניים במפה פחות מושכים תשומת לב.</string>
+    <string name="light_rs_render_descr">סגנון פשוט וחד לניווט עם מכונית. נוח לצפייה במצב לילה. תכונות מפתח: קווי מתאר, כבישים בניגודיות גבוהה ובכתום, פריטים משניים במפה פחות מושכים תשומת לב.</string>
+    <string name="topo_render_descr">סגנונות ניגודיות תוכננו בעיקר לטובת טיולים בחיק הטבע, מסלולי טיול בהרים ורכיבה על אופניים. תצוגה מותאמת לקריאה בתנאי תאורת חוץ מורכבים. תכונות מפתח: ניגודיות בין דרכים לעצמים בטבע, סוגים שונים של מסלולים, קווי מתאר עם הגדרות מתקדמות, פרטים נוספים ברמות תקריב מתואמות מעבר לסגנון בררת המחדל. אפשרות שלמות משטח מאפשרת לך להבדיל בין דרכים עם איכות משטח שונה. אין מצב לילה.</string>
+    <string name="mapnik_render_descr">סגנון עיבוד מפה בתצורת mapnik. תכונות מפתח: הצבעים דומים לסגנון של Mapnik.</string>
+    <string name="default_render_descr">סגנון מטרה כללית. עיבוד פשוט יותר כדי לקבל מפות נקיות יותר בערים מאוכלסות. תכונות מפתח: קווי מתאר, שלמות המשטח, הגבלות גישה, סימוני מספרי כבישים, עיבוד נתיבים לפי מדד SAC, תכונות ספורט מים לבנים.</string>
     </resources>

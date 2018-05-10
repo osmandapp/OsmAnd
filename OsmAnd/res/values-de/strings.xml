@@ -2950,7 +2950,6 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="add_group">Gruppe hinzufügen</string>
     <string name="empty_state_markers_active">Kartenmarkierungen erstellen!</string>
     <string name="empty_state_markers_groups">Gruppen importieren</string>
-    <string name="empty_state_markers_history">\@string/shared_string_history</string>
     <string name="empty_state_markers_history_desc">Markierungen, die als passiert gekennzeichnet sind, werden auf diesem Bildschirm angezeigt.</string>
     <string name="digits_quantity">Anzahl der Dezimalstellen</string>
     <string name="show_number_pad">Nummernblock anzeigen</string>
@@ -3122,7 +3121,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="open_in_browser_wiki">Artikel online öffnen</string>
     <string name="open_in_browser_wiki_description">Artikel in einem Webbrowser ansehen.</string>
     <string name="download_wiki_region_placeholder">diese Region</string>
-    <string name="wiki_article_search_text">Suche nach dem benötigten Wiki-Artikel</string>
+    <string name="wiki_article_search_text">Suche nach dem entsprechenden Wiki-Artikel</string>
     <string name="wiki_article_not_found">Artikel nicht gefunden</string>
     <string name="paid_app">Bezahlte App</string>
     <string name="paid_plugin">Bezahltes Modul</string>
@@ -3136,4 +3135,17 @@ Abgedeckte Fläche: %1$s x %2$s</string>
 
     <string name="maps_you_need_descr">Basierend auf den von Ihnen gespeicherten Artikeln empfehlen wir Ihnen, folgende Karten herunterzuladen:</string>
     <string name="maps_you_need">Benötigte Karten</string>
+    <string name="open_wikipedia_link_online">Wikipedia-Link online öffnen</string>
+    <string name="open_wikipedia_link_online_description">OsmAnd leitet Sie zum Browser weiter und öffnet den Link online.</string>
+    <string name="read_wikipedia_offline_description">Holen Sie sich das OsmAnd Live Abonnement, um Wikipedia und Wikivoyage Artikel offline zu lesen.</string>
+    <string name="how_to_open_link">Wie öffnet man einen Link?</string>
+    <string name="read_wikipedia_offline">Wikipedia offline lesen</string>
+    <string name="download_all">Alles herunterladen</string>
+    <string name="hide_full_description">Vollständige Beschreibung ausblenden</string>
+    <string name="show_full_description">Vollständige Beschreibung anzeigen</string>
+    <string name="nautical_render_descr">Stil für die See- und Flussschifffahrt. Hauptmerkmale: Bojen, Leuchttürme, Wasserstraßen und -markierungen, Häfen, Seezeichendienste, Tiefenlinien.</string>
+    <string name="ski_map_render_descr">Stil zum Skifahren. Hauptmerkmale: Rendern von Pisten, Luftstrassen und anderen Skimerkmalen auf komfortable Weise. Weniger störende sekundäre Kartenobjekte.</string>
+    <string name="light_rs_render_descr">Einfacher und kontrastreicher Stil für die Navigation im Auto. Schonend für die Augen im Nachtmodus. Hauptmerkmale: Konturlinien, Kontrast orange gestylter Straßen, weniger störende sekundäre Kartenobjekte.</string>
+    <string name="topo_render_descr">Kontraststil, der vor allem für Naturwanderungen, Trekking und Radtouren geeignet ist. Gute Ablesbarkeit bei komplexer Außenbeleuchtung. Hauptmerkmale: Kontrast von Straßen und natürlichen Objekten, verschiedene Arten von Routen, Höhenlinien mit erweiterten Einstellungen, mehr Details bei entsprechenden Zoomstufen als im Standardstil. Mit der Option Oberflächenintegrität können Sie zwischen Straßen mit unterschiedlicher Oberflächenqualität unterscheiden. Kein Nachtmodus.</string>
+    <string name="mapnik_render_descr">Alter Mapnik-Stil, Standard-Rendering-Stil. Hauptmerkmale: Die Farben ähneln dem Mapnik-Stil.</string>
     </resources>

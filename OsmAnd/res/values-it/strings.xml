@@ -2948,7 +2948,6 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="empty_state_markers_active_desc">Tap lungo o breve su \'Luoghi\', poi tappa il pulsante bandiera del marcatore.</string>
     <string name="empty_state_markers_groups">Importa gruppi</string>
     <string name="empty_state_markers_groups_desc">Puoi importare, come marcatori, gruppi di luoghi preferiti o punti intermedi di tracce.</string>
-    <string name="empty_state_markers_history">\@string/shared_string_history</string>
     <string name="empty_state_markers_history_desc">Marcatori indicati come passati appariranno su questa schermata.</string>
     <string name="shared_string_two">Due</string>
     <string name="shared_string_one">Uno</string>
@@ -3146,4 +3145,11 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="wiki_article_search_text">Sto cercando il necessario articolo Wiki</string>
     <string name="wiki_article_not_found">Articolo non trovato</string>
     <string name="how_to_open_wiki_title">Come aprire gli articoli di Wikipedia?</string>
-</resources>
+<string name="osmand_plus_extended_description_part2">Navigazione
+\n • Funziona online (veloce) o offline (nessuna tariffa di roaming quando sei all\'estero)
+\n • Guida vocale svolta-dopo-svolta (voci registrate e sintetizzate)
+\n • Guida sulla corsia opzionale, visualizzazione dei nomi delle strade, e tempo di arrivo stimato 
+\n • Supporto per punti intermedi del tuo itinerario 
+\n • Rielaborazione del percorso automatico ogni volta che si devia 
+\n • Ricerca di posti per indirizzo, per tipo (es: ristorante, albergo, stazione di servizio, museo) o per coordinate geografiche</string>
+    </resources>

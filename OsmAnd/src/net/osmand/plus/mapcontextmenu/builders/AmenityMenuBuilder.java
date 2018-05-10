@@ -31,9 +31,12 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
+import net.osmand.plus.wikipedia.WikiArticleHelper;
+import net.osmand.plus.wikipedia.WikipediaArticleWikiLinkFragment;
 import net.osmand.plus.wikipedia.WikipediaDialogFragment;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
 import net.osmand.plus.poi.PoiUIFilter;
@@ -291,11 +294,14 @@ public class AmenityMenuBuilder extends MenuBuilder {
 				@Override
 				public void onClick(View v) {
 					if (text.contains(".wikipedia.org/w")) {
-						WikipediaDialogFragment.showFullArticle(v.getContext(), Uri.parse(text), !light);
+						if (Version.isPaidVersion(app)) {
+							WikiArticleHelper wikiArticleHelper = new WikiArticleHelper(mapActivity, !light);
+							wikiArticleHelper.showWikiArticle(amenity.getLocation(), text);
+						} else {
+							WikipediaArticleWikiLinkFragment.showInstance(mapActivity.getSupportFragmentManager(), text);
+						}
 					} else {
-						Intent intent = new Intent(Intent.ACTION_VIEW);
-						intent.setData(Uri.parse(text));
-						v.getContext().startActivity(intent);
+						WikipediaDialogFragment.showInstance(mapActivity, amenity, text);
 					}
 				}
 			});

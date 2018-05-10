@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.annotation.ColorRes;
 import android.view.View;
 
 import net.osmand.plus.OsmandSettings;
@@ -140,11 +139,6 @@ public class CoordinateInputBottomSheetDialogFragment extends MenuBottomSheetDia
 	@Override
 	protected int getDismissButtonTextId() {
 		return R.string.shared_string_close;
-	}
-
-	@ColorRes
-	private int getActiveColorId() {
-		return nightMode ? R.color.osmand_orange : R.color.color_myloc_distance;
 	}
 
 	interface CoordinateInputFormatChangeListener {

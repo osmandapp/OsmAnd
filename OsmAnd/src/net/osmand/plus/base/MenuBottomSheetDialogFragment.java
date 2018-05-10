@@ -39,6 +39,8 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 	protected boolean usedOnMap = true;
 	protected boolean nightMode;
 
+	protected int themeRes;
+
 	private LinearLayout itemsContainer;
 
 	public void setUsedOnMap(boolean usedOnMap) {
@@ -52,6 +54,7 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 			usedOnMap = savedInstanceState.getBoolean(USED_ON_MAP_KEY);
 		}
 		nightMode = isNightMode();
+		themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 	}
 
 	@Nullable
@@ -60,7 +63,6 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 		createMenuItems(savedInstanceState);
 
 		OsmandApplication app = getMyApplication();
-		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 
 		View mainView = View.inflate(new ContextThemeWrapper(app, themeRes), R.layout.bottom_sheet_menu_base, null);
 		if (useScrollableItemsContainer()) {
@@ -146,7 +148,12 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 	}
 
 	protected Drawable getActiveIcon(@DrawableRes int id) {
-		return getIcon(id, nightMode ? R.color.osmand_orange : R.color.color_myloc_distance);
+		return getIcon(id, getActiveColorId());
+	}
+
+	@ColorRes
+	protected int getActiveColorId() {
+		return nightMode ? R.color.osmand_orange : R.color.color_myloc_distance;
 	}
 
 	@ColorInt
