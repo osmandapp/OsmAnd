@@ -23,6 +23,7 @@ import android.webkit.JavascriptInterface;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.TextView;
+
 import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
@@ -181,10 +182,10 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 			String link = data.getStringExtra(WikivoyageArticleContentsFragment.CONTENT_ITEM_LINK_KEY);
 			String title = data.getStringExtra(WikivoyageArticleContentsFragment.CONTENT_ITEM_TITLE_KEY);
 			moveToAnchor(link, title);
-		} else if (requestCode ==  WikivoyageShowPicturesDialogFragment.SHOW_PICTURES_CHANGED_REQUEST_CODE) {
+		} else if (requestCode == WikivoyageShowPicturesDialogFragment.SHOW_PICTURES_CHANGED_REQUEST_CODE) {
 			updateWebSettings();
 			populateArticle();
-		} else if (requestCode ==  WikivoyageArticleNavigationFragment.OPEN_ARTICLE_REQUEST_CODE) {
+		} else if (requestCode == WikivoyageArticleNavigationFragment.OPEN_ARTICLE_REQUEST_CODE) {
 			long cityId = data.getLongExtra(WikivoyageArticleNavigationFragment.CITY_ID_KEY, -1);
 			String selectedLang = data.getStringExtra(WikivoyageArticleNavigationFragment.SELECTED_LANG_KEY);
 			if (cityId != -1 && !TextUtils.isEmpty(selectedLang)) {
@@ -316,15 +317,15 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 			String[] aggregatedPartOfArrayOrig = article.getAggregatedPartOf().split(",");
 			if (aggregatedPartOfArrayOrig.length > 0) {
 				String current = aggregatedPartOfArrayOrig[0];
-				sb.append("<div class=\"nav-bar"+nightModeClass+"\" onClick=\"showNavigation()\">");
+				sb.append("<div class=\"nav-bar" + nightModeClass + "\" onClick=\"showNavigation()\">");
 				if (aggregatedPartOfArrayOrig.length > 0) {
-					for (int i = 0; i <  aggregatedPartOfArrayOrig.length ; i++) {
+					for (int i = 0; i < aggregatedPartOfArrayOrig.length; i++) {
 						if (i > 0) {
-					    		sb.append("&nbsp;&nbsp;•&nbsp;&nbsp;").append(aggregatedPartOfArrayOrig[i]);
+							sb.append("&nbsp;&nbsp;•&nbsp;&nbsp;").append(aggregatedPartOfArrayOrig[i]);
 						} else {
-						   if (!TextUtils.isEmpty(current)) {
-							sb.append("<span class=\"nav-bar-current\">").append(current).append("</span>");
-						   }
+							if (!TextUtils.isEmpty(current)) {
+								sb.append("<span class=\"nav-bar-current\">").append(current).append("</span>");
+							}
 						}
 					}
 				}
@@ -334,9 +335,8 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 		String url = TravelArticle.getImageUrl(imageTitle, false);
 		if (!TextUtils.isEmpty(imageTitle) && getSettings().WIKI_ARTICLE_SHOW_IMAGES.get() != OFF &&
 				!url.startsWith(EMPTY_URL)) {
-			sb.append("<div class=\"title-image"+nightModeClass+"\" style=\"background-image: url(").append(url).append(")\"></div>");
+			sb.append("<div class=\"title-image" + nightModeClass + "\" style=\"background-image: url(").append(url).append(")\"></div>");
 		}
-
 
 
 		sb.append("<div class=\"main" + nightModeClass + "\">\n");
@@ -395,19 +395,19 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 					WikivoyageArticleDialogFragment.this, cityId, selectedLang);
 		}
 	}
-	
+
 	@Override
 	protected void closeFragment() {
 		int backStackEntryCount = getFragmentManager().getBackStackEntryCount();
 		int pop = -1;
-		for(int i = backStackEntryCount - 1; i >= 0; i--) {
+		for (int i = backStackEntryCount - 1; i >= 0; i--) {
 			BackStackEntry entry = getFragmentManager().getBackStackEntryAt(i);
-			if(!TAG.equals(entry.getName())) {
+			if (!TAG.equals(entry.getName())) {
 				pop = i;
 				break;
 			}
 		}
-		if(pop == -1) {
+		if (pop == -1) {
 			dismiss();
 		} else {
 			getFragmentManager().popBackStackImmediate(pop, 0);
