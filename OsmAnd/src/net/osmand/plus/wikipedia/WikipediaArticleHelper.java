@@ -9,7 +9,6 @@ import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
-import net.osmand.CallbackWithObject;
 import net.osmand.IndexConstants;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
@@ -43,7 +42,6 @@ public class WikipediaArticleHelper {
 	private WikiArticleSearchTask articleSearchTask;
 	private MapActivity mapActivity;
 
-	private String regionName;
 	private boolean nightMode;
 
 	public WikipediaArticleHelper(MapActivity mapActivity, boolean nightMode) {
@@ -54,7 +52,6 @@ public class WikipediaArticleHelper {
 	public static class WikiArticleSearchTask extends AsyncTask<Void, Void, List<Amenity>> {
 
 		private ProgressDialog dialog;
-		private CallbackWithObject<String> callback;
 		private WeakReference<MapActivity> weakMapActivity;
 
 		private LatLon articleLatLon;
@@ -65,17 +62,13 @@ public class WikipediaArticleHelper {
 		private boolean isNightMode;
 
 		WikiArticleSearchTask(LatLon articleLatLon,
-		                      String regionName,
 		                      MapActivity mapActivity,
 		                      boolean nightMode,
-		                      String url,
-		                      final CallbackWithObject<String> callback) {
+		                      String url) {
 			this.articleLatLon = articleLatLon;
-			this.regionName = regionName;
 			weakMapActivity = new WeakReference<>(mapActivity);
 			this.isNightMode = nightMode;
 			this.url = url;
-			this.callback = callback;
 			dialog = createProgressDialog(mapActivity);
 		}
 
@@ -112,7 +105,6 @@ public class WikipediaArticleHelper {
 				if (repository == null) {
 					if ((regionName == null || regionName.isEmpty()) && item != null) {
 						regionName = (getRegionName(item.getFileName(), application.getRegions()));
-						callback.processResult(regionName);
 					}
 					return null;
 				} else {
@@ -133,7 +125,6 @@ public class WikipediaArticleHelper {
 				dialog.dismiss();
 			}
 			dialog = null;
-			callback = null;
 		}
 
 		@Override
@@ -184,13 +175,7 @@ public class WikipediaArticleHelper {
 		if (articleLatLon == null) {
 			return;
 		}
-		articleSearchTask = new WikiArticleSearchTask(articleLatLon, regionName, mapActivity, nightMode, url, new CallbackWithObject<String>() {
-			@Override
-			public boolean processResult(String s) {
-				regionName = s;
-				return true;
-			}
-		});
+		articleSearchTask = new WikiArticleSearchTask(articleLatLon, mapActivity, nightMode, url);
 		articleSearchTask.execute();
 	}
 
