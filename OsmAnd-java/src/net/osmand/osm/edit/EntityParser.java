@@ -59,6 +59,9 @@ public class EntityParser {
 		if (mo.getName().length() == 0) {
 			setNameFromRef(mo, tags);
 		}
+		if (mo.getName().length() == 0) {
+			setNameFromBrand(mo, tags);
+		}
 	}
 
 	/**
@@ -115,6 +118,13 @@ public class EntityParser {
 
 	private static void setNameFromRef(MapObject mo, Map<String, String> tags) {
 		String ref = tags.get(OSMTagKey.REF.getValue());
+		if(ref != null){
+			mo.setName(ref);
+		}
+	}
+	
+	private static void setNameFromBrand(MapObject mo, Map<String, String> tags) {
+		String ref = tags.get(OSMTagKey.BRAND.getValue());
 		if(ref != null){
 			mo.setName(ref);
 		}

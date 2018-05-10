@@ -525,7 +525,8 @@ public class SearchCoreFactory {
 							sr.otherNames = object.getAllNames(true);
 							sr.localeName = object.getName(phrase.getSettings().getLang(), phrase.getSettings().isTransliterate());
 							if (phrase.isUnknownSearchWordComplete()) {
-								if(!nm.matches(sr.localeName) && !nm.matches(sr.otherNames)) {
+								if(!nm.matches(sr.localeName) && !nm.matches(sr.otherNames) &&
+										!nm.matches(object.getAdditionalInfo().values())) {
 									return false;
 								}
 							}
