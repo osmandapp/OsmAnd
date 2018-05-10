@@ -41,19 +41,19 @@ public class FavoritePointEditor extends PointEditor {
 	}
 
 	public void add(LatLon latLon, String title, String originObjectName, String categoryName, int categoryColor, boolean autoFill) {
-
-		if (latLon == null) return;
-
+		if (latLon == null) {
+			return;
+		}
 		isNew = true;
-
 		if (categoryName != null && !categoryName.isEmpty()) {
-
-			FavouritesDbHelper.FavoriteGroup category = mapActivity.getMyApplication().getFavorites().getGroup(categoryName);
-
-			if (category == null)
+			FavouritesDbHelper.FavoriteGroup category = mapActivity.getMyApplication().getFavorites()
+					.getGroup(categoryName);
+			if (category == null) {
 				mapActivity.getMyApplication().getFavorites().addEmptyCategory(categoryName, categoryColor);
-
-		} else categoryName = "";
+			}
+		} else {
+			categoryName = "";
+		}
 
 		favorite = new FavouritePoint(latLon.getLatitude(), latLon.getLongitude(), title, categoryName);
 		favorite.setDescription("");
