@@ -22,7 +22,6 @@ import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.resources.AmenityIndexRepositoryBinary;
 import net.osmand.plus.wikivoyage.article.WikivoyageArticleWikiLinkFragment;
-import net.osmand.plus.wikivoyage.data.TravelArticle;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -58,20 +57,20 @@ public class WikipediaArticleHelper {
 		private CallbackWithObject<String> callback;
 		private WeakReference<MapActivity> weakMapActivity;
 
-		private Object article;
+		private LatLon articleLatLon;
 		private String regionName;
 		private String url;
 		private String lang;
 		private String name;
 		private boolean isNightMode;
 
-		WikiArticleSearchTask(Object article,
+		WikiArticleSearchTask(LatLon articleLatLon,
 		                      String regionName,
 		                      MapActivity mapActivity,
 		                      boolean nightMode,
 		                      String url,
 		                      final CallbackWithObject<String> callback) {
-			this.article = article;
+			this.articleLatLon = articleLatLon;
 			this.regionName = regionName;
 			weakMapActivity = new WeakReference<>(mapActivity);
 			this.isNightMode = nightMode;
@@ -97,16 +96,9 @@ public class WikipediaArticleHelper {
 			if (application != null && !isCancelled()) {
 				IndexItem item = null;
 				try {
-					if (article != null) {
-						if (article instanceof TravelArticle) {
-							TravelArticle travelArticle = (TravelArticle) article;
-							item = DownloadResources.findSmallestIndexItemAt(application,
-									new LatLon(travelArticle.getLat(), travelArticle.getLon()), DownloadActivityType.WIKIPEDIA_FILE);
-						} else if (article instanceof Amenity) {
-							Amenity amenityArticle = (Amenity) article;
-							item = DownloadResources.findSmallestIndexItemAt(application,
-									amenityArticle.getLocation(), DownloadActivityType.WIKIPEDIA_FILE);
-						}
+					if (articleLatLon != null) {
+						item = DownloadResources.findSmallestIndexItemAt(application,
+								articleLatLon, DownloadActivityType.WIKIPEDIA_FILE);
 					}
 				} catch (IOException e) {
 					Log.e(TAG, e.getMessage(), e);
@@ -188,11 +180,11 @@ public class WikipediaArticleHelper {
 		return null;
 	}
 
-	public void getWikiArticle(Object article, String url) {
-		if (article == null) {
+	public void showWikiArticle(LatLon articleLatLon, String url) {
+		if (articleLatLon == null) {
 			return;
 		}
-		articleSearchTask = new WikiArticleSearchTask(article, regionName, mapActivity, nightMode, url, new CallbackWithObject<String>() {
+		articleSearchTask = new WikiArticleSearchTask(articleLatLon, regionName, mapActivity, nightMode, url, new CallbackWithObject<String>() {
 			@Override
 			public boolean processResult(String s) {
 				regionName = s;

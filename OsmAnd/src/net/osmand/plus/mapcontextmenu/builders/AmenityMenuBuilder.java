@@ -296,7 +296,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 					if (text.contains(".wikipedia.org/w")) {
 						if (Version.isPaidVersion(app)) {
 							WikipediaArticleHelper wikipediaArticleHelper = new WikipediaArticleHelper(mapActivity, !light);
-							wikipediaArticleHelper.getWikiArticle(amenity, text);
+							wikipediaArticleHelper.showWikiArticle(amenity.getLocation(), text);
 						} else {
 							WikipediaArticleWikiLinkFragment.showInstance(mapActivity.getSupportFragmentManager(), text);
 						}

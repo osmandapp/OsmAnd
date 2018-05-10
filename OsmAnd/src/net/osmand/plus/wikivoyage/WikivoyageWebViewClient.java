@@ -12,6 +12,7 @@ import android.util.Log;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.OsmandApplication;
@@ -64,8 +65,8 @@ public class WikivoyageWebViewClient extends WebViewClient {
 	public boolean shouldOverrideUrlLoading(WebView view, String url) {
 		boolean isWebPage = url.startsWith(PAGE_PREFIX_HTTP) || url.startsWith(PAGE_PREFIX_HTTPS);
 		if (url.contains(WIKIVOAYAGE_DOMAIN) && isWebPage) {
-			String lang = wikipediaArticleHelper.getLang(url);
-			String articleName = wikipediaArticleHelper.getArticleNameFromUrl(url, lang);
+			String lang = WikipediaArticleHelper.getLang(url);
+			String articleName = WikipediaArticleHelper.getArticleNameFromUrl(url, lang);
 			long articleId = app.getTravelDbHelper().getArticleId(articleName, lang);
 			if (articleId != 0) {
 				WikivoyageArticleDialogFragment.showInstance(app, fragmentManager, articleId, lang);
@@ -74,7 +75,7 @@ public class WikivoyageWebViewClient extends WebViewClient {
 			}
 			return true;
 		} else if (url.contains(WIKI_DOMAIN) && isWebPage) {
-			wikipediaArticleHelper.getWikiArticle(article, url);
+			wikipediaArticleHelper.showWikiArticle(new LatLon(article.getLat(), article.getLon()), url);
 		} else if (isWebPage) {
 			warnAboutExternalLoad(url, context, nightMode);
 		} else if (url.startsWith(PREFIX_GEO)) {
