@@ -3217,4 +3217,8 @@ représentant la zone : %1$s x %2$s</string>
     <string name="download_all">Télécharger tout</string>
     <string name="hide_full_description">Masquer la description complète</string>
     <string name="show_full_description">Afficher la description complète</string>
+    <string name="nautical_render_descr">Style pour la navigation en mer et en rivière. Fonctions clés : phares, balises, alignements, ports, lignes de sonde.</string>
+    <string name="ski_map_render_descr">Style pour les sports d\'hiver. Fonctions clés : tracés et difficultés des pistes de ski, remontées mécaniques, rendu hivernal et masquage des objets secondaires.</string>
+    <string name="light_rs_render_descr">Style simple et contrasté pour la navigation en voiture. Mode nuit doux. Fonctions clés : routes orangées et contrastées, objets secondaires masqués.</string>
+    <string name="mapnik_render_descr">Ancien rendu par défaut de mapnik. Fonctions clés : couleurs identiques au style Mapnik.</string>
     </resources>

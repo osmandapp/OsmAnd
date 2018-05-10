@@ -63,11 +63,11 @@
     <string name="index_item_depth_contours_osmand_ext">Контуры морских глубин</string>
     <string name="index_item_depth_points_southern_hemisphere">Отметки морских глубин южного полушария</string>
     <string name="index_item_depth_points_northern_hemisphere">Отметки морских глубин северного полушария</string>
-    <string name="depth_contour_descr">Набор карт, содержащих контуры и точки морских глубин.</string>
+    <string name="depth_contour_descr">Контуры морских глубин и отметки.</string>
     <string name="subscribe_email_desc">Подпишитесь на нашу рассылку о скидках на приложение и получите 3 дополнительные загрузки карт!</string>
     <string name="subscribe_email_error">Ошибка</string>
     <string name="quick_action_auto_zoom">Автомасштаб карты вкл/выкл</string>
-    <string name="quick_action_auto_zoom_desc">Нажатие на кнопку действия вкл/выкл автомасштаб карты в зависимости от скорости.</string>
+    <string name="quick_action_auto_zoom_desc">Нажатие этой кнопки действия вкл/выкл автомасштаб карты в зависимости от скорости.</string>
     <string name="quick_action_auto_zoom_on">Включение автомасштаба</string>
     <string name="quick_action_auto_zoom_off">Выключение автомасштаба</string>
     <string name="quick_action_add_destination">Добавить пункт назначения</string>
@@ -3019,4 +3019,13 @@
     <string name="nautical_render_descr">Стиль для морской и речной навигации. Основные возможности: буи, маяки, водные навигационные линии и знаки, гавани, услуги морских судов, контуры глубин.</string>
     <string name="ski_map_render_descr">Стиль для катания на лыжах. Основные возможности: отображение трасс, воздушных линий и других лыжных объектов. Меньше отвлекающих второстепенных объектов на карте.</string>
     <string name="download_all">Скачать все</string>
+    <string name="light_rs_render_descr">Простой и контрастный стиль для автомобильной навигации. Комфортный для глаз в ночном режиме. Ключевые особенности: контурные линии, контрастные оранжевые дороги, меньше отвлекающих второстепенных объектов на карте.</string>
+    <string name="topo_render_descr">Контрастный стиль, предназначенный в основном для прогулок на природе, походов и езды на велосипеде. Хорошая читаемость при сложном внешнем освещении. Ключевые особенности: контрастные дороги и природные объекты, различные типы маршрутов, контурные линии с расширенными настройками, более подробная информация при соответствующих уровнях масштабирования, чем в стиле по умолчанию. Опция качество дорожного покрытия позволяет различать дороги с различным качеством поверхности. Нет ночного режима.</string>
+    <string name="mapnik_render_descr">Старый стиль отображения по умолчанию mapnik. Ключевые особенности: цвета похожи на стиль Mapnik.</string>
+    <string name="default_render_descr">Стиль общего назначения. Упрощенный рендеринг с более чистыми картами в населенных городах. Ключевые особенности: контурные линии, маршруты, качество поверхности, ограничения доступа, дорожные щиты, визуализация маршрутов по шкале SAC, характеристики спортивных сплавов.</string>
+    <string name="open_wikipedia_link_online">Открыть ссылку в Википедии в онлайн</string>
+    <string name="open_wikipedia_link_online_description">OsmAnd перенаправит вас в браузер и откроет ссылку онлайн.</string>
+    <string name="read_wikipedia_offline_description">Получите подписку на OsmAnd Live, чтобы читать статьи в Википедии и Викигиде в автономном режиме.</string>
+    <string name="how_to_open_link">Как открыть ссылку?</string>
+    <string name="read_wikipedia_offline">Читать Википедию в автономном режиме</string>
     </resources>

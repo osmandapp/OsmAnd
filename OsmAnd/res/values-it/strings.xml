@@ -3152,4 +3152,18 @@ Rappresenta l\'area: %1$s x %2$s</string>
 \n • Supporto per punti intermedi del tuo itinerario 
 \n • Rielaborazione del percorso automatico ogni volta che si devia 
 \n • Ricerca di posti per indirizzo, per tipo (es: ristorante, albergo, stazione di servizio, museo) o per coordinate geografiche</string>
+    <string name="hide_full_description">Nascondi la descrizione completa</string>
+    <string name="show_full_description">Mostra la descrizione completa</string>
+    <string name="nautical_render_descr">Stile per la navigazione marittima e fluviale. Caratteristiche principali: boe, fari, linee e punti per la navigazione su acqua, porti, servizi marittimi, isobate.</string>
+    <string name="ski_map_render_descr">Stile per lo sci. Caratteristiche principali: visualizza piste da sci, impianti di risalita e altre peculiarità inerenti lo sci in modo adeguato. Gli oggetti della mappa secondari sono mostrati in una maniera meno appariscente.</string>
+    <string name="light_rs_render_descr">Stile semplice e contrastato per la navigazione in auto. Non infastidisce gli occhi nella modalità notte. Caratteristiche principali: curve di livello, strade disegnate in arancio ad alto contrasto, oggetti secondari visualizzati in modo meno appariscente.</string>
+    <string name="topo_render_descr">Stile ad alto contrasto progettato principalmente per passeggiate, gite e pedalate nella natura. Buona leggibilità alla luce del sole. Caratteristiche principali: oggetti naturali e strade ad alto contrasto, tipi differenti di percorsi, curve di livello con impostazioni avanzate, maggior dettagli rispetto allo stile predefinito nei corrispondenti livelli di ingrandimento. L’opzione di integrità della superficie permette di distinguere le strade a seconda della qualità del loro manto. Nessuna modalità notte.</string>
+    <string name="mapnik_render_descr">Vecchio stile predefinito simile a Mapnik. Caratteristiche principali: i colori sono simili a quelli dello stile Mapnik.</string>
+    <string name="default_render_descr">Stile ad uso generico. Rappresentazione grafica semplificata per avere mappe più pulite nelle grandi città. Caratteristiche principali: curve di livello, rotte, qualità del manto stradale, divieti di accesso, sigle stradali, rappresentazione grafica dei percorsi in base alla loro scala SAC, elementi per gli sport fluviali.</string>
+    <string name="open_wikipedia_link_online">Apri il link di Wikipedia online</string>
+    <string name="open_wikipedia_link_online_description">OsmAnd aprirà il link online nel tuo browser.</string>
+    <string name="read_wikipedia_offline_description">Sottoscrivi OsmAnd Live per leggere gli articoli di Wikipedia e Wikivoyage senza una connessione dati.</string>
+    <string name="how_to_open_link">Come aprire un link?</string>
+    <string name="read_wikipedia_offline">Leggi Wikipedia senza una connessione dati</string>
+    <string name="download_all">Scarica tutto</string>
     </resources>
