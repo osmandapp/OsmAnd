@@ -289,6 +289,8 @@ public class RendererRegistry {
 		switch (key) {
 			case DEFAULT_RENDER:
 				return ctx.getString(R.string.default_render_descr);
+			case TOURING_VIEW:
+				return ctx.getString(R.string.touring_view_render_descr);
 			case MAPNIK_RENDER:
 				return ctx.getString(R.string.mapnik_render_descr);
 			case TOPO_RENDER:
