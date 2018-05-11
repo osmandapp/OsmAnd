@@ -122,7 +122,7 @@ body {
     height: 30%;
     background: center;
     background-size: 100%;
-    background-size:cover;
+    background-size: cover;
     background-repeat: no-repeat;
     background-color: #f2f2f2;
     background-color: var(--topbar-bg-color-day);
@@ -133,7 +133,7 @@ body {
     height: 30%;
     background: center;
     background-size: 100%;
-    background-size:cover;
+    background-size: cover;
     background-repeat: no-repeat;
     background-color:#222526;
     background-color: var(--topbar-bg-color-day);
@@ -141,7 +141,8 @@ body {
 
 h1 {
     font-size: 2em;
-    color: var(--main-text-color-day, #212121);
+    color: #212121;
+    color: var(--main-text-color-day);
     font-family: RobotoSlab-Regular;
     letter-spacing: 0.02em;
     word-wrap: break-word;
@@ -238,6 +239,7 @@ h3 {
 }
 
 h4, h5 {
+    color: #454545;
     color: var(--headline-text-color-day);
     font-size: 1.2em;
     font-size: var(--headers-font-size);
@@ -252,6 +254,7 @@ h4, h5 {
 }
 
 .nightmode h4, .nightmode h5 {
+    color: #999999;
     color: var(--headline-text-color-night);
 }
 
@@ -305,6 +308,7 @@ img {
 }
 
 a, a.external.free, a.text {
+    color: #237bff;
     color: var(--link-text-color-day);
     text-decoration-color: #a3c8ff;
     word-wrap: break-word;
@@ -312,6 +316,7 @@ a, a.external.free, a.text {
 }
 
 .nightmode a, .nightmode a.external.free, .nightmode a.text  {
+    color: #d28521;
     color: var(--link-text-color-night);
     text-decoration-color: #854f08;
     word-wrap: break-word;
@@ -332,7 +337,8 @@ pre {
 }
 
 .nightmode pre {
-    color: #cccccc; color: var(--main-text-color-night);
+    color: #cccccc; 
+    color: var(--main-text-color-night);
 }
 
 a.geo {
