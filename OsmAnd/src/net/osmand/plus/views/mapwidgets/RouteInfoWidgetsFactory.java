@@ -23,6 +23,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import net.osmand.AndroidUtils;
 import net.osmand.Location;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
@@ -1309,6 +1310,11 @@ public class RouteInfoWidgetsFactory {
 						if (!Algorithms.objectEquals(text, this.textString)) {
 							textString = text;
 							this.text.setText(this.textString);
+							if (alarm.getType() == AlarmInfoType.SPEED_LIMIT && settings.DRIVING_REGION.get().americanSigns) {
+								this.text.setPadding(0, AndroidUtils.dpToPx(layout.getContext(), 20f), 0, 0);
+							} else {
+								this.text.setPadding(0, 0, 0, 0);
+							}
 						}
 						if (!Algorithms.objectEquals(bottomText, this.bottomTextString)) {
 							bottomTextString = bottomText;
