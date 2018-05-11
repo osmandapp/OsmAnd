@@ -2921,7 +2921,7 @@ Lon %2$s</string>
 \n</string>
     <string name="day_off_label">cerrado (día libre)</string>
     <string name="winter_and_ski_renderer">Invierno y esquí</string>
-    <string name="touring_view_renderer">Vista de Touring (contraste y detalles)</string>
+    <string name="touring_view_renderer">Vista turística</string>
     <string name="nautical_renderer">Náutico</string>
 <string name="copy_location_name">Copiar nombre del punto/PDI</string>
     <string name="toast_empty_name_error">Ubicación sin nombre</string>
@@ -2972,7 +2972,7 @@ Lon %2$s</string>
     <string name="waypoints_removed_from_map_markers">Puntos de referencia borrados de los marcadores del mapa</string>
     <string name="use_two_digits_longitude">Usar longitud de dos dígitos</string>
     <string name="shared_string_result">Resultado</string>
-    <string name="saved_articles">Artículos guardados</string>
+    <string name="saved_articles">Artículos favoritos</string>
     <string name="shared_string_explore">Explorar</string>
     <string name="wikivoyage_search_hint">Buscar: País, ciudad, provincia</string>
     <string name="shared_string_read">Leer</string>
@@ -2994,7 +2994,7 @@ Lon %2$s</string>
     <string name="shared_string_wifi_only">Sólo con Wi-Fi</string>
     <string name="select_travel_book">Marcar libro de viajes</string>
     <string name="shared_string_travel_book">Libro de viajes</string>
-    <string name="download_images">Descargar imágenes</string>
+    <string name="download_images">Mostrar imágenes</string>
     <string name="purchase_dialog_title">Elegir plan</string>
     <string name="purchase_dialog_travel_description">Comprar uno de los siguientes elementos para leer artículos turísticos sin conexión:</string>
     <string name="purchase_dialog_subtitle">Elegir el elemento adecuado:</string>
@@ -3038,7 +3038,7 @@ Lon %2$s</string>
     <string name="paid_app">Aplicación de pago</string>
     <string name="paid_plugin">Complemento de pago</string>
     <string name="osmand_team">Equipo de OsmAnd</string>
-    <string name="maps_you_need_descr">Basado en los artículos guardados, se recomienda descargar los siguientes mapas:</string>
+    <string name="maps_you_need_descr">Basado en los artículos favoritos, se recomienda descargar los siguientes mapas:</string>
     <string name="maps_you_need">Mapas que necesitas</string>
     <string name="shared_string_restart">Reiniciar</string>
     <string name="purchase_cancelled_dialog_title">Has cancelado la suscripción de OsmAnd Live</string>
@@ -3059,4 +3059,6 @@ Lon %2$s</string>
     <string name="mapnik_render_descr">Antiguo estilo predefinido de Mapnik. Características: los colores son similares al estilo Mapnik.</string>
     <string name="default_render_descr">Estilo de uso general. Visualización limpia y simplificada para ciudades densamente pobladas. Características principales: Curvas de nivel, recorridos, calidad de la superficie, restricciones de acceso, escudos, visualización de caminos según escala SAC, características de deportes acuáticos.</string>
     <string name="touring_view_render_descr">Estilo de alto detalle para turismo. Incluye todas las opciones de configuración del estilo predefinido, además: Muestra tanto detalle como sea posible, en particular todos los caminos, senderos y otras formas de viaje. Una clara distinción visual entre todos los tipos de carreteras, que recuerda a muchos atlas de rutas turísticas. Esquema de color de alto contraste para uso en exteriores, modo diurno y nocturno.</string>
+    <string name="shared_string_bookmark">Favoritos</string>
+    <string name="off_road_render_descr">Adecuado para usarlo durante la conducción todoterreno. Adecuado para usarlo como un mapa subyacente con imágenes satelitales verdes . Características principales: Reducción del espesor de las carreteras principales, aumento del espesor de las vías, senderos, bicicletas y otras rutas. Basado en el estilo «Topo».</string>
     </resources>
