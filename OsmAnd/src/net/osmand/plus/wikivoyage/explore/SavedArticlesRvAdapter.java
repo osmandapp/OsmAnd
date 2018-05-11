@@ -105,7 +105,7 @@ public class SavedArticlesRvAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 			holder.partOf.setText(article.getGeoDescription());
 			holder.leftButton.setText(app.getString(R.string.shared_string_read));
 			holder.leftButton.setCompoundDrawablesWithIntrinsicBounds(readIcon, null, null, null);
-			holder.rightButton.setText(app.getString(R.string.shared_string_delete));
+			holder.rightButton.setText(app.getString(R.string.shared_string_remove));
 			holder.rightButton.setCompoundDrawablesWithIntrinsicBounds(null, null, deleteIcon, null);
 			holder.divider.setVisibility(lastItem ? View.GONE : View.VISIBLE);
 			holder.shadow.setVisibility(lastItem ? View.VISIBLE : View.GONE);
