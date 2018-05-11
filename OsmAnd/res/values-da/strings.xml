@@ -3089,7 +3089,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="lang_lo">Laotisk</string>
     <string name="day_off_label">lukket</string>
     <string name="winter_and_ski_renderer">Vinter og ski</string>
-    <string name="touring_view_renderer">Touringvisning (kontrast og detaljer)</string>
+    <string name="touring_view_renderer">Touringvisning</string>
     <string name="nautical_renderer">Nautisk</string>
 <string name="rendering_attr_hidePOILabels_name">IP-etiketter</string>
     <string name="release_2_9">• Påvisning af stopskilt tager nu hensyn til kørselsretningen 
@@ -3165,7 +3165,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="use_two_digits_longitude">Brug tocifret længdegrad</string>
     <string name="wikivoyage_search_hint">Søg: land, by, region</string>
     <string name="shared_string_read">Læs</string>
-    <string name="saved_articles">Gemte artikler</string>
+    <string name="saved_articles">Bogmærkede artikler</string>
     <string name="shared_string_explore">Udforsk</string>
     <string name="shared_string_contents">Indhold</string>
     <string name="article_removed">Artikel fjernet</string>
@@ -3183,7 +3183,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="online_webpage_warning">Siden er kun tilgængelig online. Åben den i en webbrowser?</string>
     <string name="images_cache">Billedcache</string>
     <string name="delete_search_history">Slet søgehistorik</string>
-    <string name="download_images">Hent billeder</string>
+    <string name="download_images">Vis billeder</string>
     <string name="purchase_dialog_title">Vælg plan</string>
     <string name="purchase_dialog_travel_description">Køb en af følgende for at læse rejseartikler offline:</string>
     <string name="purchase_dialog_subtitle">Vælg passende emne:</string>
@@ -3227,7 +3227,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="wiki_article_not_found">Artikel ikke fundet</string>
     <string name="how_to_open_wiki_title">Hvordan åbner man Wikipedia artikler?</string>
 <string name="osmand_team">OsmAnd-team</string>
-    <string name="maps_you_need_descr">Baseret på artikler der er gemt, anbefales det at hente følgende kort:</string>
+    <string name="maps_you_need_descr">Baseret på artikler der er bogmærket, anbefales det at hente følgende kort:</string>
     <string name="maps_you_need">Kort der er brug for</string>
     <string name="shared_string_restart">Genstart</string>
     <string name="show_images">Vis billeder</string>
@@ -3249,4 +3249,6 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="mapnik_render_descr">"Gammel \'Mapnik\' standard renderingstilart. Hovedtræk: farver svarer til  \'Mapnik\'-stilart."</string>
     <string name="default_render_descr">Generel stilart. Forenklet rendering for at få renere kort i tæt befolkede byer. Hovedtræk: højdekurver, ruter, vejbelægning, adgangsbegrænsninger, vejskilte, visning af stier i henhold til SAC-skalaen, rafting funktioner.</string>
     <string name="touring_view_render_descr">Meget detaljeret stilart for touring formål. Indeholder alle indstillingsmuligheder af standardstil, desuden: viser så mange detaljer som muligt, navnlig alle veje, stier og andre måder at rejse på. En Klar visuel sondring mellem alle forskellige veje, minder om mange vejkort. Farveskema med høj kontrast til udendørs brug, dag og nat stilstand.</string>
+    <string name="shared_string_bookmark">Bogmærke</string>
+    <string name="off_road_render_descr">Egnet til brug under off-road kørsel. Velegnet til brug med grønne satellitbilleder som underlejringskort. Hovedtræk: reduceret tykkelse af hovedveje, øget tykkelse af spor, stier, cykel og andre ruter. Baseret på \'Topo\' stilart.</string>
     </resources>
