@@ -2527,9 +2527,7 @@ Lon %2$s</string>
 \n • (Opcional) Guía de carriles, nombres de calles y tiempo estimado al destino 
 \n • Soporta puntos intermedios en el itinerario 
 \n • La ruta se recalcula al salirse de la misma  
-\n • Busca destinos por dirección, por tipo (por ejemplo: Restaurantes, hoteles, estaciones de servicio, museos), o por coordenada geográfica 
-\n
-\n"</string>
+\n • Busca destinos por dirección, por tipo (por ejemplo: Restaurantes, hoteles, estaciones de servicio, museos), o por coordenada geográfica "</string>
     <string name="osmand_plus_extended_description_part3">Vista del mapa 
 \n • Muestra tu ubicación y orientación 
 \n • (Opcional) Ajusta el mapa a la dirección del movimiento (o la brújula) 
