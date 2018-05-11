@@ -226,7 +226,7 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 			final TravelLocalDataHelper helper = getMyApplication().getTravelDbHelper().getLocalDataHelper();
 			final boolean saved = helper.isArticleSaved(article);
 			Drawable icon = getActiveIcon(saved ? R.drawable.ic_action_read_later_fill : R.drawable.ic_action_read_later);
-			saveBtn.setText(getString(saved ? R.string.shared_string_delete : R.string.shared_string_save));
+			saveBtn.setText(getString(saved ? R.string.shared_string_remove : R.string.shared_string_bookmark));
 			saveBtn.setCompoundDrawablesWithIntrinsicBounds(null, null, icon, null);
 			saveBtn.setOnClickListener(new View.OnClickListener() {
 				@Override
