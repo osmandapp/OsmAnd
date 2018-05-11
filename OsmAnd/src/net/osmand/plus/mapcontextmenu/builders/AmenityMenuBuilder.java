@@ -301,7 +301,9 @@ public class AmenityMenuBuilder extends MenuBuilder {
 							WikipediaArticleWikiLinkFragment.showInstance(mapActivity.getSupportFragmentManager(), text);
 						}
 					} else {
-						WikipediaDialogFragment.showInstance(mapActivity, amenity, text);
+						Intent intent = new Intent(Intent.ACTION_VIEW);
+						intent.setData(Uri.parse(text));
+						v.getContext().startActivity(intent);
 					}
 				}
 			});
