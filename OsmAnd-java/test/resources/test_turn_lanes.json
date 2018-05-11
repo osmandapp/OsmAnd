@@ -672,6 +672,33 @@
     "expectedResults": {
       "75576478": "TL|C|C|+TR"
     }
+  },
+  {
+    "testName": "38.Freeway A20 TR",
+    "startPoint": {
+      "latitude": 45.614017077100364,
+      "longitude": 35.56860889494419
+    },
+    "endPoint": {
+      "latitude": 45.61377692625833,
+      "longitude": 35.57223255932331
+    },
+    "expectedResults": {
+      "77729": "C|C|C|+TSLR"
+    }
+  },
+  {
+    "testName": "38.Freeway A20 TR",
+    "startPoint": {
+      "latitude": 45.61567371465745,
+      "longitude": 35.606546729803085
+    },
+    "endPoint": {
+      "latitude": 45.6155498906659,
+      "longitude": 35.604315131902695
+    },
+    "expectedResults": {
+    }
   }
 
 ]
