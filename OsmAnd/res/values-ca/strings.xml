@@ -1012,7 +1012,7 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="av_photo_play_sound">Reprodueix un so en fer una foto</string>
     <string name="av_camera_focus_hiperfocal">Enfocament de nitidesa màxima</string>
     <string name="av_camera_focus_auto">Enfocament automàtic</string>
-    <string name="osb_comment_dialog_error">S\'ha produït una excepció: No s\'ha afegit el comentari</string>
+    <string name="osb_comment_dialog_error">No s\'ha pogut afegir el comentari</string>
     <string name="osb_author_dialog_password">Contrasenya de l\'OSM (opcional)</string>
     <string name="amenity_type_seamark">Balisa marina</string>
     <string name="app_modes_choose_descr">Seleccioneu els perfils d\'ús per ser visibles a l\'aplicació.</string>
@@ -1718,7 +1718,7 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="try_again">Torneu-ho a provar</string>
     <string name="error_message_pattern">Error: {0}</string>
     <string name="no_updates_available">No hi ha actualitzacions disponibles</string>
-    <string name="we_really_care_about_your_opinion">Ens interessa la vostra opinió i els vostres comentaris són importants per nosaltres.
+    <string name="we_really_care_about_your_opinion">Ens interessa la vostra opinió i valorem molt els vostres comentaris.
 \n</string>
     <string name="rendering_value_boldOutline_name">Contorn destacat</string>
     <string name="traffic_warning_hazard">Perill informat</string>
@@ -1888,9 +1888,9 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
 	<string name="osn_reopen_dialog_title">Reobre nota</string>
 	<string name="osn_close_dialog_title">Tanca nota</string>
 	<string name="osn_add_dialog_success">S\'ha creat la nota</string>
-	<string name="osn_add_dialog_error">S\'ha produït una excepció: La nota no s\'ha creat</string>
+	<string name="osn_add_dialog_error">No s\'ha pogut crear la nota</string>
 	<string name="osn_close_dialog_success">Nota tancada</string>
-	<string name="osn_close_dialog_error">S\'ha produït una excepció: La nota no s\'ha tancat</string>
+	<string name="osn_close_dialog_error">No s\'ha pogut tancar la nota</string>
 	<string name="shared_string_commit">Valida</string>
 	
     <string name="rendering_attr_currentTrackColor_description">Color de la traça GPX</string>
@@ -2006,7 +2006,7 @@ L\'espai disponible és només de {2} MB.</string>
     <string name="shared_string_move_up">Puja ↑</string>
     <string name="shared_string_move_down">Baixa ↓</string>
     <string name="avoid_road">Evita la via</string>
-    <string name="storage_directory_readonly_desc">La carpeta d\'emmagatzemament de dades seleccionada només permet la lectura. S\'ha modificat temporalment la carpeta d\'emmagatzemament a la memòria interna . Seleccioneu un directori d\'emmagatzemament vàlid.</string>
+    <string name="storage_directory_readonly_desc">S\'ha canviat a la memòria interna perquè la carpeta seleccionada només permet lectures. Seleccioneu un directori d\'emmagatzemament on es pugui escriure.</string>
     <string name="storage_directory_shared">Memòria compartida</string>
     <string name="no_waypoints_found">No s\'ha trobat cap fita</string>
     <string name="report">Informe</string>
@@ -2034,7 +2034,7 @@ L\'espai disponible és només de {2} MB.</string>
     <string name="osm_live_support_region">Zona de suport</string>
     <string name="osm_live_thanks">Us agraïm haver-vos subscrit a les actualitzacions en directe</string>
     <string name="osm_live_region_desc">Una part del vostre donatiu s\'enviarà als usuaris d\'OSM que enviïn modificacions del mapa a aquesta regió.</string>
-    <string name="osm_live_ask_for_purchase">Primer us hauríeu de subscriure a OsmAnd Live</string>
+    <string name="osm_live_ask_for_purchase">Primer heu de comprar una subscripció a OsmAnd Live</string>
 
     <string name="select_map_marker">Seleccioneu un marcador de mapa</string>
     <string name="map_markers_other">Altres marcadors</string>
@@ -2091,7 +2091,7 @@ L\'espai disponible és només de {2} MB.</string>
     <string name="access_direction_haptic_feedback_descr">Indica amb vibració la direcció al punt de destinació.</string>
     <string name="access_direction_audio_feedback_descr">Indicació acústica de la direcció al punt de destinació.</string>
     <string name="access_direction_audio_feedback">Àudio direccional</string>
-    <string name="access_direction_haptic_feedback">Resposta cinètica segons direcció</string>
+    <string name="access_direction_haptic_feedback">Direccions segons el tacte</string>
     <string name="follow_us">Seguiu-nos</string>
     <string name="move_marker_bottom_sheet_title">Desplaceu el mapa per canviar la posició del marcador</string>
     <!-- string name="lat_lon_pattern">Lat: %1$.5f Lon: %2$.5f</string -->
@@ -2704,7 +2704,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="empty_state_markers_history_desc">Els marcadors marcats com a aprovats apareixeran en aquesta pantalla.</string>
     <string name="shared_string_two">Dos</string>
     <string name="shared_string_one">Un</string>
-    <string name="show_guide_line_descr">Mostra línies guia des de la vostra ubicació a les dels marcadors actius.</string>
+    <string name="show_guide_line_descr">Mostra una línia de direcció entre la vostra ubicació i les dels marcadors actius.</string>
     <string name="show_arrows_descr">Mostra una o dues fletxes indicant la direcció dels marcadors actius.</string>
     <string name="distance_indication_descr">Seleccioneu com indicar la distància als marcadors actius.</string>
     <string name="active_markers_descr">Trieu quants indicadors actius voleu veure.</string>
@@ -2811,7 +2811,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
 	<string name="south_abbreviation">S</string>
 	<string name="north_abbreviation">N</string>
 	<string name="optional_point_name">"Nom opcional del punt "</string>
-    <string name="transport_nearby_routes_within">Rutes a prop de</string>
+    <string name="transport_nearby_routes_within">Rutes properes a</string>
     <string name="transport_nearby_routes">A prop</string>
     <string name="enter_the_file_name">Introduïu el nom del fitxer.</string>
     <string name="map_import_error">Error d\'importació del mapa</string>
@@ -2826,7 +2826,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="waypoints_removed_from_map_markers">Fites eliminades dels marcadors de mapa</string>
     <string name="wikivoyage_search_hint">Cerca: País, ciutat, província</string>
     <string name="shared_string_read">Llegit</string>
-    <string name="saved_articles">Articles desats</string>
+    <string name="saved_articles">Articles seleccionats</string>
     <string name="shared_string_explore">Explora</string>
     <string name="shared_string_contents">Continguts</string>
     <string name="shared_string_result">Resultat</string>
@@ -2842,7 +2842,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="online_webpage_warning">"La pàgina només es pot consultar en línia.  La voleu obrir en un navegador?"</string>
     <string name="images_cache">Memòria cau d\'imatges</string>
     <string name="delete_search_history">Esborra l\'historial de cerca</string>
-    <string name="download_images">Baixa imatges</string>
+    <string name="download_images">Mostra les imatges</string>
     <string name="download_maps_travel">Mapes de viatge</string>
     <string name="article_removed">Article esborrat</string>
     <string name="purchase_dialog_title">Seleccioneu un pla</string>
@@ -2870,10 +2870,10 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="how_to_open_wiki_title">Com obrir els articles de la Viquipèdia?</string>
 <string name="shared_string_restart">Reinicia</string>
     <string name="show_images">Mostra les imatges</string>
-    <string name="purchase_cancelled_dialog_title">Heu cancel·lat la subscripció OsmAnd Live</string>
+    <string name="purchase_cancelled_dialog_title">Heu cancel·lat la vostra subscripció OsmAnd Live</string>
     <string name="purchase_cancelled_dialog_descr">Renoveu la subscripció per continuar utilitzant totes les funcions:</string>
 
-    <string name="maps_you_need_descr">En base als articles que heu desat, recomanem que us baixeu els següents mapes:</string>
+    <string name="maps_you_need_descr">En base als articles que heu seleccionat, recomanem que us baixeu els següents mapes:</string>
     <string name="maps_you_need">Mapes que us calen</string>
     <string name="osmand_team">Equip OsmAnd</string>
     <string name="paid_app">Aplicació de pagament</string>
@@ -2896,13 +2896,13 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="shared_string_wikivoyage">"Viquiviatges "</string>
     <string name="index_item_world_wikivoyage">Articles de Viquiviatges d\'arreu</string>
     <string name="open_wikipedia_link_online">Obre l\'enllaç en línia de Viquipèdia</string>
-    <string name="open_wikipedia_link_online_description">OsmAnd us portarà al navegador i obrirà l\'enllaç en línia.</string>
+    <string name="open_wikipedia_link_online_description">L\'enllaç s\'obrirà en el vostre navegador.</string>
     <string name="how_to_open_link">Com obrir l\'enllaç?</string>
     <string name="read_wikipedia_offline">Consulta la Viquipèdia en local</string>
     <string name="download_all">Baixa-ho tot</string>
     <string name="hide_full_description">Amaga la descripció completa</string>
     <string name="show_full_description">Mostra la descripció completa</string>
-    <string name="nautical_render_descr">Estil nàutic. Principals característiques: boies, fars, línies i balises de navegació aquàtica, ports, serveis marítims, isòbates.</string>
+    <string name="nautical_render_descr">Estil nàutic. Principals característiques: boies, fars, rutes fluvials, rutes i referències marítimes, ports, serveis de navegació assistida, isòbates.</string>
     <string name="ski_map_render_descr">Estil per l\'esquí. Principals característiques: representació de pistes, vies aèries i altres característiques d\'esquí de forma adient. Menys objectes secundaris del mapa que distreguin.</string>
     <string name="light_rs_render_descr">"Estil senzill i contrastat per navegació amb el cotxe. En mode nocturn té cura de la vista.  Principals característiques: corbes de nivell, vies contrastades d\'estil ataronjat, menys objectes secundaris al mapa que puguin distreure."</string>
     <string name="wiki_article_search_text">Buscant el corresponent article a la wiki</string>

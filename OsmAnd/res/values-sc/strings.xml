@@ -3113,7 +3113,7 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="nothing_found_in_radius">Perunu risultadu:</string>
     <string name="select_waypoints_category_description">Annanghe totu sos puntos de sa rasta, o issèbera categorias separadas.</string>
     <string name="shared_string_total">Totale</string>
-    <string name="saved_articles">Artìculos sarvados</string>
+    <string name="saved_articles">Artìculos sarvados in sos sinnalibros</string>
     <string name="shared_string_explore">Esplora</string>
     <string name="shared_string_result">Risultadu</string>
     <string name="shared_string_travel">Biàgiu</string>
@@ -3133,7 +3133,7 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="online_webpage_warning">Pàgina disponìbile petzi in lìnia. La cheres abèrrere in un\'eploradore (unu browser) ìnternet?</string>
     <string name="images_cache">Cache de sas immàgines</string>
     <string name="delete_search_history">Iscantzella sa cronologia de sas chircas</string>
-    <string name="download_images">Iscàrriga sas immàgines</string>
+    <string name="download_images">Ammustra sas immàgines</string>
     <string name="download_maps_travel">Mapas de biàgiu</string>
     <string name="shared_string_wikivoyage">Wikivoyage</string>
     <string name="article_removed">Artìculu iscantzelladu</string>
@@ -3182,7 +3182,7 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="paid_app">Aplicatzione a pagamentu</string>
     <string name="paid_plugin">Estensione a pagamentu</string>
     <string name="osmand_team">Grupu de traballu de OsmAnd</string>
-    <string name="maps_you_need_descr">Bidende sos artìculos chi as sarvadu, ti cunsigiamus de iscarrigare custas mapas:</string>
+    <string name="maps_you_need_descr">Bidende sos artìculos chi as sarvadu in sos sinnalibros, ti cunsigiamus de iscarrigare custas mapas:</string>
     <string name="maps_you_need">Mapas cunsigiadas</string>
     <string name="shared_string_restart">Torra a allùghere</string>
     <string name="show_images">Ammustra sas immàgines</string>
@@ -3204,4 +3204,6 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="mapnik_render_descr">Istile betzu de renderizatzione simigiante a cussu de \'Mapnik\'. Caraterìsticas printzipales: sos colores sunt simigiantes a s\'istile de \'Mapnik\'.</string>
     <string name="default_render_descr">Istile de impreu generale. Renderizatzione semplificada pro tènnere mapas prus netas in sas tzitades cun un\'arta densidade de populatzione. Caraterìsticas printzipales: curvas de livellu, àndalas, calidades de sas superfìtzies, restritziones de atzessu, iscudos istradales, rapresentatzione de sas camineras sighende s\'iscala SAC, funtzionalidades pro sos isports de abba durche.</string>
     <string name="touring_view_render_descr">Istile fatu a sa minuda pro su turismu. Incluit totu sas optziones de configuratzione de s\'istile predefinidu e, in prus: ammustrat totu sas minujas chi est possìbile ammustrare, in particulare totu sas istradas, camineras, e sas àteras maneras de biagiare. Faghet una distintzione crara intre totu sas castas de istrada, in una manera sìmile a medas atlantes pro su turismu. Tenet un\'ischema de colores a cuntrastu artu pro s\'impreu a s\'àera aberta, una modalidade pro sa die e una pro sa note.</string>
+    <string name="shared_string_bookmark">Sinnalibru</string>
+    <string name="off_road_render_descr">Adatu pro s\'impreu durante sa ghia foras de sas istradas. Adatu pro s\'impreu cun mapas satellitares birdes comente suta-istratos. Caraterìsticas printzipales: grussesa de sas istradas printzipales minimada, grussesa de sas rastas, sas camineras, de sas pistas tziclàbiles e de sas àteras àndalas ismanniada. Basadu in subra de s\'istile topogràficu.</string>
     </resources>
