@@ -3078,7 +3078,7 @@
     <string name="lang_lo">لائو</string>
     <string name="rendering_attr_hidePOILabels_name">نام POIها</string>
     <string name="winter_and_ski_renderer">"زمستان و اسکی "</string>
-    <string name="touring_view_renderer">نمای سفر (تضاد رنگی و جزئیات بیشتر)</string>
+    <string name="touring_view_renderer">نمای گردشگری</string>
     <string name="nautical_renderer">دریایی</string>
 <string name="release_2_9">• تشخیص علائم ایست با توجه به مسیر رانندگی
 \n
@@ -3151,7 +3151,7 @@
     <string name="shared_string_travel">مسافرت</string>
     <string name="shared_string_result">نتیجه</string>
     <string name="use_two_digits_longitude">طول جغرافیایی دورقمی</string>
-    <string name="saved_articles">مقاله‌های ذخیره‌شده</string>
+    <string name="saved_articles">مقاله‌های نشانک‌دار</string>
     <string name="wikivoyage_search_hint">جست‌وجو: کشور، استان، شهرستان</string>
     <string name="shared_string_read">مطالعه</string>
     <string name="shared_string_explore">کاوش</string>
@@ -3170,7 +3170,7 @@
     <string name="shared_string_wifi_only">فقط با وای‌فای</string>
     <string name="online_webpage_warning">این صفحه فقط به‌صورت آنلاین در دسترس است. با مرورگر اینترنت باز شود؟</string>
     <string name="images_cache">حافظهٔ نهان تصاویر</string>
-    <string name="download_images">دانلود تصاویر</string>
+    <string name="download_images">نمایش تصاویر</string>
     <string name="select_travel_book">انتخاب کتاب سفر</string>
     <string name="shared_string_travel_book">کتاب سفر</string>
     <string name="purchase_dialog_title">انتخاب طرح</string>
@@ -3200,7 +3200,7 @@
 	<string name="update_is_available">به‌روزرسانی وجود دارد</string>
 	<string name="download_file">دانلود فایل</string>
     <string name="start_editing_card_image_text">راهنمای جهانی مسافرت رایگان است و همه می‌توانند آن را ویرایش کنند.</string>
-    <string name="welcome_to_open_beta_description">«مسافرت» بر اساس ویکی‌سفر ساخته شده. در دورهٔ آزمایش همگانیِ نسخهٔ بتا می‌توانید همهٔ قابلیت‌های آن را به‌رایگان ارزیابی کنید. با پایان دورهٔ آزمایشی، «مسافرت» در اختیار مشترکان نسخهٔ نامحدود OsmAnd و دارندگان OsmAnd+‎ خواهد بود.</string>
+    <string name="welcome_to_open_beta_description">«مسافرت» بر پایهٔ ویکی‌سفر ساخته شده. در دورهٔ آزمایش همگانیِ نسخهٔ بتا می‌توانید همهٔ قابلیت‌های آن را به‌رایگان ارزیابی کنید. با پایان دورهٔ آزمایشی، «مسافرت» در اختیار مشترکان نسخهٔ نامحدود OsmAnd و دارندگان OsmAnd+‎ خواهد بود.</string>
     <string name="start_editing_card_description">شما می‌توانید هر یک از مقالات ویکی‌سفر را ویرایش کنید. امیدواریم با انجام این کار دیگران را در دانش، تجربه، استعداد و توجهتان سهیم کنید.</string>
     <string name="start_editing">شروع ویرایش</string>
     <string name="get_unlimited_access">گرفتن دسترسی نامحدود</string>
@@ -3216,7 +3216,7 @@
     <string name="how_to_open_wiki_title">چگونه مقاله‌های ویکی‌پدیا را باز کنیم؟</string>
 <string name="popular_destinations">مقصدهای محبوب</string>
     <string name="osmand_team">تیم OsmAnd</string>
-    <string name="maps_you_need_descr">بر اساس مقالاتی که ذخیره کرده‌اید، پیشنهاد می‌کنیم این نقشه‌ها را دانلود کنید:</string>
+    <string name="maps_you_need_descr">بر اساس مقالاتی که نشانک زده‌اید، پیشنهاد می‌کنیم این نقشه‌ها را دانلود کنید:</string>
     <string name="maps_you_need">نقشه‌هایی که لازم دارید</string>
     <string name="shared_string_restart">راه‌اندازی مجدد</string>
     <string name="show_images">نمایش تصاویر</string>
@@ -3247,4 +3247,7 @@
 \n- نمایش بیشترین جزئیات ممکن و به‌طور خاص همهٔ جاده‌ها، مسیرها و راه‌های مسافرتی.
 \n- تمایز ظاهری آشکار بین انواع راه‌ها که شما را به‌یاد بسیاری از اطلس‌های گردشگری می‌اندازد.
 \n- ترکیب رنگی بسیار پادنما که مناسب فضای باز و حالت‌های روز و شب است.</string>
+    <string name="shared_string_bookmark">نشانک</string>
+    <string name="off_road_render_descr">مناسب رانندگی برون‌جاده‌ای (آفرود). بهتر است با زیرلایهٔ سبزرنگ از تصاویر ماهواره‌ای استفاده شود.
+\nویژگی‌های اصلی: ضخامت کمتر برای راه‌های اصلی. ضخامت بیشتر برای trackها،‏ pathها، مسیرهای دوچرخه و سایر مسیرها. بر پایهٔ سبک Topo است.</string>
     </resources>
