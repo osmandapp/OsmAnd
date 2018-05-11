@@ -415,13 +415,14 @@ public class TurnType {
 
 	public static int convertType(String lane) {
 		int turn;
-		if (lane.equals("none") || lane.equals("through")) {
-			turn = TurnType.C;
-		} else if (lane.equals("slight_right") || 
+		// merge should be recognized as continue route (but it could displayed differently)
+		if (lane.equals("none") || lane.equals("through") || 
+				lane.equals("merge_to_left") || 
 				lane.equals("merge_to_right")) {
+			turn = TurnType.C;
+		} else if (lane.equals("slight_right") ) {
 			turn = TurnType.TSLR;
-		} else if (lane.equals("slight_left") || 
-				lane.equals("merge_to_left")) {
+		} else if (lane.equals("slight_left") ) {
 			turn = TurnType.TSLL;
 		} else if (lane.equals("right")) {
 			turn = TurnType.TR;
