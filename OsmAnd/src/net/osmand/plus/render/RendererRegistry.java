@@ -301,6 +301,8 @@ public class RendererRegistry {
 				return ctx.getString(R.string.ski_map_render_descr);
 			case NAUTICAL_RENDER:
 				return ctx.getString(R.string.nautical_render_descr);
+			case OFFROAD_RENDER:
+				return ctx.getString(R.string.off_road_render_descr);
 		}
 		return ""; 
 	}
