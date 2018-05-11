@@ -13,9 +13,9 @@
     <string name="shared_string_bookmark">Bookmark</string>
     <string name="hide_full_description">Hide full description</string>
     <string name="show_full_description">Show full description</string>
-    <string name="off_road_render_descr">Suitable for use during off-road driving. Suitable for use with green satellite images as an underlay map. Key points: reduced thickness of the main roads, increased thickness of tracks, paths, bicycle and other routes. Based on Topo style.</string>
+    <string name="off_road_render_descr">Suitable for use during off-road driving. Suitable for use with green satellite images as an underlay map. Key points: Reduced main road thickness, increased thickness of tracks, paths, bicycle and other routes. Based on \'Topo\' style.</string>
     <string name="nautical_render_descr">Nautical navigation style. Key features: Buoys, lighthouses, riverways, sea lanes and marks, harbours, seamark services, depth contours.</string>
-    <string name="ski_map_render_descr">Skiing style. Key features: Renders pistes, aerial ways and other ski features in a convenient way. Less distracting secondary map objects.</string>
+    <string name="ski_map_render_descr">Skiing style. Key features: Renders pistes, ski-lifts and other ski features in a convenient way. Less distracting secondary map objects.</string>
     <string name="light_rs_render_descr">Simple and contrasting style for car navigation. Gentle on the eyes in the night mode. Key features: Contour lines, contrasting orange styled roads, less distracting secondary map objects.</string>
     <string name="topo_render_descr">Contrast style designed primarily for hiking, trekking and cycling in nature. Good readability in complex external lighting. Key features: Contrasting roads and natural objects, different types of routes, contour lines with advanced settings, more details at corresponding zoom levels than the "default" style. "Surface integrity" option allows distinguishing road surface quality. No night mode.</string>
     <string name="mapnik_render_descr">Old \'Mapnik\'-style default rendering style. Key features: Colors are similar to \'Mapnik\' style.</string>
