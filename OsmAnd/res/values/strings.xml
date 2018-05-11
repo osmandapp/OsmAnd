@@ -10,6 +10,7 @@
 	- For wording and consistency, please note http://osmand.net/help-online?id=technical-articles#Creating_a_Consistent_User_Experience
 	Thx - Hardy
 -->
+    <string name="shared_string_bookmark">Bookmark</string>
     <string name="hide_full_description">Hide full description</string>
     <string name="show_full_description">Show full description</string>
     <string name="nautical_render_descr">Nautical navigation style. Key features: Buoys, lighthouses, riverways, sea lanes and marks, harbours, seamark services, depth contours.</string>
@@ -30,7 +31,7 @@
     <string name="purchase_cancelled_dialog_title">You have canceled your OsmAnd Live subscription</string>
     <string name="purchase_cancelled_dialog_descr">Renew subscription to continue using all the features:</string>
 
-    <string name="maps_you_need_descr">Based on the articles you saved, the following maps are recommended for you to download:</string>
+    <string name="maps_you_need_descr">Based on the articles you bookmarked, the following maps are recommended for you to download:</string>
     <string name="maps_you_need">Maps you need</string>
     <string name="osmand_team">OsmAnd team</string>
     <string name="popular_destinations">Popular destinations</string>
@@ -84,7 +85,7 @@
     <string name="article_removed">Article removed</string>
     <string name="wikivoyage_search_hint">Search: Country, city, province</string>
     <string name="shared_string_read">Read</string>
-    <string name="saved_articles">Saved articles</string>
+    <string name="saved_articles">Bookmarked articles</string>
     <string name="shared_string_explore">Explore</string>
     <string name="shared_string_contents">Contents</string>
     <string name="shared_string_result">Result</string>
