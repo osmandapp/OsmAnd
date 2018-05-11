@@ -37,7 +37,7 @@ public class RendererRegistry {
 	
 	public final static String DEFAULT_RENDER = "OsmAnd";  //$NON-NLS-1$
 	public final static String DEFAULT_RENDER_FILE_PATH = "default.render.xml";
-	public final static String TOURING_VIEW = "Touring view";  //$NON-NLS-1$
+	public final static String TOURING_VIEW = "Touring view (contrast and details)";  //$NON-NLS-1$
 	public final static String WINTER_SKI_RENDER = "Winter and ski";  //$NON-NLS-1$
 	public final static String NAUTICAL_RENDER = "Nautical";  //$NON-NLS-1$
 	public final static String TOPO_RENDER = "Topo";  //$NON-NLS-1$
@@ -302,7 +302,7 @@ public class RendererRegistry {
 			case NAUTICAL_RENDER:
 				return ctx.getString(R.string.nautical_render_descr);
 		}
-		return "No description provided"; // FIXME
+		return ""; 
 	}
 
 	public RenderingRulesStorage getCurrentSelectedRenderer() {

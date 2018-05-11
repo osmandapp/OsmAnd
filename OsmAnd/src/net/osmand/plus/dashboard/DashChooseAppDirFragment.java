@@ -319,7 +319,7 @@ public class DashChooseAppDirFragment {
 			});
 			copyMapsBtn.setOnClickListener(new View.OnClickListener() {
 				@Override
-				public void onClick(View v) {
+				public void onClick(final View v) {
 					MoveFilesToDifferentDirectory task = new MoveFilesToDifferentDirectory(activity, currentAppFile,
 							selectedFile) {
 
@@ -329,11 +329,14 @@ public class DashChooseAppDirFragment {
 							if (result) {
 								mapsCopied = true;
 								getMyApplication().getResourceManager().resetStoreDirectory();
+								// immediately proceed with change (to not loose where maps are currently located)
+								getConfirmListener().onClick(v);
 							} else {
 								Toast.makeText(activity, R.string.copying_osmand_file_failed,
 										Toast.LENGTH_SHORT).show();
+								updateView();
 							}
-							updateView();
+							
 						}
 					};
 					task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
@@ -360,10 +363,12 @@ public class DashChooseAppDirFragment {
 							((FragmentActivity) activity).getSupportFragmentManager().beginTransaction()
 									.remove(fragment).commit();
 						}
+						getMyApplication().restartApp(activity);
 					} else {
 						Toast.makeText(activity, R.string.specified_directiory_not_writeable,
 								Toast.LENGTH_LONG).show();
 					}
+					
 					if(dlg != null) {
 						dlg.dismiss();
 					}

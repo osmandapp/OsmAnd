@@ -387,7 +387,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 				settings.SAVE_GLOBAL_TRACK_TO_GPX.set(true);
 				settings.SAVE_GLOBAL_TRACK_REMEMBER.set(choice.value);
 				int interval = settings.SAVE_GLOBAL_TRACK_INTERVAL.get();
-				app.startNavigationService(NavigationService.USED_BY_GPX, interval < 30000? 0 : interval);
+				app.startNavigationService(NavigationService.USED_BY_GPX, interval < 30000 ? 0 : interval);
 			}
 		};
 		if (choice.value || map == null) {

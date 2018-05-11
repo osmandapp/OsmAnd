@@ -112,7 +112,7 @@
             android:gravity="center"
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
-            android:text="@string/shared_string_ok"
+            android:text="@string/shared_string_continue"
             osmand:textAllCapsCompat="true"
             osmand:typeface="@string/font_roboto_medium"/>
     </LinearLayout>

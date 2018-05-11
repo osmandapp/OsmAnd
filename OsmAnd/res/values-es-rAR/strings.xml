@@ -223,7 +223,7 @@ Lon %2$s</string>
     <string name="stop_navigation_service">Parar</string>
     <string name="confirm_every_run">Preguntar siempre</string>
     <string name="enable_sleep_mode">Activar modo reposo del GPS</string>
-    <string name="save_current_track_descr">Guarda ahora la traza actual en la tarjeta de memoria.</string>
+    <string name="save_current_track_descr">Guardar ahora la traza actual en la tarjeta de memoria.</string>
     <string name="save_current_track">Guardar traza GPX actual</string>
     <string name="save_track_interval_globally">Intervalo de registro</string>
     <string name="voice_provider">Indicaciones por voz</string>
@@ -505,14 +505,14 @@ Lon %2$s</string>
 \n- Crear grupos; 
 \n- Sincronizar grupos y dispositivos con el servidor; 
 \n- Gestionar grupos y dispositivos en el panel de control personal del sitio web.</string>
-    <string name="speed_limit_exceed_message">Elige el margen de tolerancia sobre el límite de velocidad, en el cual recibirás un aviso de voz.</string>
+    <string name="speed_limit_exceed_message">Margen de tolerancia sobre el límite de velocidad, en el cual recibirás un aviso de voz.</string>
     <string name="fav_point_emoticons_message">Nombre del punto favorito cambiado a «%1$s», para facilitar el guardado de la cadena con emoticonos a un archivo.</string>
     <string name="fav_point_dublicate">Nombre del punto favorito duplicado</string>
     <string name="fav_point_dublicate_message">Nombre del favorito en uso, cambiado a «%1$s» para evitar duplicación.</string>
     <string name="text_size_descr">Define el tamaño del texto en el mapa.</string>
     <string name="background_service_is_enabled_question">El servicio de OsmAnd, aún está funcionando en modo reposo. ¿Quieres pararlo también?</string>
     <string name="sleep_mode_stop_dialog">¿Parar modo reposo del GPS?</string>
-    <string name="save_global_track_interval_descr">Elige el intervalo de registro para la grabación de trazas general (activar mediante el control de grabación GPX en el mapa).</string>
+    <string name="save_global_track_interval_descr">Intervalo de registro para la grabación general de trazas (activar mediante el control de grabación GPX en el mapa).</string>
     <string name="save_global_track_interval">Intervalo de registro general</string>
     <string name="background_service_int">Intervalo de activación del GPS</string>
     <string name="save_track_to_gpx_globally">Guardar traza en archivo GPX</string>
@@ -521,8 +521,8 @@ Lon %2$s</string>
     <string name="save_track_to_gpx">Guardar la traza automáticamente durante la navegación</string>
     <string name="save_track_to_gpx_descrp">Una traza GPX se guardará automáticamente en la carpeta de trazas durante la navegación.</string>
     <string name="save_track_interval">Intervalo de registro durante la navegación</string>
-    <string name="save_track_interval_descr">Elige el intervalo de registro de trazas durante la navegación.</string>
-    <string name="voice_provider_descr">Elige las indicaciones por voz para la navegación.</string>
+    <string name="save_track_interval_descr">Intervalo de registro de trazas durante la navegación.</string>
+    <string name="voice_provider_descr">Indicaciones por voz para la navegación.</string>
     <string name="enable_proxy_descr">Configura un proxy HTTP para todas las peticiones de red.</string>
     <string name="proxy_host_title">Servidor proxy</string>
     <string name="proxy_host_descr">Configura el nombre de tu proxy (p.e. 127.0.0.1).</string>
@@ -606,7 +606,7 @@ Lon %2$s</string>
     <string name="disable_complex_routing_descr">Desactiva la planificación de ruta de dos fases para la navegación en automóvil.</string>
     <string name="disable_complex_routing">Desactivar navegación compleja</string>
     <string name="amenity_type_seamark">Náutico</string>
-    <string name="app_modes_choose_descr">Elige los perfiles de uso visibles en la aplicación.</string>
+    <string name="app_modes_choose_descr">Perfiles de uso visibles en la aplicación.</string>
     <string name="app_modes_choose">Perfiles de aplicación</string>
     <string name="map_widget_map_rendering">Renderizado del mapa</string>
     <string name="app_mode_hiking">Senderismo</string>
@@ -642,7 +642,7 @@ Lon %2$s</string>
     <string name="edit_tilesource_choose_existing">Elegir existente…</string>
     <string name="maps_define_edit">Definir/Editar…</string>
     <string name="map_widget_fps_info">Info de depuración FPS</string>
-    <string name="driving_region_descr">Elige la región de conducción: EEUU, Europa, Reino Unido, Asia u otras.</string>
+    <string name="driving_region_descr">Región de conducción: EEUU, Europa, Reino Unido, Asia u otras.</string>
     <string name="driving_region">Región de conducción</string>
     <string name="driving_region_japan">Japón</string>
     <string name="driving_region_us">Estados Unidos</string>
@@ -716,7 +716,7 @@ Lon %2$s</string>
     <string name="phone">Teléfono</string>
     <string name="osmand_background_plugin_description">Muestra los ajustes para activar en modo reposo el rastreo y la navegación, activando periódicamente el dispositivo GPS (con la pantalla apagada).</string>
     <string name="contribution_activity">Instalar compilación</string>
-    <string name="choose_osmand_theme_descr">Elige el aspecto de la aplicación.</string>
+    <string name="choose_osmand_theme_descr">Aspecto de la aplicación.</string>
     <string name="choose_osmand_theme">Tema</string>
     <string name="accessibility_options">Opciones de accesibilidad</string>
     <string name="select_address_activity">Elegir dirección</string>
@@ -752,7 +752,7 @@ Lon %2$s</string>
     <string name="av_def_action_audio">Grabar audio</string>
     <string name="av_widget_action_descr">Elige la acción predefinida.</string>
     <string name="av_widget_action">Acción predefinida</string>
-    <string name="av_video_format_descr">Elige el formato de salida del video.</string>
+    <string name="av_video_format_descr">Formato de salida del video.</string>
     <string name="av_video_format">Formato de salida del video</string>
     <string name="av_use_external_recorder_descr">Usa la grabadora del sistema para video.</string>
     <string name="av_use_external_recorder">Usar grabadora externa</string>
@@ -1234,7 +1234,7 @@ Lon %2$s</string>
     <string name="local_indexes_cat_poi">Datos de PDI</string>
     <string name="ttsvoice">Voz TTS</string>
     <string name="search_offline_clear_search">Nueva búsqueda</string>
-    <string name="map_text_size_descr">Elige el tamaño del texto para los nombres en el mapa.</string>
+    <string name="map_text_size_descr">Tamaño del texto para los nombres en el mapa.</string>
     <string name="map_text_size">Tamaño del texto</string>
     <string name="trace_rendering">Información de depuración de visualización</string>
     <string name="trace_rendering_descr">Muestra el rendimiento de visualización.</string>
@@ -1277,8 +1277,8 @@ Lon %2$s</string>
     <string name="search_offline_geo_error">No se pudo analizar el filtro «%s».</string>
     <string name="search_osm_offline">Buscar ubicación geográfica</string>
     <string name="system_locale">Sistema</string>
-    <string name="preferred_locale_descr">Elige el idioma de visualización (surte efecto al reiniciar OsmAnd).</string>
-    <string name="preferred_locale">Idioma de la pantalla</string>
+    <string name="preferred_locale_descr">Idioma de visualización (surte efecto al reiniciar OsmAnd).</string>
+    <string name="preferred_locale">Idioma de visualización</string>
     <string name="incomplete_locale">incompleto</string>
     <string name="unit_of_length_descr">Cambia la distancia de medición.</string>
     <string name="unit_of_length">Unidades de longitud</string>
@@ -1344,7 +1344,7 @@ Lon %2$s</string>
     <string name="install_selected_build">¿Instalar OsmAnd - {0} de {1} {2} MB ?</string>
     <string name="loading_builds_failed">Fallo recuperando la lista de compilaciones OsmAnd</string>
     <string name="loading_builds">Cargando compilaciones OsmAnd…</string>
-    <string name="select_build_to_install">Elige una compilación OsmAnd a instalar</string>
+    <string name="select_build_to_install">Compilación OsmAnd a instalar</string>
     <string name="gps_status_app_not_found">La aplicación «GPS Status» no está instalada. ¿Buscar en la tienda de aplicaciones?</string>
     <string name="voice_is_not_available_msg">Las indicaciones por voz no están disponibles, vaya a «Ajustes» → «Ajustes de navegación» → «Indicaciones por voz» y elige o descarga un paquete de indicaciones por voz.</string>
     <string name="voice_is_not_available_title">No se eligieron indicaciones por voz</string>
@@ -1361,7 +1361,7 @@ Lon %2$s</string>
     <string name="fast_route_mode_descr">Activar para calcular la ruta más rápida o desactivar para la más eficiente en combustible.</string>
     <string name="tiles_to_download_estimated_size">En el zoom {0}, descarga {1} teselas ({2} MB)</string>
     <string name="shared_string_download_map">Descargar mapa</string>
-    <string name="select_max_zoom_preload_area">Elige el zoom máximo a precargar</string>
+    <string name="select_max_zoom_preload_area">Zoom máximo a precargar</string>
     <string name="maps_could_not_be_downloaded">No se pudo descargar el mapa</string>
     <string name="continuous_rendering">Visualización continua</string>
     <string name="continuous_rendering_descr">Mostrar visualización de forma continua en vez de todo de una vez.</string>
@@ -1370,7 +1370,7 @@ Lon %2$s</string>
     <string name="renderer_load_sucess">Visualización cargada</string>
     <string name="renderer_load_exception">No se pudo cargar el visualizador</string>
     <string name="renderers">Visualización vectorial</string>
-    <string name="renderers_descr">Elige el aspecto de visualización de los mapas vectoriales.</string>
+    <string name="renderers_descr">Aspecto de visualización de los mapas vectoriales.</string>
     <string name="poi_context_menu_website">Mostrar sitio web del PDI</string>
     <string name="poi_context_menu_call">Mostrar teléfono del PDI</string>
     <string name="download_type_to_filter">escribe el filtro</string>
@@ -1395,7 +1395,7 @@ Lon %2$s</string>
     <string name="rotate_map_compass_opt">Dirección de la brújula</string>
     <string name="rotate_map_bearing_opt">Dirección del movimiento</string>
     <string name="rotate_map_none_opt">Sin rotación (norte siempre arriba)</string>
-    <string name="rotate_map_to_bearing_descr">Elige la alineación de la pantalla del mapa.</string>
+    <string name="rotate_map_to_bearing_descr">Alineación de la pantalla del mapa.</string>
     <string name="rotate_map_to_bearing">Orientación del mapa</string>
     <string name="show_route">Detalle de la ruta</string>
     <string name="fav_imported_sucessfully">Favoritos importados</string>
@@ -1430,7 +1430,7 @@ Lon %2$s</string>
     <string name="int_seconds">segundos</string>
     <string name="int_min">min.</string>
     <string name="background_service_int_descr">Define el intervalo de activación del modo reposo.</string>
-    <string name="background_service_provider_descr">Elige el método de ubicación usado del modo reposo.</string>
+    <string name="background_service_provider_descr">Método de ubicación usado del modo reposo.</string>
     <string name="background_service_provider">Proveedor de ubicación</string>
     <string name="background_router_service_descr">Realiza un seguimiento de tu ubicación con la pantalla apagada.</string>
     <string name="background_router_service">Ejecutar OsmAnd en modo reposo</string>
@@ -1657,7 +1657,7 @@ Lon %2$s</string>
     <string name="edit_filter_create_message">Se creó el filtro {0}</string>
     <string name="email">correo electrónico</string>
     <string name="av_camera_focus">Método de enfoque</string>
-    <string name="av_camera_focus_descr">Elige el modo de enfoque de la cámara interna.</string>
+    <string name="av_camera_focus_descr">Modo de enfoque de la cámara interna.</string>
     <string name="av_camera_focus_auto">Enfoque automático</string>
     <string name="av_camera_focus_hiperfocal">Enfoque hiperfocal</string>
     <string name="av_camera_focus_edof">Profundidad de campo extendido (EDOF)</string>
@@ -1665,9 +1665,9 @@ Lon %2$s</string>
     <string name="av_camera_focus_macro">Modo de enfoque macro (primer plano)</string>
     <string name="av_camera_focus_continuous">Enfoque continuo</string>
     <string name="av_photo_play_sound">Sonido al fotografiar</string>
-    <string name="av_photo_play_sound_descr">Elige si reproducir sonido al fotografiar.</string>
+    <string name="av_photo_play_sound_descr">Reproducir sonido al fotografiar.</string>
     <string name="av_camera_pic_size">Tamaño de fotografía</string>
-    <string name="av_camera_pic_size_descr">Elige el tamaño interno de la fotografía.</string>
+    <string name="av_camera_pic_size_descr">Tamaño interno de la fotografía.</string>
     <string name="navigation_intent_invalid">Formato inválido: %s</string>
     <string name="plugin_description_title">Descripción</string>
     <string name="plugin_install_needs_network">Es necesaria una conexión a Internet para instalar este complemento.</string>
@@ -2542,7 +2542,7 @@ Lon %2$s</string>
 \n • PDI de Wikipedia, ideal para el turismo 
 \n • Descargas gratis ilimitadas, directamente desde la aplicación 
 \n • Mapas vectoriales reducidos sin conexión, actualizados al menos una vez cada mes 
-\n • Elije entre datos completos de la región o sólo la red de rutas (Ejemplo: Todo Japón tiene 700 MB o sólo 200 MB para la red de rutas)</string>
+\n • Elige entre datos completos de la región o sólo la red de rutas (Ejemplo: Todo Japón tiene 700 MB o sólo 200 MB para la red de rutas)</string>
     <string name="osmand_plus_extended_description_part5">Funciones de seguridad 
 \n • (Opcional) El modo diurno/nocturno se alterna automáticamente 
 \n • (Opcional) Visualización del límite de velocidad, con aviso al excederte 
@@ -2680,7 +2680,7 @@ Lon %2$s</string>
     <string name="mapillary_menu_title_tile_cache">Caché de teselas</string>
     <string name="shared_string_reset">Restablecer</string>
     <string name="store_tracks_in_monthly_directories">Guardar las trazas grabadas en carpetas mensuales</string>
-    <string name="store_tracks_in_monthly_directories_descrp">Guarda las trazas grabadas en subcarpetas por mes de grabación (como 2018-01).</string>
+    <string name="store_tracks_in_monthly_directories_descrp">Guardar las trazas grabadas en subcarpetas, por mes de grabación (como 2018-01).</string>
     <string name="average">Promedio</string>
     <string name="of">%1$d de %2$d</string>
     <string name="ascent_descent">Ascenso/Descenso</string>
@@ -2754,7 +2754,7 @@ Lon %2$s</string>
     <string name="sort_by">Ordenar por</string>
     
     <string name="map_orientation_change_in_accordance_with_speed">Umbral de orientación del mapa</string>
-    <string name="map_orientation_change_in_accordance_with_speed_descr">Elije la velocidad a partir de la cual la orientación del mapa cambia de «Dirección del movimiento» a «Dirección de la brújula».</string>
+    <string name="map_orientation_change_in_accordance_with_speed_descr">Velocidad a partir de la cual la orientación del mapa cambia de «Dirección del movimiento» a «Dirección de la brújula».</string>
     <string name="all_markers_moved_to_history">Todos los marcadores del mapa movidos al historial</string>
     <string name="marker_moved_to_history">Marcador del mapa movido al historial</string>
     <string name="marker_moved_to_active">Marcador del mapa movido a los activos</string>
@@ -2931,7 +2931,7 @@ Lon %2$s</string>
     <string name="gpx_file">Archivo GPX</string>
     <string name="osc_file">Archivo OSC</string>
     <string name="choose_file_type">Elegir tipo de archivo</string>
-    <string name="osm_edits_export_desc">Elije el tipo de exportación: notas de OSM, PDI o ambos.</string>
+    <string name="osm_edits_export_desc">Elige el tipo de exportación: notas de OSM, PDI o ambos.</string>
     <string name="all_data">Todos los datos</string>
     <string name="osm_notes">Notas de OSM</string>
     <string name="tunnel_warning">Túnel adelante</string>
