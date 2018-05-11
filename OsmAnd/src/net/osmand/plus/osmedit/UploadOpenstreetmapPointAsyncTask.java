@@ -91,11 +91,12 @@ public class UploadOpenstreetmapPointAsyncTask
 			}
 		});
 		progress.setMax(listSize);
+		progress.setRetainInstance(true);
 	}
 
 	@Override
 	protected void onPostExecute(Map<OsmPoint, String> loadErrorsMap) {
-		if (progress != null && progress.isResumed()) {
+		if (progress != null) {
 			progress.dismissAllowingStateLoss();
 		}
 		listener.uploadEnded(loadErrorsMap);
