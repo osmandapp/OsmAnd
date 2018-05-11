@@ -57,7 +57,6 @@ import net.osmand.router.RouteResultPreparation;
 import net.osmand.router.TurnType;
 import net.osmand.util.Algorithms;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -642,9 +641,9 @@ public class RouteInfoWidgetsFactory {
 			private int cachedDegrees;
 			private float MIN_SPEED_FOR_HEADING = 1f;
 
-			public LatLon getPointToNavigate() {
-				TargetPoint p = map.getPointToNavigate();
-				return p == null ? null : p.point;
+			private LatLon getNextTargetPoint() {
+				List<TargetPoint> points = getOsmandApplication().getTargetPointsHelper().getIntermediatePointsWithTarget();
+				return points.isEmpty() ? null : points.get(0).point;
 			}
 
 			@Override
@@ -668,7 +667,7 @@ public class RouteInfoWidgetsFactory {
 			public int getBearing(boolean relative) {
 				int d = -1000;
 				Location myLocation = getOsmandApplication().getLocationProvider().getLastKnownLocation();
-				LatLon l = getPointToNavigate();
+				LatLon l = getNextTargetPoint();
 				if (l == null) {
 					List<MapMarker> markers = getOsmandApplication().getMapMarkersHelper().getMapMarkers();
 					if (markers.size() > 0) {
