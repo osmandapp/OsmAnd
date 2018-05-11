@@ -16,6 +16,8 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
+import android.text.TextPaint;
+import android.text.TextUtils;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
@@ -82,6 +84,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	private Bitmap arrowShadow;
 	private float[] calculations = new float[2];
 
+	private final TextPaint textPaint = new TextPaint();
 	private final RenderingLineAttributes lineAttrs = new RenderingLineAttributes("measureDistanceLine");
 	private final RenderingLineAttributes textAttrs = new RenderingLineAttributes("rulerLineFont");
 	private final RenderingLineAttributes planRouteAttrs = new RenderingLineAttributes("markerPlanRouteline");
@@ -257,6 +260,8 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 			textAttrs.updatePaints(view, nightMode, tileBox);
 			textAttrs.paint.setStyle(Paint.Style.FILL);
 
+			textPaint.set(textAttrs.paint);
+
 			boolean drawMarkerName = map.getMyApplication().getSettings().DISPLAYED_MARKERS_WIDGETS_COUNT.get() == 1;
 
 			int locX;
@@ -293,6 +298,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 				float dist = (float) MapUtils.getDistance(myLoc.getLatitude(), myLoc.getLongitude(), marker.getLatitude(), marker.getLongitude());
 				String distSt = OsmAndFormatter.getFormattedDistance(dist, view.getApplication());
 				String text = distSt + (drawMarkerName ? " • " + marker.getName(map) : "");
+				text = TextUtils.ellipsize(text, textPaint, pm.getLength(), TextUtils.TruncateAt.END).toString();
 				Rect bounds = new Rect();
 				textAttrs.paint.getTextBounds(text, 0, text.length(), bounds);
 				float hOffset = pm.getLength() / 2 - bounds.width() / 2;
