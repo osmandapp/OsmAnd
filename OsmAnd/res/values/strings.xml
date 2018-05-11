@@ -13,6 +13,7 @@
     <string name="shared_string_bookmark">Bookmark</string>
     <string name="hide_full_description">Hide full description</string>
     <string name="show_full_description">Show full description</string>
+    <string name="off_road_render_descr">Suitable for use during off-road driving. Suitable for use with green satellite images as an undarlay map. Key points: reduced thickness of the main roads, increased thickness of tracks, paths, bicycle and other routes. Based on Topo style.</string>
     <string name="nautical_render_descr">Nautical navigation style. Key features: Buoys, lighthouses, riverways, sea lanes and marks, harbours, seamark services, depth contours.</string>
     <string name="ski_map_render_descr">Skiing style. Key features: Renders pistes, aerial ways and other ski features in a convenient way. Less distracting secondary map objects.</string>
     <string name="light_rs_render_descr">Simple and contrasting style for car navigation. Gentle on the eyes in the night mode. Key features: Contour lines, contrasting orange styled roads, less distracting secondary map objects.</string>
@@ -79,7 +80,7 @@
     <string name="online_webpage_warning">Page only available online. Open in web browser?</string>
     <string name="images_cache">Images cache</string>
     <string name="delete_search_history">Delete search history</string>
-    <string name="download_images">Download images</string>
+    <string name="download_images">Show images</string>
     <string name="download_maps_travel">Travel maps</string>
     <string name="shared_string_wikivoyage">Wikivoyage</string>
     <string name="article_removed">Article removed</string>
