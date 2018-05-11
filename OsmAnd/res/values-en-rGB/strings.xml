@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
 	<!--
 		Our app defaults to American English with default strings in res/values
 		This file is manually maintained in res/values-en-rGB and should ONLY contain strings where a different spelling should be used for English as used in the United Kingdom
@@ -85,4 +86,5 @@
 	<string name="quick_action_favorites_hide">Hide Favourites</string>
 	<string name="quick_action_category_descr">Select the category to save the favourite in.</string>
 	<string name="analyze_on_map">Analyse on map</string>
-</resources>
+<string name="purchase_cancelled_dialog_title">You have cancelled your OsmAnd Live subscription</string>
+    </resources>
