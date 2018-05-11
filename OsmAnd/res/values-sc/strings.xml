@@ -3190,17 +3190,18 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="purchase_cancelled_dialog_descr">Rinnova s\'abbonamentu tuo pro sighire a impreare totu sas funtzionalidades:</string>
 
     <string name="download_all">Iscàrriga totu</string>
-    <string name="open_wikipedia_link_online">Aberi su ligàmene de wikipedia in lìnia</string>
-    <string name="open_wikipedia_link_online_description">OsmAnd at a abèrrere su ligàmene in lìnia in s\'esploradore tuo.</string>
+    <string name="open_wikipedia_link_online">Aberi su ligàmene de Wikipedia in lìnia</string>
+    <string name="open_wikipedia_link_online_description">"Su ligàmene at a  bènnere abertu in un\'esploradore."</string>
     <string name="read_wikipedia_offline_description">Abbona·ti a OsmAnd Live pro lèghere sos artìculos de Wikipedia e Wikivoyage chene connessione.</string>
     <string name="how_to_open_link">Comente abèrrere su ligàmene?</string>
     <string name="read_wikipedia_offline">Leghe Wikipedia chene connessione</string>
     <string name="hide_full_description">Istichi sa descritzione intrea</string>
     <string name="show_full_description">Ammustra sa descritzione intrea</string>
-    <string name="nautical_render_descr">Istile pro su nàvigu marìtimu e de sos rios. Caraterìsticas printzipales: pidagnos, fatos, lìnias e edifìtzios nàuticos, portos, servìtzios marìtimos, curvas de livellu marinas.</string>
+    <string name="nautical_render_descr">Istile pro su nàvigu marìtimu e de sos rios. Caraterìsticas printzipales: pidagnos, faros, bias fluviales, lìnias e edifìtzios nàuticos, portos, servìtzios marìtimos, curvas de livellu marinas.</string>
     <string name="ski_map_render_descr">Istile pro s\'iscì. Caraterìsticas printzipales: pistas de iscì, funivias e àteras istruturas pro s\'iscì in una manera conveniente. Prus pagos ogetos de mapa secondàrios chi distraent.</string>
     <string name="light_rs_render_descr">Istile simple e cun cuntrastu artu pro su nàvigu in màchina. Gentile pro sos ogros in sa modalidade noturna. Caraterìsticas printzipales: lìnias de livellu, istradas cun cuntrastu artu in colore arantzu, prus pagos ogetos de mapa secondàrios chi distraent.</string>
     <string name="topo_render_descr">Istile cun cuntrastu artu disinnadu primariamente pro escursionismu o tziclismu. Legibilidade bona un\'illuminatzione esterna cumplessa. Caraterìsticas printzipales: istradas e ogetos naturales in cuntrastu artu, castas diferentes de àndalas, curvas de livellu cun impostatziones avantzadas, prus minujas in sos livellos de ismanniamentu currispondentes chi in s\'istile predefinidu. S\'optzione de integridade de sa superfìtzie ti permitit de distìnghere intre sas istradas cun calidades de sas superfìtzies diferentes. Peruna modalidade noturna.</string>
-    <string name="mapnik_render_descr">Istile betzu de renderizatzione simigiante a cussu de Mapnik. Caraterìsticas printzipales: sos colores sunt simigiantes a s\'istile de Mapnik.</string>
-    <string name="default_render_descr">Istile de impreu generale. Renderizatzione semplificada pro tènnere mapas prus netas in sas tzitades populosas. Caraterìsticas printzipales: curvas de livellu, àndalas, calidades de sas superfìtzies, restritziones de atzessu, iscudos istradales, rapresentatzione de sas camineras sighende s\'iscala SAC, funtzionalidades pro sos isports de abba durche.</string>
+    <string name="mapnik_render_descr">Istile betzu de renderizatzione simigiante a cussu de \'Mapnik\'. Caraterìsticas printzipales: sos colores sunt simigiantes a s\'istile de \'Mapnik\'.</string>
+    <string name="default_render_descr">Istile de impreu generale. Renderizatzione semplificada pro tènnere mapas prus netas in sas tzitades cun un\'arta densidade de populatzione. Caraterìsticas printzipales: curvas de livellu, àndalas, calidades de sas superfìtzies, restritziones de atzessu, iscudos istradales, rapresentatzione de sas camineras sighende s\'iscala SAC, funtzionalidades pro sos isports de abba durche.</string>
+    <string name="touring_view_render_descr">Istile fatu a sa minuda pro su turismu. Incluit totu sas optziones de configuratzione de s\'istile predefinidu e, in prus: ammustrat totu sas minujas chi est possìbile ammustrare, in particulare totu sas istradas, camineras, e sas àteras maneras de biagiare. Faghet una distintzione crara intre totu sas castas de istrada, in una manera sìmile a medas atlantes pro su turismu. Tenet un\'ischema de colores a cuntrastu artu pro s\'impreu a s\'àera aberta, una modalidade pro sa die e una pro sa note.</string>
     </resources>
