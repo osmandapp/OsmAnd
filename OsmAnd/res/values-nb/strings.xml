@@ -3120,4 +3120,7 @@
 
     <string name="maps_you_need_descr">Basert på artiklene du har lagret, anbefales du å laste ned følgende kart:</string>
     <string name="maps_you_need">Kart du trenger</string>
+    <string name="shared_string_bookmark">Bokmerk</string>
+    <string name="off_road_render_descr">Nytt for bruk under villmarkskjøring. Nyttig for bruk med grønne satellittbilder som underlagskart. Nøkkelpunkter: Redusert tykkelse for hovedveier, økt tykkelse for småveier, stier, sykkel- og andre -ruter.
+\nBasert på Topo-stil.</string>
     </resources>
