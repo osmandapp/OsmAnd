@@ -223,7 +223,7 @@ Lon %2$s</string>
     <string name="stop_navigation_service">Parar</string>
     <string name="confirm_every_run">Preguntar siempre</string>
     <string name="enable_sleep_mode">Activar modo reposo del GPS</string>
-    <string name="save_current_track_descr">Guarda ahora la traza actual en la tarjeta de memoria.</string>
+    <string name="save_current_track_descr">Guardar ahora la traza actual en la tarjeta de memoria.</string>
     <string name="save_current_track">Guardar traza GPX actual</string>
     <string name="save_track_interval_globally">Intervalo de registro</string>
     <string name="voice_provider">Indicaciones por voz</string>
@@ -505,14 +505,14 @@ Lon %2$s</string>
 \n- Crear grupos;
 \n- Sincronizar grupos y dispositivos con el servidor;
 \n- Gestionar grupos y dispositivos en el panel de control personal del sitio web.</string>
-    <string name="speed_limit_exceed_message">Elige el margen de tolerancia sobre el límite de velocidad, en el cual recibirás un aviso de voz.</string>
+    <string name="speed_limit_exceed_message">Margen de tolerancia sobre el límite de velocidad, en el cual recibirás un aviso de voz.</string>
     <string name="fav_point_emoticons_message">Nombre del punto favorito cambiado a «%1$s», para facilitar el guardado de la cadena con emoticonos a un archivo.</string>
     <string name="fav_point_dublicate">Nombre del punto favorito duplicado</string>
     <string name="fav_point_dublicate_message">Nombre del favorito en uso, cambiado a «%1$s» para evitar duplicación.</string>
     <string name="text_size_descr">Define el tamaño del texto en el mapa.</string>
     <string name="background_service_is_enabled_question">El servicio de OsmAnd, aún está funcionando en modo reposo. ¿Quieres pararlo también?</string>
     <string name="sleep_mode_stop_dialog">¿Parar modo reposo del GPS?</string>
-    <string name="save_global_track_interval_descr">Elige el intervalo de registro para la grabación de trazas general (activar mediante el control de grabación GPX en el mapa).</string>
+    <string name="save_global_track_interval_descr">Intervalo de registro para la grabación general de trazas (activar mediante el control de grabación GPX en el mapa).</string>
     <string name="save_global_track_interval">Intervalo de registro general</string>
     <string name="background_service_int">Intervalo de activación del GPS</string>
     <string name="save_track_to_gpx_globally">Guardar traza en archivo GPX</string>
@@ -521,8 +521,8 @@ Lon %2$s</string>
     <string name="save_track_to_gpx">Guardar la traza automáticamente durante la navegación</string>
     <string name="save_track_to_gpx_descrp">Una traza GPX se guardará automáticamente en la carpeta de trazas durante la navegación.</string>
     <string name="save_track_interval">Intervalo de registro durante la navegación</string>
-    <string name="save_track_interval_descr">Elige el intervalo de registro de trazas durante la navegación.</string>
-    <string name="voice_provider_descr">Elige las indicaciones por voz para la navegación.</string>
+    <string name="save_track_interval_descr">Intervalo de registro de trazas durante la navegación.</string>
+    <string name="voice_provider_descr">Indicaciones por voz para la navegación.</string>
     <string name="enable_proxy_descr">Configura un proxy HTTP para todas las peticiones de red.</string>
     <string name="proxy_host_title">Servidor proxy</string>
     <string name="proxy_host_descr">Configura el nombre de tu proxy (p.e. 127.0.0.1).</string>
@@ -606,7 +606,7 @@ Lon %2$s</string>
     <string name="disable_complex_routing_descr">Desactiva la planificación de ruta de dos fases para la navegación en automóvil.</string>
     <string name="disable_complex_routing">Desactivar navegación compleja</string>
     <string name="amenity_type_seamark">Náutico</string>
-    <string name="app_modes_choose_descr">Elige los perfiles de uso visibles en la aplicación.</string>
+    <string name="app_modes_choose_descr">Perfiles de uso visibles en la aplicación.</string>
     <string name="app_modes_choose">Perfiles de aplicación</string>
     <string name="map_widget_map_rendering">Renderizado del mapa</string>
     <string name="app_mode_hiking">Senderismo</string>
@@ -642,7 +642,7 @@ Lon %2$s</string>
     <string name="edit_tilesource_choose_existing">Elegir existente…</string>
     <string name="maps_define_edit">Definir/Editar…</string>
     <string name="map_widget_fps_info">Info de depuración FPS</string>
-    <string name="driving_region_descr">Elige la región de conducción: EEUU, Europa, Reino Unido, Asia u otras.</string>
+    <string name="driving_region_descr">Región de conducción: EEUU, Europa, Reino Unido, Asia u otras.</string>
     <string name="driving_region">Región de conducción</string>
     <string name="driving_region_japan">Japón</string>
     <string name="driving_region_us">Estados Unidos</string>
@@ -716,7 +716,7 @@ Lon %2$s</string>
     <string name="phone">Teléfono</string>
     <string name="osmand_background_plugin_description">Muestra los ajustes para activar en modo reposo el rastreo y la navegación, activando periódicamente el dispositivo GPS (con la pantalla apagada).</string>
     <string name="contribution_activity">Instalar compilación</string>
-    <string name="choose_osmand_theme_descr">Elige el aspecto de la aplicación.</string>
+    <string name="choose_osmand_theme_descr">El aspecto de la aplicación.</string>
     <string name="choose_osmand_theme">Tema</string>
     <string name="accessibility_options">Opciones de accesibilidad</string>
     <string name="select_address_activity">Elegir dirección</string>
@@ -752,7 +752,7 @@ Lon %2$s</string>
     <string name="av_def_action_audio">Grabar audio</string>
     <string name="av_widget_action_descr">Elige la acción predefinida.</string>
     <string name="av_widget_action">Acción predefinida</string>
-    <string name="av_video_format_descr">Elige el formato de salida del video.</string>
+    <string name="av_video_format_descr">Formato de salida del video.</string>
     <string name="av_video_format">Formato de salida del video</string>
     <string name="av_use_external_recorder_descr">Usa la grabadora del sistema para video.</string>
     <string name="av_use_external_recorder">Usar grabadora externa</string>
@@ -856,7 +856,7 @@ Lon %2$s</string>
     <string name="osmand_long_description_1000_chars">"OsmAnd (OSM Automated Navigation Directions, y en español, Guía de Navegación Automatizada de OSM) 
 \n
 \nOsmAnd es un software de navegación de código abierto con acceso a una amplia variedad de datos globales de OpenStreetMap (OSM). Todos los datos del mapa (vectores y teselas) pueden ser almacenados en la memoria del teléfono para su uso sin conexión. También ofrece funcionalidades de rutas con y sin conexión, incluyendo indicaciones giro-a-giro por voz. 
-\n 
+\n
 \n Algunas de las funciones fundamentales: 
 \n - Completa funcionalidad sin conexión (almacena los mapas vectoriales o teselas descargados en la memoria del dispositivo) 
 \n - Mapas vectoriales compactos disponibles de todo el planeta 
@@ -865,7 +865,7 @@ Lon %2$s</string>
 \n - Búsqueda sin conexión de direcciones y lugares (PDI) 
 \n - Navegación sin conexión para distancias de rango medio 
 \n - Modos de automóvil, bicicleta y peatón con opcional: 
-\n  - Cambio automático de vista día/noche 
+\n  - Cambio automático de modo diurno/nocturno 
 \n  - Zoom del mapa según la velocidad 
 \n  - Alineación del mapa, según la brújula o dirección del movimiento 
 \n  - Indicación de carriles, visualización de límites de velocidad, voces grabadas y sintetizadas 
@@ -892,7 +892,7 @@ Lon %2$s</string>
 \n - Búsqueda sin conexión de direcciones y lugares (PDI) 
 \n - Rutas sin conexión para distancias de rango medio 
 \n - Modos de automóvil, bicicleta y peatón con opcional: 
-\n  - Cambio automático de vista día/noche 
+\n  - Cambio automático de modo diurno/nocturno 
 \n  - Zoom del mapa según la velocidad 
 \n  - Alineación del mapa, según brújula o dirección del movimiento 
 \n  - Indicación de carriles, mostrar límites de velocidad, voces grabadas y sintetizadas"</string>
@@ -902,7 +902,7 @@ Lon %2$s</string>
     <string name="select_navigation_mode">Elegir modo de transporte</string>
     <string name="day_night_info_description">Alba: %1$s
 \nOcaso: %2$s</string>
-    <string name="day_night_info">Información día/noche</string>
+    <string name="day_night_info">Información diurna/nocturna</string>
     
     <string name="map_widget_renderer">Estilo del mapa</string>
     <string name="layer_map_appearance">Configurar pantalla</string>
@@ -1234,7 +1234,7 @@ Lon %2$s</string>
     <string name="local_indexes_cat_poi">Datos de PDI</string>
     <string name="ttsvoice">Voz TTS</string>
     <string name="search_offline_clear_search">Nueva búsqueda</string>
-    <string name="map_text_size_descr">Elige el tamaño del texto para los nombres en el mapa.</string>
+    <string name="map_text_size_descr">Tamaño del texto para los nombres en el mapa.</string>
     <string name="map_text_size">Tamaño del texto</string>
     <string name="trace_rendering">Información de depuración de visualización</string>
     <string name="trace_rendering_descr">Muestra el rendimiento de visualización.</string>
@@ -1277,8 +1277,8 @@ Lon %2$s</string>
     <string name="search_offline_geo_error">No se pudo analizar el filtro «%s».</string>
     <string name="search_osm_offline">Buscar ubicación geográfica</string>
     <string name="system_locale">Sistema</string>
-    <string name="preferred_locale_descr">Elige el idioma de visualización (surte efecto al reiniciar OsmAnd).</string>
-    <string name="preferred_locale">Idioma de la pantalla</string>
+    <string name="preferred_locale_descr">Idioma de visualización (surte efecto al reiniciar OsmAnd).</string>
+    <string name="preferred_locale">Idioma de visualización</string>
     <string name="incomplete_locale">incompleto</string>
     <string name="unit_of_length_descr">Cambia la distancia de medición.</string>
     <string name="unit_of_length">Unidades de longitud</string>
@@ -1344,16 +1344,16 @@ Lon %2$s</string>
     <string name="install_selected_build">¿Instalar OsmAnd - {0} de {1} {2} MB ?</string>
     <string name="loading_builds_failed">Fallo recuperando la lista de compilaciones OsmAnd</string>
     <string name="loading_builds">Cargando compilaciones OsmAnd…</string>
-    <string name="select_build_to_install">Elige una compilación OsmAnd a instalar</string>
+    <string name="select_build_to_install">Compilación OsmAnd a instalar</string>
     <string name="gps_status_app_not_found">La aplicación «GPS Status» no está instalada. ¿Buscar en la tienda de aplicaciones?</string>
     <string name="voice_is_not_available_msg">Las indicaciones por voz no están disponibles, vaya a «Ajustes» → «Ajustes de navegación» → «Indicaciones por voz» y elige o descarga un paquete de indicaciones por voz.</string>
     <string name="voice_is_not_available_title">No se eligieron indicaciones por voz</string>
-    <string name="daynight_mode_day">Día</string>
-    <string name="daynight_mode_night">Noche</string>
+    <string name="daynight_mode_day">Diurno</string>
+    <string name="daynight_mode_night">Nocturno</string>
     <string name="daynight_mode_auto">Alba/ocaso</string>
     <string name="daynight_mode_sensor">Sensor de luz</string>
     <string name="daynight_descr">Elige el motivo de cambio entre el modo nocturno y diurno.</string>
-    <string name="daynight">Modo día/noche</string>
+    <string name="daynight">Modo diurno/nocturno</string>
     <string name="download_files_question">¿Descargar {0} archivo(s) ({1} MB)?</string>
     <string name="items_were_selected">{0} elemento(s) seleccionado(s)</string>
     <string name="filter_existing_indexes">Descargados</string>
@@ -1361,7 +1361,7 @@ Lon %2$s</string>
     <string name="fast_route_mode_descr">Activar para calcular la ruta más rápida o desactivar para la más eficiente en combustible.</string>
     <string name="tiles_to_download_estimated_size">En el zoom {0}, descarga {1} teselas ({2} MB)</string>
     <string name="shared_string_download_map">Descargar mapa</string>
-    <string name="select_max_zoom_preload_area">Elige el zoom máximo a precargar</string>
+    <string name="select_max_zoom_preload_area">Zoom máximo a precargar</string>
     <string name="maps_could_not_be_downloaded">No se pudo descargar el mapa</string>
     <string name="continuous_rendering">Visualización continua</string>
     <string name="continuous_rendering_descr">Mostrar visualización de forma continua en vez de todo de una vez.</string>
@@ -1370,7 +1370,7 @@ Lon %2$s</string>
     <string name="renderer_load_sucess">Visualización cargada</string>
     <string name="renderer_load_exception">No se pudo cargar el visualizador</string>
     <string name="renderers">Visualización vectorial</string>
-    <string name="renderers_descr">Elige el aspecto de visualización de los mapas vectoriales.</string>
+    <string name="renderers_descr">Aspecto de visualización de los mapas vectoriales.</string>
     <string name="poi_context_menu_website">Mostrar sitio web del PDI</string>
     <string name="poi_context_menu_call">Mostrar teléfono del PDI</string>
     <string name="download_type_to_filter">escribe el filtro</string>
@@ -1395,7 +1395,7 @@ Lon %2$s</string>
     <string name="rotate_map_compass_opt">Dirección de la brújula</string>
     <string name="rotate_map_bearing_opt">Dirección del movimiento</string>
     <string name="rotate_map_none_opt">Sin rotación (norte siempre arriba)</string>
-    <string name="rotate_map_to_bearing_descr">Elige la alineación de la pantalla del mapa.</string>
+    <string name="rotate_map_to_bearing_descr">Alineación de la pantalla del mapa.</string>
     <string name="rotate_map_to_bearing">Orientación del mapa</string>
     <string name="show_route">Detalle de la ruta</string>
     <string name="fav_imported_sucessfully">Favoritos importados</string>
@@ -1430,7 +1430,7 @@ Lon %2$s</string>
     <string name="int_seconds">segundos</string>
     <string name="int_min">min.</string>
     <string name="background_service_int_descr">Define el intervalo de activación del modo reposo.</string>
-    <string name="background_service_provider_descr">Elige el método de ubicación usado del modo reposo.</string>
+    <string name="background_service_provider_descr">Método de ubicación usado del modo reposo.</string>
     <string name="background_service_provider">Proveedor de ubicación</string>
     <string name="background_router_service_descr">Realiza un seguimiento de tu ubicación con la pantalla apagada.</string>
     <string name="background_router_service">Ejecutar OsmAnd en modo reposo</string>
@@ -1657,7 +1657,7 @@ Lon %2$s</string>
     <string name="edit_filter_create_message">Se creó el filtro {0}</string>
     <string name="email">correo electrónico</string>
     <string name="av_camera_focus">Método de enfoque</string>
-    <string name="av_camera_focus_descr">Elige el modo de enfoque de la cámara interna.</string>
+    <string name="av_camera_focus_descr">Modo de enfoque de la cámara interna.</string>
     <string name="av_camera_focus_auto">Enfoque automático</string>
     <string name="av_camera_focus_hiperfocal">Enfoque hiperfocal</string>
     <string name="av_camera_focus_edof">Profundidad de campo extendido (EDOF)</string>
@@ -1665,9 +1665,9 @@ Lon %2$s</string>
     <string name="av_camera_focus_macro">Modo de enfoque macro (primer plano)</string>
     <string name="av_camera_focus_continuous">Enfoque continuo</string>
     <string name="av_photo_play_sound">Sonido al fotografiar</string>
-    <string name="av_photo_play_sound_descr">Elige si reproducir sonido al fotografiar.</string>
+    <string name="av_photo_play_sound_descr">Reproducir sonido al fotografiar.</string>
     <string name="av_camera_pic_size">Tamaño de fotografía</string>
-    <string name="av_camera_pic_size_descr">Elige el tamaño interno de la fotografía.</string>
+    <string name="av_camera_pic_size_descr">Tamaño interno de la fotografía.</string>
     <string name="navigation_intent_invalid">Formato inválido: %s</string>
     <string name="plugin_description_title">Descripción</string>
     <string name="plugin_install_needs_network">Es necesaria una conexión a Internet para instalar este complemento.</string>
@@ -2472,12 +2472,12 @@ Lon %2$s</string>
 \n • La guía por voz giro-a-giro lo guía a lo largo del camino (voces grabadas y sintetizadas) 
 \n • La ruta se recalcula al salirse de la misma 
 \n • Guía de carriles, nombres de calles y tiempo estimado al destino, lo ayudará a lo largo de la ruta 
-\n • Para hacer su viaje seguro, los modos día/noche se alternan automáticamente 
+\n • Para hacer su viaje seguro, los modos diurno/nocturno se alternan automáticamente 
 \n • Muestra los límites de velocidad y obtiene un aviso al excederte del mismo 
 \n • El zoom del mapa se ajusta a la velocidad 
 \n • Busca destinos por dirección, por tipo (por ejemplo: estacionamientos, restaurantes, hoteles, gasolineras, museos), o por coordenadas geográficas 
 \n • Soporta puntos intermedios en el itinerario 
-\n • Graba tu viaje o sube una traza GPX y síguela
+\n • Graba tu viaje o sube una traza GPX y síguela 
 \n</string>
     <string name="osmand_extended_description_part3">Mapa 
 \n • Muestra PDI (puntos de interés) a tu alrededor 
@@ -2528,6 +2528,7 @@ Lon %2$s</string>
 \n • Soporta puntos intermedios en el itinerario 
 \n • La ruta se recalcula al salirse de la misma  
 \n • Busca destinos por dirección, por tipo (por ejemplo: Restaurantes, hoteles, gasolineras, museos), o por coordenada geográfica 
+\n
 \n"</string>
     <string name="osmand_plus_extended_description_part3">Vista del mapa 
 \n • Muestra tu ubicación y orientación 
@@ -2542,9 +2543,9 @@ Lon %2$s</string>
 \n • PDI de Wikipedia, ideal para el turismo 
 \n • Descargas gratis ilimitadas, directamente desde la aplicación 
 \n • Mapas vectoriales reducidos sin conexión, actualizados al menos una vez cada mes 
-\n • Elije entre datos completos de la región o sólo la red de rutas (Ejemplo: Todo Japón tiene 700 MB o sólo 200 MB para la red de rutas)</string>
+\n • Elige entre datos completos de la región o sólo la red de rutas (Ejemplo: Todo Japón tiene 700 MB o sólo 200 MB para la red de rutas)</string>
     <string name="osmand_plus_extended_description_part5">Funciones de seguridad 
-\n • (Opcional) La vista día/noche se alterna automáticamente 
+\n • (Opcional) El modo diurno/nocturno se alterna automáticamente 
 \n • (Opcional) Visualización del límite de velocidad, con aviso al excederte 
 \n • (Opcional) Zoom del mapa según la velocidad 
 \n • Comparte la ubicación para que tus amigos puedan encontrarte</string>
@@ -2562,6 +2563,7 @@ Lon %2$s</string>
 \n • (Opcional) Grabación del viaje en modo reposo (mientras el dispositivo está bloqueado) 
 \n
 \n  OsmAnd es un software de código abierto, activamente desarrollado. Cualquiera puede contribuir con la aplicación informando sobre errores, mejorando las traducciones o desarrollando nuevas funciones. Además, el proyecto también depende de contribuciones financieras para desarrollar y probar nuevas funcionalidades. 
+\n
 \n"</string>
     <string name="osmand_plus_extended_description_part8">Cobertura y calidad aproximada del mapa: 
 \n • Europa Occidental: **** 
@@ -2680,7 +2682,7 @@ Lon %2$s</string>
     <string name="mapillary_menu_title_tile_cache">Caché de teselas</string>
     <string name="shared_string_reset">Restablecer</string>
     <string name="store_tracks_in_monthly_directories">Guardar las trazas grabadas en carpetas mensuales</string>
-    <string name="store_tracks_in_monthly_directories_descrp">Guarda las trazas grabadas en subcarpetas por mes de grabación (como 2018-01).</string>
+    <string name="store_tracks_in_monthly_directories_descrp">Guardar las trazas grabadas en subcarpetas, por mes de grabación (como 2018-01).</string>
     <string name="average">Promedio</string>
     <string name="of">%1$d de %2$d</string>
     <string name="ascent_descent">Ascenso/Descenso</string>
@@ -2754,7 +2756,7 @@ Lon %2$s</string>
     <string name="sort_by">Ordenar por</string>
     
     <string name="map_orientation_change_in_accordance_with_speed">Umbral de orientación del mapa</string>
-    <string name="map_orientation_change_in_accordance_with_speed_descr">Elije la velocidad a partir de la cual la orientación del mapa cambia de «Dirección del movimiento» a «Dirección de la brújula».</string>
+    <string name="map_orientation_change_in_accordance_with_speed_descr">Velocidad a partir de la cual la orientación del mapa cambia de «Dirección del movimiento» a «Dirección de la brújula».</string>
     <string name="all_markers_moved_to_history">Todos los marcadores del mapa movidos al historial</string>
     <string name="marker_moved_to_history">Marcador del mapa movido al historial</string>
     <string name="marker_moved_to_active">Marcador del mapa movido a los activos</string>
@@ -2920,7 +2922,7 @@ Lon %2$s</string>
 \n</string>
     <string name="day_off_label">cerrado (día libre)</string>
     <string name="winter_and_ski_renderer">Invierno y esquí</string>
-    <string name="touring_view_renderer">Vista de Touring (contraste y detalles)</string>
+    <string name="touring_view_renderer">Vista turística</string>
     <string name="nautical_renderer">Náutico</string>
     <string name="copy_location_name">Copiar nombre del punto/PDI</string>
     <string name="toast_empty_name_error">Ubicación sin nombre</string>
@@ -2931,7 +2933,7 @@ Lon %2$s</string>
     <string name="gpx_file">Archivo GPX</string>
     <string name="osc_file">Archivo OSC</string>
     <string name="choose_file_type">Elegir tipo de archivo</string>
-    <string name="osm_edits_export_desc">Elije el tipo de exportación: notas de OSM, PDI o ambos.</string>
+    <string name="osm_edits_export_desc">Elige el tipo de exportación: notas de OSM, PDI o ambos.</string>
     <string name="all_data">Todos los datos</string>
     <string name="osm_notes">Notas de OSM</string>
     <string name="tunnel_warning">Túnel adelante</string>
@@ -2971,7 +2973,7 @@ Lon %2$s</string>
     <string name="waypoints_removed_from_map_markers">Puntos de referencia borrados de los marcadores del mapa</string>
     <string name="use_two_digits_longitude">Usar longitud de dos dígitos</string>
     <string name="shared_string_result">Resultado</string>
-    <string name="saved_articles">Artículos guardados</string>
+    <string name="saved_articles">Artículos favoritos</string>
     <string name="shared_string_explore">Explorar</string>
     <string name="wikivoyage_search_hint">Buscar: País, ciudad, provincia</string>
     <string name="shared_string_read">Leer</string>
@@ -2993,7 +2995,7 @@ Lon %2$s</string>
     <string name="shared_string_wifi_only">Sólo con Wi-Fi</string>
     <string name="select_travel_book">Marcar libro de viajes</string>
     <string name="shared_string_travel_book">Libro de viajes</string>
-    <string name="download_images">Descargar imágenes</string>
+    <string name="download_images">Mostrar imágenes</string>
     <string name="purchase_dialog_title">Elegir plan</string>
     <string name="purchase_dialog_travel_description">Comprar uno de los siguientes elementos para leer artículos turísticos sin conexión:</string>
     <string name="purchase_dialog_subtitle">Elegir el elemento adecuado:</string>
@@ -3037,24 +3039,27 @@ Lon %2$s</string>
     <string name="paid_app">Aplicación de pago</string>
     <string name="paid_plugin">Complemento de pago</string>
     <string name="osmand_team">Equipo de OsmAnd</string>
-    <string name="maps_you_need_descr">Basado en los artículos guardados, recomendamos que descargue los siguientes mapas:</string>
+    <string name="maps_you_need_descr">Basado en los artículos favoritos, se recomienda descargar los siguientes mapas:</string>
     <string name="maps_you_need">Mapas que necesitas</string>
     <string name="shared_string_restart">Reiniciar</string>
     <string name="purchase_cancelled_dialog_title">Has cancelado la suscripción de OsmAnd Live</string>
     <string name="purchase_cancelled_dialog_descr">Renueva la suscripción para continuar usando todas las funciones:</string>
 
     <string name="open_wikipedia_link_online">Abrir enlace de Wikipedia en línea</string>
-    <string name="open_wikipedia_link_online_description">OsmAnd abrirá el navegador para ver el enlace en línea.</string>
+    <string name="open_wikipedia_link_online_description">El enlace se abrirá en un navegador web.</string>
     <string name="read_wikipedia_offline_description">Obtén una suscripción de OsmAnd Live para leer artículos de Wikipedia y Wikiviajes, sin conexión.</string>
-    <string name="how_to_open_link">¿Cómo abrir un enlace?</string>
+    <string name="how_to_open_link">¿Cómo abrir el enlace?</string>
     <string name="read_wikipedia_offline">Leer la Wikipedia sin conexión</string>
     <string name="download_all">Descargar todo</string>
     <string name="hide_full_description">Ocultar descripción completa</string>
     <string name="show_full_description">Mostrar descripción completa</string>
-    <string name="nautical_render_descr">Estilo para navegación marítima y fluvial. Características principales: boyas, faros, líneas y balizas de navegación fluvial, puertos, servicios marítimos, curvas de profundidad.</string>
-    <string name="ski_map_render_descr">Estilo para esquiar. Características principales: pistas de esquí, pistas aéreas y otras características de esquí de una manera conveniente. Menos objetos cartográficos secundarios que distraen la atención.</string>
-    <string name="light_rs_render_descr">Estilo simple y de contraste para la navegación en automóvil. Suave para los ojos en el modo nocturno. Características principales: curvas de nivel, caminos de estilo naranja contrastante, objetos cartográficos secundarios menos molestos.</string>
-    <string name="topo_render_descr">Estilo de contraste diseñado principalmente para caminatas en la naturaleza, trekking y ciclismo. Buena legibilidad en iluminación exterior compleja. Características principales: contraste de caminos y objetos naturales, diferentes tipos de rutas, curvas de nivel con ajustes avanzados, mayor detalle en los niveles de zoom correspondientes que en el estilo predefinido. La opción de integridad de la superficie permite distinguir entre caminos con diferente calidad de superficie. Sin modo nocturno.</string>
-    <string name="mapnik_render_descr">Estilo de visualización antiguo predefinido de Mapnik. Características: los colores son similares al estilo Mapnik.</string>
-    <string name="default_render_descr">Estilo de uso general. Visualización simplificada para tener mapas más limpios en las ciudades pobladas. Características principales: curvas de nivel, recorridos, calidad de la superficie, restricciones de acceso, escudos, visualización de caminos según escala SAC, características de los deportes acuáticos.</string>
+    <string name="nautical_render_descr">Estilo de navegación náutica. Características principales: Boyas, faros, vías fluviales, carriles y balizas marítimas, puertos, servicios marítimos, curvas de profundidad.</string>
+    <string name="ski_map_render_descr">Estilo de esquí. Características principales: Visualización de pistas de esquí, aéreas y otras características de esquí de una manera conveniente. Menos objetos cartográficos secundarios que distraen la atención.</string>
+    <string name="light_rs_render_descr">Estilo simple y contrastante para la navegación en automóvil. Suave para los ojos en el modo nocturno. Características principales: curvas de nivel, estilo vial contrastante en naranja, objetos cartográficos secundarios menos molestos.</string>
+    <string name="topo_render_descr">Estilo de contraste diseñado principalmente para caminatas, senderismo y ciclismo en la naturaleza. Buena legibilidad en iluminación exterior compleja. Características principales: Contraste de caminos y objetos naturales, diferentes tipos de rutas, curvas de nivel con ajustes avanzados, mayor detalle en los niveles de zoom correspondientes que en el estilo predefinido. La opción de integridad de la superficie permite distinguir la calidad de la superficie del camino. Sin modo nocturno.</string>
+    <string name="mapnik_render_descr">Antiguo estilo predefinido de Mapnik. Características: los colores son similares al estilo Mapnik.</string>
+    <string name="default_render_descr">Estilo de uso general. Visualización limpia y simplificada para ciudades densamente pobladas. Características principales: Curvas de nivel, recorridos, calidad de la superficie, restricciones de acceso, escudos, visualización de caminos según escala SAC, características de deportes acuáticos.</string>
+    <string name="shared_string_bookmark">Favoritos</string>
+    <string name="off_road_render_descr">Adecuado para usarlo durante la conducción todoterreno. Adecuado para usarlo como un mapa subyacente con imágenes satelitales verdes . Características principales: Reducción del espesor de las carreteras principales, aumento del espesor de las vías, senderos, bicicletas y otras rutas. Basado en el estilo «Topo».</string>
+    <string name="touring_view_render_descr">Estilo de alto detalle para turismo. Incluye todas las opciones de configuración del estilo predefinido, además: Muestra tanto detalle como sea posible, en particular todos los caminos, senderos y otras formas de viaje. Una clara distinción visual entre todos los tipos de carreteras, que recuerda a muchos atlas de rutas turísticas. Esquema de color de alto contraste para uso en exteriores, modo diurno y nocturno.</string>
     </resources>
