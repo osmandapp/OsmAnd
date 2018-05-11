@@ -3185,21 +3185,23 @@
     <string name="osmand_team">OsmAnd 團隊</string>
     <string name="shared_string_restart">重新啟動</string>
     <string name="show_images">顯示圖片</string>
-    <string name="purchase_cancelled_dialog_title">"您已取消 OsmAnd  Live 訂閱"</string>
+    <string name="purchase_cancelled_dialog_title">"您已取消您的 OsmAnd  Live 訂閱"</string>
     <string name="purchase_cancelled_dialog_descr">恢復訂閱以繼續使用所有的功能：</string>
 
-    <string name="maps_you_need_descr">根據您已儲存的文章，我們建議您下載下面的地圖：</string>
+    <string name="maps_you_need_descr">根據您已儲存的文章，建議您去下載下方的地圖：</string>
     <string name="maps_you_need">您需要的地圖</string>
     <string name="open_wikipedia_link_online">線上開啟維基百科連結</string>
-    <string name="open_wikipedia_link_online_description">OsmAnd 會將您重新引導到瀏覽器並在線上打開連結。</string>
+    <string name="open_wikipedia_link_online_description">該連結將會在瀏覽器中開啟。</string>
     <string name="read_wikipedia_offline_description">獲得 OsmAnd Live 訂閱可以離線閱讀維基百科和維基導遊文章。</string>
     <string name="how_to_open_link">如何開啟連結？</string>
     <string name="read_wikipedia_offline">離線閱讀維基百科</string>
     <string name="download_all">全部下載</string>
     <string name="hide_full_description">隱藏完整說明</string>
     <string name="show_full_description">顯示完整說明</string>
-    <string name="nautical_render_descr">海洋和河流導航的樣式。主要功能：浮標、燈塔、水域航行線和標記、港口、海洋標記服務、海洋等深線。</string>
-    <string name="ski_map_render_descr">滑雪樣式。主要功能：以便捷的方式呈現滑雪道、航拍方式和其他滑雪特點。減少分散注意力的次要地圖物件。</string>
+    <string name="nautical_render_descr">海洋導航樣式。主要功能：浮標、燈塔、海洋航道和標記、港口、海洋標記服務、海洋等深線。</string>
+    <string name="ski_map_render_descr">滑雪樣式。主要功能：以簡便的方式呈現滑雪道、航拍方式和其他滑雪特點。減少分散注意力的次要地圖物件。</string>
     <string name="light_rs_render_descr">給汽車導航的簡單和對比樣式。在夜間模式下呵護雙眼。主要功能：等高線、橙色對比樣式的道路、減少分散注意力的次要地圖物件。</string>
-    <string name="mapnik_render_descr">舊 mapnik 樣式預設的繪製樣式。主要功能：顏色類似於 Mapnik 樣式。</string>
+    <string name="mapnik_render_descr">舊「mapnik」樣式，預設的繪製樣式。主要功能：顏色類似於「Mapnik」樣式。</string>
+    <string name="topo_render_descr">對比樣式設計主要用於登山健行、在自然界長途跋涉和騎自行車。在複雜的外部照明中具有良好的清晰度。主要功能：對比道路和自然物件、不同類型的路線、具有進階設定的等高線，在相同的縮放級別比預設樣式有更多的細節。路面的整體選項可以區分路面品質。沒有間模式。</string>
+    <string name="default_render_descr">一般用途樣式。簡化在人口密集的城市更清晰的繪製。主要功能：等高線、路線、路面品質、准入限制、路障、根據 SAC 比例繪製的路徑、激流運動的特點。</string>
     </resources>
