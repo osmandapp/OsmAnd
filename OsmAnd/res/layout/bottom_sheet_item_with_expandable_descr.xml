@@ -12,6 +12,7 @@
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:ellipsize="end"
+		android:lineSpacingMultiplier="@dimen/text_button_line_spacing_multiplier"
 		android:maxLines="3"
 		android:paddingLeft="@dimen/content_padding"
 		android:paddingRight="@dimen/content_padding"
