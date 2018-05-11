@@ -213,7 +213,7 @@ public class GeocodingUtilities {
 	private void addWord(List<String> ls, String word, boolean addCommonWords) {
 		String w = word.trim().toLowerCase();
 		if (!Algorithms.isEmpty(w)) {
-			if(!addCommonWords && CommonWords.getCommonGeocoding(word) != -1) {
+			if(!addCommonWords && CommonWords.getCommonGeocoding(w) != -1) {
 				return;
 			}
 			ls.add(w);
@@ -224,14 +224,19 @@ public class GeocodingUtilities {
 			double knownMinBuildingDistance, final ResultMatcher<GeocodingResult> result) throws IOException {
 		// test address index search
 		final List<GeocodingResult> streetsList = new ArrayList<GeocodingResult>();
-		final List<String> streetNamesUsed = prepareStreetName(road.streetName, true);
-		final List<String> streetNamesPacked = streetNamesUsed.size() == 0 ? 
-				prepareStreetName(road.streetName, false) : streetNamesUsed;
-		if (streetNamesPacked.size() > 0) {
-			log.info("Search street by name " + road.streetName + " " + streetNamesPacked);
+		boolean addCommonWords = false;
+		List<String> streetNamesUsed = prepareStreetName(road.streetName, addCommonWords);
+		if(streetNamesUsed.size() == 0) {
+			addCommonWords = true;
+			streetNamesUsed = prepareStreetName(road.streetName, addCommonWords);
+		}
+		final boolean addCommonWordsFinal = addCommonWords;
+		final List<String> streetNamesUsedFinal = streetNamesUsed;
+		if (streetNamesUsedFinal.size() > 0) {
+			log.info("Search street by name " + road.streetName + " " + streetNamesUsedFinal);
 			String mainWord = "";
-			for (int i = 0; i < streetNamesPacked.size(); i++) {
-				String s = streetNamesPacked.get(i);
+			for (int i = 0; i < streetNamesUsedFinal.size(); i++) {
+				String s = streetNamesUsedFinal.get(i);
 				if (s.length() > mainWord.length()) {
 					mainWord = s;
 				}
@@ -241,7 +246,7 @@ public class GeocodingUtilities {
 						@Override
 						public boolean publish(MapObject object) {
 							if (object instanceof Street
-									&& prepareStreetName(object.getName(), true).equals(streetNamesUsed)) {
+									&& prepareStreetName(object.getName(), addCommonWordsFinal).equals(streetNamesUsedFinal)) {
 								double d = MapUtils.getDistance(object.getLocation(), road.searchPoint.getLatitude(),
 										road.searchPoint.getLongitude());
 								// double check to suport old format
