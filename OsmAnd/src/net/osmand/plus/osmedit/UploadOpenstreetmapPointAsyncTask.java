@@ -91,6 +91,7 @@ public class UploadOpenstreetmapPointAsyncTask
 			}
 		});
 		progress.setMax(listSize);
+		progress.setRetainInstance(true);
 	}
 
 	@Override
