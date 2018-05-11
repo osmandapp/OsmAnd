@@ -1063,7 +1063,7 @@
 	<string name="poi_anchor_berth">Θέση αγκυροβόλησης</string>
 	<string name="poi_beacon">Φωτεινό σήμα</string>
 	<string name="poi_beacon_lateral">Πλευρικός φάρος</string>
-	<string name="poi_beacon_safe_water">Σήμανση πόσιμου νερού</string>
+	<string name="poi_beacon_safe_water">Σήμανση ασφαλών υδάτων</string>
 	<string name="poi_beacon_special_purpose">Φάρος ειδικού σκοπού</string>
 	<string name="poi_berth">Προβλήτα</string>
 	<string name="poi_seamark_building">Κτίριο σημαντήρα</string>
@@ -1071,10 +1071,25 @@
 	<string name="poi_buoy_cardinal">Τεταρτοκυκλικός σημαντήρας</string>
 	<string name="poi_buoy_isolated_danger">Σημαντήρας, απομονωμένος κίνδυνος</string>
 	<string name="poi_buoy_lateral">Πλευρικός Σημαντήρας</string>
-	<string name="poi_buoy_safe_water">Σημαντήρας πόσιμου νερού</string>
+	<string name="poi_buoy_safe_water">Σημαντήρας ασφαλών υδάτων</string>
 	<string name="poi_buoy_special_purpose">Σημαντήρας ειδικού σκοπού</string>
 	<string name="poi_daymark">Σήμανση ημέρας</string>
 	<string name="poi_distance_mark">Σήμανση απόστασης</string>
 	<string name="poi_dry_dock">Μόνιμη δεξαμενή</string>
 	<string name="poi_floating_dock">Πλωτή δεξαμενή</string>
+	<string name="poi_beacon_cardinal">Φάρος καρδιναλίου</string>
+	<string name="poi_buoy_installation">Σημαντήρας εγκατάστασης</string>
+	<string name="poi_fog_signal">Σήμα ομίχλης</string>
+	<string name="poi_harbour_basin">Λιμενολεκάνη</string>
+	<string name="poi_seamark_harbour">Λιμάνι</string>
+	<string name="poi_landmark">Ορόσημο</string>
+	<string name="poi_seamark_light">Σήμανση φωτός</string>
+	<string name="poi_seamark_light_major">Σήμανση μεγάλου φωτός</string>
+	<string name="poi_seamark_light_minor">Σήμανση μικρού φωτός</string>
+	<string name="poi_seamark_light_float">Σήμανση επιπλέοντος φωτός</string>
+	<string name="poi_seamark_light_vessel">Σήμανση πλοίου με φως</string>
+	<string name="poi_mooring">Πρόσδεση</string>
+	<string name="poi_lock_basin">Λεκάνη θυροφράγματος</string>
+	<string name="poi_notice">Σήμανση προειδοποίησης</string>
+	<string name="poi_pile">Πάσαλος</string>
 	</resources>
