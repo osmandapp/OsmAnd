@@ -90,7 +90,7 @@ public class ArticleTravelCard extends BaseTravelCard {
 			final TravelLocalDataHelper helper = app.getTravelDbHelper().getLocalDataHelper();
 			final boolean saved = helper.isArticleSaved(article);
 			Drawable icon = getActiveIcon(saved ? R.drawable.ic_action_read_later_fill : R.drawable.ic_action_read_later);
-			holder.rightButton.setText(saved ? R.string.shared_string_delete : R.string.shared_string_save);
+			holder.rightButton.setText(saved ? R.string.shared_string_remove : R.string.shared_string_bookmark);
 			holder.rightButton.setCompoundDrawablesWithIntrinsicBounds(null, null, icon, null);
 			holder.rightButton.setOnClickListener(new View.OnClickListener() {
 				@Override
