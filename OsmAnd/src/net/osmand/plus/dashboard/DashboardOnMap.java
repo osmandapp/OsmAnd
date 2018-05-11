@@ -1113,7 +1113,10 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 		float initialToolbarTransY = show ? -toolbar.getHeight() : 0;
 		float finalToolbarTransY = show ? 0 : -toolbar.getHeight();
 		animators.add(ObjectAnimator.ofFloat(toolbar, View.TRANSLATION_Y, initialToolbarTransY, finalToolbarTransY));
-		set.setDuration(300).playTogether(animators);
+		for (Animator animator : animators) {
+			animator.setDuration(300);
+		}
+		set.playTogether(animators);
 		set.addListener(new AnimatorListenerAdapter() {
 			@Override
 			public void onAnimationStart(Animator animation) {
