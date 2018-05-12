@@ -739,7 +739,7 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 							});
 						}
 						if (!gpxItem.group.getTrack().generalTrack) {
-							((ImageView) view.findViewById(R.id.overflow_menu)).setImageDrawable(ic.getThemedIcon(R.drawable.ic_overflow_menu_dark));
+							((ImageView) view.findViewById(R.id.overflow_menu)).setImageDrawable(ic.getThemedIcon(R.drawable.ic_overflow_menu_white));
 							view.findViewById(R.id.overflow_menu).setVisibility(View.VISIBLE);
 							view.findViewById(R.id.overflow_menu).setOnClickListener(new View.OnClickListener() {
 								@Override
@@ -851,7 +851,7 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 							});
 						}
 						if (!gpxItem.group.getTrack().generalTrack) {
-							((ImageView) view.findViewById(R.id.overflow_menu)).setImageDrawable(ic.getThemedIcon(R.drawable.ic_overflow_menu_dark));
+							((ImageView) view.findViewById(R.id.overflow_menu)).setImageDrawable(ic.getThemedIcon(R.drawable.ic_overflow_menu_white));
 							view.findViewById(R.id.overflow_menu).setVisibility(View.VISIBLE);
 							view.findViewById(R.id.overflow_menu).setOnClickListener(new View.OnClickListener() {
 								@Override
@@ -950,7 +950,7 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 							});
 						}
 						if (!gpxItem.group.getTrack().generalTrack) {
-							((ImageView) view.findViewById(R.id.overflow_menu)).setImageDrawable(ic.getThemedIcon(R.drawable.ic_overflow_menu_dark));
+							((ImageView) view.findViewById(R.id.overflow_menu)).setImageDrawable(ic.getThemedIcon(R.drawable.ic_overflow_menu_white));
 							view.findViewById(R.id.overflow_menu).setVisibility(View.VISIBLE);
 							view.findViewById(R.id.overflow_menu).setOnClickListener(new View.OnClickListener() {
 								@Override
