@@ -2881,7 +2881,7 @@ Indikas lokon:  %1$s x %2$s"</string>
 \n</string>
     <string name="day_off_label">fermita</string>
     <string name="winter_and_ski_renderer">Vintro kaj skiado</string>
-    <string name="touring_view_renderer">Turisma mapo (kontrasta kaj detala)</string>
+    <string name="touring_view_renderer">Turisma mapo</string>
     <string name="nautical_renderer">Marnavigada</string>
     <string name="copy_location_name">Kopii nomon de punkto</string>
     <string name="toast_empty_name_error">Sennoma ejo</string>
@@ -2934,7 +2934,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="shared_string_result">Rezulto</string>
     <string name="wikivoyage_search_hint">Serĉi landon, provincon, urbon</string>
     <string name="shared_string_read">Legi</string>
-    <string name="saved_articles">Konservitaj artikoloj</string>
+    <string name="saved_articles">Legosignoj</string>
     <string name="shared_string_explore">Esplori</string>
     <string name="shared_string_contents">Enhavo</string>
     <string name="article_removed">Forigis artikolon</string>
@@ -2954,7 +2954,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="shared_string_wifi_only">Nur tra vifio</string>
     <string name="select_travel_book">Elekti vojaĝilon</string>
     <string name="shared_string_travel_book">Vojaĝilo</string>
-    <string name="download_images">Elŝuti bildojn</string>
+    <string name="download_images">Montri bildojn</string>
     <string name="purchase_dialog_title">Elekti planon</string>
     <string name="purchase_dialog_travel_description">Aĉetu unu el la jenaj por legi vojaĝajn artikolojn seninterrete:</string>
     <string name="purchase_dialog_subtitle">Elektu elementon:</string>
@@ -2998,7 +2998,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="wiki_article_search_text">Serĉi rilatan artikolon en Vikipedio</string>
     <string name="wiki_article_not_found">Ne trovis artikolon</string>
     <string name="how_to_open_wiki_title">Kiel malfermi artikolojn de Vikipedio?</string>
-<string name="maps_you_need_descr">Surbaze de artikoloj, kiujn vi konservis, ni proponas al vi elŝuti la jenajn mapojn:</string>
+<string name="maps_you_need_descr">Surbaze de artikoloj, kiujn vi aldonis al legosignoj, ni proponas al vi elŝuti la jenajn mapojn:</string>
     <string name="maps_you_need">Mapoj por vi</string>
     <string name="shared_string_restart">Restarti</string>
     <string name="purchase_cancelled_dialog_title">Vi rezignis pri abono al OsmAnd-Live</string>
@@ -3006,16 +3006,19 @@ Indikas lokon:  %1$s x %2$s"</string>
 
     <string name="hide_full_description">Kaŝi plenan priskribon</string>
     <string name="show_full_description">Montri plenan priskribon</string>
-    <string name="nautical_render_descr">Stilo por mara kaj rivera navigado. Ĉefaj eblaĵoj: buoj, lumturoj, linioj kaj markoj por akv-navigado, havenoj, profundec-kurboj.</string>
+    <string name="nautical_render_descr">Stilo por mara kaj rivera navigado. Ĉefaj eblaĵoj: buoj, lumturoj, akvovojoj, linioj kaj markoj por akv-navigado, havenoj, profundec-kurboj.</string>
     <string name="ski_map_render_descr">Stilo por skiado. Ĉefaj eblaĵoj: oportuna vidigo de skivojoj kaj telferoj; malpli absorbaj malpli gravaj objektoj.</string>
     <string name="light_rs_render_descr">Simpla kaj kontrasta stilo por aŭt-navigado. Agrabla por okuloj dum nokto. Ĉefaj eblaĵoj: konturoj, kontrastaj oranĝkoloraj vojoj, malpli absorbaj malpli gravaj objektoj.</string>
     <string name="topo_render_descr">Kontrasta stilo speciale por turisma marŝado kaj biciklado. Dece legebla ĉe maloportuna ekstera lumo. Ĉefaj eblaĵoj: kontrastaj vojoj kaj naturaj objektoj, diversaj specoj de kursoj, agordeblaj nivel-kurboj, pli da detaloj ĉe difinita skal-nivelo ol sur la norma map-stilo. Agordo por kvalito de voja pavimo. Sen nokta reĝimo.</string>
     <string name="mapnik_render_descr">Malnova bildigada map-stilo de Mapnik. Ĉefa eblaĵo: koloroj similaj al tiuj de Mapnik.</string>
-    <string name="default_render_descr">Ĝenerala map-stilo. Simpligita bildigado por pli klaraj mapoj en dense loĝitaj urboj. Ĉefaj eblaĵoj: nivel-kurboj, vojoj, kvalito de vojoj, aliraj limigoj, ŝoseaj numeroj, turismaj kursoj laŭ SAC-skalo, objektoj por rapid-akvaj sportoj.</string>
+    <string name="default_render_descr">Ĝenerala map-stilo. Simpligita kaj klara bildigado en dense loĝigitaj urboj. Ĉefaj eblaĵoj: nivel-kurboj, vojoj, kvalito de vojoj, aliraj limigoj, ŝoseaj numeroj, turismaj kursoj laŭ SAC-skalo, objektoj por rapid-akvaj sportoj.</string>
     <string name="open_wikipedia_link_online">Malfermi Vikipedian ligilon enrete</string>
-    <string name="open_wikipedia_link_online_description">OsmAnd aldirektos vin al la foliumilo por malfermi la ligilon enrete.</string>
+    <string name="open_wikipedia_link_online_description">La ligilo estos malfermita per ret-foliumilo.</string>
     <string name="read_wikipedia_offline_description">Akiru abonon al OsmAnd-Live por legi artikolojn de Vikipedio kaj Vikivojaĝo eksterrete.</string>
-    <string name="how_to_open_link">Kiel malfermi ligilon?</string>
+    <string name="how_to_open_link">Kiel malfermi la ligilon?</string>
     <string name="read_wikipedia_offline">Legi Vikipedion eksterrete</string>
     <string name="download_all">Elŝuti ĉiujn</string>
+    <string name="shared_string_bookmark">Legosigno</string>
+    <string name="off_road_render_descr">Taŭga por ekster-voja veturado kaj por uzi kun verdaj satelitaj fotoj kiel subtavolan mapon. Ĉefaj eblaĵoj: malpliigita larĝo de ĉefaj vojoj, pliigita larĝo de kampaj vojoj, vojetoj, biciklaj kaj aliaj vojoj. Surbaze la stilo “Topo”.</string>
+    <string name="touring_view_render_descr">Detalplena stilo por turismo. Inkluzivas ĉiujn agordojn de norma stilo kaj krome: vidigas kiel eble pli da detaloj, precipe ĉiujn ŝoseojn kaj vojetojn kaj aliajn rimedojn por vojaĝi. Klare distingebla vido de diversaj vojoj, simile al paperaj mapoj. Alte kontrasta kolor-skemo por eksterdoma uzo, nokta kaj taga reĝimoj.</string>
     </resources>

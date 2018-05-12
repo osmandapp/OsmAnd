@@ -3218,9 +3218,10 @@ représentant la zone : %1$s x %2$s</string>
     <string name="hide_full_description">Masquer la description complète</string>
     <string name="show_full_description">Afficher la description complète</string>
     <string name="nautical_render_descr">Style pour la navigation en mer et en rivière. Fonctions clés : phares, balises, chenaux de navigation, ports, lignes de sonde.</string>
-    <string name="ski_map_render_descr">Style pour les sports d\'hiver. Fonctions clés : tracés et difficultés des pistes de ski, remontées mécaniques, rendu hivernal et masquage des objets secondaires.</string>
+    <string name="ski_map_render_descr">Style sports d\'hiver. Fonctions clés : traces et difficultés des pistes de ski, remontées mécaniques, rendu hivernal et masquage des objets secondaires.</string>
     <string name="light_rs_render_descr">Style simple et contrasté pour la navigation en voiture. Mode nuit doux. Fonctions clés : routes orangées et contrastées, objets secondaires masqués.</string>
     <string name="mapnik_render_descr">Ancien rendu par défaut \'Mapnik\'. Fonctions clés : couleurs identiques au style Mapnik.</string>
     <string name="default_render_descr">Style générique. Rendu simplifié pour des cartes claires en zone urbaine. Fonctions clés : routes, restrictions d\'accès, revêtement des routes, chemins identifiés sur l\'échelle SAC.</string>
     <string name="shared_string_bookmark">Favori</string>
+    <string name="topo_render_descr">Style contrasté pour les activités en milieu naturel (randonnée, VTT). Lisibilité optimisée pour l\'extérieur. Fonctions clés : éléments naturels contrastés, distinction des types et des revêtements des routes, courbes de niveaux (option avancée), affichage de détails lors des zooms. Mode nuit.</string>
     </resources>

@@ -2984,4 +2984,27 @@
 	<string name="poi_health_person_type_technician">Ruolu de su traballadore sanitàriu: tècnicu</string>
 	<string name="poi_health_person_type_witchdoctor">Ruolu de su traballadore sanitàriu: majàrgiu</string>
 
+	<string name="poi_service_car">Servìtziu pro sas automòbiles</string>
+	<string name="poi_glacier_type">Casta de astragàrgiu</string>
+
+<string name="synonyms_poi_fuel">Rifornidore de carburante;Distribudore de benzina;Istatzione de benzina;Istatzione de rifornimentu;Istatzione de servìtziu</string>
+
+	<string name="synonyms_poi_nightclub">Discoteca;Club noturnu;Nightclub</string>
+	<string name="poi_lock_basin">Batzinu de serrada</string>
+	<string name="poi_counselling_type_addiction_yes">Consulèntzia professionale (dipendèntzia): eja</string>
+	<string name="poi_counselling_type_addiction_no">Consulèntzia professionale (dipendèntzia): nono</string>
+	<string name="poi_counselling_type_antenatal_yes">Consulèntzia professionale (prenatale): eja</string>
+	<string name="poi_counselling_type_antenatal_no">Consulèntzia professionale (prenatale): nono</string>
+	<string name="poi_counselling_type_child_guidance_yes">Consulèntzia professionale (orientamentu pro sos pitzinnos): eja</string>
+	<string name="poi_counselling_type_child_guidance_no">Consulèntzia professionale (orientamentu pro sos pitzinnos): nono</string>
+	<string name="poi_counselling_type_couple_yes">Consulèntzia professionale (còpia): eja</string>
+	<string name="poi_counselling_type_couple_no">Consulèntzia professionale (còpia): nono</string>
+	<string name="poi_counselling_type_crisis_yes">Consulèntzia professionale (crisi): eja</string>
+	<string name="poi_counselling_type_crisis_no">Consulèntzia professionale (crisi): nono</string>
+	<string name="poi_counselling_type_drugs_yes">Consulèntzia professionale (drogas): eja</string>
+	<string name="poi_counselling_type_drugs_no">Consulèntzia professionale (drogas): nono</string>
+	<string name="poi_counselling_type_education_yes">Consulèntzia professionale (educatzione): eja</string>
+	<string name="poi_counselling_type_education_no">Consulèntzia professionale (educatzione): nono</string>
+	<string name="poi_counselling_type_family_yes">Consulèntzia professionale (famìlia): eja</string>
+	<string name="poi_counselling_type_family_no">Consulèntzia professionale (famìlia): nono</string>
 	</resources>
