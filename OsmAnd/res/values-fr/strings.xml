@@ -3224,4 +3224,6 @@ représentant la zone : %1$s x %2$s</string>
     <string name="default_render_descr">Style générique. Rendu simplifié pour des cartes claires en zone urbaine. Fonctions clés : routes, restrictions d\'accès, revêtement des routes, chemins identifiés sur l\'échelle SAC.</string>
     <string name="shared_string_bookmark">Favori</string>
     <string name="topo_render_descr">Style contrasté pour les activités en milieu naturel (randonnée, VTT). Lisibilité optimisée pour l\'extérieur. Fonctions clés : éléments naturels contrastés, distinction des types et des revêtements des routes, courbes de niveaux (option avancée), affichage de détails lors des zooms. Mode nuit.</string>
+    <string name="off_road_render_descr">Adapté pour conduite sur les voies non revêtues, avec une sous-couche de carte images satellite. Fonction clefs : largeur réduite pour les routes, largeur augmentée pour les chemins et autres pistes. Basé sur le style \"Topo\".</string>
+    <string name="touring_view_render_descr">Style très détaillé pour le tourisme. Inclus tous les affichages du style par défaut plus : détails supplémentaires sur les routes, chemins et tous les itinéraires permettant de voyager. Distinction des différents types de routes. Thème coloré et contrasté. Mode jour / nuit.</string>
     </resources>
