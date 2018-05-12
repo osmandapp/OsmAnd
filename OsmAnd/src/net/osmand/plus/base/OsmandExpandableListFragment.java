@@ -1,5 +1,6 @@
 package net.osmand.plus.base;
 
+import android.app.Activity;
 import android.graphics.Shader.TileMode;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -19,22 +20,21 @@ import net.osmand.plus.activities.OsmandActionBarActivity;
 
 public abstract class OsmandExpandableListFragment extends BaseOsmAndFragment
 		implements OnChildClickListener {
-	
-	
+
 	protected ExpandableListView listView;
 	protected ExpandableListAdapter adapter;
-	
+
 	@Override
 	public View onCreateView(@NonNull android.view.LayoutInflater inflater, android.view.ViewGroup container, Bundle savedInstanceState) {
 		View v = createView(inflater, container);
 		listView = (ExpandableListView) v.findViewById(android.R.id.list);
 		listView.setOnChildClickListener(this);
-		if(this.adapter != null) {
+		if (this.adapter != null) {
 			listView.setAdapter(this.adapter);
 		}
 		return v;
 	}
-	
+
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
@@ -48,19 +48,19 @@ public abstract class OsmandExpandableListFragment extends BaseOsmAndFragment
 		setHasOptionsMenu(true);
 		return inflater.inflate(R.layout.expandable_list, container, false);
 	}
-	
+
 	public void setAdapter(ExpandableListAdapter a) {
 		this.adapter = a;
-		if(listView != null) {
+		if (listView != null) {
 			listView.setAdapter(a);
 		}
-		
+
 	}
-	
+
 	public ExpandableListAdapter getAdapter() {
 		return adapter;
 	}
-	
+
 	public void fixBackgroundRepeat(View view) {
 		Drawable bg = view.getBackground();
 		if (bg != null) {
@@ -96,31 +96,34 @@ public abstract class OsmandExpandableListFragment extends BaseOsmAndFragment
 		MenuItemCompat.setShowAsAction(menuItem, menuItemType);
 		return menuItem;
 	}
-	
-	
+
+
 	public boolean isLightActionBar() {
-		return ((OsmandApplication) getActivity().getApplication()).getSettings().isLightActionBar();
+		Activity activity = getActivity();
+		return activity == null || ((OsmandApplication) activity.getApplication()).getSettings().isLightActionBar();
 	}
-	
-	
+
+
 	public void collapseTrees(final int count) {
-		getActivity().runOnUiThread(new Runnable() {
-			@Override
-			public void run() {
-				synchronized (adapter) {
-					final ExpandableListView expandableListView = getExpandableListView();
-					for (int i = 0; i < adapter.getGroupCount(); i++) {
-						int cp = adapter.getChildrenCount(i);
-						if (cp < count) {
-							expandableListView.expandGroup(i);
-						} else {
-							expandableListView.collapseGroup(i);
+		Activity activity = getActivity();
+		if (activity != null) {
+			activity.runOnUiThread(new Runnable() {
+				@Override
+				public void run() {
+					synchronized (adapter) {
+						final ExpandableListView expandableListView = getExpandableListView();
+						for (int i = 0; i < adapter.getGroupCount(); i++) {
+							int cp = adapter.getChildrenCount(i);
+							if (cp < count) {
+								expandableListView.expandGroup(i);
+							} else {
+								expandableListView.collapseGroup(i);
+							}
 						}
 					}
 				}
-			}
-		});
-
+			});
+		}
 	}
 
 	public OsmandActionBarActivity getActionBarActivity() {

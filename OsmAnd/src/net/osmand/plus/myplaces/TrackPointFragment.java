@@ -1,14 +1,15 @@
 package net.osmand.plus.myplaces;
 
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.MenuItemCompat;
@@ -57,7 +58,7 @@ import net.osmand.plus.activities.TrackActivity;
 import net.osmand.plus.base.FavoriteImageDrawable;
 import net.osmand.plus.base.OsmandExpandableListFragment;
 import net.osmand.plus.dialogs.DirectionsDialogs;
-import net.osmand.plus.measurementtool.NewGpxData;
+import net.osmand.plus.myplaces.TrackBitmapDrawer.TrackBitmapDrawerListener;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -66,16 +67,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class TrackPointFragment extends OsmandExpandableListFragment {
-
-	public static final String ARG_TO_FILTER_SHORT_TRACKS = "ARG_TO_FILTER_SHORT_TRACKS";
+public class TrackPointFragment extends OsmandExpandableListFragment implements TrackBitmapDrawerListener {
 
 	public static final int SEARCH_ID = -1;
 	public static final int DELETE_ID = 2;
@@ -87,22 +85,16 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 	public static final int SELECT_FAVORITES_ACTION_MODE_ID = 8;
 
 	private OsmandApplication app;
+	private TrackActivityFragmentAdapter fragmentAdapter;
 	final private PointGPXAdapter adapter = new PointGPXAdapter();
-	private GpxDisplayItemType[] filterTypes = {GpxDisplayItemType.TRACK_POINTS, GpxDisplayItemType.TRACK_ROUTE_POINTS};
+
 	private boolean selectionMode = false;
 	private LinkedHashMap<GpxDisplayItemType, Set<GpxDisplayItem>> selectedItems = new LinkedHashMap<>();
 	private Set<Integer> selectedGroups = new LinkedHashSet<>();
 	private ActionMode actionMode;
 	private SearchView searchView;
-	private boolean menuOpened = false;
-	private FloatingActionButton menuFab;
-	private FloatingActionButton waypointFab;
-	private View waypointTextLayout;
-	private FloatingActionButton routePointFab;
-	private View routePointTextLayout;
-	private FloatingActionButton lineFab;
-	private View lineTextLayout;
-	private View overlayView;
+	private boolean updateEnable;
+
 	private View mainView;
 	private PopupMenu popupItemMenu;
 	private Menu optionsMenu;
@@ -114,118 +106,74 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 	}
 
 	@Override
+	public void onActivityCreated(Bundle savedInstanceState) {
+		super.onActivityCreated(savedInstanceState);
+		if (fragmentAdapter != null) {
+			fragmentAdapter.onActivityCreated(savedInstanceState);
+		}
+	}
+
+	@Override
+	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		mainView = inflater.inflate(R.layout.track_points_tree, container, false);
+		ExpandableListView listView = (ExpandableListView) mainView.findViewById(android.R.id.list);
+
+		fragmentAdapter = new TrackActivityFragmentAdapter(app, this, listView,
+				GpxDisplayItemType.TRACK_POINTS, GpxDisplayItemType.TRACK_ROUTE_POINTS);
+		fragmentAdapter.setShowMapOnly(true);
+		fragmentAdapter.setTrackBitmapSelectionSupported(false);
+		fragmentAdapter.onCreateView(mainView);
+
+		setContent(listView);
+		setListView(listView);
+		expandAllGroups();
+
+		return mainView;
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		setUpdateEnable(true);
+	}
+
+	@Override
 	public void onPause() {
 		super.onPause();
+		setUpdateEnable(false);
 		if (popupItemMenu != null) {
 			popupItemMenu.dismiss();
 		}
 		if (optionsMenu != null) {
 			optionsMenu.close();
 		}
-	}
-
-	@Override
-	public void onActivityCreated(Bundle savedInstanceState) {
-		super.onActivityCreated(savedInstanceState);
-		listView.setOnScrollListener(new AbsListView.OnScrollListener() {
-			@Override
-			public void onScrollStateChanged(AbsListView absListView, int i) {
-				if (i == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL) {
-					if (menuOpened) {
-						hideTransparentOverlay();
-						closeMenu();
-					}
-				}
+		if (fragmentAdapter != null) {
+			if (fragmentAdapter.splitListPopupWindow != null) {
+				fragmentAdapter.splitListPopupWindow.dismiss();
 			}
-
-			@Override
-			public void onScroll(AbsListView absListView, int i, int i1, int i2) {
-			}
-		});
-		listView.setBackgroundColor(getResources().getColor(
-				getMyApplication().getSettings().isLightContent() ? R.color.ctx_menu_info_view_bg_light
-						: R.color.ctx_menu_info_view_bg_dark));
-	}
-
-	private void hideTransparentOverlay() {
-		overlayView.setVisibility(View.GONE);
-	}
-
-	private void showTransparentOverlay() {
-		overlayView.setVisibility(View.VISIBLE);
-	}
-
-	private View.OnClickListener onFabClickListener = new View.OnClickListener() {
-		@Override
-		public void onClick(View view) {
-			switch (view.getId()) {
-				case R.id.overlay_view:
-					hideTransparentOverlay();
-					closeMenu();
-					break;
-				case R.id.menu_fab:
-					if (menuOpened) {
-						hideTransparentOverlay();
-						closeMenu();
-					} else {
-						showTransparentOverlay();
-						openMenu();
-					}
-					break;
-				case R.id.waypoint_text_layout:
-				case R.id.waypoint_fab:
-					PointDescription pointWptDescription = new PointDescription(PointDescription.POINT_TYPE_WPT, getString(R.string.add_waypoint));
-					addPoint(pointWptDescription);
-					break;
-				case R.id.route_text_layout:
-				case R.id.route_fab:
-					addNewGpxData(NewGpxData.ActionType.ADD_ROUTE_POINTS);
-					break;
-				case R.id.line_text_layout:
-				case R.id.line_fab:
-					addNewGpxData(NewGpxData.ActionType.ADD_SEGMENT);
-					break;
+			if (fragmentAdapter.colorListPopupWindow != null) {
+				fragmentAdapter.colorListPopupWindow.dismiss();
 			}
 		}
-	};
+	}
 
 	@Override
-	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		mainView = inflater.inflate(R.layout.track_points_tree, container, false);
-		ExpandableListView listView = (ExpandableListView) mainView.findViewById(android.R.id.list);
-		setHasOptionsMenu(true);
-
-		overlayView = mainView.findViewById(R.id.overlay_view);
-		overlayView.setOnClickListener(onFabClickListener);
-
-		menuFab = (FloatingActionButton) mainView.findViewById(R.id.menu_fab);
-		menuFab.setOnClickListener(onFabClickListener);
-
-		waypointFab = (FloatingActionButton) mainView.findViewById(R.id.waypoint_fab);
-		waypointFab.setOnClickListener(onFabClickListener);
-		waypointTextLayout = mainView.findViewById(R.id.waypoint_text_layout);
-		waypointTextLayout.setOnClickListener(onFabClickListener);
-
-		routePointFab = (FloatingActionButton) mainView.findViewById(R.id.route_fab);
-		routePointFab.setOnClickListener(onFabClickListener);
-		routePointTextLayout = mainView.findViewById(R.id.route_text_layout);
-		routePointTextLayout.setOnClickListener(onFabClickListener);
-
-		lineFab = (FloatingActionButton) mainView.findViewById(R.id.line_fab);
-		lineFab.setOnClickListener(onFabClickListener);
-		lineTextLayout = mainView.findViewById(R.id.line_text_layout);
-		lineTextLayout.setOnClickListener(onFabClickListener);
-
-		TextView tv = new TextView(getActivity());
-		tv.setText(R.string.none_selected_gpx);
-		tv.setTextSize(24);
-		listView.setEmptyView(tv);
-
-		setContent(listView);
-		setListView(listView);
-		expandAllGroups();
-		return mainView;
+	public void onDestroyView() {
+		super.onDestroyView();
+		fragmentAdapter = null;
 	}
+
+	public boolean isUpdateEnable() {
+		return updateEnable;
+	}
+
+	public void setUpdateEnable(boolean updateEnable) {
+		this.updateEnable = updateEnable;
+		if (fragmentAdapter != null) {
+			fragmentAdapter.setUpdateEnable(updateEnable);
+		}
+	}
+
 
 	private int getSelectedItemsCount() {
 		int count = 0;
@@ -245,42 +193,6 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 			}
 		}
 		return result;
-	}
-
-	private void addPoint(PointDescription pointDescription) {
-		TrackActivity activity = getTrackActivity();
-		if (activity != null) {
-			activity.addPoint(pointDescription);
-		}
-	}
-
-	private void addNewGpxData(NewGpxData.ActionType actionType) {
-		TrackActivity activity = getTrackActivity();
-		if (activity != null) {
-			activity.addNewGpxData(actionType);
-		}
-	}
-
-	private void openMenu() {
-		menuFab.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.ic_action_remove_dark));
-		waypointFab.setVisibility(View.VISIBLE);
-		waypointTextLayout.setVisibility(View.VISIBLE);
-		routePointFab.setVisibility(View.VISIBLE);
-		routePointTextLayout.setVisibility(View.VISIBLE);
-		lineFab.setVisibility(View.VISIBLE);
-		lineTextLayout.setVisibility(View.VISIBLE);
-		menuOpened = true;
-	}
-
-	private void closeMenu() {
-		menuFab.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.ic_action_plus));
-		waypointFab.setVisibility(View.GONE);
-		waypointTextLayout.setVisibility(View.GONE);
-		routePointFab.setVisibility(View.GONE);
-		routePointTextLayout.setVisibility(View.GONE);
-		lineFab.setVisibility(View.GONE);
-		lineTextLayout.setVisibility(View.GONE);
-		menuOpened = false;
 	}
 
 	@Nullable
@@ -306,57 +218,21 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 		}
 	}
 
-	private void setupListView(ListView listView) {
+	private void setupListView(@NonNull ListView listView) {
 		if (!adapter.isEmpty() && listView.getHeaderViewsCount() == 0) {
-			listView.addHeaderView(getActivity().getLayoutInflater().inflate(R.layout.list_shadow_header, null, false));
-			listView.addFooterView(getActivity().getLayoutInflater().inflate(R.layout.list_shadow_footer, null, false));
+			listView.addHeaderView(getLayoutInflater().inflate(R.layout.list_shadow_header, null, false));
+			listView.addFooterView(getLayoutInflater().inflate(R.layout.list_shadow_footer, null, false));
 			View view = new View(getActivity());
 			view.setLayoutParams(new AbsListView.LayoutParams(
 					AbsListView.LayoutParams.MATCH_PARENT,
-					AndroidUtils.dpToPx(getActivity(), 72)));
+					AndroidUtils.dpToPx(listView.getContext(), 72)));
 			listView.addFooterView(view);
 		}
 	}
 
-	private boolean isArgumentTrue(@NonNull String arg) {
-		return getArguments() != null && getArguments().getBoolean(arg);
-	}
-
-	private boolean hasFilterType(GpxDisplayItemType filterType) {
-		for (GpxDisplayItemType type : filterTypes) {
-			if (type == filterType) {
-				return true;
-			}
-		}
-		return false;
-	}
-
-	private List<GpxDisplayGroup> filterGroups() {
-		List<GpxDisplayGroup> groups = new ArrayList<>();
-		TrackActivity activity = getTrackActivity();
-		if (activity != null) {
-			List<GpxDisplayGroup> result = activity.getGpxFile(false);
-			for (GpxDisplayGroup group : result) {
-				boolean add = hasFilterType(group.getType());
-				if (isArgumentTrue(ARG_TO_FILTER_SHORT_TRACKS)) {
-					Iterator<GpxDisplayItem> item = group.getModifiableList().iterator();
-					while (item.hasNext()) {
-						GpxDisplayItem it2 = item.next();
-						if (it2.analysis != null && it2.analysis.totalDistance < 100) {
-							item.remove();
-						}
-					}
-					if (group.getModifiableList().isEmpty()) {
-						add = false;
-					}
-				}
-				if (add) {
-					groups.add(group);
-				}
-
-			}
-		}
-		return groups;
+	@Nullable
+	private List<GpxDisplayGroup> getOriginalGroups() {
+		return fragmentAdapter != null ? fragmentAdapter.getOriginalGroups() : null;
 	}
 
 	public void setContent() {
@@ -365,19 +241,14 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 	}
 
 	public void setContent(ExpandableListView listView) {
-		adapter.synchronizeGroups(filterGroups());
+		List<GpxDisplayGroup> groups = getOriginalGroups();
+		if (groups != null) {
+			adapter.synchronizeGroups(groups);
+		}
 		setupListView(listView);
 		if (listView.getAdapter() == null) {
 			listView.setAdapter(adapter);
 		}
-	}
-
-	protected List<GpxDisplayItem> flatten(List<GpxDisplayGroup> groups) {
-		ArrayList<GpxDisplayItem> list = new ArrayList<>();
-		for (GpxDisplayGroup g : groups) {
-			list.addAll(g.getModifiableList());
-		}
-		return list;
 	}
 
 	@Override
@@ -423,10 +294,15 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		menu.clear();
+		Activity activity = getActivity();
+		if (activity == null) {
+			return;
+		}
+
 		MenuItem mi = createMenuItem(menu, SEARCH_ID, R.string.search_poi_filter, R.drawable.ic_action_search_dark,
 				R.drawable.ic_action_search_dark, MenuItemCompat.SHOW_AS_ACTION_ALWAYS | MenuItemCompat.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW);
-		searchView = new SearchView(getActivity());
-		FavoritesActivity.updateSearchView(getActivity(), searchView);
+		searchView = new SearchView(activity);
+		FavoritesActivity.updateSearchView(activity, searchView);
 		MenuItemCompat.setActionView(mi, searchView);
 		searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 			@Override
@@ -450,8 +326,11 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 			@Override
 			public boolean onMenuItemActionCollapse(MenuItem item) {
 				adapter.setFilterResults(null);
-				adapter.synchronizeGroups(filterGroups());
-				adapter.notifyDataSetChanged();
+				List<GpxDisplayGroup> groups = getOriginalGroups();
+				if (groups != null) {
+					adapter.synchronizeGroups(groups);
+					adapter.notifyDataSetChanged();
+				}
 				// Needed to hide intermediate progress bar after closing action mode
 				new Handler().postDelayed(new Runnable() {
 					public void run() {
@@ -542,8 +421,9 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 
 	private void deleteItemsAction() {
 		int size = getSelectedItemsCount();
-		if (size > 0) {
-			AlertDialog.Builder b = new AlertDialog.Builder(getActivity());
+		Activity activity = getActivity();
+		if (size > 0 && activity != null) {
+			AlertDialog.Builder b = new AlertDialog.Builder(activity);
 			b.setMessage(getString(R.string.points_delete_multiple, size));
 			b.setPositiveButton(R.string.shared_string_delete, new DialogInterface.OnClickListener() {
 				@Override
@@ -586,9 +466,11 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 			if (gpxFile != null) {
 				app.getSelectedGpxHelper().selectGpxFile(gpxFile, true, false);
 			}
-			hideTransparentOverlay();
-			closeMenu();
-			updateMenuFabVisibility(false);
+			if (fragmentAdapter != null) {
+				fragmentAdapter.hideTransparentOverlay();
+				fragmentAdapter.closeFabMenu(activity);
+				fragmentAdapter.updateMenuFabVisibility(false);
+			}
 			Snackbar snackbar = Snackbar.make(mainView, R.string.waypoints_removed_from_map_markers,
 					Snackbar.LENGTH_LONG)
 					.setAction(R.string.shared_string_undo, new View.OnClickListener() {
@@ -604,17 +486,15 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 			snackbar.addCallback(new Snackbar.Callback() {
 				@Override
 				public void onDismissed(Snackbar transientBottomBar, int event) {
-					updateMenuFabVisibility(true);
+					if (fragmentAdapter != null) {
+						fragmentAdapter.updateMenuFabVisibility(true);
+					}
 					super.onDismissed(transientBottomBar, event);
 				}
 			});
 			AndroidUtils.setSnackbarTextColor(snackbar, R.color.color_dialog_buttons_dark);
 			snackbar.show();
 		}
-	}
-
-	private void updateMenuFabVisibility(boolean visible) {
-		menuFab.setVisibility(visible ? View.VISIBLE : View.GONE);
 	}
 
 	private void enterFavoritesMode() {
@@ -747,6 +627,32 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 		return true;
 	}
 
+	@Override
+	public void onTrackBitmapDrawing() {
+		if (fragmentAdapter != null) {
+			fragmentAdapter.onTrackBitmapDrawing();
+		}
+	}
+
+	@Override
+	public void onTrackBitmapDrawn() {
+		if (fragmentAdapter != null) {
+			fragmentAdapter.onTrackBitmapDrawn();
+		}
+	}
+
+	@Override
+	public boolean isTrackBitmapSelectionSupported() {
+		return fragmentAdapter != null && fragmentAdapter.isTrackBitmapSelectionSupported();
+	}
+
+	@Override
+	public void drawTrackBitmap(Bitmap bitmap) {
+		if (fragmentAdapter != null) {
+			fragmentAdapter.drawTrackBitmap(bitmap);
+		}
+	}
+
 	class PointGPXAdapter extends OsmandBaseExpandableListAdapter implements Filterable {
 
 		Map<GpxDisplayGroup, List<GpxDisplayItem>> itemGroups = new LinkedHashMap<>();
@@ -754,7 +660,7 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 		Filter myFilter;
 		private Set<?> filter;
 
-		public void synchronizeGroups(List<GpxDisplayGroup> gs) {
+		public void synchronizeGroups(@NonNull List<GpxDisplayGroup> gs) {
 			itemGroups.clear();
 			groups.clear();
 			Set<?> flt = filter;
@@ -838,7 +744,7 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 			boolean checkBox = row != null && row.findViewById(R.id.toggle_item) instanceof CheckBox;
 			boolean same = (selectionMode && checkBox) || (!selectionMode && !checkBox);
 			if (row == null || !same) {
-				LayoutInflater inflater = getActivity().getLayoutInflater();
+				LayoutInflater inflater = getLayoutInflater();
 				row = inflater.inflate(R.layout.wpt_list_item_category, parent, false);
 			}
 			row.setOnClickListener(null);
@@ -895,7 +801,7 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 								 ViewGroup parent) {
 			View row = convertView;
 			if (row == null) {
-				LayoutInflater inflater = getActivity().getLayoutInflater();
+				LayoutInflater inflater = getLayoutInflater();
 				row = inflater.inflate(R.layout.wpt_list_item, parent, false);
 			}
 			if (childPosition == 0) {
@@ -922,30 +828,33 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 					@Override
 					public void onClick(View v) {
 						IconsCache iconsCache = getMyApplication().getIconsCache();
-						popupItemMenu = new PopupMenu(getActivity(), v);
-						DirectionsDialogs.setupPopUpMenuIcon(popupItemMenu);
+						Activity activity = getActivity();
+						if (activity != null) {
+							popupItemMenu = new PopupMenu(activity, v);
+							DirectionsDialogs.setupPopUpMenuIcon(popupItemMenu);
 
-						MenuItem menuItem = popupItemMenu.getMenu().add(R.string.shared_string_edit).setIcon(iconsCache.getThemedIcon(R.drawable.ic_action_edit_dark));
-						menuItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-							@Override
-							public boolean onMenuItemClick(MenuItem mItem) {
-								final OsmandSettings settings = app.getSettings();
-								LatLon location = new LatLon(gpxItem.locationStart.lat, gpxItem.locationStart.lon);
-								if (gpxItem.group.getGpx() != null) {
-									app.getSelectedGpxHelper().setGpxFileToDisplay(gpxItem.group.getGpx());
+							MenuItem menuItem = popupItemMenu.getMenu().add(R.string.shared_string_edit).setIcon(iconsCache.getThemedIcon(R.drawable.ic_action_edit_dark));
+							menuItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+								@Override
+								public boolean onMenuItemClick(MenuItem mItem) {
+									final OsmandSettings settings = app.getSettings();
+									LatLon location = new LatLon(gpxItem.locationStart.lat, gpxItem.locationStart.lon);
+									if (gpxItem.group.getGpx() != null) {
+										app.getSelectedGpxHelper().setGpxFileToDisplay(gpxItem.group.getGpx());
+									}
+									settings.setMapLocationToShow(location.getLatitude(), location.getLongitude(),
+											settings.getLastKnownMapZoom(),
+											new PointDescription(PointDescription.POINT_TYPE_WPT, gpxItem.name),
+											false,
+											gpxItem.locationStart);
+									settings.setEditObjectToShow();
+
+									MapActivity.launchMapActivityMoveToTop(getActivity());
+									return true;
 								}
-								settings.setMapLocationToShow(location.getLatitude(), location.getLongitude(),
-										settings.getLastKnownMapZoom(),
-										new PointDescription(PointDescription.POINT_TYPE_WPT, gpxItem.name),
-										false,
-										gpxItem.locationStart);
-								settings.setEditObjectToShow();
-
-								MapActivity.launchMapActivityMoveToTop(getActivity());
-								return true;
-							}
-						});
-						popupItemMenu.show();
+							});
+							popupItemMenu.show();
+						}
 					}
 				});
 				int groupColor = gpxItem.group.getColor();
@@ -953,7 +862,7 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 					groupColor = gpxItem.locationStart.getColor(groupColor);
 				}
 				if (groupColor == 0) {
-					groupColor = getTrackActivity().getResources().getColor(R.color.gpx_color_point);
+					groupColor = ContextCompat.getColor(app, R.color.gpx_color_point);
 				}
 				icon.setImageDrawable(FavoriteImageDrawable.getOrCreate(getActivity(), groupColor, false));
 			} else {
@@ -1017,7 +926,7 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 
 	public class PointsFilter extends Filter {
 
-		public PointsFilter() {
+		PointsFilter() {
 		}
 
 		@Override
@@ -1029,10 +938,13 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 			} else {
 				Set<Object> filter = new HashSet<>();
 				String cs = constraint.toString().toLowerCase();
-				for (GpxDisplayGroup g : filterGroups()) {
-					for (GpxDisplayItem i : g.getModifiableList()) {
-						if (i.name.toLowerCase().contains(cs)) {
-							filter.add(i);
+				List<GpxDisplayGroup> groups = getOriginalGroups();
+				if (groups != null) {
+					for (GpxDisplayGroup g : groups) {
+						for (GpxDisplayItem i : g.getModifiableList()) {
+							if (i.name.toLowerCase().contains(cs)) {
+								filter.add(i);
+							}
 						}
 					}
 				}
@@ -1046,7 +958,10 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 		protected void publishResults(CharSequence constraint, FilterResults results) {
 			synchronized (adapter) {
 				adapter.setFilterResults((Set<?>) results.values);
-				adapter.synchronizeGroups(filterGroups());
+				List<GpxDisplayGroup> groups = getOriginalGroups();
+				if (groups != null) {
+					adapter.synchronizeGroups(groups);
+				}
 			}
 			adapter.notifyDataSetChanged();
 			expandAllGroups();
@@ -1110,7 +1025,10 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 				fragment.selectedGroups.clear();
 
 				fragment.hideProgressBar();
-				fragment.adapter.synchronizeGroups(fragment.filterGroups());
+				List<GpxDisplayGroup> groups = fragment.getOriginalGroups();
+				if (groups != null) {
+					fragment.adapter.synchronizeGroups(groups);
+				}
 			}
 		}
 

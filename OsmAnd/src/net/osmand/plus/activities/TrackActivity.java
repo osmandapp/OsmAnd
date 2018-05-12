@@ -8,7 +8,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.util.Log;
 import android.view.MenuItem;
@@ -21,6 +20,7 @@ import net.osmand.data.QuadRect;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
+import net.osmand.plus.GPXUtilities.Track;
 import net.osmand.plus.GPXUtilities.TrkSegment;
 import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.GpxSelectionHelper;
@@ -34,6 +34,8 @@ import net.osmand.plus.R;
 import net.osmand.plus.measurementtool.NewGpxData;
 import net.osmand.plus.myplaces.FavoritesActivity;
 import net.osmand.plus.myplaces.SplitSegmentDialogFragment;
+import net.osmand.plus.myplaces.TrackBitmapDrawer;
+import net.osmand.plus.myplaces.TrackBitmapDrawer.TrackBitmapDrawerListener;
 import net.osmand.plus.myplaces.TrackPointFragment;
 import net.osmand.plus.myplaces.TrackSegmentFragment;
 import net.osmand.plus.views.AddGpxPointBottomSheetHelper.NewGpxPoint;
@@ -51,11 +53,14 @@ public class TrackActivity extends TabActivity {
 	public static final String CURRENT_RECORDING = "CURRENT_RECORDING";
 	protected List<WeakReference<Fragment>> fragList = new ArrayList<>();
 	private OsmandApplication app;
+	private TrackBitmapDrawer trackBitmapDrawer;
+
 	private File file = null;
 	private GPXFile gpxFile;
 	private GpxDataItem gpxDataItem;
 	private LockableViewPager viewPager;
 	private long modifiedTime = -1;
+
 	private List<GpxDisplayGroup> displayGroups;
 	private List<GpxDisplayGroup> originalGroups = new ArrayList<>();
 	private boolean stopped = false;
@@ -63,10 +68,10 @@ public class TrackActivity extends TabActivity {
 	private boolean openTracksList = false;
 
 	@Override
-	public void onCreate(Bundle icicle) {
+	public void onCreate(Bundle savedInstanceState) {
 		this.app = getMyApplication();
 		app.applyTheme(this);
-		super.onCreate(icicle);
+		super.onCreate(savedInstanceState);
 		Intent intent = getIntent();
 		if (intent == null || (!intent.hasExtra(TRACK_FILE_NAME) &&
 				!intent.hasExtra(CURRENT_RECORDING))) {
@@ -88,13 +93,19 @@ public class TrackActivity extends TabActivity {
 			}
 			actionBar.setElevation(AndroidUtils.dpToPx(app, 4f));
 		}
-		if (intent.hasExtra(OPEN_POINTS_TAB)) {
+		if (intent.hasExtra(OPEN_POINTS_TAB)
+				|| (savedInstanceState != null && savedInstanceState.getBoolean(OPEN_POINTS_TAB, false))) {
 			openPointsTab = true;
 		}
 		if (intent.hasExtra(OPEN_TRACKS_LIST)) {
 			openTracksList = true;
 		}
 		setContentView(R.layout.track_content);
+	}
+
+	@Nullable
+	public TrackBitmapDrawer getTrackBitmapDrawer() {
+		return trackBitmapDrawer;
 	}
 
 	public void addPoint(PointDescription pointDescription) {
@@ -145,8 +156,8 @@ public class TrackActivity extends TabActivity {
 		double left = 0, right = 0;
 		double top = 0, bottom = 0;
 		if (getGpx() != null) {
-			for (GPXUtilities.Track track : getGpx().tracks) {
-				for (GPXUtilities.TrkSegment segment : track.segments) {
+			for (Track track : getGpx().tracks) {
+				for (TrkSegment segment : track.segments) {
 					for (WptPt p : segment.points) {
 						if (left == 0 && right == 0) {
 							left = p.getLongitude();
@@ -234,6 +245,9 @@ public class TrackActivity extends TabActivity {
 	@Override
 	public void onAttachFragment(Fragment fragment) {
 		fragList.add(new WeakReference<>(fragment));
+		if (trackBitmapDrawer != null && fragment instanceof TrackBitmapDrawerListener) {
+			trackBitmapDrawer.addListener((TrackBitmapDrawerListener) fragment);
+		}
 	}
 
 	@Override
@@ -245,6 +259,14 @@ public class TrackActivity extends TabActivity {
 		viewPager.setSwipeLocked(true);
 		setViewPagerAdapter(viewPager, new ArrayList<TabActivity.TabItem>());
 		new GPXFileLoaderTask(this).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
+	}
+
+	@Override
+	protected void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+		if (viewPager.getCurrentItem() == 1) {
+			outState.putBoolean(OPEN_POINTS_TAB, true);
+		}
 	}
 
 	public OsmandApplication getMyApplication() {
@@ -302,6 +324,15 @@ public class TrackActivity extends TabActivity {
 		super.onBackPressed();
 	}
 
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		if (trackBitmapDrawer != null) {
+			trackBitmapDrawer.clearListeners();
+			trackBitmapDrawer = null;
+		}
+	}
+
 	boolean isHavingWayPoints() {
 		return getGpx() != null && getGpx().hasWptPt();
 	}
@@ -324,14 +355,31 @@ public class TrackActivity extends TabActivity {
 		setGpx(gpxFile);
 		setGpxDataItem(file != null ? app.getGpxDatabase().getItem(file) : null);
 
+		if (gpxFile != null) {
+			trackBitmapDrawer = new TrackBitmapDrawer(this, gpxFile, getGpxDataItem(), getRect());
+		}
+
 		for (WeakReference<Fragment> f : fragList) {
 			Fragment frag = f.get();
+			if (frag instanceof TrackBitmapDrawerListener) {
+				if (trackBitmapDrawer != null) {
+					trackBitmapDrawer.addListener((TrackBitmapDrawerListener) frag);
+				}
+			}
 			if (frag instanceof TrackSegmentFragment) {
-				((TrackSegmentFragment) frag).updateContent();
+				TrackSegmentFragment trackSegmentFragment = (TrackSegmentFragment) frag;
+				if (trackBitmapDrawer != null) {
+					trackBitmapDrawer.setDrawEnabled(trackSegmentFragment.isUpdateEnable());
+				}
+				trackSegmentFragment.updateContent();
 			} else if (frag instanceof SplitSegmentDialogFragment) {
 				((SplitSegmentDialogFragment) frag).updateContent();
 			} else if (frag instanceof TrackPointFragment) {
-				((TrackPointFragment) frag).setContent();
+				TrackPointFragment trackPointFragment = (TrackPointFragment) frag;
+				if (trackBitmapDrawer != null) {
+					trackBitmapDrawer.setDrawEnabled(trackPointFragment.isUpdateEnable());
+				}
+				trackPointFragment.setContent();
 			}
 		}
 		OsmandFragmentPagerAdapter pagerAdapter = (OsmandFragmentPagerAdapter) viewPager.getAdapter();

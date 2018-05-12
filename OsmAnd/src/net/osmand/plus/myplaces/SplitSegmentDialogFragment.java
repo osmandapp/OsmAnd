@@ -30,8 +30,8 @@ import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
-import net.osmand.plus.GpxSelectionHelper.GpxDisplayItemType;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
+import net.osmand.plus.GpxSelectionHelper.GpxDisplayItemType;
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
@@ -45,12 +45,9 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 
 import gnu.trove.list.array.TIntArrayList;
-
-import static net.osmand.plus.myplaces.TrackSegmentFragment.ARG_TO_FILTER_SHORT_TRACKS;
 
 public class SplitSegmentDialogFragment extends DialogFragment {
 
@@ -345,18 +342,6 @@ public class SplitSegmentDialogFragment extends DialogFragment {
 			List<GpxDisplayGroup> result = getTrackActivity().getGpxFile(useDisplayGroups);
 			for (GpxDisplayGroup group : result) {
 				boolean add = hasFilterType(group.getType());
-				if (isArgumentTrue(ARG_TO_FILTER_SHORT_TRACKS)) {
-					Iterator<GpxDisplayItem> item = group.getModifiableList().iterator();
-					while (item.hasNext()) {
-						GpxDisplayItem it2 = item.next();
-						if (it2.analysis != null && it2.analysis.totalDistance < 100) {
-							item.remove();
-						}
-					}
-					if (group.getModifiableList().isEmpty()) {
-						add = false;
-					}
-				}
 				if (add) {
 					groups.add(group);
 				}
@@ -384,10 +369,6 @@ public class SplitSegmentDialogFragment extends DialogFragment {
 			overviewSegment = result.get(0).getModifiableList().get(0);
 		}
 		return overviewSegment;
-	}
-
-	private boolean isArgumentTrue(@NonNull String arg) {
-		return getArguments() != null && getArguments().getBoolean(arg);
 	}
 
 	protected boolean hasFilterType(GpxDisplayItemType filterType) {

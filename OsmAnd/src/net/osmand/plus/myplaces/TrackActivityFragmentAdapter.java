@@ -1,0 +1,817 @@
+package net.osmand.plus.myplaces;
+
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.ListPopupWindow;
+import android.support.v7.widget.SwitchCompat;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.AbsListView;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.CompoundButton;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+
+import net.osmand.AndroidUtils;
+import net.osmand.data.LatLon;
+import net.osmand.data.PointDescription;
+import net.osmand.data.QuadRect;
+import net.osmand.plus.GPXDatabase;
+import net.osmand.plus.GPXDatabase.GpxDataItem;
+import net.osmand.plus.GPXUtilities;
+import net.osmand.plus.GPXUtilities.GPXFile;
+import net.osmand.plus.GPXUtilities.WptPt;
+import net.osmand.plus.GpxSelectionHelper;
+import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
+import net.osmand.plus.GpxSelectionHelper.GpxDisplayItemType;
+import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.TrackActivity;
+import net.osmand.plus.dialogs.ConfigureMapMenu;
+import net.osmand.plus.measurementtool.NewGpxData;
+import net.osmand.plus.myplaces.TrackBitmapDrawer.TrackBitmapDrawerListener;
+import net.osmand.render.RenderingRulesStorage;
+
+import java.lang.ref.WeakReference;
+import java.util.ArrayList;
+import java.util.List;
+
+import gnu.trove.list.array.TIntArrayList;
+
+import static net.osmand.plus.dialogs.ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR;
+
+public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
+
+	private OsmandApplication app;
+	private Fragment fragment;
+	private ListView listView;
+	private GpxDisplayItemType[] filterTypes;
+
+	private List<String> options = new ArrayList<>();
+	private List<Double> distanceSplit = new ArrayList<>();
+	private TIntArrayList timeSplit = new TIntArrayList();
+	private int selectedSplitInterval;
+	private boolean updateEnable;
+	private View headerView;
+	private SwitchCompat vis;
+
+	private boolean showMapOnly;
+
+	private boolean trackBitmapSelectionSupported;
+	private ImageView imageView;
+	private ProgressBar progressBar;
+
+	private boolean fabMenuOpened = false;
+	private FloatingActionButton menuFab;
+	private FloatingActionButton waypointFab;
+	private View waypointTextLayout;
+	private FloatingActionButton routePointFab;
+	private View routePointTextLayout;
+	private FloatingActionButton lineFab;
+	private View lineTextLayout;
+	private View overlayView;
+
+	ListPopupWindow splitListPopupWindow;
+	ListPopupWindow colorListPopupWindow;
+
+	TrackActivityFragmentAdapter(@NonNull OsmandApplication app,
+								 @NonNull Fragment fragment,
+								 @NonNull ListView listView,
+								 @NonNull GpxDisplayItemType... filterTypes) {
+		this.app = app;
+		this.fragment = fragment;
+		this.listView = listView;
+		this.filterTypes = filterTypes;
+	}
+
+	public void onActivityCreated(Bundle savedInstanceState) {
+		listView.setOnScrollListener(new AbsListView.OnScrollListener() {
+			@Override
+			public void onScrollStateChanged(AbsListView absListView, int i) {
+				if (i == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL) {
+					if (fabMenuOpened) {
+						hideTransparentOverlay();
+						closeFabMenu(absListView.getContext());
+					}
+				}
+			}
+
+			@Override
+			public void onScroll(AbsListView absListView, int i, int i1, int i2) {
+			}
+		});
+		listView.setBackgroundColor(ContextCompat.getColor(app, app.getSettings().isLightContent()
+				? R.color.ctx_menu_info_view_bg_light : R.color.ctx_menu_info_view_bg_dark));
+	}
+
+	public void onCreateView(@NonNull View view) {
+		fragment.setHasOptionsMenu(true);
+		Context context = view.getContext();
+
+		ListView listView = (ListView) view.findViewById(android.R.id.list);
+		listView.setDivider(null);
+		listView.setDividerHeight(0);
+
+		overlayView = view.findViewById(R.id.overlay_view);
+		overlayView.setOnClickListener(onFabClickListener);
+
+		menuFab = (FloatingActionButton) view.findViewById(R.id.menu_fab);
+		menuFab.setOnClickListener(onFabClickListener);
+
+		waypointFab = (FloatingActionButton) view.findViewById(R.id.waypoint_fab);
+		waypointFab.setOnClickListener(onFabClickListener);
+		waypointTextLayout = view.findViewById(R.id.waypoint_text_layout);
+		waypointTextLayout.setOnClickListener(onFabClickListener);
+
+		routePointFab = (FloatingActionButton) view.findViewById(R.id.route_fab);
+		routePointFab.setOnClickListener(onFabClickListener);
+		routePointTextLayout = view.findViewById(R.id.route_text_layout);
+		routePointTextLayout.setOnClickListener(onFabClickListener);
+
+		lineFab = (FloatingActionButton) view.findViewById(R.id.line_fab);
+		lineFab.setOnClickListener(onFabClickListener);
+		lineTextLayout = view.findViewById(R.id.line_text_layout);
+		lineTextLayout.setOnClickListener(onFabClickListener);
+
+		TextView tv = new TextView(context);
+		tv.setText(R.string.none_selected_gpx);
+		tv.setTextSize(24);
+		listView.setEmptyView(tv);
+
+		LayoutInflater inflater = LayoutInflater.from(context);
+		headerView = inflater.inflate(R.layout.gpx_item_list_header, null, false);
+		listView.addHeaderView(headerView);
+		listView.addFooterView(inflater.inflate(R.layout.list_shadow_footer, null, false));
+		View emptyView = new View(context);
+		emptyView.setLayoutParams(new AbsListView.LayoutParams(
+				AbsListView.LayoutParams.MATCH_PARENT,
+				AndroidUtils.dpToPx(context, 72)));
+		listView.addFooterView(emptyView);
+
+		updateHeader(0);
+	}
+
+	@Nullable
+	public TrackActivity getTrackActivity() {
+		return (TrackActivity) fragment.getActivity();
+	}
+
+	@Nullable
+	private TrackBitmapDrawer getTrackBitmapDrawer() {
+		TrackActivity activity = getTrackActivity();
+		return activity != null ? activity.getTrackBitmapDrawer() : null;
+	}
+
+	private GPXFile getGpx() {
+		TrackActivity activity = getTrackActivity();
+		return activity != null ? activity.getGpx() : null;
+	}
+
+	@Nullable
+	private GpxDataItem getGpxDataItem() {
+		TrackActivity activity = getTrackActivity();
+		return activity != null ? activity.getGpxDataItem() : null;
+	}
+
+	private void showTrackBitmapProgress() {
+		if (progressBar != null) {
+			progressBar.setVisibility(View.VISIBLE);
+		}
+	}
+
+	private void hideTrackBitmapProgress() {
+		if (progressBar != null) {
+			progressBar.setVisibility(View.GONE);
+		}
+	}
+
+	public boolean isUpdateEnable() {
+		return updateEnable;
+	}
+
+	public void setUpdateEnable(boolean updateEnable) {
+		this.updateEnable = updateEnable;
+		TrackBitmapDrawer trackDrawer = getTrackBitmapDrawer();
+		if (trackDrawer != null) {
+			getTrackBitmapDrawer().setDrawEnabled(updateEnable);
+		}
+	}
+
+	public void setShowMapOnly(boolean showMapOnly) {
+		this.showMapOnly = showMapOnly;
+	}
+
+	public void setTrackBitmapSelectionSupported(boolean trackBitmapSelectionSupported) {
+		this.trackBitmapSelectionSupported = trackBitmapSelectionSupported;
+	}
+
+	private void refreshTrackBitmap() {
+		TrackBitmapDrawer trackDrawer = getTrackBitmapDrawer();
+		if (trackDrawer != null) {
+			getTrackBitmapDrawer().refreshTrackBitmap();
+		}
+	}
+
+	public void updateHeader(int listItemsCount) {
+		progressBar = (ProgressBar) headerView.findViewById(R.id.mapLoadProgress);
+		imageView = (ImageView) headerView.findViewById(R.id.imageView);
+		imageView.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				TrackActivity activity = getTrackActivity();
+				GpxDataItem gpxDataItem = getGpxDataItem();
+				GPXFile gpx = getGpx();
+				WptPt pointToShow = gpx != null ? gpx.findPointToShow() : null;
+				if (activity != null && pointToShow != null) {
+					LatLon location = new LatLon(pointToShow.getLatitude(),
+							pointToShow.getLongitude());
+					final OsmandSettings settings = app.getSettings();
+					String trackName = "";
+					if (gpx.showCurrentTrack) {
+						trackName = app.getString(R.string.shared_string_currently_recording_track);
+					} else if (gpxDataItem != null) {
+						trackName = gpxDataItem.getFile().getName();
+					} else {
+						trackName = gpx.path;
+					}
+					settings.setMapLocationToShow(location.getLatitude(), location.getLongitude(),
+							settings.getLastKnownMapZoom(),
+							new PointDescription(PointDescription.POINT_TYPE_WPT, trackName),
+							false,
+							getRect()
+					);
+
+					MapActivity.launchMapActivityMoveToTop(activity);
+				}
+			}
+		});
+		final View splitColorView = headerView.findViewById(R.id.split_color_view);
+		final View divider = headerView.findViewById(R.id.divider);
+		final View splitIntervalView = headerView.findViewById(R.id.split_interval_view);
+		final View colorView = headerView.findViewById(R.id.color_view);
+		vis = (SwitchCompat) headerView.findViewById(R.id.showOnMapToggle);
+		GPXFile gpxFile = getGpx();
+		final boolean selected = gpxFile != null &&
+				((gpxFile.showCurrentTrack && app.getSelectedGpxHelper().getSelectedCurrentRecordingTrack() != null) ||
+						(gpxFile.path != null && app.getSelectedGpxHelper().getSelectedFileByPath(gpxFile.path) != null));
+
+		boolean hasPath = gpxFile != null && (gpxFile.tracks.size() > 0 || gpxFile.routes.size() > 0);
+		TrackActivity activity = getTrackActivity();
+		TrackBitmapDrawer trackDrawer = getTrackBitmapDrawer();
+		if (activity != null && trackDrawer!= null) {
+			if (trackDrawer.isNonInitialized()) {
+				if (trackDrawer.initAndDraw()) {
+					imageView.setVisibility(View.VISIBLE);
+				} else {
+					imageView.setVisibility(View.GONE);
+				}
+			} else {
+				refreshTrackBitmap();
+			}
+		}
+
+		if (showMapOnly) {
+			headerView.findViewById(R.id.track_settings_view).setVisibility(View.GONE);
+		} else {
+			vis.setChecked(selected);
+			vis.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+				@Override
+				public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+					if (!isChecked) {
+						selectedSplitInterval = 0;
+					}
+					GPXFile gpxFile = getGpx();
+					if (gpxFile != null) {
+						GpxSelectionHelper.SelectedGpxFile sf = app.getSelectedGpxHelper().selectGpxFile(gpxFile, vis.isChecked(), false);
+						final List<GpxDisplayGroup> groups = getDisplayGroups();
+						if (groups.size() > 0) {
+							updateSplit(groups, vis.isChecked() ? sf : null);
+							if (getGpxDataItem() != null) {
+								updateSplitInDatabase();
+							}
+						}
+					}
+					updateSplitIntervalView(splitIntervalView);
+					updateColorView(colorView);
+				}
+			});
+			updateColorView(colorView);
+			colorView.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					TrackActivity activity = getTrackActivity();
+					if (activity != null) {
+						colorListPopupWindow = new ListPopupWindow(activity);
+						colorListPopupWindow.setAnchorView(colorView);
+						colorListPopupWindow.setContentWidth(AndroidUtils.dpToPx(app, 200f));
+						colorListPopupWindow.setModal(true);
+						colorListPopupWindow.setDropDownGravity(Gravity.RIGHT | Gravity.TOP);
+						colorListPopupWindow.setVerticalOffset(AndroidUtils.dpToPx(app, -48f));
+						colorListPopupWindow.setHorizontalOffset(AndroidUtils.dpToPx(app, -6f));
+						GPXFile gpxFile = getGpx();
+						final ConfigureMapMenu.GpxAppearanceAdapter gpxApprAdapter = new ConfigureMapMenu.GpxAppearanceAdapter(activity,
+								gpxFile.getColor(0), ConfigureMapMenu.GpxAppearanceAdapter.GpxAppearanceAdapterType.TRACK_COLOR);
+						colorListPopupWindow.setAdapter(gpxApprAdapter);
+						colorListPopupWindow.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+							@Override
+							public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+								ConfigureMapMenu.AppearanceListItem item = gpxApprAdapter.getItem(position);
+								if (item != null) {
+									if (CURRENT_TRACK_COLOR_ATTR.equals(item.getAttrName())) {
+										GPXFile gpx = getGpx();
+										int clr = item.getColor();
+										if (vis.isChecked()) {
+											if (gpx != null) {
+												GpxSelectionHelper.SelectedGpxFile sf = app.getSelectedGpxHelper().selectGpxFile(gpx, vis.isChecked(), false);
+												if (clr != 0 && sf.getModifiableGpxFile() != null) {
+													sf.getModifiableGpxFile().setColor(clr);
+													if (getGpxDataItem() != null) {
+														app.getGpxDatabase().updateColor(getGpxDataItem(), clr);
+													}
+												}
+											}
+										} else if (getGpxDataItem() != null) {
+											app.getGpxDatabase().updateColor(getGpxDataItem(), clr);
+										}
+										if (gpx != null && gpx.showCurrentTrack) {
+											app.getSettings().CURRENT_TRACK_COLOR.set(clr);
+										}
+										refreshTrackBitmap();
+									}
+								}
+								colorListPopupWindow.dismiss();
+								updateColorView(colorView);
+							}
+						});
+						colorListPopupWindow.show();
+					}
+				}
+			});
+
+			if (hasPath) {
+				if (!gpxFile.showCurrentTrack && listItemsCount > 0) {
+					prepareSplitIntervalAdapterData();
+					setupSplitIntervalView(splitIntervalView);
+					updateSplitIntervalView(splitIntervalView);
+					splitIntervalView.setOnClickListener(new View.OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							TrackActivity activity = getTrackActivity();
+							if (activity != null) {
+								splitListPopupWindow = new ListPopupWindow(activity);
+								splitListPopupWindow.setAnchorView(splitIntervalView);
+								splitListPopupWindow.setContentWidth(AndroidUtils.dpToPx(app, 200f));
+								splitListPopupWindow.setModal(true);
+								splitListPopupWindow.setDropDownGravity(Gravity.RIGHT | Gravity.TOP);
+								splitListPopupWindow.setVerticalOffset(AndroidUtils.dpToPx(app, -48f));
+								splitListPopupWindow.setHorizontalOffset(AndroidUtils.dpToPx(app, -6f));
+								splitListPopupWindow.setAdapter(new ArrayAdapter<>(activity,
+										R.layout.popup_list_text_item, options));
+								splitListPopupWindow.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+									@Override
+									public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+										selectedSplitInterval = position;
+										GPXFile gpx = getGpx();
+										if (gpx != null) {
+											GpxSelectionHelper.SelectedGpxFile sf = app.getSelectedGpxHelper().selectGpxFile(gpx, vis.isChecked(), false);
+											final List<GpxDisplayGroup> groups = getDisplayGroups();
+											if (groups.size() > 0) {
+												updateSplit(groups, vis.isChecked() ? sf : null);
+												if (getGpxDataItem() != null) {
+													updateSplitInDatabase();
+												}
+											}
+										}
+										splitListPopupWindow.dismiss();
+										updateSplitIntervalView(splitIntervalView);
+									}
+								});
+								splitListPopupWindow.show();
+							}
+						}
+					});
+					splitIntervalView.setVisibility(View.VISIBLE);
+				} else {
+					splitIntervalView.setVisibility(View.GONE);
+				}
+				splitColorView.setVisibility(View.VISIBLE);
+				divider.setVisibility(View.VISIBLE);
+			} else {
+				splitColorView.setVisibility(View.GONE);
+				divider.setVisibility(View.GONE);
+			}
+		}
+	}
+
+	@Nullable
+	private QuadRect getRect() {
+		TrackActivity activity = getTrackActivity();
+		return activity != null ? activity.getRect() : null;
+	}
+
+	public boolean isShowOnMap() {
+		return vis != null && vis.isChecked();
+	}
+
+	public void updateSelectedPoint(double lat, double lon) {
+		TrackBitmapDrawer trackDrawer = getTrackBitmapDrawer();
+		if (trackDrawer != null) {
+			trackDrawer.updateSelectedPoint(lat, lon);
+		}
+	}
+
+	public void updateMenuFabVisibility(boolean visible) {
+		menuFab.setVisibility(visible ? View.VISIBLE : View.GONE);
+	}
+
+	@NonNull
+	public List<GpxDisplayGroup> getOriginalGroups() {
+		return filterGroups(false);
+	}
+
+	@NonNull
+	public List<GpxDisplayGroup> getDisplayGroups() {
+		return filterGroups(true);
+	}
+
+	private boolean hasFilterType(GpxDisplayItemType filterType) {
+		for (GpxDisplayItemType type : filterTypes) {
+			if (type == filterType) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	@NonNull
+	private List<GpxDisplayGroup> filterGroups(boolean useDisplayGroups) {
+		List<GpxDisplayGroup> groups = new ArrayList<>();
+		TrackActivity activity = getTrackActivity();
+		if (activity != null) {
+			List<GpxDisplayGroup> result = activity.getGpxFile(useDisplayGroups);
+			for (GpxDisplayGroup group : result) {
+				boolean add = hasFilterType(group.getType());
+				if (add) {
+					groups.add(group);
+				}
+
+			}
+		}
+		return groups;
+	}
+
+	private void setupSplitIntervalView(View view) {
+		final TextView title = (TextView) view.findViewById(R.id.split_interval_title);
+		final TextView text = (TextView) view.findViewById(R.id.split_interval_text);
+		final ImageView img = (ImageView) view.findViewById(R.id.split_interval_arrow);
+		int colorId;
+		final List<GpxDisplayGroup> groups = getDisplayGroups();
+		if (groups.size() > 0) {
+			colorId = app.getSettings().isLightContent() ?
+					R.color.primary_text_light : R.color.primary_text_dark;
+		} else {
+			colorId = app.getSettings().isLightContent() ?
+					R.color.secondary_text_light : R.color.secondary_text_dark;
+		}
+		int color = app.getResources().getColor(colorId);
+		title.setTextColor(color);
+		text.setTextColor(color);
+		img.setImageDrawable(app.getIconsCache().getIcon(R.drawable.ic_action_arrow_drop_down, colorId));
+	}
+
+	private void updateSplitIntervalView(View view) {
+		final TextView text = (TextView) view.findViewById(R.id.split_interval_text);
+		if (selectedSplitInterval == 0) {
+			text.setText(app.getString(R.string.shared_string_none));
+		} else {
+			text.setText(options.get(selectedSplitInterval));
+		}
+	}
+
+	private void updateColorView(View colorView) {
+		final ImageView colorImageView = (ImageView) colorView.findViewById(R.id.colorImage);
+		int color = getGpxDataItem() != null ? getGpxDataItem().getColor() : 0;
+		GPXFile gpxFile = getGpx();
+		if (color == 0 && gpxFile != null) {
+			if (gpxFile.showCurrentTrack) {
+				color = app.getSettings().CURRENT_TRACK_COLOR.get();
+			} else {
+				color = gpxFile.getColor(0);
+			}
+		}
+		if (color == 0) {
+			final RenderingRulesStorage renderer = app.getRendererRegistry().getCurrentSelectedRenderer();
+			final OsmandSettings.CommonPreference<String> prefColor
+					= app.getSettings().getCustomRenderProperty(CURRENT_TRACK_COLOR_ATTR);
+			color = ConfigureMapMenu.GpxAppearanceAdapter.parseTrackColor(renderer, prefColor.get());
+		}
+		if (color == 0) {
+			colorImageView.setImageDrawable(app.getIconsCache().getThemedIcon(R.drawable.ic_action_circle));
+		} else {
+			colorImageView.setImageDrawable(app.getIconsCache().getPaintedIcon(R.drawable.ic_action_circle, color));
+		}
+		TrackBitmapDrawer trackDrawer = getTrackBitmapDrawer();
+		if (trackDrawer != null) {
+			trackDrawer.setTrackColor(color);
+		}
+	}
+
+	public List<GpxSelectionHelper.GpxDisplayItem> flatten(List<GpxDisplayGroup> groups) {
+		ArrayList<GpxSelectionHelper.GpxDisplayItem> list = new ArrayList<>();
+		for (GpxDisplayGroup g : groups) {
+			list.addAll(g.getModifiableList());
+		}
+		return list;
+	}
+
+	private void prepareSplitIntervalAdapterData() {
+		final List<GpxDisplayGroup> groups = getDisplayGroups();
+
+		options.add(app.getString(R.string.shared_string_none));
+		distanceSplit.add(-1d);
+		timeSplit.add(-1);
+		addOptionSplit(30, true, groups); // 50 feet, 20 yards, 20
+		// m
+		addOptionSplit(60, true, groups); // 100 feet, 50 yards,
+		// 50 m
+		addOptionSplit(150, true, groups); // 200 feet, 100 yards,
+		// 100 m
+		addOptionSplit(300, true, groups); // 500 feet, 200 yards,
+		// 200 m
+		addOptionSplit(600, true, groups); // 1000 feet, 500 yards,
+		// 500 m
+		addOptionSplit(1500, true, groups); // 2000 feet, 1000 yards, 1 km
+		addOptionSplit(3000, true, groups); // 1 mi, 2 km
+		addOptionSplit(6000, true, groups); // 2 mi, 5 km
+		addOptionSplit(15000, true, groups); // 5 mi, 10 km
+
+		addOptionSplit(15, false, groups);
+		addOptionSplit(30, false, groups);
+		addOptionSplit(60, false, groups);
+		addOptionSplit(120, false, groups);
+		addOptionSplit(150, false, groups);
+		addOptionSplit(300, false, groups);
+		addOptionSplit(600, false, groups);
+		addOptionSplit(900, false, groups);
+		addOptionSplit(1800, false, groups);
+		addOptionSplit(3600, false, groups);
+	}
+
+	private void updateSplit(@NonNull List<GpxDisplayGroup> groups, @Nullable GpxSelectionHelper.SelectedGpxFile sf) {
+		TrackActivity activity = getTrackActivity();
+		if (activity != null) {
+			new SplitTrackAsyncTask(activity, this, sf, groups)
+					.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
+		}
+	}
+
+	private void addOptionSplit(int value, boolean distance, List<GpxDisplayGroup> model) {
+		if (distance) {
+			double dvalue = OsmAndFormatter.calculateRoundedDist(value, app);
+			options.add(OsmAndFormatter.getFormattedDistance((float) dvalue, app));
+			distanceSplit.add(dvalue);
+			timeSplit.add(-1);
+			if (Math.abs(model.get(0).getSplitDistance() - dvalue) < 1) {
+				selectedSplitInterval = distanceSplit.size() - 1;
+			}
+		} else {
+			if (value < 60) {
+				options.add(value + " " + app.getString(R.string.int_seconds));
+			} else if (value % 60 == 0) {
+				options.add((value / 60) + " " + app.getString(R.string.int_min));
+			} else {
+				options.add((value / 60f) + " " + app.getString(R.string.int_min));
+			}
+			distanceSplit.add(-1d);
+			timeSplit.add(value);
+			if (model.get(0).getSplitTime() == value) {
+				selectedSplitInterval = distanceSplit.size() - 1;
+			}
+		}
+	}
+
+	private void updateSplitInDatabase() {
+		int splitType = 0;
+		double splitInterval = 0;
+		if (selectedSplitInterval == 0) {
+			splitType = GPXDatabase.GPX_SPLIT_TYPE_NO_SPLIT;
+			splitInterval = 0;
+		} else if (distanceSplit.get(selectedSplitInterval) > 0) {
+			splitType = GPXDatabase.GPX_SPLIT_TYPE_DISTANCE;
+			splitInterval = distanceSplit.get(selectedSplitInterval);
+		} else if (timeSplit.get(selectedSplitInterval) > 0) {
+			splitType = GPXDatabase.GPX_SPLIT_TYPE_TIME;
+			splitInterval = timeSplit.get(selectedSplitInterval);
+		}
+		GpxDataItem item = getGpxDataItem();
+		if (item != null) {
+			app.getGpxDatabase().updateSplit(item, splitType, splitInterval);
+		}
+	}
+
+	public void updateSplitView() {
+		GPXFile gpxFile = getGpx();
+		if (gpxFile != null) {
+			GpxSelectionHelper.SelectedGpxFile sf = app.getSelectedGpxHelper().selectGpxFile(gpxFile,
+					((SwitchCompat) headerView.findViewById(R.id.showOnMapToggle)).isChecked(), false);
+			final List<GpxDisplayGroup> groups = getDisplayGroups();
+			if (groups.size() > 0) {
+				updateSplit(groups, ((SwitchCompat) headerView.findViewById(R.id.showOnMapToggle)).isChecked() ? sf : null);
+				if (getGpxDataItem() != null) {
+					updateSplitInDatabase();
+				}
+			}
+			updateSplitIntervalView(headerView.findViewById(R.id.split_interval_view));
+		}
+	}
+
+	public void hideTransparentOverlay() {
+		overlayView.setVisibility(View.GONE);
+	}
+
+	public void showTransparentOverlay() {
+		overlayView.setVisibility(View.VISIBLE);
+	}
+
+	public void openFabMenu(@NonNull Context context) {
+		menuFab.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_action_remove_dark));
+		waypointFab.setVisibility(View.VISIBLE);
+		waypointTextLayout.setVisibility(View.VISIBLE);
+		routePointFab.setVisibility(View.VISIBLE);
+		routePointTextLayout.setVisibility(View.VISIBLE);
+		lineFab.setVisibility(View.VISIBLE);
+		lineTextLayout.setVisibility(View.VISIBLE);
+		fabMenuOpened = true;
+	}
+
+	public void closeFabMenu(@NonNull Context context) {
+		menuFab.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_action_plus));
+		waypointFab.setVisibility(View.GONE);
+		waypointTextLayout.setVisibility(View.GONE);
+		routePointFab.setVisibility(View.GONE);
+		routePointTextLayout.setVisibility(View.GONE);
+		lineFab.setVisibility(View.GONE);
+		lineTextLayout.setVisibility(View.GONE);
+		fabMenuOpened = false;
+	}
+
+	public void addPoint(PointDescription pointDescription) {
+		TrackActivity activity = getTrackActivity();
+		if (activity != null) {
+			activity.addPoint(pointDescription);
+		}
+	}
+
+	public void addNewGpxData(NewGpxData.ActionType actionType) {
+		TrackActivity activity = getTrackActivity();
+		if (activity != null) {
+			activity.addNewGpxData(actionType);
+		}
+	}
+
+	public void addNewGpxData(NewGpxData.ActionType actionType, GPXUtilities.TrkSegment segment) {
+		TrackActivity activity = getTrackActivity();
+		if (activity != null) {
+			activity.addNewGpxData(actionType, segment);
+		}
+	}
+
+	private View.OnClickListener onFabClickListener = new View.OnClickListener() {
+		@Override
+		public void onClick(View view) {
+			switch (view.getId()) {
+				case R.id.overlay_view:
+					hideTransparentOverlay();
+					closeFabMenu(view.getContext());
+					break;
+				case R.id.menu_fab:
+					if (fabMenuOpened) {
+						hideTransparentOverlay();
+						closeFabMenu(view.getContext());
+					} else {
+						showTransparentOverlay();
+						openFabMenu(view.getContext());
+					}
+					break;
+				case R.id.waypoint_text_layout:
+				case R.id.waypoint_fab:
+					PointDescription pointWptDescription =
+							new PointDescription(PointDescription.POINT_TYPE_WPT, app.getString(R.string.add_waypoint));
+					addPoint(pointWptDescription);
+					break;
+				case R.id.route_text_layout:
+				case R.id.route_fab:
+					addNewGpxData(NewGpxData.ActionType.ADD_ROUTE_POINTS);
+					break;
+				case R.id.line_text_layout:
+				case R.id.line_fab:
+					addNewGpxData(NewGpxData.ActionType.ADD_SEGMENT);
+					break;
+			}
+		}
+	};
+
+	@Override
+	public void onTrackBitmapDrawing() {
+		showTrackBitmapProgress();
+	}
+
+	@Override
+	public void onTrackBitmapDrawn() {
+		hideTrackBitmapProgress();
+	}
+
+	@Override
+	public boolean isTrackBitmapSelectionSupported() {
+		return trackBitmapSelectionSupported;
+	}
+
+	@Override
+	public void drawTrackBitmap(Bitmap bitmap) {
+		imageView.setImageDrawable(new BitmapDrawable(app.getResources(), bitmap));
+	}
+
+	private static class SplitTrackAsyncTask extends AsyncTask<Void, Void, Void> {
+		private final GpxSelectionHelper.SelectedGpxFile selectedGpx;
+		private OsmandApplication app;
+		private final WeakReference<TrackActivity> activityRef;
+		private final WeakReference<TrackActivityFragmentAdapter> fragmentAdapterRef;
+		private final List<GpxDisplayGroup> groups;
+
+		private List<Double> distanceSplit;
+		private TIntArrayList timeSplit;
+		private int selectedSplitInterval;
+
+		SplitTrackAsyncTask(@NonNull TrackActivity activity,
+							@NonNull TrackActivityFragmentAdapter fragmentAdapter,
+							@Nullable GpxSelectionHelper.SelectedGpxFile selectedGpx,
+							@NonNull List<GpxDisplayGroup> groups) {
+			activityRef = new WeakReference<>(activity);
+			fragmentAdapterRef = new WeakReference<>(fragmentAdapter);
+			app = activity.getMyApplication();
+			this.selectedGpx = selectedGpx;
+			this.groups = groups;
+
+			selectedSplitInterval = fragmentAdapter.selectedSplitInterval;
+			distanceSplit = fragmentAdapter.distanceSplit;
+			timeSplit = fragmentAdapter.timeSplit;
+		}
+
+		protected void onPreExecute() {
+			TrackActivity activity = activityRef.get();
+			if (activity != null) {
+				activity.setSupportProgressBarIndeterminateVisibility(true);
+			}
+		}
+
+		protected void onPostExecute(Void result) {
+			TrackActivity activity = activityRef.get();
+			TrackActivityFragmentAdapter fragment = fragmentAdapterRef.get();
+			if (activity != null && fragment != null) {
+				if (!activity.isFinishing()) {
+					activity.setSupportProgressBarIndeterminateVisibility(false);
+				}
+				if (selectedGpx != null) {
+					List<GpxDisplayGroup> groups = fragment.getDisplayGroups();
+					selectedGpx.setDisplayGroups(groups);
+				}
+				/*
+				if (fragment.isVisible()) {
+					fragment.updateContent();
+				}
+				*/
+			}
+		}
+
+		@Override
+		protected Void doInBackground(Void... params) {
+			for (GpxDisplayGroup model : groups) {
+				if (selectedSplitInterval == 0) {
+					model.noSplit(app);
+				} else if (distanceSplit.get(selectedSplitInterval) > 0) {
+					model.splitByDistance(app, distanceSplit.get(selectedSplitInterval));
+				} else if (timeSplit.get(selectedSplitInterval) > 0) {
+					model.splitByTime(app, timeSplit.get(selectedSplitInterval));
+				}
+			}
+			return null;
+		}
+	}
+}
