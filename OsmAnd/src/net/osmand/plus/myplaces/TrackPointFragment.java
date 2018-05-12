@@ -21,6 +21,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MenuItem.OnActionExpandListener;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
@@ -59,6 +60,7 @@ import net.osmand.plus.base.FavoriteImageDrawable;
 import net.osmand.plus.base.OsmandExpandableListFragment;
 import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.myplaces.TrackBitmapDrawer.TrackBitmapDrawerListener;
+import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -80,20 +82,22 @@ public class TrackPointFragment extends OsmandExpandableListFragment implements 
 	public static final int DELETE_ACTION_ID = 3;
 	public static final int SHARE_ID = 4;
 	public static final int SELECT_MAP_MARKERS_ID = 5;
-	public static final int SELECT_MAP_MARKERS_ACTION_MODE_ID = 6;
+	//public static final int SELECT_MAP_MARKERS_ACTION_MODE_ID = 6;
 	public static final int SELECT_FAVORITES_ID = 7;
 	public static final int SELECT_FAVORITES_ACTION_MODE_ID = 8;
+
+	private static final int ROUTE_POINTS_LIMIT = 3;
 
 	private OsmandApplication app;
 	private TrackActivityFragmentAdapter fragmentAdapter;
 	final private PointGPXAdapter adapter = new PointGPXAdapter();
 
-	private boolean selectionMode = false;
+	private boolean selectionMode;
 	private LinkedHashMap<GpxDisplayItemType, Set<GpxDisplayItem>> selectedItems = new LinkedHashMap<>();
 	private Set<Integer> selectedGroups = new LinkedHashSet<>();
 	private ActionMode actionMode;
-	private SearchView searchView;
 	private boolean updateEnable;
+	private boolean routePointsExpanded;
 
 	private View mainView;
 	private PopupMenu popupItemMenu;
@@ -300,10 +304,10 @@ public class TrackPointFragment extends OsmandExpandableListFragment implements 
 		}
 
 		MenuItem mi = createMenuItem(menu, SEARCH_ID, R.string.search_poi_filter, R.drawable.ic_action_search_dark,
-				R.drawable.ic_action_search_dark, MenuItemCompat.SHOW_AS_ACTION_ALWAYS | MenuItemCompat.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW);
-		searchView = new SearchView(activity);
+				R.drawable.ic_action_search_dark, MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW);
+		SearchView searchView = new SearchView(activity);
 		FavoritesActivity.updateSearchView(activity, searchView);
-		MenuItemCompat.setActionView(mi, searchView);
+		mi.setActionView(searchView);
 		searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 			@Override
 			public boolean onQueryTextSubmit(String query) {
@@ -317,7 +321,7 @@ public class TrackPointFragment extends OsmandExpandableListFragment implements 
 				return true;
 			}
 		});
-		MenuItemCompat.setOnActionExpandListener(mi, new MenuItemCompat.OnActionExpandListener() {
+		mi.setOnActionExpandListener(new OnActionExpandListener() {
 			@Override
 			public boolean onMenuItemActionExpand(MenuItem item) {
 				return true;
@@ -329,7 +333,6 @@ public class TrackPointFragment extends OsmandExpandableListFragment implements 
 				List<GpxDisplayGroup> groups = getOriginalGroups();
 				if (groups != null) {
 					adapter.synchronizeGroups(groups);
-					adapter.notifyDataSetChanged();
 				}
 				// Needed to hide intermediate progress bar after closing action mode
 				new Handler().postDelayed(new Runnable() {
@@ -341,22 +344,22 @@ public class TrackPointFragment extends OsmandExpandableListFragment implements 
 			}
 		});
 
-		if (!MenuItemCompat.isActionViewExpanded(mi)) {
+		if (!mi.isActionViewExpanded()) {
 
 			createMenuItem(menu, SHARE_ID, R.string.shared_string_share, R.drawable.ic_action_gshare_dark,
-					R.drawable.ic_action_gshare_dark, MenuItemCompat.SHOW_AS_ACTION_NEVER);
+					R.drawable.ic_action_gshare_dark, MenuItem.SHOW_AS_ACTION_NEVER);
 			GPXFile gpxFile = getGpx();
 			if (gpxFile != null && gpxFile.path != null) {
 				final MapMarkersHelper markersHelper = app.getMapMarkersHelper();
 				final boolean synced = markersHelper.getMarkersGroup(getGpx()) != null;
 				createMenuItem(menu, SELECT_MAP_MARKERS_ID, synced ? R.string.remove_from_map_markers
 								: R.string.shared_string_add_to_map_markers, R.drawable.ic_action_flag_dark,
-						R.drawable.ic_action_flag_dark, MenuItemCompat.SHOW_AS_ACTION_NEVER);
+						R.drawable.ic_action_flag_dark, MenuItem.SHOW_AS_ACTION_NEVER);
 			}
 			createMenuItem(menu, SELECT_FAVORITES_ID, R.string.shared_string_add_to_favorites, R.drawable.ic_action_fav_dark,
-					R.drawable.ic_action_fav_dark, MenuItemCompat.SHOW_AS_ACTION_NEVER);
+					R.drawable.ic_action_fav_dark, MenuItem.SHOW_AS_ACTION_NEVER);
 			createMenuItem(menu, DELETE_ID, R.string.shared_string_delete, R.drawable.ic_action_delete_dark,
-					R.drawable.ic_action_delete_dark, MenuItemCompat.SHOW_AS_ACTION_NEVER);
+					R.drawable.ic_action_delete_dark, MenuItem.SHOW_AS_ACTION_NEVER);
 		}
 		this.optionsMenu = menu;
 	}
@@ -505,7 +508,7 @@ public class TrackPointFragment extends OsmandExpandableListFragment implements 
 				setSelectionMode(true);
 				createMenuItem(menu, SELECT_FAVORITES_ACTION_MODE_ID, R.string.shared_string_add_to_favorites,
 						R.drawable.ic_action_fav_dark, R.drawable.ic_action_fav_dark,
-						MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
+						MenuItem.SHOW_AS_ACTION_IF_ROOM);
 				selectedItems.clear();
 				selectedGroups.clear();
 				adapter.notifyDataSetInvalidated();
@@ -587,9 +590,12 @@ public class TrackPointFragment extends OsmandExpandableListFragment implements 
 
 	@Override
 	public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-		if (selectionMode) {
+		final GpxDisplayItem item = adapter.getChild(groupPosition, childPosition);
+		if (item == null) {
+			routePointsExpanded = true;
+			adapter.notifyDataSetChanged();
+		} else if (selectionMode) {
 			CheckBox ch = (CheckBox) v.findViewById(R.id.toggle_item);
-			GpxDisplayItem item = adapter.getChild(groupPosition, childPosition);
 			ch.setChecked(!ch.isChecked());
 			if (ch.isChecked()) {
 				Set<GpxDisplayItem> set = selectedItems.get(item.group.getType());
@@ -608,21 +614,18 @@ public class TrackPointFragment extends OsmandExpandableListFragment implements 
 			}
 			updateSelectionMode(actionMode);
 		} else {
-			final GpxDisplayItem item = adapter.getChild(groupPosition, childPosition);
-			if (item != null) {
-				if (item.group.getGpx() != null) {
-					app.getSelectedGpxHelper().setGpxFileToDisplay(item.group.getGpx());
-				}
-				final OsmandSettings settings = app.getSettings();
-				LatLon location = new LatLon(item.locationStart.lat, item.locationStart.lon);
-				settings.setMapLocationToShow(location.getLatitude(), location.getLongitude(),
-						settings.getLastKnownMapZoom(),
-						new PointDescription(PointDescription.POINT_TYPE_WPT, item.name),
-						false,
-						item.locationStart);
-
-				MapActivity.launchMapActivityMoveToTop(getActivity());
+			if (item.group.getGpx() != null) {
+				app.getSelectedGpxHelper().setGpxFileToDisplay(item.group.getGpx());
 			}
+			final OsmandSettings settings = app.getSettings();
+			LatLon location = new LatLon(item.locationStart.lat, item.locationStart.lon);
+			settings.setMapLocationToShow(location.getLatitude(), location.getLongitude(),
+					settings.getLastKnownMapZoom(),
+					new PointDescription(PointDescription.POINT_TYPE_WPT, item.name),
+					false,
+					item.locationStart);
+
+			MapActivity.launchMapActivityMoveToTop(getActivity());
 		}
 		return true;
 	}
@@ -699,7 +702,14 @@ public class TrackPointFragment extends OsmandExpandableListFragment implements 
 
 		@Override
 		public GpxDisplayItem getChild(int groupPosition, int childPosition) {
-			return itemGroups.get(groups.get(groupPosition)).get(childPosition);
+			final GpxDisplayGroup group = getGroup(groupPosition);
+			int count = itemGroups.get(group).size();
+			if (group.getType() == GpxDisplayItemType.TRACK_POINTS || routePointsExpanded
+					|| count <= ROUTE_POINTS_LIMIT + 1 || childPosition < ROUTE_POINTS_LIMIT) {
+				return itemGroups.get(groups.get(groupPosition)).get(childPosition);
+			} else {
+				return null;
+			}
 		}
 
 		@Override
@@ -709,7 +719,13 @@ public class TrackPointFragment extends OsmandExpandableListFragment implements 
 
 		@Override
 		public int getChildrenCount(int groupPosition) {
-			return itemGroups.get(groups.get(groupPosition)).size();
+			int count = itemGroups.get(groups.get(groupPosition)).size();
+			final GpxDisplayGroup group = getGroup(groupPosition);
+			if (group.getType() == GpxDisplayItemType.TRACK_POINTS || routePointsExpanded || count <= ROUTE_POINTS_LIMIT + 1) {
+				return count;
+			} else {
+				return ROUTE_POINTS_LIMIT + 1;
+			}
 		}
 
 		@Override
@@ -814,12 +830,17 @@ public class TrackPointFragment extends OsmandExpandableListFragment implements 
 
 			ImageView icon = (ImageView) row.findViewById(R.id.icon);
 			TextView title = (TextView) row.findViewById(R.id.label);
+			TextViewEx button = (TextViewEx) row.findViewById(R.id.button);
 			TextView description = (TextView) row.findViewById(R.id.description);
 
 			final GpxDisplayItem gpxItem = getChild(groupPosition, childPosition);
-			boolean isWpt = gpxItem.group.getType() == GpxDisplayItemType.TRACK_POINTS;
+			boolean isWpt = gpxItem != null && gpxItem.group.getType() == GpxDisplayItemType.TRACK_POINTS;
 			ImageView options = (ImageView) row.findViewById(R.id.options);
 			if (isWpt) {
+				title.setVisibility(View.VISIBLE);
+				description.setVisibility(View.VISIBLE);
+				button.setVisibility(View.GONE);
+
 				options.setFocusable(false);
 				options.setImageDrawable(getMyApplication().getIconsCache().getThemedIcon(
 						R.drawable.ic_overflow_menu_white));
@@ -866,19 +887,32 @@ public class TrackPointFragment extends OsmandExpandableListFragment implements 
 				}
 				icon.setImageDrawable(FavoriteImageDrawable.getOrCreate(getActivity(), groupColor, false));
 			} else {
-				icon.setImageDrawable(app.getIconsCache().getThemedIcon(R.drawable.ic_action_marker_dark));
+				boolean showAll = gpxItem == null;
+				title.setVisibility(showAll ? View.GONE : View.VISIBLE);
+				description.setVisibility(showAll ? View.GONE : View.VISIBLE);
+				button.setVisibility(!showAll ? View.GONE : View.VISIBLE);
+
+				if (showAll) {
+					int count = itemGroups.get(groups.get(groupPosition)).size();
+					button.setText(getString(R.string.shared_string_show_all) + " - " + count);
+					icon.setImageDrawable(null);
+				} else {
+					icon.setImageDrawable(app.getIconsCache().getThemedIcon(R.drawable.ic_action_marker_dark));
+				}
 				options.setVisibility(View.GONE);
 			}
-			title.setText(gpxItem.name);
-			if (!Algorithms.isEmpty(gpxItem.description)) {
-				description.setText(gpxItem.description);
-				description.setVisibility(View.VISIBLE);
-			} else {
-				description.setVisibility(View.GONE);
+			if (gpxItem != null) {
+				title.setText(gpxItem.name);
+				if (!Algorithms.isEmpty(gpxItem.description)) {
+					description.setText(gpxItem.description);
+					description.setVisibility(View.VISIBLE);
+				} else {
+					description.setVisibility(View.GONE);
+				}
 			}
 
 			final CheckBox ch = (CheckBox) row.findViewById(R.id.toggle_item);
-			if (selectionMode) {
+			if (selectionMode && gpxItem != null) {
 				ch.setVisibility(View.VISIBLE);
 				ch.setChecked(selectedItems.get(gpxItem.group.getType()) != null && selectedItems.get(gpxItem.group.getType()).contains(gpxItem));
 				row.findViewById(R.id.icon).setVisibility(View.GONE);
