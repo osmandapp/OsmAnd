@@ -375,7 +375,7 @@ public class TrackPointFragment extends OsmandExpandableListFragment implements 
 		}
 	}
 
-	private void enableSelectionMode(boolean selectionMode) {
+	private void setSelectionMode(boolean selectionMode) {
 		this.selectionMode = selectionMode;
 	}
 
@@ -385,7 +385,7 @@ public class TrackPointFragment extends OsmandExpandableListFragment implements 
 
 			@Override
 			public boolean onCreateActionMode(ActionMode mode, Menu menu) {
-				enableSelectionMode(true);
+				setSelectionMode(true);
 				createMenuItem(menu, DELETE_ACTION_ID, R.string.shared_string_delete,
 						R.drawable.ic_action_delete_dark, R.drawable.ic_action_delete_dark,
 						MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
@@ -403,7 +403,7 @@ public class TrackPointFragment extends OsmandExpandableListFragment implements 
 
 			@Override
 			public void onDestroyActionMode(ActionMode mode) {
-				enableSelectionMode(false);
+				setSelectionMode(false);
 				adapter.notifyDataSetInvalidated();
 			}
 
@@ -502,7 +502,7 @@ public class TrackPointFragment extends OsmandExpandableListFragment implements 
 
 			@Override
 			public boolean onCreateActionMode(ActionMode mode, Menu menu) {
-				enableSelectionMode(true);
+				setSelectionMode(true);
 				createMenuItem(menu, SELECT_FAVORITES_ACTION_MODE_ID, R.string.shared_string_add_to_favorites,
 						R.drawable.ic_action_fav_dark, R.drawable.ic_action_fav_dark,
 						MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
@@ -520,7 +520,7 @@ public class TrackPointFragment extends OsmandExpandableListFragment implements 
 
 			@Override
 			public void onDestroyActionMode(ActionMode mode) {
-				enableSelectionMode(false);
+				setSelectionMode(false);
 				adapter.notifyDataSetInvalidated();
 			}
 
@@ -907,6 +907,7 @@ public class TrackPointFragment extends OsmandExpandableListFragment implements 
 				});
 			} else {
 				row.findViewById(R.id.icon).setVisibility(View.VISIBLE);
+				ch.setVisibility(View.GONE);
 			}
 			return row;
 		}
