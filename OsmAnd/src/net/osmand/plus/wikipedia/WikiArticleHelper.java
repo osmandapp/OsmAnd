@@ -245,6 +245,7 @@ public class WikiArticleHelper {
 
 		int firstParagraphStart = content.indexOf(P_OPENED);
 		int firstParagraphEnd = content.indexOf(P_CLOSED);
+		firstParagraphEnd = firstParagraphEnd < firstParagraphStart ? content.indexOf(P_CLOSED, firstParagraphStart) : firstParagraphEnd;
 		if (firstParagraphStart == -1 || firstParagraphEnd == -1
 				|| firstParagraphEnd < firstParagraphStart) {
 			return null;
