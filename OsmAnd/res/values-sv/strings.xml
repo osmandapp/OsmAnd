@@ -1661,7 +1661,7 @@ Nyttjat utrymme är {1} MB.
     <string name="route_points">Ruttpunkter</string>
     <string name="shared_string_ellipsis">…</string>
     <string name="shared_string_selected">Markerad(e)</string>
-    <string name="shared_string_selected_lowercase">markerad(e)</string>
+    <string name="shared_string_selected_lowercase">markerade</string>
     <string name="shared_string_never">Aldrig</string>
     <string name="shared_string_none">Ingen</string>
     <string name="shared_string_and">och</string>

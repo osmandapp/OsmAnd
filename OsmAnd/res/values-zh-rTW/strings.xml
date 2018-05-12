@@ -3045,7 +3045,7 @@
     <string name="lang_lo">寮語</string>
     <string name="day_off_label">關閉</string>
     <string name="winter_and_ski_renderer">冬季和滑雪</string>
-    <string name="touring_view_renderer">旅遊風景 (對比和細節)</string>
+    <string name="touring_view_renderer">旅遊風景</string>
     <string name="nautical_renderer">航海</string>
 <string name="rendering_attr_hidePOILabels_name">POI 標籤</string>
     <string name="release_2_9">\\022 更新了快顯功能選單：顯示 POI 何時開啟/關閉
@@ -3118,7 +3118,7 @@
     <string name="waypoints_removed_from_map_markers">已從地圖標記移除航點</string>
     <string name="use_two_digits_longitude">使用兩位數的經度</string>
     <string name="shared_string_result">結果</string>
-    <string name="saved_articles">已儲存的文章</string>
+    <string name="saved_articles">已存書籤的文章</string>
     <string name="shared_string_explore">探索</string>
     <string name="wikivoyage_search_hint">搜尋：國家、城市、地區</string>
     <string name="shared_string_read">讀取</string>
@@ -3136,7 +3136,7 @@
     <string name="online_webpage_warning">此頁面僅在線上狀態提供。您想在網頁瀏覽器中開啟它嗎？</string>
     <string name="images_cache">圖像快取</string>
     <string name="delete_search_history">刪除搜尋歷史記錄</string>
-    <string name="download_images">下載圖像</string>
+    <string name="download_images">顯示圖片</string>
     <string name="download_maps_travel">旅遊地圖</string>
     <string name="shared_string_wikivoyage">維基導遊</string>
     <string name="index_item_world_wikivoyage">全球維基導遊文章</string>
@@ -3188,7 +3188,7 @@
     <string name="purchase_cancelled_dialog_title">"您已取消您的 OsmAnd  Live 訂閱"</string>
     <string name="purchase_cancelled_dialog_descr">恢復訂閱以繼續使用所有的功能：</string>
 
-    <string name="maps_you_need_descr">根據您已儲存的文章，建議您去下載下方的地圖：</string>
+    <string name="maps_you_need_descr">根據您已存書籤的文章，建議您去下載下方的地圖：</string>
     <string name="maps_you_need">您需要的地圖</string>
     <string name="open_wikipedia_link_online">線上開啟維基百科連結</string>
     <string name="open_wikipedia_link_online_description">該連結將會在瀏覽器中開啟。</string>
@@ -3199,9 +3199,10 @@
     <string name="hide_full_description">隱藏完整說明</string>
     <string name="show_full_description">顯示完整說明</string>
     <string name="nautical_render_descr">海洋導航樣式。主要功能：浮標、燈塔、海洋航道和標記、港口、海洋標記服務、海洋等深線。</string>
-    <string name="ski_map_render_descr">滑雪樣式。主要功能：以簡便的方式呈現滑雪道、航拍方式和其他滑雪特點。減少分散注意力的次要地圖物件。</string>
+    <string name="ski_map_render_descr">滑雪樣式。主要功能：以簡便的方式繪製滑雪道、滑雪纜車和其他滑雪特徵。減少分散注意力的次要地圖物件。</string>
     <string name="light_rs_render_descr">給汽車導航的簡單和對比樣式。在夜間模式下呵護雙眼。主要功能：等高線、橙色對比樣式的道路、減少分散注意力的次要地圖物件。</string>
     <string name="mapnik_render_descr">舊「mapnik」樣式，預設的繪製樣式。主要功能：顏色類似於「Mapnik」樣式。</string>
     <string name="topo_render_descr">對比樣式設計主要用於登山健行、在自然界長途跋涉和騎自行車。在複雜的外部照明中具有良好的清晰度。主要功能：對比道路和自然物件、不同類型的路線、具有進階設定的等高線，在相同的縮放級別比預設樣式有更多的細節。路面的整體選項可以區分路面品質。沒有間模式。</string>
     <string name="default_render_descr">一般用途樣式。簡化在人口密集的城市更清晰的繪製。主要功能：等高線、路線、路面品質、准入限制、路障、根據 SAC 比例繪製的路徑、激流運動的特點。</string>
+    <string name="shared_string_bookmark">書籤</string>
     </resources>

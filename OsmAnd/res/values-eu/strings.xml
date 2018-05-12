@@ -3059,7 +3059,7 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="total_donations">Dohaintzak guztira</string>
 <string name="day_off_label">itxita</string>
     <string name="winter_and_ski_renderer">Negua eta eskia</string>
-    <string name="touring_view_renderer">Bidaiatze ikuspegia (kontrastea eta xehetasunak)</string>
+    <string name="touring_view_renderer">Bidaiatze ikuspegia</string>
     <string name="nautical_renderer">Nautikoa</string>
 <string name="rendering_attr_hidePOILabels_name">POI etiketak</string>
     <string name="release_2_9">\\022 Laster-menua eguneratuta: erakutsi POI-a irekitzean edo ixtean
@@ -3142,13 +3142,13 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="online_webpage_warning">Orria sarean besterik ez dago eskuragarri. Web nabigatzaile batean ireki nahi duzu?</string>
     <string name="images_cache">Irudien cache-a</string>
     <string name="delete_search_history">Ezabatu bilaketa historiala</string>
-    <string name="download_images">Deskargatu irudiak</string>
+    <string name="download_images">Erakutsi irudiak</string>
     <string name="download_maps_travel">Bidai mapak</string>
     <string name="shared_string_wikivoyage">Wikivoyage</string>
     <string name="article_removed">Artikulua kenduta</string>
     <string name="wikivoyage_search_hint">Bilatu: Herrialdea, hiria, probintzia</string>
     <string name="shared_string_read">Irakurri</string>
-    <string name="saved_articles">Gordetako artikuluak</string>
+    <string name="saved_articles">Gogoko artikuluak</string>
     <string name="shared_string_explore">Arakatu</string>
     <string name="shared_string_contents">Edukiak</string>
     <string name="shared_string_result">Emaitza</string>
@@ -3189,9 +3189,9 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="shared_string_restart">Berrabiarazi</string>
     <string name="show_images">Erakutsi irudiak</string>
     <string name="purchase_cancelled_dialog_title">OsmAnd Live harpidetza bertan behera utzi duzu</string>
-    <string name="purchase_cancelled_dialog_descr">Berriztu harpidetza ezaugarri hauek erabiltzeko:</string>
+    <string name="purchase_cancelled_dialog_descr">Berriztu harpidetza ezaugarri guztiak erabiltzeko:</string>
 
-    <string name="maps_you_need_descr">Gorde dituzun artikuluetan oinarrituta, honako mapak deskargatzea aholkatzen dizugu:</string>
+    <string name="maps_you_need_descr">Gogoko dituzun artikuluetan oinarrituta, honako mapak deskargatzea aholkatzen dizugu:</string>
     <string name="maps_you_need">Behar dituzun mapak</string>
     <string name="travel_card_download_descr">Deskargatu Wikivoyage bidai gida hauek munduko tokien inguruko artikuluak ikusteko Internetera konexioa ez duzunean ere.</string>
 	<string name="start_editing_card_image_text">Edonork idatzi dezakeen mundu osoko doako gida.</string>
@@ -3209,9 +3209,10 @@ Area honi dagokio: %1$s x %2$s</string>
 <string name="hide_full_description">Ezkutatu deskripzio osoa</string>
     <string name="show_full_description">Erakutsi deskripzio osoa</string>
     <string name="open_wikipedia_link_online">Ireki Wikipedia esteka sarean</string>
-    <string name="open_wikipedia_link_online_description">OsmAnd aplikazioak nabigatzailera eramango zaitu eta sareko esteka ireki.</string>
+    <string name="open_wikipedia_link_online_description">Esteka web nabigatzailean irekiko da.</string>
     <string name="read_wikipedia_offline_description">Eskuratu OsmAnd Live harpidetza Wikipedia eta Wikivoyage artikuluak lineaz kanpo irakurtzeko.</string>
-    <string name="how_to_open_link">Nola ireki esteka bat?</string>
+    <string name="how_to_open_link">Nola ireki esteka?</string>
     <string name="read_wikipedia_offline">Irakurri Wikipedia sarean</string>
     <string name="download_all">Deskargatu dena</string>
+    <string name="shared_string_bookmark">Gogokoa</string>
     </resources>
