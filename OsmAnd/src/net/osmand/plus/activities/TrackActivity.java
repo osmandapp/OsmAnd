@@ -333,11 +333,15 @@ public class TrackActivity extends TabActivity {
 		}
 	}
 
-	boolean isHavingWayPoints() {
+	boolean hasTrackPoints() {
+		return getGpx() != null && getGpx().hasTrkPt();
+	}
+
+	boolean hasWayPoints() {
 		return getGpx() != null && getGpx().hasWptPt();
 	}
 
-	boolean isHavingRoutePoints() {
+	boolean hasRoutePoints() {
 		return getGpx() != null && getGpx().hasRtePt();
 	}
 
@@ -385,9 +389,9 @@ public class TrackActivity extends TabActivity {
 		OsmandFragmentPagerAdapter pagerAdapter = (OsmandFragmentPagerAdapter) viewPager.getAdapter();
 		if (pagerAdapter != null) {
 			pagerAdapter.addTab(getTabIndicator(R.string.gpx_track, TrackSegmentFragment.class));
-			if (isHavingWayPoints() || isHavingRoutePoints()) {
+			if (hasWayPoints() || hasRoutePoints()) {
 				pagerAdapter.addTab(getTabIndicator(R.string.points, TrackPointFragment.class));
-				if (openPointsTab) {
+				if (openPointsTab || !hasTrackPoints()) {
 					viewPager.setCurrentItem(1, false);
 				}
 			}
@@ -399,6 +403,9 @@ public class TrackActivity extends TabActivity {
 				bottomNav.setItemIconTintList(navColorStateList);
 				bottomNav.setItemTextColor(navColorStateList);
 				bottomNav.setVisibility(View.VISIBLE);
+				if (viewPager.getCurrentItem() == 1) {
+					bottomNav.setSelectedItemId(R.id.action_points);
+				}
 				bottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
 					@Override
 					public boolean onNavigationItemSelected(@NonNull MenuItem item) {
