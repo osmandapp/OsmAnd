@@ -2747,7 +2747,7 @@
     <string name="min_km">דק׳/ק״מ</string>
     <string name="lang_lo">לאו</string>
     <string name="wikivoyage_search_hint">חיפוש: מדינה, עיר, מחוז</string>
-    <string name="saved_articles">מאמרים שנשמרו</string>
+    <string name="saved_articles">ערכים שנוספו למועדפים</string>
     <string name="shared_string_explore">סיור</string>
     <string name="access_disable_offroute_recalc">אין אפשרות לחישוב מסלול מחדש לאחר עזיבת המסלול</string>
     <string name="access_disable_offroute_recalc_descr">אין אפשרות לחישוב המסלול מחדש לאחר חריגה מהמסלול.</string>
@@ -2789,7 +2789,7 @@
 \n • הקלטת מסע לקובץ GPX מקומי או שירות מקוון
 \n • הצגה של מהירות וגובה כרשות
 \n • הצגת קווי מתאר והצללות (דרך תוסף חיצוני)</string>
-    <string name="touring_view_renderer">תצוגת טיול (ניגודיות ופרטים)</string>
+    <string name="touring_view_renderer">תצוגת טיול</string>
     <string name="osmand_plus_extended_description_part7">תרומה ישירות ל־OSM 
 \n • דיווח על באגים בנתונים 
 \n • העלאת מסלולי GPX מהמפה ישירות ל־OSM 
@@ -2833,7 +2833,7 @@
     <string name="shared_string_wifi_only">רשת אלחוטית בלבד</string>
     <string name="select_travel_book">בחירת ספר מסע</string>
     <string name="shared_string_travel_book">ספר מסע</string>
-    <string name="download_images">הורדת תמונות</string>
+    <string name="download_images">הצגת תמונות</string>
     <string name="dd_mm_ss_format">DD°MM′SS″</string>
 	<string name="dd_dddddd_format">DD.DDDDDD°</string>
 	<string name="dd_ddddd_format">DD.DDDDD°</string>
@@ -3121,25 +3121,26 @@
     <string name="rendering_value_walkingRoutesOSMC_name">צבע לפי סימול הליכת שטח של OSMC</string>
     <string name="osmand_team">צוות OsmAnd</string>
     <string name="empty_state_markers_history">היסטוריה</string>
-    <string name="maps_you_need_descr">על סמך הערכים ששמרת, נוכל להמליץ לך להוריד את המפות הבאות:</string>
+    <string name="maps_you_need_descr">על סמך הערכים שהוספת לסימניות, נוכל להמליץ לך להוריד את המפות הבאות:</string>
     <string name="maps_you_need">מפות שדרושות לך</string>
     <string name="shared_string_restart">הפעלה מחדש</string>
-    <string name="purchase_cancelled_dialog_title">ביטלת את המינוי ל־OsmAnd חי</string>
-    <string name="purchase_cancelled_dialog_descr">יש לחדש את המינוי כדי להמשיך להשתמש בכל התכונות הבאות:</string>
+    <string name="purchase_cancelled_dialog_title">ביטלת את המינוי שלך ל־OsmAnd חי</string>
+    <string name="purchase_cancelled_dialog_descr">יש לחדש את המינוי כדי להמשיך להשתמש בכל התכונות:</string>
 
     <string name="download_all">להוריד הכול</string>
     <string name="open_wikipedia_link_online">פתיחת הקישור של ויקיפדיה בדפדפן</string>
-    <string name="open_wikipedia_link_online_description">OsmAnd יפנה אותך לדפדפן ויפתח את הקישור.</string>
+    <string name="open_wikipedia_link_online_description">הקישור ייפתח בדפדפן.</string>
     <string name="read_wikipedia_offline_description">עליך לערוך מינוי ל־OsmAnd חי כדי לקרוא ערכים מוויקיפדיה ומוויקימסע ללא חיבור לאינטרנט.</string>
-    <string name="how_to_open_link">כיצד לפתוח קישור?</string>
+    <string name="how_to_open_link">כיצד לפתוח את הקישור?</string>
     <string name="read_wikipedia_offline">קריאת ויקיפדיה ללא חיבור לאינטרנט</string>
     <string name="edit_tilesource_elliptic_tile">היטל כדורי</string>
     <string name="hide_full_description">הסתרת התיאור המלא</string>
     <string name="show_full_description">הצגת התיאור המלא</string>
-    <string name="nautical_render_descr">סגנון לניווט בים ובנהרות. תכונות מפתח: מצופים, מגדלורים, קווים וסימונים לניווט במים, מעגנים, שירותי סימונים ימיים, קווי מתאר לתיאור עומק.</string>
-    <string name="ski_map_render_descr">סגנון גלישת סקי. תכונות מפתח: מסלולי גלישה, דרכים אוויריות ותכונות סקי נוספות בדרך נוחה. עצמים משניים במפה פחות מושכים תשומת לב.</string>
+    <string name="nautical_render_descr">סגנון לניווט ימי. תכונות מפתח: מצופים, מגדלורים, מסלולי נהרות, סימונים ומסלולים לניווט בים, מעגנים, שירותי סימונים ימיים, קווי מתאר לתיאור עומק.</string>
+    <string name="ski_map_render_descr">סגנון גלישת סקי. תכונות מפתח: עיבוד מסלולי גלישה, מעליות סקי ותכונות סקי נוספות בדרך נוחה. עצמים משניים במפה פחות מושכים תשומת לב.</string>
     <string name="light_rs_render_descr">סגנון פשוט וחד לניווט עם מכונית. נוח לצפייה במצב לילה. תכונות מפתח: קווי מתאר, כבישים בניגודיות גבוהה ובכתום, פריטים משניים במפה פחות מושכים תשומת לב.</string>
     <string name="topo_render_descr">סגנונות ניגודיות תוכננו בעיקר לטובת טיולים בחיק הטבע, מסלולי טיול בהרים ורכיבה על אופניים. תצוגה מותאמת לקריאה בתנאי תאורת חוץ מורכבים. תכונות מפתח: ניגודיות בין דרכים לעצמים בטבע, סוגים שונים של מסלולים, קווי מתאר עם הגדרות מתקדמות, פרטים נוספים ברמות תקריב מתואמות מעבר לסגנון בררת המחדל. אפשרות שלמות משטח מאפשרת לך להבדיל בין דרכים עם איכות משטח שונה. אין מצב לילה.</string>
-    <string name="mapnik_render_descr">סגנון עיבוד מפה בתצורת mapnik. תכונות מפתח: הצבעים דומים לסגנון של Mapnik.</string>
-    <string name="default_render_descr">סגנון מטרה כללית. עיבוד פשוט יותר כדי לקבל מפות נקיות יותר בערים מאוכלסות. תכונות מפתח: קווי מתאר, שלמות המשטח, הגבלות גישה, סימוני מספרי כבישים, עיבוד נתיבים לפי מדד SAC, תכונות ספורט מים לבנים.</string>
+    <string name="mapnik_render_descr">סגנון עיבוד מפה בתצורת ‚Mapnik’. תכונות מפתח: הצבעים דומים לסגנון של ‚Mapnik’.</string>
+    <string name="default_render_descr">סגנון מטרה כללית. עיבוד נקי יותר בערים מאוכלסות לעייפה. תכונות מפתח: קווי מתאר, שלמות המשטח, הגבלות גישה, סימוני מספרי כבישים, עיבוד נתיבים לפי מדד SAC, תכונות ספורט מים לבנים.</string>
+    <string name="shared_string_bookmark">סימנייה</string>
     </resources>
