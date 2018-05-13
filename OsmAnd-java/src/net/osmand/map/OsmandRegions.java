@@ -1,6 +1,5 @@
 package net.osmand.map;
 
-
 import net.osmand.OsmAndCollator;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
@@ -705,19 +704,22 @@ public class OsmandRegions {
 		}
 		if (mapDataObjects != null) {
 			for (BinaryMapDataObject obj : mapDataObjects) {
-				result.add(getRegionData(getFullName(obj)));
+				if (obj != null) {
+					String fullName = getFullName(obj);
+					WorldRegion reg = getRegionData(fullName);
+					if (reg != null) {
+						result.add(reg);
+					}
+
+				}
+
 			}
 		}
 		return result;
 	}
 
-	public BinaryMapDataObject findBinaryMapDataObject(LatLon latLon) {
-		List<BinaryMapDataObject> mapDataObjects = null;
-		try {
-			mapDataObjects = getBinaryMapDataObjects(latLon);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+	public BinaryMapDataObject findBinaryMapDataObject(LatLon latLon) throws IOException {
+		List<BinaryMapDataObject> mapDataObjects = getBinaryMapDataObjects(latLon);
 		BinaryMapDataObject res = null;
 		double smallestArea = -1;
 		if (mapDataObjects != null) {
@@ -732,7 +734,6 @@ public class OsmandRegions {
 				}
 			}
 		}
-
 		return res;
 	}
 

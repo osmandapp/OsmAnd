@@ -15,6 +15,7 @@ import net.osmand.IndexConstants;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.map.OsmandRegions;
+import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -23,6 +24,7 @@ import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.resources.AmenityIndexRepositoryBinary;
 import net.osmand.plus.wikivoyage.article.WikivoyageArticleWikiLinkFragment;
+import net.osmand.util.Algorithms;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -93,26 +95,28 @@ public class WikiArticleHelper {
 			OsmandApplication application = activity.getMyApplication();
 			List<Amenity> results = new ArrayList<>();
 			if (application != null && !isCancelled()) {
-				IndexItem item = null;
-				try {
-					if (articleLatLon != null) {
-						item = DownloadResources.findSmallestIndexItemAt(application,
-								articleLatLon, DownloadActivityType.WIKIPEDIA_FILE);
-					}
-				} catch (IOException e) {
-					Log.e(TAG, e.getMessage(), e);
-				}
-				String filename = null;
-				if (item != null && item.isDownloaded()) {
-					filename = getFilenameFromIndex(item.getFileName());
-				}
-				AmenityIndexRepositoryBinary repository = application.getResourceManager()
-						.getAmenityRepositoryByFileName(filename == null ? "" : filename);
-				if (repository == null) {
-					if ((regionName == null || regionName.isEmpty()) && item != null) {
-						regionName = (getRegionName(item.getFileName(), application.getRegions()));
-					}
+				List<WorldRegion> regions;
+				if (articleLatLon != null) {
+					regions = application.getRegions().getWoldRegions(articleLatLon);
+				} else {
 					return null;
+				}
+				AmenityIndexRepositoryBinary repository = getAmenityRepositoryByRegion(regions, application);
+				if (repository == null) {
+					if (regionName == null || regionName.isEmpty()) {
+						IndexItem item = null;
+						try {
+							item = DownloadResources.findSmallestIndexItemAt(application, articleLatLon,
+                                    DownloadActivityType.WIKIPEDIA_FILE);
+						} catch (IOException e) {
+							Log.e(TAG, e.getMessage(), e);
+						}
+						if (item != null) {
+							regionName = (getRegionName(item.getFileName(), application.getRegions()));
+						}
+						return null;
+					}
+
 				} else {
 					if (isCancelled()) {
 						return null;
@@ -122,6 +126,23 @@ public class WikiArticleHelper {
 				}
 			}
 			return results;
+		}
+
+		@Nullable
+		private AmenityIndexRepositoryBinary getAmenityRepositoryByRegion(@NonNull List<WorldRegion> regions, @NonNull OsmandApplication app) {
+			AmenityIndexRepositoryBinary repo = null;
+			for (WorldRegion reg : regions) {
+				if (reg != null) {
+					if (repo != null) {
+						break;
+					}
+					repo = app.getResourceManager()
+							.getAmenityRepositoryByFileName(Algorithms
+									.capitalizeFirstLetterAndLowercase(reg.getRegionDownloadName()) +
+									IndexConstants.BINARY_WIKI_MAP_INDEX_EXT);
+				}
+			}
+			return repo;
 		}
 
 		@Override
