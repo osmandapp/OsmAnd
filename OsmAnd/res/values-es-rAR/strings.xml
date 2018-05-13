@@ -1508,7 +1508,7 @@ Lon %2$s</string>
     <string name="max_level_download_tile">Máximo zoom en línea</string>
     <string name="max_level_download_tile_descr">No buscar en las teselas de mapas en línea para niveles de zoom más allá de esto.</string>
     <string name="route_general_information">Distancia total %1$s, tiempo de viaje %2$d h %3$d min.</string>
-    <string name="router_service_descr">Elige un servicio de navegación con o sin conexión.</string>
+    <string name="router_service_descr">Servicios de navegación con o sin conexión.</string>
     <string name="router_service">Servicio de navegación</string>
     <string name="sd_dir_not_accessible">¡Carpeta de almacenamiento de datos en la tarjeta de memoria inaccesible!</string>
     <string name="download_question">¿Descargar {0} - {1} ?</string>
@@ -2424,7 +2424,7 @@ Lon %2$s</string>
     
     
     <string name="routing_attr_height_obstacles_name">Usar datos de elevación</string>
-    <string name="routing_attr_height_obstacles_description">Usa datos de elevación del terreno provistos por SRTM, ASTER y EU-DEM.</string>
+    <string name="routing_attr_height_obstacles_description">Datos de elevación del terreno provistos por SRTM, ASTER y EU-DEM.</string>
 
     <string name="routing_attr_driving_style_name">Estilo de conducción</string>
     
@@ -3058,6 +3058,6 @@ Lon %2$s</string>
     <string name="mapnik_render_descr">Antiguo estilo predefinido de Mapnik. Características: los colores son similares al estilo Mapnik.</string>
     <string name="default_render_descr">Estilo de uso general. Visualización limpia y simplificada para ciudades densamente pobladas. Características principales: Curvas de nivel, recorridos, calidad de la superficie, restricciones de acceso, escudos, visualización de caminos según escala SAC, características de deportes acuáticos.</string>
     <string name="touring_view_render_descr">Estilo de alto detalle para turismo. Incluye todas las opciones de configuración del estilo predefinido, además: Muestra tanto detalle como sea posible, en particular todos los caminos, senderos y otras formas de viaje. Una clara distinción visual entre todos los tipos de carreteras, que recuerda a muchos atlas de rutas turísticas. Esquema de color de alto contraste para uso en exteriores, modo diurno y nocturno.</string>
-    <string name="shared_string_bookmark">Favoritos</string>
+    <string name="shared_string_bookmark">Favorito</string>
     <string name="off_road_render_descr">Adecuado para usarlo durante la conducción todoterreno. Adecuado para usarlo como un mapa subyacente con imágenes satelitales verdes . Características principales: Reducción del grosor en carreteras principales, aumento del grosor de las vías, senderos, bicicletas y otras rutas. Basado en el estilo «Topo».</string>
     </resources>

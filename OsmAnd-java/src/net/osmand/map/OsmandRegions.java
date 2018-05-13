@@ -1,6 +1,5 @@
 package net.osmand.map;
 
-
 import net.osmand.OsmAndCollator;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
@@ -695,11 +694,42 @@ public class OsmandRegions {
 		}
 	}
 
-	public BinaryMapDataObject findBinaryMapDataObject(LatLon latLon) throws IOException {
+	public List<WorldRegion> getWoldRegionsAt(LatLon latLon) throws IOException {
+		List<WorldRegion> result = new ArrayList<>();
+		List<BinaryMapDataObject> mapDataObjects = getBinaryMapDataObjectsAt(latLon);
+		for (BinaryMapDataObject obj : mapDataObjects) {
+			String fullName = getFullName(obj);
+			if (fullName != null) {
+				WorldRegion reg = getRegionData(fullName);
+				if (reg != null) {
+					result.add(reg);
+				}
+			}
+		}
+		return result;
+	}
+
+	public BinaryMapDataObject getSmallestBinaryMapDataObjectAt(LatLon latLon) throws IOException {
+		List<BinaryMapDataObject> mapDataObjects = getBinaryMapDataObjectsAt(latLon);
+		BinaryMapDataObject res = null;
+		double smallestArea = -1;
+		for (BinaryMapDataObject o : mapDataObjects) {
+			double area = OsmandRegions.getArea(o);
+			if (smallestArea == -1) {
+				smallestArea = area;
+				res = o;
+			} else if (area < smallestArea) {
+				smallestArea = area;
+				res = o;
+			}
+		}
+		return res;
+	}
+
+	private List<BinaryMapDataObject> getBinaryMapDataObjectsAt(LatLon latLon) throws IOException {
 		int point31x = MapUtils.get31TileNumberX(latLon.getLongitude());
 		int point31y = MapUtils.get31TileNumberY(latLon.getLatitude());
 
-		BinaryMapDataObject res = null;
 		List<BinaryMapDataObject> mapDataObjects;
 		try {
 			mapDataObjects = queryBbox(point31x, point31x, point31y, point31y);
@@ -729,19 +759,7 @@ public class OsmandRegions {
 					}
 				}
 			}
-			double smallestArea = -1;
-			for (BinaryMapDataObject o : mapDataObjects) {
-				double area = OsmandRegions.getArea(o);
-				if (smallestArea == -1) {
-					smallestArea = area;
-					res = o;
-				} else if (area < smallestArea) {
-					smallestArea = area;
-					res = o;
-				}
-			}
 		}
-		return res;
+		return mapDataObjects;
 	}
-
 }

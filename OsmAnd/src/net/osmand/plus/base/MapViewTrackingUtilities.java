@@ -161,7 +161,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 			protected BinaryMapDataObject doInBackground(LatLon... latLons) {
 				try {
 					if (latLons != null && latLons.length > 0) {
-						return app.getRegions().findBinaryMapDataObject(latLons[0]);
+						return app.getRegions().getSmallestBinaryMapDataObjectAt(latLons[0]);
 					}
 				} catch (IOException e) {
 					// ignore
