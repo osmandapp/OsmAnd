@@ -3130,7 +3130,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="open_in_browser_wiki">Otwórz artykuł online</string>
     <string name="open_in_browser_wiki_description">Pokaż ten artykuł w przeglądarce.</string>
     <string name="download_wiki_region_placeholder">ten region</string>
-    <string name="wiki_article_search_text">Wyszukiwanie niezbędnych artykułów wiki</string>
+    <string name="wiki_article_search_text">Wyszukiwanie odpowiedniego artykułu wiki</string>
     <string name="wiki_article_not_found">Nie znaleziono artykułu</string>
     <string name="how_to_open_wiki_title">Jak otworzyć artykuły z Wikipedii?</string>
 <string name="shared_string_restart">Uruchom ponownie</string>
