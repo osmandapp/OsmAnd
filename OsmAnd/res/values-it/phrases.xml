@@ -2475,4 +2475,9 @@
 	<string name="poi_wiki_lang_af">Africaans wiki</string>
 	<string name="poi_full_height_turnstile">Tornello a tutta altezza</string>
 	<string name="poi_stile">Scaletta</string>
+	<string name="poi_aerialway_pylon">Pilone di sollevamento aereo</string>
+
+	<string name="poi_recycling_foil">Pellicola</string>
+	<string name="poi_prosecutor">Procuratore</string>
+	<string name="synonyms_poi_nightclub">Discoteca;Disko</string>
 	</resources>
