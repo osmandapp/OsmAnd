@@ -41,8 +41,8 @@ public class ContributionVersionActivity extends OsmandListActivity {
 	private static final int INSTALL_BUILD = 2;
 	private static final int ACTIVITY_TO_INSTALL = 23;
 	
-	private static final String URL_TO_RETRIEVE_BUILDS = "https://download.osmand.net/builds.php";
-	private static final String URL_GET_BUILD = "https://download.osmand.net/";
+	private static final String URL_TO_RETRIEVE_BUILDS = "https://osmand.net/builds";
+	private static final String URL_GET_BUILD = "https://osmand.net/";
 	
 	private ProgressDialog progressDlg;
 	private Date currentInstalledDate;

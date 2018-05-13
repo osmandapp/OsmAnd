@@ -446,7 +446,7 @@ public abstract class ImageCard extends AbstractCard {
 				if (this.params != null) {
 					pms.putAll(this.params);
 				}
-				String response = AndroidNetworkUtils.sendRequest(app, "https://osmand.net/api/cm_place.php", pms,
+				String response = AndroidNetworkUtils.sendRequest(app, "https://osmand.net/api/cm_place", pms,
 						"Requesting location images...", false, false);
 
 				if (!Algorithms.isEmpty(response)) {

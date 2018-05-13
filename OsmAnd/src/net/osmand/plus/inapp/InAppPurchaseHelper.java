@@ -487,7 +487,7 @@ public class InAppPurchaseHelper {
 				}
 
 				return AndroidNetworkUtils.sendRequest(ctx,
-						"http://download.osmand.net/subscription/register.php",
+						"https://osmand.net/subscription/register",
 						parameters, "Requesting userId...", true, true);
 
 			} catch (Exception e) {
@@ -681,7 +681,7 @@ public class InAppPurchaseHelper {
 			parameters.put("token", token);
 
 			AndroidNetworkUtils.sendRequestAsync(ctx,
-					"http://download.osmand.net/subscription/purchased.php",
+					"https://osmand.net/subscription/purchased",
 					parameters, "Sending purchase info...", true, true, new OnRequestResultListener() {
 						@Override
 						public void onResult(String result) {

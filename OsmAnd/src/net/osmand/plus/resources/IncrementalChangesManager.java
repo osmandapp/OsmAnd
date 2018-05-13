@@ -25,7 +25,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class IncrementalChangesManager {
 
-	private static final String URL = "http://download.osmand.net/check_live.php";
+	private static final String URL = "https://osmand.net/check_live";
 	private static final org.apache.commons.logging.Log log = PlatformUtil.getLog(IncrementalChangesManager.class);
 	private ResourceManager resourceManager;
 	private final Map<String, RegionUpdateFiles> regions = new ConcurrentHashMap<String, IncrementalChangesManager.RegionUpdateFiles>();

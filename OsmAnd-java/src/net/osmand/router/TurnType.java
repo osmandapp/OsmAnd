@@ -416,9 +416,9 @@ public class TurnType {
 	public static int convertType(String lane) {
 		int turn;
 		// merge should be recognized as continue route (but it could displayed differently)
-		if (lane.equals("none") || lane.equals("through") || 
-				lane.equals("merge_to_left") || 
-				lane.equals("merge_to_right")) {
+		if (lane.equals("none") || lane.equals("through") 
+				|| lane.equals("merge_to_left") 
+				|| lane.equals("merge_to_right")) {
 			turn = TurnType.C;
 		} else if (lane.equals("slight_right") ) {
 			turn = TurnType.TSLR;

@@ -460,7 +460,7 @@ public class TileSourceManager {
 	public static List<TileSourceTemplate> downloadTileSourceTemplates(String versionAsUrl) {
 		final List<TileSourceTemplate> templates = new ArrayList<TileSourceTemplate>();
 		try {
-			URLConnection connection = NetworkUtils.getHttpURLConnection("http://download.osmand.net//tile_sources.php?" + versionAsUrl);
+			URLConnection connection = NetworkUtils.getHttpURLConnection("https://osmand.net/tile_sources?" + versionAsUrl);
 			XmlPullParser parser = PlatformUtil.newXMLPullParser();
 			parser.setInput(connection.getInputStream(), "UTF-8");
 			int tok;

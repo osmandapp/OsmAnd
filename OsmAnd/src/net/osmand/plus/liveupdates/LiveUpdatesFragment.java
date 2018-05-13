@@ -201,7 +201,7 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppPurc
 				readMoreBtn.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						Uri uri = Uri.parse("https://osmand.net/osm_live.php");
+						Uri uri = Uri.parse("https://osmand.net/osm_live");
 						Intent goToOsmLive = new Intent(Intent.ACTION_VIEW, uri);
 						startActivity(goToOsmLive);
 					}

@@ -287,7 +287,7 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 					parameters.put("email", email);
 
 					return AndroidNetworkUtils.sendRequest(getMyApplication(),
-							"http://download.osmand.net/subscription/register_email.php",
+							"https://osmand.net/subscription/register_email",
 							parameters, "Subscribing email...", true, true);
 
 				} catch (Exception e) {

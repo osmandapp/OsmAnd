@@ -229,7 +229,7 @@ public class SubscriptionFragment extends BaseOsmAndDialogFragment implements In
 						showProgress(null);
 
 						AndroidNetworkUtils.sendRequestAsync(getMyApplication(),
-								"http://download.osmand.net/subscription/update.php",
+								"https://osmand.net/subscription/update",
 								parameters, "Sending data...", true, true, new AndroidNetworkUtils.OnRequestResultListener() {
 									@Override
 									public void onResult(String result) {

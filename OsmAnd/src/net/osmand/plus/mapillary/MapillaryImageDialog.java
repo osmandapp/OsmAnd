@@ -64,9 +64,9 @@ public class MapillaryImageDialog extends ContextMenuCardDialog {
 	private static final String KEY_MAPILLARY_DIALOG_CA = "key_mapillary_dialog_ca";
 
 	private static final String MAPILLARY_VIEWER_URL_TEMPLATE =
-			"https://osmand.net/api/mapillary/photo-viewer.php?photo_id=";
+			"https://osmand.net/api/mapillary/photo-viewer?photo_id=";
 	private static final String MAPILLARY_HIRES_IMAGE_URL_TEMPLATE =
-			"https://osmand.net/api/mapillary/get_photo.php?hires=true&photo_id=";
+			"https://osmand.net/api/mapillary/get_photo?hires=true&photo_id=";
 
 	private static final String WEBGL_ERROR_MESSAGE = "Error creating WebGL context";
 
