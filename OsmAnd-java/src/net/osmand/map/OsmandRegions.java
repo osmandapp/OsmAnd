@@ -695,11 +695,51 @@ public class OsmandRegions {
 		}
 	}
 
-	public BinaryMapDataObject findBinaryMapDataObject(LatLon latLon) throws IOException {
+	public List<WorldRegion> getWoldRegions(LatLon latLon) {
+		List<WorldRegion> result = new ArrayList<>();
+		List<BinaryMapDataObject> mapDataObjects = null;
+		try {
+			mapDataObjects = getBinaryMapDataObjects(latLon);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		if (mapDataObjects != null) {
+			for (BinaryMapDataObject obj : mapDataObjects) {
+				result.add(getRegionData(getFullName(obj)));
+			}
+		}
+		return result;
+	}
+
+	public BinaryMapDataObject findBinaryMapDataObject(LatLon latLon) {
+		List<BinaryMapDataObject> mapDataObjects = null;
+		try {
+			mapDataObjects = getBinaryMapDataObjects(latLon);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		BinaryMapDataObject res = null;
+		double smallestArea = -1;
+		if (mapDataObjects != null) {
+			for (BinaryMapDataObject o : mapDataObjects) {
+				double area = OsmandRegions.getArea(o);
+				if (smallestArea == -1) {
+					smallestArea = area;
+					res = o;
+				} else if (area < smallestArea) {
+					smallestArea = area;
+					res = o;
+				}
+			}
+		}
+
+		return res;
+	}
+
+	private List<BinaryMapDataObject> getBinaryMapDataObjects(LatLon latLon) throws IOException {
 		int point31x = MapUtils.get31TileNumberX(latLon.getLongitude());
 		int point31y = MapUtils.get31TileNumberY(latLon.getLatitude());
 
-		BinaryMapDataObject res = null;
 		List<BinaryMapDataObject> mapDataObjects;
 		try {
 			mapDataObjects = queryBbox(point31x, point31x, point31y, point31y);
@@ -729,19 +769,7 @@ public class OsmandRegions {
 					}
 				}
 			}
-			double smallestArea = -1;
-			for (BinaryMapDataObject o : mapDataObjects) {
-				double area = OsmandRegions.getArea(o);
-				if (smallestArea == -1) {
-					smallestArea = area;
-					res = o;
-				} else if (area < smallestArea) {
-					smallestArea = area;
-					res = o;
-				}
-			}
 		}
-		return res;
+		return mapDataObjects;
 	}
-
 }
