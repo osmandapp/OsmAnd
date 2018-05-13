@@ -3130,13 +3130,13 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="osmand_team">OsmAnd-Team</string>
     <string name="shared_string_restart">Neustart</string>
     <string name="show_images">Bilder anzeigen</string>
-    <string name="purchase_cancelled_dialog_title">Sie haben Ihr OsmAnd Live-Abonnement gekündigt</string>
+    <string name="purchase_cancelled_dialog_title">Sie haben ihr OsmAnd Live-Abonnement gekündigt</string>
     <string name="purchase_cancelled_dialog_descr">Erneuern Sie Ihr Abonnement, um weiterhin alle Funktionen nutzen zu können:</string>
 
     <string name="maps_you_need_descr">Basierend auf den Artikeln, die Sie mit einem Lesezeichen versehen haben, werden Ihnen die folgenden Karten zum Download empfohlen:</string>
     <string name="maps_you_need">Benötigte Karten</string>
     <string name="open_wikipedia_link_online">Wikipedia-Link online öffnen</string>
-    <string name="open_wikipedia_link_online_description">Der Link wird in einem Webbrowser geöffnet.</string>
+    <string name="open_wikipedia_link_online_description">Der Link wird im Webbrowser geöffnet.</string>
     <string name="read_wikipedia_offline_description">Holen Sie sich das OsmAnd Live Abonnement, um Wikipedia und Wikivoyage Artikel offline zu lesen.</string>
     <string name="how_to_open_link">Wie öffnet man den Link?</string>
     <string name="read_wikipedia_offline">Wikipedia offline lesen</string>
