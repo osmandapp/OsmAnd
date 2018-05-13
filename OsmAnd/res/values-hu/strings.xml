@@ -2959,4 +2959,48 @@ Kérlek adj meg egy teljes kódot</string>
 \n
 \n</string>
     <string name="osm_recipient_stat">Szerkesztések: %1$s, összeg %2$s mBTC</string>
+    <string name="shared_string_bookmark">Könyvjelző</string>
+    <string name="hide_full_description">Teljes leírás elrejtése</string>
+    <string name="show_full_description">Teljes leírás megjelenítése</string>
+    <string name="open_wikipedia_link_online">Wikipédia link megnyitása online</string>
+    <string name="open_wikipedia_link_online_description">A link a böngészőben fog megnyílni.</string>
+    <string name="read_wikipedia_offline">Wikipédia olvasása offline</string>
+    <string name="download_all">Összes letöltése</string>
+    <string name="shared_string_restart">Újraindítás</string>
+    <string name="show_images">Képek megjelenítése</string>
+    <string name="maps_you_need_descr">A könyvjelzőzött cikkek alapján az alábbi térképek letöltését ajánljuk neked:</string>
+    <string name="maps_you_need">Ajánlott térképek</string>
+    <string name="osmand_team">OsmAnd csapat</string>
+    <string name="popular_destinations">Népszerű célpontok</string>
+    <string name="paid_app">Fizetős alkalmazás</string>
+    <string name="paid_plugin">Fizetős bővítmény</string>
+    <string name="update_is_available">Frissítés érhető el</string>
+	<string name="download_file">Fájl letöltése</string>
+    <string name="monthly_map_updates">Térképfrissítés: <b>havonta</b></string>
+    <string name="daily_map_updates">Térképfrissítés: <b>óránként</b></string>
+    <string name="in_app_purchase">Alkalmazáson belüli vásárlás</string>
+    <string name="in_app_purchase_desc">Egyszeri fizetés</string>
+    <string name="in_app_purchase_desc_ex">Ha egyszer megveszed, mindig elérhető lesz számodra.</string>
+    <string name="purchase_unlim_title">Vásárlás - %1$s</string>
+    <string name="purchase_subscription_title">Előfizetés - %1$s</string>
+
+    <string name="wikivoyage_offline">Wikivoyage offline</string>
+
+    <string name="unlimited_downloads">Korlátlan letöltés</string>
+    <string name="wikipedia_offline">Wikipédia offline</string>
+    <string name="contour_lines_hillshade_maps">Szintvonal és domborzat térképek</string>
+    <string name="unlock_all_features">Összes OsmAnd képesség feloldása</string>
+
+    <string name="purchase_dialog_title">Konstrukció kiválasztása</string>
+    <string name="shared_string_only_with_wifi">Csak Wi-Fi</string>
+    <string name="wikivoyage_download_pics">Képek letöltése</string>
+    <string name="wikivoyage_download_pics_descr">A cikkekben szereplő képek letölthetőek offline használatra.
+\n Később itt módosíthatod a döntésedet: „Felfedezés” → „Opciók”.</string>
+    <string name="shared_string_wifi_only">Csak Wi-Fi</string>
+    <string name="select_travel_book">Útikönyv kiválasztása</string>
+    <string name="shared_string_travel_book">Útikönyv</string>
+    <string name="online_webpage_warning">Az oldal csak online érhető el. Megnyitod böngészőben?</string>
+    <string name="images_cache">Kép tároló</string>
+    <string name="delete_search_history">Keresési előzmények törlése</string>
+    <string name="download_images">Képek megjelenítése</string>
     </resources>

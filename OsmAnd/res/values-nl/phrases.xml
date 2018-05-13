@@ -1437,8 +1437,8 @@
 	<string name="poi_payment_coins_50c12">€ 0.50, € 1, en € 2 munten</string>
 	<string name="poi_payment_telephone_cards_yes">Telefoonkaarten</string>
 	<string name="poi_payment_telephone_cards_no">Telefoonkaarten niet mogelijk</string>
-	<string name="poi_payment_credit_cards_yes">Credit card</string>
-	<string name="poi_payment_credit_cards_no">Betaling met Creditcard niet mogelijk</string>
+	<string name="poi_payment_credit_cards_yes">Creditcards</string>
+	<string name="poi_payment_credit_cards_no">Betaling met creditcard niet mogelijk</string>
 	<string name="poi_payment_notes_yes">Bankbiljetten</string>
 	<string name="poi_payment_notes_no">Betaling met bankbiljetten niet mogelijk</string>
 	<string name="poi_payment_electronic_purses_yes">Elektronische portemonnee</string>
@@ -2730,5 +2730,7 @@
 	<string name="poi_gambling_slot_machines">Gokautomaten</string>
 	<string name="poi_gambling_betting">Wedden</string>
 	<string name="poi_gambling_bingo">Bingo</string>
+
+	<string name="poi_charging_station_filter">Oplaadpunt</string>
 
 	</resources>
