@@ -461,16 +461,11 @@ public class DownloadResources extends DownloadResourceGroup {
 		return findIndexItemsAt(app, latLon, type, false);
 	}
 
-	public static List<IndexItem> findIndexItemsAt(OsmandApplication app, LatLon latLon, DownloadActivityType type, boolean includeDownloaded) {
+	public static List<IndexItem> findIndexItemsAt(OsmandApplication app, LatLon latLon, DownloadActivityType type, boolean includeDownloaded) throws IOException {
 		List<IndexItem> res = new ArrayList<>();
 		OsmandRegions regions = app.getRegions();
 		DownloadIndexesThread downloadThread = app.getDownloadThread();
-		List<WorldRegion> downloadRegions = null;
-		try {
-			downloadRegions = regions.getWoldRegions(latLon);
-		} catch (IOException e) {
-			android.util.Log.e(TAG, e.getMessage(), e);
-		}
+		List<WorldRegion> downloadRegions = regions.getWoldRegions(latLon);
 		if (downloadRegions != null) {
 			for (WorldRegion downloadRegion : downloadRegions) {
 				if (includeDownloaded || !isIndexItemDownloaded(downloadThread, type, downloadRegion, res)) {
