@@ -118,7 +118,7 @@ public class WikiArticleHelper {
 								Log.e(TAG, e.getMessage(), e);
 							}
 							if (item != null) {
-								regionName = (getRegionName(item.getFileName(), application.getRegions()));
+								regionName = getRegionName(item.getFileName(), application.getRegions());
 							}
 							return null;
 						}
