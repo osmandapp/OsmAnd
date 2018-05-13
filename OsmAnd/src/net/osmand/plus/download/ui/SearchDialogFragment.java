@@ -408,7 +408,7 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 				Amenity amenity = cityItem.getAmenity();
 				BinaryMapDataObject o = null;
 				try {
-					o = osmandRegions.findBinaryMapDataObject(amenity.getLocation());
+					o = osmandRegions.getSmallestBinaryMapDataObjectAt(amenity.getLocation());
 				} catch (IOException e) {
 					// ignore
 				}

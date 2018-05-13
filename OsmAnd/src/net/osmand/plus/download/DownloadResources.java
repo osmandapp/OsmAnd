@@ -5,15 +5,12 @@ import android.support.annotation.Nullable;
 
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
-import net.osmand.binary.BinaryMapDataObject;
-import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.LatLon;
 import net.osmand.map.OsmandRegions;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.download.DownloadOsmandIndexesHelper.AssetIndexItem;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
-import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
 
@@ -23,7 +20,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -465,7 +461,7 @@ public class DownloadResources extends DownloadResourceGroup {
 		List<IndexItem> res = new ArrayList<>();
 		OsmandRegions regions = app.getRegions();
 		DownloadIndexesThread downloadThread = app.getDownloadThread();
-		List<WorldRegion> downloadRegions = regions.getWoldRegions(latLon);
+		List<WorldRegion> downloadRegions = regions.getWoldRegionsAt(latLon);
 		for (WorldRegion downloadRegion : downloadRegions) {
 			if (includeDownloaded || !isIndexItemDownloaded(downloadThread, type, downloadRegion, res)) {
 				addIndexItem(downloadThread, type, downloadRegion, res);

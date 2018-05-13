@@ -694,9 +694,9 @@ public class OsmandRegions {
 		}
 	}
 
-	public List<WorldRegion> getWoldRegions(LatLon latLon) throws IOException {
+	public List<WorldRegion> getWoldRegionsAt(LatLon latLon) throws IOException {
 		List<WorldRegion> result = new ArrayList<>();
-		List<BinaryMapDataObject> mapDataObjects = getBinaryMapDataObjects(latLon);
+		List<BinaryMapDataObject> mapDataObjects = getBinaryMapDataObjectsAt(latLon);
 		for (BinaryMapDataObject obj : mapDataObjects) {
 			String fullName = getFullName(obj);
 			if (fullName != null) {
@@ -709,8 +709,8 @@ public class OsmandRegions {
 		return result;
 	}
 
-	public BinaryMapDataObject findBinaryMapDataObject(LatLon latLon) throws IOException {
-		List<BinaryMapDataObject> mapDataObjects = getBinaryMapDataObjects(latLon);
+	public BinaryMapDataObject getSmallestBinaryMapDataObjectAt(LatLon latLon) throws IOException {
+		List<BinaryMapDataObject> mapDataObjects = getBinaryMapDataObjectsAt(latLon);
 		BinaryMapDataObject res = null;
 		double smallestArea = -1;
 		for (BinaryMapDataObject o : mapDataObjects) {
@@ -726,7 +726,7 @@ public class OsmandRegions {
 		return res;
 	}
 
-	private List<BinaryMapDataObject> getBinaryMapDataObjects(LatLon latLon) throws IOException {
+	private List<BinaryMapDataObject> getBinaryMapDataObjectsAt(LatLon latLon) throws IOException {
 		int point31x = MapUtils.get31TileNumberX(latLon.getLongitude());
 		int point31y = MapUtils.get31TileNumberY(latLon.getLatitude());
 

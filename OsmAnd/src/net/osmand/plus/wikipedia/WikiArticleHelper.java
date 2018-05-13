@@ -12,7 +12,6 @@ import android.text.Html;
 import android.util.Log;
 
 import net.osmand.IndexConstants;
-import net.osmand.ResultMatcher;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.map.OsmandRegions;
@@ -99,7 +98,7 @@ public class WikiArticleHelper {
 				List<WorldRegion> regions = null;
 				if (articleLatLon != null) {
 					try {
-						regions = application.getRegions().getWoldRegions(articleLatLon);
+						regions = application.getRegions().getWoldRegionsAt(articleLatLon);
 					} catch (IOException e) {
 						Log.e(TAG, e.getMessage(), e);
 					}
