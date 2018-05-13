@@ -473,10 +473,8 @@ public class DownloadResources extends DownloadResourceGroup {
 		}
 		if (downloadRegions != null) {
 			for (WorldRegion downloadRegion : downloadRegions) {
-				if (downloadRegion != null) {
-					if (includeDownloaded || !isIndexItemDownloaded(downloadThread, type, downloadRegion, res)) {
-						addIndexItem(downloadThread, type, downloadRegion, res);
-					}
+				if (includeDownloaded || !isIndexItemDownloaded(downloadThread, type, downloadRegion, res)) {
+					addIndexItem(downloadThread, type, downloadRegion, res);
 				}
 			}
 		}
