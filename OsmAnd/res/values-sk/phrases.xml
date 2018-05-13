@@ -256,9 +256,9 @@
 	<string name="poi_government">Vládne orgány</string>
 	<string name="poi_office_administrative">Lokálne úrady</string>
 	<string name="poi_customs">Colná správa</string>
-	<string name="poi_city">Mesto nad 100 tis.obyv.</string>
-	<string name="poi_town">Mesto 10 tis.-100 tis.obyv.</string>
-	<string name="poi_village">Obec 200-10 tis.obyv.</string>
+	<string name="poi_city">Mesto (nad 100 tis.obyv.)</string>
+	<string name="poi_town">Mesto (10 tis.-100 tis.obyv.)</string>
+	<string name="poi_village">Obec (200-10 tis.obyv.)</string>
 	<string name="poi_hamlet">Osada/Samota</string>
 	<string name="poi_isolated_dwelling">Izolované obydlie</string>
 	<string name="poi_suburb">Mestský obvod</string>
@@ -2582,9 +2582,9 @@
 	<string name="poi_architecture_brutalism">Architektúra: brutalizmus</string>
 	<string name="poi_cliff">Útes</string>
 
-	<string name="poi_bridge_structure_simple_suspension">Mostná konštrukcia: jednoduchý visutý</string>
-	<string name="poi_bridge_structure_suspension">Mostná konštrukcia: visutý</string>
-	<string name="poi_bridge_structure_arch">Mostná konštrukcia: oblúkový</string>
+	<string name="poi_bridge_structure_simple_suspension">Mostná konštrukcia: jednoduchá visutá</string>
+	<string name="poi_bridge_structure_suspension">Mostná konštrukcia: visutá</string>
+	<string name="poi_bridge_structure_arch">Mostná konštrukcia: oblúková</string>
 	<string name="poi_bridge_structure_floating">Mostná konštrukcia: plávajúca</string>
 	<string name="poi_bridge_structure_cable_stayed">Mostná konštrukcia: zavesená</string>
 	<string name="poi_bridge_structure_boardwalk">Mostná konštrukcia: drevený chodník</string>
@@ -2840,7 +2840,7 @@
 	<string name="poi_water_heater_no">Ohrievač vody: nie</string>
 
 	<string name="poi_parking_garage_boxes">Garážové boxy</string>
-	<string name="poi_parking_carports"/>
+	<string name="poi_parking_carports">Prístrešky pre autá</string>
 
 	<string name="poi_netball">Netball</string>
 	<string name="poi_disc_golf">Diskový golf</string>
@@ -3254,4 +3254,283 @@
 	<string name="poi_health_specialty_pathology_yes">Patologická anatómia</string>
 	<string name="poi_health_specialty_oncology_yes">Onkológia</string>
 	<string name="poi_health_specialty_tropical_medicine_yes">Tropická medicína</string>
+	<string name="poi_service_car">Služby pre autá</string>
+	<string name="poi_glacier_type">Typ ľadovca</string>
+
+<string name="synonyms_poi_fuel">Čerpacia stanica</string>
+
+	<string name="synonyms_poi_nightclub">Diskotéka</string>
+	<string name="poi_leisure_common">Obecná odpočinková zóna</string>
+	<string name="poi_architecture_new_objectivity">Architektúra: nový objektivizmus</string>
+	<string name="poi_architecture_timber_frame">Architektúra: drevená kostra</string>
+	<string name="poi_architecture_art_nouveau">Architektúra: secesia</string>
+	<string name="poi_architecture_oldrussian">Architektúra: staroruská</string>
+	<string name="poi_architecture_postconstructivism">Architektúra: Post-konštruktivizmus</string>
+	<string name="poi_bridge_structure_beam">Mostná konštrukcia: trám</string>
+	<string name="poi_bridge_structure_truss">Mostná konštrukcia: priehradová</string>
+	<string name="poi_bridge_structure_humpback">Mostná konštrukcia: vlnitá</string>
+	<string name="poi_bridge_structure_log">Mostná konštrukcia: brvno</string>
+	<string name="poi_bridge_movable_bascule">Typ pohyblivého mostu: sklápací</string>
+	<string name="poi_impromptu_yes">Improvizovaný kemp: áno</string>
+	<string name="poi_impromptu_no">Improvizovaný kemp: nie</string>
+	<string name="poi_sanitary_dump_station_yes">Zariadenie na vypustenie sanitárneho odpadu: áno</string>
+	<string name="poi_sanitary_dump_station_no">Zariadenie na vypustenie sanitárneho odpadu: nie</string>
+	<string name="poi_health_specialty_osteopathy_yes">Osteopatia</string>
+	<string name="poi_health_specialty_maternity_yes">Materstvo</string>
+	<string name="poi_health_specialty_orthodontics_yes">Čeľustná ortopédia</string>
+	<string name="poi_health_specialty_occupational_yes">Ergoterapia</string>
+	<string name="poi_suction_point">Miesto na čerpanie vody na hasenie</string>
+
+	<string name="poi_fire_hydrant_type_underground">Podzemný</string>
+	<string name="poi_fire_hydrant_type_pillar">Sĺpový</string>
+	<string name="poi_fire_hydrant_type_dry_barrel">Suchá nádrž</string>
+	<string name="poi_fire_hydrant_type_pond">Rybník</string>
+	<string name="poi_fire_hydrant_type_wall">Na stene</string>
+
+	<string name="poi_treat_inpatient_yes">Služby pre ležiacich pacientov: áno</string>
+	<string name="poi_treat_inpatient_no">Služby pre ležiacich pacientov: nie</string>
+	<string name="poi_treat_inpatient_only">Služby pre ležiacich pacientov: výlučne</string>
+	<string name="poi_bicycle_parking_lockers">Skrinky</string>
+	<string name="poi_spoil_heap">Halda</string>
+	
+	<string name="poi_crossing_activation_automatic">Aktivácia priechodu: automatická</string>
+	<string name="poi_crossing_activation_local">Aktivácia priechodu: z miesta</string>
+	<string name="poi_crossing_activation_remote">Aktivácia priechodu: diaľkové ovládanie</string>
+	<string name="poi_crossing_saltire_yes">Výstražný kríž</string>
+	<string name="poi_crossing_saltire_no">Výstražný kríž: nie</string>
+	<string name="poi_pump_type_india_mk_2_3">Typ pumpy: India Mk II alebo III</string>
+	<string name="poi_pump_type_gravity">Typ pumpy: gravitačná</string>
+	<string name="poi_pump_style_modern">Vzhľad pumpy: moderný</string>
+	<string name="poi_pump_style_historic">Vzhľad pumpy: historický</string>
+	<string name="poi_pump_status_ok">Stav pumpy: v poriadku</string>
+	<string name="poi_pump_status_broken">Stav pumpy: pokazená</string>
+	<string name="poi_pump_status_locked">Stav pumpy: uzamknutá</string>
+
+	<string name="poi_fire_operator">Hasičský okrsok</string>
+
+	<string name="poi_xmas_day_date">Vianoce: obdobie udalosti</string>
+	<string name="poi_xmas_note">Vianoce: poznámka</string>
+	<string name="poi_xmas_opening_hours">Vianoce: otváracie hodiny</string>
+	<string name="poi_xmas_location">Vianoce: poloha</string>
+	<string name="poi_xmas_url">Vianoce: webstránka</string>
+
+	<string name="poi_cuisine_empanada">Empanada</string>
+	<string name="poi_cuisine_crepes">Francúzske palacinky</string>
+	<string name="poi_cuisine_udon">Udon</string>
+	<string name="poi_cuisine_bubble_tea">Bublinkový čaj (Bubble tea)</string>
+	<string name="poi_cuisine_sub">Prekrojený sendvič (sub)</string>
+	<string name="poi_cuisine_shawarma">Shawarma</string>
+
+	<string name="poi_party">Predmety na oslavy</string>
+	<string name="poi_locomotive">Lokomotíva</string>
+
+	<string name="poi_animal_keeping">Výbeh pre zvieratá</string>
+	<string name="poi_animal_keeping_horse">Výbeh pre zvieratá: kone</string>
+	<string name="poi_animal_keeping_sheep">Výbeh pre zvieratá: ovce</string>
+	<string name="poi_railway_yard">Nákladná stanica</string>
+
+	<string name="poi_coworking_space">Coworkingové kancelárie</string>
+
+	<string name="poi_life_ring">Záchranné koleso</string>
+
+	<string name="poi_zoo_petting_zoo">Pre deti</string>
+	<string name="poi_zoo_wildlife_park">Výbehy s prirodzeným prostredím (wildlife park)</string>
+	<string name="poi_zoo_enclosure">Klietky</string>
+	<string name="poi_zoo_safari_park">Safari park</string>
+	<string name="poi_zoo_birds">Vtáky</string>
+	<string name="poi_zoo_aviary">Voliéra</string>
+	<string name="poi_zoo_falconry">Dravé vtáky</string>
+	<string name="poi_zoo_reptile">Plazy</string>
+
+	<string name="poi_stands">Tribúny</string>
+
+	<string name="poi_motorcycle_sales_yes">Predaj</string>
+	<string name="poi_motorcycle_sales_no">Predaj: nie</string>
+	<string name="poi_motorcycle_sales_yes_used">Predaj: áno; ojazdené</string>
+	<string name="poi_motorcycle_sales_used">Predaj: ojazdené</string>
+	<string name="poi_motorcycle_rental_yes">Prenájom</string>
+	<string name="poi_motorcycle_rental_no">Prenájom: nie</string>
+	<string name="poi_motorcycle_repair_yes">Opravy</string>
+	<string name="poi_motorcycle_repair_no">Opravy: nie</string>
+	<string name="poi_motorcycle_parts_yes">Náhradné diely</string>
+	<string name="poi_motorcycle_parts_no">Náhradné diely: nie</string>
+	<string name="poi_motorcycle_tyres_yes">Preumatiky</string>
+	<string name="poi_motorcycle_tyres_no">Pneumatiky: nie</string>
+	<string name="poi_motorcycle_clothes_yes">Oblečenie pre motocyklistov</string>
+	<string name="poi_motorcycle_clothes_no">Oblečenie pre motocyklistov: nie</string>
+	<string name="poi_generator_output_electricity_no">Výstup (elektrina): nie</string>
+
+	<string name="poi_owner">Vlastník</string>
+
+	<string name="poi_animal_shelter_purpose_adoption_yes">Adopcie: áno</string>
+	<string name="poi_animal_shelter_purpose_adoption_no">Adopcie: nie</string>
+	<string name="poi_animal_shelter_purpose_release_yes">Vypustenie: áno</string>
+	<string name="poi_animal_shelter_purpose_release_no">Vypustenie: nie</string>
+
+	<string name="poi_spaceport">Kozmodróm</string>
+
+	<string name="poi_direction_n">Smer: serverne</string>
+	<string name="poi_direction_nne">Smer: servero-severovýchodne</string>
+	<string name="poi_direction_ne">Smer: severovýchodne</string>
+	<string name="poi_direction_ene">Smer: východo-severovýchodne</string>
+	<string name="poi_direction_e">Smer: východne</string>
+	<string name="poi_direction_ese">Smer: východo-juhovýchodne</string>
+	<string name="poi_direction_se">Smer: juhovýchodne</string>
+	<string name="poi_direction_sse">Smer: juho-juhovýchodne</string>
+	<string name="poi_direction_s">Smer: južne</string>
+	<string name="poi_direction_ssw">Smer: juho-juhozápadne</string>
+	<string name="poi_direction_sw">Smer: juhozápadne</string>
+	<string name="poi_direction_wsw">Smer: západo-juhozápadne</string>
+	<string name="poi_direction_w">Smer: západne</string>
+	<string name="poi_direction_wnw">Smer: západo-severozápadne</string>
+	<string name="poi_direction_nw">Smer: severozápadne</string>
+	<string name="poi_direction_nnw">Smer: severo-severozápadne</string>
+	<string name="poi_direction_forward">Smer: dopredu</string>
+	<string name="poi_direction_backward">Smer: dozadu</string>
+	<string name="poi_direction_clockwise">Smer: v smere hodinových ručičiek</string>
+	<string name="poi_direction_anticlockwise">Smer: proti smeru hodinových ručičiek</string>
+	<string name="poi_direction_up">Smer: nahor</string>
+	<string name="poi_direction_down">Smer: nadol</string>
+	<string name="poi_direction_entrance">Smer: vchod</string>
+	<string name="poi_direction_exit">Smer: východ</string>
+	<string name="poi_direction_all">Smer: všetky strany</string>
+
+	<string name="poi_winter_room_yes">Zimná miestnosť: áno</string>
+	<string name="poi_winter_room_no">Zimná miestnosť: nie</string>
+	<string name="poi_reservation_required">Rezervácia: povinná</string>
+	<string name="poi_reservation_recommended">Rezervácia: odporúčaná</string>
+	<string name="poi_reservation_yes">Rezervácia: áno</string>
+	<string name="poi_reservation_no">Rezervácia: nie</string>
+	<string name="poi_reservation_members_only">Rezervácia: len členovia</string>
+
+	<string name="poi_beds">Postele</string>
+
+	<string name="poi_boat_rental">Požičovňa lodí</string>
+	<string name="poi_network">Sieť</string>
+
+	<string name="poi_government_archive">Archív</string>
+	<string name="poi_government_ministry">Ministerstvo</string>
+	<string name="poi_government_public_service">Verejná služba</string>
+	<string name="poi_government_social_security">Sociálne poistenie</string>
+	<string name="poi_government_social_services">Sociálne služby</string>
+	<string name="poi_government_treasury">Pokladnica</string>
+	<string name="poi_government_transportation">Dopravná inštitúcia</string>
+	<string name="poi_government_legislative">Legislatívna inštitúcia</string>
+
+	<string name="poi_vhf">Kanál VHF</string>
+
+	<string name="poi_surface_metal_grid">Kovová mriežka</string>
+
+	<string name="poi_location_underground">Umiestnenie: pod zemou</string>
+	<string name="poi_location_underwater">Umiestnenie: pod vodou</string>
+	<string name="poi_location_overground">Umiestnenie: nad zemou</string>
+	<string name="poi_location_overhead">Umiestnenie: nad hlavou</string>
+	<string name="poi_location_roof">Umiestnenie: na streche</string>
+	<string name="poi_location_rooftop">Umiestnenie: na streche</string>
+	<string name="poi_location_outdoor">Umiestnenie: vonku</string>
+	<string name="poi_location_indoor">Umiestnenie: v budove</string>
+	<string name="poi_location_platform">Umiestnenie: na námornej plošine</string>
+	<string name="poi_location_bridge">Umiestnenie: na moste</string>
+	<string name="poi_location_wall">Umiestnenie: na stene</string>
+	<string name="poi_location_entrance">Umiestnenie: vo vchode</string>
+
+	<string name="poi_visibility_house">Viditeľnosť: od domu</string>
+	<string name="poi_visibility_street">Viditeľnosť: z ulice</string>
+	<string name="poi_visibility_area">Viditeľnosť: v celej oblasti</string>
+
+	<string name="poi_operational_status_open">Otvorené</string>
+	<string name="poi_operational_status_closed">Zatvorené</string>
+	<string name="poi_operational_status_restricted">Obmedzené</string>
+	<string name="poi_operational_status_broken">Nefunkčné</string>
+	<string name="poi_operational_status_needs_maintenance">Potrebuje údržbu</string>
+
+	<string name="poi_water_purification_none">Žiadne</string>
+	<string name="poi_water_purification_chlorine">Chlór</string>
+	<string name="poi_water_purification_reverse_osmosis">Reverzná osmóza</string>
+	<string name="poi_water_purification_aquatabs">Tablety do vody</string>
+
+	<string name="poi_water_supply_water_well">Studňa</string>
+	<string name="poi_water_supply_pipeline">Potrubie</string>
+	<string name="poi_water_supply_running_water">Tečúca voda</string>
+	<string name="poi_water_supply_pump">Pumpa</string>
+	<string name="poi_water_supply_borehole">Vrt</string>
+	<string name="poi_water_supply_water_trucking">Dovoz vody</string>
+	<string name="poi_water_supply_water_tank">Vodná nádrž</string>
+	<string name="poi_water_supply_bottled_water">Balená voda</string>
+
+	<string name="poi_water_place_access_community">Komunita</string>
+	<string name="poi_water_place_access_family">Rodina</string>
+	<string name="poi_water_place_access_multifamilies">Viac rodín</string>
+
+	<string name="poi_charging_station_filter">Nabíjacia stanica</string>
+
+	<string name="poi_depot">Depo</string>
+
+	<string name="poi_letter_box">Schránka príjemcu</string>
+	<string name="poi_post_street">Ulica</string>
+	<string name="poi_post_housenumber">Číslo domu</string>
+	<string name="poi_post_flats">Byt</string>
+
+	<string name="poi_payment_centre">Platobné centrum</string>
+	<string name="poi_money_transfer">Zasielanie peňazí</string>
+
+	<string name="poi_ref_post">PSČ</string>
+
+	<string name="poi_climbing_sport_yes">Šport: áno</string>
+	<string name="poi_climbing_sport_no">Šport: nie</string>
+	<string name="poi_climbing_routes">Lezecké trasy</string>
+
+	<string name="poi_circumference">Obvod</string>
+	<string name="poi_diameter_crown">Priemer koruny</string>
+
+	<string name="poi_meadow_agricultural">Typ: poľnohospodárska</string>
+	<string name="poi_meadow_perpetual">Typ: udržiavaná prírodou</string>
+	<string name="poi_meadow_transitional">Typ: prechodná</string>
+	<string name="poi_meadow_pasture">Typ: pastvina</string>
+
+	<string name="poi_frozen_food">Mrazené jedlá</string>
+
+	<string name="poi_shop_fireplace">Predajňa krbov</string>
+
+	<string name="poi_shop_boat">Predaj lodí</string>
+
+	<string name="poi_cannabis">Predaj marihuany</string>
+
+	<string name="poi_flooring">Podlahy</string>
+	<string name="poi_pottery">Hrnčiarstvo</string>
+
+	<string name="poi_whitewater_rapid_name">Názov perejí</string>
+
+	<string name="poi_barbecue_grill">Gril: áno</string>
+
+	<string name="poi_water_utility">Kancelária dodávateľa vody</string>
+
+	<string name="poi_amusement_arcade">Herné automaty (nie hazard)</string>
+	<string name="poi_adult_gaming_centre">Herňa</string>
+
+	<string name="poi_service_vehicle_car_repair_yes">Oprava áut</string>
+	<string name="poi_service_vehicle_oil_change_yes">Výmena oleja</string>
+	<string name="poi_service_vehicle_used_car_sales_yes">Predaj ojazdených áut</string>
+	<string name="poi_service_vehicle_brakes_yes">Brzdy</string>
+	<string name="poi_service_vehicle_new_car_sales_yes">Predaj nových áut</string>
+	<string name="poi_service_vehicle_diagnostics_yes">Diagnostika</string>
+	<string name="poi_service_vehicle_car_parts_yes">Náhradné diely</string>
+	<string name="poi_service_vehicle_batteries_yes">Batérie</string>
+	<string name="poi_service_vehicle_air_conditioning_yes">Klimatizácie</string>
+	<string name="poi_service_vehicle_body_repair_yes">Opravy karosérie</string>
+	<string name="poi_service_vehicle_electrical_yes">Elektrické rozvody</string>
+	<string name="poi_service_vehicle_wheels_yes">Kolesá</string>
+	<string name="poi_service_vehicle_glass_yes">Sklo</string>
+	<string name="poi_service_vehicle_truck_repair_yes">Oprava nákladných áut</string>
+	<string name="poi_service_vehicle_transmission_repair_yes">Opravy prevodovky</string>
+	<string name="poi_service_vehicle_motor_yes">Motory</string>
+	<string name="poi_service_vehicle_insurance_yes">Poistenie</string>
+	<string name="poi_service_vehicle_tyres_yes">Pneumatiky</string>
+
+	<string name="poi_aerialway_zip_line">Lanový sklz</string>
+
+	<string name="poi_via_ferrata">Via ferrata</string>
+	<string name="poi_cable_number">Počet lán</string>
+	<string name="poi_via_ferrata_scale">Náročnosť</string>
+
 	</resources>
