@@ -1226,4 +1226,15 @@
 	<string name="poi_wiki_lang_mn">Μονγκολική βίκι</string>
 	<string name="poi_wiki_lang_nap">Ναπολιτάνικη βίκι</string>
 
+	<string name="poi_bollard">Οδικό κολωνάκι</string>
+	<string name="poi_cycle_barrier">Φράγμα ποδηλάτου</string>
+	<string name="poi_motorcycle_barrier">Φράγμα μοτοσικλέτας</string>
+	<string name="poi_bus_trap">Δίοδος λεωφορείων</string>
+	<string name="poi_cattle_grid">Φράγμα βοοειδών</string>
+	<string name="poi_full_height_turnstile">Περιστρεφόμενη πόρτα πλήρους ύψους</string>
+	<string name="poi_general_barrier">Γενικό φράγμα</string>
+	<string name="poi_stile">Σειρά από σκαλοπάτια σε φράχτη</string>
+	<string name="poi_debris">Συντρίμμια</string>
+	<string name="poi_jersey_barrier">Φράγμα Τζέρσεϊ</string>
+	<string name="poi_height_restrictor">Περιοριστής ύψους</string>
 	</resources>
