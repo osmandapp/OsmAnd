@@ -12,6 +12,7 @@ import android.text.Html;
 import android.util.Log;
 
 import net.osmand.IndexConstants;
+import net.osmand.ResultMatcher;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.map.OsmandRegions;
@@ -93,43 +94,49 @@ public class WikiArticleHelper {
 		protected List<Amenity> doInBackground(Void... voids) {
 			MapActivity activity = weakMapActivity.get();
 			OsmandApplication application = activity.getMyApplication();
-			List<Amenity> results = new ArrayList<>();
+			final List<Amenity> results = new ArrayList<>();
 			if (application != null && !isCancelled()) {
-				List<WorldRegion> regions;
+				List<WorldRegion> regions = null;
 				if (articleLatLon != null) {
-					regions = application.getRegions().getWoldRegions(articleLatLon);
+					try {
+						regions = application.getRegions().getWoldRegions(articleLatLon);
+					} catch (IOException e) {
+						Log.e(TAG, e.getMessage(), e);
+					}
 				} else {
 					return null;
 				}
-				AmenityIndexRepositoryBinary repository = getAmenityRepositoryByRegion(regions, application);
-				if (repository == null) {
-					if (regionName == null || regionName.isEmpty()) {
-						IndexItem item = null;
-						try {
-							item = DownloadResources.findSmallestIndexItemAt(application, articleLatLon,
-                                    DownloadActivityType.WIKIPEDIA_FILE);
-						} catch (IOException e) {
-							Log.e(TAG, e.getMessage(), e);
+				if (regions != null) {
+					AmenityIndexRepositoryBinary repository = getWikiRepositoryByRegions(regions, application);
+					if (repository == null) {
+						if (regionName == null || regionName.isEmpty()) {
+							IndexItem item = null;
+							try {
+								item = DownloadResources.findSmallestIndexItemAt(application, articleLatLon,
+										DownloadActivityType.WIKIPEDIA_FILE);
+							} catch (IOException e) {
+								Log.e(TAG, e.getMessage(), e);
+							}
+							if (item != null) {
+								regionName = (getRegionName(item.getFileName(), application.getRegions()));
+							}
+							return null;
 						}
-						if (item != null) {
-							regionName = (getRegionName(item.getFileName(), application.getRegions()));
-						}
-						return null;
-					}
 
-				} else {
-					if (isCancelled()) {
-						return null;
+					} else {
+						if (isCancelled()) {
+							return null;
+						}
+						results.addAll(repository.searchAmenitiesByName(0, 0, 0, 0,
+								Integer.MAX_VALUE, Integer.MAX_VALUE, name, null));
 					}
-					results.addAll(repository.searchAmenitiesByName(0, 0, 0, 0,
-							Integer.MAX_VALUE, Integer.MAX_VALUE, name, null));
 				}
 			}
 			return results;
 		}
 
 		@Nullable
-		private AmenityIndexRepositoryBinary getAmenityRepositoryByRegion(@NonNull List<WorldRegion> regions, @NonNull OsmandApplication app) {
+		private AmenityIndexRepositoryBinary getWikiRepositoryByRegions(@NonNull List<WorldRegion> regions, @NonNull OsmandApplication app) {
 			AmenityIndexRepositoryBinary repo = null;
 			for (WorldRegion reg : regions) {
 				if (reg != null) {

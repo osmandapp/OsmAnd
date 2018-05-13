@@ -694,25 +694,16 @@ public class OsmandRegions {
 		}
 	}
 
-	public List<WorldRegion> getWoldRegions(LatLon latLon) {
+	public List<WorldRegion> getWoldRegions(LatLon latLon) throws IOException {
 		List<WorldRegion> result = new ArrayList<>();
-		List<BinaryMapDataObject> mapDataObjects = null;
-		try {
-			mapDataObjects = getBinaryMapDataObjects(latLon);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		if (mapDataObjects != null) {
-			for (BinaryMapDataObject obj : mapDataObjects) {
-				if (obj != null) {
-					String fullName = getFullName(obj);
-					WorldRegion reg = getRegionData(fullName);
-					if (reg != null) {
-						result.add(reg);
-					}
-
+		List<BinaryMapDataObject> mapDataObjects = getBinaryMapDataObjects(latLon);
+		for (BinaryMapDataObject obj : mapDataObjects) {
+			String fullName = getFullName(obj);
+			if (fullName != null) {
+				WorldRegion reg = getRegionData(fullName);
+				if (reg != null) {
+					result.add(reg);
 				}
-
 			}
 		}
 		return result;
@@ -722,16 +713,14 @@ public class OsmandRegions {
 		List<BinaryMapDataObject> mapDataObjects = getBinaryMapDataObjects(latLon);
 		BinaryMapDataObject res = null;
 		double smallestArea = -1;
-		if (mapDataObjects != null) {
-			for (BinaryMapDataObject o : mapDataObjects) {
-				double area = OsmandRegions.getArea(o);
-				if (smallestArea == -1) {
-					smallestArea = area;
-					res = o;
-				} else if (area < smallestArea) {
-					smallestArea = area;
-					res = o;
-				}
+		for (BinaryMapDataObject o : mapDataObjects) {
+			double area = OsmandRegions.getArea(o);
+			if (smallestArea == -1) {
+				smallestArea = area;
+				res = o;
+			} else if (area < smallestArea) {
+				smallestArea = area;
+				res = o;
 			}
 		}
 		return res;

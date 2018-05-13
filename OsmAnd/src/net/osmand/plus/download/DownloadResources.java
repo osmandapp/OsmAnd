@@ -30,6 +30,8 @@ import java.util.List;
 import java.util.Map;
 
 public class DownloadResources extends DownloadResourceGroup {
+	private static final String TAG = DownloadResources.class.getSimpleName();
+
 	public boolean isDownloadedFromInternet = false;
 	public boolean downloadFromInternetFailed = false;
 	public boolean mapVersionIsIncreased = false;
@@ -463,11 +465,18 @@ public class DownloadResources extends DownloadResourceGroup {
 		List<IndexItem> res = new ArrayList<>();
 		OsmandRegions regions = app.getRegions();
 		DownloadIndexesThread downloadThread = app.getDownloadThread();
-		List<WorldRegion> downloadRegions = regions.getWoldRegions(latLon);
-		for (WorldRegion downloadRegion : downloadRegions) {
-			if (downloadRegion != null) {
-				if (includeDownloaded || !isIndexItemDownloaded(downloadThread, type, downloadRegion, res)) {
-					addIndexItem(downloadThread, type, downloadRegion, res);
+		List<WorldRegion> downloadRegions = null;
+		try {
+			downloadRegions = regions.getWoldRegions(latLon);
+		} catch (IOException e) {
+			android.util.Log.e(TAG, e.getMessage(), e);
+		}
+		if (downloadRegions != null) {
+			for (WorldRegion downloadRegion : downloadRegions) {
+				if (downloadRegion != null) {
+					if (includeDownloaded || !isIndexItemDownloaded(downloadThread, type, downloadRegion, res)) {
+						addIndexItem(downloadThread, type, downloadRegion, res);
+					}
 				}
 			}
 		}
