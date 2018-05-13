@@ -3013,7 +3013,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="lang_lo">Laotisch</string>
     <string name="day_off_label">aus</string>
     <string name="winter_and_ski_renderer">Winter und Ski</string>
-    <string name="touring_view_renderer">Tourenansicht (Kontrast und Details)</string>
+    <string name="touring_view_renderer">Tourenansicht</string>
     <string name="nautical_renderer">Nautisch</string>
     <string name="copy_location_name">Punkt/POI-Name kopieren</string>
     <string name="toast_empty_name_error">Unbenannter Ort</string>
@@ -3065,7 +3065,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="use_two_digits_longitude">Zweistelligen Längengrad verwenden</string>
     <string name="wikivoyage_search_hint">Suche: Land, Stadt, Provinz</string>
     <string name="shared_string_read">Lesen</string>
-    <string name="saved_articles">Gespeicherte Artikel</string>
+    <string name="saved_articles">Artikel mit Lesezeichen</string>
     <string name="shared_string_explore">Durchsuchen</string>
     <string name="shared_string_result">Ergebnis</string>
     <string name="download_maps_travel">Reisekarten</string>
@@ -3087,7 +3087,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="select_travel_book">Reisebuch auswählen</string>
     <string name="shared_string_travel_book">Reisebuch</string>
     <string name="images_cache">Bilder-Cache</string>
-    <string name="download_images">Bilder herunterladen</string>
+    <string name="download_images">Bilder anzeigen</string>
     <string name="travel_card_update_descr">Neue Wikivoyage-Daten verfügbar, aktualisieren Sie sie, um sie zu nutzen.</string>
 	<string name="travel_card_download_descr">Laden Sie diese Wikivoyage-Reiseführer herunter, um Artikel zu Orten auf der ganzen Welt ohne Internetverbindung anzuzeigen.</string>
 	<string name="update_is_available">Aktualisierung verfügbar</string>
@@ -3130,23 +3130,26 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="osmand_team">OsmAnd-Team</string>
     <string name="shared_string_restart">Neustart</string>
     <string name="show_images">Bilder anzeigen</string>
-    <string name="purchase_cancelled_dialog_title">Sie haben das OsmAnd Live-Abonnement gekündigt</string>
+    <string name="purchase_cancelled_dialog_title">Sie haben Ihr OsmAnd Live-Abonnement gekündigt</string>
     <string name="purchase_cancelled_dialog_descr">Erneuern Sie Ihr Abonnement, um weiterhin alle Funktionen nutzen zu können:</string>
 
-    <string name="maps_you_need_descr">Basierend auf den von Ihnen gespeicherten Artikeln empfehlen wir Ihnen, folgende Karten herunterzuladen:</string>
+    <string name="maps_you_need_descr">Basierend auf den Artikeln, die Sie mit einem Lesezeichen versehen haben, werden Ihnen die folgenden Karten zum Download empfohlen:</string>
     <string name="maps_you_need">Benötigte Karten</string>
     <string name="open_wikipedia_link_online">Wikipedia-Link online öffnen</string>
-    <string name="open_wikipedia_link_online_description">OsmAnd leitet Sie zum Browser weiter und öffnet den Link online.</string>
+    <string name="open_wikipedia_link_online_description">Der Link wird in einem Webbrowser geöffnet.</string>
     <string name="read_wikipedia_offline_description">Holen Sie sich das OsmAnd Live Abonnement, um Wikipedia und Wikivoyage Artikel offline zu lesen.</string>
-    <string name="how_to_open_link">Wie öffnet man einen Link?</string>
+    <string name="how_to_open_link">Wie öffnet man den Link?</string>
     <string name="read_wikipedia_offline">Wikipedia offline lesen</string>
     <string name="download_all">Alles herunterladen</string>
     <string name="hide_full_description">Vollständige Beschreibung ausblenden</string>
     <string name="show_full_description">Vollständige Beschreibung anzeigen</string>
-    <string name="nautical_render_descr">Stil für die See- und Flussschifffahrt. Hauptmerkmale: Bojen, Leuchttürme, Wasserstraßen und -markierungen, Häfen, Seezeichendienste, Tiefenlinien.</string>
-    <string name="ski_map_render_descr">Stil zum Skifahren. Hauptmerkmale: Rendern von Pisten, Luftstrassen und anderen Skimerkmalen auf komfortable Weise. Weniger störende sekundäre Kartenobjekte.</string>
+    <string name="nautical_render_descr">Nautischer Navigationsstil. Hauptmerkmale: Bojen, Leuchttürme, Flussläufe, Seewege und Markierungen, Häfen, Seezeichendienste, Tiefenlinien.</string>
+    <string name="ski_map_render_descr">Skistil. Hauptmerkmale: Rendert Pisten, Skilifte und andere Skifunktionen auf komfortable Weise. Weniger störende sekundäre Kartenobjekte.</string>
     <string name="light_rs_render_descr">Einfacher und kontrastreicher Stil für die Navigation im Auto. Schonend für die Augen im Nachtmodus. Hauptmerkmale: Konturlinien, Kontrast orange gestylter Straßen, weniger störende sekundäre Kartenobjekte.</string>
-    <string name="topo_render_descr">Kontraststil, der vor allem für Naturwanderungen, Trekking und Radtouren geeignet ist. Gute Ablesbarkeit bei komplexer Außenbeleuchtung. Hauptmerkmale: Kontrast von Straßen und natürlichen Objekten, verschiedene Arten von Routen, Höhenlinien mit erweiterten Einstellungen, mehr Details bei entsprechenden Zoomstufen als im Standardstil. Mit der Option Oberflächenintegrität können Sie zwischen Straßen mit unterschiedlicher Oberflächenqualität unterscheiden. Kein Nachtmodus.</string>
-    <string name="mapnik_render_descr">Alter Mapnik-Stil, Standard-Rendering-Stil. Hauptmerkmale: Die Farben ähneln dem Mapnik-Stil.</string>
-    <string name="default_render_descr">Universeller Stil. Vereinfachtes Rendering für sauberere Karten in bevölkerten Städten. Hauptmerkmale: Höhenlinien, Routen, Oberflächenqualität, Zufahrtsbeschränkungen, Straßenschilder, Wegewiedergabe nach SAC-Skala, Wildwassersportmerkmale.</string>
+    <string name="topo_render_descr">Kontraststil für Wandern, Trekking und Radfahren in der Natur. Gute Lesbarkeit bei komplexer Außenbeleuchtung. Hauptmerkmale: Kontrastreiche Straßen und natürliche Objekte, verschiedene Arten von Routen, Höhenlinien mit erweiterten Einstellungen, mehr Details bei entsprechenden Zoomstufen als der Standardstil. Die Option Oberflächenintegrität ermöglicht die Unterscheidung der Straßenoberflächenqualität. Kein Nachtmodus.</string>
+    <string name="mapnik_render_descr">Alter \'Mapnik\'-Stil, Standard-Rendering-Stil. Hauptmerkmale: Die Farben ähneln dem Mapnik-Stil.</string>
+    <string name="default_render_descr">Universeller Stil. Vereinfachte, sauberere Darstellung in dicht besiedelten Städten. Hauptmerkmale: Konturlinien, Routen, Oberflächenqualität, Zugangsbeschränkungen, Straßenschilder, Wegeführung nach SAC-Skala, Wildwassersportmerkmale.</string>
+    <string name="shared_string_bookmark">Lesezeichen</string>
+    <string name="off_road_render_descr">Geeignet für den Einsatz im Gelände. Geeignet für die Verwendung mit grünen Satellitenbildern als Unterlagekarte. Wichtige Punkte: Reduzierte Hauptstraßendicke, erhöhte Dicke von Strecken, Wegen, Fahrrädern und anderen Routen. Basiert auf dem \'Topo\'-Stil.</string>
+    <string name="touring_view_render_descr">Hoch detaillierter Stil für Touringzwecke. Enthält zusätzlich alle Konfigurationsoptionen des Standardstils: zeigt so viele Details wie möglich an, insbesondere alle Straßen, Wege und andere Reisemöglichkeiten. Klare visuelle Unterscheidung zwischen den verschiedenen Straßentypen, die an viele Tourenatlanten erinnern. Kontrastreiches Farbschema für den Außenbereich, Tag- und Nachtmodus.</string>
     </resources>
