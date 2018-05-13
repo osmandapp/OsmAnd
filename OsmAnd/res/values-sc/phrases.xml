@@ -3007,4 +3007,76 @@
 	<string name="poi_counselling_type_education_no">Consulèntzia professionale (educatzione): nono</string>
 	<string name="poi_counselling_type_family_yes">Consulèntzia professionale (famìlia): eja</string>
 	<string name="poi_counselling_type_family_no">Consulèntzia professionale (famìlia): nono</string>
-	</resources>
+	<string name="poi_counselling_type_homeless_yes">Consulèntzia professionale (barbones): eja</string>
+	<string name="poi_counselling_type_homeless_no">Consulèntzia professionale (barbones): nono</string>
+	<string name="poi_counselling_type_immigrant_yes">Consulèntzia professionale (immigrantes): eja</string>
+	<string name="poi_counselling_type_immigrant_no">Consulèntzia professionale (immigrantes): nono</string>
+	<string name="poi_counselling_type_marriage_yes">Consulèntzia professionale (coja): eja</string>
+	<string name="poi_counselling_type_marriage_no">Consulèntzia professionale (coja): nono</string>
+	<string name="poi_counselling_type_nutrition_yes">Consulèntzia professionale (nutritzione): eja</string>
+	<string name="poi_counselling_type_nutrition_nfire_hydo">Consulèntzia professionale (nutritzione): nono</string>
+	<string name="poi_counselling_type_rehabilitation_yes">Consulèntzia professionale (riabilitatzione): eja</string>
+	<string name="poi_counselling_type_rehabilitation_no">Consulèntzia professionale (riabilitatzione): nono</string>
+	<string name="poi_counselling_type_sexual_yes">Consulèntzia professionale (sessuale): eja</string>
+	<string name="poi_counselling_type_sexual_no">Consulèntzia professionale (sessuale): nono</string>
+	<string name="poi_counselling_type_sexual_abuse_yes">Consulèntzia professionale (abusu sessuale): eja</string>
+	<string name="poi_counselling_type_sexual_abuse_no">Consulèntzia professionale (abusu sessuale): nono</string>
+	<string name="poi_counselling_type_victim_yes">Consulèntzia professionale (vìtimas): eja</string>
+	<string name="poi_counselling_type_victim_no">Consulèntzia professionale (vìtimas): nono</string>
+	<string name="poi_counselling_type_violence_yes">Consulèntzia professionale (violèntzia): eja</string>
+	<string name="poi_counselling_type_violence_no">Consulèntzia professionale (violèntzia): nono</string>
+
+	<string name="poi_provided_for_infant_yes">Servìtziu frunidu a sas criaduras: eja</string>
+	<string name="poi_provided_for_infant_no">Servìtziu frunidu a sas criaduras: nono</string>
+	<string name="poi_provided_for_toddler_yes">Servìtziu frunidu a sos pitzinneddos: eja</string>
+	<string name="poi_provided_for_toddler_no">Servìtziu frunidu a sos pitzinneddos: nono</string>
+	<string name="poi_provided_for_child_yes">Servìtziu frunidu a sos pitzinnos: eja</string>
+	<string name="poi_provided_for_child_no">Servìtziu frunidu a sos pitzinnos: nono</string>
+	<string name="poi_provided_for_adult_yes">Servìtziu frunidu a sos adultos: eja</string>
+	<string name="poi_provided_for_adult_no">Servìtziu frunidu a sos adultos: nono</string>
+	<string name="poi_provided_for_woman_yes">Servìtziu frunidu a sas fèminas: eja</string>
+	<string name="poi_provided_for_woman_no">Servìtziu frunidu a sas fèminas: nono</string>
+	<string name="poi_provided_for_senior_yes">Servìtziu frunidu a sos antzianos: eja</string>
+	<string name="poi_provided_for_senior_no">Servìtziu frunidu a sos antzianos: nono</string>
+	<string name="poi_provided_for_girl_yes">Servìtziu frunidu a sas pitzocas: eja</string>
+	<string name="poi_provided_for_girl_no">Servìtziu frunidu a sas pitzocas: nono</string>
+	<string name="poi_provided_for_man_yes">Servìtziu frunidu a sos òmines: eja</string>
+	<string name="poi_provided_for_man_no">Servìtziu frunidu a sos òmines: nono</string>
+	<string name="poi_provided_for_boy_yes">Servìtziu frunidu a sos pitzocos: eja</string>
+	<string name="poi_provided_for_boy_no">Servìtziu frunidu a sos pitzocos: nono</string>
+
+	<string name="poi_capacity_beds">Capatzidade (letos)</string>
+
+	<string name="poi_treat_inpatient_yes">Servìtzios ospedalieros: eja</string>
+	<string name="poi_treat_inpatient_no">Servìtzios ospedalieros: nono</string>
+	<string name="poi_treat_inpatient_only">Servìtzios ospedalieros: petzi</string>
+	<string name="poi_counselling_yes">Consulèntzias professionales: eja</string>
+	<string name="poi_counselling_no">Consulèntzias professionales: nono</string>
+	<string name="poi_emergency_yes">Emergèntzia: eja</string>
+	<string name="poi_emergency_no">Emergèntzia: nono</string>
+	<string name="poi_home_visit_no">Bìsita a domitzìliu: nono</string>
+
+	<string name="poi_disease_malaria_yes">Malària: eja</string>
+	<string name="poi_disease_malaria_no">Malària: nono</string>
+	<string name="poi_disease_ebola_yes">Èbola: eja</string>
+	<string name="poi_disease_ebola_no">Èbola: nono</string>
+	<string name="poi_disease_autism_yes">Autismu: eja</string>
+	<string name="poi_disease_autism_no">Autismu: nono</string>
+	<string name="poi_disease_aids_yes">AIDS: eja</string>
+	<string name="poi_disease_aids_no">AIDS: nono</string>
+
+	<string name="poi_office_physician">Ufìtziu mèigu</string>
+	<string name="poi_office_therapist">Ufìtziu de unu terapèuta</string>
+	<string name="poi_office_podologist">Ufìtziu de unu podòlogu</string>
+	<string name="poi_office_healer">Ufìtziu de unu sanadore</string>
+	<string name="poi_office_psychologist">Ufìtziu de unu psicòlogu</string>
+	<string name="poi_office_nursing_service">Servìtziu de infermeria</string>
+	<string name="poi_office_midwife">Ufìtziu de una mastra de partu</string>
+
+	<string name="poi_fire_hydrant_diameter">Diàmetru de s\'idrante</string>
+	<string name="poi_fire_hydrant_pressure">Pressione de s\'idrante</string>
+	<string name="poi_glacier_ele_top">Puntu prus artu</string>
+	<string name="poi_glacier_ele_bottom">Puntu prus bassu</string>
+	<string name="poi_glacier_slope">Pendèntzia mèdia</string>
+
+</resources>
