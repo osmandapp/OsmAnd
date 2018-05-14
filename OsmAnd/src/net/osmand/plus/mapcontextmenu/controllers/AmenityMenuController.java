@@ -131,6 +131,11 @@ public class AmenityMenuController extends MenuController {
 	}
 
 	@Override
+	public boolean isWaypointButtonEnabled() {
+		return marker == null;
+	}
+
+	@Override
 	public boolean displayDistanceDirection() {
 		return true;
 	}
