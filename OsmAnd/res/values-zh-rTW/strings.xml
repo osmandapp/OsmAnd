@@ -3019,7 +3019,15 @@
     <string name="by_type">按照類型</string>
     <string name="one_tap_active_descr">輕點在地圖上的標記，將其移動到活動標記的頂端，而不用打開內容選單。</string>
     <string name="modify_the_search_query">變更搜尋的查詢。</string>
-    <string name="release_3_0">"\\022 
+    <string name="release_3_0">"\\022 新的旅行選單：檢視不用網路的維基導遊文章
+\n
+\n• 維基百科：新面貌、活動連結、圖片
+\n
+\n• 開放式軌跡使用者介面：顯示航點群組
+\n
+\n• 地圖標記：從 GPX 檔案匯入所選的群組，嶄新的座標輸入外觀
+\n
+\n• OsmAnd Live 訂閱，現在包含了所有 OsmAnd 的功能
 \n "</string>
     <string name="av_locations_selected_desc">包括座標和所選註解資料的 GPX 檔案。</string>
     <string name="av_locations_all_desc">包括座標和所有註解資料的 GPX 檔案。</string>
