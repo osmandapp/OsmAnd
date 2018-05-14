@@ -321,6 +321,16 @@ public class MenuBuilder {
 		return routes.size() > 0;
 	}
 
+	private boolean showLocalTransportRoutes() {
+		List<TransportStopRoute> localTransportRoutes = mapContextMenu.getLocalTransportStopRoutes();
+		return localTransportRoutes != null && localTransportRoutes.size() > 0;
+	}
+
+	private boolean showNearbyTransportRoutes() {
+		List<TransportStopRoute> nearbyTransportRoutes = mapContextMenu.getNearbyTransportStopRoutes();
+		return nearbyTransportRoutes != null && nearbyTransportRoutes.size() > 0;
+	}
+
 	void onHide() {
 		hidden = true;
 	}
@@ -440,11 +450,12 @@ public class MenuBuilder {
 
 	protected void buildTopInternal(View view) {
 		if (showTransportRoutes()) {
-			buildRow(view, 0, null, app.getString(R.string.transport_Routes), 0, true, getCollapsableTransportStopRoutesView(view.getContext(), false, false),
-					false, 0, false, null, true);
-
-			CollapsableView collapsableView = getCollapsableTransportStopRoutesView(view.getContext(), false, true);
-			if (collapsableView != null) {
+			if (showLocalTransportRoutes()) {
+				buildRow(view, 0, null, app.getString(R.string.transport_Routes), 0, true, getCollapsableTransportStopRoutesView(view.getContext(), false, false),
+						false, 0, false, null, true);
+			}
+			if (showNearbyTransportRoutes()) {
+				CollapsableView collapsableView = getCollapsableTransportStopRoutesView(view.getContext(), false, true);
 				String routesWithingDistance = app.getString(R.string.transport_nearby_routes_within) + " " + OsmAndFormatter.getFormattedDistance(TransportStopController.SHOW_STOPS_RADIUS_METERS, app);
 				buildRow(view, 0, null, routesWithingDistance, 0, true, collapsableView,
 						false, 0, false, null, true);
@@ -747,6 +758,19 @@ public class MenuBuilder {
 		}
 	}
 
+	private String adjustRouteRef(String ref) {
+		if (ref != null) {
+			int charPos = ref.lastIndexOf(':');
+			if (charPos != -1) {
+				ref = ref.substring(0, charPos);
+			}
+			if (ref.length() > 4) {
+				ref = ref.substring(0, 4);
+			}
+		}
+		return ref;
+	}
+
 	public int dpToPx(float dp) {
 		Resources r = app.getResources();
 		return (int) TypedValue.applyDimension(
@@ -785,7 +809,7 @@ public class MenuBuilder {
 		shape.setColor(route.getColor(mapActivity.getMyApplication(), !light));
 
 		transportRect.setBackgroundDrawable(shape);
-		transportRect.setText(route.route.getRef());
+		transportRect.setText(adjustRouteRef(route.route.getRef()));
 		baseView.addView(transportRect);
 
 		LinearLayout infoView = new LinearLayout(view.getContext());
@@ -850,11 +874,7 @@ public class MenuBuilder {
 		} else {
 			buildTransportRouteRows(view, nearbyTransportStopRoutes);
 		}
-		if (isNearbyRoutes && nearbyTransportStopRoutes.isEmpty()) {
-			return null;
-		} else {
-			return new CollapsableView(view, this, collapsed);
-		}
+		return new CollapsableView(view, this, collapsed);
 	}
 
 	private void buildTransportRouteRows(LinearLayout view, List<TransportStopRoute> routes) {
