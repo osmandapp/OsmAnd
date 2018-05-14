@@ -3196,4 +3196,16 @@
 <string name="synonyms_poi_nightclub">Disco;Disko</string>
 	<string name="poi_glacier_type">Glaziar mota</string>
 
-</resources>
+<string name="poi_outdoor_seating_no">Kanpoko eserlekurik ez</string>
+	<string name="poi_outdoor_seating_terrace">Kanpoko eserlekua: terraza</string>
+	<string name="poi_outdoor_seating_sidewalk">Kanpoko eserlekua: Espaloia</string>
+	<string name="poi_outdoor_seating_pedestrian_zone">Kanpoko eserlekua: Oinezkoentzako zonaldea</string>
+	<string name="poi_outdoor_seating_garden">Kanpoko eserlekua: Lorategia</string>
+	<string name="poi_outdoor_seating_patio">Kanpoko eserlekua: Patioa</string>
+
+	<string name="poi_indoor_yes">Barrukoa</string>
+	<string name="poi_indoor_no">Kanpokoa</string>
+	<string name="poi_vending_telephone_vouchers">Telefono-baleak</string>
+	<string name="poi_vending_vouchers">Baleak</string>
+	<string name="poi_resource_aggregate"></string>
+	</resources>
