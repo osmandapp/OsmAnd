@@ -45,11 +45,11 @@ public class ReportsFragment extends BaseOsmAndFragment implements CountrySelect
 	public static final int TITLE = R.string.report;
 	public static final String DOMAIN = "https://osmand.net/";
 	public static final String TOTAL_CHANGES_BY_MONTH_URL_PATTERN = DOMAIN +
-			"reports/query_report.php?report=total_changes_by_month&month=%s&region=%s";
+			"reports/query_report?report=total_changes_by_month&month=%s&region=%s";
 	public static final String USERS_RANKING_BY_MONTH =  DOMAIN +
-			"reports/query_report.php?report=ranking_users_by_month&month=%s&region=%s";
+			"reports/query_report?report=ranking_users_by_month&month=%s&region=%s";
 	public static final String RECIPIENTS_BY_MONTH =  DOMAIN +
-			"reports/query_report.php?report=recipients_by_month&month=%s&region=%s";
+			"reports/query_report?report=recipients_by_month&month=%s&region=%s";
 
 
 	private static final Log LOG = PlatformUtil.getLog(ReportsFragment.class);
