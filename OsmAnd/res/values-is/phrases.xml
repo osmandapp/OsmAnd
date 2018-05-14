@@ -3831,4 +3831,13 @@
 	<string name="poi_glacier_ele_bottom">Lægsti punktur</string>
 	<string name="poi_glacier_slope">Meðalhalli</string>
 
+<string name="poi_checkpoint_type">Gerð eftirlitsstöðvar</string>
+
+<string name="poi_checkpoint_hiking">Gönguferðastöð</string>
+	<string name="poi_checkpoint_type_stamp">Stimpilstöð</string>
+	<string name="poi_checkpoint_type_code">Kóði</string>
+	<string name="poi_checkpoint_type_notebook">Gestabók</string>
+	<string name="poi_checkpoint_type_electronic">Rafrænt</string>
+	<string name="poi_course">Leið</string>
+
 </resources>
