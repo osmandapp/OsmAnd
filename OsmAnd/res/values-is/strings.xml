@@ -2619,7 +2619,7 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     
     <string name="day_off_label">slökkt</string>
     <string name="winter_and_ski_renderer">Vetur og skíði</string>
-    <string name="touring_view_renderer">Ferðakort (birtuskil og ítarefni)</string>
+    <string name="touring_view_renderer">Ferðakort</string>
     <string name="nautical_renderer">Sjókort</string>
 <string name="simulate_initial_startup_descr">Stillir flaggið sem gefur til kynna fyrstu keyrslu forrits, heldur öllum öðrum stillingum óbreyttum.</string>
     <string name="fav_point_dublicate_message">"Tilgreint heiti eftirlætis er þegar  í notkun, var breytt í %1$s til að koma í veg fyrir tvítekningu."</string>
@@ -2936,7 +2936,7 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="shared_string_travel">Ferðalög</string>
     <string name="shared_string_result">Niðurstaða</string>
     <string name="use_two_digits_longitude">Notaðu tveggja-stafa lengdargráður</string>
-    <string name="saved_articles">Vistaðar greinar</string>
+    <string name="saved_articles">Bókamerktar greinar</string>
     <string name="shared_string_explore">Uppgötva</string>
     <string name="wikivoyage_search_hint">Leita: Land, borg/sveitarfélag, hérað/sýsla</string>
     <string name="shared_string_read">Lesið</string>
@@ -2955,7 +2955,7 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="online_webpage_warning">Þessi síða er einungis tiltæk á netinu. Viltu opna hana í vafra?</string>
     <string name="images_cache">Biðminni mynda</string>
     <string name="delete_search_history">Eyða leitarferli</string>
-    <string name="download_images">Sækja myndir</string>
+    <string name="download_images">Birta myndir</string>
     <string name="purchase_dialog_title">Veldu áskrift</string>
     <string name="purchase_dialog_travel_description">Til að lesa ferðagreinar án nettengingar, þarftu að kaupa eitt af eftirfarandi atriðum:</string>
     <string name="purchase_dialog_subtitle">Veldu hentugt atriði:</string>
@@ -3001,17 +3001,23 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="wiki_article_not_found">Grein fannst ekki</string>
     <string name="how_to_open_wiki_title">Hvernig á að opna Wikipedia-greinar?</string>
 <string name="osmand_team">OsmAnd-teymið</string>
-    <string name="maps_you_need_descr">Miðað við þær greinar sem þú hefur lesið, stingum við upp á að þú sækir þessi landakort:</string>
+    <string name="maps_you_need_descr">Miðað við þær greinar sem þú hefur bókamerkt, stingum við upp á að þú sækir þessi landakort:</string>
     <string name="maps_you_need">Kort sem þú þarft</string>
     <string name="shared_string_restart">Byrja aftur</string>
     <string name="show_images">Birta myndir</string>
-    <string name="purchase_cancelled_dialog_title">Þú hefur hætt áskrift að OsmAnd Live</string>
-    <string name="purchase_cancelled_dialog_descr">Endurnýjaðu áskriftina til að nýta þér allra eiginleikanna:</string>
+    <string name="purchase_cancelled_dialog_title">Þú hefur hætt áskrift þinni að OsmAnd Live</string>
+    <string name="purchase_cancelled_dialog_descr">Endurnýjaðu áskriftina til að halda áfram að nýta þér allra eiginleikana:</string>
 
     <string name="open_wikipedia_link_online">Opna Wikipedia-tengil á netinu</string>
-    <string name="open_wikipedia_link_online_description">OsmAnd mun endurbeina þér í vafrann og opna tengilinn í gegnum netið.</string>
+    <string name="open_wikipedia_link_online_description">Tengilinn verður opnaður í vafra.</string>
     <string name="read_wikipedia_offline_description">Fáðu áskrift að OsmAnd Live til að lesa Wikipedia- og Wikivoyage-greinar án nettengingar.</string>
-    <string name="how_to_open_link">Hvernig á að opna tengil?</string>
+    <string name="how_to_open_link">Hvernig á að opna tengilinn?</string>
     <string name="read_wikipedia_offline">Lesa Wikipedia ónettengt</string>
     <string name="download_all">Sækja allt</string>
+    <string name="shared_string_bookmark">Bókamerki</string>
+    <string name="hide_full_description">Fela fulla lýsingu</string>
+    <string name="show_full_description">Sýna fulla lýsingu</string>
+    <string name="off_road_render_descr">Hentar til notkunar við akstur utan vega. Hentar til notkunar með grænar gervihnattamyndir sem undirlagskort. Helstu eiginleikar: minni línusverleiki aðalvega, aukin línusverleiki gangstíga, slóða, reiðhjólaleiða og annarra leiða. Byggt á \' Topo\' stíl.</string>
+    <string name="nautical_render_descr">Leiðsagnarstíll fyrir sjó og vötn. Helstu eiginleikar: baujur, siglingamerki, siglingaleiðir og merkingar, hafnir, þjónustur við sæfarendur, dýptarlínur.</string>
+    <string name="ski_map_render_descr">Stíll fyrir skíði og vetraríþróttir. Helstu eiginleikar: myndgerir skíðaleiðir, skíðalyftur og aðra skíðaeiginleika á þægilegan hátt. Minni sjónræn truflun af völdum annarra kortahluta.</string>
     </resources>

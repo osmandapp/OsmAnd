@@ -1237,4 +1237,180 @@
 	<string name="poi_debris">Συντρίμμια</string>
 	<string name="poi_jersey_barrier">Φράγμα Τζέρσεϊ</string>
 	<string name="poi_height_restrictor">Περιοριστής ύψους</string>
+	<string name="poi_block">Ογκόλιθος</string>
+	<string name="poi_bump_gate">Φράγμα ζώων-διέλευση αυτοκινήτων</string>
+	<string name="poi_horse_stile">Διέλευση πεζών-φράγμα εποχούμενων</string>
+	<string name="poi_kissing_gate">Ταλαντευόμενη θύρα</string>
+	<string name="poi_swing_gate">Περιστρεφόμενο δρύφρακτο</string>
+	<string name="poi_turnstile">Περιστρεφόμενη θύρα</string>
+	<string name="poi_barrier_entrance">Δίοδος σε τοίχο ή φράκτη</string>
+	<string name="poi_entrance_main">Κύρια είσοδος</string>
+	<string name="poi_entrance">Είσοδος</string>
+	<string name="poi_entrance_exit">Έξοδος</string>
+
+	<string name="poi_highway_crossing">Διέλευση πεζών</string>
+
+	<string name="poi_icn_ref">Διεθνής κόμβος ποδηλατικού δικτύου</string>
+	<string name="poi_ncn_ref">Εθνικός κόμβος ποδηλατικού δικτύου</string>
+	<string name="poi_rcn_ref">Τοπικός κόμβος ποδηλατικού δικτύου</string>
+	<string name="poi_lcn_ref">Τοπικός κόμβος ποδηλατικού δικτύου</string>
+	<string name="poi_iwn_ref">Διεθνής κόμβος πεζοπορικού δικτύου</string>
+	<string name="poi_nwn_ref">Εθνικός κόμβος πεζοπορικού δικτύου</string>
+	<string name="poi_rwn_ref">Περιφερειακός κόμβος πεζοπορικού δικτύου</string>
+	<string name="poi_lwn_ref">Τοπικός κόμβος πεζοπορικού δικτύου</string>
+
+	<string name="poi_route_hiking_iwn_poi">Διεθνής πεζοπορική διαδρομή</string>
+	<string name="poi_route_hiking_nwn_poi">Εθνική πεζοπορική διαδρομή</string>
+	<string name="poi_route_hiking_rwn_poi">Περιφερειακή πεζοπορική διαδρομή</string>
+	<string name="poi_route_hiking_lwn_poi">Τοπική πεζοπορική διαδρομή</string>
+	<string name="poi_route_hiking_ref_poi">Παραπομπή πεζοπορικής διαδρομής</string>
+
+	<string name="poi_opening_hours">Ώρες λειτουργίας</string>
+	<string name="poi_collection_times">Ώρα συλλογής</string>
+	<string name="poi_description">Περιγραφή</string>
+	<string name="poi_phone">Τηλέφωνο</string>
+	<string name="poi_website">Ιστότοπος</string>
+	<string name="poi_email">Ηλ. διεύθυνση</string>
+	<string name="poi_fax">Τηλεομοιότυπο (φαξ)</string>
+	<string name="facebook">Facebook</string>
+	<string name="twitter">Twitter</string>
+	<string name="poi_skype">Skype</string>
+	<string name="poi_youtube">YouTube</string>
+	<string name="poi_instagram">Instagram</string>
+	<string name="vk">VKontakte</string>
+	<string name="poi_google_plus">Google+</string>
+	<string name="poi_mobile">Κινητό</string>
+	<string name="poi_service_times">Ώρες εξυπηρέτησης</string>
+	<string name="poi_maxheight">Μέγιστο ύψος</string>
+	<string name="poi_maxweight">Μέγιστο βάρος</string>
+	<string name="poi_height">Ύψος</string>
+	<string name="poi_ele">Υψόμετρο πάνω από την επιφάνεια της θάλασσας</string>
+	<string name="poi_abandoned">Παρατημένο</string>
+	<string name="poi_abandoned_poi">Παρατημένο αντικείμενο</string>
+	<string name="poi_disused">Αχρηστευμένο</string>
+
+	<string name="poi_operator">Χειριστής</string>
+	<string name="poi_brand">Επωνυμία</string>
+	<string name="poi_fee_yes">Ναι</string>
+	<string name="poi_fee_no">Όχι</string>
+	<string name="poi_drinking_water_yes">Ναι</string>
+	<string name="poi_drinking_water_no">Όχι</string>
+	<string name="poi_supervised_yes">Με εποπτεία</string>
+	<string name="poi_supervised_no">Χωρίς εποπτεία</string>
+	<string name="poi_seasonal_yes">Ναι</string>
+	<string name="poi_seasonal_no">Όχι</string>
+	<string name="poi_seasonal_dry_season">Εποχή ξηρασίας</string>
+	<string name="poi_seasonal_wet_season">Περίοδος βροχών</string>
+	<string name="poi_seasonal_spring">Άνοιξη</string>
+	<string name="poi_seasonal_summer">Καλοκαίρι</string>
+	<string name="poi_seasonal_autumn">Φθινόπωρο</string>
+	<string name="poi_seasonal_winter">Χειμώνας</string>
+	<string name="poi_crossing_traffic_signals">Με φανάρια</string>
+	<string name="poi_crossing_uncontrolled">Χωρίς φανάρια</string>
+	<string name="poi_start_date">Ημερομηνία έναρξης</string>
+	<string name="poi_wheelchair_accessibility">Πρόσβαση με καροτσάκι</string>
+	<string name="poi_wheelchair_yes">Ναι</string>
+	<string name="poi_wheelchair_no">Όχι</string>
+	<string name="poi_wheelchair_limited">Περιορισμένο</string>
+	<string name="poi_wholesale">Χονδρικώς</string>
+
+	<string name="poi_access_private">Ιδιωτική πρόσβαση</string>
+	<string name="poi_access_no">Χωρίς πρόσβαση</string>
+	<string name="poi_access_destination">Πρόσβαση ως προορισμός</string>
+	<string name="poi_access_permissive">Επιτρεπτή πρόσβαση</string>
+	<string name="poi_access_customers">Πρόσβαση πελατών</string>
+	<string name="poi_access_delivery">Πρόσβαση διανομής</string>
+	<string name="poi_access_agricultural">Αγροτική πρόσβαση</string>
+
+	<string name="poi_content_silage">Περιεχόμενο: ενσίρωση</string>
+	<string name="poi_content_water">Περιεχόμενο: νερό</string>
+	<string name="poi_content_slurry">Περιεχόμενο: κοπριά</string>
+	<string name="poi_content_oil">Περιεχόμενο: πετρέλαιο</string>
+	<string name="poi_content_fuel">Περιεχόμενο: καύσιμο</string>
+	<string name="poi_content_manure">Περιεχόμενο: λίπασμα</string>
+	<string name="poi_content_wine">Περιεχόμενο: κρασί</string>
+	<string name="poi_content_sewage">Περιεχόμενο: λύματα</string>
+	<string name="poi_content_gas">Περιεχόμενο: αέριο</string>
+	<string name="poi_content_biomass">Περιεχόμενο: βιομάζα</string>
+	<string name="poi_content_wastewater">Περιεχόμενο: απόνερα</string>
+	<string name="poi_content_crop">Περιεχόμενο: σοδειά</string>
+	<string name="poi_content_fodder">Περιεχόμενο: σανός</string>
+	<string name="poi_content_beer">Περιεχόμενο: μπίρα</string>
+	<string name="poi_content_salt">Περιεχόμενο: αλάτι</string>
+	<string name="poi_content_grain">Περιεχόμενο: δημητριακά</string>
+
+	<string name="poi_nudism_yes">Επιτρεπόμενο</string>
+	<string name="poi_nudism_no">Απαγορευμένο</string>
+	<string name="poi_nudism_obligatory">Υποχρεωτικό</string>
+	<string name="poi_nudism_customary">Συνηθισμένο</string>
+	<string name="poi_nudism_permissive">Επιτρεπτό</string>
+
+	<string name="poi_trade_building_supplies">Οικοδομικά υλικά</string>
+	<string name="poi_trade_plumbing">Υδραυλικά είδη</string>
+	<string name="poi_trade_wood">Ξύλινα είδη</string>
+	<string name="poi_trade_agricultural_supplies">Αγροτικά είδη</string>
+	<string name="poi_trade_tile">Είδη πλακιδίων</string>
+
+	<string name="poi_population">Πληθυσμός</string>
+	<string name="poi_parking_underground">Υπόγειος χώρος στάθμευσης</string>
+	<string name="poi_parking_multi_storey">Πολυώροφος χώρος στάθμευσης</string>
+
+	<string name="poi_bicycle_parking_anchors">Χώρος στάθμευσης ποδηλάτου</string>
+	<string name="poi_bicycle_parking_stands">Βάση στάθμευσης ποδηλάτου</string>
+	<string name="poi_bicycle_parking_building">Ειδικό κτίριο</string>
+	<string name="poi_bicycle_parking_bollard">Κολωνάκι ποδηλάτου</string>
+	<string name="poi_bicycle_parking_informal">Ανεπίσημο</string>
+
+	<string name="poi_leaf_type_broadleaved">Πλατύφυλλος</string>
+	<string name="poi_leaf_type_needleleaved">Βελονόφυλλο</string>
+	<string name="poi_leaf_type_mixed">Μικτό</string>
+	<string name="poi_leaf_type_leafless">Χωρίς φύλλα</string>
+	<string name="poi_species">Είδος</string>
+	<string name="poi_genus">Γένος</string>
+	<string name="poi_taxon">Ταξινομική κατηγορία</string>
+
+	<string name="poi_trees_olive">Ελιά</string>
+	<string name="poi_trees_apple">Μηλιά</string>
+	<string name="poi_trees_oil">Φοινικέλαιο</string>
+	<string name="poi_trees_orange">Πορτοκαλιά</string>
+	<string name="poi_trees_almond">Αμυγδαλιά</string>
+	<string name="poi_trees_banana">Μπανανιά</string>
+	<string name="poi_trees_hazel">Φουντουκιά</string>
+	<string name="poi_trees_coconut">Φοίνικας</string>
+	<string name="poi_trees_persimmon">Λωτός</string>
+	<string name="poi_trees_cherry">Κερασιά</string>
+	<string name="poi_trees_walnut">Καρυδιά</string>
+	<string name="poi_trees_plum">Δαμασκηνιά</string>
+	<string name="poi_trees_peach">Ροδακινιά</string>
+	<string name="poi_trees_tea">Τεϊόδενδρο</string>
+	<string name="poi_trees_coca">Κοκκαΐνη</string>
+	<string name="poi_trees_kiwi">Ακτινιδιά</string>
+	<string name="poi_trees_nectorine">Νεκταρινιά</string>
+	<string name="poi_trees_mango">Μανγκόδεντρο</string>
+	<string name="poi_trees_date">Χουρμαδιά</string>
+	<string name="poi_trees_coffea">Καφεόδενδρο</string>
+	<string name="poi_trees_pomegranate">Ροδιά</string>
+
+	<string name="poi_urban">Αστικό</string>
+	<string name="poi_rural">Αγροτικό</string>
+
+	<string name="poi_enforcement_traffic_signals">Οδικός έλεγχος: Σηματοδότες</string>
+	<string name="poi_enforcement_maxspeed">Οδικός έλεγχος: μέγιστη ταχύτητα</string>
+	<string name="poi_enforcement_maxheight">Οδικός έλεγχος: μέγιστο ύψος</string>
+	<string name="poi_enforcement_mindistance">Οδικός έλεγχος: ελάχιστη απόσταση</string>
+	<string name="poi_enforcement_check">Οδικός έλεγχος</string>
+	<string name="poi_enforcement_access">Οδικός έλεγχος: πρόσβαση</string>
+	<string name="poi_enforcement_toll">Οδικός έλεγχος: διόδια</string>
+
+	<string name="poi_animal_shelter">Καταφύγιο ζώων</string>
+	<string name="poi_animal_shelter_dog">Σκυλιά</string>
+	<string name="poi_animal_shelter_cat">Γάτες</string>
+	<string name="poi_animal_shelter_dog_cat">Σκυλιά, γάτες</string>
+	<string name="poi_animal_shelter_bird">Πουλιά</string>
+	<string name="poi_animal_shelter_wildlife">Άγρια ζωή</string>
+	<string name="poi_animal_shelter_horse">Άλογα</string>
+	<string name="poi_animal_shelter_mammal">Θηλαστικά</string>
+	<string name="poi_animal_shelter_fish">Ψάρια</string>
+
+	<string name="poi_seats">Θέσεις</string>
 	</resources>

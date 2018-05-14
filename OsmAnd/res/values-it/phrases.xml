@@ -670,7 +670,7 @@
 	<string name="poi_crane">Gru</string>
 	<string name="poi_industrial">Area industriale</string>
 	<string name="poi_bell_tower">Torre campanaria</string>
-	<string name="poi_water_transport">Trasporto su acqua</string>
+	<string name="poi_water_transport">Trasporto navale</string>
 		<string name="poi_bicycle_transport">Trasporto in bici</string>
 		<string name="poi_aerialway_transport">Trasporto a fune</string>
 		<string name="poi_node_networks">Nodo ciclistico/pedonale</string>
@@ -2475,4 +2475,9 @@
 	<string name="poi_wiki_lang_af">Africaans wiki</string>
 	<string name="poi_full_height_turnstile">Tornello a tutta altezza</string>
 	<string name="poi_stile">Scaletta</string>
+	<string name="poi_aerialway_pylon">Pilone di sollevamento aereo</string>
+
+	<string name="poi_recycling_foil">Pellicola</string>
+	<string name="poi_prosecutor">Procuratore</string>
+	<string name="synonyms_poi_nightclub">Discoteca;Disko</string>
 	</resources>
