@@ -521,7 +521,7 @@ public abstract class MenuController extends BaseMenuController implements Colla
 		return null;
 	}
 
-	private List<TransportStopRoute> getSubTransportStopRoutes(boolean nearby) {
+	protected List<TransportStopRoute> getSubTransportStopRoutes(boolean nearby) {
 		List<TransportStopRoute> allRoutes = getTransportStopRoutes();
 		if (allRoutes != null) {
 			List<TransportStopRoute> res = new ArrayList<>();

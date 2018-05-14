@@ -179,6 +179,24 @@ public class AmenityMenuController extends MenuController {
 	}
 
 	@Override
+	protected List<TransportStopRoute> getSubTransportStopRoutes(boolean nearby) {
+		List<TransportStopRoute> allRoutes = getTransportStopRoutes();
+		if (allRoutes != null) {
+			List<TransportStopRoute> res = new ArrayList<>();
+			for (TransportStopRoute route : allRoutes) {
+				boolean isCurrentRouteLocal = route.refStop != null && route.refStop.getName().equals(route.stop.getName());
+				if (!nearby && isCurrentRouteLocal) {
+					res.add(route);
+				} else if (nearby && route.refStop == null) {
+					res.add(route);
+				}
+			}
+			return res;
+		}
+		return null;
+	}
+
+	@Override
 	public void addPlainMenuItems(String typeStr, PointDescription pointDescription, LatLon latLon) {
 	}
 
@@ -261,6 +279,9 @@ public class AmenityMenuController extends MenuController {
 					r.desc = useEnglishNames ? rs.getEnName(true) : rs.getName();
 					r.route = rs;
 					r.stop = s;
+					if (amenity.getLocation().equals(s.getLocation()) || (isSubwayEntrance && type == TransportStopType.SUBWAY)) {
+						r.refStop = s;
+					}
 					r.distance = dist;
 					this.routes.add(r);
 				}
