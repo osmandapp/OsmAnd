@@ -81,7 +81,7 @@
     <string name="images_cache">Images cache</string>
     <string name="delete_search_history">Delete search history</string>
     <string name="download_images">Show images</string>
-    <string name="download_maps_travel">Travel maps</string>
+    <string name="download_maps_travel">Travel guides</string>
     <string name="shared_string_wikivoyage">Wikivoyage</string>
     <string name="article_removed">Article removed</string>
     <string name="wikivoyage_search_hint">Search: Country, city, province</string>
