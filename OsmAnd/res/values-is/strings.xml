@@ -2567,13 +2567,16 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="non_optimal_route_calculation">Reikna leiðir yfir langar fjarlægðir sem hugsanlega eru ekki þær bestu</string>
     <string name="av_locations_selected_desc">GPX-skrá með hnitum og gögnum valinna minnispunkta.</string>
     <string name="av_locations_all_desc">GPX-skrá með hnitum og gögnum allra minnispunkta.</string>
-    <string name="release_3_0">\\022 Greining á stöðvunarmerkjum er núna einnig notuð til ákvörðunar akstursstefnu
-\n 
-\n • Nýtt reiknirit gefur nothæfari upplýsingar um hækkun/lækkun í GPX-ferlum
-\n 
-\n • Göngutímar taka núna mið af landslagi/hækkun (Naismith-reglan)
-\n 
-\n</string>
+    <string name="release_3_0">\\\\022 Ný ferðavalmynd: skoða WikiVoyage-greinar án internet-tengingar\\n
+\n\\n
+\n • Wikipedia: nýtt útlit, virkir tenglar, myndir\\n
+\n\\n
+\n • Open Track viðmót: birta hópa af ferilpunktum\\n
+\n\\n
+\n • Kortamerki: innflutningur valinna hópa úr GPX-skrám, nýtt útlit fyrir innsetningu hnita\\n
+\n\\n
+\n • Áskrift að OsmAnd Live er núna með alla eiginleika OsmAnd\\n
+\n\\n</string>
     <string name="empty_state_osm_edits_descr">Búðu til eða breyttu merkisstöðum í OSM (POI), opnaðu eða gerðu athugasemdir í OSM og sendu inn skráða ferla í GPX-skrám.</string>
     <string name="one_tap_active_descr">Bankaðu á merki á kortinu til að færa það efst í virk kortamerki án þess að opna samhengisvalmyndina.</string>
     <string name="empty_state_av_notes_desc">Bættu minnispunkti með hljóði, ljósmynd eða myndskeiði á hvern punkt á kortinu, með hjálp viðmótshluta eða samhengisvalmyndar.</string>
@@ -3022,4 +3025,6 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="light_rs_render_descr">Einfaldur stíll með góðum birtuskilum fyrir leiðsögn við akstur. Fer vel með augun í næturham. Helstu eiginleikar: hæðarlínur, skýrar appelsínugular götur, litlar sjónrænar truflanir af völdum annarra kortafyrirbæra.</string>
     <string name="mapnik_render_descr">Eldri sjálfgefni \'Mapnik\' myndgerðarstíllinn. Helstu eiginleikar: Litum svipar til \'Mapnik\' stílsins.</string>
     <string name="default_render_descr">Stíll til almennrar notkunar. Einfölduð skýr framsetning fyrir þétta byggð. Helstu eiginleikar: hæðarlínur, leiðir, gæði yfirborðs, aðgangstakmarkanir, vegmerkingar, stígar skilgreindir skv. SAC-kvarða, eigindi fyrir vatnasport.</string>
+    <string name="topo_render_descr">Stíll með góðum birtuskilum hugsaður fyrir gönguferðir, fjallaferðir og hjólreiðar úti í náttúrunni. Læsilegt í erfiðum birtuskilyrðum utanhúss. Helstu eiginleikar: skýr munur á götum og náttúrufyrirbærum, hæðarlínur með ítarlegum stillingum, fleiri smáatriði á hverju aðdráttarstigi en í sjálfgefna stílnum. Stillingar á yfirborðseiginleikum gerir kleift að aðgreina leiðir eftir gæðum yfirborðs. Enginn næturhamur.</string>
+    <string name="touring_view_render_descr">Stíll með nákvæmum smáatriðum til ferðalaga. Er með öllum þeim stillingum sem fylgja sjálfgefna stílnum, en að auki: eins mörg smáatriði og mögulegt er, sérstaklega hvað varðar vegi, stíga og aðrar leiðir til umferðar. Skýr aðgreining allra gerða leiða, minnir á gamlar landakortabækur. Litastef með góðum birtuskilum til notkunar utanhúss, með dags- og næturham.</string>
     </resources>
