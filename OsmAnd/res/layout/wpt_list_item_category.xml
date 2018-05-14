@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="fill_parent"
-              android:layout_height="wrap_content"
-              xmlns:osmand="http://schemas.android.com/apk/res-auto"
-              android:orientation="vertical">
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:osmand="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
     <LinearLayout
         android:id="@+id/group_divider"
@@ -18,19 +19,19 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingLeft="@dimen/list_content_padding"
-        android:minHeight="@dimen/list_item_height"
         android:background="?attr/bg_color"
-        android:orientation="horizontal">
+        android:minHeight="@dimen/wpt_list_category_height"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/list_content_padding">
 
         <CheckBox
             android:id="@+id/toggle_item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
+            android:layout_marginRight="@dimen/list_content_padding"
             android:background="?attr/dashboard_button"
             android:focusable="false"
-            android:layout_marginRight="@dimen/list_content_padding"
             android:visibility="gone"
             tools:visiblity="visible"/>
 
@@ -45,19 +46,19 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_weight="1"
             android:layout_gravity="center_vertical"
-            android:paddingTop="8dp"
-            android:paddingBottom="8dp">
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:paddingBottom="8dp"
+            android:paddingTop="8dp">
 
             <net.osmand.plus.widgets.TextViewEx
                 android:id="@+id/category_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:textColor="?android:textColorPrimary"
-                android:textSize="@dimen/default_sub_text_size"
+                android:textColor="?attr/wikivoyage_primary_text_color"
+                android:textSize="@dimen/text_button_text_size"
                 osmand:typeface="@string/font_roboto_medium"
                 tools:text="Category name"/>
 
@@ -66,20 +67,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:textColor="?android:textColorSecondary"
+                android:textColor="@color/wikivoyage_secondary_text"
                 android:textSize="@dimen/default_sub_text_size"
+                osmand:typeface="@string/font_roboto_regular"
                 tools:text="Important points in this route"/>
 
         </LinearLayout>
 
         <ImageView
             android:id="@+id/options"
-            android:contentDescription="@string/shared_string_more"
             android:layout_width="46dp"
             android:layout_height="match_parent"
-            android:layout_marginRight="4dp"
             android:layout_gravity="center_vertical"
+            android:layout_marginRight="4dp"
             android:background="?attr/dashboard_button"
+            android:contentDescription="@string/shared_string_more"
             android:focusable="false"
             android:scaleType="center"
             android:src="@drawable/ic_overflow_menu_white"
@@ -90,9 +92,9 @@
             android:id="@+id/explist_indicator"
             android:layout_width="24dp"
             android:layout_height="match_parent"
-            android:scaleType="center"
             android:layout_gravity="center_vertical"
             android:layout_marginRight="@dimen/list_content_padding"
+            android:scaleType="center"
             android:visibility="gone"/>
 
     </LinearLayout>

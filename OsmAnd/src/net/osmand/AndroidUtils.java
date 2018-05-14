@@ -12,7 +12,10 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.StateListDrawable;
 import android.os.Build;
 import android.os.IBinder;
+import android.support.annotation.AttrRes;
+import android.support.annotation.ColorInt;
 import android.support.annotation.ColorRes;
+import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.text.Spannable;
@@ -282,6 +285,13 @@ public class AndroidUtils {
 				sp,
 				r.getDisplayMetrics()
 		);
+	}
+
+	@ColorInt
+	public static int getColorFromAttr(@NonNull Context ctx, @AttrRes int colorAttribute) {
+		TypedValue typedValue = new TypedValue();
+		ctx.getTheme().resolveAttribute(colorAttribute, typedValue, true);
+		return typedValue.data;
 	}
 
 	public static int resolveAttribute(Context ctx, int attribute) {
