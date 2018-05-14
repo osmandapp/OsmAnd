@@ -9,8 +9,8 @@
 	<string name="poi_air_transport">Tresporte aereu</string>
 	<string name="poi_water_transport">Tresporte acuáticu</string>
 	<string name="poi_communication">Comunicación</string>
-<string name="poi_fuel_type">Triba</string>
-	<string name="poi_fuel_avia_type">Triba</string>
+<string name="poi_fuel_type">Triba de combustible</string>
+	<string name="poi_fuel_avia_type">Triba de combustible (avia)</string>
 	<string name="poi_payment_type">Triba de pagu</string>
 	<string name="poi_payment_fuel_type">Tarxetes pa gasolineres</string>
 	<string name="poi_additional_type">Adicional</string>

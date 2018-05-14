@@ -2859,7 +2859,15 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="by_type">Podľa typu</string>
     <string name="one_tap_active">Jedno stlačenie aktívne</string>
     <string name="modify_the_search_query">Upraviť vyhľadávacie kritériá.</string>
-    <string name="release_3_0">\\022 
+    <string name="release_3_0">\\022 Nové menu Cestovanie: zobrazte si články WikiVoyage bez použitia Internetu
+\n
+\n • Wikipédia: nový vzhľad, aktívne linky, obrázky
+\n
+\n • Rozhranie zobrazovania stôp: zobrazuje skupiny prechodných bodov (waypointov)
+\n
+\n • Mapové značky: import vybraných skupín z GPX súborov, nový vzhľad zadávania súradníc
+\n
+\n • Predplatné OsmAnd Live zahŕňa všetky funkcie OsmAnd
 \n</string>
     <string name="what_is_here">Čo je tu:</string>
     <string name="parked_at">zaparkované o</string>

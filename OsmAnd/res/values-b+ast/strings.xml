@@ -973,7 +973,7 @@ Puntos</string>
     <string name="import_file">Importar ficheru</string>
 	<string name="waypoints_added_to_map_markers">Puntos de ruta añadíos a los marcadores del mapa</string>
 	<string name="plan_route_no_markers_toast">Hai qu\'amestar polo menos un marcador pa usar esta función.</string>
-    <string name="osn_modify_dialog_error">Hebo una esceición: Nun se camudó la nota</string>
+    <string name="osn_modify_dialog_error">Nun pudo camudase la nota</string>
     <string name="empty_state_av_notes">¡Toma notes!</string>
     <string name="yesterday">Ayeri</string>
     <string name="this_year">Esti añu</string>
@@ -1050,8 +1050,15 @@ Puntos</string>
     <string name="additional_actions">Más aiciones</string>
     <string name="av_locations_selected_desc">Ficheru GPX con coordenaes y datos de les notes esbillaes.</string>
     <string name="av_locations_all_desc">Ficheru GPX con coordenaes y datos de toles notes.</string>
-    <string name="release_3_0">\\022
+    <string name="release_3_0">\\022 Nuevu menú Viaxe : consultar los artículos de WikiVoyage ensin conexón
 \n
+\n • Wikipedia : nuevu aspeutu, imaxes
+\n
+\n • Interfazd\'apertura de traces : ver grupos de puntos de ruta
+\n
+\n • Marcadores del mapa : importar grupos seleicionaos dende ficheros GPX, nuevu aspeutu de la entrada de coordenaes
+\n
+\n • La suscripción a OsmAnd Live agora incluye toles funciones d\'OsmAnd
 \n</string>
     <string name="modify_the_search_query">Cambiar la consulta de la gueta.</string>
     <string name="shared_string_actions">Aiciones</string>
@@ -1076,11 +1083,11 @@ Puntos</string>
     <string name="track_waypoints">Puntos de ruta de la traza</string>
     <string name="favourites_group">Categoría de favoritos</string>
     <string name="add_group">Amestar un grupu</string>
-    <string name="add_group_descr">Puedes importar grupos dende favoritos o de puntos de ruta d\\\'una traza.</string>
+    <string name="add_group_descr">Importar grupos dende favoritos o de puntos de ruta de la traza.</string>
     <string name="empty_state_markers_active">¡Crea marcadores de mapa!</string>
     <string name="empty_state_markers_active_desc">Da un toque llargu o curtiu en «Llugares», llueu toca nel botón de bandera de marcador.</string>
     <string name="empty_state_markers_groups">Importar grupos</string>
-    <string name="empty_state_markers_groups_desc">Puedes importar grupos de favoritos o puntos de ruta d\\\'una traza como marcadores.</string>
+    <string name="empty_state_markers_groups_desc">Importar grupos de favoritos o puntos de ruta de la traza como marcadores.</string>
     <string name="shared_string_two">Dos</string>
     <string name="shared_string_one">Un</string>
     <string name="show_guide_line_descr">Amosar llinies de direición dende la to posición a les de marcadores activos.</string>
