@@ -894,10 +894,10 @@
 	<string name="poi_rcn_ref">地區性自行車網路節點</string>
 	<string name="poi_lcn_ref">本地自行車網路節點</string>
 
-	<string name="poi_iwn_ref">國際步行網路節點</string>
-	<string name="poi_nwn_ref">全國步行網路節點</string>
-	<string name="poi_rwn_ref">地區性步行網路節點</string>
-	<string name="poi_lwn_ref">本地步行網路節點</string>
+	<string name="poi_iwn_ref">國際登山健行網路節點</string>
+	<string name="poi_nwn_ref">全國登山健行網路節點</string>
+	<string name="poi_rwn_ref">地區性登山健行網路節點</string>
+	<string name="poi_lwn_ref">本地登山健行網路節點</string>
 
 	<string name="poi_opening_hours">營業時間</string>
 	<string name="poi_collection_times">採收時間</string>
@@ -925,14 +925,14 @@
 	<string name="poi_fee_yes">費用</string>
 
 	<string name="poi_abandoned_poi">已遺棄的物件</string>
-	<string name="poi_route_hiking_iwn_poi">國際徒步登山路線</string>
-	<string name="poi_route_hiking_nwn_poi">全國徒步登山路線</string>
-	<string name="poi_route_hiking_rwn_poi">地區性徒步登山路線</string>
-	<string name="poi_route_hiking_lwn_poi">當地徒步登山路線</string>
-	<string name="poi_route_hiking_ref_poi">徒步旅行路線參考</string>
+	<string name="poi_route_hiking_iwn_poi">國際登山健行登山路線</string>
+	<string name="poi_route_hiking_nwn_poi">全國登山健行路線</string>
+	<string name="poi_route_hiking_rwn_poi">地區性登山健行路線</string>
+	<string name="poi_route_hiking_lwn_poi">當地登山健行路線</string>
+	<string name="poi_route_hiking_ref_poi">登山健行路線參考</string>
 
-	<string name="poi_node_networks">徒步旅行/自行車網路節點</string>
-		<string name="poi_hiking_routes">徒步路線</string>
+	<string name="poi_node_networks">登山健行/自行車網路節點</string>
+		<string name="poi_hiking_routes">登山健行路線</string>
 		<string name="poi_traffic_enforcement">交通執法</string>
 	<string name="poi_access_private">私人通路</string>
 	<string name="poi_access_no">禁止通行</string>
@@ -1275,7 +1275,7 @@
 	<string name="poi_information_trail_blaze">小徑</string>
 	<string name="poi_information_terminal">資訊終端機</string>
 	<string name="poi_information_route_marker">路線標識</string>
-	<string name="poi_information_hikingmap">徒步旅行地圖</string>
+	<string name="poi_information_hikingmap">登山健行地圖</string>
 	<string name="poi_information_nature">資訊標誌：大自然</string>
 	<string name="poi_doors">門</string>
 	<string name="poi_bicycle_parking_anchors">錨泊點</string>
@@ -3877,4 +3877,10 @@
 	<string name="poi_glacier_ele_bottom">最低點</string>
 	<string name="poi_glacier_slope">平均坡度</string>
 
-</resources>
+<string name="poi_checkpoint_type">檢查站類型</string>
+
+<string name="poi_checkpoint_hiking">登山健行檢查站</string>
+	<string name="poi_checkpoint_type_code">程式碼</string>
+	<string name="poi_checkpoint_type_notebook">筆記電腦</string>
+	<string name="poi_checkpoint_type_electronic">電子</string>
+	</resources>
