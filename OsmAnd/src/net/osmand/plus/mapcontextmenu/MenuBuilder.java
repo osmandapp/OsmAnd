@@ -322,11 +322,13 @@ public class MenuBuilder {
 	}
 
 	private boolean showLocalTransportRoutes() {
-		return mapContextMenu.getLocalTransportStopRoutes().size() > 0;
+		List<TransportStopRoute> localTransportRoutes = mapContextMenu.getLocalTransportStopRoutes();
+		return localTransportRoutes != null && localTransportRoutes.size() > 0;
 	}
 
 	private boolean showNearbyTransportRoutes() {
-		return mapContextMenu.getNearbyTransportStopRoutes().size() > 0;
+		List<TransportStopRoute> nearbyTransportRoutes = mapContextMenu.getNearbyTransportStopRoutes();
+		return nearbyTransportRoutes != null && nearbyTransportRoutes.size() > 0;
 	}
 
 	void onHide() {
@@ -756,7 +758,7 @@ public class MenuBuilder {
 		}
 	}
 
-	private String getAdjustedRouteRef(String ref) {
+	private String adjustRouteRef(String ref) {
 		if (ref != null) {
 			int charPos = ref.lastIndexOf(':');
 			if (charPos != -1) {
@@ -807,7 +809,7 @@ public class MenuBuilder {
 		shape.setColor(route.getColor(mapActivity.getMyApplication(), !light));
 
 		transportRect.setBackgroundDrawable(shape);
-		transportRect.setText(getAdjustedRouteRef(route.route.getRef()));
+		transportRect.setText(adjustRouteRef(route.route.getRef()));
 		baseView.addView(transportRect);
 
 		LinearLayout infoView = new LinearLayout(view.getContext());
