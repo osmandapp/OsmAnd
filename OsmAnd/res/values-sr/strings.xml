@@ -1749,8 +1749,15 @@
     <string name="first_intermediate_dest_description">Додаје прво стајање</string>
     <string name="switch_osm_notes_visibility_desc">Прикажи/Сакриј ОСМ белешке на карти.</string>
     <string name="gpx_file">GPX фајл</string>
-    <string name="release_3_0">\\022 
+    <string name="release_3_0">\\022 Нови турустички мени: гледајте WikiVoyage чланке без коришћења интернета
 \n
+\n • Википедија: нови изглед, активне везе, слике
+\n
+\n • Open Track UI: приказ група пролазних тачака
+\n
+\n • Маркери на карти: увезите означене групе из GPX фајлова
+\n
+\n • OsmAnd Live претплата сада укључује све OsmAnd функционалности
 \n</string>
     <string name="gpx_file_desc">GPX - погодно за извоз у ЈОСМ и друге ОСМ уређиваче.</string>
     <string name="osc_file_desc">ОСЦ - погодно за извоз у OpenStreetMap.</string>
@@ -2571,13 +2578,13 @@
     <string name="online_webpage_warning">Страна доступна само док сте на мрежи. Отворити је у веб читачу?</string>
     <string name="images_cache">Кеш слика</string>
     <string name="delete_search_history">Обриши историјат претрага</string>
-    <string name="download_images">Преузми слике</string>
+    <string name="download_images">Прикажи слике</string>
     <string name="download_maps_travel">Карте путовања</string>
     <string name="shared_string_wikivoyage">Wikivoyage</string>
     <string name="article_removed">Чланак уклоњен</string>
     <string name="wikivoyage_search_hint">Претрага: држава, град, покрајина</string>
     <string name="shared_string_read">Читај</string>
-    <string name="saved_articles">Сачувани чланци</string>
+    <string name="saved_articles">Забележени чланци</string>
     <string name="shared_string_explore">Истражи</string>
     <string name="shared_string_contents">Садржаји</string>
     <string name="shared_string_result">Резултат</string>
@@ -2717,7 +2724,7 @@
     <string name="quick_action_interim_dialog">Прикажи дијалог међувремена</string>
     <string name="quick_action_duplicates">Задато име брзе радње је већ у употреби, промењено је у %1$s да би се избегло дуплирање.</string>
     <string name="quick_action_duplicate">Већ постоји брза радња са овим именом</string>
-    <string name="maps_you_need_descr">На основу чланака који сте читали, предлажено је да скинете следеће карте:</string>
+    <string name="maps_you_need_descr">На основу чланака који сте забележили, предложено је да скинете следеће карте:</string>
     <string name="osmand_accessibility_description">Са овим додатком, функције приступачности из уређаја могу да се користе директно у OsmAnd-у. Може да управља брзином изговора синтетизованих гласова, коришћење трекбола за контролу зумирања, изговара текст, нпр. да Вам каже положај.</string>
     <string name="intermediate_items_sort_return">Оптимизуј редослед успутних одредишта ка крајњем одредишту.</string>
     <string name="osmand_short_description_80_chars">Глобални преглед карти на мобилним уређајима &amp; навигација за ОСМ карте на мрежи и ван мреже</string>
@@ -2799,11 +2806,11 @@
     <string name="reports_for">Извештај за</string>
     <string name="quick_favorites_name_preset">Унапред постављено име</string>
     <string name="import_track_desc">Фајл %1$s не садржи пролазне тачке, да га увезем као путању?</string>
-    <string name="touring_view_renderer">Туристички преглед (контраст и детаљи)</string>
+    <string name="touring_view_renderer">Туристички преглед</string>
     <string name="hide_full_description">Сакриј цео опис</string>
     <string name="show_full_description">Прикажи цео опис</string>
     <string name="nautical_render_descr">Стил за речно и морско навођење. Главне одлике: бове, светионици, речни и морски путеви, луке, поморске ознаке, изобате.</string>
-    <string name="ski_map_render_descr">Стил за скијање. Главне одлике: исцртавање стаза, ваздушних путева и остали скијашких објеката на лак начин. Остали објекти на карти мање одвраћају пажњу.</string>
+    <string name="ski_map_render_descr">Стил за скијање. Главне одлике: исцртавање стаза, ски лифтова и осталих скијашких објеката на лак начин. Остали објекти на карти мање одвраћају пажњу.</string>
     <string name="light_rs_render_descr">Једноставан стил са контрастом за навођење у колима. Пријатан за очи ноћу. Главне одлике: изохипсе, наранџасти путеви са добрим контрастом, остали објекти на карти мање одвраћају пажњу.</string>
     <string name="topo_render_descr">Контрастни стил примарно намењен шетању, пешачењу, трекингу и бициклизму у природи. Добра читљивост у тешким спољним условима осветљености. Главне одлике: добар контраст за путеве и природне објекте, различити типови путања, изохипсе са напредним подешавањима, више детаља на истим нивоима увећања у односу на основни стил. Опција интегритета подлоге Вам омогућава да разликујете путеве са различитим квалитетима подлога. Нема ноћног режима.</string>
     <string name="mapnik_render_descr">Стари \"Мапник\" стил исцртавања. Главне одлике: боје су сличне као у \"Мапник\" стилу.</string>
@@ -2855,4 +2862,11 @@
     <string name="send_location_email_pattern">Да видите положај, пратите везу ка веб локацији %1$s или Андроид intent везу %2$s</string>
     <string name="voice_is_not_available_msg">Нема доступног гласовног навођења, идите у \"Поставке\" → \"Опште\" → \"Гласовно навођење\" и одаберите или скините пакет са гласовима.</string>
     <string name="number_of_rows_in_dash">Број редова на табли %1$s</string>
+    <string name="shared_string_bookmark">Забележи</string>
+    <string name="switch_to_vector_map_to_see">Постојеће векторске карте за овај положај. 
+\n\t
+\n\tДа бисте их користили, идите на \'Мени\' → \'Подеси карту\' → \'Извор карте…\' → \'Векторске карте ван мреже\'.</string>
+    <string name="osmand_routing_experimental">OsmAnd навођење ван мреже је експериментална функционалност и не ради за удаљености преко 20 km.
+\n
+\nНавођење привремено пребачено на мрежни CloudMade сервис.</string>
     </resources>
