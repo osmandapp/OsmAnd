@@ -1477,6 +1477,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			additionalInfoImageView.setVisibility(showAdditionalImage ? View.VISIBLE : View.GONE);
 		}
 		updateCompassVisibility();
+		updateAdditionalInfoVisibility();
 	}
 
 	private void updateCompassVisibility() {
@@ -1487,8 +1488,24 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 				updateDistanceDirection();
 				compassView.setVisibility(View.VISIBLE);
 			} else {
-				compassView.setVisibility(View.INVISIBLE);
+				compassView.setVisibility(View.GONE);
 			}
+		}
+	}
+
+	private void updateAdditionalInfoVisibility() {
+		TextView line3 = (TextView) view.findViewById(R.id.context_menu_line3);
+		ImageView additionalInfoImageView = (ImageView) view.findViewById(R.id.additional_info_image_view);
+		TextView additionalInfoTextView = (TextView) view.findViewById(R.id.additional_info_text_view);
+		View compassView = view.findViewById(R.id.compass_layout);
+
+		if (line3.getVisibility() == View.GONE
+				&& additionalInfoImageView.getVisibility() == View.GONE
+				&& additionalInfoTextView.getVisibility() == View.GONE
+				&& compassView.getVisibility() == View.GONE) {
+			view.findViewById(R.id.additional_info_row).setVisibility(View.GONE);
+		} else {
+			view.findViewById(R.id.additional_info_row).setVisibility(View.VISIBLE);
 		}
 	}
 
