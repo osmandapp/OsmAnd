@@ -553,6 +553,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		final ImageView imageWaypoint = (ImageView) view.findViewById(R.id.context_menu_route_image_view);
 		imageWaypoint.setImageDrawable(getIcon(menu.getWaypointActionIconId(),
 				R.color.ctx_menu_buttons_icon_color));
+		((TextView) view.findViewById(R.id.context_menu_route_text_view)).setText(menu.getWaypointActionStringId());
 		View waypointView = view.findViewById(R.id.context_menu_route_view);
 		if (menu.isButtonWaypointEnabled()) {
 			waypointView.setOnClickListener(new View.OnClickListener() {

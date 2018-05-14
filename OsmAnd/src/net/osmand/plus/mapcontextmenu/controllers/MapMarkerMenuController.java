@@ -147,6 +147,6 @@ public class MapMarkerMenuController extends MenuController {
 
 	@Override
 	public int getWaypointActionStringId() {
-		return R.string.rename_marker;
+		return R.string.shared_string_edit;
 	}
 }
