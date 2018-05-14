@@ -100,7 +100,12 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		ll.setOnLongClickListener(new View.OnLongClickListener() {
 			@Override
 			public boolean onLongClick(View v) {
-				String textToCopy = !Algorithms.isEmpty(textPrefix) ? textPrefix + ": " + txt : txt;
+				String textToCopy;
+				if (txt.contains(".wikipedia.org/w")) {
+					textToCopy = txt;
+				} else {
+					textToCopy = !Algorithms.isEmpty(textPrefix) ? textPrefix + ": " + txt : txt;
+				}
 				copyToClipboard(textToCopy, view.getContext());
 				return true;
 			}
