@@ -44,7 +44,7 @@ public class TravelDbHelper {
 
 	private static final Log LOG = PlatformUtil.getLog(TravelDbHelper.class);
 
-	private static final String ARTICLES_TABLE_NAME = "wikivoyage_articles";
+	private static final String ARTICLES_TABLE_NAME = "travel_articles";
 	private static final String POPULAR_TABLE_NAME = "popular_articles";
 	private static final String ARTICLES_COL_ID = "article_id";
 	private static final String ARTICLES_POP_INDEX = "popularity_index";
@@ -55,7 +55,7 @@ public class TravelDbHelper {
 	private static final String ARTICLES_COL_LON = "lon";
 	private static final String ARTICLES_COL_IMAGE_TITLE = "image_title";
 	private static final String ARTICLES_COL_GPX_GZ = "gpx_gz";
-	private static final String ARTICLES_COL_CITY_ID = "city_id";
+	private static final String ARTICLES_COL_TRIP_ID = "trip_id";
 	private static final String ARTICLES_COL_ORIGINAL_ID = "original_id";
 	private static final String ARTICLES_COL_LANG = "lang";
 	private static final String ARTICLES_COL_CONTENTS_JSON = "contents_json";
@@ -70,7 +70,7 @@ public class TravelDbHelper {
 			ARTICLES_COL_LON + ", " +
 			ARTICLES_COL_IMAGE_TITLE + ", " +
 			ARTICLES_COL_GPX_GZ + ", " +
-			ARTICLES_COL_CITY_ID + ", " +
+			ARTICLES_COL_TRIP_ID + ", " +
 			ARTICLES_COL_ORIGINAL_ID + ", " +
 			ARTICLES_COL_LANG + ", " +
 			ARTICLES_COL_CONTENTS_JSON + ", " +
@@ -81,14 +81,14 @@ public class TravelDbHelper {
 			ARTICLES_COL_TITLE + ", " +
 			ARTICLES_COL_LAT + ", " +
 			ARTICLES_COL_LON + ", " +
-			ARTICLES_COL_CITY_ID + ", " +
+			ARTICLES_COL_TRIP_ID + ", " +
 			ARTICLES_COL_LANG + ", " +
 			ARTICLES_POP_INDEX +
 			" FROM " + POPULAR_TABLE_NAME;
 
-	private static final String SEARCH_TABLE_NAME = "wikivoyage_search";
+	private static final String SEARCH_TABLE_NAME = "travel_search";
 	private static final String SEARCH_COL_SEARCH_TERM = "search_term";
-	private static final String SEARCH_COL_CITY_ID = "city_id";
+	private static final String SEARCH_COL_trip_id = "trip_id";
 	private static final String SEARCH_COL_ARTICLE_TITLE = "article_title";
 	private static final String SEARCH_COL_LANG = "lang";
 
@@ -194,9 +194,9 @@ public class TravelDbHelper {
 		String[] queries = searchQuery.replace('_', ' ').replace('/', ' ').split(" ");
 		if (conn != null) {
 			List<String> params = new ArrayList<>();
-			String query = "SELECT  distinct wa.city_id, wa.title, wa.lang, wa.is_part_of, wa.image_title "
-					+ "FROM wikivoyage_articles wa WHERE wa.city_id in "
-					+ " (SELECT city_id FROM wikivoyage_search WHERE search_term LIKE";
+			String query = "SELECT  distinct wa.trip_id, wa.title, wa.lang, wa.is_part_of, wa.image_title "
+					+ "FROM travel_articles wa WHERE wa.trip_id in "
+					+ " (SELECT trip_id FROM travel_search WHERE search_term LIKE";
 			for (String q : queries) {
 				if (q.trim().length() > 0) {
 					if (params.size() > 5) {
@@ -204,7 +204,7 @@ public class TravelDbHelper {
 						break;
 					}
 					if (params.size() > 0) {
-						query += " AND city_id IN (SELECT city_id FROM wikivoyage_search WHERE search_term LIKE ?) ";
+						query += " AND trip_id IN (SELECT trip_id FROM travel_search WHERE search_term LIKE ?) ";
 					} else {
 						query += "?";
 					}
@@ -263,7 +263,7 @@ public class TravelDbHelper {
 		sortPopArticlesByDistance(popReadArticles);
 		StringBuilder bld = new StringBuilder();
 		bld.append(ARTICLES_TABLE_SELECT).append(LANG_WHERE)
-				.append(" and ").append(ARTICLES_COL_CITY_ID).append(" IN (");
+				.append(" and ").append(ARTICLES_COL_TRIP_ID).append(" IN (");
 		for (int i = 0; i < popReadArticles.size() && i < POPULAR_LIMIT; i++) {
 			if (i > 0) {
 				bld.append(", ");
@@ -382,20 +382,20 @@ public class TravelDbHelper {
 		Map<String, WikivoyageSearchResult> headerObjs = new HashMap<>();
 		if (conn != null) {
 			List<String> params = new ArrayList<>();
-			StringBuilder query = new StringBuilder("SELECT a.city_id, a.title, a.lang, a.is_part_of " +
-					"FROM wikivoyage_articles a WHERE is_part_of = ? and lang = ? ");
+			StringBuilder query = new StringBuilder("SELECT a.trip_id, a.title, a.lang, a.is_part_of " +
+					"FROM travel_articles a WHERE is_part_of = ? and lang = ? ");
 			params.add(title);
 			params.add(lang);
 			if (parts != null && parts.length > 0) {
 				headers = new HashSet<>(Arrays.asList(parts));
 				headers.add(title);
-				query.append("UNION SELECT a.city_id, a.title, a.lang, a.is_part_of " +
-						"FROM wikivoyage_articles a WHERE title = ? and lang = ? ");
+				query.append("UNION SELECT a.trip_id, a.title, a.lang, a.is_part_of " +
+						"FROM travel_articles a WHERE title = ? and lang = ? ");
 				params.add(parts[0]);
 				params.add(lang);
 				for (String part : parts) {
-					query.append("UNION SELECT a.city_id, a.title, a.lang, a.is_part_of " +
-							"FROM wikivoyage_articles a WHERE is_part_of = ? and lang = ? ");
+					query.append("UNION SELECT a.trip_id, a.title, a.lang, a.is_part_of " +
+							"FROM travel_articles a WHERE is_part_of = ? and lang = ? ");
 					params.add(part);
 					params.add(lang);
 				}
@@ -450,7 +450,7 @@ public class TravelDbHelper {
 		TravelArticle res = null;
 		SQLiteConnection conn = openConnection();
 		if (conn != null) {
-			SQLiteCursor cursor = conn.rawQuery(ARTICLES_TABLE_SELECT + " WHERE " + ARTICLES_COL_CITY_ID + " = ? AND "
+			SQLiteCursor cursor = conn.rawQuery(ARTICLES_TABLE_SELECT + " WHERE " + ARTICLES_COL_TRIP_ID + " = ? AND "
 					+ ARTICLES_COL_LANG + " = ?", new String[]{String.valueOf(cityId), lang});
 			if (cursor.moveToFirst()) {
 				res = readArticle(cursor);
@@ -464,7 +464,7 @@ public class TravelDbHelper {
 		long res = 0;
 		SQLiteConnection conn = openConnection();
 		if (conn != null) {
-			SQLiteCursor cursor = conn.rawQuery("SELECT " + ARTICLES_COL_CITY_ID + " FROM "
+			SQLiteCursor cursor = conn.rawQuery("SELECT " + ARTICLES_COL_TRIP_ID + " FROM "
 					+ ARTICLES_TABLE_NAME + " WHERE " + ARTICLES_COL_TITLE + " = ? AND "
 					+ ARTICLES_COL_LANG + " = ?", new String[]{title, lang});
 			if (cursor.moveToFirst()) {
@@ -481,7 +481,7 @@ public class TravelDbHelper {
 		SQLiteConnection conn = openConnection();
 		if (conn != null) {
 			SQLiteCursor cursor = conn.rawQuery("SELECT " + ARTICLES_COL_LANG + " FROM " + ARTICLES_TABLE_NAME
-					+ " WHERE " + ARTICLES_COL_CITY_ID + " = ?", new String[]{String.valueOf(cityId)});
+					+ " WHERE " + ARTICLES_COL_TRIP_ID + " = ?", new String[]{String.valueOf(cityId)});
 			if (cursor.moveToFirst()) {
 				String baseLang = application.getLanguage();
 				do {
