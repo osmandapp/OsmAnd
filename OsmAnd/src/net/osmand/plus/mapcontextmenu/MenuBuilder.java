@@ -756,6 +756,19 @@ public class MenuBuilder {
 		}
 	}
 
+	private String getAdjustedRouteRef(String ref) {
+		if (ref != null) {
+			int charPos = ref.lastIndexOf(':');
+			if (charPos != -1) {
+				ref = ref.substring(0, charPos);
+			}
+			if (ref.length() > 4) {
+				ref = ref.substring(0, 4);
+			}
+		}
+		return ref;
+	}
+
 	public int dpToPx(float dp) {
 		Resources r = app.getResources();
 		return (int) TypedValue.applyDimension(
@@ -794,7 +807,7 @@ public class MenuBuilder {
 		shape.setColor(route.getColor(mapActivity.getMyApplication(), !light));
 
 		transportRect.setBackgroundDrawable(shape);
-		transportRect.setText(route.route.getRef());
+		transportRect.setText(getAdjustedRouteRef(route.route.getRef()));
 		baseView.addView(transportRect);
 
 		LinearLayout infoView = new LinearLayout(view.getContext());
