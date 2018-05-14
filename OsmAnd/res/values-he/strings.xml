@@ -2536,7 +2536,15 @@
     <string name="animate_my_location_desc">הפעלת הנפשת גלישת מפה של ה‚מיקום שלי’ במהלך ניווט.</string>
     <string name="shared_string_in_name">ב־%1$s</string>
     <string name="one_tap_active_descr">ניתן לגעת בסמן על המפה כדי להעביר אותו לראש הסמנים הפעילים מבלי לפתוח את תפריט ההקשר.</string>
-    <string name="release_3_0">\\022 
+    <string name="release_3_0">\\022 תפריט טיולים חדש: הצגת ערכים מוויקימסע ללא שימוש באינטרנט
+\n
+\n • ויקיפדיה: מראה חדש, קישורים פעילים, תמונות
+\n
+\n • Open Track UI: הצגת קבוצות נקודות דרך
+\n
+\n • סמני מפה: ייבוא הקבוצות הנבחרות מקובצי GPX, מראה חדש לקלט נקודות ציון
+\n
+\n • המינוי ל־OsmAnd חי כולל את כל התכונות של OsmAnd
 \n
 \n</string>
     <string name="one_tap_active">הפעלה בנגיעה אחת</string>
