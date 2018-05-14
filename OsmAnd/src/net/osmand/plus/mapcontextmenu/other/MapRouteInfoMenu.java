@@ -139,6 +139,9 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 				getTargets().setStartPoint(latlon, true, null);
 			}
 			show();
+			if (selectFromMapForIntermediate && getTargets().checkPointToNavigateShort()) {
+				mapActivity.getMapActions().openIntermediatePointsDialog();
+			}
 			return true;
 		}
 		return false;

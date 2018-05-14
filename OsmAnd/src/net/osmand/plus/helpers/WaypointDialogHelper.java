@@ -1086,9 +1086,11 @@ public class WaypointDialogHelper {
 				popup.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 					@Override
 					public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+						boolean hideDashboard = false;
 						if (id == MapRouteInfoMenu.SPINNER_FAV_ID) {
 							routeMenu.selectFavorite(null, false, true);
 						} else if (id == MapRouteInfoMenu.SPINNER_MAP_ID) {
+							hideDashboard = true;
 							routeMenu.selectOnScreen(false, true);
 						} else if (id == MapRouteInfoMenu.SPINNER_ADDRESS_ID) {
 							mapActivity.showQuickSearch(MapActivity.ShowQuickSearchMode.INTERMEDIATE_SELECTION, false);
@@ -1101,7 +1103,9 @@ public class WaypointDialogHelper {
 						}
 						popup.dismiss();
 						dismiss();
-						mapActivity.getDashboard().hideDashboard();
+						if (hideDashboard) {
+							mapActivity.getDashboard().hideDashboard();
+						}
 					}
 				});
 				popup.show();
