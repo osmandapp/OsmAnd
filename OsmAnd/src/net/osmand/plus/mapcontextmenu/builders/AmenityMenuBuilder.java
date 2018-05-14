@@ -56,6 +56,8 @@ import java.util.Map;
 
 public class AmenityMenuBuilder extends MenuBuilder {
 
+	private static final String WIKI_LINK = ".wikipedia.org/w";
+
 	private final Amenity amenity;
 
 	public AmenityMenuBuilder(MapActivity mapActivity, final Amenity amenity) {
@@ -101,7 +103,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			@Override
 			public boolean onLongClick(View v) {
 				String textToCopy;
-				if (txt.contains(".wikipedia.org/w")) {
+				if (txt.contains(WIKI_LINK)) {
 					textToCopy = txt;
 				} else {
 					textToCopy = !Algorithms.isEmpty(textPrefix) ? textPrefix + ": " + txt : txt;
@@ -298,7 +300,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			ll.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					if (text.contains(".wikipedia.org/w")) {
+					if (text.contains(WIKI_LINK)) {
 						if (Version.isPaidVersion(app)) {
 							WikiArticleHelper wikiArticleHelper = new WikiArticleHelper(mapActivity, !light);
 							wikiArticleHelper.showWikiArticle(amenity.getLocation(), text);
