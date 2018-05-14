@@ -1413,4 +1413,89 @@
 	<string name="poi_animal_shelter_fish">Ψάρια</string>
 
 	<string name="poi_seats">Θέσεις</string>
+	<string name="poi_crossing_unmarked">Χωρίς οδική σήμανση</string>
+	<string name="poi_trees_rubber">Καουτσουκόδεντρο</string>
+	<string name="poi_backrest_yes">Πλάτη καθίσματος: ναι</string>
+	<string name="poi_backrest_no">Πλάτη καθίσματος: όχι</string>
+
+	<string name="poi_intermittent">Διακεκομμένο</string>
+
+	<string name="poi_building">Κτίριο</string>
+	<string name="poi_deadlock">Αδιέξοδος</string>
+
+	<string name="poi_generator_source_coal">Πηγή ενέργειας: κάρβουνο</string>
+	<string name="poi_generator_source_gas">Πηγή ενέργειας: γκάζι</string>
+	<string name="poi_generator_source_nuclear">Πηγή ενέργειας: πυρηνική</string>
+	<string name="poi_generator_source_solar">Πηγή ενέργειας: ηλιακή</string>
+	<string name="poi_generator_source_hydro">Πηγή ενέργειας: υδροηλεκτρική</string>
+	<string name="poi_generator_source_wind">Πηγή ενέργειας: άνεμος</string>
+	<string name="poi_generator_source_geothermal">Πηγή ενέργειας: γεωθερμική</string>
+	<string name="poi_generator_source_oil">Πηγή ενέργειας: πετρέλαιο</string>
+	<string name="poi_generator_source_diesel">Πηγή ενέργειας: ντίζελ</string>
+
+	<string name="poi_int_name">Διεθνές όνομα</string>
+	<string name="poi_nat_name">Εθνικό όνομα</string>
+	<string name="poi_reg_name">Περιφερειακό όνομα</string>
+	<string name="poi_loc_name">Τοπικό όνομα</string>
+	<string name="poi_old_name">Παλιό όνομα</string>
+	<string name="poi_alt_name">Εναλλακτικό όνομα</string>
+
+	<string name="poi_pump_manual">Χειροκίνητη</string>
+	<string name="poi_pump_powered">Τροφοδοτούμενη</string>
+	<string name="poi_pump_no">Χωρίς αντλία</string>
+	<string name="poi_pump_yes">Ναι</string>
+
+	<string name="poi_water_characteristic_mineral">Μεταλλικό</string>
+	<string name="poi_water_characteristic_mud">Χαρακτηριστικό νερού: λάσπη</string>
+	<string name="poi_water_characteristic_sulfuric">Θειικό</string>
+
+	<string name="poi_water_point">Σημείο νερού</string>
+
+	<string name="poi_information_guidepost">Οδοδείκτης</string>
+	<string name="poi_information_board">Πίνακας</string>
+	<string name="poi_information_map">Χάρτης</string>
+	<string name="poi_information_office">Γραφείο</string>
+	<string name="poi_information_trail_blaze">Σημάδι μονοπατιού</string>
+	<string name="poi_information_terminal">Τερματικό</string>
+	<string name="poi_information_route_marker">Δείκτης διαδρομής</string>
+	<string name="poi_information_hikingmap">Πεζοπορικός χάρτης</string>
+	<string name="poi_information_nature">Φύση</string>
+	<string name="poi_information_history">Ιστορικό</string>
+	<string name="poi_information_sign">Σήμα</string>
+	<string name="poi_information_audioguide">Ηχητικός οδηγός</string>
+	<string name="poi_information_bicyclemap">Ποδηλατικός χάρτης</string>
+	<string name="poi_information_tactile_model">Απτικό πρότυπο</string>
+	<string name="poi_information_tactile_map">Απτικός χάρτης</string>
+	<string name="poi_board_type_notice">Πίνακας ανακοινώσεων</string>
+	<string name="poi_board_type_plants">Φυτά</string>
+	<string name="poi_board_type_geology">Γεωλογία</string>
+	<string name="poi_board_type_public_transport">Δημόσιες συγκοινωνίες</string>
+	<string name="poi_board_type_technology">Τεχνολογία</string>
+	<string name="poi_board_type_astronomy">Αστρονομία</string>
+
+	<string name="poi_fireplace_yes">Ναι</string>
+	<string name="poi_fireplace_no">Χωρίς τζάκι</string>
+
+	<string name="poi_covered_yes">Ναι</string>
+	<string name="poi_covered_no">Δεν καλύπτεται</string>
+
+	<string name="poi_smoking_no">Δεν επιτρέπεται</string>
+	<string name="poi_smoking_outside">Μόνο έξω</string>
+	<string name="poi_smoking_yes">Επιτρέπεται</string>
+	<string name="poi_smoking_separated">Σε ξεχωριστό δωμάτιο</string>
+	<string name="poi_smoking_isolated">Σε απομονωμένο δωμάτιο</string>
+	<string name="poi_smoking_dedicated">Μόνο για καπνιστές</string>
+
+	<string name="poi_toll_yes">Διόδια</string>
+	<string name="poi_toll_no">Χωρίς διόδια</string>
+	<string name="poi_toll_hgv_yes">Διόδια για βαρέα οχήματα</string>
+	<string name="poi_tactile_paving_yes">Ναι</string>
+	<string name="poi_tactile_paving_no">Χωρίς απτικό πλακόστρωτο</string>
+	<string name="poi_traffic_signals_sound_yes">Ναι</string>
+	<string name="poi_traffic_signals_sound_no">Όχι</string>
+	<string name="poi_traffic_signals_sound_walk">Μόνο όταν επιτρέπεται το περπάτημα</string>
+
+	<string name="poi_rescue_station">Σταθμός διάσωσης</string>
+
+	<string name="poi_services">ΣΕΑ</string>
 	</resources>
