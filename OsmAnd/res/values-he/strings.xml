@@ -1213,20 +1213,20 @@
     <string name="shared_string_hide">הסתרה</string>
     <string name="av_video_quality_low">איכות וידאו נמוכה</string>
     <string name="av_video_quality_high">איכות וידאו גבוהה</string>
-    <string name="av_video_quality">איכות וידאו</string>
+    <string name="av_video_quality">איכות פלט וידאו</string>
     <string name="av_video_quality_descr">בחירת רמת איכות הווידאו.</string>
-    <string name="av_audio_format">פורמט שמע</string>
+    <string name="av_audio_format">תבנית פלט שמע</string>
     <string name="av_audio_format_descr">בחירת המבנה לפלט שמע.</string>
     <string name="av_audio_bitrate">קצב סיביות להקלטת שמע</string>
     <string name="av_audio_bitrate_descr">בחירת קצב הסיביות לשמע.</string>
     <string name="please_specify_poi_type_only_from_list">נא לבחור את נקודת העניין הנכונה מהרשימה או לדלג.</string>
     <string name="access_from_map_description">כפתור התפריט מציג את לוח המחוונים במקום את התפריט</string>
-    <string name="access_from_map">גישה מתצוגת המפה</string>
+    <string name="access_from_map">גישה מהמפה</string>
     <string name="show_on_start_description">במצב כבוי תוצג המפה מיד עם הכניסה ליישום.</string>
-    <string name="show_on_start">תצוגה בכניסה ליישום</string>
+    <string name="show_on_start">הצגה בהפעלת היישומון</string>
     
     <string name="shared_string_continue">המשך</string>
-    <string name="shared_string_record">רשומה</string>
+    <string name="shared_string_record">הקלטה</string>
     <string name="gpx_logging_no_data">אין נתונים</string>
     <string name="gpx_appearance">מראה</string>
     
@@ -1243,9 +1243,9 @@
     <string name="weekly">שבועי</string>
     <string name="night">לילה</string>
     <string name="daily">יומי</string>
-    <string name="update_time">זמן עידכון</string>
-    <string name="update_now">עדכן עכשיו</string>
-    <string name="updates_size">גודל עידכון</string>
+    <string name="update_time">מועד עדכון</string>
+    <string name="update_now">עדכון כעת</string>
+    <string name="updates_size">גודל העדכון</string>
     <string name="shared_string_filters">מסננים</string>
     <string name="save_filter">שמירת מסנן</string>
     <string name="delete_filter">מחיקת מסנן</string>
