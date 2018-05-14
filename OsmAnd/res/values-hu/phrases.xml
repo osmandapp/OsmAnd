@@ -23,14 +23,14 @@
 	<string name="poi_antiques">Régiségkereskedés</string>
 	<string name="poi_chemist">Drogéria</string>
 	<string name="poi_copyshop">Fénymásoló</string>
-	<string name="poi_florist">Virágárus</string>
+	<string name="poi_florist">Virágbolt</string>
 	<string name="poi_garden_centre">Kertészet</string>
 	<string name="poi_gift">Ajándékbolt</string>
 	<string name="poi_hardware">Vas-műszaki bolt</string>
 	<string name="poi_jewelry">Ékszerbolt</string>
 	<string name="poi_motorcycle">Motorkerékpárbolt</string>
 	<string name="poi_sports">Sportbolt</string>
-	<string name="poi_ticket">Jegyárus</string>
+	<string name="poi_ticket">Jegypénztár</string>
 	<string name="poi_tobacco">Dohánybolt</string>
 	<string name="poi_toys">Játékbolt</string>
 	<string name="poi_variety_store">100 forintos bolt</string>
@@ -3836,5 +3836,27 @@
 	<string name="poi_via_ferrata">Via ferrata (vasalt út)</string>
 	<string name="poi_cable_number">Sodronyok száma</string>
 	<string name="poi_via_ferrata_scale">Nehézségi fok</string>
+
+<string name="poi_glacier_type">Gleccser típusa</string>
+
+<string name="poi_outpost">Üzlet árukiszállítási helye</string>
+
+	<string name="poi_glacier_type_icecap">Jégsapka</string>
+	<string name="poi_glacier_type_icefield">Jégmező</string>
+	<string name="poi_glacier_type_plateau">Fennsík</string>
+	<string name="poi_glacier_type_valley">Völgyi gleccser</string>
+	<string name="poi_glacier_type_outlet">Jégsapkákból, jégtakaróból táplálkozó</string>
+	<string name="poi_glacier_type_tidewater">Tengerbe borjadzó</string>
+	<string name="poi_glacier_type_mountain">Kisebb hegyi gleccser</string>
+	<string name="poi_glacier_type_hanging">Függő gleccser</string>
+	<string name="poi_glacier_type_icefall">Jégzuhatag</string>
+	<string name="poi_glacier_type_rock">Sziklás</string>
+	<string name="poi_glacier_type_shelf">Selfjég</string>
+	<string name="poi_glacier_type_remnant">Gleccsermaradvány</string>
+	<string name="poi_glacier_type_ice_tongue">Jégnyelv</string>
+
+	<string name="poi_glacier_ele_top">Legmagasabb pont</string>
+	<string name="poi_glacier_ele_bottom">Legalacsonyabb pont</string>
+	<string name="poi_glacier_slope">Átlagos lejtés (%)</string>
 
 </resources>
