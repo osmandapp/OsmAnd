@@ -3800,4 +3800,13 @@
 	<string name="poi_glacier_ele_bottom">Низшая точка</string>
 	<string name="poi_glacier_slope">Средний уклон</string>
 
-	</resources>
+	<string name="poi_checkpoint_type">Тип контрольного пункта</string>
+
+	<string name="poi_checkpoint_hiking">Пешеходный контрольный пункт</string>
+	<string name="poi_checkpoint_type_stamp">Точка штамповки</string>
+	<string name="poi_checkpoint_type_code">Код</string>
+	<string name="poi_checkpoint_type_notebook">Блокнот</string>
+	<string name="poi_checkpoint_type_electronic">Электронный</string>
+	<string name="poi_course">Маршрут</string>
+
+</resources>

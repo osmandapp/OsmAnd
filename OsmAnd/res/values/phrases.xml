@@ -106,6 +106,7 @@
 	<string name="poi_socket_schuko_output_filter">Schuko output</string>
 	<string name="poi_service_car">Car service</string>
 	<string name="poi_glacier_type">Glacier type</string>
+	<string name="poi_checkpoint_type">Checkpoint type</string>
 
 <!--  categories -->
 	<string name="poi_shop">Store</string>
@@ -3821,5 +3822,14 @@
 	<string name="poi_glacier_ele_top">Highest point</string>
 	<string name="poi_glacier_ele_bottom">Lowest point</string>
 	<string name="poi_glacier_slope">Average slope</string>
+
+	<string name="poi_checkpoint_hiking">Hiking checkpoint</string>
+	<string name="poi_checkpoint_type_stamp">Stamping point</string>
+	<string name="poi_checkpoint_type_code">Code</string>
+	<string name="poi_checkpoint_type_notebook">Notebook</string>
+	<string name="poi_checkpoint_type_needler">Needler</string>
+	<string name="poi_checkpoint_type_quize">Quize</string>
+	<string name="poi_checkpoint_type_electronic">Electronic</string>
+	<string name="poi_course">Course</string>
 
 </resources>
