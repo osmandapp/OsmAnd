@@ -3014,10 +3014,12 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="how_to_open_link">Hvernig á að opna tengilinn?</string>
     <string name="read_wikipedia_offline">Lesa Wikipedia ónettengt</string>
     <string name="download_all">Sækja allt</string>
-    <string name="shared_string_bookmark">Bókamerki</string>
     <string name="hide_full_description">Fela fulla lýsingu</string>
     <string name="show_full_description">Sýna fulla lýsingu</string>
     <string name="off_road_render_descr">Hentar til notkunar við akstur utan vega. Hentar til notkunar með grænar gervihnattamyndir sem undirlagskort. Helstu eiginleikar: minni línusverleiki aðalvega, aukin línusverleiki gangstíga, slóða, reiðhjólaleiða og annarra leiða. Byggt á \' Topo\' stíl.</string>
     <string name="nautical_render_descr">Leiðsagnarstíll fyrir sjó og vötn. Helstu eiginleikar: baujur, siglingamerki, siglingaleiðir og merkingar, hafnir, þjónustur við sæfarendur, dýptarlínur.</string>
     <string name="ski_map_render_descr">Stíll fyrir skíði og vetraríþróttir. Helstu eiginleikar: myndgerir skíðaleiðir, skíðalyftur og aðra skíðaeiginleika á þægilegan hátt. Minni sjónræn truflun af völdum annarra kortahluta.</string>
+    <string name="light_rs_render_descr">Einfaldur stíll með góðum birtuskilum fyrir leiðsögn við akstur. Fer vel með augun í næturham. Helstu eiginleikar: hæðarlínur, skýrar appelsínugular götur, litlar sjónrænar truflanir af völdum annarra kortafyrirbæra.</string>
+    <string name="mapnik_render_descr">Eldri sjálfgefni \'Mapnik\' myndgerðarstíllinn. Helstu eiginleikar: Litum svipar til \'Mapnik\' stílsins.</string>
+    <string name="default_render_descr">Stíll til almennrar notkunar. Einfölduð skýr framsetning fyrir þétta byggð. Helstu eiginleikar: hæðarlínur, leiðir, gæði yfirborðs, aðgangstakmarkanir, vegmerkingar, stígar skilgreindir skv. SAC-kvarða, eigindi fyrir vatnasport.</string>
     </resources>
