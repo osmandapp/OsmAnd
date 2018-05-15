@@ -1498,4 +1498,44 @@
 	<string name="poi_rescue_station">Σταθμός διάσωσης</string>
 
 	<string name="poi_services">ΣΕΑ</string>
+	<string name="poi_checkpoint_type">Τύπος σημείου ελέγχου</string>
+
+<string name="poi_sally_port">Πύλη οχύρωσης</string>
+	<string name="poi_mini_roundabout">Μικρός κυκλικός κόμβος</string>
+	<string name="poi_railway_crossing">Ισόπεδη διάβαση</string>
+	<string name="poi_railway_level_crossing">Ισόπεδη διασταύρωση</string>
+	<string name="poi_bird_hide">Παρατηρητήριο πουλιών</string>
+	<string name="poi_horse_riding">Ιππασία</string>
+	<string name="poi_leisure_common">Κοινός χώρος αναψυχής</string>
+	<string name="poi_garden">Κήπος</string>
+
+	<string name="poi_heath">Ανοιχτός χώρος με θάμνους</string>
+	<string name="poi_grass">Χορτάρι</string>
+	<string name="poi_grassland">Λιβάδι</string>
+	<string name="poi_scrub">Θάμνοι</string>
+	<string name="poi_farmland">Χωράφι</string>
+	<string name="poi_logging">Υλοτομία</string>
+	<string name="poi_sand">Άμμος</string>
+
+	<string name="poi_windfall">Πεσμένος καρπός</string>
+	<string name="poi_dead_wood">Νεκρό ξύλο</string>
+
+	<string name="poi_passing_place">Πλάτωμα μονόδρομου</string>
+	<string name="poi_level">Επίπεδο</string>
+	<string name="poi_rtsa_scale">Κλίμακα RTSA</string>
+
+	<string name="poi_piste_difficulty_easy">Εύκολη</string>
+	<string name="poi_piste_difficulty_intermediate">Μεσαία</string>
+	<string name="poi_piste_difficulty_advanced">Δύσκολη</string>
+	<string name="poi_piste_difficulty_novice">Αρχάριοι</string>
+	<string name="poi_piste_difficulty_expert">Ειδικός</string>
+	<string name="poi_piste_difficulty_freeride">Ελεύθερη διαδρομή</string>
+	<string name="poi_piste_grooming_classic">Κλασική</string>
+	<string name="poi_piste_grooming_classic_skating">Κλασική+παγοδρομία</string>
+	<string name="poi_piste_grooming_backcountry">Απομακρυσμένη</string>
+	<string name="poi_piste_grooming_scooter">Σκούτερ</string>
+	<string name="poi_piste_grooming_skating">Παγοδρομία</string>
+	<string name="poi_piste_grooming_no">Όχι</string>
+	<string name="poi_piste_grooming_mogul">Στοίβα χιονιού (μόγκουλ)</string>
+
 	</resources>

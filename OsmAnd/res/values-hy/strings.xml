@@ -2743,7 +2743,7 @@
     <string name="lang_lo">"Lao "</string>
     <string name="day_off_label">Ոչ աշխ․ օր</string>
     <string name="winter_and_ski_renderer">"Ձմեռային / լեռնադահուկային "</string>
-    <string name="touring_view_renderer">Զբոսաշրջական տեսք (հակադրություն և մանրամասներ)</string>
+    <string name="touring_view_renderer">Զբոսաշրջական տեսք</string>
     <string name="nautical_renderer">Ծովային</string>
     <string name="copy_location_name">Պատճենահանել կետի անվանումը / POI</string>
     <string name="toast_empty_name_error">Դիրքը անուն չունի</string>
@@ -2787,4 +2787,20 @@
     <string name="default_render_descr">Ընդհանուր ոճ: Խիտ բնակեցված քաղաքներում պարզեցված ռենդերինգ: Հիմնական առանձնահատկություններ՝ Եզրագծային գծեր, երթուղիներ, ճանապարհերի մակերեսային որակնը, մուտքի սահմանափակումներ, ճանապարհային նշաններ, SAC սանդղակի երթուղիների արտացոլում, սպորտային համաձուլվածքների բնութագրեր:</string>
     <string name="open_wikipedia_link_online">Բացել Wikipedia հղումը առցանց</string>
     <string name="open_wikipedia_link_online_description">Հղումը կբացվի վեբ բրաուզերում:</string>
+    <string name="shared_string_bookmark">Էջանշան</string>
+    <string name="how_to_open_link">Ինչպես բացել հղում?</string>
+    <string name="read_wikipedia_offline">կարդալ Wikipedia անցանց</string>
+    <string name="download_all">Ներբեռնել բոլորը</string>
+    <string name="shared_string_restart">Վերագործարկ</string>
+    <string name="show_images">Ցուցադրել նկարները</string>
+    <string name="purchase_cancelled_dialog_title">Դուք չեղյալ եք հայտարարել ձեր OsmAnd Live բաժանորդագրությունը</string>
+    <string name="purchase_cancelled_dialog_descr">Վերսկսել բաժանորդագրությունը, որպեսզի շարունակել օգտագործել բոլոր հնարավորությունները՝</string>
+
+    <string name="start_editing_card_description">Դուք կարող եք և պետք է խմբագրեք Wikivoyage-ի ցանկացած հոդված։ Կիսվել գիտելիքներով, փորձով, տաղանդով, և Ձեր ուշադրությունը</string>
+    <string name="travel_guide">Wikivoyage Ճանապարհորդական ուղեցույց</string>
+    <string name="download_images">Ցուցադրել նկարները</string>
+    <string name="shared_string_wikivoyage">Վիկիուղեցույց / Wikivoyage</string>
+    <string name="article_removed">Հոդվածը հեռացվել է</string>
+    <string name="wikivoyage_search_hint">Որոնում `Երկիր, քաղաք, մարզ</string>
+    <string name="shared_string_read">Կարդալ</string>
     </resources>
