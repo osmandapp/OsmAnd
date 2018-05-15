@@ -784,7 +784,7 @@ Pôr do Sol: %2$s</string>
     <string name="layer_recordings">Camada de gravação</string>
     <string name="recording_can_not_be_played">Gravação não pode ser reproduzida</string>
     <string name="recording_context_menu_delete">Apagar gravação</string>
-    <string name="recording_context_menu_play">Tocar</string>
+    <string name="recording_context_menu_play">Ouvir</string>
     <string name="recording_description">Gravando %1$s %3$s %2$s</string>
     <string name="recording_default_name">Gravando</string>
     <string name="map_widget_av_notes">Notas de áudio/vídeo</string>
@@ -1654,7 +1654,7 @@ Pôr do Sol: %2$s</string>
 	<string name="av_camera_focus_macro">Foco macro (close-up)</string>
 	<string name="av_camera_focus_continuous">A câmera tenta focar continuamente</string>
 	<string name="av_photo_play_sound">Som ao fotografar</string>
-	<string name="av_photo_play_sound_descr">Escolher se tocará som quando tirar fotos</string>
+	<string name="av_photo_play_sound_descr">Escolher se tocará som quando tirar fotos.</string>
 	<string name="av_camera_pic_size">Tamanho da foto</string>
 	<string name="av_camera_pic_size_descr">Selecionar tamanho de imagem da foto</string>
     <string name="navigation_intent_invalid">Formato inválido: %s</string>
@@ -2266,7 +2266,7 @@ Pôr do Sol: %2$s</string>
     <string name="select_city">Selecionar cidade</string>
     <string name="select_postcode">Selecionar código postal</string>
     <string name="quick_action_auto_zoom">Zoom automático do mapa ligar/desligar</string>
-    <string name="quick_action_auto_zoom_desc">Tocar no botão de ação irá ligar/desligar a ampliação/redução automática do mapa de acordo com sua velocidade.</string>
+    <string name="quick_action_auto_zoom_desc">Tocar neste botão de ação irá ligar/desligar o zoom automático do mapa de acordo com sua velocidade.</string>
     <string name="quick_action_auto_zoom_on">Ativar zoom automático do mapa</string>
     <string name="quick_action_auto_zoom_off">Desativar zoom automático do mapa</string>
     <string name="quick_action_add_destination">Adicionar destino</string>
@@ -2443,7 +2443,7 @@ Pôr do Sol: %2$s</string>
 <string name="empty_state_av_notes_desc">Adicionar nota de áudio, vídeo ou foto para cada ponto no mapa, usando o widget ou o menu de contexto.</string>
     <string name="quick_action_add_destination_desc">Tocar no botão de ação adicionará um destino no local do centro da tela. O destino anteriormente definido se torna o último destino intermediário.</string>
     <string name="quick_action_replace_destination_desc">Tocar no botão de ação substituirá o destino com o local do centro da tela.</string>
-    <string name="quick_action_add_first_intermediate_desc">Tocar no botão de ação adicionará um primeiro ponto intermédio no local do centro da tela.</string>
+    <string name="quick_action_add_first_intermediate_desc">Tocar neste botão de ação adicionará o primeiro ponto intermédio no centro da tela.</string>
     <string name="subscribe_email_desc">Assine a nossa lista de e-mail sobre descontos do aplicativo e obtenha mais 3 downloads de mapa!</string>
     <string name="do_not_send_anonymous_app_usage_desc">OsmAnd coleta informações sobre quais partes do aplicativo você abrir. A sua localização nunca é enviada, nem qualquer coisa digitada no aplicativo ou detalhes das áreas que você visualizar, pesquisar ou baixar.</string>
     <string name="auto_split_recording_title">Autodividir gravações após um intervalo</string>
