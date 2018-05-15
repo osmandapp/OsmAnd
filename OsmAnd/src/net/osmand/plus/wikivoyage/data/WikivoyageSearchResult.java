@@ -9,14 +9,14 @@ public class WikivoyageSearchResult {
 
 	private static final int SHOW_LANGS = 3;
 
-	long cityId;
+	long tripId;
 	List<String> articleTitles = new ArrayList<>();
 	List<String> langs = new ArrayList<>();
 	List<String> isPartOf = new ArrayList<>();
 	String imageTitle;
 
-	public long getCityId() {
-		return cityId;
+	public long getTripId() {
+		return tripId;
 	}
 
 	public List<String> getArticleTitles() {
