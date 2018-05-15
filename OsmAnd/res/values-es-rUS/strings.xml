@@ -2444,7 +2444,7 @@ Lon %2$s</string>
     <string name="points_delete_multiple_succesful">Punto(s) borrado(s).</string>
     <string name="points_delete_multiple">¿Borrar %1$d punto(s)?</string>
     <string name="route_points_category_name">Giros a pasar en esta ruta</string>
-    <string name="track_points_category_name">Puntos destacados en esta ruta</string>
+    <string name="track_points_category_name">Puntos de ruta, puntos de interés, características nombradas</string>
     <string name="add_new_folder">Añadir nueva carpeta</string>
     <string name="shared_string_slope">Pendiente</string>
     <string name="lang_ber">Bereber (amazig)</string>
@@ -2874,7 +2874,15 @@ Lon %2$s</string>
     <string name="by_date">Por fecha</string>
     <string name="by_type">Por tipo</string>
     <string name="modify_the_search_query">Modificar la consulta de búsqueda.</string>
-    <string name="release_3_0">• 
+    <string name="release_3_0">• Nuevo menú «Viajes»: ver artículos de WikiViajes sin usar una conexión a Internet
+\n
+\n • Wikipedia: Nuevo aspecto, enlaces activos, imágenes
+\n
+\n • Interfaz de apertura de traza: visualizar grupos de los puntos de ruta
+\n
+\n • Marcadores del mapa: importación de grupos seleccionados desde archivos GPX, nuevo aspecto en el ingreso de coordenadas
+\n
+\n • La suscripción de OsmAnd Live, ahora incluye todas las características de OsmAnd
 \n</string>
     <string name="what_is_here">Aquí hay:</string>
     <string name="parked_at">estacionado a las</string>
@@ -2979,7 +2987,7 @@ Lon %2$s</string>
     <string name="shared_string_read">Leer</string>
     <string name="article_removed">Artículo borrado</string>
     <string name="shared_string_contents">Contenido</string>
-    <string name="download_maps_travel">Mapas turísticos</string>
+    <string name="download_maps_travel">Guías turísticas</string>
     <string name="shared_string_wikivoyage">Wikiviajes</string>
     <string name="index_item_world_wikivoyage">Artículos de Wikiviajes en todo el mundo</string>
     <string name="online_webpage_warning">La página sólo está disponible en línea. ¿Abrirla en el navegador web?</string>
