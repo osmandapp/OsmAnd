@@ -3075,9 +3075,9 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="popular_destinations">Popularne cele podróży</string>
     <string name="paid_app">Aplikacja płatna</string>
     <string name="paid_plugin">Wtyczka płatna</string>
-    <string name="travel_card_update_descr">Dostępne są nowe dane Wikipodróży, zaktualizuj je, aby cieszyć się nimi.</string>
+    <string name="travel_card_update_descr">Dostępne są nowe dane Wikipodróży. Proszę je uaktualnić, aby z nich korzystać.</string>
 	<string name="travel_card_download_descr">Pobierz te przewodniki podróży Wikipodróże, aby wyświetlić artykuły o miejscach na całym świecie bez połączenia z Internetem.</string>
-	<string name="update_is_available">Aktualizacja jest dostępna</string>
+	<string name="update_is_available">Dostępne uaktualnienie</string>
 	<string name="download_file">Pobierz plik</string>
     <string name="start_editing_card_image_text">Bezpłatny przewodnik po świecie, który każdy może edytować.</string>
     <string name="welcome_to_open_beta_description">Podróże oparte są na Wikivoyage. Podczas otwartych beta-testów masz możliwość oceny wszystkich funkcji za darmo. Po zakończeniu okresu beta, Podróże będą dostępne dla subskrybentów OsmAnd Unlimited oraz posiadaczy OsmAnd+</string>
@@ -3138,7 +3138,8 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="purchase_cancelled_dialog_title">Anulowano subskrypcję OsmAnd Live</string>
     <string name="purchase_cancelled_dialog_descr">Proszę przedłużyć subskrypcję, aby kontynuować korzystanie z wszystkich funkcji:</string>
 
-    <string name="maps_you_need_descr">Na podstawie zapisanych artykułów, zalecamy pobranie poniższych map:</string>
-    <string name="maps_you_need">Mapy, które potrzebujesz</string>
+    <string name="maps_you_need_descr">Zalecamy pobranie poniższych map, na podstawie zapisanych artykułów:</string>
+    <string name="maps_you_need">Potrzebne mapy</string>
     <string name="osmand_team">Zespół OsmAnd</string>
+    <string name="download_all">Pobierz wszystkie</string>
     </resources>
