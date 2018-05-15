@@ -761,6 +761,10 @@ public class GpxSelectionHelper {
 		public int getColor() {
 			return color;
 		}
+
+		public void setColor(int color) {
+			this.color = color;
+		}
 	}
 
 	public static class GpxDisplayItem {

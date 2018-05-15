@@ -100,7 +100,7 @@ public class WikivoyageArticleNavigationFragment extends MenuBottomSheetDialogFr
 			public boolean onChildClick(ExpandableListView parent, View v,
 										int groupPosition, int childPosition, long id) {
 				WikivoyageSearchResult articleItem = listAdapter.getArticleItem(groupPosition, childPosition);
-				sendResults(articleItem.getCityId());
+				sendResults(articleItem.getTripId());
 				dismiss();
 				return true;
 			}
@@ -109,10 +109,10 @@ public class WikivoyageArticleNavigationFragment extends MenuBottomSheetDialogFr
 			@Override
 			public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
 				WikivoyageSearchResult articleItem = (WikivoyageSearchResult) listAdapter.getGroup(groupPosition);
-				if (articleItem.getCityId() == UNDEFINED) {
+				if (articleItem.getTripId() == UNDEFINED) {
 					Toast.makeText(getContext(), R.string.wiki_article_not_found, Toast.LENGTH_LONG).show();
 				} else {
-					sendResults(articleItem.getCityId());
+					sendResults(articleItem.getTripId());
 					dismiss();
 				}
 				return true;
@@ -235,7 +235,7 @@ public class WikivoyageArticleNavigationFragment extends MenuBottomSheetDialogFr
 								 boolean isLastChild, View convertView, ViewGroup parent) {
 			WikivoyageSearchResult articleItem = getArticleItem(groupPosition, childPosition);
 			String childTitle = articleItem.getArticleTitles().get(0);
-			boolean selected = cityId == articleItem.getCityId() || parentsList.contains(childTitle);
+			boolean selected = cityId == articleItem.getTripId() || parentsList.contains(childTitle);
 
 			if (convertView == null) {
 				convertView = LayoutInflater.from(context)

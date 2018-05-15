@@ -3167,4 +3167,6 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="read_wikipedia_offline">Leggi Wikipedia senza una connessione dati</string>
     <string name="download_all">Scarica tutto</string>
     <string name="shared_string_bookmark">Segnalibro</string>
+    <string name="off_road_render_descr">Adatto all’uso durante la guida fuoristrada. Adatto all’uso con immagini satellitari come sfondo. Caratteristiche principali: Larghezza delle strade principali ridotta, larghezza di sentieri, carrarecce, piste ciclabili ed altri percorsi aumentata. Basato sullo stile ‘Topo’.</string>
+    <string name="touring_view_render_descr">Stile molto dettagliato per le necessità del turista. Include tutte le opzioni di configurazioni dello stile predefinito e in più: Mostra più dettaglio possibile, in particolare, le strade, i percorsi e altri itinerari per chi viaggia. Distinzione chiara dei vari tipi di strada, come avviene negli atlanti per turisti. Schema dei colori ad alto contrasto per l’uso all’esterno, modalità diurna e notturna.</string>
     </resources>

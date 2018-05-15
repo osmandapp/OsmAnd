@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+	<dimen name="wpt_list_category_height">60dp</dimen>
+	<dimen name="wpt_list_item_height">56dp</dimen>
+	<dimen name="list_item_button_padding">4dp</dimen>
 	<dimen name="action_bar_height">64dp</dimen>
 	<dimen name="list_content_padding_large">32dp</dimen>
 	<dimen name="title_padding">20dp</dimen>

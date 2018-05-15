@@ -1,5 +1,43 @@
 package net.osmand.plus.download.ui;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.EnumSet;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.regex.Pattern;
+
+import net.osmand.AndroidUtils;
+import net.osmand.Collator;
+import net.osmand.IndexConstants;
+import net.osmand.OsmAndCollator;
+import net.osmand.map.ITileSource;
+import net.osmand.plus.ContextMenuAdapter;
+import net.osmand.plus.ContextMenuAdapter.ItemClickListener;
+import net.osmand.plus.ContextMenuItem;
+import net.osmand.plus.IconsCache;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.LocalIndexHelper;
+import net.osmand.plus.activities.LocalIndexHelper.LocalIndexType;
+import net.osmand.plus.activities.LocalIndexInfo;
+import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
+import net.osmand.plus.base.OsmandExpandableListFragment;
+import net.osmand.plus.dialogs.DirectionsDialogs;
+import net.osmand.plus.download.DownloadActivity;
+import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
+import net.osmand.plus.download.IndexItem;
+import net.osmand.plus.helpers.FileNameTranslationHelper;
+import net.osmand.plus.inapp.InAppPurchaseHelper;
+import net.osmand.plus.resources.IncrementalChangesManager;
+import net.osmand.util.Algorithms;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.res.Resources;
@@ -35,44 +73,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import net.osmand.AndroidUtils;
-import net.osmand.IndexConstants;
-import net.osmand.map.ITileSource;
-import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.ContextMenuAdapter.ItemClickListener;
-import net.osmand.plus.ContextMenuItem;
-import net.osmand.plus.IconsCache;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.R;
-import net.osmand.plus.activities.LocalIndexHelper;
-import net.osmand.plus.activities.LocalIndexHelper.LocalIndexType;
-import net.osmand.plus.activities.LocalIndexInfo;
-import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
-import net.osmand.plus.base.OsmandExpandableListFragment;
-import net.osmand.plus.dialogs.DirectionsDialogs;
-import net.osmand.plus.download.DownloadActivity;
-import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
-import net.osmand.plus.download.IndexItem;
-import net.osmand.plus.helpers.FileNameTranslationHelper;
-import net.osmand.plus.inapp.InAppPurchaseHelper;
-import net.osmand.plus.resources.IncrementalChangesManager;
-import net.osmand.util.Algorithms;
-
-import java.io.File;
-import java.text.Collator;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.EnumSet;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.regex.Pattern;
 
 
 public class LocalIndexesFragment extends OsmandExpandableListFragment implements DownloadEvents {
@@ -851,7 +851,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 		}
 
 		public void sortData() {
-			final Collator cl = Collator.getInstance();
+			final Collator cl = OsmAndCollator.primaryCollator();
 			for (List<LocalIndexInfo> i : data.values()) {
 				Collections.sort(i, new Comparator<LocalIndexInfo>() {
 					@Override

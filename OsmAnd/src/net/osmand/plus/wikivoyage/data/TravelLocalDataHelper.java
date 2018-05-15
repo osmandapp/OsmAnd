@@ -62,7 +62,7 @@ public class TravelLocalDataHelper {
 	}
 
 	public void addToHistory(@NonNull TravelArticle article) {
-		addToHistory(article.getCityId(), article.getTitle(), article.getLang(), article.getIsPartOf());
+		addToHistory(article.getTripId(), article.getTitle(), article.getLang(), article.getIsPartOf());
 	}
 
 	public void addToHistory(long cityId, String title, String lang, String isPartOf) {
@@ -98,7 +98,7 @@ public class TravelLocalDataHelper {
 	public void addArticleToSaved(@NonNull TravelArticle article) {
 		if (!isArticleSaved(article)) {
 			TravelArticle saved = new TravelArticle();
-			saved.cityId = article.cityId;
+			saved.tripId = article.tripId;
 			saved.title = article.title;
 			saved.lang = article.lang;
 			saved.aggregatedPartOf = article.aggregatedPartOf;
@@ -121,7 +121,7 @@ public class TravelLocalDataHelper {
 	}
 
 	public void removeArticleFromSaved(@NonNull TravelArticle article) {
-		TravelArticle savedArticle = getArticle(article.cityId, article.lang);
+		TravelArticle savedArticle = getArticle(article.tripId, article.lang);
 		if (savedArticle != null) {
 			savedArticles.remove(savedArticle);
 			dbHelper.removeSavedArticle(savedArticle);
@@ -130,7 +130,7 @@ public class TravelLocalDataHelper {
 	}
 
 	public boolean isArticleSaved(@NonNull TravelArticle article) {
-		return getArticle(article.cityId, article.lang) != null;
+		return getArticle(article.tripId, article.lang) != null;
 	}
 
 	private void notifySavedUpdated() {
@@ -142,7 +142,7 @@ public class TravelLocalDataHelper {
 	@Nullable
 	private TravelArticle getArticle(long cityId, String lang) {
 		for (TravelArticle article : savedArticles) {
-			if (article.cityId == cityId && article.lang != null && article.lang.equals(lang)) {
+			if (article.tripId == cityId && article.lang != null && article.lang.equals(lang)) {
 				return article;
 			}
 		}
@@ -402,7 +402,7 @@ public class TravelLocalDataHelper {
 			if (conn != null) {
 				try {
 					conn.execSQL("INSERT INTO " + BOOKMARKS_TABLE_NAME + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
-							new Object[]{article.cityId, article.title, article.lang,
+							new Object[]{article.tripId, article.title, article.lang,
 									article.aggregatedPartOf, article.imageTitle, article.content,
 									travelBook, article.lat, article.lon});
 				} finally {
@@ -423,7 +423,7 @@ public class TravelLocalDataHelper {
 									" WHERE " + BOOKMARKS_COL_CITY_ID + " = ?" +
 									" AND " + BOOKMARKS_COL_LANG + " = ?" +
 									" AND " + BOOKMARKS_COL_TRAVEL_BOOK + " = ?",
-							new Object[]{article.cityId, article.lang, travelBook});
+							new Object[]{article.tripId, article.lang, travelBook});
 				} finally {
 					conn.close();
 				}
@@ -454,7 +454,7 @@ public class TravelLocalDataHelper {
 		private TravelArticle readSavedArticle(SQLiteCursor cursor) {
 			TravelArticle res = new TravelArticle();
 
-			res.cityId = cursor.getLong(0);
+			res.tripId = cursor.getLong(0);
 			res.title = cursor.getString(1);
 			res.lang = cursor.getString(2);
 			res.aggregatedPartOf = cursor.getString(3);

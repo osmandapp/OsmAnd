@@ -81,7 +81,7 @@
     <string name="images_cache">Images cache</string>
     <string name="delete_search_history">Delete search history</string>
     <string name="download_images">Show images</string>
-    <string name="download_maps_travel">Travel maps</string>
+    <string name="download_maps_travel">Travel guides</string>
     <string name="shared_string_wikivoyage">Wikivoyage</string>
     <string name="article_removed">Article removed</string>
     <string name="wikivoyage_search_hint">Search: Country, city, province</string>
@@ -416,7 +416,7 @@
     <string name="points_delete_multiple_succesful">Point(s) deleted.</string>
     <string name="points_delete_multiple">You are going to delete %1$d point(s). Are you sure?</string>
     <string name="route_points_category_name">Turns to pass on this route</string>
-    <string name="track_points_category_name">Prominent points on this route</string>
+    <string name="track_points_category_name">Waypoints, points of interest, named features</string>
     <string name="gpx_track">Track</string>
     <string name="max_speed">Maximum speed</string>
     <string name="average_speed">Average speed</string>

@@ -3930,4 +3930,15 @@
 	<string name="poi_glacier_ele_bottom">Laveste punkt</string>
 	<string name="poi_glacier_slope">Gennemsnitlig hældning</string>
 
+<string name="poi_checkpoint_type">Kontrolpunktstype</string>
+
+<string name="poi_checkpoint_hiking">Vandretur kontrolpunkt</string>
+	<string name="poi_checkpoint_type_stamp">Stemplepunkt</string>
+	<string name="poi_checkpoint_type_code">Kode</string>
+	<string name="poi_checkpoint_type_notebook">Notesbog</string>
+	<string name="poi_checkpoint_type_needler">Nåle</string>
+	<string name="poi_checkpoint_type_quize">Quiz</string>
+	<string name="poi_checkpoint_type_electronic">Elektronisk</string>
+	<string name="poi_course">Bane</string>
+
 </resources>
