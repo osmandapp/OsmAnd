@@ -2591,7 +2591,7 @@
     <string name="points_delete_multiple_succesful">標點已刪除。</string>
     <string name="points_delete_multiple">您將要刪除 %1$d 個標點。您確定嗎？</string>
     <string name="route_points_category_name">轉為通過這條路線</string>
-    <string name="track_points_category_name">在此路線中的重要標點</string>
+    <string name="track_points_category_name">路徑點、興趣點、已命名的圖徽</string>
     <string name="add_new_folder">增加新的檔案夾</string>
     <string name="shared_string_slope">斜坡</string>
     <string name="lang_ber">柏柏爾語</string>
@@ -3145,7 +3145,7 @@
     <string name="images_cache">圖像快取</string>
     <string name="delete_search_history">刪除搜尋歷史記錄</string>
     <string name="download_images">顯示圖片</string>
-    <string name="download_maps_travel">旅遊地圖</string>
+    <string name="download_maps_travel">旅遊指南</string>
     <string name="shared_string_wikivoyage">維基導遊</string>
     <string name="index_item_world_wikivoyage">全球維基導遊文章</string>
     <string name="travel_guide_description">在 OsmAnd 內部沒有網路連線的狀況下，引領到全球最感興趣的地點。</string>
@@ -3215,4 +3215,6 @@
     <string name="shared_string_bookmark">書籤</string>
     <string name="off_road_render_descr">適合用在越野駕駛。適合與綠色衛星圖片一起使用作為底圖。要點：減少主要道路的粗度、增加軌道、路徑、自行車和其他路線的粗度。基於「Topo」樣式。</string>
     <string name="touring_view_render_descr">旅遊為目地的高詳細樣式。包括所有組態選項的預設樣式，另外還有：儘可能詳細的顯示，尤其是所有道路、路徑及其他旅遊方式。清晰的視覺區分所有不同的道路類型，讓人追憶的許多旅遊地圖。戶外使用的高對比配色方案、晝夜模式。</string>
+    <string name="access_intermediate_arrival_time">中轉抵達時間</string>
+    <string name="map_widget_intermediate_time">中轉時間</string>
     </resources>
