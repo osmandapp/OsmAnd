@@ -2596,7 +2596,7 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="gpx_track">Rasta</string>
     <string name="points_delete_multiple_succesful">Puntu/os iscantzelladu/os.</string>
     <string name="points_delete_multiple">As a iscantzellare %1$d puntu/os. Seguru ses?</string>
-    <string name="track_points_category_name">Puntos importantes in custa àndala</string>
+    <string name="track_points_category_name">Puntos de coladòrgiu, puntos de interesse, elementos cun nùmenes</string>
     <string name="add_new_folder">Annanghe una cartella noa</string>
     <string name="route_points_category_name">Bortadas de colare in cust\'àndala</string>
     <string name="shared_string_slope">Caladòrgia</string>
@@ -3017,7 +3017,16 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="by_date">Pro data</string>
     <string name="by_type">Pro casta</string>
     <string name="modify_the_search_query">Modìfica sa rechesta de chirca.</string>
-    <string name="release_3_0">\\022 
+    <string name="release_3_0">\\022 Menù de biàgiu nou: abbàida sos artìculos de WikiVoyage chene impreare sa connessione a ìnternet
+\n
+\n • Wikipedia: aspetu nou, ligàmenes ativos, immàgines
+\n
+\n • Interfache pro abèrrere sas rastas: ammustra sos puntos de coladòrgiu
+\n
+\n • Marcadores mapa: importatzione de grupos ischertados dae documentos GPX, aspetu noude s\'insertada de sas coordinatas
+\n
+\n • S\'abbonamentu a OsmAnd Live como incluet totu sas funtzionalidades de OsmAnd
+\n
 \n</string>
     <string name="what_is_here">Ite b\'est inoghe:</string>
     <string name="parked_at">parchegiadu in</string>
@@ -3134,7 +3143,7 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="images_cache">Cache de sas immàgines</string>
     <string name="delete_search_history">Iscantzella sa cronologia de sas chircas</string>
     <string name="download_images">Ammustra sas immàgines</string>
-    <string name="download_maps_travel">Mapas de biàgiu</string>
+    <string name="download_maps_travel">Ghias de biàgiu</string>
     <string name="shared_string_wikivoyage">Wikivoyage</string>
     <string name="article_removed">Artìculu iscantzelladu</string>
     <string name="wikivoyage_search_hint">Chirca: Istadu, Tzitade, Provìntzia</string>
