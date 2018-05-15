@@ -129,10 +129,12 @@ public class WikiArticleHelper {
 						ResultMatcher<Amenity> matcher = new ResultMatcher<Amenity>() {
 							@Override
 							public boolean publish(Amenity amenity) {
-								List<String> otherNames = amenity.getAllNames(false);
-								String localeName = amenity.getName(lang, false);
-								if (name.equalsIgnoreCase(localeName) || otherNames.contains(name)) {
-									results.add(amenity);
+								List<String> allNames = amenity.getAllNames(false);
+								for (String amenityName : allNames) {
+									if (name.equalsIgnoreCase(amenityName)) {
+										results.add(amenity);
+										break;
+									}
 								}
 								return false;
 							}
