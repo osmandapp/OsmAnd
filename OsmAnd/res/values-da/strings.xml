@@ -3063,11 +3063,11 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="by_date">Efter dato</string>
     <string name="by_type">Efter type</string>
     <string name="modify_the_search_query">Ændr søgning.</string>
-    <string name="release_3_0">\\022 Ny rejseguide menu: se WikiVoyage artikler uden internetforbindelse
+    <string name="release_3_0">• Ny rejseguide menu: se WikiVoyage artikler uden internetforbindelse
 \n
 \n  • Wikipedia: nyt udseende, aktive links, billeder
 \n
-\n  • Open Track grænseflade: vis rutepunktsgrupper
+\n  • Åbn spor grænseflade: vis rutepunktsgrupper
 \n
 \n  • Kortmarkører: import af udvalgte grupper fra GPX-filer, nyt udseende på koordinat indtastning
 \n
