@@ -12,8 +12,10 @@ import android.text.Html;
 import android.util.Log;
 
 import net.osmand.IndexConstants;
+import net.osmand.ResultMatcher;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
+import net.osmand.data.QuadRect;
 import net.osmand.map.OsmandRegions;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
@@ -25,6 +27,7 @@ import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.resources.AmenityIndexRepositoryBinary;
 import net.osmand.plus.wikivoyage.article.WikivoyageArticleWikiLinkFragment;
 import net.osmand.util.Algorithms;
+import net.osmand.util.MapUtils;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -70,9 +73,9 @@ public class WikiArticleHelper {
 		private boolean isNightMode;
 
 		WikiArticleSearchTask(LatLon articleLatLon,
-		                      MapActivity mapActivity,
-		                      boolean nightMode,
-		                      String url) {
+							  MapActivity mapActivity,
+							  boolean nightMode,
+							  String url) {
 			this.articleLatLon = articleLatLon;
 			weakMapActivity = new WeakReference<>(mapActivity);
 			this.isNightMode = nightMode;
@@ -126,8 +129,24 @@ public class WikiArticleHelper {
 						if (isCancelled()) {
 							return null;
 						}
-						results.addAll(repository.searchAmenitiesByName(0, 0, 0, 0,
-								Integer.MAX_VALUE, Integer.MAX_VALUE, name, null));
+						ResultMatcher<Amenity> matcher = new ResultMatcher<Amenity>() {
+							@Override
+							public boolean publish(Amenity amenity) {
+								List<String> otherNames = amenity.getAllNames(false);
+								String localeName = amenity.getName(lang, false);
+								if (name.equalsIgnoreCase(localeName) || otherNames.contains(name)) {
+									results.add(amenity);
+								}
+								return false;
+							}
+
+							@Override
+							public boolean isCancelled() {
+								return false;
+							}
+						};
+						repository.searchAmenitiesByName(0, 0, 0, 0,
+								Integer.MAX_VALUE, Integer.MAX_VALUE, name, matcher);
 					}
 				}
 			}
@@ -175,12 +194,6 @@ public class WikiArticleHelper {
 				}
 			}
 		}
-	}
-
-	private static String getFilenameFromIndex(String fileName) {
-		return fileName
-				.replace("_" + IndexConstants.BINARY_MAP_VERSION, "")
-				.replace(ZIP_EXT, "");
 	}
 
 	private static String getRegionName(String filename, OsmandRegions osmandRegions) {
