@@ -3259,4 +3259,6 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="touring_view_render_descr">Meget detaljeret stilart til touring. Indeholder alle indstillingsmuligheder af standardstil, desuden: viser så mange detaljer som muligt, navnlig alle veje, stier og andre måder at rejse på. En Klar visuel sondring mellem alle forskellige veje, minder om mange vejkort. Farveskema med høj kontrast til udendørs brug, dag og nat stilstand.</string>
     <string name="shared_string_bookmark">Bogmærke</string>
     <string name="off_road_render_descr">Egnet til brug under off-road kørsel. Velegnet til brug med grønne satellitbilleder som underlejringskort. Hovedtræk: reduceret tykkelse af hovedveje, øget tykkelse af spor, stier, cykel og andre ruter. Baseret på \'Topo\' stilart.</string>
+    <string name="access_intermediate_arrival_time">Mellemliggende ankomsttid</string>
+    <string name="map_widget_intermediate_time">Mellemliggende tid</string>
     </resources>
