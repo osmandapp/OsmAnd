@@ -455,15 +455,19 @@ public class TrackPointFragment extends OsmandExpandableListFragment implements 
 		if (activity == null) {
 			return;
 		}
-		GPXFile gpxFile = getGpx();
+		final GPXFile gpxFile = getGpx();
 		MapMarkersGroup markersSearch = markersHelper.getMarkersGroup(gpxFile);
 		final MapMarkersGroup markersGr;
+		final boolean markersRemoved;
 		if (markersSearch != null) {
 			markersGr = markersSearch;
 			markersHelper.removeMarkersGroup(markersGr);
+			markersRemoved = true;
 		} else if (gpxFile != null) {
 			markersGr = markersHelper.addOrEnableGroup(gpxFile);
+			markersRemoved = false;
 		} else {
+			markersRemoved = false;
 			markersGr = null;
 		}
 		if (markersGr != null) {
@@ -476,14 +480,24 @@ public class TrackPointFragment extends OsmandExpandableListFragment implements 
 				fragmentAdapter.closeFabMenu(activity);
 				fragmentAdapter.updateMenuFabVisibility(false);
 			}
-			Snackbar snackbar = Snackbar.make(mainView, R.string.waypoints_removed_from_map_markers,
+			Snackbar snackbar = Snackbar.make(mainView, markersRemoved ?
+							R.string.waypoints_removed_from_map_markers : R.string.waypoints_added_to_map_markers,
 					Snackbar.LENGTH_LONG)
 					.setAction(R.string.shared_string_undo, new View.OnClickListener() {
 						@Override
 						public void onClick(View v) {
 							TrackActivity trackActivity = getTrackActivity();
 							if (trackActivity != null) {
-								markersHelper.removeMarkersGroup(markersGr);
+								if (markersRemoved) {
+									if (gpxFile != null) {
+										markersHelper.addOrEnableGroup(gpxFile);
+									}
+								} else {
+									MapMarkersGroup group = markersHelper.getMarkersGroup(gpxFile);
+									if (group != null) {
+										markersHelper.removeMarkersGroup(group);
+									}
+								}
 								trackActivity.invalidateOptionsMenu();
 							}
 						}
