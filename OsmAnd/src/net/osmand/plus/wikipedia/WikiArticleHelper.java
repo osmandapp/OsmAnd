@@ -26,7 +26,6 @@ import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.resources.AmenityIndexRepositoryBinary;
 import net.osmand.plus.wikivoyage.article.WikivoyageArticleWikiLinkFragment;
 import net.osmand.util.Algorithms;
-import net.osmand.util.MapUtils;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
