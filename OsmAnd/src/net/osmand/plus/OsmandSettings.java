@@ -3012,6 +3012,9 @@ public class OsmandSettings {
 	public final OsmandPreference<Boolean> SHOW_ARRIVAL_TIME_OTHERWISE_EXPECTED_TIME =
 			new BooleanPreference("show_arrival_time", true).makeGlobal();
 
+	public final OsmandPreference<Boolean> SHOW_INTERMEDIATE_ARRIVAL_TIME_OTHERWISE_EXPECTED_TIME =
+			new BooleanPreference("show_intermediate_arrival_time", true).makeGlobal();
+
 	public final OsmandPreference<Boolean> SHOW_RELATIVE_BEARING_OTHERWISE_REGULAR_BEARING =
 			new BooleanPreference("show_relative_bearing", true).makeGlobal();
 

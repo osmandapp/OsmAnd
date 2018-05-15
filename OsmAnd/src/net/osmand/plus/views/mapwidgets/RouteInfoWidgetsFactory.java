@@ -198,15 +198,26 @@ public class RouteInfoWidgetsFactory {
 		public static final int TIME_CONTROL_WIDGET_STATE_TIME_TO_GO = R.id.time_control_widget_state_time_to_go;
 
 		private final OsmandPreference<Boolean> showArrival;
+		private final boolean intermediate;
 
-		public TimeControlWidgetState(OsmandApplication ctx) {
+		public TimeControlWidgetState(OsmandApplication ctx, boolean intermediate) {
 			super(ctx);
-			showArrival = ctx.getSettings().SHOW_ARRIVAL_TIME_OTHERWISE_EXPECTED_TIME;
+			if (intermediate) {
+				showArrival = ctx.getSettings().SHOW_INTERMEDIATE_ARRIVAL_TIME_OTHERWISE_EXPECTED_TIME;
+			} else {
+				showArrival = ctx.getSettings().SHOW_ARRIVAL_TIME_OTHERWISE_EXPECTED_TIME;
+			}
+
+			this.intermediate = intermediate;
 		}
 
 		@Override
 		public int getMenuTitleId() {
-			return showArrival.get() ? R.string.access_arrival_time : R.string.map_widget_time;
+			if (intermediate) {
+				return showArrival.get() ? R.string.access_intermediate_arrival_time : R.string.map_widget_intermediate_time;
+			} else {
+				return showArrival.get() ? R.string.access_arrival_time : R.string.map_widget_time;
+			}
 		}
 
 		@Override
@@ -221,7 +232,11 @@ public class RouteInfoWidgetsFactory {
 
 		@Override
 		public int[] getMenuTitleIds() {
-			return new int[]{R.string.access_arrival_time, R.string.map_widget_time};
+			if (intermediate) {
+				return new int[]{R.string.access_intermediate_arrival_time, R.string.map_widget_intermediate_time};
+			} else {
+				return new int[]{R.string.access_arrival_time, R.string.map_widget_time};
+			}
 		}
 
 		@Override
@@ -240,14 +255,15 @@ public class RouteInfoWidgetsFactory {
 		}
 	}
 
-	public TextInfoWidget createTimeControl(final MapActivity map){
+	public TextInfoWidget createTimeControl(final MapActivity map, final boolean intermediate){
 		final RoutingHelper routingHelper = map.getRoutingHelper();
 		final int time = R.drawable.widget_time_day;
 		final int timeN = R.drawable.widget_time_night;
 		final int timeToGo = R.drawable.widget_time_to_distance_day;
 		final int timeToGoN = R.drawable.widget_time_to_distance_night;
 		final OsmandApplication ctx = map.getMyApplication();
-		final OsmandPreference<Boolean> showArrival = ctx.getSettings().SHOW_ARRIVAL_TIME_OTHERWISE_EXPECTED_TIME;
+		final OsmandPreference<Boolean> showArrival = intermediate?ctx.getSettings().SHOW_INTERMEDIATE_ARRIVAL_TIME_OTHERWISE_EXPECTED_TIME
+																  :ctx.getSettings().SHOW_ARRIVAL_TIME_OTHERWISE_EXPECTED_TIME;
 		final TextInfoWidget leftTimeControl = new TextInfoWidget(map) {
 			private long cachedLeftTime = 0;
 			
@@ -257,7 +273,12 @@ public class RouteInfoWidgetsFactory {
 				int time = 0;
 				if (routingHelper != null && routingHelper.isRouteCalculated()) {
 					//boolean followingMode = routingHelper.isFollowingMode();
-					time = routingHelper.getLeftTime();
+					if (intermediate) {
+						time = routingHelper.getLeftTimeNextIntermediate();
+					} else {
+						time = routingHelper.getLeftTime();
+					}
+
 					if (time != 0) {
 						if (/*followingMode && */showArrival.get()) {
 							long toFindTime = time * 1000 + System.currentTimeMillis();

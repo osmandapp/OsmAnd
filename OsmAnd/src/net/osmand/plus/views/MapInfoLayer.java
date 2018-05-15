@@ -163,17 +163,20 @@ public class MapInfoLayer extends OsmandMapLayer {
 		// priorityOrder: 10s navigation-related, 20s position-related, 30s recording- and other plugin-related, 40s general device information, 50s debugging-purpose
 		TextInfoWidget intermediateDist = ric.createIntermediateDistanceControl(map);
 		registerSideWidget(intermediateDist, R.drawable.ic_action_intermediate, R.string.map_widget_intermediate_distance, "intermediate_distance", false, 13);
+		TextInfoWidget intermediateTime = ric.createTimeControl(map, true);
+		registerSideWidget(intermediateTime, new TimeControlWidgetState(app, true), "intermediate_time", false, 14);
 		TextInfoWidget dist = ric.createDistanceControl(map);
-		registerSideWidget(dist, R.drawable.ic_action_target, R.string.map_widget_distance, "distance", false, 14);
-		TextInfoWidget time = ric.createTimeControl(map);
-		registerSideWidget(time, new TimeControlWidgetState(app), "time", false, 15);
+		registerSideWidget(dist, R.drawable.ic_action_target, R.string.map_widget_distance, "distance", false, 15);
+		TextInfoWidget time = ric.createTimeControl(map, false);
+		registerSideWidget(time, new TimeControlWidgetState(app, false), "time", false, 16);
+
 
 		TextInfoWidget marker = mwf.createMapMarkerControl(map, true);
-		registerSideWidget(marker, R.drawable.ic_action_flag_dark, R.string.map_marker_1st, "map_marker_1st", false, 16);
+		registerSideWidget(marker, R.drawable.ic_action_flag_dark, R.string.map_marker_1st, "map_marker_1st", false, 17);
 		TextInfoWidget bearing = ric.createBearingControl(map);
-		registerSideWidget(bearing, new BearingWidgetState(app), "bearing", false, 17);
+		registerSideWidget(bearing, new BearingWidgetState(app), "bearing", false, 18);
 		TextInfoWidget marker2nd = mwf.createMapMarkerControl(map, false);
-		registerSideWidget(marker2nd, R.drawable.ic_action_flag_dark, R.string.map_marker_2nd, "map_marker_2nd", false, 18);
+		registerSideWidget(marker2nd, R.drawable.ic_action_flag_dark, R.string.map_marker_2nd, "map_marker_2nd", false, 19);
 
 		TextInfoWidget speed = ric.createSpeedControl(map);
 		registerSideWidget(speed, R.drawable.ic_action_speed, R.string.map_widget_speed, "speed", false, 20);
