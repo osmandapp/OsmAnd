@@ -2133,7 +2133,7 @@
     <string name="relief_smoothness_factor_descr">اولویت ساختار زمین: هموار یا پرتپه.</string>
     <string name="shared_string_slope">شیب</string>
     <string name="points_delete_multiple">دارید %1$d نقطه را حذف می‌کنید؛ مطمئن هستید؟</string>
-    <string name="track_points_category_name">نقاط مهم این مسیر</string>
+    <string name="track_points_category_name">نقاط میانی، نقاط محبوب (POI)، عارضه‌های دارای نام</string>
     <string name="gpx_track">مسیر</string>
     <string name="shared_string_time_span">مدت‌زمان</string>
     <string name="select_gpx_folder">پوشهٔ مسیر را انتخاب کنید</string>
@@ -3163,7 +3163,7 @@
     <string name="shared_string_read">مطالعه</string>
     <string name="shared_string_explore">کاوش</string>
     <string name="shared_string_contents">فهرست</string>
-    <string name="download_maps_travel">مقاله‌های مسافرت</string>
+    <string name="download_maps_travel">راهنما‌های مسافرت</string>
     <string name="shared_string_wikivoyage">ویکی‌سفر</string>
     <string name="article_removed">مقاله حذف شد</string>
     <string name="index_item_world_wikivoyage">مقاله‌های جهانی ویکی‌سفر</string>
