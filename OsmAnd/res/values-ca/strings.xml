@@ -350,7 +350,7 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="tile_source_already_installed">El mapa ja està instal·lat, s\'actualitzarà \'Configuració\'.</string>
     <string name="select_tile_source_to_install">Seleccioneu els mapes (de tessel·les) per instal·lar o actualitzar.</string>
     <string name="internet_not_available">No es pot realitzar l\'operació sense una connexió a Internet.</string>
-    <string name="level_to_switch_vector_raster_descr">Nivell mínim de zoom per utilitzar mapes vectorials.</string>
+    <string name="level_to_switch_vector_raster_descr">Utilitza mapes ràster per escales més grans.</string>
     <string name="level_to_switch_vector_raster">Nivell mínim de zoom pels vectors</string>
     <string name="error_doing_search">No s\'ha pogut fer la cerca sense connexió.</string>
     <string name="amenity_type_healthcare">Serveis mèdics</string>
@@ -933,12 +933,12 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="use_magnetic_sensor">Usa el sensor magnètic</string>
     <string name="other_location">Una altra</string>
     <string name="files_limit">Queden %1$d fitxers</string>
-    <string name="available_downloads_left">Teniu disponibles %1$d fitxers per baixar</string>
+    <string name="available_downloads_left">%1$d fitxers pendents de baixar</string>
     <string name="install_paid">Versió completa</string>
     <string name="cancel_route">Descarta la ruta</string>
     <string name="cancel_navigation">Atura la navegació</string>
     <string name="clear_destination">Neteja la destinació</string>
-    <string name="download_using_mobile_internet">No teniu habilitada la connexió Wi-Fi. Voleu utilitzar la connexió a Internet actual per les baixades?</string>
+    <string name="download_using_mobile_internet">No esteu connectats amb Wi-Fi. Voleu utilitzar la connexió a Internet actual per les baixades?</string>
     <string name="street_name">Nom de carrer</string>
     <string name="hno">Número</string>
     <string name="monitoring_settings">Enregistrament del trajecte</string>
@@ -1714,7 +1714,7 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="download_live_updates">Actualitzacions al moment</string>
     <string name="failed_to_upload">S\'ha produït un error en la pujada</string>
     <string name="delete_change">Suprimeix les modificacions</string>
-    <string name="successfully_uploaded_pattern">S\'ha pujat amb èxit {0}/{1}</string>
+    <string name="successfully_uploaded_pattern">S\'ha pujat {0}/{1}</string>
     <string name="try_again">Torneu-ho a provar</string>
     <string name="error_message_pattern">Error: {0}</string>
     <string name="no_updates_available">No hi ha actualitzacions disponibles</string>
@@ -1750,7 +1750,7 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="working_days">Dies laborables</string>
     <string name="recent_places">Llocs recents</string>
     <string name="favourites">Preferits</string>
-    <string name="saved_at_time">S\'ha desat correctament a: %1$s</string>
+    <string name="saved_at_time">Ara desat a: %1$s</string>
     <string name="poi_deleted_localy">El PDI s\'eliminara un cop pugeu els vostres canvis</string>
     <string name="show_gpx">Mostra GPX</string>
     <string name="favourites_edit_dialog_title">Detalls del preferit</string>
@@ -1794,7 +1794,7 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="later">Mes tard</string>
     <string name="get_full_version">Versió completa</string>
     <string name="downloads">Baixades</string>
-    <string name="activate_seamarks_plugin">Activeu el connector de cartes marines</string>
+    <string name="activate_seamarks_plugin">Activeu el connector de \'Cartes marines\'</string>
     <string name="activate_srtm_plugin">Activeu el connector de corbes de nivell</string>
     <string name="favorite_category_dublicate_message">El nom de categoria especificat ja existeix. Utilitzeu un nom diferent.</string>
     <string name="favorite_category_name">Nom de categoria</string>
