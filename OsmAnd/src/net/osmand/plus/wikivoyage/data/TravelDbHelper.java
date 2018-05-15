@@ -49,6 +49,7 @@ public class TravelDbHelper {
 	private static final String POPULAR_TABLE_NAME = "popular_articles";
 	private static final String ARTICLES_COL_ID = "article_id";
 	private static final String ARTICLES_POP_INDEX = "popularity_index";
+	private static final String ARTICLES_POP_ORDER = "order";
 	private static final String ARTICLES_COL_TITLE = "title";
 	private static final String ARTICLES_COL_CONTENT = "content_gz";
 	private static final String ARTICLES_COL_IS_PART_OF = "is_part_of";
@@ -84,6 +85,7 @@ public class TravelDbHelper {
 			ARTICLES_COL_LON + ", " +
 			ARTICLES_COL_TRIP_ID + ", " +
 			ARTICLES_COL_LANG + ", " +
+			ARTICLES_POP_ORDER + ", " +
 			ARTICLES_POP_INDEX +
 			" FROM " + POPULAR_TABLE_NAME;
 
@@ -252,13 +254,16 @@ public class TravelDbHelper {
 		String LANG_WHERE = " WHERE " + ARTICLES_COL_LANG + " = '" + language + "'";
 		SQLiteCursor cursor = conn.rawQuery(POP_ARTICLES_TABLE_SELECT + LANG_WHERE, null);
 		// read popular articles
+		List<PopularArticle> popReadArticlesOrder = new ArrayList<>();
 		List<PopularArticle> popReadArticlesLocation = new ArrayList<>();
 		List<PopularArticle> popReadArticles = new ArrayList<>();
 		if (cursor.moveToFirst()) {
 			do {
 				PopularArticle travelArticle = PopularArticle.readArticle(cursor);
 				if (language.equals(travelArticle.lang)) {
-					if(travelArticle.isLocationSpecified()) {
+					if(travelArticle.order != -1) {
+						popReadArticlesOrder.add(travelArticle);
+					} if(travelArticle.isLocationSpecified()) {
 						popReadArticlesLocation.add(travelArticle);
 					} else {
 						popReadArticles.add(travelArticle);
@@ -270,13 +275,27 @@ public class TravelDbHelper {
 		// shuffle, sort & mix
 		Random rm = new Random();
 		Collections.shuffle(popReadArticles, rm);
+		Collections.sort(popReadArticlesOrder, new Comparator<PopularArticle>() {
+			@Override
+			public int compare(PopularArticle article1, PopularArticle article2) {
+				return Integer.compare(article1.order, article2.order);
+			}
+		});
 		sortPopArticlesByDistance(popReadArticlesLocation);
 		List<Long> resArticleOrder = new ArrayList<Long>();
+		Iterator<PopularArticle> orderIterator = popReadArticlesOrder.iterator();
 		Iterator<PopularArticle> locIterator = popReadArticlesLocation.iterator();
 		Iterator<PopularArticle> otherIterator = popReadArticles.iterator();
+		int initialLocationArticles = 2;
 		for (int i = 0; i < POPULAR_LIMIT; i++) {
 			PopularArticle pa = null;
-			if((!otherIterator.hasNext() || rm.nextBoolean()) && locIterator.hasNext()) {
+			if(orderIterator.hasNext()) {
+				pa = orderIterator.next();
+			} else if(initialLocationArticles-- > 0 && locIterator.hasNext()) {
+				// first 2 by location
+				pa = locIterator.next();
+			} else if((!otherIterator.hasNext() || (rm.nextDouble() > 0.4)) && locIterator.hasNext()) {
+				// 60% case we select location iterator
 				pa = locIterator.next();
 			} else if(otherIterator.hasNext()){
 				pa = otherIterator.next();
@@ -369,6 +388,7 @@ public class TravelDbHelper {
 			});
 		}
 	}
+	
 
 	private Collection<WikivoyageSearchResult> groupSearchResultsByCityId(List<WikivoyageSearchResult> res) {
 		String baseLng = application.getLanguage();
@@ -599,6 +619,7 @@ public class TravelDbHelper {
 		String title;
 		String lang;
 		int popIndex;
+		int order;
 		double lat;
 		double lon;
 		
@@ -613,7 +634,8 @@ public class TravelDbHelper {
 			res.lon = cursor.isNull(2) ? Double.NaN : cursor.getDouble(2);
 			res.tripId = cursor.getLong(3);
 			res.lang = cursor.getString(4);
-			res.popIndex = cursor.isNull(5) ? 0 : cursor.getInt(5);
+			res.order = cursor.isNull(5) ? -1 : cursor.getInt(5);
+			res.popIndex = cursor.isNull(6) ? 0 : cursor.getInt(6);
 			return res;
 		}
 	}
