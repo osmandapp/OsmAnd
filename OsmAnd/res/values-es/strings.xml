@@ -3062,4 +3062,6 @@
     <string name="shared_string_bookmark">Favorito</string>
     <string name="off_road_render_descr">Adecuado para usarlo durante la conducción todoterreno. Adecuado para usarlo como un mapa subyacente con imágenes satelitales verdes . Características principales: Reducción del grosor en carreteras principales, aumento del grosor de las vías, senderos, bicicletas y otras rutas. Basado en el estilo «Topo».</string>
     <string name="touring_view_render_descr">Estilo de alto detalle para turismo. Incluye todas las opciones de configuración del estilo predefinido, además: Muestra tanto detalle como sea posible, en particular todos los caminos, senderos y otras formas de viaje. Una clara distinción visual entre todos los tipos de carreteras, que recuerda a muchos atlas de rutas turísticas. Esquema de color de alto contraste para uso en exteriores, modo diurno y nocturno.</string>
+    <string name="access_intermediate_arrival_time">Hora de llegada intermedia</string>
+    <string name="map_widget_intermediate_time">Tiempo intermedio</string>
     </resources>
