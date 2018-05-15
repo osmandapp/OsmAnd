@@ -26,6 +26,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:paddingBottom="@dimen/context_menu_padding_margin_tiny"
                 android:paddingLeft="@dimen/context_menu_padding_margin_default"
                 android:paddingRight="@dimen/context_menu_padding_margin_default">
 
@@ -82,7 +83,7 @@
                 android:paddingBottom="@dimen/context_menu_transport_grid_spacing"
                 android:paddingLeft="@dimen/context_menu_padding_margin_default"
                 android:paddingRight="@dimen/context_menu_padding_margin_default"
-                android:paddingTop="@dimen/context_menu_transport_padding_top"
+                android:paddingTop="@dimen/context_menu_padding_margin_tiny"
                 android:verticalSpacing="@dimen/context_menu_transport_grid_spacing"
                 android:visibility="gone"/>
 
@@ -96,7 +97,8 @@
                 android:orientation="horizontal"
                 android:paddingLeft="@dimen/context_menu_padding_margin_default"
                 android:paddingRight="@dimen/context_menu_padding_margin_default"
-                android:paddingTop="3dp">
+                android:paddingTop="3dp"
+                tools:visibility="gone">
 
                 <net.osmand.plus.widgets.TextViewEx
                     android:id="@+id/nearby_routes_within_text_view"
@@ -124,7 +126,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height= "wrap_content"
                 android:layout_marginBottom="@dimen/context_menu_direction_margin"
-                android:layout_marginTop="@dimen/context_menu_padding_margin_tiny"
                 android:gravity="top"
                 android:orientation="horizontal"
                 android:paddingTop="3dp"

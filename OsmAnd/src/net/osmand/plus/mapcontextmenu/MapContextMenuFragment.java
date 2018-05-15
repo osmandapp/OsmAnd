@@ -1488,21 +1488,23 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 				updateDistanceDirection();
 				compassView.setVisibility(View.VISIBLE);
 			} else {
-				compassView.setVisibility(View.GONE);
+				compassView.setVisibility(View.INVISIBLE);
 			}
 		}
 	}
 
 	private void updateAdditionalInfoVisibility() {
-		TextView line3 = (TextView) view.findViewById(R.id.context_menu_line3);
-		ImageView additionalInfoImageView = (ImageView) view.findViewById(R.id.additional_info_image_view);
-		TextView additionalInfoTextView = (TextView) view.findViewById(R.id.additional_info_text_view);
+		View line3 = (TextView) view.findViewById(R.id.context_menu_line3);
+		View additionalInfoImageView = (ImageView) view.findViewById(R.id.additional_info_image_view);
+		View additionalInfoTextView = (TextView) view.findViewById(R.id.additional_info_text_view);
 		View compassView = view.findViewById(R.id.compass_layout);
+		View titleProgressContainer = view.findViewById(R.id.title_progress_container);
 
 		if (line3.getVisibility() == View.GONE
 				&& additionalInfoImageView.getVisibility() == View.GONE
 				&& additionalInfoTextView.getVisibility() == View.GONE
-				&& compassView.getVisibility() == View.GONE) {
+				&& titleProgressContainer.getVisibility() == View.VISIBLE
+				&& compassView.getVisibility() == View.INVISIBLE) {
 			view.findViewById(R.id.additional_info_row).setVisibility(View.GONE);
 		} else {
 			view.findViewById(R.id.additional_info_row).setVisibility(View.VISIBLE);
