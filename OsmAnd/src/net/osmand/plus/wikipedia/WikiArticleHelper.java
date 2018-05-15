@@ -15,7 +15,6 @@ import net.osmand.IndexConstants;
 import net.osmand.ResultMatcher;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
-import net.osmand.data.QuadRect;
 import net.osmand.map.OsmandRegions;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
@@ -42,7 +41,6 @@ public class WikiArticleHelper {
 	private static final String TAG = WikiArticleHelper.class.getSimpleName();
 
 	private static final int PARTIAL_CONTENT_PHRASES = 3;
-	private static final String ZIP_EXT = ".zip";
 	private static final String PAGE_PREFIX_HTTP = "http://";
 	private static final String PAGE_PREFIX_HTTPS = "https://";
 	private static final String WIKIVOAYAGE_DOMAIN = ".wikivoyage.org/wiki/";
