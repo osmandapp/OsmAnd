@@ -70,9 +70,9 @@ public class WikiArticleHelper {
 		private boolean isNightMode;
 
 		WikiArticleSearchTask(LatLon articleLatLon,
-							  MapActivity mapActivity,
-							  boolean nightMode,
-							  String url) {
+		                      MapActivity mapActivity,
+		                      boolean nightMode,
+		                      String url) {
 			this.articleLatLon = articleLatLon;
 			weakMapActivity = new WeakReference<>(mapActivity);
 			this.isNightMode = nightMode;
