@@ -2431,7 +2431,7 @@
     <string name="points_delete_multiple_succesful">Punto(s) borrado(s).</string>
     <string name="points_delete_multiple">¿Borrar %1$d punto(s)?</string>
     <string name="route_points_category_name">Giros a pasar en esta ruta</string>
-    <string name="track_points_category_name">Puntos destacados en esta ruta</string>
+    <string name="track_points_category_name">Puntos de ruta, puntos de interés, características nombradas</string>
     <string name="gpx_track">Traza</string>
     <string name="max_speed">Velocidad máxima</string>
     <string name="average_speed">Velocidad media</string>
@@ -2852,7 +2852,15 @@
     <string name="active_markers_descr">Elige el número de marcadores activos a mostrar.</string>
     <string name="shared_string_more_without_dots">Más</string>
     <string name="looking_for_tracks_with_waypoints">Búsqueda de trazas con puntos de ruta</string>
-    <string name="release_3_0">• 
+    <string name="release_3_0">• Nuevo menú «Viajes»: ver artículos de WikiViajes sin usar una conexión a Internet
+\n
+\n • Wikipedia: Nuevo aspecto, enlaces activos, imágenes
+\n
+\n • Interfaz de apertura de traza: visualizar grupos de los puntos de ruta
+\n
+\n • Marcadores del mapa: importación de grupos seleccionados desde archivos GPX, nuevo aspecto en el ingreso de coordenadas
+\n
+\n • La suscripción de OsmAnd Live, ahora incluye todas las características de OsmAnd
 \n</string>
     <string name="modify_the_search_query">Modificar la consulta de búsqueda.</string>
     <string name="empty_state_osm_edits">Crear o modificar objetos OSM</string>
@@ -2922,7 +2930,7 @@
 \n 
 \n • El tiempo de caminata es consciente del terreno ascendente (regla de Naismith). 
 \n</string>
-    <string name="touring_view_renderer">Vista de Touring (contraste y detalles)</string>
+    <string name="touring_view_renderer">Vista turística</string>
     <string name="nautical_renderer">Náutico</string>
     <string name="copy_location_name">Copiar nombre del punto/PDI</string>
     <string name="toast_empty_name_error">Ubicación sin nombre</string>
@@ -2968,7 +2976,7 @@
     <string name="online_webpage_warning">La página sólo está disponible en línea. ¿Abrirla en el navegador web?</string>
     <string name="images_cache">Caché de imágenes</string>
     <string name="delete_search_history">Borrar historial de búsquedas</string>
-    <string name="download_maps_travel">Mapas turísticos</string>
+    <string name="download_maps_travel">Guías turísticas</string>
     <string name="shared_string_wikivoyage">Wikiviajes</string>
     <string name="article_removed">Artículo borrado</string>
     <string name="wikivoyage_search_hint">Buscar: País, ciudad, provincia</string>
