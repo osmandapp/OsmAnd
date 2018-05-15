@@ -49,7 +49,7 @@ public class TravelDbHelper {
 	private static final String POPULAR_TABLE_NAME = "popular_articles";
 	private static final String ARTICLES_COL_ID = "article_id";
 	private static final String ARTICLES_POP_INDEX = "popularity_index";
-	private static final String ARTICLES_POP_ORDER = "order";
+	private static final String ARTICLES_POP_ORDER = "order_index";
 	private static final String ARTICLES_COL_TITLE = "title";
 	private static final String ARTICLES_COL_CONTENT = "content_gz";
 	private static final String ARTICLES_COL_IS_PART_OF = "is_part_of";
