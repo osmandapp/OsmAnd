@@ -152,6 +152,7 @@ public class ExploreRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 			if(nd != null) {
 				nd.updateView();
 			}
+			return;
 		}
 		int pos = getNeededMapsCardPosition();
 		if (neededMapsCardExists(pos)) {
@@ -192,6 +193,7 @@ public class ExploreRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 			if(dc != null) {
 				dc.updateProgresBar();
 			}
+			return;
 		}
 		int pos = getDownloadUpdateCardPosition();
 		if (downloadUpdateCardExists(pos)) {
