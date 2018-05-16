@@ -440,7 +440,7 @@
     <string name="total_distance">Total distance</string>
     <string name="routing_attr_relief_smoothness_factor_name">Select elevation fluctuation</string>
     <string name="routing_attr_height_obstacles_name">Use elevation data</string>
-    <string name="routing_attr_height_obstacles_description">Use terrain elevation data provided by SRTM, ASTER, and EU-DEM.</string>
+    <string name="routing_attr_height_obstacles_description">Factor in terrain elevation (via SRTM, ASTER, and EU-DEM data).</string>
     <string name="rendering_attr_depthContours_description">Show depth contours and points.</string>
     <string name="rendering_attr_depthContours_name">Nautical depth contours</string>
     <string name="release_2_6">
