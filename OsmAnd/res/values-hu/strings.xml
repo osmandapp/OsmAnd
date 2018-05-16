@@ -2882,9 +2882,6 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="additional_actions">További műveletek</string>
     <string name="av_locations_selected_desc">GPX fájl a kijelölt megjegyzések koordinátáival és adataival.</string>
     <string name="av_locations_all_desc">GPX fájl az összes megjegyzés koordinátáival és adataival.</string>
-    <string name="release_3_0">\\022 
-\n
-\n</string>
     <string name="modify_the_search_query">Keresési kifejezés módosítása.</string>
     <string name="shared_string_actions">Műveletek</string>
     <string name="shared_string_marker">Jelölő</string>

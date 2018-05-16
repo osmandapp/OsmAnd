@@ -2801,7 +2801,7 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="additional_actions">Papildomi veiksmai</string>
     <string name="av_locations_selected_desc">GPX failas su koordinačių ir pasirinktų pastabų duomenimis.</string>
     <string name="av_locations_all_desc">GPX failas su koordinačių ir visų pastabų duomenimis.</string>
-    <string name="release_3_0">\\022 Stop ženklo nutatymas atliekamas atsižvelgiant į judėjimo kryptį
+    <string name="release_3_0">Stop ženklo nutatymas atliekamas atsižvelgiant į judėjimo kryptį
 \n
 \n• Naujas algoritmas, pateikiantis prasmingas pakilimo/nusileidimo vertes GPX trekams
 \n

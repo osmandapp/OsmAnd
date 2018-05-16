@@ -61,7 +61,7 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 
 	private static final String EMPTY_URL = "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4//";
 
-	private long cityId = NO_VALUE;
+	private long tripId = NO_VALUE;
 	private ArrayList<String> langs;
 	private String selectedLang;
 	private TravelArticle article;
@@ -187,10 +187,10 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 			updateWebSettings();
 			populateArticle();
 		} else if (requestCode == WikivoyageArticleNavigationFragment.OPEN_ARTICLE_REQUEST_CODE) {
-			long cityId = data.getLongExtra(WikivoyageArticleNavigationFragment.CITY_ID_KEY, -1);
+			long tripId = data.getLongExtra(WikivoyageArticleNavigationFragment.TRIP_ID_KEY, -1);
 			String selectedLang = data.getStringExtra(WikivoyageArticleNavigationFragment.SELECTED_LANG_KEY);
-			if (cityId != -1 && !TextUtils.isEmpty(selectedLang)) {
-				this.cityId = cityId;
+			if (tripId != -1 && !TextUtils.isEmpty(selectedLang)) {
+				this.tripId = tripId;
 				this.selectedLang = selectedLang;
 				populateArticle();
 			}
@@ -275,26 +275,26 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 	}
 
 	protected void populateArticle() {
-		if (cityId == NO_VALUE || langs == null) {
+		if (tripId == NO_VALUE || langs == null) {
 			Bundle args = getArguments();
 			if (args != null) {
-				cityId = args.getLong(CITY_ID_KEY);
+				tripId = args.getLong(CITY_ID_KEY);
 				langs = args.getStringArrayList(LANGS_KEY);
 			}
 		}
-		if (cityId == NO_VALUE || langs == null || langs.isEmpty()) {
+		if (tripId == NO_VALUE || langs == null || langs.isEmpty()) {
 			return;
 		}
 		if (selectedLang == null) {
 			selectedLang = langs.get(0);
 		}
 		articleToolbarText.setText("");
-		article = getMyApplication().getTravelDbHelper().getArticle(cityId, selectedLang);
+		article = getMyApplication().getTravelDbHelper().getArticle(tripId, selectedLang);
 		if (article == null) {
 			return;
 		}
 		articleToolbarText.setText(article.getTitle());
-		if (article.getGpxFile() != null) {
+		if (article.getGpxFile() != null && article.getGpxFile().getPointsSize() > 0) {
 			trackButton.setText(getString(R.string.points) + " (" + article.getGpxFile().getPointsSize() + ")");
 			webViewClient.setArticle(article);
 		}
@@ -401,7 +401,7 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 				return;
 			}
 			WikivoyageArticleNavigationFragment.showInstance(fm,
-					WikivoyageArticleDialogFragment.this, cityId, selectedLang);
+					WikivoyageArticleDialogFragment.this, tripId, selectedLang);
 		}
 	}
 
