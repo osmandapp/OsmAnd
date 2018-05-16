@@ -1538,4 +1538,80 @@
 	<string name="poi_piste_grooming_no">Όχι</string>
 	<string name="poi_piste_grooming_mogul">Στοίβα χιονιού (μόγκουλ)</string>
 
+	<string name="poi_garden_type_community">Τύπος κήπου: κοινοτικός</string>
+	<string name="poi_garden_type_private">Τύπος κήπου: ιδιωτικός</string>
+	<string name="poi_garden_type_botanical">Τύπος κήπου: βοτανικός</string>
+
+	<string name="poi_garden_style_kitchen">Τύπος κήπου: κουζίνα</string>
+	<string name="poi_garden_style_rosarium">Τύπος κήπου: τριανταφυλλώνας</string>
+	<string name="poi_garden_style_french">Τύπος κήπου: γαλλικός</string>
+	<string name="poi_garden_style_english">Τύπος κήπου: αγγλικός</string>
+	<string name="poi_garden_style_japanese">Τύπος κήπου: ιαπωνικός</string>
+
+	<string name="poi_capacity">Χωρητικότητα</string>
+	<string name="poi_capacity_disabled_yes">Ναι</string>
+	<string name="poi_capacity_disabled_no">Χωρίς ειδικές θέσεις για ανάπηρους</string>
+	<string name="poi_capacity_disabled">Ειδικές θέσεις για ανάπηρους</string>
+	<string name="poi_capacity_women_yes">Ειδικές θέσεις για γυναίκες</string>
+	<string name="poi_capacity_women_no">Χωρίς ειδικές θέσεις για γυναίκες</string>
+	<string name="poi_capacity_women">Ειδικές θέσεις για γυναίκες</string>
+	<string name="poi_capacity_pupils">Ειδικές θέσεις για σπουδαστές</string>
+	<string name="poi_capacity_teachers">Ειδικές θέσεις για δασκάλους</string>
+	<string name="poi_capacity_parent_yes">Ειδικές θέσεις για γονείς</string>
+	<string name="poi_capacity_parent_no">Χωρίς ειδικές θέσεις για γονείς</string>
+	<string name="poi_capacity_parent">Ειδικές θέσεις για γονείς</string>
+
+	<string name="poi_aerialway_occupancy">Χωρητικότητα καμπίνας/καρέκλας/αυτοκινήτου</string>
+	<string name="poi_aerialway_capacity">Ωριαία χωρητικότητα</string>
+	<string name="poi_aerialway_duration">Μέσος χρόνος ταξιδιού, σε λεπτά</string>
+	<string name="poi_aerialway_bubble_yes">Με θόλο</string>
+	<string name="poi_aerialway_bubble_no">Χωρίς θόλο</string>
+	<string name="poi_aerialway_heating_yes">Ναι</string>
+	<string name="poi_aerialway_heating_no">Χωρίς θέρμανση</string>
+	<string name="poi_aerialway_bicycle_yes">Επιτρεπόμενο</string>
+	<string name="poi_aerialway_bicycle_no">Ποδήλατο: δεν επιτρέπεται</string>
+	<string name="poi_aerialway_bicycle_summer">Επιτρέπεται μόνο το καλοκαίρι</string>
+	<string name="poi_aerialway_access_entry">Μόνο είσοδος</string>
+	<string name="poi_aerialway_access_exit">Μόνο έξοδος</string>
+	<string name="poi_aerialway_access_both">Είσοδος και έξοδος</string>
+	<string name="poi_aerialway_summer_access_entry">Καλοκαιρινή πρόσβαση: μόνο είσοδος</string>
+	<string name="poi_aerialway_summer_access_exit">Καλοκαιρινή πρόσβαση: μόνο έξοδος</string>
+	<string name="poi_aerialway_summer_access_both">Καλοκαιρινή πρόσβαση: είσοδος και έξοδος</string>
+
+	<string name="poi_stars_1">1 (Τουριστικό)</string>
+	<string name="poi_stars_1s">1S (Ανώτερο τουριστικό)</string>
+	<string name="poi_stars_2">2 (τυπικό)</string>
+	<string name="poi_stars_2s">2S (ανώτερο τυπικό)</string>
+	<string name="poi_stars_3">3 (άνετο)</string>
+	<string name="poi_stars_3s">3S (ανώτερη άνεση)</string>
+	<string name="poi_stars_4">4 (πρώτη κλάση)</string>
+	<string name="poi_stars_4s">4S (ανώτερη πρώτη κλάση)</string>
+	<string name="poi_stars_5">5 (πολυτελείας)</string>
+	<string name="poi_stars_5s">5S (ανώτερης πολυτελείας)</string>
+	<string name="poi_rooms">Δωμάτια</string>
+
+	<string name="poi_love_hotel">Ερωτικό ξενοδοχείο</string>
+
+	<string name="poi_payment_coins_yes">Κέρματα</string>
+	<string name="poi_payment_coins_no">Μη αποδεκτά τα κέρματα</string>
+	<string name="poi_payment_coins_0.5">Κέρματα $0,5</string>
+	<string name="poi_payment_coins_50c12">Κέρματα 50c, 1€ και 2€</string>
+	<string name="poi_payment_telephone_cards_yes">Τηλεφωνικές κάρτες</string>
+	<string name="poi_payment_telephone_cards_no">Μη αποδεκτές οι τηλεφωνικές κάρτες</string>
+	<string name="poi_payment_credit_cards_yes">Πιστωτικές κάρτες</string>
+	<string name="poi_payment_credit_cards_no">Μη αποδεκτές οι πιστωτικές κάρτες</string>
+	<string name="poi_payment_notes_yes">Χαρτονομίσματα</string>
+	<string name="poi_payment_notes_no">Μη αποδεκτά τα χαρτονομίσματα</string>
+	<string name="poi_payment_electronic_purses_yes">Ηλεκτρονικά πορτοφόλια</string>
+	<string name="poi_payment_electronic_purses_no">Μη αποδεκτά τα ηλεκτρονικά πορτοφόλια</string>
+	<string name="poi_payment_cash_yes">Μετρητά</string>
+	<string name="poi_payment_cash_no">Μη αποδεκτά τα μετρητά</string>
+	<string name="poi_payment_debit_cards_yes">Χρεωστικές κάρτες</string>
+	<string name="poi_payment_debit_cards_no">Μη αποδεκτές οι χρεωστικές κάρτες</string>
+	<string name="poi_payment_bitcoin_yes">Ψηφιακό νόμισμα (Bitcoin)</string>
+	<string name="poi_payment_bitcoin_no">Μη αποδεκτά τα ψηφιακά νομίσματα</string>
+	<string name="poi_payment_visa_yes">Visa</string>
+	<string name="poi_payment_visa_no">Μη αποδεκτές οι κάρτες Visa</string>
+	<string name="poi_payment_mastercard_yes">MasterCard</string>
+	<string name="poi_payment_mastercard_no">Μη αποδεκτές οι MasterCard</string>
 	</resources>
