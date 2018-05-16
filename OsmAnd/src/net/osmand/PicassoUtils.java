@@ -13,9 +13,9 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import net.osmand.plus.OsmandApplication;
 import okhttp3.Cache;
 import okhttp3.OkHttpClient;
-
 import static android.os.Build.VERSION.SDK_INT;
 import static android.os.Build.VERSION_CODES.JELLY_BEAN_MR2;
 
@@ -24,33 +24,36 @@ public class PicassoUtils {
 	private static final String PICASSO_CACHE = "picasso-cache";
 	private static final int MIN_DISK_CACHE_SIZE = 5 * 1024 * 1024; // 5MB
 	private static final int MAX_DISK_CACHE_SIZE = 50 * 1024 * 1024; // 50MB
+	private static PicassoUtils INSTANCE;
 
-	private static Cache diskCache;
-	private static LruCache memoryCache;
+	private Cache diskCache;
+	private LruCache memoryCache;
 
-	private static boolean initialized;
+	private Map<String, Boolean> cached = new HashMap<>();
+	
+	private PicassoUtils(OsmandApplication app){
+		File cacheDir = createDefaultCacheDir(app);
 
-	private static Map<String, Boolean> cached = new HashMap<>();
+		diskCache = new Cache(cacheDir, calculateDiskCacheSize(cacheDir));
+		memoryCache = new LruCache(app);
 
-	public static void setupPicasso(@NonNull Context context) {
-		if (!initialized) {
-			File cacheDir = createDefaultCacheDir(context);
+		Picasso picasso = new Picasso.Builder(app)
+				.downloader(new OkHttp3Downloader(new OkHttpClient.Builder().cache(diskCache).build()))
+				.memoryCache(memoryCache)
+				.build();
 
-			diskCache = new Cache(cacheDir, calculateDiskCacheSize(cacheDir));
-			memoryCache = new LruCache(context);
+		Picasso.setSingletonInstance(picasso);
 
-			Picasso picasso = new Picasso.Builder(context)
-					.downloader(new OkHttp3Downloader(new OkHttpClient.Builder().cache(diskCache).build()))
-					.memoryCache(memoryCache)
-					.build();
-
-			Picasso.setSingletonInstance(picasso);
-
-			initialized = true;
-		}
 	}
 
-	public static void clearAllPicassoCache() {
+	public static PicassoUtils getPicasso(@NonNull OsmandApplication app) {
+		if(INSTANCE == null) {
+			INSTANCE = new PicassoUtils(app);
+		}
+		return INSTANCE;
+	}
+
+	public void clearAllPicassoCache() {
 		if (memoryCache != null) {
 			memoryCache.clear();
 		}
@@ -64,19 +67,19 @@ public class PicassoUtils {
 		cached.clear();
 	}
 
-	public static Boolean isCached(@NonNull String key) {
+	public Boolean isURLLoaded(@NonNull String key) {
 		return cached.get(key);
 	}
 
-	public static void setCached(@NonNull String key, boolean val) {
+	public void setResultLoaded(@NonNull String key, boolean val) {
 		cached.put(key, val);
 	}
 
-	public static void clearCachedMap() {
+	public void clearCachedMap() {
 		cached.clear();
 	}
 
-	public static long getDiskCacheSizeBytes() throws IOException {
+	public long getDiskCacheSizeBytes() throws IOException {
 		return diskCache.size();
 	}
 
