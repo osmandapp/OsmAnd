@@ -31,6 +31,8 @@ public class ExploreRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 	private static final int SECOND_POSITION = 1;
 
 	private final List<BaseTravelCard> items = new ArrayList<>();
+	private TravelDownloadUpdateCard downloadCard;
+	private TravelNeededMapsCard neededMapsCard;
 
 	@NonNull
 	@Override
@@ -138,12 +140,19 @@ public class ExploreRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 	}
 
 	public void addNeededMapsCard(TravelNeededMapsCard card) {
+		this.neededMapsCard = card;
 		if (addItem(getNeededMapsCardPosition(), card)) {
 			notifyDataSetChanged();
 		}
 	}
 
 	public void updateNeededMapsCard(boolean onlyProgress) {
+		if(onlyProgress) {
+			TravelNeededMapsCard nd = this.neededMapsCard;
+			if(nd != null) {
+				nd.updateView();
+			}
+		}
 		int pos = getNeededMapsCardPosition();
 		if (neededMapsCardExists(pos)) {
 			notifyItemChanged(pos);
@@ -151,6 +160,7 @@ public class ExploreRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 	}
 
 	public void removeNeededMapsCard() {
+		this.neededMapsCard = null;
 		int pos = getNeededMapsCardPosition();
 		if (neededMapsCardExists(pos)) {
 			removeItem(pos);
@@ -170,12 +180,19 @@ public class ExploreRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 	}
 
 	public void addDownloadUpdateCard(TravelDownloadUpdateCard card) {
+		this.downloadCard = card;
 		if (addItem(getDownloadUpdateCardPosition(), card)) {
 			notifyDataSetChanged();
 		}
 	}
 
 	public void updateDownloadUpdateCard(boolean onlyProgress) {
+		if(onlyProgress) {
+			TravelDownloadUpdateCard dc = this.downloadCard;
+			if(dc != null) {
+				dc.updateProgresBar();
+			}
+		}
 		int pos = getDownloadUpdateCardPosition();
 		if (downloadUpdateCardExists(pos)) {
 			notifyItemChanged(pos);
@@ -183,6 +200,7 @@ public class ExploreRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 	}
 
 	public void removeDownloadUpdateCard() {
+		this.downloadCard = null;
 		int pos = getDownloadUpdateCardPosition();
 		if (downloadUpdateCardExists(pos)) {
 			removeItem(pos);
