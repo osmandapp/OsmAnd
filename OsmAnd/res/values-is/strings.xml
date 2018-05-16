@@ -1962,7 +1962,7 @@ Punktar</string>
     <string name="add_new_folder">Bæta við nýrri möppu</string>
     <string name="points_delete_multiple_succesful">Punkti/punktum eytt.</string>
     <string name="points_delete_multiple">Þú ert að fara að eyða %1$d punktum. Ertu viss?</string>
-    <string name="track_points_category_name">Mikilvægir punktar á þessari leið</string>
+    <string name="track_points_category_name">Vegpunktar, merkisstaðir, nefnd fyrirbæri</string>
     <string name="gpx_track">Ferill</string>
     <string name="max_speed">Mesti hraði</string>
     <string name="average_speed">Meðalhraði</string>
@@ -2945,7 +2945,7 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="wikivoyage_search_hint">Leita: Land, borg/sveitarfélag, hérað/sýsla</string>
     <string name="shared_string_read">Lesið</string>
     <string name="shared_string_contents">Innihald</string>
-    <string name="download_maps_travel">Ferðakort</string>
+    <string name="download_maps_travel">Ferðaleiðbeiningar</string>
     <string name="shared_string_wikivoyage">Wikivoyage</string>
     <string name="article_removed">Grein fjarlægð</string>
     <string name="index_item_world_wikivoyage">Greinar um víða veröld af Wikivoyage</string>
@@ -3028,4 +3028,7 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="default_render_descr">Stíll til almennrar notkunar. Einfölduð skýr framsetning fyrir þétta byggð. Helstu eiginleikar: hæðarlínur, leiðir, gæði yfirborðs, aðgangstakmarkanir, vegmerkingar, stígar skilgreindir skv. SAC-kvarða, eigindi fyrir vatnasport.</string>
     <string name="topo_render_descr">Stíll með góðum birtuskilum hugsaður fyrir gönguferðir, fjallaferðir og hjólreiðar úti í náttúrunni. Læsilegt í erfiðum birtuskilyrðum utanhúss. Helstu eiginleikar: skýr munur á götum og náttúrufyrirbærum, hæðarlínur með ítarlegum stillingum, fleiri smáatriði á hverju aðdráttarstigi en í sjálfgefna stílnum. Stillingar á yfirborðseiginleikum gerir kleift að aðgreina leiðir eftir gæðum yfirborðs. Enginn næturhamur.</string>
     <string name="touring_view_render_descr">Stíll með nákvæmum smáatriðum til ferðalaga. Er með öllum þeim stillingum sem fylgja sjálfgefna stílnum, en að auki: eins mörg smáatriði og mögulegt er, sérstaklega hvað varðar vegi, stíga og aðrar leiðir til umferðar. Skýr aðgreining allra gerða leiða, minnir á gamlar landakortabækur. Litastef með góðum birtuskilum til notkunar utanhúss, með dags- og næturham.</string>
+    <string name="shared_string_bookmark">Bókamerki</string>
+    <string name="access_intermediate_arrival_time">Milli-komutími</string>
+    <string name="map_widget_intermediate_time">Millitími</string>
     </resources>

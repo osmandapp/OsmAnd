@@ -303,7 +303,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		});
 
 		ImageView waypointsButton = (ImageView) main.findViewById(R.id.map_waypoints_route_button);
-		waypointsButton.setImageDrawable(app.getIconsCache().getIcon(R.drawable.map_action_flag_dark, nightMode ? R.color.route_info_control_icon_color_dark : R.color.route_info_control_icon_color_light));
+		waypointsButton.setImageDrawable(app.getIconsCache().getIcon(R.drawable.ic_action_intermediate_destination, nightMode ? R.color.route_info_control_icon_color_dark : R.color.route_info_control_icon_color_light));
 		waypointsButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {

@@ -2477,9 +2477,9 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="shared_string_overview">Přehled</string>
     <string name="select_street">Vyberte ulici</string>
     <string name="shared_string_in_name">v %1$s</string>
-    <string name="quick_action_add_destination_desc">Stisk tohoto tlačítka přidá střed obrazovky jako nový cíl navádění, z dříve nastaveného cíle se stává poslední mezicíl.</string>
+    <string name="quick_action_add_destination_desc">Stisk tohoto tlačítka přidá střed obrazovky jako nový cíl navádění, z dříve nastaveného cíle se stane poslední mezicíl.</string>
     <string name="quick_action_replace_destination_desc">Stisk tohoto tlačítka přidá střed obrazovky jako nový cíl navádění. Pokud byl dříve nastaven jiný cíl, bude nahrazen.</string>
-    <string name="quick_action_add_first_intermediate_desc">Stisk tohoto tlačítka přidá střed obrazovky jako nový mezicíl.</string>
+    <string name="quick_action_add_first_intermediate_desc">Stisk tohoto tlačítka přidá střed obrazovky jako první mezicíl.</string>
     <string name="no_overlay">Bez překryvné vrstvy</string>
     <string name="no_underlay">Bez podkladové vrstvy</string>
     <string name="subscribe_email_error">Chyba</string>
@@ -2606,7 +2606,7 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="keep_showing_on_map">Stále zobrazovat na mapě</string>
     <string name="exit_without_saving">Ukončit bez uložení?</string>
     <string name="map_orientation_change_in_accordance_with_speed">Práh změny orientace mapy</string>
-    <string name="map_orientation_change_in_accordance_with_speed_descr">Zvolte rychlost při které se orientace mapy změní z \"Ve směru pohybu\" na \"Podle kompasu\".</string>
+    <string name="map_orientation_change_in_accordance_with_speed_descr">Zvolte rychlost, při níž se orientace mapy změní z \"Ve směru pohybu\" na \"Podle kompasu\".</string>
     <string name="all_markers_moved_to_history">Všechny mapové značky přesunuty do historie</string>
     <string name="marker_moved_to_history">Mapová značka přesunuta do historie</string>
     <string name="marker_moved_to_active">Mapová značka přesunuta do aktivních</string>
@@ -2649,7 +2649,7 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="show_passed">Zobrazit prošlé</string>
     <string name="hide_passed">Skrýt prošlé</string>
     <string name="marker_show_distance_descr">Vyberte, jak ukazovat vzdálenost a směr k mapovým značkám na obrazovce mapy:</string>
-    <string name="osn_modify_dialog_error">Došlo k výjimce: Poznámka nebyla změněna</string>
+    <string name="osn_modify_dialog_error">Nepodařilo se změnit poznámku</string>
     <string name="osn_modify_dialog_title">Upravit poznámku</string>
     <string name="context_menu_item_modify_note">Upravit poznámku OSM</string>
     <string name="make_round_trip_descr">Přidat kopii počátečního bodu jako cíl.</string>
@@ -2670,7 +2670,7 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="route_is_calculated">Trasa vypočítána</string>
     <string name="round_trip">Okružní trasa</string>
     <string name="plan_route_no_markers_toast">Pro použití této funkce musíte přidat alespoň jednu značku .</string>
-    <string name="release_2_8">\\022 Zcela přepracované mapové značky s vodítky a plánováním trasy 
+    <string name="release_2_8">\\022 Zcela přepracované mapové značky se směrovkami a plánováním trasy 
 \n 
 \n• Nástroj měření vzdálenosti nabízí funkci přichycení k cestě a uložení bodů jako trasu 
 \n 
@@ -2682,7 +2682,7 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="looking_for_tracks_with_waypoints">Hledání tras s trasovými body</string>
     <string name="shared_string_more_without_dots">Více</string>
     <string name="appearance_on_the_map">Vzhled na mapě</string>
-    <string name="add_track_to_markers_descr">Pokud vyberete trasu která obsahuje body trasy, mohou být tyto body přidány jako značky.</string>
+    <string name="add_track_to_markers_descr">Trasové body lze přidat jako značky tím, že vyberete trasu, která je obsahuje.</string>
     <string name="add_favourites_group_to_markers_descr">Vyberte kategorii oblíbených, kterou chcete přidat k značkám.</string>
     <string name="track_waypoints">Body trasy</string>
     <string name="favourites_group">Kategorie oblíbených</string>
@@ -2869,35 +2869,36 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="unlock_all_features">Odemknout všechny funkce OsmAnd</string>
 
     <string name="purchase_dialog_title">Vyberte si předplatné</string>
-    <string name="purchase_dialog_travel_description">Chcete-li číst články o cestování offline, je třeba koupit jednu z následujících položek.</string>
+    <string name="purchase_dialog_travel_description">Chcete-li číst články o cestování offline, je třeba koupit jednu z následujících položek:</string>
     <string name="purchase_dialog_subtitle">Vyberte vhodnou položku:</string>
     <string name="shared_string_dont">Nedělat</string>
     <string name="shared_string_do">Dělat</string>
-    <string name="shared_string_only_with_wifi">Pouze s WiFi</string>
+    <string name="shared_string_only_with_wifi">Pouze na WiFi</string>
     <string name="wikivoyage_download_pics">Stáhnout obrázky</string>
-    <string name="wikivoyage_download_pics_descr">Můžeme stáhnout a zobrazit obrázky v článcích a ukládat je do zařízení, takže k nim budete mít přístup v režimu offline. Vždy můžete změnit nastavení v Prozkoumat &gt; Možnosti.</string>
-    <string name="shared_string_wifi_only">Pouze WiFi</string>
+    <string name="wikivoyage_download_pics_descr">Obrázky z článků lze stáhnout pro použití v režimu offline.
+\nToto nastavení můžete můžete změnit v Prozkoumat → Možnosti.</string>
+    <string name="shared_string_wifi_only">Pouze na Wi-Fi</string>
     <string name="select_travel_book">Vyberte cestovní knihu</string>
     <string name="shared_string_travel_book">Cestovní kniha</string>
-    <string name="online_webpage_warning">Tato stránka je k dispozici pouze online. Chcete ji otevřít v prohlížeči?</string>
+    <string name="online_webpage_warning">Stránka je k dispozici pouze online. Chcete ji otevřít v prohlížeči?</string>
     <string name="images_cache">Mezipaměť obrázků</string>
-    <string name="delete_search_history">Odstranit historii hledání</string>
-    <string name="download_images">Stáhnout obrázky</string>
-    <string name="download_maps_travel">Cestovní mapy</string>
+    <string name="delete_search_history">Vymazat historii hledání</string>
+    <string name="download_images">Zobrazit obrázky</string>
+    <string name="download_maps_travel">Cestovní průvodce</string>
     <string name="shared_string_wikivoyage">Wikivoyage</string>
     <string name="article_removed">Článek odstraněn</string>
-    <string name="wikivoyage_search_hint">Vyhledávání: Stát, Město, Kraj</string>
+    <string name="wikivoyage_search_hint">Vyhledávání: Stát, město, kraj</string>
     <string name="shared_string_read">Číst</string>
-    <string name="saved_articles">Uložené články</string>
+    <string name="saved_articles">Články v záložkách</string>
     <string name="shared_string_explore">Prozkoumat</string>
     <string name="shared_string_contents">Obsah</string>
     <string name="index_item_world_wikivoyage">Celosvětové články Wikivoyage</string>
     <string name="contour_lines_hillshade_maps">Vrstevnice &amp; stínování terénu</string>
     <string name="shared_string_restart">Restartovat</string>
     <string name="show_images">Zobrazit obrázky</string>
-    <string name="purchase_cancelled_dialog_descr">Obnovit předplatné, pro pokračování využití všech funkcí:</string>
+    <string name="purchase_cancelled_dialog_descr">Obnovte předplatné, abyste nadále mohli využívat všechny funkce:</string>
 
-    <string name="maps_you_need_descr">Na základě článků, které jste uložili, doporučujeme vám stáhnout následující mapy:</string>
+    <string name="maps_you_need_descr">Na základě článků, které jste uložili, vám doporučujeme stáhnout následující mapy:</string>
     <string name="maps_you_need">Potřebné mapy</string>
     <string name="osmand_team">OsmAnd tým</string>
     <string name="popular_destinations">Oblíbené cíle</string>
@@ -2905,8 +2906,8 @@ Zobrazená oblast: %1$s x %2$s</string>
 	<string name="download_file">Stáhnout soubor</string>
     <string name="start_editing">Začít s úpravami</string>
     <string name="get_unlimited_access">Získejte neomezený přístup</string>
-    <string name="monthly_map_updates">Aktualizace Map: <b>Každý měsíc</b></string>
-    <string name="daily_map_updates">Aktualizace Map: <b>Každou hodinu</b></string>
+    <string name="monthly_map_updates">Aktualizace map: <b>Každý měsíc</b></string>
+    <string name="daily_map_updates">Aktualizace map: <b>Každou hodinu</b></string>
     <string name="download_wikipedia_description">Stáhnout články Wikipedie pro %1$s a číst je v režimu offline.</string>
     <string name="download_wikipedia_label">Stahování dat z Wikipedie</string>
     <string name="open_in_browser_wiki">Otevřít článek online</string>
@@ -2915,4 +2916,6 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="wiki_article_search_text">Hledání potřebného wiki článku</string>
     <string name="wiki_article_not_found">Článek nebyl nalezen</string>
     <string name="how_to_open_wiki_title">Jak otevřít články Wikipedie?</string>
-</resources>
+<string name="hide_full_description">Skrýt plný popis</string>
+    <string name="show_full_description">Zobrazit plný popis</string>
+    </resources>

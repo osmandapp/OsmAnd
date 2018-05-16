@@ -3886,4 +3886,14 @@
 	<string name="poi_glacier_ele_bottom">Ніжэйшая кропка</string>
 	<string name="poi_glacier_slope">Сярэдні ўхіл</string>
 
+<string name="poi_checkpoint_type">Тып кантрольнага пункта</string>
+
+<string name="poi_checkpoint_hiking">Пешаходны кантрольны пункт</string>
+	<string name="poi_checkpoint_type_stamp">Пункт штампоўкі</string>
+	<string name="poi_checkpoint_type_code">Код</string>
+	<string name="poi_checkpoint_type_notebook">Нататнік</string>
+	<string name="poi_checkpoint_type_needler">Ігольнік</string>
+	<string name="poi_checkpoint_type_electronic">Электронны</string>
+	<string name="poi_course">Курс</string>
+
 </resources>

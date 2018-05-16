@@ -79,6 +79,7 @@ public class ApplicationMode {
 		regWidgetVisibility("intermediate_distance", all);
 		regWidgetVisibility("distance", all);
 		regWidgetVisibility("time", all);
+		regWidgetVisibility("intermediate_time", all);
 		regWidgetVisibility("speed", exceptPedestrianAndDefault);
 		regWidgetVisibility("max_speed", CAR);
 		regWidgetVisibility("altitude", pedestrianBicycle);
@@ -86,6 +87,7 @@ public class ApplicationMode {
 		regWidgetAvailability("intermediate_distance", all);
 		regWidgetAvailability("distance", all);
 		regWidgetAvailability("time", all);
+		regWidgetAvailability("intermediate_time", all);
 		regWidgetAvailability("map_marker_1st", none);
 		regWidgetAvailability("map_marker_2nd", none);
 

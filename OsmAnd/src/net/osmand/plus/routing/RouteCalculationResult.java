@@ -992,6 +992,13 @@ public class RouteCalculationResult {
 		return time;
 	}
 
+	public int getLeftTimeToNextIntermediate(Location fromLoc) {
+		if (nextIntermediate >= intermediatePoints.length) {
+			return 0;
+		}
+		return getLeftTime(fromLoc) - directions.get(intermediatePoints[nextIntermediate]).afterLeftTime;
+	}
+
 	
 	public static class NextDirectionInfo {
 		public RouteDirectionInfo directionInfo;

@@ -2412,7 +2412,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="points_delete_multiple_succesful">Forigis punkto(j)n.</string>
     <string name="points_delete_multiple">%1$d punkto(j) estos forigitaj. Ĉu pluigi?</string>
     <string name="route_points_category_name">Turniĝoj sur tiu ĉi kurso</string>
-    <string name="track_points_category_name">Gravaj punktoj sur tiu ĉi kurso</string>
+    <string name="track_points_category_name">Navigadpunktoj, interesejoj, objektoj nomitaj</string>
     <string name="shared_string_slope">Klineco</string>
     <string name="lang_ber">Berbera</string>
     <string name="relief_smoothness_factor_descr">Preferi terenon: ebenan aŭ malebenan.</string>
@@ -2945,7 +2945,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="shared_string_explore">Esplori</string>
     <string name="shared_string_contents">Enhavo</string>
     <string name="article_removed">Forigis artikolon</string>
-    <string name="download_maps_travel">Vojaĝaj mapoj</string>
+    <string name="download_maps_travel">Vojaĝaj gvidiloj</string>
     <string name="shared_string_wikivoyage">Vikivojaĝo</string>
     <string name="index_item_world_wikivoyage">Tutmondaj artikoloj de Vikivojaĝo</string>
     <string name="images_cache">Bilda kaŝmemorejo</string>
@@ -3028,4 +3028,6 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="shared_string_bookmark">Al legosignoj</string>
     <string name="off_road_render_descr">Taŭga por ekster-voja veturado kaj por uzi kun verdaj satelitaj fotoj kiel subtavolan mapon. Ĉefaj eblaĵoj: malpliigita larĝo de ĉefaj vojoj, pliigita larĝo de kampaj vojoj, vojetoj, biciklaj kaj aliaj vojoj. Surbaze la stilo “Topo”.</string>
     <string name="touring_view_render_descr">Detalplena stilo por turismo. Inkluzivas ĉiujn agordojn de norma stilo kaj krome: vidigas kiel eble pli da detaloj, precipe ĉiujn ŝoseojn kaj vojetojn kaj aliajn rimedojn por vojaĝi. Klare distingebla vido de diversaj vojoj, simile al paperaj mapoj. Alte kontrasta kolor-skemo por eksterdoma uzo, nokta kaj taga reĝimoj.</string>
+    <string name="access_intermediate_arrival_time">Alvena tempo al intercelo</string>
+    <string name="map_widget_intermediate_time">Tempo al intercelo</string>
     </resources>

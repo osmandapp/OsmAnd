@@ -12,6 +12,7 @@ import android.text.Html;
 import android.util.Log;
 
 import net.osmand.IndexConstants;
+import net.osmand.ResultMatcher;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.map.OsmandRegions;
@@ -39,7 +40,6 @@ public class WikiArticleHelper {
 	private static final String TAG = WikiArticleHelper.class.getSimpleName();
 
 	private static final int PARTIAL_CONTENT_PHRASES = 3;
-	private static final String ZIP_EXT = ".zip";
 	private static final String PAGE_PREFIX_HTTP = "http://";
 	private static final String PAGE_PREFIX_HTTPS = "https://";
 	private static final String WIKIVOAYAGE_DOMAIN = ".wikivoyage.org/wiki/";
@@ -126,8 +126,26 @@ public class WikiArticleHelper {
 						if (isCancelled()) {
 							return null;
 						}
-						results.addAll(repository.searchAmenitiesByName(0, 0, 0, 0,
-								Integer.MAX_VALUE, Integer.MAX_VALUE, name, null));
+						ResultMatcher<Amenity> matcher = new ResultMatcher<Amenity>() {
+							@Override
+							public boolean publish(Amenity amenity) {
+								List<String> allNames = amenity.getAllNames(false);
+								for (String amenityName : allNames) {
+									if (name.equalsIgnoreCase(amenityName)) {
+										results.add(amenity);
+										break;
+									}
+								}
+								return false;
+							}
+
+							@Override
+							public boolean isCancelled() {
+								return false;
+							}
+						};
+						repository.searchAmenitiesByName(0, 0, 0, 0,
+								Integer.MAX_VALUE, Integer.MAX_VALUE, name, matcher);
 					}
 				}
 			}
@@ -175,12 +193,6 @@ public class WikiArticleHelper {
 				}
 			}
 		}
-	}
-
-	private static String getFilenameFromIndex(String fileName) {
-		return fileName
-				.replace("_" + IndexConstants.BINARY_MAP_VERSION, "")
-				.replace(ZIP_EXT, "");
 	}
 
 	private static String getRegionName(String filename, OsmandRegions osmandRegions) {

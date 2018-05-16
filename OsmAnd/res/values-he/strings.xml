@@ -2717,7 +2717,7 @@
     <string name="all_data">כל הנתונים</string>
     <string name="osm_notes">הערות OSM</string>
     <string name="parked_at">מיקום החנייה</string>
-    <string name="track_points_category_name">נקודות משמעותיות בנתיב הזה</string>
+    <string name="track_points_category_name">נקודות דרך, נקודות עניין, תכונות עם שם</string>
     <string name="shared_string_time_span">מסגרת זמן</string>
     <string name="upload_osm_note_description">ניתן להעלות את הערות ה־OSM שלך באופן אנונימי או על ידי שימוש בפרופיל שלך ב־OpenStreetMap.org.</string>
     <string name="trip_rec_notification_settings_desc">הצגת התרעת מערכת שמאפשרת לך להתחיל הקלטת טיול.</string>
@@ -2772,7 +2772,7 @@
 \nייצוג המקום: %1$s × %2$s</string>
     <string name="navigate_point_northing">הצפנה</string>
     <string name="navigate_point_easting">הזרחה</string>
-    <string name="download_maps_travel">מפות טיולים</string>
+    <string name="download_maps_travel">מדריכי תיירות</string>
     <string name="shared_string_wikivoyage">ויקימסע</string>
     <string name="article_removed">המאמר הוסר</string>
     <string name="fav_point_emoticons_message">שם הנקודה המועדפת השתנה לביטוי %1$s כדי להתאים כראוי לשמירת המחרוזת עם הרגשונים לקובץ.</string>

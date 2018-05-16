@@ -198,19 +198,31 @@ public class RouteInfoWidgetsFactory {
 		public static final int TIME_CONTROL_WIDGET_STATE_TIME_TO_GO = R.id.time_control_widget_state_time_to_go;
 
 		private final OsmandPreference<Boolean> showArrival;
+		private final boolean intermediate;
 
-		public TimeControlWidgetState(OsmandApplication ctx) {
+		public TimeControlWidgetState(OsmandApplication ctx, boolean intermediate) {
 			super(ctx);
-			showArrival = ctx.getSettings().SHOW_ARRIVAL_TIME_OTHERWISE_EXPECTED_TIME;
+			this.intermediate = intermediate;
+			if (intermediate) {
+				showArrival = ctx.getSettings().SHOW_INTERMEDIATE_ARRIVAL_TIME_OTHERWISE_EXPECTED_TIME;
+			} else {
+				showArrival = ctx.getSettings().SHOW_ARRIVAL_TIME_OTHERWISE_EXPECTED_TIME;
+			}
 		}
 
 		@Override
 		public int getMenuTitleId() {
+			if (intermediate) {
+				return showArrival.get() ? R.string.access_intermediate_arrival_time : R.string.map_widget_intermediate_time;
+			}
 			return showArrival.get() ? R.string.access_arrival_time : R.string.map_widget_time;
 		}
 
 		@Override
 		public int getMenuIconId() {
+			if (intermediate) {
+				return R.drawable.ic_action_intermediate_destination_time;
+			}
 			return showArrival.get() ? R.drawable.ic_action_time : R.drawable.ic_action_time_to_distance;
 		}
 
@@ -221,11 +233,17 @@ public class RouteInfoWidgetsFactory {
 
 		@Override
 		public int[] getMenuTitleIds() {
+			if (intermediate) {
+				return new int[]{R.string.access_intermediate_arrival_time, R.string.map_widget_intermediate_time};
+			}
 			return new int[]{R.string.access_arrival_time, R.string.map_widget_time};
 		}
 
 		@Override
 		public int[] getMenuIconIds() {
+			if (intermediate) {
+				return new int[]{R.drawable.ic_action_intermediate_destination_time, R.drawable.ic_action_intermediate_destination_time};
+			}
 			return new int[]{R.drawable.ic_action_time, R.drawable.ic_action_time_to_distance};
 		}
 
@@ -240,24 +258,28 @@ public class RouteInfoWidgetsFactory {
 		}
 	}
 
-	public TextInfoWidget createTimeControl(final MapActivity map){
+	public TextInfoWidget createTimeControl(final MapActivity map, final boolean intermediate){
 		final RoutingHelper routingHelper = map.getRoutingHelper();
 		final int time = R.drawable.widget_time_day;
 		final int timeN = R.drawable.widget_time_night;
 		final int timeToGo = R.drawable.widget_time_to_distance_day;
 		final int timeToGoN = R.drawable.widget_time_to_distance_night;
 		final OsmandApplication ctx = map.getMyApplication();
-		final OsmandPreference<Boolean> showArrival = ctx.getSettings().SHOW_ARRIVAL_TIME_OTHERWISE_EXPECTED_TIME;
+		final OsmandPreference<Boolean> showArrival = intermediate
+				? ctx.getSettings().SHOW_INTERMEDIATE_ARRIVAL_TIME_OTHERWISE_EXPECTED_TIME
+				: ctx.getSettings().SHOW_ARRIVAL_TIME_OTHERWISE_EXPECTED_TIME;
+
 		final TextInfoWidget leftTimeControl = new TextInfoWidget(map) {
 			private long cachedLeftTime = 0;
 			
 			@Override
 			public boolean updateInfo(DrawSettings drawSettings) {
-				setIcons(showArrival.get() ? time : timeToGo, showArrival.get() ? timeN : timeToGoN);
+				setTimeControlIcons(this, showArrival.get(), intermediate);
 				int time = 0;
 				if (routingHelper != null && routingHelper.isRouteCalculated()) {
 					//boolean followingMode = routingHelper.isFollowingMode();
-					time = routingHelper.getLeftTime();
+					time = intermediate ? routingHelper.getLeftTimeNextIntermediate() : routingHelper.getLeftTime();
+
 					if (time != 0) {
 						if (/*followingMode && */showArrival.get()) {
 							long toFindTime = time * 1000 + System.currentTimeMillis();
@@ -297,16 +319,24 @@ public class RouteInfoWidgetsFactory {
 			@Override
 			public void onClick(View v) {
 				showArrival.set(!showArrival.get());
-				leftTimeControl.setIcons(showArrival.get() ? time : timeToGo,
-						showArrival.get() ? timeN : timeToGoN);
+				setTimeControlIcons(leftTimeControl, showArrival.get(), intermediate);
 				map.getMapView().refreshMap();
 			}
 			
 		});
 		leftTimeControl.setText(null, null);
-		leftTimeControl.setIcons(showArrival.get() ? time : timeToGo,
-				showArrival.get() ? timeN : timeToGoN);
+		setTimeControlIcons(leftTimeControl, showArrival.get(), intermediate);
 		return leftTimeControl;
+	}
+
+	private void setTimeControlIcons(TextInfoWidget timeControl, boolean showArrival, boolean intermediate) {
+		int iconLight = intermediate
+				? R.drawable.widget_intermediate_time_day
+				: showArrival ? R.drawable.widget_time_day : R.drawable.widget_time_to_distance_day;
+		int iconDark = intermediate
+				? R.drawable.widget_intermediate_time_night
+				: showArrival ? R.drawable.widget_time_night : R.drawable.widget_time_to_distance_night;
+		timeControl.setIcons(iconLight, iconDark);
 	}
 	
 	

@@ -2431,7 +2431,7 @@
     <string name="points_delete_multiple_succesful">Punto(s) borrado(s).</string>
     <string name="points_delete_multiple">¿Borrar %1$d punto(s)?</string>
     <string name="route_points_category_name">Giros a pasar en esta ruta</string>
-    <string name="track_points_category_name">Puntos destacados en esta ruta</string>
+    <string name="track_points_category_name">Puntos de ruta, puntos de interés, características nombradas</string>
     <string name="gpx_track">Traza</string>
     <string name="max_speed">Velocidad máxima</string>
     <string name="average_speed">Velocidad media</string>
@@ -2852,7 +2852,15 @@
     <string name="active_markers_descr">Elige el número de marcadores activos a mostrar.</string>
     <string name="shared_string_more_without_dots">Más</string>
     <string name="looking_for_tracks_with_waypoints">Búsqueda de trazas con puntos de ruta</string>
-    <string name="release_3_0">• 
+    <string name="release_3_0">• Nuevo menú «Viajes»: ver artículos de WikiViajes sin usar una conexión a Internet
+\n
+\n • Wikipedia: Nuevo aspecto, enlaces activos, imágenes
+\n
+\n • Interfaz de apertura de traza: visualizar grupos de los puntos de ruta
+\n
+\n • Marcadores del mapa: importación de grupos seleccionados desde archivos GPX, nuevo aspecto en el ingreso de coordenadas
+\n
+\n • La suscripción de OsmAnd Live, ahora incluye todas las características de OsmAnd
 \n</string>
     <string name="modify_the_search_query">Modificar la consulta de búsqueda.</string>
     <string name="empty_state_osm_edits">Crear o modificar objetos OSM</string>
@@ -2922,7 +2930,7 @@
 \n 
 \n • El tiempo de caminata es consciente del terreno ascendente (regla de Naismith). 
 \n</string>
-    <string name="touring_view_renderer">Vista de Touring (contraste y detalles)</string>
+    <string name="touring_view_renderer">Vista turística</string>
     <string name="nautical_renderer">Náutico</string>
     <string name="copy_location_name">Copiar nombre del punto/PDI</string>
     <string name="toast_empty_name_error">Ubicación sin nombre</string>
@@ -2968,12 +2976,12 @@
     <string name="online_webpage_warning">La página sólo está disponible en línea. ¿Abrirla en el navegador web?</string>
     <string name="images_cache">Caché de imágenes</string>
     <string name="delete_search_history">Borrar historial de búsquedas</string>
-    <string name="download_maps_travel">Mapas turísticos</string>
+    <string name="download_maps_travel">Guías turísticas</string>
     <string name="shared_string_wikivoyage">Wikiviajes</string>
     <string name="article_removed">Artículo borrado</string>
     <string name="wikivoyage_search_hint">Buscar: País, ciudad, provincia</string>
     <string name="shared_string_read">Leer</string>
-    <string name="saved_articles">Artículos guardados</string>
+    <string name="saved_articles">Artículos favoritos</string>
     <string name="shared_string_explore">Explorar</string>
     <string name="shared_string_contents">Contenido</string>
     <string name="index_item_world_wikivoyage">Artículos de Wikiviajes en todo el mundo</string>
@@ -2986,7 +2994,7 @@
     <string name="shared_string_wifi_only">Sólo con Wi-Fi</string>
     <string name="select_travel_book">Seleccionar libro de viajes</string>
     <string name="shared_string_travel_book">Libro de viajes</string>
-    <string name="download_images">Descargar imágenes</string>
+    <string name="download_images">Mostrar imágenes</string>
     <string name="purchase_dialog_title">Elegir plan</string>
     <string name="purchase_dialog_travel_description">Comprar uno de los siguientes elementos para leer artículos turísticos sin conexión:</string>
     <string name="purchase_dialog_subtitle">Elegir el elemento adecuado:</string>
@@ -3021,7 +3029,7 @@
     <string name="get_unlimited_access">Obtener acceso ilimitado</string>
     <string name="welcome_to_open_beta">Bienvenido a la beta abierta</string>
     <string name="contour_lines_hillshade_maps">Curvas de nivel y mapas de sombreado</string>
-    <string name="download_wikipedia_description">Descarga los artículos de Wikipedia por %1$s para leerlos sin conexión.</string>
+    <string name="download_wikipedia_description">Descarga los artículos de Wikipedia de %1$s para leerlos sin conexión.</string>
     <string name="download_wikipedia_label">Descargar datos de Wikipedia</string>
     <string name="open_in_browser_wiki">Abrir artículo en línea</string>
     <string name="open_in_browser_wiki_description">Ver el artículo en un navegador web.</string>
@@ -3035,20 +3043,25 @@
     <string name="purchase_cancelled_dialog_title">Ha cancelado la suscripción de OsmAnd Live</string>
     <string name="purchase_cancelled_dialog_descr">Renueve la suscripción para continuar usando todas las funciones:</string>
 
-    <string name="maps_you_need_descr">Basado en los artículos guardados, recomendamos que descargue los siguientes mapas:</string>
+    <string name="maps_you_need_descr">Basado en los artículos favoritos, se recomienda descargar los siguientes mapas:</string>
     <string name="maps_you_need">Mapas que necesita</string>
     <string name="open_wikipedia_link_online">Abrir enlace de Wikipedia en línea</string>
-    <string name="open_wikipedia_link_online_description">OsmAnd abrirá el navegador para ver el enlace en línea.</string>
+    <string name="open_wikipedia_link_online_description">El enlace se abrirá en un navegador web.</string>
     <string name="read_wikipedia_offline_description">Obtenga una suscripción de OsmAnd Live para leer artículos de Wikipedia y Wikiviajes, sin conexión.</string>
-    <string name="how_to_open_link">¿Cómo abrir un enlace?</string>
+    <string name="how_to_open_link">¿Cómo abrir el enlace?</string>
     <string name="read_wikipedia_offline">Leer la Wikipedia sin conexión</string>
     <string name="download_all">Descargar todo</string>
     <string name="hide_full_description">Ocultar descripción completa</string>
     <string name="show_full_description">Mostrar descripción completa</string>
-    <string name="nautical_render_descr">Estilo para navegación marítima y fluvial. Características principales: boyas, faros, líneas y balizas de navegación fluvial, puertos, servicios marítimos, contornos de profundidad.</string>
-    <string name="ski_map_render_descr">Estilo para esquiar. Características principales: pistas de esquí, vías aéreas y otras características de esquí en una manera adecuada. Menos objetos cartográficos secundarios que distraen la atención.</string>
-    <string name="light_rs_render_descr">Estilo simple y con contraste para la navegación con coche. Cuidadoso con los ojos en el modo nocturno. Características principales: curvas de nivel, carreteras con contraste estilo naranja, menos objetos cartográficos secundarios que distraen.</string>
-    <string name="topo_render_descr">Estilo de contraste diseñado principalmente para senderismo, trekking y ciclismo en la naturaleza. Buena legibilidad con iluminación exterior compleja. Características principales: contraste en carreteras y objetos naturales, diferentes tipos de rutas, curvas de nivel con ajustes avanzados, más detalles en los niveles de zoom correspondientes que en el estilo predeterminado. La opción de integridad de la superficie le permite distinguir entre carreteras con diferente calidad de superficie. No hay modo nocturno.</string>
-    <string name="mapnik_render_descr">Estilo de renderizado predeterminado con el viejo estilo mapnik. Características clave: los colores son similares al estilo Mapnik.</string>
-    <string name="default_render_descr">Estilo de uso general. Renderizado simplificado para tener mapas más limpios en las ciudades pobladas. Características principales: curvas de nivel, rutas, calidad de la superficie, restricciones de acceso, emblemas de carreteras, representación de caminos según escala SAC, características de deportes de aguas bravas.</string>
+    <string name="nautical_render_descr">Estilo de navegación náutica. Características principales: Boyas, faros, vías fluviales, carriles y balizas marítimas, puertos, servicios marítimos, curvas de profundidad.</string>
+    <string name="ski_map_render_descr">Estilo de esquí. Características principales: Visualización de pistas de esquí, remontes y otras características de esquí de una manera conveniente. Menos objetos cartográficos secundarios que distraen la atención.</string>
+    <string name="light_rs_render_descr">Estilo simple y contrastante para la navegación en automóvil. Suave para los ojos en el modo nocturno. Características principales: curvas de nivel, estilo vial contrastante en naranja, menos objetos cartográficos secundarios que molestos.</string>
+    <string name="topo_render_descr">Estilo de contraste diseñado principalmente para caminatas, senderismo y ciclismo en la naturaleza. Buena legibilidad con iluminación exterior compleja. Características principales: Contraste de caminos y objetos naturales, diferentes tipos de rutas, curvas de nivel con ajustes avanzados, mayor detalle en los niveles de zoom correspondientes que en el estilo predefinido. La opción de integridad de la superficie permite distinguir la calidad de la superficie del camino. Sin modo nocturno.</string>
+    <string name="mapnik_render_descr">Antiguo estilo predefinido de Mapnik. Características principales: los colores son similares al estilo Mapnik.</string>
+    <string name="default_render_descr">Estilo de uso general. Visualización limpia y simplificada para ciudades densamente pobladas. Características principales: Curvas de nivel, recorridos, calidad de la superficie, restricciones de acceso, escudos, visualización de caminos según escala SAC, características de deportes acuáticos.</string>
+    <string name="shared_string_bookmark">Favorito</string>
+    <string name="off_road_render_descr">Adecuado para usarlo durante la conducción todoterreno. Adecuado para usarlo como un mapa subyacente con imágenes satelitales verdes . Características principales: Reducción del grosor en carreteras principales, aumento del grosor de las vías, senderos, bicicletas y otras rutas. Basado en el estilo «Topo».</string>
+    <string name="touring_view_render_descr">Estilo de alto detalle para turismo. Incluye todas las opciones de configuración del estilo predefinido, además: Muestra tanto detalle como sea posible, en particular todos los caminos, senderos y otras formas de viaje. Una clara distinción visual entre todos los tipos de carreteras, que recuerda a muchos atlas de rutas turísticas. Esquema de color de alto contraste para uso en exteriores, modo diurno y nocturno.</string>
+    <string name="access_intermediate_arrival_time">Hora de llegada intermedia</string>
+    <string name="map_widget_intermediate_time">Tiempo intermedio</string>
     </resources>
