@@ -116,19 +116,16 @@ public class AndroidUtils {
 			Matcher matcher = Pattern.compile(entry).matcher(spannable);
 			while (matcher.find()) {
 				boolean set = true;
-				for (ImageSpan span : spannable.getSpans(matcher.start(),
-						matcher.end(), ImageSpan.class))
+				for (ImageSpan span : spannable.getSpans(matcher.start(), matcher.end(), ImageSpan.class))
 					if (spannable.getSpanStart(span) >= matcher.start()
-							&& spannable.getSpanEnd(span) <= matcher.end())
+							&& spannable.getSpanEnd(span) <= matcher.end()) {
 						spannable.removeSpan(span);
-					else {
+					} else {
 						set = false;
 						break;
 					}
 				if (set) {
-					spannable.setSpan(new ImageSpan(arrow),
-							matcher.start(), matcher.end(),
-							Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+					spannable.setSpan(new ImageSpan(arrow), matcher.start(), matcher.end(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 				}
 			}
 		}
