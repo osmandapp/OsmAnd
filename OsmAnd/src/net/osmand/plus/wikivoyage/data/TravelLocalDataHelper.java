@@ -286,6 +286,7 @@ public class TravelLocalDataHelper {
 							res.put(item.cityId, item);
 						} while (cursor.moveToNext());
 					}
+					cursor.close();
 				} finally {
 					conn.close();
 				}
