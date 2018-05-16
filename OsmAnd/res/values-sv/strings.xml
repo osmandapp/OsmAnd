@@ -3075,7 +3075,7 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="empty_state_favourites">Lägg Till Favoriter</string>
     <string name="empty_state_favourites_desc">Importera eller markera favoriter på kartan.</string>
     <string name="import_track">Importera spår</string>
-    <string name="import_track_desc">Filen %1$ s innehåller inte vägpunkter, importera det som ett spår?</string>
+    <string name="import_track_desc">Filen %1$s innehåller inte vägpunkter, importera det som ett spår?</string>
     <string name="move_point">Flytta punkt</string>
     <string name="add_segment_to_the_track">Lägg till i ett GPX-spår</string>
     <string name="osm_recipients_label">OSM-mottagare</string>
