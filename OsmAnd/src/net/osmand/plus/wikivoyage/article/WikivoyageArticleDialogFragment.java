@@ -352,6 +352,14 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 
 	public static boolean showInstance(@NonNull OsmandApplication app,
 									   @NonNull FragmentManager fm,
+									   @NonNull String title,
+									   @NonNull String lang) {
+		long cityId = app.getTravelDbHelper().getArticleId(title, lang);
+		return showInstance(app, fm, cityId, lang);
+	}
+
+	public static boolean showInstance(@NonNull OsmandApplication app,
+									   @NonNull FragmentManager fm,
 									   long cityId,
 									   @Nullable String selectedLang) {
 		ArrayList<String> langs = app.getTravelDbHelper().getArticleLangs(cityId);
