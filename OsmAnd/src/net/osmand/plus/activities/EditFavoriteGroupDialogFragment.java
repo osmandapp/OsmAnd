@@ -1,5 +1,6 @@
 package net.osmand.plus.activities;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -13,10 +14,13 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
@@ -66,26 +70,35 @@ public class EditFavoriteGroupDialogFragment extends MenuBottomSheetDialogFragme
 				.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						AlertDialog.Builder b = new AlertDialog.Builder(getContext());
-						b.setTitle(R.string.favorite_group_name);
-						final EditText nameEditText = new EditText(getContext());
-						nameEditText.setText(group.name);
-						b.setView(nameEditText);
-						b.setNegativeButton(R.string.shared_string_cancel, null);
-						b.setPositiveButton(R.string.shared_string_save, new DialogInterface.OnClickListener() {
-							@Override
-							public void onClick(DialogInterface dialog, int which) {
-								String name = nameEditText.getText().toString();
-								boolean nameChanged = !Algorithms.objectEquals(group.name, name);
-								if (nameChanged) {
-									app.getFavorites()
-											.editFavouriteGroup(group, name, group.color, group.visible);
-									updateParentFragment();
+						Activity activity = getActivity();
+						if (activity != null) {
+							AlertDialog.Builder b = new AlertDialog.Builder(activity);
+							b.setTitle(R.string.favorite_group_name);
+							final EditText nameEditText = new EditText(activity);
+							nameEditText.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
+							nameEditText.setText(group.name);
+							LinearLayout container = new LinearLayout(activity);
+							int sidePadding = AndroidUtils.dpToPx(activity, 24f);
+							int topPadding = AndroidUtils.dpToPx(activity, 4f);
+							container.setPadding(sidePadding, topPadding, sidePadding, topPadding);
+							container.addView(nameEditText);
+							b.setView(container);
+							b.setNegativeButton(R.string.shared_string_cancel, null);
+							b.setPositiveButton(R.string.shared_string_save, new DialogInterface.OnClickListener() {
+								@Override
+								public void onClick(DialogInterface dialog, int which) {
+									String name = nameEditText.getText().toString();
+									boolean nameChanged = !Algorithms.objectEquals(group.name, name);
+									if (nameChanged) {
+										app.getFavorites()
+												.editFavouriteGroup(group, name, group.color, group.visible);
+										updateParentFragment();
+									}
+									dismiss();
 								}
-								dismiss();
-							}
-						});
-						b.show();
+							});
+							b.show();
+						}
 					}
 				})
 				.create();
@@ -102,35 +115,38 @@ public class EditFavoriteGroupDialogFragment extends MenuBottomSheetDialogFragme
 				.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						final ListPopupWindow popup = new ListPopupWindow(getActivity());
-						popup.setAnchorView(changeColorView);
-						popup.setContentWidth(AndroidUtils.dpToPx(app, 200f));
-						popup.setModal(true);
-						popup.setDropDownGravity(Gravity.END | Gravity.TOP);
-						if (AndroidUiHelper.isOrientationPortrait(getActivity())) {
-							popup.setVerticalOffset(AndroidUtils.dpToPx(app, 48f));
-						} else {
-							popup.setVerticalOffset(AndroidUtils.dpToPx(app, -48f));
-						}
-						popup.setHorizontalOffset(AndroidUtils.dpToPx(app, -6f));
-						final FavoriteColorAdapter colorAdapter = new FavoriteColorAdapter(getActivity());
-						popup.setAdapter(colorAdapter);
-						popup.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-							@Override
-							public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-								Integer color = colorAdapter.getItem(position);
-								if (color != null) {
-									if (color != group.color) {
-										app.getFavorites()
-												.editFavouriteGroup(group, group.name, color, group.visible);
-										updateParentFragment();
-									}
-								}
-								popup.dismiss();
-								dismiss();
+						Activity activity = getActivity();
+						if (activity != null) {
+							final ListPopupWindow popup = new ListPopupWindow(activity);
+							popup.setAnchorView(v);
+							popup.setContentWidth(AndroidUtils.dpToPx(app, 200f));
+							popup.setModal(true);
+							popup.setDropDownGravity(Gravity.END | Gravity.TOP);
+							if (AndroidUiHelper.isOrientationPortrait(activity)) {
+								popup.setVerticalOffset(AndroidUtils.dpToPx(app, 48f));
+							} else {
+								popup.setVerticalOffset(AndroidUtils.dpToPx(app, -48f));
 							}
-						});
-						popup.show();
+							popup.setHorizontalOffset(AndroidUtils.dpToPx(app, -6f));
+							final FavoriteColorAdapter colorAdapter = new FavoriteColorAdapter(activity);
+							popup.setAdapter(colorAdapter);
+							popup.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+								@Override
+								public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+									Integer color = colorAdapter.getItem(position);
+									if (color != null) {
+										if (color != group.color) {
+											app.getFavorites()
+													.editFavouriteGroup(group, group.name, color, group.visible);
+											updateParentFragment();
+										}
+									}
+									popup.dismiss();
+									dismiss();
+								}
+							});
+							popup.show();
+						}
 					}
 				})
 				.create();
@@ -244,7 +260,7 @@ public class EditFavoriteGroupDialogFragment extends MenuBottomSheetDialogFragme
 
 		private final OsmandApplication app;
 
-		FavoriteColorAdapter(Context context) {
+		public FavoriteColorAdapter(Context context) {
 			super(context, R.layout.rendering_prop_menu_item);
 			this.app = (OsmandApplication) getContext().getApplicationContext();
 			init();

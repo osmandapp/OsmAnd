@@ -11,6 +11,7 @@ import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AlertDialog;
@@ -38,6 +39,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
+import net.osmand.Collator;
+import net.osmand.OsmAndCollator;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -68,7 +71,6 @@ import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.lang.ref.WeakReference;
-import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -681,8 +683,7 @@ public class TrackPointFragment extends OsmandExpandableListFragment implements 
 		Comparator<String> comparator;
 
 		PointGPXAdapter() {
-			final Collator collator = Collator.getInstance();
-			collator.setStrength(Collator.SECONDARY);
+			final Collator collator = OsmAndCollator.primaryCollator();
 			comparator = new Comparator<String>() {
 				@Override
 				public int compare(String s1, String s2) {
@@ -773,6 +774,9 @@ public class TrackPointFragment extends OsmandExpandableListFragment implements 
 									break;
 								}
 							}
+							List<GpxDisplayItem> headerGroupItems = headerGroup.getModifiableList();
+							headerGroupItems.clear();
+							headerGroupItems.addAll(values);
 							itemGroups.put(headerGroup, values);
 							groups.add(headerGroup);
 						} else {
@@ -925,9 +929,9 @@ public class TrackPointFragment extends OsmandExpandableListFragment implements 
 				options.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						Activity activity = getActivity();
+						FragmentActivity activity = getActivity();
 						if (activity != null) {
-							// todo
+							EditTrackGroupDialogFragment.showInstance(activity.getSupportFragmentManager(), group);
 						}
 					}
 				});
@@ -1011,7 +1015,7 @@ public class TrackPointFragment extends OsmandExpandableListFragment implements 
 				options.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_overflow_menu_white));
 			}
 			if (childPosition == 0) {
-				row.findViewById(R.id.divider).setVisibility(View.VISIBLE);
+				row.findViewById(R.id.divider).setVisibility(View.GONE);
 				row.findViewById(R.id.list_divider).setVisibility(View.GONE);
 			} else {
 				row.findViewById(R.id.divider).setVisibility(View.GONE);
@@ -1146,7 +1150,8 @@ public class TrackPointFragment extends OsmandExpandableListFragment implements 
 						for (GpxDisplayItem i : g.getModifiableList()) {
 							if (i.name.toLowerCase().contains(cs)) {
 								filter.add(i);
-							} else if (i.locationStart != null && cs.equals(i.locationStart.category)) {
+							} else if (i.locationStart != null && !TextUtils.isEmpty(i.locationStart.category)
+									&& i.locationStart.category.toLowerCase().contains(cs)) {
 								filter.add(i.locationStart.category);
 							}
 						}
