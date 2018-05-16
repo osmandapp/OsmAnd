@@ -443,11 +443,11 @@ public class TravelLocalDataHelper {
 		private WikivoyageSearchHistoryItem readHistoryItem(SQLiteCursor cursor) {
 			WikivoyageSearchHistoryItem res = new WikivoyageSearchHistoryItem();
 
-			res.cityId = cursor.getLong(0);
-			res.articleTitle = cursor.getString(1);
-			res.lang = cursor.getString(2);
-			res.isPartOf = cursor.getString(3);
-			res.lastAccessed = cursor.getLong(4);
+			res.cityId = cursor.getLong(cursor.getColumnIndex(HISTORY_COL_CITY_ID));
+			res.articleTitle = cursor.getString(cursor.getColumnIndex(HISTORY_COL_ARTICLE_TITLE));
+			res.lang = cursor.getString(cursor.getColumnIndex(HISTORY_COL_LANG));
+			res.isPartOf = cursor.getString(cursor.getColumnIndex(HISTORY_COL_IS_PART_OF));
+			res.lastAccessed = cursor.getLong(cursor.getColumnIndex(HISTORY_COL_LAST_ACCESSED));
 
 			return res;
 		}
@@ -455,14 +455,14 @@ public class TravelLocalDataHelper {
 		private TravelArticle readSavedArticle(SQLiteCursor cursor) {
 			TravelArticle res = new TravelArticle();
 
-			res.tripId = cursor.getLong(0);
-			res.title = cursor.getString(1);
-			res.lang = cursor.getString(2);
-			res.aggregatedPartOf = cursor.getString(3);
-			res.imageTitle = cursor.getString(4);
-			res.content = cursor.getString(5);
-			res.lat = cursor.getDouble(6);
-			res.lon = cursor.getDouble(7);
+			res.tripId = cursor.getLong(cursor.getColumnIndex(BOOKMARKS_COL_CITY_ID));
+			res.title = cursor.getString(cursor.getColumnIndex(BOOKMARKS_COL_ARTICLE_TITLE));
+			res.lang = cursor.getString(cursor.getColumnIndex(BOOKMARKS_COL_LANG));
+			res.aggregatedPartOf = cursor.getString(cursor.getColumnIndex(BOOKMARKS_COL_IS_PART_OF));
+			res.imageTitle = cursor.getString(cursor.getColumnIndex(BOOKMARKS_COL_IMAGE_TITLE));
+			res.content = cursor.getString(cursor.getColumnIndex(BOOKMARKS_COL_PARTIAL_CONTENT));
+			res.lat = cursor.getDouble(cursor.getColumnIndex(BOOKMARKS_COL_LAT));
+			res.lon = cursor.getDouble(cursor.getColumnIndex(BOOKMARKS_COL_LON));
 
 			return res;
 		}
