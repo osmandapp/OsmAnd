@@ -2866,8 +2866,13 @@
     <string name="by_date">По дате</string>
     <string name="by_type">По типу</string>
     <string name="modify_the_search_query">Изменить поисковый запрос.</string>
-    <string name="release_3_0">• 
-\n</string>
+    <string name="release_3_0">
+    \n • Новое меню «Путешествия»: просмотр статей WikiVoyage без использования Интернета
+    \n • Википедия: обновленный внешний вид, активные ссылки, изображения
+    \n • Открытый GPX: отображение групп путевых точек
+    \n • Маркеры: возможность выбрать группы путевых точек GPX для импорта
+    \n • Подписка OsmAnd Live теперь включает в себя все возможности OsmAnd
+    </string>
     <string name="osm_recipient_stat">Правок %1$s, сумма %2$s mBTC</string>
     <string name="osm_recipients_label">OSM получатели</string>
     <string name="total_donations">Всего пожертвований</string>
