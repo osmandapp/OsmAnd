@@ -2844,14 +2844,14 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="order_by">Porządkowanie według:</string>
     <string name="show_guide_line">Pokaż linie przewodnie</string>
     <string name="show_arrows_on_the_map">Strzałki na mapie</string>
-    <string name="show_passed">Wyświetl datę</string>
-    <string name="hide_passed">Ukryj datę</string>
+    <string name="show_passed">Wyświetl ominięte</string>
+    <string name="hide_passed">Ukryj ominięte</string>
     <string name="coordinate_input">Wprowadź współrzędne</string>
     <string name="shared_string_markers">Znaczniki</string>
     <string name="coordinates_format">Format współrzędnych</string>
     <string name="fast_coordinates_input_descr">Proszę wybrać format współrzędnych. Zawsze można go zmienić za naciskając \"Opcje\".</string>
     <string name="routing_attr_avoid_ice_roads_fords_name">Omijanie lodowych dróg i brodów</string>
-    <string name="routing_attr_avoid_ice_roads_fords_description">Omija lodowe drogi i brody.</string>
+    <string name="routing_attr_avoid_ice_roads_fords_description">Omijaj drogi lodowe i brody.</string>
     <string name="use_location">Użyj położenia</string>
     <string name="my_location">Aktualne położenie</string>
     <string name="shared_string_finish">Koniec trasy</string>
@@ -3142,4 +3142,9 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="maps_you_need">Potrzebne mapy</string>
     <string name="osmand_team">Zespół OsmAnd</string>
     <string name="download_all">Pobierz wszystkie</string>
+    <string name="shared_string_bookmark">Zakładka</string>
+    <string name="hide_full_description">Ukryj pełny opis</string>
+    <string name="show_full_description">Wyświetl pełny opis</string>
+    <string name="open_wikipedia_link_online_description">Odnośnik zostanie otwarty w przeglądarce internetowej.</string>
+    <string name="how_to_open_link">Jak otwierać odnośniki?</string>
     </resources>
