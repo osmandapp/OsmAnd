@@ -829,20 +829,21 @@ public class MenuBuilder {
 		titleView.setTextSize(16);
 		titleView.setTextColor(app.getResources().getColor(light ? R.color.ctx_menu_bottom_view_text_color_light : R.color.ctx_menu_bottom_view_text_color_dark));
 		String desc = route.getDescription(getMapActivity().getMyApplication(), true);
-
+		SpannableString stringWithImage = new SpannableString(desc);
 		if (desc.contains("=>") || desc.contains(" - ")) {
 			Drawable arrow = app.getIconsCache().getIcon(R.drawable.ic_arrow_right_16, light ? R.color.ctx_menu_route_icon_color_light : R.color.ctx_menu_route_icon_color_dark);
 			Float ascent = titleView.getPaint().getFontMetrics().ascent;
 			int h = (int) -ascent;
-			arrow.setBounds(0, 0, h, h);
-			SpannableString stringWithImage = new SpannableString(desc);
-			int i = desc.indexOf("=>");
-			int d = desc.indexOf(" - ");
-			stringWithImage.setSpan(new ImageSpan(arrow, DynamicDrawableSpan.ALIGN_BASELINE), i == -1 ? d : i, i == -1 ? d + 3 : i + 2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-			titleView.setText(stringWithImage);
-		} else {
-			titleView.setText(desc);
+			arrow.setBounds(0, 0, arrow.getIntrinsicWidth(), h);
+			int replaceIndex = desc.indexOf("=>");
+			if (replaceIndex != -1) {
+				stringWithImage.setSpan(new ImageSpan(arrow, DynamicDrawableSpan.ALIGN_BASELINE), replaceIndex, replaceIndex + 2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+			} else {
+				replaceIndex = desc.indexOf(" - ") + 1;
+				stringWithImage.setSpan(new ImageSpan(arrow, DynamicDrawableSpan.ALIGN_BASELINE), replaceIndex, replaceIndex + 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+			}
 		}
+		titleView.setText(stringWithImage);
 		infoView.addView(titleView);
 
 		LinearLayout typeView = new LinearLayout(view.getContext());
