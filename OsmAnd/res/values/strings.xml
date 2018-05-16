@@ -153,11 +153,11 @@
     <string name="av_locations_selected_desc">GPX file with coordinates and data of the selected notes.</string>
     <string name="av_locations_all_desc">GPX file with coordinates and data of all notes.</string>
     <string name="release_3_0">
-	\u2022 New Travel menu: view WikiVoyage articles without using the internet\n\n
-    \u2022 Wikipedia: new look, active links, images\n\n
-    \u2022 Open Track UI: display waypoint groups\n\n
-    \u2022 Map markers: import of selected groups from GPX files, coordinate input new look\n\n
-    \u2022 OsmAnd Live subscription now includes all OsmAnd features\n\n
+	\u2022 New travel guide functionality: Global offline WikiVoyage articles\n\n
+	\u2022 Wikipedia: New look, active links, images\n\n
+	\u2022 Open Track UI: Support for waypoint groups\n\n
+	\u2022 Map markers: Import of selected groups from GPX files, coordinate input, new look\n\n
+	\u2022 OsmAnd Live data (subscription) now supports all OsmAnd features\n\n
 	</string>
     <string name="modify_the_search_query">Modify the search query.</string>
     <string name="shared_string_actions">Actions</string>
