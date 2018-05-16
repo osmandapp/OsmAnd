@@ -447,9 +447,10 @@ public class TravelDbHelper {
 					+ "FROM travel_articles a WHERE is_part_of = ? and lang = ? ");
 			params.add(title);
 			params.add(lang);
-			headers.add(title);
+			
 			if (parts != null && parts.length > 0) {
 				headers.addAll(Arrays.asList(parts));
+				headers.add(title);
 				query.append("UNION SELECT a.trip_id, a.title, a.lang, a.is_part_of "
 						+ "FROM travel_articles a WHERE title = ? and lang = ? ");
 				params.add(parts[0]);
