@@ -2442,7 +2442,7 @@ Długość %2$s</string>
 \n 
 \n i więcej…</string>
     <string name="trip_rec_notification_settings">Aktywuj szybkie rejestrowanie</string>
-    <string name="trip_rec_notification_settings_desc">Wyświetl powiadomienie systemowe z opcją rozpoczęcia rejestrowania śladu.</string>
+    <string name="trip_rec_notification_settings_desc">Wyświetl powiadomienie systemowe z opcję rozpoczęcia rejestrowania śladu.</string>
     <string name="shared_string_notifications">Powiadomienia</string>
     
     
@@ -2720,7 +2720,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="mapillary_widget_descr">Pozwala na szybkie udostępnianie do Mapillary.</string>
     <string name="mapillary_descr">Udostępnia zdjęcia w widoku ulicznym. Pozwala na odkrywanie miejsc, współpracę nad uchwyceniem świata.</string>
     <string name="online_photos">Zdjęcia w sieci</string>
-    <string name="no_photos_descr">Nie ma zdjęć tego położenia.</string>
+    <string name="no_photos_descr">Nie ma zdjęć dla tego położenia.</string>
     <string name="plugin_mapillary_descr">Udostępnia zdjęcia w widoku ulicznym. Pozwala na odkrywanie miejsc, współpracę nad uchwyceniem świata.</string>
     <string name="shared_string_install">Zainstaluj</string>
     <string name="improve_coverage_mapillary">Zwiększ pokrycie zdjęć Mapillary</string>
@@ -2742,7 +2742,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="mapillary_menu_descr_dates">Wyświetl tylko dodane obrazy</string>
     <string name="mapillary_menu_edit_text_hint">Proszę wprowadzić nazwę użytkownika</string>
     <string name="mapillary_menu_filter_description">Można filtrować obrazy według nazwy użytkownika lub daty. Filtry mają zastosowanie dla większych przybliżeń.</string>
-    <string name="mapillary_menu_descr_username">"Wyświetla obrazy dodane przez "</string>
+    <string name="mapillary_menu_descr_username">Wyświetl obrazy dodane tylko przez</string>
     <string name="store_tracks_in_monthly_directories">Ślady w miesięcznych katalogach</string>
     <string name="store_tracks_in_monthly_directories_descrp">Przechowuje zarejestrowane ślady w podkatalogach odpowiadającym miesiącom (np. 2018-01).</string>
     <string name="shared_string_reset">Wyczyść</string>
@@ -2829,7 +2829,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="marker_moved_to_active">Znacznik mapy przeniesiono do aktywnych</string>
     <string name="shared_string_list">Lista</string>
     <string name="shared_string_groups">Grupy</string>
-    <string name="passed">Ostatnio użyty: %1$s</string>
+    <string name="passed">Ostatnio użyte: %1$s</string>
     <string name="make_active">Uaktywnij</string>
     <string name="today">Dzisiaj</string>
     <string name="yesterday">Wczoraj</string>
