@@ -1839,7 +1839,7 @@
     <string name="empty_state_av_notes">Κρατήστε σημειώσεις!</string>
     <string name="empty_state_av_notes_desc">Προσθήκη ήχου, βίντεο ή σημείωση φωτογραφίας για κάθε σημείο στο χάρτη, χρησιμοποιώντας το widget ή το συναφές μενού.</string>
     <string name="notes_by_date">Σημειώσεις κατά ημερομηνία</string>
-    <string name="download_maps_travel">Ταξιδιωτικοί χάρτες</string>
+    <string name="download_maps_travel">Ταξιδιωτικοί οδηγοί</string>
     <string name="article_removed">Το άρθρο αφαιρέθηκε</string>
     <string name="wikivoyage_search_hint">Αναζήτηση: Χώρα, πόλη, επαρχία</string>
     <string name="shared_string_read">Ανάγνωση</string>
@@ -2129,7 +2129,7 @@
     <string name="points_delete_multiple_succesful">Διαγράφηκαν σημεία.</string>
     <string name="points_delete_multiple">Πρόκειται να διαγράψετε %1$d σημεία. Είσαστε σίγουρος;</string>
     <string name="route_points_category_name">Στροφές για προσπέραση σε αυτό το δρομολόγιο</string>
-    <string name="track_points_category_name">Σημαντικά σημεία σε αυτό το δρομολόγιο</string>
+    <string name="track_points_category_name">Σημεία διαδρομής, σημεία ενδιαφέροντος, επώνυμα χαρακτηριστικά</string>
     <string name="gpx_track">Ίχνος</string>
     <string name="max_speed">Μέγιστη ταχύτητα</string>
     <string name="average_speed">Μέση ταχύτητα</string>
@@ -3152,4 +3152,6 @@
     <string name="shared_string_bookmark">Σελιδοδείκτης</string>
     <string name="off_road_render_descr">Κατάλληλο για χρήση κατά την οδήγηση εκτός δρόμου. Κατάλληλο για χρήση με πράσινες εικόνες δορυφόρου ως χάρτης υποστρώματος. Βασικά σημεία: μειωμένο πάχος κύριου δρόμου, αυξημένο πάχος ιχνών, διαδρομών, ποδηλάτων και άλλων διαδρομών. Βασισμένο σε μορφή \'τοπογραφική\'.</string>
     <string name="touring_view_render_descr">Μορφή υψηλών λεπτομερειών για τουριστικούς σκοπούς. Περιλαμβάνει όλες τις επιλογές διαμόρφωσης της προεπιλεγμένης μορφής και επιπλέον: Εμφανίζει τη μεγαλύτερη δυνατή λεπτομέρεια, ιδιαίτερα σε δρόμους, διαδρομές και άλλους τρόπους ταξιδιού. Καθαρή οπτική διάκριση μεταξύ όλων των διαφορετικών τύπων δρόμου, που θυμίζει πολλούς τουριστικούς άτλαντες. Χρωματικός συνδυασμός υψηλής αντίθεσης για εξωτερική χρήση, κατάσταση μέρας και νύχτας.</string>
+    <string name="access_intermediate_arrival_time">Ενδιάμεσος χρόνος άφιξης</string>
+    <string name="map_widget_intermediate_time">Ενδιάμεσος χρόνος</string>
     </resources>

@@ -784,7 +784,7 @@ Pôr do Sol: %2$s</string>
     <string name="layer_recordings">Camada de gravação</string>
     <string name="recording_can_not_be_played">Gravação não pode ser reproduzida</string>
     <string name="recording_context_menu_delete">Apagar gravação</string>
-    <string name="recording_context_menu_play">Ouvir</string>
+    <string name="recording_context_menu_play">Tocar</string>
     <string name="recording_description">Gravando %1$s %3$s %2$s</string>
     <string name="recording_default_name">Gravando</string>
     <string name="map_widget_av_notes">Notas de áudio/vídeo</string>

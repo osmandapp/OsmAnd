@@ -2909,7 +2909,7 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="rendering_attr_whiteWaterSports_name">Forsränning</string>
     <string name="osmand_extended_description_part8">OsmAnd är open-source och är utvecklas aktivt. Alla kan bidra till programmet genom att rapportera buggar, förbättra översättningar eller programmera nya funktioner. Projektet är i ett dynamiskt tillstånd av kontinuerlig förbättring av alla dessa former genom utvecklare och interaktion med användare. Projektet är också beroende av ekonomiska bidrag för att finansiera kodning och testning av nya funktioner. Ungefärlig karttäckning och kvalitet: • Västeuropa: **** • Östeuropa: *** • Ryssland: *** • Nordamerika: *** • Sydamerika: ** • Asien: ** • Japan &amp; Korea: *** • Mellanöstern: ** • Afrika: ** • Antarktis: * De flesta länder runt om i världen finns tillgängliga för nedladdning! Få en tillförlitlig navigator i ditt land - det kan vara Tyskland, Frankrike, Mexiko, Storbritannien, Spanien, Nederländerna, USA, Ryssland, Brasilien eller något annat.</string>
     <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OSM Automated Navigation Directions) OsmAnd+ är ett open source-navigationsprogram med tillgång till ett brett utbud av global OpenStreetMap(OSM)-data. Alla kartdata (vektor- eller rasterkartor) kan sparas på telefonens minneskort för användning offline. OsmAnd erbjuder även offline och online-ruttunktioner, inklusive turn-by-turn röstguidning. OsmAnd+ är den betalda appversionen, genom att köpa det stödjer du projektet, finansierar utveckling av nya funktioner, och får de senaste uppdateringarna. Några av de centrala funktionerna: - Komplett offline-funktionalitet (spara vektor- eller rasterkartor i enhetens lagring) - Kompakta offline vektorkartor för hela världen finns tillgängliga - Obegränsad nedladdning av land- eller regionkartor direkt från appen - Offline Wikipedia-artiklar (ladda ner Wikipedia POI), utmärkt för sightseeing - Överlagring av flera kartskikt är möjligt, som GPX eller navigeringsspår, Punkter av Intresse, favoriter, höjdkurvor, hållplatser för kollektivtrafiken, fler kartor med anpassningsbar genomskinlighet- Offlinesökning efter adresser och intressepunkter (POI) - Offline routing för mediumdistansavstånd - Bil-, cykel- och fotgängarelägen med: - tillval automatiskt byte av dag/nattläge - valfri hastighetsbunden kartzoom - valfri kartjustering enligt kompass eller riktning - som tillval körfältsguide, hastighetsgräns visas, inspelade- och TTS-röster</string>
-    <string name="nothing_found_in_radius">Vi kunde inte hitta något i radien:</string>
+    <string name="nothing_found_in_radius">Kunde inte hitta något inom:</string>
     <string name="select_waypoints_category_description">Du kan lägga till alla spårens vägpunkter, eller välj separata kategorier.</string>
     <string name="shared_string_total">Totalt</string>
     <string name="osmand_plus_extended_description_part1">OsmAnd+ (OSM Automated Navigation Directions) är en kartnavigationsapp med tillgång till gratis världsomfattande och högkvalitativa OpenStreetMap(OSM)-data. Njut av röst- och visuell navigation, visning av POI(points of interest - intressepunkter), att skapa och hantera GPX-spår, se höjdkurvor och höjdinfo, välja mellan bil-cykel- och fotgängarlägen, OSM-redigering och mycket mer. OsmAnd+ är en betald version av appen. Genom att köpa den, stödjer du projektet, finansierar utveckling av nya funktioner, och får de senaste uppdateringarna. Några av de viktigaste funktionerna:</string>
@@ -2935,13 +2935,163 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="quick_action_showhide_poi_descr">Knackning på åtgärdsknappen visar eller döljer Intressepunkter på kartan.</string>
     <string name="quick_action_fav_name_descr">Lämna tomt för att automatiskt använda adressen eller platsens namn.</string>
     <string name="show_tunnels">Tunnlar</string>
-<string name="wikivoyage_search_hint">Sök: Land, Stad, Region</string>
+<string name="wikivoyage_search_hint">Sök: Land, stad, region</string>
     <string name="shared_string_read">Läs</string>
-    <string name="saved_articles">Sparade artiklar</string>
+    <string name="saved_articles">Bokmärkta artiklar</string>
     <string name="shared_string_explore">Utforska</string>
     <string name="shared_string_result">Resultat</string>
-    <string name="use_two_digits_longitude">Använd två siffror longitud</string>
+    <string name="use_two_digits_longitude">Använd tvåsiffrig longitud</string>
     <string name="shared_string_travel">Resor</string>
     <string name="waypoints_removed_from_map_markers">Waypoints tas bort från kartmarkörer</string>
     <string name="total_donations">Donationer totalt</string>
-    </resources>
+    <string name="shared_string_bookmark">Bokmärke</string>
+    <string name="hide_full_description">Dölj fullständig beskrivning</string>
+    <string name="show_full_description">Visa fullständig beskrivning</string>
+    <string name="off_road_render_descr">Lämplig för användning vid off-road körning. Lämplig för användning med gröna satellitbilder som ett underlagskarta. Viktiga egenskaper: minskad tjocklek på stora vägar, ökad tjocklek av spår, stigar, cykelvägar och andra stigar. Baserat på \'Topo\' stil.</string>
+    <string name="nautical_render_descr">Nautisk navigeringsstil. Viktiga funktioner: bojar, fyrar, vattendrag, farleder och märken, hamnar, sjömärken, djupkonturer.</string>
+    <string name="ski_map_render_descr">Skidåkningsstil. Viktiga funktioner: Renderar pister, skidliftar och andra skidanläggningar på ett bekvämt sätt. Mindre distraherande sekundära kartobjekt.</string>
+    <string name="light_rs_render_descr">Enkel och kontrastrik stil för navigering med bil. Skonsam mot ögonen under natten. Viktiga funktioner: höjdkurvor, kontrastrik orange stil på vägar, mindre störande sekundära kartobjekt.</string>
+    <string name="topo_render_descr">Kontraststil utformad främst för vandring, trekking och cykling i naturen. Bra läsbarhet vid komplex extern belysning. Viktiga funktioner: kontrastrika vägar och naturliga objekt, olika typer av rutter, höjdkurvor med avancerade inställningar för mer detaljer på motsvarande zoomnivåer än standard. Ytläge-alternativet kan skilja vägens ytkvalitet. Inget nattläge.</string>
+    <string name="mapnik_render_descr">Gamla \"Mapnik\'-stil standardrendering. Viktiga funktioner: Färger som liknar \"Mapnik\" stil.</string>
+    <string name="touring_view_render_descr">Högsdetaljsstil för touringändamål. Innehåller alla inställningar av standardstilen, men även: Visar så mycket information som möjligt, i synnerhet alla vägar, stigar och andra sätt att resa. Tydliga visuella skillnader mellan olika vägtyper, påminnande av många atlaser. Högkontrastfärger för användning utomhus, dag- och nattläge.</string>
+    <string name="default_render_descr">Stil för allmänna ändamål. Förenklad återgivning i tätbefolkade städer. Viktiga funktioner: höjdkurvor, rutter, ytkvalitet, tillträdeskontroll, farthinder, stigrendering enligt SAC-skala, vattensporter.</string>
+    <string name="open_wikipedia_link_online">Öppna Wikipedia-länk på nätet</string>
+    <string name="open_wikipedia_link_online_description">Länken kommer att öppnas i en webbläsare.</string>
+    <string name="read_wikipedia_offline_description">Skaffa OsmAnd Live-prenumeration för att läsa Wikipedia och Wikipedia-artiklar offline.</string>
+    <string name="how_to_open_link">Hur man öppnar länken?</string>
+    <string name="read_wikipedia_offline">Läs Wikipedia offline</string>
+    <string name="download_all">Ladda ner alla</string>
+    <string name="shared_string_restart">Starta om</string>
+    <string name="show_images">Visa bilder</string>
+    <string name="purchase_cancelled_dialog_title">Du har annullerat ditt OsmAnd Live-abonnemang</string>
+    <string name="purchase_cancelled_dialog_descr">Förnya abonnemanget för att fortsätta använda alla funktioner:</string>
+
+    <string name="maps_you_need_descr">Baserat på de artiklar som du bokmärkt, följande kartor rekommenderas för dig att ladda ner:</string>
+    <string name="maps_you_need">Kartor du behöver</string>
+    <string name="osmand_team">OsmAnd team</string>
+    <string name="popular_destinations">Populära destinationer</string>
+    <string name="paid_app">Betald app</string>
+    <string name="paid_plugin">Betald plugin</string>
+    <string name="travel_card_update_descr">Nya Wikivoyage-data tillgängliga, uppdatera för att njuta.</string>
+	<string name="travel_card_download_descr">Ladda ner dessa Wikivoyage-reseguider för att visa artiklar om platser runt om i världen utan en internetanslutning.</string>
+	<string name="update_is_available">Uppdatering tillgänglig</string>
+	<string name="download_file">Ladda ned fil</string>
+    <string name="start_editing_card_image_text">Den fria, världsomspännande reseguiden som alla kan redigera.</string>
+    <string name="welcome_to_open_beta_description">Resor är baserade på Wikivoyage. Testa alla funktioner under öppnen beta-testning gratis. Efteråt kommer resor att vara tillgängliga för prenumeranter av OsmAnd Obegränsad och ägare av OsmAnd+</string>
+    <string name="start_editing_card_description">Du kan och borde redigera en artikel på Wikivoyage. Dela med sig av kunskap, erfarenhet, talang och din kännedom</string>
+    <string name="start_editing">Börja redigera</string>
+    <string name="get_unlimited_access">Få obegränsad tillgång</string>
+    <string name="welcome_to_open_beta">Välkommen till öppen beta</string>
+    <string name="travel_guide">Reseguiden Wikivoyage</string>
+    <string name="travel_guide_description">Guider till de mest intressanta platserna i världen, inuti OsmAnd, utan en internetanslutning.</string>
+    <string name="monthly_map_updates">Kartuppdateringar: <b>Varje månad</b></string>
+    <string name="daily_map_updates">Kartuppdateringar: <b>Varje timme</b></string>
+    <string name="in_app_purchase">Köp i app</string>
+    <string name="in_app_purchase_desc">Engångsbetalning</string>
+    <string name="in_app_purchase_desc_ex">När det väl är köpt, blir det permanent tillgängligt för dig.</string>
+    <string name="purchase_unlim_title">Köp - %1$s</string>
+    <string name="purchase_subscription_title">Prenumerera - %1$s</string>
+
+    <string name="wikivoyage_offline">Wikivoyage offline</string>
+
+    <string name="unlimited_downloads">Obegränsat antal nedladdningar</string>
+    <string name="wikipedia_offline">Wikipedia offline</string>
+    <string name="contour_lines_hillshade_maps">Höjdkurvor &amp; höjdreliefer</string>
+    <string name="unlock_all_features">Låsa upp alla OsmAnd-funktioner</string>
+
+    <string name="purchase_dialog_title">Välj abonnemang</string>
+    <string name="purchase_dialog_travel_description">Köp något av följande för att läsa researtiklar offline:</string>
+    <string name="purchase_dialog_subtitle">Välj lämpligt val:</string>
+    <string name="shared_string_dont">Gör inte</string>
+    <string name="shared_string_do">Gör</string>
+    <string name="shared_string_only_with_wifi">Endast på Wi-Fi</string>
+    <string name="wikivoyage_download_pics">Hämta bilder</string>
+    <string name="wikivoyage_download_pics_descr">Bilder från artiklar kan laddas ner för användning offline.
+\nDu kan alltid ändra inställningen i \"Utforska\" → \"Alternativ\".</string>
+    <string name="shared_string_wifi_only">Endast på Wi-Fi</string>
+    <string name="select_travel_book">Välj resebok</string>
+    <string name="shared_string_travel_book">Resebok</string>
+    <string name="online_webpage_warning">Sidan endast tillgänglig online. Öppna i webbläsare?</string>
+    <string name="images_cache">Bildcache</string>
+    <string name="delete_search_history">Ta bort sökhistorik</string>
+    <string name="download_images">Visa bilder</string>
+    <string name="download_maps_travel">Reseguider</string>
+    <string name="shared_string_wikivoyage">Wikivoyage</string>
+    <string name="article_removed">Artikeln borttagen</string>
+    <string name="shared_string_contents">Innehåll</string>
+    <string name="index_item_world_wikivoyage">Världsomspännande Wikivoyage-artiklar</string>
+    <string name="access_intermediate_arrival_time">Mellanliggande ankomsttid</string>
+    <string name="map_widget_intermediate_time">Mellanliggande tid</string>
+    <string name="osmand_plus_extended_description_part4">Använda OSM-Data och Wikipedia
+\n• Högkvalitetsinformation från de bästa samarbetsprojekten i världen
+\n• OSM-data som är tillgängliga per land eller region
+\n• Wikipedia Intressepunkter, perfekt för sightseeing
+\n• Obegränsat antal gratis nedladdningar, direkt från appen
+\n• Kompakt offline vektorkartor uppdateras minst en gång i månaden
+\n
+\n• Val mellan hela regionen data och bara vägnätet (Exempel: Hela Japan är 700 MB eller endast vägnätet för 200 MB)</string>
+    <string name="osmand_plus_extended_description_part5">Säkerhetsfunktioner • Valfri växling mellan dag-/nattläge • Valfri visning av hastighet, med en påminnelse om du överskrider den • Valfri hastighetsbaserad zoomning • Dela din position så att dina vänner kan hitta dig</string>
+    <string name="osmand_plus_extended_description_part6">Funktioner för cykel och gående • Se vägar för gående och cyklande samt vandringsstigar, utmärkta för utomhusaktiviteter • Speciella ruttval och visningsläge för cykel och gående • Valfria kollektivtrafiksplatser (buss, spårvagn, tåg) inklusive linjenamn • Valfri reseinspelning till lokal GPX-fil eller onlinetjänst • Valfri visning av hastighet och höjd • Visa konturlinjer och höjdreliefer (via separat plugin)</string>
+    <string name="osmand_plus_extended_description_part7">Bidra direkt till OSM
+\n• Rapportera databuggar
+\n• Ladda upp GPX-spår till OSM direkt från appen
+\n• Lägg till Intressepunkter och ladda upp dem direkt till OSM (eller senare om offline)
+\n• Valfri reseinspelning i bakgrundsläge (när enheten är i strömsparläge)
+\nOsmAnd utvecklas aktivt med öppen källkod. Alla kan bidra till appen genom att rapportera buggar, förbättra översättningar eller koda nya funktioner. Dock är projektet beroende av ekonomiska bidrag för att finansiera kodning och testning av nya funktioner.
+\n</string>
+    <string name="osmand_plus_extended_description_part8">Ungefärlig karttäckning och kvalitet:
+\n• Västeuropa: ****
+\n• Östreuropa: ***
+\n• Ryssland: ***
+\n• Nordamerika: ***
+\n• Sydamerika: **
+\n• Asien: **
+\n• Japan &amp; Korea: ***
+\n• Mellanöstern: **
+\n• Afrika: **
+\n• Antarktis: *
+\nDe flesta länder runt om i världen finns som nedladdningar
+\nFrån Afghanistan till Zimbabwe, från Australien till USA. Argentina, Brasilien, Kanada, Frankrike, Tyskland, Mexiko, Storbritannien, Spanien, ...
+\n</string>
+    <string name="quick_action_bug_descr">Detta meddelande ingår i kommentarsfältet.</string>
+    <string name="quick_action_category_descr">Välj kategorin du vill spara favoriten i.</string>
+    <string name="quick_action_gpx_category_descr">Välj en valfri kategori.</string>
+    <string name="quick_action_poi_list">POI-lista</string>
+    <string name="quick_action_sh_poi_descr">Lägga till en eller flera POI-kategorier som ska visas på kartan.</string>
+    <string name="quick_action_map_style_action">Lägg till en kartstil</string>
+    <string name="quick_action_empty_param_error">Fyll i alla parametrar</string>
+    <string name="quick_action_map_styles">Kartstilar</string>
+    <string name="quick_action_map_overlay">Ändra kartöversikt</string>
+    <string name="mappilary_no_internet_desc">Du måste vara ansluten till Internet för att visa foton från Mapillary.</string>
+    <string name="add_route_points">Lägg till ruttpunkter</string>
+    <string name="add_waypoint">Lägg till vägpunkt</string>
+    <string name="add_line">Lägg till rad</string>
+    <string name="save_gpx_waypoint">Spara GPX-Waypoint</string>
+    <string name="save_route_point">Spara ruttpunkt</string>
+    <string name="waypoint_one">Vägpunkt 1</string>
+    <string name="route_point_one">Ruttpunkt 1</string>
+    <string name="empty_state_my_tracks">Lägg till och spela in spår</string>
+    <string name="empty_state_my_tracks_desc">Spela in eller importera spår för att visa.</string>
+    <string name="empty_state_favourites">Lägg Till Favoriter</string>
+    <string name="empty_state_favourites_desc">Importera eller markera favoriter på kartan.</string>
+    <string name="import_track">Importera spår</string>
+    <string name="import_track_desc">Filen %1$ s innehåller inte vägpunkter, importera det som ett spår?</string>
+    <string name="move_point">Flytta punkt</string>
+    <string name="add_segment_to_the_track">Lägg till i ett GPX-spår</string>
+    <string name="osm_recipients_label">OSM-mottagare</string>
+    <string name="day_off_label">av</string>
+    <string name="winter_and_ski_renderer">Vinter och skidor</string>
+    <string name="touring_view_renderer">Touringvy</string>
+    <string name="nautical_renderer">Nautisk</string>
+    <string name="copy_location_name">Kopia punkt/POI namn</string>
+    <string name="toast_empty_name_error">Ej namngiven plats</string>
+    <string name="tunnel_warning">Tunnel framför</string>
+    <string name="download_wikipedia_description">Hämta Wikipedia-artiklar om %1$s för att läsa dem offline.</string>
+    <string name="download_wikipedia_label">Hämta Wikipedia-data</string>
+    <string name="open_in_browser_wiki">Öppna artikeln online</string>
+    <string name="open_in_browser_wiki_description">Visa artikeln i en webbläsare.</string>
+    <string name="download_wiki_region_placeholder">denna region</string>
+    <string name="wiki_article_search_text">Söka efter motsvarande wiki-artikel</string>
+    <string name="wiki_article_not_found">Artikeln hittades inte</string>
+    <string name="how_to_open_wiki_title">Hur man öppnar Wikipedia-artiklar?</string>
+</resources>
