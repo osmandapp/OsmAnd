@@ -258,7 +258,8 @@ public class TrackActivity extends TabActivity {
 		viewPager = (LockableViewPager) findViewById(R.id.pager);
 		viewPager.setSwipeLocked(true);
 		setViewPagerAdapter(viewPager, new ArrayList<TabActivity.TabItem>());
-		new GPXFileLoaderTask(this).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
+
+		loadGpx();
 	}
 
 	@Override
@@ -269,6 +270,10 @@ public class TrackActivity extends TabActivity {
 		}
 	}
 
+	public void loadGpx() {
+		new GPXFileLoaderTask(this).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
+	}
+
 	public OsmandApplication getMyApplication() {
 		return (OsmandApplication) getApplication();
 	}
@@ -276,6 +281,9 @@ public class TrackActivity extends TabActivity {
 	@Override
 	protected void onPause() {
 		super.onPause();
+		if (viewPager.getCurrentItem() == 1) {
+			openPointsTab = true;
+		}
 	}
 
 	@Override
@@ -387,7 +395,7 @@ public class TrackActivity extends TabActivity {
 			}
 		}
 		OsmandFragmentPagerAdapter pagerAdapter = (OsmandFragmentPagerAdapter) viewPager.getAdapter();
-		if (pagerAdapter != null) {
+		if (pagerAdapter != null && pagerAdapter.getCount() == 0) {
 			pagerAdapter.addTab(getTabIndicator(R.string.gpx_track, TrackSegmentFragment.class));
 			if (hasWayPoints() || hasRoutePoints()) {
 				pagerAdapter.addTab(getTabIndicator(R.string.points, TrackPointFragment.class));

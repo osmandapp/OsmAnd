@@ -4,6 +4,7 @@ import net.osmand.PlatformUtil;
 import android.app.Activity;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
+import android.support.annotation.NonNull;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Surface;
@@ -14,7 +15,7 @@ import android.view.View;
  */
 public class AndroidUiHelper {
 
-    public static int getScreenOrientation(Activity activity) {
+    public static int getScreenOrientation(@NonNull Activity activity) {
         int rotation = activity.getWindowManager().getDefaultDisplay().getRotation();
         DisplayMetrics dm = new DisplayMetrics();
         activity.getWindowManager().getDefaultDisplay().getMetrics(dm);
@@ -90,12 +91,12 @@ public class AndroidUiHelper {
 		return false;
 	}
     
-	public static boolean isXLargeDevice(Activity ctx) {
+	public static boolean isXLargeDevice(@NonNull Activity ctx) {
 		int lt = (ctx.getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK);
 		return lt == Configuration.SCREENLAYOUT_SIZE_XLARGE;
 	}
 
-	public static boolean isOrientationPortrait(Activity ctx) {
+	public static boolean isOrientationPortrait(@NonNull Activity ctx) {
 		int orientation = AndroidUiHelper.getScreenOrientation(ctx);
 		return orientation == ActivityInfo.SCREEN_ORIENTATION_PORTRAIT ||
 				orientation == ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT;
