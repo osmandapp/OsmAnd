@@ -179,12 +179,6 @@ public class MapPoiTypes {
 			if (skipNonEditable && pc.isNotEditableOsm()) {
 				continue;
 			}
-			for (PoiFilter pf : pc.getPoiFilters()) {
-				if (skipNonEditable && pf.isNotEditableOsm()) {
-					continue;
-				}	
-				addPoiTypesTranslation(skipNonEditable, translation, pf);
-			}
 			addPoiTypesTranslation(skipNonEditable, translation, pc);
 		}
 		return translation;
