@@ -19,7 +19,6 @@ public class TravelArticle {
 	private static final String THUMB_PREFIX = "320px-";
 	private static final String REGULAR_PREFIX = "1280px-";//1280, 1024, 800
 
-	String id;
 	String title;
 	String content;
 	String isPartOf;
@@ -33,9 +32,6 @@ public class TravelArticle {
 	String contentsJson;
 	String aggregatedPartOf;
 
-	public String getId() {
-		return id;
-	}
 
 	public String getTitle() {
 		return title;
