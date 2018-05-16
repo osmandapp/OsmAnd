@@ -10,11 +10,11 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.download.IndexItem;
 
+import java.lang.ref.WeakReference;
 import java.text.DateFormat;
 
 public class TravelDownloadUpdateCard extends BaseTravelCard {
@@ -23,6 +23,7 @@ public class TravelDownloadUpdateCard extends BaseTravelCard {
 
 	private boolean download;
 	private boolean showOtherMapsBtn;
+	private WeakReference<DownloadUpdateVH> ref;
 
 	private ClickListener listener;
 
@@ -62,6 +63,7 @@ public class TravelDownloadUpdateCard extends BaseTravelCard {
 		if (viewHolder instanceof DownloadUpdateVH) {
 			boolean loading = isLoading();
 			DownloadUpdateVH holder = (DownloadUpdateVH) viewHolder;
+			this.ref = new WeakReference<TravelDownloadUpdateCard.DownloadUpdateVH>(holder);
 			holder.title.setText(getTitle(loading));
 			holder.icon.setImageDrawable(getIcon());
 			holder.description.setText(getDescription());
@@ -73,16 +75,27 @@ public class TravelDownloadUpdateCard extends BaseTravelCard {
 				holder.fileTitle.setText(getFileTitle());
 				holder.fileDescription.setText(getFileDescription());
 				holder.progressBar.setVisibility(loading ? View.VISIBLE : View.GONE);
-				if (isLoadingInProgress()) {
-					int progress = app.getDownloadThread().getCurrentDownloadingItemProgress();
-					holder.progressBar.setProgress(progress < 0 ? 0 : progress);
-				} else {
-					holder.progressBar.setProgress(0);
-				}
+				updateProgressBar(holder);
 			}
 			boolean primaryBtnVisible = updatePrimaryButton(holder, loading);
 			boolean secondaryBtnVisible = updateSecondaryButton(holder, loading);
 			holder.buttonsDivider.setVisibility(primaryBtnVisible && secondaryBtnVisible ? View.VISIBLE : View.GONE);
+		}
+	}
+	
+	public void updateProgresBar() {
+		DownloadUpdateVH holder = ref.get();
+		if (holder != null && holder.itemView.isShown()) {
+			updateProgressBar(holder);
+		}
+	}
+
+	private void updateProgressBar(DownloadUpdateVH holder) {
+		if (isLoadingInProgress()) {
+			int progress = app.getDownloadThread().getCurrentDownloadingItemProgress();
+			holder.progressBar.setProgress(progress < 0 ? 0 : progress);
+		} else {
+			holder.progressBar.setProgress(0);
 		}
 	}
 

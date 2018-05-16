@@ -90,8 +90,8 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIn
 			currentDownloadingIndexItem = current;
 			removeRedundantCards();
 		}
-		adapter.updateDownloadUpdateCard();
-		adapter.updateNeededMapsCard();
+		adapter.updateDownloadUpdateCard(true);
+		adapter.updateNeededMapsCard(true);
 	}
 
 	@Override
@@ -194,7 +194,7 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIn
 				public void onPrimaryButtonClick() {
 					if (mainIndexItem != null) {
 						downloadManager.startDownload(getMyActivity(), mainIndexItem);
-						adapter.updateDownloadUpdateCard();
+						adapter.updateDownloadUpdateCard(false);
 					}
 				}
 
@@ -202,7 +202,7 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIn
 				public void onSecondaryButtonClick() {
 					if (downloadUpdateCard.isLoading()) {
 						downloadThread.cancelDownload(mainIndexItem);
-						adapter.updateDownloadUpdateCard();
+						adapter.updateDownloadUpdateCard(false);
 					} else if (!downloadUpdateCard.isDownload()) {
 						removeDownloadUpdateCard();
 					} else if (downloadUpdateCard.isShowOtherMapsBtn()) {
@@ -217,7 +217,7 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIn
 				}
 			});
 			downloadUpdateCard.setIndexItem(mainIndexItem);
-			adapter.setDownloadUpdateCard(downloadUpdateCard);
+			adapter.addDownloadUpdateCard(downloadUpdateCard);
 		}
 	}
 
@@ -230,14 +230,14 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIn
 				@Override
 				public void onPrimaryButtonClick() {
 					downloadManager.startDownload(getMyActivity(), getAllItemsForDownload());
-					adapter.updateNeededMapsCard();
+					adapter.updateNeededMapsCard(false);
 				}
 
 				@Override
 				public void onSecondaryButtonClick() {
 					if (neededMapsCard.isDownloading()) {
 						app.getDownloadThread().cancelDownload(neededIndexItems);
-						adapter.updateNeededMapsCard();
+						adapter.updateNeededMapsCard(false);
 					} else {
 						removeNeededMapsCard();
 					}
@@ -257,11 +257,11 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIn
 						} else if (!item.isDownloaded()) {
 							downloadManager.startDownload(getMyActivity(), item);
 						}
-						adapter.updateNeededMapsCard();
+						adapter.updateNeededMapsCard(false);
 					}
 				}
 			});
-			adapter.setNeededMapsCard(neededMapsCard);
+			adapter.addNeededMapsCard(neededMapsCard);
 		}
 	}
 

@@ -137,13 +137,13 @@ public class ExploreRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 		return false;
 	}
 
-	public void setNeededMapsCard(TravelNeededMapsCard card) {
+	public void addNeededMapsCard(TravelNeededMapsCard card) {
 		if (addItem(getNeededMapsCardPosition(), card)) {
 			notifyDataSetChanged();
 		}
 	}
 
-	public void updateNeededMapsCard() {
+	public void updateNeededMapsCard(boolean onlyProgress) {
 		int pos = getNeededMapsCardPosition();
 		if (neededMapsCardExists(pos)) {
 			notifyItemChanged(pos);
@@ -169,13 +169,13 @@ public class ExploreRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 		return items.size() > position && items.get(position).getCardType() == TravelNeededMapsCard.TYPE;
 	}
 
-	public void setDownloadUpdateCard(TravelDownloadUpdateCard card) {
+	public void addDownloadUpdateCard(TravelDownloadUpdateCard card) {
 		if (addItem(getDownloadUpdateCardPosition(), card)) {
 			notifyDataSetChanged();
 		}
 	}
 
-	public void updateDownloadUpdateCard() {
+	public void updateDownloadUpdateCard(boolean onlyProgress) {
 		int pos = getDownloadUpdateCardPosition();
 		if (downloadUpdateCardExists(pos)) {
 			notifyItemChanged(pos);
