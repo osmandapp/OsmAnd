@@ -98,7 +98,6 @@ public class TravelLocalDataHelper {
 	public void addArticleToSaved(@NonNull TravelArticle article) {
 		if (!isArticleSaved(article)) {
 			TravelArticle saved = new TravelArticle();
-			saved.tripId = article.tripId;
 			saved.title = article.title;
 			saved.lang = article.lang;
 			saved.aggregatedPartOf = article.aggregatedPartOf;
@@ -121,7 +120,7 @@ public class TravelLocalDataHelper {
 	}
 
 	public void removeArticleFromSaved(@NonNull TravelArticle article) {
-		TravelArticle savedArticle = getArticle(article.tripId, article.lang);
+		TravelArticle savedArticle = getArticle(article.title, article.lang);
 		if (savedArticle != null) {
 			savedArticles.remove(savedArticle);
 			dbHelper.removeSavedArticle(savedArticle);
@@ -130,7 +129,7 @@ public class TravelLocalDataHelper {
 	}
 
 	public boolean isArticleSaved(@NonNull TravelArticle article) {
-		return getArticle(article.tripId, article.lang) != null;
+		return getArticle(article.title, article.lang) != null;
 	}
 
 	private void notifySavedUpdated() {
@@ -140,9 +139,9 @@ public class TravelLocalDataHelper {
 	}
 
 	@Nullable
-	private TravelArticle getArticle(long cityId, String lang) {
+	private TravelArticle getArticle(String title, String lang) {
 		for (TravelArticle article : savedArticles) {
-			if (article.tripId == cityId && article.lang != null && article.lang.equals(lang)) {
+			if (article.title != null && article.title.equals(title) && article.lang != null && article.lang.equals(lang)) {
 				return article;
 			}
 		}
@@ -185,7 +184,6 @@ public class TravelLocalDataHelper {
 				" FROM " + HISTORY_TABLE_NAME;
 
 		private static final String BOOKMARKS_TABLE_NAME = "wikivoyage_saved_articles";
-		private static final String BOOKMARKS_COL_CITY_ID = "city_id";
 		private static final String BOOKMARKS_COL_ARTICLE_TITLE = "article_title";
 		private static final String BOOKMARKS_COL_LANG = "lang";
 		private static final String BOOKMARKS_COL_IS_PART_OF = "is_part_of";
@@ -197,7 +195,6 @@ public class TravelLocalDataHelper {
 
 		private static final String BOOKMARKS_TABLE_CREATE = "CREATE TABLE IF NOT EXISTS " +
 				BOOKMARKS_TABLE_NAME + " (" +
-				BOOKMARKS_COL_CITY_ID + " long, " +
 				BOOKMARKS_COL_ARTICLE_TITLE + " TEXT, " +
 				BOOKMARKS_COL_LANG + " TEXT, " +
 				BOOKMARKS_COL_IS_PART_OF + " TEXT, " +
@@ -208,7 +205,6 @@ public class TravelLocalDataHelper {
 				BOOKMARKS_COL_LON + " double);";
 
 		private static final String BOOKMARKS_TABLE_SELECT = "SELECT " +
-				BOOKMARKS_COL_CITY_ID + ", " +
 				BOOKMARKS_COL_ARTICLE_TITLE + ", " +
 				BOOKMARKS_COL_LANG + ", " +
 				BOOKMARKS_COL_IS_PART_OF + ", " +
@@ -402,10 +398,19 @@ public class TravelLocalDataHelper {
 			SQLiteConnection conn = openConnection(false);
 			if (conn != null) {
 				try {
-					conn.execSQL("INSERT INTO " + BOOKMARKS_TABLE_NAME + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
-							new Object[]{article.tripId, article.title, article.lang,
-									article.aggregatedPartOf, article.imageTitle, article.content,
-									travelBook, article.lat, article.lon});
+					String query = "INSERT INTO " + BOOKMARKS_TABLE_NAME + " (" +
+							BOOKMARKS_COL_ARTICLE_TITLE + ", " +
+							BOOKMARKS_COL_LANG + ", " +
+							BOOKMARKS_COL_IS_PART_OF + ", " +
+							BOOKMARKS_COL_IMAGE_TITLE + ", " +
+							BOOKMARKS_COL_PARTIAL_CONTENT + ", " +
+							BOOKMARKS_COL_TRAVEL_BOOK + ", " +
+							BOOKMARKS_COL_LAT + ", " +
+							BOOKMARKS_COL_LON +
+							") VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+					conn.execSQL(query, new Object[]{article.title, article.lang,
+							article.aggregatedPartOf, article.imageTitle, article.content,
+							travelBook, article.lat, article.lon});
 				} finally {
 					conn.close();
 				}
@@ -421,10 +426,10 @@ public class TravelLocalDataHelper {
 			if (conn != null) {
 				try {
 					conn.execSQL("DELETE FROM " + BOOKMARKS_TABLE_NAME +
-									" WHERE " + BOOKMARKS_COL_CITY_ID + " = ?" +
+									" WHERE " + BOOKMARKS_COL_ARTICLE_TITLE + " = ?" +
 									" AND " + BOOKMARKS_COL_LANG + " = ?" +
 									" AND " + BOOKMARKS_COL_TRAVEL_BOOK + " = ?",
-							new Object[]{article.tripId, article.lang, travelBook});
+							new Object[]{article.title, article.lang, travelBook});
 				} finally {
 					conn.close();
 				}
@@ -443,11 +448,11 @@ public class TravelLocalDataHelper {
 		private WikivoyageSearchHistoryItem readHistoryItem(SQLiteCursor cursor) {
 			WikivoyageSearchHistoryItem res = new WikivoyageSearchHistoryItem();
 
-			res.cityId = cursor.getLong(0);
-			res.articleTitle = cursor.getString(1);
-			res.lang = cursor.getString(2);
-			res.isPartOf = cursor.getString(3);
-			res.lastAccessed = cursor.getLong(4);
+			res.cityId = cursor.getLong(cursor.getColumnIndex(HISTORY_COL_CITY_ID));
+			res.articleTitle = cursor.getString(cursor.getColumnIndex(HISTORY_COL_ARTICLE_TITLE));
+			res.lang = cursor.getString(cursor.getColumnIndex(HISTORY_COL_LANG));
+			res.isPartOf = cursor.getString(cursor.getColumnIndex(HISTORY_COL_IS_PART_OF));
+			res.lastAccessed = cursor.getLong(cursor.getColumnIndex(HISTORY_COL_LAST_ACCESSED));
 
 			return res;
 		}
@@ -455,14 +460,13 @@ public class TravelLocalDataHelper {
 		private TravelArticle readSavedArticle(SQLiteCursor cursor) {
 			TravelArticle res = new TravelArticle();
 
-			res.tripId = cursor.getLong(0);
-			res.title = cursor.getString(1);
-			res.lang = cursor.getString(2);
-			res.aggregatedPartOf = cursor.getString(3);
-			res.imageTitle = cursor.getString(4);
-			res.content = cursor.getString(5);
-			res.lat = cursor.getDouble(6);
-			res.lon = cursor.getDouble(7);
+			res.title = cursor.getString(cursor.getColumnIndex(BOOKMARKS_COL_ARTICLE_TITLE));
+			res.lang = cursor.getString(cursor.getColumnIndex(BOOKMARKS_COL_LANG));
+			res.aggregatedPartOf = cursor.getString(cursor.getColumnIndex(BOOKMARKS_COL_IS_PART_OF));
+			res.imageTitle = cursor.getString(cursor.getColumnIndex(BOOKMARKS_COL_IMAGE_TITLE));
+			res.content = cursor.getString(cursor.getColumnIndex(BOOKMARKS_COL_PARTIAL_CONTENT));
+			res.lat = cursor.getDouble(cursor.getColumnIndex(BOOKMARKS_COL_LAT));
+			res.lon = cursor.getDouble(cursor.getColumnIndex(BOOKMARKS_COL_LON));
 
 			return res;
 		}
