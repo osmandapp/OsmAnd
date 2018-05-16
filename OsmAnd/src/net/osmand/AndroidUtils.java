@@ -23,6 +23,7 @@ import android.text.SpannableString;
 import android.text.TextPaint;
 import android.text.TextUtils;
 import android.text.format.DateFormat;
+import android.text.style.ImageSpan;
 import android.text.style.URLSpan;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
@@ -45,6 +46,9 @@ import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static android.util.TypedValue.COMPLEX_UNIT_DIP;
 import static android.util.TypedValue.COMPLEX_UNIT_SP;
@@ -104,6 +108,31 @@ public class AndroidUtils {
 			}
 		}
 		return src;
+	}
+
+	public static Spannable replaceIconsInString(String text, Drawable arrow, Set<String> keys) {
+		Spannable spannable = new SpannableString(text);
+		for (String entry : keys) {
+			Matcher matcher = Pattern.compile(entry).matcher(spannable);
+			while (matcher.find()) {
+				boolean set = true;
+				for (ImageSpan span : spannable.getSpans(matcher.start(),
+						matcher.end(), ImageSpan.class))
+					if (spannable.getSpanStart(span) >= matcher.start()
+							&& spannable.getSpanEnd(span) <= matcher.end())
+						spannable.removeSpan(span);
+					else {
+						set = false;
+						break;
+					}
+				if (set) {
+					spannable.setSpan(new ImageSpan(arrow),
+							matcher.start(), matcher.end(),
+							Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+				}
+			}
+		}
+		return spannable;
 	}
 
 	public static void removeLinkUnderline(TextView textView) {
