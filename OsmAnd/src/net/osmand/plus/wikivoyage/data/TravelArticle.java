@@ -1,10 +1,12 @@
 package net.osmand.plus.wikivoyage.data;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.Size;
 import android.text.TextUtils;
-
 import net.osmand.plus.GPXUtilities.GPXFile;
 
 import org.apache.commons.codec.binary.Hex;
@@ -103,6 +105,11 @@ public class TravelArticle {
 
 	@NonNull
 	public static String getImageUrl(@NonNull String imageTitle, boolean thumbnail) {
+		try {
+			imageTitle = URLDecoder.decode(imageTitle, "UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			System.err.println(e.getMessage());
+		}
 		String[] hash = getHash(imageTitle);
 		String prefix = thumbnail ? THUMB_PREFIX : REGULAR_PREFIX;
 		return IMAGE_ROOT_URL + "thumb/" + hash[0] + "/" + hash[1] + "/" + imageTitle + "/" + prefix + imageTitle;

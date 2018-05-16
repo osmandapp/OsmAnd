@@ -34,6 +34,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -417,7 +418,8 @@ public class TravelDbHelper {
 	}
 
 	@NonNull
-	public LinkedHashMap<WikivoyageSearchResult, List<WikivoyageSearchResult>> getNavigationMap(final TravelArticle article) {
+	public LinkedHashMap<WikivoyageSearchResult, List<WikivoyageSearchResult>> getNavigationMap(
+			final TravelArticle article) {
 		String lang = article.getLang();
 		String title = article.getTitle();
 		if (TextUtils.isEmpty(lang) || TextUtils.isEmpty(title)) {
@@ -437,24 +439,24 @@ public class TravelDbHelper {
 		}
 		Map<String, List<WikivoyageSearchResult>> navMap = new HashMap<>();
 		SQLiteConnection conn = openConnection();
-		Set<String> headers = null;
+		Set<String> headers = new LinkedHashSet<String>();
 		Map<String, WikivoyageSearchResult> headerObjs = new HashMap<>();
 		if (conn != null) {
 			List<String> params = new ArrayList<>();
-			StringBuilder query = new StringBuilder("SELECT a.trip_id, a.title, a.lang, a.is_part_of " +
-					"FROM travel_articles a WHERE is_part_of = ? and lang = ? ");
+			StringBuilder query = new StringBuilder("SELECT a.trip_id, a.title, a.lang, a.is_part_of "
+					+ "FROM travel_articles a WHERE is_part_of = ? and lang = ? ");
 			params.add(title);
 			params.add(lang);
+			headers.add(title);
 			if (parts != null && parts.length > 0) {
-				headers = new HashSet<>(Arrays.asList(parts));
-				headers.add(title);
-				query.append("UNION SELECT a.trip_id, a.title, a.lang, a.is_part_of " +
-						"FROM travel_articles a WHERE title = ? and lang = ? ");
+				headers.addAll(Arrays.asList(parts));
+				query.append("UNION SELECT a.trip_id, a.title, a.lang, a.is_part_of "
+						+ "FROM travel_articles a WHERE title = ? and lang = ? ");
 				params.add(parts[0]);
 				params.add(lang);
 				for (String part : parts) {
-					query.append("UNION SELECT a.trip_id, a.title, a.lang, a.is_part_of " +
-							"FROM travel_articles a WHERE is_part_of = ? and lang = ? ");
+					query.append("UNION SELECT a.trip_id, a.title, a.lang, a.is_part_of "
+							+ "FROM travel_articles a WHERE is_part_of = ? and lang = ? ");
 					params.add(part);
 					params.add(lang);
 				}
@@ -482,23 +484,21 @@ public class TravelDbHelper {
 			cursor.close();
 		}
 		LinkedHashMap<WikivoyageSearchResult, List<WikivoyageSearchResult>> res = new LinkedHashMap<>();
-		if (parts != null) {
-			for (String header : parts) {
-				WikivoyageSearchResult searchResult = headerObjs.get(header);
-				List<WikivoyageSearchResult> results = navMap.get(header);
-				if (results != null) {
-					Collections.sort(results, new Comparator<WikivoyageSearchResult>() {
-						@Override
-						public int compare(WikivoyageSearchResult o1, WikivoyageSearchResult o2) {
-							return collator.compare(o1.articleTitles.get(0), o2.articleTitles.get(0));
-						}
-					});
-					WikivoyageSearchResult emptyResult = new WikivoyageSearchResult();
-					emptyResult.articleTitles.add(header);
-					emptyResult.tripId = -1;
-					searchResult = searchResult != null ? searchResult : emptyResult;
-					res.put(searchResult, results);
-				}
+		for (String header : headers) {
+			WikivoyageSearchResult searchResult = headerObjs.get(header);
+			List<WikivoyageSearchResult> results = navMap.get(header);
+			if (results != null) {
+				Collections.sort(results, new Comparator<WikivoyageSearchResult>() {
+					@Override
+					public int compare(WikivoyageSearchResult o1, WikivoyageSearchResult o2) {
+						return collator.compare(o1.articleTitles.get(0), o2.articleTitles.get(0));
+					}
+				});
+				WikivoyageSearchResult emptyResult = new WikivoyageSearchResult();
+				emptyResult.articleTitles.add(header);
+				emptyResult.tripId = -1;
+				searchResult = searchResult != null ? searchResult : emptyResult;
+				res.put(searchResult, results);
 			}
 		}
 		return res;
