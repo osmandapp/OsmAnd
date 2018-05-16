@@ -16,7 +16,7 @@ public class TravelArticle {
 
 	private static final String IMAGE_ROOT_URL = "https://upload.wikimedia.org/wikipedia/commons/";
 	private static final String THUMB_PREFIX = "320px-";
-	private static final String REGULAR_PREFIX = "800px-";
+	private static final String REGULAR_PREFIX = "1280px-";//1280, 1024, 800
 
 	String id;
 	String title;
