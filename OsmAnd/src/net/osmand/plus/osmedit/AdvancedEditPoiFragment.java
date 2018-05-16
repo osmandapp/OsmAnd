@@ -215,6 +215,8 @@ public class AdvancedEditPoiFragment extends BaseOsmAndFragment
 			 });
 
 			valueEditText.setText(vl);
+			valueEditText.setAdapter(valueAdapter);
+			valueEditText.setThreshold(3);
 			valueEditText.addTextChangedListener(new TextWatcher() {
 				@Override
 				public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -279,7 +281,8 @@ public class AdvancedEditPoiFragment extends BaseOsmAndFragment
 			}
 			if (poiType.getEditOsmTag() != null &&
 					!poiType.getEditOsmTag().equals(OSMSettings.OSMTagKey.NAME.getValue())) {
-				stringSet.add(poiType.getEditOsmTag());
+				String editOsmTag = poiType.getEditOsmTag();
+				stringSet.add(editOsmTag);
 				if (poiType.getOsmTag2() != null) {
 					stringSet.add(poiType.getOsmTag2());
 				}

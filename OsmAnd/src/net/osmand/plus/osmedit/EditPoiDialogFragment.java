@@ -580,11 +580,16 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 					if(!s.getKeyName().contains("osmand")) {
 						addMapEntryAdapter(subCategories, s.getKeyName().replace('_', ' '), s);
 					}
+					if(!Algorithms.isEmpty(s.getEditOsmValue())) {
+						addMapEntryAdapter(subCategories, s.getEditOsmValue().replace('_', ' '), s);
+					}
 				}
 			}
 		}
 		for (Map.Entry<String, PoiType> s : editPoiData.getAllTranslatedSubTypes().entrySet()) {
-			addMapEntryAdapter(subCategories, s.getKey(), s.getValue());
+			if(!s.getKey().contains("osmand")) {
+				addMapEntryAdapter(subCategories, s.getKey(), s.getValue());
+			}
 		}
 		final ArrayAdapter<Object> adapter;
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {

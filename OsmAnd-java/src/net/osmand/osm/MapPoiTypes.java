@@ -179,21 +179,32 @@ public class MapPoiTypes {
 			if (skipNonEditable && pc.isNotEditableOsm()) {
 				continue;
 			}
-			for (PoiType pt : pc.getPoiTypes()) {
-				if (pt.isReference()) {
+			for (PoiFilter pf : pc.getPoiFilters()) {
+				if (skipNonEditable && pf.isNotEditableOsm()) {
 					continue;
-				}
-				if (pt.getBaseLangType() != null) {
-					continue;
-				}
-				if (skipNonEditable && pt.isNotEditableOsm()) {
-					continue;
-				}
-				translation.put(pt.getKeyName().replace('_', ' ').toLowerCase(), pt);
-				translation.put(pt.getTranslation().toLowerCase(), pt);
+				}	
+				addPoiTypesTranslation(skipNonEditable, translation, pf);
 			}
+			addPoiTypesTranslation(skipNonEditable, translation, pc);
 		}
 		return translation;
+	}
+
+
+	private void addPoiTypesTranslation(boolean skipNonEditable, Map<String, PoiType> translation, PoiFilter pf) {
+		for (PoiType pt : pf.getPoiTypes()) {
+			if (pt.isReference()) {
+				continue;
+			}
+			if (pt.getBaseLangType() != null) {
+				continue;
+			}
+			if (skipNonEditable && pt.isNotEditableOsm()) {
+				continue;
+			}
+			translation.put(pt.getKeyName().replace('_', ' ').toLowerCase(), pt);
+			translation.put(pt.getTranslation().toLowerCase(), pt);
+		}
 	}
 
 	public List<AbstractPoiType> getAllTypesTranslatedNames(StringMatcher matcher) {
