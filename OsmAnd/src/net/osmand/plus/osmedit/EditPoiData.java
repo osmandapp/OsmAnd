@@ -204,11 +204,11 @@ public class EditPoiData {
 		retrieveType();
 		PoiType pt = getPoiTypeDefined();
 		if(pt != null) {
-			tagValues.put(REMOVE_TAG_PREFIX+pt.getOsmTag(), REMOVE_TAG_VALUE);
+			tagValues.put(REMOVE_TAG_PREFIX+pt.getEditOsmTag(), REMOVE_TAG_VALUE);
 			tagValues.put(REMOVE_TAG_PREFIX+pt.getOsmTag2(), REMOVE_TAG_VALUE);
-			tagValues.remove(pt.getOsmTag());
+			tagValues.remove(pt.getEditOsmTag());
 			tagValues.remove(pt.getOsmTag2());
-			changedTags.removeAll(Arrays.asList(pt.getOsmTag(), pt.getOsmTag2()));
+			changedTags.removeAll(Arrays.asList(pt.getEditOsmTag(), pt.getOsmTag2()));
 			category = pt.getCategory();
 		}
 		notifyDatasetChanged(POI_TYPE_TAG);

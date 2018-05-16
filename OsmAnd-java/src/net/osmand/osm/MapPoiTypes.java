@@ -584,6 +584,9 @@ public class MapPoiTypes {
 		tp.setLang(lang);
 		tp.setOsmTag(otag);
 		tp.setOsmValue(parser.getAttributeValue("", "value"));
+		tp.setOsmEditTagValue(parser.getAttributeValue("", "edit_tag"),
+				parser.getAttributeValue("", "edit_value"));
+		
 		tp.setOsmTag2(parser.getAttributeValue("", "tag2"));
 		tp.setOsmValue2(parser.getAttributeValue("", "value2"));
 		tp.setText("text".equals(parser.getAttributeValue("", "type")));

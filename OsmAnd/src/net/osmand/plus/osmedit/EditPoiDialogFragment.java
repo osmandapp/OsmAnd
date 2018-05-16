@@ -459,8 +459,8 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 		if (poiTypeTag != null) {
 			final PoiType poiType = editPoiData.getAllTranslatedSubTypes().get(poiTypeTag.trim().toLowerCase());
 			if (poiType != null) {
-				node.putTagNoLC(poiType.getOsmTag(), poiType.getOsmValue());
-				node.removeTag(EditPoiData.REMOVE_TAG_PREFIX + poiType.getOsmTag());
+				node.putTagNoLC(poiType.getEditOsmTag(), poiType.getEditOsmValue());
+				node.removeTag(EditPoiData.REMOVE_TAG_PREFIX + poiType.getEditOsmTag());
 				if (poiType.getOsmTag2() != null) {
 					node.putTagNoLC(poiType.getOsmTag2(), poiType.getOsmValue2());
 					node.removeTag(EditPoiData.REMOVE_TAG_PREFIX + poiType.getOsmTag2());
