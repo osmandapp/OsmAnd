@@ -251,7 +251,7 @@
     <string name="online_photos">Առցանց լուսանկարներ</string>
     <string name="shared_string_add_photos">Ավելացնել լուսանկարներ</string>
     <string name="no_photos_descr">Այս վայրի համար լուսանկարներ չունենք։</string>
-    <string name="mapillary_action_descr">Նպաստել այս դիրքի համար ձեր սեփական փողոցային դիտարկումներով Mapillary- ի միջոցով:</string>
+    <string name="mapillary_action_descr">Նպաստել այս դիրքի համար ձեր սեփական փողոցային դիտարկումներով Mapillary-ի միջոցով:</string>
     <string name="mapillary_widget">Mapillary վիջեթը</string>
     <string name="mapillary_widget_descr">Թույլ է տալիս արագորեն նպաստել Mapillary-ին։</string>
     <string name="mapillary_descr">Առցանց փողոցային նկարներ բոլորի համար: Բացահայտեք վայրերը, համագործակցեք, նկարեք աշխարհը:</string>
@@ -332,7 +332,7 @@
     <string name="add_new_folder">Ավելացնել նոր թղթապանակ</string>
     <string name="points_delete_multiple_succesful">Կետ(եր)ը ջնջված է:</string>
     <string name="points_delete_multiple">Դուք մտադիր եք ջնջել կետ(եր)ը: Համոզված եք?</string>
-    <string name="track_points_category_name">Հայտնի կետեր այս երթուղու վրա</string>
+    <string name="track_points_category_name">Ճանապարհային կետեր, POI, հատկանիշներ</string>
     <string name="gpx_track">Տրեկ</string>
     <string name="max_speed">Առավելագույն արագություն</string>
     <string name="average_speed">Միջին արագությունը</string>
@@ -427,7 +427,7 @@
     <string name="storage_free_space">Ազատ տեղ</string>
     <string name="storage_place_description">OsmAnd-ը կպահպանի տվյալները (քարտեզներ, երթուղիներ և այլն) %1$s։</string>
     <string name="give_permission">Տալ թույլտվություն</string>
-    <string name="animate_my_location_desc">"Միացնել  Իմ Դիրքի անիմացումը քարտեզի համայնապատկերում նավիգացիայի ժամանակ։"</string>
+    <string name="animate_my_location_desc">"Միացնել  \"Իմ Դիրքի\" անիմացումը քարտեզի համայնապատկերում նավիգացիայի ժամանակ։"</string>
     <string name="index_item_depth_points_southern_hemisphere">Ծովային խորության կետերը հարավային կիսագնդում</string>
     <string name="index_item_depth_points_northern_hemisphere">Ծովային խորության կետերը հյուսիսային կիսագնդում</string>
     <string name="do_not_send_anonymous_app_usage_desc">OsmAnd հավաքում է միայն այն տեղեկատվությունները, որոնք վերաբերվում են հավելվածին օգտագործման։ Ձեր գտնվելու վայրը երբեք չի ուղարկվի, ոչ էլ այն, ինչ դուք մուտք եք գործել հավեվածում կամ ձեր դիտած, որոնման և ներբեռնելու տարածքների մանրամասները:</string>
@@ -488,7 +488,7 @@
     <string name="access_no_destination">Նպատակակետը սահմանված չէ</string>
     <string name="map_widget_magnetic_bearing">Մագնիսական կրող</string>
     <string name="access_disable_offroute_recalc">Երթուղին դադարեցնելուց հետո երթուղու վերահաշվարկ չի կատարվում</string>
-    <string name="access_disable_offroute_recalc_descr">Կանխել երթուղու ավտոմատ վերահաշվարկը երթուղին դադարեցնելուց հետո։</string>
+    <string name="access_disable_offroute_recalc_descr">Կանխել երթուղու վերահաշվարկը երթուղուց շեղվելու դեպքում։</string>
     <string name="access_disable_wrong_direction_recalc">Չվերահաշվարկել երթուղին հակառակ ուղղության համար</string>
     <string name="access_disable_wrong_direction_recalc_descr">Կանխել երթուղու ավտոմատ վերահաշվարկը հակառակ ողղությամբ շարժվելու ժամանակ։</string>
     <string name="access_smart_autoannounce">Smart ավտո-հայտարարում</string>
@@ -504,7 +504,7 @@
     <string name="access_hint_enter_name">Մուտքագրեք անուն</string>
     <string name="access_hint_enter_category">Մուտքագրեք կատեգորիան</string>
     <string name="access_hint_enter_description">Մուտքագրեք նկարագրություն:</string>
-    <string name="access_map_linked_to_location">Քարտեզը կապված է գտնվելու վայրի հետ</string>
+    <string name="access_map_linked_to_location">"Քարտեզ կցված է  գտնվելու վայրին"</string>
     <string name="access_collapsed_list">Փակել ցանկը</string>
     <string name="access_expanded_list">Ընդլայնված ցուցակ</string>
     <string name="access_empty_list">Դատարկ ցուցակ</string>
@@ -522,10 +522,10 @@
     <string name="no_map_markers_found">Խնդրում ենք ավելացնել մարկերներ քարտեզի վրա</string>
     <string name="no_waypoints_found">Ոչ մի ճանապարհային նշան չի գտնվել</string>
     
-    <string name="anonymous_user_hint">Անանուն օգտվողը չի կարող՝
-\n-ստեղծել խմբեր;
-\n-խմբերի և սարքերի համաժամեցում սերվերի հետ;
-\n-կառավարել խմբերը և սարքերը անձնական էջում:</string>
+    <string name="anonymous_user_hint">Անանուն օգտվողը չի կարող՝ 
+\n-Ստեղծել խմբեր; 
+\n-Խմբերի և սարքերի համաժամեցում սերվերի հետ; 
+\n-Կառավարել խմբերը և սարքերը անձնական էջում:</string>
     <string name="report">Հաշվետվությունում</string>
     
     
@@ -538,9 +538,9 @@
     
     
     
-    <string name="storage_permission_restart_is_required">"Այժմ ծրագիրը իրավունք ունի մուտթագրել տվյալներ արտաքին պահեստավորման սարքի վրա։ Պահանջվում է  վերագործարկել ծրագիրը."</string>
-    <string name="shared_string_move_up">Տեղափոխել վերև</string>
-    <string name="shared_string_move_down">Տեղափոխել ներքև</string>
+    <string name="storage_permission_restart_is_required">"Այժմ ծրագիրը իրավունք ունի մուտթագրել տվյալներ արտաքին պահեստավորման սարքի վրա։ Պահանջվում է  վերագործարկել ծրագիրը։"</string>
+    <string name="shared_string_move_up">Տեղափոխել ↑</string>
+    <string name="shared_string_move_down">Տեղափոխել ↓</string>
     <string name="finish_navigation">"Ավարտել  նավարկությունը"</string>
     <string name="avoid_road">Խուսափել ճանապարհներից</string>
     <string name="storage_directory_readonly_desc">Տվյալների պահպանման համար ընտրված թղթապանակը միայն կարդալու է: Փոխարենը ժամանակավորապես կկիրառվի ներքին հիշողությունը: Խնդրում ենք ընտրել համապատասխան պահպանման վայր:</string>

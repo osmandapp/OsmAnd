@@ -3124,4 +3124,6 @@
     <string name="shared_string_bookmark">Bokmerk</string>
     <string name="off_road_render_descr">Nytt for bruk under villmarkskjøring. Nyttig for bruk med grønne satellittbilder som underlagskart. Nøkkelpunkter: Redusert tykkelse for hovedveier, økt tykkelse for småveier, stier, sykkel- og andre -ruter.
 \nBasert på Topo-stil.</string>
+    <string name="access_intermediate_arrival_time">Mellomliggende ankomsttid</string>
+    <string name="map_widget_intermediate_time">Mellomliggende tid</string>
     </resources>
