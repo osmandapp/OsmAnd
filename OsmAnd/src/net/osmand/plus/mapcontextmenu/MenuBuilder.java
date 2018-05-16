@@ -832,9 +832,7 @@ public class MenuBuilder {
 		SpannableString stringWithImage = new SpannableString(desc);
 		if (desc.contains("=>") || desc.contains(" - ")) {
 			Drawable arrow = app.getIconsCache().getIcon(R.drawable.ic_arrow_right_16, light ? R.color.ctx_menu_route_icon_color_light : R.color.ctx_menu_route_icon_color_dark);
-			Float ascent = titleView.getPaint().getFontMetrics().ascent;
-			int h = (int) -ascent;
-			arrow.setBounds(0, 0, arrow.getIntrinsicWidth(), h);
+			arrow.setBounds(0, 0, arrow.getIntrinsicWidth(), arrow.getIntrinsicHeight());
 			int replaceIndex = desc.indexOf("=>");
 			if (replaceIndex != -1) {
 				stringWithImage.setSpan(new ImageSpan(arrow, DynamicDrawableSpan.ALIGN_BASELINE), replaceIndex, replaceIndex + 2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
