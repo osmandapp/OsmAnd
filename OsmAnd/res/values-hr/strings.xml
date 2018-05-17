@@ -1401,7 +1401,7 @@
 	<string name="shared_string_address">Adresa</string>
 	<string name="shared_string_my_location">Moja lokacija</string>
 	<string name="shared_string_currently_recording_track">Snimanje trase</string>
-	<string name="shared_string_my_tracks">Moje trase</string>
+	<string name="shared_string_gpx_files">Moje trase</string>
 	<string name="shared_string_audio">Zvučni zapis</string>
 	<string name="shared_string_video">Video zapis</string>
 	<string name="shared_string_photo">Fotografija</string>

@@ -1285,7 +1285,7 @@ Proporcionální paměť %4$s MB (limit Androidu %5$s MB, Dalvik %6$s MB).</stri
     
     
     <string name="gpx_file_is_empty">Prázdná GPX trasa</string>
-    <string name="shared_string_my_tracks">Všechny trasy</string>
+    <string name="shared_string_gpx_files">Všechny trasy</string>
     <string name="shared_string_my_favorites">Moje oblíbené</string>
     <string name="shared_string_my_places">Moje místa</string>
     

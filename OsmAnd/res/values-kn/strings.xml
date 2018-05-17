@@ -100,7 +100,7 @@
 	<string name="shared_string_my_location">ನನ್ನ ಈಗಿನ ಸ್ಥಳ</string>
 	<string name="shared_string_my_places">ನನ್ನ ಸ್ಥಳಗಳು</string>
 	<string name="shared_string_my_favorites">ನನ್ನ ಇಷ್ಟವಾದವುಗಳು</string>
-	<string name="shared_string_my_tracks">ನನ್ನ ಟ್ರ್ಯಾಕ್ ಗಳು</string>
+	<string name="shared_string_gpx_files">ನನ್ನ ಟ್ರ್ಯಾಕ್ ಗಳು</string>
 	<string name="shared_string_currently_recording_track">ಈಗ ದಾಖಲಿಸಿಕೊಳ್ಳುತ್ತಿರುವ ಟ್ರ್ಯಾಕ್</string>
 	<string name="shared_string_audio">ಶ್ರಾವ್ಯ</string>
 	<string name="shared_string_video">ದೃಶ್ಯ</string>

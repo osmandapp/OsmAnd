@@ -1294,7 +1294,7 @@
     
     <string name="gpx_file_is_empty">Трек GPX порожній</string>
     
-    <string name="shared_string_my_tracks">Всі треки</string>
+    <string name="shared_string_gpx_files">Всі треки</string>
     <string name="shared_string_my_favorites">Мої закладки</string>
     <string name="shared_string_my_places">Мої місця</string>
     <string name="osmo_user_joined">Користувач %1$s приєднався до групи %2$s</string>

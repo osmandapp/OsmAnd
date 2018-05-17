@@ -120,7 +120,7 @@ Lon %2$s</string>
     <string name="shared_string_my_location">Mi ubicación</string>
     <string name="shared_string_my_places">Mis sitios</string>
     <string name="shared_string_my_favorites">Favoritos</string>
-    <string name="shared_string_my_tracks">Trazas</string>
+    <string name="shared_string_gpx_files">Trazas</string>
     <string name="shared_string_currently_recording_track">Grabando traza actual</string>
     <string name="shared_string_audio">Audio</string>
     <string name="shared_string_video">Video</string>

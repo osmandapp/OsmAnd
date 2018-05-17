@@ -1385,7 +1385,7 @@ Omogoča tudi dodajanje opomb v koledar za prikaz opomnikov ob daljših časih p
     <string name="gpx_selection_points">%1$s \nTočk</string>
     <string name="gpx_file_is_empty">Sled GPX je brez podatkov</string>
 
-    <string name="shared_string_my_tracks">Shranjene sledi</string>
+    <string name="shared_string_gpx_files">Shranjene sledi</string>
     <string name="shared_string_my_places">Shranjene točke</string>
 
     

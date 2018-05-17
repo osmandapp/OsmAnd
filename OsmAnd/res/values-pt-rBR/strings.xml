@@ -133,7 +133,7 @@
 	<string name="shared_string_add_to_favorites">Adicionar aos favoritos</string>
 	<string name="shared_string_my_location">Minha posição</string>
 	<string name="shared_string_my_favorites">Meus favoritos</string>
-	<string name="shared_string_my_tracks">Minhas trilhas</string>
+	<string name="shared_string_gpx_files">Minhas trilhas</string>
 	<string name="shared_string_currently_recording_track">Gravando trilha</string>
 	<string name="shared_string_audio">Áudio</string>
 	<string name="shared_string_video">Vídeo</string>

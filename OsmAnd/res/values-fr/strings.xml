@@ -1450,7 +1450,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     
     <string name="gpx_file_is_empty">Vider la trace GPX</string>
 
-    <string name="shared_string_my_tracks">Traces</string>
+    <string name="shared_string_gpx_files">Traces</string>
     <string name="shared_string_my_favorites">Favoris</string>
     <string name="shared_string_my_places">Favoris</string>
 

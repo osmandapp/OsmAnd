@@ -1821,7 +1821,7 @@ Lengtegraad:\t\t%2$s</string>
 	<string name="shared_string_collapse">Inklappen</string>
 	<string name="shared_string_my_location">Huidige Positie</string>
 	<string name="shared_string_my_favorites">Favorieten</string>
-	<string name="shared_string_my_tracks">GPX-tracks</string>
+	<string name="shared_string_gpx_files">GPX-tracks</string>
 	<string name="shared_string_currently_recording_track">Huidige GPX-track</string>
 	<string name="local_osm_changes_upload_all_confirm">Je gaat %1$d wijziging(en) naar OSM sturen. Weet je dat zeker?</string>
     <string name="confirmation_to_clear_history">Wil je de geschiedenis verwijderen?</string>

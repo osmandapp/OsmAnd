@@ -1098,6 +1098,7 @@
     <string name="shared_string_my_location">My Position</string>
     <string name="shared_string_my_places">My Places</string>
     <string name="shared_string_my_favorites">Favorites</string>
+    <string name="shared_string_gpx_files">GPX files</string>
     <string name="shared_string_currently_recording_track">Currently recording track</string>
     <string name="shared_string_audio">Audio</string>
     <string name="shared_string_video">Video</string>

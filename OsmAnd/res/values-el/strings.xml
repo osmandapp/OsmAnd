@@ -1602,7 +1602,7 @@
 	<string name="shared_string_my_location">Η Τοποθεσία μου</string>
 	<string name="shared_string_my_places">Τα μέρη μου</string>
 	<string name="shared_string_my_favorites">Τα Αγαπημένα</string>
-	<string name="shared_string_my_tracks">Ίχνη</string>
+	<string name="shared_string_gpx_files">Ίχνη</string>
 	<string name="shared_string_audio">Ήχος</string>
 	<string name="shared_string_video">Εικόνα</string>
 	<string name="shared_string_photo">Φωτογραφία</string>

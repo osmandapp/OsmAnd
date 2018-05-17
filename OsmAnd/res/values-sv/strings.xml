@@ -1709,7 +1709,7 @@ Nyttjat utrymme är {1} MB.
     <string name="shared_string_my_location">Min position</string>
     <string name="shared_string_my_places">Mina platser</string>
     <string name="shared_string_my_favorites">Mina favoriter</string>
-    <string name="shared_string_my_tracks">Mina spår</string>
+    <string name="shared_string_gpx_files">Mina spår</string>
     <string name="shared_string_currently_recording_track">Spelar för tillfället in spår</string>
     <string name="shared_string_audio">Ljud</string>
     <string name="shared_string_video">Video</string>

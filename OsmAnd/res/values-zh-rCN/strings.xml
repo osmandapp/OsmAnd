@@ -1828,7 +1828,7 @@
     <string name="shared_string_favorite">我的收藏</string>
     <string name="shared_string_address">地址</string>
     <string name="shared_string_my_favorites">我的收藏</string>
-    <string name="shared_string_my_tracks">我的足迹</string>
+    <string name="shared_string_gpx_files">我的足迹</string>
     <string name="shared_string_currently_recording_track">当前正在录制轨迹</string>
     <string name="shared_string_audio">音频</string>
     <string name="shared_string_video">视频</string>

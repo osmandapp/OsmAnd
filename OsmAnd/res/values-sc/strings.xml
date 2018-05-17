@@ -510,7 +510,7 @@
 
     <string name="gpx_file_is_empty">Rasta GPX bòida</string>
 
-    <string name="shared_string_my_tracks">Rastas</string>
+    <string name="shared_string_gpx_files">Rastas</string>
     <string name="shared_string_my_favorites">Preferidos</string>
     <string name="shared_string_my_places">Logos meos</string>
 

@@ -1410,7 +1410,7 @@
     <string name="gpx_timemoving">Timpul în mişcare: %1$s</string>
     <string name="gpx_file_is_empty">Traseul Gpx este gol</string>
     
-    <string name="shared_string_my_tracks">Traseele mele</string>
+    <string name="shared_string_gpx_files">Traseele mele</string>
     
     
     

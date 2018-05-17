@@ -1361,7 +1361,7 @@
     <string name="gpx_add_track">İz əlavə et</string>
     <string name="storage_place_description">OsmAnd-ın məlumat saxlama yeri (xəritələr, izlər və s.): %1$s.</string>
     <string name="shared_string_save_as_gpx">Yeni GPX izi olaraq saxla</string>
-    <string name="shared_string_my_tracks">İzlər</string>
+    <string name="shared_string_gpx_files">İzlər</string>
     <string name="shared_string_currently_recording_track">Hazırkı qeyd edilən iz</string>
     <string name="track_segments">İz seqmentləri</string>
     <string name="track_points">İz nöqtələri</string>

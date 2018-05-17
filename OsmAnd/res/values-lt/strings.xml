@@ -1447,7 +1447,7 @@ Tam prireiks {1} MB pastoviam saugojimui.
 
     <string name="gpx_file_is_empty">GPX maršrutas yra tuščias</string>
 
-    <string name="shared_string_my_tracks">Visi maršrutai</string>
+    <string name="shared_string_gpx_files">Visi maršrutai</string>
     <string name="shared_string_my_favorites">Mano mėgiami</string>
     <string name="shared_string_my_places">Mano vietos</string>
 

@@ -1315,7 +1315,7 @@ Proportionaler Speicher %4$s MB (Android Limit %5$s MB, Dalvik %6$s MB).</string
 	<string name="arrival_distance_descr">Wann soll die Ankunft am Ziel angekündigt werden?</string>
 	<string name="int_days">Tage</string>
 	<string name="import_file_favourites">Daten als GPX-Datei speichern oder Wegpunkte als Favoriten importieren?</string>
-	<string name="shared_string_my_tracks">Tracks</string>
+	<string name="shared_string_gpx_files">Tracks</string>
 	<string name="shared_string_my_favorites">Favoriten</string>
 	<string name="shared_string_my_places">Meine Orte</string>
 	<string name="loading_smth">%1$s wird geladen …</string>

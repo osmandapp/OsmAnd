@@ -253,7 +253,7 @@
     <string name="shared_string_my_location">Staðsetning mín</string>
     <string name="shared_string_my_places">Staðirnir mínir</string>
     <string name="shared_string_my_favorites">Eftirlæti</string>
-    <string name="shared_string_my_tracks">Ferlar</string>
+    <string name="shared_string_gpx_files">Ferlar</string>
     <string name="shared_string_audio">Hljóð</string>
     <string name="shared_string_video">Myndskeið</string>
     <string name="shared_string_photo">Ljósmynd</string>

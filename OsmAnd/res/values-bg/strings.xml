@@ -1440,7 +1440,7 @@
     <string name="shared_string_address">Адрес</string>
     <string name="shared_string_my_location">Моето местоположение</string>
     <string name="shared_string_my_favorites">Моите места</string>
-    <string name="shared_string_my_tracks">Моите следи</string>
+    <string name="shared_string_gpx_files">Моите следи</string>
     <string name="shared_string_currently_recording_track">Текуща следа</string>
     <string name="shared_string_audio">Аудио</string>
     <string name="shared_string_video">Видео</string>

@@ -1790,7 +1790,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="shared_string_clear_all">Slet alle</string>
     <string name="shared_string_my_location">Position</string>
     <string name="shared_string_my_favorites">Favoritter</string>
-    <string name="shared_string_my_tracks">Spor</string>
+    <string name="shared_string_gpx_files">Spor</string>
     <string name="shared_string_currently_recording_track">Nuværende optagelsesspor</string>
     <string name="waypoint_visit_after">Besøg efter</string>
     <string name="waypoint_visit_before">Besøg før</string>

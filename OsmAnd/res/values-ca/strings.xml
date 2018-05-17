@@ -1268,7 +1268,7 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     
     <string name="osmo_edit_color">Mostra el color</string>
     <string name="gpx_file_is_empty">La traça GPX és buida</string>
-    <string name="shared_string_my_tracks">Traces</string>
+    <string name="shared_string_gpx_files">Traces</string>
     <string name="shared_string_my_favorites">Preferits</string>
     <string name="shared_string_my_places">Preferits</string>
     
