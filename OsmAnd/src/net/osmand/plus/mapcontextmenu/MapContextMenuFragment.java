@@ -1115,6 +1115,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 					}
 				}
 
+				updateAdditionalInfoVisibility();
 				final ProgressBar progressBar = (ProgressBar) view.findViewById(R.id.progressBar);
 				final TextView progressTitle = (TextView) view.findViewById(R.id.progressTitle);
 				progressTitle.setText(titleProgressController.caption);
@@ -1281,6 +1282,12 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 								line2MeasuredHeight = line2.getMeasuredHeight();
 							}
 
+							int line3Height = 0;
+							View line3Container = view.findViewById(R.id.additional_info_row);
+							if (line3Container.getVisibility() == View.VISIBLE) {
+								line3Height = line3Container.getMeasuredHeight();
+							}
+
 							int titleButtonHeight = 0;
 							View titleButtonContainer = view.findViewById(R.id.title_button_container);
 							if (titleButtonContainer.getVisibility() == View.VISIBLE) {
@@ -1313,12 +1320,12 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 								}
 								newMenuTopViewHeight = menuTopViewHeightExcludingTitle + titleHeight
 										+ titleButtonHeight + downloadButtonsHeight
-										+ titleBottomButtonHeight + titleProgressHeight;
+										+ titleBottomButtonHeight + titleProgressHeight + line3Height;
 								dy = Math.max(0, newMenuTopViewHeight - menuTopViewHeight
 										- (newMenuTopShadowAllHeight - menuTopShadowAllHeight));
 							} else {
 								menuTopViewHeightExcludingTitle = newMenuTopViewHeight - line1.getMeasuredHeight() - line2MeasuredHeight
-										- titleButtonHeight - downloadButtonsHeight - titleBottomButtonHeight - titleProgressHeight;
+										- titleButtonHeight - downloadButtonsHeight - titleBottomButtonHeight - titleProgressHeight-line3Height;
 								menuTitleTopBottomPadding = (line1.getMeasuredHeight() - line1.getLineCount() * line1.getLineHeight())
 										+ (line2MeasuredHeight - line2LineCount * line2LineHeight);
 								menuButtonsHeight = view.findViewById(R.id.context_menu_bottom_buttons).getHeight()
@@ -1489,6 +1496,24 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			} else {
 				compassView.setVisibility(View.INVISIBLE);
 			}
+		}
+	}
+
+	private void updateAdditionalInfoVisibility() {
+		View line3 = (TextView) view.findViewById(R.id.context_menu_line3);
+		View additionalInfoImageView = (ImageView) view.findViewById(R.id.additional_info_image_view);
+		View additionalInfoTextView = (TextView) view.findViewById(R.id.additional_info_text_view);
+		View compassView = view.findViewById(R.id.compass_layout);
+		View titleProgressContainer = view.findViewById(R.id.title_progress_container);
+
+		if (line3.getVisibility() == View.GONE
+				&& additionalInfoImageView.getVisibility() == View.GONE
+				&& additionalInfoTextView.getVisibility() == View.GONE
+				&& titleProgressContainer.getVisibility() == View.VISIBLE
+				&& compassView.getVisibility() == View.INVISIBLE) {
+			view.findViewById(R.id.additional_info_row).setVisibility(View.GONE);
+		} else {
+			view.findViewById(R.id.additional_info_row).setVisibility(View.VISIBLE);
 		}
 	}
 
