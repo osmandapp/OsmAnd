@@ -416,11 +416,15 @@ public class AmenityMenuBuilder extends MenuBuilder {
 				}
 			} else if (key.startsWith("name:")) {
 				continue;
-			} else if (Amenity.OPENING_HOURS.equals(key)) {
+			} else if (Amenity.OPENING_HOURS.equals(key)
+					|| Amenity.SERVICE_HOURS.equals(key)
+					|| Amenity.SERVICE_TIMES.equals(key)) {
 				iconId = R.drawable.ic_action_time;
-				collapsableView = getCollapsableTextView(view.getContext(), true, amenity.getOpeningHours());
+				String openingHours = amenity.getOpeningHours();
+				openingHours = openingHours != null ? openingHours : vl;
+				collapsableView = getCollapsableTextView(view.getContext(), true, openingHours);
 				collapsable = true;
-				OpeningHoursParser.OpeningHours rs = OpeningHoursParser.parseOpenedHours(amenity.getOpeningHours());
+				OpeningHoursParser.OpeningHours rs = OpeningHoursParser.parseOpenedHours(openingHours);
 				if (rs != null) {
 					vl = rs.toLocalString();
 					Calendar inst = Calendar.getInstance();
