@@ -399,7 +399,7 @@
     <string name="animate_route">開始模擬</string>
     <string name="file_can_not_be_renamed">檔名不可更改。</string>
     <string name="file_with_name_already_exists">該檔名已存在。</string>
-    <string name="gpx_navigation">GPX 路線</string>
+    <string name="shared_string_gpx_route">GPX 路線</string>
     <string name="poi_query_by_name_matches_categories">在數個 POI 類別裡找到與查詢符合的：</string>
     <string name="data_to_search_poi_not_available">在裝置端資料查尋的 POI 不存在。</string>
     <string name="poi_filter_by_name">以名稱查尋</string>

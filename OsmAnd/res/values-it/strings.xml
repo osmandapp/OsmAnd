@@ -86,7 +86,7 @@ La memoria utilizzata è  {1} MB.
 
     <string name="file_can_not_be_renamed">Il file non può essere rinominato.</string>
     <string name="file_with_name_already_exists">Esiste già un file con lo stesso nome.</string>
-    <string name="gpx_navigation">Percorso GPX</string>
+    <string name="shared_string_gpx_route">Percorso GPX</string>
     <string name="poi_query_by_name_matches_categories">Trovate delle categorie PDI che rispecchiano la ricerca :</string>
     <string name="data_to_search_poi_not_available">Dati locali contenenti PDI non presenti.</string>
     <string name="poi_filter_by_name">Ricerca per nome</string>

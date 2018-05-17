@@ -787,7 +787,7 @@
 	<string name="map_version_changed_info">Server sadrži datoteke karata koje nisu kompatibilne s trenutnom verzijom aplikacije. Za preuzimanje i korištenje, molimo vas da nadogradite aplikaciju na noviju verziju.</string>
 	<string name="poi_filter_by_name">Traži po imenu</string>
 	<string name="old_poi_file_should_be_deleted">POI datoteka \'%1$s\' je suvišna i može se izbrisati.</string>
-	<string name="gpx_navigation">GPX ruta</string>
+	<string name="shared_string_gpx_route">GPX ruta</string>
 	<string name="poi_query_by_name_matches_categories">Nekoliko POI kategorija podudara se s upitom:</string>
 	<string name="file_can_not_be_renamed">Datoteka se ne može preimenovati.</string>
 	<string name="file_with_name_already_exists">Datoteka s tim imenom već postoji.</string>

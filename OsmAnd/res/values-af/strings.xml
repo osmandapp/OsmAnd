@@ -268,7 +268,7 @@
   
   <string name="file_can_not_be_renamed">Lêer kan nie herbenoem word nie.</string>
   <string name="file_with_name_already_exists">Lêer met daardie naam bestaan reeds.</string>
-  <string name="gpx_navigation">GPX roete</string>
+  <string name="shared_string_gpx_route">GPX roete</string>
   <string name="poi_query_by_name_matches_categories">Verskeie interessante plek kategorieë gevind vir die soektog:</string>
   <string name="data_to_search_poi_not_available">Plaaslike inligting om interessante plek te soek is nie teenwoordig nie.</string>
   <string name="poi_filter_by_name">Soek met die naam</string>

@@ -382,7 +382,7 @@
 	
 	<string name="file_can_not_be_renamed">Fișierul nu poate fi redenumit.</string>
 	<string name="file_with_name_already_exists">Există un fișier cu același nume.</string>
-	<string name="gpx_navigation">Rută GPX</string>
+	<string name="shared_string_gpx_route">Rută GPX</string>
 	<string name="poi_query_by_name_matches_categories">Au foste găsite câteva categorii de POI care satisfac condițiile:</string>
 	<string name="data_to_search_poi_not_available">Nu există date offline salvate pentru efectuarea căutării.</string>
 	<string name="poi_filter_by_name">Căutare după nume</string>

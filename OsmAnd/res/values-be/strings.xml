@@ -629,7 +629,7 @@
 	
 	<string name="file_can_not_be_renamed">Файл ня можа быць пераназваны.</string>
 	<string name="file_with_name_already_exists">Файл з такой назвай ужо існуе.</string>
-	<string name="gpx_navigation">GPX-маршрут</string>
+	<string name="shared_string_gpx_route">GPX-маршрут</string>
 	<string name="poi_query_by_name_matches_categories">Некалькі катэгорый POI знойдзены, што адпавядаюць запыту:</string>
 	<string name="data_to_search_poi_not_available">Лякальных зьвестак для пошуку POI няма.</string>
 	<string name="poi_filter_by_name">Пошук па назве</string>

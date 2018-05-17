@@ -145,7 +145,7 @@
     <string name="animate_route">Zapnout animaci</string>
     <string name="file_can_not_be_renamed">Nelze přejmenovat soubor.</string>
     <string name="file_with_name_already_exists">Soubor tohoto jména již existuje.</string>
-    <string name="gpx_navigation">GPX trasa</string>
+    <string name="shared_string_gpx_route">GPX trasa</string>
     <string name="poi_query_by_name_matches_categories">Vašemu dotazu odpovídá několik kategorií POI:</string>
     <string name="data_to_search_poi_not_available">Lokální data pro vyhledávání POI není dostupný.</string>
     <string name="poi_filter_by_name">Hledat podle jména</string>

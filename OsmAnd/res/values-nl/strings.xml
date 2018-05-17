@@ -189,7 +189,7 @@ Er is nu {2} MB beschikbaar</string>
   
   <string name="file_can_not_be_renamed">Bestandsnaam kan niet worden gewijzigd.</string>
   <string name="file_with_name_already_exists">Er bestaat al een bestand met die naam.</string>
-  <string name="gpx_navigation">Navigatie langs GPX-track</string>
+  <string name="shared_string_gpx_route">Navigatie langs GPX-track</string>
   <string name="poi_query_by_name_matches_categories">Meerdere overeenkomende interessepunt-categorieën gevonden:</string>
   <string name="data_to_search_poi_not_available">Lokale gegevens voor het zoeken van interessepunten zijn niet aanwezig.</string>
   <string name="poi_filter_by_name">Zoek op naam</string>

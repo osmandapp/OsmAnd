@@ -230,7 +230,7 @@
   
   <string name="file_can_not_be_renamed">Файл не можна перейменувати.</string>
   <string name="file_with_name_already_exists">Файл з таким ім’ям вже існує.</string>
-  <string name="gpx_navigation">Маршрут GPX</string>
+  <string name="shared_string_gpx_route">Маршрут GPX</string>
   <string name="poi_query_by_name_matches_categories">Деякі категорії POI відповідають запиту, можете використовувати їх для створення фільтра:</string>
   <string name="data_to_search_poi_not_available">Локальні дані для пошуку POI за іменем не знайдено.</string>
   <string name="poi_filter_by_name">Пошук за назвою</string>

@@ -26,7 +26,7 @@
 
     <string name="file_can_not_be_renamed">Nie można zmienić nazwy pliku.</string>
     <string name="file_with_name_already_exists">Plik o takiej nazwie już istnieje.</string>
-    <string name="gpx_navigation">Trasa GPX</string>
+    <string name="shared_string_gpx_route">Trasa GPX</string>
     <string name="data_to_search_poi_not_available">Brak danych lokalnych do wyszukania UM.</string>
     <string name="poi_filter_by_name">Szukaj wg nazwy</string>
     <string name="old_poi_file_should_be_deleted">Plik „%1$s” z danymi użytecznych miejsc jest zbędny i można go usunąć.</string>

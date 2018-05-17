@@ -1210,7 +1210,7 @@ Pôr do Sol: %2$s</string>
 	<string name="animate_route">Iniciar simulação</string>
 	<string name="file_can_not_be_renamed">O arquivo não pode ser renomeado.</string>
 	<string name="file_with_name_already_exists">Já existe um arquivo com esse nome.</string>
-	<string name="gpx_navigation">Rota GPX</string>
+	<string name="shared_string_gpx_route">Rota GPX</string>
 	<string name="poi_query_by_name_matches_categories">Encontradas várias categorias de POI que correspondem à consulta:</string>
 	<string name="data_to_search_poi_not_available">Não existem dados locais para pesquisa de POI.</string>
 	<string name="poi_filter_by_name">Pesquisar por nome</string>

@@ -558,7 +558,7 @@
 
     <string name="file_can_not_be_renamed">Файлът не може да бъде преименуван.</string>
     <string name="file_with_name_already_exists">Съществува файл с това име.</string>
-    <string name="gpx_navigation">GPX маршрут</string>
+    <string name="shared_string_gpx_route">GPX маршрут</string>
     <string name="poi_query_by_name_matches_categories">Намерени са няколко категории POI отговарящи на тези критерии:</string>
     <string name="data_to_search_poi_not_available">Няма местни данни за търсене на POI.</string>
     <string name="poi_filter_by_name">Търсене по име</string>

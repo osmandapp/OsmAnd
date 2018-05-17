@@ -561,7 +561,7 @@
 	<string name="auto_follow_route_navigation_descr">Keskitä karttanäkymä automaattisesti vain navigoidessa.</string>
 	<string name="pref_vector_map">Vektorikarttojen asetukset</string>
 	<string name="file_with_name_already_exists">Tiedosto tällä nimellä on jo olemassa.</string>
-	<string name="gpx_navigation">GPX reitti</string>
+	<string name="shared_string_gpx_route">GPX reitti</string>
 	<string name="button_upgrade_osmandplus">Päivitä OsmAnd+ ohjelmaan</string>
 	<string name="context_menu_item_search">Etsi läheltä tätä paikkaa</string>
 	<string name="route_successfully_saved_at">Reitti tallennettiin onnistuneesti nimellä ”%1$s”.</string>

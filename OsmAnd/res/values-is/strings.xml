@@ -931,7 +931,7 @@ Ferill %2$s</string>
     <string name="user_password">OSM-lykilorðið þitt</string>
     <string name="use_transparent_map_theme">Gegnsætt þema</string>
     <string name="pref_overlay">Yfirlag / Undirlag</string>
-    <string name="gpx_navigation">GPX-leið</string>
+    <string name="shared_string_gpx_route">GPX-leið</string>
     <string name="file_with_name_already_exist">Skrá með sama heiti er þegar til.</string>
     <string name="local_index_mi_upload_gpx">Senda til OSM</string>
     <string name="basemap_missing">Sæktu grunnkort af heiminum til að fá hnattræna yfirsýn á alla jörðina í minni aðdrætti.</string>

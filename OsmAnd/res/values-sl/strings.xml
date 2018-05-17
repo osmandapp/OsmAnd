@@ -674,7 +674,7 @@ Omogoča tudi dodajanje opomb v koledar za prikaz opomnikov ob daljših časih p
 
     <string name="file_can_not_be_renamed">Datoteke ni mogoče preimenovati.</string>
     <string name="file_with_name_already_exists">Datoteka s tem imenom že obstaja.</string>
-    <string name="gpx_navigation">Pot GPX</string>
+    <string name="shared_string_gpx_route">Pot GPX</string>
     <string name="poi_query_by_name_matches_categories">S poizvedbo je skladnih več kategorij POI:</string>
     <string name="data_to_search_poi_not_available">Ni krajevnih podatkov za iskanje POI.</string>
     <string name="old_poi_file_should_be_deleted">Podatkovna datoteka POI \'%1$s\' je zastarela in jo je priporočljivo izbrisati.</string>

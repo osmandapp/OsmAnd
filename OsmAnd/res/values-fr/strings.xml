@@ -97,7 +97,7 @@
 
     <string name="file_can_not_be_renamed">Le fichier ne peut pas être renommé.</string>
     <string name="file_with_name_already_exists">Un fichier avec ce nom existe déjà.</string>
-    <string name="gpx_navigation">Itinéraire GPX</string>
+    <string name="shared_string_gpx_route">Itinéraire GPX</string>
     <string name="poi_query_by_name_matches_categories">Des catégories de points d\'intérêt correspondantes à la recherche ont été trouvées :</string>
     <string name="data_to_search_poi_not_available">Pas de données de points d\'intérêt en local pour effectuer une recherche.</string>
     <string name="poi_filter_by_name">Rechercher par nom</string>

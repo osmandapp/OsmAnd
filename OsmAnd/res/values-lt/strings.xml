@@ -256,7 +256,7 @@ Tam prireiks {1} MB pastoviam saugojimui.
 
     <string name="file_can_not_be_renamed">Failo pavadinimo pakeisti negalima.</string>
     <string name="file_with_name_already_exists">Failas tokiu pavadinimu jau yra.</string>
-    <string name="gpx_navigation">GPX maršrutas</string>
+    <string name="shared_string_gpx_route">GPX maršrutas</string>
     <string name="poi_query_by_name_matches_categories">Rastos kelios LV kategorijos, kurios atitinka jūsų užklausą :</string>
     <string name="data_to_search_poi_not_available">Nėra LV paieškai reikalingų vietinių duomenų.</string>
     <string name="poi_filter_by_name">Ieškoti pagal pavadinimą</string>

@@ -854,7 +854,7 @@ Memòria in proportzione %4$s MB (lìmite de Android %5$s MB, Dalvik %6$s MB).</
     <string name="animate_route_off">Firma animatzione</string>
     <string name="animate_route">Avia animatzione</string>
     <string name="file_with_name_already_exists">Esistit giai unu documentu cun su matessi nùmene.</string>
-    <string name="gpx_navigation">Àndala GPX</string>
+    <string name="shared_string_gpx_route">Àndala GPX</string>
     <string name="poi_filter_by_name">Chirca pro nùmene</string>
     <string name="button_upgrade_osmandplus">Agiorna OsmAnd+</string>
 

@@ -164,7 +164,7 @@ Ehhez {1} MB helyre van szükség.
 
     <string name="file_can_not_be_renamed">Fájl nem átnevezhető.</string>
     <string name="file_with_name_already_exists">Már létezik ilyen néven fájl.</string>
-    <string name="gpx_navigation">GPX útvonal</string>
+    <string name="shared_string_gpx_route">GPX útvonal</string>
     <string name="poi_query_by_name_matches_categories">Keresésnek megfelelő POI kategóriák:</string>
     <string name="data_to_search_poi_not_available">POI kereséshez nem található helyi adat.</string>
     <string name="poi_filter_by_name">Név szerinti keresés</string>

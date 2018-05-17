@@ -212,7 +212,7 @@
 	<string name="city_type_village">村</string>
 	<string name="city_type_town">镇</string>
 	<string name="city_type_city">城市</string>
-	<string name="gpx_navigation">GPX 路径</string>
+	<string name="shared_string_gpx_route">GPX 路径</string>
 	<string name="button_upgrade_osmandplus">升级OsmAnd+</string>
 	<string name="shared_string_rename">重命名</string>
 	

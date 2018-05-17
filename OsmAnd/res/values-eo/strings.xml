@@ -1484,7 +1484,7 @@ Proporcia memoro %4$s MB (limito de Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="animate_route">Ekigi simuladon</string>
     <string name="file_can_not_be_renamed">Ne povas alinomi dosieron.</string>
     <string name="file_with_name_already_exists">Dosiero kun sama nomo jam ekzistas.</string>
-    <string name="gpx_navigation">GPX-kurso</string>
+    <string name="shared_string_gpx_route">GPX-kurso</string>
     <string name="poi_query_by_name_matches_categories">Trovis kelkajn kategoriojn de interesejoj kiuj kongruas kun la serĉmendo:</string>
     <string name="data_to_search_poi_not_available">Mankas lokaj datumoj por serĉi interesejojn.</string>
     <string name="poi_filter_by_name">Serĉi laŭ nomo</string>

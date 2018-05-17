@@ -1926,7 +1926,7 @@
     <string name="animate_route">Սկսեք մոդելավորում</string>
     <string name="file_can_not_be_renamed">Ֆայլը հնարավոր չե վերանվանել:</string>
     <string name="file_with_name_already_exists">Նման անվանումով Ֆայլը արդեն գոյություն ունի:</string>
-    <string name="gpx_navigation">GPX երթուղին</string>
+    <string name="shared_string_gpx_route">GPX երթուղին</string>
     <string name="poi_query_by_name_matches_categories">Ոմանք POI կատեգորիաները համապատասխանում են հարցմանը, դուք կարող եք օգտագործել դրանք ֆիլտր ստեղծելու համար՝</string>
     <string name="data_to_search_poi_not_available">POIs-ի որոնման համար տեղական տվյալները չգտնվեցին:</string>
     <string name="poi_filter_by_name">Որոնել ըստ անվան</string>

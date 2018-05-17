@@ -232,7 +232,7 @@
     <string name="animate_route">Start simulering</string>
     <string name="file_can_not_be_renamed">Fil kan ikke endre navn.</string>
     <string name="file_with_name_already_exists">Fil med dette navnet finnes allerede.</string>
-    <string name="gpx_navigation">GPX-rute</string>
+    <string name="shared_string_gpx_route">GPX-rute</string>
     <string name="poi_query_by_name_matches_categories">Flere interessepunktkategorier funnet som samsvarer med søket:</string>
     <string name="data_to_search_poi_not_available">Lokale data til å søke interessepunkter foreligger ikke.</string>
     <string name="poi_filter_by_name">Søk på navn</string>

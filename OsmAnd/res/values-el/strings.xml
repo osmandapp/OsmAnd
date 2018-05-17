@@ -392,7 +392,7 @@
 	
 	<string name="file_can_not_be_renamed">Το αρχείο δεν μπορεί να μετονομαστεί.</string>
 	<string name="file_with_name_already_exists">Υπάρχει ήδη αρχείο με αυτό το όνομα.</string>
-	<string name="gpx_navigation">διαδρομή GPX</string>
+	<string name="shared_string_gpx_route">διαδρομή GPX</string>
 	<string name="poi_query_by_name_matches_categories">Βρέθηκαν αρκετές κατηγορίες ΣΕ που ταιριάζουν με το ερώτημα:</string>
 	<string name="data_to_search_poi_not_available">Δεν υπάρχουν τοπικά δεδομένα για αναζήτηση ΣΕ.</string>
 	<string name="poi_filter_by_name">Αναζήτηση βάσει ονόματος</string>

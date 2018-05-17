@@ -369,7 +369,7 @@
     <string name="user_password">"നിങ്ങളുടെ ഓഎസ്എം പാസ്സ്വേഡ് "</string>
     <string name="animate_route">"സിമുലേഷന്‍ ആരംഭിക്കുക "</string>
     <string name="file_with_name_already_exists">ആ പേരില്‍ ഒരു ഫയല്‍ നിലവിലുണ്ടു്.</string>
-    <string name="gpx_navigation">ജിപിഎക്സ് മാര്‍ഗം</string>
+    <string name="shared_string_gpx_route">ജിപിഎക്സ് മാര്‍ഗം</string>
     <string name="file_with_name_already_exist">അതെ പേരില്‍ ഒരു ഫയല്‍ നിലവിലുണ്ടു്.</string>
     <string name="local_index_map_data">ഭൂപട വിവരങ്ങ</string>
     <string name="search_offline_clear_search">"പുതിയ  തെരച്ചില്‍"</string>

@@ -1028,7 +1028,7 @@ Os mapas en teselas pódense obter directamente a través de recursos na rede ou
 	
 	<string name="file_can_not_be_renamed">Non é posíbel mudar o nome do ficheiro.</string>
 	<string name="file_with_name_already_exists">Xa existe un ficheiro con ese nome.</string>
-	<string name="gpx_navigation">Itinerario de GPX</string>
+	<string name="shared_string_gpx_route">Itinerario de GPX</string>
 	<string name="poi_query_by_name_matches_categories">Hai varias categorías de PDE que responden á consulta:</string>
 	<string name="data_to_search_poi_not_available">Non hai datos locais presentes para buscar puntos de interese.</string>
 	<string name="poi_filter_by_name">Buscar polo nome</string>

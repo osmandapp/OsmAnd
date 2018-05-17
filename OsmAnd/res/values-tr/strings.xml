@@ -672,7 +672,7 @@
     <string name="av_def_action_choose">Talep üzerine seç</string>
     <string name="osmand_play_title_30_chars">OsmAnd Haritalar &amp; Yolbul</string>
 	<string name="osmand_plus_play_title_30_chars">OsmAnd+ Haritalar &amp; Yolbul</string>
-	<string name="gpx_navigation">GPX Rotası</string>
+	<string name="shared_string_gpx_route">GPX Rotası</string>
 	<string name="poi_query_by_name_matches_categories">Sorgunuza uyan çeşitli POI kategorileri bulundu:</string>
 	<string name="data_to_search_poi_not_available">POI araması yapmak için yerel veri mevcut değil.</string>
 	<string name="old_poi_file_should_be_deleted">POI veri dosyası \'%1$s\' gereksiz ve silinebilir.</string>

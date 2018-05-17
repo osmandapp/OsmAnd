@@ -2214,7 +2214,7 @@
     <string name="animate_route">Start simulation</string>
     <string name="file_can_not_be_renamed">File can not be renamed.</string>
     <string name="file_with_name_already_exists">File with that name already exists.</string>
-    <string name="gpx_navigation">GPX route</string>
+    <string name="shared_string_gpx_route">GPX route</string>
     <string name="poi_query_by_name_matches_categories">Several POI categories found matching the query:</string>
     <string name="data_to_search_poi_not_available">Local data to search POI is not present.</string>
     <string name="poi_filter_by_name">Search by name</string>

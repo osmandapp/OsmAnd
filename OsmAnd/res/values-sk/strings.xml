@@ -222,7 +222,7 @@
     <string name="animate_route">Začať simuláciu</string>
     <string name="file_can_not_be_renamed">Súbor nemôže byť premenovaný.</string>
     <string name="file_with_name_already_exists">Súbor s týmto názvom už existuje.</string>
-    <string name="gpx_navigation">GPX trasa</string>
+    <string name="shared_string_gpx_route">GPX trasa</string>
     <string name="poi_query_by_name_matches_categories">Boli nájdené nejaké kategórie POI vyhovujúce požiadavke:</string>
     <string name="data_to_search_poi_not_available">Miestne údaje na hľadanie POI nie sú dostupné.</string>
     <string name="poi_filter_by_name">Hľadať podľa názvu</string>

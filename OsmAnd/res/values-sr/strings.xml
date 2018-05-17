@@ -122,7 +122,7 @@
 	<string name="animate_route">Започни симулацију</string>
 	<string name="file_can_not_be_renamed">Фајл не може бити преименован.</string>
 	<string name="file_with_name_already_exists">Фајл са тим именом већ постоји.</string>
-	<string name="gpx_navigation">GPX рута</string>
+	<string name="shared_string_gpx_route">GPX рута</string>
 	<string name="poi_filter_by_name">Претрага по имену</string>
 	<string name="update_poi_file_not_found">Локални фајл који одржава промене тачака од интереса није пронађен и не може да се направи.</string>
 	<string name="button_upgrade_osmandplus">Надоградите OsmAnd+</string>

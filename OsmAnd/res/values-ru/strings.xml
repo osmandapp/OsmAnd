@@ -449,7 +449,7 @@
     <string name="auto_follow_route_navigation">Автовозврат карты только при следовании по маршруту</string>
     <string name="auto_follow_route_navigation_descr">Возвращать карту в текущее положение только при следовании по маршруту.</string>
     <string name="auto_follow_location_enabled">Привязка карты к местоположению включена.</string>
-    <string name="gpx_navigation">GPX маршрут</string>
+    <string name="shared_string_gpx_route">GPX маршрут</string>
     <string name="poi_query_by_name_matches_categories">Некоторые категории POI соответствуют запросу, можете использовать их для создания фильтра:</string>
     <string name="data_to_search_poi_not_available">Локальные данные для поиска POI по имени не найдены.</string>
     <string name="poi_filter_by_name">Поиск по имени</string>

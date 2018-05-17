@@ -1167,7 +1167,7 @@ POIの更新は利用できません</string>
 	
 	<string name="file_can_not_be_renamed">ファイルの名前は変更できません。</string>
 	<string name="file_with_name_already_exists">その名前のファイルが既に存在します。</string>
-	<string name="gpx_navigation">GPXルート</string>
+	<string name="shared_string_gpx_route">GPXルート</string>
 	<string name="poi_query_by_name_matches_categories">いくつかのPOIカテゴリと、一致するクエリが見つかりました:</string>
 	<string name="data_to_search_poi_not_available">POI検索用ローカルデータが存在しません。</string>
 	<string name="poi_filter_by_name">名前で検索する</string>

@@ -633,7 +633,7 @@
   
   <string name="file_can_not_be_renamed">O ficheiro não pode ser renomeado.</string>
   <string name="file_with_name_already_exists">Já existe um ficheiro com esse nome.</string>
-  <string name="gpx_navigation">Rota GPX</string>
+  <string name="shared_string_gpx_route">Rota GPX</string>
   <string name="poi_query_by_name_matches_categories">Several POI categories found matching the query :</string>
   <string name="data_to_search_poi_not_available">Não existem dados locais para busca de POI.</string>
   <string name="old_poi_file_should_be_deleted">O ficheiro POI \'%1$s\' é repetido e pode ser apagado.</string>

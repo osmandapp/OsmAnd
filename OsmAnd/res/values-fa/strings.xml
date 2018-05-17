@@ -404,7 +404,7 @@
 	<string name="city_type_city">شهر</string>
 	<string name="file_can_not_be_renamed">نام فایل را نمی‌توان تغییر داد.</string>
 	<string name="file_with_name_already_exists">فایلی با نام یکسان وجود دارد.</string>
-	<string name="gpx_navigation">مسیر GPX</string>
+	<string name="shared_string_gpx_route">مسیر GPX</string>
 	<string name="poi_filter_by_name">جست‌وجو بر اساس نام</string>
 	<string name="index_settings">مدیریت فایل‌های نقشه</string>
 	<string name="general_settings">عمومی</string>

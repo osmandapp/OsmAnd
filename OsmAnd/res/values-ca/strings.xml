@@ -218,7 +218,7 @@ S\'ocuparà una memòria de {1} MB
     <string name="animate_route_off">Atura l\'animació</string>
     <string name="animate_route">Inicia l\'animació</string>
     <string name="file_with_name_already_exists">Ja existeix un fitxer amb aquest nom.</string>
-    <string name="gpx_navigation">Ruta GPX</string>
+    <string name="shared_string_gpx_route">Ruta GPX</string>
     <string name="data_to_search_poi_not_available">No hi ha dades locals per cercar els PDI.</string>
     <string name="poi_filter_by_name">Cerca pel nom</string>
     <string name="poi_filter_nominatim">Nominatim en línia</string>

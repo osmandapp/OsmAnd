@@ -471,7 +471,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="animate_route">Start simulering</string>
     <string name="file_can_not_be_renamed">Filen kan ikke omdøbes.</string>
     <string name="file_with_name_already_exists">Der eksisterer allerede en fil med det navn.</string>
-    <string name="gpx_navigation">GPX-rute</string>
+    <string name="shared_string_gpx_route">GPX-rute</string>
     <string name="poi_query_by_name_matches_categories">Flere kategorier af interessepunkter fundet som matcher forespørgslen:</string>
     <string name="data_to_search_poi_not_available">Lokale data til at søge interessepunkter findes ikke.</string>
     <string name="poi_filter_by_name">Søg via navn</string>

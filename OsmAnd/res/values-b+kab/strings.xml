@@ -152,7 +152,7 @@
     <string name="general_settings">Amatu</string>
     <string name="city_type_village">Taddart</string>
     <string name="city_type_town">Tiγremt</string>
-    <string name="gpx_navigation">Abrid n GPX</string>
+    <string name="shared_string_gpx_route">Abrid n GPX</string>
     <string name="button_upgrade_osmandplus">Sedγi OsmAnd+</string>
     <string name="search_position_address">Tansa …</string>
     <string name="filename_input">Isem n ufaylu :</string>

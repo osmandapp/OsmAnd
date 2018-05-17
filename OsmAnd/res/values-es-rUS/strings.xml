@@ -1176,7 +1176,7 @@ Lon %2$s</string>
     <string name="animate_route">Iniciar simulación</string>
     <string name="file_can_not_be_renamed">El archivo no se puede renombrar.</string>
     <string name="file_with_name_already_exists">Ya existe un archivo con ese nombre.</string>
-    <string name="gpx_navigation">Ruta GPX</string>
+    <string name="shared_string_gpx_route">Ruta GPX</string>
     <string name="poi_query_by_name_matches_categories">Encontradas varias categorías de PDI que responden a la consulta:</string>
     <string name="data_to_search_poi_not_available">Sin datos locales para buscar PDI.</string>
     <string name="poi_filter_by_name">Buscar por nombre</string>

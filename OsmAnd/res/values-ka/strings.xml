@@ -207,7 +207,7 @@
   
   <string name="file_can_not_be_renamed">ფაილისათვის სახელის გადარქმევა შეუძლებელია.</string>
   <string name="file_with_name_already_exists">ფაილი მოცემული სახელით უკვე არსებობს.</string>
-  <string name="gpx_navigation">GPX გზა</string>
+  <string name="shared_string_gpx_route">GPX გზა</string>
   <string name="poi_query_by_name_matches_categories">ძებნის შედეგები შეიცავს რამოდენიმე POI კატეგორიას :</string>
   <string name="data_to_search_poi_not_available">ადგილობრივი მონაცემები POI-ს ძებნისათვის არ არსებობს.</string>
   <string name="poi_filter_by_name">სახელით ძებნა</string>
