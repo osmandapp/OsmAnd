@@ -35,8 +35,16 @@ public class TravelLocalDataHelper {
 		dbHelper = new WikivoyageLocalDataDbHelper(app);
 	}
 
-	void refreshCachedData() {
-		historyMap = dbHelper.getAllHistoryMap();
+	void refreshCachedData(TravelDbHelper travelDbHelper) {
+		List<WikivoyageSearchHistoryItem> history = dbHelper.getAllHistory();
+		historyMap = new TLongObjectHashMap<>(history.size());
+		for (WikivoyageSearchHistoryItem item : history) {
+			long id = travelDbHelper.getArticleId(item.articleTitle, item.lang);
+			if (id != 0) {
+				item.cityId = id;
+				historyMap.put(id, item);
+			}
+		}
 		savedArticles = dbHelper.readSavedArticles();
 	}
 
@@ -67,26 +75,21 @@ public class TravelLocalDataHelper {
 
 	public void addToHistory(long cityId, String title, String lang, String isPartOf) {
 		WikivoyageSearchHistoryItem item = historyMap.get(cityId);
-		boolean newItem = item == null;
-		if (newItem) {
-			item = new WikivoyageSearchHistoryItem();
-			item.cityId = cityId;
+		if (item != null) {
+			removeHistoryItem(item);
 		}
+		item = new WikivoyageSearchHistoryItem();
+		item.cityId = cityId;
 		item.articleTitle = title;
 		item.lang = lang;
 		item.isPartOf = isPartOf;
 		item.lastAccessed = System.currentTimeMillis();
-		if (newItem) {
-			dbHelper.addHistoryItem(item);
-			historyMap.put(item.cityId, item);
-		} else {
-			dbHelper.updateHistoryItem(item);
-		}
+		dbHelper.addHistoryItem(item);
+		historyMap.put(item.cityId, item);
 		if (historyMap.size() > HISTORY_ITEMS_LIMIT) {
 			List<WikivoyageSearchHistoryItem> allHistory = getAllHistory();
 			WikivoyageSearchHistoryItem lastItem = allHistory.get(allHistory.size() - 1);
-			dbHelper.removeHistoryItem(lastItem);
-			historyMap.remove(lastItem.cityId);
+			removeHistoryItem(lastItem);
 		}
 	}
 
@@ -132,6 +135,11 @@ public class TravelLocalDataHelper {
 		return getArticle(article.title, article.lang) != null;
 	}
 
+	private void removeHistoryItem(WikivoyageSearchHistoryItem item) {
+		dbHelper.removeHistoryItem(item);
+		historyMap.remove(item.cityId);
+	}
+
 	private void notifySavedUpdated() {
 		if (listener != null) {
 			listener.savedArticlesUpdated();
@@ -159,7 +167,6 @@ public class TravelLocalDataHelper {
 		private static final String DB_NAME = "wikivoyage_local_data";
 
 		private static final String HISTORY_TABLE_NAME = "wikivoyage_search_history";
-		private static final String HISTORY_COL_CITY_ID = "city_id";
 		private static final String HISTORY_COL_ARTICLE_TITLE = "article_title";
 		private static final String HISTORY_COL_LANG = "lang";
 		private static final String HISTORY_COL_IS_PART_OF = "is_part_of";
@@ -168,7 +175,6 @@ public class TravelLocalDataHelper {
 
 		private static final String HISTORY_TABLE_CREATE = "CREATE TABLE IF NOT EXISTS " +
 				HISTORY_TABLE_NAME + " (" +
-				HISTORY_COL_CITY_ID + " long, " +
 				HISTORY_COL_ARTICLE_TITLE + " TEXT, " +
 				HISTORY_COL_LANG + " TEXT, " +
 				HISTORY_COL_IS_PART_OF + " TEXT, " +
@@ -176,7 +182,6 @@ public class TravelLocalDataHelper {
 				HISTORY_COL_TRAVEL_BOOK + " TEXT);";
 
 		private static final String HISTORY_TABLE_SELECT = "SELECT " +
-				HISTORY_COL_CITY_ID + ", " +
 				HISTORY_COL_ARTICLE_TITLE + ", " +
 				HISTORY_COL_LANG + ", " +
 				HISTORY_COL_IS_PART_OF + ", " +
@@ -265,8 +270,8 @@ public class TravelLocalDataHelper {
 		}
 
 		@NonNull
-		TLongObjectHashMap<WikivoyageSearchHistoryItem> getAllHistoryMap() {
-			TLongObjectHashMap<WikivoyageSearchHistoryItem> res = new TLongObjectHashMap<>();
+		List<WikivoyageSearchHistoryItem> getAllHistory() {
+			List<WikivoyageSearchHistoryItem> res = new ArrayList<>();
 			String travelBook = getSelectedTravelBookName();
 			if (travelBook == null) {
 				return res;
@@ -278,8 +283,7 @@ public class TravelLocalDataHelper {
 					SQLiteCursor cursor = conn.rawQuery(query, new String[]{travelBook});
 					if (cursor.moveToFirst()) {
 						do {
-							WikivoyageSearchHistoryItem item = readHistoryItem(cursor);
-							res.put(item.cityId, item);
+							res.add(readHistoryItem(cursor));
 						} while (cursor.moveToNext());
 					}
 					cursor.close();
@@ -298,32 +302,15 @@ public class TravelLocalDataHelper {
 			SQLiteConnection conn = openConnection(false);
 			if (conn != null) {
 				try {
-					conn.execSQL("INSERT INTO " + HISTORY_TABLE_NAME + " VALUES (?, ?, ?, ?, ?, ?)",
-							new Object[]{item.cityId, item.articleTitle, item.lang,
-									item.isPartOf, item.lastAccessed, travelBook});
-				} finally {
-					conn.close();
-				}
-			}
-		}
-
-		void updateHistoryItem(WikivoyageSearchHistoryItem item) {
-			String travelBook = getSelectedTravelBookName();
-			if (travelBook == null) {
-				return;
-			}
-			SQLiteConnection conn = openConnection(false);
-			if (conn != null) {
-				try {
-					conn.execSQL("UPDATE " + HISTORY_TABLE_NAME + " SET " +
-									HISTORY_COL_ARTICLE_TITLE + " = ?, " +
-									HISTORY_COL_LANG + " = ?, " +
-									HISTORY_COL_IS_PART_OF + " = ?, " +
-									HISTORY_COL_LAST_ACCESSED + " = ? " +
-									"WHERE " + HISTORY_COL_CITY_ID + " = ? " +
-									"AND " + HISTORY_COL_TRAVEL_BOOK + " = ?",
-							new Object[]{item.articleTitle, item.lang, item.isPartOf,
-									item.lastAccessed, item.cityId, travelBook});
+					String query = "INSERT INTO " + HISTORY_TABLE_NAME + "( " +
+							HISTORY_COL_ARTICLE_TITLE + ", " +
+							HISTORY_COL_LANG + ", " +
+							HISTORY_COL_IS_PART_OF + ", " +
+							HISTORY_COL_LAST_ACCESSED + ", " +
+							HISTORY_COL_TRAVEL_BOOK +
+							") VALUES (?, ?, ?, ?, ?)";
+					conn.execSQL(query, new Object[]{item.articleTitle, item.lang, item.isPartOf,
+							item.lastAccessed, travelBook});
 				} finally {
 					conn.close();
 				}
@@ -339,9 +326,10 @@ public class TravelLocalDataHelper {
 			if (conn != null) {
 				try {
 					conn.execSQL("DELETE FROM " + HISTORY_TABLE_NAME +
-									" WHERE " + HISTORY_COL_CITY_ID + " = ?" +
+									" WHERE " + HISTORY_COL_ARTICLE_TITLE + " = ?" +
+									" AND " + HISTORY_COL_LANG + " = ?" +
 									" AND " + HISTORY_COL_TRAVEL_BOOK + " = ?",
-							new Object[]{item.cityId, travelBook});
+							new Object[]{item.articleTitle, item.lang, travelBook});
 				} finally {
 					conn.close();
 				}
@@ -448,7 +436,6 @@ public class TravelLocalDataHelper {
 		private WikivoyageSearchHistoryItem readHistoryItem(SQLiteCursor cursor) {
 			WikivoyageSearchHistoryItem res = new WikivoyageSearchHistoryItem();
 
-			res.cityId = cursor.getLong(cursor.getColumnIndex(HISTORY_COL_CITY_ID));
 			res.articleTitle = cursor.getString(cursor.getColumnIndex(HISTORY_COL_ARTICLE_TITLE));
 			res.lang = cursor.getString(cursor.getColumnIndex(HISTORY_COL_LANG));
 			res.isPartOf = cursor.getString(cursor.getColumnIndex(HISTORY_COL_IS_PART_OF));
