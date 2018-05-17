@@ -180,7 +180,7 @@ OsmAnd バージョンがインストールされています。全てのオフ�
  <string name="trace_rendering">レンダリング速度を表示</string>
      <string name="daynight_mode_day">昼固定</string>
      <string name="daynight_mode_night">夜固定</string>
-     <string name="daynight_mode_auto">日の出/日の入</string>
+     <string name="daynight_mode_auto">日の出/日の入時間を参考</string>
      <string name="daynight_mode_sensor">ライトセンサー</string>
      <string name="daynight_descr">昼/夜モード切替ルールを選択します</string>
      <string name="daynight">昼/夜モード切替</string>
@@ -1341,7 +1341,7 @@ POIの更新は利用できません</string>
 	
 	
 	
-	<string name="keep_and_add_destination_point">より後の目的地として追加</string>
+	<string name="keep_and_add_destination_point">最終的な目的地として追加</string>
     <string name="select_gpx">GPXファイルを選択…</string>
     <string name="route_descr_select_destination">目的地を選択</string>
     <string name="shared_string_select_on_map">マップから選択</string>
@@ -2570,12 +2570,11 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="routing_attr_short_way_description">燃費を抑えることを重視した(通常より短い)ルートにします</string>
     <string name="clear_tile_data">すべてのタイルを消去</string>
     <string name="navigate_point_olc">オープンロケーションコード(OLC)</string>
-    <string name="navigate_point_olc_info_invalid">無効なOLCです
-</string>
+    <string name="navigate_point_olc_info_invalid">OLCの値が正しくありません</string>
     <string name="navigate_point_olc_info_short">省略OLCです
 省略されてないコードを入力して下さい</string>
-    <string name="navigate_point_olc_info_area">OLCは有効で
-指定されたエリアは: %1$s x %2$sです</string>
+    <string name="navigate_point_olc_info_area">OLCの値は正常
+\n指定された場所の範囲は: %1$s x %2$sです</string>
     <string name="configure_screen_quick_action">クイックアクション</string>
 
     <string name="quick_action_item_action">アクション %d</string>
@@ -3075,12 +3074,15 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="tap_on_map_to_hide_interface">フルスクリーンモード</string>
     <string name="live_monitoring_max_interval_to_send">オンライン追跡用のバッファ指定</string>
     <string name="live_monitoring_max_interval_to_send_desrc">送信用現在地データをネット接続せずにどのくらいの時間記録するか、バッファを指定します</string>
-    <string name="release_3_0">• 停止標識の案内は運転方向を考慮するように変更
+    <string name="release_3_0">\\022 新しい旅行メニュー:インターネットに接続しなくてもWikiVoyage(ウィキボヤージュ)の旅行ガイドを見られるように変更
 \n
-\n • GPX経路に残す上昇下降値に有意かつ新しいアルゴリズムを採用
+\n• Wikipedia:新しい外見、アクティブリンク、画像の参照
 \n
-\n • 地形(上り坂)を考慮した徒歩移動時間を算出するように改良(ネイスミスのルール／Naismith\'s ruleを適用)
+\n• 経路の参照UI:経由地点グループの表示
 \n
+\n• マップマーカー:選択した複数GPXファイルからの取り込みに対応、新しい外見の採用
+\n
+\n• OsmAnd LiveサブスクリプションでOsmAndの全ての機能を利用可能に
 \n</string>
     <string name="rendering_attr_hidePOILabels_name">POIのラベル</string>
     <string name="context_menu_read_article">記事を読む</string>
@@ -3096,7 +3098,7 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="shared_string_added">追加しました</string>
     <string name="notes_by_date">日付別の注釈</string>
     <string name="add_group">グループの追加</string>
-    <string name="empty_state_osm_edits_descr">OSM用POIの作成や更新、注釈の追加などが可能で、記録したGPXファイルを用いてあなたもOSMに貢献することができます。</string>
+    <string name="empty_state_osm_edits_descr">OSM編集はPOIの作成や更新、注釈の追加などが可能です。記録したGPXファイルを用いてあなたもOSMに貢献することができるでしょう。</string>
     <string name="mark_passed">通過済みにする</string>
     <string name="add_segment_to_the_track">GPX経路に追加</string>
     <string name="shared_string_current">現在</string>
@@ -3119,6 +3121,12 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
 \n
 \n• GPX経路に保存する上昇／下降値の算出を新しいアルゴリズムに変更
 \n
-\n• 地形(上り坂)を考慮した徒歩移動時間の算出(ネイスミスのルール)
+\n• 地形(上り坂)を考慮した徒歩移動時間の算出(ネイスミスの法則を適用)
 \n</string>
+    <string name="use_two_digits_longitude">二桁の経度を使用</string>
+    <string name="enter_lon">経度を入力してください</string>
+    <string name="enter_lat">緯度を入力</string>
+    <string name="enter_lat_and_lon">緯度と経度を入力してください</string>
+	<string name="optional_point_name">任意の地点名を入力</string>
+    <string name="subsequent_dest_description">選択した地点を、最終目的地として設定します</string>
     </resources>
