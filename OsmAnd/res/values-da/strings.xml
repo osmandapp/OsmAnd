@@ -3063,15 +3063,15 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="by_date">Efter dato</string>
     <string name="by_type">Efter type</string>
     <string name="modify_the_search_query">Ændr søgning.</string>
-    <string name="release_3_0">• Ny rejseguide menu: se WikiVoyage artikler uden internetforbindelse
-\n
-\n  • Wikipedia: nyt udseende, aktive links, billeder
-\n
-\n  • Åbn spor grænseflade: vis rutepunktsgrupper
-\n
-\n  • Kortmarkører: import af udvalgte grupper fra GPX-filer, nyt udseende på koordinat indtastning
-\n
-\n  • OsmAnd Live-abonnement indeholder nu alle OsmAnd-funktioner
+    <string name="release_3_0">• Ny rejseguide menu: se Wikivoyage artikler uden internetforbindelse 
+\n 
+\n  • Wikipedia: nyt udseende, aktive links, billeder 
+\n 
+\n  • Åbn spor grænseflade: vis rutepunktsgrupper 
+\n 
+\n  • Kortmarkører: import af udvalgte grupper fra GPX-filer, nyt udseende på koordinat indtastning 
+\n 
+\n  • OsmAnd Live-abonnement indeholder nu alle OsmAnd-funktioner 
 \n</string>
     <string name="av_locations_selected_desc">GPX-fil med koordinaterne og data for de valgte noter.</string>
     <string name="av_locations_all_desc">GPX-fil med koordinater og data for alle noter.</string>
@@ -3202,10 +3202,10 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="purchase_unlim_title">Køb - %1$s</string>
     <string name="purchase_subscription_title">Abonner - %1$s</string>
 
-    <string name="wikivoyage_offline">Wikivoyage er offline</string>
+    <string name="wikivoyage_offline">Wikivoyage offline</string>
     
     <string name="unlimited_downloads">Ubegrænset hentninger</string>
-    <string name="wikipedia_offline">Wikipedia er offline</string>
+    <string name="wikipedia_offline">Wikipedia offline</string>
     <string name="contour_lines_sea_depth">Højdekurver + havdybde</string>
     <string name="unlock_all_features">Lås op for alle funktioner i OsmAnd</string>
 
