@@ -2788,11 +2788,11 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="quick_action_resume_pause_navigation">Navigation pausieren/fortsetzen</string>
     <string name="release_2_7">• Mapillary-Erweiterung mit Vor-Ort-Bildern 
 \n 
-\n • Lineal-Steuerelement zur Entfernungsmessung 
+\n• Lineal-Steuerelement zur Entfernungsmessung 
 \n 
-\n • GPX-Teilabschnitte mit detaillierten Informationen zum Track 
+\n• GPX-Teilabschnitte mit detaillierten Informationen zum Track 
 \n 
-\n • Weitere Verbesserungen und Fehlerkorrekturen 
+\n• Weitere Verbesserungen und Fehlerkorrekturen 
 \n 
 \n</string>
     <string name="rendering_value_translucent_pink_name">Transparentes Rosa</string>
