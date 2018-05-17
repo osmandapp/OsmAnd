@@ -17,7 +17,7 @@
     <string name="context_menu_item_first_intermediate_point">İlk ara hedef eklemek</string>
     <string name="add_as_last_destination_point">Son ara nokta olarak ekle</string>
     <string name="add_as_first_destination_point">İlk ara nokta olarak ekle</string>
-    <string name="replace_destination_point">Varış noktasını yenisiyle değiştir</string>
+    <string name="replace_destination_point">Varış noktasını değiştir</string>
     <string name="new_destination_point_dialog">Varış noktası halihazırda ayarlı:</string>
     <string name="target_points">Varış noktaları</string>
     <string name="intermediate_point_too_far">Ara hedef %1$s çok uzak en yakın yol var.</string>
@@ -726,7 +726,7 @@
 	<string name="driving_region_descr">Sürüş bölgesini seç: ABD, Avrupa, İngiltere, Asya ve Diğerleri.</string>
 	<string name="driving_region">Sürüş bölgesi</string>
 	<string name="driving_region_japan">Japonya</string>
-	<string name="driving_region_us">Amerika</string>
+	<string name="driving_region_us">Birleşik Devletler</string>
 	<string name="driving_region_canada">Kanada</string>
 	<string name="driving_region_europe_asia">Avrupa, Asya, Latin Amerika ve benzeri</string>
 	<string name="driving_region_uk">Birleşik Krallık (İngiltere), Hindistan ve benzerleri</string>
@@ -2054,7 +2054,7 @@
     <string name="add_time_span">Zaman aralığı ekle</string>
     <string name="road_blocked">Yol kapalı</string>
     <string name="shared_string_select">Seç</string>
-    <string name="switch_start_finish">Rotayı tersine çevir.</string>
+    <string name="switch_start_finish">Rotayı tersine çevir</string>
     <string name="rendering_attr_hideIcons_name">POI simgeleri</string>
     <string name="number_of_contributors">Katkıcı sayısı</string>
     <string name="number_of_edits">Değişiklik sayısı</string>
@@ -2580,25 +2580,26 @@
     <string name="lang_es_us">İspanyolca (Amerikan)</string>
     <string name="moving_time">Hareket Zamanı</string>
     <string name="purchase_dialog_title">Plan seçin</string>
-    <string name="purchase_dialog_travel_description">Seyahat makalelerini çevrimdışı okumak için, aşağıda bulunan nesnelerden bir tanesini satın almalısınız.</string>
+    <string name="purchase_dialog_travel_description">Seyahat makalelerini çevrimdışı okumak için, aşağıdakilerden birini satın alın:</string>
     <string name="purchase_dialog_subtitle">Uygun nesneyi seçin:</string>
     <string name="shared_string_dont">Yapma</string>
     <string name="shared_string_do">Yap</string>
     <string name="shared_string_only_with_wifi">Sadece Kablosuz\'la</string>
     <string name="wikivoyage_download_pics">Resimleri İndir</string>
-    <string name="wikivoyage_download_pics_descr">"Makalelerdeki resimleri indirebilir, gösterebilir ve cihazda depolayabiliriz, bu sayede onlara çevrimdışıyken erişebilirsiniz. Bu ayarı her zaman  Gezinti &gt; Seçenekler sekmesinden değiştirebilirsiniz."</string>
-    <string name="shared_string_wifi_only">Sadece Kablosuz</string>
+    <string name="wikivoyage_download_pics_descr">"Makalelerdeki resimler çevrim dışı kullanım için indirilebilir.
+\n Bu ayarı her zaman  \'Gezinti\' → \'Seçenekler\' den değiştirebilirsiniz."</string>
+    <string name="shared_string_wifi_only">Sadece Kablosuz\'la</string>
     <string name="select_travel_book">Seyahat kitabı seçin</string>
     <string name="shared_string_travel_book">Seyahat kitabı</string>
-    <string name="online_webpage_warning">Bu sayfa sadece çevrimdışı kullanılabilir. Tarayıcıda açmak ister misiniz?</string>
+    <string name="online_webpage_warning">Sayfa yalnızca çevrim içi kullanılabilir. Tarayıcıda açılsın mı?</string>
     <string name="images_cache">Resimler önbelleği</string>
     <string name="delete_search_history">Arama geçmisini sil</string>
-    <string name="download_images">Resimleri indir</string>
-    <string name="download_maps_travel">Seyahat haritaları</string>
+    <string name="download_images">Resimleri göster</string>
+    <string name="download_maps_travel">Seyahat rehberleri</string>
     <string name="article_removed">Makale kaldırıldı</string>
-    <string name="wikivoyage_search_hint">Arayın: Ülke, Şehir, Eyalet</string>
+    <string name="wikivoyage_search_hint">Ara: Ülke, şehir, eyalet</string>
     <string name="shared_string_read">Oku</string>
-    <string name="saved_articles">Kaydedilmiş makaleler</string>
+    <string name="saved_articles">İşaretlenmiş makaleler</string>
     <string name="shared_string_explore">Gezin</string>
     <string name="shared_string_contents">İçerikler</string>
     <string name="shared_string_result">Sonuç</string>
@@ -2609,4 +2610,5 @@
     <string name="distance_farthest">Uzaklık: En uzak önce</string>
     <string name="distance_nearest">Uzaklık: En yakın önce</string>
     <string name="get_unlimited_access">Sınırsız erişim alın</string>
-    </resources>
+    <string name="dd_dddddd_format">DD,DDDDDD°</string>
+	</resources>
