@@ -1282,6 +1282,12 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 								line2MeasuredHeight = line2.getMeasuredHeight();
 							}
 
+							int line3Height = 0;
+							View line3Container = view.findViewById(R.id.additional_info_row);
+							if (line3Container.getVisibility() == View.VISIBLE) {
+								line3Height = line3Container.getMeasuredHeight();
+							}
+
 							int titleButtonHeight = 0;
 							View titleButtonContainer = view.findViewById(R.id.title_button_container);
 							if (titleButtonContainer.getVisibility() == View.VISIBLE) {
@@ -1304,12 +1310,6 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 							View titleProgressContainer = view.findViewById(R.id.title_progress_container);
 							if (titleProgressContainer.getVisibility() == View.VISIBLE) {
 								titleProgressHeight = titleProgressContainer.getMeasuredHeight();
-							}
-
-							int line3Height = 0;
-							View line3Container = view.findViewById(R.id.additional_info_row);
-							if (line3Container.getVisibility() == View.VISIBLE) {
-								line3Height = line3Container.getMeasuredHeight();
 							}
 
 							if (menuTopViewHeight != 0) {
