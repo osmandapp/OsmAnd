@@ -3257,6 +3257,6 @@
     <string name="shared_string_bookmark">نشانک</string>
     <string name="off_road_render_descr">مناسب رانندگی برون‌جاده‌ای (آفرود). بهتر است با زیرلایهٔ سبزرنگ از تصاویر ماهواره‌ای استفاده شود.
 \nویژگی‌های اصلی: ضخامت کمتر برای راه‌های اصلی. ضخامت بیشتر برای trackها،‏ pathها، مسیرهای دوچرخه و سایر مسیرها. بر پایهٔ سبک Topo است.</string>
-    <string name="access_intermediate_arrival_time">ساعت رسیدن به نقطهٔ میانی</string>
-    <string name="map_widget_intermediate_time">زمان متوسط</string>
+    <string name="access_intermediate_arrival_time">زمان رسیدن به میانی</string>
+    <string name="map_widget_intermediate_time">مدت تا میانی</string>
     </resources>

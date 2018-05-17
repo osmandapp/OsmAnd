@@ -45,7 +45,7 @@
 	<string name="save_track_to_gpx_globally_headline">GPX-Aufzeichnung bei Bedarf</string>
 	<string name="save_track_to_gpx_globally_descr">Generelle Positionserfassung kann mit der Schaltfläche \'GPX-Aufzeichnung\' direkt auf dem Kartenbildschirm aktiviert oder deaktiviert werden.</string>
 	<string name="save_current_track">Track jetzt speichern</string>
-	<string name="save_current_track_descr">Aktuellen Track jetzt auf Speicherkarte speichern.</string>
+	<string name="save_current_track_descr">Aktuellen Track jetzt als GPX-Datei speichern.</string>
 	<string name="save_track_to_gpx">Während Navigation autom. Track aufzeichnen</string>
 	<string name="save_track_to_gpx_descrp">Während der Navigation wird automatisch ein GPX-Track im Track-Ordner gespeichert.</string>
 	<string name="save_track_interval_globally">Aufzeichnungsintervall</string>
@@ -393,7 +393,7 @@
 	<string name="search_position_map_view">Aktueller Kartenmittelpunkt</string>
 	<string name="select_search_position">Ausgangspunkt:</string>
 	<string name="context_menu_item_search">In der Nähe suchen</string>
-	<string name="shared_string_save_as_gpx">Als neuen GPX-Track speichern</string>
+	<string name="shared_string_save_as_gpx">Als neue GPX-Datei speichern</string>
 	<string name="route_successfully_saved_at">Route erfolgreich gespeichert als \'%1$s\'.</string>
 	<string name="filename_input">Dateiname:</string>
 	<string name="file_with_name_already_exist">Datei mit gleichem Namen besteht bereits.</string>
@@ -618,7 +618,7 @@
 	<string name="voice">Sprachansage</string>
 	<string name="no_vector_map_loaded">Offline-Daten wurden nicht geladen</string>
 	
-	<string name="layer_gpx_layer">GPX-Track…</string>
+	<string name="layer_gpx_layer">GPX-Dateien…</string>
 	<string name="error_reading_gpx">GPX-Daten konnten nicht gelesen werden</string>
 	<string name="vector_data">Offline-Vektor-Karten</string>
 	<string name="transport_context_menu">Suche nach Verbindung an Haltestelle</string>
@@ -785,7 +785,7 @@
 	<string name="loading_cities">Lade Orte…</string>
 	
 	<string name="poi">POI</string>
-	<string name="error_occurred_saving_gpx">GPX-Spur konnte nicht gespeichert werden</string>
+	<string name="error_occurred_saving_gpx">GPX-Datei konnte nicht gespeichert werden</string>
 	<string name="error_calculating_route">Route konnte nicht berechnet werden</string>
 	<string name="error_calculating_route_occured">Route konnte nicht berechnet werden</string>
 	<string name="empty_route_calculated">Berechnete Route ist leer</string>
@@ -797,7 +797,7 @@
 	<string name="loading_data">Daten werden geladen…</string>
 	<string name="reading_indexes">Lese lokale Daten…</string>
 	<string name="previous_run_crashed">Die vorherige Programminstanz war abgestürzt. Logdatei unter {0}. Fehler bitte melden und Logdatei anhängen.</string>
-	<string name="saving_gpx_tracks">GPX-Track wird auf der SD-Karte gespeichert…</string>
+	<string name="saving_gpx_tracks">GPX-Datei wird gespeichert…</string>
 	<string name="finished_task">Abgeschlossen</string>
 	
 	<string name="use_online_routing_descr">Internet zur Routenberechnung verwenden.</string>
@@ -1173,7 +1173,7 @@ Proportionaler Speicher %4$s MB (Android Limit %5$s MB, Dalvik %6$s MB).</string
 	<string name="osmand_distance_planning_plugin_name">Entfernungsmesser &amp; Streckenplaner</string>
 	<string name="shared_string_do_not_show_again">Nicht erneut anzeigen</string>
 	
-	<string name="distance_measurement_load_gpx">Vorhandene GPX-Spur öffnen</string>
+	<string name="distance_measurement_load_gpx">Vorhandene GPX-Datei öffnen</string>
 	<string name="search_street_in_neighborhood_cities">Straßennamen in benachbarten Orten suchen</string>
 	<string name="intermediate_items_sort_by_distance">Tür-zu-Tür sortieren</string>
 	<string name="use_distance_measurement_help">* Tippen, um einen Punkt zu setzen. 
@@ -1332,7 +1332,7 @@ Proportionaler Speicher %4$s MB (Android Limit %5$s MB, Dalvik %6$s MB).</string
 	<string name="show_zoom_buttons_navigation_descr">Zoomtasten bei Navigation anzeigen.</string>
 	<string name="show_zoom_buttons_navigation">Zoomtasten anzeigen</string>
 	<string name="no_index_file_to_download">Keine Downloads gefunden, bitte die Internet-Verbindung überprüfen.</string>
-	<string name="none_selected_gpx">Keine GPX-Datei ausgewählt. Zum Auswählen lange auf einen vorhandenen Track drücken.</string>
+	<string name="none_selected_gpx">Keine GPX-Datei ausgewählt. Auswahl durch langes Drücken auf eine vorhandenen Datei.</string>
 	
 	<string name="local_index_select_gpx_file">Zum Anzeigen auswählen</string>
 	<string name="rendering_attr_hideBuildings_name">Gebäude</string>
@@ -1496,7 +1496,7 @@ Proportionaler Speicher %4$s MB (Android Limit %5$s MB, Dalvik %6$s MB).</string
 	<string name="osmo_edit_color">Darstellungsfarbe</string>
 	
 
-	<string name="gpx_file_is_empty">GPX-Track ist leer</string>
+	<string name="gpx_file_is_empty">GPX-Datei ist leer</string>
 	<string name="gpx_info_waypoints">Wegpunkte: %1$s </string>
 	<string name="gpx_info_distance">Strecke: %1$s (%2$s Punkte) </string>
 	<string name="gpx_info_start_time">Startzeit: %1$tF, %1$tT </string>
@@ -1515,7 +1515,7 @@ Proportionaler Speicher %4$s MB (Android Limit %5$s MB, Dalvik %6$s MB).</string
 	<string name="gpx_selection_route_points">%1$s \nRoutenpunkte %2$s</string>
 	<string name="gpx_selection_points">%1$s \nPunkte</string>
 	<string name="gpx_selection_track">%1$s 
-\nSpur %2$s</string>
+\nTrack %2$s</string>
 	
 	<string name="gpx_split_interval">Trennungsintervall</string>
 	<string name="gpx_info_subtracks">Track-Segmente: %1$s</string>
@@ -2299,7 +2299,7 @@ Derzeit sind nur {2} MB verfügbar.</string>
     <string name="no_inet_connection_desc_map">Erforderlich, um Karten herunterzuladen.</string>
     <string name="search_location">Standort wird gesucht …</string>
     <string name="storage_free_space">Freier Speicherplatz</string>
-    <string name="storage_place_description">OsmAnd speichert Daten (Karten, Tracks, usw.) in \'%1$s\'.</string>
+    <string name="storage_place_description">OsmAnd speichert Daten (Karten, GPX-Dateien, usw.) in \'%1$s\'.</string>
     <string name="give_permission">Berechtigung erteilen</string>
     <string name="allow_access_location">Standortbestimmung zulassen</string>
     <string name="first_usage_greeting">Erhalten Sie Wegbeschreibungen und entdecken Sie neue Orte ohne Internetverbindung</string>
@@ -2373,9 +2373,9 @@ Derzeit sind nur {2} MB verfügbar.</string>
     
     <string name="gpx_appearance">Aussehen</string>
     <string name="route_calculation">Routenberechnung</string>
-    <string name="gpx_no_tracks_title">Sie haben noch keine Tracks</string>
-    <string name="gpx_no_tracks_title_folder">Tracks können dem Ordner hinzugefügt werden</string>
-    <string name="gpx_add_track">Track hinzufügen</string>
+    <string name="gpx_no_tracks_title">Sie haben noch keine GPX-Dateien</string>
+    <string name="gpx_no_tracks_title_folder">GPX-Dateien können dem Ordner hinzugefügt werden</string>
+    <string name="gpx_add_track">GPX-Datei hinzufügen</string>
     <string name="upload_poi">POI hochladen</string>
     <string name="route_roundabout_short">Nehmen Sie die %1$d Ausfahrt</string>
     <string name="search_map_hint">Suche Stadt oder Region</string>
@@ -2504,8 +2504,8 @@ Abgedeckte Fläche: %1$s x %2$s</string>
 \n und mehr…</string>
 	
     
-    <string name="routing_attr_height_obstacles_name">Höhendaten verwenden</string>
-    <string name="routing_attr_height_obstacles_description">Von SRTM, ASTER und EU-DEM bereitgestellte Geländeprofildaten verwenden.</string>
+    <string name="routing_attr_height_obstacles_name">Höhendaten berücksichtigen</string>
+    <string name="routing_attr_height_obstacles_description">Geländeprofil berücksichtigen (SRTM, ASTER und EU-DEM Daten).</string>
 
     <string name="rendering_attr_depthContours_name">Nautische Tiefenlinien</string>
 	<string name="rendering_attr_depthContours_description">Tiefenlinien und -punkte einblenden.</string>
@@ -2518,10 +2518,10 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="total_distance">Gesamtstrecke</string>
     <string name="routing_attr_driving_style_name">Fahrweise</string>
     
-    <string name="select_gpx_folder">Track-Ordner wählen</string>
+    <string name="select_gpx_folder">GPX-Datei-Ordner wählen</string>
     <string name="file_can_not_be_moved">Datei kann nicht verschoben werden.</string>
     <string name="shared_string_move">Verschieben</string>
-    <string name="shared_string_tracks">Spuren</string>
+    <string name="shared_string_tracks">Tracks</string>
     <string name="shared_string_time_moving">Zeit in Bewegung</string>
     <string name="shared_string_time_span">Dauer</string>
     <string name="shared_string_max">Max</string>
@@ -2530,10 +2530,10 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="shared_string_color">Farbe</string>
     <string name="max_speed">Höchstgeschwindigkeit</string>
     <string name="average_speed">Durchschnittsgeschwindigkeit</string>
-    <string name="gpx_track">Spur</string>
+    <string name="gpx_track">Track</string>
     <string name="points_delete_multiple_succesful">Punkt(e) gelöscht.</string>
     <string name="points_delete_multiple">Es werden %1$d Punkt(e) gelöscht. Fortfahren?</string>
-    <string name="track_points_category_name">Markante Punkte auf dieser Route</string>
+    <string name="track_points_category_name">Wegpunkte, POI, markierte Orte</string>
     <string name="route_points_category_name">Richtungsänderungen entlang dieser Route</string>
     <string name="add_new_folder">Neuen Ordner hinzufügen</string>
     <string name="shared_string_slope">Steigung</string>
@@ -2828,14 +2828,14 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="choose_navigation_type">Navigationsprofil wählen</string>
     <string name="add_route_points">Routenpunkte hinzufügen</string>
     <string name="add_line">Strecke hinzufügen</string>
-    <string name="empty_state_my_tracks">Tracks hinzufügen und aufzeichnen</string>
-    <string name="empty_state_my_tracks_desc">Tracks aufzeichnen oder importieren.</string>
+    <string name="empty_state_my_tracks">GPX-Dateien hinzufügen</string>
+    <string name="empty_state_my_tracks_desc">GPX-Dateien importieren oder Tracks aufzeichnen.</string>
     <string name="empty_state_favourites">Favoriten hinzufügen</string>
-    <string name="empty_state_favourites_desc">Importieren oder markieren Sie Favoriten auf der Karte.</string>
-    <string name="import_track">Track importieren</string>
+    <string name="empty_state_favourites_desc">Favoriten importieren, oder durch Markieren von Punkten auf der Karte erstellen.</string>
+    <string name="import_track">GPX-Datei importieren</string>
     <string name="import_track_desc">Die Datei %1$s enthält keine Wegpunkte, soll sie als Track importiert werden?</string>
     <string name="move_point">Punkt verschieben</string>
-    <string name="add_segment_to_the_track">Zu einem GPX-Track hinzufügen</string>
+    <string name="add_segment_to_the_track">Zu einer GPX-Datei hinzufügen</string>
 <string name="do_not_use_animations">Keine Animationen</string>
     <string name="do_not_use_animations_descr">Deaktiviert Animationen in der App.</string>
     <string name="keep_showing_on_map">Weiterhin auf der Karte anzeigen</string>
@@ -2873,8 +2873,8 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="shared_string_sort">Sortieren</string>
     <string name="coordinate_input">Koordinateneingabe</string>
     <string name="is_saved">gespeichert</string>
-    <string name="marker_save_as_track_descr">Markierungen in die hier festgelegte Datei exportieren:</string>
-    <string name="marker_save_as_track">Als Track speichern</string>
+    <string name="marker_save_as_track_descr">Markierungen in die hier festgelegte GPX-Datei exportieren:</string>
+    <string name="marker_save_as_track">Als GPX-Datei speichern</string>
     <string name="move_to_history">In den Verlauf verschieben</string>
     <string name="group_will_be_removed_after_restart">Die Gruppe wird beim nächsten Start der App entfernt.</string>
     <string name="show_passed">Passierte anzeigen</string>
@@ -2930,7 +2930,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="wrong_input">Falsche Eingabe</string>
 	<string name="enter_new_name">Neuen Namen eingeben</string>
 	<string name="shared_string_back">Zurück</string>
-	<string name="view">Ansicht</string>
+	<string name="view">Ansehen</string>
 	<string name="waypoints_added_to_map_markers">Wegpunkte zu Kartenmarkierung hinzugefügt</string>
 	<string name="wrong_format">Falsches Format</string>
     <string name="tap_on_map_to_hide_interface">Vollbildmodus</string>
@@ -2943,7 +2943,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="shared_string_right">Rechts</string>
     <string name="shared_string_left">Links</string>
     <string name="shared_string_paste">Einfügen</string>
-    <string name="looking_for_tracks_with_waypoints">Suche nach Tracks mit Wegpunkten</string>
+    <string name="looking_for_tracks_with_waypoints">Suche nach GPX-Dateien mit Wegpunkten</string>
     <string name="shared_string_more_without_dots">Mehr</string>
     <string name="appearance_on_the_map">Darstellung auf der Karte</string>
     <string name="favourites_group">Favoritenkategorie</string>
@@ -2958,7 +2958,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="go_to_next_field">Nächstes Feld</string>
     <string name="rename_marker">Markierung umbenennen</string>
     <string name="mark_passed">Markierung passiert</string>
-    <string name="track_waypoints">Track-Wegpunkte</string>
+    <string name="track_waypoints">GPX-Wegpunkte</string>
     <string name="modify_the_search_query">Suchanfrage verändern.</string>
     <string name="empty_state_osm_edits">Erstellen oder ändern von OSM-Objekten</string>
     <string name="empty_state_osm_edits_descr">OSM-POI erstellen oder verändern, OSM-Notizen eröffnen oder bearbeiten, und aufgezeichnete GPX-Dateien hinzufügen.</string>
@@ -2970,10 +2970,16 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="empty_state_av_notes">Machen Sie sich Notizen!</string>
     <string name="by_date">Nach Datum</string>
     <string name="by_type">Nach Typ</string>
-    <string name="import_gpx_file_description">kann als Favorit oder Track importiert werden.</string>
+    <string name="import_gpx_file_description">kann als Favoriten oder GPX-Datei importiert werden.</string>
     <string name="empty_state_av_notes_desc">Audio-, Video- oder Fotonotizen zu jedem Punkt auf der Karte über Bedienelement oder Kontextmenü hinzufügen.</string>
     <string name="notes_by_date">Notizen nach Datum</string>
     <string name="tap_on_map_to_hide_interface_descr">Ein Tippen auf die Karte schaltet die Steuerschaltflächen und Bedienelemente um.</string>
+    <string name="release_3_0">
+	• Neu: OsmAnd Travel: Globale offline Wikivoyage Reiseführer-Funktionalität\n\n
+	• Wikipedia: Neues Layout, anklickbare Links, Bilder\n\n
+	• Unterstützung der Gruppierung von GPX Wegpunkten\n\n
+	• Kartenmarkierungen: Import auswählbarer Gruppen aus GPX-Dateien, Koordinateneingabe, neues Layout\n\n
+	• OsmAnd Live Daten unterstützen nun alle OsmAnd Funktionen</string>
     <string name="one_tap_active">Mit einem Tippen aktiv</string>
     <string name="what_is_here">Was ist hier:</string>
     <string name="without_time_limit">Ohne Zeitbegrenzung</string>
@@ -2992,11 +2998,11 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="av_locations_all_desc">GPX-Datei mit Koordinaten und Daten aller Notizen.</string>
     <string name="shared_string_actions">Aktionen</string>
     <string name="shared_string_marker">Markierung</string>
-    <string name="add_track_to_markers_descr">Durch Auswahl eines dieser Tracks können die darin enthaltenen Wegpunkte zu den Markierungen hinzuzugefügt werden.</string>
+    <string name="add_track_to_markers_descr">Wählen Sie eine GPX-Datei für das Hinzufügen der enthaltenen Punkte zu den Markierungen.</string>
     <string name="add_favourites_group_to_markers_descr">Wählen Sie eine Favoritenkategorie aus, die Sie den Markierungen hinzufügen möchten.</string>
-    <string name="add_group_descr">Importieren Sie Gruppen aus Favoriten oder Track-Wegpunkten.</string>
+    <string name="add_group_descr">Importieren Sie Gruppen aus Favoriten oder GPX-Wegpunkten.</string>
     <string name="empty_state_markers_active_desc">Tippen Sie \'Orte\' lang oder kurz an, tippen Sie anschließend auf das Markierungszeichen.</string>
-    <string name="empty_state_markers_groups_desc">Importieren Sie Favoritengruppen oder Track-Wegpunkte als Markierungen.</string>
+    <string name="empty_state_markers_groups_desc">Importieren Sie Favoritengruppen oder GPX-Wegpunkte als Markierungen.</string>
     <string name="show_guide_line_descr">Richtungsanzeiger von Ihrem Standort zu aktiven Markierungspunkten einblenden.</string>
     <string name="show_arrows_descr">Ein oder zwei Pfeile anzeigen, die die Richtung zu den aktiven Markierungen angeben.</string>
     <string name="distance_indication_descr">Wählen Sie aus, wie der Abstand zu aktiven Markierungen angezeigt werden soll.</string>
@@ -3065,7 +3071,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="saved_articles">Artikel mit Lesezeichen</string>
     <string name="shared_string_explore">Durchsuchen</string>
     <string name="shared_string_result">Ergebnis</string>
-    <string name="download_maps_travel">Reisekarten</string>
+    <string name="download_maps_travel">Reiseführer</string>
     <string name="shared_string_wikivoyage">Wikivoyage</string>
     <string name="article_removed">Artikel entfernt</string>
     <string name="index_item_world_wikivoyage">Weltweite Wikivoyage Artikel</string>
@@ -3075,7 +3081,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
 \nSie können diese Einstellung jederzeit in \'Durchsuchen\' → \'Optionen\' ändern.</string>
     <string name="online_webpage_warning">Seite ist nur online abrufbar. Im Webbrowser öffnen?</string>
     <string name="delete_search_history">Suchverlauf löschen</string>
-    <string name="purchase_dialog_travel_description">Um Reisebeiträge offline lesen zu können, kaufen Sie einen der folgenden Artikel:</string>
+    <string name="purchase_dialog_travel_description">Für die Offlne Reiseführerfunktionalität, kaufen Sie einen der folgenden Artikel:</string>
     <string name="purchase_dialog_subtitle">Passenden Artikel auswählen:</string>
     <string name="shared_string_dont">Nicht</string>
     <string name="shared_string_do">Tun</string>
@@ -3085,13 +3091,13 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="shared_string_travel_book">Reisebuch</string>
     <string name="images_cache">Bilder-Cache</string>
     <string name="download_images">Bilder anzeigen</string>
-    <string name="travel_card_update_descr">Neue Wikivoyage-Daten verfügbar, aktualisieren Sie sie, um sie zu nutzen.</string>
+    <string name="travel_card_update_descr">Neue Wikivoyage-Daten verfügbar, Aktualisierung möglich.</string>
 	<string name="travel_card_download_descr">Laden Sie diese Wikivoyage-Reiseführer herunter, um Artikel zu Orten auf der ganzen Welt ohne Internetverbindung anzuzeigen.</string>
 	<string name="update_is_available">Aktualisierung verfügbar</string>
 	<string name="download_file">Datei herunterladen</string>
     <string name="start_editing_card_image_text">Der kostenlose weltweite Reiseführer, den jeder bearbeiten kann.</string>
-    <string name="welcome_to_open_beta_description">Travel basiert auf Wikivoyage. Testen Sie alle Funktionen während des Open-Beta-Tests kostenlos. Danach steht Travel den Abonnenten von OsmAnd Unlimited und den Besitzern von OsmAnd+ zur Verfügung</string>
-    <string name="start_editing_card_description">Sie können und sollten jeden Artikel auf Wikivoyage bearbeiten. Teilen Sie Wissen, Erfahrung, Talent und Ihre Aufmerksamkeit</string>
+    <string name="welcome_to_open_beta_description">OsmAnd Travel basiert auf Wikivoyage. Testen Sie alle Funktionen während des Open-Beta-Tests kostenlos. Danach steht OsmAnd Travel den Abonnenten von OsmAnd Unlimited und den Besitzern von OsmAnd+ zur Verfügung.</string>
+    <string name="start_editing_card_description">Sie können und sollten Artikel auf Wikivoyage bearbeiten. Teilen Sie Wissen, Erfahrung, Talent und Ihre Aufmerksamkeit</string>
     <string name="start_editing">Bearbeitung starten</string>
     <string name="get_unlimited_access">Erhalten Sie unbegrenzten Zugang</string>
     <string name="welcome_to_open_beta">Willkommen zur Open Beta</string>
@@ -3148,5 +3154,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="default_render_descr">Universeller Stil. Vereinfachte, sauberere Darstellung in dicht besiedelten Städten. Hauptmerkmale: Höhenlinien, Routen, Oberflächenqualität, Zufahrtsbeschränkungen, Straßenschilder, Wegeführung nach SAC-Skala, Wildwassersportmerkmale.</string>
     <string name="shared_string_bookmark">Lesezeichen</string>
     <string name="off_road_render_descr">Geeignet für den Einsatz im Gelände. Geeignet für die Verwendung mit grünen Satellitenbildern als Unterlagekarte. Wichtige Punkte: Reduzierte Hauptstraßendicke, erhöhte Dicke von Strecken, Wegen, Fahrrädern und anderen Routen. Basiert auf dem \'Topo\'-Stil.</string>
-    <string name="touring_view_render_descr">Hoch detaillierter Stil für Touringzwecke. Enthält zusätzlich alle Konfigurationsoptionen des Standardstils: zeigt so viele Details wie möglich an, insbesondere alle Straßen, Wege und andere Reisemöglichkeiten. Klare visuelle Unterscheidung zwischen den verschiedenen Straßentypen, die an viele Tourenatlanten erinnern. Kontrastreiches Farbschema für den Außenbereich, Tag- und Nachtmodus.</string>
+    <string name="touring_view_render_descr">Hoch detaillierter Stil für Touringzwecke. Enthält alle Konfigurationsoptionen des Standardstils, zusätzlich: Zeigt so viele Details wie möglich an, insbesondere alle Straßen, Wege und andere Reisemöglichkeiten. Klare visuelle Unterscheidung zwischen den verschiedenen Straßentypen, ähnlich vielen Tourenatlanten. Kontrastreiches Farbschema für den Außenbereich, Tag- und Nachtmodus.</string>
+    <string name="access_intermediate_arrival_time">Ankunftszeit Zwischenziel</string>
+    <string name="map_widget_intermediate_time">Reisezeit Zwischenziel</string>
     </resources>

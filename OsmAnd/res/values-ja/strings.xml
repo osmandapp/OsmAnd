@@ -180,7 +180,7 @@ OsmAnd バージョンがインストールされています。全てのオフ�
  <string name="trace_rendering">レンダリング速度を表示</string>
      <string name="daynight_mode_day">昼固定</string>
      <string name="daynight_mode_night">夜固定</string>
-     <string name="daynight_mode_auto">日の出/日の入</string>
+     <string name="daynight_mode_auto">日の出/日の入時間を参照</string>
      <string name="daynight_mode_sensor">ライトセンサー</string>
      <string name="daynight_descr">昼/夜モード切替ルールを選択します</string>
      <string name="daynight">昼/夜モード切替</string>
@@ -454,13 +454,13 @@ POIの更新は利用できません</string>
  <string name="data_settings">データ</string>
  
  <string name="osm_settings">OSM</string>
- <string name="auto_zoom_map_descr">移動速度に従ってマップを自動ズームする際のズーム率を設定します</string>
+ <string name="auto_zoom_map_descr">移動速度を基準とした自動ズームレベルを設定します。(その間マップは現在位置と同期します)</string>
  <string name="auto_zoom_map">マップを自動ズーム</string>
  <string name="additional_settings">追加設定</string>
  <string name="settings_preset_descr">マップの表示とナビゲーション設定はプロファイルごとに記憶されます。標準で使用するプロファイルを指定してください</string>
  <string name="settings_preset">標準プロファイル</string>
  <string name="shared_string_settings">設定</string>
- <string name="save_current_track_descr">現在の経路を今すぐSDに保存します</string>
+ <string name="save_current_track_descr">現在の経路を今すぐメモリーカードに保存します。</string>
  <string name="save_current_track">現在の経路を保存</string>
  <string name="save_track_interval_descr">ナビゲーション中の経路の記録間隔を選択します</string>
  <string name="save_track_interval">ナビゲーション中の経路記録間隔</string>
@@ -692,13 +692,7 @@ POIの更新は利用できません</string>
     <string name="gpx_saved_sucessfully">GPXファイルは正常に {0} に保存されました</string>
     <string name="osmand_distance_planning_plugin_description">このプラグインはマップ画面のタップ、又は既存のGPXファイルから道順を作成したり、旅程の計画など任意の地点間の距離を測定するためのウィジェットを追加します。得られた結果はGPXファイルとして保存することができるので、後で使用することができます。</string>
     <string name="osmand_distance_planning_plugin_name">距離の計算＆計画ツール</string>
-    <string name="use_distance_measurement_help">* 地点をマークするにはタップして下さい。
- 
- * マップ上で長タップすると以前の地点を削除できます。
-
- * 地点を長押しすると詳細を見ることができます。
-
- * 測定ウィジェットをタップするとより多くのアクションを行うことができます。</string>
+    <string name="use_distance_measurement_help">* 地点をマークするにはタップして下さい。 * マップ上でロングタップすると以前の地点を削除できます。 * 地点をロングタップすると詳細を見ることができます。 * 測定ウィジェットをタップするとより多くのアクションを行うことができます。</string>
     <string name="shared_string_do_not_show_again">これ以降表示しない</string>
     <string name="distance_measurement_start_editing">編集を開始</string>
     <string name="distance_measurement_finish_editing">編集を終了</string>
@@ -718,7 +712,7 @@ POIの更新は利用できません</string>
     <string name="cancel_route">ルートをキャンセル</string>
     <string name="cancel_navigation">ナビを停止</string>
     <string name="clear_destination">選択した目的地、経由地点を削除します、よろしいですか？</string>
-    <string name="download_using_mobile_internet">現在Wi-Fiに接続されていません。現在のインターネット接続を使用したままダウンロードを続行しますか？</string>
+    <string name="download_using_mobile_internet">Wi-Fiに接続されていません。現在の接続を利用してインターネットからダウンロードを行いますか？</string>
     <string name="street_name">道路名称</string>
 	<string name="hno">家屋番号</string>
     <string name="monitoring_settings">旅程・経路記録</string>
@@ -1155,7 +1149,7 @@ POIの更新は利用できません</string>
 	<string name="native_library_not_supported">ネイティブライブラリは、このデバイスでサポートされていません。</string>
 	<string name="init_native_library">ネイティブライブラリを初期化しています…</string>
 	<string name="choose_auto_follow_route">マップの自動中心表示設定</string>
-	<string name="choose_auto_follow_route_descr">マップの自動位置調整タイミングを設定します</string>
+	<string name="choose_auto_follow_route_descr">マップの現在地との位置同期タイミングを設定します。</string>
 	
 	<string name="auto_follow_route_navigation">ナビゲーションのみ</string>
 	<string name="auto_follow_route_navigation_descr">マップの自動中心表示はナビゲーション中のみ有効です</string>
@@ -1347,7 +1341,7 @@ POIの更新は利用できません</string>
 	
 	
 	
-	<string name="keep_and_add_destination_point">より後の目的地として追加</string>
+	<string name="keep_and_add_destination_point">最終的な目的地として追加</string>
     <string name="select_gpx">GPXファイルを選択…</string>
     <string name="route_descr_select_destination">目的地を選択</string>
     <string name="shared_string_select_on_map">マップから選択</string>
@@ -1691,7 +1685,7 @@ POIの更新は利用できません</string>
     <string name="traffic_warning_calming">速度抑制</string>
     <string name="traffic_warning_speed_camera">スピードカメラ</string>
     <string name="traffic_warning">通行に関する警告</string>
-	<string name="local_index_description">選択解除または削除するには長押し、詳細を見るにはタップして下さい。現在のデバイス上のデータ(空き容量 %1$s):</string>
+	<string name="local_index_description">選択解除または削除するにはロングタップ、詳細を見るにはタップして下さい。現在のデバイス上のデータ(空き容量 %1$s):</string>
 	<string name="speed_limit_exceed">制限速度の許容範囲</string>
 	<string name="speed_limit_exceed_message">制限速度超過による警告音声の許容値を選択します</string>
 	<string name="fav_point_emoticons_message">お気に入り地点名は文字列に絵文字を含んでいるため、ファイルとして正常に保存するため %1$sという名前に変更されました。</string>
@@ -2576,12 +2570,11 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="routing_attr_short_way_description">燃費を抑えることを重視した(通常より短い)ルートにします</string>
     <string name="clear_tile_data">すべてのタイルを消去</string>
     <string name="navigate_point_olc">オープンロケーションコード(OLC)</string>
-    <string name="navigate_point_olc_info_invalid">無効なOLCです
-</string>
+    <string name="navigate_point_olc_info_invalid">OLCの値が正しくありません</string>
     <string name="navigate_point_olc_info_short">省略OLCです
 省略されてないコードを入力して下さい</string>
-    <string name="navigate_point_olc_info_area">OLCは有効で
-指定されたエリアは: %1$s x %2$sです</string>
+    <string name="navigate_point_olc_info_area">OLCの値は正常
+\n指定された場所の範囲は: %1$s x %2$sです</string>
     <string name="configure_screen_quick_action">クイックアクション</string>
 
     <string name="quick_action_item_action">アクション %d</string>
@@ -3081,12 +3074,15 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="tap_on_map_to_hide_interface">フルスクリーンモード</string>
     <string name="live_monitoring_max_interval_to_send">オンライン追跡用のバッファ指定</string>
     <string name="live_monitoring_max_interval_to_send_desrc">送信用現在地データをネット接続せずにどのくらいの時間記録するか、バッファを指定します</string>
-    <string name="release_3_0">• 停止標識の案内は運転方向を考慮するように変更
+    <string name="release_3_0">\\022 新しい旅行メニュー:インターネットに接続しなくてもWikiVoyage(ウィキボヤージュ)の旅行ガイドを見られるように変更
 \n
-\n • GPX経路に残す上昇下降値に有意かつ新しいアルゴリズムを採用
+\n• Wikipedia:新しい外見、アクティブリンク、画像の参照
 \n
-\n • 地形(上り坂)を考慮した徒歩移動時間を算出するように改良(ネイスミスのルール／Naismith\'s ruleを適用)
+\n• 経路の参照UI:経由地点グループの表示
 \n
+\n• マップマーカー:選択した複数GPXファイルからの取り込みに対応、新しい外見の採用
+\n
+\n• OsmAnd LiveサブスクリプションでOsmAndの全ての機能を利用可能に
 \n</string>
     <string name="rendering_attr_hidePOILabels_name">POIのラベル</string>
     <string name="context_menu_read_article">記事を読む</string>
@@ -3102,7 +3098,35 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="shared_string_added">追加しました</string>
     <string name="notes_by_date">日付別の注釈</string>
     <string name="add_group">グループの追加</string>
-    <string name="empty_state_osm_edits_descr">OSM用POIの作成や更新、注釈の追加などが可能で、記録したGPXファイルを用いてあなたもOSMに貢献することができます。</string>
+    <string name="empty_state_osm_edits_descr">OSM編集はPOIの作成や更新、注釈の追加などが可能です。記録したGPXファイルを用いてあなたもOSMに貢献することができるでしょう。</string>
     <string name="mark_passed">通過済みにする</string>
     <string name="add_segment_to_the_track">GPX経路に追加</string>
+    <string name="shared_string_current">現在</string>
+    <string name="shared_string_actions">その他</string>
+    <string name="release_2_9">\\022 コンテキストメニュー周りを更新: POIを開いたり閉じたりするときなど
+\n
+\n• 移動メニュー:使用可能な全てのルートが一番上に表示可能に
+\n
+\n• Wikipedia:元記事を開くためのボタンを追加し、外観を変更
+\n
+\n• ルート:ワンタップで出発地点と目的地を入れ替えられるように
+\n
+\n• メモ:タイプ、日付でのソート機能の追加
+\n
+\n• OSM編集:動作後にPOIのアイコン、名称、カテゴリを表示するように
+\n
+\n• クイックマーカー作成時の座標入力画面を作成
+\n
+\n• 一時停止標識の案内は、車の向きを考慮するように変更
+\n
+\n• GPX経路に保存する上昇／下降値の算出を新しいアルゴリズムに変更
+\n
+\n• 地形(上り坂)を考慮した徒歩移動時間の算出(ネイスミスの法則を適用)
+\n</string>
+    <string name="use_two_digits_longitude">二桁の経度を使用</string>
+    <string name="enter_lon">経度を入力してください</string>
+    <string name="enter_lat">緯度を入力</string>
+    <string name="enter_lat_and_lon">緯度と経度を入力してください</string>
+	<string name="optional_point_name">任意の地点名を入力</string>
+    <string name="subsequent_dest_description">選択した地点を、最終目的地として設定します</string>
     </resources>

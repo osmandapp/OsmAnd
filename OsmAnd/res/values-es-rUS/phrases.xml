@@ -3669,4 +3669,8 @@
 	<string name="poi_checkpoint_type_electronic">Electrónico</string>
 	<string name="poi_course">Circuito</string>
 
+<string name="poi_rock">Roca</string>
+
+	<string name="poi_end_date">Fecha de finalización</string>
+
 </resources>
