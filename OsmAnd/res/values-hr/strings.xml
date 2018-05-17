@@ -1529,7 +1529,7 @@
     <string name="shared_string_record">Snimi</string>
     <string name="gpx_logging_no_data">Nema podataka</string>
     <string name="add_new_folder">Nova mapa</string>
-    <string name="gpx_track">Trag</string>
+    <string name="shared_string_gpx_track">Trag</string>
     <string name="max_speed">Max brzina</string>
     <string name="average_speed">Prosječna brzina</string>
     <string name="shared_string_time_span">Vremensko razdoblje</string>

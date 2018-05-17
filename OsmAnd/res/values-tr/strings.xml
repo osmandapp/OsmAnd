@@ -2175,7 +2175,7 @@
     <string name="routing_attr_short_way_description">Yakıt tasarruflu yolu kullan (çoğunlukla daha kısadır).</string>
     <string name="add_new_folder">Yeni klasör ekle</string>
     <string name="points_delete_multiple_succesful">Nokta(lar) başarıyla silindi.</string>
-    <string name="gpx_track">Takip et</string>
+    <string name="shared_string_gpx_track">Takip et</string>
     <string name="track_points_category_name">Bu rotadaki dikkate değer noktalar</string>
     <string name="max_speed">Azami hız</string>
     <string name="average_speed">Ortalama hız</string>

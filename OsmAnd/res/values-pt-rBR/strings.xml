@@ -2371,7 +2371,7 @@ Pôr do Sol: %2$s</string>
     <string name="points_delete_multiple_succesful">Ponto(s) excluído(s) com êxito.</string>
     <string name="points_delete_multiple">Você vai eliminar %1$d ponto(s). Tem a certeza?</string>
     <string name="track_points_category_name">Pontos de destaque nesta rota</string>
-    <string name="gpx_track">Trilha</string>
+    <string name="shared_string_gpx_track">Trilha</string>
     <string name="max_speed">Velocidade máxima</string>
     <string name="shared_string_time_moving">Tempo em movimento</string>
     <string name="shared_string_time_span">Tempo de duração</string>

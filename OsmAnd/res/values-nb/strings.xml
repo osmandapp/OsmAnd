@@ -2268,7 +2268,7 @@
     <string name="routing_attr_relief_smoothness_factor_more_plains_name">Flatt</string>
     <string name="relief_smoothness_factor_descr">Foretrukket terreng: Flatt eller kupert.</string>
     <string name="add_new_folder">Legg til ny mappe</string>
-    <string name="gpx_track">GPX-spor</string>
+    <string name="shared_string_gpx_track">GPX-spor</string>
     <string name="routing_attr_height_obstacles_name">Bruk høydedata</string>
     <string name="routing_attr_height_obstacles_description">Bruk terrenghøydedata fra SRTM, ASTER og EU-DEM.</string>
     <string name="quick_action_bug_message">Melding</string>

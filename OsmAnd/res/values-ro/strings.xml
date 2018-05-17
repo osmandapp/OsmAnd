@@ -2103,7 +2103,7 @@
     <string name="relief_smoothness_factor_descr">Teren preferat: plat sau deluros</string>
     <string name="shared_string_slope">Pantă</string>
     <string name="add_new_folder">Adaugă dosar nou</string>
-    <string name="gpx_track">Track(pistă)</string>
+    <string name="shared_string_gpx_track">Track(pistă)</string>
     <string name="max_speed">Viteza maximă</string>
     <string name="average_speed">Viteza medie</string>
     <string name="shared_string_max">Maxim</string>

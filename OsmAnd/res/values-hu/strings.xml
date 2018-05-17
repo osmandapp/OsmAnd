@@ -2575,7 +2575,7 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="points_delete_multiple">%1$d pont törlésére készülsz. Biztosan vagy benne?</string>
     <string name="route_points_category_name">Érintendő fordulók az útvonalon</string>
     <string name="track_points_category_name">Figyelemre méltó pontok az útvonalon</string>
-    <string name="gpx_track">Nyomvonal</string>
+    <string name="shared_string_gpx_track">Nyomvonal</string>
     <string name="lang_ber">berber</string>
     <string name="do_not_send_anonymous_app_usage">Ne küldjön anonim használati statisztikát</string>
     <string name="do_not_send_anonymous_app_usage_desc">Az OsmAnd adatokat gyűjt arról, hogy az alkalmazás melyik részeit nyitod meg. Az alkalmazás soha nem küldi el a helyadataidat, és az alkalmazásba bevitt adatokat, valamint az általad megnézett, keresett vagy letöltött területek adatait sem.</string>

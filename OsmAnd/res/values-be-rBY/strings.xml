@@ -2410,7 +2410,7 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="add_new_folder">Dadać novuju tečku</string>
     <string name="points_delete_multiple_succesful">Kropka(i) paspiachova vydaleny.</string>
     <string name="points_delete_multiple">Vy źbirajeciesia vydalić %1$d kropku(i). Vy ŭpeŭnieny?</string>
-    <string name="gpx_track">Śled</string>
+    <string name="shared_string_gpx_track">Śled</string>
     <string name="max_speed">Maks. chutkaść</string>
     <string name="average_speed">Siaredniaja chutkaść</string>
     <string name="shared_string_max">Maks.</string>

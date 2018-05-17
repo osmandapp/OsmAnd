@@ -2634,7 +2634,7 @@
     <string name="points_delete_multiple">"Ви збираєтеся вилучити %1$d точку(и).  Певні?"</string>
     <string name="route_points_category_name">Повороти (точки для проходження) на цьому маршруті</string>
     <string name="track_points_category_name">Важливі точки маршруту</string>
-    <string name="gpx_track">Трек</string>
+    <string name="shared_string_gpx_track">Трек</string>
     <string name="max_speed">"Макс.  швидкість"</string>
     <string name="average_speed">Середня швидкість</string>
     <string name="shared_string_time_moving">Час в русі</string>

@@ -2588,7 +2588,7 @@ Apraksta laukumu: %1$s x %2$s</string>
     <string name="points_delete_multiple">Jūs izdzēsīsiet %1$d punktu(us). Vai turpināt?</string>
     <string name="route_points_category_name">Punkti maršruta ceļā</string>
     <string name="track_points_category_name">Izceltie punkti maršrutā</string>
-    <string name="gpx_track">Treks</string>
+    <string name="shared_string_gpx_track">Treks</string>
     <string name="max_speed">Maks. ātrums</string>
     <string name="average_speed">Vidējais ātrums</string>
     <string name="shared_string_time_moving">Laiks kustībā</string>

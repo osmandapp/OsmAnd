@@ -333,7 +333,7 @@
     <string name="points_delete_multiple_succesful">Կետ(եր)ը ջնջված է:</string>
     <string name="points_delete_multiple">Դուք մտադիր եք ջնջել կետ(եր)ը: Համոզված եք?</string>
     <string name="track_points_category_name">Ճանապարհային կետեր, POI, հատկանիշներ</string>
-    <string name="gpx_track">Տրեկ</string>
+    <string name="shared_string_gpx_track">Տրեկ</string>
     <string name="max_speed">Առավելագույն արագություն</string>
     <string name="average_speed">Միջին արագությունը</string>
     <string name="shared_string_time_moving">Ժամանակն շարժման մեջ</string>

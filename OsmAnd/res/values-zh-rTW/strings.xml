@@ -2587,7 +2587,7 @@
     <string name="shared_string_color">顏色</string>
     <string name="max_speed">最高速度</string>
     <string name="average_speed">平均速度</string>
-    <string name="gpx_track">軌跡</string>
+    <string name="shared_string_gpx_track">軌跡</string>
     <string name="points_delete_multiple_succesful">標點已刪除。</string>
     <string name="points_delete_multiple">您將要刪除 %1$d 個標點。您確定嗎？</string>
     <string name="route_points_category_name">轉為通過這條路線</string>

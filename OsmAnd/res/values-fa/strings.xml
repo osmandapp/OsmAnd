@@ -2134,7 +2134,7 @@
     <string name="shared_string_slope">شیب</string>
     <string name="points_delete_multiple">دارید %1$d نقطه را حذف می‌کنید؛ مطمئن هستید؟</string>
     <string name="track_points_category_name">نقاط میانی، نقاط محبوب (POI)، عارضه‌های دارای نام</string>
-    <string name="gpx_track">مسیر</string>
+    <string name="shared_string_gpx_track">مسیر</string>
     <string name="shared_string_time_span">مدت‌زمان</string>
     <string name="select_gpx_folder">پوشهٔ مسیر را انتخاب کنید</string>
     <string name="shared_string_tracks">Tracks</string>

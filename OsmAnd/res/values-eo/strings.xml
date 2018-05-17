@@ -2407,7 +2407,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="shared_string_color">Koloro</string>
     <string name="average_speed">Mezuma rapido</string>
     <string name="max_speed">Maksimuma rapido</string>
-    <string name="gpx_track">Spuro</string>
+    <string name="shared_string_gpx_track">Spuro</string>
     <string name="add_new_folder">Aldoni novan dosierujon</string>
     <string name="points_delete_multiple_succesful">Forigis punkto(j)n.</string>
     <string name="points_delete_multiple">%1$d punkto(j) estos forigitaj. Ĉu pluigi?</string>

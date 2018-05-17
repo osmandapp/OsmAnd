@@ -2560,7 +2560,7 @@
     <string name="full_version_thanks">شكرا لكم لاقتناء النسخة الكاملة من أوسماند.</string>
     <string name="routing_attr_driving_style_speed_name">طرق أقصر</string>
     <string name="routing_attr_driving_style_safety_name">تفضيل الشوارع الجانبية</string>
-    <string name="gpx_track">المسار</string>
+    <string name="shared_string_gpx_track">المسار</string>
     <string name="select_gpx_folder">إختر مجلد المسار</string>
     <string name="shared_string_tracks">المسارات</string>
     <string name="shared_string_time">الزمن</string>

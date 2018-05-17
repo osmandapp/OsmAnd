@@ -1353,7 +1353,7 @@
     <string name="shared_string_export">İxrac et</string>
     <string name="fav_export_confirmation">Daha əvvəl ixrac edilən favoritlər faylı artıq var. Onu əvəz etmək istəyirsiniz?</string>
     <string name="osmand_net_previously_installed">Əvvəlki OsmAnd versiyası quraşdırılıb. Bütün oflayn məlumatlar yeni proqram tərəfindən dəstəklənəcək. Amma Favorit nöqtələr köhnə proqramda ixrac edilməli və sonra yenisinə idxal edilməlidir.</string>
-    <string name="gpx_track">İz</string>
+    <string name="shared_string_gpx_track">İz</string>
     <string name="select_gpx_folder">İz qovluğunu seçin</string>
     <string name="shared_string_tracks">İzlər</string>
     <string name="gpx_no_tracks_title">Hələ hər hansı izləriniz yoxdur</string>

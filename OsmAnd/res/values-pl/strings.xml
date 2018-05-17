@@ -2608,7 +2608,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="shared_string_color">Kolor</string>
     <string name="max_speed">Maksymalna prędkość</string>
     <string name="average_speed">Średnia prędkość</string>
-    <string name="gpx_track">Ślad</string>
+    <string name="shared_string_gpx_track">Ślad</string>
     <string name="points_delete_multiple_succesful">Usunięto punkty.</string>
     <string name="points_delete_multiple">Zostanie usuniętych %1$d punktów. Kontynuować?</string>
     <string name="track_points_category_name">Ważne punkty tej trasy</string>

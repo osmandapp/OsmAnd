@@ -2593,7 +2593,7 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="shared_string_start_time">Tzucada</string>
     <string name="shared_string_end_time">Arrivu</string>
     <string name="shared_string_color">Colore</string>
-    <string name="gpx_track">Rasta</string>
+    <string name="shared_string_gpx_track">Rasta</string>
     <string name="points_delete_multiple_succesful">Puntu/os iscantzelladu/os.</string>
     <string name="points_delete_multiple">As a iscantzellare %1$d puntu/os. Seguru ses?</string>
     <string name="track_points_category_name">Puntos de coladòrgiu, puntos de interesse, elementos cun nùmenes</string>

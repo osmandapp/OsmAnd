@@ -738,7 +738,7 @@ Puntos</string>
     <string name="points_delete_multiple">Vas desaniciar %1$d puntu(os). ¿Tas seguru?</string>
     <string name="route_points_category_name">Xiros a pasar con esta ruta</string>
     <string name="track_points_category_name">Puntos destacaos d\'esta ruta</string>
-    <string name="gpx_track">Traza</string>
+    <string name="shared_string_gpx_track">Traza</string>
     <string name="max_speed">Velocidá máxima</string>
     <string name="average_speed">Velocidá media</string>
     <string name="shared_string_time_moving">Tiempu moviéndose</string>

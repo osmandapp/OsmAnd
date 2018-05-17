@@ -330,7 +330,7 @@
     <string name="points_delete_multiple">Anda akan menghapus %1$d point (s). Apakah kamu yakin?</string>
     <string name="route_points_category_name">Turn untuk meneruskan rute ini</string>
     <string name="track_points_category_name">Poin penting pada rute ini</string>
-    <string name="gpx_track">Trek</string>
+    <string name="shared_string_gpx_track">Trek</string>
     <string name="max_speed">Kecepatan maksimal</string>
     <string name="average_speed">Kecepatan rata-rata</string>
     <string name="shared_string_time_moving">Waktu berpindah</string>

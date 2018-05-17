@@ -990,7 +990,7 @@
     <string name="add_new_folder">Nowy rjadowak dodać</string>
     <string name="points_delete_multiple_succesful">Dypki su so wotstronili.</string>
     <string name="points_delete_multiple">Chceš wotstronić %1$d dypk(i). Sy sej wěsty/a?</string>
-    <string name="gpx_track">Čara</string>
+    <string name="shared_string_gpx_track">Čara</string>
     <string name="max_speed">maks. spěšnosć</string>
     <string name="average_speed">přerěznu spěšnosć</string>
     <string name="shared_string_max">maks.</string>

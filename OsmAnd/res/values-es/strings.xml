@@ -2432,7 +2432,7 @@
     <string name="points_delete_multiple">¿Borrar %1$d punto(s)?</string>
     <string name="route_points_category_name">Giros a pasar en esta ruta</string>
     <string name="track_points_category_name">Puntos de ruta, puntos de interés, características nombradas</string>
-    <string name="gpx_track">Traza</string>
+    <string name="shared_string_gpx_track">Traza</string>
     <string name="max_speed">Velocidad máxima</string>
     <string name="average_speed">Velocidad media</string>
     <string name="shared_string_time_moving">Tiempo moviéndose</string>

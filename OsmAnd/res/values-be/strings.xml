@@ -2551,7 +2551,7 @@
     <string name="points_delete_multiple_succesful">Кропка(і) выдаленая.</string>
     <string name="points_delete_multiple">Вы збіраецеся выдаліць %1$d кропак. Вы ўпэўнены?</string>
     <string name="track_points_category_name">Значныя кропкі маршрута</string>
-    <string name="gpx_track">Сьлед</string>
+    <string name="shared_string_gpx_track">Сьлед</string>
     <string name="max_speed">Макс. хуткасць</string>
     <string name="average_speed">Сярэдняя хуткасць</string>
     <string name="shared_string_time_moving">Час руху</string>

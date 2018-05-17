@@ -2247,7 +2247,7 @@ Clique no widget de medição para ver mais ações.</string>
     <string name="points_delete_multiple">Vai apagar %1$d ponto(s). Tem a certeza?</string>
     <string name="route_points_category_name">Mudanças de direção a passar neste percurso</string>
     <string name="track_points_category_name">Pontos proeminentes neste percurso</string>
-    <string name="gpx_track">Percurso</string>
+    <string name="shared_string_gpx_track">Percurso</string>
     <string name="max_speed">Velocidade máxima</string>
     <string name="average_speed">Velocidade média</string>
     <string name="shared_string_time_moving">Tempo em movimento</string>

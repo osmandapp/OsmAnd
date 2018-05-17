@@ -1963,7 +1963,7 @@ Punktar</string>
     <string name="points_delete_multiple_succesful">Punkti/punktum eytt.</string>
     <string name="points_delete_multiple">Þú ert að fara að eyða %1$d punktum. Ertu viss?</string>
     <string name="track_points_category_name">Vegpunktar, merkisstaðir, nefnd fyrirbæri</string>
-    <string name="gpx_track">Ferill</string>
+    <string name="shared_string_gpx_track">Ferill</string>
     <string name="max_speed">Mesti hraði</string>
     <string name="average_speed">Meðalhraði</string>
     <string name="shared_string_time_moving">Tími á ferð</string>

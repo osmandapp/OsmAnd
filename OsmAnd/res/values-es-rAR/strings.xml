@@ -2440,7 +2440,7 @@ Lon %2$s</string>
     <string name="shared_string_color">Color</string>
     <string name="max_speed">Velocidad máxima</string>
     <string name="average_speed">Velocidad media</string>
-    <string name="gpx_track">Traza</string>
+    <string name="shared_string_gpx_track">Traza</string>
     <string name="points_delete_multiple_succesful">Punto(s) borrado(s).</string>
     <string name="points_delete_multiple">¿Borrar %1$d punto(s)?</string>
     <string name="route_points_category_name">Giros a pasar en esta ruta</string>

@@ -2130,7 +2130,7 @@
     <string name="points_delete_multiple">Πρόκειται να διαγράψετε %1$d σημεία. Είσαστε σίγουρος;</string>
     <string name="route_points_category_name">Στροφές για προσπέραση σε αυτό το δρομολόγιο</string>
     <string name="track_points_category_name">Σημεία διαδρομής, σημεία ενδιαφέροντος, επώνυμα χαρακτηριστικά</string>
-    <string name="gpx_track">Ίχνος</string>
+    <string name="shared_string_gpx_track">Ίχνος</string>
     <string name="max_speed">Μέγιστη ταχύτητα</string>
     <string name="average_speed">Μέση ταχύτητα</string>
     <string name="shared_string_time_moving">Διάρκεια κίνησης</string>

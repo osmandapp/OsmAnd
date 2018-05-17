@@ -1548,7 +1548,7 @@
     <string name="add_new_folder">添加新文件夹</string>
     <string name="route_points_category_name">转到这条路线上</string>
     <string name="track_points_category_name">在这条路线的突出点</string>
-    <string name="gpx_track">轨迹</string>
+    <string name="shared_string_gpx_track">轨迹</string>
     <string name="shared_string_time_moving">移动的时间</string>
     <string name="shared_string_time_span">时间跨度</string>
     <string name="select_gpx_folder">选择轨迹文件夹</string>

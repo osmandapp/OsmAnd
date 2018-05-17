@@ -1297,7 +1297,7 @@
     <string name="points_delete_multiple_succesful">წერტილები წარმატებით წაიშალა.</string>
     <string name="points_delete_multiple">დარწმუნებული ბრძანდებით, რომ აპირებთ წაშალოთ %1$d წერტილ(ებ)ი?</string>
     <string name="track_points_category_name">ამ გზის მნიშვნელოვანი წერტილები</string>
-    <string name="gpx_track">მიდევნება</string>
+    <string name="shared_string_gpx_track">მიდევნება</string>
     <string name="max_speed">მაქს. სიჩქარე</string>
     <string name="average_speed">საშუალო სიჩქარე</string>
     <string name="shared_string_time_span">დროის შუალედი</string>

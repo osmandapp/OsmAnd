@@ -2655,7 +2655,7 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="points_delete_multiple_succesful">ポイントは正常に削除されました。</string>
     <string name="points_delete_multiple">%1$d個のポイントを削除します。よろしいですか？</string>
     <string name="track_points_category_name">このルートで重要とされた地点(マーカー)一覧</string>
-    <string name="gpx_track">経路</string>
+    <string name="shared_string_gpx_track">経路</string>
     <string name="get_for_month">月額</string>
     <string name="favorite_group_name">グループ名</string>
     <string name="change_color">色を変更</string>

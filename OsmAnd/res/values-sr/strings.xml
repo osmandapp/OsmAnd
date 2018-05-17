@@ -1476,7 +1476,7 @@
     <string name="points_delete_multiple">Избрисаћете %1$d тачку(е). Да ли сте сигурни?</string>
     <string name="route_points_category_name">Број скретања на овом путу</string>
     <string name="track_points_category_name">Истакнуте тачке на овом путу</string>
-    <string name="gpx_track">Путања</string>
+    <string name="shared_string_gpx_track">Путања</string>
     <string name="max_speed">Највећа брзина</string>
     <string name="average_speed">Просечна брзина</string>
     <string name="shared_string_time_moving">Време кретања</string>

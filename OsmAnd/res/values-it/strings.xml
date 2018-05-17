@@ -2643,7 +2643,7 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="points_delete_multiple">Stai cancellando %1$d punto(i). Confermi?</string>
     <string name="route_points_category_name">Svolte di questo percorso</string>
     <string name="track_points_category_name">Punti importanti di questo percorso</string>
-    <string name="gpx_track">Traccia</string>
+    <string name="shared_string_gpx_track">Traccia</string>
     <string name="max_speed">Velocità massima</string>
     <string name="add_new_folder">Aggiungi una nuova cartella</string>
     <string name="shared_string_slope">Pendenza</string>
