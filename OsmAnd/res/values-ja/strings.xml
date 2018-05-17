@@ -180,7 +180,7 @@ OsmAnd バージョンがインストールされています。全てのオフ�
  <string name="trace_rendering">レンダリング速度を表示</string>
      <string name="daynight_mode_day">昼固定</string>
      <string name="daynight_mode_night">夜固定</string>
-     <string name="daynight_mode_auto">日の出/日の入時間を参考</string>
+     <string name="daynight_mode_auto">日の出/日の入時間を参照</string>
      <string name="daynight_mode_sensor">ライトセンサー</string>
      <string name="daynight_descr">昼/夜モード切替ルールを選択します</string>
      <string name="daynight">昼/夜モード切替</string>
