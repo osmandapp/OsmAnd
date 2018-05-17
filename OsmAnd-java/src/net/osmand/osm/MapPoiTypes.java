@@ -179,21 +179,26 @@ public class MapPoiTypes {
 			if (skipNonEditable && pc.isNotEditableOsm()) {
 				continue;
 			}
-			for (PoiType pt : pc.getPoiTypes()) {
-				if (pt.isReference()) {
-					continue;
-				}
-				if (pt.getBaseLangType() != null) {
-					continue;
-				}
-				if (skipNonEditable && pt.isNotEditableOsm()) {
-					continue;
-				}
-				translation.put(pt.getKeyName().replace('_', ' ').toLowerCase(), pt);
-				translation.put(pt.getTranslation().toLowerCase(), pt);
-			}
+			addPoiTypesTranslation(skipNonEditable, translation, pc);
 		}
 		return translation;
+	}
+
+
+	private void addPoiTypesTranslation(boolean skipNonEditable, Map<String, PoiType> translation, PoiFilter pf) {
+		for (PoiType pt : pf.getPoiTypes()) {
+			if (pt.isReference()) {
+				continue;
+			}
+			if (pt.getBaseLangType() != null) {
+				continue;
+			}
+			if (skipNonEditable && pt.isNotEditableOsm()) {
+				continue;
+			}
+			translation.put(pt.getKeyName().replace('_', ' ').toLowerCase(), pt);
+			translation.put(pt.getTranslation().toLowerCase(), pt);
+		}
 	}
 
 	public List<AbstractPoiType> getAllTypesTranslatedNames(StringMatcher matcher) {
@@ -584,6 +589,9 @@ public class MapPoiTypes {
 		tp.setLang(lang);
 		tp.setOsmTag(otag);
 		tp.setOsmValue(parser.getAttributeValue("", "value"));
+		tp.setOsmEditTagValue(parser.getAttributeValue("", "edit_tag"),
+				parser.getAttributeValue("", "edit_value"));
+		
 		tp.setOsmTag2(parser.getAttributeValue("", "tag2"));
 		tp.setOsmValue2(parser.getAttributeValue("", "value2"));
 		tp.setText("text".equals(parser.getAttributeValue("", "type")));

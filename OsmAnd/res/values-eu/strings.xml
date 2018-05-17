@@ -2945,9 +2945,6 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="shared_string_without_name">Izenik gabe</string>
     <string name="av_locations_selected_desc">Hautatutako oharren koordenatuak eta datuak dituen GPX fitxategia.</string>
     <string name="av_locations_all_desc">Ohar guztien koordenatuak eta datuak dituen GPX fitxategia.</string>
-    <string name="release_3_0">\\022 
-\n
-\n</string>
     <string name="modify_the_search_query">Aldatu bilaketaren galdera.</string>
     <string name="shared_string_actions">Ekintzak</string>
     <string name="shared_string_marker">Markatzailea</string>

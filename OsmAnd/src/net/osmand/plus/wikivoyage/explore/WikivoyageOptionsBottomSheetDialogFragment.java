@@ -103,7 +103,7 @@ public class WikivoyageOptionsBottomSheetDialogFragment extends MenuBottomSheetD
 					@Override
 					public void onClick(View v) {
 						new WebView(getContext()).clearCache(true);
-						PicassoUtils.clearAllPicassoCache();
+						PicassoUtils.getPicasso(getMyApplication()).clearAllPicassoCache();
 						sendResult(CACHE_CLEARED);
 						dismiss();
 					}

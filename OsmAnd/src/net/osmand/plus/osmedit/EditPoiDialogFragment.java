@@ -459,8 +459,8 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 		if (poiTypeTag != null) {
 			final PoiType poiType = editPoiData.getAllTranslatedSubTypes().get(poiTypeTag.trim().toLowerCase());
 			if (poiType != null) {
-				node.putTagNoLC(poiType.getOsmTag(), poiType.getOsmValue());
-				node.removeTag(EditPoiData.REMOVE_TAG_PREFIX + poiType.getOsmTag());
+				node.putTagNoLC(poiType.getEditOsmTag(), poiType.getEditOsmValue());
+				node.removeTag(EditPoiData.REMOVE_TAG_PREFIX + poiType.getEditOsmTag());
 				if (poiType.getOsmTag2() != null) {
 					node.putTagNoLC(poiType.getOsmTag2(), poiType.getOsmValue2());
 					node.removeTag(EditPoiData.REMOVE_TAG_PREFIX + poiType.getOsmTag2());
@@ -580,11 +580,16 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 					if(!s.getKeyName().contains("osmand")) {
 						addMapEntryAdapter(subCategories, s.getKeyName().replace('_', ' '), s);
 					}
+					if(!Algorithms.isEmpty(s.getEditOsmValue())) {
+						addMapEntryAdapter(subCategories, s.getEditOsmValue().replace('_', ' '), s);
+					}
 				}
 			}
 		}
 		for (Map.Entry<String, PoiType> s : editPoiData.getAllTranslatedSubTypes().entrySet()) {
-			addMapEntryAdapter(subCategories, s.getKey(), s.getValue());
+			if(!s.getKey().contains("osmand")) {
+				addMapEntryAdapter(subCategories, s.getKey(), s.getValue());
+			}
 		}
 		final ArrayAdapter<Object> adapter;
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {

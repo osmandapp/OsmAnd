@@ -394,8 +394,8 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 				// check whether this is node (because id of node could be the same as relation)
 				if (entity != null && MapUtils.getDistance(entity.getLatLon(), n.getLocation()) < 50) {
 					PoiType poiType = n.getType().getPoiTypeByKeyName(n.getSubType());
-					if(poiType.getOsmValue().equals(entity.getTag(poiType.getOsmTag()))) {
-						entity.removeTag(poiType.getOsmTag());
+					if(poiType.getEditOsmValue().equals(entity.getTag(poiType.getEditOsmTag()))) {
+						entity.removeTag(poiType.getEditOsmTag());
 						entity.putTagNoLC(EditPoiData.POI_TYPE_TAG, poiType.getTranslation());
 					} else {
 						// later we could try to determine tags

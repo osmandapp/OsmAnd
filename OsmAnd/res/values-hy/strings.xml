@@ -2632,8 +2632,7 @@
     <string name="additional_actions">Լրացուցիչ գործողություններ</string>
     <string name="av_locations_selected_desc">GPX ֆայլը կոորդինատներով և ընտրված գրառումների տվյալներով:</string>
     <string name="av_locations_all_desc">GPX ֆայլը կոորդինատներով և բոլոր նշումների տվյալները։</string>
-    <string name="release_3_0">\\022 
-\n
+    <string name="release_3_0"> 
 \nՆոր Ճամփորդության մենյու. Դիտեք WikiVoyage- ի հոդվածները առանց ինտերնետի օգտագործման
 \n
 \n • Wikipedia՝ նոր տեսք, ակտիվ հղումներ, պատկերներ

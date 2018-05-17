@@ -49,7 +49,7 @@ public class SavedArticlesTabFragment extends BaseOsmAndFragment implements Trav
 				FragmentActivity activity = getActivity();
 				if (activity != null) {
 					FragmentManager fm = activity.getSupportFragmentManager();
-					WikivoyageArticleDialogFragment.showInstance(app, fm, article.getTripId(), article.getLang());
+					WikivoyageArticleDialogFragment.showInstance(app, fm, article.getTitle(), article.getLang());
 				}
 			}
 		});

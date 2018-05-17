@@ -10,14 +10,15 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.IndexItem;
+import net.osmand.plus.wikivoyage.explore.travelcards.TravelDownloadUpdateCard.DownloadUpdateVH;
 
+import java.lang.ref.WeakReference;
 import java.util.List;
 
 public class TravelNeededMapsCard extends BaseTravelCard {
@@ -29,7 +30,7 @@ public class TravelNeededMapsCard extends BaseTravelCard {
 
 	private Drawable downloadIcon;
 	private Drawable cancelIcon;
-
+	private WeakReference<NeededMapsVH> ref;
 	private CardListener listener;
 	private View.OnClickListener onItemClickListener;
 
@@ -57,62 +58,73 @@ public class TravelNeededMapsCard extends BaseTravelCard {
 	public void bindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder) {
 		if (viewHolder instanceof NeededMapsVH) {
 			NeededMapsVH holder = (NeededMapsVH) viewHolder;
-
+			ref = new WeakReference<NeededMapsVH>(holder);
 			holder.description.setText(isInternetAvailable()
 					? R.string.maps_you_need_descr : R.string.no_index_file_to_download);
 			adjustChildCount(holder.itemsContainer);
 
-			boolean paidVersion = Version.isPaidVersion(app);
-
-			for (int i = 0; i < items.size(); i++) {
-				IndexItem item = items.get(i);
-				boolean downloading = downloadThread.isDownloading(item);
-				boolean currentDownloading = downloading && downloadThread.getCurrentDownloadingItem() == item;
-				boolean lastItem = i == items.size() - 1;
-				View view = holder.itemsContainer.getChildAt(i);
-
-				if (item.isDownloaded()) {
-					view.setOnClickListener(null);
-				} else {
-					view.setTag(item);
-					view.setOnClickListener(onItemClickListener);
-				}
-
-				((ImageView) view.findViewById(R.id.icon))
-						.setImageDrawable(getActiveIcon(item.getType().getIconResource()));
-				((TextView) view.findViewById(R.id.title))
-						.setText(item.getVisibleName(app, app.getRegions(), false));
-				((TextView) view.findViewById(R.id.description)).setText(getItemDescription(item));
-
-				ImageView iconAction = (ImageView) view.findViewById(R.id.icon_action);
-				Button buttonAction = (Button) view.findViewById(R.id.button_action);
-				if (item.isDownloaded()) {
-					iconAction.setVisibility(View.GONE);
-					buttonAction.setVisibility(View.GONE);
-				} else {
-					boolean showBtn = !paidVersion && item.getType() == DownloadActivityType.WIKIPEDIA_FILE;
-					iconAction.setVisibility(showBtn ? View.GONE : View.VISIBLE);
-					buttonAction.setVisibility(showBtn ? View.VISIBLE : View.GONE);
-					if (!showBtn) {
-						iconAction.setImageDrawable(downloading ? cancelIcon : downloadIcon);
-					}
-				}
-
-				ProgressBar progressBar = (ProgressBar) view.findViewById(R.id.progress_bar);
-				progressBar.setVisibility(downloading ? View.VISIBLE : View.GONE);
-				if (currentDownloading) {
-					int progress = downloadThread.getCurrentDownloadingItemProgress();
-					progressBar.setProgress(progress < 0 ? 0 : progress);
-				} else {
-					progressBar.setProgress(0);
-				}
-
-				view.findViewById(R.id.divider).setVisibility(lastItem ? View.GONE : View.VISIBLE);
-			}
+			updateView(holder);
 
 			boolean primaryBtnVisible = updatePrimaryButton(holder);
 			boolean secondaryBtnVisible = updateSecondaryButton(holder);
 			holder.buttonsDivider.setVisibility(primaryBtnVisible && secondaryBtnVisible ? View.VISIBLE : View.GONE);
+		}
+	}
+	
+	public void updateView() {
+		NeededMapsVH holder = ref.get();
+		if (holder != null && holder.itemView.isShown()) {
+			updateView(holder);
+		}
+	}
+
+	private void updateView(NeededMapsVH holder) {
+		boolean paidVersion = Version.isPaidVersion(app);
+
+		for (int i = 0; i < items.size(); i++) {
+			IndexItem item = items.get(i);
+			boolean downloading = downloadThread.isDownloading(item);
+			boolean currentDownloading = downloading && downloadThread.getCurrentDownloadingItem() == item;
+			boolean lastItem = i == items.size() - 1;
+			View view = holder.itemsContainer.getChildAt(i);
+
+			if (item.isDownloaded()) {
+				view.setOnClickListener(null);
+			} else {
+				view.setTag(item);
+				view.setOnClickListener(onItemClickListener);
+			}
+
+			((ImageView) view.findViewById(R.id.icon))
+					.setImageDrawable(getActiveIcon(item.getType().getIconResource()));
+			((TextView) view.findViewById(R.id.title))
+					.setText(item.getVisibleName(app, app.getRegions(), false));
+			((TextView) view.findViewById(R.id.description)).setText(getItemDescription(item));
+
+			ImageView iconAction = (ImageView) view.findViewById(R.id.icon_action);
+			Button buttonAction = (Button) view.findViewById(R.id.button_action);
+			if (item.isDownloaded()) {
+				iconAction.setVisibility(View.GONE);
+				buttonAction.setVisibility(View.GONE);
+			} else {
+				boolean showBtn = !paidVersion && item.getType() == DownloadActivityType.WIKIPEDIA_FILE;
+				iconAction.setVisibility(showBtn ? View.GONE : View.VISIBLE);
+				buttonAction.setVisibility(showBtn ? View.VISIBLE : View.GONE);
+				if (!showBtn) {
+					iconAction.setImageDrawable(downloading ? cancelIcon : downloadIcon);
+				}
+			}
+
+			ProgressBar progressBar = (ProgressBar) view.findViewById(R.id.progress_bar);
+			progressBar.setVisibility(downloading ? View.VISIBLE : View.GONE);
+			if (currentDownloading) {
+				int progress = downloadThread.getCurrentDownloadingItemProgress();
+				progressBar.setProgress(progress < 0 ? 0 : progress);
+			} else {
+				progressBar.setProgress(0);
+			}
+
+			view.findViewById(R.id.divider).setVisibility(lastItem ? View.GONE : View.VISIBLE);
 		}
 	}
 

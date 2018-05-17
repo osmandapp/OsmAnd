@@ -96,8 +96,8 @@ public class OpenstreetmapLocalUtil implements OpenstreetmapUtil {
 			AbstractPoiType abstractPoi = MapPoiTypes.getDefault().getAnyPoiAdditionalTypeByKey(entry.getKey());
 			if (abstractPoi != null && abstractPoi instanceof PoiType) {
 				PoiType p = (PoiType) abstractPoi;
-				if (!p.isNotEditableOsm() && !Algorithms.isEmpty(p.getOsmTag())) {
-					entity.putTagNoLC(p.getOsmTag(), entry.getValue());
+				if (!p.isNotEditableOsm() && !Algorithms.isEmpty(p.getEditOsmTag())) {
+					entity.putTagNoLC(p.getEditOsmTag(), entry.getValue());
 				}
 			}
 		}

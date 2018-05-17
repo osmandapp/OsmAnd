@@ -1050,15 +1050,11 @@ Puntos</string>
     <string name="additional_actions">Más aiciones</string>
     <string name="av_locations_selected_desc">Ficheru GPX con coordenaes y datos de les notes esbillaes.</string>
     <string name="av_locations_all_desc">Ficheru GPX con coordenaes y datos de toles notes.</string>
-    <string name="release_3_0">\\022 Nuevu menú Viaxe : consultar los artículos de WikiVoyage ensin conexón
-\n
-\n • Wikipedia : nuevu aspeutu, imaxes
-\n
-\n • Interfazd\'apertura de traces : ver grupos de puntos de ruta
-\n
-\n • Marcadores del mapa : importar grupos seleicionaos dende ficheros GPX, nuevu aspeutu de la entrada de coordenaes
-\n
-\n • La suscripción a OsmAnd Live agora incluye toles funciones d\'OsmAnd
+    <string name="release_3_0">Nuevu menú Viaxe : consultar los artículos de WikiVoyage ensin conexón
+\u2022 Wikipedia, Wikivoyage : nuevu aspeutu, imaxes
+\u2022 Interfazd\'apertura de traces : ver grupos de puntos de ruta
+\u2022 Marcadores del mapa : importar grupos seleicionaos dende ficheros GPX, nuevu aspeutu de la entrada de coordenaes
+\u2022 La suscripción a OsmAnd Live agora incluye toles funciones d\'OsmAnd
 \n</string>
     <string name="modify_the_search_query">Cambiar la consulta de la gueta.</string>
     <string name="shared_string_actions">Aiciones</string>
