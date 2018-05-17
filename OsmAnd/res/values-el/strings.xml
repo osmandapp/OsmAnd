@@ -959,7 +959,7 @@
     <string name="new_destination_point_dialog">Έχετε ήδη ορίσει έναν προορισμό:</string>
     <string name="target_point">Προορισμός %1$s</string>
     <string name="context_menu_item_last_intermediate_point">Προσθήκη ως τελευταίου ενδιάμεσου προορισμού</string>
-    <string name="target_points">Προορισμοί</string>
+    <string name="shared_string_target_points">Προορισμοί</string>
     <string name="map_widget_monitoring_services">Υπηρεσίες καταγραφής</string>
 	<string name="delete_target_point">Αφαίρεση προορισμού</string>
 	<string name="intermediate_point">Ενδιάμεσος προορισμός %1$s</string>

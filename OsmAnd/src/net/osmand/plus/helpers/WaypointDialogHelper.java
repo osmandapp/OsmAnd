@@ -804,7 +804,7 @@ public class WaypointDialogHelper {
 		String str = ctx.getString(R.string.shared_string_waypoints);
 		switch (type) {
 			case WaypointHelper.TARGETS:
-				str = ctx.getString(R.string.targets);
+				str = ctx.getString(R.string.shared_string_target_points);
 				break;
 			case WaypointHelper.ALARMS:
 				str = ctx.getString(R.string.way_alarms);

@@ -959,7 +959,7 @@
 
     <string name="replace_destination_point">Замени одредиште</string>
     <string name="new_destination_point_dialog">Већ сте поставили одредишну тачку:</string>
-    <string name="target_points">Одредишта</string>
+    <string name="shared_string_target_points">Одредишта</string>
     <string name="add_tag">Додај ознаку</string>
     <string name="poi_filter_public_transport">Јавни превоз</string>
     <string name="poi_filter_entertainment">Забава</string>

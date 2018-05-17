@@ -205,7 +205,7 @@
     <string name="add_as_first_destination_point">Добави като първа междинна точка</string>
     <string name="replace_destination_point">Смяна на точка</string>
     <string name="new_destination_point_dialog">Вече сте задали крайна цел.</string>
-    <string name="target_points">Междинни точки</string>
+    <string name="shared_string_target_points">Междинни точки</string>
     <string name="intermediate_point_too_far">Междинна точка %1$s е твърде далеч от най-близкия път.</string>
     <string name="arrived_at_intermediate_point">Пристигнахте в междинна точка</string>
     <string name="context_menu_item_intermediate_point">Добави  като междинна точка</string>

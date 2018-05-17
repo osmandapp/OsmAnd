@@ -932,7 +932,7 @@
     <string name="add_as_first_destination_point">Dodaj jako pierwszy cel pośredni trasy</string>
     <string name="replace_destination_point">Zastąp cel trasy</string>
     <string name="new_destination_point_dialog">Już ustalono cel trasy:</string>
-    <string name="target_points">Cele podróży</string>
+    <string name="shared_string_target_points">Cele podróży</string>
     <string name="intermediate_point_too_far">Cel pośredni %1$s jest zbyt daleko od najbliższej ulicy.</string>
     <string name="arrived_at_intermediate_point">Osiągnięto cel pośredni trasy</string>
     <string name="context_menu_item_intermediate_point">Dodaj jako cel pośredni trasy</string>

@@ -296,7 +296,7 @@
     <string name="delete_target_point">Odstrani cilj</string>
     <string name="target_point">Ciljna točka %1$s</string>
     <string name="intermediate_point">Vmesni cilj %1$s</string>
-    <string name="target_points">Cilji</string>
+    <string name="shared_string_target_points">Cilji</string>
     <string name="poi_filter_emergency">Pomoč v sili</string>
     <string name="poi_filter_car_aid">Pomoč na cesti</string>
     <string name="poi_filter_food_shop">Trgovina s hrano</string>

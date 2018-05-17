@@ -597,7 +597,7 @@
     <string name="context_menu_item_first_intermediate_point">Dodaj prvu međutočku</string>
     <string name="add_as_last_destination_point">Dodaj kao zadnju međutočku</string>
     <string name="add_as_first_destination_point">Dodaj kao prvu međutočku</string>
-    <string name="target_points">Ciljevi</string>
+    <string name="shared_string_target_points">Ciljevi</string>
     <string name="search_near_map">Traži u blizini posljednje lokacije na karti</string>
 	<string name="transport_Stop">Postaja</string>
 	<string name="transport_stops">Postaje</string>

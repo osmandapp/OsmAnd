@@ -839,7 +839,7 @@ Proporcionální paměť %4$s MB (limit Androidu %5$s MB, Dalvik %6$s MB).</stri
     <string name="replace_destination_point">Nahradit cíl</string>
     <string name="new_destination_point_dialog">Cíl je již nastaven:</string>
     <string name="target_point">Cíl %1$s</string>
-    <string name="target_points">Cíle</string>
+    <string name="shared_string_target_points">Cíle</string>
     <string name="osmand_long_description_1000_chars">"OsmAnd
 \n
 \nOsmAnd je open-source navigační program s přístupem k široké paletě celosvětových mapových dat OpenStreetMap (OSM). Veškerá mapová data (vektorová nebo rastrová) mohou být uložena na paměťové kartě telefonu pro off-line použití. OsmAnd také nabízí off-line a on-line navigaci včetně hlasových pokynů.

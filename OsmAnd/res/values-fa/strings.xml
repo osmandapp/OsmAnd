@@ -660,7 +660,7 @@
     <string name="audionotes_location_not_defined">مکانی برای یادداشت‌گذاری تعیین نشده است.
 \nمکانی را مشخص و از طریق منوی زمینه اقدام کنید.</string>
     <string name="rendering_attr_showRoadMaps_description">انتخاب کنید چه زمانی نقشه‌های فقط-جاده‌ای نشان داده شود:</string>
-	<string name="target_points">مقصدها</string>
+	<string name="shared_string_target_points">مقصدها</string>
     <string name="ending_point_too_far">نقطهٔ پایانی از نزدیک‌ترین جاده خیلی دور است.</string>
     <string name="map_widget_vector_attributes">خصوصیات رندر نقشه</string>
 	

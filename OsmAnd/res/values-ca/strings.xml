@@ -702,7 +702,7 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="replace_destination_point">Substitueix la destinació</string>
     <string name="new_destination_point_dialog">Ja teniu definida una destinació:</string>
     <string name="target_point">Destinació %1$s</string>
-    <string name="target_points">Destinacions</string>
+    <string name="shared_string_target_points">Destinacions</string>
     <string name="intermediate_point_too_far">La fita %1$s és massa lluny de la carretera més propera.</string>
     <string name="arrived_at_intermediate_point">Heu arribat a la vostra destinació intermèdia</string>
     <string name="context_menu_item_intermediate_point">Afegeix com una fita</string>

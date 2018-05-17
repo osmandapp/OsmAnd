@@ -622,7 +622,7 @@ Os datos globais (entre os 70 graos norte e os 70 graos sul) están baseados nas
 
     <string name="replace_destination_point">Substituír o destino</string>
     <string name="new_destination_point_dialog">Xa existe un destino:</string>
-    <string name="target_points">Destinos</string>
+    <string name="shared_string_target_points">Destinos</string>
     <string name="intermediate_point_too_far">O destino intermedio %1$s está demasiado lonxe da estrada máis próxima.</string>
     <string name="arrived_at_intermediate_point">Chegou ao destino intermedio</string>
     <string name="context_menu_item_intermediate_point">Engadir un destino intermedio</string>

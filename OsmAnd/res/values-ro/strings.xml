@@ -21,7 +21,7 @@
     <string name="add_as_first_destination_point">Adaugă ca primă destinație</string>
     <string name="replace_destination_point">Înlocuiește destinația curentă</string>
     <string name="new_destination_point_dialog">Aveți deja stabilită o destinație.</string>
-    <string name="target_points">Puncte intermediare</string>
+    <string name="shared_string_target_points">Puncte intermediare</string>
     <string name="intermediate_point_too_far">Punctul intermediar %1$s este prea departe de vreun drum.</string>
     <string name="arrived_at_intermediate_point">Ați ajuns la punctul intermediar</string>
     <string name="context_menu_item_intermediate_point">Adaugă ca punct intermediar</string>

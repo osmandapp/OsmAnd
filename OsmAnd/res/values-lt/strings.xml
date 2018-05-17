@@ -916,7 +916,7 @@ Tam prireiks {1} MB pastoviam saugojimui.
     <string name="replace_destination_point">Pakeisti kelionės tikslą</string>
     <string name="new_destination_point_dialog">Jūs jau turite nustatę kelionės tikslą:</string>
     <string name="target_point">Tikslas %1$s</string>
-    <string name="target_points">Tikslai</string>
+    <string name="shared_string_target_points">Tikslai</string>
     <string name="intermediate_point_too_far">Tarpinis tikslas %1$s yra per toli nuo artimiausio kelio.</string>
     <string name="arrived_at_intermediate_point">Jūs atvykote į tarpinį tikslą</string>
     <string name="context_menu_item_intermediate_point">Pridėti tarpinį tikslą</string>

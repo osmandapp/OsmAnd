@@ -837,7 +837,7 @@ POIの更新は利用できません</string>
 	<string name="no_route">ルートがありません</string>
 	<string name="replace_destination_point">目的地の入れ替え</string>
     <string name="new_destination_point_dialog">すでに目的地が設定されています。</string>
-    <string name="target_points">目的地</string>
+    <string name="shared_string_target_points">目的地</string>
     <string name="ending_point_too_far">終点が最寄りの道路より遠すぎます。</string>
     <string name="add_tag">タグの追加</string>
     <string name="btn_advanced_mode">拡張モード…</string>

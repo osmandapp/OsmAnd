@@ -918,7 +918,7 @@ Proporcionális memória %4$s MB (Android korlát %5$s MB, Dalvik %6$s MB).</str
     <string name="replace_destination_point">Célpont lecserélése</string>
     <string name="new_destination_point_dialog">Már be van állítva célpont:</string>
     <string name="target_point">Célpont %1$s</string>
-    <string name="target_points">Célpontok</string>
+    <string name="shared_string_target_points">Célpontok</string>
     <string name="intermediate_point_too_far">%1$s köztes célpont túl messze van a legközelebbi úttól.</string>
     <string name="arrived_at_intermediate_point">Megérkeztél a köztes célponthoz</string>
     <string name="context_menu_item_intermediate_point">Beállítás köztes célpontnak</string>

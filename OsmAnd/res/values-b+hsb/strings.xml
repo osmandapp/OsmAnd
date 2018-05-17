@@ -435,7 +435,7 @@
 
     <string name="replace_destination_point">Cil narunać</string>
     <string name="new_destination_point_dialog">Cil bu hižo postajeny:</string>
-    <string name="target_points">Cile</string>
+    <string name="shared_string_target_points">Cile</string>
     <string name="intermediate_point_too_far">Mjezycil %1$s je předaloko preč wot najblišeho puća.</string>
     <string name="arrived_at_intermediate_point">Mjezycil docpěty</string>
     <string name="context_menu_item_intermediate_point">Jako mjezycil dodać</string>

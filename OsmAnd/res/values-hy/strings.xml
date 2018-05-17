@@ -1594,7 +1594,7 @@
     <string name="add_as_first_destination_point">Ավելացնել որպես առաջին միջանկյալ նպատակակետ</string>
     <string name="replace_destination_point">Փոխարինել նպատակակետը</string>
     <string name="new_destination_point_dialog">Դուք արդեն ունեք նշանակած նպատակակետ՝</string>
-    <string name="target_points">Նպատակակետեր</string>
+    <string name="shared_string_target_points">Նպատակակետեր</string>
     <string name="intermediate_point_too_far">Միջանկյալ նպատակակետը %1$s շատ հեռու է մոտակա ճանապարհից:</string>
     <string name="arrived_at_intermediate_point">Դուք հասել եք ձեր միջանկյալ նպատակակետին</string>
     <string name="context_menu_item_intermediate_point">Ավելացնել որպես միջանկյալ նպատակակետ</string>

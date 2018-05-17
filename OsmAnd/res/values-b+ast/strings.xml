@@ -997,7 +997,7 @@ Puntos</string>
     <string name="dropbox_plugin_name">Complementu Dropbox</string>
     <string name="map_widget_audionotes">Notes d\'audiu</string>
     <string name="rendering_attr_noAdminboundaries_name">Llendes</string>
-    <string name="target_points">Destinos</string>
+    <string name="shared_string_target_points">Destinos</string>
     <string name="poi_filter_entertainment">Entretenimientu</string>
     <string name="avoid_in_routing_title">Evitar…</string>
     <string name="map_widget_distance">Destín</string>

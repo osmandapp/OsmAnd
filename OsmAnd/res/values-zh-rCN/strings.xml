@@ -22,7 +22,7 @@
     <string name="safe_mode">“安全模式”</string>
     <string name="no_route">沒有路由</string>
 	<string name="delete_target_point">删除目的地</string>
-    <string name="target_points">目的地</string>
+    <string name="shared_string_target_points">目的地</string>
     <string name="map_widget_intermediate_distance">途径目的地</string>
     <string name="poi_filter_parking">停車</string>
     <string name="poi_filter_emergency">急</string>

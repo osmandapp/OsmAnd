@@ -14,7 +14,7 @@
     <string name="replace_destination_point">Nahradiť cieľ</string>
     <string name="new_destination_point_dialog">Už máte určený cieľ:</string>
     <string name="target_point">Cieľ %1$s</string>
-    <string name="target_points">Ciele</string>
+    <string name="shared_string_target_points">Ciele</string>
     <string name="intermediate_point_too_far">Prechodný bod %1$s je príliš ďaleko od najbližšej cesty.</string>
     <string name="arrived_at_intermediate_point">Dorazili ste k Vášmu prechodnému bodu</string>
     <string name="context_menu_item_intermediate_point">Pridať ako prechodný bod</string>

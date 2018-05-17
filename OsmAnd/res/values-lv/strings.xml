@@ -927,7 +927,7 @@
     <string name="replace_destination_point">Nomainīt galapunktu</string>
     <string name="new_destination_point_dialog">Galapunkts jau ir uzstādīts:</string>
     <string name="target_point">Punkts %1$s</string>
-    <string name="target_points">Galapunkti</string>
+    <string name="shared_string_target_points">Galapunkti</string>
     <string name="intermediate_point_too_far">Starpposma punkts %1$s ir pārāk tālu no tuvākā ceļa.</string>
     <string name="arrived_at_intermediate_point">Jūs esat nokļuvis starpposma punktā</string>
     <string name="context_menu_item_intermediate_point">Pievienot kā starpposma punktu</string>

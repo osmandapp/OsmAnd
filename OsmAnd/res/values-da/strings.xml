@@ -255,7 +255,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="route_kl">Hold til venstre og kør</string>
     <string name="route_kr">Hold til højre og kør</string>
     <string name="layer_hillshade">Reliefskygger</string>
-    <string name="target_points">Destinationer</string>
+    <string name="shared_string_target_points">Destinationer</string>
     <string name="map_widget_intermediate_distance">Mellemliggende destination</string>
     <string name="osmand_play_title_30_chars">OsmAnd kort &amp; navigation</string>
     <string name="osmand_plus_play_title_30_chars">OsmAnd+ kort &amp; navigation</string>

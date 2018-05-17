@@ -1014,7 +1014,7 @@
     <string name="add_as_first_destination_point">Додати як першу проміжну точку</string>
     <string name="replace_destination_point">Замінити пункт призначення</string>
     <string name="new_destination_point_dialog">Ви вже встановили пункт призначення:</string>
-    <string name="target_points">Точки призначення</string>
+    <string name="shared_string_target_points">Точки призначення</string>
     <string name="intermediate_point_too_far">Проміжна точка %1$s занадто далека від найближчої дороги.</string>
     <string name="arrived_at_intermediate_point">Ви досягли проміжного пункту</string>
     <string name="context_menu_item_intermediate_point">Додати як проміжну точку</string>

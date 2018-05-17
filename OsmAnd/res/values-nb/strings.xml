@@ -15,7 +15,7 @@
     <string name="add_as_first_destination_point">Legg til som første mellomliggende reisemål</string>
     <string name="replace_destination_point">Erstatt reisemålet</string>
     <string name="new_destination_point_dialog">Du har allerede angitt et reisemål:</string>
-    <string name="target_points">Reisemål</string>
+    <string name="shared_string_target_points">Reisemål</string>
     <string name="intermediate_point_too_far">Mellomliggende reisemål %1$s er for langt fra den nærmeste veien.</string>
     <string name="arrived_at_intermediate_point">Du har kommet til ditt mellomliggende reisemål</string>
     <string name="context_menu_item_intermediate_point">Legg til som mellomliggende reisemål</string>

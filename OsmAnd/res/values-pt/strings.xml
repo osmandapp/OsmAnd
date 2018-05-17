@@ -955,7 +955,7 @@
     <string name="add_as_first_destination_point">Adicionar como primeiro ponto de passagem</string>
     <string name="replace_destination_point">Substituir o ponto de destino</string>
     <string name="new_destination_point_dialog">Já existe um ponto de destino definido.</string>
-    <string name="target_points">Pontos de parada</string>
+    <string name="shared_string_target_points">Pontos de parada</string>
     <string name="intermediate_point_too_far">Waypoint %1$s distante da estrada mais próxima.</string>
     <string name="btn_advanced_mode">Modo avançado…</string>
     <string name="poi_filter_parking">Estacionamento</string>

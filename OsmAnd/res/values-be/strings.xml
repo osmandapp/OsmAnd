@@ -234,7 +234,7 @@
     <string name="add_as_first_destination_point">Дадаць першым прамежкавым пунктам прызначэньня</string>
     <string name="replace_destination_point">Замяніць пункт прызначэньня</string>
     <string name="new_destination_point_dialog">Вы ўжо абралі пункт прызначэньня:</string>
-    <string name="target_points">Пункты прызначэньня</string>
+    <string name="shared_string_target_points">Пункты прызначэньня</string>
     <string name="intermediate_point_too_far">Прамежкавы пункт прызначэньня %1$s занадта далёка ад бліжэйшай дарогі.</string>
     <string name="arrived_at_intermediate_point">Вы дасягнулі прамежкавага пункта</string>
     <string name="context_menu_item_intermediate_point">Дадаць прамежкавым пунктам прызначэньня</string>

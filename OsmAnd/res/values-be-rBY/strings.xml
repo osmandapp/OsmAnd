@@ -692,7 +692,7 @@ Punktaŭ maršrutu %2$s</string>
 
     <string name="replace_destination_point">Zamianіć punkt pryznačeńnia</string>
     <string name="new_destination_point_dialog">Vy ŭžo abrali punkt pryznačeńnia:</string>
-    <string name="target_points">Punkty pryznačeńnia</string>
+    <string name="shared_string_target_points">Punkty pryznačeńnia</string>
     <string name="intermediate_point_too_far">Pramiežkavy punkt pryznačeńnia %1$s zanadta daloka ad bližejšaj darohі.</string>
     <string name="arrived_at_intermediate_point">Vy dasiahnuli pramiežkavaha punkta pryznačeńnia</string>
     <string name="context_menu_item_intermediate_point">Dadać pramiežkavym punktam pryznačeńnia</string>

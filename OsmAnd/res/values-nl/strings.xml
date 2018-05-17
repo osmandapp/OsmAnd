@@ -967,7 +967,7 @@ Proportioneel werkgeheugen %4$s MB (Android limiet %5$s MB, Dalvik %6$s MB).</st
     <string name="replace_destination_point">Bestemming vervangen</string>
     <string name="new_destination_point_dialog">Er is al een bestemming gekozen:</string>
     <string name="target_point">Bestemming %1$s</string>
-    <string name="target_points">Bestemmingen</string>
+    <string name="shared_string_target_points">Bestemmingen</string>
     <string name="map_widget_monitoring_services">Registratiediensten</string>
 	<string name="no_route">Geen route</string>
 	<string name="delete_target_point">Bestemming wissen</string>

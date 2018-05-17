@@ -1015,7 +1015,7 @@
     <string name="target_point">Təyinat nöqtəsi %1$s</string>
     <string name="replace_destination_point">Təyinat nöqtəsini əvəz et</string>
     <string name="new_destination_point_dialog">Artıq təyinat nöqtəsini seçmisiniz:</string>
-    <string name="target_points">Təyinat nöqtələri</string>
+    <string name="shared_string_target_points">Təyinat nöqtələri</string>
     <string name="amenity_type_user_defined">İstifadəçi müəyyənləşdirib</string>
     <string name="mapillary">Mapillary</string>
     <string name="private_access_routing_req">Təyinat nöqtəniz xüsusi girişi olan ərazidə yerləşir. Bu səyahət üçün xüsusi yollara giriş icazəsi vermək istəyirsiniz?</string>

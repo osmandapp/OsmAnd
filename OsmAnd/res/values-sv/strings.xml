@@ -561,7 +561,7 @@ Nyttjat utrymme är {1} MB.
     <string name="replace_destination_point">Byt destination</string>
     <string name="new_destination_point_dialog">Du har redan angivit en destination:</string>
     <string name="target_point">Destination %1$s</string>
-    <string name="target_points">Destinationer</string>
+    <string name="shared_string_target_points">Destinationer</string>
     <string name="intermediate_point_too_far">Den mellanliggande destinationen %1$s ligger för långt från närmaste väg.</string>
     <string name="arrived_at_intermediate_point">Du har anlänt till din mellanliggande destination</string>
     <string name="context_menu_item_intermediate_point">Lägg till som mellanliggande destination</string>

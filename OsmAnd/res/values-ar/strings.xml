@@ -78,7 +78,7 @@
 	<string name="no_route">لا طريق</string>
 	<string name="delete_target_point">إزالة الوجهة</string>
     <string name="new_destination_point_dialog">لقد حددت نقطة وجهة سابقا:</string>
-    <string name="target_points">الوجهات</string>
+    <string name="shared_string_target_points">الوجهات</string>
     <string name="btn_advanced_mode">الوضع المتقدم…</string>
     <string name="poi_filter_parking">موقف سيارات</string>
     <string name="poi_filter_emergency">حالة طوارئ</string>

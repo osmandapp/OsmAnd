@@ -19,7 +19,7 @@
     <string name="add_as_first_destination_point">İlk ara nokta olarak ekle</string>
     <string name="replace_destination_point">Varış noktasını yenisiyle değiştir</string>
     <string name="new_destination_point_dialog">Varış noktası halihazırda ayarlı:</string>
-    <string name="target_points">Varış noktaları</string>
+    <string name="shared_string_target_points">Varış noktaları</string>
     <string name="intermediate_point_too_far">Ara hedef %1$s çok uzak en yakın yol var.</string>
     <string name="arrived_at_intermediate_point">Ara hedefine ulaştın</string>
     <string name="context_menu_item_intermediate_point">Ara hedef olarak eklemek</string>

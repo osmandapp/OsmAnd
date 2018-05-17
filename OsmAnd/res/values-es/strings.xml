@@ -868,7 +868,7 @@
     <string name="replace_destination_point">Reemplazar destino</string>
     <string name="new_destination_point_dialog">Ya se estableció el destino:</string>
     <string name="target_point">Destino «%1$s»</string>
-    <string name="target_points">Destinos</string>
+    <string name="shared_string_target_points">Destinos</string>
     <string name="intermediate_point_too_far">Destino intermedio «%1$s» demasiado lejos de la carretera.</string>
     <string name="arrived_at_intermediate_point">Has llegado al destino intermedio</string>
     <string name="context_menu_item_intermediate_point">Añadir como destino intermedio</string>

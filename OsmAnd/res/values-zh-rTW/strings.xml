@@ -19,7 +19,7 @@
     <string name="add_as_first_destination_point">增加為第一個中轉地點</string>
     <string name="replace_destination_point">替換目的地</string>
     <string name="new_destination_point_dialog">您已經設定了一個目的地：</string>
-    <string name="target_points">目的地</string>
+    <string name="shared_string_target_points">目的地</string>
     <string name="intermediate_point_too_far">中轉地點 %1$s 離最近的道路太遠。</string>
     <string name="arrived_at_intermediate_point">您已經抵達您的中轉地點</string>
     <string name="context_menu_item_intermediate_point">新增為中轉地點</string>

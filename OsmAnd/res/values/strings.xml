@@ -1304,7 +1304,6 @@
     <string name="index_tours">Tours</string>
     <string name="shared_string_all">All</string>
     <string name="shared_string_waypoints">Waypoints</string>
-    <string name="targets">Destinations</string>
     <string name="download_additional_maps">Download missing maps %1$s (%2$d MB)?</string>
     <string name="rendering_value_browse_map_name">Browse map</string>
     <string name="rendering_value_car_name">Car</string>
@@ -1714,7 +1713,7 @@
     <string name="add_as_first_destination_point">Add as first intermediate destination</string>
     <string name="replace_destination_point">Replace the destination</string>
     <string name="new_destination_point_dialog">You have already set a destination:</string>
-    <string name="target_points">Destinations</string>
+    <string name="shared_string_target_points">Destinations</string>
     <string name="intermediate_point_too_far">Intermediate destination %1$s is too far from the nearest road.</string>
     <string name="arrived_at_intermediate_point">You have arrived at your intermediate destination</string>
     <string name="context_menu_item_intermediate_point">Add as intermediate destination</string>

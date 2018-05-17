@@ -461,7 +461,7 @@
     <string name="recording_default_name">Upptaka</string>
     <string name="index_srtm_parts">hlutar</string>
     <string name="map_widget_max_speed">Hraðatakmörk</string>
-    <string name="target_points">Áfangastaðir</string>
+    <string name="shared_string_target_points">Áfangastaðir</string>
     <string name="add_tag">Bæta við merki</string>
     <string name="btn_advanced_mode">Ítarlegri hamur…</string>
     <string name="poi_filter_parking">Bílastæði</string>

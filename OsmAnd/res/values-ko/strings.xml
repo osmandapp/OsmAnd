@@ -1091,7 +1091,7 @@
 
     <string name="replace_destination_point">도착지로 대체</string>
     <string name="new_destination_point_dialog">이미 도착지가 설정되었습니다.</string>
-    <string name="target_points">경유지</string>
+    <string name="shared_string_target_points">경유지</string>
     <string name="intermediate_point_too_far">도로에서 너무 멀리 떨어진 경유지 %1$s .</string>
     <string name="arrived_at_intermediate_point">경유지에 도착했습니다</string>
     <string name="context_menu_item_intermediate_point">경유지로 추가</string>

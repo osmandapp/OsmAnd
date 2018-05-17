@@ -926,7 +926,7 @@ Memoria in proporzione %4$s MB (limite di Android %5$s MB, Dalvik %6$s MB).</str
     <string name="replace_destination_point">Sostituisci la destinazione</string>
     <string name="new_destination_point_dialog">La destinazione è già impostata:</string>
     <string name="target_point">Destinazione %1$s</string>
-    <string name="target_points">Destinazioni</string>
+    <string name="shared_string_target_points">Destinazioni</string>
     <string name="map_widget_monitoring_services">Servizi di registrazione</string>
     <string name="no_route">Nessun percorso</string>
     <string name="delete_target_point">Rimuovi la destinazione</string>

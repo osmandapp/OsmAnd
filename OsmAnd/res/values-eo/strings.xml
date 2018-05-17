@@ -1163,7 +1163,7 @@ Lon: %2$s</string>
 
     <string name="replace_destination_point">Anstataŭigi la celon</string>
     <string name="new_destination_point_dialog">Vi jam elektis celon:</string>
-    <string name="target_points">Celoj</string>
+    <string name="shared_string_target_points">Celoj</string>
     <string name="intermediate_point_too_far">Intercelo %1$s estas tro malproksime al la plej proksima vojo.</string>
     <string name="arrived_at_intermediate_point">Vi alvenis al la intercelo</string>
     <string name="context_menu_item_intermediate_point">Aldoni kiel intercelon</string>

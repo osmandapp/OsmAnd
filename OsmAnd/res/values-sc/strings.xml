@@ -372,7 +372,7 @@
 
     <string name="replace_destination_point">Remplasa sa destinatzione</string>
     <string name="new_destination_point_dialog">Tenes giai una destinatzione impostada:</string>
-    <string name="target_points">Itineràriu</string>
+    <string name="shared_string_target_points">Itineràriu</string>
     <string name="intermediate_point_too_far">Sa tapa %1$s est tropu indedda dae s’istrada prus a curtzu.</string>
     <string name="arrived_at_intermediate_point">Ses arribadu a sa tapa intermèdia tua</string>
     <string name="context_menu_item_intermediate_point">Annanghe·la comente tapa intermèdia</string>

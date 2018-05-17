@@ -919,7 +919,7 @@ Pôr do Sol: %2$s</string>
 
     <string name="replace_destination_point">Substituir o destino</string>
     <string name="new_destination_point_dialog">Você já tem o destino definido.</string>
-    <string name="target_points">Destinos</string>
+    <string name="shared_string_target_points">Destinos</string>
     <string name="show_warnings_descr">Configurar para mostrar moderadores de tráfego (limites de velocidade, paradas obrigatórias, lombadas), radares e faixas de rolamento</string>
 	<string name="intermediate_point_too_far">Destino intermediário %1$s está muito longe da via mais próxima.</string>
     <string name="arrived_at_intermediate_point">Você chegou no seu destino intermediário</string>

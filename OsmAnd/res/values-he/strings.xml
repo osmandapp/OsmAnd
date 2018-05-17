@@ -23,7 +23,7 @@
     <string name="add_as_first_destination_point">הוספה כיעד הביניים הראשון</string>
     <string name="replace_destination_point">החלפת היעד</string>
     <string name="new_destination_point_dialog">כבר הגדרת יעד:</string>
-    <string name="target_points">יעדים</string>
+    <string name="shared_string_target_points">יעדים</string>
     <string name="intermediate_point_too_far">יעד הביניים %1$s רחוק מדי מהדרך הקרוב אליו.</string>
     <string name="arrived_at_intermediate_point">הגעת ליעד הביניים שלך</string>
     <string name="context_menu_item_intermediate_point">הוספה כיעד ביניים</string>

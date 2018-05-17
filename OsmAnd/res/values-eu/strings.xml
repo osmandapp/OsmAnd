@@ -238,7 +238,7 @@
   <string name="add_as_first_destination_point">Gehitu lehen erdibideko helburu gisa</string>
   <string name="replace_destination_point">Ordeztu helmuga</string>
   <string name="new_destination_point_dialog">Baduzu dagoeneko helmuga ezarria:</string>
-  <string name="target_points">Helburuak</string>
+  <string name="shared_string_target_points">Helburuak</string>
   <string name="intermediate_point_too_far">%1$s tarteko helburua urrutiegi dago gertuen dagoen bidetik.</string>
   <string name="arrived_at_intermediate_point">Zure erdibideko helburura heldu zara</string>
   <string name="context_menu_item_intermediate_point">Gehitu erdibideko helburu gisa</string>

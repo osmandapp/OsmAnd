@@ -119,7 +119,7 @@
     <string name="phone">ഫോണ്‍</string>
     <string name="download_wikipedia_maps">വിക്കിപീഡിയ</string>
     <string name="recording_context_menu_show">കാണിക്കുക</string>
-    <string name="target_points">ഉദ്ദിഷ്ടസ്ഥലങ്ങള്‍</string>
+    <string name="shared_string_target_points">ഉദ്ദിഷ്ടസ്ഥലങ്ങള്‍</string>
     <string name="poi_filter_parking">പാര്‍ക്കിങ്ങ്</string>
     <string name="poi_filter_emergency">എമെര്‍ജന്‍സി (അടിയന്തിരം)</string>
     <string name="poi_filter_public_transport">പൊതു ഗതാഗത സംവിധാനം</string>

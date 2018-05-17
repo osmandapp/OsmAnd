@@ -8,7 +8,7 @@
     <string name="add_as_first_destination_point">Lisää ensimmäiseksi välietapiksi</string>
     <string name="replace_destination_point">Korvaa määränpää</string>
     <string name="new_destination_point_dialog">Määränpää\' on jo asetettu:</string>
-    <string name="target_points">Määränpää ja Välietapit</string>
+    <string name="shared_string_target_points">Määränpää ja Välietapit</string>
     <string name="intermediate_point_too_far">Välietappi %1$s on liian kaukana lähimmästä tiestä.</string>
     <string name="arrived_at_intermediate_point">Olet saapunut välietapille</string>
     <string name="context_menu_item_intermediate_point">Lisää välietapiksi</string>

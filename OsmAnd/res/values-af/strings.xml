@@ -922,7 +922,7 @@
     <string name="add_as_first_destination_point">Voeg by as eerste oorgangspunt</string>
     <string name="replace_destination_point">Vervang bestemmingspunt</string>
     <string name="new_destination_point_dialog">Jy het al reeds `n bestemming ingestel.</string>
-    <string name="target_points">Wegpunte</string>
+    <string name="shared_string_target_points">Wegpunte</string>
     <string name="intermediate_point_too_far">Oorgangspunt %1$s is te ver van die naaste pad.</string>
     <string name="arrived_at_intermediate_point">Jy het jou oorgangspunt bereik</string>
     <string name="context_menu_item_intermediate_point">Voeg by as oorgangspunt</string>
