@@ -15,11 +15,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.view.ContextThemeWrapper;
 import android.text.ClipboardManager;
-import android.text.Spannable;
-import android.text.SpannableString;
 import android.text.TextUtils;
-import android.text.style.DynamicDrawableSpan;
-import android.text.style.ImageSpan;
 import android.text.util.Linkify;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -74,6 +70,7 @@ public class MenuBuilder {
 
 	public static final float SHADOW_HEIGHT_TOP_DP = 17f;
 	public static final int TITLE_LIMIT = 60;
+	protected static final String[] arrowChars = new String[]{"=>"," - "};
 
 	protected MapActivity mapActivity;
 	protected MapContextMenu mapContextMenu;
@@ -829,19 +826,10 @@ public class MenuBuilder {
 		titleView.setTextSize(16);
 		titleView.setTextColor(app.getResources().getColor(light ? R.color.ctx_menu_bottom_view_text_color_light : R.color.ctx_menu_bottom_view_text_color_dark));
 		String desc = route.getDescription(getMapActivity().getMyApplication(), true);
-		SpannableString stringWithImage = new SpannableString(desc);
-		if (desc.contains("=>") || desc.contains(" - ")) {
-			Drawable arrow = app.getIconsCache().getIcon(R.drawable.ic_arrow_right_16, light ? R.color.ctx_menu_route_icon_color_light : R.color.ctx_menu_route_icon_color_dark);
-			arrow.setBounds(0, 0, arrow.getIntrinsicWidth(), arrow.getIntrinsicHeight());
-			int replaceIndex = desc.indexOf("=>");
-			if (replaceIndex != -1) {
-				stringWithImage.setSpan(new ImageSpan(arrow, DynamicDrawableSpan.ALIGN_BASELINE), replaceIndex, replaceIndex + 2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-			} else {
-				replaceIndex = desc.indexOf(" - ") + 1;
-				stringWithImage.setSpan(new ImageSpan(arrow, DynamicDrawableSpan.ALIGN_BASELINE), replaceIndex, replaceIndex + 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-			}
-		}
-		titleView.setText(stringWithImage);
+		Drawable arrow = app.getIconsCache().getIcon(R.drawable.ic_arrow_right_16, light ? R.color.ctx_menu_route_icon_color_light : R.color.ctx_menu_route_icon_color_dark);
+		arrow.setBounds(0, 0, arrow.getIntrinsicWidth(), arrow.getIntrinsicHeight());
+
+		titleView.setText(AndroidUtils.replaceCharsWithIcon(desc, arrow, arrowChars));
 		infoView.addView(titleView);
 
 		LinearLayout typeView = new LinearLayout(view.getContext());

@@ -7,6 +7,8 @@ import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.graphics.Canvas;
+import android.graphics.Paint;
 import android.graphics.PointF;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.StateListDrawable;
@@ -23,6 +25,7 @@ import android.text.SpannableString;
 import android.text.TextPaint;
 import android.text.TextUtils;
 import android.text.format.DateFormat;
+import android.text.style.ImageSpan;
 import android.text.style.URLSpan;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
@@ -58,7 +61,7 @@ public class AndroidUtils {
 	public static boolean isHardwareKeyboardAvailable(Context context) {
 		return context.getResources().getConfiguration().keyboard != Configuration.KEYBOARD_NOKEYS;
 	}
-	
+
 	public static void softKeyboardDelayed(final View view) {
 		view.post(new Runnable() {
 			@Override
@@ -104,6 +107,30 @@ public class AndroidUtils {
 			}
 		}
 		return src;
+	}
+
+	public static Spannable replaceCharsWithIcon(String text, Drawable icon, String[] chars) {
+		Spannable spannable = new SpannableString(text);
+		for (String entry : chars) {
+			int i = text.indexOf(entry, 0);
+			while (i < text.length() && i != -1) {
+				ImageSpan span = new ImageSpan(icon) {
+					public void draw(Canvas canvas, CharSequence text, int start, int end,
+					                 float x, int top, int y, int bottom, Paint paint) {
+						Drawable drawable = getDrawable();
+						canvas.save();
+						int transY = bottom - drawable.getBounds().bottom;
+						transY -= paint.getFontMetricsInt().descent / 2;
+						canvas.translate(x, transY);
+						drawable.draw(canvas);
+						canvas.restore();
+					}
+				};
+				spannable.setSpan(span, i, i + entry.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+				i = text.indexOf(entry, i + entry.length());
+			}
+		}
+		return spannable;
 	}
 
 	public static void removeLinkUnderline(TextView textView) {
