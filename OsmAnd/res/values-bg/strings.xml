@@ -2204,8 +2204,6 @@
     <string name="additional_actions">Допълнителни действия</string>
     <string name="av_locations_selected_desc">GPX файл с координати и данни от избрани бележки.</string>
     <string name="av_locations_all_desc">GPX файл с координати и данни от всички бележки.</string>
-    <string name="release_3_0">\\022 
-\n</string>
     <string name="modify_the_search_query">Променете заявката за търсене.</string>
     <string name="shared_string_actions">Действия</string>
     <string name="shared_string_marker">Маркер</string>

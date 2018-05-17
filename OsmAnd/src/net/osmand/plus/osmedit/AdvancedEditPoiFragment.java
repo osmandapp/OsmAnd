@@ -140,8 +140,8 @@ public class AdvancedEditPoiFragment extends BaseOsmAndFragment
 	private void updatePoiType() {
 		PoiType pt = getData().getPoiTypeDefined();
 		if (pt != null) {
-			amenityTagTextView.setText(pt.getOsmTag());
-			amenityTextView.setText(pt.getOsmValue());
+			amenityTagTextView.setText(pt.getEditOsmTag());
+			amenityTextView.setText(pt.getEditOsmValue());
 		} else {
 			amenityTagTextView.setText(getData().getPoiCategory().getDefaultTag());
 			amenityTextView.setText(getData().getPoiTypeString());
@@ -215,6 +215,8 @@ public class AdvancedEditPoiFragment extends BaseOsmAndFragment
 			 });
 
 			valueEditText.setText(vl);
+			valueEditText.setAdapter(valueAdapter);
+			valueEditText.setThreshold(3);
 			valueEditText.addTextChangedListener(new TextWatcher() {
 				@Override
 				public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -277,16 +279,17 @@ public class AdvancedEditPoiFragment extends BaseOsmAndFragment
 			if (poiType.isNotEditableOsm() || poiType.getBaseLangType() != null) {
 				return;
 			}
-			if (poiType.getOsmTag() != null &&
-					!poiType.getOsmTag().equals(OSMSettings.OSMTagKey.NAME.getValue())) {
-				stringSet.add(poiType.getOsmTag());
+			if (poiType.getEditOsmTag() != null &&
+					!poiType.getEditOsmTag().equals(OSMSettings.OSMTagKey.NAME.getValue())) {
+				String editOsmTag = poiType.getEditOsmTag();
+				stringSet.add(editOsmTag);
 				if (poiType.getOsmTag2() != null) {
 					stringSet.add(poiType.getOsmTag2());
 				}
 
 			}
-			if (poiType.getOsmValue() != null) {
-				values.add(poiType.getOsmValue());
+			if (poiType.getEditOsmValue() != null) {
+				values.add(poiType.getEditOsmValue());
 			}
 			if (poiType.getOsmValue2() != null) {
 				values.add(poiType.getOsmValue2());

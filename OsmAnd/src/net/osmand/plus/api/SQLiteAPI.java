@@ -50,6 +50,8 @@ public interface SQLiteAPI {
 		byte[] getBlob(int ind);
 		
 		boolean isNull(int ind);
+
+		int getColumnIndex(String columnName);
 		
 		void close();
 

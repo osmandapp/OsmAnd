@@ -2725,9 +2725,6 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="empty_state_markers_active_desc">Klepnutím nebo přidržením označte \'Místa\', pak klepněte na tlačítko značky s vlajkou.</string>
     <string name="modify_the_search_query">Upravit vyhledávací dotaz.</string>
     <string name="one_tap_active">Jedním klepnutím aktivní</string>
-    <string name="release_3_0">\\022
-\n 
-\n</string>
     <string name="rendering_attr_hidePOILabels_name">Popisky bodů</string>
     <string name="shared_string_without_name">Bez názvu</string>
     <string name="what_is_here">Co je zde:</string>

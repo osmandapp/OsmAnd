@@ -1,10 +1,11 @@
 package net.osmand.plus.api;
 
-import net.osmand.plus.OsmandApplication;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+
+import net.osmand.plus.OsmandApplication;
 
 public class SQLiteAPIImpl implements SQLiteAPI {
 
@@ -82,6 +83,11 @@ public class SQLiteAPIImpl implements SQLiteAPI {
 				
 				public boolean isNull(int ind) {
 					return c.isNull(ind);
+				}
+
+				@Override
+				public int getColumnIndex(String columnName) {
+					return c.getColumnIndex(columnName);
 				}
 
 

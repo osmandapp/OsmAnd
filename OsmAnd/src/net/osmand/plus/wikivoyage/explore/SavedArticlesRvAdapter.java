@@ -43,6 +43,7 @@ public class SavedArticlesRvAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
 	private final Drawable readIcon;
 	private final Drawable deleteIcon;
+	private PicassoUtils picasso;
 
 	public void setListener(Listener listener) {
 		this.listener = listener;
@@ -51,6 +52,7 @@ public class SavedArticlesRvAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 	SavedArticlesRvAdapter(OsmandApplication app) {
 		this.app = app;
 		this.settings = app.getSettings();
+		picasso = PicassoUtils.getPicasso(app);
 
 		int colorId = settings.isLightContent()
 				? R.color.wikivoyage_active_light : R.color.wikivoyage_active_dark;
@@ -78,28 +80,27 @@ public class SavedArticlesRvAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 			final ItemVH holder = (ItemVH) viewHolder;
 			TravelArticle article = (TravelArticle) getItem(position);
 			final String url = TravelArticle.getImageUrl(article.getImageTitle(), false);
-			Boolean cached = PicassoUtils.isCached(url);
+			Boolean loaded = picasso.isURLLoaded(url);
 			boolean lastItem = position == getItemCount() - 1;
 
-			RequestCreator rc = Picasso.get()
-					.load(url);
+			RequestCreator rc = Picasso.get().load(url);
 			WikivoyageUtils.setupNetworkPolicy(settings, rc);
 			rc.transform(new CropCircleTransformation())
 					.into(holder.icon, new Callback() {
 						@Override
 						public void onSuccess() {
 							holder.icon.setVisibility(View.VISIBLE);
-							PicassoUtils.setCached(url, true);
+							picasso.setResultLoaded(url, true);
 						}
 
 						@Override
 						public void onError(Exception e) {
 							holder.icon.setVisibility(View.GONE);
-							PicassoUtils.setCached(url, false);
+							picasso.setResultLoaded(url, false);
 						}
 					});
 
-			holder.icon.setVisibility(cached != null && cached ? View.VISIBLE : View.GONE);
+			holder.icon.setVisibility(loaded == null || loaded.booleanValue() ? View.VISIBLE : View.GONE);
 			holder.title.setText(article.getTitle());
 			holder.content.setText(article.getContent());
 			holder.partOf.setText(article.getGeoDescription());

@@ -1966,8 +1966,6 @@
     <string name="empty_state_my_tracks">İzlər əlavə et və qeyd et</string>
     <string name="empty_state_my_tracks_desc">Baxmaq üçün izləri qeyd edin və ya idxal edin.</string>
     <string name="enter_the_file_name">Fayl adını daxil edin.</string>
-    <string name="release_3_0">•
-\n</string>
     <string name="distance_indication_descr">Aktiv işarələrə qədər məsafənin necə göstəriləcəyini seçin.</string>
     <string name="tunnel_warning">İrəlidə tunel</string>
     <string name="show_guide_line_descr">Mövqeyinizdən aktiv işarə məkanlarına bələdçi xətlərini göstər.</string>

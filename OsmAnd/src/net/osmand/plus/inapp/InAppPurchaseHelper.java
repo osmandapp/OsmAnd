@@ -361,19 +361,18 @@ public class InAppPurchaseHelper {
 			Purchase liveUpdatesPurchase = inventory.getPurchase(SKU_LIVE_UPDATES);
 			boolean subscribedToLiveUpdates = (liveUpdatesPurchase != null && liveUpdatesPurchase.getPurchaseState() == 0);
 			OsmandPreference<Long> subscriptionCancelledTime = ctx.getSettings().LIVE_UPDATES_PURCHASE_CANCELLED_TIME;
-			if (!subscribedToLiveUpdates) {
+			if (!subscribedToLiveUpdates && ctx.getSettings().LIVE_UPDATES_PURCHASED.get()) {
 				if (subscriptionCancelledTime.get() == 0) {
 					subscriptionCancelledTime.set(System.currentTimeMillis());
 					ctx.getSettings().LIVE_UPDATES_PURCHASE_CANCELLED_FIRST_DLG_SHOWN.set(false);
 					ctx.getSettings().LIVE_UPDATES_PURCHASE_CANCELLED_SECOND_DLG_SHOWN.set(false);
-				} else if (System.currentTimeMillis() - subscriptionCancelledTime.get() > SUBSCRIPTION_HOLDING_TIME_MSEC
-						&& ctx.getSettings().LIVE_UPDATES_PURCHASED.get()) {
+				} else if (System.currentTimeMillis() - subscriptionCancelledTime.get() > SUBSCRIPTION_HOLDING_TIME_MSEC) {
 					ctx.getSettings().LIVE_UPDATES_PURCHASED.set(false);
 					if (!isDepthContoursPurchased(ctx)) {
 						ctx.getSettings().getCustomRenderBooleanProperty("depthContours").set(false);
 					}
 				}
-			} else {
+			} else if (subscribedToLiveUpdates) {
 				subscriptionCancelledTime.set(0L);
 				ctx.getSettings().LIVE_UPDATES_PURCHASED.set(true);
 			}

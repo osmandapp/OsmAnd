@@ -260,10 +260,6 @@ public class RouteInfoWidgetsFactory {
 
 	public TextInfoWidget createTimeControl(final MapActivity map, final boolean intermediate){
 		final RoutingHelper routingHelper = map.getRoutingHelper();
-		final int time = R.drawable.widget_time_day;
-		final int timeN = R.drawable.widget_time_night;
-		final int timeToGo = R.drawable.widget_time_to_distance_day;
-		final int timeToGoN = R.drawable.widget_time_to_distance_night;
 		final OsmandApplication ctx = map.getMyApplication();
 		final OsmandPreference<Boolean> showArrival = intermediate
 				? ctx.getSettings().SHOW_INTERMEDIATE_ARRIVAL_TIME_OTHERWISE_EXPECTED_TIME

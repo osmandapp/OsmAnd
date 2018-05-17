@@ -36,7 +36,7 @@ public class WikivoyageArticleNavigationFragment extends MenuBottomSheetDialogFr
 
 	public static final String TAG = WikivoyageArticleNavigationFragment.class.getSimpleName();
 
-	public static final String CITY_ID_KEY = "city_id_key";
+	public static final String TRIP_ID_KEY = "trip_id_key";
 	public static final String SELECTED_LANG_KEY = "selected_lang_key";
 
 	public static final int OPEN_ARTICLE_REQUEST_CODE = 2;
@@ -59,12 +59,12 @@ public class WikivoyageArticleNavigationFragment extends MenuBottomSheetDialogFr
 
 		if (savedInstanceState != null) {
 			selectedLang = savedInstanceState.getString(SELECTED_LANG_KEY);
-			cityId = savedInstanceState.getLong(CITY_ID_KEY);
+			cityId = savedInstanceState.getLong(TRIP_ID_KEY);
 		} else {
 			Bundle args = getArguments();
 			if (args != null) {
 				selectedLang = args.getString(SELECTED_LANG_KEY);
-				cityId = args.getLong(CITY_ID_KEY);
+				cityId = args.getLong(TRIP_ID_KEY);
 			}
 		}
 
@@ -132,7 +132,7 @@ public class WikivoyageArticleNavigationFragment extends MenuBottomSheetDialogFr
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
-		outState.putLong(CITY_ID_KEY, cityId);
+		outState.putLong(TRIP_ID_KEY, cityId);
 		outState.putString(SELECTED_LANG_KEY, selectedLang);
 	}
 
@@ -156,7 +156,7 @@ public class WikivoyageArticleNavigationFragment extends MenuBottomSheetDialogFr
 									   @NonNull String selectedLang) {
 		try {
 			Bundle args = new Bundle();
-			args.putLong(CITY_ID_KEY, cityId);
+			args.putLong(TRIP_ID_KEY, cityId);
 			args.putString(SELECTED_LANG_KEY, selectedLang);
 			WikivoyageArticleNavigationFragment fragment = new WikivoyageArticleNavigationFragment();
 			if (targetFragment != null) {

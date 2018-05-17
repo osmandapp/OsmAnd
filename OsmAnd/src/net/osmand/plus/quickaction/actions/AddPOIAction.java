@@ -112,7 +112,7 @@ public class AddPOIAction extends QuickAction {
 				if (tag.getKey().equals(EditPoiData.POI_TYPE_TAG)) {
 					final PoiType poiType = editPoiData.getAllTranslatedSubTypes().get(tag.getValue().trim().toLowerCase());
 					if (poiType != null) {
-						newNode.putTagNoLC(poiType.getOsmTag(), poiType.getOsmValue());
+						newNode.putTagNoLC(poiType.getEditOsmTag(), poiType.getEditOsmValue());
 						if (poiType.getOsmTag2() != null) {
 							newNode.putTagNoLC(poiType.getOsmTag2(), poiType.getOsmValue2());
 						}
