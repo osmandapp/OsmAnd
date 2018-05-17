@@ -48,9 +48,6 @@ import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import static android.util.TypedValue.COMPLEX_UNIT_DIP;
 import static android.util.TypedValue.COMPLEX_UNIT_SP;
@@ -112,34 +109,25 @@ public class AndroidUtils {
 		return src;
 	}
 
-	public static Spannable replaceIconsInString(String text, Drawable icon, Set<String> keys) {
+	public static Spannable replaceCharsWithIcon(String text, Drawable icon, String[] chars) {
 		Spannable spannable = new SpannableString(text);
-		for (String entry : keys) {
-			Matcher matcher = Pattern.compile(entry).matcher(spannable);
-			while (matcher.find()) {
-				boolean set = true;
-				for (ImageSpan span : spannable.getSpans(matcher.start(), matcher.end(), ImageSpan.class))
-					if (spannable.getSpanStart(span) >= matcher.start()
-							&& spannable.getSpanEnd(span) <= matcher.end()) {
-						spannable.removeSpan(span);
-					} else {
-						set = false;
-						break;
+		for (String entry : chars) {
+			int i = text.indexOf(entry, 0);
+			while (i < text.length() && i != -1) {
+				ImageSpan span = new ImageSpan(icon) {
+					public void draw(Canvas canvas, CharSequence text, int start, int end,
+					                 float x, int top, int y, int bottom, Paint paint) {
+						Drawable drawable = getDrawable();
+						canvas.save();
+						int transY = bottom - drawable.getBounds().bottom;
+						transY -= paint.getFontMetricsInt().descent / 2;
+						canvas.translate(x, transY);
+						drawable.draw(canvas);
+						canvas.restore();
 					}
-				if (set) {
-					spannable.setSpan(new ImageSpan(icon) {
-						public void draw(Canvas canvas, CharSequence text, int start, int end,
-						                 float x, int top, int y, int bottom, Paint paint) {
-							Drawable drawable = getDrawable();
-							canvas.save();
-							int transY = bottom - drawable.getBounds().bottom;
-							transY -= paint.getFontMetricsInt().descent / 2;
-							canvas.translate(x, transY);
-							drawable.draw(canvas);
-							canvas.restore();
-						}
-					}, matcher.start(), matcher.end(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-				}
+				};
+				spannable.setSpan(span, i, i + entry.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+				i = text.indexOf(entry, i + entry.length());
 			}
 		}
 		return spannable;

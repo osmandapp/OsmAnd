@@ -15,11 +15,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.view.ContextThemeWrapper;
 import android.text.ClipboardManager;
-import android.text.Spannable;
-import android.text.SpannableString;
 import android.text.TextUtils;
-import android.text.style.DynamicDrawableSpan;
-import android.text.style.ImageSpan;
 import android.text.util.Linkify;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -61,14 +57,11 @@ import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import static android.util.TypedValue.COMPLEX_UNIT_DIP;
 import static net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask.*;
@@ -77,7 +70,7 @@ public class MenuBuilder {
 
 	public static final float SHADOW_HEIGHT_TOP_DP = 17f;
 	public static final int TITLE_LIMIT = 60;
-	protected static final Set<String> charArrows = new HashSet<>(Arrays.asList("=>"," - "));
+	protected static final String[] arrowChars = new String[]{"=>"," - "};
 
 	protected MapActivity mapActivity;
 	protected MapContextMenu mapContextMenu;
@@ -836,7 +829,7 @@ public class MenuBuilder {
 		Drawable arrow = app.getIconsCache().getIcon(R.drawable.ic_arrow_right_16, light ? R.color.ctx_menu_route_icon_color_light : R.color.ctx_menu_route_icon_color_dark);
 		arrow.setBounds(0, 0, arrow.getIntrinsicWidth(), arrow.getIntrinsicHeight());
 
-		titleView.setText(AndroidUtils.replaceIconsInString(desc, arrow, charArrows));
+		titleView.setText(AndroidUtils.replaceCharsWithIcon(desc, arrow, arrowChars));
 		infoView.addView(titleView);
 
 		LinearLayout typeView = new LinearLayout(view.getContext());
