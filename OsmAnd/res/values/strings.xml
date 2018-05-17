@@ -426,7 +426,7 @@
     <string name="select_gpx_folder">Select GPX file folder</string>
     <string name="file_can_not_be_moved">File can not be moved.</string>
     <string name="shared_string_move">Move</string>
-    <string name="shared_string_tracks">GPX files</string>
+    <string name="shared_string_tracks">Tracks</string>
     <string name="routing_attr_driving_style_name">Driving style</string>
     <string name="route_altitude">Route elevation</string>
     <string name="altitude_descent">Descent</string>
@@ -2575,7 +2575,7 @@
     <string name="loading_data">Loading data…</string>
     <string name="reading_indexes">Reading local data…</string>
     <string name="previous_run_crashed">Last OsmAnd run crashed. Log file is at {0}. Please report the issue and attach the log file.</string>
-    <string name="saving_gpx_tracks">Saving GPX files…</string>
+    <string name="saving_gpx_tracks">Saving GPX file…</string>
     <string name="finished_task">Finished</string>
     <string name="use_online_routing_descr">Use the Internet to calculate a route.</string>
     <string name="use_online_routing">Use online navigation</string>
