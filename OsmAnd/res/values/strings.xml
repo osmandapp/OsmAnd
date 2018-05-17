@@ -39,11 +39,11 @@
     <string name="paid_app">Paid app</string>
     <string name="paid_plugin">Paid plugin</string>
     <string name="travel_card_update_descr">New Wikivoyage data available, update it to enjoy.</string>
-	<string name="travel_card_download_descr">Download these Wikivoyage travel guides to view articles about places around the world without a connection to the Internet.</string>
+	<string name="travel_card_download_descr">Download Wikivoyage travel guides to view articles about places around the world without a connection to the Internet.</string>
 	<string name="update_is_available">Update available</string>
 	<string name="download_file">Download file</string>
     <string name="start_editing_card_image_text">The free worldwide travel guide anyone can edit.</string>
-    <string name="welcome_to_open_beta_description">Travel is based on Wikivoyage. Test all features during open beta testing, for free. Afterwards, Travel will be available to subscribers of OsmAnd Unlimited and owners of OsmAnd+</string>
+    <string name="welcome_to_open_beta_description">OsmAnd Travel is based on Wikivoyage. Test all features during open beta testing, for free. Afterwards, OsmAnd Travel will be available to subscribers of OsmAnd Unlimited and owners of OsmAnd+.</string>
     <string name="start_editing_card_description">You can and should edit any article on Wikivoyage. Share knowledge, experience, talent, and your attention</string>
     <string name="start_editing">Start editing</string>
     <string name="get_unlimited_access">Get unlimited access</string>
@@ -63,7 +63,7 @@
     <string name="contour_lines_hillshade_maps">Contour lines &amp; Hillshade maps</string>
     <string name="unlock_all_features">Unlock all OsmAnd features</string>
     <string name="purchase_dialog_title">Choose plan</string>
-    <string name="purchase_dialog_travel_description">Purchase one of the following to read travel articles offline:</string>
+    <string name="purchase_dialog_travel_description">Purchase one of the following to receive the offline travel guide functionality:</string>
     <string name="purchase_dialog_subtitle">Choose suitable item:</string>
     <string name="shared_string_dont">Don\'t</string>
     <string name="shared_string_do">Do</string>
@@ -72,7 +72,7 @@
     <string name="wikivoyage_download_pics_descr">Images for articles can be downloaded for offline use.\n
     You can always change the setting in \'Explore\' → \'Options\'.</string>
     <string name="shared_string_wifi_only">Only on Wi-Fi</string>
-    <string name="select_travel_book">Select travel book</string>
+    <string name="select_travel_book">Select a travel book</string>
     <string name="shared_string_travel_book">Travel book</string>
     <string name="online_webpage_warning">Page only available online. Open in web browser?</string>
     <string name="images_cache">Image cache</string>
@@ -150,11 +150,11 @@
     <string name="av_locations_selected_desc">GPX file with coordinates and data of the selected notes.</string>
     <string name="av_locations_all_desc">GPX file with coordinates and data of all notes.</string>
     <string name="release_3_0">
-	\u2022 New travel guide functionality: Global offline Wikivoyage articles\n\n
-	\u2022 Wikipedia: New look, active links, images now supported\n\n
-	\u2022 Open Track UI: Support for waypoint groups\n\n
-	\u2022 Map markers: Import of selected groups from GPX files, coordinate input, new look\n\n
-	\u2022 OsmAnd Live data (subscription) now supports all OsmAnd features\n\n
+	• Introducing OsmAnd Travel: Global and offline Wikivoyage travel guide funtionality\n\n
+	• Wikipedia: New look, active links, images now supported\n\n
+	• Open Track UI: Support for waypoint groups\n\n
+	• Map markers: Import of selected groups from GPX files, coordinate input, new look\n\n
+	• OsmAnd Live data (subscription) now supports all OsmAnd features\n\n
 	</string>
     <string name="modify_the_search_query">Modify the search query.</string>
     <string name="shared_string_actions">Actions</string>
@@ -414,7 +414,7 @@
     <string name="points_delete_multiple">You are going to delete %1$d point(s). Are you sure?</string>
     <string name="route_points_category_name">Turns to pass on this route</string>
     <string name="track_points_category_name">Waypoints, points of interest, named features</string>
-    <string name="gpx_track">GPX file</string>
+    <string name="gpx_track">Track</string>
     <string name="max_speed">Maximum speed</string>
     <string name="average_speed">Average speed</string>
     <string name="shared_string_time_moving">Time moving</string>
@@ -2723,7 +2723,7 @@
     <string name="favourites">Favorites</string>
     <string name="saved_at_time">Now saved at: %1$s</string>
     <string name="poi_deleted_localy">POI will be deleted once you upload your changes</string>
-    <string name="show_gpx">Show GPX</string>
+    <string name="show_gpx">Show GPX data</string>
     <string name="count_of_lines">Count of lines</string>
     <string name="are_you_sure">Are you sure?</string>
     <string name="unsaved_changes_will_be_lost">Any unsaved changes will be lost. Continue?</string>
