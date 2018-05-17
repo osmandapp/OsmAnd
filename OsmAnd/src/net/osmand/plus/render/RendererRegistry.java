@@ -297,6 +297,8 @@ public class RendererRegistry {
 				return ctx.getString(R.string.topo_render_descr);
 			case LIGHTRS_RENDER:
 				return ctx.getString(R.string.light_rs_render_descr);
+			case UNIRS_RENDER:
+				return ctx.getString(R.string.unirs_render_descr);
 			case WINTER_SKI_RENDER:
 				return ctx.getString(R.string.ski_map_render_descr);
 			case NAUTICAL_RENDER:
