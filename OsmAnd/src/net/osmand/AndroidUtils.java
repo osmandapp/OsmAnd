@@ -7,6 +7,8 @@ import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.graphics.Canvas;
+import android.graphics.Paint;
 import android.graphics.PointF;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.StateListDrawable;
@@ -62,7 +64,7 @@ public class AndroidUtils {
 	public static boolean isHardwareKeyboardAvailable(Context context) {
 		return context.getResources().getConfiguration().keyboard != Configuration.KEYBOARD_NOKEYS;
 	}
-	
+
 	public static void softKeyboardDelayed(final View view) {
 		view.post(new Runnable() {
 			@Override
@@ -110,7 +112,7 @@ public class AndroidUtils {
 		return src;
 	}
 
-	public static Spannable replaceIconsInString(String text, Drawable arrow, Set<String> keys) {
+	public static Spannable replaceIconsInString(String text, Drawable icon, Set<String> keys) {
 		Spannable spannable = new SpannableString(text);
 		for (String entry : keys) {
 			Matcher matcher = Pattern.compile(entry).matcher(spannable);
@@ -125,7 +127,18 @@ public class AndroidUtils {
 						break;
 					}
 				if (set) {
-					spannable.setSpan(new ImageSpan(arrow), matcher.start(), matcher.end(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+					spannable.setSpan(new ImageSpan(icon) {
+						public void draw(Canvas canvas, CharSequence text, int start, int end,
+						                 float x, int top, int y, int bottom, Paint paint) {
+							Drawable drawable = getDrawable();
+							canvas.save();
+							int transY = bottom - drawable.getBounds().bottom;
+							transY -= paint.getFontMetricsInt().descent / 2;
+							canvas.translate(x, transY);
+							drawable.draw(canvas);
+							canvas.restore();
+						}
+					}, matcher.start(), matcher.end(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 				}
 			}
 		}
