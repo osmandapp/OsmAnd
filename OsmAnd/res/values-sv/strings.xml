@@ -2736,7 +2736,7 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="empty_state_av_notes_desc">Lägg till ljud-, video- eller fotonotering för varje punkt på kartan, med hjälp av widgeten eller menyn.</string>
     <string name="add_track_to_markers_descr">Välj ett spår att lägga till sina waypoints till markörer. (Endast spår med waypoints visas.)</string>
     <string name="add_favourites_group_to_markers_descr">Välj en favoritkategori för att lägga till markörer.</string>
-    <string name="track_waypoints">Spåra waypoints</string>
+    <string name="shared_string_gpx_waypoints">Spåra waypoints</string>
     <string name="favourites_group">Kategorin Favoriter</string>
     <string name="add_group">Lägg till en grupp</string>
     <string name="add_group_descr">Du kan importera grupper från favoriter eller spår-waypoints.</string>

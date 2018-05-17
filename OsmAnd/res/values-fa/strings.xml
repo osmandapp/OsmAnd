@@ -3026,7 +3026,7 @@
     <string name="appearance_on_the_map">تنظیمات ظاهری</string>
     <string name="add_track_to_markers_descr">مسیری را انتخاب کنید تا نقاط بین‌راهیِ آن به نشانه‌ها اضافه شود.</string>
     <string name="add_favourites_group_to_markers_descr">یک گروه از نقاط برگزیده را انتخاب کنید تا به نشانه‌ها اضافه شود.</string>
-    <string name="track_waypoints">نقاط بین‌راهی مسیر</string>
+    <string name="shared_string_gpx_waypoints">نقاط بین‌راهی مسیر</string>
     <string name="favourites_group">گروه نقاط برگزیده</string>
     <string name="add_group">افزودن گروه</string>
     <string name="add_group_descr">گروهی از نقاط برگزیده یا نقاط بین‌راهی را وارد کنید.</string>

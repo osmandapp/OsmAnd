@@ -2971,7 +2971,7 @@
     <string name="shared_string_two">Два</string>
     <string name="shared_string_one">Адзін</string>
     <string name="add_favourites_group_to_markers_descr">Абярыце катэгорыю ўлюбёных, каб дадаць да маркераў.</string>
-    <string name="track_waypoints">Шляхавыя кропкі</string>
+    <string name="shared_string_gpx_waypoints">Шляхавыя кропкі</string>
     <string name="favourites_group">Катэгорыя ўлюбёных</string>
     <string name="add_group">Дадаць групу</string>
     <string name="add_group_descr">Вы можаце імпартаваць групы з улюбёных ці шляхавых кропак.</string>

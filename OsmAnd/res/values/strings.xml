@@ -178,7 +178,7 @@
     <string name="appearance_on_the_map">Appearance on the map</string>
     <string name="add_track_to_markers_descr">Select a GPX file to add its waypoints to the markers.</string>
     <string name="add_favourites_group_to_markers_descr">Select a favorite category to add to the markers.</string>
-    <string name="track_waypoints">GPX waypoints</string>
+    <string name="shared_string_gpx_waypoints">GPX waypoints</string>
     <string name="favourites_group">Favorites category</string>
     <string name="add_group">Add a group</string>
     <string name="add_group_descr">Import groups from favorites or GPX waypoints.</string>

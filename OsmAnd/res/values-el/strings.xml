@@ -1899,7 +1899,7 @@
     <string name="appearance_on_the_map">Εμφάνιση στον χάρτη</string>
     <string name="add_track_to_markers_descr">Τα σημεία διαδρομής μπορούν να προστεθούν σε δείκτες επιλέγοντας ένα από αυτά τα ίχνη που τα έχει.</string>
     <string name="add_favourites_group_to_markers_descr">Επιλέξτε μια αγαπημένη κατηγορία για να προσθέσετε στους δείκτες.</string>
-    <string name="track_waypoints">Σημεία διαδρομής ίχνους</string>
+    <string name="shared_string_gpx_waypoints">Σημεία διαδρομής ίχνους</string>
     <string name="favourites_group">Κατηγορία αγαπημένων</string>
     <string name="add_group">Προσθήκη ομάδας</string>
     <string name="add_group_descr">Εισάγετε ομάδες από αγαπημένα ή σημεία διαδρομής ίχνους.</string>

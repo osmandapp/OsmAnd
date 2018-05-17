@@ -2801,7 +2801,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="appearance_on_the_map">Aspekto sur la mapo</string>
     <string name="add_track_to_markers_descr">Oni povas aldoni navigadpunktojn al map-markoj per elekti iun kurson enhavantan ilin.</string>
     <string name="add_favourites_group_to_markers_descr">Elektu grupon de ŝatataj por aldoni al map-markoj.</string>
-    <string name="track_waypoints">Navigadpunktoj de kurso</string>
+    <string name="shared_string_gpx_waypoints">Navigadpunktoj de kurso</string>
     <string name="favourites_group">Kategorio de ŝatataj</string>
     <string name="add_group">Aldoni grupon</string>
     <string name="add_group_descr">Enportu grupon el ŝatataj aŭ navigadpunktojn de kurso.</string>

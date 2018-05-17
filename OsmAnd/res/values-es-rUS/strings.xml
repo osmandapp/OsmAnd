@@ -2842,7 +2842,7 @@ Lon %2$s</string>
     <string name="rename_marker">Renombrar marcador</string>
     <string name="add_track_to_markers_descr">Los puntos de referencia pueden añadirse a los marcadores eligiendo una de estas trazas.</string>
     <string name="add_favourites_group_to_markers_descr">Elige una categoría de favoritos para añadir a los marcadores.</string>
-    <string name="track_waypoints">Puntos de referencia de la traza</string>
+    <string name="shared_string_gpx_waypoints">Puntos de referencia de la traza</string>
     <string name="favourites_group">Categoría de favoritos</string>
     <string name="add_group">Añadir un grupo</string>
     <string name="add_group_descr">Importar grupos de favoritos o puntos de referencia de la traza.</string>

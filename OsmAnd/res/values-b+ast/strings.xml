@@ -1076,7 +1076,7 @@ Puntos</string>
     <string name="appearance_on_the_map">Apariencia nel mapa</string>
     <string name="add_track_to_markers_descr">Los puntos de ruta pueden añadise a los marcadores seleicionando una de les traces que los tengan.</string>
     <string name="add_favourites_group_to_markers_descr">Seleiciona una categoría favorita p\\\'amestala a los marcadores.</string>
-    <string name="track_waypoints">Puntos de ruta de la traza</string>
+    <string name="shared_string_gpx_waypoints">Puntos de ruta de la traza</string>
     <string name="favourites_group">Categoría de favoritos</string>
     <string name="add_group">Amestar un grupu</string>
     <string name="add_group_descr">Importar grupos dende favoritos o de puntos de ruta de la traza.</string>

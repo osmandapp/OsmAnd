@@ -3062,7 +3062,7 @@
     <string name="appearance_on_the_map">Поява на мапі</string>
     <string name="add_track_to_markers_descr">Виберіть трек для додавання шляхових точок (показані лише треки з точками)</string>
     <string name="add_favourites_group_to_markers_descr">Виберіть категорію закладок для додавання до маркерів.</string>
-    <string name="track_waypoints">Шляхові точки треку</string>
+    <string name="shared_string_gpx_waypoints">Шляхові точки треку</string>
     <string name="favourites_group">Категорія закладок</string>
     <string name="add_group">Додати групу</string>
     <string name="add_group_descr">Ви можете імпортувати групу з закладок або шляхових точок.</string>

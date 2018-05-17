@@ -1534,7 +1534,7 @@
     <string name="appearance_on_the_map">הופעה על המפה</string>
     <string name="add_track_to_markers_descr">ניתן להוסיף נקודות דרך לסמנים על ידי בחירת אחד המסלולים שבו יש אותם.</string>
     <string name="add_favourites_group_to_markers_descr">נא לבחור קטגוריה מועדפת להוספה לסמנים.</string>
-    <string name="track_waypoints">נקודות דרך במסלול</string>
+    <string name="shared_string_gpx_waypoints">נקודות דרך במסלול</string>
     <string name="favourites_group">קטגוריית מועדפים</string>
     <string name="add_group">הוספת קבוצה</string>
     <string name="add_group_descr">ניתן לייבא קבוצות ממועדפים או נקודות דרך של מסלול.</string>

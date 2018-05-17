@@ -2688,7 +2688,7 @@
     <string name="appearance_on_the_map">在地图上的外观</string>
     <string name="add_track_to_markers_descr">选择一个轨迹一遍添加它的航路点到标记。（只有有航路点的轨迹才会列举出来。）</string>
     <string name="add_favourites_group_to_markers_descr">选择一个收藏夹类别以便添加到标记。</string>
-    <string name="track_waypoints">轨迹航路点</string>
+    <string name="shared_string_gpx_waypoints">轨迹航路点</string>
     <string name="favourites_group">收藏夹类别</string>
     <string name="add_group">添加组</string>
     <string name="add_group_descr">您可以从收藏夹或轨道航点导入组。</string>
