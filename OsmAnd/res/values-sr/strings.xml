@@ -712,7 +712,7 @@
     
     
     
-    <string name="gpx_wpt">Пролазна тачка</string>
+    <string name="shared_string_waypoint">Пролазна тачка</string>
     <string name="available_maps">Доступне карте</string>
     <string name="select_voice_provider">Изаберите гласовно навођење</string>
     <string name="select_voice_provider_descr">Изаберите или преузмите гласовно навођење свог језика.</string>

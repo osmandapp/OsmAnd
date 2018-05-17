@@ -1494,7 +1494,7 @@
     <string name="gpx_split_interval">Interwał podziału</string>
     <string name="loading_smth">Wczytywanie %1$s…</string>
     <string name="map_widget_plain_time">Aktualny czas</string>
-    <string name="gpx_wpt">Punkt trasy</string>
+    <string name="shared_string_waypoint">Punkt trasy</string>
     <string name="save_as_favorites_points">Zapisz jako grupę ulubionych</string>
     <string name="select_destination_and_intermediate_points">Wybierz cele docelowe</string>
     <string name="layer_amenity_label">Etykiety punktów</string>

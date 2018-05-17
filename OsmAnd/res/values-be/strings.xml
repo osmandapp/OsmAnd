@@ -1432,7 +1432,7 @@
     <string name="gpx_info_asc_altitude">Пад’ём/спад: %1$s</string>
     <string name="loading_smth">Чытаньне %1$s…</string>
     <string name="map_widget_plain_time">Цяперашні час</string>
-    <string name="gpx_wpt">Пункт шляху</string>
+    <string name="shared_string_waypoint">Пункт шляху</string>
     <string name="selected_gpx_info_show">"
 \n
 \nДоўга ўтрымлівайце, каб убачыць на мапе"</string>

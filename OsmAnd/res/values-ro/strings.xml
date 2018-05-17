@@ -1271,7 +1271,7 @@
     <string name="layer_amenity_label">Etichete puncte</string>
     <string name="loading_smth">Încărcare %1$s…</string>
     <string name="map_widget_plain_time">Ora curentă</string>
-    <string name="gpx_wpt">Punct de reper</string>
+    <string name="shared_string_waypoint">Punct de reper</string>
     <string name="none_selected_gpx">Niciun fișier GPX selectat. Pentru a selecta țineți apăsat pe un track disponibil.</string>
     <string name="selected_gpx_info_show">\n\nȚineți apăsat pentru a vedea pe hartă</string>
     <string name="shared_string_selected">Selectat</string>

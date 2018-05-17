@@ -1382,7 +1382,7 @@
     <string name="layer_amenity_label">Підписи до цікавих точок</string>
     <string name="loading_smth">Звантажується %1$s…</string>
     <string name="map_widget_plain_time">Поточний час</string>
-    <string name="gpx_wpt">Маршрутна точка</string>
+    <string name="shared_string_waypoint">Маршрутна точка</string>
     <string name="selected_gpx_info_show">"
 \n
 \nДовго утримуйте, щоб побачити на мапі"</string>

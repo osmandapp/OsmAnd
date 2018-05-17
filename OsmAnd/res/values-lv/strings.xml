@@ -1453,7 +1453,7 @@ OsmAnd ir atvērtā koda navigācijas aplikācija ar piekļuvi vispusīgiem Open
     <string name="gpx_file_is_empty">Gpx treks ir tukšs</string>
     <string name="loading_smth">Ielādē %1$s…</string>
     <string name="map_widget_plain_time">Tekošais laiks</string>
-    <string name="gpx_wpt">Ceļapunkts</string>
+    <string name="shared_string_waypoint">Ceļapunkts</string>
     <string name="selected_gpx_info_show">\n\nTuriet nospiestu, lai rādītu uz kartes</string>
     <string name="delay_navigation_start">Automātiski uzsākt navigācijas vadību</string>
     <string name="shared_string_selected_lowercase">Izvēlēts</string>

@@ -1438,7 +1438,7 @@ POIの更新は利用できません</string>
     <string name="layer_amenity_label">施設の名称</string>
     <string name="loading_smth">ロード中 %1$s …</string>
     <string name="map_widget_plain_time">現在時刻</string>
-    <string name="gpx_wpt">経由地点</string>
+    <string name="shared_string_waypoint">経由地点</string>
     <string name="selected_gpx_info_show">"
 \n
 \nマップ上に表示するにはロングタップしてください"</string>

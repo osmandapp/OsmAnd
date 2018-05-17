@@ -1501,7 +1501,7 @@
     
     <string name="loading_smth">%1$s 불러오는 중…</string>
     <string name="map_widget_plain_time">현재 시간</string>
-    <string name="gpx_wpt">경유지</string>
+    <string name="shared_string_waypoint">경유지</string>
     <string name="selected_gpx_info_show">\n\n지도를 보려면 누르고 계십시요</string>
     <string name="delay_navigation_start">순차적인 안내를 시작합니다</string>
     <string name="gpx_split_interval">분할 간격</string>

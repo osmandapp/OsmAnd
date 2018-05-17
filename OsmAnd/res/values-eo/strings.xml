@@ -784,7 +784,7 @@ Lon: %2$s</string>
     <string name="layer_amenity_label">Etikedoj de interesejoj</string>
     <string name="loading_smth">Ŝargado de %1$s…</string>
     <string name="map_widget_plain_time">Nuna tempo</string>
-    <string name="gpx_wpt">Navigadpunkto</string>
+    <string name="shared_string_waypoint">Navigadpunkto</string>
     <string name="selected_gpx_info_show">"
 \n
 \nPremtenu por vidigi sur la mapo"</string>

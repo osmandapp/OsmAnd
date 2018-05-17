@@ -1351,7 +1351,7 @@ Proporcionális memória %4$s MB (Android korlát %5$s MB, Dalvik %6$s MB).</str
     <string name="select_destination_and_intermediate_points">Célpontok kijelölése</string>
     <string name="layer_amenity_label">POI-rátétréteg feliratai</string>
     <string name="map_widget_plain_time">Jelenlegi idő</string>
-    <string name="gpx_wpt">Útpont</string>
+    <string name="shared_string_waypoint">Útpont</string>
     <string name="selected_gpx_info_show">\n\nTérképen megtekintéshez nyomd meg hosszan</string>
     <string name="delay_navigation_start">Navigáció indítása automatikusan</string>
     <string name="shared_string_selected_lowercase">kijelölve</string>

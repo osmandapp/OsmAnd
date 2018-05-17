@@ -2778,7 +2778,7 @@
     <string name="fav_point_emoticons_message">שם הנקודה המועדפת השתנה לביטוי %1$s כדי להתאים כראוי לשמירת המחרוזת עם הרגשונים לקובץ.</string>
     <string name="save_track_interval_globally">הפרשי רישום</string>
     <string name="rendering_attr_hideWoodScrubs_name">עצים וצמחיה נמוכה</string>
-    <string name="gpx_wpt">נקודת דרך</string>
+    <string name="shared_string_waypoint">נקודת דרך</string>
     <string name="delay_navigation_start">התחלת הנחייה לפי פניות אוטומטית</string>
     <string name="gpx_timespan">טווח זמן: %1$s</string>
     <string name="index_item_world_seamarks">נקודות ציון ימיות</string>

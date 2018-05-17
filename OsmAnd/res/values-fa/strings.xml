@@ -1500,7 +1500,7 @@
     
     <string name="loading_smth">بارگیری %1$s…</string>
     <string name="map_widget_plain_time">زمان جاری</string>
-    <string name="gpx_wpt">نقطهٔ بین‌راهی</string>
+    <string name="shared_string_waypoint">نقطهٔ بین‌راهی</string>
     <string name="selected_gpx_info_show">"
 \n
 \nبرای نمایش بر روی نقشه انگشت خود را چند لحظه بر روی صفحه نگه دارید"</string>

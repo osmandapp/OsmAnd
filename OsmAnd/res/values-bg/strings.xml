@@ -1295,7 +1295,7 @@
     <string name="layer_amenity_label">Етикети на точките</string>
     <string name="loading_smth">Зареждане %1$s …</string>
     <string name="map_widget_plain_time">Текущо време</string>
-    <string name="gpx_wpt">Точка</string>
+    <string name="shared_string_waypoint">Точка</string>
     <string name="selected_gpx_info_show">\n\nНатиснете и задръжте за показване на картата</string>
     <string name="text_size_descr">Въведете размер на текста върху картата.</string>
     <string name="text_size">Размер на текста</string>

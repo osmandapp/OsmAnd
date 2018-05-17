@@ -200,7 +200,7 @@
     <string name="layer_amenity_label">Nazvy POI-nakladki</string>
     <string name="loading_smth">Čytańnie %1$s…</string>
     <string name="map_widget_plain_time">Ciapierašni čas</string>
-    <string name="gpx_wpt">Punkt šlachu</string>
+    <string name="shared_string_waypoint">Punkt šlachu</string>
     <string name="selected_gpx_info_show">"
 \n
 \nDoŭha ŭtrymlivajcie, kab ubačyć na mapie"</string>

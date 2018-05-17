@@ -128,7 +128,7 @@ As pistas gravadas pódense compartir ou empregar colaborando con OSM. Os atleta
     <string name="layer_amenity_label">Nomes dos puntos</string>
     <string name="loading_smth">A cargar %1$s…</string>
     <string name="map_widget_plain_time">Hora actual</string>
-    <string name="gpx_wpt">Punto de pasaxe</string>
+    <string name="shared_string_waypoint">Punto de pasaxe</string>
     <string name="selected_gpx_info_show">\n\nManteña premido para ver no mapa</string>
     <string name="delay_navigation_start">Iniciar a orientación paso a paso automaticamente</string>
     <string name="shared_string_selected_lowercase">seleccionado</string>

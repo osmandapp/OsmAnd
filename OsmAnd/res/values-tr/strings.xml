@@ -1764,7 +1764,7 @@
     <string name="layer_amenity_label"/>
     <string name="loading_smth">%1$s yükleniyor …</string>
     <string name="map_widget_plain_time">Şimdiki zaman</string>
-    <string name="gpx_wpt">Mevki</string>
+    <string name="shared_string_waypoint">Mevki</string>
     <string name="selected_gpx_info_show">"
 \n
 \nGörmek için harita üzerinde basılı tutun"</string>

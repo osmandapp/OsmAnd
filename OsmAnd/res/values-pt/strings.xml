@@ -1464,7 +1464,7 @@ Clique no widget de medição para ver mais ações.</string>
     <string name="layer_amenity_label">Rótulos de pontos</string>
     <string name="loading_smth">Carregando %1$s …</string>
     <string name="map_widget_plain_time">Tempo atual</string>
-    <string name="gpx_wpt">Ponto</string>
+    <string name="shared_string_waypoint">Ponto</string>
     <string name="selected_gpx_info_show">\n\nPressione e segure para ver no mapa</string>
     <string name="delay_navigation_start">Iniciar navegação com atraso</string>
     <string name="shared_string_selected_lowercase">seleccionado</string>

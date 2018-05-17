@@ -1297,7 +1297,7 @@
     <string name="sort_by_name">ترتيب حسب الاسم</string>
     <string name="show_zoom_buttons_navigation_descr">"عرض  أزرار التقريب أثناء الملاحة."</string>
     <string name="select_destination_and_intermediate_points">حدد الوجهات</string>
-    <string name="gpx_wpt">إحداثية</string>
+    <string name="shared_string_waypoint">إحداثية</string>
     <string name="rendering_attr_hideHouseNumbers_name">أرقام المنازل</string>
     <string name="confirm_usage_speed_cameras">غير مسموح استخدام تحذيرات كاميرا السرعة بالقانون في العديد من البلدان (ألمانيا وفرنسا، وإيطاليا، وغيرها). أوسماند لا تتحمل أي مسؤولية إذا كنت تنتهك القانون. الرجاء انقر نعم فقط إذا كنت مؤهلاً استخدام هذه الميزة.</string>
 	<string name="osm_changes_added_to_local_edits">تم إضافة تعديلات OSM إلى التغييرات المحلية</string>

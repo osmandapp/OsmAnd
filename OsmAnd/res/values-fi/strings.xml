@@ -1833,7 +1833,7 @@ Jälki %2$s</string>
     <string name="select_destination_and_intermediate_points">Valitse päämäärät</string>
     <string name="loading_smth">Ladataan %1$s…</string>
     <string name="map_widget_plain_time">Aika nyt</string>
-    <string name="gpx_wpt">Väyläpiste</string>
+    <string name="shared_string_waypoint">Väyläpiste</string>
     <string name="gpx_info_waypoints">"Väyläpisteet: %1$s "</string>
     <string name="gpx_info_distance">"Etäisyys: %1$s (%2$s pistettä) "</string>
     <string name="gpx_info_start_time">"Lähtöaika: %1$tF, %1$tT "</string>

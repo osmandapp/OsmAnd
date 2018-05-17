@@ -1269,7 +1269,7 @@
     <string name="layer_amenity_label">"POI  կետերի պիտակները"</string>
     <string name="loading_smth">Բեռնում %1$s…</string>
     <string name="map_widget_plain_time">Ընթացիկ ժամը</string>
-    <string name="gpx_wpt">Կետ</string>
+    <string name="shared_string_waypoint">Կետ</string>
     <string name="selected_gpx_info_show">"
 \n
 \nՍեխմեք և պահեք քարտեզի վրա տեսնելու համար"</string>

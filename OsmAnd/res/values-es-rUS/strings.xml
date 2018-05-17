@@ -271,7 +271,7 @@ Lon %2$s</string>
     <string name="layer_amenity_label">Nombres de PDI superpuestos</string>
     <string name="loading_smth">Cargando %1$s…</string>
     <string name="map_widget_plain_time">Tiempo actual</string>
-    <string name="gpx_wpt">Punto de referencia</string>
+    <string name="shared_string_waypoint">Punto de referencia</string>
     <string name="selected_gpx_info_show">"
 \n
 \nMantén pulsado para ver en el mapa"</string>

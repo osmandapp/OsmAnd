@@ -476,7 +476,7 @@
     <string name="layer_amenity_label">Etichetas de s\'istratu de sos PDI</string>
     <string name="loading_smth">Carrigamentu de %1$s…</string>
     <string name="map_widget_plain_time">Oràriu atuale</string>
-    <string name="gpx_wpt">Puntu de coladòrgiu</string>
+    <string name="shared_string_waypoint">Puntu de coladòrgiu</string>
     <string name="selected_gpx_info_show">"
 \n
 \nMantene incarcadu pro l\'ammustrare in sa mapa"</string>

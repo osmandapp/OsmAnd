@@ -1414,7 +1414,7 @@
     <string name="gpx_info_maximum_speed">最高速度：%1$s</string>
     <string name="gpx_info_avg_altitude">平均海拔：%1$s</string>
     <string name="gpx_info_diff_altitude">海拔高度範圍：%1$s</string>
-    <string name="gpx_wpt">航點</string>
+    <string name="shared_string_waypoint">航點</string>
     <string name="gpx_info_waypoints">航點：%1$s</string>
     <string name="save_as_favorites_points">另存群組為我的收藏</string>
     <string name="select_destination_and_intermediate_points">選擇目的地</string>

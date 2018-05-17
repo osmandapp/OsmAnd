@@ -1292,7 +1292,7 @@
     
     <string name="gpx_split_interval">Διάστημα διαχωρισμού</string>
     <string name="select_destination_and_intermediate_points">Επιλέξτε προορισμούς</string>
-    <string name="gpx_wpt">Σημείο διαδρομής</string>
+    <string name="shared_string_waypoint">Σημείο διαδρομής</string>
     <string name="gpx_info_subtracks">"Υποΐχνη: %1$s "</string>
 	<string name="gpx_info_waypoints">"Σημεία διαδρομής: %1$s "</string>
 	<string name="gpx_timespan">Χρονική διάρκεια: %1$s</string>

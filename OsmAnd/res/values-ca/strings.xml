@@ -1285,7 +1285,7 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="gpx_info_avg_altitude">Alçada mitjana: %1$s</string>
     <string name="loading_smth">S\'està carregant %1$s…</string>
     <string name="map_widget_plain_time">Hora actual</string>
-    <string name="gpx_wpt">Fita</string>
+    <string name="shared_string_waypoint">Fita</string>
     <string name="selected_gpx_info_show">"
 \n
 \nPremeu contínuament per veure al mapa"</string>

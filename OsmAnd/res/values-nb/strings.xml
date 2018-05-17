@@ -788,7 +788,7 @@
     <string name="rendering_attr_showSurfaces_name">Vis veidekke</string>
     <string name="select_destination_and_intermediate_points">Velg reisemål</string>
     <string name="layer_amenity_label">Overleggspåskrifter for interessepunkter</string>
-    <string name="gpx_wpt">Rutepunkt</string>
+    <string name="shared_string_waypoint">Rutepunkt</string>
     <string name="voice_pref_title">Tale</string>
     <string name="misc_pref_title">Diverse</string>
     <string name="localization_pref_title">Lokaltilpasning</string>

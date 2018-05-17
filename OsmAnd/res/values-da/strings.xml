@@ -1433,7 +1433,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
 
     <string name="gpx_info_subtracks">Underspor: %1$s </string>
     <string name="map_widget_plain_time">Aktuel tid</string>
-    <string name="gpx_wpt">Rutepunkt</string>
+    <string name="shared_string_waypoint">Rutepunkt</string>
     <string name="selected_gpx_info_show">"
 \n
 \nLangt tryk for at se på kortet"</string>

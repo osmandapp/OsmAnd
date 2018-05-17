@@ -1419,7 +1419,7 @@ Memoria in proporzione %4$s MB (limite di Android %5$s MB, Dalvik %6$s MB).</str
 
     <string name="gpx_split_interval">Intervallo suddivisione</string>
     <string name="loading_smth">Caricamento di %1$s…</string>
-    <string name="gpx_wpt">Tappa</string>
+    <string name="shared_string_waypoint">Tappa</string>
     <string name="selected_gpx_info_show">\n\nTieni premuto per vederlo sulla mappa</string>
     <string name="delay_navigation_start">Avvia la navigazione passo per passo automaticamente</string>
     <string name="map_widget_plain_time">Orario attuale</string>

@@ -1406,7 +1406,7 @@ Omogoča tudi dodajanje opomb v koledar za prikaz opomnikov ob daljših časih p
     <string name="save_as_favorites_points">Shrani kot skupino priljubljenih</string>
     <string name="select_destination_and_intermediate_points">Izbor ciljev</string>
     <string name="layer_amenity_label">Izpiši oznake točk POI</string>
-    <string name="gpx_wpt">Vmesna točka</string>
+    <string name="shared_string_waypoint">Vmesna točka</string>
     <string name="selected_gpx_info_show">\n\nPritisnite in zadržite za prikaz na zemljevidu</string>
     <string name="delay_navigation_start">Samodejno začni vodenje od zavoja do zavoja</string>
     <string name="gpx_info_subtracks">Podsledi: %1$s</string>

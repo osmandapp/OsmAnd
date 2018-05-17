@@ -884,7 +884,7 @@
     <string name="gpx_split_interval">Bölünmə intervalı</string>
     <string name="save_as_favorites_points">Favorit qrup olaraq saxla</string>
     <string name="select_destination_and_intermediate_points">Təyinat nöqtələrini seçin</string>
-    <string name="gpx_wpt">Yol nöqtəsi</string>
+    <string name="shared_string_waypoint">Yol nöqtəsi</string>
     <string name="gpx_info_waypoints">Yol nöqtələri: %1$s</string>
     <string name="gpx_info_distance">Məsafə: %1$s (%2$s nöqtə)</string>
     <string name="gpx_info_average_speed">Ortalama sürət: %1$s</string>

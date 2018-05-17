@@ -1627,7 +1627,7 @@
     <string name="map_preferred_locale_descr">"മേല്‍ക്കുറിപ്പുകളുടെ ഭാക്ഷ തെരഞ്ഞെടുക്കുക( ഈ ഭാക്ഷ ലഭ്യമല്ലെങ്കില്‍ ഇംഗ്ളീഷ്/പ്രാദേശിക ഭാക്ഷയിലേക്ക് മാറും) "</string>
     <string name="rendering_attr_moreDetailed_name">കൂടുതല്‍ വിവരങ്ങള്‍</string>
     <string name="rendering_attr_lessDetailed_name">കുറച്ച് വിവരങ്ങള്‍</string>
-    <string name="gpx_wpt">പാതബിന്ദു(വേപോയിന്റ്)</string>
+    <string name="shared_string_waypoint">പാതബിന്ദു(വേപോയിന്റ്)</string>
     <string name="gpx_file_is_empty">ജിപിഎക്സ് പാത ശൂന്യമാണ്</string>
     
     

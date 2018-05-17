@@ -1422,7 +1422,7 @@ Tam prireiks {1} MB pastoviam saugojimui.
     <string name="layer_amenity_label">LV sluoksnių pavadinimai</string>
     <string name="loading_smth">Įkeliama %1$s …</string>
     <string name="map_widget_plain_time">Dabartinis laikas</string>
-    <string name="gpx_wpt">Kelionės taškas</string>
+    <string name="shared_string_waypoint">Kelionės taškas</string>
     <string name="selected_gpx_info_show">\n\nPaspauskite ir laikykite kad pamatytumėte žemėlapyje</string>
     <string name="delay_navigation_start">Pradėti navigaciją automatiškai</string>
     <string name="shared_string_selected_lowercase">pasirinkti</string>

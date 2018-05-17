@@ -1265,7 +1265,7 @@ Proporčná pamäť %4$s MB (Limit Androidu %5$s MB, Dalvik %6$s MB).</string>
     
     <string name="loading_smth">Načítava sa %1$s…</string>
     <string name="map_widget_plain_time">Aktuálny čas</string>
-    <string name="gpx_wpt">Prechodný bod</string>
+    <string name="shared_string_waypoint">Prechodný bod</string>
     <string name="selected_gpx_info_show">\n\nStlačte a podržte pre zobrazenie na mape</string>
     <string name="delay_navigation_start">Spustiť navigačné povely automaticky</string>
     <string name="gpx_split_interval">Interval rozdelenia</string>

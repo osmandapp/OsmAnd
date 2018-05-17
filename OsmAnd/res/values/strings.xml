@@ -1355,7 +1355,7 @@
     <string name="layer_amenity_label">POI overlay labels</string>
     <string name="loading_smth">Loading %1$s…</string>
     <string name="map_widget_plain_time">Current time</string>
-    <string name="gpx_wpt">Waypoint</string>
+    <string name="shared_string_waypoint">Waypoint</string>
     <string name="selected_gpx_info_show">\n\nLong-tap to view on the map</string>
     <string name="delay_navigation_start">Start turn-by-turn guidance automatically</string>
     <string name="local_index_gpx_info_show">\n\nLong-tap for options</string>

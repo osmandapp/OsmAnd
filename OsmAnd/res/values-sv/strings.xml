@@ -1365,7 +1365,7 @@ Nyttjat utrymme är {1} MB.
     <string name="gpx_file_is_empty">GPX-spåret är tomt</string>
     <string name="loading_smth">Laddar %1$s …</string>
     <string name="map_widget_plain_time">Aktuell tid</string>
-    <string name="gpx_wpt">Waypoint</string>
+    <string name="shared_string_waypoint">Waypoint</string>
     <string name="selected_gpx_info_show">"
 \n
 \nTryck och håll för att visa på kartan"</string>

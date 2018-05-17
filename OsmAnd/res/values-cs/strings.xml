@@ -1316,7 +1316,7 @@ Proporcionální paměť %4$s MB (limit Androidu %5$s MB, Dalvik %6$s MB).</stri
     <string name="gpx_selection_route_points">%1$s \nBody trasy %2$s</string>
     <string name="gpx_selection_points">%1$s \nBody</string>
     <string name="gpx_selection_track">%1$s \nTrasa %2$s</string>
-    <string name="gpx_wpt">Bod na trase</string>
+    <string name="shared_string_waypoint">Bod na trase</string>
     <string name="selected_gpx_info_show">"
 \n
 \nStiskněte a podržte pro zobrazení na mapě"</string>

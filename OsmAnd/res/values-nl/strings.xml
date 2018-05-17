@@ -1461,7 +1461,7 @@ Wil je een nieuwe map maken op de toegestane locatie en de OsmAnd-bestanden daar
     <string name="map_widget_plain_time">Huidige tijd</string>
     <string name="select_destination_and_intermediate_points">Bestemmingen kiezen</string>
     <string name="layer_amenity_label">Namen van interessepunten</string>
-    <string name="gpx_wpt">Routepunt</string>
+    <string name="shared_string_waypoint">Routepunt</string>
     <string name="selected_gpx_info_show">\n\nLang drukken om op de kaart te bekijken</string>
     <string name="delay_navigation_start">Start navigatie automatisch</string>
     <string name="gpx_split_interval">Splits om de</string>

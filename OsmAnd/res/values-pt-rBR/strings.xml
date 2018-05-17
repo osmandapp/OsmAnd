@@ -448,7 +448,7 @@
     <string name="gpx_file_is_empty">A trilha GPX está vazia</string>
     
     
-    <string name="gpx_wpt">Marco de trajeto</string>
+    <string name="shared_string_waypoint">Marco de trajeto</string>
     <string name="gpx_selection_segment_title">Segmento</string>
     
     

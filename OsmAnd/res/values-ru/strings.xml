@@ -1582,7 +1582,7 @@
     <string name="gpx_selection_track">%1$s \nТрек %2$s</string>
     <string name="loading_smth">Загрузка %1$s…</string>
     <string name="map_widget_plain_time">Текущее время</string>
-    <string name="gpx_wpt">Путевая точка</string>
+    <string name="shared_string_waypoint">Путевая точка</string>
     <string name="gpx_split_interval">Интервал разбиения</string>
     <string name="delay_navigation_start">Старт навигации автоматически</string>
     <string name="save_as_favorites_points">Сохранить как группу избранных</string>
