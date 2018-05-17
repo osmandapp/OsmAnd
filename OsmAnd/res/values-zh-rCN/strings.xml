@@ -2718,7 +2718,7 @@
     <string name="switch_osm_notes_visibility_desc">在地图上显示/隐藏 OSM 笔记。</string>
     <string name="gpx_file_desc">GPX - 适合导出到 JOSM 或其它 OSM 编辑器。</string>
     <string name="osc_file_desc">OSC - 适合导出到 OpenStreetMap。</string>
-    <string name="gpx_file">GPX 文件</string>
+    <string name="shared_string_gpx_file">GPX 文件</string>
     <string name="osc_file">OSC 文件</string>
     <string name="choose_file_type">选择文件类型</string>
     <string name="osm_edits_export_desc">选择导出类型：OSM 笔记、POI（兴趣点）或者同时使用两者。</string>

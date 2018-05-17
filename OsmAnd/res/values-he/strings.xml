@@ -2710,7 +2710,7 @@
     <string name="switch_osm_notes_visibility_desc">הצגה/הסתרה של הערות OSM במפה.</string>
     <string name="gpx_file_desc">GPX - מתאים לייצוא ל־JOSM או עורכי OSM אחרים.</string>
     <string name="osc_file_desc">OSC - מתאים לייצוא ל־OpenStreetMap.</string>
-    <string name="gpx_file">קובץ GPX</string>
+    <string name="shared_string_gpx_file">קובץ GPX</string>
     <string name="osc_file">קובץ OSC</string>
     <string name="choose_file_type">נא לבחור את סוג הקובץ</string>
     <string name="osm_edits_export_desc">נא לבחור את סוג הייצור: הערות OSM, נקודות עניין או גם וגם.</string>

@@ -3128,7 +3128,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="switch_osm_notes_visibility_desc">Vis/skjul OSM-noter på kortet.</string>
     <string name="gpx_file_desc">GPX - velegnet som eksport til JOSM eller andre OSM-redigeringsværktøjer.</string>
     <string name="osc_file_desc">OSC - velegnet som eksport til OpenStreetMap.</string>
-    <string name="gpx_file">GPX-fil</string>
+    <string name="shared_string_gpx_file">GPX-fil</string>
     <string name="osc_file">OSC-fil</string>
     <string name="choose_file_type">Vælg filtype</string>
     <string name="osm_edits_export_desc">Vælg eksporttype: OSM-noter, IP, eller begge.</string>

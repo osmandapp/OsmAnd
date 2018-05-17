@@ -2910,7 +2910,7 @@
     <string name="switch_osm_notes_visibility_desc">Показать/скрыть заметки OSM на карте.</string>
     <string name="gpx_file_desc">GPX - подходит для экспорта в JOSM и другие OSM редакторы.</string>
     <string name="osc_file_desc">OSC - подходит для экспорта в OpenStreetMap.</string>
-    <string name="gpx_file">GPX файл</string>
+    <string name="shared_string_gpx_file">GPX файл</string>
     <string name="osc_file">OSC файл</string>
     <string name="choose_file_type">Выберите тип файла</string>
     <string name="osm_edits_export_desc">Выберите тип экспорта: заметки OSM, POI или оба.</string>

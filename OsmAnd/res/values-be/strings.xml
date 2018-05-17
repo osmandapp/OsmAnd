@@ -3063,7 +3063,7 @@
     <string name="switch_osm_notes_visibility_desc">Паказаць/схаваць OSM-нататкі на мапе.</string>
     <string name="gpx_file_desc">GPX падыходзіць для экспарту ў JOSM і іншыя OSM-рэдактары.</string>
     <string name="osc_file_desc">OSC падыходзіць для экспарту ў OpenStreetMap.</string>
-    <string name="gpx_file">GPX-файл</string>
+    <string name="shared_string_gpx_file">GPX-файл</string>
     <string name="osc_file">OSC-файл</string>
     <string name="choose_file_type">Абярыце тып файла</string>
     <string name="osm_edits_export_desc">Абярыце тып экспарту: OSM-нататкі, POI ці абодвыя.</string>

@@ -2904,7 +2904,7 @@
     <string name="winter_and_ski_renderer">Invierno y esquí</string>
     <string name="gpx_file_desc">GPX - adecuado para exportar a JOSM u otros editores OSM.</string>
     <string name="osc_file_desc">OSC - adecuado para exportar a OpenStreetMap.</string>
-    <string name="gpx_file">Archivo GPX</string>
+    <string name="shared_string_gpx_file">Archivo GPX</string>
     <string name="osc_file">Archivo OSC</string>
     <string name="choose_file_type">Elegir tipo de archivo</string>
     <string name="osm_edits_export_desc">Seleccione el tipo de exportación: notas de OSM, PDI o ambos.</string>

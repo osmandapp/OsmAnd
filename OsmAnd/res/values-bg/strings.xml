@@ -2186,7 +2186,7 @@
     <string name="make_as_start_point">Отбележете като начало</string>
     <string name="shared_string_current">Текущ</string>
     <string name="show_closed_notes">Покажи затворените бележки</string>
-    <string name="gpx_file">GPX файл</string>
+    <string name="shared_string_gpx_file">GPX файл</string>
     <string name="all_data">Всички данни</string>
     <string name="osm_notes">OSM бележки</string>
     <string name="will_open_tomorrow_at">Ще отвори утре в</string>

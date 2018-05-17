@@ -3115,7 +3115,7 @@
     <string name="switch_osm_notes_visibility_desc">پنهان/آشکارکردن توضیحات ویرایشی.</string>
     <string name="gpx_file_desc">جی‌پی‌ایکس - مناسب برای استفاده در JOSM یا سایر ویرایشگرهای OSM.</string>
     <string name="osc_file_desc">اُاِس‌سی - مناسب برای استفاده در OpenStreetMap.</string>
-    <string name="gpx_file">فایل GPX</string>
+    <string name="shared_string_gpx_file">فایل GPX</string>
     <string name="osc_file">فایل OSC</string>
     <string name="choose_file_type">انتخاب قالب فایل</string>
     <string name="osm_edits_export_desc">نوع خروجی را انتخاب کنید: توضیحات ویرایشی، POI یا هر دو.</string>

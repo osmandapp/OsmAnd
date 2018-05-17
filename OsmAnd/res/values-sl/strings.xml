@@ -2982,7 +2982,7 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="switch_osm_notes_visibility_desc">Pokaži/Skrij sporočila na zemljevidu.</string>
     <string name="gpx_file_desc">Zapis GPX – primeren za uvoz v program JOSM in druge urejevalnike OSM.</string>
     <string name="osc_file_desc">Zapis OSC – primeren za uvoz v OpenStreetMap.</string>
-    <string name="gpx_file">Datoteka GPX</string>
+    <string name="shared_string_gpx_file">Datoteka GPX</string>
     <string name="osc_file">Datoteka OSC</string>
     <string name="choose_file_type">Izbor vrste datoteke</string>
     <string name="osm_edits_export_desc">Izbor vrste zapisa za izvoz: sporočila OSM, točke POI ali oboje.</string>

@@ -2907,7 +2907,7 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="switch_osm_notes_visibility_desc">OSM jegyzetek megmutatása/elrejtése a térképen.</string>
     <string name="gpx_file_desc">GPX – megfelelő export JOSM és más OSM-szerkesztők számára</string>
     <string name="osc_file_desc">OSC – megfelelő export az OpenStreetMap számára</string>
-    <string name="gpx_file">GPX-fájl</string>
+    <string name="shared_string_gpx_file">GPX-fájl</string>
     <string name="osc_file">OSC-fájl</string>
     <string name="choose_file_type">Fájltípus kiválasztása</string>
     <string name="osm_edits_export_desc">Az exporttípus kijelölése: OSM-megjegyzések, POI vagy mindkettő.</string>

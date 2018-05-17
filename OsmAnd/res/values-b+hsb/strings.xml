@@ -1455,7 +1455,7 @@
     <string name="osmand_parking_delete_confirm">Chceš parkowansku chorhojčku woprawdźe wotstronić?</string>
     <string name="osmand_parking_delete">Parkowansku chorhojčku wotstronić</string>
     <string name="context_menu_item_delete_parking_point">Parkowansku chorhojčku wotstronić</string>
-    <string name="gpx_file">GPX-dataja</string>
+    <string name="shared_string_gpx_file">GPX-dataja</string>
     <string name="osc_file">OSC-dataja</string>
     <string name="choose_file_type">Datajowy typ wubrać</string>
     <string name="osm_notes">OSM-noticy</string>

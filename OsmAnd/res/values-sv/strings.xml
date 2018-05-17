@@ -2710,7 +2710,7 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="switch_osm_notes_visibility_desc">Visa/Dölj OSM Anteckningar på kartan.</string>
     <string name="gpx_file_desc">GPX - lämplig för export till JOSM eller andra OSM-redigerare.</string>
     <string name="osc_file_desc">OSC - lämplig för export till OpenStreetMap.</string>
-    <string name="gpx_file">GPX-fil</string>
+    <string name="shared_string_gpx_file">GPX-fil</string>
     <string name="osc_file">OSC-fil</string>
     <string name="choose_file_type">Välj filtyp</string>
     <string name="osm_edits_export_desc">Välj typ av export: OSM-anteckningar, POI, eller båda.</string>

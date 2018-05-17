@@ -3102,7 +3102,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="switch_osm_notes_visibility_desc">Afficher / Masquer les notes OSM sur la carte.</string>
     <string name="gpx_file_desc">GPX - adapté à l\'export vers JOSM et d\'autres éditeurs OSM.</string>
     <string name="osc_file_desc">OSC - adapté à l\'export vers OpenStreetMap.</string>
-    <string name="gpx_file">Fichier GPX</string>
+    <string name="shared_string_gpx_file">Fichier GPX</string>
     <string name="osc_file">Fichier OSC</string>
     <string name="choose_file_type">Sélectionnez le type de fichier</string>
     <string name="osm_edits_export_desc">Sélectionnez le type d\'export : notes OSM, PI ou les 2.</string>

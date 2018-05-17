@@ -2770,7 +2770,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="switch_osm_notes_visibility_desc">Mostra/Amaga notes OSM en el mapa.</string>
     <string name="gpx_file_desc">GPX - adient per exportar-lo a JOSM o a altres editors d\'OSM.</string>
     <string name="osc_file_desc">OSC - adient per exportar-lo a OpenStreetMap.</string>
-    <string name="gpx_file">Arxiu GPX</string>
+    <string name="shared_string_gpx_file">Arxiu GPX</string>
     <string name="osc_file">Arxiu OSC</string>
     <string name="choose_file_type">Seleccioneu el tipus de fitxer</string>
     <string name="osm_edits_export_desc">Seleccioneu el tipus d\'exportació: notes d\'OSM, PDI o tots dos.</string>

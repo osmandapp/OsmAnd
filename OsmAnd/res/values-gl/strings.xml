@@ -2670,7 +2670,7 @@ Pódese pechar esta vista desactivándoa aquí ou cambiando o «Estilo de mapa»
     <string name="switch_osm_notes_visibility_desc">Mostrar/Agochar as Notas de OSM no mapa.</string>
     <string name="gpx_file_desc">GPX - adecuado para exportar a JOSM ou outros editores de OSM.</string>
     <string name="osc_file_desc">OSC - adecuado para exportar a OpenStreetMap.</string>
-    <string name="gpx_file">Ficheiro GPX</string>
+    <string name="shared_string_gpx_file">Ficheiro GPX</string>
     <string name="osc_file">Ficheiro OSC</string>
     <string name="choose_file_type">Escolla o tipo de ficheiro</string>
     <string name="osm_edits_export_desc">Seleccione o tipo de exportación: Notas de OSM, PdI ou ambos.</string>

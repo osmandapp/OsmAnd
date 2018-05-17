@@ -1832,7 +1832,7 @@
     <string name="navigation_intent_invalid">Yanlış format: %s</string>
     <string name="show_closed_notes">Bağlı qeydləri göstər</string>
     <string name="switch_osm_notes_visibility_desc">Xəritədə OSM qeydlərini göstər/gizlət.</string>
-    <string name="gpx_file">GPX faylı</string>
+    <string name="shared_string_gpx_file">GPX faylı</string>
     <string name="osc_file">OSC faylı</string>
     <string name="choose_file_type">Fayl növünü seçin</string>
     <string name="all_data">Bütün məlumatlar</string>

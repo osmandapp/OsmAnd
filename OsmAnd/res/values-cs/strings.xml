@@ -2775,7 +2775,7 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="switch_osm_notes_visibility_desc">Zobrazit/skrýt OSM poznámky na mapě.</string>
     <string name="gpx_file_desc">GPX - vhodné pro export do JOSM nebo jiných editorů OSM.</string>
     <string name="osc_file_desc">OSC - vhodné pro export do OpenStreetMap.</string>
-    <string name="gpx_file">Soubor GPX</string>
+    <string name="shared_string_gpx_file">Soubor GPX</string>
     <string name="osc_file">Soubor OSC</string>
     <string name="choose_file_type">Zvolte typ souboru</string>
     <string name="osm_edits_export_desc">Vyberte typ exportu: OSM poznámky, POI nebo obojí.</string>

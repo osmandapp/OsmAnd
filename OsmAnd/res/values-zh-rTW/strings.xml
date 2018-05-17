@@ -3083,7 +3083,7 @@
     <string name="switch_osm_notes_visibility_desc">在地圖上顯示/隱藏 OSM 的註解。</string>
     <string name="gpx_file_desc">GPX - 適合匯出到 JOSM 或其他 OSM 編輯。</string>
     <string name="osc_file_desc">OSC - 適合匯出到 OpenStreetMap。</string>
-    <string name="gpx_file">GPX 檔案</string>
+    <string name="shared_string_gpx_file">GPX 檔案</string>
     <string name="osc_file">OSC 檔案</string>
     <string name="choose_file_type">選擇檔案類型</string>
     <string name="osm_edits_export_desc">選擇匯出類型：OSM 註解、POI 或著兩者。</string>

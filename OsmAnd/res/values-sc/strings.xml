@@ -3083,7 +3083,7 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="switch_osm_notes_visibility_desc">Ammustra/Istichi sas notas OSM in sa mapa.</string>
     <string name="gpx_file_desc">GPX - adatu pro s\'esportatzione a JOSM o a àteros editores OSM.</string>
     <string name="osc_file_desc">OSC - adatu pro s\'esportatzione in OpenStreetmap.</string>
-    <string name="gpx_file">Documentu GPX</string>
+    <string name="shared_string_gpx_file">Documentu GPX</string>
     <string name="osc_file">Documentu OSC</string>
     <string name="choose_file_type">Issèbera sa casta de documentu</string>
     <string name="osm_edits_export_desc">Issèbera sa casta de esportatzione: notas OSM, PDI, o ambos.</string>

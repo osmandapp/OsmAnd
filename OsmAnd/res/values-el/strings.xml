@@ -1885,7 +1885,7 @@
     <string name="switch_osm_notes_visibility_desc">Εμφάνιση/Απόκρυψη σημειώσεων OSM στον χάρτη.</string>
     <string name="gpx_file_desc">GPX - κατάλληλο για εξαγωγή σε JOSM ή σε άλλους επεξεργαστές OSM.</string>
     <string name="osc_file_desc">OSC - κατάλληλο για εξαγωγή σε OpenStreetMap.</string>
-    <string name="gpx_file">Αρχείο GPX</string>
+    <string name="shared_string_gpx_file">Αρχείο GPX</string>
     <string name="osc_file">Αρχείο OSC</string>
     <string name="choose_file_type">Επιλέξτε τύπο αρχείου</string>
     <string name="osm_edits_export_desc">Επιλέξτε τον τύπο εξαγωγής: σημειώσεις OSM, ΣΕ ή και τα δύο.</string>

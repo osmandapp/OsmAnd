@@ -2736,7 +2736,7 @@ Pôr do Sol: %2$s</string>
     <string name="lang_lo">Laociano</string>
     <string name="show_closed_notes">Mostrar notas encerradas</string>
     <string name="switch_osm_notes_visibility_desc">Mostrar/Ocultar Notas OSM no mapa.</string>
-    <string name="gpx_file">Arquivo GPX</string>
+    <string name="shared_string_gpx_file">Arquivo GPX</string>
     <string name="osc_file">Arquivo OSC</string>
     <string name="choose_file_type">Escolha o tipo de arquivo</string>
     <string name="show_tunnels">Túneis</string>
