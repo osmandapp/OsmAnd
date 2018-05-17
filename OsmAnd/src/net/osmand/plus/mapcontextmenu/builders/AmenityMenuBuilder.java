@@ -363,7 +363,9 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			boolean isWiki = false;
 			boolean isText = false;
 			boolean isDescription = false;
-			boolean needLinks = !"population".equals(key);
+			boolean needLinks = !("population".equals(key)
+					|| "service_hours".equals(key)
+					|| "height".equals(key));
 			boolean isPhoneNumber = false;
 			boolean isUrl = false;
 			boolean isCuisine = false;
