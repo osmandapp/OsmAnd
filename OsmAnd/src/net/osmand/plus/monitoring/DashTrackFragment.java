@@ -45,7 +45,7 @@ import java.util.List;
 public class DashTrackFragment extends DashBaseFragment {
 
 	public static final String TAG = "DASH_TRACK_FRAGMENT";
-	public static final int TITLE_ID = R.string.shared_string_my_tracks;
+	public static final int TITLE_ID = R.string.shared_string_gpx_files;
 
 	private static final String ROW_NUMBER_TAG = TAG + "_row_number";
 

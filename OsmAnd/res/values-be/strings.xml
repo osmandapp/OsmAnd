@@ -629,7 +629,7 @@
 	
 	<string name="file_can_not_be_renamed">Файл ня можа быць пераназваны.</string>
 	<string name="file_with_name_already_exists">Файл з такой назвай ужо існуе.</string>
-	<string name="gpx_navigation">GPX-маршрут</string>
+	<string name="shared_string_gpx_route">GPX-маршрут</string>
 	<string name="poi_query_by_name_matches_categories">Некалькі катэгорый POI знойдзены, што адпавядаюць запыту:</string>
 	<string name="data_to_search_poi_not_available">Лякальных зьвестак для пошуку POI няма.</string>
 	<string name="poi_filter_by_name">Пошук па назве</string>
@@ -1432,7 +1432,7 @@
     <string name="gpx_info_asc_altitude">Пад’ём/спад: %1$s</string>
     <string name="loading_smth">Чытаньне %1$s…</string>
     <string name="map_widget_plain_time">Цяперашні час</string>
-    <string name="gpx_wpt">Пункт шляху</string>
+    <string name="shared_string_waypoint">Пункт шляху</string>
     <string name="selected_gpx_info_show">"
 \n
 \nДоўга ўтрымлівайце, каб убачыць на мапе"</string>
@@ -1525,7 +1525,7 @@
     <string name="rendering_value_pedestrian_name">Пешаход</string>
     <string name="download_additional_maps">Сьцягнуць мапы, што адсутнічаюць, %1$s (%2$d МБ)?</string>
     
-    <string name="waypoints">Пункты шляху</string>
+    <string name="shared_string_waypoints">Пункты шляху</string>
     <string name="way_alarms">Дарожныя папярэджаньні</string>
     <string name="speak_favorites">Улюбёныя паблізу</string>
     <string name="speak_poi">Навакольныя POI</string>
@@ -1650,7 +1650,7 @@
     <string name="rendering_attr_streetLighting_name">Вулічнае асьвятленьне</string>
     <string name="version_settings_descr">Сцягваць начныя зборкі.</string>
     <string name="version_settings">Зборкі</string>
-    <string name="points">Пункты</string>
+    <string name="shared_string_gpx_points">Пункты</string>
     
     
     <string name="gps_status">Стан GPS</string>
@@ -2551,7 +2551,7 @@
     <string name="points_delete_multiple_succesful">Кропка(і) выдаленая.</string>
     <string name="points_delete_multiple">Вы збіраецеся выдаліць %1$d кропак. Вы ўпэўнены?</string>
     <string name="track_points_category_name">Значныя кропкі маршрута</string>
-    <string name="gpx_track">Сьлед</string>
+    <string name="shared_string_gpx_track">Сьлед</string>
     <string name="max_speed">Макс. хуткасць</string>
     <string name="average_speed">Сярэдняя хуткасць</string>
     <string name="shared_string_time_moving">Час руху</string>
@@ -2563,7 +2563,7 @@
     <string name="select_gpx_folder">Абраць тэчку трэкаў</string>
     <string name="file_can_not_be_moved">Файл не можа быць перамешчаны.</string>
     <string name="shared_string_move">Перамясціць</string>
-    <string name="shared_string_tracks">Трэкі</string>
+    <string name="shared_string_gpx_tracks">Трэкі</string>
     <string name="routing_attr_driving_style_name">Стыль язды</string>
     
     <string name="route_altitude">Вышыня маршруту</string>
@@ -2971,7 +2971,7 @@
     <string name="shared_string_two">Два</string>
     <string name="shared_string_one">Адзін</string>
     <string name="add_favourites_group_to_markers_descr">Абярыце катэгорыю ўлюбёных, каб дадаць да маркераў.</string>
-    <string name="track_waypoints">Шляхавыя кропкі</string>
+    <string name="shared_string_gpx_waypoints">Шляхавыя кропкі</string>
     <string name="favourites_group">Катэгорыя ўлюбёных</string>
     <string name="add_group">Дадаць групу</string>
     <string name="add_group_descr">Вы можаце імпартаваць групы з улюбёных ці шляхавых кропак.</string>
@@ -3063,7 +3063,7 @@
     <string name="switch_osm_notes_visibility_desc">Паказаць/схаваць OSM-нататкі на мапе.</string>
     <string name="gpx_file_desc">GPX падыходзіць для экспарту ў JOSM і іншыя OSM-рэдактары.</string>
     <string name="osc_file_desc">OSC падыходзіць для экспарту ў OpenStreetMap.</string>
-    <string name="gpx_file">GPX-файл</string>
+    <string name="shared_string_gpx_file">GPX-файл</string>
     <string name="osc_file">OSC-файл</string>
     <string name="choose_file_type">Абярыце тып файла</string>
     <string name="osm_edits_export_desc">Абярыце тып экспарту: OSM-нататкі, POI ці абодвыя.</string>

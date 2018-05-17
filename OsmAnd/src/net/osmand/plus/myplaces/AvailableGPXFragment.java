@@ -1147,7 +1147,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 			StringBuilder t = new StringBuilder();
 			String groupName = group.replaceAll("_", " ").replace(".gpx", "");
 			if (groupName.length() == 0) {
-				groupName = getString(R.string.shared_string_my_tracks);
+				groupName = getString(R.string.shared_string_gpx_files);
 			}
 			t.append(Algorithms.capitalizeFirstLetter(groupName));
 			boolean light = app.getSettings().isLightContent();

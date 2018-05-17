@@ -164,7 +164,7 @@ Ehhez {1} MB helyre van szükség.
 
     <string name="file_can_not_be_renamed">Fájl nem átnevezhető.</string>
     <string name="file_with_name_already_exists">Már létezik ilyen néven fájl.</string>
-    <string name="gpx_navigation">GPX útvonal</string>
+    <string name="shared_string_gpx_route">GPX útvonal</string>
     <string name="poi_query_by_name_matches_categories">Keresésnek megfelelő POI kategóriák:</string>
     <string name="data_to_search_poi_not_available">POI kereséshez nem található helyi adat.</string>
     <string name="poi_filter_by_name">Név szerinti keresés</string>
@@ -1351,7 +1351,7 @@ Proporcionális memória %4$s MB (Android korlát %5$s MB, Dalvik %6$s MB).</str
     <string name="select_destination_and_intermediate_points">Célpontok kijelölése</string>
     <string name="layer_amenity_label">POI-rátétréteg feliratai</string>
     <string name="map_widget_plain_time">Jelenlegi idő</string>
-    <string name="gpx_wpt">Útpont</string>
+    <string name="shared_string_waypoint">Útpont</string>
     <string name="selected_gpx_info_show">\n\nTérképen megtekintéshez nyomd meg hosszan</string>
     <string name="delay_navigation_start">Navigáció indítása automatikusan</string>
     <string name="shared_string_selected_lowercase">kijelölve</string>
@@ -1525,7 +1525,7 @@ Proporcionális memória %4$s MB (Android korlát %5$s MB, Dalvik %6$s MB).</str
 
     <string name="index_tours">Túrák</string>
     <string name="shared_string_all">Összes</string>
-    <string name="waypoints">Útpontok</string>
+    <string name="shared_string_waypoints">Útpontok</string>
     <string name="targets">Célpontok</string>
     <string name="way_alarms">Forgalmi figyelmeztetések</string>
     <string name="speak_favorites">Közeli kedvencek</string>
@@ -1649,7 +1649,7 @@ Proporcionális memória %4$s MB (Android korlát %5$s MB, Dalvik %6$s MB).</str
     <string name="proxy_pref_title">Proxy</string>
     <string name="proxy_pref_descr">Internet proxy beállítása.</string>
     <string name="settings_privacy">Adatvédelem</string>
-    <string name="points">Pontok</string>
+    <string name="shared_string_gpx_points">Pontok</string>
 
     <string name="shared_string_my_location">Saját pozícióm</string>
 
@@ -2516,7 +2516,7 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="select_gpx_folder">Nyomvonalkönyvtár kijelölése</string>
     <string name="file_can_not_be_moved">A fájl nem helyezhető át.</string>
     <string name="shared_string_move">Áthelyezés</string>
-    <string name="shared_string_tracks">Nyomvonalak</string>
+    <string name="shared_string_gpx_tracks">Nyomvonalak</string>
     <string name="routing_attr_driving_style_name">Vezetési stílus</string>
     
     <string name="route_altitude">Útvonal magassága</string>
@@ -2575,7 +2575,7 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="points_delete_multiple">%1$d pont törlésére készülsz. Biztosan vagy benne?</string>
     <string name="route_points_category_name">Érintendő fordulók az útvonalon</string>
     <string name="track_points_category_name">Figyelemre méltó pontok az útvonalon</string>
-    <string name="gpx_track">Nyomvonal</string>
+    <string name="shared_string_gpx_track">Nyomvonal</string>
     <string name="lang_ber">berber</string>
     <string name="do_not_send_anonymous_app_usage">Ne küldjön anonim használati statisztikát</string>
     <string name="do_not_send_anonymous_app_usage_desc">Az OsmAnd adatokat gyűjt arról, hogy az alkalmazás melyik részeit nyitod meg. Az alkalmazás soha nem küldi el a helyadataidat, és az alkalmazásba bevitt adatokat, valamint az általad megnézett, keresett vagy letöltött területek adatait sem.</string>
@@ -2840,7 +2840,7 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="appearance_on_the_map">Megjelenítés a térképen</string>
     <string name="add_track_to_markers_descr">Útpontokat adhatsz a térképjelölőkhöz, kiválasztva egy őket tartalmazó nyomvonalat.</string>
     <string name="add_favourites_group_to_markers_descr">Válassz egy kedvencek kategóriát, amikből jelölőt készítenél.</string>
-    <string name="track_waypoints">Nyomvonal útpontok</string>
+    <string name="shared_string_gpx_waypoints">Nyomvonal útpontok</string>
     <string name="favourites_group">Kedvencek kategória</string>
     <string name="add_group">Csoport hozzáadása</string>
     <string name="add_group_descr">Csoportok importálása kedvencekből vagy nyomvonal útpontból.</string>
@@ -2907,7 +2907,7 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="switch_osm_notes_visibility_desc">OSM jegyzetek megmutatása/elrejtése a térképen.</string>
     <string name="gpx_file_desc">GPX – megfelelő export JOSM és más OSM-szerkesztők számára</string>
     <string name="osc_file_desc">OSC – megfelelő export az OpenStreetMap számára</string>
-    <string name="gpx_file">GPX-fájl</string>
+    <string name="shared_string_gpx_file">GPX-fájl</string>
     <string name="osc_file">OSC-fájl</string>
     <string name="choose_file_type">Fájltípus kiválasztása</string>
     <string name="osm_edits_export_desc">Az exporttípus kijelölése: OSM-megjegyzések, POI vagy mindkettő.</string>

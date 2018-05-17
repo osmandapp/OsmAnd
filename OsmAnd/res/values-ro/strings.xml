@@ -382,7 +382,7 @@
 	
 	<string name="file_can_not_be_renamed">Fișierul nu poate fi redenumit.</string>
 	<string name="file_with_name_already_exists">Există un fișier cu același nume.</string>
-	<string name="gpx_navigation">Rută GPX</string>
+	<string name="shared_string_gpx_route">Rută GPX</string>
 	<string name="poi_query_by_name_matches_categories">Au foste găsite câteva categorii de POI care satisfac condițiile:</string>
 	<string name="data_to_search_poi_not_available">Nu există date offline salvate pentru efectuarea căutării.</string>
 	<string name="poi_filter_by_name">Căutare după nume</string>
@@ -1207,7 +1207,7 @@
     <string name="duration">Durată</string>
     <string name="distance">Distanță</string>
     <string name="shared_string_all">Toate</string>
-    <string name="waypoints">Puncte de referință</string>
+    <string name="shared_string_waypoints">Puncte de referință</string>
     <string name="targets">Destinații</string>
     <string name="download_additional_maps">Descarcă hărțile lipsă %1$s (%2$d MB)?</string>
     <string name="shared_string_more">Mai mult…</string>
@@ -1271,7 +1271,7 @@
     <string name="layer_amenity_label">Etichete puncte</string>
     <string name="loading_smth">Încărcare %1$s…</string>
     <string name="map_widget_plain_time">Ora curentă</string>
-    <string name="gpx_wpt">Punct de reper</string>
+    <string name="shared_string_waypoint">Punct de reper</string>
     <string name="none_selected_gpx">Niciun fișier GPX selectat. Pentru a selecta țineți apăsat pe un track disponibil.</string>
     <string name="selected_gpx_info_show">\n\nȚineți apăsat pentru a vedea pe hartă</string>
     <string name="shared_string_selected">Selectat</string>
@@ -1333,7 +1333,7 @@
     <string name="text_size">Mărimea textului</string>
     <string name="rendering_attr_streetLighting_name">Lumină stradală</string>
     <string name="proxy_pref_title">Proxy</string>
-    <string name="points">Puncte</string>
+    <string name="shared_string_gpx_points">Puncte</string>
     <string name="shared_string_my_location">Poziția mea</string>
     
 	<string name="home_button">Acasă</string>
@@ -1888,7 +1888,7 @@
     <string name="switch_osm_notes_visibility_desc">Arată/ascunde notele OSM pe hartă.</string>
     <string name="gpx_file_desc">GPX - disponibill pentru export catre JOSM sau alte editoare OSM.</string>
     <string name="osc_file_desc">OSC - disponibil pentru export catre OpenStreetMap.</string>
-    <string name="gpx_file">Fișier GPX</string>
+    <string name="shared_string_gpx_file">Fișier GPX</string>
     <string name="osc_file">Fișier OSC</string>
     <string name="choose_file_type">Alege tipul de fișier</string>
     <string name="osm_edits_export_desc">Alege tipul de export: Note OSM, POI, sau ambele.</string>
@@ -1933,7 +1933,7 @@
     <string name="appearance_on_the_map">Apariția pe hartă</string>
     <string name="add_track_to_markers_descr">Selectează un track pentru a-i adăuga un punct intermediar la marcaje. (Numai trackurile cu puncte intermediare sunt listate.)</string>
     <string name="add_favourites_group_to_markers_descr">Selectează o categorie de favorite pentru a fi adaugată la marcaje.</string>
-    <string name="track_waypoints">Puncte intermediare pentru track</string>
+    <string name="shared_string_gpx_waypoints">Puncte intermediare pentru track</string>
     <string name="favourites_group">Categorie favorite</string>
     <string name="add_group">Adaugă un grup</string>
     <string name="add_group_descr">Puteți importa grupuri din favorite sau puncte intermediare de trackuri</string>
@@ -2103,7 +2103,7 @@
     <string name="relief_smoothness_factor_descr">Teren preferat: plat sau deluros</string>
     <string name="shared_string_slope">Pantă</string>
     <string name="add_new_folder">Adaugă dosar nou</string>
-    <string name="gpx_track">Track(pistă)</string>
+    <string name="shared_string_gpx_track">Track(pistă)</string>
     <string name="max_speed">Viteza maximă</string>
     <string name="average_speed">Viteza medie</string>
     <string name="shared_string_max">Maxim</string>
@@ -2113,7 +2113,7 @@
     <string name="select_gpx_folder">Selectează dosarul cu track-uri</string>
     <string name="file_can_not_be_moved">Fișierul nu poate fi mutat.</string>
     <string name="shared_string_move">Mută</string>
-    <string name="shared_string_tracks">Track-uri</string>
+    <string name="shared_string_gpx_tracks">Track-uri</string>
     <string name="routing_attr_driving_style_name">Stil de conducere</string>
     <string name="shared_string_time">Timp</string>
     <string name="total_distance">Distanța totală</string>

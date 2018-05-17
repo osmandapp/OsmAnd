@@ -476,7 +476,7 @@
     <string name="layer_amenity_label">Etichetas de s\'istratu de sos PDI</string>
     <string name="loading_smth">Carrigamentu de %1$s…</string>
     <string name="map_widget_plain_time">Oràriu atuale</string>
-    <string name="gpx_wpt">Puntu de coladòrgiu</string>
+    <string name="shared_string_waypoint">Puntu de coladòrgiu</string>
     <string name="selected_gpx_info_show">"
 \n
 \nMantene incarcadu pro l\'ammustrare in sa mapa"</string>
@@ -854,7 +854,7 @@ Memòria in proportzione %4$s MB (lìmite de Android %5$s MB, Dalvik %6$s MB).</
     <string name="animate_route_off">Firma animatzione</string>
     <string name="animate_route">Avia animatzione</string>
     <string name="file_with_name_already_exists">Esistit giai unu documentu cun su matessi nùmene.</string>
-    <string name="gpx_navigation">Àndala GPX</string>
+    <string name="shared_string_gpx_route">Àndala GPX</string>
     <string name="poi_filter_by_name">Chirca pro nùmene</string>
     <string name="button_upgrade_osmandplus">Agiorna OsmAnd+</string>
 
@@ -1534,7 +1534,7 @@ Memòria in proportzione %4$s MB (lìmite de Android %5$s MB, Dalvik %6$s MB).</
     <string name="off_router_service_no_gps_available">Su servìtziu de nàvigu de isfundu de OsmAnd netzèssitat de su sistema de positzionamentu ativadu.</string>
 
 
-    <string name="waypoints">Puntos de coladòrgiu</string>
+    <string name="shared_string_waypoints">Puntos de coladòrgiu</string>
     <string name="targets">Destinatziones</string>
     <string name="way_alarms">Avisos de tràficu</string>
     <string name="speak_favorites">Preferidos a curtzu</string>
@@ -1660,7 +1660,7 @@ Memòria in proportzione %4$s MB (lìmite de Android %5$s MB, Dalvik %6$s MB).</
     <string name="rendering_attr_streetLighting_name">Illuminatzione pùblica</string>
     <string name="version_settings_descr">Iscàrriga versiones de isvilupu.</string>
     <string name="version_settings">Versiones</string>
-    <string name="points">Puntos</string>
+    <string name="shared_string_gpx_points">Puntos</string>
 
     <string name="shared_string_my_location">Positzione mea</string>
 
@@ -2581,7 +2581,7 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="average_altitude">Artària mèdia</string>
     <string name="total_distance">Distàntzia totale</string>
     <string name="shared_string_time">Tempus</string>
-    <string name="shared_string_tracks">Rastas</string>
+    <string name="shared_string_gpx_tracks">Rastas</string>
     <string name="select_gpx_folder">Icherta sa cartella de sas rastas</string>
     <string name="file_can_not_be_moved">Su documentu non podet èssere mòidu.</string>
     <string name="shared_string_move">Move</string>
@@ -2593,7 +2593,7 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="shared_string_start_time">Tzucada</string>
     <string name="shared_string_end_time">Arrivu</string>
     <string name="shared_string_color">Colore</string>
-    <string name="gpx_track">Rasta</string>
+    <string name="shared_string_gpx_track">Rasta</string>
     <string name="points_delete_multiple_succesful">Puntu/os iscantzelladu/os.</string>
     <string name="points_delete_multiple">As a iscantzellare %1$d puntu/os. Seguru ses?</string>
     <string name="track_points_category_name">Puntos de coladòrgiu, puntos de interesse, elementos cun nùmenes</string>
@@ -2986,7 +2986,7 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="appearance_on_the_map">Visualizatzione in sa mapa</string>
     <string name="add_track_to_markers_descr">Sos puntos de coladòrgiu podent èssere annantos a sos marcadores ischertende una de sas rastas chi los tenet.</string>
     <string name="add_favourites_group_to_markers_descr">Issèbera una categoria de preferidos pro l\'annànghere a sos marcadores.</string>
-    <string name="track_waypoints">Puntos de coladòrgiu</string>
+    <string name="shared_string_gpx_waypoints">Puntos de coladòrgiu</string>
     <string name="favourites_group">Categoria de preferidos</string>
     <string name="add_group">Annanghe unu grupu</string>
     <string name="add_group_descr">Importa unu grupu de preferidos o puntos de coladòrgiu de una rasta.</string>
@@ -3083,7 +3083,7 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="switch_osm_notes_visibility_desc">Ammustra/Istichi sas notas OSM in sa mapa.</string>
     <string name="gpx_file_desc">GPX - adatu pro s\'esportatzione a JOSM o a àteros editores OSM.</string>
     <string name="osc_file_desc">OSC - adatu pro s\'esportatzione in OpenStreetmap.</string>
-    <string name="gpx_file">Documentu GPX</string>
+    <string name="shared_string_gpx_file">Documentu GPX</string>
     <string name="osc_file">Documentu OSC</string>
     <string name="choose_file_type">Issèbera sa casta de documentu</string>
     <string name="osm_edits_export_desc">Issèbera sa casta de esportatzione: notas OSM, PDI, o ambos.</string>

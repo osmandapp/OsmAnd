@@ -735,7 +735,7 @@
 	
 	<string name="file_can_not_be_renamed">لا يمكن اعادة تسمية الملف.</string>
 	<string name="file_with_name_already_exists">يوجد بالفعل ملف بهذا الاسم.</string>
-	<string name="gpx_navigation">الطريق GPX</string>
+	<string name="shared_string_gpx_route">الطريق GPX</string>
 	<string name="poi_query_by_name_matches_categories">وجد عدة تصنيفات POI توافق الاستعلام:</string>
 	<string name="data_to_search_poi_not_available">البيانات المحلية لبحث POI غير موجودة.</string>
 	<string name="poi_filter_by_name">البحث بالاسم</string>
@@ -1182,7 +1182,7 @@
     <string name="proxy_pref_title">بروكسي</string>
     <string name="proxy_pref_descr">تحديد وكيل بروكسي إنترنت.</string>
     <string name="settings_privacy">الخصوصية</string>
-    <string name="points">نقاط</string>
+    <string name="shared_string_gpx_points">نقاط</string>
 	<string name="navigation_over_track">بدء الملاحة على طول المسار؟</string>
 	<string name="avoid_roads_msg">يمكنك تشغيل مسار بديل بتحديد طرق متجنبة</string>
 	<string name="rendering_attr_roadStyle_name">نمط الطريق</string>
@@ -1258,7 +1258,7 @@
     <string name="distance">المسافة</string>
     <string name="index_tours">الجولات</string>
     <string name="shared_string_all">جميع</string>
-    <string name="waypoints">نقاط الطريق</string>
+    <string name="shared_string_waypoints">نقاط الطريق</string>
     <string name="targets">الوجهات</string>
     <string name="rendering_value_browse_map_name">استعرض الخريطة</string>  
     <string name="rendering_value_car_name">سيارة</string>
@@ -1297,7 +1297,7 @@
     <string name="sort_by_name">ترتيب حسب الاسم</string>
     <string name="show_zoom_buttons_navigation_descr">"عرض  أزرار التقريب أثناء الملاحة."</string>
     <string name="select_destination_and_intermediate_points">حدد الوجهات</string>
-    <string name="gpx_wpt">إحداثية</string>
+    <string name="shared_string_waypoint">إحداثية</string>
     <string name="rendering_attr_hideHouseNumbers_name">أرقام المنازل</string>
     <string name="confirm_usage_speed_cameras">غير مسموح استخدام تحذيرات كاميرا السرعة بالقانون في العديد من البلدان (ألمانيا وفرنسا، وإيطاليا، وغيرها). أوسماند لا تتحمل أي مسؤولية إذا كنت تنتهك القانون. الرجاء انقر نعم فقط إذا كنت مؤهلاً استخدام هذه الميزة.</string>
 	<string name="osm_changes_added_to_local_edits">تم إضافة تعديلات OSM إلى التغييرات المحلية</string>
@@ -2560,9 +2560,9 @@
     <string name="full_version_thanks">شكرا لكم لاقتناء النسخة الكاملة من أوسماند.</string>
     <string name="routing_attr_driving_style_speed_name">طرق أقصر</string>
     <string name="routing_attr_driving_style_safety_name">تفضيل الشوارع الجانبية</string>
-    <string name="gpx_track">المسار</string>
+    <string name="shared_string_gpx_track">المسار</string>
     <string name="select_gpx_folder">إختر مجلد المسار</string>
-    <string name="shared_string_tracks">المسارات</string>
+    <string name="shared_string_gpx_tracks">المسارات</string>
     <string name="shared_string_time">الزمن</string>
     <string name="osmand_plus_extended_description_part8">التغطية التقريبية للخريطة و جودتها : • أوروبا الغربية : **** • أوروبا الشرقية : *** • روسيا : *** • أمريكا الشمالية : *** • امريكا الجنوبية : ** • آسيا : ** • اليابان وكوريا : *** • الشرق الأوسط : ** • إفريقيا : ** • أنتاركتيكا : *
 \n معظم البلدان في جميع أنحاء العالم متاحة للتنزيل ! من أفغانستان إلى زيمبابوي، من أستراليا إلى الولايات المتحدة الأمريكية. الأرجنتين، البرازيل، كندا، فرنسا، ألمانيا، المكسيك، المملكة المتحدة، إسبانيا، …</string>
@@ -2854,7 +2854,7 @@
     <string name="by_type">حسب النوع</string>
     <string name="shared_string_more_without_dots">المزيد</string>
     <string name="appearance_on_the_map">المظهر على الخريطة</string>
-    <string name="track_waypoints">نقاط المسار</string>
+    <string name="shared_string_gpx_waypoints">نقاط المسار</string>
     <string name="add_group">إضافة مجموعة</string>
     <string name="empty_state_markers_active">قم بإنشاء علامات على الخريطة !</string>
     <string name="empty_state_markers_groups">إستيراد مجموعات</string>
@@ -2903,7 +2903,7 @@
     <string name="make_as_start_point">تحديد كنقطة البداية</string>
     <string name="show_closed_notes">إظهار الملاحظات المُغلَقة</string>
     <string name="switch_osm_notes_visibility_desc">إظهار/إخفاء ملاحظات OSM على الخريطة.</string>
-    <string name="gpx_file">ملف GPX</string>
+    <string name="shared_string_gpx_file">ملف GPX</string>
     <string name="osc_file">ملف OSC</string>
     <string name="choose_file_type">قم باختيار نسق الملف</string>
     <string name="all_data">كافة البيانات</string>

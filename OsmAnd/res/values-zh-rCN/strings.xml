@@ -212,7 +212,7 @@
 	<string name="city_type_village">村</string>
 	<string name="city_type_town">镇</string>
 	<string name="city_type_city">城市</string>
-	<string name="gpx_navigation">GPX 路径</string>
+	<string name="shared_string_gpx_route">GPX 路径</string>
 	<string name="button_upgrade_osmandplus">升级OsmAnd+</string>
 	<string name="shared_string_rename">重命名</string>
 	
@@ -1548,11 +1548,11 @@
     <string name="add_new_folder">添加新文件夹</string>
     <string name="route_points_category_name">转到这条路线上</string>
     <string name="track_points_category_name">在这条路线的突出点</string>
-    <string name="gpx_track">轨迹</string>
+    <string name="shared_string_gpx_track">轨迹</string>
     <string name="shared_string_time_moving">移动的时间</string>
     <string name="shared_string_time_span">时间跨度</string>
     <string name="select_gpx_folder">选择轨迹文件夹</string>
-    <string name="shared_string_tracks">轨迹</string>
+    <string name="shared_string_gpx_tracks">轨迹</string>
     <string name="route_altitude">路线标高</string>
     <string name="altitude_descent">下坡</string>
     <string name="altitude_ascent">上坡</string>
@@ -1881,7 +1881,7 @@
     <string name="version_settings">构建</string>
     <string name="rendering_attr_streetLighting_name">街道照明</string>
     <string name="proxy_pref_descr">设置代理互联网通信</string>
-    <string name="points">点</string>
+    <string name="shared_string_gpx_points">点</string>
     <string name="navigation_over_track">开始沿着轨道导航吗？</string>
     <string name="avoid_roads_msg">您可以选择一条需绕开的道路以触发路线重新规划</string>
     <string name="speak_pedestrian">步行街道</string>
@@ -1959,7 +1959,7 @@
 \n启动此预览，会更改地图样式到“冬季和滑雪”，显示出冬季的条件下，所有的景观特征。此查看可以在这里经由再次取消启动，或通过“配置地图”下的“地图样式”这两者中任何一个的更改而恢复它。</string>
     <string name="index_tours">旅游</string>
     <string name="shared_string_all">全部</string>
-    <string name="waypoints">路标</string>
+    <string name="shared_string_waypoints">路标</string>
     <string name="targets">目的地</string>
     <string name="download_additional_maps">要下载缺少的地图 %1$s (%2$d MB) 吗？</string>
     <string name="rendering_value_browse_map_name">浏览地图</string>
@@ -2010,7 +2010,7 @@
     <string name="save_as_favorites_points">另存为收藏夹组</string>
     <string name="layer_amenity_label">点标签</string>
     <string name="loading_smth">正在加载 %1$s…</string>
-    <string name="gpx_wpt">航点</string>
+    <string name="shared_string_waypoint">航点</string>
     <string name="selected_gpx_info_show">"
 \n
 \n长按在地图上查看"</string>
@@ -2688,7 +2688,7 @@
     <string name="appearance_on_the_map">在地图上的外观</string>
     <string name="add_track_to_markers_descr">选择一个轨迹一遍添加它的航路点到标记。（只有有航路点的轨迹才会列举出来。）</string>
     <string name="add_favourites_group_to_markers_descr">选择一个收藏夹类别以便添加到标记。</string>
-    <string name="track_waypoints">轨迹航路点</string>
+    <string name="shared_string_gpx_waypoints">轨迹航路点</string>
     <string name="favourites_group">收藏夹类别</string>
     <string name="add_group">添加组</string>
     <string name="add_group_descr">您可以从收藏夹或轨道航点导入组。</string>
@@ -2718,7 +2718,7 @@
     <string name="switch_osm_notes_visibility_desc">在地图上显示/隐藏 OSM 笔记。</string>
     <string name="gpx_file_desc">GPX - 适合导出到 JOSM 或其它 OSM 编辑器。</string>
     <string name="osc_file_desc">OSC - 适合导出到 OpenStreetMap。</string>
-    <string name="gpx_file">GPX 文件</string>
+    <string name="shared_string_gpx_file">GPX 文件</string>
     <string name="osc_file">OSC 文件</string>
     <string name="choose_file_type">选择文件类型</string>
     <string name="osm_edits_export_desc">选择导出类型：OSM 笔记、POI（兴趣点）或者同时使用两者。</string>

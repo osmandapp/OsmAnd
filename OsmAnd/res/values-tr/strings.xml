@@ -672,7 +672,7 @@
     <string name="av_def_action_choose">Talep üzerine seç</string>
     <string name="osmand_play_title_30_chars">OsmAnd Haritalar &amp; Yolbul</string>
 	<string name="osmand_plus_play_title_30_chars">OsmAnd+ Haritalar &amp; Yolbul</string>
-	<string name="gpx_navigation">GPX Rotası</string>
+	<string name="shared_string_gpx_route">GPX Rotası</string>
 	<string name="poi_query_by_name_matches_categories">Sorgunuza uyan çeşitli POI kategorileri bulundu:</string>
 	<string name="data_to_search_poi_not_available">POI araması yapmak için yerel veri mevcut değil.</string>
 	<string name="old_poi_file_should_be_deleted">POI veri dosyası \'%1$s\' gereksiz ve silinebilir.</string>
@@ -1212,7 +1212,7 @@
     <string name="edit_group">Grubu düzenle</string>
     <string name="parking_place">Park yeri</string>
     <string name="gps_status">GPS durumu</string>
-    <string name="points">Noktalar</string>
+    <string name="shared_string_gpx_points">Noktalar</string>
 	<string name="rendering_attr_roadStyle_name">Yol tarzı</string>
     <string name="rendering_value__name">Varsayılan</string>
     <string name="rendering_value_default_name">Standart</string>
@@ -1764,7 +1764,7 @@
     <string name="layer_amenity_label"/>
     <string name="loading_smth">%1$s yükleniyor …</string>
     <string name="map_widget_plain_time">Şimdiki zaman</string>
-    <string name="gpx_wpt">Mevki</string>
+    <string name="shared_string_waypoint">Mevki</string>
     <string name="selected_gpx_info_show">"
 \n
 \nGörmek için harita üzerinde basılı tutun"</string>
@@ -1977,7 +1977,7 @@
     <string name="int_hour">h</string>
     <string name="index_tours">Turlar</string>
     <string name="shared_string_all">Tüm</string>
-    <string name="waypoints">Yol işaretleri</string>
+    <string name="shared_string_waypoints">Yol işaretleri</string>
     <string name="targets">Varış noktaları</string>
     <string name="download_additional_maps">Eksik haritalar %1$s (%2$d MB) indirilsinmi?</string>
     <string name="rendering_value_browse_map_name">Haritaya göz at</string>
@@ -2175,7 +2175,7 @@
     <string name="routing_attr_short_way_description">Yakıt tasarruflu yolu kullan (çoğunlukla daha kısadır).</string>
     <string name="add_new_folder">Yeni klasör ekle</string>
     <string name="points_delete_multiple_succesful">Nokta(lar) başarıyla silindi.</string>
-    <string name="gpx_track">Takip et</string>
+    <string name="shared_string_gpx_track">Takip et</string>
     <string name="track_points_category_name">Bu rotadaki dikkate değer noktalar</string>
     <string name="max_speed">Azami hız</string>
     <string name="average_speed">Ortalama hız</string>
@@ -2536,7 +2536,7 @@
     <string name="shared_string_time_moving">Hareket zamanı</string>
     <string name="shared_string_time_span">Zaman aralığı</string>
     <string name="select_gpx_folder">Yol-izi klasörü seç</string>
-    <string name="shared_string_tracks">Yol-izleri</string>
+    <string name="shared_string_gpx_tracks">Yol-izleri</string>
     <string name="route_altitude">Rota yüksekliği</string>
     <string name="altitude_descent">yükselikte azalma</string>
     <string name="altitude_ascent">Yükseklikte artış</string>

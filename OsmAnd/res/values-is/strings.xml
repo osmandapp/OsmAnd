@@ -265,7 +265,7 @@
     <string name="gps_status">Staða GPS</string>
     <string name="proxy_pref_title">Milliþjónn</string>
     <string name="settings_privacy">Gagnaleynd</string>
-    <string name="points">Punktar</string>
+    <string name="shared_string_gpx_points">Punktar</string>
     <string name="rendering_value__name">Sjálfgefið</string>
     <string name="rendering_value_default_name">Sjálfgefið</string>
     <string name="dash_download_manage">Umsjón</string>
@@ -297,7 +297,7 @@
     <string name="distance">Vegalengd</string>
     <string name="index_tours">Ferðir</string>
     <string name="shared_string_all">Allt</string>
-    <string name="waypoints">Ferilpunktar</string>
+    <string name="shared_string_waypoints">Ferilpunktar</string>
     <string name="targets">Áfangastaðir</string>
     <string name="announce_gpx_waypoints">GPX-ferilpunktar</string>
     <string name="rendering_value_browse_map_name">Fletta korti</string>
@@ -320,7 +320,7 @@
     <string name="select_destination_and_intermediate_points">Velja áfangastaði</string>
     <string name="loading_smth">Hleð inn %1$s…</string>
     <string name="map_widget_plain_time">Núverandi tími</string>
-    <string name="gpx_wpt">Ferilpunktur</string>
+    <string name="shared_string_waypoint">Ferilpunktur</string>
     <string name="gpx_info_waypoints">Ferilpunktar: %1$s</string>
     <string name="gpx_selection_segment_title">Bútur</string>
     <string name="gpx_selection_number_of_points">%1$s punktar</string>
@@ -931,7 +931,7 @@ Ferill %2$s</string>
     <string name="user_password">OSM-lykilorðið þitt</string>
     <string name="use_transparent_map_theme">Gegnsætt þema</string>
     <string name="pref_overlay">Yfirlag / Undirlag</string>
-    <string name="gpx_navigation">GPX-leið</string>
+    <string name="shared_string_gpx_route">GPX-leið</string>
     <string name="file_with_name_already_exist">Skrá með sama heiti er þegar til.</string>
     <string name="local_index_mi_upload_gpx">Senda til OSM</string>
     <string name="basemap_missing">Sæktu grunnkort af heiminum til að fá hnattræna yfirsýn á alla jörðina í minni aðdrætti.</string>
@@ -1963,7 +1963,7 @@ Punktar</string>
     <string name="points_delete_multiple_succesful">Punkti/punktum eytt.</string>
     <string name="points_delete_multiple">Þú ert að fara að eyða %1$d punktum. Ertu viss?</string>
     <string name="track_points_category_name">Vegpunktar, merkisstaðir, nefnd fyrirbæri</string>
-    <string name="gpx_track">Ferill</string>
+    <string name="shared_string_gpx_track">Ferill</string>
     <string name="max_speed">Mesti hraði</string>
     <string name="average_speed">Meðalhraði</string>
     <string name="shared_string_time_moving">Tími á ferð</string>
@@ -1975,7 +1975,7 @@ Punktar</string>
     <string name="select_gpx_folder">Veldu möppu undir ferla</string>
     <string name="file_can_not_be_moved">Ekki er hægt að færa skrá.</string>
     <string name="shared_string_move">Færa</string>
-    <string name="shared_string_tracks">Ferlar</string>
+    <string name="shared_string_gpx_tracks">Ferlar</string>
     <string name="routing_attr_driving_style_name">Akstursstíll</string>
     <string name="route_altitude">Hæð leiðar</string>
     <string name="altitude_descent">Lækkun</string>
@@ -2300,7 +2300,7 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="looking_for_tracks_with_waypoints">Leita að ferlum með ferilpunktum</string>
     <string name="shared_string_more_without_dots">Meira</string>
     <string name="appearance_on_the_map">Framsetning á korti</string>
-    <string name="track_waypoints">Ferilpunktar í ferli</string>
+    <string name="shared_string_gpx_waypoints">Ferilpunktar í ferli</string>
     <string name="favourites_group">Flokkur eftirlæta</string>
     <string name="add_group">Bæta við hópi</string>
     <string name="empty_state_markers_active">Búa til kortamerki!</string>
@@ -2643,7 +2643,7 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="animate_my_location_desc">Virkja hreyfingu við hliðrun staðsetningar minnar á meðan leiðsögn stendur.</string>
     <string name="storage_permission_restart_is_required">Núna hefur forritið heimild til að skrifa í ytri gagnageymslur, en það þarf að endurræsa forritið handvirkt til að geta nýtt sér það.</string>
     <string name="show_transparency_seekbar">Birta gegnsæis-sleða</string>
-    <string name="gpx_file">GPX-skrá</string>
+    <string name="shared_string_gpx_file">GPX-skrá</string>
     <string name="osc_file">OSC-skrá</string>
     <string name="choose_file_type">Veldu skráartegund</string>
     <string name="all_data">Öll gögn</string>

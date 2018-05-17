@@ -90,7 +90,7 @@
     <string name="distance">ദൂരം</string>
     <string name="index_tours">ടൂര്‍സ്</string>
     <string name="shared_string_all">എല്ലാം</string>
-    <string name="waypoints">വഴിത്തിരിവുകള്‍</string>
+    <string name="shared_string_waypoints">വഴിത്തിരിവുകള്‍</string>
     <string name="targets">ഉദ്ദിഷ്ടസ്ഥലങ്ങള്‍</string>
     <string name="rendering_value_car_name">കാര്‍</string>
     <string name="rendering_value_bicycle_name">സൈക്കിള്‍</string>
@@ -263,7 +263,7 @@
     <string name="edit_group">"ഗ്രൂപ്പ് എഡിറ്റ് ചെയ്യുക "</string>
     <string name="version_settings_descr">നൈറ്റിലി ബില്‍ഡ് വേര്‍ഷന്‍ ഡൗണ്‍ലോഡ് ചെയ്യുക</string>
     <string name="rendering_attr_streetLighting_name">"തെരുവിളക്ക് "</string>
-    <string name="points">പോയിന്റുകള്‍</string>
+    <string name="shared_string_gpx_points">പോയിന്റുകള്‍</string>
     <string name="rendering_attr_roadStyle_name">റോഡ് സ്ടൈല്‍</string>
     <string name="rendering_attr_roadStyle_description">റോഡ് സ്ടൈല്‍</string>
     <string name="map_locale">ഭൂപട ഭാഷ(Map Language)</string>
@@ -369,7 +369,7 @@
     <string name="user_password">"നിങ്ങളുടെ ഓഎസ്എം പാസ്സ്വേഡ് "</string>
     <string name="animate_route">"സിമുലേഷന്‍ ആരംഭിക്കുക "</string>
     <string name="file_with_name_already_exists">ആ പേരില്‍ ഒരു ഫയല്‍ നിലവിലുണ്ടു്.</string>
-    <string name="gpx_navigation">ജിപിഎക്സ് മാര്‍ഗം</string>
+    <string name="shared_string_gpx_route">ജിപിഎക്സ് മാര്‍ഗം</string>
     <string name="file_with_name_already_exist">അതെ പേരില്‍ ഒരു ഫയല്‍ നിലവിലുണ്ടു്.</string>
     <string name="local_index_map_data">ഭൂപട വിവരങ്ങ</string>
     <string name="search_offline_clear_search">"പുതിയ  തെരച്ചില്‍"</string>
@@ -1627,7 +1627,7 @@
     <string name="map_preferred_locale_descr">"മേല്‍ക്കുറിപ്പുകളുടെ ഭാക്ഷ തെരഞ്ഞെടുക്കുക( ഈ ഭാക്ഷ ലഭ്യമല്ലെങ്കില്‍ ഇംഗ്ളീഷ്/പ്രാദേശിക ഭാക്ഷയിലേക്ക് മാറും) "</string>
     <string name="rendering_attr_moreDetailed_name">കൂടുതല്‍ വിവരങ്ങള്‍</string>
     <string name="rendering_attr_lessDetailed_name">കുറച്ച് വിവരങ്ങള്‍</string>
-    <string name="gpx_wpt">പാതബിന്ദു(വേപോയിന്റ്)</string>
+    <string name="shared_string_waypoint">പാതബിന്ദു(വേപോയിന്റ്)</string>
     <string name="gpx_file_is_empty">ജിപിഎക്സ് പാത ശൂന്യമാണ്</string>
     
     

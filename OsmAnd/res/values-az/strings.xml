@@ -884,7 +884,7 @@
     <string name="gpx_split_interval">Bölünmə intervalı</string>
     <string name="save_as_favorites_points">Favorit qrup olaraq saxla</string>
     <string name="select_destination_and_intermediate_points">Təyinat nöqtələrini seçin</string>
-    <string name="gpx_wpt">Yol nöqtəsi</string>
+    <string name="shared_string_waypoint">Yol nöqtəsi</string>
     <string name="gpx_info_waypoints">Yol nöqtələri: %1$s</string>
     <string name="gpx_info_distance">Məsafə: %1$s (%2$s nöqtə)</string>
     <string name="gpx_info_average_speed">Ortalama sürət: %1$s</string>
@@ -1226,7 +1226,7 @@
     <string name="shared_string_collapse">Yığışdır</string>
     <string name="route_points">Marşrut nöqtələri</string>
     <string name="srtm_plugin_name">Kontur xətləri</string>
-    <string name="points">Nöqtələr</string>
+    <string name="shared_string_gpx_points">Nöqtələr</string>
     <string name="traffic_warning_pedestrian">Piyada keçidi</string>
     <string name="show_pedestrian_warnings">Piyada keçidləri</string>
     <string name="navigate_point_zone">Zona</string>
@@ -1353,9 +1353,9 @@
     <string name="shared_string_export">İxrac et</string>
     <string name="fav_export_confirmation">Daha əvvəl ixrac edilən favoritlər faylı artıq var. Onu əvəz etmək istəyirsiniz?</string>
     <string name="osmand_net_previously_installed">Əvvəlki OsmAnd versiyası quraşdırılıb. Bütün oflayn məlumatlar yeni proqram tərəfindən dəstəklənəcək. Amma Favorit nöqtələr köhnə proqramda ixrac edilməli və sonra yenisinə idxal edilməlidir.</string>
-    <string name="gpx_track">İz</string>
+    <string name="shared_string_gpx_track">İz</string>
     <string name="select_gpx_folder">İz qovluğunu seçin</string>
-    <string name="shared_string_tracks">İzlər</string>
+    <string name="shared_string_gpx_tracks">İzlər</string>
     <string name="gpx_no_tracks_title">Hələ hər hansı izləriniz yoxdur</string>
     <string name="gpx_no_tracks_title_folder">Qovluğa izlər əlavə edə də bilərsiniz</string>
     <string name="gpx_add_track">İz əlavə et</string>
@@ -1543,7 +1543,7 @@
     <string name="no_waypoints_found">Yol nöqtələri tapılmadı</string>
     <string name="context_menu_item_delete_waypoint">GPX yol nöqtəsi silinsin?</string>
     <string name="context_menu_item_edit_waypoint">GPX nöqtəsinə düzəliş et</string>
-    <string name="waypoints">Yol nöqtələri</string>
+    <string name="shared_string_waypoints">Yol nöqtələri</string>
     <string name="announce_gpx_waypoints">GPX yol nöqtələri</string>
     <string name="add_waypoint_dialog_added">GPX yol nöqtəsi “{0}” əlavə edildi</string>
     <string name="context_menu_item_add_waypoint">GPX yol nöqtəsi əlavə et</string>
@@ -1693,7 +1693,7 @@
     <string name="osmand_parking_no_lim_text">Vaxt-limitsiz</string>
     <string name="pref_vector_map">Vektor xəritə parametrləri</string>
     <string name="file_with_name_already_exists">Bu adda fayl artıq mövcuddur.</string>
-    <string name="gpx_navigation">GPX marşrut</string>
+    <string name="shared_string_gpx_route">GPX marşrut</string>
     <string name="measurement_tool">Məsafəni ölç</string>
     
     
@@ -1832,7 +1832,7 @@
     <string name="navigation_intent_invalid">Yanlış format: %s</string>
     <string name="show_closed_notes">Bağlı qeydləri göstər</string>
     <string name="switch_osm_notes_visibility_desc">Xəritədə OSM qeydlərini göstər/gizlət.</string>
-    <string name="gpx_file">GPX faylı</string>
+    <string name="shared_string_gpx_file">GPX faylı</string>
     <string name="osc_file">OSC faylı</string>
     <string name="choose_file_type">Fayl növünü seçin</string>
     <string name="all_data">Bütün məlumatlar</string>

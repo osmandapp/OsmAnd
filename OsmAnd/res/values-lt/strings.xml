@@ -256,7 +256,7 @@ Tam prireiks {1} MB pastoviam saugojimui.
 
     <string name="file_can_not_be_renamed">Failo pavadinimo pakeisti negalima.</string>
     <string name="file_with_name_already_exists">Failas tokiu pavadinimu jau yra.</string>
-    <string name="gpx_navigation">GPX maršrutas</string>
+    <string name="shared_string_gpx_route">GPX maršrutas</string>
     <string name="poi_query_by_name_matches_categories">Rastos kelios LV kategorijos, kurios atitinka jūsų užklausą :</string>
     <string name="data_to_search_poi_not_available">Nėra LV paieškai reikalingų vietinių duomenų.</string>
     <string name="poi_filter_by_name">Ieškoti pagal pavadinimą</string>
@@ -1422,7 +1422,7 @@ Tam prireiks {1} MB pastoviam saugojimui.
     <string name="layer_amenity_label">LV sluoksnių pavadinimai</string>
     <string name="loading_smth">Įkeliama %1$s …</string>
     <string name="map_widget_plain_time">Dabartinis laikas</string>
-    <string name="gpx_wpt">Kelionės taškas</string>
+    <string name="shared_string_waypoint">Kelionės taškas</string>
     <string name="selected_gpx_info_show">\n\nPaspauskite ir laikykite kad pamatytumėte žemėlapyje</string>
     <string name="delay_navigation_start">Pradėti navigaciją automatiškai</string>
     <string name="shared_string_selected_lowercase">pasirinkti</string>
@@ -1538,7 +1538,7 @@ Tam prireiks {1} MB pastoviam saugojimui.
     <string name="index_tours">Turai</string>
     <string name="shared_string_all">Visi</string>
     <string name="targets">Tikslai</string>
-    <string name="waypoints">Tarpiniai taškai</string>
+    <string name="shared_string_waypoints">Tarpiniai taškai</string>
     <string name="way_alarms">Eismo perspėjimai</string>
     <string name="speak_favorites">Artimiausios įsimintos vietos</string>
     <string name="speak_poi">Artimiausios lankytinos vietos</string>
@@ -1655,7 +1655,7 @@ Tam prireiks {1} MB pastoviam saugojimui.
     <string name="proxy_pref_title">Proksi serveris</string>
     <string name="proxy_pref_descr">Nurodyti proksi serverį.</string>
     <string name="settings_privacy">Privatumas</string>
-    <string name="points">Taškai</string>
+    <string name="shared_string_gpx_points">Taškai</string>
 
     <string name="shared_string_my_location">Mano dabartinė vieta</string>
 
@@ -2588,10 +2588,10 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="parking_options">Parkavimo pasirinkimai</string>
     <string name="route_points_category_name">Posūkiai kuriuos reikės padaryti šiame maršrute</string>
     <string name="track_points_category_name">Ypatingos reikšmės objektai šiame maršrute</string>
-    <string name="gpx_track">Kelias</string>
+    <string name="shared_string_gpx_track">Kelias</string>
     <string name="shared_string_time_span">Trukmė</string>
     <string name="select_gpx_folder">Pasirinkite kelio segtuvą</string>
-    <string name="shared_string_tracks">Keliai</string>
+    <string name="shared_string_gpx_tracks">Keliai</string>
     <string name="route_altitude">Maršruto sukilimas</string>
     <string name="altitude_descent">Nusileidimas</string>
     <string name="altitude_ascent">Sukilimas</string>

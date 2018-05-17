@@ -878,7 +878,7 @@ public class TrackPointFragment extends OsmandExpandableListFragment implements 
 				row.findViewById(R.id.list_divider).setVisibility(View.GONE);
 				row.setOnClickListener(null);
 				if (group.getType() == GpxDisplayItemType.TRACK_POINTS) {
-					groupTitle.setText(getString(R.string.points));
+					groupTitle.setText(getString(R.string.shared_string_gpx_points));
 					description.setText(getString(R.string.track_points_category_name));
 				} else {
 					groupTitle.setText(getString(R.string.route_points));
@@ -912,7 +912,7 @@ public class TrackPointFragment extends OsmandExpandableListFragment implements 
 
 				String categoryName = group.getName();
 				if (TextUtils.isEmpty(categoryName)) {
-					categoryName = getString(R.string.waypoints);
+					categoryName = getString(R.string.shared_string_waypoints);
 				}
 				SpannableStringBuilder text = new SpannableStringBuilder(categoryName).append(" — ").append(String.valueOf(getChildrenCount(groupPosition)));
 				text.setSpan(new ForegroundColorSpan(AndroidUtils.getColorFromAttr(app, R.attr.wikivoyage_primary_text_color)),

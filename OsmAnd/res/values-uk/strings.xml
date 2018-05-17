@@ -230,7 +230,7 @@
   
   <string name="file_can_not_be_renamed">Файл не можна перейменувати.</string>
   <string name="file_with_name_already_exists">Файл з таким ім’ям вже існує.</string>
-  <string name="gpx_navigation">Маршрут GPX</string>
+  <string name="shared_string_gpx_route">Маршрут GPX</string>
   <string name="poi_query_by_name_matches_categories">Деякі категорії POI відповідають запиту, можете використовувати їх для створення фільтра:</string>
   <string name="data_to_search_poi_not_available">Локальні дані для пошуку POI за іменем не знайдено.</string>
   <string name="poi_filter_by_name">Пошук за назвою</string>
@@ -1382,7 +1382,7 @@
     <string name="layer_amenity_label">Підписи до цікавих точок</string>
     <string name="loading_smth">Звантажується %1$s…</string>
     <string name="map_widget_plain_time">Поточний час</string>
-    <string name="gpx_wpt">Маршрутна точка</string>
+    <string name="shared_string_waypoint">Маршрутна точка</string>
     <string name="selected_gpx_info_show">"
 \n
 \nДовго утримуйте, щоб побачити на мапі"</string>
@@ -1629,7 +1629,7 @@
     <string name="distance">Віддаль</string>
     <string name="index_tours">Подорожі</string>
     <string name="shared_string_all">Усі</string>
-    <string name="waypoints">Шляхові точки</string>
+    <string name="shared_string_waypoints">Шляхові точки</string>
     <string name="targets">Цілі</string>
     <string name="way_alarms">Перешкоди</string>
     <string name="speak_favorites">Довколишні закладки</string>
@@ -1726,7 +1726,7 @@
     <string name="proxy_pref_title">Проксі-сервер</string>
     <string name="proxy_pref_descr">Укажіть Інтернет-проксі.</string>
     <string name="settings_privacy">Приватність</string>
-    <string name="points">Точки</string>
+    <string name="shared_string_gpx_points">Точки</string>
     
     <string name="shared_string_my_location">Моя позиція</string>
     
@@ -2545,7 +2545,7 @@
     <string name="quick_action_showhide_favorites_descr">При натисканні на кнопку дії будуть показані чи приховані точки закладок на мапі.</string>
     <string name="file_can_not_be_moved">Файл не може бути переміщений.</string>
     <string name="shared_string_move">Перемістити</string>
-    <string name="shared_string_tracks">Треки</string>
+    <string name="shared_string_gpx_tracks">Треки</string>
     <string name="routing_attr_driving_style_name">Стиль водіння</string>
     
     <string name="route_altitude">Висота маршруту</string>
@@ -2634,7 +2634,7 @@
     <string name="points_delete_multiple">"Ви збираєтеся вилучити %1$d точку(и).  Певні?"</string>
     <string name="route_points_category_name">Повороти (точки для проходження) на цьому маршруті</string>
     <string name="track_points_category_name">Важливі точки маршруту</string>
-    <string name="gpx_track">Трек</string>
+    <string name="shared_string_gpx_track">Трек</string>
     <string name="max_speed">"Макс.  швидкість"</string>
     <string name="average_speed">Середня швидкість</string>
     <string name="shared_string_time_moving">Час в русі</string>
@@ -3062,7 +3062,7 @@
     <string name="appearance_on_the_map">Поява на мапі</string>
     <string name="add_track_to_markers_descr">Виберіть трек для додавання шляхових точок (показані лише треки з точками)</string>
     <string name="add_favourites_group_to_markers_descr">Виберіть категорію закладок для додавання до маркерів.</string>
-    <string name="track_waypoints">Шляхові точки треку</string>
+    <string name="shared_string_gpx_waypoints">Шляхові точки треку</string>
     <string name="favourites_group">Категорія закладок</string>
     <string name="add_group">Додати групу</string>
     <string name="add_group_descr">Ви можете імпортувати групу з закладок або шляхових точок.</string>
@@ -3131,7 +3131,7 @@
     <string name="switch_osm_notes_visibility_desc">Показати/приховати OSM-нотатки на мапі.</string>
     <string name="gpx_file_desc">GPX — підходить для експорту в JOSM та інші OSM-редактори.</string>
     <string name="osc_file_desc">OSC — підходить для експорту в OpenStreetMap.</string>
-    <string name="gpx_file">GPX-файл</string>
+    <string name="shared_string_gpx_file">GPX-файл</string>
     <string name="osc_file">OSC-файл</string>
     <string name="choose_file_type">Виберіть тип файлу</string>
     <string name="osm_edits_export_desc">Виберіть тип експорту: OSM-нотатки, POI чи і те і те.</string>

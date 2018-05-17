@@ -50,7 +50,7 @@ public class FileTypeBottomSheetDialogFragment extends MenuBottomSheetDialogFrag
 		BaseBottomSheetItem gpxItem = new BottomSheetItemWithDescription.Builder()
 				.setDescription(getString(R.string.gpx_file_desc))
 				.setIcon(fileIcon)
-				.setTitle(getString(R.string.gpx_file))
+				.setTitle(getString(R.string.shared_string_gpx_file))
 				.setLayoutId(R.layout.bottom_sheet_item_with_descr_56dp)
 				.setOnClickListener(new View.OnClickListener() {
 					@Override

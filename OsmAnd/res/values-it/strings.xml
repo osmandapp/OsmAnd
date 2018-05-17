@@ -86,7 +86,7 @@ La memoria utilizzata è  {1} MB.
 
     <string name="file_can_not_be_renamed">Il file non può essere rinominato.</string>
     <string name="file_with_name_already_exists">Esiste già un file con lo stesso nome.</string>
-    <string name="gpx_navigation">Percorso GPX</string>
+    <string name="shared_string_gpx_route">Percorso GPX</string>
     <string name="poi_query_by_name_matches_categories">Trovate delle categorie PDI che rispecchiano la ricerca :</string>
     <string name="data_to_search_poi_not_available">Dati locali contenenti PDI non presenti.</string>
     <string name="poi_filter_by_name">Ricerca per nome</string>
@@ -1419,7 +1419,7 @@ Memoria in proporzione %4$s MB (limite di Android %5$s MB, Dalvik %6$s MB).</str
 
     <string name="gpx_split_interval">Intervallo suddivisione</string>
     <string name="loading_smth">Caricamento di %1$s…</string>
-    <string name="gpx_wpt">Tappa</string>
+    <string name="shared_string_waypoint">Tappa</string>
     <string name="selected_gpx_info_show">\n\nTieni premuto per vederlo sulla mappa</string>
     <string name="delay_navigation_start">Avvia la navigazione passo per passo automaticamente</string>
     <string name="map_widget_plain_time">Orario attuale</string>
@@ -1511,7 +1511,7 @@ Memoria in proporzione %4$s MB (limite di Android %5$s MB, Dalvik %6$s MB).</str
     <string name="rendering_value_pedestrian_name">Pedone</string>
     <string name="download_additional_maps">Scaricare le mappe mancanti %1$s (%2$d MB)?</string>
 
-    <string name="waypoints">Punti intermedi</string>
+    <string name="shared_string_waypoints">Punti intermedi</string>
     <string name="targets">Destinazioni</string>
     <string name="way_alarms">Avvisi del traffico</string>
     <string name="speak_favorites">Preferiti nelle vicinanze</string>
@@ -1634,7 +1634,7 @@ Memoria in proporzione %4$s MB (limite di Android %5$s MB, Dalvik %6$s MB).</str
     <string name="proxy_pref_title">Proxy</string>
     <string name="version_settings_descr">Download versioni di sviluppo.</string>
     <string name="version_settings">Versioni</string>
-    <string name="points">Punti</string>
+    <string name="shared_string_gpx_points">Punti</string>
 
 
     <string name="gps_status">Stato GPS</string>
@@ -2636,14 +2636,14 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="select_gpx_folder">Scegli la cartella delle tracce</string>
     <string name="file_can_not_be_moved">Il file non può essere spostato.</string>
     <string name="shared_string_move">Sposta</string>
-    <string name="shared_string_tracks">Tracce</string>
+    <string name="shared_string_gpx_tracks">Tracce</string>
     <string name="average_speed">Velocità media</string>
     <string name="shared_string_time_moving">Tempo in movimento</string>
     <string name="points_delete_multiple_succesful">Cancellazione punto(i) riuscita.</string>
     <string name="points_delete_multiple">Stai cancellando %1$d punto(i). Confermi?</string>
     <string name="route_points_category_name">Svolte di questo percorso</string>
     <string name="track_points_category_name">Punti importanti di questo percorso</string>
-    <string name="gpx_track">Traccia</string>
+    <string name="shared_string_gpx_track">Traccia</string>
     <string name="max_speed">Velocità massima</string>
     <string name="add_new_folder">Aggiungi una nuova cartella</string>
     <string name="shared_string_slope">Pendenza</string>
@@ -2941,7 +2941,7 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="appearance_on_the_map">Visualizzazione nella mappa</string>
     <string name="add_track_to_markers_descr">I punti intermedi possono essere aggiunti ai marcatori selezionando una traccia che ne contiene.</string>
     <string name="add_favourites_group_to_markers_descr">Scegli una categoria di luoghi preferiti da aggiungere ai marcatori.</string>
-    <string name="track_waypoints">Punti intermedi della traccia</string>
+    <string name="shared_string_gpx_waypoints">Punti intermedi della traccia</string>
     <string name="favourites_group">Categoria di luoghi preferiti</string>
     <string name="add_group">Aggiungi un gruppo</string>
     <string name="add_group_descr">Puoi importare un gruppo dai preferiti o i punti intermedi di una traccia.</string>
@@ -3027,7 +3027,7 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="switch_osm_notes_visibility_desc">Mostra/nascondi le note OSM sulla mappa.</string>
     <string name="gpx_file_desc">GPX - adatto all\'esportazione in JOSM o altri editor OSM.</string>
     <string name="osc_file_desc">OSC - adatto per l\'esportazione in OpenStreeMap.</string>
-    <string name="gpx_file">File GPX</string>
+    <string name="shared_string_gpx_file">File GPX</string>
     <string name="osc_file">File OSC</string>
     <string name="choose_file_type">Scelgi il tipo di file</string>
     <string name="osm_edits_export_desc">Scegli il tipo da esportare: note OSM, PDI, o entrambi.</string>

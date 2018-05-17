@@ -31,7 +31,7 @@
     <string name="switch_osm_notes_visibility_desc">Diskouez/Kuzhat notennoù OSM war ar gartenn-mañ.</string>
     <string name="gpx_file_desc">GPX - azasaet evit ezporzhiañ da JOSM pe embannerien OSM all.</string>
     <string name="osc_file_desc">OSC - azasaet evit ezporzhiañ da OpenStreetMap.</string>
-    <string name="gpx_file">Restr GPX</string>
+    <string name="shared_string_gpx_file">Restr GPX</string>
     <string name="osc_file">Restr OSC</string>
     <string name="choose_file_type">Dibabit rizh ar restr</string>
     </resources>

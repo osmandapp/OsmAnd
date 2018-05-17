@@ -207,7 +207,7 @@
   
   <string name="file_can_not_be_renamed">ფაილისათვის სახელის გადარქმევა შეუძლებელია.</string>
   <string name="file_with_name_already_exists">ფაილი მოცემული სახელით უკვე არსებობს.</string>
-  <string name="gpx_navigation">GPX გზა</string>
+  <string name="shared_string_gpx_route">GPX გზა</string>
   <string name="poi_query_by_name_matches_categories">ძებნის შედეგები შეიცავს რამოდენიმე POI კატეგორიას :</string>
   <string name="data_to_search_poi_not_available">ადგილობრივი მონაცემები POI-ს ძებნისათვის არ არსებობს.</string>
   <string name="poi_filter_by_name">სახელით ძებნა</string>
@@ -1297,7 +1297,7 @@
     <string name="points_delete_multiple_succesful">წერტილები წარმატებით წაიშალა.</string>
     <string name="points_delete_multiple">დარწმუნებული ბრძანდებით, რომ აპირებთ წაშალოთ %1$d წერტილ(ებ)ი?</string>
     <string name="track_points_category_name">ამ გზის მნიშვნელოვანი წერტილები</string>
-    <string name="gpx_track">მიდევნება</string>
+    <string name="shared_string_gpx_track">მიდევნება</string>
     <string name="max_speed">მაქს. სიჩქარე</string>
     <string name="average_speed">საშუალო სიჩქარე</string>
     <string name="shared_string_time_span">დროის შუალედი</string>
@@ -1308,7 +1308,7 @@
     <string name="select_gpx_folder">აირჩეთ მიდევნების დასტა</string>
     <string name="file_can_not_be_moved">ფაილის გადაადგილება შეუძლებელია.</string>
     <string name="shared_string_move">გადატანა</string>
-    <string name="shared_string_tracks">ბილიკები</string>
+    <string name="shared_string_gpx_tracks">ბილიკები</string>
     <string name="routing_attr_driving_style_name">მართვის სტილი</string>
     <string name="route_altitude">გზის სიმაღლე</string>
     <string name="altitude_descent">დაშვება</string>

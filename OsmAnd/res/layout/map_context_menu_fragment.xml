@@ -26,6 +26,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:paddingBottom="@dimen/context_menu_padding_margin_tiny"
                 android:paddingLeft="@dimen/context_menu_padding_margin_default"
                 android:paddingRight="@dimen/context_menu_padding_margin_default">
 
@@ -122,6 +123,11 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/additional_info_row"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height= "wrap_content"
                 android:layout_marginBottom="@dimen/context_menu_direction_margin"
@@ -189,6 +195,8 @@
                         tools:textColor="?android:textColorSecondary"/>
 
                 </LinearLayout>
+
+            </LinearLayout>
 
             </LinearLayout>
 

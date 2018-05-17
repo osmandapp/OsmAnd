@@ -122,7 +122,7 @@
 	<string name="animate_route">Започни симулацију</string>
 	<string name="file_can_not_be_renamed">Фајл не може бити преименован.</string>
 	<string name="file_with_name_already_exists">Фајл са тим именом већ постоји.</string>
-	<string name="gpx_navigation">GPX рута</string>
+	<string name="shared_string_gpx_route">GPX рута</string>
 	<string name="poi_filter_by_name">Претрага по имену</string>
 	<string name="update_poi_file_not_found">Локални фајл који одржава промене тачака од интереса није пронађен и не може да се направи.</string>
 	<string name="button_upgrade_osmandplus">Надоградите OsmAnd+</string>
@@ -389,7 +389,7 @@
     <string name="gps_status">Стање GPS-а</string>
     <string name="version_settings_descr">Преузми ноћне изградње.</string>
     <string name="version_settings">Изградње</string>
-    <string name="points">Тачке</string>
+    <string name="shared_string_gpx_points">Тачке</string>
     
     <string name="shared_string_my_location">Мој положај</string>
     
@@ -680,7 +680,7 @@
     <string name="duration">Трајање</string>
     <string name="distance">Растојање</string>
     <string name="shared_string_all">Све</string>
-    <string name="waypoints">Пролазне тачке</string>
+    <string name="shared_string_waypoints">Пролазне тачке</string>
     <string name="targets">Одредишта</string>
     <string name="download_additional_maps">Да преузмем недостајуће карте %1$s (%2$d MB)?</string>
     <string name="rendering_value_browse_map_name">Прегледај карту</string>
@@ -712,7 +712,7 @@
     
     
     
-    <string name="gpx_wpt">Пролазна тачка</string>
+    <string name="shared_string_waypoint">Пролазна тачка</string>
     <string name="available_maps">Доступне карте</string>
     <string name="select_voice_provider">Изаберите гласовно навођење</string>
     <string name="select_voice_provider_descr">Изаберите или преузмите гласовно навођење свог језика.</string>
@@ -1476,7 +1476,7 @@
     <string name="points_delete_multiple">Избрисаћете %1$d тачку(е). Да ли сте сигурни?</string>
     <string name="route_points_category_name">Број скретања на овом путу</string>
     <string name="track_points_category_name">Истакнуте тачке на овом путу</string>
-    <string name="gpx_track">Путања</string>
+    <string name="shared_string_gpx_track">Путања</string>
     <string name="max_speed">Највећа брзина</string>
     <string name="average_speed">Просечна брзина</string>
     <string name="shared_string_time_moving">Време кретања</string>
@@ -1487,7 +1487,7 @@
     <string name="select_gpx_folder">Изаберите фасциклу стазе</string>
     <string name="file_can_not_be_moved">Фајл не може да се премести.</string>
     <string name="shared_string_move">Премести</string>
-    <string name="shared_string_tracks">Стазе</string>
+    <string name="shared_string_gpx_tracks">Стазе</string>
     <string name="routing_attr_driving_style_name">Начин вожње</string>
     <string name="route_altitude">Успон пута</string>
     <string name="altitude_descent">Силазан</string>
@@ -1554,7 +1554,7 @@
     <string name="shared_string_more_without_dots">Још</string>
     <string name="add_track_to_markers_descr">Пролазне тачке се могу додати на маркере тако што се означе оне путање које их садрже.</string>
     <string name="add_favourites_group_to_markers_descr">Изаберите омиљену категорију за додавање ознакама.</string>
-    <string name="track_waypoints">Пролазне тачке путање</string>
+    <string name="shared_string_gpx_waypoints">Пролазне тачке путање</string>
     <string name="favourites_group">Омиљена категорија</string>
     <string name="add_group">Додај скуп</string>
     <string name="add_group_descr">Увозите групе из омиљених или пролазних тачака путање.</string>
@@ -1748,7 +1748,7 @@
     <string name="last_intermediate_dest_description">Додаје пролазно стајање</string>
     <string name="first_intermediate_dest_description">Додаје прво стајање</string>
     <string name="switch_osm_notes_visibility_desc">Прикажи/Сакриј ОСМ белешке на карти.</string>
-    <string name="gpx_file">GPX фајл</string>
+    <string name="shared_string_gpx_file">GPX фајл</string>
     <string name="release_3_0">Нови турустички мени: гледајте WikiVoyage чланке без коришћења интернета
 \n
 \n • Википедија: нови изглед, активне везе, слике

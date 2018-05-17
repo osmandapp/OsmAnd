@@ -91,7 +91,7 @@
     <string name="points_delete_multiple">Вы собираетесь удалить %1$d точку(и). Вы уверены?</string>
     <string name="route_points_category_name">Повороты на маршруте</string>
     <string name="track_points_category_name">Важные точки на этом маршруте</string>
-    <string name="gpx_track">Трек</string>
+    <string name="shared_string_gpx_track">Трек</string>
     <string name="max_speed">Макс. скорость</string>
     <string name="average_speed">Средняя скорость</string>
     <string name="shared_string_time_moving">Время в движении</string>
@@ -102,7 +102,7 @@
     <string name="shared_string_color">Цвет</string>
     <string name="select_gpx_folder">Выберите папку для треков</string>
     <string name="shared_string_move">Переместить</string>
-    <string name="shared_string_tracks">Треки</string>
+    <string name="shared_string_gpx_tracks">Треки</string>
     <string name="altitude_descent">Спуск</string>
     <string name="altitude_ascent">Подъем</string>
     <string name="altitude_range">Диапазон высот</string>
@@ -449,7 +449,7 @@
     <string name="auto_follow_route_navigation">Автовозврат карты только при следовании по маршруту</string>
     <string name="auto_follow_route_navigation_descr">Возвращать карту в текущее положение только при следовании по маршруту.</string>
     <string name="auto_follow_location_enabled">Привязка карты к местоположению включена.</string>
-    <string name="gpx_navigation">GPX маршрут</string>
+    <string name="shared_string_gpx_route">GPX маршрут</string>
     <string name="poi_query_by_name_matches_categories">Некоторые категории POI соответствуют запросу, можете использовать их для создания фильтра:</string>
     <string name="data_to_search_poi_not_available">Локальные данные для поиска POI по имени не найдены.</string>
     <string name="poi_filter_by_name">Поиск по имени</string>
@@ -1582,7 +1582,7 @@
     <string name="gpx_selection_track">%1$s \nТрек %2$s</string>
     <string name="loading_smth">Загрузка %1$s…</string>
     <string name="map_widget_plain_time">Текущее время</string>
-    <string name="gpx_wpt">Путевая точка</string>
+    <string name="shared_string_waypoint">Путевая точка</string>
     <string name="gpx_split_interval">Интервал разбиения</string>
     <string name="delay_navigation_start">Старт навигации автоматически</string>
     <string name="save_as_favorites_points">Сохранить как группу избранных</string>
@@ -1676,7 +1676,7 @@
     <string name="rendering_value_bicycle_name">Велосипед</string>
     <string name="rendering_value_pedestrian_name">Пешеход</string>
     <string name="download_additional_maps">Скачать недостающие карты %1$s (%2$d MB)?</string>
-    <string name="waypoints">Путевые точки</string>
+    <string name="shared_string_waypoints">Путевые точки</string>
     <string name="targets">Пункты назначения</string>
     <string name="way_alarms">Дорожные предупреждения</string>
     <string name="speak_favorites">Близлежащие избранные</string>
@@ -1793,7 +1793,7 @@
     <string name="version_settings">Сборки</string>
     <string name="shared_string_my_location">Мое местоположение</string>
     <string name="gps_status">Статус GPS</string>
-    <string name="points">Точки</string>
+    <string name="shared_string_gpx_points">Точки</string>
     <string name="parking_place">Место для парковки</string>
     <string name="remove_the_tag">УДАЛИТЬ ТЕГ</string>
     <string name="plugin_description_title">Описание</string>
@@ -2712,7 +2712,7 @@
     <string name="mark_passed">Отметить пройденным</string>
     <string name="import_track_desc">Файл %1$s не содержит путевых точек, импортировать его как трек?</string>
     <string name="add_track_to_markers_descr">Путевые точки можно добавить к маркерам выбрав один из этих треков, содержащих их.</string>
-    <string name="track_waypoints">Трек путевых точек</string>
+    <string name="shared_string_gpx_waypoints">Трек путевых точек</string>
     <string name="shared_string_right">Направо</string>
     <string name="shared_string_left">Налево</string>
     <string name="show_number_pad">Показать цифровую панель</string>
@@ -2910,7 +2910,7 @@
     <string name="switch_osm_notes_visibility_desc">Показать/скрыть заметки OSM на карте.</string>
     <string name="gpx_file_desc">GPX - подходит для экспорта в JOSM и другие OSM редакторы.</string>
     <string name="osc_file_desc">OSC - подходит для экспорта в OpenStreetMap.</string>
-    <string name="gpx_file">GPX файл</string>
+    <string name="shared_string_gpx_file">GPX файл</string>
     <string name="osc_file">OSC файл</string>
     <string name="choose_file_type">Выберите тип файла</string>
     <string name="osm_edits_export_desc">Выберите тип экспорта: заметки OSM, POI или оба.</string>

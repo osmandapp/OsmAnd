@@ -283,7 +283,7 @@
 	<string name="rendering_value_translucent_lightgreen_name">Verde claro tresllúcido</string>
 	<string name="rendering_value_lightblue_name">Azul claro</string>
 	<string name="rendering_value_translucent_lightblue_name">Azul claro tresllúcido</string>
-<string name="points">Puntos</string>
+<string name="shared_string_gpx_points">Puntos</string>
     <string name="map_locale">Llingua del mapa</string>
     <string name="map_update">Anovamientos disponibles pa %1$s mapes</string>
     <string name="lock_screen_request_explanation">%1$s precisa esti permisu p\'apagar la pantalla pola carauterística d\'aforru d\'enerxía.</string>
@@ -738,7 +738,7 @@ Puntos</string>
     <string name="points_delete_multiple">Vas desaniciar %1$d puntu(os). ¿Tas seguru?</string>
     <string name="route_points_category_name">Xiros a pasar con esta ruta</string>
     <string name="track_points_category_name">Puntos destacaos d\'esta ruta</string>
-    <string name="gpx_track">Traza</string>
+    <string name="shared_string_gpx_track">Traza</string>
     <string name="max_speed">Velocidá máxima</string>
     <string name="average_speed">Velocidá media</string>
     <string name="shared_string_time_moving">Tiempu moviéndose</string>
@@ -750,7 +750,7 @@ Puntos</string>
     <string name="select_gpx_folder">Escueye la carpeta de traces</string>
     <string name="file_can_not_be_moved">El ficheru nun puede movese.</string>
     <string name="shared_string_move">Mover</string>
-    <string name="shared_string_tracks">Traces</string>
+    <string name="shared_string_gpx_tracks">Traces</string>
     <string name="routing_attr_driving_style_name">Estilu de conducción</string>
     <string name="route_altitude">Altor de la ruta</string>
     <string name="altitude_descent">Descensu</string>
@@ -1076,7 +1076,7 @@ Puntos</string>
     <string name="appearance_on_the_map">Apariencia nel mapa</string>
     <string name="add_track_to_markers_descr">Los puntos de ruta pueden añadise a los marcadores seleicionando una de les traces que los tengan.</string>
     <string name="add_favourites_group_to_markers_descr">Seleiciona una categoría favorita p\\\'amestala a los marcadores.</string>
-    <string name="track_waypoints">Puntos de ruta de la traza</string>
+    <string name="shared_string_gpx_waypoints">Puntos de ruta de la traza</string>
     <string name="favourites_group">Categoría de favoritos</string>
     <string name="add_group">Amestar un grupu</string>
     <string name="add_group_descr">Importar grupos dende favoritos o de puntos de ruta de la traza.</string>

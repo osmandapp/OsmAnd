@@ -202,7 +202,7 @@
 	<string name="osmand_development_plugin_description">Este complemento exibe configurações de desenvolvimento e recursos de depuração como testar ou simular o roteamento, o desempenho de renderização de tela ou instruções de voz. Essas configurações são destinadas a desenvolvedores e não são necessárias para o usuário comum.</string>
 	<string name="proxy_pref_descr">Configurar proxy</string>
     <string name="settings_privacy">Privacidade</string>
-    <string name="points">Pontos</string>
+    <string name="shared_string_gpx_points">Pontos</string>
 	<string name="navigation_over_track">Iniciar a navegação pela trilha?</string>
 	<string name="speak_pedestrian">Travessias de pedestre</string>
     <string name="rendering_attr_roadStyle_name">Estilo das vias</string>
@@ -359,7 +359,7 @@
     <string name="distance">Distância</string>
     <string name="index_tours">Excursões</string>
     <string name="shared_string_all">Todos</string>
-    <string name="waypoints">Marcos do trajeto</string>
+    <string name="shared_string_waypoints">Marcos do trajeto</string>
     <string name="targets">Destinos</string>
     <string name="announce_gpx_waypoints">Pontos de passagem GPX</string>
     <string name="download_additional_maps">Baixar mapas que faltam %1$s (%2$d MB)?</string>
@@ -448,7 +448,7 @@
     <string name="gpx_file_is_empty">A trilha GPX está vazia</string>
     
     
-    <string name="gpx_wpt">Marco de trajeto</string>
+    <string name="shared_string_waypoint">Marco de trajeto</string>
     <string name="gpx_selection_segment_title">Segmento</string>
     
     
@@ -1210,7 +1210,7 @@ Pôr do Sol: %2$s</string>
 	<string name="animate_route">Iniciar simulação</string>
 	<string name="file_can_not_be_renamed">O arquivo não pode ser renomeado.</string>
 	<string name="file_with_name_already_exists">Já existe um arquivo com esse nome.</string>
-	<string name="gpx_navigation">Rota GPX</string>
+	<string name="shared_string_gpx_route">Rota GPX</string>
 	<string name="poi_query_by_name_matches_categories">Encontradas várias categorias de POI que correspondem à consulta:</string>
 	<string name="data_to_search_poi_not_available">Não existem dados locais para pesquisa de POI.</string>
 	<string name="poi_filter_by_name">Pesquisar por nome</string>
@@ -2303,7 +2303,7 @@ Pôr do Sol: %2$s</string>
     <string name="appearance_on_the_map">Aparência no mapa</string>
     <string name="add_track_to_markers_descr">Pontos de passagem podem ser adicionados a marcadores selecionando uma dessas trilhas que os tem.</string>
     <string name="add_favourites_group_to_markers_descr">Selecione uma categoria favorita para adicionar aos marcadores.</string>
-    <string name="track_waypoints">Pontos de passagem de trilhas</string>
+    <string name="shared_string_gpx_waypoints">Pontos de passagem de trilhas</string>
     <string name="favourites_group">Categoria favoritos</string>
     <string name="add_group">Adicionar um grupo</string>
     <string name="add_group_descr">Você pode importar grupos dos favoritos ou pontos de passagem de trilhas.</string>
@@ -2371,7 +2371,7 @@ Pôr do Sol: %2$s</string>
     <string name="points_delete_multiple_succesful">Ponto(s) excluído(s) com êxito.</string>
     <string name="points_delete_multiple">Você vai eliminar %1$d ponto(s). Tem a certeza?</string>
     <string name="track_points_category_name">Pontos de destaque nesta rota</string>
-    <string name="gpx_track">Trilha</string>
+    <string name="shared_string_gpx_track">Trilha</string>
     <string name="max_speed">Velocidade máxima</string>
     <string name="shared_string_time_moving">Tempo em movimento</string>
     <string name="shared_string_time_span">Tempo de duração</string>
@@ -2382,7 +2382,7 @@ Pôr do Sol: %2$s</string>
     <string name="select_gpx_folder">Selecionar pasta da trilha</string>
     <string name="file_can_not_be_moved">Arquivo não pode ser movido.</string>
     <string name="shared_string_move">Mover</string>
-    <string name="shared_string_tracks">Trilhas</string>
+    <string name="shared_string_gpx_tracks">Trilhas</string>
     <string name="routing_attr_driving_style_name">Estilo de condução</string>
     <string name="route_altitude">Altitude da rota</string>
     <string name="routing_attr_relief_smoothness_factor_name">Selecionar a flutuação de altimetria</string>
@@ -2736,7 +2736,7 @@ Pôr do Sol: %2$s</string>
     <string name="lang_lo">Laociano</string>
     <string name="show_closed_notes">Mostrar notas encerradas</string>
     <string name="switch_osm_notes_visibility_desc">Mostrar/Ocultar Notas OSM no mapa.</string>
-    <string name="gpx_file">Arquivo GPX</string>
+    <string name="shared_string_gpx_file">Arquivo GPX</string>
     <string name="osc_file">Arquivo OSC</string>
     <string name="choose_file_type">Escolha o tipo de arquivo</string>
     <string name="show_tunnels">Túneis</string>

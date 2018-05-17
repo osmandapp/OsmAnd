@@ -22,7 +22,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="3dp"
-            android:text="@string/gpx_navigation"
+            android:text="@string/shared_string_gpx_route"
             android:textSize="@dimen/default_sub_text_size">
         </TextView>
 

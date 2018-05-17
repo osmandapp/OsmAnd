@@ -399,7 +399,7 @@
     <string name="animate_route">開始模擬</string>
     <string name="file_can_not_be_renamed">檔名不可更改。</string>
     <string name="file_with_name_already_exists">該檔名已存在。</string>
-    <string name="gpx_navigation">GPX 路線</string>
+    <string name="shared_string_gpx_route">GPX 路線</string>
     <string name="poi_query_by_name_matches_categories">在數個 POI 類別裡找到與查詢符合的：</string>
     <string name="data_to_search_poi_not_available">在裝置端資料查尋的 POI 不存在。</string>
     <string name="poi_filter_by_name">以名稱查尋</string>
@@ -1414,7 +1414,7 @@
     <string name="gpx_info_maximum_speed">最高速度：%1$s</string>
     <string name="gpx_info_avg_altitude">平均海拔：%1$s</string>
     <string name="gpx_info_diff_altitude">海拔高度範圍：%1$s</string>
-    <string name="gpx_wpt">航點</string>
+    <string name="shared_string_waypoint">航點</string>
     <string name="gpx_info_waypoints">航點：%1$s</string>
     <string name="save_as_favorites_points">另存群組為我的收藏</string>
     <string name="select_destination_and_intermediate_points">選擇目的地</string>
@@ -1506,7 +1506,7 @@
     <string name="rendering_value_pedestrian_name">步行</string>
     <string name="download_additional_maps">要下載缺少的地圖 %1$s (%2$d MB) 嗎？</string>
 
-    <string name="waypoints">航點</string>
+    <string name="shared_string_waypoints">航點</string>
     <string name="targets">目的地</string>
     <string name="way_alarms">交通狀況提醒</string>
     <string name="speak_favorites">附近的收藏</string>
@@ -1628,7 +1628,7 @@
     <string name="proxy_port_descr">組態您代理伺服器的埠號 (例如 8118)。</string>
     <string name="version_settings_descr">下載 nightly builds 版。</string>
     <string name="version_settings">建構</string>
-    <string name="points">點</string>
+    <string name="shared_string_gpx_points">點</string>
 
 
     <string name="gps_status">GPS 狀態</string>
@@ -2575,7 +2575,7 @@
     <string name="total_distance">總體距離</string>
     <string name="routing_attr_driving_style_name">駕駛方式</string>
     
-    <string name="shared_string_tracks">軌跡</string>
+    <string name="shared_string_gpx_tracks">軌跡</string>
     <string name="select_gpx_folder">選擇軌跡資料夾</string>
     <string name="file_can_not_be_moved">檔案無法移動。</string>
     <string name="shared_string_move">移動</string>
@@ -2587,7 +2587,7 @@
     <string name="shared_string_color">顏色</string>
     <string name="max_speed">最高速度</string>
     <string name="average_speed">平均速度</string>
-    <string name="gpx_track">軌跡</string>
+    <string name="shared_string_gpx_track">軌跡</string>
     <string name="points_delete_multiple_succesful">標點已刪除。</string>
     <string name="points_delete_multiple">您將要刪除 %1$d 個標點。您確定嗎？</string>
     <string name="route_points_category_name">轉為通過這條路線</string>
@@ -2988,7 +2988,7 @@
     <string name="appearance_on_the_map">顯現在地圖上</string>
     <string name="add_track_to_markers_descr">航點可以藉著選擇這些軌跡其中的一個增加到標記。</string>
     <string name="add_favourites_group_to_markers_descr">選擇您想增加標記的收藏類別。</string>
-    <string name="track_waypoints">軌跡航點</string>
+    <string name="shared_string_gpx_waypoints">軌跡航點</string>
     <string name="favourites_group">我的收藏類別</string>
     <string name="add_group">新增群組</string>
     <string name="add_group_descr">從我的收藏匯入群組或軌跡航點。</string>
@@ -3083,7 +3083,7 @@
     <string name="switch_osm_notes_visibility_desc">在地圖上顯示/隱藏 OSM 的註解。</string>
     <string name="gpx_file_desc">GPX - 適合匯出到 JOSM 或其他 OSM 編輯。</string>
     <string name="osc_file_desc">OSC - 適合匯出到 OpenStreetMap。</string>
-    <string name="gpx_file">GPX 檔案</string>
+    <string name="shared_string_gpx_file">GPX 檔案</string>
     <string name="osc_file">OSC 檔案</string>
     <string name="choose_file_type">選擇檔案類型</string>
     <string name="osm_edits_export_desc">選擇匯出類型：OSM 註解、POI 或著兩者。</string>

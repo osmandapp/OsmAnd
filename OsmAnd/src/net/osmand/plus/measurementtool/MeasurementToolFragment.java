@@ -188,7 +188,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 
 		upIcon = getContentIcon(R.drawable.ic_action_arrow_up);
 		downIcon = getContentIcon(R.drawable.ic_action_arrow_down);
-		pointsSt = getString(R.string.points).toLowerCase();
+		pointsSt = getString(R.string.shared_string_gpx_points).toLowerCase();
 
 		View view = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.fragment_measurement_tool, null);
 

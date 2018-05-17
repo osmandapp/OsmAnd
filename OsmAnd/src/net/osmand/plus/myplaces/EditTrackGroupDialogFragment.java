@@ -173,7 +173,7 @@ public class EditTrackGroupDialogFragment extends MenuBottomSheetDialogFragment 
 	}
 
 	private static String getCategoryName(@NonNull Context ctx, String category) {
-		return Algorithms.isEmpty(category) ? ctx.getString(R.string.waypoints) : category;
+		return Algorithms.isEmpty(category) ? ctx.getString(R.string.shared_string_waypoints) : category;
 	}
 
 	private void updateColorView(ImageView colorImageView) {

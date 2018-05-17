@@ -385,7 +385,7 @@ Nyttjat utrymme är {1} MB.
     <string name="animate_route">Starta simuleringen</string>
     <string name="file_can_not_be_renamed">Filen kan inte döpas om.</string>
     <string name="file_with_name_already_exists">En fil med det namnet finns redan.</string>
-    <string name="gpx_navigation">GPX-rutt</string>
+    <string name="shared_string_gpx_route">GPX-rutt</string>
     <string name="poi_query_by_name_matches_categories">Hittade flera POI-kategorier som matchar frågan:</string>
     <string name="data_to_search_poi_not_available">Lokala data för att söka POI är inte tillgängliga.</string>
     <string name="poi_filter_by_name">Sök efter namn</string>
@@ -1365,7 +1365,7 @@ Nyttjat utrymme är {1} MB.
     <string name="gpx_file_is_empty">GPX-spåret är tomt</string>
     <string name="loading_smth">Laddar %1$s …</string>
     <string name="map_widget_plain_time">Aktuell tid</string>
-    <string name="gpx_wpt">Waypoint</string>
+    <string name="shared_string_waypoint">Waypoint</string>
     <string name="selected_gpx_info_show">"
 \n
 \nTryck och håll för att visa på kartan"</string>
@@ -1488,7 +1488,7 @@ Nyttjat utrymme är {1} MB.
     <string name="rendering_value_browse_map_name">Titta på kartan</string>
     <string name="download_additional_maps">Ladda ner kartor som saknas %1$s (%2$d MB)?</string>
 
-    <string name="waypoints">Waypoints</string>
+    <string name="shared_string_waypoints">Waypoints</string>
     <string name="targets">Destinationer</string>
     <string name="way_alarms">Trafikskyltar</string>
     <string name="speak_favorites">Närbelägna favoriter</string>
@@ -1613,7 +1613,7 @@ Nyttjat utrymme är {1} MB.
     <string name="gps_status">GPS-status</string>
     <string name="version_settings_descr">Hämta \"nattversioner\".</string>
     <string name="version_settings">Versioner</string>
-    <string name="points">Punkter</string>
+    <string name="shared_string_gpx_points">Punkter</string>
 
 
     <string name="shared_string_disabled">Inaktiverad</string>
@@ -2442,7 +2442,7 @@ Om du tycker om OsmAnd och OSM och vill stödja dem så är detta ett utmärkt s
 Vänligen tillhandahåll fullständig kod</string>
     <string name="file_can_not_be_moved">Filen kan inte flyttas.</string>
     <string name="shared_string_move">Flytta</string>
-    <string name="shared_string_tracks">Spår</string>
+    <string name="shared_string_gpx_tracks">Spår</string>
     <string name="routing_attr_driving_style_name">Körstil</string>
     
     <string name="route_altitude">Rutthöjd</string>
@@ -2482,7 +2482,7 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="points_delete_multiple">Du håller på att ta bort %1$d punkt(er). Är du säker?</string>
     <string name="route_points_category_name">Kurvor att passera längs rutten</string>
     <string name="track_points_category_name">Viktiga punkter längs denna rutt</string>
-    <string name="gpx_track">Spår</string>
+    <string name="shared_string_gpx_track">Spår</string>
     <string name="shared_string_action_name">Åtgärdsnamn</string>
 <string name="quick_action_map_overlay_title">Kartöverlägg</string>
     <string name="quick_action_map_overlay_action">Lägg till överlägg</string>
@@ -2710,7 +2710,7 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="switch_osm_notes_visibility_desc">Visa/Dölj OSM Anteckningar på kartan.</string>
     <string name="gpx_file_desc">GPX - lämplig för export till JOSM eller andra OSM-redigerare.</string>
     <string name="osc_file_desc">OSC - lämplig för export till OpenStreetMap.</string>
-    <string name="gpx_file">GPX-fil</string>
+    <string name="shared_string_gpx_file">GPX-fil</string>
     <string name="osc_file">OSC-fil</string>
     <string name="choose_file_type">Välj filtyp</string>
     <string name="osm_edits_export_desc">Välj typ av export: OSM-anteckningar, POI, eller båda.</string>
@@ -2736,7 +2736,7 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="empty_state_av_notes_desc">Lägg till ljud-, video- eller fotonotering för varje punkt på kartan, med hjälp av widgeten eller menyn.</string>
     <string name="add_track_to_markers_descr">Välj ett spår att lägga till sina waypoints till markörer. (Endast spår med waypoints visas.)</string>
     <string name="add_favourites_group_to_markers_descr">Välj en favoritkategori för att lägga till markörer.</string>
-    <string name="track_waypoints">Spåra waypoints</string>
+    <string name="shared_string_gpx_waypoints">Spåra waypoints</string>
     <string name="favourites_group">Kategorin Favoriter</string>
     <string name="add_group">Lägg till en grupp</string>
     <string name="add_group_descr">Du kan importera grupper från favoriter eller spår-waypoints.</string>

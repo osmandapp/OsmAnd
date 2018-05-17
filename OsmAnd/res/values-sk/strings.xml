@@ -222,7 +222,7 @@
     <string name="animate_route">Začať simuláciu</string>
     <string name="file_can_not_be_renamed">Súbor nemôže byť premenovaný.</string>
     <string name="file_with_name_already_exists">Súbor s týmto názvom už existuje.</string>
-    <string name="gpx_navigation">GPX trasa</string>
+    <string name="shared_string_gpx_route">GPX trasa</string>
     <string name="poi_query_by_name_matches_categories">Boli nájdené nejaké kategórie POI vyhovujúce požiadavke:</string>
     <string name="data_to_search_poi_not_available">Miestne údaje na hľadanie POI nie sú dostupné.</string>
     <string name="poi_filter_by_name">Hľadať podľa názvu</string>
@@ -1265,7 +1265,7 @@ Proporčná pamäť %4$s MB (Limit Androidu %5$s MB, Dalvik %6$s MB).</string>
     
     <string name="loading_smth">Načítava sa %1$s…</string>
     <string name="map_widget_plain_time">Aktuálny čas</string>
-    <string name="gpx_wpt">Prechodný bod</string>
+    <string name="shared_string_waypoint">Prechodný bod</string>
     <string name="selected_gpx_info_show">\n\nStlačte a podržte pre zobrazenie na mape</string>
     <string name="delay_navigation_start">Spustiť navigačné povely automaticky</string>
     <string name="gpx_split_interval">Interval rozdelenia</string>
@@ -1369,7 +1369,7 @@ Proporčná pamäť %4$s MB (Limit Androidu %5$s MB, Dalvik %6$s MB).</string>
     <string name="rendering_value_bicycle_name">Bicykel</string>
     <string name="rendering_value_pedestrian_name">Chodec</string>
     <string name="download_additional_maps">Stiahnuť chýbajúce mapy %1$s (%2$d MB)?</string>
-    <string name="waypoints">Prechodné body</string>
+    <string name="shared_string_waypoints">Prechodné body</string>
     <string name="targets">Ciele</string>
     <string name="way_alarms">Dopravné varovania</string>
     <string name="speak_favorites">Blízke obľúbené body</string>
@@ -1486,7 +1486,7 @@ Proporčná pamäť %4$s MB (Limit Androidu %5$s MB, Dalvik %6$s MB).</string>
     <string name="proxy_port_descr">Nastaviť port proxy servera (napr. 8118).</string>
     <string name="version_settings_descr">Stiahnuť vývojové verzie.</string>
     <string name="version_settings">Verzie</string>
-    <string name="points">Body</string>
+    <string name="shared_string_gpx_points">Body</string>
     <string name="parking_place">Miesto zaparkovania</string>
     <string name="remove_the_tag">ODSTRÁNIŤ ZNAČKU</string>
     <string name="gps_status">Stav GPS</string>
@@ -2423,7 +2423,7 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="select_gpx_folder">Zvoľte priečinok pre stopy</string>
     <string name="file_can_not_be_moved">Súbor nemôže byť presunutý.</string>
     <string name="shared_string_move">Presunúť</string>
-    <string name="shared_string_tracks">Stopy</string>
+    <string name="shared_string_gpx_tracks">Stopy</string>
     <string name="shared_string_time_moving">Čas v pohybe</string>
     <string name="shared_string_time_span">Časový rozsah</string>
     <string name="shared_string_max">Maximum</string>
@@ -2432,7 +2432,7 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="shared_string_color">Farba</string>
     <string name="max_speed">Maximálna rýchlosť</string>
     <string name="average_speed">Priemerná rýchlosť</string>
-    <string name="gpx_track">Stopa</string>
+    <string name="shared_string_gpx_track">Stopa</string>
     <string name="points_delete_multiple_succesful">Bod(y) boli vymazané.</string>
     <string name="points_delete_multiple">Chystáte sa vymazať %1$d bodov. Ste si istý?</string>
     <string name="route_points_category_name">Zákruty potrebné na tejto trase</string>
@@ -2828,7 +2828,7 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="appearance_on_the_map">Vzhľad na mape</string>
     <string name="add_track_to_markers_descr">Waypointy môžu byť pridané k značkám zvolením jednej stopy, ktorá ich obsahuje.</string>
     <string name="add_favourites_group_to_markers_descr">Zvoľte kategóriu obľúbených bodov, ktoré majú byť pridané k značkám.</string>
-    <string name="track_waypoints">Body stopy</string>
+    <string name="shared_string_gpx_waypoints">Body stopy</string>
     <string name="favourites_group">Kategória obľúbených bodov</string>
     <string name="add_group">Pridať skupinu</string>
     <string name="add_group_descr">Importovať skupiny z obľúbených bodov alebo waypointov stopy.</string>
@@ -2923,7 +2923,7 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="switch_osm_notes_visibility_desc">Zobraziť/skryť OSM poznámky na mape.</string>
     <string name="gpx_file_desc">GPX - vhodné na export do JOSM a iných editorov OSM.</string>
     <string name="osc_file_desc">OSC - vhodné na export do OpenStreetMap.</string>
-    <string name="gpx_file">Súbor GPX</string>
+    <string name="shared_string_gpx_file">Súbor GPX</string>
     <string name="osc_file">Súbor OSC</string>
     <string name="choose_file_type">Zvoľte typ súboru</string>
     <string name="osm_edits_export_desc">Vyberte typ exportu: OSM poznámky, body záujmu alebo obe.</string>

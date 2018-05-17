@@ -404,7 +404,7 @@
 	<string name="city_type_city">شهر</string>
 	<string name="file_can_not_be_renamed">نام فایل را نمی‌توان تغییر داد.</string>
 	<string name="file_with_name_already_exists">فایلی با نام یکسان وجود دارد.</string>
-	<string name="gpx_navigation">مسیر GPX</string>
+	<string name="shared_string_gpx_route">مسیر GPX</string>
 	<string name="poi_filter_by_name">جست‌وجو بر اساس نام</string>
 	<string name="index_settings">مدیریت فایل‌های نقشه</string>
 	<string name="general_settings">عمومی</string>
@@ -1500,7 +1500,7 @@
     
     <string name="loading_smth">بارگیری %1$s…</string>
     <string name="map_widget_plain_time">زمان جاری</string>
-    <string name="gpx_wpt">نقطهٔ بین‌راهی</string>
+    <string name="shared_string_waypoint">نقطهٔ بین‌راهی</string>
     <string name="selected_gpx_info_show">"
 \n
 \nبرای نمایش بر روی نقشه انگشت خود را چند لحظه بر روی صفحه نگه دارید"</string>
@@ -1571,7 +1571,7 @@
     <string name="distance">مسافت</string>
     <string name="index_tours">سفرها</string>
     <string name="shared_string_all">همه</string>
-    <string name="waypoints">نقاط بین‌راهی</string>
+    <string name="shared_string_waypoints">نقاط بین‌راهی</string>
     <string name="targets">مقصدها</string>
     <string name="way_alarms">هشدارهای ترافیکی</string>
     <string name="speak_favorites">نقاط برگزیدهٔ اطراف</string>
@@ -1667,7 +1667,7 @@
     <string name="rendering_attr_streetLighting_name">روشنایی خیابان</string>
     <string name="proxy_pref_title">پروکسی</string>
     <string name="proxy_pref_descr">تنظیم پروکسی را انجام دهید.</string>
-    <string name="points">نقاط</string>
+    <string name="shared_string_gpx_points">نقاط</string>
     
     <string name="shared_string_my_location">موقعیت من</string>
     
@@ -2134,10 +2134,10 @@
     <string name="shared_string_slope">شیب</string>
     <string name="points_delete_multiple">دارید %1$d نقطه را حذف می‌کنید؛ مطمئن هستید؟</string>
     <string name="track_points_category_name">نقاط میانی، نقاط محبوب (POI)، عارضه‌های دارای نام</string>
-    <string name="gpx_track">مسیر</string>
+    <string name="shared_string_gpx_track">مسیر</string>
     <string name="shared_string_time_span">مدت‌زمان</string>
     <string name="select_gpx_folder">پوشهٔ مسیر را انتخاب کنید</string>
-    <string name="shared_string_tracks">Tracks</string>
+    <string name="shared_string_gpx_tracks">Tracks</string>
     <string name="route_altitude">ارتفاع مسیر</string>
     <string name="altitude_descent">نزول</string>
     <string name="altitude_ascent">صعود</string>
@@ -3026,7 +3026,7 @@
     <string name="appearance_on_the_map">تنظیمات ظاهری</string>
     <string name="add_track_to_markers_descr">مسیری را انتخاب کنید تا نقاط بین‌راهیِ آن به نشانه‌ها اضافه شود.</string>
     <string name="add_favourites_group_to_markers_descr">یک گروه از نقاط برگزیده را انتخاب کنید تا به نشانه‌ها اضافه شود.</string>
-    <string name="track_waypoints">نقاط بین‌راهی مسیر</string>
+    <string name="shared_string_gpx_waypoints">نقاط بین‌راهی مسیر</string>
     <string name="favourites_group">گروه نقاط برگزیده</string>
     <string name="add_group">افزودن گروه</string>
     <string name="add_group_descr">گروهی از نقاط برگزیده یا نقاط بین‌راهی را وارد کنید.</string>
@@ -3115,7 +3115,7 @@
     <string name="switch_osm_notes_visibility_desc">پنهان/آشکارکردن توضیحات ویرایشی.</string>
     <string name="gpx_file_desc">جی‌پی‌ایکس - مناسب برای استفاده در JOSM یا سایر ویرایشگرهای OSM.</string>
     <string name="osc_file_desc">اُاِس‌سی - مناسب برای استفاده در OpenStreetMap.</string>
-    <string name="gpx_file">فایل GPX</string>
+    <string name="shared_string_gpx_file">فایل GPX</string>
     <string name="osc_file">فایل OSC</string>
     <string name="choose_file_type">انتخاب قالب فایل</string>
     <string name="osm_edits_export_desc">نوع خروجی را انتخاب کنید: توضیحات ویرایشی، POI یا هر دو.</string>

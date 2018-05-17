@@ -990,7 +990,7 @@
     <string name="add_new_folder">Nowy rjadowak dodać</string>
     <string name="points_delete_multiple_succesful">Dypki su so wotstronili.</string>
     <string name="points_delete_multiple">Chceš wotstronić %1$d dypk(i). Sy sej wěsty/a?</string>
-    <string name="gpx_track">Čara</string>
+    <string name="shared_string_gpx_track">Čara</string>
     <string name="max_speed">maks. spěšnosć</string>
     <string name="average_speed">přerěznu spěšnosć</string>
     <string name="shared_string_max">maks.</string>
@@ -999,7 +999,7 @@
     <string name="shared_string_color">Barba</string>
     <string name="select_gpx_folder">Rjadowak za čary wubrać</string>
     <string name="file_can_not_be_moved">Dataja njehodźi so přesunyć.</string>
-    <string name="shared_string_tracks">Čary</string>
+    <string name="shared_string_gpx_tracks">Čary</string>
     <string name="routing_attr_driving_style_name">Stil jědźenja</string>
     <string name="route_altitude">Wysokosć čary</string>
     <string name="altitude_descent">Wotstup</string>
@@ -1455,7 +1455,7 @@
     <string name="osmand_parking_delete_confirm">Chceš parkowansku chorhojčku woprawdźe wotstronić?</string>
     <string name="osmand_parking_delete">Parkowansku chorhojčku wotstronić</string>
     <string name="context_menu_item_delete_parking_point">Parkowansku chorhojčku wotstronić</string>
-    <string name="gpx_file">GPX-dataja</string>
+    <string name="shared_string_gpx_file">GPX-dataja</string>
     <string name="osc_file">OSC-dataja</string>
     <string name="choose_file_type">Datajowy typ wubrać</string>
     <string name="osm_notes">OSM-noticy</string>

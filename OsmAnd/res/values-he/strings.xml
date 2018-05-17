@@ -384,7 +384,7 @@
 	
 	<string name="file_can_not_be_renamed">לא ניתן לשנות את שם הקובץ.</string>
 	<string name="file_with_name_already_exists">כבר קיים קובץ בשם הזה.</string>
-	<string name="gpx_navigation">מסלול GPX</string>
+	<string name="shared_string_gpx_route">מסלול GPX</string>
 	<string name="poi_query_by_name_matches_categories">נמצאו מספר קטגוריות נ״ע התואמות לשאילתה :</string>
 	<string name="data_to_search_poi_not_available">נתונים מקומיים לחיפוש נ״ע לא קיים.</string>
 	<string name="poi_filter_by_name">חיפוש לפי שם</string>
@@ -1534,7 +1534,7 @@
     <string name="appearance_on_the_map">הופעה על המפה</string>
     <string name="add_track_to_markers_descr">ניתן להוסיף נקודות דרך לסמנים על ידי בחירת אחד המסלולים שבו יש אותם.</string>
     <string name="add_favourites_group_to_markers_descr">נא לבחור קטגוריה מועדפת להוספה לסמנים.</string>
-    <string name="track_waypoints">נקודות דרך במסלול</string>
+    <string name="shared_string_gpx_waypoints">נקודות דרך במסלול</string>
     <string name="favourites_group">קטגוריית מועדפים</string>
     <string name="add_group">הוספת קבוצה</string>
     <string name="add_group_descr">ניתן לייבא קבוצות ממועדפים או נקודות דרך של מסלול.</string>
@@ -1687,7 +1687,7 @@
     <string name="proxy_pref_title">מתווך</string>
     <string name="proxy_pref_descr">ציון שרת מתווך.</string>
     <string name="settings_privacy">פרטיות</string>
-    <string name="points">נקודות</string>
+    <string name="shared_string_gpx_points">נקודות</string>
     <string name="navigation_over_track">להתחיל ניווט לאורך המסלול?</string>
     <string name="speak_pedestrian">מעברי חציה</string>
     <string name="rendering_attr_roadStyle_name">סגנון דרך</string>
@@ -1766,7 +1766,7 @@
     <string name="min_max">מזערי/מרבי</string>
     <string name="index_tours">סיורים</string>
     <string name="shared_string_all">הכול</string>
-    <string name="waypoints">נקודות דרך</string>
+    <string name="shared_string_waypoints">נקודות דרך</string>
     <string name="targets">יעדים</string>
     <string name="announce_gpx_waypoints">נקודות דרך GPX</string>
     <string name="download_additional_maps">להוריד את המפות החסרות %1$s ‏(%2$d מ״ב)?</string>
@@ -2263,7 +2263,7 @@
     <string name="points_delete_multiple_succesful">הנקודות נמחקו.</string>
     <string name="points_delete_multiple">פעולה זו תוביל למחיקתן של %1$d נקודות. להמשיך?</string>
     <string name="route_points_category_name">פניות שיש לקחת בנתיב הזה</string>
-    <string name="gpx_track">מסלול</string>
+    <string name="shared_string_gpx_track">מסלול</string>
     <string name="max_speed">מהירות מרבית</string>
     <string name="average_speed">מהירות ממוצעת</string>
     <string name="shared_string_time_moving">זמן תנועה</string>
@@ -2393,7 +2393,7 @@
     <string name="select_gpx_folder">בחירת תיקיית מסלולים</string>
     <string name="file_can_not_be_moved">אי אפשר להעביר את הקובץ.</string>
     <string name="shared_string_move">העברה</string>
-    <string name="shared_string_tracks">מסלולים</string>
+    <string name="shared_string_gpx_tracks">מסלולים</string>
     <string name="routing_attr_driving_style_name">סגנון נהיגה</string>
     <string name="route_altitude">תוואי נתיב</string>
     <string name="altitude_descent">עלייה</string>
@@ -2710,7 +2710,7 @@
     <string name="switch_osm_notes_visibility_desc">הצגה/הסתרה של הערות OSM במפה.</string>
     <string name="gpx_file_desc">GPX - מתאים לייצוא ל־JOSM או עורכי OSM אחרים.</string>
     <string name="osc_file_desc">OSC - מתאים לייצוא ל־OpenStreetMap.</string>
-    <string name="gpx_file">קובץ GPX</string>
+    <string name="shared_string_gpx_file">קובץ GPX</string>
     <string name="osc_file">קובץ OSC</string>
     <string name="choose_file_type">נא לבחור את סוג הקובץ</string>
     <string name="osm_edits_export_desc">נא לבחור את סוג הייצור: הערות OSM, נקודות עניין או גם וגם.</string>
@@ -2778,7 +2778,7 @@
     <string name="fav_point_emoticons_message">שם הנקודה המועדפת השתנה לביטוי %1$s כדי להתאים כראוי לשמירת המחרוזת עם הרגשונים לקובץ.</string>
     <string name="save_track_interval_globally">הפרשי רישום</string>
     <string name="rendering_attr_hideWoodScrubs_name">עצים וצמחיה נמוכה</string>
-    <string name="gpx_wpt">נקודת דרך</string>
+    <string name="shared_string_waypoint">נקודת דרך</string>
     <string name="delay_navigation_start">התחלת הנחייה לפי פניות אוטומטית</string>
     <string name="gpx_timespan">טווח זמן: %1$s</string>
     <string name="index_item_world_seamarks">נקודות ציון ימיות</string>

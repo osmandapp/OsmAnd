@@ -155,7 +155,7 @@ Lon %2$s</string>
     <string name="rendering_attr_streetLighting_name">Alumbrado público</string>
     <string name="proxy_pref_title">Proxy</string>
     <string name="settings_privacy">Privacidad</string>
-    <string name="points">Puntos</string>
+    <string name="shared_string_gpx_points">Puntos</string>
     <string name="navigation_over_track">¿Iniciar la navegación a lo largo de la traza?</string>
     <string name="speak_pedestrian">Cruces peatonales</string>
     <string name="rendering_attr_roadStyle_name">Estilo vial</string>
@@ -235,7 +235,7 @@ Lon %2$s</string>
     <string name="duration">Duración</string>
     <string name="distance">Distancia</string>
     <string name="shared_string_all">Todos</string>
-    <string name="waypoints">Puntos de referencia</string>
+    <string name="shared_string_waypoints">Puntos de referencia</string>
     <string name="targets">Destinos</string>
     <string name="announce_gpx_waypoints">Puntos GPX</string>
     <string name="download_additional_maps">¿Descargar los %1$s mapas que faltan (%2$d MB)?</string>
@@ -271,7 +271,7 @@ Lon %2$s</string>
     <string name="layer_amenity_label">Nombres de PDI superpuestos</string>
     <string name="loading_smth">Cargando %1$s…</string>
     <string name="map_widget_plain_time">Tiempo actual</string>
-    <string name="gpx_wpt">Punto de referencia</string>
+    <string name="shared_string_waypoint">Punto de referencia</string>
     <string name="selected_gpx_info_show">"
 \n
 \nMantén pulsado para ver en el mapa"</string>
@@ -1176,7 +1176,7 @@ Lon %2$s</string>
     <string name="animate_route">Iniciar simulación</string>
     <string name="file_can_not_be_renamed">El archivo no se puede renombrar.</string>
     <string name="file_with_name_already_exists">Ya existe un archivo con ese nombre.</string>
-    <string name="gpx_navigation">Ruta GPX</string>
+    <string name="shared_string_gpx_route">Ruta GPX</string>
     <string name="poi_query_by_name_matches_categories">Encontradas varias categorías de PDI que responden a la consulta:</string>
     <string name="data_to_search_poi_not_available">Sin datos locales para buscar PDI.</string>
     <string name="poi_filter_by_name">Buscar por nombre</string>
@@ -2431,7 +2431,7 @@ Lon %2$s</string>
     <string name="select_gpx_folder">Marcar carpeta de traza</string>
     <string name="file_can_not_be_moved">Archivo inamovible.</string>
     <string name="shared_string_move">Mover</string>
-    <string name="shared_string_tracks">Trazas</string>
+    <string name="shared_string_gpx_tracks">Trazas</string>
     <string name="shared_string_time_moving">Tiempo moviéndose</string>
     <string name="shared_string_time_span">Duración</string>
     <string name="shared_string_max">Máx</string>
@@ -2440,7 +2440,7 @@ Lon %2$s</string>
     <string name="shared_string_color">Color</string>
     <string name="max_speed">Velocidad máxima</string>
     <string name="average_speed">Velocidad media</string>
-    <string name="gpx_track">Traza</string>
+    <string name="shared_string_gpx_track">Traza</string>
     <string name="points_delete_multiple_succesful">Punto(s) borrado(s).</string>
     <string name="points_delete_multiple">¿Borrar %1$d punto(s)?</string>
     <string name="route_points_category_name">Giros a pasar en esta ruta</string>
@@ -2840,7 +2840,7 @@ Lon %2$s</string>
     <string name="go_to_next_field">Siguiente campo</string>
     <string name="add_track_to_markers_descr">Los puntos de referencia pueden añadirse a los marcadores eligiendo una de estas trazas.</string>
     <string name="add_favourites_group_to_markers_descr">Elige una categoría de favoritos para añadir a los marcadores.</string>
-    <string name="track_waypoints">Puntos de referencia de la traza</string>
+    <string name="shared_string_gpx_waypoints">Puntos de referencia de la traza</string>
     <string name="favourites_group">Categoría de favoritos</string>
     <string name="add_group">Añadir un grupo</string>
     <string name="add_group_descr">Importar grupos de favoritos o puntos de referencia de la traza.</string>
@@ -2936,7 +2936,7 @@ Lon %2$s</string>
     <string name="switch_osm_notes_visibility_desc">Alternar vista de notas de OSM en el mapa.</string>
     <string name="gpx_file_desc">GPX - adecuado para exportar a JOSM u otros editores OSM.</string>
     <string name="osc_file_desc">OSC - adecuado para exportar a OpenStreetMap.</string>
-    <string name="gpx_file">Archivo GPX</string>
+    <string name="shared_string_gpx_file">Archivo GPX</string>
     <string name="osc_file">Archivo OSC</string>
     <string name="choose_file_type">Elegir tipo de archivo</string>
     <string name="osm_edits_export_desc">Elige el tipo de exportación: notas de OSM, PDI o ambos.</string>

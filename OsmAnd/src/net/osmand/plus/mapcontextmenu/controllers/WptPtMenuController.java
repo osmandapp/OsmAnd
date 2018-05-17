@@ -100,7 +100,7 @@ public class WptPtMenuController extends MenuController {
 		GpxSelectionHelper helper = getMapActivity().getMyApplication().getSelectedGpxHelper();
 		SelectedGpxFile selectedGpxFile = helper.getSelectedGPXFile(wpt);
 		StringBuilder sb = new StringBuilder();
-		sb.append(getMapActivity().getString(R.string.gpx_wpt));
+		sb.append(getMapActivity().getString(R.string.shared_string_waypoint));
 		sb.append(", ");
 		if (selectedGpxFile != null) {
 			File file = new File(selectedGpxFile.getGpxFile().path);
@@ -117,6 +117,6 @@ public class WptPtMenuController extends MenuController {
 
 	@Override
 	public String getCommonTypeStr() {
-		return getMapActivity().getString(R.string.gpx_wpt);
+		return getMapActivity().getString(R.string.shared_string_waypoint);
 	}
 }

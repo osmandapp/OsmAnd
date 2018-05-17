@@ -183,7 +183,7 @@
     <string name="shared_string_added">Zêdekirî</string>
     <string name="gpx_file_desc">GPX - ji bo eksportkirina JOSM an jî edîtorên din yên OSMê minasîb e.</string>
     <string name="osc_file_desc">OSC - ji bo eksportkirina OpenStreetMapê minasîb e.</string>
-    <string name="gpx_file">Dosyeya GPXê</string>
+    <string name="shared_string_gpx_file">Dosyeya GPXê</string>
     <string name="osc_file">Dosyeya OSCê</string>
     <string name="choose_file_type">Cureya dosyeyê bibijêre</string>
     <string name="osm_edits_export_desc">Cureya eksportkirinê bibijêre: Notên OSMê, POI an jî her du.</string>

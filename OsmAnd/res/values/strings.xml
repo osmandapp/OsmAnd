@@ -126,7 +126,7 @@
     <string name="switch_osm_notes_visibility_desc">Show/Hide OSM notes on the map.</string>
     <string name="gpx_file_desc">GPX - suitable for export to JOSM or other OSM editors.</string>
     <string name="osc_file_desc">OSC - suitable for export to OpenStreetMap.</string>
-    <string name="gpx_file">GPX file</string>
+    <string name="shared_string_gpx_file">GPX file</string>
     <string name="osc_file">OSC file</string>
     <string name="choose_file_type">Choose file type</string>
     <string name="osm_edits_export_desc">Select the export type: OSM notes, POI, or both.</string>
@@ -178,7 +178,7 @@
     <string name="appearance_on_the_map">Appearance on the map</string>
     <string name="add_track_to_markers_descr">Select a GPX file to add its waypoints to the markers.</string>
     <string name="add_favourites_group_to_markers_descr">Select a favorite category to add to the markers.</string>
-    <string name="track_waypoints">GPX waypoints</string>
+    <string name="shared_string_gpx_waypoints">GPX waypoints</string>
     <string name="favourites_group">Favorites category</string>
     <string name="add_group">Add a group</string>
     <string name="add_group_descr">Import groups from favorites or GPX waypoints.</string>
@@ -415,7 +415,7 @@
     <string name="points_delete_multiple">You are going to delete %1$d point(s). Are you sure?</string>
     <string name="route_points_category_name">Turns to pass on this route</string>
     <string name="track_points_category_name">Waypoints, points of interest, named features</string>
-    <string name="gpx_track">Track</string>
+    <string name="shared_string_gpx_track">Track</string>
     <string name="max_speed">Maximum speed</string>
     <string name="average_speed">Average speed</string>
     <string name="shared_string_time_moving">Time moving</string>
@@ -427,7 +427,7 @@
     <string name="select_gpx_folder">Select GPX file folder</string>
     <string name="file_can_not_be_moved">File can not be moved.</string>
     <string name="shared_string_move">Move</string>
-    <string name="shared_string_tracks">Tracks</string>
+    <string name="shared_string_gpx_tracks">Tracks</string>
     <string name="routing_attr_driving_style_name">Driving style</string>
     <string name="route_altitude">Route elevation</string>
     <string name="altitude_descent">Descent</string>
@@ -1098,7 +1098,6 @@
     <string name="shared_string_my_location">My Position</string>
     <string name="shared_string_my_places">My Places</string>
     <string name="shared_string_my_favorites">Favorites</string>
-    <string name="shared_string_my_tracks">GPX files</string>
     <string name="shared_string_currently_recording_track">Currently recording track</string>
     <string name="shared_string_audio">Audio</string>
     <string name="shared_string_video">Video</string>
@@ -1179,7 +1178,7 @@
     <string name="proxy_pref_title">Proxy</string>
     <string name="proxy_pref_descr">Specify a proxy server.</string>
     <string name="settings_privacy">Privacy</string>
-    <string name="points">Points</string>
+    <string name="shared_string_gpx_points">Points</string>
     <string name="navigation_over_track">Start navigation along track?</string>
     <string name="avoid_roads_msg">Trigger an alternative route by selecting roads to avoid</string>
     <string name="speak_pedestrian">Pedestrian crosswalks</string>
@@ -1304,9 +1303,8 @@
     <string name="min_max">Min/Max</string>
     <string name="index_tours">Tours</string>
     <string name="shared_string_all">All</string>
-    <string name="waypoints">Waypoints</string>
+    <string name="shared_string_waypoints">Waypoints</string>
     <string name="targets">Destinations</string>
-    <string name="announce_gpx_waypoints">GPX waypoints</string>
     <string name="download_additional_maps">Download missing maps %1$s (%2$d MB)?</string>
     <string name="rendering_value_browse_map_name">Browse map</string>
     <string name="rendering_value_car_name">Car</string>
@@ -1356,7 +1354,7 @@
     <string name="layer_amenity_label">POI overlay labels</string>
     <string name="loading_smth">Loading %1$s…</string>
     <string name="map_widget_plain_time">Current time</string>
-    <string name="gpx_wpt">Waypoint</string>
+    <string name="shared_string_waypoint">Waypoint</string>
     <string name="selected_gpx_info_show">\n\nLong-tap to view on the map</string>
     <string name="delay_navigation_start">Start turn-by-turn guidance automatically</string>
     <string name="local_index_gpx_info_show">\n\nLong-tap for options</string>
@@ -2215,7 +2213,7 @@
     <string name="animate_route">Start simulation</string>
     <string name="file_can_not_be_renamed">File can not be renamed.</string>
     <string name="file_with_name_already_exists">File with that name already exists.</string>
-    <string name="gpx_navigation">GPX route</string>
+    <string name="shared_string_gpx_route">GPX route</string>
     <string name="poi_query_by_name_matches_categories">Several POI categories found matching the query:</string>
     <string name="data_to_search_poi_not_available">Local data to search POI is not present.</string>
     <string name="poi_filter_by_name">Search by name</string>

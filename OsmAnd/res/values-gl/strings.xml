@@ -57,7 +57,7 @@ As pistas gravadas pódense compartir ou empregar colaborando con OSM. Os atleta
     <string name="distance">Distancia</string>
     <string name="index_tours">Visitas</string>
     <string name="shared_string_all">Todo</string>
-    <string name="waypoints">Puntos de pasaxe</string>
+    <string name="shared_string_waypoints">Puntos de pasaxe</string>
     <string name="targets">Destinos</string>
     <string name="announce_gpx_waypoints">Puntos de pasaxe do GPX</string>
     <string name="download_additional_maps">Descargar os mapas que faltan, %1$s (%2$d MB)?</string>
@@ -128,7 +128,7 @@ As pistas gravadas pódense compartir ou empregar colaborando con OSM. Os atleta
     <string name="layer_amenity_label">Nomes dos puntos</string>
     <string name="loading_smth">A cargar %1$s…</string>
     <string name="map_widget_plain_time">Hora actual</string>
-    <string name="gpx_wpt">Punto de pasaxe</string>
+    <string name="shared_string_waypoint">Punto de pasaxe</string>
     <string name="selected_gpx_info_show">\n\nManteña premido para ver no mapa</string>
     <string name="delay_navigation_start">Iniciar a orientación paso a paso automaticamente</string>
     <string name="shared_string_selected_lowercase">seleccionado</string>
@@ -1028,7 +1028,7 @@ Os mapas en teselas pódense obter directamente a través de recursos na rede ou
 	
 	<string name="file_can_not_be_renamed">Non é posíbel mudar o nome do ficheiro.</string>
 	<string name="file_with_name_already_exists">Xa existe un ficheiro con ese nome.</string>
-	<string name="gpx_navigation">Itinerario de GPX</string>
+	<string name="shared_string_gpx_route">Itinerario de GPX</string>
 	<string name="poi_query_by_name_matches_categories">Hai varias categorías de PDE que responden á consulta:</string>
 	<string name="data_to_search_poi_not_available">Non hai datos locais presentes para buscar puntos de interese.</string>
 	<string name="poi_filter_by_name">Buscar polo nome</string>
@@ -1807,7 +1807,7 @@ Lon %2$s</string>
     <string name="proxy_pref_title">Proxy</string>
     <string name="proxy_pref_descr">Configurar unha comunicación á Internet por proxy</string>
     <string name="settings_privacy">Privacidade</string>
-    <string name="points">Puntos</string>
+    <string name="shared_string_gpx_points">Puntos</string>
 	<string name="navigation_over_track">Comezar a navegación seguindo a pista?</string>
 	<string name="avoid_roads_msg">Pode designar unha ruta alternativa seleccionando as estradas que desexe evitar</string>
 	<string name="rendering_value__name">Predeterminado</string>
@@ -2477,7 +2477,7 @@ Pódese pechar esta vista desactivándoa aquí ou cambiando o «Estilo de mapa»
     <string name="select_gpx_folder">Seleccione o cartafol de pistas</string>
     <string name="file_can_not_be_moved">Non é posíbel mover o ficheiro.</string>
     <string name="shared_string_move">Mover</string>
-    <string name="shared_string_tracks">Pistas</string>
+    <string name="shared_string_gpx_tracks">Pistas</string>
     <string name="routing_attr_driving_style_name">Estilo de condución</string>
     <string name="route_altitude">Altitude da ruta</string>
     <string name="altitude_descent">Descenso</string>
@@ -2670,7 +2670,7 @@ Pódese pechar esta vista desactivándoa aquí ou cambiando o «Estilo de mapa»
     <string name="switch_osm_notes_visibility_desc">Mostrar/Agochar as Notas de OSM no mapa.</string>
     <string name="gpx_file_desc">GPX - adecuado para exportar a JOSM ou outros editores de OSM.</string>
     <string name="osc_file_desc">OSC - adecuado para exportar a OpenStreetMap.</string>
-    <string name="gpx_file">Ficheiro GPX</string>
+    <string name="shared_string_gpx_file">Ficheiro GPX</string>
     <string name="osc_file">Ficheiro OSC</string>
     <string name="choose_file_type">Escolla o tipo de ficheiro</string>
     <string name="osm_edits_export_desc">Seleccione o tipo de exportación: Notas de OSM, PdI ou ambos.</string>
@@ -2718,7 +2718,7 @@ Pódese pechar esta vista desactivándoa aquí ou cambiando o «Estilo de mapa»
     <string name="empty_state_markers_history_desc">Os marcadores marcados como pasados aparecen nesta pantalla.</string>
     <string name="tap_on_map_to_hide_interface_descr">Un toque no mapa alterna entre os botóns de control e os trebellos.</string>
     <string name="mark_passed">Marcador pasado</string>
-    <string name="gpx_track">Ruta</string>
+    <string name="shared_string_gpx_track">Ruta</string>
     <string name="lang_kab">Cabila</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Cor por afiliación da rede</string>
     <string name="average">Media</string>

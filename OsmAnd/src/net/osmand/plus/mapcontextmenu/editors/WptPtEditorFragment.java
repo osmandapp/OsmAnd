@@ -279,7 +279,7 @@ public class WptPtEditorFragment extends PointEditorFragment {
 
 	@Override
 	public String getHeaderCaption() {
-		return getMapActivity().getResources().getString(R.string.gpx_wpt);
+		return getMapActivity().getResources().getString(R.string.shared_string_waypoint);
 	}
 
 	@Override

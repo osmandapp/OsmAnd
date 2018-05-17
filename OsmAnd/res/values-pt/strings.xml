@@ -633,7 +633,7 @@
   
   <string name="file_can_not_be_renamed">O ficheiro não pode ser renomeado.</string>
   <string name="file_with_name_already_exists">Já existe um ficheiro com esse nome.</string>
-  <string name="gpx_navigation">Rota GPX</string>
+  <string name="shared_string_gpx_route">Rota GPX</string>
   <string name="poi_query_by_name_matches_categories">Several POI categories found matching the query :</string>
   <string name="data_to_search_poi_not_available">Não existem dados locais para busca de POI.</string>
   <string name="old_poi_file_should_be_deleted">O ficheiro POI \'%1$s\' é repetido e pode ser apagado.</string>
@@ -1464,7 +1464,7 @@ Clique no widget de medição para ver mais ações.</string>
     <string name="layer_amenity_label">Rótulos de pontos</string>
     <string name="loading_smth">Carregando %1$s …</string>
     <string name="map_widget_plain_time">Tempo atual</string>
-    <string name="gpx_wpt">Ponto</string>
+    <string name="shared_string_waypoint">Ponto</string>
     <string name="selected_gpx_info_show">\n\nPressione e segure para ver no mapa</string>
     <string name="delay_navigation_start">Iniciar navegação com atraso</string>
     <string name="shared_string_selected_lowercase">seleccionado</string>
@@ -1510,7 +1510,7 @@ Clique no widget de medição para ver mais ações.</string>
     <string name="gps_status">Situação do GPS</string>
     <string name="proxy_pref_title">Proxy</string>
     <string name="settings_privacy">Privacidade</string>
-    <string name="points">Pontos</string>
+    <string name="shared_string_gpx_points">Pontos</string>
     <string name="shared_string_my_location">Minha localização</string>
     
 	<string name="avoid_roads_msg">Você pode inciar rotas alternativas selecionando estradas a serem evitadas</string>
@@ -1676,7 +1676,7 @@ Clique no widget de medição para ver mais ações.</string>
     <string name="use_opengl_render_descr">Usar aceleração de hardware OpenGL para renderização (pode não funcionar em alguns aparelhos)</string>
     <string name="wake_on_voice">Acender a tela</string>
     <string name="configure_map">Configurar mapa</string>
-    <string name="waypoints">Pontos de parada</string>
+    <string name="shared_string_waypoints">Pontos de parada</string>
     <string name="targets">Destinos</string>
     <string name="shared_string_dismiss">Descartar</string>
 	<string name="rendering_category_others">Outros atributos do mapa</string>
@@ -2247,7 +2247,7 @@ Clique no widget de medição para ver mais ações.</string>
     <string name="points_delete_multiple">Vai apagar %1$d ponto(s). Tem a certeza?</string>
     <string name="route_points_category_name">Mudanças de direção a passar neste percurso</string>
     <string name="track_points_category_name">Pontos proeminentes neste percurso</string>
-    <string name="gpx_track">Percurso</string>
+    <string name="shared_string_gpx_track">Percurso</string>
     <string name="max_speed">Velocidade máxima</string>
     <string name="average_speed">Velocidade média</string>
     <string name="shared_string_time_moving">Tempo em movimento</string>
@@ -2259,7 +2259,7 @@ Clique no widget de medição para ver mais ações.</string>
     <string name="select_gpx_folder">Selecionar diretório do percurso</string>
     <string name="file_can_not_be_moved">Ficheiro não pode ser movido.</string>
     <string name="shared_string_move">Mover</string>
-    <string name="shared_string_tracks">Percursos</string>
+    <string name="shared_string_gpx_tracks">Percursos</string>
     <string name="routing_attr_driving_style_name">Estilo de condução</string>
     <string name="route_altitude">Elevação do percurso</string>
     <string name="altitude_descent">Descida</string>

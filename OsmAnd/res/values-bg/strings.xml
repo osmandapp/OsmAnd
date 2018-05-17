@@ -558,7 +558,7 @@
 
     <string name="file_can_not_be_renamed">Файлът не може да бъде преименуван.</string>
     <string name="file_with_name_already_exists">Съществува файл с това име.</string>
-    <string name="gpx_navigation">GPX маршрут</string>
+    <string name="shared_string_gpx_route">GPX маршрут</string>
     <string name="poi_query_by_name_matches_categories">Намерени са няколко категории POI отговарящи на тези критерии:</string>
     <string name="data_to_search_poi_not_available">Няма местни данни за търсене на POI.</string>
     <string name="poi_filter_by_name">Търсене по име</string>
@@ -1220,7 +1220,7 @@
     <string name="distance">Разстояние</string>
     <string name="index_tours">Пътувания</string>
     <string name="shared_string_all">Всички</string>
-    <string name="waypoints">Точки</string>
+    <string name="shared_string_waypoints">Точки</string>
     <string name="targets">Дестинации</string>
     <string name="way_alarms">Предупреждения</string>
     <string name="speak_favorites">Записани места</string>
@@ -1295,7 +1295,7 @@
     <string name="layer_amenity_label">Етикети на точките</string>
     <string name="loading_smth">Зареждане %1$s …</string>
     <string name="map_widget_plain_time">Текущо време</string>
-    <string name="gpx_wpt">Точка</string>
+    <string name="shared_string_waypoint">Точка</string>
     <string name="selected_gpx_info_show">\n\nНатиснете и задръжте за показване на картата</string>
     <string name="text_size_descr">Въведете размер на текста върху картата.</string>
     <string name="text_size">Размер на текста</string>
@@ -1476,7 +1476,7 @@
     <string name="proxy_pref_title">Прокси</string>
     <string name="proxy_pref_descr">Настройка на прокси интернет комуникация</string>
     <string name="settings_privacy">Поверителност</string>
-    <string name="points">Точки</string>
+    <string name="shared_string_gpx_points">Точки</string>
     <string name="record_plugin_description">"Тази добавка позволява записване на изминатия път в GPX файл. Записът може да се активира чрез докосване на бутон на главния екран или автоматично при стартиране на навигацията.\n\nЗаписаните следи могат да бъдат споделяни или да се изпращат към OSM. Спортистите могат да използват записаните следи за да проследят своя напредък. Основните данни на следата можете да видите директно в OsmAnd, като междинни времена, средната скорост и т.н. По-късно можете да анализирате следите в специални приложения за целта. "</string>
     <string name="navigation_over_track">Стартиране на навигацията по маршрута?</string>
     <string name="save_track_to_gpx_globally_headline">Запис на следа при поискване</string>
@@ -2186,7 +2186,7 @@
     <string name="make_as_start_point">Отбележете като начало</string>
     <string name="shared_string_current">Текущ</string>
     <string name="show_closed_notes">Покажи затворените бележки</string>
-    <string name="gpx_file">GPX файл</string>
+    <string name="shared_string_gpx_file">GPX файл</string>
     <string name="all_data">Всички данни</string>
     <string name="osm_notes">OSM бележки</string>
     <string name="will_open_tomorrow_at">Ще отвори утре в</string>

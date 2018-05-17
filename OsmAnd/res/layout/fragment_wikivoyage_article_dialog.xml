@@ -129,7 +129,7 @@
 				android:paddingLeft="@dimen/bottom_sheet_content_margin"
 				android:paddingRight="@dimen/bottom_sheet_content_padding_small"
 				android:paddingTop="@dimen/context_menu_padding_margin_tiny"
-				android:text="@string/points"
+				android:text="@string/shared_string_gpx_points"
 				android:textColor="?attr/wikivoyage_active_color"
 				android:textSize="@dimen/text_button_text_size"
 				osmand:typeface="@string/font_roboto_medium"

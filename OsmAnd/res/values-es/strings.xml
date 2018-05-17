@@ -96,7 +96,7 @@
     <string name="animate_route">Iniciar simulación</string>
     <string name="file_can_not_be_renamed">El archivo no se puede renombrar.</string>
     <string name="file_with_name_already_exists">Ya existe un archivo con ese nombre.</string>
-    <string name="gpx_navigation">Ruta GPX</string>
+    <string name="shared_string_gpx_route">Ruta GPX</string>
     <string name="poi_query_by_name_matches_categories">Encontradas varias categorías de PDI que responden a la consulta:</string>
     <string name="data_to_search_poi_not_available">Sin datos locales para buscar PDI.</string>
     <string name="poi_filter_by_name">Buscar por nombre</string>
@@ -1339,7 +1339,7 @@
     <string name="gpx_info_diff_altitude">Rango de altitud: %1$s</string>
     <string name="gpx_info_asc_altitude">Descendido/ascendido: %1$s</string>
     <string name="map_widget_plain_time">Tiempo actual</string>
-    <string name="gpx_wpt">Punto de ruta</string>
+    <string name="shared_string_waypoint">Punto de ruta</string>
     <string name="select_destination_and_intermediate_points">Marque los destinos</string>
     <string name="layer_amenity_label">Nombres de PDI superpuestos</string>
     <string name="save_as_favorites_points">Guardar como grupo de favoritos</string>
@@ -1423,7 +1423,7 @@
     <string name="rendering_value_pedestrian_name">Peatón</string>
     <string name="shared_string_more">Más…</string>
     <string name="download_additional_maps">¿Descargar los %1$s mapas que faltan (%2$d MB)?</string>
-    <string name="waypoints">Puntos de ruta</string>
+    <string name="shared_string_waypoints">Puntos de ruta</string>
     <string name="targets">Destinos</string>
     <string name="way_alarms">Advertencias de tráfico</string>
     <string name="speak_favorites">Favoritos cercanos</string>
@@ -1545,7 +1545,7 @@
     <string name="version_settings">Compilaciones</string>
     <string name="gps_status">Estado del GPS</string>
     <string name="rendering_attr_streetLighting_name">Alumbrado público</string>
-    <string name="points">Puntos</string>
+    <string name="shared_string_gpx_points">Puntos</string>
     <string name="shared_string_my_location">Mi ubicación</string>
     <string name="parking_place">Lugar de aparcamiento</string>
     <string name="remove_the_tag">QUITAR ETIQUETA</string>
@@ -2397,7 +2397,7 @@
 	<string name="select_gpx_folder">Seleccionar carpeta de traza</string>
     <string name="file_can_not_be_moved">Archivo inamovible.</string>
     <string name="shared_string_move">Mover</string>
-    <string name="shared_string_tracks">Trazas</string>
+    <string name="shared_string_gpx_tracks">Trazas</string>
     <string name="routing_attr_driving_style_name">Estilo de conducción</string>
     
     <string name="route_altitude">Elevación de la ruta</string>
@@ -2432,7 +2432,7 @@
     <string name="points_delete_multiple">¿Borrar %1$d punto(s)?</string>
     <string name="route_points_category_name">Giros a pasar en esta ruta</string>
     <string name="track_points_category_name">Puntos de ruta, puntos de interés, características nombradas</string>
-    <string name="gpx_track">Traza</string>
+    <string name="shared_string_gpx_track">Traza</string>
     <string name="max_speed">Velocidad máxima</string>
     <string name="average_speed">Velocidad media</string>
     <string name="shared_string_time_moving">Tiempo moviéndose</string>
@@ -2835,7 +2835,7 @@
     <string name="appearance_on_the_map">Apariencia en el mapa</string>
     <string name="add_track_to_markers_descr">Los puntos de ruta pueden añadirse a los marcadores seleccionando una de estas trazas.</string>
     <string name="add_favourites_group_to_markers_descr">Selecciona una categoría de favoritos para añadir a los marcadores.</string>
-    <string name="track_waypoints">Puntos de ruta de la traza</string>
+    <string name="shared_string_gpx_waypoints">Puntos de ruta de la traza</string>
     <string name="favourites_group">Categoría de favoritos</string>
     <string name="add_group">Añadir un grupo</string>
     <string name="add_group_descr">Importar grupos de favoritos o puntos de ruta de la traza.</string>
@@ -2904,7 +2904,7 @@
     <string name="winter_and_ski_renderer">Invierno y esquí</string>
     <string name="gpx_file_desc">GPX - adecuado para exportar a JOSM u otros editores OSM.</string>
     <string name="osc_file_desc">OSC - adecuado para exportar a OpenStreetMap.</string>
-    <string name="gpx_file">Archivo GPX</string>
+    <string name="shared_string_gpx_file">Archivo GPX</string>
     <string name="osc_file">Archivo OSC</string>
     <string name="choose_file_type">Elegir tipo de archivo</string>
     <string name="osm_edits_export_desc">Seleccione el tipo de exportación: notas de OSM, PDI o ambos.</string>

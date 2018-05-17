@@ -42,7 +42,7 @@
     <string name="save_as_favorites_points">Lagra som favorittgruppe</string>
     <string name="loading_smth">Lastar %1$s …</string>
     <string name="map_widget_plain_time">Gjeldande klokkeslett</string>
-    <string name="gpx_wpt">Vegpunkt</string>
+    <string name="shared_string_waypoint">Vegpunkt</string>
     <string name="selected_gpx_info_show">\n\nHald inne for å sjå på kartet</string>
     <string name="shared_string_selected_lowercase">valt</string>
     <string name="local_index_gpx_info_show">\n\nHald inne for å sjå val</string>

@@ -44,7 +44,7 @@ public class SelectionMarkersGroupBottomSheetDialogFragment extends MenuBottomSh
 
 		BaseBottomSheetItem waypointsItem = new SimpleBottomSheetItem.Builder()
 				.setIcon(getContentIcon(R.drawable.ic_action_polygom_dark))
-				.setTitle(getString(R.string.track_waypoints))
+				.setTitle(getString(R.string.shared_string_gpx_waypoints))
 				.setLayoutId(R.layout.bottom_sheet_item_simple)
 				.setOnClickListener(new View.OnClickListener() {
 					@Override

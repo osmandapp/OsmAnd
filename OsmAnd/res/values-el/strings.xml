@@ -392,7 +392,7 @@
 	
 	<string name="file_can_not_be_renamed">Το αρχείο δεν μπορεί να μετονομαστεί.</string>
 	<string name="file_with_name_already_exists">Υπάρχει ήδη αρχείο με αυτό το όνομα.</string>
-	<string name="gpx_navigation">διαδρομή GPX</string>
+	<string name="shared_string_gpx_route">διαδρομή GPX</string>
 	<string name="poi_query_by_name_matches_categories">Βρέθηκαν αρκετές κατηγορίες ΣΕ που ταιριάζουν με το ερώτημα:</string>
 	<string name="data_to_search_poi_not_available">Δεν υπάρχουν τοπικά δεδομένα για αναζήτηση ΣΕ.</string>
 	<string name="poi_filter_by_name">Αναζήτηση βάσει ονόματος</string>
@@ -1292,7 +1292,7 @@
     
     <string name="gpx_split_interval">Διάστημα διαχωρισμού</string>
     <string name="select_destination_and_intermediate_points">Επιλέξτε προορισμούς</string>
-    <string name="gpx_wpt">Σημείο διαδρομής</string>
+    <string name="shared_string_waypoint">Σημείο διαδρομής</string>
     <string name="gpx_info_subtracks">"Υποΐχνη: %1$s "</string>
 	<string name="gpx_info_waypoints">"Σημεία διαδρομής: %1$s "</string>
 	<string name="gpx_timespan">Χρονική διάρκεια: %1$s</string>
@@ -1472,7 +1472,7 @@
     <string name="duration">Διάρκεια</string>
     <string name="distance">Απόσταση</string>
     <string name="index_tours">Περιηγήσεις</string>
-    <string name="waypoints">Σημεία διαδρομής</string>
+    <string name="shared_string_waypoints">Σημεία διαδρομής</string>
     <string name="save_track_to_gpx_globally">Καταγραφή ίχνους σε αρχείο GPX</string>
 	<string name="save_track_to_gpx_globally_descr">Η γενική καταγραφή θέσης σε αρχείο GPX μπορεί να ενεργοποιηθεί και να απενεργοποιηθεί χρησιμοποιώντας το γραφικό στοιχείο καταγραφής GPX στην οθόνη του χάρτη.</string>
 	<string name="save_track_interval_globally">Διάστημα καταγραφής</string>
@@ -1552,7 +1552,7 @@
     <string name="voices">Φωνητικές οδηγίες</string>
 	<string name="parking_place">Χώρος στάθμευσης</string>
     <string name="gps_status">Κατάσταση GPS</string>
-    <string name="points">Σημεία</string>
+    <string name="shared_string_gpx_points">Σημεία</string>
     
     
 	<string name="navigation_over_track">Έναρξη πλοήγησης κατά μήκος του ίχνους;</string>
@@ -1885,7 +1885,7 @@
     <string name="switch_osm_notes_visibility_desc">Εμφάνιση/Απόκρυψη σημειώσεων OSM στον χάρτη.</string>
     <string name="gpx_file_desc">GPX - κατάλληλο για εξαγωγή σε JOSM ή σε άλλους επεξεργαστές OSM.</string>
     <string name="osc_file_desc">OSC - κατάλληλο για εξαγωγή σε OpenStreetMap.</string>
-    <string name="gpx_file">Αρχείο GPX</string>
+    <string name="shared_string_gpx_file">Αρχείο GPX</string>
     <string name="osc_file">Αρχείο OSC</string>
     <string name="choose_file_type">Επιλέξτε τύπο αρχείου</string>
     <string name="osm_edits_export_desc">Επιλέξτε τον τύπο εξαγωγής: σημειώσεις OSM, ΣΕ ή και τα δύο.</string>
@@ -1899,7 +1899,7 @@
     <string name="appearance_on_the_map">Εμφάνιση στον χάρτη</string>
     <string name="add_track_to_markers_descr">Τα σημεία διαδρομής μπορούν να προστεθούν σε δείκτες επιλέγοντας ένα από αυτά τα ίχνη που τα έχει.</string>
     <string name="add_favourites_group_to_markers_descr">Επιλέξτε μια αγαπημένη κατηγορία για να προσθέσετε στους δείκτες.</string>
-    <string name="track_waypoints">Σημεία διαδρομής ίχνους</string>
+    <string name="shared_string_gpx_waypoints">Σημεία διαδρομής ίχνους</string>
     <string name="favourites_group">Κατηγορία αγαπημένων</string>
     <string name="add_group">Προσθήκη ομάδας</string>
     <string name="add_group_descr">Εισάγετε ομάδες από αγαπημένα ή σημεία διαδρομής ίχνους.</string>
@@ -2130,7 +2130,7 @@
     <string name="points_delete_multiple">Πρόκειται να διαγράψετε %1$d σημεία. Είσαστε σίγουρος;</string>
     <string name="route_points_category_name">Στροφές για προσπέραση σε αυτό το δρομολόγιο</string>
     <string name="track_points_category_name">Σημεία διαδρομής, σημεία ενδιαφέροντος, επώνυμα χαρακτηριστικά</string>
-    <string name="gpx_track">Ίχνος</string>
+    <string name="shared_string_gpx_track">Ίχνος</string>
     <string name="max_speed">Μέγιστη ταχύτητα</string>
     <string name="average_speed">Μέση ταχύτητα</string>
     <string name="shared_string_time_moving">Διάρκεια κίνησης</string>
@@ -2142,7 +2142,7 @@
     <string name="select_gpx_folder">Επιλογή φακέλου ιχνών</string>
     <string name="file_can_not_be_moved">Το αρχείο δεν μπορεί να μετακινηθεί.</string>
     <string name="shared_string_move">Μετακίνηση</string>
-    <string name="shared_string_tracks">Ίχνη</string>
+    <string name="shared_string_gpx_tracks">Ίχνη</string>
     <string name="routing_attr_driving_style_name">Τρόπος οδήγησης</string>
     <string name="route_altitude">Ανύψωση διαδρομής</string>
     <string name="altitude_descent">Κατηφόρα</string>

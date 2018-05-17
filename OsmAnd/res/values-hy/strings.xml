@@ -333,7 +333,7 @@
     <string name="points_delete_multiple_succesful">Կետ(եր)ը ջնջված է:</string>
     <string name="points_delete_multiple">Դուք մտադիր եք ջնջել կետ(եր)ը: Համոզված եք?</string>
     <string name="track_points_category_name">Ճանապարհային կետեր, POI, հատկանիշներ</string>
-    <string name="gpx_track">Տրեկ</string>
+    <string name="shared_string_gpx_track">Տրեկ</string>
     <string name="max_speed">Առավելագույն արագություն</string>
     <string name="average_speed">Միջին արագությունը</string>
     <string name="shared_string_time_moving">Ժամանակն շարժման մեջ</string>
@@ -345,7 +345,7 @@
     <string name="select_gpx_folder">Ընտրեք թղթապանակ տրեկերի համար</string>
     <string name="file_can_not_be_moved">Ֆայլը չի կարող տեղափոխվել:</string>
     <string name="shared_string_move">Տեղափոխել</string>
-    <string name="shared_string_tracks">Տրեկեր</string>
+    <string name="shared_string_gpx_tracks">Տրեկեր</string>
     <string name="routing_attr_driving_style_name">Վարորդական ոճ</string>
     <string name="route_altitude">Երթուղու բարձրությունը</string>
     <string name="altitude_descent">Վայրեջք</string>
@@ -1079,7 +1079,7 @@
     <string name="proxy_pref_title">Proxy սերվեր</string>
     <string name="proxy_pref_descr">Նշեք proxy սերվերը։</string>
     <string name="settings_privacy">Գաղտնիություն</string>
-    <string name="points">Կետեր</string>
+    <string name="shared_string_gpx_points">Կետեր</string>
     <string name="navigation_over_track">Ցանկանում եք սկսել նավարկությունը ըստ տրեկի?</string>
     <string name="avoid_roads_msg">Ընտրել այլընտրանքային երթուղի, ընտրելով ճանապարհներ, որոնք պետք է խուսափել</string>
     <string name="speak_pedestrian">Հետիոտնային անցումներ</string>
@@ -1206,7 +1206,7 @@
     <string name="min_max">Min/Max</string>
     <string name="index_tours">Տուրեր</string>
     <string name="shared_string_all">Բոլորը</string>
-    <string name="waypoints">Կետեր</string>
+    <string name="shared_string_waypoints">Կետեր</string>
     <string name="targets">Նպատակակետեր</string>
     <string name="announce_gpx_waypoints">"GPX  ուղևորության կետեր"</string>
     <string name="download_additional_maps">Ներբեռնեք բացակայող քարտեզները %1$s (%2$d MB)?</string>
@@ -1269,7 +1269,7 @@
     <string name="layer_amenity_label">"POI  կետերի պիտակները"</string>
     <string name="loading_smth">Բեռնում %1$s…</string>
     <string name="map_widget_plain_time">Ընթացիկ ժամը</string>
-    <string name="gpx_wpt">Կետ</string>
+    <string name="shared_string_waypoint">Կետ</string>
     <string name="selected_gpx_info_show">"
 \n
 \nՍեխմեք և պահեք քարտեզի վրա տեսնելու համար"</string>
@@ -1926,7 +1926,7 @@
     <string name="animate_route">Սկսեք մոդելավորում</string>
     <string name="file_can_not_be_renamed">Ֆայլը հնարավոր չե վերանվանել:</string>
     <string name="file_with_name_already_exists">Նման անվանումով Ֆայլը արդեն գոյություն ունի:</string>
-    <string name="gpx_navigation">GPX երթուղին</string>
+    <string name="shared_string_gpx_route">GPX երթուղին</string>
     <string name="poi_query_by_name_matches_categories">Ոմանք POI կատեգորիաները համապատասխանում են հարցմանը, դուք կարող եք օգտագործել դրանք ֆիլտր ստեղծելու համար՝</string>
     <string name="data_to_search_poi_not_available">POIs-ի որոնման համար տեղական տվյալները չգտնվեցին:</string>
     <string name="poi_filter_by_name">Որոնել ըստ անվան</string>
@@ -2580,7 +2580,7 @@
     <string name="shared_string_action_name">Գործողության անունը</string>
     <string name="mappilary_no_internet_desc">Mapillary-ից լուսանկարներ դիտելու համար Ձեզ անհրաժեշտ է ինտերնետ:</string>
     <string name="retry">Կրկնել</string>
-    <string name="track_waypoints">Տրեկի (track) կետերը</string>
+    <string name="shared_string_gpx_waypoints">Տրեկի (track) կետերը</string>
     <string name="add_group">Ավելացնել խումբ</string>
     <string name="add_group_descr">Ներմուծել խումբեր «Սիրված»-ներից կամ տրեկի կետերից:</string>
     <string name="empty_state_markers_groups">Ներմուծել խմբերը</string>
@@ -2707,7 +2707,7 @@
     <string name="total_donations">Ընդհանուր նվիրատվությունները</string>
 <string name="gpx_file_desc">"GPX -  JOSM կամ այլ OSM խմբագրիչների արտահանման համար:"</string>
     <string name="osc_file_desc">"OSC -  OpenStreetMap արտահանման համար:"</string>
-    <string name="gpx_file">GPX ֆայլ</string>
+    <string name="shared_string_gpx_file">GPX ֆայլ</string>
     <string name="osc_file">OSC ֆայլ</string>
     <string name="choose_file_type">Ընտրեք ֆայլի տեսակը</string>
     <string name="osm_edits_export_desc">Ընտրեք արտահանման տեսակը`OSM նշումներ, POI կամ երկուսն էլ:</string>

@@ -131,7 +131,7 @@ public class PointDescription {
 			} else if (isPoi()) {
 				typeName = ctx.getString(R.string.poi);
 			} else if (isWpt()) {
-				return ctx.getString(R.string.gpx_wpt);
+				return ctx.getString(R.string.shared_string_waypoint);
 			}
 			if (!Algorithms.isEmpty(typeName)) {
 				if (Algorithms.isEmpty(name)) {

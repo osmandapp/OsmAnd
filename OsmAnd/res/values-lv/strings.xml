@@ -181,7 +181,7 @@
   
   <string name="file_can_not_be_renamed">Failu nevar pārsaukt.</string>
   <string name="file_with_name_already_exists">Fails ar šādu nosaukumu jau eksistē.</string>
-  <string name="gpx_navigation">GPX maršruts</string>
+  <string name="shared_string_gpx_route">GPX maršruts</string>
   <string name="poi_query_by_name_matches_categories">Pēc atslēgvārda atrastās POI kategorijas:</string>
   <string name="data_to_search_poi_not_available">Lokālie dati POI vārdu meklēšanai nav pieejami.</string>
   <string name="poi_filter_by_name">Meklēt pēc vārda</string>
@@ -1453,7 +1453,7 @@ OsmAnd ir atvērtā koda navigācijas aplikācija ar piekļuvi vispusīgiem Open
     <string name="gpx_file_is_empty">Gpx treks ir tukšs</string>
     <string name="loading_smth">Ielādē %1$s…</string>
     <string name="map_widget_plain_time">Tekošais laiks</string>
-    <string name="gpx_wpt">Ceļapunkts</string>
+    <string name="shared_string_waypoint">Ceļapunkts</string>
     <string name="selected_gpx_info_show">\n\nTuriet nospiestu, lai rādītu uz kartes</string>
     <string name="delay_navigation_start">Automātiski uzsākt navigācijas vadību</string>
     <string name="shared_string_selected_lowercase">Izvēlēts</string>
@@ -1507,7 +1507,7 @@ OsmAnd ir atvērtā koda navigācijas aplikācija ar piekļuvi vispusīgiem Open
     <string name="distance">Attālums</string>
     <string name="index_tours">Braucieni</string>
     <string name="shared_string_all">Visi</string>
-    <string name="waypoints">Ceļapunkti</string>
+    <string name="shared_string_waypoints">Ceļapunkti</string>
     <string name="targets">Galamērķi</string>
     <string name="rendering_value_browse_map_name">Atvērt karti</string>  
     <string name="rendering_value_car_name">Auto</string>
@@ -1725,7 +1725,7 @@ OsmAnd ir atvērtā koda navigācijas aplikācija ar piekļuvi vispusīgiem Open
     <string name="proxy_pref_title">Proxy</string>
     <string name="proxy_pref_descr">Izveidot savienojumu caur proxy</string>
     <string name="settings_privacy">Privātums</string>
-    <string name="points">Punkti</string>
+    <string name="shared_string_gpx_points">Punkti</string>
     
 	<string name="navigation_over_track">Sākt navigāciju pa trasi?</string>
 	<string name="avoid_roads_msg">Jūs varat izmainīt maršrutu, atzīmējot ceļus, pa kuriem nebraukt</string>
@@ -2588,7 +2588,7 @@ Apraksta laukumu: %1$s x %2$s</string>
     <string name="points_delete_multiple">Jūs izdzēsīsiet %1$d punktu(us). Vai turpināt?</string>
     <string name="route_points_category_name">Punkti maršruta ceļā</string>
     <string name="track_points_category_name">Izceltie punkti maršrutā</string>
-    <string name="gpx_track">Treks</string>
+    <string name="shared_string_gpx_track">Treks</string>
     <string name="max_speed">Maks. ātrums</string>
     <string name="average_speed">Vidējais ātrums</string>
     <string name="shared_string_time_moving">Laiks kustībā</string>
@@ -2600,7 +2600,7 @@ Apraksta laukumu: %1$s x %2$s</string>
     <string name="select_gpx_folder">Izvēlieties treku mapi</string>
     <string name="file_can_not_be_moved">Fails nevar tikt pārvietots.</string>
     <string name="shared_string_move">Pārvietot</string>
-    <string name="shared_string_tracks">Treki</string>
+    <string name="shared_string_gpx_tracks">Treki</string>
     <string name="routing_attr_driving_style_name">Braukšanas stils</string>
     
     <string name="route_altitude">Maršruta altitūda</string>

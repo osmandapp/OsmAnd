@@ -561,7 +561,7 @@
 	<string name="auto_follow_route_navigation_descr">Keskitä karttanäkymä automaattisesti vain navigoidessa.</string>
 	<string name="pref_vector_map">Vektorikarttojen asetukset</string>
 	<string name="file_with_name_already_exists">Tiedosto tällä nimellä on jo olemassa.</string>
-	<string name="gpx_navigation">GPX reitti</string>
+	<string name="shared_string_gpx_route">GPX reitti</string>
 	<string name="button_upgrade_osmandplus">Päivitä OsmAnd+ ohjelmaan</string>
 	<string name="context_menu_item_search">Etsi läheltä tätä paikkaa</string>
 	<string name="route_successfully_saved_at">Reitti tallennettiin onnistuneesti nimellä ”%1$s”.</string>
@@ -1306,7 +1306,7 @@ Maailmanlaajuiset tiedot (välillä 70 astetta pohjoista ja 70 astetta eteläist
     <string name="proxy_pref_title">Proxy</string>
     <string name="proxy_pref_descr">Aseta internet yhteyden proxy</string>
     <string name="settings_privacy">Yksityisyys</string>
-    <string name="points">Pisteet</string>
+    <string name="shared_string_gpx_points">Pisteet</string>
     <string name="navigation_over_track">Aloita suunnistus jäljen mukaan?</string>
     <string name="speak_pedestrian">Suojatiet</string>
     <string name="rendering_attr_roadStyle_name">Tien tyyli</string>
@@ -1466,7 +1466,7 @@ Maailmanlaajuiset tiedot (välillä 70 astetta pohjoista ja 70 astetta eteläist
     <string name="distance">Etäisyys</string>
     <string name="index_tours">Edestakainen matka</string>
     <string name="shared_string_all">Kaikki</string>
-    <string name="waypoints">Väyläpiste</string>
+    <string name="shared_string_waypoints">Väyläpiste</string>
     <string name="targets">Kohteet</string>
     <string name="announce_gpx_waypoints">GPX väyläpisteet</string>
     <string name="download_additional_maps">Lataa puuttuvat kartat %1$s (%2$d MB)?</string>
@@ -1833,7 +1833,7 @@ Jälki %2$s</string>
     <string name="select_destination_and_intermediate_points">Valitse päämäärät</string>
     <string name="loading_smth">Ladataan %1$s…</string>
     <string name="map_widget_plain_time">Aika nyt</string>
-    <string name="gpx_wpt">Väyläpiste</string>
+    <string name="shared_string_waypoint">Väyläpiste</string>
     <string name="gpx_info_waypoints">"Väyläpisteet: %1$s "</string>
     <string name="gpx_info_distance">"Etäisyys: %1$s (%2$s pistettä) "</string>
     <string name="gpx_info_start_time">"Lähtöaika: %1$tF, %1$tT "</string>

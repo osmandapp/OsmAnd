@@ -639,7 +639,7 @@ Biltegiratzean {1} MB erabiliko dira.
   
   <string name="file_can_not_be_renamed">Ezin da fitxategia izenez aldatu.</string>
   <string name="file_with_name_already_exists">Izen berdineko fitxategi bat dago dagoeneko.</string>
-  <string name="gpx_navigation">GPX ibilbidea</string>
+  <string name="shared_string_gpx_route">GPX ibilbidea</string>
   <string name="poi_query_by_name_matches_categories">Bilaketarekin bat datozen bizpahiru POI kategoria aurkitu dira:</string>
   <string name="data_to_search_poi_not_available">Ez dira aurkitu POI bilaketetarako datu lokalak.</string>
   <string name="poi_filter_by_name">Izenez bilatu</string>
@@ -1735,8 +1735,8 @@ Lorratza %2$s</string>
     <string name="access_autoannounce_period_descr">Iragarpenen arteko gutxieneko denbora tartea.</string>
     <string name="access_collapsed_list">Tolestutako zerrenda</string>
     <string name="access_expanded_list">Zabaldutako zerrenda</string>
-    <string name="waypoints">Bide-puntuak</string>
-    <string name="gpx_wpt">Bide-puntua</string>
+    <string name="shared_string_waypoints">Bide-puntuak</string>
+    <string name="shared_string_waypoint">Bide-puntua</string>
     <string name="gpx_info_waypoints">Bide-puntuak: %1$s</string>
     <string name="configure_map">Konfiguratu mapa</string>
     
@@ -2004,7 +2004,7 @@ Eskuragarri {2} MB besterik ez daude.</string>
     <string name="proxy_pref_title">Proxya</string>
     <string name="proxy_pref_descr">Zehaztu proxy zerbitzari bat.</string>
     <string name="settings_privacy">Pribatutasuna</string>
-    <string name="points">Puntuak</string>
+    <string name="shared_string_gpx_points">Puntuak</string>
     <string name="speak_pedestrian">Zebrabideak</string>
     <string name="rendering_value__name">Lehenetsia</string>
     <string name="rendering_value_default_name">Lehenetsia</string>
@@ -2584,7 +2584,7 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="points_delete_multiple">%1$d puntu ezabatuko dituzu. Ziur zaude?</string>
     <string name="route_points_category_name">Ibilbide honetan pasatu beharreko bide-gurutzeak</string>
     <string name="track_points_category_name">Ibilbide honetako puntu nabarmenak</string>
-    <string name="gpx_track">Lorratza</string>
+    <string name="shared_string_gpx_track">Lorratza</string>
     <string name="max_speed">Gehieneko abiadura</string>
     <string name="average_speed">Batezbesteko abiadura</string>
     <string name="shared_string_time_moving">Denbora mugimenduan</string>
@@ -2596,7 +2596,7 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="select_gpx_folder">Hautatu lorratzen karpeta</string>
     <string name="file_can_not_be_moved">Fitxategia ezin da lekuz aldatu.</string>
     <string name="shared_string_move">Lekuz aldatu</string>
-    <string name="shared_string_tracks">Lorratzak</string>
+    <string name="shared_string_gpx_tracks">Lorratzak</string>
     <string name="routing_attr_driving_style_name">Gidatzeko estiloa</string>
     
     <string name="route_altitude">Ibilbidearen elebazioa</string>
@@ -2966,7 +2966,7 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="appearance_on_the_map">Maparen itxura</string>
     <string name="add_track_to_markers_descr">Bide-puntuak markatzaileetara gehitu ahal dira, bide-puntuak dituzten lorratz hauetako bat hautatuz.</string>
     <string name="add_favourites_group_to_markers_descr">Hautatu gogoko kategoria bat markatzaileetara gehitzeko.</string>
-    <string name="track_waypoints">Lorratzaren bide-puntuak</string>
+    <string name="shared_string_gpx_waypoints">Lorratzaren bide-puntuak</string>
     <string name="favourites_group">Gogokoak kategoria</string>
     <string name="add_group">Gehitu talde bat</string>
     <string name="add_group_descr">"Inportatu taldeak  gogokoetatik eta lorratzaren bide-puntuetatik."</string>
@@ -3093,7 +3093,7 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="switch_osm_notes_visibility_desc">Erakutsi/ezkutatu OSM oharrak mapan.</string>
     <string name="gpx_file_desc">GPX - JOSM edo bestelako OSM editoreentzat esportatzeko egokia.</string>
     <string name="osc_file_desc">OSC - OpenStreeMap-era esportatzeko egokia.</string>
-    <string name="gpx_file">GPX fitxategia</string>
+    <string name="shared_string_gpx_file">GPX fitxategia</string>
     <string name="osc_file">OSC fitxategia</string>
     <string name="choose_file_type">Hautatu fitxategi mota</string>
     <string name="osm_edits_export_desc">Hautatu esportazio mota: OSM oharra, POI, edo biak.</string>

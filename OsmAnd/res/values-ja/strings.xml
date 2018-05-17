@@ -1167,7 +1167,7 @@ POIの更新は利用できません</string>
 	
 	<string name="file_can_not_be_renamed">ファイルの名前は変更できません。</string>
 	<string name="file_with_name_already_exists">その名前のファイルが既に存在します。</string>
-	<string name="gpx_navigation">GPXルート</string>
+	<string name="shared_string_gpx_route">GPXルート</string>
 	<string name="poi_query_by_name_matches_categories">いくつかのPOIカテゴリと、一致するクエリが見つかりました:</string>
 	<string name="data_to_search_poi_not_available">POI検索用ローカルデータが存在しません。</string>
 	<string name="poi_filter_by_name">名前で検索する</string>
@@ -1438,7 +1438,7 @@ POIの更新は利用できません</string>
     <string name="layer_amenity_label">施設の名称</string>
     <string name="loading_smth">ロード中 %1$s …</string>
     <string name="map_widget_plain_time">現在時刻</string>
-    <string name="gpx_wpt">経由地点</string>
+    <string name="shared_string_waypoint">経由地点</string>
     <string name="selected_gpx_info_show">"
 \n
 \nマップ上に表示するにはロングタップしてください"</string>
@@ -1653,7 +1653,7 @@ POIの更新は利用できません</string>
 <string name="route_descr_destination">目的地</string>
     <string name="index_tours">旅行</string>
     <string name="shared_string_all">全て</string>
-    <string name="waypoints">経由地点</string>
+    <string name="shared_string_waypoints">経由地点</string>
     <string name="targets">目的地</string>
     <string name="way_alarms">通行に関する警告</string>
     <string name="speak_favorites">周辺のお気に入り</string>
@@ -1744,7 +1744,7 @@ POIの更新は利用できません</string>
     <string name="proxy_pref_title">プロキシ</string>
     <string name="proxy_pref_descr">インターネット接続のプロキシ設定をします</string>
     <string name="settings_privacy">プライバシー設定</string>
-    <string name="points">地点</string>
+    <string name="shared_string_gpx_points">地点</string>
     
     <string name="shared_string_my_location">現在地点</string>
     
@@ -2543,7 +2543,7 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="select_gpx_folder">経路フォルダー選択</string>
     <string name="file_can_not_be_moved">ファイルを移動することはできません。</string>
     <string name="shared_string_move">移動</string>
-    <string name="shared_string_tracks">経路</string>
+    <string name="shared_string_gpx_tracks">経路</string>
     <string name="routing_attr_driving_style_name">運転スタイル</string>
     
     <string name="route_altitude">ルートの標高</string>
@@ -2655,7 +2655,7 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="points_delete_multiple_succesful">ポイントは正常に削除されました。</string>
     <string name="points_delete_multiple">%1$d個のポイントを削除します。よろしいですか？</string>
     <string name="track_points_category_name">このルートで重要とされた地点(マーカー)一覧</string>
-    <string name="gpx_track">経路</string>
+    <string name="shared_string_gpx_track">経路</string>
     <string name="get_for_month">月額</string>
     <string name="favorite_group_name">グループ名</string>
     <string name="change_color">色を変更</string>
@@ -3056,7 +3056,7 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="active_markers_descr">マーカーの方向と距離に関する情報の表示数を選択してください。</string>
     <string name="favourites_group">お気に入り地点のカテゴリ</string>
     <string name="empty_state_markers_active_desc">任意の場所をロングまたはショートタップで指定後、旗のボタンでマーカーを作成します。</string>
-    <string name="track_waypoints">経路データ内の経由地点</string>
+    <string name="shared_string_gpx_waypoints">経路データ内の経由地点</string>
     <string name="show_passed">通過済みも表示</string>
     <string name="hide_passed">通過済みは非表示</string>
     <string name="import_track_desc">ファイル %1$s は経由地点を含んでいません、それでも経路としてインポートしますか？</string>
