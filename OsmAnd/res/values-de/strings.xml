@@ -45,7 +45,7 @@
 	<string name="save_track_to_gpx_globally_headline">GPX-Aufzeichnung bei Bedarf</string>
 	<string name="save_track_to_gpx_globally_descr">Generelle Positionserfassung kann mit der Schaltfläche \'GPX-Aufzeichnung\' direkt auf dem Kartenbildschirm aktiviert oder deaktiviert werden.</string>
 	<string name="save_current_track">Track jetzt speichern</string>
-	<string name="save_current_track_descr">Aktuellen Track jetzt auf Speicherkarte speichern.</string>
+	<string name="save_current_track_descr">Aktuellen Track jetzt als GPX-Datei speichern.</string>
 	<string name="save_track_to_gpx">Während Navigation autom. Track aufzeichnen</string>
 	<string name="save_track_to_gpx_descrp">Während der Navigation wird automatisch ein GPX-Track im Track-Ordner gespeichert.</string>
 	<string name="save_track_interval_globally">Aufzeichnungsintervall</string>
@@ -393,7 +393,7 @@
 	<string name="search_position_map_view">Aktueller Kartenmittelpunkt</string>
 	<string name="select_search_position">Ausgangspunkt:</string>
 	<string name="context_menu_item_search">In der Nähe suchen</string>
-	<string name="shared_string_save_as_gpx">Als neuen GPX-Track speichern</string>
+	<string name="shared_string_save_as_gpx">Als neue GPX-Datei speichern</string>
 	<string name="route_successfully_saved_at">Route erfolgreich gespeichert als \'%1$s\'.</string>
 	<string name="filename_input">Dateiname:</string>
 	<string name="file_with_name_already_exist">Datei mit gleichem Namen besteht bereits.</string>
@@ -618,7 +618,7 @@
 	<string name="voice">Sprachansage</string>
 	<string name="no_vector_map_loaded">Offline-Daten wurden nicht geladen</string>
 	
-	<string name="layer_gpx_layer">GPX-Track…</string>
+	<string name="layer_gpx_layer">GPX-Dateien…</string>
 	<string name="error_reading_gpx">GPX-Daten konnten nicht gelesen werden</string>
 	<string name="vector_data">Offline-Vektor-Karten</string>
 	<string name="transport_context_menu">Suche nach Verbindung an Haltestelle</string>
@@ -785,7 +785,7 @@
 	<string name="loading_cities">Lade Orte…</string>
 	
 	<string name="poi">POI</string>
-	<string name="error_occurred_saving_gpx">GPX-Spur konnte nicht gespeichert werden</string>
+	<string name="error_occurred_saving_gpx">GPX-Datei konnte nicht gespeichert werden</string>
 	<string name="error_calculating_route">Route konnte nicht berechnet werden</string>
 	<string name="error_calculating_route_occured">Route konnte nicht berechnet werden</string>
 	<string name="empty_route_calculated">Berechnete Route ist leer</string>
@@ -797,7 +797,7 @@
 	<string name="loading_data">Daten werden geladen…</string>
 	<string name="reading_indexes">Lese lokale Daten…</string>
 	<string name="previous_run_crashed">Die vorherige Programminstanz war abgestürzt. Logdatei unter {0}. Fehler bitte melden und Logdatei anhängen.</string>
-	<string name="saving_gpx_tracks">GPX-Track wird auf der SD-Karte gespeichert…</string>
+	<string name="saving_gpx_tracks">GPX-Datei wird gespeichert…</string>
 	<string name="finished_task">Abgeschlossen</string>
 	
 	<string name="use_online_routing_descr">Internet zur Routenberechnung verwenden.</string>
@@ -1173,7 +1173,7 @@ Proportionaler Speicher %4$s MB (Android Limit %5$s MB, Dalvik %6$s MB).</string
 	<string name="osmand_distance_planning_plugin_name">Entfernungsmesser &amp; Streckenplaner</string>
 	<string name="shared_string_do_not_show_again">Nicht erneut anzeigen</string>
 	
-	<string name="distance_measurement_load_gpx">Vorhandene GPX-Spur öffnen</string>
+	<string name="distance_measurement_load_gpx">Vorhandene GPX-Datei öffnen</string>
 	<string name="search_street_in_neighborhood_cities">Straßennamen in benachbarten Orten suchen</string>
 	<string name="intermediate_items_sort_by_distance">Tür-zu-Tür sortieren</string>
 	<string name="use_distance_measurement_help">* Tippen, um einen Punkt zu setzen. 
@@ -1332,7 +1332,7 @@ Proportionaler Speicher %4$s MB (Android Limit %5$s MB, Dalvik %6$s MB).</string
 	<string name="show_zoom_buttons_navigation_descr">Zoomtasten bei Navigation anzeigen.</string>
 	<string name="show_zoom_buttons_navigation">Zoomtasten anzeigen</string>
 	<string name="no_index_file_to_download">Keine Downloads gefunden, bitte die Internet-Verbindung überprüfen.</string>
-	<string name="none_selected_gpx">Keine GPX-Datei ausgewählt. Zum Auswählen lange auf einen vorhandenen Track drücken.</string>
+	<string name="none_selected_gpx">Keine GPX-Datei ausgewählt. Auswahl durch langes Drücken auf eine vorhandenen Datei.</string>
 	
 	<string name="local_index_select_gpx_file">Zum Anzeigen auswählen</string>
 	<string name="rendering_attr_hideBuildings_name">Gebäude</string>
@@ -1496,7 +1496,7 @@ Proportionaler Speicher %4$s MB (Android Limit %5$s MB, Dalvik %6$s MB).</string
 	<string name="osmo_edit_color">Darstellungsfarbe</string>
 	
 
-	<string name="gpx_file_is_empty">GPX-Track ist leer</string>
+	<string name="gpx_file_is_empty">GPX-Datei ist leer</string>
 	<string name="gpx_info_waypoints">Wegpunkte: %1$s </string>
 	<string name="gpx_info_distance">Strecke: %1$s (%2$s Punkte) </string>
 	<string name="gpx_info_start_time">Startzeit: %1$tF, %1$tT </string>
@@ -2299,7 +2299,7 @@ Derzeit sind nur {2} MB verfügbar.</string>
     <string name="no_inet_connection_desc_map">Erforderlich, um Karten herunterzuladen.</string>
     <string name="search_location">Standort wird gesucht …</string>
     <string name="storage_free_space">Freier Speicherplatz</string>
-    <string name="storage_place_description">OsmAnd speichert Daten (Karten, Tracks, usw.) in \'%1$s\'.</string>
+    <string name="storage_place_description">OsmAnd speichert Daten (Karten, GPX-Dateien, usw.) in \'%1$s\'.</string>
     <string name="give_permission">Berechtigung erteilen</string>
     <string name="allow_access_location">Standortbestimmung zulassen</string>
     <string name="first_usage_greeting">Erhalten Sie Wegbeschreibungen und entdecken Sie neue Orte ohne Internetverbindung</string>
@@ -2373,9 +2373,9 @@ Derzeit sind nur {2} MB verfügbar.</string>
     
     <string name="gpx_appearance">Aussehen</string>
     <string name="route_calculation">Routenberechnung</string>
-    <string name="gpx_no_tracks_title">Sie haben noch keine Tracks</string>
-    <string name="gpx_no_tracks_title_folder">Tracks können dem Ordner hinzugefügt werden</string>
-    <string name="gpx_add_track">Track hinzufügen</string>
+    <string name="gpx_no_tracks_title">Sie haben noch keine GPX-Dateien</string>
+    <string name="gpx_no_tracks_title_folder">GPX-Dateien können dem Ordner hinzugefügt werden</string>
+    <string name="gpx_add_track">GPX-Datei hinzufügen</string>
     <string name="upload_poi">POI hochladen</string>
     <string name="route_roundabout_short">Nehmen Sie die %1$d Ausfahrt</string>
     <string name="search_map_hint">Suche Stadt oder Region</string>
@@ -2518,7 +2518,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="total_distance">Gesamtstrecke</string>
     <string name="routing_attr_driving_style_name">Fahrweise</string>
     
-    <string name="select_gpx_folder">Track-Ordner wählen</string>
+    <string name="select_gpx_folder">GPX-Datei-Ordner wählen</string>
     <string name="file_can_not_be_moved">Datei kann nicht verschoben werden.</string>
     <string name="shared_string_move">Verschieben</string>
     <string name="shared_string_tracks">Spuren</string>
@@ -2530,7 +2530,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="shared_string_color">Farbe</string>
     <string name="max_speed">Höchstgeschwindigkeit</string>
     <string name="average_speed">Durchschnittsgeschwindigkeit</string>
-    <string name="gpx_track">Spur</string>
+    <string name="gpx_track">GPX-Datei</string>
     <string name="points_delete_multiple_succesful">Punkt(e) gelöscht.</string>
     <string name="points_delete_multiple">Es werden %1$d Punkt(e) gelöscht. Fortfahren?</string>
     <string name="track_points_category_name">Markante Punkte auf dieser Route</string>
@@ -2828,14 +2828,14 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="choose_navigation_type">Navigationsprofil wählen</string>
     <string name="add_route_points">Routenpunkte hinzufügen</string>
     <string name="add_line">Strecke hinzufügen</string>
-    <string name="empty_state_my_tracks">Tracks hinzufügen und aufzeichnen</string>
-    <string name="empty_state_my_tracks_desc">Tracks aufzeichnen oder importieren.</string>
+    <string name="empty_state_my_tracks">GPX-Dateien hinzufügen</string>
+    <string name="empty_state_my_tracks_desc">GPX-Dateien importieren oder Tracks aufzeichnen.</string>
     <string name="empty_state_favourites">Favoriten hinzufügen</string>
-    <string name="empty_state_favourites_desc">Importieren oder markieren Sie Favoriten auf der Karte.</string>
-    <string name="import_track">Track importieren</string>
+    <string name="empty_state_favourites_desc">Favoriten importieren, oder durch Markieren von Punkten auf der Karte erstellen.</string>
+    <string name="import_track">GPX-Datei importieren</string>
     <string name="import_track_desc">Die Datei %1$s enthält keine Wegpunkte, soll sie als Track importiert werden?</string>
     <string name="move_point">Punkt verschieben</string>
-    <string name="add_segment_to_the_track">Zu einem GPX-Track hinzufügen</string>
+    <string name="add_segment_to_the_track">Zu einer GPX-Datei hinzufügen</string>
 <string name="do_not_use_animations">Keine Animationen</string>
     <string name="do_not_use_animations_descr">Deaktiviert Animationen in der App.</string>
     <string name="keep_showing_on_map">Weiterhin auf der Karte anzeigen</string>
@@ -2873,8 +2873,8 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="shared_string_sort">Sortieren</string>
     <string name="coordinate_input">Koordinateneingabe</string>
     <string name="is_saved">gespeichert</string>
-    <string name="marker_save_as_track_descr">Markierungen in die hier festgelegte Datei exportieren:</string>
-    <string name="marker_save_as_track">Als Track speichern</string>
+    <string name="marker_save_as_track_descr">Markierungen in die hier festgelegte GPX-Datei exportieren:</string>
+    <string name="marker_save_as_track">Als GPX-Datei speichern</string>
     <string name="move_to_history">In den Verlauf verschieben</string>
     <string name="group_will_be_removed_after_restart">Die Gruppe wird beim nächsten Start der App entfernt.</string>
     <string name="show_passed">Passierte anzeigen</string>
@@ -2943,7 +2943,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="shared_string_right">Rechts</string>
     <string name="shared_string_left">Links</string>
     <string name="shared_string_paste">Einfügen</string>
-    <string name="looking_for_tracks_with_waypoints">Suche nach Tracks mit Wegpunkten</string>
+    <string name="looking_for_tracks_with_waypoints">Suche nach GPX-Dateien mit Wegpunkten</string>
     <string name="shared_string_more_without_dots">Mehr</string>
     <string name="appearance_on_the_map">Darstellung auf der Karte</string>
     <string name="favourites_group">Favoritenkategorie</string>
@@ -2958,7 +2958,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="go_to_next_field">Nächstes Feld</string>
     <string name="rename_marker">Markierung umbenennen</string>
     <string name="mark_passed">Markierung passiert</string>
-    <string name="track_waypoints">Track-Wegpunkte</string>
+    <string name="track_waypoints">GPX-Wegpunkte</string>
     <string name="modify_the_search_query">Suchanfrage verändern.</string>
     <string name="empty_state_osm_edits">Erstellen oder ändern von OSM-Objekten</string>
     <string name="empty_state_osm_edits_descr">OSM-POI erstellen oder verändern, OSM-Notizen eröffnen oder bearbeiten, und aufgezeichnete GPX-Dateien hinzufügen.</string>
@@ -2970,7 +2970,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="empty_state_av_notes">Machen Sie sich Notizen!</string>
     <string name="by_date">Nach Datum</string>
     <string name="by_type">Nach Typ</string>
-    <string name="import_gpx_file_description">kann als Favorit oder Track importiert werden.</string>
+    <string name="import_gpx_file_description">kann als Favoriten oder GPX-Datei importiert werden.</string>
     <string name="empty_state_av_notes_desc">Audio-, Video- oder Fotonotizen zu jedem Punkt auf der Karte über Bedienelement oder Kontextmenü hinzufügen.</string>
     <string name="notes_by_date">Notizen nach Datum</string>
     <string name="tap_on_map_to_hide_interface_descr">Ein Tippen auf die Karte schaltet die Steuerschaltflächen und Bedienelemente um.</string>
@@ -2992,11 +2992,11 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="av_locations_all_desc">GPX-Datei mit Koordinaten und Daten aller Notizen.</string>
     <string name="shared_string_actions">Aktionen</string>
     <string name="shared_string_marker">Markierung</string>
-    <string name="add_track_to_markers_descr">Durch Auswahl eines dieser Tracks können die darin enthaltenen Wegpunkte zu den Markierungen hinzuzugefügt werden.</string>
+    <string name="add_track_to_markers_descr">Wählen Sie eine GPX-Datei für das Hinzufügen der enthaltenen Punkte zu den Markierungen.</string>
     <string name="add_favourites_group_to_markers_descr">Wählen Sie eine Favoritenkategorie aus, die Sie den Markierungen hinzufügen möchten.</string>
-    <string name="add_group_descr">Importieren Sie Gruppen aus Favoriten oder Track-Wegpunkten.</string>
+    <string name="add_group_descr">Importieren Sie Gruppen aus Favoriten oder GPX-Wegpunkten.</string>
     <string name="empty_state_markers_active_desc">Tippen Sie \'Orte\' lang oder kurz an, tippen Sie anschließend auf das Markierungszeichen.</string>
-    <string name="empty_state_markers_groups_desc">Importieren Sie Favoritengruppen oder Track-Wegpunkte als Markierungen.</string>
+    <string name="empty_state_markers_groups_desc">Importieren Sie Favoritengruppen oder GPX-Wegpunkte als Markierungen.</string>
     <string name="show_guide_line_descr">Richtungsanzeiger von Ihrem Standort zu aktiven Markierungspunkten einblenden.</string>
     <string name="show_arrows_descr">Ein oder zwei Pfeile anzeigen, die die Richtung zu den aktiven Markierungen angeben.</string>
     <string name="distance_indication_descr">Wählen Sie aus, wie der Abstand zu aktiven Markierungen angezeigt werden soll.</string>
