@@ -1305,7 +1305,6 @@
     <string name="shared_string_all">All</string>
     <string name="shared_string_waypoints">Waypoints</string>
     <string name="targets">Destinations</string>
-    <string name="announce_gpx_waypoints">GPX waypoints</string>
     <string name="download_additional_maps">Download missing maps %1$s (%2$d MB)?</string>
     <string name="rendering_value_browse_map_name">Browse map</string>
     <string name="rendering_value_car_name">Car</string>
