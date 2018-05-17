@@ -3750,8 +3750,8 @@
 	<string name="poi_climbing_boulder_no">Escalada en bloque: no</string>
 	<string name="poi_climbing_toprope_yes">Moulinette: sí</string>
 	<string name="poi_climbing_toprope_no">Moulinette: no</string>
-	<string name="poi_climbing_multipitch_yes">Rutas multipaso: sí</string>
-	<string name="poi_climbing_multipitch_no">Rutas multipaso: no</string>
+	<string name="poi_climbing_multipitch_yes">Rutas de varios largos: sí</string>
+	<string name="poi_climbing_multipitch_no">Rutas de varios largos: no</string>
 	<string name="poi_climbing_deepwater_yes">Psicobloc: sí</string>
 	<string name="poi_climbing_deepwater_no">Psicobloc: no</string>
 
@@ -3891,5 +3891,9 @@
 	<string name="poi_checkpoint_type_notebook">Portátil (notebook)</string>
 	<string name="poi_checkpoint_type_electronic">Electrónico</string>
 	<string name="poi_course">Circuito</string>
+
+<string name="poi_rock">Roca</string>
+
+	<string name="poi_end_date">Fecha de fin</string>
 
 </resources>
