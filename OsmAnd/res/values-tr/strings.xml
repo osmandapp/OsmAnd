@@ -1039,16 +1039,16 @@
 	<string name="level_to_switch_vector_raster">Asgari vektör yakınlaştırma seviyesi</string>
 	
 	<string name="routing_attr_prefer_motorway_name">Otoyolları tercih et</string>
-	<string name="routing_attr_prefer_motorway_description"/>
+	<string name="routing_attr_prefer_motorway_description">Otoyolları tercih et</string>
 	
 	<string name="routing_attr_avoid_toll_name">Paralı yollardan sakın</string>
-	<string name="routing_attr_avoid_toll_description">Paralı yollardan kaçın</string>
+	<string name="routing_attr_avoid_toll_description">Paralı yollardan sakın</string>
 	<string name="routing_attr_avoid_unpaved_name">Asfaltsız yollardan sakın</string>
 	<string name="routing_attr_avoid_unpaved_description">Asfaltsız yollardan kaçın</string>
 	<string name="routing_attr_avoid_ferries_name">Feribotlardan sakın</string>
-	<string name="routing_attr_avoid_ferries_description">Feribotlardan kaçın</string>
+	<string name="routing_attr_avoid_ferries_description">Feribotlardan sakın</string>
 	<string name="routing_attr_avoid_motorway_name">Otoyollardan sakın</string>
-	<string name="routing_attr_avoid_motorway_description">Otoyollardan kaçın</string>
+	<string name="routing_attr_avoid_motorway_description">Otoyollardan sakın</string>
 	<string name="routing_attr_weight_name">Ağırlık sınırı</string>
 	<string name="routing_attr_weight_description">Güzergahlara uygun olmak için araç ağırlığını belirt</string>
     <string name="copying_osmand_files">Kopyalama Osmand veri dosyaları …</string>
@@ -2608,4 +2608,5 @@
     <string name="group_deleted">Grup silindi</string>
     <string name="distance_farthest">Uzaklık: En uzak önce</string>
     <string name="distance_nearest">Uzaklık: En yakın önce</string>
+    <string name="get_unlimited_access">Sınırsız erişim alın</string>
     </resources>
