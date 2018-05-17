@@ -133,7 +133,7 @@
 				android:textColor="?attr/wikivoyage_active_color"
 				android:textSize="@dimen/text_button_text_size"
 				osmand:typeface="@string/font_roboto_medium"
-				tools:drawableLeft="@drawable/ic_action_track_16"
+				tools:drawableLeft="@drawable/ic_action_markers_dark"
 				tools:drawableTint="?attr/wikivoyage_active_color"
 				tools:ignore="UnusedAttribute" />
 

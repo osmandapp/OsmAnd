@@ -130,7 +130,7 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 
 		trackButton = (TextView) mainView.findViewById(R.id.gpx_button);
 		trackButton.setCompoundDrawablesWithIntrinsicBounds(
-				getActiveIcon(R.drawable.ic_action_track_16), null, null, null
+				getActiveIcon(R.drawable.ic_action_markers_dark), null, null, null
 		);
 		trackButton.setOnClickListener(new View.OnClickListener() {
 			@Override
