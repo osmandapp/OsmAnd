@@ -2137,7 +2137,7 @@
     <string name="shared_string_gpx_track">مسیر</string>
     <string name="shared_string_time_span">مدت‌زمان</string>
     <string name="select_gpx_folder">پوشهٔ مسیر را انتخاب کنید</string>
-    <string name="shared_string_tracks">Tracks</string>
+    <string name="shared_string_gpx_tracks">Tracks</string>
     <string name="route_altitude">ارتفاع مسیر</string>
     <string name="altitude_descent">نزول</string>
     <string name="altitude_ascent">صعود</string>

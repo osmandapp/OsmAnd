@@ -2536,7 +2536,7 @@
     <string name="shared_string_time_moving">Hareket zamanı</string>
     <string name="shared_string_time_span">Zaman aralığı</string>
     <string name="select_gpx_folder">Yol-izi klasörü seç</string>
-    <string name="shared_string_tracks">Yol-izleri</string>
+    <string name="shared_string_gpx_tracks">Yol-izleri</string>
     <string name="route_altitude">Rota yüksekliği</string>
     <string name="altitude_descent">yükselikte azalma</string>
     <string name="altitude_ascent">Yükseklikte artış</string>

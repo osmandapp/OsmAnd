@@ -427,7 +427,7 @@
     <string name="select_gpx_folder">Select GPX file folder</string>
     <string name="file_can_not_be_moved">File can not be moved.</string>
     <string name="shared_string_move">Move</string>
-    <string name="shared_string_tracks">Tracks</string>
+    <string name="shared_string_gpx_tracks">Tracks</string>
     <string name="routing_attr_driving_style_name">Driving style</string>
     <string name="route_altitude">Route elevation</string>
     <string name="altitude_descent">Descent</string>

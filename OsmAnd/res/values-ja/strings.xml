@@ -2543,7 +2543,7 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="select_gpx_folder">経路フォルダー選択</string>
     <string name="file_can_not_be_moved">ファイルを移動することはできません。</string>
     <string name="shared_string_move">移動</string>
-    <string name="shared_string_tracks">経路</string>
+    <string name="shared_string_gpx_tracks">経路</string>
     <string name="routing_attr_driving_style_name">運転スタイル</string>
     
     <string name="route_altitude">ルートの標高</string>

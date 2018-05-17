@@ -2405,7 +2405,7 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="select_gpx_folder">Vybrat adresář trasy</string>
     <string name="file_can_not_be_moved">Soubor nemůže být přesunut.</string>
     <string name="shared_string_move">Přesunout</string>
-    <string name="shared_string_tracks">Trasy</string>
+    <string name="shared_string_gpx_tracks">Trasy</string>
     <string name="shared_string_time_moving">Doba pohybu</string>
     <string name="shared_string_time_span">Časový rozsah</string>
     <string name="shared_string_max">Maximum</string>

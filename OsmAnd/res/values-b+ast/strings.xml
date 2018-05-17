@@ -750,7 +750,7 @@ Puntos</string>
     <string name="select_gpx_folder">Escueye la carpeta de traces</string>
     <string name="file_can_not_be_moved">El ficheru nun puede movese.</string>
     <string name="shared_string_move">Mover</string>
-    <string name="shared_string_tracks">Traces</string>
+    <string name="shared_string_gpx_tracks">Traces</string>
     <string name="routing_attr_driving_style_name">Estilu de conducción</string>
     <string name="route_altitude">Altor de la ruta</string>
     <string name="altitude_descent">Descensu</string>

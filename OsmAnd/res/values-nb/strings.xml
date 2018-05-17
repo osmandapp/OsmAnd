@@ -2138,7 +2138,7 @@
     <string name="shared_string_color">Farge</string>
     <string name="file_can_not_be_moved">Filen kan ikke flyttes.</string>
     <string name="shared_string_move">Flytt</string>
-    <string name="shared_string_tracks">Spor</string>
+    <string name="shared_string_gpx_tracks">Spor</string>
     <string name="routing_attr_driving_style_name">Kjørestil</string>
     
     <string name="shared_string_time">Tid</string>

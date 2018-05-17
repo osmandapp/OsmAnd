@@ -2477,7 +2477,7 @@ Pódese pechar esta vista desactivándoa aquí ou cambiando o «Estilo de mapa»
     <string name="select_gpx_folder">Seleccione o cartafol de pistas</string>
     <string name="file_can_not_be_moved">Non é posíbel mover o ficheiro.</string>
     <string name="shared_string_move">Mover</string>
-    <string name="shared_string_tracks">Pistas</string>
+    <string name="shared_string_gpx_tracks">Pistas</string>
     <string name="routing_attr_driving_style_name">Estilo de condución</string>
     <string name="route_altitude">Altitude da ruta</string>
     <string name="altitude_descent">Descenso</string>

@@ -345,7 +345,7 @@
     <string name="select_gpx_folder">Ընտրեք թղթապանակ տրեկերի համար</string>
     <string name="file_can_not_be_moved">Ֆայլը չի կարող տեղափոխվել:</string>
     <string name="shared_string_move">Տեղափոխել</string>
-    <string name="shared_string_tracks">Տրեկեր</string>
+    <string name="shared_string_gpx_tracks">Տրեկեր</string>
     <string name="routing_attr_driving_style_name">Վարորդական ոճ</string>
     <string name="route_altitude">Երթուղու բարձրությունը</string>
     <string name="altitude_descent">Վայրեջք</string>

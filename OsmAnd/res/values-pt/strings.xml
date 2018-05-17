@@ -2259,7 +2259,7 @@ Clique no widget de medição para ver mais ações.</string>
     <string name="select_gpx_folder">Selecionar diretório do percurso</string>
     <string name="file_can_not_be_moved">Ficheiro não pode ser movido.</string>
     <string name="shared_string_move">Mover</string>
-    <string name="shared_string_tracks">Percursos</string>
+    <string name="shared_string_gpx_tracks">Percursos</string>
     <string name="routing_attr_driving_style_name">Estilo de condução</string>
     <string name="route_altitude">Elevação do percurso</string>
     <string name="altitude_descent">Descida</string>

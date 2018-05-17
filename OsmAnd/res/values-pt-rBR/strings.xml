@@ -2382,7 +2382,7 @@ Pôr do Sol: %2$s</string>
     <string name="select_gpx_folder">Selecionar pasta da trilha</string>
     <string name="file_can_not_be_moved">Arquivo não pode ser movido.</string>
     <string name="shared_string_move">Mover</string>
-    <string name="shared_string_tracks">Trilhas</string>
+    <string name="shared_string_gpx_tracks">Trilhas</string>
     <string name="routing_attr_driving_style_name">Estilo de condução</string>
     <string name="route_altitude">Altitude da rota</string>
     <string name="routing_attr_relief_smoothness_factor_name">Selecionar a flutuação de altimetria</string>

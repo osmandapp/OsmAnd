@@ -2393,7 +2393,7 @@
     <string name="select_gpx_folder">בחירת תיקיית מסלולים</string>
     <string name="file_can_not_be_moved">אי אפשר להעביר את הקובץ.</string>
     <string name="shared_string_move">העברה</string>
-    <string name="shared_string_tracks">מסלולים</string>
+    <string name="shared_string_gpx_tracks">מסלולים</string>
     <string name="routing_attr_driving_style_name">סגנון נהיגה</string>
     <string name="route_altitude">תוואי נתיב</string>
     <string name="altitude_descent">עלייה</string>

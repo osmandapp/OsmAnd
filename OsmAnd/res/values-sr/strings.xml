@@ -1487,7 +1487,7 @@
     <string name="select_gpx_folder">Изаберите фасциклу стазе</string>
     <string name="file_can_not_be_moved">Фајл не може да се премести.</string>
     <string name="shared_string_move">Премести</string>
-    <string name="shared_string_tracks">Стазе</string>
+    <string name="shared_string_gpx_tracks">Стазе</string>
     <string name="routing_attr_driving_style_name">Начин вожње</string>
     <string name="route_altitude">Успон пута</string>
     <string name="altitude_descent">Силазан</string>

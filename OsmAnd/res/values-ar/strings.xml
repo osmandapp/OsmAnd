@@ -2562,7 +2562,7 @@
     <string name="routing_attr_driving_style_safety_name">تفضيل الشوارع الجانبية</string>
     <string name="shared_string_gpx_track">المسار</string>
     <string name="select_gpx_folder">إختر مجلد المسار</string>
-    <string name="shared_string_tracks">المسارات</string>
+    <string name="shared_string_gpx_tracks">المسارات</string>
     <string name="shared_string_time">الزمن</string>
     <string name="osmand_plus_extended_description_part8">التغطية التقريبية للخريطة و جودتها : • أوروبا الغربية : **** • أوروبا الشرقية : *** • روسيا : *** • أمريكا الشمالية : *** • امريكا الجنوبية : ** • آسيا : ** • اليابان وكوريا : *** • الشرق الأوسط : ** • إفريقيا : ** • أنتاركتيكا : *
 \n معظم البلدان في جميع أنحاء العالم متاحة للتنزيل ! من أفغانستان إلى زيمبابوي، من أستراليا إلى الولايات المتحدة الأمريكية. الأرجنتين، البرازيل، كندا، فرنسا، ألمانيا، المكسيك، المملكة المتحدة، إسبانيا، …</string>

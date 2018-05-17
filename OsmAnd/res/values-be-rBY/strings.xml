@@ -2420,7 +2420,7 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="select_gpx_folder">Abiarycie tečku trekaŭ</string>
     <string name="file_can_not_be_moved">Fajł nie moža być pieramieščany.</string>
     <string name="shared_string_move">Pieramiaścić</string>
-    <string name="shared_string_tracks">Treki</string>
+    <string name="shared_string_gpx_tracks">Treki</string>
     <string name="routing_attr_driving_style_name">Styl yazdy</string>
     <string name="route_altitude">Vyšynia maršrutu</string>
     <string name="altitude_descent">Spusk</string>

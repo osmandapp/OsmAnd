@@ -1308,7 +1308,7 @@
     <string name="select_gpx_folder">აირჩეთ მიდევნების დასტა</string>
     <string name="file_can_not_be_moved">ფაილის გადაადგილება შეუძლებელია.</string>
     <string name="shared_string_move">გადატანა</string>
-    <string name="shared_string_tracks">ბილიკები</string>
+    <string name="shared_string_gpx_tracks">ბილიკები</string>
     <string name="routing_attr_driving_style_name">მართვის სტილი</string>
     <string name="route_altitude">გზის სიმაღლე</string>
     <string name="altitude_descent">დაშვება</string>

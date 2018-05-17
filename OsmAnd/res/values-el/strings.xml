@@ -2142,7 +2142,7 @@
     <string name="select_gpx_folder">Επιλογή φακέλου ιχνών</string>
     <string name="file_can_not_be_moved">Το αρχείο δεν μπορεί να μετακινηθεί.</string>
     <string name="shared_string_move">Μετακίνηση</string>
-    <string name="shared_string_tracks">Ίχνη</string>
+    <string name="shared_string_gpx_tracks">Ίχνη</string>
     <string name="routing_attr_driving_style_name">Τρόπος οδήγησης</string>
     <string name="route_altitude">Ανύψωση διαδρομής</string>
     <string name="altitude_descent">Κατηφόρα</string>

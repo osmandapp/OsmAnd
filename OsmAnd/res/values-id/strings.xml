@@ -342,7 +342,7 @@
     <string name="select_gpx_folder">Pilih Folder Trek</string>
     <string name="file_can_not_be_moved">File tidak bisa dipindahkan.</string>
     <string name="shared_string_move">Pindah</string>
-    <string name="shared_string_tracks">Jalur</string>
+    <string name="shared_string_gpx_tracks">Jalur</string>
     <string name="routing_attr_driving_style_name">Gaya Berkendara</string>
     <string name="route_altitude">Ketinggian Rute</string>
     <string name="altitude_descent">Turun</string>

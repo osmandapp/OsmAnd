@@ -2591,7 +2591,7 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="shared_string_gpx_track">Kelias</string>
     <string name="shared_string_time_span">Trukmė</string>
     <string name="select_gpx_folder">Pasirinkite kelio segtuvą</string>
-    <string name="shared_string_tracks">Keliai</string>
+    <string name="shared_string_gpx_tracks">Keliai</string>
     <string name="route_altitude">Maršruto sukilimas</string>
     <string name="altitude_descent">Nusileidimas</string>
     <string name="altitude_ascent">Sukilimas</string>

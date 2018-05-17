@@ -999,7 +999,7 @@
     <string name="shared_string_color">Barba</string>
     <string name="select_gpx_folder">Rjadowak za čary wubrać</string>
     <string name="file_can_not_be_moved">Dataja njehodźi so přesunyć.</string>
-    <string name="shared_string_tracks">Čary</string>
+    <string name="shared_string_gpx_tracks">Čary</string>
     <string name="routing_attr_driving_style_name">Stil jědźenja</string>
     <string name="route_altitude">Wysokosć čary</string>
     <string name="altitude_descent">Wotstup</string>

@@ -396,7 +396,7 @@ public class TrackActivity extends TabActivity {
 		}
 		OsmandFragmentPagerAdapter pagerAdapter = (OsmandFragmentPagerAdapter) viewPager.getAdapter();
 		if (pagerAdapter != null && pagerAdapter.getCount() == 0) {
-			pagerAdapter.addTab(getTabIndicator(R.string.shared_string_tracks, TrackSegmentFragment.class));
+			pagerAdapter.addTab(getTabIndicator(R.string.shared_string_gpx_tracks, TrackSegmentFragment.class));
 			pagerAdapter.addTab(getTabIndicator(R.string.points, TrackPointFragment.class));
 			if (openPointsTab || !hasTrackPoints()) {
 				viewPager.setCurrentItem(1, false);

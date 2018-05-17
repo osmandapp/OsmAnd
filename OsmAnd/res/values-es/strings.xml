@@ -2397,7 +2397,7 @@
 	<string name="select_gpx_folder">Seleccionar carpeta de traza</string>
     <string name="file_can_not_be_moved">Archivo inamovible.</string>
     <string name="shared_string_move">Mover</string>
-    <string name="shared_string_tracks">Trazas</string>
+    <string name="shared_string_gpx_tracks">Trazas</string>
     <string name="routing_attr_driving_style_name">Estilo de conducción</string>
     
     <string name="route_altitude">Elevación de la ruta</string>

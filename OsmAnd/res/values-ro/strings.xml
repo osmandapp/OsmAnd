@@ -2113,7 +2113,7 @@
     <string name="select_gpx_folder">Selectează dosarul cu track-uri</string>
     <string name="file_can_not_be_moved">Fișierul nu poate fi mutat.</string>
     <string name="shared_string_move">Mută</string>
-    <string name="shared_string_tracks">Track-uri</string>
+    <string name="shared_string_gpx_tracks">Track-uri</string>
     <string name="routing_attr_driving_style_name">Stil de conducere</string>
     <string name="shared_string_time">Timp</string>
     <string name="total_distance">Distanța totală</string>

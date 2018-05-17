@@ -1975,7 +1975,7 @@ Punktar</string>
     <string name="select_gpx_folder">Veldu möppu undir ferla</string>
     <string name="file_can_not_be_moved">Ekki er hægt að færa skrá.</string>
     <string name="shared_string_move">Færa</string>
-    <string name="shared_string_tracks">Ferlar</string>
+    <string name="shared_string_gpx_tracks">Ferlar</string>
     <string name="routing_attr_driving_style_name">Akstursstíll</string>
     <string name="route_altitude">Hæð leiðar</string>
     <string name="altitude_descent">Lækkun</string>

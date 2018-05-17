@@ -2563,7 +2563,7 @@
     <string name="select_gpx_folder">Абраць тэчку трэкаў</string>
     <string name="file_can_not_be_moved">Файл не можа быць перамешчаны.</string>
     <string name="shared_string_move">Перамясціць</string>
-    <string name="shared_string_tracks">Трэкі</string>
+    <string name="shared_string_gpx_tracks">Трэкі</string>
     <string name="routing_attr_driving_style_name">Стыль язды</string>
     
     <string name="route_altitude">Вышыня маршруту</string>

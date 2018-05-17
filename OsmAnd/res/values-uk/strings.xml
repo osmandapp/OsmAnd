@@ -2545,7 +2545,7 @@
     <string name="quick_action_showhide_favorites_descr">При натисканні на кнопку дії будуть показані чи приховані точки закладок на мапі.</string>
     <string name="file_can_not_be_moved">Файл не може бути переміщений.</string>
     <string name="shared_string_move">Перемістити</string>
-    <string name="shared_string_tracks">Треки</string>
+    <string name="shared_string_gpx_tracks">Треки</string>
     <string name="routing_attr_driving_style_name">Стиль водіння</string>
     
     <string name="route_altitude">Висота маршруту</string>
