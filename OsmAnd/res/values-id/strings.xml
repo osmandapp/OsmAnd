@@ -133,7 +133,7 @@
 	<string name="wrong_input">Kesalahan masukan</string>
 	<string name="enter_new_name">Masukkan nama baru</string>
 	<string name="shared_string_back">Kembali</string>
-	<string name="view">Lihat</string>
+	<string name="shared_string_view">Lihat</string>
 	<string name="waypoints_added_to_map_markers">Titik arah ditambahkan ke penanda peta</string>
 	<string name="wrong_format">Format salah</string>
     <string name="shared_string_road">Jalan</string>

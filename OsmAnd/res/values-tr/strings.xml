@@ -2337,7 +2337,7 @@
 	<string name="wrong_input">Yanlış girdi</string>
 	<string name="enter_new_name">Yeni isim gir</string>
 	<string name="shared_string_back">Geri</string>
-	<string name="view">Görünüm</string>
+	<string name="shared_string_view">Görünüm</string>
 	<string name="wrong_format">Yanlış format</string>
     <string name="shared_string_markers">İşaretçiler</string>
     <string name="my_location">Konumum</string>

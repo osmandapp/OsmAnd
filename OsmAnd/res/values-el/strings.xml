@@ -1934,7 +1934,7 @@
 	<string name="wrong_input">Εσφαλμένη εισαγωγή</string>
 	<string name="enter_new_name">Εισάγετε νέο όνομα</string>
 	<string name="shared_string_back">Προηγούμενο</string>
-	<string name="view">Προβολή</string>
+	<string name="shared_string_view">Προβολή</string>
 	<string name="waypoints_added_to_map_markers">Προστέθηκαν σημεία διαδρομής στους δείκτες χάρτη</string>
 	<string name="wrong_format">Εσφαλμένη μορφή</string>
     <string name="shared_string_road">Δρόμος</string>

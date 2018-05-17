@@ -2818,7 +2818,7 @@ Kérlek adj meg egy teljes kódot</string>
 	<string name="wrong_input">Hibás bevitel</string>
 	<string name="enter_new_name">Új név megadása</string>
 	<string name="shared_string_back">Vissza</string>
-	<string name="view">Nézet</string>
+	<string name="shared_string_view">Nézet</string>
 	<string name="waypoints_added_to_map_markers">Útpontok hozzáadva a térképjelölőkhöz</string>
 	<string name="wrong_format">Hibás formátum</string>
     <string name="shared_string_road">Út</string>

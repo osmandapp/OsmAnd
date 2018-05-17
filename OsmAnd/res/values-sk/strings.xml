@@ -2805,7 +2805,7 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="wrong_input">Nesprávny vstup</string>
 	<string name="enter_new_name">Zadajte nový názov</string>
 	<string name="shared_string_back">Späť</string>
-	<string name="view">Zobraziť</string>
+	<string name="shared_string_view">Zobraziť</string>
 	<string name="waypoints_added_to_map_markers">Body trasy pridané k mapovým značkám</string>
 	<string name="wrong_format">Nesprávny formát</string>
     <string name="import_gpx_file_description">môže byť importovaný ako obľúbený bod alebo stopa.</string>

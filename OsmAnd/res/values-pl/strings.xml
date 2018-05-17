@@ -2888,7 +2888,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="wrong_input">Nieprawidłowe dane</string>
 	<string name="enter_new_name">Wprowadź nową nazwę</string>
 	<string name="shared_string_back">Wróć</string>
-	<string name="view">Wyświetl</string>
+	<string name="shared_string_view">Wyświetl</string>
 	<string name="waypoints_added_to_map_markers">Dodano punkty pośrednie do znaczników mapy</string>
 	<string name="shared_string_gpx_waypoints">Punkty śladu</string>
     <string name="favourites_group">Kategoria ulubionych</string>

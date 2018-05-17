@@ -2821,7 +2821,7 @@ Lon %2$s</string>
     <string name="enter_new_name">Ingresar nuevo nombre</string>
     <string name="shared_string_back">Atrás</string>
     <string name="wrong_format">Formato incorrecto</string>
-    <string name="view">Ver</string>
+    <string name="shared_string_view">Ver</string>
 	<string name="waypoints_added_to_map_markers">Puntos de referencia añadidos en «Marcadores del mapa»</string>
 	<string name="import_gpx_file_description">puede importarse como favorito, o como archivo de traza.</string>
     <string name="import_as_gpx">Importar como archivo GPX</string>

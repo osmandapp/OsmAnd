@@ -2934,7 +2934,7 @@ voor Gebied: %1$s x %2$s</string>
     <string name="wrong_input">Foutieve invoer</string>
 	<string name="enter_new_name">Kies een nieuwe naam</string>
 	<string name="shared_string_back">Vorige</string>
-	<string name="view">Bekijk</string>
+	<string name="shared_string_view">Bekijk</string>
 	<string name="wrong_format">Foutief formaat</string>
     <string name="shared_string_road">Weg</string>
     <string name="tap_on_map_to_hide_interface_descr">Een tik op de kaart verbergt/toont de bedieningsknoppen en widgets.</string>

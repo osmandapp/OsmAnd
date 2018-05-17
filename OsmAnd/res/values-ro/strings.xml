@@ -1967,7 +1967,7 @@
 	<string name="wrong_input">Introducere greșită</string>
 	<string name="enter_new_name">Introduceți noul nume</string>
 	<string name="shared_string_back">Inapoi</string>
-	<string name="view">Vizualizare</string>
+	<string name="shared_string_view">Vizualizare</string>
 	<string name="waypoints_added_to_map_markers">Punctele intermediare adăugate la marcajele hărții</string>
 	<string name="wrong_format">Format greșit</string>
     <string name="shared_string_road">Road</string>

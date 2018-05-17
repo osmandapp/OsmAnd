@@ -3042,7 +3042,7 @@
     <string name="rendering_value_darkyellow_name">Темно-жовтий</string>
     <string name="enter_new_name">Введіть нове ім’я</string>
     <string name="shared_string_back">Назад</string>
-    <string name="view">Перегляд</string>
+    <string name="shared_string_view">Перегляд</string>
 	<string name="waypoints_added_to_map_markers">Шляхові точки додані в маркери мапи</string>
 	<string name="import_gpx_file_description">може бути імпортовано як точки Закладок або як файл треку.</string>
     <string name="import_as_gpx">Імпортувати як GPX-файл</string>

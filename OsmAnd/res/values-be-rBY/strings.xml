@@ -2865,7 +2865,7 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="wrong_input">Drenny ŭvod</string>
 	<string name="enter_new_name">Uviadzicie novaje imia</string>
 	<string name="shared_string_back">Nazad</string>
-	<string name="view">Prahladzieć</string>
+	<string name="shared_string_view">Prahladzieć</string>
 	<string name="waypoints_added_to_map_markers">Kropki maršruta dadadzienyja ŭ markiery mapy</string>
 	<string name="import_gpx_file_description">mohuć być impartavanyja jak Ulubionyja kropki ci jak fajł śledu.</string>
     <string name="import_as_gpx">Impartavać jak GPX-fajł</string>

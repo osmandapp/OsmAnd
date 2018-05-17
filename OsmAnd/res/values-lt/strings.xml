@@ -2724,7 +2724,7 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
 	<string name="wrong_input">Klaidinga įvestis</string>
 	<string name="enter_new_name">Įveskite naują pavadinimą</string>
 	<string name="shared_string_back">Atgal</string>
-	<string name="view">Peržiūrėti</string>
+	<string name="shared_string_view">Peržiūrėti</string>
 	<string name="wrong_format">Klaidingas formatas</string>
     <string name="shared_string_road">Kelias</string>
     <string name="show_map">Rodyti žemėlapį</string>

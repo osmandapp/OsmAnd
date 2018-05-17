@@ -2557,7 +2557,7 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="distance_moving">Distansen korrigerad</string>
     <string name="enter_new_name">Ange nytt namn</string>
 	<string name="shared_string_back">Bakåt</string>
-	<string name="view">Visa</string>
+	<string name="shared_string_view">Visa</string>
 	<string name="wrong_format">Fel format</string>
     <string name="shared_string_road">Väg</string>
     <string name="show_map">Visa kartan</string>

@@ -2966,7 +2966,7 @@
     <string name="wrong_input">輸入錯誤</string>
     <string name="enter_new_name">輸入新名稱</string>
     <string name="shared_string_back">返回</string>
-    <string name="view">檢視</string>
+    <string name="shared_string_view">檢視</string>
 	<string name="waypoints_added_to_map_markers">航點已加入到地圖標記</string>
 	<string name="import_gpx_file_description">可以匯入為我的收藏或軌跡檔案。</string>
     <string name="import_as_gpx">匯入為 GPX 檔案</string>

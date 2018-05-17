@@ -2813,7 +2813,7 @@
     <string name="wrong_input">Entrada incorrecta</string>
     <string name="enter_new_name">Ingresar nuevo nombre</string>
     <string name="shared_string_back">Atrás</string>
-    <string name="view">Ver</string>
+    <string name="shared_string_view">Ver</string>
 	<string name="waypoints_added_to_map_markers">Puntos de ruta añadidos en «Marcadores del mapa»</string>
 	<string name="tap_on_map_to_hide_interface_descr">Una pulsación en el mapa alterna los botones de la interfaz y los controles.</string>
     <string name="tap_on_map_to_hide_interface">Modo de pantalla completa</string>

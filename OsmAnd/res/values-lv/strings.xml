@@ -2876,7 +2876,7 @@ No Afganistānas līdz Zimbabvei, no Austrālijas līdz ASV, Argentīna, Brazīl
     <string name="wrong_input">Nepareiza ievade</string>
 	<string name="enter_new_name">Ievadiet jaunu vārdu</string>
 	<string name="shared_string_back">Atpakaļ</string>
-	<string name="view">Skatīt</string>
+	<string name="shared_string_view">Skatīt</string>
 	<string name="waypoints_added_to_map_markers">Ceļapunkti pievienoti kartes marķieriem</string>
 	<string name="wrong_format">Nepareizs formāts</string>
     <string name="shared_string_road">Ceļš</string>

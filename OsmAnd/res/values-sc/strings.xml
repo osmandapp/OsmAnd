@@ -2964,7 +2964,7 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="wrong_input">Insertadura isballiada</string>
 	<string name="enter_new_name">Inserta unu nùmene nou</string>
 	<string name="shared_string_back">In dae segus</string>
-	<string name="view">Abbàida</string>
+	<string name="shared_string_view">Abbàida</string>
 	<string name="waypoints_added_to_map_markers">Puntos de coladòrgiu annantos a sos marcadores de sa mapa</string>
 	<string name="import_gpx_file_description">podet èssere importadu comente preferidu o comente documentu de rasta.</string>
     <string name="import_as_gpx">Importa comente documentu GPX</string>

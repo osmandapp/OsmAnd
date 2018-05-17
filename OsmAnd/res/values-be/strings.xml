@@ -2951,7 +2951,7 @@
     <string name="wrong_input">Дрэнны ўвод</string>
 	<string name="enter_new_name">Увядзіце новае імя</string>
 	<string name="shared_string_back">Назад</string>
-	<string name="view">Праглядзець</string>
+	<string name="shared_string_view">Праглядзець</string>
 	<string name="waypoints_added_to_map_markers">Кропкі маршрута дададзеныя ў маркеры мапы</string>
 	<string name="import_gpx_file_description">могуць быць імпартаваныя як «Улюбёныя» ці як файл следу.</string>
     <string name="import_as_gpx">Імпартаваць як GPX-файл</string>

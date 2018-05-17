@@ -1518,7 +1518,7 @@
 	<string name="wrong_input">קלט שגוי</string>
 	<string name="enter_new_name">נא להקליד שם חדש</string>
 	<string name="shared_string_back">חזרה</string>
-	<string name="view">תצוגה</string>
+	<string name="shared_string_view">תצוגה</string>
 	<string name="wrong_format">מבנה שגוי</string>
     <string name="shared_string_road">דרך</string>
     <string name="show_map">הצגת מפה</string>

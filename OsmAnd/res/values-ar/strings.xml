@@ -2817,7 +2817,7 @@
     <string name="wrong_format">تنسيق خاطئ</string>
     <string name="enter_new_name">قم بإدخال إسم جديد</string>
 	<string name="shared_string_back">العودة</string>
-	<string name="view">عرض</string>
+	<string name="shared_string_view">عرض</string>
 	<string name="waypoints_added_to_map_markers">تمت إضافة نقاط الطريق إلى علامات الخريطة</string>
 	<string name="wrong_input">إدخال خاطئ</string>
 	<string name="import_gpx_file_description">يمكن استيرادها كنقاط مفضلة، أو كملف مسار.</string>

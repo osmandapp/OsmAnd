@@ -2998,7 +2998,7 @@
     <string name="wrong_input">ورودی نادرست</string>
 	<string name="enter_new_name">نام جدیدی بنویسید</string>
 	<string name="shared_string_back">عقب</string>
-	<string name="view">نما</string>
+	<string name="shared_string_view">نما</string>
 	<string name="waypoints_added_to_map_markers">نقاط بین‌راهی به نشانه‌های نقشه اضافه شد</string>
 	<string name="import_gpx_file_description">را می‌توانید به‌عنوان یک مسیر یا نقطهٔ برگزیده وارد کنید.</string>
     <string name="import_as_gpx">ورود به‌عنوان فایل GPX</string>

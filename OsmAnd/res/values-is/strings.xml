@@ -2324,7 +2324,7 @@ Stendur fyrir svæði: %1$s x %2$s</string>
 	<string name="wrong_input">Rangt ílag</string>
 	<string name="enter_new_name">Settu inn nýtt heiti</string>
 	<string name="shared_string_back">Til baka</string>
-	<string name="view">Skoða</string>
+	<string name="shared_string_view">Skoða</string>
 	<string name="waypoints_added_to_map_markers">Ferilpunktum bætt í kortamerki</string>
 	<string name="wrong_format">Rangt snið</string>
     <string name="shared_string_road">Vegur</string>

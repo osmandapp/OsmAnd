@@ -1724,7 +1724,7 @@
     <string name="tap_on_map_to_hide_interface">Tam ekran rejimi</string>
     <string name="enter_new_name">Yeni ad daxil edin</string>
 	<string name="shared_string_back">Geri</string>
-	<string name="view">Bax</string>
+	<string name="shared_string_view">Bax</string>
 	<string name="shared_string_road">Yol</string>
     <string name="show_map">Xəritəni göstər</string>
     <string name="route_is_calculated">Marşrut hesablandı</string>

@@ -2637,7 +2637,7 @@ Pódese pechar esta vista desactivándoa aquí ou cambiando o «Estilo de mapa»
     <string name="import_file">Importar ficheiro</string>
 	<string name="enter_new_name">Introduza o novo nome</string>
 	<string name="shared_string_back">Atrás</string>
-	<string name="view">Ver</string>
+	<string name="shared_string_view">Ver</string>
 	<string name="wrong_format">Formato erróneo</string>
     <string name="clear_all_intermediates">Limpar todos os puntos intermedios</string>
     <string name="group_deleted">Grupo eliminado</string>

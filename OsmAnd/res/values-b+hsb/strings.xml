@@ -1262,7 +1262,7 @@
     <string name="import_as_gpx">Jako GPX-dataju importować</string>
     <string name="import_as_favorites">Jako faworit importować</string>
     <string name="import_file">Dataju importować</string>
-	<string name="view">Wobhladać</string>
+	<string name="shared_string_view">Wobhladać</string>
 	<string name="wrong_format">Wopačny format</string>
     <string name="shared_string_road">Dróha</string>
     <string name="route_is_calculated">Čara je so wobličiła</string>

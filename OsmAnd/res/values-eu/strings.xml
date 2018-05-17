@@ -2997,7 +2997,7 @@ Area honi dagokio: %1$s x %2$s</string>
 	<string name="wrong_input">Sarrera okerra</string>
 	<string name="enter_new_name">Sartu izen berria</string>
 	<string name="shared_string_back">Atzera</string>
-	<string name="view">Ikusi</string>
+	<string name="shared_string_view">Ikusi</string>
 	<string name="waypoints_added_to_map_markers">Bide-puntuak mapa-markatzaileetara gehituta</string>
 	<string name="wrong_format">Formatu okerra</string>
     <string name="shared_string_road">Errepidea</string>

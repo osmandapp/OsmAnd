@@ -1579,7 +1579,7 @@
 	<string name="wrong_input">Погрешан унос</string>
 	<string name="enter_new_name">Унесите ново име</string>
 	<string name="shared_string_back">Назад</string>
-	<string name="view">Преглед</string>
+	<string name="shared_string_view">Преглед</string>
 	<string name="waypoints_added_to_map_markers">Пролазне тачке додате ознакама на карти</string>
 	<string name="wrong_format">Погрешан облик</string>
     <string name="shared_string_road">Пут</string>

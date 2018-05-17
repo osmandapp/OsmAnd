@@ -2548,7 +2548,7 @@
     <string name="make_round_trip_descr">Legg til kopi av startpunktet som reisemål.</string>
     <string name="make_round_trip">Gjør rundtur</string>
     <string name="srtm_menu_download_descr">Last ned kotekartet for denne regionen.</string>
-    <string name="view">Vis</string>
+    <string name="shared_string_view">Vis</string>
 	<string name="import_as_gpx">Importer som GPX-fil</string>
     <string name="import_as_favorites">Importer som favoritt</string>
     <string name="import_file">Importer fil</string>

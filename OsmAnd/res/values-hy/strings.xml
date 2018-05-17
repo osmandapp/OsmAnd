@@ -1046,7 +1046,7 @@
     <string name="wrong_input">Սխալ մուտքագրում</string>
 	<string name="enter_new_name">Մուտքագրեք նոր անուն</string>
 	<string name="shared_string_back">Վերադառնալ</string>
-	<string name="view">Դիտել</string>
+	<string name="shared_string_view">Դիտել</string>
 	<string name="osm_settings">OSM-ի խմբագրում</string>
     <string name="waypoints_added_to_map_markers">Կետերը ավելացվել են քարտեզի մարկերներին</string>
 	<string name="osm_editing_plugin_description">"Այս OsmAnd-ի plugin-ի միջոցով  կարելի է ներդրում  կատարել OSM-ի, ինչպիսիք են OSM POI-ի օբյեկտների ստեղծում կամ փոփոխում, OSM նշումների բացումը կամ մեկնաբանումը և վերբեռնում արձանագրված GPX ֆայլերը: OSM-ն գլոբալ հանրային քարտեզագրման նախագիծ է, որը կառավարվում է OSM համայնքի կողմից: Մանրամասների համար այցելեք https://openstreetmap.org: Ակտիվ մասնակցությունը գնահատվում է, և ներդրումները կարող են կատարվել ուղղակիորեն OsmAnd-ից, եթե նշեք ձեր անձնական OSM-ի հավատարմագրերը հավելվածում:"</string>

@@ -2724,7 +2724,7 @@
     <string name="import_as_favorites">Импортировать как избранные</string>
     <string name="import_file">Импорт файла</string>
 	<string name="wrong_input">Неправильный ввод</string>
-	<string name="view">Просмотр</string>
+	<string name="shared_string_view">Просмотр</string>
 	<string name="waypoints_added_to_map_markers">Путевые точки добавлены в маркеры карты</string>
 	<string name="route_is_calculated">Маршрут рассчитан</string>
     <string name="round_trip">Путешествие</string>

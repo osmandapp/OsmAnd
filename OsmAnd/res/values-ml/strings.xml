@@ -1736,7 +1736,7 @@
     <string name="import_file">"ഫയല്‍ എടുക്കുക "</string>
 	<string name="wrong_input">"തെറ്റായ ഇന്‍പുട്ട് "</string>
 	<string name="enter_new_name">"പുതിയ പേര്  ചേര്‍ക്കുക "</string>
-	<string name="view">"കാണുക "</string>
+	<string name="shared_string_view">"കാണുക "</string>
 	<string name="waypoints_added_to_map_markers">പാതബിന്ദുക്കള്‍ ഭൂപട അടയാളങ്ങളില്‍ ചേര്‍ത്തു</string>
 	<string name="wrong_format">"തെറ്റായ ഫോര്‍മാറ്റ് "</string>
     <string name="shared_string_road">"വഴി "</string>

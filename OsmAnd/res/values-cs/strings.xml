@@ -2662,7 +2662,7 @@ Zobrazená oblast: %1$s x %2$s</string>
 	<string name="wrong_input">Chybný vstup</string>
 	<string name="enter_new_name">Zadejte nový název</string>
 	<string name="shared_string_back">Zpět</string>
-	<string name="view">Zobrazit</string>
+	<string name="shared_string_view">Zobrazit</string>
 	<string name="waypoints_added_to_map_markers">Body trasy přidané k mapovým značkám</string>
 	<string name="wrong_format">Chybný formát</string>
     <string name="shared_string_road">Cesta</string>
