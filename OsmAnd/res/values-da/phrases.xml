@@ -3941,4 +3941,8 @@
 	<string name="poi_checkpoint_type_electronic">Elektronisk</string>
 	<string name="poi_course">Bane</string>
 
+<string name="poi_rock">Klippe</string>
+
+	<string name="poi_end_date">Slutdato</string>
+
 </resources>

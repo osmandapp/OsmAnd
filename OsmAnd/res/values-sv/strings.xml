@@ -2729,9 +2729,6 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="additional_actions">Ytterligare åtgärder</string>
     <string name="av_locations_selected_desc">GPX-fil med koordinater och data för valda anteckningar.</string>
     <string name="av_locations_all_desc">GPX-fil med koordinater och data för alla anteckningar.</string>
-    <string name="release_3_0">\\022 
-\n
-\n</string>
     <string name="shared_string_actions">Åtgärder</string>
     <string name="shared_string_marker">Markör</string>
     <string name="one_tap_active_descr">Tryck på en markör på kartan för att flytta den till toppen av de aktiva markörerna utan att öppna sammanhangsmenyn.</string>

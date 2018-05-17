@@ -543,7 +543,7 @@
     <string name="shared_string_move_down">Տեղափոխել ↓</string>
     <string name="finish_navigation">"Ավարտել  նավարկությունը"</string>
     <string name="avoid_road">Խուսափել ճանապարհներից</string>
-    <string name="storage_directory_readonly_desc">Տվյալների պահպանման համար ընտրված թղթապանակը միայն կարդալու է: Փոխարենը ժամանակավորապես կկիրառվի ներքին հիշողությունը: Խնդրում ենք ընտրել համապատասխան պահպանման վայր:</string>
+    <string name="storage_directory_readonly_desc">Ընտրել տվյալների պահպանման համապատասխան վայր քանի որ ընտրված թղթապանակը միայն կարդալու համար է:</string>
     <string name="storage_directory_shared">Համատեղ հիշողություն</string>
     <string name="shared_string_topbar">Վերին վահանակ</string>
     <string name="full_report">Լրիվ հաշվետվությունում</string>
@@ -555,17 +555,18 @@
     <string name="osm_editors_ranking">OSM քարտեզագրողների վարկանիշը</string>
     <string name="osm_live_subscription">OsmAnd Live բաժանորդագրություն</string>
     <string name="osm_live_subscribe_btn">Բաժանորդագրվել</string>
-    <string name="osm_live_email_desc">Նա անհրաժեշտ է, որպեսզի ձեզ տրամադրել տեղեկատվություն ներդրումների մասին:</string>
+    <string name="osm_live_email_desc">Ի գիտություն ձեզ ներդրումների մասին:</string>
     <string name="osm_live_user_public_name">Հանրային անուն</string>
     <string name="osm_live_hide_user_name">Մի ցուցադրեք իմ անունը զեկույցներում</string>
     <string name="osm_live_support_region">Աջակցվող տարածաշրջան</string>
     <string name="osm_live_month_cost">Ամսավճար</string>
-    <string name="osm_live_month_cost_desc">Ամսական վճար:</string>
+    <string name="osm_live_month_cost_desc">Ամսական վճար</string>
     <string name="osm_live_active">Ակտիվ</string>
     <string name="osm_live_not_active">Ոչ ակտիվ</string>
-    <string name="osm_live_enter_email">Խնդրում ենք մուտքագրեք ճիշտ E-mail հասցեն</string>
+    <string name="osm_live_enter_email">Խնդրում ենք մուտքագրեք ճիշտ e-mail հասցեն</string>
     <string name="osm_live_enter_user_name">Մուտքագրեք անուն</string>
-    <string name="osm_live_thanks">Շնորհակալություն ավտոմատ թարմացումներին բաժանորդագրվելու համար!</string>
+    <string name="osm_live_thanks">Շնորհակալություն, աջակցելու OsmAnd-ին համար!
+\nՆոր առանձնահատկություններ ակտիվացնելու համար անհրաժեշտ է վերագործարկել OsmAnd։</string>
     <string name="osm_live_region_desc">Ձեր նվիրատվության մի մասը կուղարկվի OpenStreetMap նախագծի մասնակիցներին, ովքեր փոփոխություններ են կատարել այս տարածաշրջանի քարտեզի վրա:</string>
     <string name="osm_live_subscription_settings">Բաժանորդագրության պարամետրերը</string>
     <string name="osm_live_ask_for_purchase">Խնդրում ենք նախ ձեռք բերեք OsmAnd Live բաժանորդագրությունը</string>
@@ -578,7 +579,7 @@
     <string name="map_marker_2nd">Երկրորդ մարկեր</string>
     <string name="shared_string_toolbar">Գործիքագոտին</string>
     <string name="shared_string_widgets">Վիջեթներ</string>
-    <string name="add_points_to_map_markers_q">Ցանկանում եք ավելացնել մարկերներ բոլոր կետերի համար?</string>
+    <string name="add_points_to_map_markers_q">Ավելացնել որպես մարկերներ բոլոր կետերի համար?</string>
     <string name="shared_string_add_to_map_markers">Ավելացնել մարկերներին</string>
     <string name="select_map_markers">Ընտրել մարկերներ</string>
     <string name="shared_string_reverse_order">Հակառակ դասավորություն</string>
@@ -598,7 +599,7 @@
     <string name="data_is_not_available">Տվյալները հասանելի չեն</string>
     <string name="shared_string_remove">Ջնջել</string>
     <string name="shared_string_read_more">Կարդալ ավելին</string>
-    <string name="clear_updates_proposition_message">Դուք կարող եք հեռացնել բեռնված թարմացումները և վերադառնալ սկզբնական քարտեզի հրատարակությանը</string>
+    <string name="clear_updates_proposition_message">Հեռացրեք բեռնված թարմացումները և վերադառձեք սկզբնական քարտեզի հրատարակությանը</string>
     <string name="add_time_span">Ավելացնել ժամանակահատված</string>
     <string name="road_blocked">Ճանապարհը փակված է</string>
     <string name="shared_string_select">Ընտրել</string>
@@ -606,7 +607,7 @@
     <string name="rendering_attr_hideIcons_name">POI պատկերակները</string>
     <string name="item_removed">Նյութը հեռացվել է</string>
     <string name="n_items_removed">Նյութերը հեռացվել են</string>
-    <string name="shared_string_undo_all">ՃԵՂՅԱԼ ՀԱՄԱՐԵԼ ԱՄԲՈՂՋԸ</string>
+    <string name="shared_string_undo_all">Ճեղյալ համարել ամբողջը</string>
     <string name="shared_string_type">Տեսակ</string>
     <string name="starting_point">Սկզբնական կետ</string>
     <string name="shared_string_not_selected">Ընտրված չէ</string>
@@ -644,17 +645,17 @@
     <string name="shared_string_paused">Դադարեցվել է</string>
     <string name="shared_string_recorded">Գրանցված է</string>
     <string name="shared_string_record">Գրանցում</string>
-    <string name="osm_live_header">Այս բաժանորդագրությունը հնարավորություն է տալիս ամեն ժամյա թարմացումներ ստանալ աշխարհի բոլոր քարտեզների համար: Եկամտի մի մասը վերադառնում է OSM համայնքին և վճարվում է յուրաքանչյուր OSM ներդրման համար: Եթե սիրում եք OsmAnd- ը և OSM- ը և ուզում եք աջակցել նրանց, սա կատարյալ ճանապարհն է դա անել:</string>
+    <string name="osm_live_header">"Այս բաժանորդագրությունը հնարավորություն է տալիս  ժամը մեկ անգամ թարմացումներ ստանալ աշխարհի բոլոր քարտեզների համար: Եկամտի մի մասը վերադառնում է OSM համայնքին և վճարվում է յուրաքանչյուր OSM ներդրման համար: Եթե սիրում եք OsmAnd-ը և OSM-ը և ուզում եք աջակցել նրանց, սա կատարյալ եղանակն  է դա անել:"</string>
     <string name="no_location_permission">Ծրագիրը թույլտվություն չունի մուտք գործի տվյալները պահպանման վայրը:</string>
     <string name="no_camera_permission">Ծրագիրը թույլտվություն չունի տեսախցիկի օգտագործման համար։</string>
     <string name="no_microphone_permission">Ծրագիրը թույլտվություն չունի խոսափողի օգտագործման համար։</string>
     <string name="access_direction_haptic_feedback">Ուղղության ցուցում շոշափման եղանակով</string>
     <string name="download_files_error_not_enough_space">Բավարար տեղ չկա: Պահպանելու համար անհրաժեշտ է {3} ՄԲ ժամանակավոր, {1} ՄԲ մշտապես: Առկա է միայն {2} ՄԲ:</string>
-    <string name="download_files_question_space_with_temp">Ներբեռնել {0} ֆայլ(եր)? Օգտագործված պահեստային տարածքը {3} ՄԲ ժամանակավոր է, {1} ՄԲ մշտապես: (Առկա է միայն {2} ՄԲ:)</string>
+    <string name="download_files_question_space_with_temp">Ներբեռնել {0} ֆայլ(եր)? Օգտագործված պահեստային տարածքը {3} ՄԲ ժամանակավոր է, {1} ՄԲ մշտապես: (Առկա է {2} ՄԲ:)</string>
     <string name="download_files_question_space">Ներբեռնեք {0} ֆայլ (եր)? Օգտագործված պահեստային տարածքը`{1} ՄԲ է։ (Առկա տարածքը {2} ՄԲ է:)</string>
     <string name="rec_split_storage_size">Պահպանման տարացքի ծավալը</string>
     <string name="please_specify_poi_type_only_from_list">Խնդրում ենք նշել ճիշտ POI տեսակի կամ բաց թողնել այն։</string>
-    <string name="access_from_map_description">Մենյուի կոճակը բացում է Վահանակը, այլ ոչ Մենյու։</string>
+    <string name="access_from_map_description">Մենյուի կոճակը բացում է Վահանակը, այլ ոչ Մենյու</string>
     <string name="access_from_map">Մուտք քարտեզից</string>
     <string name="show_on_start_description">\'Off\' ուղղակիորեն մեկնարկում է քարտեզը։</string>
     <string name="show_on_start">Ցույց տալ սկզբից</string>
@@ -672,7 +673,7 @@
     <string name="osn_comment_dialog_title">Ավելացնել մեկնաբանություն</string>
     <string name="osn_reopen_dialog_title">Վերաբացել նշումը</string>
     <string name="osn_close_dialog_title">Փակել նշումը</string>
-    <string name="osn_add_dialog_success">Նշումը հաջողությամբ ստեղծվել է</string>
+    <string name="osn_add_dialog_success">Նշումը ստեղծվեց</string>
     <string name="wrong_format">Սխալ ձևաչափ</string>
     <string name="release_2_7">• Mapillary plugin փողոցների լուսանկարներով
 \n
@@ -693,14 +694,14 @@
     <string name="auto_split_recording_title">Գրանցումների ավտո-պառակտում դադարից հետո</string>
     <string name="rec_split">Գրանցումների պառակտում</string>
     <string name="rec_split_title">Օգտագործել գրանցումների պառակտումը</string>
-    <string name="osn_add_dialog_error">Սխալ. Նշում չի ստեղծվել</string>
-    <string name="osn_close_dialog_success">Նշումը հաջողությամբ փակվեց</string>
-    <string name="osn_close_dialog_error">Սխալ: նշումը չի փակվել</string>
+    <string name="osn_add_dialog_error">Նշումը չհաջողվեց ստեղծվել</string>
+    <string name="osn_close_dialog_success">Նշումը փակվեց</string>
+    <string name="osn_close_dialog_error">Նշումը չփակվեց</string>
     <string name="osb_author_dialog_password">OSM գաղտնաբառ (ըստ ցանկության)</string>
     <string name="osb_comment_dialog_message">Մեկնաբանություն</string>
     <string name="osb_comment_dialog_author">Հեղինակի անունը</string>
-    <string name="osb_comment_dialog_error">Սխալ․ մեկնաբանություն չի ավելացվել</string>
-    <string name="osb_comment_dialog_success">Մեկնաբանությունը հաջողությամբ ավելացվել է</string>
+    <string name="osb_comment_dialog_error">Մեկնաբանությունը չավելացվեց</string>
+    <string name="osb_comment_dialog_success">"Մեկնաբանությունը  ավելացվեց"</string>
     <string name="shared_string_commit">Հաստատել</string>
     <string name="context_menu_item_delete_waypoint">Ջնջել GPX կետը?</string>
     <string name="context_menu_item_edit_waypoint">Խմբագրել GPX կետը</string>
@@ -717,9 +718,9 @@
     <string name="shared_string_upload">Վերբեռնել</string>
     <string name="osm_edit_created_poi">Ստեղծեք OSM POI</string>
     <string name="world_map_download_descr">Աշխարհի հիմնական քարտեզը (ամբողջ աշխարհը ցածր խոշորացումով) բացակայում է կամ հնացած է: Խնդրում ենք վերբեռնել հիմնական աշխարհագրական քարտեզը աշխատանքային միջավայրի ամբողջականության համար:</string>
-    <string name="shared_string_qr_code">QR-կոդը</string>
+    <string name="shared_string_qr_code">QR կոդ</string>
     <string name="map_downloaded">Քարտեզը ներբեռնված է</string>
-    <string name="map_downloaded_descr">Քարտեզի %1$s ներբեռնված է, այժմ կարող եք օգտագործել այն:</string>
+    <string name="map_downloaded_descr">Քարտեզի %1$s կարող եք օգտագործել:</string>
     <string name="go_to_map">Ցույց տալ քարտեզը</string>
     <string name="simulate_initial_startup_descr">Սահմանում է առաջին գործարկման նշանը, չի փոխում այլ կարգավորումները։</string>
     <string name="simulate_initial_startup">Ընդօրինակում առաջին գործարկումը</string>
@@ -744,7 +745,7 @@
     <string name="si_min_km">Րոպե կիլոմետր</string>
     <string name="si_min_m">Րոպե մղոն</string>
     <string name="si_nm_h">Ծովային մղոն ժամում (հանգույց)</string>
-    <string name="nm_h">նմ/ժ</string>
+    <string name="nm_h">նմ</string>
     <string name="min_mile">րոպե/մ</string>
     <string name="min_km">րոպե/կմ</string>
     <string name="m_s">մ/վ</string>
@@ -759,7 +760,7 @@
     <string name="av_locations">Գտնվելու վայրերը</string>
     <string name="plugin_settings">Պլագիններ</string>
     <string name="routing_attr_avoid_shuttle_train_name">Խուսափեք բեռնատար գնացքներից</string>
-    <string name="routing_attr_avoid_shuttle_train_description">Խուսափեք բեռնատար գնացքներից</string>
+    <string name="routing_attr_avoid_shuttle_train_description">"Խուսափեք  գնացքներից"</string>
     <string name="traffic_warning_hazard">Վտանգ</string>
     <string name="rendering_value_boldOutline_name">Համարձակ ուրվագիծ</string>
     <string name="no_updates_available">Թարմացում չկա</string>
@@ -790,7 +791,7 @@
     <string name="rendering_value_translucent_pink_name">Թափանցիկ վարդագույն</string>
     <string name="rendering_value_brown_name">Շագանակագույն</string>
     <string name="rendering_value_translucent_purple_name">Թափանցիկ մանուշակագույն</string>
-    <string name="restart_is_required">Փոփոխությունները լիովին կիրառելու համար պետք է վերագործարկեք հավելված:</string>
+    <string name="restart_is_required">Փոփոխությունները կիրառելու համար պետք է վերագործարկեք հավելվածը:</string>
     <string name="light_theme">Լուսավոր</string>
     <string name="dark_theme">Մութ</string>
     <string name="lang_bn">Բենգալերեն</string>
@@ -812,11 +813,11 @@
     <string name="lang_eo">Էսպերանտո</string>
     <string name="lang_es_us">Իսպաներեն (Ամերիկյան)</string>
     <string name="lang_es_ar">Իսպաներեն (Արգենտինա)</string>
-    <string name="lang_nb">"Նորվեգերեն  (Bokmål)"</string>
+    <string name="lang_nb">Նորվեգերեն Bokmål</string>
     <string name="lang_vo">Վոլապուկ</string>
     <string name="lang_th">Թայերեն</string>
     <string name="lang_te">Թելուգու</string>
-    <string name="lang_nn">Նորվեգերեն (Nynorsk)</string>
+    <string name="lang_nn">Նորվեգերեն Nynorsk</string>
     <string name="lang_new">Նևար/ Նեպալ Բհասա</string>
     <string name="lang_ms">Մալայզիա</string>
     <string name="lang_ht">Հայիթերեն</string>
@@ -827,9 +828,9 @@
     <string name="lang_hsb">Սորբին (Վերին)</string>
     <string name="lang_kab">Կաբիլեն</string>
     <string name="lang_ber">Բերբեր</string>
-    <string name="archive_wikipedia_data">Դուք ունեք հին անհամապատասխան Վիքիպեդիայի տվյալներ ներբեռնված: Ցանկանում եք արխիվացնել դրանք?</string>
-    <string name="download_wikipedia_files">Ցանկանում եք ներբեռնել լրացուցիչ Վիքիպեդիայի տվյալները (%1$s MB)?</string>
-    <string name="gps_network_not_enabled">Կոորդինատները հայտնաբերման ծառայությունը միացված չէ: Ցանկանում եք դա դարձնել?</string>
+    <string name="archive_wikipedia_data">Դուք ունեք հին անհամապատասխան Վիքիպեդիայի տվյալներ: Արխիվացնել դրանք?</string>
+    <string name="download_wikipedia_files">Ներբեռնել լրացուցիչ Վիքիպեդիայի տվյալները (%1$s MB)?</string>
+    <string name="gps_network_not_enabled">Կոորդինատները հայտնաբերման ծառայությունը միացված չէ: Միացնել?</string>
     <string name="disable_recording_once_app_killed">Դադարեցնել ինքնավար գրանցումը</string>
     <string name="disable_recording_once_app_killed_descrp">Հավելվածը փակելուց հետո (ուրիշ հավելվածը միջոցով), GPX-ի գրանցումը կդադարեցվի: (Ֆոնային պատկերակը անհետանում է Android ծանուցման բարից:)</string>
     <string name="shared_string_import2osmand">Ներմուծել OsmAnd</string>
@@ -843,7 +844,7 @@
     <string name="rendering_value_walkingRoutesOSMC_name">Գույնը ըստ OSMC արշավային խորհրդանիշի</string>
     <string name="shared_string_logoff">Ելք</string>
     <string name="rendering_attr_hideHouseNumbers_name">Տան համարները</string>
-    <string name="application_dir_change_warning3">Տեղափոխել նաև OsmAnd-ի տվյալների ֆայլերը նոր նշանակման վայր?</string>
+    <string name="application_dir_change_warning3">"Տեղափոխել  OsmAnd-ի տվյալների ֆայլերը նոր նշանակման վայր?"</string>
     <string name="specified_directiory_not_writeable">Հնարավոր չէ ստեղծել քարտեզներ նշված դիրեկտորիայում</string>
     <string name="copying_osmand_file_failed">Չհաջողվեց տեղափոխել ֆայլեր</string>
     <string name="storage_directory_external">Արտաքին պահեստավորման սարք</string>
@@ -866,10 +867,10 @@
     <string name="shared_string_show_description">Ցույց տալ նկարագրությունը։</string>
     <string name="shared_string_message">Հաղորդագրություն</string>
     <string name="agps_data_last_downloaded">A-GPS-ի վերջին տվյալները ներբեռնվել են` %1$s</string>
-    <string name="confirm_usage_speed_cameras">Շատ երկրներում (Գերմանիա, Ֆրանսիա, Իտալիա եւ այլն) արագության խցիկի մասին զգուշացումների օգտագործումը օրենքով չի թույլատրվում։ Ընտրեք «այո», միայն այն դեպքում, եթե դուք իրավասու եք օգտագործել այս հնարավորությունը:</string>
+    <string name="confirm_usage_speed_cameras">Շատ երկրներում (Գերմանիա, Ֆրանսիա, Իտալիա եւ այլն) արագության խցիկի մասին զգուշացումների օգտագործումը անօրինական է։ OsmAnd-ը ոչ մի պատասխանատվություն չի կրում, եթե Դուք խախտում եք օրենքը ։ Ընտրեք «այո», միայն այն դեպքում, եթե դուք իրավասու եք օգտագործել այս հնարավորությունը:</string>
     <string name="welmode_download_maps">Ներբեռնել քարտեզներ</string>
     <string name="welcome_select_region">Ճանապարհային նշանների և կանոնների ճիշտ ցուցադրման համար ընտրեք ձեր շրջանը:</string>
-    <string name="welcome_text">OsmAnd-ը տրամադրում է անցանց(օֆլայն) քարտեզի դիտարկումը &amp; անցանց(օֆլայն) նավիգացիա:</string>
+    <string name="welcome_text">OsmAnd-ը տրամադրում է անցանց(օֆլայն) քարտեզի դիտարկումը և անցանց(օֆլայն) նավիգացիա:</string>
     <string name="welcome_header">Բարի գալուստ</string>
     <string name="current_route">Ընթացիկ երթուղին</string>
     <string name="osm_changes_added_to_local_edits">OSM-ի փոփոխությունները մուտքագրվել են տեղական տվյալների բազայում</string>
@@ -877,7 +878,7 @@
     
     <string name="local_recordings_delete_all_confirm">Դուք մտադիր եք ջնջել %1$d նշումներ: Համոզված եք?</string>
     <string name="local_osm_changes_upload_all_confirm">Դուք մտադիր եք %1$d փոփոխություններ ուղարկել OSM- ին: Համոզված եք?</string>
-    <string name="confirmation_to_clear_history">Ցանկանում եք մաքրել պատմությունը?</string>
+    <string name="confirmation_to_clear_history">Մաքրել պատմությունը?</string>
     <string name="delay_to_start_navigation_descr">Նշեք սպասման ժամանակը երթուղու պլանավորման էկրանին։</string>
     <string name="delay_to_start_navigation">Նավիգացիաի մեկնարկի հետաձքումը…</string>
     <string name="shared_string_go">Գնացինք</string>
@@ -937,13 +938,13 @@
     <string name="shared_string_import">Ներմուծել</string>
     <string name="shared_string_export">Արտահանել</string>
     <string name="shared_string_more">Ավելին…</string>
-    <string name="shared_string_remember_my_choice">Հիշել իմ ընտրությունը</string>
+    <string name="shared_string_remember_my_choice">Հիշել ընտրությունը</string>
     <string name="shared_string_refresh">Թարմացնել</string>
     <string name="shared_string_download">Ներբեռնել</string>
     <string name="shared_string_downloading">Ներբեռնում</string>
-    <string name="shared_string_download_successful">Ներբեռնումը հաջողությամբ ավարտվեց</string>
+    <string name="shared_string_download_successful">Ներբեռնումը ավարտվեց</string>
     <string name="shared_string_io_error">I/O սխալ տեղի ունեցավ</string>
-    <string name="shared_string_unexpected_error">Անսպասելի սխալ տեղի ունեցավ</string>
+    <string name="shared_string_unexpected_error">Անսպասելի սխալ</string>
     <string name="shared_string_action_template">Գործողություն {0}</string>
     <string name="shared_string_close">Փակել</string>
     <string name="shared_string_exit">Ելք</string>
@@ -954,10 +955,10 @@
     <string name="shared_string_favorites">Սիրված</string>
     <string name="shared_string_address">Հասցե</string>
     <string name="shared_string_add">Ավելացնել</string>
-    <string name="shared_string_add_to_favorites">Ավելացնել սիրածների մեջ</string>
+    <string name="shared_string_add_to_favorites">Ավելացնել \"Սիրածների\" մեջ</string>
     <string name="shared_string_my_location">Իմ դիրքը</string>
     <string name="shared_string_my_places">Իմ վայրերը</string>
-    <string name="shared_string_my_favorites">Իմ Սիրածները</string>
+    <string name="shared_string_my_favorites">Սիրածները</string>
     <string name="release_2_6">Նոր առանձնահատկություն. Արագ գործողության կոճակ 
 \n 
 \n• Բարելավված սենսորային էկրանի արձագանք (օրինակ `զուգահեռ համաժամանակ և մեծացնելու) 
@@ -995,7 +996,7 @@
     <string name="srtm_plugin_disabled">Եզրագծերը(բարձունքների) անջատված են</string>
     <string name="favourites_edit_dialog_title">Տեղեկատվություն ընտրված կետի մասին</string>
     <string name="lang_pms">Պյեմոնտերեն</string>
-    <string name="shared_string_my_tracks">Իմ տրեկները</string>
+    <string name="shared_string_my_tracks">Տրեկները</string>
     <string name="shared_string_currently_recording_track">Ներկայումս գրնացվող ուղին</string>
     <string name="shared_string_audio">Աուդիո</string>
     <string name="shared_string_video">Վիդեո</string>
@@ -1014,13 +1015,13 @@
 \n
 \nԳրանցված տրեկերը կարող են տարածվել ձեր ընկերների հետ կամ օգտագործել OSM-ի ներդրումների համար: Մարզիկները կարող են օգտվել արձանագրված տրեկերից, որոնք կարող են վերահսկել իրենց դասընթացները: Որոշ հիմնական տրեկերի  վերլուծություն կարելի է իրականացնել ուղղակիորեն OsmAnd-ում, նման գրիչ անգամները, միջին արագությունը և այլն, և տրեկերը կարող են նաև վերլուծվել հատուկ 3-րդ կողմի վերլուծության գործիքներում:"</string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd-ի plugin բարձրության գծերի համար</string>
-    <string name="osmand_srtm_long_description_1000_chars">Այս plugin-ը ապահովում է ինչպես եզրագծային կափարիչը, այնպես էլ (ռելիեֆը) բլուրային շերտ, որը ցուցադրվում է OsmAnd-ի ստանդարտ քարտեզների վրա: Այս ֆունկցիան շատ բարձր է գնահատվելու մարզիկների, զբոսաշրջիկների, և բոլոր նրանց կողմից, ովքեր հետաքրքրված են լանդշաֆտի կառուցվածքով:
-\n
-\nՀամաշխարհային տվյալները (70 աստիճան հյուսիսից 70 աստիճան հարավ) հիմնված են SRTM-ի (Shuttle Radar Topography Mission) և ASTER- ի (Advanced Spaceborne Thermal Emission and Reflection Radiometer) կողմից չափումների վրա, ՆԱՍԱ-ի Earth Watching-ի առաջատար արբանյակի Համակարգը: ASTER-ն համագործակցային ջանք է ՆԱՍԱ-ի, Ճապոնիայի էկոնոմիկայի, առեւտրի եւ արդյունաբերության նախարարության (METI) և Ճապոնիայի տիեզերական համակարգերի (J-spacesystems) միջև:</string>
+    <string name="osmand_srtm_long_description_1000_chars">"Այս plugin-ը ապահովում է ինչպես եզրագծային կափարիչը, այնպես էլ (ռելիեֆը) բլուրային շերտ, որը ցուցադրվում է OsmAnd-ի ստանդարտ քարտեզների վրա: Այս ֆունկցիան շատ բարձր է գնահատվելու մարզիկների, զբոսաշրջիկների, և բոլոր նրանց կողմից, ովքեր հետաքրքրված են լանդշաֆտի կառուցվածքով: 
+\n 
+\nՀամաշխարհային տվյալները (70°  հյուսիսից 70° հարավ) հիմնված են SRTM-ի (Shuttle Radar Topography Mission) և ASTER- ի (Advanced Spaceborne Thermal Emission and Reflection Radiometer) կողմից չափումների վրա, ՆԱՍԱ-ի Earth Watching-ի առաջատար արբանյակի Համակարգը: ASTER-ն համագործակցային ջանք է ՆԱՍԱ-ի, Ճապոնիայի էկոնոմիկայի, առեւտրի եւ արդյունաբերության նախարարության (METI) և Ճապոնիայի տիեզերական համակարգերի (J-spacesystems) միջև:"</string>
     <string name="srtm_plugin_name">Բարձունքների գծեր (եզրագծեր)</string>
-    <string name="srtm_plugin_description">Այս plugin-ը ապահովում է ինչպես եզրագծային կափարիչը, այնպես էլ (ռելիեֆը) բլուրային շերտ, որը ցուցադրվում է OsmAnd-ի ստանդարտ քարտեզների վրա: Այս ֆունկցիան շատ բարձր է գնահատվելու մարզիկների, զբոսաշրջիկների, և բոլոր նրանց կողմից, ովքեր հետաքրքրված են լանդշաֆտի կառուցվածքով:
-\n
-\nՀամաշխարհային տվյալները (70 աստիճան հյուսիսից 70 աստիճան հարավ) հիմնված են SRTM-ի (Shuttle Radar Topography Mission) և ASTER- ի (Advanced Spaceborne Thermal Emission and Reflection Radiometer) կողմից չափումների վրա, ՆԱՍԱ-ի Earth Watching-ի առաջատար արբանյակի Համակարգը: ASTER-ն համագործակցային ջանք է ՆԱՍԱ-ի, Ճապոնիայի էկոնոմիկայի, առեւտրի եւ արդյունաբերության նախարարության (METI) և Ճապոնիայի տիեզերական համակարգերի (J-spacesystems) միջև:</string>
+    <string name="srtm_plugin_description">Այս plugin-ը ապահովում է ինչպես եզրագծային կափարիչը, այնպես էլ (ռելիեֆը) բլուրային շերտ, որը ցուցադրվում է OsmAnd-ի ստանդարտ քարտեզների վրա: Այս ֆունկցիան շատ բարձր է գնահատվելու մարզիկների, զբոսաշրջիկների, և բոլոր նրանց կողմից, ովքեր հետաքրքրված են լանդշաֆտի կառուցվածքով: 
+\n 
+\nՀամաշխարհային տվյալները (70° հյուսիսից 70° հարավ) հիմնված են SRTM-ի (Shuttle Radar Topography Mission) և ASTER- ի (Advanced Spaceborne Thermal Emission and Reflection Radiometer) կողմից չափումների վրա, ՆԱՍԱ-ի Earth Watching-ի առաջատար արբանյակի Համակարգը: ASTER-ն համագործակցային ջանք է ՆԱՍԱ-ի, Ճապոնիայի էկոնոմիկայի, առեւտրի եւ արդյունաբերության նախարարության (METI) և Ճապոնիայի տիեզերական համակարգերի (J-spacesystems) միջև:</string>
     <string name="plugin_touringview_name">Տուրիստական քարտեզ</string>
     <string name="plugin_touringview_descr">"Այս դիտարկումը ակտիվացնելուց OsmAnd-ի քարտեզի ոճը փոխվում է «Touring view»-ի ոճի , սա հատուկ բարձր մանրամասն դիտարկում է ճանապարհորդների և պրոֆեսիոնալ վարորդների համար:
 \n
@@ -1038,10 +1039,10 @@
     <string name="audionotes_plugin_name">Աուդիո և վիդեո նշումներ</string>
     <string name="audionotes_plugin_description">"Աուդիո/Վիդեո նշումների plugin-ը հնարավորություն են տալիս ստեղծել աուդիո/լուսանկարներ/վիդեո նշումներ վարելու ժամանակ  կամ   կոճակի միջոցով  քարտեզի էկրանին վրա  կամ անմիջապես համատեքստային մենյուի միջոցով ցանկացած դիրքի համար քարտեզի վրա:"</string>
     <string name="osmand_parking_plugin_name">Ավտոկայանատեղ</string>
-    <string name="osmand_parking_plugin_description">Ավտոկայանատեղ plugin-ը թույլ է տալիս հիշել, թե որտեղ է ձեր մեքենան կայանել և որքան ժամանակ է մնացել ավտոկայանատեղը ազատելու (եթե առկա է ժամկետ):
+    <string name="osmand_parking_plugin_description">Ավտոկայանատեղ plugin-ը թույլ է տալիս գրանցել, թե որտեղ է ձեր մեքենան կայանել և որքան ժամանակ է մնացել ավտոկայանատեղը ազատելու (եթե առկա է ժամկետ): 
 \nԹե տեղը, թե ժամանակը տեսանելի են OsmAnd-ի վահանակի վրա, ինչպես նաև քարտեզի էկրանին ինչպես նաև վիդժետի մեջ: Android օրացույցին կարելի է միացնել որպես հիշեցում:</string>
     <string name="shared_string_accessibility">Հատուկ հնարավորություններ</string>
-    <string name="osmand_accessibility_description">The plugin-ն սարքի համար ավելացնում հատուկ հնարավորությունների աջակցում ուղղակիորեն OsmAnd-ում: Սա հեշտացնում է, օրինակ, TTS-ի ձայնի ելքային արագությունը հարմարեցնելու համար, կարգավորել նավիգացիայի ուղղվածությունը էկրանի վրա, վերահսկեք սանդղակը կամ օգտագործեք ձայնային հետադարձ կապի հրամանները ավտո անոտացիաներ անելու դեպքում ձեր դիրքի վերաբերյալ:</string>
+    <string name="osmand_accessibility_description">"The plugin-ն սարքի համար ավելացնում հատուկ հնարավորությունների աջակցում ուղղակիորեն OsmAnd-ում: Սա հեշտացնում է, օրինակ, TTS-ի ձայնի ելքային արագությունը հարմարեցնելու համար, կարգավորել նավիգացիայի ուղղվածությունը էկրանի վրա, վերահսկեք սանդղակը կամ  ձայնային հետադարձ կապի հրամանները ավտո անոտացիաներ անելու դեպքում ձեր դիրքի վերաբերյալ:"</string>
     <string name="wrong_input">Սխալ մուտքագրում</string>
 	<string name="enter_new_name">Մուտքագրեք նոր անուն</string>
 	<string name="shared_string_back">Վերադառնալ</string>
@@ -1076,11 +1077,11 @@
     <string name="version_settings">Հավաքներ</string>
     <string name="rendering_attr_streetLighting_name">Փողոցային լուսավորություն</string>
     <string name="proxy_pref_title">Proxy սերվեր</string>
-    <string name="proxy_pref_descr">Նշեք Ինտերնետային proxy սերվերը։</string>
+    <string name="proxy_pref_descr">Նշեք proxy սերվերը։</string>
     <string name="settings_privacy">Գաղտնիություն</string>
     <string name="points">Կետեր</string>
     <string name="navigation_over_track">Ցանկանում եք սկսել նավարկությունը ըստ տրեկի?</string>
-    <string name="avoid_roads_msg">Կարող եք ընտրել այլընտրանքային երթուղի, ընտրելով ճանապարհներ, որոնք պետք է խուսափել</string>
+    <string name="avoid_roads_msg">Ընտրել այլընտրանքային երթուղի, ընտրելով ճանապարհներ, որոնք պետք է խուսափել</string>
     <string name="speak_pedestrian">Հետիոտնային անցումներ</string>
     <string name="rendering_attr_roadStyle_name">Ճանապարհների ոճը</string>
     <string name="rendering_attr_roadStyle_description">Ճանապարհների ոճը</string>
@@ -1095,7 +1096,7 @@
     <string name="rendering_value_americanRoadAtlas_name">Ամերիկայի ճանապարհների ատլաս</string>
     <string name="routing_attr_no_new_routing_name">"Չօգտագործել  երթուղային 1.9 տարբերակը"</string>
     <string name="routing_attr_no_new_routing_description">"Չօգտագործել  երթուղային 1.9 տարբերակում ներկայացված ալգորիթմը։"</string>
-    <string name="dash_download_msg_none">Ցանկանում եք ներբեռնել անցանց քարտեզները?</string>
+    <string name="dash_download_msg_none">Ներբեռնել անցանց քարտեզները?</string>
     <string name="dash_download_msg">Ներբեռնված քարտեզներ %1$s</string>
     <string name="dash_download_new_one">Ներբեռնեք նոր քարտեզ</string>
     <string name="dash_download_manage">Ներբեռնման մենեջեր</string>
@@ -1117,7 +1118,7 @@
     <string name="no_internet_connection">Ներբեռնումը հնարավոր չէ, ստուգեք ձեր ինտերնետ կապը:</string>
     <string name="everything_up_to_date">Բոլոր ֆայլերը թարմացավ են</string>
     <string name="use_opengl_render">Օգտագործել OpenGL ներկայացնման համար</string>
-    <string name="use_opengl_render_descr">Օգտագործել ապարատային արագացում OpenGL ներկայացման համար (հնարավոր է չաշխատի որոշ սարքերի վրա)։</string>
+    <string name="use_opengl_render_descr">Օգտագործել ապարատային արագացում OpenGL ներկայացման համար (հնարավոր ավելանա մարտկոցի սպառումը կան չաշխատի որոշ հին սարքերի վրա)։</string>
     <string name="error_avoid_specific_road">Շրջանցում չի գտնվել</string>
     <string name="home_button">Գլխավոր</string>
     <string name="map_update">Քարտեզների համար հասանելի թարմացումներ %1$s</string>
@@ -1165,10 +1166,10 @@
     <string name="traffic_warning_calming">Նվազեցրեք արագությունը</string>
     <string name="traffic_warning_speed_camera">Արագաչափ տեսախցիկ</string>
     <string name="traffic_warning">Արագության սահմանափակում</string>
-    <string name="speak_favorites">Մոտակա «Սիրված»-եր</string>
+    <string name="speak_favorites">Մոտակա սիրված-եր</string>
     <string name="speak_poi">Մոտակա POI</string>
     <string name="way_alarms">Երթևեկության նախազգուշացումներ</string>
-    <string name="background_service_is_enabled_question">Ֆոնային ռեժիմի դեռ աշխատում է։ Դուք ուզում եք ընդհատել այն էլ?</string>
+    <string name="background_service_is_enabled_question">Ֆոնային ռեժիմի դեռ աշխատում է։ Ընդհատել այն էլ?</string>
     <string name="sleep_mode_stop_dialog">Դադարեցնել GPS-ի աշխատանքը ֆոնային ռեժիմում?</string>
     <string name="stop_navigation_service">Դադարեցնել</string>
     <string name="confirm_every_run">Միշտ հարցնել</string>
@@ -1179,7 +1180,7 @@
     <string name="save_track_to_gpx_globally">Գրանցել տրեկը GPX ֆայլի տեքով</string>
     <string name="save_track_to_gpx_globally_headline">Տրեկի գրանցումը ըստ պահանջի</string>
     <string name="save_track_to_gpx_globally_descr">Ընդհանուր դիրքի գրանցումը GPX ֆայլի տեսքով կարող եք միացնել կամ անջատել GPX վիջետի միջոցով քարտեզի էկրանից։</string>
-    <string name="save_current_track_descr">"Պահպանել ընթացիկ տրեկը  SD-քարտի վրա հիմա։"</string>
+    <string name="save_current_track_descr">Պահպանել ընթացիկ տրեկը հիմա։</string>
     <string name="save_current_track">Պահպանել ընթացիկ GPX տրեկը</string>
     <string name="save_track_to_gpx">Նավիգացիայի ընթացքում ավտոմատ գրանցել տրեկը</string>
     <string name="save_track_to_gpx_descrp">Նավիգացիայի ընթացքում GPX տրեկները ինքնաբերաբար կպահպանվեն տրեկների թղթապանակում։</string>
@@ -1219,7 +1220,7 @@
     <string name="continue_navigation">Շարունակել նավարկությունը</string>
     <string name="pause_navigation">Կասեցնել նավիգացիյան</string>
     <string name="keep_navigation_service">Պահել</string>
-    <string name="map_preferred_locale_descr">Նախընտրելի լեզուն նշաններ համար քարտեզի վրա (եթե հասանելի չէ, ապա անգլերեն կամ տեղական անուններ)։</string>
+    <string name="map_preferred_locale_descr">Նախընտրելի լեզուն նշանների համար քարտեզի վրա (եթե հասանելի չէ, ապա Անգլերեն կամ տեղական անուններ կկիրառվեն)։</string>
     <string name="map_preferred_locale">Քարտեզի նախընտրելի լեզուն</string>
     <string name="local_map_names">Տեղական անուններ</string>
     <string name="lang_sw">Սուահիլի</string>
@@ -2632,8 +2633,7 @@
     <string name="additional_actions">Լրացուցիչ գործողություններ</string>
     <string name="av_locations_selected_desc">GPX ֆայլը կոորդինատներով և ընտրված գրառումների տվյալներով:</string>
     <string name="av_locations_all_desc">GPX ֆայլը կոորդինատներով և բոլոր նշումների տվյալները։</string>
-    <string name="release_3_0">\\022 
-\n
+    <string name="release_3_0"> 
 \nՆոր Ճամփորդության մենյու. Դիտեք WikiVoyage- ի հոդվածները առանց ինտերնետի օգտագործման
 \n
 \n • Wikipedia՝ նոր տեսք, ակտիվ հղումներ, պատկերներ

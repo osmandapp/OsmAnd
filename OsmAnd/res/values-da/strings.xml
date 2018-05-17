@@ -3063,15 +3063,15 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="by_date">Efter dato</string>
     <string name="by_type">Efter type</string>
     <string name="modify_the_search_query">Ændr søgning.</string>
-    <string name="release_3_0">• Ny rejseguide menu: se WikiVoyage artikler uden internetforbindelse
-\n
-\n  • Wikipedia: nyt udseende, aktive links, billeder
-\n
-\n  • Åbn spor grænseflade: vis rutepunktsgrupper
-\n
-\n  • Kortmarkører: import af udvalgte grupper fra GPX-filer, nyt udseende på koordinat indtastning
-\n
-\n  • OsmAnd Live-abonnement indeholder nu alle OsmAnd-funktioner
+    <string name="release_3_0">• Ny rejseguide menu: se Wikivoyage artikler uden internetforbindelse 
+\n 
+\n  • Wikipedia: nyt udseende, aktive links, billeder 
+\n 
+\n  • Åbn spor grænseflade: vis rutepunktsgrupper 
+\n 
+\n  • Kortmarkører: import af udvalgte grupper fra GPX-filer, nyt udseende på koordinat indtastning 
+\n 
+\n  • OsmAnd Live-abonnement indeholder nu alle OsmAnd-funktioner 
 \n</string>
     <string name="av_locations_selected_desc">GPX-fil med koordinaterne og data for de valgte noter.</string>
     <string name="av_locations_all_desc">GPX-fil med koordinater og data for alle noter.</string>
@@ -3202,10 +3202,10 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="purchase_unlim_title">Køb - %1$s</string>
     <string name="purchase_subscription_title">Abonner - %1$s</string>
 
-    <string name="wikivoyage_offline">Wikivoyage er offline</string>
+    <string name="wikivoyage_offline">Wikivoyage offline</string>
     
     <string name="unlimited_downloads">Ubegrænset hentninger</string>
-    <string name="wikipedia_offline">Wikipedia er offline</string>
+    <string name="wikipedia_offline">Wikipedia offline</string>
     <string name="contour_lines_sea_depth">Højdekurver + havdybde</string>
     <string name="unlock_all_features">Lås op for alle funktioner i OsmAnd</string>
 
@@ -3253,12 +3253,12 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="nautical_render_descr">Nautisk navigationsstil. Hovedtræk: bøjer, fyrtårne, vandveje, sejlruter og sømærker, havne, søfartstjenester, dybdekonturer.</string>
     <string name="ski_map_render_descr">Stilart til skiløb. Hovedtræk: visning af pister, skilifte og andre skiobjekter på en praktisk måde. Færre distraherende sekundære objekter på kortet.</string>
     <string name="light_rs_render_descr">Enkel og kontrastrig stilart til bilnavigation. Skånsom for øjnene i nat-tilstand. Hovedtræk: højdekurver, veje med kontrast i orange, færre distraherende sekundære kort objekter.</string>
-    <string name="topo_render_descr">Kontraststilart designet primært til gåture, vandring og cykling i naturen. God læsbarhed med kompleks udendørs belysning. Hovedtræk: Kontrast veje og naturlige objekter, forskellige typer ruter, højdekurver med avancerede indstillinger, flere detaljer i de tilsvarende zoomniveauer end i standard stilart. Mulighed for overfladeintegritet gør det muligt at skelne mellem veje med forskellig overfladekvalitet. Ingen nat-tilstand.</string>
+    <string name="topo_render_descr">Kontraststilart designet primært til gåture, vandring og cykling i naturen. God læsbarhed med kompleks udendørs belysning. Hovedtræk: Kontrastrige veje og naturlige objekter, forskellige typer ruter, højdekurver med avancerede indstillinger, flere detaljer i de tilsvarende zoomniveauer end i standard stilart. Overfladevalg gør det muligt at skelne mellem veje med forskellig overfladekvalitet. Ingen nat-tilstand.</string>
     <string name="mapnik_render_descr">"Gammel \'Mapnik\' standard renderingstilart. Hovedtræk: farver svarer til  \'Mapnik\'-stilart."</string>
-    <string name="default_render_descr">Generel stilart. Forenklet rendering for at få renere kort i tæt befolkede byer. Hovedtræk: højdekurver, ruter, vejbelægning, adgangsbegrænsninger, vejskilte, visning af stier i henhold til SAC-skalaen, rafting funktioner.</string>
-    <string name="touring_view_render_descr">Meget detaljeret stilart til touring. Indeholder alle indstillingsmuligheder af standardstil, desuden: viser så mange detaljer som muligt, navnlig alle veje, stier og andre måder at rejse på. En Klar visuel sondring mellem alle forskellige veje, minder om mange vejkort. Farveskema med høj kontrast til udendørs brug, dag og nat stilstand.</string>
+    <string name="default_render_descr">Generel stilart. Forenklet rendering i tæt befolkede byer. Hovedtræk: højdekurver, ruter, vejbelægning, adgangsbegrænsninger, vejskilte, visning af stier i henhold til SAC-skalaen, rafting funktioner.</string>
+    <string name="touring_view_render_descr">Detaljeret stilart til touring. Indeholder alle indstillingsmuligheder af standardstil, desuden: viser så mange detaljer som muligt, navnlig alle veje, stier og andre måder at rejse på. En Klar visuel sondring mellem alle forskellige vejtyper, minder om mange vejkort. Farveskema med høj kontrast til udendørs brug, dag og nat stilstand.</string>
     <string name="shared_string_bookmark">Bogmærke</string>
-    <string name="off_road_render_descr">Egnet til brug under off-road kørsel. Velegnet til brug med grønne satellitbilleder som underlejringskort. Hovedtræk: reduceret tykkelse af hovedveje, øget tykkelse af spor, stier, cykel og andre ruter. Baseret på \'Topo\' stilart.</string>
+    <string name="off_road_render_descr">Egnet til brug under off-road kørsel. Velegnet til brug med satellitbilleder som underlejringskort. Hovedtræk: reduceret tykkelse af hovedveje, øget tykkelse af spor, stier, cykel og andre ruter. Baseret på \'Topo\' stilart.</string>
     <string name="access_intermediate_arrival_time">Mellemliggende ankomsttid</string>
     <string name="map_widget_intermediate_time">Mellemliggende tid</string>
     </resources>

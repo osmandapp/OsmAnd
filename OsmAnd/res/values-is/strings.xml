@@ -2567,7 +2567,7 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="non_optimal_route_calculation">Reikna leiðir yfir langar fjarlægðir sem hugsanlega eru ekki þær bestu</string>
     <string name="av_locations_selected_desc">GPX-skrá með hnitum og gögnum valinna minnispunkta.</string>
     <string name="av_locations_all_desc">GPX-skrá með hnitum og gögnum allra minnispunkta.</string>
-    <string name="release_3_0">\\022 Ný ferðavalmynd: skoða WikiVoyage-greinar án internet-tengingar
+    <string name="release_3_0">Ný ferðavalmynd: skoða WikiVoyage-greinar án internet-tengingar
 \n
 \n • Wikipedia: nýtt útlit, virkir tenglar, myndir
 \n

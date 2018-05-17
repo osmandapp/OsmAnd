@@ -56,8 +56,8 @@
     <string name="osmand_parking_pm">PM</string>
     <string name="osmand_parking_am">AM</string>
     <string name="osmand_parking_position_name">Aparcament alternatiu</string>
-    <string name="osmand_parking_plugin_description">El connector de localització d\'aparcament us permet recordar on està aparcat el vostre cotxe i quant temps li queda (si l\'aparcament té una limitació de temps).
-\nTant la situació com el temps que us queda es mostren al tauler de l\'OsmAnd així com al giny en el mapa. Es pot afegir una alarma al vostre calendari d\'Android com a recordatori.</string>
+    <string name="osmand_parking_plugin_description">El connector de localització d\'aparcament us permet registrar on està aparcat el vostre cotxe i quant temps li queda (si l\'aparcament té una limitació de temps). 
+\nTant la situació com el temps que us queda es mostren al tauler de l\'OsmAnd així com en un giny a la pantalla del mapa. Es pot afegir una alarma al vostre calendari d\'Android com a recordatori.</string>
     <string name="osmand_parking_plugin_name">Posició d\'aparcament</string>
     <string name="context_menu_item_add_parking_point">Marca com a lloc d\'aparcament</string>
     <string name="context_menu_item_delete_parking_point">Suprimeix un marcador d\'aparcament</string>
@@ -479,7 +479,7 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="context_menu_item_update_poi">Actualitzar PDI</string>
     <string name="searching_address">Cercant l\'adreça…</string>
     <string name="search_offline_address">Fora de línia</string>
-    <string name="shared_string_download_successful">Baixada amb èxit</string>
+    <string name="shared_string_download_successful">S\'ha baixat</string>
     <string name="opening_hours">Horari d\'obertura</string>
     <string name="poi">PDI</string>
     <string name="new_route_calculated_dist">S\'ha calculat una ruta nova, distància</string>
@@ -877,14 +877,14 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="poi_error_info_not_loaded">No s\'ha carregat la informació del node</string>
     <string name="poi_dialog_other_tags_message">S\'han preservat totes les altres etiquetes</string>
     <string name="auto_announce_off">Atura els anuncis automàtics</string>
-    <string name="shared_string_io_error">S\'ha produït un error d\'E/S</string>
+    <string name="shared_string_io_error">Error d\'E/S</string>
     <string name="poi_namefinder_query_empty">Teclegeu per trobar el PDI</string>
     <string name="show_transport_over_map">Mostra les parades del transport</string>
     <string name="save_track_to_gpx">Enregistrament automàtic del trajecte durant la navegació</string>
     <string name="use_english_names_descr">Escolliu entre els noms nadius i els anglesos.</string>
     <string name="srtm_plugin_description">Aquest connector proporciona tant corbes de nivell superposades com una capa d\'ombres amb efecte relleu per superposar als mapes de OsmAnd. Corredors, ciclistes, excursionistes i qualsevol interessat en el perfil de relleu del terreny ho agrairan força. (Fixeu-vos que les corbes de nivell i/o els efectes de relleu són baixades independents i complementàries, disponibles un cop s\'hagi activat el connector). 
 \n 
-\nLes dades globals (entre 70 graus nord i 70 graus sud) estan basades en mesures del SRTM (Shuttle Radar Topography Mission) i del ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), un instrument de generació d\'imatges a bord de Terra, el satèl·lit insígnia del Sistema d\'Observació de la Terra de la NASA. ASTER és un esforç de col·laboració entre la NASA, el Ministeri d\'Economia i Comerç del Japó (METI) i la fundació Japan Space Systems (J-spacesystems).</string>
+\nLes dades globals (entre 70 ° nord i 70 ° sud) estan basades en mesures del SRTM (Shuttle Radar Topography Mission) i del ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), un instrument de generació d\'imatges a bord de Terra, el satèl·lit insígnia del Sistema d\'Observació de la Terra de la NASA. ASTER és un esforç de col·laboració entre la NASA, el Ministeri d\'Economia i Comerç del Japó (METI) i la fundació Japan Space Systems (J-spacesystems).</string>
     <string name="rendering_attr_showRoadMaps_description">Indiqueu quan mostrar mapes de només carreteres:</string>
     <string name="auto_announce_on">Inicia els anuncis automàtics</string>
     <string name="send_location_email_pattern">Per a veure la localització seguiu l\'enllaç web %1$s o l\'enllaç Android %2$s</string>
@@ -1070,7 +1070,7 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="edit_tilesource_choose_existing">Tria existent…</string>
     <string name="map_widget_fps_info">Info depuració FPS</string>
     <string name="intermediate_items_sort_return">Ordre optimitzat de les fites de la ruta fins a la destinació.</string>
-    <string name="osmand_distance_planning_plugin_description">Aquest connector proporciona un giny de la pantalla del mapa que permet crear itineraris en prémer sobre el mapa o bé amb l\'ús o la modificació de fitxers GPX existents, per planificar un trajecte o mesurar la distància entre punts. Els resultats es poden desar com un fitxer GPX que podreu usar més endavant com una referència.</string>
+    <string name="osmand_distance_planning_plugin_description">"Aquest connector proporciona un giny de la pantalla del mapa que permet la creació d\'itineraris prement el mapa o utilitzant  o modificant fitxers GPX existents, per planificar un trajecte o mesurar la distància entre punts. Els resultats es poden desar com un fitxer GPX que podreu usar més endavant com una referència."</string>
     <string name="android_19_location_disabled">"Des de la versió 4.4 d\'Android (KitKat) no podeu baixar i actualitzar els mapes en l\'antiga carpeta (%s). Voleu copiar tots els fitxers de l\'OsmAnd a la nova destinació? 
 \n Nota 1: Els vostres fitxers obsolets  quedaran intactes (els podeu esborrar manualment). 
 \n Nota 2: En el nou lloc d\'emmagatzemament no serà possible compartir fitxers entre l\'OsmAnd i l\'OsmAnd+."</string>
@@ -1117,7 +1117,7 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="route_info">Informació de ruta</string>
     <string name="osmand_srtm_long_description_1000_chars">Aquest connector proporciona tant corbes de nivell superposades com una capa d\'ombres amb efecte relleu per superposar als mapes de OsmAnd. Corredors, ciclistes, excursionistes i qualsevol interessat en el perfil de relleu del terreny ho agrairan força. 
 \n 
-\nLes dades globals (entre 70 graus nord i 70 graus sud) estan basades en mesures del SRTM (Shuttle Radar Topography Mission) i del ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), un instrument de generació d\'imatges a bord de Terra, el satèl·lit insígnia del Sistema d\'Observació de la Terra de la NASA. ASTER és un esforç de col·laboració entre la NASA, el Ministeri d\'Economia i Comerç del Japó (METI) i la fundació Japan Space Systems (J-spacesystems).</string>
+\nLes dades globals (entre 70 ° nord i 70 ° sud) estan basades en mesures del SRTM (Shuttle Radar Topography Mission) i del ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), un instrument de generació d\'imatges a bord de Terra, el satèl·lit insígnia del Sistema d\'Observació de la Terra de la NASA. ASTER és un esforç de col·laboració entre la NASA, el Ministeri d\'Economia i Comerç del Japó (METI) i la fundació Japan Space Systems (J-spacesystems).</string>
     <string name="keep_and_add_destination_point">Afegeix com el següent punt de destinació</string>
     <string name="calculate_osmand_route_without_internet">Càlcul sense Internet d\'un segment de ruta a l\'OsmAnd</string>
     <string name="gpx_option_calculate_first_last_segment">Calcula una ruta OsmAnd al primer i al darrer segment de la ruta</string>
@@ -1268,7 +1268,7 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     
     <string name="osmo_edit_color">Mostra el color</string>
     <string name="gpx_file_is_empty">La traça GPX és buida</string>
-    <string name="shared_string_my_tracks">Totes les traces</string>
+    <string name="shared_string_my_tracks">Traces</string>
     <string name="shared_string_my_favorites">Preferits</string>
     <string name="shared_string_my_places">Preferits</string>
     
@@ -1577,7 +1577,7 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="shared_string_deselect">Desselecciona</string>
     <string name="shared_string_deselect_all">Desselecciona-ho tot</string>
     <string name="shared_string_export">Exporta</string>
-    <string name="shared_string_unexpected_error">S\'ha produït un error inesperat</string>
+    <string name="shared_string_unexpected_error">Error inesperat</string>
     <string name="shared_string_action_template">Acció {0}</string>
     <string name="shared_string_collapse">Redueix</string>
     <string name="shared_string_currently_recording_track">Enregistrament de la traça en curs</string>
@@ -1586,7 +1586,7 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="route_points">Fites</string>
     <string name="welmode_download_maps">Baixa mapes</string>
     <string name="welcome_select_region">Trieu la vostra regió per mostrar correctament els senyals i les normes de circulació:</string>
-    <string name="welcome_text">OsmAnd us permet consultar el mapa de tot el món i navegar per tot arreu sense connexió!</string>
+    <string name="welcome_text">OsmAnd us permet consultar en local el mapa global i navegar sense connexió.</string>
     <string name="welcome_header">Benvingut</string>
     <string name="current_route">Ruta actual</string>
     <string name="rename_failed">No s\'ha pogut canviar el nom.</string>
@@ -1596,7 +1596,7 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="shared_string_release">Alliberat</string>
     <string name="shared_string_message">Missatge</string>
     <string name="agps_data_last_downloaded">Darreres dades A-GPS baixades: %1$s</string>
-    <string name="confirm_usage_speed_cameras">A molts països (Alemanya, França, Itàlia i altres) l\'ús d\'avisadors de radars no és permès per la llei. L\'OsmAnd no assumeix cap responsabilitat si decidiu violar la llei. Premeu a «sí» només si se us permet utilitzar aquesta funció.</string>
+    <string name="confirm_usage_speed_cameras">A molts països (Alemanya, França, Itàlia i altres) l\'ús d\'avisadors de radars és il·legal. L\'OsmAnd no assumeix cap responsabilitat si decidiu violar la llei. Premeu a \'Sí\' només si se us permet utilitzar aquesta funció.</string>
     <string name="agps_info">Informació A-GPS</string>
     <string name="shared_string_show_description">Mostra la descripció.</string>
     <string name="shared_string_do_not_use">No utilitzeu</string>
@@ -1619,7 +1619,7 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="index_name_netherlands">Europa - Països Baixos</string>
     <string name="rendering_value__name">Per defecte</string>
     <string name="rendering_value_highContrastRoads_name">Vies més contrastades</string>
-    <string name="application_dir_change_warning3">Voleu que l\'OsmAnd també copiï els seus fitxers de dades a la nova destinació?</string>
+    <string name="application_dir_change_warning3">Voleu que copiï els seus fitxers de dades a la nova destinació?</string>
     <string name="specified_directiory_not_writeable">Creació de mapes al directori indicat fallida</string>
     <string name="copying_osmand_file_failed">Error en copiar fitxers</string>
     <string name="storage_directory_external">Emmagatzematge exterior</string>
@@ -1652,7 +1652,7 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="disable_recording_once_app_killed_descrp">L\'enregistrament en format GPX s\'aturarà quan ho faci OsmAnd (via les aplicacions recents). (La indicació de procés de fons de l\'OsmAnd desapareixerà de la barra de notificacions d\'Android)</string>
     <string name="shared_string_import2osmand">Importa a l\'OsmAnd</string>
     <string name="local_recordings_delete_all_confirm">Esteu a punt d\'esborrar %1$d notes. N\'esteu segur?</string>
-    <string name="archive_wikipedia_data">Teniu dades baixades de Viquipèdia, antigues i incompatibles. Les voleu desar?</string>
+    <string name="archive_wikipedia_data">Teniu dades de Viquipèdia antigues i incompatibles. Les voleu desar?</string>
     <string name="download_wikipedia_files">Voleu baixar dades addicionals de la Viquipèdia (%1$s MB) ?</string>
     <string name="lang_vo">Volapük</string>
     <string name="lang_th">Tailandès</string>
@@ -1703,7 +1703,7 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="rendering_value_translucent_blue_name">Blau translúcid</string>
     <string name="rendering_value_purple_name">Porpra</string>
     <string name="rendering_value_translucent_purple_name">Porpra translúcid</string>
-    <string name="restart_is_required">Per aplicar totalment els canvis, cal que reinicieu manualment l\'aplicació.</string>
+    <string name="restart_is_required">Reinicieu manualment l\'aplicació per aplicar tots els canvis.</string>
     <string name="rendering_value_default13_name">Per defecte (13)</string>
     <string name="rendering_value_defaultTranslucentCyan_name">Per defecte (cian translúcid)</string>
     <string name="do_you_like_osmand">Us agrada OsmAnd?</string>
@@ -1796,7 +1796,7 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="downloads">Baixades</string>
     <string name="activate_seamarks_plugin">Activeu el connector de \'Cartes marines\'</string>
     <string name="activate_srtm_plugin">Activeu el connector de corbes de nivell</string>
-    <string name="favorite_category_dublicate_message">El nom de categoria especificat ja existeix. Utilitzeu un nom diferent.</string>
+    <string name="favorite_category_dublicate_message">Utilitzeu un nom de categoria nou que encara no existeixi.</string>
     <string name="favorite_category_name">Nom de categoria</string>
     <string name="favorite_category_add_new_title">Afegeix una nova categoria</string>
     <string name="confirm_download_roadmaps">N\'esteu segur de baixar el mapa amb només carreteres, quan ja teniu el mapa normal (complet)?</string>
@@ -2724,7 +2724,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="by_date">Per data</string>
     <string name="by_type">Per tipus</string>
     <string name="modify_the_search_query">Modifica la consulta de cerca.</string>
-    <string name="release_3_0">\\022 Nou menú Viatge: consulta articles de Viquiviatges sense internet
+    <string name="release_3_0"> Nou menú Viatge: consulta articles de Viquiviatges sense internet
 \n
 \n• Viquipèdia: nova imatge, enllaços actius, imatges
 \n
@@ -2923,4 +2923,5 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="default_render_descr">Estil de propòsit general. Renderitzat simplificat i més clar dins les ciutats densament poblades. Principals característiques: Corbes de nivell, vies, tipus de superfície, restriccions d\'accés, codis de les carreteres, camins representats segons l\'escala de SAC, característiques per esports aquàtics.</string>
     <string name="access_intermediate_arrival_time">Temps de pas</string>
     <string name="map_widget_intermediate_time">Temps de pas</string>
+    <string name="read_wikipedia_offline_description">Aconseguiu una subscripció OsmAnd Live per llegir articles de Viquipèdia i ViquiViatges sense connexió.</string>
     </resources>

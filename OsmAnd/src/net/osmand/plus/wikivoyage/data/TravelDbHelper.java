@@ -34,6 +34,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -47,7 +48,6 @@ public class TravelDbHelper {
 
 	private static final String ARTICLES_TABLE_NAME = "travel_articles";
 	private static final String POPULAR_TABLE_NAME = "popular_articles";
-	private static final String ARTICLES_COL_ID = "article_id";
 	private static final String ARTICLES_POP_INDEX = "popularity_index";
 	private static final String ARTICLES_POP_ORDER = "order_index";
 	private static final String ARTICLES_COL_TITLE = "title";
@@ -64,7 +64,6 @@ public class TravelDbHelper {
 	private static final String ARTICLES_COL_AGGREGATED_PART_OF = "aggregated_part_of";
 
 	private static final String ARTICLES_TABLE_SELECT = "SELECT " +
-			ARTICLES_COL_ID + ", " +
 			ARTICLES_COL_TITLE + ", " +
 			ARTICLES_COL_CONTENT + ", " +
 			ARTICLES_COL_IS_PART_OF + ", " +
@@ -417,7 +416,8 @@ public class TravelDbHelper {
 	}
 
 	@NonNull
-	public LinkedHashMap<WikivoyageSearchResult, List<WikivoyageSearchResult>> getNavigationMap(final TravelArticle article) {
+	public LinkedHashMap<WikivoyageSearchResult, List<WikivoyageSearchResult>> getNavigationMap(
+			final TravelArticle article) {
 		String lang = article.getLang();
 		String title = article.getTitle();
 		if (TextUtils.isEmpty(lang) || TextUtils.isEmpty(title)) {
@@ -437,24 +437,25 @@ public class TravelDbHelper {
 		}
 		Map<String, List<WikivoyageSearchResult>> navMap = new HashMap<>();
 		SQLiteConnection conn = openConnection();
-		Set<String> headers = null;
+		Set<String> headers = new LinkedHashSet<String>();
 		Map<String, WikivoyageSearchResult> headerObjs = new HashMap<>();
 		if (conn != null) {
 			List<String> params = new ArrayList<>();
-			StringBuilder query = new StringBuilder("SELECT a.trip_id, a.title, a.lang, a.is_part_of " +
-					"FROM travel_articles a WHERE is_part_of = ? and lang = ? ");
+			StringBuilder query = new StringBuilder("SELECT a.trip_id, a.title, a.lang, a.is_part_of "
+					+ "FROM travel_articles a WHERE is_part_of = ? and lang = ? ");
 			params.add(title);
 			params.add(lang);
+			
 			if (parts != null && parts.length > 0) {
-				headers = new HashSet<>(Arrays.asList(parts));
+				headers.addAll(Arrays.asList(parts));
 				headers.add(title);
-				query.append("UNION SELECT a.trip_id, a.title, a.lang, a.is_part_of " +
-						"FROM travel_articles a WHERE title = ? and lang = ? ");
+				query.append("UNION SELECT a.trip_id, a.title, a.lang, a.is_part_of "
+						+ "FROM travel_articles a WHERE title = ? and lang = ? ");
 				params.add(parts[0]);
 				params.add(lang);
 				for (String part : parts) {
-					query.append("UNION SELECT a.trip_id, a.title, a.lang, a.is_part_of " +
-							"FROM travel_articles a WHERE is_part_of = ? and lang = ? ");
+					query.append("UNION SELECT a.trip_id, a.title, a.lang, a.is_part_of "
+							+ "FROM travel_articles a WHERE is_part_of = ? and lang = ? ");
 					params.add(part);
 					params.add(lang);
 				}
@@ -482,23 +483,21 @@ public class TravelDbHelper {
 			cursor.close();
 		}
 		LinkedHashMap<WikivoyageSearchResult, List<WikivoyageSearchResult>> res = new LinkedHashMap<>();
-		if (parts != null) {
-			for (String header : parts) {
-				WikivoyageSearchResult searchResult = headerObjs.get(header);
-				List<WikivoyageSearchResult> results = navMap.get(header);
-				if (results != null) {
-					Collections.sort(results, new Comparator<WikivoyageSearchResult>() {
-						@Override
-						public int compare(WikivoyageSearchResult o1, WikivoyageSearchResult o2) {
-							return collator.compare(o1.articleTitles.get(0), o2.articleTitles.get(0));
-						}
-					});
-					WikivoyageSearchResult emptyResult = new WikivoyageSearchResult();
-					emptyResult.articleTitles.add(header);
-					emptyResult.tripId = -1;
-					searchResult = searchResult != null ? searchResult : emptyResult;
-					res.put(searchResult, results);
-				}
+		for (String header : headers) {
+			WikivoyageSearchResult searchResult = headerObjs.get(header);
+			List<WikivoyageSearchResult> results = navMap.get(header);
+			if (results != null) {
+				Collections.sort(results, new Comparator<WikivoyageSearchResult>() {
+					@Override
+					public int compare(WikivoyageSearchResult o1, WikivoyageSearchResult o2) {
+						return collator.compare(o1.articleTitles.get(0), o2.articleTitles.get(0));
+					}
+				});
+				WikivoyageSearchResult emptyResult = new WikivoyageSearchResult();
+				emptyResult.articleTitles.add(header);
+				emptyResult.tripId = -1;
+				searchResult = searchResult != null ? searchResult : emptyResult;
+				res.put(searchResult, results);
 			}
 		}
 		return res;
@@ -567,24 +566,23 @@ public class TravelDbHelper {
 	private TravelArticle readArticle(SQLiteCursor cursor) {
 		TravelArticle res = new TravelArticle();
 
-		res.id = cursor.getString(0);
-		res.title = cursor.getString(1);
+		res.title = cursor.getString(0);
 		try {
-			res.content = Algorithms.gzipToString(cursor.getBlob(2));
+			res.content = Algorithms.gzipToString(cursor.getBlob(1));
 		} catch (IOException e) {
 			LOG.error(e.getMessage(), e);
 		}
-		res.isPartOf = cursor.getString(3);
-		res.lat = cursor.isNull(4) ? Double.NaN : cursor.getDouble(4);
-		res.lon = cursor.isNull(5) ? Double.NaN : cursor.getDouble(5);
-		res.imageTitle = cursor.getString(6);
-		res.tripId = cursor.getLong(8);
-		res.originalId = cursor.isNull(9) ? 0 : cursor.getLong(9);
-		res.lang = cursor.getString(10);
-		res.contentsJson = cursor.getString(11);
-		res.aggregatedPartOf = cursor.getString(12);
+		res.isPartOf = cursor.getString(2);
+		res.lat = cursor.isNull(3) ? Double.NaN : cursor.getDouble(3);
+		res.lon = cursor.isNull(4) ? Double.NaN : cursor.getDouble(4);
+		res.imageTitle = cursor.getString(5);
+		res.tripId = cursor.getLong(7);
+		res.originalId = cursor.isNull(8) ? 0 : cursor.getLong(8);
+		res.lang = cursor.getString(9);
+		res.contentsJson = cursor.getString(10);
+		res.aggregatedPartOf = cursor.getString(11);
 		try {
-			String gpxContent = Algorithms.gzipToString(cursor.getBlob(7));
+			String gpxContent = Algorithms.gzipToString(cursor.getBlob(6));
 			res.gpxFile = GPXUtilities.loadGPXFile(application, new ByteArrayInputStream(gpxContent.getBytes("UTF-8")));
 		} catch (IOException e) {
 			LOG.error(e.getMessage(), e);

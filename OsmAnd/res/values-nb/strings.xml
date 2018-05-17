@@ -2604,9 +2604,6 @@
     <string name="distance_indication_descr">Velg hvordan avstanden til aktive markører skal vises.</string>
     <string name="active_markers_descr">Velg antall aktive markører som skal vises.</string>
     <string name="tap_on_map_to_hide_interface_descr">Et trykk på kartet skjuler/viser kontrollknappene og miniprogrammene.</string>
-    <string name="release_3_0">\\022 
-\n
-\n</string>
     <string name="mark_passed">Marker som passert</string>
     <string name="osn_modify_dialog_error">Kunne ikke endre notatet</string>
     <string name="quick_action_auto_zoom_desc">Trykking på denne handlingsknappen slår av/på automatisk kartforstørrelse i henhold til hastigheten din.</string>

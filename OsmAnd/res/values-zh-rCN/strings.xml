@@ -2668,9 +2668,6 @@
     <string name="additional_actions">额外的活动</string>
     <string name="av_locations_selected_desc">GPX文件，包含所选笔记的坐标和数据。</string>
     <string name="av_locations_all_desc">GPX文件，包含所有注释的坐标和数据。</string>
-    <string name="release_3_0">\\022 
-\n
-\n</string>
     <string name="modify_the_search_query">修改搜索查询。</string>
     <string name="shared_string_actions">操作</string>
     <string name="shared_string_marker">标记</string>

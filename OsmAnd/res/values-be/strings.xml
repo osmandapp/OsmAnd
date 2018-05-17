@@ -3004,9 +3004,6 @@
     <string name="empty_state_av_notes">Рабі нататкі!</string>
     <string name="empty_state_av_notes_desc">Дадайце аўдыё-, відэа- ці фотанататку на любую кропку на мапе, выкарыстоўваючы віджэт ці кантэкстнае меню.</string>
     <string name="modify_the_search_query">Зьмяніце пошукавы запыт.</string>
-    <string name="release_3_0">\\022 
-\n
-\n</string>
     <string name="what_is_here">Што тут:</string>
     <string name="parked_at">прыпаркаваны на</string>
     <string name="pick_up_till">Узяць да</string>
@@ -3014,11 +3011,6 @@
     <string name="context_menu_read_full_article">Чытаць увесь артыкул</string>
     <string name="context_menu_read_article">Чытаць артыкул</string>
     <string name="context_menu_points_of_group">Усе кропкі групы</string>
-    
-    
-    
-    
-    
     <string name="additional_actions">Дадатковыя дзеяньні</string>
     <string name="av_locations_selected_desc">GPX-файл з каардынатамі і данымі выбраных нататак.</string>
     <string name="av_locations_all_desc">GPX-файл з каардынатамі і данымі ўсіх нататак.</string>
@@ -3198,4 +3190,6 @@
     <string name="shared_string_bookmark">Закладка</string>
     <string name="off_road_render_descr">Падыходзіць для выкарыстання падчас кіравання па бездарожжы. Падыходзіць для выкарыстання з зялёнымі спадарожнікавымі здымкамі ў якасць падкладкі. Аснойныя асаблівасці: паменшаная таўшчыня асноўных дарог, павялічаная таўшчыня дарожак, сцяжын, роварных і іншых маршрутаў. Заснаваны на стылі «Topo».</string>
     <string name="touring_view_render_descr">Высокадэталізаваны стыль для турыстычнах мэт. Уключае ў сябе ўсе параметры канфігурацыі агаданага стылю і, акрамя таго: паказвае, як мага больш дэталяў, наколькі гэта магчыма, у прыватнасці, усе дарогі, шляхі і іншыя спосабы перамяшчэння. Ясна візуалізуе адрозненне паміж рознымі тыпамі дарог, рэмінісцэнцыя многіх турыстычных атласаў. Высокакантрастная каляровая схема для вулічнага выкарыстання з дзённым і начным рэжымам.</string>
+    <string name="access_intermediate_arrival_time">Прамежкавы час прыбыцця</string>
+    <string name="map_widget_intermediate_time">Прамежкавы час</string>
     </resources>

@@ -3910,4 +3910,8 @@
 	<string name="poi_checkpoint_type_code">Cartel</string>
 	<string name="poi_checkpoint_type_notebook">Portátil (notebook)</string>
 	<string name="poi_checkpoint_type_electronic">Electrónico</string>
-	</resources>
+	<string name="poi_rock">Roca</string>
+
+	<string name="poi_end_date">Fecha de finalización</string>
+
+</resources>

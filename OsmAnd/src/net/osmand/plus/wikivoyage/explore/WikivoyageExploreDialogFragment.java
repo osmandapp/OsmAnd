@@ -45,13 +45,12 @@ public class WikivoyageExploreDialogFragment extends WikiBaseDialogFragment impl
 	private ExploreTabFragment exploreTabFragment;
 	private SavedArticlesTabFragment savedArticlesTabFragment;
 
+	private PicassoUtils utils;
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		Context context = getContext();
-		if (context != null) {
-			PicassoUtils.setupPicasso(context);
-		}
+		utils = PicassoUtils.getPicasso(getMyApplication());
 	}
 
 	@Nullable
@@ -145,12 +144,7 @@ public class WikivoyageExploreDialogFragment extends WikiBaseDialogFragment impl
 		populateData();
 	}
 
-	@Override
-	public void onDestroy() {
-		super.onDestroy();
-		PicassoUtils.clearCachedMap();
-	}
-
+	
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);

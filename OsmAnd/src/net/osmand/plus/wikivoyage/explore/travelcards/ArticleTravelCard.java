@@ -31,11 +31,14 @@ public class ArticleTravelCard extends BaseTravelCard {
 	private FragmentManager fragmentManager;
 	private boolean isLastItem;
 
+	private PicassoUtils picasso;
+
 	public ArticleTravelCard(OsmandApplication app, boolean nightMode, TravelArticle article, FragmentManager fragmentManager) {
 		super(app, nightMode);
 		this.article = article;
 		readIcon = getActiveIcon(R.drawable.ic_action_read_article);
 		this.fragmentManager = fragmentManager;
+		picasso = PicassoUtils.getPicasso(app);
 	}
 
 	@Override
@@ -43,7 +46,7 @@ public class ArticleTravelCard extends BaseTravelCard {
 		if (viewHolder instanceof ArticleTravelVH) {
 			final ArticleTravelVH holder = (ArticleTravelVH) viewHolder;
 			final String url = TravelArticle.getImageUrl(article.getImageTitle(), false);
-			Boolean cached = PicassoUtils.isCached(url);
+			Boolean loaded = picasso.isURLLoaded(url);
 
 			RequestCreator rc = Picasso.get()
 					.load(url);
@@ -53,17 +56,17 @@ public class ArticleTravelCard extends BaseTravelCard {
 						@Override
 						public void onSuccess() {
 							holder.icon.setVisibility(View.VISIBLE);
-							PicassoUtils.setCached(url, true);
+							picasso.setResultLoaded(url, true);
 						}
 
 						@Override
 						public void onError(Exception e) {
 							holder.icon.setVisibility(View.GONE);
-							PicassoUtils.setCached(url, false);
+							picasso.setResultLoaded(url, false);
 						}
 					});
 
-			holder.icon.setVisibility(cached != null && cached ? View.VISIBLE : View.GONE);
+			holder.icon.setVisibility(loaded == null || loaded.booleanValue() ? View.VISIBLE : View.GONE);
 			holder.title.setText(article.getTitle());
 			holder.content.setText(WikiArticleHelper.getPartialContent(article.getContent()));
 			holder.partOf.setText(article.getGeoDescription());

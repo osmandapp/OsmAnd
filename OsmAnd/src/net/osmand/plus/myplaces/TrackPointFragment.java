@@ -878,7 +878,7 @@ public class TrackPointFragment extends OsmandExpandableListFragment implements 
 				row.findViewById(R.id.list_divider).setVisibility(View.GONE);
 				row.setOnClickListener(null);
 				if (group.getType() == GpxDisplayItemType.TRACK_POINTS) {
-					groupTitle.setText(getString(R.string.waypoints));
+					groupTitle.setText(getString(R.string.points));
 					description.setText(getString(R.string.track_points_category_name));
 				} else {
 					groupTitle.setText(getString(R.string.route_points));
