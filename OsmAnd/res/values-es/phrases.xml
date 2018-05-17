@@ -3896,4 +3896,6 @@
 
 	<string name="poi_end_date">Fecha de fin</string>
 
-</resources>
+<string name="poi_checkpoint_type_needler">Perforadora</string>
+	<string name="poi_checkpoint_type_quize">Cuestionario</string>
+	</resources>
