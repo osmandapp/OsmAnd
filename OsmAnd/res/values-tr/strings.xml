@@ -751,7 +751,7 @@
     <string name="context_menu_item_destination_point">Varış noktası olarak ayarla</string>
     <string name="please_select_address">Önce şehir ya da sokak seç</string>
     <string name="search_street_in_neighborhood_cities">Yakın şehirlerde sokak ara</string>
-    <string name="intermediate_items_sort_by_distance">Sırala kapıdan kapıya</string>
+    <string name="intermediate_items_sort_by_distance">kapıdan kapıya sırala</string>
     <string name="local_osm_changes_backup_successful">OSM değişiklik dosyası başarıyla oluşturuldu</string>
     <string name="local_osm_changes_backup_failed">OSM değişikliklerinin yedeklemesi başarısız</string>
     <string name="delete_point">Mevkiyi sil</string>
@@ -777,7 +777,7 @@
     <string name="other_location">Diğer</string>
     <string name="install_paid">Tam sürüm</string>
     <string name="cancel_route">Rotaya son ver</string>
-    <string name="cancel_navigation">Yolbulu durdur</string>
+    <string name="cancel_navigation">Navigasyonu durdur</string>
     <string name="clear_destination">Varış noktasını temizle</string>
     <string name="download_using_mobile_internet">Şu anda Wifi ağına bağlı değil. Mevcut internet bağlantısı ile indirilsin mi?</string>
     <string name="street_name">Sokak Adı</string>
@@ -2054,7 +2054,7 @@
     <string name="add_time_span">Zaman aralığı ekle</string>
     <string name="road_blocked">Yol kapalı</string>
     <string name="shared_string_select">Seç</string>
-    <string name="switch_start_finish">Başlangıç noktası ve varış noktası yerlerini değiştir</string>
+    <string name="switch_start_finish">Rotayı tersine çevir.</string>
     <string name="rendering_attr_hideIcons_name">POI simgeleri</string>
     <string name="number_of_contributors">Katkıcı sayısı</string>
     <string name="number_of_edits">Değişiklik sayısı</string>
@@ -2363,7 +2363,7 @@
     <string name="do_not_use_animations">Animasyon kullanma</string>
     <string name="do_not_use_animations_descr">App animasyonlarını devre dışı bırakır.</string>
     <string name="exit_without_saving">Kaydetmeden çık?</string>
-    <string name="shared_string_options">Seçenekler</string>
+    <string name="shared_string_options">Ayarlar</string>
     <string name="choose_navigation_type">Navigasyon profili seç</string>
     <string name="enter_gpx_name">GPX dosya adı:</string>
     <string name="show_on_map_after_saving">Kaydettikten sonra haritada göster</string>
