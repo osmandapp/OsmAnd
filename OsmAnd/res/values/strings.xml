@@ -57,30 +57,27 @@
     <string name="in_app_purchase_desc_ex">Once purchased, it will be permanently available to you.</string>
     <string name="purchase_unlim_title">Buy - %1$s</string>
     <string name="purchase_subscription_title">Subscribe - %1$s</string>
-
     <string name="wikivoyage_offline">Wikivoyage offline</string>
-
     <string name="unlimited_downloads">Unlimited downloads</string>
     <string name="wikipedia_offline">Wikipedia offline</string>
     <string name="contour_lines_hillshade_maps">Contour lines &amp; Hillshade maps</string>
     <string name="unlock_all_features">Unlock all OsmAnd features</string>
-
     <string name="purchase_dialog_title">Choose plan</string>
     <string name="purchase_dialog_travel_description">Purchase one of the following to read travel articles offline:</string>
     <string name="purchase_dialog_subtitle">Choose suitable item:</string>
     <string name="shared_string_dont">Don\'t</string>
     <string name="shared_string_do">Do</string>
     <string name="shared_string_only_with_wifi">Only on Wi-Fi</string>
-    <string name="wikivoyage_download_pics">Download Pictures</string>
-    <string name="wikivoyage_download_pics_descr">Images from articles can be downloaded for offline use.\n
+    <string name="wikivoyage_download_pics">Download images</string>
+    <string name="wikivoyage_download_pics_descr">Images for articles can be downloaded for offline use.\n
     You can always change the setting in \'Explore\' → \'Options\'.</string>
     <string name="shared_string_wifi_only">Only on Wi-Fi</string>
     <string name="select_travel_book">Select travel book</string>
     <string name="shared_string_travel_book">Travel book</string>
     <string name="online_webpage_warning">Page only available online. Open in web browser?</string>
-    <string name="images_cache">Images cache</string>
+    <string name="images_cache">Image cache</string>
     <string name="delete_search_history">Delete search history</string>
-    <string name="download_images">Show images</string>
+    <string name="download_images">Download images</string>
     <string name="download_maps_travel">Travel guides</string>
     <string name="shared_string_wikivoyage">Wikivoyage</string>
     <string name="article_removed">Article removed</string>
@@ -153,8 +150,8 @@
     <string name="av_locations_selected_desc">GPX file with coordinates and data of the selected notes.</string>
     <string name="av_locations_all_desc">GPX file with coordinates and data of all notes.</string>
     <string name="release_3_0">
-	\u2022 New travel guide functionality: Global offline WikiVoyage articles\n\n
-	\u2022 Wikipedia: New look, active links, images\n\n
+	\u2022 New travel guide functionality: Global offline Wikivoyage articles\n\n
+	\u2022 Wikipedia: New look, active links, images now supported\n\n
 	\u2022 Open Track UI: Support for waypoint groups\n\n
 	\u2022 Map markers: Import of selected groups from GPX files, coordinate input, new look\n\n
 	\u2022 OsmAnd Live data (subscription) now supports all OsmAnd features\n\n
