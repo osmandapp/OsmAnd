@@ -2974,7 +2974,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="empty_state_av_notes_desc">Audio-, Video- oder Fotonotizen zu jedem Punkt auf der Karte über Bedienelement oder Kontextmenü hinzufügen.</string>
     <string name="notes_by_date">Notizen nach Datum</string>
     <string name="tap_on_map_to_hide_interface_descr">Ein Tippen auf die Karte schaltet die Steuerschaltflächen und Bedienelemente um.</string>
-    <string name="release_3_0">• Neue Reiseführer-Funktionalität: WikiVoyage Artikel offline lesen.
+    <string name="release_3_0">• Neue Reiseführer-Funktionalität: Globale offline WikiVoyage Artikel.
 \n• Wikipedia: Neues Layout, anklickbare Links, Bilder.
 \n• Unterstützung der Gruppierung von GPX Wegpunkten
 \n• Kartenmarkierungen: Import auswählbarer Gruppen aus GPX-Dateien, Koordinateneingabe, neues Layout
@@ -3090,13 +3090,13 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="shared_string_travel_book">Reisebuch</string>
     <string name="images_cache">Bilder-Cache</string>
     <string name="download_images">Bilder anzeigen</string>
-    <string name="travel_card_update_descr">Neue Wikivoyage-Daten verfügbar, aktualisieren Sie sie, um sie zu nutzen.</string>
+    <string name="travel_card_update_descr">Neue Wikivoyage-Daten verfügbar, Aktualisierung möglich.</string>
 	<string name="travel_card_download_descr">Laden Sie diese Wikivoyage-Reiseführer herunter, um Artikel zu Orten auf der ganzen Welt ohne Internetverbindung anzuzeigen.</string>
 	<string name="update_is_available">Aktualisierung verfügbar</string>
 	<string name="download_file">Datei herunterladen</string>
     <string name="start_editing_card_image_text">Der kostenlose weltweite Reiseführer, den jeder bearbeiten kann.</string>
     <string name="welcome_to_open_beta_description">Travel basiert auf Wikivoyage. Testen Sie alle Funktionen während des Open-Beta-Tests kostenlos. Danach steht Travel den Abonnenten von OsmAnd Unlimited und den Besitzern von OsmAnd+ zur Verfügung</string>
-    <string name="start_editing_card_description">Sie können und sollten jeden Artikel auf Wikivoyage bearbeiten. Teilen Sie Wissen, Erfahrung, Talent und Ihre Aufmerksamkeit</string>
+    <string name="start_editing_card_description">Sie können und sollten Artikel auf Wikivoyage bearbeiten. Teilen Sie Wissen, Erfahrung, Talent und Ihre Aufmerksamkeit</string>
     <string name="start_editing">Bearbeitung starten</string>
     <string name="get_unlimited_access">Erhalten Sie unbegrenzten Zugang</string>
     <string name="welcome_to_open_beta">Willkommen zur Open Beta</string>
@@ -3153,7 +3153,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="default_render_descr">Universeller Stil. Vereinfachte, sauberere Darstellung in dicht besiedelten Städten. Hauptmerkmale: Höhenlinien, Routen, Oberflächenqualität, Zufahrtsbeschränkungen, Straßenschilder, Wegeführung nach SAC-Skala, Wildwassersportmerkmale.</string>
     <string name="shared_string_bookmark">Lesezeichen</string>
     <string name="off_road_render_descr">Geeignet für den Einsatz im Gelände. Geeignet für die Verwendung mit grünen Satellitenbildern als Unterlagekarte. Wichtige Punkte: Reduzierte Hauptstraßendicke, erhöhte Dicke von Strecken, Wegen, Fahrrädern und anderen Routen. Basiert auf dem \'Topo\'-Stil.</string>
-    <string name="touring_view_render_descr">Hoch detaillierter Stil für Touringzwecke. Enthält zusätzlich alle Konfigurationsoptionen des Standardstils: zeigt so viele Details wie möglich an, insbesondere alle Straßen, Wege und andere Reisemöglichkeiten. Klare visuelle Unterscheidung zwischen den verschiedenen Straßentypen, die an viele Tourenatlanten erinnern. Kontrastreiches Farbschema für den Außenbereich, Tag- und Nachtmodus.</string>
+    <string name="touring_view_render_descr">Hoch detaillierter Stil für Touringzwecke. Enthält alle Konfigurationsoptionen des Standardstils, zusätzlich: Zeigt so viele Details wie möglich an, insbesondere alle Straßen, Wege und andere Reisemöglichkeiten. Klare visuelle Unterscheidung zwischen den verschiedenen Straßentypen, ähnlich vielen Tourenatlanten. Kontrastreiches Farbschema für den Außenbereich, Tag- und Nachtmodus.</string>
     <string name="access_intermediate_arrival_time">Ankunftszeit Zwischenziel</string>
     <string name="map_widget_intermediate_time">Reisezeit Zwischenziel</string>
     </resources>
