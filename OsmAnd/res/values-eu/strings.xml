@@ -2004,7 +2004,7 @@ Eskuragarri {2} MB besterik ez daude.</string>
     <string name="proxy_pref_title">Proxya</string>
     <string name="proxy_pref_descr">Zehaztu proxy zerbitzari bat.</string>
     <string name="settings_privacy">Pribatutasuna</string>
-    <string name="points">Puntuak</string>
+    <string name="shared_string_gpx_points">Puntuak</string>
     <string name="speak_pedestrian">Zebrabideak</string>
     <string name="rendering_value__name">Lehenetsia</string>
     <string name="rendering_value_default_name">Lehenetsia</string>

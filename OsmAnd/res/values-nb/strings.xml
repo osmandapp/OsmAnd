@@ -1106,7 +1106,7 @@
     <string name="rendering_attr_streetLighting_name">Gatebelysning</string>
     <string name="edit_group">Rediger gruppe</string>
     <string name="parking_place">Parkeringsplass</string>
-    <string name="points">Punkter</string>
+    <string name="shared_string_gpx_points">Punkter</string>
 
     <string name="gps_status">GPS-status</string>
     <string name="location_on_map">Posisjon:

@@ -1613,7 +1613,7 @@ Nyttjat utrymme är {1} MB.
     <string name="gps_status">GPS-status</string>
     <string name="version_settings_descr">Hämta \"nattversioner\".</string>
     <string name="version_settings">Versioner</string>
-    <string name="points">Punkter</string>
+    <string name="shared_string_gpx_points">Punkter</string>
 
 
     <string name="shared_string_disabled">Inaktiverad</string>

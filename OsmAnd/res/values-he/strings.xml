@@ -1687,7 +1687,7 @@
     <string name="proxy_pref_title">מתווך</string>
     <string name="proxy_pref_descr">ציון שרת מתווך.</string>
     <string name="settings_privacy">פרטיות</string>
-    <string name="points">נקודות</string>
+    <string name="shared_string_gpx_points">נקודות</string>
     <string name="navigation_over_track">להתחיל ניווט לאורך המסלול?</string>
     <string name="speak_pedestrian">מעברי חציה</string>
     <string name="rendering_attr_roadStyle_name">סגנון דרך</string>

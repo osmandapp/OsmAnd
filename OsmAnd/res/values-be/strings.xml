@@ -1650,7 +1650,7 @@
     <string name="rendering_attr_streetLighting_name">Вулічнае асьвятленьне</string>
     <string name="version_settings_descr">Сцягваць начныя зборкі.</string>
     <string name="version_settings">Зборкі</string>
-    <string name="points">Пункты</string>
+    <string name="shared_string_gpx_points">Пункты</string>
     
     
     <string name="gps_status">Стан GPS</string>

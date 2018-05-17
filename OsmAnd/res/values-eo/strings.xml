@@ -549,7 +549,7 @@ Lon: %2$s</string>
     <string name="rendering_attr_streetLighting_name">Stratlumigado</string>
     <string name="proxy_pref_title">Retperanto</string>
     <string name="proxy_pref_descr">Agordi retperantan (ang. proxy) servilon.</string>
-    <string name="points">Punktoj</string>
+    <string name="shared_string_gpx_points">Punktoj</string>
     <string name="navigation_over_track">Ĉu ekigi navigadon laŭlonge de spuro?</string>
     <string name="avoid_roads_msg">Elekti evitendajn vojojn por montri alternativajn kursojn</string>
     <string name="speak_pedestrian">Pasejoj zebrostriaj</string>

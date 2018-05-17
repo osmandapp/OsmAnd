@@ -1486,7 +1486,7 @@ Proporčná pamäť %4$s MB (Limit Androidu %5$s MB, Dalvik %6$s MB).</string>
     <string name="proxy_port_descr">Nastaviť port proxy servera (napr. 8118).</string>
     <string name="version_settings_descr">Stiahnuť vývojové verzie.</string>
     <string name="version_settings">Verzie</string>
-    <string name="points">Body</string>
+    <string name="shared_string_gpx_points">Body</string>
     <string name="parking_place">Miesto zaparkovania</string>
     <string name="remove_the_tag">ODSTRÁNIŤ ZNAČKU</string>
     <string name="gps_status">Stav GPS</string>

@@ -1881,7 +1881,7 @@
     <string name="version_settings">构建</string>
     <string name="rendering_attr_streetLighting_name">街道照明</string>
     <string name="proxy_pref_descr">设置代理互联网通信</string>
-    <string name="points">点</string>
+    <string name="shared_string_gpx_points">点</string>
     <string name="navigation_over_track">开始沿着轨道导航吗？</string>
     <string name="avoid_roads_msg">您可以选择一条需绕开的道路以触发路线重新规划</string>
     <string name="speak_pedestrian">步行街道</string>

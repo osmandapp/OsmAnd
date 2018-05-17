@@ -295,7 +295,7 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 		}
 		articleToolbarText.setText(article.getTitle());
 		if (article.getGpxFile() != null && article.getGpxFile().getPointsSize() > 0) {
-			trackButton.setText(getString(R.string.points) + " (" + article.getGpxFile().getPointsSize() + ")");
+			trackButton.setText(getString(R.string.shared_string_gpx_points) + " (" + article.getGpxFile().getPointsSize() + ")");
 			webViewClient.setArticle(article);
 		}
 

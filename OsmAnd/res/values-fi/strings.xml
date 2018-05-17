@@ -1306,7 +1306,7 @@ Maailmanlaajuiset tiedot (välillä 70 astetta pohjoista ja 70 astetta eteläist
     <string name="proxy_pref_title">Proxy</string>
     <string name="proxy_pref_descr">Aseta internet yhteyden proxy</string>
     <string name="settings_privacy">Yksityisyys</string>
-    <string name="points">Pisteet</string>
+    <string name="shared_string_gpx_points">Pisteet</string>
     <string name="navigation_over_track">Aloita suunnistus jäljen mukaan?</string>
     <string name="speak_pedestrian">Suojatiet</string>
     <string name="rendering_attr_roadStyle_name">Tien tyyli</string>

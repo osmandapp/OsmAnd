@@ -1725,7 +1725,7 @@ OsmAnd ir atvērtā koda navigācijas aplikācija ar piekļuvi vispusīgiem Open
     <string name="proxy_pref_title">Proxy</string>
     <string name="proxy_pref_descr">Izveidot savienojumu caur proxy</string>
     <string name="settings_privacy">Privātums</string>
-    <string name="points">Punkti</string>
+    <string name="shared_string_gpx_points">Punkti</string>
     
 	<string name="navigation_over_track">Sākt navigāciju pa trasi?</string>
 	<string name="avoid_roads_msg">Jūs varat izmainīt maršrutu, atzīmējot ceļus, pa kuriem nebraukt</string>

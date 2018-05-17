@@ -1513,7 +1513,7 @@
     <string name="rendering_attr_OSMMapperAssistant_name">OSM asistent za mapiranje</string>
 	<string name="record_plugin_name">Bilježenje putovanja</string>
 	<string name="rendering_attr_roadStyle_name">Stil ceste</string>
-    <string name="points">Točke</string>
+    <string name="shared_string_gpx_points">Točke</string>
 	<string name="rendering_value_highContrastRoads_name">Visoki kontrast ceste</string>
 	<string name="routing_attr_no_new_routing_description">Nemojte koristiti pravila usmjeravanje uvedena u v1.9</string>
     

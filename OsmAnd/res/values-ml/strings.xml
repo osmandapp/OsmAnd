@@ -263,7 +263,7 @@
     <string name="edit_group">"ഗ്രൂപ്പ് എഡിറ്റ് ചെയ്യുക "</string>
     <string name="version_settings_descr">നൈറ്റിലി ബില്‍ഡ് വേര്‍ഷന്‍ ഡൗണ്‍ലോഡ് ചെയ്യുക</string>
     <string name="rendering_attr_streetLighting_name">"തെരുവിളക്ക് "</string>
-    <string name="points">പോയിന്റുകള്‍</string>
+    <string name="shared_string_gpx_points">പോയിന്റുകള്‍</string>
     <string name="rendering_attr_roadStyle_name">റോഡ് സ്ടൈല്‍</string>
     <string name="rendering_attr_roadStyle_description">റോഡ് സ്ടൈല്‍</string>
     <string name="map_locale">ഭൂപട ഭാഷ(Map Language)</string>

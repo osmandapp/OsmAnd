@@ -1545,7 +1545,7 @@
     <string name="version_settings">Compilaciones</string>
     <string name="gps_status">Estado del GPS</string>
     <string name="rendering_attr_streetLighting_name">Alumbrado público</string>
-    <string name="points">Puntos</string>
+    <string name="shared_string_gpx_points">Puntos</string>
     <string name="shared_string_my_location">Mi ubicación</string>
     <string name="parking_place">Lugar de aparcamiento</string>
     <string name="remove_the_tag">QUITAR ETIQUETA</string>

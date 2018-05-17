@@ -1333,7 +1333,7 @@
     <string name="text_size">Mărimea textului</string>
     <string name="rendering_attr_streetLighting_name">Lumină stradală</string>
     <string name="proxy_pref_title">Proxy</string>
-    <string name="points">Puncte</string>
+    <string name="shared_string_gpx_points">Puncte</string>
     <string name="shared_string_my_location">Poziția mea</string>
     
 	<string name="home_button">Acasă</string>

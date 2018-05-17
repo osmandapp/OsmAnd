@@ -1655,7 +1655,7 @@ Tam prireiks {1} MB pastoviam saugojimui.
     <string name="proxy_pref_title">Proksi serveris</string>
     <string name="proxy_pref_descr">Nurodyti proksi serverį.</string>
     <string name="settings_privacy">Privatumas</string>
-    <string name="points">Taškai</string>
+    <string name="shared_string_gpx_points">Taškai</string>
 
     <string name="shared_string_my_location">Mano dabartinė vieta</string>
 

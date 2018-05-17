@@ -1226,7 +1226,7 @@
     <string name="shared_string_collapse">Yığışdır</string>
     <string name="route_points">Marşrut nöqtələri</string>
     <string name="srtm_plugin_name">Kontur xətləri</string>
-    <string name="points">Nöqtələr</string>
+    <string name="shared_string_gpx_points">Nöqtələr</string>
     <string name="traffic_warning_pedestrian">Piyada keçidi</string>
     <string name="show_pedestrian_warnings">Piyada keçidləri</string>
     <string name="navigate_point_zone">Zona</string>

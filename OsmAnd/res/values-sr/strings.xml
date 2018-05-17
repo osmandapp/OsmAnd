@@ -389,7 +389,7 @@
     <string name="gps_status">Стање GPS-а</string>
     <string name="version_settings_descr">Преузми ноћне изградње.</string>
     <string name="version_settings">Изградње</string>
-    <string name="points">Тачке</string>
+    <string name="shared_string_gpx_points">Тачке</string>
     
     <string name="shared_string_my_location">Мој положај</string>
     

@@ -1212,7 +1212,7 @@
     <string name="edit_group">Grubu düzenle</string>
     <string name="parking_place">Park yeri</string>
     <string name="gps_status">GPS durumu</string>
-    <string name="points">Noktalar</string>
+    <string name="shared_string_gpx_points">Noktalar</string>
 	<string name="rendering_attr_roadStyle_name">Yol tarzı</string>
     <string name="rendering_value__name">Varsayılan</string>
     <string name="rendering_value_default_name">Standart</string>

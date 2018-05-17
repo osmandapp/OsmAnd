@@ -1699,7 +1699,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="enable_proxy_title">Activer le mandataire HTTP (Proxy)</string>
     <string name="version_settings_descr">Télécharger les versions en cours de développement.</string>
     <string name="version_settings">Versions de développement</string>
-    <string name="points">Points</string>
+    <string name="shared_string_gpx_points">Points</string>
 
     <string name="shared_string_my_location">Ma position</string>
 

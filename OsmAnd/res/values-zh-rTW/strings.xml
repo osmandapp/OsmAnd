@@ -1628,7 +1628,7 @@
     <string name="proxy_port_descr">組態您代理伺服器的埠號 (例如 8118)。</string>
     <string name="version_settings_descr">下載 nightly builds 版。</string>
     <string name="version_settings">建構</string>
-    <string name="points">點</string>
+    <string name="shared_string_gpx_points">點</string>
 
 
     <string name="gps_status">GPS 狀態</string>

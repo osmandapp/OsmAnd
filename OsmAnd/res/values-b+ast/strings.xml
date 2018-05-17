@@ -283,7 +283,7 @@
 	<string name="rendering_value_translucent_lightgreen_name">Verde claro tresllúcido</string>
 	<string name="rendering_value_lightblue_name">Azul claro</string>
 	<string name="rendering_value_translucent_lightblue_name">Azul claro tresllúcido</string>
-<string name="points">Puntos</string>
+<string name="shared_string_gpx_points">Puntos</string>
     <string name="map_locale">Llingua del mapa</string>
     <string name="map_update">Anovamientos disponibles pa %1$s mapes</string>
     <string name="lock_screen_request_explanation">%1$s precisa esti permisu p\'apagar la pantalla pola carauterística d\'aforru d\'enerxía.</string>

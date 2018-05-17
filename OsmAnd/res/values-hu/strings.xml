@@ -1649,7 +1649,7 @@ Proporcionális memória %4$s MB (Android korlát %5$s MB, Dalvik %6$s MB).</str
     <string name="proxy_pref_title">Proxy</string>
     <string name="proxy_pref_descr">Internet proxy beállítása.</string>
     <string name="settings_privacy">Adatvédelem</string>
-    <string name="points">Pontok</string>
+    <string name="shared_string_gpx_points">Pontok</string>
 
     <string name="shared_string_my_location">Saját pozícióm</string>
 

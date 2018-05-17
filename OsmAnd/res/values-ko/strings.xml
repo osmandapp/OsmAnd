@@ -1718,7 +1718,7 @@
 	<string name="proxy_port_descr">당신의 프록시 포트 번호 구성 (예: 8118)</string>
 	<string name="version_settings_descr">야간 빌드를 다운로드</string>
     <string name="version_settings">빌드</string>
-    <string name="points">장소</string>
+    <string name="shared_string_gpx_points">장소</string>
     
     
     <string name="gps_status">GPS status 앱</string>

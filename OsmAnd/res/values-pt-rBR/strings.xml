@@ -202,7 +202,7 @@
 	<string name="osmand_development_plugin_description">Este complemento exibe configurações de desenvolvimento e recursos de depuração como testar ou simular o roteamento, o desempenho de renderização de tela ou instruções de voz. Essas configurações são destinadas a desenvolvedores e não são necessárias para o usuário comum.</string>
 	<string name="proxy_pref_descr">Configurar proxy</string>
     <string name="settings_privacy">Privacidade</string>
-    <string name="points">Pontos</string>
+    <string name="shared_string_gpx_points">Pontos</string>
 	<string name="navigation_over_track">Iniciar a navegação pela trilha?</string>
 	<string name="speak_pedestrian">Travessias de pedestre</string>
     <string name="rendering_attr_roadStyle_name">Estilo das vias</string>

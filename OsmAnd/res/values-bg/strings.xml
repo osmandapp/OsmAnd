@@ -1476,7 +1476,7 @@
     <string name="proxy_pref_title">Прокси</string>
     <string name="proxy_pref_descr">Настройка на прокси интернет комуникация</string>
     <string name="settings_privacy">Поверителност</string>
-    <string name="points">Точки</string>
+    <string name="shared_string_gpx_points">Точки</string>
     <string name="record_plugin_description">"Тази добавка позволява записване на изминатия път в GPX файл. Записът може да се активира чрез докосване на бутон на главния екран или автоматично при стартиране на навигацията.\n\nЗаписаните следи могат да бъдат споделяни или да се изпращат към OSM. Спортистите могат да използват записаните следи за да проследят своя напредък. Основните данни на следата можете да видите директно в OsmAnd, като междинни времена, средната скорост и т.н. По-късно можете да анализирате следите в специални приложения за целта. "</string>
     <string name="navigation_over_track">Стартиране на навигацията по маршрута?</string>
     <string name="save_track_to_gpx_globally_headline">Запис на следа при поискване</string>

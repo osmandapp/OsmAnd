@@ -1780,7 +1780,7 @@ Długość %2$s</string>
     <string name="nautical_maps_missing">Aby wyświetlać mapy żeglugowe, należy pobrać specjalną mapę offline</string>
     <string name="remove_the_tag">Usuń znacznik</string>
     <string name="version_settings">Kompilacje</string>
-    <string name="points">Punkty</string>
+    <string name="shared_string_gpx_points">Punkty</string>
     <string name="navigation_over_track">Rozpocząć nawigowanie wzdłuż śladu?</string>
     <string name="save_track_to_gpx_globally_headline">Zapis śladu na żądanie</string>
     <string name="enable_proxy_descr">Konfiguruje proxy HTTP dla wszystkich zapytań sieciowych.</string>

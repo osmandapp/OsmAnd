@@ -155,7 +155,7 @@ Lon %2$s</string>
     <string name="rendering_attr_streetLighting_name">Alumbrado público</string>
     <string name="proxy_pref_title">Proxy</string>
     <string name="settings_privacy">Privacidad</string>
-    <string name="points">Puntos</string>
+    <string name="shared_string_gpx_points">Puntos</string>
     <string name="navigation_over_track">¿Iniciar la navegación a lo largo de la traza?</string>
     <string name="speak_pedestrian">Cruces peatonales</string>
     <string name="rendering_attr_roadStyle_name">Estilo vial</string>

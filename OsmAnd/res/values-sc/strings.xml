@@ -1660,7 +1660,7 @@ Memòria in proportzione %4$s MB (lìmite de Android %5$s MB, Dalvik %6$s MB).</
     <string name="rendering_attr_streetLighting_name">Illuminatzione pùblica</string>
     <string name="version_settings_descr">Iscàrriga versiones de isvilupu.</string>
     <string name="version_settings">Versiones</string>
-    <string name="points">Puntos</string>
+    <string name="shared_string_gpx_points">Puntos</string>
 
     <string name="shared_string_my_location">Positzione mea</string>
 

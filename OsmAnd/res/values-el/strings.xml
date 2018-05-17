@@ -1552,7 +1552,7 @@
     <string name="voices">Φωνητικές οδηγίες</string>
 	<string name="parking_place">Χώρος στάθμευσης</string>
     <string name="gps_status">Κατάσταση GPS</string>
-    <string name="points">Σημεία</string>
+    <string name="shared_string_gpx_points">Σημεία</string>
     
     
 	<string name="navigation_over_track">Έναρξη πλοήγησης κατά μήκος του ίχνους;</string>

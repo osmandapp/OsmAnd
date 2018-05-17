@@ -1648,7 +1648,7 @@ Omogoča tudi dodajanje opomb v koledar za prikaz opomnikov ob daljših časih p
     <string name="proxy_pref_title">Posredniški strežnik</string>
     <string name="proxy_pref_descr">Nastavi posredniški strežnik.</string>
     <string name="settings_privacy">Zasebnost</string>
-    <string name="points">Točke</string>
+    <string name="shared_string_gpx_points">Točke</string>
 
     <string name="shared_string_my_location">Moj položaj</string>
 

@@ -8,5 +8,5 @@
     <item
         android:id="@+id/action_points"
         android:icon="@drawable/ic_action_group_select_all"
-        android:title="@string/points"/>
+        android:title="@string/shared_string_gpx_points"/>
 </menu>

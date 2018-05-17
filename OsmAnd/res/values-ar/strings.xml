@@ -1182,7 +1182,7 @@
     <string name="proxy_pref_title">بروكسي</string>
     <string name="proxy_pref_descr">تحديد وكيل بروكسي إنترنت.</string>
     <string name="settings_privacy">الخصوصية</string>
-    <string name="points">نقاط</string>
+    <string name="shared_string_gpx_points">نقاط</string>
 	<string name="navigation_over_track">بدء الملاحة على طول المسار؟</string>
 	<string name="avoid_roads_msg">يمكنك تشغيل مسار بديل بتحديد طرق متجنبة</string>
 	<string name="rendering_attr_roadStyle_name">نمط الطريق</string>

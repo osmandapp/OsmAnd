@@ -465,7 +465,7 @@
     <string name="version_settings"/>
     <string name="proxy_pref_title">Apṛuksi</string>
     <string name="settings_privacy">Tabaḍnit</string>
-    <string name="points">Tineqqiḍin</string>
+    <string name="shared_string_gpx_points">Tineqqiḍin</string>
     <string name="rendering_value__name">Amezwer</string>
     <string name="rendering_value_default_name">Amezwer</string>
     <string name="dash_download_manage">Sefrek</string>

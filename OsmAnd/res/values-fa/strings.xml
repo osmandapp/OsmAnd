@@ -1667,7 +1667,7 @@
     <string name="rendering_attr_streetLighting_name">روشنایی خیابان</string>
     <string name="proxy_pref_title">پروکسی</string>
     <string name="proxy_pref_descr">تنظیم پروکسی را انجام دهید.</string>
-    <string name="points">نقاط</string>
+    <string name="shared_string_gpx_points">نقاط</string>
     
     <string name="shared_string_my_location">موقعیت من</string>
     

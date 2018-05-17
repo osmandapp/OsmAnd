@@ -1647,7 +1647,7 @@ Proportionaler Speicher %4$s MB (Android Limit %5$s MB, Dalvik %6$s MB).</string
     <string name="proxy_pref_title">Proxy</string>
     <string name="proxy_pref_descr">Proxyserver angeben.</string>
     <string name="settings_privacy">Privatsphäre</string>
-    <string name="points">Punkte</string>
+    <string name="shared_string_gpx_points">Punkte</string>
     
     <string name="shared_string_my_location">Meine Position</string>
 

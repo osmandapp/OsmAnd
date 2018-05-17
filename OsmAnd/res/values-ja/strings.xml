@@ -1744,7 +1744,7 @@ POIの更新は利用できません</string>
     <string name="proxy_pref_title">プロキシ</string>
     <string name="proxy_pref_descr">インターネット接続のプロキシ設定をします</string>
     <string name="settings_privacy">プライバシー設定</string>
-    <string name="points">地点</string>
+    <string name="shared_string_gpx_points">地点</string>
     
     <string name="shared_string_my_location">現在地点</string>
     
