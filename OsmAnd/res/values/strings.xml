@@ -414,7 +414,7 @@
     <string name="points_delete_multiple">You are going to delete %1$d point(s). Are you sure?</string>
     <string name="route_points_category_name">Turns to pass on this route</string>
     <string name="track_points_category_name">Waypoints, points of interest, named features</string>
-    <string name="gpx_track">GPX file</string>
+    <string name="gpx_track">Track</string>
     <string name="max_speed">Maximum speed</string>
     <string name="average_speed">Average speed</string>
     <string name="shared_string_time_moving">Time moving</string>
@@ -2723,7 +2723,7 @@
     <string name="favourites">Favorites</string>
     <string name="saved_at_time">Now saved at: %1$s</string>
     <string name="poi_deleted_localy">POI will be deleted once you upload your changes</string>
-    <string name="show_gpx">Show GPX</string>
+    <string name="show_gpx">Show GPX data</string>
     <string name="count_of_lines">Count of lines</string>
     <string name="are_you_sure">Are you sure?</string>
     <string name="unsaved_changes_will_be_lost">Any unsaved changes will be lost. Continue?</string>
