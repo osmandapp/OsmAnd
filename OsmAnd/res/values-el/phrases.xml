@@ -1790,6 +1790,30 @@
 	<string name="poi_delivery_only">Μόνο διανομή</string>
 
 	<string name="poi_outdoor_seating_filter_yes">Ναι</string>
-	<string name="poi_outdoor_seating_yes">Εξωτερικά καθίσματα: ναι</string>
-	<string name="poi_outdoor_seating_no">Χωρίς εξωτερικά καθίσματα</string>
+	<string name="poi_outdoor_seating_yes">Εξωτερικές θέσεις: ναι</string>
+	<string name="poi_outdoor_seating_no">Χωρίς εξωτερικές θέσεις</string>
+	<string name="poi_outdoor_seating_terrace">Εξωτερικές θέσεις: ταράτσα</string>
+	<string name="poi_outdoor_seating_sidewalk">Εξωτερικές θέσεις: πεζοδρόμιο</string>
+	<string name="poi_outdoor_seating_pedestrian_zone">Εξωτερικές θέσεις: πεζόδρομος</string>
+	<string name="poi_outdoor_seating_garden">Εξωτερικές θέσεις: κήπος</string>
+	<string name="poi_outdoor_seating_patio">Εξωτερικές θέσεις: αίθριο</string>
+
+	<string name="poi_cocktails_yes">Ναι</string>
+
+	<string name="poi_second_hand_yes">Μεταχειρισμένα είδη</string>
+	<string name="poi_second_hand_no">Όχι μεταχειρισμένα είδη</string>
+	<string name="poi_second_hand_only">Μόνο μεταχειρισμένα είδη</string>
+
+	<string name="poi_service_parts">Κομμάτια</string>
+	<string name="poi_service_dealer">Έμπορος</string>
+	<string name="poi_service_repair">Επισκευή</string>
+	<string name="poi_service_repair_no">Χωρίς επισκευή</string>
+	<string name="poi_service_electrical">Επισκευή ηλεκτρικών οχημάτων</string>
+	<string name="poi_motorcycle_repair">Επισκευή μοτοσικλετών</string>
+	<string name="poi_self_service_yes">Ναι</string>
+	<string name="poi_self_service_no">Χωρίς αυτοεξυπηρέτηση</string>
+	<string name="poi_automated_yes">Ναι</string>
+	<string name="poi_automated_no">Μη αυτόματο</string>
+	<string name="poi_full_service_yes">Πλήρης εξυπηρέτηση</string>
+	<string name="poi_brushless_yes">Ναι</string>
 	</resources>
