@@ -1735,7 +1735,7 @@ Lorratza %2$s</string>
     <string name="access_autoannounce_period_descr">Iragarpenen arteko gutxieneko denbora tartea.</string>
     <string name="access_collapsed_list">Tolestutako zerrenda</string>
     <string name="access_expanded_list">Zabaldutako zerrenda</string>
-    <string name="waypoints">Bide-puntuak</string>
+    <string name="shared_string_waypoints">Bide-puntuak</string>
     <string name="shared_string_waypoint">Bide-puntua</string>
     <string name="gpx_info_waypoints">Bide-puntuak: %1$s</string>
     <string name="configure_map">Konfiguratu mapa</string>

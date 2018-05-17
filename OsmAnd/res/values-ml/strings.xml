@@ -90,7 +90,7 @@
     <string name="distance">ദൂരം</string>
     <string name="index_tours">ടൂര്‍സ്</string>
     <string name="shared_string_all">എല്ലാം</string>
-    <string name="waypoints">വഴിത്തിരിവുകള്‍</string>
+    <string name="shared_string_waypoints">വഴിത്തിരിവുകള്‍</string>
     <string name="targets">ഉദ്ദിഷ്ടസ്ഥലങ്ങള്‍</string>
     <string name="rendering_value_car_name">കാര്‍</string>
     <string name="rendering_value_bicycle_name">സൈക്കിള്‍</string>

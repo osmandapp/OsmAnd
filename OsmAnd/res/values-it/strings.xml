@@ -1511,7 +1511,7 @@ Memoria in proporzione %4$s MB (limite di Android %5$s MB, Dalvik %6$s MB).</str
     <string name="rendering_value_pedestrian_name">Pedone</string>
     <string name="download_additional_maps">Scaricare le mappe mancanti %1$s (%2$d MB)?</string>
 
-    <string name="waypoints">Punti intermedi</string>
+    <string name="shared_string_waypoints">Punti intermedi</string>
     <string name="targets">Destinazioni</string>
     <string name="way_alarms">Avvisi del traffico</string>
     <string name="speak_favorites">Preferiti nelle vicinanze</string>

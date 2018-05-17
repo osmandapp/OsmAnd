@@ -1525,7 +1525,7 @@ Proporcionális memória %4$s MB (Android korlát %5$s MB, Dalvik %6$s MB).</str
 
     <string name="index_tours">Túrák</string>
     <string name="shared_string_all">Összes</string>
-    <string name="waypoints">Útpontok</string>
+    <string name="shared_string_waypoints">Útpontok</string>
     <string name="targets">Célpontok</string>
     <string name="way_alarms">Forgalmi figyelmeztetések</string>
     <string name="speak_favorites">Közeli kedvencek</string>

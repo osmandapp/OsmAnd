@@ -37,7 +37,7 @@ import java.util.List;
  */
 public class DashWaypointsFragment extends DashLocationFragment {
 	public static final String TAG = "DASH_WAYPOINTS_FRAGMENT";
-	public static final int TITLE_ID = R.string.waypoints;
+	public static final int TITLE_ID = R.string.shared_string_waypoints;
 	List<TargetPoint> points = new ArrayList<TargetPoint>();
 	private static boolean SHOW_ALL;
 	public static final DashFragmentData.ShouldShowFunction SHOULD_SHOW_FUNCTION =
@@ -79,7 +79,7 @@ public class DashWaypointsFragment extends DashLocationFragment {
 		} else {
 			(mainView.findViewById(R.id.main_fav)).setVisibility(View.VISIBLE);
 		}		
-		((TextView) mainView.findViewById(R.id.fav_text)).setText(getString(R.string.waypoints));
+		((TextView) mainView.findViewById(R.id.fav_text)).setText(getString(R.string.shared_string_waypoints));
 		((Button) mainView.findViewById(R.id.show_all)).setText(getString(R.string.shared_string_show_all));
 		((Button) mainView.findViewById(R.id.show_all)).setVisibility(View.VISIBLE);
 		((Button) mainView.findViewById(R.id.show_all)).setOnClickListener(new View.OnClickListener() {
@@ -126,7 +126,7 @@ public class DashWaypointsFragment extends DashLocationFragment {
 		});
 		((Button) mainView.findViewById(R.id.show_all)).setVisibility(
 				helper.getIntermediatePoints().size() == 0 ? View.INVISIBLE : View.VISIBLE);
-		((TextView) mainView.findViewById(R.id.fav_text)).setText(getString(R.string.waypoints) + " (" + 
+		((TextView) mainView.findViewById(R.id.fav_text)).setText(getString(R.string.shared_string_waypoints) + " (" + 
 				helper.getIntermediatePointsWithTarget().size()+")");
 		LinearLayout favorites = (LinearLayout) mainView.findViewById(R.id.items);
 		favorites.removeAllViews();

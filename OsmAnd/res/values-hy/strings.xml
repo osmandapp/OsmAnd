@@ -1206,7 +1206,7 @@
     <string name="min_max">Min/Max</string>
     <string name="index_tours">Տուրեր</string>
     <string name="shared_string_all">Բոլորը</string>
-    <string name="waypoints">Կետեր</string>
+    <string name="shared_string_waypoints">Կետեր</string>
     <string name="targets">Նպատակակետեր</string>
     <string name="announce_gpx_waypoints">"GPX  ուղևորության կետեր"</string>
     <string name="download_additional_maps">Ներբեռնեք բացակայող քարտեզները %1$s (%2$d MB)?</string>

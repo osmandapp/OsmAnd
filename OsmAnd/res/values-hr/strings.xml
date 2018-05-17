@@ -1204,7 +1204,7 @@
 	<string name="stop_navigation_service">Prekini</string>
 	<string name="rendering_attr_publicTransportMode_name">Autobus, trolejbus, Shuttle bus</string>
 	<string name="monitoring_settings_descr">Konfigurirajte kako zabilježiti vaše putovanje</string>
-    <string name="waypoints">Međutočke</string>
+    <string name="shared_string_waypoints">Međutočke</string>
     <string name="rendering_attr_subwayMode_name">Podzemna željeznica</string>
  	
     

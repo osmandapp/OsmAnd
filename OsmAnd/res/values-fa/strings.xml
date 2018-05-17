@@ -1571,7 +1571,7 @@
     <string name="distance">مسافت</string>
     <string name="index_tours">سفرها</string>
     <string name="shared_string_all">همه</string>
-    <string name="waypoints">نقاط بین‌راهی</string>
+    <string name="shared_string_waypoints">نقاط بین‌راهی</string>
     <string name="targets">مقصدها</string>
     <string name="way_alarms">هشدارهای ترافیکی</string>
     <string name="speak_favorites">نقاط برگزیدهٔ اطراف</string>

@@ -1303,7 +1303,7 @@
     <string name="min_max">Min/Max</string>
     <string name="index_tours">Tours</string>
     <string name="shared_string_all">All</string>
-    <string name="waypoints">Waypoints</string>
+    <string name="shared_string_waypoints">Waypoints</string>
     <string name="targets">Destinations</string>
     <string name="announce_gpx_waypoints">GPX waypoints</string>
     <string name="download_additional_maps">Download missing maps %1$s (%2$d MB)?</string>

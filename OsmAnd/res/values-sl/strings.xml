@@ -1530,7 +1530,7 @@ Omogoča tudi dodajanje opomb v koledar za prikaz opomnikov ob daljših časih p
     <string name="rendering_attr_publicTransportMode_name">Avtobusne, trolejbusne in druge proge</string>
     <string name="record_plugin_name">Dnevnik potovanj</string>
     <string name="index_tours">Izleti</string>
-    <string name="waypoints">Vmesne točke</string>
+    <string name="shared_string_waypoints">Vmesne točke</string>
     <string name="speak_poi">Bližnje točke POI</string>
     <string name="rendering_value_browse_map_name">Poišči na zemljevidu</string>
     <string name="rendering_attr_alpineHiking_description">Izriši poti po lestvici SAC.</string>

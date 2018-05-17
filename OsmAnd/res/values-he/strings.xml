@@ -1766,7 +1766,7 @@
     <string name="min_max">מזערי/מרבי</string>
     <string name="index_tours">סיורים</string>
     <string name="shared_string_all">הכול</string>
-    <string name="waypoints">נקודות דרך</string>
+    <string name="shared_string_waypoints">נקודות דרך</string>
     <string name="targets">יעדים</string>
     <string name="announce_gpx_waypoints">נקודות דרך GPX</string>
     <string name="download_additional_maps">להוריד את המפות החסרות %1$s ‏(%2$d מ״ב)?</string>

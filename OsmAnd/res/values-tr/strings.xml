@@ -1977,7 +1977,7 @@
     <string name="int_hour">h</string>
     <string name="index_tours">Turlar</string>
     <string name="shared_string_all">Tüm</string>
-    <string name="waypoints">Yol işaretleri</string>
+    <string name="shared_string_waypoints">Yol işaretleri</string>
     <string name="targets">Varış noktaları</string>
     <string name="download_additional_maps">Eksik haritalar %1$s (%2$d MB) indirilsinmi?</string>
     <string name="rendering_value_browse_map_name">Haritaya göz at</string>

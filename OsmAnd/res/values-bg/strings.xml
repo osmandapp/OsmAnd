@@ -1220,7 +1220,7 @@
     <string name="distance">Разстояние</string>
     <string name="index_tours">Пътувания</string>
     <string name="shared_string_all">Всички</string>
-    <string name="waypoints">Точки</string>
+    <string name="shared_string_waypoints">Точки</string>
     <string name="targets">Дестинации</string>
     <string name="way_alarms">Предупреждения</string>
     <string name="speak_favorites">Записани места</string>

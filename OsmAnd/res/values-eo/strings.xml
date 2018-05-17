@@ -421,7 +421,7 @@
     <string name="int_hour">h</string>
     <string name="index_tours">Ekskursoj</string>
     <string name="shared_string_all">Ĉiuj</string>
-    <string name="waypoints">Navigadpunktoj</string>
+    <string name="shared_string_waypoints">Navigadpunktoj</string>
     <string name="targets">Celoj</string>
     <string name="lang_sw">Svahila</string>
     <string name="lang_he">Hebrea</string>

@@ -1525,7 +1525,7 @@
     <string name="rendering_value_pedestrian_name">Пешаход</string>
     <string name="download_additional_maps">Сьцягнуць мапы, што адсутнічаюць, %1$s (%2$d МБ)?</string>
     
-    <string name="waypoints">Пункты шляху</string>
+    <string name="shared_string_waypoints">Пункты шляху</string>
     <string name="way_alarms">Дарожныя папярэджаньні</string>
     <string name="speak_favorites">Улюбёныя паблізу</string>
     <string name="speak_poi">Навакольныя POI</string>

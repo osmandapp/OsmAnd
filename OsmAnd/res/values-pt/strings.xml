@@ -1676,7 +1676,7 @@ Clique no widget de medição para ver mais ações.</string>
     <string name="use_opengl_render_descr">Usar aceleração de hardware OpenGL para renderização (pode não funcionar em alguns aparelhos)</string>
     <string name="wake_on_voice">Acender a tela</string>
     <string name="configure_map">Configurar mapa</string>
-    <string name="waypoints">Pontos de parada</string>
+    <string name="shared_string_waypoints">Pontos de parada</string>
     <string name="targets">Destinos</string>
     <string name="shared_string_dismiss">Descartar</string>
 	<string name="rendering_category_others">Outros atributos do mapa</string>

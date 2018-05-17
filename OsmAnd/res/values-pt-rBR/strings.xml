@@ -359,7 +359,7 @@
     <string name="distance">Distância</string>
     <string name="index_tours">Excursões</string>
     <string name="shared_string_all">Todos</string>
-    <string name="waypoints">Marcos do trajeto</string>
+    <string name="shared_string_waypoints">Marcos do trajeto</string>
     <string name="targets">Destinos</string>
     <string name="announce_gpx_waypoints">Pontos de passagem GPX</string>
     <string name="download_additional_maps">Baixar mapas que faltam %1$s (%2$d MB)?</string>

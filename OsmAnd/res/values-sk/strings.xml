@@ -1369,7 +1369,7 @@ Proporčná pamäť %4$s MB (Limit Androidu %5$s MB, Dalvik %6$s MB).</string>
     <string name="rendering_value_bicycle_name">Bicykel</string>
     <string name="rendering_value_pedestrian_name">Chodec</string>
     <string name="download_additional_maps">Stiahnuť chýbajúce mapy %1$s (%2$d MB)?</string>
-    <string name="waypoints">Prechodné body</string>
+    <string name="shared_string_waypoints">Prechodné body</string>
     <string name="targets">Ciele</string>
     <string name="way_alarms">Dopravné varovania</string>
     <string name="speak_favorites">Blízke obľúbené body</string>

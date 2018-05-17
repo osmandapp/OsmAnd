@@ -1415,7 +1415,7 @@ Proporcionální paměť %4$s MB (limit Androidu %5$s MB, Dalvik %6$s MB).</stri
     <string name="index_tours">Cesty</string>
     <string name="shared_string_all">Všechny</string>
     <string name="save_track_to_gpx_globally">"Ukládat trasu do GPX  souboru"</string>
-    <string name="waypoints">Body na trase</string>
+    <string name="shared_string_waypoints">Body na trase</string>
     <string name="targets">Cíle</string>
     <string name="way_alarms">Dopravní varování</string>
     <string name="speak_favorites">Blízké oblíbené body</string>

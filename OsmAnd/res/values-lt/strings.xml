@@ -1538,7 +1538,7 @@ Tam prireiks {1} MB pastoviam saugojimui.
     <string name="index_tours">Turai</string>
     <string name="shared_string_all">Visi</string>
     <string name="targets">Tikslai</string>
-    <string name="waypoints">Tarpiniai taškai</string>
+    <string name="shared_string_waypoints">Tarpiniai taškai</string>
     <string name="way_alarms">Eismo perspėjimai</string>
     <string name="speak_favorites">Artimiausios įsimintos vietos</string>
     <string name="speak_poi">Artimiausios lankytinos vietos</string>

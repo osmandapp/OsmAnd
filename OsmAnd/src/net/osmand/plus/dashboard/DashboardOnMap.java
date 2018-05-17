@@ -414,7 +414,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 		tv.setText("");
 		boolean waypointsVisible = visibleType == DashboardType.WAYPOINTS || visibleType == DashboardType.WAYPOINTS_FLAT;
 		if (waypointsVisible) {
-			tv.setText(R.string.waypoints);
+			tv.setText(R.string.shared_string_waypoints);
 		} else if (visibleType == DashboardType.CONFIGURE_MAP) {
 			tv.setText(R.string.configure_map);
 		} else if (visibleType == DashboardType.CONFIGURE_SCREEN) {

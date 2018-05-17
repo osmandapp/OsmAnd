@@ -1573,7 +1573,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="shared_string_more">Plus…</string>
     <string name="download_additional_maps">Télécharger les cartes manquantes %1$s (%2$d Mo) ?</string>
 
-    <string name="waypoints">Itinéraire</string>
+    <string name="shared_string_waypoints">Itinéraire</string>
     <string name="targets">Destinations</string>
     <string name="way_alarms">Alertes de circulation</string>
     <string name="speak_favorites">Favoris à proximité</string>

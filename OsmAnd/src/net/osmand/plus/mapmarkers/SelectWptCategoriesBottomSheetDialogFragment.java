@@ -95,7 +95,7 @@ public class SelectWptCategoriesBottomSheetDialogFragment extends MenuBottomShee
 					})
 					.setDescription(String.valueOf(pointsByCategories.get(category).size()))
 					.setIcon(getContentIcon(R.drawable.ic_action_folder))
-					.setTitle(category.equals("") ? getString(R.string.waypoints) : category)
+					.setTitle(category.equals("") ? getString(R.string.shared_string_waypoints) : category)
 					.setLayoutId(R.layout.bottom_sheet_item_with_descr_and_checkbox_56dp)
 					.setTag(category)
 					.setOnClickListener(new View.OnClickListener() {

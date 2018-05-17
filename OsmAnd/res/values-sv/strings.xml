@@ -1488,7 +1488,7 @@ Nyttjat utrymme är {1} MB.
     <string name="rendering_value_browse_map_name">Titta på kartan</string>
     <string name="download_additional_maps">Ladda ner kartor som saknas %1$s (%2$d MB)?</string>
 
-    <string name="waypoints">Waypoints</string>
+    <string name="shared_string_waypoints">Waypoints</string>
     <string name="targets">Destinationer</string>
     <string name="way_alarms">Trafikskyltar</string>
     <string name="speak_favorites">Närbelägna favoriter</string>

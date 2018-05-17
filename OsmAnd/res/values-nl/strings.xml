@@ -1551,7 +1551,7 @@ Wil je een nieuwe map maken op de toegestane locatie en de OsmAnd-bestanden daar
     <string name="rendering_value_pedestrian_name">Voetganger</string>
     <string name="download_additional_maps">Download ontbrekende kaarten %1$s (%2$d MB)?</string>
     
-    <string name="waypoints">Routepunt(en)</string>
+    <string name="shared_string_waypoints">Routepunt(en)</string>
     <string name="targets">Bestemmingen</string>
     <string name="way_alarms">Waarschuwingen</string>
     <string name="speak_favorites">Favorieten in de buurt</string>

@@ -1258,7 +1258,7 @@
     <string name="distance">المسافة</string>
     <string name="index_tours">الجولات</string>
     <string name="shared_string_all">جميع</string>
-    <string name="waypoints">نقاط الطريق</string>
+    <string name="shared_string_waypoints">نقاط الطريق</string>
     <string name="targets">الوجهات</string>
     <string name="rendering_value_browse_map_name">استعرض الخريطة</string>  
     <string name="rendering_value_car_name">سيارة</string>

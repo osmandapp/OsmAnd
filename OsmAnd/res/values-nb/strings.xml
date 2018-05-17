@@ -760,7 +760,7 @@
     <string name="traffic_warning">Trafikkvarsel</string>
     <string name="way_alarms">Trafikkvarsler</string>
     <string name="save_track_interval_globally">Loggeintervall</string>
-    <string name="waypoints">Rutepunkter</string>
+    <string name="shared_string_waypoints">Rutepunkter</string>
     <string name="targets">Reisemål</string>
     <string name="rendering_attr_hideBuildings_name">Bygninger</string>
     <string name="osmand_parking_warning">Varsel</string>

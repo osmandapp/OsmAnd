@@ -1543,7 +1543,7 @@
     <string name="no_waypoints_found">Yol nöqtələri tapılmadı</string>
     <string name="context_menu_item_delete_waypoint">GPX yol nöqtəsi silinsin?</string>
     <string name="context_menu_item_edit_waypoint">GPX nöqtəsinə düzəliş et</string>
-    <string name="waypoints">Yol nöqtələri</string>
+    <string name="shared_string_waypoints">Yol nöqtələri</string>
     <string name="announce_gpx_waypoints">GPX yol nöqtələri</string>
     <string name="add_waypoint_dialog_added">GPX yol nöqtəsi “{0}” əlavə edildi</string>
     <string name="context_menu_item_add_waypoint">GPX yol nöqtəsi əlavə et</string>

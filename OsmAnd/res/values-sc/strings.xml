@@ -1534,7 +1534,7 @@ Memòria in proportzione %4$s MB (lìmite de Android %5$s MB, Dalvik %6$s MB).</
     <string name="off_router_service_no_gps_available">Su servìtziu de nàvigu de isfundu de OsmAnd netzèssitat de su sistema de positzionamentu ativadu.</string>
 
 
-    <string name="waypoints">Puntos de coladòrgiu</string>
+    <string name="shared_string_waypoints">Puntos de coladòrgiu</string>
     <string name="targets">Destinatziones</string>
     <string name="way_alarms">Avisos de tràficu</string>
     <string name="speak_favorites">Preferidos a curtzu</string>

@@ -680,7 +680,7 @@
     <string name="duration">Трајање</string>
     <string name="distance">Растојање</string>
     <string name="shared_string_all">Све</string>
-    <string name="waypoints">Пролазне тачке</string>
+    <string name="shared_string_waypoints">Пролазне тачке</string>
     <string name="targets">Одредишта</string>
     <string name="download_additional_maps">Да преузмем недостајуће карте %1$s (%2$d MB)?</string>
     <string name="rendering_value_browse_map_name">Прегледај карту</string>

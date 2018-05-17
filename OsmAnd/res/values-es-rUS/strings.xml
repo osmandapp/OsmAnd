@@ -235,7 +235,7 @@ Lon %2$s</string>
     <string name="duration">Duración</string>
     <string name="distance">Distancia</string>
     <string name="shared_string_all">Todos</string>
-    <string name="waypoints">Puntos de referencia</string>
+    <string name="shared_string_waypoints">Puntos de referencia</string>
     <string name="targets">Destinos</string>
     <string name="announce_gpx_waypoints">Puntos GPX</string>
     <string name="download_additional_maps">¿Descargar los %1$s mapas que faltan (%2$d MB)?</string>

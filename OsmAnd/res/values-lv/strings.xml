@@ -1507,7 +1507,7 @@ OsmAnd ir atvērtā koda navigācijas aplikācija ar piekļuvi vispusīgiem Open
     <string name="distance">Attālums</string>
     <string name="index_tours">Braucieni</string>
     <string name="shared_string_all">Visi</string>
-    <string name="waypoints">Ceļapunkti</string>
+    <string name="shared_string_waypoints">Ceļapunkti</string>
     <string name="targets">Galamērķi</string>
     <string name="rendering_value_browse_map_name">Atvērt karti</string>  
     <string name="rendering_value_car_name">Auto</string>

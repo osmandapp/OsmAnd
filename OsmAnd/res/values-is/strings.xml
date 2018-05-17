@@ -297,7 +297,7 @@
     <string name="distance">Vegalengd</string>
     <string name="index_tours">Ferðir</string>
     <string name="shared_string_all">Allt</string>
-    <string name="waypoints">Ferilpunktar</string>
+    <string name="shared_string_waypoints">Ferilpunktar</string>
     <string name="targets">Áfangastaðir</string>
     <string name="announce_gpx_waypoints">GPX-ferilpunktar</string>
     <string name="rendering_value_browse_map_name">Fletta korti</string>

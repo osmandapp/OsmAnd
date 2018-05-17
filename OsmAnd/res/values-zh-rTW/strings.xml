@@ -1506,7 +1506,7 @@
     <string name="rendering_value_pedestrian_name">步行</string>
     <string name="download_additional_maps">要下載缺少的地圖 %1$s (%2$d MB) 嗎？</string>
 
-    <string name="waypoints">航點</string>
+    <string name="shared_string_waypoints">航點</string>
     <string name="targets">目的地</string>
     <string name="way_alarms">交通狀況提醒</string>
     <string name="speak_favorites">附近的收藏</string>

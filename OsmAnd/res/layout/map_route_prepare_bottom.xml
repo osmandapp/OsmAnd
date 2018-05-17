@@ -32,7 +32,7 @@
 
     <ImageButton
         android:id="@+id/map_waypoints_route_button"
-        android:contentDescription="@string/waypoints"
+        android:contentDescription="@string/shared_string_waypoints"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/route_info_buttons_padding_top_bottom"

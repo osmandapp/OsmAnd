@@ -1472,7 +1472,7 @@
     <string name="duration">Διάρκεια</string>
     <string name="distance">Απόσταση</string>
     <string name="index_tours">Περιηγήσεις</string>
-    <string name="waypoints">Σημεία διαδρομής</string>
+    <string name="shared_string_waypoints">Σημεία διαδρομής</string>
     <string name="save_track_to_gpx_globally">Καταγραφή ίχνους σε αρχείο GPX</string>
 	<string name="save_track_to_gpx_globally_descr">Η γενική καταγραφή θέσης σε αρχείο GPX μπορεί να ενεργοποιηθεί και να απενεργοποιηθεί χρησιμοποιώντας το γραφικό στοιχείο καταγραφής GPX στην οθόνη του χάρτη.</string>
 	<string name="save_track_interval_globally">Διάστημα καταγραφής</string>

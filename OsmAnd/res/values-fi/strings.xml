@@ -1466,7 +1466,7 @@ Maailmanlaajuiset tiedot (välillä 70 astetta pohjoista ja 70 astetta eteläist
     <string name="distance">Etäisyys</string>
     <string name="index_tours">Edestakainen matka</string>
     <string name="shared_string_all">Kaikki</string>
-    <string name="waypoints">Väyläpiste</string>
+    <string name="shared_string_waypoints">Väyläpiste</string>
     <string name="targets">Kohteet</string>
     <string name="announce_gpx_waypoints">GPX väyläpisteet</string>
     <string name="download_additional_maps">Lataa puuttuvat kartat %1$s (%2$d MB)?</string>

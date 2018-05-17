@@ -1423,7 +1423,7 @@
     <string name="rendering_value_pedestrian_name">Peatón</string>
     <string name="shared_string_more">Más…</string>
     <string name="download_additional_maps">¿Descargar los %1$s mapas que faltan (%2$d MB)?</string>
-    <string name="waypoints">Puntos de ruta</string>
+    <string name="shared_string_waypoints">Puntos de ruta</string>
     <string name="targets">Destinos</string>
     <string name="way_alarms">Advertencias de tráfico</string>
     <string name="speak_favorites">Favoritos cercanos</string>

@@ -912,7 +912,7 @@ public class TrackPointFragment extends OsmandExpandableListFragment implements 
 
 				String categoryName = group.getName();
 				if (TextUtils.isEmpty(categoryName)) {
-					categoryName = getString(R.string.waypoints);
+					categoryName = getString(R.string.shared_string_waypoints);
 				}
 				SpannableStringBuilder text = new SpannableStringBuilder(categoryName).append(" — ").append(String.valueOf(getChildrenCount(groupPosition)));
 				text.setSpan(new ForegroundColorSpan(AndroidUtils.getColorFromAttr(app, R.attr.wikivoyage_primary_text_color)),

@@ -57,7 +57,7 @@ As pistas gravadas pódense compartir ou empregar colaborando con OSM. Os atleta
     <string name="distance">Distancia</string>
     <string name="index_tours">Visitas</string>
     <string name="shared_string_all">Todo</string>
-    <string name="waypoints">Puntos de pasaxe</string>
+    <string name="shared_string_waypoints">Puntos de pasaxe</string>
     <string name="targets">Destinos</string>
     <string name="announce_gpx_waypoints">Puntos de pasaxe do GPX</string>
     <string name="download_additional_maps">Descargar os mapas que faltan, %1$s (%2$d MB)?</string>

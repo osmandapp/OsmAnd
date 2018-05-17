@@ -801,7 +801,7 @@ public class WaypointDialogHelper {
 	}
 
 	protected String getHeader(int type, boolean checked, Activity ctx) {
-		String str = ctx.getString(R.string.waypoints);
+		String str = ctx.getString(R.string.shared_string_waypoints);
 		switch (type) {
 			case WaypointHelper.TARGETS:
 				str = ctx.getString(R.string.targets);
@@ -813,7 +813,7 @@ public class WaypointDialogHelper {
 				str = ctx.getString(R.string.shared_string_my_favorites);
 				break;
 			case WaypointHelper.WAYPOINTS:
-				str = ctx.getString(R.string.waypoints);
+				str = ctx.getString(R.string.shared_string_waypoints);
 				break;
 			case WaypointHelper.POI:
 				str = ctx.getString(R.string.poi);

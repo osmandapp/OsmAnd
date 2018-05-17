@@ -130,7 +130,7 @@
     <string name="distance">Adlehłaść</string>
     <string name="index_tours">Pajezdkі</string>
     <string name="shared_string_all">Usie</string>
-    <string name="waypoints">Punkty šlachu</string>
+    <string name="shared_string_waypoints">Punkty šlachu</string>
     <string name="targets">Celi</string>
     <string name="announce_gpx_waypoints">Punkty šlachu GPX</string>
     <string name="download_additional_maps">Ściahnuć mapy, što adsutnіčajuć, %1$s (%2$d MB)?</string>
