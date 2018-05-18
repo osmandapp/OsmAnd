@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.support.annotation.ColorInt;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.CompoundButtonCompat;
 import android.support.v4.widget.NestedScrollView;
@@ -18,6 +19,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import net.osmand.AndroidUtils;
+import net.osmand.Collator;
+import net.osmand.OsmAndCollator;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
@@ -33,7 +36,10 @@ import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.render.RenderingRulesStorage;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class SelectMapStyleBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
 
@@ -49,7 +55,7 @@ public class SelectMapStyleBottomSheetDialogFragment extends MenuBottomSheetDial
 	private View.OnClickListener onStyleClickListener;
 	private ColorStateList rbColorList;
 
-	private List<String> styles;
+	private TreeMap<String, String> stylesMap;
 	private String selectedStyle;
 
 	@Override
@@ -59,13 +65,9 @@ public class SelectMapStyleBottomSheetDialogFragment extends MenuBottomSheetDial
 			return;
 		}
 
-		RendererRegistry rendererRegistry = getMyApplication().getRendererRegistry();
-		styles = new ArrayList<>(rendererRegistry.getRendererNames());
-		if (OsmandPlugin.getEnabledPlugin(NauticalMapsPlugin.class) == null) {
-			styles.remove(RendererRegistry.NAUTICAL_RENDER);
-		}
+		stylesMap = generateStylesMap(context);
 		if (savedInstanceState == null) {
-			selectedStyle = rendererRegistry.getCurrentSelectedRenderer().getName();
+			selectedStyle = getMyApplication().getRendererRegistry().getCurrentSelectedRenderer().getName();
 		} else {
 			selectedStyle = savedInstanceState.getString(SELECTED_STYLE_KEY);
 		}
@@ -99,7 +101,7 @@ public class SelectMapStyleBottomSheetDialogFragment extends MenuBottomSheetDial
 		stylesContainer.setLayoutParams((new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)));
 		stylesContainer.setOrientation(LinearLayout.VERTICAL);
 		stylesContainer.setPadding(0, getResources().getDimensionPixelSize(R.dimen.bottom_sheet_content_padding_small), 0, 0);
-		for (int i = 0; i < styles.size(); i++) {
+		for (int i = 0; i < stylesMap.size(); i++) {
 			LayoutInflater.from(new ContextThemeWrapper(context, themeRes))
 					.inflate(R.layout.bottom_sheet_item_with_radio_btn_left, stylesContainer, true);
 		}
@@ -154,31 +156,61 @@ public class SelectMapStyleBottomSheetDialogFragment extends MenuBottomSheetDial
 		return null;
 	}
 
+	@NonNull
+	private TreeMap<String, String> generateStylesMap(Context context) {
+		final Collator collator = OsmAndCollator.primaryCollator();
+		TreeMap<String, String> res = new TreeMap<>(new Comparator<String>() {
+			@Override
+			public int compare(String string1, String string2) {
+				if (string1.equals(RendererRegistry.DEFAULT_RENDER)) {
+					return -1;
+				}
+				if (string2.equals(RendererRegistry.DEFAULT_RENDER)) {
+					return 1;
+				}
+				return collator.compare(string1, string2);
+			}
+		});
+
+		List<String> names = new ArrayList<>(getMyApplication().getRendererRegistry().getRendererNames());
+		if (OsmandPlugin.getEnabledPlugin(NauticalMapsPlugin.class) == null) {
+			names.remove(RendererRegistry.NAUTICAL_RENDER);
+		}
+		for (String name : names) {
+			String translation = RendererRegistry.getTranslatedRendererName(context, name);
+			if (translation == null) {
+				translation = name.replace('_', ' ').replace('-', ' ');
+			}
+			res.put(translation, name);
+		}
+
+		return res;
+	}
+
 	@SuppressWarnings("RedundantCast")
 	private void populateStylesList() {
 		Context context = getContext();
 		if (context == null) {
 			return;
 		}
-		for (int i = 0; i < styles.size(); i++) {
-			String style = styles.get(i);
-			boolean selected = style.equals(selectedStyle);
-			String title = RendererRegistry.getTranslatedRendererName(context, style);
-			if (title == null) {
-				title = style.replace('_', ' ').replace('-', ' ');
-			}
+		int counter = 0;
+		for (Map.Entry<String, String> entry : stylesMap.entrySet()) {
+			String name = entry.getValue();
+			boolean selected = name.equals(selectedStyle);
 
-			View view = stylesContainer.getChildAt(i);
-			view.setTag(style);
+			View view = stylesContainer.getChildAt(counter);
+			view.setTag(name);
 			view.setOnClickListener(getOnStyleClickListener());
 
 			TextView titleTv = (TextView) view.findViewById(R.id.title);
-			titleTv.setText(title);
+			titleTv.setText(entry.getKey());
 			titleTv.setTextColor(getStyleTitleColor(selected));
 
 			RadioButton rb = (RadioButton) view.findViewById(R.id.compound_button);
 			rb.setChecked(selected);
 			CompoundButtonCompat.setButtonTintList(rb, rbColorList);
+
+			counter++;
 		}
 	}
 
