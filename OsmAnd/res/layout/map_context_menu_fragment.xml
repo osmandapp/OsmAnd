@@ -26,7 +26,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:paddingBottom="@dimen/context_menu_padding_margin_tiny"
                 android:paddingLeft="@dimen/context_menu_padding_margin_default"
                 android:paddingRight="@dimen/context_menu_padding_margin_default">
 
