@@ -467,7 +467,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 					iconId = R.drawable.ic_action_note_dark;
 				} else if (isUrl && vl.contains(WIKI_LINK)) {
 					iconId = R.drawable.ic_plugin_wikipedia;
-				} else if (key.contains("addr:housename") || key.contains("whitewater:rapid_name")) {
+				} else if (key.equals("addr:housename") || key.equals("whitewater:rapid_name")) {
 					iconId = R.drawable.ic_action_poi_name;
 				} else {
 					iconId = R.drawable.ic_action_info_dark;
