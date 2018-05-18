@@ -364,7 +364,6 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			boolean isText = false;
 			boolean isDescription = false;
 			boolean needLinks = !("population".equals(key)
-					|| "service_times".equals(key)
 					|| "height".equals(key));
 			boolean isPhoneNumber = false;
 			boolean isUrl = false;
@@ -422,6 +421,9 @@ public class AmenityMenuBuilder extends MenuBuilder {
 				}
 			} else if (key.startsWith("name:")) {
 				continue;
+			} else if (Amenity.COLLECTION_TIMES.equals(key) || Amenity.SERVICE_TIMES.equals(key)) {
+				iconId = R.drawable.ic_action_time;
+				needLinks = false;
 			} else if (Amenity.OPENING_HOURS.equals(key) || 
 					Amenity.COLLECTION_TIMES.equals(key) || Amenity.SERVICE_TIMES.equals(key)) {
 				iconId = R.drawable.ic_action_time;
