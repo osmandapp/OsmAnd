@@ -386,6 +386,10 @@ public class AmenityMenuBuilder extends MenuBuilder {
 				poiTypeKeyName = pType.getKeyName();
 			}
 
+			if (vl.startsWith("http://") || vl.startsWith("https://") || vl.startsWith("HTTP://") || vl.startsWith("HTTPS://")) {
+				isUrl = true;
+			}
+
 			if (pType != null && !pType.isText()) {
 				String categoryName = pType.getPoiAdditionalCategory();
 				if (!Algorithms.isEmpty(categoryName)) {
@@ -461,6 +465,8 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			} else {
 				if (key.contains(Amenity.DESCRIPTION)) {
 					iconId = R.drawable.ic_action_note_dark;
+				} else if (isUrl && vl.contains(WIKI_LINK)) {
+					iconId = R.drawable.ic_plugin_wikipedia;
 				} else {
 					iconId = R.drawable.ic_action_info_dark;
 				}
@@ -491,10 +497,6 @@ public class AmenityMenuBuilder extends MenuBuilder {
 					textPrefix = Algorithms.capitalizeFirstLetterAndLowercase(e.getKey());
 					vl = amenity.unzipContent(e.getValue());
 				}
-			}
-
-			if (vl.startsWith("http://") || vl.startsWith("https://") || vl.startsWith("HTTP://") || vl.startsWith("HTTPS://")) {
-				isUrl = true;
 			}
 
 			boolean matchWidthDivider = !isDescription && isWiki;
@@ -619,7 +621,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			} else {
 				link = "https://www.openstreetmap.org/way/";
 			}
-			buildRow(view, R.drawable.ic_action_info_dark, null, link + (amenity.getId() >> 1),
+			buildRow(view, R.drawable.ic_action_openstreetmap_logo, null, link + (amenity.getId() >> 1),
 					0, false, null, true, 0, true, null, false);
 		}
 		buildRow(view, R.drawable.ic_action_get_my_location, null, PointDescription.getLocationName(app,
