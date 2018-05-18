@@ -265,9 +265,6 @@ public class MapDataMenuController extends MenuController {
 		if (downloadActivityType != null) {
 			res += ", " + downloadActivityType.getString(getMapActivity());
 		}
-		if (getMenuType() == MenuType.STANDARD) {
-			res += "\n";
-		}
 		return res;
 	}
 
