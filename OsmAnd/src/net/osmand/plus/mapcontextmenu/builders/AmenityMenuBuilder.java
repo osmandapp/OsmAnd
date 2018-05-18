@@ -418,7 +418,6 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			} else if (key.startsWith("name:")) {
 				continue;
 			} else if (Amenity.OPENING_HOURS.equals(key)
-					|| Amenity.SERVICE_HOURS.equals(key)
 					|| Amenity.SERVICE_TIMES.equals(key)) {
 				iconId = R.drawable.ic_action_time;
 				String openingHours = amenity.getOpeningHours();
