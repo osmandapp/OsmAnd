@@ -3847,4 +3847,19 @@
 
 <string name="poi_glacier_type_hanging">Hängend</string>
 	<string name="poi_glacier_type_remnant">Überrest</string>
-	</resources>
+	<string name="poi_checkpoint_type">Checkpoint-Typ</string>
+
+<string name="poi_checkpoint_hiking">Wander-Checkpoint</string>
+	<string name="poi_checkpoint_type_stamp">Stempel-Punkt</string>
+	<string name="poi_checkpoint_type_code">Code</string>
+	<string name="poi_checkpoint_type_notebook">Notizbuch</string>
+	<string name="poi_checkpoint_type_needler">Nadel</string>
+	<string name="poi_checkpoint_type_quize">Quize</string>
+	<string name="poi_checkpoint_type_electronic">Elektronisch</string>
+	<string name="poi_course">Kurs</string>
+
+	<string name="poi_rock">Fels</string>
+
+	<string name="poi_end_date">Enddatum</string>
+
+</resources>
