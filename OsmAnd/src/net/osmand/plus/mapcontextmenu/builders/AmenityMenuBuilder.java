@@ -469,6 +469,8 @@ public class AmenityMenuBuilder extends MenuBuilder {
 					iconId = R.drawable.ic_plugin_wikipedia;
 				} else if (key.equals("addr:housename") || key.equals("whitewater:rapid_name")) {
 					iconId = R.drawable.ic_action_poi_name;
+				} else if (key.equals("operator") || key.equals("brand")) {
+					iconId = R.drawable.ic_action_poi_brand;
 				} else {
 					iconId = R.drawable.ic_action_info_dark;
 				}
@@ -492,7 +494,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 							textPrefix = "";
 						}
 					}
-					if (icon == null && isText) {
+					if (icon == null && isText && iconId == 0) {
 						iconId = R.drawable.ic_action_note_dark;
 					}
 				} else {
