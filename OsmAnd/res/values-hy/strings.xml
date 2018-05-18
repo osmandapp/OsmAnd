@@ -13,19 +13,19 @@
     <string name="dropbox_plugin_description">Dropbox plugin-ը թույլ է տալիս սինխրոնիզացնել տրեքերը և Աուդիո/վիդեո նշումները ձեր Dropbox-ի հետ:</string>
     
     <string name="intermediate_points_change_order">Փոխել հերթականությունը</string>
-    <string name="srtm_paid_version_msg">Рассмотрите пожалуйста покупку плагина \"Линии высот\" на Market, чтобы поддержать последующую разработку.</string>
+    <string name="srtm_paid_version_msg">"Խնդրում ենք ուսումնասիրել  «Contour lines» plugin-ի գնելու տարբերակը, որպեսզի աջակցել հետագա զարգացումը:"</string>
     <string name="srtm_paid_version_title">Բարձրության գծեր փլագին</string>
     <string name="av_def_action_video">Տեսանյութի ձայնագրում</string>
     <string name="av_def_action_audio">Աուդիո ձայնագրում</string>
     <string name="av_video_format_descr">Ընտրեք տեսանյութի ֆորմատը։</string>
     <string name="av_video_format">Տեսանյութի ֆորմատ</string>
-    <string name="av_use_external_recorder_descr">Օգտագործել սիստեմային ծրագիր տեսաձայնագրման համար։</string>
+    <string name="av_use_external_recorder_descr">Օգտագործել համակարգի ծրագիրը տեսաձայնագրման համար։</string>
     <string name="av_use_external_recorder">Օգտագործել արտաքին ծրագիր</string>
-    <string name="av_use_external_camera_descr">Օգտագործել սիստեմային ծրագիր լուսանկարելու համար։</string>
+    <string name="av_use_external_camera_descr">Օգտագործել համակարգի ծրագիրը լուսանկարելու համար։</string>
     <string name="av_use_external_camera">Օգտագործել Camera ծրագիրը</string>
     <string name="av_settings_descr">Տեսա/Ձայնա-գրման պարամետրեր։</string>
     <string name="av_settings">"Աուդիո/վիդեո պարամետրեր" </string>
-    <string name="recording_error">"Սխալ է տեղի ունեցել  արձանագրության ժամանակ"</string>
+    <string name="recording_error">Չհաջողվեզ արձանագրել</string>
     <string name="recording_camera_not_available">Վիդեո/Ֆոտո-խցիկը անհասանելի է</string>
     <string name="email">էլ-փոստ</string>
 <string name="use_kalman_filter_compass_descr">Օգտագործել Կալմանի ֆիլտրը կողմնացույցի սխելներից խուսափելու համար։</string>
@@ -34,11 +34,11 @@
     <string name="use_magnetic_sensor">Օգտագործել մագնիսական սենսորը</string>
     <string name="other_location">Այլ</string>
     <string name="files_limit">Մնացել է %1$d ֆայլ</string>
-    <string name="available_downloads_left">Բեռնելու համար հասանելի էն %1$d ֆայլեր</string>
+    <string name="available_downloads_left">Բեռնելու համար մնում է %1$d ֆայլեր</string>
     <string name="install_paid">Լրիվ տարբերակ</string>
     <string name="cancel_navigation">Վերջացնել նավիգացիան</string>
     <string name="clear_destination">Մաքրել նպատակակետը</string>
-    <string name="download_using_mobile_internet">Ներկայումս WiFi կապ չկա. Դուք ցանկանու՞մ եք շարունակել ներբեռնել ընթացիկ ինտերնետ կապով?</string>
+    <string name="download_using_mobile_internet">Ներկայումս WiFi կապ չկա. Ներբեռնել, օգտագործելով ընթացիկ Ինտերնետ կապը?</string>
     <string name="street_name">Փողոցի անունը</string>
 	<string name="hno">Տան համարը</string>
     <string name="website">Վեբ կայք</string>
@@ -46,7 +46,7 @@
     
     <string name="monitoring_settings">Ուղևորության գրանցում</string>
     
-    <string name="choose_osmand_theme_descr">Ընտրեք ծրագրի դիզայնի թեման։</string>
+    <string name="choose_osmand_theme_descr">Ընտրեք ծրագրի թեման։</string>
     <string name="select_address_activity">Ընտրել հասցեն</string>
     <string name="favourites_list_activity">Ընտրել նախնտրածներից</string>
     <string name="local_openstreetmap_act_title">OSM փոփոխություններ</string>
@@ -54,7 +54,7 @@
     
 	
 	<string name="cancel_route">Դադարեցնել երթուղին</string>
-    <string name="local_osm_changes_backup_successful">OSM փոփոխության ֆայլը հաջողությամբ գեներացվել %1$s</string>
+    <string name="local_osm_changes_backup_successful">"OSMChange ֆայլը  %1$s ստեղծվեց"</string>
     <string name="delete_point">Ջնջել կետը</string>
     <string name="plugin_distance_point_time">Ժամանակ</string>
     <string name="plugin_distance_point_hdop">ճշգրտություն</string>
@@ -62,13 +62,13 @@
     <string name="plugin_distance_point_ele">բարձրություն</string>
     <string name="plugin_distance_point">Կետ</string>
     <string name="gpx_file_name">GPX ֆայլի անունը</string>
-    <string name="gpx_saved_sucessfully">{0} GPX ֆայլը հաջողությամբ պահվել է</string>
+    <string name="gpx_saved_sucessfully">{0} GPX ֆայլը պահպանվեց</string>
     <string name="shared_string_do_not_show_again">Կրկին ցույց չտալ</string>
     <string name="distance_measurement_start_editing">Սկսել խմբագրելը</string>
     <string name="distance_measurement_finish_editing">Ավարտել խմբագրելը</string>
     <string name="distance_measurement_clear_route">Մաքրել բոլոր կետերը</string>
     
-    <string name="distance_measurement_load_gpx">Բացել գոյուցյուն ունեցող GPX ֆայլը</string>
+    <string name="distance_measurement_load_gpx">Բացել առկա GPX track-ը</string>
     <string name="wait_current_task_finished">Խնդրում ենք սպասել մինջև տվյալ պրոցեսը կվերջանա</string>
     <string name="distance_measurement_finish_subtrack">Սկսել նոր ենթաճանապարհ</string>
     <string name="osmand_distance_planning_plugin_name">Հեռավորության հաշվիչ և Պլանավորման Գործիք</string>
@@ -79,10 +79,10 @@
 	
 	<string name="poi_action_change">փոփոխություն</string>
 	<string name="poi_action_add">ավելացում</string>
-	<string name="use_distance_measurement_help">* Դիպչեք կետը նշելու համար։
-\n * Սեխմեք և պահեք քարտեզի վրա նախորդ կետը ջնջելու համար։
-\n * Սեխմեք և պահեք կետը վրա բացատրությունը տեսնելու և ավելացնելու համար։
-\n * Սեխմեք չափման վիդջետի վրա այլ հնարավորությունների համար։</string>
+	<string name="use_distance_measurement_help">* Դիպչեք կետը նշելու համար։ 
+\n * Սեղմեք և պահեք քարտեզի վրա նախորդ կետը ջնջելու համար։ 
+\n * Սեղմեք և պահեք կետը վրա բացատրությունը տեսնելու և ավելացնելու համար։ 
+\n * Սեղմեք չափման վիդջետի վրա այլ հնարավորությունների համար։</string>
     <string name="monitoring_settings_descr">Ուղևորության գրանցոման կարգավորում։</string>
     <string name="choose_osmand_theme">Ծրագրի դիզայնի թեման</string>
     <string name="accessibility_options">Հատուկ հնարավորությունների կարգավորումներ</string>
@@ -120,7 +120,7 @@
     <string name="shared_string_control_start">ձայնագրել</string>
     <string name="map_widget_av_notes">Աուդիո/Վիդեո նշումներ</string>
     
-	<string name="about_version">Տարբերակ :</string>
+	<string name="about_version">Տարբերակ:</string>
     
     <string name="local_index_tile_data_downloadable">Բեռնվող: %1$s</string>
     <string name="select_gpx">Ընտրել GPX-…</string>
@@ -133,18 +133,18 @@
 	<string name="please_select_address">Առաջինը ընտրեք քաղաք կամ փողոց</string>
     <string name="context_menu_item_destination_point">Սահմանել որպես նպատակակետ</string>
     <string name="route_preferences">ուղու նախապատվություններ</string>
-    <string name="route_info">Ուղու տեղեկատվություն</string>
+    <string name="route_info">Երթուղու տեղեկատվություն</string>
     <string name="routing_attr_prefer_motorway_name">Նախընտրելի ավտոճանապարհ</string>
-	<string name="routing_attr_prefer_motorway_description">Նախընտրելի ավտոճանապարհ։</string>
-	<string name="routing_attr_avoid_toll_description">Խուսափել վճարովի ճանապարհները։</string>
+	<string name="routing_attr_prefer_motorway_description">Նախընտրելի ավտոմայրուղիներ</string>
+	<string name="routing_attr_avoid_toll_description">Խուսափել վճարովի ճանապարհներից</string>
 	<string name="routing_attr_avoid_unpaved_name">Խուսափել հողածածկ ճանապարհներից</string>
 	<string name="routing_attr_avoid_unpaved_description">Խուսափել հողածածկ ճանապարհները։</string>
 	<string name="routing_attr_avoid_ferries_name">Խուսափել լաստանավերից</string>
-	<string name="routing_attr_avoid_ferries_description">Խուսափել լաստանավերը։</string>
+	<string name="routing_attr_avoid_ferries_description">Խուսափել լաստանավերը</string>
 	<string name="routing_attr_avoid_motorway_name">Խուսափել ավտոմայրուղիներից</string>
-	<string name="routing_attr_avoid_motorway_description">Խուսափել ավտոճանապարհները։</string>
+	<string name="routing_attr_avoid_motorway_description">Խուսափել ավտոմայրուղիներ</string>
 	<string name="routing_attr_weight_name">Առավելագույն քաշը</string>
-	<string name="routing_attr_weight_description">Նշել մեքենայի քաշը երթուղին հաշվառկելու համար։</string>
+	<string name="routing_attr_weight_description">Նշեք ճանապարհների վրա թույլատրված մեքենայի քաշի սահմանը:</string>
     <string name="osmand_distance_planning_plugin_description">Այս plugin-նը ապահովում է քարտեզի էկրանի վրա վիջեթ, որը հնարավորություն է տալիս ստեղծել ուղիներ, քարտեզի վրա կտտացնելով, նաև օգտագործել կամ փոփոխել առկա GPX ֆայլերը, ուղեւորություն պլանավորել և չափել կետերի միջև հեռավորությունը։</string>
     <string name="shared_string_no">Ոչ</string>
 	<string name="shared_string_yes">Այո</string>
@@ -1256,7 +1256,7 @@
     
     
     <string name="no_index_file_to_download">Ներբեռնումներ չկան, խնդրում ենք ստուգել ձեր Ինտերնետ կապը:</string>
-    <string name="select_index_file_to_download">"Ոչինչ չի գտնվել: Դուք կարող եք ստեղծել քարտեզը  ինքնուրույն (տես osmand.net):"</string>
+    <string name="select_index_file_to_download">"Ոչինչ չի գտնվել: Դուք կարող եք ստեղծել քարտեզը  ինքնուրույն (տես https://osmand.net):"</string>
     <string name="none_selected_gpx">Ընտրված GPX ֆայլեր չկան: Ընտրելու համար երկար սխմեք հասանելի տրեկի վրա։</string>
     <string name="local_index_select_gpx_file">Ընտրեք ցույց տալու համար</string>
     <string name="gpx_split_interval">Բաժանման ընդմիջումի ժամանակը</string>
@@ -1403,7 +1403,7 @@
     <string name="lang_lv">Լատվիական</string>
     <string name="lang_lt">Լիտվական</string>
     <string name="lang_mr">Մարաթի</string>
-    <string name="lang_no">Նորվեգերեն</string>
+    <string name="lang_no">Նորվեգերեն Bokmål</string>
     <string name="lang_fa">Պարսկերեն</string>
     <string name="lang_pl">Լեհերեն</string>
     <string name="lang_pt">Պորտուգալերեն</string>
@@ -1426,24 +1426,24 @@
     <string name="index_name_canada">Հյուսիսային Ամերիկա - Կանադա</string>
     <string name="index_name_italy">Եվրոպա - Իտալիա</string>
     <string name="index_name_gb">Եվրոպա - Մեծ Բրիտանիան</string>
-    <string name="calculate_osmand_route_without_internet">Հաշվարկել OsmAnd-ի երթուղու հատվածը առանց Ինտերնետի</string>
+    <string name="calculate_osmand_route_without_internet">Հաշվարկել OsmAnd-ի երթուղու հատվածը անցանց</string>
     <string name="gpx_option_calculate_first_last_segment">Հաշվարկել երթուղին առաջին և վերջին հատվածի OsmAnd երթուղու սեգմենտին</string>
-    <string name="use_displayed_track_for_navigation">Ցանկանում եք օգտագործել նավարկության համար ցուցադրված track-ը?</string>
+    <string name="use_displayed_track_for_navigation">Օգտագործել նավարկության համար ցուցադրված track-ը?</string>
     <string name="keep_and_add_destination_point">Ավելացնել որպես նպատակակետ</string>
     <string name="routing_attr_avoid_stairs_name">Խուսափել աստիճաններից</string>
-    <string name="routing_attr_avoid_stairs_description">Խուսափել աստիճաններից։</string>
+    <string name="routing_attr_avoid_stairs_description">Խուսափել աստիճաններից</string>
     <string name="routing_attr_avoid_borders_name">Խուսափել սահմանի հատմանը</string>
-    <string name="routing_attr_avoid_borders_description">Խուսափել սահմանի հատման մեկ այլ երկրի հետ։</string>
+    <string name="routing_attr_avoid_borders_description">Խուսափել երկրի սահմանի հատումը</string>
     <string name="routing_attr_height_name">Բարձրության սահմանափակում</string>
     <string name="routing_attr_height_description">Նշեք մեքենայի բարձրությունը երթուղու հաշվարկի համար։</string>
     <string name="hillshade_layer_disabled">Տեղանքի ռելիեֆի(Hillshade) շերտը անջատված է</string>
-    <string name="android_19_location_disabled">Android 4.4 (KitKat) տարբերակից սկսած քարտը չեք կարող բեռնել և թարմացնել հին պահեստային ֆոլդերում (% s): Ցանկանում եք փոխել գտնվելու վայրը վավեր վայրով և պատճենել բոլոր OsmAnd ֆայլերը?
-\n…Ծանոթագրություն 1. Ձեր հին ֆայլերը կմնան անփոփոխ (բայց կարող են ջնջվել ձեռքով):
+    <string name="android_19_location_disabled">Android 4.4 (KitKat) տարբերակից սկսած քարտը չեք կարող բեռնել և թարմացնել հին պահեստային ֆոլդերում (% s): Պատճենել բոլոր OsmAnd ֆայլերը նոր պահպանման վայրում? 
+\n…Ծանոթագրություն 1. Ձեր հին ֆայլերը կմնան անփոփոխ (բայց կարող են ջնջվել ձեռքով): 
 \n…Ծանոթագրություն 2. Երբ ֆայլերը փոխանցեք նոր պահպանման վայր, «OsmAnd»-ի և «OsmAnd+» ֆայլերի համատեղ օգտագործումը հնարավոր չի լինի:</string>
     <string name="copying_osmand_one_file_descr">"Ֆայլի պատճենում  (%s) նոր վայր…"</string>
     <string name="copying_osmand_files_descr">"OsmAnd-ի տվյալների Ֆայլերի պատճենում նոր վայր  (%s)…"</string>
     <string name="copying_osmand_files">Պատճենահանում OsmAnd-ի տվյալների ֆայլերը…</string>
-    <string name="calculate_osmand_route_gpx">Հաշվարկել անցանց երթուղին</string>
+    <string name="calculate_osmand_route_gpx">"Հաշվարկել OsmAnd երթուղին անցանց "</string>
     <string name="app_mode_truck">Բեռնատար</string>
     <string name="guidance_preferences_descr">Նավարկության կարգավորումները</string>
     <string name="routing_preferences_descr">Երթուղու կարգավորումները</string>
@@ -1464,7 +1464,7 @@
     <string name="animate_routing_route_not_calculated">Խնդրում ենք սկզբից հաշվարկել երթուղին</string>
     <string name="animate_routing_route">Կիրառել հաշվարկված երթուղու օգտագործումը</string>
     <string name="animate_routing_gpx">Կիրառեք օգտագործվող GPX տրեկը</string>
-    <string name="route_is_too_long_v2">"Հնարավոր է, որ կպահանջվի երկար ժամանակ տեղական(օֆլայն) երթուղին հաշվարկման համար։ Խնդրում ենք ավելացնել մեկ կամ ավելի միջանկյալ նպատակակետեր երթուղու վրա, եթե հաշվարկը չի ավարտվել 10  րոպեից։"</string>
+    <string name="route_is_too_long_v2">Խնդրում ենք ավելացնել մեկ կամ ավելի միջանկյալ նպատակակետեր երթուղու վրա, եթե հաշվարկը չի ավարտվել 10 րոպեից։</string>
     <string name="auto_zoom_none">Առանց ավտո մասշտաբի</string>
     <string name="auto_zoom_close">Մոտեցնել</string>
     <string name="auto_zoom_far">Միջին պլանի</string>
@@ -1478,7 +1478,7 @@
     <string name="local_index_tile_data_maxzoom">Առավելագույն խոշորացում՝ %1$s</string>
     <string name="local_index_tile_data_minzoom">Նվազագույն խոշորացում՝ %1$s</string>
     <string name="local_index_tile_data_name">Տայլերի տվյալները՝ %1$s</string>
-    <string name="edit_tilesource_successfully">Տայլերի աղբյուրը %1$s հաջողությամբ պահպանվեց</string>
+    <string name="edit_tilesource_successfully">"Տայլերի աղբյուրը %1$s  պահպանվեց"</string>
     <string name="edit_tilesource_elliptic_tile">Մերկատորի էլիպտիկ նախագծումը</string>
     <string name="edit_tilesource_maxzoom">Առավելագույն խոշորացում</string>
     <string name="edit_tilesource_expiration_time">Լրանում է (րոպե)</string>
