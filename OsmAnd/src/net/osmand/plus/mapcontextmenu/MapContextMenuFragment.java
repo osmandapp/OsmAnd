@@ -1501,15 +1501,23 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 	}
 
 	private void updateAdditionalInfoVisibility() {
-		View line3 = (TextView) view.findViewById(R.id.context_menu_line3);
-		View additionalInfoImageView = (ImageView) view.findViewById(R.id.additional_info_image_view);
-		View additionalInfoTextView = (TextView) view.findViewById(R.id.additional_info_text_view);
+		View line3 = view.findViewById(R.id.context_menu_line3);
+		View additionalInfoImageView = view.findViewById(R.id.additional_info_image_view);
+		View additionalInfoTextView = view.findViewById(R.id.additional_info_text_view);
 		View compassView = view.findViewById(R.id.compass_layout);
+		View titleButtonContainer = view.findViewById(R.id.title_button_container);
+		View downloadButtonsContainer = view.findViewById(R.id.download_buttons_container);
+		View titleBottomButtonContainer = view.findViewById(R.id.title_bottom_button_container);
+		View titleProgressContainer = view.findViewById(R.id.title_progress_container);
 
 		if (line3.getVisibility() == View.GONE
 				&& additionalInfoImageView.getVisibility() == View.GONE
 				&& additionalInfoTextView.getVisibility() == View.GONE
-				&& compassView.getVisibility() == View.INVISIBLE) {
+				&& compassView.getVisibility() == View.INVISIBLE
+				&& titleButtonContainer.getVisibility() == View.GONE
+				&& downloadButtonsContainer.getVisibility() == View.GONE
+				&& titleBottomButtonContainer.getVisibility() == View.GONE
+				&& titleProgressContainer.getVisibility() == View.VISIBLE) {
 			view.findViewById(R.id.additional_info_row).setVisibility(View.GONE);
 		} else {
 			view.findViewById(R.id.additional_info_row).setVisibility(View.VISIBLE);
@@ -1896,6 +1904,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 	private void doAfterMenuStateChange(int previousState, int newState) {
 		updateCompassVisibility();
+		updateAdditionalInfoVisibility();
 	}
 }
 
