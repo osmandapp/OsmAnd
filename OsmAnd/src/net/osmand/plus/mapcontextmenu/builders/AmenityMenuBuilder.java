@@ -364,6 +364,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			boolean isText = false;
 			boolean isDescription = false;
 			boolean needLinks = !("population".equals(key)
+					|| "service_times".equals(key)
 					|| "height".equals(key));
 			boolean isPhoneNumber = false;
 			boolean isUrl = false;
@@ -417,14 +418,11 @@ public class AmenityMenuBuilder extends MenuBuilder {
 				}
 			} else if (key.startsWith("name:")) {
 				continue;
-			} else if (Amenity.OPENING_HOURS.equals(key)
-					|| Amenity.SERVICE_TIMES.equals(key)) {
+			} else if (Amenity.OPENING_HOURS.equals(key)) {
 				iconId = R.drawable.ic_action_time;
-				String openingHours = amenity.getOpeningHours();
-				openingHours = openingHours != null ? openingHours : vl;
-				collapsableView = getCollapsableTextView(view.getContext(), true, openingHours);
+				collapsableView = getCollapsableTextView(view.getContext(), true, amenity.getOpeningHours());
 				collapsable = true;
-				OpeningHoursParser.OpeningHours rs = OpeningHoursParser.parseOpenedHours(openingHours);
+				OpeningHoursParser.OpeningHours rs = OpeningHoursParser.parseOpenedHours(amenity.getOpeningHours());
 				if (rs != null) {
 					vl = rs.toLocalString();
 					Calendar inst = Calendar.getInstance();
