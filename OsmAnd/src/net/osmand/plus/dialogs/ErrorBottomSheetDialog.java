@@ -4,10 +4,10 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Typeface;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.content.FileProvider;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,7 +48,7 @@ public class ErrorBottomSheetDialog extends BottomSheetDialogFragment {
 				Intent intent = new Intent(Intent.ACTION_SEND);
 				intent.putExtra(Intent.EXTRA_EMAIL, new String[]{"crash@osmand.net"}); //$NON-NLS-1$
 				File file = getMyApplication().getAppPath(OsmandApplication.EXCEPTION_PATH);
-				intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(file));
+				intent.putExtra(Intent.EXTRA_STREAM, FileProvider.getUriForFile(getMyApplication(),"net.osmand.plus.fileprovider", file));
 				intent.setType("vnd.android.cursor.dir/email"); //$NON-NLS-1$
 				intent.putExtra(Intent.EXTRA_SUBJECT, "OsmAnd bug"); //$NON-NLS-1$
 				StringBuilder text = new StringBuilder();
