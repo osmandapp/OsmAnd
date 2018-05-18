@@ -1115,7 +1115,6 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 					}
 				}
 
-				updateAdditionalInfoVisibility();
 				final ProgressBar progressBar = (ProgressBar) view.findViewById(R.id.progressBar);
 				final TextView progressTitle = (TextView) view.findViewById(R.id.progressTitle);
 				progressTitle.setText(titleProgressController.caption);
@@ -1128,6 +1127,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			} else {
 				titleProgressContainer.setVisibility(View.GONE);
 			}
+			updateAdditionalInfoVisibility();
 		}
 	}
 
@@ -1484,6 +1484,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			additionalInfoImageView.setVisibility(showAdditionalImage ? View.VISIBLE : View.GONE);
 		}
 		updateCompassVisibility();
+		updateAdditionalInfoVisibility();
 	}
 
 	private void updateCompassVisibility() {
@@ -1504,12 +1505,10 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		View additionalInfoImageView = (ImageView) view.findViewById(R.id.additional_info_image_view);
 		View additionalInfoTextView = (TextView) view.findViewById(R.id.additional_info_text_view);
 		View compassView = view.findViewById(R.id.compass_layout);
-		View titleProgressContainer = view.findViewById(R.id.title_progress_container);
 
 		if (line3.getVisibility() == View.GONE
 				&& additionalInfoImageView.getVisibility() == View.GONE
 				&& additionalInfoTextView.getVisibility() == View.GONE
-				&& titleProgressContainer.getVisibility() == View.VISIBLE
 				&& compassView.getVisibility() == View.INVISIBLE) {
 			view.findViewById(R.id.additional_info_row).setVisibility(View.GONE);
 		} else {
