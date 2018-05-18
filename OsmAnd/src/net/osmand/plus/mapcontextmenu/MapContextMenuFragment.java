@@ -1484,6 +1484,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			additionalInfoImageView.setVisibility(showAdditionalImage ? View.VISIBLE : View.GONE);
 		}
 		updateCompassVisibility();
+		updateAdditionalInfoVisibility();
 	}
 
 	private void updateCompassVisibility() {
