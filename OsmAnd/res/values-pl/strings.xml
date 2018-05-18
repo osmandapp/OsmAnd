@@ -3077,8 +3077,8 @@ Reprezentuje obszar: %1$s x %2$s</string>
 	<string name="update_is_available">Dostępne uaktualnienie</string>
 	<string name="download_file">Pobierz plik</string>
     <string name="start_editing_card_image_text">Bezpłatny przewodnik po świecie, który każdy może edytować.</string>
-    <string name="welcome_to_open_beta_description">Podróże oparte są na Wikivoyage. Podczas otwartych beta-testów masz możliwość oceny wszystkich funkcji za darmo. Po zakończeniu okresu beta, Podróże będą dostępne dla subskrybentów OsmAnd Unlimited oraz posiadaczy OsmAnd+</string>
-    <string name="start_editing_card_description">Możesz edytować dowolny artykuł na Wikipodóżach i mamy nadzieję, że to zrobisz. Potrzebujemy Twojej wiedzy, doświadczenia, talentu i uwagi</string>
+    <string name="welcome_to_open_beta_description">Podróże oparte są na Wikipodróżach. Przetestuj wszystkie funkcje podczas otwartych beta-testów za darmo. Po ich zakończeniu, Podróże będą dostępne dla subskrybentów OsmAnd Unlimited oraz posiadaczy OsmAnd+</string>
+    <string name="start_editing_card_description">Możesz i powinieneś edytować dowolny artykuł w Wikipodóżach. Podziel się wiedzą, doświadczeniem, talentem i uwagą</string>
     <string name="start_editing">Rozpocznij edycję</string>
     <string name="get_unlimited_access">Uzyskaj nieograniczony dostęp</string>
     <string name="welcome_to_open_beta">Witamy w otwartej wersji beta</string>
