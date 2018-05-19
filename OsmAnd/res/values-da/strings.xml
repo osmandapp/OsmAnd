@@ -504,7 +504,9 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="shared_string_name">Navn</string>
     <string name="favourites_edit_dialog_category">Kategori</string>
     <string name="shared_string_no_thanks">Nej tak</string>
-    <string name="local_index_gpx_info_show">\n\nLangt tryk for valgmuligheder</string>
+    <string name="local_index_gpx_info_show">"
+\n
+\nTryk og hold for valgmuligheder"</string>
 	
 	<string name="osmand_long_description_1000_chars">"OsmAnd (OSM Automated Navigation Directions) 
 \n 
@@ -749,7 +751,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="no_vector_map_loaded">Vektorkort blev ikke indlæst</string>
     
     <string name="gpx_files_not_found">Ingen GPX-filer blev fundet i \'/tracks\' mappen</string>
-    <string name="layer_gpx_layer">GPX-spor…</string>
+    <string name="layer_gpx_layer">GPX-filer…</string>
     <string name="error_reading_gpx">Kunne ikke læse GPX-data</string>
     <string name="vector_data">Offline vektorkort</string>
     <string name="transport_context_menu">Søg efter transport ved stoppested</string>
@@ -966,7 +968,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="loading_cities">Indlæser byer…</string>
 
     <string name="poi">Interessepunkt</string>
-    <string name="error_occurred_saving_gpx">Kunne ikke gemme GPX-spor</string>
+    <string name="error_occurred_saving_gpx">Kunne ikke gemme GPX-fil</string>
     <string name="error_calculating_route">Kunne ikke beregne rute</string>
     <string name="error_calculating_route_occured">Kunne ikke beregne rute</string>
     <string name="empty_route_calculated">Beregnet rute er tom</string>
@@ -977,7 +979,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="loading_data">Indlæser data…</string>
     <string name="reading_indexes">Læser lokale data…</string>
     <string name="previous_run_crashed">Sidste OsmAnd kørsel fejlede. Logfilen er i {0}. Rapporter hændelsen og vedhæft logfilen.</string>
-    <string name="saving_gpx_tracks">Gemmer GPX-spor til SD-kort…</string>
+    <string name="saving_gpx_tracks">Gemmer GPX-fil…</string>
     <string name="finished_task">Færdig</string>
 
 
@@ -989,8 +991,8 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
 
     <string name="osm_settings">OSM-redigering</string>
     <string name="additional_settings">Yderligere indstillinger</string>
-    <string name="save_current_track_descr">Gem aktuelle spor til hukommelseskortet nu.</string>
-    <string name="save_current_track">Gem aktuelle GPX-spor</string>
+    <string name="save_current_track_descr">Gem det aktuelle spor som en GPX-fil nu.</string>
+    <string name="save_current_track">Gem det aktuelle spor</string>
     <string name="save_track_interval">Logningsinterval under navigation</string>
     <string name="save_track_interval_descr">Vælg logningsinterval for optagelse af spor under navigation.</string>
     <string name="save_track_to_gpx_descrp">GPX-spor gemmes automatisk i tracks-mappen under navigation.</string>
@@ -1098,7 +1100,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="plugin_distance_point">Punkt</string>
     <string name="gpx_file_name">GPX-filnavn</string>
 
-    <string name="distance_measurement_load_gpx">Åbn eksisterende GPX-spor</string>
+    <string name="distance_measurement_load_gpx">Åbn eksisterende GPX-fil</string>
     <string name="plugin_distance_point_time">tid</string>
     <string name="gpx_saved_sucessfully">GPX-fil blev gemt som {0}</string>
     <string name="distance_measurement_start_editing">Begynd redigering</string>
@@ -1109,8 +1111,8 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="osmand_distance_planning_plugin_description">Udvidelsen aktiverer et kortmodul som gør det muligt at oprette spor ved at trykke på kortet, eller ved at bruge eller ændre eksisterende GPX-filer, til at planlægge en tur og måle afstanden mellem punkter. Resultaterne kan gemmes som en GPX-fil, som senere kan bruges til vejledning.</string>
     <string name="osmand_distance_planning_plugin_name">Afstandsberegner &amp; planlægningsværktøj</string>
     <string name="use_distance_measurement_help">* Tryk for at markere et punkt. 
-\n* Langt tryk på kortet for at slette tidligere punkt. 
-\n* Langt tryk på punkt for at se og vedhæfte beskrivelse. 
+\n* Tryk og hold for at slette tidligere punkt. 
+\n* Tryk og hold på et punkt for at se og vedhæfte beskrivelse. 
 \n* Tryk på målemodul for at se flere handlinger.</string>
     <string name="delete_point">Slet punkt</string>
     <string name="local_osm_changes_backup_failed">Kunne ikke sikkerhedskopiere OSM ændringer</string>
@@ -1411,7 +1413,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     
 
 
-    <string name="gpx_file_is_empty">Tomt GPX-spor</string>
+    <string name="gpx_file_is_empty">Tom GPX-fil</string>
     <string name="gpx_info_waypoints">Rutepunkter: %1$s </string>
     <string name="gpx_info_distance">Afstand: %1$s (%2$s punkter) </string>
     <string name="gpx_info_start_time">Starttid: %1$tF, %1$tT</string>
@@ -1436,7 +1438,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="shared_string_waypoint">Rutepunkt</string>
     <string name="selected_gpx_info_show">"
 \n
-\nLangt tryk for at se på kortet"</string>
+\nTryk og hold for at se på kortet"</string>
     <string name="delay_navigation_start">Start sving-for-sving vejledning automatisk</string>
     <string name="gpx_split_interval">Opdelingsinterval</string>
     <string name="loading_smth">Indlæser %1$s…</string>
@@ -1449,7 +1451,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
 
     <string name="sort_by_distance">Sorter efter afstand</string>
     <string name="sort_by_name">Sorter efter navn</string>
-    <string name="none_selected_gpx">Ingen GPX-filer er valgt. Langt tryk for at vælge et tilgængeligt spor.</string>
+    <string name="none_selected_gpx">Ingen GPX-filer er valgt. Tryk og hold for at vælge en.</string>
     <string name="local_index_select_gpx_file">Vælg at få vist</string>
 
     <string name="no_index_file_to_download">Ingenting at hente, kontroller internetforbindelsen.</string>
@@ -1556,7 +1558,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="traffic_warning_calming">Trafikdæmpning</string>
     <string name="traffic_warning_speed_camera">Fartkamera</string>
     <string name="traffic_warning">Trafikadvarsel</string>
-    <string name="local_index_description">Tryk på et eksisterende emne for at se flere detaljer, langt tryk for at deaktivere eller slette. Aktuelle data på enhed (%1$s ledig):</string>
+    <string name="local_index_description">Tryk på et eksisterende emne for at se flere detaljer, tryk og hold for at deaktivere eller slette. Aktuelle data på enhed (%1$s ledig):</string>
     <string name="text_size_descr">Vælg tekststørrelsen på kortet.</string>
     <string name="text_size">Tekststørrelse</string>
     <string name="fav_point_dublicate">Favoritnavn dublet</string>
@@ -1741,7 +1743,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="shared_string_clear">Slet</string>
 
     <string name="shared_string_save">Gem</string>
-    <string name="shared_string_save_as_gpx">Gem som et nyt GPX-spor</string>
+    <string name="shared_string_save_as_gpx">Gem som en ny GPX-fil</string>
     <string name="shared_string_rename">Omdøb</string>
     <string name="shared_string_delete">Slet</string>
     <string name="shared_string_delete_all">Slet alle</string>
@@ -1972,7 +1974,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="poi_action_delete">slet</string>
     <string name="saved_at_time">Nu gemt i: %1$s</string>
     <string name="poi_deleted_localy">Interessepunkt (IP) vil blive slettet, når ændringer overføres</string>
-    <string name="show_gpx">Vis GPX</string>
+    <string name="show_gpx">Vis GPX-data</string>
     <string name="count_of_lines">Antal linjer</string>
     <string name="show_on_start">Vis ved start</string>
     <string name="unsaved_changes_will_be_lost">Eventuelle ikke-gemte ændringer vil gå tabt. Fortsæt?</string>
@@ -2406,7 +2408,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="no_inet_connection_desc_map">Nødvendig for at hente kort.</string>
     <string name="search_location">Søger efter placering…</string>
     <string name="storage_free_space">Ledig lagerplads</string>
-    <string name="storage_place_description">OsmAnds datalagring (for kort, spor, mv.): %1$s.</string>
+    <string name="storage_place_description">OsmAnds datalagring (for kort, GPX-filer, mv.): %1$s.</string>
     <string name="give_permission">Giv tilladelse</string>
     <string name="allow_access_location">Tillad adgang til placering</string>
     <string name="first_usage_greeting">Få rutevejledning og opdag nye steder uden internetforbindelse</string>
@@ -2475,9 +2477,9 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     
     
     
-    <string name="gpx_no_tracks_title">Ingen spor endnu</string>
-    <string name="gpx_no_tracks_title_folder">Tilføj også spor til mappen</string>
-    <string name="gpx_add_track">Tilføj spor</string>
+    <string name="gpx_no_tracks_title">Endnu ingen GPX-filer</string>
+    <string name="gpx_no_tracks_title_folder">Tilføj også GPX-filer til mappen</string>
+    <string name="gpx_add_track">Tilføj GPX-fil</string>
     <string name="gpx_appearance">Udseende</string>
     <string name="rendering_value_fine_name">Fin</string>
     <string name="route_calculation">Ruteberegning</string>
@@ -2572,7 +2574,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="quick_action_map_source_action">Tilføj en kortkilde</string>
     <string name="quick_action_map_source_switch">Kortkilde er ændret til \"%s\".</string>
     <string name="quick_action_btn_tutorial_title">Ændr knapplacering</string>
-    <string name="quick_action_btn_tutorial_descr">Tryk langt og træk knappen skifter dens placering på skærmen.</string>
+    <string name="quick_action_btn_tutorial_descr">Tryk og hold og træk knappen skifter dens placering på skærmen.</string>
 <string name="quick_action_interim_dialog">Vis en midlertidig dialogboks</string>
     <string name="shared_string_action_name">Genvejsnavn</string>
 <string name="navigate_point_olc">Open Location Code (OLC)</string>
@@ -2612,7 +2614,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="rendering_attr_depthContours_name">Havdybdekonturer</string>
 	
     <string name="routing_attr_height_obstacles_name">Brug højdedata</string>
-    <string name="routing_attr_height_obstacles_description">Brug terrænhøjdedata fra SRTM, ASTER og EU-DEM.</string>
+    <string name="routing_attr_height_obstacles_description">Factor i terrænhøjdedata (SRTM, ASTER og EU-DEM data).</string>
 
     
     <string name="route_altitude">Rutehøjde</string>
@@ -2625,7 +2627,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="routing_attr_driving_style_name">Kørestil</string>
     
     <string name="shared_string_gpx_tracks">Spor</string>
-    <string name="select_gpx_folder">Vælg mappe til spor</string>
+    <string name="select_gpx_folder">Vælg mappe til GPX-fil</string>
     <string name="file_can_not_be_moved">Filen kan ikke flyttes.</string>
     <string name="shared_string_move">Flyt</string>
     <string name="shared_string_time_span">Varighed</string>
@@ -2928,14 +2930,14 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="choose_navigation_type">Vælg navigationsprofil</string>
     <string name="add_route_points">Tilføj rutepunkter</string>
     <string name="add_line">Tilføj linje</string>
-    <string name="empty_state_my_tracks">Tilføj og optag spor</string>
-    <string name="empty_state_my_tracks_desc">Gem eller importer spor, der skal vises.</string>
+    <string name="empty_state_my_tracks">Tilføj GPX-filer</string>
+    <string name="empty_state_my_tracks_desc">Importer GPX-filer eller optag spor.</string>
     <string name="empty_state_favourites">Tilføj favoritter</string>
-    <string name="empty_state_favourites_desc">Importer eller marker favoritter på kortet.</string>
-    <string name="import_track">Importer spor</string>
+    <string name="empty_state_favourites_desc">Importer favoritter, eller tilføj via markering af punkter på kortet.</string>
+    <string name="import_track">Importer GPX-fil</string>
     <string name="import_track_desc">Filen %1$s indeholder ingen rutepunkter, importer den som et spor?</string>
     <string name="move_point">Flyt punkt</string>
-    <string name="add_segment_to_the_track">Tilføj til et GPX-spor</string>
+    <string name="add_segment_to_the_track">Tilføj til GPX-fil</string>
 <string name="keep_showing_on_map">Fortsæt med at vise på kortet</string>
     <string name="exit_without_saving">Afslut uden at gemme?</string>
     <string name="do_not_use_animations">Ingen animationer</string>
@@ -2977,8 +2979,8 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="shared_string_sort">Sorter</string>
     <string name="coordinate_input">Koordinatindtastning</string>
     <string name="is_saved">er gemt</string>
-    <string name="marker_save_as_track_descr">Eksporter markører til en fil:</string>
-    <string name="marker_save_as_track">Gem som spor</string>
+    <string name="marker_save_as_track_descr">Eksporter markører til følgende GPX-fil:</string>
+    <string name="marker_save_as_track">Gem som GPX-fil</string>
     <string name="move_to_history">Flyt til historik</string>
     <string name="group_will_be_removed_after_restart">Gruppen vil være væk efter næste genstart.</string>
     <string name="shared_string_markers">Markører</string>
@@ -3012,7 +3014,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="shared_string_back">Tilbage</string>
     <string name="shared_string_view">Vis</string>
 	<string name="waypoints_added_to_map_markers">Rutepunkter føjet til kortmarkører</string>
-	<string name="import_gpx_file_description">kan importeres som favoritter, eller en GPX-sporfil.</string>
+	<string name="import_gpx_file_description">kan importeres som favoritter eller GPX-fil.</string>
     <string name="import_as_gpx">Importer som GPX-fil</string>
     <string name="import_as_favorites">Importer som favorit</string>
     <string name="import_file">Importer fil</string>
@@ -3040,14 +3042,14 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="shared_string_gpx_waypoints">Sporets rutepunkter</string>
     <string name="favourites_group">Favoritkategori</string>
     <string name="add_group">Tilføj en gruppe</string>
-    <string name="add_group_descr">Importer grupper fra favoritter eller et spor af rutepunkter.</string>
+    <string name="add_group_descr">Importer grupper fra favoritter eller et GPX-rutepunkter.</string>
     <string name="empty_state_markers_active">Opret kortmarkører!</string>
     <string name="empty_state_markers_active_desc">Tryk langt eller kort på \'Steder\', og tryk derefter på markørflagsknappen.</string>
     <string name="empty_state_markers_groups">Importer grupper</string>
-    <string name="empty_state_markers_groups_desc">Importer favoritgrupper eller et spor af rutepunkter som markører.</string>
+    <string name="empty_state_markers_groups_desc">Importer favoritgrupper eller et GPX-rutepunkter som markører.</string>
     <string name="empty_state_markers_history_desc">Markører, der er markeret som passeret, vil blive vist på denne skærm.</string>
     <string name="appearance_on_the_map">Udseende på kortet</string>
-    <string name="looking_for_tracks_with_waypoints">Søger efter spor med rutepunkter</string>
+    <string name="looking_for_tracks_with_waypoints">Søger efter GPX-filer med rutepunkter</string>
     <string name="shared_string_more_without_dots">Mere</string>
     <string name="empty_state_osm_edits">Opret eller rediger OSM-objekter</string>
     <string name="empty_state_osm_edits_descr">Opret eller ændr OSM-interessepunkter, åbn eller kommenter OSM-noter, og bidrag med GPX-filer.</string>
@@ -3184,14 +3186,15 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="shared_string_do">Gør det</string>
     <string name="shared_string_only_with_wifi">Kun med Wi-Fi</string>
     <string name="wikivoyage_download_pics">Hent billeder</string>
-    <string name="wikivoyage_download_pics_descr">Billeder fra artikler kan hentes til offline brug. Kan altid ændres i \'Udforsk\' &gt; \'Indstillinger\'.</string>
+    <string name="wikivoyage_download_pics_descr">Billeder fra artikler kan hentes til offline brug.
+\n Kan altid ændres i \'Udforsk\' &gt; \'Indstillinger\'.</string>
     <string name="shared_string_wifi_only">Kun med Wi-Fi</string>
-    <string name="select_travel_book">Vælg rejseguide</string>
+    <string name="select_travel_book">Vælg en rejseguide</string>
     <string name="shared_string_travel_book">Rejseguide</string>
     <string name="online_webpage_warning">Siden er kun tilgængelig online. Åben den i en webbrowser?</string>
     <string name="images_cache">Billedcache</string>
     <string name="delete_search_history">Slet søgehistorik</string>
-    <string name="download_images">Vis billeder</string>
+    <string name="download_images">Hent billeder</string>
     <string name="purchase_dialog_title">Vælg plan</string>
     <string name="purchase_dialog_travel_description">Køb en af følgende for at læse rejseartikler offline:</string>
     <string name="purchase_dialog_subtitle">Vælg passende emne:</string>
@@ -3216,11 +3219,11 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="paid_plugin">Betalt udvidelse</string>
     <string name="popular_destinations">Populære destinationer</string>
     <string name="travel_card_update_descr">Nye Wikivoyage data er tilgængelige, opdater for at bruge dem.</string>
-	<string name="travel_card_download_descr">Hent Wikivoyage rejseguider for at se artikler om steder rundt om i verden uden at være forbundet til internettet.</string>
+	<string name="travel_card_download_descr">"Hent Wikivoyage rejseguider for at se artikler om steder rundt om i verden uden  forbindelse  til internettet."</string>
 	<string name="update_is_available">Opdatering er tilgængelig</string>
 	<string name="download_file">Hent fil</string>
     <string name="start_editing_card_image_text">Den gratis verdensomspændende rejseguide, som alle kan redigere.</string>
-    <string name="welcome_to_open_beta_description">Rejseguide er baseret på Wikivoyage. Test alle funktionerne i den åbne beta gratis. Bagefter vil Rejseguide være tilgængelig for abonnenter af OsmAnd ubegrænset og ejere af OsmAnd+</string>
+    <string name="welcome_to_open_beta_description">Rejseguide er baseret på Wikivoyage. Test alle funktionerne i den åbne beta gratis. Bagefter vil Rejseguide være tilgængelig for abonnenter af OsmAnd ubegrænset og ejere af OsmAnd+.</string>
     <string name="start_editing_card_description">Du kan og bør redigere en artikel på Wikivoyage. Del viden, erfaringer, talent og din opmærksomhed</string>
     <string name="start_editing">Begynd redigering</string>
     <string name="get_unlimited_access">Få ubegrænset adgang</string>
@@ -3261,4 +3264,5 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="off_road_render_descr">Egnet til brug under off-road kørsel. Velegnet til brug med satellitbilleder som underlejringskort. Hovedtræk: reduceret tykkelse af hovedveje, øget tykkelse af spor, stier, cykel og andre ruter. Baseret på \'Topo\' stilart.</string>
     <string name="access_intermediate_arrival_time">Mellemliggende ankomsttid</string>
     <string name="map_widget_intermediate_time">Mellemliggende tid</string>
+    <string name="unirs_render_descr">Ændring af standard stil for at give større kontrast af fodgænger- og cykelveje. Mapniks gamle farver bruges.</string>
     </resources>

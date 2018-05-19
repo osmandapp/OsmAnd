@@ -1021,7 +1021,7 @@
 	<string name="loading_cities">Загружаюцца гарады…</string>
 	
 	<string name="poi">POI</string>
-	<string name="error_occurred_saving_gpx">Памылка пры захаваньні GPX</string>
+	<string name="error_occurred_saving_gpx">Не атрымалася захаваць GPX-файл</string>
 	<string name="error_calculating_route">Памылка разьліку маршруту</string>
 	<string name="error_calculating_route_occured">Памылка падчас разьліку маршруту</string>
 	<string name="empty_route_calculated">Памылка: Разлічаны маршрут пусты</string>					
@@ -2870,7 +2870,7 @@
     <string name="empty_state_my_tracks">Дадаць і запісаць сляды</string>
     <string name="empty_state_my_tracks_desc">Запісаць ці імпартаваць сляды для прагляду.</string>
     <string name="empty_state_favourites">Дадаць ва Ўлюбёныя</string>
-    <string name="empty_state_favourites_desc">Дадаць улюбёныя на мапе ці імпартаваць з файлавай сыстэмы.</string>
+    <string name="empty_state_favourites_desc">Імпартаваць улюбёныя ці дадаць з дапамогай маркіроўкі пунктаў на мапе.</string>
     <string name="import_track">Імпартаваць сьлед</string>
     <string name="import_track_desc">Файл %1$s не зьмяшчае кропкі шляху, імпартаваць як сьлед?</string>
     <string name="move_point">Перамясціць кропку</string>
@@ -2953,7 +2953,7 @@
 	<string name="shared_string_back">Назад</string>
 	<string name="shared_string_view">Праглядзець</string>
 	<string name="waypoints_added_to_map_markers">Кропкі маршрута дададзеныя ў маркеры мапы</string>
-	<string name="import_gpx_file_description">могуць быць імпартаваныя як «Улюбёныя» ці як файл следу.</string>
+	<string name="import_gpx_file_description">могуць быць імпартаваныя як «Улюбёныя» ці як GPX-файл.</string>
     <string name="import_as_gpx">Імпартаваць як GPX-файл</string>
     <string name="import_as_favorites">Імпартаваць як Улюбёныя</string>
     <string name="import_file">Імпартаваць файл</string>
@@ -2974,11 +2974,11 @@
     <string name="shared_string_gpx_waypoints">Шляхавыя кропкі</string>
     <string name="favourites_group">Катэгорыя ўлюбёных</string>
     <string name="add_group">Дадаць групу</string>
-    <string name="add_group_descr">Вы можаце імпартаваць групы з улюбёных ці шляхавых кропак.</string>
+    <string name="add_group_descr">Імпартаваць групы з улюбёных ці GPX-кропак.</string>
     <string name="empty_state_markers_active">Стварыце маркеры мапы!</string>
     <string name="empty_state_markers_active_desc">Дакраніцеся месца і потым націсніце кнопку маркера.</string>
     <string name="empty_state_markers_groups">Імпартаваць групы</string>
-    <string name="empty_state_markers_groups_desc">Вы можаце імпартаваць групы улюбёных ці шляхавыя кропкі як маркеры.</string>
+    <string name="empty_state_markers_groups_desc">Імпартаваць групы улюбёных ці GPX-кропкі як маркеры.</string>
     <string name="empty_state_markers_history_desc">Маркеры, пазначаныя як пройдзенныя, з\'явяцца на гэтым экране.</string>
     <string name="show_guide_line_descr">Адлюстроўвае лініі кірунку ад вашага становішча да актыўнага маркера.</string>
     <string name="show_arrows_descr">Адлюстроўвае адну ці дзьве стрэлкі, якія паказваюць кірунак да актыўных маркераў.</string>
@@ -3192,4 +3192,5 @@
     <string name="touring_view_render_descr">Высокадэталізаваны стыль для турыстычнах мэт. Уключае ў сябе ўсе параметры канфігурацыі агаданага стылю і, акрамя таго: паказвае, як мага больш дэталяў, наколькі гэта магчыма, у прыватнасці, усе дарогі, шляхі і іншыя спосабы перамяшчэння. Ясна візуалізуе адрозненне паміж рознымі тыпамі дарог, рэмінісцэнцыя многіх турыстычных атласаў. Высокакантрастная каляровая схема для вулічнага выкарыстання з дзённым і начным рэжымам.</string>
     <string name="access_intermediate_arrival_time">Прамежкавы час прыбыцця</string>
     <string name="map_widget_intermediate_time">Прамежкавы час</string>
+    <string name="unirs_render_descr">Мадыфікацыя стандартнага стылю для забеспячэння большай кантрастнасці пешаходных і роварных дарог. Выкарыстоўваюцца старыя Mapnik-колеры.</string>
     </resources>

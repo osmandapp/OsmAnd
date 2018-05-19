@@ -412,7 +412,7 @@
 	<string name="select_search_position">Πηγή:</string>
 	<string name="context_menu_item_search">Κοντινή αναζήτηση</string>
 	
-	<string name="shared_string_save_as_gpx">Αποθήκευση ως νέο ίχνος GPX</string>
+	<string name="shared_string_save_as_gpx">Αποθήκευση ως νέο αρχείο GPX</string>
 	<string name="route_successfully_saved_at">Η διαδρομή αποθηκεύτηκε ως \'%1$s\'.</string>
 	<string name="filename_input">Όνομα αρχείου: </string>
 	<string name="file_with_name_already_exist">Υπάρχει ήδη αρχείο με το ίδιο όνομα.</string>
@@ -642,7 +642,7 @@
 	<string name="no_vector_map_loaded">Οι διανυσματικοί χάρτες δεν φορτώθηκαν</string>
 	
 	<string name="gpx_files_not_found">Δεν βρέθηκαν αρχεία GPX στον κατάλογο ιχνών</string>
-	<string name="layer_gpx_layer">Ίχνος GPX…</string>
+	<string name="layer_gpx_layer">Αρχεία GPX…</string>
 	<string name="error_reading_gpx">Αδυναμία ανάγνωσης δεδομένων GPX</string>
 	<string name="vector_data">Διανυσματικοί χάρτες χωρίς σύνδεση</string>
 	<string name="transport_context_menu">Αναζήτηση μέσου μεταφοράς στη στάση</string>
@@ -802,7 +802,7 @@
 	<string name="loading_cities">Φόρτωση πόλεων…</string>
 	
 	<string name="poi">Σημ Ενδ</string>
-	<string name="error_occurred_saving_gpx">Αδυναμία αποθήκευσης του ίχνους GPX</string>
+	<string name="error_occurred_saving_gpx">Αδυναμία αποθήκευσης αρχείου GPX</string>
 	<string name="error_calculating_route">Αδυναμία υπολογισμού διαδρομής</string>
 	<string name="error_calculating_route_occured">Αδυναμία υπολογισμού διαδρομής</string>
 	<string name="empty_route_calculated">Η υπολογισμένη διαδρομή είναι κενή</string>					
@@ -813,7 +813,7 @@
 	<string name="loading_data">Φόρτωση δεδομένων…</string>
 	<string name="reading_indexes">Ανάγνωση τοπικών δεδομένων…</string>
 	<string name="previous_run_crashed">Η τελευταία εκτέλεση του OsmAnd κατέρρευσε. Το αρχείο καταγραφής είναι στο {0}. Παρακαλώ αναφέρετε το συμβάν και επισυνάψτε το αρχείο καταγραφής.</string>
-	<string name="saving_gpx_tracks">Αποθήκευση ιχνών GPX στην SD…</string>
+	<string name="saving_gpx_tracks">Αποθήκευση αρχείου GPX…</string>
 	<string name="finished_task">Ολοκληρώθηκε</string>
 	
 	
@@ -827,8 +827,8 @@
 	
 	<string name="osm_settings">Επεξεργασία OSM</string>
 	<string name="additional_settings">Πρόσθετες ρυθμίσεις</string>
-	<string name="save_current_track_descr">Αποθήκευση τρέχοντος ίχνους στην κάρτα μνήμης τώρα.</string>
-	<string name="save_current_track">Αποθήκευση τρέχοντος ίχνους GPX</string>
+	<string name="save_current_track_descr">Αποθήκευση τρέχοντος ίχνους ως αρχείου GPX τώρα.</string>
+	<string name="save_current_track">Αποθήκευση τρέχοντος ίχνους</string>
 	<string name="save_track_interval">Διάστημα καταγραφής κατά την πλοήγηση</string>
 	<string name="save_track_interval_descr">Επιλέξτε διάστημα καταγραφής για την εγγραφή ιχνών κατά την πλοήγηση.</string>
 	<string name="save_track_to_gpx_descrp">Το ίχνος GPX αποθηκεύεται αυτόματα στον κατάλογο ιχνών κατά την πλοήγηση.</string>
@@ -1126,7 +1126,7 @@
     <string name="distance_measurement_finish_editing">Τέλος επεξεργασίας</string>
     <string name="distance_measurement_clear_route">Καθαρισμός όλων των σημείων</string>
     
-    <string name="distance_measurement_load_gpx">Άνοιγμα υφιστάμενου ίχνους GPX</string>
+    <string name="distance_measurement_load_gpx">Άνοιγμα υφιστάμενου αρχείου GPX</string>
     <string name="local_osm_changes_backup_successful">Το αρχείο αλλαγών OSM δημιουργήθηκε %1$s</string>
     <string name="destination_point">Προορισμός %1$s</string>
     <string name="context_menu_item_destination_point">Ορισμός ως προορισμός</string>
@@ -1300,7 +1300,7 @@
     <string name="gpx_selection_segment_title">Τμήμα</string>
     <string name="gpx_selection_track">%1$s
 \nΊχνος %2$s</string>
-    <string name="gpx_file_is_empty">Το ίχνος GPX είναι άδειο</string>
+    <string name="gpx_file_is_empty">Εκκένωση αρχείου GPX</string>
     
     
     
@@ -1894,19 +1894,19 @@
     <string name="will_open_tomorrow_at">Θα ανοίξει αύριο στις</string>
     <string name="by_date">Κατά ημερομηνία</string>
     <string name="by_type">Κατά τύπο</string>
-    <string name="looking_for_tracks_with_waypoints">Αναζήτηση για ίχνη με σημεία διαδρομής</string>
+    <string name="looking_for_tracks_with_waypoints">Αναζήτηση για αρχεία GPX με σημεία διαδρομής</string>
     <string name="shared_string_more_without_dots">Περισσότερα</string>
     <string name="appearance_on_the_map">Εμφάνιση στον χάρτη</string>
-    <string name="add_track_to_markers_descr">Τα σημεία διαδρομής μπορούν να προστεθούν σε δείκτες επιλέγοντας ένα από αυτά τα ίχνη που τα έχει.</string>
+    <string name="add_track_to_markers_descr">Επιλέξτε ένα αρχείο GPX για να προσθέσετε τα σημεία διαδρομής του στους δείκτες.</string>
     <string name="add_favourites_group_to_markers_descr">Επιλέξτε μια αγαπημένη κατηγορία για να προσθέσετε στους δείκτες.</string>
     <string name="shared_string_gpx_waypoints">Σημεία διαδρομής ίχνους</string>
     <string name="favourites_group">Κατηγορία αγαπημένων</string>
     <string name="add_group">Προσθήκη ομάδας</string>
-    <string name="add_group_descr">Εισάγετε ομάδες από αγαπημένα ή σημεία διαδρομής ίχνους.</string>
+    <string name="add_group_descr">Εισάγετε ομάδες από τα αγαπημένα ή σημεία διαδρομής GPX.</string>
     <string name="empty_state_markers_active">Δημιουργήστε δείκτες χάρτη!</string>
     <string name="empty_state_markers_active_desc">Πατήστε παρατεταμένα ή σύντομα \'Μέρη\', έπειτα πατήστε το πλήκτρο σημαίας δείκτη.</string>
     <string name="empty_state_markers_groups">Εισαγωγή ομάδων</string>
-    <string name="empty_state_markers_groups_desc">Εισάγετε ομάδες αγαπημένων ή σημεία διαδρομής ίχνους ως δείκτες.</string>
+    <string name="empty_state_markers_groups_desc">Εισάγετε ομάδες αγαπημένων ή σημεία διαδρομής GPX ως δείκτες.</string>
     <string name="empty_state_markers_history_desc">Οι δείκτες που σημειώθηκαν ως περασμένοι, θα εμφανιστούν στην οθόνη.</string>
     <string name="shared_string_two">Δύο</string>
     <string name="shared_string_one">Ένα</string>
@@ -1927,7 +1927,7 @@
     <string name="tap_on_map_to_hide_interface_descr">Πάτημα στον χάρτη εναλλάσσει τα πλήκτρα ελέγχου και τα γραφικά στοιχεία.</string>
     <string name="tap_on_map_to_hide_interface">Κατάσταση πλήρους οθόνης</string>
     <string name="mark_passed">Περασμένος δείκτης</string>
-    <string name="import_gpx_file_description">μπορεί να εισαχθεί ως αγαπημένο, ή ως αρχείο ίχνους.</string>
+    <string name="import_gpx_file_description">μπορεί να εισαχθεί ως αγαπημένο, ή ως αρχείο GPX.</string>
     <string name="import_as_gpx">Εισαγωγή ως αρχείο GPX</string>
     <string name="import_as_favorites">Εισαγωγή ως αγαπημένου</string>
     <string name="import_file">Εισαγωγή αρχείου</string>
@@ -1962,8 +1962,8 @@
     <string name="shared_string_sort">Ταξινόμηση</string>
     <string name="coordinate_input">Η εισαγωγή συντεταγμένης</string>
     <string name="is_saved">αποθηκεύτηκε</string>
-    <string name="marker_save_as_track_descr">Εξαγωγή των δεικτών σας σε αρχείο που μπορείτε να καθορίσετε εδώ:</string>
-    <string name="marker_save_as_track">Αποθήκευση ως ίχνους</string>
+    <string name="marker_save_as_track_descr">Εξαγωγή των δεικτών σας στο παρακάτω αρχείο GPX:</string>
+    <string name="marker_save_as_track">Αποθήκευση ως αρχείο GPX</string>
     <string name="move_to_history">Μετακίνηση στο ιστορικό</string>
     <string name="group_will_be_removed_after_restart">Η ομάδα θα φύγει την επόμενη φορά που θα ξεκινήσετε την εφαρμογή.</string>
     <string name="show_guide_line">Εμφάνιση γραμμών κατεύθυνσης</string>
@@ -2121,7 +2121,7 @@
 \n • Δείτε την ταχύτητά σας και το υψόμετρό σας 
 \n • Η επιλογή καταγραφής GPX σας επιτρέπει να καταγράψετε το ταξίδι σας και να το μοιραστείτε 
 \n • Μέσω ενός επιπλέον προσθέτου μπορείτε να ενεργοποιήσετε ισοϋψείς γραμμές και σκίαση λόφων</string>
-    <string name="images_cache">Κρυφή μνήμη εικόνων</string>
+    <string name="images_cache">Κρυφή μνήμη εικόνας</string>
     <string name="delete_search_history">Διαγραφή ιστορικού αναζήτησης</string>
     <string name="show_images">Εμφάνιση εικόνων</string>
     <string name="shared_string_slope">Κλίση</string>
@@ -2139,7 +2139,7 @@
     <string name="shared_string_start_time">Αναχώρηση</string>
     <string name="shared_string_end_time">Άφιξη</string>
     <string name="shared_string_color">Χρώμα</string>
-    <string name="select_gpx_folder">Επιλογή φακέλου ιχνών</string>
+    <string name="select_gpx_folder">Επιλογή φακέλου αρχείων GPX</string>
     <string name="file_can_not_be_moved">Το αρχείο δεν μπορεί να μετακινηθεί.</string>
     <string name="shared_string_move">Μετακίνηση</string>
     <string name="shared_string_gpx_tracks">Ίχνη</string>
@@ -2153,7 +2153,7 @@
     <string name="total_distance">Συνολική απόσταση</string>
     <string name="routing_attr_relief_smoothness_factor_name">Επιλογή διακύμανσης ανύψωσης</string>
     <string name="routing_attr_height_obstacles_name">Χρήση υψομετρικών δεδομένων</string>
-    <string name="routing_attr_height_obstacles_description">Χρήση υψομετρικών δεδομένων εδάφους που παρέχονται από SRTM, ASTER και EU-DEM.</string>
+    <string name="routing_attr_height_obstacles_description">Συντελεστής σε ανύψωση εδάφους (μέσω SRTM, ASTER και δεδομένων EU-DEM).</string>
     <string name="rendering_attr_depthContours_description">Εμφάνιση ισοβαθών καμπυλών και σημείων.</string>
     <string name="rendering_attr_depthContours_name">Ναυτικές ισοβαθείς καμπύλες</string>
     <string name="release_2_6">\\022 Νέο γνώρισμα: Πλήκτρο γρήγορης ενέργειας
@@ -2211,9 +2211,9 @@
     <string name="route_roundabout_short">Πάρτε την %1$d έξοδο και πηγαίνετε</string>
     <string name="upload_poi">Ανέβασμα ΣΕ</string>
     <string name="route_calculation">Υπολογισμός διαδρομής</string>
-    <string name="gpx_no_tracks_title">Δεν έχετε ακόμα ίχνη</string>
-    <string name="gpx_no_tracks_title_folder">Μπορείτε επίσης να προσθέσετε ίχνη στον φάκελο</string>
-    <string name="gpx_add_track">Προσθήκη ίχνους</string>
+    <string name="gpx_no_tracks_title">Δεν έχετε ακόμα αρχεία GPX</string>
+    <string name="gpx_no_tracks_title_folder">Μπορείτε επίσης να προσθέσετε αρχεία GPX στον φάκελο</string>
+    <string name="gpx_add_track">Προσθήκη αρχείου GPX</string>
     <string name="gpx_appearance">Εμφάνιση</string>
     <string name="trip_rec_notification_settings">Ενεργοποίηση γρήγορης εκκίνησης καταγραφής</string>
     <string name="trip_rec_notification_settings_desc">Εμφάνιση ειδοποίησης συστήματος που επιτρέπει την έναρξη καταγραφής ταξιδιού.</string>
@@ -2308,7 +2308,7 @@
     <string name="no_inet_connection_desc_map">Απαιτείται για κατέβασμα χαρτών.</string>
     <string name="search_location">Αναζήτηση της τοποθεσίας…</string>
     <string name="storage_free_space">Ελεύθερος χώρος</string>
-    <string name="storage_place_description">Χώρος δεδομένων του OsmAnd (για χάρτες, ίχνη, κλπ.): %1$s.</string>
+    <string name="storage_place_description">Αποθήκευση δεδομένων του OsmAnd (για χάρτες, αρχεία GPX, κλπ.): %1$s.</string>
     <string name="give_permission">Παραχώρηση άδειας</string>
     <string name="allow_access_location">Να επιτραπεί πρόσβαση της τοποθεσίας</string>
     <string name="first_usage_greeting">Πάρτε οδηγίες και ανακαλύψτε νέες τοποθεσίες χωρίς διαδικτυακή σύνδεση</string>
@@ -2369,7 +2369,7 @@
     <string name="shared_string_wifi_only">Μόνο ασύρματα</string>
     <string name="select_travel_book">Επιλογή ταξιδιωτικού βιβλίου</string>
     <string name="shared_string_travel_book">Ταξιδιωτικό βιβλίο</string>
-    <string name="download_images">Εμφάνιση εικόνων</string>
+    <string name="download_images">Κατέβασμα εικόνων</string>
     <string name="access_direction_haptic_feedback_descr">Υπόδειξη κατεύθυνσης σημείου προορισμού με δόνηση.</string>
     <string name="use_osm_live_routing_description">Ενεργοποίηση πλοήγησης για αλλαγές του OsmAnd Live.</string>
     <string name="use_osm_live_routing">Πλοήγηση OsmAnd Live</string>
@@ -2709,7 +2709,7 @@
     <string name="live_monitoring_stop">Παύση διαδικτυακής ιχνηλάτησης</string>
     <string name="rendering_attr_buildings15zoom_name">Κτίρια σε εστίαση 15</string>
     <string name="rendering_attr_showCycleRoutes_name">Εμφάνιση διαδρομών ποδηλάτων</string>
-    <string name="none_selected_gpx">Δεν επιλέχτηκαν αρχεία GPX. Για να επιλέξετε ένα πατήστε παρατεταμένα ένα διαθέσιμο ίχνος.</string>
+    <string name="none_selected_gpx">Δεν επιλέχτηκαν αρχεία GPX. Επιλέξτε ένα πατώντας παρατεταμένα.</string>
     <string name="localization_pref_title">Τοπικοποίηση</string>
     <string name="index_item_world_seamarks">Παγκόσμια θαλασσινά σημάδια</string>
     <string name="index_item_world_basemap">Επισκόπηση παγκόσμιου χάρτη</string>
@@ -2917,7 +2917,7 @@
     <string name="recent_places">Πρόσφατα μέρη</string>
     <string name="favourites">Αγαπημένα</string>
     <string name="saved_at_time">Τώρα αποθηκεύτηκε στο: %1$s</string>
-    <string name="show_gpx">Εμφάνιση GPX</string>
+    <string name="show_gpx">Εμφάνιση δεδομένων GPX</string>
     <string name="count_of_lines">Πλήθος γραμμών</string>
     <string name="are_you_sure">Είσαστε σίγουρος;</string>
     <string name="unsaved_changes_will_be_lost">Οι μη αποθηκευμένες αλλαγές θα χαθούν. Συνέχεια;</string>
@@ -3068,14 +3068,14 @@
     <string name="save_route_point">Αποθήκευση σημείου διαδρομής</string>
     <string name="waypoint_one">Σημείο διαδρομής 1</string>
     <string name="route_point_one">Σημείο διαδρομής 1</string>
-    <string name="empty_state_my_tracks">Προσθήκη και καταγραφή ιχνών</string>
-    <string name="empty_state_my_tracks_desc">Καταγραφή ή εισαγωγή ιχνών για προβολή.</string>
+    <string name="empty_state_my_tracks">Προσθήκη αρχείων GPX</string>
+    <string name="empty_state_my_tracks_desc">Εισαγωγή αρχείων GPX, ή καταγραφή ιχνών.</string>
     <string name="empty_state_favourites">Προσθήκη αγαπημένων</string>
-    <string name="empty_state_favourites_desc">Εισαγωγή ή σημείωση αγαπημένων στον χάρτη.</string>
-    <string name="import_track">Εισαγωγή ίχνους</string>
+    <string name="empty_state_favourites_desc">Εισαγωγή αγαπημένων, ή προσθήκη μέσω σημείων επισήμανσης στον χάρτη.</string>
+    <string name="import_track">Εισαγωγή αρχείου GPX</string>
     <string name="import_track_desc">Το αρχείο %1$s δεν περιέχει σημεία διαδρομής, να εισαχθεί ως ίχνος;</string>
     <string name="move_point">Μετακίνηση σημείου</string>
-    <string name="add_segment_to_the_track">Προσθήκη σε ίχνος GPX</string>
+    <string name="add_segment_to_the_track">Προσθήκη αρχείου GPX</string>
     <string name="osm_recipients_label">Αποδέκτες OSM</string>
     <string name="total_donations">Συνολικές δωρεές</string>
     <string name="day_off_label">κλειστό</string>
@@ -3087,7 +3087,7 @@
     <string name="tunnel_warning">Προσέγγιση σήραγγας</string>
     <string name="show_tunnels">Σήραγγες</string>
 <string name="purchase_dialog_title">Επιλογή σχεδίου</string>
-    <string name="purchase_dialog_travel_description">Αγοράσετε ένα από τα παρακάτω για να διαβάσετε ταξιδιωτικά άρθρα χωρίς σύνδεση:</string>
+    <string name="purchase_dialog_travel_description">Αγοράσετε ένα από τα παρακάτω για να πάρετε τη λειτουργία οδηγού ταξιδιών χωρίς σύνδεση :</string>
     <string name="purchase_dialog_subtitle">Επιλέξτε κατάλληλο στοιχείο:</string>
     <string name="monthly_map_updates">Ενημερώσεις χαρτών: <b>κάθε μήνα</b></string>
     <string name="daily_map_updates">Ενημερώσεις χαρτών: <b>κάθε ώρα</b></string>
@@ -3108,11 +3108,11 @@
     <string name="paid_app">Εφαρμογή επί πληρωμή</string>
     <string name="paid_plugin">Πρόσθετο επί πληρωμή</string>
     <string name="travel_card_update_descr">Νέα δεδομένα βικιταξιδιών είναι διαθέσιμα, ενημερώστε τα για να το απολαύσετε.</string>
-	<string name="travel_card_download_descr">Κατεβάστε αυτούς τους οδηγούς ταξιδιών των βικιταξιδιών για να προβάλετε τα άρθρα για μέρη σε όλον τον κόσμο χωρίς σύνδεση διαδικτύου.</string>
+	<string name="travel_card_download_descr">Κατεβάστε τους οδηγούς ταξιδιών των βικιταξιδιών για να προβάλετε τα άρθρα για μέρη σε όλον τον κόσμο χωρίς σύνδεση διαδικτύου.</string>
 	<string name="update_is_available">Υπάρχει διαθέσιμη ενημέρωση</string>
 	<string name="download_file">Λήψη αρχείου</string>
     <string name="start_editing_card_image_text">Ο ελεύθερος παγκόσμιος ταξιδιωτικός οδηγός που οποιοσδήποτε μπορεί να επεξεργαστεί.</string>
-    <string name="welcome_to_open_beta_description">"Το Travel βασίζεται στα βικιταξίδια.  Κατά τη διάρκεια του βήτα ελέγχου ελέγξτε όλα τα χαρακτηριστικά δωρεάν. Μετά το τέλος, το Travel θα είναι διαθέσιμο στους συνδρομητές του απεριόριστου OsmAnd και στους κατόχους του OsmAnd+"</string>
+    <string name="welcome_to_open_beta_description">"Το OsmAnd Travel βασίζεται στα βικιταξίδια.  Ελέγξτε όλα τα χαρακτηριστικά δωρεάν κατά την ανοικτή βήμα δοκιμή. Μετά το τέλος, το OsmAnd Travel θα είναι διαθέσιμο στους συνδρομητές του απεριόριστου OsmAnd και στους κατόχους του OsmAnd+."</string>
     <string name="start_editing_card_description">"Μπορείτε και πρέπει  να επεξεργαστείτε οποιοδήποτε άρθρο στο βικιταξίδια,  Μοιραστείτε τη γνώση, την εμπειρία, το ταλέντο και την προσοχή σας"</string>
     <string name="start_editing">Έναρξη επεξεργασίας</string>
     <string name="get_unlimited_access">Πάρτε απεριόριστη πρόσβαση</string>
@@ -3154,4 +3154,5 @@
     <string name="touring_view_render_descr">Μορφή υψηλών λεπτομερειών για τουριστικούς σκοπούς. Περιλαμβάνει όλες τις επιλογές διαμόρφωσης της προεπιλεγμένης μορφής και επιπλέον: Εμφανίζει τη μεγαλύτερη δυνατή λεπτομέρεια, ιδιαίτερα σε δρόμους, διαδρομές και άλλους τρόπους ταξιδιού. Καθαρή οπτική διάκριση μεταξύ όλων των διαφορετικών τύπων δρόμου, που θυμίζει πολλούς τουριστικούς άτλαντες. Χρωματικός συνδυασμός υψηλής αντίθεσης για εξωτερική χρήση, κατάσταση μέρας και νύχτας.</string>
     <string name="access_intermediate_arrival_time">Ενδιάμεσος χρόνος άφιξης</string>
     <string name="map_widget_intermediate_time">Ενδιάμεσος χρόνος</string>
+    <string name="unirs_render_descr">Τροποποίηση της τυπικής μορφής για παροχή μεγαλύτερης αντίθεσης των δρόμων πεζοπορίας και ποδηλάτου. Χρήση χρωμάτων παλιών Mapnik.</string>
     </resources>
