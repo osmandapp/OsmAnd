@@ -1955,4 +1955,13 @@
 
 	<string name="poi_wetland_wet_meadow">Υγρό λιβάδι</string>
 	<string name="poi_wetland_bog">Βάλτος</string>
+	<string name="poi_brushless_no">Χωρίς βούρτσες: όχι</string>
+	<string name="poi_wetland_marsh">Έλος</string>
+	<string name="poi_wetland_reedbed">Καλαμιώνας</string>
+	<string name="poi_wetland_swamp">Τέλμα</string>
+	<string name="poi_wetland_saltern">Εγκατάσταση άλατος</string>
+	<string name="poi_wetland_tidalflat">Κατακλυζόμενη ζώνη</string>
+	<string name="poi_wetland_saltmarsh">Αλμυρός βάλτος</string>
+	<string name="poi_wetland_mangrove">Μανγκρόβια</string>
+	<string name="poi_wetland_fen">Βάλτος</string>
 	</resources>

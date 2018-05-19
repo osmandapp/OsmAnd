@@ -44,7 +44,7 @@
 	<string name="save_track_to_gpx_globally">Aufzeichnung in GPX-Datei</string>
 	<string name="save_track_to_gpx_globally_headline">GPX-Aufzeichnung bei Bedarf</string>
 	<string name="save_track_to_gpx_globally_descr">Generelle Positionserfassung kann mit der Schaltfläche \'GPX-Aufzeichnung\' direkt auf dem Kartenbildschirm aktiviert oder deaktiviert werden.</string>
-	<string name="save_current_track">Track jetzt speichern</string>
+	<string name="save_current_track">Aktuellen Track speichern</string>
 	<string name="save_current_track_descr">Aktuellen Track jetzt als GPX-Datei speichern.</string>
 	<string name="save_track_to_gpx">Während Navigation autom. Track aufzeichnen</string>
 	<string name="save_track_to_gpx_descrp">Während der Navigation wird automatisch ein GPX-Track im Track-Ordner gespeichert.</string>
@@ -1904,7 +1904,7 @@ Lon %2$s</string>
 	<string name="working_days">Werktage</string>
 	<string name="favourites">Favoriten</string>
 	<string name="poi_deleted_localy">Der POI wird hier gelöscht, sobald sie ihre Änderungen hochladen</string>
-	<string name="show_gpx">GPX anzeigen</string>
+	<string name="show_gpx">GPX-Daten anzeigen</string>
 	<string name="are_you_sure">Sicher?</string>
 	<string name="unsaved_changes_will_be_lost">Alle ungesicherten Änderungen gehen verloren. Fortfahren?</string>
 	<string name="roads">Straßen</string>
@@ -2505,7 +2505,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
 	
     
     <string name="routing_attr_height_obstacles_name">Höhendaten berücksichtigen</string>
-    <string name="routing_attr_height_obstacles_description">Geländeprofil berücksichtigen (SRTM, ASTER und EU-DEM Daten).</string>
+    <string name="routing_attr_height_obstacles_description">Faktor im Geländeprofil (über SRTM, ASTER und EU-DEM Daten).</string>
 
     <string name="rendering_attr_depthContours_name">Nautische Tiefenlinien</string>
 	<string name="rendering_attr_depthContours_description">Tiefenlinien und -punkte einblenden.</string>
@@ -3060,7 +3060,11 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="group_deleted">Gruppe gelöscht</string>
     <string name="rendering_attr_whiteWaterSports_name">Wildwasser-Sportarten</string>
     <string name="clear_all_intermediates">Alle Zwischenpunkte löschen</string>
+<<<<<<< HEAD
     <string name="shared_string_travel_guides">Reiseführer</string>
+=======
+    <string name="shared_string_travel">Reiseführer</string>
+>>>>>>> weblate/master
     <string name="waypoints_removed_from_map_markers">Wegpunkte aus Kartenmarkierungen entfernt</string>
     <string name="nothing_found_in_radius">Nichts gefunden:</string>
     <string name="select_waypoints_category_description">Fügen Sie alle Wegpunkte des Tracks hinzu oder wählen Sie einzelne Kategorien aus.</string>
@@ -3077,7 +3081,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="index_item_world_wikivoyage">Weltweite Wikivoyage Artikel</string>
     <string name="shared_string_contents">Inhalte</string>
     <string name="wikivoyage_download_pics">Bilder herunterladen</string>
-    <string name="wikivoyage_download_pics_descr">Bilder in den Artikeln können zur Offline-Nutzung heruntergeladen werden.
+    <string name="wikivoyage_download_pics_descr">Bilder für Artikel können zur Offline-Nutzung heruntergeladen werden. 
 \nSie können diese Einstellung jederzeit in \'Durchsuchen\' → \'Optionen\' ändern.</string>
     <string name="online_webpage_warning">Seite ist nur online abrufbar. Im Webbrowser öffnen?</string>
     <string name="delete_search_history">Suchverlauf löschen</string>
@@ -3090,13 +3094,17 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="select_travel_book">Reisebuch auswählen</string>
     <string name="shared_string_travel_book">Reisebuch</string>
     <string name="images_cache">Bilder-Cache</string>
-    <string name="download_images">Bilder anzeigen</string>
+    <string name="download_images">Bilder herunterladen</string>
     <string name="travel_card_update_descr">Neue Wikivoyage-Daten verfügbar, Aktualisierung möglich.</string>
-	<string name="travel_card_download_descr">Laden Sie diese Wikivoyage-Reiseführer herunter, um Artikel zu Orten auf der ganzen Welt ohne Internetverbindung anzuzeigen.</string>
+	<string name="travel_card_download_descr">Wikivoyage-Reiseführer herunterladen, um Artikel zu Orten auf der ganzen Welt ohne Internetverbindung anzuzeigen.</string>
 	<string name="update_is_available">Aktualisierung verfügbar</string>
 	<string name="download_file">Datei herunterladen</string>
     <string name="start_editing_card_image_text">Der kostenlose weltweite Reiseführer, den jeder bearbeiten kann.</string>
+<<<<<<< HEAD
     <string name="welcome_to_open_beta_description">Die Reisefüher basieren derzeit auf Wikivoyage. Testen Sie alle Funktionen während des Open-Beta-Tests kostenlos. Danach steht die Reisefüherfunktionalität den Abonnenten von OsmAnd Unlimited und den Besitzern von OsmAnd+ zur Verfügung.</string>
+=======
+    <string name="welcome_to_open_beta_description">Reiseführer basieren derzeit auf Wikivoyage. Testen Sie alle Funktionen während des Open Beta-Tests kostenlos. Danach stehen den Abonnenten von OsmAnd Unlimited und den Besitzern von OsmAnd+ Reiseführer zur Verfügung.</string>
+>>>>>>> weblate/master
     <string name="start_editing_card_description">Sie können und sollten Artikel auf Wikivoyage bearbeiten. Teilen Sie Wissen, Erfahrung, Talent und Ihre Aufmerksamkeit</string>
     <string name="start_editing">Bearbeitung starten</string>
     <string name="get_unlimited_access">Erhalten Sie unbegrenzten Zugang</string>
@@ -3157,4 +3165,5 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="touring_view_render_descr">Hoch detaillierter Stil für Touringzwecke. Enthält alle Konfigurationsoptionen des Standardstils, zusätzlich: Zeigt so viele Details wie möglich an, insbesondere alle Straßen, Wege und andere Reisemöglichkeiten. Klare visuelle Unterscheidung zwischen den verschiedenen Straßentypen, ähnlich vielen Tourenatlanten. Kontrastreiches Farbschema für den Außenbereich, Tag- und Nachtmodus.</string>
     <string name="access_intermediate_arrival_time">Ankunftszeit Zwischenziel</string>
     <string name="map_widget_intermediate_time">Reisezeit Zwischenziel</string>
+    <string name="unirs_render_descr">Änderung des Standardstils, um den Kontrast von Fußgänger- und Fahrradwegen zu erhöhen. Verwendete Legacy Mapnik Farben.</string>
     </resources>
