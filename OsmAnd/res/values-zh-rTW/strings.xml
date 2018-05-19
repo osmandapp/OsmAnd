@@ -3019,15 +3019,15 @@
     <string name="by_type">按照類型</string>
     <string name="one_tap_active_descr">輕點在地圖上的標記，將其移動到活動標記的頂端，而不用打開內容選單。</string>
     <string name="modify_the_search_query">變更搜尋的查詢。</string>
-    <string name="release_3_0">新的旅行選單：檢視不用網路的維基導遊文章
-\n
-\n• 維基百科：嶄新的面貌、活動連結、圖片
-\n
-\n• 開放式軌跡使用者介面：顯示航點群組
-\n
-\n• 地圖標記：從 GPX 檔案匯入所選擇的群組，嶄新的座標輸入外觀
-\n
-\n• OsmAnd Live 訂閱，現在包括了 OsmAnd 所有的功能
+    <string name="release_3_0">• 新的：支援全球離線旅遊指南、參考所的位置連結到地圖、初始資料來自維基導遊。
+\n 
+\n• 維基百科：嶄新的面貌、活動連結、圖片 
+\n 
+\n• 開放式軌跡使用者介面：顯示航點群組 
+\n 
+\n• 地圖標記：從 GPX 檔案匯入所選擇的群組，嶄新的座標輸入外觀 
+\n 
+\n• OsmAnd Live 訂閱，現在包括了 OsmAnd 所有的功能 
 \n</string>
     <string name="av_locations_selected_desc">包括座標和所選註解資料的 GPX 檔案。</string>
     <string name="av_locations_all_desc">包括座標和所有註解資料的 GPX 檔案。</string>
@@ -3122,7 +3122,7 @@
     <string name="select_waypoints_category_description">增加所有軌跡的航點，或選擇個別的類別。</string>
     <string name="shared_string_total">總計</string>
     <string name="nothing_found_in_radius">找不到任何東西：</string>
-    <string name="shared_string_travel">旅行</string>
+    <string name="shared_string_travel">旅遊指南</string>
     <string name="waypoints_removed_from_map_markers">已從地圖標記移除航點</string>
     <string name="use_two_digits_longitude">使用兩位數的經度</string>
     <string name="shared_string_result">結果</string>
@@ -3175,7 +3175,7 @@
 	<string name="update_is_available">有更新可用</string>
 	<string name="download_file">下載檔案</string>
     <string name="start_editing_card_image_text">人人都可編輯的自由全球旅行指南。</string>
-    <string name="welcome_to_open_beta_description">基於維基導遊的 OsmAnd 旅行。在免費公開測試期間，測試所有的功能。在測試結束後，OsmAnd 旅行功能將只提供給 OsmAnd Unlimited 的捐款者與 OsmAnd+ 的擁有者。</string>
+    <string name="welcome_to_open_beta_description">目前旅遊指南是基於維基導遊。在公開測試期間，測試所有的功能為免費。在這之後，旅遊指南功能將只提供給 OsmAnd Unlimited 的訂戶與 OsmAnd+ 的擁有者。</string>
     <string name="start_editing_card_description">您可以也應該在維基導遊上編輯任何文章。分享知識、經驗、才能與您的關注</string>
     <string name="start_editing">開始編輯</string>
     <string name="get_unlimited_access">取得無限制的存取</string>
