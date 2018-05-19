@@ -2938,7 +2938,7 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="shared_string_explore">Utforska</string>
     <string name="shared_string_result">Resultat</string>
     <string name="use_two_digits_longitude">Använd tvåsiffrig longitud</string>
-    <string name="shared_string_travel">Resor</string>
+    <string name="shared_string_travel_guides">Resor</string>
     <string name="waypoints_removed_from_map_markers">Waypoints tas bort från kartmarkörer</string>
     <string name="total_donations">Donationer totalt</string>
     <string name="shared_string_bookmark">Bokmärke</string>

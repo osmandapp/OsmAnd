@@ -2919,7 +2919,7 @@
 <string name="wikivoyage_search_hint">البحث : بلد أو مدينة أو منطقة</string>
     <string name="shared_string_explore">إكتشف</string>
     <string name="shared_string_result">النتيجة</string>
-    <string name="shared_string_travel">السفر</string>
+    <string name="shared_string_travel_guides">السفر</string>
     <string name="enter_lon">إدخال خط الطول</string>
     <string name="enter_lat">إدخال دائرة العرض</string>
     <string name="transport_nearby_routes">بالقُرب مِن</string>

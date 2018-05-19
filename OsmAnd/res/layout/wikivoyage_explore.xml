@@ -37,7 +37,7 @@
                     android:ellipsize="end"
                     android:gravity="center_vertical"
                     android:maxLines="1"
-                    android:text="@string/shared_string_travel"
+                    android:text="@string/shared_string_travel_guides"
                     android:textColor="?attr/wikivoyage_app_bar_text_color"
                     android:textSize="@dimen/dialog_header_text_size"
                     osmand:typeface="@string/font_roboto_medium"/>

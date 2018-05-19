@@ -3054,7 +3054,7 @@ voor Gebied: %1$s x %2$s</string>
     <string name="shared_string_contents">"Inhoud "</string>
     <string name="shared_string_result">"Resultaat "</string>
     <string name="use_two_digits_longitude">"Twee cijfers gebruiken voor lengtegraad (i.p.v. drie) "</string>
-    <string name="shared_string_travel">"Reisgids "</string>
+    <string name="shared_string_travel_guides">"Reisgids "</string>
     <string name="nothing_found_in_radius">Niets gevonden:</string>
     <string name="clear_all_intermediates">Alle tussenpunten wissen</string>
     <string name="group_deleted">"Groep verwijderd "</string>

@@ -2787,7 +2787,7 @@ Pôr do Sol: %2$s</string>
     <string name="nothing_found_in_radius">Nada encontrado:</string>
     <string name="osmand_extended_description_part1">OsmAnd (sigla em inglês de Direções de Navegação Automatizada do OSM) é um aplicativo de mapa e navegação com acesso a dados livres, mundiais e de alta qualidade do OpenStreetMap (OSM). Poderá usar o navegador visual e por voz, exibir POIs (pontos de interesse), criar e gerenciar trilhas GPX, usar (através de plugin) curvas de nível e dados de altitude, escolher entre os modos motorista, ciclista e pedestre, editar o OSM e muito mais.</string>
     <string name="use_two_digits_longitude">"Use longitude com dois dígitos "</string>
-    <string name="shared_string_travel">Viagem</string>
+    <string name="shared_string_travel_guides">Viagem</string>
     <string name="waypoints_removed_from_map_markers">Pontos de passagem removidos dos marcadores de mapa</string>
     <string name="shared_string_result">Resultado</string>
     <string name="release_2_4">• Nova pesquisa de texto livre robusta 

@@ -2705,7 +2705,7 @@
     <string name="osmand_parking_overdue">תפוגה</string>
     <string name="nautical_renderer">ימי</string>
     <string name="use_two_digits_longitude">שתי ספרות לציון קו אורך</string>
-    <string name="shared_string_travel">מסע</string>
+    <string name="shared_string_travel_guides">מסע</string>
     <string name="nothing_found_in_radius">לא נמצא שום דבר:</string>
     <string name="switch_osm_notes_visibility_desc">הצגה/הסתרה של הערות OSM במפה.</string>
     <string name="gpx_file_desc">GPX - מתאים לייצוא ל־JOSM או עורכי OSM אחרים.</string>

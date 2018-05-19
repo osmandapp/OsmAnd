@@ -766,7 +766,7 @@ public class MapActivityActions implements DialogProvider {
 					}).createItem());
 		}
 
-		optionsMenuHelper.addItem(new ItemBuilder().setTitle(getString(R.string.shared_string_travel) + " (Beta)")
+		optionsMenuHelper.addItem(new ItemBuilder().setTitle(getString(R.string.shared_string_travel_guides) + " (Beta)")
 				.setIcon(R.drawable.ic_action_travel)
 				.setListener(new ItemClickListener() {
 					@Override

@@ -2603,7 +2603,7 @@
     <string name="shared_string_explore">Gezin</string>
     <string name="shared_string_contents">İçerikler</string>
     <string name="shared_string_result">Sonuç</string>
-    <string name="shared_string_travel">Seyehat</string>
+    <string name="shared_string_travel_guides">Seyehat</string>
     <string name="shared_string_total">Toplam</string>
     <string name="clear_all_intermediates">Tüm başlangıç noktalarını temizle</string>
     <string name="group_deleted">Grup silindi</string>

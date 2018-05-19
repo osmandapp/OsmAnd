@@ -3027,7 +3027,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="nothing_found_in_radius">Nic nie znaleziono:</string>
     <string name="select_waypoints_category_description">Można dodać wszystkie punkty pośrednie trasy lub wybrać osobne kategorie.</string>
     <string name="shared_string_total">Łącznie</string>
-    <string name="shared_string_travel">Przewodniki turystyczne</string>
+    <string name="shared_string_travel_guides">Przewodniki turystyczne</string>
     <string name="waypoints_removed_from_map_markers">Punkty trasy usunięte z znaczników mapy</string>
     <string name="use_two_digits_longitude">Używaj dwóch cyfr długości geograficznej</string>
     <string name="wikivoyage_search_hint">Wyszukiwanie: kraj, miasto, prowincja</string>

@@ -3142,7 +3142,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="shared_string_total">Total</string>
     <string name="nothing_found_in_radius">Aucun résultat :</string>
     <string name="waypoints_removed_from_map_markers">Étape retirée des marques</string>
-    <string name="shared_string_travel">Voyage</string>
+    <string name="shared_string_travel_guides">Voyage</string>
     <string name="shared_string_result">Résultat</string>
     <string name="saved_articles">Articles favoris</string>
     <string name="shared_string_explore">Explorer</string>

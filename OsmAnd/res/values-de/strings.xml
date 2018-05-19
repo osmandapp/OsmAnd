@@ -3060,7 +3060,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="group_deleted">Gruppe gelöscht</string>
     <string name="rendering_attr_whiteWaterSports_name">Wildwasser-Sportarten</string>
     <string name="clear_all_intermediates">Alle Zwischenpunkte löschen</string>
-    <string name="shared_string_travel">Reise</string>
+    <string name="shared_string_travel_guides">Reise</string>
     <string name="waypoints_removed_from_map_markers">Wegpunkte aus Kartenmarkierungen entfernt</string>
     <string name="nothing_found_in_radius">Nichts gefunden:</string>
     <string name="select_waypoints_category_description">Fügen Sie alle Wegpunkte des Tracks hinzu oder wählen Sie einzelne Kategorien aus.</string>

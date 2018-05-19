@@ -3155,7 +3155,7 @@
     <string name="shared_string_total">کل</string>
     <string name="nothing_found_in_radius">چیزی پیدا نشد:</string>
     <string name="waypoints_removed_from_map_markers">نقاط بین‌راهی از نشانه‌های نقشه حذف شد</string>
-    <string name="shared_string_travel">راهنماهای مسافرت</string>
+    <string name="shared_string_travel_guides">راهنماهای مسافرت</string>
     <string name="shared_string_result">نتیجه</string>
     <string name="use_two_digits_longitude">طول جغرافیایی دورقمی</string>
     <string name="saved_articles">مقاله‌های نشانک‌دار</string>

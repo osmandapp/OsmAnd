@@ -3098,7 +3098,7 @@
     <string name="select_waypoints_category_description">Вы можаце дадаць усе пункты шляху ці абраць асобныя катэгорыі.</string>
     <string name="shared_string_total">Усяго</string>
     <string name="nothing_found_in_radius">Нічога не знойдзена ў радыусе:</string>
-    <string name="shared_string_travel">Падарожжа</string>
+    <string name="shared_string_travel_guides">Падарожжа</string>
     <string name="waypoints_removed_from_map_markers">Шляхавыя кропкі выдаленыя з маркераў мапы</string>
     <string name="shared_string_result">Вынік</string>
     <string name="use_two_digits_longitude">Выкарыстоўваць дзьве лічбы даўгаты</string>

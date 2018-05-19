@@ -2600,7 +2600,7 @@
     <string name="shared_string_explore">Истражи</string>
     <string name="shared_string_contents">Садржаји</string>
     <string name="shared_string_result">Резултат</string>
-    <string name="shared_string_travel">Путовање</string>
+    <string name="shared_string_travel_guides">Путовање</string>
     <string name="layer_map">Извор карте…</string>
     <string name="route_general_information">Укупна удаљеност %1$s, време путовања %2$d h %3$d min.</string>
     <string name="position_on_map_center">На средини</string>

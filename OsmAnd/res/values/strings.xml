@@ -89,7 +89,7 @@
     <string name="shared_string_contents">Contents</string>
     <string name="shared_string_result">Result</string>
     <string name="use_two_digits_longitude">Use double digit longitude</string>
-    <string name="shared_string_travel">Travel guides</string>
+    <string name="shared_string_travel_guides">Travel guides</string>
     <string name="waypoints_removed_from_map_markers">Waypoints removed from map markers</string>
     <string name="nothing_found_in_radius">Could not find anything:</string>
     <string name="select_waypoints_category_description">Add all of the track\'s waypoints, or select separate categories.</string>

@@ -3038,7 +3038,7 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="shared_string_contents">Tartalomjegyzék</string>
     <string name="shared_string_result">Eredmény</string>
     <string name="use_two_digits_longitude">Kétszámjegyű hosszúság használata</string>
-    <string name="shared_string_travel">Utazás</string>
+    <string name="shared_string_travel_guides">Utazás</string>
     <string name="waypoints_removed_from_map_markers">Útpontok eltávolítva a térképjelölők közül</string>
     <string name="nothing_found_in_radius">Nincs találat:</string>
     <string name="select_waypoints_category_description">A nyomvonal összes útpontjának hozzáadása, vagy válassz külön kategóriát.</string>
