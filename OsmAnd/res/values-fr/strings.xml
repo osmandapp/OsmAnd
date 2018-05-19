@@ -119,7 +119,7 @@
     <string name="select_search_position">Autour de :</string>
     <string name="context_menu_item_search">Rechercher à proximité</string>
 
-    <string name="shared_string_save_as_gpx">Enregistrer comme nouvelle trace GPX</string>
+    <string name="shared_string_save_as_gpx">Enregistrer comme nouveau fichier GPX</string>
     <string name="route_successfully_saved_at">Itinéraire enregistré sous \'%1$s\'.</string>
     <string name="filename_input">Nom du fichier : </string>
     <string name="file_with_name_already_exist">Le même nom existe déjà.</string>
@@ -346,7 +346,7 @@
     <string name="no_vector_map_loaded">Aucune carte vectorielle n\'a été chargée</string>
     
     <string name="gpx_files_not_found">Aucun fichier GPX n\'a été trouvé dans le dossier de traces</string>
-    <string name="layer_gpx_layer">Trace GPX…</string>
+    <string name="layer_gpx_layer">Fichiers GPX…</string>
     <string name="error_reading_gpx">Impossible de lire les données GPX</string>
     <string name="vector_data">Cartes vectorielles OSM</string>
     <string name="transport_context_menu">Transport en commun</string>
@@ -517,7 +517,7 @@
     <string name="loading_cities">Chargement des villes…</string>
 
     <string name="poi">PI</string>
-    <string name="error_occurred_saving_gpx">Impossible d\'enregistrer la trace GPX</string>
+    <string name="error_occurred_saving_gpx">Impossible d\'enregistrer le fichier GPX</string>
     <string name="error_calculating_route">Impossible de calculer l\'itinéraire</string>
     <string name="error_calculating_route_occured">Impossible de calculer l\'itinéraire</string>
     <string name="empty_route_calculated">L\'itinéraire calculé est vide</string>
@@ -529,7 +529,7 @@
     <string name="loading_data">Chargement des données</string>
     <string name="reading_indexes">Lecture des index…</string>
     <string name="previous_run_crashed">Oups … OsmAnd a planté. Souhaitez-vous nous envoyer le fichier journal ?</string>
-    <string name="saving_gpx_tracks">Enregistrement des traces GPX sur la carte SD…</string>
+    <string name="saving_gpx_tracks">Enregistrement du fichier GPX…</string>
     <string name="finished_task">Terminé</string>
 
 
@@ -544,8 +544,8 @@
     <string name="auto_zoom_map">Zoom automatique de la carte</string>
     <string name="additional_settings">Paramètres supplémentaires</string>
     <string name="shared_string_settings">Paramètres</string>
-    <string name="save_current_track_descr">Enregistrer la trace courante sur la carte mémoire.</string>
-    <string name="save_current_track">Enregistrer la trace GPX</string>
+    <string name="save_current_track_descr">Enregistrer la trace courante comme fichier GPX.</string>
+    <string name="save_current_track">Enregistrer la trace courante</string>
     <string name="save_track_interval_descr">Sélectionnez l\'intervalle d\'enregistrement de la trace pendant l\'itinéraire</string>
     <string name="save_track_interval">Intervalle d\'enregistrement pendant la navigation</string>
     <string name="save_track_to_gpx_descrp">Une trace GPX est enregistrée automatiquement dans le dossier des traces pendant l\'itinéraire</string>
@@ -1129,7 +1129,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="distance_measurement_start_editing">Démarrer la mesure sur la carte</string>
     <string name="distance_measurement_finish_editing">Terminer la mesure</string>
 
-    <string name="distance_measurement_load_gpx">Ouvrir un fichier de trace GPX</string>
+    <string name="distance_measurement_load_gpx">Ouvrir un fichier de trace GPX existant</string>
     <string name="wait_current_task_finished">Veuillez attendre que la tâche en cours soit terminée</string>
     <string name="plugin_distance_point_time">temps</string>
     <string name="plugin_distance_point_hdop">précision</string>
@@ -1448,7 +1448,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     
     
     
-    <string name="gpx_file_is_empty">Vider la trace GPX</string>
+    <string name="gpx_file_is_empty">Fichier GPX vide</string>
 
     <string name="shared_string_gpx_files">Traces</string>
     <string name="shared_string_my_favorites">Favoris</string>
@@ -1493,7 +1493,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="sort_by_distance">Trier par distance</string>
     <string name="sort_by_name">Trier par nom</string>
     <string name="no_index_file_to_download">Aucun téléchargement trouvé, veuillez vérifier votre connexion Internet.</string>
-    <string name="none_selected_gpx">Aucun fichier GPX sélectionné. Pour sélectionner un fichier, pressez longuement sur une trace disponible.</string>
+    <string name="none_selected_gpx">Aucun fichier GPX sélectionné. Pressez longuement sur un fichier pour le sélectionner.</string>
 
     <string name="local_index_select_gpx_file">Sélectionnez pour afficher</string>
     
@@ -1951,7 +1951,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="recent_places">Emplacements récents</string>
     <string name="favourites">Favoris</string>
     <string name="show_on_start">Afficher au démarrage</string>
-    <string name="show_gpx">Afficher GPX</string>
+    <string name="show_gpx">Afficher les données GPX</string>
     <string name="count_of_lines">Nombre de lignes</string>
     <string name="number_of_rows_in_dash">Nombre de lignes %1$s</string>
     <string name="saved_at_time">Enregistré avec succès à : %1$s</string>
@@ -2384,7 +2384,7 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="give_permission">Autoriser</string>
     <string name="allow_access_location">Autoriser l\'accès à la position</string>
     <string name="search_my_location">Rechercher ma position</string>
-    <string name="storage_place_description">Espace utilisé par OsmAnd (pour les cartes, les traces, etc.) : %1$s.</string>
+    <string name="storage_place_description">Espace utilisé par OsmAnd (pour les cartes, les traces GPX, etc.) : %1$s.</string>
     <string name="first_usage_greeting">Visualisez les cartes hors ligne, laissez-vous guider sur vos itinéraires sans connexion Internet et découvrez de nouveaux lieux</string>
     <string name="get_for">Obtenir pour %1$s</string>
     <string name="get_for_month">Obtenir pour %1$s mois</string>
@@ -2452,9 +2452,9 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     
     
     
-    <string name="gpx_no_tracks_title">Vous n\'avez pas encore d’itinéraire enregistré</string>
-    <string name="gpx_no_tracks_title_folder">Vous pouvez aussi ajouter des itinéraires enregistrés au dossier</string>
-    <string name="gpx_add_track">Ajouter une trace</string>
+    <string name="gpx_no_tracks_title">Vous n\'avez pas encore de fichier GPX</string>
+    <string name="gpx_no_tracks_title_folder">Vous pouvez aussi ajouter des fichiers GPX dans le dossier</string>
+    <string name="gpx_add_track">Ajouter un fichier GPX</string>
     <string name="gpx_appearance">Apparence</string>
     <string name="rendering_value_fine_name">Bien</string>
     <string name="translit_name_if_miss">Transformer si le nom %1$s est absent</string>
@@ -2599,7 +2599,7 @@ représentant la zone : %1$s x %2$s</string>
     
     <string name="altitude_range">Amplitude altimétrique</string>
     <string name="shared_string_gpx_tracks">Traces</string>
-    <string name="select_gpx_folder">Sélectionnez le dossier des traces</string>
+    <string name="select_gpx_folder">Sélectionnez le dossier des traces GPX</string>
     <string name="file_can_not_be_moved">Impossible de déplacer le fichier.</string>
     <string name="shared_string_move">Déplacer</string>
     <string name="shared_string_max">Max</string>
@@ -2860,14 +2860,14 @@ représentant la zone : %1$s x %2$s</string>
     <string name="choose_navigation_type">Sélectionnez le type de navigation</string>
     <string name="add_route_points">Ajouter des points à la route</string>
     <string name="add_line">Ajouter une ligne</string>
-    <string name="empty_state_my_tracks">Ajouter et enregistrer des traces</string>
-    <string name="empty_state_my_tracks_desc">Enregistrer ou importer les traces à afficher.</string>
+    <string name="empty_state_my_tracks">Ajouter des fichiers GPX</string>
+    <string name="empty_state_my_tracks_desc">Importer des fichiers GPX ou enregistrer des traces.</string>
     <string name="empty_state_favourites">Ajouter des favoris</string>
-    <string name="empty_state_favourites_desc">Importez ou marquez les favoris sur la carte.</string>
-    <string name="import_track">Importer la trace</string>
+    <string name="empty_state_favourites_desc">Importez des favoris ou ajoutez-les en créant des points sur la carte.</string>
+    <string name="import_track">Importer le fichier GPX</string>
     <string name="import_track_desc">Le fichier %1$s ne contient aucune étape, l\'importer comme trace ?</string>
     <string name="move_point">Déplacer le point</string>
-    <string name="add_segment_to_the_track">Ajouter à une trace GPX</string>
+    <string name="add_segment_to_the_track">Ajouter à un fichier GPX</string>
 <string name="keep_showing_on_map">Toujours afficher sur la carte</string>
     <string name="exit_without_saving">Quitter sans enregistrer ?</string>
     <string name="do_not_use_animations">Aucune animation</string>
@@ -2951,8 +2951,8 @@ représentant la zone : %1$s x %2$s</string>
     <string name="shared_string_sort">Trier</string>
     <string name="coordinate_input">Saisie des coordonnées</string>
     <string name="is_saved">a été enregistré</string>
-    <string name="marker_save_as_track_descr">Exporte vos marques dans un fichier portant le nom :</string>
-    <string name="marker_save_as_track">Enregistrer comme trace</string>
+    <string name="marker_save_as_track_descr">Exporter vos marques dans le fichier GPX suivant :</string>
+    <string name="marker_save_as_track">Enregistrer comme fichier GPX</string>
     <string name="move_to_history">Déplacer vers l\'historique</string>
     <string name="group_will_be_removed_after_restart">Le groupe sera supprimé au prochain démarrage de l\'application.</string>
     <string name="shared_string_markers">Marques</string>
@@ -2987,7 +2987,7 @@ représentant la zone : %1$s x %2$s</string>
 	<string name="shared_string_back">Précédent</string>
 	<string name="shared_string_view">Afficher</string>
 	<string name="waypoints_added_to_map_markers">Étapes ajoutées comme marques</string>
-	<string name="import_gpx_file_description">peut être importé comme Favoris ou Fichier de trace.</string>
+	<string name="import_gpx_file_description">peut être importé comme Favoris ou Fichier GPX.</string>
     <string name="import_as_gpx">Importer comme fichier GPX</string>
     <string name="import_as_favorites">Importer comme Favoris</string>
     <string name="import_file">Importer fichier</string>
@@ -3010,11 +3010,11 @@ représentant la zone : %1$s x %2$s</string>
     <string name="shared_string_gpx_waypoints">Points de passage</string>
     <string name="favourites_group">Catégorie de favoris</string>
     <string name="add_group">Ajouter un groupe</string>
-    <string name="add_group_descr">Importez des groupes depuis des favoris ou des points de passage.</string>
+    <string name="add_group_descr">"Importer des groupes depuis des favoris ou des points de passage GPX. "</string>
     <string name="empty_state_markers_active">Ajoutez des marques sur la carte !</string>
     <string name="empty_state_markers_active_desc">Sélectionnez des emplacements sur la carte puis appuyez sur le drapeau de marque.</string>
     <string name="empty_state_markers_groups">Importer des groupes</string>
-    <string name="empty_state_markers_groups_desc">Importez des groupes de favoris ou des points de passage comme marques.</string>
+    <string name="empty_state_markers_groups_desc">Importez des groupes de favoris ou des points de passage GPX comme marques.</string>
     <string name="empty_state_markers_history_desc">Les marques visitées s\'afficheront sur cet écran.</string>
     <string name="shared_string_two">Deux</string>
     <string name="shared_string_one">Une</string>
@@ -3023,7 +3023,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="distance_indication_descr">Indiquez comment afficher la distance avec les marques actives.</string>
     <string name="active_markers_descr">Sélectionnez le nombre de marques actives à afficher.</string>
     <string name="shared_string_more_without_dots">Plus</string>
-    <string name="looking_for_tracks_with_waypoints">Rechercher des traces avec points de passage</string>
+    <string name="looking_for_tracks_with_waypoints">Recherche de fichiers GPX avec points de passage</string>
     <string name="empty_state_osm_edits">Créer et modifier des éléments OSM</string>
     <string name="empty_state_osm_edits_descr">Créer ou modifier les PI OSM, ouvrir ou commenter des Notes OSM et contribuer aux traces GPX enregistrées.</string>
     <string name="shared_string_deleted">Supprimé</string>
@@ -3142,7 +3142,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="shared_string_total">Total</string>
     <string name="nothing_found_in_radius">Aucun résultat :</string>
     <string name="waypoints_removed_from_map_markers">Étape retirée des marques</string>
-    <string name="shared_string_travel">Voyage</string>
+    <string name="shared_string_travel">Guides de voyage</string>
     <string name="shared_string_result">Résultat</string>
     <string name="saved_articles">Articles favoris</string>
     <string name="shared_string_explore">Explorer</string>
@@ -3161,13 +3161,13 @@ représentant la zone : %1$s x %2$s</string>
     <string name="shared_string_dont">Ne pas faire</string>
     <string name="shared_string_do">Faire</string>
     <string name="shared_string_only_with_wifi">Seulement en Wifi</string>
-    <string name="wikivoyage_download_pics">Recevoir les images</string>
+    <string name="wikivoyage_download_pics">Télécharger les images</string>
     <string name="wikivoyage_download_pics_descr">Vous pouvez télécharger les images des articles pour un usage hors ligne.
 \nPour modifier ce paramétrage, allez dans : Explorer &gt; Options.</string>
     <string name="shared_string_wifi_only">Wifi seulement</string>
     <string name="select_travel_book">Sélectionnez un carnet de voyage</string>
     <string name="shared_string_travel_book">Carnet de voyage</string>
-    <string name="download_images">Afficher les images</string>
+    <string name="download_images">Télécharger les images</string>
     <string name="purchase_dialog_title">Sélectionnez un plan</string>
     <string name="purchase_dialog_subtitle">Sélectionnez l\'élément adapté :</string>
     <string name="purchase_dialog_travel_description">Pour lire des articles de voyage hors ligne, achetez l\'un des éléments suivants :</string>
@@ -3189,7 +3189,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="daily_map_updates">Mise à jour des cartes : <b>Toutes les heures</b></string>
     <string name="in_app_purchase_desc_ex">La validité de votre achat sera permanente.</string>
     <string name="travel_card_update_descr">Mise à jour disponible, téléchargez les données Wikivoyage et profitez.</string>
-	<string name="travel_card_download_descr">Téléchargez ces guides Wikivoyage pour afficher des articles sur les lieux sans connexion Internet.</string>
+	<string name="travel_card_download_descr">Téléchargez les guides Wikivoyage pour consulter des articles sur les lieux sans connexion Internet.</string>
 	<string name="update_is_available">Mise à jour disponible</string>
 	<string name="download_file">Télécharger le fichier</string>
     <string name="start_editing_card_image_text">Le guide de voyage mondial et gratuit que chacun peut améliorer.</string>
@@ -3208,7 +3208,7 @@ représentant la zone : %1$s x %2$s</string>
 <string name="paid_app">Application payante</string>
     <string name="paid_plugin">Greffon payant</string>
     <string name="popular_destinations">Destinations populaires</string>
-    <string name="welcome_to_open_beta_description">Travel s’appuie sur Wikivoyage. Durant la phase bêta, évaluez toutes les fonctionnalités gratuitement. Plus tard, Travel sera accessible aux abonnés OsmAnd ainsi qu\'aux propriétaires d\'OsmAnd+</string>
+    <string name="welcome_to_open_beta_description">"Les guides de voyage s’appuient sur Wikivoyage. Durant la phase bêta, évaluez toutes les fonctionnalités gratuitement. Par la suite, les guides de voyage seront accessibles aux abonnés OsmAnd ainsi qu\'aux propriétaires d\'OsmAnd+. "</string>
     <string name="wiki_article_search_text">Recherche de l\'article Wiki correspondant</string>
     <string name="osmand_team">Équipe OsmAnd</string>
     <string name="maps_you_need_descr">D\'après les articles que vous avez marqué comme favori, nous vous conseillons de télécharger les cartes suivantes :</string>
