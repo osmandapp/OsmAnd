@@ -854,9 +854,9 @@ Lon %2$s</string>
     <string name="osmand_play_title_30_chars">Navegación y Mapas OsmAnd</string>
     <string name="osmand_short_description_80_chars">Visor y navegador móvil global de mapas OSM con y sin conexión</string>
     <string name="osmand_long_description_1000_chars">"OsmAnd (OSM Automated Navigation Directions, y en español, Guía de Navegación Automatizada de OSM) 
-\n
+\n 
 \nOsmAnd es un software de navegación de código abierto con acceso a una amplia variedad de datos globales de OpenStreetMap (OSM). Todos los datos del mapa (vectores y teselas) pueden ser almacenados en la memoria del teléfono para su uso sin conexión. También ofrece funcionalidades de rutas con y sin conexión, incluyendo indicaciones giro-a-giro por voz. 
-\n
+\n 
 \n Algunas de las funciones fundamentales: 
 \n - Completa funcionalidad sin conexión (almacena los mapas vectoriales o teselas descargados en la memoria del dispositivo) 
 \n - Mapas vectoriales compactos disponibles de todo el planeta 
@@ -869,21 +869,21 @@ Lon %2$s</string>
 \n  - Zoom del mapa según la velocidad 
 \n  - Alineación del mapa, según la brújula o dirección del movimiento 
 \n  - Indicación de carriles, visualización de límites de velocidad, voces grabadas y sintetizadas 
-\n
+\n 
 \n Limitaciones de la versión gratuita de OsmAnd: 
 \n - Limitado número de mapas descargados 
 \n - Sin acceso a los PDI descargados de Wikipedia. 
-\n
+\n 
 \n Los PDI de OsmAnd están siendo desarrollados activamente. Nuestro proyecto y su continuo progreso, se basa en contribuciones económicas para desarrollar y probar nuevas funcionalidades. Por favor, considera comprar OsmAnd+, financiar nuevas funciones o hacer una donación general en https://osmand.net."</string>
     
     <string name="osmand_plus_play_title_30_chars">Navegación y Mapas OsmAnd+</string>
     <string name="osmand_plus_short_description_80_chars">Visor y navegador móvil global de mapas OSM con y sin conexión</string>
     <string name="osmand_plus_long_description_1000_chars">"OsmAnd+ (OSM Automated Navigation Directions, y en español, Guía de Navegación Automatizada de OSM) 
-\n
+\n 
 \nOsmAnd+ es un software de navegación de código abierto con acceso a una amplia variedad de datos globales de OpenStreetMap (OSM). Todos los datos del mapa (vectores y teselas), pueden ser almacenados en la memoria del teléfono para su uso sin conexión. Ofrece funcionalidades de rutas con y sin conexión, incluyendo guía de giro-a-giro por voz. 
-\n
+\n 
 \n OsmAnd+ es la versión de pago de la aplicación, comprándola das soporte al proyecto, financias el desarrollo de nuevas funciones, y recibes las últimas actualizaciones. 
-\n
+\n 
 \n Algunas de las funciones fundamentales: 
 \n - Completa funcionalidad sin conexión (guarda los mapas vectoriales o teselas descargados en el almacenamiento del dispositivo) 
 \n - Mapas mundiales vectoriales compactos disponibles 
@@ -2559,9 +2559,8 @@ Lon %2$s</string>
 \n • Sube trazas GPX a OSM directamente desde la aplicación 
 \n • Añade PDI y súbelos directamente a OSM (o más tarde, si no estás conectado) 
 \n • (Opcional) Grabación del viaje en modo reposo (mientras el dispositivo está bloqueado) 
-\n
+\n 
 \n  OsmAnd es un software de código abierto, activamente desarrollado. Cualquiera puede contribuir con la aplicación informando sobre errores, mejorando las traducciones o desarrollando nuevas funciones. Además, el proyecto también depende de contribuciones financieras para desarrollar y probar nuevas funcionalidades. 
-\n
 \n"</string>
     <string name="osmand_plus_extended_description_part8">Cobertura y calidad aproximada del mapa: 
 \n • Europa Occidental: **** 
