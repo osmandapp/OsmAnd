@@ -620,7 +620,7 @@
 	<string name="use_online_routing_descr">برای محاسبهٔ مسیر از اینترنت استفاده شود.</string>
 	<string name="use_online_routing">استفاده از مسیریابی آنلاین</string>
 	<string name="error_occurred_saving_gpx">ذخیره‌سازی فایل GPX ناموفق بود</string>
-	<string name="loading_poi_obj">بارگیری POI…</string>
+	<string name="loading_poi_obj">بارگیری POI…‏</string>
 	<string name="loading_streets_buildings">بارگیری خیابان‌ها/ساختمان‌ها…</string>
 	<string name="loading_streets">بارگیری خیابان‌ها…</string>
 	<string name="loading_cities">بارگیری شهرها…</string>
@@ -909,7 +909,7 @@
 	<string name="converting_names">در حال تبدیل اسامی محلی/انگلیسی…</string>
 	<string name="failed_op">ناموفق</string>
 	<string name="auth_failed">اجازهٔ دسترسی احراز نشد</string>
-	<string name="closing_changeset">در حال بستن بستهٔ تغییرات…</string>
+	<string name="closing_changeset">بستن بستهٔ تغییرات…</string>
 	<string name="opening_changeset">بازکردن بستهٔ تغییرات…</string>
 	<string name="list_index_files_was_not_loaded">دریافت لیست مناطق از https://osmand.net ناموفق بود.</string>
 	<string name="downloading_list_indexes">در حال دانلود لیست مناطق موجود…</string>
