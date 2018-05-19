@@ -2996,7 +2996,7 @@
     <string name="shared_string_travel_book">Libro de viajes</string>
     <string name="download_images">Mostrar imágenes</string>
     <string name="purchase_dialog_title">Elegir plan</string>
-    <string name="purchase_dialog_travel_description">Comprar uno de los siguientes elementos para leer artículos turísticos sin conexión:</string>
+    <string name="purchase_dialog_travel_description">Compra uno de los siguientes elementos para recibir la funcionalidad de guías de viaje sin conexión:</string>
     <string name="purchase_dialog_subtitle">Elegir el elemento adecuado:</string>
     <string name="travel_guide_description">Las guías de los lugares más interesantes del planeta, dentro de OsmAnd y sin conexión a Internet.</string>
     <string name="travel_guide">Guía turística de Wikiviajes</string>
@@ -3019,11 +3019,11 @@
     <string name="paid_app">Aplicación de pago</string>
     <string name="paid_plugin">Complemento de pago</string>
     <string name="travel_card_update_descr">Nuevos datos disponibles de Wikiviajes, actualice para disfrutar de ellos.</string>
-	<string name="travel_card_download_descr">Descarga estas guías turísticas de Wikiviajes para ver artículos sobre lugares alrededor del mundo, sin una conexión a Internet.</string>
+	<string name="travel_card_download_descr">Descarga guías turísticas de Wikiviajes para ver artículos sobre lugares alrededor del mundo, sin una conexión a Internet.</string>
 	<string name="update_is_available">Actualización disponible</string>
 	<string name="download_file">Descargar archivo</string>
     <string name="start_editing_card_image_text">La guía turística libre global que cualquiera puede editar.</string>
-    <string name="welcome_to_open_beta_description">Los viajes se basan en Wikiviajes. Pruebe todas las características durante las pruebas beta abiertas, de forma gratuita. Una vez finalizado este período, «Viajes» estará disponible para los suscriptores de «OsmAnd ilimitado» y los propietarios de «OsmAnd+»</string>
+    <string name="welcome_to_open_beta_description">Las guías de viaje se basan actualmente en Wikiviajes. Prueba todas las características durante las pruebas beta abiertas, de forma gratuita. Posteriormente, las guías de viaje estarán disponibles para los suscriptores de OsmAnd Ilimitado y los propietarios de OsmAnd+</string>
     <string name="start_editing_card_description">Puede y debe editar cualquier artículo en Wikiviajes. Comparta su conocimiento, experiencia, talento y atención</string>
     <string name="start_editing">Comenzar edición</string>
     <string name="get_unlimited_access">Obtener acceso ilimitado</string>
@@ -3064,4 +3064,5 @@
     <string name="touring_view_render_descr">Estilo de alto detalle para turismo. Incluye todas las opciones de configuración del estilo predefinido, además: Muestra tanto detalle como sea posible, en particular todos los caminos, senderos y otras formas de viaje. Una clara distinción visual entre todos los tipos de carreteras, que recuerda a muchos atlas de rutas turísticas. Esquema de color de alto contraste para uso en exteriores, modo diurno y nocturno.</string>
     <string name="access_intermediate_arrival_time">Hora de llegada intermedia</string>
     <string name="map_widget_intermediate_time">Tiempo intermedio</string>
+    <string name="unirs_render_descr">Modificación del estilo estándar para proporcionar un mayor contraste de las vías peatonales y para bicicletas. Utiliza los colores heredados de Mapnik.</string>
     </resources>
