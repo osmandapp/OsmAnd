@@ -2975,7 +2975,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="notes_by_date">Notizen nach Datum</string>
     <string name="tap_on_map_to_hide_interface_descr">Ein Tippen auf die Karte schaltet die Steuerschaltflächen und Bedienelemente um.</string>
     <string name="release_3_0">
-	• Neu: OsmAnd Travel: Globale offline Wikivoyage Reiseführer-Funktionalität\n\n
+	• Neu: Unterstütung von weltweiten Offline-Reiseführern. Beschriebene Sehenswürdigkeiten sind zur Landkarte verknüpft. Die Inhalte basieren derzeit auf Wikivoyage.\n\n
 	• Wikipedia: Neues Layout, anklickbare Links, Bilder\n\n
 	• Unterstützung der Gruppierung von GPX Wegpunkten\n\n
 	• Kartenmarkierungen: Import auswählbarer Gruppen aus GPX-Dateien, Koordinateneingabe, neues Layout\n\n
@@ -3060,7 +3060,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="group_deleted">Gruppe gelöscht</string>
     <string name="rendering_attr_whiteWaterSports_name">Wildwasser-Sportarten</string>
     <string name="clear_all_intermediates">Alle Zwischenpunkte löschen</string>
-    <string name="shared_string_travel_guides">Reise</string>
+    <string name="shared_string_travel_guides">Reiseführer</string>
     <string name="waypoints_removed_from_map_markers">Wegpunkte aus Kartenmarkierungen entfernt</string>
     <string name="nothing_found_in_radius">Nichts gefunden:</string>
     <string name="select_waypoints_category_description">Fügen Sie alle Wegpunkte des Tracks hinzu oder wählen Sie einzelne Kategorien aus.</string>
@@ -3096,7 +3096,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
 	<string name="update_is_available">Aktualisierung verfügbar</string>
 	<string name="download_file">Datei herunterladen</string>
     <string name="start_editing_card_image_text">Der kostenlose weltweite Reiseführer, den jeder bearbeiten kann.</string>
-    <string name="welcome_to_open_beta_description">OsmAnd Travel basiert auf Wikivoyage. Testen Sie alle Funktionen während des Open-Beta-Tests kostenlos. Danach steht OsmAnd Travel den Abonnenten von OsmAnd Unlimited und den Besitzern von OsmAnd+ zur Verfügung.</string>
+    <string name="welcome_to_open_beta_description">Die Reisefüher basieren derzeit auf Wikivoyage. Testen Sie alle Funktionen während des Open-Beta-Tests kostenlos. Danach steht die Reisefüherfunktionalität den Abonnenten von OsmAnd Unlimited und den Besitzern von OsmAnd+ zur Verfügung.</string>
     <string name="start_editing_card_description">Sie können und sollten Artikel auf Wikivoyage bearbeiten. Teilen Sie Wissen, Erfahrung, Talent und Ihre Aufmerksamkeit</string>
     <string name="start_editing">Bearbeitung starten</string>
     <string name="get_unlimited_access">Erhalten Sie unbegrenzten Zugang</string>
