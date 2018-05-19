@@ -39,7 +39,7 @@
     
     
     <string name="stop_routing_confirm">آیا مسیریابی را قطع می‌کنید؟</string>
-    <string name="clear_dest_confirm">آیا برای پاک‌کردن مقصد (و مقصدهای بین‌راهی) مطمئن هستید؟</string>
+    <string name="clear_dest_confirm">آیا از پاک‌کردن مقصد (و مقصدهای بین‌راهی) مطمئن هستید؟</string>
     <string name="intermediate_points_change_order">تغییر ترتیب</string>
     <string name="av_def_action_video">ضبط ویدئو</string>
     <string name="av_def_action_audio">ضبط صدا</string>
@@ -620,7 +620,7 @@
 	<string name="use_online_routing_descr">برای محاسبهٔ مسیر از اینترنت استفاده شود.</string>
 	<string name="use_online_routing">استفاده از مسیریابی آنلاین</string>
 	<string name="error_occurred_saving_gpx">ذخیره‌سازی فایل GPX ناموفق بود</string>
-	<string name="loading_poi_obj">بارگیری POI…‏</string>
+	<string name="loading_poi_obj">بارگیری POI‏…</string>
 	<string name="loading_streets_buildings">بارگیری خیابان‌ها/ساختمان‌ها…</string>
 	<string name="loading_streets">بارگیری خیابان‌ها…</string>
 	<string name="loading_cities">بارگیری شهرها…</string>
@@ -852,7 +852,7 @@
 	<string name="context_menu_item_share_location">اشتراک‌گذاری مکان</string>
 	<string name="indexing_address">در حال نمایه‌کردن نشانی…</string>
 	<string name="indexing_map">در حال نمایه‌کردن نقشه…</string>
-	<string name="indexing_poi">نمایه‌کردن POI…</string>
+	<string name="indexing_poi">نمایه‌کردن POI‏…</string>
 	<string name="indexing_transport">در حال نمایه‌کردن حمل‌ونقل…</string>
 	<string name="shared_string_io_error">خطای ورودی/خروجی</string>
 	<string name="km">ک‌م</string>
@@ -2516,7 +2516,7 @@
     <string name="quick_action_add_favorite">افزودن نقطهٔ برگزیده</string>
     <string name="dialog_add_action_title">افزودن عملیات</string>
     <string name="quick_actions_delete">حذف عملیات</string>
-    <string name="quick_actions_delete_text">آیا برای حذف‌کردن عملیات «%s» مطمئن هستید؟</string>
+    <string name="quick_actions_delete_text">آیا از حذف‌کردن عملیات «%s» مطمئن هستید؟</string>
     <string name="quick_favorites_show_favorites_dialog">کادر نقاط برگزیده را نشان بده</string>
     <string name="quick_action_add_marker_descr">با لمس این دکمهٔ عملیاتی یک نشانه در مرکز صفحه ایجاد می‌شود.</string>
     <string name="quick_action_take_audio_note_descr">با لمس این دکمهٔ عملیاتی یک یادداشت صوتی در مرکز صفحه ایجاد می‌شود.</string>
@@ -3051,9 +3051,9 @@
     <string name="by_date">بر اساس تاریخ</string>
     <string name="by_type">بر اساس نوع</string>
     <string name="modify_the_search_query">عبارت جست‌وجوشده را اصلاح کنید.</string>
-    <string name="release_3_0">• جدید: پشتیبانی از راهنماهای جهانی و آفلاین مسافرت. مکان‌های زمین‌مرجع با نقشه پیوند خورده‌اند. داده‌های اولیه از ویکی‌سفر گرفته شده.
+    <string name="release_3_0">• جدید: پیاده‌سازی راهنمای آفلاین جهانی برای سفر که در آن مکان‌های موردبحث به نقشه پیوند خورده‌اند. داده‌های اولیه از ویکی‌سفر گرفته شده است.
 \n 
-\n • ویکی‌پدیا: ظاهر جدید، لینک‌های فعال، تصاویر پشتیبانی می‌شود 
+\n • ویکی‌پدیا: ظاهر جدید، لینک‌های فعال، پشتیبانی از تصاویر
 \n 
 \n • رابط کاربری بازکردن مسیر: پشتیبانی از گروه‌های نقاط بین‌راهی
 \n 
@@ -3163,7 +3163,7 @@
     <string name="shared_string_read">مطالعه</string>
     <string name="shared_string_explore">کاوش</string>
     <string name="shared_string_contents">فهرست</string>
-    <string name="download_maps_travel">راهنماهای مسافرت</string>
+    <string name="download_maps_travel">راهنمای مسافرت</string>
     <string name="shared_string_wikivoyage">ویکی‌سفر</string>
     <string name="article_removed">مقاله حذف شد</string>
     <string name="index_item_world_wikivoyage">مقاله‌های جهانی ویکی‌سفر</string>
@@ -3207,7 +3207,7 @@
 	<string name="update_is_available">به‌روزرسانی وجود دارد</string>
 	<string name="download_file">دانلود فایل</string>
     <string name="start_editing_card_image_text">یک راهنمای رایگان جهانی برای سفر که همه می‌توانند آن را ویرایش کنند.</string>
-    <string name="welcome_to_open_beta_description">راهنماهای «مسافرت» هم‌اکنون بر پایهٔ ویکی‌سفر هستند. در دورهٔ آزمایش همگانیِ نسخهٔ بتا می‌توانید همهٔ قابلیت‌های آن را به‌رایگان ارزیابی کنید. با پایان دورهٔ آزمایشی، «مسافرت» در اختیار مشترکان نسخهٔ نامحدود OsmAnd و دارندگان OsmAnd+‎ خواهد بود.</string>
+    <string name="welcome_to_open_beta_description">راهنمای «مسافرت» هم‌اکنون بر پایهٔ ویکی‌سفر ساخته شده است. در دورهٔ آزمایش همگانیِ نسخهٔ بتا می‌توانید همهٔ قابلیت‌های آن را به‌رایگان ارزیابی کنید. با پایان دورهٔ آزمایشی، «مسافرت» در اختیار مشترکان نسخهٔ نامحدود OsmAnd و دارندگان OsmAnd+‎ خواهد بود.</string>
     <string name="start_editing_card_description">شما می‌توانید هر یک از مقالات ویکی‌سفر را ویرایش کنید. امیدواریم با انجام این کار دیگران را در دانش، تجربه، استعداد و توجهتان سهیم کنید.</string>
     <string name="start_editing">شروع ویرایش</string>
     <string name="get_unlimited_access">گرفتن دسترسی نامحدود</string>
@@ -3245,14 +3245,14 @@
 \nویژگی‌های اصلی: راه‌ها و عوارض طبیعیِ پادنما، انواع مختلف مسیرها، خطوط تراز با تنظیمات پیشرفته، جزئیات بیشتر نسبت به سبک پیشفرض در زوم‌های یکسان. نمایش انواع سطوح که در نتیجه راه‌ها را بر اساس کیفیت سطحشان مجزا می‌کند. حالت شب ندارد.</string>
     <string name="mapnik_render_descr">سبک پیشفرض قدیمی که به‌سبک مپنیک است.
 \nویژگی‌های اصلی: رنگی و مشابه سبک مپنیک.</string>
-    <string name="default_render_descr">سبکی مناسب برای استفادهٔ معمولی، با ظاهری ساده و تروتمیزتر برای شهرهای متراکم.
-\nویژگی‌های اصلی: خطوط تراز، مسیرها، کیفیت سطوح، محدودیت‌های دسترسی، شمارهٔ راه‌ها، رسم مسیرها طبق درجه‌بندی SAC، خصوصیات ورزش آب‌های خروشان.</string>
+    <string name="default_render_descr">سبکی مناسب برای استفادهٔ معمولی، با ظاهری ساده و تروتمیزتر برای شهرهای متراکم. 
+\nویژگی‌های اصلی: خطوط تراز، مسیرها، کیفیت سطوح، محدودیت‌های دسترسی، شمارهٔ راه‌ها، رسم مسیرها طبق درجه‌بندی SAC، خصوصیات ورزش‌های آب‌های خروشان.</string>
     <string name="read_wikipedia_offline_description">برای مطالعهٔ آفلاین مقاله‌های ویکی‌پدیا و ویکی‌سفر مشترک به‌روزرسانی پویا شوید.</string>
     <string name="how_to_open_link">پیوند چطور باز شود؟</string>
     <string name="read_wikipedia_offline">ویکی‌پدیا را آفلاین بخوانید</string>
-    <string name="touring_view_render_descr">سبکی با جزئیات زیاد برای مقاصد گردشگری که علاوه بر پیکربندی‌های سبک پیشفرض، این‌ها را نیز دارد:
-\n- نمایش بیشترین جزئیات ممکن و به‌طور خاص همهٔ جاده‌ها، مسیرها و راه‌های مسافرتی.
-\n- تمایز ظاهری آشکار بین انواع راه‌ها که شما را به‌یاد بسیاری از اطلس‌های گردشگری می‌اندازد.
+    <string name="touring_view_render_descr">سبکی با جزئیات زیاد برای مقاصد گردشگری که علاوه بر پیکربندی‌های سبک پیشفرض، این‌ها را نیز دارد: 
+\n- نمایش بیشترین جزئیات ممکن و به‌طور خاص همهٔ جاده‌ها، مسیرها و راه‌های مسافرتی. 
+\n- تمایز ظاهری آشکار بین انواع راه‌ها که یادآور بسیاری از اطلس‌های گردشگری است. 
 \n- ترکیب رنگی بسیار پادنما که مناسب فضای باز و حالت‌های روز و شب است.</string>
     <string name="shared_string_bookmark">نشانک</string>
     <string name="off_road_render_descr">مناسب رانندگی برون‌جاده‌ای (آفرود). بهتر است با زیرلایهٔ سبزرنگ از تصاویر ماهواره‌ای استفاده شود.
