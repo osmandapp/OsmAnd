@@ -2,7 +2,6 @@ package net.osmand.plus.views;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -13,29 +12,17 @@ import android.graphics.PointF;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.view.MenuItemCompat;
-import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.Toolbar;
-import android.text.Html;
 import android.text.util.Linkify;
 import android.util.TypedValue;
-import android.view.Gravity;
-import android.view.MenuItem;
-import android.view.MenuItem.OnMenuItemClickListener;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.ValueHolder;
@@ -49,7 +36,6 @@ import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.routing.RoutingHelper;
@@ -60,9 +46,7 @@ import net.osmand.util.Algorithms;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -98,6 +82,9 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 		routingHelper.addListener(this);
 		app = activity.getMyApplication();
 		data = new OsmandMapLayer.MapLayerData<List<Amenity>>() {
+
+			Set<PoiUIFilter> calculatedFilters;
+
 			{
 				ZOOM_THRESHOLD = 0;
 			}
@@ -109,20 +96,22 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 
 			@Override
 			public void layerOnPostExecute() {
+				filters = calculatedFilters;
 				activity.getMapView().refreshMap();
 			}
 
 			@Override
 			protected List<Amenity> calculateResult(RotatedTileBox tileBox) {
 				QuadRect latLonBounds = tileBox.getLatLonBounds();
-				if (filters.isEmpty() || latLonBounds == null) {
+				calculatedFilters = filters;
+				if (calculatedFilters.isEmpty() || latLonBounds == null) {
 					return new ArrayList<>();
 				}
 				int z = (int) Math.floor(tileBox.getZoom() + Math.log(view.getSettings().MAP_DENSITY.get()) / Math.log(2));
 
 				List<Amenity> res = new ArrayList<>();
-				PoiUIFilter.combineStandardPoiFilters(filters, app);
-				for (PoiUIFilter filter : filters) {
+				PoiUIFilter.combineStandardPoiFilters(calculatedFilters, app);
+				for (PoiUIFilter filter : calculatedFilters) {
 					res.addAll(filter.searchAmenities(latLonBounds.top, latLonBounds.left,
 							latLonBounds.bottom, latLonBounds.right, z, new ResultMatcher<Amenity>() {
 

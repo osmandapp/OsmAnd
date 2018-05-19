@@ -2,7 +2,6 @@ package net.osmand.plus.search;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -32,7 +31,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -327,6 +325,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 				new OnClickListener() {
 					@Override
 					public void onClick(View v) {
+						cancelSearch();
 						SearchPhrase searchPhrase = searchUICore.getPhrase();
 						if (foundPartialLocation) {
 							QuickSearchCoordinatesFragment.showDialog(QuickSearchDialogFragment.this, searchPhrase.getUnknownSearchWord());
@@ -778,6 +777,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		app.getLocationProvider().removeCompassListener(app.getLocationProvider().getNavigationInfo());
 		getDialog().show();
 		paused = false;
+		cancelPrev = false;
 		hidden = false;
 		if (interruptedSearch) {
 			addMoreButton(true);
@@ -1542,17 +1542,6 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 					cancelPrev = false;
 				}
 				if (paused || cancelPrev) {
-					if (results.size() > 0) {
-						app.runInUIThread(new Runnable() {
-							@Override
-							public void run() {
-								SearchResultCollection collection = getResultCollection();
-								if (collection != null) {
-									collection.addSearchResults(results, true, true);
-								}
-							}
-						});
-					}
 					return false;
 				}
 				switch (object.objectType) {

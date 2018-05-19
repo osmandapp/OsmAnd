@@ -78,7 +78,6 @@ public class WikivoyageExploreActivity extends TabActivity implements DownloadEv
 				window.getAttributes().windowAnimations = R.style.Animations_NoAnimation;
 			}
 			if (Build.VERSION.SDK_INT >= 21) {
-				window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
 				window.setStatusBarColor(getResolvedColor(getStatusBarColor()));
 			}
 		}
