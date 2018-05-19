@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.support.annotation.ColorInt;
 import android.text.TextUtils;
+
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LocationPoint;
@@ -23,7 +24,6 @@ import org.xmlpull.v1.XmlSerializer;
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -86,6 +86,10 @@ public class GPXUtilities {
 
 		public void setColor(int color) {
 			getExtensionsToWrite().put("color", Algorithms.colorToString(color));
+		}
+
+		public void removeColor() {
+			getExtensionsToWrite().remove("color");
 		}
 
 		public Map<String, String> getExtensionsToWrite() {
@@ -1194,6 +1198,24 @@ public class GPXUtilities {
 				String category = pt.category == null ? "" : pt.category;
 				if (withDefaultCategory || !TextUtils.isEmpty(category)) {
 					categories.add(category);
+				}
+			}
+			return categories;
+		}
+
+		public Map<String, Integer> getWaypointCategoriesWithColors(boolean withDefaultCategory) {
+			Map<String, Integer> categories = new HashMap<>();
+			for (WptPt pt : points) {
+				String category = pt.category == null ? "" : pt.category;
+				int color = pt.category == null ? 0 : pt.getColor();
+				boolean emptyCategory = TextUtils.isEmpty(category);
+				if (!emptyCategory) {
+					Integer existingColor = categories.get(category);
+					if (existingColor == null || (existingColor == 0 && color != 0)) {
+						categories.put(category, color);
+					}
+				} else if (withDefaultCategory) {
+					categories.put(category, 0);
 				}
 			}
 			return categories;

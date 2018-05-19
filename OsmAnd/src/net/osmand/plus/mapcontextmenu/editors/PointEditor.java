@@ -72,11 +72,11 @@ public abstract class PointEditor {
 			((PointEditorFragment)fragment).dismiss();
 	}
 
-	public void setCategory(String name) {
+	public void setCategory(String name, int color) {
 		Fragment fragment = mapActivity.getSupportFragmentManager().findFragmentByTag(getFragmentTag());
 		if (fragment != null) {
 			PointEditorFragment editorFragment = (PointEditorFragment) fragment;
-			editorFragment.setCategory(name);
+			editorFragment.setCategory(name, color);
 		}
 	}
 }

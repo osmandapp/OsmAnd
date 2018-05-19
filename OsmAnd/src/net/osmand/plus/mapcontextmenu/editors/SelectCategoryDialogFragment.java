@@ -2,33 +2,34 @@ package net.osmand.plus.mapcontextmenu.editors;
 
 import android.app.Activity;
 import android.app.Dialog;
-import android.content.res.Resources;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
-import android.util.TypedValue;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
+import net.osmand.AndroidUtils;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.GPXUtilities.GPXFile;
+import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
-
-import static android.util.TypedValue.COMPLEX_UNIT_DIP;
 
 public class SelectCategoryDialogFragment extends DialogFragment {
 
-	public static final String TAG = "SelectCategoryDialogFragment";
+	public static final String TAG = SelectCategoryDialogFragment.class.getSimpleName();
 
 	public interface CategorySelectionListener{
 
@@ -40,6 +41,7 @@ public class SelectCategoryDialogFragment extends DialogFragment {
 	private String editorTag;
 	private CategorySelectionListener selectionListener;
 	private GPXFile gpxFile;
+	private Map<String, Integer> gpxCategories;
 
 	public void setGpxFile(GPXFile gpxFile) {
 		this.gpxFile = gpxFile;
@@ -47,6 +49,14 @@ public class SelectCategoryDialogFragment extends DialogFragment {
 
 	public GPXFile getGpxFile() {
 		return gpxFile;
+	}
+
+	public Map<String, Integer> getGpxCategories() {
+		return gpxCategories;
+	}
+
+	public void setGpxCategories(Map<String, Integer> gpxCategories) {
+		this.gpxCategories = gpxCategories;
 	}
 
 	@NonNull
@@ -59,35 +69,39 @@ public class SelectCategoryDialogFragment extends DialogFragment {
 			restoreState(getArguments());
 		}
 
-		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+		final FragmentActivity activity = requireActivity();
+		AlertDialog.Builder builder = new AlertDialog.Builder(activity);
 		builder.setTitle(R.string.favorite_category_select);
-		final View v = getActivity().getLayoutInflater().inflate(R.layout.favorite_categories_dialog, null, false);
-
+		final View v = activity.getLayoutInflater().inflate(R.layout.favorite_categories_dialog, null, false);
 		LinearLayout ll = (LinearLayout) v.findViewById(R.id.list_container);
 
-		final FavouritesDbHelper helper = ((OsmandApplication) getActivity().getApplication()).getFavorites();
+		final FavouritesDbHelper helper = ((OsmandApplication) activity.getApplication()).getFavorites();
 		if (gpxFile != null) {
-			Set<String> categories = gpxFile.getWaypointCategories(false);
-			for (final String category : categories) {
-				addCategory(ll, category, 0);
+			if (gpxCategories != null) {
+				for (Map.Entry<String, Integer> e : gpxCategories.entrySet()) {
+					String categoryName = e.getKey();
+					addCategory(activity, ll, categoryName, e.getValue());
+				}
 			}
 		} else {
 			List<FavouritesDbHelper.FavoriteGroup> gs = helper.getFavoriteGroups();
 			for (final FavouritesDbHelper.FavoriteGroup category : gs) {
-				addCategory(ll, category.name, category.color);
+				addCategory(activity, ll, category.name, category.color);
 			}
 		}
-		View itemView = getActivity().getLayoutInflater().inflate(R.layout.favorite_category_dialog_item, null);
+		View itemView = activity.getLayoutInflater().inflate(R.layout.favorite_category_dialog_item, null);
 		Button button = (Button)itemView.findViewById(R.id.button);
-		button.setCompoundDrawablesWithIntrinsicBounds(getIcon(getActivity(), R.drawable.map_zoom_in), null, null, null);
-		button.setCompoundDrawablePadding(dpToPx(15f));
-		button.setText(getActivity().getResources().getText(R.string.favorite_category_add_new));
+		button.setCompoundDrawablesWithIntrinsicBounds(getIcon(activity, R.drawable.map_zoom_in), null, null, null);
+		button.setCompoundDrawablePadding(AndroidUtils.dpToPx(activity,15f));
+		button.setText(activity.getResources().getText(R.string.favorite_category_add_new));
 		button.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				dismiss();
-				EditCategoryDialogFragment dialogFragment = EditCategoryDialogFragment.createInstance(editorTag);
-				dialogFragment.show(getActivity().getSupportFragmentManager(), EditCategoryDialogFragment.TAG);
+				Set<String> categories = gpxCategories != null ? gpxCategories.keySet() : null;
+				EditCategoryDialogFragment dialogFragment =
+						EditCategoryDialogFragment.createInstance(editorTag, categories,gpxFile != null);
+				dialogFragment.show(activity.getSupportFragmentManager(), EditCategoryDialogFragment.TAG);
 				dialogFragment.setSelectionListener(selectionListener);
 			}
 		});
@@ -99,34 +113,33 @@ public class SelectCategoryDialogFragment extends DialogFragment {
 		return builder.create();
 	}
 
-	private void addCategory(LinearLayout ll, final String categoryName, final int categoryColor) {
-		View itemView = getActivity().getLayoutInflater().inflate(R.layout.favorite_category_dialog_item, null);
+	private void addCategory(@NonNull final Activity activity, @NonNull LinearLayout ll, final String categoryName, final int categoryColor) {
+		View itemView = activity.getLayoutInflater().inflate(R.layout.favorite_category_dialog_item, null);
 		Button button = (Button)itemView.findViewById(R.id.button);
 		if (categoryColor != 0) {
-			button.setCompoundDrawablesWithIntrinsicBounds(getIcon(getActivity(), R.drawable.ic_action_folder, categoryColor), null, null, null);
+			button.setCompoundDrawablesWithIntrinsicBounds(
+					getIcon(activity, R.drawable.ic_action_folder, categoryColor), null, null, null);
 		} else {
-			button.setCompoundDrawablesWithIntrinsicBounds(getIcon(getActivity(), R.drawable.ic_action_folder, getResources().getColor(R.color.color_favorite)), null, null, null);
+			button.setCompoundDrawablesWithIntrinsicBounds(
+					getIcon(activity, R.drawable.ic_action_folder, ContextCompat.getColor(activity,
+							gpxFile != null ? R.color.gpx_color_point : R.color.color_favorite)), null, null, null);
 		}
-		button.setCompoundDrawablePadding(dpToPx(15f));
+		button.setCompoundDrawablePadding(AndroidUtils.dpToPx(activity,15f));
 		String name = categoryName.length() == 0 ? getString(R.string.shared_string_favorites) : categoryName;
 		button.setText(name);
 		button.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-
-				PointEditor editor = ((MapActivity) getActivity()).getContextMenu().getPointEditor(editorTag);
-
-				if (editor != null) {
-					editor.setCategory(categoryName);
-					if (gpxFile != null && editor instanceof WptPtEditor) {
-						((WptPtEditor) editor).getWptPt().category = categoryName;
+				FragmentActivity a = getActivity();
+				if (a != null && a instanceof MapActivity) {
+					PointEditor pointEditor = ((MapActivity) a).getContextMenu().getPointEditor(editorTag);
+					if (pointEditor != null) {
+						pointEditor.setCategory(categoryName, categoryColor);
+					}
+					if (selectionListener != null) {
+						selectionListener.onCategorySelected(categoryName, categoryColor);
 					}
 				}
-
-				if (selectionListener != null) {
-					selectionListener.onCategorySelected(categoryName, categoryColor);
-				}
-
 				dismiss();
 			}
 		});
@@ -167,14 +180,5 @@ public class SelectCategoryDialogFragment extends DialogFragment {
 		d.clearColorFilter();
 		d.setColorFilter(color, PorterDuff.Mode.SRC_IN);
 		return d;
-	}
-
-	private int dpToPx(float dp) {
-		Resources r = getActivity().getResources();
-		return (int) TypedValue.applyDimension(
-				COMPLEX_UNIT_DIP,
-				dp,
-				r.getDisplayMetrics()
-		);
 	}
 }

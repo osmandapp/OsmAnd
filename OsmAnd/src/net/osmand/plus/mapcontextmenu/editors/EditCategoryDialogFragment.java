@@ -4,7 +4,9 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.AdapterView;
@@ -20,26 +22,33 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.util.Algorithms;
 
+import java.util.ArrayList;
+import java.util.Set;
+
 import gnu.trove.list.array.TIntArrayList;
 
 public class EditCategoryDialogFragment extends DialogFragment {
 
-	public static final String TAG = "EditCategoryDialogFragment";
+	public static final String TAG = EditCategoryDialogFragment.class.getSimpleName();
 
 	private static final String KEY_CTX_EDIT_CAT_EDITOR_TAG = "key_ctx_edit_cat_editor_tag";
 	private static final String KEY_CTX_EDIT_CAT_NEW = "key_ctx_edit_cat_new";
 	private static final String KEY_CTX_EDIT_CAT_NAME = "key_ctx_edit_cat_name";
 	private static final String KEY_CTX_EDIT_CAT_COLOR = "key_ctx_edit_cat_color";
+	private static final String KEY_CTX_EDIT_GPX_FILE = "key_ctx_edit_gpx_file";
+	private static final String KEY_CTX_EDIT_GPX_CATEGORIES = "key_ctx_edit_gpx_categories";
 
 	private String editorTag;
 	private boolean isNew = true;
 	private String name = "";
 	private int color;
+	private boolean isGpx;
+	private ArrayList<String> gpxCategories;
 
 	private EditText nameEdit;
 	private Spinner colorSpinner;
 
-	FavouritesDbHelper helper;
+	FavouritesDbHelper favoritesHelper;
 
 	private SelectCategoryDialogFragment.CategorySelectionListener selectionListener;
 
@@ -47,7 +56,9 @@ public class EditCategoryDialogFragment extends DialogFragment {
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 
-		helper = ((OsmandApplication) getActivity().getApplication()).getFavorites();
+		FragmentActivity activity = requireActivity();
+		OsmandApplication app = (OsmandApplication) activity.getApplication();
+		favoritesHelper = app.getFavorites();
 
 		color = ColorDialogs.pallette[0];
 
@@ -57,9 +68,9 @@ public class EditCategoryDialogFragment extends DialogFragment {
 			restoreState(getArguments());
 		}
 
-		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+		AlertDialog.Builder builder = new AlertDialog.Builder(activity);
 		builder.setTitle(R.string.favorite_category_add_new_title);
-		final View v = getActivity().getLayoutInflater().inflate(R.layout.favorite_category_edit_dialog, null, false);
+		final View v = activity.getLayoutInflater().inflate(R.layout.favorite_category_edit_dialog, null, false);
 
 		nameEdit = (EditText)v.findViewById(R.id.edit_name);
 		nameEdit.setText(name);
@@ -67,7 +78,7 @@ public class EditCategoryDialogFragment extends DialogFragment {
 		colorSpinner = (Spinner)v.findViewById(R.id.edit_color);
 		final TIntArrayList colors = new TIntArrayList();
 		final int intColor = color;
-		ColorDialogs.setupColorSpinnerEx(getActivity(), intColor, colorSpinner, colors, new AdapterView.OnItemSelectedListener() {
+		ColorDialogs.setupColorSpinnerEx(activity, intColor, colorSpinner, colors, new AdapterView.OnItemSelectedListener() {
 			@Override
 			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 				color = colors.get(position);
@@ -107,25 +118,31 @@ public class EditCategoryDialogFragment extends DialogFragment {
 				public void onClick(View v)
 				{
 					name = nameEdit.getText().toString().trim();
-					if (!helper.groupExists(name)) {
-						helper.addEmptyCategory(name, color);
+					FragmentActivity activity = getActivity();
+					if (activity != null) {
+						boolean exists = isGpx ? isGpxCategoryExists(name) : favoritesHelper.groupExists(name);
+						if (exists) {
+							AlertDialog.Builder b = new AlertDialog.Builder(activity);
+							b.setMessage(getString(R.string.favorite_category_dublicate_message));
+							b.setNegativeButton(R.string.shared_string_ok, null);
+							b.show();
+						} else {
+							if (activity instanceof MapActivity) {
+								if (!isGpx) {
+									favoritesHelper.addEmptyCategory(name, color);
+								}
+								PointEditor editor = ((MapActivity) activity).getContextMenu().getPointEditor(editorTag);
 
-						PointEditor editor = ((MapActivity) getActivity()).getContextMenu().getPointEditor(editorTag);
+								if (editor != null) {
+									editor.setCategory(name, color);
+								}
 
-						if (editor != null) {
-							editor.setCategory(name);
+								if (selectionListener != null) {
+									selectionListener.onCategorySelected(name, color);
+								}
+							}
+							d.dismiss();
 						}
-
-						if (selectionListener != null){
-							selectionListener.onCategorySelected(name, color);
-						}
-
-						d.dismiss();
-					} else {
-						AlertDialog.Builder b = new AlertDialog.Builder(getActivity());
-						b.setMessage(getString(R.string.favorite_category_dublicate_message));
-						b.setNegativeButton(R.string.shared_string_ok, null);
-						b.show();
 					}
 				}
 			});
@@ -138,10 +155,28 @@ public class EditCategoryDialogFragment extends DialogFragment {
 		super.onSaveInstanceState(outState);
 	}
 
-	public static EditCategoryDialogFragment createInstance(String editorTag) {
+	private boolean isGpxCategoryExists(@NonNull String name) {
+		boolean res = false;
+		if (gpxCategories != null) {
+			String nameLC = name.toLowerCase();
+			for (String category : gpxCategories) {
+				if (category.toLowerCase().equals(nameLC)) {
+					res = true;
+					break;
+				}
+			}
+		}
+		return res;
+	}
+
+	public static EditCategoryDialogFragment createInstance(@NonNull String editorTag, @Nullable Set<String> gpxCategories, boolean isGpx) {
 		EditCategoryDialogFragment fragment = new EditCategoryDialogFragment();
 		Bundle bundle = new Bundle();
 		bundle.putString(KEY_CTX_EDIT_CAT_EDITOR_TAG, editorTag);
+		bundle.putBoolean(KEY_CTX_EDIT_GPX_FILE, isGpx);
+		if (gpxCategories != null) {
+			bundle.putStringArrayList(KEY_CTX_EDIT_GPX_CATEGORIES, new ArrayList<>(gpxCategories));
+		}
 		fragment.setArguments(bundle);
 		return fragment;
 	}
@@ -162,6 +197,10 @@ public class EditCategoryDialogFragment extends DialogFragment {
 		bundle.putString(KEY_CTX_EDIT_CAT_NEW, Boolean.valueOf(isNew).toString());
 		bundle.putString(KEY_CTX_EDIT_CAT_NAME, nameEdit.getText().toString().trim());
 		bundle.putString(KEY_CTX_EDIT_CAT_COLOR, "" + color);
+		bundle.putBoolean(KEY_CTX_EDIT_GPX_FILE, isGpx);
+		if (gpxCategories != null) {
+			bundle.putStringArrayList(KEY_CTX_EDIT_GPX_CATEGORIES, gpxCategories);
+		}
 	}
 
 	public void restoreState(Bundle bundle) {
@@ -174,10 +213,11 @@ public class EditCategoryDialogFragment extends DialogFragment {
 		if (name == null) {
 			name = "";
 		}
-
 		String colorStr = bundle.getString(KEY_CTX_EDIT_CAT_COLOR);
 		if (!Algorithms.isEmpty(colorStr)) {
 			color = Integer.parseInt(colorStr);
 		}
+		isGpx = bundle.getBoolean(KEY_CTX_EDIT_GPX_FILE, false);
+		gpxCategories = bundle.getStringArrayList(KEY_CTX_EDIT_GPX_CATEGORIES);
 	}
 }

@@ -238,7 +238,7 @@ public abstract class PointEditorFragment extends BaseOsmAndFragment {
 
 	public abstract String getToolbarTitle();
 
-	public void setCategory(String name) {
+	public void setCategory(String name, int color) {
 		AutoCompleteTextViewEx categoryEdit = (AutoCompleteTextViewEx) view.findViewById(R.id.category_edit);
 		String n = name.length() == 0 ? getDefaultCategoryName() : name;
 		categoryEdit.setText(n);
@@ -295,6 +295,8 @@ public abstract class PointEditorFragment extends BaseOsmAndFragment {
 	public abstract Drawable getNameIcon();
 
 	public abstract Drawable getCategoryIcon();
+
+	public abstract int getPointColor();
 
 	public String getNameTextValue() {
 		EditText nameEdit = (EditText) view.findViewById(R.id.name_edit);

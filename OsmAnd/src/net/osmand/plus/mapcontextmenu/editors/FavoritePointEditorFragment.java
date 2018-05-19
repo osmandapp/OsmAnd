@@ -11,7 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
 
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
@@ -103,9 +102,9 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 	}
 
 	@Override
-	public void setCategory(String name) {
+	public void setCategory(String name, int color) {
 		group = helper.getGroup(name);
-		super.setCategory(name);
+		super.setCategory(name, group.color);
 	}
 
 	@Override
@@ -246,15 +245,16 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 
 	@Override
 	public Drawable getNameIcon() {
-		int color = defaultColor;
-		if (group != null) {
-			color = group.color;
-		}
-		return FavoriteImageDrawable.getOrCreate(getMapActivity(), color, false);
+		return FavoriteImageDrawable.getOrCreate(getMapActivity(), getPointColor(), false);
 	}
 
 	@Override
 	public Drawable getCategoryIcon() {
+		return getPaintedIcon(R.drawable.ic_action_folder_stroke, getPointColor());
+	}
+
+	@Override
+	public int getPointColor() {
 		int color = 0;
 		if (group != null) {
 			color = group.color;
@@ -262,6 +262,6 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 		if (color == 0) {
 			color = defaultColor;
 		}
-		return getPaintedIcon(R.drawable.ic_action_folder_stroke, color);
+		return color;
 	}
 }
