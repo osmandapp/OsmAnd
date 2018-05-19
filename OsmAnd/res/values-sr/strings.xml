@@ -71,7 +71,7 @@
     <string name="distance_measurement_finish_editing">Заврши уређивање</string>
     <string name="distance_measurement_clear_route">Обришите све тачке</string>
     
-    <string name="distance_measurement_load_gpx">Отвори постојећи GPX путању</string>
+    <string name="distance_measurement_load_gpx">Отвори постојећи GPX фајл</string>
     <string name="wait_current_task_finished">Молимо сачекајте док се не заврши тренутни задатак</string>
     <string name="use_kalman_filter_compass">Користите Калман филтер</string>
     <string name="use_magnetic_sensor">Користи магнетни сензор</string>
@@ -611,7 +611,7 @@
     <string name="shared_string_deselect_all">Означи све</string>
     <string name="shared_string_clear">Очисти</string>
     <string name="shared_string_clear_all">Очисти све</string>
-    <string name="shared_string_save_as_gpx">Сачувај као GPX путању</string>
+    <string name="shared_string_save_as_gpx">Сачувај као нови GPX фајл</string>
     <string name="shared_string_delete">Избриши</string>
     <string name="shared_string_share">Дели</string>
     <string name="shared_string_apply">Примени</string>
@@ -670,8 +670,8 @@
     <string name="traffic_warning">Упозорење саобраћајне гужве</string>
     <string name="speak_favorites">Омиљено у близини</string>
     <string name="speak_poi">Оближње занимљиве тачке</string>
-    <string name="save_current_track_descr">Сачувај одмах тренутну путању на меморијску картицу.</string>
-    <string name="save_current_track">Сачувај тренутну GPX путању</string>
+    <string name="save_current_track_descr">Сачувај одмах тренутну путању као GPX фајл.</string>
+    <string name="save_current_track">Сачувај тренутну путању</string>
     <string name="voice_provider_descr">Изаберите гласовно навођење.</string>
     <string name="voice_provider">Гласовно навођење</string>
 
@@ -812,7 +812,7 @@
     <string name="gpx_selection_route_points">%1$s\nТачке путање %2$s</string>
     <string name="gpx_selection_points">%1$s\nТачака</string>
     <string name="gpx_selection_track">%1$s\nСтаза %2$s</string>
-    <string name="gpx_file_is_empty">Празна GPX стаза</string>
+    <string name="gpx_file_is_empty">Празан GPX фајл</string>
     
     
     
@@ -1121,9 +1121,9 @@
     <string name="route_roundabout_short">Одреди %1$d излаз и иди</string>
     <string name="upload_poi">Отпреми тачку занимања</string>
     <string name="route_calculation">Прорачун путање</string>
-    <string name="gpx_no_tracks_title">Још увек немате ниједну стазу</string>
-    <string name="gpx_no_tracks_title_folder">Такође, можете додати стазе у фасциклу</string>
-    <string name="gpx_add_track">Додај стазу</string>
+    <string name="gpx_no_tracks_title">Још увек немате ниједан GPX фајл</string>
+    <string name="gpx_no_tracks_title_folder">Такође, можете додати GPX фајлове у фасциклу</string>
+    <string name="gpx_add_track">Додај GPX фајл</string>
     <string name="gpx_appearance">Приказ</string>
     
     
@@ -1198,7 +1198,7 @@
     <string name="no_inet_connection_desc_map">Захтеване за преузимање.</string>
     <string name="search_location">Претражујем положај…</string>
     <string name="storage_free_space">Слободно место складишта</string>
-    <string name="storage_place_description">OsmAnd складиште података (за карте, стазе итд.): %1$s.</string>
+    <string name="storage_place_description">OsmAnd складиште података (за карте, GPX фајлове итд.): %1$s.</string>
     <string name="give_permission">Дајте дозволе</string>
     <string name="allow_access_location">Омогућите приступ одређивању положаја</string>
     <string name="first_usage_greeting">Добави упутства и откриј нова места без везе са интернетом</string>
@@ -1496,7 +1496,7 @@
     <string name="shared_string_max">Највиши</string>
     <string name="shared_string_start_time">Полазак</string>
     <string name="shared_string_end_time">Долазак</string>
-    <string name="select_gpx_folder">Изаберите фасциклу стазе</string>
+    <string name="select_gpx_folder">Изаберите фасциклу GPX фајлова</string>
     <string name="file_can_not_be_moved">Фајл не може да се премести.</string>
     <string name="shared_string_move">Премести</string>
     <string name="shared_string_gpx_tracks">Стазе</string>
@@ -1562,14 +1562,14 @@
     <string name="notes_by_date">Белешке по данима</string>
     <string name="by_date">По дану</string>
     <string name="by_type">По врсти</string>
-    <string name="looking_for_tracks_with_waypoints">Претрага за путањама са пролазним тачкама</string>
+    <string name="looking_for_tracks_with_waypoints">Претрага за GPX фајловима са пролазним тачкама</string>
     <string name="shared_string_more_without_dots">Још</string>
-    <string name="add_track_to_markers_descr">Пролазне тачке се могу додати на маркере тако што се означе оне путање које их садрже.</string>
+    <string name="add_track_to_markers_descr">Одаберите GPX фајл да додате његове пролазне тачке на ознаке.</string>
     <string name="add_favourites_group_to_markers_descr">Изаберите омиљену категорију за додавање ознакама.</string>
     <string name="shared_string_gpx_waypoints">Пролазне тачке путање</string>
     <string name="favourites_group">Омиљена категорија</string>
     <string name="add_group">Додај скуп</string>
-    <string name="add_group_descr">Увозите групе из омиљених или пролазних тачака путање.</string>
+    <string name="add_group_descr">Увозите групе из омиљених или из GPX пролазних тачака.</string>
     <string name="empty_state_markers_active">Направите ознаке на карти!</string>
     <string name="shared_string_two">Два</string>
     <string name="shared_string_one">Један</string>
@@ -1584,7 +1584,7 @@
     <string name="rename_marker">Преименуј ознаку</string>
     <string name="tap_on_map_to_hide_interface_descr">Тупкање на карту је укључује и искључује контролна дугмад и справице.</string>
     <string name="mark_passed">Ознака прођена</string>
-    <string name="import_gpx_file_description">може се увести или као омиљене тачке или као фајл путање.</string>
+    <string name="import_gpx_file_description">може се увести или као омиљене тачке или као GPX фајл.</string>
     <string name="import_as_gpx">Увези као GPX фајл</string>
     <string name="import_as_favorites">Увези као омиљено</string>
     <string name="import_file">Увези фајл</string>
@@ -1618,14 +1618,14 @@
     <string name="shared_string_sort">Распореди</string>
     <string name="coordinate_input">Унос координата</string>
     <string name="is_saved">је сачуван</string>
-    <string name="marker_save_as_track_descr">Извезите ознаке у фајл који можете навести овде:</string>
-    <string name="marker_save_as_track">Сачувај као путању</string>
+    <string name="marker_save_as_track_descr">Извезите ознаке у следећи GPX фајл:</string>
+    <string name="marker_save_as_track">Сачувај као GPX фајл</string>
     <string name="move_to_history">Премести у историју</string>
     <string name="descendingly">силазно</string>
     <string name="ascendingly">узлазно</string>
     <string name="order_by">Распореди по:</string>
     <string name="empty_state_markers_groups">Увези групе</string>
-    <string name="empty_state_markers_groups_desc">Увозитеи омиљене групе или пролазне тачке путања као ознаке.</string>
+    <string name="empty_state_markers_groups_desc">Увозитеи омиљене групе или GPX пролазне тачке као ознаке.</string>
     <string name="empty_state_markers_history_desc">Ознаке означене као пређене ће се појавити на екрану.</string>
     <string name="make_round_trip">Направи повратно путовање</string>
     <string name="group_will_be_removed_after_restart">Група ће нестати после следећег покретања програма.</string>
@@ -1710,7 +1710,7 @@
     <string name="index_item_depth_points_northern_hemisphere">Поморске дубинске тачке северне полулопте</string>
     <string name="download_depth_countours">Поморске изобате</string>
     <string name="shared_string_color">Боја</string>
-    <string name="routing_attr_height_obstacles_description">Користите податке висине земљишта обезбеђених помоћу СРМ-а, АСТЕР-а и ЕУ-ДЕМ-а.</string>
+    <string name="routing_attr_height_obstacles_description">Урачунај и податке висине земљишта (обезбеђених помоћу СРМ, АСТЕР и ЕУ-ДЕМ података).</string>
     <string name="auto_split_recording_title">Самоподели снимке после размака</string>
     <string name="auto_split_recording_descr">Почни нови одсечак после размака од 6 минута, нову путању после размака од 2 сата, или нови фајл после дужег размака ако је дан измењен.</string>
     <string name="rendering_attr_showMtbRoutes_name">Прикажи путеве МТБ</string>
@@ -1761,15 +1761,15 @@
     <string name="first_intermediate_dest_description">Додаје прво стајање</string>
     <string name="switch_osm_notes_visibility_desc">Прикажи/Сакриј ОСМ белешке на карти.</string>
     <string name="shared_string_gpx_file">GPX фајл</string>
-    <string name="release_3_0">Нови турустички мени: гледајте WikiVoyage чланке без коришћења интернета
+    <string name="release_3_0">• Ново: Подршка за глобалне туристичке водиче без потребе за интернет конекцијом. Референтни положају су повезани на карти. Иницијални подаци са сајта Wikivoyage.
 \n
-\n • Википедија: нови изглед, активне везе, слике
-\n
-\n • Open Track UI: приказ група пролазних тачака
-\n
-\n • Маркери на карти: увезите означене групе из GPX фајлова
-\n
-\n • OsmAnd Live претплата сада укључује све OsmAnd функционалности
+\n • Википедија: нови изглед, активне везе, слике 
+\n 
+\n • Open Track UI: приказ група пролазних тачака 
+\n 
+\n • Маркери на карти: увезите означене групе из GPX фајлова 
+\n 
+\n • OsmAnd Live претплата сада укључује све OsmAnd функционалности 
 \n</string>
     <string name="gpx_file_desc">GPX - погодно за извоз у ЈОСМ и друге ОСМ уређиваче.</string>
     <string name="osc_file_desc">ОСЦ - погодно за извоз у OpenStreetMap.</string>
@@ -1820,7 +1820,7 @@
     <string name="gpx_monitoring_stop">Заустави GPX бележење</string>
     
     
-    <string name="none_selected_gpx">Није одабрана ниједан GPX фајл. Дуго тапните на неку од доступних путања да бисте је одабрали.</string>
+    <string name="none_selected_gpx">Није одабран ниједан GPX фајл. Одаберите један дугим притискањем.</string>
     
     
     
@@ -2084,11 +2084,11 @@
     <string name="shared_string_action_name">Име радње</string>
     <string name="mappilary_no_internet_desc">Потребан је интернет да бисте видели слике са Мапилара.</string>
     <string name="retry">Покушај поново</string>
-    <string name="empty_state_my_tracks">Додај и снимај путање</string>
-    <string name="empty_state_my_tracks_desc">Сними или увези путање за преглед.</string>
+    <string name="empty_state_my_tracks">Додај GPX фајлове</string>
+    <string name="empty_state_my_tracks_desc">Увези GPX фајлове или сними путање.</string>
     <string name="empty_state_favourites">Додај омиљене</string>
-    <string name="empty_state_favourites_desc">Увезите или означите омиљене тачке на карти.</string>
-    <string name="import_track">Увези путање</string>
+    <string name="empty_state_favourites_desc">Увезите омиљене тачке, или их додајте означавајући их као ознаке на карти.</string>
+    <string name="import_track">Увези GPX фајл</string>
     <string name="winter_and_ski_renderer">Зима и скијање</string>
     <string name="nautical_renderer">Поморско</string>
     <string name="copy_location_name">Копирај име тачке</string>
@@ -2122,7 +2122,7 @@
     <string name="rendering_attr_contourLines_name">Прикажи изохипсе</string>
     <string name="offline_navigation_not_available">OsmAnd навигација ван мреже је привремено недоступна.</string>
     <string name="maps_could_not_be_downloaded">Ова карта не може да се преузме</string>
-    <string name="layer_gpx_layer">GPX путања…</string>
+    <string name="layer_gpx_layer">GPX фајлови…</string>
     <string name="vector_data">Векторске карте ван мреже</string>
     <string name="rotate_map_compass_opt">Правац компаса</string>
     <string name="rotate_map_bearing_opt">У смеру кретања</string>
@@ -2324,7 +2324,7 @@
     <string name="empty_route_calculated">Израчунати пут је празан</string>
     <string name="new_route_calculated_dist">Израчунат нови пут, удаљеност</string>
     <string name="go_back_to_osmand">Врати се на OsmAnd карту</string>
-    <string name="saving_gpx_tracks">Чувам GPX путање на меморијску картицу…</string>
+    <string name="saving_gpx_tracks">Чувам GPX фајл…</string>
     <string name="use_online_routing_descr">Користите интернет да израчунате пут.</string>
     <string name="reload_tile">Поново учитај сличицу</string>
     <string name="mark_point">Одредиште</string>
@@ -2390,7 +2390,7 @@
     <string name="working_days">Радни дани</string>
     <string name="recent_places">Скорашња места</string>
     <string name="favourites">Омиљене</string>
-    <string name="show_gpx">Прикажи GPX</string>
+    <string name="show_gpx">Прикажи GPX податке</string>
     <string name="count_of_lines">Број линија</string>
     <string name="buy">Купи</string>
     <string name="get_full_version">Пуна верзија</string>
@@ -2474,7 +2474,7 @@
     <string name="waypoint_one">Пролазна тачка 1</string>
     <string name="route_point_one">Тачка пута 1</string>
     <string name="move_point">Помери тачку</string>
-    <string name="add_segment_to_the_track">Додај у GPX путању</string>
+    <string name="add_segment_to_the_track">Додај у GPX фајл</string>
     <string name="osm_recipients_label">ОСМ примаоци</string>
     <string name="total_donations">Укупно донација</string>
     <string name="release_2_8">\\022 Комплетно преправљени маркери на картама са вођицама и планирањем пута 
@@ -2582,7 +2582,7 @@
     <string name="shared_string_do">Да</string>
     <string name="shared_string_only_with_wifi">Само на бежичној мрежи</string>
     <string name="wikivoyage_download_pics">Преузимај слике</string>
-    <string name="wikivoyage_download_pics_descr">Слике у чланцима могу бити скидане и ускладиштене на уређају за приступ ван мреже.
+    <string name="wikivoyage_download_pics_descr">Слике из чланака могу бити скидане и ускладиштене на уређају за приступ ван мреже. 
 \n Ово увек можете променити у \"Истражи\" → \"Опције\".</string>
     <string name="shared_string_wifi_only">Само бежично</string>
     <string name="select_travel_book">Одаберите књигу путовања</string>
@@ -2590,7 +2590,7 @@
     <string name="online_webpage_warning">Страна доступна само док сте на мрежи. Отворити је у веб читачу?</string>
     <string name="images_cache">Кеш слика</string>
     <string name="delete_search_history">Обриши историјат претрага</string>
-    <string name="download_images">Прикажи слике</string>
+    <string name="download_images">Скидај слике</string>
     <string name="download_maps_travel">Туристички водичи</string>
     <string name="shared_string_wikivoyage">Wikivoyage</string>
     <string name="article_removed">Чланак уклоњен</string>
@@ -2600,7 +2600,7 @@
     <string name="shared_string_explore">Истражи</string>
     <string name="shared_string_contents">Садржаји</string>
     <string name="shared_string_result">Резултат</string>
-    <string name="shared_string_travel">Путовање</string>
+    <string name="shared_string_travel">Туристички водичи</string>
     <string name="layer_map">Извор карте…</string>
     <string name="route_general_information">Укупна удаљеност %1$s, време путовања %2$d h %3$d min.</string>
     <string name="position_on_map_center">На средини</string>
@@ -2611,7 +2611,7 @@
     <string name="wiki_article_search_text">Претражујем одговарајући вики чланак</string>
     <string name="wiki_article_not_found">Чланак није нађен</string>
     <string name="how_to_open_wiki_title">Како да отворите чланке са Википедије?</string>
-<string name="welcome_to_open_beta_description">Путовање је базирано на Wikivoyage-у. Тестирајте све функционалности бесплатно. После тога, Путовање ће бити доступно само претплатницима на OsmAnd Unlimited и власницима OsmAnd+-а</string>
+<string name="welcome_to_open_beta_description">Туристички водичи су тренутно базирани на Wikivoyage-у. Тестирајте све функционалности бесплатно. После тога, туристички водичи ће бити доступни само претплатницима на OsmAnd Unlimited и власницима OsmAnd+-а.</string>
     <string name="start_editing_card_description">Можете и требали бисте да мењате било који чланак на Wikivoyage-у, а и надамо се да хоћете. Делите Ваше знање, искуство, таленат и пажњу</string>
     <string name="monthly_map_updates">Ажурирања карти: <b>Сваког месеца</b></string>
     <string name="daily_map_updates">Ажурирања карти: <b>Сваког сата</b></string>
@@ -2619,7 +2619,7 @@
 
     <string name="wikipedia_offline">Википедија ван мреже</string>
     <string name="contour_lines_hillshade_maps">Карте изохипси и рељефа</string>
-    <string name="purchase_dialog_travel_description">Купите једно од следећег да читате туристичке чланке ван мреже:</string>
+    <string name="purchase_dialog_travel_description">Купите једно од следећег да можете да читате туристичке чланке ван мреже:</string>
     <string name="use_two_digits_longitude">Користи две цифре за географску дужину</string>
     <string name="waypoints_removed_from_map_markers">Пролазне тачке уклоњене са ознака карте</string>
     <string name="select_waypoints_category_description">Додајте све пролазне тачке са путање, или одаберите засебне категорије.</string>
@@ -2669,7 +2669,7 @@
     <string name="maps_you_need">Карте које Вам требају</string>
     <string name="osmand_team">OsmAnd тим</string>
     <string name="travel_card_update_descr">Доступни су нови Wikivoyage подаци, ажурирајте их да бисте уживали.</string>
-	<string name="travel_card_download_descr">Преузмите ове Wikivoyage туристичке водиче да бисте читали чланке о местима по целом свету без интернет конекције.</string>
+	<string name="travel_card_download_descr">Преузмите Wikivoyage туристичке водиче да бисте читали чланке о местима по целом свету без интернет конекције.</string>
 	<string name="start_editing_card_image_text">Бесплатни светски туристички водич који свако може да уређује.</string>
     <string name="travel_guide">Wikivoyage туристички водич</string>
     <string name="travel_guide_description">Водичи за најзанимљивија места на планети, унутар OsmAnd-а, без потребе за интернет конекцијом.</string>
