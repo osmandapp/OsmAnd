@@ -2614,7 +2614,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="rendering_attr_depthContours_name">Havdybdekonturer</string>
 	
     <string name="routing_attr_height_obstacles_name">Brug højdedata</string>
-    <string name="routing_attr_height_obstacles_description">Factor i terrænhøjdedata (SRTM, ASTER og EU-DEM data).</string>
+    <string name="routing_attr_height_obstacles_description">Factor i terrænhøjde (SRTM, ASTER og EU-DEM data).</string>
 
     
     <string name="route_altitude">Rutehøjde</string>
@@ -3037,7 +3037,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="show_arrows_descr">Vis en eller to pile der angiver retningen til de aktive markører.</string>
     <string name="distance_indication_descr">Vælg hvordan afstanden til de aktive markører skal vises.</string>
     <string name="active_markers_descr">Vælg antallet af aktive markører der vises.</string>
-    <string name="add_track_to_markers_descr">Rutepunkter kan føjes til markører ved at vælge et af disse spor som indeholder dem.</string>
+    <string name="add_track_to_markers_descr">Vælg en GPX-fil for at tilføje rutepunkterne til markører.</string>
     <string name="add_favourites_group_to_markers_descr">Vælg en favoritkategori, der skal tilføjes markørerne.</string>
     <string name="shared_string_gpx_waypoints">Sporets rutepunkter</string>
     <string name="favourites_group">Favoritkategori</string>
@@ -3065,15 +3065,15 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="by_date">Efter dato</string>
     <string name="by_type">Efter type</string>
     <string name="modify_the_search_query">Ændr søgning.</string>
-    <string name="release_3_0">• Ny rejseguide menu: se Wikivoyage artikler uden internetforbindelse 
+    <string name="release_3_0">• Nyt: globale offline rejseguider. Henvisning til steder linkes til kortet. Date fra Wikivoyage
 \n 
-\n  • Wikipedia: nyt udseende, aktive links, billeder 
+\n • Wikipedia: nyt udseende, aktive links, billeder understøttes nu 
 \n 
-\n  • Åbn spor grænseflade: vis rutepunktsgrupper 
+\n • Åbn spor grænseflade: understøtter rutepunktsgrupper 
 \n 
-\n  • Kortmarkører: import af udvalgte grupper fra GPX-filer, nyt udseende på koordinat indtastning 
+\n • Kortmarkører: import af udvalgte grupper fra GPX-filer, nyt udseende på koordinat indtastning 
 \n 
-\n  • OsmAnd Live-abonnement indeholder nu alle OsmAnd-funktioner 
+\n • OsmAnd Live-data (abonnement) indeholder nu alle OsmAnd-funktioner 
 \n</string>
     <string name="av_locations_selected_desc">GPX-fil med koordinaterne og data for de valgte noter.</string>
     <string name="av_locations_all_desc">GPX-fil med koordinater og data for alle noter.</string>
@@ -3170,7 +3170,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="group_deleted">Gruppen slettet</string>
     <string name="rendering_attr_whiteWaterSports_name">Rafting</string>
     <string name="waypoints_removed_from_map_markers">Rutepunkter fjernet fra kortmarkører</string>
-    <string name="shared_string_travel">Rejseguide</string>
+    <string name="shared_string_travel">Rejseguider</string>
     <string name="shared_string_result">Resultat</string>
     <string name="use_two_digits_longitude">Brug tocifret længdegrad</string>
     <string name="wikivoyage_search_hint">Søg: land, by, region</string>
