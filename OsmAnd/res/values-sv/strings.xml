@@ -2979,8 +2979,8 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="start_editing">Börja redigera</string>
     <string name="get_unlimited_access">Få obegränsad tillgång</string>
     <string name="welcome_to_open_beta">Välkommen till öppen beta</string>
-    <string name="travel_guide">Reseguiden Wikivoyage</string>
-    <string name="travel_guide_description">Guider till de mest intressanta platserna i världen, inuti OsmAnd, utan en internetanslutning.</string>
+    <string name="wikivoyage_travel_guide">Reseguiden Wikivoyage</string>
+    <string name="wikivoyage_travel_guide_descr">Guider till de mest intressanta platserna i världen, inuti OsmAnd, utan en internetanslutning.</string>
     <string name="monthly_map_updates">Kartuppdateringar: <b>Varje månad</b></string>
     <string name="daily_map_updates">Kartuppdateringar: <b>Varje timme</b></string>
     <string name="in_app_purchase">Köp i app</string>

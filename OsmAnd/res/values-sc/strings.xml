@@ -3166,8 +3166,8 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="contour_lines_sea_depth">Curvas de livellu + Curvas de profundidade nàuticas</string>
     <string name="unlock_all_features">Isbloca totu sas funtzionalidades de OsmAnd</string>
 
-    <string name="travel_guide">Ghia de biàgiu de Wikivoyage</string>
-    <string name="travel_guide_description">Ghias pro sos logos prus interessantes de su mundu, in intro de OsmAnd, chi non tenent bisòngiu de impreare una connessione a ìnternet.</string>
+    <string name="wikivoyage_travel_guide">Ghia de biàgiu de Wikivoyage</string>
+    <string name="wikivoyage_travel_guide_descr">Ghias pro sos logos prus interessantes de su mundu, in intro de OsmAnd, chi non tenent bisòngiu de impreare una connessione a ìnternet.</string>
     <string name="travel_card_update_descr">Datos noos de Wikivoyage disponìbiles, agiorna·los pro los bìdere.</string>
 	<string name="travel_card_download_descr">Iscàrriga custas ghias de biàgiu de Wikivoyage pro lèghere artìculos a pitzu de logos in totu su mundu chene tènnere una connessione a ìnternet.</string>
 	<string name="update_is_available">Agiornamentu disponìbile</string>

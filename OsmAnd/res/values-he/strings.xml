@@ -2901,8 +2901,8 @@
     <string name="start_editing">להתחיל בעריכה</string>
     <string name="get_unlimited_access">קבלת גישה בלתי מוגבלת</string>
     <string name="welcome_to_open_beta">ברוך בואך לבטא הפתוחה</string>
-    <string name="travel_guide">מדריך הטיולים ויקימסע</string>
-    <string name="travel_guide_description">מדריכים למקומות המעניינים ביותר בעולם, בתוך OsmAnd, ללא חיבור לאינטרנט.</string>
+    <string name="wikivoyage_travel_guide">מדריך הטיולים ויקימסע</string>
+    <string name="wikivoyage_travel_guide_descr">מדריכים למקומות המעניינים ביותר בעולם, בתוך OsmAnd, ללא חיבור לאינטרנט.</string>
     <string name="contour_lines_hillshade_maps">קווי מתאר ומפות הצללה</string>
     <string name="popular_destinations">יעדים נפוצים</string>
     <string name="release_2_8">\\022 סמני מפה שנבנו מחדש עם קווי הכוונה ותכנון מסלול 

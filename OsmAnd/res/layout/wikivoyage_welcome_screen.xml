@@ -47,7 +47,7 @@
 			android:ellipsize="end"
 			android:gravity="center_vertical"
 			android:maxLines="2"
-			android:text="@string/travel_guide"
+			android:text="@string/wikivoyage_travel_guide"
 			android:textColor="?attr/wikivoyage_primary_text_color"
 			android:textSize="@dimen/title_text_size"/>
 
@@ -57,7 +57,7 @@
 			android:layout_weight="1"
 			android:ellipsize="end"
 			android:lineSpacingMultiplier="@dimen/text_button_line_spacing_multiplier"
-			android:text="@string/travel_guide_description"
+			android:text="@string/wikivoyage_travel_guide_descr"
 			android:textColor="@color/wikivoyage_secondary_text"
 			android:textSize="@dimen/default_list_text_size"/>
 

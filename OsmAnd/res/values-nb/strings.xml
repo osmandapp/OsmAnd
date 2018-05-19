@@ -2983,7 +2983,7 @@
     <string name="purchase_dialog_title">Velg plan</string>
     <string name="dayly_map_updates">Kartoppdateringer: Hver dag</string>
     <string name="wikivoyage_offline">Wikivoyage offline</string>
-    <string name="travel_guide">Wikivoyage reiseguide</string>
+    <string name="wikivoyage_travel_guide">Wikivoyage reiseguide</string>
     <string name="monthly_map_updates">Kartoppdateringer: <b>Hver måned</b></string>
     <string name="daily_map_updates">Kartoppdateringer: <b>Hver time</b></string>
     <string name="in_app_purchase">Kjøp i programmet</string>
@@ -2993,7 +2993,7 @@
     <string name="paid_app">Betalt program</string>
     <string name="paid_plugin">Betalt tillegg</string>
     <string name="contour_lines_hillshade_maps">Kart for koter og relieffskygger</string>
-    <string name="travel_guide_description">Guider til de mest spennende stedene, inne i OsmAnd, uten å ha internettforbindelse.</string>
+    <string name="wikivoyage_travel_guide_descr">Guider til de mest spennende stedene, inne i OsmAnd, uten å ha internettforbindelse.</string>
     <string name="purchase_dialog_travel_description">Kjøp én av følgende for å lese reiseartikler i frakoblet modus:</string>
     <string name="purchase_dialog_subtitle">Velg passende element:</string>
     <string name="travel_card_download_descr">Last ned disse Wikivoyage-reiseguidene for å se artikler om steder rundt om i verden uten å ha en internettforbindelse.</string>

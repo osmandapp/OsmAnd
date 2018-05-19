@@ -49,8 +49,8 @@
     <string name="start_editing">Start editing</string>
     <string name="get_unlimited_access">Get unlimited access</string>
     <string name="welcome_to_open_beta">Welcome to the open beta</string>
-    <string name="travel_guide">Wikivoyage Travel Guide</string>
-    <string name="travel_guide_description">Guides to the most interesting places on the planet, inside OsmAnd, without a connection to the Internet.</string>
+    <string name="wikivoyage_travel_guide">Wikivoyage Travel Guide</string>
+    <string name="wikivoyage_travel_guide_descr">Guides to the most interesting places on the planet, inside OsmAnd, without a connection to the Internet.</string>
     <string name="monthly_map_updates">Map updates: <b>Every month</b></string>
     <string name="daily_map_updates">Map updates: <b>Every hour</b></string>
     <string name="in_app_purchase">In-app purchase</string>

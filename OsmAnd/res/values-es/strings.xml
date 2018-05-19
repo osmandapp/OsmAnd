@@ -2998,8 +2998,8 @@
     <string name="purchase_dialog_title">Elegir plan</string>
     <string name="purchase_dialog_travel_description">Compra uno de los siguientes elementos para recibir la funcionalidad de guías de viaje sin conexión:</string>
     <string name="purchase_dialog_subtitle">Elegir el elemento adecuado:</string>
-    <string name="travel_guide_description">Las guías de los lugares más interesantes del planeta, dentro de OsmAnd y sin conexión a Internet.</string>
-    <string name="travel_guide">Guía turística de Wikiviajes</string>
+    <string name="wikivoyage_travel_guide_descr">Las guías de los lugares más interesantes del planeta, dentro de OsmAnd y sin conexión a Internet.</string>
+    <string name="wikivoyage_travel_guide">Guía turística de Wikiviajes</string>
     <string name="monthly_map_updates">Actualizaciones del mapa: <b>Cada mes</b></string>
     <string name="daily_map_updates">Actualizaciones del mapa: <b>Cada hora</b></string>
     <string name="in_app_purchase">Compras en la aplicación</string>

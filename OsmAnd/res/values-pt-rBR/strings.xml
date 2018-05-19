@@ -2857,8 +2857,8 @@ Pôr do Sol: %2$s</string>
     <string name="start_editing_card_image_text">O guia livre de viagens mundial que qualquer um pode editar.</string>
     <string name="start_editing">Comece a editar</string>
     <string name="get_unlimited_access">Obtenha acesso ilimitado</string>
-    <string name="travel_guide">Guia de Viagem Wikivoyage</string>
-    <string name="travel_guide_description">Explore os guias Wikivoyage para os lugares mais interessantes do planeta no OsmAnd sem precisar de conexão com a internet.</string>
+    <string name="wikivoyage_travel_guide">Guia de Viagem Wikivoyage</string>
+    <string name="wikivoyage_travel_guide_descr">Explore os guias Wikivoyage para os lugares mais interessantes do planeta no OsmAnd sem precisar de conexão com a internet.</string>
     <string name="monthly_map_updates">Atualizações de mapa: <b>mensal</b></string>
     <string name="daily_map_updates">Atualizações de mapa: <b>a cada hora</b></string>
     <string name="in_app_purchase">Compra no aplicativo</string>

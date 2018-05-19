@@ -3004,8 +3004,8 @@ Lon %2$s</string>
     <string name="purchase_dialog_title">Elegir plan</string>
     <string name="purchase_dialog_travel_description">Comprar uno de los siguientes elementos para recibir la característica de la guía turística sin conexión:</string>
     <string name="purchase_dialog_subtitle">Elegir el elemento adecuado:</string>
-    <string name="travel_guide_description">Las guías de los lugares más interesantes del planeta, dentro de OsmAnd y sin conexión a Internet.</string>
-    <string name="travel_guide">Guía turística de Wikiviajes</string>
+    <string name="wikivoyage_travel_guide_descr">Las guías de los lugares más interesantes del planeta, dentro de OsmAnd y sin conexión a Internet.</string>
+    <string name="wikivoyage_travel_guide">Guía turística de Wikiviajes</string>
     <string name="in_app_purchase">Compras en la aplicación</string>
     <string name="in_app_purchase_desc">Único pago</string>
     <string name="in_app_purchase_desc_ex">Una vez comprado, estará permanentemente disponible para ti.</string>

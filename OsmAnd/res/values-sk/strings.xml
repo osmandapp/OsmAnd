@@ -2973,8 +2973,8 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="shared_string_wikivoyage">Wikivoyage</string>
     <string name="article_removed">Článok odstránený</string>
     <string name="wikivoyage_search_hint">Hľadanie: krajina, mesto, kraj</string>
-    <string name="travel_guide_description">Sprievodcovia Wikivoyage k najzaujímavejším miestam na planéte, priamo v OsmAnd bez pripojenia na Internet.</string>
-    <string name="travel_guide">Turistický sprievodca Wikivoyage</string>
+    <string name="wikivoyage_travel_guide_descr">Sprievodcovia Wikivoyage k najzaujímavejším miestam na planéte, priamo v OsmAnd bez pripojenia na Internet.</string>
+    <string name="wikivoyage_travel_guide">Turistický sprievodca Wikivoyage</string>
     <string name="purchase_dialog_title">Vyberte si predplatné</string>
     <string name="purchase_dialog_travel_description">Zakúpte si jednu z nasledujúcich položiek pre čítanie cestovných článkov offline:</string>
     <string name="purchase_dialog_subtitle">Zvoľte vhodnú položku:</string>

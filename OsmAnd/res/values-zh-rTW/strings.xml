@@ -3148,8 +3148,8 @@
     <string name="download_maps_travel">旅遊指南</string>
     <string name="shared_string_wikivoyage">維基導遊</string>
     <string name="index_item_world_wikivoyage">全球維基導遊文章</string>
-    <string name="travel_guide_description">在 OsmAnd 內部沒有網路連線的狀況下，引領到全球最感興趣的地點。</string>
-    <string name="travel_guide">維基導遊旅行指南</string>
+    <string name="wikivoyage_travel_guide_descr">在 OsmAnd 內部沒有網路連線的狀況下，引領到全球最感興趣的地點。</string>
+    <string name="wikivoyage_travel_guide">維基導遊旅行指南</string>
     <string name="purchase_dialog_title">選擇計畫</string>
     <string name="purchase_dialog_travel_description">購買以下的其中一項即可得到離線旅遊指南功能：</string>
     <string name="purchase_dialog_subtitle">選擇適合的物品：</string>

@@ -3024,8 +3024,8 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="start_editing">Szerkesztés elkezdése</string>
     <string name="get_unlimited_access">Szerezz korlátlan hozzáférést</string>
     <string name="welcome_to_open_beta">Üdvözlünk a nyílt bétatesztben</string>
-    <string name="travel_guide">Wikivoyage Útikönyv</string>
-    <string name="travel_guide_description">Útikönyv a Föld legérdekesebb helyeihez, az OsmAndon belül, internetkapcsolat nélkül.</string>
+    <string name="wikivoyage_travel_guide">Wikivoyage Útikönyv</string>
+    <string name="wikivoyage_travel_guide_descr">Útikönyv a Föld legérdekesebb helyeihez, az OsmAndon belül, internetkapcsolat nélkül.</string>
     <string name="purchase_dialog_travel_description">Vedd meg az alábbiak egyikét hogy úti célok cikkeit olvashasd offline:</string>
     <string name="purchase_dialog_subtitle">Válaszd ki a megfelelőt:</string>
     <string name="download_maps_travel">Útikönyvek</string>

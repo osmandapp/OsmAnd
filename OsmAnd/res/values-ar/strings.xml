@@ -2940,7 +2940,7 @@
     <string name="start_editing">إبداء التحرير</string>
     <string name="get_unlimited_access">تحصل على نفاذ بلا حدود</string>
     <string name="welcome_to_open_beta">مرحبا بكم على النسخة التجريبية المفتوحة</string>
-    <string name="travel_guide">دليل ويكي سفر</string>
+    <string name="wikivoyage_travel_guide">دليل ويكي سفر</string>
     <string name="monthly_map_updates">تحديثات الخرائط : <b>كل شهر</b></string>
     <string name="daily_map_updates">تحديثات الخرائط : <b>كل ساعة</b></string>
     <string name="purchase_unlim_title">شراء - %1$s</string>

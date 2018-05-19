@@ -3128,9 +3128,9 @@
     <string name="start_editing">Пачаць рэдагаваньне</string>
     <string name="get_unlimited_access">Атрымаць неабмежаваны доступ</string>
     <string name="welcome_to_open_beta">Вітаем у адкрытым бэта-тэставанні!</string>
-    <string name="travel_guide">Турыстычны даведнік</string>
+    <string name="wikivoyage_travel_guide">Турыстычны даведнік</string>
     <string name="osmand_team">Каманда OsmAnd</string>
-    <string name="travel_guide_description">Кіраўніцтва па самым цікавым месцам на планеце ўнутны OsmAnd без злучэння з Інтэрнэтам.</string>
+    <string name="wikivoyage_travel_guide_descr">Кіраўніцтва па самым цікавым месцам на планеце ўнутны OsmAnd без злучэння з Інтэрнэтам.</string>
     <string name="monthly_map_updates">Абнаўленні мап: <b>штомесячна</b></string>
     <string name="daily_map_updates">Абнаўленні мап: <b>штогадзінна</b></string>
     <string name="in_app_purchase">Пакупка ў праграме</string>

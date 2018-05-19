@@ -3036,7 +3036,7 @@ Koda predstavlja območje: %1$s x %2$s</string>
 	<string name="update_is_available">Na voljo je posodobitev</string>
 	<string name="download_file">Prejmi datoteko</string>
     <string name="get_unlimited_access">Pridobitev neomejenega dostopa</string>
-    <string name="travel_guide">Popotniški vodnik WikiVoyage</string>
+    <string name="wikivoyage_travel_guide">Popotniški vodnik WikiVoyage</string>
     <string name="monthly_map_updates">Posodobitve zemljevida: <b>vsak mesec</b></string>
     <string name="start_editing">Začni urejanje</string>
     <string name="daily_map_updates">Posodobitve zemljevida: <b>vsako uro</b></string>
