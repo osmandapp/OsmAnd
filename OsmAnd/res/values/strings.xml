@@ -44,7 +44,7 @@
 	<string name="update_is_available">Update available</string>
 	<string name="download_file">Download file</string>
     <string name="start_editing_card_image_text">The free worldwide travel guide anyone can edit.</string>
-    <string name="welcome_to_open_beta_description">OsmAnd Travel is based on Wikivoyage. Test all features during open beta testing, for free. Afterwards, OsmAnd Travel will be available to subscribers of OsmAnd Unlimited and owners of OsmAnd+.</string>
+    <string name="welcome_to_open_beta_description">Travel guides are currently based on Wikivoyage. Test all features during open beta testing for free. Afterwards, travel guides will be available to subscribers of OsmAnd Unlimited and owners of OsmAnd+.</string>
     <string name="start_editing_card_description">You can and should edit any article on Wikivoyage. Share knowledge, experience, talent, and your attention</string>
     <string name="start_editing">Start editing</string>
     <string name="get_unlimited_access">Get unlimited access</string>
@@ -89,7 +89,7 @@
     <string name="shared_string_contents">Contents</string>
     <string name="shared_string_result">Result</string>
     <string name="use_two_digits_longitude">Use double digit longitude</string>
-    <string name="shared_string_travel">Travel</string>
+    <string name="shared_string_travel">Travel guides</string>
     <string name="waypoints_removed_from_map_markers">Waypoints removed from map markers</string>
     <string name="nothing_found_in_radius">Could not find anything:</string>
     <string name="select_waypoints_category_description">Add all of the track\'s waypoints, or select separate categories.</string>
@@ -151,7 +151,7 @@
     <string name="av_locations_selected_desc">GPX file with coordinates and data of the selected notes.</string>
     <string name="av_locations_all_desc">GPX file with coordinates and data of all notes.</string>
     <string name="release_3_0">
-	• Introducing OsmAnd Travel: Global and offline Wikivoyage travel guide funtionality\n\n
+	• New: Support for global offline travel guides. Referenced locations are linked to the map. Initial data from Wikivoyage.\n\n
 	• Wikipedia: New look, active links, images now supported\n\n
 	• Open Track UI: Support for waypoint groups\n\n
 	• Map markers: Import of selected groups from GPX files, coordinate input, new look\n\n
