@@ -472,6 +472,9 @@ public class RotatedTileBox {
 		return tx >= 0 && tx <= pixWidth && ty >= 0 && ty <= pixHeight;
 	}
 
+	public boolean containsPoint(float tx, float ty, float outMargin) {
+		return tx >= -outMargin && tx <= pixWidth + outMargin && ty >= -outMargin && ty <= pixHeight + outMargin;
+	}
 
 	public double getDistance(int pixX, int pixY, int pixX2, int pixY2) {
 		final double lat1 = getLatFromPixel(pixX, pixY);

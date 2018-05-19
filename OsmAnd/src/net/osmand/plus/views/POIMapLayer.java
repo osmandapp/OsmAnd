@@ -225,14 +225,16 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 						float y = tileBox.getPixYFromLatLon(o.getLocation().getLatitude(), o.getLocation()
 								.getLongitude());
 
-						if (intersects(boundIntersections, x, y, iconSize, iconSize)) {
-							canvas.drawBitmap(poiBackgroundSmall, x - poiBackgroundSmall.getWidth() / 2, y - poiBackgroundSmall.getHeight() / 2, paintIconBackground);
-							smallObjectsLatLon.add(new LatLon(o.getLocation().getLatitude(),
-									o.getLocation().getLongitude()));
-						} else {
-							fullObjects.add(o);
-							fullObjectsLatLon.add(new LatLon(o.getLocation().getLatitude(),
-									o.getLocation().getLongitude()));
+						if (tileBox.containsPoint(x, y, iconSize)) {
+							if (intersects(boundIntersections, x, y, iconSize, iconSize)) {
+								canvas.drawBitmap(poiBackgroundSmall, x - poiBackgroundSmall.getWidth() / 2, y - poiBackgroundSmall.getHeight() / 2, paintIconBackground);
+								smallObjectsLatLon.add(new LatLon(o.getLocation().getLatitude(),
+										o.getLocation().getLongitude()));
+							} else {
+								fullObjects.add(o);
+								fullObjectsLatLon.add(new LatLon(o.getLocation().getLatitude(),
+										o.getLocation().getLongitude()));
+							}
 						}
 					}
 					for (Amenity o : fullObjects) {
@@ -240,20 +242,22 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 								.getLongitude());
 						int y = (int) tileBox.getPixYFromLatLon(o.getLocation().getLatitude(), o.getLocation()
 								.getLongitude());
-						canvas.drawBitmap(poiBackground, x - poiBackground.getWidth() / 2, y - poiBackground.getHeight() / 2, paintIconBackground);
-						String id = null;
-						PoiType st = o.getType().getPoiTypeByKeyName(o.getSubType());
-						if (st != null) {
-							if (RenderingIcons.containsSmallIcon(st.getIconKeyName())) {
-								id = st.getIconKeyName();
-							} else if (RenderingIcons.containsSmallIcon(st.getOsmTag() + "_" + st.getOsmValue())) {
-								id = st.getOsmTag() + "_" + st.getOsmValue();
+						if (tileBox.containsPoint(x, y, iconSize)) {
+							canvas.drawBitmap(poiBackground, x - poiBackground.getWidth() / 2, y - poiBackground.getHeight() / 2, paintIconBackground);
+							String id = null;
+							PoiType st = o.getType().getPoiTypeByKeyName(o.getSubType());
+							if (st != null) {
+								if (RenderingIcons.containsSmallIcon(st.getIconKeyName())) {
+									id = st.getIconKeyName();
+								} else if (RenderingIcons.containsSmallIcon(st.getOsmTag() + "_" + st.getOsmValue())) {
+									id = st.getOsmTag() + "_" + st.getOsmValue();
+								}
 							}
-						}
-						if (id != null) {
-							Bitmap bmp = RenderingIcons.getIcon(view.getContext(), id, false);
-							if (bmp != null) {
-								canvas.drawBitmap(bmp, x - bmp.getWidth() / 2, y - bmp.getHeight() / 2, paintIcon);
+							if (id != null) {
+								Bitmap bmp = RenderingIcons.getIcon(view.getContext(), id, false);
+								if (bmp != null) {
+									canvas.drawBitmap(bmp, x - bmp.getWidth() / 2, y - bmp.getHeight() / 2, paintIcon);
+								}
 							}
 						}
 					}

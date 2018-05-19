@@ -335,7 +335,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 								if (isOnlineSearch() && !Algorithms.isEmpty(searchPhrase.getUnknownSearchWord())) {
 									app.getPoiFilters().resetNominatimFilters();
 									filter = app.getPoiFilters().getNominatimPOIFilter();
-									filter.setFilterByName(searchPhrase.getUnknownSearchWord());
+									filter.setFilterByName(searchPhrase.getUnknownSearchPhrase());
 									filter.clearCurrentResults();
 								} else {
 									filter = app.getPoiFilters().getSearchByNamePOIFilter();

@@ -29,8 +29,9 @@ public class NominatimPoiFilter extends PoiUIFilter {
 
 	private static final String FILTER_ID = "name_finder"; //$NON-NLS-1$
 	private static final Log log = PlatformUtil.getLog(NominatimPoiFilter.class);
+	private static final int MIN_SEARCH_DISTANCE_INDEX = 4;
 	private static final int LIMIT = 300;
-	
+
 	private String lastError = ""; //$NON-NLS-1$
 	private boolean addressQuery;
 	
@@ -87,6 +88,15 @@ public class NominatimPoiFilter extends PoiUIFilter {
 		if (Algorithms.isEmpty(getFilterByName())) {
 			return currentSearchResult;
 		}
+
+		double baseDistY = MapUtils.getDistance(lat, lon, lat - 1, lon);
+		double baseDistX = MapUtils.getDistance(lat, lon, lat, lon - 1);
+		double distance = distanceToSearchValues[MIN_SEARCH_DISTANCE_INDEX] * 1000;
+		topLatitude = Math.max(topLatitude, Math.min(lat + (distance / baseDistY), 84.));
+		bottomLatitude = Math.min(bottomLatitude, Math.max(lat - (distance / baseDistY), -84.));
+		leftLongitude = Math.min(leftLongitude, Math.max(lon - (distance / baseDistX), -180));
+		rightLongitude = Math.max(rightLongitude, Math.min(lon + (distance / baseDistX), 180));
+
 		String viewbox = "viewboxlbrt="+((float) leftLongitude)+","+((float) bottomLatitude)+","+((float) rightLongitude)+","+((float) topLatitude);
 		try {
 			lastError = "";
