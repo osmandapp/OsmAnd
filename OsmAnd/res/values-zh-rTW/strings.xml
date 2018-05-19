@@ -628,7 +628,7 @@
     <string name="no_vector_map_loaded">向量地圖未載入</string>
     
     <string name="gpx_files_not_found">在 /tracks 資料夾找不到 GPX 檔案</string>
-    <string name="layer_gpx_layer">GPX 軌跡…</string>
+    <string name="layer_gpx_layer">GPX 檔案…</string>
     <string name="error_reading_gpx">無法讀取 GPX 資料</string>
     <string name="vector_data">離線向量地圖</string>
     <string name="transport_context_menu">查尋公車站牌</string>
@@ -788,7 +788,7 @@
     <string name="loading_cities">正在載入縣市…</string>
 
     <string name="poi">POI</string>
-    <string name="error_occurred_saving_gpx">無法儲存 GPX 軌跡</string>
+    <string name="error_occurred_saving_gpx">無法儲存 GPX 檔案</string>
     <string name="error_calculating_route">無法計算路線</string>
     <string name="error_calculating_route_occured">無法計算路線</string>
     <string name="empty_route_calculated">計算的路線是空的</string>
@@ -799,7 +799,7 @@
     <string name="loading_data">正在載入資料…</string>
     <string name="reading_indexes">讀取裝置端資料中…</string>
     <string name="previous_run_crashed">上次執行 OsmAnd 失敗！記錄檔為{0}。請回報這問題且附上該記錄檔。</string>
-    <string name="saving_gpx_tracks">儲存 GPX 軌跡到 SD 卡中…</string>
+    <string name="saving_gpx_tracks">正在儲存 GPX 檔案…</string>
     <string name="finished_task">完成</string>
 
 
@@ -811,8 +811,8 @@
 
     <string name="osm_settings">OSM 編輯</string>
     <string name="additional_settings">額外設定</string>
-    <string name="save_current_track_descr">現在就將目前的軌跡存到記憶卡。</string>
-    <string name="save_current_track">儲存目前的 GPX 軌跡</string>
+    <string name="save_current_track_descr">現在把目前的軌跡存為 GPX 檔案。</string>
+    <string name="save_current_track">儲存目前的軌跡</string>
     <string name="save_track_interval">在導航期間的記錄間隔</string>
     <string name="save_track_interval_descr">在整個導航期間，為軌跡錄製選取記錄間隔。</string>
     <string name="save_track_to_gpx_descrp">在導航期間時，GPX 軌跡會自動儲存在 track 資料夾。</string>
@@ -951,7 +951,7 @@
     <string name="distance_measurement_finish_editing">結束編輯</string>
     <string name="distance_measurement_finish_subtrack">開始一個新的子軌跡</string>
 
-    <string name="distance_measurement_load_gpx">開啟現有的 GPX 軌跡</string>
+    <string name="distance_measurement_load_gpx">開啟現有的 GPX 檔案</string>
     <string name="wait_current_task_finished">請等待目前的作業結束</string>
     <string name="use_kalman_filter_compass_descr">降低電子羅盤讀值雜訊，但增加了慣性。</string>
     <string name="use_kalman_filter_compass">使用 Kalman 濾波器</string>
@@ -1387,7 +1387,7 @@
     
     
     
-    <string name="gpx_file_is_empty">空的 GPX 軌跡</string>
+    <string name="gpx_file_is_empty">空白的 GPX 檔案</string>
     <string name="gpx_info_distance">距離：%1$s (%2$s 個標點) </string>
     <string name="gpx_info_start_time">開始時間：%1$tF,  %1$tT </string>
     <string name="gpx_info_end_time">結束時間：%1$tF,  %1$tT </string>
@@ -1425,7 +1425,7 @@
 
     <string name="sort_by_distance">按距離排序</string>
     <string name="sort_by_name">按名稱排序</string>
-    <string name="none_selected_gpx">沒有已選定的 GPX 檔案。長按選取一個現有的軌跡。</string>
+    <string name="none_selected_gpx">沒有所選的 GPX 檔案。長按選取一個。</string>
 
     <string name="local_index_select_gpx_file">選取要顯示的</string>
     <string name="route_descr_destination">目的地</string>
@@ -1703,7 +1703,7 @@
     <string name="shared_string_clear">清除</string>
     <string name="shared_string_clear_all">全部清除</string>
     <string name="shared_string_save">儲存</string>
-    <string name="shared_string_save_as_gpx">另存為新的 GPX 軌跡</string>
+    <string name="shared_string_save_as_gpx">另存為新的 GPX 檔案</string>
     <string name="shared_string_rename">更名</string>
     <string name="shared_string_delete">删除</string>
     <string name="shared_string_delete_all">全部刪除</string>
@@ -1929,7 +1929,7 @@
     <string name="favourites">我的收藏</string>
     <string name="saved_at_time">現在已儲存於：%1$s</string>
     <string name="poi_deleted_localy">一旦您上傳您的變更，POI 會被刪除</string>
-    <string name="show_gpx">顯示 GPX</string>
+    <string name="show_gpx">顯示 GPX 資料</string>
     <string name="count_of_lines">計算行數</string>
     <string name="show_on_start">在起始時顯示</string>
     <string name="are_you_sure">您確定嗎？</string>
@@ -2353,7 +2353,7 @@
     <string name="no_inet_connection_desc_map">需要下載地圖。</string>
     <string name="search_location">正在搜尋位置…</string>
     <string name="storage_free_space">可用空間</string>
-    <string name="storage_place_description">OsmAnd 資料存儲 (給地圖、軌跡等)：%1$s。</string>
+    <string name="storage_place_description">OsmAnd 資料存儲 (給地圖、GPX 檔案等)：%1$s。</string>
     <string name="give_permission">授予權限</string>
     <string name="allow_access_location">允許位置的存取</string>
     <string name="first_usage_greeting">在沒有連線到網際網路的情況下，取得指引與探索新地點</string>
@@ -2423,9 +2423,9 @@
 \n• 許多其它的改善和錯誤修復 
 \n 
 \n和更多…</string>
-    <string name="gpx_no_tracks_title">您尚未有任何軌跡</string>
-    <string name="gpx_no_tracks_title_folder">您也可以增加軌跡到資料夾</string>
-    <string name="gpx_add_track">增加軌跡</string>
+    <string name="gpx_no_tracks_title">您尚未有任何的 GPX 檔案</string>
+    <string name="gpx_no_tracks_title_folder">您也可以增加 GPX 檔案到資料夾</string>
+    <string name="gpx_add_track">增加 GPX 檔案</string>
     <string name="gpx_appearance">外表</string>
     
     <string name="trip_rec_notification_settings">啟用錄製快速開始</string>
@@ -2564,7 +2564,7 @@
 	
     
     <string name="routing_attr_height_obstacles_name">使用海拔資料</string>
-    <string name="routing_attr_height_obstacles_description">使用 SRTM、ASTER 和 EU-DEM 提供的地形海拔資料。</string>
+    <string name="routing_attr_height_obstacles_description">將地勢海拔納入 (透過 SRTM、ASTER 和 EU-DEM 的資料)。</string>
 
     <string name="route_altitude">路線的海拔</string>
     <string name="altitude_descent">下坡</string>
@@ -2576,7 +2576,7 @@
     <string name="routing_attr_driving_style_name">駕駛方式</string>
     
     <string name="shared_string_gpx_tracks">軌跡</string>
-    <string name="select_gpx_folder">選擇軌跡資料夾</string>
+    <string name="select_gpx_folder">選擇 GPX 檔案資料夾</string>
     <string name="file_can_not_be_moved">檔案無法移動。</string>
     <string name="shared_string_move">移動</string>
     <string name="shared_string_time_moving">時間移動</string>
@@ -2882,14 +2882,14 @@
     <string name="choose_navigation_type">選擇導航設定檔</string>
     <string name="add_route_points">增加路線標點</string>
     <string name="add_line">增加線路</string>
-    <string name="empty_state_my_tracks">增加並錄製軌跡</string>
-    <string name="empty_state_my_tracks_desc">錄製或匯入軌跡以便查看。</string>
+    <string name="empty_state_my_tracks">新增 GPX 檔案</string>
+    <string name="empty_state_my_tracks_desc">匯入 GPX 檔案或錄製軌跡。</string>
     <string name="empty_state_favourites">增加到我的收藏</string>
-    <string name="empty_state_favourites_desc">在地圖上匯入或標記我的收藏。</string>
-    <string name="import_track">匯入軌跡</string>
+    <string name="empty_state_favourites_desc">匯入我的收藏或透過地圖上的標記點新增。</string>
+    <string name="import_track">匯入 GPX 檔案</string>
     <string name="import_track_desc">%1$s 檔案不包含航點，要將其匯入軌跡嗎？</string>
     <string name="move_point">移動標點</string>
-    <string name="add_segment_to_the_track">增加到 GPX 軌跡</string>
+    <string name="add_segment_to_the_track">增加到 GPX 檔案</string>
 <string name="keep_showing_on_map">在地圖上維持著顯示</string>
     <string name="exit_without_saving">離開而不儲存嗎？</string>
     <string name="do_not_use_animations">無動畫</string>
@@ -2932,8 +2932,8 @@
     <string name="shared_string_sort">分類</string>
     <string name="coordinate_input">座標輸入</string>
     <string name="is_saved">已儲存</string>
-    <string name="marker_save_as_track_descr">匯出您的標記到檔案，您可以在這裡指定：</string>
-    <string name="marker_save_as_track">另存為軌跡</string>
+    <string name="marker_save_as_track_descr">將您的標記匯出到下方的 GPX 檔案：</string>
+    <string name="marker_save_as_track">另存為 GPX 檔案</string>
     <string name="move_to_history">移至歷程</string>
     <string name="group_will_be_removed_after_restart">群組在下一次應用程式重新啟動後才會消失。</string>
     <string name="shared_string_markers">標記</string>
@@ -2968,7 +2968,7 @@
     <string name="shared_string_back">返回</string>
     <string name="shared_string_view">檢視</string>
 	<string name="waypoints_added_to_map_markers">航點已加入到地圖標記</string>
-	<string name="import_gpx_file_description">可以匯入為我的收藏或軌跡檔案。</string>
+	<string name="import_gpx_file_description">可以匯入為我的收藏或 GPX 檔案。</string>
     <string name="import_as_gpx">匯入為 GPX 檔案</string>
     <string name="import_as_favorites">匯入為我的收藏</string>
     <string name="import_file">匯入檔案</string>
@@ -2986,16 +2986,16 @@
     <string name="coordinate_input_accuracy">%1$d 個數字</string>
     <string name="go_to_next_field">下一段</string>
     <string name="appearance_on_the_map">顯現在地圖上</string>
-    <string name="add_track_to_markers_descr">航點可以藉著選擇這些軌跡其中的一個增加到標記。</string>
+    <string name="add_track_to_markers_descr">選擇一個 GPX 檔案以將其航點新增至標記。</string>
     <string name="add_favourites_group_to_markers_descr">選擇您想增加標記的收藏類別。</string>
     <string name="shared_string_gpx_waypoints">軌跡航點</string>
     <string name="favourites_group">我的收藏類別</string>
     <string name="add_group">新增群組</string>
-    <string name="add_group_descr">從我的收藏匯入群組或軌跡航點。</string>
+    <string name="add_group_descr">從我的收藏匯入群組或 GPX 航點。</string>
     <string name="empty_state_markers_active">建立地圖標記！</string>
     <string name="empty_state_markers_active_desc">長按或點一下「地點」，然後點擊標記標誌按鈕。</string>
     <string name="empty_state_markers_groups">匯入群組</string>
-    <string name="empty_state_markers_groups_desc">您可以匯入我的收藏群組或軌跡航點作為標記。</string>
+    <string name="empty_state_markers_groups_desc">您可以匯入我的收藏群組或 GPX 航點作為標記。</string>
     <string name="shared_string_two">二</string>
     <string name="shared_string_one">一</string>
     <string name="distance_indication_descr">選擇如何顯示活動標記的距離。</string>
@@ -3004,7 +3004,7 @@
     <string name="show_guide_line_descr">顯示指引路線到活動標記位置。</string>
     <string name="show_arrows_descr">顯示一個或兩個箭頭指示方向到活動標記。</string>
     <string name="shared_string_more_without_dots">更多</string>
-    <string name="looking_for_tracks_with_waypoints">尋找軌跡跟航點</string>
+    <string name="looking_for_tracks_with_waypoints">尋找有航點的 GPX 檔案</string>
     <string name="empty_state_osm_edits">建立或修改 OSM 物件</string>
     <string name="empty_state_osm_edits_descr">"建立或修改 OSM  的 POI，開啟或評注 OSM 註解，並提供所記錄的 GPX 檔案。"</string>
     <string name="shared_string_deleted">已刪除</string>
@@ -3135,23 +3135,23 @@
     <string name="shared_string_dont">不要</string>
     <string name="shared_string_do">做</string>
     <string name="shared_string_only_with_wifi">只有在 WiFi</string>
-    <string name="wikivoyage_download_pics">下載照片</string>
-    <string name="wikivoyage_download_pics_descr">文章中的圖片可以下載以供離線使用。
+    <string name="wikivoyage_download_pics">下載圖片</string>
+    <string name="wikivoyage_download_pics_descr">可以下載文章中的圖片以供離線使用。 
 \n 您隨時可以在「探索」&gt;「選項」中更改設定。</string>
     <string name="shared_string_wifi_only">只有在 Wi-Fi</string>
-    <string name="select_travel_book">選擇旅遊書籍</string>
+    <string name="select_travel_book">選擇一本旅遊書籍</string>
     <string name="shared_string_travel_book">旅遊書籍</string>
     <string name="online_webpage_warning">此頁面僅在線上狀態提供。您想在網頁瀏覽器中開啟它嗎？</string>
-    <string name="images_cache">圖像快取</string>
+    <string name="images_cache">圖片快取</string>
     <string name="delete_search_history">刪除搜尋歷史記錄</string>
-    <string name="download_images">顯示圖片</string>
+    <string name="download_images">下載圖片</string>
     <string name="download_maps_travel">旅遊指南</string>
     <string name="shared_string_wikivoyage">維基導遊</string>
     <string name="index_item_world_wikivoyage">全球維基導遊文章</string>
     <string name="travel_guide_description">在 OsmAnd 內部沒有網路連線的狀況下，引領到全球最感興趣的地點。</string>
     <string name="travel_guide">維基導遊旅行指南</string>
     <string name="purchase_dialog_title">選擇計畫</string>
-    <string name="purchase_dialog_travel_description">購買以下的其中一樣的東西以離線閱讀旅遊指南：</string>
+    <string name="purchase_dialog_travel_description">購買以下的其中一項即可得到離線旅遊指南功能：</string>
     <string name="purchase_dialog_subtitle">選擇適合的物品：</string>
     <string name="in_app_purchase">應用程式內購買</string>
     <string name="in_app_purchase_desc">一次性付款</string>
@@ -3171,11 +3171,11 @@
     <string name="paid_app">付費應用程式</string>
     <string name="paid_plugin">付費外掛程式</string>
     <string name="travel_card_update_descr">有新的維基導遊資料可用，更新以享用它們。</string>
-	<string name="travel_card_download_descr">下載這份維基導遊旅行指南，以在沒有網路連線時，檢視全球各地的旅遊文章。</string>
+	<string name="travel_card_download_descr">下載維基導遊旅行指南，以在沒有網路連線時，檢視全球各地的旅遊文章。</string>
 	<string name="update_is_available">有更新可用</string>
 	<string name="download_file">下載檔案</string>
     <string name="start_editing_card_image_text">人人都可編輯的自由全球旅行指南。</string>
-    <string name="welcome_to_open_beta_description">基於維基導遊的旅行。在免費公開測試期間，測試所有的功能。在測試結束後，旅行功能將只提供給 OsmAnd Unlimited 的捐款者與 OsmAnd+ 的擁有者</string>
+    <string name="welcome_to_open_beta_description">基於維基導遊的 OsmAnd 旅行。在免費公開測試期間，測試所有的功能。在測試結束後，OsmAnd 旅行功能將只提供給 OsmAnd Unlimited 的捐款者與 OsmAnd+ 的擁有者。</string>
     <string name="start_editing_card_description">您可以也應該在維基導遊上編輯任何文章。分享知識、經驗、才能與您的關注</string>
     <string name="start_editing">開始編輯</string>
     <string name="get_unlimited_access">取得無限制的存取</string>
@@ -3217,4 +3217,5 @@
     <string name="touring_view_render_descr">旅遊為目地的高詳細樣式。包括所有組態選項的預設樣式，另外還有：儘可能詳細的顯示，尤其是所有道路、路徑及其他旅遊方式。清晰的視覺區分所有不同的道路類型，讓人追憶的許多旅遊地圖。戶外使用的高對比配色方案、晝夜模式。</string>
     <string name="access_intermediate_arrival_time">中轉抵達時間</string>
     <string name="map_widget_intermediate_time">中轉時間</string>
+    <string name="unirs_render_descr">修改標準樣式提供更出色的行人和自行車道對比度。使用傳統的 Mapnik 配色。</string>
     </resources>
