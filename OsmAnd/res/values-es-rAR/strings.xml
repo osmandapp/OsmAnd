@@ -2974,7 +2974,7 @@ Lon %2$s</string>
     <string name="select_waypoints_category_description">Añadir todos los puntos de referencia de la traza o elegir categorías separadas.</string>
     <string name="shared_string_total">Total</string>
     <string name="nothing_found_in_radius">No se pudo encontrar nada:</string>
-    <string name="shared_string_travel">Viajes</string>
+    <string name="shared_string_travel">Guías turísticas</string>
     <string name="waypoints_removed_from_map_markers">Puntos de referencia borrados de los marcadores del mapa</string>
     <string name="use_two_digits_longitude">Usar longitud de dos dígitos</string>
     <string name="shared_string_result">Resultado</string>
@@ -3026,7 +3026,7 @@ Lon %2$s</string>
 	<string name="update_is_available">Actualización disponible</string>
 	<string name="download_file">Descargar archivo</string>
     <string name="start_editing_card_image_text">La guía turística libre global que cualquiera puede editar.</string>
-    <string name="welcome_to_open_beta_description">«OsmAnd Viajes», se basa en Wikiviajes. Prueba todas las características durante las pruebas beta abiertas, de forma gratuita. Una vez finalizado este período, «OsmAnd Viajes» estará disponible para los suscriptores de «OsmAnd ilimitado» y los propietarios de «OsmAnd+».</string>
+    <string name="welcome_to_open_beta_description">Las guías turísticas, se basan actualmente en Wikiviajes. Prueba todas las características durante las pruebas beta abiertas, de forma gratuita. Una vez finalizado este período, las guías turísticas estarán disponible para los suscriptores de «OsmAnd ilimitado» y los propietarios de «OsmAnd+».</string>
     <string name="start_editing_card_description">Puedes y debes editar cualquier artículo en Wikiviajes. Comparte tu conocimiento, experiencia, talento y atención</string>
     <string name="start_editing">Comenzar edición</string>
     <string name="get_unlimited_access">Obtener acceso ilimitado</string>
