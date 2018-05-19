@@ -852,7 +852,7 @@
 	<string name="context_menu_item_share_location">اشتراک‌گذاری مکان</string>
 	<string name="indexing_address">در حال نمایه‌کردن نشانی…</string>
 	<string name="indexing_map">در حال نمایه‌کردن نقشه…</string>
-	<string name="indexing_poi">در حال نمایه‌کردن POI…</string>
+	<string name="indexing_poi">نمایه‌کردن POI…</string>
 	<string name="indexing_transport">در حال نمایه‌کردن حمل‌ونقل…</string>
 	<string name="shared_string_io_error">خطای ورودی/خروجی</string>
 	<string name="km">ک‌م</string>
