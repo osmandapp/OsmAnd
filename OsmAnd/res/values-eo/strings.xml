@@ -498,7 +498,7 @@ Lon: %2$s</string>
     <string name="shared_string_do_not_use">Ne uzi</string>
     <string name="shared_string_selected_lowercase">elektitaj</string>
     <string name="shared_string_none">Neniu</string>
-    <string name="shared_string_save_as_gpx">Konservi kiel novan GPX-spuron</string>
+    <string name="shared_string_save_as_gpx">Konservi kiel novan GPX-dosieron</string>
     <string name="shared_string_more_actions">Pliaj agoj</string>
     <string name="shared_string_do_not_show_again">Ne montri plue</string>
     <string name="shared_string_remember_my_choice">Memori elekton</string>
@@ -645,8 +645,8 @@ Lon: %2$s</string>
     <string name="save_track_to_gpx_globally">Registri spuron al GPX-dosiero</string>
     <string name="save_track_to_gpx_globally_headline">Registri spuron laŭpete</string>
     <string name="save_track_to_gpx_globally_descr">Ĝeneralan registradon de pozicio al GPX-dosiero oni povas mal-/aktivigi per GPX-registrada fenestraĵo sur la map-ekrano.</string>
-    <string name="save_current_track_descr">Konservi aktualan kurson al memorkarto.</string>
-    <string name="save_current_track">Konservi aktualan GPX-kurson</string>
+    <string name="save_current_track_descr">Konservi aktualan spuron kiel GPX-dosieron.</string>
+    <string name="save_current_track">Konservi aktualan spuron</string>
     <string name="save_track_to_gpx">Aŭtomate registri spuron dum navigado</string>
     <string name="save_track_to_gpx_descrp">GPX-spuro estas aŭtomate konservata al dosierujo de spuroj dum navigado.</string>
     <string name="save_track_interval_globally">Registrada intervalo</string>
@@ -2174,7 +2174,7 @@ Proporcia memoro %4$s MB (limito de Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="no_inet_connection_desc_map">Bezonata por elŝuti mapojn.</string>
     <string name="search_location">Determinado de pozicio…</string>
     <string name="storage_free_space">Libera loko</string>
-    <string name="storage_place_description">Datum-memorejo de OsmAnd (por mapoj, kursoj, ktp.): %1$s.</string>
+    <string name="storage_place_description">Datum-memorejo de OsmAnd (por mapoj, GPX-dosieroj, ktp.): %1$s.</string>
     <string name="give_permission">Permesi</string>
     <string name="allow_access_location">Permesi aliron al pozicio</string>
     <string name="first_usage_greeting">Navigi kaj esplori novajn lokojn sen interreta konekto</string>
@@ -2246,9 +2246,9 @@ Proporcia memoro %4$s MB (limito de Android %5$s MB, Dalvik %6$s MB).</string>
     
     
     
-    <string name="gpx_no_tracks_title">Vi ankoraŭ havas neniujn spurojn</string>
-    <string name="gpx_no_tracks_title_folder">Vi ankaŭ povas aldoni spurojn al la dosierujo</string>
-    <string name="gpx_add_track">Aldoni spuron</string>
+    <string name="gpx_no_tracks_title">Vi ankoraŭ havas neniujn GPX-dosierojn</string>
+    <string name="gpx_no_tracks_title_folder">Vi ankaŭ povas aldoni GPX-dosierojn al la dosierujo</string>
+    <string name="gpx_add_track">Aldoni GPX-dosieron</string>
     <string name="gpx_appearance">Aspekto</string>
     <string name="rendering_value_fine_name">Eteta</string>
     <string name="route_calculation">Difinado de vojo</string>
@@ -2384,7 +2384,7 @@ Indikas lokon:  %1$s x %2$s"</string>
 	
     
     <string name="routing_attr_height_obstacles_name">Uzi datumojn pri altitudo</string>
-    <string name="routing_attr_height_obstacles_description">Uzi datumojn pri altitudo liveritajn de SRTM, ASTER kaj EU-DEM.</string>
+    <string name="routing_attr_height_obstacles_description">Konsideri nivelon de tereno (laŭ datumoj el SRTM, ASTER kaj EU-DEM).</string>
 
     <string name="route_altitude">Kursa altitudo</string>
     <string name="altitude_descent">Malsupreniro</string>
@@ -2396,7 +2396,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="routing_attr_driving_style_name">Veturada stilo</string>
     
     <string name="shared_string_gpx_tracks">Spuroj</string>
-    <string name="select_gpx_folder">Elektu dosierujon por spuroj</string>
+    <string name="select_gpx_folder">Elektu dosierujon por GPX-dosieroj</string>
     <string name="file_can_not_be_moved">Ne povas movi dosieron.</string>
     <string name="shared_string_move">Movi</string>
     <string name="shared_string_time_moving">Tempo de movado</string>
@@ -2753,8 +2753,8 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="shared_string_sort">Ordigi</string>
     <string name="coordinate_input">Enigi koordinatojn</string>
     <string name="is_saved">estas konservita</string>
-    <string name="marker_save_as_track_descr">Elporti map-markojn al dosiero difinita tie ĉi:</string>
-    <string name="marker_save_as_track">Konservi kiel kurson</string>
+    <string name="marker_save_as_track_descr">Elporti map-markojn al dosiero la GPX-dosiero:</string>
+    <string name="marker_save_as_track">Konservi kiel GPX-dosieron</string>
     <string name="move_to_history">Movi al historio</string>
     <string name="group_will_be_removed_after_restart">La grupo estos forigita post la sekva restarto de la aplikaĵo.</string>
     <string name="make_round_trip_descr">Aldoni kopion de komenc-punkto kiel celon.</string>
@@ -2799,16 +2799,16 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="coordinate_input_accuracy">%1$d ciferoj</string>
     <string name="go_to_next_field">Sekva kampo</string>
     <string name="appearance_on_the_map">Aspekto sur la mapo</string>
-    <string name="add_track_to_markers_descr">Oni povas aldoni navigadpunktojn al map-markoj per elekti iun kurson enhavantan ilin.</string>
+    <string name="add_track_to_markers_descr">Elektu GPX-dosieron por aldoni ĝiajn navigadpunktojn al map-markoj.</string>
     <string name="add_favourites_group_to_markers_descr">Elektu grupon de ŝatataj por aldoni al map-markoj.</string>
     <string name="shared_string_gpx_waypoints">Navigadpunktoj de kurso</string>
     <string name="favourites_group">Kategorio de ŝatataj</string>
     <string name="add_group">Aldoni grupon</string>
-    <string name="add_group_descr">Enportu grupon el ŝatataj aŭ navigadpunktojn de kurso.</string>
+    <string name="add_group_descr">Enportu grupon el ŝatataj aŭ el GPX-kurso.</string>
     <string name="empty_state_markers_active">Krei map-markoj!</string>
     <string name="empty_state_markers_active_desc">Frapetu aŭ frapetadu ejon kaj sekve frapetu la butonon de flago.</string>
     <string name="empty_state_markers_groups">Enporti grupojn</string>
-    <string name="empty_state_markers_groups_desc">Enportu grupojn de ŝatataj aŭ kurs-navigadpunktojn kiel map-markojn.</string>
+    <string name="empty_state_markers_groups_desc">Enportu grupojn de ŝatataj aŭ el GPX-kurso kiel map-markojn.</string>
     <string name="empty_state_markers_history_desc">Markoj markitaj kiel pasigitajn montriĝos sur tiu ĉi ekrano.</string>
     <string name="shared_string_two">Du</string>
     <string name="shared_string_one">Unu</string>
@@ -2816,7 +2816,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="show_arrows_descr">Vidigi unu aŭ du sagetojn indikantajn direkton al map-markoj.</string>
     <string name="distance_indication_descr">Elekti kiel vidigi distancon al aktivaj map-markoj.</string>
     <string name="active_markers_descr">Elekti nombron da aktivaj map-markoj por vidigi.</string>
-    <string name="looking_for_tracks_with_waypoints">Serĉado de kursoj kun navigadpunktoj</string>
+    <string name="looking_for_tracks_with_waypoints">Serĉado de GPX-kursoj kun navigadpunktoj</string>
     <string name="shared_string_more_without_dots">Pli</string>
     <string name="empty_state_osm_edits">Krei aŭ redakti OSM-objektojn</string>
     <string name="empty_state_osm_edits_descr">Kreu aŭ redaktu OSM-punktojn, kreu aŭ komentu OSM-rimarkojn kaj kontribuu per registritaj GPX-spuroj.</string>
@@ -2832,15 +2832,15 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="by_date">Laŭ dato</string>
     <string name="by_type">Laŭ speco</string>
     <string name="modify_the_search_query">Modifi serĉpeton</string>
-    <string name="release_3_0">• nova menuo “Vojaĝo”: legi artikolojn de Vikivojaĝo seninterrete
-\n
-\n• Vikipedio: nova stilo, aktivaj ligiloj, bildoj
-\n
-\n• menuo de malfermita kurso: vidigi grupojn de navigadpunktojn
-\n
-\n• map-markoj: enporti elektitajn grupojn el GPX-dosieroj, plibonigita vido de koordinata enigo
-\n
-\n• abono al OsmAnd-Live nur inkluzivas ĉiujn eblaĵojn de OsmAnd
+    <string name="release_3_0">• novaĵo: subteno por tutmondaj vojaĝaj gvidiloj seninterrete; priskribataj lokoj ligitaj al la mapo; datumoj el Vikivojaĝo
+\n 
+\n• Vikipedio: nova stilo, aktivaj ligiloj, subteno por bildoj
+\n 
+\n• menuo de malfermita kurso: vidigi grupojn de navigadpunktojn 
+\n 
+\n• map-markoj: enporti elektitajn grupojn el GPX-dosieroj, enigo de koordinatoj, nova aspekto
+\n 
+\n• abono al OsmAnd-Live nun inkluzivas ĉiujn eblaĵojn de OsmAnd 
 \n</string>
     <string name="what_is_here">Tie ĉi:</string>
     <string name="parked_at">parkumita je</string>
@@ -2935,7 +2935,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="select_waypoints_category_description">Aldonu ĉiujn navigadpunktojn de la kurso aŭ elektu disajn kategoriojn.</string>
     <string name="shared_string_total">Tute</string>
     <string name="nothing_found_in_radius">Ne trovis ion ajn:</string>
-    <string name="shared_string_travel">Vojaĝo</string>
+    <string name="shared_string_travel">Vojaĝaj gvidiloj</string>
     <string name="waypoints_removed_from_map_markers">Forigis navigadpunktojn el map-markoj</string>
     <string name="use_two_digits_longitude">Uzi du-ciferan longitudon</string>
     <string name="shared_string_result">Rezulto</string>
@@ -2948,7 +2948,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="download_maps_travel">Vojaĝaj gvidiloj</string>
     <string name="shared_string_wikivoyage">Vikivojaĝo</string>
     <string name="index_item_world_wikivoyage">Tutmondaj artikoloj de Vikivojaĝo</string>
-    <string name="images_cache">Bilda kaŝmemorejo</string>
+    <string name="images_cache">Bilda kaŝmemoro</string>
     <string name="delete_search_history">Forviŝi serĉan historion</string>
     <string name="show_images">Montri bildojn</string>
     <string name="online_webpage_warning">Paĝo disponebla nur enrete. Ĉu malfermi ĝin per foliumilo?</string>
@@ -2956,12 +2956,12 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="shared_string_do">" "</string>
     <string name="shared_string_only_with_wifi">Nur tra vifio</string>
     <string name="wikivoyage_download_pics">Elŝuti bildojn</string>
-    <string name="wikivoyage_download_pics_descr">Bildoj de artikoloj povas esti elŝutitaj por eksterreta uzo.
+    <string name="wikivoyage_download_pics_descr">Bildoj por artikoloj povas esti elŝutitaj por eksterreta uzo. 
 \n Vi ĉiam povas ŝanĝi tiun ĉi agordon en “esplori” → “agordoj”.</string>
     <string name="shared_string_wifi_only">Nur tra vifio</string>
     <string name="select_travel_book">Elekti vojaĝilon</string>
     <string name="shared_string_travel_book">Vojaĝilo</string>
-    <string name="download_images">Montri bildojn</string>
+    <string name="download_images">Elŝuti bildojn</string>
     <string name="purchase_dialog_title">Elekti planon</string>
     <string name="purchase_dialog_travel_description">Aĉetu unu el la jenaj por legi vojaĝajn artikolojn seninterrete:</string>
     <string name="purchase_dialog_subtitle">Elektu elementon:</string>
@@ -2987,11 +2987,11 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="paid_app">Pagenda aplikaĵo</string>
     <string name="paid_plugin">Pagenda kromprogramo</string>
     <string name="travel_card_update_descr">Novaj datumoj de Vikivojaĝo disponeblaj, ĝisdatigi ilin por via utilo.</string>
-	<string name="travel_card_download_descr">Elŝutu tiujn Vikivojaĝajn vojaĝ-gvidilojn por vidigi artikolojn pri tutmondaj lokoj seninterrete.</string>
+	<string name="travel_card_download_descr">Elŝutu Vikivojaĝajn vojaĝ-gvidilojn por vidigi artikolojn pri tutmondaj lokoj seninterrete.</string>
 	<string name="update_is_available">Ĝisdatigo disponeblas</string>
 	<string name="download_file">Elŝuti dosieron</string>
     <string name="start_editing_card_image_text">Senpaga/libera vojaĝ-gvidilo redaktebla de ĉiu.</string>
-    <string name="welcome_to_open_beta_description">La eblo “vojaĝo” baziĝas sur Vikivojaĝo. Provu ĉiujn eblojn dum beta-testado senpage. Poste la “vojaĝo” estos disponebla al abonantoj de OsmAnd Unlimited kaj aĉetantoj de OsmAnd+.</string>
+    <string name="welcome_to_open_beta_description">Vojaĝaj gvidiloj baziĝas sur Vikivojaĝo. Provu ĉiujn eblojn dum beta-testado senpage. Poste vojaĝaj gvidiloj estos disponeblaj al abonantoj de OsmAnd Unlimited kaj aĉetintoj de OsmAnd+.</string>
     <string name="start_editing_card_description">Vi povas (kaj bonvole fari tion) redakti iujn ajn artikolojn de Vikivojaĝo. Kunhavigu vian scion, sperton, talenton kaj prizorgon.</string>
     <string name="start_editing">Komenci redakti</string>
     <string name="get_unlimited_access">Akiri senliman atingon</string>
@@ -3030,4 +3030,5 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="touring_view_render_descr">Detalplena stilo por turismo. Inkluzivas ĉiujn agordojn de norma stilo kaj krome: vidigas kiel eble pli da detaloj, precipe ĉiujn ŝoseojn kaj vojetojn kaj aliajn rimedojn por vojaĝi. Klare distingebla vido de diversaj vojoj, simile al paperaj mapoj. Alte kontrasta kolor-skemo por eksterdoma uzo, nokta kaj taga reĝimoj.</string>
     <string name="access_intermediate_arrival_time">Alvena tempo al intercelo</string>
     <string name="map_widget_intermediate_time">Tempo al intercelo</string>
+    <string name="unirs_render_descr">Modifo de la norma stilo por pliigi kontraston de piediradaj kaj biciklaj vojoj. Uzas malnovan kolor-skemon de Mapnik.</string>
     </resources>
