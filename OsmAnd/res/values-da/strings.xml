@@ -2283,17 +2283,18 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="finish_navigation">Stop navigation</string>
     <string name="shared_string_move_up">Flyt ↑</string>
     <string name="shared_string_move_down">Flyt ↓</string>
-    <string name="release_2_3">\\022 OSM Live. Støt bidragsyderne og udviklere af kortet og få kortopdateringer hver time. 
-\n
+    <string name="release_2_3">• OSM Live. Støt bidragsyderne og udviklere af kortet og få kortopdateringer hver time. 
+\n 
 \n• Kortmarkører. En ny måde til hurtigt at vælge steder på kortet. 
-\n
+\n 
 \n• Mere detaljerede OSM-kort med landespecifikke vejskilte og masser af nye kortfunktioner. 
-\n
+\n 
 \n• Forbedret ruteplanlægning. 
-\n
+\n 
 \n• Mange forbedringer i kontekstmenuen på kortet, såsom indholdsbestemt adresseopslag. 
-\n
-\nog mere…</string>
+\n 
+\nog mere…
+\n</string>
     <string name="full_report">Fuldstændig rapport</string>
     <string name="open_street_map_login_and_pass">OpenStreetMap brugernavn og adgangskode</string>
     <string name="storage_permission_restart_is_required">Programmet har nu lov til at skrive til ekstern lager, men en genstart er påkrævet.</string>
@@ -2366,8 +2367,8 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="lang_hsb">Øvresorbisk</string>
     <string name="share_history_subject">delt via OsmAnd</string>
     
-    <string name="release_2_4">"\\022 Ny meget stærk fritekstsøgning 
-\n
+    <string name="release_2_4">"• Ny meget stærk fritekstsøgning 
+\n 
 \n  • Integration med bilens lydsystem og telefon via Bluetooth 
 \n
 \n  • Forbedret rutevejledning, talevejledning og angivelse af svingbaner 
@@ -2589,7 +2590,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="quick_action_page_list_descr">Tryk på genvejsknappen gennemløber nedenstående liste.</string>
     <string name="auto_split_recording_title">Opdel automatisk optagelser efter et ophold</string>
 	<string name="auto_split_recording_descr">Start et nyt segment efter ophold på 6 min., et nyt spor efter 2 t eller en ny fil efter let ængere ophold, hvis datoen er ændret.</string>
-    <string name="release_2_6">\\022 Ny funktion: Genvejsknap 
+    <string name="release_2_6">• Ny funktion: Genvejsknap 
 \n 
 \n  • Forbedret respons på berøringsskærm (fx samtidig panorering og zoom) 
 \n 
@@ -2614,7 +2615,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="rendering_attr_depthContours_name">Havdybdekonturer</string>
 	
     <string name="routing_attr_height_obstacles_name">Brug højdedata</string>
-    <string name="routing_attr_height_obstacles_description">Factor i terrænhøjde (SRTM, ASTER og EU-DEM data).</string>
+    <string name="routing_attr_height_obstacles_description">Terrænhøjde-faktor (via SRTM, ASTER og EU-DEM data).</string>
 
     
     <string name="route_altitude">Rutehøjde</string>
@@ -2883,15 +2884,14 @@ Repræsenterer område: %1$s x %2$s</string>
     
     
     <string name="min_max">Min/maks</string>
-    <string name="release_2_7">\\022 Mapillary-udvidelse med billeder på gadeniveau 
+    <string name="release_2_7">"• Mapillary-udvidelse med billeder på gadeniveau 
 \n 
 \n • Linealmodul til afstandsmåling 
 \n 
 \n • GPX-opdelingsintervaller med detaljeret information om sporet 
 \n 
 \n • Andre forbedringer og fejlrettelser 
-\n 
-\n</string>
+\n "</string>
     <string name="rendering_value_translucent_pink_name">Gennemsigtig lyserød</string>
     <string name="quick_action_resume_pause_navigation">Pause/genoptag navigation</string>
     <string name="quick_action_resume_pause_navigation_descr">Tryk på knappen for at sætte navigationen på pause eller genoptage den.</string>
