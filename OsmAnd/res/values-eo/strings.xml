@@ -722,7 +722,7 @@ Lon: %2$s</string>
 \nLa mondaj datumoj (inter 70° N kaj 70° S) estas bazitaj sur mezuroj de la SRTM (Shuttle Radar Topography Mission) kaj de la ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), bildiga aparato en la Terra - ĉefa satelito de Sistemo de Tera Observado de NASA. ASTER estas kunlaboraĵo de NASA, de Japana Ministerio pri Ekonomio, Komerco kaj Industrio (METI) kaj de Japanaj Spacaj Sistemoj (J-spacesystems).</string>
     <string name="no_index_file_to_download">Elŝutoj ne trovitaj, bonvolu kontroli vian retkonekton.</string>
     <string name="select_index_file_to_download">Trovis nenion. Se vi ne povas trovi vian regionon, vi povas fari ĝin mem (rigardu https://osmand.net).</string>
-    <string name="none_selected_gpx">Neniu GPX-dosiero elektita. Por elekti premtenu disponeblan kurson.</string>
+    <string name="none_selected_gpx">Neniu elektita GPX-dosiero. Elektu iun per frapetadi.</string>
     <string name="local_index_select_gpx_file">Elektu por montri</string>
     <string name="gpx_split_interval">Divid-intervalo</string>
     <string name="sort_by_distance">Ordigi laŭ distanco</string>
@@ -808,7 +808,7 @@ Lon: %2$s</string>
     <string name="gpx_selection_route_points">%1$s\nPunktoj de kurso: %2$s</string>
     <string name="gpx_selection_points">%1$s\nPunktoj</string>
     <string name="gpx_selection_track">%1$s\nKurso %2$s</string>
-    <string name="gpx_file_is_empty">Malplena GPX-spur-dosiero</string>
+    <string name="gpx_file_is_empty">Malplena GPX-dosiero</string>
     
     
     
@@ -1751,7 +1751,7 @@ Proporcia memoro %4$s MB (limito de Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="poi_context_menu_modify">Modifi interesejon</string>
     <string name="poi_context_menu_delete">Forigi interesejon</string>
     <string name="gpx_files_not_found">Neniu GPX-dosiero trovita en dosierujo de kurs-spuroj</string>
-    <string name="layer_gpx_layer">GPX-kurso…</string>
+    <string name="layer_gpx_layer">GPX-dosieroj…</string>
     <string name="error_reading_gpx">Ne povas legi GPX-datumojn</string>
     <string name="rotate_map_compass_opt">Direkto de kompaso</string>
     <string name="rotate_map_bearing_opt">Direkto de movado</string>
@@ -1894,7 +1894,7 @@ Proporcia memoro %4$s MB (limito de Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="loading_postcodes">Ŝargado de poŝtkodoj…</string>
     <string name="loading_streets">Ŝargado de stratoj…</string>
     <string name="loading_cities">Ŝargado de urboj…</string>
-    <string name="error_occurred_saving_gpx">Ne povas konservi GPX-spuron</string>
+    <string name="error_occurred_saving_gpx">Ne povas konservi GPX-dosieron</string>
     <string name="error_calculating_route">Ne povas kalkuli kurson</string>
     <string name="error_calculating_route_occured">Ne povas kalkuli kurson</string>
     <string name="empty_route_calculated">Kalkulita kurso estas malplena</string>
@@ -1905,7 +1905,7 @@ Proporcia memoro %4$s MB (limito de Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="loading_data">Ŝargado de datumoj…</string>
     <string name="reading_indexes">Ŝargado de lokaj datumoj…</string>
     <string name="previous_run_crashed">OsmAnd antaŭe kolapsis. Protokol-dosiero estas en {0}. Bonvolu raporti la problemon kaj aldoni la protokol-dosieron.</string>
-    <string name="saving_gpx_tracks">Konservado de GPX-kursoj al memorkarto…</string>
+    <string name="saving_gpx_tracks">Konservado de GPX-dosiero…</string>
     <string name="finished_task">Finita</string>
     <string name="use_online_routing_descr">Uzi Interreton por kalkuli kurson.</string>
     <string name="use_online_routing">Uzi enretan navigadon</string>
@@ -2031,7 +2031,7 @@ Proporcia memoro %4$s MB (limito de Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="favourites">Ŝatataj ejoj</string>
     <string name="saved_at_time">Konservita je: %1$s</string>
     <string name="poi_deleted_localy">Interesejo estos forigita kiam vi alŝutos viajn ŝanĝojn</string>
-    <string name="show_gpx">Montri GPX</string>
+    <string name="show_gpx">Montri GPX-datumojn</string>
     <string name="count_of_lines">Nombro da linioj</string>
     <string name="are_you_sure">Ĉu vi certas?</string>
     <string name="unsaved_changes_will_be_lost">Ĉiuj nekonservitaj ŝanĝoj estos forigitaj. Ĉu pluigi?</string>
@@ -2696,14 +2696,14 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="choose_navigation_type">Elektu profilon de navigado</string>
     <string name="add_route_points">Aldoni kurspunktojn</string>
     <string name="add_line">Aldoni linion</string>
-    <string name="empty_state_my_tracks">Aldoni kaj registri spurojn</string>
-    <string name="empty_state_my_tracks_desc">Registru aŭ enportu spurojn por vidigi.</string>
+    <string name="empty_state_my_tracks">Aldoni GPX-dosierojn</string>
+    <string name="empty_state_my_tracks_desc">Registru spurojn aŭ enportu GPX-dosierojn.</string>
     <string name="empty_state_favourites">Aldoni ŝatatajn</string>
-    <string name="empty_state_favourites_desc">Enportu aŭ aldonu ŝatatajn punktojn sur la mapon.</string>
-    <string name="import_track">Enporti spuron</string>
+    <string name="empty_state_favourites_desc">Enportu ŝatatajn punktojn aŭ aldonu per map-markoj al la mapo.</string>
+    <string name="import_track">Enporti GPX-dosieron</string>
     <string name="import_track_desc">Dosiero %1$s ne enhavas navigadpunktojn, ĉe enporti ĝin kiel spuron?</string>
     <string name="move_point">Movi punkton</string>
-    <string name="add_segment_to_the_track">Aldoni al GPX-spuro</string>
+    <string name="add_segment_to_the_track">Aldoni al GPX-dosiero</string>
 <string name="keep_showing_on_map">Daŭre montri sur mapo</string>
     <string name="exit_without_saving">Ĉu eliri sen konservi?</string>
     <string name="do_not_use_animations">Sen movbildoj</string>
