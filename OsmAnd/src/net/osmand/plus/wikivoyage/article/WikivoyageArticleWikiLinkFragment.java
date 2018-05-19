@@ -6,11 +6,12 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.view.View;
 
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
@@ -73,14 +74,16 @@ public class WikivoyageArticleWikiLinkFragment extends MenuBottomSheetDialogFrag
 				.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						MapActivity mapActivity = (MapActivity) getActivity();
-						Intent newIntent = new Intent(mapActivity, mapActivity.getMyApplication().getAppCustomization()
-								.getDownloadActivity());
-						newIntent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-						newIntent.putExtra(DownloadActivity.REGION_TO_SEARCH, wikiRegion);
-						newIntent.putExtra(SHOW_WIKI_KEY, true);
-						mapActivity.startActivity(newIntent);
-						dismiss();
+						FragmentActivity activity = getActivity();
+						OsmandApplication app = getMyApplication();
+						if (activity != null && app != null) {
+							Intent newIntent = new Intent(activity, app.getAppCustomization().getDownloadActivity());
+							newIntent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+							newIntent.putExtra(DownloadActivity.REGION_TO_SEARCH, wikiRegion);
+							newIntent.putExtra(SHOW_WIKI_KEY, true);
+							activity.startActivity(newIntent);
+							dismiss();
+						}
 					}
 				})
 				.create();

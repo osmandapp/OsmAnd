@@ -135,15 +135,15 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 		trackButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				FragmentActivity activity = getActivity();
 				FragmentManager fm = getFragmentManager();
-				if (article == null || fm == null) {
+				if (article == null || activity == null || fm == null) {
 					return;
 				}
 				TravelDbHelper dbHelper = getMyApplication().getTravelDbHelper();
 				File path = dbHelper.createGpxFile(article);
-				Intent newIntent = new Intent(getActivity(), getMyApplication().getAppCustomization().getTrackActivity());
+				Intent newIntent = new Intent(activity, getMyApplication().getAppCustomization().getTrackActivity());
 				newIntent.putExtra(TrackActivity.TRACK_FILE_NAME, path.getAbsolutePath());
-				// newIntent.putExtra(TrackActivity.OPEN_POINTS_TAB, true);
 				newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				startActivity(newIntent);
 			}
@@ -157,7 +157,10 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 		webSettings.setTextZoom((int) (getResources().getConfiguration().fontScale * 100f));
 		updateWebSettings();
 		contentWebView.addJavascriptInterface(new WikivoyageArticleWebAppInterface(), "Android");
-		webViewClient = new WikivoyageWebViewClient(getActivity(), getFragmentManager(), nightMode);
+
+		FragmentActivity activity = requireActivity();
+		FragmentManager fragmentManager = requireFragmentManager();
+		webViewClient = new WikivoyageWebViewClient(activity, fragmentManager, nightMode);
 		contentWebView.setWebViewClient(webViewClient);
 		contentWebView.setBackgroundColor(ContextCompat.getColor(getMyApplication(),
 				nightMode ? R.color.wiki_webview_background_dark : R.color.wiki_webview_background_light));
@@ -407,19 +410,20 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 
 	@Override
 	protected void closeFragment() {
-		int backStackEntryCount = getFragmentManager().getBackStackEntryCount();
+		FragmentManager fragmentManager = requireFragmentManager();
+		int backStackEntryCount = fragmentManager.getBackStackEntryCount();
 		int pop = -1;
 		for (int i = backStackEntryCount - 1; i >= 0; i--) {
-			BackStackEntry entry = getFragmentManager().getBackStackEntryAt(i);
+			BackStackEntry entry = fragmentManager.getBackStackEntryAt(i);
 			if (!TAG.equals(entry.getName())) {
 				pop = i;
 				break;
 			}
 		}
 		if (pop == -1) {
-			dismiss();
+			fragmentManager.popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
 		} else {
-			getFragmentManager().popBackStackImmediate(pop, 0);
+			fragmentManager.popBackStackImmediate(pop, 0);
 		}
 	}
 }

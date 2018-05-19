@@ -720,7 +720,7 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 
 		@Nullable
 		@Override
-		public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 			if (savedInstanceState != null) {
 				String itemFileName = savedInstanceState.getString(KEY_ASK_MAP_DOWNLOAD_ITEM_FILENAME);
 				if (itemFileName != null) {
@@ -803,7 +803,7 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 		private String regionName;
 
 		@Override
-		public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 			if (savedInstanceState != null) {
 				regionName = savedInstanceState.getString(KEY_GOTO_MAP_REGION_NAME);
 				regionName = regionName == null ? "" : regionName;

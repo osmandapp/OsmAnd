@@ -1,6 +1,7 @@
 package net.osmand.plus.activities;
 
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,7 +10,6 @@ import android.widget.ProgressBar;
 
 import net.osmand.AndroidUtils;
 import net.osmand.plus.R;
-import net.osmand.plus.myplaces.FavoritesActivity;
 
 public class ActionBarProgressActivity extends OsmandActionBarActivity {
 
@@ -23,25 +23,32 @@ public class ActionBarProgressActivity extends OsmandActionBarActivity {
 		ProgressBar progressBar = new ProgressBar(this);
 		progressBar.setVisibility(View.GONE);
 		progressBar.setIndeterminate(true);
-		getSupportActionBar().setDisplayShowCustomEnabled(true);
-		getSupportActionBar().setCustomView(progressBar);
-		setSupportProgressBarIndeterminateVisibility(false);
+		ActionBar supportActionBar = getSupportActionBar();
+		if (supportActionBar != null) {
+			supportActionBar.setDisplayShowCustomEnabled(true);
+			supportActionBar.setCustomView(progressBar);
+			setSupportProgressBarIndeterminateVisibility(false);
+		}
 	}
 
 	@Override
 	public void setSupportProgressBarIndeterminateVisibility(boolean visible) {
-		getSupportActionBar().getCustomView().setVisibility(visible ? View.VISIBLE : View.GONE);
+		ActionBar supportActionBar = getSupportActionBar();
+		if (supportActionBar != null) {
+			supportActionBar.getCustomView().setVisibility(visible ? View.VISIBLE : View.GONE);
+		}
 	}
 
 	public Toolbar getClearToolbar(boolean visible) {
 		final Toolbar tb = (Toolbar) findViewById(R.id.bottomControls);
-		if (tb == null) {
+		if (tb != null) {
+			tb.setTitle(null);
+			tb.getMenu().clear();
+			tb.setVisibility(visible ? View.VISIBLE : View.GONE);
+			return tb;
+		} else {
 			return null;
 		}
-		tb.setTitle(null);
-		tb.getMenu().clear();
-		tb.setVisibility(visible ? View.VISIBLE : View.GONE);
-		return tb;
 	}
 
 	public void setToolbarVisibility(boolean visible) {

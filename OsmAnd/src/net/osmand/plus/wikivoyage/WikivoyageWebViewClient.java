@@ -1,9 +1,9 @@
 package net.osmand.plus.wikivoyage;
 
 
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.util.Log;
@@ -19,12 +19,10 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.wikipedia.WikiArticleHelper;
 import net.osmand.plus.wikivoyage.article.WikivoyageArticleDialogFragment;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
-import net.osmand.plus.wikivoyage.explore.WikivoyageExploreDialogFragment;
+import net.osmand.plus.wikivoyage.explore.WikivoyageExploreActivity;
 
 import java.io.File;
 import java.util.List;
-
-import static android.support.v4.app.FragmentManager.POP_BACK_STACK_INCLUSIVE;
 
 
 /**
@@ -37,7 +35,7 @@ public class WikivoyageWebViewClient extends WebViewClient {
 
 	private OsmandApplication app;
 	private FragmentManager fragmentManager;
-	private Context context;
+	private FragmentActivity activity;
 	private TravelArticle article;
 	private boolean nightMode;
 
@@ -49,12 +47,12 @@ public class WikivoyageWebViewClient extends WebViewClient {
 	private WikiArticleHelper wikiArticleHelper;
 
 
-	public WikivoyageWebViewClient(FragmentActivity context, FragmentManager fm, boolean nightMode) {
-		app = (OsmandApplication) context.getApplication();
+	public WikivoyageWebViewClient(@NonNull FragmentActivity activity, @NonNull FragmentManager fm, boolean nightMode) {
+		app = (OsmandApplication) activity.getApplication();
 		fragmentManager = fm;
-		this.context = context;
+		this.activity = activity;
 		this.nightMode = nightMode;
-		wikiArticleHelper = new WikiArticleHelper((MapActivity) context, nightMode);
+		wikiArticleHelper = new WikiArticleHelper(activity, nightMode);
 	}
 
 	@Override
@@ -67,13 +65,13 @@ public class WikivoyageWebViewClient extends WebViewClient {
 			if (articleId != 0) {
 				WikivoyageArticleDialogFragment.showInstance(app, fragmentManager, articleId, lang);
 			} else {
-				WikiArticleHelper.warnAboutExternalLoad(url, context, nightMode);
+				WikiArticleHelper.warnAboutExternalLoad(url, activity, nightMode);
 			}
 			return true;
 		} else if (url.contains(WIKI_DOMAIN) && isWebPage) {
 			wikiArticleHelper.showWikiArticle(new LatLon(article.getLat(), article.getLon()), url);
 		} else if (isWebPage) {
-			WikiArticleHelper.warnAboutExternalLoad(url, context, nightMode);
+			WikiArticleHelper.warnAboutExternalLoad(url, activity, nightMode);
 		} else if (url.startsWith(PREFIX_GEO)) {
 			if (article != null) {
 				List<GPXUtilities.WptPt> points = article.getGpxFile().getPoints();
@@ -101,24 +99,29 @@ public class WikivoyageWebViewClient extends WebViewClient {
 							new PointDescription(PointDescription.POINT_TYPE_WPT, gpxPoint.name),
 							false,
 							gpxPoint);
-					fragmentManager.popBackStackImmediate(WikivoyageExploreDialogFragment.TAG,
-							POP_BACK_STACK_INCLUSIVE);
+
+					if (activity instanceof WikivoyageExploreActivity) {
+						WikivoyageExploreActivity exploreActivity = (WikivoyageExploreActivity) activity;
+						exploreActivity.setArticle(article);
+					}
+
+					fragmentManager.popBackStackImmediate();
 
 					File path = app.getTravelDbHelper().createGpxFile(article);
 					GPXUtilities.GPXFile gpxFile = article.getGpxFile();
 					gpxFile.path = path.getAbsolutePath();
 					app.getSelectedGpxHelper().setGpxFileToDisplay(gpxFile);
-					MapActivity.launchMapActivityMoveToTop(context);
+					MapActivity.launchMapActivityMoveToTop(activity);
 				}
 			}
 		} else {
 			Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-			context.startActivity(i);
+			activity.startActivity(i);
 		}
 		return true;
 	}
 
-	public void setArticle(TravelArticle article) {
+	public void setArticle(@NonNull TravelArticle article) {
 		this.article = article;
 	}
 

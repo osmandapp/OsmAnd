@@ -756,6 +756,8 @@
 		</receiver>
         <activity android:name=".liveupdates.OsmLiveActivity"
             android:label="@string/osm_live"/>
+        <activity android:name=".wikivoyage.explore.WikivoyageExploreActivity"/>
+
         <receiver android:name="net.osmand.plus.liveupdates.LiveUpdatesAlarmReceiver"/>
 </application>
 </manifest> 

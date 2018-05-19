@@ -47,7 +47,7 @@ public class AdditionalActionsBottomSheetDialogFragment extends net.osmand.plus.
 
 	@Nullable
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		Activity activity = getActivity();
 		nightMode = getMyApplication().getDaynightHelper().isNightModeForMapControls();
 		portrait = AndroidUiHelper.isOrientationPortrait(activity);

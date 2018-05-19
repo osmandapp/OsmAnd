@@ -6,8 +6,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -24,6 +22,7 @@ import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.chooseplan.ChoosePlanDialogFragment;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadIndexesThread;
+import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.DownloadValidationManager;
 import net.osmand.plus.download.IndexItem;
@@ -43,7 +42,7 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIndexesThread.DownloadEvents {
+public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadEvents {
 
 	private static final String WORLD_WIKIVOYAGE_FILE_NAME = "World_wikivoyage.sqlite";
 
@@ -99,12 +98,22 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIn
 		TravelDbHelper travelDbHelper = getMyApplication().getTravelDbHelper();
 		if (travelDbHelper.getSelectedTravelBook() == null) {
 			getMyApplication().getTravelDbHelper().initTravelBooks();
-			Fragment parent = getParentFragment();
-			if (parent != null && parent instanceof WikivoyageExploreDialogFragment) {
-				((WikivoyageExploreDialogFragment) parent).populateData();
+			WikivoyageExploreActivity exploreActivity = getExploreActivity();
+			if (exploreActivity != null) {
+				exploreActivity.populateData();
 			}
 		} else {
 			removeRedundantCards();
+		}
+	}
+
+	@Nullable
+	private WikivoyageExploreActivity getExploreActivity() {
+		Activity activity = getActivity();
+		if (activity != null && activity instanceof WikivoyageExploreActivity) {
+			return (WikivoyageExploreActivity) activity;
+		} else {
+			return null;
 		}
 	}
 
@@ -117,16 +126,14 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadIn
 	public void populateData() {
 		final List<BaseTravelCard> items = new ArrayList<>();
 		final OsmandApplication app = getMyApplication();
-
-		if (!Version.isPaidVersion(app)) {
-			items.add(new OpenBetaTravelCard(app, nightMode, getFragmentManager()));
-		}
-		if (app.getTravelDbHelper().getSelectedTravelBook() != null) {
-			FragmentActivity activity = getActivity();
-			if (activity != null) {
+		FragmentManager fm = getFragmentManager();
+		if (fm != null) {
+			if (!Version.isPaidVersion(app)) {
+				items.add(new OpenBetaTravelCard(app, nightMode, fm));
+			}
+			if (app.getTravelDbHelper().getSelectedTravelBook() != null) {
 				items.add(new HeaderTravelCard(app, nightMode, getString(R.string.popular_destinations)));
 
-				FragmentManager fm = activity.getSupportFragmentManager();
 				List<TravelArticle> popularArticles = app.getTravelDbHelper().getPopularArticles();
 				for (TravelArticle article : popularArticles) {
 					items.add(new ArticleTravelCard(app, nightMode, article, fm));

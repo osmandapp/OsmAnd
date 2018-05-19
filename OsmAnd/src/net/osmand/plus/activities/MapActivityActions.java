@@ -63,7 +63,7 @@ import net.osmand.plus.views.MapTileLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.wikivoyage.WikivoyageWelcomeDialogFragment;
 import net.osmand.plus.wikivoyage.data.TravelDbHelper;
-import net.osmand.plus.wikivoyage.explore.WikivoyageExploreDialogFragment;
+import net.osmand.plus.wikivoyage.explore.WikivoyageExploreActivity;
 import net.osmand.router.GeneralRouter;
 
 import org.apache.commons.logging.Log;
@@ -777,8 +777,9 @@ public class MapActivityActions implements DialogProvider {
 						if (travelDbHelper.getSelectedTravelBook() == null) {
 							WikivoyageWelcomeDialogFragment.showInstance(mapActivity.getSupportFragmentManager());
 						} else {
-							
-							WikivoyageExploreDialogFragment.showInstance(mapActivity.getSupportFragmentManager());
+							Intent intent = new Intent(mapActivity, WikivoyageExploreActivity.class);
+							intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+							mapActivity.startActivity(intent);
 						}
 						return true;
 					}

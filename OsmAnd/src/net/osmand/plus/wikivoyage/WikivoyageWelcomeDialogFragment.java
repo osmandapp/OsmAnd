@@ -1,5 +1,6 @@
 package net.osmand.plus.wikivoyage;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -13,7 +14,7 @@ import android.widget.ImageView.ScaleType;
 
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.wikivoyage.explore.WikivoyageExploreDialogFragment;
+import net.osmand.plus.wikivoyage.explore.WikivoyageExploreActivity;
 
 public class WikivoyageWelcomeDialogFragment extends WikiBaseDialogFragment {
 
@@ -46,7 +47,9 @@ public class WikivoyageWelcomeDialogFragment extends WikiBaseDialogFragment {
 				FragmentActivity activity = getActivity();
 				if (activity != null) {
 					dismiss();
-					WikivoyageExploreDialogFragment.showInstance(activity.getSupportFragmentManager());
+					Intent intent = new Intent(activity, WikivoyageExploreActivity.class);
+					intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+					activity.startActivity(intent);
 				}
 			}
 		});

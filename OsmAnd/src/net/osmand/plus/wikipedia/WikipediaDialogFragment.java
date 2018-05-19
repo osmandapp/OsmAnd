@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.customtabs.CustomTabsIntent;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -251,7 +252,7 @@ public class WikipediaDialogFragment extends WikiArticleBaseDialogFragment {
 		return getIcon(resId, colorId);
 	}
 
-	public static boolean showInstance(AppCompatActivity activity, Amenity amenity, String lang) {
+	public static boolean showInstance(FragmentActivity activity, Amenity amenity, String lang) {
 		try {
 			if (!amenity.getType().isWiki()) {
 				return false;

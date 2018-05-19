@@ -2,6 +2,7 @@ package net.osmand.plus.mapmarkers;
 
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.content.ContextCompat;
@@ -43,7 +44,7 @@ public class SaveAsTrackBottomSheetDialogFragment extends BottomSheetDialogFragm
 
 	@Nullable
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		MapActivity mapActivity = (MapActivity) getActivity();
 		portrait = AndroidUiHelper.isOrientationPortrait(getActivity());
 		final boolean nightMode = !getMyApplication().getSettings().isLightContent();

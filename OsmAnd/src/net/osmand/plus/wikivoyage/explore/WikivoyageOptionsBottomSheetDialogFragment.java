@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.PopupMenu;
 import android.view.Gravity;
@@ -13,6 +12,7 @@ import android.view.View;
 import android.webkit.WebView;
 
 import net.osmand.PicassoUtils;
+import net.osmand.plus.OnDialogFragmentResultListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.WikiArticleShowImages;
@@ -31,9 +31,8 @@ import java.util.List;
 
 public class WikivoyageOptionsBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
 
-	public final static String TAG = "WikivoyageOptionsBottomSheetDialogFragment";
+	public final static String TAG = WikivoyageOptionsBottomSheetDialogFragment.class.getSimpleName();
 
-	public static final int REQUEST_CODE = 0;
 	public static final int DOWNLOAD_IMAGES_CHANGED = 1;
 	public static final int CACHE_CLEARED = 2;
 	public static final int TRAVEL_BOOK_CHANGED = 3;
@@ -41,6 +40,9 @@ public class WikivoyageOptionsBottomSheetDialogFragment extends MenuBottomSheetD
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
 		final OsmandApplication app = getMyApplication();
+		if (app == null) {
+			return;
+		}
 		final OsmandSettings.CommonPreference<WikiArticleShowImages> showImagesPref = app.getSettings().WIKI_ARTICLE_SHOW_IMAGES;
 		final TravelDbHelper dbHelper = app.getTravelDbHelper();
 
@@ -120,8 +122,11 @@ public class WikivoyageOptionsBottomSheetDialogFragment extends MenuBottomSheetD
 				.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						TravelLocalDataHelper ldh = getMyApplication().getTravelDbHelper().getLocalDataHelper();
-						ldh.clearHistory();
+						OsmandApplication app = getMyApplication();
+						if (app != null) {
+							TravelLocalDataHelper ldh = app.getTravelDbHelper().getLocalDataHelper();
+							ldh.clearHistory();
+						}
 						dismiss();
 					}
 				})
@@ -130,19 +135,20 @@ public class WikivoyageOptionsBottomSheetDialogFragment extends MenuBottomSheetD
 	}
 
 	private void sendResult(int resultCode) {
-		Fragment fragment = getTargetFragment();
-		if (fragment != null) {
-			fragment.onActivityResult(getTargetRequestCode(), resultCode, null);
+		OnDialogFragmentResultListener resultListener = getResultListener();
+		if (resultListener != null) {
+			resultListener.onDialogFragmentResult(TAG, resultCode, null);
 		}
 	}
 
 	private void selectTravelBookDialog() {
 		Context ctx = getContext();
-		if (ctx == null) {
+		OsmandApplication app = getMyApplication();
+		if (ctx == null || app == null) {
 			return;
 		}
 
-		final TravelDbHelper dbHelper = getMyApplication().getTravelDbHelper();
+		final TravelDbHelper dbHelper = app.getTravelDbHelper();
 		final List<File> list = dbHelper.getExistingTravelBooks();
 		String[] ls = new String[list.size()];
 		for (int i = 0; i < ls.length; i++) {

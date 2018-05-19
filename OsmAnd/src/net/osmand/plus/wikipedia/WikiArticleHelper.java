@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentActivity;
 import android.text.Html;
 import android.util.Log;
 
@@ -19,7 +20,6 @@ import net.osmand.map.OsmandRegions;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.IndexItem;
@@ -46,21 +46,21 @@ public class WikiArticleHelper {
 	private static final String WIKI_DOMAIN = ".wikipedia.org/wiki/";
 
 	private WikiArticleSearchTask articleSearchTask;
-	private MapActivity mapActivity;
+	private FragmentActivity activity;
 
 	private boolean nightMode;
 	private static final String P_OPENED = "<p>";
 	private static final String P_CLOSED = "</p>";
 
-	public WikiArticleHelper(MapActivity mapActivity, boolean nightMode) {
-		this.mapActivity = mapActivity;
+	public WikiArticleHelper(FragmentActivity activity, boolean nightMode) {
+		this.activity = activity;
 		this.nightMode = nightMode;
 	}
 
 	public static class WikiArticleSearchTask extends AsyncTask<Void, Void, List<Amenity>> {
 
 		private ProgressDialog dialog;
-		private WeakReference<MapActivity> weakMapActivity;
+		private WeakReference<FragmentActivity> activityRef;
 
 		private LatLon articleLatLon;
 		private String regionName;
@@ -69,15 +69,15 @@ public class WikiArticleHelper {
 		private String name;
 		private boolean isNightMode;
 
-		WikiArticleSearchTask(LatLon articleLatLon,
-		                      MapActivity mapActivity,
+		WikiArticleSearchTask(@NonNull LatLon articleLatLon,
+		                      @NonNull FragmentActivity activity,
 		                      boolean nightMode,
-		                      String url) {
+		                      @NonNull String url) {
 			this.articleLatLon = articleLatLon;
-			weakMapActivity = new WeakReference<>(mapActivity);
+			activityRef = new WeakReference<>(activity);
 			this.isNightMode = nightMode;
 			this.url = url;
-			dialog = createProgressDialog(mapActivity);
+			dialog = createProgressDialog(activity);
 		}
 
 		@Override
@@ -91,8 +91,8 @@ public class WikiArticleHelper {
 
 		@Override
 		protected List<Amenity> doInBackground(Void... voids) {
-			MapActivity activity = weakMapActivity.get();
-			OsmandApplication application = activity.getMyApplication();
+			FragmentActivity activity = activityRef.get();
+			OsmandApplication application = (OsmandApplication) activity.getApplication();
 			final List<Amenity> results = new ArrayList<>();
 			if (application != null && !isCancelled()) {
 				List<WorldRegion> regions = null;
@@ -171,8 +171,8 @@ public class WikiArticleHelper {
 
 		@Override
 		protected void onCancelled() {
-			MapActivity activity = weakMapActivity.get();
-			if (activity != null && !activity.isActivityDestroyed() && dialog != null) {
+			FragmentActivity activity = activityRef.get();
+			if (activity != null && dialog != null) {
 				dialog.dismiss();
 			}
 			dialog = null;
@@ -180,8 +180,8 @@ public class WikiArticleHelper {
 
 		@Override
 		protected void onPostExecute(List<Amenity> found) {
-			MapActivity activity = weakMapActivity.get();
-			if (activity != null && !activity.isActivityDestroyed() && dialog != null) {
+			FragmentActivity activity = activityRef.get();
+			if (activity != null && dialog != null) {
 				dialog.dismiss();
 				if (found == null) {
 					WikivoyageArticleWikiLinkFragment.showInstance(activity.getSupportFragmentManager(), regionName == null ?
@@ -189,7 +189,7 @@ public class WikiArticleHelper {
 				} else if (!found.isEmpty()) {
 					WikipediaDialogFragment.showInstance(activity, found.get(0), lang);
 				} else {
-					warnAboutExternalLoad(url, weakMapActivity.get(), isNightMode);
+					warnAboutExternalLoad(url, activityRef.get(), isNightMode);
 				}
 			}
 		}
@@ -206,8 +206,8 @@ public class WikiArticleHelper {
 		return "";
 	}
 
-	private static ProgressDialog createProgressDialog(MapActivity activity) {
-		if (activity != null && !activity.isActivityDestroyed()) {
+	private static ProgressDialog createProgressDialog(@NonNull FragmentActivity activity) {
+		if (activity != null) {
 			ProgressDialog dialog = new ProgressDialog(activity);
 			dialog.setCancelable(false);
 			dialog.setMessage(activity.getString(R.string.wiki_article_search_text));
@@ -217,11 +217,10 @@ public class WikiArticleHelper {
 	}
 
 	public void showWikiArticle(LatLon articleLatLon, String url) {
-		if (articleLatLon == null) {
-			return;
+		if (articleLatLon != null) {
+			articleSearchTask = new WikiArticleSearchTask(articleLatLon, activity, nightMode, url);
+			articleSearchTask.execute();
 		}
-		articleSearchTask = new WikiArticleSearchTask(articleLatLon, mapActivity, nightMode, url);
-		articleSearchTask.execute();
 	}
 
 	@NonNull

@@ -5,6 +5,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,7 +31,7 @@ public class WikivoyageShowPicturesDialogFragment extends BottomSheetDialogFragm
 	protected boolean nightMode;
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		nightMode=!getMyApplication().getSettings().isLightContent();
 		View view = inflater.inflate(R.layout.fragment_wikivoyage_show_images_first_time, container, false);
 		view.findViewById(R.id.button_no).setOnClickListener(new View.OnClickListener() {

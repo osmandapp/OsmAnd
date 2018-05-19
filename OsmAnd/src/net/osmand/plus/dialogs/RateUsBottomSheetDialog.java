@@ -3,6 +3,7 @@ package net.osmand.plus.dialogs;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,7 +23,7 @@ public class RateUsBottomSheetDialog extends BottomSheetDialogFragment {
 	private RateUsBottomSheetDialog.FragmentState state = RateUsBottomSheetDialog.FragmentState.INITIAL_STATE;
 	@Nullable
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = getActivity().getLayoutInflater().inflate(R.layout.dash_rate_us_fragment, container, false);
 		TextView header = (TextView) view.findViewById(R.id.header);
 		TextView subheader = (TextView) view.findViewById(R.id.subheader);
