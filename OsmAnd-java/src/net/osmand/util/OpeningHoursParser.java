@@ -2173,7 +2173,7 @@ public class OpeningHoursParser {
 
 	    hours = parseOpenedHours("Mo-Sa 08:30-17:00; Th off");
 		System.out.println(hours);
-	    testInfo("17.01.2018 20:00", hours, "Will open on 08:30 Fr.");
+	    testInfo("17.01.2018 20:00", hours, "Will open on 08:30 Fri.");
 	    testInfo("18.01.2018 05:00", hours, "Will open tomorrow at 08:30");
 	    testInfo("20.01.2018 05:00", hours, "Open from 08:30");
 	    testInfo("21.01.2018 05:00", hours, "Will open tomorrow at 08:30");
