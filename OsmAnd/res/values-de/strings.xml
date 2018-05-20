@@ -3157,5 +3157,5 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="touring_view_render_descr">Hoch detaillierter Stil für Touringzwecke. Enthält alle Konfigurationsoptionen des Standardstils, zusätzlich: Zeigt so viele Details wie möglich an, insbesondere alle Straßen, Wege und andere Reisemöglichkeiten. Klare visuelle Unterscheidung zwischen den verschiedenen Straßentypen, ähnlich vielen Tourenatlanten. Kontrastreiches Farbschema für den Außenbereich, Tag- und Nachtmodus.</string>
     <string name="access_intermediate_arrival_time">Ankunftszeit Zwischenziel</string>
     <string name="map_widget_intermediate_time">Reisezeit Zwischenziel</string>
-    <string name="unirs_render_descr">Änderung des Standardstils, um den Kontrast von Fußgänger- und Fahrradwegen zu erhöhen. Verwendete Legacy Mapnik Farben.</string>
+    <string name="unirs_render_descr">Änderung des Standardstils, um den Kontrast von Fußgänger- und Fahrradwegen zu erhöhen. Verwendet Legacy Mapnik Farben.</string>
     </resources>
