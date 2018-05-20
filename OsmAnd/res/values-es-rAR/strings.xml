@@ -3069,5 +3069,5 @@ Lon %2$s</string>
     <string name="off_road_render_descr">Adecuado para usarlo durante la conducción todoterreno. Adecuado para usarlo como un mapa subyacente con imágenes satelitales verdes . Características principales: Reducción del grosor en carreteras principales, aumento del grosor de las vías, senderos, bicicletas y otras rutas. Basado en el estilo «Topo».</string>
     <string name="access_intermediate_arrival_time">Hora de llegada intermedia</string>
     <string name="map_widget_intermediate_time">Tiempo intermedio</string>
-    <string name="unirs_render_descr">Modificación del estilo estándar para proporcionar un mayor contraste de las calles peatonales y para bicicletas. Usa los colores clásicos de Mapnik.</string>
+    <string name="unirs_render_descr">Modificación del estilo predefinido para un mayor contraste en los caminos peatonales y para bicicletas. Usa los colores clásicos de Mapnik.</string>
     </resources>
