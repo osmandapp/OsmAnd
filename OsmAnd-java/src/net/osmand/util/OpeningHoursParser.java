@@ -1790,10 +1790,12 @@ public class OpeningHoursParser {
 				}
 			}
 			String basicRuleComment = null;
-			for (BasicOpeningHourRule bRule : basicRules) {
-				if (!Algorithms.isEmpty(bRule.getComment())) {
-					basicRuleComment = bRule.getComment();
-					break;
+			if (sequences.size() > 1) {
+				for (BasicOpeningHourRule bRule : basicRules) {
+					if (!Algorithms.isEmpty(bRule.getComment())) {
+						basicRuleComment = bRule.getComment();
+						break;
+					}
 				}
 			}
 			if (!Algorithms.isEmpty(basicRuleComment)) {
@@ -2231,5 +2233,9 @@ public class OpeningHoursParser {
 	    testInfo("16.02.2018 14:00", hours, "Will close at 15:00");
 	    testInfo("16.02.2018 16:00", hours, "Will open at 17:00");		
 	    testInfo("16.02.2018 18:00", hours, "Open till 23:00");		
+	    
+		hours = parseOpenedHours("Mo-Fr 10:00-21:00; Sa 12:00-23:00; PH \"Wird auf der Homepage bekannt gegeben.\"");
+		testParsedAndAssembledCorrectly("Mo-Fr 10:00-21:00; Sa 12:00-23:00; PH - Wird auf der Homepage bekannt gegeben.", hours);
+		System.out.println(hours);
 	}
 }
