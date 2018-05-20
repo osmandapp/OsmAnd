@@ -2596,7 +2596,7 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="quick_action_add_destination">Célpont hozzáadása</string>
     <string name="quick_action_replace_destination">Célpont lecserélése</string>
     <string name="quick_action_add_first_intermediate">Hozzáadás első köztes célpontként</string>
-    <string name="quick_action_add_destination_desc">A műveletgombra koppintva a képernyő középpontját beállítja célpontként. A korábban beállított célpontból utolsó köztes célpont lesz.</string>
+    <string name="quick_action_add_destination_desc">A műveletgombra koppintva a képernyő középpontját beállítja úti célként. A korábban beállított célpontból utolsó köztes célpont lesz.</string>
     <string name="quick_action_replace_destination_desc">A műveletgombra koppintás lecseréli a célpontot a képernyő középpontjára.</string>
     <string name="quick_action_add_first_intermediate_desc">A műveletgombra koppintás hozzáad egy első köztes célpontot a képernyő középpontján.</string>
     <string name="no_overlay">Nincs rátétréteg</string>
@@ -2620,18 +2620,18 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="select_street">Utca kijelölése</string>
     <string name="shared_string_in_name">itt: %1$s</string>
     <string name="type_address">Add meg a címet</string>
-    <string name="quick_action_showhide_osmbugs_title">OSM-megjegyzések megjelenítése/elrejtése</string>
+    <string name="quick_action_showhide_osmbugs_title">OSM Jegyzetek ki/bekapcsolása</string>
     <string name="quick_action_osmbugs_show">OSM-megjegyzések megjelenítése</string>
     <string name="quick_action_osmbugs_hide">OSM-megjegyzések elrejtése</string>
-    <string name="quick_action_showhide_osmbugs_descr">A műveletgombra koppintva a térképen megjelennek vagy eltűnnek az OSM-megjegyzések.</string>
+    <string name="quick_action_showhide_osmbugs_descr">A műveletgombra koppintva megjeleníti vagy eltünteti a térképen az OSM Jegyzeteket.</string>
     <string name="sorted_by_distance">Távolság szerinti sorrendben</string>
     <string name="search_favorites">Kedvencek keresése</string>
-    <string name="hillshade_menu_download_descr">A domborzatárnyékolás térképen való megtekintéséhez le kell tölteni ennek a területnek a domborzatárnyékolási térképrétegét.</string>
-    <string name="hillshade_purchase_header">A domborzatárnyékolás térképen való megtekintéséhez meg kell vásárolni és telepíteni kell a szintvonal-bővítmény</string>
+    <string name="hillshade_menu_download_descr">A domborzat megjelenítéséhez le kell tölteni régió domborzatárnyékolás térképet.</string>
+    <string name="hillshade_purchase_header">Telepítsd a „szintvonal” bővítményt, hogy megjelenjen a térképen</string>
     <string name="hide_from_zoom_level">Elrejtés ettől a nagyítási fokozattól:</string>
-    <string name="srtm_menu_download_descr">A szintvonalak térképen való megtekintéséhez le kell tölteni ennek a területnek a szintvonaltérképét.</string>
+    <string name="srtm_menu_download_descr">Töltsd le a régió „szintvonal” térképét.</string>
     <string name="shared_string_plugin">Bővítmény</string>
-    <string name="srtm_purchase_header">A szintvonalak térképen való megtekintéséhez meg kell vásárolni és telepíteni kell a szintvonal-bővítményt</string>
+    <string name="srtm_purchase_header">A szintvonalak térképen való megtekintéséhez meg kell vásárolni és telepíteni kell a „szintvonal” bővítményt</string>
     <string name="srtm_color_scheme">Színséma</string>
     <string name="show_from_zoom_level">Megjelenítés a következő nagyítási fokozattól</string>
     <string name="routing_attr_allow_private_name">Magánutak használatának engedélyezése</string>
@@ -2641,30 +2641,28 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="change_color">Szín módosítása</string>
     <string name="edit_name">Név szerkesztése</string>
     <string name="animate_my_location">Saját pozícióm animálása</string>
-    <string name="animate_my_location_desc">Helyzetem animálásának engedélyezése navigáció közben.</string>
+    <string name="animate_my_location_desc">A saját pozíció mozgásának animálása navigáció közben.</string>
     <string name="shared_string_overview">Áttekintés</string>
     <string name="route_is_too_long_v2">Ennek az útnak a kiszámítása túl hosszú ideig tarthat. Ha 10 percen belül nem kap eredményt, kérjük, adjon hozzá köztes célpontokat.</string>
     <string name="osmand_extended_description_part1">OsmAnd (OSM Automated Navigation Directions) egy térkép- és navigációs alkalmazás, amellyel hozzáférhet az ingyenes, globális és kiváló minőségű OpenStreetMap (OSM) adataihoz. Élvezze a hangalapú és vizuális navigációs szolgáltatást, tekintsen meg érdekes pontokat (POI-kat), hozzon létre és kezeljen GPX-útvonalakat szintvonalak és magasságinformációk használatával (egy plugin segítségével), válasszon az autós, kerékpáros és gyalogos üzemmód közül és használjon ki számos egyéb lehetőséget.</string>
     <string name="save_poi_too_many_uppercase">A név túl sok nagybetűt tartalmaz. Folytatja?</string>
-    <string name="private_access_routing_req">A célpont korlátozott hozzáférésű területen található. Engedélyezed a magánutak használatát ennél az útvonaltervnél?</string>
+    <string name="private_access_routing_req">A célpont korlátozott hozzáférésű területen található. Használjunk magánutakat ennél az útvonaltervnél?</string>
     <string name="restart_search">Keresés újraindítása</string>
     <string name="increase_search_radius">Keresett terület szélesítése</string>
-    <string name="nothing_found">Nincs találat :(</string>
+    <string name="nothing_found">"Nincs találat "</string>
     <string name="nothing_found_descr">Módosítsd a keresőkifejezést vagy növeld a keresés sugarát.</string>
     <string name="mapillary">Mapillary</string>
     <string name="shared_string_add_photos">Fényképek hozzáadása</string>
     <string name="no_photos_descr">Erről a helyről nincsenek fényképeink.</string>
     <string name="mapillary_action_descr">Add hozzá a saját fényképedet a hely utcanézetéről a Mapillaryvel.</string>
     <string name="mapillary_widget">Mapillary vezérlőgomb</string>
-    <string name="mapillary_widget_descr">Segítségével gyorsan hozzájárulhatsz a Mapillaryhez.</string>
+    <string name="mapillary_widget_descr">Gyors Mapillary közreműködést tesz lehetővé.</string>
     <string name="mapillary_descr">Online utcaszintű fotók mindenkinek. Fedezz fel helyeket, vegyél benne részt, fotózd le a világot.</string>
     <string name="plugin_mapillary_descr">Utcaszintű fotók mindenkinek. Fedezz fel helyeket, vegyél benne részt, fotózd le a világot.</string>
     <string name="osmand_extended_description_part4">Az OsmAnd sítérkép bővítménye lehetővé teszi a sípályák megjelenítését nehézség szerint, valamint további információkat, mint például a felvonók helyét, és más berendezéseket.</string>
     <string name="online_photos">Online fényképek</string>
     <string name="improve_coverage_mapillary">Fényképes lefedettség javítása a Mapillaryvel</string>
-    <string name="improve_coverage_install_mapillary_desc">Készíthet saját fényképet vagy fényképsorozatot, és hozzáadhatja ehhez a térképhelyhez. 
-\n 
-\nEhhez először telepítenie kell a Mapillary alkalmazást a Google Play-ről.</string>
+    <string name="improve_coverage_install_mapillary_desc">A Mapillary telepítésével fényképeket adhatsz a térképhez.</string>
     <string name="shared_string_install">Telepítés</string>
     <string name="open_mapillary">Mapillary megnyitása</string>
     <string name="mapillary_image">Mapillary-kép</string>
@@ -2673,12 +2671,12 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="shared_string_permissions">Engedélyek</string>
     <string name="import_gpx_failed_descr">Az OsmAnd nem tudja importálni a fájlt. Ellenőrizze, hogy az OsmAndnak van-e engedélye fájlt olvasni erről a helyről.</string>
     <string name="store_tracks_in_monthly_directories">Rögzített nyomvonalak tárolása havi könyvtárakban</string>
-    <string name="store_tracks_in_monthly_directories_descrp">Rögzített nyomvonalak tárolása havi bontású alkönyvtárakban (pl. 2017-01).</string>
+    <string name="store_tracks_in_monthly_directories_descrp">Rögzített nyomvonalak tárolása havi bontású alkönyvtárakban (pl. 2018-01).</string>
     <string name="shared_string_reset">Visszaállítás</string>
     <string name="shared_string_reload">Újratöltés</string>
     <string name="mapillary_menu_descr_tile_cache">Csempék újratöltése naprakész adatok megjelenítéséhez.</string>
     <string name="mapillary_menu_title_tile_cache">Csempegyorsítótár</string>
-    <string name="wrong_user_name">Hibás felhasználónév!</string>
+    <string name="wrong_user_name">Hibás felhasználónév</string>
     <string name="shared_string_to">Ide:</string>
     <string name="mapillary_menu_date_from">Ettől:</string>
     <string name="mapillary_menu_descr_dates">Csak az ekkor hozzáadott képek megtekintése:</string>
@@ -2686,7 +2684,7 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="mapillary_menu_edit_text_hint">Felhasználónév megadása</string>
     <string name="mapillary_menu_descr_username">Csak az általa hozzáadott képek megtekintése:</string>
     <string name="mapillary_menu_title_username">Felhasználónév</string>
-    <string name="mapillary_menu_filter_description">A képeket feltöltő vagy dátum szerint is szűrheti. A szűrők csak erős nagyításnál működnek.</string>
+    <string name="mapillary_menu_filter_description">A képek szűrése feltöltő vagy dátum szerint. Csak erős nagyításnál használhatóak.</string>
     
     <string name="map_widget_ruler_control">Sugaras vonalzó</string>
     <string name="average">Átlag</string>
@@ -2695,9 +2693,9 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="moving_time">Mozgásban töltött idő</string>
     <string name="max_min">Max/Min</string>
     <string name="min_max">Min/Max</string>
-    <string name="quick_action_resume_pause_navigation">Navigáció folytatása/szüneteltetése</string>
+    <string name="quick_action_resume_pause_navigation">Navigáció szüneteltetése/folytatása</string>
     <string name="quick_action_resume_pause_navigation_descr">A navigáció szüneteltetéséhez vagy folytatásához koppintson erre a gombra.</string>
-    <string name="quick_action_show_navigation_finish_dialog">„Navigáció befejezése” párbeszéd megjelenítése</string>
+    <string name="quick_action_show_navigation_finish_dialog">„Navigáció véget ért” panel megjelenítése</string>
     <string name="quick_action_start_stop_navigation">Navigáció indítása/megállítása</string>
     <string name="quick_action_start_stop_navigation_descr">A navigáció elkezdéséhez vagy befejezéséhez koppintson erre a gombra.</string>
     <string name="release_2_7">\\022 Mapillary bővítmény utcaszintű fotókkal
@@ -2727,8 +2725,8 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="shared_string_sort">Rendezés</string>
     <string name="coordinate_input">Koordináta bevitele</string>
     <string name="is_saved">mentve</string>
-    <string name="marker_save_as_track_descr">Jelölők exportálása a következő fájlba:</string>
-    <string name="marker_save_as_track">Mentés nyomvonalként</string>
+    <string name="marker_save_as_track_descr">Jelölők exportálása az alábbi GPX fájlba:</string>
+    <string name="marker_save_as_track">Mentés GPX fájlként</string>
     <string name="move_to_history">Áthelyezés az előzményekbe</string>
     <string name="group_will_be_removed_after_restart">A csoport el fog tűnni, amikor legközelebb elindítod az alkalmazást.</string>
     <string name="show_guide_line">Irányjelző vonalak megjelenítése</string>
@@ -2741,7 +2739,7 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="date_added">Dátum hozzáadva</string>
     <string name="order_by">Rendezés alapja:</string>
     <string name="marker_show_distance_descr">Válassza ki, hogyan jelenjen meg a térképjelölők távolsága és iránya a térképképernyőn:</string>
-    <string name="map_orientation_change_in_accordance_with_speed_descr">Válaszd ki, mekkora sebességnél váltson a térkép forgatása „Mozgás iránya”-ról „Iránytű”-re.</string>
+    <string name="map_orientation_change_in_accordance_with_speed_descr">Válaszd ki, mekkora sebesség alatt váltson a térkép forgatása „Haladási irány”-ról „Iránytű”-re.</string>
     <string name="all_markers_moved_to_history">Minden térképjelölő áthelyezve az előzményekbe</string>
     <string name="marker_moved_to_history">Térképjelölő áthelyezve az előzményekhez</string>
     <string name="shared_string_list">Lista</string>
@@ -2835,19 +2833,19 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="notes_by_date">Megjegyzések dátum szerint</string>
     <string name="by_date">Dátum szerint</string>
     <string name="by_type">Típus szerint</string>
-    <string name="looking_for_tracks_with_waypoints">Útpontokat tartalmazó nyomvonalak keresése</string>
+    <string name="looking_for_tracks_with_waypoints">Útpontokat tartalmazó GPX fájlok keresése</string>
     <string name="shared_string_more_without_dots">Többi</string>
     <string name="appearance_on_the_map">Megjelenítés a térképen</string>
-    <string name="add_track_to_markers_descr">Útpontokat adhatsz a térképjelölőkhöz, kiválasztva egy őket tartalmazó nyomvonalat.</string>
+    <string name="add_track_to_markers_descr">Válassz egy GPX fájlt, aminek útpontjaiból a jelölők készüljenek.</string>
     <string name="add_favourites_group_to_markers_descr">Válassz egy kedvencek kategóriát, amikből jelölőt készítenél.</string>
     <string name="shared_string_gpx_waypoints">Nyomvonal útpontok</string>
     <string name="favourites_group">Kedvencek kategória</string>
     <string name="add_group">Csoport hozzáadása</string>
-    <string name="add_group_descr">Csoportok importálása kedvencekből vagy nyomvonal útpontból.</string>
+    <string name="add_group_descr">Csoportok importálása kedvencekből vagy GPX útpontból.</string>
     <string name="empty_state_markers_active">Készíts térképjelölőket!</string>
     <string name="empty_state_markers_active_desc">Koppints hosszan vagy röviden egy helyre, majd koppints a jelölőzászló gombjára.</string>
     <string name="empty_state_markers_groups">Csoportok importálása</string>
-    <string name="empty_state_markers_groups_desc">Jelölők importálása kedvencek csoportokból, vagy nyomvonal útpontokból.</string>
+    <string name="empty_state_markers_groups_desc">Jelölők importálása kedvencek csoportokból, vagy GPX útpontokból.</string>
     <string name="shared_string_two">Kettő</string>
     <string name="shared_string_one">Egy</string>
     <string name="show_guide_line_descr">Irányjelző vonalat jelenít meg az aktuális pozíciódtól az aktív térképjelölőkig.</string>
@@ -2866,7 +2864,7 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="tap_on_map_to_hide_interface_descr">Egy koppintás a térképen ki/be kapcsolja a gombokat és a widgeteket.</string>
     <string name="tap_on_map_to_hide_interface">Teljes képernyős mód</string>
     
-    <string name="import_gpx_file_description">importálható kedvencekként, vagy nyomvonal fájlként.</string>
+    <string name="import_gpx_file_description">importálható kedvencekként, vagy GPX fájlként.</string>
     <string name="what_is_here">Mi van itt:</string>
     <string name="parked_at">leparkolva ekkor:</string>
     <string name="pick_up_till">Felvenni eddig:</string>
@@ -2882,16 +2880,16 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="additional_actions">További műveletek</string>
     <string name="av_locations_selected_desc">GPX fájl a kijelölt megjegyzések koordinátáival és adataival.</string>
     <string name="av_locations_all_desc">GPX fájl az összes megjegyzés koordinátáival és adataival.</string>
-    <string name="release_3_0">• Új Utazás menü: olvass Wikivoyage cikkeket internetkapcsolat nélkül
-\n
-\n • Wikipédia: új kinézet, aktív linkek, képek
-\n
-\n • Nyomvonal megnyitás: útpont csoportok megjelenítése
-\n
-\n • Térképjelölők: kiválasztott csoportok importálása GPX-fájlból; új koordinátabetivel
-\n
-\n • Az OsmAnd Live előfizetés már minden OsmAnd funkciót tartalmaz
-\n
+    <string name="release_3_0">• Újdonság: Globális útikalauz támogatás. A hivatkozott helyszínek össze vannak kapcsolva a térképpel. Induló adatok a Wikivoyage-ból.
+\n 
+\n • Wikipédia: új kinézet, aktív linkek, képek 
+\n 
+\n • Nyomvonal megnyitás: útpont csoportok megjelenítése 
+\n 
+\n • Térképjelölők: kiválasztott csoportok importálása GPX-fájlból; új koordinátabetivel 
+\n 
+\n • Az OsmAnd Live előfizetés már minden OsmAnd funkciót tartalmaz 
+\n 
 \n</string>
     <string name="modify_the_search_query">Keresési kifejezés módosítása.</string>
     <string name="shared_string_actions">Műveletek</string>
@@ -3010,23 +3008,23 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="online_webpage_warning">Az oldal csak online érhető el. Megnyitod böngészőben?</string>
     <string name="images_cache">Kép tároló</string>
     <string name="delete_search_history">Keresési előzmények törlése</string>
-    <string name="download_images">Képek megjelenítése</string>
+    <string name="download_images">Képek letöltése</string>
     <string name="read_wikipedia_offline_description">Szerez OsmAnd Live előfizetést hogy Wikipédia és Wikivoyage cikkeket olvashass offline.</string>
     <string name="how_to_open_link">Hogyan nyisd meg a linket?</string>
     <string name="purchase_cancelled_dialog_title">Lemondtad az OsmAnd Live előfizetésedet</string>
     <string name="purchase_cancelled_dialog_descr">Előfizetés megújítása az alábbi funkciók használatának folytatásához:</string>
 
     <string name="travel_card_update_descr">Új Wikivoyage adat érhető el, a használatához frissíts.</string>
-	<string name="travel_card_download_descr">Töltsd le ezeket a Wikivoyage útikönyveket, hogy internetkapcsolat nélkül olvashass cikkeket a világ érdekes helyeiről.</string>
+	<string name="travel_card_download_descr">Töltsd le a Wikivoyage útikalauzokat, hogy internetkapcsolat nélkül olvashass cikkeket a világ érdekes helyeiről.</string>
 	<string name="start_editing_card_image_text">Az ingyenes, világméretű útikönyv, amit bárki szerkeszthet.</string>
-    <string name="welcome_to_open_beta_description">Az Utazás funkció a Wikivoyage-t használja. Teszteld a lehetőségeit a nyílt bétateszt során ingyenesen. Később az Utazás az OsmAnd Korlátlan előfizetőknek és OsmAnd+ tulajdonosoknak lesz elérhető.</string>
+    <string name="welcome_to_open_beta_description">Az útikalauz a Wikivoyage-on alapul. Teszteld a lehetőségeit a nyílt bétateszt során ingyenesen. Később az útikalauz az OsmAnd Korlátlan előfizetőknek és OsmAnd+ tulajdonosoknak lesz elérhető.</string>
     <string name="start_editing_card_description">Szerkesztheted, sőt szerkeszd a Wikivoyage bármely cikkét. Oszd meg a tudásodat, tapasztalataidat, figyelmességed</string>
     <string name="start_editing">Szerkesztés elkezdése</string>
     <string name="get_unlimited_access">Szerezz korlátlan hozzáférést</string>
     <string name="welcome_to_open_beta">Üdvözlünk a nyílt bétatesztben</string>
     <string name="wikivoyage_travel_guide">Wikivoyage Útikönyv</string>
     <string name="wikivoyage_travel_guide_descr">Útikönyv a Föld legérdekesebb helyeihez, az OsmAndon belül, internetkapcsolat nélkül.</string>
-    <string name="purchase_dialog_travel_description">Vedd meg az alábbiak egyikét hogy úti célok cikkeit olvashasd offline:</string>
+    <string name="purchase_dialog_travel_description">Az offline útikalauz funkció használatához vedd meg az alábbiak egyikét:</string>
     <string name="purchase_dialog_subtitle">Válaszd ki a megfelelőt:</string>
     <string name="download_maps_travel">Útikönyvek</string>
     <string name="shared_string_wikivoyage">Wikivoyage</string>
