@@ -334,7 +334,7 @@
     <string name="download_wikipedia_files">Ĉu elŝuti aldonajn Vikipediajn datumojn (%1$s MB) ?</string>
     <string name="gps_network_not_enabled">Pozici-trova servo estas malaktiva. Ĉu aktivigi ĝin?</string>
     <string name="disable_recording_once_app_killed">Preventi de aŭtomata protokolado</string>
-    <string name="disable_recording_once_app_killed_descrp">Paŭzigi GPX-protokolado je halto de aplikaĵo (per lastaj aplikaĵoj). (Fona piktogramo de OsmAnd malaperas de Androida sciiga breto.)</string>
+    <string name="disable_recording_once_app_killed_descrp">Paŭzigi GPX-protokoladon je halto de la aplikaĵo (per lastaj aplikaĵoj). (Fona piktogramo de OsmAnd malaperas de Androida sciiga breto.)</string>
     <string name="read_full_article">Legi tutan artikolon (enrete)</string>
     <string name="shared_string_show_details">Montri detalojn</string>
     <string name="osm_edit_context_menu_delete">Forigi OSM-redaktojn</string>

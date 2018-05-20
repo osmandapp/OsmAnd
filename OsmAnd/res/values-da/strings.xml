@@ -3065,7 +3065,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="by_date">Efter dato</string>
     <string name="by_type">Efter type</string>
     <string name="modify_the_search_query">Ændr søgning.</string>
-    <string name="release_3_0">• Nyt: globale offline rejseguider. Henvisning til steder linkes til kortet. Date fra Wikivoyage
+    <string name="release_3_0">• Nyt: globale offline rejseguider. Henvisning til steder linker til kortet. Data fra Wikivoyage 
 \n 
 \n • Wikipedia: nyt udseende, aktive links, billeder understøttes nu 
 \n 
