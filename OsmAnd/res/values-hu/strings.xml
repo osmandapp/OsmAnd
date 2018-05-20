@@ -2159,7 +2159,7 @@ Jelenleg csak {2} MB érhető el.</string>
     <string name="download_files_question_space_with_temp">Letöltesz {0} fájlt?
  Ehhez átmenetileg {3} MB, véglegesen {1} MB szükséges.
  (Jelenleg {2} MB érhető el.)</string>
-    <string name="upload_osm_note_description">OSM-megjegyzést feltölthetsz névtelenül vagy az OpenStreetMap.org-fiókoddal.</string>
+    <string name="upload_osm_note_description">Tölts fel OSM Jegyzetet névtelenül vagy az OpenStreetMap.org-fiókodat használva.</string>
     <string name="upload_osm_note">OSM-megjegyzés feltöltése</string>
     <string name="map_marker_1st">Első térképjelölő</string>
     <string name="map_marker_2nd">Második térképjelölő</string>
@@ -2321,7 +2321,7 @@ Jelenleg csak {2} MB érhető el.</string>
     <string name="skip_map_downloading">Térképletöltés kihagyása</string>
     <string name="first_usage_greeting">Navigálj és fedezz fel új helyeket internetkapcsolat nélkül</string>
     <string name="search_another_country">Másik régió kijelölése</string>
-    <string name="skip_map_downloading_desc">"Nincs offline térkép telepítve. Választhatsz egy térképet a listából, vagy tölts le később innen: Menü  - %1$s."</string>
+    <string name="skip_map_downloading_desc">"Nincs telepítve offline térkép. Választhatsz egy térképet a listából, vagy tölts le később innen: „Menü  - %1$s”."</string>
     <string name="osm_live_payment_desc">Az előfizetési díj havonta lesz felszámítva. Az előfizetést bármikor lemondhatod a Google Play-en.</string>
     <string name="donation_to_osm">Adomány az OpenStreetMap közösségnek</string>
     <string name="donation_to_osm_desc">Az adományod egy részét továbbítjuk azon OSM szerkesztőknek, akik módosításokat küldtek be OpenStreetMapre. Az előfizetési díj változatlan marad.</string>
@@ -2338,9 +2338,9 @@ Jelenleg csak {2} MB érhető el.</string>
     <string name="no_inet_connection_desc_map">A térképek letöltéséhez szükséges.</string>
     <string name="search_location">Hely keresése…</string>
     <string name="storage_free_space">Szabad hely</string>
-    <string name="storage_place_description">Az OsmAnd tárolt adatai (térképek, nyomvonalak, stb.): %1$s.</string>
+    <string name="storage_place_description">Az OsmAnd tárolt adatai (térképek, GPX fájlok, stb.): %1$s.</string>
     <string name="give_permission">Engedélyezés</string>
-    <string name="allow_access_location">Adj hozzáférést a pozíciódhoz</string>
+    <string name="allow_access_location">Hozzáférés a pozíciódhoz engedélyezése</string>
     <string name="search_my_location">Pozícióm meghatározása</string>
     <string name="no_update_info_desc">Ne keressen verziófrissítéseket és OsmAnddel kapcsolatos kedvezményeket.</string>
     <string name="no_update_info">Ne mutass frissítéseket</string>
@@ -2361,7 +2361,7 @@ Jelenleg csak {2} MB érhető el.</string>
     <string name="save_filter">Szűrő mentése</string>
     <string name="delete_filter">Szűrő törlése</string>
     <string name="new_filter">Új szűrő</string>
-    <string name="new_filter_desc">Kérlek add meg az új szűrő nevét, ez hozzá lesz adva a Kategóriák fülhöz.</string>
+    <string name="new_filter_desc">Kérlek add meg az új szűrő nevét, ez hozzá lesz adva a „Kategóriák” fülhöz.</string>
     <string name="lang_kab">kabil</string>
     <string name="shared_string_continue">Folytatás</string>
     <string name="gpx_logging_no_data">Nincs adat</string>
@@ -2369,9 +2369,9 @@ Jelenleg csak {2} MB érhető el.</string>
     <string name="route_roundabout_short">Hajts ki a(z) %1$d kijáraton és menj</string>
     <string name="upload_poi">POI feltöltése</string>
     <string name="route_calculation">Útvonalszámítás</string>
-    <string name="gpx_no_tracks_title">Még nincsenek nyomvonalaid</string>
-    <string name="gpx_no_tracks_title_folder">Te is hozzáadhatsz nyomvonalakat a könyvtárhoz</string>
-    <string name="gpx_add_track">Nyomvonal hozzáadása</string>
+    <string name="gpx_no_tracks_title">Még nincsenek GPX fájljaid</string>
+    <string name="gpx_no_tracks_title_folder">Te is hozzáadhatsz GPX fájlokat a könyvtárhoz</string>
+    <string name="gpx_add_track">GPX fájl hozzáadása</string>
     <string name="gpx_appearance">Megjelenés</string>
     
     
@@ -2384,11 +2384,11 @@ Jelenleg csak {2} MB érhető el.</string>
     <string name="shared_string_recorded">Felvett</string>
     <string name="shared_string_record">Felvétel</string>
     <string name="save_track_min_speed">Rögzítési minimum sebesség</string>
-    <string name="save_track_min_speed_descr">Szűrő: A legkisebb sebesség megadása, aminél pontot fog rögzíteni.</string>
+    <string name="save_track_min_speed_descr">Szűrő: Ez alatti sebességnél nem rögzít pontot.</string>
     <string name="save_track_min_distance">Rögzítési minimális elmozdulás</string>
-    <string name="save_track_min_distance_descr">Szűrő: Az előző pozíciótól mért legkisebb távolság, ahol pontot fog rögzíteni.</string>
+    <string name="save_track_min_distance_descr">Szűrő: Az előző ponttól mért legkisebb távolság, aminél új pontot fog rögzíteni.</string>
     <string name="save_track_precision">Rögzítési minimum pontosság</string>
-    <string name="save_track_precision_descr">Szűrő: Minimális GPS-vételi pontosság, aminél pontot fog rögzíteni.</string>
+    <string name="save_track_precision_descr">Szűrő: Nem rögzít, amíg el nem éri ezt a vételi pontosságot.</string>
     <string name="christmas_poi">Karácsonyi POI</string>
     <string name="christmas_desc">A karácsonyra és újévi ünnepekre készülve bekapcsolhatod a karácsonyi POI-k megjelenítését: karácsonyfák, vásárok, stb.</string>
     <string name="christmas_desc_q">Megjeleníted a karácsonyi POI-kat?</string>
@@ -2513,7 +2513,7 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="navigate_point_olc_info_area">Érvényes teljes OLC
 Ábrázolt terület: %1$s x %2$s</string>
     <string name="quick_action_page_list_descr">A műveletgombra koppintás léptetni fogja az alábbi listát.</string>
-    <string name="select_gpx_folder">Nyomvonalkönyvtár kijelölése</string>
+    <string name="select_gpx_folder">GPX fájlok könyvtárának kijelölése</string>
     <string name="file_can_not_be_moved">A fájl nem helyezhető át.</string>
     <string name="shared_string_move">Áthelyezés</string>
     <string name="shared_string_gpx_tracks">Nyomvonalak</string>
@@ -2529,7 +2529,7 @@ Kérlek adj meg egy teljes kódot</string>
     
     
     <string name="routing_attr_height_obstacles_name">Magasságadatok használata</string>
-    <string name="routing_attr_height_obstacles_description">Terepmagasság használata SRTM, ASTER és EU-DEM domborzatmodellekből.</string>
+    <string name="routing_attr_height_obstacles_description">Terepmagasság figyelembe vétele (SRTM, ASTER és EU-DEM domborzatmodellekből).</string>
 
     <string name="rendering_attr_depthContours_description">Mélységvonalak és pontok megjelenítése.</string>
     <string name="rendering_attr_depthContours_name">Tengeri mélységvonalak</string>
@@ -2554,13 +2554,13 @@ Kérlek adj meg egy teljes kódot</string>
 \n • Sok egyéb apró fejlesztés és hibajavítás…</string>
 	<string name="auto_split_recording_title">Felvételek auto-vágása szünet után</string>
 	<string name="auto_split_recording_descr">Új szakasz kezdése 6 perc szünet után, új nyomvonal 2 óra szünet után, vagy új fájl hosszabb szünet után ha a dátum megváltozott.</string>
-    <string name="max_speed">Max sebesség</string>
+    <string name="max_speed">Maximum sebesség</string>
     <string name="average_speed">Átlagsebesség</string>
     <string name="shared_string_time_moving">Mozgásban töltött idő</string>
     <string name="shared_string_time_span">Időtartam</string>
     <string name="shared_string_max">Max</string>
-    <string name="shared_string_start_time">Kezdő idő</string>
-    <string name="shared_string_end_time">Befejező idő</string>
+    <string name="shared_string_start_time">Indulás</string>
+    <string name="shared_string_end_time">Érkezés</string>
     <string name="shared_string_color">Szín</string>
     <string name="routing_attr_relief_smoothness_factor_hills_name">Dombos</string>
     <string name="routing_attr_relief_smoothness_factor_plains_name">Kevésbé dombos</string>
@@ -2571,18 +2571,18 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="relief_smoothness_factor_descr">Előnyben részesített terep: sík vagy dombos.</string>
     <string name="shared_string_slope">Lejtő</string>
     <string name="add_new_folder">Új könyvtár létrehozása</string>
-    <string name="points_delete_multiple_succesful">Pont(ok) sikeresen törölve.</string>
+    <string name="points_delete_multiple_succesful">Pont(ok) törölve.</string>
     <string name="points_delete_multiple">%1$d pont törlésére készülsz. Biztosan vagy benne?</string>
     <string name="route_points_category_name">Érintendő fordulók az útvonalon</string>
-    <string name="track_points_category_name">Figyelemre méltó pontok az útvonalon</string>
+    <string name="track_points_category_name">Útpontok és érdekes, vagy elnevezett helyek</string>
     <string name="shared_string_gpx_track">Nyomvonal</string>
     <string name="lang_ber">berber</string>
     <string name="do_not_send_anonymous_app_usage">Ne küldjön anonim használati statisztikát</string>
     <string name="do_not_send_anonymous_app_usage_desc">Az OsmAnd adatokat gyűjt arról, hogy az alkalmazás melyik részeit nyitod meg. Az alkalmazás soha nem küldi el a helyadataidat, és az alkalmazásba bevitt adatokat, valamint az általad megnézett, keresett vagy letöltött területek adatait sem.</string>
     <string name="do_not_show_startup_messages">Ne mutasson üzeneteket indításkor</string>
-    <string name="do_not_show_startup_messages_desc">Kikapcsolja az alkalmazás árleszállításainak és a különleges helyi események üzeneteinek megjelenítését.</string>
+    <string name="do_not_show_startup_messages_desc">Ne mutassa az alkalmazás árleszállításainak és a különleges helyi események üzeneteit.</string>
     <string name="parking_options">Parkolási opciók</string>
-    <string name="full_version_thanks">Köszönjük, hogy megvásároltad az OsmAnd teljes verzióját!</string>
+    <string name="full_version_thanks">Köszönjük, hogy megvásároltad az OsmAnd fizetős verzióját.</string>
     <string name="routing_attr_relief_smoothness_factor_name">Magasság ingadozásának kijelölése</string>
     <string name="right_side_navigation">Jobb oldali közlekedés</string>
     <string name="driving_region_automatic">Automatikus</string>
@@ -2597,17 +2597,17 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="quick_action_replace_destination">Célpont lecserélése</string>
     <string name="quick_action_add_first_intermediate">Hozzáadás első köztes célpontként</string>
     <string name="quick_action_add_destination_desc">A műveletgombra koppintva a képernyő középpontját beállítja úti célként. A korábban beállított célpontból utolsó köztes célpont lesz.</string>
-    <string name="quick_action_replace_destination_desc">A műveletgombra koppintás lecseréli a célpontot a képernyő középpontjára.</string>
-    <string name="quick_action_add_first_intermediate_desc">A műveletgombra koppintás hozzáad egy első köztes célpontot a képernyő középpontján.</string>
+    <string name="quick_action_replace_destination_desc">"A műveletgombra koppintva a képernyő középpontját beállítja új úti célként, lecserélve  korábban kiválasztott célpontot (ha volt)."</string>
+    <string name="quick_action_add_first_intermediate_desc">A műveletgombra koppintva a képernyő középpontját beállítja első köztes célpontnak.</string>
     <string name="no_overlay">Nincs rátétréteg</string>
     <string name="no_underlay">Nincs alátétréteg</string>
     <string name="subscribe_email_error">Hiba</string>
     <string name="subscribe_email_desc">Iratkozz fel az alkalmazás akciókról szóló hírlevelünkre és kapsz további 3 térképletöltést!</string>
-    <string name="depth_contour_descr">Térképkészlet, amely tartalmazza a tengeri mélységvonalakat és tengi pontokat.</string>
-    <string name="sea_depth_thanks">Köszönjük, hogy megvásároltad a tengeri mélységvonalakat!</string>
+    <string name="depth_contour_descr">Tengeri mélységvonalak és hajózási jelzések.</string>
+    <string name="sea_depth_thanks">Köszönjük, hogy megvásároltad a tengeri mélységvonalakat</string>
     <string name="index_item_depth_contours_osmand_ext">Tengeri mélységvonalak</string>
-    <string name="index_item_depth_points_southern_hemisphere">Tengeri mélységpontok, déli félteke</string>
-    <string name="index_item_depth_points_northern_hemisphere">Tengeri mélységpontok, északi félteke</string>
+    <string name="index_item_depth_points_southern_hemisphere">Déli félteke, tengeri mélységpontok</string>
+    <string name="index_item_depth_points_northern_hemisphere">Északi félteke, tengeri mélységpontok</string>
     <string name="download_depth_countours">Tengeri mélységvonalak</string>
     <string name="nautical_maps">Hajózási térképek</string>
     <string name="analyze_on_map">Elemzés a térképen</string>
