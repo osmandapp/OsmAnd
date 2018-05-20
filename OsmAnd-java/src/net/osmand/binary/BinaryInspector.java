@@ -83,7 +83,7 @@ public class BinaryInspector {
 //					"-osm="+System.getProperty("maps.dir")+"/map_full_1.obf.osm",
 //					System.getProperty("maps.dir")+"/diff/Bulgaria_europe_01_00.obf"
 //					System.getProperty("maps.dir")+"/diff/Diff.obf"
-					System.getProperty("maps.dir")+"/Map.obf"
+					System.getProperty("maps.dir")+"/Andorra_europe.wiki.obf"
 			});
 		} else {
 			in.inspector(args);
@@ -1240,7 +1240,12 @@ public class BinaryInspector {
 							}
 						}
 
-						println(object.getType().getKeyName() + ": " + object.getSubType() + " " + object.getName() + " " + object.getLocation() + " osmid=" + (object.getId() >> 1) + " " + s);
+						long id = (object.getId() );
+						if(id > 0) {
+							id = id >> 1;
+						}
+						println(object.getType().getKeyName() + ": " + object.getSubType() + " " + object.getName() +
+								" " + object.getLocation() + " osmid=" + id + " " + s);
 						return false;
 					}
 

@@ -2,15 +2,16 @@ package net.osmand.plus.wikivoyage.data;
 
 public class WikivoyageSearchHistoryItem {
 
-	long cityId;
 	String articleTitle;
 	String lang;
 	String isPartOf;
 	long lastAccessed;
-
-	public long getCityId() {
-		return cityId;
+	
+	
+	public String getKey() {
+		return TravelLocalDataHelper.getHistoryKey(lang, articleTitle);
 	}
+
 
 	public String getArticleTitle() {
 		return articleTitle;
