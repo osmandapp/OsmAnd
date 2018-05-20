@@ -2976,16 +2976,16 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="wikivoyage_travel_guide_descr">Sprievodcovia Wikivoyage k najzaujímavejším miestam na planéte, priamo v OsmAnd bez pripojenia na Internet.</string>
     <string name="wikivoyage_travel_guide">Turistický sprievodca Wikivoyage</string>
     <string name="purchase_dialog_title">Vyberte si predplatné</string>
-    <string name="purchase_dialog_travel_description">Zakúpte si jednu z nasledujúcich položiek pre čítanie cestovných článkov offline:</string>
+    <string name="purchase_dialog_travel_description">Zakúpte si jednu z nasledujúcich položiek pre získanie cestovných článkov offline:</string>
     <string name="purchase_dialog_subtitle">Zvoľte vhodnú položku:</string>
     <string name="shared_string_dont">Neurobiť</string>
     <string name="shared_string_do">Urobiť</string>
     <string name="shared_string_only_with_wifi">Iba na Wi-Fi</string>
     <string name="wikivoyage_download_pics">Stiahnuť obrázky</string>
-    <string name="wikivoyage_download_pics_descr">Obrázky v článkoch môžu byť stihanuté pre použitie offline.
-\n Toto nastavenie môžete zmeniť v Preskúmať → Nastavenia.</string>
+    <string name="wikivoyage_download_pics_descr">Obrázky pre články môžu byť stiahnuté pre použitie offline. 
+\n Toto nastavenie môžete zmeniť v \"Preskúmať\" → \"Nastavenia\".</string>
     <string name="shared_string_wifi_only">Len na Wi-Fi</string>
-    <string name="select_travel_book">Zvoliť cestovnú knihu</string>
+    <string name="select_travel_book">Zvoľte cestovnú knihu</string>
     <string name="shared_string_travel_book">Cestovná kniha</string>
     <string name="download_images">Zobraziť obrázky</string>
     <string name="shared_string_read">Čítať</string>
@@ -3027,7 +3027,7 @@ Zodpovedá oblasti: %1$s x %2$s</string>
 	<string name="update_is_available">Je dostupná aktualizácia</string>
 	<string name="download_file">Stiahnuť súbor</string>
     <string name="start_editing_card_image_text">Voľný cestovný sprievodca po svete, ktorý môže upravovať každý.</string>
-    <string name="welcome_to_open_beta_description">Cestovanie je založené na Wikivoyage. Vyskúšajte všetky funkcie počas otvoreného betatestovania zadarmo. Potom bude Cestovanie dostupné predplatiteľom Neobmedzeného OsmAnd a používateľom OsmAnd+</string>
+    <string name="welcome_to_open_beta_description">Cestovní sprievodcovia sú založení na Wikivoyage. Vyskúšajte všetky funkcie počas otvoreného betatestovania zadarmo. Potom budú cestovní sprievodcovia dostupní predplatiteľom Neobmedzeného OsmAnd a používateľom OsmAnd+.</string>
     <string name="start_editing_card_description">Môžete upravovať články na Wikivoyage. Zdieľajte znalosti, skúsenosti, talent a vašu pozornosť</string>
     <string name="start_editing">Začať upravovať</string>
     <string name="welcome_to_open_beta">Vitajte v otvorenej beta verzii</string>
@@ -3054,4 +3054,7 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="wiki_article_search_text">Hľadá sa príslušný článok wiki</string>
     <string name="wiki_article_not_found">Článok sa nenašiel</string>
     <string name="how_to_open_wiki_title">Ako otvoriť články Wikipédie?</string>
-</resources>
+<string name="unirs_render_descr">Modifikácia štandardného štýlu pre väčší kontrast ciest pre chodcov a cyklistov. Používa staršie farby z Mapniku.</string>
+    <string name="access_intermediate_arrival_time">Čas príchodu k prechodnému bodu</string>
+    <string name="map_widget_intermediate_time">Prechodný čas</string>
+    </resources>
