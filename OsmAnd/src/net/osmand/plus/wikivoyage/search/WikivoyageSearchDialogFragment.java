@@ -116,7 +116,7 @@ public class WikivoyageSearchDialogFragment extends WikiBaseDialogFragment {
 					} else if (item instanceof WikivoyageSearchHistoryItem) {
 						WikivoyageSearchHistoryItem historyItem = (WikivoyageSearchHistoryItem) item;
 						WikivoyageArticleDialogFragment
-								.showInstance(app, fm, historyItem.getCityId(), historyItem.getLang());
+								.showInstance(app, fm, historyItem.getArticleTitle(), historyItem.getLang());
 					}
 				}
 			}
