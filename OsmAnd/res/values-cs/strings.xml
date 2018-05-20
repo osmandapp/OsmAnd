@@ -2010,7 +2010,7 @@ Délka %2$s</string>
  V úložišti je zapotřebí dočasně {3} MB a trvale {1} MB.
  Aktuálně je k dispozici pouze {2} MB.</string>
     <string name="upload_osm_note">Nahrát OSM poznámku</string>
-    <string name="upload_osm_note_description">Můžete nahrát OSM poznámku anonymně, nebo použitím svého účtu OpenStreetMap.org.</string>
+    <string name="upload_osm_note_description">Nahrajte OSM poznámku anonymně, nebo prostřednictvím svého účtu OpenStreetMap.org.</string>
     <string name="shared_string_move_up">Posunout ↑</string>
     <string name="shared_string_move_down">Posunout ↓</string>
     <string name="finish_navigation">Dokončit navigaci</string>
@@ -2129,7 +2129,7 @@ Délka %2$s</string>
     <string name="postcode">Poštovní směrovací číslo</string>
     <string name="search_categories">Kategorie</string>
     <string name="back_to_search">Zpět ke hledání</string>
-    <string name="confirmation_to_delete_history_items">Chcete odstranit vybrané položky z \'Historie\'?</string>
+    <string name="confirmation_to_delete_history_items">Odstranit vybrané položky z \'Historie\'?</string>
     <string name="show_something_on_map">Zobrazit %1$s na mapě</string>
     <string name="dist_away_from_my_location">Hledat do vzdálenosti %1$s</string>
     
@@ -2186,7 +2186,7 @@ Délka %2$s</string>
     <string name="osmand_plus_banner_desc">Neomezené stahování map, aktualizací a modul Wikipedie.</string>
     <string name="si_mi_meters">Míle/metry</string>
     <string name="lang_hsb">Hornolužická srbština</string>
-    <string name="gpx_no_tracks_title">Nemáte zatím žádné trasy</string>
+    <string name="gpx_no_tracks_title">Nemáte zatím žádné GPX soubory</string>
     <string name="gpx_no_tracks_title_folder">Můžete také přidat trasy do složky</string>
     <string name="gpx_add_track">Přidat trasu</string>
     <string name="gpx_appearance">Vzhled</string>
@@ -2206,9 +2206,9 @@ Délka %2$s</string>
     <string name="save_track_min_speed">Minimální rychlost pro záznam</string>
     <string name="save_track_min_speed_descr">Filtr: Nezaznamenávat body pod touto rychlostí.</string>
     <string name="save_track_min_distance">Minimální změna polohy pro záznam</string>
-    <string name="save_track_min_distance_descr">Filtr: Nastavte minimální vzdálenost bodu pro záznam nového.</string>
+    <string name="save_track_min_distance_descr">Filtr: Nastavte minimální vzdálenost od bodu pro záznam nového.</string>
     <string name="save_track_precision">Minimální přesnost záznamu</string>
-    <string name="save_track_precision_descr">Filtr: Nezaznamenávat dokud není dosažena tato přesnost.</string>
+    <string name="save_track_precision_descr">Filtr: Nezaznamenávat, dokud není dosažena tato přesnost.</string>
     <string name="christmas_poi">Vánoční POI</string>
     <string name="christmas_desc">Před Vánoci a Novým rokem můžete zobrazit POI spojené s Vánoci: vánoční stromky, trhy atd.</string>
     <string name="christmas_desc_q">Zobrazit vánoční POI?</string>
