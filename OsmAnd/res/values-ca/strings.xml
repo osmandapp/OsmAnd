@@ -2325,18 +2325,18 @@ L\'espai disponible és només de {2} MB.</string>
     <string name="quick_action_add_marker_descr">Prement aquest botó d\'acció s\'afegeix un marcador de mapa a la posició central de la pantalla.</string>
     <string name="quick_action_add_gpx_descr">Prement aquest botó d\'acció s\'afegirà, al centre de la pantalla, una fita GPX.</string>
     <string name="quick_action_take_audio_note_descr">Prement aquest botó d\'acció afegiu una nota d\'àudio en el centre de la pantalla.</string>
-    <string name="quick_action_take_video_note_descr">"Prement aquest botó d\'acció  afegiu una nota de vídeo en el centre de la pantalla."</string>
-    <string name="quick_action_take_photo_note_descr">Si premeu el botó de l\'acció s\'afegirà una nota fotogràfica a la posició del centre de la pantalla.</string>
-    <string name="quick_action_add_osm_bug_descr">Si premeu aquest botó d\'acció s\'afegirà una nota OSM al centre de la pantalla.</string>
-    <string name="quick_action_add_poi_descr">Si premeu aquest botó d\'acció s\'afegirà un PDI al centre de la pantalla.</string>
-    <string name="quick_action_navigation_voice_descr">Si premeu aquest botó d\'acció s\'activarà o es desactivarà la veu d\'orientació durant la navegació.</string>
-    <string name="quick_action_add_parking_descr">Si premeu aquest botó d\'acció s\'afegirà un posició d\'aparcament al centre de la pantalla.</string>
+    <string name="quick_action_take_video_note_descr">Prement aquest botó d\'acció afegiu una nota de vídeo en el centre de la pantalla.</string>
+    <string name="quick_action_take_photo_note_descr">Prement el botó d\'acció s\'afegeix una nota fotogràfica en el centre de la pantalla.</string>
+    <string name="quick_action_add_osm_bug_descr">Prement aquest botó d\'acció afegiu una nota OSM al centre de la pantalla.</string>
+    <string name="quick_action_add_poi_descr">Prement aquest botó d\'acció afegiu un PDI al centre de la pantalla.</string>
+    <string name="quick_action_navigation_voice_descr">Prement aquest botó d\'acció activeu o desactiveu la orientació de veu durant la navegació.</string>
+    <string name="quick_action_add_parking_descr">Prement aquest botó d\'acció afegiu una posició d\'aparcament al centre de la pantalla.</string>
     <string name="favorite_autofill_toast_text">" s\'ha desat a "</string>
     <string name="favorite_empty_place_name">Lloc</string>
     <string name="quick_action_duplicates">El nom d\'acció directa indicat ja s\'està utilitzant, s\'ha canviat pel de %1$s per evitar duplicats.</string>
     <string name="quick_action_duplicate">El nom de l\'acció directa està duplicat</string>
-    <string name="quick_action_showhide_favorites_descr">Si premeu aquest botó d\'acció es mostraran o s\'amagaran els punts preferits en el mapa.</string>
-    <string name="quick_action_showhide_poi_descr">Si premeu aquest botó d\'acció es mostraran o s\'amagaran els PDIs en el mapa.</string>
+    <string name="quick_action_showhide_favorites_descr">Prement aquest botó d\'acció es mostra o s\'amaga els punts preferits en el mapa.</string>
+    <string name="quick_action_showhide_poi_descr">Prement aquest botó d\'acció mostreu o amagueu els PDIs en el mapa.</string>
     <string name="quick_action_showhide_favorites_title">Mostra/amaga preferits</string>
     <string name="quick_action_favorites_show">Mostra preferits</string>
     <string name="quick_action_favorites_hide">Amaga preferits</string>
@@ -2347,15 +2347,15 @@ L\'espai disponible és només de {2} MB.</string>
     <string name="quick_action_add_create_items">Crea elements</string>
     <string name="quick_action_add_configure_map">Configura el mapa</string>
     <string name="quick_action_add_navigation">Navegació</string>
-    <string name="quick_action_fav_name_descr">Deixeu-lo buit per omplir automàticament amb l\'adreça o el nom d\'un lloc.</string>
-    <string name="quick_action_bug_descr">Aquest missatge serà auto-completat en el camp de comentaris.</string>
+    <string name="quick_action_fav_name_descr">Deixeu-lo buit per utilitzar l\'adreça o el nom d\'un lloc.</string>
+    <string name="quick_action_bug_descr">Aquest missatge està inclòs en el camp de comentaris.</string>
     <string name="quick_action_bug_message">Missatge</string>
     <string name="quick_action_category_descr">Seleccioneu una categoria on desar-hi el preferit.</string>
     <string name="quick_action_gpx_category_descr">Seleccioneu una categoria opcional.</string>
     <string name="quick_action_poi_list">Llista de PDI</string>
     
     <string name="quick_action_map_style_action">Afegiu un estil de mapa</string>
-    <string name="quick_action_empty_param_error">Els paràmetres no haurien d\'estar buits</string>
+    <string name="quick_action_empty_param_error">Ompliu tots els paràmetres</string>
     <string name="quick_action_map_styles">Estils de mapa</string>
     <string name="quick_action_map_overlay">Modifica la superposició del mapa</string>
     <string name="quick_action_map_overlay_title">Superposicions de mapa</string>
@@ -2370,7 +2370,7 @@ L\'espai disponible és només de {2} MB.</string>
     <string name="quick_action_btn_tutorial_title">Modifica la posició del botó</string>
     <string name="quick_action_btn_tutorial_descr">Si premeu i arrossegueu alhora, el botó canvia la seva posició a la pantalla.</string>
 <string name="quick_action_interim_dialog">Mostra un diàleg provisional</string>
-    <string name="quick_action_sh_poi_descr">Podeu afegir una o més categories de PDI per mostrar-les al mapa.</string>
+    <string name="quick_action_sh_poi_descr">Afegiu una o més categories de PDI per mostrar-les al mapa.</string>
     <string name="shared_string_action_name">Nom de l\'acció</string>
 <string name="quick_action_map_overlay_switch">La superposició del mapa s\'ha canviat a \"%s\".</string>
     <string name="quick_action_map_underlay_switch">El fons del mapa s\'ha canviat a \"%s\".</string>
@@ -2381,7 +2381,7 @@ L\'espai disponible és només de {2} MB.</string>
 Proporcioneu el codi complet</string>
     <string name="navigate_point_olc_info_area">OLC complet vàlid 
 Abasta l\'àrea: %1$s x %2$s</string>
-    <string name="quick_action_page_list_descr">Prement aquest botó d\'acció es mostra la pàgina següent seguint la llista.</string>
+    <string name="quick_action_page_list_descr">Prement aquest botó d\'acció pagineu per la llista que segueix.</string>
     <string name="auto_split_recording_title">Divisió automàtica de les gravacions un cop aturades</string>
 	<string name="auto_split_recording_descr">Comença un nou segment desprès de 6 min d\'interrupció, una traça nova si es superen les 2 hores o un nou fitxer si encara dura més i ha canviat la data.</string>
     <string name="release_2_6">\\u2022 Nova opció: botó d\'acció ràpida 
@@ -2725,14 +2725,14 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="choose_navigation_type">Escolliu el perfil de navegació</string>
     <string name="add_route_points">Afegeix punts de la ruta</string>
     <string name="add_line">Afegeix una línia</string>
-    <string name="empty_state_my_tracks">Afegiu i enregistreu traces</string>
-    <string name="empty_state_my_tracks_desc">Enregistra o importa traces per veure.</string>
+    <string name="empty_state_my_tracks">Afegiu fitxers GPX</string>
+    <string name="empty_state_my_tracks_desc">Importeu fitxers GPX o enregistreu traces.</string>
     <string name="empty_state_favourites">Afegiu als preferits</string>
-    <string name="empty_state_favourites_desc">Afegiu preferits al mapa o importeu-los.</string>
-    <string name="import_track">Importa traça</string>
+    <string name="empty_state_favourites_desc">Importeu preferits o afegiu-los al mapa marcant-los.</string>
+    <string name="import_track">Importa fitxer GPX</string>
     <string name="import_track_desc">El fitxer %1$s no conté fites, voleu importar-lo com una traça?</string>
     <string name="move_point">Mou punt</string>
-    <string name="add_segment_to_the_track">Afegeix a una traça GPX</string>
+    <string name="add_segment_to_the_track">Afegeix a un fitxer GPX</string>
 <string name="keep_showing_on_map">Continua mostrant al mapa</string>
     <string name="exit_without_saving">Voleu sortir sense desar?</string>
     <string name="do_not_use_animations">Sense animacions</string>
@@ -2899,7 +2899,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="rendering_attr_hidePOILabels_name">Etiquetes PDI</string>
     <string name="day_off_label">tancat</string>
     <string name="winter_and_ski_renderer">Hivern i esquí</string>
-    <string name="touring_view_renderer">Visualització de moviment (contrast i detalls)</string>
+    <string name="touring_view_renderer">Vista turística</string>
     <string name="nautical_renderer">Nàutica</string>
     <string name="copy_location_name">Còpia Punt/PDI nom</string>
     <string name="toast_empty_name_error">Ubicació sense nom</string>
