@@ -496,7 +496,7 @@
     <string name="save_track_interval_descr">Wybiera tempo rejestrowania śladów podczas nawigacji.</string>
     <string name="save_track_interval">Częstość rejestrowania podczas nawigacji</string>
 
-    <string name="save_track_to_gpx_descrp">Ślad GPX zostanie automatycznie zapisany do katalogu śladów podczas nawigacji.</string>
+    <string name="save_track_to_gpx_descrp">Zapisuje automatycznie ślad GPX do katalogu śladów podczas nawigowania.</string>
     <string name="save_track_to_gpx">Automatyczne rejestrowanie śladu podczas nawigacji</string>
     <string name="update_tile">Uaktualnij mapę</string>
     <string name="reload_tile">Wczytaj ponownie kafelki</string>
@@ -839,7 +839,7 @@
     <string name="osmand_parking_position_description_add_time">Zaparkowano samochód o</string>
     <string name="use_compass_navigation_descr">Użyj kompasu, gdy nie zostanie wykryty kierunek.</string>
     <string name="use_compass_navigation">Użyj kompasu</string>
-    <string name="route_updated_loc_found">Trasa zostanie wyznaczona po określeniu aktualnego położenia</string>
+    <string name="route_updated_loc_found">Oczekiwanie na aktualne położenie w celu wyznaczenia trasy</string>
     <string name="continue_follow_previous_route_auto">Poprzednia trasa nie została ukończona. Kontynuować ją? (%1$s sekund)</string>
 
 
@@ -1294,7 +1294,7 @@
     <string name="routing_attr_avoid_motorway_name">Omijanie autostrad</string>
     <string name="routing_attr_avoid_motorway_description">Omijaj autostrady</string>
     <string name="routing_attr_weight_name">Ograniczenie wagi</string>
-    <string name="routing_attr_weight_description">Określa maksymalną, dozwoloną masę pojazdu.</string>
+    <string name="routing_attr_weight_description">Określa maksymalny, dozwolony ciężar pojazdu.</string>
     <string name="select_gpx">Wybierz ślad GPX…</string>
     <string name="route_descr_select_destination">Wybierz cel trasy</string>
     <string name="shared_string_select_on_map">Wskaż na mapie</string>
@@ -1358,7 +1358,7 @@
     <string name="index_item_nation_addresses">Adresy krajowe</string>
     <string name="index_item_world_basemap">Podstawowa mapa świata</string>
     <string name="index_item_world_ski">Światowa mapa tras narciarskich</string>
-    <string name="interrupt_music_descr">Całkowicie wstrzymuje odtwarzanie muzyki podczas komunikatów (nie tylko ją przycisza).</string>
+    <string name="interrupt_music_descr">Całkowicie wstrzymuje odtwarzanie muzyki (nie tylko ją przycisza) podczas komunikatów.</string>
     <string name="interrupt_music">Przerywanie muzyki</string>
     <string name="always_center_position_on_map">Zawsze wyśrodkowane położenie</string>
     <string name="voice_pref_title">Głos</string>
@@ -1503,7 +1503,7 @@
     <string name="show_zoom_buttons_navigation">Przyciski zbliżania</string>
     <string name="sort_by_distance">Sortuj wg odległości</string>
     <string name="sort_by_name">Sortuj wg nazwy</string>
-    <string name="none_selected_gpx">Nie wybrano żadnego pliku GPX. Aby wybrać przytrzymaj nacisk na dostępnej ścieżce.</string>
+    <string name="none_selected_gpx">Nie wybrano żadnego pliku GPX. Proszę zaznaczyć plik naciskając i przytrzymując element.</string>
 
     <string name="local_index_select_gpx_file">Wybierz aby wyświetlić</string>
     
@@ -1861,7 +1861,7 @@ Długość %2$s</string>
     <string name="archive_wikipedia_data">Posiadasz stare niezgodne dane Wikipedii. Zarchiwizować je?</string>
     <string name="download_wikipedia_files">Pobrać dodatkowe dane Wikipedii (%1$s MB)?</string>
     <string name="gps_network_not_enabled">Usługa lokalizacji nie jest włączona. Włączyć ją?</string>
-    <string name="disable_recording_once_app_killed_descrp">Po zakończeniu działania aplikacji wstrzymuje rejestrowanie śladu (ikona działania w tle znika z paska powiadomień)</string>
+    <string name="disable_recording_once_app_killed_descrp">Wstrzymuje rejestrowanie śladu po zakończeniu działania aplikacji. (Ikona działania w tle znika z paska powiadomień.)</string>
     <string name="shared_string_import2osmand">Import do OsmAnd</string>
     <string name="read_full_article">Czytaj cały artykuł (online)</string>
     <string name="shared_string_wikipedia">Wikipedia</string>
@@ -2156,7 +2156,7 @@ Długość %2$s</string>
     <string name="updates_size">Rozmiar aktualizacji</string>
     <string name="last_map_change">Ostatnia zmiana mapy: %s</string>
     <string name="rec_split_clip_length">Długość nagrania</string>
-    <string name="shared_string_not_selected">Nie wybrany</string>
+    <string name="shared_string_not_selected">Nie wybrano</string>
 <string name="item_removed">Usunięto element</string>
     <string name="n_items_removed">pozycji usuniętych</string>
     <string name="shared_string_undo_all">Cofnij wszystko</string>
@@ -2414,13 +2414,13 @@ Długość %2$s</string>
     <string name="rendering_attr_contourColorScheme_name">Zestaw kolorów poziomic</string>
     <string name="rendering_attr_surfaceIntegrity_name">Spójność nawierzchni dróg</string>
     <string name="christmas_poi">Bożonarodzeniowe miejsca</string>
-    <string name="save_track_min_speed_descr">Filtr: Brak rejestrowania punktów poniżej tej prędkości.</string>
+    <string name="save_track_min_speed_descr">Filtr: nie rejestruje punktów przed osiągnięciem określonej prędkości.</string>
     <string name="rendering_attr_contourColorScheme_description">Zestaw kolorów poziomic</string>
-    <string name="save_track_min_speed">Minimalna prędkość rejestrowania</string>
-    <string name="save_track_min_distance">Filtr: minimalna zmiana położenia, aby zarejestrować punkt</string>
-    <string name="save_track_min_distance_descr">Filtr: ustaw minimalną odległość od poprzedniego punktu do rejestracji.</string>
-    <string name="save_track_precision">Minimalna dokładność rejestrowania</string>
-    <string name="save_track_precision_descr">Filtr: Brak rejestrowania, jeśli ta dokładność nie została osiągnięta.</string>
+    <string name="save_track_min_speed">Najmniejsza rejestrowana prędkość</string>
+    <string name="save_track_min_distance">Najmniejsza zmiana położenia</string>
+    <string name="save_track_min_distance_descr">Filtr: ustala minimalną odległość od poprzedniego punktu do nowo rejestrowanego.</string>
+    <string name="save_track_precision">Najmniejsza dokładność rejestrowania</string>
+    <string name="save_track_precision_descr">Filtr: nie rejestruje, jeśli określona dokładność nie została osiągnięta.</string>
     <string name="christmas_desc">Oczekując Świąt Bożego Narodzenia i Nowego Roku, możesz włączyć wyświetlanie użytecznych miejsc związanych ze Świętami: choinki, jarmarki, itp.</string>
     <string name="christmas_desc_q">Wyświetlać świąteczne miejsca?</string>
     <string name="shared_string_continue">Kontynuuj</string>
@@ -2442,8 +2442,8 @@ Długość %2$s</string>
 \n • mnóstwo innych ulepszeń i poprawek błędów 
 \n 
 \n i więcej…</string>
-    <string name="trip_rec_notification_settings">Aktywuj szybkie rejestrowanie</string>
-    <string name="trip_rec_notification_settings_desc">Wyświetl powiadomienie systemowe z opcję rozpoczęcia rejestrowania śladu.</string>
+    <string name="trip_rec_notification_settings">Szybkie rozpoczęcie rejestrowania</string>
+    <string name="trip_rec_notification_settings_desc">Wyświetla powiadomienie systemowe umożliwiające rozpoczęcia rejestrowania śladu.</string>
     <string name="shared_string_notifications">Powiadomienia</string>
     
     
@@ -2467,9 +2467,9 @@ Długość %2$s</string>
     <string name="lang_zh_hk">Chiński (Hongkong)</string>
     <string name="rendering_attr_contourDensity_description">Gęstość poziomic</string>
     <string name="rendering_attr_contourDensity_name">Gęstość poziomic</string>
-    <string name="rendering_value_high_name">Wysoka</string>
+    <string name="rendering_value_high_name">Duża</string>
     <string name="rendering_value_medium_w_name">Średnia</string>
-    <string name="rendering_value_low_name">Niska</string>
+    <string name="rendering_value_low_name">Mała</string>
     <string name="rendering_attr_contourWidth_description">Szerokość poziomic</string>
     <string name="rendering_attr_contourWidth_name">Szerokość poziomic</string>
     <string name="rendering_attr_hideWaterPolygons_description">Woda</string>
@@ -2785,7 +2785,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
 \n • Dodawaj Użyteczne Miejsca (POI) i przesyłaj je bezpośrednio do OSM (lub później, jeśli jesteś offline)
 \n</string>
     <string name="live_monitoring_max_interval_to_send">Bufor czasowy do śledzenia online</string>
-    <string name="live_monitoring_max_interval_to_send_desrc">Określ bufor czasu, który umożliwia przechowywanie lokalizacji bez połączenia</string>
+    <string name="live_monitoring_max_interval_to_send_desrc">Określa czas przechowywania wysyłanych położeń bez połączenia</string>
     <string name="mappilary_no_internet_desc">Potrzebujesz połączenia z Internetem, aby oglądać zdjęcia z Mapillary.</string>
     <string name="add_waypoint">Dodaj punkt orientacyjny</string>
     <string name="save_gpx_waypoint">Zapisz punkt orientacyjny GPX</string>
@@ -3043,7 +3043,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="shared_string_dont">Nie</string>
     <string name="shared_string_do">Tak</string>
     <string name="shared_string_only_with_wifi">Tylko przez Wi-Fi</string>
-    <string name="wikivoyage_download_pics">Pobierz zdjęcia</string>
+    <string name="wikivoyage_download_pics">Pobierz obrazy</string>
     <string name="wikivoyage_download_pics_descr">Obrazy z artykułów mogą być pobrane w celu użycia w trybie offline.
 \nMożesz zawsze zmienić ustawienia w \"Przeglądaj\" → \"Opcje\".</string>
     <string name="shared_string_wifi_only">Tylko przez Wi-Fi</string>
@@ -3074,7 +3074,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="paid_app">Aplikacja płatna</string>
     <string name="paid_plugin">Wtyczka płatna</string>
     <string name="travel_card_update_descr">Dostępne są nowe dane Wikipodróży. Proszę je uaktualnić, aby z nich korzystać.</string>
-	<string name="travel_card_download_descr">Pobierz te przewodniki podróży Wikipodróże, aby wyświetlić artykuły o miejscach na całym świecie bez połączenia z Internetem.</string>
+	<string name="travel_card_download_descr">Proszę pobrać przewodniki Wikipodróży, aby wyświetlić artykuły o miejscach na całym świecie bez połączenia z Internetem.</string>
 	<string name="update_is_available">Dostępne uaktualnienie</string>
 	<string name="download_file">Pobierz plik</string>
     <string name="start_editing_card_image_text">Bezpłatny przewodnik po świecie, który każdy może edytować.</string>
@@ -3160,4 +3160,14 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="import_file">Zapisz plik</string>
 	<string name="access_intermediate_arrival_time">Czas przybycia do punktu pośredniego</string>
     <string name="map_widget_intermediate_time">Czas pośredni</string>
+    <string name="unirs_render_descr">Modyfikacja standardowego stylu zapewniająca większy kontrast dróg pieszych i rowerowych. Używa przestarzałych kolorów stylu „Mapnik”.</string>
+    <string name="off_road_render_descr">Styl odpowiedni do przejazdów terenowych. Nadaje się do użycia z podkładami o barwie zielonej. Kluczowe cechy: zmniejszona szerokość głównych dróg, zwiększona szerokość dróg leśnych i polnych, ścieżek, dróg rowerowych i innych. Stworzona na podstawie stylu „Topo”.</string>
+    <string name="nautical_render_descr">Styl nawigacji morskiej. Kluczowe cechy: boje, latarnie morskie, drogi rzeczne, drogi morskie, porty, obiekty żeglugi, izobaty.</string>
+    <string name="ski_map_render_descr">Styl narciarski. Kluczowe cechy: renderuje w dogodny sposób trasy narciarskie, wyciągi i inne obiekty narciarskie. Mniej rozpraszające drugoplanowe obiekty mapy.</string>
+    <string name="light_rs_render_descr">Uproszczony styl dla nawigacji samochodowej o dużym kontraście. Nie męczy oczu w trybie nocnym. Kluczowe cechy: poziomice, kontrastujące drogi w kolorze pomarańczowym, mniej rozpraszające drugoplanowe obiekty mapy.</string>
+    <string name="topo_render_descr">Styl o dużym kontraście zaprojektowany pierwotnie do wędrówek górskich, wędrówek i jazdy na rowerze poza obszarami miejskimi. Zapewnia dobrą czytelność przy dużym oświetleniu zewnętrznym. Kluczowe cechy: kontrastujące drogi i obiekty naturalne, różne rodzaje tras, poziomice z zaawansowanymi ustawieniami wyświetlania, więcej szczegółów przy odpowiadających stopniach przybliżenia niż w stylu domyślnym. Opcja spójności nawierzchni umożliwia różnicowanie jakości nawierzchni drogi. Brak trybu nocnego.</string>
+    <string name="mapnik_render_descr">Stary domyślny styl renderowania wzorowany na stylu „Mapnik”. Kluczowe cechy: kolory podobne do użytych w stylu „Mapnik”.</string>
+    <string name="touring_view_render_descr">"Styl o dużej ilości szczegółów, przeznaczony do podróżowania. Zawiera wszystkie opcje konfiguracyjne domyślnego stylu i dodatkowo wyświetla możliwie dużo szczegółów, a zwłaszcza wszystkie drogi, ścieżki i inne obiekty związane z podróżowaniem. Odróżnia wizualnie różne rodzaje dróg,  przypominając w tym wiele atlasów podróżniczych. Zapewnia duży kontrast podczas używania na zewnątrz budynków oraz tryb dzienny i nocny."</string>
+    <string name="default_render_descr">Styl ogólnego przeznaczenia. Zapewnia uproszczone renderowanie w gęsto zaludnionych miastach. Kluczowe cechy: poziomice, drogi, jakość nawierzchni, ograniczenia dostępu, oznaczenia dróg, renderowanie ścieżek z uwzględnieniem klasyfikacji trudności, obiekty sportów spływowych.</string>
+    <string name="contour_lines_hillshade_maps">Poziomice i cieniowanie rzeźby terenu</string>
     </resources>
