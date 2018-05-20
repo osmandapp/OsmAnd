@@ -513,7 +513,7 @@
 	<string name="poi_leisure_fishing">Logu pro piscare</string>
 	<string name="poi_miniature_golf">Mini golf</string>
 	<string name="poi_biergarten">Giardinu de sa birra (Biergarten)</string>
-	<string name="poi_fast_food">Fast food</string>
+	<string name="poi_fast_food">Màndigu lestru</string>
 	<string name="poi_craft_caterer">Servìtziu de ristorazione</string>
 	<string name="poi_craft_rigger">Atrezadura pro barcas a vela</string>
 	<string name="poi_craft_roofer">Fraigadura e acontzamentu de cobertas</string>
@@ -1481,7 +1481,7 @@
 
 	<string name="poi_route_railway_ref">Àndala ferroviària</string>
 
-	<string name="poi_wiki_link">Wiki</string>
+	<string name="poi_wiki_link">Wikipedia</string>
 
 
 <string name="poi_traffic_calming_island">Ìsula iscrobatràfficu</string>
@@ -3079,4 +3079,252 @@
 	<string name="poi_glacier_ele_bottom">Puntu prus bassu</string>
 	<string name="poi_glacier_slope">Pendèntzia mèdia</string>
 
-</resources>
+<string name="poi_checkpoint_type">Casta de puntu de controllu</string>
+
+<string name="poi_fire_hydrant_count">Nùmeru de idrantes</string>
+	<string name="poi_fire_hydrant_flow_capacity">Capatzidade de flussu de s\'idrante</string>
+	<string name="poi_fire_hydrant_position_green">In s\'erba</string>
+	<string name="poi_fire_hydrant_position_lane">In s\'istrada</string>
+	<string name="poi_fire_hydrant_position_parking_lot">In unu parchègiu</string>
+	<string name="poi_fire_hydrant_position_street">In s\'istrada</string>
+	<string name="poi_fire_hydrant_position_underground">Suta terra</string>
+	<string name="poi_fire_hydrant_style_wsh">Istile de s\'idrante: wsh</string>
+	<string name="poi_fire_hydrant_style_water_source_main">Printzipale</string>
+	<string name="poi_fire_hydrant_style_water_source_pond">Poju</string>
+	<string name="poi_fire_hydrant_style_water_source_stream">Trainu</string>
+	<string name="poi_fire_hydrant_style_water_source_cistern">Tzisterna</string>
+	<string name="poi_in_service_yes">In servìtziu: eja</string>
+
+	<string name="poi_street_cabinet_power">Casta de cabina: eletritzidade</string>
+	<string name="poi_street_cabinet_telecom">Casta de cabina: telecomunicatziones</string>
+	<string name="poi_street_cabinet_cable_tv">Casta de cabina: tv bia cavu</string>
+	<string name="poi_street_cabinet_gas">Casta de cabina: gas</string>
+	<string name="poi_street_cabinet_postal_service">Casta de cabina: servìtziu postale</string>
+	<string name="poi_street_cabinet_waste">Casta de cabina: arga</string>
+	<string name="poi_street_cabinet_water_management">Casta de cabina: gestione de s\'abba</string>
+	<string name="poi_street_cabinet_street_lighting">Casta de cabina: illuminatzione pùblica</string>
+
+	<string name="poi_military_checkpoint">Puntu de controllu militare</string>
+
+	<string name="poi_bicycle_parking_lockers">Armàrios</string>
+	<string name="poi_bicycle_parking_tree">Àrbore de bitzicletas</string>
+	<string name="poi_bicycle_parking_streetpod">Pod pro bitzicletas (streetpod)</string>
+
+	<string name="poi_depth">Profundidade</string>
+
+	<string name="poi_salt_yes">Sale</string>
+	<string name="poi_salt_no">Sale: nono</string>
+	<string name="poi_wheelchair_designated">Designadu</string>
+	<string name="poi_spoil_heap">Muntone de bascaràmmene</string>
+	
+	<string name="poi_summer_camp">Campu istiale</string>
+	<string name="poi_recreation_center">Tzentru ricreativu</string>
+
+	<string name="poi_crossing_activation_automatic">Ativatzione de su coladòrgiu: automàtica</string>
+	<string name="poi_crossing_activation_local">Ativatzione de su coladòrgiu: locale</string>
+	<string name="poi_crossing_activation_remote">Ativatzione de su coladòrgiu: remota</string>
+	<string name="poi_crossing_barrier_no">Barriera de coladòrgiu: nono</string>
+	<string name="poi_crossing_barrier_yes">Barriera de coladòrgiu</string>
+	<string name="poi_crossing_barrier_full">Barriera de coladòrgiu: intrea</string>
+	<string name="poi_crossing_barrier_half">Barriera de coladòrgiu: metade</string>
+	<string name="poi_crossing_barrier_double_half">Barriera de coladòrgiu: metade dòpia</string>
+	<string name="poi_crossing_bell_yes">Campana de coladòrgiu</string>
+	<string name="poi_crossing_bell_no">Campana de coladòrgiu: nono</string>
+	<string name="poi_crossing_light_yes">Lughe de coladòrgiu</string>
+	<string name="poi_crossing_light_no">Lughe de coladòrgiu: nono</string>
+	<string name="poi_crossing_on_demand_yes">Coladòrgiu a segus de rechesta</string>
+	<string name="poi_crossing_on_demand_no">Coladòrgiu a segus de rechesta: nono</string>
+	<string name="poi_crossing_saltire_yes">Sinnale de coladòrgiu a livellu</string>
+	<string name="poi_crossing_saltire_no">Sinnale de coladòrgiu a livellu: nono</string>
+	<string name="poi_crossing_supervision_yes">Coladòrgiu controlladu</string>
+	<string name="poi_crossing_supervision_no">Coladòrgiu controlladu: nono</string>
+	<string name="poi_crossing_supervision_attendant">Coladòrgiu controlladu: guardianu</string>
+	<string name="poi_crossing_supervision_camera">Coladòrgiu controlladu: videocàmera</string>
+
+	<string name="poi_dispensing_yes">Eja</string>
+	<string name="poi_dispensing_no">Intregatzione: nono</string>
+
+	<string name="poi_aerodrome_type_international">Internatzionale</string>
+	<string name="poi_aerodrome_type_regional">Regionale</string>
+	<string name="poi_aerodrome_type_public">Pùblicu</string>
+	<string name="poi_aerodrome_type_military">Militare</string>
+	<string name="poi_aerodrome_type_military_public">Militare/pùblicu</string>
+	<string name="poi_aerodrome_type_private">Privadu</string>
+
+	<string name="poi_valley_balka">Balka</string>
+
+	<string name="poi_ventilation_shaft">Putzu de ventilatzione</string>
+
+	<string name="poi_pump_type_beam_pump">Casta de pompa: pompa a trae</string>
+	<string name="poi_pump_type_india_mk_2_3">Casta de pompa: India Mk II o III&gt;</string>
+	<string name="poi_pump_type_gravity">Casta de pompa: a gravidade</string>
+	<string name="poi_pump_style_modern">Casta de pompa: moderna</string>
+	<string name="poi_pump_style_historic">Casta de pompa: istòrica</string>
+	<string name="poi_pump_status_ok">Istadu de sa pompa: bonu</string>
+	<string name="poi_pump_status_broken">Istadu de sa pompa: truncada</string>
+	<string name="poi_pump_status_locked">Istadu de sa pompa: blocada</string>
+
+	<string name="poi_payment_troika_yes">Troika</string>
+	<string name="poi_payment_troika_no">No atzetat cartas Troika</string>
+
+	<string name="poi_telescope">Telescòpiu</string>
+	<string name="poi_telescope_type_optical">Òticu</string>
+	<string name="poi_telescope_type_radio">Ràdiu</string>
+	<string name="poi_telescope_type_gamma">Gamma</string>
+	<string name="poi_telescope_diameter">Diàmetru</string>
+	<string name="poi_telescope_spectrum">Ispètru</string>
+	<string name="poi_telescope_usage_education">Impreu: educatzione</string>
+	<string name="poi_telescope_usage_espionage">Impreu: ispionàgiu</string>
+	<string name="poi_telescope_usage_research">Impreu: chirca</string>
+
+	<string name="poi_observatory_type_espionage">Impreu: ispionàgiu</string>
+	<string name="poi_observatory_type_meteorological">Meteorològicu</string>
+	<string name="poi_observatory_type_gravitational">Gravitatzionale</string>
+
+	<string name="poi_greenhouse_horticulture">Orticultura in serra</string>
+
+	<string name="poi_voltage">Voltàgiu</string>
+	<string name="poi_generator_output_electricity">Potèntzia de essida</string>
+	<string name="poi_generator_output_electricity_yes">Essida: eletritzidade</string>
+	<string name="poi_generator_output_hot_water">Potèntzia de essida de s\'abba caente</string>
+	<string name="poi_generator_output_hot_water_yes">Essida: abba caente</string>
+	<string name="poi_generator_output_steam_yes">Essida: vapore</string>
+	<string name="poi_generator_output_hot_air_yes">Essida: àera caente</string>
+	<string name="poi_generator_output_cold_water_yes">Essida: abba frita</string>
+	<string name="poi_generator_output_compressed_air">Potèntzia de essida de s\'àera cumpressa</string>
+	<string name="poi_generator_output_compressed_air_yes">Essida: àera cumpressa</string>
+	<string name="poi_generator_output_vacuum_yes">Essida: bòidu</string>
+	<string name="poi_generator_output_biogas">Potèntzia de essida de su biogas</string>
+	<string name="poi_generator_output_biogas_yes">Essida: biogas</string>
+
+	<string name="poi_pumping_station">Istatzione de pompàgiu</string>
+
+	<string name="poi_display_yes">Ischermu: eja</string>
+	<string name="poi_display_no">Ischermu: nono</string>
+	<string name="poi_display_analog_yes">Ischermu analògicu</string>
+	<string name="poi_display_digital_yes">Ischermu digitale</string>
+	<string name="poi_display_sundial_yes">Meridiana</string>
+
+	<string name="poi_barometer_yes">Baròmetru</string>
+	<string name="poi_barometer_no">Baròmetru: nono</string>
+	<string name="poi_thermometer_yes">Termòmetru</string>
+	<string name="poi_thermometer_no">Termòmetru: nono</string>
+	<string name="poi_hygrometer_yes">Igròmetru</string>
+	<string name="poi_hygrometer_no">Igròmetru: nono</string>
+	<string name="poi_date_yes">Data ammustrada</string>
+	<string name="poi_date_no">Data ammustrada: nono</string>
+
+	<string name="poi_support_pole">Suportu: palu</string>
+	<string name="poi_support_wall_mounted">Suportu: muru</string>
+	<string name="poi_support_tree">Suportu: àrbore</string>
+	<string name="poi_support_pedestal">Suportu: peagna</string>
+	<string name="poi_support_ground">Suportu: terrinu</string>
+	<string name="poi_support_billboard">Suportu: tabellone</string>
+	<string name="poi_support_ceiling">Suportu: bòveda</string>
+	<string name="poi_support_suspended">Suportu: suspèndidu</string>
+	<string name="poi_support_roof">Suportu: coberta</string>
+	<string name="poi_support_tower">Suportu: turre</string>
+
+	<string name="poi_passenger_information_display_yes">Ischermu de informatziones pro sos passegeros: eja</string>
+	<string name="poi_passenger_information_display_no">Ischermu de informatziones pro sos passegeros: nono</string>
+
+	<string name="poi_aquaculture">Abbacultura</string>
+	<string name="poi_aquaculture_shrimp">Abbacultura: gàmberos</string>
+	<string name="poi_aquaculture_fish">Abbacultura: pische</string>
+	<string name="poi_aquaculture_mussels">Abbacultura: cotzas</string>
+
+	<string name="poi_mdf">Permutadore (MDF)</string>
+	<string name="poi_min_age">Edade mìnima</string>
+
+	<string name="poi_organic_yes">Eja</string>
+	<string name="poi_organic_no">Nono</string>
+	<string name="poi_organic_only">Ebbia</string>
+
+	<string name="poi_traffic_mirror">Ispigru de tràficu</string>
+
+	<string name="poi_diplomatic_consulate">Consoladu</string>
+	<string name="poi_diplomatic_consulate_general">Consoladu generale</string>
+	<string name="poi_diplomatic_honorary_consulate">Consoladu onoràriu</string>
+	<string name="poi_diplomatic_permanent_mission">Missione permanente</string>
+	<string name="poi_diplomatic_delegation">Delegatzione</string>
+	<string name="poi_diplomatic_ambassadors_residence">Residèntzia de s\'ambasciadore</string>
+	<string name="poi_diplomatic_high_commission">Arta commissione</string>
+
+	<string name="poi_fire_operator">Operadore pro fogos</string>
+
+	<string name="poi_water_tank">Depòsitu de abba</string>
+
+	<string name="poi_toilets_disposal_flush">Eliminatzione refudos de sos bagnos: flussu de abba</string>
+	<string name="poi_toilets_disposal_pitlatrine">Eliminatzione refudos de sos bagnos: latrina a fossa sèmplitze</string>
+	<string name="poi_toilets_disposal_chemical">Eliminatzione refudos de sos bagnos: chìmica</string>
+	<string name="poi_toilets_disposal_bucket">Eliminatzione refudos de sos bagnos: istèrgiu</string>
+
+	<string name="poi_length">Longària</string>
+
+	<string name="poi_xmas">Pasca de Nadale</string>
+	<string name="poi_xmas_event">Eventu de Nadale</string>
+	<string name="poi_xmas_market">Mercadu de Nadale</string>
+	<string name="poi_xmas_pyramid">Piràmide de Nadale</string>
+	<string name="poi_xmas_shop">Butega de Nadale</string>
+	<string name="poi_xmas_shop_christmas_tree">Butega de àrbores</string>
+	<string name="poi_xmas_tree">Àrbore de Nadale</string>
+	<string name="poi_xmas_day_date">Pasca de Nadale: perìodu pro s\'eventu</string>
+	<string name="poi_xmas_note">Pasca de Nadale: nota</string>
+	<string name="poi_xmas_opening_hours">"Pasca de Nadale:  oràriu de abertura"</string>
+	<string name="poi_xmas_location">"Pasca de Nadale:  positzione"</string>
+	<string name="poi_xmas_url">Pasca de Nadale: situ web</string>
+
+	<string name="poi_public_bookcase">Libreria pùblica</string>
+	<string name="poi_public_bookcase_type_phone_box">Casta: cabina telefònica</string>
+	<string name="poi_public_bookcase_type_reading_box">Casta: iscàtula de letura</string>
+	<string name="poi_public_bookcase_type_wooden_cabinet">Casta: cabina de linna</string>
+	<string name="poi_public_bookcase_type_metal_cabinet">Casta: cabina de metallu</string>
+	<string name="poi_public_bookcase_type_shelf">Casta: iscafale</string>
+
+	<string name="poi_cuisine_pizza">Pitza</string>
+	<string name="poi_cuisine_burger">Hamburger</string>
+	<string name="poi_cuisine_coffee">Cafè</string>
+	<string name="poi_cuisine_sandwich">Paninos</string>
+	<string name="poi_cuisine_kebab">Kebab</string>
+	<string name="poi_cuisine_doner">Doner kebab (shawarma)</string>
+	<string name="poi_cuisine_chicken">Puddu</string>
+	<string name="poi_cuisine_ice_cream">Geladu</string>
+	<string name="poi_cuisine_sushi">Sushi</string>
+	<string name="poi_cuisine_fish_and_chips">Pische e patatas fritas (Fish and chips)
+\n</string>
+	<string name="poi_cuisine_seafood">Frutos de mare</string>
+	<string name="poi_cuisine_barbecue">Barbecue</string>
+	<string name="poi_cuisine_noodle">Ispaghitos (noodles) orientales</string>
+	<string name="poi_cuisine_donut">Cascheddas (donuts)</string>
+	<string name="poi_cuisine_ramen">Ramen</string>
+	<string name="poi_cuisine_crepe">Crepe</string>
+	<string name="poi_cuisine_breakfast">Ismurzu</string>
+	<string name="poi_cuisine_beef_bowl">Gyūdon</string>
+	<string name="poi_cuisine_steak">Bisteca</string>
+	<string name="poi_cuisine_tapas">Tapas</string>
+	<string name="poi_cuisine_gastropub">Gastropub</string>
+	<string name="poi_cuisine_heuriger">Heuriger</string>
+	<string name="poi_cuisine_curry">Curry</string>
+	<string name="poi_cuisine_buschenschank">Buschenschank</string>
+	<string name="poi_cuisine_grill">Grìllia</string>
+	<string name="poi_cuisine_bagel">Bagel</string>
+	<string name="poi_cuisine_diner">Diner</string>
+	<string name="poi_cuisine_sausage">Sartitza</string>
+	<string name="poi_cuisine_cake">Turta</string>
+	<string name="poi_cuisine_pancake">Pancake</string>
+	<string name="poi_cuisine_pasta">Pasta</string>
+	<string name="poi_cuisine_fast_food">Màndigu lestru</string>
+	<string name="poi_cuisine_juice">Sutzu de frùtora</string>
+	<string name="poi_cuisine_soba">Soba (pasta giaponesa)</string>
+	<string name="poi_cuisine_fine_dining">Arta coghina</string>
+	<string name="poi_cuisine_tea">Tè</string>
+	<string name="poi_cuisine_tea_shop">Butega de tè</string>
+	<string name="poi_cuisine_soup">Supa</string>
+	<string name="poi_cuisine_pie">Turtas</string>
+	<string name="poi_cuisine_hotdog">Hot dog</string>
+	<string name="poi_cuisine_deli">Gastronomia</string>
+	<string name="poi_cuisine_salad">Insalada</string>
+	<string name="poi_cuisine_frozen_yogurt">Yogurt astradu</string>
+	<string name="poi_cuisine_fried_food">Màndigu frintu</string>
+	<string name="poi_checkpoint_hiking">Puntu de controllu pro s\'escursionismu</string>
+	</resources>
