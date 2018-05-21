@@ -2957,8 +2957,8 @@ Abasta l\'àrea: %1$s x %2$s</string>
 	<string name="south_abbreviation">S</string>
 	<string name="north_abbreviation">N</string>
 	<string name="optional_point_name">"Nom opcional del punt "</string>
-    <string name="transport_nearby_routes_within">Rutes prou properes</string>
-    <string name="transport_nearby_routes">A prop</string>
+    <string name="transport_nearby_routes_within">Rutes properes a dins</string>
+    <string name="transport_nearby_routes">A dins</string>
     <string name="enter_the_file_name">Introduïu el nom del fitxer.</string>
     <string name="map_import_error">Error d\'importació del mapa</string>
     <string name="map_imported_successfully">S\'ha importat el mapa</string>
