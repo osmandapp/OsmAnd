@@ -3259,5 +3259,5 @@
 \nویژگی‌های اصلی: ضخامت کمتر برای راه‌های اصلی. ضخامت بیشتر برای trackها،‏ pathها، مسیرهای دوچرخه و سایر مسیرها. بر پایهٔ سبک Topo است.</string>
     <string name="access_intermediate_arrival_time">زمان رسیدن به میانی</string>
     <string name="map_widget_intermediate_time">مدت تا میانی</string>
-    <string name="unirs_render_descr">اصلاح‌یافتهٔ سبک استاندارد برای ایجاد پادنمایی بیشتر برای راه‌های پیاده و دوچرخه. از رنگ‌بندی مپنیک استفاده می‌کند.</string>
+    <string name="unirs_render_descr">اصلاح‌یافتهٔ سبک پیشفرض برای ایجاد پادنمایی بیشتر برای راه‌های پیاده و دوچرخه. از رنگ‌بندی مپنیک استفاده می‌کند.</string>
     </resources>
