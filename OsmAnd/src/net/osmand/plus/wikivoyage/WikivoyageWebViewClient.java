@@ -24,6 +24,8 @@ import net.osmand.plus.wikivoyage.explore.WikivoyageExploreActivity;
 import java.io.File;
 import java.util.List;
 
+import static net.osmand.plus.wikipedia.WikiArticleHelper.WIKI_DOMAIN;
+
 
 /**
  * Custom WebView client to handle the internal links.
@@ -43,7 +45,6 @@ public class WikivoyageWebViewClient extends WebViewClient {
 	private static final String PAGE_PREFIX_HTTP = "http://";
 	private static final String PAGE_PREFIX_HTTPS = "https://";
 	private static final String WIKIVOAYAGE_DOMAIN = ".wikivoyage.org/wiki/";
-	private static final String WIKI_DOMAIN = ".wikipedia.org/wiki/";
 	private WikiArticleHelper wikiArticleHelper;
 
 

@@ -56,6 +56,7 @@ public class WikipediaDialogFragment extends WikiArticleBaseDialogFragment {
 	private String title;
 	private String article;
 	private String langSelected;
+	private WikipediaWebViewClient webViewClient;
 
 	public void setAmenity(Amenity amenity) {
 		this.amenity = amenity;
@@ -122,7 +123,8 @@ public class WikipediaDialogFragment extends WikiArticleBaseDialogFragment {
 		WebSettings webSettings = contentWebView.getSettings();
 		webSettings.setJavaScriptEnabled(true);
 		webSettings.setTextZoom((int) (getResources().getConfiguration().fontScale * 100f));
-		contentWebView.setWebViewClient(new WikipediaWebViewClient(getActivity(), nightMode));
+		webViewClient = new WikipediaWebViewClient(getActivity(), amenity, nightMode);
+		contentWebView.setWebViewClient(webViewClient);
 		updateWebSettings();
 		contentWebView.setBackgroundColor(ContextCompat.getColor(getMyApplication(),
 				nightMode ? R.color.wiki_webview_background_dark : R.color.wiki_webview_background_light));
@@ -161,6 +163,14 @@ public class WikipediaDialogFragment extends WikiArticleBaseDialogFragment {
 			dialog.setDismissMessage(null);
 		}
 		super.onDestroyView();
+	}
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		if (webViewClient != null) {
+			webViewClient.stopRunningAsyncTasks();
+		}
 	}
 
 	@Override
