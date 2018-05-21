@@ -112,7 +112,7 @@ public class AndroidUtils {
 	}
 
 	public static Uri getUriForFile(Context context, File file) {
-		return FileProvider.getUriForFile(context, context.getPackageName() + ".fileprovider", file);
+		return FileProvider.getUriForFile(context, "net.osmand.plus.fileprovider", file);
 	}
 
 	public static Spannable replaceCharsWithIcon(String text, Drawable icon, String[] chars) {

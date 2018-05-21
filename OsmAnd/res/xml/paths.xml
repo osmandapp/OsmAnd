@@ -8,4 +8,21 @@
     <external-files-path
         name="files"
         path="/"/>
+
+	<external-path
+		name="external_files"
+		path="." />
+
+	<files-path
+		name="files_path"
+		path="." />
+
+	<external-cache-path
+		name="external_cache_path"
+		path="." />
+
+	<root-path
+		name="root"
+		path="." />
+
 </paths>
