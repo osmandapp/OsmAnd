@@ -112,8 +112,8 @@
 	<string name="south_abbreviation">S</string>
 	<string name="north_abbreviation">N</string>
 	<string name="optional_point_name">Optional point name</string>
-    <string name="transport_nearby_routes_within">Nearby routes in</string>
-    <string name="transport_nearby_routes">Near</string>
+    <string name="transport_nearby_routes_within">Nearby routes within</string>
+    <string name="transport_nearby_routes">Within</string>
     <string name="enter_the_file_name">Enter the filename.</string>
     <string name="map_import_error">Map import error</string>
     <string name="map_imported_successfully">Map imported</string>
