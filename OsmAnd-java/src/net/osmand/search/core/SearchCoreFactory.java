@@ -406,6 +406,7 @@ public class SearchCoreFactory {
 									return false;
 								}
 								sr.objectType = ObjectType.POSTCODE;
+								sr.priorityDistance = 0;
 							}  else {
 								if ((locSpecified && !villagesBbox.contains(x, y, x, y))
 										|| !phrase.isSearchTypeAllowed(ObjectType.VILLAGE)) {
