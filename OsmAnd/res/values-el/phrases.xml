@@ -1964,4 +1964,42 @@
 	<string name="poi_wetland_saltmarsh">Αλμυρός βάλτος</string>
 	<string name="poi_wetland_mangrove">Μανγκρόβια</string>
 	<string name="poi_wetland_fen">Βάλτος</string>
+	<string name="poi_wetland_mud">Λάσπη</string>
+
+	<string name="poi_beach_sand">Άμμος</string>
+	<string name="poi_beach_shingle">Βότσαλο</string>
+	<string name="poi_beach_rocky">Βραχώδης</string>
+
+	<string name="poi_chimney">Καπνοδόχος</string>
+	<string name="poi_palm">Φοίνικας</string>
+	<string name="poi_cypress">Κυπαρίσσι</string>
+	<string name="poi_flagpole">Ιστός σημαίας</string>
+
+	<string name="poi_bench_yes">Ναι</string>
+	<string name="poi_bench_no">Χωρίς πάγκο</string>
+	<string name="poi_bin_yes">Με καλάθι</string>
+	<string name="poi_bin_no">Χωρίς καλάθι</string>
+
+	<string name="poi_shelter_type_public_transport">Δημόσια συγκοινωνία</string>
+	<string name="poi_shelter_type_picnic_shelter">Υπαίθριο φαγητό</string>
+	<string name="poi_shelter_type_weather_shelter">Καιρός</string>
+	<string name="poi_shelter_type_lean_to">Υπόστεγο</string>
+	<string name="poi_shelter_type_basic_hut">Στοιχειώδης καλύβα</string>
+	<string name="poi_shelter_type_building">Κτίριο</string>
+	<string name="poi_shelter_type_wildlife_hide">Παρατηρητήριο άγριας ζωής</string>
+	<string name="poi_shelter_type_rock_shelter">Βραχώδες καταφύγιο</string>
+	<string name="poi_shelter_type_sun_shelter">Αντιηλιακό καταφύγιο</string>
+	<string name="poi_shelter_type_field_shelter">Καταφύγιο ζώων</string>
+	<string name="poi_shelter_type_tent">Τύπος καταφυγίου: σκηνή</string>
+	<string name="poi_shelter_type_abandoned">Τύπος καταφυγίου: εγκατελειμμένο</string>
+
+	<string name="poi_internet_access_type_wlan">Ασύρματο διαδίκτυο</string>
+	<string name="poi_internet_access_type_terminal">Τερματικό</string>
+	<string name="poi_internet_access_type_wired">Ενσύρματο</string>
+	<string name="poi_internet_access_type_public">Τύπος πρόσβασης διαδικτύου: δημόσιος</string>
+	<string name="poi_internet_access_type_service">Τύπος πρόσβασης διαδικτύου: υπηρεσία</string>
+	<string name="poi_internet_access_type_no">Χωρίς πρόσβαση διαδικτύου</string>
+	<string name="poi_internet_access_type_yes">Με πρόσβαση διαδικτύου</string>
+
+	<string name="poi_maxwidth">Μέγιστο πλάτος</string>
 	</resources>

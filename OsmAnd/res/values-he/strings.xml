@@ -2763,7 +2763,7 @@
     <string name="fav_point_dublicate">שם נקודה מועדפת כפול</string>
     <string name="shared_string_read">נקרא</string>
     <string name="shared_string_contents">תכנים</string>
-    <string name="transport_nearby_routes">בסביבה</string>
+    <string name="transport_nearby_routes">בסביבת</string>
     <string name="navigate_point_olc_info_invalid">קוד מיקום פתוח שגוי
 \n</string>
     <string name="navigate_point_olc_info_short">קוד מיקום פתוח קצר
