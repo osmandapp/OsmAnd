@@ -2068,6 +2068,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 					sendIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.share_history_subject));
 					sendIntent.putExtra(Intent.EXTRA_STREAM, AndroidUtils.getUriForFile(getMapActivity(), dst));
 					sendIntent.setType("text/plain");
+					sendIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
 					startActivity(sendIntent);
 				}
 			};

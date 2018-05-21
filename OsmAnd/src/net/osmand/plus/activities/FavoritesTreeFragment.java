@@ -589,6 +589,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 					sendIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.share_fav_subject));
 					sendIntent.putExtra(Intent.EXTRA_STREAM, AndroidUtils.getUriForFile(getMyApplication(), dst));
 					sendIntent.setType("text/plain");
+					sendIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
 					startActivity(sendIntent);
 				} catch (IOException e) {
 					Toast.makeText(getActivity(), "Error sharing favorites: " + e.getMessage(), Toast.LENGTH_SHORT).show();

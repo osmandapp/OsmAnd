@@ -843,7 +843,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 //		}
 		Uri fileUri = AndroidUtils.getUriForFile(getMapActivity(), getBaseFileName(lat, lon, app, ext));
 		intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri); // set the image file name
-
+		intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
 		intent.putExtra(MediaStore.EXTRA_VIDEO_QUALITY, 1); // set the video image quality to high
 		// start the video capture Intent
 		mapActivity.startActivityForResult(intent, 205);
@@ -1881,6 +1881,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		if (r.isVideo()) {
 			Intent vint = new Intent(Intent.ACTION_VIEW);
 			vint.setDataAndType(AndroidUtils.getUriForFile(mapActivity, r.file), "video/*");
+			vint.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
 			vint.setFlags(0x10000000);
 			try {
 				ctx.startActivity(vint);
@@ -1891,6 +1892,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		} else if (r.isPhoto()) {
 			Intent vint = new Intent(Intent.ACTION_VIEW);
 			vint.setDataAndType(AndroidUtils.getUriForFile(mapActivity, r.file), "image/*");
+			vint.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
 			vint.setFlags(0x10000000);
 			ctx.startActivity(vint);
 			return;
