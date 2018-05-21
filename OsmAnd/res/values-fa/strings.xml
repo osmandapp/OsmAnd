@@ -3146,8 +3146,8 @@
 	<string name="south_abbreviation">S</string>
 	<string name="north_abbreviation">N</string>
 	<string name="optional_point_name">نام نقطه (اختیاری)</string>
-    <string name="transport_nearby_routes_within">مسیرهای نزدیک در</string>
-    <string name="transport_nearby_routes">نزدیک</string>
+    <string name="transport_nearby_routes_within">مسیرهای نزدیک تا</string>
+    <string name="transport_nearby_routes">در کمتر از</string>
     <string name="group_deleted">گروه حذف شد</string>
     <string name="rendering_attr_whiteWaterSports_name">ورزش‌‌های آب‌های خروشان</string>
     <string name="clear_all_intermediates">پاک‌کردن همهٔ نقاط میانی</string>
