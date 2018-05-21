@@ -957,7 +957,10 @@ public class ResourceManager {
 		List<BinaryMapIndexReader> readers = new ArrayList<>(fileReaders.size());
 		for(BinaryMapReaderResource r : fileReaders.values()) {
 			if(r.isUseForRouting()) {
-				readers.add(r.getReader(BinaryMapReaderResourceType.ROUTING));
+				BinaryMapIndexReader reader = r.getReader(BinaryMapReaderResourceType.ROUTING);
+				if (reader != null) {
+					readers.add(reader);
+				}
 			}
 		}
 		return readers.toArray(new BinaryMapIndexReader[readers.size()]);
