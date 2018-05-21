@@ -126,7 +126,11 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer, Stat
 	@Override
 	public void stateChanged(ApplicationMode change) {
 		if(prologSystem != null) {
-			prologSystem.getTheoryManager().retract(new Struct("appMode", new Var()));
+			try {
+				prologSystem.getTheoryManager().retract(new Struct("appMode", new Var()));
+			} catch (Exception e) {
+				log.error("Retract error: ", e);
+			}
 			prologSystem.getTheoryManager()
 				.assertA(
 						new Struct("appMode", new Struct(ctx.getSettings().APPLICATION_MODE.get().getStringKey()

@@ -39,7 +39,7 @@ public class InAppPurchaseHelper {
 	private static final String TAG = InAppPurchaseHelper.class.getSimpleName();
 	boolean mDebugLog = true;
 
-	public static final long SUBSCRIPTION_HOLDING_TIME_MSEC = 1000 * 60;// * 60 * 24 * 3; // 3 days
+	public static final long SUBSCRIPTION_HOLDING_TIME_MSEC = 1000 * 60 * 60 * 24 * 3; // 3 days
 
 	private long lastValidationCheckTime;
 	private String liveUpdatesPrice;

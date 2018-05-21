@@ -1,8 +1,8 @@
 package net.osmand.plus;
 
-import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.util.LongSparseArray;
 
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
@@ -20,6 +20,8 @@ import net.osmand.router.RoutingConfiguration;
 import net.osmand.router.RoutingContext;
 import net.osmand.util.MapUtils;
 
+import org.apache.commons.logging.Log;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -27,6 +29,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class CurrentPositionHelper {
 	
@@ -37,18 +40,15 @@ public class CurrentPositionHelper {
 	private OsmandApplication app;
 	private ApplicationMode am;
 	private List<BinaryMapReaderResource> usedReaders = new ArrayList<>();
-	private static final org.apache.commons.logging.Log log = PlatformUtil.getLog(CurrentPositionHelper.class);
-	private ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
+	private static final Log log = PlatformUtil.getLog(CurrentPositionHelper.class);
 
-	public CurrentPositionHelper(OsmandApplication app) {
+	private ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
+	private LongSparseArray<AtomicInteger> requestNumbersMap = new LongSparseArray<>();
+
+	CurrentPositionHelper(OsmandApplication app) {
 		this.app = app;
 	}
-	
-	
-	public Location getLastAskedLocation() {
-		return lastAskedLocation;
-	}
-	
+
 	public boolean getRouteSegment(Location loc, @Nullable ApplicationMode appMode,
 								   ResultMatcher<RouteDataObject> result) {
 		return scheduleRouteSegmentFind(loc, false, true, null, result, appMode);
@@ -80,9 +80,13 @@ public class CurrentPositionHelper {
 		}
 		return null;
 	}
-	
 
 	///////////////////////// PRIVATE IMPLEMENTATION //////////////////////////
+
+	private long getRequestNumberKey(boolean storeFound, boolean allowEmptyNames) {
+		return (storeFound ? 0x2 : 0x0) | (allowEmptyNames ? 0x1 : 0x0);
+	}
+
 	private boolean scheduleRouteSegmentFind(final Location loc,
 											 final boolean storeFound,
 											 final boolean allowEmptyNames,
@@ -91,18 +95,20 @@ public class CurrentPositionHelper {
 											 @Nullable final ApplicationMode appMode) {
 		boolean res = false;
 		if (loc != null) {
-			new AsyncTask<Void, Void, Void>() {
+			long requestKey = getRequestNumberKey(storeFound, allowEmptyNames);
+			AtomicInteger requestNumber = requestNumbersMap.get(requestKey);
+			if (requestNumber == null) {
+				requestNumber = new AtomicInteger();
+				requestNumbersMap.put(requestKey, requestNumber);
+			}
+			final int request = requestNumber.incrementAndGet();
+			final AtomicInteger finalRequestNumber = requestNumber;
+			singleThreadExecutor.submit(new Runnable() {
 				@Override
-				protected Void doInBackground(Void... params) {
-					try {
-						processGeocoding(loc, geoCoding, storeFound, allowEmptyNames, result, appMode);
-					} catch (Exception e) {
-						log.error("Error processing geocoding", e);
-						e.printStackTrace();
-					}
-					return null;
+				public void run() {
+					processGeocoding(loc, geoCoding, storeFound, allowEmptyNames, result, appMode, request, finalRequestNumber);
 				}
-			}.executeOnExecutor(singleThreadExecutor, (Void) null);
+			});
 			res = true;
 		}
 		return res;
@@ -147,7 +153,13 @@ public class CurrentPositionHelper {
 											   boolean storeFound,
 											   boolean allowEmptyNames,
 											   @Nullable final ResultMatcher<RouteDataObject> result,
-											   @Nullable ApplicationMode appMode) throws IOException {
+											   @Nullable ApplicationMode appMode,
+											   int request,
+											   @NonNull AtomicInteger requestNumber) {
+
+		if (request != requestNumber.get()) {
+			return;
+		}
 
 		final List<GeocodingResult> gr = runUpdateInThread(loc.getLatitude(), loc.getLongitude(),
 				geoCoding != null, allowEmptyNames, appMode);
@@ -170,7 +182,7 @@ public class CurrentPositionHelper {
 	private List<GeocodingResult> runUpdateInThread(double lat, double lon,
 													boolean geocoding,
 													boolean allowEmptyNames,
-													@Nullable ApplicationMode appMode) throws IOException {
+													@Nullable ApplicationMode appMode) {
 
 		List<BinaryMapReaderResource> checkReaders = checkReaders(lat, lon, usedReaders);
 		if (appMode == null) {
@@ -185,7 +197,7 @@ public class CurrentPositionHelper {
 		try {
 			return new GeocodingUtilities().reverseGeocodingSearch(geocoding ? defCtx : ctx, lat, lon, allowEmptyNames);
 		} catch (Exception e) {
-			e.printStackTrace();
+			log.error("Exception happened during runUpdateInThread", e);
 			return null;
 		}
 	}
@@ -240,7 +252,6 @@ public class CurrentPositionHelper {
 								minBuildingDistance, result);
 					} catch (IOException e) {
 						log.error("Exception happened during reverse geocoding", e);
-						e.printStackTrace();
 					}
 					if (justified != null && !justified.isEmpty()) {
 						double md = justified.get(0).getDistance();
@@ -295,10 +306,4 @@ public class CurrentPositionHelper {
 		}
 		return d;
 	}
-	
-
-	
-	
-
-	
 }
