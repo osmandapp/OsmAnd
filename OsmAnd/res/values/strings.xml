@@ -2733,8 +2733,8 @@
     <string name="show_free_version_banner">Show free version banner</string>
     <string name="show_free_version_banner_description">Display the free version banner even in the paid version.</string>
     <string name="buy">Buy</string>
-    <string name="activate_seamarks_plugin">Please activate \'Seamarks\' plugin</string>
-    <string name="activate_srtm_plugin">Please activate \'Contour lines\' plugin</string>
+    <string name="activate_seamarks_plugin">Please activate the \'Nautical map view\' plugin</string>
+    <string name="activate_srtm_plugin">Please activate the \'Contour lines\' plugin</string>
     <string name="later">Later</string>
     <string name="get_full_version">Full version</string>
     <string name="downloads">Downloads</string>
