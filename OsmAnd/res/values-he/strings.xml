@@ -406,7 +406,7 @@
 	<string name="select_search_position">מקור:</string>
 	<string name="context_menu_item_search">חיפוש בסביבת מקום</string>
 	
-	<string name="shared_string_save_as_gpx">שמירה כמסלול GPX חדש</string>
+	<string name="shared_string_save_as_gpx">שמירה כקובץ GPX חדש</string>
 	<string name="route_successfully_saved_at">המסלול נשמר בתור ‚%1$s’.</string>
 	<string name="filename_input">שם הקובץ:</string>
 	<string name="file_with_name_already_exist">כבר קיים קובץ השם הזה.</string>
@@ -644,7 +644,7 @@
 	<string name="no_vector_map_loaded">המפות הווקטוריות לא נטענו</string>
 	
 	<string name="gpx_files_not_found">לא נמצאו קובצי GPX בתיקיית המסלולים</string>
-	<string name="layer_gpx_layer">דרך ה־GPX…</string>
+	<string name="layer_gpx_layer">קובצי GPX…</string>
 	<string name="error_reading_gpx">לא ניתן לקרוא את נתוני ה־GPX</string>
 	<string name="vector_data">מפות וקטוריות בלתי מקוונות</string>
 	<string name="transport_context_menu">חיפוש תחבורה בתחנה</string>
@@ -812,7 +812,7 @@
 	<string name="loading_cities">הערים נטענות…</string>
 	
 	<string name="poi">נ״ע</string>
-	<string name="error_occurred_saving_gpx">לא ניתן לשמור מסלול GPX</string>
+	<string name="error_occurred_saving_gpx">לא ניתן לשמור קובץ GPX</string>
 	<string name="error_calculating_route">לא ניתן לחשב מסלול</string>
 	<string name="error_calculating_route_occured">לא ניתן לחשב מסלול</string>
 	<string name="empty_route_calculated">המסלול שחושב ריק</string>					
@@ -824,7 +824,7 @@
 	<string name="loading_data">הנתונים נטענים…</string>
 	<string name="reading_indexes">המידע המקומי נקרא…</string>
 	<string name="previous_run_crashed">ההפעלה האחרונה של OsmAnd קרסה. קובץ היומן נמצא תחת {0}. נא לדווח על התקלה ולצרף את קובץ היומן.</string>
-	<string name="saving_gpx_tracks">דרכי ה־GPX נשמרות על ה־SD…</string>
+	<string name="saving_gpx_tracks">קובץ GPX נשמר…</string>
 	<string name="finished_task">בוצע</string>
 	
 	
@@ -839,8 +839,8 @@
 	<string name="osm_settings">עריכה ב־OSM</string>
 	<string name="additional_settings">הגדרות נוספות</string>
 	<string name="shared_string_settings">הגדרות</string>
-	<string name="save_current_track_descr">שמירת המסלול הנוכחי לכרטיס הזיכרון כעת.</string>
-	<string name="save_current_track">שמירת מסלול ה־GPX הנוכחי</string>
+	<string name="save_current_track_descr">שמירת המסלול הנוכחי כקובץ GPX כעת.</string>
+	<string name="save_current_track">שמירת המסלול הנוכחי</string>
 	<string name="save_track_interval">מרווח בין השמירות ליומן במהלך ניווט</string>
 	<string name="save_track_interval_descr">נא לבחור את ההפרש בין הצבת המיקום בטוויית דרכים.</string>
 	<string name="save_track_to_gpx_descrp">מסלול GPX יישמר אוטומטית לתיקיית המסלולים במהלך הניווט.</string>
@@ -1169,7 +1169,7 @@
     <string name="distance_measurement_finish_subtrack">תת מסלול/נקודה הבאים</string>
     <string name="distance_measurement_clear_route">מחיקת הנקודות</string>
     
-    <string name="distance_measurement_load_gpx">פתיחת מסלול GPX קיים</string>
+    <string name="distance_measurement_load_gpx">פתיחת קובץ GPX קיים</string>
     <string name="use_distance_measurement_help">* יש לגעת כדי לסמן נקודה.
 \n * נגיעה ארוכה במפה כדי למחוק נקודה קודמת.
 \n * נגיעה ארוכה על נקודה כדי לצפות ולצרף תיאור.
@@ -1235,8 +1235,8 @@
     
     <string name="shared_string_pause">הפסקה</string>
     <string name="map_markers_other">סמנים אחרים</string>
-    <string name="gpx_add_track">הוספת מסלול</string>
-    <string name="gpx_no_tracks_title">עדיין אין לך מסלולים</string>
+    <string name="gpx_add_track">הוספת קובץ GPX</string>
+    <string name="gpx_no_tracks_title">עדיין אין לך קובצי GPX</string>
     <string name="rendering_value_dark_brown_name">חום כהה</string>
     <string name="rendering_value_light_brown_name">חום בהיר</string>
     <string name="morning">בוקר</string>
@@ -1308,7 +1308,7 @@
     <string name="quick_action_showhide_osmbugs_descr">נגיעה בכפתור הפעולה גורמת להצגה או להסתרה של הערות OSM על המפה.</string>
     <string name="sorted_by_distance">מסודר לפי מרחק</string>
     <string name="search_favorites">חיפוש במועדפים</string>
-    <string name="none_selected_gpx">לא נבחרו קובצי GPX. כדי לבחור אחד, יש ללחוץ לחיצה ארוכה על מסלול זמין.</string>
+    <string name="none_selected_gpx">לא נבחרו קובצי GPX. ניתן לבחור אחד בלחיצה ארוכה.</string>
     <string name="local_index_select_gpx_file">יש לבחור כדי להציג</string>
     <string name="gpx_split_interval">משך פיצול</string>
     <string name="sort_by_distance">סידור לפי מרחק</string>
@@ -1341,7 +1341,7 @@
 \nנקודות</string>
     <string name="gpx_selection_track">%1$s 
 \nמסלול %2$s</string>
-    <string name="gpx_file_is_empty">מסלול GPX ריק</string>
+    <string name="gpx_file_is_empty">קובץ GPX ריק</string>
     
     
     
@@ -1506,12 +1506,12 @@
     <string name="shared_string_finish">סיום</string>
     <string name="plan_route">תכנון נתיב</string>
     <string name="shared_string_sort">מיון</string>
-    <string name="marker_save_as_track">שמירה כמסלול</string>
+    <string name="marker_save_as_track">שמירה כקובץ GPX</string>
     <string name="move_to_history">העברה להיסטוריה</string>
     <string name="disable_complex_routing_descr">השבתת ניתוב דו־שלבי לניווט הרכב.</string>
     <string name="tap_on_map_to_hide_interface">מצב מסך מלא</string>
     
-    <string name="import_gpx_file_description">ניתן לייבא כמועדפים או כקובץ מסלול.</string>
+    <string name="import_gpx_file_description">ניתן לייבא כמועדפים או כקובץ GPX.</string>
     <string name="import_as_gpx">ייבוא כקובץ GPX</string>
     <string name="import_as_favorites">ייבוא כמועדף</string>
     <string name="import_file">ייבוא קובץ</string>
@@ -1532,16 +1532,16 @@
     <string name="rename_marker">שינוי שם סמן</string>
     <string name="tap_on_map_to_hide_interface_descr">נגיעה במפה מחליפה את תצוגת הכפתורים והווידג׳טים.</string>
     <string name="appearance_on_the_map">הופעה על המפה</string>
-    <string name="add_track_to_markers_descr">ניתן להוסיף נקודות דרך לסמנים על ידי בחירת אחד המסלולים שבו יש אותם.</string>
+    <string name="add_track_to_markers_descr">נא לבחור קובץ GPX כדי להוסיף את נקודות הדרך שלו לסמנים.</string>
     <string name="add_favourites_group_to_markers_descr">נא לבחור קטגוריה מועדפת להוספה לסמנים.</string>
     <string name="shared_string_gpx_waypoints">נקודות דרך במסלול</string>
     <string name="favourites_group">קטגוריית מועדפים</string>
     <string name="add_group">הוספת קבוצה</string>
-    <string name="add_group_descr">ניתן לייבא קבוצות ממועדפים או נקודות דרך של מסלול.</string>
+    <string name="add_group_descr">ייבוא קבוצות ממועדפים או מנקודות דרך GPX.</string>
     <string name="empty_state_markers_active">ליצור סמנים במפה!</string>
     <string name="empty_state_markers_active_desc">יש לגעת בנגיעה קצרה או ארוכה ב‚מקומות’ ולאחר מכן ללחוץ על כפתור דגל הסמן.</string>
     <string name="empty_state_markers_groups">ייבוא קבוצות</string>
-    <string name="empty_state_markers_groups_desc">ניתן לייבא קבוצות מועדפים או נקודות דרך במסלול כסמנים.</string>
+    <string name="empty_state_markers_groups_desc">ייבוא קבוצות מועדפים או נקודות דרך GPX כסמנים.</string>
     <string name="shared_string_two">שניים</string>
     <string name="shared_string_one">אחד</string>
     <string name="show_guide_line_descr">הצגת קווי כיוון מהמיקום שלך למיקומי הסמנים הפעילים.</string>
@@ -1564,7 +1564,7 @@
     <string name="routing_attr_avoid_ice_roads_fords_description">הימנעות מכבישי קרח וממעברים על מים זורמים.</string>
     <string name="add_location_as_first_point_descr">ניתן להוסיף את המיקום שלך כנקודת ההתחלה כדי לתכנן את המסלול המושלם.</string>
     <string name="coordinate_input">קלט נקודות ציון</string>
-    <string name="marker_save_as_track_descr">ייצוא הסמנים שלך לקובץ שניתן לציין כאן:</string>
+    <string name="marker_save_as_track_descr">ייצוא הסמנים שלך לקובץ ה־GPX הבא:</string>
     <string name="group_will_be_removed_after_restart">הקבוצה תוסר לאחר ההפעלה הבאה של היישומון.</string>
     <string name="show_guide_line">הצגת קווי כיוון</string>
     <string name="use_osm_live_routing">ניווט חי של OsmAnd</string>
@@ -1943,14 +1943,14 @@
     <string name="save_route_point">שמירת נקודת נתיב</string>
     <string name="waypoint_one">נקודת דרך 1</string>
     <string name="route_point_one">נקודת נתיב 1</string>
-    <string name="empty_state_my_tracks">הוספה והקלטה של מסלולים</string>
-    <string name="empty_state_my_tracks_desc">יש להקליט או לייבא מסלולים כדי לצפות.</string>
+    <string name="empty_state_my_tracks">הוספת קובצי GPX</string>
+    <string name="empty_state_my_tracks_desc">ייבוא קובצי GPX או הקלטת מסלולים.</string>
     <string name="empty_state_favourites">הוספת מועדפים</string>
-    <string name="empty_state_favourites_desc">ייבוא או סימון מועדפים על המפה.</string>
-    <string name="import_track">ייבוא מסלול</string>
+    <string name="empty_state_favourites_desc">ייבוא מועדפים או הוספה דרך נקודות סימון במפה.</string>
+    <string name="import_track">ייבוא קובץ GPX</string>
     <string name="import_track_desc">הקובץ %1$s אינו מכיל נקודות דרך, לייבא אותו כמסלול?</string>
     <string name="move_point">הזזת נקודה</string>
-    <string name="add_segment_to_the_track">הוספה למסלול GPX</string>
+    <string name="add_segment_to_the_track">הוספה לקובץ GPX</string>
 <string name="last_seven_days">7 הימים האחרונים</string>
     <string name="this_year">השנה הזאת</string>
     <string name="move_all_to_history">העברת הכול להיסטוריה</string>
@@ -2050,7 +2050,7 @@
     <string name="ascendingly">עולה</string>
     <string name="date_added">תאריך ההוספה</string>
     <string name="order_by">סידור לפי:</string>
-    <string name="looking_for_tracks_with_waypoints">מתבצע חיפוש אחר מסלולים עם נקודות דרך</string>
+    <string name="looking_for_tracks_with_waypoints">מתבצע חיפוש אחר קובצי GPX עם נקודות דרך</string>
     <string name="shared_string_more_without_dots">עוד</string>
     <string name="do_not_send_anonymous_app_usage">לא לשלוח סטטיסטיקת שימוש אלמונית</string>
     <string name="osn_comment_dialog_title">הוספת הערה</string>
@@ -2390,7 +2390,7 @@
     <string name="shared_string_start_time">יציאה לדרך</string>
     <string name="shared_string_end_time">הגעה</string>
     <string name="shared_string_color">צבע</string>
-    <string name="select_gpx_folder">בחירת תיקיית מסלולים</string>
+    <string name="select_gpx_folder">בחירת תיקיית קובצי GPX</string>
     <string name="file_can_not_be_moved">אי אפשר להעביר את הקובץ.</string>
     <string name="shared_string_move">העברה</string>
     <string name="shared_string_gpx_tracks">מסלולים</string>
@@ -2494,11 +2494,11 @@
     <string name="route_roundabout_short">יש לצאת ביציאה מס׳ %1$d ולהמשיך</string>
     <string name="upload_poi">העלאת נקודות עניין</string>
     <string name="route_calculation">חישוב נתיב</string>
-    <string name="gpx_no_tracks_title_folder">ניתן גם להוסיף מסלולים לתיקייה</string>
+    <string name="gpx_no_tracks_title_folder">ניתן גם להוסיף קובצי GPX לתיקייה</string>
     <string name="trip_rec_notification_settings">הפעלת התחלת הקלטה מהירה</string>
     <string name="saved_at_time">נשמר כעת תחת: %1$s</string>
     <string name="poi_deleted_localy">נקודת העניין תימחק לאחר העלאת השינויים שלך</string>
-    <string name="show_gpx">הצגת GPX</string>
+    <string name="show_gpx">הצגת נתוני GPX</string>
     <string name="count_of_lines">ספירה של קווים</string>
     <string name="are_you_sure">להמשיך?</string>
     <string name="unsaved_changes_will_be_lost">שינויים לא נשמרו יוסרו. להמשיך?</string>
@@ -2536,16 +2536,16 @@
     <string name="animate_my_location_desc">הפעלת הנפשת גלישת מפה של ה‚מיקום שלי’ במהלך ניווט.</string>
     <string name="shared_string_in_name">ב־%1$s</string>
     <string name="one_tap_active_descr">ניתן לגעת בסמן על המפה כדי להעביר אותו לראש הסמנים הפעילים מבלי לפתוח את תפריט ההקשר.</string>
-    <string name="release_3_0">תפריט טיולים חדש: הצגת ערכים מוויקימסע ללא שימוש באינטרנט
-\n
-\n • ויקיפדיה: מראה חדש, קישורים פעילים, תמונות
-\n
-\n • Open Track UI: הצגת קבוצות נקודות דרך
-\n
-\n • סמני מפה: ייבוא הקבוצות הנבחרות מקובצי GPX, מראה חדש לקלט נקודות ציון
-\n
-\n • המינוי ל־OsmAnd חי כולל את כל התכונות של OsmAnd
-\n
+    <string name="release_3_0">• חדש: תמיכה במדריכי תיירות מוויקימסע ללא שימוש באינטרנט. המיקומים שבהפניות מקושרים למפה. נתונים התחלתיים מוויקימסע.
+\n 
+\n • ויקיפדיה: מראה חדש, קישורים פעילים, תמונות 
+\n 
+\n • Open Track UI: הצגת קבוצות נקודות דרך 
+\n 
+\n • סמני מפה: ייבוא הקבוצות הנבחרות מקובצי GPX, מראה חדש לקלט נקודות ציון 
+\n 
+\n • המינוי ל־OsmAnd חי כולל את כל התכונות של OsmAnd 
+\n 
 \n</string>
     <string name="one_tap_active">הפעלה בנגיעה אחת</string>
     <string name="map_orientation_change_in_accordance_with_speed_descr">נא לבחור באיזו מהירות כיוון המפה יתחלף ממצב ‚כיוון התנועה’ למצב ‚כיוון מצפן’ להלן.</string>
@@ -2604,7 +2604,7 @@
     <string name="no_inet_connection_desc_map">נדרש לטובת הורדת מפות.</string>
     <string name="search_location">מתבצע חיפוש אחר המיקום…</string>
     <string name="storage_free_space">מקום פנוי</string>
-    <string name="storage_place_description">אחסון נתונים של OsmAnd (למפות, מסלולים וכו׳): %1$s.</string>
+    <string name="storage_place_description">אחסון נתונים של OsmAnd (למפות, קובצי GPX וכו׳): %1$s.</string>
     <string name="move_marker_bottom_sheet_title">יש להזיז את המפה כדי לשנות את מיקום הסמן</string>
     <string name="follow_us">לעקוב אחרינו</string>
     <string name="access_direction_audio_feedback">חיווי כיוון קולי</string>
@@ -2705,7 +2705,7 @@
     <string name="osmand_parking_overdue">תפוגה</string>
     <string name="nautical_renderer">ימי</string>
     <string name="use_two_digits_longitude">שתי ספרות לציון קו אורך</string>
-    <string name="shared_string_travel_guides">מסע</string>
+    <string name="shared_string_travel_guides">מדריכי תיירות</string>
     <string name="nothing_found_in_radius">לא נמצא שום דבר:</string>
     <string name="switch_osm_notes_visibility_desc">הצגה/הסתרה של הערות OSM במפה.</string>
     <string name="gpx_file_desc">GPX - מתאים לייצוא ל־JOSM או עורכי OSM אחרים.</string>
@@ -2836,12 +2836,12 @@
     <string name="shared_string_do">לעשות</string>
     <string name="shared_string_only_with_wifi">רק עם רשת אלחוטית</string>
     <string name="wikivoyage_download_pics">הורדת תמונות</string>
-    <string name="wikivoyage_download_pics_descr">ניתן להוריד תמונות מערכים לשימוש בלתי מקוון
+    <string name="wikivoyage_download_pics_descr">ניתן להוריד תמונות עבור ערכים לשימוש בלתי מקוון.
 \n תמיד ניתן לשנות את ההגדרה הזאת תחת ‚סיור’ ← ‚אפשרויות’.</string>
     <string name="shared_string_wifi_only">רשת אלחוטית בלבד</string>
     <string name="select_travel_book">בחירת ספר מסע</string>
     <string name="shared_string_travel_book">ספר מסע</string>
-    <string name="download_images">הצגת תמונות</string>
+    <string name="download_images">הורדת תמונות</string>
     <string name="dd_mm_ss_format">DD°MM′SS″</string>
 	<string name="dd_dddddd_format">DD.DDDDDD°</string>
 	<string name="dd_ddddd_format">DD.DDDDD°</string>
@@ -2860,7 +2860,7 @@
     <string name="quick_action_interim_dialog">הצגת חלון זמני</string>
     <string name="favorite_autofill_toast_text">" נשמר אל "</string>
     <string name="purchase_dialog_title">נא לבחור בתכנית</string>
-    <string name="purchase_dialog_travel_description">עליך לרכוש את אחד מהפריטים הבאים כדי לקרוא מאמרי מסע באופן בלתי מקוון:</string>
+    <string name="purchase_dialog_travel_description">עליך לרכוש את אחד מהפריטים הבאים כדי לקבל את תכונת הדרכות התיירות:</string>
     <string name="purchase_dialog_subtitle">נא לבחור את הפריט המתאים:</string>
     <string name="rendering_attr_depthContours_name">קווי עומק ימיים</string>
     <string name="download_files_question_space_with_temp">להוריד {0} קבצים? המקום שינוצל באחסון הוא {3} מ״ב באופן זמני, {1} מ״ב באופן קבוע. ({2} מ״ב פנויים.)</string>
@@ -2892,16 +2892,16 @@
     <string name="paid_app">יישומון בתשלום</string>
     <string name="paid_plugin">תוסף בתשלום</string>
     <string name="travel_card_update_descr">יש נתונים חדשים בוויקימסע, כדאי לעדכן אותם כדי ליהנות.</string>
-	<string name="travel_card_download_descr">יש להוריד את הדרכות הטיולים האלה של ויקימסע כדי לצפות בערכים על מקומות מסביב לעולם ללא חיבור לאינטרנט.</string>
+	<string name="travel_card_download_descr">יש להוריד הדרכות תיירות של ויקימסע כדי לצפות בערכים על מקומות מסביב לעולם ללא חיבור לאינטרנט.</string>
 	<string name="update_is_available">קיים עדכון</string>
 	<string name="download_file">הורדת קובץ</string>
-    <string name="start_editing_card_image_text">מדריך הטיולים המקוון שכל אחד יכול לערוך.</string>
-    <string name="welcome_to_open_beta_description">הטיול מבוסס על ויקימסע. ניתן לבדוק את כל האפשרויות במהלך הבטא הפתוחה, בחינם. לאחר סיום תקופת הבטא, תכונת הטיול תהיה זמינה לנרשמי OsmAnd ללא הגבלה ולבעלי OsmAnd+‎</string>
+    <string name="start_editing_card_image_text">מדריך התיירות המקוון שכל אחד יכול לערוך.</string>
+    <string name="welcome_to_open_beta_description">מדריכי התיירות מבוססים על ויקימסע. ניתן לבדוק את כל האפשרויות במהלך הבטא הפתוחה בחינם. לאחר סיום תקופת הבטא, מדריכי התיירות יהיו זמינים לנרשמי OsmAnd ללא הגבלה ולבעלי OsmAnd+‎.</string>
     <string name="start_editing_card_description">ניתן וכדאי לערוך כל ערך בוויקימסע. השיתוף דורש את הידע, הניסיון, הכישרון ואת תשומת הלב שלך</string>
     <string name="start_editing">להתחיל בעריכה</string>
     <string name="get_unlimited_access">קבלת גישה בלתי מוגבלת</string>
     <string name="welcome_to_open_beta">ברוך בואך לבטא הפתוחה</string>
-    <string name="wikivoyage_travel_guide">מדריך הטיולים ויקימסע</string>
+    <string name="wikivoyage_travel_guide">מדריך התיירות ויקימסע</string>
     <string name="wikivoyage_travel_guide_descr">מדריכים למקומות המעניינים ביותר בעולם, בתוך OsmAnd, ללא חיבור לאינטרנט.</string>
     <string name="contour_lines_hillshade_maps">קווי מתאר ומפות הצללה</string>
     <string name="popular_destinations">יעדים נפוצים</string>
@@ -3093,7 +3093,7 @@
 \n ועוד…</string>
     <string name="nm">nmi</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">עיבוד מסלולים לפי עקבות OSMC.</string>
-    <string name="routing_attr_height_obstacles_description">שימוש בנתוני גובה פני קרקע מאת SRTM,‏ ASTER ו־EU-DEM.</string>
+    <string name="routing_attr_height_obstacles_description">מקדם נתוני גובה פני קרקע (נתונים של SRTM,‏ ASTER ו־EU-DEM).</string>
     <string name="release_2_6">\\022 תכונה חדש: כפתור פעולה מהירה
 \n
 \n • תגובה משופרת למחוות מסך מגע (למשל: גלילה ותקריב מהירים יותר)
@@ -3155,4 +3155,5 @@
     <string name="touring_view_render_descr">סגנון פירוט מדויק לטובת תיירות. כולל את כל אפשרויות התצוגה של בררת המחדל, בנוסף: מציג כמה שיותר פרטים ככל הניתן, במיוחד את כל הדרכים, השבילים ודרכי טיול נוספות. הבחנה חזותית ברורה בין כל סוגי הדרכים השונים, העלאת זכרונות בתצורת אטלסים לתיירות. ערכת צבעים בניגודיות גבוהה לשימוש בחוץ לצד מצבי יום ולילה.</string>
     <string name="access_intermediate_arrival_time">זמן הגעה לנקודת ביניים</string>
     <string name="map_widget_intermediate_time">זמן ביניים</string>
+    <string name="unirs_render_descr">שינוי סגנון בררת המחדל להגברת הניגודיות של שבילי אופניים והולכי רגל. הצבעים שיהיו בשימוש תואמי Mapnik.</string>
     </resources>
