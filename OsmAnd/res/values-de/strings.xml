@@ -2023,8 +2023,8 @@ Lon %2$s</string>
 	<string name="downloads_left_template">%1$s Downloads übrig</string>
 	<string name="downloading_number_of_files">Herunterladen - %1$d Datei</string>
     <string name="show_free_version_banner">Zeige das Banner der freien Version</string>
-    <string name="activate_seamarks_plugin">Bitte das Seekarten-Modul aktivieren</string>
-    <string name="activate_srtm_plugin">Bitte das SRTM-Modul aktivieren</string>
+    <string name="activate_seamarks_plugin">Bitte das \'Seekarten-Modul\' aktivieren</string>
+    <string name="activate_srtm_plugin">Bitte das \'Höhenlinien-Modul\' aktivieren</string>
     <string name="get_full_version">Vollversion</string>
     <string name="confirm_download_roadmaps">Die reine Straßenkarte wird nicht benötigt, da Sie die Standardkarte haben. Trotzdem herunterladen?</string>
     <string name="value_downloaded_of_max">%1$.1f von %2$.1f MB</string>
@@ -2943,7 +2943,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="shared_string_right">Rechts</string>
     <string name="shared_string_left">Links</string>
     <string name="shared_string_paste">Einfügen</string>
-    <string name="looking_for_tracks_with_waypoints">Suche nach GPX-Dateien mit Wegpunkten</string>
+    <string name="looking_for_tracks_with_waypoints">Suche nach Tracks mit Wegpunkten</string>
     <string name="shared_string_more_without_dots">Mehr</string>
     <string name="appearance_on_the_map">Darstellung auf der Karte</string>
     <string name="favourites_group">Favoritenkategorie</string>
@@ -2958,7 +2958,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="go_to_next_field">Nächstes Feld</string>
     <string name="rename_marker">Markierung umbenennen</string>
     <string name="mark_passed">Markierung passiert</string>
-    <string name="shared_string_gpx_waypoints">GPX-Wegpunkte</string>
+    <string name="shared_string_gpx_waypoints">Track Wegpunkte</string>
     <string name="modify_the_search_query">Suchanfrage verändern.</string>
     <string name="empty_state_osm_edits">Erstellen oder ändern von OSM-Objekten</string>
     <string name="empty_state_osm_edits_descr">OSM-POI erstellen oder verändern, OSM-Notizen eröffnen oder bearbeiten, und aufgezeichnete GPX-Dateien hinzufügen.</string>
@@ -2998,11 +2998,11 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="av_locations_all_desc">GPX-Datei mit Koordinaten und Daten aller Notizen.</string>
     <string name="shared_string_actions">Aktionen</string>
     <string name="shared_string_marker">Markierung</string>
-    <string name="add_track_to_markers_descr">Wählen Sie eine GPX-Datei für das Hinzufügen der enthaltenen Punkte zu den Markierungen.</string>
+    <string name="add_track_to_markers_descr">Wählen Sie einen Track aus, um dessen Wegpunkte zu den Markierungen hinzuzufügen.</string>
     <string name="add_favourites_group_to_markers_descr">Wählen Sie eine Favoritenkategorie aus, die Sie den Markierungen hinzufügen möchten.</string>
     <string name="add_group_descr">Importieren Sie Gruppen aus Favoriten oder GPX-Wegpunkten.</string>
     <string name="empty_state_markers_active_desc">Tippen Sie \'Orte\' lang oder kurz an, tippen Sie anschließend auf das Markierungszeichen.</string>
-    <string name="empty_state_markers_groups_desc">Importieren Sie Favoritengruppen oder GPX-Wegpunkte als Markierungen.</string>
+    <string name="empty_state_markers_groups_desc">Importieren Sie Favoritengruppen oder Wegpunkte als Markierungen.</string>
     <string name="show_guide_line_descr">Richtungsanzeiger von Ihrem Standort zu aktiven Markierungspunkten einblenden.</string>
     <string name="show_arrows_descr">Ein oder zwei Pfeile anzeigen, die die Richtung zu den aktiven Markierungen angeben.</string>
     <string name="distance_indication_descr">Wählen Sie aus, wie der Abstand zu aktiven Markierungen angezeigt werden soll.</string>
@@ -3055,7 +3055,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
 	<string name="south_abbreviation">S</string>
 	<string name="north_abbreviation">N</string>
 	<string name="optional_point_name">Optionaler Punktname</string>
-    <string name="transport_nearby_routes_within">Routen innerhalb</string>
+    <string name="transport_nearby_routes_within">Nahe Routen innerhalb</string>
     <string name="transport_nearby_routes">Innerhalb</string>
     <string name="group_deleted">Gruppe gelöscht</string>
     <string name="rendering_attr_whiteWaterSports_name">Wildwasser-Sportarten</string>
@@ -3158,4 +3158,5 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="access_intermediate_arrival_time">Ankunftszeit Zwischenziel</string>
     <string name="map_widget_intermediate_time">Reisezeit Zwischenziel</string>
     <string name="unirs_render_descr">Änderung des Standardstils, um den Kontrast von Fußgänger- und Fahrradwegen zu erhöhen. Verwendet Legacy Mapnik Farben.</string>
+    <string name="shared_string_gpx_files">GPX-Dateien</string>
     </resources>
