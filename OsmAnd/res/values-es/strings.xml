@@ -2989,12 +2989,12 @@
     <string name="shared_string_do">Sí</string>
     <string name="shared_string_only_with_wifi">Sólo con Wi-Fi</string>
     <string name="wikivoyage_download_pics">Descargar imágenes</string>
-    <string name="wikivoyage_download_pics_descr">Las imágenes de los artículos pueden descargarse para su uso sin conexión.
-\n Siempre puede cambiar los ajustes en «Explorar» → «Opciones».</string>
+    <string name="wikivoyage_download_pics_descr">Las imágenes pata los artículos pueden descargarse para su uso sin conexión. 
+\n Siempre puedes cambiar los ajustes en «Explorar» → «Opciones».</string>
     <string name="shared_string_wifi_only">Sólo con Wi-Fi</string>
-    <string name="select_travel_book">Seleccionar libro de viajes</string>
+    <string name="select_travel_book">Seleccionar un libro de viajes</string>
     <string name="shared_string_travel_book">Libro de viajes</string>
-    <string name="download_images">Mostrar imágenes</string>
+    <string name="download_images">Descargar imágenes</string>
     <string name="purchase_dialog_title">Elegir plan</string>
     <string name="purchase_dialog_travel_description">Compra uno de los siguientes elementos para recibir la funcionalidad de guías de viaje sin conexión:</string>
     <string name="purchase_dialog_subtitle">Elegir el elemento adecuado:</string>
@@ -3064,5 +3064,6 @@
     <string name="touring_view_render_descr">Estilo de alto detalle para turismo. Incluye todas las opciones de configuración del estilo predefinido, además: Muestra tanto detalle como sea posible, en particular todos los caminos, senderos y otras formas de viaje. Una clara distinción visual entre todos los tipos de carreteras, que recuerda a muchos atlas de rutas turísticas. Esquema de color de alto contraste para uso en exteriores, modo diurno y nocturno.</string>
     <string name="access_intermediate_arrival_time">Hora de llegada intermedia</string>
     <string name="map_widget_intermediate_time">Tiempo intermedio</string>
-    <string name="unirs_render_descr">Modificación del estilo estándar para proporcionar un mayor contraste de las vías peatonales y para bicicletas. Utiliza los colores heredados de Mapnik.</string>
+    <string name="unirs_render_descr">Modificación del estilo estándar para aumentar el contraste de los caminos peatonales y ciclistas. Utiliza los colores heredados de Mapnik.</string>
+    <string name="shared_string_gpx_files">Archivos GPX</string>
     </resources>
