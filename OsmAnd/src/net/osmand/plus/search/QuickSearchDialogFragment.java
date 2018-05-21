@@ -16,7 +16,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.content.FileProvider;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
@@ -2067,10 +2066,9 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 					sendIntent.setAction(Intent.ACTION_SEND);
 					sendIntent.putExtra(Intent.EXTRA_TEXT, "History.gpx:\n\n\n" + GPXUtilities.asString(gpxFile, app));
 					sendIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.share_history_subject));
-					sendIntent.putExtra(Intent.EXTRA_STREAM,
-							FileProvider.getUriForFile(getActivity(),
-									getActivity().getPackageName() + ".fileprovider", dst));
+					sendIntent.putExtra(Intent.EXTRA_STREAM, AndroidUtils.getUriForFile(getMapActivity(), dst));
 					sendIntent.setType("text/plain");
+					sendIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
 					startActivity(sendIntent);
 				}
 			};

@@ -3,7 +3,6 @@ package net.osmand.plus.activities;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
@@ -111,8 +110,8 @@ public class ContributionVersionActivity extends OsmandListActivity {
 			if(currentSelectedBuild != null){
 				Intent intent = new Intent(Intent.ACTION_VIEW);
 				intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION); 
-	            intent.setDataAndType(Uri.fromFile(pathToDownload), "application/vnd.android.package-archive");
-	            startActivityForResult(intent, ACTIVITY_TO_INSTALL);
+	            intent.setDataAndType(AndroidUtils.getUriForFile(getMyApplication(), pathToDownload), "application/vnd.android.package-archive");
+				startActivityForResult(intent, ACTIVITY_TO_INSTALL);
 	            updateInstalledApp(false, currentSelectedBuild.date);
 			}
 		}

@@ -1410,10 +1410,11 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
-				final Uri fileUri = Uri.fromFile(gpxInfo.file);
+				final Uri fileUri = AndroidUtils.getUriForFile(getMyApplication(), gpxInfo.file);
 				final Intent sendIntent = new Intent(Intent.ACTION_SEND);
 				sendIntent.putExtra(Intent.EXTRA_STREAM, fileUri);
 				sendIntent.setType("application/gpx+xml");
+				sendIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
 				startActivity(sendIntent);
 				return true;
 			}

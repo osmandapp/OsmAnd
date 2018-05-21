@@ -291,10 +291,11 @@ public class TrackPointFragment extends OsmandExpandableListFragment implements 
 	private void shareItems() {
 		GPXFile gpxFile = getGpx();
 		if (gpxFile != null) {
-			final Uri fileUri = Uri.fromFile(new File(gpxFile.path));
+			final Uri fileUri = AndroidUtils.getUriForFile(getMyApplication(), new File(gpxFile.path));
 			final Intent sendIntent = new Intent(Intent.ACTION_SEND);
 			sendIntent.putExtra(Intent.EXTRA_STREAM, fileUri);
 			sendIntent.setType("application/gpx+xml");
+			sendIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
 			startActivity(sendIntent);
 		}
 	}

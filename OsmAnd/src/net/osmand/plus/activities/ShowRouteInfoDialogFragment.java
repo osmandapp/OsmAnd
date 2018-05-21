@@ -13,7 +13,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.content.FileProvider;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.text.TextUtils;
@@ -35,6 +34,7 @@ import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.listener.ChartTouchListener;
 import com.github.mikephil.charting.listener.OnChartGestureListener;
 
+import net.osmand.AndroidUtils;
 import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -440,7 +440,7 @@ public class ShowRouteInfoDialogFragment extends DialogFragment {
 			@Override
 			public void onClick(View v) {
 				final GPXFile gpx = helper.generateGPXFileWithRoute();
-				final Uri fileUri = Uri.fromFile(new File(gpx.path));
+				final Uri fileUri = AndroidUtils.getUriForFile(getMyApplication(), new File(gpx.path));
 				File dir = new File(getActivity().getCacheDir(), "share");
 				if (!dir.exists()) {
 					dir.mkdir();
@@ -457,10 +457,9 @@ public class ShowRouteInfoDialogFragment extends DialogFragment {
 					sendIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.share_route_subject));
 					sendIntent.putExtra(Intent.EXTRA_STREAM, fileUri);
 					sendIntent.putExtra(
-							Intent.EXTRA_STREAM,
-							FileProvider.getUriForFile(getActivity(),
-									getActivity().getPackageName() + ".fileprovider", dst));
+							Intent.EXTRA_STREAM, AndroidUtils.getUriForFile(getMyApplication(), dst));
 					sendIntent.setType("text/plain");
+					sendIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
 					startActivity(sendIntent);
 				} catch (IOException e) {
 					// Toast.makeText(getActivity(), "Error sharing favorites: " + e.getMessage(),
@@ -560,7 +559,7 @@ public class ShowRouteInfoDialogFragment extends DialogFragment {
 	void print() {
 		File file = generateRouteInfoHtml(adapter, helper.getGeneralRouteInformation());
 		if (file.exists()) {
-			Uri uri = Uri.fromFile(file);
+			Uri uri = AndroidUtils.getUriForFile(getMyApplication(), file);
 			Intent browserIntent;
 			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) { // use Android Print Framework
 				browserIntent = new Intent(getActivity(), PrintDialogActivity.class)
@@ -569,6 +568,7 @@ public class ShowRouteInfoDialogFragment extends DialogFragment {
 				browserIntent = new Intent(Intent.ACTION_VIEW).setDataAndType(
 						uri, "text/html");
 			}
+			browserIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
 			startActivity(browserIntent);
 		}
 	}

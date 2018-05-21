@@ -12,7 +12,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.content.FileProvider;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.view.ActionMode;
@@ -32,6 +31,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import net.osmand.AndroidUtils;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -587,10 +587,9 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 					}
 					sendIntent.putExtra(Intent.EXTRA_TEXT, Html.fromHtml(generateHtmlPrint(groups).toString()));
 					sendIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.share_fav_subject));
-					sendIntent.putExtra(Intent.EXTRA_STREAM,
-							FileProvider.getUriForFile(getActivity(),
-									getActivity().getPackageName() + ".fileprovider", dst));
+					sendIntent.putExtra(Intent.EXTRA_STREAM, AndroidUtils.getUriForFile(getMyApplication(), dst));
 					sendIntent.setType("text/plain");
+					sendIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
 					startActivity(sendIntent);
 				} catch (IOException e) {
 					Toast.makeText(getActivity(), "Error sharing favorites: " + e.getMessage(), Toast.LENGTH_SHORT).show();

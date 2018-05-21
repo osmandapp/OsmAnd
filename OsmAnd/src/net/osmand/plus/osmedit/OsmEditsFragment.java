@@ -4,7 +4,6 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -30,6 +29,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import net.osmand.AndroidUtils;
 import net.osmand.data.PointDescription;
 import net.osmand.osm.edit.Node;
 import net.osmand.plus.GPXUtilities;
@@ -865,8 +865,9 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 				final Intent sendIntent = new Intent();
 				sendIntent.setAction(Intent.ACTION_SEND);
 				sendIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.share_osm_edits_subject));
-				sendIntent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(osmchange));
+				sendIntent.putExtra(Intent.EXTRA_STREAM, AndroidUtils.getUriForFile(getMyApplication(), osmchange));
 				sendIntent.setType("text/plain");
+				sendIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
 				startActivity(sendIntent);
 			}
 		}
