@@ -1826,7 +1826,7 @@ Dĺžka %2$s</string>
     <string name="world_maps">Svetové mapy</string>
     <string name="hillshade_layer_disabled">Tieňovaný reliéf vypnutý</string>
     <string name="buy">Kúpiť</string>
-    <string name="activate_seamarks_plugin">Prosím zapnite modul \"Námorné značky\"</string>
+    <string name="activate_seamarks_plugin">Prosím zapnite modul \"Námorný mapový pohľad\"</string>
     <string name="activate_srtm_plugin">Prosím zapnite modul \"Vrstevnice\"</string>
     <string name="later">Neskôr</string>
     <string name="get_full_version">Plná verzia</string>
@@ -2826,16 +2826,16 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="go_to_next_field">Ďalšie pole</string>
     <string name="rename_marker">Premenovať značku</string>
     <string name="appearance_on_the_map">Vzhľad na mape</string>
-    <string name="add_track_to_markers_descr">Zvoľte súbor GPX pre pridanie jeho waypointov medzi značky.</string>
+    <string name="add_track_to_markers_descr">Zvoľte stopu pre pridanie jej waypointov medzi značky.</string>
     <string name="add_favourites_group_to_markers_descr">Zvoľte kategóriu obľúbených bodov, ktoré majú byť pridané k značkám.</string>
-    <string name="shared_string_gpx_waypoints">Body stopy</string>
+    <string name="shared_string_gpx_waypoints">Waypointy stopy</string>
     <string name="favourites_group">Kategória obľúbených bodov</string>
     <string name="add_group">Pridať skupinu</string>
     <string name="add_group_descr">Importovať skupiny z obľúbených bodov alebo waypointov GPX.</string>
     <string name="empty_state_markers_active">Vytvoriť mapové značky!</string>
     <string name="empty_state_markers_active_desc">Stlačte \"Miesta\" dlho alebo krátko, potom stlačte tlačidlo s vlajkou.</string>
     <string name="empty_state_markers_groups">Importovať skupiny</string>
-    <string name="empty_state_markers_groups_desc">Importovať skupiny obľúbených bodov alebo waypointov GPX ako značky.</string>
+    <string name="empty_state_markers_groups_desc">Importovať skupiny obľúbených bodov alebo waypointov ako značky.</string>
     <string name="empty_state_markers_history_desc">Značky označené ako prejdené sa zobrazia na tejto obrazovke.</string>
     <string name="shared_string_two">Dve</string>
     <string name="shared_string_one">Jedna</string>
@@ -2844,7 +2844,7 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="distance_indication_descr">Zvoliť ako chcete zobraziť vzdialenosť k aktívnym značkám.</string>
     <string name="active_markers_descr">Zvoľte počet aktívnych značiek na zobrazenie.</string>
     <string name="shared_string_more_without_dots">Viac</string>
-    <string name="looking_for_tracks_with_waypoints">Hľadajú sa GPX súbory s waypointami</string>
+    <string name="looking_for_tracks_with_waypoints">Hľadajú sa stopy s waypointami</string>
     <string name="empty_state_osm_edits">Vytvoriť alebo upraviť objekty OSM</string>
     <string name="empty_state_osm_edits_descr">Vytvoriť alebo upraviť body záujmu OSM, otvoriť alebo komentovať OSM poznámky a prispieť zaznamenanými súbormi GPX.</string>
     <string name="shared_string_deleted">Odstránené</string>
@@ -3057,4 +3057,5 @@ Zodpovedá oblasti: %1$s x %2$s</string>
 <string name="unirs_render_descr">Modifikácia štandardného štýlu pre väčší kontrast ciest pre chodcov a cyklistov. Používa staršie farby z Mapniku.</string>
     <string name="access_intermediate_arrival_time">Čas príchodu k prechodnému bodu</string>
     <string name="map_widget_intermediate_time">Prechodný čas</string>
+    <string name="shared_string_gpx_files">Súbory GPX</string>
     </resources>
