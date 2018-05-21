@@ -963,11 +963,15 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 	public void updateMapCenter(LatLon mapCenter) {
 		customMapCenter = true;
-		menu.setMapCenter(mapCenter);
+		if (menu != null) {
+			menu.setMapCenter(mapCenter);
+		}
 		this.mapCenter = mapCenter;
-		RotatedTileBox box = map.getCurrentRotatedTileBox().copy();
-		origMarkerX = box.getCenterPixelX();
-		origMarkerY = box.getCenterPixelY();
+		if (map != null) {
+			RotatedTileBox box = map.getCurrentRotatedTileBox().copy();
+			origMarkerX = box.getCenterPixelX();
+			origMarkerY = box.getCenterPixelY();
+		}
 	}
 
 	private void enableDisableButtons(View buttonView, TextView button, boolean enabled) {
