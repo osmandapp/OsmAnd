@@ -2954,8 +2954,8 @@ Zodpovedá oblasti: %1$s x %2$s</string>
 	<string name="south_abbreviation">J</string>
 	<string name="north_abbreviation">S</string>
 	<string name="optional_point_name">Voliteľný názov bodu</string>
-    <string name="transport_nearby_routes_within">Blízke trasy v</string>
-    <string name="transport_nearby_routes">Blízko</string>
+    <string name="transport_nearby_routes_within">Blízke trasy do</string>
+    <string name="transport_nearby_routes">Vovnútri</string>
     <string name="rendering_attr_whiteWaterSports_name">Divoká voda</string>
     <string name="group_deleted">Skupina odstránená</string>
     <string name="waypoints_removed_from_map_markers">Body trasy odstránené z mapových značiek</string>
