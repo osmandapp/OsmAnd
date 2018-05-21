@@ -996,7 +996,7 @@
     <string name="srtm_plugin_disabled">Եզրագծերը(բարձունքների) անջատված են</string>
     <string name="favourites_edit_dialog_title">Տեղեկատվություն ընտրված կետի մասին</string>
     <string name="lang_pms">Պյեմոնտերեն</string>
-    <string name="shared_string_gpx_files">Տրեկները</string>
+    <string name="shared_string_tracks">Տրեկները</string>
     <string name="shared_string_currently_recording_track">Ներկայումս գրնացվող ուղին</string>
     <string name="shared_string_audio">Աուդիո</string>
     <string name="shared_string_video">Վիդեո</string>

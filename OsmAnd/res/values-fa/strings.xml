@@ -1490,7 +1490,7 @@
 	
 	<string name="gpx_file_is_empty">فایل GPX خالی</string>
     
-    <string name="shared_string_gpx_files">مسیرها</string>
+    <string name="shared_string_tracks">مسیرها</string>
     <string name="shared_string_my_favorites">نقاط برگزیده</string>
     <string name="shared_string_my_places">مکان‌های من</string>
     

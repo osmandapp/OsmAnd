@@ -1609,7 +1609,7 @@ Dĺžka %2$s</string>
     <string name="shared_string_clear_all">Vymazať všetko</string>
     <string name="shared_string_my_location">Moja poloha</string>
     <string name="shared_string_my_favorites">Obľúbené</string>
-    <string name="shared_string_gpx_files">Stopy</string>
+    <string name="shared_string_tracks">Stopy</string>
     <string name="shared_string_currently_recording_track">Teraz nahrávaná stopa</string>
     <string name="delay_to_start_navigation_descr">Zadajte dobu zotrvania na obrazovke plánovania trasy.</string>
     <string name="delay_to_start_navigation">Spustiť navigačné pokyny po…</string>

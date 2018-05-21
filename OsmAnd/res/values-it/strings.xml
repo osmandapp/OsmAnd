@@ -1762,7 +1762,7 @@ Attivando questa vista lo stile della mappa diventerà \'Inverno e sci\', mostra
     <string name="shared_string_clear_all">Cancella tutto</string>
     <string name="shared_string_my_location">La mia posizione</string>
     <string name="shared_string_my_favorites">I miei preferiti</string>
-    <string name="shared_string_gpx_files">Le mie tracce</string>
+    <string name="shared_string_tracks">Le mie tracce</string>
     <string name="shared_string_currently_recording_track">Traccia in corso di registrazione</string>
     <string name="waypoint_visit_after">Visita dopo</string>
     <string name="waypoint_visit_before">Visita prima</string>

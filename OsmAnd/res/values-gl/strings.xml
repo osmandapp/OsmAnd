@@ -158,7 +158,7 @@ As pistas gravadas pódense compartir ou empregar colaborando con OSM. Os atleta
     
     <string name="gpx_file_is_empty">A pista GPX está baleira</string>
     
-    <string name="shared_string_gpx_files">Todas as pistas</string>
+    <string name="shared_string_tracks">Todas as pistas</string>
     <string name="shared_string_my_favorites">Os meus favoritos</string>
     <string name="shared_string_my_places">Os meus lugares</string>
     

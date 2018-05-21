@@ -1446,7 +1446,7 @@ OsmAnd ir atvērtā koda navigācijas aplikācija ar piekļuvi vispusīgiem Open
     
     
     
-    <string name="shared_string_gpx_files">Visi treki</string>
+    <string name="shared_string_tracks">Visi treki</string>
     <string name="shared_string_my_favorites">Mana izlase</string>
     <string name="shared_string_my_places">Izlase</string>
     

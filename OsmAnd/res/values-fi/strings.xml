@@ -736,7 +736,7 @@
 	<string name="shared_string_my_location">Sijaintini</string>
 	<string name="shared_string_my_places">Omat paikat</string>
 	<string name="shared_string_my_favorites">Omat suosikit</string>
-	<string name="shared_string_gpx_files">Reittini</string>
+	<string name="shared_string_tracks">Reittini</string>
 	<string name="shared_string_audio">Ääni</string>
 	<string name="shared_string_video">Video</string>
 	<string name="shared_string_photo">Kuva</string>

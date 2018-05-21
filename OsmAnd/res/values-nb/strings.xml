@@ -1198,7 +1198,7 @@
     <string name="shared_string_my_location">Min posisjon</string>
     <string name="shared_string_my_places">Mine steder</string>
     <string name="shared_string_my_favorites">Favoritter</string>
-    <string name="shared_string_gpx_files">Spor</string>
+    <string name="shared_string_tracks">Spor</string>
     <string name="shared_string_photo">Foto</string>
 
     <string name="route_points">Rutepunkter</string>

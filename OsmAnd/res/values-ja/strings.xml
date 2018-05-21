@@ -1466,7 +1466,7 @@ POIの更新は利用できません</string>
     
     <string name="gpx_file_is_empty">GPSトラックは空です</string>
     
-    <string name="shared_string_gpx_files">使用した経路</string>
+    <string name="shared_string_tracks">使用した経路</string>
     <string name="shared_string_my_favorites">お気に入り</string>
     <string name="shared_string_my_places">お気に入り</string>
     

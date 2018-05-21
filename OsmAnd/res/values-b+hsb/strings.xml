@@ -1442,7 +1442,7 @@
     <string name="shared_string_action_template">Akcija {0}</string>
     <string name="shared_string_exit">Skónčić</string>
     <string name="shared_string_add_to_favorites">Jako faworit składować</string>
-    <string name="shared_string_gpx_files">Moje puće</string>
+    <string name="shared_string_tracks">Puće</string>
     <string name="shared_string_currently_recording_track">Tuchwilne nahrawanje puća</string>
     <string name="shared_string_audio">Awdijo</string>
     <string name="shared_string_video">Widejo</string>

@@ -1735,7 +1735,7 @@
     <string name="shared_string_my_location">我的位置</string>
     <string name="shared_string_my_places">我的地點</string>
     <string name="shared_string_my_favorites">收藏</string>
-    <string name="shared_string_gpx_files">軌跡</string>
+    <string name="shared_string_tracks">軌跡</string>
     <string name="shared_string_currently_recording_track">錄製軌跡</string>
     <string name="shared_string_audio">音訊</string>
     <string name="shared_string_video">視訊</string>

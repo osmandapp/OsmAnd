@@ -637,7 +637,7 @@
     <string name="shared_string_add_to_favorites">Додај у \"Омиљено\"</string>
     <string name="shared_string_my_places">Моја места</string>
     <string name="shared_string_my_favorites">Омиљено</string>
-    <string name="shared_string_gpx_files">Путање</string>
+    <string name="shared_string_tracks">Путање</string>
     <string name="shared_string_video">Снимак</string>
     <string name="shared_string_photo">Слика</string>
     <string name="route_points">Тачке путање</string>

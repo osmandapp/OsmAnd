@@ -1461,7 +1461,7 @@
     
     <string name="gpx_file_is_empty">Pusty plik GPX</string>
 
-    <string name="shared_string_gpx_files">Ślady</string>
+    <string name="shared_string_tracks">Ślady</string>
     <string name="shared_string_my_favorites">Ulubione</string>
     <string name="shared_string_my_places">Miejsca</string>
 

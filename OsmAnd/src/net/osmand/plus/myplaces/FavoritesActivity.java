@@ -45,7 +45,7 @@ public class FavoritesActivity extends TabActivity {
 	public static final String OPEN_FAVOURITES_TAB = "open_favourites_tab";
 	public static final String OPEN_MY_PLACES_TAB = "open_my_places_tab";
 
-	public static final int  GPX_TAB = R.string.shared_string_gpx_files;
+	public static final int  GPX_TAB = R.string.shared_string_tracks;
 	public static final int  FAV_TAB = R.string.shared_string_my_favorites;
 	protected List<WeakReference<Fragment>> fragList = new ArrayList<>();
 	private int tabSize;

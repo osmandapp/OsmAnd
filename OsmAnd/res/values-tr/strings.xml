@@ -1345,7 +1345,7 @@
 	<string name="shared_string_deselect">Seçimini kaldırın</string>
 	<string name="shared_string_deselect_all">Tüm Seçimleri Kaldır</string>
 	<string name="shared_string_collapse">Daralt</string>
-	<string name="shared_string_gpx_files">Benim İzlerim</string>
+	<string name="shared_string_tracks">Benim İzlerim</string>
 	<string name="shared_string_currently_recording_track">Mevcut kaydedilen izim</string>
 	<string name="route_points">Rota noktaları</string>
 	<string name="track_segments">İz bölümü</string>

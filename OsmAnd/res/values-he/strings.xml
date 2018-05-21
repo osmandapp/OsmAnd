@@ -2366,7 +2366,7 @@
     <string name="shared_string_my_location">המיקום שלי</string>
     <string name="shared_string_my_places">המקומות שלי</string>
     <string name="shared_string_my_favorites">מועדפים</string>
-    <string name="shared_string_gpx_files">מסלולים</string>
+    <string name="shared_string_tracks">מסלולים</string>
     <string name="shared_string_currently_recording_track">המסלול מוקלט</string>
     <string name="shared_string_audio">שמע</string>
     <string name="shared_string_video">וידאו</string>
