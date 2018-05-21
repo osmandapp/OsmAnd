@@ -1411,7 +1411,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
-				final Uri fileUri = FileProvider.getUriForFile(getMyApplication(),"net.osmand.plus.fileprovider", gpxInfo.file);
+				final Uri fileUri = FileProvider.getUriForFile(getMyApplication(),getActivity().getPackageName() + ".fileprovider", gpxInfo.file);
 				final Intent sendIntent = new Intent(Intent.ACTION_SEND);
 				sendIntent.putExtra(Intent.EXTRA_STREAM, fileUri);
 				sendIntent.setType("application/gpx+xml");

@@ -1879,7 +1879,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	public void playRecording(final Context ctx, final Recording r) {
 		if (r.isVideo()) {
 			Intent vint = new Intent(Intent.ACTION_VIEW);
-			vint.setDataAndType(FileProvider.getUriForFile(mapActivity,"net.osmand.plus.fileprovider",r.file), "video/*");
+			vint.setDataAndType(FileProvider.getUriForFile(mapActivity,mapActivity.getPackageName() + ".fileprovider",r.file), "video/*");
 			vint.setFlags(0x10000000);
 			try {
 				ctx.startActivity(vint);
@@ -1889,7 +1889,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			return;
 		} else if (r.isPhoto()) {
 			Intent vint = new Intent(Intent.ACTION_VIEW);
-			vint.setDataAndType(FileProvider.getUriForFile(mapActivity,"net.osmand.plus.fileprovider",r.file), "image/*");
+			vint.setDataAndType(FileProvider.getUriForFile(mapActivity,mapActivity.getPackageName() + ".fileprovider",r.file), "image/*");
 			vint.setFlags(0x10000000);
 			ctx.startActivity(vint);
 			return;
