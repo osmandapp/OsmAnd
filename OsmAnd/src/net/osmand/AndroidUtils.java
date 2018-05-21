@@ -12,6 +12,7 @@ import android.graphics.Paint;
 import android.graphics.PointF;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.StateListDrawable;
+import android.net.Uri;
 import android.os.Build;
 import android.os.IBinder;
 import android.support.annotation.AttrRes;
@@ -20,6 +21,7 @@ import android.support.annotation.ColorRes;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.FileProvider;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.TextPaint;
@@ -107,6 +109,10 @@ public class AndroidUtils {
 			}
 		}
 		return src;
+	}
+
+	public static Uri getUriForFile(Context context, File file) {
+		return FileProvider.getUriForFile(context, context.getPackageName() + ".fileprovider", file);
 	}
 
 	public static Spannable replaceCharsWithIcon(String text, Drawable icon, String[] chars) {

@@ -4,7 +4,6 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -111,7 +110,7 @@ public class ContributionVersionActivity extends OsmandListActivity {
 			if(currentSelectedBuild != null){
 				Intent intent = new Intent(Intent.ACTION_VIEW);
 				intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION); 
-	            intent.setDataAndType(FileProvider.getUriForFile(getMyApplication(), getMyApplication().getPackageName() + ".fileprovider",pathToDownload), "application/vnd.android.package-archive");
+	            intent.setDataAndType(AndroidUtils.getUriForFile(getMyApplication(), pathToDownload), "application/vnd.android.package-archive");
 				intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
 				startActivityForResult(intent, ACTIVITY_TO_INSTALL);
 	            updateInstalledApp(false, currentSelectedBuild.date);

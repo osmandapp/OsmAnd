@@ -12,7 +12,6 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.view.ActionMode;
 import android.util.Xml;
@@ -30,6 +29,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import net.osmand.AndroidUtils;
 import net.osmand.data.PointDescription;
 import net.osmand.osm.edit.Node;
 import net.osmand.plus.GPXUtilities;
@@ -865,7 +865,7 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 				final Intent sendIntent = new Intent();
 				sendIntent.setAction(Intent.ACTION_SEND);
 				sendIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.share_osm_edits_subject));
-				sendIntent.putExtra(Intent.EXTRA_STREAM, FileProvider.getUriForFile(getMyApplication(), getMyApplication().getPackageName() + ".fileprovider", osmchange));
+				sendIntent.putExtra(Intent.EXTRA_STREAM, AndroidUtils.getUriForFile(getMyApplication(), osmchange));
 				sendIntent.setType("text/plain");
 				sendIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
 				startActivity(sendIntent);

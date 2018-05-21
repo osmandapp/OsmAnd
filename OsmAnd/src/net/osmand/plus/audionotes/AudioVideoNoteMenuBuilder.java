@@ -4,13 +4,13 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
-import android.support.v4.content.FileProvider;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import net.osmand.AndroidUtils;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin.Recording;
@@ -64,7 +64,7 @@ public class AudioVideoNoteMenuBuilder extends MenuBuilder {
 					@Override
 					public void onClick(View v) {
 						Intent vint = new Intent(Intent.ACTION_VIEW);
-						vint.setDataAndType(FileProvider.getUriForFile(getApplication(), getMapActivity().getPackageName() + ".fileprovider", recording.getFile()), "image/*");
+						vint.setDataAndType(AndroidUtils.getUriForFile(getApplication(),recording.getFile()) , "image/*");
 						vint.setFlags(0x10000000);
 						vint.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
 						v.getContext().startActivity(vint);

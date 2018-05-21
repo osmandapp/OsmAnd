@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.view.ActionMode;
 import android.view.LayoutInflater;
@@ -27,6 +26,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.GPXUtilities;
@@ -463,7 +463,7 @@ public class NotesFragment extends OsmAndListFragment {
 		for (Recording rec : selected) {
 			File file = rec == SHARE_LOCATION_FILE ? generateGPXForRecordings(selected) : rec.getFile();
 			if (file != null) {
-				uris.add(FileProvider.getUriForFile(getMyApplication(), getMyApplication().getPackageName() + ".fileprovider", file));
+				uris.add(AndroidUtils.getUriForFile(getMyApplication(), file));
 			}
 		}
 
