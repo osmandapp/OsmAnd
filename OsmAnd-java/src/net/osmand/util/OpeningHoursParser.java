@@ -1607,6 +1607,10 @@ public class OpeningHoursParser {
 		int indexP = 0;
 		for(int i = 0; i <= tokens.size(); i++) {
 			Token t = i == tokens.size() ? null : tokens.get(i);
+			if (i == 0 && t != null && t.type == TokenType.TOKEN_UNKNOWN) {
+				// skip rule if the first token unknown
+				return;
+			}
 			if (t == null || t.type.ord() > currentParse.ord()) {
 				presentTokens.add(currentParse);
 				if (currentParse == TokenType.TOKEN_MONTH || currentParse == TokenType.TOKEN_DAY_MONTH
@@ -1687,17 +1691,10 @@ public class OpeningHoursParser {
 		if(!presentTokens.contains(TokenType.TOKEN_MONTH)) {
 			Arrays.fill(basic.getMonths(), true);
 		}
-//		if(!presentTokens.contains(TokenType.TOKEN_DAY_MONTH)) {
-//			Arrays.fill(basic.getDayMonths(), true);
-//		}
 		if(!presentTokens.contains(TokenType.TOKEN_DAY_WEEK) && !presentTokens.contains(TokenType.TOKEN_HOLIDAY) &&
 				!presentTokens.contains(TokenType.TOKEN_DAY_MONTH)) {
 			Arrays.fill(basic.getDays(), true);
 		}
-//		if(!presentTokens.contains(TokenType.TOKEN_HOUR_MINUTES)) {
-//			basic.addTimeRange(0, 24 * 60);
-//		}
-//		System.out.println(r + " " +  tokens);
 		rules.add(0, basic);
 	}
 
@@ -1806,7 +1803,7 @@ public class OpeningHoursParser {
 			rs.addRules(basicRules);
 		}
 		rs.setSequenceCount(sequences.size());
-		return rs;
+		return rs.rules.size() > 0 ? rs : null;
 	}
 
 	/**
