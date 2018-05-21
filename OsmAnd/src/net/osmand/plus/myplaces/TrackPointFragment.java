@@ -13,6 +13,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.FileProvider;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.view.ActionMode;
@@ -291,10 +292,11 @@ public class TrackPointFragment extends OsmandExpandableListFragment implements 
 	private void shareItems() {
 		GPXFile gpxFile = getGpx();
 		if (gpxFile != null) {
-			final Uri fileUri = Uri.fromFile(new File(gpxFile.path));
+			final Uri fileUri = FileProvider.getUriForFile(getMyApplication(), getMyApplication().getPackageName() + ".fileprovider",new File(gpxFile.path));
 			final Intent sendIntent = new Intent(Intent.ACTION_SEND);
 			sendIntent.putExtra(Intent.EXTRA_STREAM, fileUri);
 			sendIntent.setType("application/gpx+xml");
+			sendIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
 			startActivity(sendIntent);
 		}
 	}

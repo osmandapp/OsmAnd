@@ -440,7 +440,7 @@ public class ShowRouteInfoDialogFragment extends DialogFragment {
 			@Override
 			public void onClick(View v) {
 				final GPXFile gpx = helper.generateGPXFileWithRoute();
-				final Uri fileUri = Uri.fromFile(new File(gpx.path));
+				final Uri fileUri = FileProvider.getUriForFile(getMyApplication(), getMyApplication().getPackageName() + ".fileprovider",new File(gpx.path));
 				File dir = new File(getActivity().getCacheDir(), "share");
 				if (!dir.exists()) {
 					dir.mkdir();
@@ -461,6 +461,7 @@ public class ShowRouteInfoDialogFragment extends DialogFragment {
 							FileProvider.getUriForFile(getActivity(),
 									getActivity().getPackageName() + ".fileprovider", dst));
 					sendIntent.setType("text/plain");
+					sendIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
 					startActivity(sendIntent);
 				} catch (IOException e) {
 					// Toast.makeText(getActivity(), "Error sharing favorites: " + e.getMessage(),
@@ -560,7 +561,7 @@ public class ShowRouteInfoDialogFragment extends DialogFragment {
 	void print() {
 		File file = generateRouteInfoHtml(adapter, helper.getGeneralRouteInformation());
 		if (file.exists()) {
-			Uri uri = Uri.fromFile(file);
+			Uri uri = FileProvider.getUriForFile(getMyApplication(), getMyApplication().getPackageName() + ".fileprovider",file);
 			Intent browserIntent;
 			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) { // use Android Print Framework
 				browserIntent = new Intent(getActivity(), PrintDialogActivity.class)
@@ -569,6 +570,7 @@ public class ShowRouteInfoDialogFragment extends DialogFragment {
 				browserIntent = new Intent(Intent.ACTION_VIEW).setDataAndType(
 						uri, "text/html");
 			}
+			browserIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
 			startActivity(browserIntent);
 		}
 	}

@@ -11,6 +11,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.content.FileProvider;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewCompat;
@@ -151,10 +152,11 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 						.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 							@Override
 							public boolean onMenuItemClick(MenuItem item) {
-								final Uri fileUri = Uri.fromFile(new File(getGpx().path));
+								final Uri fileUri = FileProvider.getUriForFile(getMyApplication(), getMyApplication().getPackageName() + ".fileprovider", new File(getGpx().path));
 								final Intent sendIntent = new Intent(Intent.ACTION_SEND);
 								sendIntent.putExtra(Intent.EXTRA_STREAM, fileUri);
 								sendIntent.setType("application/gpx+xml");
+								sendIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
 								startActivity(sendIntent);
 								return true;
 							}

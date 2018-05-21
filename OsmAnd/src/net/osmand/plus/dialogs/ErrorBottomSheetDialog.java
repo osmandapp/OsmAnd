@@ -48,7 +48,8 @@ public class ErrorBottomSheetDialog extends BottomSheetDialogFragment {
 				Intent intent = new Intent(Intent.ACTION_SEND);
 				intent.putExtra(Intent.EXTRA_EMAIL, new String[]{"crash@osmand.net"}); //$NON-NLS-1$
 				File file = getMyApplication().getAppPath(OsmandApplication.EXCEPTION_PATH);
-				intent.putExtra(Intent.EXTRA_STREAM, FileProvider.getUriForFile(getMyApplication(),"net.osmand.plus.fileprovider", file));
+				intent.putExtra(Intent.EXTRA_STREAM, FileProvider.getUriForFile(getMyApplication(), getMyApplication().getPackageName() + ".fileprovider", file));
+				intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
 				intent.setType("vnd.android.cursor.dir/email"); //$NON-NLS-1$
 				intent.putExtra(Intent.EXTRA_SUBJECT, "OsmAnd bug"); //$NON-NLS-1$
 				StringBuilder text = new StringBuilder();
@@ -89,7 +90,6 @@ public class ErrorBottomSheetDialog extends BottomSheetDialogFragment {
 	}
 
 	public static boolean shouldShow(OsmandSettings settings, MapActivity activity) {
-		return activity.getMyApplication().getAppInitializer()
-				.checkPreviousRunsForExceptions(activity, settings != null);
+		return true;
 	}
 }

@@ -828,8 +828,9 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 
 	public void captureImage(double lat, double lon, final MapActivity mapActivity) {
 		Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-		Uri fileUri = Uri.fromFile(getBaseFileName(lat, lon, app, IMG_EXTENSION));
+		Uri fileUri = FileProvider.getUriForFile(getMapActivity(), getMapActivity().getPackageName() + ".fileprovider", (getBaseFileName(lat, lon, app, IMG_EXTENSION)));
 		intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri); // set the image file name
+		intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
 		// start the image capture Intent
 		mapActivity.startActivityForResult(intent, 105);
 	}
@@ -841,7 +842,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 //		if (AV_VIDEO_FORMAT.get() == VIDEO_OUTPUT_3GP) {
 //			ext = THREEGP_EXTENSION;
 //		}
-		Uri fileUri = Uri.fromFile(getBaseFileName(lat, lon, app, ext));
+		Uri fileUri = FileProvider.getUriForFile(getMapActivity(), getMapActivity().getPackageName() + ".fileprovider", getBaseFileName(lat, lon, app, ext));
 		intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri); // set the image file name
 
 		intent.putExtra(MediaStore.EXTRA_VIDEO_QUALITY, 1); // set the video image quality to high
@@ -1503,7 +1504,8 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 		final File f = getBaseFileName(lat, lon, app, IMG_EXTENSION);
 		lastTakingPhoto = f;
-		takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(f));
+		takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, FileProvider.getUriForFile(getMapActivity(), getMapActivity().getPackageName() + ".fileprovider",f));
+		takePictureIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
 		try {
 			mapActivity.startActivityForResult(takePictureIntent, 205);
 		} catch (Exception e) {

@@ -463,7 +463,7 @@ public class NotesFragment extends OsmAndListFragment {
 		for (Recording rec : selected) {
 			File file = rec == SHARE_LOCATION_FILE ? generateGPXForRecordings(selected) : rec.getFile();
 			if (file != null) {
-				uris.add(FileProvider.getUriForFile(getContext(), getActivity().getPackageName() + ".fileprovider", file));
+				uris.add(FileProvider.getUriForFile(getMyApplication(), getMyApplication().getPackageName() + ".fileprovider", file));
 			}
 		}
 
