@@ -2569,7 +2569,7 @@ Pro praghere iscrie su còdighe intreu</string>
 	<string name="rendering_attr_depthContours_description">Ammustra sas lìnias de profondidade.</string>
     
     <string name="routing_attr_height_obstacles_name">Imprea sos datos de s\'artària</string>
-    <string name="routing_attr_height_obstacles_description">Fatore in s\'artària de su terrinu (dae datos SRTM, ASTER e EU-DEM).</string>
+    <string name="routing_attr_height_obstacles_description">Fatore pro s\'artària de su terrinu (dae datos SRTM, ASTER e EU-DEM).</string>
 
     
     <string name="routing_attr_driving_style_name">Istile de ghia</string>
@@ -3215,7 +3215,7 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="touring_view_render_descr">Istile fatu a sa minuda pro su turismu. Incluit totu sas optziones de configuratzione de s\'istile predefinidu e, in prus: ammustrat totu sas minujas chi est possìbile ammustrare, in particulare totu sas istradas, camineras, e sas àteras maneras de biagiare. Faghet una distintzione crara intre totu sas castas de istrada, in una manera sìmile a medas atlantes pro su turismu. Tenet un\'ischema de colores a cuntrastu artu pro s\'impreu a s\'àera aberta, una modalidade pro sa die e una pro sa note.</string>
     <string name="shared_string_bookmark">Sinnalibru</string>
     <string name="off_road_render_descr">Adatu pro s\'impreu durante sa ghia foras de sas istradas. Adatu pro s\'impreu cun mapas satellitares birdes comente suta-istratos. Caraterìsticas printzipales: grussesa de sas istradas printzipales minimada, grussesa de sas rastas, sas camineras, de sas pistas tziclàbiles e de sas àteras àndalas ismanniada. Basadu in subra de s\'istile topogràficu.</string>
-    <string name="unirs_render_descr">Modìfica de s\'istile istandard pro frunire unu cuntrastu prus mannu pro sas istradas pedonales e sas pistas tziclàbiles. Imprea sos colores de sa versione betza de Mapnik.</string>
+    <string name="unirs_render_descr">Modìfica de s\'istile predefinidu pro ismanniare su cuntrastu pro sas istradas pedonales e sas pistas tziclàbiles. Impreat sos colores de sa versione betza de Mapnik.</string>
     <string name="access_intermediate_arrival_time">Ora de arrivu a sa tapa</string>
     <string name="map_widget_intermediate_time">Tempus de arrivu a sa tapa</string>
     </resources>
