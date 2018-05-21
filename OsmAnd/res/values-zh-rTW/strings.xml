@@ -3217,5 +3217,5 @@
     <string name="touring_view_render_descr">旅遊為目地的高詳細樣式。包括所有組態選項的預設樣式，另外還有：儘可能詳細的顯示，尤其是所有道路、路徑及其他旅遊方式。清晰的視覺區分所有不同的道路類型，讓人追憶的許多旅遊地圖。戶外使用的高對比配色方案、晝夜模式。</string>
     <string name="access_intermediate_arrival_time">中轉抵達時間</string>
     <string name="map_widget_intermediate_time">中轉時間</string>
-    <string name="unirs_render_descr">修改標準樣式提供更出色的行人和自行車道對比度。使用傳統的 Mapnik 配色。</string>
+    <string name="unirs_render_descr">修改預設樣式增加行人和自行車道的對比度。使用傳統的 Mapnik 配色。</string>
     </resources>
