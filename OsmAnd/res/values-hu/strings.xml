@@ -2262,9 +2262,9 @@ Jelenleg csak {2} MB érhető el.</string>
     <string name="map_widget_battery">Akkumulátor töltöttsége</string>
     <string name="move_marker_bottom_sheet_title">A jelölő helyének módosításához mozgasd a térképet</string>
     <!-- string name="lat_lon_pattern">Szél.: %1$.5f Hossz.: %2$.5f</string -->
-    <string name="access_direction_audio_feedback">Irány hangos visszajelzése</string>
+    <string name="access_direction_audio_feedback">Irány hangjelzés</string>
     <string name="access_direction_audio_feedback_descr">Hanggal jelölje a célpont irányát.</string>
-    <string name="access_direction_haptic_feedback">Irány rezgő visszajelzése</string>
+    <string name="access_direction_haptic_feedback">Rezgő irányjelzés</string>
     <string name="access_direction_haptic_feedback_descr">Rezgéssel jelölje a célpont irányát.</string>
     <string name="access_smart_autoannounce">Okos automatikus bejelentés</string>
     <string name="access_smart_autoannounce_descr">Figyelmeztetés, csak ha a célpont iránya megváltozott.</string>
@@ -2286,7 +2286,7 @@ Jelenleg csak {2} MB érhető el.</string>
     <string name="lang_en_gb">angol (Egyesült Királyság)</string>
     <string name="postcode">Irányítószám</string>
     <string name="back_to_search">Vissza a kereséshez</string>
-    <string name="confirmation_to_delete_history_items">Szeretnéd eltávolítani a kijelölt elemeket az előzményekből?</string>
+    <string name="confirmation_to_delete_history_items">Eltávolítod a kijelölt elemeket az „Előzmények”-ből?</string>
     <string name="show_something_on_map">%1$s megjelenítése a térképen</string>
     <string name="release_2_4">\\022 Új, hatékony szabad szavas kereső 
 \n 
@@ -2342,9 +2342,9 @@ Jelenleg csak {2} MB érhető el.</string>
     <string name="give_permission">Engedélyezés</string>
     <string name="allow_access_location">Hozzáférés a pozíciódhoz engedélyezése</string>
     <string name="search_my_location">Pozícióm meghatározása</string>
-    <string name="no_update_info_desc">Ne keressen verziófrissítéseket és OsmAnddel kapcsolatos kedvezményeket.</string>
-    <string name="no_update_info">Ne mutass frissítéseket</string>
-    <string name="update_all_maps_now">Szeretnéd most frissíteni az összes térképet?</string>
+    <string name="no_update_info_desc">Ne keressen új verziókat és OsmAnddel kapcsolatos kedvezményeket.</string>
+    <string name="no_update_info">Ne mutasson új verziókat</string>
+    <string name="update_all_maps_now">Frissíted most az összes térképet?</string>
     <string name="clear_tile_data">Összes csempe törlése</string>
     <string name="routing_attr_short_way_name">Üzemanyag-takarékos útvonal</string>
     <string name="routing_attr_short_way_description">Üzemanyag-takarékos útvonal tervezése (általában rövidebb).</string>
