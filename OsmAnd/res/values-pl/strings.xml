@@ -3160,7 +3160,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="import_file">Zapisz plik</string>
 	<string name="access_intermediate_arrival_time">Czas przybycia do punktu pośredniego</string>
     <string name="map_widget_intermediate_time">Czas pośredni</string>
-    <string name="unirs_render_descr">Modyfikacja standardowego stylu zapewniająca większy kontrast dróg pieszych i rowerowych. Używa przestarzałych kolorów stylu „Mapnik”.</string>
+    <string name="unirs_render_descr">Modyfikacja domyślnego stylu zwiększająca kontrast dróg pieszych i rowerowych. Używa przestarzałych kolorów stylu „Mapnik”.</string>
     <string name="off_road_render_descr">Styl odpowiedni do przejazdów terenowych. Nadaje się do użycia z podkładami o barwie zielonej. Kluczowe cechy: zmniejszona szerokość głównych dróg, zwiększona szerokość dróg leśnych i polnych, ścieżek, dróg rowerowych i innych. Stworzona na podstawie stylu „Topo”.</string>
     <string name="nautical_render_descr">Styl nawigacji morskiej. Kluczowe cechy: boje, latarnie morskie, drogi rzeczne, drogi morskie, porty, obiekty żeglugi, izobaty.</string>
     <string name="ski_map_render_descr">Styl narciarski. Kluczowe cechy: renderuje w dogodny sposób trasy narciarskie, wyciągi i inne obiekty narciarskie. Mniej rozpraszające drugoplanowe obiekty mapy.</string>
