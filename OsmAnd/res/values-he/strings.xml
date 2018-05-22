@@ -1532,7 +1532,7 @@
     <string name="rename_marker">שינוי שם סמן</string>
     <string name="tap_on_map_to_hide_interface_descr">נגיעה במפה מחליפה את תצוגת הכפתורים והווידג׳טים.</string>
     <string name="appearance_on_the_map">הופעה על המפה</string>
-    <string name="add_track_to_markers_descr">נא לבחור קובץ GPX כדי להוסיף את נקודות הדרך שלו לסמנים.</string>
+    <string name="add_track_to_markers_descr">נא לבחור מסלול כדי להוסיף את נקודות הדרך שלו לסמנים.</string>
     <string name="add_favourites_group_to_markers_descr">נא לבחור קטגוריה מועדפת להוספה לסמנים.</string>
     <string name="shared_string_gpx_waypoints">נקודות דרך במסלול</string>
     <string name="favourites_group">קטגוריית מועדפים</string>
@@ -1541,7 +1541,7 @@
     <string name="empty_state_markers_active">ליצור סמנים במפה!</string>
     <string name="empty_state_markers_active_desc">יש לגעת בנגיעה קצרה או ארוכה ב‚מקומות’ ולאחר מכן ללחוץ על כפתור דגל הסמן.</string>
     <string name="empty_state_markers_groups">ייבוא קבוצות</string>
-    <string name="empty_state_markers_groups_desc">ייבוא קבוצות מועדפים או נקודות דרך GPX כסמנים.</string>
+    <string name="empty_state_markers_groups_desc">ייבוא קבוצות מועדפים או נקודות דרך כסמנים.</string>
     <string name="shared_string_two">שניים</string>
     <string name="shared_string_one">אחד</string>
     <string name="show_guide_line_descr">הצגת קווי כיוון מהמיקום שלך למיקומי הסמנים הפעילים.</string>
@@ -2050,7 +2050,7 @@
     <string name="ascendingly">עולה</string>
     <string name="date_added">תאריך ההוספה</string>
     <string name="order_by">סידור לפי:</string>
-    <string name="looking_for_tracks_with_waypoints">מתבצע חיפוש אחר קובצי GPX עם נקודות דרך</string>
+    <string name="looking_for_tracks_with_waypoints">מתבצע חיפוש אחר מסלולים עם נקודות דרך</string>
     <string name="shared_string_more_without_dots">עוד</string>
     <string name="do_not_send_anonymous_app_usage">לא לשלוח סטטיסטיקת שימוש אלמונית</string>
     <string name="osn_comment_dialog_title">הוספת הערה</string>
@@ -2508,8 +2508,8 @@
     <string name="show_free_version_banner">הצגת חלונית גרסה חופשית</string>
     <string name="show_free_version_banner_description">הצגת חלונית הגרסה החינמית גם בגרסה בתשלום.</string>
     <string name="buy">רכישה</string>
-    <string name="activate_seamarks_plugin">נא להפעיל את התוסף ‚סמנים הימיים’</string>
-    <string name="activate_srtm_plugin">נא להפעיל את התוסף ‚SRTM’</string>
+    <string name="activate_seamarks_plugin">נא להפעיל את התוסף ‚תצוגת מפה ימית’</string>
+    <string name="activate_srtm_plugin">נא להפעיל את התוסף ‚קווי מתאר’</string>
     <string name="poi_context_menu_modify_osm_change">עריכת שינוי ב־OSM</string>
     <string name="christmas_poi">נקודת עניין של חג המולד</string>
     <string name="christmas_desc_q">להציג נקודת עניין של חג המולד?</string>
@@ -3156,4 +3156,5 @@
     <string name="access_intermediate_arrival_time">זמן הגעה לנקודת ביניים</string>
     <string name="map_widget_intermediate_time">זמן ביניים</string>
     <string name="unirs_render_descr">שינוי סגנון בררת המחדל להגברת הניגודיות של שבילי אופניים והולכי רגל. הצבעים שיהיו בשימוש תואמי Mapnik.</string>
+    <string name="shared_string_gpx_files">קובצי GPX</string>
     </resources>
