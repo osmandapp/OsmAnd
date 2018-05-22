@@ -13,7 +13,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
-
 import net.osmand.AndroidUtils;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager;
@@ -230,14 +229,18 @@ public class MapillaryPlugin extends OsmandPlugin {
 		boolean success = false;
 		OsmandApplication app = (OsmandApplication) activity.getApplication();
 		if (isPackageInstalled(MAPILLARY_PACKAGE_ID, app)) {
-			if (imageKey != null) {
-				Intent intent = new Intent(ACTION_VIEW, Uri.parse(MessageFormat.format("mapillary://mapillary/photo/{0}?image_key={0}", imageKey)));
-				intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-				app.startActivity(intent);
-			} else {
-				Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("mapillary://mapillary/capture"));
-				intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-				app.startActivity(intent);
+			try {
+				if (imageKey != null) {
+					Intent intent = new Intent(ACTION_VIEW, Uri.parse(MessageFormat.format("mapillary://mapillary/photo/{0}?image_key={0}", imageKey)));
+					intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+					app.startActivity(intent);
+				} else {
+					Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("mapillary://mapillary/capture"));
+					intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+					app.startActivity(intent);
+				}
+			} catch (ActivityNotFoundException e) {
+				new MapillaryInstallDialogFragment().show(activity.getSupportFragmentManager(), MapillaryInstallDialogFragment.TAG);
 			}
 			success = true;
 		} else {
