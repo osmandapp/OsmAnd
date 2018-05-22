@@ -1875,7 +1875,7 @@ Punktar</string>
     <string name="offline_edition_descr">Alltaf nota ónettengdar breytingar.</string>
     <string name="local_openstreetmap_upload">Senda breytingu inn til OSM</string>
     <string name="local_openstreetmap_descr_title">Ósamstilltar (async) OSM-breytingar:</string>
-    <string name="free_version_message">Þessi ókeypis útgáfa af OsmAnd er takmörkuð við %1$s niðurhöl korta og styður ekki lestur ónettengdra Wikipedia-greina.</string>
+    <string name="free_version_message">Þú getur sótt eða uppfært %1$s kort.</string>
     <string name="index_name_voice">Raddskipanir (upptökur, takmarkaðir eiginleikar)</string>
     <string name="profile_settings">Sértækar stillingar notandasniðs</string>
     <string name="poi_filter_nominatim">Nominatim á netinu</string>
@@ -3033,4 +3033,5 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="map_widget_intermediate_time">Millitími</string>
     <string name="unirs_render_descr">Aðlögun á sjálfgefna stílnum til að auka birtuskil leiða fyrir fótgangandi og hjólreiðafólk. Notar eldri liti úr Mapnik.</string>
     <string name="shared_string_gpx_files">GPX-skrár</string>
+    <string name="get_osmand_live">Náðu í OsmAnd Live til að aflæsa öllum eiginleikum: Fáðu ótakmörkuð niðurhöl korta og daglegar kortauppfærslur, allar greiddar og ókeypis viðbætur, Wikipedia, Wikivoyage og margt fleira.</string>
     </resources>
