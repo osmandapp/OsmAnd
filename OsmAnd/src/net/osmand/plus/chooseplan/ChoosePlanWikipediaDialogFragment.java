@@ -1,8 +1,5 @@
 package net.osmand.plus.chooseplan;
 
-import net.osmand.plus.R;
-import net.osmand.plus.Version;
-import net.osmand.plus.download.DownloadValidationManager;
 
 public class ChoosePlanWikipediaDialogFragment extends ChoosePlanFreeBannerDialogFragment {
 	public static final String TAG = ChoosePlanWikipediaDialogFragment.class.getSimpleName();
