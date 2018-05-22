@@ -1872,7 +1872,7 @@
 	<string name="north_abbreviation">Β</string>
 	<string name="optional_point_name">Προαιρετικό όνομα σημείου</string>
     <string name="transport_nearby_routes_within">Κοντινές διαδρομές</string>
-    <string name="transport_nearby_routes">Κοντινές</string>
+    <string name="transport_nearby_routes">Με</string>
     <string name="enter_the_file_name">Εισάγετε το όνομα του αρχείου.</string>
     <string name="map_import_error">Σφάλμα εισαγωγής χάρτη</string>
     <string name="map_imported_successfully">Ο χάρτης εισήχθη</string>
@@ -1894,10 +1894,10 @@
     <string name="will_open_tomorrow_at">Θα ανοίξει αύριο στις</string>
     <string name="by_date">Κατά ημερομηνία</string>
     <string name="by_type">Κατά τύπο</string>
-    <string name="looking_for_tracks_with_waypoints">Αναζήτηση για αρχεία GPX με σημεία διαδρομής</string>
+    <string name="looking_for_tracks_with_waypoints">Αναζήτηση για ίχνη με σημεία διαδρομής</string>
     <string name="shared_string_more_without_dots">Περισσότερα</string>
     <string name="appearance_on_the_map">Εμφάνιση στον χάρτη</string>
-    <string name="add_track_to_markers_descr">Επιλέξτε ένα αρχείο GPX για να προσθέσετε τα σημεία διαδρομής του στους δείκτες.</string>
+    <string name="add_track_to_markers_descr">Επιλέξτε ένα ίχνος για να προσθέσετε τα σημεία διαδρομής του στους δείκτες.</string>
     <string name="add_favourites_group_to_markers_descr">Επιλέξτε μια αγαπημένη κατηγορία για να προσθέσετε στους δείκτες.</string>
     <string name="shared_string_gpx_waypoints">Σημεία διαδρομής ίχνους</string>
     <string name="favourites_group">Κατηγορία αγαπημένων</string>
@@ -1906,7 +1906,7 @@
     <string name="empty_state_markers_active">Δημιουργήστε δείκτες χάρτη!</string>
     <string name="empty_state_markers_active_desc">Πατήστε παρατεταμένα ή σύντομα \'Μέρη\', έπειτα πατήστε το πλήκτρο σημαίας δείκτη.</string>
     <string name="empty_state_markers_groups">Εισαγωγή ομάδων</string>
-    <string name="empty_state_markers_groups_desc">Εισάγετε ομάδες αγαπημένων ή σημεία διαδρομής GPX ως δείκτες.</string>
+    <string name="empty_state_markers_groups_desc">Εισάγετε ομάδες αγαπημένων ή σημεία διαδρομής ως δείκτες.</string>
     <string name="empty_state_markers_history_desc">Οι δείκτες που σημειώθηκαν ως περασμένοι, θα εμφανιστούν στην οθόνη.</string>
     <string name="shared_string_two">Δύο</string>
     <string name="shared_string_one">Ένα</string>
@@ -2927,8 +2927,8 @@
     <string name="show_free_version_banner">Εμφάνιση διαφήμισης ελεύθερης έκδοσης</string>
     <string name="show_free_version_banner_description">Εμφάνιση της διαφήμισης ελεύθερης έκδοσης ακόμα και στην επί πληρωμή έκδοση.</string>
     <string name="buy">Αγορά</string>
-    <string name="activate_seamarks_plugin">Παρακαλούμε, ενεργοποιήστε το πρόσθετο \'Θαλασσινά σημάδια\'</string>
-    <string name="activate_srtm_plugin">Παρακαλούμε, ενεργοποιήστε το πρόσθετο \'SRTM\'</string>
+    <string name="activate_seamarks_plugin">Παρακαλούμε, ενεργοποιήστε το πρόσθετο \'προβολή ναυτικού χάρτη\'</string>
+    <string name="activate_srtm_plugin">Παρακαλούμε, ενεργοποιήστε το πρόσθετο \'ισοϋψείς γραμμές\'</string>
     <string name="later">Αργότερα</string>
     <string name="get_full_version">Πλήρης έκδοση</string>
     <string name="downloads">Λήψεις</string>
@@ -3155,4 +3155,5 @@
     <string name="access_intermediate_arrival_time">Ενδιάμεσος χρόνος άφιξης</string>
     <string name="map_widget_intermediate_time">Ενδιάμεσος χρόνος</string>
     <string name="unirs_render_descr">Τροποποίηση της τυπικής μορφής για αύξηση της αντίθεσης των δρόμων πεζοπορίας και ποδηλάτου. Χρήση χρωμάτων παλιών Mapnik.</string>
+    <string name="shared_string_gpx_files">Αρχεία GPX</string>
     </resources>
