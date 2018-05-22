@@ -311,7 +311,7 @@
 	<string name="gpx_monitoring_disabled_warn">ניתן להפעיל מעקב אחר המסלול דרך וידג׳ט ה־GPX או דרך ההגדרה ‚מעקב טיול’.</string>
 	<string name="show_current_gpx_title">הצגת המסלול הנוכחי</string>
 	    
-	<string name="free_version_message">גרסה חינמית זו של OsmAnd מוגבלת לכדי %1$s הורדות מפה (הוספה או עדכון של מפות) ואינה תומכת בכתבות בלתי מקוונות של ויקיפדיה.</string>
+	<string name="free_version_message">ניתן להוריד או לעדכן מפות %1$s.</string>
 	<string name="free_version_title">גרסה בחינם</string>
 	<string name="poi_context_menu_showdescription">הצגת תיאור של נ״ע.</string>
 	<string name="index_name_north_america">צפון אמריקה</string>
@@ -3157,4 +3157,5 @@
     <string name="map_widget_intermediate_time">זמן ביניים</string>
     <string name="unirs_render_descr">שינוי סגנון בררת המחדל להגברת הניגודיות של שבילי אופניים והולכי רגל. הצבעים שיהיו בשימוש תואמי Mapnik.</string>
     <string name="shared_string_gpx_files">קובצי GPX</string>
+    <string name="get_osmand_live">ניתן להירשם ל־OsmAnd חי כדי לקבל גישה לכל התכונות: עדכוני מפה יומיים עם מספר בלתי מוגבל של הורדות, כל התוספים בתשלום ובחינם, ויקיפדיה, ויקימסע ועוד הרבה.</string>
     </resources>
