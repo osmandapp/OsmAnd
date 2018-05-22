@@ -13,6 +13,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresPermission;
 import android.support.v4.content.ContextCompat;
+import android.text.TextUtils;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
@@ -27,12 +28,15 @@ import net.osmand.RenderingContext;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.data.TransportStop;
+import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiFilter;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivityActions;
@@ -40,6 +44,7 @@ import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.other.MapMultiSelectionMenu;
 import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.render.NativeOsmandLibrary;
+import net.osmand.plus.resources.TransportIndexRepository;
 import net.osmand.plus.views.AddGpxPointBottomSheetHelper.NewGpxPoint;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -51,6 +56,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import gnu.trove.list.array.TIntArrayList;
+
+import static net.osmand.plus.mapcontextmenu.controllers.TransportStopController.SHOW_STOPS_RADIUS_METERS;
 
 public class ContextMenuLayer extends OsmandMapLayer {
 	//private static final Log LOG = PlatformUtil.getLog(ContextMenuLayer.class);
@@ -141,16 +148,21 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		this.selectedObject = selectedObject;
 	}
 
+	@Nullable
 	private List<String> getPublicTransportTypes() {
-		if (publicTransportTypes == null) {
-			publicTransportTypes = new ArrayList<>();
-			List<PoiFilter> filters = activity.getMyApplication().getPoiTypes().getPoiCategoryByName("transportation").getPoiFilters();
-			for (PoiFilter poiFilter : filters) {
-				if (poiFilter.getKeyName().equals("public_transport")) {
-					for (PoiType poiType : poiFilter.getPoiTypes()) {
-						publicTransportTypes.add(poiType.getKeyName());
-						for (PoiType poiAdditionalType : poiType.getPoiAdditionals()) {
-							publicTransportTypes.add(poiAdditionalType.getKeyName());
+		OsmandApplication app = activity.getMyApplication();
+		if (publicTransportTypes == null && !app.isApplicationInitializing()) {
+			PoiCategory category = app.getPoiTypes().getPoiCategoryByName("transportation");
+			if (category != null) {
+				List<PoiFilter> filters = category.getPoiFilters();
+				publicTransportTypes = new ArrayList<>();
+				for (PoiFilter poiFilter : filters) {
+					if (poiFilter.getKeyName().equals("public_transport")) {
+						for (PoiType poiType : poiFilter.getPoiTypes()) {
+							publicTransportTypes.add(poiType.getKeyName());
+							for (PoiType poiAdditionalType : poiType.getPoiAdditionals()) {
+								publicTransportTypes.add(poiAdditionalType.getKeyName());
+							}
 						}
 					}
 				}
@@ -476,7 +488,9 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 	private void enterMovingMode(RotatedTileBox tileBox) {
 		Vibrator vibrator = (Vibrator) activity.getSystemService(Context.VIBRATOR_SERVICE);
-		vibrator.vibrate(VIBRATE_SHORT);
+		if (vibrator != null) {
+			vibrator.vibrate(VIBRATE_SHORT);
+		}
 
 		menu.updateMapCenter(null);
 		menu.hide();
@@ -559,8 +573,10 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 	private boolean showContextMenu(PointF point, RotatedTileBox tileBox, boolean showUnknownLocation) {
 		LatLon objectLatLon = null;
-		Map<Object, IContextMenuProvider> selectedObjects = selectObjectsForContextMenu(tileBox, point, false, showUnknownLocation);
+		Map<Object, IContextMenuProvider> selectedObjects
+				= selectObjectsForContextMenu(tileBox, point, false, showUnknownLocation);
 		NativeOsmandLibrary nativeLib = NativeOsmandLibrary.getLoadedLibrary();
+		LatLon pointLatLon = tileBox.getLatLonFromPixel(point.x, point.y);
 		if (nativeLib != null) {
 			MapRenderRepositories maps = activity.getMyApplication().getResourceManager().getRenderer();
 			RenderingContext rc = maps.getVisibleRenderingContext();
@@ -611,7 +627,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 						}
 						LatLon searchLatLon = objectLatLon;
 						if (searchLatLon == null) {
-							searchLatLon = tileBox.getLatLonFromPixel(point.x, point.y);
+							searchLatLon = pointLatLon;
 						}
 						Amenity amenity = findAmenity(activity.getMyApplication(), renderedObject.getId() >> 7, names, searchLatLon, 50);
 						if (amenity != null) {
@@ -649,6 +665,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 				return true;
 			}
 		}
+		processTransportStops(selectedObjects, pointLatLon);
 		if (selectedObjects.size() == 1) {
 			Object selectedObj = selectedObjects.keySet().iterator().next();
 			LatLon latLon = objectLatLon;
@@ -661,7 +678,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 				pointDescription = provider.getObjectName(selectedObj);
 			}
 			if (latLon == null) {
-				latLon = getLatLon(point, tileBox);
+				latLon = pointLatLon;
 			}
 			if (mInAddGpxPointMode) {
 				String title = pointDescription == null ? "" : pointDescription.getName();
@@ -674,32 +691,22 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 		} else if (selectedObjects.size() > 1) {
 			selectedObjectContextMenuProvider = null;
-			showContextMenuForSelectedObjects(getLatLon(point, tileBox), selectedObjects);
+			showContextMenuForSelectedObjects(pointLatLon, selectedObjects);
 			return true;
 
 		} else if (showUnknownLocation) {
 			hideVisibleMenues();
 			selectedObjectContextMenuProvider = null;
-			LatLon latLon = getLatLon(point, tileBox);
 			activity.getMapViewTrackingUtilities().setMapLinkedToLocation(false);
 			if (mInAddGpxPointMode) {
 				mAddGpxPointBottomSheetHelper.setTitle("");
-				view.getAnimatedDraggingThread().startMoving(latLon.getLatitude(), latLon.getLongitude(), view.getZoom(), true);
+				view.getAnimatedDraggingThread().startMoving(pointLatLon.getLatitude(), pointLatLon.getLongitude(), view.getZoom(), true);
 			} else {
-				menu.show(latLon, null, null);
+				menu.show(pointLatLon, null, null);
 			}
 			return true;
 		}
 		return false;
-	}
-
-	@NonNull
-	private LatLon getLatLon(PointF point, RotatedTileBox tileBox) {
-		LatLon latLon;
-		final double lat = tileBox.getLatFromPixel((int) point.x, (int) point.y);
-		final double lon = tileBox.getLonFromPixel((int) point.x, (int) point.y);
-		latLon = new LatLon(lat, lon);
-		return latLon;
 	}
 
 	public boolean disableSingleTap() {
@@ -731,6 +738,60 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		return res;
 	}
 
+	private void processTransportStops(@NonNull Map<Object, IContextMenuProvider> selectedObjects, @NonNull LatLon latLon) {
+		List<String> publicTransportTypes = getPublicTransportTypes();
+		if (publicTransportTypes != null) {
+			List<Amenity> transportStopAmenities = new ArrayList<>();
+			for (Object o : selectedObjects.keySet()) {
+				if (o instanceof Amenity) {
+					Amenity amenity = (Amenity) o;
+					if (!TextUtils.isEmpty(amenity.getSubType()) && publicTransportTypes.contains(amenity.getSubType())) {
+						transportStopAmenities.add(amenity);
+					}
+				}
+			}
+			if (transportStopAmenities.size() > 0) {
+				List<TransportStop> transportStops = findTransportStopsAt(latLon.getLatitude(), latLon.getLongitude());
+				List<TransportStop> transportStopsReplacement = new ArrayList<>();
+				for (Amenity amenity : transportStopAmenities) {
+					for (TransportStop transportStop : transportStops) {
+						if (transportStop.getName().startsWith(amenity.getName())) {
+							selectedObjects.remove(amenity);
+							if (!transportStopsReplacement.contains(transportStop)) {
+								transportStopsReplacement.add(transportStop);
+							}
+							break;
+						}
+					}
+				}
+				if (transportStopsReplacement.size() > 0) {
+					TransportStopsLayer transportStopsLayer = activity.getMapLayers().getTransportStopsLayer();
+					if (transportStopsLayer != null) {
+						for (TransportStop transportStop : transportStopsReplacement) {
+							selectedObjects.put(transportStop, transportStopsLayer);
+						}
+					}
+				}
+			}
+		}
+	}
+
+	@NonNull
+	private List<TransportStop> findTransportStopsAt(double latitude, double longitude) {
+		ArrayList<TransportStop> transportStops = new ArrayList<>();
+		List<TransportIndexRepository> reps =
+				activity.getMyApplication().getResourceManager().searchTransportRepositories(latitude, longitude);
+
+		for (TransportIndexRepository t : reps) {
+			ArrayList<TransportStop> ls = new ArrayList<>();
+			QuadRect ll = MapUtils.calculateLatLonBbox(latitude, longitude, SHOW_STOPS_RADIUS_METERS);
+			t.searchTransportStops(ll.top, ll.left, ll.bottom, ll.right, -1, ls, null);
+			transportStops.addAll(ls);
+		}
+		return transportStops;
+	}
+
+	@NonNull
 	private Map<Object, IContextMenuProvider> selectObjectsForContextMenu(RotatedTileBox tileBox,
 																		  PointF point, boolean acquireObjLatLon,
 																		  boolean unknownLocation) {
