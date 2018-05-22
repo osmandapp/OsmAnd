@@ -438,7 +438,7 @@
 	<string name="local_openstreetmap_upload">آپلود اصلاحات به OSM</string>
 	<string name="local_openstreetmap_delete">حذف اصلاحات</string>
 	<string name="local_openstreetmap_descr_title">ویرایش ناهمزمان OSM:</string>
-	<string name="free_version_message">با این نسخهٔ رایگانِ OsmAnd می‌توانید %1$s نقشه دانلود کنید (افزودن یا به‌روزرسانی نقشه). همچنین نسخهٔ رایگان از مقالات آفلاین ویکی‌پدیا پشتیبانی نمی‌کند.</string>
+	<string name="free_version_message">شما می‌توانید %1$s نقشه را دانلود یا به‌روز کنید.</string>
 	<string name="free_version_title">نسخهٔ رایگان</string>
 	<string name="poi_context_menu_showdescription">نمایش توضیحات POI.</string>
 	<string name="index_name_north_america">آمریکای شمالی</string>
@@ -3261,4 +3261,5 @@
     <string name="map_widget_intermediate_time">مدت تا میانی</string>
     <string name="unirs_render_descr">اصلاح‌یافتهٔ سبک پیشفرض برای ایجاد پادنمایی بیشتر برای راه‌های پیاده و دوچرخه. از رنگ‌بندی مپنیک استفاده می‌کند.</string>
     <string name="shared_string_gpx_files">فایل‌های GPX</string>
+    <string name="get_osmand_live">‏OsmAnd Live را تهیه کنید تا همهٔ این قابلیت‌ها باز شود: به‌روزآوری روزانهٔ نقشه و دانلودهای نامحدود، همهٔ افزونه‌های رایگان و پولی، ویکی‌پدیا، ویکی‌سفر و...</string>
     </resources>
