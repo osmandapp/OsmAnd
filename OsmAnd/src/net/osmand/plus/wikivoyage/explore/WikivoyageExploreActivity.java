@@ -20,12 +20,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
-import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
-import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.LockableViewPager;
 import net.osmand.plus.OnDialogFragmentResultListener;
 import net.osmand.plus.OsmandApplication;
@@ -183,6 +181,13 @@ public class WikivoyageExploreActivity extends TabActivity implements DownloadEv
 			}
 			setIntent(null);
 		}
+		getMyApplication().getDownloadThread().setUiActivity(this);
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+		getMyApplication().getDownloadThread().resetUiActivity(this);
 	}
 
 	@Nullable
