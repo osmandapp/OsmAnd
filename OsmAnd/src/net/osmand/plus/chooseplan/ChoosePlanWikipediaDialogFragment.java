@@ -50,13 +50,4 @@ public class ChoosePlanWikipediaDialogFragment extends ChoosePlanFreeBannerDialo
 		return selectedPlanTypeFeatures;
 	}
 
-	@Override
-	public String getInfoDescription() {
-		if (Version.isFreeVersion(getOsmandApplication())) {
-			return getString(R.string.free_version_message,
-					DownloadValidationManager.MAXIMUM_AVAILABLE_FREE_DOWNLOADS) + "\n" + getString(R.string.get_osmand_live);
-		} else {
-			return getString(R.string.get_osmand_live);
-		}
-	}
 }
