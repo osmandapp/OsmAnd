@@ -438,7 +438,7 @@
 	<string name="local_openstreetmap_upload">آپلود اصلاحات به OSM</string>
 	<string name="local_openstreetmap_delete">حذف اصلاحات</string>
 	<string name="local_openstreetmap_descr_title">ویرایش ناهمزمان OSM:</string>
-	<string name="free_version_message">شما می‌توانید %1$s نقشه را دانلود یا به‌روز کنید.</string>
+	<string name="free_version_message">شما می‌توانید %1$s نقشه دانلود یا به‌روز کنید.</string>
 	<string name="free_version_title">نسخهٔ رایگان</string>
 	<string name="poi_context_menu_showdescription">نمایش توضیحات POI.</string>
 	<string name="index_name_north_america">آمریکای شمالی</string>
