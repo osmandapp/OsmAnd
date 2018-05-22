@@ -1,5 +1,9 @@
 package net.osmand.plus.chooseplan;
 
+import net.osmand.plus.R;
+import net.osmand.plus.Version;
+import net.osmand.plus.download.DownloadValidationManager;
+
 public class ChoosePlanWikipediaDialogFragment extends ChoosePlanFreeBannerDialogFragment {
 	public static final String TAG = ChoosePlanWikipediaDialogFragment.class.getSimpleName();
 
@@ -48,6 +52,11 @@ public class ChoosePlanWikipediaDialogFragment extends ChoosePlanFreeBannerDialo
 
 	@Override
 	public String getInfoDescription() {
-		return "";
+		if (Version.isFreeVersion(getOsmandApplication())) {
+			return getString(R.string.free_version_message,
+					DownloadValidationManager.MAXIMUM_AVAILABLE_FREE_DOWNLOADS) + "\n" + getString(R.string.get_osmand_live);
+		} else {
+			return getString(R.string.get_osmand_live);
+		}
 	}
 }

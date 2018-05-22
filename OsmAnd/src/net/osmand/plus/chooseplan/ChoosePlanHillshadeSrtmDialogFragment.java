@@ -4,7 +4,9 @@ import android.app.Activity;
 import android.view.View;
 
 import net.osmand.plus.R;
+import net.osmand.plus.Version;
 import net.osmand.plus.activities.OsmandInAppPurchaseActivity;
+import net.osmand.plus.download.DownloadValidationManager;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 
 public class ChoosePlanHillshadeSrtmDialogFragment extends ChoosePlanDialogFragment {
@@ -52,7 +54,12 @@ public class ChoosePlanHillshadeSrtmDialogFragment extends ChoosePlanDialogFragm
 
 	@Override
 	public String getInfoDescription() {
-		return "";
+		if (Version.isFreeVersion(getOsmandApplication())) {
+			return getString(R.string.free_version_message,
+					DownloadValidationManager.MAXIMUM_AVAILABLE_FREE_DOWNLOADS) + "\n" + getString(R.string.get_osmand_live);
+		} else {
+			return getString(R.string.get_osmand_live);
+		}
 	}
 
 	@Override
