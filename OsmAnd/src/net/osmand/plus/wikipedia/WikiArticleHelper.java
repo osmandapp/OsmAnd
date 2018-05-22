@@ -42,6 +42,7 @@ public class WikiArticleHelper {
 	private static final int PARTIAL_CONTENT_PHRASES = 3;
 	private static final String PAGE_PREFIX_HTTP = "http://";
 	private static final String PAGE_PREFIX_HTTPS = "https://";
+	private static final String PAGE_PREFIX_FILE = "file://";
 	private static final String WIKIVOAYAGE_DOMAIN = ".wikivoyage.org/wiki/";
 
 	public static final String WIKI_DOMAIN = ".wikipedia.org/wiki/";
@@ -57,6 +58,11 @@ public class WikiArticleHelper {
 	public WikiArticleHelper(FragmentActivity activity, boolean nightMode) {
 		this.activity = activity;
 		this.nightMode = nightMode;
+	}
+
+	public static String normalizeFileUrl(String url) {
+		return url.startsWith(PAGE_PREFIX_FILE) ?
+				url.replace(PAGE_PREFIX_FILE, PAGE_PREFIX_HTTPS) : url;
 	}
 
 	public static class WikiArticleSearchTask extends AsyncTask<Void, Void, List<Amenity>> {

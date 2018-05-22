@@ -33,6 +33,7 @@ public class WikipediaWebViewClient extends WebViewClient {
 
 	@Override
 	public boolean shouldOverrideUrlLoading(WebView view, String url) {
+		WikiArticleHelper.normalizeFileUrl(url);
 		if ((url.contains(WIKI_DOMAIN) || url.contains(WIKI_DOMAIN_COM)) && article != null) {
 			wikiArticleHelper.showWikiArticle(article.getLocation(), url);
 		} else if (url.startsWith(PAGE_PREFIX_HTTP) || url.startsWith(PAGE_PREFIX_HTTPS)) {
