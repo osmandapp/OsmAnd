@@ -129,7 +129,12 @@ public class OsmBugsRemoteUtil implements OsmBugsUtil {
 			log.info(msg); //$NON-NLS-1$
 			// populate return fields.
 
-			StringBuilder responseBody = Algorithms.readFromInputStream(connection.getInputStream());
+			StringBuilder responseBody;
+			if (connection.getResponseCode() == HttpURLConnection.HTTP_CONFLICT) {
+				responseBody = Algorithms.readFromInputStream(connection.getErrorStream());
+			} else {
+				responseBody = Algorithms.readFromInputStream(connection.getInputStream());
+			}
 			log.info("Response : " + responseBody); //$NON-NLS-1$
 			connection.disconnect();
 			if (!ok) {
