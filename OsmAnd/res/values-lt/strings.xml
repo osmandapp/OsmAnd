@@ -2429,7 +2429,7 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="mapillary">Mapillary</string>
     <string name="restart_search">Ieškoti iš naujo</string>
     <string name="increase_search_radius">Padidinti paieškos spindulį</string>
-    <string name="nothing_found">Nepavyko nieko rasti :(</string>
+    <string name="nothing_found">Nepavyko nieko rasti</string>
     <string name="nothing_found_descr">Pakeiskite paieškos užklausą arba padidinkite paieškos spindulį.</string>
     <string name="quick_action_showhide_osmbugs_title">Rodyti/slėpti OSM Pastabas</string>
     <string name="quick_action_osmbugs_show">Rodyti OSM Pastabas</string>
@@ -2530,13 +2530,13 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="sorted_by_distance">Surūšiuota pagal atstumą</string>
     <string name="shared_string_visible">Matomas</string>
     <string name="shared_string_reload">Perkrauti</string>
-    <string name="wrong_user_name">Neteisingas vartotojo vardas!</string>
+    <string name="wrong_user_name">Neteisingas vartotojo vardas</string>
     <string name="mapillary_menu_descr_dates">Peržiūrėti tik pridėtas nuotraukas</string>
     <string name="mapillary_menu_descr_username">Peržiūrėti tik pridėtas nuotraukas</string>
     <string name="import_gpx_failed_descr">OsmAnd negali importuoti failo. Prašome patikrinti, ar OsmAnd turi leidimą skaityti failą iš jo buvimo vietos.</string>
     <string name="distance_moving">Atstumas pataisytas</string>
     <string name="mapillary_action_descr">Prisidėti su savo šios vietos gatvių vaizdu naudojant Mapillary.</string>
-    <string name="mapillary_widget_descr">Leidžia jums greitai prisidėti prie Mapillary.</string>
+    <string name="mapillary_widget_descr">Leidžia greitai prisidėti prie Mapillary.</string>
     <string name="mapillary_descr">Internetinės gatvės nuotraukos visiems. Atraskite vietas, bendradarbiaukite, fotografuokite pasaulį.</string>
     <string name="plugin_mapillary_descr">Internetinės gatvės nuotraukos visiems. Atraskite vietas, bendradarbiaukite, fotografuokite pasaulį.</string>
     <string name="routing_attr_allow_private_description">Naudoti privačias teritorijas.</string>
@@ -2560,7 +2560,7 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="store_tracks_in_monthly_directories">Išsaugoti įrašytas keliones mėnesiniuose segtuvuose</string>
     <string name="store_tracks_in_monthly_directories_descrp">Išsaugoti įrašytas keliones mėnesiniuose poaplankiuose (pvz. 2017-01).</string>
     <string name="srtm_menu_download_descr">Norėdami ant žemėlapio matyti kontūrų linijas turėsite parsisiųsti šio regiono konturų linijų žemėlapį.</string>
-    <string name="srtm_purchase_header">Norėdami matyti konturų linijas ant žemėlapio turėsite nusipirkti ir įsidiegti kontūrų linijų įskiepį</string>
+    <string name="srtm_purchase_header">Norėdami matyti kontūrų linijas ant žemėlapio, turėsite nusipirkti ir įsidiegti \"Kontūrų linijų\" įskiepį</string>
     <string name="show_from_zoom_level">Rodyti nuo mąstelio</string>
     <string name="routing_attr_allow_private_name">Naudoti privačius kelius</string>
     <string name="display_zoom_level">Mastelis: %1$s</string>
