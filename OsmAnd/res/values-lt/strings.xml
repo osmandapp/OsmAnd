@@ -2865,8 +2865,8 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="monthly_map_updates">Žemėlapis atnaujinamas: <b>Kas mėnesį</b></string>
     <string name="daily_map_updates">Žemėlapis atnaujinamas: <b>Kas valandą</b></string>
     <string name="in_app_purchase_desc">Vienkartinis mokestis</string>
-    <string name="purchase_unlim_title">Pirkti - %1$ s</string>
-    <string name="purchase_subscription_title">Prenumeruoti - %1$ s</string>
+    <string name="purchase_unlim_title">Pirkti - %1$s</string>
+    <string name="purchase_subscription_title">Prenumeruoti - %1$s</string>
     <string name="unlimited_downloads">Neriboti atsisiuntimai</string>
     <string name="unlock_all_features">Atrakinti visas OsmAnd funkcijas</string>
     <string name="purchase_dialog_title">Pasirinkite planą</string>
