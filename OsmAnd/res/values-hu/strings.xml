@@ -606,7 +606,7 @@ Ehhez {1} MB helyre van szükség.
 
     <string name="data_settings">Adat</string>
     <string name="osm_settings">OSM szerkesztés</string>
-    <string name="auto_zoom_map_descr">Térkép automatikus nagyítása a sebesség függvényében (miközben a térkép követi a pozíciódat).</string>
+    <string name="auto_zoom_map_descr">Zoomszint állítása a sebesség függvényében (miközben a térkép követi a pozíciódat).</string>
     <string name="auto_zoom_map">Automatikus nagyítás</string>
     <string name="additional_settings">További beállítások</string>
     <string name="shared_string_settings">Beállítások</string>
@@ -759,7 +759,7 @@ Ehhez {1} MB helyre van szükség.
 \nEzen térképek bármelyike használható az OsmAnd térkép képernyőjén megjelenítendő fő (alap) térképként, vagy egy másik alaptérkép fedvényeként vagy alátétjeként (mint például az OsmAnd normál offline térképei). Bármely alátét térkép jobban láthatóbbá tételének érdekében az OsmAnd vektoros térképeinek bizonyos elemei igény szerint könnyedén elrejthetők a „Térkép beállítása” menün keresztül. 
 \n 
 \nA csempés térképek internetes forrásokon keresztül szerezhetők be, vagy előkészíthetők kapcsolat nélküli használathoz (és kézzel átmásolva az OsmAnd adatmappájába) egy olyan SQLite adatbázisként, amelyet különféle harmadik féltől származó térkép-előkészítő eszközök állíthatnak elő.</string>
-    <string name="osmand_background_plugin_description">"Megjeleníti a háttér üzemmódban  (kikapcsolt képernyővel) való útvonalrögzítéshez és navigációhoz tartozó beállításokat. (A készülék bizonyos időközönként felébreszti a GPS-t.)"</string>
+    <string name="osmand_background_plugin_description">Megjeleníti a háttérben futó nyomvonalrögzítés és navigáció beállításait, ami periodikusan felébreszti a GPS modult (kikapcsolt képernyőnél).</string>
     <string name="osmand_accessibility_description">Ez a bővítmény elérhetővé teszi az eszköz akadálymentesítési lehetőségeit közvetlenül az OsmAnd programban. Ez megkönnyíti például a TTS hangok beszédsebességének állítását, az irányító gombok képernyő navigációjának beállítását, egy görgető használatát a nagyítás vezérléséhez, vagy szövegfelolvasó visszajelzés használatát, például a pozíció automatikus bejelentésénél.</string>
 
 
@@ -838,8 +838,8 @@ Proporcionális memória %4$s MB (Android korlát %5$s MB, Dalvik %6$s MB).</str
     <string name="osmand_parking_position_description_add_time">Autó leparkolva:</string>
     <string name="use_compass_navigation_descr">Iránytű használata navigáláshoz, ha az irány nem érzékelhető.</string>
     <string name="use_compass_navigation">Iránytű használata</string>
-    <string name="route_updated_loc_found">Az útvonaltervezés elindul, amint megvan a pozíció</string>
-    <string name="continue_follow_previous_route_auto">Az előző navigáció még nem ért véget. Folytassuk? (%1$s másodperc)</string>
+    <string name="route_updated_loc_found">Várakozás a GPS pozícióra útvonalszámításhoz</string>
+    <string name="continue_follow_previous_route_auto">Folytassuk az előző, befejezetlen navigációt? (%1$s másodperc)</string>
 
 
     <string name="show_cameras">Traffipaxok</string>
@@ -949,7 +949,7 @@ Proporcionális memória %4$s MB (Android korlát %5$s MB, Dalvik %6$s MB).</str
 
     <string name="safe_mode_description">Alkalmazás futtatása csökkentett módban (a lassabb Android-kódot használata a natív kód helyett).</string>
     <string name="safe_mode">Csökkentett mód</string>
-    <string name="native_library_not_running">Az alkalmazás csökkentett módban fut (letilthatod a Beállításokban).</string>
+    <string name="native_library_not_running">Az alkalmazás csökkentett módban fut (letilthatod a „Beállítások”-ban).</string>
     <string name="rendering_attr_showRoadMaps_description">Válaszd ki, mikor jelenjenek meg a csak-út térképek:</string>
     <string name="rendering_attr_showRoadMaps_name">Csak-út térképek</string>
     <string name="download_roads_only_item">Csak utak</string>
@@ -984,10 +984,10 @@ Proporcionális memória %4$s MB (Android korlát %5$s MB, Dalvik %6$s MB).</str
 \nA globális adatok (az északi 70° és déli 70° szélesség között) az SRTM (Shuttle Radar Topography Mission) és az ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer) mérésein alapulnak, amely a NASA Earsh Observing System zászlóshajójának, a Terra műholdnak a képalkotó berendezése. Az ASTER a NASA, a Japán Gazdasági, Kereskedelmi és Ipari Minisztérium (METI), valamint a Japán Űrügynökség (J-spacesystems) közös projektje."</string>
 
 
-    <string name="recording_is_recorded">Hang/videofelvétel elindult. Leállításhoz koppints az A/V vezérlő stop gombjára.</string>
+    <string name="recording_is_recorded">Hang/video felvétele. Leállításhoz koppints az A/V vezérlő stop gombjára.</string>
     <string name="recording_playing">A hangfelvétel lejátszása elindult…\n%1$s</string>
     <string name="recording_open_external_player">Külső lejátszó megnyitása</string>
-    <string name="recording_delete_confirm">Szeretnéd törölni a felvételt?</string>
+    <string name="recording_delete_confirm">Törlöd a felvételt?</string>
 
     <string name="recording_unavailable">nem elérhető</string>
     <string name="recording_context_menu_arecord">Hangos megjegyzés készítése</string>
@@ -1008,12 +1008,12 @@ Proporcionális memória %4$s MB (Android korlát %5$s MB, Dalvik %6$s MB).</str
     <string name="av_def_action_audio">Hangfelvétel</string>
     <string name="av_video_format_descr">Video kimeneti formátum kiválasztása.</string>
     <string name="av_video_format">Videó kimeneti formátuma</string>
-    <string name="av_use_external_recorder_descr">Rendszerprogram használata videofelvételre.</string>
+    <string name="av_use_external_recorder_descr">Rendszeralkalmazás használata videofelvételre.</string>
     <string name="av_use_external_recorder">Külső felvevő használata</string>
     <string name="av_settings_descr">Hang- és videofelvétel beállításai.</string>
     <string name="av_settings">Hang/videóbeállítások </string>
-    <string name="recording_error">A felvétel közben hiba történt </string>
-    <string name="recording_camera_not_available">A kamera nem elérhető</string>
+    <string name="recording_error">A felvétel nem sikerült</string>
+    <string name="recording_camera_not_available">A kamera nem érhető el</string>
     <string name="shared_string_control_stop">Leállítás</string>
     <string name="osmand_srtm_long_description_1000_chars">Ez a bővítmény egy szintvonal fedvényt és egy domborzatárnyékolás réteget biztosít, amelyek az OsmAnd normál térképein jelennek meg. Ezt a funkcionalitást nagyon fogják értékelni a sportolók, túrázók, utazók és mindenki, akiket a táj domborzati szerkezete érdekel. 
 \n 
@@ -1021,7 +1021,7 @@ Proporcionális memória %4$s MB (Android korlát %5$s MB, Dalvik %6$s MB).</str
     <string name="av_widget_action_descr">Vezérlőgomb alapértelmezett működési módja.</string>
     <string name="av_widget_action">Alapértelmezett mód</string>
     <string name="recording_description">Felvétel %1$s %3$s %2$s</string>
-    <string name="srtm_paid_version_msg">Kérlek, fontold meg a szintvonal bővítmény megvásárlását a Play Store-ban, ezzel is támogatva a további fejlesztéseket.</string>
+    <string name="srtm_paid_version_msg">Kérlek, fontold meg a „Szintvonalak” bővítmény megvásárlását a Play Store-ban, ezzel is támogatva a további fejlesztéseket.</string>
     <string name="srtm_paid_version_title">Szintvonal bővítmény</string>
 
     <string name="intermediate_points_change_order">Más sorrend</string>
@@ -1030,7 +1030,7 @@ Proporcionális memória %4$s MB (Android korlát %5$s MB, Dalvik %6$s MB).</str
     <string name="local_indexes_cat_av">Hang- és videofelvétel</string>
     <string name="stop_routing_confirm">Biztosan megállítod a navigációt?</string>
     <string name="clear_dest_confirm">Biztosan törlöd a célpontot (és a köztes célpontokat)?</string>
-    <string name="precise_routing_mode_descr">Pontos útvonaltervező engedélyezése hibamentes, pontos útvonalak tervezéséhez. Jelenleg lassú, kis távolságokra működik.</string>
+    <string name="precise_routing_mode_descr">Pontos, hibamentes útvonaltervek készítése. Jelenleg korlátozott távolságra és lassan tervez.</string>
     <string name="precise_routing_mode">Pontos útvonaltervezés (kísérleti)</string>
     <string name="recording_context_menu_show">Mutat</string>
     <string name="recording_photo_description">Fénykép %1$s %2$s</string>
@@ -1066,7 +1066,7 @@ Proporcionális memória %4$s MB (Android korlát %5$s MB, Dalvik %6$s MB).</str
     <string name="monitoring_settings_descr">Az útvonalaid felvételének beállításai.</string>
 
 
-    <string name="choose_osmand_theme_descr">Alkalmazástéma kiválasztása.</string>
+    <string name="choose_osmand_theme_descr">Válaszd ki, hogyan nézzen ki az alkalmazás.</string>
     <string name="choose_osmand_theme">Téma</string>
     <string name="accessibility_options">Kisegítő lehetőségek</string>
     <string name="select_address_activity">Cím kiválasztása</string>
@@ -1079,9 +1079,9 @@ Proporcionális memória %4$s MB (Android korlát %5$s MB, Dalvik %6$s MB).</str
     <string name="clear_destination">Célpont törlése</string>
     <string name="other_location">Egyéb</string>
     <string name="files_limit">%1$d fájl maradt</string>
-    <string name="available_downloads_left">%1$d fájl elérhető letöltésre</string>
+    <string name="available_downloads_left">%1$d letöltendő fájl maradt</string>
     <string name="install_paid">Teljes verzió</string>
-    <string name="use_magnetic_sensor_descr">Az iránytűhöz használd a mágneses érzékelőt a tájolási érzékelő helyett.</string>
+    <string name="use_magnetic_sensor_descr">A mágnesszenzor használata az iránytű értékének meghatározásához a tájolás szenzor helyett.</string>
     <string name="use_magnetic_sensor">Mágneses érzékelő (iránytű) használata</string>
     <string name="use_kalman_filter_compass_descr">Csökkenti a zajt az iránytű olvasásakor, de hozzáadja a tehetetlenséget.</string>
     <string name="use_kalman_filter_compass">Kálmán-szűrő használata</string>
@@ -1095,7 +1095,7 @@ Proporcionális memória %4$s MB (Android korlát %5$s MB, Dalvik %6$s MB).</str
     <string name="plugin_distance_point_ele">magasság</string>
     <string name="plugin_distance_point">Pont</string>
     <string name="gpx_file_name">GPX fájlnév</string>
-    <string name="gpx_saved_sucessfully">GPX fájl sikeresen elmentve ide: {0}</string>
+    <string name="gpx_saved_sucessfully">GPX fájl elmentve ide: {0}</string>
     <string name="osmand_distance_planning_plugin_description">Ez a bővítmény lehetővé teszi útvonalak létrehozását a térképen való koppintással, vagy meglévő GPX fájlok használatát, módosítását egy út megtervezéséhez és a pontok közötti távolság méréséhez. Az eszközt a térkép képernyőn elhelyezett gombbal lehet indítani. Az eredmény elmenthető GPX fájlként, amely később használható a vezetéshez.</string>
     <string name="osmand_distance_planning_plugin_name">Távolságszámító és tervezőeszköz</string>
     <string name="use_distance_measurement_help">* Pont megjelöléséhez koppints. 
@@ -1108,16 +1108,16 @@ Proporcionális memória %4$s MB (Android korlát %5$s MB, Dalvik %6$s MB).</str
     <string name="distance_measurement_finish_subtrack">Következő alnyomvonal/pont</string>
     <string name="distance_measurement_clear_route">Pontok törlése</string>
 
-    <string name="distance_measurement_load_gpx">Meglévő GPX megnyitása</string>
-    <string name="local_osm_changes_backup_successful">Az OSM módosításfájl sikeresen létrehozva %1$s</string>
-    <string name="local_osm_changes_backup_failed">OSM módosítófájl biztonsági mentése sikertelen</string>
+    <string name="distance_measurement_load_gpx">Meglévő GPX fájl megnyitása</string>
+    <string name="local_osm_changes_backup_successful">OSM módosításfájl létrehozva %1$s</string>
+    <string name="local_osm_changes_backup_failed">Nem sikerült az OSM módosításokról biztonsági mentést készíteni</string>
     <string name="local_osm_changes_backup">Biztonsági mentés OSM módosítófájlként</string>
     <string name="delete_point">Pont törlése</string>
 
-    <string name="intermediate_items_sort_return">Célpontok optimális sorrendbe rendezése a jelenlegi pozíciódtól a célpont felé.</string>
+    <string name="intermediate_items_sort_return">A köztes célpontok optimális rendezése a célponthoz vezető útvonalon.</string>
     <string name="intermediate_items_sort_by_distance">Rendezés háztól-házig</string>
 
-    <string name="osb_author_or_password_not_specified">Kérlek adj meg OSM felhasználónevet és jelszót a Beállításokban</string>
+    <string name="osb_author_or_password_not_specified">Kérlek adj meg OSM felhasználónevet és jelszót a „Beállítások”-ban</string>
     <string name="clear_intermediate_points">Köztes célpontok törlése</string>
     <string name="keep_intermediate_points">Köztes célpontok megtartása</string>
     <string name="new_directions_point_dialog">Már vannak köztes célpontjaid.</string>
@@ -1175,7 +1175,7 @@ Proporcionális memória %4$s MB (Android korlát %5$s MB, Dalvik %6$s MB).</str
     <string name="local_index_tile_data_maxzoom">Maximális zoom: %1$s</string>
     <string name="local_index_tile_data_minzoom">Minimális zoom: %1$s</string>
     <string name="local_index_tile_data_name">Csempeadat: %1$s</string>
-    <string name="edit_tilesource_successfully">%1$s csempeforrás sikeresen elmentve</string>
+    <string name="edit_tilesource_successfully">%1$s csempeforrás elmentve</string>
     <string name="edit_tilesource_elliptic_tile">Elliptikus Merkátor</string>
     <string name="edit_tilesource_maxzoom">Maximális zoom</string>
     <string name="edit_tilesource_expiration_time">Lejárat (perc)</string>
@@ -1196,7 +1196,7 @@ Proporcionális memória %4$s MB (Android korlát %5$s MB, Dalvik %6$s MB).</str
     <string name="shared_string_or">vagy</string>
     <string name="amenity_type_seamark">Hajózási jelzés</string>
     <string name="app_modes_choose_descr">Milyen felhasználási módok jelenjenek meg az alkalmazásban?</string>
-    <string name="app_modes_choose">Felhasználási módok</string>
+    <string name="app_modes_choose">Alkalmazás profilok</string>
     <string name="map_widget_map_rendering">Térkép megjelenítése</string>
     <string name="app_mode_hiking">Gyalogtúra</string>
     <string name="app_mode_motorcycle">Motorkerékpár</string>
@@ -1233,14 +1233,15 @@ Proporcionális memória %4$s MB (Android korlát %5$s MB, Dalvik %6$s MB).</str
     <string name="routing_attr_avoid_motorway_name">Autópályák elkerülése</string>
     <string name="routing_attr_avoid_motorway_description">Autópályák elkerülése</string>
     <string name="routing_attr_weight_name">Súlykorlátozás</string>
-    <string name="routing_attr_weight_description">Jármű súlyának megadása, ami az úton megengedett kell legyen.</string>
-    <string name="android_19_location_disabled">Az Android 4.4 (KitKat) verzió óta nem lehet térképet letölteni és frissíteni a korábbi tárolási helyre (%s). Szeretnéd az engedélyezett tárolóhelyet megváltoztatni és az összes OsmAnd fájlt oda másolni?\n 1. megjegyzés: a régi fájlok érintetlenül maradnak (de kézzel törölhetők).
+    <string name="routing_attr_weight_description">Add meg az utakon megengedett járműtömeget korlátot.</string>
+    <string name="android_19_location_disabled">Az Android 4.4 (KitKat) verzió óta nem lehet térképet letölteni és frissíteni a korábbi tárolási helyre (%s). Másoljuk az összes OsmAnd fájlt az új helyre?
+\n 1. megjegyzés: a régi fájlok érintetlenül maradnak (de kézzel törölhetők). 
 \n 2. megjegyzés: az új tárolóhelyen nem lehetséges az OsmAnd és OsmAnd+ között fájlokat megosztani.</string>
 
     <string name="copying_osmand_one_file_descr">%s fájl másolása az új helyre…</string>
     <string name="copying_osmand_files_descr">OsmAnd adatainak másolása az új helyre (%s)…</string>
     <string name="copying_osmand_files">OsmAnd adatfájlok másolása…</string>
-    <string name="calculate_osmand_route_gpx">OsmAnd offline útvonal tervezése</string>
+    <string name="calculate_osmand_route_gpx">Offline OsmAnd útvonaltervezés</string>
     <string name="app_mode_truck">Teherautó</string>
     <string name="guidance_preferences_descr">Navigációs beállítások</string>
     <string name="routing_preferences_descr">Útvonaltervezési beállítások</string>
@@ -2645,8 +2646,10 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="animate_my_location">Saját pozícióm animálása</string>
     <string name="animate_my_location_desc">A saját pozíció mozgásának animálása navigáció közben.</string>
     <string name="shared_string_overview">Áttekintés</string>
-    <string name="route_is_too_long_v2">Ennek az útnak a kiszámítása túl hosszú ideig tarthat. Ha 10 percen belül nem kap eredményt, kérjük, adjon hozzá köztes célpontokat.</string>
-    <string name="osmand_extended_description_part1">OsmAnd (OSM Automated Navigation Directions) egy térkép- és navigációs alkalmazás, amellyel hozzáférhet az ingyenes, globális és kiváló minőségű OpenStreetMap (OSM) adataihoz. Élvezze a hangalapú és vizuális navigációs szolgáltatást, tekintsen meg érdekes pontokat (POI-kat), hozzon létre és kezeljen GPX-útvonalakat szintvonalak és magasságinformációk használatával (egy plugin segítségével), válasszon az autós, kerékpáros és gyalogos üzemmód közül és használjon ki számos egyéb lehetőséget.</string>
+    <string name="route_is_too_long_v2">Kérlek adj hozzá köztes célpontokat, ha 10 percen belül nem kapsz eredményt erre a hosszú útvonalra.</string>
+    <string name="osmand_extended_description_part1">OsmAnd (OSM Automated Navigation Directions) egy térkép- és navigációs alkalmazás, amellyel hozzáférhetsz az ingyenes, globális és kiváló minőségű OpenStreetMap (OSM) adataihoz.
+\n
+\nÉlvezd a hangalapú és vizuális navigációs szolgáltatást, tekints meg érdekes helyeket (POI-kat), hozz létre és kezelj GPX nyomvonalakat, szintvonalak és magasságinformációk használatával (egy plugin segítségével), válassz az autós, kerékpáros és gyalogos üzemmód közül, szerkessz OSM-et és használd ki a számos egyéb lehetőséget.</string>
     <string name="save_poi_too_many_uppercase">A név túl sok nagybetűt tartalmaz. Folytatja?</string>
     <string name="private_access_routing_req">A célpont korlátozott hozzáférésű területen található. Használjunk magánutakat ennél az útvonaltervnél?</string>
     <string name="restart_search">Keresés újraindítása</string>
@@ -2661,7 +2664,8 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="mapillary_widget_descr">Gyors Mapillary közreműködést tesz lehetővé.</string>
     <string name="mapillary_descr">Online utcaszintű fotók mindenkinek. Fedezz fel helyeket, vegyél benne részt, fotózd le a világot.</string>
     <string name="plugin_mapillary_descr">Utcaszintű fotók mindenkinek. Fedezz fel helyeket, vegyél benne részt, fotózd le a világot.</string>
-    <string name="osmand_extended_description_part4">Az OsmAnd sítérkép bővítménye lehetővé teszi a sípályák megjelenítését nehézség szerint, valamint további információkat, mint például a felvonók helyét, és más berendezéseket.</string>
+    <string name="osmand_extended_description_part4">Síelés
+\nAz OsmAnd sítérkép bővítménye lehetővé teszi a sípályák megjelenítését nehézség szerint, valamint további információkat, mint például a felvonók helyét, és más berendezéseket.</string>
     <string name="online_photos">Online fényképek</string>
     <string name="improve_coverage_mapillary">Fényképes lefedettség javítása a Mapillaryvel</string>
     <string name="improve_coverage_install_mapillary_desc">A Mapillary telepítésével fényképeket adhatsz a térképhez.</string>
@@ -2835,10 +2839,10 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="notes_by_date">Megjegyzések dátum szerint</string>
     <string name="by_date">Dátum szerint</string>
     <string name="by_type">Típus szerint</string>
-    <string name="looking_for_tracks_with_waypoints">Útpontokat tartalmazó GPX fájlok keresése</string>
+    <string name="looking_for_tracks_with_waypoints">Útpontokat tartalmazó nyomvonalak keresése</string>
     <string name="shared_string_more_without_dots">Többi</string>
     <string name="appearance_on_the_map">Megjelenítés a térképen</string>
-    <string name="add_track_to_markers_descr">Válassz egy GPX fájlt, aminek útpontjaiból a jelölők készüljenek.</string>
+    <string name="add_track_to_markers_descr">Válassz egy nyomvonalat, aminek útpontjaiból a jelölők készüljenek.</string>
     <string name="add_favourites_group_to_markers_descr">Válassz egy kedvencek kategóriát, amikből jelölőt készítenél.</string>
     <string name="shared_string_gpx_waypoints">Nyomvonal útpontok</string>
     <string name="favourites_group">Kedvencek kategória</string>
@@ -2847,7 +2851,7 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="empty_state_markers_active">Készíts térképjelölőket!</string>
     <string name="empty_state_markers_active_desc">Koppints hosszan vagy röviden egy helyre, majd koppints a jelölőzászló gombjára.</string>
     <string name="empty_state_markers_groups">Csoportok importálása</string>
-    <string name="empty_state_markers_groups_desc">Jelölők importálása kedvencek csoportokból, vagy GPX útpontokból.</string>
+    <string name="empty_state_markers_groups_desc">Jelölők importálása kedvencek csoportokból, vagy útpontokból.</string>
     <string name="shared_string_two">Kettő</string>
     <string name="shared_string_one">Egy</string>
     <string name="show_guide_line_descr">Irányjelző vonalat jelenít meg az aktuális pozíciódtól az aktív térképjelölőkig.</string>
@@ -3024,7 +3028,7 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="start_editing">Szerkesztés elkezdése</string>
     <string name="get_unlimited_access">Szerezz korlátlan hozzáférést</string>
     <string name="welcome_to_open_beta">Üdvözlünk a nyílt bétatesztben</string>
-    <string name="wikivoyage_travel_guide">Wikivoyage Útikönyv</string>
+    <string name="wikivoyage_travel_guide">Útikalauzok</string>
     <string name="wikivoyage_travel_guide_descr">Útikönyv a Föld legérdekesebb helyeihez, az OsmAndon belül, internetkapcsolat nélkül.</string>
     <string name="purchase_dialog_travel_description">Az offline útikalauz funkció használatához vedd meg az alábbiak egyikét:</string>
     <string name="purchase_dialog_subtitle">Válaszd ki a megfelelőt:</string>
