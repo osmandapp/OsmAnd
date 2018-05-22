@@ -202,7 +202,7 @@ Lon %2$s</string>
     <string name="map_widget_right">Panel derecho</string>
     <string name="map_widget_left">Panel izquierdo</string>
     <string name="configure_map">Configurar mapa</string>
-    <string name="search_radius_proximity">En un radio de</string>
+    <string name="search_radius_proximity">A menos de</string>
     
     
     <string name="anonymous_user">Usuario anónimo</string>
@@ -1830,8 +1830,8 @@ Lon %2$s</string>
     <string name="downloading_number_of_files">Descargando - %1$d archivo/s</string>
     <string name="hillshade_layer_disabled">Capa de sombreado desactivada</string>
     <string name="buy">Comprar</string>
-    <string name="activate_seamarks_plugin">Activa el complemento «Vista náutica»</string>
-    <string name="activate_srtm_plugin">Activa el complemento de «SRTM»</string>
+    <string name="activate_seamarks_plugin">Activa el complemento de «Vista náutica»</string>
+    <string name="activate_srtm_plugin">Activa el complemento de «Curvas de nivel»</string>
     <string name="later">Luego</string>
     <string name="get_full_version">Versión completa</string>
     <string name="regions">Regiones</string>
@@ -2837,7 +2837,7 @@ Lon %2$s</string>
     <string name="coordinate_input_accuracy">%1$d dígitos</string>
     <string name="go_to_next_field">Siguiente campo</string>
     <string name="rename_marker">Renombrar marcador</string>
-    <string name="add_track_to_markers_descr">Elige un archivo GPX para añadir sus puntos de referencia a los marcadores.</string>
+    <string name="add_track_to_markers_descr">Elige una traza para añadir sus puntos de referencia a los marcadores.</string>
     <string name="add_favourites_group_to_markers_descr">Elige una categoría de favoritos para añadir a los marcadores.</string>
     <string name="shared_string_gpx_waypoints">Puntos de referencia de la traza</string>
     <string name="favourites_group">Categoría de favoritos</string>
@@ -2846,7 +2846,7 @@ Lon %2$s</string>
     <string name="empty_state_markers_active">¡Crea marcadores del mapa!</string>
     <string name="empty_state_markers_active_desc">Pulsa en «Lugares» y luego pulsa la bandera del marcador.</string>
     <string name="empty_state_markers_groups">Importar grupos</string>
-    <string name="empty_state_markers_groups_desc">Importar grupos de favoritos o puntos de referencia GPX, como marcadores.</string>
+    <string name="empty_state_markers_groups_desc">Importar grupos de favoritos o puntos de referencia, como marcadores.</string>
     <string name="empty_state_markers_history_desc">Los marcadores descartados aparecerán en esta pantalla.</string>
     <string name="shared_string_two">Dos</string>
     <string name="shared_string_one">Uno</string>
@@ -2855,7 +2855,7 @@ Lon %2$s</string>
     <string name="distance_indication_descr">Elige cómo mostrar la distancia a los marcadores activos.</string>
     <string name="active_markers_descr">Elige el número de marcadores activos a mostrar.</string>
     <string name="appearance_on_the_map">Aspecto en el mapa</string>
-    <string name="looking_for_tracks_with_waypoints">Buscando archivos GPX con puntos de referencia</string>
+    <string name="looking_for_tracks_with_waypoints">Buscando trazas con puntos de referencia</string>
     <string name="shared_string_more_without_dots">Más</string>
     <string name="empty_state_osm_edits">Crear o modificar objetos OSM</string>
     <string name="empty_state_osm_edits_descr">Crea o modifica puntos de interés, abre o comenta notas de OSM y contribuye con grabaciones GPX.</string>
@@ -2873,13 +2873,13 @@ Lon %2$s</string>
     <string name="modify_the_search_query">Modificar la consulta de búsqueda.</string>
     <string name="release_3_0">• Introducción de OsmAnd Viajes: Guía mundial de viaje sin conexión a Internet, basado en Wikiviajes 
 \n 
-\n • Wikipedia: Nuevo aspecto, enlaces activos, imágenes ahora soportadas
+\n • Wikipedia: Nuevo aspecto, enlaces activos, imágenes ahora soportadas 
 \n 
 \n • Interfaz de apertura de traza: Soporte para los grupos de puntos de ruta 
 \n 
 \n • Marcadores del mapa: Importación de grupos elegidos desde archivos GPX, Ingreso de coordenadas, nuevo aspecto 
 \n 
-\n • Los datos de OsmAnd Live (suscripción), soporta ahora todas las características de OsmAnd 
+\n • La suscripción de OsmAnd Live, soporta ahora todas las características de OsmAnd 
 \n</string>
     <string name="what_is_here">Aquí hay:</string>
     <string name="parked_at">estacionado a las</string>
@@ -3005,7 +3005,7 @@ Lon %2$s</string>
     <string name="purchase_dialog_travel_description">Comprar uno de los siguientes elementos para recibir la característica de la guía turística sin conexión:</string>
     <string name="purchase_dialog_subtitle">Elegir el elemento adecuado:</string>
     <string name="wikivoyage_travel_guide_descr">Las guías de los lugares más interesantes del planeta, dentro de OsmAnd y sin conexión a Internet.</string>
-    <string name="wikivoyage_travel_guide">Guía turística de Wikiviajes</string>
+    <string name="wikivoyage_travel_guide">Guías turísticas</string>
     <string name="monthly_map_updates">Actualizaciones del mapa: <b>Cada mes</b></string>
     <string name="daily_map_updates">Actualizaciones del mapa: <b>Cada hora</b></string>
     <string name="in_app_purchase">Compras en la aplicación</string>
@@ -3070,4 +3070,5 @@ Lon %2$s</string>
     <string name="access_intermediate_arrival_time">Hora de llegada intermedia</string>
     <string name="map_widget_intermediate_time">Tiempo intermedio</string>
     <string name="unirs_render_descr">Modificación del estilo predefinido para un mayor contraste en los caminos peatonales y para bicicletas. Usa los colores clásicos de Mapnik.</string>
+    <string name="shared_string_gpx_files">Archivos GPX</string>
     </resources>
