@@ -14,7 +14,7 @@
 	<string name="poi_confectionery">Butega de durches</string>
 	<string name="poi_ice_cream">Gelateria</string>
 	<string name="poi_supermarket">Supermercadu</string>
-	<string name="poi_tea">Butega de su té</string>
+	<string name="poi_tea">Butega de su te</string>
 	<string name="poi_dairy">Lateria</string>
 	<string name="poi_vending_machine">Distribudore automàticu</string>
 
@@ -2422,7 +2422,7 @@
 	<string name="poi_crop_rape">Cortura: napu</string>
 	<string name="poi_crop_beet">Cortura: beda</string>
 	<string name="poi_crop_lavender">Cortura: ispìgula/ispigu</string>
-	<string name="poi_crop_tea">Cortura: tè</string>
+	<string name="poi_crop_tea">Cortura: te</string>
 	<string name="poi_crop_coffee">Cortura: cafè</string>
 	<string name="poi_crop_poultry">Cortura: màndigu pro puddas</string>
 	<string name="poi_crop_sunflower">Cortura: girasole</string>
@@ -3317,8 +3317,8 @@
 	<string name="poi_cuisine_juice">Sutzu de frùtora</string>
 	<string name="poi_cuisine_soba">Soba (pasta giaponesa)</string>
 	<string name="poi_cuisine_fine_dining">Arta coghina</string>
-	<string name="poi_cuisine_tea">Tè</string>
-	<string name="poi_cuisine_tea_shop">Butega de tè</string>
+	<string name="poi_cuisine_tea">Te</string>
+	<string name="poi_cuisine_tea_shop">Butega de te</string>
 	<string name="poi_cuisine_soup">Supa</string>
 	<string name="poi_cuisine_pie">Turtas</string>
 	<string name="poi_cuisine_hotdog">Hot dog</string>
@@ -3420,4 +3420,46 @@
 
 	<string name="poi_cuisine_savory_pancakes">Pancakes salados</string>
 	<string name="poi_cuisine_bistro">Bistrò</string>
+	<string name="poi_cuisine_bakery">Furru de su pane</string>
+	<string name="poi_cuisine_couscous">Couscous</string>
+	<string name="poi_cuisine_piadina">Piadinas</string>
+	<string name="poi_cuisine_falafel">Falafel</string>
+	<string name="poi_cuisine_smoothie">Frulladu</string>
+	<string name="poi_cuisine_souvlaki">Souvlaki</string>
+	<string name="poi_cuisine_snack">Merenda (snack)</string>
+	<string name="poi_cuisine_yogurt">Yogurt</string>
+	<string name="poi_cuisine_gyros">Gyros</string>
+	<string name="poi_cuisine_empanada">Empanadas</string>
+	<string name="poi_cuisine_crepes">Crepes</string>
+	<string name="poi_cuisine_yakiniku">Yakiniku</string>
+	<string name="poi_cuisine_suki">Suki</string>
+	<string name="poi_cuisine_udon">Udon</string>
+	<string name="poi_cuisine_brasserie">Brasserie</string>
+	<string name="poi_cuisine_bubble_tea">Te cun bubbulicas</string>
+	<string name="poi_cuisine_yakitori">Yakitori</string>
+	<string name="poi_cuisine_sagardotegia">Sagardotegia (sidru)</string>
+	<string name="poi_cuisine_meat">Petza</string>
+	<string name="poi_cuisine_wings">Alas de puddu</string>
+	<string name="poi_cuisine_waffle">Waffles</string>
+	<string name="poi_cuisine_chocolate">Tziculate</string>
+	<string name="poi_cuisine_wine">Binu</string>
+	<string name="poi_cuisine_potato">Patatas</string>
+	<string name="poi_cuisine_brunch">Brunch (ismurzu+gustu)</string>
+	<string name="poi_cuisine_sub">Baguette imbutida</string>
+	<string name="poi_cuisine_pita">Pita</string>
+	<string name="poi_cuisine_fondue">Fonduda</string>
+	<string name="poi_cuisine_baguette">Baguettes</string>
+	<string name="poi_cuisine_pastel">Pastel</string>
+	<string name="poi_cuisine_burrito">Burritos</string>
+	<string name="poi_cuisine_teriyaki">Teriyaki</string>
+	<string name="poi_cuisine_shawarma">Shawarma</string>
+
+	<string name="poi_gambling_lottery">Loteria</string>
+	<string name="poi_gambling_pachinko">Pachinko</string>
+	<string name="poi_gambling_slot_machines">Machineddas (slot machines)
+\n</string>
+	<string name="poi_gambling_betting">Iscummissas</string>
+	<string name="poi_gambling_bingo">Bingo</string>
+
+	<string name="poi_nutrition_supplements">Integradores alimentares</string>
 	</resources>

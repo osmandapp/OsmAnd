@@ -2002,4 +2002,29 @@
 	<string name="poi_internet_access_type_yes">Με πρόσβαση διαδικτύου</string>
 
 	<string name="poi_maxwidth">Μέγιστο πλάτος</string>
+	<string name="poi_wetland_string_bog">Βάλτος με ανυψώσεις και νησίδες</string>
+	<string name="poi_wetland_palsa_bog">Τέλμα πάλσα</string>
+	<string name="poi_iata">Κωδικός IATA</string>
+	<string name="poi_icao">Κωδικός ICAO</string>
+	<string name="poi_faa">Κωδικός FAA</string>
+	
+	<string name="poi_artwork_type_sculpture">Τύπος έργου: γλυπτική</string>
+	<string name="poi_artwork_type_statue">Τύπος έργου: άγαλμα</string>
+	<string name="poi_artwork_type_mural">Τύπος έργου: τοιχογραφία</string>
+	<string name="poi_artwork_type_architecture">Τύπος έργου: αρχιτεκτονική</string>
+	<string name="poi_artwork_type_painting">Τύπος έργου: ζωγραφική</string>
+	<string name="poi_artwork_type_stone">Τύπος έργου: λίθος</string>
+	<string name="poi_artwork_type_bust">Τύπος έργου: προτομή</string>
+	<string name="poi_artwork_type_installation">Τύπος έργου: εγκατάσταση</string>
+	<string name="poi_artwork_type_mosaic">Τύπος έργου: μωσαϊκό</string>
+	<string name="poi_artwork_type_relief">Τύπος έργου: ανάγλυφο</string>
+	<string name="poi_artwork_type_graffiti">Τύπος έργου: γκράφιτι</string>
+	<string name="poi_artwork_type_stele">Τύπος έργου: στήλη</string>
+	<string name="poi_width">Πλάτος</string>
+
+	<string name="poi_architect_name">Αρχιτέκτονας</string>
+
+	<string name="poi_architecture_modern">Αρχιτεκτονική: σύγχρονη</string>
+	<string name="poi_architecture_stalinist_neoclassicism">Αρχιτεκτονική: σταλινικός νεοκλασικισμός</string>
+	<string name="poi_architecture_eclectic">Αρχιτεκτονική: εκλεκτική</string>
 	</resources>

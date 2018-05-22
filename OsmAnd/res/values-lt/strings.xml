@@ -2691,7 +2691,7 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     
     <string name="show_direction">Atstumo nuoroda</string>
     <string name="sort_by">Rūšiuoti pagal</string>
-    <string name="do_not_use_animations">Nenaudoti animacijos</string>
+    <string name="do_not_use_animations">Be animacijos</string>
     <string name="do_not_use_animations_descr">Išjungia animaciją programoje.</string>
     <string name="keep_showing_on_map">Nuolat rodyti žemėlapyje</string>
     <string name="exit_without_saving">Ar norite išeiti neįrašę?</string>
@@ -2704,7 +2704,7 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="add_point_after">Pridėti tašką po</string>
     <string name="shared_string_options">Parinktys</string>
     <string name="measurement_tool_snap_to_road_descr">OsmAnd sujungs taškus su pasirinkto profilio maršrutu.</string>
-    <string name="measurement_tool_save_as_new_track_descr">Taškus galite įrašyti kaip maršruto taškus arba kaip linija.</string>
+    <string name="measurement_tool_save_as_new_track_descr">Taškus galite įrašyti kaip maršruto taškus arba kaip liniją.</string>
     <string name="choose_navigation_type">Pasirinkite navigacijos profilį</string>
     <string name="none_point_error">Prašome pridėti bent vieną tašką.</string>
     <string name="enter_gpx_name">GPX failo pavadinimas:</string>
@@ -2774,7 +2774,7 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="tap_on_map_to_hide_interface">Viso ekrano režimas</string>
     <string name="round_trip">Kelionė</string>
     <string name="context_menu_item_modify_note">Keisti OSM pastabą</string>
-    <string name="fast_coordinates_input">Greita koordinačių įvestis</string>
+    <string name="fast_coordinates_input">Sparčioji koordinatės įvestis</string>
     <string name="routing_attr_avoid_ice_roads_fords_name">Vengti ledo kelių, brastų</string>
     <string name="is_saved">išsaugota</string>
     <string name="move_to_history">Perkelti į istoriją</string>
@@ -2818,11 +2818,11 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="mark_passed">Pažymėti kaip praeitą</string>
     <string name="plan_route_no_markers_toast">Turite pridėti bent vieną žymeklį norėdami naudoti šią funkciją.</string>
     <string name="make_round_trip_descr">Nukopijuoti pradžios tašką kaip paskirties vietą.</string>
-    <string name="fast_coordinates_input_descr">Pasirinkite koordinačių įvesties formatą. Jūs visada galite pakeisti, spustelėdami Savybės.</string>
+    <string name="fast_coordinates_input_descr">Pasirinkite koordinačių įvesties formatą. Jūs visada galite pakeisti, spustelėdami \"Savybės\".</string>
     <string name="plan_route">Planuoti maršrutą</string>
     <string name="coordinate_input">Koordinačių įrašymas</string>
     <string name="marker_save_as_track_descr">Žymeklių eksporta į failą galite aprašyti čia:</string>
-    <string name="remove_from_map_markers">Pašalinti iš Žemėlapio Žymeklių</string>
+    <string name="remove_from_map_markers">Pašalinti iš žemėlapio žymeklių</string>
     <string name="all_markers_moved_to_history">Visi žymekliai perkelti į istorija</string>
     <string name="marker_moved_to_history">Žemėlapio žymeklis perkeltas į istoriją</string>
     <string name="marker_moved_to_active">Žemėlapio žymeklis perkeltas prie aktyvų</string>
