@@ -8,7 +8,10 @@ import android.support.annotation.ColorInt;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.IdRes;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.view.ViewTreeObserver;
@@ -33,35 +36,37 @@ public class BaseOsmAndFragment extends Fragment implements TransitionAnimator {
 		super.onResume();
 		if (Build.VERSION.SDK_INT >= 21) {
 			Activity activity = getActivity();
-			int colorId = getStatusBarColorId();
-			if (colorId != -1) {
-				if (activity instanceof MapActivity) {
-					((MapActivity) activity).updateStatusBarColor();
-				} else {
-					statusBarColor = activity.getWindow().getStatusBarColor();
-					activity.getWindow().setStatusBarColor(ContextCompat.getColor(activity, colorId));
+			if (activity != null) {
+				int colorId = getStatusBarColorId();
+				if (colorId != -1) {
+					if (activity instanceof MapActivity) {
+						((MapActivity) activity).updateStatusBarColor();
+					} else {
+						statusBarColor = activity.getWindow().getStatusBarColor();
+						activity.getWindow().setStatusBarColor(ContextCompat.getColor(activity, colorId));
+					}
 				}
-			}
-			if (!isFullScreenAllowed() && activity instanceof MapActivity) {
-				View view = getView();
-				if (view != null) {
-					ViewTreeObserver vto = view.getViewTreeObserver();
-					vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+				if (!isFullScreenAllowed() && activity instanceof MapActivity) {
+					View view = getView();
+					if (view != null) {
+						ViewTreeObserver vto = view.getViewTreeObserver();
+						vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
 
-						@TargetApi(Build.VERSION_CODES.JELLY_BEAN)
-						@Override
-						public void onGlobalLayout() {
+							@TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+							@Override
+							public void onGlobalLayout() {
 
-							View view = getView();
-							if (view != null) {
-								ViewTreeObserver obs = view.getViewTreeObserver();
-								obs.removeOnGlobalLayoutListener(this);
-								view.requestLayout();
+								View view = getView();
+								if (view != null) {
+									ViewTreeObserver obs = view.getViewTreeObserver();
+									obs.removeOnGlobalLayoutListener(this);
+									view.requestLayout();
+								}
 							}
-						}
-					});
+						});
+					}
+					((MapActivity) activity).exitFromFullScreen();
 				}
-				((MapActivity) activity).exitFromFullScreen();
 			}
 		}
 	}
@@ -71,11 +76,13 @@ public class BaseOsmAndFragment extends Fragment implements TransitionAnimator {
 		super.onPause();
 		if (Build.VERSION.SDK_INT >= 21) {
 			Activity activity = getActivity();
-			if (!(activity instanceof MapActivity) && statusBarColor != -1) {
-				activity.getWindow().setStatusBarColor(statusBarColor);
-			}
-			if (!isFullScreenAllowed() && activity instanceof MapActivity) {
-				((MapActivity) activity).enterToFullScreen();
+			if (activity != null) {
+				if (!(activity instanceof MapActivity) && statusBarColor != -1) {
+					activity.getWindow().setStatusBarColor(statusBarColor);
+				}
+				if (!isFullScreenAllowed() && activity instanceof MapActivity) {
+					((MapActivity) activity).enterToFullScreen();
+				}
 			}
 		}
 	}
@@ -121,14 +128,33 @@ public class BaseOsmAndFragment extends Fragment implements TransitionAnimator {
 		return true;
 	}
 
+	@Nullable
 	protected OsmandApplication getMyApplication() {
-		return (OsmandApplication) getActivity().getApplication();
+		FragmentActivity activity = getActivity();
+		if (activity != null) {
+			return (OsmandApplication) activity.getApplication();
+		} else {
+			return null;
+		}
 	}
 
+	@NonNull
+	protected OsmandApplication requireMyApplication() {
+		FragmentActivity activity = requireActivity();
+		return (OsmandApplication) activity.getApplication();
+	}
+
+	@Nullable
 	protected OsmandActionBarActivity getMyActivity() {
 		return (OsmandActionBarActivity) getActivity();
 	}
 
+	@NonNull
+	protected OsmandActionBarActivity requireMyActivity() {
+		return (OsmandActionBarActivity) requireActivity();
+	}
+
+	@Nullable
 	protected OsmandInAppPurchaseActivity getInAppPurchaseActivity() {
 		Activity activity = getActivity();
 		if (activity instanceof OsmandInAppPurchaseActivity) {
@@ -138,23 +164,28 @@ public class BaseOsmAndFragment extends Fragment implements TransitionAnimator {
 		}
 	}
 
+	@Nullable
 	protected IconsCache getIconsCache() {
-		if (iconsCache == null) {
-			iconsCache = getMyApplication().getIconsCache();
+		OsmandApplication app = getMyApplication();
+		if (iconsCache == null && app != null) {
+			iconsCache = app.getIconsCache();
 		}
 		return iconsCache;
 	}
 
 	protected Drawable getPaintedContentIcon(@DrawableRes int id, @ColorInt int color) {
-		return getIconsCache().getPaintedIcon(id, color);
+		IconsCache cache = getIconsCache();
+		return cache != null ? cache.getPaintedIcon(id, color) : null;
 	}
 
 	protected Drawable getIcon(@DrawableRes int id, @ColorRes int colorId) {
-		return getIconsCache().getIcon(id, colorId);
+		IconsCache cache = getIconsCache();
+		return cache != null ? cache.getIcon(id, colorId) : null;
 	}
 
 	protected Drawable getContentIcon(@DrawableRes int id) {
-		return getIconsCache().getThemedIcon(id);
+		IconsCache cache = getIconsCache();
+		return cache != null ? cache.getThemedIcon(id) : null;
 	}
 
 	protected void setThemedDrawable(View parent, @IdRes int viewId, @DrawableRes int iconId) {
@@ -165,7 +196,19 @@ public class BaseOsmAndFragment extends Fragment implements TransitionAnimator {
 		((ImageView) view).setImageDrawable(getContentIcon(iconId));
 	}
 
+	@Nullable
 	protected OsmandSettings getSettings() {
-		return getMyApplication().getSettings();
+		OsmandApplication app = getMyApplication();
+		if (app != null) {
+			return app.getSettings();
+		} else {
+			return null;
+		}
+	}
+
+	@NonNull
+	protected OsmandSettings requireSettings() {
+		OsmandApplication app = requireMyApplication();
+		return app.getSettings();
 	}
 }

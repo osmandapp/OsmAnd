@@ -1,5 +1,6 @@
 package net.osmand.plus.wikivoyage.explore;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -29,14 +30,15 @@ public class SavedArticlesTabFragment extends BaseOsmAndFragment implements Trav
 
 	protected static final Log LOG = PlatformUtil.getLog(SavedArticlesTabFragment.class);
 
+	@Nullable
 	private TravelLocalDataHelper dataHelper;
-
+	@Nullable
 	private SavedArticlesRvAdapter adapter;
 
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		final OsmandApplication app = getMyApplication();
+		final OsmandApplication app = requireMyApplication();
 		dataHelper = app.getTravelDbHelper().getLocalDataHelper();
 
 		final View mainView = inflater.inflate(R.layout.fragment_saved_articles_tab, container, false);
@@ -62,22 +64,42 @@ public class SavedArticlesTabFragment extends BaseOsmAndFragment implements Trav
 	@Override
 	public void onResume() {
 		super.onResume();
-		dataHelper.setListener(this);
+		if (dataHelper != null) {
+			dataHelper.setListener(this);
+		}
+		WikivoyageExploreActivity exploreActivity = getExploreActivity();
+		if (exploreActivity != null) {
+			exploreActivity.onTabFragmentResume(this);
+		}
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
-		dataHelper.setListener(null);
+		if (dataHelper != null) {
+			dataHelper.setListener(null);
+		}
 	}
 
 	@Override
 	public void savedArticlesUpdated() {
-		List<Object> newItems = getItems();
-		SavedArticlesDiffCallback diffCallback = new SavedArticlesDiffCallback(adapter.getItems(), newItems);
-		DiffUtil.DiffResult diffRes = DiffUtil.calculateDiff(diffCallback);
-		adapter.setItems(newItems);
-		diffRes.dispatchUpdatesTo(adapter);
+		if (adapter != null) {
+			List<Object> newItems = getItems();
+			SavedArticlesDiffCallback diffCallback = new SavedArticlesDiffCallback(adapter.getItems(), newItems);
+			DiffUtil.DiffResult diffRes = DiffUtil.calculateDiff(diffCallback);
+			adapter.setItems(newItems);
+			diffRes.dispatchUpdatesTo(adapter);
+		}
+	}
+
+	@Nullable
+	private WikivoyageExploreActivity getExploreActivity() {
+		Activity activity = getActivity();
+		if (activity != null && activity instanceof WikivoyageExploreActivity) {
+			return (WikivoyageExploreActivity) activity;
+		} else {
+			return null;
+		}
 	}
 
 	public void invalidateAdapter() {
@@ -88,11 +110,13 @@ public class SavedArticlesTabFragment extends BaseOsmAndFragment implements Trav
 
 	private List<Object> getItems() {
 		List<Object> items = new ArrayList<>();
-		List<TravelArticle> savedArticles = dataHelper.getSavedArticles();
-		if (!savedArticles.isEmpty()) {
-			Collections.reverse(savedArticles);
-			items.add(getString(R.string.saved_articles));
-			items.addAll(savedArticles);
+		if (dataHelper != null) {
+			List<TravelArticle> savedArticles = dataHelper.getSavedArticles();
+			if (!savedArticles.isEmpty()) {
+				Collections.reverse(savedArticles);
+				items.add(getString(R.string.saved_articles));
+				items.addAll(savedArticles);
+			}
 		}
 		return items;
 	}

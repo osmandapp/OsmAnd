@@ -42,8 +42,6 @@ import java.util.List;
 
 public class WikivoyageExploreActivity extends TabActivity implements DownloadEvents, OnDialogFragmentResultListener {
 
-	public static final String INTENT_KEY_PARENT_WIKIVOYAGE_EXPLORE_ACTIVITY = "intent_key_parent_wikivoyage_explore_activity";
-
 	private static final String TAB_SELECTED = "tab_selected";
 	private static final String CITY_ID_KEY = "city_id_key";
 	private static final String SELECTED_LANG_KEY = "selected_lang_key";
@@ -56,6 +54,7 @@ public class WikivoyageExploreActivity extends TabActivity implements DownloadEv
 	protected List<WeakReference<Fragment>> fragments = new ArrayList<>();
 
 	private LockableViewPager viewPager;
+	private boolean updateNeeded;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -293,14 +292,18 @@ public class WikivoyageExploreActivity extends TabActivity implements DownloadEv
 	private void onDataLoaded() {
 		switchProgressBarVisibility(false);
 		updateSearchBarVisibility();
+		updateFragments();
+	}
 
+	private void updateFragments() {
 		ExploreTabFragment exploreTabFragment = getExploreTabFragment();
-		if (exploreTabFragment != null) {
-			exploreTabFragment.populateData();
-		}
 		SavedArticlesTabFragment savedArticlesTabFragment = getSavedArticlesTabFragment();
-		if (savedArticlesTabFragment != null) {
+		if (exploreTabFragment != null && savedArticlesTabFragment != null) {
+			exploreTabFragment.populateData();
 			savedArticlesTabFragment.savedArticlesUpdated();
+			updateNeeded = false;
+		} else {
+			updateNeeded = true;
 		}
 	}
 
@@ -321,6 +324,12 @@ public class WikivoyageExploreActivity extends TabActivity implements DownloadEv
 		SavedArticlesTabFragment savedArticlesTabFragment = getSavedArticlesTabFragment();
 		if (savedArticlesTabFragment != null) {
 			savedArticlesTabFragment.invalidateAdapter();
+		}
+	}
+
+	public void onTabFragmentResume(Fragment fragment) {
+		if (updateNeeded) {
+			updateFragments();
 		}
 	}
 
