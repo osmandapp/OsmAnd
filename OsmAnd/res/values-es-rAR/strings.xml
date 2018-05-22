@@ -1830,7 +1830,7 @@ Lon %2$s</string>
     <string name="downloading_number_of_files">Descargando - %1$d archivo/s</string>
     <string name="hillshade_layer_disabled">Capa de sombreado desactivada</string>
     <string name="buy">Comprar</string>
-    <string name="activate_seamarks_plugin">Activa el complemento «Vista náutica»</string>
+    <string name="activate_seamarks_plugin">Activa el complemento de «Vista náutica»</string>
     <string name="activate_srtm_plugin">Activa el complemento de «Curvas de nivel»</string>
     <string name="later">Luego</string>
     <string name="get_full_version">Versión completa</string>
