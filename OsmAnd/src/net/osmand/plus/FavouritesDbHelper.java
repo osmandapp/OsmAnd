@@ -732,7 +732,7 @@ public class FavouritesDbHelper {
 									"SELECT " + FAVOURITE_COL_NAME + ", " + FAVOURITE_COL_CATEGORY + ", " + FAVOURITE_COL_LAT + "," + FAVOURITE_COL_LON + " FROM " + //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ 
 											FAVOURITE_TABLE_NAME, null);
 					cachedFavoritePoints.clear();
-					if (query.moveToFirst()) {
+					if (query != null && query.moveToFirst()) {
 						do {
 							String name = query.getString(0);
 							String cat = query.getString(1);
@@ -748,7 +748,9 @@ public class FavouritesDbHelper {
 							}
 						} while (query.moveToNext());
 					}
-					query.close();
+					if (query != null) {
+						query.close();
+					}
 				} finally {
 					db.close();
 				}

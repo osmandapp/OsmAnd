@@ -278,11 +278,13 @@ public class TravelLocalDataHelper {
 				try {
 					String query = HISTORY_TABLE_SELECT + " WHERE " + HISTORY_COL_TRAVEL_BOOK + " = ?";
 					SQLiteCursor cursor = conn.rawQuery(query, new String[]{travelBook});
-					if (cursor.moveToFirst()) {
-						do {
-							WikivoyageSearchHistoryItem item = readHistoryItem(cursor);
-							res.put(item.getKey(), item);
-						} while (cursor.moveToNext());
+					if (cursor != null) {
+						if (cursor.moveToFirst()) {
+							do {
+								WikivoyageSearchHistoryItem item = readHistoryItem(cursor);
+								res.put(item.getKey(), item);
+							} while (cursor.moveToNext());
+						}
 					}
 					cursor.close();
 				} finally {
@@ -380,12 +382,14 @@ public class TravelLocalDataHelper {
 				try {
 					String query = BOOKMARKS_TABLE_SELECT + " WHERE " + BOOKMARKS_COL_TRAVEL_BOOK + " = ?";
 					SQLiteCursor cursor = conn.rawQuery(query, new String[]{travelBook});
-					if (cursor.moveToFirst()) {
-						do {
-							res.add(readSavedArticle(cursor));
-						} while (cursor.moveToNext());
+					if (cursor != null) {
+						if (cursor.moveToFirst()) {
+							do {
+								res.add(readSavedArticle(cursor));
+							} while (cursor.moveToNext());
+						}
+						cursor.close();
 					}
-					cursor.close();
 				} finally {
 					conn.close();
 				}

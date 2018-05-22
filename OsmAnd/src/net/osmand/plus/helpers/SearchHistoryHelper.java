@@ -374,7 +374,7 @@ public class SearchHistoryHelper {
 				// LEGACY QUERY !!
 				SQLiteCursor query = db.rawQuery(
 						"SELECT name, latitude, longitude, time FROM history ORDER BY time DESC", null); //$NON-NLS-1$//$NON-NLS-2$
-				if (query.moveToFirst()) {
+				if (query != null && query.moveToFirst()) {
 					do {
 						String name = query.getString(0);
 						String type = PointDescription.POINT_TYPE_MARKER;
@@ -401,7 +401,9 @@ public class SearchHistoryHelper {
 						entries.add(e);
 					} while (query.moveToNext());
 				}
-				query.close();
+				if(query != null) {
+					query.close();
+				}
 			}
 			return entries;
 		}
@@ -416,7 +418,7 @@ public class SearchHistoryHelper {
 									HISTORY_COL_TIME + ", " + HISTORY_COL_FREQ_INTERVALS + ", " + HISTORY_COL_FREQ_VALUES +
 									" FROM " +	HISTORY_TABLE_NAME , null); //$NON-NLS-1$//$NON-NLS-2$
 					Map<PointDescription, HistoryEntry> st = new HashMap<PointDescription, HistoryEntry>(); 
-					if (query.moveToFirst()) {
+					if (query != null && query.moveToFirst()) {
 						boolean reinsert = false;
 						do {
 							String name = query.getString(0);
@@ -443,7 +445,9 @@ public class SearchHistoryHelper {
 							
 						}
 					}
-					query.close();
+					if(query != null) {
+						query.close();
+					}
 				} finally {
 					db.close();
 				}

@@ -216,18 +216,20 @@ public class TravelDbHelper {
 			query += ") ";
 			if (params.size() > 0) {
 				SQLiteCursor cursor = conn.rawQuery(query, params.toArray(new String[params.size()]));
-				if (cursor.moveToFirst()) {
-					do {
-						WikivoyageSearchResult rs = new WikivoyageSearchResult();
-						rs.tripId = cursor.getLong(0);
-						rs.articleTitles.add(cursor.getString(1));
-						rs.langs.add(cursor.getString(2));
-						rs.isPartOf.add(cursor.getString(3));
-						rs.imageTitle = cursor.getString(4);
-						res.add(rs);
-					} while (cursor.moveToNext());
+				if (cursor != null) {
+					if (cursor.moveToFirst()) {
+						do {
+							WikivoyageSearchResult rs = new WikivoyageSearchResult();
+							rs.tripId = cursor.getLong(0);
+							rs.articleTitles.add(cursor.getString(1));
+							rs.langs.add(cursor.getString(2));
+							rs.isPartOf.add(cursor.getString(3));
+							rs.imageTitle = cursor.getString(4);
+							res.add(rs);
+						} while (cursor.moveToNext());
+					}
+					cursor.close();
 				}
-				cursor.close();
 			}
 		}
 
@@ -252,6 +254,9 @@ public class TravelDbHelper {
 		}
 		String LANG_WHERE = " WHERE " + ARTICLES_COL_LANG + " = '" + language + "'";
 		SQLiteCursor cursor = conn.rawQuery(POP_ARTICLES_TABLE_SELECT + LANG_WHERE, null);
+		if(cursor == null) {
+			return popularArticles;
+		}
 		// read popular articles
 		List<PopularArticle> popReadArticlesOrder = new ArrayList<>();
 		List<PopularArticle> popReadArticlesLocation = new ArrayList<>();
@@ -327,13 +332,15 @@ public class TravelDbHelper {
 		bld.append(")");
 		cursor = conn.rawQuery(bld.toString(), null);
 		Map<Long, TravelArticle> ts = new HashMap<Long, TravelArticle>();
-		if (cursor.moveToFirst()) {
-			do {
-				TravelArticle travelArticle = readArticle(cursor);
-				ts.put(travelArticle.tripId, travelArticle);
-			} while (cursor.moveToNext());
+		if (cursor != null) {
+			if (cursor.moveToFirst()) {
+				do {
+					TravelArticle travelArticle = readArticle(cursor);
+					ts.put(travelArticle.tripId, travelArticle);
+				} while (cursor.moveToNext());
+			}
+			cursor.close();
 		}
-		cursor.close();
 		return ts;
 	}
 
@@ -461,7 +468,7 @@ public class TravelDbHelper {
 				}
 			}
 			SQLiteCursor cursor = conn.rawQuery(query.toString(), params.toArray(new String[params.size()]));
-			if (cursor.moveToFirst()) {
+			if (cursor != null && cursor.moveToFirst()) {
 				do {
 					WikivoyageSearchResult rs = new WikivoyageSearchResult();
 					rs.tripId = cursor.getLong(0);
@@ -480,7 +487,9 @@ public class TravelDbHelper {
 					}
 				} while (cursor.moveToNext());
 			}
-			cursor.close();
+			if (cursor != null) {
+				cursor.close();
+			}
 		}
 		LinkedHashMap<WikivoyageSearchResult, List<WikivoyageSearchResult>> res = new LinkedHashMap<>();
 		for (String header : headers) {
@@ -509,11 +518,13 @@ public class TravelDbHelper {
 		SQLiteConnection conn = openConnection();
 		if (conn != null) {
 			SQLiteCursor cursor = conn.rawQuery(ARTICLES_TABLE_SELECT + " WHERE " + ARTICLES_COL_TRIP_ID + " = ? AND "
-					+ ARTICLES_COL_LANG + " = ?", new String[]{String.valueOf(cityId), lang});
-			if (cursor.moveToFirst()) {
-				res = readArticle(cursor);
+					+ ARTICLES_COL_LANG + " = ?", new String[] { String.valueOf(cityId), lang });
+			if (cursor != null) {
+				if (cursor.moveToFirst()) {
+					res = readArticle(cursor);
+				}
+				cursor.close();
 			}
-			cursor.close();
 		}
 		return res;
 	}
@@ -525,10 +536,12 @@ public class TravelDbHelper {
 			SQLiteCursor cursor = conn.rawQuery("SELECT " + ARTICLES_COL_TRIP_ID + " FROM "
 					+ ARTICLES_TABLE_NAME + " WHERE " + ARTICLES_COL_TITLE + " = ? AND "
 					+ ARTICLES_COL_LANG + " = ?", new String[]{title, lang});
-			if (cursor.moveToFirst()) {
-				res = cursor.getLong(0);
+			if (cursor != null) {
+				if (cursor.moveToFirst()) {
+					res = cursor.getLong(0);
+				}
+				cursor.close();
 			}
-			cursor.close();
 		}
 		return res;
 	}
@@ -540,24 +553,26 @@ public class TravelDbHelper {
 		if (conn != null) {
 			SQLiteCursor cursor = conn.rawQuery("SELECT " + ARTICLES_COL_LANG + " FROM " + ARTICLES_TABLE_NAME
 					+ " WHERE " + ARTICLES_COL_TRIP_ID + " = ?", new String[]{String.valueOf(cityId)});
-			if (cursor.moveToFirst()) {
-				String baseLang = application.getLanguage();
-				do {
-					String lang = cursor.getString(0);
-					if (lang.equals(baseLang)) {
-						res.add(0, lang);
-					} else if (lang.equals("en")) {
-						if (res.size() > 0 && res.get(0).equals(baseLang)) {
-							res.add(1, lang);
-						} else {
+			if (cursor != null) {
+				if (cursor.moveToFirst()) {
+					String baseLang = application.getLanguage();
+					do {
+						String lang = cursor.getString(0);
+						if (lang.equals(baseLang)) {
 							res.add(0, lang);
+						} else if (lang.equals("en")) {
+							if (res.size() > 0 && res.get(0).equals(baseLang)) {
+								res.add(1, lang);
+							} else {
+								res.add(0, lang);
+							}
+						} else {
+							res.add(lang);
 						}
-					} else {
-						res.add(lang);
-					}
-				} while (cursor.moveToNext());
+					} while (cursor.moveToNext());
+				}
+				cursor.close();
 			}
-			cursor.close();
 		}
 		return res;
 	}

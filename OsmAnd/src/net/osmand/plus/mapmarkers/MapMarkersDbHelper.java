@@ -213,13 +213,15 @@ public class MapMarkersDbHelper {
 		if (db != null) {
 			try {
 				SQLiteCursor query = db.rawQuery(GROUPS_TABLE_SELECT, null);
-				if (query.moveToFirst()) {
+				if (query != null && query.moveToFirst()) {
 					do {
 						MapMarkersGroup group = readGroup(query);
 						res.put(group.getId(), group);
 					} while (query.moveToNext());
 				}
-				query.close();
+				if(query != null) {
+					query.close();
+				}
 			} finally {
 				db.close();
 			}
@@ -392,10 +394,12 @@ public class MapMarkersDbHelper {
 		if (db != null) {
 			try {
 				SQLiteCursor query = db.rawQuery(MARKERS_TABLE_SELECT + " WHERE " + MARKERS_COL_ID + " = ?", new String[]{id});
-				if (query.moveToFirst()) {
+				if (query != null && query.moveToFirst()) {
 					res = readItem(query);
 				}
-				query.close();
+				if(query != null) {
+					query.close();
+				}
 			} finally {
 				db.close();
 			}
@@ -411,14 +415,16 @@ public class MapMarkersDbHelper {
 			try {
 				SQLiteCursor query = db.rawQuery(MARKERS_TABLE_SELECT + " WHERE " + MARKERS_COL_ACTIVE + " = ?",
 						new String[]{String.valueOf(1)});
-				if (query.moveToFirst()) {
+				if (query != null && query.moveToFirst()) {
 					do {
 						MapMarker marker = readItem(query);
 						markers.put(marker.id, marker);
 						nextKeys.add(marker.nextKey);
 					} while (query.moveToNext());
 				}
-				query.close();
+				if(query != null) {
+					query.close();
+				}
 			} finally {
 				db.close();
 			}
@@ -570,12 +576,14 @@ public class MapMarkersDbHelper {
 			try {
 				SQLiteCursor query = db.rawQuery(MARKERS_TABLE_SELECT + " WHERE " + MARKERS_COL_ACTIVE + " = ?",
 						new String[]{String.valueOf(0)});
-				if (query.moveToFirst()) {
+				if (query != null && query.moveToFirst()) {
 					do {
 						markers.add(readItem(query));
 					} while (query.moveToNext());
 				}
-				query.close();
+				if(query != null) {
+					query.close();
+				}
 			} finally {
 				db.close();
 			}
