@@ -1,6 +1,5 @@
 package net.osmand.plus.chooseplan;
 
-
 public class ChoosePlanWikipediaDialogFragment extends ChoosePlanFreeBannerDialogFragment {
 	public static final String TAG = ChoosePlanWikipediaDialogFragment.class.getSimpleName();
 
