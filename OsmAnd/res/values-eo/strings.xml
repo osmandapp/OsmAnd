@@ -1436,7 +1436,7 @@ Proporcia memoro %4$s MB (limito de Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="current_track">Nuna spuro</string>
     <string name="gpx_monitoring_disabled_warn">Konservu kurson uzante GPX-fenestraĵon aŭ per \'Registrado de kurso\' agordoj.</string>
     <string name="show_current_gpx_title">Montri nunan kurson</string>
-    <string name="free_version_message">Tiu ĉi senpaga versio estas limigita al %1$s elŝutoj de mapoj (por aldoni aŭ ĝisdatigi) kaj ne subtenas eksterretajn Vikipediajn artikolojn.</string>
+    <string name="free_version_message">Vi povas elŝuti aŭ ĝisdatigi %1$s mapojn.</string>
     <string name="poi_context_menu_showdescription">Montri priskribon de la interesejo.</string>
     <string name="index_name_wiki">Tutmondaj Vikipediaj interesejoj</string>
     <string name="index_name_voice">Voĉ-avertoj (antaŭregistritaj, limigitaj ebloj)</string>
@@ -2799,7 +2799,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="coordinate_input_accuracy">%1$d ciferoj</string>
     <string name="go_to_next_field">Sekva kampo</string>
     <string name="appearance_on_the_map">Aspekto sur la mapo</string>
-    <string name="add_track_to_markers_descr">Elektu GPX-dosieron por aldoni ĝiajn navigadpunktojn al map-markoj.</string>
+    <string name="add_track_to_markers_descr">Elektu kurson por aldoni ĝiajn navigadpunktojn al map-markoj.</string>
     <string name="add_favourites_group_to_markers_descr">Elektu grupon de ŝatataj por aldoni al map-markoj.</string>
     <string name="shared_string_gpx_waypoints">Navigadpunktoj de kurso</string>
     <string name="favourites_group">Kategorio de ŝatataj</string>
@@ -2808,7 +2808,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="empty_state_markers_active">Krei map-markoj!</string>
     <string name="empty_state_markers_active_desc">Frapetu aŭ frapetadu ejon kaj sekve frapetu la butonon de flago.</string>
     <string name="empty_state_markers_groups">Enporti grupojn</string>
-    <string name="empty_state_markers_groups_desc">Enportu grupojn de ŝatataj aŭ el GPX-kurso kiel map-markojn.</string>
+    <string name="empty_state_markers_groups_desc">Enportu grupojn de ŝatataj aŭ navigadpunktojn kiel map-markojn.</string>
     <string name="empty_state_markers_history_desc">Markoj markitaj kiel pasigitajn montriĝos sur tiu ĉi ekrano.</string>
     <string name="shared_string_two">Du</string>
     <string name="shared_string_one">Unu</string>
@@ -2816,7 +2816,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="show_arrows_descr">Vidigi unu aŭ du sagetojn indikantajn direkton al map-markoj.</string>
     <string name="distance_indication_descr">Elekti kiel vidigi distancon al aktivaj map-markoj.</string>
     <string name="active_markers_descr">Elekti nombron da aktivaj map-markoj por vidigi.</string>
-    <string name="looking_for_tracks_with_waypoints">Serĉado de GPX-kursoj kun navigadpunktoj</string>
+    <string name="looking_for_tracks_with_waypoints">Serĉado de kursoj kun navigadpunktoj</string>
     <string name="shared_string_more_without_dots">Pli</string>
     <string name="empty_state_osm_edits">Krei aŭ redakti OSM-objektojn</string>
     <string name="empty_state_osm_edits_descr">Kreu aŭ redaktu OSM-punktojn, kreu aŭ komentu OSM-rimarkojn kaj kontribuu per registritaj GPX-spuroj.</string>
@@ -2967,7 +2967,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="purchase_dialog_travel_description">Aĉetu unu el la jenaj por legi vojaĝajn artikolojn seninterrete:</string>
     <string name="purchase_dialog_subtitle">Elektu elementon:</string>
     <string name="wikivoyage_travel_guide_descr">Gvidlibroj de Vikivojaĝo pri la plej interesaj lokoj de la mondo, legeblaj en OsmAnd seninterrete.</string>
-    <string name="wikivoyage_travel_guide">Vikivojaĝa gvidilo</string>
+    <string name="wikivoyage_travel_guide">Vojaĝaj gvidiloj</string>
     <string name="in_app_purchase">Enaplikaĵa aĉeto</string>
     <string name="in_app_purchase_desc">Unufoja pago</string>
     <string name="in_app_purchase_desc_ex">Kiam aĉetita, por ĉiam estos disponebla por vi.</string>
@@ -3032,4 +3032,6 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="access_intermediate_arrival_time">Alvena tempo al intercelo</string>
     <string name="map_widget_intermediate_time">Tempo al intercelo</string>
     <string name="unirs_render_descr">Modifo de la norma stilo por pliigi kontraston de piediradaj kaj biciklaj vojoj. Uzas malnovan kolor-skemon de Mapnik.</string>
+    <string name="get_osmand_live">Akiru OsmAnd-Live por malŝlosi ĉiujn eblaĵojn: ĉiutagajn map-ĝisdatigojn, senlimigitajn elŝutojn, ĉiujn pagendajn kaj senpagajn kromprogramojn, Vikipedion, Vikivojaĝon kaj pli.</string>
+    <string name="shared_string_gpx_files">GPX-dosieroj</string>
     </resources>
