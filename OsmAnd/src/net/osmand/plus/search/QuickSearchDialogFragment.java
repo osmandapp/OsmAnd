@@ -769,7 +769,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		if (dialog == null) {
 			return;
 		}
-		if (useMapCenter) {
+		if (useMapCenter && getMapActivity() != null) {
 			LatLon mapCenter = getMapActivity().getMapView().getCurrentRotatedTileBox().getCenterLatLon();
 			SearchSettings ss = searchUICore.getSearchSettings().setOriginalLocation(
 					new LatLon(mapCenter.getLatitude(), mapCenter.getLongitude()));
