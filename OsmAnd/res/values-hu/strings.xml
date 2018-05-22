@@ -2882,13 +2882,13 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="additional_actions">További műveletek</string>
     <string name="av_locations_selected_desc">GPX fájl a kijelölt megjegyzések koordinátáival és adataival.</string>
     <string name="av_locations_all_desc">GPX fájl az összes megjegyzés koordinátáival és adataival.</string>
-    <string name="release_3_0">• Újdonság: Globális útikalauz támogatás. A hivatkozott helyszínek össze vannak kapcsolva a térképpel. Induló adatok a Wikivoyage-ból.
+    <string name="release_3_0">• Újdonság: Globális útikalauz támogatás. A hivatkozott helyszínek össze vannak kapcsolva a térképpel. Induló adatok a Wikivoyage-ból. 
 \n 
 \n • Wikipédia: új kinézet, aktív linkek, képek 
 \n 
 \n • Nyomvonal megnyitás: útpont csoportok megjelenítése 
 \n 
-\n • Térképjelölők: kiválasztott csoportok importálása GPX-fájlból; új koordinátabetivel 
+\n • Térképjelölők: kiválasztott csoportok importálása GPX-fájlból; új koordinátabevitel 
 \n 
 \n • Az OsmAnd Live előfizetés már minden OsmAnd funkciót tartalmaz 
 \n 
