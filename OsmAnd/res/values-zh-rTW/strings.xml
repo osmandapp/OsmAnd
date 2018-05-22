@@ -1735,7 +1735,7 @@
     <string name="shared_string_my_location">我的位置</string>
     <string name="shared_string_my_places">我的地點</string>
     <string name="shared_string_my_favorites">收藏</string>
-    <string name="shared_string_gpx_files">軌跡</string>
+    <string name="shared_string_tracks">軌跡</string>
     <string name="shared_string_currently_recording_track">錄製軌跡</string>
     <string name="shared_string_audio">音訊</string>
     <string name="shared_string_video">視訊</string>
@@ -1967,8 +1967,8 @@
     <string name="downloading_number_of_files">正在下載 - %1$d 檔案</string>
     <string name="buy">購買</string>
     <string name="hillshade_layer_disabled">地形陰影圖層停用</string>
-    <string name="activate_seamarks_plugin">請啟動「航線標識」外掛元件</string>
-    <string name="activate_srtm_plugin">請啟動「SRTM」外掛元件</string>
+    <string name="activate_seamarks_plugin">請啟動「檢視航海地圖」外掛元件</string>
+    <string name="activate_srtm_plugin">請啟動「等高線」外掛元件</string>
     <string name="later">隨後</string>
     <string name="get_full_version">完整版</string>
     <string name="regions">地區</string>
@@ -2986,7 +2986,7 @@
     <string name="coordinate_input_accuracy">%1$d 個數字</string>
     <string name="go_to_next_field">下一段</string>
     <string name="appearance_on_the_map">顯現在地圖上</string>
-    <string name="add_track_to_markers_descr">選擇一個 GPX 檔案以將其航點新增至標記。</string>
+    <string name="add_track_to_markers_descr">選擇一個軌跡以將其航點新增至標記。</string>
     <string name="add_favourites_group_to_markers_descr">選擇您想增加標記的收藏類別。</string>
     <string name="shared_string_gpx_waypoints">軌跡航點</string>
     <string name="favourites_group">我的收藏類別</string>
@@ -2995,7 +2995,7 @@
     <string name="empty_state_markers_active">建立地圖標記！</string>
     <string name="empty_state_markers_active_desc">長按或點一下「地點」，然後點擊標記標誌按鈕。</string>
     <string name="empty_state_markers_groups">匯入群組</string>
-    <string name="empty_state_markers_groups_desc">您可以匯入我的收藏群組或 GPX 航點作為標記。</string>
+    <string name="empty_state_markers_groups_desc">您可以匯入我的收藏群組或航點作為標記。</string>
     <string name="shared_string_two">二</string>
     <string name="shared_string_one">一</string>
     <string name="distance_indication_descr">選擇如何顯示活動標記的距離。</string>
@@ -3004,7 +3004,7 @@
     <string name="show_guide_line_descr">顯示指引路線到活動標記位置。</string>
     <string name="show_arrows_descr">顯示一個或兩個箭頭指示方向到活動標記。</string>
     <string name="shared_string_more_without_dots">更多</string>
-    <string name="looking_for_tracks_with_waypoints">尋找有航點的 GPX 檔案</string>
+    <string name="looking_for_tracks_with_waypoints">尋找有航點的軌跡</string>
     <string name="empty_state_osm_edits">建立或修改 OSM 物件</string>
     <string name="empty_state_osm_edits_descr">"建立或修改 OSM  的 POI，開啟或評注 OSM 註解，並提供所記錄的 GPX 檔案。"</string>
     <string name="shared_string_deleted">已刪除</string>
@@ -3019,15 +3019,15 @@
     <string name="by_type">按照類型</string>
     <string name="one_tap_active_descr">輕點在地圖上的標記，將其移動到活動標記的頂端，而不用打開內容選單。</string>
     <string name="modify_the_search_query">變更搜尋的查詢。</string>
-    <string name="release_3_0">• 新的：支援全球離線旅遊指南、參考所的位置連結到地圖、初始資料來自維基導遊。
+    <string name="release_3_0">• 新的：支援全球離線旅遊指南、參考所的位置連結到地圖、初始資料來自維基導遊。 
 \n 
 \n• 維基百科：嶄新的面貌、活動連結、圖片 
 \n 
 \n• 開放式軌跡使用者介面：顯示航點群組 
 \n 
-\n• 地圖標記：從 GPX 檔案匯入所選擇的群組，嶄新的座標輸入外觀 
+\n• 地圖標記：從 GPX 檔案匯入所選擇的群組、座標輸入、嶄新的外觀 
 \n 
-\n• OsmAnd Live 訂閱，現在包括了 OsmAnd 所有的功能 
+\n• OsmAnd Live 訂閱，現在支援 OsmAnd 所有的功能 
 \n</string>
     <string name="av_locations_selected_desc">包括座標和所選註解資料的 GPX 檔案。</string>
     <string name="av_locations_all_desc">包括座標和所有註解資料的 GPX 檔案。</string>
@@ -3100,7 +3100,7 @@
     <string name="map_imported_successfully">地圖已匯入</string>
     <string name="enter_the_file_name">輸入檔案名稱。</string>
     <string name="transport_nearby_routes_within">在附近的路線</string>
-    <string name="transport_nearby_routes">附近</string>
+    <string name="transport_nearby_routes">範圍內</string>
     <string name="enter_lon">輸入經度</string>
     <string name="enter_lat">輸入緯度</string>
     <string name="enter_lat_and_lon">輸入緯度和經度</string>
@@ -3218,4 +3218,5 @@
     <string name="access_intermediate_arrival_time">中轉抵達時間</string>
     <string name="map_widget_intermediate_time">中轉時間</string>
     <string name="unirs_render_descr">修改預設樣式增加行人和自行車道的對比度。使用傳統的 Mapnik 配色。</string>
+    <string name="shared_string_gpx_files">GPX 檔</string>
     </resources>

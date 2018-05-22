@@ -1777,7 +1777,7 @@
 	<string name="shared_string_clear_all">Ачысьціць ўсё</string>
 	<string name="shared_string_collapse">Згарнуць</string>
 	<string name="shared_string_my_location">Маё месцазнаходжанне</string>
-	<string name="shared_string_gpx_files">Мае сьляды</string>
+	<string name="shared_string_tracks">Сьляды</string>
 	<string name="shared_string_currently_recording_track">Сьлед, які цяпер запісваецца</string>
 	<string name="plugin_touringview_name">Турыстычная мапа</string>
 	<string name="rename_failed">Перайменаванне не атрымалася.</string>

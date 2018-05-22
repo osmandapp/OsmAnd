@@ -155,7 +155,7 @@
 	• Wikipedia: New look, active links, images now supported\n\n
 	• Open Track UI: Support for waypoint groups\n\n
 	• Map markers: Import of selected groups from GPX files, coordinate input, new look\n\n
-	• OsmAnd Live data (subscription) now supports all OsmAnd features\n\n
+	• OsmAnd Live subscription now supports all OsmAnd features\n\n
 	</string>
     <string name="modify_the_search_query">Modify the search query.</string>
     <string name="shared_string_actions">Actions</string>
@@ -173,19 +173,19 @@
     <string name="notes_by_date">Notes by date</string>
     <string name="by_date">By date</string>
     <string name="by_type">By type</string>
-    <string name="looking_for_tracks_with_waypoints">Looking for GPX files with waypoints</string>
+    <string name="looking_for_tracks_with_waypoints">Looking for tracks with waypoints</string>
     <string name="shared_string_more_without_dots">More</string>
     <string name="appearance_on_the_map">Appearance on the map</string>
-    <string name="add_track_to_markers_descr">Select a GPX file to add its waypoints to the markers.</string>
+    <string name="add_track_to_markers_descr">Select a track to add its waypoints to the markers.</string>
     <string name="add_favourites_group_to_markers_descr">Select a favorite category to add to the markers.</string>
-    <string name="shared_string_gpx_waypoints">GPX waypoints</string>
+    <string name="shared_string_gpx_waypoints">Track waypoints</string>
     <string name="favourites_group">Favorites category</string>
     <string name="add_group">Add a group</string>
     <string name="add_group_descr">Import groups from favorites or GPX waypoints.</string>
     <string name="empty_state_markers_active">Create map markers!</string>
     <string name="empty_state_markers_active_desc">Long or short tap \'Places\', then tap the marker flag button.</string>
     <string name="empty_state_markers_groups">Import groups</string>
-    <string name="empty_state_markers_groups_desc">Import favorite groups or GPX waypoints as markers.</string>
+    <string name="empty_state_markers_groups_desc">Import favorite groups or waypoints as markers.</string>
     <string name="empty_state_markers_history_desc">Markers marked as passed will appear on this screen.</string>
     <string name="shared_string_two">Two</string>
     <string name="shared_string_one">One</string>
@@ -1098,6 +1098,7 @@
     <string name="shared_string_my_location">My Position</string>
     <string name="shared_string_my_places">My Places</string>
     <string name="shared_string_my_favorites">Favorites</string>
+    <string name="shared_string_tracks">Tracks</string>
     <string name="shared_string_gpx_files">GPX files</string>
     <string name="shared_string_currently_recording_track">Currently recording track</string>
     <string name="shared_string_audio">Audio</string>
@@ -2732,8 +2733,8 @@
     <string name="show_free_version_banner">Show free version banner</string>
     <string name="show_free_version_banner_description">Display the free version banner even in the paid version.</string>
     <string name="buy">Buy</string>
-    <string name="activate_seamarks_plugin">Please activate \'Seamarks\' plugin</string>
-    <string name="activate_srtm_plugin">Please activate \'SRTM\' plugin</string>
+    <string name="activate_seamarks_plugin">Please activate the \'Nautical map view\' plugin</string>
+    <string name="activate_srtm_plugin">Please activate the \'Contour lines\' plugin</string>
     <string name="later">Later</string>
     <string name="get_full_version">Full version</string>
     <string name="downloads">Downloads</string>

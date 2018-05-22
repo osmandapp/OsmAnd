@@ -765,6 +765,10 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	}
 
 	public void show() {
+		Dialog dialog = getDialog();
+		if (dialog == null) {
+			return;
+		}
 		if (useMapCenter) {
 			LatLon mapCenter = getMapActivity().getMapView().getCurrentRotatedTileBox().getCenterLatLon();
 			SearchSettings ss = searchUICore.getSearchSettings().setOriginalLocation(
@@ -774,7 +778,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			updateLocationUI(mapCenter, null);
 		}
 		app.getLocationProvider().removeCompassListener(app.getLocationProvider().getNavigationInfo());
-		getDialog().show();
+		dialog.show();
 		paused = false;
 		cancelPrev = false;
 		hidden = false;

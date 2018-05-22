@@ -1,15 +1,17 @@
 package net.osmand.plus.wikipedia;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.v4.app.FragmentActivity;
-import android.support.v7.app.AlertDialog;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-import net.osmand.plus.R;
+import net.osmand.data.Amenity;
+
+import static net.osmand.plus.wikipedia.WikiArticleHelper.WIKI_DOMAIN;
+import static net.osmand.plus.wikipedia.WikiArticleHelper.WIKI_DOMAIN_COM;
+
 
 
 public class WikipediaWebViewClient extends WebViewClient {
@@ -19,20 +21,33 @@ public class WikipediaWebViewClient extends WebViewClient {
 
 	private Context context;
 	private boolean nightMode;
+	private WikiArticleHelper wikiArticleHelper;
+	private Amenity article;
 
-	public WikipediaWebViewClient(FragmentActivity context, boolean nightMode) {
+	public WikipediaWebViewClient(FragmentActivity context, Amenity article, boolean nightMode) {
 		this.context = context;
 		this.nightMode = nightMode;
+		this.wikiArticleHelper = new WikiArticleHelper(context, nightMode);
+		this.article = article;
 	}
 
 	@Override
 	public boolean shouldOverrideUrlLoading(WebView view, String url) {
-		if (url.startsWith(PAGE_PREFIX_HTTP) || url.startsWith(PAGE_PREFIX_HTTPS)) {
+		url = WikiArticleHelper.normalizeFileUrl(url);
+		if ((url.contains(WIKI_DOMAIN) || url.contains(WIKI_DOMAIN_COM)) && article != null) {
+			wikiArticleHelper.showWikiArticle(article.getLocation(), url);
+		} else if (url.startsWith(PAGE_PREFIX_HTTP) || url.startsWith(PAGE_PREFIX_HTTPS)) {
 			WikiArticleHelper.warnAboutExternalLoad(url, context, nightMode);
 		} else {
 			Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
 			context.startActivity(i);
 		}
 		return true;
+	}
+
+	public void stopRunningAsyncTasks() {
+		if (wikiArticleHelper != null) {
+			wikiArticleHelper.stopSearchAsyncTask();
+		}
 	}
 }

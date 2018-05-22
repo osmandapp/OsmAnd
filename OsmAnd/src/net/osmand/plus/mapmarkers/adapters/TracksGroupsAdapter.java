@@ -25,7 +25,7 @@ public class TracksGroupsAdapter extends GroupsAdapter {
 	public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
 		if (holder instanceof MapMarkersGroupHeaderViewHolder) {
 			MapMarkersGroupHeaderViewHolder markersGroupHeaderViewHolder = (MapMarkersGroupHeaderViewHolder) holder;
-			markersGroupHeaderViewHolder.title.setText(app.getText(R.string.shared_string_gpx_files));
+			markersGroupHeaderViewHolder.title.setText(app.getText(R.string.shared_string_tracks));
 			markersGroupHeaderViewHolder.description.setText(app.getText(R.string.add_track_to_markers_descr));
 		} else if (holder instanceof MapMarkersGroupViewHolder) {
 			GpxDataItem gpx = getItem(position);

@@ -688,16 +688,17 @@
     }
   },
   {
-    "testName": "38.Freeway A20 TR",
+    "testName": "39.5003",
     "startPoint": {
-      "latitude": 45.61567371465745,
-      "longitude": 35.606546729803085
+      "latitude": 45.61561133366637,
+      "longitude": 35.60593853890896
     },
     "endPoint": {
-      "latitude": 45.6155498906659,
-      "longitude": 35.604315131902695
+      "latitude": 45.615545669389455,
+      "longitude": 35.6042527705431
     },
     "expectedResults": {
+      "129459": "C|+C|+C"
     }
   }
 

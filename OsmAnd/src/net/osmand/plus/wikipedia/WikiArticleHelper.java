@@ -42,8 +42,11 @@ public class WikiArticleHelper {
 	private static final int PARTIAL_CONTENT_PHRASES = 3;
 	private static final String PAGE_PREFIX_HTTP = "http://";
 	private static final String PAGE_PREFIX_HTTPS = "https://";
+	private static final String PAGE_PREFIX_FILE = "file://";
 	private static final String WIKIVOAYAGE_DOMAIN = ".wikivoyage.org/wiki/";
-	private static final String WIKI_DOMAIN = ".wikipedia.org/wiki/";
+
+	public static final String WIKI_DOMAIN = ".wikipedia.org/wiki/";
+	public static final String WIKI_DOMAIN_COM = ".wikipedia.com/wiki/";
 
 	private WikiArticleSearchTask articleSearchTask;
 	private FragmentActivity activity;
@@ -55,6 +58,11 @@ public class WikiArticleHelper {
 	public WikiArticleHelper(FragmentActivity activity, boolean nightMode) {
 		this.activity = activity;
 		this.nightMode = nightMode;
+	}
+
+	public static String normalizeFileUrl(String url) {
+		return url.startsWith(PAGE_PREFIX_FILE) ?
+				url.replace(PAGE_PREFIX_FILE, PAGE_PREFIX_HTTPS) : url;
 	}
 
 	public static class WikiArticleSearchTask extends AsyncTask<Void, Void, List<Amenity>> {
@@ -234,7 +242,8 @@ public class WikiArticleHelper {
 	}
 
 	public static String getArticleNameFromUrl(String url, String lang) {
-		String domain = url.contains(WIKIVOAYAGE_DOMAIN) ? WIKIVOAYAGE_DOMAIN : WIKI_DOMAIN;
+		String domain = url.contains(WIKIVOAYAGE_DOMAIN) ? WIKIVOAYAGE_DOMAIN :
+				url.contains(WIKI_DOMAIN) ? WIKI_DOMAIN : WIKI_DOMAIN_COM;
 		String articleName = "";
 
 		if (url.startsWith(PAGE_PREFIX_HTTP)) {

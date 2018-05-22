@@ -1113,7 +1113,7 @@
 	<string name="shared_string_address">عنوان</string>
 	<string name="shared_string_my_location">موقعي</string>
 	<string name="shared_string_my_favorites">مفضلتي</string>
-	<string name="shared_string_gpx_files">مساراتي</string>
+	<string name="shared_string_tracks">مساراتي</string>
 	<string name="rendering_category_hide">إخفاء</string>
     <string name="configure_map">ضبط الخريطة</string>
     <string name="layer_map">مصدر الخريطة…</string>

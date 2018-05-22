@@ -1792,7 +1792,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="shared_string_clear_all">Slet alle</string>
     <string name="shared_string_my_location">Position</string>
     <string name="shared_string_my_favorites">Favoritter</string>
-    <string name="shared_string_gpx_files">Spor</string>
+    <string name="shared_string_tracks">Spor</string>
     <string name="shared_string_currently_recording_track">Nuværende optagelsesspor</string>
     <string name="waypoint_visit_after">Besøg efter</string>
     <string name="waypoint_visit_before">Besøg før</string>
@@ -2012,8 +2012,8 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="downloading_number_of_files">Henter - %1$d fil</string>
     <string name="buy">Køb</string>
     <string name="hillshade_layer_disabled">Reliefskygger er deaktiveret</string>
-    <string name="activate_seamarks_plugin">Aktiver \'Sømærke\' udvidelsen</string>
-    <string name="activate_srtm_plugin">Aktiver \'SRTM\' udvidelsen</string>
+    <string name="activate_seamarks_plugin">Aktiver \'Søkort\' udvidelsen</string>
+    <string name="activate_srtm_plugin">Aktiver \'Højdekurver\' udvidelsen</string>
     <string name="later">Senere</string>
     <string name="get_full_version">Fuldversion</string>
     <string name="regions">Områder</string>
@@ -3037,19 +3037,19 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="show_arrows_descr">Vis en eller to pile der angiver retningen til de aktive markører.</string>
     <string name="distance_indication_descr">Vælg hvordan afstanden til de aktive markører skal vises.</string>
     <string name="active_markers_descr">Vælg antallet af aktive markører der vises.</string>
-    <string name="add_track_to_markers_descr">Vælg en GPX-fil for at tilføje rutepunkterne til markører.</string>
+    <string name="add_track_to_markers_descr">Vælg et spor for at tilføje dens rutepunkter til markører.</string>
     <string name="add_favourites_group_to_markers_descr">Vælg en favoritkategori, der skal tilføjes markørerne.</string>
-    <string name="shared_string_gpx_waypoints">Sporets rutepunkter</string>
+    <string name="shared_string_gpx_waypoints">Sporrutepunkter</string>
     <string name="favourites_group">Favoritkategori</string>
     <string name="add_group">Tilføj en gruppe</string>
     <string name="add_group_descr">Importer grupper fra favoritter eller et GPX-rutepunkter.</string>
     <string name="empty_state_markers_active">Opret kortmarkører!</string>
     <string name="empty_state_markers_active_desc">Tryk langt eller kort på \'Steder\', og tryk derefter på markørflagsknappen.</string>
     <string name="empty_state_markers_groups">Importer grupper</string>
-    <string name="empty_state_markers_groups_desc">Importer favoritgrupper eller et GPX-rutepunkter som markører.</string>
+    <string name="empty_state_markers_groups_desc">Importer favoritgrupper eller rutepunkter som markører.</string>
     <string name="empty_state_markers_history_desc">Markører, der er markeret som passeret, vil blive vist på denne skærm.</string>
     <string name="appearance_on_the_map">Udseende på kortet</string>
-    <string name="looking_for_tracks_with_waypoints">Søger efter GPX-filer med rutepunkter</string>
+    <string name="looking_for_tracks_with_waypoints">Søger efter spor med rutepunkter</string>
     <string name="shared_string_more_without_dots">Mere</string>
     <string name="empty_state_osm_edits">Opret eller rediger OSM-objekter</string>
     <string name="empty_state_osm_edits_descr">Opret eller ændr OSM-interessepunkter, åbn eller kommenter OSM-noter, og bidrag med GPX-filer.</string>
@@ -3073,7 +3073,7 @@ Repræsenterer område: %1$s x %2$s</string>
 \n 
 \n • Kortmarkører: import af udvalgte grupper fra GPX-filer, nyt udseende på koordinat indtastning 
 \n 
-\n • OsmAnd Live-data (abonnement) indeholder nu alle OsmAnd-funktioner 
+\n • OsmAnd Live abonnement indeholder nu alle OsmAnd-funktioner 
 \n</string>
     <string name="av_locations_selected_desc">GPX-fil med koordinaterne og data for de valgte noter.</string>
     <string name="av_locations_all_desc">GPX-fil med koordinater og data for alle noter.</string>
@@ -3153,8 +3153,8 @@ Repræsenterer område: %1$s x %2$s</string>
 	<string name="south_abbreviation">S</string>
 	<string name="north_abbreviation">N</string>
 	<string name="optional_point_name">Valgfrit punktnavn</string>
-    <string name="transport_nearby_routes_within">Nærliggende ruter</string>
-    <string name="transport_nearby_routes">Nær</string>
+    <string name="transport_nearby_routes_within">Nærliggende ruter indenfor</string>
+    <string name="transport_nearby_routes">Indenfor</string>
     <string name="enter_the_file_name">Indtast filnavnet.</string>
     <string name="map_import_error">Fejl ved import af kort</string>
     <string name="map_imported_successfully">Kortet blev importeret</string>
@@ -3195,7 +3195,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="images_cache">Billedcache</string>
     <string name="delete_search_history">Slet søgehistorik</string>
     <string name="download_images">Hent billeder</string>
-    <string name="purchase_dialog_title">Vælg plan</string>
+    <string name="purchase_dialog_title">Vælg abonnement</string>
     <string name="purchase_dialog_travel_description">Køb en af følgende for at læse rejseartikler offline:</string>
     <string name="purchase_dialog_subtitle">Vælg passende emne:</string>
     <string name="monthly_map_updates">Opdatering af kort: <b>hver måned</b></string>
@@ -3223,7 +3223,7 @@ Repræsenterer område: %1$s x %2$s</string>
 	<string name="update_is_available">Opdatering er tilgængelig</string>
 	<string name="download_file">Hent fil</string>
     <string name="start_editing_card_image_text">Den gratis verdensomspændende rejseguide, som alle kan redigere.</string>
-    <string name="welcome_to_open_beta_description">Rejseguide er baseret på Wikivoyage. Test alle funktionerne i den åbne beta gratis. Bagefter vil Rejseguide være tilgængelig for abonnenter af OsmAnd ubegrænset og ejere af OsmAnd+.</string>
+    <string name="welcome_to_open_beta_description">Rejseguide er baseret på Wikivoyage. Test alle funktionerne gratis i den åbne beta. Bagefter vil rejseguider være tilgængelig for abonnenter af OsmAnd ubegrænset og ejere af OsmAnd+.</string>
     <string name="start_editing_card_description">Du kan og bør redigere en artikel på Wikivoyage. Del viden, erfaringer, talent og din opmærksomhed</string>
     <string name="start_editing">Begynd redigering</string>
     <string name="get_unlimited_access">Få ubegrænset adgang</string>
@@ -3264,5 +3264,6 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="off_road_render_descr">Egnet til brug under off-road kørsel. Velegnet til brug med satellitbilleder som underlejringskort. Hovedtræk: reduceret tykkelse af hovedveje, øget tykkelse af spor, stier, cykel og andre ruter. Baseret på \'Topo\' stilart.</string>
     <string name="access_intermediate_arrival_time">Mellemliggende ankomsttid</string>
     <string name="map_widget_intermediate_time">Mellemliggende tid</string>
-    <string name="unirs_render_descr">Ændring af standard stil for at give større kontrast af fodgænger- og cykelveje. Mapniks gamle farver bruges.</string>
+    <string name="unirs_render_descr">Ændring af standard stil for at øge kontrasten på fodgænger- og cykelveje. Bruger Mapniks oprindelige farver.</string>
+    <string name="shared_string_gpx_files">GPX-filer</string>
     </resources>

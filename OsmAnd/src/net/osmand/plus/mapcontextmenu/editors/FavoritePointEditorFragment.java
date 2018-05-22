@@ -123,7 +123,7 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 		mapActivity.getSupportFragmentManager().beginTransaction()
 				//.setCustomAnimations(slideInAnim, slideOutAnim, slideInAnim, slideOutAnim)
 				.add(R.id.fragmentContainer, fragment, editor.getFragmentTag())
-				.addToBackStack(null).commit();
+				.addToBackStack(null).commitAllowingStateLoss();
 	}
 
 	public static void showAutoFillInstance(final MapActivity mapActivity, boolean autoFill) {

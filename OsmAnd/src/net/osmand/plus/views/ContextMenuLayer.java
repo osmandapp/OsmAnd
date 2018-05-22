@@ -28,6 +28,7 @@ import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.data.TransportStop;
 import net.osmand.osm.PoiFilter;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.ContextMenuAdapter;
@@ -624,6 +625,12 @@ public class ContextMenuLayer extends OsmandMapLayer {
 								if (o instanceof Amenity && ((Amenity) o).compareTo(amenity) == 0) {
 									exists = true;
 									break;
+								} else if (o instanceof TransportStop) {
+									TransportStop transportStop = (TransportStop) o;
+									if (transportStop.getName().startsWith(amenity.getName())) {
+										exists = true;
+										break;
+									}
 								}
 							}
 							if (!exists) {

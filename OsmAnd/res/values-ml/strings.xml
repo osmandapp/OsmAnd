@@ -1256,7 +1256,7 @@
     <string name="shared_string_my_location">"എന്റെ സ്ഥാനം "</string>
     <string name="shared_string_my_places">"എന്റെ സ്ഥലങ്ങള്‍ "</string>
     <string name="shared_string_my_favorites">എനിക്ക് ഇഷ്ടമുളളവ</string>
-    <string name="shared_string_gpx_files">"എന്റെ  പാതകള്‍"</string>
+    <string name="shared_string_tracks">"എന്റെ  പാതകള്‍"</string>
     <string name="shared_string_audio">ശബ്ദം</string>
     <string name="shared_string_photo">ഫോട്ടോ</string>
     <string name="rendering_value_highContrastRoads_name">കൂടിയ നിറവ്യത്യാസമുള്ള റോഡുകള്‍</string>

@@ -467,8 +467,8 @@
     <string name="opening_hours">Åpningstider</string>
     <string name="poi">Interessepunkt</string>
     <string name="additional_settings">Tilleggsinnstillinger</string>
-    <string name="save_current_track_descr">Lagre gjeldende spor til minnekort nå.</string>
-    <string name="save_current_track">Lagre gjeldende GPX-spor</string>
+    <string name="save_current_track_descr">Lagre nåværende spor som GPX-fil nå.</string>
+    <string name="save_current_track">Lagre gjeldende spor</string>
     <string name="save_track_interval">Loggeintervall under navigering</string>
     <string name="save_track_interval_descr">Velg loggingsintervall for opptak av spor under navigering.</string>
     <string name="save_track_to_gpx_descrp">Et GPX-spor lagres automatisk i spor-mappen under navigering.</string>
@@ -1150,7 +1150,7 @@
     <string name="reading_cached_tiles">Leser hurtigbufrede fliser…</string>
     <string name="maps_could_not_be_downloaded">Dette kartet kan ikke lastes ned</string>
     <string name="use_high_res_maps">Høyoppløselig visning</string>
-    <string name="layer_gpx_layer">GPX-spor…</string>
+    <string name="layer_gpx_layer">GPX-filer…</string>
     <string name="sd_unmounted">Minnekort er ikke tilgjengelig.
 \nDu vil ikke kunne se kart eller finne ting.</string>
     <string name="sd_mounted_ro">Minnekort er skrivebeskyttet.
@@ -1175,7 +1175,7 @@
     <string name="shared_string_history">Historikk</string>
     <string name="shared_string_select_on_map">Velg på kart</string>
     <string name="shared_string_save">Lagre</string>
-    <string name="shared_string_save_as_gpx">Lagre som nytt GPX-spor</string>
+    <string name="shared_string_save_as_gpx">Lagre som ny GPX-fil</string>
     <string name="shared_string_rename">Endre navn</string>
     <string name="shared_string_delete">Slett</string>
     <string name="shared_string_share">Del</string>
@@ -1198,7 +1198,7 @@
     <string name="shared_string_my_location">Min posisjon</string>
     <string name="shared_string_my_places">Mine steder</string>
     <string name="shared_string_my_favorites">Favoritter</string>
-    <string name="shared_string_gpx_files">Spor</string>
+    <string name="shared_string_tracks">Spor</string>
     <string name="shared_string_photo">Foto</string>
 
     <string name="route_points">Rutepunkter</string>
@@ -1387,7 +1387,7 @@
     <string name="please_specify_poi_type">Spesifiser interessepunkttype.</string>
     <string name="working_days">Arbeidsdager</string>
     <string name="favourites">Favoritter</string>
-    <string name="show_gpx">Vis GPX</string>
+    <string name="show_gpx">Vis GPX-data</string>
     <string name="roads">Veier</string>
     <string name="favourites_context_menu_add">Legg til favoritt</string>
     <string name="favorite_category_dublicate_message">Bruk et kategorinavn som ikke finnes allerede.</string>
@@ -1724,7 +1724,7 @@
     <string name="current_track">Aktuelle spor</string>
     <string name="show_current_gpx_title">Vis aktuelle spor</string>
     <string name="rendering_attr_currentTrackWidth_description">GPX-bredde</string>
-    <string name="storage_place_description">OsmAnds datalagring (for kart, spor, etc.): %1$s.</string>
+    <string name="storage_place_description">OsmAnds datalagring (for kart, GPX-filer, osv.): %1$s.</string>
     <string name="first_usage_greeting">Få anvisninger og oppdag nye steder uten å ha internettforbindelse</string>
     <string name="update_all_maps_now">Oppdater alle kart nå?</string>
     <string name="osm_live_payment_desc">Abonnementsavgift belastes månedsvis. Avbryt det på Google Play når som helst.</string>
@@ -1834,7 +1834,7 @@
     <string name="no_index_file_to_download">Ingen nedlastinger funnet, sjekk din internettforbindelse.</string>
     <string name="gpx_info_subtracks">Underspor: %1$s</string>
     <string name="gpx_selection_segment_title">Segment</string>
-    <string name="gpx_file_is_empty">Tomt GPX-spor</string>
+    <string name="gpx_file_is_empty">Tom GPX-fil</string>
     
     
     
@@ -1868,9 +1868,9 @@
 \n
 \n OsmAnd utvikles aktivt, og prosjektet vårt og dets videre framdrift avhenger av finansielle bidrag for å drive utviklingen og testingen av nye funksjoner. Overvei å kjøpe OsmAnd+ eller støtte spesifikke nye funksjoner eller bidra med en generell donasjon på https://osmand.net.</string>
 	<string name="upload_osm_note_description">Last opp ditt OSM-notat anonymt eller ved å bruke din profil hos OpenStreetMap.org</string>
-    <string name="gpx_no_tracks_title">Du har ingen spor ennå</string>
-    <string name="gpx_no_tracks_title_folder">Legg til spor i mappen</string>
-    <string name="gpx_add_track">Legg til spor</string>
+    <string name="gpx_no_tracks_title">Du har ingen GPX-filer enda</string>
+    <string name="gpx_no_tracks_title_folder">Du kan også legge til GPX-filer i mappen</string>
+    <string name="gpx_add_track">Legg til GPX-fil</string>
     <string name="trip_rec_notification_settings">Aktiver hurtigstart av opptak</string>
     <string name="trip_rec_notification_settings_desc">Vis et systemvarsel slik at du kan starte turopptak.</string>
     <string name="save_track_min_speed">Minimumshastighet for logging</string>
@@ -1981,7 +1981,7 @@
     
     
     <string name="select_index_file_to_download">Fant ikke noe. Hvis du ikke finner din region, kan du lage den selv (se https://osmand.net).</string>
-    <string name="none_selected_gpx">Ingen GPX-filer valgt. For å velge lang-trykk et tilgjengelig spor.</string>
+    <string name="none_selected_gpx">Ingen GPX-filer valgt. Velg en ved lang-trykking.</string>
     <string name="gpx_split_interval">Oppdelingsintervall</string>
     <string name="gpx_info_asc_altitude">Nedstigning/stigning: %1$s</string>
     <string name="gpx_timespan">Tidsrom: %1$s</string>
@@ -2034,7 +2034,7 @@
     <string name="distance_measurement_start_editing">Start redigering</string>
     <string name="distance_measurement_finish_editing">Fullfør redigering</string>
     <string name="distance_measurement_finish_subtrack">Begynn nytt underspor</string>
-    <string name="distance_measurement_load_gpx">Åpne eksisterende GPX-spor</string>
+    <string name="distance_measurement_load_gpx">Åpne eksisterende GPX-fil</string>
     <string name="use_magnetic_sensor_descr">For kompassavlesningen, bruk den magnetiske sensoren istedenfor orienteringssensoren.</string>
     <string name="download_using_mobile_internet">Ikke tilkoblet Wi-Fi. Bruk gjeldende internettforbindelse for nedlasting?</string>
     <string name="contribution_activity">Installasjonsversjon</string>
@@ -2182,7 +2182,7 @@
     <string name="points_delete_multiple_succesful">Punkt(er) slettet.</string>
     <string name="points_delete_multiple">Du skal slette %1$d punkt(er). Er du sikker?</string>
     <string name="average_speed">Gjennomsnittshastighet</string>
-    <string name="select_gpx_folder">Velg spor-mappe</string>
+    <string name="select_gpx_folder">Velg GPX-fil -mappe</string>
     <string name="osmand_extended_description_part1">OsmAnd (OSM Automated Navigation Directions) er et kart- og navigeringsprogram med tilgang til gratis, verdensomspennende og høykvalitets data fra OpenStreetMap (OSM).
 \n
 \n Gled deg over tale og visuell navigering, visning av interessepunkter, oppretting og behandling av GPX-spor, bruk av kotevisualisering og høydeinformasjon (gjennom programtillegg), et valg mellom kjøring, sykling, fotgjenger-modus, OSM-redigering og mye mer.</string>
@@ -2270,7 +2270,7 @@
     <string name="add_new_folder">Legg til ny mappe</string>
     <string name="shared_string_gpx_track">GPX-spor</string>
     <string name="routing_attr_height_obstacles_name">Bruk høydedata</string>
-    <string name="routing_attr_height_obstacles_description">Bruk terrenghøydedata fra SRTM, ASTER og EU-DEM.</string>
+    <string name="routing_attr_height_obstacles_description">Ta hensyn til terrenghøydedata (fra SRTM-, ASTER- og EU-DEM -data).</string>
     <string name="quick_action_bug_message">Melding</string>
     <string name="shared_string_permissions">Tillatelser</string>
     <string name="import_gpx_failed_descr">OsmAnd kan ikke importere filen. Kontroller om OsmAnd har leserettighet for fillagringsstedet.</string>
@@ -2321,14 +2321,14 @@
     <string name="measurement_tool_snap_to_road_descr">OsmAnd vil forbinde punktene med ruter for den valgte profilen.</string>
     <string name="measurement_tool_save_as_new_track_descr">Lagre punktene enten som rutepunkter eller som linje.</string>
     <string name="choose_navigation_type">Velg navigeringsprofil</string>
-    <string name="empty_state_my_tracks">Legg til og ta opp spor</string>
-    <string name="empty_state_my_tracks_desc">Ta opp eller importer spor som skal vises.</string>
+    <string name="empty_state_my_tracks">Legg til GPX-filer</string>
+    <string name="empty_state_my_tracks_desc">Importer GPX-filer, eller ta opp spor.</string>
     <string name="empty_state_favourites">Legg til favoritter</string>
-    <string name="empty_state_favourites_desc">Importer eller marker favoritter på kartet.</string>
-    <string name="import_track">Importer spor</string>
+    <string name="empty_state_favourites_desc">Importer favoritter, eller legg til via markering av punkter på kartet.</string>
+    <string name="import_track">Importer GPX-fil</string>
     <string name="import_track_desc">Filen %1$s inneholder ingen rutepunkter, importere den som et spor?</string>
     <string name="move_point">Flytt punkt</string>
-    <string name="add_segment_to_the_track">Legg til i et GPX-spor</string>
+    <string name="add_segment_to_the_track">Legg til i GPX-fil</string>
 <string name="add_route_points">Legg til rutepunkter</string>
     <string name="add_line">Legg til linje</string>
     <string name="do_not_use_animations">Ingen animasjoner</string>
@@ -2355,7 +2355,7 @@
     <string name="full_version_thanks">Takk for at du kjøpte betalingsversjonen av OsmAnd.</string>
     <string name="routing_attr_driving_style_speed_name">Kortere ruter</string>
     <string name="routing_attr_driving_style_balance_name">Balansert</string>
-    <string name="track_points_category_name">Fremtredende punkter på denne ruten</string>
+    <string name="track_points_category_name">Rutepunkter, fremtredende punkter på denne ruten, navngitte karakteristika.</string>
     <string name="shared_string_time_moving">Tid i bevegelse</string>
     <string name="shared_string_time_span">Varighet</string>
     <string name="shared_string_max">Maks.</string>
@@ -2387,8 +2387,8 @@
     <string name="shared_string_sort">Sorter</string>
     <string name="coordinate_input">Koordinatinntasting</string>
     <string name="is_saved">blir lagret</string>
-    <string name="marker_save_as_track_descr">Eksporter dine markører til en fil du kan spesifisere her:</string>
-    <string name="marker_save_as_track">Lagre som spor</string>
+    <string name="marker_save_as_track_descr">Eksporter dine markører til følgende GPX-fil:</string>
+    <string name="marker_save_as_track">Lagre som GPX-fil</string>
     <string name="all_markers_moved_to_history">Alle kartmarkører flyttet til historikk</string>
     <string name="marker_moved_to_history">Kartmarkør flyttet til historikk</string>
     <string name="marker_moved_to_active">Kartmarkør flyttet til aktive</string>
@@ -2481,12 +2481,12 @@
     <string name="opening_hours_not_supported">Åpningstidsformat kan ikke endres</string>
     <string name="update_poi_error_loading">Kunne ikke laste inn data fra tjener</string>
     <string name="auth_failed">Identitetsbekreftelse mislyktes</string>
-    <string name="error_occurred_saving_gpx">Kunne ikke lagre GPX-spor</string>
+    <string name="error_occurred_saving_gpx">Kunne ikke lagre GPX-fil</string>
     <string name="error_calculating_route">Kunne ikke beregne rute</string>
     <string name="error_calculating_route_occured">Kunne ikke beregne rute</string>
     <string name="empty_route_calculated">Beregnet rute er tom</string>
     <string name="new_route_calculated_dist">Ny rute beregnet, distanse</string>
-    <string name="saving_gpx_tracks">Lagrer GPX-spor til SD-kort…</string>
+    <string name="saving_gpx_tracks">Lagrer GPX-fil til SD-kort…</string>
     <string name="data_settings_descr">Angi språk, last ned/gjeninnlast data.</string>
     <string name="av_camera_focus">Kameraets fokusmetode</string>
     <string name="av_camera_focus_descr">Velg fokusmodus for kameraet.</string>
@@ -2553,7 +2553,7 @@
     <string name="import_as_favorites">Importer som favoritt</string>
     <string name="import_file">Importer fil</string>
 	<string name="marker_show_distance_descr">Velg hvordan avstand og retning til kartmarkører på kartskjermen angis:</string>
-    <string name="import_gpx_file_description">kan importeres som favoritt, eller som sporfil.</string>
+    <string name="import_gpx_file_description">kan importeres som favoritt, eller GPX-fil.</string>
     <string name="tap_on_map_to_hide_interface">Fullskjermmodus</string>
     
     <string name="appearance_on_the_map">Utseende på kartet</string>
@@ -2595,10 +2595,10 @@
     <string name="rendering_value_darkyellow_name">Mørkegul</string>
     <string name="rendering_value_translucent_pink_name">Gjennomskinnelig rosa</string>
     <string name="modify_the_search_query">Endre søkeord.</string>
-    <string name="looking_for_tracks_with_waypoints">Ser etter spor med rutepunkter</string>
+    <string name="looking_for_tracks_with_waypoints">Ser etter GPX-filer med rutepunkter</string>
     <string name="shared_string_gpx_waypoints">Spor-rutepunkter</string>
-    <string name="add_group_descr">Importer grupper fra favoritter eller spor-rutepunkter.</string>
-    <string name="empty_state_markers_groups_desc">Importer favorittgrupper eller spor-rutepunkter som markører.</string>
+    <string name="add_group_descr">Importer grupper fra favoritter eller GPX-rutepunkter.</string>
+    <string name="empty_state_markers_groups_desc">Importer favorittgrupper eller GPX-rutepunkter som markører.</string>
     <string name="show_guide_line_descr">Vis veivisningslinjer fra din posisjon til de aktive markørplasseringene.</string>
     <string name="show_arrows_descr">Vis én eller to piler som indikerer retningen til de aktive markørene.</string>
     <string name="distance_indication_descr">Velg hvordan avstanden til aktive markører skal vises.</string>
@@ -2648,7 +2648,7 @@
     <string name="quick_action_page_list_descr">Trykking på denne handlingsknappen blar gjennom listen nedenfor.</string>
     <string name="quick_action_empty_param_error">Fyll ut alle parametere</string>
     <string name="quick_action_btn_tutorial_descr">Lang-trykking og dragning av knappen endrer dens posisjon på skjermen.</string>
-    <string name="add_track_to_markers_descr">Rutepunkter kan legges til i markører ved å velge et av disse sporene (som har rutepunkter).</string>
+    <string name="add_track_to_markers_descr">Velg en GPX-fil for å legge til dens rutepunkter til markørene.</string>
     <string name="depth_contour_descr">Kart for havdybdekoter og sjømerker.</string>
     <string name="do_not_send_anonymous_app_usage_desc">OsmAnd samler inn info om hvilke deler av programmet du åpner. Plasseringen din blir aldri sendt, ei heller noe du måtte skrive inn i programmet eller detaljer om områder som vises, søkes etter, eller lastes ned.</string>
     <string name="do_not_show_startup_messages_desc">Ikke vis programrabatter og spesielle lokale hendelsesmeldinger.</string>
@@ -2872,10 +2872,10 @@
     <string name="osmand_routing_experimental">Frakoblet OsmAnd-navigasjon er en eksperimentell funksjon, og fungerer ikke for distanser lenger enn omtrent 20 km.
 \n
 \nNavigasjon midlertidig byttet til nettbasert CloudMade-tjeneste.</string>
-    <string name="download_maps_travel">Reisekart</string>
+    <string name="download_maps_travel">Reiseguider</string>
     <string name="shared_string_wikivoyage">Wikivoyage</string>
     <string name="article_removed">Artikkel fjernet</string>
-    <string name="images_cache">Bilde-hurtigbuffer</string>
+    <string name="images_cache">Bildehurtiglager</string>
     <string name="delete_search_history">Slett søkehistorikk</string>
     <string name="show_images">Vis bilder</string>
     <string name="online_webpage_warning">Siden er kun tilgjengelig på nett. Åpne i nettleser?</string>
@@ -2972,7 +2972,7 @@
     <string name="shared_string_wifi_only">Kun på Wi-Fi</string>
     <string name="select_travel_book">Velg reisebok</string>
     <string name="shared_string_travel_book">Reisebok</string>
-    <string name="download_images">Vis bilder</string>
+    <string name="download_images">Last ned bilder</string>
     <string name="wikipedia_offline">Wikipedia offline</string>
     <string name="contour_lines_sea_depth">Koter + havdybde</string>
     <string name="in_app_purchase_desc">Engangsbetaling</string>
@@ -2996,7 +2996,7 @@
     <string name="wikivoyage_travel_guide_descr">Guider til de mest spennende stedene, inne i OsmAnd, uten å ha internettforbindelse.</string>
     <string name="purchase_dialog_travel_description">Kjøp én av følgende for å lese reiseartikler i frakoblet modus:</string>
     <string name="purchase_dialog_subtitle">Velg passende element:</string>
-    <string name="travel_card_download_descr">Last ned disse Wikivoyage-reiseguidene for å se artikler om steder rundt om i verden uten å ha en internettforbindelse.</string>
+    <string name="travel_card_download_descr">Last ned Wikivoyage-reiseguider for å se artikler om steder rundt om i verden uten å ha internettforbindelse.</string>
 	<string name="popular_destinations">Populære reisemål</string>
     <string name="download_wikipedia_label">Last ned Wikipedia-data</string>
     <string name="how_to_open_wiki_title">Hvordan åpne Wikipedia-artikler?</string>
@@ -3018,7 +3018,7 @@
 	<string name="update_is_available">Oppdatering tilgjengelig</string>
 	<string name="download_file">Last ned fil</string>
     <string name="start_editing_card_image_text">Den frie verdensomspennende reiseguiden alle kan redigere.</string>
-    <string name="welcome_to_open_beta_description">Reise er basert på Wikivoyage. Test all funksjonalitet gratis under den åpne beta-perioden. Etterpå vil Travel bli tilgjengelig for dem som abonnerer på ubegrenset OsmAnd og eiere av OsmAnd+</string>
+    <string name="welcome_to_open_beta_description">Reiseguider baserer seg nå på Wikivoyage. Test all funksjonalitet gratis under den åpne beta-perioden. Etterpå vil reiseguider være tilgjengelige for dem som abonnerer på ubegrenset OsmAnd og eiere av OsmAnd+.</string>
     <string name="start_editing_card_description">Du kan redigere enhver artikkel på Wikivoyage. Del kunnskap, erfaring, talent, og din oppmerksomhet</string>
     <string name="start_editing">Start redigering</string>
     <string name="get_unlimited_access">Få ubegrenset tilgang</string>
@@ -3123,4 +3123,6 @@
 \nBasert på Topo-stil.</string>
     <string name="access_intermediate_arrival_time">Mellomliggende ankomsttid</string>
     <string name="map_widget_intermediate_time">Mellomliggende tid</string>
+    <string name="unirs_render_descr">Endrer den forvalgte stilen for å øke kontrasten på gangveier og sykkelstier. Bruker de opprinnelige Mapnik-fargene.</string>
+    <string name="shared_string_gpx_files">GPX-filer</string>
     </resources>

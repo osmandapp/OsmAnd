@@ -24,6 +24,8 @@ import net.osmand.plus.wikivoyage.explore.WikivoyageExploreActivity;
 import java.io.File;
 import java.util.List;
 
+import static net.osmand.plus.wikipedia.WikiArticleHelper.WIKI_DOMAIN;
+
 
 /**
  * Custom WebView client to handle the internal links.
@@ -43,7 +45,6 @@ public class WikivoyageWebViewClient extends WebViewClient {
 	private static final String PAGE_PREFIX_HTTP = "http://";
 	private static final String PAGE_PREFIX_HTTPS = "https://";
 	private static final String WIKIVOAYAGE_DOMAIN = ".wikivoyage.org/wiki/";
-	private static final String WIKI_DOMAIN = ".wikipedia.org/wiki/";
 	private WikiArticleHelper wikiArticleHelper;
 
 
@@ -57,6 +58,7 @@ public class WikivoyageWebViewClient extends WebViewClient {
 
 	@Override
 	public boolean shouldOverrideUrlLoading(WebView view, String url) {
+		url = WikiArticleHelper.normalizeFileUrl(url);
 		boolean isWebPage = url.startsWith(PAGE_PREFIX_HTTP) || url.startsWith(PAGE_PREFIX_HTTPS);
 		if (url.contains(WIKIVOAYAGE_DOMAIN) && isWebPage) {
 			String lang = WikiArticleHelper.getLang(url);
@@ -68,7 +70,7 @@ public class WikivoyageWebViewClient extends WebViewClient {
 				WikiArticleHelper.warnAboutExternalLoad(url, activity, nightMode);
 			}
 			return true;
-		} else if (url.contains(WIKI_DOMAIN) && isWebPage) {
+		} else if (url.contains(WIKI_DOMAIN) && isWebPage && article != null) {
 			wikiArticleHelper.showWikiArticle(new LatLon(article.getLat(), article.getLon()), url);
 		} else if (isWebPage) {
 			WikiArticleHelper.warnAboutExternalLoad(url, activity, nightMode);

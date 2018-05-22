@@ -1490,7 +1490,7 @@
 	
 	<string name="gpx_file_is_empty">فایل GPX خالی</string>
     
-    <string name="shared_string_gpx_files">مسیرها</string>
+    <string name="shared_string_tracks">مسیرها</string>
     <string name="shared_string_my_favorites">نقاط برگزیده</string>
     <string name="shared_string_my_places">مکان‌های من</string>
     
@@ -2448,8 +2448,8 @@
     <string name="show_free_version_banner">نمایش بنر نسخهٔ رایگان</string>
     <string name="show_free_version_banner_description">حتی در نسخهٔ خریداری‌شده هم بنر نسخهٔ رایگان را نشان بده.</string>
     <string name="buy">خرید</string>
-    <string name="activate_seamarks_plugin">لطفاً افزونهٔ Seamarks را فعال کنید</string>
-    <string name="activate_srtm_plugin">لطفاً افزونهٔ SRTM را فعال کنید</string>
+    <string name="activate_seamarks_plugin">لطفاً افزونهٔ «نمای دریایی نقشه» را فعال کنید</string>
+    <string name="activate_srtm_plugin">لطفاً افزونهٔ «منحنی‌های تراز» را فعال کنید</string>
     <string name="later">بعداً</string>
     <string name="get_full_version">نسخهٔ کامل</string>
     <string name="downloads">دانلودها</string>
@@ -3024,7 +3024,7 @@
     <string name="distance_indication_descr">مشخص کنید که مسافت شما تا نشانه‌های فعال چگونه نشان داده شود.</string>
     <string name="active_markers_descr">تعداد نشانه‌های فعال روی نقشه را مشخص کنید.</string>
     <string name="appearance_on_the_map">تنظیمات ظاهری</string>
-    <string name="add_track_to_markers_descr">یک فایل GPX را انتخاب کنید تا نقاط بین‌راهیِ آن را به نشانه‌ها اضافه کنید.</string>
+    <string name="add_track_to_markers_descr">مسیری را انتخاب کنید تا نقاط بین‌راهیِ آن را به نشانه‌ها اضافه کنید.</string>
     <string name="add_favourites_group_to_markers_descr">یک گروه از نقاط برگزیده را انتخاب کنید تا به نشانه‌ها اضافه شود.</string>
     <string name="shared_string_gpx_waypoints">نقاط بین‌راهی مسیر</string>
     <string name="favourites_group">گروه نقاط برگزیده</string>
@@ -3033,10 +3033,10 @@
     <string name="empty_state_markers_active">روی نقشه نشانه‌گذاری کنید!</string>
     <string name="empty_state_markers_active_desc">مکان‌ها را به‌صورت کوتاه یا طولانی لمس کنید و سپس دکمهٔ پرچم را بزنید.</string>
     <string name="empty_state_markers_groups">واردکردن گروه‌ها</string>
-    <string name="empty_state_markers_groups_desc">گروه‌های نقاط برگزیده یا نقاط بین‌راهی GPX را به‌عنوان نشانه وارد کنید.</string>
+    <string name="empty_state_markers_groups_desc">گروه‌های نقاط برگزیده یا نقاط بین‌راهی را به‌عنوان نشانه وارد کنید.</string>
     <string name="empty_state_markers_history_desc">نشانه‌هایی که به‌عنوان عبورکرده مشخص شده‌اند در این صفحه نشان داده می‌شوند.</string>
     <string name="shared_string_more_without_dots">بیشتر</string>
-    <string name="looking_for_tracks_with_waypoints">در جست‌وجوی فایل‌های GPX دارای نقطهٔ بین‌راهی</string>
+    <string name="looking_for_tracks_with_waypoints">در جست‌وجوی مسیرهای دارای نقطهٔ بین‌راهی</string>
     <string name="empty_state_osm_edits">ایجاد یا ویرایش اشیای OSM</string>
     <string name="empty_state_osm_edits_descr">ایجاد یا ویرایش POIها، بازگشایی توضیحات ویرایشی و نظردادن روی آن‌ها و آپلود فایل‌های ذخیره‌شدهٔ GPX.</string>
     <string name="shared_string_deleted">حذف شد</string>
@@ -3146,8 +3146,8 @@
 	<string name="south_abbreviation">S</string>
 	<string name="north_abbreviation">N</string>
 	<string name="optional_point_name">نام نقطه (اختیاری)</string>
-    <string name="transport_nearby_routes_within">مسیرهای نزدیک در</string>
-    <string name="transport_nearby_routes">نزدیک</string>
+    <string name="transport_nearby_routes_within">مسیرهای نزدیک تا</string>
+    <string name="transport_nearby_routes">در کمتر از</string>
     <string name="group_deleted">گروه حذف شد</string>
     <string name="rendering_attr_whiteWaterSports_name">ورزش‌‌های آب‌های خروشان</string>
     <string name="clear_all_intermediates">پاک‌کردن همهٔ نقاط میانی</string>
@@ -3260,4 +3260,5 @@
     <string name="access_intermediate_arrival_time">زمان رسیدن به میانی</string>
     <string name="map_widget_intermediate_time">مدت تا میانی</string>
     <string name="unirs_render_descr">اصلاح‌یافتهٔ سبک پیشفرض برای ایجاد پادنمایی بیشتر برای راه‌های پیاده و دوچرخه. از رنگ‌بندی مپنیک استفاده می‌کند.</string>
+    <string name="shared_string_gpx_files">فایل‌های GPX</string>
     </resources>
