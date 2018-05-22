@@ -517,6 +517,10 @@ public abstract class MenuController extends BaseMenuController implements Colla
 		return pointDescription.getName();
 	}
 
+	public String getFirstNameStr() {
+		return "";
+	}
+
 	public List<TransportStopRoute> getTransportStopRoutes() {
 		return null;
 	}

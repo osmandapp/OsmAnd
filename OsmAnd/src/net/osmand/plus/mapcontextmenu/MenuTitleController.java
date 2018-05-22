@@ -137,6 +137,7 @@ public abstract class MenuTitleController {
 	}
 
 	protected void acquireNameAndType() {
+		String firstNameStr = "";
 		nameStr = "";
 		typeStr = "";
 		commonTypeStr = "";
@@ -144,6 +145,7 @@ public abstract class MenuTitleController {
 
 		MenuController menuController = getMenuController();
 		if (menuController != null) {
+			firstNameStr = menuController.getFirstNameStr();
 			nameStr = menuController.getNameStr();
 			typeStr = menuController.getTypeStr();
 			commonTypeStr = menuController.getCommonTypeStr();
@@ -154,6 +156,10 @@ public abstract class MenuTitleController {
 			typeStr = commonTypeStr;
 		} else if (Algorithms.isEmpty(typeStr)) {
 			typeStr = commonTypeStr;
+		}
+
+		if (!Algorithms.isEmpty(firstNameStr)) {
+			nameStr = firstNameStr + " (" + nameStr + ")";
 		}
 	}
 

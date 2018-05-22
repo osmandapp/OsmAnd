@@ -131,8 +131,11 @@ public class AmenityMenuController extends MenuController {
 	}
 
 	@Override
-	public boolean isWaypointButtonEnabled() {
-		return marker == null;
+	public int getWaypointActionStringId() {
+		if (marker != null) {
+			return R.string.shared_string_edit;
+		}
+		return super.getWaypointActionStringId();
 	}
 
 	@Override
@@ -153,6 +156,14 @@ public class AmenityMenuController extends MenuController {
 			}
 		}
 		return name;
+	}
+
+	@Override
+	public String getFirstNameStr() {
+		if (marker != null) {
+			return marker.getName(getMapActivity());
+		}
+		return super.getFirstNameStr();
 	}
 
 	@Override
