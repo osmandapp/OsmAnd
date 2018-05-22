@@ -3125,4 +3125,5 @@
     <string name="map_widget_intermediate_time">Mellomliggende tid</string>
     <string name="unirs_render_descr">Endrer den forvalgte stilen for å øke kontrasten på gangveier og sykkelstier. Bruker de opprinnelige Mapnik-fargene.</string>
     <string name="shared_string_gpx_files">GPX-filer</string>
+    <string name="get_osmand_live">Skaff deg OsmAnd Live for å låse opp alle funksjoner: Daglige kartoppdateringer med ubegrensede nedlastinger, alle programtilleggene, Wikipedia, Wikivoyage og mye mer.</string>
     </resources>
