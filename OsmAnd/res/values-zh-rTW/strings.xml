@@ -330,7 +330,7 @@
     <string name="live_monitoring_url">線上即時追蹤網路地址</string>
     <string name="gpx_monitoring_disabled_warn">記錄軌跡使用 GPX 小工具或透過 \'錄製旅程\'的設定。</string>
     <string name="show_current_gpx_title">顯示目前軌跡</string>
-    <string name="free_version_message">此 OsmAnd 免費版，有下載地圖 %1$s 次限制（增加或更新地圖），並且不支援離線維基百科的文章資料。</string>
+    <string name="free_version_message">您可以下載或更新 %1$s 地圖。</string>
     <string name="free_version_title">免費版</string>
     <string name="poi_context_menu_showdescription">顯示 POI 記述。</string>
     <string name="index_name_north_america">北美洲</string>
@@ -3219,4 +3219,5 @@
     <string name="map_widget_intermediate_time">中轉時間</string>
     <string name="unirs_render_descr">修改預設樣式增加行人和自行車道的對比度。使用傳統的 Mapnik 配色。</string>
     <string name="shared_string_gpx_files">GPX 檔</string>
+    <string name="get_osmand_live">獲得 OsmAnd Live 解鎖全部功能：每日地圖更新與無限下載、所有付費和免費的外掛元件、維基百科、維基導遊和更多。</string>
     </resources>
