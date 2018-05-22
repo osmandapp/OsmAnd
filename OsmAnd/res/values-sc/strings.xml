@@ -1960,8 +1960,8 @@ Lon %2$s</string>
     <string name="downloading_number_of_files">Iscarrighende - %1$d documentu/os</string>
     <string name="hillshade_layer_disabled">Livellu umbradura rilievos disativadu</string>
     <string name="buy">Còmpora</string>
-    <string name="activate_seamarks_plugin">Pro praghere allughe s’estensione nàutica</string>
-    <string name="activate_srtm_plugin">Pro praghere allue s’estensione \'SRTM\'</string>
+    <string name="activate_seamarks_plugin">Pro praghere allughe s’estensione \'Vista mapa nàutica\'</string>
+    <string name="activate_srtm_plugin">Pro praghere allughe s’estensione \'Curvas de livellu\'</string>
     <string name="later">Prus a tardu</string>
     <string name="get_full_version">Versione cumprida</string>
     <string name="regions">Regiones</string>
@@ -2984,7 +2984,7 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="go_to_next_field">Campu imbeniente</string>
     <string name="rename_marker">Torra a numenare su marcadore</string>
     <string name="appearance_on_the_map">Visualizatzione in sa mapa</string>
-    <string name="add_track_to_markers_descr">Issèbera unu documentu GPX pro annànghere sos puntos de coladòrgiu suos a sa mapa.</string>
+    <string name="add_track_to_markers_descr">Issèbera una rasta pro annànghere sos puntos de coladòrgiu suos a sa mapa.</string>
     <string name="add_favourites_group_to_markers_descr">Issèbera una categoria de preferidos pro l\'annànghere a sos marcadores.</string>
     <string name="shared_string_gpx_waypoints">Puntos de coladòrgiu</string>
     <string name="favourites_group">Categoria de preferidos</string>
@@ -2993,7 +2993,7 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="empty_state_markers_active">Crea marcadores in sa mapa!</string>
     <string name="empty_state_markers_active_desc">Marca logos in sa mapa cun un\'incarcu curtzu o longu in \"Logos\" e, a pustis, incarchende su butone cun sa bandera de sos marcadores.</string>
     <string name="empty_state_markers_groups">Importa grupos</string>
-    <string name="empty_state_markers_groups_desc">Importa grupos de preferidos o puntos de coladòrgiu de unu GPX comente marcadores.</string>
+    <string name="empty_state_markers_groups_desc">Importa grupos de preferidos o puntos de coladòrgiu comente marcadores.</string>
     <string name="empty_state_markers_history_desc">Sos marcadores sinnados comente colados ant a aparire in custu ischermu.</string>
     <string name="shared_string_two">Duos</string>
     <string name="shared_string_one">Unu</string>
@@ -3002,7 +3002,7 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="distance_indication_descr">Issèbera comente ammustrare sa distàntzia cun sos marcadores ativos.</string>
     <string name="active_markers_descr">Issèbera su nùmeru de marcadores ativos de ammustrare.</string>
     <string name="shared_string_more_without_dots">Àteru</string>
-    <string name="looking_for_tracks_with_waypoints">Chirchende documentos GPX cun puntos de coladòrgiu</string>
+    <string name="looking_for_tracks_with_waypoints">Chirchende rastas cun puntos de coladòrgiu</string>
     <string name="empty_state_osm_edits">Crea o modìfica ogetos OSM</string>
     <string name="empty_state_osm_edits_descr">Crea o modìfica PDI OSM, aberi o cummenta notas OSM, e contribui cun documentos GPX registrados.</string>
     <string name="shared_string_deleted">Iscantzelladu</string>
@@ -3218,4 +3218,5 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="unirs_render_descr">Modìfica de s\'istile predefinidu pro ismanniare su cuntrastu pro sas istradas pedonales e sas pistas tziclàbiles. Impreat sos colores de sa versione betza de Mapnik.</string>
     <string name="access_intermediate_arrival_time">Ora de arrivu a sa tapa</string>
     <string name="map_widget_intermediate_time">Tempus de arrivu a sa tapa</string>
+    <string name="shared_string_gpx_files">Documentos GPX</string>
     </resources>

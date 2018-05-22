@@ -3124,4 +3124,5 @@
     <string name="access_intermediate_arrival_time">Mellomliggende ankomsttid</string>
     <string name="map_widget_intermediate_time">Mellomliggende tid</string>
     <string name="unirs_render_descr">Endrer den forvalgte stilen for å øke kontrasten på gangveier og sykkelstier. Bruker de opprinnelige Mapnik-fargene.</string>
+    <string name="shared_string_gpx_files">GPX-filer</string>
     </resources>
