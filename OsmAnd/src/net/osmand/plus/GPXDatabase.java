@@ -523,12 +523,14 @@ public class GPXDatabase {
 		if (db != null) {
 			try {
 				SQLiteCursor query = db.rawQuery(GPX_TABLE_SELECT, null);
-				if (query.moveToFirst()) {
+				if (query != null && query.moveToFirst()) {
 					do {
 						items.add(readItem(query));
 					} while (query.moveToNext());
 				}
-				query.close();
+				if (query != null) {
+					query.close();
+				}
 			} finally {
 				db.close();
 			}
@@ -546,10 +548,12 @@ public class GPXDatabase {
 				String fileDir = getFileDir(file);
 				SQLiteCursor query = db.rawQuery(GPX_TABLE_SELECT + " WHERE " + GPX_COL_NAME + " = ? AND " +
 						GPX_COL_DIR + " = ?", new String[] { fileName, fileDir });
-				if (query.moveToFirst()) {
+				if ( query != null && query.moveToFirst()) {
 					result = readItem(query);
 				}
-				query.close();
+				if (query != null) {
+					query.close();
+				}
 			} finally {
 				db.close();
 			}

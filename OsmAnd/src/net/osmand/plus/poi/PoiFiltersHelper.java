@@ -473,7 +473,7 @@ public class PoiFiltersHelper {
 				SQLiteCursor query = conn.rawQuery("SELECT " + CATEGORIES_FILTER_ID + ", " + CATEGORIES_COL_CATEGORY + "," + CATEGORIES_COL_SUBCATEGORY + " FROM " +  //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 						CATEGORIES_NAME, null);
 				Map<String, Map<PoiCategory, LinkedHashSet<String>>> map = new LinkedHashMap<String, Map<PoiCategory, LinkedHashSet<String>>>();
-				if (query.moveToFirst()) {
+				if (query != null && query.moveToFirst()) {
 					do {
 						String filterId = query.getString(0);
 						if (!map.containsKey(filterId)) {
@@ -492,11 +492,13 @@ public class PoiFiltersHelper {
 						}
 					} while (query.moveToNext());
 				}
-				query.close();
+				if(query != null) {
+					query.close();
+				}
 
 				query = conn.rawQuery("SELECT " + FILTER_COL_ID + ", " + FILTER_COL_NAME + "," + FILTER_COL_FILTERBYNAME + " FROM " +  //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 						FILTER_NAME, null);
-				if (query.moveToFirst()) {
+				if (query != null && query.moveToFirst()) {
 					do {
 						String filterId = query.getString(0);
 						if (map.containsKey(filterId)) {
@@ -507,7 +509,9 @@ public class PoiFiltersHelper {
 						}
 					} while (query.moveToNext());
 				}
-				query.close();
+				if(query != null) {
+					query.close();
+				}
 			}
 			return list;
 		}
