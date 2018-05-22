@@ -220,10 +220,17 @@ public class DiscountHelper {
 					purchaseHelper.purchaseFullVersion(mapActivity);
 				}
 			} else if (url.contains(InAppPurchaseHelper.SKU_LIVE_UPDATES)){
-				Intent intent = new Intent(mapActivity, OsmLiveActivity.class);
-				intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-				intent.putExtra(OsmLiveActivity.OPEN_SUBSCRIPTION_INTENT_PARAM, true);
-				mapActivity.startActivity(intent);
+				OsmandApplication app = mapActivity.getMyApplication();
+				app.logEvent(mapActivity, "osm_live_purchase_redirect");
+				OsmandSettings settings = app.getSettings();
+				InAppPurchaseHelper purchaseHelper = app.getInAppPurchaseHelper();
+				if (purchaseHelper != null) {
+					purchaseHelper.purchaseLiveUpdates(mapActivity,
+							settings.BILLING_USER_EMAIL.get(),
+							settings.BILLING_USER_NAME.get(),
+							settings.BILLING_USER_COUNTRY_DOWNLOAD_NAME.get(),
+							settings.BILLING_HIDE_USER_NAME.get());
+				}
 			}
 		} else {
 			Intent intent = new Intent(Intent.ACTION_VIEW);
