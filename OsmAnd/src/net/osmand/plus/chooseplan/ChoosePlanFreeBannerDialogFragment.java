@@ -57,16 +57,6 @@ public class ChoosePlanFreeBannerDialogFragment extends ChoosePlanDialogFragment
 	}
 
 	@Override
-	public String getInfoDescription() {
-		if (Version.isFreeVersion(getOsmandApplication())) {
-			return getString(R.string.free_version_message,
-					DownloadValidationManager.MAXIMUM_AVAILABLE_FREE_DOWNLOADS) + "\n" + getString(R.string.get_osmand_live);
-		} else {
-			return getString(R.string.get_osmand_live);
-		}
-	}
-
-	@Override
 	public int getPlanTypeHeaderImageId() {
 		return R.drawable.img_logo_38dp_osmand;
 	}
