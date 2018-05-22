@@ -1003,4 +1003,8 @@
 	<string name="poi_free_flying_no_flight_time">بدون زمان پرواز (پرواز آزاد)</string>
 	<string name="poi_wiki_link">ویکی‌پدیا</string>
 
+	<string name="poi_historic_period_first_persian_period">دورهٔ تاریخی: دورهٔ اول پارسی</string>
+	<string name="poi_historic_period_second_persian_period">دورهٔ تاریخی: دورهٔ دوم پارسی</string>
+	<string name="poi_cuisine_persian">ایرانی</string>
+	<string name="poi_party">لوازم مراسم</string>
 	</resources>
