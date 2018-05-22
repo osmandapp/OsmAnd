@@ -2,10 +2,10 @@ package net.osmand.plus.osmedit;
 
 
 
-import java.util.List;
-
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.osmedit.OsmPoint.Action;
+
+import java.util.List;
 
 public class OsmBugsLocalUtil implements OsmBugsUtil {
 
@@ -40,6 +40,7 @@ public class OsmBugsLocalUtil implements OsmBugsUtil {
 		pnt.setLatitude(point.getLatitude());
 		pnt.setLongitude(point.getLongitude());
 		pnt.setText(text);
+		pnt.setAction(point.getAction());
 		point = pnt;
 		return wrap(point, db.updateOsmBug(point.getId(), text));
 	}
