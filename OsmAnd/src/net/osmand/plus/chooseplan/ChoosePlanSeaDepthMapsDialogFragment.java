@@ -51,11 +51,6 @@ public class ChoosePlanSeaDepthMapsDialogFragment extends ChoosePlanDialogFragme
 	}
 
 	@Override
-	public String getInfoDescription() {
-		return "";
-	}
-
-	@Override
 	public int getPlanTypeHeaderImageId() {
 		return R.drawable.img_logo_38dp_sea_depth;
 	}

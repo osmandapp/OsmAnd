@@ -35,6 +35,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
+import net.osmand.plus.download.DownloadValidationManager;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseTaskType;
@@ -209,6 +210,16 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 		}
 	}
 
+	public String getInfoDescription() {
+		if (Version.isFreeVersion(getOsmandApplication())) {
+			String description = getString(R.string.free_version_message,
+					DownloadValidationManager.MAXIMUM_AVAILABLE_FREE_DOWNLOADS) + "\n";
+			return description + getString(R.string.get_osmand_live);
+		} else {
+			return getString(R.string.get_osmand_live);
+		}
+	}
+
 	public OsmandApplication getOsmandApplication() {
 		return app;
 	}
@@ -220,8 +231,6 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 	public abstract OsmAndFeature[] getSelectedOsmLiveFeatures();
 
 	public abstract OsmAndFeature[] getSelectedPlanTypeFeatures();
-
-	public abstract String getInfoDescription();
 
 	@DrawableRes
 	public abstract int getPlanTypeHeaderImageId();

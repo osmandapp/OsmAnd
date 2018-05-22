@@ -46,8 +46,4 @@ public class ChoosePlanWikipediaDialogFragment extends ChoosePlanFreeBannerDialo
 		return selectedPlanTypeFeatures;
 	}
 
-	@Override
-	public String getInfoDescription() {
-		return "";
-	}
 }

@@ -51,11 +51,6 @@ public class ChoosePlanHillshadeSrtmDialogFragment extends ChoosePlanDialogFragm
 	}
 
 	@Override
-	public String getInfoDescription() {
-		return "";
-	}
-
-	@Override
 	public int getPlanTypeHeaderImageId() {
 		return R.drawable.img_logo_38dp_contour_lines;
 	}

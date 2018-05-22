@@ -6,7 +6,6 @@ import android.view.View;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.OsmandInAppPurchaseActivity;
-import net.osmand.plus.download.DownloadValidationManager;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 
 public class ChoosePlanFreeBannerDialogFragment extends ChoosePlanDialogFragment {
@@ -53,12 +52,6 @@ public class ChoosePlanFreeBannerDialogFragment extends ChoosePlanDialogFragment
 	@Override
 	public OsmAndFeature[] getSelectedPlanTypeFeatures() {
 		return selectedPlanTypeFeatures;
-	}
-
-	@Override
-	public String getInfoDescription() {
-		return getString(R.string.free_version_message,
-				DownloadValidationManager.MAXIMUM_AVAILABLE_FREE_DOWNLOADS);
 	}
 
 	@Override

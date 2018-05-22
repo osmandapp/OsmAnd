@@ -10,6 +10,7 @@
 	- For wording and consistency, please note http://osmand.net/help-online?id=technical-articles#Creating_a_Consistent_User_Experience
 	Thx - Hardy
 -->
+    <string name="get_osmand_live">Get OsmAnd Live to unlock all features: Daily map updates with unlimited downloads, all paid and free plugins, Wikipedia, Wikivoyage and much more.</string>
     <string name="unirs_render_descr">Modification of the default style to increase contrast of pedestrian and bicycle roads. Uses legacy Mapnik colors.</string>
     <string name="shared_string_bookmark">Bookmark</string>
     <string name="hide_full_description">Hide full description</string>
@@ -2152,7 +2153,7 @@
     <string name="live_monitoring_max_interval_to_send_desrc">Specify a time buffer to keep locations to send without connection</string>
     <string name="gpx_monitoring_disabled_warn">Log track using GPX widget or via \'Trip recording\' settings.</string>
     <string name="show_current_gpx_title">Show current track</string>
-    <string name="free_version_message">This free OsmAnd version is limited to %1$s map downloads (to add or update maps) and does not support offline Wikipedia articles.</string>
+    <string name="free_version_message">You can download or update %1$s maps.</string>
     <string name="free_version_title">Free version</string>
     <string name="poi_context_menu_showdescription">Show POI description.</string>
     <string name="index_name_north_america">North America</string>
