@@ -1834,7 +1834,7 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="get_full_version">Versió completa</string>
     <string name="downloads">Baixades</string>
     <string name="activate_seamarks_plugin">Activeu el connector de \'Cartes marines\'</string>
-    <string name="activate_srtm_plugin">Activeu el connector \'SRTM\'</string>
+    <string name="activate_srtm_plugin">Activeu el connector \'Corbes de nivell\'</string>
     <string name="favorite_category_dublicate_message">Utilitzeu un nom de categoria nou que encara no existeixi.</string>
     <string name="favorite_category_name">Nom de categoria</string>
     <string name="favorite_category_add_new_title">Afegeix una nova categoria</string>
@@ -2829,7 +2829,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="go_to_next_field">Camp següent</string>
     <string name="rename_marker">Reanomena el marcador</string>
     <string name="appearance_on_the_map">Aparença al mapa</string>
-    <string name="add_track_to_markers_descr">Seleccioneu un arxiu GPX per afegir les seves fites com marcadors.</string>
+    <string name="add_track_to_markers_descr">Seleccioneu una traça per afegir les seves fites com marcadors.</string>
     <string name="add_favourites_group_to_markers_descr">Seleccioneu una categoria preferida per afegir-la als marcadors.</string>
     <string name="shared_string_gpx_waypoints">Fites de la traça</string>
     <string name="favourites_group">Categoria de preferits</string>
@@ -2838,7 +2838,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="empty_state_markers_active">Creeu marcadors de mapa!</string>
     <string name="empty_state_markers_active_desc">Premeu molt o poc temps a \'Llocs\' i després el botó seleccionador.</string>
     <string name="empty_state_markers_groups">Importa grups</string>
-    <string name="empty_state_markers_groups_desc">Importeu com marcadors a grups de preferits o a fites de GPX.</string>
+    <string name="empty_state_markers_groups_desc">Importeu grups de preferits o a fites com marcadors.</string>
     <string name="empty_state_markers_history_desc">Els marcadors marcats com a aprovats apareixeran en aquesta pantalla.</string>
     <string name="shared_string_two">Dos</string>
     <string name="shared_string_one">Un</string>
@@ -2847,7 +2847,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="distance_indication_descr">Seleccioneu com indicar la distància als marcadors actius.</string>
     <string name="active_markers_descr">Trieu quants indicadors actius voleu veure.</string>
     <string name="shared_string_more_without_dots">Més</string>
-    <string name="looking_for_tracks_with_waypoints">Cercant arxius GPX amb fites</string>
+    <string name="looking_for_tracks_with_waypoints">Cercant traces amb fites</string>
     <string name="empty_state_osm_edits">Crea o modifica objectes OSM</string>
     <string name="empty_state_osm_edits_descr">Afegiu o modifiqueu PDIs a OSM, obriu o comenteu comentaris OSM i aporteu traces GPX enregistrades.</string>
     <string name="shared_string_deleted">S\'ha esborrat</string>
@@ -3062,4 +3062,5 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="map_widget_intermediate_time">Temps de pas</string>
     <string name="read_wikipedia_offline_description">Aconseguiu una subscripció OsmAnd Live per llegir articles de Viquipèdia i ViquiViatges sense connexió.</string>
     <string name="unirs_render_descr">Modificació de l\'estil predefinit per incrementar el contrast a les vies per vianants i bicicletes. Utilitza els colors del llegat Mapnik.</string>
+    <string name="shared_string_gpx_files">Fitxers GPX</string>
     </resources>
