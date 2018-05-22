@@ -3023,7 +3023,7 @@
 	<string name="update_is_available">Actualización disponible</string>
 	<string name="download_file">Descargar archivo</string>
     <string name="start_editing_card_image_text">La guía turística libre global que cualquiera puede editar.</string>
-    <string name="welcome_to_open_beta_description">Las guías de viaje se basan actualmente en Wikiviajes. Prueba todas las características durante las pruebas beta abiertas, de forma gratuita. Posteriormente, las guías de viaje estarán disponibles para los suscriptores de OsmAnd Ilimitado y los propietarios de OsmAnd+</string>
+    <string name="welcome_to_open_beta_description">Las guías de viaje se basan actualmente en Wikiviajes. Prueba todas las características durante las pruebas beta abiertas, de forma gratuita. Posteriormente, las guías de viaje estarán disponibles para los suscriptores de OsmAnd Ilimitado y los propietarios de OsmAnd+.</string>
     <string name="start_editing_card_description">Puede y debe editar cualquier artículo en Wikiviajes. Comparta su conocimiento, experiencia, talento y atención</string>
     <string name="start_editing">Comenzar edición</string>
     <string name="get_unlimited_access">Obtener acceso ilimitado</string>
@@ -3066,4 +3066,5 @@
     <string name="map_widget_intermediate_time">Tiempo intermedio</string>
     <string name="unirs_render_descr">Modificación del estilo estándar para aumentar el contraste de los caminos peatonales y ciclistas. Utiliza los colores heredados de Mapnik.</string>
     <string name="shared_string_gpx_files">Archivos GPX</string>
+    <string name="get_osmand_live">Obtenga OsmAnd Live para desbloquear todas las funciones: Actualizaciones diarias de mapas con descargas ilimitadas, todos los plugins gratuitos y de pago, Wikipedia, Wikivoyage y mucho más.</string>
     </resources>
