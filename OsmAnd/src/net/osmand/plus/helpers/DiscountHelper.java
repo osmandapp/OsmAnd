@@ -14,8 +14,8 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.chooseplan.ChoosePlanDialogFragment;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
-import net.osmand.plus.liveupdates.OsmLiveActivity;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarControllerType;
 import net.osmand.util.Algorithms;
@@ -220,17 +220,7 @@ public class DiscountHelper {
 					purchaseHelper.purchaseFullVersion(mapActivity);
 				}
 			} else if (url.contains(InAppPurchaseHelper.SKU_LIVE_UPDATES)){
-				OsmandApplication app = mapActivity.getMyApplication();
-				app.logEvent(mapActivity, "osm_live_purchase_redirect");
-				OsmandSettings settings = app.getSettings();
-				InAppPurchaseHelper purchaseHelper = app.getInAppPurchaseHelper();
-				if (purchaseHelper != null) {
-					purchaseHelper.purchaseLiveUpdates(mapActivity,
-							settings.BILLING_USER_EMAIL.get(),
-							settings.BILLING_USER_NAME.get(),
-							settings.BILLING_USER_COUNTRY_DOWNLOAD_NAME.get(),
-							settings.BILLING_HIDE_USER_NAME.get());
-				}
+				ChoosePlanDialogFragment.showOsmLiveInstance(mapActivity.getSupportFragmentManager());
 			}
 		} else {
 			Intent intent = new Intent(Intent.ACTION_VIEW);
