@@ -3172,7 +3172,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="purchase_dialog_subtitle">Sélectionnez l\'élément adapté :</string>
     <string name="purchase_dialog_travel_description">Pour lire des articles de voyage hors ligne, achetez l\'un des éléments suivants :</string>
     <string name="wikivoyage_travel_guide_descr">Guides des lieux les plus intéressants au monde depuis OsmAnd et sans connexion Internet.</string>
-    <string name="wikivoyage_travel_guide">Guide Wikivoyage</string>
+    <string name="wikivoyage_travel_guide">Guides de voyage</string>
     <string name="in_app_purchase">Achat via l\'application</string>
     <string name="in_app_purchase_desc">Paiement unique</string>
     <string name="purchase_unlim_title">Acheter - %1$s</string>
