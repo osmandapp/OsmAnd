@@ -142,7 +142,7 @@ public class MapMarkerMenuController extends MenuController {
 
 	@Override
 	public int getWaypointActionIconId() {
-		return R.drawable.map_action_edit_dark;
+		return R.drawable.ic_action_edit_dark;
 	}
 
 	@Override

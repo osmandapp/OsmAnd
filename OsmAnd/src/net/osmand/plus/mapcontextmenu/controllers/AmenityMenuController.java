@@ -131,6 +131,14 @@ public class AmenityMenuController extends MenuController {
 	}
 
 	@Override
+	public int getWaypointActionIconId() {
+		if (marker != null) {
+			return R.drawable.ic_action_edit_dark;
+		}
+		return super.getWaypointActionIconId();
+	}
+
+	@Override
 	public int getWaypointActionStringId() {
 		if (marker != null) {
 			return R.string.shared_string_edit;
