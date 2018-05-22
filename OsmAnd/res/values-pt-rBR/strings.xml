@@ -1963,7 +1963,7 @@ Pôr do Sol: %2$s</string>
     <string name="update">Atualizar tudo</string>
     <string name="only_download_over_wifi">Somente baixar via Wi-Fi</string>
     <string name="live_update">Atualização ao vivo</string>
-<string name="update_now">Atualizar agora</string>
+<string name="update_now">Atualizar já</string>
 <string name="route_distance">Distância:</string>
     <string name="route_duration">Tempo:</string>
     <string name="missing_write_external_storage_permission">App não tem permissão para usar o cartão SD</string>
