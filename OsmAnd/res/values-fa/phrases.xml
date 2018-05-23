@@ -526,7 +526,7 @@
 <string name="poi_craft_roofer">ایزوگام</string>
 <string name="poi_craft_saddler">سراج</string>
 <string name="poi_craft_sailmaker">لوازم قایق</string>
-<string name="poi_craft_sawmill">پوب بری</string>
+<string name="poi_craft_sawmill">چوب بری</string>
 <string name="poi_craft_scaffolder"/>
 <string name="poi_craft_sculptor">مجسمه ساز</string>
 <string name="poi_craft_shoemaker">کفاش</string>
@@ -818,7 +818,7 @@
 	<string name="poi_healthcare">سلامت</string>
 	<string name="poi_office">اداره</string>
 	<string name="poi_tourism">گردشگری</string>
-	<string name="poi_sightseeing">دیدن دیدنی‌ها</string>
+	<string name="poi_sightseeing">دیدنی‌ها</string>
 	<string name="poi_accomodation">محل اسکان</string>
 	<string name="poi_internet_access">اینترنت</string>
 	<string name="poi_entertainment">اوقات فراغت</string>
