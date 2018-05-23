@@ -59,6 +59,9 @@ public class FavouritesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 				favouritesViewHolder.description.setText(favouritePoint.getCategory());
 			}
 			favouritesViewHolder.favouriteImage.setImageDrawable(FavoriteImageDrawable.getOrCreate(context, favouritePoint.getColor(), false));
+			if (location == null) {
+				return;
+			}
 			float dist = (float) MapUtils.getDistance(favouritePoint.getLatitude(), favouritePoint.getLongitude(), location.getLatitude(), location.getLongitude());
 			favouritesViewHolder.distance.setText(OsmAndFormatter.getFormattedDistance(dist, app));
 			favouritesViewHolder.arrowImage.setImageDrawable(iconsCache.getIcon(R.drawable.ic_direction_arrow));
