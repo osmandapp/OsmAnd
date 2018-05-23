@@ -13,7 +13,6 @@ import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.FavoriteImageDrawable;
 import net.osmand.plus.dashboard.DashLocationFragment;
 import net.osmand.util.MapUtils;
@@ -25,7 +24,6 @@ public class FavouritesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
 	private final List<FavouritePoint> favouritePoints;
 	private OsmandApplication app;
-	private MapActivity mapActivity;
 	private IconsCache iconsCache;
 	private View.OnClickListener listener;
 
@@ -34,9 +32,8 @@ public class FavouritesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 	private boolean useCenter;
 	private int screenOrientation;
 
-	public FavouritesAdapter(MapActivity mapActivity, List<FavouritePoint> FavouritePoints) {
-		this.mapActivity = mapActivity;
-		app = mapActivity.getMyApplication();
+	public FavouritesAdapter(OsmandApplication app, List<FavouritePoint> FavouritePoints) {
+		this.app = app;
 		iconsCache = app.getIconsCache();
 		this.favouritePoints = FavouritePoints;
 	}
@@ -59,7 +56,7 @@ public class FavouritesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 			} else {
 				favouritesViewHolder.description.setText(favouritePoint.getCategory());
 			}
-			favouritesViewHolder.favouriteImage.setImageDrawable(FavoriteImageDrawable.getOrCreate(mapActivity, favouritePoint.getColor(), false));
+			favouritesViewHolder.favouriteImage.setImageDrawable(FavoriteImageDrawable.getOrCreate(app, favouritePoint.getColor(), false));
 			if (location == null) {
 				return;
 			}
@@ -68,7 +65,7 @@ public class FavouritesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 			favouritesViewHolder.arrowImage.setImageDrawable(iconsCache.getIcon(R.drawable.ic_direction_arrow));
 			DashLocationFragment.updateLocationView(useCenter, location, heading, favouritesViewHolder.arrowImage,
 					favouritesViewHolder.distance, favouritePoint.getLatitude(), favouritePoint.getLongitude(),
-					screenOrientation, app, mapActivity);
+					screenOrientation, app, app);
 		}
 	}
 
