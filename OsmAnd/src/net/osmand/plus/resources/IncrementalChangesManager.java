@@ -66,10 +66,11 @@ public class IncrementalChangesManager {
 
 	public void indexMainMap(File f, long dateCreated) {
 		String nm = Algorithms.getFileNameWithoutExtension(f).toLowerCase();
-		if(!regions.containsKey(nm)) {
-			regions.put(nm, new RegionUpdateFiles(nm));
-		}
 		RegionUpdateFiles regionUpdateFiles = regions.get(nm);
+		if(regionUpdateFiles == null) {
+			regionUpdateFiles = new RegionUpdateFiles(nm);
+			regions.put(nm, regionUpdateFiles);
+		}
 		regionUpdateFiles.mainFile = f;
 		regionUpdateFiles.mainFileInit = dateCreated;
 		if (!regionUpdateFiles.monthUpdates.isEmpty()) {
@@ -93,7 +94,8 @@ public class IncrementalChangesManager {
 				RegionUpdate monthRu = regionUpdateFiles.monthUpdates.get(month);
 				while (it.hasNext()) {
 					RegionUpdate ru = it.next();
-					if (ru.obfCreated < dateCreated || (monthRu != null && ru.obfCreated < monthRu.obfCreated)) {
+					if (ru.obfCreated < dateCreated || 
+							(monthRu != null && ru.obfCreated < monthRu.obfCreated)) {
 						log.info("Delete overlapping day update " + ru.file.getName());
 						resourceManager.closeFile(ru.file.getName());
 						it.remove();
@@ -113,10 +115,11 @@ public class IncrementalChangesManager {
 		}
 		String nm = index.substring(0, index.length() - 9);
 		String date = index.substring(index.length() - 9 + 1);
-		if(!regions.containsKey(nm)) {
-			regions.put(nm, new RegionUpdateFiles(nm));
-		}
 		RegionUpdateFiles regionUpdateFiles = regions.get(nm);
+		if(regionUpdateFiles == null) {
+			regionUpdateFiles = new RegionUpdateFiles(nm);
+			regions.put(nm, regionUpdateFiles);
+		}
 		return regionUpdateFiles.addUpdate(date, f, dateCreated);
 	}
 	
