@@ -67,10 +67,15 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 				R.layout.recyclerview, null);
 		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 		location = getMyApplication().getLocationProvider().getLastKnownLocation();
+		adapter = new FavouritesAdapter(getMyApplication(), favouritePoints);
 		if (location != null) {
 			latLon = new LatLon(location.getLatitude(), location.getLongitude());
+			adapter.setUseCenter(false);
+		} else {
+			latLon = ((MapActivity) getActivity()).getMapLocation();
+			adapter.setUseCenter(true);
 		}
-		adapter = new FavouritesAdapter(getContext(), favouritePoints);
+		adapter.setLocation(latLon);
 		sortFavourites();
 		final BottomSheetItemTitleWithDescrAndButton[] title = new BottomSheetItemTitleWithDescrAndButton[1];
 		title[0] = (BottomSheetItemTitleWithDescrAndButton) new BottomSheetItemTitleWithDescrAndButton.Builder()
@@ -214,12 +219,12 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 					if (location == null) {
 						location = getMyApplication().getLocationProvider().getLastKnownLocation();
 					}
-					if (location == null) {
-						return;
-					}
-					adapter.setUseCenter(false);
-					adapter.setLocation(new LatLon(location.getLatitude(), location.getLongitude()));
-					adapter.setHeading(heading != null ? heading : 99);
+
+					boolean useCenter = location == null;
+					latLon = useCenter ? mapActivity.getMapLocation() : new LatLon(location.getLatitude(), location.getLongitude());
+					adapter.setUseCenter(useCenter);
+					adapter.setLocation(latLon);
+					adapter.setHeading(useCenter ? -mapActivity.getMapRotate() : heading != null ? heading : 99);
 					adapter.notifyDataSetChanged();
 				}
 			});
@@ -260,11 +265,6 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 	}
 
 	private void sortFavourites() {
-		if (location != null) {
-			latLon = new LatLon(location.getLatitude(), location.getLongitude());
-		} else if (sortByDist) {
-			return;
-		}
 		final Collator inst = Collator.getInstance();
 		Collections.sort(favouritePoints, new Comparator<FavouritePoint>() {
 			@Override
