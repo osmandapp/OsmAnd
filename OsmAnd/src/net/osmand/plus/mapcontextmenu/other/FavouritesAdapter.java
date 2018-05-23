@@ -1,6 +1,5 @@
 package net.osmand.plus.mapcontextmenu.other;
 
-import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,18 +22,22 @@ import java.util.List;
 
 public class FavouritesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-	private final Context context;
+	private IconsCache iconsCache;
 	private final List<FavouritePoint> favouritePoints;
-
+	private final OsmandApplication app;
+	private final MapActivity mapActivity;
 	private View.OnClickListener listener;
+
 	private LatLon location;
 	private Float heading;
 	private boolean useCenter;
 	private int screenOrientation;
 
-	public FavouritesAdapter(Context context, List<FavouritePoint> FavouritePoints) {
+	public FavouritesAdapter(MapActivity mapActivity, List<FavouritePoint> FavouritePoints) {
+		this.mapActivity = mapActivity;
+		app = mapActivity.getMyApplication();
+		iconsCache = app.getIconsCache();
 		this.favouritePoints = FavouritePoints;
-		this.context = context;
 	}
 
 	@Override
@@ -47,9 +50,6 @@ public class FavouritesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 	@Override
 	public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
 		if (holder instanceof FavouritesViewHolder) {
-			MapActivity mapActivity = (MapActivity) context;
-			OsmandApplication app = (OsmandApplication) mapActivity.getApplication();
-			IconsCache iconsCache = app.getIconsCache();
 			FavouritesViewHolder favouritesViewHolder = (FavouritesViewHolder) holder;
 			FavouritePoint favouritePoint = getItem(position);
 			favouritesViewHolder.title.setText(favouritePoint.getName());
@@ -58,7 +58,7 @@ public class FavouritesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 			} else {
 				favouritesViewHolder.description.setText(favouritePoint.getCategory());
 			}
-			favouritesViewHolder.favouriteImage.setImageDrawable(FavoriteImageDrawable.getOrCreate(context, favouritePoint.getColor(), false));
+			favouritesViewHolder.favouriteImage.setImageDrawable(FavoriteImageDrawable.getOrCreate(mapActivity, favouritePoint.getColor(), false));
 			if (location == null) {
 				return;
 			}
@@ -67,7 +67,7 @@ public class FavouritesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 			favouritesViewHolder.arrowImage.setImageDrawable(iconsCache.getIcon(R.drawable.ic_direction_arrow));
 			DashLocationFragment.updateLocationView(useCenter, location, heading, favouritesViewHolder.arrowImage,
 					favouritesViewHolder.distance, favouritePoint.getLatitude(), favouritePoint.getLongitude(),
-					screenOrientation, app, context);
+					screenOrientation, app, mapActivity);
 		}
 	}
 

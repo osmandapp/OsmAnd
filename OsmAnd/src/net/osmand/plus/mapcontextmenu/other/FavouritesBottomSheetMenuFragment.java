@@ -67,7 +67,7 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 				R.layout.recyclerview, null);
 		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 		location = getMyApplication().getLocationProvider().getLastKnownLocation();
-		adapter = new FavouritesAdapter(getActivity(), favouritePoints);
+		adapter = new FavouritesAdapter((MapActivity) getActivity(), favouritePoints);
 		if (location != null) {
 			latLon = new LatLon(location.getLatitude(), location.getLongitude());
 			adapter.setUseCenter(false);
