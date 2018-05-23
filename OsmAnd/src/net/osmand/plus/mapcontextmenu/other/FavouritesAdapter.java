@@ -22,10 +22,11 @@ import java.util.List;
 
 public class FavouritesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-	private IconsCache iconsCache;
+
 	private final List<FavouritePoint> favouritePoints;
-	private final OsmandApplication app;
-	private final MapActivity mapActivity;
+	private OsmandApplication app;
+	private MapActivity mapActivity;
+	private IconsCache iconsCache;
 	private View.OnClickListener listener;
 
 	private LatLon location;
