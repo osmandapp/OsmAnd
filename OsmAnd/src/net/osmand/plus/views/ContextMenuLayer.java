@@ -765,7 +765,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 					if (amenityTransportStops.size() > 0) {
 						selectedObjects.remove(amenity);
 						if (amenityTransportStops.size() > 1) {
-							sort(amenity.getLocation(), amenityTransportStops);
+							sortTransportStops(amenity.getLocation(), amenityTransportStops);
 						}
 						TransportStop amenityTransportStop = amenityTransportStops.get(0);
 						if (!transportStopsReplacement.contains(amenityTransportStop)) {
@@ -785,7 +785,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		}
 	}
 
-	private void sort(@NonNull LatLon latLon, List<TransportStop> transportStops) {
+	private void sortTransportStops(@NonNull LatLon latLon, List<TransportStop> transportStops) {
 		for (TransportStop transportStop : transportStops) {
 			transportStop.distance = (int) MapUtils.getDistance(latLon, transportStop.getLocation());
 		}
