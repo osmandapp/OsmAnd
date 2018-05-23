@@ -16,6 +16,7 @@ import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.FavoriteImageDrawable;
 import net.osmand.plus.dashboard.DashLocationFragment;
 import net.osmand.util.MapUtils;
@@ -48,7 +49,8 @@ public class FavouritesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 	@Override
 	public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
 		if (holder instanceof FavouritesViewHolder) {
-			OsmandApplication app = (OsmandApplication) ((Activity) context).getApplication();
+			MapActivity mapActivity = (MapActivity) context;
+			OsmandApplication app = (OsmandApplication) mapActivity.getApplication();
 			IconsCache iconsCache = app.getIconsCache();
 			FavouritesViewHolder favouritesViewHolder = (FavouritesViewHolder) holder;
 			FavouritePoint favouritePoint = getItem(position);
@@ -58,12 +60,11 @@ public class FavouritesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 			} else {
 				favouritesViewHolder.description.setText(favouritePoint.getCategory());
 			}
-			Location myloc = app.getLocationProvider().getLastKnownLocation();
 			favouritesViewHolder.favouriteImage.setImageDrawable(FavoriteImageDrawable.getOrCreate(context, favouritePoint.getColor(), false));
-			if (myloc == null) {
-				return;
+			if (location == null) {
+				location = mapActivity.getMapLocation();
 			}
-			float dist = (float) MapUtils.getDistance(favouritePoint.getLatitude(), favouritePoint.getLongitude(), myloc.getLatitude(), myloc.getLongitude());
+			float dist = (float) MapUtils.getDistance(favouritePoint.getLatitude(), favouritePoint.getLongitude(), location.getLatitude(), location.getLongitude());
 			favouritesViewHolder.distance.setText(OsmAndFormatter.getFormattedDistance(dist, app));
 			favouritesViewHolder.arrowImage.setImageDrawable(iconsCache.getIcon(R.drawable.ic_direction_arrow));
 			DashLocationFragment.updateLocationView(useCenter, location, heading, favouritesViewHolder.arrowImage,
