@@ -39,6 +39,8 @@
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:hint="@string/shared_string_name"
+                    android:importantForAutofill="noExcludeDescendants"
                     android:layout_marginLeft="72dp"
                     android:layout_marginRight="16dp">
 
@@ -46,8 +48,8 @@
                         android:id="@+id/poiNameEditText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="@string/shared_string_name"
                         android:imeOptions="actionNext"
+                        android:importantForAutofill="noExcludeDescendants"
                         android:inputType="textCapSentences"
                         tools:text="@string/lorem_ipsum"/>
 
@@ -73,6 +75,8 @@
                     android:id="@+id/poiTypeTextInputLayout"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:hint="@string/poi_dialog_poi_type"
+                    android:importantForAutofill="noExcludeDescendants"
                     android:layout_marginLeft="24dp"
                     android:layout_weight="1">
 
@@ -82,7 +86,7 @@
                         android:layout_height="wrap_content"
                         android:completionThreshold="1"
                         android:drawableRight="@drawable/ic_action_arrow_drop_down"
-                        android:hint="@string/poi_dialog_poi_type"
+                        android:importantForAutofill="noExcludeDescendants"
                         android:imeOptions="actionSend"
                         android:inputType="text"
                         tools:text="@string/lorem_ipsum"/>
