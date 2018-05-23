@@ -252,7 +252,7 @@ public class MapMarkersWidgetsFactory {
 		DirectionDrawable dd;
 		if (!(arrowImg.getDrawable() instanceof DirectionDrawable)) {
 			newImage = true;
-			dd = new DirectionDrawable(map, arrowImg.getWidth(), arrowImg.getHeight());
+			dd = new DirectionDrawable(map.getMyApplication(), arrowImg.getWidth(), arrowImg.getHeight());
 		} else {
 			dd = (DirectionDrawable) arrowImg.getDrawable();
 		}

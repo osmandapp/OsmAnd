@@ -526,6 +526,6 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 				heading, direction, distanceText,
 				listItem.getSearchResult().location.getLatitude(),
 				listItem.getSearchResult().location.getLongitude(),
-				screenOrientation, app, activity);
+				screenOrientation, app);
 	}
 }

@@ -149,7 +149,6 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 	private ApplicationMode previousAppMode;
 	private boolean landscape;
 	private List<WeakReference<DashBaseFragment>> fragList = new LinkedList<>();
-	private net.osmand.Location myLocation;
 	private LatLon mapViewLocation;
 	private float heading;
 	private boolean mapLinkedToLocation;
@@ -621,10 +620,6 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 		}
 	}
 
-	public net.osmand.Location getMyLocation() {
-		return myLocation;
-	}
-
 	public LatLon getMapViewLocation() {
 		return mapViewLocation;
 	}
@@ -716,7 +711,6 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 			mapViewLocation = mapActivity.getMapLocation();
 			mapRotation = mapActivity.getMapRotate();
 			mapLinkedToLocation = mapActivity.getMapViewTrackingUtilities().isMapLinkedToLocation();
-			myLocation = mapActivity.getMyApplication().getLocationProvider().getLastKnownLocation();
 			mapActivity.getMapViewTrackingUtilities().setDashboard(this);
 			mapActivity.disableDrawer();
 			dashboardView.setVisibility(View.VISIBLE);
@@ -1218,7 +1212,6 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 	}
 
 	public void updateMyLocation(net.osmand.Location location) {
-		myLocation = location;
 		updateLocation(false, true, false);
 	}
 

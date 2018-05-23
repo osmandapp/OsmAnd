@@ -1,7 +1,5 @@
 package net.osmand.plus.mapcontextmenu.other;
 
-import android.app.Activity;
-import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,7 +7,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import net.osmand.Location;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.plus.IconsCache;
@@ -24,18 +21,21 @@ import java.util.List;
 
 public class FavouritesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-	private final Context context;
-	private final List<FavouritePoint> favouritePoints;
 
+	private final List<FavouritePoint> favouritePoints;
+	private OsmandApplication app;
+	private IconsCache iconsCache;
 	private View.OnClickListener listener;
+
 	private LatLon location;
 	private Float heading;
 	private boolean useCenter;
 	private int screenOrientation;
 
-	public FavouritesAdapter(Context context, List<FavouritePoint> FavouritePoints) {
+	public FavouritesAdapter(OsmandApplication app, List<FavouritePoint> FavouritePoints) {
+		this.app = app;
+		iconsCache = app.getIconsCache();
 		this.favouritePoints = FavouritePoints;
-		this.context = context;
 	}
 
 	@Override
@@ -48,8 +48,6 @@ public class FavouritesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 	@Override
 	public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
 		if (holder instanceof FavouritesViewHolder) {
-			OsmandApplication app = (OsmandApplication) ((Activity) context).getApplication();
-			IconsCache iconsCache = app.getIconsCache();
 			FavouritesViewHolder favouritesViewHolder = (FavouritesViewHolder) holder;
 			FavouritePoint favouritePoint = getItem(position);
 			favouritesViewHolder.title.setText(favouritePoint.getName());
@@ -58,17 +56,16 @@ public class FavouritesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 			} else {
 				favouritesViewHolder.description.setText(favouritePoint.getCategory());
 			}
-			Location myloc = app.getLocationProvider().getLastKnownLocation();
-			favouritesViewHolder.favouriteImage.setImageDrawable(FavoriteImageDrawable.getOrCreate(context, favouritePoint.getColor(), false));
-			if (myloc == null) {
+			favouritesViewHolder.favouriteImage.setImageDrawable(FavoriteImageDrawable.getOrCreate(app, favouritePoint.getColor(), false));
+			if (location == null) {
 				return;
 			}
-			float dist = (float) MapUtils.getDistance(favouritePoint.getLatitude(), favouritePoint.getLongitude(), myloc.getLatitude(), myloc.getLongitude());
+			float dist = (float) MapUtils.getDistance(favouritePoint.getLatitude(), favouritePoint.getLongitude(), location.getLatitude(), location.getLongitude());
 			favouritesViewHolder.distance.setText(OsmAndFormatter.getFormattedDistance(dist, app));
 			favouritesViewHolder.arrowImage.setImageDrawable(iconsCache.getIcon(R.drawable.ic_direction_arrow));
 			DashLocationFragment.updateLocationView(useCenter, location, heading, favouritesViewHolder.arrowImage,
 					favouritesViewHolder.distance, favouritePoint.getLatitude(), favouritePoint.getLongitude(),
-					screenOrientation, app, context);
+					screenOrientation, app);
 		}
 	}
 

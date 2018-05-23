@@ -395,7 +395,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 			DashLocationFragment.updateLocationView(useCenter, location,
 					heading, markerImageViewToUpdate, drawableResToUpdate, markerToHighlight ? color : 0,
 					itemViewHolder.distance, markerLatLon,
-					screenOrientation, app, mapActivity, true);
+					screenOrientation, app, true);
 		} else if (holder instanceof MapMarkerHeaderViewHolder) {
 			final MapMarkerHeaderViewHolder headerViewHolder = (MapMarkerHeaderViewHolder) holder;
 			final Object header = getItem(position);

@@ -22,37 +22,37 @@ public class DirectionDrawable extends Drawable {
 	Paint paintRouteDirection;
 	float width;
 	float height;
-	Context ctx;
 	private float angle;
 	int resourceId = -1;
 	Drawable arrowImage ;
+	private OsmandApplication app;
 
-	public DirectionDrawable(Context ctx, float width, float height, int resourceId, int clrId) {
+	public DirectionDrawable(OsmandApplication ctx, float width, float height, int resourceId, int clrId) {
 		this(ctx, width, height);
-		IconsCache iconsCache = ((OsmandApplication) ctx.getApplicationContext()).getIconsCache();
+		IconsCache iconsCache = ctx.getIconsCache();
 		arrowImage = iconsCache.getIcon(resourceId, clrId);
 		this.resourceId = resourceId;
 	}
 	
-	public DirectionDrawable(Context ctx, float width, float height) {
-		this.ctx = ctx;
+	public DirectionDrawable(OsmandApplication app, float width, float height) {
+		this.app = app;
 		this.width = width;
 		this.height = height;
 		paintRouteDirection = new Paint();
 		paintRouteDirection.setStyle(Paint.Style.FILL_AND_STROKE);
-		paintRouteDirection.setColor(ctx.getResources().getColor(R.color.color_unknown));
+		paintRouteDirection.setColor(app.getResources().getColor(R.color.color_unknown));
 		paintRouteDirection.setAntiAlias(true);
 	}
 	
 	public void setImage(int resourceId, int clrId) {
-		IconsCache iconsCache = ((OsmandApplication) ctx.getApplicationContext()).getIconsCache();
+		IconsCache iconsCache = app.getIconsCache();
 		arrowImage = iconsCache.getIcon(resourceId, clrId);
 		this.resourceId = resourceId;
 		onBoundsChange(getBounds());
 	}
 
 	public void setImage(int resourceId) {
-		IconsCache iconsCache = ((OsmandApplication) ctx.getApplicationContext()).getIconsCache();
+		IconsCache iconsCache = app.getIconsCache();
 		arrowImage = iconsCache.getIcon(resourceId, 0);
 		this.resourceId = resourceId;
 		onBoundsChange(getBounds());
@@ -62,10 +62,10 @@ public class DirectionDrawable extends Drawable {
 	public void setColorId(int clrId) {
 		// R.color.color_ok, R.color.color_unknown, R.color.color_warning
 		if(arrowImage != null) {
-			IconsCache iconsCache = ((OsmandApplication) ctx.getApplicationContext()).getIconsCache();
+			IconsCache iconsCache = app.getIconsCache();
 			arrowImage = iconsCache.getIcon(resourceId, clrId);
 		} else {
-			paintRouteDirection.setColor(ctx.getResources().getColor(clrId));
+			paintRouteDirection.setColor(app.getResources().getColor(clrId));
 		}
 	}
 
@@ -157,7 +157,7 @@ public class DirectionDrawable extends Drawable {
 
 		DisplayMetrics dm = new DisplayMetrics();
 		Matrix pathTransform = new Matrix();
-		WindowManager mgr = (WindowManager) ctx.getSystemService(Context.WINDOW_SERVICE);
+		WindowManager mgr = (WindowManager) app.getSystemService(Context.WINDOW_SERVICE);
 		mgr.getDefaultDisplay().getMetrics(dm);
 		pathTransform.postScale(dm.density, dm.density);
 		path.transform(pathTransform);

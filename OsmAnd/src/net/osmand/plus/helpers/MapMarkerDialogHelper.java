@@ -54,7 +54,7 @@ public class MapMarkerDialogHelper {
 		DirectionDrawable dd;
 		if (!(arrow.getDrawable() instanceof DirectionDrawable)) {
 			newImage = true;
-			dd = new DirectionDrawable(ctx, arrow.getWidth(), arrow.getHeight());
+			dd = new DirectionDrawable((OsmandApplication) ctx.getApplicationContext(), arrow.getWidth(), arrow.getHeight());
 		} else {
 			dd = (DirectionDrawable) arrow.getDrawable();
 		}

@@ -659,7 +659,7 @@ public class QuickSearchCoordinatesFragment extends DialogFragment implements Os
 				heading, direction, distanceText,
 				location.getLatitude(),
 				location.getLongitude(),
-				screenOrientation, getMyApplication(), getMapActivity());
+				screenOrientation, getMyApplication());
 	}
 
 	public static void showDialog(DialogFragment parentFragment, String text) {

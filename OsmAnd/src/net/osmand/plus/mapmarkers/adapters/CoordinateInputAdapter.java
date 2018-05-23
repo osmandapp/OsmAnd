@@ -102,7 +102,7 @@ public class CoordinateInputAdapter extends RecyclerView.Adapter<MapMarkerItemVi
 		DashLocationFragment.updateLocationView(useCenter, location,
 				heading, holder.iconDirection, R.drawable.ic_direction_arrow,
 				holder.distance, new LatLon(mapMarker.getLatitude(), mapMarker.getLongitude()),
-				screenOrientation, mapActivity.getMyApplication(), mapActivity, true);
+				screenOrientation, mapActivity.getMyApplication(), true);
 	}
 
 	@Override
