@@ -50,6 +50,8 @@ import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -754,13 +756,20 @@ public class ContextMenuLayer extends OsmandMapLayer {
 				List<TransportStop> transportStops = findTransportStopsAt(latLon.getLatitude(), latLon.getLongitude());
 				List<TransportStop> transportStopsReplacement = new ArrayList<>();
 				for (Amenity amenity : transportStopAmenities) {
+					List<TransportStop> amenityTransportStops = new ArrayList<>();
 					for (TransportStop transportStop : transportStops) {
 						if (transportStop.getName().startsWith(amenity.getName())) {
-							selectedObjects.remove(amenity);
-							if (!transportStopsReplacement.contains(transportStop)) {
-								transportStopsReplacement.add(transportStop);
-							}
-							break;
+							amenityTransportStops.add(transportStop);
+						}
+					}
+					if (amenityTransportStops.size() > 0) {
+						selectedObjects.remove(amenity);
+						if (amenityTransportStops.size() > 1) {
+							sort(amenity.getLocation(), amenityTransportStops);
+						}
+						TransportStop amenityTransportStop = amenityTransportStops.get(0);
+						if (!transportStopsReplacement.contains(amenityTransportStop)) {
+							transportStopsReplacement.add(amenityTransportStop);
 						}
 					}
 				}
@@ -774,6 +783,19 @@ public class ContextMenuLayer extends OsmandMapLayer {
 				}
 			}
 		}
+	}
+
+	private void sort(@NonNull LatLon latLon, List<TransportStop> transportStops) {
+		for (TransportStop transportStop : transportStops) {
+			transportStop.distance = (int) MapUtils.getDistance(latLon, transportStop.getLocation());
+		}
+		Collections.sort(transportStops, new Comparator<TransportStop>() {
+
+			@Override
+			public int compare(TransportStop s1, TransportStop s2) {
+				return Algorithms.compare(s1.distance, s2.distance);
+			}
+		});
 	}
 
 	@NonNull
