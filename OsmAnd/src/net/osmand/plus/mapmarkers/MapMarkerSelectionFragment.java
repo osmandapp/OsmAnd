@@ -70,11 +70,9 @@ public class MapMarkerSelectionFragment extends BaseOsmAndDialogFragment {
 				Float head = trackingUtils.getHeading();
 				float mapRotation = mapActivity.getMapRotate();
 				LatLon mw = mapActivity.getMapLocation();
-				Location l = trackingUtils.getMyLocation();
-				boolean mapLinked = trackingUtils.isMapLinkedToLocation() && l != null;
-				LatLon myLoc = l == null ? null : new LatLon(l.getLatitude(), l.getLongitude());
+				boolean mapLinked = trackingUtils.isMapLinkedToLocation();
 				useCenter = !mapLinked;
-				loc = (useCenter ? mw : myLoc);
+				loc = mw;
 				if (useCenter) {
 					heading = -mapRotation;
 				} else {

@@ -107,9 +107,6 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 		}
 	}
 
-	public Location getMyLocation() {
-		return myLocation;
-	}
 
 	public Float getHeading() {
 		return heading;
@@ -124,7 +121,8 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 		heading = val;
 		if (mapView != null) {
 			float speedForDirectionOfMovement = settings.SWITCH_MAP_DIRECTION_TO_COMPASS.get();
-			boolean smallSpeedForDirectionOfMovement = speedForDirectionOfMovement != 0 && getMyLocation() != null && isSmallSpeedForDirectionOfMovement(getMyLocation(), speedForDirectionOfMovement);
+			boolean smallSpeedForDirectionOfMovement = speedForDirectionOfMovement != 0 && 
+					myLocation != null && isSmallSpeedForDirectionOfMovement(myLocation, speedForDirectionOfMovement);
 			if ((settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_COMPASS || (settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_BEARING && smallSpeedForDirectionOfMovement)) && !routePlanningMode) {
 				if (Math.abs(MapUtils.degreesDiff(mapView.getRotate(), -val)) > 1) {
 					mapView.setRotate(-val);
