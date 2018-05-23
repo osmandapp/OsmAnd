@@ -260,9 +260,17 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 	}
 
 	private void sortFavourites() {
-		if (location != null) {
+		if (location == null) {
+			Activity activity = getActivity();
+			if (activity instanceof MapActivity) {
+				MapActivity mapActivity = (MapActivity) activity;
+				latLon = mapActivity.getMapLocation();
+			}
+		} else {
 			latLon = new LatLon(location.getLatitude(), location.getLongitude());
-		} else if (sortByDist) {
+		}
+
+		if (sortByDist && latLon == null) {
 			return;
 		}
 		final Collator inst = Collator.getInstance();
