@@ -318,7 +318,7 @@
 	<string name="gpx_monitoring_disabled_warn">Καταγραφή ίχνους χρησιμοποιώντας το γραφικό στοιχείο GPX\', ή μέσω των ρυθμίσεων \'Εγγραφή ταξιδιού\'.</string>
 	<string name="show_current_gpx_title">Εμφάνιση τρέχοντος ίχνους</string>
 	    
-	<string name="free_version_message">Αυτή η δωρεάν έκδοση του OsmAnd περιορίζεται σε %1$s λήψεις χαρτών (για προσθήκη ή ενημέρωση χαρτών) και δεν υποστηρίζει εκτός σύνδεσης άρθρα από τη βικιπαίδεια.</string>
+	<string name="free_version_message">Μπορείτε να κατεβάσετε ή να ενημερώσετε %1$s χάρτες.</string>
 	<string name="free_version_title">Ελεύθερη έκδοση</string>
 	<string name="poi_context_menu_showdescription">Εμφάνιση περιγραφής ΣΕ.</string>
 	<string name="index_name_north_america">Βόρεια Αμερική</string>
@@ -3117,7 +3117,7 @@
     <string name="start_editing">Έναρξη επεξεργασίας</string>
     <string name="get_unlimited_access">Πάρτε απεριόριστη πρόσβαση</string>
     <string name="welcome_to_open_beta">Καλώς ήλθατε, στην ανοικτή βήτα</string>
-    <string name="wikivoyage_travel_guide">Οδηγός ταξιδιού βικιταξίδια</string>
+    <string name="wikivoyage_travel_guide">Ταξιδιωτικοί οδηγοί</string>
     <string name="wikivoyage_travel_guide_descr">Οδηγοί για τα πιο ενδιαφέροντα μέρη στον πλανήτη, μέσα στο OsmAnd, χωρίς σύνδεση διαδικτύου.</string>
     <string name="contour_lines_hillshade_maps">Χάρτες ισοϋψών γραμμών &amp; σκίασης αναγλύφου</string>
     <string name="download_wikipedia_description">Λήψη των άρθρων της βικιπαίδειας για %1$s για να τα διαβάσετε χωρίς σύνδεση.</string>
@@ -3156,4 +3156,5 @@
     <string name="map_widget_intermediate_time">Ενδιάμεσος χρόνος</string>
     <string name="unirs_render_descr">Τροποποίηση της τυπικής μορφής για αύξηση της αντίθεσης των δρόμων πεζοπορίας και ποδηλάτου. Χρήση χρωμάτων παλιών Mapnik.</string>
     <string name="shared_string_gpx_files">Αρχεία GPX</string>
+    <string name="get_osmand_live">Εγγραφείτε στο OsmAnd Live για να ξεκλειδώσετε όλα τα χαρακτηριστικά: Ημερήσιες ενημερώσεις χαρτών με απεριόριστες λήψεις, όλα πληρωμένα και χωρίς πρόσθετα, βικιπαίδεια, βικιταξίδια και πολλά άλλα.</string>
     </resources>
