@@ -1110,7 +1110,7 @@ Lon %2$s</string>
     <string name="live_monitoring_url">Dirección web de registro en vivo</string>
     <string name="gpx_monitoring_disabled_warn">Registra trazas usando el control GPX o mediante la opción «Grabar viaje».</string>
     <string name="show_current_gpx_title">Mostrar traza actual</string>
-    <string name="free_version_message">Esta versión gratuita de OsmAnd está limitada a %1$s descargas de mapas (añadir o actualizar mapas) y no soporta artículos de Wikipedia sin conexión.</string>
+    <string name="free_version_message">Puedes descargar o actualizar %1$s mapas.</string>
     <string name="free_version_title">Versión gratuita</string>
     <string name="poi_context_menu_showdescription">Detalles del PDI.</string>
     <string name="index_name_north_america">Norteamérica</string>
@@ -3071,4 +3071,5 @@ Lon %2$s</string>
     <string name="map_widget_intermediate_time">Tiempo intermedio</string>
     <string name="unirs_render_descr">Modificación del estilo predefinido para un mayor contraste en los caminos peatonales y para bicicletas. Usa los colores clásicos de Mapnik.</string>
     <string name="shared_string_gpx_files">Archivos GPX</string>
+    <string name="get_osmand_live">Obtén «OsmAnd Live» para desbloquear todas las características: Actualizaciones diarias de mapas con descargas ilimitadas, todos los complementos gratuitos y de pago, artículos de Wikipedia, Wikiviajes y mucho más.</string>
     </resources>
