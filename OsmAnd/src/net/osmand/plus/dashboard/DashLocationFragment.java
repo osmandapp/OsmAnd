@@ -32,7 +32,6 @@ public abstract class DashLocationFragment extends DashBaseFragment {
 	private static final int ORIENTATION_180 = 2;
 	protected List<DashLocationView> distances = new ArrayList<DashLocationFragment.DashLocationView>();
 	private int screenOrientation;
-	protected LatLon lastUpdatedLocation;
 
 	public static class DashLocationView {
 		public ImageView arrow;
@@ -98,50 +97,61 @@ public abstract class DashLocationFragment extends DashBaseFragment {
 		float head = d.getHeading();
 		float mapRotation = d.getMapRotation();
 		LatLon mw = d.getMapViewLocation();
-		Location l = d.getMyLocation();
-		boolean mapLinked = d.isMapLinkedToLocation() && l != null;
-		LatLon myLoc = l == null ? null : new LatLon(l.getLatitude(), l.getLongitude());
-		boolean useCenter = !mapLinked;
-		LatLon loc = (useCenter ? mw : myLoc);
+		boolean useCenter = !d.isMapLinkedToLocation();
 		float h = useCenter ? -mapRotation : head;
-		lastUpdatedLocation = loc;
 		for (DashLocationView lv : distances) {
-			updateLocationView(useCenter, loc, h, lv.arrow, lv.arrowResId, lv.txt, lv.loc, screenOrientation,
-					getMyApplication(), getActivity(), lv.paint);
+			updateLocationView(useCenter, mw, h, lv.arrow, lv.arrowResId, lv.txt, lv.loc, screenOrientation,
+					getMyApplication(), lv.paint);
 		}
 	}
 
 	public static void updateLocationView(boolean useCenter, LatLon fromLoc, Float h,
 										  ImageView arrow, int imgColor, TextView txt, int textColor, double toLat, double toLon,
 										  int screenOrientation, OsmandApplication app, Context ctx) {
-		updateLocationView(useCenter, fromLoc, h, arrow, 0, imgColor, txt, textColor, new LatLon(toLat, toLon), screenOrientation, app, ctx, true);
+		updateLocationView(useCenter, fromLoc, h, arrow, 0, imgColor, txt, textColor, new LatLon(toLat, toLon), screenOrientation, app, true);
 	}
 
 	public static void updateLocationView(boolean useCenter, LatLon fromLoc, Float h,
 										  ImageView arrow, TextView txt, double toLat, double toLon,
-										  int screenOrientation, OsmandApplication app, Context ctx) {
-		updateLocationView(useCenter, fromLoc, h, arrow, 0, txt, new LatLon(toLat, toLon), screenOrientation, app, ctx, true);
+										  int screenOrientation, OsmandApplication app) {
+		updateLocationView(useCenter, fromLoc, h, arrow, 0, txt, new LatLon(toLat, toLon), screenOrientation, app,  true);
 	}
 
 	public static void updateLocationView(boolean useCenter, LatLon fromLoc, Float h,
 										  ImageView arrow, int arrowResId, TextView txt, LatLon toLoc,
-										  int screenOrientation, OsmandApplication app, Context ctx, boolean paint) {
-		updateLocationView(useCenter, fromLoc, h, arrow, arrowResId, 0, txt, 0, toLoc, screenOrientation, app, ctx, paint);
+										  int screenOrientation, OsmandApplication app, boolean paint) {
+		updateLocationView(useCenter, fromLoc, h, arrow, arrowResId, 0, txt, 0, toLoc, screenOrientation, app, paint);
 	}
 
 	public static void updateLocationView(boolean useCenter, LatLon fromLoc, Float h,
 										  ImageView arrow, int arrowResId, int imgColor, TextView txt, LatLon toLoc,
-										  int screenOrientation, OsmandApplication app, Context ctx, boolean paint) {
-		updateLocationView(useCenter, fromLoc, h, arrow, arrowResId, imgColor, txt, 0, toLoc, screenOrientation, app, ctx, paint);
+										  int screenOrientation, OsmandApplication app, boolean paint) {
+		updateLocationView(useCenter, fromLoc, h, arrow, arrowResId, imgColor, txt, 0, toLoc, screenOrientation, app, paint);
 	}
 
 	public static void updateLocationView(boolean useCenter, LatLon fromLoc, Float h,
 										  ImageView arrow, int arrowResId, int imgColor, TextView txt, int textColor, LatLon toLoc,
-										  int screenOrientation, OsmandApplication app, Context ctx, boolean paint) {
+										  int screenOrientation, OsmandApplication app, boolean paint) {
 		float[] mes = new float[2];
+		boolean stale = false;
+		if(!useCenter) {
+			Location loc = app.getLocationProvider().getLastKnownLocation();
+			if(loc == null) {
+				loc = app.getLocationProvider().getLastStaleKnownLocation();
+				stale = true;
+			}
+			
+			if(loc != null) {
+				fromLoc = new LatLon(loc.getLatitude(), loc.getLongitude());
+			} else {
+				fromLoc = null;
+			}
+		}
 		if (fromLoc != null && toLoc != null) {
 			Location.distanceBetween(toLoc.getLatitude(), toLoc.getLongitude(), fromLoc.getLatitude(), fromLoc.getLongitude(), mes);
 		}
+		
+
 		if (arrow != null) {
 			boolean newImage = false;
 			if (arrowResId == 0) {
@@ -150,11 +160,18 @@ public abstract class DashLocationFragment extends DashBaseFragment {
 			DirectionDrawable dd;
 			if(!(arrow.getDrawable() instanceof DirectionDrawable)) {
 				newImage = true;
-				dd = new DirectionDrawable(ctx, arrow.getWidth(), arrow.getHeight());
+				dd = new DirectionDrawable(app, arrow.getWidth(), arrow.getHeight());
 			} else {
 				dd = (DirectionDrawable) arrow.getDrawable();
 			}
-			dd.setImage(arrowResId, imgColor == 0 ? useCenter ? R.color.color_distance : R.color.color_myloc_distance : imgColor);
+			int imgColorSet = imgColor;
+			if (imgColorSet == 0) {
+				imgColorSet = useCenter ? R.color.color_distance : R.color.color_myloc_distance;
+				if(stale) {
+					imgColorSet = R.color.icon_color;
+				}
+			}
+			dd.setImage(arrowResId, imgColorSet);
 			if (fromLoc == null || h == null || toLoc == null) {
 				dd.setAngle(0);
 			} else {
@@ -168,8 +185,14 @@ public abstract class DashLocationFragment extends DashBaseFragment {
 		if (txt != null) {
 			if (fromLoc != null && toLoc != null) {
 				if (paint) {
-					txt.setTextColor(app.getResources().getColor(
-							textColor == 0 ? useCenter ? R.color.color_distance : R.color.color_myloc_distance : textColor));
+					int textColorSet = textColor;
+					if(textColorSet == 0) {
+						textColorSet = useCenter ? R.color.color_distance : R.color.color_myloc_distance ;
+						if(stale) {
+							textColorSet = R.color.icon_color;
+						}
+					}
+					txt.setTextColor(app.getResources().getColor(textColorSet));
 				}
 				txt.setText(OsmAndFormatter.getFormattedDistance(mes[0], app));
 			} else {

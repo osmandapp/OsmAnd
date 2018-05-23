@@ -66,11 +66,16 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 		recyclerView = (RecyclerView) View.inflate(new ContextThemeWrapper(getContext(), themeRes),
 				R.layout.recyclerview, null);
 		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-		location = getMyApplication().getLocationProvider().getLastKnownLocation();
+		location = getMyApplication().getLocationProvider().getLastStaleKnownLocation();
+		adapter = new FavouritesAdapter(getMyApplication(), favouritePoints);
 		if (location != null) {
 			latLon = new LatLon(location.getLatitude(), location.getLongitude());
+			adapter.setUseCenter(false);
+		} else {
+			latLon = ((MapActivity) getActivity()).getMapLocation();
+			adapter.setUseCenter(true);
 		}
-		adapter = new FavouritesAdapter(getContext(), favouritePoints);
+		adapter.setLocation(latLon);
 		sortFavourites();
 		final BottomSheetItemTitleWithDescrAndButton[] title = new BottomSheetItemTitleWithDescrAndButton[1];
 		title[0] = (BottomSheetItemTitleWithDescrAndButton) new BottomSheetItemTitleWithDescrAndButton.Builder()
@@ -212,14 +217,14 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 				@Override
 				public void run() {
 					if (location == null) {
-						location = getMyApplication().getLocationProvider().getLastKnownLocation();
+						location = getMyApplication().getLocationProvider().getLastStaleKnownLocation();
 					}
-					if (location == null) {
-						return;
-					}
-					adapter.setUseCenter(false);
-					adapter.setLocation(new LatLon(location.getLatitude(), location.getLongitude()));
-					adapter.setHeading(heading != null ? heading : 99);
+
+					boolean useCenter = location == null;
+					latLon = useCenter ? mapActivity.getMapLocation() : new LatLon(location.getLatitude(), location.getLongitude());
+					adapter.setUseCenter(useCenter);
+					adapter.setLocation(latLon);
+					adapter.setHeading(useCenter ? -mapActivity.getMapRotate() : heading != null ? heading : 99);
 					adapter.notifyDataSetChanged();
 				}
 			});
@@ -260,16 +265,11 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 	}
 
 	private void sortFavourites() {
-		if (location != null) {
-			latLon = new LatLon(location.getLatitude(), location.getLongitude());
-		} else if (sortByDist) {
-			return;
-		}
 		final Collator inst = Collator.getInstance();
 		Collections.sort(favouritePoints, new Comparator<FavouritePoint>() {
 			@Override
 			public int compare(FavouritePoint lhs, FavouritePoint rhs) {
-				if (sortByDist) {
+				if (sortByDist && latLon != null) {
 					double ld = MapUtils.getDistance(latLon, lhs.getLatitude(),
 							lhs.getLongitude());
 					double rd = MapUtils.getDistance(latLon, rhs.getLatitude(),

@@ -242,7 +242,7 @@ public class SearchHistoryFragment extends OsmAndListFragment implements SearchA
 			TextView distanceText = (TextView) row.findViewById(R.id.distance);
 			ImageView direction = (ImageView) row.findViewById(R.id.direction);
 			DashLocationFragment.updateLocationView(!searchAroundLocation, location, heading, direction, distanceText, 
-					historyEntry.getLat(), historyEntry.getLon(), screenOrientation, getMyApplication(), getActivity()); 
+					historyEntry.getLat(), historyEntry.getLon(), screenOrientation, getMyApplication()); 
 			ImageButton options = (ImageButton) row.findViewById(R.id.options);
 			options.setImageDrawable(getMyApplication().getIconsCache().getThemedIcon(R.drawable.ic_overflow_menu_white));
 			options.setVisibility(View.VISIBLE);

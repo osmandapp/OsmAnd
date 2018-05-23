@@ -238,7 +238,7 @@ public class FavoritesListFragment extends OsmAndListFragment implements SearchA
 
 			icon.setImageDrawable(FavoriteImageDrawable.getOrCreate(activity, favorite.getColor(), false));
 			DashLocationFragment.updateLocationView(!searchAroundLocation, location, heading, direction, distanceText,
-					favorite.getLatitude(), favorite.getLongitude(), screenOrientation, app, activity);
+					favorite.getLatitude(), favorite.getLongitude(), screenOrientation, app);
 
 			name.setText(getName(favorite));
 			final CheckBox ch = (CheckBox) row.findViewById(R.id.toggle_item);

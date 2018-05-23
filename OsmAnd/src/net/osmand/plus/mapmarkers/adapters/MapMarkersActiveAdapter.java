@@ -196,7 +196,7 @@ public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemV
 		DashLocationFragment.updateLocationView(useCenter, location,
 				heading, markerImageViewToUpdate, drawableResToUpdate,
 				showDirectionEnabled && displayedInWidget ? markerColor : 0, holder.distance, markerLatLon,
-				screenOrientation, mapActivity.getMyApplication(), mapActivity, true);
+				screenOrientation, mapActivity.getMyApplication(), true);
 	}
 
 	@Override

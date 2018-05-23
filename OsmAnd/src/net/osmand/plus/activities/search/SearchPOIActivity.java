@@ -785,7 +785,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 			if (dd instanceof DirectionDrawable) {
 				draw = (DirectionDrawable) dd;
 			} else {
-				draw = new DirectionDrawable(SearchPOIActivity.this, 24, 24,
+				draw = new DirectionDrawable(getMyApplication(), 24, 24,
 						R.drawable.ic_direction_arrow, R.color.color_distance);
 				direction.setImageDrawable(draw);
 			}
