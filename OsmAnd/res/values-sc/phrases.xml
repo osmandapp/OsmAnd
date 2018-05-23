@@ -3462,4 +3462,12 @@
 	<string name="poi_gambling_bingo">Bingo</string>
 
 	<string name="poi_nutrition_supplements">Integradores alimentares</string>
+	<string name="poi_cliff">Iscameddu</string>
+
+	<string name="poi_animal_keeping">Cuadorju pro animales</string>
+	<string name="poi_animal_keeping_horse">Cuadorju pro animales: caddos</string>
+	<string name="poi_animal_keeping_sheep">Cuadorju pro animales: berbeghes</string>
+	<string name="poi_animal_keeping_type_paddock">Casta: chirra</string>
+	<string name="poi_animal_keeping_type_open_stable">Casta: istalla aberta</string>
+
 	</resources>

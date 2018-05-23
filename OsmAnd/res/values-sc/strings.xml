@@ -963,7 +963,7 @@ Memòria in proportzione %4$s MB (lìmite de Android %5$s MB, Dalvik %6$s MB).</
     <string name="live_monitoring_url">Indiritzu ìnternet pro s’arrastamentu in dereta</string>
     <string name="gpx_monitoring_disabled_warn">Registra sa rasta impreende su widget GPX o sas impostatziones \'Registratzione biàgios\'.</string>
 
-    <string name="free_version_message">Custa versione de badas de OsmAnd est limitada a %1$s iscarrigamentos (pro annànghere o agiornare mapas) e non suportat sos artìculos non in lìnia de Wikipedia.</string>
+    <string name="free_version_message">Podes iscarrigare o agiornare %1$s mapas.</string>
     <string name="index_name_voice">Indicatziones vocales (registradas, funtzionalidades limitadas)</string>
     <string name="index_name_tts_voice">Indicatziones vocales (TTS-sintetizadas, preferìbiles)</string>
     <string name="amenity_type_user_defined">Definidu dae s’impitadore</string>
@@ -3219,4 +3219,5 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="access_intermediate_arrival_time">Ora de arrivu a sa tapa</string>
     <string name="map_widget_intermediate_time">Tempus de arrivu a sa tapa</string>
     <string name="shared_string_gpx_files">Documentos GPX</string>
+    <string name="get_osmand_live">Abbona·ti a OsmAnd Live pro isblocare totu sas funtzionalidades: agiornamentos die pro die de sas mapas cun iscarrigamentos illimitados, totu sas estensiones de badas e a pagamentu, Wikipedia, Wikivoyage e meda àteru.</string>
     </resources>
