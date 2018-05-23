@@ -823,8 +823,8 @@
 
 Ces informations sont visibles sur le Tableau de bord comme sur la carte. Un rappel peut même être ajouté à votre calendrier.</string>
     <string name="osmand_parking_plugin_name">Emplacement de stationnement</string>
-    <string name="context_menu_item_add_parking_point">Marquer comme emplacement de stationnement</string>
-    <string name="context_menu_item_delete_parking_point">Supprimer un emplacement de stationnement</string>
+    <string name="context_menu_item_add_parking_point">Marquer comme stationnement</string>
+    <string name="context_menu_item_delete_parking_point">Supprimer l\'emplacement de stationnement</string>
     <string name="starting_point_too_far">Point de départ trop éloigné de la route la plus proche.</string>
     <string name="shared_location">Lieu partagé</string>
     <string name="select_animate_speedup">Sélectionner la vitesse de l\'animation</string>
@@ -2315,7 +2315,7 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="lang_hu_formal">Hongrois (formel)</string>
     <string name="move_marker_bottom_sheet_title">Déplacez la carte pour modifier la position de la marque</string>
     <string name="current_track">Trace courante</string>
-    <string name="change_markers_position">Modifier la position de la marque</string>
+    <string name="change_markers_position">Déplacer la marque</string>
     <string name="lang_es_us">Espagnol (américain)</string>
     <string name="lang_en_gb">Anglais (Royaume-Uni)</string>
     <string name="access_direction_audio_feedback_descr">Indiquer la direction de la cible par des sons</string>
