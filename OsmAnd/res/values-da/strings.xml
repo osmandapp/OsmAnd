@@ -3266,5 +3266,5 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="map_widget_intermediate_time">Mellemliggende tid</string>
     <string name="unirs_render_descr">Ændring af standard stil for at øge kontrasten på fodgænger- og cykelveje. Bruger Mapniks oprindelige farver.</string>
     <string name="shared_string_gpx_files">GPX-filer</string>
-    <string name="get_osmand_live">Abonner på OsmAnd Live og brug alle funktioner: daglige opdateringer af kort, alt betalt og gratis udvidelser, Wikipedia, Wikivoyage og meget mere.</string>
+    <string name="get_osmand_live">Abonner på OsmAnd Live og brug alle funktioner: daglige opdateringer af kort, alle gratis og betalte udvidelser, Wikipedia, Wikivoyage og meget mere.</string>
     </resources>
