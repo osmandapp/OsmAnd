@@ -157,7 +157,7 @@
     <string name="local_openstreetmap_delete">Esborra els canvis</string>
     <string name="local_openstreetmap_uploadall">Penja-ho tot</string>
     <string name="show_current_gpx_title">Mostra la traça actual</string>
-    <string name="free_version_message">Aquesta versió gratuïta de l\'OsmAnd està limitada a %1$s baixades de mapes(sigui afegint o actualitzant in mapa) i no permet l\'ús fora de línia dels articles de la Viquipèdia.</string>
+    <string name="free_version_message">Podeu baixar de nou o actualitzar %1$s mapes.</string>
     <string name="free_version_title">Versió gratuïta</string>
     <string name="poi_context_menu_showdescription">Mostra la descripció del PDI.</string>
     <string name="index_name_france">Europa - França</string>
@@ -3063,4 +3063,5 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="read_wikipedia_offline_description">Aconseguiu una subscripció OsmAnd Live per llegir articles de Viquipèdia i ViquiViatges sense connexió.</string>
     <string name="unirs_render_descr">Modificació de l\'estil predefinit per incrementar el contrast a les vies per vianants i bicicletes. Utilitza els colors del llegat Mapnik.</string>
     <string name="shared_string_gpx_files">Fitxers GPX</string>
+    <string name="get_osmand_live">Obteniu OsmAnd Live per disposar de totes les funcionalitats:Actualitzacions diàries de mapes sense límit de baixades, tots els connectors tant els de pagament com els de frac, Viquipèdia, ViquiViatges i molt més.</string>
     </resources>
