@@ -75,6 +75,7 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 			latLon = ((MapActivity) getActivity()).getMapLocation();
 			adapter.setUseCenter(true);
 		}
+		adapter.setLocation(latLon);
 		sortFavourites();
 		final BottomSheetItemTitleWithDescrAndButton[] title = new BottomSheetItemTitleWithDescrAndButton[1];
 		title[0] = (BottomSheetItemTitleWithDescrAndButton) new BottomSheetItemTitleWithDescrAndButton.Builder()
