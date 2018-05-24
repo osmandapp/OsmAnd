@@ -188,6 +188,20 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 		}
 	}
 
+	public void updateRouteCalculationProgress(int progress) {
+		WeakReference<MapRouteInfoMenuFragment> fragmentRef = findMenuFragment();
+		if (fragmentRef != null) {
+			fragmentRef.get().updateRouteCalculationProgress(progress);
+		}
+	}
+
+	public void routeCalculationFinished() {
+		WeakReference<MapRouteInfoMenuFragment> fragmentRef = findMenuFragment();
+		if (fragmentRef != null) {
+			fragmentRef.get().hideRouteCalculationProgressBar();
+		}
+	}
+
 	public void updateMenu() {
 		WeakReference<MapRouteInfoMenuFragment> fragmentRef = findMenuFragment();
 		if (fragmentRef != null)

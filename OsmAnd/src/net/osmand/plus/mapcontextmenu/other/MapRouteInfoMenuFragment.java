@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
@@ -103,6 +104,23 @@ public class MapRouteInfoMenuFragment extends BaseOsmAndFragment {
 	public void updateFromIcon() {
 		if (menu != null) {
 			menu.updateFromIcon(mainView);
+		}
+	}
+
+	public void updateRouteCalculationProgress(int progress) {
+		ProgressBar progressBar = (ProgressBar) mainView.findViewById(R.id.progress_bar);
+		if (progressBar != null) {
+			if (progressBar.getVisibility() != View.VISIBLE) {
+				progressBar.setVisibility(View.VISIBLE);
+			}
+			progressBar.setProgress(progress);
+		}
+	}
+
+	public void hideRouteCalculationProgressBar() {
+		View progressBar = mainView.findViewById(R.id.progress_bar);
+		if (progressBar != null) {
+			progressBar.setVisibility(View.GONE);
 		}
 	}
 
