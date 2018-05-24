@@ -1977,7 +1977,6 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		LatLon latLon = null;
 		if (location != null) {
 			latLon = new LatLon(location.getLatitude(), location.getLongitude());
-			navigationInfo.updateLocation(location);
 		}
 		updateLocationUI(latLon, heading);
 	}
