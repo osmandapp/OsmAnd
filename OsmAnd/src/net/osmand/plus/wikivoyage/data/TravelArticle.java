@@ -8,7 +8,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.Size;
 import android.text.TextUtils;
-
 import net.osmand.plus.GPXUtilities.GPXFile;
 
 import org.apache.commons.codec.binary.Hex;
