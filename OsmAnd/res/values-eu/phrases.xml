@@ -844,7 +844,7 @@
 	<string name="poi_bench_no">Eserleku gabe</string>
 	<string name="poi_shelter_type_public_transport">Garraio publikoa</string>
 	<string name="poi_shelter_type_picnic_shelter"/>
-	<string name="poi_shelter_type_weather_shelter"/>
+	<string name="poi_shelter_type_weather_shelter">Eguraldiarentzat</string>
 	<string name="poi_shelter_type_basic_hut">Oinarrizko txabola</string>
 	<string name="poi_shelter_type_building">Eraikina</string>
 	<string name="poi_shelter_type_wildlife_hide">Basabizitza parada</string>
@@ -3319,4 +3319,52 @@
 
 	<string name="poi_end_date">Bukaera data</string>
 
-</resources>
+<string name="poi_fuel_100ll">100LL erregaia</string>
+	<string name="poi_fuel_jeta1">Jet A-1 erregaia</string>
+	<string name="poi_historic_farm">Baserri historikoa</string>
+	<string name="poi_historic_railway_station">Tren estazio historikoa</string>
+
+	<string name="poi_historic_gallows">Urkamendi historikoa</string>
+	<string name="poi_historic_railway">Trenbide historikoa</string>
+
+	<string name="poi_concentration_camp_nazism">Mota: Nazia</string>
+	<string name="poi_concentration_camp_gulag">Mota: Gulag</string>
+
+	<string name="poi_boat_storage">Ontzi biltegiratzea</string>
+
+	<string name="poi_conveying_yes">"Garraiagailua:  Bai"</string>
+
+	<string name="poi_bridge_ref">Zubi-erreferentzia</string>
+	<string name="poi_tunnel_ref">Tunel-erreferentzia</string>
+
+	<string name="poi_ref">Erreferentzia</string>
+
+	<string name="poi_health_specialty_herbalism_yes">Sendabelarrak</string>
+	<string name="poi_health_specialty_palliative_medicine_yes">Medikuntza paliatiboa</string>
+
+	<string name="poi_fitness_centre">Gimnasioa</string>
+	<string name="poi_fitness">Gimnasia</string>
+
+	<string name="poi_boxing">Boxeoa</string>
+
+	<string name="poi_official_name">Izen ofiziala</string>
+
+	<string name="poi_dyke">Dikea</string>
+	<string name="poi_inscription_n">Inskripzioa: I</string>
+	<string name="poi_inscription_nw">Inskripzioa: IM</string>
+	<string name="poi_inscription_w">Inskripzioa: M</string>
+	<string name="poi_inscription_sw">Inskripzioa: HM</string>
+	<string name="poi_inscription_s">Inskripzioa: H</string>
+	<string name="poi_inscription_se">Inskripzioa: HE</string>
+	<string name="poi_inscription_e">Inskripzioa: E</string>
+	<string name="poi_inscription_ne">Inskripzioa: IE</string>
+
+	<string name="poi_nuclear_explosion_device">Leherketa: Gailua</string>
+
+	<string name="poi_fire_hydrant_type_underground">Lurrazpikoa</string>
+	<string name="poi_fire_hydrant_type_pillar">Zutabea</string>
+	<string name="poi_fire_hydrant_type_dry_barrel">Upel lehorra</string>
+	<string name="poi_fire_hydrant_type_pond">Urmaela</string>
+	<string name="poi_fire_hydrant_type_wall">Horma</string>
+
+	</resources>
