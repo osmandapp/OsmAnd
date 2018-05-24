@@ -46,7 +46,7 @@ import net.osmand.plus.GPXUtilities.TrkSegment;
 import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
-import net.osmand.plus.IconsCache;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
@@ -108,7 +108,7 @@ public class ShowRouteInfoDialogFragment extends DialogFragment {
 		view = inflater.inflate(R.layout.route_info_layout, container, false);
 
 		Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
-		toolbar.setNavigationIcon(getMyApplication().getIconsCache().getThemedIcon(R.drawable.ic_arrow_back));
+		toolbar.setNavigationIcon(getMyApplication().getUIUtilities().getThemedIcon(R.drawable.ic_arrow_back));
 		toolbar.setNavigationContentDescription(R.string.shared_string_close);
 		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
 			@Override
@@ -118,9 +118,9 @@ public class ShowRouteInfoDialogFragment extends DialogFragment {
 		});
 
 		((ImageView) view.findViewById(R.id.distance_icon))
-				.setImageDrawable(app.getIconsCache().getThemedIcon(R.drawable.ic_action_route_distance));
+				.setImageDrawable(app.getUIUtilities().getThemedIcon(R.drawable.ic_action_route_distance));
 		((ImageView) view.findViewById(R.id.time_icon))
-				.setImageDrawable(app.getIconsCache().getThemedIcon(R.drawable.ic_action_time_span));
+				.setImageDrawable(app.getUIUtilities().getThemedIcon(R.drawable.ic_action_time_span));
 
 		buildMenuButtons();
 
@@ -337,13 +337,13 @@ public class ShowRouteInfoDialogFragment extends DialogFragment {
 		((TextView) headerView.findViewById(R.id.ascent_text)).setText(asc);
 
 		((ImageView) headerView.findViewById(R.id.average_icon))
-				.setImageDrawable(app.getIconsCache().getThemedIcon(R.drawable.ic_action_altitude_average));
+				.setImageDrawable(app.getUIUtilities().getThemedIcon(R.drawable.ic_action_altitude_average));
 		((ImageView) headerView.findViewById(R.id.range_icon))
-				.setImageDrawable(app.getIconsCache().getThemedIcon(R.drawable.ic_action_altitude_average));
+				.setImageDrawable(app.getUIUtilities().getThemedIcon(R.drawable.ic_action_altitude_average));
 		((ImageView) headerView.findViewById(R.id.descent_icon))
-				.setImageDrawable(app.getIconsCache().getThemedIcon(R.drawable.ic_action_altitude_descent));
+				.setImageDrawable(app.getUIUtilities().getThemedIcon(R.drawable.ic_action_altitude_descent));
 		((ImageView) headerView.findViewById(R.id.ascent_icon))
-				.setImageDrawable(app.getIconsCache().getThemedIcon(R.drawable.ic_action_altitude_ascent));
+				.setImageDrawable(app.getUIUtilities().getThemedIcon(R.drawable.ic_action_altitude_ascent));
 
 		headerView.findViewById(R.id.details_view).setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -415,7 +415,7 @@ public class ShowRouteInfoDialogFragment extends DialogFragment {
 	}
 
 	private void buildMenuButtons() {
-		IconsCache iconsCache = getMyApplication().getIconsCache();
+		UiUtilities iconsCache = getMyApplication().getUIUtilities();
 		ImageButton printRoute = (ImageButton) view.findViewById(R.id.print_route);
 		printRoute.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_gprint_dark));
 		printRoute.setOnClickListener(new View.OnClickListener() {

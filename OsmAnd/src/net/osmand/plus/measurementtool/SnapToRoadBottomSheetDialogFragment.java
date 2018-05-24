@@ -141,7 +141,7 @@ public class SnapToRoadBottomSheetDialogFragment extends android.support.design.
 	}
 
 	private Drawable getContentIcon(@DrawableRes int id) {
-		return getMyApplication().getIconsCache()
+		return getMyApplication().getUIUtilities()
 				.getIcon(id, nightMode ? R.color.ctx_menu_info_text_dark : R.color.on_map_icon_color);
 	}
 

@@ -132,7 +132,7 @@ public class PluginActivity extends OsmandActionBarActivity {
 		Button getButton = (Button)findViewById(R.id.plugin_get);
 		Button settingsButton = (Button)findViewById(R.id.plugin_settings);
 		settingsButton.setCompoundDrawablesWithIntrinsicBounds(
-				getMyApplication().getIconsCache().getThemedIcon(R.drawable.ic_action_settings),
+				getMyApplication().getUIUtilities().getThemedIcon(R.drawable.ic_action_settings),
 				null, null, null);
 		View installHeader = findViewById(R.id.plugin_install_header);
 
@@ -142,7 +142,7 @@ public class PluginActivity extends OsmandActionBarActivity {
 			settingsButton.setVisibility(View.GONE);
 			installHeader.setVisibility(View.VISIBLE);
 			View worldGlobeIcon = installHeader.findViewById(R.id.ic_world_globe);
-			Drawable worldGlobeDrawable = getMyApplication().getIconsCache().getThemedIcon(
+			Drawable worldGlobeDrawable = getMyApplication().getUIUtilities().getThemedIcon(
 					R.drawable.ic_world_globe_dark);
 			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
 				worldGlobeIcon.setBackground(worldGlobeDrawable);

@@ -22,7 +22,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import net.osmand.plus.IconsCache;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -317,7 +317,7 @@ public class QuickActionsWidget extends LinearLayout {
         return (OsmandApplication)(getContext().getApplicationContext());
     }
 
-    private IconsCache getIconsCache(){
-        return getApplication().getIconsCache();
+    private UiUtilities getIconsCache(){
+        return getApplication().getUIUtilities();
     }
 }

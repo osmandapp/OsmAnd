@@ -256,12 +256,12 @@ public class QuickSearchListItem {
 		switch (searchResult.objectType) {
 			case FAVORITE:
 			case FAVORITE_GROUP:
-				return app.getIconsCache().getThemedIcon(R.drawable.ic_small_group);
+				return app.getUIUtilities().getThemedIcon(R.drawable.ic_small_group);
 			case RECENT_OBJ:
 				HistoryEntry historyEntry = (HistoryEntry) searchResult.object;
 				String typeName = historyEntry.getName().getTypeName();
 				if (typeName != null && !typeName.isEmpty()) {
-					return app.getIconsCache().getThemedIcon(R.drawable.ic_small_group);
+					return app.getUIUtilities().getThemedIcon(R.drawable.ic_small_group);
 				} else {
 					return null;
 				}
@@ -359,7 +359,7 @@ public class QuickSearchListItem {
 			case FAVORITE_GROUP:
 				FavoriteGroup group = (FavoriteGroup) searchResult.object;
 				int color = group.color == 0 || group.color == Color.BLACK ? app.getResources().getColor(R.color.color_favorite) : group.color;
-				return app.getIconsCache().getPaintedIcon(R.drawable.ic_action_fav_dark, color | 0xff000000);
+				return app.getUIUtilities().getPaintedIcon(R.drawable.ic_action_fav_dark, color | 0xff000000);
 			case REGION:
 				return getIcon(app, R.drawable.ic_world_globe_dark);
 			case RECENT_OBJ:
@@ -390,7 +390,7 @@ public class QuickSearchListItem {
 	}
 
 	private static Drawable getIcon(OsmandApplication app, int iconId) {
-		return app.getIconsCache().getIcon(iconId,
+		return app.getUIUtilities().getIcon(iconId,
 				app.getSettings().isLightContent() ? R.color.osmand_orange : R.color.osmand_orange_dark);
 	}
 }

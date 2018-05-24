@@ -124,7 +124,7 @@ public class PluginsActivity extends OsmandListActivity {
 
 
 			ImageView pluginOptions = (ImageView) view.findViewById(R.id.plugin_options);
-			pluginOptions.setImageDrawable(getMyApplication().getIconsCache().getThemedIcon(R.drawable.ic_overflow_menu_white));
+			pluginOptions.setImageDrawable(getMyApplication().getUIUtilities().getThemedIcon(R.drawable.ic_overflow_menu_white));
 			pluginOptions.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {

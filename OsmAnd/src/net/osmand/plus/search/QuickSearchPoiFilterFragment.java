@@ -34,7 +34,7 @@ import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiFilter;
 import net.osmand.osm.PoiType;
-import net.osmand.plus.IconsCache;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
@@ -145,7 +145,7 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 		description.setText(filter.getName());
 
 		Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
-		toolbar.setNavigationIcon(app.getIconsCache().getIcon(R.drawable.ic_action_remove_dark));
+		toolbar.setNavigationIcon(app.getUIUtilities().getIcon(R.drawable.ic_action_remove_dark));
 		toolbar.setNavigationContentDescription(R.string.shared_string_close);
 		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
 			@Override
@@ -158,7 +158,7 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 		moreButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				IconsCache iconsCache = app.getIconsCache();
+				UiUtilities iconsCache = app.getUIUtilities();
 				final PopupMenu optionsMenu = new PopupMenu(getContext(), v);
 				DirectionsDialogs.setupPopUpMenuIcon(optionsMenu);
 				MenuItem item;
@@ -235,7 +235,7 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 
 		editText.setVisibility(View.VISIBLE);
 		final ImageView textEditIcon = (ImageView) editTextView.findViewById(R.id.icon);
-		textEditIcon.setImageDrawable(app.getIconsCache().getThemedIcon(R.drawable.ic_action_search_dark));
+		textEditIcon.setImageDrawable(app.getUIUtilities().getThemedIcon(R.drawable.ic_action_search_dark));
 		textEditIcon.setVisibility(View.VISIBLE);
 		editTextView.findViewById(R.id.titleBold).setVisibility(View.GONE);
 		editTextView.findViewById(R.id.titleButton).setVisibility(View.GONE);
@@ -804,7 +804,7 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 				}
 
 				if (item.iconId != 0) {
-					icon.setImageDrawable(app.getIconsCache().getIcon(item.iconId,
+					icon.setImageDrawable(app.getUIUtilities().getIcon(item.iconId,
 							app.getSettings().isLightContent() ? R.color.icon_color : R.color.color_white));
 					icon.setVisibility(View.VISIBLE);
 				} else {
@@ -817,7 +817,7 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 						titleBold.setText(item.text);
 						if (item.expandable) {
 							expandItem.setImageDrawable(item.expanded ?
-									app.getIconsCache().getThemedIcon(R.drawable.ic_action_arrow_up) : app.getIconsCache().getThemedIcon(R.drawable.ic_action_arrow_down));
+									app.getUIUtilities().getThemedIcon(R.drawable.ic_action_arrow_up) : app.getUIUtilities().getThemedIcon(R.drawable.ic_action_arrow_down));
 							expandItem.setVisibility(View.VISIBLE);
 						} else {
 							expandItem.setVisibility(View.GONE);

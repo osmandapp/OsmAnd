@@ -37,9 +37,6 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 	private static final String IS_SORTED = "sorted";
 	private static final String SORTED_BY_TYPE = "sortedByType";
 
-	private Location location;
-	private LatLon latLon;
-	private Float heading;
 	private List<FavouritePoint> favouritePoints;
 	private FavouritesAdapter adapter;
 	private RecyclerView recyclerView;
@@ -49,6 +46,7 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 	private boolean compassUpdateAllowed = true;
 	private boolean target;
 	private boolean intermediate;
+	private float lastHeading;
 
 	@Override
 	public void createMenuItems(final Bundle savedInstanceState) {
@@ -66,16 +64,7 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 		recyclerView = (RecyclerView) View.inflate(new ContextThemeWrapper(getContext(), themeRes),
 				R.layout.recyclerview, null);
 		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-		location = getMyApplication().getLocationProvider().getLastStaleKnownLocation();
 		adapter = new FavouritesAdapter(getMyApplication(), favouritePoints);
-		if (location != null) {
-			latLon = new LatLon(location.getLatitude(), location.getLongitude());
-			adapter.setUseCenter(false);
-		} else {
-			latLon = ((MapActivity) getActivity()).getMapLocation();
-			adapter.setUseCenter(true);
-		}
-		adapter.setLocation(latLon);
 		sortFavourites();
 		final BottomSheetItemTitleWithDescrAndButton[] title = new BottomSheetItemTitleWithDescrAndButton[1];
 		title[0] = (BottomSheetItemTitleWithDescrAndButton) new BottomSheetItemTitleWithDescrAndButton.Builder()
@@ -171,7 +160,6 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 	@Override
 	public void onResume() {
 		super.onResume();
-		adapter.setScreenOrientation(DashLocationFragment.getScreenOrientation(getActivity()));
 		startLocationUpdate();
 	}
 
@@ -184,26 +172,14 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 
 	@Override
 	public void updateLocation(Location location) {
-		boolean newLocation = this.location == null && location != null;
-		boolean locationChanged = this.location != null && location != null
-				&& this.location.getLatitude() != location.getLatitude()
-				&& this.location.getLongitude() != location.getLongitude();
-		if (newLocation || locationChanged) {
-			this.location = location;
-			updateLocationUi();
-		}
+		updateLocationUi();
 	}
 
 	@Override
 	public void updateCompassValue(float value) {
-		// 99 in next line used to one-time initialize arrows (with reference vs. fixed-north direction)
-		// on non-compass devices
-		float lastHeading = heading != null ? heading : 99;
-		heading = value;
-		if (Math.abs(MapUtils.degreesDiff(lastHeading, heading)) > 5) {
+		if (Math.abs(MapUtils.degreesDiff(lastHeading, value)) > 5) {
+			lastHeading = value;
 			updateLocationUi();
-		} else {
-			heading = lastHeading;
 		}
 	}
 
@@ -216,15 +192,6 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 			mapActivity.getMyApplication().runInUIThread(new Runnable() {
 				@Override
 				public void run() {
-					if (location == null) {
-						location = getMyApplication().getLocationProvider().getLastStaleKnownLocation();
-					}
-
-					boolean useCenter = location == null;
-					latLon = useCenter ? mapActivity.getMapLocation() : new LatLon(location.getLatitude(), location.getLongitude());
-					adapter.setUseCenter(useCenter);
-					adapter.setLocation(latLon);
-					adapter.setHeading(useCenter ? -mapActivity.getMapRotate() : heading != null ? heading : 99);
 					adapter.notifyDataSetChanged();
 				}
 			});
@@ -266,6 +233,9 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 
 	private void sortFavourites() {
 		final Collator inst = Collator.getInstance();
+		Location stale = getMyApplication().getLocationProvider().getLastStaleKnownLocation();
+		final LatLon latLon = stale != null ? new LatLon(stale.getLatitude(), stale.getLongitude()) : 
+			getMyApplication().getMapViewTrackingUtilities().getMapLocation();			
 		Collections.sort(favouritePoints, new Comparator<FavouritePoint>() {
 			@Override
 			public int compare(FavouritePoint lhs, FavouritePoint rhs) {

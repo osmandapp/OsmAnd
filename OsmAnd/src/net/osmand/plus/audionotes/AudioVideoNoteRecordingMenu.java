@@ -10,7 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
-import net.osmand.plus.IconsCache;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin.AVActionType;
@@ -124,7 +124,7 @@ public class AudioVideoNoteRecordingMenu {
 
 	public void update() {
 		CurrentRecording recording = plugin.getCurrentRecording();
-		IconsCache iconsCache = plugin.getMapActivity().getMyApplication().getIconsCache();
+		UiUtilities iconsCache = plugin.getMapActivity().getMyApplication().getUIUtilities();
 
 		ImageView leftButtonIcon = (ImageView) view.findViewById(R.id.leftButtonIcon);
 		View leftButtonView = view.findViewById(R.id.leftButtonView);

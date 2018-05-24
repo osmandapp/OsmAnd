@@ -271,7 +271,7 @@ public class WikivoyageExploreActivity extends TabActivity implements DownloadEv
 	}
 
 	protected Drawable getIcon(@DrawableRes int id, @ColorRes int colorId) {
-		return app.getIconsCache().getIcon(id, colorId);
+		return app.getUIUtilities().getIcon(id, colorId);
 	}
 
 	@ColorRes

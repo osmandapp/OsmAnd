@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
-import net.osmand.plus.IconsCache;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.R;
 
 import java.util.List;
@@ -50,7 +50,7 @@ public class MultiSelectionArrayAdapter extends ArrayAdapter<MapMultiSelectionMe
 					}
 				}
 			});
-			IconsCache iconsCache = menu.getMapActivity().getMyApplication().getIconsCache();
+			UiUtilities iconsCache = menu.getMapActivity().getMyApplication().getUIUtilities();
 			final View iconLayout = convertView.findViewById(R.id.context_menu_icon_layout);
 			final ImageView iconView = (ImageView) convertView.findViewById(R.id.context_menu_icon_view);
 			Drawable icon = item.getRightIcon();

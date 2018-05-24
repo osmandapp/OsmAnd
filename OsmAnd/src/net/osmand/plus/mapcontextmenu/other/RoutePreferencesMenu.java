@@ -454,7 +454,7 @@ public class RoutePreferencesMenu {
 					v.findViewById(R.id.description_text).setVisibility(View.GONE);
 					v.findViewById(R.id.select_button).setVisibility(View.GONE);
 					((ImageView) v.findViewById(R.id.icon))
-							.setImageDrawable(app.getIconsCache().getIcon(R.drawable.ic_action_volume_up, !nightMode));
+							.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_volume_up, !nightMode));
 					final CompoundButton btn = (CompoundButton) v.findViewById(R.id.toggle_item);
 					btn.setVisibility(View.VISIBLE);
 					btn.setChecked(!routingHelper.getVoiceRouter().isMute());
@@ -474,7 +474,7 @@ public class RoutePreferencesMenu {
 					View v = mapActivity.getLayoutInflater().inflate(R.layout.switch_select_list_item, null);
 					AndroidUtils.setListItemBackground(mapActivity, v, nightMode);
 					((ImageView) v.findViewById(R.id.icon))
-							.setImageDrawable(app.getIconsCache().getIcon(R.drawable.ic_action_road_works_dark, !nightMode));
+							.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_road_works_dark, !nightMode));
 					v.findViewById(R.id.toggle_item).setVisibility(View.GONE);
 					final TextView btn = (TextView) v.findViewById(R.id.select_button);
 					btn.setTextColor(btn.getLinkTextColors());
@@ -560,7 +560,7 @@ public class RoutePreferencesMenu {
 					final TextView gpxSpinner = (TextView) v.findViewById(R.id.GPXRouteSpinner);
 					AndroidUtils.setTextPrimaryColor(mapActivity, gpxSpinner, nightMode);
 					((ImageView) v.findViewById(R.id.dropDownIcon))
-							.setImageDrawable(app.getIconsCache().getIcon(R.drawable.ic_action_arrow_drop_down, !nightMode));
+							.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_arrow_drop_down, !nightMode));
 					updateSpinnerItems(gpxSpinner);
 					return v;
 				}
@@ -568,7 +568,7 @@ public class RoutePreferencesMenu {
 					View v = mapActivity.getLayoutInflater().inflate(R.layout.layers_list_activity_item, null);
 					AndroidUtils.setListItemBackground(mapActivity, v, nightMode);
 					final ImageView icon = (ImageView) v.findViewById(R.id.icon);
-					icon.setImageDrawable(app.getIconsCache().getIcon(R.drawable.map_action_settings, !nightMode));
+					icon.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.map_action_settings, !nightMode));
 					icon.setVisibility(View.VISIBLE);
 					TextView titleView = (TextView) v.findViewById(R.id.title);
 					titleView.setText(R.string.routing_settings_2);

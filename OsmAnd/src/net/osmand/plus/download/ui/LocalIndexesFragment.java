@@ -21,7 +21,7 @@ import net.osmand.map.ITileSource;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.ItemClickListener;
 import net.osmand.plus.ContextMenuItem;
-import net.osmand.plus.IconsCache;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
@@ -1100,7 +1100,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 
 			public void bindLocalIndexInfo(final LocalIndexInfo child) {
 
-				options.setImageDrawable(ctx.getMyApplication().getIconsCache()
+				options.setImageDrawable(ctx.getMyApplication().getUIUtilities()
 						.getThemedIcon(R.drawable.ic_overflow_menu_white));
 				options.setContentDescription(ctx.getString(R.string.shared_string_more));
 				options.setOnClickListener(new View.OnClickListener() {
@@ -1177,14 +1177,14 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 			}
 
 			private Drawable getContentIcon(DownloadActivity context, int resourceId, int colorId) {
-				return context.getMyApplication().getIconsCache().getIcon(resourceId, colorId);
+				return context.getMyApplication().getUIUtilities().getIcon(resourceId, colorId);
 			}
 		}
 
 	}
 
 	private void openPopUpMenu(View v, final LocalIndexInfo info) {
-		IconsCache iconsCache = getMyApplication().getIconsCache();
+		UiUtilities iconsCache = getMyApplication().getUIUtilities();
 		final PopupMenu optionsMenu = new PopupMenu(getActivity(), v);
 		DirectionsDialogs.setupPopUpMenuIcon(optionsMenu);
 		final boolean restore = info.isBackupedData();

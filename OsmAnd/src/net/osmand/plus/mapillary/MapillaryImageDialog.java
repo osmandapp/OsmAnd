@@ -32,7 +32,7 @@ import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager;
-import net.osmand.plus.IconsCache;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
@@ -85,12 +85,12 @@ public class MapillaryImageDialog extends ContextMenuCardDialog {
 	private double fetchedTileLon = Double.NaN;
 	private List<MapillaryImage> sequenceImages = new ArrayList<>();
 	private AtomicInteger downloadRequestNumber = new AtomicInteger();
-	private IconsCache ic;
+	private UiUtilities ic;
 
 	public MapillaryImageDialog(@NonNull MapActivity mapActivity, @NonNull Bundle bundle) {
 		super(mapActivity, CardDialogType.MAPILLARY);
 		restoreFields(bundle);
-		this.ic = mapActivity.getMyApplication().getIconsCache();
+		this.ic = mapActivity.getMyApplication().getUIUtilities();
 	}
 
 	public MapillaryImageDialog(MapActivity mapActivity, String key, String sKey, String imageUrl,
@@ -104,7 +104,7 @@ public class MapillaryImageDialog extends ContextMenuCardDialog {
 		this.viewerUrl = viewerUrl;
 		this.latLon = latLon;
 		this.ca = ca;
-		this.ic = mapActivity.getMyApplication().getIconsCache();
+		this.ic = mapActivity.getMyApplication().getUIUtilities();
 		this.sync = sync;
 	}
 
@@ -204,7 +204,7 @@ public class MapillaryImageDialog extends ContextMenuCardDialog {
 	@Override
 	protected void createMenuItems(Menu menu) {
 		MenuItem item = menu.add(R.string.open_mapillary)
-				.setIcon(getMapActivity().getMyApplication().getIconsCache().getThemedIcon(
+				.setIcon(getMapActivity().getMyApplication().getUIUtilities().getThemedIcon(
 						R.drawable.ic_action_mapillary));
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override

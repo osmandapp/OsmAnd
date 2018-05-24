@@ -52,7 +52,7 @@ import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItemType;
-import net.osmand.plus.IconsCache;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MapMarkersGroup;
 import net.osmand.plus.OsmandApplication;
@@ -850,7 +850,7 @@ public class TrackPointFragment extends OsmandExpandableListFragment implements 
 		public View getGroupView(final int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
 			View row = convertView;
 			final GpxDisplayGroup group = getGroup(groupPosition);
-			IconsCache iconsCache = app.getIconsCache();
+			UiUtilities iconsCache = app.getUIUtilities();
 			if (row == null) {
 				LayoutInflater inflater = getLayoutInflater();
 				row = inflater.inflate(R.layout.wpt_list_item, parent, false);
@@ -926,7 +926,7 @@ public class TrackPointFragment extends OsmandExpandableListFragment implements 
 				if (groupColor == 0) {
 					groupColor = ContextCompat.getColor(app, R.color.gpx_color_point);
 				}
-				icon.setImageDrawable(app.getIconsCache().getPaintedIcon(R.drawable.ic_action_folder, groupColor | 0xff000000));
+				icon.setImageDrawable(app.getUIUtilities().getPaintedIcon(R.drawable.ic_action_folder, groupColor | 0xff000000));
 				options.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
@@ -1007,7 +1007,7 @@ public class TrackPointFragment extends OsmandExpandableListFragment implements 
 		public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView,
 								 ViewGroup parent) {
 			View row = convertView;
-			IconsCache iconsCache = getMyApplication().getIconsCache();
+			UiUtilities iconsCache = getMyApplication().getUIUtilities();
 			if (row == null) {
 				LayoutInflater inflater = getLayoutInflater();
 				row = inflater.inflate(R.layout.wpt_list_item, parent, false);
@@ -1079,7 +1079,7 @@ public class TrackPointFragment extends OsmandExpandableListFragment implements 
 					} else {
 						description.setVisibility(View.GONE);
 					}
-					icon.setImageDrawable(app.getIconsCache().getThemedIcon(R.drawable.ic_action_marker_dark));
+					icon.setImageDrawable(app.getUIUtilities().getThemedIcon(R.drawable.ic_action_marker_dark));
 				}
 			}
 

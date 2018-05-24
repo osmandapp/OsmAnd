@@ -27,7 +27,7 @@ import net.osmand.plus.GPXUtilities.TrkSegment;
 import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
-import net.osmand.plus.IconsCache;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -450,7 +450,7 @@ public class TrackDetailsMenu {
 		});
 
 		final OsmandApplication app = mapActivity.getMyApplication();
-		final IconsCache ic = app.getIconsCache();
+		final UiUtilities ic = app.getUIUtilities();
 
 		GpxUiHelper.setupGPXChart(app, chart, 4);
 

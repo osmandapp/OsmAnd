@@ -67,7 +67,7 @@ import net.osmand.plus.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.plus.GPXUtilities.Speed;
 import net.osmand.plus.GPXUtilities.TrkSegment;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
-import net.osmand.plus.IconsCache;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
@@ -327,7 +327,7 @@ public class GpxUiHelper {
 											final List<GPXInfo> list,
 											final ContextMenuAdapter adapter) {
 		final OsmandApplication app = (OsmandApplication) activity.getApplication();
-		final IconsCache iconsCache = app.getIconsCache();
+		final UiUtilities iconsCache = app.getUIUtilities();
 		final File dir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
 		AlertDialog.Builder builder = new AlertDialog.Builder(activity);
 		final int layout = R.layout.list_menu_item_native_singlechoice;
@@ -747,13 +747,13 @@ public class GpxUiHelper {
 			v.findViewById(R.id.unknown_section).setVisibility(View.GONE);
 			ImageView distanceI = (ImageView) v.findViewById(R.id.distance_icon);
 			distanceI.setVisibility(View.VISIBLE);
-			distanceI.setImageDrawable(app.getIconsCache().getThemedIcon(R.drawable.ic_small_distance));
+			distanceI.setImageDrawable(app.getUIUtilities().getThemedIcon(R.drawable.ic_small_distance));
 			ImageView pointsI = (ImageView) v.findViewById(R.id.points_icon);
 			pointsI.setVisibility(View.VISIBLE);
-			pointsI.setImageDrawable(app.getIconsCache().getThemedIcon(R.drawable.ic_small_point));
+			pointsI.setImageDrawable(app.getUIUtilities().getThemedIcon(R.drawable.ic_small_point));
 			ImageView timeI = (ImageView) v.findViewById(R.id.time_icon);
 			timeI.setVisibility(View.VISIBLE);
-			timeI.setImageDrawable(app.getIconsCache().getThemedIcon(R.drawable.ic_small_time));
+			timeI.setImageDrawable(app.getUIUtilities().getThemedIcon(R.drawable.ic_small_time));
 			TextView time = (TextView) v.findViewById(R.id.time);
 			TextView distance = (TextView) v.findViewById(R.id.distance);
 			TextView pointsCount = (TextView) v.findViewById(R.id.points_count);
@@ -817,9 +817,9 @@ public class GpxUiHelper {
 		}
 		int color = GpxAppearanceAdapter.parseTrackColor(renderer, prefColorValue);
 		if (color == -1) {
-			colorImageView.setImageDrawable(app.getIconsCache().getThemedIcon(R.drawable.ic_action_circle));
+			colorImageView.setImageDrawable(app.getUIUtilities().getThemedIcon(R.drawable.ic_action_circle));
 		} else {
-			colorImageView.setImageDrawable(app.getIconsCache().getPaintedIcon(R.drawable.ic_action_circle, color));
+			colorImageView.setImageDrawable(app.getUIUtilities().getPaintedIcon(R.drawable.ic_action_circle, color));
 		}
 	}
 
@@ -1610,7 +1610,7 @@ public class GpxUiHelper {
 		}
 
 		public Drawable getImageDrawable(@NonNull OsmandApplication app) {
-			return app.getIconsCache().getThemedIcon(imageId);
+			return app.getUIUtilities().getThemedIcon(imageId);
 		}
 
 		public static String getName(@NonNull Context ctx, @NonNull GPXDataSetType[] types) {
@@ -1663,7 +1663,7 @@ public class GpxUiHelper {
 		}
 
 		public Drawable getImageDrawable(OsmandApplication app) {
-			return app.getIconsCache().getThemedIcon(imageId);
+			return app.getUIUtilities().getThemedIcon(imageId);
 		}
 	}
 

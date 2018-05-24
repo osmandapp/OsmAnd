@@ -76,7 +76,7 @@ public abstract class AbstractCard {
 
 		final Toolbar topBar = new Toolbar(ctx);
 		topBar.setClickable(true);
-		Drawable back = app.getIconsCache().getIcon(R.drawable.ic_action_remove_dark);
+		Drawable back = app.getUIUtilities().getIcon(R.drawable.ic_action_remove_dark);
 		topBar.setNavigationIcon(back);
 		topBar.setNavigationContentDescription(R.string.shared_string_close);
 		topBar.setTitle(title);
