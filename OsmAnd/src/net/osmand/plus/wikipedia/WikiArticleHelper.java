@@ -326,7 +326,7 @@ public class WikiArticleHelper {
 	}
 
 	public static String buildTravelUrl(String url, String lang) {
-		String query = url.substring(url.indexOf(':') + 1);
-		return "https://osmand.net/travel?query=" + query + "&lang=" + lang;
+		String title = url.substring(url.indexOf(':') + 1);
+		return "https://osmand.net/travel?query=" + title + "&lang=" + lang;
 	}
 }
