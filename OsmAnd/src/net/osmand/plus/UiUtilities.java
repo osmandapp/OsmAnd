@@ -4,7 +4,6 @@ import gnu.trove.map.hash.TLongObjectHashMap;
 import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.plus.views.DirectionDrawable;
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
@@ -172,7 +171,7 @@ public class UiUtilities {
 			if (fromLoc == null || h == null || toLoc == null) {
 				dd.setAngle(0);
 			} else {
-				float orientation = (cache == null ? 0 : -cache.screenOrientation) ;
+				float orientation = (cache == null ? 0 : cache.screenOrientation) ;
 				dd.setAngle(mes[1] - h + 180 + orientation);
 			}
 			if (newImage) {
