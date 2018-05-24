@@ -1,11 +1,13 @@
 package net.osmand.plus.mapcontextmenu;
 
 import android.graphics.drawable.Drawable;
+import android.support.annotation.Nullable;
 
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.GeocodingLookupService;
 import net.osmand.plus.GeocodingLookupService.AddressLookupRequest;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.util.Algorithms;
 
@@ -24,6 +26,7 @@ public abstract class MenuTitleController {
 	protected String searchAddressStr;
 	protected String addressNotFoundStr;
 
+	@Nullable
 	public abstract MapActivity getMapActivity();
 
 	public abstract LatLon getLatLon();
@@ -33,6 +36,16 @@ public abstract class MenuTitleController {
 	public abstract Object getObject();
 
 	public abstract MenuController getMenuController();
+
+	@Nullable
+	public OsmandApplication getMyApplication() {
+		MapActivity activity = getMapActivity();
+		if (activity != null) {
+			return activity.getMyApplication();
+		} else {
+			return null;
+		}
+	}
 
 	public String getTitleStr() {
 		if (displayStreetNameInTitle() && searchingAddress()) {
@@ -47,8 +60,9 @@ public abstract class MenuTitleController {
 	}
 
 	public void cancelSearchAddress() {
-		if (addressLookupRequest != null) {
-			getMapActivity().getMyApplication().getGeocodingLookupService().cancel(addressLookupRequest);
+		OsmandApplication app = getMyApplication();
+		if (addressLookupRequest != null && app != null) {
+			app.getGeocodingLookupService().cancel(addressLookupRequest);
 			addressLookupRequest = null;
 			onSearchAddressDone();
 		}
@@ -99,17 +113,20 @@ public abstract class MenuTitleController {
 	}
 
 	protected void initTitle() {
-		searchAddressStr = PointDescription.getSearchAddressStr(getMapActivity());
-		addressNotFoundStr = PointDescription.getAddressNotFoundStr(getMapActivity());
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			searchAddressStr = PointDescription.getSearchAddressStr(mapActivity);
+			addressNotFoundStr = PointDescription.getAddressNotFoundStr(mapActivity);
 
-		if (searchingAddress()) {
-			cancelSearchAddress();
-		}
+			if (searchingAddress()) {
+				cancelSearchAddress();
+			}
 
-		acquireIcons();
-		acquireNameAndType();
-		if (needStreetName()) {
-			acquireStreetName();
+			acquireIcons();
+			acquireNameAndType();
+			if (needStreetName()) {
+				acquireStreetName();
+			}
 		}
 	}
 
@@ -167,10 +184,11 @@ public abstract class MenuTitleController {
 		addressLookupRequest = new AddressLookupRequest(getLatLon(), new GeocodingLookupService.OnAddressLookupResult() {
 			@Override
 			public void geocodingDone(String address) {
-				if (addressLookupRequest != null) {
+				MapActivity mapActivity = getMapActivity();
+				if (addressLookupRequest != null && mapActivity != null) {
 					addressLookupRequest = null;
 					if (Algorithms.isEmpty(address)) {
-						streetStr = PointDescription.getAddressNotFoundStr(getMapActivity());
+						streetStr = PointDescription.getAddressNotFoundStr(mapActivity);
 					} else {
 						streetStr = address;
 					}
@@ -189,7 +207,10 @@ public abstract class MenuTitleController {
 			}
 		});
 
-		getMapActivity().getMyApplication().getGeocodingLookupService().lookupAddress(addressLookupRequest);
+		OsmandApplication app = getMyApplication();
+		if (app != null) {
+			app.getGeocodingLookupService().lookupAddress(addressLookupRequest);
+		}
 	}
 
 	protected void onSearchAddressDone() {

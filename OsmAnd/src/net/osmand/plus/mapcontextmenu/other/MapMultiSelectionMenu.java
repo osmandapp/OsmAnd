@@ -1,6 +1,7 @@
 package net.osmand.plus.mapcontextmenu.other;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 
 import net.osmand.data.LatLon;
@@ -12,7 +13,6 @@ import net.osmand.plus.mapcontextmenu.MenuController.MenuType;
 import net.osmand.plus.mapcontextmenu.MenuTitleController;
 import net.osmand.plus.views.ContextMenuLayer;
 import net.osmand.plus.views.ContextMenuLayer.IContextMenuProvider;
-import net.osmand.plus.views.OsmandMapTileView;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -34,21 +34,29 @@ public class MapMultiSelectionMenu extends BaseMenuController {
 		private Object object;
 		private int order;
 
+		@Nullable
 		private MapActivity mapActivity;
+		@Nullable
 		private MenuController controller;
 
-		public MenuObject(LatLon latLon, PointDescription pointDescription, Object object, MapActivity mapActivity) {
+		MenuObject(LatLon latLon, PointDescription pointDescription, Object object, @Nullable MapActivity mapActivity) {
 			this.latLon = latLon;
 			this.pointDescription = pointDescription;
 			this.object = object;
 			this.mapActivity = mapActivity;
-			init();
+			if (mapActivity != null) {
+				init();
+			}
 		}
 
 		protected void init() {
 			controller = MenuController.getMenuController(mapActivity, latLon, pointDescription, object, MenuType.MULTI_LINE);
 			controller.setActive(true);
 			initTitle();
+		}
+
+		protected void deinit() {
+			controller = null;
 		}
 
 		@Override
@@ -66,6 +74,7 @@ public class MapMultiSelectionMenu extends BaseMenuController {
 			return object;
 		}
 
+		@Nullable
 		@Override
 		public MapActivity getMapActivity() {
 			return mapActivity;
@@ -82,15 +91,19 @@ public class MapMultiSelectionMenu extends BaseMenuController {
 		}
 	}
 
-	public MapMultiSelectionMenu(MapActivity mapActivity) {
+	public MapMultiSelectionMenu(@NonNull MapActivity mapActivity) {
 		super(mapActivity);
 	}
 
-	public void setMapActivity(MapActivity mapActivity) {
+	public void setMapActivity(@Nullable MapActivity mapActivity) {
 		super.setMapActivity(mapActivity);
 		for (MenuObject o : objects) {
 			o.mapActivity = mapActivity;
-			o.init();
+			if (mapActivity != null) {
+				o.init();
+			} else {
+				o.deinit();
+			}
 		}
 	}
 
@@ -154,15 +167,6 @@ public class MapMultiSelectionMenu extends BaseMenuController {
 		if (isVisible()) {
 			hide();
 		}
-
-/*
-		for (Map.Entry<Object, IContextMenuProvider> e : selectedObjects.entrySet()) {
-			if (e.getValue() instanceof ContextMenuLayer.IContextMenuProviderSelection) {
-				((ContextMenuLayer.IContextMenuProviderSelection) e.getValue()).setSelectedObject(e.getKey());
-			}
-		}
-*/
-
 		this.latLon = latLon;
 		createCollection(selectedObjects);
 		updateNightMode();

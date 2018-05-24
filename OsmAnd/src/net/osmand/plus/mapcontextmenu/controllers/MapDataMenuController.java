@@ -354,7 +354,8 @@ public class MapDataMenuController extends MenuController {
 
 	@Override
 	public void updateData() {
-		if (indexItem == null) {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null && indexItem == null) {
 			otherIndexItems = new LinkedList<>(downloadThread.getIndexes().getIndexItems(mapObject.getWorldRegion()));
 			Iterator<IndexItem> it = otherIndexItems.iterator();
 			while (it.hasNext()) {
@@ -374,19 +375,19 @@ public class MapDataMenuController extends MenuController {
 		leftDownloadButtonController.visible = true;
 		leftDownloadButtonController.updateStateListDrawableIcon(R.drawable.ic_action_import, true);
 		if (backuped) {
-			leftDownloadButtonController.caption = getMapActivity().getString(R.string.local_index_mi_restore);
+			leftDownloadButtonController.caption = mapActivity.getString(R.string.local_index_mi_restore);
 		} else if (indexItem != null) {
 			if ((indexItem.getType() == DownloadActivityType.SRTM_COUNTRY_FILE
 					|| indexItem.getType() == DownloadActivityType.HILLSHADE_FILE)
 					&& srtmDisabled) {
-				leftDownloadButtonController.caption = getMapActivity().getString(R.string.get_plugin);
+				leftDownloadButtonController.caption = mapActivity.getString(R.string.get_plugin);
 				leftDownloadButtonController.clearIcon(true);
 			} else if (indexItem.isOutdated()) {
-				leftDownloadButtonController.caption = getMapActivity().getString(R.string.shared_string_update);
+				leftDownloadButtonController.caption = mapActivity.getString(R.string.shared_string_update);
 			} else if (!downloaded) {
-				leftDownloadButtonController.caption = getMapActivity().getString(R.string.shared_string_download);
+				leftDownloadButtonController.caption = mapActivity.getString(R.string.shared_string_download);
 			} else if (isLiveUpdatesOn()) {
-				leftDownloadButtonController.caption = getMapActivity().getString(R.string.live_update);
+				leftDownloadButtonController.caption = mapActivity.getString(R.string.live_update);
 			} else {
 				leftDownloadButtonController.visible = false;
 			}
@@ -399,7 +400,7 @@ public class MapDataMenuController extends MenuController {
 				|| (otherLocalIndexInfos != null && otherLocalIndexInfos.size() > 0);
 
 		boolean internetConnectionAvailable =
-				getMapActivity().getMyApplication().getSettings().isInternetConnectionAvailable();
+				mapActivity.getMyApplication().getSettings().isInternetConnectionAvailable();
 		boolean downloadIndexes = internetConnectionAvailable
 				&& !downloadThread.getIndexes().isDownloadedFromInternet
 				&& !downloadThread.getIndexes().downloadFromInternetFailed;
@@ -417,21 +418,21 @@ public class MapDataMenuController extends MenuController {
 			double mb = indexItem.getArchiveSizeMB();
 			String v;
 			if (titleProgressController.progress != -1) {
-				v = getMapActivity().getString(R.string.value_downloaded_of_max, mb * titleProgressController.progress / 100, mb);
+				v = mapActivity.getString(R.string.value_downloaded_of_max, mb * titleProgressController.progress / 100, mb);
 			} else {
-				v = getMapActivity().getString(R.string.file_size_in_mb, mb);
+				v = mapActivity.getString(R.string.file_size_in_mb, mb);
 			}
 			if (indexItem.getType() == DownloadActivityType.ROADS_FILE) {
-				titleProgressController.caption = indexItem.getType().getString(getMapActivity()) + " • " + v;
+				titleProgressController.caption = indexItem.getType().getString(mapActivity) + " • " + v;
 			} else {
 				titleProgressController.caption = v;
 			}
 			titleProgressController.visible = true;
 		} else if (downloadIndexes) {
-			titleProgressController.setIndexesDownloadMode();
+			titleProgressController.setIndexesDownloadMode(mapActivity);
 			titleProgressController.visible = true;
 		} else if (!internetConnectionAvailable) {
-			titleProgressController.setNoInternetConnectionMode();
+			titleProgressController.setNoInternetConnectionMode(mapActivity);
 			titleProgressController.visible = true;
 		} else {
 			titleProgressController.visible = false;

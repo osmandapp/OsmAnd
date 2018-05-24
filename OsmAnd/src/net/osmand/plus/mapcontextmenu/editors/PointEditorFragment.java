@@ -8,7 +8,9 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -42,12 +44,13 @@ public abstract class PointEditorFragment extends BaseOsmAndFragment {
 
 		view = inflater.inflate(R.layout.point_editor_fragment, container, false);
 
-		getEditor().updateLandscapePortrait();
+		getEditor().updateLandscapePortrait(requireActivity());
 		getEditor().updateNightMode();
 
 		Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
 		toolbar.setTitle(getToolbarTitle());
-		toolbar.setNavigationIcon(getMyApplication().getIconsCache().getIcon(R.drawable.ic_arrow_back));
+		OsmandApplication app = requireMyApplication();
+		toolbar.setNavigationIcon(app.getIconsCache().getIcon(R.drawable.ic_arrow_back));
 		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
 		toolbar.setTitleTextColor(getResources().getColor(getResIdFromAttribute(getMapActivity(), R.attr.pstsTextColor)));
 		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -139,7 +142,7 @@ public abstract class PointEditorFragment extends BaseOsmAndFragment {
 		ImageView descriptionImage = (ImageView) view.findViewById(R.id.description_image);
 		descriptionImage.setImageDrawable(getRowIcon(R.drawable.ic_action_note_dark));
 
-		if (getMyApplication().accessibilityEnabled()) {
+		if (app.accessibilityEnabled()) {
 			nameCaption.setFocusable(true);
 			categoryCaption.setFocusable(true);
 			nameEdit.setHint(R.string.access_hint_enter_name);
@@ -161,7 +164,10 @@ public abstract class PointEditorFragment extends BaseOsmAndFragment {
 	@Override
 	public void onStart() {
 		super.onStart();
-		getMapActivity().getContextMenu().setBaseFragmentVisibility(false);
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			mapActivity.getContextMenu().setBaseFragmentVisibility(false);
+		}
 	}
 
 	@Override
@@ -178,7 +184,10 @@ public abstract class PointEditorFragment extends BaseOsmAndFragment {
 	public void onStop() {
 		super.onStop();
 		hideKeyboard();
-		getMapActivity().getContextMenu().setBaseFragmentVisibility(true);
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			mapActivity.getContextMenu().setBaseFragmentVisibility(true);
+		}
 	}
 
 	@Override
@@ -200,13 +209,16 @@ public abstract class PointEditorFragment extends BaseOsmAndFragment {
 	}
 
 	private void hideKeyboard() {
-		InputMethodManager inputMethodManager = (InputMethodManager) getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
-		if (inputMethodManager != null) {
-			View currentFocus = getActivity().getCurrentFocus();
-			if (currentFocus != null) {
-				IBinder windowToken = currentFocus.getWindowToken();
-				if (windowToken != null) {
-					inputMethodManager.hideSoftInputFromWindow(windowToken, 0);
+		FragmentActivity activity = getActivity();
+		if (activity != null) {
+			InputMethodManager inputMethodManager = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
+			if (inputMethodManager != null) {
+				View currentFocus = activity.getCurrentFocus();
+				if (currentFocus != null) {
+					IBinder windowToken = currentFocus.getWindowToken();
+					if (windowToken != null) {
+						inputMethodManager.hideSoftInputFromWindow(windowToken, 0);
+					}
 				}
 			}
 		}
@@ -252,10 +264,13 @@ public abstract class PointEditorFragment extends BaseOsmAndFragment {
 		return getString(R.string.shared_string_none);
 	}
 
+	@Nullable
 	protected MapActivity getMapActivity() {
 		return (MapActivity) getActivity();
 	}
 
+	@Nullable
+	@Override
 	protected OsmandApplication getMyApplication() {
 		if (getActivity() == null) {
 			return null;
@@ -268,11 +283,14 @@ public abstract class PointEditorFragment extends BaseOsmAndFragment {
 	}
 
 	public void dismiss(boolean includingMenu) {
-		if (includingMenu) {
-			getMapActivity().getSupportFragmentManager().popBackStack();
-			getMapActivity().getContextMenu().close();
-		} else {
-			getMapActivity().getSupportFragmentManager().popBackStack();
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			if (includingMenu) {
+				mapActivity.getSupportFragmentManager().popBackStack();
+				mapActivity.getContextMenu().close();
+			} else {
+				mapActivity.getSupportFragmentManager().popBackStack();
+			}
 		}
 	}
 
