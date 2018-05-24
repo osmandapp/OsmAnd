@@ -61,6 +61,7 @@ public class DiscountHelper {
 		pms.put("version", Version.getFullVersion(app));
 		pms.put("nd", app.getAppInitializer().getFirstInstalledDays() +"");
 		pms.put("ns", app.getAppInitializer().getNumberOfStarts() + "");
+		pms.put("lang", app.getLanguage() + "");
 		try {
 			pms.put("aid", Secure.getString(app.getContentResolver(), Secure.ANDROID_ID));
 		} catch (Exception e) {
