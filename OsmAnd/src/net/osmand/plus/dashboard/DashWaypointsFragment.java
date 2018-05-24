@@ -150,7 +150,7 @@ public class DashWaypointsFragment extends DashLocationFragment {
 				id = R.drawable.list_destination;
 			}
 
-			((ImageView) view.findViewById(R.id.favourite_icon)).setImageDrawable(getMyApplication().getIconsCache()
+			((ImageView) view.findViewById(R.id.favourite_icon)).setImageDrawable(getMyApplication().getUIUtilities()
 					.getIcon(id, 0));
 			DashLocationView dv = new DashLocationView(direction, label, new LatLon(point.getLatitude(),
 					point.getLongitude()));
@@ -161,7 +161,7 @@ public class DashWaypointsFragment extends DashLocationFragment {
 			options.setVisibility(View.VISIBLE);
 			final boolean optionsVisible = (SHOW_ALL && getMyApplication().getTargetPointsHelper().getIntermediatePoints().size() > 0); 
 			
-			options.setImageDrawable(getMyApplication().getIconsCache().
+			options.setImageDrawable(getMyApplication().getUIUtilities().
 					getThemedIcon(optionsVisible ? R.drawable.ic_overflow_menu_white :
 							R.drawable.ic_action_remove_dark));
 			options.setOnClickListener(new View.OnClickListener() {
@@ -176,7 +176,7 @@ public class DashWaypointsFragment extends DashLocationFragment {
 			});
 			
 			ImageButton navigate =  ((ImageButton)view.findViewById(R.id.navigate_to));
-			navigate.setImageDrawable(getMyApplication().getIconsCache().
+			navigate.setImageDrawable(getMyApplication().getUIUtilities().
 					getThemedIcon(R.drawable.ic_action_gdirections_dark));
 			navigate.setVisibility(target? View.VISIBLE : View.GONE);
 			navigate.setOnClickListener(new View.OnClickListener() {
@@ -241,7 +241,7 @@ public class DashWaypointsFragment extends DashLocationFragment {
 			if (point.index > 0 || target) {
 				final int ind = target ? allTargets.size() - 1 : point.index;
 				item = optionsMenu.getMenu().add(R.string.waypoint_visit_before)
-						.setIcon(getMyApplication().getIconsCache().
+						.setIcon(getMyApplication().getUIUtilities().
 								getThemedIcon(R.drawable.ic_action_up_dark));
 				item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 					@Override
@@ -256,7 +256,7 @@ public class DashWaypointsFragment extends DashLocationFragment {
 			}
 			if (!target) {
 				item = optionsMenu.getMenu().add(R.string.waypoint_visit_after)
-						.setIcon(getMyApplication().getIconsCache().
+						.setIcon(getMyApplication().getUIUtilities().
 								getThemedIcon(R.drawable.ic_action_down_dark));
 				item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 					@Override
@@ -271,7 +271,7 @@ public class DashWaypointsFragment extends DashLocationFragment {
 			}
 		}
 		item = optionsMenu.getMenu().add(
-				R.string.shared_string_remove).setIcon(getMyApplication().getIconsCache().
+				R.string.shared_string_remove).setIcon(getMyApplication().getUIUtilities().
 				getThemedIcon(R.drawable.ic_action_remove_dark));
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override

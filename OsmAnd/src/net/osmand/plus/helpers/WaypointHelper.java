@@ -13,7 +13,7 @@ import net.osmand.data.LocationPoint;
 import net.osmand.data.PointDescription;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.ApplicationMode;
-import net.osmand.plus.IconsCache;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings.MetricsConstants;
@@ -704,7 +704,7 @@ public class WaypointHelper {
 				return null;
 
 			} else if (type == TARGETS) {
-				IconsCache iconsCache = app.getIconsCache();
+				UiUtilities iconsCache = app.getUIUtilities();
 				if (((TargetPoint) point).start) {
 					if (app.getTargetPointsHelper().getPointToStart() == null) {
 						return iconsCache.getIcon(R.drawable.ic_action_location_color, 0);

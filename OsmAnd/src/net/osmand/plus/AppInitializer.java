@@ -13,7 +13,6 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Build;
 import android.support.v7.app.AlertDialog;
-
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
@@ -27,6 +26,7 @@ import net.osmand.plus.activities.DayNightHelper;
 import net.osmand.plus.activities.LocalIndexHelper;
 import net.osmand.plus.activities.LocalIndexInfo;
 import net.osmand.plus.activities.SavingTrackHelper;
+import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.ui.AbstractLoadLocalIndexTask;
 import net.osmand.plus.helpers.AvoidSpecificRoads;
@@ -67,7 +67,6 @@ import java.util.Locale;
 import java.util.Random;
 
 import btools.routingapp.BRouterServiceConnection;
-
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.getPendingIntent;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceLastCheck;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceLiveUpdatesOn;
@@ -448,6 +447,7 @@ public class AppInitializer implements IProgress {
 		app.mapMarkersDbHelper = startupInit(new MapMarkersDbHelper(app), MapMarkersDbHelper.class);
 		app.mapMarkersHelper = startupInit(new MapMarkersHelper(app), MapMarkersHelper.class);
 		app.searchUICore = startupInit(new QuickSearchHelper(app), QuickSearchHelper.class);
+		app.mapViewTrackingUtilities = startupInit(new MapViewTrackingUtilities(app), MapViewTrackingUtilities.class); 
 		app.travelDbHelper = new TravelDbHelper(app);
 		if (app.getSettings().SELECTED_TRAVEL_BOOK.get() != null) {
 			app.travelDbHelper.initTravelBooks();

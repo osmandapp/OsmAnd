@@ -135,9 +135,9 @@ public class SubscriptionFragment extends BaseOsmAndDialogFragment implements In
 		View view = inflater.inflate(R.layout.subscription_fragment, container, false);
 		ImageButton closeButton = (ImageButton) view.findViewById(R.id.closeButton);
 		if (editMode) {
-			closeButton.setImageDrawable(getMyApplication().getIconsCache().getIcon(R.drawable.ic_action_mode_back));
+			closeButton.setImageDrawable(getMyApplication().getUIUtilities().getIcon(R.drawable.ic_action_mode_back));
 		} else {
-			closeButton.setImageDrawable(getMyApplication().getIconsCache().getIcon(R.drawable.ic_action_remove_dark));
+			closeButton.setImageDrawable(getMyApplication().getUIUtilities().getIcon(R.drawable.ic_action_remove_dark));
 		}
 		closeButton.setOnClickListener(new View.OnClickListener() {
 			@Override

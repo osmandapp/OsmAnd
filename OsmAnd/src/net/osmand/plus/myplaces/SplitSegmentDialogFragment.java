@@ -32,7 +32,7 @@ import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItemType;
-import net.osmand.plus.IconsCache;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
@@ -62,7 +62,7 @@ public class SplitSegmentDialogFragment extends DialogFragment {
 	private List<Double> distanceSplit = new ArrayList<>();
 	private TIntArrayList timeSplit = new TIntArrayList();
 	private int selectedSplitInterval;
-	private IconsCache ic;
+	private UiUtilities ic;
 	private int minMaxSpeedLayoutWidth;
 	private Paint minMaxSpeedPaint;
 	private Rect minMaxSpeedTextBounds;
@@ -73,7 +73,7 @@ public class SplitSegmentDialogFragment extends DialogFragment {
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		app = getMyApplication();
-		ic = app.getIconsCache();
+		ic = app.getUIUtilities();
 		boolean isLightTheme = app.getSettings().OSMAND_THEME.get() == OsmandSettings.OSMAND_LIGHT_THEME;
 		int themeId = isLightTheme ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme;
 		setStyle(STYLE_NO_FRAME, themeId);
@@ -109,7 +109,7 @@ public class SplitSegmentDialogFragment extends DialogFragment {
 		if (trackActivityActionBar != null) {
 			titleTextView.setText(trackActivityActionBar.getTitle());
 		}
-		toolbar.setNavigationIcon(getMyApplication().getIconsCache().getIcon(R.drawable.ic_arrow_back));
+		toolbar.setNavigationIcon(getMyApplication().getUIUtilities().getIcon(R.drawable.ic_arrow_back));
 		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
 		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
 			@Override
@@ -254,7 +254,7 @@ public class SplitSegmentDialogFragment extends DialogFragment {
 		int color = app.getResources().getColor(colorId);
 		title.setTextColor(color);
 		text.setTextColor(color);
-		img.setImageDrawable(app.getIconsCache().getIcon(R.drawable.ic_action_arrow_drop_down, colorId));
+		img.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_arrow_drop_down, colorId));
 	}
 
 	private void updateSplitIntervalView(View view) {

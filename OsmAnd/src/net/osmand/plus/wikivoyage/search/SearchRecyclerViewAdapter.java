@@ -139,7 +139,7 @@ public class SearchRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
 						: R.drawable.wikivoyage_search_placeholder
 		);
 		if (Build.VERSION.SDK_INT < 21 && res != null) {
-			res.setDrawableByLayerId(R.id.placeholder_icon, app.getIconsCache().getIcon(
+			res.setDrawableByLayerId(R.id.placeholder_icon, app.getUIUtilities().getIcon(
 					history ? R.drawable.ic_action_history : R.drawable.ic_action_placeholder_city,
 					R.color.icon_color
 			));

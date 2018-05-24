@@ -44,7 +44,7 @@ public abstract class ActionBarPreferenceActivity extends AppCompatPreferenceAct
 			shadowView = null;
 		}
 		tb.setClickable(true);
-		tb.setNavigationIcon(((OsmandApplication) getApplication()).getIconsCache().getIcon(R.drawable.ic_arrow_back));
+		tb.setNavigationIcon(((OsmandApplication) getApplication()).getUIUtilities().getIcon(R.drawable.ic_arrow_back));
 		tb.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
 		tb.setBackgroundColor(getResources().getColor(getResIdFromAttribute(this, R.attr.pstsTabBackground)));
 		tb.setTitleTextColor(getResources().getColor(getResIdFromAttribute(this, R.attr.pstsTextColor)));

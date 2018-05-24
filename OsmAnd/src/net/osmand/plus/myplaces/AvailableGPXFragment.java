@@ -60,7 +60,7 @@ import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
-import net.osmand.plus.IconsCache;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
@@ -222,7 +222,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		final boolean isRecording = app.getSettings().SAVE_GLOBAL_TRACK_TO_GPX.get();
 
 		ImageView icon = (ImageView) currentGpxView.findViewById(R.id.icon);
-		icon.setImageDrawable(app.getIconsCache().getIcon(R.drawable.monitoring_rec_big));
+		icon.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.monitoring_rec_big));
 		icon.setVisibility(selectionMode && showOnMapMode ? View.GONE : View.VISIBLE);
 
 		final boolean light = app.getSettings().isLightContent();
@@ -234,14 +234,14 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 			TextView segmentTime = (TextView) currentGpxView.findViewById(R.id.segment_time);
 			segmentTime.setText(OsmAndFormatter.getFormattedDurationShort((int)(sth.getDuration() / 1000)));
 			segmentTime.setVisibility(View.VISIBLE);
-			stop.setCompoundDrawablesWithIntrinsicBounds(app.getIconsCache()
+			stop.setCompoundDrawablesWithIntrinsicBounds(app.getUIUtilities()
 					.getIcon(R.drawable.ic_action_rec_stop, light ? R.color.color_dialog_buttons_light : R.color.color_dialog_buttons_dark), null, null, null);
 			stop.setText(app.getString(R.string.shared_string_control_stop));
 			stop.setContentDescription(app.getString(R.string.gpx_monitoring_stop));
 		} else {
 			currentGpxView.findViewById(R.id.segment_time_div).setVisibility(View.GONE);
 			currentGpxView.findViewById(R.id.segment_time).setVisibility(View.GONE);
-			stop.setCompoundDrawablesWithIntrinsicBounds(app.getIconsCache()
+			stop.setCompoundDrawablesWithIntrinsicBounds(app.getUIUtilities()
 					.getIcon(R.drawable.ic_action_rec_start, light ? R.color.color_dialog_buttons_light : R.color.color_dialog_buttons_dark), null, null, null);
 			stop.setText(app.getString(R.string.shared_string_record));
 			stop.setContentDescription(app.getString(R.string.gpx_monitoring_start));
@@ -259,7 +259,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 			}
 		});
 		Button save = (Button) currentGpxView.findViewById(R.id.save_button);
-		save.setCompoundDrawablesWithIntrinsicBounds(app.getIconsCache()
+		save.setCompoundDrawablesWithIntrinsicBounds(app.getUIUtilities()
 				.getIcon(R.drawable.ic_action_gsave_dark, light ? R.color.color_dialog_buttons_light : R.color.color_dialog_buttons_dark), null, null, null);
 		save.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -379,9 +379,9 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 
 	public void createCurrentTrackView() {
 		ImageView distanceI = (ImageView) currentGpxView.findViewById(R.id.distance_icon);
-		distanceI.setImageDrawable(app.getIconsCache().getThemedIcon(R.drawable.ic_small_distance));
+		distanceI.setImageDrawable(app.getUIUtilities().getThemedIcon(R.drawable.ic_small_distance));
 		ImageView pointsI = (ImageView) currentGpxView.findViewById(R.id.points_icon);
-		pointsI.setImageDrawable(app.getIconsCache().getThemedIcon(R.drawable.ic_small_point));
+		pointsI.setImageDrawable(app.getUIUtilities().getThemedIcon(R.drawable.ic_small_point));
 		updateCurrentTrack();
 	}
 
@@ -1069,7 +1069,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 
 			ImageView icon = (ImageView) v.findViewById(R.id.icon);
 			ImageButton options = (ImageButton) v.findViewById(R.id.options);
-			options.setImageDrawable(getMyApplication().getIconsCache().getThemedIcon(R.drawable.ic_overflow_menu_white));
+			options.setImageDrawable(getMyApplication().getUIUtilities().getThemedIcon(R.drawable.ic_overflow_menu_white));
 			options.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
@@ -1176,7 +1176,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 				final CheckBox ch = (CheckBox) v.findViewById(R.id.toggle_item);
 				ch.setVisibility(View.GONE);
 				if (isSelectedGroup(groupPosition)) {
-					setCategoryIcon(app, app.getIconsCache().getIcon(R.drawable.ic_map, R.color.osmand_orange), groupPosition, isExpanded, v, light);
+					setCategoryIcon(app, app.getUIUtilities().getIcon(R.drawable.ic_map, R.color.osmand_orange), groupPosition, isExpanded, v, light);
 				} else {
 					setCategoryIcon(app, 0, groupPosition, isExpanded, v, light);
 				}
@@ -1353,7 +1353,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 	}
 
 	private void openPopUpMenu(View v, final GpxInfo gpxInfo) {
-		IconsCache iconsCache = getMyApplication().getIconsCache();
+		UiUtilities iconsCache = getMyApplication().getUIUtilities();
 		final PopupMenu optionsMenu = new PopupMenu(getActivity(), v);
 		DirectionsDialogs.setupPopUpMenuIcon(optionsMenu);
 
@@ -1790,14 +1790,14 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		// ImageView icon = (ImageView) v.findViewById(!isDashItem? R.id.icon : R.id.show_on_map);
 		ImageView icon = (ImageView) v.findViewById(R.id.icon);
 		icon.setVisibility(View.VISIBLE);
-		icon.setImageDrawable(app.getIconsCache().getThemedIcon(R.drawable.ic_action_polygom_dark));
+		icon.setImageDrawable(app.getUIUtilities().getThemedIcon(R.drawable.ic_action_polygom_dark));
 		if (child.isCorrupted()) {
 			viewName.setTypeface(Typeface.DEFAULT, Typeface.ITALIC);
 		} else {
 			viewName.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
 		}
 		if (getSelectedGpxFile(child, app) != null) {
-			icon.setImageDrawable(app.getIconsCache().getIcon(R.drawable.ic_action_polygom_dark, R.color.color_distance));
+			icon.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_polygom_dark, R.color.color_distance));
 		}
 		GPXTrackAnalysis analysis = getGpxTrackAnalysis(child, app);
 		boolean sectionRead = analysis == null;
@@ -1826,13 +1826,13 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 			v.findViewById(R.id.unknown_section).setVisibility(View.GONE);
 			ImageView distanceI = (ImageView) v.findViewById(R.id.distance_icon);
 			distanceI.setVisibility(View.VISIBLE);
-			distanceI.setImageDrawable(app.getIconsCache().getThemedIcon(R.drawable.ic_small_distance));
+			distanceI.setImageDrawable(app.getUIUtilities().getThemedIcon(R.drawable.ic_small_distance));
 			ImageView pointsI = (ImageView) v.findViewById(R.id.points_icon);
 			pointsI.setVisibility(View.VISIBLE);
-			pointsI.setImageDrawable(app.getIconsCache().getThemedIcon(R.drawable.ic_small_point));
+			pointsI.setImageDrawable(app.getUIUtilities().getThemedIcon(R.drawable.ic_small_point));
 			ImageView timeI = (ImageView) v.findViewById(R.id.time_icon);
 			timeI.setVisibility(View.VISIBLE);
-			timeI.setImageDrawable(app.getIconsCache().getThemedIcon(R.drawable.ic_small_time));
+			timeI.setImageDrawable(app.getUIUtilities().getThemedIcon(R.drawable.ic_small_time));
 			TextView time = (TextView) v.findViewById(R.id.time);
 			TextView distance = (TextView) v.findViewById(R.id.distance);
 			TextView pointsCount = (TextView) v.findViewById(R.id.points_count);

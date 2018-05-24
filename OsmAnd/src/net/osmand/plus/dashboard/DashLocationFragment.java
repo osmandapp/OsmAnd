@@ -1,23 +1,14 @@
 package net.osmand.plus.dashboard;
 
-import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.content.Context;
-import android.hardware.Sensor;
-import android.hardware.SensorManager;
-import android.view.WindowManager;
-import android.widget.ImageView;
-import android.widget.TextView;
-
-import net.osmand.Location;
-import net.osmand.data.LatLon;
-import net.osmand.plus.OsmAndFormatter;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
-import net.osmand.plus.views.DirectionDrawable;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import net.osmand.data.LatLon;
+import net.osmand.plus.UiUtilities;
+import net.osmand.plus.UiUtilities.UpdateLocationViewCache;
+import android.annotation.SuppressLint;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 /**
  * Created by Denis
@@ -26,12 +17,7 @@ import java.util.List;
 @SuppressLint("ResourceAsColor")
 public abstract class DashLocationFragment extends DashBaseFragment {
 
-	private static final int ORIENTATION_0 = 0;
-	private static final int ORIENTATION_90 = 3;
-	private static final int ORIENTATION_270 = 1;
-	private static final int ORIENTATION_180 = 2;
 	protected List<DashLocationView> distances = new ArrayList<DashLocationFragment.DashLocationView>();
-	private int screenOrientation;
 
 	public static class DashLocationView {
 		public ImageView arrow;
@@ -46,40 +32,14 @@ public abstract class DashLocationFragment extends DashBaseFragment {
 			this.txt = txt;
 			this.loc = loc;
 		}
-
-
 	}
 
 
 	@Override
 	public void onOpenDash() {
 		//Hardy: getRotation() is the correction if device's screen orientation != the default display's standard orientation
-		screenOrientation = getScreenOrientation(getActivity());
 	}
 
-	public static int getScreenOrientation(Activity a) {
-		int screenOrientation = ((WindowManager) a.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getRotation();
-		switch (screenOrientation) {
-			case ORIENTATION_0:   // Device default (normally portrait)
-				screenOrientation = 0;
-				break;
-			case ORIENTATION_90:  // Landscape right
-				screenOrientation = 90;
-				break;
-			case ORIENTATION_270: // Landscape left
-				screenOrientation = 270;
-				break;
-			case ORIENTATION_180: // Upside down
-				screenOrientation = 180;
-				break;
-		}
-		//Looks like screenOrientation correction must not be applied for devices without compass?
-		Sensor compass = ((SensorManager) a.getSystemService(Context.SENSOR_SERVICE)).getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
-		if (compass == null) {
-			screenOrientation = 0;
-		}
-		return screenOrientation;
-	}
 
 	public LatLon getDefaultLocation() {
 		DashboardOnMap d = dashboard;
@@ -94,114 +54,16 @@ public abstract class DashLocationFragment extends DashBaseFragment {
 		if (d == null) {
 			return;
 		}
-		float head = d.getHeading();
-		float mapRotation = d.getMapRotation();
-		LatLon mw = d.getMapViewLocation();
-		boolean useCenter = !d.isMapLinkedToLocation();
-		float h = useCenter ? -mapRotation : head;
+		UiUtilities ic = getMyApplication().getUIUtilities();
+		UpdateLocationViewCache cache = ic.getUpdateLocationViewCache();
 		for (DashLocationView lv : distances) {
-			updateLocationView(useCenter, mw, h, lv.arrow, lv.arrowResId, lv.txt, lv.loc, screenOrientation,
-					getMyApplication(), lv.paint);
+			cache.arrowResId = lv.arrowResId;
+			cache.paintTxt = lv.paint;
+			ic.updateLocationView(cache, lv.arrow, lv.txt, lv.loc);
 		}
 	}
 
-	public static void updateLocationView(boolean useCenter, LatLon fromLoc, Float h,
-										  ImageView arrow, int imgColor, TextView txt, int textColor, double toLat, double toLon,
-										  int screenOrientation, OsmandApplication app, Context ctx) {
-		updateLocationView(useCenter, fromLoc, h, arrow, 0, imgColor, txt, textColor, new LatLon(toLat, toLon), screenOrientation, app, true);
-	}
-
-	public static void updateLocationView(boolean useCenter, LatLon fromLoc, Float h,
-										  ImageView arrow, TextView txt, double toLat, double toLon,
-										  int screenOrientation, OsmandApplication app) {
-		updateLocationView(useCenter, fromLoc, h, arrow, 0, txt, new LatLon(toLat, toLon), screenOrientation, app,  true);
-	}
-
-	public static void updateLocationView(boolean useCenter, LatLon fromLoc, Float h,
-										  ImageView arrow, int arrowResId, TextView txt, LatLon toLoc,
-										  int screenOrientation, OsmandApplication app, boolean paint) {
-		updateLocationView(useCenter, fromLoc, h, arrow, arrowResId, 0, txt, 0, toLoc, screenOrientation, app, paint);
-	}
-
-	public static void updateLocationView(boolean useCenter, LatLon fromLoc, Float h,
-										  ImageView arrow, int arrowResId, int imgColor, TextView txt, LatLon toLoc,
-										  int screenOrientation, OsmandApplication app, boolean paint) {
-		updateLocationView(useCenter, fromLoc, h, arrow, arrowResId, imgColor, txt, 0, toLoc, screenOrientation, app, paint);
-	}
-
-	public static void updateLocationView(boolean useCenter, LatLon fromLoc, Float h,
-										  ImageView arrow, int arrowResId, int imgColor, TextView txt, int textColor, LatLon toLoc,
-										  int screenOrientation, OsmandApplication app, boolean paint) {
-		float[] mes = new float[2];
-		boolean stale = false;
-		if(!useCenter) {
-			Location loc = app.getLocationProvider().getLastKnownLocation();
-			if(loc == null) {
-				loc = app.getLocationProvider().getLastStaleKnownLocation();
-				stale = true;
-			}
-			
-			if(loc != null) {
-				fromLoc = new LatLon(loc.getLatitude(), loc.getLongitude());
-			} else {
-				fromLoc = null;
-			}
-		}
-		if (fromLoc != null && toLoc != null) {
-			Location.distanceBetween(toLoc.getLatitude(), toLoc.getLongitude(), fromLoc.getLatitude(), fromLoc.getLongitude(), mes);
-		}
-		
-
-		if (arrow != null) {
-			boolean newImage = false;
-			if (arrowResId == 0) {
-				arrowResId = R.drawable.ic_direction_arrow;
-			}
-			DirectionDrawable dd;
-			if(!(arrow.getDrawable() instanceof DirectionDrawable)) {
-				newImage = true;
-				dd = new DirectionDrawable(app, arrow.getWidth(), arrow.getHeight());
-			} else {
-				dd = (DirectionDrawable) arrow.getDrawable();
-			}
-			int imgColorSet = imgColor;
-			if (imgColorSet == 0) {
-				imgColorSet = useCenter ? R.color.color_distance : R.color.color_myloc_distance;
-				if(stale) {
-					imgColorSet = R.color.icon_color;
-				}
-			}
-			dd.setImage(arrowResId, imgColorSet);
-			if (fromLoc == null || h == null || toLoc == null) {
-				dd.setAngle(0);
-			} else {
-				dd.setAngle(mes[1] - h + 180 + screenOrientation);
-			}
-			if (newImage) {
-				arrow.setImageDrawable(dd);
-			}
-			arrow.invalidate();
-		}
-		if (txt != null) {
-			if (fromLoc != null && toLoc != null) {
-				if (paint) {
-					int textColorSet = textColor;
-					if(textColorSet == 0) {
-						textColorSet = useCenter ? R.color.color_distance : R.color.color_myloc_distance ;
-						if(stale) {
-							textColorSet = R.color.icon_color;
-						}
-					}
-					txt.setTextColor(app.getResources().getColor(textColorSet));
-				}
-				txt.setText(OsmAndFormatter.getFormattedDistance(mes[0], app));
-			} else {
-				txt.setText("");
-			}
-		}
-	}
-
-	public void updateLocation(boolean centerChanged, boolean locationChanged, boolean compassChanged) {
+		public void updateLocation(boolean centerChanged, boolean locationChanged, boolean compassChanged) {
 		if (compassChanged && !dashboard.isMapLinkedToLocation()) {
 			return;
 		}

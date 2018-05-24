@@ -10,14 +10,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.WindowManager;
 import android.widget.ImageView;
 
-import net.osmand.plus.IconsCache;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 
 public class BaseOsmAndDialogFragment extends DialogFragment {
 
-	private IconsCache iconsCache;
+	private UiUtilities iconsCache;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -35,9 +35,9 @@ public class BaseOsmAndDialogFragment extends DialogFragment {
 		return (AppCompatActivity) getActivity();
 	}
 
-	protected IconsCache getIconsCache() {
+	protected UiUtilities getIconsCache() {
 		if (iconsCache == null) {
-			iconsCache = getMyApplication().getIconsCache();
+			iconsCache = getMyApplication().getUIUtilities();
 		}
 		return iconsCache;
 	}

@@ -4,7 +4,7 @@ import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.TextView;
 
-import net.osmand.plus.IconsCache;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.R;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadActivityType;
@@ -29,11 +29,11 @@ public class DownloadGroupViewHolder {
 		Drawable iconLeft;
 		if (group.getType() == DownloadResourceGroup.DownloadResourceGroupType.VOICE_REC
 				|| group.getType() == DownloadResourceGroup.DownloadResourceGroupType.VOICE_TTS) {
-			iconLeft = ctx.getMyApplication().getIconsCache().getThemedIcon(R.drawable.ic_action_volume_up);
+			iconLeft = ctx.getMyApplication().getUIUtilities().getThemedIcon(R.drawable.ic_action_volume_up);
 		} else if (group.getType() == DownloadResourceGroup.DownloadResourceGroupType.FONTS) {
-			iconLeft = ctx.getMyApplication().getIconsCache().getThemedIcon(R.drawable.ic_action_map_language);
+			iconLeft = ctx.getMyApplication().getUIUtilities().getThemedIcon(R.drawable.ic_action_map_language);
 		} else {
-			IconsCache cache = ctx.getMyApplication().getIconsCache();
+			UiUtilities cache = ctx.getMyApplication().getUIUtilities();
 			if (isParentWorld(group) || isParentWorld(group.getParentGroup())) {
 				iconLeft = cache.getThemedIcon(R.drawable.ic_world_globe_dark);
 			} else {

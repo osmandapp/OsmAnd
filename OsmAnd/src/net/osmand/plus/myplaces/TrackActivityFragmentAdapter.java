@@ -493,7 +493,7 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 		int color = app.getResources().getColor(colorId);
 		title.setTextColor(color);
 		text.setTextColor(color);
-		img.setImageDrawable(app.getIconsCache().getIcon(R.drawable.ic_action_arrow_drop_down, colorId));
+		img.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_arrow_drop_down, colorId));
 	}
 
 	private void updateSplitIntervalView(View view) {
@@ -523,9 +523,9 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 			color = ConfigureMapMenu.GpxAppearanceAdapter.parseTrackColor(renderer, prefColor.get());
 		}
 		if (color == 0) {
-			colorImageView.setImageDrawable(app.getIconsCache().getThemedIcon(R.drawable.ic_action_circle));
+			colorImageView.setImageDrawable(app.getUIUtilities().getThemedIcon(R.drawable.ic_action_circle));
 		} else {
-			colorImageView.setImageDrawable(app.getIconsCache().getPaintedIcon(R.drawable.ic_action_circle, color));
+			colorImageView.setImageDrawable(app.getUIUtilities().getPaintedIcon(R.drawable.ic_action_circle, color));
 		}
 		TrackBitmapDrawer trackDrawer = getTrackBitmapDrawer();
 		if (trackDrawer != null) {

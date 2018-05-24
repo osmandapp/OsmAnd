@@ -14,7 +14,7 @@ import android.widget.LinearLayout;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
-import net.osmand.plus.IconsCache;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.OsmandPreference;
@@ -484,7 +484,7 @@ public class MapWidgetRegistry {
 							MenuInflater inflater = popup.getMenuInflater();
 							final Menu menu = popup.getMenu();
 							inflater.inflate(R.menu.widget_visibility_menu, menu);
-							IconsCache ic = mapActivity.getMyApplication().getIconsCache();
+							UiUtilities ic = mapActivity.getMyApplication().getUIUtilities();
 							menu.findItem(R.id.action_show).setIcon(ic.getThemedIcon(R.drawable.ic_action_view));
 							menu.findItem(R.id.action_hide).setIcon(ic.getThemedIcon(R.drawable.ic_action_hide));
 							menu.findItem(R.id.action_collapse).setIcon(ic.getThemedIcon(R.drawable.ic_action_widget_collapse));

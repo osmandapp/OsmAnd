@@ -4,8 +4,8 @@ import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-import net.osmand.plus.IconsCache;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 
@@ -82,7 +82,7 @@ public abstract class BaseMenuController {
 
 	protected Drawable getIconOrig(int iconId) {
 		if (mapActivity != null) {
-			IconsCache iconsCache = mapActivity.getMyApplication().getIconsCache();
+			UiUtilities iconsCache = mapActivity.getMyApplication().getUIUtilities();
 			return iconsCache.getIcon(iconId, 0);
 		} else {
 			return null;
@@ -95,7 +95,7 @@ public abstract class BaseMenuController {
 
 	protected Drawable getIcon(int iconId, int colorId) {
 		if (mapActivity != null) {
-			IconsCache iconsCache = mapActivity.getMyApplication().getIconsCache();
+			UiUtilities iconsCache = mapActivity.getMyApplication().getUIUtilities();
 			return iconsCache.getIcon(iconId, colorId);
 		} else {
 			return null;
@@ -104,7 +104,7 @@ public abstract class BaseMenuController {
 
 	protected Drawable getPaintedIcon(int iconId, int color) {
 		if (mapActivity != null) {
-			IconsCache iconsCache = mapActivity.getMyApplication().getIconsCache();
+			UiUtilities iconsCache = mapActivity.getMyApplication().getUIUtilities();
 			return iconsCache.getPaintedIcon(iconId, color);
 		} else {
 			return null;
@@ -113,7 +113,7 @@ public abstract class BaseMenuController {
 
 	protected Drawable getIcon(int iconId, int colorLightId, int colorDarkId) {
 		if (mapActivity != null) {
-			IconsCache iconsCache = mapActivity.getMyApplication().getIconsCache();
+			UiUtilities iconsCache = mapActivity.getMyApplication().getUIUtilities();
 			return iconsCache.getIcon(iconId, isLight() ? colorLightId : colorDarkId);
 		} else {
 			return null;

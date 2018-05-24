@@ -30,7 +30,7 @@ import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.data.LatLon;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.PoiType;
-import net.osmand.plus.IconsCache;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
@@ -67,7 +67,7 @@ public class SearchPoiFilterFragment extends OsmAndListFragment implements Searc
 		v.findViewById(R.id.SearchFilterLayout).setVisibility(View.VISIBLE);
 		((EditText) v.findViewById(R.id.searchEditText)).setHint(R.string.search_poi_category_hint);
 		((ImageView) v.findViewById(R.id.search_icon)).setImageDrawable(
-				getMyApplication().getIconsCache().getThemedIcon(R.drawable.ic_action_search_dark));
+				getMyApplication().getUIUtilities().getThemedIcon(R.drawable.ic_action_search_dark));
 
 		setupSearchEditText((EditText) v.findViewById(R.id.searchEditText));
 		setupOptions((ImageView) v.findViewById(R.id.options));
@@ -76,7 +76,7 @@ public class SearchPoiFilterFragment extends OsmAndListFragment implements Searc
 	}
 
 	private void setupOptions(ImageView options) {
-		options.setImageDrawable(getMyApplication().getIconsCache().getThemedIcon(R.drawable.ic_overflow_menu_white));
+		options.setImageDrawable(getMyApplication().getUIUtilities().getThemedIcon(R.drawable.ic_overflow_menu_white));
 		options.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -326,7 +326,7 @@ public class SearchPoiFilterFragment extends OsmAndListFragment implements Searc
 
 	private void showOptionsMenu(View v) {
 		// Show menu with search all, name finder, name finder poi
-		IconsCache iconsCache = getMyApplication().getIconsCache();
+		UiUtilities iconsCache = getMyApplication().getUIUtilities();
 		final PopupMenu optionsMenu = new PopupMenu(getActivity(), v);
 
 		MenuItem item = optionsMenu.getMenu().add(R.string.poi_filter_custom_filter)

@@ -203,7 +203,7 @@ public class OsmEditsAdapter extends ArrayAdapter<Object> {
 			holder.selectCheckBox.setVisibility(View.GONE);
 		}
 
-		holder.optionsImageButton.setImageDrawable(app.getIconsCache().getThemedIcon(R.drawable.ic_overflow_menu_white));
+		holder.optionsImageButton.setImageDrawable(app.getUIUtilities().getThemedIcon(R.drawable.ic_overflow_menu_white));
 		holder.optionsImageButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -281,9 +281,9 @@ public class OsmEditsAdapter extends ArrayAdapter<Object> {
 			} else if (point.getAction() == OsmPoint.Action.REOPEN) {
 				colorResId = R.color.color_osm_edit_modify;
 			}
-			return app.getIconsCache().getIcon(iconResId, colorResId);
+			return app.getUIUtilities().getIcon(iconResId, colorResId);
 		} else if (point.getGroup() == OsmPoint.Group.BUG) {
-			return app.getIconsCache().getIcon(R.drawable.ic_type_bug, R.color.color_distance);
+			return app.getUIUtilities().getIcon(R.drawable.ic_type_bug, R.color.color_distance);
 		}
 		return null;
 	}

@@ -440,6 +440,20 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 			mapView.refreshMap();
 		}
 	}
+	
+	public LatLon getMapLocation() {
+		if (mapView == null) {
+			return settings.getLastKnownMapLocation();
+		}
+		return new LatLon(mapView.getLatitude(), mapView.getLongitude());
+	}
+	
+	public Float getMapRotate() {
+		if (mapView == null) {
+			return null;
+		}
+		return mapView.getRotate();
+	}
 
 	@Override
 	public void newRouteIsCalculated(boolean newRoute, ValueHolder<Boolean> showToast) {

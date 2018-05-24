@@ -2569,7 +2569,7 @@
     <string name="retry">تلاش مجدد</string>
     <string name="add_line">افزودن خط</string>
     <string name="empty_state_favourites">افزودن نقاط برگزیده</string>
-    <string name="empty_state_favourites_desc">نقاط برگزیده را روی نقشه علامت بزنید یا آن‌ها را از یک فایل وارد کنید.</string>
+    <string name="empty_state_favourites_desc">نقاط موردعلاقه‌تان را روی نقشه علامت بزنید یا آن‌ها را از یک فایل وارد کنید.</string>
     <string name="move_point">جابه‌جاکردن نقطه</string>
     <string name="make_round_trip_descr">نقطهٔ شروع را به‌عنوان مقصد هم در نظر بگیر.</string>
     <string name="make_round_trip">ایجاد سفر رفت‌وبرگشتی</string>
@@ -2583,7 +2583,7 @@
     <string name="my_location">موقعیت من</string>
     <string name="shared_string_finish">پایان</string>
     <string name="plan_route">طراحی مسیر</string>
-    <string name="shared_string_sort">مرتب‌کردن</string>
+    <string name="shared_string_sort">مرتب‌سازی</string>
     <string name="coordinate_input">واردکردن مختصات</string>
     <string name="is_saved">ذخیره شد</string>
     <string name="marker_save_as_track_descr">نشانه‌هایتان را در این فایل GPX ذخیره کنید:</string>
@@ -2592,7 +2592,7 @@
     <string name="descendingly">نزولی</string>
     <string name="marker_show_distance_descr">مسافت تا نشانه‌ها و جهت‌گیری به‌سمت آن‌ها چگونه روی نقشه نشان داده شود:</string>
     <string name="map_orientation_change_in_accordance_with_speed">آستانهٔ تغییر جهت نقشه</string>
-    <string name="map_orientation_change_in_accordance_with_speed_descr">مشخص کنید که در چه سرعتی جهت نقشه از «در جهت حرکت» به «در جهت قطب‌نما» تغییر کند.</string>
+    <string name="map_orientation_change_in_accordance_with_speed_descr">مشخص کنید در چه سرعتی جهت نقشه از «در جهت حرکت» به «در جهت قطب‌نما» تغییر کند.</string>
     <string name="all_markers_moved_to_history">همهٔ نشانه‌های نقشه به سابقه منتقل شد</string>
     <string name="marker_moved_to_history">نشانهٔ نقشه به سابقه منتقل شد</string>
     <string name="marker_moved_to_active">نشانهٔ نقشه به قسمت فعال منتقل شد</string>
@@ -2885,7 +2885,7 @@
 \n • رابط کاربری و شیوهٔ دانلود اطلاعات نقشه‌ها بازسازی شده است
 \n
 \n و…</string>
-    <string name="av_locations_descr">فایل GPX با مکان‌های یادداشت‌دار.</string>
+    <string name="av_locations_descr">فایل GPX از مکان‌های یادداشت‌دار.</string>
     <string name="osmand_plus_extended_description_part1">برنامهٔ OsmAnd+‎ (مخفف OSM Automated Navigation Directions به‌معنی راهبری خودکار با نقشهٔ OSM) یک نرم‌افزار نقشه و راهبری است که به گسترهٔ وسیعی از داده‌های نقشهٔ باز شهری (OpenStreetMap یا به‌صورت خلاصه OSM) دسترسی دارد. این داده‌های رایگان و جهانی با بالاترین کیفیت ارائه می‌شوند. 
 \n
 \nراهبر دیداری و شنیداری، مشاهدهٔ مکان‌های محبوب (POIها یا Points of interest)، ایجاد و مدیریت ردهای GPX، استفاده از تصویرسازی منحنی‌های تراز و اطلاعات ارتفاع، انتخاب حالت‌های پیاده، دوچرخه، خودرو، امکان ویرایش مکان‌ها و... چیزهایی هستند که تجربهٔ مؤثر و لذت‌بخشی را در کار با نقشه برایتان به ارمغان می‌آورد. 
@@ -3021,7 +3021,7 @@
     <string name="shared_string_one">یک</string>
     <string name="show_guide_line_descr">خطوط جهت‌داری را از موقعیت شما به‌سمت نشانه‌های فعال نمایش می‌دهد.</string>
     <string name="show_arrows_descr">با یک یا دو پیکان، سمت قرارگیری نشانه‌های فعال روی نقشه را نمایش می‌دهد.</string>
-    <string name="distance_indication_descr">مشخص کنید که مسافت شما تا نشانه‌های فعال چگونه نشان داده شود.</string>
+    <string name="distance_indication_descr">مشخص کنید مسافت شما تا نشانه‌های فعال کجا نشان داده شود.</string>
     <string name="active_markers_descr">تعداد نشانه‌های فعال روی نقشه را مشخص کنید.</string>
     <string name="appearance_on_the_map">تنظیمات ظاهری</string>
     <string name="add_track_to_markers_descr">مسیری را انتخاب کنید تا نقاط بین‌راهیِ آن را به نشانه‌ها اضافه کنید.</string>
@@ -3032,13 +3032,13 @@
     <string name="add_group_descr">گروهی از نقاط برگزیده یا نقاط بین‌راهی GPX را وارد کنید.</string>
     <string name="empty_state_markers_active">روی نقشه نشانه‌گذاری کنید!</string>
     <string name="empty_state_markers_active_desc">مکان‌ها را به‌صورت کوتاه یا طولانی لمس کنید و سپس دکمهٔ پرچم را بزنید.</string>
-    <string name="empty_state_markers_groups">واردکردن گروه‌ها</string>
+    <string name="empty_state_markers_groups">گروه وارد کنید</string>
     <string name="empty_state_markers_groups_desc">گروه‌های نقاط برگزیده یا نقاط بین‌راهی را به‌عنوان نشانه وارد کنید.</string>
     <string name="empty_state_markers_history_desc">نشانه‌هایی که به‌عنوان عبورکرده مشخص شده‌اند در این صفحه نشان داده می‌شوند.</string>
     <string name="shared_string_more_without_dots">بیشتر</string>
     <string name="looking_for_tracks_with_waypoints">در جست‌وجوی مسیرهای دارای نقطهٔ بین‌راهی</string>
-    <string name="empty_state_osm_edits">ایجاد یا ویرایش اشیای OSM</string>
-    <string name="empty_state_osm_edits_descr">ایجاد یا ویرایش POIها، بازگشایی توضیحات ویرایشی و نظردادن روی آن‌ها و آپلود فایل‌های ذخیره‌شدهٔ GPX.</string>
+    <string name="empty_state_osm_edits">اشیای OSM را بسازید یا ویرایش کنید</string>
+    <string name="empty_state_osm_edits_descr">نقاط پرکاربرد (POI) را اضافه یا ویرایش کنید، توضیح ویرایشی اضافه کنید یا روی آن‌ها نظر بدهید و فایل‌های GPX ضبط‌شده را آپلود کنید.</string>
     <string name="shared_string_deleted">حذف شد</string>
     <string name="shared_string_edited">ویرایش شد</string>
     <string name="shared_string_added">افزوده شد</string>
@@ -3074,8 +3074,8 @@
     <string name="will_open_at">ساعت بازکردن</string>
     <string name="will_open_on">زمان بازشدن</string>
     <string name="additional_actions">عملیات بیشتر</string>
-    <string name="av_locations_selected_desc">فایل GPX با مختصات و داده‌های یادداشت‌هایی که انتخاب شده است.</string>
-    <string name="av_locations_all_desc">فایل GPX با مختصات و داده‌های یادداشت‌هایی که انتخاب شده است.</string>
+    <string name="av_locations_selected_desc">فایل GPX از مختصات و اطلاعات یادداشت‌های انتخابی.</string>
+    <string name="av_locations_all_desc">فایل GPX از مختصات و اطلاعات همهٔ یادداشت‌ها.</string>
     <string name="shared_string_actions">عملیات</string>
     <string name="shared_string_marker">نشانه</string>
     <string name="osm_recipient_stat">ویرایش‌ها: %1$s، مبلغ: %2$s هزارم بیت‌کوین</string>

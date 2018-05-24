@@ -54,7 +54,6 @@ import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarControllerType;
 import net.osmand.util.Algorithms;
-import net.osmand.util.MapUtils;
 
 import java.lang.ref.WeakReference;
 import java.util.LinkedList;
@@ -83,10 +82,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 	private boolean centerMarker;
 	private int mapZoom;
 
-	private LatLon myLocation;
-	private Float heading;
 	private boolean inLocationUpdate = false;
-	private boolean cachedMyLocation;
 	private boolean appModeChanged;
 	private boolean appModeListenerAdded;
 	private boolean autoHide;
@@ -307,9 +303,6 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		}
 
 		OsmandApplication app = mapActivity.getMyApplication();
-		if (myLocation == null) {
-			updateMyLocation(app.getLocationProvider().getLastKnownLocation(), false);
-		}
 
 		if (!update && isVisible()) {
 			if (this.object == null || !this.object.equals(object)) {
@@ -440,7 +433,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 	}
 
 	public void onFragmentResume() {
-		if (active && displayDistanceDirection() && myLocation != null) {
+		if (active && displayDistanceDirection()) {
 			updateLocation(false, true, false);
 		}
 	}
@@ -1034,8 +1027,8 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 	}
 
 	public void addNewWptToGPXFile(final LatLon latLon, final String title,
-										  final String categoryName,
-										  final int categoryColor, final boolean skipDialog) {
+								   final String categoryName,
+								   final int categoryColor, final boolean skipDialog) {
 		if (mapActivity != null) {
 			CallbackWithObject<GPXFile[]> callbackWithObject = new CallbackWithObject<GPXFile[]>() {
 				@Override
@@ -1320,30 +1313,13 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		return getCurrentMenuState() == MenuState.HEADER_ONLY;
 	}
 
-	public LatLon getMyLocation() {
-		return myLocation;
-	}
-
-	public boolean isCachedMyLocation() {
-		return cachedMyLocation;
-	}
-
-	public Float getHeading() {
-		return heading;
-	}
 
 	private void updateMyLocation(Location location, boolean updateLocationUi) {
-		if (location == null) {
-			MapActivity mapActivity = getMapActivity();
-			if (mapActivity != null) {
-				location = mapActivity.getMyApplication().getLocationProvider().getLastStaleKnownLocation();
-			}
-			cachedMyLocation = location != null;
-		} else {
-			cachedMyLocation = false;
+		MapActivity mapActivity = getMapActivity();
+		if (location == null && mapActivity != null) {
+			location = mapActivity.getMyApplication().getLocationProvider().getLastStaleKnownLocation();
 		}
 		if (location != null) {
-			myLocation = new LatLon(location.getLatitude(), location.getLongitude());
 			if (updateLocationUi) {
 				updateLocation(false, true, false);
 			}
@@ -1358,15 +1334,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 
 	public void updateCompassValue(float value) {
 		if (active && displayDistanceDirection()) {
-			// 99 in next line used to one-time initialize arrows (with reference vs. fixed-north direction)
-			// on non-compass devices
-			float lastHeading = heading != null ? heading : 99;
-			heading = value;
-			if (Math.abs(MapUtils.degreesDiff(lastHeading, heading)) > 5) {
-				updateLocation(false, false, true);
-			} else {
-				heading = lastHeading;
-			}
+			updateLocation(false, false, true);
 		}
 	}
 

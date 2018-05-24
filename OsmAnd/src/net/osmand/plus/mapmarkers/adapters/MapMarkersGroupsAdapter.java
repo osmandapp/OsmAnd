@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
-
 import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.data.LatLon;
@@ -18,7 +17,7 @@ import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.GPXUtilities;
-import net.osmand.plus.IconsCache;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.GroupHeader;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
@@ -26,6 +25,7 @@ import net.osmand.plus.MapMarkersHelper.MapMarkersGroup;
 import net.osmand.plus.MapMarkersHelper.ShowHideHistoryButton;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities.UpdateLocationViewCache;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.DashLocationFragment;
 import net.osmand.plus.mapmarkers.SelectWptCategoriesBottomSheetDialogFragment;
@@ -60,15 +60,12 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 	private OsmandApplication app;
 	private List<Object> items = new ArrayList<>();
 	private boolean night;
-	private int screenOrientation;
-	private LatLon location;
-	private Float heading;
-	private boolean useCenter;
 	private boolean showDirectionEnabled;
 	private List<MapMarker> showDirectionMarkers;
 	private Snackbar snackbar;
 
 	private MapMarkersGroupsAdapterListener listener;
+	private UpdateLocationViewCache updateLocationViewCache;
 
 	public void setListener(MapMarkersGroupsAdapterListener listener) {
 		this.listener = listener;
@@ -77,6 +74,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 	public MapMarkersGroupsAdapter(MapActivity mapActivity) {
 		this.mapActivity = mapActivity;
 		app = mapActivity.getMyApplication();
+		updateLocationViewCache = app.getUIUtilities().getUpdateLocationViewCache();
 		night = !mapActivity.getMyApplication().getSettings().isLightContent();
 		updateShowDirectionMarkers();
 		createDisplayGroups();
@@ -225,22 +223,6 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 		return pos;
 	}
 
-	public void setLocation(LatLon location) {
-		this.location = location;
-	}
-
-	public void setHeading(Float heading) {
-		this.heading = heading;
-	}
-
-	public void setUseCenter(boolean useCenter) {
-		this.useCenter = useCenter;
-	}
-
-	public void setScreenOrientation(int screenOrientation) {
-		this.screenOrientation = screenOrientation;
-	}
-
 	public void updateDisplayedData() {
 		createDisplayGroups();
 		updateShowDirectionMarkers();
@@ -274,7 +256,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 
 	@Override
 	public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
-		IconsCache iconsCache = app.getIconsCache();
+		UiUtilities iconsCache = app.getUIUtilities();
 		if (holder instanceof MapMarkerItemViewHolder) {
 			final MapMarkerItemViewHolder itemViewHolder = (MapMarkerItemViewHolder) holder;
 			final MapMarker marker = (MapMarker) getItem(position);
@@ -392,10 +374,9 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 			itemViewHolder.bottomShadow.setVisibility(lastItem ? View.VISIBLE : View.GONE);
 
 			LatLon markerLatLon = new LatLon(marker.getLatitude(), marker.getLongitude());
-			DashLocationFragment.updateLocationView(useCenter, location,
-					heading, markerImageViewToUpdate, drawableResToUpdate, markerToHighlight ? color : 0,
-					itemViewHolder.distance, markerLatLon,
-					screenOrientation, app, true);
+			updateLocationViewCache.arrowResId = drawableResToUpdate;
+			updateLocationViewCache.arrowColor = markerToHighlight ? color : 0;
+			app.getUIUtilities().updateLocationView(updateLocationViewCache, markerImageViewToUpdate, itemViewHolder.distance, markerLatLon);
 		} else if (holder instanceof MapMarkerHeaderViewHolder) {
 			final MapMarkerHeaderViewHolder headerViewHolder = (MapMarkerHeaderViewHolder) holder;
 			final Object header = getItem(position);
@@ -575,7 +556,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 				categoriesViewHolder.title.setText(getGroupWptCategoriesString(group));
 				categoriesViewHolder.divider.setVisibility(View.VISIBLE);
 				categoriesViewHolder.button.setCompoundDrawablesWithIntrinsicBounds(
-						null, null, app.getIconsCache().getIcon(R.drawable.ic_action_filter,
+						null, null, app.getUIUtilities().getIcon(R.drawable.ic_action_filter,
 								night ? R.color.wikivoyage_active_dark : R.color.wikivoyage_active_light), null);
 				categoriesViewHolder.button.setOnClickListener(openChooseCategoriesDialog);
 				categoriesViewHolder.title.setOnClickListener(openChooseCategoriesDialog);

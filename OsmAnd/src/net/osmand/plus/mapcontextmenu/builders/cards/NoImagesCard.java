@@ -6,7 +6,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
-import net.osmand.plus.IconsCache;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapillary.MapillaryPlugin;
@@ -25,7 +25,7 @@ public class NoImagesCard extends AbstractCard {
 	@Override
 	public void update() {
 		if (view != null) {
-			IconsCache ic = getMyApplication().getIconsCache();
+			UiUtilities ic = getMyApplication().getUIUtilities();
 			boolean night = getMyApplication().getDaynightHelper().isNightModeForMapControls();
 			MapActivity ctx = getMapActivity();
 			AndroidUtils.setBackgroundColor(ctx, view, night, R.color.bg_color_light, R.color.bg_color_dark);

@@ -23,7 +23,7 @@ import android.widget.TextView;
 
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
-import net.osmand.plus.IconsCache;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
@@ -95,7 +95,7 @@ public class QuickSearchCustomPoiFragment extends DialogFragment {
 		view = inflater.inflate(R.layout.search_custom_poi, container, false);
 
 		Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
-		toolbar.setNavigationIcon(app.getIconsCache().getIcon(R.drawable.ic_action_remove_dark));
+		toolbar.setNavigationIcon(app.getUIUtilities().getIcon(R.drawable.ic_action_remove_dark));
 		toolbar.setNavigationContentDescription(R.string.shared_string_close);
 		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
 			@Override
@@ -227,7 +227,7 @@ public class QuickSearchCustomPoiFragment extends DialogFragment {
 				SwitchCompat check = (SwitchCompat) row.findViewById(R.id.toggle_item);
 
 				boolean categorySelected = filter.isTypeAccepted(category);
-				IconsCache ic = app.getIconsCache();
+				UiUtilities ic = app.getUIUtilities();
 				int iconId = getIconId(category);
 				if (iconId != 0) {
 					if (categorySelected) {

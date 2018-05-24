@@ -384,7 +384,7 @@ public class ItemViewHolder {
 		final File fl = indexItem.getTargetFile(context.getMyApplication());
 		if (fl.exists()) {
 			item = optionsMenu.getMenu().add(R.string.shared_string_remove).setIcon(
-							context.getMyApplication().getIconsCache().getThemedIcon(R.drawable.ic_action_remove_dark));
+							context.getMyApplication().getUIUtilities().getThemedIcon(R.drawable.ic_action_remove_dark));
 			item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 				@Override
 				public boolean onMenuItemClick(MenuItem item) {
@@ -424,7 +424,7 @@ public class ItemViewHolder {
 			});
 		}
 		item = optionsMenu.getMenu().add(R.string.shared_string_download)
-				.setIcon(context.getMyApplication().getIconsCache().getThemedIcon(R.drawable.ic_action_import));
+				.setIcon(context.getMyApplication().getUIUtilities().getThemedIcon(R.drawable.ic_action_import));
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
@@ -437,10 +437,10 @@ public class ItemViewHolder {
 	}
 
 	private Drawable getContentIcon(DownloadActivity context, int resourceId) {
-		return context.getMyApplication().getIconsCache().getThemedIcon(resourceId);
+		return context.getMyApplication().getUIUtilities().getThemedIcon(resourceId);
 	}
 
 	private Drawable getContentIcon(DownloadActivity context, int resourceId, int color) {
-		return context.getMyApplication().getIconsCache().getPaintedIcon(resourceId, color);
+		return context.getMyApplication().getUIUtilities().getPaintedIcon(resourceId, color);
 	}
 }

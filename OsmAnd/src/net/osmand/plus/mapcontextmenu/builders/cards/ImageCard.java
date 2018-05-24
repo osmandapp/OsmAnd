@@ -328,7 +328,7 @@ public abstract class ImageCard extends AbstractCard {
 					R.drawable.context_menu_card_light, R.drawable.context_menu_card_dark);
 
 			if (icon == null && topIconId != 0) {
-				icon = getMyApplication().getIconsCache().getIcon(topIconId);
+				icon = getMyApplication().getUIUtilities().getIcon(topIconId);
 			}
 			if (icon == null) {
 				iconImageView.setVisibility(View.GONE);
@@ -373,9 +373,9 @@ public abstract class ImageCard extends AbstractCard {
 			}
 			if (buttonIcon == null && buttonIconId != 0) {
 				if (buttonIconColor != 0) {
-					buttonIcon = getMyApplication().getIconsCache().getPaintedIcon(buttonIconId, buttonIconColor);
+					buttonIcon = getMyApplication().getUIUtilities().getPaintedIcon(buttonIconId, buttonIconColor);
 				} else {
-					buttonIcon = getMyApplication().getIconsCache().getIcon(buttonIconId);
+					buttonIcon = getMyApplication().getUIUtilities().getIcon(buttonIconId);
 				}
 			}
 			button.setCompoundDrawablesWithIntrinsicBounds(buttonIcon, null, null, null);

@@ -314,7 +314,7 @@ public class ShowHidePoiAction extends QuickAction {
 			@Override
 			public void onShow(DialogInterface dialog) {
 				Button neutralButton = alertDialog.getButton(DialogInterface.BUTTON_NEUTRAL);
-				Drawable drawable = app.getIconsCache().getThemedIcon(R.drawable.ic_action_multiselect);
+				Drawable drawable = app.getUIUtilities().getThemedIcon(R.drawable.ic_action_multiselect);
 				neutralButton.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null);
 			}
 		});

@@ -147,7 +147,7 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 		View mainView = inflater.inflate(R.layout.fragment_map_markers_dialog, container);
 
 		Toolbar toolbar = (Toolbar) mainView.findViewById(R.id.map_markers_toolbar);
-		toolbar.setNavigationIcon(getMyApplication().getIconsCache().getIcon(R.drawable.ic_arrow_back));
+		toolbar.setNavigationIcon(getMyApplication().getUIUtilities().getIcon(R.drawable.ic_arrow_back));
 		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
 		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
 			@Override

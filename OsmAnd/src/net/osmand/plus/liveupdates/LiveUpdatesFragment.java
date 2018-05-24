@@ -179,7 +179,7 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppPurc
 				TextView regionNameHeaderTextView = (TextView) subscriptionHeader.findViewById(R.id.regionHeaderTextView);
 				TextView regionNameTextView = (TextView) subscriptionHeader.findViewById(R.id.regionTextView);
 				statusTextView.setText(getString(R.string.osm_live_active));
-				statusIcon.setImageDrawable(getMyApplication().getIconsCache().getThemedIcon(R.drawable.ic_action_done));
+				statusIcon.setImageDrawable(getMyApplication().getUIUtilities().getThemedIcon(R.drawable.ic_action_done));
 				regionNameHeaderTextView.setText(R.string.osm_live_support_region);
 				String countryName = getSettings().BILLING_USER_COUNTRY.get();
 				if (Algorithms.isEmpty(countryName)) {
@@ -618,7 +618,7 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppPurc
 		}
 
 		private Drawable getSecondaryColorPaintedIcon(@DrawableRes int drawable) {
-			return fragment.getMyActivity().getMyApplication().getIconsCache()
+			return fragment.getMyActivity().getMyApplication().getUIUtilities()
 					.getPaintedIcon(drawable, secondaryColor);
 		}
 	}

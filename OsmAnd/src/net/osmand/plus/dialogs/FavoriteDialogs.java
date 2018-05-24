@@ -19,8 +19,8 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import net.osmand.AndroidUtils;
+import net.osmand.Location;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -42,11 +42,10 @@ public class FavoriteDialogs {
 	public static final String KEY_FAVORITE = "favorite";
 	
 	public static Dialog createReplaceFavouriteDialog(final Activity activity, final Bundle args) {
-		final FavouritesDbHelper helper = ((OsmandApplication) activity.getApplication()).getFavorites();
+		OsmandApplication app = (OsmandApplication) activity.getApplication();
+		final FavouritesDbHelper helper = app.getFavorites();
 		final List<FavouritePoint> points = new ArrayList<FavouritePoint>(helper.getFavouritePoints());
-		final FavouritesAdapter favouritesAdapter = new FavouritesAdapter(activity, 
-				((OsmandApplication) activity.getApplication()).getFavorites().getFavouritePoints(),
-				false);
+		final FavouritesAdapter favouritesAdapter = new FavouritesAdapter(activity, points,false);
 		final Dialog[] dlgHolder = new Dialog[1];
 		OnItemClickListener click = new AdapterView.OnItemClickListener() {
 
@@ -56,9 +55,8 @@ public class FavoriteDialogs {
 			}
 			
 		};
-		if (activity instanceof MapActivity) {
-			favouritesAdapter.updateLocation(((MapActivity) activity).getMapLocation());
-		}
+		favouritesAdapter.sortByDefault();
+		
 		if(points.size() == 0){
 			Toast.makeText(activity, activity.getString(R.string.fav_points_not_exist), Toast.LENGTH_SHORT).show();
 			return null;
@@ -210,25 +208,7 @@ public class FavoriteDialogs {
 			final OnDismissListener dismissListener, final Dialog[] dialogHolder, final boolean sortByDist) {
 		ListView listView = new ListView(uiContext);
 		AlertDialog.Builder bld = new AlertDialog.Builder(uiContext);
-		final Collator inst = Collator.getInstance();
-		favouritesAdapter.sort(new Comparator<FavouritePoint>() {
-
-			@Override
-			public int compare(FavouritePoint lhs, FavouritePoint rhs) {
-				if (sortByDist) {
-					if (favouritesAdapter.getLocation() == null) {
-						return 0;
-					}
-					double ld = MapUtils.getDistance(favouritesAdapter.getLocation(), lhs.getLatitude(),
-							lhs.getLongitude());
-					double rd = MapUtils.getDistance(favouritesAdapter.getLocation(), rhs.getLatitude(),
-							rhs.getLongitude());
-					return Double.compare(ld, rd);
-				}
-				return inst.compare(lhs.getName(), rhs.getName());
-			}
-		});
-		
+		favouritesAdapter.sortByDefault();
 		listView.setAdapter(favouritesAdapter);
 		listView.setOnItemClickListener(click);
 		bld.setPositiveButton(sortByDist ? R.string.sort_by_name :

@@ -20,7 +20,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import net.osmand.plus.IconsCache;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -247,7 +247,7 @@ public class CreateEditActionDialog extends DialogFragment {
         return (OsmandApplication)(getContext().getApplicationContext());
     }
 
-    private IconsCache getIconsCache(){
-        return getApplication().getIconsCache();
+    private UiUtilities getIconsCache(){
+        return getApplication().getUIUtilities();
     }
 }

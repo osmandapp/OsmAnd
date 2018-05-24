@@ -147,7 +147,6 @@ public class MapMarkersActiveFragment extends Fragment implements OsmAndCompassL
 	@Override
 	public void onResume() {
 		super.onResume();
-		adapter.setScreenOrientation(DashLocationFragment.getScreenOrientation(getActivity()));
 		startLocationUpdate();
 	}
 
@@ -220,12 +219,6 @@ public class MapMarkersActiveFragment extends Fragment implements OsmAndCompassL
 					if (location == null) {
 						location = mapActivity.getMyApplication().getLocationProvider().getLastKnownLocation();
 					}
-					MapViewTrackingUtilities utilities = mapActivity.getMapViewTrackingUtilities();
-					boolean useCenter = !(utilities.isMapLinkedToLocation() && location != null);
-
-					adapter.setUseCenter(useCenter);
-					adapter.setLocation(useCenter ? mapActivity.getMapLocation() : new LatLon(location.getLatitude(), location.getLongitude()));
-					adapter.setHeading(useCenter ? -mapActivity.getMapRotate() : heading != null ? heading : 99);
 					adapter.notifyDataSetChanged();
 				}
 			});

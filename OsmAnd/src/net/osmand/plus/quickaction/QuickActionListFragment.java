@@ -109,7 +109,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
 
     private void setUpToolbar(View view) {
         Toolbar  toolbar = (Toolbar) view.findViewById(R.id.custom_toolbar);
-        Drawable back    = getMyApplication().getIconsCache().getIcon(R.drawable.ic_arrow_back);
+        Drawable back    = getMyApplication().getUIUtilities().getIcon(R.drawable.ic_arrow_back);
         back.setColorFilter(ContextCompat.getColor(getContext(), R.color.color_white), PorterDuff.Mode.MULTIPLY);
         toolbar.setNavigationIcon(back);
         toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
@@ -161,7 +161,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
         AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(getContext(), R.style.OsmandLightTheme));
         builder.setTitle(R.string.quick_actions_delete);
         builder.setMessage(getResources().getString(R.string.quick_actions_delete_text, itemName));
-        builder.setIcon(getMyApplication().getIconsCache().getThemedIcon(R.drawable.ic_action_delete_dark));
+        builder.setIcon(getMyApplication().getUIUtilities().getThemedIcon(R.drawable.ic_action_delete_dark));
         builder.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 adapter.deleteItem(itemPosition);
@@ -216,7 +216,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
                 itemVH.title.setText(item.getName(getContext()));
                 itemVH.subTitle.setText(getResources().getString(R.string.quick_action_item_action, getActionPosition(position)));
 
-                itemVH.icon.setImageDrawable(getMyApplication().getIconsCache().getThemedIcon(item.getIconRes(getContext())));
+                itemVH.icon.setImageDrawable(getMyApplication().getUIUtilities().getThemedIcon(item.getIconRes(getContext())));
                 itemVH.handleView.setOnTouchListener(new View.OnTouchListener() {
                     @Override
                     public boolean onTouch(View v, MotionEvent event) {
@@ -411,8 +411,8 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
                 closeBtn = (ImageView) itemView.findViewById(R.id.closeImageButton);
                 container = itemView.findViewById(R.id.searchListItemLayout);
 
-                handleView.setImageDrawable(getMyApplication().getIconsCache().getThemedIcon(R.drawable.ic_action_reorder));
-                closeBtn.setImageDrawable(getMyApplication().getIconsCache().getThemedIcon(R.drawable.ic_action_remove_dark));
+                handleView.setImageDrawable(getMyApplication().getUIUtilities().getThemedIcon(R.drawable.ic_action_reorder));
+                closeBtn.setImageDrawable(getMyApplication().getUIUtilities().getThemedIcon(R.drawable.ic_action_remove_dark));
             }
         }
 

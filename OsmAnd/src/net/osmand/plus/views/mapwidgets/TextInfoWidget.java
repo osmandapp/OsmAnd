@@ -62,7 +62,7 @@ public class TextInfoWidget  {
 	}
 	
 	public void setImageDrawable(int res) {
-		setImageDrawable(app.getIconsCache().getIcon(res, 0), false);
+		setImageDrawable(app.getUIUtilities().getIcon(res, 0), false);
 	}
 	
 	

@@ -179,7 +179,7 @@ public class SearchAddressFragment extends Fragment {
 			}
 		});
 		OsmandApplication app = getApplication();
-		Drawable icon = getApplication().getIconsCache().getThemedIcon(R.drawable.ic_action_remove_dark);
+		Drawable icon = getApplication().getUIUtilities().getThemedIcon(R.drawable.ic_action_remove_dark);
 		((ImageView)findViewById(R.id.ResetBuilding)).setBackgroundDrawable(icon);
 		findViewById(R.id.ResetBuilding).setOnClickListener(new View.OnClickListener(){
 			@Override

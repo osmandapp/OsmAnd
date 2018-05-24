@@ -110,7 +110,7 @@ public class ContextMenuAdapter {
 		@LayoutRes
 		private int layoutId;
 		private final ConfigureMapMenu.OnClickListener changeAppModeListener;
-		private final IconsCache mIconsCache;
+		private final UiUtilities mIconsCache;
 
 		public ContextMenuArrayAdapter(Activity context,
 									   @LayoutRes int layoutRes,
@@ -124,7 +124,7 @@ public class ContextMenuAdapter {
 			this.lightTheme = lightTheme;
 			this.layoutId = layoutRes;
 			this.changeAppModeListener = changeAppModeListener;
-			mIconsCache = app.getIconsCache();
+			mIconsCache = app.getUIUtilities();
 		}
 
 		@Override
@@ -169,7 +169,7 @@ public class ContextMenuAdapter {
 			}
 			if (layoutId == R.layout.help_to_improve_item) {
 				TextView feedbackButton = (TextView) convertView.findViewById(R.id.feedbackButton);
-				Drawable pollIcon = app.getIconsCache().getThemedIcon(R.drawable.ic_action_big_poll);
+				Drawable pollIcon = app.getUIUtilities().getThemedIcon(R.drawable.ic_action_big_poll);
 				feedbackButton.setCompoundDrawablesWithIntrinsicBounds(null, pollIcon, null, null);
 				feedbackButton.setOnClickListener(new View.OnClickListener() {
 					@Override
@@ -181,7 +181,7 @@ public class ContextMenuAdapter {
 				});
 				TextView contactUsButton = (TextView) convertView.findViewById(R.id.contactUsButton);
 				Drawable contactUsIcon =
-						app.getIconsCache().getThemedIcon(R.drawable.ic_action_big_feedback);
+						app.getUIUtilities().getThemedIcon(R.drawable.ic_action_big_feedback);
 				contactUsButton.setCompoundDrawablesWithIntrinsicBounds(null, contactUsIcon, null,
 						null);
 				final String email = app.getString(R.string.support_email);

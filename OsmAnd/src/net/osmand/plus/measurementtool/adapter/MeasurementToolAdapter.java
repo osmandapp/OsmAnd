@@ -13,7 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import net.osmand.plus.GPXUtilities.WptPt;
-import net.osmand.plus.IconsCache;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -57,7 +57,7 @@ public class MeasurementToolAdapter extends RecyclerView.Adapter<MeasurementTool
 
 	@Override
 	public void onBindViewHolder(final MeasureToolItemVH holder, int pos) {
-		IconsCache iconsCache = mapActivity.getMyApplication().getIconsCache();
+		UiUtilities iconsCache = mapActivity.getMyApplication().getUIUtilities();
 		holder.iconReorder.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_reorder));
 		holder.iconReorder.setOnTouchListener(new View.OnTouchListener() {
 			@Override

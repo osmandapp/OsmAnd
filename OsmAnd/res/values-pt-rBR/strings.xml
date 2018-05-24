@@ -1483,7 +1483,7 @@ Pôr do Sol: %2$s</string>
 	<string name="show_transport_over_map">Mostrar paradas de transporte</string>
 	<string name="hello">Aplicativo de navegação OsmAnd</string>
 	<string name="update_poi_success">Dados de POI foram atualizados ({0} foram carregados)</string>
-	<string name="update_poi_error_local">Erro ao atualizar a lista local de POI</string>
+	<string name="update_poi_error_local">Não pôde atualizar a lista local de POIs</string>
 	<string name="update_poi_error_loading">Erro ao carregar dados do servidor</string>
 	<string name="update_poi_no_offline_poi_index">Não há dados de POI off-line para esta região</string>
 	<string name="update_poi_is_not_available_for_zoom">Aproximar zoom permite atualizar POIs</string>
@@ -1547,7 +1547,7 @@ Pôr do Sol: %2$s</string>
 	<string name="use_online_routing_descr">Usar a Internet para calcular a rota</string>
 	<string name="use_online_routing">Usar a navegação on-line</string>
 	<string name="osm_settings_descr">Especificar configurações de Openstreetmap.org (OSM) necessárias para envios ao OSM</string>
-	<string name="data_settings_descr">Especificar o idioma, baixar/atualizar dados</string>
+	<string name="data_settings_descr">Especificar o idioma, baixar/atualizar dados.</string>
 	<string name="data_settings">Dados</string>
 	<string name="additional_settings">Configurações adicionais</string>
 	<string name="update_tile">Atualizar mapa</string>
@@ -1960,10 +1960,10 @@ Pôr do Sol: %2$s</string>
     <string name="no_address_found">Sem endereço determinado</string>
 	<string name="looking_up_address">Procurando endereço</string>
     <string name="rendering_attr_horseRoutes_name">Rotas a cavalo</string>
-    <string name="update">Atualizar tudo</string>
+    <string name="update">Atualizar</string>
     <string name="only_download_over_wifi">Somente baixar via Wi-Fi</string>
     <string name="live_update">Atualização ao vivo</string>
-<string name="update_now">Atualizar já</string>
+<string name="update_now">Atualizar</string>
 <string name="route_distance">Distância:</string>
     <string name="route_duration">Tempo:</string>
     <string name="missing_write_external_storage_permission">App não tem permissão para usar o cartão SD</string>
@@ -2077,7 +2077,7 @@ Pôr do Sol: %2$s</string>
     <string name="search_my_location">Encontrar a minha posição</string>
     <string name="no_update_info_desc">Não verificar se há atualizações de versão ou descontos relacionados ao OsmAnd.</string>
     <string name="no_update_info">Não mostrar atualizações</string>
-    <string name="update_all_maps_now">Você deseja atualizar todos os seus mapas agora?</string>
+    <string name="update_all_maps_now">Atualizar todos os mapas agora?</string>
     <string name="clear_tile_data">Limpar todos os títulos</string>
     <string name="replace_favorite_confirmation">Você tem certeza que deseja substituir seu favorito %1$s?</string>
     <string name="shared_string_change">Mudar</string>
@@ -2904,4 +2904,15 @@ Pôr do Sol: %2$s</string>
 \ne muito mais…</string>
     <string name="download_wikipedia_description">Baixe artigos da Wikipédia por %1$s para lê-los offline.</string>
     <string name="wiki_article_search_text">Procurando o artigo wiki necessário</string>
+    <string name="shared_string_bookmark">Marcador</string>
+    <string name="hide_full_description">Ocultar descrição completa</string>
+    <string name="show_full_description">Mostrar descrição completa</string>
+    <string name="open_wikipedia_link_online_description">O link será aberto em um navegador web.</string>
+    <string name="how_to_open_link">Como abrir o link?</string>
+    <string name="read_wikipedia_offline">Ler a Wikipédia offline</string>
+    <string name="download_all">Baixar tudo</string>
+    <string name="purchase_cancelled_dialog_title">Você cancelou a sua assinatura OsmAnd Live</string>
+    <string name="shared_string_gpx_files">Arquivos GPX</string>
+    <string name="access_intermediate_arrival_time">Hora de chegada intermediária</string>
+    <string name="map_widget_intermediate_time">Hora intermediária</string>
     </resources>

@@ -51,7 +51,7 @@ import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnRowItemClick;
 import net.osmand.plus.ContextMenuItem;
-import net.osmand.plus.IconsCache;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
@@ -443,12 +443,12 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 		flat.setVisibility(View.GONE);
 		ImageView settingsButton = (ImageView) dashboardView.findViewById(R.id.toolbar_settings);
 		settingsButton.setVisibility(View.GONE);
-		IconsCache iconsCache = mapActivity.getMyApplication().getIconsCache();
+		UiUtilities iconsCache = mapActivity.getMyApplication().getUIUtilities();
 		ImageView lst = (ImageView) dashboardView.findViewById(R.id.toolbar_list);
 		lst.setVisibility(View.GONE);
 		ImageView back = (ImageView) dashboardView.findViewById(R.id.toolbar_back);
 		back.setImageDrawable(
-				getMyApplication().getIconsCache().getIcon(R.drawable.ic_arrow_back));
+				getMyApplication().getUIUtilities().getIcon(R.drawable.ic_arrow_back));
 		back.setOnClickListener(new View.OnClickListener() {
 
 			@Override

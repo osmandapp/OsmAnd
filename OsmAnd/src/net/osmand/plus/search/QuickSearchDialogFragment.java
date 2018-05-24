@@ -284,9 +284,9 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 		buttonToolbarView = view.findViewById(R.id.button_toolbar_layout);
 		buttonToolbarImage = (ImageView) view.findViewById(R.id.buttonToolbarImage);
-		buttonToolbarImage.setImageDrawable(app.getIconsCache().getThemedIcon(R.drawable.ic_action_marker_dark));
+		buttonToolbarImage.setImageDrawable(app.getUIUtilities().getThemedIcon(R.drawable.ic_action_marker_dark));
 		buttonToolbarFilter = (ImageButton) view.findViewById(R.id.filterButton);
-		buttonToolbarFilter.setImageDrawable(app.getIconsCache().getThemedIcon(R.drawable.ic_action_filter));
+		buttonToolbarFilter.setImageDrawable(app.getUIUtilities().getThemedIcon(R.drawable.ic_action_filter));
 		buttonToolbarFilter.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -427,7 +427,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		if (!app.getSettings().isLightContent()) {
 			toolbar.setBackgroundColor(ContextCompat.getColor(mapActivity, R.color.actionbar_dark_color));
 		}
-		toolbar.setNavigationIcon(app.getIconsCache().getThemedIcon(R.drawable.ic_arrow_back));
+		toolbar.setNavigationIcon(app.getUIUtilities().getThemedIcon(R.drawable.ic_arrow_back));
 		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
 		toolbar.setNavigationOnClickListener(
 				new OnClickListener() {
@@ -441,7 +441,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		);
 
 		toolbarEdit = (Toolbar) view.findViewById(R.id.toolbar_edit);
-		toolbarEdit.setNavigationIcon(app.getIconsCache().getIcon(R.drawable.ic_action_remove_dark));
+		toolbarEdit.setNavigationIcon(app.getUIUtilities().getIcon(R.drawable.ic_action_remove_dark));
 		toolbarEdit.setNavigationContentDescription(R.string.shared_string_cancel);
 		toolbarEdit.setNavigationOnClickListener(
 				new OnClickListener() {
@@ -588,7 +588,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 		progressBar = (ProgressBar) view.findViewById(R.id.searchProgressBar);
 		clearButton = (ImageButton) view.findViewById(R.id.clearButton);
-		clearButton.setImageDrawable(app.getIconsCache().getThemedIcon(R.drawable.ic_action_remove_dark));
+		clearButton.setImageDrawable(app.getUIUtilities().getThemedIcon(R.drawable.ic_action_remove_dark));
 		clearButton.setOnClickListener(
 				new OnClickListener() {
 					@Override
@@ -842,10 +842,10 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		buttonToolbarFilter.setVisibility(filterButtonVisible ? View.VISIBLE : View.GONE);
 		if (filterButtonVisible) {
 			if (word.getResult().object instanceof PoiUIFilter) {
-				buttonToolbarFilter.setImageDrawable(app.getIconsCache().getIcon(R.drawable.ic_action_filter,
+				buttonToolbarFilter.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_filter,
 						app.getSettings().isLightContent() ? R.color.color_dialog_buttons_light : R.color.color_dialog_buttons_dark));
 			} else{
-				buttonToolbarFilter.setImageDrawable(app.getIconsCache().getThemedIcon(R.drawable.ic_action_filter));
+				buttonToolbarFilter.setImageDrawable(app.getUIUtilities().getThemedIcon(R.drawable.ic_action_filter));
 			}
 		}
 	}
@@ -1008,14 +1008,14 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			double d = MapUtils.getDistance(latLon, location.getLatitude(), location.getLongitude());
 			String dist = OsmAndFormatter.getFormattedDistance((float) d, app);
 			searchEditText.setHint(getString(R.string.dist_away_from_my_location, dist));
-			clearButton.setImageDrawable(app.getIconsCache().getIcon(R.drawable.ic_action_get_my_location, R.color.color_myloc_distance));
+			clearButton.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_get_my_location, R.color.color_myloc_distance));
 		} else {
 			if (addressSearch) {
 				searchEditText.setHint(R.string.type_address);
 			} else {
 				searchEditText.setHint(R.string.search_poi_category_hint);
 			}
-			clearButton.setImageDrawable(app.getIconsCache().getThemedIcon(R.drawable.ic_action_remove_dark));
+			clearButton.setImageDrawable(app.getUIUtilities().getThemedIcon(R.drawable.ic_action_remove_dark));
 		}
 	}
 
@@ -1977,7 +1977,6 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		LatLon latLon = null;
 		if (location != null) {
 			latLon = new LatLon(location.getLatitude(), location.getLongitude());
-			navigationInfo.updateLocation(location);
 		}
 		updateLocationUI(latLon, heading);
 	}

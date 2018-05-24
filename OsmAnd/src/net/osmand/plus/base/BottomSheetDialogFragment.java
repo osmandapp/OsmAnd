@@ -79,7 +79,7 @@ public abstract class BottomSheetDialogFragment extends DialogFragment {
 	protected Drawable getIcon(@DrawableRes int drawableRes, @ColorRes int color) {
 		OsmandApplication app = getMyApplication();
 		if (app != null) {
-			return app.getIconsCache().getIcon(drawableRes, color);
+			return app.getUIUtilities().getIcon(drawableRes, color);
 		} else {
 			return null;
 		}
@@ -89,7 +89,7 @@ public abstract class BottomSheetDialogFragment extends DialogFragment {
 	protected Drawable getContentIcon(@DrawableRes int drawableRes) {
 		OsmandApplication app = getMyApplication();
 		if (app != null) {
-			return app.getIconsCache().getThemedIcon(drawableRes);
+			return app.getUIUtilities().getThemedIcon(drawableRes);
 		} else {
 			return null;
 		}

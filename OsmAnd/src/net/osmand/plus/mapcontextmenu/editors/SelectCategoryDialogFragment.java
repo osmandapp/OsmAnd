@@ -18,7 +18,7 @@ import net.osmand.AndroidUtils;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.WptPt;
-import net.osmand.plus.IconsCache;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -168,7 +168,7 @@ public class SelectCategoryDialogFragment extends DialogFragment {
 
 	private static Drawable getIcon(final Activity activity, int iconId) {
 		OsmandApplication app = (OsmandApplication)activity.getApplication();
-		IconsCache iconsCache = app.getIconsCache();
+		UiUtilities iconsCache = app.getUIUtilities();
 		boolean light = app.getSettings().isLightContent();
 		return iconsCache.getIcon(iconId,
 				light ? R.color.icon_color : R.color.icon_color_light);

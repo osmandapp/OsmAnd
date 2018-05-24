@@ -41,7 +41,7 @@ public class QuickSearchButtonListItem extends QuickSearchListItem {
 	@Override
 	public Drawable getIcon() {
 		if (iconId != 0) {
-			return app.getIconsCache().getIcon(iconId, colorId);
+			return app.getUIUtilities().getIcon(iconId, colorId);
 		} else {
 			return null;
 		}

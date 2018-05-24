@@ -54,7 +54,7 @@ public abstract class OsmandListActivity extends
 	public MenuItem createMenuItem(Menu m, int id, int titleRes, int iconDark, int menuItemType) {
 		MenuItem menuItem = m.add(0, id, 0, titleRes);
 		if (iconDark != 0) {
-			menuItem.setIcon(getMyApplication().getIconsCache().getIcon(iconDark));
+			menuItem.setIcon(getMyApplication().getUIUtilities().getIcon(iconDark));
 		}
 		menuItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override

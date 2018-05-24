@@ -47,7 +47,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import net.osmand.AndroidUtils;
 import net.osmand.Location;
 import net.osmand.data.LatLon;
@@ -58,6 +57,7 @@ import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities.UpdateLocationViewCache;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.dashboard.DashLocationFragment;
@@ -98,6 +98,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 	private Float heading;
 	private boolean locationUpdateStarted;
 	private boolean compassUpdateAllowed = true;
+
 
 	public void setListener(OnMapMarkersSavedListener listener) {
 		this.listener = listener;
@@ -497,7 +498,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 	@Override
 	public void onResume() {
 		super.onResume();
-		adapter.setScreenOrientation(DashLocationFragment.getScreenOrientation(getActivity()));
+		
 		startLocationUpdate();
 
 		final View focusedView = getDialog().getCurrentFocus();
@@ -1020,7 +1021,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 	}
 
 	private Drawable getColoredIcon(@DrawableRes int resId, @ColorRes int colorResId) {
-		return getMyApplication().getIconsCache().getIcon(resId, colorResId);
+		return getMyApplication().getUIUtilities().getIcon(resId, colorResId);
 	}
 
 	private MapActivity getMapActivity() {
@@ -1065,15 +1066,6 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			mapActivity.getMyApplication().runInUIThread(new Runnable() {
 				@Override
 				public void run() {
-					if (location == null) {
-						location = mapActivity.getMyApplication().getLocationProvider().getLastKnownLocation();
-					}
-					MapViewTrackingUtilities utilities = mapActivity.getMapViewTrackingUtilities();
-					boolean useCenter = !(utilities.isMapLinkedToLocation() && location != null);
-
-					adapter.setUseCenter(useCenter);
-					adapter.setLocation(useCenter ? mapActivity.getMapLocation() : new LatLon(location.getLatitude(), location.getLongitude()));
-					adapter.setHeading(useCenter ? -mapActivity.getMapRotate() : heading != null ? heading : 99);
 					adapter.notifyDataSetChanged();
 				}
 			});

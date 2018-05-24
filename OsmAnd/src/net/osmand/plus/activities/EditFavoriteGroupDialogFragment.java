@@ -244,7 +244,7 @@ public class EditFavoriteGroupDialogFragment extends MenuBottomSheetDialogFragme
 		if (color == 0) {
 			colorImageView.setImageDrawable(getContentIcon(R.drawable.ic_action_circle));
 		} else {
-			colorImageView.setImageDrawable(getMyApplication().getIconsCache().getPaintedIcon(R.drawable.ic_action_circle, color));
+			colorImageView.setImageDrawable(getMyApplication().getUIUtilities().getPaintedIcon(R.drawable.ic_action_circle, color));
 		}
 	}
 
@@ -284,7 +284,7 @@ public class EditFavoriteGroupDialogFragment extends MenuBottomSheetDialogFragme
 				TextView textView = (TextView) v.findViewById(R.id.text1);
 				textView.setText(app.getString(ColorDialogs.paletteColors[position]));
 				textView.setCompoundDrawablesWithIntrinsicBounds(null, null,
-						app.getIconsCache().getPaintedIcon(R.drawable.ic_action_circle, color), null);
+						app.getUIUtilities().getPaintedIcon(R.drawable.ic_action_circle, color), null);
 				textView.setCompoundDrawablePadding(AndroidUtils.dpToPx(getContext(), 10f));
 				v.findViewById(R.id.divider).setVisibility(View.GONE);
 			}

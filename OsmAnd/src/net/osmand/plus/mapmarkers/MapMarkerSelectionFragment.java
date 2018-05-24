@@ -36,11 +36,11 @@ public class MapMarkerSelectionFragment extends BaseOsmAndDialogFragment {
 	private Float heading;
 	private boolean useCenter;
 	private boolean nightMode;
-	private int screenOrientation;
 	private boolean target;
 	private boolean intermediate;
 
 	private OnMarkerSelectListener onClickListener;
+	private int screenOrientation;
 
 	@Nullable
 	@Override
@@ -63,7 +63,7 @@ public class MapMarkerSelectionFragment extends BaseOsmAndDialogFragment {
 			MapRouteInfoMenu routeInfoMenu = mapActivity.getMapLayers().getMapControlsLayer().getMapRouteInfoMenu();
 			onClickListener = routeInfoMenu.getOnMarkerSelectListener();
 
-			screenOrientation = DashLocationFragment.getScreenOrientation(mapActivity);
+			screenOrientation = app.getUIUtilities().getScreenOrientation();
 
 			MapViewTrackingUtilities trackingUtils = mapActivity.getMapViewTrackingUtilities();
 			if (trackingUtils != null) {
@@ -84,7 +84,7 @@ public class MapMarkerSelectionFragment extends BaseOsmAndDialogFragment {
 
 		View view = inflater.inflate(R.layout.map_marker_selection_fragment, container, false);
 		ImageButton closeButton = (ImageButton) view.findViewById(R.id.closeButton);
-		closeButton.setImageDrawable(getMyApplication().getIconsCache().getIcon(R.drawable.ic_action_mode_back));
+		closeButton.setImageDrawable(getMyApplication().getUIUtilities().getIcon(R.drawable.ic_action_mode_back));
 		closeButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {

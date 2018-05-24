@@ -17,7 +17,7 @@ import com.squareup.picasso.RequestCreator;
 
 import net.osmand.AndroidUtils;
 import net.osmand.PicassoUtils;
-import net.osmand.plus.IconsCache;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
@@ -56,7 +56,7 @@ public class SavedArticlesRvAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
 		int colorId = settings.isLightContent()
 				? R.color.wikivoyage_active_light : R.color.wikivoyage_active_dark;
-		IconsCache ic = app.getIconsCache();
+		UiUtilities ic = app.getUIUtilities();
 		readIcon = ic.getIcon(R.drawable.ic_action_read_article, colorId);
 		deleteIcon = ic.getIcon(R.drawable.ic_action_read_later_fill, colorId);
 	}
