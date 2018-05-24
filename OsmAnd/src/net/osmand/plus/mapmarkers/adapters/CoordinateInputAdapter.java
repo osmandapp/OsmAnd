@@ -30,7 +30,7 @@ public class CoordinateInputAdapter extends RecyclerView.Adapter<MapMarkerItemVi
 	public CoordinateInputAdapter(MapActivity mapActivity, List<MapMarker> mapMarkers) {
 		this.mapActivity = mapActivity;
 		iconsCache = mapActivity.getMyApplication().getUIUtilities();
-		updateViewCache = iconsCache.getUpdateLocationViewCache(mapActivity);
+		updateViewCache = iconsCache.getUpdateLocationViewCache();
 		this.mapMarkers = mapMarkers;
 		nightTheme = !mapActivity.getMyApplication().getSettings().isLightContent();
 	}

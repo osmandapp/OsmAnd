@@ -166,7 +166,7 @@ public class FavoritesListFragment extends OsmAndListFragment implements SearchA
 			this.activity = activity;
 			this.app = ((OsmandApplication) activity.getApplication());
 			this.shouldShowMenuButton = shouldShowMenuButton;
-			cache = app.getUIUtilities().getUpdateLocationViewCache(activity);
+			cache = app.getUIUtilities().getUpdateLocationViewCache();
 		}
 
 

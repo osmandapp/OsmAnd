@@ -721,7 +721,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 
 		AmenityAdapter(List<Amenity> list) {
 			super(SearchPOIActivity.this, R.layout.searchpoi_list, list);
-			updateLocationViewCache = getMyApplication().getUIUtilities().getUpdateLocationViewCache(SearchPOIActivity.this);
+			updateLocationViewCache = getMyApplication().getUIUtilities().getUpdateLocationViewCache();
 			originalAmenityList = new ArrayList<Amenity>(list);
 			this.setNotifyOnChange(false);
 		}
@@ -732,7 +732,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 
 		public void setNewModel(List<Amenity> amenityList) {
 			setNotifyOnChange(false);
-			updateLocationViewCache = getMyApplication().getUIUtilities().getUpdateLocationViewCache(SearchPOIActivity.this);
+			updateLocationViewCache = getMyApplication().getUIUtilities().getUpdateLocationViewCache();
 			originalAmenityList = new ArrayList<Amenity>(amenityList);
 			clear();
 			for (Amenity obj : amenityList) {

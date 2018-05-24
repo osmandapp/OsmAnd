@@ -74,7 +74,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 	public MapMarkersGroupsAdapter(MapActivity mapActivity) {
 		this.mapActivity = mapActivity;
 		app = mapActivity.getMyApplication();
-		updateLocationViewCache = app.getUIUtilities().getUpdateLocationViewCache(mapActivity);
+		updateLocationViewCache = app.getUIUtilities().getUpdateLocationViewCache();
 		night = !mapActivity.getMyApplication().getSettings().isLightContent();
 		updateShowDirectionMarkers();
 		createDisplayGroups();

@@ -116,7 +116,7 @@ public class QuickSearchCoordinatesFragment extends DialogFragment implements Os
 				dismiss();
 			}
 		});
-		updateLocationViewCache = app.getUIUtilities().getUpdateLocationViewCache(getActivity());
+		updateLocationViewCache = app.getUIUtilities().getUpdateLocationViewCache();
 		myLocation = app.getLocationProvider().getLastKnownLocation();
 		currentFormat = app.getSettings().COORDINATES_FORMAT.get();
 

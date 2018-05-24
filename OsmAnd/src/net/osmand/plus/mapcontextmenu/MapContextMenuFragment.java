@@ -142,7 +142,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		processScreenHeight(container);
 
 		menu = getMapActivity().getContextMenu();
-		updateLocationViewCache = getMyApplication().getUIUtilities().getUpdateLocationViewCache(getMapActivity());
+		updateLocationViewCache = getMyApplication().getUIUtilities().getUpdateLocationViewCache();
 
 		markerPaddingPx = dpToPx(MARKER_PADDING_DP);
 		markerPaddingXPx = dpToPx(MARKER_PADDING_X_DP);
@@ -1173,7 +1173,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			dismissMenu();
 			return;
 		}
-		updateLocationViewCache = getMyApplication().getUIUtilities().getUpdateLocationViewCache(getMapActivity());
+		updateLocationViewCache = getMyApplication().getUIUtilities().getUpdateLocationViewCache();
 		getMapActivity().getMapViewTrackingUtilities().setContextMenu(menu);
 		getMapActivity().getMapViewTrackingUtilities().setMapLinkedToLocation(false);
 		wasDrawerDisabled = getMapActivity().isDrawerDisabled();

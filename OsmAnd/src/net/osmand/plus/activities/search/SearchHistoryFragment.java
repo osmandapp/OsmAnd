@@ -124,7 +124,7 @@ public class SearchHistoryFragment extends OsmAndListFragment implements SearchA
 		//Hardy: onResume() code is needed so that search origin is properly reflected in tab contents when origin has been changed on one tab, then tab is changed to another one.
 		location = null;
 		FragmentActivity activity = getActivity();
-		updateLocationViewCache = getMyApplication().getUIUtilities().getUpdateLocationViewCache(getActivity());
+		updateLocationViewCache = getMyApplication().getUIUtilities().getUpdateLocationViewCache();
 		Intent intent = activity.getIntent();
 		if (intent != null) {
 			double lat = intent.getDoubleExtra(SEARCH_LAT, 0);

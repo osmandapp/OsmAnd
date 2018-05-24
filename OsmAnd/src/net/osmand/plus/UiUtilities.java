@@ -99,9 +99,9 @@ public class UiUtilities {
 	}
 
 
-	public UpdateLocationViewCache getUpdateLocationViewCache(Activity a){
+	public UpdateLocationViewCache getUpdateLocationViewCache(){
 		UpdateLocationViewCache uvc = new UpdateLocationViewCache();
-		uvc.screenOrientation = getScreenOrientation(a);
+		uvc.screenOrientation = getScreenOrientation();
 		return uvc;
 	}
 	
@@ -172,7 +172,7 @@ public class UiUtilities {
 			if (fromLoc == null || h == null || toLoc == null) {
 				dd.setAngle(0);
 			} else {
-				float orientation = (cache == null ? 0 : -cache.screenOrientation) * 90;
+				float orientation = (cache == null ? 0 : -cache.screenOrientation) ;
 				dd.setAngle(mes[1] - h + 180 + orientation);
 			}
 			if (newImage) {
@@ -199,8 +199,8 @@ public class UiUtilities {
 		}
 	}
 	
-	public static int getScreenOrientation(Activity a) {
-		int screenOrientation = ((WindowManager) a.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getRotation();
+	public int getScreenOrientation() {
+		int screenOrientation = ((WindowManager) app.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getRotation();
 		switch (screenOrientation) {
 			case ORIENTATION_0:   // Device default (normally portrait)
 				screenOrientation = 0;
@@ -216,7 +216,7 @@ public class UiUtilities {
 				break;
 		}
 		//Looks like screenOrientation correction must not be applied for devices without compass?
-		Sensor compass = ((SensorManager) a.getSystemService(Context.SENSOR_SERVICE)).getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
+		Sensor compass = ((SensorManager) app.getSystemService(Context.SENSOR_SERVICE)).getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
 		if (compass == null) {
 			screenOrientation = 0;
 		}

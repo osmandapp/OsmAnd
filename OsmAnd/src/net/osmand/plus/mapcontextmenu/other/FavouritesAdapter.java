@@ -1,5 +1,12 @@
 package net.osmand.plus.mapcontextmenu.other;
 
+import java.util.List;
+
+import net.osmand.data.FavouritePoint;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities.UpdateLocationViewCache;
+import net.osmand.plus.base.FavoriteImageDrawable;
 import android.app.Activity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -7,18 +14,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import net.osmand.data.FavouritePoint;
-import net.osmand.data.LatLon;
-import net.osmand.plus.UiUtilities;
-import net.osmand.plus.OsmAndFormatter;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities.UpdateLocationViewCache;
-import net.osmand.plus.base.FavoriteImageDrawable;
-import net.osmand.plus.dashboard.DashLocationFragment;
-import net.osmand.util.MapUtils;
-
-import java.util.List;
 
 public class FavouritesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -29,10 +24,10 @@ public class FavouritesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
 	private UpdateLocationViewCache cache;
 
-	public FavouritesAdapter(OsmandApplication app, Activity a, List<FavouritePoint> FavouritePoints) {
+	public FavouritesAdapter(OsmandApplication app, List<FavouritePoint> FavouritePoints) {
 		this.app = app;
 		this.favouritePoints = FavouritePoints;
-		cache = app.getUIUtilities().getUpdateLocationViewCache(a);
+		cache = app.getUIUtilities().getUpdateLocationViewCache();
 	}
 
 	@Override

@@ -60,7 +60,7 @@ public class MapMarkersWidgetsFactory {
 	public MapMarkersWidgetsFactory(final MapActivity map) {
 		this.map = map;
 		helper = map.getMyApplication().getMapMarkersHelper();
-		screenOrientation = map.getMyApplication().getUIUtilities().getScreenOrientation(map);
+		screenOrientation = map.getMyApplication().getUIUtilities().getScreenOrientation();
 		portraitMode = AndroidUiHelper.isOrientationPortrait(map);
 
 		addressTopBar = map.findViewById(R.id.map_top_bar);

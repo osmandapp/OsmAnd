@@ -55,7 +55,7 @@ public abstract class DashLocationFragment extends DashBaseFragment {
 			return;
 		}
 		UiUtilities ic = getMyApplication().getUIUtilities();
-		UpdateLocationViewCache cache = ic.getUpdateLocationViewCache(getActivity());
+		UpdateLocationViewCache cache = ic.getUpdateLocationViewCache();
 		for (DashLocationView lv : distances) {
 			cache.arrowResId = lv.arrowResId;
 			cache.paintTxt = lv.paint;
