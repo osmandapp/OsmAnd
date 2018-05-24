@@ -83,7 +83,7 @@ public class SavedArticlesTabFragment extends BaseOsmAndFragment implements Trav
 
 	@Override
 	public void savedArticlesUpdated() {
-		if (adapter != null) {
+		if (adapter != null && getActivity() != null) {
 			List<Object> newItems = getItems();
 			SavedArticlesDiffCallback diffCallback = new SavedArticlesDiffCallback(adapter.getItems(), newItems);
 			DiffUtil.DiffResult diffRes = DiffUtil.calculateDiff(diffCallback);
