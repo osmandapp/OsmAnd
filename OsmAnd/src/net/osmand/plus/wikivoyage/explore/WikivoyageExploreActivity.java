@@ -298,7 +298,8 @@ public class WikivoyageExploreActivity extends TabActivity implements DownloadEv
 	private void updateFragments() {
 		ExploreTabFragment exploreTabFragment = getExploreTabFragment();
 		SavedArticlesTabFragment savedArticlesTabFragment = getSavedArticlesTabFragment();
-		if (exploreTabFragment != null && savedArticlesTabFragment != null) {
+		if (exploreTabFragment != null && savedArticlesTabFragment != null
+				&& exploreTabFragment.isAdded() && savedArticlesTabFragment.isAdded()) {
 			exploreTabFragment.populateData();
 			savedArticlesTabFragment.savedArticlesUpdated();
 			updateNeeded = false;
