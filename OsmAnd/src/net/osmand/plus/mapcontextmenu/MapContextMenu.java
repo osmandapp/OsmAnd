@@ -1,15 +1,8 @@
 package net.osmand.plus.mapcontextmenu;
 
-import android.app.Dialog;
-import android.app.ProgressDialog;
-import android.content.DialogInterface;
-import android.graphics.drawable.Drawable;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v7.app.AlertDialog;
-import android.view.View;
-import android.widget.LinearLayout;
+import java.lang.ref.WeakReference;
+import java.util.LinkedList;
+import java.util.List;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.Location;
@@ -56,11 +49,16 @@ import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarControllerType;
 import net.osmand.util.Algorithms;
-import net.osmand.util.MapUtils;
-
-import java.lang.ref.WeakReference;
-import java.util.LinkedList;
-import java.util.List;
+import android.app.Dialog;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.graphics.drawable.Drawable;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
+import android.view.View;
+import android.widget.LinearLayout;
 
 public class MapContextMenu extends MenuTitleController implements StateChangedListener<ApplicationMode>,
 		MapMarkerChangedListener, TargetPointChangedListener {
@@ -84,9 +82,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 	private boolean centerMarker;
 	private int mapZoom;
 
-	private LatLon myLocation;
 	private boolean inLocationUpdate = false;
-	private boolean cachedMyLocation;
 	private boolean appModeChanged;
 	private boolean appModeListenerAdded;
 	private boolean autoHide;
@@ -293,9 +289,6 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 						boolean update, boolean restorePrevious) {
 		OsmandApplication app = mapActivity.getMyApplication();
 
-		if (myLocation == null) {
-			updateMyLocation(app.getLocationProvider().getLastKnownLocation(), false);
-		}
 
 		if (!update && isVisible()) {
 			if (this.object == null || !this.object.equals(object)) {
@@ -422,7 +415,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 	}
 
 	public void onFragmentResume() {
-		if (active && displayDistanceDirection() && myLocation != null) {
+		if (active && displayDistanceDirection()) {
 			updateLocation(false, true, false);
 		}
 	}
@@ -1252,12 +1245,8 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 	private void updateMyLocation(Location location, boolean updateLocationUi) {
 		if (location == null) {
 			location = getMapActivity().getMyApplication().getLocationProvider().getLastStaleKnownLocation();
-			cachedMyLocation = location != null;
-		} else {
-			cachedMyLocation = false;
 		}
 		if (location != null) {
-			myLocation = new LatLon(location.getLatitude(), location.getLongitude());
 			if (updateLocationUi) {
 				updateLocation(false, true, false);
 			}

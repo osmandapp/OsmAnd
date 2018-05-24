@@ -137,7 +137,7 @@ public class UiUtilities {
 			} else {
 				useCenter = true;
 				fromLoc = app.getMapViewTrackingUtilities().getMapLocation();
-				h = app.getMapViewTrackingUtilities().getHeading();
+				h = app.getMapViewTrackingUtilities().getMapRotate();
 				if(h != null) {
 					h = -h;
 				}
@@ -172,7 +172,7 @@ public class UiUtilities {
 			if (fromLoc == null || h == null || toLoc == null) {
 				dd.setAngle(0);
 			} else {
-				float orientation = (cache == null ? 0 : cache.screenOrientation) * 90;
+				float orientation = (cache == null ? 0 : -cache.screenOrientation) * 90;
 				dd.setAngle(mes[1] - h + 180 + orientation);
 			}
 			if (newImage) {
