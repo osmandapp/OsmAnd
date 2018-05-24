@@ -102,6 +102,7 @@ public class TravelArticle {
 
 	@NonNull
 	public static String getImageUrl(@NonNull String imageTitle, boolean thumbnail) {
+		imageTitle = imageTitle.replace(" ", "_");
 		try {
 			imageTitle = URLDecoder.decode(imageTitle, "UTF-8");
 		} catch (UnsupportedEncodingException e) {
@@ -120,7 +121,7 @@ public class TravelArticle {
 	@Size(2)
 	@NonNull
 	private static String[] getHash(@NonNull String s) {
-		String md5 = new String(Hex.encodeHex(DigestUtils.md5(s.replace(" ", "_"))));
+		String md5 = new String(Hex.encodeHex(DigestUtils.md5(s)));
 		return new String[]{md5.substring(0, 1), md5.substring(0, 2)};
 	}
 }
