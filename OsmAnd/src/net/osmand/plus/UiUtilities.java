@@ -122,10 +122,10 @@ public class UiUtilities {
 			LatLon toLoc) {
 		float[] mes = new float[2];
 		boolean stale = false;
-		LatLon fromLoc = cache.specialFrom;
-		boolean useCenter = cache.specialFrom != null;
+		LatLon fromLoc = cache == null ? null : cache.specialFrom;
+		boolean useCenter = fromLoc != null;
 		Float h = null;
-		if (cache.specialFrom == null) {
+		if (fromLoc == null) {
 			Location loc = app.getLocationProvider().getLastKnownLocation();
 			h = app.getLocationProvider().getHeading();
 			if (loc == null) {
@@ -150,7 +150,7 @@ public class UiUtilities {
 
 		if (arrow != null) {
 			boolean newImage = false;
-			int arrowResId = cache.arrowResId;
+			int arrowResId = cache == null ? 0 : cache.arrowResId;
 			if (arrowResId == 0) {
 				arrowResId = R.drawable.ic_direction_arrow;
 			}
@@ -161,7 +161,7 @@ public class UiUtilities {
 			} else {
 				dd = (DirectionDrawable) arrow.getDrawable();
 			}
-			int imgColorSet = cache.arrowColor;
+			int imgColorSet = cache == null ? 0 : cache.arrowColor;
 			if (imgColorSet == 0) {
 				imgColorSet = useCenter ? R.color.color_distance : R.color.color_myloc_distance;
 				if (stale) {
@@ -172,7 +172,8 @@ public class UiUtilities {
 			if (fromLoc == null || h == null || toLoc == null) {
 				dd.setAngle(0);
 			} else {
-				dd.setAngle(mes[1] - h + 180 + cache.screenOrientation);
+				float orientation = (cache == null ? 0 : cache.screenOrientation) * 90;
+				dd.setAngle(mes[1] - h + 180 + orientation);
 			}
 			if (newImage) {
 				arrow.setImageDrawable(dd);

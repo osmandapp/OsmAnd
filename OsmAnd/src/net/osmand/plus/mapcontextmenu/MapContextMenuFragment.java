@@ -142,6 +142,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		processScreenHeight(container);
 
 		menu = getMapActivity().getContextMenu();
+		updateLocationViewCache = getMyApplication().getUIUtilities().getUpdateLocationViewCache(getMapActivity());
 
 		markerPaddingPx = dpToPx(MARKER_PADDING_DP);
 		markerPaddingXPx = dpToPx(MARKER_PADDING_X_DP);

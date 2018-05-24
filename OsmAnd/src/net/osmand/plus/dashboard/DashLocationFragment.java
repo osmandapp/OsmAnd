@@ -18,7 +18,6 @@ import android.widget.TextView;
 public abstract class DashLocationFragment extends DashBaseFragment {
 
 	protected List<DashLocationView> distances = new ArrayList<DashLocationFragment.DashLocationView>();
-	private int screenOrientation;
 
 	public static class DashLocationView {
 		public ImageView arrow;
@@ -39,7 +38,6 @@ public abstract class DashLocationFragment extends DashBaseFragment {
 	@Override
 	public void onOpenDash() {
 		//Hardy: getRotation() is the correction if device's screen orientation != the default display's standard orientation
-		screenOrientation = UiUtilities.getScreenOrientation(getActivity());
 	}
 
 
