@@ -2056,4 +2056,61 @@
 	<string name="poi_bridge_waterway">Γέφυρα θαλάσσιων οδών</string>
 	<string name="poi_bridge_structure_beam">Δομή γέφυρας: ακτινωτή</string>
 	<string name="poi_bridge_structure_simple_suspension">Δομή γέφυρας: απλή ανάρτηση</string>
+	<string name="poi_bridge_structure_suspension">Δομή γέφυρας: κρεμαστή</string>
+	<string name="poi_bridge_structure_arch">Δομή γέφυρας: τόξο</string>
+	<string name="poi_bridge_structure_truss">Δομή γέφυρας: δικτυωτή</string>
+	<string name="poi_bridge_structure_floating">Δομή γέφυρας: επιπλέουσα</string>
+	<string name="poi_bridge_structure_humpback">Δομή γέφυρας: με καμπούρα</string>
+	<string name="poi_bridge_structure_cable_stayed">Δομή γέφυρας: καλωδιωτή</string>
+	<string name="poi_bridge_structure_boardwalk">Δομή γέφυρας: σανιδωτή</string>
+	<string name="poi_bridge_structure_simple_wooden">Δομή γέφυρας: απλό ξύλο</string>
+	<string name="poi_bridge_structure_viaduct">Δομή γέφυρας: οδογέφυρα</string>
+	<string name="poi_bridge_structure_aqueduct">Δομή γέφυρας: υδραγωγείο</string>
+	<string name="poi_bridge_structure_log">Δομή γέφυρας: κορμοί</string>
+	<string name="poi_bridge_type_movable">Δομή γέφυρας: κινητή</string>
+	<string name="poi_bridge_movable_bascule">Τύπος κινητής γέφυρας: με αντίβαρο</string>
+	<string name="poi_bridge_movable_swing">Τύπος κινητής γέφυρας: περιστρεφόμενη</string>
+	<string name="poi_bridge_movable_drawbridge">Τύπος κινητής γέφυρας: συρόμενη</string>
+	<string name="poi_bridge_movable_submersible">Τύπος κινητής γέφυρας: υποβρύχια</string>
+	<string name="poi_bridge_movable_transporter">Τύπος κινητής γέφυρας: μεταφορική</string>
+	<string name="poi_bridge_movable_retractable">Τύπος κινητής γέφυρας: συρόμενη</string>
+
+	<string name="poi_lit_yes">Φωτισμένο: ναι</string>
+	<string name="poi_lit_no">Φωτισμένο: όχι</string>
+
+	<string name="poi_surface_unpaved">Επιφάνεια: χωρίς πλακόστρωση</string>
+	<string name="poi_surface_paved">Επιφάνεια: πλακοστρωμένη</string>
+	<string name="poi_surface_asphalt">Επιφάνεια: άσφαλτος</string>
+	<string name="poi_surface_concrete">Επιφάνεια: σκυρόδεμα</string>
+	<string name="poi_surface_sett">Επιφάνεια: κυβόλιθος</string>
+	<string name="poi_surface_cobblestone">Επιφάνεια: βότσαλο</string>
+	<string name="poi_surface_paving_stones">Επιφάνεια: πλάκες</string>
+	<string name="poi_surface_pebblestone">Επιφάνεια: βότσαλα</string>
+	<string name="poi_surface_stone">Επιφάνεια: πέτρα</string>
+	<string name="poi_surface_metal">Επιφάνεια: μέταλλο</string>
+	<string name="poi_surface_wood">Επιφάνεια: ξύλο</string>
+	<string name="poi_surface_gravel">Επιφάνεια: χαλίκι</string>
+	<string name="poi_surface_fine_gravel">Επιφάνεια: λεπτό χαλίκι</string>
+	<string name="poi_surface_compacted">Επιφάνεια: συμπαγής</string>
+	<string name="poi_surface_sand">Επιφάνεια: άμμος</string>
+	<string name="poi_surface_grass">Επιφάνεια: χορτάρι</string>
+	<string name="poi_surface_grass_paver">Επιφάνεια: πλάκες και χορτάρι</string>
+	<string name="poi_surface_ground">Επιφάνεια: έδαφος</string>
+	<string name="poi_surface_dirt">Επιφάνεια: χώμα</string>
+	<string name="poi_surface_mud">Επιφάνεια: λάσπη</string>
+	<string name="poi_surface_ice">Επιφάνεια: πάγος</string>
+	<string name="poi_surface_salt">Επιφάνεια: αλάτι</string>
+	<string name="poi_surface_snow">Επιφάνεια: χιόνι</string>
+
+	<string name="poi_route_bus_ref">Λεωφορείο</string>
+	<string name="poi_route_share_taxi_ref">Μοιραζόμενο ταξί</string>
+	<string name="poi_route_trolleybus_ref">Τρόλεϊ</string>
+	<string name="poi_route_tram_ref">Τροχιόδρομος (τραμ)</string>
+	<string name="poi_route_train_ref">Σιδηρόδρομος</string>
+	<string name="poi_route_light_rail_ref">Ελαφρύς σιδηρόδρομος</string>
+	<string name="poi_route_monorail_ref">Μονή σιδηροτροχιά</string>
+	<string name="poi_route_funicular_ref">Καλωδιωτός σιδηρόδρομος</string>
+	<string name="poi_route_ferry_ref">Πορθμείο</string>
+	<string name="poi_route_subway_ref">Υπόγειος σιδηρόδρομος (μετρό)</string>
+
 	</resources>
