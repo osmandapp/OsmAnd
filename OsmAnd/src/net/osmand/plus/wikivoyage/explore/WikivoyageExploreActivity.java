@@ -3,6 +3,7 @@ package net.osmand.plus.wikivoyage.explore;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -35,6 +36,7 @@ import net.osmand.plus.wikivoyage.article.WikivoyageArticleDialogFragment;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
 import net.osmand.plus.wikivoyage.data.TravelDbHelper;
 import net.osmand.plus.wikivoyage.search.WikivoyageSearchDialogFragment;
+import net.osmand.util.Algorithms;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -168,15 +170,34 @@ public class WikivoyageExploreActivity extends TabActivity implements DownloadEv
 		super.onResume();
 		Intent intent = getIntent();
 		if (intent != null) {
-			int currentItem = intent.getIntExtra(TAB_SELECTED, 0);
-			if (currentItem == SAVED_ARTICLES_POSITION) {
-				BottomNavigationView bottomNav = (BottomNavigationView) findViewById(R.id.bottom_navigation);
-				bottomNav.setSelectedItemId(R.id.action_saved_articles);
-			}
-			long cityId = intent.getLongExtra(CITY_ID_KEY, -1);
-			String selectedLang = intent.getStringExtra(SELECTED_LANG_KEY);
-			if (cityId != -1) {
-				WikivoyageArticleDialogFragment.showInstance(app, getSupportFragmentManager(), cityId, selectedLang);
+			Uri data = intent.getData();
+			if (data != null) {
+				String scheme = data.getScheme();
+				String host = data.getHost();
+				String path = data.getPath();
+				if (("http".equalsIgnoreCase(scheme) || "https".equalsIgnoreCase(scheme))
+						&& host != null
+						&& path != null
+						&& host.contains("osmand.net")
+						&& path.startsWith("/travel")) {
+					String query = data.getQueryParameter("query");
+					String selectedLang = data.getQueryParameter("lang");
+					if (!Algorithms.isEmpty(query) && !Algorithms.isEmpty(selectedLang)) {
+						WikivoyageArticleDialogFragment.showInstance(app, getSupportFragmentManager(), query, selectedLang);
+					}
+				}
+			} else {
+				int currentItem = intent.getIntExtra(TAB_SELECTED, 0);
+				if (currentItem == SAVED_ARTICLES_POSITION) {
+					BottomNavigationView bottomNav = (BottomNavigationView) findViewById(R.id.bottom_navigation);
+					bottomNav.setSelectedItemId(R.id.action_saved_articles);
+				}
+				long articleId = intent.getLongExtra(CITY_ID_KEY, -1);
+				String selectedLang = intent.getStringExtra(SELECTED_LANG_KEY);
+
+				if (articleId != -1) {
+					WikivoyageArticleDialogFragment.showInstance(app, getSupportFragmentManager(), articleId, selectedLang);
+				}
 			}
 			setIntent(null);
 		}
