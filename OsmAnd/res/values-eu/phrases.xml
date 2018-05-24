@@ -3207,5 +3207,116 @@
 	<string name="poi_indoor_no">Kanpokoa</string>
 	<string name="poi_vending_telephone_vouchers">Telefono-baleak</string>
 	<string name="poi_vending_vouchers">Baleak</string>
-	<string name="poi_resource_aggregate"></string>
-	</resources>
+	<string name="poi_resource_aggregate"/>
+	<string name="poi_checkpoint_type">Kontrol-postu mota</string>
+
+<string name="synonyms_poi_fuel">Gasolindegia; Zerbitzu estazioa;Erregai estazioa;Petrolio estazioa</string>
+
+	<string name="poi_tactile_paving_no">Ukimenezko zoladura gabe</string>
+	<string name="poi_capacity_disabled_no">Ez dago ezinduentzako toki berezirik</string>
+	<string name="poi_capacity_disabled">Ezinduentzako toki bereziak</string>
+	<string name="poi_drive_in_no">"Kotxean zerbitzatzea: Ez "</string>
+	<string name="poi_drive_through_no">Kotxearekin gurutzatzea: Ez</string>
+
+	<string name="poi_takeaway_no">Ezin da eraman</string>
+	<string name="poi_takeaway_only">Eramateko besterik ez</string>
+
+	<string name="poi_delivery_no">Ez da etxera bidaltzen</string>
+	<string name="poi_delivery_only">Etxera bidaltzeko besterik ez</string>
+
+	<string name="poi_vending_bicycle_tube">Bizikletentzako hodiak</string>
+	<string name="poi_vending_parcel_pickup">Paketeak jasotzeko gunea</string>
+	<string name="poi_memorial_stele">Estela</string>
+	<string name="poi_memorial_stupa">Estupa</string>
+	<string name="poi_memorial_fassade_decoration">Aurrealdeko dekorazioa</string>
+
+	<string name="poi_resource_mica">Mika</string>
+	<string name="poi_resource_peat">Zohikatza</string>
+	<string name="poi_resource_ruby">Errubia</string>
+	<string name="poi_resource_rutile">Errutiloa</string>
+	<string name="poi_resource_slate_iron_ore_copper">Arbela;burdin minerala;kobrea</string>
+	<string name="poi_resource_zircon">Zirkoia</string>
+
+	<string name="poi_wetland_wet_meadow">Belardi hezea</string>
+	<string name="poi_socket_as3112_yes">AS/NZS 3112</string>
+
+	<string name="poi_socket_chademo_output_high">Handia</string>
+	<string name="poi_socket_chademo_output_medium">Tartekoa</string>
+	<string name="poi_socket_chademo_output_low">Txikia</string>
+	<string name="poi_socket_type2_output_high">Handia</string>
+	<string name="poi_socket_type2_output_medium">Tartekoa</string>
+	<string name="poi_socket_type2_output_low">Txikia</string>
+	<string name="poi_socket_type2_combo_output_high">Handia</string>
+	<string name="poi_socket_type2_combo_output_medium">Tartekoa</string>
+	<string name="poi_socket_type2_combo_output_low">Txikia</string>
+	<string name="poi_socket_type3_output_high">Handia</string>
+	<string name="poi_socket_type3_output_medium">Tartekoa</string>
+	<string name="poi_socket_type3_output_low">Txikia</string>
+	<string name="poi_socket_cee_blue_output_high">Handia</string>
+	<string name="poi_socket_cee_blue_output_medium">Tartekoa</string>
+	<string name="poi_socket_cee_blue_output_low">Txikia</string>
+	<string name="poi_socket_schuko_output_high">Handia</string>
+	<string name="poi_socket_schuko_output_medium">Tartekoa</string>
+	<string name="poi_socket_schuko_output_low">Txikia</string>
+
+	<string name="poi_flooring">Zoladura denda</string>
+	<string name="poi_pottery">Eltzegintza</string>
+
+	<string name="poi_outpost">Dendako entrega-puntua</string>
+
+	<string name="poi_adult_gaming_centre">Helduentzako jokoen zentroa</string>
+
+	<string name="poi_service_vehicle_car_repair_yes">Kotxe konponketa</string>
+	<string name="poi_service_vehicle_oil_change_yes">Olio aldaketa</string>
+	<string name="poi_service_vehicle_used_car_sales_yes">Erabilitako kotxeen salmenta</string>
+	<string name="poi_service_vehicle_brakes_yes">Frenoak</string>
+	<string name="poi_service_vehicle_new_car_sales_yes">Kotxe berrien salmenta</string>
+	<string name="poi_service_vehicle_diagnostics_yes">Diagnostikoak</string>
+	<string name="poi_service_vehicle_car_parts_yes">Kotxerako piezak</string>
+	<string name="poi_service_vehicle_batteries_yes">Bateriak</string>
+	<string name="poi_service_vehicle_air_conditioning_yes">Haize egokitua</string>
+	<string name="poi_service_vehicle_body_repair_yes">Karrozeriaren konponketa</string>
+	<string name="poi_service_vehicle_electrical_yes">Elektrikoa</string>
+	<string name="poi_service_vehicle_wheels_yes">Gurpilak</string>
+	<string name="poi_service_vehicle_glass_yes">Kristala</string>
+	<string name="poi_service_vehicle_truck_repair_yes">Kamioien konponketa</string>
+	<string name="poi_service_vehicle_muffler_yes">Isilgailua</string>
+	<string name="poi_service_vehicle_alignment_yes">Alineazioa</string>
+	<string name="poi_service_vehicle_transmission_repair_yes">Transmisioaren konponketa</string>
+	<string name="poi_service_vehicle_motor_yes">Motorra</string>
+	<string name="poi_service_vehicle_insurance_yes">Asegurua</string>
+	<string name="poi_service_vehicle_tyres_yes">Pneumatikoak</string>
+
+	<string name="poi_climbing_adventure">Eskalada abentura</string>
+
+	<string name="poi_via_ferrata">Via ferrata</string>
+	<string name="poi_cable_number">Kable zenbakia</string>
+	<string name="poi_via_ferrata_scale">Zailtauna</string>
+
+	<string name="poi_glacier_type_plateau">Goi-ordoki</string>
+	<string name="poi_glacier_type_valley">Harana</string>
+	<string name="poi_glacier_type_mountain">Mendia</string>
+	<string name="poi_glacier_type_hanging">Zintzilik</string>
+	<string name="poi_glacier_type_rock">Harkaitza</string>
+	<string name="poi_glacier_type_shelf">Apala</string>
+	<string name="poi_glacier_type_remnant">Geldikia</string>
+	<string name="poi_glacier_type_ice_tongue">Izotz-mihia</string>
+
+	<string name="poi_glacier_ele_top">Punturik altuena</string>
+	<string name="poi_glacier_ele_bottom">Punturik baxuena</string>
+	<string name="poi_glacier_slope">Batez besteko aldapa</string>
+
+	<string name="poi_checkpoint_hiking">Bidezidor kiroleko kontrol-puntua</string>
+	<string name="poi_checkpoint_type_stamp">Zigilatze puntua</string>
+	<string name="poi_checkpoint_type_code">Kodea</string>
+	<string name="poi_checkpoint_type_notebook">Koadernoa</string>
+	<string name="poi_checkpoint_type_needler">Zulatzailea</string>
+	<string name="poi_checkpoint_type_quize">Galdetegia</string>
+	<string name="poi_checkpoint_type_electronic">Elektronikoa</string>
+	<string name="poi_course">Zirkuitoa</string>
+
+	<string name="poi_rock">Harkaitza</string>
+
+	<string name="poi_end_date">Bukaera data</string>
+
+</resources>

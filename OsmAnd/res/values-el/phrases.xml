@@ -2027,4 +2027,33 @@
 	<string name="poi_architecture_modern">Αρχιτεκτονική: σύγχρονη</string>
 	<string name="poi_architecture_stalinist_neoclassicism">Αρχιτεκτονική: σταλινικός νεοκλασικισμός</string>
 	<string name="poi_architecture_eclectic">Αρχιτεκτονική: εκλεκτική</string>
+	<string name="poi_architecture_new_objectivity">Αρχιτεκτονική: νέα αντικειμενικότητα</string>
+	<string name="poi_architecture_contemporary">Αρχιτεκτονική: σύγχρονη</string>
+	<string name="poi_architecture_constructivism">Αρχιτεκτονική: οικοδομισμός</string>
+	<string name="poi_architecture_umgebinde">Αρχιτεκτονική: περιδεμένη (umgebinde)</string>
+	<string name="poi_architecture_timber_frame">Αρχιτεκτονική: ξύλινος σκελετός</string>
+	<string name="poi_architecture_art_nouveau">Αρχιτεκτονική: νέο ύφος (αρ νουβό)</string>
+	<string name="poi_architecture_neoclassicism">Αρχιτεκτονική: νεοκλασικισμός</string>
+	<string name="poi_architecture_victorian">Αρχιτεκτονική: βικτωριανή</string>
+	<string name="poi_architecture_brutalism">Αρχιτεκτονική: μπρουταλισμός</string>
+	<string name="poi_architecture_classicism">Αρχιτεκτονική: κλασικισμός</string>
+	<string name="poi_architecture_gothic">Αρχιτεκτονική: γοτθική</string>
+	<string name="poi_architecture_oldrussian">Αρχιτεκτονική: παλαιορωσική</string>
+	<string name="poi_architecture_baroque">Αρχιτεκτονική: μπαρόκ</string>
+	<string name="poi_architecture_postconstructivism">Αρχιτεκτονική: μεταοικοδομισμός</string>
+	<string name="poi_architecture_wilhelminian_style">Αρχιτεκτονική: βιλχεμινικό ύφος</string>
+	<string name="poi_architecture_renaissance">Αρχιτεκτονική: αναγεννησιακή</string>
+	<string name="poi_architecture_romanesque">Αρχιτεκτονική: ρομανική</string>
+
+	<string name="poi_tunnel_waterway">Υδατοσήραγγα</string>
+	<string name="poi_tunnel_car">Οδική σήραγγα</string>
+	<string name="poi_tunnel_pedestrian">Πεζοσήραγγα</string>
+	<string name="poi_tunnel_railway">Σιδηροδρομική σήραγγα</string>
+	<string name="poi_bridge_car">Οδική σήραγγα</string>
+	<string name="poi_bridge_pedestrian">Πεζογέφυρα</string>
+	<string name="poi_bridge_bicycle">Ποδηλατική γέφυρα</string>
+	<string name="poi_bridge_railway">Σιδηροδρομική γέφυρα</string>
+	<string name="poi_bridge_waterway">Γέφυρα θαλάσσιων οδών</string>
+	<string name="poi_bridge_structure_beam">Δομή γέφυρας: ακτινωτή</string>
+	<string name="poi_bridge_structure_simple_suspension">Δομή γέφυρας: απλή ανάρτηση</string>
 	</resources>
