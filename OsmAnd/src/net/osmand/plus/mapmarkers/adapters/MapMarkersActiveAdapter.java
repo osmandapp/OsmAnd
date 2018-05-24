@@ -11,11 +11,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import net.osmand.AndroidUtils;
 import net.osmand.data.LatLon;
-import net.osmand.plus.IconsCache;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.MapMarkersHelper.MapMarkersGroup;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities.UpdateLocationViewCache;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.DashLocationFragment;
 import net.osmand.util.Algorithms;
@@ -35,15 +36,15 @@ public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemV
 	private Snackbar snackbar;
 	private boolean showDirectionEnabled;
 
-	private LatLon location;
-	private Float heading;
-	private boolean useCenter;
-	private int screenOrientation;
 	private boolean night;
+	private UiUtilities uiUtilities;
+	private UpdateLocationViewCache updateLocationViewCache;
 
 	public MapMarkersActiveAdapter(MapActivity mapActivity) {
 		setHasStableIds(true);
 		this.mapActivity = mapActivity;
+		uiUtilities = mapActivity.getMyApplication().getUIUtilities();
+		updateLocationViewCache = uiUtilities.getUpdateLocationViewCache(mapActivity);
 		markers = mapActivity.getMyApplication().getMapMarkersHelper().getMapMarkers();
 		night = !mapActivity.getMyApplication().getSettings().isLightContent();
 		showDirectionEnabled = mapActivity.getMyApplication().getSettings().MARKERS_DISTANCE_INDICATION_ENABLED.get();
@@ -56,23 +57,6 @@ public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemV
 	public void setAdapterListener(MapMarkersActiveAdapterListener listener) {
 		this.listener = listener;
 	}
-
-	public void setLocation(LatLon location) {
-		this.location = location;
-	}
-
-	public void setHeading(Float heading) {
-		this.heading = heading;
-	}
-
-	public void setUseCenter(boolean useCenter) {
-		this.useCenter = useCenter;
-	}
-
-	public void setScreenOrientation(int screenOrientation) {
-		this.screenOrientation = screenOrientation;
-	}
-
 	@Override
 	public MapMarkerItemViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
 		View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.map_marker_item_new, viewGroup, false);
@@ -87,7 +71,7 @@ public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemV
 
 	@Override
 	public void onBindViewHolder(final MapMarkerItemViewHolder holder, final int pos) {
-		IconsCache iconsCache = mapActivity.getMyApplication().getIconsCache();
+		UiUtilities iconsCache = mapActivity.getMyApplication().getUIUtilities();
 		MapMarker marker = markers.get(pos);
 
 		ImageView markerImageViewToUpdate;
@@ -193,10 +177,9 @@ public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemV
 			}
 		});
 
-		DashLocationFragment.updateLocationView(useCenter, location,
-				heading, markerImageViewToUpdate, drawableResToUpdate,
-				showDirectionEnabled && displayedInWidget ? markerColor : 0, holder.distance, markerLatLon,
-				screenOrientation, mapActivity.getMyApplication(), true);
+		updateLocationViewCache.arrowResId = drawableResToUpdate;
+		updateLocationViewCache.arrowColor = showDirectionEnabled && displayedInWidget ? markerColor : 0;
+		uiUtilities.updateLocationView(updateLocationViewCache, markerImageViewToUpdate, holder.distance, markerLatLon);
 	}
 
 	@Override

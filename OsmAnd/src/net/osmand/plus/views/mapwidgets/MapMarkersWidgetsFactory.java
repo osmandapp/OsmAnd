@@ -8,7 +8,7 @@ import android.widget.TextView;
 import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.plus.IconsCache;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.OsmAndFormatter;
@@ -60,7 +60,7 @@ public class MapMarkersWidgetsFactory {
 	public MapMarkersWidgetsFactory(final MapActivity map) {
 		this.map = map;
 		helper = map.getMyApplication().getMapMarkersHelper();
-		screenOrientation = DashLocationFragment.getScreenOrientation(map);
+		screenOrientation = map.getMyApplication().getUIUtilities().getScreenOrientation(map);
 		portraitMode = AndroidUiHelper.isOrientationPortrait(map);
 
 		addressTopBar = map.findViewById(R.id.map_top_bar);
@@ -92,7 +92,7 @@ public class MapMarkersWidgetsFactory {
 			}
 		});
 
-		IconsCache iconsCache = map.getMyApplication().getIconsCache();
+		UiUtilities iconsCache = map.getMyApplication().getUIUtilities();
 		if (isLandscapeLayout() && helper.getMapMarkers().size() > 1
 				&& !(map.getMyApplication().getSettings().DISPLAYED_MARKERS_WIDGETS_COUNT.get() == 1)) {
 			moreButton.setVisibility(View.GONE);
@@ -367,7 +367,7 @@ public class MapMarkersWidgetsFactory {
 			if (marker.colorIndex != -1) {
 				if (marker.colorIndex != cachedMarkerColorIndex
 						|| cachedNightMode == null || cachedNightMode != isNight()) {
-					setImageDrawable(map.getMyApplication().getIconsCache()
+					setImageDrawable(map.getMyApplication().getUIUtilities()
 							.getIcon(isNight() ? R.drawable.widget_marker_night : R.drawable.widget_marker_day,
 									R.drawable.widget_marker_triangle,
 									MapMarker.getColorId(marker.colorIndex)));

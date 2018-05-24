@@ -82,7 +82,7 @@ public class MapMarkerDialogHelper {
 			textDist.setTextColor(ctx.getResources()
 					.getColor(useCenter ? R.color.color_distance : R.color.color_myloc_distance));
 		} else {
-			waypointIcon.setImageDrawable(app.getIconsCache()
+			waypointIcon.setImageDrawable(app.getUIUtilities()
 					.getIcon(R.drawable.ic_action_flag_dark, !nightMode));
 			AndroidUtils.setTextSecondaryColor(ctx, text, nightMode);
 			AndroidUtils.setTextSecondaryColor(ctx, textDist, nightMode);
@@ -124,6 +124,6 @@ public class MapMarkerDialogHelper {
 	}
 
 	public static Drawable getMapMarkerIcon(OsmandApplication app, int colorIndex) {
-		return app.getIconsCache().getIcon(R.drawable.ic_action_flag_dark, MapMarker.getColorId(colorIndex));
+		return app.getUIUtilities().getIcon(R.drawable.ic_action_flag_dark, MapMarker.getColorId(colorIndex));
 	}
 }

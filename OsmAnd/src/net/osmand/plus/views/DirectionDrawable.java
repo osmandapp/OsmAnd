@@ -1,6 +1,6 @@
 package net.osmand.plus.views;
 
-import net.osmand.plus.IconsCache;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import android.content.Context;
@@ -29,7 +29,7 @@ public class DirectionDrawable extends Drawable {
 
 	public DirectionDrawable(OsmandApplication ctx, float width, float height, int resourceId, int clrId) {
 		this(ctx, width, height);
-		IconsCache iconsCache = ctx.getIconsCache();
+		UiUtilities iconsCache = ctx.getUIUtilities();
 		arrowImage = iconsCache.getIcon(resourceId, clrId);
 		this.resourceId = resourceId;
 	}
@@ -45,14 +45,14 @@ public class DirectionDrawable extends Drawable {
 	}
 	
 	public void setImage(int resourceId, int clrId) {
-		IconsCache iconsCache = app.getIconsCache();
+		UiUtilities iconsCache = app.getUIUtilities();
 		arrowImage = iconsCache.getIcon(resourceId, clrId);
 		this.resourceId = resourceId;
 		onBoundsChange(getBounds());
 	}
 
 	public void setImage(int resourceId) {
-		IconsCache iconsCache = app.getIconsCache();
+		UiUtilities iconsCache = app.getUIUtilities();
 		arrowImage = iconsCache.getIcon(resourceId, 0);
 		this.resourceId = resourceId;
 		onBoundsChange(getBounds());
@@ -62,7 +62,7 @@ public class DirectionDrawable extends Drawable {
 	public void setColorId(int clrId) {
 		// R.color.color_ok, R.color.color_unknown, R.color.color_warning
 		if(arrowImage != null) {
-			IconsCache iconsCache = app.getIconsCache();
+			UiUtilities iconsCache = app.getUIUtilities();
 			arrowImage = iconsCache.getIcon(resourceId, clrId);
 		} else {
 			paintRouteDirection.setColor(app.getResources().getColor(clrId));

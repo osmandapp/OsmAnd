@@ -600,17 +600,17 @@ public class MapInfoWidgetsFactory {
 				if (controller.backBtnIconDarkId == 0) {
 					backButton.setImageDrawable(null);
 				} else {
-					backButton.setImageDrawable(app.getIconsCache().getIcon(controller.backBtnIconDarkId, controller.backBtnIconClrDarkId));
+					backButton.setImageDrawable(app.getUIUtilities().getIcon(controller.backBtnIconDarkId, controller.backBtnIconClrDarkId));
 				}
 				if (controller.closeBtnIconDarkId == 0) {
 					closeButton.setImageDrawable(null);
 				} else {
-					closeButton.setImageDrawable(app.getIconsCache().getIcon(controller.closeBtnIconDarkId, controller.closeBtnIconClrDarkId));
+					closeButton.setImageDrawable(app.getUIUtilities().getIcon(controller.closeBtnIconDarkId, controller.closeBtnIconClrDarkId));
 				}
 				if (controller.refreshBtnIconDarkId == 0) {
 					refreshButton.setImageDrawable(null);
 				} else {
-					refreshButton.setImageDrawable(app.getIconsCache().getIcon(controller.refreshBtnIconDarkId, controller.refreshBtnIconClrDarkId));
+					refreshButton.setImageDrawable(app.getUIUtilities().getIcon(controller.refreshBtnIconDarkId, controller.refreshBtnIconClrDarkId));
 				}
 				int titleColor = map.getResources().getColor(controller.titleTextClrDarkId);
 				int descrColor = map.getResources().getColor(controller.descrTextClrDarkId);
@@ -622,17 +622,17 @@ public class MapInfoWidgetsFactory {
 				if (controller.backBtnIconLightId == 0) {
 					backButton.setImageDrawable(null);
 				} else {
-					backButton.setImageDrawable(app.getIconsCache().getIcon(controller.backBtnIconLightId, controller.backBtnIconClrLightId));
+					backButton.setImageDrawable(app.getUIUtilities().getIcon(controller.backBtnIconLightId, controller.backBtnIconClrLightId));
 				}
 				if (controller.closeBtnIconLightId == 0) {
 					closeButton.setImageDrawable(null);
 				} else {
-					closeButton.setImageDrawable(app.getIconsCache().getIcon(controller.closeBtnIconLightId, controller.closeBtnIconClrLightId));
+					closeButton.setImageDrawable(app.getUIUtilities().getIcon(controller.closeBtnIconLightId, controller.closeBtnIconClrLightId));
 				}
 				if (controller.refreshBtnIconLightId == 0) {
 					refreshButton.setImageDrawable(null);
 				} else {
-					refreshButton.setImageDrawable(app.getIconsCache().getIcon(controller.refreshBtnIconLightId, controller.refreshBtnIconClrLightId));
+					refreshButton.setImageDrawable(app.getUIUtilities().getIcon(controller.refreshBtnIconLightId, controller.refreshBtnIconClrLightId));
 				}
 				int titleColor = map.getResources().getColor(controller.titleTextClrLightId);
 				int descrColor = map.getResources().getColor(controller.descrTextClrLightId);
@@ -750,9 +750,9 @@ public class MapInfoWidgetsFactory {
 
 			ImageView all = (ImageView) waypointInfoBar.findViewById(R.id.waypoint_more);
 			ImageView remove = (ImageView) waypointInfoBar.findViewById(R.id.waypoint_close);
-			all.setImageDrawable(map.getMyApplication().getIconsCache()
+			all.setImageDrawable(map.getMyApplication().getUIUtilities()
 					.getIcon(R.drawable.ic_overflow_menu_white, !nightMode));
-			remove.setImageDrawable(map.getMyApplication().getIconsCache()
+			remove.setImageDrawable(map.getMyApplication().getUIUtilities()
 					.getIcon(R.drawable.ic_action_remove_dark, !nightMode));
 		}
 
@@ -847,7 +847,7 @@ public class MapInfoWidgetsFactory {
 						addressText.setCompoundDrawables(turnDrawable, null, null, null);
 						addressText.setCompoundDrawablePadding(4);
 					} else if (showMarker) {
-						Drawable marker = map.getMyApplication().getIconsCache().getIcon(R.drawable.ic_action_start_navigation, R.color.color_myloc_distance);
+						Drawable marker = map.getMyApplication().getUIUtilities().getIcon(R.drawable.ic_action_start_navigation, R.color.color_myloc_distance);
 						addressTextShadow.setCompoundDrawablesWithIntrinsicBounds(marker, null, null, null);
 						addressTextShadow.setCompoundDrawablePadding(4);
 						addressText.setCompoundDrawablesWithIntrinsicBounds(marker, null, null, null);

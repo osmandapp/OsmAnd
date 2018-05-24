@@ -11,7 +11,7 @@ import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.GPXUtilities.GPXFile;
-import net.osmand.plus.IconsCache;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TrackActivity;
@@ -28,7 +28,7 @@ public class AddGpxPointBottomSheetHelper implements OnDismissListener {
 	private final MapActivity mapActivity;
 	private final MapContextMenu contextMenu;
 	private final ContextMenuLayer contextMenuLayer;
-	private final IconsCache iconsCache;
+	private final UiUtilities iconsCache;
 	private String titleText;
 	private boolean applyingPositionMode;
 	private NewGpxPoint newGpxPoint;
@@ -36,7 +36,7 @@ public class AddGpxPointBottomSheetHelper implements OnDismissListener {
 
 	public AddGpxPointBottomSheetHelper(final MapActivity activity, ContextMenuLayer ctxMenuLayer) {
 		this.contextMenuLayer = ctxMenuLayer;
-		iconsCache = activity.getMyApplication().getIconsCache();
+		iconsCache = activity.getMyApplication().getUIUtilities();
 		mapActivity = activity;
 		contextMenu = activity.getContextMenu();
 		view = activity.findViewById(R.id.add_gpx_point_bottom_sheet);

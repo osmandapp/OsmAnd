@@ -42,6 +42,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.api.SQLiteAPI;
 import net.osmand.plus.api.SQLiteAPIImpl;
+import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.dialogs.RateUsBottomSheetDialog;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.helpers.AvoidSpecificRoads;
@@ -87,7 +88,7 @@ public class OsmandApplication extends MultiDexApplication {
 	OsmAndAppCustomization appCustomization;
 	private final SQLiteAPI sqliteAPI = new SQLiteAPIImpl(this);
 	private final OsmAndTaskManager taskManager = new OsmAndTaskManager(this);
-	private final IconsCache iconsCache = new IconsCache(this);
+	private final UiUtilities iconsCache = new UiUtilities(this);
 	Handler uiHandler;
 	private boolean plusVersionInApp;
 
@@ -122,6 +123,7 @@ public class OsmandApplication extends MultiDexApplication {
 	QuickSearchHelper searchUICore;
 	TravelDbHelper travelDbHelper;
 	InAppPurchaseHelper inAppPurchaseHelper;
+	MapViewTrackingUtilities mapViewTrackingUtilities;
 
 	RoutingConfiguration.Builder defaultRoutingConfig;
 	private Locale preferredLocale = null;
@@ -214,9 +216,10 @@ public class OsmandApplication extends MultiDexApplication {
 		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 	
-	public IconsCache getIconsCache() {
+	public UiUtilities getUIUtilities() {
 		return iconsCache;
 	}
+	
 	
 	@Override
 	public void onTerminate() {
@@ -420,7 +423,7 @@ public class OsmandApplication extends MultiDexApplication {
 				View view = uiContext.getLayoutInflater().inflate(R.layout.select_voice_first, null);
 
 				((ImageView) view.findViewById(R.id.icon))
-						.setImageDrawable(getIconsCache().getIcon(R.drawable.ic_action_volume_up, getSettings().isLightContent()));
+						.setImageDrawable(getUIUtilities().getIcon(R.drawable.ic_action_volume_up, getSettings().isLightContent()));
 
 				view.findViewById(R.id.spinner).setOnClickListener(new View.OnClickListener() {
 					@Override
@@ -441,7 +444,7 @@ public class OsmandApplication extends MultiDexApplication {
 				});
 
 				((ImageView) view.findViewById(R.id.dropDownIcon))
-						.setImageDrawable(getIconsCache().getIcon(R.drawable.ic_action_arrow_drop_down, getSettings().isLightContent()));
+						.setImageDrawable(getUIUtilities().getIcon(R.drawable.ic_action_arrow_drop_down, getSettings().isLightContent()));
 
 				builder.setCancelable(true);
 				builder.setNegativeButton(R.string.shared_string_cancel, null);
@@ -1002,5 +1005,9 @@ public class OsmandApplication extends MultiDexApplication {
 			}
 		});
 		bld.show();
+	}
+	
+	public MapViewTrackingUtilities getMapViewTrackingUtilities() {
+		return mapViewTrackingUtilities;
 	}
 }

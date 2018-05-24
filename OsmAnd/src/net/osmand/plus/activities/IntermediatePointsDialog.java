@@ -252,7 +252,7 @@ public class IntermediatePointsDialog {
 				} else {
 					int icon = position == intermediates.size() - 1? R.drawable.ic_action_target:
 						R.drawable.ic_action_intermediate;
-					tv.setCompoundDrawablesWithIntrinsicBounds(app.getIconsCache().getThemedIcon(icon), null, null, null);
+					tv.setCompoundDrawablesWithIntrinsicBounds(app.getUIUtilities().getThemedIcon(icon), null, null, null);
 					tv.setCompoundDrawablePadding(padding);
 					final CheckBox ch = ((CheckBox) v.findViewById(R.id.toggle_item));
 					ch.setVisibility(View.VISIBLE);

@@ -160,7 +160,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	private static final Log LOG = PlatformUtil.getLog(MapActivity.class);
 
-	private static MapViewTrackingUtilities mapViewTrackingUtilities;
+	private MapViewTrackingUtilities mapViewTrackingUtilities;
 	private static MapContextMenu mapContextMenu = new MapContextMenu();
 	private static Intent prevActivityIntent = null;
 
@@ -220,7 +220,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		boolean portraitMode = AndroidUiHelper.isOrientationPortrait(this);
 		boolean largeDevice = AndroidUiHelper.isXLargeDevice(this);
 		landscapeLayout = !portraitMode && !largeDevice;
-
+		mapViewTrackingUtilities = app.getMapViewTrackingUtilities();
 		mapContextMenu.setMapActivity(this);
 
 		super.onCreate(savedInstanceState);
@@ -1226,10 +1226,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	public LatLon getMapLocation() {
-		if (mapView == null) {
-			return settings.getLastKnownMapLocation();
-		}
-		return new LatLon(mapView.getLatitude(), mapView.getLongitude());
+		return mapViewTrackingUtilities.getMapLocation();
 	}
 
 	public float getMapRotate() {
@@ -1451,9 +1448,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		return mapViewTrackingUtilities;
 	}
 
-	public static MapViewTrackingUtilities getSingleMapViewTrackingUtilities() {
-		return mapViewTrackingUtilities;
-	}
 
 	protected void parseLaunchIntentLocation() {
 		Intent intent = getIntent();

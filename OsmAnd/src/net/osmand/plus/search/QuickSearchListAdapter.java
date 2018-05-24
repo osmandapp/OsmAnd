@@ -13,7 +13,6 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import net.osmand.AndroidUtils;
 import net.osmand.CollatorStringMatcher;
 import net.osmand.Location;
@@ -24,6 +23,7 @@ import net.osmand.osm.AbstractPoiType;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities.UpdateLocationViewCache;
 import net.osmand.plus.dashboard.DashLocationFragment;
 import net.osmand.plus.search.listitems.QuickSearchHeaderListItem;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
@@ -45,11 +45,8 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 	private Activity activity;
 	private AccessibilityAssistant accessibilityAssistant;
 
-	private LatLon location;
-	private Float heading;
 	private boolean useMapCenter;
 
-	private int screenOrientation;
 	private int dp56;
 	private int dp1;
 
@@ -59,6 +56,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 	private boolean selectionMode;
 	private boolean selectAll;
 	private List<QuickSearchListItem> selectedItems = new ArrayList<>();
+	private UpdateLocationViewCache updateLocationViewCache;
 
 	public interface OnSelectionListener {
 
@@ -73,6 +71,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 		this.activity = activity;
 		dp56 = AndroidUtils.dpToPx(app, 56f);
 		dp1 = AndroidUtils.dpToPx(app, 1f);
+		updateLocationViewCache = app.getUIUtilities().getUpdateLocationViewCache(activity);
 	}
 
 	public void setAccessibilityAssistant(AccessibilityAssistant accessibilityAssistant) {
@@ -85,30 +84,6 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 
 	public void setSelectionListener(OnSelectionListener selectionListener) {
 		this.selectionListener = selectionListener;
-	}
-
-	public int getScreenOrientation() {
-		return screenOrientation;
-	}
-
-	public void setScreenOrientation(int screenOrientation) {
-		this.screenOrientation = screenOrientation;
-	}
-
-	public LatLon getLocation() {
-		return location;
-	}
-
-	public void setLocation(LatLon location) {
-		this.location = location;
-	}
-
-	public Float getHeading() {
-		return heading;
-	}
-
-	public void setHeading(Float heading) {
-		this.heading = heading;
 	}
 
 	public boolean isUseMapCenter() {
@@ -425,7 +400,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 					int colorId = worksNow ? worksLater ? R.color.color_ok : R.color.color_intermediate : R.color.color_warning;
 
 					timeLayout.setVisibility(View.VISIBLE);
-					timeIcon.setImageDrawable(app.getIconsCache().getIcon(R.drawable.ic_small_time, colorId));
+					timeIcon.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_small_time, colorId));
 					timeText.setTextColor(app.getResources().getColor(colorId));
 					String rt = rs.getCurrentRuleTime(inst);
 					timeText.setText(rt == null ? "" : rt);
@@ -497,17 +472,12 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 
 	private void updateCompassVisibility(View view, QuickSearchListItem listItem) {
 		View compassView = view.findViewById(R.id.compass_layout);
-		Location ll = app.getLocationProvider().getLastKnownLocation();
-		boolean showCompass = location != null && listItem.getSearchResult().location != null;
-		if ((ll != null || useMapCenter) && showCompass) {
+		boolean showCompass = listItem.getSearchResult().location != null;
+		if (showCompass) {
 			updateDistanceDirection(view, listItem);
 			compassView.setVisibility(View.VISIBLE);
 		} else {
-			if (!showCompass) {
-				compassView.setVisibility(View.GONE);
-			} else {
-				compassView.setVisibility(View.INVISIBLE);
-			}
+			compassView.setVisibility(View.GONE);
 		}
 	}
 
@@ -515,17 +485,11 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 		TextView distanceText = (TextView) view.findViewById(R.id.distance);
 		ImageView direction = (ImageView) view.findViewById(R.id.direction);
 		SearchPhrase phrase = listItem.getSearchResult().requiredSearchPhrase;
-		LatLon loc = location;
+		updateLocationViewCache.specialFrom =  null;
 		if(phrase != null && useMapCenter) {
-			LatLon ol = phrase.getSettings().getOriginalLocation();
-			if(ol != null) {
-				loc = ol;
-			}
+			updateLocationViewCache.specialFrom = phrase.getSettings().getOriginalLocation();
 		}
-		DashLocationFragment.updateLocationView(useMapCenter, loc,
-				heading, direction, distanceText,
-				listItem.getSearchResult().location.getLatitude(),
-				listItem.getSearchResult().location.getLongitude(),
-				screenOrientation, app);
+		LatLon toloc = listItem.getSearchResult().location;
+		app.getUIUtilities().updateLocationView(updateLocationViewCache, direction, distanceText, toloc);
 	}
 }

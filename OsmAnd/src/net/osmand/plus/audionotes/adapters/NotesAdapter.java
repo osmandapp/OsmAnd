@@ -212,7 +212,7 @@ public class NotesAdapter extends ArrayAdapter<Object> {
 			int iconRes = recording.isAudio() ? R.drawable.ic_type_audio
 					: (recording.isVideo() ? R.drawable.ic_type_video : R.drawable.ic_type_img);
 			int colorRes = app.getSettings().isLightContent() ? R.color.icon_color : R.color.ctx_menu_info_text_dark;
-			holder.icon.setImageDrawable(app.getIconsCache().getIcon(iconRes, colorRes));
+			holder.icon.setImageDrawable(app.getUIUtilities().getIcon(iconRes, colorRes));
 		}
 
 		holder.bottomDivider.setVisibility(hideBottomDivider(position) ? View.GONE : View.VISIBLE);
@@ -230,7 +230,7 @@ public class NotesAdapter extends ArrayAdapter<Object> {
 				}
 			});
 		} else {
-			holder.options.setImageDrawable(app.getIconsCache().getThemedIcon(R.drawable.ic_overflow_menu_white));
+			holder.options.setImageDrawable(app.getUIUtilities().getThemedIcon(R.drawable.ic_overflow_menu_white));
 			holder.options.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {

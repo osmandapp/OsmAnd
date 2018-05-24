@@ -181,7 +181,7 @@ public class EditTrackGroupDialogFragment extends MenuBottomSheetDialogFragment 
 		if (color == 0) {
 			colorImageView.setImageDrawable(getContentIcon(R.drawable.ic_action_circle));
 		} else {
-			colorImageView.setImageDrawable(getMyApplication().getIconsCache().getPaintedIcon(R.drawable.ic_action_circle, color));
+			colorImageView.setImageDrawable(getMyApplication().getUIUtilities().getPaintedIcon(R.drawable.ic_action_circle, color));
 		}
 	}
 

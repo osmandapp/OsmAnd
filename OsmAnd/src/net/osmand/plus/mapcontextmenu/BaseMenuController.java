@@ -2,7 +2,7 @@ package net.osmand.plus.mapcontextmenu;
 
 import android.graphics.drawable.Drawable;
 
-import net.osmand.plus.IconsCache;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -71,7 +71,7 @@ public abstract class BaseMenuController {
 	}
 
 	protected Drawable getIconOrig(int iconId) {
-		IconsCache iconsCache = getMapActivity().getMyApplication().getIconsCache();
+		UiUtilities iconsCache = getMapActivity().getMyApplication().getUIUtilities();
 		return iconsCache.getIcon(iconId, 0);
 	}
 
@@ -80,17 +80,17 @@ public abstract class BaseMenuController {
 	}
 
 	protected Drawable getIcon(int iconId, int colorId) {
-		IconsCache iconsCache = getMapActivity().getMyApplication().getIconsCache();
+		UiUtilities iconsCache = getMapActivity().getMyApplication().getUIUtilities();
 		return iconsCache.getIcon(iconId, colorId);
 	}
 
 	protected Drawable getPaintedIcon(int iconId, int color) {
-		IconsCache iconsCache = getMapActivity().getMyApplication().getIconsCache();
+		UiUtilities iconsCache = getMapActivity().getMyApplication().getUIUtilities();
 		return iconsCache.getPaintedIcon(iconId, color);
 	}
 
 	protected Drawable getIcon(int iconId, int colorLightId, int colorDarkId) {
-		IconsCache iconsCache = getMapActivity().getMyApplication().getIconsCache();
+		UiUtilities iconsCache = getMapActivity().getMyApplication().getUIUtilities();
 		return iconsCache.getIcon(iconId, isLight() ? colorLightId : colorDarkId);
 	}
 }

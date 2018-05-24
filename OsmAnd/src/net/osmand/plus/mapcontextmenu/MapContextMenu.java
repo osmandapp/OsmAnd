@@ -85,7 +85,6 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 	private int mapZoom;
 
 	private LatLon myLocation;
-	private Float heading;
 	private boolean inLocationUpdate = false;
 	private boolean cachedMyLocation;
 	private boolean appModeChanged;
@@ -1249,18 +1248,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		return getCurrentMenuState() == MenuState.HEADER_ONLY;
 	}
 
-	public LatLon getMyLocation() {
-		return myLocation;
-	}
-
-	public boolean isCachedMyLocation() {
-		return cachedMyLocation;
-	}
-
-	public Float getHeading() {
-		return heading;
-	}
-
+	
 	private void updateMyLocation(Location location, boolean updateLocationUi) {
 		if (location == null) {
 			location = getMapActivity().getMyApplication().getLocationProvider().getLastStaleKnownLocation();
@@ -1284,15 +1272,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 
 	public void updateCompassValue(float value) {
 		if (active && displayDistanceDirection()) {
-			// 99 in next line used to one-time initialize arrows (with reference vs. fixed-north direction)
-			// on non-compass devices
-			float lastHeading = heading != null ? heading : 99;
-			heading = value;
-			if (Math.abs(MapUtils.degreesDiff(lastHeading, heading)) > 5) {
-				updateLocation(false, false, true);
-			} else {
-				heading = lastHeading;
-			}
+			updateLocation(false, false, true);
 		}
 	}
 

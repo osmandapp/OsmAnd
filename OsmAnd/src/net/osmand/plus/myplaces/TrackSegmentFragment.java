@@ -51,7 +51,7 @@ import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItemType;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
-import net.osmand.plus.IconsCache;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
@@ -676,7 +676,7 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 					}
 				});
 
-				final IconsCache ic = app.getIconsCache();
+				final UiUtilities ic = app.getUIUtilities();
 				switch (tabType) {
 					case GPX_TAB_ITEM_GENERAL:
 						if (analysis != null) {
@@ -1063,7 +1063,7 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 					ViewCompat.setAlpha(img, tabs.getTabTextSelectedAlpha());
 					break;
 				case SOLID_COLOR:
-					img.setImageDrawable(app.getIconsCache().getPaintedIcon(imageId, tabs.getTextColor()));
+					img.setImageDrawable(app.getUIUtilities().getPaintedIcon(imageId, tabs.getTextColor()));
 					break;
 			}
 		}
@@ -1078,7 +1078,7 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 					ViewCompat.setAlpha(img, tabs.getTabTextAlpha());
 					break;
 				case SOLID_COLOR:
-					img.setImageDrawable(app.getIconsCache().getPaintedIcon(imageId, tabs.getTabInactiveTextColor()));
+					img.setImageDrawable(app.getUIUtilities().getPaintedIcon(imageId, tabs.getTabInactiveTextColor()));
 					break;
 			}
 		}

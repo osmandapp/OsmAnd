@@ -1,6 +1,30 @@
 package net.osmand.plus.activities;
 
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import net.osmand.IProgress;
+import net.osmand.IndexConstants;
+import net.osmand.data.PointDescription;
+import net.osmand.osm.io.NetworkUtils;
+import net.osmand.plus.ApplicationMode;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.OsmandSettings.DrivingRegion;
+import net.osmand.plus.OsmandSettings.MetricsConstants;
+import net.osmand.plus.R;
+import net.osmand.plus.Version;
+import net.osmand.plus.base.MapViewTrackingUtilities;
+import net.osmand.plus.dashboard.DashChooseAppDirFragment;
+import net.osmand.plus.dashboard.DashChooseAppDirFragment.ChooseAppDirFragment;
+import net.osmand.plus.dashboard.DashChooseAppDirFragment.MoveFilesToDifferentDirectory;
+import net.osmand.plus.dialogs.ConfigureMapMenu;
+import net.osmand.plus.download.DownloadActivity;
+import net.osmand.plus.render.NativeOsmandLibrary;
+import net.osmand.render.RenderingRulesStorage;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
@@ -30,32 +54,6 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import net.osmand.IProgress;
-import net.osmand.IndexConstants;
-import net.osmand.data.PointDescription;
-import net.osmand.osm.io.NetworkUtils;
-import net.osmand.plus.ApplicationMode;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.OsmandSettings.DrivingRegion;
-import net.osmand.plus.OsmandSettings.MetricsConstants;
-import net.osmand.plus.R;
-import net.osmand.plus.Version;
-import net.osmand.plus.base.MapViewTrackingUtilities;
-import net.osmand.plus.dashboard.DashChooseAppDirFragment;
-import net.osmand.plus.dashboard.DashChooseAppDirFragment.ChooseAppDirFragment;
-import net.osmand.plus.dashboard.DashChooseAppDirFragment.MoveFilesToDifferentDirectory;
-import net.osmand.plus.dialogs.ConfigureMapMenu;
-import net.osmand.plus.download.DownloadActivity;
-import net.osmand.plus.inapp.InAppPurchaseHelper;
-import net.osmand.plus.render.NativeOsmandLibrary;
-import net.osmand.render.RenderingRulesStorage;
-
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 
 public class SettingsGeneralActivity extends SettingsBaseActivity implements OnRequestPermissionsResultCallback {
@@ -168,7 +166,7 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 					public void onClick(DialogInterface dialog, int which) {
 						if (drs.get(which) == null) {
 							settings.DRIVING_REGION_AUTOMATIC.set(true);
-							MapViewTrackingUtilities mapViewTrackingUtilities = MapActivity.getSingleMapViewTrackingUtilities();
+							MapViewTrackingUtilities mapViewTrackingUtilities = getMyApplication().getMapViewTrackingUtilities();
 							if (mapViewTrackingUtilities != null) {
 								mapViewTrackingUtilities.resetDrivingRegionUpdate();
 							}

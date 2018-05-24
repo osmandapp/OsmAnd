@@ -294,7 +294,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 	public void updateRouteButtons(View main, boolean routeInfo) {
 		boolean nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
 		ImageView cancelRouteButton = (ImageView) main.findViewById(R.id.map_cancel_route_button);
-		cancelRouteButton.setImageDrawable(app.getIconsCache().getIcon(R.drawable.map_action_cancel, nightMode ? R.color.route_info_control_icon_color_dark : R.color.route_info_control_icon_color_light));
+		cancelRouteButton.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.map_action_cancel, nightMode ? R.color.route_info_control_icon_color_dark : R.color.route_info_control_icon_color_light));
 		cancelRouteButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -303,7 +303,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		});
 
 		ImageView waypointsButton = (ImageView) main.findViewById(R.id.map_waypoints_route_button);
-		waypointsButton.setImageDrawable(app.getIconsCache().getIcon(R.drawable.ic_action_intermediate_destination, nightMode ? R.color.route_info_control_icon_color_dark : R.color.route_info_control_icon_color_light));
+		waypointsButton.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_intermediate_destination, nightMode ? R.color.route_info_control_icon_color_dark : R.color.route_info_control_icon_color_light));
 		waypointsButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -312,8 +312,8 @@ public class MapControlsLayer extends OsmandMapLayer {
 		});
 
 		ImageView options = (ImageView) main.findViewById(R.id.map_options_route_button);
-		options.setImageDrawable(!routeInfo ? app.getIconsCache().getIcon(R.drawable.map_action_settings,
-				R.color.osmand_orange) : app.getIconsCache().getIcon(R.drawable.map_action_settings, nightMode ? R.color.route_info_control_icon_color_dark : R.color.route_info_control_icon_color_light));
+		options.setImageDrawable(!routeInfo ? app.getUIUtilities().getIcon(R.drawable.map_action_settings,
+				R.color.osmand_orange) : app.getUIUtilities().getIcon(R.drawable.map_action_settings, nightMode ? R.color.route_info_control_icon_color_dark : R.color.route_info_control_icon_color_light));
 		options.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -322,7 +322,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		});
 
 		TextView routeGoButton = (TextView) main.findViewById(R.id.map_go_route_button);
-		routeGoButton.setCompoundDrawablesWithIntrinsicBounds(app.getIconsCache().getIcon(R.drawable.map_start_navigation, R.color.color_white), null, null, null);
+		routeGoButton.setCompoundDrawablesWithIntrinsicBounds(app.getUIUtilities().getIcon(R.drawable.map_start_navigation, R.color.color_white), null, null, null);
 		routeGoButton.setText(mapActivity.getString(R.string.shared_string_go));
 		routeGoButton.setTextColor(ContextCompat.getColor(mapActivity, R.color.color_white));
 		AndroidUtils.setBackground(mapActivity, routeGoButton, nightMode, R.drawable.route_info_go_btn_bg_light, R.drawable.route_info_go_btn_bg_dark);
@@ -1189,11 +1189,11 @@ public class MapControlsLayer extends OsmandMapLayer {
 			}
 			Drawable d = null;
 			if (resDarkId != 0 && nightMode) {
-				d = ctx.getIconsCache().getIcon(resDarkId);
+				d = ctx.getUIUtilities().getIcon(resDarkId);
 			} else if (resLightId != 0 && !nightMode) {
-				d = ctx.getIconsCache().getIcon(resLightId);
+				d = ctx.getUIUtilities().getIcon(resLightId);
 			} else if (resId != 0) {
-				d = ctx.getIconsCache().getIcon(resId, nightMode ? resClrDark : resClrLight);
+				d = ctx.getUIUtilities().getIcon(resId, nightMode ? resClrDark : resClrLight);
 			}
 
 			if (iv instanceof ImageView) {

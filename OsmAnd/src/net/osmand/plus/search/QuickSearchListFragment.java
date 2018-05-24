@@ -192,8 +192,6 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 	@Override
 	public void onResume() {
 		super.onResume();
-		int screenOrientation = DashLocationFragment.getScreenOrientation(getActivity());
-		listAdapter.setScreenOrientation(screenOrientation);
 		dialogFragment.onSearchListFragmentResume(this);
 	}
 
@@ -336,8 +334,6 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 
 	public void updateLocation(LatLon latLon, Float heading) {
 		if (listAdapter != null && !touching && !scrolling) {
-			listAdapter.setLocation(latLon);
-			listAdapter.setHeading(heading);
 			dialogFragment.getAccessibilityAssistant().lockEvents();
 			listAdapter.notifyDataSetChanged();
 			dialogFragment.getAccessibilityAssistant().unlockEvents();
@@ -346,7 +342,9 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 				try {
 					int position = getListView().getPositionForView(selected);
 					if ((position != AdapterView.INVALID_POSITION) && (position >= getListView().getHeaderViewsCount())) {
-						dialogFragment.getNavigationInfo().updateTargetDirection(listAdapter.getItem(position - getListView().getHeaderViewsCount()).getSearchResult().location, heading.floatValue());
+						dialogFragment.getNavigationInfo().updateTargetDirection(
+								listAdapter.getItem(position - getListView().getHeaderViewsCount()).getSearchResult().location, 
+								heading.floatValue());
 					}
 				} catch (Exception e) {
 					return;

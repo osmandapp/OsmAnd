@@ -94,7 +94,7 @@ public class DashAudioVideoNotesFragment extends DashBaseFragment {
 			View view = inflater.inflate(R.layout.note, null, false);
 
 			getNoteView(recording, view, getMyApplication());
-			((ImageView) view.findViewById(R.id.play)).setImageDrawable(getMyApplication().getIconsCache()
+			((ImageView) view.findViewById(R.id.play)).setImageDrawable(getMyApplication().getUIUtilities()
 					.getThemedIcon(R.drawable.ic_play_dark));
 			view.findViewById(R.id.play).setOnClickListener(new View.OnClickListener() {
 				@Override
@@ -146,11 +146,11 @@ public class DashAudioVideoNotesFragment extends DashBaseFragment {
 		Drawable iconDrawable;
 
 		if (recording.isAudio()) {
-			iconDrawable = ctx.getIconsCache().getIcon(R.drawable.ic_type_audio, R.color.color_distance);
+			iconDrawable = ctx.getUIUtilities().getIcon(R.drawable.ic_type_audio, R.color.color_distance);
 		} else if (recording.isVideo()) {
-			iconDrawable = ctx.getIconsCache().getIcon(R.drawable.ic_type_video, R.color.color_distance);
+			iconDrawable = ctx.getUIUtilities().getIcon(R.drawable.ic_type_video, R.color.color_distance);
 		} else {
-			iconDrawable = ctx.getIconsCache().getIcon(R.drawable.ic_type_img, R.color.color_distance);
+			iconDrawable = ctx.getUIUtilities().getIcon(R.drawable.ic_type_img, R.color.color_distance);
 		}
 		icon.setImageDrawable(iconDrawable);
 		return iconDrawable;

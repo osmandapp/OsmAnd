@@ -41,8 +41,8 @@ public class DashSimulateFragment extends DashBaseFragment {
 				: R.string.animate_route);
 		ImageButton actionButton = (ImageButton) getView().findViewById(R.id.stop);
 		actionButton.setImageDrawable(
-				!routeAnimating ? getMyApplication().getIconsCache().getThemedIcon(R.drawable.ic_action_play_dark)
-						: getMyApplication().getIconsCache().getThemedIcon(R.drawable.ic_action_rec_stop));
+				!routeAnimating ? getMyApplication().getUIUtilities().getThemedIcon(R.drawable.ic_action_play_dark)
+						: getMyApplication().getUIUtilities().getThemedIcon(R.drawable.ic_action_rec_stop));
 		actionButton.setContentDescription(getString(routeAnimating ? R.string.animate_route_off : R.string.animate_route));
 
 	}

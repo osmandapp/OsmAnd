@@ -158,7 +158,7 @@ public class AdditionalActionsBottomSheetDialogFragment extends net.osmand.plus.
 
 	@Override
 	protected Drawable getContentIcon(@DrawableRes int id) {
-		return getMyApplication().getIconsCache().getIcon(id, nightMode ? R.color.grid_menu_icon_dark : R.color.on_map_icon_color);
+		return getMyApplication().getUIUtilities().getIcon(id, nightMode ? R.color.grid_menu_icon_dark : R.color.on_map_icon_color);
 	}
 
 	private int getCancelRowBgResId() {

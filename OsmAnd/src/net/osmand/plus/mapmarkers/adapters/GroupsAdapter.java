@@ -6,7 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import net.osmand.plus.IconsCache;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 
@@ -17,11 +17,11 @@ public abstract class GroupsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
 	private GroupsAdapterListener listener;
 	protected OsmandApplication app;
-	protected IconsCache iconsCache;
+	protected UiUtilities iconsCache;
 
 	public GroupsAdapter(Context context) {
 		this.app = (OsmandApplication) context.getApplicationContext();
-		this.iconsCache = app.getIconsCache();
+		this.iconsCache = app.getUIUtilities();
 	}
 
 	public void setAdapterListener(GroupsAdapterListener listener) {

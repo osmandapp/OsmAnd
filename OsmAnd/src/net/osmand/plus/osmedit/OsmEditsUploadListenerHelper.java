@@ -23,7 +23,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import net.osmand.plus.IconsCache;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
@@ -268,7 +268,7 @@ public class OsmEditsUploadListenerHelper implements OsmEditsUploadListener {
 
 			PointWithPotentialError pointWrapper = data[position];
 			holder.pointNameTextView.setText(pointWrapper.point);
-			IconsCache cache = ((OsmandApplication) context.getApplication()).getIconsCache();
+			UiUtilities cache = ((OsmandApplication) context.getApplication()).getUIUtilities();
 			holder.checkedUncheckedImageView.setImageDrawable(pointWrapper.hasError ?
 					cache.getThemedIcon(R.drawable.ic_action_remove_dark) :
 					cache.getThemedIcon(R.drawable.ic_action_done));

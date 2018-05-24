@@ -76,15 +76,15 @@ public class AppModeDialog {
 			ImageView iv = (ImageView) tb.findViewById(R.id.app_mode_icon);
 			boolean nightMode = isNightMode(ctx, useMapTheme);
 			if (checked) {
-				iv.setImageDrawable(ctx.getIconsCache().getIcon(mode.getSmallIconDark(), nightMode ? R.color.route_info_checked_mode_icon_color_dark : R.color.route_info_checked_mode_icon_color_light));
+				iv.setImageDrawable(ctx.getUIUtilities().getIcon(mode.getSmallIconDark(), nightMode ? R.color.route_info_checked_mode_icon_color_dark : R.color.route_info_checked_mode_icon_color_light));
 				iv.setContentDescription(String.format("%s %s", mode.toHumanString(ctx), ctx.getString(R.string.item_checked)));
 				tb.findViewById(R.id.selection).setVisibility(View.VISIBLE);
 			} else {
 				if (useMapTheme) {
-					iv.setImageDrawable(ctx.getIconsCache().getIcon(mode.getSmallIconDark(), R.color.route_info_unchecked_mode_icon_color));
+					iv.setImageDrawable(ctx.getUIUtilities().getIcon(mode.getSmallIconDark(), R.color.route_info_unchecked_mode_icon_color));
 					iv.setBackgroundResource(AndroidUtils.resolveAttribute(ctx, android.R.attr.selectableItemBackground));
 				} else {
-					iv.setImageDrawable(ctx.getIconsCache().getThemedIcon(mode.getSmallIconDark()));
+					iv.setImageDrawable(ctx.getUIUtilities().getThemedIcon(mode.getSmallIconDark()));
 				}
 				iv.setContentDescription(String.format("%s %s", mode.toHumanString(ctx), ctx.getString(R.string.item_unchecked)));
 				tb.findViewById(R.id.selection).setVisibility(View.INVISIBLE);
@@ -123,7 +123,7 @@ public class AppModeDialog {
 		int metricsY = (int) ctx.getResources().getDimension(R.dimen.route_info_modes_height);
 		View tb = layoutInflater.inflate(R.layout.mode_view, null);
 		ImageView iv = (ImageView) tb.findViewById(R.id.app_mode_icon);
-		iv.setImageDrawable(ctx.getIconsCache().getIcon(mode.getSmallIconDark(), isNightMode(ctx, useMapTheme) ? R.color.route_info_checked_mode_icon_color_dark : R.color.route_info_checked_mode_icon_color_light));
+		iv.setImageDrawable(ctx.getUIUtilities().getIcon(mode.getSmallIconDark(), isNightMode(ctx, useMapTheme) ? R.color.route_info_checked_mode_icon_color_dark : R.color.route_info_checked_mode_icon_color_light));
 		iv.setContentDescription(mode.toHumanString(ctx));
 //		tb.setCompoundDrawablesWithIntrinsicBounds(null, ctx.getIconsCache().getIcon(mode.getIconId(), R.color.app_mode_icon_color), null, null);
 		LayoutParams lp = new LinearLayout.LayoutParams(metricsX, metricsY);

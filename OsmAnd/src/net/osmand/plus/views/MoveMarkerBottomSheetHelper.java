@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import net.osmand.data.RotatedTileBox;
 import net.osmand.data.PointDescription;
-import net.osmand.plus.IconsCache;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 
@@ -27,7 +27,7 @@ public class MoveMarkerBottomSheetHelper {
 		this.mDescription = (TextView) mView.findViewById(R.id.description);
 		this.mContext = activity;
 
-		IconsCache iconsCache = activity.getMyApplication().getIconsCache();
+		UiUtilities iconsCache = activity.getMyApplication().getUIUtilities();
 		icon.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_photo_dark, R.color.marker_green));
 		mView.findViewById(R.id.apply_button).setOnClickListener(new View.OnClickListener() {
 			@Override

@@ -556,14 +556,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		}
 	}
 	
-	public synchronized Float getHeading() {
-//		if (heading != null && lastValSin != avgValSin && System.currentTimeMillis() - lastHeadingCalcTime > 700) {
-//			avgValSin = lastValSin;
-//			avgValCos = lastValCos;
-//			Arrays.fill(previousCompassValuesA, avgValSin);
-//			Arrays.fill(previousCompassValuesB, avgValCos);
-//			updateCompassVal();
-//		}
+	public Float getHeading() {
 		return heading;
 	}
 	

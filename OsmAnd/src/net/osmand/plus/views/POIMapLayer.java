@@ -305,7 +305,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 
 		final Toolbar topBar = new Toolbar(ctx);
 		topBar.setClickable(true);
-		Drawable back = app.getIconsCache().getIcon(R.drawable.ic_arrow_back);
+		Drawable back = app.getUIUtilities().getIcon(R.drawable.ic_arrow_back);
 		topBar.setNavigationIcon(back);
 		topBar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
 		topBar.setTitle(title);

@@ -1,18 +1,19 @@
 package net.osmand.plus.mapcontextmenu.other;
 
+import android.app.Activity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
-import net.osmand.plus.IconsCache;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities.UpdateLocationViewCache;
 import net.osmand.plus.base.FavoriteImageDrawable;
 import net.osmand.plus.dashboard.DashLocationFragment;
 import net.osmand.util.MapUtils;
@@ -24,18 +25,14 @@ public class FavouritesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
 	private final List<FavouritePoint> favouritePoints;
 	private OsmandApplication app;
-	private IconsCache iconsCache;
 	private View.OnClickListener listener;
 
-	private LatLon location;
-	private Float heading;
-	private boolean useCenter;
-	private int screenOrientation;
+	private UpdateLocationViewCache cache;
 
-	public FavouritesAdapter(OsmandApplication app, List<FavouritePoint> FavouritePoints) {
+	public FavouritesAdapter(OsmandApplication app, Activity a, List<FavouritePoint> FavouritePoints) {
 		this.app = app;
-		iconsCache = app.getIconsCache();
 		this.favouritePoints = FavouritePoints;
+		cache = app.getUIUtilities().getUpdateLocationViewCache(a);
 	}
 
 	@Override
@@ -57,15 +54,8 @@ public class FavouritesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 				favouritesViewHolder.description.setText(favouritePoint.getCategory());
 			}
 			favouritesViewHolder.favouriteImage.setImageDrawable(FavoriteImageDrawable.getOrCreate(app, favouritePoint.getColor(), false));
-			if (location == null) {
-				return;
-			}
-			float dist = (float) MapUtils.getDistance(favouritePoint.getLatitude(), favouritePoint.getLongitude(), location.getLatitude(), location.getLongitude());
-			favouritesViewHolder.distance.setText(OsmAndFormatter.getFormattedDistance(dist, app));
-			favouritesViewHolder.arrowImage.setImageDrawable(iconsCache.getIcon(R.drawable.ic_direction_arrow));
-			DashLocationFragment.updateLocationView(useCenter, location, heading, favouritesViewHolder.arrowImage,
-					favouritesViewHolder.distance, favouritePoint.getLatitude(), favouritePoint.getLongitude(),
-					screenOrientation, app);
+			app.getUIUtilities().updateLocationView(cache, favouritesViewHolder.arrowImage, favouritesViewHolder.distance,
+					favouritePoint.getLatitude(), favouritePoint.getLongitude());
 		}
 	}
 
@@ -82,21 +72,6 @@ public class FavouritesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 		this.listener = listener;
 	}
 
-	public void setScreenOrientation(int screenOrientation) {
-		this.screenOrientation = screenOrientation;
-	}
-
-	public void setLocation(LatLon location) {
-		this.location = location;
-	}
-
-	public void setHeading(Float heading) {
-		this.heading = heading;
-	}
-
-	public void setUseCenter(boolean useCenter) {
-		this.useCenter = useCenter;
-	}
 
 	class FavouritesViewHolder extends RecyclerView.ViewHolder {
 

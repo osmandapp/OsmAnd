@@ -387,9 +387,9 @@ public class ConfigureMapMenu {
 								View v = super.getView(position, convertView, parent);
 								final ImageView icon = (ImageView) v.findViewById(R.id.icon);
 								if (checkedItems[position]) {
-									icon.setImageDrawable(app.getIconsCache().getIcon(iconIds[position], R.color.osmand_orange));
+									icon.setImageDrawable(app.getUIUtilities().getIcon(iconIds[position], R.color.osmand_orange));
 								} else {
-									icon.setImageDrawable(app.getIconsCache().getThemedIcon(iconIds[position]));
+									icon.setImageDrawable(app.getUIUtilities().getThemedIcon(iconIds[position]));
 								}
 								v.findViewById(R.id.divider).setVisibility(View.GONE);
 								v.findViewById(R.id.description).setVisibility(View.GONE);
@@ -402,9 +402,9 @@ public class ConfigureMapMenu {
 									public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 										checkedItems[position] = isChecked;
 										if (checkedItems[position]) {
-											icon.setImageDrawable(app.getIconsCache().getIcon(iconIds[position], R.color.osmand_orange));
+											icon.setImageDrawable(app.getUIUtilities().getIcon(iconIds[position], R.color.osmand_orange));
 										} else {
-											icon.setImageDrawable(app.getIconsCache().getThemedIcon(iconIds[position]));
+											icon.setImageDrawable(app.getUIUtilities().getThemedIcon(iconIds[position]));
 										}
 									}
 								});
@@ -1385,14 +1385,14 @@ public class ConfigureMapMenu {
 						iconId = R.drawable.ic_action_gpx_width_thin;
 					}
 					textView.setCompoundDrawablesWithIntrinsicBounds(null, null,
-							app.getIconsCache().getPaintedIcon(iconId, currentColor), null);
+							app.getUIUtilities().getPaintedIcon(iconId, currentColor), null);
 				} else {
 					if (item.color == -1) {
 						textView.setCompoundDrawablesWithIntrinsicBounds(null, null,
-								app.getIconsCache().getThemedIcon(R.drawable.ic_action_circle), null);
+								app.getUIUtilities().getThemedIcon(R.drawable.ic_action_circle), null);
 					} else {
 						textView.setCompoundDrawablesWithIntrinsicBounds(null, null,
-								app.getIconsCache().getPaintedIcon(R.drawable.ic_action_circle, item.color), null);
+								app.getUIUtilities().getPaintedIcon(R.drawable.ic_action_circle, item.color), null);
 					}
 				}
 				textView.setCompoundDrawablePadding(AndroidUtils.dpToPx(getContext(), 10f));

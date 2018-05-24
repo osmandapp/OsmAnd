@@ -18,7 +18,7 @@ import android.view.ViewTreeObserver;
 import android.view.animation.Animation;
 import android.widget.ImageView;
 
-import net.osmand.plus.IconsCache;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.activities.MapActivity;
@@ -26,7 +26,7 @@ import net.osmand.plus.activities.OsmandActionBarActivity;
 import net.osmand.plus.activities.OsmandInAppPurchaseActivity;
 
 public class BaseOsmAndFragment extends Fragment implements TransitionAnimator {
-	private IconsCache iconsCache;
+	private UiUtilities iconsCache;
 
 	private int statusBarColor = -1;
 	private boolean transitionAnimationAllowed = true;
@@ -165,26 +165,26 @@ public class BaseOsmAndFragment extends Fragment implements TransitionAnimator {
 	}
 
 	@Nullable
-	protected IconsCache getIconsCache() {
+	protected UiUtilities getIconsCache() {
 		OsmandApplication app = getMyApplication();
 		if (iconsCache == null && app != null) {
-			iconsCache = app.getIconsCache();
+			iconsCache = app.getUIUtilities();
 		}
 		return iconsCache;
 	}
 
 	protected Drawable getPaintedContentIcon(@DrawableRes int id, @ColorInt int color) {
-		IconsCache cache = getIconsCache();
+		UiUtilities cache = getIconsCache();
 		return cache != null ? cache.getPaintedIcon(id, color) : null;
 	}
 
 	protected Drawable getIcon(@DrawableRes int id, @ColorRes int colorId) {
-		IconsCache cache = getIconsCache();
+		UiUtilities cache = getIconsCache();
 		return cache != null ? cache.getIcon(id, colorId) : null;
 	}
 
 	protected Drawable getContentIcon(@DrawableRes int id) {
-		IconsCache cache = getIconsCache();
+		UiUtilities cache = getIconsCache();
 		return cache != null ? cache.getThemedIcon(id) : null;
 	}
 

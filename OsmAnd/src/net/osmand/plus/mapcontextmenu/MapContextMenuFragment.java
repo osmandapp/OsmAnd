@@ -1,5 +1,36 @@
 package net.osmand.plus.mapcontextmenu;
 
+import static android.util.TypedValue.COMPLEX_UNIT_DIP;
+import static net.osmand.plus.mapcontextmenu.MenuBuilder.SHADOW_HEIGHT_TOP_DP;
+
+import java.util.List;
+
+import net.osmand.AndroidUtils;
+import net.osmand.data.LatLon;
+import net.osmand.data.PointDescription;
+import net.osmand.data.QuadPoint;
+import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.LockableScrollView;
+import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities.UpdateLocationViewCache;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
+import net.osmand.plus.mapcontextmenu.MenuController.MenuState;
+import net.osmand.plus.mapcontextmenu.MenuController.TitleButtonController;
+import net.osmand.plus.mapcontextmenu.MenuController.TitleProgressController;
+import net.osmand.plus.mapcontextmenu.controllers.TransportStopController;
+import net.osmand.plus.mapcontextmenu.other.MapRouteInfoMenu;
+import net.osmand.plus.transport.TransportStopRoute;
+import net.osmand.plus.views.AnimateDraggingMapThread;
+import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.TransportStopsLayer;
+import net.osmand.plus.views.controls.HorizontalSwipeConfirm;
+import net.osmand.plus.views.controls.SingleTapConfirm;
+import net.osmand.util.Algorithms;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
@@ -34,38 +65,6 @@ import android.widget.LinearLayout;
 import android.widget.OverScroller;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
-import net.osmand.AndroidUtils;
-import net.osmand.data.LatLon;
-import net.osmand.data.PointDescription;
-import net.osmand.data.QuadPoint;
-import net.osmand.data.RotatedTileBox;
-import net.osmand.plus.LockableScrollView;
-import net.osmand.plus.OsmAndFormatter;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BaseOsmAndFragment;
-import net.osmand.plus.dashboard.DashLocationFragment;
-import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
-import net.osmand.plus.mapcontextmenu.MenuController.MenuState;
-import net.osmand.plus.mapcontextmenu.MenuController.TitleButtonController;
-import net.osmand.plus.mapcontextmenu.MenuController.TitleProgressController;
-import net.osmand.plus.mapcontextmenu.controllers.TransportStopController;
-import net.osmand.plus.mapcontextmenu.other.MapRouteInfoMenu;
-import net.osmand.plus.transport.TransportStopRoute;
-import net.osmand.plus.views.AnimateDraggingMapThread;
-import net.osmand.plus.views.OsmandMapTileView;
-import net.osmand.plus.views.TransportStopsLayer;
-import net.osmand.plus.views.controls.HorizontalSwipeConfirm;
-import net.osmand.plus.views.controls.SingleTapConfirm;
-import net.osmand.util.Algorithms;
-
-import java.util.List;
-
-import static android.util.TypedValue.COMPLEX_UNIT_DIP;
-import static net.osmand.plus.mapcontextmenu.MenuBuilder.SHADOW_HEIGHT_TOP_DP;
 
 
 public class MapContextMenuFragment extends BaseOsmAndFragment implements DownloadEvents {
@@ -133,6 +132,8 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 	private int screenOrientation;
 	private boolean created;
+
+	private UpdateLocationViewCache updateLocationViewCache;
 
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -751,7 +752,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 	}
 
 	private void updateImageButton(ImageButton button, int iconLightId, int iconDarkId, int bgLightId, int bgDarkId, boolean night) {
-		button.setImageDrawable(getMapActivity().getMyApplication().getIconsCache().getIcon(night ? iconDarkId : iconLightId));
+		button.setImageDrawable(getMapActivity().getMyApplication().getUIUtilities().getIcon(night ? iconDarkId : iconLightId));
 		if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
 			button.setBackground(getMapActivity().getResources().getDrawable(night ? bgDarkId : bgLightId,
 					getMapActivity().getTheme()));
@@ -1171,7 +1172,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			dismissMenu();
 			return;
 		}
-		screenOrientation = DashLocationFragment.getScreenOrientation(getActivity());
+		updateLocationViewCache = getMyApplication().getUIUtilities().getUpdateLocationViewCache(getMapActivity());
 		getMapActivity().getMapViewTrackingUtilities().setContextMenu(menu);
 		getMapActivity().getMapViewTrackingUtilities().setMapLinkedToLocation(false);
 		wasDrawerDisabled = getMapActivity().isDrawerDisabled();
@@ -1495,7 +1496,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		OsmandApplication app = getMyApplication();
 		if (app != null && view != null) {
 			View compassView = view.findViewById(R.id.compass_layout);
-			if (menu.getMyLocation() != null && menu.displayDistanceDirection() && menu.getCurrentMenuState() != MenuState.FULL_SCREEN) {
+			if (menu.displayDistanceDirection() && menu.getCurrentMenuState() != MenuState.FULL_SCREEN) {
 				updateDistanceDirection();
 				compassView.setVisibility(View.VISIBLE);
 			} else {
@@ -1534,10 +1535,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		if (app != null && activity != null && view != null) {
 			TextView distanceText = (TextView) view.findViewById(R.id.distance);
 			ImageView direction = (ImageView) view.findViewById(R.id.direction);
-			float myHeading = menu.getHeading() == null ? 0f : menu.getHeading();
-			int color = menu.isCachedMyLocation() ? R.color.icon_color : 0;
-			DashLocationFragment.updateLocationView(false, menu.getMyLocation(), myHeading, direction, color, distanceText,
-					color, menu.getLatLon().getLatitude(), menu.getLatLon().getLongitude(), screenOrientation, app, activity);
+			getMyApplication().getUIUtilities().updateLocationView(updateLocationViewCache, direction, distanceText, menu.getLatLon());
 		}
 	}
 

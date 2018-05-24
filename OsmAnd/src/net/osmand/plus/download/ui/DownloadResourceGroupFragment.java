@@ -28,7 +28,7 @@ import android.widget.TextView;
 
 import net.osmand.AndroidNetworkUtils;
 import net.osmand.AndroidUtils;
-import net.osmand.plus.IconsCache;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
@@ -105,7 +105,7 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 		activity.getAccessibilityAssistant().registerPage(view, DownloadActivity.DOWNLOAD_TAB_NUMBER);
 
 		toolbar = (Toolbar) view.findViewById(R.id.toolbar);
-		toolbar.setNavigationIcon(getMyApplication().getIconsCache().getIcon(R.drawable.ic_arrow_back));
+		toolbar.setNavigationIcon(getMyApplication().getUIUtilities().getIcon(R.drawable.ic_arrow_back));
 		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
 		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
 			@Override
@@ -159,7 +159,7 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 		if (!openAsDialog() && purchaseHelper != null && !purchaseHelper.hasInventory()) {
 			restorePurchasesView = activity.getLayoutInflater().inflate(R.layout.restore_purchases_list_footer, null);
 			((ImageView) restorePurchasesView.findViewById(R.id.icon)).setImageDrawable(
-					getMyApplication().getIconsCache().getThemedIcon(R.drawable.ic_action_reset_to_default_dark));
+					getMyApplication().getUIUtilities().getThemedIcon(R.drawable.ic_action_reset_to_default_dark));
 			restorePurchasesView.findViewById(R.id.button).setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
@@ -181,7 +181,7 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 			searchView = activity.getLayoutInflater().inflate(R.layout.simple_list_menu_item, null);
 			searchView.setBackgroundResource(android.R.drawable.list_selector_background);
 			TextView title = (TextView) searchView.findViewById(R.id.title);
-			title.setCompoundDrawablesWithIntrinsicBounds(getMyApplication().getIconsCache().getThemedIcon(R.drawable.ic_action_search_dark), null, null, null);
+			title.setCompoundDrawablesWithIntrinsicBounds(getMyApplication().getUIUtilities().getThemedIcon(R.drawable.ic_action_search_dark), null, null, null);
 			title.setHint(R.string.search_map_hint);
 			searchView.setOnClickListener(new OnClickListener() {
 				@Override
@@ -532,11 +532,11 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 			Drawable iconLeft;
 			if (group.getType() == DownloadResourceGroupType.VOICE_REC
 					|| group.getType() == DownloadResourceGroupType.VOICE_TTS) {
-				iconLeft = ctx.getMyApplication().getIconsCache().getThemedIcon(R.drawable.ic_action_volume_up);
+				iconLeft = ctx.getMyApplication().getUIUtilities().getThemedIcon(R.drawable.ic_action_volume_up);
 			} else if (group.getType() == DownloadResourceGroupType.FONTS) {
-				iconLeft = ctx.getMyApplication().getIconsCache().getThemedIcon(R.drawable.ic_action_map_language);
+				iconLeft = ctx.getMyApplication().getUIUtilities().getThemedIcon(R.drawable.ic_action_map_language);
 			} else {
-				IconsCache cache = ctx.getMyApplication().getIconsCache();
+				UiUtilities cache = ctx.getMyApplication().getUIUtilities();
 				if (isParentWorld(group) || isParentWorld(group.getParentGroup())) {
 					iconLeft = cache.getThemedIcon(R.drawable.ic_world_globe_dark);
 				} else {

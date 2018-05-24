@@ -107,7 +107,7 @@ public class ContextMenuItem {
 		if (skipPaintingWithoutColor || getColorRes() != INVALID_ID) {
 			return getColorRes();
 		} else {
-			return IconsCache.getDefaultColorRes(context);
+			return UiUtilities.getDefaultColorRes(context);
 		}
 	}
 

@@ -149,7 +149,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 			View searchView = inflater.inflate(R.layout.search_fav_list_item, null);
 			searchView.setBackgroundResource(light ? R.color.bg_color_light : R.color.bg_color_dark);
 			TextView title = (TextView) searchView.findViewById(R.id.title);
-			title.setCompoundDrawablesWithIntrinsicBounds(getMyApplication().getIconsCache().getThemedIcon(R.drawable.ic_action_search_dark), null, null, null);
+			title.setCompoundDrawablesWithIntrinsicBounds(getMyApplication().getUIUtilities().getThemedIcon(R.drawable.ic_action_search_dark), null, null, null);
 			title.setHint(R.string.shared_string_search);
 			searchView.setOnClickListener(new View.OnClickListener() {
 				@Override
@@ -783,7 +783,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 			int disabledColor = light ? R.color.secondary_text_light : R.color.secondary_text_dark;
 			row.findViewById(R.id.group_divider).setVisibility(groupPosition == 0 ? View.GONE : View.VISIBLE);
 			int color = model.color == 0 || model.color == Color.BLACK ? getResources().getColor(R.color.color_favorite) : model.color;
-			setCategoryIcon(app, app.getIconsCache().getPaintedIcon(
+			setCategoryIcon(app, app.getUIUtilities().getPaintedIcon(
 					R.drawable.ic_action_fav_dark, visible ? (color | 0xff000000) : getResources().getColor(disabledColor)),
 					groupPosition, isExpanded, row, light);
 			adjustIndicator(app, groupPosition, isExpanded, row, light);
@@ -833,7 +833,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 			}
 			final View ch = row.findViewById(R.id.options);
 			if (!selectionMode) {
-				((ImageView) ch).setImageDrawable(getMyApplication().getIconsCache().getThemedIcon(R.drawable.ic_overflow_menu_white));
+				((ImageView) ch).setImageDrawable(getMyApplication().getUIUtilities().getThemedIcon(R.drawable.ic_overflow_menu_white));
 				ch.setVisibility(View.VISIBLE);
 				ch.setContentDescription(getString(R.string.shared_string_settings));
 				ch.setOnClickListener(new View.OnClickListener() {
@@ -877,7 +877,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 			if (showOptionsButton) {
 				ImageView options = (ImageView) row.findViewById(R.id.options);
 				options.setFocusable(false);
-				options.setImageDrawable(getMyApplication().getIconsCache().getThemedIcon(
+				options.setImageDrawable(getMyApplication().getUIUtilities().getThemedIcon(
 						R.drawable.ic_overflow_menu_white));
 				options.setVisibility(View.VISIBLE);
 				options.setOnClickListener(new View.OnClickListener() {

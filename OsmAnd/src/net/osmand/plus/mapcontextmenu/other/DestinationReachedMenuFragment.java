@@ -15,7 +15,7 @@ import android.widget.TextView;
 import net.osmand.AndroidUtils;
 import net.osmand.data.LatLon;
 import net.osmand.plus.ApplicationMode;
-import net.osmand.plus.IconsCache;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
@@ -55,7 +55,7 @@ public class DestinationReachedMenuFragment extends Fragment {
 			}
 		});
 
-		IconsCache iconsCache = getMapActivity().getMyApplication().getIconsCache();
+		UiUtilities iconsCache = getMapActivity().getMyApplication().getUIUtilities();
 
 		ImageButton closeImageButton = (ImageButton) view.findViewById(R.id.closeImageButton);
 		closeImageButton.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_remove_dark, menu.isLight()));

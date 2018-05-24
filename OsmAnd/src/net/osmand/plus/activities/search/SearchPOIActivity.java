@@ -3,6 +3,45 @@
  */
 package net.osmand.plus.activities.search;
 
+import gnu.trove.set.hash.TLongHashSet;
+
+import java.text.MessageFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
+
+import net.osmand.Location;
+import net.osmand.ResultMatcher;
+import net.osmand.access.AccessibilityAssistant;
+import net.osmand.access.NavigationInfo;
+import net.osmand.data.Amenity;
+import net.osmand.data.LatLon;
+import net.osmand.data.PointDescription;
+import net.osmand.osm.PoiType;
+import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
+import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.R;
+import net.osmand.plus.R.color;
+import net.osmand.plus.UiUtilities;
+import net.osmand.plus.activities.EditPOIFilterActivity;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.OsmandListActivity;
+import net.osmand.plus.poi.NominatimPoiFilter;
+import net.osmand.plus.poi.PoiUIFilter;
+import net.osmand.plus.poi.PoiUIFilter.AmenityNameFilter;
+import net.osmand.plus.render.RenderingIcons;
+import net.osmand.plus.views.DirectionDrawable;
+import net.osmand.util.Algorithms;
+import net.osmand.util.MapUtils;
+import net.osmand.util.OpeningHoursParser;
+import net.osmand.util.OpeningHoursParser.OpeningHours;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -35,47 +74,6 @@ import android.widget.LinearLayout.LayoutParams;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import net.osmand.Location;
-import net.osmand.ResultMatcher;
-import net.osmand.access.AccessibilityAssistant;
-import net.osmand.access.NavigationInfo;
-import net.osmand.data.Amenity;
-import net.osmand.data.LatLon;
-import net.osmand.data.PointDescription;
-import net.osmand.osm.PoiType;
-import net.osmand.plus.IconsCache;
-import net.osmand.plus.OsmAndFormatter;
-import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
-import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.R;
-import net.osmand.plus.R.color;
-import net.osmand.plus.activities.EditPOIFilterActivity;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.OsmandListActivity;
-import net.osmand.plus.dashboard.DashLocationFragment;
-import net.osmand.plus.poi.NominatimPoiFilter;
-import net.osmand.plus.poi.PoiUIFilter;
-import net.osmand.plus.poi.PoiUIFilter.AmenityNameFilter;
-import net.osmand.plus.render.RenderingIcons;
-import net.osmand.plus.views.DirectionDrawable;
-import net.osmand.util.Algorithms;
-import net.osmand.util.MapUtils;
-import net.osmand.util.OpeningHoursParser;
-import net.osmand.util.OpeningHoursParser.OpeningHours;
-
-import java.text.MessageFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
-
-import gnu.trove.set.hash.TLongHashSet;
 
 /**
  * Search poi activity
@@ -133,7 +131,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 		});
 		showFilterItem = menu.add(0, FILTER, 0, R.string.search_poi_filter);
 		MenuItemCompat.setShowAsAction(showFilterItem, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
-		showFilterItem = showFilterItem.setIcon(getMyApplication().getIconsCache().getIcon(
+		showFilterItem = showFilterItem.setIcon(getMyApplication().getUIUtilities().getIcon(
 				R.drawable.ic_action_filter_dark));
 		showFilterItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 			@Override
@@ -156,7 +154,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 
 		showOnMapItem = menu.add(0, SHOW_ON_MAP, 0, R.string.shared_string_show_on_map);
 		MenuItemCompat.setShowAsAction(showOnMapItem, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
-		showOnMapItem = showOnMapItem.setIcon(getMyApplication().getIconsCache().getIcon(
+		showOnMapItem = showOnMapItem.setIcon(getMyApplication().getUIUtilities().getIcon(
 				R.drawable.ic_show_on_map));
 		showOnMapItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 			@Override
@@ -264,9 +262,9 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 		});
 		searchFilter.setHint(R.string.filter_poi_hint);
 		((ImageView) findViewById(R.id.search_icon)).setImageDrawable(
-				getMyApplication().getIconsCache().getThemedIcon(R.drawable.ic_action_filter_dark));
+				getMyApplication().getUIUtilities().getThemedIcon(R.drawable.ic_action_filter_dark));
 		((ImageView) findViewById(R.id.options)).
-				setImageDrawable(getMyApplication().getIconsCache().getThemedIcon(R.drawable.ic_overflow_menu_white));
+				setImageDrawable(getMyApplication().getUIUtilities().getThemedIcon(R.drawable.ic_overflow_menu_white));
 		findViewById(R.id.options).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -346,7 +344,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 
 	private void showOptionsMenu(View v) {
 		// Show menu with search all, name finder, name finder poi
-		IconsCache iconsCache = getMyApplication().getIconsCache();
+		UiUtilities iconsCache = getMyApplication().getUIUtilities();
 		final PopupMenu optionsMenu = new PopupMenu(this, v);
 
 		final PoiUIFilter f = this.filter;
@@ -380,7 +378,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 	}
 
 	private void addFilter(PopupMenu optionsMenu, final String value) {
-		IconsCache iconsCache = getMyApplication().getIconsCache();
+		UiUtilities iconsCache = getMyApplication().getUIUtilities();
 		MenuItem item = optionsMenu.getMenu().add(getString(R.string.search_poi_filter) + ": " + value)
 				.setIcon(iconsCache.getThemedIcon(R.drawable.ic_action_filter_dark));
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
@@ -557,7 +555,8 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 			try {
 				int position = getListView().getPositionForView(selected);
 				if ((position != AdapterView.INVALID_POSITION) && (position >= getListView().getHeaderViewsCount())) {
-					navigationInfo.updateTargetDirection(amenityAdapter.getItem(position - getListView().getHeaderViewsCount()).getLocation(), heading.floatValue());
+					navigationInfo.updateTargetDirection(amenityAdapter.getItem(position - getListView().getHeaderViewsCount()).
+							getLocation(), heading.floatValue());
 				}
 			} catch (Exception e) {
 				return;
@@ -731,7 +730,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 
 		public void setNewModel(List<Amenity> amenityList) {
 			setNotifyOnChange(false);
-			screenOrientation = DashLocationFragment.getScreenOrientation(SearchPOIActivity.this);
+			screenOrientation = getMyApplication().getUIUtilities().getScreenOrientation(SearchPOIActivity.this);
 			originalAmenityList = new ArrayList<Amenity>(amenityList);
 			clear();
 			for (Amenity obj : amenityList) {
@@ -768,7 +767,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 
 					timeIcon.setVisibility(View.VISIBLE);
 					timeText.setVisibility(View.VISIBLE);
-					timeIcon.setImageDrawable(app.getIconsCache().getIcon(R.drawable.ic_small_time, colorId));
+					timeIcon.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_small_time, colorId));
 					timeText.setTextColor(app.getResources().getColor(colorId));
 					String rt = rs.getCurrentRuleTime(inst);
 					timeText.setText(rt == null ? "" : rt);

@@ -109,7 +109,7 @@ public class WptPtMenuBuilder extends MenuBuilder {
 				File file = new File(gpx.path);
 				String gpxName = file.getName().replace(".gpx", "").replace("/", " ").replace("_", " ");
 				int color = getPointColor(wpt, getFileColor(selectedGpxFile));
-				buildRow(view, app.getIconsCache().getPaintedIcon(R.drawable.ic_type_waypoints_group, color), null, title, 0, gpxName,
+				buildRow(view, app.getUIUtilities().getPaintedIcon(R.drawable.ic_type_waypoints_group, color), null, title, 0, gpxName,
 						true, getCollapsableWaypointsView(view.getContext(), true, gpx, wpt),
 						false, 0, false, null, false);
 			}

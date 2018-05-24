@@ -16,7 +16,7 @@ import net.osmand.data.PointDescription;
 import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.GeocodingLookupService.AddressLookupRequest;
 import net.osmand.plus.GeocodingLookupService.OnAddressLookupResult;
-import net.osmand.plus.IconsCache;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
@@ -89,7 +89,7 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemVie
 	public void onBindViewHolder(final MapMarkerItemViewHolder holder, int pos) {
 		OsmandApplication app = mapActivity.getMyApplication();
 		boolean night = app.getDaynightHelper().isNightModeForMapControls();
-		IconsCache iconsCache = app.getIconsCache();
+		UiUtilities iconsCache = app.getUIUtilities();
 
 		boolean locationItem = showLocationItem && pos == 0;
 		boolean firstMarkerItem = showLocationItem ? pos == 1 : pos == 0;
