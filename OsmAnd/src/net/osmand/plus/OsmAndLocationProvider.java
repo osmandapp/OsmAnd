@@ -706,8 +706,10 @@ public class OsmAndLocationProvider implements SensorEventListener {
 					gpsSignalLost = true;
 					if (routingHelper.isFollowingMode() && routingHelper.getLeftDistance() > 0) {
 						routingHelper.getVoiceRouter().gpsLocationLost();
+						if (simulatePosition == null) {
+							setLocation(null);
+						}
 					}
-					setLocation(null);
 				}
 			}, LOST_LOCATION_CHECK_DELAY);
 			app.runMessageInUIThreadAndCancelPrevious(START_SIMULATE_LOCATION_MSG_ID, new Runnable() {
