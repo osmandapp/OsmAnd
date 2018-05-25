@@ -431,6 +431,7 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 		}
 	}
 
+	@Override
 	protected void setupToolbar(Toolbar toolbar) {
 		super.setupToolbar(toolbar);
 		toolbar.setOverflowIcon(getIcon(R.drawable.ic_overflow_menu_white, R.color.icon_color));
