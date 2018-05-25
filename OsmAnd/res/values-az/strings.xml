@@ -1936,7 +1936,7 @@
     <string name="subsequent_dest_description">Təyinat nöqtəsini yuxarı daşı və təyinat nöqtəsi yarat</string>
     <string name="empty_state_av_notes">Qeydlər yaradın!</string>
     <string name="empty_state_av_notes_desc">Widget və ya kontekst menyusunu istifadə edərək xəritədəki hər nöqtəyə səs, video və ya şəkil qeydi əlavə edin.</string>
-    <string name="import_gpx_file_description">favorit və ya iz faylı kimi idxal edilə bilər.</string>
+    <string name="import_gpx_file_description">favoritlər və ya GPX faylı kimi idxal edilə bilər.</string>
     <string name="plan_route_no_markers_toast">Bu funksiyanı istifadə etmək üçün ən azı bir işarə əlavə etməlisiniz.</string>
     <string name="osn_modify_dialog_error">İstisna hal baş verdi: Qeyd dəyişdirilmədi</string>
     <string name="map_orientation_change_in_accordance_with_speed_descr">Xəritə istiqamətinin “Hərəkət istiqaməti”ndən “Kompas istiqaməti”nə keçmə sürətini seçin.</string>

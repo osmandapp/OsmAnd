@@ -3470,4 +3470,89 @@
 	<string name="poi_animal_keeping_type_paddock">Casta: chirra</string>
 	<string name="poi_animal_keeping_type_open_stable">Casta: istalla aberta</string>
 
+	<string name="poi_tower_construction_lattice">Costrutzione: retìculu</string>
+	<string name="poi_tower_construction_freestanding">Costrutzione: autoportante</string>
+	<string name="poi_tower_construction_dish">Costrutzione: antenna parabòlica</string>
+	<string name="poi_tower_construction_dome">Costrutzione: tzimbòriu</string>
+	<string name="poi_tower_construction_concealed">Costrutzione: istichida</string>
+
+	<string name="poi_railway_yard">Istatzione mertzes</string>
+
+	<string name="poi_coworking_space">Ispàtziu de traballu comunitàriu</string>
+
+	<string name="poi_drink_wine_retail">Binu: bèndida</string>
+	<string name="poi_drink_wine_served">Binu: servidu</string>
+
+	<string name="poi_energy_supplier">Ufìtziu de su frunidore de energia</string>
+
+	<string name="poi_electronics_repair_computer">Acontzu de eletrònicos: elaboradores</string>
+	<string name="poi_electronics_repair_appliance">Acontzu de eletrònicos: eletrodomèsticos</string>
+	<string name="poi_electronics_repair_phone">Acontzu de eletrònicos: telèfonos</string>
+	<string name="poi_electronics_repair_tv">Acontzu de eletrònicos: televisores</string>
+
+	<string name="poi_resort_kids_camp">Campu pro pitzinnos</string>
+	<string name="poi_life_ring">Sarvagente</string>
+
+	<string name="poi_zoo_petting_zoo">Zoo interativu</string>
+	<string name="poi_zoo_wildlife_park">Parcu faunìsticu</string>
+	<string name="poi_zoo_enclosure">Cresura</string>
+	<string name="poi_zoo_safari_park">Parcu safari</string>
+	<string name="poi_zoo_birds">Pugiones</string>
+	<string name="poi_zoo_aviary">Boliera</string>
+	<string name="poi_zoo_falconry">Falconeria</string>
+	<string name="poi_zoo_reptile">Retilàriu</string>
+
+	<string name="poi_stands">Bancarellas</string>
+
+	<string name="poi_motorcycle_sales_yes">Bèndida</string>
+	<string name="poi_motorcycle_sales_no">Bèndida: nono</string>
+	<string name="poi_motorcycle_sales_used">Bèndida: impreadas ebbia</string>
+	<string name="poi_motorcycle_rental_yes">Nolu</string>
+	<string name="poi_motorcycle_rental_no">Nolu: nono</string>
+	<string name="poi_motorcycle_repair_yes">Acontzu</string>
+	<string name="poi_motorcycle_repair_no">Acontzu: nono</string>
+	<string name="poi_motorcycle_parts_yes">Ricàmbios</string>
+	<string name="poi_motorcycle_parts_no">Ricàmbios: nono</string>
+	<string name="poi_motorcycle_tyres_yes">Pneumàticos</string>
+	<string name="poi_motorcycle_tyres_no">Pneumàticos: nono</string>
+	<string name="poi_motorcycle_clothes_yes">Bestimentas pro mototziclistas</string>
+	<string name="poi_motorcycle_clothes_no">Bestimentas pro mototziclistas: nono</string>
+	<string name="poi_motorcycle_type_scooter">Motorinu</string>
+	<string name="poi_motorcycle_type_sportbike">Mototzicleta isportiva</string>
+	<string name="poi_motorcycle_type_chopper">Chopper</string>
+	<string name="poi_motorcycle_type_offroad">Fora de istrada (Offroad)</string>
+	<string name="poi_motorcycle_type_dualsport">Dualsport (Enduro)</string>
+	<string name="poi_motorcycle_type_standard">Istandard</string>
+
+	<string name="poi_generator_output_electricity_no">Essida (eletritzidade): nono</string>
+
+	<string name="poi_owner">Proprietàriu</string>
+
+	<string name="poi_animal_shelter_purpose_adoption_no">Adotzione: nono</string>
+	<string name="poi_direction_n">Diretzione: nord</string>
+	<string name="poi_direction_nne">Diretzione: nord-nordest</string>
+	<string name="poi_direction_ne">Diretzione: nordest</string>
+	<string name="poi_direction_ene">Diretzione: est-nordest</string>
+	<string name="poi_direction_e">Diretzione: est</string>
+	<string name="poi_direction_ese">Diretzione: est-sudest</string>
+	<string name="poi_direction_se">Diretzione: sudest</string>
+	<string name="poi_direction_sse">Diretzione: sud-sudest</string>
+	<string name="poi_direction_s">Diretzione: sud</string>
+	<string name="poi_direction_ssw">Diretzione: sud-sudovest</string>
+	<string name="poi_direction_sw">Diretzione: sudovest</string>
+	<string name="poi_direction_wsw">Diretzione: ovest-sudovest</string>
+	<string name="poi_direction_w">Diretzione: ovest</string>
+	<string name="poi_direction_wnw">Diretzione: ovest-nordovest</string>
+	<string name="poi_direction_nw">Diretzione: nordovest</string>
+	<string name="poi_direction_nnw">Diretzione: nord-nordovest</string>
+	<string name="poi_direction_forward">Diretzione: in antis</string>
+	<string name="poi_direction_backward">Diretzione: in dae segus</string>
+	<string name="poi_direction_clockwise">Diretzione: in sensu oràriu</string>
+	<string name="poi_direction_anticlockwise">Diretzione: in sensu antioràriu</string>
+	<string name="poi_direction_up">Diretzione: in subra</string>
+	<string name="poi_direction_down">Diretzione: in suta</string>
+	<string name="poi_direction_entrance">Diretzione: intrada</string>
+	<string name="poi_direction_exit">Diretzione: essida</string>
+	<string name="poi_direction_all">Diretzione: totus</string>
+
 	</resources>

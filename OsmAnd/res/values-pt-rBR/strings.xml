@@ -170,7 +170,7 @@
 	<string name="osmand_distance_planning_plugin_name">Calculadora de distância e ferramenta de planeamento</string>
 	<string name="osmand_distance_planning_plugin_description">Este complemento fornece um widget da tela mapa permitindo criar caminhos tocando no mapa, ou usar ou modificar arquivos GPX existentes, para planejar uma viagem e medir a distância entre pontos. Os resultados podem ser salvos como um arquivo GPX, que mais tarde pode ser usado para orientação.</string>
 	<string name="shared_string_accessibility">Acessibilidade</string>
-	<string name="osmand_accessibility_description">Este complemento disponibiliza recursos de acessibilidade do dispositivo diretamente no OsmAnd. Facilita, por exemplo, o ajuste da velocidade para vozes TTS, configuração da navegação direcional na tela, uso do trackball para controle de zoom, ou retorno de texto para fala, como para anunciar automaticamente sua posição.</string>
+	<string name="osmand_accessibility_description">Este complemento disponibiliza recursos de acessibilidade do dispositivo diretamente no OsmAnd. Facilita, por exemplo, o ajuste da velocidade para vozes TTS, configuração da navegação direcional na tela, uso do trackball para controle de zoom, ou retorno de texto para fala, por exemplo para anunciar automaticamente sua posição.</string>
 	<string name="osm_settings">Edição no OSM</string>
 	<string name="debugging_and_development">Desenvolvimento OsmAnd</string>
 	<string name="rename_failed">Falha ao renomear.</string>
@@ -800,7 +800,7 @@ Pôr do Sol: %2$s</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Sobreposição de símbolo de montanhismo</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Renderizar caminhos de acordo com traços OSMC</string>
     
-	<string name="rendering_attr_noAdminboundaries_name">Fronteiras</string>
+	<string name="rendering_attr_noAdminboundaries_name">Limites</string>
 	<string name="rendering_attr_noAdminboundaries_description">Esconder limites regionais (níveis administrativos 5-9)</string>
 	
 	<string name="target_point">Destino %1$s</string>
@@ -1667,7 +1667,7 @@ Pôr do Sol: %2$s</string>
 	
     <string name="shared_string_logoff">Desconectar</string>
     
-	<string name="routing_attr_avoid_borders_description">Evitar atravessar fronteiras com outro país</string>
+	<string name="routing_attr_avoid_borders_description">Evitar cruzar fronteiras nacionais</string>
 	<string name="routing_attr_height_name">Limite de altura</string>
 	<string name="routing_attr_height_description">Especificar a altura do veículo para ser permitida nas rotas</string>
     <string name="use_fast_recalculation">Recálculo de rota inteligente</string>
@@ -1753,7 +1753,7 @@ Pôr do Sol: %2$s</string>
 	<string name="try_again">Tentar novamente</string>
 	<string name="error_message_pattern">Erro: {0}</string>
 <string name="no_updates_available">Não há atualizações disponíveis</string>
-    <string name="we_really_care_about_your_opinion">Nos preocupamos muito com sua opinião e é importante para nós ouvi-lo.</string>
+    <string name="we_really_care_about_your_opinion">A sua opinião e o seu comentário são importantes para nós.</string>
 	<string name="rendering_value_boldOutline_name">Títulos com contornos</string>
     <string name="traffic_warning_hazard">Perigo</string>
     <string name="dahboard_options_dialog_title">Configurar o painel de controle</string>
@@ -1938,7 +1938,7 @@ Pôr do Sol: %2$s</string>
     <string name="instalation_troubleshooting_item">Instalação e solução de problemas</string>
     <string name="techical_articles_item">Artigos técnicos</string>
     <string name="versions_item">Versões</string>
-    <string name="feedback">Retorno</string>
+    <string name="feedback">Comente</string>
     <string name="contact_us">Fale conosco</string>
     <string name="map_legend">Legenda do mapa</string>
     <string name="save_poi_without_poi_type_message">Você realmente quer salvar o POI sem especificar o tipo?</string>
@@ -2011,7 +2011,7 @@ Pôr do Sol: %2$s</string>
     <string name="road_blocked">Estrada bloqueada</string>
     <string name="shared_string_select">Selecionar</string>
     <string name="data_is_not_available">Dados indisponíveis</string>
-    <string name="rendering_attr_hideUnderground_name">Ocultar objetos subterrâneos</string>
+    <string name="rendering_attr_hideUnderground_name">Objetos subterrâneos</string>
     <string name="shared_string_read_more">Leia mais</string>
     
     <string name="shared_string_email_address">Endereço de e-mail</string>
@@ -2467,9 +2467,9 @@ Pôr do Sol: %2$s</string>
     <string name="route_stops_before">%1$s paradas antes</string>
     <string name="dist_away_from_my_location">Pesquisar a %1$s daqui</string>
     <string name="current_track">Trilha atual</string>
-    <string name="access_direction_audio_feedback">Resposta sonora de direção</string>
+    <string name="access_direction_audio_feedback">Direções por áudio</string>
     <string name="access_direction_audio_feedback_descr">Indicar a direção do ponto de destino por som.</string>
-    <string name="access_direction_haptic_feedback">Resposta tátil de direção</string>
+    <string name="access_direction_haptic_feedback">Direções por tato</string>
     <string name="access_direction_haptic_feedback_descr">Indica a direção do ponto de destino por vibração.</string>
     <string name="use_osm_live_routing_description">Ativar a navegação por mudanças do OsmAnd Live.</string>
     <string name="map_widget_magnetic_bearing">Rumo magnético</string>
@@ -2646,7 +2646,7 @@ Pôr do Sol: %2$s</string>
     <string name="quick_action_showhide_poi_descr">Tocar no botão de ação irá mostrar ou ocultar POIs no mapa.</string>
     <string name="quick_action_showhide_favorites_title">Mostrar/ocultar favoritos</string>
     <string name="quick_action_favorites_show">Mostrar Favoritos</string>
-    <string name="quick_action_favorites_hide">Ocultar Favoritos</string>
+    <string name="quick_action_favorites_hide">Ocultar favoritos</string>
     <string name="quick_action_showhide_poi_title">Mostrar/ocultar POI</string>
     <string name="quick_action_poi_show">Mostrar %1$s</string>
     <string name="quick_action_poi_hide">Ocultar %1$s</string>
@@ -2915,4 +2915,11 @@ Pôr do Sol: %2$s</string>
     <string name="shared_string_gpx_files">Arquivos GPX</string>
     <string name="access_intermediate_arrival_time">Hora de chegada intermediária</string>
     <string name="map_widget_intermediate_time">Hora intermediária</string>
+    <string name="get_osmand_live">Adquira OsmAnd Live para desbloquear todos os recursos:atualização diária de mapa com downloads ilimitados, todos os plugins grátis e pagos, Wikipédia, Wikivoyage e muito mais.</string>
+    <string name="unirs_render_descr">Modificação do estilo padrão para aumentar o contraste de vias de pedestre e bicicleta. Usa as cores Mapnik antigo.</string>
+    <string name="off_road_render_descr">Adequado para uso durante a condução off-road e com imagens de satélite verde usadas como mapa de fundo. Pontos-chave: espessura de vias principais reduzida, maior espessura de caminhos, trilhas, ciclovias e outras rotas. Baseado no estilo \'Topo\'.</string>
+    <string name="nautical_render_descr">Estilo de navegação náutica. Principais características: boias, faróis, rios, rotas e marcas marítimas, portos, serviços de balizamento, batimetria.</string>
+    <string name="light_rs_render_descr">Estilo simples e contrastante para navegação do carro. Cômodo aos olhos no modo noturno. Principais características: curvas de nível, estradas em laranja contrastante, objetos secundários menos distratantes.</string>
+    <string name="open_wikipedia_link_online">Abrir link da Wikipedia online</string>
+    <string name="read_wikipedia_offline_description">Assine OsmAnd Live para ler artigos da Wikipédia e Wikivoyage offline.</string>
     </resources>
