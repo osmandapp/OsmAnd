@@ -704,11 +704,10 @@ public class OsmAndLocationProvider implements SensorEventListener {
 						return;
 					}
 					gpsSignalLost = true;
-					if (routingHelper.isFollowingMode() && routingHelper.getLeftDistance() > 0) {
+					if (routingHelper.isFollowingMode() && routingHelper.getLeftDistance() > 0
+							&& simulatePosition == null) {
 						routingHelper.getVoiceRouter().gpsLocationLost();
-						if (simulatePosition == null) {
-							setLocation(null);
-						}
+						setLocation(null);
 					}
 				}
 			}, LOST_LOCATION_CHECK_DELAY);
