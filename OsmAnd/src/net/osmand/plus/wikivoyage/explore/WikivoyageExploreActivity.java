@@ -180,7 +180,7 @@ public class WikivoyageExploreActivity extends TabActivity implements DownloadEv
 						&& path != null
 						&& host.contains("osmand.net")
 						&& path.startsWith("/travel")) {
-					String query = data.getQueryParameter("query");
+					String query = data.getQueryParameter("title");
 					String selectedLang = data.getQueryParameter("lang");
 					if (!Algorithms.isEmpty(query) && !Algorithms.isEmpty(selectedLang)) {
 						WikivoyageArticleDialogFragment.showInstance(app, getSupportFragmentManager(), query, selectedLang);
