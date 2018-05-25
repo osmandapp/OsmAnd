@@ -335,4 +335,17 @@ public class WikiArticleHelper {
 		}
 		return "https://osmand.net/travel?title=" + title + "&lang=" + lang;
 	}
+
+	public static String decodeTitleFromTravelUrl(String url) {
+		String title = "";
+		try {
+			if (!Algorithms.isEmpty(url)) {
+				title = url.replace("_", " ");
+				title = URLDecoder.decode(title, "UTF-8");
+			}
+		} catch (UnsupportedEncodingException e) {
+			System.err.println(e.getMessage());
+		}
+		return title;
+	}
 }
