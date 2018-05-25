@@ -173,23 +173,7 @@ public class WikivoyageExploreActivity extends TabActivity implements DownloadEv
 		if (intent != null) {
 			Uri data = intent.getData();
 			if (data != null) {
-				String scheme = data.getScheme();
-				String host = data.getHost();
-				String path = data.getPath();
-				if (("http".equalsIgnoreCase(scheme) || "https".equalsIgnoreCase(scheme))
-						&& host != null
-						&& path != null
-						&& host.contains("osmand.net")
-						&& path.startsWith("/travel")) {
-					String title = WikiArticleHelper.decodeTitleFromTravelUrl(data.getQueryParameter("title"));
-					String selectedLang = data.getQueryParameter("lang");
-					if (!Algorithms.isEmpty(title) && !Algorithms.isEmpty(selectedLang)) {
-						long articleId = app.getTravelDbHelper().getArticleId(title, selectedLang);
-						if (articleId != -1) {
-							WikivoyageArticleDialogFragment.showInstance(app, getSupportFragmentManager(), articleId, selectedLang);
-						}
-					}
-				}
+				parseLaunchIntentLink(data);
 			} else {
 				int currentItem = intent.getIntExtra(TAB_SELECTED, 0);
 				if (currentItem == SAVED_ARTICLES_POSITION) {
@@ -206,6 +190,26 @@ public class WikivoyageExploreActivity extends TabActivity implements DownloadEv
 			setIntent(null);
 		}
 		getMyApplication().getDownloadThread().setUiActivity(this);
+	}
+
+	protected void parseLaunchIntentLink(Uri data) {
+		String scheme = data.getScheme();
+		String host = data.getHost();
+		String path = data.getPath();
+		if (("http".equalsIgnoreCase(scheme) || "https".equalsIgnoreCase(scheme))
+				&& host != null
+				&& path != null
+				&& host.contains("osmand.net")
+				&& path.startsWith("/travel")) {
+			String title = WikiArticleHelper.decodeTitleFromTravelUrl(data.getQueryParameter("title"));
+			String selectedLang = data.getQueryParameter("lang");
+			if (!Algorithms.isEmpty(title) && !Algorithms.isEmpty(selectedLang)) {
+				long articleId = app.getTravelDbHelper().getArticleId(title, selectedLang);
+				if (articleId != -1) {
+					WikivoyageArticleDialogFragment.showInstance(app, getSupportFragmentManager(), articleId, selectedLang);
+				}
+			}
+		}
 	}
 
 	@Override
