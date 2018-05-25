@@ -54,6 +54,15 @@
 					tools:text="En"
 					tools:textColor="?attr/wikivoyage_active_color"/>
 
+				<android.support.v7.widget.AppCompatImageView
+					android:id="@+id/options_button"
+					style="@style/Widget.AppCompat.ActionButton"
+					android:layout_width="48dp"
+					android:layout_height="match_parent"
+					android:layout_gravity="top"
+					android:contentDescription="@string/shared_string_options"
+					tools:src="@drawable/ic_overflow_menu_white"/>
+
 			</LinearLayout>
 
 		</android.support.v7.widget.Toolbar>
