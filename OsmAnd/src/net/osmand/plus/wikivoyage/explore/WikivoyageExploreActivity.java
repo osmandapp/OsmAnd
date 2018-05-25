@@ -32,15 +32,14 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.TabActivity;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
+import net.osmand.plus.wikipedia.WikiArticleHelper;
 import net.osmand.plus.wikivoyage.article.WikivoyageArticleDialogFragment;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
 import net.osmand.plus.wikivoyage.data.TravelDbHelper;
 import net.osmand.plus.wikivoyage.search.WikivoyageSearchDialogFragment;
 import net.osmand.util.Algorithms;
 
-import java.io.UnsupportedEncodingException;
 import java.lang.ref.WeakReference;
-import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -182,17 +181,13 @@ public class WikivoyageExploreActivity extends TabActivity implements DownloadEv
 						&& path != null
 						&& host.contains("osmand.net")
 						&& path.startsWith("/travel")) {
-					String query = data.getQueryParameter("title");
-					try {
-						if (!Algorithms.isEmpty(query)) {
-							query = URLDecoder.decode(query, "UTF-8");
-						}
-					} catch (UnsupportedEncodingException e) {
-						System.err.println(e.getMessage());
-					}
+					String title = WikiArticleHelper.decodeTitleFromTravelUrl(data.getQueryParameter("title"));
 					String selectedLang = data.getQueryParameter("lang");
-					if (!Algorithms.isEmpty(query) && !Algorithms.isEmpty(selectedLang)) {
-						WikivoyageArticleDialogFragment.showInstance(app, getSupportFragmentManager(), query, selectedLang);
+					if (!Algorithms.isEmpty(title) && !Algorithms.isEmpty(selectedLang)) {
+						long articleId = app.getTravelDbHelper().getArticleId(title, selectedLang);
+						if (articleId != -1) {
+							WikivoyageArticleDialogFragment.showInstance(app, getSupportFragmentManager(), articleId, selectedLang);
+						}
 					}
 				}
 			} else {
