@@ -684,7 +684,8 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	
 	private void scheduleCheckIfGpsLost(final net.osmand.Location location) {
 		final RoutingHelper routingHelper = app.getRoutingHelper();
-		if (location != null) {
+		if (location != null && routingHelper.isFollowingMode() && routingHelper.getLeftDistance() > 0
+				&& simulatePosition == null) {
 			final long fixTime = location.getTime();
 			app.runMessageInUIThreadAndCancelPrevious(LOST_LOCATION_MSG_ID, new Runnable() {
 
@@ -702,25 +703,23 @@ public class OsmAndLocationProvider implements SensorEventListener {
 					setLocation(null);
 				}
 			}, LOST_LOCATION_CHECK_DELAY);
-			if (routingHelper.isFollowingMode() && routingHelper.getLeftDistance() > 0 && simulatePosition == null) {
-				app.runMessageInUIThreadAndCancelPrevious(START_SIMULATE_LOCATION_MSG_ID, new Runnable() {
+			app.runMessageInUIThreadAndCancelPrevious(START_SIMULATE_LOCATION_MSG_ID, new Runnable() {
 
-					@Override
-					public void run() {
-						net.osmand.Location lastKnown = getLastKnownLocation();
-						if (lastKnown != null && lastKnown.getTime() > fixTime) {
-							// false positive case, still strange how we got here with removeMessages
-							return;
-						}
-						List<RouteSegmentResult> tunnel = routingHelper.getUpcomingTunnel(1000);
-						if(tunnel != null) {
-							simulatePosition = new SimulationProvider();
-							simulatePosition.startSimulation(tunnel, location);
-							simulatePositionImpl();
-						}
+				@Override
+				public void run() {
+					net.osmand.Location lastKnown = getLastKnownLocation();
+					if (lastKnown != null && lastKnown.getTime() > fixTime) {
+						// false positive case, still strange how we got here with removeMessages
+						return;
 					}
-				}, START_LOCATION_SIMULATION_DELAY);
-			}
+					List<RouteSegmentResult> tunnel = routingHelper.getUpcomingTunnel(1000);
+					if(tunnel != null) {
+						simulatePosition = new SimulationProvider();
+						simulatePosition.startSimulation(tunnel, location);
+						simulatePositionImpl();
+					}
+				}
+			}, START_LOCATION_SIMULATION_DELAY);
 		}
 	}
 	
