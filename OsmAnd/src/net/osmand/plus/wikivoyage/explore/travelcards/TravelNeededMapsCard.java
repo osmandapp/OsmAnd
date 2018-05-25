@@ -72,9 +72,11 @@ public class TravelNeededMapsCard extends BaseTravelCard {
 	}
 	
 	public void updateView() {
-		NeededMapsVH holder = ref.get();
-		if (holder != null && holder.itemView.isShown()) {
-			updateView(holder);
+		if (ref != null) {
+			NeededMapsVH holder = ref.get();
+			if (holder != null && holder.itemView.isShown()) {
+				updateView(holder);
+			}
 		}
 	}
 
