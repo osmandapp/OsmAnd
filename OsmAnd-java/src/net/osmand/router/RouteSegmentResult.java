@@ -71,6 +71,9 @@ public class RouteSegmentResult {
 	}
 	
 	public void attachRoute(int roadIndex, RouteSegmentResult r){
+		if(r.getObject().isRoadDeleted()) {
+			return;
+		}
 		int st = Math.abs(roadIndex - startPointIndex);
 		if(attachedRoutes[st] == null) {
 			attachedRoutes[st] = new ArrayList<RouteSegmentResult>();
