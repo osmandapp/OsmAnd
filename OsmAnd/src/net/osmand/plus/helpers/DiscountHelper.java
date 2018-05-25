@@ -136,7 +136,7 @@ public class DiscountHelper {
 						settings.DISCOUNT_TOTAL_SHOW.set(settings.DISCOUNT_TOTAL_SHOW.get() + 1);
 						settings.DISCOUNT_SHOW_NUMBER_OF_STARTS.set(app.getAppInitializer().getNumberOfStarts());
 						settings.DISCOUNT_SHOW_DATETIME_MS.set(System.currentTimeMillis());
-						showDiscountBanner(mapActivity, message, description, icon, url);
+						showDiscountBanner(mapActivity, message, description, icon, url);	
 					}
 				}
 			}
@@ -167,7 +167,7 @@ public class DiscountHelper {
 	}
 
 	private static void showDiscountBanner(final MapActivity mapActivity, final String title,
-	                                       final String description, final String icon, final String url) {
+									  final String description, final String icon, final String url) {
 		final DiscountBarController toolbarController = new DiscountBarController();
 		toolbarController.setTitle(title);
 		toolbarController.setDescription(description);
