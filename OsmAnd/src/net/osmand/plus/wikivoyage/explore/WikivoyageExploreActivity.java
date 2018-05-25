@@ -38,7 +38,9 @@ import net.osmand.plus.wikivoyage.data.TravelDbHelper;
 import net.osmand.plus.wikivoyage.search.WikivoyageSearchDialogFragment;
 import net.osmand.util.Algorithms;
 
+import java.io.UnsupportedEncodingException;
 import java.lang.ref.WeakReference;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -181,6 +183,13 @@ public class WikivoyageExploreActivity extends TabActivity implements DownloadEv
 						&& host.contains("osmand.net")
 						&& path.startsWith("/travel")) {
 					String query = data.getQueryParameter("title");
+					try {
+						if (!Algorithms.isEmpty(query)) {
+							query = URLDecoder.decode(query, "UTF-8");
+						}
+					} catch (UnsupportedEncodingException e) {
+						System.err.println(e.getMessage());
+					}
 					String selectedLang = data.getQueryParameter("lang");
 					if (!Algorithms.isEmpty(query) && !Algorithms.isEmpty(selectedLang)) {
 						WikivoyageArticleDialogFragment.showInstance(app, getSupportFragmentManager(), query, selectedLang);
