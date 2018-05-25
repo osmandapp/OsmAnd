@@ -84,9 +84,11 @@ public class TravelDownloadUpdateCard extends BaseTravelCard {
 	}
 	
 	public void updateProgresBar() {
-		DownloadUpdateVH holder = ref.get();
-		if (holder != null && holder.itemView.isShown()) {
-			updateProgressBar(holder);
+		if(ref != null) {
+			DownloadUpdateVH holder = ref.get();
+			if (holder != null && holder.itemView.isShown()) {
+				updateProgressBar(holder);
+			}
 		}
 	}
 
