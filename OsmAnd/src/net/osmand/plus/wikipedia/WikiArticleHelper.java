@@ -327,8 +327,7 @@ public class WikiArticleHelper {
 	}
 
 	public static String buildTravelUrl(String url, String lang) {
-		String title = url.substring(url.indexOf(':') + 1);
-		title = title.replace(" ", "_");
+		String title = url.replace(" ", "_");
 		try {
 			title = URLEncoder.encode(title, "UTF-8");
 		} catch (UnsupportedEncodingException e) {
