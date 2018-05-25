@@ -595,8 +595,8 @@
     },
     "expectedResults": {
       "222244": "TL|TL|+C,TR",
-      "222243": "TL|TL|+C|C|TSLR",
-      "222164": "TL|TL|+C|C"
+      "222243": "TL|TL|+C|+C|TSLR",
+      "222164": "TL|TL|+C|+C"
     }
   },
   {
