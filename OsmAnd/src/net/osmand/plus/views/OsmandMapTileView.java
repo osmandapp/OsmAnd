@@ -373,7 +373,10 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		if (mainLayer != null) {
 			animatedDraggingThread.stopAnimating();
 			currentViewport.setZoomAndAnimation(zoom, 0, 0);
-			currentViewport.setRotate(zoom > LOWEST_ZOOM_TO_ROTATE ? rotate : 0);
+			if (zoom <= LOWEST_ZOOM_TO_ROTATE) {
+				rotate = 0;
+			}
+			currentViewport.setRotate(rotate);
 			refreshMap();
 		}
 	}
@@ -383,7 +386,10 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			animatedDraggingThread.stopAnimating();
 			currentViewport.setZoomAndAnimation(zoom, 0);
 			currentViewport.setMapDensity(mapDensity);
-			currentViewport.setRotate(zoom > LOWEST_ZOOM_TO_ROTATE ? rotate : 0);
+			if (zoom <= LOWEST_ZOOM_TO_ROTATE) {
+				rotate = 0;
+			}
+			currentViewport.setRotate(rotate);
 			refreshMap();
 		}
 	}
@@ -899,7 +905,10 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	protected void zoomToAnimate(int zoom, double zoomToAnimate, boolean notify) {
 		if (mainLayer != null && getMaxZoom() >= zoom && getMinZoom() <= zoom) {
 			currentViewport.setZoomAndAnimation(zoom, zoomToAnimate);
-			currentViewport.setRotate(zoom > LOWEST_ZOOM_TO_ROTATE ? rotate : 0);
+			if (zoom <= LOWEST_ZOOM_TO_ROTATE) {
+				rotate = 0;
+			}
+			currentViewport.setRotate(rotate);
 			refreshMap();
 			if (notify && locationListener != null) {
 				locationListener.locationChanged(getLatitude(), getLongitude(), this);
