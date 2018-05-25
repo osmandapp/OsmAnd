@@ -13,6 +13,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.view.ContextThemeWrapper;
 import android.text.ClipboardManager;
 import android.text.TextUtils;
@@ -752,7 +753,10 @@ public class MenuBuilder {
 	public Drawable getRowIcon(Context ctx, String fileName) {
 		Drawable d = RenderingIcons.getBigIcon(ctx, fileName);
 		if (d != null) {
-			d.setColorFilter(app.getResources().getColor(light ? R.color.ctx_menu_bottom_view_icon_light : R.color.ctx_menu_bottom_view_icon_dark), PorterDuff.Mode.SRC_IN);
+			d = DrawableCompat.wrap(d);
+			d.mutate();
+			d.setColorFilter(app.getResources().getColor(light
+					? R.color.ctx_menu_bottom_view_icon_light : R.color.ctx_menu_bottom_view_icon_dark), PorterDuff.Mode.SRC_IN);
 			return d;
 		} else {
 			return null;

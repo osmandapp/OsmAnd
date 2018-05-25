@@ -109,8 +109,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
 
     private void setUpToolbar(View view) {
         Toolbar  toolbar = (Toolbar) view.findViewById(R.id.custom_toolbar);
-        Drawable back    = getMyApplication().getIconsCache().getIcon(R.drawable.ic_arrow_back);
-        back.setColorFilter(ContextCompat.getColor(getContext(), R.color.color_white), PorterDuff.Mode.MULTIPLY);
+        Drawable back = getMyApplication().getIconsCache().getIcon(R.drawable.ic_arrow_back, R.color.color_white);
         toolbar.setNavigationIcon(back);
         toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
