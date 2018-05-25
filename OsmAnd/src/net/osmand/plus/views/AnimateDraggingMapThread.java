@@ -162,17 +162,16 @@ public class AnimateDraggingMapThread {
 				setTargetValues(zoom, finalLat, finalLon);
 				boolean animateZoom = finalZoom != null && (zoom != startZoom || startZoomFP != 0);
 				boolean animateRotation = rotation != startRotaton;
-				if (animateZoom) {
-					animatingZoomInThread(startZoom, startZoomFP, zoom, zoomFP, NAV_ANIMATION_TIME, notifyListener);
-				}
-
 				if (animateRotation) {
 					animatingRotateInThread(rotation, 500f, notifyListener);
 				}
-
-				if (!stopped){
+				if (!stopped) {
 					animatingMoveInThread(mMoveX, mMoveY, NAV_ANIMATION_TIME, notifyListener, null);
 				}
+				if (!stopped && animateZoom) {
+					animatingZoomInThread(startZoom, startZoomFP, zoom, 0, NAV_ANIMATION_TIME, notifyListener);
+				}
+				pendingRotateAnimation();
 			}
 		});
 	}
