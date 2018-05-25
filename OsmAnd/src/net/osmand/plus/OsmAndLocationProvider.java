@@ -874,8 +874,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		if (loc != null) {
 			int counter = locationRequestsCounter.incrementAndGet();
 			if (counter >= REQUESTS_BEFORE_CHECK_LOCATION && locationRequestsCounter.compareAndSet(counter, 0)) {
-				net.osmand.Location cached = cachedLocation;
-				if (cached != null && System.currentTimeMillis() - cached.getTime() > LOCATION_TIMEOUT_TO_BE_STALE) {
+				if (System.currentTimeMillis() - loc.getTime() > LOCATION_TIMEOUT_TO_BE_STALE) {
 					location = null;
 				}
 			}
