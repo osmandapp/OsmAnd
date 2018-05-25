@@ -40,7 +40,6 @@ public class DiscountHelper {
 	private static boolean mBannerVisible;
 	private static final String URL = "https://osmand.net/api/motd";
 	private static final String INAPP_PREFIX = "osmand-in-app:";
-	private static final String TRAVEL_PREFIX = "https://osmand.net/travel";
 
 
 	public static void checkAndDisplay(final MapActivity mapActivity) {
@@ -224,11 +223,6 @@ public class DiscountHelper {
 			} else if (url.contains(InAppPurchaseHelper.SKU_LIVE_UPDATES)){
 				ChoosePlanDialogFragment.showOsmLiveInstance(mapActivity.getSupportFragmentManager());
 			}
-		} else if (url.startsWith(TRAVEL_PREFIX)) {
-			Intent intent = new Intent(Intent.ACTION_SEND);
-			intent.putExtra(Intent.EXTRA_TEXT, url);
-			intent.setType("text/plain");
-			mapActivity.startActivity(Intent.createChooser(intent, mapActivity.getString(R.string.shared_string_share)));
 		} else {
 			Intent intent = new Intent(Intent.ACTION_VIEW);
 			intent.setData(Uri.parse(url));
