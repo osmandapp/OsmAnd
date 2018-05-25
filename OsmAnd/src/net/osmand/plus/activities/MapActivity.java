@@ -440,6 +440,10 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 					if (pbExtView.getVisibility() == View.VISIBLE) {
 						pbExtView.setVisibility(View.GONE);
 					}
+					if (MapRouteInfoMenu.isVisible()) {
+						pb.setVisibility(View.GONE);
+						return;
+					}
 					if (pb.getVisibility() == View.GONE) {
 						pb.setVisibility(View.VISIBLE);
 					}
