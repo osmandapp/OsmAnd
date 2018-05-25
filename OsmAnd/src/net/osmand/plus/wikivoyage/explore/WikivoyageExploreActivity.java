@@ -172,7 +172,7 @@ public class WikivoyageExploreActivity extends TabActivity implements DownloadEv
 		Intent intent = getIntent();
 		if (intent != null) {
 			Uri data = intent.getData();
-			if (data != null) {
+			if (data != null && ("http".equalsIgnoreCase(data.getScheme()) || "https".equalsIgnoreCase(data.getScheme()))) {
 				parseLaunchIntentLink(data);
 			} else {
 				int currentItem = intent.getIntExtra(TAB_SELECTED, 0);
@@ -182,7 +182,6 @@ public class WikivoyageExploreActivity extends TabActivity implements DownloadEv
 				}
 				long articleId = intent.getLongExtra(CITY_ID_KEY, -1);
 				String selectedLang = intent.getStringExtra(SELECTED_LANG_KEY);
-
 				if (articleId != -1) {
 					WikivoyageArticleDialogFragment.showInstance(app, getSupportFragmentManager(), articleId, selectedLang);
 				}
@@ -193,14 +192,9 @@ public class WikivoyageExploreActivity extends TabActivity implements DownloadEv
 	}
 
 	protected void parseLaunchIntentLink(Uri data) {
-		String scheme = data.getScheme();
 		String host = data.getHost();
 		String path = data.getPath();
-		if (("http".equalsIgnoreCase(scheme) || "https".equalsIgnoreCase(scheme))
-				&& host != null
-				&& path != null
-				&& host.contains("osmand.net")
-				&& path.startsWith("/travel")) {
+		if (host != null && path != null && host.contains("osmand.net") && path.startsWith("/travel")) {
 			String title = WikiArticleHelper.decodeTitleFromTravelUrl(data.getQueryParameter("title"));
 			String selectedLang = data.getQueryParameter("lang");
 			if (!Algorithms.isEmpty(title) && !Algorithms.isEmpty(selectedLang)) {
