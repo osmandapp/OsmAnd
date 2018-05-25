@@ -235,7 +235,7 @@ public class DiscountHelper {
 			Intent intent = new Intent(Intent.ACTION_SEND);
 			intent.putExtra(Intent.EXTRA_TEXT, WikiArticleHelper.buildTravelUrl(url, lang));
 			intent.setType("text/plain");
-			mapActivity.startActivity(Intent.createChooser(intent, mapActivity.getString(R.string.share_article)));
+			mapActivity.startActivity(Intent.createChooser(intent, mapActivity.getString(R.string.shared_string_share)));
 		} else {
 			Intent intent = new Intent(Intent.ACTION_VIEW);
 			intent.setData(Uri.parse(url));
