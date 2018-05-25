@@ -647,16 +647,6 @@
 
             </FrameLayout>
 
-            <ProgressBar
-                android:id="@+id/map_horizontal_progress"
-                style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="@dimen/map_routing_progress_width"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/map_button_margin"
-                android:layout_marginRight="@dimen/map_button_margin"
-                android:max="100"
-                android:progress="60"
-                android:visibility="gone"/>
         </LinearLayout>
     </FrameLayout>
 

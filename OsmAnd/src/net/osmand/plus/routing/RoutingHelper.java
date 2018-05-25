@@ -783,18 +783,39 @@ public class RoutingHelper {
 		}
 		RouteSegmentResult rs = getCurrentSegmentResult();
 		if(rs != null) {
-			String nm = rs.getObject().getName(settings.MAP_PREFERRED_LOCALE.get(), settings.MAP_TRANSLITERATE_NAMES.get());
-			String rf = rs.getObject().getRef(settings.MAP_PREFERRED_LOCALE.get(), settings.MAP_TRANSLITERATE_NAMES.get(), rs.isForwardDirection());
-			String dn = rs.getObject().getDestinationName(settings.MAP_PREFERRED_LOCALE.get(),
-					settings.MAP_TRANSLITERATE_NAMES.get(), rs.isForwardDirection());
-			return formatStreetName(nm, rf, dn, "»");
+			String name = getRouteSegmentStreetName(rs);
+			if (!Algorithms.isEmpty(name)) {
+				return name;
+			}
+		}
+		rs = getNextStreetSegmentResult();
+		if(rs != null) {
+			String name = getRouteSegmentStreetName(rs);
+			if (!Algorithms.isEmpty(name)) {
+				if(next != null) {
+					next[0] = TurnType.valueOf(TurnType.C, false);
+				}
+				return name;
+			}
 		}
 		return null;
 	}
 
-    public RouteSegmentResult getCurrentSegmentResult() {
+	private String getRouteSegmentStreetName(RouteSegmentResult rs) {
+		String nm = rs.getObject().getName(settings.MAP_PREFERRED_LOCALE.get(), settings.MAP_TRANSLITERATE_NAMES.get());
+		String rf = rs.getObject().getRef(settings.MAP_PREFERRED_LOCALE.get(), settings.MAP_TRANSLITERATE_NAMES.get(), rs.isForwardDirection());
+		String dn = rs.getObject().getDestinationName(settings.MAP_PREFERRED_LOCALE.get(),
+				settings.MAP_TRANSLITERATE_NAMES.get(), rs.isForwardDirection());
+		return formatStreetName(nm, rf, dn, "»");
+	}
+
+	public RouteSegmentResult getCurrentSegmentResult() {
         return route.getCurrentSegmentResult();
     }
+
+	public RouteSegmentResult getNextStreetSegmentResult() {
+		return route.getNextStreetSegmentResult();
+	}
 
     public List<RouteSegmentResult> getUpcomingTunnel(float distToStart) {
     	return route.getUpcomingTunnel(distToStart);

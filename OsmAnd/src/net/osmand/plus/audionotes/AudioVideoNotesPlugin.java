@@ -907,27 +907,26 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		}
 	}
 
-	public void recordVideo(final double lat, final double lon, final MapActivity mapActivity, final boolean forceExternal) {
-		if (AV_EXTERNAL_RECORDER.get() || forceExternal) {
-			captureVideoExternal(lat, lon, mapActivity);
-		} else {
-			if (ActivityCompat.checkSelfPermission(mapActivity, Manifest.permission.CAMERA)
-					== PackageManager.PERMISSION_GRANTED
-					&& ActivityCompat.checkSelfPermission(mapActivity, Manifest.permission.RECORD_AUDIO)
-					== PackageManager.PERMISSION_GRANTED) {
+	public void recordVideo(final double lat, final double lon, final MapActivity mapActivity,
+			final boolean forceExternal) {
+		if (ActivityCompat.checkSelfPermission(mapActivity, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED
+				&& ActivityCompat.checkSelfPermission(mapActivity, Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_GRANTED) {
+			if (AV_EXTERNAL_RECORDER.get() || forceExternal) {
+				captureVideoExternal(lat, lon, mapActivity);
+			} else {
 				openCamera();
 				if (cam != null) {
 					initRecMenu(AVActionType.REC_VIDEO, lat, lon);
 					recordVideoCamera(lat, lon, mapActivity);
 				}
-			} else {
-				actionLat = lat;
-				actionLon = lon;
-				ActivityCompat.requestPermissions(mapActivity,
-						new String[]{Manifest.permission.CAMERA, Manifest.permission.RECORD_AUDIO},
-						CAMERA_FOR_VIDEO_REQUEST_CODE);
 			}
+		} else {
+			actionLat = lat;
+			actionLon = lon;
+			ActivityCompat.requestPermissions(mapActivity, new String[] { Manifest.permission.CAMERA,
+					Manifest.permission.RECORD_AUDIO }, CAMERA_FOR_VIDEO_REQUEST_CODE);
 		}
+
 	}
 
 	public void recordVideoCamera(final double lat, final double lon, final MapActivity mapActivity) {
