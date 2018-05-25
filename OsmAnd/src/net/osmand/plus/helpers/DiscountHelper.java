@@ -167,7 +167,7 @@ public class DiscountHelper {
 	}
 
 	private static void showDiscountBanner(final MapActivity mapActivity, final String title,
-										   final String description, final String icon, final String url) {
+	                                       final String description, final String icon, final String url) {
 		final DiscountBarController toolbarController = new DiscountBarController();
 		toolbarController.setTitle(title);
 		toolbarController.setDescription(description);
