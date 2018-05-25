@@ -31,6 +31,7 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.lang.ref.WeakReference;
 import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -327,6 +328,12 @@ public class WikiArticleHelper {
 
 	public static String buildTravelUrl(String url, String lang) {
 		String title = url.substring(url.indexOf(':') + 1);
-		return "https://osmand.net/travel?query=" + title + "&lang=" + lang;
+		title = title.replace(" ", "_");
+		try {
+			title = URLEncoder.encode(title, "UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			System.err.println(e.getMessage());
+		}
+		return "https://osmand.net/travel?title=" + title + "&lang=" + lang;
 	}
 }

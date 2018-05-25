@@ -34,6 +34,7 @@ import net.osmand.plus.activities.TrackActivity;
 import net.osmand.plus.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.wikipedia.WikiArticleBaseDialogFragment;
+import net.osmand.plus.wikipedia.WikiArticleHelper;
 import net.osmand.plus.wikivoyage.WikivoyageShowPicturesDialogFragment;
 import net.osmand.plus.wikivoyage.WikivoyageWebViewClient;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
@@ -135,17 +136,10 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 		trackButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				FragmentActivity activity = getActivity();
-				FragmentManager fm = getFragmentManager();
-				if (article == null || activity == null || fm == null) {
-					return;
-				}
-				TravelDbHelper dbHelper = getMyApplication().getTravelDbHelper();
-				File path = dbHelper.createGpxFile(article);
-				Intent newIntent = new Intent(activity, getMyApplication().getAppCustomization().getTrackActivity());
-				newIntent.putExtra(TrackActivity.TRACK_FILE_NAME, path.getAbsolutePath());
-				newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-				startActivity(newIntent);
+				Intent intent = new Intent(Intent.ACTION_SEND);
+				intent.putExtra(Intent.EXTRA_TEXT, WikiArticleHelper.buildTravelUrl(article.getTitle().replace(" ", "%20"), article.getLang()));
+				intent.setType("text/plain");
+				startActivity(Intent.createChooser(intent, getString(R.string.shared_string_share)));
 			}
 		});
 
