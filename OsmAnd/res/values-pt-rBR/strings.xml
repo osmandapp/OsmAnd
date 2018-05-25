@@ -390,13 +390,13 @@
 	<string name="gpx_monitoring_stop">Parar registro de GPX</string>
     <string name="gpx_start_new_segment">Iniciar novo rastreamento</string>
     <string name="rendering_attr_hideBuildings_name">Edifícios</string>
-    <string name="rendering_attr_hideNonVehicleHighways_name">Ocultar estradas não-trafegáveis</string>
-    <string name="rendering_attr_hideText_name">Ocultar textos</string>
-    <string name="rendering_attr_hideWoodScrubs_name">Ocultar bosques e matas</string>
+    <string name="rendering_attr_hideNonVehicleHighways_name">Estradas não trafegáveis</string>
+    <string name="rendering_attr_hideText_name">Textos</string>
+    <string name="rendering_attr_hideWoodScrubs_name">Matas e arbustos</string>
     <string name="rendering_attr_buildings15zoom_name">Edifícios em zoom 15</string>
     <string name="rendering_attr_moreDetailed_name">Mais detalhes</string>
     <string name="rendering_attr_lessDetailed_name">Menos detalhes</string>
-    <string name="rendering_attr_hideAccess_name">Ocultar restrições de acesso</string>
+    <string name="rendering_attr_hideAccess_name">Restrições de acesso</string>
     <string name="rendering_attr_showAccess_name">Mostrar restrições de acesso</string>
     <string name="rendering_attr_showSurfaceGrade_name">Mostrar qualidade da via</string>
     <string name="rendering_attr_showSurfaces_name">Mostrar superfície da via</string>
@@ -1357,7 +1357,7 @@ Pôr do Sol: %2$s</string>
 	<string name="km_h">km/h</string>
 	<string name="m">m</string>
 	<string name="old_map_index_is_not_supported">O formato obsoleto de mapa \'\'{0}\'\' não é suportado</string>
-	<string name="poi_filter_closest_poi">POIs mais próximos</string>
+	<string name="poi_filter_closest_poi">POIs próximos</string>
 	<string name="poi_filter_custom_filter">Filtro personalizado</string>
 	<string name="reading_cached_tiles">Lendo quadrículas salvas…</string>
 	<string name="version_index_is_big_for_memory">O índice \'\'{0}\'\' não coube na memória</string>
@@ -2204,7 +2204,7 @@ Pôr do Sol: %2$s</string>
     <string name="mapillary_menu_edit_text_hint">Digite o nome de usuário</string>
     <string name="mapillary_menu_descr_username">Ver somente imagens adicionadas por</string>
     <string name="mapillary_menu_title_username">Nome de usuário</string>
-    <string name="mapillary_menu_filter_description">Você pode filtrar imagens por quem submeteu ou por data. Os filtros só se aplicam para um zoom bem próximo.</string>
+    <string name="mapillary_menu_filter_description">Filtre imagens por quem submeteu ou por data. Ativo somente com um zoom bem próximo.</string>
     <string name="shared_string_permissions">Permissões</string>
     <string name="import_gpx_failed_descr">O OsmAnd não pôde importar o arquivo. Favor verificar se o OsmAnd tem permissão para ler arquivo de sua localização.</string>
     <string name="distance_moving">Distância corrigida</string>
@@ -2227,10 +2227,10 @@ Pôr do Sol: %2$s</string>
     <string name="increase_search_radius">Aumentar o raio de busca</string>
     <string name="nothing_found">Nada encontrado :(</string>
     <string name="nothing_found_descr">Modifique o texto da pesquisa ou aumente o raio de busca.</string>
-    <string name="quick_action_showhide_osmbugs_title">Mostrar/ocultar Anotações do OSM</string>
+    <string name="quick_action_showhide_osmbugs_title">Mostrar/ocultar notas OSM</string>
     <string name="quick_action_osmbugs_show">Mostrar Anotações do OSM</string>
-    <string name="quick_action_osmbugs_hide">Ocultar Anotações do OSM</string>
-    <string name="quick_action_showhide_osmbugs_descr">Tocar no botão de ação irá mostrar ou ocultar as Anotações do OSM no mapa.</string>
+    <string name="quick_action_osmbugs_hide">Ocultar notas OSM</string>
+    <string name="quick_action_showhide_osmbugs_descr">Tocar neste botão de ação mostra ou oculta as notas OSM no mapa.</string>
     <string name="sorted_by_distance">Classificado por distância</string>
     <string name="search_favorites">Pesquisar favoritos</string>
     <string name="hillshade_menu_download_descr">Para ver o sombreamento do relevo no mapa, você precisa baixar a camada de mapa de sombreamento de relevo desta região.</string>
@@ -2642,8 +2642,8 @@ Pôr do Sol: %2$s</string>
     <string name="favorite_empty_place_name">Lugar</string>
     <string name="quick_action_duplicates">Nome de ação rápida especificada já em uso foi mudado para %1$s para evitar a duplicação.</string>
     <string name="quick_action_duplicate">Nome de ação rápida duplicado</string>
-    <string name="quick_action_showhide_favorites_descr">Tocar no botão de ação irá mostrar ou ocultar os pontos favoritos no mapa.</string>
-    <string name="quick_action_showhide_poi_descr">Tocar no botão de ação irá mostrar ou ocultar POIs no mapa.</string>
+    <string name="quick_action_showhide_favorites_descr">Tocar neste botão de ação mostra ou oculta os pontos favoritos no mapa.</string>
+    <string name="quick_action_showhide_poi_descr">Tocar neste botão de ação mostra ou oculta POIs no mapa.</string>
     <string name="quick_action_showhide_favorites_title">Mostrar/ocultar favoritos</string>
     <string name="quick_action_favorites_show">Mostrar Favoritos</string>
     <string name="quick_action_favorites_hide">Ocultar favoritos</string>
@@ -2735,7 +2735,7 @@ Pôr do Sol: %2$s</string>
 \ne muito mais…</string>
     <string name="lang_lo">Laociano</string>
     <string name="show_closed_notes">Mostrar notas encerradas</string>
-    <string name="switch_osm_notes_visibility_desc">Mostrar/Ocultar Notas OSM no mapa.</string>
+    <string name="switch_osm_notes_visibility_desc">Mostrar/Ocultar notas OSM no mapa.</string>
     <string name="shared_string_gpx_file">Arquivo GPX</string>
     <string name="osc_file">Arquivo OSC</string>
     <string name="choose_file_type">Escolha o tipo de arquivo</string>
@@ -2774,7 +2774,7 @@ Pôr do Sol: %2$s</string>
 	<string name="north_abbreviation">N</string>
 	<string name="optional_point_name">Nome do ponto opcional</string>
     <string name="transport_nearby_routes_within">Rotas a menos de</string>
-    <string name="transport_nearby_routes">PERTO DE</string>
+    <string name="transport_nearby_routes">Cerca de</string>
     <string name="enter_the_file_name">Digite o nome do arquivo.</string>
     <string name="map_import_error">Erro de importação de mapa</string>
     <string name="map_imported_successfully">Mapa importado</string>
@@ -2804,7 +2804,13 @@ Pôr do Sol: %2$s</string>
 \n 
 \ne muito mais…</string>
     <string name="osmand_plus_extended_description_part2">Navegação • Funciona on-line (rápido) ou offline (sem custo de roaming quando estiver no exterior) • Orientação por voz passo-a-passo (vozes gravadas e sintetizadas) • Orientação de faixas opcional, exibição do nome da rua e tempo estimado de chegada • Suporta pontos intermediários do seu itinerário • Correção de rota automático sempre que você sair da rota • Busque lugares por endereço, pelo tipo (ex.: restaurante, hotel, posto de gasolina, museu), ou por coordenadas geográficas</string>
-    <string name="osmand_plus_extended_description_part3">Visualização de mapa • Exiba sua posição e orientação • Opcionalmente alinhe a tela de acordo com a bússola ou a direção de seu movimento • Salve seus lugares mais importantes como Favoritos • Exiba POIs (pontos de interesse) próximos • Exiba imagens online especializadas, vista de satélite (do Bing), diferentes camadas como trilhas de navegação GPX e camadas adicionais com transparência personalizável • Opcionalmente exiba nomes de lugares em inglês, língua local ou fonético</string>
+    <string name="osmand_plus_extended_description_part3">Visualização de mapa
+\n• Exiba sua posição e orientação
+\n• Opcionalmente alinhe a tela de acordo com a bússola ou a direção de seu movimento
+\n• Salve seus lugares mais importantes como favoritos
+\n• Exiba POIs (pontos de interesse) próximos
+\n• Exiba imagens online especializadas, vista de satélite (do Bing), diferentes camadas como trilhas de navegação GPX e camadas adicionais com transparência personalizável
+\n• Opcionalmente exiba nomes de lugares em inglês, língua local ou fonético</string>
     <string name="osmand_plus_extended_description_part4">Use dados OSM e da Wikipédia • Informações de alta qualidade dos melhores projetos colaborativos do mundo • Dados OSM disponíveis por país ou região • POIs da Wikipédia, ótimo para visitas turísticas • Downloads grátis ilimitados, diretamente do aplicativo • Mapas vetoriais offline compactos e atualizados mensalmente • Seleção entre região completa ou apenas rede rodoviária (Exemplo: Japão inteiro tem 700 MB ou apenas 200 MB para rede rodoviária)</string>
     <string name="online_webpage_warning">Página disponível só online. Abrir num navegador web?</string>
     <string name="images_cache">Cache de imagens</string>
