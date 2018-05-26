@@ -3,7 +3,7 @@
 		<string name="poi_shop_food">Tienda de comestibles y supermercado</string>
 	<string name="poi_emergency">Emergencia</string>
 	<string name="poi_transportation">Transporte</string>
-		<string name="poi_road_obstacle">Obstáculo en la carretera</string>
+		<string name="poi_road_obstacle">Obstáculo en el camino</string>
 		<string name="poi_filling_station">Gasolineras</string>
 		<string name="poi_personal_transport">Transporte particular</string>
 		<string name="poi_public_transport">Transporte público</string>
@@ -1574,7 +1574,7 @@
 	<string name="poi_memorial_plaque">Placa</string>
 	<string name="poi_memorial_statue">Estatua</string>
 	<string name="poi_memorial_stone">Piedra</string>
-	<string name="poi_memorial_stele">Estrella</string>
+	<string name="poi_memorial_stele">Estela</string>
 	<string name="poi_memorial_bust">Busto</string>
 	<string name="poi_memorial_blue_plaque">Placa azul</string>
 	<string name="poi_memorial_cross">Crucero (monumento)</string>
