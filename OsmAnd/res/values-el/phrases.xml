@@ -2113,4 +2113,37 @@
 	<string name="poi_route_ferry_ref">Πορθμείο</string>
 	<string name="poi_route_subway_ref">Υπόγειος σιδηρόδρομος (μετρό)</string>
 
+	<string name="poi_route_railway_ref">Σιδηροδρομική διαδρομή</string>
+
+	<string name="poi_historic_yes">Ιστορικό αντικείμενο</string>
+	<string name="poi_surveillance_yes">Επίβλεψη: ναι</string>
+	<string name="poi_shop_additional_yes">Με κατάστημα</string>
+
+	<string name="poi_service_bicycle_retail_yes">Πώληση</string>
+	<string name="poi_service_bicycle_retail_no">Πώληση ποδηλάτων: όχι</string>
+	<string name="poi_service_bicycle_repair_yes">Επισκευή</string>
+	<string name="poi_service_bicycle_repair_no">Επισκευή ποδηλάτου: όχι</string>
+	<string name="poi_service_bicycle_rental_yes">Ενοικίαση</string>
+	<string name="poi_service_bicycle_rental_no">Ενοικίαση ποδηλάτου: όχι</string>
+	<string name="poi_service_bicycle_pump_yes">Τρόμπα ποδηλάτου</string>
+	<string name="poi_service_bicycle_pump_no">Τρόμπα ποδηλάτου: όχι</string>
+	<string name="poi_service_bicycle_diy_yes">Εργαλεία για ιδιοεπισκευή</string>
+	<string name="poi_service_bicycle_diy_no">Εργαλεία ποδηλάτου για ιδιοεπισκευή: όχι</string>
+	<string name="poi_service_bicycle_cleaning_yes">Καθαρισμός</string>
+	<string name="poi_service_bicycle_cleaning_no">Καθαρισμός ποδηλάτου: όχι</string>
+	<string name="poi_service_bicycle_second_hand_yes">Λιανική πώληση μεταχειρισμένων ποδηλάτων</string>
+	<string name="poi_service_bicycle_second_hand_no">Λιανική πώληση μεταχειρισμένων ποδηλάτων: όχι</string>
+	<string name="poi_bicycle_repair_station">Σταθμός ιδιοεπισκευής ποδηλάτου</string>
+
+	<string name="poi_wildlife_hide">Θέση παρακολούθησης άγριας ζωής</string>
+
+	<string name="poi_training_language">Εκπαίδευση: γλώσσα</string>
+	<string name="poi_training_music">Εκπαίδευση: μουσική</string>
+	<string name="poi_training_dance">Εκπαίδευση: χορός</string>
+	<string name="poi_training_sport">Εκπαίδευση: αθλητισμός</string>
+	<string name="poi_training_art">Εκπαίδευση: τέχνες</string>
+	<string name="poi_training_cooking">Εκπαίδευση: μαγειρική</string>
+	<string name="poi_training_computer">Εκπαίδευση: πληροφορική</string>
+	<string name="poi_training_yoga">Εκπαίδευση: γιόγκα</string>
+	<string name="poi_training_martial_art">Εκπαίδευση: πολεμικές τέχνες</string>
 	</resources>
