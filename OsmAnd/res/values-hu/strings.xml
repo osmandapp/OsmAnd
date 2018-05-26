@@ -216,7 +216,7 @@ Ehhez {1} MB helyre van szükség.
     <string name="local_index_items_deleted">%2$d darabból %1$d törölve.</string>
     <string name="local_index_items_restored">%2$d darabból %1$d aktiválva.</string>
     <string name="local_index_no_items_to_do">Nincs elem a művelethez: %1$s</string>
-    <string name="local_index_action_do">%2$s darab elemen végre lesz hajtva a %1$s. Folytatod?</string>
+    <string name="local_index_action_do">%2$s elem %1$sére készülsz. Folytatod?</string>
     <string name="local_index_descr_title">Térképfájlok kezelése.</string>
     <string name="local_index_mi_restore">Aktiválás</string>
     <string name="local_index_mi_backup">Deaktiválás</string>
