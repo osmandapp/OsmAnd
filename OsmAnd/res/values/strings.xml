@@ -152,12 +152,12 @@
     <string name="av_locations_selected_desc">GPX file with coordinates and data of the selected notes.</string>
     <string name="av_locations_all_desc">GPX file with coordinates and data of all notes.</string>
     <string name="release_3_0">
-	• New: Support for global offline travel guides. Referenced locations are linked to the map. Initial data from Wikivoyage.\n\n
-	• Wikipedia: New look, active links, images now supported\n\n
-	• Open Track UI: Support for waypoint groups\n\n
-	• Map markers: Import of selected groups from GPX files, coordinate input, new look\n\n
-	• OsmAnd Live subscription now supports all OsmAnd features\n\n
-	</string>
+• New: Support for global offline travel guides. Referenced locations are linked to the map. Initial data from Wikivoyage.\n\n
+• Wikipedia: New look, active links, images now supported\n\n
+• Open Track UI: Support for waypoint groups\n\n
+• Map markers: Import of selected groups from GPX files, coordinate input, new look\n\n
+• OsmAnd Live subscription now supports all OsmAnd features\n\n
+    </string>
     <string name="modify_the_search_query">Modify the search query.</string>
     <string name="shared_string_actions">Actions</string>
     <string name="shared_string_marker">Marker</string>
