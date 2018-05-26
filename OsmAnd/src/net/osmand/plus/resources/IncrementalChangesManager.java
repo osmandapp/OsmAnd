@@ -94,6 +94,9 @@ public class IncrementalChangesManager {
 				RegionUpdate monthRu = regionUpdateFiles.monthUpdates.get(month);
 				while (it.hasNext()) {
 					RegionUpdate ru = it.next();
+					if(ru == null) {
+						continue;
+					}
 					if (ru.obfCreated < dateCreated || 
 							(monthRu != null && ru.obfCreated < monthRu.obfCreated)) {
 						log.info("Delete overlapping day update " + ru.file.getName());
