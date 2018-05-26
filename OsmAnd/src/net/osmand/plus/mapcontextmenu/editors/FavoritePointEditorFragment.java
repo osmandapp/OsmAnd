@@ -183,6 +183,9 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 		} else {
 			helper.editFavouriteName(favorite, name, category, description);
 		}
+		if(getMapActivity() == null) {
+			return;
+		}
 		getMapActivity().refreshMap();
 		if (needDismiss) {
 			dismiss(false);
