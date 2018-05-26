@@ -161,10 +161,12 @@ public class IncrementalChangesManager {
 			if(date.endsWith("00")) {
 				monthUpdates.put(monthYear, ru);
 			} else {
-				if (!dayUpdates.containsKey(monthYear)) {
-					dayUpdates.put(monthYear, new ArrayList<IncrementalChangesManager.RegionUpdate>());
+				List<RegionUpdate> list = dayUpdates.get(monthYear);
+				if (list == null) {
+					list = new ArrayList<IncrementalChangesManager.RegionUpdate>();
 				}
-				dayUpdates.get(monthYear).add(ru);
+				list.add(ru);
+				dayUpdates.put(monthYear, list);
 			}
 			return true;
 		}
