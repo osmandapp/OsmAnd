@@ -183,7 +183,7 @@
     <string name="offline_edition">Frakoblet redigering</string>
     <string name="offline_edition_descr">Bruk alltid frakoblet redigering.</string>
 
-    <string name="free_version_message">Denne gratis OsmAnd-versjonen er begrenset til %1$s kartnedlastinger (å legge til eller oppdatere kart) og støtter ikke offline Wikipedia-artikler.</string>
+    <string name="free_version_message">Du kan laste ned eller oppdatere %1$s kart.</string>
     <string name="free_version_title">Gratisversjon</string>
     <string name="poi_context_menu_showdescription">Vis interessepunkt-beskrivelse.</string>
     <string name="index_name_north_america">Nord-Amerika</string>
@@ -2580,7 +2580,7 @@
     <string name="shared_string_added">Lagt til</string>
     <string name="marker_activated">Markøren %s er aktivert.</string>
     <string name="one_tap_active_descr">Trykk en markør på kartet for å flytte den til toppen av de aktive markørene uten å åpne kontekstmenyen.</string>
-    <string name="one_tap_active">Ett trykk aktiv</string>
+    <string name="one_tap_active">Ett-trykk aktiv</string>
     <string name="empty_state_av_notes">Ta notater!</string>
     <string name="empty_state_av_notes_desc">Legg til lyd-, video- eller bildenotat til hvert punkt på kartet, ved bruk av modul eller kontekstmeny.</string>
     <string name="notes_by_date">Notater etter dato</string>
@@ -2740,7 +2740,7 @@
     <string name="distance_nearest">Avstand: Nærmeste først</string>
     <string name="optional_point_name">Valgfritt punktnavn</string>
     <string name="transport_nearby_routes_within">Ruter i nærheten innen</string>
-    <string name="transport_nearby_routes">Nær</string>
+    <string name="transport_nearby_routes">Innenfor</string>
     <string name="enter_lon">Oppfør lengdegrad</string>
     <string name="enter_lat">Oppfør breddegrad</string>
     <string name="enter_lat_and_lon">Oppfør bredde- og lengdegrad</string>
@@ -2970,7 +2970,7 @@
     <string name="shared_string_only_with_wifi">Kun på Wi-Fi</string>
     <string name="wikivoyage_download_pics">Last ned bilder</string>
     <string name="shared_string_wifi_only">Kun på Wi-Fi</string>
-    <string name="select_travel_book">Velg reisebok</string>
+    <string name="select_travel_book">Velg en reisebok</string>
     <string name="shared_string_travel_book">Reisebok</string>
     <string name="download_images">Last ned bilder</string>
     <string name="wikipedia_offline">Wikipedia offline</string>
@@ -2983,7 +2983,7 @@
     <string name="purchase_dialog_title">Velg plan</string>
     <string name="dayly_map_updates">Kartoppdateringer: Hver dag</string>
     <string name="wikivoyage_offline">Wikivoyage offline</string>
-    <string name="wikivoyage_travel_guide">Wikivoyage reiseguide</string>
+    <string name="wikivoyage_travel_guide">Reiseguider</string>
     <string name="monthly_map_updates">Kartoppdateringer: <b>Hver måned</b></string>
     <string name="daily_map_updates">Kartoppdateringer: <b>Hver time</b></string>
     <string name="in_app_purchase">Kjøp i programmet</string>
@@ -3014,7 +3014,7 @@
 \n • Ruten blir automatisk beregnet på nytt når du avviker fra den
 \n • Søk steder etter adresse, etter type (f.eks. restaurant, hotell, bensinstasjon, museum) eller med geografiske koordinater
 \n</string>
-    <string name="travel_card_update_descr">Vi har forberedt oppdateringer og ordnet ting i Wikivoyage-dataen, oppdater filen for å gjøre bruk av dem.</string>
+    <string name="travel_card_update_descr">Ny Wikivoyage-data tilgjengelig, oppdater for å gjøre bruk av den.</string>
 	<string name="update_is_available">Oppdatering tilgjengelig</string>
 	<string name="download_file">Last ned fil</string>
     <string name="start_editing_card_image_text">Den frie verdensomspennende reiseguiden alle kan redigere.</string>
