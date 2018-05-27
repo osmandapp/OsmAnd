@@ -103,7 +103,7 @@
 	<string name="poi_second_hand">Negozio dell\'usato</string>
 	<string name="poi_tobacco">Tabaccheria</string>
 	<string name="poi_toys">Negozio di giocattoli</string>
-	<string name="poi_houseware">Nogozio casalinghi</string>
+	<string name="poi_houseware">Negozio casalinghi</string>
 	<string name="poi_newsagent">Giornalaio</string>
 	<string name="poi_radiotechnics">Negozio per radiotecnica</string>
 	<string name="poi_sports">Articoli sportivi</string>
@@ -296,7 +296,7 @@
 	<string name="poi_craft_gardener">Giardiniere</string>
 	<string name="poi_craft_electrician">Elettricista</string>
 	<string name="poi_craft_dressmaker">Sarto</string>
-	<string name="poi_religion_christian">Luogo di culto: cristiano</string>
+	<string name="poi_religion_christian">Cristianesimo</string>
 	<string name="poi_place_of_worship">Luogo di culto</string>
 	<string name="poi_chalet">Chalet</string>
 
@@ -361,7 +361,7 @@
 
 	<string name="poi_aerialway_station">Stazione skilift</string>
 	<string name="poi_aerialway_cable_car">Funivia</string>
-	<string name="poi_aerialway_t_bar">Skilift a àncora</string>
+	<string name="poi_aerialway_t_bar">Skilift a ancora</string>
 	<string name="poi_aerialway_j_bar">Skilift a J</string>
 	<string name="poi_aerialway_platter">Skilift a piattello</string>
 	<string name="poi_aerialway_mixed_lift">Skilift misto</string>
@@ -396,10 +396,10 @@
 	<string name="poi_boules">Bocce</string>
 	<string name="poi_cycling">Ciclismo</string>
 	<string name="poi_gymnastics">Ginnastica</string>
-	<string name="poi_religion_buddhist">Luogo di culto: duddista</string>
-	<string name="poi_religion_hindu">Luogo di culto: induismo</string>
-	<string name="poi_religion_shinto">Luogo di culto: shintoismo</string>
-	<string name="poi_religion_taoist">Luogo di culto: taoismo</string>
+	<string name="poi_religion_buddhist">Buddismo</string>
+	<string name="poi_religion_hindu">Induismo</string>
+	<string name="poi_religion_shinto">Shintoismo</string>
+	<string name="poi_religion_taoist">Taoismo</string>
 	<string name="poi_monastery">Monastero</string>
 	<string name="poi_historic_monastery">Monastero storico</string>
 	<string name="poi_wayside_cross">Croce storica</string>
@@ -435,8 +435,8 @@
 	<string name="poi_library">Biblioteca</string>
 	<string name="poi_theatre">Teatro</string>
 	<string name="poi_theatre_genre_circus">Circo</string>
-	<string name="poi_dance_floor">Discoteca</string>
-	<string name="poi_nightclub">Night</string>
+	<string name="poi_dance_floor">Sala da ballo</string>
+	<string name="poi_nightclub">Discoteca</string>
 	<string name="poi_stripclub">Strip club</string>
 	<string name="poi_hunting_stand">Postazione di caccia</string>
 	<string name="poi_miniature_golf">Mini golf</string>
@@ -492,8 +492,8 @@
 	<string name="poi_advertising_agency">Agenzia pubblicitaria</string>
 	<string name="poi_studio">Studio di registrazione</string>
 	<string name="poi_historic_ship">Nave storica</string>
-	<string name="poi_religion_muslim">Luogo di culto: musulmano</string>
-	<string name="poi_religion_sikh">Luogo di culto: sikhismo</string>
+	<string name="poi_religion_muslim">Musulmano</string>
+	<string name="poi_religion_sikh">Sikhismo</string>
 	<string name="poi_travel_agent">Agenzia di viaggi</string>
 	<string name="poi_cinema">Cinema</string>
 	<string name="poi_casino">Casinò</string>
@@ -541,7 +541,7 @@
 	<string name="poi_attraction_maze">Labirinto</string>
 	<string name="poi_attraction_roller_coaster">Montagne russe</string>
 	<string name="poi_attraction_summer_toboggan">Toboga estivo</string>
-	<string name="poi_religion_jewish">Luogo di culto: ebreo</string>
+	<string name="poi_religion_jewish">Ebraico</string>
 	<string name="poi_geyser">Geyser</string>
 	<string name="poi_arts_centre">Centro artistico</string>
 	<string name="poi_leisure_fishing">Postazione di pesca</string>
@@ -697,7 +697,7 @@
 	<string name="poi_games">Giochi</string>
 	<string name="poi_model">Negozio di modellistica</string>
 	<string name="poi_video_games">Videogiochi</string>
-	<string name="poi_pyrotechnics">Fuochi d\'artifico</string>
+	<string name="poi_pyrotechnics">Fuochi d’artificio</string>
 	<string name="poi_weapons">Armeria</string>
 
 	<string name="poi_fuel_biodiesel">Bio-diesel</string>
@@ -717,7 +717,7 @@
 	<string name="poi_recycling_tyres">Pneumatici</string>
 	<string name="poi_recycling_computers">Computer</string>
 	<string name="poi_recycling_hydrargyrum">Mercurio</string>
-	<string name="poi_recycling_tv_monitor">Tv, monitor</string>
+	<string name="poi_recycling_tv_monitor">Televisori, monitor</string>
 	<string name="poi_recycling_tetrapak">Tetrapak</string>
 	<string name="poi_recycling_waste_oil">Olio esausto</string>
 	<string name="poi_recycling_bottles">Bottiglie</string>
@@ -929,7 +929,7 @@
 	<string name="poi_apartment">Appartamento</string>
 	<string name="poi_wilderness_hut">Rifugio non custodito</string>
 	<string name="poi_cabin">Cabina</string>
-	<string name="poi_religion_voodoo">Religione: Voodoo</string>
+	<string name="poi_religion_voodoo">Voodoo</string>
 	<string name="poi_religion_spiritualist">Spiritualismo</string>
 	<string name="poi_denomination_catholic">Cattolica</string>
 	<string name="poi_denomination_baptist">Battista</string>
@@ -1244,7 +1244,7 @@
 	<string name="poi_payment_pikepass_designated">PIKEPASS (indicato)</string>
 	<string name="poi_payment_visa_debit_yes">Carte di debito Visa</string>
 	<string name="poi_payment_visa_debit_no">Carte di debito Visa non accettato</string>
-	<string name="poi_payment_cryptocurrencies_no">Cryptocurrencies non accettato</string>
+	<string name="poi_payment_cryptocurrencies_no">Cryptomonete non accettate</string>
 	<string name="poi_payment_others_yes">Altro</string>
 	<string name="poi_payment_others_no">Altri metodi di pagamento non accettati</string>
 	<string name="poi_payment_routex_yes">Routex</string>
@@ -2479,5 +2479,30 @@
 
 	<string name="poi_recycling_foil">Pellicola</string>
 	<string name="poi_prosecutor">Procuratore</string>
-	<string name="synonyms_poi_nightclub">Discoteca;Disko</string>
+	<string name="synonyms_poi_nightclub">Discoteca;Disko;Disco;Club notturno</string>
+	<string name="poi_religion_unitarian_universalist">Universalismo unitariano</string>
+	<string name="poi_payment_cheque_no">Assegni non accettati</string>
+	<string name="poi_payment_routex_no">Carte carburanti Routex non accettate</string>
+	<string name="poi_payment_icsf_yes">Biglietti prepagati IC</string>
+	<string name="poi_payment_icsf_no">Biglietti prepagati IC non accettati</string>
+	<string name="poi_payment_jcb_no">Carte JCB non accettate</string>
+	<string name="poi_payment_ep_quick_no">Carte Quick non accettate</string>
+	<string name="poi_payment_eurowag_no">Carte Eurowag non accettate</string>
+	<string name="poi_payment_euroshell_no">Carte carburanti Euroshell non accettate</string>
+	<string name="poi_payment_westfalen_card_no">Carte Westfalen non accettate</string>
+	<string name="poi_payment_cibus_no">Carte Cibus non accettate</string>
+	<string name="poi_payment_ep_proton_yes">Proton</string>
+	<string name="poi_payment_ep_proton_no">Carte Proton non accettate</string>
+	<string name="poi_payment_roadrunner_no">Carte Roadrunner non accettate</string>
+	<string name="poi_payment_oyster_no">Carte Oyster non accettate</string>
+	<string name="poi_payment_sube_no">Carte SUBE non accettate</string>
+	<string name="poi_payment_token_yes">Gettoni</string>
+	<string name="poi_payment_token_no">Gettoni non accettati</string>
+	<string name="poi_payment_golden_crown_yes">Golden Crown</string>
+	<string name="poi_payment_golden_crown_no">Carte Golden Crown non accettate</string>
+	<string name="poi_payment_pro100_no">Carte PRO100 non accettate</string>
+	<string name="poi_payment_union_card_yes">Union Card</string>
+	<string name="poi_payment_union_card_no">Union Card non accettata</string>
+	<string name="poi_payment_mtsmoney_yes">MTS-Money</string>
+	<string name="poi_payment_mtsmoney_no">MTS-Money non accettato</string>
 	</resources>
