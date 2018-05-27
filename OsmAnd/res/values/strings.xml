@@ -29,7 +29,7 @@
     <string name="how_to_open_link">How to open the link?</string>
     <string name="read_wikipedia_offline">Read Wikipedia offline</string>
     <string name="download_all">Download all</string>
-    <string name="shared_string_restart">Restart</string>
+    <string name="shared_string_restart">App restart</string>
     <string name="show_images">Show images</string>
     <string name="purchase_cancelled_dialog_title">You have canceled your OsmAnd Live subscription</string>
     <string name="purchase_cancelled_dialog_descr">Renew subscription to continue using all the features:</string>
@@ -71,8 +71,8 @@
     <string name="shared_string_do">Do</string>
     <string name="shared_string_only_with_wifi">Only on Wi-Fi</string>
     <string name="wikivoyage_download_pics">Download images</string>
-    <string name="wikivoyage_download_pics_descr">Images for articles can be downloaded for offline use.\n
-    You can always change the setting in \'Explore\' → \'Options\'.</string>
+    <!-- Use ← for RTL languages -->
+    <string name="wikivoyage_download_pics_descr">Article images can be downloaded for offline use.\nAlways available in \'Explore\' → \'Options\'.</string>
     <string name="shared_string_wifi_only">Only on Wi-Fi</string>
     <string name="select_travel_book">Select a travel book</string>
     <string name="shared_string_travel_book">Travel book</string>
@@ -168,7 +168,7 @@
     <string name="shared_string_added">Added</string>
     <string name="marker_activated">Marker %s activated.</string>
     <string name="one_tap_active_descr">Tap a marker on the map to move it to the top of the active markers without opening the context menu.</string>
-    <string name="one_tap_active">One tap active</string>
+    <string name="one_tap_active">\'One tap\' active</string>
     <string name="empty_state_av_notes">Take notes!</string>
     <string name="empty_state_av_notes_desc">Add audio, video or photo note to every point on the map, using widget or context menu.</string>
     <string name="notes_by_date">Notes by date</string>
@@ -2051,6 +2051,7 @@
     <string name="unknown_location">Position not yet known</string>
     <string name="modify_transparency">Modify transparency (0 - transparent, 255 - opaque)</string>
     <string name="confirm_interrupt_download">Cancel file download?</string>
+    <!-- Use ← for RTL languages -->
     <string name="first_time_msg">Thank you for using OsmAnd. Download regional data for offline use via \'Settings\' →  \'Manage map files\' to view maps, locate addresses, look up POIs, find public transport and more.</string>
     <string name="basemap_was_selected_to_download">Basemap is selected for download so that the app functions.</string>
     <string name="local_indexes_cat_tile">Online and cached tile maps</string>
@@ -2287,6 +2288,7 @@
     <string name="gpx_option_reverse_route">Reverse GPX direction</string>
     <string name="gpx_option_destination_point">Use current destination</string>
     <string name="gpx_option_from_start_point">Pass along entire track</string>
+    <!-- Use ← for RTL languages -->
     <string name="switch_to_vector_map_to_see">Offline vector map present for this location. \n\t\n\tTo use activate \'Menu\' → \'Configure map\' → \'Map Source…\' → \'Offline vector maps\'.</string>
     <string name="choose_audio_stream">Voice guidance output</string>
     <string name="choose_audio_stream_descr">Select the speaker to play the voice guidance.</string>
@@ -2380,6 +2382,7 @@
     <string name="loading_builds">Loading OsmAnd builds…</string>
     <string name="select_build_to_install">Select an OsmAnd build to install</string>
     <string name="gps_status_app_not_found">GPS status app not installed. Search in market?</string>
+    <!-- Use ← for RTL languages -->
     <string name="voice_is_not_available_msg">No voice guidance available, please go to \'Settings\' → \'General\' → \'Voice guidance\' and select or download a voice prompt package.</string>
     <string name="voice_is_not_available_title">No voice guidance selected</string>
     <string name="daynight_mode_day">Day</string>
