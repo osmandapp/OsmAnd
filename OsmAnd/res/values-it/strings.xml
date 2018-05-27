@@ -48,7 +48,7 @@
     <string name="open_street_map_login_descr">Necessario per inviare contributi a openstreetmap.org</string>
     <string name="user_password">Password in OSM</string>
     
-    <string name="osmand_service">"Modalità  backgraund"</string>
+    <string name="osmand_service">"Modalità  background"</string>
     <string name="osmand_service_descr">OsmAnd, a schermo spento, è eseguito in background</string>
 
 
@@ -90,7 +90,7 @@ La memoria utilizzata è  {1} MB.
     <string name="poi_query_by_name_matches_categories">Trovate delle categorie PDI che rispecchiano la ricerca :</string>
     <string name="data_to_search_poi_not_available">Dati locali contenenti PDI non presenti.</string>
     <string name="poi_filter_by_name">Ricerca per nome</string>
-    <string name="old_poi_file_should_be_deleted">Il file dati PDI \'%1$s\' è didondante e può essere eliminato.</string>
+    <string name="old_poi_file_should_be_deleted">Il file dati PDI \'%1$s\' è ridondante e può essere eliminato.</string>
     <string name="update_poi_file_not_found">Il file per registrare i cambiamenti dei PDI non è stato trovato nè creato.</string>
     <string name="button_upgrade_osmandplus">Aggiorna OsmAnd+</string>
     <string name="map_version_changed_info">Nel server ci sono file di mappe incompatibili con l\'attuale versione del programma utilizzata. Per scaricarli ed utilizzarli aggiorna l\'applicazione all\'ultima versione.</string>
@@ -359,7 +359,7 @@ La memoria utilizzata è  {1} MB.
     <string name="use_trackball_descr">Utilizza la trackball per muovere la mappa</string>
     <string name="use_trackball">Usa la trackball</string>
     <string name="background_service_wait_int_descr">Scegli l\'intervallo di tempo per determinare la posizione</string>
-    <string name="background_service_wait_int">Attesa masssima per la determinazione</string>
+    <string name="background_service_wait_int">Attesa massima per la determinazione</string>
 
     <string name="where_am_i">Dove sono?</string>
     <string name="process_navigation_service">Servizio di navigazione OsmAnd</string>
@@ -386,8 +386,8 @@ La memoria utilizzata è  {1} MB.
     <string name="voice_data_corrupted">I file voce specificati sono corrotti</string>
     <string name="voice_data_unavailable">File voce non disponibili</string>
   
-  <string name="sd_unmounted">La scheda SD non accessibile.
-\nImpossibile visualizzare le mappe e cercare alcunchè.</string>
+  <string name="sd_unmounted">Scheda di memoria non accessibile. 
+\nImpossibile visualizzare le mappe o cercare alcunché.</string>
   <string name="sd_mounted_ro">Scheda SD accessibile in sola lettura.
 \nImpossibile effettuare download da internet e solo le mappe precaricate sono visibili.</string>
     <string name="unzipping_file">File in decompressione…</string>
@@ -978,7 +978,7 @@ Memoria in proporzione %4$s MB (limite di Android %5$s MB, Dalvik %6$s MB).</str
 
     <string name="audionotes_location_not_defined">La posizione da associare con la nota non è ancora definita. \"Usa posizione …\" per assegnare una nota alla posizione specificata.</string>
 
-    <string name="osmand_srtm_short_description_80_chars">Plugin Osmand per le curve di livello offline</string>
+    <string name="osmand_srtm_short_description_80_chars">Plugin OsmAnd per le curve di livello offline</string>
     <string name="osmand_srtm_long_description_1000_chars">Questo plugin fornisce sia le curve di livello che lo strato ombreggiamento dei rilievi che possono essere visualizzate nelle mappe standard di OsmAnd. Questa funzionalità sarà molto apprezzata dagli atleti, dagli escursionisti, e tutti coloro che sono interessati all\'orografia e al paesaggio.
 \n
 \nI dati globali (fra i 70 gradi nord e 70 gradi sud) sono basati su misurazioni del SRTM (Shuttle Radar Topography Mission) e ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), lo strumento misuratore a bordo Terra, il satellite della NASA del sistema di osservazione della terra. ASTER è uno sforzo di cooperazione tra NASA, il Ministero dell\'Economia del Giappone, Commercio e Industria (METI) e sistema spaziale giapponese (J-spacesystems).</string>
@@ -1094,7 +1094,7 @@ Memoria in proporzione %4$s MB (limite di Android %5$s MB, Dalvik %6$s MB).</str
 \n* Premere e tenere premuto sulla mappa per eliminare il punto precedente.
 \n* Premere e tenere premuto sul punto per vedere e allegare una descrizione.
 \n* Fare clic sul widget di misura per vedere ulteriori azioni.</string>
-    <string name="distance_measurement_start_editing">Iniza a modificare</string>
+    <string name="distance_measurement_start_editing">Inizia a modificare</string>
     <string name="distance_measurement_finish_editing">Finisci di modificare</string>
     <string name="distance_measurement_finish_subtrack">Inizia una nuova sottotraccia</string>
     <string name="distance_measurement_clear_route">Cancella tutti i punti</string>
@@ -1529,7 +1529,7 @@ Memoria in proporzione %4$s MB (limite di Android %5$s MB, Dalvik %6$s MB).</str
     <string name="save_track_to_gpx_globally">Registra la traccia in un file GPX</string>
     <string name="save_track_to_gpx_globally_descr">La registrazione della posizione in un file GPX può essere accesa o spenta dal widget registrazione GPX sulla schermata della mappa.</string>
     <string name="save_track_interval_globally">Intervallo registrazione</string>
-    <string name="rendering_attr_publicTransportMode_name">Percorsi bus, filubus, servizi navetta</string>
+    <string name="rendering_attr_publicTransportMode_name">Percorsi bus, filobus, servizi navetta</string>
     <string name="confirm_every_run">Chiedi sempre</string>
     <string name="save_global_track_interval_descr">Scegli l\'intervallo di tempo per la registrazione del percorso (abilitata attraverso il widget registrazione GPX sulla mappa).</string>
     <string name="save_global_track_interval">Intervallo predefinito di registrazione</string>
@@ -1957,7 +1957,7 @@ Attivando questa vista lo stile della mappa diventerà \'Inverno e sci\', mostra
     <string name="roads">Strade</string>
     <string name="shared_string_trip_recording">Registrazione viaggio</string>
     <string name="shared_string_navigation">Navigazione</string>
-    <string name="osmand_running_in_background">Esecuzione in backgroung</string>
+    <string name="osmand_running_in_background">Esecuzione in background</string>
     <string name="default_speed_system_descr">Specifica l\'unità di misura della velocità.</string>
     <string name="default_speed_system">Unità di misura della velocità</string>
     <string name="nm">NM</string>
@@ -2679,7 +2679,7 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="subscribe_email_desc">Sottoscrivi la mailing list della nostra applicazione e otterrai ulteriori 3 download di mappe!</string>
     <string name="quick_action_auto_zoom">Zoom della mappa automatico acceso/spento</string>
     <string name="quick_action_auto_zoom_desc">Toccando il pulsante azione accenderà o spegnerà lo zoom automatico della mappa in base alla tua velocità.</string>
-    <string name="quick_action_auto_zoom_on">Abilita lo oom della mappa automatico della mappa</string>
+    <string name="quick_action_auto_zoom_on">Abilita lo zoom automatico della mappa</string>
     <string name="quick_action_auto_zoom_off">Disattiva lo zoom automatico della mappa</string>
     <string name="quick_action_add_destination">Aggiungi una destinazione</string>
     <string name="quick_action_replace_destination">Sostituisci la destinazione</string>
@@ -2933,7 +2933,7 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="import_as_gpx">Importa come file GPX</string>
     <string name="import_as_favorites">Importa come preferito</string>
     <string name="import_file">Importa file</string>
-	<string name="tap_on_map_to_hide_interface_descr">Un tap sulla mappa per nascondere/visualizzare i pulsanti di controllo e i widgets.</string>
+	<string name="tap_on_map_to_hide_interface_descr">Un tap sulla mappa per nascondere/visualizzare i pulsanti di controllo e i widget.</string>
     <string name="tap_on_map_to_hide_interface">Modalità a schermo intero</string>
     
     <string name="mark_passed">Marcatore superato</string>
@@ -3026,10 +3026,10 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="show_closed_notes">Mostra le note chiuse</string>
     <string name="switch_osm_notes_visibility_desc">Mostra/nascondi le note OSM sulla mappa.</string>
     <string name="gpx_file_desc">GPX - adatto all\'esportazione in JOSM o altri editor OSM.</string>
-    <string name="osc_file_desc">OSC - adatto per l\'esportazione in OpenStreeMap.</string>
+    <string name="osc_file_desc">OSC - adatto per l’esportazione in OpenStreetMap.</string>
     <string name="shared_string_gpx_file">File GPX</string>
     <string name="osc_file">File OSC</string>
-    <string name="choose_file_type">Scelgi il tipo di file</string>
+    <string name="choose_file_type">Scegli il tipo di file</string>
     <string name="osm_edits_export_desc">Scegli il tipo da esportare: note OSM, PDI, o entrambi.</string>
     <string name="all_data">Tutti i dati</string>
     <string name="osm_notes">Note OSM</string>
@@ -3087,7 +3087,7 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="start_editing_card_image_text">La guida turistica libera in tutto il mondo che chiunque può modificare.</string>
     <string name="welcome_to_open_beta_description">Le guide di viaggio sono basate su Wikivoyage. Valuta tutte le caratteristiche durante il beta test aperto, gratuitamente. Dopo, Viaggio sarà disponibile per gli abbonati di OsmAnd Unlimited e per i proprietari di OsmAnd+</string>
     <string name="start_editing_card_description">Puoi e dovresti editare qualsiasi articolo su Wikivoyage. Condividi conoscenza, esperienza, talento e la tua attenzione</string>
-    <string name="start_editing">Iniza a modificare</string>
+    <string name="start_editing">Inizia a modificare</string>
     <string name="get_unlimited_access">Ottieni l\'accesso illimitato</string>
     <string name="welcome_to_open_beta">Benvenuti alla open beta</string>
     <string name="wikivoyage_travel_guide">Guide Viaggi</string>
@@ -3175,13 +3175,13 @@ Rappresenta l\'area: %1$s x %2$s</string>
 \n • Mostra tasselli online specializzati, immagini satellitari (da Bing), varie informazioni sovrimpresse come per esempio tracce GPX per il turismo, la navigazione e ulteriori livelli con trasparenza personalizzabile
 \n • Scegli se mostrare il nome dei luoghi in Inglese, nella lingua locale oppure mediante l’alfabeto fonetico
 \n</string>
-    <string name="osmand_plus_extended_description_part4">Usa OSM e i dati di Wikipedia
-\n • informazioni di alta qualità dal miglior progetto collaborativo del mondo
-\n • dati OSM disponibili in base al paese o alla regione
-\n • Punti di interesse di Wikipedia POIs, ottimi per visitare un posto
-\n • Scaricamento illimitato e gratuito, direttamento dalla app
-\n • Mappe vettoriali compatte e offline aggiornate con cadenza garantita mensile
-\n
+    <string name="osmand_plus_extended_description_part4">Usa OSM e i dati di Wikipedia 
+\n • informazioni di alta qualità dal miglior progetto collaborativo del mondo 
+\n • dati OSM disponibili in base al paese o alla regione 
+\n • Punti di interesse di Wikipedia, ottimi per visitare un posto 
+\n • Scaricamento illimitato e gratuito, direttamente dalla app 
+\n • Mappe vettoriali compatte e offline aggiornate con cadenza garantita mensile 
+\n 
 \n • Selezione tra dati di una regione completa oppure della sola rete stradale (per esempio: tutto il Giappone è 700 MB mentre solo la sua rete stradale è 200 MB)</string>
     <string name="osmand_plus_extended_description_part5">Funzioni per la sicurezza
 \n • Scegli se passare dalla modalità diurna a quella notturna automaticamente
@@ -3200,4 +3200,5 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="access_intermediate_arrival_time">Orario di arrivo intermedio</string>
     <string name="map_widget_intermediate_time">orario intermedio</string>
     <string name="get_osmand_live">Acquista OsmAnd Live per sbloccare tutte le funzionalità: aggiornamenti quotidiani delle mappe con download illimitati, tutti i componenti aggiuntivi gratuiti e a pagamento, Wikipedia, Wikivoyage è molto altro.</string>
+    <string name="shared_string_gpx_files">File GPX</string>
     </resources>
