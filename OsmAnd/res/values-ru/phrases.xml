@@ -1309,7 +1309,7 @@
 	<string name="poi_payment_type">Тип оплаты</string>
 	<string name="poi_payment_fuel_type">Топливные карты</string>
 	<string name="poi_fuel_type">Вид топлива</string>
-	<string name="poi_fuel_avia_type">Вид топлива</string>
+	<string name="poi_fuel_avia_type">Вид топлива (для самолетов)</string>
 
 	<string name="poi_payment_coins_yes">Монеты</string>
 	<string name="poi_payment_coins_no">Монеты не принимаются</string>
@@ -3661,7 +3661,7 @@
 	<string name="poi_google_plus">Google+</string>
 	<string name="poi_content_wastewater">Содержимое: стоки</string>
 	<string name="poi_enforcement_check">Требование: контроль</string>
-	<string name="poi_payment_account_cards_no">Карточки не принимаются</string>
+	<string name="poi_payment_account_cards_no"></string>
 	<string name="poi_payment_prepaid_ticket_yes">Предоплаченные билеты</string>
 
 	<string name="poi_depot">Депо</string>

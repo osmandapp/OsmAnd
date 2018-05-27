@@ -32,7 +32,7 @@
     <string name="live_monitoring_url">Dirección web de Seguimiento en directo</string>
     <string name="gpx_monitoring_disabled_warn">Registra trazas utilizando el control GPX o mediante la opción «Grabar viaje».</string>
     <string name="show_current_gpx_title">Mostrar traza actual</string>
-    <string name="free_version_message">Esta versión gratuita de OsmAnd está limitada a %1$s descargas de mapas (añadir o actualizar mapas) y no soporta artículos de Wikipedia sin conexión.</string>
+    <string name="free_version_message">Puedes descargar o actualizar %1$s mapas.</string>
     <string name="free_version_title">Versión gratuita</string>
     <string name="poi_context_menu_showdescription">Detalles del PDI.</string>
     <string name="index_name_north_america">Norteamérica</string>
@@ -115,7 +115,7 @@
     <string name="search_position_map_view">Vista actual del mapa</string>
     <string name="select_search_position">Origen:</string>
     <string name="context_menu_item_search">Buscar cerca</string>
-    <string name="shared_string_save_as_gpx">Guardar como nueva traza GPX</string>
+    <string name="shared_string_save_as_gpx">Guardar como nuevo archivo GPX</string>
     <string name="route_successfully_saved_at">Ruta guardada como «%1$s».</string>
     <string name="filename_input">Nombre del archivo:</string>
     <string name="file_with_name_already_exist">Ya existe un archivo con el mismo nombre.</string>
@@ -510,8 +510,8 @@
     <string name="auto_zoom_map">Zoom automático del mapa</string>
     <string name="additional_settings">Ajustes adicionales</string>
     <string name="shared_string_settings">Ajustes</string>
-    <string name="save_current_track_descr">Guarda ahora la traza actual en la tarjeta de memoria.</string>
-    <string name="save_current_track">Guardar traza GPX actual</string>
+    <string name="save_current_track_descr">Guarda la traza actual como archivo GPX ahora.</string>
+    <string name="save_current_track">Guardar traza actual</string>
     <string name="save_track_interval">Intervalo de registro durante la navegación</string>
     <string name="save_track_interval_descr">Elige el intervalo de registro de trazas durante la navegación.</string>
     <string name="save_track_to_gpx_descrp">Una traza GPX se guardará automáticamente en la carpeta de trazas durante la navegación.</string>
@@ -1047,7 +1047,7 @@
     <string name="distance_measurement_finish_editing">Terminar edición</string>
     <string name="distance_measurement_finish_subtrack">Iniciar subtraza nueva</string>
     <string name="distance_measurement_clear_route">Limpiar todos los puntos</string>
-    <string name="distance_measurement_load_gpx">Abrir traza GPX existente</string>
+    <string name="distance_measurement_load_gpx">Abrir archivo GPX existente</string>
     <string name="av_camera_focus">Método de enfoque</string>
     <string name="av_camera_focus_descr">Selecciona el modo de enfoque de la cámara interna.</string>
     <string name="av_camera_focus_auto">Enfoque automático</string>
@@ -1321,7 +1321,7 @@
     <string name="gpx_selection_segment_title">Segmento</string>
     <string name="gpx_selection_track">%1$s
 \nTraza %2$s</string>
-    <string name="gpx_file_is_empty">Traza GPX vacía</string>
+    <string name="gpx_file_is_empty">Archivo GPX vacío</string>
     <string name="shared_string_tracks">Trazas</string>
     <string name="loading_smth">Cargando %1$s…</string>
     <string name="selected_gpx_info_show">\n\nMantenga pulsado para ver en el mapa</string>
@@ -1348,7 +1348,7 @@
     <string name="route_descr_destination">Destino</string>
     <string name="sort_by_distance">Ordenar por distancia</string>
     <string name="sort_by_name">Ordenar por nombre</string>
-    <string name="none_selected_gpx">Sin archivos GPX seleccionados. Para seleccionar uno, mantenga pulsado en una traza disponible.</string>
+    <string name="none_selected_gpx">Sin archivos GPX seleccionados. Selecciona uno manteniendo pulsado sobre él.</string>
     <string name="local_index_select_gpx_file">Marcar para mostrar</string>
     <string name="no_index_file_to_download">No se encontraron descargas, compruebe su conexión a Internet.</string>
     <string name="rendering_attr_hideBuildings_name">Edificios</string>
@@ -2201,7 +2201,7 @@
     <string name="no_inet_connection_desc_map">Necesario para descargar mapas.</string>
     <string name="search_location">Buscando la ubicación…</string>
     <string name="storage_free_space">Espacio libre</string>
-    <string name="storage_place_description">Almacenamiento de datos OsmAnd (para mapas, trazas, etc.): %1$s.</string>
+    <string name="storage_place_description">Almacenamiento de datos de OsmAnd (para mapas, archivos GPX, etc.): %1$s.</string>
     <string name="give_permission">Conceder permiso</string>
     <string name="allow_access_location">Permitir el acceso a la ubicación</string>
     <string name="first_usage_greeting">Obtenga direcciones y descubre lugares nuevos sin una conexión a Internet</string>
@@ -2238,9 +2238,9 @@
     <string name="upload_poi">Subir PDI</string>
     <string name="route_calculation">Cálculo de la ruta</string>
     <string name="search_map_hint">Buscar ciudad o región</string>
-    <string name="gpx_no_tracks_title">Sin trazas aún</string>
-    <string name="gpx_no_tracks_title_folder">También puedes añadir trazas a la carpeta</string>
-    <string name="gpx_add_track">Añadir traza</string>
+    <string name="gpx_no_tracks_title">Aún no tienes archivos GPX</string>
+    <string name="gpx_no_tracks_title_folder">También puedes añadir archivos GPX a la carpeta</string>
+    <string name="gpx_add_track">Añadir archivo GPX</string>
     <string name="gpx_appearance">Aspecto</string>
     
     
@@ -2394,7 +2394,7 @@
 \n • Varias otras mejoras y corrección de errores 
 \n 
 \n y más…</string>
-	<string name="select_gpx_folder">Seleccionar carpeta de traza</string>
+	<string name="select_gpx_folder">Seleccionar carpeta de archivo GPX</string>
     <string name="file_can_not_be_moved">Archivo inamovible.</string>
     <string name="shared_string_move">Mover</string>
     <string name="shared_string_gpx_tracks">Trazas</string>
@@ -2410,7 +2410,7 @@
     
     
     <string name="routing_attr_height_obstacles_name">Usar datos de elevación</string>
-    <string name="routing_attr_height_obstacles_description">Usa datos de elevación del terreno proporcionados por SRTM, ASTER y UR-DEM.</string>
+    <string name="routing_attr_height_obstacles_description">Incluye como factor la elevación del terreno (vía datos de SRTM, ASTER y EU-DEM).</string>
 
     <string name="rendering_attr_depthContours_description">Mostrar curvas y puntos de profundidad.</string>
     <string name="rendering_attr_depthContours_name">Curvas de profundidad náuticas</string>
@@ -2780,8 +2780,8 @@
     <string name="shared_string_sort">Ordenar</string>
     <string name="coordinate_input">Ingresar coordenadas</string>
     <string name="is_saved">está guardado</string>
-    <string name="marker_save_as_track_descr">Exporta los marcadores a un archivo que puedes nombrar aquí:</string>
-    <string name="marker_save_as_track">Guardar como traza</string>
+    <string name="marker_save_as_track_descr">Exporta tus marcadores al siguiente archivo GPX:</string>
+    <string name="marker_save_as_track">Guardar como archivo GPX</string>
     <string name="move_to_history">Mover al historial</string>
     <string name="group_will_be_removed_after_restart">El grupo desaparecerá la próxima vez que inicies la aplicación.</string>
     <string name="shared_string_markers">Marcadores</string>
@@ -2819,7 +2819,7 @@
     <string name="tap_on_map_to_hide_interface">Modo de pantalla completa</string>
     
     <string name="mark_passed">Descartar</string>
-    <string name="import_gpx_file_description">puede importarse como favorito, o como archivo de traza.</string>
+    <string name="import_gpx_file_description">puede importarse como favorito, o como archivo GPX.</string>
     <string name="import_as_gpx">Importar como archivo GPX</string>
     <string name="import_as_favorites">Importar como favorito</string>
     <string name="import_file">Importar archivo</string>
@@ -2833,16 +2833,16 @@
     <string name="go_to_next_field">Siguiente campo</string>
     <string name="rename_marker">Renombrar marcador</string>
     <string name="appearance_on_the_map">Apariencia en el mapa</string>
-    <string name="add_track_to_markers_descr">Los puntos de ruta pueden añadirse a los marcadores seleccionando una de estas trazas.</string>
+    <string name="add_track_to_markers_descr">Selecciona una pista para añadir sus puntos de referencia a los marcadores.</string>
     <string name="add_favourites_group_to_markers_descr">Selecciona una categoría de favoritos para añadir a los marcadores.</string>
-    <string name="shared_string_gpx_waypoints">Puntos de ruta de la traza</string>
+    <string name="shared_string_gpx_waypoints">Puntos de referencia de la traza</string>
     <string name="favourites_group">Categoría de favoritos</string>
     <string name="add_group">Añadir un grupo</string>
-    <string name="add_group_descr">Importar grupos de favoritos o puntos de ruta de la traza.</string>
+    <string name="add_group_descr">Importa grupos desde favoritos o puntos de ruta GPX.</string>
     <string name="empty_state_markers_active">¡Crea marcadores del mapa!</string>
     <string name="empty_state_markers_active_desc">Pulsa en «Sitios» y luego pulsa la bandera del marcador.</string>
     <string name="empty_state_markers_groups">Importar grupos</string>
-    <string name="empty_state_markers_groups_desc">Importar grupos de favoritos o puntos de ruta de la traza, como marcadores.</string>
+    <string name="empty_state_markers_groups_desc">Importa grupos de favoritos o puntos de ruta como marcadores.</string>
     <string name="empty_state_markers_history_desc">Los marcadores descartados aparecerán en esta pantalla.</string>
     <string name="shared_string_two">Dos</string>
     <string name="shared_string_one">Uno</string>
@@ -2851,16 +2851,16 @@
     <string name="distance_indication_descr">Elige cómo mostrar la distancia a los marcadores activos.</string>
     <string name="active_markers_descr">Elige el número de marcadores activos a mostrar.</string>
     <string name="shared_string_more_without_dots">Más</string>
-    <string name="looking_for_tracks_with_waypoints">Búsqueda de trazas con puntos de ruta</string>
-    <string name="release_3_0">• Nuevo menú «Viajes»: ver artículos de WikiViajes sin usar una conexión a Internet
-\n
-\n • Wikipedia: Nuevo aspecto, enlaces activos, imágenes
-\n
-\n • Interfaz de apertura de traza: visualizar grupos de los puntos de ruta
-\n
-\n • Marcadores del mapa: importación de grupos seleccionados desde archivos GPX, nuevo aspecto en el ingreso de coordenadas
-\n
-\n • La suscripción de OsmAnd Live, ahora incluye todas las características de OsmAnd
+    <string name="looking_for_tracks_with_waypoints">Búsqueda de trazas con puntos de referencia</string>
+    <string name="release_3_0">• Nuevo: Soporte para guías de viaje globales sin conexión a Internet Las ubicaciones de referencia están vinculadas al mapa. Datos iniciales de Wikivoyage.
+\n 
+\n • Wikipedia: Nuevo aspecto, enlaces activos, ahora soporta imágenes 
+\n 
+\n • Interfaz de uuario de Open Tracks: Soporte para grupos de puntos de referencia
+\n 
+\n • Marcadores del mapa: Importación de grupos seleccionados desde archivos GPX, ingreso de coordenadas, nuevo aspecto
+\n 
+\n • La suscripción de OsmAnd Live ahora soporta todas las características de OsmAnd
 \n</string>
     <string name="modify_the_search_query">Modificar la consulta de búsqueda.</string>
     <string name="empty_state_osm_edits">Crear o modificar objetos OSM</string>
@@ -2974,7 +2974,7 @@
     <string name="shared_string_result">Resultado</string>
     <string name="use_two_digits_longitude">Usar longitud de dos dígitos</string>
     <string name="online_webpage_warning">La página sólo está disponible en línea. ¿Abrirla en el navegador web?</string>
-    <string name="images_cache">Caché de imágenes</string>
+    <string name="images_cache">Almacén de imágenes</string>
     <string name="delete_search_history">Borrar historial de búsquedas</string>
     <string name="download_maps_travel">Guías turísticas</string>
     <string name="shared_string_wikivoyage">Wikiviajes</string>
@@ -2999,7 +2999,7 @@
     <string name="purchase_dialog_travel_description">Compra uno de los siguientes elementos para recibir la funcionalidad de guías de viaje sin conexión:</string>
     <string name="purchase_dialog_subtitle">Elegir el elemento adecuado:</string>
     <string name="wikivoyage_travel_guide_descr">Las guías de los lugares más interesantes del planeta, dentro de OsmAnd y sin conexión a Internet.</string>
-    <string name="wikivoyage_travel_guide">Guía turística de Wikiviajes</string>
+    <string name="wikivoyage_travel_guide">Guías de viaje</string>
     <string name="monthly_map_updates">Actualizaciones del mapa: <b>Cada mes</b></string>
     <string name="daily_map_updates">Actualizaciones del mapa: <b>Cada hora</b></string>
     <string name="in_app_purchase">Compras en la aplicación</string>
