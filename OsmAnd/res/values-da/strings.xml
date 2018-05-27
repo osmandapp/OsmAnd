@@ -3186,8 +3186,8 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="shared_string_do">Gør det</string>
     <string name="shared_string_only_with_wifi">Kun med Wi-Fi</string>
     <string name="wikivoyage_download_pics">Hent billeder</string>
-    <string name="wikivoyage_download_pics_descr">Billeder fra artikler kan hentes til offline brug.
-\n Kan altid ændres i \'Udforsk\' &gt; \'Indstillinger\'.</string>
+    <string name="wikivoyage_download_pics_descr">Billeder fra artikler kan hentes til offline brug. 
+\nKan altid ændres i \'Udforsk\' → \'Indstillinger\'.</string>
     <string name="shared_string_wifi_only">Kun med Wi-Fi</string>
     <string name="select_travel_book">Vælg en rejseguide</string>
     <string name="shared_string_travel_book">Rejseguide</string>
