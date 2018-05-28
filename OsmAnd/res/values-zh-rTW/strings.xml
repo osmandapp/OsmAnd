@@ -3011,7 +3011,7 @@
     <string name="shared_string_edited">已編輯</string>
     <string name="shared_string_added">已增加</string>
     <string name="marker_activated">標記 %s 已啟動。</string>
-    <string name="one_tap_active">點一下啟動</string>
+    <string name="one_tap_active">「點一下」啟動</string>
     <string name="empty_state_av_notes">記註解！</string>
     <string name="empty_state_av_notes_desc">使用小工具或內容選單，增加音訊、視訊或照片附註在地圖上的每個標點。</string>
     <string name="notes_by_date">註解按照日期</string>
@@ -3191,7 +3191,7 @@
     <string name="how_to_open_wiki_title">如何開啟維基百科文章？</string>
 <string name="popular_destinations">人氣目的地</string>
     <string name="osmand_team">OsmAnd 團隊</string>
-    <string name="shared_string_restart">重新啟動</string>
+    <string name="shared_string_restart">重新啟動應用程式</string>
     <string name="show_images">顯示圖片</string>
     <string name="purchase_cancelled_dialog_title">"您已取消您的 OsmAnd  Live 訂閱"</string>
     <string name="purchase_cancelled_dialog_descr">恢復訂閱以繼續使用所有的功能：</string>
