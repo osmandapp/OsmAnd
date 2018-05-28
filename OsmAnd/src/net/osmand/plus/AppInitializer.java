@@ -351,7 +351,7 @@ public class AppInitializer implements IProgress {
 						Integer in = (Integer) f.get(null);
 						return app.getString(in);
 					}
-				} catch (Exception e) {
+				} catch (Throwable e) {
 					LOG.info("No translation: " + keyName);
 				}
 				return null;
