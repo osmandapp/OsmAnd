@@ -2871,16 +2871,15 @@ Lon %2$s</string>
     <string name="by_date">Por fecha</string>
     <string name="by_type">Por tipo</string>
     <string name="modify_the_search_query">Modificar la consulta de búsqueda.</string>
-    <string name="release_3_0">• Introducción de OsmAnd Viajes: Guía mundial de viaje sin conexión a Internet, basado en Wikiviajes 
+    <string name="release_3_0">"• Nuevo: Soporte de guías turísticas globales sin conexión a Internet. Las ubicaciones de referencias, están enlazadas al mapa. Datos iniciales de Wikiviajes 
 \n 
-\n • Wikipedia: Nuevo aspecto, enlaces activos, imágenes ahora soportadas 
+\n • Wikipedia: Nuevo aspecto, enlaces activos, ahora con soporte de imágenes 
 \n 
 \n • Interfaz de apertura de traza: Soporte para los grupos de puntos de ruta 
 \n 
-\n • Marcadores del mapa: Importación de grupos elegidos desde archivos GPX, Ingreso de coordenadas, nuevo aspecto 
+\n • Marcadores del mapa: Importación de grupos elegidos desde archivos GPX, ingreso de coordenadas, nuevo aspecto 
 \n 
-\n • La suscripción de OsmAnd Live, soporta ahora todas las características de OsmAnd 
-\n</string>
+\n • La suscripción de OsmAnd Live, soporta ahora todas las características de OsmAnd "</string>
     <string name="what_is_here">Aquí hay:</string>
     <string name="parked_at">estacionado a las</string>
     <string name="pick_up_till">Recoger hasta las</string>

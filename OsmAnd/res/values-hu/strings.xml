@@ -245,11 +245,11 @@ Ehhez {1} MB helyre van szükség.
 
 
     <string name="installing_new_resources">Új adatok kicsomagolása…</string>
-    <string name="internet_connection_required_for_online_route">Online navigáció használata internetkapcsolat nélkül nem lehetséges.</string>
+    <string name="internet_connection_required_for_online_route">Egy online navigációs szolgáltatás lett kiválasztva, de nem kapcsolódsz az internetre.</string>
     <string name="tts_language_not_supported_title">Nem támogatott nyelv</string>
-    <string name="tts_language_not_supported">A kijelölt nyelvet az Android TTS rendszere nem támogatja. A Marketből letölthetsz másik TTS rendszert, egyébként a jelenlegi TTS-t használja a program.</string>
+    <string name="tts_language_not_supported">A kiválasztott nyelvet az Android TTS rendszere nem támogatja. Keresel másik TTS rendszert a Play Áruházban? Egyébként a jelenlegi TTS-t használja a program.</string>
     <string name="tts_missing_language_data_title">Hiányzó adat</string>
-    <string name="tts_missing_language_data">Nincs telepített adat a kijelölt nyelv használatához. Szeretnéd letölteni a Marketből?</string>
+    <string name="tts_missing_language_data">Átváltasz az áruházra a kiválasztott nyelv letöltéséhez?</string>
     <string name="gpx_option_reverse_route">GPX irány megfordítása</string>
     <string name="gpx_option_destination_point">Jelenlegi célpont használata</string>
     <string name="gpx_option_from_start_point">Végig az egész útvonalon</string>
@@ -261,7 +261,7 @@ Ehhez {1} MB helyre van szükség.
     <string name="voice_stream_voice_call">Telefonhívás hangcsatorna (megszakítja a Bluetooth zenelejátszást)</string>
     <string name="voice_stream_notification">Üzenetjel hangcsatorna</string>
     <string name="voice_stream_music">Zene hangcsatorna</string>
-    <string name="warning_tile_layer_not_downloadable">Az alkalmazás nem tudja letölteni a(z) %1$s térképréteget; próbáld meg újratelepíteni.</string>
+    <string name="warning_tile_layer_not_downloadable">Az alkalmazás nem tudja letölteni a(z) %1$s térképréteget; az újratelepítés segíthet.</string>
     <string name="overlay_transparency_descr">Rátétréteg átlátszóságának módosítása.</string>
     <string name="overlay_transparency">Rátétréteg átlátszósága</string>
     <string name="map_transparency_descr">Alaptérkép átlátszóságának módosítása.</string>
@@ -483,9 +483,10 @@ Ehhez {1} MB helyre van szükség.
     <string name="voice_data_corrupted">A beállított beszédadat hibás</string>
     <string name="voice_data_unavailable">A kijelölt beszédadat nem elérhető</string>
 
-    <string name="sd_unmounted">Az memóriakártya nem érhető el.
+    <string name="sd_unmounted">A memóriakártya nem érhető el. 
 \nÍgy nem fogod tudni megnézni a térképet és keresni.</string>
-    <string name="sd_mounted_ro">Az SD kártya csak olvasható.\nÍgy csak az előre letöltött térkép használható, nem tudsz újabbat letölteni az internetről.</string>
+    <string name="sd_mounted_ro">A memóriakártya csak olvasható.
+\nJelenleg csak a betöltött térkép nézegethető, nem lehet új területeket letölteni.</string>
     <string name="unzipping_file">Fájl kitömörítése (unzip)…</string>
     <string name="route_tr">Fordulj jobbra és menj</string>
     <string name="route_tshr">Fordulj élesen jobbra és menj</string>
@@ -498,7 +499,7 @@ Ehhez {1} MB helyre van szükség.
     <string name="first_time_continue">Tovább</string>
     <string name="first_time_download">Régiók letöltése</string>
     <string name="first_time_msg">Köszönjük, hogy az OsmAndet használod! Regionális adatokat offline használatra a \'Beállítások\' → \'Térképek kezelése\' menüben szerezhetsz be. Ezt követően tudsz majd térképet nézni, címre, POI-ra keresni, útvonalat tervezni.</string>
-    <string name="search_poi_location">Jel keresése…</string>
+    <string name="search_poi_location">Várakozás jelre…</string>
     <string name="search_near_map">Keresés a jelenlegi térképközéppont közelében</string>
     <string name="search_nearby">Keresés a közelben</string>
     <string name="map_orientation_default">Mint a készülék</string>
@@ -506,7 +507,7 @@ Ehhez {1} MB helyre van szükség.
     <string name="map_orientation_landscape">Vízszintes</string>
     <string name="map_screen_orientation">Kijelző orientáció</string>
     <string name="map_screen_orientation_descr">Álló, fekvő, vagy eszköz helyzete szerint.</string>
-    <string name="opening_hours_not_supported">Nyitvatartási időformátum szerkesztése nem támogatott</string>
+    <string name="opening_hours_not_supported">Nyitvatartási időformátum nem módosítható</string>
     <string name="add_new_rule">Új szabály felvétele</string>
     <string name="transport_Routes">Útvonalak</string>
     <string name="transport_Stop">Megálló</string>
@@ -515,8 +516,8 @@ Ehhez {1} MB helyre van szükség.
     <string name="transport_search_before">Előzetes útvonal</string>
     <string name="transport_finish_search">Keresés befejezése</string>
     <string name="transport_stop_to_go_out">Leszállási megálló kiválasztása</string>
-    <string name="transport_to_go_after">utána gyalog</string>
-    <string name="transport_to_go_before">előtte gyalog</string>
+    <string name="transport_to_go_after">távolság előtte</string>
+    <string name="transport_to_go_before">távolság utána</string>
     <string name="transport_stops_to_pass">ennyi megálló:</string>
     <string name="transport_route_distance">Útvonal távolsága</string>
     <string name="transport">Tömegközlekedés</string>
@@ -524,13 +525,13 @@ Ehhez {1} MB helyre van szükség.
     <string name="show_transport_over_map_description">Tömegközlekedési megállok megjelenítése a térképen.</string>
     <string name="show_transport_over_map">Tömegközlekedési megállok megjelenítése</string>
     <string name="hello">OsmAnd navigációs alkalmazás</string>
-    <string name="update_poi_success">POI adatok sikeresen frissítve ({0} db betöltve)</string>
-    <string name="update_poi_error_local">Hiba a helyi index állományok frissítésénél</string>
-    <string name="update_poi_error_loading">Hiba az adatok szerverről való letöltésekor</string>
+    <string name="update_poi_success">POI adatok frissítve ({0} db betöltve)</string>
+    <string name="update_poi_error_local">Nem sikerült frissíteni a helyi POI listát</string>
+    <string name="update_poi_error_loading">Nem sikerült adatokat betölteni a kiszolgálóról</string>
     <string name="update_poi_no_offline_poi_index">Nincs helyi POI indexadat ehhez a területhez</string>
-    <string name="update_poi_is_not_available_for_zoom">Nem lehet a POI-kat frissíteni kis nagyítás mellett</string>
+    <string name="update_poi_is_not_available_for_zoom">Belenagyítva tudod frissíteni a POI-kat</string>
     <string name="context_menu_item_update_poi">POI-k frissítése</string>
-    <string name="context_menu_item_update_map_confirm">Biztos, hogy a helyi adatokat internetről frissíti?</string>
+    <string name="context_menu_item_update_map_confirm">Frissíted a helyi adatokat internetről?</string>
     <string name="search_history_city">Település: {0}</string>
     <string name="search_history_street">Utca: {0}, {1}</string>
     <string name="search_history_int_streets">Kereszteződés: {0} és {1}, {2}</string>
@@ -548,19 +549,19 @@ Ehhez {1} MB helyre van szükség.
     <string name="search_offline_address">Offline</string>
     <string name="search_online_address">Online keresés</string>
     <string name="max_level_download_tile">Maximális online nagyítás</string>
-    <string name="max_level_download_tile_descr">Maximális nagyítási szint meghatározása online térképcsempék letöltéshez.</string>
+    <string name="max_level_download_tile_descr">Ne töltsön le online térképcsempéket ezen nagyítási szint felett.</string>
     <string name="route_general_information">Teljes távolság %1$s, utazási idő %2$d óra %3$d perc.</string>
     <string name="router_service_descr">Online vagy offline útvonaltervező szolgáltatás kiválasztása.</string>
     <string name="router_service">Útvonaltervező szolgáltatás</string>
-    <string name="sd_dir_not_accessible">Az adattárolási könyvtár nem elérhető az SD kártyán!</string>
+    <string name="sd_dir_not_accessible">Az adattárolási könyvtár nem érhető el a memóriakártyán!</string>
     <string name="download_question">Letöltés {0} - {1} ?</string>
-    <string name="download_question_exist">{0} régióhoz már le van töltve offline adat ({1}). Szeretnéd frissíteni ({2})?</string>
+    <string name="download_question_exist">{0} régióhoz már le van töltve offline adat ({1}). Frissíted ({2})?</string>
     <string name="address">Cím</string>
     <string name="shared_string_download_successful">Letöltve</string>
 
 
     <string name="downloading_list_indexes">Elérhető régiók listájának letöltése…</string>
-    <string name="list_index_files_was_not_loaded">Nincs letöltve a régiók listája az osmand.net-ről.</string>
+    <string name="list_index_files_was_not_loaded">Nem sikerült letölteni a régiók listáját az osmand.net-ről.</string>
     <string name="select_index_file_to_download">Nincs találat. Ha nem találod a régiódat, elkészítheted magadnak. (Lásd: https://osmand.net).</string>
 
     <string name="fav_points_edited">Kedvenc pontok szerkesztése kész</string>
@@ -579,26 +580,26 @@ Ehhez {1} MB helyre van szükség.
     <string name="loading_poi_obj">POI betöltése…</string>
     <string name="auth_failed">Azonosítás nem sikerült</string>
     <string name="failed_op">sikertelen</string>
-    <string name="converting_names">Eredeti/angol nevek átváltása…</string>
+    <string name="converting_names">Helyi/angol nevek átváltása…</string>
     <string name="loading_streets_buildings">Utcák és épületek betöltése…</string>
     <string name="loading_postcodes">Irányítószámok betöltése…</string>
     <string name="loading_streets">Utcák betöltése…</string>
     <string name="loading_cities">Települések betöltése…</string>
 
     <string name="poi">POI</string>
-    <string name="error_occurred_saving_gpx">Hiba történt a GPX fájl mentéskor</string>
-    <string name="error_calculating_route">Útvonaltervezési hiba</string>
-    <string name="error_calculating_route_occured">Hiba történt az útvonaltervezés közben</string>
-    <string name="empty_route_calculated">Hiba: üres útvonal lett tervezve</string>
+    <string name="error_occurred_saving_gpx">A GPX fájlt nem sikerült menteni</string>
+    <string name="error_calculating_route">Nem sikerült útvonalat tervezni</string>
+    <string name="error_calculating_route_occured">Nem sikerült útvonalat tervezni</string>
+    <string name="empty_route_calculated">Üres útvonal lett tervezve</string>
     <string name="new_route_calculated_dist">Új útvonal tervezve, távolság</string>
     <string name="arrived_at_destination">Megérkeztél a célponthoz</string>
-    <string name="invalid_locations">Érvénytelen koordináták!</string>
+    <string name="invalid_locations">Érvénytelen koordináták</string>
     <string name="go_back_to_osmand">Vissza az OsmAnd térképhez</string>
     <string name="shared_string_close">Bezárás</string>
     <string name="loading_data">Adatok betöltése…</string>
     <string name="reading_indexes">Helyi adatok olvasása…</string>
     <string name="previous_run_crashed">Az OsmAnd legutóbb összeomlott. Naplófájl: {0}. Kérlek jelentsd a hibát és csatold hozzá a naplófájlt.</string>
-    <string name="saving_gpx_tracks">GPX útvonalak mentése SD kártyára…</string>
+    <string name="saving_gpx_tracks">GPX fájl mentése…</string>
     <string name="finished_task">Befejezve</string>
 
 
@@ -625,9 +626,9 @@ Ehhez {1} MB helyre van szükség.
 
 
     <string name="shared_string_add_to_favorites">Hozzáadás a „Kedvencek”-hez</string>
-    <string name="use_english_names_descr">Választás az eredeti és az angol nevek között.</string>
-    <string name="use_english_names">Angol nevek használata</string>
-    <string name="app_settings">Alkalmazás beállítása</string>
+    <string name="use_english_names_descr">Választás a helyi és az angol nevek között.</string>
+    <string name="use_english_names">Angol nevek használata a térképen</string>
+    <string name="app_settings">Alkalmazás beállításai</string>
     <string name="search_address">Cím keresés</string>
     <string name="choose_building">Épület kiválasztása</string>
     <string name="choose_street">Utca kiválasztása</string>
@@ -648,7 +649,7 @@ Ehhez {1} MB helyre van szükség.
 
 
     <string name="show_gps_coordinates_text">GPS koordináták megjelenítése a térképen</string>
-    <string name="use_internet_to_download_tile">Internet használata a hiányzó térképcsempék letöltéséhez</string>
+    <string name="use_internet_to_download_tile">Hiányzó térképcsempék letöltése</string>
     <string name="app_description">Navigációs alkalmazás</string>
     <string name="shared_string_exit">Kilépés</string>
 
@@ -664,9 +665,9 @@ Ehhez {1} MB helyre van szükség.
     <string name="choose_intersected_street">Keresztező utca kiválasztása</string>
     <string name="Closest_Amenities">Közeli hasznos létesítmények</string>
     <string name="app_mode_default">Alapértelmezett</string>
-    <string name="app_mode_car">Autó</string>
-    <string name="app_mode_bicycle">Kerékpár</string>
-    <string name="app_mode_pedestrian">Gyalogos</string>
+    <string name="app_mode_car">Vezetés</string>
+    <string name="app_mode_bicycle">Kerékpározás</string>
+    <string name="app_mode_pedestrian">Gyaloglás</string>
     <string name="position_on_map_center">Középen</string>
     <string name="position_on_map_bottom">Alul</string>
     <string name="navigate_point_top_text">Földrajzi szélesség és hosszúság megadása a kijelölt formátumban (F - fok, P - perc, M - másodperc)</string>
@@ -696,11 +697,11 @@ Ehhez {1} MB helyre van szükség.
     <string name="shared_string_no">Nem</string>
     <string name="add_favorite_dialog_top_text">Kedvenc neve</string>
     <string name="add_favorite_dialog_default_favourite_name">Kedvenc</string>
-    <string name="add_favorite_dialog_favourite_added_template">\'\'{0}\'\' kedvenc pont sikeresen hozzáadva.</string>
+    <string name="add_favorite_dialog_favourite_added_template">\'\'{0}\'\' kedvenc pont hozzáadva.</string>
     <string name="favourites_context_menu_edit">Kedvenc szerkesztése</string>
     <string name="favourites_context_menu_delete">Kedvenc törlése</string>
     <string name="favourites_remove_dialog_msg">Törlöd a(z) \'%s\' kedvenc pontot?</string>
-    <string name="favourites_remove_dialog_success">{0} kedvenc pont sikeresen törölve.</string>
+    <string name="favourites_remove_dialog_success">{0} kedvenc pont törölve.</string>
     
     
     
@@ -722,11 +723,11 @@ Ehhez {1} MB helyre van szükség.
     <string name="poi_remove_confirm_template">{0} törlés (megjegyzés bevitele)?</string>
     <string name="poi_remove_title">POI törlése</string>
     <string name="shared_string_delete">Törlés</string>
-    <string name="poi_remove_success">POI törlése sikeres</string>
+    <string name="poi_remove_success">POI törölve</string>
     <string name="poi_action_add">hozzáadás</string>
     <string name="poi_action_change">módosítás</string>
-    <string name="poi_action_succeded_template">{0} művelet sikeresen befejeződött.</string>
-    <string name="poi_error_unexpected_template">{0} művelet közben nem várt hiba történt.</string>
+    <string name="poi_action_succeded_template">{0} művelet befejeződött.</string>
+    <string name="poi_error_unexpected_template">{0} műveletet nem sikerült végrehajtani.</string>
     <string name="poi_error_io_error_template">{0} művelet közben input/output hiba történt.</string>
     <string name="poi_error_info_not_loaded">Nincs letöltve információ a pontról</string>
     <string name="poi_dialog_opening_hours">Nyitva</string>
@@ -1717,7 +1718,7 @@ Proporcionális memória %4$s MB (Android korlát %5$s MB, Dalvik %6$s MB).</str
     <string name="version_settings_descr">Napi összeállítások letöltése.</string>
     <string name="shared_string_enable">Engedélyezés</string>
     <string name="shared_string_disable">Letiltás</string>
-    <string name="plugin_install_needs_network">Internetkapcsolat szükséges a bővítmény telepítéséhez.</string>
+    <string name="plugin_install_needs_network">A bővítmény telepítéséhez csatlakozod kell az internetre.</string>
     <string name="get_plugin">Beszerzés</string>
     <string name="version_settings">Összeállítások</string>
     <string name="plugin_ski_name">Sítérképnézet</string>
@@ -1926,10 +1927,10 @@ Hosszúság: %2$s</string>
     <string name="rate_this_app_long">Pontozd az OsmAndot a Google Play áruházban</string>
     <string name="download_live_updates">Élő frissítések</string>
     <string name="no_updates_available">Nem érhetők el frissítések</string>
-    <string name="we_really_care_about_your_opinion">Sokat adunk a véleményedre és fontos nekünk, hogy visszahalljunk.</string>
+    <string name="we_really_care_about_your_opinion">Sokat adunk a véleményedre, a visszajelzésed fontos számunkra.</string>
     <string name="failed_to_upload">Nem sikerült feltölteni</string>
     <string name="delete_change">Változtatás törlése</string>
-    <string name="successfully_uploaded_pattern">Sikeresen feltöltve: {0}/{1}</string>
+    <string name="successfully_uploaded_pattern">Feltöltve: {0}/{1}</string>
     <string name="try_again">Próbáld újra</string>
     <string name="error_message_pattern">Hiba: {0}</string>
     <string name="rendering_value_boldOutline_name">Vastag körvonal</string>
@@ -1941,7 +1942,7 @@ Hosszúság: %2$s</string>
     <string name="dahboard_options_dialog_title">Műszerfal beállításai</string>
     <string name="traffic_warning_hazard">Veszély</string>
     <string name="poi_action_delete">törlés</string>
-    <string name="shared_string_undo">VISSZAVONÁS</string>
+    <string name="shared_string_undo">Visszavonás</string>
     <string name="commit_poi">POI beküldése</string>
     <string name="tab_title_basic">Alap</string>
     <string name="tab_title_advanced">Haladó</string>
@@ -1959,7 +1960,7 @@ Hosszúság: %2$s</string>
     <string name="working_days">Munkanapok</string>
     <string name="recent_places">Gyakori helyek</string>
     <string name="favourites">Kedvencek</string>
-    <string name="saved_at_time">Sikeresen mentve ekkor: %1$s</string>
+    <string name="saved_at_time">Mentve ekkor: %1$s</string>
     <string name="regions">Régiók</string>
 
     <string name="region_maps">Régiószintű térképek</string>
@@ -1996,7 +1997,7 @@ Hosszúság: %2$s</string>
     <string name="favourites_context_menu_add">Kedvenc létrehozása</string>
     <string name="show_on_start">Megjelenítés indításkor</string>
     <string name="poi_deleted_localy">A POI törölve lesz, amint feltöltöd a változtatásokat</string>
-    <string name="show_gpx">GPX megjelenítése</string>
+    <string name="show_gpx">GPX adat megjelenítése</string>
     <string name="count_of_lines">Sorok száma</string>
     <string name="are_you_sure">Biztos vagy benne?</string>
     <string name="unsaved_changes_will_be_lost">A nem mentett változtatások el fognak veszni. Folytatod?</string>
@@ -2004,7 +2005,7 @@ Hosszúság: %2$s</string>
     <string name="roads">Utak</string>
     <string name="show_free_version_banner">Ingyenes verzió banner megjelenítése</string>
     <string name="show_free_version_banner_description">Az ingyenes verzió bannerének megjelenítése akkor is, ha fizetős verziót használsz.</string>
-    <string name="buy">VÁSÁRLÁS</string>
+    <string name="buy">Vásárlás</string>
     <string name="activate_seamarks_plugin">Kérlek, aktiváld a „Hajózási térkép” bővítményt</string>
     <string name="activate_srtm_plugin">Kérlek, aktiváld a „Szintvonalak” bővítményt</string>
     <string name="later">Tovább</string>
@@ -2014,12 +2015,12 @@ Hosszúság: %2$s</string>
     <string name="favorite_category_dublicate_message">Kérlek válassz olyan kategória nevet, ami még nem létezik.</string>
     <string name="favorite_category_name">Kategórianév</string>
     <string name="favorite_category_add_new_title">Új kategória hozzáadása</string>
-    <string name="confirm_download_roadmaps">Biztosan letöltesz csak utakat tartalmazó térképet, annak ellenére, hogy már van teljes térképed?</string>
+    <string name="confirm_download_roadmaps">A csak utakat tartalmazó térkép nem szükséges, mert le van töltve a teljes térkép. Letöltöd ennek ellenére?</string>
     <string name="value_downloaded_of_max">%1$.1f / %2$.1f MB</string>
     <string name="file_size_in_mb">%.1f MB</string>
     <string name="update_all">Összes frissítése (%1$s MB)</string>
     <string name="free_downloads_used">Elhasznált ingyenes letöltés</string>
-    <string name="free_downloads_used_description">Megjeleníti az elhasznált ingyenes letöltéseket.</string>
+    <string name="free_downloads_used_description">Megjeleníti a maradék ingyenes letöltéseket.</string>
     <string name="simulate_initial_startup_descr">Az első indítást jelző flag beállítása, a többi beállítás változatlan marad.</string>
     <string name="simulate_initial_startup">Alkalmazás első indításának szimulálása</string>
     <string name="share_geo">geo:</string>
@@ -2036,7 +2037,7 @@ Hosszúság: %2$s</string>
     <string name="new_version">Új verzió</string>
     <string name="begin_with_osmand_menu_group">Ismerkedés az OsmAnddal</string>
     <string name="features_menu_group">Szolgáltatások</string>
-    <string name="help_us_to_improve_menu_group">Segíts nekünk az OsmAnd fejlesztésében</string>
+    <string name="help_us_to_improve_menu_group">Segíts az OsmAnd fejlesztésében</string>
     <string name="other_menu_group">Egyebek</string>
     <string name="plugins_menu_group">Bővítmények</string>
     <string name="first_usage_item">Első használat</string>
@@ -2154,7 +2155,7 @@ Hosszúság: %2$s</string>
     <string name="route_distance">Távolság:</string>
     <string name="route_duration">Idő:</string>
     <string name="update">Frissítés</string>
-    <string name="missing_write_external_storage_permission">Az alkalmazásnak nincs jogosultsága elérni az SD kártyát</string>
+    <string name="missing_write_external_storage_permission">Az alkalmazásnak nincs jogosultsága használni a memóriakártyát</string>
     <string name="last_update">Utolsó frissítés: %s</string>
 <string name="shared_string_not_selected">Nincs kijelölve</string>
     <string name="update_time">Frissítés ideje</string>
@@ -2484,9 +2485,9 @@ Jelenleg csak {2} MB érhető el.</string>
     <string name="quick_action_add_poi">POI készítés</string>
     <string name="quick_action_map_style">Térképstílus módosítás</string>
     <string name="quick_action_map_style_switch">A térképstílus erre módosult: „%s”.</string>
-    <string name="quick_action_take_audio_note">Hangos megjegyzés készítése</string>
-    <string name="quick_action_take_video_note">Videomegjegyzés készítése</string>
-    <string name="quick_action_take_photo_note">Fényképes megjegyzés készítése</string>
+    <string name="quick_action_take_audio_note">Új hangjegyzet</string>
+    <string name="quick_action_take_video_note">Új videojegyzet</string>
+    <string name="quick_action_take_photo_note">Új fotójegyzet</string>
     <string name="quick_action_add_osm_bug">OSM-megjegyzés készítése</string>
     <string name="quick_action_navigation_voice">Hang be/ki</string>
     <string name="quick_action_navigation_voice_off">Hang kikapcsolva</string>
@@ -2694,7 +2695,7 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="osmand_extended_description_part1">OsmAnd (OSM Automated Navigation Directions) egy térkép- és navigációs alkalmazás, amellyel hozzáférhetsz az ingyenes, globális és kiváló minőségű OpenStreetMap (OSM) adataihoz.
 \n
 \nÉlvezd a hangalapú és vizuális navigációs szolgáltatást, tekints meg érdekes helyeket (POI-kat), hozz létre és kezelj GPX nyomvonalakat, szintvonalak és magasságinformációk használatával (egy plugin segítségével), válassz az autós, kerékpáros és gyalogos üzemmód közül, szerkessz OSM-et és használd ki a számos egyéb lehetőséget.</string>
-    <string name="save_poi_too_many_uppercase">A név túl sok nagybetűt tartalmaz. Folytatja?</string>
+    <string name="save_poi_too_many_uppercase">A név túl sok nagybetűt tartalmaz. Folytatod?</string>
     <string name="private_access_routing_req">A célpont korlátozott hozzáférésű területen található. Használjunk magánutakat ennél az útvonaltervnél?</string>
     <string name="restart_search">Keresés újraindítása</string>
     <string name="increase_search_radius">Keresett terület szélesítése</string>
