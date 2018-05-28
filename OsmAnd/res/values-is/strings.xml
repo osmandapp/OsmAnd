@@ -2292,7 +2292,7 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="shared_string_edited">Breytt</string>
     <string name="shared_string_added">Bætt við</string>
     <string name="marker_activated">Kortamerkið %s virkjað.</string>
-    <string name="one_tap_active">Eitt bank virkjar</string>
+    <string name="one_tap_active">\'Eitt bank\' virkjar</string>
     <string name="empty_state_av_notes">Taktu niður minnispunkta!</string>
     <string name="notes_by_date">Minnispunktar eftir dagsetningu</string>
     <string name="by_date">Eftir dagsetningu</string>
@@ -2963,8 +2963,8 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="purchase_dialog_title">Veldu áskrift</string>
     <string name="purchase_dialog_travel_description">Til að lesa ferðagreinar án nettengingar, þarftu að kaupa eitt af eftirfarandi atriðum:</string>
     <string name="purchase_dialog_subtitle">Veldu hentugt atriði:</string>
-    <string name="wikivoyage_download_pics_descr">Hægt er að ná í myndir úr greinum, þannig að þannig að þær séu tiltækar þegar ekki næst tenging við netið. 
-\n Þú getur alltaf breytt þessum stillingum í \'Uppgötva\' → \'Valkostir\'.</string>
+    <string name="wikivoyage_download_pics_descr">Hægt er að ná í myndir úr greinum til notkunar án nettengingar. 
+\nAlltaf tiltækt í \'Uppgötva\' → \'Valkostir\'.</string>
     <string name="wikivoyage_travel_guide_descr">Flettu upp á áhugaverðustu stöðum jarðarinnar innan úr OsmAnd, án tengingar við internetið.</string>
     <string name="wikivoyage_travel_guide">Ferðagreinar</string>
     <string name="in_app_purchase">Kaup í forritinu</string>
@@ -3007,7 +3007,7 @@ Stendur fyrir svæði: %1$s x %2$s</string>
 <string name="osmand_team">OsmAnd-teymið</string>
     <string name="maps_you_need_descr">Miðað við þær greinar sem þú hefur bókamerkt, stingum við upp á að þú sækir þessi landakort:</string>
     <string name="maps_you_need">Kort sem þú þarft</string>
-    <string name="shared_string_restart">Byrja aftur</string>
+    <string name="shared_string_restart">Endurræsa forrit</string>
     <string name="show_images">Birta myndir</string>
     <string name="purchase_cancelled_dialog_title">Þú hefur hætt áskrift þinni að OsmAnd Live</string>
     <string name="purchase_cancelled_dialog_descr">Endurnýjaðu áskriftina til að halda áfram að nýta þér allra eiginleikana:</string>
