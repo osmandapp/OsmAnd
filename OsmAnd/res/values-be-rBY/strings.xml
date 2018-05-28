@@ -1208,7 +1208,7 @@ Miesca parkoŭkі і čas vіdać na paneli kіravańnia OsmAnd і na vіdžecie
 	<string name="create_poi_link_to_osm_doc"><u>Online OSM</u> mapa z vyjavami.</string>
 	<string name="error_doing_search">Pamylka pry aŭtanomnym pošuku.</string>
 	<string name="search_offline_geo_error">Niemahčyma apracavać zapyt \'%s\'.</string>
-	<string name="search_osm_offline">Pošuk ŭ lakalnych mapach</string>
+	<string name="search_osm_offline">Pošuk pa hieahrafčnamu stanovišču</string>
 	<string name="system_locale">Sіstemnaja</string>
 	<string name="preferred_locale_descr">Vybar movy interfejsu (pierazapuscicie OsmAnd paslia zmieny).</string>
 	<string name="preferred_locale">Mova іnterfejsu</string>
