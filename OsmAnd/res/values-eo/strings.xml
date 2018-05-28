@@ -2957,8 +2957,8 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="shared_string_do">" "</string>
     <string name="shared_string_only_with_wifi">Nur tra vifio</string>
     <string name="wikivoyage_download_pics">Elŝuti bildojn</string>
-    <string name="wikivoyage_download_pics_descr">Bildoj por artikoloj povas esti elŝutitaj por eksterreta uzo. 
-\n Vi ĉiam povas ŝanĝi tiun ĉi agordon en “esplori” → “agordoj”.</string>
+    <string name="wikivoyage_download_pics_descr">Bildoj por artikoloj estas elŝuteblaj por eksterreta uzo. 
+\nVi ĉiam povas ŝanĝi tion en “esplori” → “agordoj”.</string>
     <string name="shared_string_wifi_only">Nur tra vifio</string>
     <string name="select_travel_book">Elekti vojaĝilon</string>
     <string name="shared_string_travel_book">Vojaĝilo</string>
@@ -3008,7 +3008,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="how_to_open_wiki_title">Kiel malfermi artikolojn de Vikipedio?</string>
 <string name="maps_you_need_descr">Surbaze de artikoloj, kiujn vi aldonis al legosignoj, ni proponas al vi elŝuti la jenajn mapojn:</string>
     <string name="maps_you_need">Mapoj por vi</string>
-    <string name="shared_string_restart">Restarti</string>
+    <string name="shared_string_restart">Restarti aplikaĵon</string>
     <string name="purchase_cancelled_dialog_title">Vi rezignis pri abono al OsmAnd-Live</string>
     <string name="purchase_cancelled_dialog_descr">Reaboni por plue uzi ĉiujn eblojn:</string>
 
