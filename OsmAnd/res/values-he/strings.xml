@@ -2547,7 +2547,7 @@
 \n • המינוי ל־OsmAnd חי כולל את כל התכונות של OsmAnd 
 \n 
 \n</string>
-    <string name="one_tap_active">הפעלה בנגיעה אחת</string>
+    <string name="one_tap_active">הפעלה ב‚נגיעה אחת’</string>
     <string name="map_orientation_change_in_accordance_with_speed_descr">נא לבחור באיזו מהירות כיוון המפה יתחלף ממצב ‚כיוון התנועה’ למצב ‚כיוון מצפן’ להלן.</string>
     <string name="index_item_depth_points_southern_hemisphere">נקודות עומק ימיות בחצי הכדור הדרומי</string>
     <string name="index_item_depth_points_northern_hemisphere">נקודות עומק ימיות בחצי הכדור הצפוני</string>
@@ -3131,7 +3131,7 @@
     <string name="empty_state_markers_history">היסטוריה</string>
     <string name="maps_you_need_descr">על סמך הערכים שהוספת לסימניות, נוכל להמליץ לך להוריד את המפות הבאות:</string>
     <string name="maps_you_need">מפות שדרושות לך</string>
-    <string name="shared_string_restart">הפעלה מחדש</string>
+    <string name="shared_string_restart">הפעלת היישומון מחדש</string>
     <string name="purchase_cancelled_dialog_title">ביטלת את המינוי שלך ל־OsmAnd חי</string>
     <string name="purchase_cancelled_dialog_descr">יש לחדש את המינוי כדי להמשיך להשתמש בכל התכונות:</string>
 

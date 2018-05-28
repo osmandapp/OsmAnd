@@ -2872,7 +2872,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
 \n• La subscripció OsmAnd Live ara inclou totes les característiques d\'OsmAnd 
 \n 
 \n</string>
-    <string name="one_tap_active">S\'activa amb un toc</string>
+    <string name="one_tap_active">\'Un toc\' actiu</string>
     <string name="what_is_here">El que hi ha aquí:</string>
     <string name="parked_at">aparcat a</string>
     <string name="pick_up_till">Treure abans de</string>
@@ -2981,7 +2981,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="shared_string_only_with_wifi">Només per wi-fi</string>
     <string name="wikivoyage_download_pics">Baixa imatges</string>
     <string name="wikivoyage_download_pics_descr">Es poden baixar imatges dels articles per accedir-hi sense connexió. 
-\nSempre podeu canviar la configuració a \'Exploració\' → \'Opcions\'.</string>
+\nSempre disponible a \'Exploració\' → \'Opcions\'.</string>
     <string name="shared_string_wifi_only">Només per wi-fi</string>
     <string name="select_travel_book">Seleccioneu una guia de viatges</string>
     <string name="shared_string_travel_book">Guia de viatges</string>
@@ -3014,7 +3014,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="download_wiki_region_placeholder">aquesta regió</string>
     <string name="wiki_article_not_found">L\'article no s\'ha trobat</string>
     <string name="how_to_open_wiki_title">Com obrir els articles de la Viquipèdia?</string>
-<string name="shared_string_restart">Reinicia</string>
+<string name="shared_string_restart">Reinici de l\'aplicació</string>
     <string name="show_images">Mostra les imatges</string>
     <string name="purchase_cancelled_dialog_title">Heu cancel·lat la vostra subscripció OsmAnd Live</string>
     <string name="purchase_cancelled_dialog_descr">Renoveu la subscripció per continuar utilitzant totes les funcions:</string>
