@@ -352,6 +352,7 @@ public class AppInitializer implements IProgress {
 						return app.getString(in);
 					}
 				} catch (Exception e) {
+					LOG.info("No translation: " + keyName);
 				}
 				return null;
 			}

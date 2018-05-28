@@ -1231,7 +1231,9 @@ public class GPXUtilities {
 	public static String writeGpxFile(File fout, GPXFile file, OsmandApplication ctx) {
 		Writer output = null;
 		try {
-			fout.getParentFile().mkdirs();
+			if(fout.getParentFile() != null) {
+				fout.getParentFile().mkdirs();
+			}
 			output = new OutputStreamWriter(new FileOutputStream(fout), "UTF-8"); //$NON-NLS-1$
 			String msg = writeGpx(output, file, ctx);
 			if(Algorithms.isEmpty(file.path)) {
