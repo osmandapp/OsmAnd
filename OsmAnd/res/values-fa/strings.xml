@@ -3044,7 +3044,7 @@
     <string name="shared_string_added">افزوده شد</string>
     <string name="marker_activated">نشانهٔ %s فعال شد.</string>
     <string name="one_tap_active_descr">یکی از نشانه‌های روی نقشه لمس کنید تا بدون نیاز به بازکردن منوی زمینه، آن را در صدر نشانه‌های فعال قرار دهید.</string>
-    <string name="one_tap_active">فعال‌کردن با یک بار لمس</string>
+    <string name="one_tap_active">فعال‌کردن «با یک لمس»</string>
     <string name="empty_state_av_notes">یادداشت بگذارید!</string>
     <string name="empty_state_av_notes_desc">با استفاده از ابزارک یا منوی زمینه، برای هر نقطه‌ای روی نقشه یادداشت صوتی، عکسی یا ویدئویی بگذارید.</string>
     <string name="notes_by_date">یادداشت‌ها بر اساس تاریخ</string>
@@ -3172,8 +3172,8 @@
     <string name="shared_string_do">دانلود کن</string>
     <string name="shared_string_only_with_wifi">فقط با وای‌فای</string>
     <string name="wikivoyage_download_pics">دانلود تصاویر</string>
-    <string name="wikivoyage_download_pics_descr">می‌توانید دانلود تصاویر موجود در مقاله‌ها را فعال کنید تا در زمان آفلاین‌بودن نیز آن‌ها را ببینید. 
-\nهمواره می‌توانید این گزینه را در «کاوش &gt; گزینه‌ها» تغییر دهید.</string>
+    <string name="wikivoyage_download_pics_descr">می‌توانید تصاویر موجود در مقاله‌ها را برای استفاده در مواقع آفلاین، دانلود کنید.
+\nاین گزینه همیشه در «کاوش &gt; گزینه‌ها» در دسترس است.</string>
     <string name="shared_string_wifi_only">فقط با وای‌فای</string>
     <string name="online_webpage_warning">این صفحه فقط به‌صورت آنلاین در دسترس است. با مرورگر اینترنت باز شود؟</string>
     <string name="images_cache">حافظهٔ نهان تصاویر</string>
