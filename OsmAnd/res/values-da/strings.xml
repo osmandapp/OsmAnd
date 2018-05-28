@@ -3058,7 +3058,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="shared_string_added">Tilføjet</string>
     <string name="marker_activated">Markør %s er aktiveret.</string>
     <string name="one_tap_active_descr">Tryk på en markør på kortet for at flytte den til toppen af de aktive markører uden at åbne kontekstmenuen.</string>
-    <string name="one_tap_active">Aktivering med ét tryk</string>
+    <string name="one_tap_active">\'Et tryk\' aktivering</string>
     <string name="empty_state_av_notes">Tag noter!</string>
     <string name="empty_state_av_notes_desc">Tilføj en lyd-, video- eller fotonote til hvert punkt på kortet ved hjælp af modul- eller kontekstmenu.</string>
     <string name="notes_by_date">Noter efter dato</string>
@@ -3186,7 +3186,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="shared_string_do">Gør det</string>
     <string name="shared_string_only_with_wifi">Kun med Wi-Fi</string>
     <string name="wikivoyage_download_pics">Hent billeder</string>
-    <string name="wikivoyage_download_pics_descr">Billeder fra artikler kan hentes til offline brug. 
+    <string name="wikivoyage_download_pics_descr">Artikelbilleder kan hentes til offline brug. 
 \nKan altid ændres i \'Udforsk\' → \'Indstillinger\'.</string>
     <string name="shared_string_wifi_only">Kun med Wi-Fi</string>
     <string name="select_travel_book">Vælg en rejseguide</string>
