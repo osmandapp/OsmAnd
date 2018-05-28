@@ -742,7 +742,7 @@
 	
 	<string name="error_doing_search">Не атрымалася выканаць пошук у аўтаномным рэжыме.</string>
 	<string name="search_offline_geo_error">Немагчыма апрацаваць запыт \'%s\'.</string>
-	<string name="search_osm_offline">Пошук ў лякальных мапах</string>
+	<string name="search_osm_offline">Пошук па геаграфічнаму становішчу</string>
 	<string name="system_locale">Сістэмная</string>
 	<string name="preferred_locale_descr">Выбар мовы інтэрфэйсу (перазапусціце OsmAnd пасля змены).</string>
 	<string name="preferred_locale">Мова інтэрфэйсу</string>
