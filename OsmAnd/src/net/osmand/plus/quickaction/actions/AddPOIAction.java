@@ -117,8 +117,10 @@ public class AddPOIAction extends QuickAction {
 							newNode.putTagNoLC(poiType.getOsmTag2(), poiType.getOsmValue2());
 						}
 					} else if (!Algorithms.isEmpty(tag.getValue())) {
-						newNode.putTagNoLC(editPoiData.getPoiCategory().getDefaultTag(), tag.getValue());
-
+						PoiCategory category = editPoiData.getPoiCategory();
+						if (category != null) {
+							newNode.putTagNoLC(category.getDefaultTag(), tag.getValue());
+						}
 					}
 					if (offlineEdit && !Algorithms.isEmpty(tag.getValue())) {
 						newNode.putTagNoLC(tag.getKey(), tag.getValue());

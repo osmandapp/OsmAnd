@@ -1,5 +1,7 @@
 package net.osmand.plus.osmedit;
 
+import android.support.annotation.Nullable;
+
 import net.osmand.PlatformUtil;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
@@ -52,7 +54,7 @@ public class EditPoiData {
 		}
 	}
 	
-	
+	@Nullable
 	public PoiCategory getPoiCategory() {
 		return category;
 	}

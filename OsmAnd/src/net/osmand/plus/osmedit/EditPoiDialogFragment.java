@@ -273,7 +273,10 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 				if (!getEditPoiData().isInEdit()) {
 					getEditPoiData().updateTypeTag(s.toString(), true);
 					if (!getMyApplication().isApplicationInitializing()) {
-						poiTypeTextInputLayout.setHint(editPoiData.getPoiCategory().getTranslation());
+						PoiCategory category = editPoiData.getPoiCategory();
+						if (category != null) {
+							poiTypeTextInputLayout.setHint(category.getTranslation());
+						}
 					}
 				}
 			}
@@ -289,9 +292,10 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 					if (event.getX() >= (editText.getRight()
 							- editText.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width()
 							- editText.getPaddingRight())) {
-						if (editPoiData.getPoiCategory() != null) {
+						PoiCategory category = editPoiData.getPoiCategory();
+						if (category != null) {
 							PoiSubTypeDialogFragment dialogFragment =
-									PoiSubTypeDialogFragment.createInstance(editPoiData.getPoiCategory());
+									PoiSubTypeDialogFragment.createInstance(category);
 							dialogFragment.setOnItemSelectListener(new PoiSubTypeDialogFragment.OnItemSelectListener() {
 								@Override
 								public void select(String category) {
@@ -466,8 +470,10 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 					node.removeTag(EditPoiData.REMOVE_TAG_PREFIX + poiType.getOsmTag2());
 				}
 			} else if (!Algorithms.isEmpty(poiTypeTag)) {
-				node.putTagNoLC(editPoiData.getPoiCategory().getDefaultTag(), poiTypeTag);
-
+				PoiCategory category = editPoiData.getPoiCategory();
+				if (category != null) {
+					node.putTagNoLC(category.getDefaultTag(), poiTypeTag);
+				}
 			}
 			if (offlineEdit && !Algorithms.isEmpty(poiTypeTag)) {
 				node.putTagNoLC(EditPoiData.POI_TYPE_TAG, poiTypeTag);
