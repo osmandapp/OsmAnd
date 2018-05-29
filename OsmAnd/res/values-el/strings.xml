@@ -1835,7 +1835,7 @@
     <string name="shared_string_added">Προστέθηκε</string>
     <string name="marker_activated">Ο δείκτης %s ενεργοποιήθηκε.</string>
     <string name="one_tap_active_descr">Πατήστε ένα δείκτη στο χάρτη για να τον μετακινήσετε στην κορυφή των ενεργών δεικτών χωρίς να ανοίξει το συναφές μενού.</string>
-    <string name="one_tap_active">Μονό πάτημα ενεργό</string>
+    <string name="one_tap_active">Ενεργό \'ένα πάτημα\'</string>
     <string name="empty_state_av_notes">Κρατήστε σημειώσεις!</string>
     <string name="empty_state_av_notes_desc">Προσθήκη ήχου, βίντεο ή σημείωση φωτογραφίας για κάθε σημείο στο χάρτη, χρησιμοποιώντας το widget ή το συναφές μενού.</string>
     <string name="notes_by_date">Σημειώσεις κατά ημερομηνία</string>
@@ -2364,8 +2364,8 @@
     <string name="shared_string_do">Κάντε</string>
     <string name="shared_string_only_with_wifi">Μόνο με ασύρματη σύνδεση</string>
     <string name="wikivoyage_download_pics">Κατέβασμα εικόνων</string>
-    <string name="wikivoyage_download_pics_descr">Εικόνες από άρθρα μπορούν να κατέβουν για χρήση χωρίς σύνδεση.
-\n Μπορείτε πάντα να αλλάξετε τη ρύθμιση σε \'Εξερεύνηση\' → \'Επιλογές\'.</string>
+    <string name="wikivoyage_download_pics_descr">Εικόνες από άρθρα μπορούν να κατέβουν για χρήση χωρίς σύνδεση. 
+\nΠάντα διαθέσιμες στο \'Εξερεύνηση\' → \'Επιλογές\'.</string>
     <string name="shared_string_wifi_only">Μόνο ασύρματα</string>
     <string name="select_travel_book">Επιλογή ταξιδιωτικού βιβλίου</string>
     <string name="shared_string_travel_book">Ταξιδιωτικό βιβλίο</string>
@@ -3129,7 +3129,7 @@
     <string name="wiki_article_not_found">Δεν βρέθηκε το άρθρο</string>
     <string name="how_to_open_wiki_title">Πώς να ανοίξετε τα άρθρα της βικιπαίδειας;</string>
 <string name="osmand_team">Ομάδα OsmAnd</string>
-    <string name="shared_string_restart">Επανεκκίνηση</string>
+    <string name="shared_string_restart">Επανεκκίνηση εφαρμογής</string>
     <string name="purchase_cancelled_dialog_title">Έχετε ακυρώσει τη συνδρομή σας στο OsmAnd Live</string>
     <string name="purchase_cancelled_dialog_descr">Ανανεώστε τη συνδρομή για να συνεχίσετε τη χρήση όλων των χαρακτηριστικών:</string>
 
