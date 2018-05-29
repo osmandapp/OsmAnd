@@ -94,16 +94,20 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 				return super.isInterrupted();
 			}
 
+
+			@Override
+			public void layerOnPreExecute() {
+				calculatedFilters = new TreeSet<>(filters);
+			}
+
 			@Override
 			public void layerOnPostExecute() {
-				filters = calculatedFilters;
 				activity.getMapView().refreshMap();
 			}
 
 			@Override
 			protected List<Amenity> calculateResult(RotatedTileBox tileBox) {
 				QuadRect latLonBounds = tileBox.getLatLonBounds();
-				calculatedFilters = filters;
 				if (calculatedFilters.isEmpty() || latLonBounds == null) {
 					return new ArrayList<>();
 				}
