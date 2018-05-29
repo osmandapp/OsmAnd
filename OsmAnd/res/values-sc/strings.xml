@@ -3010,7 +3010,7 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="shared_string_added">Annantu</string>
     <string name="marker_activated">Marcadore %s ativadu.</string>
     <string name="one_tap_active_descr">Incarca in unu marcadore in sa mapa pro lu moere in sa prima positzione in sos marcadores ativos, chene abèrrere su menù contestuale.</string>
-    <string name="one_tap_active">Un\'incarcu ativu</string>
+    <string name="one_tap_active">\'Un\'incarcu\' ativu</string>
     <string name="empty_state_av_notes">Piga notas!</string>
     <string name="empty_state_av_notes_desc">Annanghe notas sonoras, vìdeos o fotografias a cada puntu in sa mapa, impreende su widget o su menù contestuale.</string>
     <string name="notes_by_date">Notas pro data</string>
@@ -3193,7 +3193,7 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="osmand_team">Grupu de traballu de OsmAnd</string>
     <string name="maps_you_need_descr">Bidende sos artìculos chi as sarvadu in sos sinnalibros, ti cunsigiamus de iscarrigare custas mapas:</string>
     <string name="maps_you_need">Mapas cunsigiadas</string>
-    <string name="shared_string_restart">Torra a allùghere</string>
+    <string name="shared_string_restart">Torra a allùghere s\'aplicatzione</string>
     <string name="show_images">Ammustra sas immàgines</string>
     <string name="purchase_cancelled_dialog_title">As iscantzelladu s\'abbonamentu tuo a OsmAnd Live</string>
     <string name="purchase_cancelled_dialog_descr">Rinnova s\'abbonamentu tuo pro sighire a impreare totu sas funtzionalidades:</string>
