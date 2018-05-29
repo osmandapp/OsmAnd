@@ -2190,4 +2190,6 @@
 	<string name="poi_office_camping">Γραφείο κατασκήνωσης</string>
 	<string name="poi_model_aerodrome">Αεροδρόμιο μοντελισμού</string>
 	<string name="poi_guide">Γραφείο ξεναγών</string>
+	<string name="poi_quango">Ημικρατικός οργανισμός</string>
+	<string name="poi_consulting">Γραφείο συμβούλων</string>
 	</resources>
