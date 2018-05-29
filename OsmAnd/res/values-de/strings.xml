@@ -2983,7 +2983,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
 \n • Kartenmarkierungen: Import auswählbarer Gruppen aus GPX-Dateien, Koordinateneingabe, neues Layout
 \n
 \n • OsmAnd Live-Abonnement unterstützt nun alle OsmAnd Funktionen</string>
-    <string name="one_tap_active">Mit einem Tippen aktiv</string>
+    <string name="one_tap_active">\"Einem Klick\" aktiv</string>
     <string name="what_is_here">Was ist hier:</string>
     <string name="without_time_limit">Ohne Zeitbegrenzung</string>
     <string name="context_menu_read_full_article">Ganzen Artikel lesen</string>
@@ -3080,8 +3080,8 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="index_item_world_wikivoyage">Weltweite Wikivoyage Artikel</string>
     <string name="shared_string_contents">Inhalte</string>
     <string name="wikivoyage_download_pics">Bilder herunterladen</string>
-    <string name="wikivoyage_download_pics_descr">Bilder für Artikel können zur Offline-Nutzung heruntergeladen werden. 
-\nSie können diese Einstellung jederzeit in \'Durchsuchen\' → \'Optionen\' ändern.</string>
+    <string name="wikivoyage_download_pics_descr">Artikelbilder können für den Offline-Einsatz heruntergeladen werden.
+\nImmer verfügbar unter \'Durchsuchen\' → \'Optionen\'.</string>
     <string name="online_webpage_warning">Seite ist nur online abrufbar. Im Webbrowser öffnen?</string>
     <string name="delete_search_history">Suchverlauf löschen</string>
     <string name="purchase_dialog_travel_description">Für die Offlne Reiseführerfunktionalität, kaufen Sie einen der folgenden Artikel:</string>
@@ -3134,7 +3134,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="how_to_open_wiki_title">Wie öffnet man Wikipedia-Artikel?</string>
 <string name="popular_destinations">Beliebte Reiseziele</string>
     <string name="osmand_team">OsmAnd-Team</string>
-    <string name="shared_string_restart">Neustart</string>
+    <string name="shared_string_restart">App neu starten</string>
     <string name="show_images">Bilder anzeigen</string>
     <string name="purchase_cancelled_dialog_title">Sie haben ihr OsmAnd Live-Abonnement gekündigt</string>
     <string name="purchase_cancelled_dialog_descr">Erneuern Sie Ihr Abonnement, um weiterhin alle Funktionen nutzen zu können:</string>
