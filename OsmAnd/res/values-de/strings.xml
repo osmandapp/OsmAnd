@@ -2983,7 +2983,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
 \n • Kartenmarkierungen: Import auswählbarer Gruppen aus GPX-Dateien, Koordinateneingabe, neues Layout
 \n
 \n • OsmAnd Live-Abonnement unterstützt nun alle OsmAnd Funktionen</string>
-    <string name="one_tap_active">\"Einem Klick\" aktiv</string>
+    <string name="one_tap_active">\'Ein Klick\' aktiv</string>
     <string name="what_is_here">Was ist hier:</string>
     <string name="without_time_limit">Ohne Zeitbegrenzung</string>
     <string name="context_menu_read_full_article">Ganzen Artikel lesen</string>
