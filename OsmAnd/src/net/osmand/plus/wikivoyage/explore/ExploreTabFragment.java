@@ -214,7 +214,7 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadEv
 			boolean outdated = mainIndexItem != null && mainIndexItem.isOutdated();
 			File selectedTravelBook = app.getTravelDbHelper().getSelectedTravelBook();
 
-			if (selectedTravelBook == null || outdated) {
+			if (selectedTravelBook == null || (outdated && app.getSettings().SHOW_TRAVEL_UPDATE_CARD.get())) {
 				boolean showOtherMaps = false;
 				if (selectedTravelBook == null) {
 					List<IndexItem> items = downloadThread.getIndexes().getWikivoyageItems();
@@ -238,6 +238,7 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadEv
 							downloadThread.cancelDownload(mainIndexItem);
 							adapter.updateDownloadUpdateCard(false);
 						} else if (!downloadUpdateCard.isDownload()) {
+							app.getSettings().SHOW_TRAVEL_UPDATE_CARD.set(false);
 							removeDownloadUpdateCard();
 						} else if (downloadUpdateCard.isShowOtherMapsBtn()) {
 							Activity activity = getActivity();
@@ -258,7 +259,7 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadEv
 
 	private void addNeededMapsCard() {
 		final OsmandApplication app = getMyApplication();
-		if (app != null && !neededIndexItems.isEmpty() && adapter != null) {
+		if (app != null && !neededIndexItems.isEmpty() && adapter != null && app.getSettings().SHOW_TRAVEL_NEEDED_MAPS_CARD.get()) {
 			neededMapsCard = new TravelNeededMapsCard(app, nightMode, neededIndexItems);
 			neededMapsCard.setListener(new TravelNeededMapsCard.CardListener() {
 				@Override
@@ -277,6 +278,7 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadEv
 							adapter.updateNeededMapsCard(false);
 						}
 					} else {
+						app.getSettings().SHOW_TRAVEL_NEEDED_MAPS_CARD.set(false);
 						removeNeededMapsCard();
 					}
 				}
