@@ -177,6 +177,7 @@ public class RoutePlannerFrontEnd {
 			if (routeDirection != null) {
 				ctx.precalculatedRouteDirection = routeDirection.adopt(ctx);
 			}
+			ctx.calculationProgress.iteration++;
 			List<RouteSegmentResult> res = runNativeRouting(ctx, recalculationEnd);
 			if (res != null) {
 				new RouteResultPreparation().printResults(ctx, start, end, res);
