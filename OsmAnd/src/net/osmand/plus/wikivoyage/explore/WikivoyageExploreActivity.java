@@ -199,7 +199,7 @@ public class WikivoyageExploreActivity extends TabActivity implements DownloadEv
 			String selectedLang = data.getQueryParameter("lang");
 			if (!Algorithms.isEmpty(title) && !Algorithms.isEmpty(selectedLang)) {
 				long articleId = app.getTravelDbHelper().getArticleId(title, selectedLang);
-				if (articleId != -1) {
+				if (articleId != 0) {
 					WikivoyageArticleDialogFragment.showInstance(app, getSupportFragmentManager(), articleId, selectedLang);
 				}
 			}
