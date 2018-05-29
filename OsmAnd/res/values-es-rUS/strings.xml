@@ -2864,7 +2864,7 @@ Lon %2$s</string>
     <string name="shared_string_added">Añadido</string>
     <string name="marker_activated">Marcador «%s» activado.</string>
     <string name="one_tap_active_descr">Pulsa un marcador en el mapa para moverlo al primer lugar de los marcadores activos, sin abrir el menú contextual.</string>
-    <string name="one_tap_active">Activar con una pulsación</string>
+    <string name="one_tap_active">Activar «Una pulsación»</string>
     <string name="empty_state_av_notes">¡Tomar notas multimedia!</string>
     <string name="empty_state_av_notes_desc">Añade una nota de audio, vídeo o foto para cada punto del mapa, utilizando el controlador o el menú contextual.</string>
     <string name="notes_by_date">Notas por fecha</string>
@@ -2994,8 +2994,8 @@ Lon %2$s</string>
     <string name="shared_string_do">Sí</string>
     <string name="shared_string_only_with_wifi">Sólo con Wi-Fi</string>
     <string name="wikivoyage_download_pics">Descargar imágenes</string>
-    <string name="wikivoyage_download_pics_descr">Las imágenes de los artículos pueden descargarse para su uso sin conexión.
-\n Siempre puedes cambiar los ajustes en «Explorar» → «Opciones».</string>
+    <string name="wikivoyage_download_pics_descr">Las imágenes de los artículos pueden descargarse para su uso sin conexión. 
+\nSiempre disponible en «Explorar» → «Opciones».</string>
     <string name="shared_string_wifi_only">Sólo con Wi-Fi</string>
     <string name="select_travel_book">Marcar un libro de viaje</string>
     <string name="shared_string_travel_book">Libro de viajes</string>
@@ -3045,7 +3045,7 @@ Lon %2$s</string>
     <string name="osmand_team">Equipo de OsmAnd</string>
     <string name="maps_you_need_descr">Basado en los artículos favoritos, se recomienda descargar los siguientes mapas:</string>
     <string name="maps_you_need">Mapas que necesitas</string>
-    <string name="shared_string_restart">Reiniciar</string>
+    <string name="shared_string_restart">Reiniciar aplicación</string>
     <string name="purchase_cancelled_dialog_title">Has cancelado la suscripción de OsmAnd Live</string>
     <string name="purchase_cancelled_dialog_descr">Renueva la suscripción para continuar usando todas las funciones:</string>
 
