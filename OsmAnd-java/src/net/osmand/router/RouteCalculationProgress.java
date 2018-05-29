@@ -16,7 +16,7 @@ public class RouteCalculationProgress {
 	public int visitedSegments = 0;
 	
 	public int totalIterations = 1;
-	public int iteration = 1;
+	public int iteration = -1;
 	
 	public boolean isCancelled;
 	public boolean requestPrivateAccessRouting;
