@@ -168,9 +168,11 @@ public abstract class MenuController extends BaseMenuController implements Colla
 		builder.build(rootView);
 	}
 
-	public static MenuController getMenuController(MapActivity mapActivity,
-												   LatLon latLon, PointDescription pointDescription, Object object,
-												   MenuType menuType) {
+	public static MenuController getMenuController(@NonNull MapActivity mapActivity,
+												   @NonNull LatLon latLon,
+												   @NonNull PointDescription pointDescription,
+												   @Nullable Object object,
+												   @NonNull MenuType menuType) {
 		MenuController menuController = null;
 		if (object != null) {
 			if (object instanceof Amenity) {
@@ -414,14 +416,17 @@ public abstract class MenuController extends BaseMenuController implements Colla
 		return 0;
 	}
 
+	@Nullable
 	public Drawable getRightIcon() {
 		return null;
 	}
 
+	@Nullable
 	public Drawable getSecondLineTypeIcon() {
 		return null;
 	}
 
+	@Nullable
 	public Drawable getSubtypeIcon() {
 		return null;
 	}
@@ -450,10 +455,12 @@ public abstract class MenuController extends BaseMenuController implements Colla
 		return true;
 	}
 
+	@NonNull
 	public String getTypeStr() {
 		return "";
 	}
 
+	@NonNull
 	public String getSubtypeStr() {
 		return "";
 	}
@@ -517,22 +524,27 @@ public abstract class MenuController extends BaseMenuController implements Colla
 		return 0;
 	}
 
+	@NonNull
 	public String getCommonTypeStr() {
 		return "";
 	}
 
+	@NonNull
 	public String getNameStr() {
 		return pointDescription.getName();
 	}
 
+	@NonNull
 	public String getFirstNameStr() {
 		return "";
 	}
 
+	@Nullable
 	public List<TransportStopRoute> getTransportStopRoutes() {
 		return null;
 	}
 
+	@Nullable
 	protected List<TransportStopRoute> getSubTransportStopRoutes(boolean nearby) {
 		List<TransportStopRoute> allRoutes = getTransportStopRoutes();
 		if (allRoutes != null) {
@@ -548,10 +560,12 @@ public abstract class MenuController extends BaseMenuController implements Colla
 		return null;
 	}
 
+	@Nullable
 	public List<TransportStopRoute> getLocalTransportStopRoutes() {
 		return getSubTransportStopRoutes(false);
 	}
 
+	@Nullable
 	public List<TransportStopRoute> getNearbyTransportStopRoutes() {
 		return getSubTransportStopRoutes(true);
 	}

@@ -1,5 +1,6 @@
 package net.osmand.plus.mapcontextmenu.builders;
 
+import android.support.annotation.NonNull;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
@@ -19,7 +20,7 @@ import net.osmand.util.Algorithms;
 public class GpxItemMenuBuilder extends MenuBuilder {
 	private GpxDisplayItem item;
 
-	public GpxItemMenuBuilder(MapActivity mapActivity, GpxDisplayItem item) {
+	public GpxItemMenuBuilder(@NonNull MapActivity mapActivity, @NonNull GpxDisplayItem item) {
 		super(mapActivity);
 		this.item = item;
 	}

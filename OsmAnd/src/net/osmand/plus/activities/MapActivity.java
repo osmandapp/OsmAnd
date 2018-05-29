@@ -1551,6 +1551,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		return dashboardOnMap;
 	}
 
+	@NonNull
 	public MapContextMenu getContextMenu() {
 		return mapContextMenu;
 	}

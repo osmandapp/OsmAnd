@@ -1,6 +1,7 @@
 package net.osmand.plus.mapcontextmenu.controllers;
 
 import android.graphics.drawable.Drawable;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 
 import net.osmand.data.Amenity;
@@ -18,7 +19,6 @@ import net.osmand.plus.mapcontextmenu.builders.FavouritePointMenuBuilder;
 import net.osmand.plus.mapcontextmenu.editors.FavoritePointEditor;
 import net.osmand.plus.mapcontextmenu.editors.FavoritePointEditorFragment;
 import net.osmand.plus.transport.TransportStopRoute;
-import net.osmand.util.Algorithms;
 import net.osmand.util.OpeningHoursParser;
 
 import java.util.ArrayList;
@@ -30,7 +30,7 @@ public class FavouritePointMenuController extends MenuController {
 	private MapMarker mapMarker;
 	private List<TransportStopRoute> routes = new ArrayList<>();
 
-	public FavouritePointMenuController(MapActivity mapActivity, PointDescription pointDescription, final FavouritePoint fav) {
+	public FavouritePointMenuController(@NonNull MapActivity mapActivity, @NonNull PointDescription pointDescription, final @NonNull FavouritePoint fav) {
 		super(new FavouritePointMenuBuilder(mapActivity, fav), pointDescription, mapActivity);
 		this.fav = fav;
 
@@ -77,10 +77,13 @@ public class FavouritePointMenuController extends MenuController {
 
 	@Override
 	public boolean handleSingleTapOnMap() {
-		Fragment fragment = getMapActivity().getSupportFragmentManager().findFragmentByTag(FavoritePointEditor.TAG);
-		if (fragment != null) {
-			((FavoritePointEditorFragment)fragment).dismiss();
-			return true;
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			Fragment fragment = mapActivity.getSupportFragmentManager().findFragmentByTag(FavoritePointEditor.TAG);
+			if (fragment != null) {
+				((FavoritePointEditorFragment) fragment).dismiss();
+				return true;
+			}
 		}
 		return false;
 	}
@@ -102,7 +105,12 @@ public class FavouritePointMenuController extends MenuController {
 
 	@Override
 	public Drawable getRightIcon() {
-		return FavoriteImageDrawable.getOrCreate(getMapActivity().getMyApplication(), fav.getColor(), false);
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			return FavoriteImageDrawable.getOrCreate(mapActivity.getMyApplication(), fav.getColor(), false);
+		} else {
+			return null;
+		}
 	}
 
 	@Override
@@ -125,10 +133,16 @@ public class FavouritePointMenuController extends MenuController {
 		return R.string.shared_string_edit;
 	}
 
+	@NonNull
 	@Override
 	public String getTypeStr() {
-		return fav.getCategory().length() == 0 ?
-				getMapActivity().getString(R.string.shared_string_favorites) : fav.getCategory();
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			return fav.getCategory().length() == 0 ?
+					mapActivity.getString(R.string.shared_string_favorites) : fav.getCategory();
+		} else {
+			return "";
+		}
 	}
 
 	private FavouritePointMenuBuilder getBuilder() {

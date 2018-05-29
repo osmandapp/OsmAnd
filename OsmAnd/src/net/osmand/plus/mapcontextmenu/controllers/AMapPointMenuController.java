@@ -1,24 +1,22 @@
 package net.osmand.plus.mapcontextmenu.controllers;
 
 import android.graphics.drawable.Drawable;
-import android.view.View;
+import android.support.annotation.NonNull;
 
 import net.osmand.aidl.maplayer.point.AMapPoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
-import net.osmand.plus.views.TransportStopsLayer;
 import net.osmand.util.Algorithms;
 
-public class AMapPointMenuController  extends MenuController {
+public class AMapPointMenuController extends MenuController {
 
 	private AMapPoint point;
 
-	public AMapPointMenuController(MapActivity mapActivity, PointDescription pointDescription, final AMapPoint point) {
+	public AMapPointMenuController(@NonNull MapActivity mapActivity, @NonNull PointDescription pointDescription, @NonNull AMapPoint point) {
 		super(new MenuBuilder(mapActivity), pointDescription, mapActivity);
 		this.point = point;
 	}
@@ -62,6 +60,7 @@ public class AMapPointMenuController  extends MenuController {
 		}
 	}
 
+	@NonNull
 	@Override
 	public String getTypeStr() {
 		if (!Algorithms.isEmpty(point.getTypeName())) {
@@ -71,9 +70,15 @@ public class AMapPointMenuController  extends MenuController {
 		}
 	}
 
+	@NonNull
 	@Override
 	public String getCommonTypeStr() {
-		return getMapActivity().getString(R.string.shared_string_location);
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			return mapActivity.getString(R.string.shared_string_location);
+		} else {
+			return "";
+		}
 	}
 
 	@Override

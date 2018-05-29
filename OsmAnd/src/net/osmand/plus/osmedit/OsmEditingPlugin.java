@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
@@ -150,19 +151,19 @@ public class OsmEditingPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public void registerLayers(MapActivity activity) {
+	public void registerLayers(@NonNull MapActivity activity) {
 		osmBugsLayer = new OsmBugsLayer(activity, this);
 		osmEditsLayer = new OsmEditsLayer(activity, this);
 	}
 
-	public OsmEditsLayer getOsmEditsLayer(MapActivity activity) {
+	public OsmEditsLayer getOsmEditsLayer(@NonNull MapActivity activity) {
 		if (osmEditsLayer == null) {
 			registerLayers(activity);
 		}
 		return osmEditsLayer;
 	}
 
-	public OsmBugsLayer getBugsLayer(MapActivity activity) {
+	public OsmBugsLayer getBugsLayer(@NonNull MapActivity activity) {
 		if (osmBugsLayer == null) {
 			registerLayers(activity);
 		}

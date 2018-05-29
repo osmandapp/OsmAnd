@@ -1,6 +1,7 @@
 package net.osmand.plus.mapcontextmenu.controllers;
 
 import android.graphics.drawable.Drawable;
+import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
 import net.osmand.data.Amenity;
@@ -13,6 +14,7 @@ import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiFilter;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
@@ -41,7 +43,9 @@ public class AmenityMenuController extends MenuController {
 
 	private MapMarker marker;
 
-	public AmenityMenuController(final MapActivity mapActivity, PointDescription pointDescription, final Amenity amenity) {
+	public AmenityMenuController(@NonNull MapActivity mapActivity,
+								 @NonNull PointDescription pointDescription,
+								 @NonNull final Amenity amenity) {
 		super(new AmenityMenuBuilder(mapActivity, amenity), pointDescription, mapActivity);
 		this.amenity = amenity;
 		if (amenity.getType().getKeyName().equals("transportation")) {
@@ -71,10 +75,13 @@ public class AmenityMenuController extends MenuController {
 			leftTitleButtonController = new TitleButtonController() {
 				@Override
 				public void buttonPressed() {
-					WikipediaDialogFragment.showInstance(mapActivity, amenity);
+					MapActivity activity = getMapActivity();
+					if (activity != null) {
+						WikipediaDialogFragment.showInstance(activity, amenity);
+					}
 				}
 			};
-			leftTitleButtonController.caption = getMapActivity().getString(R.string.context_menu_read_article);
+			leftTitleButtonController.caption = mapActivity.getString(R.string.context_menu_read_article);
 			leftTitleButtonController.updateStateListDrawableIcon(R.drawable.ic_action_read_text, true);
 		}
 
@@ -151,6 +158,7 @@ public class AmenityMenuController extends MenuController {
 		return true;
 	}
 
+	@NonNull
 	@Override
 	public String getNameStr() {
 		String name = amenity.getName(
@@ -166,6 +174,7 @@ public class AmenityMenuController extends MenuController {
 		return name;
 	}
 
+	@NonNull
 	@Override
 	public String getFirstNameStr() {
 		if (marker != null) {
@@ -174,6 +183,7 @@ public class AmenityMenuController extends MenuController {
 		return super.getFirstNameStr();
 	}
 
+	@NonNull
 	@Override
 	public String getTypeStr() {
 		return getTypeStr(amenity);
@@ -191,6 +201,7 @@ public class AmenityMenuController extends MenuController {
 		return typeStr;
 	}
 
+	@NonNull
 	@Override
 	public String getCommonTypeStr() {
 		PoiCategory pc = amenity.getType();
@@ -253,40 +264,44 @@ public class AmenityMenuController extends MenuController {
 
 	private void processTransportStop() {
 		routes = new ArrayList<>();
-		List<TransportIndexRepository> reps = getMapActivity().getMyApplication()
-				.getResourceManager().searchTransportRepositories(amenity.getLocation().getLatitude(),
-						amenity.getLocation().getLongitude());
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			OsmandApplication app = mapActivity.getMyApplication();
+			List<TransportIndexRepository> reps = app
+					.getResourceManager().searchTransportRepositories(amenity.getLocation().getLatitude(),
+							amenity.getLocation().getLongitude());
 
-		boolean useEnglishNames = getMapActivity().getMyApplication().getSettings().usingEnglishNames();
-		boolean isSubwayEntrance = amenity.getSubType().equals("subway_entrance");
-		
-		for (TransportIndexRepository t : reps) {
-			ArrayList<TransportStop> ls = new ArrayList<>();
-			QuadRect ll = MapUtils.calculateLatLonBbox(amenity.getLocation().getLatitude(), amenity.getLocation().getLongitude(),
-					isSubwayEntrance ? 400 : 150);
-			t.searchTransportStops(ll.top, ll.left, ll.bottom, ll.right, -1, ls, null);
-			for (TransportStop tstop : ls) {
-				addRoutes(useEnglishNames, t, tstop,
-						(int) MapUtils.getDistance(tstop.getLocation(), amenity.getLocation()), isSubwayEntrance);
+			boolean useEnglishNames = app.getSettings().usingEnglishNames();
+			boolean isSubwayEntrance = amenity.getSubType().equals("subway_entrance");
+
+			for (TransportIndexRepository t : reps) {
+				ArrayList<TransportStop> ls = new ArrayList<>();
+				QuadRect ll = MapUtils.calculateLatLonBbox(amenity.getLocation().getLatitude(), amenity.getLocation().getLongitude(),
+						isSubwayEntrance ? 400 : 150);
+				t.searchTransportStops(ll.top, ll.left, ll.bottom, ll.right, -1, ls, null);
+				for (TransportStop tstop : ls) {
+					addRoutes(useEnglishNames, t, tstop,
+							(int) MapUtils.getDistance(tstop.getLocation(), amenity.getLocation()), isSubwayEntrance);
+				}
 			}
+			Collections.sort(routes, new Comparator<TransportStopRoute>() {
+
+				@Override
+				public int compare(TransportStopRoute o1, TransportStopRoute o2) {
+					if (o1.distance != o2.distance) {
+						return Algorithms.compare(o1.distance, o2.distance);
+					}
+					int i1 = Algorithms.extractFirstIntegerNumber(o1.desc);
+					int i2 = Algorithms.extractFirstIntegerNumber(o2.desc);
+					if (i1 != i2) {
+						return Algorithms.compare(i1, i2);
+					}
+					return o1.desc.compareTo(o2.desc);
+				}
+			});
+
+			builder.setRoutes(routes);
 		}
-		Collections.sort(routes, new Comparator<TransportStopRoute>() {
-
-			@Override
-			public int compare(TransportStopRoute o1, TransportStopRoute o2) {
-				if (o1.distance != o2.distance) {
-					return Algorithms.compare(o1.distance, o2.distance);
-				}
-				int i1 = Algorithms.extractFirstIntegerNumber(o1.desc);
-				int i2 = Algorithms.extractFirstIntegerNumber(o2.desc);
-				if (i1 != i2) {
-					return Algorithms.compare(i1, i2);
-				}
-				return o1.desc.compareTo(o2.desc);
-			}
-		});
-
-		builder.setRoutes(routes);
 	}
 
 	private void addRoutes(boolean useEnglishNames, TransportIndexRepository t, TransportStop s, int dist, boolean isSubwayEntrance) {

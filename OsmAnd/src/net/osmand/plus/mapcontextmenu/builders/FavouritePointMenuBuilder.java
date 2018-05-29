@@ -38,15 +38,14 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 	private final FavouritePoint fav;
 	private Object originObject;
 
-	public FavouritePointMenuBuilder(MapActivity mapActivity, final FavouritePoint fav) {
+	public FavouritePointMenuBuilder(@NonNull MapActivity mapActivity, final @NonNull FavouritePoint fav) {
 		super(mapActivity);
 		this.fav = fav;
 		setShowNearestWiki(true);
 		acquireOriginObject();
 	}
 
-	private void acquireOriginObject()
-	{
+	private void acquireOriginObject() {
 		String originObjectName = fav.getOriginObjectName();
 		if (originObjectName.length() > 0) {
 			if (originObjectName.startsWith(Amenity.class.getSimpleName())) {
@@ -100,7 +99,7 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 	}
 
 	private void buildDescriptionRow(final View view, final String description, int textColor,
-	                                 int textLinesLimit, boolean matchWidthDivider) {
+									 int textLinesLimit, boolean matchWidthDivider) {
 		if (!isFirstRow()) {
 			buildRowDivider(view);
 		}
@@ -129,8 +128,7 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 		llText.setOrientation(LinearLayout.VERTICAL);
 		ll.addView(llText);
 
-		TextView textPrefixView = null;
-		textPrefixView = new TextView(view.getContext());
+		TextView textPrefixView = new TextView(view.getContext());
 		LinearLayout.LayoutParams llTextParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 		llTextParams.setMargins(dpToPx(16f), dpToPx(8f), 0, 0);
 		textPrefixView.setLayoutParams(llTextParams);

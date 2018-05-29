@@ -1,6 +1,7 @@
 package net.osmand.plus.mapillary;
 
 import android.graphics.drawable.Drawable;
+import android.support.annotation.NonNull;
 
 import net.osmand.data.PointDescription;
 import net.osmand.plus.R;
@@ -13,7 +14,9 @@ public class MapillaryMenuController extends MenuController {
 
 	private MapillaryImage image;
 
-	public MapillaryMenuController(MapActivity mapActivity, PointDescription pointDescription, MapillaryImage image) {
+	public MapillaryMenuController(@NonNull MapActivity mapActivity,
+								   @NonNull PointDescription pointDescription,
+								   @NonNull MapillaryImage image) {
 		super(new MenuBuilder(mapActivity), pointDescription, mapActivity);
 		this.image = image;
 	}
@@ -27,9 +30,10 @@ public class MapillaryMenuController extends MenuController {
 
 	@Override
 	public boolean setActive(boolean active) {
-		if (image != null && getMenuType() == MenuType.STANDARD) {
-			MapillaryImageDialog.show(getMapActivity(), image.getLatitude(), image.getLongitude(),
-					image.getKey(), image.getSKey(), image.getCa(), getMapActivity().getMyApplication().getString(R.string.mapillary), null);
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null && image != null && getMenuType() == MenuType.STANDARD) {
+			MapillaryImageDialog.show(mapActivity, image.getLatitude(), image.getLongitude(),
+					image.getKey(), image.getSKey(), image.getCa(), mapActivity.getMyApplication().getString(R.string.mapillary), null);
 			return false;
 		} else {
 			return super.setActive(active);

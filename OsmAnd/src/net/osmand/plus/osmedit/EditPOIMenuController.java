@@ -1,6 +1,7 @@
 package net.osmand.plus.osmedit;
 
 import android.content.DialogInterface;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 
 import net.osmand.data.PointDescription;
@@ -23,7 +24,7 @@ public class EditPOIMenuController extends MenuController {
 	private String category;
 	private String actionStr;
 
-	public EditPOIMenuController(final MapActivity mapActivity, PointDescription pointDescription, OsmPoint osmPoint) {
+	public EditPOIMenuController(@NonNull MapActivity mapActivity, @NonNull PointDescription pointDescription, @NonNull OsmPoint osmPoint) {
 		super(new EditPOIMenuBuilder(mapActivity, osmPoint), pointDescription, mapActivity);
 		this.osmPoint = osmPoint;
 		plugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
@@ -34,71 +35,77 @@ public class EditPOIMenuController extends MenuController {
 		leftTitleButtonController = new TitleButtonController() {
 			@Override
 			public void buttonPressed() {
-				if (plugin != null) {
+				MapActivity activity = getMapActivity();
+				if (plugin != null && activity != null) {
 					SendPoiDialogFragment sendPoiDialogFragment =
 							SendPoiDialogFragment.createInstance(new OsmPoint[]{getOsmPoint()}, SendPoiDialogFragment.PoiUploaderType.SIMPLE);
-					sendPoiDialogFragment.show(getMapActivity().getSupportFragmentManager(), SendPoiDialogFragment.TAG);
+					sendPoiDialogFragment.show(activity.getSupportFragmentManager(), SendPoiDialogFragment.TAG);
 				}
 			}
 		};
-		leftTitleButtonController.caption = getMapActivity().getString(R.string.shared_string_upload);
+		leftTitleButtonController.caption = mapActivity.getString(R.string.shared_string_upload);
 		leftTitleButtonController.updateStateListDrawableIcon(R.drawable.ic_action_export, true);
 
 		rightTitleButtonController = new TitleButtonController() {
 			@Override
 			public void buttonPressed() {
-				AlertDialog.Builder bld = new AlertDialog.Builder(getMapActivity());
-				bld.setMessage(R.string.recording_delete_confirm);
-				bld.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
+				MapActivity activity = getMapActivity();
+				if (activity != null) {
+					AlertDialog.Builder bld = new AlertDialog.Builder(activity);
+					bld.setMessage(R.string.recording_delete_confirm);
+					bld.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
 
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						if (plugin != null) {
-							boolean deleted = false;
-							OsmPoint point = getOsmPoint();
-							if (point instanceof OsmNotesPoint) {
-								deleted = plugin.getDBBug().deleteAllBugModifications((OsmNotesPoint) point);
-							} else if (point instanceof OpenstreetmapPoint) {
-								deleted = plugin.getDBPOI().deletePOI((OpenstreetmapPoint) point);
-							}
-							if (deleted) {
-								getMapActivity().getContextMenu().close();
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							MapActivity a = getMapActivity();
+							if (plugin != null && a != null) {
+								boolean deleted = false;
+								OsmPoint point = getOsmPoint();
+								if (point instanceof OsmNotesPoint) {
+									deleted = plugin.getDBBug().deleteAllBugModifications((OsmNotesPoint) point);
+								} else if (point instanceof OpenstreetmapPoint) {
+									deleted = plugin.getDBPOI().deletePOI((OpenstreetmapPoint) point);
+								}
+								if (deleted) {
+									a.getContextMenu().close();
+								}
 							}
 						}
-					}
-				});
-				bld.setNegativeButton(R.string.shared_string_no, null);
-				bld.show();
+					});
+					bld.setNegativeButton(R.string.shared_string_no, null);
+					bld.show();
+				}
 			}
 		};
-		rightTitleButtonController.caption = getMapActivity().getString(R.string.shared_string_delete);
+		rightTitleButtonController.caption = mapActivity.getString(R.string.shared_string_delete);
 		rightTitleButtonController.updateStateListDrawableIcon(R.drawable.ic_action_delete_dark, true);
 
 		category = getCategory();
 
 		if (osmPoint.getGroup() == OsmPoint.Group.POI) {
-			if(osmPoint.getAction() == Action.DELETE) {
-				actionStr = getMapActivity().getString(R.string.osm_edit_deleted_poi);
-			} else if(osmPoint.getAction() == Action.MODIFY) {
-				actionStr = getMapActivity().getString(R.string.osm_edit_modified_poi);
-			} else/* if(osmPoint.getAction() == Action.CREATE) */{
-				actionStr = getMapActivity().getString(R.string.osm_edit_created_poi);
+			if (osmPoint.getAction() == Action.DELETE) {
+				actionStr = mapActivity.getString(R.string.osm_edit_deleted_poi);
+			} else if (osmPoint.getAction() == Action.MODIFY) {
+				actionStr = mapActivity.getString(R.string.osm_edit_modified_poi);
+			} else/* if(osmPoint.getAction() == Action.CREATE) */ {
+				actionStr = mapActivity.getString(R.string.osm_edit_created_poi);
 			}
 		} else if (osmPoint.getGroup() == OsmPoint.Group.BUG) {
-			if(osmPoint.getAction() == Action.DELETE) {
-				actionStr = getMapActivity().getString(R.string.osm_edit_removed_note);
-			} else if(osmPoint.getAction() == Action.MODIFY) {
-				actionStr = getMapActivity().getString(R.string.osm_edit_commented_note);
-			} else if(osmPoint.getAction() == Action.REOPEN) {
-				actionStr = getMapActivity().getString(R.string.osm_edit_reopened_note);
-			} else/* if(osmPoint.getAction() == Action.CREATE) */{
-				actionStr = getMapActivity().getString(R.string.osm_edit_created_note);
+			if (osmPoint.getAction() == Action.DELETE) {
+				actionStr = mapActivity.getString(R.string.osm_edit_removed_note);
+			} else if (osmPoint.getAction() == Action.MODIFY) {
+				actionStr = mapActivity.getString(R.string.osm_edit_commented_note);
+			} else if (osmPoint.getAction() == Action.REOPEN) {
+				actionStr = mapActivity.getString(R.string.osm_edit_reopened_note);
+			} else/* if(osmPoint.getAction() == Action.CREATE) */ {
+				actionStr = mapActivity.getString(R.string.osm_edit_created_note);
 			}
 		} else {
 			actionStr = "";
 		}
 	}
 
+	@NonNull
 	@Override
 	public String getTypeStr() {
 		return category;
@@ -152,8 +159,9 @@ public class EditPOIMenuController extends MenuController {
 			OpenstreetmapPoint osmP = (OpenstreetmapPoint) osmPoint;
 			int iconResId = 0;
 			String poiTranslation = osmP.getEntity().getTag(EditPoiData.POI_TYPE_TAG);
-			if (poiTranslation != null) {
-				Map<String, PoiType> poiTypeMap = getMapActivity().getMyApplication().getPoiTypes().getAllTranslatedNames(false);
+			MapActivity mapActivity = getMapActivity();
+			if (poiTranslation != null && mapActivity != null) {
+				Map<String, PoiType> poiTypeMap = mapActivity.getMyApplication().getPoiTypes().getAllTranslatedNames(false);
 				PoiType poiType = poiTypeMap.get(poiTranslation.toLowerCase());
 				if (poiType != null) {
 					String id = null;

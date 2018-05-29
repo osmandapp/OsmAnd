@@ -59,7 +59,6 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.activities.TabActivity.TabItem;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
-import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
@@ -325,7 +324,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			return "";
 		}
 
-		public String getType(Context ctx) {
+		public String getType(@NonNull Context ctx) {
 			if (this.isAudio()) {
 				return ctx.getResources().getString(R.string.shared_string_audio);
 			} else if (this.isVideo()) {
@@ -1876,7 +1875,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		}
 	}
 
-	public void playRecording(final Context ctx, final Recording r) {
+	public void playRecording(final @NonNull Context ctx, final @NonNull Recording r) {
 		if (r.isVideo()) {
 			Intent vint = new Intent(Intent.ACTION_VIEW);
 			vint.setDataAndType(AndroidUtils.getUriForFile(ctx, r.file), "video/*");

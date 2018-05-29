@@ -214,7 +214,7 @@ public class MenuBuilder {
 		}
 	}
 
-	public MenuBuilder(MapActivity mapActivity) {
+	public MenuBuilder(@NonNull MapActivity mapActivity) {
 		this.mapActivity = mapActivity;
 		this.app = mapActivity.getMyApplication();
 		this.plainMenuItems = new LinkedList<>();

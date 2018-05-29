@@ -1,6 +1,7 @@
 package net.osmand.plus.mapcontextmenu.controllers;
 
 import android.graphics.drawable.Drawable;
+import android.support.annotation.NonNull;
 
 import net.osmand.data.PointDescription;
 import net.osmand.plus.ApplicationMode;
@@ -8,11 +9,10 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
-import net.osmand.plus.mapillary.MapillaryPlugin;
 
 public class MyLocationMenuController  extends MenuController {
 
-	public MyLocationMenuController(MapActivity mapActivity, PointDescription pointDescription) {
+	public MyLocationMenuController(@NonNull MapActivity mapActivity, @NonNull PointDescription pointDescription) {
 		super(new MenuBuilder(mapActivity), pointDescription, mapActivity);
 		builder.setShowNearestWiki(true);
 	}
@@ -26,14 +26,21 @@ public class MyLocationMenuController  extends MenuController {
 		return getLatLon();
 	}
 
+	@NonNull
 	@Override
 	public String getTypeStr() {
 		return getPointDescription().getTypeName();
 	}
 
+	@NonNull
 	@Override
 	public String getCommonTypeStr() {
-		return getMapActivity().getString(R.string.shared_string_location);
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			return mapActivity.getString(R.string.shared_string_location);
+		} else {
+			return "";
+		}
 	}
 
 	@Override
@@ -43,7 +50,12 @@ public class MyLocationMenuController  extends MenuController {
 
 	@Override
 	public Drawable getRightIcon() {
-		ApplicationMode appMode = getMapActivity().getMyApplication().getSettings().getApplicationMode();
-		return getMapActivity().getResources().getDrawable(appMode.getResourceLocationDay());
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			ApplicationMode appMode = mapActivity.getMyApplication().getSettings().getApplicationMode();
+			return mapActivity.getResources().getDrawable(appMode.getResourceLocationDay());
+		} else {
+			return null;
+		}
 	}
 }

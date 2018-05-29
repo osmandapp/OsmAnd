@@ -1,12 +1,14 @@
 package net.osmand.plus.mapcontextmenu.controllers;
 
 import android.graphics.drawable.Drawable;
+import android.support.annotation.NonNull;
 
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.search.SearchHistoryFragment;
+import net.osmand.plus.helpers.AvoidSpecificRoads;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.routing.RoutingHelper;
@@ -16,18 +18,23 @@ public class PointDescriptionMenuController extends MenuController {
 
 	private boolean hasTypeInDescription;
 
-	public PointDescriptionMenuController(final MapActivity mapActivity, final PointDescription pointDescription) {
+	public PointDescriptionMenuController(@NonNull MapActivity mapActivity,
+										  @NonNull PointDescription pointDescription) {
 		super(new MenuBuilder(mapActivity), pointDescription, mapActivity);
 		builder.setShowNearestWiki(true);
 		initData();
 
-		final OsmandApplication app = mapActivity.getMyApplication();
-		final RoutingHelper routingHelper = app.getRoutingHelper();
+		OsmandApplication app = mapActivity.getMyApplication();
+		RoutingHelper routingHelper = app.getRoutingHelper();
 		if (routingHelper.isRoutePlanningMode() || routingHelper.isFollowingMode()) {
 			leftTitleButtonController = new TitleButtonController() {
 				@Override
 				public void buttonPressed() {
-					app.getAvoidSpecificRoads().addImpassableRoad(mapActivity, getLatLon(), false, null, false);
+					MapActivity activity = getMapActivity();
+					if (activity != null) {
+						AvoidSpecificRoads roads = activity.getMyApplication().getAvoidSpecificRoads();
+						roads.addImpassableRoad(activity, getLatLon(), false, null, false);
+					}
 				}
 			};
 			leftTitleButtonController.caption = mapActivity.getString(R.string.avoid_road);
@@ -73,6 +80,7 @@ public class PointDescriptionMenuController extends MenuController {
 		}
 	}
 
+	@NonNull
 	@Override
 	public String getTypeStr() {
 		if (hasTypeInDescription) {
@@ -82,9 +90,15 @@ public class PointDescriptionMenuController extends MenuController {
 		}
 	}
 
+	@NonNull
 	@Override
 	public String getCommonTypeStr() {
-		return getMapActivity().getString(R.string.shared_string_location);
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			return mapActivity.getString(R.string.shared_string_location);
+		} else {
+			return "";
+		}
 	}
 
 	@Override

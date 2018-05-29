@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.widget.Toast;
 
@@ -35,6 +36,7 @@ import net.osmand.plus.views.DownloadedRegionsLayer.DownloadMapObject;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
+import java.lang.ref.WeakReference;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -54,7 +56,7 @@ public class MapDataMenuController extends MenuController {
 
 	private DownloadIndexesThread downloadThread;
 
-	public MapDataMenuController(final MapActivity mapActivity, PointDescription pointDescription, final DownloadMapObject mapObject) {
+	public MapDataMenuController(@NonNull MapActivity mapActivity, @NonNull PointDescription pointDescription, final @NonNull DownloadMapObject mapObject) {
 		super(new MenuBuilder(mapActivity), pointDescription, mapActivity);
 		this.mapObject = mapObject;
 		indexItem = mapObject.getIndexItem();
@@ -63,7 +65,7 @@ public class MapDataMenuController extends MenuController {
 		downloadThread = app.getDownloadThread();
 		if (indexItem != null) {
 			downloaded = indexItem.isDownloaded();
-			backuped = indexItem.getBackupFile(getMapActivity().getMyApplication()).exists();
+			backuped = indexItem.getBackupFile(app).exists();
 			otherIndexItems = new LinkedList<>(downloadThread.getIndexes().getIndexItems(mapObject.getWorldRegion()));
 			otherIndexItems.remove(indexItem);
 		} else if (localIndexInfo != null) {
@@ -88,64 +90,68 @@ public class MapDataMenuController extends MenuController {
 		leftDownloadButtonController = new TitleButtonController() {
 			@Override
 			public void buttonPressed() {
+				MapActivity activity = getMapActivity();
 				if (backuped) {
 					restoreFromBackup();
-				} else if (indexItem != null) {
+				} else if (indexItem != null && activity != null) {
 					if ((indexItem.getType() == DownloadActivityType.SRTM_COUNTRY_FILE
 							|| indexItem.getType() == DownloadActivityType.HILLSHADE_FILE)
 							&& srtmDisabled) {
-						getMapActivity().getContextMenu().close();
+						activity.getContextMenu().close();
 
 						if (srtmNeedsInstallation) {
 							OsmandPlugin plugin = OsmandPlugin.getPlugin(SRTMPlugin.class);
 							if (plugin != null) {
-								mapActivity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(plugin.getInstallURL())));
+								activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(plugin.getInstallURL())));
 							} else {
-								Toast.makeText(mapActivity.getApplicationContext(),
-										mapActivity.getString(R.string.activate_srtm_plugin), Toast.LENGTH_LONG).show();
+								Toast.makeText(activity.getApplicationContext(),
+										activity.getString(R.string.activate_srtm_plugin), Toast.LENGTH_LONG).show();
 							}
 						} else {
-							mapActivity.startActivity(new Intent(mapActivity, mapActivity.getMyApplication().getAppCustomization()
+							activity.startActivity(new Intent(activity, activity.getMyApplication().getAppCustomization()
 									.getPluginsActivity()));
-							Toast.makeText(mapActivity, mapActivity.getString(R.string.activate_srtm_plugin),
+							Toast.makeText(activity, activity.getString(R.string.activate_srtm_plugin),
 									Toast.LENGTH_SHORT).show();
 						}
 					} else if (!downloaded || indexItem.isOutdated()) {
-						new DownloadValidationManager(app).startDownload(mapActivity, indexItem);
+						new DownloadValidationManager(app).startDownload(activity, indexItem);
 					} else if (isLiveUpdatesOn()) {
-						LiveUpdatesHelper.runLiveUpdate(mapActivity, indexItem.getTargetFileName(), true);
+						LiveUpdatesHelper.runLiveUpdate(activity, indexItem.getTargetFileName(), true);
 					}
 				}
 			}
 		};
-		leftDownloadButtonController.caption = getMapActivity().getString(R.string.shared_string_download);
+		leftDownloadButtonController.caption = mapActivity.getString(R.string.shared_string_download);
 		leftDownloadButtonController.updateStateListDrawableIcon(R.drawable.ic_action_import, true);
 
 		rightDownloadButtonController = new TitleButtonController() {
 			@Override
 			public void buttonPressed() {
-				getMapActivity().getContextMenu().close();
+				MapActivity activity = getMapActivity();
+				if (activity != null) {
+					activity.getContextMenu().close();
 
-				Map<Object, IContextMenuProvider> selectedObjects = new HashMap<>();
-				IContextMenuProvider provider = mapActivity.getMapLayers().getDownloadedRegionsLayer();
-				if (otherIndexItems != null && otherIndexItems.size() > 0) {
-					for (IndexItem item : otherIndexItems) {
-						selectedObjects.put(
-								new DownloadMapObject(mapObject.getDataObject(), mapObject.getWorldRegion(), item, null),
-								provider);
+					Map<Object, IContextMenuProvider> selectedObjects = new HashMap<>();
+					IContextMenuProvider provider = activity.getMapLayers().getDownloadedRegionsLayer();
+					if (otherIndexItems != null && otherIndexItems.size() > 0) {
+						for (IndexItem item : otherIndexItems) {
+							selectedObjects.put(
+									new DownloadMapObject(mapObject.getDataObject(), mapObject.getWorldRegion(), item, null),
+									provider);
+						}
+					} else if (otherLocalIndexInfos != null && otherLocalIndexInfos.size() > 0) {
+						for (LocalIndexInfo info : otherLocalIndexInfos) {
+							selectedObjects.put(
+									new DownloadMapObject(mapObject.getDataObject(), mapObject.getWorldRegion(), null, info),
+									provider);
+						}
 					}
-				} else if (otherLocalIndexInfos != null && otherLocalIndexInfos.size() > 0) {
-					for (LocalIndexInfo info : otherLocalIndexInfos) {
-						selectedObjects.put(
-								new DownloadMapObject(mapObject.getDataObject(), mapObject.getWorldRegion(), null, info),
-								provider);
-					}
+					activity.getContextMenu().getMultiSelectionMenu().show(
+							activity.getContextMenu().getLatLon(), selectedObjects);
 				}
-				mapActivity.getContextMenu().getMultiSelectionMenu().show(
-						mapActivity.getContextMenu().getLatLon(), selectedObjects);
 			}
 		};
-		rightDownloadButtonController.caption = getMapActivity().getString(R.string.download_select_map_types);
+		rightDownloadButtonController.caption = mapActivity.getString(R.string.download_select_map_types);
 		rightDownloadButtonController.updateStateListDrawableIcon(R.drawable.ic_plugin_srtm, true);
 
 		bottomTitleButtonController = new TitleButtonController() {
@@ -162,7 +168,7 @@ public class MapDataMenuController extends MenuController {
 				}
 			}
 		};
-		bottomTitleButtonController.caption = getMapActivity().getString(R.string.shared_string_delete);
+		bottomTitleButtonController.caption = mapActivity.getString(R.string.shared_string_delete);
 		bottomTitleButtonController.updateStateListDrawableIcon(R.drawable.ic_action_delete_dark, true);
 
 		titleProgressController = new TitleProgressController() {
@@ -184,7 +190,12 @@ public class MapDataMenuController extends MenuController {
 	}
 
 	private boolean isLiveUpdatesOn() {
-		return getMapActivity().getMyApplication().getSettings().IS_LIVE_UPDATES_ON.get();
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			return mapActivity.getMyApplication().getSettings().IS_LIVE_UPDATES_ON.get();
+		} else {
+			return false;
+		}
 	}
 
 	@Override
@@ -210,7 +221,10 @@ public class MapDataMenuController extends MenuController {
 			mb = indexItem.getArchiveSizeMB();
 		}
 		if (mb != 0) {
-			return getMapActivity().getString(R.string.file_size_in_mb, mb);
+			MapActivity mapActivity = getMapActivity();
+			if (mapActivity != null) {
+				return mapActivity.getString(R.string.file_size_in_mb, mb);
+			}
 		}
 		return "";
 	}
@@ -253,17 +267,21 @@ public class MapDataMenuController extends MenuController {
 		}
 	}
 
+	@NonNull
 	@Override
 	public String getTypeStr() {
-		String res;
-		if (mapObject.getWorldRegion().getSuperregion() != null) {
-			res = mapObject.getWorldRegion().getSuperregion().getLocaleName();
-		} else {
-			res = getMapActivity().getString(R.string.shared_string_map);
-		}
-		DownloadActivityType downloadActivityType = getDownloadActivityType();
-		if (downloadActivityType != null) {
-			res += ", " + downloadActivityType.getString(getMapActivity());
+		String res = "";
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			if (mapObject.getWorldRegion().getSuperregion() != null) {
+				res = mapObject.getWorldRegion().getSuperregion().getLocaleName();
+			} else {
+				res = mapActivity.getString(R.string.shared_string_map);
+			}
+			DownloadActivityType downloadActivityType = getDownloadActivityType();
+			if (downloadActivityType != null) {
+				res += ", " + downloadActivityType.getString(mapActivity);
+			}
 		}
 		return res;
 	}
@@ -275,17 +293,21 @@ public class MapDataMenuController extends MenuController {
 
 	@Override
 	public void addPlainMenuItems(String typeStr, PointDescription pointDescription, LatLon latLon) {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity == null) {
+			return;
+		}
 		if (indexItem != null) {
-			addPlainMenuItem(R.drawable.ic_action_info_dark, null, indexItem.getType().getString(getMapActivity()), false, false, null);
+			addPlainMenuItem(R.drawable.ic_action_info_dark, null, indexItem.getType().getString(mapActivity), false, false, null);
 			StringBuilder sizeStr = new StringBuilder();
-			sizeStr.append(indexItem.getSizeDescription(getMapActivity()));
+			sizeStr.append(indexItem.getSizeDescription(mapActivity));
 			if (backuped) {
-				sizeStr.append(" — ").append(LocalIndexType.DEACTIVATED.getHumanString(getMapActivity()));
+				sizeStr.append(" — ").append(LocalIndexType.DEACTIVATED.getHumanString(mapActivity));
 			}
 			addPlainMenuItem(R.drawable.ic_action_info_dark, null, sizeStr.toString(), false, false, null);
 		} else if (localIndexInfo != null) {
 			if (getDownloadActivityType() != null) {
-				addPlainMenuItem(R.drawable.ic_action_info_dark, null, getDownloadActivityType().getString(getMapActivity()), false, false, null);
+				addPlainMenuItem(R.drawable.ic_action_info_dark, null, getDownloadActivityType().getString(mapActivity), false, false, null);
 			}
 			StringBuilder sizeStr = new StringBuilder();
 			if (localIndexInfo.getSize() >= 0) {
@@ -297,9 +319,9 @@ public class MapDataMenuController extends MenuController {
 			}
 			if (backuped) {
 				if (sizeStr.length() > 0) {
-					sizeStr.append(" — ").append(LocalIndexType.DEACTIVATED.getHumanString(getMapActivity()));
+					sizeStr.append(" — ").append(LocalIndexType.DEACTIVATED.getHumanString(mapActivity));
 				} else {
-					sizeStr.append(LocalIndexType.DEACTIVATED.getHumanString(getMapActivity()));
+					sizeStr.append(LocalIndexType.DEACTIVATED.getHumanString(mapActivity));
 				}
 			}
 			addPlainMenuItem(R.drawable.ic_action_info_dark, null, sizeStr.toString(), false, false, null);
@@ -326,11 +348,11 @@ public class MapDataMenuController extends MenuController {
 				b.insert(0, population.charAt(i));
 				k++;
 			}
-			addPlainMenuItem(R.drawable.ic_action_info_dark, null, getMapActivity().getResources().getString(R.string.poi_population)
+			addPlainMenuItem(R.drawable.ic_action_info_dark, null, mapActivity.getResources().getString(R.string.poi_population)
 					+ ": " + b, false, false, null);
 		}
 		if (indexItem != null) {
-			DateFormat dateFormat = android.text.format.DateFormat.getMediumDateFormat(getMapActivity());
+			DateFormat dateFormat = android.text.format.DateFormat.getMediumDateFormat(mapActivity);
 			addPlainMenuItem(R.drawable.ic_action_data, null, indexItem.getRemoteDate(dateFormat), false, false, null);
 		} else if (localIndexInfo != null) {
 			addPlainMenuItem(R.drawable.ic_action_data, null, localIndexInfo.getDescription(), false, false, null);
@@ -355,7 +377,10 @@ public class MapDataMenuController extends MenuController {
 	@Override
 	public void updateData() {
 		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null && indexItem == null) {
+		if (mapActivity == null) {
+			return;
+		}
+		if (indexItem == null) {
 			otherIndexItems = new LinkedList<>(downloadThread.getIndexes().getIndexItems(mapObject.getWorldRegion()));
 			Iterator<IndexItem> it = otherIndexItems.iterator();
 			while (it.hasNext()) {
@@ -439,117 +464,51 @@ public class MapDataMenuController extends MenuController {
 		}
 	}
 
-	public void deleteItem(final File fl) {
-		final OsmandApplication app = getMapActivity().getMyApplication();
-		if (fl.exists()) {
-			AlertDialog.Builder confirm = new AlertDialog.Builder(getMapActivity());
-			confirm.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					new AsyncTask<Void, Void, Void>() {
-
-						@Override
-						protected void onPreExecute() {
-							getMapActivity().getContextMenu().close();
+	private void deleteItem(final File file) {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			OsmandApplication app = mapActivity.getMyApplication();
+			if (file.exists()) {
+				AlertDialog.Builder confirm = new AlertDialog.Builder(getMapActivity());
+				confirm.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						MapActivity activity = getMapActivity();
+						if (activity != null) {
+							new DeleteFileTask(activity, file).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
 						}
-
-						@Override
-						protected Void doInBackground(Void... params) {
-							boolean successfull = Algorithms.removeAllFiles(fl.getAbsoluteFile());
-							if (successfull) {
-								app.getResourceManager().closeFile(fl.getName());
-							}
-							app.getDownloadThread().updateLoadedFiles();
-							return null;
-						}
-
-						protected void onPostExecute(Void result) {
-							getMapActivity().refreshMap();
-						}
-
-					}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
-				}
-			});
-			confirm.setNegativeButton(R.string.shared_string_no, null);
-			String fn;
-			if (indexItem != null) {
-				fn = FileNameTranslationHelper.getFileName(getMapActivity(), app.getRegions(),
-						indexItem.getVisibleName(getMapActivity(), app.getRegions()));
-			} else {
-				fn = getPointDescription().getName();
-			}
-			confirm.setMessage(getMapActivity().getString(R.string.delete_confirmation_msg, fn));
-			confirm.show();
-		}
-	}
-
-	public void restoreFromBackup() {
-		final OsmandApplication app = getMapActivity().getMyApplication();
-		new AsyncTask<Void, Void, Void>() {
-
-			@Override
-			protected void onPreExecute() {
-				getMapActivity().getContextMenu().close();
-			}
-
-			@Override
-			protected Void doInBackground(Void... params) {
-				if (localIndexInfo != null) {
-					LocalIndexInfo info = localIndexInfo;
-					move(new File(info.getPathToData()), getFileToRestore(info));
-					app.getResourceManager().reloadIndexes(IProgress.EMPTY_PROGRESS, new ArrayList<String>());
-					app.getDownloadThread().updateLoadedFiles();
-				} else if (indexItem != null) {
-					move(indexItem.getBackupFile(app), indexItem.getTargetFile(app));
-					app.getResourceManager().reloadIndexes(IProgress.EMPTY_PROGRESS, new ArrayList<String>());
-					app.getDownloadThread().updateLoadedFiles();
-				}
-				return null;
-			}
-
-			protected void onPostExecute(Void result) {
-				getMapActivity().refreshMap();
-			}
-
-		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
-	}
-
-	private boolean move(File from, File to) {
-		if (!to.getParentFile().exists()) {
-			to.getParentFile().mkdirs();
-		}
-		return from.renameTo(to);
-	}
-
-	private File getFileToRestore(LocalIndexInfo i) {
-		if (i.isBackupedData()) {
-			final OsmandApplication app = getMapActivity().getMyApplication();
-			File parent = new File(i.getPathToData()).getParentFile();
-			if (i.getOriginalType() == LocalIndexType.MAP_DATA) {
-				if (i.getFileName().endsWith(IndexConstants.BINARY_ROAD_MAP_INDEX_EXT)) {
-					parent = app.getAppPath(IndexConstants.ROADS_INDEX_DIR);
+					}
+				});
+				confirm.setNegativeButton(R.string.shared_string_no, null);
+				String fn;
+				if (indexItem != null) {
+					fn = FileNameTranslationHelper.getFileName(getMapActivity(), app.getRegions(),
+							indexItem.getVisibleName(getMapActivity(), app.getRegions()));
 				} else {
-					parent = app.getAppPath(IndexConstants.MAPS_PATH);
+					fn = getPointDescription().getName();
 				}
-			} else if (i.getOriginalType() == LocalIndexType.TILES_DATA) {
-				parent = app.getAppPath(IndexConstants.TILES_INDEX_DIR);
-			} else if (i.getOriginalType() == LocalIndexType.SRTM_DATA) {
-				parent = app.getAppPath(IndexConstants.SRTM_INDEX_DIR);
-			} else if (i.getOriginalType() == LocalIndexType.WIKI_DATA) {
-				parent = app.getAppPath(IndexConstants.WIKI_INDEX_DIR);
-			} else if (i.getOriginalType() == LocalIndexType.TRAVEL_DATA) {
-				parent = app.getAppPath(IndexConstants.WIKIVOYAGE_INDEX_DIR);
-			} else if (i.getOriginalType() == LocalIndexType.TTS_VOICE_DATA) {
-				parent = app.getAppPath(IndexConstants.VOICE_INDEX_DIR);
-			} else if (i.getOriginalType() == LocalIndexType.VOICE_DATA) {
-				parent = app.getAppPath(IndexConstants.VOICE_INDEX_DIR);
+				confirm.setMessage(mapActivity.getString(R.string.delete_confirmation_msg, fn));
+				confirm.show();
 			}
-			return new File(parent, i.getFileName());
 		}
-		return new File(i.getPathToData());
 	}
 
-	public DownloadActivityType getDownloadActivityType() {
+	private void restoreFromBackup() {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			RestoreFromBackupTask restoreFromBackupTask = null;
+			if (localIndexInfo != null) {
+				restoreFromBackupTask = new RestoreFromBackupTask(mapActivity, localIndexInfo);
+			} else if (indexItem != null) {
+				restoreFromBackupTask = new RestoreFromBackupTask(mapActivity, indexItem);
+			}
+			if (restoreFromBackupTask != null) {
+				restoreFromBackupTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
+			}
+		}
+	}
+
+	private DownloadActivityType getDownloadActivityType() {
 		if (indexItem != null) {
 			return indexItem.getType();
 		} else if (localIndexInfo != null) {
@@ -575,6 +534,135 @@ public class MapDataMenuController extends MenuController {
 			}
 		} else {
 			return null;
+		}
+	}
+
+	private static class DeleteFileTask extends AsyncTask<Void, Void, Void> {
+
+		private File file;
+		private WeakReference<MapActivity> mapActivityRef;
+		private OsmandApplication app;
+
+		DeleteFileTask(@NonNull MapActivity mapActivity, @NonNull File file) {
+			this.file = file;
+			this.mapActivityRef = new WeakReference<>(mapActivity);
+			this.app = mapActivity.getMyApplication();
+		}
+
+		@Override
+		protected void onPreExecute() {
+			MapActivity mapActivity = mapActivityRef.get();
+			if (mapActivity != null) {
+				mapActivity.getContextMenu().close();
+			}
+		}
+
+		@Override
+		protected Void doInBackground(Void... params) {
+			boolean successfull = Algorithms.removeAllFiles(file.getAbsoluteFile());
+			if (successfull) {
+				app.getResourceManager().closeFile(file.getName());
+			}
+			app.getDownloadThread().updateLoadedFiles();
+			return null;
+		}
+
+		protected void onPostExecute(Void result) {
+			MapActivity mapActivity = mapActivityRef.get();
+			if (mapActivity != null) {
+				mapActivity.refreshMap();
+			}
+		}
+
+	}
+
+	private static class RestoreFromBackupTask extends AsyncTask<Void, Void, Void> {
+
+		private WeakReference<MapActivity> mapActivityRef;
+		private OsmandApplication app;
+
+		private LocalIndexInfo localIndexInfo;
+		private IndexItem indexItem;
+
+		RestoreFromBackupTask(@NonNull MapActivity mapActivity, @NonNull LocalIndexInfo localIndexInfo) {
+			this.mapActivityRef = new WeakReference<>(mapActivity);
+			this.app = mapActivity.getMyApplication();
+			this.localIndexInfo = localIndexInfo;
+		}
+
+		RestoreFromBackupTask(@NonNull MapActivity mapActivity, @NonNull IndexItem indexItem) {
+			this.mapActivityRef = new WeakReference<>(mapActivity);
+			this.app = mapActivity.getMyApplication();
+			this.indexItem = indexItem;
+		}
+
+		@Override
+		protected void onPreExecute() {
+			MapActivity mapActivity = mapActivityRef.get();
+			if (mapActivity != null) {
+				mapActivity.getContextMenu().close();
+			}
+		}
+
+		@Override
+		protected Void doInBackground(Void... params) {
+			if (localIndexInfo != null) {
+				LocalIndexInfo info = localIndexInfo;
+				if (move(new File(info.getPathToData()), getFileToRestore(info))) {
+					app.getResourceManager().reloadIndexes(IProgress.EMPTY_PROGRESS, new ArrayList<String>());
+					app.getDownloadThread().updateLoadedFiles();
+				}
+			} else if (indexItem != null) {
+				if (move(indexItem.getBackupFile(app), indexItem.getTargetFile(app))) {
+					app.getResourceManager().reloadIndexes(IProgress.EMPTY_PROGRESS, new ArrayList<String>());
+					app.getDownloadThread().updateLoadedFiles();
+				}
+			}
+			return null;
+		}
+
+		protected void onPostExecute(Void result) {
+			MapActivity mapActivity = mapActivityRef.get();
+			if (mapActivity != null) {
+				mapActivity.refreshMap();
+			}
+		}
+
+		@NonNull
+		private File getFileToRestore(LocalIndexInfo i) {
+			if (i.isBackupedData()) {
+				File parent = new File(i.getPathToData()).getParentFile();
+				if (i.getOriginalType() == LocalIndexType.MAP_DATA) {
+					if (i.getFileName().endsWith(IndexConstants.BINARY_ROAD_MAP_INDEX_EXT)) {
+						parent = app.getAppPath(IndexConstants.ROADS_INDEX_DIR);
+					} else {
+						parent = app.getAppPath(IndexConstants.MAPS_PATH);
+					}
+				} else if (i.getOriginalType() == LocalIndexType.TILES_DATA) {
+					parent = app.getAppPath(IndexConstants.TILES_INDEX_DIR);
+				} else if (i.getOriginalType() == LocalIndexType.SRTM_DATA) {
+					parent = app.getAppPath(IndexConstants.SRTM_INDEX_DIR);
+				} else if (i.getOriginalType() == LocalIndexType.WIKI_DATA) {
+					parent = app.getAppPath(IndexConstants.WIKI_INDEX_DIR);
+				} else if (i.getOriginalType() == LocalIndexType.TRAVEL_DATA) {
+					parent = app.getAppPath(IndexConstants.WIKIVOYAGE_INDEX_DIR);
+				} else if (i.getOriginalType() == LocalIndexType.TTS_VOICE_DATA) {
+					parent = app.getAppPath(IndexConstants.VOICE_INDEX_DIR);
+				} else if (i.getOriginalType() == LocalIndexType.VOICE_DATA) {
+					parent = app.getAppPath(IndexConstants.VOICE_INDEX_DIR);
+				}
+				return new File(parent, i.getFileName());
+			}
+			return new File(i.getPathToData());
+		}
+
+		private boolean move(File from, File to) {
+			if (!to.getParentFile().exists()) {
+				if (!to.getParentFile().mkdirs()) {
+					return false;
+				}
+			}
+			return from.renameTo(to);
 		}
 	}
 }

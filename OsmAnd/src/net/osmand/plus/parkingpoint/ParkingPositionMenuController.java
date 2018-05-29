@@ -1,6 +1,7 @@
 package net.osmand.plus.parkingpoint;
 
 import android.graphics.drawable.Drawable;
+import android.support.annotation.NonNull;
 
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandPlugin;
@@ -16,7 +17,7 @@ public class ParkingPositionMenuController extends MenuController {
 	private String parkingLeftDescription = "";
 	private String parkingTitle = "";
 
-	public ParkingPositionMenuController(MapActivity mapActivity, PointDescription pointDescription) {
+	public ParkingPositionMenuController(@NonNull MapActivity mapActivity, @NonNull PointDescription pointDescription) {
 		super(new MenuBuilder(mapActivity), pointDescription, mapActivity);
 		plugin = OsmandPlugin.getPlugin(ParkingPositionPlugin.class);
 		if (plugin != null) {
@@ -25,12 +26,13 @@ public class ParkingPositionMenuController extends MenuController {
 		leftTitleButtonController = new TitleButtonController() {
 			@Override
 			public void buttonPressed() {
-				if (plugin != null) {
-					plugin.showDeleteDialog(getMapActivity());
+				MapActivity activity = getMapActivity();
+				if (plugin != null && activity != null) {
+					plugin.showDeleteDialog(activity);
 				}
 			}
 		};
-		leftTitleButtonController.caption = getMapActivity().getString(R.string.shared_string_delete);
+		leftTitleButtonController.caption = mapActivity.getString(R.string.shared_string_delete);
 		leftTitleButtonController.updateStateListDrawableIcon(R.drawable.ic_action_delete_dark, true);
 	}
 
@@ -42,8 +44,9 @@ public class ParkingPositionMenuController extends MenuController {
 
 	@Override
 	protected void setObject(Object object) {
-		if (plugin != null) {
-			buildParkingDescription(getMapActivity());
+		MapActivity mapActivity = getMapActivity();
+		if (plugin != null && mapActivity != null) {
+			buildParkingDescription(mapActivity);
 		}
 	}
 
@@ -77,6 +80,7 @@ public class ParkingPositionMenuController extends MenuController {
 		return plugin.getParkingType() ? R.color.ctx_menu_amenity_closed_text_color : R.color.icon_color;
 	}
 
+	@NonNull
 	@Override
 	public String getNameStr() {
 		return parkingTitle;
@@ -97,6 +101,7 @@ public class ParkingPositionMenuController extends MenuController {
 		return getIcon(R.drawable.ic_action_parking_dark, R.color.map_widget_blue);
 	}
 
+	@NonNull
 	@Override
 	public String getTypeStr() {
 		return parkingStartDescription;

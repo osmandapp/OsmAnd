@@ -1,6 +1,7 @@
 package net.osmand.plus.mapcontextmenu.controllers;
 
 import android.graphics.drawable.Drawable;
+import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 
 import net.osmand.binary.RouteDataObject;
@@ -16,24 +17,28 @@ public class ImpassibleRoadsMenuController extends MenuController {
 
 	private RouteDataObject route;
 
-	public ImpassibleRoadsMenuController(final MapActivity mapActivity,
-										 PointDescription pointDescription, RouteDataObject route) {
+	public ImpassibleRoadsMenuController(@NonNull MapActivity mapActivity,
+										 @NonNull PointDescription pointDescription,
+										 @NonNull RouteDataObject route) {
 		super(new MenuBuilder(mapActivity), pointDescription, mapActivity);
 		this.route = route;
 		final OsmandApplication app = mapActivity.getMyApplication();
 		leftTitleButtonController = new TitleButtonController() {
 			@Override
 			public void buttonPressed() {
-				app.getAvoidSpecificRoads().removeImpassableRoad(
-						ImpassibleRoadsMenuController.this.route);
-				RoutingHelper rh = app.getRoutingHelper();
-				if (rh.isRouteCalculated() || rh.isRouteBeingCalculated()) {
-					rh.recalculateRouteDueToSettingsChange();
+				MapActivity activity = getMapActivity();
+				if (activity != null) {
+					app.getAvoidSpecificRoads().removeImpassableRoad(
+							ImpassibleRoadsMenuController.this.route);
+					RoutingHelper rh = app.getRoutingHelper();
+					if (rh.isRouteCalculated() || rh.isRouteBeingCalculated()) {
+						rh.recalculateRouteDueToSettingsChange();
+					}
+					activity.getContextMenu().close();
 				}
-				getMapActivity().getContextMenu().close();
 			}
 		};
-		leftTitleButtonController.caption = getMapActivity().getString(R.string.shared_string_remove);
+		leftTitleButtonController.caption = mapActivity.getString(R.string.shared_string_remove);
 		leftTitleButtonController.updateStateListDrawableIcon(R.drawable.ic_action_delete_dark, true);
 	}
 
@@ -47,13 +52,24 @@ public class ImpassibleRoadsMenuController extends MenuController {
 		return route;
 	}
 
+	@NonNull
 	@Override
 	public String getTypeStr() {
-		return getMapActivity().getString(R.string.road_blocked);
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			return mapActivity.getString(R.string.road_blocked);
+		} else {
+			return "";
+		}
 	}
 
 	@Override
 	public Drawable getRightIcon() {
-		return ContextCompat.getDrawable(getMapActivity(), R.drawable.map_pin_avoid_road);
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			return ContextCompat.getDrawable(mapActivity, R.drawable.map_pin_avoid_road);
+		} else {
+			return null;
+		}
 	}
 }

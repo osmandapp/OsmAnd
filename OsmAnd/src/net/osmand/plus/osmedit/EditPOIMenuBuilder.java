@@ -1,5 +1,6 @@
 package net.osmand.plus.osmedit;
 
+import android.support.annotation.NonNull;
 import android.view.View;
 
 import net.osmand.data.PointDescription;
@@ -15,7 +16,7 @@ public class EditPOIMenuBuilder extends MenuBuilder {
 
 	private final OsmPoint osmPoint;
 
-	public EditPOIMenuBuilder(MapActivity mapActivity, final OsmPoint osmPoint) {
+	public EditPOIMenuBuilder(@NonNull MapActivity mapActivity, final @NonNull OsmPoint osmPoint) {
 		super(mapActivity);
 		this.osmPoint = osmPoint;
 	}

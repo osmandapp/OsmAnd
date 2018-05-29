@@ -1,15 +1,16 @@
 package net.osmand.plus.mapcontextmenu.controllers;
 
 import android.graphics.drawable.Drawable;
+import android.support.annotation.NonNull;
 
 import net.osmand.data.PointDescription;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
-import net.osmand.plus.mapillary.MapillaryPlugin;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.util.Algorithms;
 
@@ -17,37 +18,42 @@ public class TargetPointMenuController extends MenuController {
 
 	private TargetPoint targetPoint;
 
-	public TargetPointMenuController(MapActivity mapActivity, PointDescription pointDescription, TargetPoint targetPoint) {
+	public TargetPointMenuController(@NonNull MapActivity mapActivity, @NonNull PointDescription pointDescription, @NonNull TargetPoint targetPoint) {
 		super(new MenuBuilder(mapActivity), pointDescription, mapActivity);
 		this.targetPoint = targetPoint;
 		builder.setShowNearestWiki(true);
-		final TargetPointsHelper targetPointsHelper = getMapActivity().getMyApplication().getTargetPointsHelper();
+		OsmandApplication app = mapActivity.getMyApplication();
+		final TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
 		final int intermediatePointsCount = targetPointsHelper.getIntermediatePoints().size();
-		RoutingHelper routingHelper = getMapActivity().getMyApplication().getRoutingHelper();
+		RoutingHelper routingHelper = app.getRoutingHelper();
 		final boolean nav = routingHelper.isRoutePlanningMode() || routingHelper.isFollowingMode();
 		leftTitleButtonController = new TitleButtonController() {
 			@Override
 			public void buttonPressed() {
-				TargetPoint tp = getTargetPoint();
-				if (tp.start) {
-					getMapActivity().getMyApplication().getTargetPointsHelper().clearStartPoint(true);
-				} else if (tp.intermediate) {
-					targetPointsHelper.removeWayPoint(true, tp.index);
-				} else {
-					targetPointsHelper.removeWayPoint(true, -1);
-				}
-				getMapActivity().getContextMenu().close();
-				if (nav && intermediatePointsCount == 0 && !tp.start) {
-					getMapActivity().getMapActions().stopNavigationWithoutConfirm();
-					getMapActivity().getMyApplication().getTargetPointsHelper().clearStartPoint(false);
+				final MapActivity activity = getMapActivity();
+				if (activity != null) {
+					TargetPoint tp = getTargetPoint();
+					OsmandApplication application = activity.getMyApplication();
+					if (tp.start) {
+						application.getTargetPointsHelper().clearStartPoint(true);
+					} else if (tp.intermediate) {
+						targetPointsHelper.removeWayPoint(true, tp.index);
+					} else {
+						targetPointsHelper.removeWayPoint(true, -1);
+					}
+					activity.getContextMenu().close();
+					if (nav && intermediatePointsCount == 0 && !tp.start) {
+						activity.getMapActions().stopNavigationWithoutConfirm();
+						application.getTargetPointsHelper().clearStartPoint(false);
+					}
 				}
 			}
 		};
 		if (nav && intermediatePointsCount == 0 && !targetPoint.start) {
-			leftTitleButtonController.caption = getMapActivity().getString(R.string.cancel_navigation);
+			leftTitleButtonController.caption = mapActivity.getString(R.string.cancel_navigation);
 			leftTitleButtonController.leftIconId = R.drawable.ic_action_remove_dark;
 		} else {
-			leftTitleButtonController.caption = getMapActivity().getString(R.string.shared_string_remove);
+			leftTitleButtonController.caption = mapActivity.getString(R.string.shared_string_remove);
 			leftTitleButtonController.leftIconId = R.drawable.ic_action_delete_dark;
 		}
 	}
@@ -89,12 +95,18 @@ public class TargetPointMenuController extends MenuController {
 		}
 	}
 
+	@NonNull
 	@Override
 	public String getTypeStr() {
-		if (targetPoint.start) {
-			return getMapActivity().getString(R.string.starting_point);
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			if (targetPoint.start) {
+				return mapActivity.getString(R.string.starting_point);
+			} else {
+				return targetPoint.getPointDescription(mapActivity).getTypeName();
+			}
 		} else {
-			return targetPoint.getPointDescription(getMapActivity()).getTypeName();
+			return "";
 		}
 	}
 

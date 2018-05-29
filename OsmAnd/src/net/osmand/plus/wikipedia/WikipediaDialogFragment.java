@@ -69,7 +69,7 @@ public class WikipediaDialogFragment extends WikiArticleBaseDialogFragment {
 	@SuppressLint("SetJavaScriptEnabled")
 	@Nullable
 	@Override
-	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		View mainView = inflater.inflate(R.layout.wikipedia_dialog_fragment, container, false);
 
 		setupToolbar((Toolbar) mainView.findViewById(R.id.toolbar));
@@ -152,7 +152,7 @@ public class WikipediaDialogFragment extends WikiArticleBaseDialogFragment {
 	}
 
 	@Override
-	public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 		populateArticle();
 	}
 
@@ -193,7 +193,10 @@ public class WikipediaDialogFragment extends WikiArticleBaseDialogFragment {
 				@Override
 				public void onClick(View view) {
 					String article = "https://" + langSelected.toLowerCase() + ".wikipedia.org/wiki/" + title.replace(' ', '_');
-					showFullArticle(getContext(), Uri.parse(article), nightMode);
+					Context context = getContext();
+					if (context != null) {
+						showFullArticle(context, Uri.parse(article), nightMode);
+					}
 				}
 			});
 
@@ -208,7 +211,7 @@ public class WikipediaDialogFragment extends WikiArticleBaseDialogFragment {
 		}
 	}
 
-	public static void showFullArticle(Context context, Uri uri, boolean nightMode) {
+	public static void showFullArticle(@NonNull Context context, @NonNull Uri uri, boolean nightMode) {
 		CustomTabsIntent customTabsIntent = new CustomTabsIntent.Builder()
 				.setToolbarColor(ContextCompat.getColor(context, nightMode ? R.color.actionbar_dark_color : R.color.actionbar_light_color))
 				.build();
@@ -217,44 +220,47 @@ public class WikipediaDialogFragment extends WikiArticleBaseDialogFragment {
 
 	@Override
 	protected void showPopupLangMenu(View view, final String langSelected) {
-		final PopupMenu optionsMenu = new PopupMenu(getContext(), view, Gravity.RIGHT);
-		Set<String> namesSet = new TreeSet<>();
-		namesSet.addAll(amenity.getNames("content", "en"));
-		namesSet.addAll(amenity.getNames("description", "en"));
+		Context context = getContext();
+		if (context != null) {
+			final PopupMenu optionsMenu = new PopupMenu(context, view, Gravity.RIGHT);
+			Set<String> namesSet = new TreeSet<>();
+			namesSet.addAll(amenity.getNames("content", "en"));
+			namesSet.addAll(amenity.getNames("description", "en"));
 
-		Map<String, String> names = new HashMap<>();
-		for (String n : namesSet) {
-			names.put(n, FileNameTranslationHelper.getVoiceName(getContext(), n));
-		}
-		String selectedLangName = names.get(langSelected);
-		if (selectedLangName != null) {
-			names.remove(langSelected);
-		}
-		Map<String, String> sortedNames = AndroidUtils.sortByValue(names);
+			Map<String, String> names = new HashMap<>();
+			for (String n : namesSet) {
+				names.put(n, FileNameTranslationHelper.getVoiceName(context, n));
+			}
+			String selectedLangName = names.get(langSelected);
+			if (selectedLangName != null) {
+				names.remove(langSelected);
+			}
+			Map<String, String> sortedNames = AndroidUtils.sortByValue(names);
 
-		if (selectedLangName != null) {
-			MenuItem item = optionsMenu.getMenu().add(selectedLangName);
-			item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-				@Override
-				public boolean onMenuItemClick(MenuItem item) {
-					setLanguage(langSelected);
-					populateArticle();
-					return true;
-				}
-			});
+			if (selectedLangName != null) {
+				MenuItem item = optionsMenu.getMenu().add(selectedLangName);
+				item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+					@Override
+					public boolean onMenuItemClick(MenuItem item) {
+						setLanguage(langSelected);
+						populateArticle();
+						return true;
+					}
+				});
+			}
+			for (final Map.Entry<String, String> e : sortedNames.entrySet()) {
+				MenuItem item = optionsMenu.getMenu().add(e.getValue());
+				item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+					@Override
+					public boolean onMenuItemClick(MenuItem item) {
+						setLanguage(e.getKey());
+						populateArticle();
+						return true;
+					}
+				});
+			}
+			optionsMenu.show();
 		}
-		for (final Map.Entry<String, String> e : sortedNames.entrySet()) {
-			MenuItem item = optionsMenu.getMenu().add(e.getValue());
-			item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-				@Override
-				public boolean onMenuItemClick(MenuItem item) {
-					setLanguage(e.getKey());
-					populateArticle();
-					return true;
-				}
-			});
-		}
-		optionsMenu.show();
 	}
 
 	private Drawable getIcon(int resId) {
@@ -262,7 +268,7 @@ public class WikipediaDialogFragment extends WikiArticleBaseDialogFragment {
 		return getIcon(resId, colorId);
 	}
 
-	public static boolean showInstance(FragmentActivity activity, Amenity amenity, String lang) {
+	public static boolean showInstance(@NonNull FragmentActivity activity, @NonNull Amenity amenity, @Nullable String lang) {
 		try {
 			if (!amenity.getType().isWiki()) {
 				return false;
@@ -281,7 +287,7 @@ public class WikipediaDialogFragment extends WikiArticleBaseDialogFragment {
 		}
 	}
 
-	public static boolean showInstance(AppCompatActivity activity, Amenity amenity) {
+	public static boolean showInstance(@NonNull AppCompatActivity activity, @NonNull Amenity amenity) {
 		return showInstance(activity, amenity, null);
 	}
 

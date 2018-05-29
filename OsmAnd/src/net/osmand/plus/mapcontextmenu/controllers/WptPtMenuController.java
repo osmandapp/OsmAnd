@@ -1,6 +1,7 @@
 package net.osmand.plus.mapcontextmenu.controllers;
 
 import android.graphics.drawable.Drawable;
+import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 
 import net.osmand.data.LatLon;
@@ -24,7 +25,7 @@ public class WptPtMenuController extends MenuController {
 	private WptPt wpt;
 	private MapMarker mapMarker;
 
-	public WptPtMenuController(MapActivity mapActivity, PointDescription pointDescription, WptPt wpt) {
+	public WptPtMenuController(@NonNull MapActivity mapActivity, @NonNull PointDescription pointDescription, @NonNull WptPt wpt) {
 		super(new WptPtMenuBuilder(mapActivity, wpt), pointDescription, mapActivity);
 		this.wpt = wpt;
 
@@ -77,8 +78,13 @@ public class WptPtMenuController extends MenuController {
 
 	@Override
 	public Drawable getRightIcon() {
-		return FavoriteImageDrawable.getOrCreate(getMapActivity().getMyApplication(),
-				wpt.getColor(ContextCompat.getColor(getMapActivity(), R.color.gpx_color_point)), false);
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			return FavoriteImageDrawable.getOrCreate(mapActivity.getMyApplication(),
+					wpt.getColor(ContextCompat.getColor(mapActivity, R.color.gpx_color_point)), false);
+		} else {
+			return null;
+		}
 	}
 
 	@Override
@@ -95,28 +101,41 @@ public class WptPtMenuController extends MenuController {
 		return mapMarker == null;
 	}
 
+	@NonNull
 	@Override
 	public String getTypeStr() {
-		GpxSelectionHelper helper = getMapActivity().getMyApplication().getSelectedGpxHelper();
-		SelectedGpxFile selectedGpxFile = helper.getSelectedGPXFile(wpt);
-		StringBuilder sb = new StringBuilder();
-		sb.append(getMapActivity().getString(R.string.shared_string_waypoint));
-		sb.append(", ");
-		if (selectedGpxFile != null) {
-			File file = new File(selectedGpxFile.getGpxFile().path);
-			String gpxName = file.getName().replace(".gpx", "").replace("/", " ").replace("_", " ");
-			sb.append(gpxName);
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			GpxSelectionHelper helper = mapActivity.getMyApplication().getSelectedGpxHelper();
+			SelectedGpxFile selectedGpxFile = helper.getSelectedGPXFile(wpt);
+			StringBuilder sb = new StringBuilder();
+			sb.append(mapActivity.getString(R.string.shared_string_waypoint));
+			sb.append(", ");
+			if (selectedGpxFile != null) {
+				File file = new File(selectedGpxFile.getGpxFile().path);
+				String gpxName = file.getName().replace(".gpx", "").replace("/", " ").replace("_", " ");
+				sb.append(gpxName);
+			}
+			return sb.toString();
+		} else {
+			return "";
 		}
-		return sb.toString();
 	}
 
+	@NonNull
 	@Override
 	public String getSubtypeStr() {
 		return wpt.category != null ? wpt.category : "";
 	}
 
+	@NonNull
 	@Override
 	public String getCommonTypeStr() {
-		return getMapActivity().getString(R.string.shared_string_waypoint);
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			return mapActivity.getString(R.string.shared_string_waypoint);
+		} else {
+			return "";
+		}
 	}
 }

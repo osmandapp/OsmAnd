@@ -27,9 +27,7 @@ import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
@@ -61,7 +59,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 
 	private final Amenity amenity;
 
-	public AmenityMenuBuilder(MapActivity mapActivity, final Amenity amenity) {
+	public AmenityMenuBuilder(@NonNull MapActivity mapActivity, final @NonNull Amenity amenity) {
 		super(mapActivity);
 		this.amenity = amenity;
 		setShowNearestWiki(true, amenity.getId());
@@ -88,8 +86,6 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			buildRowDivider(view);
 		}
 
-		final String txt = text;
-
 		LinearLayout baseView = new LinearLayout(view.getContext());
 		baseView.setOrientation(LinearLayout.VERTICAL);
 		LinearLayout.LayoutParams llBaseViewParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -104,10 +100,10 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			@Override
 			public boolean onLongClick(View v) {
 				String textToCopy;
-				if (txt.contains(WIKI_LINK)) {
-					textToCopy = txt;
+				if (text.contains(WIKI_LINK)) {
+					textToCopy = text;
 				} else {
-					textToCopy = !Algorithms.isEmpty(textPrefix) ? textPrefix + ": " + txt : txt;
+					textToCopy = !Algorithms.isEmpty(textPrefix) ? textPrefix + ": " + text : text;
 				}
 				copyToClipboard(textToCopy, view.getContext());
 				return true;
@@ -167,7 +163,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			textView.setTextColor(linkTextColor);
 			needLinks = false;
 		}
-		textView.setText(txt);
+		textView.setText(text);
 		if (needLinks) {
 			Linkify.addLinks(textView, Linkify.ALL);
 			textView.setLinksClickable(true);
@@ -635,8 +631,6 @@ public class AmenityMenuBuilder extends MenuBuilder {
 					0, false, false, false, 1000, null, false, false, false, 0);
 			buildAmenityRow(view, wikiInfo);
 		}
-
-		OsmandSettings st = ((OsmandApplication) mapActivity.getApplicationContext()).getSettings();
 
 		boolean osmEditingEnabled = OsmandPlugin.getEnabledPlugin(OsmEditingPlugin.class) != null;
 		if (osmEditingEnabled && amenity.getId() != null

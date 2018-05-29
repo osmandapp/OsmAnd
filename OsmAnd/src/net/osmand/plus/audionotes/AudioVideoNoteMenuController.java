@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 
 import net.osmand.data.LatLon;
@@ -21,7 +22,7 @@ public class AudioVideoNoteMenuController extends MenuController {
 	private AudioVideoNotesPlugin mPlugin;
 	private boolean mIsFileAvailable;
 
-	public AudioVideoNoteMenuController(MapActivity mapActivity, PointDescription pointDescription, final Recording recording) {
+	public AudioVideoNoteMenuController(@NonNull MapActivity mapActivity, @NonNull PointDescription pointDescription, final @NonNull Recording recording) {
 		super(new AudioVideoNoteMenuBuilder(mapActivity, recording), pointDescription, mapActivity);
 		this.mRecording = recording;
 		mPlugin = OsmandPlugin.getPlugin(AudioVideoNotesPlugin.class);
@@ -36,7 +37,10 @@ public class AudioVideoNoteMenuController extends MenuController {
 						if (mPlugin.isPlaying(getRecording())) {
 							mPlugin.stopPlaying();
 						} else {
-							mPlugin.playRecording(getMapActivity(), getRecording());
+							MapActivity activity = getMapActivity();
+							if (activity != null) {
+								mPlugin.playRecording(activity, getRecording());
+							}
 						}
 					}
 				}
@@ -45,23 +49,27 @@ public class AudioVideoNoteMenuController extends MenuController {
 			rightTitleButtonController = new TitleButtonController() {
 				@Override
 				public void buttonPressed() {
-					AlertDialog.Builder bld = new AlertDialog.Builder(getMapActivity());
-					bld.setMessage(R.string.recording_delete_confirm);
-					bld.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
+					MapActivity activity = getMapActivity();
+					if (activity != null) {
+						AlertDialog.Builder bld = new AlertDialog.Builder(activity);
+						bld.setMessage(R.string.recording_delete_confirm);
+						bld.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
 
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							if (mPlugin != null) {
-								mPlugin.deleteRecording(getRecording(), true);
-								getMapActivity().getContextMenu().close();
+							@Override
+							public void onClick(DialogInterface dialog, int which) {
+								MapActivity a = getMapActivity();
+								if (mPlugin != null && a != null) {
+									mPlugin.deleteRecording(getRecording(), true);
+									a.getContextMenu().close();
+								}
 							}
-						}
-					});
-					bld.setNegativeButton(R.string.shared_string_no, null);
-					bld.show();
+						});
+						bld.setNegativeButton(R.string.shared_string_no, null);
+						bld.show();
+					}
 				}
 			};
-			rightTitleButtonController.caption = getMapActivity().getString(R.string.shared_string_delete);
+			rightTitleButtonController.caption = mapActivity.getString(R.string.shared_string_delete);
 			rightTitleButtonController.updateStateListDrawableIcon(R.drawable.ic_action_delete_dark, true);
 		}
 
@@ -96,27 +104,45 @@ public class AudioVideoNoteMenuController extends MenuController {
 		}
 	}
 
+	@NonNull
 	@Override
 	public String getNameStr() {
-		if (mIsFileAvailable) {
-			return mRecording.getName(getMapActivity(), false);
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			if (mIsFileAvailable) {
+				return mRecording.getName(mapActivity, false);
+			} else {
+				return mapActivity.getString(R.string.data_is_not_available);
+			}
 		} else {
-			return getMapActivity().getString(R.string.data_is_not_available);
+			return "";
 		}
 	}
 
+	@NonNull
 	@Override
 	public String getTypeStr() {
 		if (mIsFileAvailable) {
-			return mRecording.getType(getMapActivity());
+			MapActivity mapActivity = getMapActivity();
+			if (mapActivity != null) {
+				return mRecording.getType(mapActivity);
+			} else {
+				return "";
+			}
 		} else {
 			return super.getTypeStr();
 		}
 	}
 
+	@NonNull
 	@Override
 	public String getCommonTypeStr() {
-		return getMapActivity().getString(R.string.audionotes_plugin_name);
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			return mapActivity.getString(R.string.audionotes_plugin_name);
+		} else {
+			return "";
+		}
 	}
 
 	@Override
@@ -128,14 +154,15 @@ public class AudioVideoNoteMenuController extends MenuController {
 	public void updateData() {
 		super.updateData();
 
-		if (!mIsFileAvailable) {
+		MapActivity mapActivity = getMapActivity();
+		if (!mIsFileAvailable || mapActivity == null) {
 			return;
 		}
-		boolean accessibilityEnabled = getMapActivity().getMyApplication().accessibilityEnabled();
+		boolean accessibilityEnabled = mapActivity.getMyApplication().accessibilityEnabled();
 		rightTitleButtonController.visible = true;
 		if (!mRecording.isPhoto()) {
 			if (mPlugin.isPlaying(mRecording)) {
-				leftTitleButtonController.caption = getMapActivity().getString(R.string.shared_string_control_stop);
+				leftTitleButtonController.caption = mapActivity.getString(R.string.shared_string_control_stop);
 				leftTitleButtonController.updateStateListDrawableIcon(R.drawable.ic_action_rec_stop, true);
 				int pos = mPlugin.getPlayingPosition();
 				String durationStr;
@@ -148,39 +175,43 @@ public class AudioVideoNoteMenuController extends MenuController {
 				leftTitleButtonController.rightTextCaption = "— " + durationStr;
 				rightTitleButtonController.visible = false;
 			} else {
-				leftTitleButtonController.caption = getMapActivity().getString(R.string.recording_context_menu_play);
+				leftTitleButtonController.caption = mapActivity.getString(R.string.recording_context_menu_play);
 				leftTitleButtonController.updateStateListDrawableIcon(R.drawable.ic_play_dark, true);
 				String durationStr = mRecording.getPlainDuration(accessibilityEnabled);
 				leftTitleButtonController.needRightText = true;
 				leftTitleButtonController.rightTextCaption = "— " + durationStr;
 			}
 		} else {
-			leftTitleButtonController.caption = getMapActivity().getString(R.string.recording_context_menu_show);
+			leftTitleButtonController.caption = mapActivity.getString(R.string.recording_context_menu_show);
 			leftTitleButtonController.updateStateListDrawableIcon(R.drawable.ic_action_view, true);
 		}
 	}
 
 	@Override
 	public void share(LatLon latLon, String title, String address) {
-		if (mIsFileAvailable) {
+		MapActivity mapActivity = getMapActivity();
+		if (mIsFileAvailable && mapActivity != null) {
 			String path = mRecording.getFile().getAbsolutePath();
-			MediaScannerConnection.scanFile(getMapActivity(), new String[]{path},
+			MediaScannerConnection.scanFile(mapActivity, new String[]{path},
 					null, new MediaScannerConnection.OnScanCompletedListener() {
 						public void onScanCompleted(String path, Uri uri) {
-							Intent shareIntent = new Intent(
-									android.content.Intent.ACTION_SEND);
-							if (mRecording.isPhoto()) {
-								shareIntent.setType("image/*");
-							} else if (mRecording.isAudio()) {
-								shareIntent.setType("audio/*");
-							} else if (mRecording.isVideo()) {
-								shareIntent.setType("video/*");
+							MapActivity activity = getMapActivity();
+							if (activity != null) {
+								Intent shareIntent = new Intent(
+										android.content.Intent.ACTION_SEND);
+								if (mRecording.isPhoto()) {
+									shareIntent.setType("image/*");
+								} else if (mRecording.isAudio()) {
+									shareIntent.setType("audio/*");
+								} else if (mRecording.isVideo()) {
+									shareIntent.setType("video/*");
+								}
+								shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
+								shareIntent
+										.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+								activity.startActivity(Intent.createChooser(shareIntent,
+										activity.getString(R.string.share_note)));
 							}
-							shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
-							shareIntent
-									.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
-							getMapActivity().startActivity(Intent.createChooser(shareIntent,
-									getMapActivity().getString(R.string.share_note)));
 						}
 					});
 		} else {

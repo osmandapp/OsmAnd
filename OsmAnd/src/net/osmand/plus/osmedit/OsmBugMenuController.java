@@ -1,6 +1,7 @@
 package net.osmand.plus.osmedit;
 
 import android.graphics.drawable.Drawable;
+import android.support.annotation.NonNull;
 
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -16,7 +17,7 @@ public class OsmBugMenuController extends MenuController {
 	private OsmEditingPlugin plugin;
 	private OpenStreetNote bug;
 
-	public OsmBugMenuController(MapActivity mapActivity, PointDescription pointDescription, OpenStreetNote bug) {
+	public OsmBugMenuController(@NonNull MapActivity mapActivity, @NonNull PointDescription pointDescription, @NonNull OpenStreetNote bug) {
 		super(new MenuBuilder(mapActivity), pointDescription, mapActivity);
 		plugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
 		this.bug = bug;
@@ -24,32 +25,34 @@ public class OsmBugMenuController extends MenuController {
 		leftTitleButtonController = new TitleButtonController() {
 			@Override
 			public void buttonPressed() {
-				if (plugin != null) {
+				MapActivity activity = getMapActivity();
+				if (plugin != null && activity != null) {
 					OpenStreetNote bg = getBug();
 					if(bg.isOpened()) {
-						plugin.getBugsLayer(getMapActivity()).commentBug(bg, "");
+						plugin.getBugsLayer(activity).commentBug(bg, "");
 					} else {
-						plugin.getBugsLayer(getMapActivity()).reopenBug(bg, "");
+						plugin.getBugsLayer(activity).reopenBug(bg, "");
 					}
 				}
 			}
 		};
 		if(bug.isOpened()) {
-			leftTitleButtonController.caption = getMapActivity().getString(R.string.poi_dialog_comment);
+			leftTitleButtonController.caption = mapActivity.getString(R.string.poi_dialog_comment);
 		} else {
-			leftTitleButtonController.caption = getMapActivity().getString(R.string.poi_dialog_reopen);
+			leftTitleButtonController.caption = mapActivity.getString(R.string.poi_dialog_reopen);
 		}
 		leftTitleButtonController.updateStateListDrawableIcon(R.drawable.ic_action_note_dark, true);
 
 		rightTitleButtonController = new TitleButtonController() {
 			@Override
 			public void buttonPressed() {
-				if (plugin != null) {
-					plugin.getBugsLayer(getMapActivity()).closeBug(getBug(), "");
+				MapActivity activity = getMapActivity();
+				if (plugin != null && activity != null) {
+					plugin.getBugsLayer(activity).closeBug(getBug(), "");
 				}
 			}
 		};
-		rightTitleButtonController.caption = getMapActivity().getString(R.string.shared_string_close);
+		rightTitleButtonController.caption = mapActivity.getString(R.string.shared_string_close);
 		rightTitleButtonController.updateStateListDrawableIcon(R.drawable.ic_action_remove_dark, true);
 
 		updateData();
@@ -81,6 +84,7 @@ public class OsmBugMenuController extends MenuController {
 		}
 	}
 
+	@NonNull
 	@Override
 	public String getTypeStr() {
 		return getPointDescription().getTypeName();

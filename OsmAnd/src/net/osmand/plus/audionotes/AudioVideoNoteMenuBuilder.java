@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
+import android.support.annotation.NonNull;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -24,7 +25,7 @@ public class AudioVideoNoteMenuBuilder extends MenuBuilder {
 
 	private final Recording recording;
 
-	public AudioVideoNoteMenuBuilder(MapActivity mapActivity, final Recording recording) {
+	public AudioVideoNoteMenuBuilder(@NonNull MapActivity mapActivity, final @NonNull Recording recording) {
 		super(mapActivity);
 		this.recording = recording;
 	}
