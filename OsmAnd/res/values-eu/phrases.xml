@@ -3367,4 +3367,16 @@
 	<string name="poi_fire_hydrant_type_pond">Urmaela</string>
 	<string name="poi_fire_hydrant_type_wall">Horma</string>
 
+	<string name="poi_tomb_columbarium">Mota: Kolunbarioa</string>
+	<string name="poi_tomb_mausoleum">Mota: Mausoleoa</string>
+	<string name="poi_tomb_sarcophagus">Mota: Sarkofagoa</string>
+	<string name="poi_tomb_crypt">Mota: Kripta</string>
+	<string name="poi_tomb_pyramid">Mota: Piramidea</string>
+
+	<string name="poi_surface_artificial_turf">Soropil artifiziala</string>
+	<string name="poi_surface_decoturf">DecoTurf (Teniserako soropil artifizial gogorra)</string>
+	<string name="poi_surface_metal_grid">Sareta metalikoa</string>
+
+	<string name="poi_water_purification_aquatabs">Aquatabs</string>
+
 	</resources>
