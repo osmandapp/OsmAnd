@@ -13,7 +13,7 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Build;
 import android.support.v7.app.AlertDialog;
-
+import android.util.Log;
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
@@ -67,7 +67,6 @@ import java.util.Locale;
 import java.util.Random;
 
 import btools.routingapp.BRouterServiceConnection;
-
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.getPendingIntent;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceLastCheck;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceLiveUpdatesOn;
@@ -178,6 +177,8 @@ public class AppInitializer implements IProgress {
 			startPrefs.edit().putString(VERSION_INSTALLED, Version.getFullVersion(app)).commit();
 			appVersionChanged = true;
 		}
+		app.getSettings().SHOW_TRAVEL_UPDATE_CARD.set(true);
+		app.getSettings().SHOW_TRAVEL_NEEDED_MAPS_CARD.set(true);
 		initSettings = true;
 	}
 
@@ -352,7 +353,8 @@ public class AppInitializer implements IProgress {
 						Integer in = (Integer) f.get(null);
 						return app.getString(in);
 					}
-				} catch (Exception e) {
+				} catch (Throwable e) {
+					LOG.info("No translation: " + keyName);
 				}
 				return null;
 			}

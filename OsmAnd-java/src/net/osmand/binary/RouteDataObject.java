@@ -236,6 +236,7 @@ public class RouteDataObject {
 		}
 		return null;
 	}
+	
 
 	public String getName(String lang){
 		return getName(lang, false);
@@ -683,6 +684,18 @@ public class RouteDataObject {
 			direction = Math.abs(diff) < Math.PI / 2f;
 		}
 		return direction;
+	}
+	
+	public boolean isRoadDeleted() {
+		int[] pt = getTypes();
+		int sz = pt.length;
+		for (int i = 0; i < sz; i++) {
+			RouteTypeRule r = region.quickGetEncodingRule(pt[i]);
+			if ("osmand_change".equals(r.getTag()) && "delete".equals(r.getValue())) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public boolean isStopApplicable(boolean direction, int intId, int startPointInd, int endPointInd) {

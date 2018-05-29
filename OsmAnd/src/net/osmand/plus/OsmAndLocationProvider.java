@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import net.osmand.GeoidAltitudeCorrection;
 import net.osmand.PlatformUtil;
@@ -70,12 +71,12 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	private static final int GPS_DIST_REQUEST = 0;
 	private static final int NOT_SWITCH_TO_NETWORK_WHEN_GPS_LOST_MS = 12000;
 
-	private static final long STALE_LOCATION_TIMEOUT = 1000 * 60 * 5; // 5 minutes
-	private static final long STALE_LOCATION_TIMEOUT_FOR_UI = 1000 * 60 * 15; // 15 minutes
+	private static final long LOCATION_TIMEOUT_TO_BE_STALE = 1000 * 60 * 2; // 2 minutes
+	private static final long STALE_LOCATION_TIMEOUT_TO_BE_GONE = 1000 * 60 * 20; // 20 minutes
 
 	private static final int REQUESTS_BEFORE_CHECK_LOCATION = 100;
-	private int locationRequestsCounter;
-	private int staleLocationRequestsCounter;
+	private AtomicInteger locationRequestsCounter = new AtomicInteger();
+	private AtomicInteger staleLocationRequestsCounter = new AtomicInteger();
 
 	private net.osmand.Location cachedLocation;
 
@@ -690,7 +691,8 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	
 	private void scheduleCheckIfGpsLost(final net.osmand.Location location) {
 		final RoutingHelper routingHelper = app.getRoutingHelper();
-		if (location != null) {
+		if (location != null && routingHelper.isFollowingMode() && routingHelper.getLeftDistance() > 0
+				&& simulatePosition == null) {
 			final long fixTime = location.getTime();
 			app.runMessageInUIThreadAndCancelPrevious(LOST_LOCATION_MSG_ID, new Runnable() {
 
@@ -702,31 +704,30 @@ public class OsmAndLocationProvider implements SensorEventListener {
 						return;
 					}
 					gpsSignalLost = true;
-					if (routingHelper.isFollowingMode() && routingHelper.getLeftDistance() > 0) {
+					if (routingHelper.isFollowingMode() && routingHelper.getLeftDistance() > 0
+							&& simulatePosition == null) {
 						routingHelper.getVoiceRouter().gpsLocationLost();
+						setLocation(null);
 					}
-					setLocation(null);
 				}
 			}, LOST_LOCATION_CHECK_DELAY);
-			if (routingHelper.isFollowingMode() && routingHelper.getLeftDistance() > 0 && simulatePosition == null) {
-				app.runMessageInUIThreadAndCancelPrevious(START_SIMULATE_LOCATION_MSG_ID, new Runnable() {
+			app.runMessageInUIThreadAndCancelPrevious(START_SIMULATE_LOCATION_MSG_ID, new Runnable() {
 
-					@Override
-					public void run() {
-						net.osmand.Location lastKnown = getLastKnownLocation();
-						if (lastKnown != null && lastKnown.getTime() > fixTime) {
-							// false positive case, still strange how we got here with removeMessages
-							return;
-						}
-						List<RouteSegmentResult> tunnel = routingHelper.getUpcomingTunnel(1000);
-						if(tunnel != null) {
-							simulatePosition = new SimulationProvider();
-							simulatePosition.startSimulation(tunnel, location);
-							simulatePositionImpl();
-						}
+				@Override
+				public void run() {
+					net.osmand.Location lastKnown = getLastKnownLocation();
+					if (lastKnown != null && lastKnown.getTime() > fixTime) {
+						// false positive case, still strange how we got here with removeMessages
+						return;
 					}
-				}, START_LOCATION_SIMULATION_DELAY);
-			}
+					List<RouteSegmentResult> tunnel = routingHelper.getUpcomingTunnel(1000);
+					if(tunnel != null) {
+						simulatePosition = new SimulationProvider();
+						simulatePosition.startSimulation(tunnel, location);
+						simulatePositionImpl();
+					}
+				}
+			}, START_LOCATION_SIMULATION_DELAY);
 		}
 	}
 	
@@ -869,15 +870,14 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	}
 
 	public net.osmand.Location getLastKnownLocation() {
-		net.osmand.Location location = this.location;
-		if (location != null && locationRequestsCounter == 0
-				&& System.currentTimeMillis() - location.getTime() > STALE_LOCATION_TIMEOUT) {
-			location = null;
-		}
-		if (locationRequestsCounter == REQUESTS_BEFORE_CHECK_LOCATION) {
-			locationRequestsCounter = 0;
-		} else {
-			locationRequestsCounter++;
+		net.osmand.Location loc = this.location;
+		if (loc != null) {
+			int counter = locationRequestsCounter.incrementAndGet();
+			if (counter >= REQUESTS_BEFORE_CHECK_LOCATION && locationRequestsCounter.compareAndSet(counter, 0)) {
+				if (System.currentTimeMillis() - loc.getTime() > LOCATION_TIMEOUT_TO_BE_STALE) {
+					location = null;
+				}
+			}
 		}
 		return location;
 	}
@@ -885,18 +885,16 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	@Nullable
 	public net.osmand.Location getLastStaleKnownLocation() {
 		net.osmand.Location newLoc = getLastKnownLocation();
-		if (newLoc == null) {
-			if (staleLocationRequestsCounter == 0 && cachedLocation != null
-					&& System.currentTimeMillis() - cachedLocation.getTime() > STALE_LOCATION_TIMEOUT_FOR_UI) {
-				cachedLocation = null;
+		if (newLoc == null && cachedLocation != null) {
+			int counter = staleLocationRequestsCounter.incrementAndGet();
+			if (counter >= REQUESTS_BEFORE_CHECK_LOCATION && staleLocationRequestsCounter.compareAndSet(counter, 0)) {
+				net.osmand.Location cached = cachedLocation;
+				if (cached != null && System.currentTimeMillis() - cached.getTime() > STALE_LOCATION_TIMEOUT_TO_BE_GONE) {
+					cachedLocation = null;
+				}
 			}
 		} else {
 			cachedLocation = newLoc;
-		}
-		if (staleLocationRequestsCounter == REQUESTS_BEFORE_CHECK_LOCATION) {
-			staleLocationRequestsCounter = 0;
-		} else {
-			staleLocationRequestsCounter++;
 		}
 		return cachedLocation;
 	}

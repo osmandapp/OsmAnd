@@ -764,7 +764,6 @@ public class RouteInfoWidgetsFactory {
 		private int dist;
 		private LanesDrawable lanesDrawable;
 		private View centerInfo;
-		private View progress;
 		private int shadowRadius;
 
 		public LanesControl(final MapActivity map, final OsmandMapTileView view) {
@@ -772,7 +771,6 @@ public class RouteInfoWidgetsFactory {
 			lanesText = (TextView) map.findViewById(R.id.map_lanes_dist_text);
 			lanesShadowText = (TextView) map.findViewById(R.id.map_lanes_dist_text_shadow);
 			centerInfo = (View) map.findViewById(R.id.map_center_info);
-			progress = (View) map.findViewById(R.id.map_horizontal_progress);
 			lanesDrawable = new LanesDrawable(map, map.getMapView().getScaleCoefficient());
 			lanesView.setImageDrawable(lanesDrawable);
 			trackingUtilities = map.getMapViewTrackingUtilities();
@@ -859,7 +857,7 @@ public class RouteInfoWidgetsFactory {
 			updateVisibility(lanesShadowText, visible && shadowRadius > 0);
 			updateVisibility(lanesText, visible);
 			updateVisibility(lanesView, visible);
-			updateVisibility(centerInfo, visible || progress.getVisibility() == View.VISIBLE);
+			updateVisibility(centerInfo, visible);
 			return true;
 		}
 	}
