@@ -313,6 +313,9 @@ public abstract class OsmandMapLayer {
 			}
 		}
 
+		public void layerOnPreExecute() {
+		}
+
 		public void layerOnPostExecute() {
 		}
 
@@ -350,6 +353,7 @@ public abstract class OsmandMapLayer {
 			@Override
 			protected void onPreExecute() {
 				currentTask = this;
+				layerOnPreExecute();
 			}
 
 			@Override
