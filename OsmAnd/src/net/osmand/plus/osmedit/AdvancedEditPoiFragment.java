@@ -146,6 +146,8 @@ public class AdvancedEditPoiFragment extends BaseOsmAndFragment
 			PoiCategory category = getData().getPoiCategory();
 			if (category != null) {
 				amenityTagTextView.setText(category.getDefaultTag());
+			} else {
+				amenityTagTextView.setText(R.string.tag_poi_amenity);
 			}
 			amenityTextView.setText(getData().getPoiTypeString());
 		}
