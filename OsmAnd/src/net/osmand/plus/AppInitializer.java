@@ -177,6 +177,8 @@ public class AppInitializer implements IProgress {
 			startPrefs.edit().putString(VERSION_INSTALLED, Version.getFullVersion(app)).commit();
 			appVersionChanged = true;
 		}
+		app.getSettings().SHOW_TRAVEL_UPDATE_CARD.set(true);
+		app.getSettings().SHOW_TRAVEL_NEEDED_MAPS_CARD.set(true);
 		initSettings = true;
 	}
 
