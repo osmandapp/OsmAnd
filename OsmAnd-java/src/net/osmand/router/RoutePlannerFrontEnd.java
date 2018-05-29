@@ -158,6 +158,8 @@ public class RoutePlannerFrontEnd {
 		}
 		if (ctx.calculationMode == RouteCalculationMode.COMPLEX && routeDirection == null
 				&& maxDistance > ctx.config.DEVIATION_RADIUS * 6) {
+			ctx.calculationProgress.totalIterations++;
+			ctx.calculationProgress.iteration++;
 			RoutingContext nctx = buildRoutingContext(ctx.config, ctx.nativeLib, ctx.getMaps(), RouteCalculationMode.BASE);
 			nctx.calculationProgress = ctx.calculationProgress;
 			List<RouteSegmentResult> ls = searchRoute(nctx, start, end, intermediates);
@@ -197,6 +199,7 @@ public class RoutePlannerFrontEnd {
 		if (!addSegment(end, ctx, indexNotFound++, points)) {
 			return null;
 		}
+		ctx.calculationProgress.iteration++;
 		List<RouteSegmentResult> res = searchRoute(ctx, points, routeDirection);
 		// make start and end more precise
 		makeStartEndPointsPrecise(res, start, end, intermediates);
