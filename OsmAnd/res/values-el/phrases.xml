@@ -2146,4 +2146,48 @@
 	<string name="poi_training_computer">Εκπαίδευση: πληροφορική</string>
 	<string name="poi_training_yoga">Εκπαίδευση: γιόγκα</string>
 	<string name="poi_training_martial_art">Εκπαίδευση: πολεμικές τέχνες</string>
+	<string name="poi_service_bicycle_chaintool_yes">Εργαλείο αλυσίδας</string>
+	<string name="poi_service_bicycle_chaintool_no">Εργαλείο αλυσίδας ποδηλάτου: όχι</string>
+	<string name="poi_service_bicycle_charging_yes">Χρέωση: ναι</string>
+	<string name="poi_service_bicycle_charging_no">Χρέωση: όχι</string>
+	<string name="poi_training_aviation">Εκπαίδευση: αεροπλοΐα</string>
+	<string name="poi_training_hairdressing">Εκπαίδευση: κομμωτική</string>
+
+	<string name="poi_monument_yes">Μνημειακό αντικείμενο</string>
+
+	<string name="poi_industrial_oil">Τύπος: πετρελαϊκή βιομηχανία</string>
+	<string name="poi_industrial_wellsite">Τύπος: Τόπος φρέατος</string>
+	<string name="poi_industrial_factory">Τύπος: εργοστάσιο</string>
+	<string name="poi_industrial_gas">Τύπος: βιομηχανία φυσικού αερίου</string>
+	<string name="poi_industrial_timber">Τύπος: ξυλεία</string>
+	<string name="poi_industrial_refinery">Τύπος: διυλιστήριο</string>
+	<string name="poi_industrial_warehouse">Τύπος: αποθήκη</string>
+	<string name="poi_industrial_auto_wrecker">Τύπος: εταιρία ανακύκλωσης οχημάτων</string>
+	<string name="poi_industrial_agriculture">Τύπος: γεωργία</string>
+	<string name="poi_industrial_brewery">Τύπος: ζυθοποιία</string>
+	<string name="poi_industrial_brickyard">Τύπος: τουβλοποιία</string>
+	<string name="poi_industrial_intermodal_freight_terminal">Τύπος: διατροπικό τερματικό εμπορευμάτων</string>
+	<string name="poi_industrial_sawmill">Τύπος: πριονιστήριο</string>
+	<string name="poi_industrial_water_purification">Τύπος: εξευγενισμός νερού</string>
+	<string name="poi_industrial_port">Τύπος: λιμάνι</string>
+	<string name="poi_industrial_depot">Τύπος: αμαξοστάσιο</string>
+
+	<string name="poi_note">Σημείωση</string>
+	<string name="poi_watering_place">Νερόλακκος</string>
+	<string name="poi_animal_boarding">Οικοτροφείο ζώων</string>
+	<string name="poi_animal_boarding_dog">Τύπος οικοτροφείου: σκύλοι</string>
+	<string name="poi_animal_boarding_cat">Τύπος οικοτροφείου: γάτες</string>
+	<string name="poi_animal_boarding_dog_cat">Τύπος οικοτροφείου: σκύλοι, γάτες</string>
+	<string name="poi_animal_boarding_horse">Τύπος οικοτροφείου: άλογα</string>
+
+	<string name="poi_historic_aircraft">Ιστορικό αεροσκάφος</string>
+
+	<string name="poi_elevator_yes">Με ανλκυστήρα</string>
+	<string name="poi_elevator_no">Χωρίς ανελκυστήρα</string>
+
+	<string name="poi_technical_monument">Τεχνικό μνημείο</string>
+
+	<string name="poi_office_camping">Γραφείο κατασκήνωσης</string>
+	<string name="poi_model_aerodrome">Αεροδρόμιο μοντελισμού</string>
+	<string name="poi_guide">Γραφείο ξεναγών</string>
 	</resources>
