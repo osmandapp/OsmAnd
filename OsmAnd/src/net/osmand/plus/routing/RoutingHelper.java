@@ -1006,14 +1006,8 @@ public class RoutingHelper {
 				public void run() {
 					RouteCalculationProgress calculationProgress = params.calculationProgress;
 					if (isRouteBeingCalculated()) {
-						float p = Math.max(calculationProgress.distanceFromBegin, calculationProgress.distanceFromEnd);
-						float all = calculationProgress.totalEstimatedDistance * 1.25f;
-						if (all > 0) {
-							int t = (int) Math.min(p * p / (all * all) * 100f, 99);
-							progressRoute.updateProgress(t);
-						} else {
-							progressRoute.updateProgress(0);
-						}
+						float pr = calculationProgress.getLinearProgress();
+						progressRoute.updateProgress((int) pr);
 						Thread t = currentRunningJob;
 						if(t instanceof RouteRecalculationThread && ((RouteRecalculationThread) t).params != params) {
 							// different calculation started
