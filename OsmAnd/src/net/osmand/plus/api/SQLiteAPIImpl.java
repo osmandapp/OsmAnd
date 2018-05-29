@@ -1,15 +1,19 @@
 package net.osmand.plus.api;
 
+import net.osmand.PlatformUtil;
+import net.osmand.plus.OsmandApplication;
+
+import org.apache.commons.logging.Log;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import net.osmand.plus.OsmandApplication;
-
 public class SQLiteAPIImpl implements SQLiteAPI {
 
 	private OsmandApplication app;
+	private static final Log LOG = PlatformUtil.getLog(SQLiteAPIImpl.class);
 
 	public SQLiteAPIImpl(OsmandApplication app) {
 		this.app = app;
@@ -18,9 +22,13 @@ public class SQLiteAPIImpl implements SQLiteAPI {
 	@SuppressLint("InlinedApi")
 	@Override
 	public SQLiteConnection getOrCreateDatabase(String name, boolean readOnly) {
-		android.database.sqlite.SQLiteDatabase db = app.openOrCreateDatabase(name,
-				Context.MODE_PRIVATE |
-						(readOnly ? 0 : Context.MODE_ENABLE_WRITE_AHEAD_LOGGING), null);
+		android.database.sqlite.SQLiteDatabase db = null;
+		try {
+			db = app.openOrCreateDatabase(name, Context.MODE_PRIVATE
+					| (readOnly ? 0 : Context.MODE_ENABLE_WRITE_AHEAD_LOGGING), null);
+		} catch (RuntimeException e) {
+			LOG.error(e.getMessage(), e);
+		}
 		if(db == null) {
 			return null;
 		}
