@@ -10,7 +10,10 @@ import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PointF;
+import android.graphics.drawable.ClipDrawable;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
+import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.StateListDrawable;
 import android.net.Uri;
 import android.os.Build;
@@ -31,6 +34,7 @@ import android.text.style.ImageSpan;
 import android.text.style.URLSpan;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewParent;
 import android.view.inputmethod.InputMethodManager;
@@ -248,6 +252,24 @@ public class AndroidUtils {
 		StateListDrawable res = new StateListDrawable();
 		res.addState(new int[]{state}, stateDrawable);
 		res.addState(new int[]{}, normal);
+		return res;
+	}
+
+	public static LayerDrawable createProgressDrawable(@ColorInt int bgColor, @ColorInt int progressColor) {
+		ShapeDrawable bg = new ShapeDrawable();
+		bg.getPaint().setColor(bgColor);
+
+		ShapeDrawable progress = new ShapeDrawable();
+		progress.getPaint().setColor(progressColor);
+
+		LayerDrawable res = new LayerDrawable(new Drawable[]{
+				bg,
+				new ClipDrawable(progress, Gravity.START, ClipDrawable.HORIZONTAL)
+		});
+
+		res.setId(0, android.R.id.background);
+		res.setId(1, android.R.id.progress);
+
 		return res;
 	}
 

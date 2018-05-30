@@ -568,6 +568,10 @@ public class MapActivityLayers {
 		return activity.getString(resId);
 	}
 
+	public RouteLayer getRouteLayer() {
+		return routeLayer;
+	}
+
 	public PointNavigationLayer getNavigationLayer() {
 		return navigationLayer;
 	}
