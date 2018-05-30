@@ -253,7 +253,7 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 		}
 	}
 
-	private void updateHeader() {
+	public void updateHeader() {
 		if (fragmentAdapter != null) {
 			fragmentAdapter.updateHeader(adapter.getCount());
 		}

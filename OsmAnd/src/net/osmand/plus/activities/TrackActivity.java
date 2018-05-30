@@ -34,6 +34,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.measurementtool.NewGpxData;
 import net.osmand.plus.myplaces.FavoritesActivity;
 import net.osmand.plus.myplaces.SplitSegmentDialogFragment;
+import net.osmand.plus.myplaces.TrackActivityFragmentAdapter;
 import net.osmand.plus.myplaces.TrackBitmapDrawer;
 import net.osmand.plus.myplaces.TrackBitmapDrawer.TrackBitmapDrawerListener;
 import net.osmand.plus.myplaces.TrackPointFragment;
@@ -317,6 +318,19 @@ public class TrackActivity extends TabActivity {
 			Fragment frag = f.get();
 			if (frag instanceof TrackSegmentFragment) {
 				((TrackSegmentFragment) frag).updateSplitView();
+			}
+		}
+	}
+
+	public void updateHeader(Fragment sender) {
+		for (WeakReference<Fragment> f : fragList) {
+			Fragment frag = f.get();
+			if (frag != sender) {
+				if (frag instanceof TrackSegmentFragment) {
+					((TrackSegmentFragment) frag).updateHeader();
+				} else if (frag instanceof TrackPointFragment) {
+					((TrackPointFragment) frag).updateHeader();
+				}
 			}
 		}
 	}
