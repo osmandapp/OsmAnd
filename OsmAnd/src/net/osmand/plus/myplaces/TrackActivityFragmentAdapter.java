@@ -422,7 +422,7 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 		}
 	}
 
-	private boolean isGpxFileSelected(GPXFile gpxFile) {
+	public boolean isGpxFileSelected(GPXFile gpxFile) {
 		return gpxFile != null &&
 				((gpxFile.showCurrentTrack && app.getSelectedGpxHelper().getSelectedCurrentRecordingTrack() != null) ||
 						(gpxFile.path != null && app.getSelectedGpxHelper().getSelectedFileByPath(gpxFile.path) != null));

@@ -633,8 +633,19 @@ public class TrackPointFragment extends OsmandExpandableListFragment implements 
 			}
 			updateSelectionMode(actionMode);
 		} else {
-			if (item.group.getGpx() != null) {
-				app.getSelectedGpxHelper().setGpxFileToDisplay(item.group.getGpx());
+			GPXFile gpx = item.group.getGpx();
+			if (gpx != null) {
+				TrackActivity trackActivity = getTrackActivity();
+				if (trackActivity != null && fragmentAdapter != null) {
+					boolean gpxFileSelected = fragmentAdapter.isGpxFileSelected(gpx);
+					if (!gpxFileSelected) {
+						Intent intent = trackActivity.getIntent();
+						if (intent != null) {
+							intent.putExtra(TrackActivity.SHOW_TEMPORARILY, true);
+						}
+					}
+				}
+				app.getSelectedGpxHelper().setGpxFileToDisplay(gpx);
 			}
 			final OsmandSettings settings = app.getSettings();
 			LatLon location = new LatLon(item.locationStart.lat, item.locationStart.lon);
