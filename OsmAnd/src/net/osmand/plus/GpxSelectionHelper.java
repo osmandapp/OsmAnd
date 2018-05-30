@@ -244,7 +244,10 @@ public class GpxSelectionHelper {
 		return dg;
 	}
 
-	private static void processGroupTrack(OsmandApplication app, GpxDisplayGroup group) {
+	private static void processGroupTrack(@NonNull OsmandApplication app, @NonNull GpxDisplayGroup group) {
+		if (group.track == null) {
+			return;
+		}
 		List<GpxDisplayItem> list = group.getModifiableList();
 		String timeSpanClr = Algorithms.colorToString(ContextCompat.getColor(app, R.color.gpx_time_span_color));
 		String speedClr = Algorithms.colorToString(ContextCompat.getColor(app, R.color.gpx_speed));
@@ -252,7 +255,6 @@ public class GpxSelectionHelper {
 		String descClr = Algorithms.colorToString(ContextCompat.getColor(app, R.color.gpx_altitude_desc));
 		String distanceClr = Algorithms.colorToString(ContextCompat.getColor(app, R.color.gpx_distance_color));
 		final float eleThreshold = 3;
-//		int t = 1;
 		for (TrkSegment r : group.track.segments) {
 			if (r.points.size() == 0) {
 				continue;

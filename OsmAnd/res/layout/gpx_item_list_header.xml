@@ -180,4 +180,14 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/bottom_divider"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone">
+
+        <include layout="@layout/list_item_divider"/>
+
+    </LinearLayout>
+
 </LinearLayout>

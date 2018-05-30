@@ -675,6 +675,12 @@ public class TrackPointFragment extends OsmandExpandableListFragment implements 
 		}
 	}
 
+	public void updateHeader() {
+		if (fragmentAdapter != null) {
+			fragmentAdapter.updateHeader(0);
+		}
+	}
+
 	class PointGPXAdapter extends OsmandBaseExpandableListAdapter implements Filterable {
 
 		Map<GpxDisplayGroup, List<GpxDisplayItem>> itemGroups = new LinkedHashMap<>();

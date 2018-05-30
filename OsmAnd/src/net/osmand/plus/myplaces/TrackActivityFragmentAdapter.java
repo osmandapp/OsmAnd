@@ -276,13 +276,14 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 		final View splitIntervalView = headerView.findViewById(R.id.split_interval_view);
 		final View colorView = headerView.findViewById(R.id.color_view);
 		vis = (SwitchCompat) headerView.findViewById(R.id.showOnMapToggle);
+		final View bottomDivider = headerView.findViewById(R.id.bottom_divider);
 		GPXFile gpxFile = getGpx();
 		boolean gpxFileSelected = isGpxFileSelected(gpxFile);
 
 		boolean hasPath = gpxFile != null && (gpxFile.tracks.size() > 0 || gpxFile.routes.size() > 0);
 		TrackActivity activity = getTrackActivity();
 		TrackBitmapDrawer trackDrawer = getTrackBitmapDrawer();
-		if (activity != null && trackDrawer!= null) {
+		if (activity != null && trackDrawer != null) {
 			if (trackDrawer.isNonInitialized()) {
 				if (trackDrawer.initAndDraw()) {
 					imageView.setVisibility(View.VISIBLE);
@@ -294,21 +295,33 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 			}
 		}
 
-		if (showMapOnly) {
-			headerView.findViewById(R.id.track_settings_view).setVisibility(View.GONE);
-		} else {
-			vis.setChecked(gpxFileSelected);
-			vis.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-				@Override
-				public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-					if (!isChecked) {
-						selectedSplitInterval = 0;
-					}
-					setTrackVisibilityOnMap(vis.isChecked());
+		vis.setChecked(gpxFileSelected);
+		vis.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				if (!isChecked) {
+					selectedSplitInterval = 0;
+				}
+				setTrackVisibilityOnMap(vis.isChecked());
+				if (!showMapOnly) {
 					updateSplitIntervalView(splitIntervalView);
 					updateColorView(colorView);
 				}
-			});
+				TrackActivity trackActivity = getTrackActivity();
+				if (trackActivity != null) {
+					trackActivity.updateHeader(fragment);
+				}
+			}
+		});
+
+		if (showMapOnly) {
+			splitIntervalView.setVisibility(View.GONE);
+			splitColorView.setVisibility(View.GONE);
+			divider.setVisibility(View.GONE);
+			bottomDivider.setVisibility(View.VISIBLE);
+		} else {
+			bottomDivider.setVisibility(View.GONE);
+
 			updateColorView(colorView);
 			colorView.setOnClickListener(new View.OnClickListener() {
 				@Override
@@ -411,8 +424,8 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 
 	private boolean isGpxFileSelected(GPXFile gpxFile) {
 		return gpxFile != null &&
-					((gpxFile.showCurrentTrack && app.getSelectedGpxHelper().getSelectedCurrentRecordingTrack() != null) ||
-							(gpxFile.path != null && app.getSelectedGpxHelper().getSelectedFileByPath(gpxFile.path) != null));
+				((gpxFile.showCurrentTrack && app.getSelectedGpxHelper().getSelectedCurrentRecordingTrack() != null) ||
+						(gpxFile.path != null && app.getSelectedGpxHelper().getSelectedFileByPath(gpxFile.path) != null));
 	}
 
 	private void setTrackVisibilityOnMap(boolean visible) {
