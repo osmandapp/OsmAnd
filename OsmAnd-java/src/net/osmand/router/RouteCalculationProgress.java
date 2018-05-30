@@ -21,25 +21,25 @@ public class RouteCalculationProgress {
 	public boolean isCancelled;
 	public boolean requestPrivateAccessRouting;
 	
-	private static final float INITIAL_PROGRSS = 0.05f;
+	private static final float INITIAL_PROGRESS = 0.05f;
 	private static final float FIRST_ITERATION = 0.72f;
 	
 	public float getLinearProgress() {
 		float p = Math.max(distanceFromBegin, distanceFromEnd);
-		float all = totalEstimatedDistance * 1.25f;
+		float all = totalEstimatedDistance * 1.35f;
 		float pr = 0;
 		if (all > 0) {
-			pr = p * p / (all * all);
+			pr = Math.min(p * p / (all * all), 1);
 		}
-		float progress = INITIAL_PROGRSS;
+		float progress = INITIAL_PROGRESS;
 		if (totalIterations > 1) {
-			if (iteration <= 0) {
-				progress = pr * FIRST_ITERATION + INITIAL_PROGRSS;
+			if (iteration < 1) {
+				progress = pr * FIRST_ITERATION + INITIAL_PROGRESS;
 			} else {
-				progress = (INITIAL_PROGRSS + FIRST_ITERATION) + pr * (1 - FIRST_ITERATION - INITIAL_PROGRSS);
+				progress = (INITIAL_PROGRESS + FIRST_ITERATION) + pr * (1 - FIRST_ITERATION - INITIAL_PROGRESS);
 			}
 		} else {
-			progress = INITIAL_PROGRSS + pr * (1 - INITIAL_PROGRSS);
+			progress = INITIAL_PROGRESS + pr * (1 - INITIAL_PROGRESS);
 		}
 		return Math.min(progress * 100f, 99);
 	}

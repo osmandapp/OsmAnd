@@ -231,18 +231,20 @@
                     tools:src="@drawable/ic_action_test_light"/>
             </LinearLayout>
         </LinearLayout>
+        
+		<ProgressBar
+			android:id="@+id/map_horizontal_progress"
+			style="?android:attr/progressBarStyleHorizontal"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_gravity="bottom"
+			android:max="100"
+			android:minHeight="0dp"
+			android:visibility="gone"
+			tools:progress="60"
+			tools:visibility="visible" />
     </FrameLayout>
 
-	<ProgressBar
-		android:id="@+id/map_horizontal_progress"
-		style="?android:attr/progressBarStyleHorizontal"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:max="100"
-		android:minHeight="0dp"
-		android:visibility="gone"
-		tools:progress="60"
-		tools:visibility="visible" />
 
 	<FrameLayout
         android:layout_width="match_parent"

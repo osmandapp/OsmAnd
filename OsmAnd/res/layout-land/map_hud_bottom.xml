@@ -192,6 +192,19 @@
                     android:contentDescription="@string/shared_string_hide"
                     android:src="@drawable/headliner_close"/>
             </LinearLayout>
+            
+               	<ProgressBar
+        			android:id="@+id/map_horizontal_progress"
+        			style="?android:attr/progressBarStyleHorizontal"
+        			android:layout_width="match_parent"
+        			android:layout_gravity="bottom"
+        			android:layout_height="wrap_content"
+        			android:max="100"
+        			android:minHeight="0dp"
+        			android:visibility="gone"
+        			tools:progress="60"
+        			tools:visibility="visible" />
+            
 
         </FrameLayout>
 
@@ -242,16 +255,6 @@
 
     </LinearLayout>
 
-    <ProgressBar
-        android:id="@+id/map_horizontal_progress"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:max="100"
-        android:minHeight="0dp"
-        android:visibility="gone"
-        tools:progress="60"
-        tools:visibility="visible" />
 
     <include
         layout="@layout/move_marker_bottom_sheet"
