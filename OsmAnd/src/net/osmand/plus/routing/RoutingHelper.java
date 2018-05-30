@@ -983,12 +983,21 @@ public class RoutingHelper {
 					"Calculating route", params, paramsChanged); //$NON-NLS-1$
 			currentRunningJob = newThread;
 			if (updateProgress) {
+				startProgress(params);
 				updateProgress(params);
 			}
 			if (prevRunningJob != null) {
 				newThread.setWaitPrevJob(prevRunningJob);
 			}
 			currentRunningJob.start();
+		}
+	}
+
+	private void startProgress(final RouteCalculationParams params) {
+		if (params.calculationProgressCallback != null) {
+			params.calculationProgressCallback.start();
+		} else if (progressRoute != null) {
+			progressRoute.start();
 		}
 	}
 
@@ -1041,10 +1050,13 @@ public class RoutingHelper {
 
 	public interface RouteCalculationProgressCallback {
 
-		// set visibility
-		public void updateProgress(int progress);
-		public void requestPrivateAccessRouting();
-		public void finish();
+		void start();
+
+		void updateProgress(int progress);
+
+		void requestPrivateAccessRouting();
+
+		void finish();
 	}
 
 
