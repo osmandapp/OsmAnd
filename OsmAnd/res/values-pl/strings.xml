@@ -260,11 +260,11 @@
     <string name="maps_could_not_be_downloaded">Nie udało się pobrać tej mapy</string>
     <string name="continuous_rendering">Renderowanie ciągłe</string>
     <string name="continuous_rendering_descr">Używa ciągłego renderowania podczas wyświetlania zamiast renderowania jednego obrazu naraz.</string>
-    <string name="rendering_exception">Wystąpił błąd podczas rysowania wybranej powierzchni</string>
+    <string name="rendering_exception">Nie udało się narysować wybranej powierzchni</string>
     <string name="rendering_out_of_memory">Brak wystarczającej ilości pamięci, aby wyświetlić wybrany obszar</string>
     <string name="show_point_options">Użyj położenia…</string>
     <string name="renderer_load_sucess">Wczytano renderer</string>
-    <string name="renderer_load_exception">Wystąpił błąd: Nie wczytano renderera</string>
+    <string name="renderer_load_exception">Nie wczytano renderera</string>
     <string name="renderers">Renderer wektorowy</string>
     <string name="renderers_descr">Wybierz wygląd mapy wektorowej offline.</string>
     <string name="poi_context_menu_website">Wyświetl stronę internetową użytecznego miejsca</string>
@@ -308,7 +308,7 @@
 
     <string name="error_occurred_loading_gpx">Wystąpił błąd podczas wczytywania GPX</string>
     <string name="send_report">Wyślij zgłoszenie</string>
-    <string name="none_region_found">Brak danych offline na karcie pamięci. Proszę pobrać je z sieci.</string>
+    <string name="none_region_found">Nie znaleziono pobranych map na karcie pamięci.</string>
     <string name="poi_namefinder_query_empty">Wprowadź zapytanie by znaleźć POI</string>
     <string name="any_poi">Jakiekolwiek</string>
     
@@ -325,7 +325,7 @@
 
     <string name="use_trackball_descr">Umożliwia przesuwanie mapy za pomocą trackballa.</string>
     <string name="use_trackball">Używanie trackballa</string>
-    <string name="background_service_wait_int_descr">Czas oczekiwania na poprawne położenie GPS.</string>
+    <string name="background_service_wait_int_descr">Ustawia maksymalny czas oczekiwania na poprawne położenie GPS.</string>
     <string name="background_service_wait_int">Czas oczekiwania</string>
 
     <string name="where_am_i">Gdzie jestem?</string>
@@ -398,8 +398,8 @@
     <string name="show_transport_over_map">Pokaż przystanki</string>
     <string name="hello">Aplikacja do nawigacji satelitarnej OsmAnd</string>
     <string name="update_poi_success">Uaktualniono dane użytecznych miejsc (wczytano {0})</string>
-    <string name="update_poi_error_local">Błąd uaktualniania lokalnej listy UM</string>
-    <string name="update_poi_error_loading">Błąd pobierania danych z serwera</string>
+    <string name="update_poi_error_local">Nie uaktualniono lokalnej listy UM</string>
+    <string name="update_poi_error_loading">Nie pobrano danych z serwera</string>
     <string name="update_poi_no_offline_poi_index">Brak danych offline UM dla tego rejonu</string>
     <string name="update_poi_is_not_available_for_zoom">Uaktualnianie UM jest niedostępne dla małych poziomów przybliżenia</string>
     <string name="context_menu_item_update_poi">Uaktualnij użyteczne miejsce</string>
@@ -459,10 +459,10 @@
     <string name="loading_cities">Wczytywanie miast…</string>
 
     <string name="poi">Użyteczne miejsce</string>
-    <string name="error_occurred_saving_gpx">Błąd podczas zapisywania śladu GPX</string>
+    <string name="error_occurred_saving_gpx">Nie zapisano śladu GPX</string>
     <string name="error_calculating_route">Błąd wyznaczania trasy</string>
-    <string name="error_calculating_route_occured">Wystąpił błąd podczas wyznaczania trasy</string>
-    <string name="empty_route_calculated">Błąd: Wyznaczono pustą trasę</string>
+    <string name="error_calculating_route_occured">Nie wyznaczono trasy</string>
+    <string name="empty_route_calculated">Wyznaczono pustą trasę</string>
     <string name="new_route_calculated_dist">Obliczono nową trasę, odległość</string>
     <string name="arrived_at_destination">Osiągnięto cel</string>
     <string name="invalid_locations">Nieprawidłowe współrzędne</string>
@@ -589,7 +589,7 @@
 
 
     <string name="osb_comment_dialog_success">Dodano komentarz</string>
-    <string name="osb_comment_dialog_error">Wystąpił błąd: Nie dodano komentarza</string>
+    <string name="osb_comment_dialog_error">Nie dodano komentarza</string>
 
 
     <string name="poi_edit_title">Edytowanie użytecznego miejsca</string>
@@ -602,7 +602,7 @@
     <string name="poi_action_add">dodaj</string>
     <string name="poi_action_change">zmień</string>
     <string name="poi_action_succeded_template">Zakończono czynność {0}.</string>
-    <string name="poi_error_unexpected_template">Wystąpił nieoczekiwany błąd podczas wykonywania czynności {0}.</string>
+    <string name="poi_error_unexpected_template">Nie można wykonać czynności {0}.</string>
     <string name="poi_error_io_error_template">Wystąpił błąd wejścia/wyjścia podczas wykonywania czynności {0}.</string>
     <string name="poi_error_info_not_loaded">Nie wczytano informacji na temat węzła</string>
     <string name="poi_dialog_opening_hours">Otwarte</string>
@@ -742,7 +742,7 @@
     <string name="gpx_monitoring_disabled_warn">Zapisuj ślad używając widżetu GPX lub ustawienia „Nagrywanie trasy”.</string>
     <string name="show_current_gpx_title">Aktualny ślad</string>
 
-    <string name="free_version_message">Ta darmowa wersja OsmAnd jest ograniczona do %1$s pobrań (dodania i aktualizacji map) i nie obsługuje artykułów Wikipedii w trybie offline.</string>
+    <string name="free_version_message">Możesz pobrać lub zaktualizować %1$s map.</string>
     <string name="free_version_title">Wersja darmowa</string>
     <string name="poi_context_menu_showdescription">Wyświetla opis użytecznego miejsca.</string>
     <string name="index_name_north_america">Ameryka Północna</string>
@@ -1039,7 +1039,7 @@
     <string name="av_use_external_recorder">Używanie aplikacji kamery</string>
     <string name="av_settings_descr">Konfiguruj ustawienia dźwięku i obrazu.</string>
     <string name="av_settings">Ustawienia obrazu/dźwięku </string>
-    <string name="recording_error">Wystąpił błąd podczas nagrywania </string>
+    <string name="recording_error">Nagrywanie nie powiodło się</string>
     <string name="recording_camera_not_available">Kamera jest niedostępna</string>
     <string name="recording_is_recorded">Nagrywanie dźwięku/obrazu. Aby zatrzymać naciśnij przycisk na widżecie.</string>
     <string name="recording_playing">Dźwięk z wybranego nagrania jest odtwarzany.\n%1$s</string>
@@ -1155,7 +1155,7 @@
     <string name="distance_measurement_load_gpx">Otwórz plik GPX</string>
     <string name="delete_point">Usuń punkt</string>
     <string name="local_osm_changes_backup_successful">Plik zmian OSM został wygenerowany %1$s</string>
-    <string name="local_osm_changes_backup_failed">Wystąpił błąd podczas tworzenia kopii zapasowej zmian OSM</string>
+    <string name="local_osm_changes_backup_failed">Nie utworzono kopii zapasowej zmian OSM</string>
     <string name="local_osm_changes_backup">Stwórz kopię w formacie zmian OSM</string>
     <string name="intermediate_items_sort_by_distance">Posortuj wg odległości</string>
     <string name="intermediate_items_sort_return">Optymalizacja kolejności celów pośrednich na trasie do miejsca docelowego.</string>
@@ -1675,7 +1675,7 @@
     <string name="map_locale">Język mapy</string>
     <string name="navigate_point_zone">Strefa</string>
     <string name="download_tab_downloads">Dostępne</string>
-    <string name="download_tab_updates">Uaktualnienia</string>
+    <string name="download_tab_updates">Aktualizacje</string>
     <string name="rendering_attr_roadStyle_name">Styl dróg</string>
     <string name="rendering_value_default_name">Domyślnie</string>
     <string name="rendering_value_orange_name">Pomarańczowy</string>
@@ -1720,7 +1720,7 @@
     <string name="device_memory">Pamięć urządzenia</string>
     <string name="edit_group">Modyfikowanie grupy</string>
     <string name="parking_place">Miejsce parkowania</string>
-    <string name="avoid_roads_msg">Można wyznaczyć alternatywną trasę wybierając drogi, które mają być omijane</string>
+    <string name="avoid_roads_msg">Wyznacz alternatywną trasę wybierając drogi, które mają być omijane</string>
     <string name="enable_proxy_title">Włączenie proxy HTTP</string>
     <string name="proxy_host_title">Host proxy</string>
     <string name="proxy_port_title">Port proxy</string>
@@ -1964,7 +1964,7 @@ Długość %2$s</string>
     <string name="favourites">Ulubione</string>
     <string name="saved_at_time">Zapisano o: %1$s</string>
     <string name="poi_deleted_localy">Użyteczne miejsce zostanie usunięte po wysłaniu zmian</string>
-    <string name="show_gpx">Wyświetlanie GPX</string>
+    <string name="show_gpx">Wyświetlanie danych GPX</string>
     <string name="show_on_start">Wyświetlanie podczas uruchamiania</string>
     <string name="count_of_lines">Liczba linii</string>
     <string name="unsaved_changes_will_be_lost">Wszelkie niezapisane zmiany zostaną utracone. Kontynuować?</string>
@@ -2039,7 +2039,7 @@ Długość %2$s</string>
     <string name="simulate_initial_startup_descr">Ustala flagę wskazującą pierwsze uruchomienie programu zachowując wszystkie pozostałe ustawienia.</string>
     <string name="share_geo">geo:</string>
     <string name="confirm_download_roadmaps">Mapa samochodowa nie jest potrzebna jeśli masz mapę standardową. Pobrać mimo to?</string>
-    <string name="free_downloads_used_description">Wyświetla ilość zużytych darmowych pobrań.</string>
+    <string name="free_downloads_used_description">Wyświetla liczbę pozostałych darmowych pobrań.</string>
 
     <string name="show_on_start_description">Przełącza wyświetlanie kokpitu po uruchomieniu.</string>
     <string name="new_version">Nowa wersja</string>
@@ -2108,9 +2108,9 @@ Długość %2$s</string>
     <string name="osm_edit_removed_note">Usunięto uwagę OSM</string>
     <string name="osm_edit_created_note">Utworzono uwagę OSM</string>
     <string name="osn_add_dialog_title">Utwórz uwagę</string>
-    <string name="osn_add_dialog_error">Wystąpił błąd: Nie utworzono uwagi</string>
+    <string name="osn_add_dialog_error">Nie utworzono uwagi</string>
     <string name="osn_close_dialog_success">Zamknięto uwagę</string>
-    <string name="osn_close_dialog_error">Wystąpił błąd: Nie zamknięto uwagi</string>
+    <string name="osn_close_dialog_error">Nie zamknięto uwagi</string>
     <string name="shared_string_commit">Zatwierdź</string>
 
     <string name="context_menu_item_edit_waypoint">Edytuj punkt śladu GPX</string>
@@ -2173,7 +2173,7 @@ Długość %2$s</string>
 <string name="shared_string_remove">Usuń</string>
     <string name="data_is_not_available">Dane niedostępne</string>
     <string name="shared_string_select">Wybierz</string>
-    <string name="clear_updates_proposition_message">Można usunąć pobrane uaktualnienia i przywrócić pierwotną wersję mapy</string>
+    <string name="clear_updates_proposition_message">Usuwanie pobranych aktualizacji i przywrócenie pierwotnej wersji mapy</string>
     <string name="number_of_edits">Liczba edycji</string>
     <string name="reports_for">Region raportowania</string>
 <string name="number_of_contributors">Liczba współtwórców</string>
@@ -2189,7 +2189,7 @@ Długość %2$s</string>
     <string name="download_files_question_space_with_temp">Czy pobrać {0} plik(-i/-ów)?
  Wymagane miejsce {3} MB tymczasowo i {1} MB na stałe.
  (Dostępne miejsce {2} MB.)</string>
-    <string name="upload_osm_note_description">Można przesłać uwagi OSM anonimowo lub używając swojego profilu na OpenStreetMap.org.</string>
+    <string name="upload_osm_note_description">Przesyłanie uwag OSM anonimowo lub używając profilu na OpenStreetMap.org.</string>
     <string name="upload_osm_note">Wysyłanie uwagi OSM</string>
     <string name="upload_anonymously">Wysłanie anonimowo</string>
 
@@ -2585,7 +2585,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="rendering_attr_depthContours_name">Mapy batymetryczne</string>
 	
     <string name="routing_attr_height_obstacles_name">Użyj danych wysokościowych</string>
-    <string name="routing_attr_height_obstacles_description">Używa danych wysokościowych dostarczanych przez SRTM, ASTER i EU-DEM.</string>
+    <string name="routing_attr_height_obstacles_description">Używa danych wysokościowych (dane z SRTM, ASTER i EU-DEM).</string>
     <string name="routing_attr_height_relief_smoothness_factor_description">Więcej równin lub więcej wzgórz</string>
 
     <string name="route_altitude">Wysokość trasy</string>
@@ -2870,7 +2870,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="route_is_calculated">Trasa jest wyznaczona</string>
     <string name="round_trip">Zamknięta trasa</string>
     <string name="plan_route_no_markers_toast">Należy dodać co najmniej jeden znacznik, aby skorzystać z tej funkcji.</string>
-    <string name="osn_modify_dialog_error">Wystąpił błąd: nie zmieniono uwagi</string>
+    <string name="osn_modify_dialog_error">Nie udało się zmodyfikować uwagi</string>
     <string name="osn_modify_dialog_title">Zmodyfikuj uwagę</string>
     <string name="context_menu_item_modify_note">Edytuj uwagę OSM</string>
     <string name="make_round_trip_descr">Dodaj kopię punktu początkowego jako punkt końcowy.</string>
@@ -2994,7 +2994,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
 	<string name="north_abbreviation">Pn.</string>
 	<string name="optional_point_name">Dodatkowa nazwa punktu</string>
     <string name="transport_nearby_routes_within">Trasy w pobliżu</string>
-    <string name="transport_nearby_routes">W pobliżu</string>
+    <string name="transport_nearby_routes">W odległości</string>
     <string name="enter_the_file_name">Proszę wprowadzić nazwę pliku.</string>
     <string name="map_import_error">Błąd importowania mapy</string>
     <string name="map_imported_successfully">Zaimportowano mapę</string>
@@ -3044,8 +3044,8 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="shared_string_do">Tak</string>
     <string name="shared_string_only_with_wifi">Tylko przez Wi-Fi</string>
     <string name="wikivoyage_download_pics">Pobierz obrazy</string>
-    <string name="wikivoyage_download_pics_descr">Obrazy z artykułów mogą być pobrane w celu użycia w trybie offline.
-\nMożesz zawsze zmienić ustawienia w \"Przeglądaj\" → \"Opcje\".</string>
+    <string name="wikivoyage_download_pics_descr">Obrazy z artykułów mogą być pobrane w celu użycia w trybie offline. 
+\nZmian można dokonać w \"Przeglądaj\" → \"Opcje\".</string>
     <string name="shared_string_wifi_only">Tylko przez Wi-Fi</string>
     <string name="select_travel_book">Wybierz podręcznik podróży</string>
     <string name="shared_string_travel_book">Podręcznik podróży</string>
@@ -3078,7 +3078,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
 	<string name="update_is_available">Dostępne uaktualnienie</string>
 	<string name="download_file">Pobierz plik</string>
     <string name="start_editing_card_image_text">Bezpłatny przewodnik po świecie, który każdy może edytować.</string>
-    <string name="welcome_to_open_beta_description">Podróże oparte są na Wikipodróżach. Przetestuj wszystkie funkcje podczas otwartych beta-testów za darmo. Po ich zakończeniu, Podróże będą dostępne dla subskrybentów OsmAnd Unlimited oraz posiadaczy OsmAnd+</string>
+    <string name="welcome_to_open_beta_description">Przewodniki turystyczne obecnie oparte są na Wikipodróżach. Przetestuj wszystkie funkcje podczas otwartych beta-testów za darmo. Po ich zakończeniu, przewodniki turystyczne będą dostępne dla subskrybentów OsmAnd Unlimited oraz posiadaczy OsmAnd+.</string>
     <string name="start_editing_card_description">Możesz i powinieneś edytować dowolny artykuł w Wikipodóżach. Podziel się wiedzą, doświadczeniem, talentem i uwagą</string>
     <string name="start_editing">Rozpocznij edycję</string>
     <string name="get_unlimited_access">Uzyskaj nieograniczony dostęp</string>
@@ -3172,4 +3172,8 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="contour_lines_hillshade_maps">Poziomice i cieniowanie rzeźby terenu</string>
     <string name="get_osmand_live">Zdobądź OsmAnd Live i odblokuj wszystkie funkcjonalności: dzienne uaktualnienia map z nieograniczoną liczbą pobrań, wszystkie płatne i nieodpłatne wtyczki, Wikipedię, przewodniki Wikipodróży i wiele innych.</string>
     <string name="purchase_dialog_travel_description">Proszę zakupić jeden z następujących, aby otrzymać funkcjonalność przewodnika podróży bez połączenia sieciowego:</string>
+    <string name="open_wikipedia_link_online">Otwórz odnośnik do Wikipedii online</string>
+    <string name="read_wikipedia_offline_description">Zasubskrybuj OsmAnd Live, by czytać artykuły Wikipedii i Wikipodróży offline.</string>
+    <string name="read_wikipedia_offline">Czytaj Wikipedię offline</string>
+    <string name="shared_string_gpx_files">Pliki GPX</string>
     </resources>
