@@ -176,7 +176,7 @@ public class RoutePlannerFrontEnd {
 			if (routeDirection != null) {
 				ctx.precalculatedRouteDirection = routeDirection.adopt(ctx);
 			}
-			ctx.calculationProgress.iteration++;
+			ctx.calculationProgress.nextIteration();
 			List<RouteSegmentResult> res = runNativeRouting(ctx, recalculationEnd);
 			if (res != null) {
 				new RouteResultPreparation().printResults(ctx, start, end, res);
@@ -199,7 +199,7 @@ public class RoutePlannerFrontEnd {
 		if (!addSegment(end, ctx, indexNotFound++, points)) {
 			return null;
 		}
-		ctx.calculationProgress.iteration++;
+		ctx.calculationProgress.nextIteration();
 		List<RouteSegmentResult> res = searchRoute(ctx, points, routeDirection);
 		// make start and end more precise
 		makeStartEndPointsPrecise(res, start, end, intermediates);

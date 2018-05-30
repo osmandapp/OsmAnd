@@ -43,4 +43,9 @@ public class RouteCalculationProgress {
 		}
 		return Math.min(progress * 100f, 99);
 	}
+
+	public void nextIteration() {
+		iteration++;
+		totalEstimatedDistance = 0;
+	}
 }
