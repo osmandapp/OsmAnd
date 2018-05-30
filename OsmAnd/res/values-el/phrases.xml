@@ -2192,4 +2192,50 @@
 	<string name="poi_guide">Γραφείο ξεναγών</string>
 	<string name="poi_quango">Ημικρατικός οργανισμός</string>
 	<string name="poi_consulting">Γραφείο συμβούλων</string>
+	<string name="poi_cooperative">Συνεταιριστικό γραφείο</string>
+	<string name="poi_office_forestry">Δασαρχείο</string>
+	<string name="poi_logistics">Επιμελητεία</string>
+	<string name="poi_parish">Ενοριακό γραφείο</string>
+	<string name="poi_publisher">Εκδοτικό γραφείο</string>
+
+	<string name="poi_fuel_91ul">Καύσιμο 91UL</string>
+	<string name="poi_fuel_100ll">Καύσιμο 100LL</string>
+	<string name="poi_fuel_autogas">Υγραέριο κίνησης</string>
+	<string name="poi_fuel_jeta1">Καύσιμο Jet A-1</string>
+	<string name="poi_fuel_adblue">Καύσιμο AdBlue</string>
+
+	<string name="poi_fuel_wood">Καύσιμο: ξύλο</string>
+	<string name="poi_fuel_charcoal">Καύσιμο: κάρβουνο</string>
+	<string name="poi_fuel_coal">Καύσιμο: γαιάνθρακας</string>
+
+	<string name="poi_street_lamp">Λάμπα δρόμου</string>
+
+	<string name="poi_escape_lane">Λωρίδα διαφυγής</string>
+
+	<string name="poi_crop_rice">Καλλιέργεια: ρύζι</string>
+	<string name="poi_crop_grass">Καλλιέργεια: χορτάρι</string>
+	<string name="poi_crop_corn">Καλλιέργεια: καλαμπόκι</string>
+	<string name="poi_crop_cereal">Καλλιέργεια: δημητριακά</string>
+	<string name="poi_crop_sugarcane">Καλλιέργεια: ζαχαροκάλαμο</string>
+	<string name="poi_crop_wheat">Καλλιέργεια: σιτάρι</string>
+	<string name="poi_crop_soy">Καλλιέργεια: σόγια</string>
+	<string name="poi_crop_barley">Καλλιέργεια: κριθάρι</string>
+	<string name="poi_crop_vegetables">Καλλιέργεια: λαχανικά</string>
+	<string name="poi_crop_hop">Καλλιέργεια: λυκίσκος</string>
+	<string name="poi_crop_rape">Καλλιέργεια: ελαιοκράμβη</string>
+	<string name="poi_crop_beet">Καλλιέργεια: παντζάρια</string>
+	<string name="poi_crop_lavender">Καλλιέργεια: λεβάντα</string>
+	<string name="poi_crop_tea">Καλλιέργεια: τσάι</string>
+	<string name="poi_crop_coffee">Καλλιέργεια: καφές</string>
+	<string name="poi_crop_poultry">Παραγωγή: πουλερικά</string>
+	<string name="poi_crop_sunflower">Καλλιέργεια: ηλίανθος</string>
+	<string name="poi_crop_raspberry">Καλλιέργεια: σμέουρα</string>
+	<string name="poi_crop_tobacco">Καλλιέργεια: καπνός</string>
+	<string name="poi_crop_strawberry">Καλλιέργεια: φράουλες</string>
+	<string name="poi_crop_vegetables_flowers">Καλλιέργεια: λαχανικά, λουλούδια</string>
+	<string name="poi_crop_cassava">Καλλιέργεια: μανιότη</string>
+	<string name="poi_crop_cranberry">Καλλιέργεια: μυρτίδια</string>
+	<string name="poi_crop_asparagus">Καλλιέργεια: σπαράγγι</string>
+	<string name="poi_crop_flowers">Καλλιέργεια: άνθη</string>
+
 	</resources>

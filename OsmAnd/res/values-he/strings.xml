@@ -2836,8 +2836,8 @@
     <string name="shared_string_do">לעשות</string>
     <string name="shared_string_only_with_wifi">רק עם רשת אלחוטית</string>
     <string name="wikivoyage_download_pics">הורדת תמונות</string>
-    <string name="wikivoyage_download_pics_descr">ניתן להוריד תמונות עבור ערכים לשימוש בלתי מקוון.
-\n תמיד ניתן לשנות את ההגדרה הזאת תחת ‚סיור’ ← ‚אפשרויות’.</string>
+    <string name="wikivoyage_download_pics_descr">ניתן להוריד תמונות ערכים לשימוש בלתי מקוון. 
+\n תמיד זמין תחת ‚סיור’ ← ‚אפשרויות’.</string>
     <string name="shared_string_wifi_only">רשת אלחוטית בלבד</string>
     <string name="select_travel_book">בחירת ספר מסע</string>
     <string name="shared_string_travel_book">ספר מסע</string>

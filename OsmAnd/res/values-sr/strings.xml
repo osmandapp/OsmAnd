@@ -2833,7 +2833,7 @@
     <string name="how_to_open_link">Како да отворим везу?</string>
     <string name="read_wikipedia_offline">Читај Википедију ван мреже</string>
     <string name="download_all">Преузми све</string>
-    <string name="shared_string_restart">Поново покрени</string>
+    <string name="shared_string_restart">Поново покрени апликацију</string>
     <string name="native_app_allocated_memory_descr">Укупно меморије које је алоцирала апликација %1$s MB (Далвик %2$s MB, остало %3$s MB). Пропорционално меморије %4$s MB (Андроид лимит %5$s MB, Далвик %6$s MB).</string>
     <string name="rendering_attr_noPolygons_description">Начини провидним све ваздушне одлике терена.</string>
     <string name="show_more_map_detail_descr">Приказуј неке детаље векторских карти (путеви итд.) већ на мањим зумовима.</string>
