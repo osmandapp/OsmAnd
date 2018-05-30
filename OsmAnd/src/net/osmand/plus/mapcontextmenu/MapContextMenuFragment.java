@@ -1529,7 +1529,6 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			view.findViewById(R.id.additional_info_row_container).setVisibility(View.VISIBLE);
 			view.findViewById(R.id.additional_info_row).setVisibility(View.VISIBLE);
 		}
-		runLayoutListener();
 	}
 
 	private void updateDistanceDirection() {
@@ -1913,6 +1912,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 	private void doAfterMenuStateChange(int previousState, int newState) {
 		updateCompassVisibility();
 		updateAdditionalInfoVisibility();
+		runLayoutListener();
 	}
 }
 
