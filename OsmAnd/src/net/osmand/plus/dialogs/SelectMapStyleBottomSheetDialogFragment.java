@@ -74,6 +74,9 @@ public class SelectMapStyleBottomSheetDialogFragment extends MenuBottomSheetDial
 		} else {
 			selectedStyle = savedInstanceState.getString(SELECTED_STYLE_KEY);
 		}
+		if(selectedStyle == null) {
+			selectedStyle = RendererRegistry.DEFAULT_RENDER;
+		}
 
 		rbColorList = AndroidUtils.createCheckedColorStateList(context, R.color.icon_color, getActiveColorId());
 
