@@ -122,7 +122,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/additional_info_row"
+                android:id="@+id/additional_info_row_container"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
@@ -137,7 +137,12 @@
                 android:paddingBottom="3dp"
                 android:paddingLeft="@dimen/context_menu_padding_margin_default"
                 android:paddingRight="@dimen/context_menu_padding_margin_default">
-
+                
+                <LinearLayout
+                    android:id="@+id/additional_info_row"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    
                 <net.osmand.plus.widgets.TextViewEx
                     android:id="@+id/context_menu_line3"
                     style="@style/TextAppearance.ContextMenuSubtitle"
@@ -193,6 +198,7 @@
                         tools:text="100500 km"
                         tools:textColor="?android:textColorSecondary"/>
 
+                </LinearLayout>
                 </LinearLayout>
 
             </LinearLayout>
