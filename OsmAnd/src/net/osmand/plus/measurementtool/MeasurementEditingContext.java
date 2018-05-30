@@ -284,6 +284,12 @@ public class MeasurementEditingContext {
 		params.ctx = application;
 		params.calculationProgress = calculationProgress = new RouteCalculationProgress();
 		params.calculationProgressCallback = new RoutingHelper.RouteCalculationProgressCallback() {
+
+			@Override
+			public void start() {
+
+			}
+
 			@Override
 			public void updateProgress(int progress) {
 				int pairs = calculatedPairs + snapToRoadPairsToCalculate.size();

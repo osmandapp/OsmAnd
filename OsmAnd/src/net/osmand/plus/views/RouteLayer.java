@@ -1,13 +1,17 @@
 package net.osmand.plus.views;
 
-import gnu.trove.list.array.TByteArrayList;
-import gnu.trove.list.array.TIntArrayList;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
-import java.util.TreeMap;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Matrix;
+import android.graphics.Paint;
+import android.graphics.Paint.Cap;
+import android.graphics.Path;
+import android.graphics.PointF;
+import android.graphics.PorterDuff.Mode;
+import android.graphics.PorterDuffColorFilter;
+import android.support.annotation.ColorInt;
 
 import net.osmand.Location;
 import net.osmand.data.LatLon;
@@ -21,17 +25,15 @@ import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.util.MapUtils;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Matrix;
-import android.graphics.Paint;
-import android.graphics.Paint.Cap;
-import android.graphics.Path;
-import android.graphics.PointF;
-import android.graphics.PorterDuff.Mode;
-import android.graphics.PorterDuffColorFilter;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
+import java.util.TreeMap;
+
+import gnu.trove.list.array.TByteArrayList;
+import gnu.trove.list.array.TIntArrayList;
 
 public class RouteLayer extends OsmandMapLayer {
 	
@@ -118,13 +120,7 @@ public class RouteLayer extends OsmandMapLayer {
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
 		if (helper.getFinalLocation() != null && helper.getRoute().isCalculated()) {
-			boolean updatePaints = attrs.updatePaints(view, settings, tileBox);
-			attrs.isPaint3 = false;
-			attrs.isPaint2 = false;
-			if(updatePaints) {
-				paintIconAction.setColorFilter(new PorterDuffColorFilter(attrs.paint3.getColor(), Mode.MULTIPLY));
-				paintIcon.setColorFilter(new PorterDuffColorFilter(attrs.paint2.getColor(), Mode.MULTIPLY));
-			}
+			updateAttrs(settings, tileBox);
 			
 			if(coloredArrowUp == null) {
 				Bitmap originalArrowUp = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_route_direction_arrow, null);
@@ -172,6 +168,16 @@ public class RouteLayer extends OsmandMapLayer {
 			}
 		}
 	
+	}
+
+	private void updateAttrs(DrawSettings settings, RotatedTileBox tileBox) {
+		boolean updatePaints = attrs.updatePaints(view, settings, tileBox);
+		attrs.isPaint3 = false;
+		attrs.isPaint2 = false;
+		if(updatePaints) {
+			paintIconAction.setColorFilter(new PorterDuffColorFilter(attrs.paint3.getColor(), Mode.MULTIPLY));
+			paintIcon.setColorFilter(new PorterDuffColorFilter(attrs.paint2.getColor(), Mode.MULTIPLY));
+		}
 	}
 
 	private void drawXAxisPoints(Canvas canvas, RotatedTileBox tileBox) {
@@ -241,6 +247,12 @@ public class RouteLayer extends OsmandMapLayer {
 				canvas.rotate(tb.getRotate(), tb.getCenterPixelX(), tb.getCenterPixelY());
 			}
 		}
+	}
+
+	@ColorInt
+	public int getRouteLineColor(boolean night) {
+		updateAttrs(new DrawSettings(night), view.getCurrentRotatedTileBox());
+		return attrs.paint.getColor();
 	}
 	
 	private void cullRamerDouglasPeucker(TByteArrayList survivor, List<Location> points,

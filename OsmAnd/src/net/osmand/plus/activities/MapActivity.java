@@ -281,8 +281,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			}
 		};
 		app.getResourceManager().getMapTileDownloader().addDownloaderCallback(downloaderCallback);
-		createProgressBarForRouting();
 		mapLayers.createLayers(mapView);
+		createProgressBarForRouting();
 		updateStatusBarColor();
 		// This situtation could be when navigation suddenly crashed and after restarting
 		// it tries to continue the last route
@@ -432,6 +432,15 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		final ProgressBar pbExt = (ProgressBar) findViewById(R.id.map_horizontal_progress_external);
 
 		app.getRoutingHelper().setProgressBar(new RouteCalculationProgressCallback() {
+
+			@Override
+			public void start() {
+				boolean night = getMyApplication().getDaynightHelper().isNightModeForMapControls();
+				int bgColor = ContextCompat.getColor(app, night
+						? R.color.map_progress_bar_bg_dark : R.color.map_progress_bar_bg_light);
+				pb.setProgressDrawable(AndroidUtils
+						.createProgressDrawable(bgColor, mapLayers.getRouteLayer().getRouteLineColor(night)));
+			}
 
 			@Override
 			public void updateProgress(int progress) {
