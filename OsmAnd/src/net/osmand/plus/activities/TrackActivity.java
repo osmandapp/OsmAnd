@@ -51,6 +51,7 @@ public class TrackActivity extends TabActivity {
 	public static final String OPEN_POINTS_TAB = "OPEN_POINTS_TAB";
 	public static final String OPEN_TRACKS_LIST = "OPEN_TRACKS_LIST";
 	public static final String CURRENT_RECORDING = "CURRENT_RECORDING";
+	public static final String SHOW_TEMPORARILY = "SHOW_TEMPORARILY";
 	protected List<WeakReference<Fragment>> fragList = new ArrayList<>();
 	private OsmandApplication app;
 	private TrackBitmapDrawer trackBitmapDrawer;
@@ -440,6 +441,7 @@ public class TrackActivity extends TabActivity {
 		private OsmandApplication app;
 		private WeakReference<TrackActivity> activityRef;
 		private File file;
+		private boolean showTemporarily;
 
 		private TrackActivity getTrackActivity() {
 			return activityRef.get();
@@ -455,6 +457,11 @@ public class TrackActivity extends TabActivity {
 			TrackActivity activity = getTrackActivity();
 			if (activity != null) {
 				activity.setSupportProgressBarIndeterminateVisibility(true);
+				Intent intent = activity.getIntent();
+				if (intent != null && intent.hasExtra(SHOW_TEMPORARILY)) {
+					showTemporarily = true;
+					intent.removeExtra(SHOW_TEMPORARILY);
+				}
 			}
 		}
 
@@ -491,7 +498,9 @@ public class TrackActivity extends TabActivity {
 			TrackActivity activity = getTrackActivity();
 			if (activity != null) {
 				activity.setSupportProgressBarIndeterminateVisibility(false);
-
+				if (showTemporarily && result != null) {
+					app.getSelectedGpxHelper().selectGpxFile(result, false, false);
+				}
 				if (!activity.stopped) {
 					activity.onGPXFileReady(result);
 				}
