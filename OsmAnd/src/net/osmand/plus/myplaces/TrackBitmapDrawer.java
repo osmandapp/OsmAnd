@@ -266,7 +266,7 @@ public class TrackBitmapDrawer {
 			float x = tileBox.getPixXFromLatLon(o.lat, o.lon);
 			float y = tileBox.getPixYFromLatLon(o.lat, o.lon);
 
-			int pointColor = o.getColor(fileColor);
+			int pointColor = o.getColor(fileColor) | 0xff000000;
 			paintIcon.setColorFilter(new PorterDuffColorFilter(pointColor, PorterDuff.Mode.MULTIPLY));
 			canvas.drawBitmap(pointSmall, x - pointSmall.getWidth() / 2, y - pointSmall.getHeight() / 2, paintIcon);
 		}
