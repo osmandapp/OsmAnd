@@ -3555,4 +3555,182 @@
 	<string name="poi_direction_exit">Diretzione: essida</string>
 	<string name="poi_direction_all">Diretzione: totus</string>
 
+	<string name="poi_winter_room_yes">Rifùgiu pro s\'ierru: eja</string>
+	<string name="poi_winter_room_no">Rifùgiu pro s\'ierru: nono</string>
+	<string name="poi_government_archive">Archìviu</string>
+	<string name="poi_government_ministry">Ministeru</string>
+	<string name="poi_government_public_service">Servìtziu pùblicu</string>
+	<string name="poi_government_social_security">Seguresa sotziale</string>
+	<string name="poi_government_social_services">Servìtzios sotziales</string>
+	<string name="poi_government_treasury">Ascusorgieria (tesoreria)</string>
+	<string name="poi_government_transportation">Istitutzione de sos trasportos</string>
+	<string name="poi_vhf">Canale VHF</string>
+
+	<string name="poi_gorge">Gula</string>
+	<string name="poi_couloir">Canalone</string>
+	<string name="poi_mountain_area">Àrea de monte</string>
+
+	<string name="poi_surface_clay">Arghidda</string>
+	<string name="poi_surface_tartan">Tartan</string>
+	<string name="poi_surface_artificial_turf">Erba artifitziale</string>
+	<string name="poi_surface_decoturf">DecoTurf</string>
+	<string name="poi_surface_metal_grid">Grìllia metàllica</string>
+
+	<string name="poi_location_underground">Positzione: in suta de terra</string>
+	<string name="poi_location_underwater">Positzione: in suta de s\'abba</string>
+	<string name="poi_location_overground">Positzione: in subra de sa superfìtzie</string>
+	<string name="poi_location_overhead">Positzione: subraelevadu</string>
+	<string name="poi_location_roof">Positzione: coberta</string>
+	<string name="poi_location_rooftop">Positzione: in subra de sa coberta</string>
+	<string name="poi_location_outdoor">Positzione: esterna</string>
+	<string name="poi_location_indoor">Positzione: interna</string>
+	<string name="poi_location_platform">Positzione: prataforma</string>
+	<string name="poi_location_kiosk">Positzione: chioscu</string>
+	<string name="poi_location_bridge">Positzione: ponte</string>
+	<string name="poi_location_wall">Positzione: muru</string>
+	<string name="poi_location_entrance">Positzione: intrada</string>
+
+	<string name="poi_operational_status_open">Abertu</string>
+	<string name="poi_operational_status_closed">Serradu</string>
+	<string name="poi_operational_status_restricted">Restrintu</string>
+	<string name="poi_operational_status_broken">Truncadu</string>
+	<string name="poi_operational_status_needs_maintenance">Tenent bisòngiu de manutentzione</string>
+
+	<string name="poi_water_place_durability_durable">Durabilidade de sa mitza de abba: duràbile</string>
+	<string name="poi_water_place_durability_emergency">Durabilidade de sa mitza de abba: emergèntzia</string>
+
+	<string name="poi_water_purification_none">Nudda</string>
+	<string name="poi_water_purification_chlorine">Cloru</string>
+	<string name="poi_water_purification_reverse_osmosis">Osmosi inversa</string>
+	<string name="poi_water_purification_aquatabs">Aquatabs</string>
+
+	<string name="poi_water_supply_water_well">Putzu de abba</string>
+	<string name="poi_water_supply_pipeline">Tubadura</string>
+	<string name="poi_water_supply_running_water">Abba currente</string>
+	<string name="poi_water_supply_pump">Pompa</string>
+	<string name="poi_water_supply_borehole">Perforatzione</string>
+	<string name="poi_water_supply_water_trucking">Càmion de abba</string>
+	<string name="poi_water_supply_water_tank">Depòsitu de abba</string>
+	<string name="poi_water_supply_bottled_water">Ampulla de abba</string>
+
+	<string name="poi_water_place_access_community">Comunidade</string>
+	<string name="poi_water_place_access_family">Famìlia</string>
+	<string name="poi_water_place_access_multifamilies">Famìlias mùltiplas</string>
+
+	<string name="poi_socket_cee_blue">Presa: CEE biaita</string>
+	<string name="poi_socket_cee_blue_current">Presa: CEE biaita: currente</string>
+	<string name="poi_socket_cee_blue_output">Presa: CEE biaita: essida</string>
+	<string name="poi_socket_cee_red_16a">Presa: CEE ruja 16A</string>
+	<string name="poi_socket_cee_red_16a_current">Presa: CEE ruja 16A: currente</string>
+	<string name="poi_socket_cee_red_16a_output">Presa: CEE ruja 16A: essida</string>
+	<string name="poi_socket_cee_red_32a">Presa: CEE ruja 32A</string>
+	<string name="poi_socket_cee_red_32a_current">Presa: CEE ruja 32A: currente</string>
+	<string name="poi_socket_cee_red_32a_output">Presa: CEE ruja 32A: essida</string>
+	<string name="poi_socket_cee_red_64a">Presa: CEE ruja 64A</string>
+	<string name="poi_socket_cee_red_64a_current">Presa: CEE ruja 64A: currente</string>
+	<string name="poi_socket_cee_red_64a_output">Presa: CEE ruja 64A: essida</string>
+	<string name="poi_socket_cee_red_125a">Presa: CEE ruja 125A</string>
+	<string name="poi_socket_cee_red_125a_current">Presa: CEE ruja 125A: currente</string>
+	<string name="poi_socket_cee_red_125a_output">Presa: CEE ruja 125A: essida</string>
+	<string name="poi_socket_type1">Presa: Casta 1</string>
+	<string name="poi_socket_type1_current">Presa: Casta 1: currente</string>
+	<string name="poi_socket_type1_output">Presa: Casta 1: essida</string>
+	<string name="poi_socket_type1_combo">Presa: Casta 1 combo</string>
+	<string name="poi_socket_type1_combo_current">Presa: Casta 1 combo: currente</string>
+	<string name="poi_socket_type1_combo_output">Presa: Casta 1 combo: essida</string>
+	<string name="poi_socket_type2">Presa: Casta 2</string>
+	<string name="poi_socket_type2_current">Presa: Casta 2: currente</string>
+	<string name="poi_socket_type2_output">Presa: Casta 2: essida</string>
+	<string name="poi_socket_type2_combo">Presa: Casta 2 combo</string>
+	<string name="poi_socket_type2_combo_current">Presa: Casta 2 combo: currente</string>
+	<string name="poi_socket_type2_combo_output">Presa: Casta 2 combo: essida</string>
+	<string name="poi_socket_type3">Presa: Casta 3</string>
+	<string name="poi_socket_type3_current">Presa: Casta 3: currente</string>
+	<string name="poi_socket_type3_output">Presa: Casta 3: essida</string>
+	<string name="poi_socket_chademo">Presa: CHAdeMO</string>
+	<string name="poi_socket_chademo_current">Presa: CHAdeMO: currente</string>
+	<string name="poi_socket_chademo_output">Presa: CHAdeMO: essida</string>
+	<string name="poi_socket_tesla_standard">Presa: Tesla istandard</string>
+	<string name="poi_socket_tesla_standard_current">Presa: Tesla istandard: currente</string>
+	<string name="poi_socket_tesla_standard_output">Presa: Tesla istandard: essida</string>
+	<string name="poi_socket_tesla_supercharger">Presa: Tesla Supercharger</string>
+	<string name="poi_socket_tesla_supercharger_current">Presa: Tesla Supercharger: currente</string>
+	<string name="poi_socket_tesla_supercharger_output">Presa: Tesla Supercharger: essida</string>
+	<string name="poi_socket_tesla_roadster">Presa: Tesla Roadster</string>
+	<string name="poi_socket_tesla_roadster_current">Presa: Tesla Roadster: currente</string>
+	<string name="poi_socket_tesla_roadster_output">Presa: Tesla Roadster: essida</string>
+	<string name="poi_socket_nema_5_15">Presa: NEMA 5-15R</string>
+	<string name="poi_socket_nema_5_15_current">Presa: NEMA 5-15R: currente</string>
+	<string name="poi_socket_nema_5_15_output">Presa: NEMA 5-15R: essida</string>
+	<string name="poi_socket_nema_5_20">Presa: NEMA 5-20</string>
+	<string name="poi_socket_nema_5_20_current">Presa: NEMA 5-20: currente</string>
+	<string name="poi_socket_nema_5_20_output">Presa: NEMA 5-20: essida</string>
+	<string name="poi_socket_nema_14_30">Presa: NEMA 14-30</string>
+	<string name="poi_socket_nema_14_30_current">Presa: NEMA 14-30: currente</string>
+	<string name="poi_socket_nema_14_30_output">Presa: NEMA 14-30: essida</string>
+	<string name="poi_socket_nema_14_50">Presa: NEMA 14-50</string>
+	<string name="poi_socket_nema_14_50_current">Presa: NEMA 14-50: currente</string>
+	<string name="poi_socket_nema_14_50_output">Presa: NEMA 14-50: essida</string>
+	<string name="poi_socket_schuko">Presa: Schuko</string>
+	<string name="poi_socket_schuko_current">Presa: Schuko: currente</string>
+	<string name="poi_socket_schuko_output">Presa: Schuko: essida</string>
+	<string name="poi_socket_bs1363">Presa: BS 1363</string>
+	<string name="poi_socket_bs1363_current">Presa: BS 1363: currente</string>
+	<string name="poi_socket_bs1363_output">Presa: BS 1363: essida</string>
+	<string name="poi_socket_as3112">Presa: AS/NZS 3112</string>
+	<string name="poi_socket_as3112_current">Presa: AS/NZS 3112: currente</string>
+	<string name="poi_socket_as3112_output">Presa: AS/NZS 3112: essida</string>
+
+	<string name="poi_car_no">Màchina: nono</string>
+	<string name="poi_bicycle_no">Bitzicleta: nono</string>
+	<string name="poi_scooter_no">Motorinu: nono</string>
+	<string name="poi_truck_no">Càmion: nono</string>
+
+	<string name="poi_parking_fee_yes">Tarifa de parchègiu: eja</string>
+	<string name="poi_parking_fee_no">Tarifa de parchègiu: nono</string>
+	<string name="poi_parking_fee">Tarifa de parchègiu</string>
+
+	<string name="poi_amperage">Amperàgiu</string>
+	<string name="poi_charging_station_output">Essida de s\'istatzione de càrriga</string>
+
+	<string name="poi_map_type_topo">Casta de mapa: topogràfica</string>
+	<string name="poi_map_type_street">Casta de mapa: istrada</string>
+	<string name="poi_map_type_scheme">Casta de mapa: ischema</string>
+	<string name="poi_map_type_toposcope">Casta de mapa: toposcòpica</string>
+	<string name="poi_post_flats">Appartamentu</string>
+
+	<string name="poi_ref_post">Còdighe postale</string>
+
+	<string name="poi_climbing_sport_no">Isport: nono</string>
+	<string name="poi_climbing_trad_no">Traditzionale: nono</string>
+	<string name="poi_climbing_orientation_n">Orientamentu de su muru: N</string>
+	<string name="poi_climbing_orientation_ne">Orientamentu de su muru: NE</string>
+	<string name="poi_climbing_orientation_e">Orientamentu de su muru: E</string>
+	<string name="poi_climbing_orientation_se">Orientamentu de su muru: SE</string>
+	<string name="poi_climbing_orientation_s">Orientamentu de su muru: S</string>
+	<string name="poi_climbing_orientation_sw">Orientamentu de su muru: SO</string>
+	<string name="poi_climbing_orientation_w">Orientamentu de su muru: O</string>
+	<string name="poi_climbing_orientation_nw">Orientamentu de su muru: NO</string>
+	<string name="poi_circumference">Tzircunferèntzia</string>
+	<string name="poi_diameter_crown">Diàmetru de sa corona</string>
+
+	<string name="poi_cannabis">Butega de cànnabis</string>
+
+	<string name="poi_socket_type1_yes">Casta 1</string>
+	<string name="poi_socket_type1_combo_yes">Casta 1 combo</string>
+	<string name="poi_socket_type2_yes">Casta 2</string>
+	<string name="poi_socket_type2_combo_yes">Casta 2 combo</string>
+	<string name="poi_socket_type3_yes">Casta 3</string>
+	<string name="poi_socket_chademo_yes">CHAdeMO</string>
+	<string name="poi_socket_tesla_standard_yes">Tesla istandard</string>
+	<string name="poi_socket_tesla_supercharger_yes">Tesla Supercharger</string>
+	<string name="poi_socket_tesla_roadster_yes">Tesla Roadster</string>
+	<string name="poi_socket_nema_5_15_yes">NEMA 5-15R</string>
+	<string name="poi_socket_nema_5_20_yes">NEMA 5-20</string>
+	<string name="poi_socket_nema_14_30_yes">NEMA 14-30</string>
+	<string name="poi_socket_nema_14_50_yes">NEMA 14-50</string>
+	<string name="poi_socket_schuko_yes">Schuko</string>
+	<string name="poi_socket_bs1363_yes">BS 1363</string>
+	<string name="poi_socket_as3112_yes">AS/NZS 3112</string>
+
 	</resources>
