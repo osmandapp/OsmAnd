@@ -511,7 +511,7 @@
 	<string name="poi_beach_resort">Istabilimentu balneare</string>
 	<string name="poi_dog_park">Parcu pro sos canes</string>
 	<string name="poi_leisure_fishing">Logu pro piscare</string>
-	<string name="poi_miniature_golf">Mini golf</string>
+	<string name="poi_miniature_golf">Minigolf</string>
 	<string name="poi_biergarten">Giardinu de sa birra (Biergarten)</string>
 	<string name="poi_fast_food">Màndigu lestru</string>
 	<string name="poi_craft_caterer">Servìtziu de ristorazione</string>
@@ -988,7 +988,7 @@
 	<string name="poi_denomination_church_of_scotland">Crèsia de Iscòtzia</string>
 	<string name="poi_denomination_salvation_army">Esèrtzitu de sa sarvesa</string>
 	<string name="poi_denomination_iglesia_ni_cristo">Iglesia ni cristo</string>
-	<string name="poi_denomination_uniting">Uniting</string>
+	<string name="poi_denomination_uniting">Unificada (Uniting)</string>
 	<string name="poi_denomination_mennonite">Mennonita</string>
 	<string name="poi_denomination_quaker">Cuàchera</string>
 	<string name="poi_denomination_bulgarian_orthodox">Ortodossa bùlgara</string>
@@ -1947,7 +1947,7 @@
 	<string name="poi_denomination">Denominatzione</string>
 	<string name="poi_information_type">Casta</string>
 	<string name="poi_information_contents">Cuntenutu</string>
-	<string name="poi_clock_option">Àteras</string>
+	<string name="poi_clock_option">Àteru</string>
 	<string name="poi_scout_camp">Campu scout</string>
 	<string name="poi_backcountry">Foras de pista</string>
 	<string name="poi_resort_type">Casta</string>
@@ -2125,7 +2125,7 @@
 	<string name="poi_outdoor_seating_no">Peruna cadira in foras</string>
 	<string name="poi_outdoor_seating_terrace">Cadiras in foras: terratzu</string>
 	<string name="poi_outdoor_seating_sidewalk">Cadiras in foras: istradedda (coladòrgiu pedonale)</string>
-	<string name="poi_fire_hydrant_position_sidewalk">Positzione de s\'idrante: istradedda (coladòrgiu pedonale)</string>
+	<string name="poi_fire_hydrant_position_sidewalk">Istradedda (coladòrgiu pedonale)</string>
 	<string name="poi_outdoor_seating_pedestrian_zone">Cadiras in foras: area pedonale</string>
 	<string name="poi_outdoor_seating_garden">Cadiras in foras: giardinu</string>
 	<string name="poi_outdoor_seating_patio">Cadiras in foras: loza</string>
@@ -3733,4 +3733,149 @@
 	<string name="poi_socket_bs1363_yes">BS 1363</string>
 	<string name="poi_socket_as3112_yes">AS/NZS 3112</string>
 
-	</resources>
+	<string name="poi_volleyball">Volleyball</string>
+
+	<string name="poi_map_size_site">Mannària de sa mapa: giassu</string>
+	<string name="poi_map_size_city">Mannària de sa mapa: tzitade</string>
+	<string name="poi_map_size_region">Mannària de sa mapa: regione</string>
+
+	<string name="poi_charging_station_filter">Istatzione de càrriga</string>
+
+	<string name="poi_depot">Depòsitu</string>
+
+	<string name="poi_letter_box">Cassita de sas lìteras</string>
+	<string name="poi_climbing_boulder_yes">Massismu: eja</string>
+	<string name="poi_climbing_boulder_no">Massismu: nono</string>
+	<string name="poi_climbing_toprope_yes">Moulinete: eja</string>
+	<string name="poi_climbing_toprope_no">Moulinete: nono</string>
+	<string name="poi_climbing_multipitch_yes">Àndalas a prus artiadas: eja</string>
+	<string name="poi_climbing_multipitch_no">Àndalas a prus artiadas: nono</string>
+	<string name="poi_climbing_mixed_yes">Mistu: eja</string>
+	<string name="poi_climbing_mixed_no">Mistu: nono</string>
+	<string name="poi_climbing_deepwater_yes">Psicobloc: eja</string>
+	<string name="poi_climbing_deepwater_no">Psicobloc: nono</string>
+
+	<string name="poi_climbing_length">Longària de s\'aperrinzada</string>
+	<string name="poi_climbing_length_min">Longària mìnima de s\'aperrinzada</string>
+	<string name="poi_climbing_length_max">Longària màssima de s\'aperrinzada</string>
+	<string name="poi_climbing_rock_limestone">Perda de s\'aperrinzada: carchina</string>
+	<string name="poi_climbing_rock_granite">Perda de s\'aperrinzada: granitu</string>
+	<string name="poi_climbing_rock_sandstone">Perda de s\'aperrinzada: arenària</string>
+	<string name="poi_climbing_rock_quartzite">Perda de s\'aperrinzada: cuartzite</string>
+	<string name="poi_climbing_rock_gneiss">Perda de s\'aperrinzada: gneiss</string>
+	<string name="poi_climbing_rock_porphyry">Perda de s\'aperrinzada: pòrfidu</string>
+	<string name="poi_climbing_quality_solid">Calidade de s\'aperrinzada: sòlida</string>
+	<string name="poi_climbing_quality_fragile">Calidade de s\'aperrinzada: fràgile</string>
+	<string name="poi_climbing_bolted_yes">Ancoràgios fissos: eja</string>
+	<string name="poi_climbing_bolted_no">Ancoràgios fissos: nono</string>
+	<string name="poi_climbing_summit_log_yes">Registru de aperrinzada in su cùcuru: eja</string>
+	<string name="poi_climbing_summit_log_no">Registru de aperrinzada in su cùcuru: nono</string>
+	<string name="poi_climbing_routes">Àndalas de aperrinzada</string>
+
+	<string name="poi_meadow_agricultural">Casta: agrìculu</string>
+	<string name="poi_meadow_perpetual">Casta: perpètuu</string>
+	<string name="poi_meadow_transitional">Casta: transitzionale</string>
+	<string name="poi_meadow_pasture">Casta: pastura</string>
+
+	<string name="poi_frozen_food">Màndigu congeladu</string>
+
+	<string name="poi_agrarian">Butega pro s\'agricultura</string>
+
+	<string name="poi_shop_fireplace">Butega de tzimineras e istufas</string>
+
+	<string name="poi_shop_boat">Butega de barcas</string>
+
+	<string name="poi_socket_cee_blue_yes">CEE biaita</string>
+	<string name="poi_socket_cee_red_16a_yes">CEE ruja 16A</string>
+	<string name="poi_socket_cee_red_32a_yes">CEE ruja 32A</string>
+	<string name="poi_socket_cee_red_64a_yes">CEE ruja 64A</string>
+	<string name="poi_socket_cee_red_125a_yes">CEE ruja 125A</string>
+	<string name="poi_socket_chademo_output_high">Arta</string>
+	<string name="poi_socket_chademo_output_medium">Mèdia</string>
+	<string name="poi_socket_chademo_output_low">Bassa</string>
+	<string name="poi_socket_type2_output_high">Arta</string>
+	<string name="poi_socket_type2_output_medium">Mèdia</string>
+	<string name="poi_socket_type2_output_low">Bassa</string>
+	<string name="poi_socket_type2_combo_output_high">Arta</string>
+	<string name="poi_socket_type2_combo_output_medium">Mèdia</string>
+	<string name="poi_socket_type2_combo_output_low">Bassa</string>
+	<string name="poi_socket_type3_output_high">Arta</string>
+	<string name="poi_socket_type3_output_medium">Mèdia</string>
+	<string name="poi_socket_type3_output_low">Bassa</string>
+	<string name="poi_socket_cee_blue_output_high">Arta</string>
+	<string name="poi_socket_cee_blue_output_medium">Mèdia</string>
+	<string name="poi_socket_cee_blue_output_low">Bassa</string>
+	<string name="poi_socket_schuko_output_high">Arta</string>
+	<string name="poi_socket_schuko_output_medium">Mèdia</string>
+	<string name="poi_socket_schuko_output_low">Bassa</string>
+
+	<string name="poi_flooring">Butega de pamentos</string>
+	<string name="poi_pottery">Tzeràmica</string>
+
+	<string name="poi_whitewater_rapid_name">Nùmene de sos tràinos de su riu</string>
+
+	<string name="poi_outpost">Puntu de intrega de sa butega</string>
+
+	<string name="poi_barbecue_grill">Grill pro su barbecue: eja</string>
+
+	<string name="poi_water_utility">Ufitziu pro unu servìtziu pro s\'abba</string>
+
+	<string name="poi_amusement_arcade">Sala giogos</string>
+	<string name="poi_adult_gaming_centre">Sala giogos pro adultos</string>
+
+	<string name="poi_service_vehicle_car_repair_yes">Mecànicu</string>
+	<string name="poi_service_vehicle_oil_change_yes">Càmbiu de s\'ògiu</string>
+	<string name="poi_service_vehicle_used_car_sales_yes">Bèndida de automòbiles impreadas</string>
+	<string name="poi_service_vehicle_brakes_yes">Frenos</string>
+	<string name="poi_service_vehicle_new_car_sales_yes">Bèndida de automòbiles noas</string>
+	<string name="poi_service_vehicle_diagnostics_yes">Diagnòstica</string>
+	<string name="poi_service_vehicle_car_parts_yes">Cantos de ricàmbiu pro automòbiles</string>
+	<string name="poi_service_vehicle_batteries_yes">Baterias</string>
+	<string name="poi_service_vehicle_air_conditioning_yes">Àera conditzionada</string>
+	<string name="poi_service_vehicle_body_repair_yes">Acontzu de sa carrotzeria</string>
+	<string name="poi_service_vehicle_electrical_yes">Elètricu</string>
+	<string name="poi_service_vehicle_wheels_yes">Rodas</string>
+	<string name="poi_service_vehicle_glass_yes">Birdu</string>
+	<string name="poi_service_vehicle_truck_repair_yes">Acontzu de càmions</string>
+	<string name="poi_service_vehicle_muffler_yes">Silentziadore</string>
+	<string name="poi_service_vehicle_alignment_yes">Alliniamentu</string>
+	<string name="poi_service_vehicle_transmission_repair_yes">Acontzu de sa trasmissione</string>
+	<string name="poi_service_vehicle_motor_yes">Motore</string>
+	<string name="poi_service_vehicle_insurance_yes">Asseguratzione</string>
+	<string name="poi_service_vehicle_tyres_yes">Pneumàticos</string>
+
+	<string name="poi_aerialway_zip_line">Telefèrica</string>
+
+	<string name="poi_climbing_adventure">Aventura de aperrinzada</string>
+
+	<string name="poi_via_ferrata">Via ferrada</string>
+	<string name="poi_cable_number">Nùmeru de cavos</string>
+	<string name="poi_via_ferrata_scale">Dificultade</string>
+
+	<string name="poi_glacier_type_icecap">Caluta de astra</string>
+	<string name="poi_glacier_type_icefield">Campu de astra</string>
+	<string name="poi_glacier_type_plateau">Artipranu</string>
+	<string name="poi_glacier_type_valley">Badde</string>
+	<string name="poi_glacier_type_outlet">De essida</string>
+	<string name="poi_glacier_type_tidewater">Abba de marea</string>
+	<string name="poi_glacier_type_mountain">Monte</string>
+	<string name="poi_glacier_type_hanging">Suspesu</string>
+	<string name="poi_glacier_type_icefall">Istrampu de astra</string>
+	<string name="poi_glacier_type_rock">Ruca</string>
+	<string name="poi_glacier_type_shelf">Prataforma de astra gallegiante</string>
+	<string name="poi_glacier_type_remnant">Restos</string>
+	<string name="poi_glacier_type_ice_tongue">Limba de astra</string>
+
+	<string name="poi_checkpoint_type_stamp">Puntu de istampigliadura</string>
+	<string name="poi_checkpoint_type_code">Còdighe</string>
+	<string name="poi_checkpoint_type_notebook">Libreddu</string>
+	<string name="poi_checkpoint_type_needler">Perforadora</string>
+	<string name="poi_checkpoint_type_quize">Chistionàriu</string>
+	<string name="poi_checkpoint_type_electronic">Eletrònicu</string>
+	<string name="poi_course">Tzircùitu</string>
+
+	<string name="poi_rock">Ruca</string>
+
+	<string name="poi_end_date">Data de fine</string>
+
+</resources>
