@@ -607,27 +607,29 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 		}
 	}
 
-	private void addOptionSplit(int value, boolean distance, List<GpxDisplayGroup> model) {
-		if (distance) {
-			double dvalue = OsmAndFormatter.calculateRoundedDist(value, app);
-			options.add(OsmAndFormatter.getFormattedDistance((float) dvalue, app));
-			distanceSplit.add(dvalue);
-			timeSplit.add(-1);
-			if (Math.abs(model.get(0).getSplitDistance() - dvalue) < 1) {
-				selectedSplitInterval = distanceSplit.size() - 1;
-			}
-		} else {
-			if (value < 60) {
-				options.add(value + " " + app.getString(R.string.int_seconds));
-			} else if (value % 60 == 0) {
-				options.add((value / 60) + " " + app.getString(R.string.int_min));
+	private void addOptionSplit(int value, boolean distance, @NonNull List<GpxDisplayGroup> model) {
+		if (model.size() > 0) {
+			if (distance) {
+				double dvalue = OsmAndFormatter.calculateRoundedDist(value, app);
+				options.add(OsmAndFormatter.getFormattedDistance((float) dvalue, app));
+				distanceSplit.add(dvalue);
+				timeSplit.add(-1);
+				if (Math.abs(model.get(0).getSplitDistance() - dvalue) < 1) {
+					selectedSplitInterval = distanceSplit.size() - 1;
+				}
 			} else {
-				options.add((value / 60f) + " " + app.getString(R.string.int_min));
-			}
-			distanceSplit.add(-1d);
-			timeSplit.add(value);
-			if (model.get(0).getSplitTime() == value) {
-				selectedSplitInterval = distanceSplit.size() - 1;
+				if (value < 60) {
+					options.add(value + " " + app.getString(R.string.int_seconds));
+				} else if (value % 60 == 0) {
+					options.add((value / 60) + " " + app.getString(R.string.int_min));
+				} else {
+					options.add((value / 60f) + " " + app.getString(R.string.int_min));
+				}
+				distanceSplit.add(-1d);
+				timeSplit.add(value);
+				if (model.get(0).getSplitTime() == value) {
+					selectedSplitInterval = distanceSplit.size() - 1;
+				}
 			}
 		}
 	}
