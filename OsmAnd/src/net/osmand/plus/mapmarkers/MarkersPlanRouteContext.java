@@ -218,6 +218,12 @@ public class MarkersPlanRouteContext {
 		params.ctx = app;
 		params.calculationProgress = calculationProgress = new RouteCalculationProgress();
 		params.calculationProgressCallback = new RoutingHelper.RouteCalculationProgressCallback() {
+
+			@Override
+			public void start() {
+
+			}
+
 			@Override
 			public void updateProgress(int progress) {
 				int pairs = calculatedPairs + snapToRoadPairsToCalculate.size();

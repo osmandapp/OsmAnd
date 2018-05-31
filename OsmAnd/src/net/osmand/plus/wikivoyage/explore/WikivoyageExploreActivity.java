@@ -3,6 +3,7 @@ package net.osmand.plus.wikivoyage.explore;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -31,10 +32,12 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.TabActivity;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
+import net.osmand.plus.wikipedia.WikiArticleHelper;
 import net.osmand.plus.wikivoyage.article.WikivoyageArticleDialogFragment;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
 import net.osmand.plus.wikivoyage.data.TravelDbHelper;
 import net.osmand.plus.wikivoyage.search.WikivoyageSearchDialogFragment;
+import net.osmand.util.Algorithms;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -168,19 +171,39 @@ public class WikivoyageExploreActivity extends TabActivity implements DownloadEv
 		super.onResume();
 		Intent intent = getIntent();
 		if (intent != null) {
-			int currentItem = intent.getIntExtra(TAB_SELECTED, 0);
-			if (currentItem == SAVED_ARTICLES_POSITION) {
-				BottomNavigationView bottomNav = (BottomNavigationView) findViewById(R.id.bottom_navigation);
-				bottomNav.setSelectedItemId(R.id.action_saved_articles);
-			}
-			long cityId = intent.getLongExtra(CITY_ID_KEY, -1);
-			String selectedLang = intent.getStringExtra(SELECTED_LANG_KEY);
-			if (cityId != -1) {
-				WikivoyageArticleDialogFragment.showInstance(app, getSupportFragmentManager(), cityId, selectedLang);
+			Uri data = intent.getData();
+			if (data != null && ("http".equalsIgnoreCase(data.getScheme()) || "https".equalsIgnoreCase(data.getScheme()))) {
+				parseLaunchIntentLink(data);
+			} else {
+				int currentItem = intent.getIntExtra(TAB_SELECTED, 0);
+				if (currentItem == SAVED_ARTICLES_POSITION) {
+					BottomNavigationView bottomNav = (BottomNavigationView) findViewById(R.id.bottom_navigation);
+					bottomNav.setSelectedItemId(R.id.action_saved_articles);
+				}
+				long articleId = intent.getLongExtra(CITY_ID_KEY, -1);
+				String selectedLang = intent.getStringExtra(SELECTED_LANG_KEY);
+				if (articleId != -1) {
+					WikivoyageArticleDialogFragment.showInstance(app, getSupportFragmentManager(), articleId, selectedLang);
+				}
 			}
 			setIntent(null);
 		}
 		getMyApplication().getDownloadThread().setUiActivity(this);
+	}
+
+	protected void parseLaunchIntentLink(Uri data) {
+		String host = data.getHost();
+		String path = data.getPath();
+		if (host != null && path != null && host.contains("osmand.net") && path.startsWith("/travel")) {
+			String title = WikiArticleHelper.decodeTitleFromTravelUrl(data.getQueryParameter("title"));
+			String selectedLang = data.getQueryParameter("lang");
+			if (!Algorithms.isEmpty(title) && !Algorithms.isEmpty(selectedLang)) {
+				long articleId = app.getTravelDbHelper().getArticleId(title, selectedLang);
+				if (articleId != 0) {
+					WikivoyageArticleDialogFragment.showInstance(app, getSupportFragmentManager(), articleId, selectedLang);
+				}
+			}
+		}
 	}
 
 	@Override
@@ -298,7 +321,8 @@ public class WikivoyageExploreActivity extends TabActivity implements DownloadEv
 	private void updateFragments() {
 		ExploreTabFragment exploreTabFragment = getExploreTabFragment();
 		SavedArticlesTabFragment savedArticlesTabFragment = getSavedArticlesTabFragment();
-		if (exploreTabFragment != null && savedArticlesTabFragment != null) {
+		if (exploreTabFragment != null && savedArticlesTabFragment != null
+				&& exploreTabFragment.isAdded() && savedArticlesTabFragment.isAdded()) {
 			exploreTabFragment.populateData();
 			savedArticlesTabFragment.savedArticlesUpdated();
 			updateNeeded = false;

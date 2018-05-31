@@ -1287,7 +1287,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 							}
 
 							int line3Height = 0;
-							View line3Container = view.findViewById(R.id.additional_info_row);
+							View line3Container = view.findViewById(R.id.additional_info_row_container);
 							if (line3Container.getVisibility() == View.VISIBLE) {
 								line3Height = line3Container.getMeasuredHeight();
 							}
@@ -1520,10 +1520,13 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 				&& compassView.getVisibility() == View.INVISIBLE
 				&& titleButtonContainer.getVisibility() == View.GONE
 				&& downloadButtonsContainer.getVisibility() == View.GONE
-				&& titleBottomButtonContainer.getVisibility() == View.GONE
-				&& titleProgressContainer.getVisibility() == View.VISIBLE) {
+				&& titleBottomButtonContainer.getVisibility() == View.GONE) {
+			if (titleProgressContainer.getVisibility() == View.VISIBLE) {
+				view.findViewById(R.id.additional_info_row_container).setVisibility(View.GONE);
+			}
 			view.findViewById(R.id.additional_info_row).setVisibility(View.GONE);
 		} else {
+			view.findViewById(R.id.additional_info_row_container).setVisibility(View.VISIBLE);
 			view.findViewById(R.id.additional_info_row).setVisibility(View.VISIBLE);
 		}
 	}
@@ -1909,6 +1912,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 	private void doAfterMenuStateChange(int previousState, int newState) {
 		updateCompassVisibility();
 		updateAdditionalInfoVisibility();
+		runLayoutListener();
 	}
 }
 

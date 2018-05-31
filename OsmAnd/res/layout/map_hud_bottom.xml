@@ -231,9 +231,21 @@
                     tools:src="@drawable/ic_action_test_light"/>
             </LinearLayout>
         </LinearLayout>
+
+		<ProgressBar
+			android:id="@+id/map_horizontal_progress"
+			style="?android:attr/progressBarStyleHorizontal"
+			android:layout_width="match_parent"
+			android:layout_height="4dp"
+			android:layout_gravity="bottom"
+			android:max="100"
+			android:visibility="gone"
+			tools:progress="60"
+			tools:visibility="visible" />
     </FrameLayout>
 
-    <FrameLayout
+
+	<FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -251,36 +263,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
 
-        <LinearLayout
-            android:id="@+id/map_context_menu_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:background="@drawable/btn_flat"
-            android:visibility="gone">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="fill_parent"
-                android:layout_weight="1"
-                android:ellipsize="end"
-                android:gravity="center">
-            </TextView>
-
-            <ImageButton
-                android:layout_width="@dimen/map_address_height"
-                android:layout_height="@dimen/map_address_height"
-                android:layout_gravity="center_vertical"
-                android:background="@drawable/btn_circle_transparent"
-                tools:src="@drawable/ic_action_test_light"/>
-
-            <ImageButton
-                android:layout_width="@dimen/map_address_height"
-                android:layout_height="@dimen/map_address_height"
-                android:layout_gravity="center_vertical"
-                android:background="@drawable/btn_circle_transparent"
-                tools:src="@drawable/ic_action_test_light"/>
-        </LinearLayout>
     </FrameLayout>
 
 </LinearLayout>

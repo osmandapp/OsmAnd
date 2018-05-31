@@ -19,8 +19,7 @@ public class OsmandActionBarActivity extends OsmandInAppPurchaseActivity {
 
     //should be called after set content view
     protected void setupHomeButton(){
-        Drawable back = ((OsmandApplication)getApplication()).getIconsCache().getIcon(R.drawable.ic_arrow_back);
-        back.setColorFilter(ContextCompat.getColor(this, R.color.color_white), PorterDuff.Mode.MULTIPLY);
+        Drawable back = ((OsmandApplication)getApplication()).getIconsCache().getIcon(R.drawable.ic_arrow_back, R.color.color_white);
         final ActionBar supportActionBar = getSupportActionBar();
         if (supportActionBar != null) {
             supportActionBar.setHomeButtonEnabled(true);

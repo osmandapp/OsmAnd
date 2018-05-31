@@ -16,6 +16,7 @@ import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,6 +35,7 @@ import net.osmand.plus.activities.TrackActivity;
 import net.osmand.plus.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.wikipedia.WikiArticleBaseDialogFragment;
+import net.osmand.plus.wikipedia.WikiArticleHelper;
 import net.osmand.plus.wikivoyage.WikivoyageShowPicturesDialogFragment;
 import net.osmand.plus.wikivoyage.WikivoyageWebViewClient;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
@@ -60,7 +62,9 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 	private static final String SELECTED_LANG_KEY = "selected_lang_key";
 
 	private static final String EMPTY_URL = "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4//";
-
+	
+	private static final int MENU_ITEM_SHARE = 0;
+	
 	private long tripId = NO_VALUE;
 	private ArrayList<String> langs;
 	private String selectedLang;
@@ -299,7 +303,10 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 		webViewClient.setArticle(article);
 		articleToolbarText.setText(article.getTitle());
 		if (article.getGpxFile() != null && article.getGpxFile().getPointsSize() > 0) {
+			trackButton.setVisibility(View.VISIBLE);
 			trackButton.setText(getString(R.string.shared_string_gpx_points) + " (" + article.getGpxFile().getPointsSize() + ")");
+		} else {
+			trackButton.setVisibility(View.GONE);
 		}
 
 		TravelLocalDataHelper ldh = getMyApplication().getTravelDbHelper().getLocalDataHelper();
@@ -425,5 +432,32 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 		} else {
 			fragmentManager.popBackStackImmediate(pop, 0);
 		}
+	}
+
+	@Override
+	protected void setupToolbar(Toolbar toolbar) {
+		super.setupToolbar(toolbar);
+		toolbar.setOverflowIcon(getIcon(R.drawable.ic_overflow_menu_white, R.color.icon_color));
+
+		Menu menu = toolbar.getMenu();
+		MenuItem.OnMenuItemClickListener itemClickListener = new MenuItem.OnMenuItemClickListener() {
+			@Override
+			public boolean onMenuItemClick(MenuItem item) {
+				OsmandApplication app = getMyApplication();
+				if (app != null) {
+					int itemId = item.getItemId();
+					if (itemId == MENU_ITEM_SHARE) {
+						Intent intent = new Intent(Intent.ACTION_SEND);
+						intent.putExtra(Intent.EXTRA_TEXT, WikiArticleHelper.buildTravelUrl(article.getTitle(), article.getLang()));
+						intent.setType("text/plain");
+						startActivity(Intent.createChooser(intent, getString(R.string.shared_string_share)));
+						return true;
+					}
+				}
+				return false;
+			}
+		};
+		MenuItem itemShow = menu.add(0, MENU_ITEM_SHARE, 0, R.string.shared_string_share);
+		itemShow.setOnMenuItemClickListener(itemClickListener);
 	}
 }

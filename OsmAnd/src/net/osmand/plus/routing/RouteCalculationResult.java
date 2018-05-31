@@ -5,6 +5,7 @@ import android.content.Context;
 import net.osmand.Location;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
+import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
 import net.osmand.data.LocationPoint;
 import net.osmand.plus.ApplicationMode;
@@ -13,6 +14,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.routing.AlarmInfo.AlarmInfoType;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.TurnType;
+import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
@@ -74,7 +76,7 @@ public class RouteCalculationResult {
 			addMissingTurnsToRoute(locations, localDirections, params.start,params.end, 
 					params.mode, params.ctx, params.leftSide);
 			// if there is no closest points to start - add it
-			introduceFirstPointAndLastPoint(locations, localDirections, null, params.start, params.end);
+			introduceFirstPointAndLastPoint(locations, localDirections, null, params.start, params.end, params.ctx);
 		}
 		this.appMode = params.mode;
 		this.locations = Collections.unmodifiableList(locations);
@@ -99,7 +101,7 @@ public class RouteCalculationResult {
 		List<Location> locations = new ArrayList<Location>();
 		ArrayList<AlarmInfo> alarms = new ArrayList<AlarmInfo>();
 		List<RouteSegmentResult> segments = convertVectorResult(computeDirections, locations, list, alarms, ctx);
-		introduceFirstPointAndLastPoint(locations, computeDirections, segments, start, end);
+		introduceFirstPointAndLastPoint(locations, computeDirections, segments, start, end, ctx);
 		
 		this.locations = Collections.unmodifiableList(locations);
 		this.segments = Collections.unmodifiableList(segments);
@@ -584,8 +586,9 @@ public class RouteCalculationResult {
 	 * If beginning is too far from start point, then introduce GO Ahead
 	 * @param end 
 	 */
-	private static void introduceFirstPointAndLastPoint(List<Location> locations, List<RouteDirectionInfo> directions, List<RouteSegmentResult> segs, Location start, 
-			LatLon end) {
+	private static void introduceFirstPointAndLastPoint(List<Location> locations, List<RouteDirectionInfo> directions,
+														List<RouteSegmentResult> segs, Location start, LatLon end,
+														OsmandApplication ctx) {
 		if (!locations.isEmpty() && locations.get(0).distanceTo(start) > 50) {
 			// add start point
 			locations.add(0, start);
@@ -619,6 +622,16 @@ public class RouteCalculationResult {
 			}
 			// Wrong AvgSpeed for the last turn can cause significantly wrong total travel time if calculated route ends on a GPX route segment (then last turn is where GPX is joined again)
 			RouteDirectionInfo info = new RouteDirectionInfo(lastDirInf != null ? lastDirInf.getAverageSpeed() : 1, TurnType.valueOf(type, false));
+			if (segs != null) {
+				RouteSegmentResult lastSegmentResult = segs.get(segs.size() - 1);
+				RouteDataObject routeDataObject = lastSegmentResult.getObject();
+				info.setRef(routeDataObject.getRef(ctx.getSettings().MAP_PREFERRED_LOCALE.get(),
+						ctx.getSettings().MAP_TRANSLITERATE_NAMES.get(), lastSegmentResult.isForwardDirection()));
+				info.setStreetName(routeDataObject.getName(ctx.getSettings().MAP_PREFERRED_LOCALE.get(),
+						ctx.getSettings().MAP_TRANSLITERATE_NAMES.get()));
+				info.setDestinationName(routeDataObject.getDestinationName(ctx.getSettings().MAP_PREFERRED_LOCALE.get(),
+						ctx.getSettings().MAP_TRANSLITERATE_NAMES.get(), lastSegmentResult.isForwardDirection()));
+			}
 			info.distance = 0;
 			info.afterLeftTime = 0;
 			info.routePointOffset = locations.size() - 1;			
@@ -688,7 +701,19 @@ public class RouteCalculationResult {
 		}
 		return null;
 	}
-	
+
+	public RouteSegmentResult getNextStreetSegmentResult() {
+		int cs = currentRoute > 0 ? currentRoute - 1 : 0;
+		while(cs < segments.size()) {
+			RouteSegmentResult segmentResult = segments.get(cs);
+			if (!Algorithms.isEmpty(segmentResult.getObject().getName())) {
+				return segmentResult;
+			}
+			cs++;
+		}
+		return null;
+	}
+
 	public List<RouteSegmentResult> getUpcomingTunnel(float distToStart) {
 		int cs = currentRoute > 0 ? currentRoute - 1 : 0;
 		if(cs < segments.size()) {

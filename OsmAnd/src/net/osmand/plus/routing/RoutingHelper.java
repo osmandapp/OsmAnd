@@ -783,18 +783,39 @@ public class RoutingHelper {
 		}
 		RouteSegmentResult rs = getCurrentSegmentResult();
 		if(rs != null) {
-			String nm = rs.getObject().getName(settings.MAP_PREFERRED_LOCALE.get(), settings.MAP_TRANSLITERATE_NAMES.get());
-			String rf = rs.getObject().getRef(settings.MAP_PREFERRED_LOCALE.get(), settings.MAP_TRANSLITERATE_NAMES.get(), rs.isForwardDirection());
-			String dn = rs.getObject().getDestinationName(settings.MAP_PREFERRED_LOCALE.get(),
-					settings.MAP_TRANSLITERATE_NAMES.get(), rs.isForwardDirection());
-			return formatStreetName(nm, rf, dn, "»");
+			String name = getRouteSegmentStreetName(rs);
+			if (!Algorithms.isEmpty(name)) {
+				return name;
+			}
+		}
+		rs = getNextStreetSegmentResult();
+		if(rs != null) {
+			String name = getRouteSegmentStreetName(rs);
+			if (!Algorithms.isEmpty(name)) {
+				if(next != null) {
+					next[0] = TurnType.valueOf(TurnType.C, false);
+				}
+				return name;
+			}
 		}
 		return null;
 	}
 
-    public RouteSegmentResult getCurrentSegmentResult() {
+	private String getRouteSegmentStreetName(RouteSegmentResult rs) {
+		String nm = rs.getObject().getName(settings.MAP_PREFERRED_LOCALE.get(), settings.MAP_TRANSLITERATE_NAMES.get());
+		String rf = rs.getObject().getRef(settings.MAP_PREFERRED_LOCALE.get(), settings.MAP_TRANSLITERATE_NAMES.get(), rs.isForwardDirection());
+		String dn = rs.getObject().getDestinationName(settings.MAP_PREFERRED_LOCALE.get(),
+				settings.MAP_TRANSLITERATE_NAMES.get(), rs.isForwardDirection());
+		return formatStreetName(nm, rf, dn, "»");
+	}
+
+	public RouteSegmentResult getCurrentSegmentResult() {
         return route.getCurrentSegmentResult();
     }
+
+	public RouteSegmentResult getNextStreetSegmentResult() {
+		return route.getNextStreetSegmentResult();
+	}
 
     public List<RouteSegmentResult> getUpcomingTunnel(float distToStart) {
     	return route.getUpcomingTunnel(distToStart);
@@ -962,12 +983,21 @@ public class RoutingHelper {
 					"Calculating route", params, paramsChanged); //$NON-NLS-1$
 			currentRunningJob = newThread;
 			if (updateProgress) {
+				startProgress(params);
 				updateProgress(params);
 			}
 			if (prevRunningJob != null) {
 				newThread.setWaitPrevJob(prevRunningJob);
 			}
 			currentRunningJob.start();
+		}
+	}
+
+	private void startProgress(final RouteCalculationParams params) {
+		if (params.calculationProgressCallback != null) {
+			params.calculationProgressCallback.start();
+		} else if (progressRoute != null) {
+			progressRoute.start();
 		}
 	}
 
@@ -985,14 +1015,8 @@ public class RoutingHelper {
 				public void run() {
 					RouteCalculationProgress calculationProgress = params.calculationProgress;
 					if (isRouteBeingCalculated()) {
-						float p = Math.max(calculationProgress.distanceFromBegin, calculationProgress.distanceFromEnd);
-						float all = calculationProgress.totalEstimatedDistance * 1.25f;
-						if (all > 0) {
-							int t = (int) Math.min(p * p / (all * all) * 100f, 99);
-							progressRoute.updateProgress(t);
-						} else {
-							progressRoute.updateProgress(0);
-						}
+						float pr = calculationProgress.getLinearProgress();
+						progressRoute.updateProgress((int) pr);
 						Thread t = currentRunningJob;
 						if(t instanceof RouteRecalculationThread && ((RouteRecalculationThread) t).params != params) {
 							// different calculation started
@@ -1026,10 +1050,13 @@ public class RoutingHelper {
 
 	public interface RouteCalculationProgressCallback {
 
-		// set visibility
-		public void updateProgress(int progress);
-		public void requestPrivateAccessRouting();
-		public void finish();
+		void start();
+
+		void updateProgress(int progress);
+
+		void requestPrivateAccessRouting();
+
+		void finish();
 	}
 
 
