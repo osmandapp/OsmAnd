@@ -3044,4 +3044,7 @@
     <string name="unirs_render_descr">Модификация стиля по умолчанию для увеличения контраста пешеходных и велосипедных дорог. Использует старые цвета Mapnik.</string>
 
     <string name="shared_string_gpx_files">Файлы GPX</string>
+    <string name="get_osmand_live">Получите OsmAnd Live, чтобы разблокировать все функции: ежедневные обновления карт с неограниченной загрузкой, все платные и бесплатные плагины, Википедия, Викигид и многое другое.</string>
+    <string name="access_intermediate_arrival_time">Промежуточное время прибытия</string>
+    <string name="map_widget_intermediate_time">Промежуточное время</string>
     </resources>
