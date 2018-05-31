@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.wikipedia.WikipediaDialogFragment;
 
 public class StartEditingTravelCard extends BaseTravelCard {
 
@@ -36,11 +37,8 @@ public class StartEditingTravelCard extends BaseTravelCard {
 			holder.button.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					CustomTabsIntent customTabsIntent = new CustomTabsIntent.Builder()
-							.setToolbarColor(ContextCompat.getColor(app, nightMode ? R.color.actionbar_dark_color : R.color.actionbar_light_color))
-							.build();
-					String text = "https://" + app.getLanguage().toLowerCase() + ".m.wikivoyage.org";
-					customTabsIntent.launchUrl(context, Uri.parse(text));
+					WikipediaDialogFragment.showFullArticle(context,
+							Uri.parse("https://" + app.getLanguage().toLowerCase() + ".m.wikivoyage.org"), nightMode);
 				}
 			});
 		}

@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -212,10 +213,16 @@ public class WikipediaDialogFragment extends WikiArticleBaseDialogFragment {
 	}
 
 	public static void showFullArticle(@NonNull Context context, @NonNull Uri uri, boolean nightMode) {
-		CustomTabsIntent customTabsIntent = new CustomTabsIntent.Builder()
-				.setToolbarColor(ContextCompat.getColor(context, nightMode ? R.color.actionbar_dark_color : R.color.actionbar_light_color))
-				.build();
-		customTabsIntent.launchUrl(context, uri);
+		if (Build.VERSION.SDK_INT > Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
+			CustomTabsIntent customTabsIntent = new CustomTabsIntent.Builder()
+					.setToolbarColor(ContextCompat.getColor(context, nightMode ? R.color.actionbar_dark_color : R.color.actionbar_light_color))
+					.build();
+			customTabsIntent.launchUrl(context, uri);
+		} else {
+			Intent i = new Intent(Intent.ACTION_VIEW);
+			i.setData(uri);
+			context.startActivity(i);
+		}
 	}
 
 	@Override
