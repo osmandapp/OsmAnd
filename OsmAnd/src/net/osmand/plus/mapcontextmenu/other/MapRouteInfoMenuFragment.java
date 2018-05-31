@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -191,6 +192,11 @@ public class MapRouteInfoMenuFragment extends BaseOsmAndFragment {
 		AndroidUtils.setTextSecondaryColor(ctx, (TextView) mainView.findViewById(R.id.DistanceTitle), nightMode);
 		AndroidUtils.setTextPrimaryColor(ctx, (TextView) mainView.findViewById(R.id.DurationText), nightMode);
 		AndroidUtils.setTextSecondaryColor(ctx, (TextView) mainView.findViewById(R.id.DurationTitle), nightMode);
+
+		int bgColor = ContextCompat.getColor(ctx, nightMode
+				? R.color.map_progress_bar_bg_dark : R.color.map_progress_bar_bg_light);
+		((ProgressBar) mainView.findViewById(R.id.progress_bar)).setProgressDrawable(AndroidUtils
+				.createProgressDrawable(bgColor, ctx.getMapLayers().getRouteLayer().getRouteLineColor(nightMode)));
 	}
 
 	public static boolean showInstance(final MapActivity mapActivity) {
