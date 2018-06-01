@@ -2238,4 +2238,38 @@
 	<string name="poi_crop_asparagus">Καλλιέργεια: σπαράγγι</string>
 	<string name="poi_crop_flowers">Καλλιέργεια: άνθη</string>
 
+	<string name="poi_surveillance_indoor">Παρακολούθηση: εσωτερική</string>
+	<string name="poi_surveillance_outdoor">Παρακολούθηση: εξωτερική</string>
+	<string name="poi_surveillance_public">Παρακολούθηση: δημόσια</string>
+
+	<string name="poi_clothes_women">Γυναίκες</string>
+	<string name="poi_clothes_underwear">Εσώρουχα</string>
+	<string name="poi_clothes_men">Άνδρες</string>
+	<string name="poi_clothes_wedding">Νυφικό</string>
+	<string name="poi_clothes_sports">Αθλητικά</string>
+	<string name="poi_clothes_babies">Μωρουδιακά</string>
+	<string name="poi_clothes_denim">Τζιν</string>
+	<string name="poi_clothes_workwear">Ρούχα εργασίας</string>
+	<string name="poi_clothes_hats">Καπέλα</string>
+	<string name="poi_clothes_fur">Γούνες</string>
+	<string name="poi_clothes_leather">Δερμάτινα</string>
+	<string name="poi_clothes_costumes">Κοστούμια</string>
+	<string name="poi_clothes_traditional">Παραδοσιακά</string>
+	<string name="poi_clothes_suits">Κοστούμια</string>
+	<string name="poi_clothes_maternity">Μητέρες</string>
+	<string name="poi_clothes_vintage">Εποχής</string>
+	<string name="poi_clothes_oversize">Υπερμεγέθη</string>
+	<string name="poi_clothes_schoolwear">Σχολικά</string>
+	<string name="poi_clothes_swimwear">Μπάνιου</string>
+	<string name="poi_clothes_socks">Κάλτσες</string>
+	<string name="poi_clothes_shirts">Πουκάμισα</string>
+	<string name="poi_clothes_dance">Χορού</string>
+	<string name="poi_clothes_military">Στρατιωτικά</string>
+
+	<string name="poi_historic_milestone">Ιστορικά ορόσημα</string>
+
+	<string name="poi_shoes_children">Παιδικά</string>
+	<string name="poi_shoes_women">Γυναικεία</string>
+	<string name="poi_shoes_sport">Αθλητικά</string>
+	<string name="poi_shoes_men">Ανδρικά</string>
 	</resources>
