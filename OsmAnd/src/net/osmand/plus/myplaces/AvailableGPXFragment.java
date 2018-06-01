@@ -459,7 +459,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		ItemClickListener listener = new ContextMenuAdapter.ItemClickListener() {
 			@Override
 			public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, final int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
-				if (itemId == R.string.local_index_mi_reload) {
+				if (itemId == R.string.shared_string_refresh) {
 					reloadTracks();
 				} else if (itemId == R.string.shared_string_show_on_map) {
 					openShowOnMapMode();
@@ -486,7 +486,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 				.setListener(listener).createItem());
 		optionsMenuAdapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.shared_string_delete, getActivity())
 				.setIcon(R.drawable.ic_action_delete_dark).setListener(listener).createItem());
-		optionsMenuAdapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.local_index_mi_reload, getActivity())
+		optionsMenuAdapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.shared_string_refresh, getActivity())
 				.setIcon(R.drawable.ic_action_refresh_dark).setListener(listener).createItem());
 		OsmandPlugin.onOptionsMenuActivity(getActivity(), this, optionsMenuAdapter);
 		for (int j = 0; j < optionsMenuAdapter.length(); j++) {

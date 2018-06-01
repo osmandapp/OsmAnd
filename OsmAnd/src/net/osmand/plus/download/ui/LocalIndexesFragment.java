@@ -631,7 +631,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 			}
 		};
 		optionsMenuAdapter.addItem(new ContextMenuItem.ItemBuilder()
-				.setTitleId(R.string.local_index_mi_reload, getContext())
+				.setTitleId(R.string.shared_string_refresh, getContext())
 				.setIcon(R.drawable.ic_action_refresh_dark)
 				.setListener(listener)
 				.createItem());
@@ -786,7 +786,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 	}
 
 	public void localOptionsMenu(final int itemId) {
-		if (itemId == R.string.local_index_mi_reload) {
+		if (itemId == R.string.shared_string_refresh) {
 			getDownloadActivity().reloadLocalIndexes();
 		} else if (itemId == R.string.shared_string_delete) {
 			openSelectionMode(itemId, R.drawable.ic_action_delete_dark,

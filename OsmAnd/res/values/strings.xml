@@ -2263,7 +2263,6 @@
     <string name="local_index_descr_title">Manage map files.</string>
     <string name="local_index_mi_restore">Activate</string>
     <string name="local_index_mi_backup">Deactivate</string>
-    <string name="local_index_mi_reload">Reload from memory card</string>
     <string name="local_index_poi_data">POI data</string>
     <string name="local_index_address_data">Address data</string>
     <string name="local_index_transport_data">Public transport data</string>
