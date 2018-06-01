@@ -1,0 +1,12 @@
+language: android
+
+android:
+  components:
+    - tools
+    - platform-tools
+
+    # The BuildTools version used by your project
+    - build-tools-27.0.3
+    - android-27
+
+script: ./gradlew test
