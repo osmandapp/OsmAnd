@@ -1660,7 +1660,7 @@
     <string name="recording_is_recorded">Recording Audio/video. Stop by tapping the AV widget.</string>
     <string name="recording_playing">An audio from the specified recording is being played.\n%1$s</string>
     <string name="recording_open_external_player">Open external player</string>
-    <string name="recording_delete_confirm">Delete this recording?</string>
+    <string name="recording_delete_confirm">Delete this item?</string>
     <string name="recording_unavailable">unavailable</string>
     <string name="recording_context_menu_arecord">Take an audio note</string>
     <string name="recording_context_menu_vrecord">Take a video note</string>
