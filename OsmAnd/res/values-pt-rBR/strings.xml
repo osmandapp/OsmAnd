@@ -240,7 +240,7 @@
 	<string name="rendering_attr_subwayMode_name">Rotas de metrô</string>
     <string name="lock_screen_request_explanation">%1$s precisa dessa permissão para desligar a tela para economizar energia.</string>
     <string name="wake_on_voice">Ligar tela</string>
-    <string name="wake_on_voice_descr">Ligar tela do aparelho (se estiver desligada) quando se aproxima da manobra</string>
+    <string name="wake_on_voice_descr">Ligar tela do aparelho (se estiver desligada) quando se aproxima da manobra.</string>
     <string name="impassable_road">Evitar estradas…</string>
     <string name="rendering_attr_trainLightrailRoutes_name">Rotas de trem</string>
     <string name="rendering_attr_tramRoutes_name">Rotas de bonde</string>
@@ -725,7 +725,7 @@ Pôr do Sol: %2$s</string>
     <string name="website">Website</string>
 	<string name="phone">Telefone</string>
     
-    <string name="osmand_background_plugin_description">Mostrar as configurações para ativar o rastreamento e navegação em segundo plano (tela desligada), ativando periodicamente o dispositivo GPS.</string>
+    <string name="osmand_background_plugin_description">Mostrar configurações para ativar o rastreamento e navegação em segundo plano, ativando periodicamente o dispositivo GPS (com tela desligada).</string>
     <string name="contribution_activity">Instalar a versão</string>
     <string name="choose_osmand_theme_descr">Escolher o tema do aplicativo</string>
     <string name="choose_osmand_theme">Tema</string>
@@ -1121,7 +1121,7 @@ Pôr do Sol: %2$s</string>
 	<string name="user_password">Sua senha do OSM</string>
 	
 	<string name="osmand_service">Modo em segundo plano</string>
-	<string name="osmand_service_descr">Use para executar o OsmAnd, enquanto a tela estiver desligada</string>
+	<string name="osmand_service_descr">OsmAnd é executado em segundo plano com a tela desligada.</string>
 	
 	
 	
@@ -1281,7 +1281,7 @@ Pôr do Sol: %2$s</string>
 	<string name="choose_audio_stream">Saída para orientação por voz</string>
 	<string name="choose_audio_stream_descr">Escolha o canal para orientação por voz</string>
 	<string name="voice_stream_voice_call">Áudio de chamada de voz</string>
-	<string name="voice_stream_music">Áudio de media/música</string>
+	<string name="voice_stream_music">Áudio de mídia/música</string>
 	<string name="warning_tile_layer_not_downloadable">Aplicativo não pode baixar camada %1$s do mapa, por favor, tente reinstalá-lo.</string>
 	<string name="overlay_transparency_descr">Modificar a transparência da sobreposição</string>
 	<string name="overlay_transparency">Transparência da sobreposição</string>
@@ -1451,7 +1451,7 @@ Pôr do Sol: %2$s</string>
 	<string name="background_service_int_descr">Definir intervalo de ativação usado pelo serviço em segundo plano</string>
 	<string name="background_service_provider_descr">Escolher o provedor de posição usado pelo serviço em segundo plano.</string>
 	<string name="background_service_provider">Provedor de posição</string>
-	<string name="background_router_service_descr">Executar OsmAnd em segundo plano para monitorar sua posição enquanto a tela estiver desligada</string>
+	<string name="background_router_service_descr">Monitorar sua posição enquanto a tela estiver desligada.</string>
 	<string name="background_router_service">Executar em segundo plano</string>
 	<string name="off_router_service_no_gps_available">O serviço em segundo plano exige a ativação de algum provedor de posição.</string>
 	<string name="hide_poi_filter">Ocultar filtro</string>
@@ -2748,8 +2748,8 @@ Pôr do Sol: %2$s</string>
     <string name="choose_file_type">Escolha o tipo de arquivo</string>
     <string name="show_tunnels">Túneis</string>
 <string name="shared_string_current">Atual</string>
-    <string name="last_intermediate_dest_description">Adiciona a última parada ao longo do percurso</string>
-    <string name="first_intermediate_dest_description">Adiciona a primeira parada na rota</string>
+    <string name="last_intermediate_dest_description">Adiciona parada intermediária</string>
+    <string name="first_intermediate_dest_description">Adiciona parada inicial</string>
     <string name="subsequent_dest_description">Mover destino para cima, e criar destino</string>
     <string name="gpx_file_desc">GPX - adequado para exportar para JOSM ou outros editores OSM.</string>
     <string name="osc_file_desc">OSC - adequado para exportar para OpenStreetMap.</string>
