@@ -1,6 +1,6 @@
 buildscript {
     repositories {
-	maven {
+        maven {
             // Google Maven Repository
             url 'https://maven.google.com'
         }
@@ -10,13 +10,12 @@ buildscript {
         //classpath 'com.android.tools.build:gradle:2.+'
         classpath 'com.android.tools.build:gradle:3.1.+'
         classpath 'com.google.gms:google-services:3.0.0'
-	    classpath 'com.github.ksoichiro:gradle-eclipse-aar-plugin:0.3.1'
+        classpath 'com.github.ksoichiro:gradle-eclipse-aar-plugin:0.3.1'
     }
 }
 
 apply plugin: 'com.github.ksoichiro.eclipse.aar'    
 allprojects {
-    
     repositories {
         mavenCentral()
         maven {
