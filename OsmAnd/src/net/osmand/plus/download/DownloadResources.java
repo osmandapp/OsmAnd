@@ -173,11 +173,17 @@ public class DownloadResources extends DownloadResourceGroup {
 			if ((item.getType() == DownloadActivityType.NORMAL_FILE && !item.extra)
 					|| item.getType() == DownloadActivityType.ROADS_FILE
 					|| item.getType() == DownloadActivityType.WIKIPEDIA_FILE
-					|| item.getType() == DownloadActivityType.WIKIVOYAGE_FILE
 					|| item.getType() == DownloadActivityType.DEPTH_CONTOUR_FILE
 					|| item.getType() == DownloadActivityType.SRTM_COUNTRY_FILE) {
 				outdated = true;
+			} else if(item.getType() == DownloadActivityType.WIKIVOYAGE_FILE) {
+				long itemSize = item.getContentSize();
+				long oldItemSize = app.getAppPath(item.getTargetFileName()).length();
+				if (itemSize != oldItemSize) {
+					outdated = true;
+				}
 			} else {
+
 				long itemSize = item.getContentSize();
 				long oldItemSize = 0;
 				if (item.getType() == DownloadActivityType.VOICE_FILE) {
