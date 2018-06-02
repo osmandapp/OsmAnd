@@ -1087,7 +1087,7 @@ Proportionaler Speicher %4$s MB (Android Limit %5$s MB, Dalvik %6$s MB).</string
 
 	<string name="recording_camera_not_available">Kamera nicht verfügbar</string>
 	<string name="recording_open_external_player">Externen Player öffnen</string>
-	<string name="recording_delete_confirm">Diese Aufzeichnung löschen?</string>
+	<string name="recording_delete_confirm">Diese Datei löschen?</string>
 	<string name="recording_unavailable">nicht verfügbar</string>
 	<string name="recording_context_menu_play">Wiedergabe</string>
 	<string name="recording_default_name">Aufnahme</string>

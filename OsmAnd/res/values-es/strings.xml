@@ -326,7 +326,7 @@
     <string name="no_vector_map_loaded">Los mapas vectoriales no están cargados</string>
     
     <string name="gpx_files_not_found">Sin archivos GPX en la carpeta de trazas</string>
-    <string name="layer_gpx_layer">Traza GPX…</string>
+    <string name="layer_gpx_layer">Archivos GPX…</string>
     <string name="error_reading_gpx">No se pudieron leer los datos GPX</string>
     <string name="vector_data">Mapas vectoriales sin conexión</string>
     <string name="transport_context_menu">Buscar transporte en parada</string>
@@ -486,7 +486,7 @@
     <string name="loading_streets">Cargando calles…</string>
     <string name="loading_cities">Cargando ciudades…</string>
     <string name="poi">PDI</string>
-    <string name="error_occurred_saving_gpx">No se pudo guardar la traza GPX</string>
+    <string name="error_occurred_saving_gpx">No se pudo guardar el archivo GPX</string>
     <string name="error_calculating_route">No se pudo calcular la ruta</string>
     <string name="error_calculating_route_occured">No se pudo calcular la ruta</string>
     <string name="empty_route_calculated">La ruta calculada está vacía</string>
@@ -498,7 +498,7 @@
     <string name="loading_data">Cargando datos…</string>
     <string name="reading_indexes">Leyendo datos locales…</string>
     <string name="previous_run_crashed">La última vez, OsmAnd falló. El archivo de registro está en {0}. Envíenos el problema adjuntando el archivo.</string>
-    <string name="saving_gpx_tracks">Guardando trazas GPX en la SD…</string>
+    <string name="saving_gpx_tracks">Guardando archivo GPX.…</string>
     <string name="finished_task">Terminado</string>
     <string name="use_online_routing_descr">Usa Internet para calcular la ruta.</string>
     <string name="use_online_routing">Usar navegación en línea</string>
@@ -1791,7 +1791,7 @@
     <string name="poi_action_delete">borrar</string>
     <string name="saved_at_time">Ahora, guardado como: %1$s</string>
     <string name="poi_deleted_localy">El PDI se borrará una vez subido los cambios</string>
-    <string name="show_gpx">Mostrar GPX</string>
+    <string name="show_gpx">Mostrar datos GPX</string>
     <string name="count_of_lines">Número de líneas</string>
     <string name="show_on_start">Mostrar al inicio</string>
     <string name="are_you_sure">¿Está seguro?</string>
@@ -1830,8 +1830,8 @@
     <string name="show_free_version_banner">Mostrar anuncio de la versión gratuita</string>
     <string name="show_free_version_banner_description">Muestra el anuncio de la versión gratuita, incluso en la versión de pago.</string>
     <string name="buy">Comprar</string>
-    <string name="activate_seamarks_plugin">Active el complemento «Vista náutica»</string>
-    <string name="activate_srtm_plugin">Active el complemento de «SRTM»</string>
+    <string name="activate_seamarks_plugin">Por favor, activa el complemento «Vista náutica»</string>
+    <string name="activate_srtm_plugin">Por favor, activa el complemento de «Curvas de nivel»</string>
     <string name="later">Luego</string>
     <string name="get_full_version">Versión completa</string>
     <string name="downloads">Descargas</string>
@@ -2734,14 +2734,14 @@
     <string name="choose_navigation_type">Seleccionar perfil de navegación</string>
     <string name="add_route_points">Añadir puntos de ruta</string>
     <string name="add_line">Añadir línea</string>
-    <string name="empty_state_my_tracks">Añadir y grabar trazas</string>
-    <string name="empty_state_my_tracks_desc">Graba o importa trazas para visualizar.</string>
+    <string name="empty_state_my_tracks">Añadir archivos GPX</string>
+    <string name="empty_state_my_tracks_desc">Importa archivos GPX o graba pistas.</string>
     <string name="empty_state_favourites">Añadir favoritos</string>
-    <string name="empty_state_favourites_desc">Importar o marcar favoritos en el mapa.</string>
-    <string name="import_track">Importar traza</string>
+    <string name="empty_state_favourites_desc">Importa favoritos, o añádelos marcando puntos en el mapa.</string>
+    <string name="import_track">Importar archivo GPX</string>
     <string name="import_track_desc">El archivo «%1$s» no contiene puntos de ruta, ¿Quieres importarlo como una traza?</string>
     <string name="move_point">Mover punto</string>
-    <string name="add_segment_to_the_track">Añadir a una traza GPX</string>
+    <string name="add_segment_to_the_track">Añadir a un archivo GPX</string>
 <string name="move_all_to_history">Mover todo al historial</string>
     
     <string name="show_direction">Indicación de distancia</string>
@@ -2989,8 +2989,8 @@
     <string name="shared_string_do">Sí</string>
     <string name="shared_string_only_with_wifi">Sólo con Wi-Fi</string>
     <string name="wikivoyage_download_pics">Descargar imágenes</string>
-    <string name="wikivoyage_download_pics_descr">Las imágenes pata los artículos pueden descargarse para su uso sin conexión. 
-\n Siempre puedes cambiar los ajustes en «Explorar» → «Opciones».</string>
+    <string name="wikivoyage_download_pics_descr">Las imágenes del artículo pueden descargarse para su uso sin conexión. 
+\nSiempre disponible en «Explorar» → «Opciones».</string>
     <string name="shared_string_wifi_only">Sólo con Wi-Fi</string>
     <string name="select_travel_book">Seleccionar un libro de viajes</string>
     <string name="shared_string_travel_book">Libro de viajes</string>
@@ -3038,7 +3038,7 @@
     <string name="wiki_article_not_found">Artículo no encontrado</string>
     <string name="how_to_open_wiki_title">¿Cómo abrir artículos de Wikipedia?</string>
 <string name="osmand_team">Equipo de OsmAnd</string>
-    <string name="shared_string_restart">Reiniciar</string>
+    <string name="shared_string_restart">Reiniciar app</string>
     <string name="show_images">Mostrar imágenes</string>
     <string name="purchase_cancelled_dialog_title">Ha cancelado la suscripción de OsmAnd Live</string>
     <string name="purchase_cancelled_dialog_descr">Renueve la suscripción para continuar usando todas las funciones:</string>
@@ -3066,5 +3066,5 @@
     <string name="map_widget_intermediate_time">Tiempo intermedio</string>
     <string name="unirs_render_descr">Modificación del estilo estándar para aumentar el contraste de los caminos peatonales y ciclistas. Utiliza los colores heredados de Mapnik.</string>
     <string name="shared_string_gpx_files">Archivos GPX</string>
-    <string name="get_osmand_live">Obtenga OsmAnd Live para desbloquear todas las funciones: Actualizaciones diarias de mapas con descargas ilimitadas, todos los plugins gratuitos y de pago, Wikipedia, Wikivoyage y mucho más.</string>
+    <string name="get_osmand_live">Consigue OsmAnd Live para desbloquear todas las funciones: Actualizaciones diarias de mapas con descargas ilimitadas, todos los complemento gratuitos y de pago, Wikipedia, Wikivoyage y mucho más.</string>
     </resources>
