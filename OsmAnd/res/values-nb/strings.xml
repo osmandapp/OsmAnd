@@ -1415,7 +1415,7 @@
     <string name="get_full_version">Fullversjon</string>
     <string name="confirm_download_roadmaps">Det rene veikartet er ikke nødvendig siden du har det fullstendige standardkartet. Laste det ned likevel?</string>
     <string name="later">Senere</string>
-    <string name="activate_srtm_plugin">Aktiver programtillegg SRTM</string>
+    <string name="activate_srtm_plugin">Aktiver \"koter\" -tillegget</string>
     <string name="opening_at">Åpner</string>
     <string name="closing_at">Lukker</string>
     
@@ -1647,7 +1647,7 @@
     <string name="shared_string_wikipedia">Wikipedia</string>
     <string name="local_indexes_cat_wiki">Wikipedia</string>
     <string name="wait_current_task_finished">Vent til gjeldende oppgave er ferdig</string>
-    <string name="recording_delete_confirm">Slett dette opptaket?</string>
+    <string name="recording_delete_confirm">Slett dette elementet?</string>
     <string name="osmand_parking_delete">Slett parkeringsplassmarkør</string>
     <string name="local_openstreetmap_delete">Slett endring</string>
     <string name="poi_dialog_reopen">Gjenåpne</string>
@@ -2598,7 +2598,7 @@
     <string name="looking_for_tracks_with_waypoints">Ser etter GPX-filer med rutepunkter</string>
     <string name="shared_string_gpx_waypoints">Spor-rutepunkter</string>
     <string name="add_group_descr">Importer grupper fra favoritter eller GPX-rutepunkter.</string>
-    <string name="empty_state_markers_groups_desc">Importer favorittgrupper eller GPX-rutepunkter som markører.</string>
+    <string name="empty_state_markers_groups_desc">Importer favorittgrupper eller rutepunkter som markører.</string>
     <string name="show_guide_line_descr">Vis veivisningslinjer fra din posisjon til de aktive markørplasseringene.</string>
     <string name="show_arrows_descr">Vis én eller to piler som indikerer retningen til de aktive markørene.</string>
     <string name="distance_indication_descr">Velg hvordan avstanden til aktive markører skal vises.</string>
@@ -2641,14 +2641,14 @@
     <string name="opening_changeset">Åpner endringssett…</string>
     <string name="closing_changeset">Lukker endringssett…</string>
     <string name="downloading_number_of_files">Laster ned - %1$d fil</string>
-    <string name="activate_seamarks_plugin">Aktiver \"sjømerke\"-tillegget</string>
+    <string name="activate_seamarks_plugin">Aktiver \"sjøkartvisning\" -tillegget</string>
     <string name="save_poi_too_many_uppercase">Navnet inneholder for mange store bokstaver. Fortsett?</string>
     <string name="quick_action_add_poi">Legg til interessepunkt</string>
     <string name="quick_action_showhide_poi_descr">Trykking på denne handlingsknappen viser eller skjuler interessepunkter på kartet.</string>
     <string name="quick_action_page_list_descr">Trykking på denne handlingsknappen blar gjennom listen nedenfor.</string>
     <string name="quick_action_empty_param_error">Fyll ut alle parametere</string>
     <string name="quick_action_btn_tutorial_descr">Lang-trykking og dragning av knappen endrer dens posisjon på skjermen.</string>
-    <string name="add_track_to_markers_descr">Velg en GPX-fil for å legge til dens rutepunkter til markørene.</string>
+    <string name="add_track_to_markers_descr">Velg et spor for å legge til dets rutepunkter til markørene.</string>
     <string name="depth_contour_descr">Kart for havdybdekoter og sjømerker.</string>
     <string name="do_not_send_anonymous_app_usage_desc">OsmAnd samler inn info om hvilke deler av programmet du åpner. Plasseringen din blir aldri sendt, ei heller noe du måtte skrive inn i programmet eller detaljer om områder som vises, søkes etter, eller lastes ned.</string>
     <string name="do_not_show_startup_messages_desc">Ikke vis programrabatter og spesielle lokale hendelsesmeldinger.</string>
@@ -2963,8 +2963,8 @@
 \n • Hastighet- og høydevisning  (alternativ)
 \n • Visning av koter og relieffskygger (via programtillegg)"</string>
     <string name="live_monitoring_url_descr">Angi nettadressen med parametersyntaks: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}.</string>
-    <string name="wikivoyage_download_pics_descr">Bilder fra artikler kan lastes ned for bruk i frakoblet modus.
-\n Innstillingen kan endres i \'Utforsk\' → \'Alternativer\'.</string>
+    <string name="wikivoyage_download_pics_descr">Bilder fra artikler kan lastes ned for frakoblet bruk. 
+\nKan alltid endres i \'Utforsk\' → \'Alternativer\'.</string>
     <string name="shared_string_dont">Ikke</string>
     <string name="shared_string_do">Gjør</string>
     <string name="shared_string_only_with_wifi">Kun på Wi-Fi</string>
