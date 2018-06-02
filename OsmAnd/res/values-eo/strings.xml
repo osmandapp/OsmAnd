@@ -1103,7 +1103,7 @@ Lon: %2$s</string>
     <string name="recording_is_recorded">Registranta sonon/videon. Por ĉesigi premu la butonon sur la fenestraĵo.</string>
     <string name="recording_playing">Ludanta sonon de elektita registraĵo.\n%1$s</string>
     <string name="recording_open_external_player">Malfermi eksteran ludilon</string>
-    <string name="recording_delete_confirm">Ĉu forigi tiun ĉi registraĵon?</string>
+    <string name="recording_delete_confirm">Ĉu forigi tiun ĉi elementon?</string>
     <string name="recording_unavailable">nedisponebla</string>
     <string name="recording_context_menu_arecord">Krei son-noton</string>
     <string name="recording_context_menu_vrecord">Krei video-noton</string>
