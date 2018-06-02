@@ -2499,7 +2499,7 @@
 	<string name="poi_health_specialty_occupational_yes">Terapia ocupacional</string>
 	<string name="poi_health_specialty_child_psychiatry_yes">Psiquiatria infantil</string>
 	<string name="poi_health_specialty_physiatry_yes">Fisiatria</string>
-	<string name="poi_health_specialty_maxillofacial_surgery_yes">Cirugia maxilofacial</string>
+	<string name="poi_health_specialty_maxillofacial_surgery_yes">Cirurgia maxilofacial</string>
 	<string name="poi_health_specialty_diagnostic_radiology_yes">Radiologia diagnóstica</string>
 	<string name="poi_health_specialty_gastroenterology_yes">Gastroenterologia</string>
 	<string name="poi_health_specialty_dentistry_yes">Odontologia</string>
