@@ -1045,7 +1045,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="recording_is_recorded">En cours d\'enregistrement Audio/vidéo. Arrêt par appui sur le gadget Audio/vidéo.</string>
     <string name="recording_playing">La note audio de l\'enregistrement spécifié est en cours de lecture.\n%1$s</string>
     <string name="recording_open_external_player">Ouvrir dans un lecteur externe</string>
-    <string name="recording_delete_confirm">Supprimer cet enregistrement ?</string>
+    <string name="recording_delete_confirm">Supprimer cet élément ?</string>
     <string name="recording_unavailable">non disponible</string>
     <string name="recording_context_menu_arecord">Prendre une note audio</string>
     <string name="recording_context_menu_vrecord">Prendre une note vidéo</string>
