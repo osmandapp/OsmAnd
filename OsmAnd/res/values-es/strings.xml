@@ -932,7 +932,7 @@
     <string name="map_widget_audionotes">Notas de audio</string>
     <string name="recording_is_recorded">Grabando audio/vídeo. Para pararlo, pulse el control AV.</string>
     <string name="recording_open_external_player">Abrir reproductor externo</string>
-    <string name="recording_delete_confirm">¿Borrar esta grabación?</string>
+    <string name="recording_delete_confirm">¿Eliminar este elemento?</string>
     <string name="recording_unavailable">no disponible</string>
     <string name="recording_context_menu_arecord">Grabar audio</string>
     <string name="recording_context_menu_vrecord">Grabar vídeo</string>
