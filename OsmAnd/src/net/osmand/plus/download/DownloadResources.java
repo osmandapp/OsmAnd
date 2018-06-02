@@ -178,7 +178,8 @@ public class DownloadResources extends DownloadResourceGroup {
 				outdated = true;
 			} else if(item.getType() == DownloadActivityType.WIKIVOYAGE_FILE) {
 				long itemSize = item.getContentSize();
-				long oldItemSize = app.getAppPath(item.getTargetFileName()).length();
+				long oldItemSize = app.getAppPath(IndexConstants.WIKIVOYAGE_INDEX_DIR +
+						item.getTargetFileName()).length();
 				if (itemSize != oldItemSize) {
 					outdated = true;
 				}
