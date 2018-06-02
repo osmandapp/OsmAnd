@@ -1021,7 +1021,7 @@
     <string name="recording_camera_not_available">相機失效</string>
     <string name="recording_playing">從已指定的錄音開始播放音訊。\n%1$s</string>
     <string name="recording_open_external_player">開啟外部播放</string>
-    <string name="recording_delete_confirm">刪除此錄製嗎？</string>
+    <string name="recording_delete_confirm">要刪除此項目？</string>
     <string name="recording_unavailable">無法使用</string>
     <string name="recording_context_menu_arecord">錄取音訊附註</string>
     <string name="destination_point">目的地 %1$s</string>

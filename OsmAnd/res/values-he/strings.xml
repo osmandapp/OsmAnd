@@ -1056,7 +1056,7 @@
     <string name="recording_is_recorded">שמע/וידאו מוקלטים. ניתן להפסיק זאת דרך נגיעה בווידג׳ט.</string>
     <string name="recording_playing">השמע מההקלטה שצוינה מושמע.\n%1$s</string>
     <string name="recording_open_external_player">פתיחת נגן חיצוני</string>
-    <string name="recording_delete_confirm">למחוק הקלטה זו?</string>
+    <string name="recording_delete_confirm">למחוק את הפריט הזה?</string>
     
     <string name="recording_unavailable">לא זמין</string>
     <string name="recording_context_menu_arecord">הקלטת הערה קולית</string>
