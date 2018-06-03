@@ -655,7 +655,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			getSupportActionBar().hide();
 		}
 
-		app.getLocationProvider().checkIfLastKnownLocationIsValid();
 		// for voice navigation
 		ApplicationMode routingAppMode = getRoutingHelper().getAppMode();
 		if (routingAppMode != null && settings.AUDIO_STREAM_GUIDANCE.getModeValue(routingAppMode) != null) {
