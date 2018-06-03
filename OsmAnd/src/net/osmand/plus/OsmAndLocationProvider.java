@@ -78,11 +78,15 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	private AtomicInteger locationRequestsCounter = new AtomicInteger();
 	private AtomicInteger staleLocationRequestsCounter = new AtomicInteger();
 
-	private net.osmand.Location cachedLocation;
+
 
 	private long lastTimeGPSLocationFixed = 0;
+	private long lastTimeLocationFixed = 0;
 	private boolean gpsSignalLost;
 	private SimulationProvider simulatePosition = null;
+
+	private long cachedLocationTimeFix = 0;
+	private net.osmand.Location cachedLocation;
 
 	private boolean sensorRegistered = false;
 	private float[] mGravs = new float[3];
@@ -585,7 +589,8 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		@Override
 		public void onLocationChanged(Location location) {
 			if (location != null) {
-				lastTimeGPSLocationFixed = location.getTime();
+				// lastTimeGPSLocationFixed = location.getTime();
+				lastTimeGPSLocationFixed = System.currentTimeMillis();
 			}
 			if(!locationSimulation.isRouteAnimating()) {
 				setLocation(convertLocation(location, app));
@@ -773,7 +778,10 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		if(location == null){
 			updateGPSInfo(null);
 		}
+
 		if(location != null) {
+			// // use because there is a bug on some devices with location.getTime()
+			lastTimeLocationFixed = System.currentTimeMillis();
 			simulatePosition = null;
 			if(gpsSignalLost) {
 				gpsSignalLost = false;
@@ -818,12 +826,6 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		}
 	}
 
-	public void checkIfLastKnownLocationIsValid() {
-		net.osmand.Location loc = getLastKnownLocation();
-		if (loc != null && (System.currentTimeMillis() - loc.getTime()) > INTERVAL_TO_CLEAR_SET_LOCATION) {
-			setLocation(null);
-		}
-	}
 
 	public NavigationInfo getNavigationInfo() {
 		return navigationInfo;
@@ -874,7 +876,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		if (loc != null) {
 			int counter = locationRequestsCounter.incrementAndGet();
 			if (counter >= REQUESTS_BEFORE_CHECK_LOCATION && locationRequestsCounter.compareAndSet(counter, 0)) {
-				if (System.currentTimeMillis() - loc.getTime() > LOCATION_TIMEOUT_TO_BE_STALE) {
+				if (System.currentTimeMillis() - lastTimeGPSLocationFixed > LOCATION_TIMEOUT_TO_BE_STALE) {
 					location = null;
 				}
 			}
@@ -889,12 +891,13 @@ public class OsmAndLocationProvider implements SensorEventListener {
 			int counter = staleLocationRequestsCounter.incrementAndGet();
 			if (counter >= REQUESTS_BEFORE_CHECK_LOCATION && staleLocationRequestsCounter.compareAndSet(counter, 0)) {
 				net.osmand.Location cached = cachedLocation;
-				if (cached != null && System.currentTimeMillis() - cached.getTime() > STALE_LOCATION_TIMEOUT_TO_BE_GONE) {
+				if (cached != null && System.currentTimeMillis() - cachedLocationTimeFix > STALE_LOCATION_TIMEOUT_TO_BE_GONE) {
 					cachedLocation = null;
 				}
 			}
 		} else {
 			cachedLocation = newLoc;
+			cachedLocationTimeFix = lastTimeLocationFixed;
 		}
 		return cachedLocation;
 	}
