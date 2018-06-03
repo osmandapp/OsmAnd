@@ -2125,7 +2125,7 @@
 	<string name="poi_backcountry_yes">Sí</string>
 	<string name="poi_backcountry_no">No</string>
 	<string name="poi_scout_yes">Sí</string>
-	<string name="poi_scout_no">Campamento scout: no</string>
+	<string name="poi_scout_no">Campamento de exploradores: no</string>
 	<string name="poi_group_only_yes">Sólo para grupos: sí</string>
 	<string name="poi_group_only_no">Sólo para grupos: no</string>
 	<string name="poi_washing_machine_yes">Sí</string>
@@ -3104,17 +3104,17 @@
 	<string name="poi_healthcare_alternative_types">Especialidad</string>
 	<string name="poi_free_flying_characteristics">Característica de vuelo</string>
 	<string name="poi_archaeological_site_type">Tipo de sitio arqueológico</string>
-	<string name="poi_star_rating">Clasificación de estrellas</string>
+	<string name="poi_star_rating">Valoración por estrellas</string>
 	<string name="poi_denomination">Denominación</string>
 
 <string name="poi_fee">Tarifado</string>
 	<string name="poi_wheelchair_accessibility">Accesible para sillas de rueda</string>
 	<string name="poi_brushless">Cepillo giratorio</string>
-	<string name="poi_religion_type">Tipo de religión</string>
+	<string name="poi_religion_type">Religión</string>
 	<string name="poi_information_type">Tipo de información</string>
 	<string name="poi_information_contents">Contenido</string>
 	<string name="poi_clock_option">Adicional</string>
-	<string name="poi_scout_camp">Campamento scout</string>
+	<string name="poi_scout_camp">Campamento de exploradores</string>
 	<string name="poi_backcountry">Travesía (fuera de pista)</string>
 	<string name="poi_resort_type">Tipo de complejo</string>
 	<string name="poi_piste_difficulty">Dificultad de la pista</string>
@@ -3461,7 +3461,7 @@
 <string name="poi_owner">Propietario</string>
 
 <string name="poi_animal_shelter_type">Animales aceptados</string>
-	<string name="poi_animal_shelter_purpose">Propósito específico</string>
+	<string name="poi_animal_shelter_purpose">Finalidad</string>
 
 <string name="poi_animal_shelter_wildlife">Fauna silvestre</string>
 	<string name="poi_animal_shelter_horse">Caballos</string>

@@ -295,7 +295,7 @@
     <string name="recording_is_recorded">S’àudio/vìdeo est beninde registradu. Pro lu firmare incarca in su widget AV.</string>
     <string name="recording_playing">S’àudio de sa registratzione isseberada istat pro èssere reprodotu.\n%1$s</string>
     <string name="recording_open_external_player">Abèri reprodutòre esternu</string>
-    <string name="recording_delete_confirm">Iscantzellare custa registratzione?</string>
+    <string name="recording_delete_confirm">Iscantzellare custu elementu?</string>
 
     <string name="recording_unavailable">non disponìbile</string>
     <string name="recording_context_menu_arecord">Registra una nota àudio</string>
