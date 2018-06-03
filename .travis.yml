@@ -1,5 +1,7 @@
 language: android
 
+# Work in progress. Repo should be used for initial checkout https://github.com/osmandapp/OsmAnd-manifest/blob/master/android_build.xml
+
 android:
   components:
     - tools
