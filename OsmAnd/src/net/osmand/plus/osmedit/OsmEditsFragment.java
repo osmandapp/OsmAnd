@@ -758,20 +758,20 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 					if (point.getGroup() == Group.POI) {
 						OpenstreetmapPoint p = (OpenstreetmapPoint) point;
 						WptPt wpt = new WptPt();
-						wpt.name = "node" + " " + OsmPoint.stringAction.get(p.getAction());
+						wpt.name = getTagsString(p);
 						wpt.lat = p.getLatitude();
 						wpt.lon = p.getLongitude();
-						wpt.desc = "id: " + String.valueOf(p.getId());
-						wpt.comment = getTagsString(p);
+						wpt.desc = "id: " + String.valueOf(p.getId()) +
+								" node" + " " + OsmPoint.stringAction.get(p.getAction());
 						gpx.addPoint(wpt);
 					} else if (point.getGroup() == Group.BUG) {
 						OsmNotesPoint p = (OsmNotesPoint) point;
 						WptPt wpt = new WptPt();
-						wpt.name = "note" + " " + OsmPoint.stringAction.get(p.getAction());
+						wpt.name = p.getText();
 						wpt.lat = p.getLatitude();
 						wpt.lon = p.getLongitude();
-						wpt.desc = "id: " + String.valueOf(p.getId());
-						wpt.comment = p.getText();
+						wpt.desc = "id: " + String.valueOf(p.getId()) +
+								" note" + " " + OsmPoint.stringAction.get(p.getAction()) ;
 						gpx.addPoint(wpt);
 					}
 				}
