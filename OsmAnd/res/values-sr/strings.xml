@@ -83,7 +83,7 @@
     <string name="av_settings">Аудио/видео подешавања </string>
     <string name="recording_error">Снимање није успело</string>
     <string name="recording_camera_not_available">Камера недоступна</string>
-    <string name="recording_delete_confirm">Избрисати овај снимак?</string>
+    <string name="recording_delete_confirm">Избрисати ову ставку?</string>
     <string name="recording_unavailable">недоступан</string>
     <string name="recording_context_menu_arecord">Направи аудио белешку</string>
     <string name="recording_context_menu_vrecord">Направи видео белешку</string>
