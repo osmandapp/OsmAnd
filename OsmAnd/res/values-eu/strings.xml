@@ -163,7 +163,7 @@
   <string name="recording_is_recorded">Audioa/bideoa grabatzen. Gelditu AV trepeta sakatuz.</string>
   <string name="recording_playing">Aukeratutako grabaketaren audioa erreproduzitzen.⏎\n%1$s</string>
   <string name="recording_open_external_player">Ireki kanpoko erreproduzitzailea</string>
-  <string name="recording_delete_confirm">Ezabatu grabaketa hau?</string>
+  <string name="recording_delete_confirm">Ezabatu elementu hau?</string>
   
   <string name="recording_unavailable">ez eskuragarri</string>
   <string name="recording_context_menu_arecord">Grabatu audio ohar bat</string>
