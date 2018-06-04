@@ -901,7 +901,7 @@ Proporčná pamäť %4$s MB (Limit Androidu %5$s MB, Dalvik %6$s MB).</string>
     <string name="recording_is_recorded">Zvuk/video sa nahráva. Záznam zastavte stlačením tlačidla AV.</string>
     <string name="recording_playing">Prehráva sa zvuk zo zadaného záznamu.\n%1$s</string>
     <string name="recording_open_external_player">Otvoriť externý prehrávač</string>
-    <string name="recording_delete_confirm">Odstrániť tento záznam?</string>
+    <string name="recording_delete_confirm">Odstrániť túto položku?</string>
     <string name="recording_unavailable">nedostupné</string>
     <string name="recording_context_menu_arecord">Zaznamenať zvukovú poznámku</string>
     <string name="recording_context_menu_vrecord">Zaznamenať video poznámku</string>
