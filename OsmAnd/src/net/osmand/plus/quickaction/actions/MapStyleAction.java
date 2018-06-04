@@ -1,7 +1,9 @@
 package net.osmand.plus.quickaction.actions;
 
 import android.content.DialogInterface;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.SwitchCompat;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -12,6 +14,7 @@ import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dialogs.ConfigureMapMenu;
+import net.osmand.plus.dialogs.SelectMapViewQuickActionsBottomSheet;
 import net.osmand.plus.openseamapsplugin.NauticalMapsPlugin;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.SwitchableAction;
@@ -42,7 +45,17 @@ public class MapStyleAction extends SwitchableAction<String> {
 	public void execute(MapActivity activity) {
 
 		List<String> mapStyles = getFilteredStyles();
-
+		boolean showBottomSheetStyles = Boolean.valueOf(getParams().get(KEY_DIALOG));
+		if (showBottomSheetStyles) {
+			SelectMapViewQuickActionsBottomSheet fragment = new SelectMapViewQuickActionsBottomSheet();
+			Bundle args = new Bundle();
+			args.putStringArrayList("test", (ArrayList<String>) mapStyles);
+			args.putInt("type", TYPE);
+			fragment.setArguments(args);
+			fragment.show(activity.getSupportFragmentManager(),
+					SelectMapViewQuickActionsBottomSheet.TAG);
+			return;
+		}
 		String curStyle = activity.getMyApplication().getSettings().RENDERER.get();
 		int index = mapStyles.indexOf(curStyle);
 		String nextStyle = mapStyles.get(0);
@@ -163,6 +176,13 @@ public class MapStyleAction extends SwitchableAction<String> {
 	@Override
 	protected void saveListToParams(List<String> styles) {
 		getParams().put(getListKey(), TextUtils.join(",", styles));
+	}
+
+	@Override
+	public boolean fillParams(View root, MapActivity activity) {
+		super.fillParams(root, activity);
+		getParams().put(KEY_DIALOG, Boolean.toString(((SwitchCompat) root.findViewById(R.id.saveButton)).isChecked()));
+		return true;
 	}
 
 	@Override
