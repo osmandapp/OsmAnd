@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.annotation.StringRes;
 import android.support.v4.view.MotionEventCompat;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SwitchCompat;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -23,6 +24,7 @@ import java.util.List;
 
 public abstract class SwitchableAction<T> extends QuickAction {
 
+	protected static final String KEY_DIALOG = "dialog";
 	private transient EditText title;
 
 	protected SwitchableAction(int type) {
@@ -43,7 +45,12 @@ public abstract class SwitchableAction<T> extends QuickAction {
 
 		View view = LayoutInflater.from(parent.getContext())
 				.inflate(R.layout.quick_action_switchable_action, parent, false);
-
+		
+		SwitchCompat showDialog = (SwitchCompat) view.findViewById(R.id.saveButton);
+		if (!getParams().isEmpty()) {
+			showDialog.setChecked(Boolean.valueOf(getParams().get(KEY_DIALOG)));
+		}
+		
 		final RecyclerView list = (RecyclerView) view.findViewById(R.id.list);
 
 		final QuickActionItemTouchHelperCallback touchHelperCallback = new QuickActionItemTouchHelperCallback();

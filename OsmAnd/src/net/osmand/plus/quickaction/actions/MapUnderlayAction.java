@@ -1,8 +1,10 @@
 package net.osmand.plus.quickaction.actions;
 
 import android.content.DialogInterface;
+import android.os.Bundle;
 import android.support.v4.util.Pair;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.SwitchCompat;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
@@ -14,12 +16,14 @@ import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.dialogs.SelectMapViewQuickActionsBottomSheet;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.SwitchableAction;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -81,6 +85,22 @@ public class MapUnderlayAction extends SwitchableAction<Pair<String, String>> {
 			OsmandSettings settings = activity.getMyApplication().getSettings();
 			List<Pair<String, String>> sources = loadListFromParams();
 
+			boolean showBottomSheetStyles = Boolean.valueOf(getParams().get(KEY_DIALOG));
+			if (showBottomSheetStyles) {
+				SelectMapViewQuickActionsBottomSheet fragment = new SelectMapViewQuickActionsBottomSheet();
+				HashMap<String, String> hashMap = new HashMap<>();
+				for (Pair<String, String> pair : sources) {
+					hashMap.put(pair.first, pair.second);
+				}
+				Bundle args = new Bundle();
+				args.putInt("type", TYPE);
+				args.putSerializable("map", hashMap);
+				fragment.setArguments(args);
+				fragment.show(activity.getSupportFragmentManager(),
+						SelectMapViewQuickActionsBottomSheet.TAG);
+				return;
+			}
+			
 			Pair<String, String> currentSource = new Pair<>(
 					settings.MAP_UNDERLAY.get(),
 					settings.MAP_UNDERLAY.get());
@@ -167,5 +187,12 @@ public class MapUnderlayAction extends SwitchableAction<Pair<String, String>> {
 				builder.show();
 			}
 		};
+	}
+
+	@Override
+	public boolean fillParams(View root, MapActivity activity) {
+		super.fillParams(root, activity);
+		getParams().put(KEY_DIALOG, Boolean.toString(((SwitchCompat) root.findViewById(R.id.saveButton)).isChecked()));
+		return true;
 	}
 }
