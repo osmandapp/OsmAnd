@@ -82,12 +82,12 @@
     <string name="shared_string_type">Speco</string>
     <string name="rec_split">Sonregistrila dividilo</string>
     <string name="rec_split_title">Uzi sonregistrilan dividilon</string>
-    <string name="rec_split_desc">Superskribi sonaĵojn kiam uzata spaco trograndas grandon de memorejo.</string>
+    <string name="rec_split_desc">Superskribi sonaĵojn kiam uzata spaco trograndas grandon de konservejo.</string>
     <string name="rec_split_clip_length">Sonaĵa longo</string>
     <string name="rec_split_clip_length_desc">Supera limigo por registritaj sonaĵoj.</string>
     <string name="available_maps">Disponeblaj mapoj</string>
     <string name="live_updates">Aŭtomataj ĝisdatigoj perinterretaj</string>
-    <string name="rec_split_storage_size">Memoreja kapacito</string>
+    <string name="rec_split_storage_size">Konserveja kapacito</string>
     <string name="rec_split_storage_size_desc">Kvanto da spaco kiu povas esti okupata per ĉiuj registritaj sonaĵoj.</string>
     <string name="select_voice_provider">Elekti dialogan helpon</string>
     <string name="select_voice_provider_descr">Elekti aŭ elŝuti dialogan helpon en via lingvo.</string>
@@ -347,12 +347,12 @@
     <string name="application_dir_change_warning3">Ĉu kopii dosierojn de datumoj al la nova loko?</string>
     <string name="specified_directiory_not_writeable">Ne povas krei mapojn en la difina dosierujo</string>
     <string name="copying_osmand_file_failed">Kopiado de dosieroj malsukcesis</string>
-    <string name="storage_directory_external">Ekstera memorejo</string>
-    <string name="storage_directory_multiuser">Pluruzanta memorejo</string>
-    <string name="storage_directory_internal_app">Interna aplikaĵa memoro</string>
+    <string name="storage_directory_external">Ekstera konservejo</string>
+    <string name="storage_directory_multiuser">Pluruzanta konservejo</string>
+    <string name="storage_directory_internal_app">Interna aplikaĵa konservejo</string>
     <string name="storage_directory_manual">Difina permane</string>
     <string name="storage_directory_default">Interna memoro</string>
-    <string name="storage_directory">Memorejo por mapoj</string>
+    <string name="storage_directory">Konservejo por mapoj</string>
     <string name="shared_string_copy">Kopii</string>
     <string name="shared_string_message">Mesaĝo</string>
     <string name="shared_string_edit">Redakti</string>
@@ -457,7 +457,7 @@
     
     
     
-    <string name="storage_permission_restart_is_required">Nun la aplikaĵo estas permesita por skribi en ekstera memorejo, sed permana restarto de aplikaĵo nepras.</string>
+    <string name="storage_permission_restart_is_required">Nun la aplikaĵo estas permesita por skribi en ekstera konservejo, sed permana restarto de aplikaĵo nepras.</string>
     <string name="full_report">Plena raporto</string>
     <string name="open_street_map_login_and_pass">Uzantnomo kaj pasvorto al OpenStreetMap</string>
     <string name="application_dir">Datum-konservada dosierujo</string>
@@ -936,8 +936,8 @@ Lon: %2$s</string>
     <string name="routing_attr_weight_description">Agordi maksimuman permesatan pezon de veturilo.</string>
     <string name="routing_attr_height_name">Altlimo</string>
     <string name="routing_attr_height_description">Agordi maksimuman permesan alton de veturilo.</string>
-    <string name="android_19_location_disabled">Ekde la versio 4.4 (KitKat) de Android, vi ne povas elŝuti kaj ĝisdatigi mapojn al la antaŭa dosierujo (%s). Ĉu ŝanĝi ĝin al permesa memoreja loko kaj kopii ĉiujn dosierojn de OsmAnd tie?
-\n Rimarko 1: Viaj malnovaj dosieroj ne estos ŝanĝitaj (tamen vi povos forigi ilin permane).
+    <string name="android_19_location_disabled">Ekde la versio 4.4 (KitKat) de Android, vi ne povas elŝuti kaj ĝisdatigi mapojn al la antaŭa dosierujo (%s). Ĉu ŝanĝi ĝin al permesita loko kaj kopii ĉiujn dosierojn de OsmAnd tien? 
+\n Rimarko 1: Viaj malnovaj dosieroj ne estos ŝanĝitaj (tamen vi povos forigi ilin permane). 
 \n Rimarko 2: Dosieroj en la nova loko ne povos esti uzitaj ambaŭ per OsmAnd kaj OsmAnd+.</string>
     <string name="copying_osmand_one_file_descr">Kopiado de dosiero (%s) al la nova loko…</string>
     <string name="copying_osmand_files_descr">Kopiado de datum-dosieroj de OsmAnd al la nova dosierujo (%s)…</string>
@@ -1196,11 +1196,11 @@ Lon: %2$s</string>
     <string name="osmand_short_description_80_chars">Foliumi tutmondajn mapojn kaj navigadi uzante eksterretajn kaj enretajn OSM mapojn</string>
 	<string name="osmand_plus_short_description_80_chars">Foliumi tutmondajn mapojn kaj navigadi uzante eksterretajn kaj enretajn OSM mapojn</string>
 	<string name="osmand_long_description_1000_chars">OsmAnd (OSM Aŭtomata Navigado Direktanta al la celo) 
-\n
+\n 
 \nOsmAnd estas malfermkoda navigada aplikaĵo subtenanta diversajn mondajn mapojn de OpenStreetMap (OSM). Ĉiuj mapoj (vektoraj kaj kahelaj) povas esti konservitaj en la poŝtelefona memorejo por eksterreta uzado. La aplikaĵo ankaŭ ebligas uzi eksterretan kaj enretan navigadon kun turnon-post-turno voĉaj anoncoj. 
-\n
+\n 
 \nĈefaj ebloj: 
-\n- Funkcias tute eksterrete (konservas elŝutitajn vektorajn aŭ kahelaj mapojn en la aparata memorejo) 
+\n- Funkcias tute eksterrete (konservas elŝutitajn vektorajn aŭ kahelaj mapojn en la aparata konservejo) 
 \n- Kompaktaj vektoraj eksterretaj mapoj de la tuta mondo 
 \n- Elŝuti landaj aŭ regionaj mapoj senpere en la aplikaĵo 
 \n- Diversspecaj tavoloj de mapo: GPX aŭ navigadaj kursoj, interesejoj, ŝatataj ejoj, nivelkurboj, haltejoj de publik-transporto, ekstraj mapoj kun ŝanĝebla diafaneco 
@@ -1211,11 +1211,11 @@ Lon: %2$s</string>
 \n - agordebla rapid-dependa map-skalado 
 \n - agordebla map-turniĝo laŭ direkto de movado aŭ kompaso 
 \n - sciigoj pri koridoroj, rapidlimoj, antaŭregistritaj aŭ sintezitaj parolaj helpoj 
-\n
+\n 
 \nLimoj en tiu ĉi senpaga versio de OsmAnd: 
 \n- Limigita nombro da elŝutoj de mapoj 
 \n- Sen aliro al eksterretaj vikipediaj interesejoj 
-\n
+\n 
 \nOsmAnd estas konstante evoluigata kaj ĝia plua evoluigo dependas de monaj donacoj por subteni programadon kaj testadon de novaj ebloj. Bonvolu konsideri aĉeti OsmAnd+, aŭ donaci por aŭ elektitaj funkcioj aŭ ĝenerale por la projekto ĉe https://osmand.net.</string>
 	<string name="day_night_info_description">Sunleviĝo: %1$s\nSunsubiro: %2$s</string>
     <string name="day_night_info">Informo pri tago/nokto</string>
@@ -2135,23 +2135,38 @@ Proporcia memoro %4$s MB (limito de Android %5$s MB, Dalvik %6$s MB).</string>
     
     <string name="osmand_plus_long_description_1000_chars">"OsmAnd (OSM Aŭtomata Navigado Direktanta al la celo) 
 \n
+\n 
 \nOsmAnd estas malfermkoda navigada aplikaĵo subtenanta diversajn mondajn mapojn de OpenStreetMap (OSM). Ĉiuj mapoj (vektoraj kaj kahelaj) povas esti konservitaj en la poŝtelefona memorejo por eksterreta uzado. OsmAnd ankaŭ ebligas uzi eksterretan kaj enretan navigadon kun turnon-post-turno voĉaj anoncoj. 
 \n
+\n 
 \nOsmAnd+ estas pagenda versio de programo, per aĉeto de aplikaĵo, vi subtenas la projekton, donacas al novajn eblojn, kaj ricevos la plej novajn ĝisdatigojn. 
 \n
+\n 
 \nĈefaj ebloj: 
 \n
-\n- Funkcias tute eksterrete (konservas elŝutitajn vektorajn aŭ kahelaj mapojn en la aparata memorejo) 
+\n 
+\n- Funkcias tute eksterrete (konservas elŝutitajn vektorajn aŭ kahelaj mapojn en la aparata konservejo) 
+\n
 \n- Kompaktaj vektoraj eksterretaj mapoj de la tuta mondo 
+\n
 \n- Senlime elŝuti landaj aŭ regionaj mapoj senpere en la aplikaĵo 
+\n
 \n- Eksterreta Vikipedio (elŝuteblaj vikipediaj interesejoj), perfekte por vizitado 
+\n
 \n- Diversspecaj tavoloj de mapo: GPX aŭ navigadaj kursoj, interesejoj, ŝatataj ejoj, nivelkurboj, haltejoj de publik-transporto, ekstraj mapoj kun ŝanĝebla diafaneco 
+\n
 \n- Serĉi eksterrete adresojn kaj interesajn ejojn (interesejojn) 
+\n
 \n- Difini kursojn por mezaj distancoj eksterrete 
+\n
 \n- Aŭta, bicikla, kaj piediranta reĝimoj kun: 
+\n
 \n  - agordeblaj aŭtomata/taga/nokta aspektoj 
+\n
 \n  - agordebla rapid-dependa map-skalado 
+\n
 \n  - agordebla map-turniĝo laŭ direkto de movado aŭ kompaso 
+\n
 \n  - sciigoj pri koridoroj, rapidlimoj, antaŭregistritaj aŭ sintezitaj parolaj helpoj"</string>
 	
     
@@ -2174,7 +2189,7 @@ Proporcia memoro %4$s MB (limito de Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="no_inet_connection_desc_map">Bezonata por elŝuti mapojn.</string>
     <string name="search_location">Determinado de pozicio…</string>
     <string name="storage_free_space">Libera loko</string>
-    <string name="storage_place_description">Datum-memorejo de OsmAnd (por mapoj, GPX-dosieroj, ktp.): %1$s.</string>
+    <string name="storage_place_description">Dosierujo por datumoj de OsmAnd (por mapoj, GPX-dosieroj, ktp.): %1$s.</string>
     <string name="give_permission">Permesi</string>
     <string name="allow_access_location">Permesi aliron al pozicio</string>
     <string name="first_usage_greeting">Navigi kaj esplori novajn lokojn sen interreta konekto</string>
