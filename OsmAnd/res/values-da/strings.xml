@@ -16,7 +16,7 @@
     <string name="recording_playing">Den valgte optagelsen bliver afspillet.
 \n%1$s</string>
     <string name="recording_open_external_player">Åbn ekstern afspiller</string>
-    <string name="recording_delete_confirm">Slet optagelsen?</string>
+    <string name="recording_delete_confirm">Slet elementet?</string>
 
     <string name="recording_unavailable">ikke tilgængelig</string>
     <string name="recording_context_menu_arecord">Optag lydnote</string>
