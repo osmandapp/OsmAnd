@@ -146,7 +146,7 @@ class TelegramHelper private constructor() {
                 parameters.apiHash = "a3406de8d171bb422bb6ddf3bbd800e2"
                 parameters.systemLanguageCode = "en"
                 parameters.deviceModel = "Android"
-                parameters.systemVersion = "Unknown"
+                parameters.systemVersion = "OsmAnd Telegram"
                 parameters.applicationVersion = "1.0"
                 parameters.enableStorageOptimizer = true
 
