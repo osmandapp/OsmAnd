@@ -867,7 +867,7 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="search_villages_and_postcodes">Cerca addicional de municipis i codis postals</string>
     <string name="route_descr_lat_lon">Lat %1$.3f long %2$.3f</string>
     <string name="intermediate_points_change_order">Canvia l\'ordre</string>
-    <string name="recording_delete_confirm">Voleu eliminar aquest enregistrament?</string>
+    <string name="recording_delete_confirm">Voleu eliminar aquest element?</string>
     <string name="recording_default_name">Enregistrament</string>
     <string name="recording_description">Enregistrament %1$s %3$s %2$s</string>
     <string name="layer_recordings">Capa d\'enregistraments</string>
