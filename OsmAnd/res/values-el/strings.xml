@@ -1019,7 +1019,7 @@
     <string name="recording_is_recorded">Εγγραφή Ήχου/βίντεο. Σταμάτημα πατώντας το γραφικό στοιχείο AV.</string>
     <string name="recording_playing">Ένας ήχος από την συγκεκριμένη εγγραφή αναπαράγεται.\n%1$s</string>
     <string name="recording_open_external_player">Άνοιγμα εξωτερικού αναπαραγωγέα</string>
-    <string name="recording_delete_confirm">Να διαγραφεί αυτή η εγγραφή;</string>
+    <string name="recording_delete_confirm">Να διαγραφεί αυτό το στοιχείο;</string>
     
     <string name="recording_unavailable">μη διαθέσιμο</string>
     <string name="recording_context_menu_arecord">Κάντε ηχητική σημείωση</string>
