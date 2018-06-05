@@ -1,0 +1,30 @@
+gradle
+gradlew
+gradlew.bat
+
+aarDependencies
+
+bin/
+dist/
+gen/
+local.properties
+obj/
+out/
+use/
+
+# Android Studio
+/.idea
+*.iml
+
+# Gradle
+.gradle
+/local.properties
+
+# MacOSX
+.DS_Store
+
+# Output
+/build
+
+# Project-specific
+*.so

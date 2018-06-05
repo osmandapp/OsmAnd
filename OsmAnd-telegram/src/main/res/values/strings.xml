@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Telegram Test</string>
+    <string name="phone_number_title">Phone number in international format</string>
+    <string name="shared_string_password">Password</string>
+    <string name="authentication_code">Authentication code</string>
+    <string name="login_to_telegram">Login to telegram</string>
+    <string name="shared_string_login">Login</string>
+    <string name="shared_string_logout">Logout</string>
+    <string name="not_logged_in">You are not logged in</string>
+    <string name="initialization">Initialization</string>
+    <string name="logging_out">Logging out</string>
+    <string name="closing">Closing</string>
+    <string name="shared_string_continue">Continue</string>
+    <string name="shared_string_cancel">Cancel</string>
+</resources>
