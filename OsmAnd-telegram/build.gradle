@@ -70,6 +70,37 @@ android {
     }
 }
 
+task downloadTdLibzip {
+    doLast {
+        ant.get(src: 'https://core.telegram.org/tdlib/tdlib.zip', dest: 'tdlib.zip', skipexisting: 'true')
+        ant.unzip(src: 'tdlib.zip', dest: 'tdlib/')
+    }
+}
+
+task copyNativeLibs(type: Copy) {
+    dependsOn downloadTdLibzip
+    from "tdlib/libtd/src/main/libs"
+    into "libs"
+}
+
+task copyJavaSources(type: Copy)  {
+    dependsOn downloadTdLibzip
+    from "tdlib/libtd/src/main/java/org/drinkless/td"
+    into "src/main/java/org/drinkless/td"
+}
+
+task downloadPrebuiltTelegram {
+    dependsOn downloadTdLibzip, copyNativeLibs, copyJavaSources
+}
+
+
+afterEvaluate {
+  android.applicationVariants.all { variant ->
+    variant.javaCompiler.dependsOn(downloadPrebuiltTelegram)
+    variant.preBuild.dependsOn(downloadPrebuiltTelegram)
+  }
+}
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 

@@ -11,6 +11,7 @@ local.properties
 obj/
 out/
 use/
+src/main/java/org/drinkless/td/
 
 # Android Studio
 /.idea
@@ -28,3 +29,5 @@ use/
 
 # Project-specific
 *.so
+tdlib.zip
+tdlib

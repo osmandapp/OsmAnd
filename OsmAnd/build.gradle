@@ -374,9 +374,6 @@ afterEvaluate {
     variant.javaCompiler.dependsOn(collectExternalResources, buildOsmAndCore, cleanupDuplicatesInCore)
   }
 }
-//tasks.withType(JavaCompile) {
-	//compileTask -> compileTask.dependsOn << [collectExternalResources, buildOsmAndCore, cleanupDuplicatesInCore]
-//}
 
 task appStart(type: Exec) {
 	// linux 
@@ -385,20 +382,6 @@ task appStart(type: Exec) {
 	// commandLine 'cmd', '/c', 'adb', 'shell', 'am', 'start', '-n', 'net.osmand.plus/net.osmand.plus.activities.MapActivity'      
 }
 
-repositories {
-	ivy {
-		name = "OsmAndBinariesIvy"
-		url = "http://builder.osmand.net"
-		layout "pattern", {
-			artifact "ivy/[organisation]/[module]/[revision]/[artifact]-[revision].[ext]"
-		}
-	}
-	mavenCentral()
-	jcenter()
-	maven {
-		url "https://jitpack.io"
-	}
-}
 
 project.logger.warn("Analytics enabled for free version: $analytics")
 dependencies {

@@ -19,11 +19,22 @@ buildscript {
 
 apply plugin: 'com.github.ksoichiro.eclipse.aar'    
 allprojects {
+
     repositories {
+        ivy {
+            name = "OsmAndBinariesIvy"
+            url = "http://builder.osmand.net"
+            layout "pattern", {
+                artifact "ivy/[organisation]/[module]/[revision]/[artifact]-[revision].[ext]"
+            }
+        }
         mavenCentral()
+        jcenter()
         maven {
             url "https://maven.google.com"
         }
-	jcenter()
+        maven {
+            url "https://jitpack.io"
+        }
     }
 }
