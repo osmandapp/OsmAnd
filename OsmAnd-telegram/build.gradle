@@ -53,16 +53,6 @@ android {
             dimension "abi"
         }
     }
-
-    buildTypes {
-        debug {
-            signingConfig signingConfigs.development
-        }
-        release {
-            signingConfig signingConfigs.publishing
-        }
-    }
-
     signingConfigs {
         development {
             storeFile file("../keystores/debug.keystore")
@@ -79,6 +69,17 @@ android {
         }
     }
 
+
+    buildTypes {
+        debug {
+            signingConfig signingConfigs.development
+        }
+        release {
+            signingConfig signingConfigs.publishing
+        }
+    }
+
+    
     lintOptions {
         // use this line to check all rules except those listed
         disable 'InvalidPackage'
