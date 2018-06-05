@@ -1,4 +1,4 @@
-package net.osmand.telegramtest
+package net.osmand.telegram
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -6,8 +6,8 @@ import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
-import net.osmand.telegramtest.LoginDialogFragment.LoginDialogType
-import net.osmand.telegramtest.TelegramHelper.*
+import net.osmand.telegram.LoginDialogFragment.LoginDialogType
+import net.osmand.telegram.TelegramHelper.*
 
 
 class MainActivity : AppCompatActivity(), TelegramListener {

@@ -1,7 +1,7 @@
-package net.osmand.telegramtest
+package net.osmand.telegram
 
 import android.text.TextUtils
-import net.osmand.telegramtest.TelegramHelper.AuthParamType.*
+import net.osmand.telegram.TelegramHelper.AuthParamType.*
 
 import org.drinkless.td.libcore.telegram.Client
 import org.drinkless.td.libcore.telegram.Client.ResultHandler

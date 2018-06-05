@@ -1,4 +1,4 @@
-package net.osmand.telegramtest
+package net.osmand.telegram
 
 import org.junit.Test
 
