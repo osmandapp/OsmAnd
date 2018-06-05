@@ -268,6 +268,10 @@ public class GPXUtilities {
 
 	}
 
+	public static class Metadata extends GPXExtensions {
+		public String desc;
+	}
+
 	public static class GPXTrackAnalysis {
 		public float totalDistance = 0;
 		public int totalTracks = 0;
@@ -779,6 +783,7 @@ public class GPXUtilities {
 
 	public static class GPXFile extends GPXExtensions {
 		public String author;
+		public Metadata metadata;
 		public List<Track> tracks = new ArrayList<>();
 		private List<WptPt> points = new ArrayList<>();
 		public List<Route> routes = new ArrayList<>();
@@ -1274,6 +1279,13 @@ public class GPXUtilities {
 			serializer.attribute(null, "xsi:schemaLocation",
 					"http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd");
 
+			if (file.metadata != null) {
+				serializer.startTag(null, "metadata");
+				writeNotNullText(serializer, "desc", file.metadata.desc);
+				writeExtensions(serializer, file.metadata);
+				serializer.endTag(null, "metadata");
+			}
+
 			for (Track track : file.tracks) {
 				if (!track.generalTrack) {
 					serializer.startTag(null, "trk"); //$NON-NLS-1$
@@ -1478,6 +1490,11 @@ public class GPXUtilities {
 							if (parser.getName().equals("gpx")) {
 								((GPXFile) parse).author = parser.getAttributeValue("", "creator");
 							}
+							if (parser.getName().equals("metadata")) {
+								Metadata metadata = new Metadata();
+								((GPXFile) parse).metadata = metadata;
+								parserState.push(metadata);
+							}
 							if (parser.getName().equals("trk")) {
 								Track track = new Track();
 								((GPXFile) parse).tracks.add(track);
@@ -1492,6 +1509,10 @@ public class GPXUtilities {
 								WptPt wptPt = parseWptAttributes(parser);
 								((GPXFile) parse).points.add(wptPt);
 								parserState.push(wptPt);
+							}
+						} else if (parse instanceof Metadata) {
+							if (parser.getName().equals("desc")) {
+								((Metadata) parse).desc = readText(parser, "desc");
 							}
 						} else if (parse instanceof Route) {
 							if (parser.getName().equals("name")) {
@@ -1606,7 +1627,10 @@ public class GPXUtilities {
 						extensionReadMode = false;
 					}
 
-					if (tag.equals("trkpt")) {
+					if (tag.equals("metadata")) {
+						Object pop = parserState.pop();
+						assert pop instanceof Metadata;
+					} else if (tag.equals("trkpt")) {
 						Object pop = parserState.pop();
 						assert pop instanceof WptPt;
 					} else if (tag.equals("wpt")) {
