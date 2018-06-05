@@ -605,7 +605,7 @@
     <string name="recording_is_recorded">در حال ضبط صدا/ویدئو. توقف ضبط با لمس ابزارک صدا/ویدئو.</string>
     <string name="recording_playing">صدایی از فایل ضبط‌شدهٔ موردنظر در حال پخش است. 
 \n%1$s</string>
-    <string name="recording_delete_confirm">این مورد ضبط‌شده را پاک می‌کنید؟</string>
+    <string name="recording_delete_confirm">این مورد را پاک می‌کنید؟</string>
     <string name="recording_description">در حال ضبط %1$s %3$s %2$s</string>
     <string name="osmand_srtm_short_description_80_chars">افزونهٔ OsmAnd برای منحنی‌های تراز آفلاین</string>
     <string name="use_magnetic_sensor_descr">برای مقدار قطب‌نما به‌جای حسگر جهتی از حسگر مغناطیسی استفاده می‌کند.</string>
