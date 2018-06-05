@@ -7,6 +7,7 @@ import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.support.annotation.ColorInt;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.util.Pair;
 import android.support.v4.widget.CompoundButtonCompat;
 import android.support.v4.widget.NestedScrollView;
@@ -29,6 +30,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
+import net.osmand.plus.quickaction.CreateEditActionDialog;
 import net.osmand.plus.quickaction.QuickActionFactory;
 import net.osmand.plus.quickaction.actions.MapStyleAction;
 import net.osmand.plus.quickaction.actions.MapSourceAction;
@@ -44,6 +46,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import static net.osmand.plus.quickaction.SwitchableAction.KEY_ACTIONS_MAP;
+import static net.osmand.plus.quickaction.SwitchableAction.KEY_ID;
+import static net.osmand.plus.quickaction.SwitchableAction.KEY_TYPE;
+import static net.osmand.plus.quickaction.actions.MapStyleAction.KEY_STYLES;
+
 public class SelectMapViewQuickActionsBottomSheet extends MenuBottomSheetDialogFragment {
 
 	public static final String TAG = SelectMapViewQuickActionsBottomSheet.class.getSimpleName();
@@ -52,7 +59,6 @@ public class SelectMapViewQuickActionsBottomSheet extends MenuBottomSheetDialogF
 	private static final String LAYER_OSM_VECTOR = "LAYER_OSM_VECTOR";
 	private static final String KEY_NO_OVERLAY = "no_overlay";
 	private static final String KEY_NO_UNDERLAY = "no_underlay";
-	private static final String MAP = "map";
 
 	private LinearLayout stylesContainer;
 	private View.OnClickListener onClickListener;
@@ -63,6 +69,7 @@ public class SelectMapViewQuickActionsBottomSheet extends MenuBottomSheetDialogF
 	private HashMap<String, String> pairsMap;
 	private String selectedItem;
 	private int type;
+	private long id;
 
 	@Override
 	@SuppressWarnings("unchecked")
@@ -76,11 +83,12 @@ public class SelectMapViewQuickActionsBottomSheet extends MenuBottomSheetDialogF
 		}
 		Bundle args = getArguments();
 
-		type = args.getInt("type");
+		type = args.getInt(KEY_TYPE);
+		id = args.getLong(KEY_ID);
 		if (type == MapStyleAction.TYPE) {
-			stylesList = args.getStringArrayList("test");
+			stylesList = args.getStringArrayList(KEY_STYLES);
 		} else {
-			pairsMap = (HashMap<String, String>) args.getSerializable(MAP);
+			pairsMap = (HashMap<String, String>) args.getSerializable(KEY_ACTIONS_MAP);
 		}
 		OsmandApplication app = (OsmandApplication) context.getApplicationContext();
 		settings = app.getSettings();
@@ -174,18 +182,12 @@ public class SelectMapViewQuickActionsBottomSheet extends MenuBottomSheetDialogF
 	@Override
 	protected void onDismissButtonClickAction() {
 		MapActivity mapActivity = getMapActivity();
-		if (mapActivity == null) {
+		FragmentManager fm = getFragmentManager();
+		if (mapActivity == null || fm == null) {
 			return;
 		}
-		if (type == MapStyleAction.TYPE) {
-			changeMapStyle(mapActivity);
-		} else if (type == MapSourceAction.TYPE) {
-			changeMapSource(mapActivity);
-		} else if (type == MapOverlayAction.TYPE) {
-			changeMapOverlay(mapActivity);
-		} else if (type == MapUnderlayAction.TYPE) {
-			changeMapUnderlay(mapActivity);
-		}
+		CreateEditActionDialog dialog = CreateEditActionDialog.newInstance(id);
+		dialog.show(fm, CreateEditActionDialog.TAG);
 	}
 
 
@@ -318,17 +320,21 @@ public class SelectMapViewQuickActionsBottomSheet extends MenuBottomSheetDialogF
 			onClickListener = new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					Context context = getContext();
-					if (context == null) {
+					MapActivity mapActivity = getMapActivity();
+					if (mapActivity == null) {
 						return;
 					}
 					selectedItem = (String) v.getTag();
 					if (type == MapStyleAction.TYPE) {
-						Toast.makeText(context, selectedItem, Toast.LENGTH_SHORT).show();
-					} else {
-						Toast.makeText(context, pairsMap.get(selectedItem), Toast.LENGTH_SHORT).show();
+						changeMapStyle(mapActivity);
+					} else if (type == MapSourceAction.TYPE) {
+						changeMapSource(mapActivity);
+					} else if (type == MapOverlayAction.TYPE) {
+						changeMapOverlay(mapActivity);
+					} else if (type == MapUnderlayAction.TYPE) {
+						changeMapUnderlay(mapActivity);
 					}
-					populateItemsList();
+					dismiss();
 				}
 			};
 		}
