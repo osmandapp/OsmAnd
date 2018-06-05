@@ -24,7 +24,12 @@ import java.util.List;
 
 public abstract class SwitchableAction<T> extends QuickAction {
 
+	public static final String KEY_ACTIONS_MAP = "actions_map";
+	public static final String KEY_TYPE = "type";
+	public static final String KEY_ID = "id";
+	
 	protected static final String KEY_DIALOG = "dialog";
+
 	private transient EditText title;
 
 	protected SwitchableAction(int type) {

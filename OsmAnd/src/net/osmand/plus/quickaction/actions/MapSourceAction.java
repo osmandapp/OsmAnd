@@ -88,8 +88,9 @@ public class MapSourceAction extends SwitchableAction<Pair<String, String>> {
 					hashMap.put(pair.first, pair.second);
 				}
 				Bundle args = new Bundle();
-				args.putInt("type", TYPE);
-				args.putSerializable("map", hashMap);
+				args.putInt(KEY_TYPE, TYPE);
+				args.putLong(KEY_ID, id);
+				args.putSerializable(KEY_ACTIONS_MAP, hashMap);
 				fragment.setArguments(args);
 				fragment.show(activity.getSupportFragmentManager(),
 						SelectMapViewQuickActionsBottomSheet.TAG);

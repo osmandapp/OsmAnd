@@ -31,7 +31,7 @@ public class MapStyleAction extends SwitchableAction<String> {
 
 	public static final int TYPE = 14;
 
-	private final static String KEY_STYLES = "styles";
+	public final static String KEY_STYLES = "styles";
 
 	public MapStyleAction() {
 		super(TYPE);
@@ -49,8 +49,9 @@ public class MapStyleAction extends SwitchableAction<String> {
 		if (showBottomSheetStyles) {
 			SelectMapViewQuickActionsBottomSheet fragment = new SelectMapViewQuickActionsBottomSheet();
 			Bundle args = new Bundle();
-			args.putStringArrayList("test", (ArrayList<String>) mapStyles);
-			args.putInt("type", TYPE);
+			args.putStringArrayList(KEY_STYLES, (ArrayList<String>) mapStyles);
+			args.putInt(KEY_TYPE, TYPE);
+			args.putLong(KEY_ID, id);
 			fragment.setArguments(args);
 			fragment.show(activity.getSupportFragmentManager(),
 					SelectMapViewQuickActionsBottomSheet.TAG);
