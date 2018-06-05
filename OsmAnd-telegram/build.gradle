@@ -67,6 +67,7 @@ android {
     buildTypes {
         debug {
             signingConfig signingConfigs.development
+            applicationIdSuffix ".debug"
         }
         release {
             signingConfig signingConfigs.publishing
