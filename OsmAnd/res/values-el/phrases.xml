@@ -2272,4 +2272,120 @@
 	<string name="poi_shoes_women">Γυναικεία</string>
 	<string name="poi_shoes_sport">Αθλητικά</string>
 	<string name="poi_shoes_men">Ανδρικά</string>
+	<string name="poi_shoes_orthopedic">Ορθοπεδικά</string>
+
+	<string name="poi_historic_manor">Ιστορική έπαυλη</string>
+	<string name="poi_castle_type_stately">Τύπος πύργου: επιβλητικός</string>
+	<string name="poi_castle_type_defensive">Τύπος πύργου: αμυντικός</string>
+	<string name="poi_castle_type_fortress">Τύπος πύργου: οχυρό</string>
+	<string name="poi_castle_type_palace">Τύπος πύργου: ανάκτορο</string>
+	<string name="poi_castle_type_kremlin">Τύπος πύργου: κρεμλίνο</string>
+	<string name="poi_castle_type_defensive_stately">Τύπος πύργου: αμυντικό, μεγαλοπρεπές</string>
+	<string name="poi_castle_type_castrum">Τύπος πύργου: κάστρο</string>
+	<string name="poi_castle_type_shiro">Τύπος πύργου: σίρο</string>
+
+	<string name="poi_massage_thai">Ταϊλανδικό</string>
+	<string name="poi_massage_sexual">Σεξουαλικό</string>
+	<string name="poi_massage_chinese">Κινέζικο</string>
+	<string name="poi_massage_therapeutic">Θεραπευτικό</string>
+
+	<string name="poi_massage_yes">Υπηρεσίες μαλάξεων (μασάζ)</string>
+	<string name="poi_sauna_yes">Υπηρεσίες σάουνα</string>
+	<string name="poi_solarium_yes">Υπηρεσίες σολάριουμ</string>
+
+	<string name="poi_tents_yes">Επιτρεπτές</string>
+	<string name="poi_tents_no">Δεν επιτρέπονται σκηνές</string>
+	<string name="poi_openfire_yes">Επιτρέπεται ανοιχτή φωτιά</string>
+	<string name="poi_openfire_no">Δεν επιτρέπεται ανοιχτή φωτιά</string>
+	<string name="poi_backcountry_yes">Ναι</string>
+	<string name="poi_backcountry_no">Όχι</string>
+	<string name="poi_scout_yes">Ναι</string>
+	<string name="poi_scout_no">Κατασκήνωση προσκόπων: όχι</string>
+	<string name="poi_group_only_yes">Μόνο ομάδες: ναι</string>
+	<string name="poi_group_only_no">Μόνο ομάδες: όχι</string>
+	<string name="poi_washing_machine_yes">Ναι</string>
+	<string name="poi_washing_machine_no">Πλυντήριο: όχι</string>
+	<string name="poi_shower_filter_yes">Ναι</string>
+	<string name="poi_shower_yes">Ντουζιέρα: ναι</string>
+	<string name="poi_shower_no">Ντουζιέρα: όχι</string>
+	<string name="poi_shower_hot">Ντουζιέρα: ζεστή</string>
+	<string name="poi_shower_outdoor">Ντουζιέρα: εξωτερική</string>
+	<string name="poi_shower_cold">Ντουζιέρα: κρύα</string>
+	<string name="poi_shower_indoor">Ντουζιέρα: εσωτερική</string>
+	<string name="poi_caravans_yes">Ναι</string>
+	<string name="poi_caravans_no">Τροχόσπιτα: όχι</string>
+	<string name="poi_impromptu_yes">Αυτοσχέδιος: ναι</string>
+	<string name="poi_impromptu_no">Αυτοσχέδιος: όχι</string>
+	<string name="poi_sanitary_dump_station_yes">Σταθμός υγειονομικής ταφής: ναι</string>
+	<string name="poi_sanitary_dump_station_no">Σταθμός υγειονομικής ταφής: όχι</string>
+	<string name="poi_power_supply_yes">Ναι</string>
+	<string name="poi_power_supply_no">Ηλεκτρισμός: όχι</string>
+	<string name="poi_power_supply_cee_17_blue">Ηλεκτρισμός (ρευματοδότης): CEE 17 γαλάζιος</string>
+	<string name="poi_power_supply_cee_7_4">Ηλεκτρισμός (ρευματοδότης): CEE 7/4</string>
+	<string name="poi_power_supply_cee_7_5">Ηλεκτρισμός (ρευματοδότης): CEE 7/5</string>
+	<string name="poi_power_supply_nema_5_15">Ηλεκτρισμός (ρευματοδότης): NEMA 5-15</string>
+
+	<string name="poi_capacity_tents">Μέγιστος αριθμός σκηνών</string>
+	<string name="poi_capacity_caravans">Μέγιστος αριθμός τροχόσπιτων</string>
+	<string name="poi_dog_yes">Επιτρέπονται τα σκυλιά</string>
+	<string name="poi_dog_no">Δεν επιτρέπονται τα σκυλιά</string>
+
+	<string name="poi_refugee_yes">Υποδομές για πρόσφυγες</string>
+	<string name="poi_refugee_no">Πρόσφυγες: όχι</string>
+
+	<string name="poi_social_facility_group_home">Ίδρυμα</string>
+	<string name="poi_social_facility_assisted_living">Υποβοηθούμενη διαβίωση</string>
+	<string name="poi_social_facility_outreach">Κοινωνικές υπηρεσίες</string>
+	<string name="poi_social_facility_food_bank">Τράπεζα τροφίμων</string>
+	<string name="poi_social_facility_shelter">Καταφύγιο</string>
+	<string name="poi_social_facility_ambulatory_care">Κινητή φροντίδα</string>
+	<string name="poi_social_facility_workshop">Εργαστήριο</string>
+	<string name="poi_social_facility_day_care">Ημερήσια φροντίδα</string>
+
+	<string name="poi_social_facility_for_senior">Ηλικιωμένοι</string>
+	<string name="poi_social_facility_for_child">Παιδιά</string>
+	<string name="poi_social_facility_for_orphan">Ορφανά</string>
+	<string name="poi_social_facility_for_disabled">Ανάπηροι</string>
+	<string name="poi_social_facility_for_mental_health">Ασθενείς με διανοητικές διαταραχές</string>
+	<string name="poi_social_facility_for_juvenile">Νεαροί</string>
+	<string name="poi_social_facility_for_homeless">Άστεγοι</string>
+	<string name="poi_social_facility_for_migrant">Μετανάστες</string>
+	<string name="poi_social_facility_for_underprivileged">Μειονεκτούντες</string>
+	<string name="poi_social_facility_for_drug_addicted">Τοξικομανείς</string>
+	<string name="poi_social_facility_for_unemployed">Άνεργοι</string>
+	<string name="poi_social_facility_for_diseased">Ασθενείς</string>
+	<string name="poi_social_facility_for_child_juvenile">Παιδιά, νέοι</string>
+
+	<string name="poi_theatre_genre_philharmonic">Φιλαρμονική</string>
+	<string name="poi_theatre_genre_musical">Μουσικά</string>
+	<string name="poi_theatre_genre_drama">Δράμα</string>
+	<string name="poi_theatre_genre_opera">Όπερα</string>
+	<string name="poi_theatre_genre_cabaret">Καμπαρέ</string>
+	<string name="poi_theatre_genre_puppet">Μαριονέτες</string>
+	<string name="poi_theatre_genre_comedy">Κωμωδία</string>
+	<string name="poi_theatre_genre_chamber_music">Μουσική δωματίου</string>
+	<string name="poi_theatre_genre_marionette">Μαριονέτες</string>
+	<string name="poi_theatre_genre_ballet">Μπαλέτο</string>
+	<string name="poi_theatre_genre_shadow_play">Θέατρο σκιών</string>
+
+	<string name="poi_bandstand">Σκηνή</string>
+	<string name="poi_kiln">Φούρνος</string>
+	<string name="poi_product_brick">Προϊόν: τούβλο</string>
+	<string name="poi_product_quicklime">Προϊόν: Άσβεστος ασβέστης</string>
+	<string name="poi_product_leather">Προϊόν: δέρμα</string>
+	<string name="poi_product_beer">Προϊόν: μπίρα</string>
+	<string name="poi_product_charcoal">Προϊόν: Κάρβουνο</string>
+	<string name="poi_product_meat">Προϊόν: κρέας</string>
+
+	<string name="poi_wheelchair_description">Περιγραφή για χρήστες αμαξιδίου</string>
+	<string name="poi_blind_description">Περιγραφή για τυφλούς</string>
+	<string name="poi_deaf_description">Περιγραφή για κουφούς</string>
+
+	<string name="poi_highway_steps">Σκάλες</string>
+	<string name="poi_handrail_yes">Κουπαστή: ναι</string>
+	<string name="poi_handrail_no">Κουπαστή: όχι</string>
+	<string name="poi_ramp_yes">Ράμπα: ναι</string>
+	<string name="poi_ramp_no">Ράμπα: όχι</string>
+	<string name="poi_ramp_wheelchair_yes">Ράμπα για αμαξίδια: ναι</string>
+	<string name="poi_ramp_wheelchair_no">Ράμπα για αμαξίδια: όχι</string>
 	</resources>

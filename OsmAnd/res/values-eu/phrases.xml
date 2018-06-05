@@ -3381,4 +3381,61 @@
 
 	<string name="poi_stone_type_coat_of_arms">Mota: Armarria</string>
 
+	<string name="poi_bin_yes">Saskiarekin</string>
+	<string name="poi_bin_no">Saski gabe</string>
+
+	<string name="poi_free_flying_guest_guidelines_yes">Gonbidatuen gidalerroak: Bai</string>
+	<string name="poi_free_flying_guest_guidelines_no">Gonbidatuen gidalerroak: Ez</string>
+
+	<string name="poi_tanning_salon">Solarium</string>
+
+	<string name="poi_cuisine_gyros">Gyros</string>
+	<string name="poi_cuisine_suki">Suki</string>
+	<string name="poi_winter_room_yes">Negurako gela: Bai</string>
+	<string name="poi_winter_room_no">Negurako gela: Ez</string>
+	<string name="poi_water_place_durability_durable">Urtokiaren iraunkortasuna: Iraunkorra</string>
+	<string name="poi_water_place_durability_emergency">Urtokiaren iraunkortasuna: Larrialdia</string>
+
+	<string name="poi_climbing_orientation_n">Hormaren orientazioa : I</string>
+	<string name="poi_climbing_orientation_ne">Hormaren orientazioa : IE</string>
+	<string name="poi_climbing_orientation_e">Hormaren orientazioa : E</string>
+	<string name="poi_climbing_orientation_se">Hormaren orientazioa : HE</string>
+	<string name="poi_climbing_orientation_s">Hormaren orientazioa : H</string>
+	<string name="poi_climbing_orientation_sw">Hormaren orientazioa : HM</string>
+	<string name="poi_climbing_orientation_w">Hormaren orientazioa : M</string>
+	<string name="poi_climbing_orientation_nw">Hormaren orientazioa : IM</string>
+	<string name="poi_circumference">Zirkunferentzia</string>
+	<string name="poi_diameter_crown">Koroaren diametroa</string>
+
+	<string name="poi_meadow_agricultural">Mota: Nekazaritza</string>
+	<string name="poi_meadow_perpetual">Mota: Behin betikoa</string>
+	<string name="poi_meadow_transitional">Mota: Transizionala</string>
+	<string name="poi_meadow_pasture">Mota: Larrea</string>
+
+	<string name="poi_shop_fireplace">Sutondo denda</string>
+
+	<string name="poi_shop_boat">Itsasontzi denda</string>
+
+	<string name="poi_cannabis">Cannabis denda</string>
+
+	<string name="poi_socket_cee_blue_yes">CEE urdina</string>
+	<string name="poi_socket_cee_red_16a_yes">CEE gorria 16A</string>
+	<string name="poi_socket_cee_red_32a_yes">CEE gorria 32A</string>
+	<string name="poi_socket_cee_red_64a_yes">CEE gorria 64A</string>
+	<string name="poi_socket_cee_red_125a_yes">CEE gorria 125A</string>
+	<string name="poi_socket_type1_yes">1 mota</string>
+	<string name="poi_socket_type1_combo_yes">1 mota konbinatua</string>
+	<string name="poi_socket_type2_yes">2 mota</string>
+	<string name="poi_socket_type2_combo_yes">2 mota konbinatua</string>
+	<string name="poi_socket_type3_yes">3 mota</string>
+	<string name="poi_socket_chademo_yes">CHAdeMO</string>
+	<string name="poi_socket_tesla_standard_yes">Tesla estandarra</string>
+	<string name="poi_socket_tesla_supercharger_yes">Tesla superkargagailua</string>
+	<string name="poi_socket_tesla_roadster_yes">Tesla Roadster</string>
+	<string name="poi_socket_nema_5_15_yes">NEMA 5-15R</string>
+	<string name="poi_socket_nema_5_20_yes">NEMA 5-20</string>
+	<string name="poi_socket_nema_14_30_yes">NEMA 14-30</string>
+	<string name="poi_socket_nema_14_50_yes">NEMA 14-50</string>
+	<string name="poi_socket_schuko_yes">Schuko</string>
+	<string name="poi_socket_bs1363_yes">BS 1363</string>
 	</resources>
