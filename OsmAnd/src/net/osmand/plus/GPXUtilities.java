@@ -1462,8 +1462,8 @@ public class GPXUtilities {
 		formatMillis.setTimeZone(TimeZone.getTimeZone("UTC"));
 		try {
 			XmlPullParser parser = PlatformUtil.newXMLPullParser();
-			parser.setInput(getUTF8Reader(f)); //$NON-NLS-1$
-			Stack<GPXExtensions> parserState = new Stack<GPXExtensions>();
+			parser.setInput(getUTF8Reader(f));
+			Stack<GPXExtensions> parserState = new Stack<>();
 			boolean extensionReadMode = false;
 			parserState.push(res);
 			int tok;
@@ -1487,64 +1487,64 @@ public class GPXUtilities {
 						extensionReadMode = true;
 					} else {
 						if (parse instanceof GPXFile) {
-							if (parser.getName().equals("gpx")) {
+							if (tag.equals("gpx")) {
 								((GPXFile) parse).author = parser.getAttributeValue("", "creator");
 							}
-							if (parser.getName().equals("metadata")) {
+							if (tag.equals("metadata")) {
 								Metadata metadata = new Metadata();
 								((GPXFile) parse).metadata = metadata;
 								parserState.push(metadata);
 							}
-							if (parser.getName().equals("trk")) {
+							if (tag.equals("trk")) {
 								Track track = new Track();
 								((GPXFile) parse).tracks.add(track);
 								parserState.push(track);
 							}
-							if (parser.getName().equals("rte")) {
+							if (tag.equals("rte")) {
 								Route route = new Route();
 								((GPXFile) parse).routes.add(route);
 								parserState.push(route);
 							}
-							if (parser.getName().equals("wpt")) {
+							if (tag.equals("wpt")) {
 								WptPt wptPt = parseWptAttributes(parser);
 								((GPXFile) parse).points.add(wptPt);
 								parserState.push(wptPt);
 							}
 						} else if (parse instanceof Metadata) {
-							if (parser.getName().equals("desc")) {
+							if (tag.equals("desc")) {
 								((Metadata) parse).desc = readText(parser, "desc");
 							}
 						} else if (parse instanceof Route) {
-							if (parser.getName().equals("name")) {
+							if (tag.equals("name")) {
 								((Route) parse).name = readText(parser, "name");
 							}
-							if (parser.getName().equals("desc")) {
+							if (tag.equals("desc")) {
 								((Route) parse).desc = readText(parser, "desc");
 							}
-							if (parser.getName().equals("rtept")) {
+							if (tag.equals("rtept")) {
 								WptPt wptPt = parseWptAttributes(parser);
 								((Route) parse).points.add(wptPt);
 								parserState.push(wptPt);
 							}
 						} else if (parse instanceof Track) {
-							if (parser.getName().equals("name")) {
+							if (tag.equals("name")) {
 								((Track) parse).name = readText(parser, "name");
 							}
-							if (parser.getName().equals("desc")) {
+							if (tag.equals("desc")) {
 								((Track) parse).desc = readText(parser, "desc");
 							}
-							if (parser.getName().equals("trkseg")) {
+							if (tag.equals("trkseg")) {
 								TrkSegment trkSeg = new TrkSegment();
 								((Track) parse).segments.add(trkSeg);
 								parserState.push(trkSeg);
 							}
 						} else if (parse instanceof TrkSegment) {
-							if (parser.getName().equals("trkpt")) {
+							if (tag.equals("trkpt")) {
 								WptPt wptPt = parseWptAttributes(parser);
 								((TrkSegment) parse).points.add(wptPt);
 								parserState.push(wptPt);
 							}
-							if (parser.getName().equals("csvattributes")) {
+							if (tag.equals("csvattributes")) {
 								String segmentPoints = readText(parser, "csvattributes");
 								String[] pointsArr = segmentPoints.split("\n");
 								for (int i = 0; i < pointsArr.length; i++) {
@@ -1566,20 +1566,20 @@ public class GPXUtilities {
 							}
 							// main object to parse
 						} else if (parse instanceof WptPt) {
-							if (parser.getName().equals("name")) {
+							if (tag.equals("name")) {
 								((WptPt) parse).name = readText(parser, "name");
-							} else if (parser.getName().equals("desc")) {
+							} else if (tag.equals("desc")) {
 								((WptPt) parse).desc = readText(parser, "desc");
-							} else if (parser.getName().equals("cmt")) {
+							} else if (tag.equals("cmt")) {
 								((WptPt) parse).comment = readText(parser, "cmt");
-							} else if (parser.getName().equals("speed")) {
+							} else if (tag.equals("speed")) {
 								try {
 									String value = readText(parser, "speed");
 									((WptPt) parse).speed = Float.parseFloat(value);
 									((WptPt) parse).getExtensionsToWrite().put("speed", value);
 								} catch (NumberFormatException e) {
 								}
-							} else if (parser.getName().equals("link")) {
+							} else if (tag.equals("link")) {
 								((WptPt) parse).link = parser.getAttributeValue("", "href");
 							} else if (tag.equals("category")) {
 								((WptPt) parse).category = readText(parser, "category");
@@ -1587,7 +1587,7 @@ public class GPXUtilities {
 								if (((WptPt) parse).category == null) {
 									((WptPt) parse).category = readText(parser, "type");
 								}
-							} else if (parser.getName().equals("ele")) {
+							} else if (tag.equals("ele")) {
 								String text = readText(parser, "ele");
 								if (text != null) {
 									try {
@@ -1595,7 +1595,7 @@ public class GPXUtilities {
 									} catch (NumberFormatException e) {
 									}
 								}
-							} else if (parser.getName().equals("hdop")) {
+							} else if (tag.equals("hdop")) {
 								String text = readText(parser, "hdop");
 								if (text != null) {
 									try {
@@ -1603,7 +1603,7 @@ public class GPXUtilities {
 									} catch (NumberFormatException e) {
 									}
 								}
-							} else if (parser.getName().equals("time")) {
+							} else if (tag.equals("time")) {
 								String text = readText(parser, "time");
 								if (text != null) {
 									try {
@@ -1651,17 +1651,6 @@ public class GPXUtilities {
 					}
 				}
 			}
-//			if (convertCloudmadeSource && res.isCloudmadeRouteFile()) {
-//				Track tk = new Track();
-//				res.tracks.add(tk);
-//				TrkSegment segment = new TrkSegment();
-//				tk.segments.add(segment);
-//
-//				for (WptPt wp : res.points) {
-//					segment.points.add(wp);
-//				}
-//				res.points.clear();
-//			}
 		} catch (RuntimeException e) {
 			log.error("Error reading gpx", e); //$NON-NLS-1$
 			res.warning = ctx.getString(R.string.error_reading_gpx) + " " + e.getMessage();
