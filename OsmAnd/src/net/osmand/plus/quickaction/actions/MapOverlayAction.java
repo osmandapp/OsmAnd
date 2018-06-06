@@ -3,6 +3,7 @@ package net.osmand.plus.quickaction.actions;
 import android.content.DialogInterface;
 import android.support.v4.util.Pair;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.SwitchCompat;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
@@ -55,7 +56,7 @@ public class MapOverlayAction extends SwitchableAction<Pair<String, String>> {
 	}
 
 	@Override
-	protected List<Pair<String, String>> loadListFromParams() {
+	public List<Pair<String, String>> loadListFromParams() {
 
 		String json = getParams().get(getListKey());
 
@@ -82,6 +83,12 @@ public class MapOverlayAction extends SwitchableAction<Pair<String, String>> {
 			OsmandSettings settings = activity.getMyApplication().getSettings();
 			List<Pair<String, String>> sources = loadListFromParams();
 
+			boolean showBottomSheetStyles = Boolean.valueOf(getParams().get(KEY_DIALOG));
+			if (showBottomSheetStyles) {
+				showChooseDialog(activity.getSupportFragmentManager());
+				return;
+			}
+			
 			Pair<String, String> currentSource = new Pair<>(
 					settings.MAP_OVERLAY.get(),
 					settings.MAP_OVERLAY.get());
@@ -92,21 +99,28 @@ public class MapOverlayAction extends SwitchableAction<Pair<String, String>> {
 			if (index >= 0 && index + 1 < sources.size()) {
 				nextSource = sources.get(index + 1);
 			}
+			executeWithParams(activity, nextSource.first);
+		}
+	}
 
-			boolean hasOverlay = !nextSource.first.equals(KEY_NO_OVERLAY);
+	@Override
+	public void executeWithParams(MapActivity activity, String params) {
+		OsmandRasterMapsPlugin plugin = OsmandPlugin.getEnabledPlugin(OsmandRasterMapsPlugin.class);
+		if (plugin != null) {
+			OsmandSettings settings = activity.getMyApplication().getSettings();
+			boolean hasOverlay = !params.equals(KEY_NO_OVERLAY);
 			if (hasOverlay) {
-				settings.MAP_OVERLAY.set(nextSource.first);
-				settings.MAP_OVERLAY_PREVIOUS.set(nextSource.first);
+				settings.MAP_OVERLAY.set(params);
+				settings.MAP_OVERLAY_PREVIOUS.set(params);
 			} else {
 				settings.MAP_OVERLAY.set(null);
 				settings.MAP_OVERLAY_PREVIOUS.set(null);
 			}
-
 			plugin.updateMapLayers(activity.getMapView(), settings.MAP_OVERLAY, activity.getMapLayers());
-			Toast.makeText(activity, activity.getString(R.string.quick_action_map_overlay_switch, nextSource.second), Toast.LENGTH_SHORT).show();
+			Toast.makeText(activity, activity.getString(R.string.quick_action_map_overlay_switch, params), Toast.LENGTH_SHORT).show();
 		}
 	}
-
+	
 	@Override
 	protected int getAddBtnText() {
 		return R.string.quick_action_map_overlay_action;
@@ -164,5 +178,12 @@ public class MapOverlayAction extends SwitchableAction<Pair<String, String>> {
 				builder.show();
 			}
 		};
+	}
+
+	@Override
+	public boolean fillParams(View root, MapActivity activity) {
+		super.fillParams(root, activity);
+		getParams().put(KEY_DIALOG, Boolean.toString(((SwitchCompat) root.findViewById(R.id.saveButton)).isChecked()));
+		return true;
 	}
 }

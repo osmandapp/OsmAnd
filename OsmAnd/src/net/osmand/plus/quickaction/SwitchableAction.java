@@ -1,9 +1,12 @@
 package net.osmand.plus.quickaction;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.support.annotation.StringRes;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.MotionEventCompat;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SwitchCompat;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -16,12 +19,17 @@ import android.widget.TextView;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.dialogs.SelectMapViewQuickActionsBottomSheet;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public abstract class SwitchableAction<T> extends QuickAction {
+
+	public static final String KEY_ID = "id";
+	
+	protected static final String KEY_DIALOG = "dialog";
 
 	private transient EditText title;
 
@@ -43,7 +51,12 @@ public abstract class SwitchableAction<T> extends QuickAction {
 
 		View view = LayoutInflater.from(parent.getContext())
 				.inflate(R.layout.quick_action_switchable_action, parent, false);
-
+		
+		SwitchCompat showDialog = (SwitchCompat) view.findViewById(R.id.saveButton);
+		if (!getParams().isEmpty()) {
+			showDialog.setChecked(Boolean.valueOf(getParams().get(KEY_DIALOG)));
+		}
+		
 		final RecyclerView list = (RecyclerView) view.findViewById(R.id.list);
 
 		final QuickActionItemTouchHelperCallback touchHelperCallback = new QuickActionItemTouchHelperCallback();
@@ -90,6 +103,18 @@ public abstract class SwitchableAction<T> extends QuickAction {
 		return hasParams;
 	}
 
+	public abstract List<T> loadListFromParams();
+
+	public abstract void executeWithParams(MapActivity activity, String params);
+	
+	protected void showChooseDialog(FragmentManager fm) {
+		SelectMapViewQuickActionsBottomSheet fragment = new SelectMapViewQuickActionsBottomSheet();
+		Bundle args = new Bundle();
+		args.putLong(KEY_ID, id);
+		fragment.setArguments(args);
+		fragment.show(fm, SelectMapViewQuickActionsBottomSheet.TAG);
+	}
+	
 	protected class Adapter extends RecyclerView.Adapter<Adapter.ItemHolder> implements QuickActionItemTouchHelperCallback.OnItemMoveCallback {
 
 		private List<T> itemsList = new ArrayList<>();
@@ -248,8 +273,6 @@ public abstract class SwitchableAction<T> extends QuickAction {
 	protected abstract String getTitle(List<T> filters);
 
 	protected abstract void saveListToParams(List<T> list);
-
-	protected abstract List<T> loadListFromParams();
 
 	protected abstract String getItemName(T item);
 
