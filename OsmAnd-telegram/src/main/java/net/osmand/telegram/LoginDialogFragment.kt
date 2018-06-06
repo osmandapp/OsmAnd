@@ -1,5 +1,6 @@
 package net.osmand.telegram
 
+import android.content.DialogInterface
 import android.os.Bundle
 import android.support.v4.app.DialogFragment
 import android.support.v4.app.FragmentManager
@@ -44,7 +45,9 @@ class LoginDialogFragment : DialogFragment() {
         }
 
         fun dismiss(fragmentManager: FragmentManager) {
-            getFragment(fragmentManager)?.dismiss()
+            val loginDialogFragment = getFragment(fragmentManager)
+            loginDialogFragment?.dismissedManually = true
+            loginDialogFragment?.dismiss()
         }
 
         private fun getFragment(fragmentManager: FragmentManager): LoginDialogFragment? {
@@ -53,6 +56,8 @@ class LoginDialogFragment : DialogFragment() {
     }
 
     private var loginDialogActiveTypes: Set<LoginDialogType>? = null
+
+    private var dismissedManually = false
 
     enum class LoginDialogType(val paramKey: String, val viewId: Int, val editorId: Int) {
         ENTER_PHONE_NUMBER(ENTER_PHONE_NUMBER_PARAM_KEY, R.id.enterPhoneNumberLayout, R.id.phoneNumberEditText),
@@ -87,6 +92,13 @@ class LoginDialogFragment : DialogFragment() {
         val view = inflater.inflate(R.layout.login_dialog, container)
         buildDialog(view)
         return view
+    }
+
+    override fun onDismiss(dialog: DialogInterface?) {
+        super.onDismiss(dialog)
+        if (!dismissedManually) {
+            getMainActivity()?.closeTelegram()
+        }
     }
 
     private fun buildDialog(view: View?) {
@@ -145,7 +157,7 @@ class LoginDialogFragment : DialogFragment() {
         }
         val cancelButton: Button? = view?.findViewById(R.id.calcelButton)
         cancelButton?.setOnClickListener {
-            getMainActivity()?.close()
+            dismiss()
         }
     }
 

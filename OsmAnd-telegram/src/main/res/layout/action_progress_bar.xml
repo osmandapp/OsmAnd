@@ -2,7 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center">
+    android:gravity="center"
+    android:paddingRight="16dp"
+    android:paddingLeft="16dp">
 
     <ProgressBar
         android:layout_width="32dp"

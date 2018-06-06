@@ -1,7 +1,6 @@
 package net.osmand.telegram
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
@@ -18,9 +17,14 @@ class MainActivity : AppCompatActivity(), TelegramListener {
         private const val PROGRESS_MENU_ID = 2
     }
 
-    private val telegramHelper: TelegramHelper = TelegramHelper.instance
     private var authParamRequestHandler: AuthParamRequestHandler? = null
     private var paused: Boolean = false
+
+    private val app: TelegramApplication
+        get() = application as TelegramApplication
+
+    private val telegramHelper: TelegramHelper
+        get() = app.telegramHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,12 +32,19 @@ class MainActivity : AppCompatActivity(), TelegramListener {
 
         paused = false
 
-        telegramHelper.appDir = filesDir.absolutePath
         authParamRequestHandler = telegramHelper.setAuthParamRequestHandler(object : AuthParamRequestListener {
             override fun onRequestAuthParam(paramType: AuthParamType) {
                 runOnUiThread {
                     if (!paused) {
                         showLoginDialog(paramType)
+                    }
+                }
+            }
+
+            override fun onAuthRequestError(code: Int, message: String) {
+                runOnUiThread {
+                    if (!paused) {
+                        Toast.makeText(this@MainActivity, "$code - $message", Toast.LENGTH_LONG).show()
                     }
                 }
             }
@@ -45,7 +56,9 @@ class MainActivity : AppCompatActivity(), TelegramListener {
     override fun onResume() {
         super.onResume()
         paused = false
+
         invalidateOptionsMenu()
+        updateTitle()
     }
 
     override fun onPause() {
@@ -69,7 +82,7 @@ class MainActivity : AppCompatActivity(), TelegramListener {
         }
     }
 
-    fun logout(silent: Boolean = false) {
+    fun logoutTelegram(silent: Boolean = false) {
         if (telegramHelper.getAuthState() == AuthState.READY) {
             telegramHelper.logout()
         } else {
@@ -81,7 +94,7 @@ class MainActivity : AppCompatActivity(), TelegramListener {
         }
     }
 
-    fun close() {
+    fun closeTelegram() {
         telegramHelper.close()
     }
 
@@ -92,7 +105,7 @@ class MainActivity : AppCompatActivity(), TelegramListener {
                 true
             }
             LOGOUT_MENU_ID -> {
-                logout()
+                logoutTelegram()
                 true
             }
             else -> super.onOptionsItemSelected(item)
@@ -159,9 +172,7 @@ class MainActivity : AppCompatActivity(), TelegramListener {
     }
 
     fun applyAuthParam(loginDialogFragment: LoginDialogFragment?, loginDialogType: LoginDialogType, text: String) {
-        if (loginDialogFragment != null) {
-            loginDialogFragment.updateDialog(LoginDialogType.SHOW_PROGRESS)
-        }
+        loginDialogFragment?.updateDialog(LoginDialogType.SHOW_PROGRESS)
         when (loginDialogType) {
             LoginDialogType.ENTER_PHONE_NUMBER -> authParamRequestHandler?.applyAuthParam(AuthParamType.PHONE_NUMBER, text)
             LoginDialogType.ENTER_CODE -> authParamRequestHandler?.applyAuthParam(AuthParamType.CODE, text)

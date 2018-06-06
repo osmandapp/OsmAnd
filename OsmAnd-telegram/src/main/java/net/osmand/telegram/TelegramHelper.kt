@@ -2,14 +2,12 @@ package net.osmand.telegram
 
 import android.text.TextUtils
 import net.osmand.telegram.TelegramHelper.AuthParamType.*
-
 import org.drinkless.td.libcore.telegram.Client
 import org.drinkless.td.libcore.telegram.Client.ResultHandler
 import org.drinkless.td.libcore.telegram.TdApi
 import org.drinkless.td.libcore.telegram.TdApi.AuthorizationState
-
 import java.io.File
-import java.util.TreeSet
+import java.util.*
 import java.util.concurrent.ConcurrentHashMap
 
 class TelegramHelper private constructor() {
@@ -50,6 +48,7 @@ class TelegramHelper private constructor() {
 
     interface AuthParamRequestListener {
         fun onRequestAuthParam(paramType: AuthParamType)
+        fun onAuthRequestError(code: Int, message: String)
     }
 
     inner class AuthParamRequestHandler(val authParamRequestListener: AuthParamRequestListener) {
@@ -371,6 +370,8 @@ class TelegramHelper private constructor() {
             when (obj.constructor) {
                 TdApi.Error.CONSTRUCTOR -> {
                     log.error("Receive an error: $obj")
+                    val errorObj = obj as TdApi.Error
+                    authParamRequestHandler?.authParamRequestListener?.onAuthRequestError(errorObj.code, errorObj.message)
                     onAuthorizationStateUpdated(null) // repeat last action
                 }
                 TdApi.Ok.CONSTRUCTOR -> {
