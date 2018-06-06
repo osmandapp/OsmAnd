@@ -3,6 +3,7 @@ package net.osmand.plus.wikivoyage.data;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
+
 import net.osmand.Collator;
 import net.osmand.CollatorStringMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
@@ -31,7 +32,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
@@ -519,6 +519,23 @@ public class TravelDbHelper {
 		if (conn != null) {
 			SQLiteCursor cursor = conn.rawQuery(ARTICLES_TABLE_SELECT + " WHERE " + ARTICLES_COL_TRIP_ID + " = ? AND "
 					+ ARTICLES_COL_LANG + " = ?", new String[] { String.valueOf(cityId), lang });
+			if (cursor != null) {
+				if (cursor.moveToFirst()) {
+					res = readArticle(cursor);
+				}
+				cursor.close();
+			}
+		}
+		return res;
+	}
+
+	@Nullable
+	public TravelArticle getArticle(String title, String lang) {
+		TravelArticle res = null;
+		SQLiteConnection conn = openConnection();
+		if (conn != null) {
+			SQLiteCursor cursor = conn.rawQuery(ARTICLES_TABLE_SELECT + " WHERE " + ARTICLES_COL_TITLE + " = ? AND "
+					+ ARTICLES_COL_LANG + " = ?", new String[]{title, lang});
 			if (cursor != null) {
 				if (cursor.moveToFirst()) {
 					res = readArticle(cursor);
