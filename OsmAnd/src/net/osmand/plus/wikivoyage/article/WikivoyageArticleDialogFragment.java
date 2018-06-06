@@ -281,6 +281,7 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 		popup.show();
 	}
 
+	@Override
 	protected void populateArticle() {
 		if (tripId == NO_VALUE || langs == null) {
 			Bundle args = getArguments();
@@ -318,6 +319,7 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 	}
 
 	@NonNull
+	@Override
 	protected String createHtmlContent() {
 		StringBuilder sb = new StringBuilder(HEADER_INNER);
 		String bodyTag = rtlLanguages.contains(article.getLang()) ? "<body dir=\"rtl\">\n" : "<body>\n";

@@ -801,6 +801,7 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 			timeSplit = fragmentAdapter.timeSplit;
 		}
 
+		@Override
 		protected void onPreExecute() {
 			TrackActivity activity = activityRef.get();
 			if (activity != null) {
@@ -808,6 +809,7 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 			}
 		}
 
+		@Override
 		protected void onPostExecute(Void result) {
 			TrackActivity activity = activityRef.get();
 			TrackActivityFragmentAdapter fragment = fragmentAdapterRef.get();
