@@ -3207,7 +3207,7 @@
 	<string name="poi_indoor_no">Kanpokoa</string>
 	<string name="poi_vending_telephone_vouchers">Telefono-baleak</string>
 	<string name="poi_vending_vouchers">Baleak</string>
-	<string name="poi_resource_aggregate"/>
+	<string name="poi_resource_aggregate">Agregatua</string>
 	<string name="poi_checkpoint_type">Kontrol-postu mota</string>
 
 <string name="synonyms_poi_fuel">Gasolindegia; Zerbitzu estazioa;Erregai estazioa;Petrolio estazioa</string>
@@ -3438,4 +3438,35 @@
 	<string name="poi_socket_nema_14_50_yes">NEMA 14-50</string>
 	<string name="poi_socket_schuko_yes">Schuko</string>
 	<string name="poi_socket_bs1363_yes">BS 1363</string>
+	<string name="poi_stone_type_conciliation_cross">Mota: Kontziliazio gurutzea</string>
+	<string name="poi_free_flying_rigid_yes">Trinkoa</string>
+	<string name="poi_health_amenity_type_first_aid_kit">Lehen sorospenetarako botika-kutxa</string>
+	<string name="poi_health_amenity_type_scales">Baskula publikoak</string>
+
+	<string name="poi_crossing_supervision_yes">Bidegurutze ikuskatua</string>
+	<string name="poi_crossing_supervision_no">Bidegurutze ikuskatua: Ez</string>
+	<string name="poi_crossing_supervision_attendant">Bidegurutze ikuskatua: Zaintzailea</string>
+	<string name="poi_crossing_supervision_camera">Bidegurutze ikuskatua: Kamera</string>
+
+	<string name="poi_network">Sarea</string>
+
+	<string name="poi_government_archive">Artxiboa</string>
+	<string name="poi_government_ministry">Ministerioa</string>
+	<string name="poi_government_public_service">Zerbitzu publikoa</string>
+	<string name="poi_government_social_security">Segurtasun soziala</string>
+	<string name="poi_government_social_services">Zerbitzu sozialak</string>
+	<string name="poi_government_treasury">Diruzaintza</string>
+	<string name="poi_government_transportation">Garraio instituzioa</string>
+	<string name="poi_government_legislative">Instituzio legegilea</string>
+
+	<string name="poi_vhf">VHF kanala</string>
+
+	<string name="poi_gorge">Arroila</string>
+	<string name="poi_couloir">Korridorea</string>
+	<string name="poi_mountain_area">Mendialdea</string>
+
+	<string name="poi_surface_clay">Buztina</string>
+	<string name="poi_surface_tartan">Zirrikitona</string>
+	<string name="poi_glacier_type_outlet">Isurbidea</string>
+	<string name="poi_glacier_type_tidewater">Itsasaldi-ura</string>
 	</resources>
