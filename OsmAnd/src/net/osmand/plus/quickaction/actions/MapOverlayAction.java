@@ -104,10 +104,10 @@ public class MapOverlayAction extends SwitchableAction<Pair<String, String>> {
 	}
 
 	@Override
-	public void executeWithParams(MapActivity mapActivity, String params) {
+	public void executeWithParams(MapActivity activity, String params) {
 		OsmandRasterMapsPlugin plugin = OsmandPlugin.getEnabledPlugin(OsmandRasterMapsPlugin.class);
 		if (plugin != null) {
-			OsmandSettings settings = mapActivity.getMyApplication().getSettings();
+			OsmandSettings settings = activity.getMyApplication().getSettings();
 			boolean hasOverlay = !params.equals(KEY_NO_OVERLAY);
 			if (hasOverlay) {
 				settings.MAP_OVERLAY.set(params);
@@ -116,8 +116,8 @@ public class MapOverlayAction extends SwitchableAction<Pair<String, String>> {
 				settings.MAP_OVERLAY.set(null);
 				settings.MAP_OVERLAY_PREVIOUS.set(null);
 			}
-			plugin.updateMapLayers(mapActivity.getMapView(), settings.MAP_OVERLAY, mapActivity.getMapLayers());
-			Toast.makeText(mapActivity, mapActivity.getString(R.string.quick_action_map_overlay_switch, params), Toast.LENGTH_SHORT).show();
+			plugin.updateMapLayers(activity.getMapView(), settings.MAP_OVERLAY, activity.getMapLayers());
+			Toast.makeText(activity, activity.getString(R.string.quick_action_map_overlay_switch, params), Toast.LENGTH_SHORT).show();
 		}
 	}
 	

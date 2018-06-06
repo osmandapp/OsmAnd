@@ -105,7 +105,7 @@ public abstract class SwitchableAction<T> extends QuickAction {
 
 	public abstract List<T> loadListFromParams();
 
-	public abstract void executeWithParams(MapActivity mapActivity, String params);
+	public abstract void executeWithParams(MapActivity activity, String params);
 	
 	protected void showChooseDialog(FragmentManager fm) {
 		SelectMapViewQuickActionsBottomSheet fragment = new SelectMapViewQuickActionsBottomSheet();

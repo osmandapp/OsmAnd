@@ -98,17 +98,17 @@ public class MapSourceAction extends SwitchableAction<Pair<String, String>> {
 	}
 
 	@Override
-	public void executeWithParams(MapActivity mapActivity, String params) {
-		OsmandSettings settings = mapActivity.getMyApplication().getSettings();
+	public void executeWithParams(MapActivity activity, String params) {
+		OsmandSettings settings = activity.getMyApplication().getSettings();
 		if (params.equals(LAYER_OSM_VECTOR)) {
 			settings.MAP_ONLINE_DATA.set(false);
-			mapActivity.getMapLayers().updateMapSource(mapActivity.getMapView(), null);
+			activity.getMapLayers().updateMapSource(activity.getMapView(), null);
 		} else {
 			settings.MAP_TILE_SOURCES.set(params);
 			settings.MAP_ONLINE_DATA.set(true);
-			mapActivity.getMapLayers().updateMapSource(mapActivity.getMapView(), settings.MAP_TILE_SOURCES);
+			activity.getMapLayers().updateMapSource(activity.getMapView(), settings.MAP_TILE_SOURCES);
 		}
-		Toast.makeText(mapActivity, mapActivity.getString(R.string.quick_action_map_source_switch, params), Toast.LENGTH_SHORT).show();
+		Toast.makeText(activity, activity.getString(R.string.quick_action_map_source_switch, params), Toast.LENGTH_SHORT).show();
 	}
 	
 	@Override

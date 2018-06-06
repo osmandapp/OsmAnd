@@ -103,10 +103,10 @@ public class MapUnderlayAction extends SwitchableAction<Pair<String, String>> {
 	}
 
 	@Override
-	public void executeWithParams(MapActivity mapActivity, String params) {
+	public void executeWithParams(MapActivity activity, String params) {
 		OsmandRasterMapsPlugin plugin = OsmandPlugin.getEnabledPlugin(OsmandRasterMapsPlugin.class);
 		if (plugin != null) {
-			OsmandSettings settings = mapActivity.getMyApplication().getSettings();
+			OsmandSettings settings = activity.getMyApplication().getSettings();
 			boolean hasUnderlay = !params.equals(KEY_NO_UNDERLAY);
 			if (hasUnderlay) {
 				settings.MAP_UNDERLAY.set(params);
@@ -116,11 +116,11 @@ public class MapUnderlayAction extends SwitchableAction<Pair<String, String>> {
 				settings.MAP_UNDERLAY_PREVIOUS.set(null);
 			}
 			final OsmandSettings.CommonPreference<Boolean> hidePolygonsPref =
-					mapActivity.getMyApplication().getSettings().getCustomRenderBooleanProperty("noPolygons");
+					activity.getMyApplication().getSettings().getCustomRenderBooleanProperty("noPolygons");
 			hidePolygonsPref.set(hasUnderlay);
 
-			plugin.updateMapLayers(mapActivity.getMapView(), settings.MAP_UNDERLAY, mapActivity.getMapLayers());
-			Toast.makeText(mapActivity, mapActivity.getString(R.string.quick_action_map_underlay_switch, params), Toast.LENGTH_SHORT).show();
+			plugin.updateMapLayers(activity.getMapView(), settings.MAP_UNDERLAY, activity.getMapLayers());
+			Toast.makeText(activity, activity.getString(R.string.quick_action_map_underlay_switch, params), Toast.LENGTH_SHORT).show();
 		}
 	}
 	
