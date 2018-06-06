@@ -580,9 +580,9 @@
     <string name="voice_stream_music">Media/musiqi səsi</string>
     <string name="tile_source_already_installed">Xəritə artıq quraşdırılıb, “Parametrlər” yenilənəcək.</string>
     <string name="install_more">Daha çox quraşdır…</string>
-    <string name="error_doing_search">Oflayn axtarışda səhv.</string>
+    <string name="error_doing_search">Oflayn axtarış həyata keçirilə bilmədi.</string>
     <string name="system_locale">Sistem</string>
-    <string name="preferred_locale_descr">Proqramın dilini seçin (dəyişdikdən sonra OsmAnd-ı yenidən başladın).</string>
+    <string name="preferred_locale_descr">Proqramın dilini seçin (OsmAnd yenidən başladıldıqda təsirli olur).</string>
     <string name="preferred_locale">Proqram dili</string>
     <string name="incomplete_locale">natamam</string>
     <string name="si_km_m">Kilometr/metr</string>
@@ -618,7 +618,7 @@
     <string name="poi_context_menu_website">POI veb-saytını göstər</string>
     <string name="poi_context_menu_call">POI telefonunu göstər</string>
     <string name="download_type_to_filter">filtr üçün yazın</string>
-    <string name="error_reading_gpx">GPX məlumatları oxunarkən səhv</string>
+    <string name="error_reading_gpx">GPX məlumatları oxuna bilmədi</string>
     <string name="poi_context_menu_delete">POI-ni sil</string>
     <string name="rotate_map_none_opt">Döndərmə (şimal hər zaman yuxarı)</string>
     <string name="fav_saved_sucessfully">Favoritlər {0}-da saxlanıldı</string>
@@ -663,7 +663,7 @@
     <string name="loading_streets">Küçələr yüklənir…</string>
     <string name="loading_cities">Şəhərlər yüklənir…</string>
     <string name="poi">POI</string>
-    <string name="error_occurred_saving_gpx">GPX yadda saxlanarkən səhv</string>
+    <string name="error_occurred_saving_gpx">GPX faylı yadda saxlana bilmədi</string>
     <string name="go_back_to_osmand">OsmAnd xəritəyə geri qayıt</string>
     <string name="loading_data">Məlumatlar yüklənir…</string>
     <string name="reading_indexes">Yerli məlumatlar oxunur…</string>
@@ -738,7 +738,7 @@
     <string name="recent_places">Ən son yerlər</string>
     <string name="favourites">Favoritlər</string>
     <string name="saved_at_time">Yadda saxlandı: %1$s</string>
-    <string name="show_gpx">GPX göstər</string>
+    <string name="show_gpx">GPX məlumatlarını göstər</string>
     <string name="are_you_sure">Əminsiniz?</string>
     <string name="downloading_number_of_files">%1$d fayl endirilir</string>
     <string name="buy">Al</string>
@@ -1031,7 +1031,7 @@
     <string name="prefs_plugins_descr">Qoşmalar təkmil parametrləri və əlavə funksionallığı aktivləşdirir.</string>
     <string name="prefs_plugins">Qoşmalar</string>
     <string name="plugin_install_needs_network">Bu qoşmanı quraşdırmaq üçün internet bağlantınız olmalıdır.</string>
-    <string name="activate_srtm_plugin">“SRTM” qoşmasını aktivləşdirin</string>
+    <string name="activate_srtm_plugin">“Kontur xətləri” qoşmasını aktivləşdirin</string>
     <string name="plugins_menu_group">Qoşmalar</string>
     <string name="impassable_road_desc">Naviqasiya zamanı yayınmaq istədiyiniz yolları seçin.</string>
     <string name="roads_only">Yalnız yollar</string>
@@ -1143,15 +1143,15 @@
     <string name="transport">Nəqliyyat</string>
     <string name="hello">OsmAnd naviqasiya proqramı</string>
     <string name="update_poi_success">POI məlumatları yeniləndi ({0} obyekt yükləndi)</string>
-    <string name="update_poi_error_local">Yerli POI siyahısı yeniləmə səhvi</string>
-    <string name="update_poi_error_loading">Serverdən məlumatlar yüklənərkən səhv oldu</string>
+    <string name="update_poi_error_local">Yerli POI siyahısı yenilənə bilmədi</string>
+    <string name="update_poi_error_loading">Serverdən məlumatlar yüklənə bilmədi</string>
     <string name="update_poi_no_offline_poi_index">Bu ərazi üçün oflayn POI məlumatları yoxdur</string>
     <string name="update_poi_is_not_available_for_zoom">Kiçik miqyas səviyyələrində POI-ləri yeniləmək mümkün deyil</string>
     <string name="search_osm_nominatim">OSM Nominatim istifadə etməklə onlayn axtarış</string>
     <string name="route_general_information">Ümumi məsafə %1$s, səyahət vaxtı %2$d s %3$d dəq.</string>
     <string name="router_service_descr">Onlayn və ya oflayn naviqasiya xidməti seçin.</string>
     <string name="router_service">Naviqasiya xidməti</string>
-    <string name="download_question_exist">{0} üçün oflayn məlumatlar artıq var ({1}). Onu yeniləmək istəyirsiniz ({2})?</string>
+    <string name="download_question_exist">{0} üçün oflayn məlumatlar artıq var ({1}). Yenilənsin ({2})?</string>
     <string name="downloading_list_indexes">Mövcud regionların siyahısı endirilir…</string>
     <string name="list_index_files_was_not_loaded">Regionların siyahısı https://osmand.net-dən alınmadı.</string>
     <string name="fav_points_edited">Favorit nöqtəyə düzəliş edildi</string>
@@ -1163,9 +1163,9 @@
     <string name="auth_failed">İcazə uğursuz oldu</string>
     <string name="converting_names">Yerli/İngiliscə adlar çevrilir…</string>
     <string name="loading_streets_buildings">Küçələr/binalar yüklənir…</string>
-    <string name="error_calculating_route">Marşrut hesablama səhvi</string>
-    <string name="error_calculating_route_occured">Marşrut hesablanarkən səhv baş verdi</string>
-    <string name="empty_route_calculated">Səhv: Hesablanan marşrut boşdur</string>
+    <string name="error_calculating_route">Marşrut hesablana bilmədi</string>
+    <string name="error_calculating_route_occured">Marşrut hesablana bilmədi</string>
+    <string name="empty_route_calculated">Hesablanan marşrut boşdur</string>
     <string name="new_route_calculated_dist">Yeni marşrut hesablandı, məsafə</string>
     <string name="arrived_at_destination">Təyinat nöqtənizə gəlib çatdınız</string>
     <string name="invalid_locations">Yanlış koordinatlar</string>
@@ -1352,7 +1352,7 @@
     <string name="fav_imported_sucessfully">Favoritlər idxal edildi</string>
     <string name="shared_string_export">İxrac et</string>
     <string name="fav_export_confirmation">Daha əvvəl ixrac edilən favoritlər faylı artıq var. Onu əvəz etmək istəyirsiniz?</string>
-    <string name="osmand_net_previously_installed">Əvvəlki OsmAnd versiyası quraşdırılıb. Bütün oflayn məlumatlar yeni proqram tərəfindən dəstəklənəcək. Amma Favorit nöqtələr köhnə proqramda ixrac edilməli və sonra yenisinə idxal edilməlidir.</string>
+    <string name="osmand_net_previously_installed">Köhnə proqramdakı bütün oflayn məlumatlar yeni proqram tərəfindən dəstəklənəcək, lakin favorit nöqtələr köhnə proqramdan ixrac edilməli və yenisinə idxal edilməlidir.</string>
     <string name="shared_string_gpx_track">İz</string>
     <string name="select_gpx_folder">GPX fayl qovluğunu seçin</string>
     <string name="shared_string_gpx_tracks">İzlər</string>
@@ -1394,9 +1394,9 @@
     <string name="show_current_gpx_title">Hazırkı izi göstər</string>
     <string name="add_waypoint_dialog_title">Qeyd edilən GPX izinə yol nöqtəsi əlavə et</string>
     <string name="gpx_files_not_found">İzlər qovluğunda GPX faylları tapılmadı</string>
-    <string name="layer_gpx_layer">GPX iz…</string>
-    <string name="background_router_service_descr">Ekran sönülü olarkən mövqeyinizi izləmək üçün OsmAnd arxa fonda işləyir.</string>
-    <string name="saving_gpx_tracks">GPX izlər SD kartda saxlanır…</string>
+    <string name="layer_gpx_layer">GPX faylları…</string>
+    <string name="background_router_service_descr">Ekran sönülü olarkən mövqeyinizi izləyir.</string>
+    <string name="saving_gpx_tracks">GPX faylı saxlanır…</string>
     
     
     
@@ -1681,7 +1681,7 @@
     <string name="show_route">Marşrut detalları</string>
     <string name="no_fav_to_save">Yadda saxlanacaq favorit nöqtələr yoxdur</string>
     <string name="share_fav_subject">Favoritlər OsmAnd ilə paylaşılıb</string>
-    <string name="error_occurred_loading_gpx">GPX yüklənərkən səhv baş verdi</string>
+    <string name="error_occurred_loading_gpx">GPX yüklənə bilmədi</string>
     <string name="thanks_yandex_traffic">Trafik məlumatları üçün Yandex-ə təşəkkürlər.</string>
     <string name="layer_yandex_traffic">Yandex trafik</string>
     <string name="layer_route">Marşrut</string>
@@ -1732,7 +1732,7 @@
     <string name="shared_string_sort">Sırala</string>
     <string name="marker_save_as_track">GPX faylı kimi saxla</string>
     <string name="shared_string_groups">Qruplar</string>
-    <string name="import_track">İz idxal et</string>
+    <string name="import_track">GPX faylı idxal et</string>
     <string name="context_menu_read_full_article">Tam məqaləni oxu</string>
     <string name="context_menu_read_article">Məqaləni oxu</string>
     <string name="modify_the_search_query">Axtarış sorğusunu dəyiş.</string>
@@ -1803,7 +1803,7 @@
     <string name="none_point_error">Ən azı bir nöqtə əlavə edin.</string>
     <string name="import_track_desc">%1$s faylı yol nöqtəsi ehtiva etmir, iz olaraq idxal edilsin?</string>
     <string name="move_point">Nöqtəni daşı</string>
-    <string name="add_segment_to_the_track">GPX izinə əlavə et</string>
+    <string name="add_segment_to_the_track">GPX faylına əlavə et</string>
     <string name="osm_recipients_label">OSM qəbul edənlər</string>
     <string name="total_donations">Ümumi ianələr</string>
     <string name="winter_and_ski_renderer">Qış və xizək</string>
@@ -1880,7 +1880,7 @@
     <string name="items_were_selected">{0} element seçilib</string>
     <string name="poi_namefinder_query_empty">POI tapmaq üçün yazın</string>
     <string name="quick_action_category_descr">Favoriti yadda saxlamaq üçün kateqoriya seçin.</string>
-    <string name="quick_action_sh_poi_descr">Xəritədə göstərmək üçün bir və ya bir neçə POI kateqoriyası əlavə edə bilərsiniz.</string>
+    <string name="quick_action_sh_poi_descr">Xəritədə göstərmək üçün bir və ya bir neçə POI kateqoriyası əlavə edin.</string>
     <string name="quick_action_empty_param_error">Parametrlər boş olmamalıdır</string>
     <string name="quick_action_map_overlay">Xəritə örtüyünü dəyiş</string>
     <string name="quick_action_map_overlay_title">Xəritə örtükləri</string>
@@ -1903,15 +1903,15 @@
 <string name="make_as_start_point">Bunu başlanğıc nöqtəsi et</string>
     <string name="shared_string_current">Hazırkı</string>
     <string name="add_location_as_first_point_descr">Mükəmməl marşrut planlaşdırmaq üçün mövqeyinizi başlanğıc nöqtə olaraq əlavə edin.</string>
-    <string name="quick_action_add_marker_descr">Bu fəaliyyət düyməsinə toxunulduqda ekranın mərkəzində xəritə işarəsi əlavə ediləcək.</string>
+    <string name="quick_action_add_marker_descr">Bu fəaliyyət düyməsinə toxunulduqda ekranın mərkəzində xəritə işarəsi əlavə edilir.</string>
     <string name="quick_action_add_gpx_descr">Fəaliyyət düyməsinə toxunulduqda ekranın mərkəzində GPX yol nöqtəsi əlavə ediləcək.</string>
     <string name="quick_action_take_audio_note_descr">Fəaliyyət düyməsinə toxunulduqda ekranın mərkəzində səsli qeyd əlavə ediləcək.</string>
     <string name="quick_action_take_video_note_descr">Fəaliyyət düyməsinə toxunulduqda ekran mərkəzində video qeyd əlavə ediləcək.</string>
     <string name="quick_action_take_photo_note_descr">Fəaliyyət düyməsinə toxunulduqda ekranın mərkəzində şəkilli qeyd əlavə ediləcək.</string>
     <string name="quick_action_add_osm_bug_descr">Fəaliyyət düyməsinə toxunulduqda ekranın mərkəzində OSM qeydi əlavə ediləcək.</string>
     <string name="quick_action_add_poi_descr">Fəaliyyət düyməsinə toxunulduqda ekranın mərkəzində POI əlavə ediləcək.</string>
-    <string name="quick_action_showhide_favorites_descr">Bu fəaliyyət düyməsinə toxunulduqda xəritədə favorit nöqtələr göstəriləcək və ya gizlədiləcək.</string>
-    <string name="quick_action_showhide_poi_descr">Bu fəaliyyət düyməsinə toxunulduqda xəritədə POI-lər göstəriləcək və ya gizlədiləcək.</string>
+    <string name="quick_action_showhide_favorites_descr">Bu fəaliyyət düyməsinə toxunulduqda xəritədə favorit nöqtələr göstərilir və ya gizlədilir.</string>
+    <string name="quick_action_showhide_poi_descr">Bu fəaliyyət düyməsinə toxunulduqda xəritədə POI-lər göstərilir və ya gizlədilir.</string>
     <string name="audionotes_location_not_defined">Qeyd ilə əlaqələndiriləcək məkan hələ müəyyənləşdirilməyib. Göstərilən məkana qeyd təyin etmək üçün “Məkan istifadə et…”.</string>
     <string name="send_location_way_choose_title">İstifadə etməklə paylaş</string>
     <string name="gpx_file_desc">GPX - JOSM və ya digər OSM redaktorlarına ixrac üçün uygundur.</string>
@@ -1963,7 +1963,7 @@
     <string name="new_directions_point_dialog">Artıq müəyyənləşdirilmiş ara təyinat nöqtələriniz var.</string>
     <string name="map_import_error">Xəritə idxalı səhvi</string>
     <string name="map_imported_successfully">Xəritə idxal edildi</string>
-    <string name="empty_state_my_tracks">İzlər əlavə et və qeyd et</string>
+    <string name="empty_state_my_tracks">GPX faylları əlavə et</string>
     <string name="empty_state_my_tracks_desc">Baxmaq üçün izləri qeyd edin və ya idxal edin.</string>
     <string name="enter_the_file_name">Fayl adını daxil edin.</string>
     <string name="distance_indication_descr">Aktiv işarələrə qədər məsafənin necə göstəriləcəyini seçin.</string>
@@ -1996,7 +1996,7 @@
     <string name="first_usage_item_description">Xəritələri endirmək, əsas parametrləri qurmaq.</string>
     <string name="navigation_item_description">Naviqasiya quraşdırma.</string>
     <string name="faq_item">FAQ</string>
-    <string name="save_poi_too_many_uppercase">Adda çoxlu böyük hərflər var. Davam etmək istəyirsiniz?</string>
+    <string name="save_poi_too_many_uppercase">Adda çoxlu böyük hərflər var. Davam edilsin?</string>
     <string name="live_update">Canlı yeniləmə</string>
     <string name="configure_screen_quick_action">Sürətli fəaliyyət</string>
     <string name="quick_action_duplicates">Göstərilən sürətli fəaliyyət adı artıq istifadə olunur, təkrarlanmaması üçün ad %1$s olaraq dəyişdirildi.</string>
@@ -2123,4 +2123,23 @@
     <string name="unlock_all_features">Bütün OsmAnd xüsusiyyətlərini aç</string>
 
     <string name="purchase_dialog_title">Plan seçin</string>
-    </resources>
+    <string name="hide_full_description">Tam açıqlamanı gizlət</string>
+    <string name="show_full_description">Tam açıqlamanı göstər</string>
+    <string name="open_wikipedia_link_online">Vikipediya linkini onlayn aç</string>
+    <string name="open_wikipedia_link_online_description">Link veb brauzerdə açılacaq.</string>
+    <string name="how_to_open_link">Link necə açılır?</string>
+    <string name="download_all">Hamısını endir</string>
+    <string name="maps_you_need">Sizə lazımlı xəritələr</string>
+    <string name="paid_app">Pullu proqram</string>
+    <string name="paid_plugin">Pullu qoşma</string>
+    <string name="update_is_available">Yeniləmə mövcuddur</string>
+	<string name="download_file">Faylı endir</string>
+    <string name="start_editing">Düzəlişə başla</string>
+    <string name="get_unlimited_access">Limitsiz giriş əldə et</string>
+    <string name="download_wikipedia_label">Vikipediya məlumatlarını endir</string>
+    <string name="open_in_browser_wiki">Məqaləni onlayn aç</string>
+    <string name="open_in_browser_wiki_description">Məqaləyə veb brauzerdə bax.</string>
+    <string name="download_wiki_region_placeholder">bu region</string>
+    <string name="wiki_article_not_found">Məqalə tapılmadı</string>
+    <string name="how_to_open_wiki_title">Vikipediya məqalələri necə açılır?</string>
+</resources>
