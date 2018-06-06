@@ -341,6 +341,7 @@ public class TrackPointFragment extends OsmandExpandableListFragment implements 
 				}
 				// Needed to hide intermediate progress bar after closing action mode
 				new Handler().postDelayed(new Runnable() {
+					@Override
 					public void run() {
 						hideProgressBar();
 					}

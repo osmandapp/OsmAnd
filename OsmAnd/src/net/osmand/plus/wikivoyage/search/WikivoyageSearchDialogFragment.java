@@ -164,6 +164,7 @@ public class WikivoyageSearchDialogFragment extends WikiBaseDialogFragment {
 			@Override
 			public boolean publish(final List<WikivoyageSearchResult> results) {
 				getMyApplication().runInUIThread(new Runnable() {
+					@Override
 					public void run() {
 						if (!isCancelled()) {
 							setAdapterItems(results);
