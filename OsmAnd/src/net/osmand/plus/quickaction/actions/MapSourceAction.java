@@ -1,7 +1,6 @@
 package net.osmand.plus.quickaction.actions;
 
 import android.content.DialogInterface;
-import android.os.Bundle;
 import android.support.v4.util.Pair;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.SwitchCompat;
@@ -16,14 +15,12 @@ import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.dialogs.SelectMapViewQuickActionsBottomSheet;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.SwitchableAction;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,9 +28,9 @@ import java.util.Map;
 public class MapSourceAction extends SwitchableAction<Pair<String, String>> {
 
 	public static final int TYPE = 17;
+	public static final String LAYER_OSM_VECTOR = "LAYER_OSM_VECTOR";
 
 	private final static String KEY_SOURCE = "source";
-	private final String LAYER_OSM_VECTOR = "LAYER_OSM_VECTOR";
 
 	public MapSourceAction() {
 		super(TYPE);
@@ -60,7 +57,7 @@ public class MapSourceAction extends SwitchableAction<Pair<String, String>> {
 	}
 
 	@Override
-	protected List<Pair<String, String>> loadListFromParams() {
+	public List<Pair<String, String>> loadListFromParams() {
 
 		String json = getParams().get(getListKey());
 
@@ -82,18 +79,7 @@ public class MapSourceAction extends SwitchableAction<Pair<String, String>> {
 
 			boolean showBottomSheetStyles = Boolean.valueOf(getParams().get(KEY_DIALOG));
 			if (showBottomSheetStyles) {
-				SelectMapViewQuickActionsBottomSheet fragment = new SelectMapViewQuickActionsBottomSheet();
-				HashMap<String, String> hashMap = new HashMap<>();
-				for (Pair<String, String> pair : sources) {
-					hashMap.put(pair.first, pair.second);
-				}
-				Bundle args = new Bundle();
-				args.putInt(KEY_TYPE, TYPE);
-				args.putLong(KEY_ID, id);
-				args.putSerializable(KEY_ACTIONS_MAP, hashMap);
-				fragment.setArguments(args);
-				fragment.show(activity.getSupportFragmentManager(),
-						SelectMapViewQuickActionsBottomSheet.TAG);
+				showChooseDialog(activity.getSupportFragmentManager());
 				return;
 			}
 			
@@ -107,23 +93,24 @@ public class MapSourceAction extends SwitchableAction<Pair<String, String>> {
 			if (index >= 0 && index + 1 < sources.size()) {
 				nextSource = sources.get(index + 1);
 			}
-
-			if (nextSource.first.equals(LAYER_OSM_VECTOR)) {
-
-				settings.MAP_ONLINE_DATA.set(false);
-				activity.getMapLayers().updateMapSource(activity.getMapView(), null);
-
-			} else {
-
-				settings.MAP_TILE_SOURCES.set(nextSource.first);
-				settings.MAP_ONLINE_DATA.set(true);
-				activity.getMapLayers().updateMapSource(activity.getMapView(), settings.MAP_TILE_SOURCES);
-			}
-
-			Toast.makeText(activity, activity.getString(R.string.quick_action_map_source_switch, nextSource.second), Toast.LENGTH_SHORT).show();
+			executeWithParams(activity, nextSource.first);
 		}
 	}
 
+	@Override
+	public void executeWithParams(MapActivity mapActivity, String params) {
+		OsmandSettings settings = mapActivity.getMyApplication().getSettings();
+		if (params.equals(LAYER_OSM_VECTOR)) {
+			settings.MAP_ONLINE_DATA.set(false);
+			mapActivity.getMapLayers().updateMapSource(mapActivity.getMapView(), null);
+		} else {
+			settings.MAP_TILE_SOURCES.set(params);
+			settings.MAP_ONLINE_DATA.set(true);
+			mapActivity.getMapLayers().updateMapSource(mapActivity.getMapView(), settings.MAP_TILE_SOURCES);
+		}
+		Toast.makeText(mapActivity, mapActivity.getString(R.string.quick_action_map_source_switch, params), Toast.LENGTH_SHORT).show();
+	}
+	
 	@Override
 	protected int getAddBtnText() {
 		return R.string.quick_action_map_source_action;

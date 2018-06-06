@@ -1,7 +1,6 @@
 package net.osmand.plus.quickaction.actions;
 
 import android.content.DialogInterface;
-import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.SwitchCompat;
 import android.text.TextUtils;
@@ -14,7 +13,6 @@ import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dialogs.ConfigureMapMenu;
-import net.osmand.plus.dialogs.SelectMapViewQuickActionsBottomSheet;
 import net.osmand.plus.openseamapsplugin.NauticalMapsPlugin;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.SwitchableAction;
@@ -31,7 +29,7 @@ public class MapStyleAction extends SwitchableAction<String> {
 
 	public static final int TYPE = 14;
 
-	public final static String KEY_STYLES = "styles";
+	private final static String KEY_STYLES = "styles";
 
 	public MapStyleAction() {
 		super(TYPE);
@@ -47,14 +45,7 @@ public class MapStyleAction extends SwitchableAction<String> {
 		List<String> mapStyles = getFilteredStyles();
 		boolean showBottomSheetStyles = Boolean.valueOf(getParams().get(KEY_DIALOG));
 		if (showBottomSheetStyles) {
-			SelectMapViewQuickActionsBottomSheet fragment = new SelectMapViewQuickActionsBottomSheet();
-			Bundle args = new Bundle();
-			args.putStringArrayList(KEY_STYLES, (ArrayList<String>) mapStyles);
-			args.putInt(KEY_TYPE, TYPE);
-			args.putLong(KEY_ID, id);
-			fragment.setArguments(args);
-			fragment.show(activity.getSupportFragmentManager(),
-					SelectMapViewQuickActionsBottomSheet.TAG);
+			showChooseDialog(activity.getSupportFragmentManager());
 			return;
 		}
 		String curStyle = activity.getMyApplication().getSettings().RENDERER.get();
@@ -64,26 +55,26 @@ public class MapStyleAction extends SwitchableAction<String> {
 		if (index >= 0 && index + 1 < mapStyles.size()) {
 			nextStyle = mapStyles.get(index + 1);
 		}
-
-		RenderingRulesStorage loaded = activity.getMyApplication()
-				.getRendererRegistry().getRenderer(nextStyle);
-
-		if (loaded != null) {
-
-			OsmandMapTileView view = activity.getMapView();
-			view.getSettings().RENDERER.set(nextStyle);
-
-			activity.getMyApplication().getRendererRegistry().setCurrentSelectedRender(loaded);
-			ConfigureMapMenu.refreshMapComplete(activity);
-
-			Toast.makeText(activity, activity.getString(R.string.quick_action_map_style_switch, nextStyle), Toast.LENGTH_SHORT).show();
-
-		} else {
-
-			Toast.makeText(activity, R.string.renderer_load_exception, Toast.LENGTH_SHORT).show();
-		}
+		executeWithParams(activity, nextStyle);
 	}
 
+	@Override
+	public void executeWithParams(MapActivity mapActivity, String params) {
+		OsmandApplication app = mapActivity.getMyApplication();
+		RenderingRulesStorage loaded = app.getRendererRegistry().getRenderer(params);
+		if (loaded != null) {
+			OsmandMapTileView view = mapActivity.getMapView();
+			view.getSettings().RENDERER.set(params);
+
+			app.getRendererRegistry().setCurrentSelectedRender(loaded);
+			ConfigureMapMenu.refreshMapComplete(mapActivity);
+
+			Toast.makeText(mapActivity, mapActivity.getString(R.string.quick_action_map_style_switch, params), Toast.LENGTH_SHORT).show();
+		} else {
+			Toast.makeText(mapActivity, R.string.renderer_load_exception, Toast.LENGTH_SHORT).show();
+		}
+	}
+	
 	public List<String> getFilteredStyles() {
 
 		List<String> filtered = new ArrayList<>();
@@ -187,7 +178,7 @@ public class MapStyleAction extends SwitchableAction<String> {
 	}
 
 	@Override
-	protected List<String> loadListFromParams() {
+	public List<String> loadListFromParams() {
 
 		List<String> styles = new ArrayList<>();
 

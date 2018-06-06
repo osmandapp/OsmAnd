@@ -76,6 +76,10 @@ public class QuickAction {
         return id;
     }
 
+	public long getType() {
+		return type;
+	}
+
     public boolean isActionEditable() {
         return isActionEditable;
     }
