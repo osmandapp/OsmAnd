@@ -1542,7 +1542,7 @@ Len %2$s</string>
     <string name="recording_error">Upptaka mistókst</string>
     <string name="recording_camera_not_available">Myndavél er ekki tiltæk</string>
     <string name="recording_open_external_player">Opna utanaðkomandi spilara</string>
-    <string name="recording_delete_confirm">Eyða þessari upptöku?</string>
+    <string name="recording_delete_confirm">Eyða þessu atriði?</string>
     <string name="recording_context_menu_arecord">Taka minnispunkt sem hljóðupptöku</string>
     <string name="recording_context_menu_vrecord">Taka minnispunkt sem myndskeið</string>
     <string name="recording_can_not_be_played">Ekki var hægt að spila upptöku</string>

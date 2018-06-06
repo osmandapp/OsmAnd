@@ -2506,4 +2506,29 @@
 	<string name="poi_payment_mtsmoney_yes">MTS-Money</string>
 	<string name="poi_payment_mtsmoney_no">MTS-Money non accettato</string>
 	<string name="poi_brewery_additional">Nome birrificio</string>
+	<string name="poi_fire_hydrant_style_water_source_main">Principale</string>
+	<string name="poi_fire_hydrant_style_water_source_pond">Stagno</string>
+	<string name="poi_fire_hydrant_style_water_source_stream">Ruscello</string>
+	<string name="poi_valley_balka">"Balka "</string>
+
+	<string name="poi_display_yes">Display: Sì</string>
+	<string name="poi_display_no">"Display: no "</string>
+	<string name="poi_display_analog_yes">Display analogico</string>
+	<string name="poi_display_digital_yes">Display digitale</string>
+	<string name="poi_organic_yes">Sì</string>
+	<string name="poi_organic_no">"No "</string>
+	<string name="poi_organic_only">Solo</string>
+
+	<string name="poi_boat_rental">Noleggio barche</string>
+	<string name="poi_boat_motorboat_rental_yes">Barche a motore: sì</string>
+	<string name="poi_boat_motorboat_rental_no">Barche a motore: no</string>
+	<string name="poi_boat_houseboat_rental_yes">Case galleggianti: sì</string>
+	<string name="poi_boat_houseboat_rental_no">Case galleggianti: no</string>
+	<string name="poi_boat_pedalboat_rental_yes">Pedalò: sì</string>
+	<string name="poi_boat_pedalboat_rental_no">Pedalò: no</string>
+	<string name="poi_boat_jetski_rental_yes">Jetski: sì</string>
+	<string name="poi_boat_jetski_rental_no">Jetski: no</string>
+	<string name="poi_boat_kayak_rental_rental_yes">Kayak: sì</string>
+	<string name="poi_boat_kayak_rental_rental_no">Kayak: no</string>
+	<string name="poi_surface_tartan">"Tartan "</string>
 	</resources>

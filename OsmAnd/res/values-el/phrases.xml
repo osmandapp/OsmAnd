@@ -2388,4 +2388,71 @@
 	<string name="poi_ramp_no">Ράμπα: όχι</string>
 	<string name="poi_ramp_wheelchair_yes">Ράμπα για αμαξίδια: ναι</string>
 	<string name="poi_ramp_wheelchair_no">Ράμπα για αμαξίδια: όχι</string>
+	<string name="poi_product_lime">Προϊόν: ασβέστης</string>
+	<string name="poi_ramp_stroller_yes">Ράμπα (καροτσάκι): ναι</string>
+	<string name="poi_ramp_stroller_no">Ράμπα (καροτσάκι): όχι</string>
+	<string name="poi_ramp_bicycle_yes">Ράμπα για ποδήλατα: ναι</string>
+	<string name="poi_ramp_bicycle_no">Ράμπα για ποδήλατα: όχι</string>
+	<string name="poi_ramp_luggage_yes">Ράμπα για αποσκευές: ναι</string>
+	<string name="poi_ramp_luggage_no">Ράμπα για αποσκευές: όχι</string>
+	<string name="poi_step_count">Αριθμός σκαλιών</string>
+	<string name="poi_step_condition_even">Κατάσταση σκαλιών: επίπεδα</string>
+	<string name="poi_step_condition_uneven">Κατάσταση σκαλιών: ανομοιόμορφα</string>
+	<string name="poi_step_condition_rough">Κατάσταση σκαλιών: ανώμαλα</string>
+
+	<string name="poi_cairn">Τύμβος</string>
+
+	<string name="poi_defibrillator">Απινιδωτής</string>
+	<string name="poi_defibrillator_yes">Απινιδωτής: ναι</string>
+
+	<string name="poi_tomb_war_grave">Τύπος: πολεμικοί τάφοι</string>
+	<string name="poi_tomb_tumulus">Τύπος: τύμβος</string>
+	<string name="poi_tomb_rock_cut">Τύπος: λαξευμένα σε πέτρες</string>
+	<string name="poi_tomb_hypogeum">Τύπος: υπόγειος</string>
+	<string name="poi_tomb_vault">Τύπος: θόλος</string>
+	<string name="poi_tomb_columbarium">Τύπος: τεφροφυλάκιο</string>
+	<string name="poi_tomb_mausoleum">Τύπος: μαυσωλείο</string>
+	<string name="poi_tomb_sarcophagus">Τύπος: σαρκοφάγος</string>
+	<string name="poi_tomb_crypt">Τύπος: κρύπτη</string>
+	<string name="poi_tomb_pyramid">Τύπος: πυραμίδα</string>
+
+	<string name="poi_historic_civilization_ancient_roman">Πολιτισμός: αρχαίος ρωμαϊκός (753 π.Χ. - 284 μ.Χ.)</string>
+	<string name="poi_historic_civilization_nuragic">Πολιτισμός: νουραγικός (18ος αιώνας π.Χ. - 2ος αιώνας μ.Χ.)</string>
+	<string name="poi_historic_civilization_etruscan">Πολιτισμός: ετρουσκικός (12ος - 6ος αιώνας π.Χ.)</string>
+	<string name="poi_historic_civilization_prehistoric">Πολιτισμός: προϊστορικός</string>
+	<string name="poi_historic_civilization_ancient_greek">"Πολιτισμός:  αρχαιοελληνικός"</string>
+	<string name="poi_historic_civilization_roman">Πολιτισμός: ρωμαϊκός</string>
+	<string name="poi_historic_civilization_byzantine">Πολιτισμός: βυζαντινός (285 μ.Χ. - 1453 μ.Χ.)</string>
+	<string name="poi_historic_civilization_imperial_chinese">Πολιτισμός: αυτοκρατορικός κινέζικος (221 π.Χ. - 1911 μ.Χ.)</string>
+	<string name="poi_historic_civilization_ancient_egyptian">Πολιτισμός: αρχαίος αιγυπτιακός (μέχρι 332 π.Χ.)</string>
+	<string name="poi_historic_civilization_celtic">Πολιτισμός: κελτικός</string>
+	<string name="poi_historic_civilization_western_roman">Πολιτισμός: δυτικός ρωμαϊκός (285 μ.Χ. - 476 μ.Χ.)</string>
+	<string name="poi_historic_civilization_mycenaean">Πολιτισμός: μυκηναϊκός</string>
+	<string name="poi_historic_civilization_dacian">Πολιτισμός: δακικός</string>
+	<string name="poi_historic_civilization_hernici">Πολιτισμός: ερνικικός</string>
+	<string name="poi_historic_civilization_greek_egyptian">Πολιτισμός: ελληνοαιγυπτιακός (332 π.Χ. - 30 π.Χ.)</string>
+	<string name="poi_historic_civilization_roman_and_byzantine_egyptian">Πολιτισμός: ρωμαϊκός και βυζαντινοαιγυπτιακός</string>
+	<string name="poi_historic_civilization_helladic">Πολιτισμός: ελλαδικός</string>
+	<string name="poi_historic_civilization_cycladic">Πολιτισμός: κυκλαδικός</string>
+	<string name="poi_historic_civilization_minoan">Πολιτισμός: μινωικός</string>
+	<string name="poi_historic_civilization_tiahuanacota">Πολιτισμός: τιαχουανακότα</string>
+
+	<string name="poi_animal_training">Εκγύμναση ζώων</string>
+	<string name="poi_animal_training_dog">Σκύλος</string>
+	<string name="poi_animal_training_horse">Άλογο</string>
+
+	<string name="poi_horse_yes">Επιτρέπονται άλογα</string>
+	<string name="poi_horse_no">Δεν επιτρέπονται άλογα</string>
+	<string name="poi_animal_yes">Επιτρέπονται ζώα</string>
+	<string name="poi_animal_no">Δεν επιτρέπονται ζώα</string>
+
+	<string name="poi_historic_period_nuragic">Ιστορική περίοδος: νουραγική</string>
+	<string name="poi_historic_period_stone_bronze_undetermined">Ιστορική περίοδος: λίθινη / χάλκινη εποχή (ακαθόριστη)</string>
+	<string name="poi_historic_period_bronze_age">Ιστορική περίοδος: χάλκινη εποχή</string>
+	<string name="poi_historic_period_principate">"Ιστορική περίοδος: πριγκιπάτο (27 π.Χ. - 284 μ.Χ.) "</string>
+	<string name="poi_historic_period_classical_greece">Ιστορική περίοδος: κλασική Ελλάδα (5ος - 4ος π.Χ.)</string>
+	<string name="poi_historic_period_archaic_greece">Ιστορική περίοδος: αρχαιοελληνική</string>
+	<string name="poi_historic_period_iron_age">Ιστορική περίοδος: εποχή σιδήρου</string>
+	<string name="poi_historic_period_roman_republic">Ιστορική περίοδος: ρωμαϊκή δημοκρατία (508 π.Χ. - 27 π.Χ.)</string>
+	<string name="poi_historic_period_hellenistic_greece">Ιστορική περίοδος: ελληνιστική Ελλάδα</string>
 	</resources>
