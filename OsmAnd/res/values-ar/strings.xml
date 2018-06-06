@@ -2976,4 +2976,5 @@
     <string name="read_wikipedia_offline">قراءة ويكيبيديا مِن دون اتصال</string>
     <string name="download_all">تنزيل الكل</string>
     <string name="shared_string_restart">إعادة التشغيل</string>
+    <string name="shared_string_bookmark">إشارة مرجعية</string>
     </resources>
