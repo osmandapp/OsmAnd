@@ -59,19 +59,19 @@ public class MapStyleAction extends SwitchableAction<String> {
 	}
 
 	@Override
-	public void executeWithParams(MapActivity mapActivity, String params) {
-		OsmandApplication app = mapActivity.getMyApplication();
+	public void executeWithParams(MapActivity activity, String params) {
+		OsmandApplication app = activity.getMyApplication();
 		RenderingRulesStorage loaded = app.getRendererRegistry().getRenderer(params);
 		if (loaded != null) {
-			OsmandMapTileView view = mapActivity.getMapView();
+			OsmandMapTileView view = activity.getMapView();
 			view.getSettings().RENDERER.set(params);
 
 			app.getRendererRegistry().setCurrentSelectedRender(loaded);
-			ConfigureMapMenu.refreshMapComplete(mapActivity);
+			ConfigureMapMenu.refreshMapComplete(activity);
 
-			Toast.makeText(mapActivity, mapActivity.getString(R.string.quick_action_map_style_switch, params), Toast.LENGTH_SHORT).show();
+			Toast.makeText(activity, activity.getString(R.string.quick_action_map_style_switch, params), Toast.LENGTH_SHORT).show();
 		} else {
-			Toast.makeText(mapActivity, R.string.renderer_load_exception, Toast.LENGTH_SHORT).show();
+			Toast.makeText(activity, R.string.renderer_load_exception, Toast.LENGTH_SHORT).show();
 		}
 	}
 	
