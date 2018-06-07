@@ -2,11 +2,12 @@ package net.osmand.telegram
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.view.Menu
-import android.view.MenuItem
+import android.support.v7.widget.*
+import android.view.*
 import android.widget.Toast
 import net.osmand.telegram.LoginDialogFragment.LoginDialogType
 import net.osmand.telegram.TelegramHelper.*
+import org.drinkless.td.libcore.telegram.TdApi
 
 
 class MainActivity : AppCompatActivity(), TelegramListener {
@@ -17,8 +18,12 @@ class MainActivity : AppCompatActivity(), TelegramListener {
         private const val PROGRESS_MENU_ID = 2
     }
 
-    private var authParamRequestHandler: AuthParamRequestHandler? = null
+    private var telegramAuthorizationRequestHandler: TelegramAuthorizationRequestHandler? = null
     private var paused: Boolean = false
+
+    private lateinit var chatsView: RecyclerView
+    private lateinit var chatViewAdapter: ChatsAdapter
+    private lateinit var chatViewManager: RecyclerView.LayoutManager
 
     private val app: TelegramApplication
         get() = application as TelegramApplication
@@ -32,20 +37,30 @@ class MainActivity : AppCompatActivity(), TelegramListener {
 
         paused = false
 
-        authParamRequestHandler = telegramHelper.setAuthParamRequestHandler(object : AuthParamRequestListener {
-            override fun onRequestAuthParam(paramType: AuthParamType) {
-                runOnUiThread {
-                    if (!paused) {
-                        showLoginDialog(paramType)
-                    }
+        chatViewManager = LinearLayoutManager(this)
+        chatViewAdapter = ChatsAdapter()
+
+        chatsView = findViewById<RecyclerView>(R.id.groups_view).apply {
+            //setHasFixedSize(true)
+
+            // use a linear layout manager
+            layoutManager = chatViewManager
+
+            // specify an viewAdapter (see also next example)
+            adapter = chatViewAdapter
+
+        }
+
+        telegramAuthorizationRequestHandler = telegramHelper.setTelegramAuthorizationRequestHandler(object : TelegramAuthorizationRequestListener {
+            override fun onRequestTelegramAuthenticationParameter(parameterType: TelegramAuthenticationParameterType) {
+                runOnUi {
+                    showLoginDialog(parameterType)
                 }
             }
 
-            override fun onAuthRequestError(code: Int, message: String) {
-                runOnUiThread {
-                    if (!paused) {
-                        Toast.makeText(this@MainActivity, "$code - $message", Toast.LENGTH_LONG).show()
-                    }
+            override fun onTelegramAuthorizationRequestError(code: Int, message: String) {
+                runOnUi {
+                    Toast.makeText(this@MainActivity, "$code - $message", Toast.LENGTH_LONG).show()
                 }
             }
         })
@@ -66,24 +81,59 @@ class MainActivity : AppCompatActivity(), TelegramListener {
         paused = true
     }
 
-    override fun onTelegramStatusChanged(prevAutoState: AuthState, newAuthState: AuthState) {
-        runOnUiThread {
-            if (!paused) {
-                val fm = supportFragmentManager
-                when (newAuthState) {
-                    AuthState.READY,
-                    AuthState.CLOSED,
-                    AuthState.UNKNOWN -> LoginDialogFragment.dismiss(fm)
-                    else -> Unit
+    override fun onTelegramStatusChanged(prevTelegramAuthorizationState: TelegramAuthorizationState,
+                                         newTelegramAuthorizationState: TelegramAuthorizationState) {
+        runOnUi {
+            val fm = supportFragmentManager
+            when (newTelegramAuthorizationState) {
+                TelegramAuthorizationState.READY,
+                TelegramAuthorizationState.CLOSED,
+                TelegramAuthorizationState.UNKNOWN -> LoginDialogFragment.dismiss(fm)
+                else -> Unit
+            }
+            invalidateOptionsMenu()
+            updateTitle()
+
+            when (newTelegramAuthorizationState) {
+                TelegramAuthorizationState.READY -> {
+                    updateChatsList()
+                    telegramHelper.requestChats()
                 }
-                invalidateOptionsMenu()
-                updateTitle()
+                TelegramAuthorizationState.CLOSED,
+                TelegramAuthorizationState.UNKNOWN -> {
+                    chatViewAdapter.chats = emptyList()
+                }
+                else -> Unit
             }
         }
     }
 
+    override fun onTelegramChatsRead() {
+        runOnUi {
+            updateChatsList()
+        }
+    }
+
+    override fun onTelegramError(code: Int, message: String) {
+        runOnUi {
+            Toast.makeText(this@MainActivity, "$code - $message", Toast.LENGTH_LONG).show()
+        }
+    }
+
+    private fun updateChatsList() {
+        val chatList = telegramHelper.getChatList()
+        val chats: MutableList<TdApi.Chat> = mutableListOf()
+        for (orderedChat in chatList) {
+            val chat = telegramHelper.getChat(orderedChat.chatId)
+            if (chat != null) {
+                chats.add(chat)
+            }
+        }
+        chatViewAdapter.chats = chats
+    }
+
     fun logoutTelegram(silent: Boolean = false) {
-        if (telegramHelper.getAuthState() == AuthState.READY) {
+        if (telegramHelper.getTelegramAuthorizationState() == TelegramAuthorizationState.READY) {
             telegramHelper.logout()
         } else {
             invalidateOptionsMenu()
@@ -96,6 +146,12 @@ class MainActivity : AppCompatActivity(), TelegramListener {
 
     fun closeTelegram() {
         telegramHelper.close()
+    }
+
+    private fun runOnUi(action: (() -> Unit)) {
+        if (!paused) {
+            runOnUiThread(action)
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
@@ -115,17 +171,17 @@ class MainActivity : AppCompatActivity(), TelegramListener {
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         if (menu != null) {
             menu.clear()
-            when (telegramHelper.getAuthState()) {
-                AuthState.UNKNOWN,
-                AuthState.WAIT_PARAMETERS,
-                AuthState.WAIT_PHONE_NUMBER,
-                AuthState.WAIT_CODE,
-                AuthState.WAIT_PASSWORD,
-                AuthState.LOGGING_OUT,
-                AuthState.CLOSING -> createProgressMenuItem(menu)
-                AuthState.READY -> createMenuItem(menu, LOGOUT_MENU_ID, R.string.shared_string_logout,
+            when (telegramHelper.getTelegramAuthorizationState()) {
+                TelegramAuthorizationState.UNKNOWN,
+                TelegramAuthorizationState.WAIT_PARAMETERS,
+                TelegramAuthorizationState.WAIT_PHONE_NUMBER,
+                TelegramAuthorizationState.WAIT_CODE,
+                TelegramAuthorizationState.WAIT_PASSWORD,
+                TelegramAuthorizationState.LOGGING_OUT,
+                TelegramAuthorizationState.CLOSING -> createProgressMenuItem(menu)
+                TelegramAuthorizationState.READY -> createMenuItem(menu, LOGOUT_MENU_ID, R.string.shared_string_logout,
                         MenuItem.SHOW_AS_ACTION_WITH_TEXT or MenuItem.SHOW_AS_ACTION_ALWAYS)
-                AuthState.CLOSED -> createMenuItem(menu, LOGIN_MENU_ID, R.string.shared_string_login,
+                TelegramAuthorizationState.CLOSED -> createMenuItem(menu, LOGIN_MENU_ID, R.string.shared_string_login,
                         MenuItem.SHOW_AS_ACTION_WITH_TEXT or MenuItem.SHOW_AS_ACTION_ALWAYS)
             }
         }
@@ -148,35 +204,35 @@ class MainActivity : AppCompatActivity(), TelegramListener {
     }
 
     private fun updateTitle() {
-        title = when (telegramHelper.getAuthState()) {
+        title = when (telegramHelper.getTelegramAuthorizationState()) {
 
-            AuthState.UNKNOWN,
-            AuthState.WAIT_PHONE_NUMBER,
-            AuthState.WAIT_CODE,
-            AuthState.WAIT_PASSWORD,
-            AuthState.READY,
-            AuthState.CLOSED -> getString(R.string.app_name)
+            TelegramAuthorizationState.UNKNOWN,
+            TelegramAuthorizationState.WAIT_PHONE_NUMBER,
+            TelegramAuthorizationState.WAIT_CODE,
+            TelegramAuthorizationState.WAIT_PASSWORD,
+            TelegramAuthorizationState.READY,
+            TelegramAuthorizationState.CLOSED -> getString(R.string.app_name)
 
-            AuthState.WAIT_PARAMETERS -> getString(R.string.initialization) + "..."
-            AuthState.LOGGING_OUT -> getString(R.string.logging_out) + "..."
-            AuthState.CLOSING -> getString(R.string.closing) + "..."
+            TelegramAuthorizationState.WAIT_PARAMETERS -> getString(R.string.initialization) + "..."
+            TelegramAuthorizationState.LOGGING_OUT -> getString(R.string.logging_out) + "..."
+            TelegramAuthorizationState.CLOSING -> getString(R.string.closing) + "..."
         }
     }
 
-    private fun showLoginDialog(authParamType: AuthParamType) {
-        when (authParamType) {
-            AuthParamType.PHONE_NUMBER -> LoginDialogFragment.showDialog(supportFragmentManager, LoginDialogType.ENTER_PHONE_NUMBER)
-            AuthParamType.CODE -> LoginDialogFragment.showDialog(supportFragmentManager, LoginDialogType.ENTER_CODE)
-            AuthParamType.PASSWORD -> LoginDialogFragment.showDialog(supportFragmentManager, LoginDialogType.ENTER_PASSWORD)
+    private fun showLoginDialog(telegramAuthenticationParameterType: TelegramAuthenticationParameterType) {
+        when (telegramAuthenticationParameterType) {
+            TelegramAuthenticationParameterType.PHONE_NUMBER -> LoginDialogFragment.showDialog(supportFragmentManager, LoginDialogType.ENTER_PHONE_NUMBER)
+            TelegramAuthenticationParameterType.CODE -> LoginDialogFragment.showDialog(supportFragmentManager, LoginDialogType.ENTER_CODE)
+            TelegramAuthenticationParameterType.PASSWORD -> LoginDialogFragment.showDialog(supportFragmentManager, LoginDialogType.ENTER_PASSWORD)
         }
     }
 
     fun applyAuthParam(loginDialogFragment: LoginDialogFragment?, loginDialogType: LoginDialogType, text: String) {
         loginDialogFragment?.updateDialog(LoginDialogType.SHOW_PROGRESS)
         when (loginDialogType) {
-            LoginDialogType.ENTER_PHONE_NUMBER -> authParamRequestHandler?.applyAuthParam(AuthParamType.PHONE_NUMBER, text)
-            LoginDialogType.ENTER_CODE -> authParamRequestHandler?.applyAuthParam(AuthParamType.CODE, text)
-            LoginDialogType.ENTER_PASSWORD -> authParamRequestHandler?.applyAuthParam(AuthParamType.PASSWORD, text)
+            LoginDialogType.ENTER_PHONE_NUMBER -> telegramAuthorizationRequestHandler?.applyAuthenticationParameter(TelegramAuthenticationParameterType.PHONE_NUMBER, text)
+            LoginDialogType.ENTER_CODE -> telegramAuthorizationRequestHandler?.applyAuthenticationParameter(TelegramAuthenticationParameterType.CODE, text)
+            LoginDialogType.ENTER_PASSWORD -> telegramAuthorizationRequestHandler?.applyAuthenticationParameter(TelegramAuthenticationParameterType.PASSWORD, text)
             else -> Unit
         }
     }
@@ -184,5 +240,36 @@ class MainActivity : AppCompatActivity(), TelegramListener {
     override fun onDestroy() {
         super.onDestroy()
         telegramHelper.close()
+    }
+
+    inner class ChatsAdapter :
+            RecyclerView.Adapter<ChatsAdapter.ViewHolder>() {
+
+        var chats: List<TdApi.Chat> = emptyList()
+            set(value) {
+                field = value
+                notifyDataSetChanged()
+            }
+
+        inner class ViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
+            val icon: AppCompatImageView? = view.findViewById(R.id.icon)
+            val groupName: AppCompatTextView? = view.findViewById(R.id.name)
+            val shareLocationSwitch: SwitchCompat? = view.findViewById(R.id.share_location_switch)
+            val showOnMapSwitch: SwitchCompat? = view.findViewById(R.id.show_on_map_switch)
+        }
+
+        override fun onCreateViewHolder(parent: ViewGroup,
+                                        viewType: Int): ChatsAdapter.ViewHolder {
+            val view = LayoutInflater.from(parent.context)
+                    .inflate(R.layout.chat_list_item, parent, false)
+
+            return ViewHolder(view)
+        }
+
+        override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+            holder.groupName?.text = chats[position].title
+        }
+
+        override fun getItemCount() = chats.size
     }
 }

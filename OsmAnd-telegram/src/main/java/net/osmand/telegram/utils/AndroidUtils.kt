@@ -1,4 +1,4 @@
-package net.osmand.telegram
+package net.osmand.telegram.utils
 
 import android.app.Activity
 import android.content.Context

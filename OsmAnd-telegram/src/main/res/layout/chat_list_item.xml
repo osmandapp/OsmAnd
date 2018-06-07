@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:descendantFocusability="blocksDescendants"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/bg_color"
+        android:minHeight="@dimen/list_item_height_min"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/content_padding_half"
+        android:paddingLeft="@dimen/content_padding_standard"
+        android:paddingStart="@dimen/content_padding_standard"
+        android:paddingTop="@dimen/content_padding_half">
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/icon"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_group"
+            android:tint="?attr/icon_color"
+            android:visibility="visible" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/name"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/content_padding_half"
+            android:layout_marginStart="@dimen/content_padding_half"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            tools:text="Group name" />
+
+        <android.support.v7.widget.SwitchCompat
+            android:id="@+id/share_location_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="@dimen/content_padding_half"
+            android:layout_marginLeft="@dimen/content_padding_standard"
+            android:layout_marginRight="@dimen/content_padding_half"
+            android:layout_marginStart="@dimen/content_padding_standard"
+            android:focusableInTouchMode="true" />
+
+        <android.support.v7.widget.SwitchCompat
+            android:id="@+id/show_on_map_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="@dimen/content_padding_standard"
+            android:layout_marginLeft="@dimen/content_padding_half"
+            android:layout_marginRight="@dimen/content_padding_standard"
+            android:layout_marginStart="@dimen/content_padding_half"
+            android:focusableInTouchMode="true" />
+
+    </LinearLayout>
+
+</LinearLayout>

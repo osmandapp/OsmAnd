@@ -3,11 +3,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-    android:paddingRight="16dp"
-    android:paddingLeft="16dp">
+    android:paddingRight="@dimen/content_padding_standard"
+    android:paddingLeft="@dimen/content_padding_standard">
 
     <ProgressBar
-        android:layout_width="32dp"
-        android:layout_height="32dp" />
+        android:layout_width="@dimen/progress_bar_size_small"
+        android:layout_height="@dimen/progress_bar_size_small" />
 
 </LinearLayout>

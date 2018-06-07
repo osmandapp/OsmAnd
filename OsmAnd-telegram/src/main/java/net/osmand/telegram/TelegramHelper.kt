@@ -1,7 +1,9 @@
 package net.osmand.telegram
 
 import android.text.TextUtils
-import net.osmand.telegram.TelegramHelper.AuthParamType.*
+import net.osmand.telegram.TelegramHelper.TelegramAuthenticationParameterType.*
+import net.osmand.telegram.utils.CancellableAsyncTask
+import net.osmand.telegram.utils.PlatformUtil
 import org.drinkless.td.libcore.telegram.Client
 import org.drinkless.td.libcore.telegram.Client.ResultHandler
 import org.drinkless.td.libcore.telegram.TdApi
@@ -10,12 +12,56 @@ import java.io.File
 import java.util.*
 import java.util.concurrent.ConcurrentHashMap
 
+
 class TelegramHelper private constructor() {
+
+    companion object {
+        private val log = PlatformUtil.getLog(TelegramHelper::class.java)
+        private const val CHATS_LIMIT = 100
+
+        private var helper: TelegramHelper? = null
+
+        private val users = ConcurrentHashMap<Int, TdApi.User>()
+        private val basicGroups = ConcurrentHashMap<Int, TdApi.BasicGroup>()
+        private val supergroups = ConcurrentHashMap<Int, TdApi.Supergroup>()
+        private val secretChats = ConcurrentHashMap<Int, TdApi.SecretChat>()
+
+        private val chats = ConcurrentHashMap<Long, TdApi.Chat>()
+        private val chatList = TreeSet<OrderedChat>()
+
+        private val usersFullInfo = ConcurrentHashMap<Int, TdApi.UserFullInfo>()
+        private val basicGroupsFullInfo = ConcurrentHashMap<Int, TdApi.BasicGroupFullInfo>()
+        private val supergroupsFullInfo = ConcurrentHashMap<Int, TdApi.SupergroupFullInfo>()
+
+        val instance: TelegramHelper
+            get() {
+                if (helper == null) {
+                    helper = TelegramHelper()
+                }
+                return helper!!
+            }
+
+        private fun setChatOrder(chat: TdApi.Chat, order: Long) {
+            synchronized(chatList) {
+                if (chat.order != 0L) {
+                    chatList.remove(OrderedChat(chat.order, chat.id))
+                }
+
+                chat.order = order
+
+                if (chat.order != 0L) {
+                    chatList.add(OrderedChat(chat.order, chat.id))
+                }
+            }
+        }
+    }
+
     var appDir: String? = null
     private var libraryLoaded = false
-    private var authParamRequestHandler: AuthParamRequestHandler? = null
+    private var telegramAuthorizationRequestHandler: TelegramAuthorizationRequestHandler? = null
 
     private var client: Client? = null
+    private var haveFullChatList: Boolean = false
 
     private var authorizationState: AuthorizationState? = null
     private var isHaveAuthorization = false
@@ -24,13 +70,23 @@ class TelegramHelper private constructor() {
 
     var listener: TelegramListener? = null
 
-    enum class AuthParamType {
+    fun getChatList(): TreeSet<OrderedChat> {
+        synchronized(chatList) {
+            return TreeSet<OrderedChat>(chatList)
+        }
+    }
+
+    fun getChat(id: Long): TdApi.Chat? {
+        return chats[id]
+    }
+
+    enum class TelegramAuthenticationParameterType {
         PHONE_NUMBER,
         CODE,
         PASSWORD
     }
 
-    enum class AuthState {
+    enum class TelegramAuthorizationState {
         UNKNOWN,
         WAIT_PARAMETERS,
         WAIT_PHONE_NUMBER,
@@ -43,46 +99,51 @@ class TelegramHelper private constructor() {
     }
 
     interface TelegramListener {
-        fun onTelegramStatusChanged(prevAutoState: AuthState, newAuthState: AuthState)
+        fun onTelegramStatusChanged(prevTelegramAuthorizationState: TelegramAuthorizationState,
+                                    newTelegramAuthorizationState: TelegramAuthorizationState)
+
+        fun onTelegramChatsRead()
+        fun onTelegramError(code: Int, message: String)
     }
 
-    interface AuthParamRequestListener {
-        fun onRequestAuthParam(paramType: AuthParamType)
-        fun onAuthRequestError(code: Int, message: String)
+    interface TelegramAuthorizationRequestListener {
+        fun onRequestTelegramAuthenticationParameter(parameterType: TelegramAuthenticationParameterType)
+        fun onTelegramAuthorizationRequestError(code: Int, message: String)
     }
 
-    inner class AuthParamRequestHandler(val authParamRequestListener: AuthParamRequestListener) {
+    inner class TelegramAuthorizationRequestHandler(val telegramAuthorizationRequestListener: TelegramAuthorizationRequestListener) {
 
-        fun applyAuthParam(paramType: AuthParamType, paramValue: String) {
-            if (!TextUtils.isEmpty(paramValue)) {
-                when (paramType) {
-                    PHONE_NUMBER -> client!!.send(TdApi.SetAuthenticationPhoneNumber(paramValue, false, false), AuthorizationRequestHandler())
-                    CODE -> client!!.send(TdApi.CheckAuthenticationCode(paramValue, "", ""), AuthorizationRequestHandler())
-                    PASSWORD -> client!!.send(TdApi.CheckAuthenticationPassword(paramValue), AuthorizationRequestHandler())
+        fun applyAuthenticationParameter(parameterType: TelegramAuthenticationParameterType, parameterValue: String) {
+            if (!TextUtils.isEmpty(parameterValue)) {
+                when (parameterType) {
+                    PHONE_NUMBER -> client!!.send(TdApi.SetAuthenticationPhoneNumber(parameterValue, false, false), AuthorizationRequestHandler())
+                    CODE -> client!!.send(TdApi.CheckAuthenticationCode(parameterValue, "", ""), AuthorizationRequestHandler())
+                    PASSWORD -> client!!.send(TdApi.CheckAuthenticationPassword(parameterValue), AuthorizationRequestHandler())
                 }
             }
         }
     }
 
-    fun getAuthState(): AuthState {
-        val authorizationState = this.authorizationState ?: return AuthState.UNKNOWN
+    fun getTelegramAuthorizationState(): TelegramAuthorizationState {
+        val authorizationState = this.authorizationState
+                ?: return TelegramAuthorizationState.UNKNOWN
         return when (authorizationState.constructor) {
-            TdApi.AuthorizationStateWaitTdlibParameters.CONSTRUCTOR -> AuthState.WAIT_PARAMETERS
-            TdApi.AuthorizationStateWaitPhoneNumber.CONSTRUCTOR -> AuthState.WAIT_PHONE_NUMBER
-            TdApi.AuthorizationStateWaitCode.CONSTRUCTOR -> AuthState.WAIT_CODE
-            TdApi.AuthorizationStateWaitPassword.CONSTRUCTOR -> AuthState.WAIT_PASSWORD
-            TdApi.AuthorizationStateReady.CONSTRUCTOR -> AuthState.READY
-            TdApi.AuthorizationStateLoggingOut.CONSTRUCTOR -> AuthState.LOGGING_OUT
-            TdApi.AuthorizationStateClosing.CONSTRUCTOR -> AuthState.CLOSING
-            TdApi.AuthorizationStateClosed.CONSTRUCTOR -> AuthState.CLOSED
-            else -> AuthState.UNKNOWN
+            TdApi.AuthorizationStateWaitTdlibParameters.CONSTRUCTOR -> TelegramAuthorizationState.WAIT_PARAMETERS
+            TdApi.AuthorizationStateWaitPhoneNumber.CONSTRUCTOR -> TelegramAuthorizationState.WAIT_PHONE_NUMBER
+            TdApi.AuthorizationStateWaitCode.CONSTRUCTOR -> TelegramAuthorizationState.WAIT_CODE
+            TdApi.AuthorizationStateWaitPassword.CONSTRUCTOR -> TelegramAuthorizationState.WAIT_PASSWORD
+            TdApi.AuthorizationStateReady.CONSTRUCTOR -> TelegramAuthorizationState.READY
+            TdApi.AuthorizationStateLoggingOut.CONSTRUCTOR -> TelegramAuthorizationState.LOGGING_OUT
+            TdApi.AuthorizationStateClosing.CONSTRUCTOR -> TelegramAuthorizationState.CLOSING
+            TdApi.AuthorizationStateClosed.CONSTRUCTOR -> TelegramAuthorizationState.CLOSED
+            else -> TelegramAuthorizationState.UNKNOWN
         }
     }
 
-    fun setAuthParamRequestHandler(authParamRequestListener: AuthParamRequestListener): AuthParamRequestHandler {
-        val authParamRequestHandler = AuthParamRequestHandler(authParamRequestListener)
-        this.authParamRequestHandler = authParamRequestHandler
-        return authParamRequestHandler
+    fun setTelegramAuthorizationRequestHandler(telegramAuthorizationRequestListener: TelegramAuthorizationRequestListener): TelegramAuthorizationRequestHandler {
+        val handler = TelegramAuthorizationRequestHandler(telegramAuthorizationRequestListener)
+        this.telegramAuthorizationRequestHandler = handler
+        return handler
     }
 
     init {
@@ -108,6 +169,42 @@ class TelegramHelper private constructor() {
         }
     }
 
+    fun requestChats() {
+        synchronized(chatList) {
+            if (!haveFullChatList && CHATS_LIMIT > chatList.size) {
+                // have enough chats in the chat list or chat list is too small
+                var offsetOrder = java.lang.Long.MAX_VALUE
+                var offsetChatId: Long = 0
+                if (!chatList.isEmpty()) {
+                    val last = chatList.last()
+                    offsetOrder = last.order
+                    offsetChatId = last.chatId
+                }
+                client?.send(TdApi.GetChats(offsetOrder, offsetChatId, CHATS_LIMIT - chatList.size), { obj ->
+                    when (obj.constructor) {
+                        TdApi.Error.CONSTRUCTOR -> {
+                            val error = obj as TdApi.Error
+                            listener?.onTelegramError(error.code, error.message)
+                        }
+                        TdApi.Chats.CONSTRUCTOR -> {
+                            val chatIds = (obj as TdApi.Chats).chatIds
+                            if (chatIds.isEmpty()) {
+                                synchronized(chatList) {
+                                    haveFullChatList = true
+                                }
+                            }
+                            // chats had already been received through updates, let's retry request
+                            requestChats()
+                        }
+                        else -> listener?.onTelegramError(-1, "Receive wrong response from TDLib: $obj")
+                    }
+                })
+                return
+            }
+        }
+        listener?.onTelegramChatsRead()
+    }
+
     fun logout(): Boolean {
         return if (libraryLoaded) {
             isHaveAuthorization = false
@@ -129,7 +226,7 @@ class TelegramHelper private constructor() {
     }
 
     private fun onAuthorizationStateUpdated(authorizationState: AuthorizationState?) {
-        val prevAuthState = getAuthState()
+        val prevAuthState = getTelegramAuthorizationState()
         if (authorizationState != null) {
             this.authorizationState = authorizationState
         }
@@ -156,15 +253,15 @@ class TelegramHelper private constructor() {
             }
             TdApi.AuthorizationStateWaitPhoneNumber.CONSTRUCTOR -> {
                 log.info("Request phone number")
-                authParamRequestHandler?.authParamRequestListener?.onRequestAuthParam(PHONE_NUMBER)
+                telegramAuthorizationRequestHandler?.telegramAuthorizationRequestListener?.onRequestTelegramAuthenticationParameter(PHONE_NUMBER)
             }
             TdApi.AuthorizationStateWaitCode.CONSTRUCTOR -> {
                 log.info("Request code")
-                authParamRequestHandler?.authParamRequestListener?.onRequestAuthParam(CODE)
+                telegramAuthorizationRequestHandler?.telegramAuthorizationRequestListener?.onRequestTelegramAuthenticationParameter(CODE)
             }
             TdApi.AuthorizationStateWaitPassword.CONSTRUCTOR -> {
                 log.info("Request password")
-                authParamRequestHandler?.authParamRequestListener?.onRequestAuthParam(PASSWORD)
+                telegramAuthorizationRequestHandler?.telegramAuthorizationRequestListener?.onRequestTelegramAuthenticationParameter(PASSWORD)
             }
             TdApi.AuthorizationStateReady.CONSTRUCTOR -> {
                 isHaveAuthorization = true
@@ -183,11 +280,11 @@ class TelegramHelper private constructor() {
             }
             else -> log.error("Unsupported authorization state: " + this.authorizationState!!)
         }
-        val newAuthState = getAuthState()
+        val newAuthState = getTelegramAuthorizationState()
         listener?.onTelegramStatusChanged(prevAuthState, newAuthState)
     }
 
-    private class OrderedChat internal constructor(internal val order: Long, internal val chatId: Long) : Comparable<OrderedChat> {
+    class OrderedChat internal constructor(internal val order: Long, internal val chatId: Long) : Comparable<OrderedChat> {
 
         override fun compareTo(other: OrderedChat): Int {
             if (this.order != other.order) {
@@ -257,6 +354,9 @@ class TelegramHelper private constructor() {
                         chat.order = 0
                         setChatOrder(chat, order)
                     }
+                    CancellableAsyncTask.run("onTelegramChatsRead", 100, {
+                        listener?.onTelegramChatsRead()
+                    })
                 }
                 TdApi.UpdateChatTitle.CONSTRUCTOR -> {
                     val updateChat = obj as TdApi.UpdateChatTitle
@@ -371,53 +471,13 @@ class TelegramHelper private constructor() {
                 TdApi.Error.CONSTRUCTOR -> {
                     log.error("Receive an error: $obj")
                     val errorObj = obj as TdApi.Error
-                    authParamRequestHandler?.authParamRequestListener?.onAuthRequestError(errorObj.code, errorObj.message)
+                    telegramAuthorizationRequestHandler?.telegramAuthorizationRequestListener?.onTelegramAuthorizationRequestError(errorObj.code, errorObj.message)
                     onAuthorizationStateUpdated(null) // repeat last action
                 }
                 TdApi.Ok.CONSTRUCTOR -> {
                 }
                 else -> log.error("Receive wrong response from TDLib: $obj")
             }// result is already received through UpdateAuthorizationState, nothing to do
-        }
-    }
-
-    companion object {
-        private val log = PlatformUtil.getLog(TelegramHelper::class.java)
-
-        private var helper: TelegramHelper? = null
-
-        private val users = ConcurrentHashMap<Int, TdApi.User>()
-        private val basicGroups = ConcurrentHashMap<Int, TdApi.BasicGroup>()
-        private val supergroups = ConcurrentHashMap<Int, TdApi.Supergroup>()
-        private val secretChats = ConcurrentHashMap<Int, TdApi.SecretChat>()
-
-        private val chats = ConcurrentHashMap<Long, TdApi.Chat>()
-        private val chatList = TreeSet<OrderedChat>()
-
-        private val usersFullInfo = ConcurrentHashMap<Int, TdApi.UserFullInfo>()
-        private val basicGroupsFullInfo = ConcurrentHashMap<Int, TdApi.BasicGroupFullInfo>()
-        private val supergroupsFullInfo = ConcurrentHashMap<Int, TdApi.SupergroupFullInfo>()
-
-        val instance: TelegramHelper
-            get() {
-                if (helper == null) {
-                    helper = TelegramHelper()
-                }
-                return helper!!
-            }
-
-        private fun setChatOrder(chat: TdApi.Chat, order: Long) {
-            synchronized(chatList) {
-                if (chat.order != 0L) {
-                    chatList.remove(OrderedChat(chat.order, chat.id))
-                }
-
-                chat.order = order
-
-                if (chat.order != 0L) {
-                    chatList.add(OrderedChat(chat.order, chat.id))
-                }
-            }
         }
     }
 }

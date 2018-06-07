@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="content_padding_half">8dp</dimen>
+    <dimen name="content_padding_standard">16dp</dimen>
+    <dimen name="progress_bar_size_small">32dp</dimen>
+    <dimen name="dialog_title_text_size">22sp</dimen>
+    <dimen name="dialog_padding_vertical">24dp</dimen>
+    <dimen name="dialog_padding_horizontal">48dp</dimen>
+    <dimen name="list_item_height_min">48dp</dimen>
+</resources>

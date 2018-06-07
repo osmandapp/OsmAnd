@@ -6,6 +6,9 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+
+        <item name="bg_color">@color/bg_color_light</item>
+        <item name="icon_color">@color/icon_color_light</item>
     </style>
 
     <style name="AppTheme.NoActionbar">

@@ -1,4 +1,4 @@
-package net.osmand.telegram;
+package net.osmand.telegram.utils;
 
 import org.apache.commons.logging.Log;
 

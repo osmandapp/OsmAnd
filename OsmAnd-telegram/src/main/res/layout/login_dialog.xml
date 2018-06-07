@@ -4,10 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
-    android:paddingBottom="24dp"
-    android:paddingLeft="48dp"
-    android:paddingRight="48dp"
-    android:paddingTop="24dp">
+    android:paddingBottom="@dimen/dialog_padding_vertical"
+    android:paddingLeft="@dimen/dialog_padding_horizontal"
+    android:paddingRight="@dimen/dialog_padding_horizontal"
+    android:paddingTop="@dimen/dialog_padding_vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,7 +20,7 @@
             android:layout_weight="0.2"
             android:gravity="center"
             android:text="@string/login_to_telegram"
-            android:textSize="22sp"
+            android:textSize="@dimen/dialog_title_text_size"
             android:textStyle="bold" />
 
         <LinearLayout
@@ -106,8 +106,8 @@
                 android:visibility="visible">
 
                 <ProgressBar
-                    android:layout_width="32dp"
-                    android:layout_height="32dp" />
+                    android:layout_width="@dimen/progress_bar_size_small"
+                    android:layout_height="@dimen/progress_bar_size_small" />
 
             </LinearLayout>
 
