@@ -133,6 +133,7 @@ public class TrackPointFragment extends OsmandExpandableListFragment implements 
 				GpxDisplayItemType.TRACK_POINTS, GpxDisplayItemType.TRACK_ROUTE_POINTS);
 		fragmentAdapter.setShowMapOnly(true);
 		fragmentAdapter.setTrackBitmapSelectionSupported(false);
+		fragmentAdapter.setShowDescriptionCard(true);
 		fragmentAdapter.onCreateView(mainView);
 
 		setContent(listView);

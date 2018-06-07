@@ -172,4 +172,10 @@
 		android:visibility="gone"
 		tools:visibility="visible"/>
 
+	<include
+		android:id="@+id/list_item_divider"
+		layout="@layout/list_item_divider"
+		android:visibility="gone"
+		tools:visibility="visible"/>
+
 </LinearLayout>
