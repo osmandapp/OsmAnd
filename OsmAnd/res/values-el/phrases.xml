@@ -2455,4 +2455,206 @@
 	<string name="poi_historic_period_iron_age">Ιστορική περίοδος: εποχή σιδήρου</string>
 	<string name="poi_historic_period_roman_republic">Ιστορική περίοδος: ρωμαϊκή δημοκρατία (508 π.Χ. - 27 π.Χ.)</string>
 	<string name="poi_historic_period_hellenistic_greece">Ιστορική περίοδος: ελληνιστική Ελλάδα</string>
+	<string name="poi_historic_period_new_kingdom">Ιστορική περίοδος: νέο βασίλειο (1550 - 1069 π.Χ.)</string>
+	<string name="poi_historic_period_middle_kingdom">Ιστορική περίοδος: μεσαίο βασίλειο (2055 – 1650 π.Χ.)</string>
+	<string name="poi_historic_period_predynastic_egypt">Ιστορική περίοδος: προδυναστική Αίγυπτος</string>
+	<string name="poi_historic_period_early_dynastic_period">Ιστορική περίοδος: πρώιμη δυναστική περίοδος (3100 – 2686 π.Χ.)</string>
+	<string name="poi_historic_period_old_kingdom">Ιστορική περίοδος: παλιό βασίλειο (2686 – 2181 π.Χ.)</string>
+	<string name="poi_historic_period_first_intermediate_period">Ιστορική περίοδος: πρώτη ενδιάμεση περίοδος (2181 – 2055 π.Χ.)</string>
+	<string name="poi_historic_period_second_intermediate_period">Ιστορική περίοδος: δεύτερη ενδιάμεση περίοδος (1650 – 1550 π.Χ.)</string>
+	<string name="poi_historic_period_third_intermediate_period">Ιστορική περίοδος: τρίτη ενδιάμεση περίοδος (1069 – 664 π.Χ.)</string>
+	<string name="poi_historic_period_first_persian_period">Ιστορική περίοδος: πρώτη περσική περίοδος</string>
+	<string name="poi_historic_period_late_period">Ιστορική περίοδος: τελευταία περίοδος (664 – 332 π.Χ.)</string>
+	<string name="poi_historic_period_second_persian_period">Ιστορική περίοδος: δεύτερη περσική περίοδος</string>
+	<string name="poi_historic_period_alexander_the_great">Ιστορική περίοδος: Αλέξανδρος ο Μέγας</string>
+	<string name="poi_historic_period_ptolemaic_egypt">Ιστορική περίοδος: πτολεμαϊκή αιγυπτιακή (305 π.Χ. – 30 π.Χ.)</string>
+	<string name="poi_historic_period_christian_egypt">Ιστορική περίοδος: χριστιανική αιγυπτιακή</string>
+	<string name="poi_historic_period_byzantine_egypt">Ιστορική περίοδος: βυζαντινή αιγυπτιακή (30 π.Χ. – 641 μ.Χ.)</string>
+	<string name="poi_historic_period_persian_occupation">Ιστορική περίοδος: περσική κατοχή</string>
+	<string name="poi_historic_period_greek_dark_ages">Ιστορική περίοδος: Ελληνικός μεσαίωνας (1100 – 800 π.Χ.)</string>
+	<string name="poi_historic_period_roman_greece">Ιστορική περίοδος: Ρωμαϊκή Ελλάδα (146 π.Χ. – 330 μ.Χ.)</string>
+	<string name="poi_historic_period_roman_kingdom">Ιστορική περίοδος: Ρωμαϊκό βασίλειο (753 π.Χ. – 509 π.Χ.)</string>
+	<string name="poi_historic_period_dominate">Ιστορική περίοδος: κυριαρχία (285 μ.Χ. – 476 μ.Χ.)</string>
+	<string name="poi_historic_period_villager">Ιστορική περίοδος: χωριάτικη (εποχή I, II, 1580 π.Χ. – 133 μ.Χ.)</string>
+	<string name="poi_historic_period_urban">Ιστορική περίοδος: αστική (εποχή III, 133 AD – 374 AD)</string>
+	<string name="poi_historic_period_classical">Ιστορική περίοδος: κλασική (εποχή IV, 374 π.Χ. – 900 π.Χ.)</string>
+	<string name="poi_historic_period_imperial">Ιστορική περίοδος: αυτοκρατορική (εποχή V, 900 π.Χ. – 1200 π.Χ.)</string>
+
+	<string name="poi_historic_era_paleolithic">Ιστορική εποχή: παλαιολιθική (2,6 εκατομμύρια χρόνια – 10000 πριν το σήμερα)</string>
+	<string name="poi_historic_era_mesolithic">Ιστορική εποχή: μεσολιθική</string>
+	<string name="poi_historic_era_neolithic">Ιστορική εποχή: νεολιθική</string>
+	<string name="poi_historic_era_chalcolithic">Ιστορική εποχή: χαλκολιθική (4η–3η χιλιετία π.Χ.)</string>
+
+	<string name="poi_historic_stone">Ιστορική πέτρα</string>
+	<string name="poi_stone_type_conciliation_cross">Τύπος: σταυρός συμφιλίωσης</string>
+	<string name="poi_stone_type_coat_of_arms">Τύπος: οικόσημο</string>
+
+	<string name="poi_material_wood">Υλικό: ξύλο</string>
+	<string name="poi_material_metal">Υλικό: μέταλλο</string>
+	<string name="poi_material_reinforced_concrete">Υλικό: ενισχυμένο σκυρόδεμα</string>
+	<string name="poi_material_concrete">Υλικό: σκυρόδεμα</string>
+	<string name="poi_material_steel">Υλικό: χάλυβας</string>
+	<string name="poi_material_stone">Υλικό: πέτρα</string>
+	<string name="poi_material_masonry">Υλικό: τοιχοποιία</string>
+	<string name="poi_material_brick">Υλικό: τούβλο</string>
+	<string name="poi_material_plastic">Υλικό: πλαστικό</string>
+	<string name="poi_material_sandstone">Υλικό: ψαμμίτης</string>
+	<string name="poi_material_granite_stone">Υλικό: πέτρα γρανίτη</string>
+	<string name="poi_material_metal_wood">Υλικό: μέταλλο, ξύλο</string>
+	<string name="poi_material_glass">Υλικό: γυαλί</string>
+	<string name="poi_material_bronze">Υλικό: ορείχαλκος</string>
+	<string name="poi_material_earth">Υλικό: χώμα</string>
+	<string name="poi_material_composite">Υλικό: σύνθετο</string>
+	<string name="poi_material_limestone">Υλικό: ασβεστόλιθος</string>
+	<string name="poi_material_marble">Υλικό: μάρμαρο</string>
+	<string name="poi_material_aluminium">Υλικό: αλουμίνιο</string>
+
+	<string name="poi_site_type_megalith">Μεγάλιθος</string>
+	<string name="poi_site_type_tumulus">Τύμβος</string>
+	<string name="poi_site_type_fortification">Οχύρωση</string>
+	<string name="poi_site_type_settlement">Οικισμός</string>
+	<string name="poi_site_type_city">Πόλη</string>
+	<string name="poi_site_type_hut_circle">Κυκλική καλύβα</string>
+	<string name="poi_site_type_necropolis">Νεκρόπολη</string>
+	<string name="poi_site_type_petroglyph">Πετρόγλυφο</string>
+	<string name="poi_site_type_earthwork">Χωματουργικά</string>
+	<string name="poi_megalith_type_menhir">Τύπος μεγαλίθου: μενίρ</string>
+	<string name="poi_megalith_type_dolmen">Τύπος μεγαλίθου: ντολμέν</string>
+	<string name="poi_megalith_type_nuraghe">Τύπος μεγαλίθου: νουράγκε</string>
+	<string name="poi_megalith_type_stone_circle">Τύπος μεγαλίθου: πέτρινος κύκλος</string>
+	<string name="poi_megalith_type_passage_grave">Τύπος μεγαλίθου: τάφος με δίοδο</string>
+	<string name="poi_fortification_type_hill_fort">Τύπος οχύρωσης: οχυρός λόφος</string>
+	<string name="poi_fortification_type_limes">Τύπος οχύρωσης: λίμες (σύνορο)</string>
+	<string name="poi_fortification_type_sconce">Τύπος οχύρωσης: μικρό οχυρό</string>
+	<string name="poi_fortification_type_ring_ditch">Τύπος οχύρωσης: κυκλική τάφρος</string>
+
+	<string name="poi_pa">Πα (οχυρωμένος οικισμός των μαόρι)</string>
+
+	<string name="poi_historic_farm">Ιστορικό αγρόκτημα</string>
+	<string name="poi_historic_railway_station">Ιστορικός σταθμός σιδηροδρόμου</string>
+
+	<string name="poi_historic_threshing_floor">Ιστορικό αλώνι</string>
+	<string name="poi_historic_gallows">Ιστορικές αγχόνες</string>
+	<string name="poi_historic_railway">Ιστορικός σιδηρόδρομος</string>
+
+	<string name="poi_square">Πλατεία</string>
+	<string name="poi_artist_name">Καλλιτέχνης</string>
+	<string name="poi_sculptor">Γλύπτης</string>
+
+	<string name="poi_building_type_church">Τύπος οικοδομής: εκκλησία</string>
+	<string name="poi_building_type_chapel">Τύπος οικοδομής: παρεκκλήσι</string>
+	<string name="poi_building_type_mosque">Τύπος οικοδομής: τέμενος</string>
+	<string name="poi_building_type_temple">Τύπος οικοδομής: ναός</string>
+	<string name="poi_building_type_cathedral">Τύπος οικοδομής: καθεδρικός</string>
+	<string name="poi_building_type_monastery">Τύπος οικοδομής: μοναστήρι</string>
+	<string name="poi_building_type_basilica">Τύπος οικοδομής: βασιλική</string>
+	<string name="poi_building_type_synagogue">Τύπος οικοδομής: συναγωγή</string>
+	<string name="poi_building_type_shrine">Τύπος οικοδομής: μικρό παρεκκλήσι</string>
+
+	<string name="poi_cross">Σταυρός</string>
+	<string name="poi_summit_cross">Σταυρός κορυφής: ναι</string>
+
+	<string name="poi_prison_camp">Πρώην φυλακή</string>
+	<string name="poi_concentration_camp">Τύπος: στρατόπεδο συγκέντρωσης</string>
+	<string name="poi_pow_camp">Τύπος: στρατόπεδο αιχμαλώτων πολέμου</string>
+	<string name="poi_labor_camp">Τύπος: στρατόπεδο εργασίας</string>
+	<string name="poi_concentration_camp_nazism">Τύπος: ναζί</string>
+	<string name="poi_concentration_camp_gulag">Τύπος: γκούλακ</string>
+
+	<string name="poi_temperature">Θερμοκρασία</string>
+	<string name="poi_bathing_yes">Κολύμβηση: ναι</string>
+	<string name="poi_bathing_no">Κολύμβηση: όχι</string>
+
+	<string name="poi_boat_storage">Χώρος σκαφών</string>
+
+	<string name="poi_conveying_yes">Κυλιόμενες σκάλες: ναι</string>
+
+	<string name="poi_bridge_ref">Αριθμός γέφυρας</string>
+	<string name="poi_tunnel_ref">Αριθμός σήραγγας</string>
+
+	<string name="poi_ref">Αριθμός</string>
+
+	<string name="poi_cargo_passengers">Επιβάτες</string>
+	<string name="poi_cargo_vehicle">Οχήματα</string>
+	<string name="poi_cargo_bicycle">Ποδήλατα</string>
+	<string name="poi_cargo_container">Περιέκτες</string>
+	<string name="poi_cargo_hgv">Όχημα μεταφοράς βαρέων φορτίων</string>
+
+	<string name="poi_fitness_station">Χώρος εκγύμνασης</string>
+
+	<string name="poi_hackerspace">Χώρος δημιουργικών ασχολιών</string>
+
+
+	<string name="poi_craft_electronics_repair">Επισκευές ηλεκτρονικών</string>
+	<string name="poi_fireworks">Κατάστημα πυροτεχνημάτων</string>
+
+	<string name="poi_aerialway_length">Μήκος</string>
+
+	<string name="poi_health_specialty_general_yes">Γενικός γιατρός</string>
+	<string name="poi_health_specialty_ophthalmology_yes">Οφθαλμολογία</string>
+	<string name="poi_health_specialty_gynaecology_yes">Γυναικολογία</string>
+	<string name="poi_health_specialty_internal_medicine_yes">Εσωτερική παθολογία</string>
+	<string name="poi_health_specialty_orthopaedics_yes">Ορθοπαιδική</string>
+	<string name="poi_health_specialty_otolaryngology_yes">Ωτορινολαρυλογία</string>
+	<string name="poi_health_specialty_paediatrics_yes">Παιδιατρική</string>
+	<string name="poi_health_specialty_paediatrics_no">Ειδικότητα υγείας: παιδιατρική: όχι</string>
+	<string name="poi_health_specialty_dermatology_yes">Δερματολογία</string>
+	<string name="poi_health_specialty_urology_yes">Ουρολογία</string>
+	<string name="poi_health_specialty_surgery_yes">Γενική χειρουργική</string>
+	<string name="poi_health_specialty_radiology_yes">Ραδιολογία</string>
+	<string name="poi_health_specialty_psychiatry_yes">Ψυχιατρική</string>
+	<string name="poi_health_specialty_neurology_yes">Νευρολογία</string>
+	<string name="poi_health_specialty_dermatovenereology_yes">Δερματολογία-Αφροδισιολογία</string>
+	<string name="poi_health_specialty_cardiology_yes">Καρδιολογία</string>
+	<string name="poi_health_specialty_trauma_yes">Τραυματολογία</string>
+	<string name="poi_health_specialty_biology_yes">Κλινική βιολογία</string>
+	<string name="poi_health_specialty_osteopathy_yes">Οστεοπαθητική</string>
+	<string name="poi_health_specialty_anaesthetics_yes">Αναισθησιολογία</string>
+	<string name="poi_health_specialty_pulmonology_yes">Πνευμονολογία</string>
+	<string name="poi_health_specialty_dental_oral_maxillo_facial_surgery_yes">Οδοντική, στοματική και γναθοπροσωπική χειρουργική</string>
+	<string name="poi_health_specialty_maternity_yes">Μαιευτική</string>
+	<string name="poi_health_specialty_emergency_medicine_yes">Ιατρική ατυχημάτων και επειγόντων</string>
+	<string name="poi_health_specialty_emergency_medicine_no">Ειδικότητα ιατρικής: ιατρική ατυχημάτων και επειγόντων: όχι</string>
+	<string name="poi_health_specialty_plastic_surgery_yes">Πλαστική χειρουργική</string>
+	<string name="poi_health_specialty_orthodontics_yes">Ορθοδοντική</string>
+	<string name="poi_health_specialty_physiotherapy_yes">Φυσιοθεραπεία</string>
+	<string name="poi_health_specialty_biochemistry_yes">Βιολογική χημεία</string>
+	<string name="poi_health_specialty_occupational_yes">Εργοθεραπεία</string>
+	<string name="poi_health_specialty_child_psychiatry_yes">Παιδοψυχιατρική</string>
+	<string name="poi_health_specialty_physiatry_yes">Φυσική ιατρική και αποκατάσταση</string>
+	<string name="poi_health_specialty_maxillofacial_surgery_yes">Γναθοπροσωπική χειρουργική</string>
+	<string name="poi_health_specialty_diagnostic_radiology_yes">Διαγνωστική ραδιολογία</string>
+	<string name="poi_health_specialty_gastroenterology_yes">Γαστροεντερολογία</string>
+	<string name="poi_health_specialty_dentistry_yes">Οδοντιατρική</string>
+	<string name="poi_health_specialty_nephrology_yes">Νεφρολογία (νεφρικές νόσοι)</string>
+	<string name="poi_health_specialty_neurosurgery_yes">Νευρολογική χειρουργική</string>
+	<string name="poi_health_specialty_neuropsychiatry_yes">Νευροψυχιατρική</string>
+	<string name="poi_health_specialty_endocrinology_yes">Ενδοκρινολογία</string>
+	<string name="poi_health_specialty_nuclear_medicine_yes">Πυρηνική ιατρική</string>
+	<string name="poi_health_specialty_pathology_yes">Παθολογική ανατομία</string>
+	<string name="poi_health_specialty_oncology_yes">Ογκολογία</string>
+	<string name="poi_health_specialty_tropical_medicine_yes">Τροπική ιατρική</string>
+	<string name="poi_health_specialty_tropical_medicine_no">Ειδικότητα ιατρικής: τροπική ιατρική: όχι</string>
+	<string name="poi_health_specialty_obstetrics_postnatal_yes">Μαιευτική (μεταγεννητική)</string>
+	<string name="poi_health_specialty_obstetrics_postnatal_no">Ειδικότητα ιατρικής: μαιευτική (μεταγεννητική): όχι</string>
+	<string name="poi_health_specialty_obstetrics_antenatal_yes">Μαιευτική (προγεννητική)</string>
+	<string name="poi_health_specialty_obstetrics_antenatal_no">Ιατρική ειδικότητα: μαιευτική (προγεννητική): όχι</string>
+	<string name="poi_health_specialty_social_paediatrics_yes">Κοινωνική παιδιατρική</string>
+	<string name="poi_health_specialty_social_paediatrics_no">Ειδικότητα ιατρικής: κοινωνική παιδιατρική: όχι</string>
+	<string name="poi_health_specialty_obstetrics_caesarean_section_yes">Μαιευτική (καισαρική τομή)</string>
+	<string name="poi_health_specialty_obstetrics_caesarean_section_no">Ειδικότητα ιατρικής: μαιευτική (καισαρική τομή): όχι</string>
+	<string name="poi_health_specialty_addiction_medicine_yes">Ιατρική εξάρτησης</string>
+	<string name="poi_health_specialty_optometry_yes">Οπτομετρία</string>
+	<string name="poi_health_specialty_clinical_pathology_yes">Κλινική παθολογία</string>
+	<string name="poi_health_specialty_speech_therapy_yes">Λογοθεραπεία</string>
+	<string name="poi_health_specialty_manual_therapy_yes">Χειροθεραπεία</string>
+	<string name="poi_health_specialty_sports_medicine_yes">Αθλητική ιατρική</string>
+	<string name="poi_health_specialty_podology_yes">Ποδολογία</string>
+	<string name="poi_health_specialty_adult_psychiatry_yes">Ψυχιατρική ενηλίκων</string>
+	<string name="poi_health_specialty_acupuncture_yes">Βελονισμός</string>
+	<string name="poi_health_specialty_homeopathy_yes">Ομοιοπαθητική</string>
+	<string name="poi_health_specialty_traditional_chinese_medicine_yes">Παραδοσιακή κινέζικη ιατρική</string>
+	<string name="poi_health_specialty_reiki_yes">Ρέικι</string>
+	<string name="poi_health_specialty_herbalism_yes">Βοτανοθεραπεία</string>
+	<string name="poi_health_specialty_chiropractic_yes">Χειροπρακτική</string>
 	</resources>

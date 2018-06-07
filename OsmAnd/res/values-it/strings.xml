@@ -2678,13 +2678,13 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="subscribe_email_error">Errore</string>
     <string name="subscribe_email_desc">Sottoscrivi la mailing list della nostra applicazione e otterrai ulteriori 3 download di mappe!</string>
     <string name="quick_action_auto_zoom">Zoom della mappa automatico acceso/spento</string>
-    <string name="quick_action_auto_zoom_desc">Toccando il pulsante azione accenderà o spegnerà lo zoom automatico della mappa in base alla tua velocità.</string>
+    <string name="quick_action_auto_zoom_desc">Toccando il pulsante azione si accende o spegne lo zoom automatico della mappa in base alla tua velocità.</string>
     <string name="quick_action_auto_zoom_on">Abilita lo zoom automatico della mappa</string>
     <string name="quick_action_auto_zoom_off">Disattiva lo zoom automatico della mappa</string>
     <string name="quick_action_add_destination">Aggiungi una destinazione</string>
     <string name="quick_action_replace_destination">Sostituisci la destinazione</string>
     <string name="quick_action_add_first_intermediate">Aggiungi il primo intermedio</string>
-    <string name="quick_action_add_destination_desc">Toccando il pulsante azione aggiungerai una destinazione nella posizione al centro dello schermo. La destinazione impostata in precedenza diverrà l\'ultimo punto intermedio.</string>
+    <string name="quick_action_add_destination_desc">Toccando il pulsante azione il centro dello schermo diviene la destinazione del percorso, la destinazione impostata in precedenza diverrà l\'ultimo punto intermedio.</string>
     <string name="quick_action_replace_destination_desc">Toccando il pulsante azione sostituirai la destinazione con la posizione al centro dello schermo.</string>
     <string name="quick_action_add_first_intermediate_desc">Toccando il pulsante azione aggiungerai un primo punto intermedio nella posizione al centro dello schermo.</string>
     <string name="no_overlay">Nessun stato sovrapposto</string>
