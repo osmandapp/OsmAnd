@@ -3158,4 +3158,5 @@
     <string name="unirs_render_descr">שינוי סגנון בררת המחדל להגברת הניגודיות של שבילי אופניים והולכי רגל. הצבעים שיהיו בשימוש תואמי Mapnik.</string>
     <string name="shared_string_gpx_files">קובצי GPX</string>
     <string name="get_osmand_live">ניתן להירשם ל־OsmAnd חי כדי לקבל גישה לכל התכונות: עדכוני מפה יומיים עם מספר בלתי מוגבל של הורדות, כל התוספים בתשלום ובחינם, ויקיפדיה, ויקימסע ועוד הרבה.</string>
+    <string name="quick_action_edit_actions">עריכת פעולות</string>
     </resources>
