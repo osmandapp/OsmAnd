@@ -3239,4 +3239,5 @@ représentant la zone : %1$s x %2$s</string>
     <string name="unirs_render_descr">Modification du style par défaut pour augmenter le contraste des voies piétonnes et cyclables. Utilise les couleurs héritées de Mapnik.</string>
     <string name="shared_string_gpx_files">Fichiers GPX</string>
     <string name="get_osmand_live">Souscrivez à OsmAnd Live et vous pourrez utiliser toutes les fonctionnalités : Mise à jour quotidienne des cartes (avec un nombre illimité de téléchargements), Greffons, Wikipédia, Guides de voyage et bien plus encore ...</string>
+    <string name="quick_action_edit_actions">Modifier les actions</string>
     </resources>

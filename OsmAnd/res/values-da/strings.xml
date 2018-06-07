@@ -1716,7 +1716,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="shared_string_ellipsis">…</string>
     <string name="shared_string_ok">OK</string>
     <string name="shared_string_cancel">Annuller</string>
-    <string name="shared_string_dismiss">Afvis</string>
+    <string name="shared_string_dismiss">Annuller</string>
     <string name="shared_string_yes">Ja</string>
     <string name="shared_string_no">Nej</string>
     <string name="shared_string_on">Til</string>
@@ -3267,4 +3267,5 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="unirs_render_descr">Ændring af standard stil for at øge kontrasten på fodgænger- og cykelveje. Bruger Mapniks oprindelige farver.</string>
     <string name="shared_string_gpx_files">GPX-filer</string>
     <string name="get_osmand_live">Abonner på OsmAnd Live og brug alle funktioner: daglige opdateringer af kort, alle gratis og betalte udvidelser, Wikipedia, Wikivoyage og meget mere.</string>
+    <string name="quick_action_edit_actions">Rediger handlinger</string>
     </resources>

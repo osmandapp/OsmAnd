@@ -2657,4 +2657,37 @@
 	<string name="poi_health_specialty_reiki_yes">Ρέικι</string>
 	<string name="poi_health_specialty_herbalism_yes">Βοτανοθεραπεία</string>
 	<string name="poi_health_specialty_chiropractic_yes">Χειροπρακτική</string>
+	<string name="poi_health_specialty_naturopathy_yes">Φυσιοπαθητική</string>
+	<string name="poi_health_specialty_depth_psychology_yes">Ψυχολογία βάθους</string>
+	<string name="poi_health_specialty_behavior_yes">Συμπεριφορά</string>
+	<string name="poi_health_specialty_palliative_medicine_yes">Παρηγορητική ιατρική</string>
+
+	<string name="poi_building_type_pyramid">Τύπος οικοδομής: πυραμίδα</string>
+
+	<string name="poi_fitness_centre">Γυμναστήριο</string>
+	<string name="poi_fitness">Φυσική κατάσταση</string>
+
+	<string name="poi_billiards">Μπιλιάρδο</string>
+
+	<string name="poi_microwave_oven_yes">Φούρνος μικροκυμάτων: ναι</string>
+	<string name="poi_microwave_oven_no">Φούρνος μικροκυμάτων: όχι</string>
+	<string name="poi_water_heater_yes">Θερμαντήρας νερού: ναι</string>
+	<string name="poi_water_heater_no">Θερμαντήρας νερού: όχι</string>
+
+	<string name="poi_parking_surface">Τύπος: επιφανειακός</string>
+	<string name="poi_parking_garage_boxes">Ατομικός χώρος στάθμευσης</string>
+	<string name="poi_parking_carports">Στέγαστρο οχημάτων</string>
+
+	<string name="poi_dojo">Ντότζο</string>
+
+	<string name="poi_gaelic_games">Γαελικά παιχνίδια</string>
+	<string name="poi_running">Δρόμος</string>
+	<string name="poi_netball">Νετμπολ</string>
+	<string name="poi_karting">Αγώνες καρτ</string>
+	<string name="poi_badminton">Αντιπτέριση (μπάντμιντον)</string>
+	<string name="poi_judo">Τζούντο</string>
+	<string name="poi_disc_golf">Ντισκ γκολφ</string>
+	<string name="poi_futsal">Ποδόσφαιρο σάλας</string>
+	<string name="poi_rc_car">Ραδιοελεγχόμενοι αγώνες αυτοκινήτων</string>
+	<string name="poi_squash">Σκουός</string>
 	</resources>
