@@ -3059,4 +3059,5 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="map_widget_intermediate_time">Prechodný čas</string>
     <string name="shared_string_gpx_files">Súbory GPX</string>
     <string name="get_osmand_live">Získajte OsmAnd Live pre odomknutie všetkých funkcií: Denné aktualizácie máp s neobmedzeným počtom stiahnutí, všetky platené moduly, Wikipedia, Wikivoyage a mnoho ďalšieho.</string>
+    <string name="quick_action_edit_actions">Upraviť akcie</string>
     </resources>
