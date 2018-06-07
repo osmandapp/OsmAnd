@@ -3072,4 +3072,5 @@ Lon %2$s</string>
     <string name="unirs_render_descr">Modificación del estilo predefinido para un mayor contraste en los caminos peatonales y para bicicletas. Usa los colores clásicos de Mapnik.</string>
     <string name="shared_string_gpx_files">Archivos GPX</string>
     <string name="get_osmand_live">Obtén «OsmAnd Live» para desbloquear todas las características: Actualizaciones diarias de mapas con descargas ilimitadas, todos los complementos gratuitos y de pago, artículos de Wikipedia, Wikiviajes y mucho más.</string>
+    <string name="quick_action_edit_actions">Editar acciones</string>
     </resources>
