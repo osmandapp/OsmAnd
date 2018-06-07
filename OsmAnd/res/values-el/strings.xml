@@ -3157,4 +3157,5 @@
     <string name="unirs_render_descr">Τροποποίηση της τυπικής μορφής για αύξηση της αντίθεσης των δρόμων πεζοπορίας και ποδηλάτου. Χρήση χρωμάτων παλιών Mapnik.</string>
     <string name="shared_string_gpx_files">Αρχεία GPX</string>
     <string name="get_osmand_live">Εγγραφείτε στο OsmAnd Live για να ξεκλειδώσετε όλα τα χαρακτηριστικά: Ημερήσιες ενημερώσεις χαρτών με απεριόριστες λήψεις, όλα πληρωμένα και χωρίς πρόσθετα, βικιπαίδεια, βικιταξίδια και πολλά άλλα.</string>
+    <string name="quick_action_edit_actions">Επεξεργασία ενεργειών</string>
     </resources>
