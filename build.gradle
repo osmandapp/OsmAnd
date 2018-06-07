@@ -28,11 +28,11 @@ allprojects {
                 artifact "ivy/[organisation]/[module]/[revision]/[artifact]-[revision].[ext]"
             }
         }
-        mavenCentral()
-        jcenter()
         maven {
             url "https://maven.google.com"
         }
+        mavenCentral()
+        jcenter()
         maven {
             url "https://jitpack.io"
         }
