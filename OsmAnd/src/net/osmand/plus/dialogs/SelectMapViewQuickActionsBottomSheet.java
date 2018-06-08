@@ -179,7 +179,7 @@ public class SelectMapViewQuickActionsBottomSheet extends MenuBottomSheetDialogF
 			List<String> stylesList = mapStyleAction.getFilteredStyles();
 			for (String entry : stylesList) {
 				boolean selected = entry.equals(selectedItem);
-				createItemRow(selected, counter, entry, entry);
+				createItemRow(selected, counter, mapStyleAction.getTranslatedItemName(context, entry), entry);
 				counter++;
 			}
 		} else if (action instanceof SwitchableAction) {
