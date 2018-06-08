@@ -109,7 +109,8 @@ public class MapSourceAction extends SwitchableAction<Pair<String, String>> {
 			settings.MAP_ONLINE_DATA.set(true);
 			activity.getMapLayers().updateMapSource(activity.getMapView(), settings.MAP_TILE_SOURCES);
 		}
-		Toast.makeText(activity, activity.getString(R.string.quick_action_map_source_switch, getTranslatedItemName(activity, params)), Toast.LENGTH_SHORT).show();
+		Toast.makeText(activity, activity.getString(R.string.quick_action_map_source_switch,
+				getTranslatedItemName(activity, params)), Toast.LENGTH_SHORT).show();
 	}
 
 	@Override

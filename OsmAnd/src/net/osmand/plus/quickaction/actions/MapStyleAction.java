@@ -70,7 +70,8 @@ public class MapStyleAction extends SwitchableAction<String> {
 			app.getRendererRegistry().setCurrentSelectedRender(loaded);
 			ConfigureMapMenu.refreshMapComplete(activity);
 
-			Toast.makeText(activity, activity.getString(R.string.quick_action_map_style_switch, getTranslatedItemName(activity,params)), Toast.LENGTH_SHORT).show();
+			Toast.makeText(activity, activity.getString(R.string.quick_action_map_style_switch,
+					getTranslatedItemName(activity, params)), Toast.LENGTH_SHORT).show();
 		} else {
 			Toast.makeText(activity, R.string.renderer_load_exception, Toast.LENGTH_SHORT).show();
 		}

@@ -118,7 +118,8 @@ public class MapOverlayAction extends SwitchableAction<Pair<String, String>> {
 				settings.MAP_OVERLAY_PREVIOUS.set(null);
 			}
 			plugin.updateMapLayers(activity.getMapView(), settings.MAP_OVERLAY, activity.getMapLayers());
-			Toast.makeText(activity, activity.getString(R.string.quick_action_map_overlay_switch, params), Toast.LENGTH_SHORT).show();
+			Toast.makeText(activity, activity.getString(R.string.quick_action_map_overlay_switch,
+					getTranslatedItemName(activity, params)), Toast.LENGTH_SHORT).show();
 		}
 	}
 

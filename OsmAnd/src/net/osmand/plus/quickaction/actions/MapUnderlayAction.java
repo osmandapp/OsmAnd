@@ -121,7 +121,8 @@ public class MapUnderlayAction extends SwitchableAction<Pair<String, String>> {
 			hidePolygonsPref.set(hasUnderlay);
 
 			plugin.updateMapLayers(activity.getMapView(), settings.MAP_UNDERLAY, activity.getMapLayers());
-			Toast.makeText(activity, activity.getString(R.string.quick_action_map_underlay_switch, params), Toast.LENGTH_SHORT).show();
+			Toast.makeText(activity, activity.getString(R.string.quick_action_map_underlay_switch,
+					getTranslatedItemName(activity, params)), Toast.LENGTH_SHORT).show();
 		}
 	}
 
