@@ -1,5 +1,6 @@
 package net.osmand.plus.quickaction.actions;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.support.v4.util.Pair;
 import android.support.v7.app.AlertDialog;
@@ -69,7 +70,7 @@ public class MapOverlayAction extends SwitchableAction<Pair<String, String>> {
 	}
 
 	@Override
-	protected String getItemName(Pair<String, String> item) {
+	protected String getItemName(Pair<String, String> item, Context context) {
 		return item.second;
 	}
 
@@ -120,7 +121,16 @@ public class MapOverlayAction extends SwitchableAction<Pair<String, String>> {
 			Toast.makeText(activity, activity.getString(R.string.quick_action_map_overlay_switch, params), Toast.LENGTH_SHORT).show();
 		}
 	}
-	
+
+	@Override
+	public String getTranslatedItemName(Context context, String item) {
+		if (item.equals(KEY_NO_OVERLAY)) {
+			return context.getString(R.string.no_overlay);
+		} else {
+			return item;
+		}
+	}
+
 	@Override
 	protected int getAddBtnText() {
 		return R.string.quick_action_map_overlay_action;
