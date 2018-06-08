@@ -18,6 +18,7 @@ import android.widget.Toast;
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
+import net.osmand.data.TransportStop;
 import net.osmand.osm.PoiType;
 import net.osmand.osm.edit.Node;
 import net.osmand.plus.ContextMenuAdapter;
@@ -195,7 +196,8 @@ public class OsmEditingPlugin extends OsmandPlugin {
 				} else if (resId == R.string.context_menu_item_modify_note) {
 					modifyOsmNote(mapActivity, (OsmNotesPoint) selectedObj);
 				} else if (resId == R.string.poi_context_menu_modify) {
-					EditPoiDialogFragment.showEditInstance((Amenity) selectedObj, mapActivity);
+					EditPoiDialogFragment.showEditInstance(selectedObj instanceof TransportStop ?
+							((TransportStop) selectedObj).getAmenity() : (Amenity) selectedObj, mapActivity);
 				} else if (resId == R.string.poi_context_menu_modify_osm_change) {
 					final Node entity = ((OpenstreetmapPoint) selectedObj).getEntity();
 					EditPoiDialogFragment.createInstance(entity, false)
@@ -222,6 +224,18 @@ public class OsmEditingPlugin extends OsmandPlugin {
 					.setOrder(MODIFY_OSM_CHANGE_ITEM_ORDER)
 					.setListener(listener)
 					.createItem());
+		} else if (selectedObj instanceof TransportStop && ((TransportStop) selectedObj).getAmenity() != null) {
+			TransportStop transportStop = (TransportStop) selectedObj;
+			Amenity amenity = transportStop.getAmenity();
+			final PoiType poiType = amenity.getType().getPoiTypeByKeyName(amenity.getSubType());
+			isEditable = !amenity.getType().isWiki() && poiType != null && !poiType.isNotEditableOsm();
+			if (isEditable) {
+				adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.poi_context_menu_modify, mapActivity)
+						.setIcon(R.drawable.ic_action_edit_dark)
+						.setOrder(MODIFY_POI_ITEM_ORDER)
+						.setListener(listener)
+						.createItem());
+			}
 		} else {
 			adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.context_menu_item_create_poi, mapActivity)
 					.setIcon(R.drawable.ic_action_plus_dark)
