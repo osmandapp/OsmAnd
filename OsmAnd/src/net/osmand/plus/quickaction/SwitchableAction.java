@@ -62,7 +62,7 @@ public abstract class SwitchableAction<T> extends QuickAction {
 		final QuickActionItemTouchHelperCallback touchHelperCallback = new QuickActionItemTouchHelperCallback();
 		final ItemTouchHelper touchHelper = new ItemTouchHelper(touchHelperCallback);
 
-		final Adapter adapter = new Adapter(new QuickActionListFragment.OnStartDragListener() {
+		final Adapter adapter = new Adapter(activity, new QuickActionListFragment.OnStartDragListener() {
 			@Override
 			public void onStartDrag(RecyclerView.ViewHolder viewHolder) {
 				touchHelper.startDrag(viewHolder);
@@ -107,6 +107,8 @@ public abstract class SwitchableAction<T> extends QuickAction {
 
 	public abstract void executeWithParams(MapActivity activity, String params);
 	
+	public abstract String getTranslatedItemName(Context context, String item);
+	
 	protected void showChooseDialog(FragmentManager fm) {
 		SelectMapViewQuickActionsBottomSheet fragment = new SelectMapViewQuickActionsBottomSheet();
 		Bundle args = new Bundle();
@@ -119,8 +121,10 @@ public abstract class SwitchableAction<T> extends QuickAction {
 
 		private List<T> itemsList = new ArrayList<>();
 		private final QuickActionListFragment.OnStartDragListener onStartDragListener;
+		private Context context;
 
-		public Adapter(QuickActionListFragment.OnStartDragListener onStartDragListener) {
+		public Adapter(Context context, QuickActionListFragment.OnStartDragListener onStartDragListener) {
+			this.context = context;
 			this.onStartDragListener = onStartDragListener;
 			this.itemsList = new ArrayList<>();
 		}
@@ -135,7 +139,7 @@ public abstract class SwitchableAction<T> extends QuickAction {
 		public void onBindViewHolder(final Adapter.ItemHolder holder, final int position) {
 			final T item = itemsList.get(position);
 
-			holder.title.setText(getItemName(item));
+			holder.title.setText(getItemName(context, item));
 
 			holder.handleView.setOnTouchListener(new View.OnTouchListener() {
 				@Override
@@ -274,7 +278,7 @@ public abstract class SwitchableAction<T> extends QuickAction {
 
 	protected abstract void saveListToParams(List<T> list);
 
-	protected abstract String getItemName(T item);
+	protected abstract String getItemName(Context context, T item);
 
 	protected abstract
 	@StringRes

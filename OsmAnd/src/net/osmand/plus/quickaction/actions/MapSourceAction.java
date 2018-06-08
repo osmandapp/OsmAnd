@@ -1,5 +1,6 @@
 package net.osmand.plus.quickaction.actions;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.support.v4.util.Pair;
 import android.support.v7.app.AlertDialog;
@@ -108,7 +109,17 @@ public class MapSourceAction extends SwitchableAction<Pair<String, String>> {
 			settings.MAP_ONLINE_DATA.set(true);
 			activity.getMapLayers().updateMapSource(activity.getMapView(), settings.MAP_TILE_SOURCES);
 		}
-		Toast.makeText(activity, activity.getString(R.string.quick_action_map_source_switch, params), Toast.LENGTH_SHORT).show();
+		Toast.makeText(activity, activity.getString(R.string.quick_action_map_source_switch,
+				getTranslatedItemName(activity, params)), Toast.LENGTH_SHORT).show();
+	}
+
+	@Override
+	public String getTranslatedItemName(Context context, String item) {
+		if (item.equals(LAYER_OSM_VECTOR)) {
+			return context.getString(R.string.vector_data);
+		} else {
+			return item;
+		}
 	}
 	
 	@Override
@@ -178,7 +189,7 @@ public class MapSourceAction extends SwitchableAction<Pair<String, String>> {
 	}
 
 	@Override
-	protected String getItemName(Pair<String, String> item) {
+	protected String getItemName(Context context, Pair<String, String> item) {
 		return item.second;
 	}
 

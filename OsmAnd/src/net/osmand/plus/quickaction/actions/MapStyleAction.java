@@ -1,5 +1,6 @@
 package net.osmand.plus.quickaction.actions;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.SwitchCompat;
@@ -69,12 +70,20 @@ public class MapStyleAction extends SwitchableAction<String> {
 			app.getRendererRegistry().setCurrentSelectedRender(loaded);
 			ConfigureMapMenu.refreshMapComplete(activity);
 
-			Toast.makeText(activity, activity.getString(R.string.quick_action_map_style_switch, params), Toast.LENGTH_SHORT).show();
+			Toast.makeText(activity, activity.getString(R.string.quick_action_map_style_switch,
+					getTranslatedItemName(activity, params)), Toast.LENGTH_SHORT).show();
 		} else {
 			Toast.makeText(activity, R.string.renderer_load_exception, Toast.LENGTH_SHORT).show();
 		}
 	}
-	
+
+	@Override
+	public String getTranslatedItemName(Context context, String item) {
+		String translation = RendererRegistry.getTranslatedRendererName(context, item);
+		return translation != null ? translation
+				: item.replace('_', ' ').replace('-', ' ');
+	}
+
 	public List<String> getFilteredStyles() {
 
 		List<String> filtered = new ArrayList<>();
@@ -192,8 +201,12 @@ public class MapStyleAction extends SwitchableAction<String> {
 	}
 
 	@Override
-	protected String getItemName(String item) {
-		return item;
+	protected String getItemName(Context context, String item) {
+		if (context != null) {
+			return getTranslatedItemName(context, item);
+		} else {
+			return item;
+		}
 	}
 
 	@Override
