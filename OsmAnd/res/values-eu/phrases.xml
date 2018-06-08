@@ -3469,4 +3469,34 @@
 	<string name="poi_surface_tartan">Zirrikitona</string>
 	<string name="poi_glacier_type_outlet">Isurbidea</string>
 	<string name="poi_glacier_type_tidewater">Itsasaldi-ura</string>
+	<string name="poi_cuisine_fish_and_chips">Arrain eta patata frijituak</string>
+	<string name="poi_cuisine_noodle">Fideoak</string>
+	<string name="poi_cuisine_beef_bowl">Gyudon</string>
+	<string name="poi_cuisine_curry">Curry-a</string>
+	<string name="poi_cuisine_pancake">Krepeak</string>
+	<string name="poi_cuisine_fast_food">Janari lasterra</string>
+	<string name="poi_cuisine_soba">Soba (fideo japoniarrak)</string>
+	<string name="poi_cuisine_hotdog">Saltxitxak</string>
+	<string name="poi_cuisine_deli">Delicatessen</string>
+	<string name="poi_cuisine_couscous">Couscous</string>
+	<string name="poi_cuisine_snack">Ahamena</string>
+	<string name="poi_cuisine_empanada">Enpanada</string>
+	<string name="poi_cuisine_crepes">Krepeak</string>
+	<string name="poi_cuisine_yakiniku">Yakiniku</string>
+	<string name="poi_cuisine_yakitori">Yakitori</string>
+	<string name="poi_cuisine_wings">Hegoak</string>
+	<string name="poi_cuisine_pita">Pita ogia</string>
+	<string name="poi_cuisine_fondue">Fondue</string>
+	<string name="poi_cuisine_baguette">Baguette</string>
+	<string name="poi_cuisine_pastel">Pastelak</string>
+	<string name="poi_cuisine_burrito">Burritoak</string>
+	<string name="poi_cuisine_teriyaki">Teriyaki</string>
+	<string name="poi_cuisine_shawarma">Shawarma</string>
+
+	<string name="poi_animal_keeping_type_paddock">"Mota:  Bazkalarrea"</string>
+	<string name="poi_tower_construction_freestanding">Eraikuntza: Independentea</string>
+	<string name="poi_tower_construction_dish">Eraikuntza: Parabolikoa</string>
+	<string name="poi_tower_construction_dome">Eraikuntza: Kupula</string>
+	<string name="poi_tower_construction_concealed">Eraikuntza: Ostendua</string>
+
 	</resources>
