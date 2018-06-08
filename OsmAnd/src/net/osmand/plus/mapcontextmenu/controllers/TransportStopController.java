@@ -171,7 +171,7 @@ public class TransportStopController extends MenuController {
 		if (amenity != null) {
 			AmenityMenuController.addTypeMenuItem(amenity, builder);
 		} else {
-			addMyLocationToPlainItems(latLon);
+			super.addPlainMenuItems(typeStr, pointDescription, latLon);
 		}
 	}
 }
