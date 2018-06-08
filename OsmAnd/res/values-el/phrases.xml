@@ -2741,4 +2741,25 @@
 	<string name="poi_nuclear_explosion_type_atmospheric_balloon">Τύπος έκρηξης: ατμοσφαιρική, μπαλόνι</string>
 	<string name="poi_nuclear_explosion_type_atmospheric_atmospheric_surface">Τύπος έκρηξης: ατμοσφαιρική, επιφανειακή</string>
 	<string name="poi_nuclear_explosion_type_atmospheric_water_surface_barge">Τύπος έκρηξης: ατμοσφαιρική, επιφανειακά ύδατα, φορτηγίδα</string>
+	<string name="poi_nuclear_explosion_type_underground">Τύπος έκρηξης: υπόγειος</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_rocket_or_missile">Τύπος έκρηξης: ατμοσφαιρικός, πύραυλος ή βλήμα</string>
+	<string name="poi_nuclear_explosion_type_space">Τύπος έκρηξης: διάστημα (ύψος πάνω από 80 χιλιόμετρα)</string>
+	<string name="poi_nuclear_explosion_type_underwater">Τύπος έκρηξης: υποβρύχιος</string>
+	<string name="poi_nuclear_explosion_date_utc">Ημερομηνία έκρηξης (UTC)</string>
+	<string name="poi_nuclear_explosion_shot_name_en">"Όνομα εκτόξευσης (en) "</string>
+	<string name="poi_nuclear_explosion_series">Σειρά εκρήξεων</string>
+	<string name="poi_nuclear_explosion_purpose_nuclear_weapons_related">Σκοπός έκρηξης: σχετικός με πυρηνικά όπλα</string>
+	<string name="poi_nuclear_explosion_purpose_weapons_effects">Σκοπός έκρηξης: επιπτώσεις όπλων</string>
+	<string name="poi_nuclear_explosion_purpose_safety_experiment">Σκοπός έκρηξης: πείραμα ασφαλείας</string>
+	<string name="poi_nuclear_explosion_purpose_research_for_peaceful_applications">Σκοπός έκρηξης: αναζήτηση ειρηνικών εφαρμογών</string>
+	<string name="poi_nuclear_explosion_purpose_fundamental_science">Σκοπός έκρηξης: βασική έρευνα</string>
+	<string name="poi_nuclear_explosion_purpose_industrial_application_cavity_excavation">Σκοπός έκρηξης: βιομηχανική εφαρμογή, εκσκαφή κοιλότητας</string>
+	<string name="poi_nuclear_explosion_purpose_industrial_application_seismic_sounding">Σκοπός έκρηξης: βιομηχανική εφαρμογή, σεισμική βυθομέτρηση</string>
+	<string name="poi_nuclear_explosion_purpose_industrial_application_oil_stimulation">Σκοπός έκρηξης: βιομηχανική εφαρμογή, διέγερση πετρελαίου</string>
+	<string name="poi_nuclear_explosion_purpose_industrial_application">Σκοπός έκρηξης: βιομηχανική εφαρμογή</string>
+	<string name="poi_nuclear_explosion_purpose_industrial_application_earth_moving">Σκοπός έκρηξης: βιομηχανική εφαρμογή, μετακίνηση εδάφους</string>
+	<string name="poi_nuclear_explosion_time_utc">Χρόνος έκρηξης (UTC)</string>
+	<string name="poi_nuclear_explosion_yield">Απόδοση έκρηξης</string>
+	<string name="poi_nuclear_explosion_hole">Οπή έκρηξης</string>
+	<string name="poi_nuclear_explosion_height_of_burst">Ύψος έκρηξης</string>
 	</resources>
