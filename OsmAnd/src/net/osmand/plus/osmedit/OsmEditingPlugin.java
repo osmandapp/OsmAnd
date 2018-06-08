@@ -207,8 +207,13 @@ public class OsmEditingPlugin extends OsmandPlugin {
 			}
 		};
 		boolean isEditable = false;
-		if (selectedObj instanceof Amenity) {
-			Amenity amenity = (Amenity) selectedObj;
+		if (selectedObj instanceof Amenity || (selectedObj instanceof TransportStop && ((TransportStop) selectedObj).getAmenity() != null)) {
+			Amenity amenity;
+			if (selectedObj instanceof Amenity) {
+				amenity = (Amenity) selectedObj;
+			} else {
+				amenity = ((TransportStop) selectedObj).getAmenity();
+			}
 			final PoiType poiType = amenity.getType().getPoiTypeByKeyName(amenity.getSubType());
 			isEditable = !amenity.getType().isWiki() && poiType !=null && !poiType.isNotEditableOsm();
 		}
@@ -224,18 +229,6 @@ public class OsmEditingPlugin extends OsmandPlugin {
 					.setOrder(MODIFY_OSM_CHANGE_ITEM_ORDER)
 					.setListener(listener)
 					.createItem());
-		} else if (selectedObj instanceof TransportStop && ((TransportStop) selectedObj).getAmenity() != null) {
-			TransportStop transportStop = (TransportStop) selectedObj;
-			Amenity amenity = transportStop.getAmenity();
-			final PoiType poiType = amenity.getType().getPoiTypeByKeyName(amenity.getSubType());
-			isEditable = !amenity.getType().isWiki() && poiType != null && !poiType.isNotEditableOsm();
-			if (isEditable) {
-				adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.poi_context_menu_modify, mapActivity)
-						.setIcon(R.drawable.ic_action_edit_dark)
-						.setOrder(MODIFY_POI_ITEM_ORDER)
-						.setListener(listener)
-						.createItem());
-			}
 		} else {
 			adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.context_menu_item_create_poi, mapActivity)
 					.setIcon(R.drawable.ic_action_plus_dark)
