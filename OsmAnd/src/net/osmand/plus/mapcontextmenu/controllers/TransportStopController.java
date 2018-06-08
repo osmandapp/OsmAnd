@@ -1,13 +1,15 @@
 package net.osmand.plus.mapcontextmenu.controllers;
 
+import net.osmand.data.Amenity;
+import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.data.TransportRoute;
 import net.osmand.data.TransportStop;
 import net.osmand.plus.R;
+import net.osmand.plus.mapcontextmenu.builders.TransportStopMenuBuilder;
 import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.resources.TransportIndexRepository;
 import net.osmand.plus.transport.TransportStopType;
@@ -29,8 +31,8 @@ public class TransportStopController extends MenuController {
 	private TransportStopType topType;
 
 	public TransportStopController(MapActivity mapActivity,
-								   PointDescription pointDescription, TransportStop transportStop) {
-		super(new MenuBuilder(mapActivity), pointDescription, mapActivity);
+	                               PointDescription pointDescription, TransportStop transportStop) {
+		super(new TransportStopMenuBuilder(mapActivity, transportStop), pointDescription, mapActivity);
 		this.transportStop = transportStop;
 		processRoutes();
 	}
@@ -157,4 +159,13 @@ public class TransportStopController extends MenuController {
 		return false;
 	}
 
+	@Override
+	public void addPlainMenuItems(String typeStr, PointDescription pointDescription, LatLon latLon) {
+		Amenity amenity = transportStop.getAmenity();
+		if (amenity != null) {
+			AmenityMenuController.addTypeMenuItem(amenity, builder);
+		} else {
+			super.addPlainMenuItems(typeStr, pointDescription, latLon);
+		}
+	}
 }

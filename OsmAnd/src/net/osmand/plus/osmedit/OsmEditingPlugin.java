@@ -18,6 +18,7 @@ import android.widget.Toast;
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
+import net.osmand.data.TransportStop;
 import net.osmand.osm.PoiType;
 import net.osmand.osm.edit.Node;
 import net.osmand.plus.ContextMenuAdapter;
@@ -195,7 +196,8 @@ public class OsmEditingPlugin extends OsmandPlugin {
 				} else if (resId == R.string.context_menu_item_modify_note) {
 					modifyOsmNote(mapActivity, (OsmNotesPoint) selectedObj);
 				} else if (resId == R.string.poi_context_menu_modify) {
-					EditPoiDialogFragment.showEditInstance((Amenity) selectedObj, mapActivity);
+					EditPoiDialogFragment.showEditInstance(selectedObj instanceof TransportStop ?
+							((TransportStop) selectedObj).getAmenity() : (Amenity) selectedObj, mapActivity);
 				} else if (resId == R.string.poi_context_menu_modify_osm_change) {
 					final Node entity = ((OpenstreetmapPoint) selectedObj).getEntity();
 					EditPoiDialogFragment.createInstance(entity, false)
@@ -205,8 +207,13 @@ public class OsmEditingPlugin extends OsmandPlugin {
 			}
 		};
 		boolean isEditable = false;
-		if (selectedObj instanceof Amenity) {
-			Amenity amenity = (Amenity) selectedObj;
+		if (selectedObj instanceof Amenity || (selectedObj instanceof TransportStop && ((TransportStop) selectedObj).getAmenity() != null)) {
+			Amenity amenity;
+			if (selectedObj instanceof Amenity) {
+				amenity = (Amenity) selectedObj;
+			} else {
+				amenity = ((TransportStop) selectedObj).getAmenity();
+			}
 			final PoiType poiType = amenity.getType().getPoiTypeByKeyName(amenity.getSubType());
 			isEditable = !amenity.getType().isWiki() && poiType !=null && !poiType.isNotEditableOsm();
 		}
