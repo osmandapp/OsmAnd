@@ -139,7 +139,7 @@ public abstract class SwitchableAction<T> extends QuickAction {
 		public void onBindViewHolder(final Adapter.ItemHolder holder, final int position) {
 			final T item = itemsList.get(position);
 
-			holder.title.setText(getItemName(item, context));
+			holder.title.setText(getItemName(context, item));
 
 			holder.handleView.setOnTouchListener(new View.OnTouchListener() {
 				@Override
@@ -278,7 +278,7 @@ public abstract class SwitchableAction<T> extends QuickAction {
 
 	protected abstract void saveListToParams(List<T> list);
 
-	protected abstract String getItemName(T item, Context context);
+	protected abstract String getItemName(Context context, T item);
 
 	protected abstract
 	@StringRes

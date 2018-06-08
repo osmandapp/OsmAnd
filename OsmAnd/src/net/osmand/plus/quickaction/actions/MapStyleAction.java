@@ -201,7 +201,7 @@ public class MapStyleAction extends SwitchableAction<String> {
 	}
 
 	@Override
-	protected String getItemName(String item, Context context) {
+	protected String getItemName(Context context, String item) {
 		if (context != null) {
 			return getTranslatedItemName(context, item);
 		} else {

@@ -70,7 +70,7 @@ public class MapUnderlayAction extends SwitchableAction<Pair<String, String>> {
 	}
 
 	@Override
-	protected String getItemName(Pair<String, String> item, Context context) {
+	protected String getItemName(Context context, Pair<String, String> item) {
 		return item.second;
 	}
 
