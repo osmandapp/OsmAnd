@@ -116,7 +116,6 @@ class MainActivity : AppCompatActivity(), TelegramListener {
             when (newTelegramAuthorizationState) {
                 TelegramAuthorizationState.READY -> {
                     updateChatsList()
-                    telegramHelper.requestChats()
                 }
                 TelegramAuthorizationState.CLOSED,
                 TelegramAuthorizationState.UNKNOWN -> {
@@ -128,6 +127,13 @@ class MainActivity : AppCompatActivity(), TelegramListener {
     }
 
     override fun onTelegramChatsRead() {
+        runOnUi {
+            removeNonexistingChatsFromSettings()
+            updateChatsList()
+        }
+    }
+
+    override fun onTelegramChatsChanged() {
         runOnUi {
             updateChatsList()
         }
@@ -142,6 +148,11 @@ class MainActivity : AppCompatActivity(), TelegramListener {
     override fun onSendLiveLicationError(code: Int, message: String) {
         log.error("Send live location error: $code - $message")
         app.isInternetConnectionAvailable(true)
+    }
+
+    private fun removeNonexistingChatsFromSettings() {
+        val presentChatTitles = telegramHelper.getChatTitles()
+        settings.removeNonexistingChats(presentChatTitles)
     }
 
     private fun updateChatsList() {
@@ -302,12 +313,12 @@ class MainActivity : AppCompatActivity(), TelegramListener {
         }
 
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-            val chatId = chats[position].id
-            holder.groupName?.text = chats[position].title
+            val chatTitle = chats[position].title
+            holder.groupName?.text = chatTitle
             holder.shareLocationSwitch?.setOnCheckedChangeListener(null)
-            holder.shareLocationSwitch?.isChecked = settings.isSharingLocationToChat(chatId)
+            holder.shareLocationSwitch?.isChecked = settings.isSharingLocationToChat(chatTitle)
             holder.shareLocationSwitch?.setOnCheckedChangeListener { view, isChecked ->
-                settings.shareLocationToChat(chatId, isChecked)
+                settings.shareLocationToChat(chatTitle, isChecked)
                 if (settings.hasAnyChatToShareLocation()) {
                     if (!AndroidUtils.isLocationPermissionAvailable(view.context)) {
                         requestLocationPermission()

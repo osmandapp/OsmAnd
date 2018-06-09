@@ -17,21 +17,9 @@ class TelegramHelper private constructor() {
     companion object {
         private val log = PlatformUtil.getLog(TelegramHelper::class.java)
         private const val CHATS_LIMIT = 100
+        private const val IGNORED_ERROR_CODE = 406
 
         private var helper: TelegramHelper? = null
-
-        private val users = ConcurrentHashMap<Int, TdApi.User>()
-        private val basicGroups = ConcurrentHashMap<Int, TdApi.BasicGroup>()
-        private val supergroups = ConcurrentHashMap<Int, TdApi.Supergroup>()
-        private val secretChats = ConcurrentHashMap<Int, TdApi.SecretChat>()
-
-        private val chats = ConcurrentHashMap<Long, TdApi.Chat>()
-        private val chatList = TreeSet<OrderedChat>()
-        private val chatLiveMessages = ConcurrentHashMap<Long, Long>()
-
-        private val usersFullInfo = ConcurrentHashMap<Int, TdApi.UserFullInfo>()
-        private val basicGroupsFullInfo = ConcurrentHashMap<Int, TdApi.BasicGroupFullInfo>()
-        private val supergroupsFullInfo = ConcurrentHashMap<Int, TdApi.SupergroupFullInfo>()
 
         val instance: TelegramHelper
             get() {
@@ -40,35 +28,37 @@ class TelegramHelper private constructor() {
                 }
                 return helper!!
             }
-
-        private fun setChatOrder(chat: TdApi.Chat, order: Long) {
-            synchronized(chatList) {
-                if (chat.order != 0L) {
-                    chatList.remove(OrderedChat(chat.order, chat.id))
-                }
-
-                chat.order = order
-
-                if (chat.order != 0L) {
-                    chatList.add(OrderedChat(chat.order, chat.id))
-                }
-            }
-        }
     }
+
+    private val users = ConcurrentHashMap<Int, TdApi.User>()
+    private val basicGroups = ConcurrentHashMap<Int, TdApi.BasicGroup>()
+    private val supergroups = ConcurrentHashMap<Int, TdApi.Supergroup>()
+    private val secretChats = ConcurrentHashMap<Int, TdApi.SecretChat>()
+
+    private val chats = ConcurrentHashMap<Long, TdApi.Chat>()
+    private val chatTitles = ConcurrentHashMap<String, Long>()
+    private val chatList = TreeSet<OrderedChat>()
+    private val chatLiveMessages = ConcurrentHashMap<Long, Long>()
+
+    private val usersFullInfo = ConcurrentHashMap<Int, TdApi.UserFullInfo>()
+    private val basicGroupsFullInfo = ConcurrentHashMap<Int, TdApi.BasicGroupFullInfo>()
+    private val supergroupsFullInfo = ConcurrentHashMap<Int, TdApi.SupergroupFullInfo>()
 
     var appDir: String? = null
     private var libraryLoaded = false
     private var telegramAuthorizationRequestHandler: TelegramAuthorizationRequestHandler? = null
 
     private var client: Client? = null
+
     private var haveFullChatList: Boolean = false
-    private var firstTimeSendingLiveLocation: Boolean = true
-    private var requestingLiveLocationMessages: Boolean = false
+    private var needRefreshActiveLiveLocationMessages: Boolean = true
+    private var requestingActiveLiveLocationMessages: Boolean = false
 
     private var authorizationState: AuthorizationState? = null
-    private var isHaveAuthorization = false
+    private var haveAuthorization = false
 
     private val defaultHandler = DefaultHandler()
+    private val liveLocationMessageUpdatesHandler = LiveLocationMessageUpdatesHandler()
 
     var listener: TelegramListener? = null
 
@@ -78,8 +68,19 @@ class TelegramHelper private constructor() {
         }
     }
 
+    fun getChatTitles(): List<String> {
+        return chatTitles.keys().toList()
+    }
+
     fun getChat(id: Long): TdApi.Chat? {
         return chats[id]
+    }
+
+    private fun updateChatTitles() {
+        chatTitles.clear()
+        for (chatEntry in chats.entries) {
+            chatTitles[chatEntry.value.title] = chatEntry.key
+        }
     }
 
     enum class TelegramAuthenticationParameterType {
@@ -105,6 +106,7 @@ class TelegramHelper private constructor() {
                                     newTelegramAuthorizationState: TelegramAuthorizationState)
 
         fun onTelegramChatsRead()
+        fun onTelegramChatsChanged()
         fun onTelegramError(code: Int, message: String)
         fun onSendLiveLicationError(code: Int, message: String)
     }
@@ -172,8 +174,12 @@ class TelegramHelper private constructor() {
         }
     }
 
-    fun requestChats() {
+    fun requestChats(reload: Boolean = false) {
         synchronized(chatList) {
+            if (reload) {
+                chatList.clear()
+                haveFullChatList = false
+            }
             if (!haveFullChatList && CHATS_LIMIT > chatList.size) {
                 // have enough chats in the chat list or chat list is too small
                 var offsetOrder = java.lang.Long.MAX_VALUE
@@ -187,7 +193,9 @@ class TelegramHelper private constructor() {
                     when (obj.constructor) {
                         TdApi.Error.CONSTRUCTOR -> {
                             val error = obj as TdApi.Error
-                            listener?.onTelegramError(error.code, error.message)
+                            if (error.code != IGNORED_ERROR_CODE) {
+                                listener?.onTelegramError(error.code, error.message)
+                            }
                         }
                         TdApi.Chats.CONSTRUCTOR -> {
                             val chatIds = (obj as TdApi.Chats).chatIds
@@ -205,6 +213,7 @@ class TelegramHelper private constructor() {
                 return
             }
         }
+        updateChatTitles()
         listener?.onTelegramChatsRead()
     }
 
@@ -214,29 +223,35 @@ class TelegramHelper private constructor() {
      * @latitude Latitude of the location
      * @longitude Longitude of the location
      */
-    fun sendLiveLocationMessage(chatIds: List<Long>, livePeriod: Int = 61, latitude: Double, longitude: Double) {
-        if (!requestingLiveLocationMessages) {
-            if (firstTimeSendingLiveLocation) {
+    fun sendLiveLocationMessage(chatTitles: List<String>, livePeriod: Int = 61, latitude: Double, longitude: Double): Boolean {
+        if (!requestingActiveLiveLocationMessages && haveAuthorization) {
+            if (needRefreshActiveLiveLocationMessages) {
                 getActiveLiveLocationMessages {
-                    sendLiveLocationImpl(chatIds, livePeriod, latitude, longitude)
+                    sendLiveLocationImpl(chatTitles, livePeriod, latitude, longitude)
                 }
-                firstTimeSendingLiveLocation = false
+                needRefreshActiveLiveLocationMessages = false
             } else {
-                sendLiveLocationImpl(chatIds, livePeriod, latitude, longitude)
+                sendLiveLocationImpl(chatTitles, livePeriod, latitude, longitude)
             }
+            return true
         }
+        return false
     }
 
     private fun getActiveLiveLocationMessages(onComplete: (() -> Unit)?) {
-        requestingLiveLocationMessages = true
+        requestingActiveLiveLocationMessages = true
         client?.send(TdApi.GetActiveLiveLocationMessages(), { obj ->
             when (obj.constructor) {
                 TdApi.Error.CONSTRUCTOR -> {
                     val error = obj as TdApi.Error
-                    listener?.onSendLiveLicationError(error.code, error.message)
+                    if (error.code != IGNORED_ERROR_CODE) {
+                        needRefreshActiveLiveLocationMessages = true
+                        listener?.onSendLiveLicationError(error.code, error.message)
+                    }
                 }
                 TdApi.Messages.CONSTRUCTOR -> {
                     val messages = (obj as TdApi.Messages).messages
+                    chatLiveMessages.clear()
                     if (messages.isNotEmpty()) {
                         for (msg in messages) {
                             val chatId = msg.chatId
@@ -247,24 +262,27 @@ class TelegramHelper private constructor() {
                 }
                 else -> listener?.onSendLiveLicationError(-1, "Receive wrong response from TDLib: $obj")
             }
-            requestingLiveLocationMessages = false
+            requestingActiveLiveLocationMessages = false
         })
     }
 
-    private fun sendLiveLocationImpl(chatIds: List<Long>, livePeriod: Int = 61, latitude: Double, longitude: Double) {
+    private fun sendLiveLocationImpl(chatTitles: List<String>, livePeriod: Int = 61, latitude: Double, longitude: Double) {
         val lp = livePeriod.coerceAtLeast(61)
         val location = TdApi.Location(latitude, longitude)
         val content = TdApi.InputMessageLocation(location, lp)
 
-        for (chatId in chatIds) {
-            val msgId = chatLiveMessages[chatId]
-            if (msgId != null) {
-                if (msgId != 0L) {
-                    client?.send(TdApi.EditMessageLiveLocation(chatId, msgId, null, location), LiveLocationMessageUpdatesHandler(chatId))
+        for (chatTitle in chatTitles) {
+            val chatId = this.chatTitles[chatTitle]
+            if (chatId != null) {
+                val msgId = chatLiveMessages[chatId]
+                if (msgId != null) {
+                    if (msgId != 0L) {
+                        client?.send(TdApi.EditMessageLiveLocation(chatId, msgId, null, location), liveLocationMessageUpdatesHandler)
+                    }
+                } else {
+                    chatLiveMessages[chatId] = 0L
+                    client?.send(TdApi.SendMessage(chatId, 0, false, true, null, content), liveLocationMessageUpdatesHandler)
                 }
-            } else {
-                chatLiveMessages[chatId] = 0L
-                client?.send(TdApi.SendMessage(chatId, 0, false, true, null, content), LiveLocationMessageUpdatesHandler(chatId))
             }
         }
     }
@@ -273,18 +291,22 @@ class TelegramHelper private constructor() {
      * @chatId Id of the chat
      * @message Text of the message
      */
-    fun sendTextMessage(chatId: Long, message: String) {
+    fun sendTextMessage(chatId: Long, message: String): Boolean {
         // initialize reply markup just for testing
         //val row = arrayOf(TdApi.InlineKeyboardButton("https://telegram.org?1", TdApi.InlineKeyboardButtonTypeUrl()), TdApi.InlineKeyboardButton("https://telegram.org?2", TdApi.InlineKeyboardButtonTypeUrl()), TdApi.InlineKeyboardButton("https://telegram.org?3", TdApi.InlineKeyboardButtonTypeUrl()))
         //val replyMarkup = TdApi.ReplyMarkupInlineKeyboard(arrayOf(row, row, row))
 
-        val content = TdApi.InputMessageText(TdApi.FormattedText(message, null), false, true)
-        client?.send(TdApi.SendMessage(chatId, 0, false, true, null, content), defaultHandler)
+        if (haveAuthorization) {
+            val content = TdApi.InputMessageText(TdApi.FormattedText(message, null), false, true)
+            client?.send(TdApi.SendMessage(chatId, 0, false, true, null, content), defaultHandler)
+            return true
+        }
+        return false
     }
 
     fun logout(): Boolean {
         return if (libraryLoaded) {
-            isHaveAuthorization = false
+            haveAuthorization = false
             client!!.send(TdApi.LogOut(), defaultHandler)
             true
         } else {
@@ -294,7 +316,7 @@ class TelegramHelper private constructor() {
 
     fun close(): Boolean {
         return if (libraryLoaded) {
-            isHaveAuthorization = false
+            haveAuthorization = false
             client!!.send(TdApi.Close(), defaultHandler)
             true
         } else {
@@ -302,19 +324,35 @@ class TelegramHelper private constructor() {
         }
     }
 
-    private inner class LiveLocationMessageUpdatesHandler(val chatId: Long): ResultHandler {
+    private fun setChatOrder(chat: TdApi.Chat, order: Long) {
+        synchronized(chatList) {
+            if (chat.order != 0L) {
+                chatList.remove(OrderedChat(chat.order, chat.id))
+            }
+
+            chat.order = order
+
+            if (chat.order != 0L) {
+                chatList.add(OrderedChat(chat.order, chat.id))
+            }
+        }
+    }
+
+    private inner class LiveLocationMessageUpdatesHandler: ResultHandler {
         override fun onResult(obj: TdApi.Object) {
             when (obj.constructor) {
                 TdApi.Error.CONSTRUCTOR -> {
                     val error = obj as TdApi.Error
-                    chatLiveMessages.remove(chatId)
-                    listener?.onSendLiveLicationError(error.code, error.message)
+                    if (error.code != IGNORED_ERROR_CODE) {
+                        needRefreshActiveLiveLocationMessages = true
+                        listener?.onSendLiveLicationError(error.code, error.message)
+                    }
                 }
                 else -> {
                     if (obj is TdApi.Message) {
                         when (obj.sendingState?.constructor) {
                             TdApi.MessageSendingStateFailed.CONSTRUCTOR -> {
-                                chatLiveMessages.remove(obj.chatId)
+                                needRefreshActiveLiveLocationMessages = true
                                 listener?.onSendLiveLicationError(-1, "Live location message ${obj.id} failed to send")
                             }
                         }
@@ -329,7 +367,7 @@ class TelegramHelper private constructor() {
         if (authorizationState != null) {
             this.authorizationState = authorizationState
         }
-        when (this.authorizationState!!.constructor) {
+        when (this.authorizationState?.constructor) {
             TdApi.AuthorizationStateWaitTdlibParameters.CONSTRUCTOR -> {
                 log.info("Init tdlib parameters")
 
@@ -363,22 +401,26 @@ class TelegramHelper private constructor() {
                 telegramAuthorizationRequestHandler?.telegramAuthorizationRequestListener?.onRequestTelegramAuthenticationParameter(PASSWORD)
             }
             TdApi.AuthorizationStateReady.CONSTRUCTOR -> {
-                isHaveAuthorization = true
-                firstTimeSendingLiveLocation = true
                 log.info("Ready")
             }
             TdApi.AuthorizationStateLoggingOut.CONSTRUCTOR -> {
-                isHaveAuthorization = false
                 log.info("Logging out")
             }
             TdApi.AuthorizationStateClosing.CONSTRUCTOR -> {
-                isHaveAuthorization = false
                 log.info("Closing")
             }
             TdApi.AuthorizationStateClosed.CONSTRUCTOR -> {
                 log.info("Closed")
             }
             else -> log.error("Unsupported authorization state: " + this.authorizationState!!)
+        }
+        val wasAuthorized = haveAuthorization
+        haveAuthorization = this.authorizationState?.constructor == TdApi.AuthorizationStateReady.CONSTRUCTOR
+        if (wasAuthorized != haveAuthorization) {
+            needRefreshActiveLiveLocationMessages = true
+            if (haveAuthorization) {
+                requestChats(true)
+            }
         }
         val newAuthState = getTelegramAuthorizationState()
         listener?.onTelegramStatusChanged(prevAuthState, newAuthState)
@@ -456,7 +498,8 @@ class TelegramHelper private constructor() {
                             setChatOrder(chat, order)
                         }
                     }
-                    listener?.onTelegramChatsRead()
+                    updateChatTitles()
+                    listener?.onTelegramChatsChanged()
                 }
                 TdApi.UpdateChatTitle.CONSTRUCTOR -> {
                     val updateChat = obj as TdApi.UpdateChatTitle
@@ -464,6 +507,8 @@ class TelegramHelper private constructor() {
                     synchronized(chat!!) {
                         chat.title = updateChat.title
                     }
+                    updateChatTitles()
+                    listener?.onTelegramChatsChanged()
                 }
                 TdApi.UpdateChatPhoto.CONSTRUCTOR -> {
                     val updateChat = obj as TdApi.UpdateChatPhoto
@@ -471,6 +516,7 @@ class TelegramHelper private constructor() {
                     synchronized(chat!!) {
                         chat.photo = updateChat.photo
                     }
+                    listener?.onTelegramChatsChanged()
                 }
                 TdApi.UpdateChatLastMessage.CONSTRUCTOR -> {
                     val updateChat = obj as TdApi.UpdateChatLastMessage
@@ -486,6 +532,7 @@ class TelegramHelper private constructor() {
                     synchronized(chat!!) {
                         setChatOrder(chat, updateChat.order)
                     }
+                    listener?.onTelegramChatsChanged()
                 }
                 TdApi.UpdateChatIsPinned.CONSTRUCTOR -> {
                     val updateChat = obj as TdApi.UpdateChatIsPinned
@@ -525,9 +572,7 @@ class TelegramHelper private constructor() {
                     }
                 }
                 TdApi.UpdateMessageSendFailed.CONSTRUCTOR -> {
-                    val updateMessageSendFailed = obj as TdApi.UpdateMessageSendFailed
-                    val message = updateMessageSendFailed.message
-                    chatLiveMessages.remove(message.chatId)
+                    needRefreshActiveLiveLocationMessages = true
                 }
                 TdApi.UpdateMessageSendSucceeded.CONSTRUCTOR -> {
                     val updateMessageSendSucceeded = obj as TdApi.UpdateMessageSendSucceeded
@@ -593,8 +638,10 @@ class TelegramHelper private constructor() {
                 TdApi.Error.CONSTRUCTOR -> {
                     log.error("Receive an error: $obj")
                     val errorObj = obj as TdApi.Error
-                    telegramAuthorizationRequestHandler?.telegramAuthorizationRequestListener?.onTelegramAuthorizationRequestError(errorObj.code, errorObj.message)
-                    onAuthorizationStateUpdated(null) // repeat last action
+                    if (errorObj.code != IGNORED_ERROR_CODE) {
+                        telegramAuthorizationRequestHandler?.telegramAuthorizationRequestListener?.onTelegramAuthorizationRequestError(errorObj.code, errorObj.message)
+                        onAuthorizationStateUpdated(null) // repeat last action
+                    }
                 }
                 TdApi.Ok.CONSTRUCTOR -> {
                 }

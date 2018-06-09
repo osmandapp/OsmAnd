@@ -10,17 +10,17 @@ class TelegramSettings(private val app: TelegramApplication) {
 
         private const val SETTINGS_NAME = "osmand_telegram_settings"
 
-        private const val SHARE_LOCATION_CHATS_KEY = "share_location_chats_key"
-        private const val SHOW_ON_MAP_CHATS_KEY = "show_on_map_chats_key"
+        private const val SHARE_LOCATION_CHATS_KEY = "share_location_chats"
+        private const val SHOW_ON_MAP_CHATS_KEY = "show_on_map_chats"
 
-        private const val METRICS_CONSTANTS_KEY = "metrics_constants_key"
-        private const val SPEED_CONSTANTS_KEY = "speed_constants_key"
+        private const val METRICS_CONSTANTS_KEY = "metrics_constants"
+        private const val SPEED_CONSTANTS_KEY = "speed_constants"
 
-        private const val SHOW_NOTIFICATION_ALWAYS_KEY = "show_notification_always_key"
+        private const val SHOW_NOTIFICATION_ALWAYS_KEY = "show_notification_always"
     }
 
-    private var shareLocationChats: Set<Long> = emptySet()
-    private var showOnMapChats: Set<Long> = emptySet()
+    private var shareLocationChats: Set<String> = emptySet()
+    private var showOnMapChats: Set<String> = emptySet()
 
     var metricsConstants = MetricsConstants.KILOMETERS_AND_METERS
     var speedConstants = SpeedConstants.KILOMETERS_PER_HOUR
@@ -35,16 +35,22 @@ class TelegramSettings(private val app: TelegramApplication) {
         return shareLocationChats.isNotEmpty()
     }
 
-    fun isSharingLocationToChat(chatId: Long): Boolean {
-        return shareLocationChats.contains(chatId)
+    fun isSharingLocationToChat(chatTitle: String): Boolean {
+        return shareLocationChats.contains(chatTitle)
     }
 
-    fun shareLocationToChat(chatId: Long, share: Boolean) {
+    fun removeNonexistingChats(presentChatTitles: List<String>) {
+        val shareLocationChats = shareLocationChats.toMutableList()
+        shareLocationChats.intersect(presentChatTitles)
+        this.shareLocationChats = shareLocationChats.toHashSet()
+    }
+
+    fun shareLocationToChat(chatTitle: String, share: Boolean) {
         val shareLocationChats = shareLocationChats.toMutableList()
         if (share) {
-            shareLocationChats.add(chatId)
+            shareLocationChats.add(chatTitle)
         } else {
-            shareLocationChats.remove(chatId)
+            shareLocationChats.remove(chatTitle)
         }
         this.shareLocationChats = shareLocationChats.toHashSet()
     }
@@ -57,15 +63,15 @@ class TelegramSettings(private val app: TelegramApplication) {
 
         val shareLocationChatsSet = mutableSetOf<String>()
         val shareLocationChats = ArrayList(shareLocationChats)
-        for (chatId in shareLocationChats) {
-            shareLocationChatsSet.add(chatId.toString())
+        for (chatTitle in shareLocationChats) {
+            shareLocationChatsSet.add(chatTitle)
         }
         edit.putStringSet(SHARE_LOCATION_CHATS_KEY, shareLocationChatsSet)
 
         val showOnMapChatsSet = mutableSetOf<String>()
         val showOnMapChats = ArrayList(showOnMapChats)
-        for (chatId in showOnMapChats) {
-            showOnMapChatsSet.add(chatId.toString())
+        for (chatTitle in showOnMapChats) {
+            showOnMapChatsSet.add(chatTitle)
         }
         edit.putStringSet(SHOW_ON_MAP_CHATS_KEY, showOnMapChatsSet)
 
@@ -80,23 +86,17 @@ class TelegramSettings(private val app: TelegramApplication) {
     fun read() {
         val prefs = app.getSharedPreferences(SETTINGS_NAME, Context.MODE_PRIVATE)
 
-        val shareLocationChats = mutableSetOf<Long>()
+        val shareLocationChats = mutableSetOf<String>()
         val shareLocationChatsSet = prefs.getStringSet(SHARE_LOCATION_CHATS_KEY, mutableSetOf())
-        for (chatIdStr in shareLocationChatsSet) {
-            val chatId = chatIdStr.toLongOrNull()
-            if (chatId != null) {
-                shareLocationChats.add(chatId)
-            }
+        for (chatTitle in shareLocationChatsSet) {
+            shareLocationChats.add(chatTitle)
         }
         this.shareLocationChats = shareLocationChats
 
-        val showOnMapChats = mutableSetOf<Long>()
+        val showOnMapChats = mutableSetOf<String>()
         val showOnMapChatsSet = prefs.getStringSet(SHOW_ON_MAP_CHATS_KEY, mutableSetOf())
-        for (chatIdStr in showOnMapChatsSet) {
-            val chatId = chatIdStr.toLongOrNull()
-            if (chatId != null) {
-                showOnMapChats.add(chatId)
-            }
+        for (chatTitle in showOnMapChatsSet) {
+            showOnMapChats.add(chatTitle)
         }
         this.showOnMapChats = showOnMapChats
 
