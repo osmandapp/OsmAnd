@@ -3047,4 +3047,5 @@
     <string name="get_osmand_live">Получите OsmAnd Live, чтобы разблокировать все функции: ежедневные обновления карт с неограниченной загрузкой, все платные и бесплатные плагины, Википедия, Викигид и многое другое.</string>
     <string name="access_intermediate_arrival_time">Промежуточное время прибытия</string>
     <string name="map_widget_intermediate_time">Промежуточное время</string>
+    <string name="quick_action_edit_actions">Редактировать действие</string>
     </resources>
