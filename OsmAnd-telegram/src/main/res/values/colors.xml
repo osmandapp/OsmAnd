@@ -9,4 +9,6 @@
     <color name="icon_color_light">#ccc</color>
     <color name="icon_color_dark">#ff4f4f4f</color>
 
+    <color name="osmand_orange">#ff8f00</color>
+
 </resources>

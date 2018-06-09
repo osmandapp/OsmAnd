@@ -1,22 +1,32 @@
 package net.osmand.telegram
 
+import android.Manifest
+import android.content.pm.PackageManager
 import android.os.Bundle
+import android.support.v4.app.ActivityCompat
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.*
 import android.view.*
 import android.widget.Toast
+import net.osmand.PlatformUtil
 import net.osmand.telegram.LoginDialogFragment.LoginDialogType
-import net.osmand.telegram.TelegramHelper.*
+import net.osmand.telegram.helpers.TelegramHelper
+import net.osmand.telegram.helpers.TelegramHelper.*
+import net.osmand.telegram.utils.AndroidUtils
 import org.drinkless.td.libcore.telegram.TdApi
 
 
 class MainActivity : AppCompatActivity(), TelegramListener {
 
     companion object {
+        private const val PERMISSION_REQUEST_LOCATION = 1
+
         private const val LOGIN_MENU_ID = 0
         private const val LOGOUT_MENU_ID = 1
         private const val PROGRESS_MENU_ID = 2
     }
+
+    private val log = PlatformUtil.getLog(TelegramHelper::class.java)
 
     private var telegramAuthorizationRequestHandler: TelegramAuthorizationRequestHandler? = null
     private var paused: Boolean = false
@@ -28,8 +38,8 @@ class MainActivity : AppCompatActivity(), TelegramListener {
     private val app: TelegramApplication
         get() = application as TelegramApplication
 
-    private val telegramHelper: TelegramHelper
-        get() = app.telegramHelper
+    private val telegramHelper get() = app.telegramHelper
+    private val settings get() = app.settings
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -74,11 +84,25 @@ class MainActivity : AppCompatActivity(), TelegramListener {
 
         invalidateOptionsMenu()
         updateTitle()
+
+        if (settings.hasAnyChatToShareLocation() && AndroidUtils.isLocationPermissionAvailable(this)) {
+            requestLocationPermission()
+        }
     }
 
     override fun onPause() {
         super.onPause()
         paused = true
+    }
+
+    override fun onStop() {
+        super.onStop()
+        settings.save()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        telegramHelper.close()
     }
 
     override fun onTelegramStatusChanged(prevTelegramAuthorizationState: TelegramAuthorizationState,
@@ -118,6 +142,10 @@ class MainActivity : AppCompatActivity(), TelegramListener {
         runOnUi {
             Toast.makeText(this@MainActivity, "$code - $message", Toast.LENGTH_LONG).show()
         }
+    }
+
+    override fun onSendLiveLicationError(code: Int, message: String) {
+        log.error("Send live location error: $code - $message")
     }
 
     private fun updateChatsList() {
@@ -237,9 +265,23 @@ class MainActivity : AppCompatActivity(), TelegramListener {
         }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        telegramHelper.close()
+    private fun requestLocationPermission() {
+        if (!AndroidUtils.isLocationPermissionAvailable(this)) {
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), PERMISSION_REQUEST_LOCATION)
+        }
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            when (requestCode) {
+                PERMISSION_REQUEST_LOCATION -> {
+                    if (settings.hasAnyChatToShareLocation()) {
+                        app.shareLocationHelper.startSharingLocation()
+                    }
+                }
+            }
+        }
     }
 
     inner class ChatsAdapter :
@@ -258,16 +300,28 @@ class MainActivity : AppCompatActivity(), TelegramListener {
             val showOnMapSwitch: SwitchCompat? = view.findViewById(R.id.show_on_map_switch)
         }
 
-        override fun onCreateViewHolder(parent: ViewGroup,
-                                        viewType: Int): ChatsAdapter.ViewHolder {
-            val view = LayoutInflater.from(parent.context)
-                    .inflate(R.layout.chat_list_item, parent, false)
-
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChatsAdapter.ViewHolder {
+            val view = LayoutInflater.from(parent.context).inflate(R.layout.chat_list_item, parent, false)
             return ViewHolder(view)
         }
 
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+            val chatId = chats[position].id
             holder.groupName?.text = chats[position].title
+            holder.shareLocationSwitch?.setOnCheckedChangeListener(null)
+            holder.shareLocationSwitch?.isChecked = settings.isSharingLocationToChat(chatId)
+            holder.shareLocationSwitch?.setOnCheckedChangeListener { view, isChecked ->
+                settings.shareLocationToChat(chatId, isChecked)
+                if (settings.hasAnyChatToShareLocation()) {
+                    if (!AndroidUtils.isLocationPermissionAvailable(view.context)) {
+                        requestLocationPermission()
+                    } else {
+                        app.shareLocationHelper.startSharingLocation()
+                    }
+                } else {
+                    app.shareLocationHelper.stopSharingLocation()
+                }
+            }
         }
 
         override fun getItemCount() = chats.size

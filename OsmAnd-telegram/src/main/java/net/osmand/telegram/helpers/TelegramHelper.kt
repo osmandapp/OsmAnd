@@ -1,9 +1,8 @@
-package net.osmand.telegram
+package net.osmand.telegram.helpers
 
 import android.text.TextUtils
-import net.osmand.telegram.TelegramHelper.TelegramAuthenticationParameterType.*
-import net.osmand.telegram.utils.CancellableAsyncTask
-import net.osmand.telegram.utils.PlatformUtil
+import net.osmand.telegram.helpers.TelegramHelper.TelegramAuthenticationParameterType.*
+import net.osmand.PlatformUtil
 import org.drinkless.td.libcore.telegram.Client
 import org.drinkless.td.libcore.telegram.Client.ResultHandler
 import org.drinkless.td.libcore.telegram.TdApi
@@ -104,6 +103,7 @@ class TelegramHelper private constructor() {
 
         fun onTelegramChatsRead()
         fun onTelegramError(code: Int, message: String)
+        fun onSendLiveLicationError(code: Int, message: String)
     }
 
     interface TelegramAuthorizationRequestListener {
@@ -203,6 +203,77 @@ class TelegramHelper private constructor() {
             }
         }
         listener?.onTelegramChatsRead()
+    }
+
+    /**
+     * @chatId Id of the chat
+     * @livePeriod Period for which the location can be updated, in seconds; should be between 60 and 86400 for a live location and 0 otherwise.
+     * @latitude Latitude of the location
+     * @longitude Longitude of the location
+     */
+    fun sendLiveLocation(chatIds: List<Long>, livePeriod: Int = 61, latitude: Double, longitude: Double) {
+
+        val lp = livePeriod.coerceAtLeast(61)
+        val location = TdApi.Location(latitude, longitude)
+        val content = TdApi.InputMessageLocation(location, lp)
+
+        client?.send(TdApi.GetActiveLiveLocationMessages(), { obj ->
+            when (obj.constructor) {
+                TdApi.Error.CONSTRUCTOR -> {
+                    val error = obj as TdApi.Error
+                    listener?.onSendLiveLicationError(error.code, error.message)
+                }
+                TdApi.Messages.CONSTRUCTOR -> {
+                    val messages = (obj as TdApi.Messages).messages
+                    val processedChatIds = mutableListOf<Long>()
+                    if (messages.isNotEmpty()) {
+                        for (msg in messages) {
+                            if (chatIds.contains(msg.chatId)) {
+                                processedChatIds.add(msg.chatId)
+                                client?.send(TdApi.EditMessageLiveLocation(msg.chatId, msg.id, null, location), { o->
+                                    when (o.constructor) {
+                                        TdApi.Error.CONSTRUCTOR -> {
+                                            val error = o as TdApi.Error
+                                            listener?.onSendLiveLicationError(error.code, error.message)
+                                        }
+                                        else -> listener?.onSendLiveLicationError(-1, "Receive wrong response from TDLib: $o")
+                                    }
+                                })
+                            }
+                        }
+                    }
+                    if (chatIds.size != processedChatIds.size) {
+                        val mutableChatIds = chatIds.toMutableList()
+                        mutableChatIds.removeAll(processedChatIds)
+                        for (chatId in mutableChatIds) {
+                            client?.send(TdApi.SendMessage(chatId, 0, false, true, null, content), { o->
+                                when (o.constructor) {
+                                    TdApi.Error.CONSTRUCTOR -> {
+                                        val error = o as TdApi.Error
+                                        listener?.onSendLiveLicationError(error.code, error.message)
+                                    }
+                                    else -> listener?.onSendLiveLicationError(-1, "Receive wrong response from TDLib: $o")
+                                }
+                            })
+                        }
+                    }
+                }
+                else -> listener?.onSendLiveLicationError(-1, "Receive wrong response from TDLib: $obj")
+            }
+        })
+    }
+
+    /**
+     * @chatId Id of the chat
+     * @message Text of the message
+     */
+    fun sendText(chatId: Long, message: String) {
+        // initialize reply markup just for testing
+        //val row = arrayOf(TdApi.InlineKeyboardButton("https://telegram.org?1", TdApi.InlineKeyboardButtonTypeUrl()), TdApi.InlineKeyboardButton("https://telegram.org?2", TdApi.InlineKeyboardButtonTypeUrl()), TdApi.InlineKeyboardButton("https://telegram.org?3", TdApi.InlineKeyboardButtonTypeUrl()))
+        //val replyMarkup = TdApi.ReplyMarkupInlineKeyboard(arrayOf(row, row, row))
+
+        val content = TdApi.InputMessageText(TdApi.FormattedText(message, null), false, true)
+        client?.send(TdApi.SendMessage(chatId, 0, false, true, null, content), defaultHandler)
     }
 
     fun logout(): Boolean {
@@ -354,9 +425,7 @@ class TelegramHelper private constructor() {
                         chat.order = 0
                         setChatOrder(chat, order)
                     }
-                    CancellableAsyncTask.run("onTelegramChatsRead", 100, {
-                        listener?.onTelegramChatsRead()
-                    })
+                    listener?.onTelegramChatsRead()
                 }
                 TdApi.UpdateChatTitle.CONSTRUCTOR -> {
                     val updateChat = obj as TdApi.UpdateChatTitle
@@ -424,6 +493,11 @@ class TelegramHelper private constructor() {
                         chat.unreadMentionCount = updateChat.unreadMentionCount
                     }
                 }
+
+                TdApi.UpdateMessageSendSucceeded.CONSTRUCTOR -> {
+                    val updateMessageSent = obj as TdApi.UpdateMessageSendSucceeded
+                }
+
                 TdApi.UpdateChatReplyMarkup.CONSTRUCTOR -> {
                     val updateChat = obj as TdApi.UpdateChatReplyMarkup
                     val chat = chats[updateChat.chatId]

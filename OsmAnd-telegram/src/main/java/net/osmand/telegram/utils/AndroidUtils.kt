@@ -1,8 +1,11 @@
 package net.osmand.telegram.utils
 
+import android.Manifest
 import android.app.Activity
 import android.content.Context
+import android.content.pm.PackageManager
 import android.content.res.Configuration
+import android.support.v4.app.ActivityCompat
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 
@@ -31,5 +34,9 @@ object AndroidUtils {
                 }
             }
         }
+    }
+
+    fun isLocationPermissionAvailable(context: Context): Boolean {
+        return ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
     }
 }

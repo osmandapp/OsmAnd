@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="net.osmand.telegram">
 
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -19,6 +20,7 @@
 
         <activity
             android:name=".MainActivity"
+            android:launchMode="singleTask"
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="adjustResize">
 
@@ -30,6 +32,16 @@
 
         </activity>
 
+        <service
+            android:label="@string/process_location_service"
+            android:name="net.osmand.telegram.LocationService"
+            android:stopWithTask="true">
+            <intent-filter>
+                <action android:name="net.osmand.telegram.LocationService" />
+            </intent-filter>
+        </service>
+
+        <receiver android:name=".notifications.NotificationDismissReceiver" />
     </application>
 
 </manifest>

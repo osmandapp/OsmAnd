@@ -12,7 +12,7 @@ import android.view.inputmethod.EditorInfo
 import android.widget.Button
 import android.widget.EditText
 import net.osmand.telegram.utils.AndroidUtils
-import net.osmand.telegram.utils.PlatformUtil
+import net.osmand.PlatformUtil
 
 
 class LoginDialogFragment : DialogFragment() {
