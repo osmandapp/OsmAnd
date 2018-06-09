@@ -39,6 +39,12 @@ class TelegramApplication : Application() {
         }
     }
 
+    override fun onTerminate() {
+        super.onTerminate()
+        // TODO close telegram api in appropriate place
+        telegramHelper.close()
+    }
+
     val isWifiConnected: Boolean
         get() {
             val mgr = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager

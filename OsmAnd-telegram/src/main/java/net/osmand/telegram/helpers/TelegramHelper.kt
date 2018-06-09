@@ -1,8 +1,8 @@
 package net.osmand.telegram.helpers
 
 import android.text.TextUtils
-import net.osmand.telegram.helpers.TelegramHelper.TelegramAuthenticationParameterType.*
 import net.osmand.PlatformUtil
+import net.osmand.telegram.helpers.TelegramHelper.TelegramAuthenticationParameterType.*
 import org.drinkless.td.libcore.telegram.Client
 import org.drinkless.td.libcore.telegram.Client.ResultHandler
 import org.drinkless.td.libcore.telegram.TdApi
@@ -27,6 +27,7 @@ class TelegramHelper private constructor() {
 
         private val chats = ConcurrentHashMap<Long, TdApi.Chat>()
         private val chatList = TreeSet<OrderedChat>()
+        private val chatLiveMessages = ConcurrentHashMap<Long, Long>()
 
         private val usersFullInfo = ConcurrentHashMap<Int, TdApi.UserFullInfo>()
         private val basicGroupsFullInfo = ConcurrentHashMap<Int, TdApi.BasicGroupFullInfo>()
@@ -61,6 +62,8 @@ class TelegramHelper private constructor() {
 
     private var client: Client? = null
     private var haveFullChatList: Boolean = false
+    private var firstTimeSendingLiveLocation: Boolean = true
+    private var requestingLiveLocationMessages: Boolean = false
 
     private var authorizationState: AuthorizationState? = null
     private var isHaveAuthorization = false
@@ -211,12 +214,21 @@ class TelegramHelper private constructor() {
      * @latitude Latitude of the location
      * @longitude Longitude of the location
      */
-    fun sendLiveLocation(chatIds: List<Long>, livePeriod: Int = 61, latitude: Double, longitude: Double) {
+    fun sendLiveLocationMessage(chatIds: List<Long>, livePeriod: Int = 61, latitude: Double, longitude: Double) {
+        if (!requestingLiveLocationMessages) {
+            if (firstTimeSendingLiveLocation) {
+                getActiveLiveLocationMessages {
+                    sendLiveLocationImpl(chatIds, livePeriod, latitude, longitude)
+                }
+                firstTimeSendingLiveLocation = false
+            } else {
+                sendLiveLocationImpl(chatIds, livePeriod, latitude, longitude)
+            }
+        }
+    }
 
-        val lp = livePeriod.coerceAtLeast(61)
-        val location = TdApi.Location(latitude, longitude)
-        val content = TdApi.InputMessageLocation(location, lp)
-
+    private fun getActiveLiveLocationMessages(onComplete: (() -> Unit)?) {
+        requestingLiveLocationMessages = true
         client?.send(TdApi.GetActiveLiveLocationMessages(), { obj ->
             when (obj.constructor) {
                 TdApi.Error.CONSTRUCTOR -> {
@@ -225,49 +237,43 @@ class TelegramHelper private constructor() {
                 }
                 TdApi.Messages.CONSTRUCTOR -> {
                     val messages = (obj as TdApi.Messages).messages
-                    val processedChatIds = mutableListOf<Long>()
                     if (messages.isNotEmpty()) {
                         for (msg in messages) {
-                            if (chatIds.contains(msg.chatId)) {
-                                processedChatIds.add(msg.chatId)
-                                client?.send(TdApi.EditMessageLiveLocation(msg.chatId, msg.id, null, location), { o->
-                                    when (o.constructor) {
-                                        TdApi.Error.CONSTRUCTOR -> {
-                                            val error = o as TdApi.Error
-                                            listener?.onSendLiveLicationError(error.code, error.message)
-                                        }
-                                        else -> listener?.onSendLiveLicationError(-1, "Receive wrong response from TDLib: $o")
-                                    }
-                                })
-                            }
+                            val chatId = msg.chatId
+                            chatLiveMessages[chatId] = msg.id
                         }
                     }
-                    if (chatIds.size != processedChatIds.size) {
-                        val mutableChatIds = chatIds.toMutableList()
-                        mutableChatIds.removeAll(processedChatIds)
-                        for (chatId in mutableChatIds) {
-                            client?.send(TdApi.SendMessage(chatId, 0, false, true, null, content), { o->
-                                when (o.constructor) {
-                                    TdApi.Error.CONSTRUCTOR -> {
-                                        val error = o as TdApi.Error
-                                        listener?.onSendLiveLicationError(error.code, error.message)
-                                    }
-                                    else -> listener?.onSendLiveLicationError(-1, "Receive wrong response from TDLib: $o")
-                                }
-                            })
-                        }
-                    }
+                    onComplete?.invoke()
                 }
                 else -> listener?.onSendLiveLicationError(-1, "Receive wrong response from TDLib: $obj")
             }
+            requestingLiveLocationMessages = false
         })
+    }
+
+    private fun sendLiveLocationImpl(chatIds: List<Long>, livePeriod: Int = 61, latitude: Double, longitude: Double) {
+        val lp = livePeriod.coerceAtLeast(61)
+        val location = TdApi.Location(latitude, longitude)
+        val content = TdApi.InputMessageLocation(location, lp)
+
+        for (chatId in chatIds) {
+            val msgId = chatLiveMessages[chatId]
+            if (msgId != null) {
+                if (msgId != 0L) {
+                    client?.send(TdApi.EditMessageLiveLocation(chatId, msgId, null, location), LiveLocationMessageUpdatesHandler(chatId))
+                }
+            } else {
+                chatLiveMessages[chatId] = 0L
+                client?.send(TdApi.SendMessage(chatId, 0, false, true, null, content), LiveLocationMessageUpdatesHandler(chatId))
+            }
+        }
     }
 
     /**
      * @chatId Id of the chat
      * @message Text of the message
      */
-    fun sendText(chatId: Long, message: String) {
+    fun sendTextMessage(chatId: Long, message: String) {
         // initialize reply markup just for testing
         //val row = arrayOf(TdApi.InlineKeyboardButton("https://telegram.org?1", TdApi.InlineKeyboardButtonTypeUrl()), TdApi.InlineKeyboardButton("https://telegram.org?2", TdApi.InlineKeyboardButtonTypeUrl()), TdApi.InlineKeyboardButton("https://telegram.org?3", TdApi.InlineKeyboardButtonTypeUrl()))
         //val replyMarkup = TdApi.ReplyMarkupInlineKeyboard(arrayOf(row, row, row))
@@ -293,6 +299,28 @@ class TelegramHelper private constructor() {
             true
         } else {
             false
+        }
+    }
+
+    private inner class LiveLocationMessageUpdatesHandler(val chatId: Long): ResultHandler {
+        override fun onResult(obj: TdApi.Object) {
+            when (obj.constructor) {
+                TdApi.Error.CONSTRUCTOR -> {
+                    val error = obj as TdApi.Error
+                    chatLiveMessages.remove(chatId)
+                    listener?.onSendLiveLicationError(error.code, error.message)
+                }
+                else -> {
+                    if (obj is TdApi.Message) {
+                        when (obj.sendingState?.constructor) {
+                            TdApi.MessageSendingStateFailed.CONSTRUCTOR -> {
+                                chatLiveMessages.remove(obj.chatId)
+                                listener?.onSendLiveLicationError(-1, "Live location message ${obj.id} failed to send")
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 
@@ -336,6 +364,7 @@ class TelegramHelper private constructor() {
             }
             TdApi.AuthorizationStateReady.CONSTRUCTOR -> {
                 isHaveAuthorization = true
+                firstTimeSendingLiveLocation = true
                 log.info("Ready")
             }
             TdApi.AuthorizationStateLoggingOut.CONSTRUCTOR -> {
@@ -495,11 +524,28 @@ class TelegramHelper private constructor() {
                         chat.unreadMentionCount = updateChat.unreadMentionCount
                     }
                 }
-
-                TdApi.UpdateMessageSendSucceeded.CONSTRUCTOR -> {
-                    val updateMessageSent = obj as TdApi.UpdateMessageSendSucceeded
+                TdApi.UpdateMessageSendFailed.CONSTRUCTOR -> {
+                    val updateMessageSendFailed = obj as TdApi.UpdateMessageSendFailed
+                    val message = updateMessageSendFailed.message
+                    chatLiveMessages.remove(message.chatId)
                 }
-
+                TdApi.UpdateMessageSendSucceeded.CONSTRUCTOR -> {
+                    val updateMessageSendSucceeded = obj as TdApi.UpdateMessageSendSucceeded
+                    val message = updateMessageSendSucceeded.message
+                    chatLiveMessages[message.chatId] = message.id
+                }
+                TdApi.UpdateDeleteMessages.CONSTRUCTOR -> {
+                    val updateDeleteMessages = obj as TdApi.UpdateDeleteMessages
+                    if (updateDeleteMessages.isPermanent) {
+                        val chatId = updateDeleteMessages.chatId
+                        for (messageId in updateDeleteMessages.messageIds) {
+                            if (chatLiveMessages[chatId] == messageId) {
+                                chatLiveMessages.remove(chatId)
+                                break
+                            }
+                        }
+                    }
+                }
                 TdApi.UpdateChatReplyMarkup.CONSTRUCTOR -> {
                     val updateChat = obj as TdApi.UpdateChatReplyMarkup
                     val chat = chats[updateChat.chatId]
@@ -537,7 +583,7 @@ class TelegramHelper private constructor() {
                     val updateSupergroupFullInfo = obj as TdApi.UpdateSupergroupFullInfo
                     supergroupsFullInfo[updateSupergroupFullInfo.supergroupId] = updateSupergroupFullInfo.supergroupFullInfo
                 }
-            }// print("Unsupported update:" + newLine + object);
+            }
         }
     }
 
