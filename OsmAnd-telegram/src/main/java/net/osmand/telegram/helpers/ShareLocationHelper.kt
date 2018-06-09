@@ -41,7 +41,7 @@ class ShareLocationHelper(private val app: TelegramApplication) {
     fun updateLocation(location: Location?) {
         lastLocation = location
 
-        if (location != null) {
+        if (location != null && app.isInternetConnectionAvailable) {
             val shareLocationChats = app.settings.getShareLocationChats()
             if (shareLocationChats.isNotEmpty()) {
                 app.telegramHelper.sendLiveLocation(shareLocationChats, MAX_LOCATION_MESSAGE_LIVE_PERIOD_SEC, location.latitude, location.longitude)

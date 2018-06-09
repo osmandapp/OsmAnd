@@ -419,11 +419,13 @@ class TelegramHelper private constructor() {
                     val updateNewChat = obj as TdApi.UpdateNewChat
                     val chat = updateNewChat.chat
                     synchronized(chat!!) {
-                        chats[chat.id] = chat
+                        if (chat.type !is TdApi.ChatTypeSupergroup || !(chat.type as TdApi.ChatTypeSupergroup).isChannel) {
+                            chats[chat.id] = chat
 
-                        val order = chat.order
-                        chat.order = 0
-                        setChatOrder(chat, order)
+                            val order = chat.order
+                            chat.order = 0
+                            setChatOrder(chat, order)
+                        }
                     }
                     listener?.onTelegramChatsRead()
                 }
