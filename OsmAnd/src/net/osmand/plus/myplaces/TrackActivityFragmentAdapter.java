@@ -29,7 +29,12 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.RequestCreator;
+
 import net.osmand.AndroidUtils;
+import net.osmand.PicassoUtils;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
@@ -51,7 +56,10 @@ import net.osmand.plus.activities.TrackActivity;
 import net.osmand.plus.dialogs.ConfigureMapMenu;
 import net.osmand.plus.measurementtool.NewGpxData;
 import net.osmand.plus.myplaces.TrackBitmapDrawer.TrackBitmapDrawerListener;
+import net.osmand.plus.widgets.tools.CropCircleTransformation;
 import net.osmand.plus.wikipedia.WikiArticleHelper;
+import net.osmand.plus.wikivoyage.WikivoyageUtils;
+import net.osmand.plus.wikivoyage.article.WikivoyageArticleDialogFragment;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
 import net.osmand.render.RenderingRulesStorage;
 
@@ -464,7 +472,6 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 		String title = metadata.getArticleTitle();
 		String lang = metadata.getArticleLang();
 		if (!TextUtils.isEmpty(title) && !TextUtils.isEmpty(lang)) {
-			// FIXME: check immediately after deleting the Travel DB
 			return app.getTravelDbHelper().getArticle(title, lang);
 		}
 		return null;
@@ -475,19 +482,40 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 		return app.getUIUtilities().getIcon(R.drawable.ic_action_read_article, colorId);
 	}
 
-	private View createTravelArticleCard(final Context context, @NonNull TravelArticle article) {
+	private View createTravelArticleCard(final Context context, @NonNull final TravelArticle article) {
 		View card = LayoutInflater.from(context).inflate(R.layout.wikivoyage_article_card, null);
 		((TextView) card.findViewById(R.id.title)).setText(article.getTitle());
 		((TextView) card.findViewById(R.id.content)).setText(WikiArticleHelper.getPartialContent(article.getContent()));
 		((TextView) card.findViewById(R.id.part_of)).setText(article.getGeoDescription());
-		// FIXME: icon
+		final ImageView icon = (ImageView) card.findViewById(R.id.icon);
+		final String url = TravelArticle.getImageUrl(article.getImageTitle(), false);
+		final PicassoUtils picassoUtils = PicassoUtils.getPicasso(app);
+		RequestCreator rc = Picasso.get().load(url);
+		WikivoyageUtils.setupNetworkPolicy(app.getSettings(), rc);
+		rc.transform(new CropCircleTransformation())
+				.into(icon, new Callback() {
+					@Override
+					public void onSuccess() {
+						icon.setVisibility(View.VISIBLE);
+						picassoUtils.setResultLoaded(url, true);
+					}
+
+					@Override
+					public void onError(Exception e) {
+						picassoUtils.setResultLoaded(url, false);
+					}
+				});
 		TextView readBtn = (TextView) card.findViewById(R.id.left_button);
 		readBtn.setText(app.getString(R.string.shared_string_read));
 		readBtn.setCompoundDrawablesWithIntrinsicBounds(getReadIcon(), null, null, null);
 		readBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Toast.makeText(context, "Read", Toast.LENGTH_SHORT).show(); // FIXME
+				TrackActivity activity = getTrackActivity();
+				if (activity != null) {
+					WikivoyageArticleDialogFragment.showInstance(app,
+							activity.getSupportFragmentManager(), article.getTripId(), article.getLang());
+				}
 			}
 		});
 		card.findViewById(R.id.right_button).setVisibility(View.GONE);
