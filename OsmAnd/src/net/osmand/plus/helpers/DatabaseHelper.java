@@ -47,6 +47,9 @@ public class DatabaseHelper {
 
     private SQLiteAPI.SQLiteConnection openConnection(boolean readonly) {
         SQLiteAPI.SQLiteConnection conn = app.getSQLiteAPI().getOrCreateDatabase(DB_NAME, readonly);
+        if (conn == null) {
+            return null;
+        }
         if (conn.getVersion() == 0 || DB_VERSION != conn.getVersion()) {
             if (readonly) {
                 conn.close();
