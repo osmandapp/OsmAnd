@@ -112,6 +112,9 @@ public class MapMarkersDbHelper {
 
 	private SQLiteConnection openConnection(boolean readonly) {
 		SQLiteConnection conn = context.getSQLiteAPI().getOrCreateDatabase(DB_NAME, readonly);
+		if (conn == null) {
+			return conn;
+		}
 		int version = conn.getVersion();
 		if (version == 0 || DB_VERSION != version) {
 			if (readonly) {
