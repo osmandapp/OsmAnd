@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="bg_color_light">#fff</color>
+    <color name="bg_color_dark">#333b40</color>
+    <color name="icon_color_light">#ccc</color>
+    <color name="icon_color_dark">#ff4f4f4f</color>
+
+    <color name="osmand_orange">#ff8f00</color>
+
+    <color name="dialogTitleBackgroundColor">#2f7af5</color>
+
+</resources>
