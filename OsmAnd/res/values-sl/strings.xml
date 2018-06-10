@@ -1091,7 +1091,7 @@ Omogoča tudi dodajanje opomb v koledar za prikaz opomnikov ob daljših časih p
     <string name="destination_point">Cilj %1$s</string>
 
     <string name="intermediate_items_sort_by_distance">Razvrsti od vrat do vrat</string>
-    <string name="osmand_distance_planning_plugin_description">Vstavek omogoča načrtovanje poti (ali uporabo/spreminjanje obstoječih datotek GPX) in merjenje razdalj med točkami na sledi. Podatke je mogoče shraniti kot poti GPX in jih kasneje uporabiti tudi na poti.</string>
+    <string name="osmand_distance_planning_plugin_description">Vstavek omogoča načrtovanje poti (ali uporabo/spreminjanje obstoječih datotek GPX) in merjenje razdalj med točkami na sledi. Podatke je mogoče shraniti kot poti GPX in jih kasneje uporabiti tudi med vodenjem poti.</string>
     <string name="osmand_distance_planning_plugin_name">Orodje za načrtovanje poti</string>
     <string name="distance_measurement_finish_subtrack">Začni z novo podrejeno sledjo</string>
     <string name="wait_current_task_finished">Počakajte na končanje trenutne naloge</string>
@@ -2550,7 +2550,7 @@ Koda predstavlja območje: %1$s x %2$s</string>
 
     <string name="routing_attr_driving_style_name">Način vožnje</string>
     
-    <string name="select_gpx_folder">Izbor mape sledi</string>
+    <string name="select_gpx_folder">Izbor mape datotek GPX</string>
     <string name="file_can_not_be_moved">Datoteke ni mogoče premakniti.</string>
     <string name="shared_string_move">Premakni</string>
     <string name="shared_string_gpx_tracks">Sledi</string>
@@ -2566,7 +2566,7 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="points_delete_multiple_succesful">Točke so izbrisane.</string>
     <string name="points_delete_multiple">Izbrisati želite točke (%1$d). Ali želite nadaljevati?</string>
     <string name="route_points_category_name">Zavoji na poti, ki jih je treba doseči</string>
-    <string name="track_points_category_name">Pomembnejše točke na poti</string>
+    <string name="track_points_category_name">Vmesne točke, točke POI in druge pomembnejše točke</string>
     <string name="shared_string_slope">Pobočje</string>
     <string name="add_new_folder">Dodaj novo mapo</string>
     <string name="lang_ber">Berberščina</string>
@@ -2840,11 +2840,11 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="add_location_as_first_point_descr">Dodajte trenutno mesto kot začetno točko za načrtovanje poti.</string>
     <string name="my_location">Moja trenutna točka</string>
     <string name="shared_string_finish">Cilj</string>
-    <string name="plan_route">Planiranje poti</string>
+    <string name="plan_route">Načrtovanje poti</string>
     <string name="shared_string_sort">Razvrsti</string>
     <string name="coordinate_input">Vpis koordinat</string>
     <string name="is_saved">je shranjeno</string>
-    <string name="marker_save_as_track">Shrani kot sled</string>
+    <string name="marker_save_as_track">Shrani kot datoteko GPX</string>
     <string name="move_to_history">Premakni v zgodovino</string>
     <string name="group_will_be_removed_after_restart">Skupina bo odstranjena ob ponovnem zagonu programa.</string>
     <string name="map_orientation_change_in_accordance_with_speed">Prag usmerjenosti zemljevida</string>
@@ -2856,7 +2856,7 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="make_round_trip_descr">Dodaj kopijo začetne točke kot ciljno.</string>
     <string name="make_round_trip">Ustvari krožno potovanje</string>
     
-    <string name="marker_save_as_track_descr">Izvozi oznake v datoteko:</string>
+    <string name="marker_save_as_track_descr">Izvozi označbe v datoteko GPX:</string>
     <string name="make_active">Označi kot dejavno</string>
     <string name="appearance_on_the_map">Prikaz na zemljevidu</string>
     <string name="shared_string_gpx_waypoints">Vmesne točke sledi</string>
@@ -2901,12 +2901,12 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="empty_state_av_notes_desc">Dodajte slikovno, zvokovno ali video opombo za vsako točko na zemljevidu prek gradnika ali vsebinskega menija.</string>
     <string name="notes_by_date">Opombe po datumu</string>
     <string name="looking_for_tracks_with_waypoints">Iskanje sledi z vmesnimi točkami</string>
-    <string name="add_track_to_markers_descr">"Izbor sledi za dodajanje vmesnik točk kot označbe na  zemljevid (izpisane so le sledi z vmesnimi točkami)."</string>
+    <string name="add_track_to_markers_descr">Izbor sledi za dodajanje vmesnik točk kot označbe.</string>
     <string name="add_favourites_group_to_markers_descr">Izbor priljubljenih za dodajanje med označbe.</string>
-    <string name="add_group_descr">Uvoziti je mogoče skupine iz priljubljenih ali vmesnih točk sledi.</string>
+    <string name="add_group_descr">Uvoz skupin iz priljubljenih ali vmesnih točk sledi.</string>
     <string name="empty_state_markers_active">Ustvarjanje označb zemljevida</string>
     <string name="empty_state_markers_active_desc">Ob dolgem pritisku na zemljevid se izriše označba, s ponovnim pa se doda še zastavica.</string>
-    <string name="empty_state_markers_groups_desc">Uvoziti je mogoče skupine priljubljenih in vmesnih točk kot označbe na zemljevidu.</string>
+    <string name="empty_state_markers_groups_desc">Uvoz skupin priljubljenih in vmesnih točk kot označbe na zemljevidu.</string>
     <string name="empty_state_markers_history_desc">Označbe, označene kot dosežene, bodo prikazane na tem zaslonu.</string>
     <string name="shared_string_two">Dve</string>
     <string name="shared_string_one">Ena</string>
@@ -3036,7 +3036,7 @@ Koda predstavlja območje: %1$s x %2$s</string>
 	<string name="update_is_available">Na voljo je posodobitev</string>
 	<string name="download_file">Prejmi datoteko</string>
     <string name="get_unlimited_access">Pridobitev neomejenega dostopa</string>
-    <string name="wikivoyage_travel_guide">Popotniški vodnik WikiVoyage</string>
+    <string name="wikivoyage_travel_guide">Popotniški vodniki</string>
     <string name="monthly_map_updates">Posodobitve zemljevida: <b>vsak mesec</b></string>
     <string name="start_editing">Začni urejanje</string>
     <string name="daily_map_updates">Posodobitve zemljevida: <b>vsako uro</b></string>
@@ -3053,15 +3053,15 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="wikipedia_offline">Wikipedia brez povezave</string>
     <string name="shared_string_only_with_wifi">Le s povezavo Wi-FI</string>
     <string name="wikivoyage_download_pics">Prejmi slike</string>
-    <string name="wikivoyage_download_pics_descr">Slike v prispevku je mogoče prejeti za delo brez povezave.
-\nNastavitev je vedno mogoče spremeniti v meniju »Razišči« → »Možnosti«.</string>
+    <string name="wikivoyage_download_pics_descr">Slike v prispevku je mogoče prejeti za delo brez povezave. 
+\nNastavitev je na voljo v meniju »Razišči« → »Možnosti«.</string>
     <string name="shared_string_wifi_only">Le s povezavo Wi-FI</string>
     <string name="select_travel_book">Izbor popotniškega vodnika</string>
     <string name="shared_string_travel_book">Popotniški vodnik</string>
     <string name="images_cache">Predpomnilnik slik</string>
     <string name="delete_search_history">Izbriši zgodovino iskanja</string>
     <string name="download_images">Prejmi slike</string>
-    <string name="download_maps_travel">Popotniški zemljevidi</string>
+    <string name="download_maps_travel">Popotniški vodniki</string>
     <string name="shared_string_wikivoyage">Wikivoyage</string>
     <string name="article_removed">Prispevek je odstranjen</string>
     <string name="shared_string_read">Preberi</string>
@@ -3071,4 +3071,24 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="shared_string_bookmark">Zaznamek</string>
     <string name="hide_full_description">Skrij polni opis</string>
     <string name="show_full_description">Pokaži polni opis</string>
-    </resources>
+    <string name="quick_action_edit_actions">Uredi dejanja</string>
+    <string name="purchase_dialog_title">Izbor načrta</string>
+    <string name="release_3_0">• Novo: podpora za popotniške vodnike. Mesta vodnikov so povezana z zemljevidom, začetni podatki pa s spletišča Wikivoyage.
+\n
+\n• Wikipedija: nov videz, dejavne povezave, podpora za prikaz slik
+\n
+\n• Vmesnik Open Track: podpora za skupine vmesnih točk
+\n
+\n• Označbe zemljevida: možnost uvoza izbranih skupin iz datotek GPX, vpis koordinat, spremenjen vmesnik
+\n
+\n• Naročnine na OsmAnd Live podpirajo vse možnosti programa OsmAnd
+\n
+\n</string>
+    <string name="download_wikipedia_label">Prejmi podatke Wikipedije</string>
+    <string name="open_in_browser_wiki">Odpri prispevek na spletni strani</string>
+    <string name="open_in_browser_wiki_description">Pregledovanje prispevkov v spletnem brskalniku.</string>
+    <string name="download_wiki_region_placeholder">to območje</string>
+    <string name="wiki_article_search_text">Iskanje pripadajočega prispevka na Wikipediji</string>
+    <string name="wiki_article_not_found">Prispevka ni mogoče najti</string>
+    <string name="how_to_open_wiki_title">Kako odpreti prispevek na Wikipediji?</string>
+</resources>
