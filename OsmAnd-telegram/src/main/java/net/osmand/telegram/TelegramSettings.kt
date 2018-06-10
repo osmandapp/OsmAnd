@@ -39,10 +39,22 @@ class TelegramSettings(private val app: TelegramApplication) {
         return shareLocationChats.contains(chatTitle)
     }
 
+    fun hasAnyChatToShowOnMap(): Boolean {
+        return showOnMapChats.isNotEmpty()
+    }
+
+    fun isShowingChatOnMap(chatTitle: String): Boolean {
+        return showOnMapChats.contains(chatTitle)
+    }
+
     fun removeNonexistingChats(presentChatTitles: List<String>) {
         val shareLocationChats = shareLocationChats.toMutableList()
         shareLocationChats.intersect(presentChatTitles)
         this.shareLocationChats = shareLocationChats.toHashSet()
+
+        val showOnMapChats = showOnMapChats.toMutableList()
+        showOnMapChats.intersect(presentChatTitles)
+        this.showOnMapChats = showOnMapChats.toHashSet()
     }
 
     fun shareLocationToChat(chatTitle: String, share: Boolean) {
@@ -55,7 +67,18 @@ class TelegramSettings(private val app: TelegramApplication) {
         this.shareLocationChats = shareLocationChats.toHashSet()
     }
 
+    fun showChatOnMap(chatTitle: String, show: Boolean) {
+        val showOnMapChats = showOnMapChats.toMutableList()
+        if (show) {
+            showOnMapChats.add(chatTitle)
+        } else {
+            showOnMapChats.remove(chatTitle)
+        }
+        this.showOnMapChats = showOnMapChats.toHashSet()
+    }
+
     fun getShareLocationChats() = ArrayList(shareLocationChats)
+    fun getShowOnMapChats() = ArrayList(showOnMapChats)
 
     fun save() {
         val prefs = app.getSharedPreferences(SETTINGS_NAME, Context.MODE_PRIVATE)

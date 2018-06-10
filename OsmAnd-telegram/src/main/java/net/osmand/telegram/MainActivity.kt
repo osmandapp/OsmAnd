@@ -315,6 +315,7 @@ class MainActivity : AppCompatActivity(), TelegramListener {
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
             val chatTitle = chats[position].title
             holder.groupName?.text = chatTitle
+
             holder.shareLocationSwitch?.setOnCheckedChangeListener(null)
             holder.shareLocationSwitch?.isChecked = settings.isSharingLocationToChat(chatTitle)
             holder.shareLocationSwitch?.setOnCheckedChangeListener { view, isChecked ->
@@ -327,6 +328,17 @@ class MainActivity : AppCompatActivity(), TelegramListener {
                     }
                 } else {
                     app.shareLocationHelper.stopSharingLocation()
+                }
+            }
+
+            holder.showOnMapSwitch?.setOnCheckedChangeListener(null)
+            holder.showOnMapSwitch?.isChecked = settings.isShowingChatOnMap(chatTitle)
+            holder.showOnMapSwitch?.setOnCheckedChangeListener { view, isChecked ->
+                settings.showChatOnMap(chatTitle, isChecked)
+                if (settings.hasAnyChatToShowOnMap()) {
+                    //app.shareLocationHelper.startSharingLocation()
+                } else {
+                    //app.shareLocationHelper.stopSharingLocation()
                 }
             }
         }
