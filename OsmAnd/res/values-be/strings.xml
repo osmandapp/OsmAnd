@@ -1453,7 +1453,7 @@
     
     <string name="sort_by_distance">Сартаваць паводле адлегласьці</string>
     <string name="sort_by_name">Сартаваць паводле назвы</string>
-    <string name="none_selected_gpx">GPX-файлы не абраныя. Выбраць доўгім утрымліваннем.</string>
+    <string name="none_selected_gpx">GPX-файлы не абраныя. Выбраць доўгім націскам.</string>
     
     <string name="local_index_select_gpx_file">Выбраць для паказу</string>
     <string name="no_index_file_to_download">Спампоўка не знойдзеная. Калі ласка, праверце ваша злучэнне з Інтэрнэтам.</string>
@@ -2594,24 +2594,24 @@
     <string name="quick_action_navigation_voice">Голас укл/адкл</string>
     <string name="quick_favorites_show_favorites_dialog">Паказаць дыялёг улюбёных</string>
     <string name="quick_favorites_name_preset">Назва перадусталёўкі</string>
-    <string name="quick_action_add_marker_descr">Пры націсканні на кнопку дадасць маркер на мапу ў цэнтры экрана.</string>
-    <string name="quick_action_add_gpx_descr">Пры націску на кнопку дадасьць GPX-кропку ў сярэдзіне экрана.</string>
-    <string name="quick_action_take_audio_note_descr">Пры націсканні на кнопку дадасць аўдыянататку на мапу ў сярэдзіне экрана.</string>
-    <string name="quick_action_take_video_note_descr">Пры націсканні на кнопку дадасць відэанататку на мапу ў сярэдзіне экрана.</string>
-    <string name="quick_action_take_photo_note_descr">Пры націсканні на кнопку дадасць фотанататку на мапу ў сярэдзіне экрана.</string>
-    <string name="quick_action_add_osm_bug_descr">Пры націсканні на кнопку дадасць OSM-нататку на мапу ў сярэдзіне экрана.</string>
-    <string name="quick_action_add_poi_descr">Пры націсканні на кнопку дадасць POI ў сярэдзіне экрана.</string>
-    <string name="quick_action_navigation_voice_descr">Пры націсканьні на кнопку адключыць ці ўключыць галасавыя падказкі падчас навігацыі.</string>
-    <string name="quick_action_add_parking_descr">Націск на кнопку дадасьць месца паркоўкі ў сярэдзіне экрана.</string>
+    <string name="quick_action_add_marker_descr">Націск на гэтую кнопку дадасць маркер на мапу ў цэнтры экрана.</string>
+    <string name="quick_action_add_gpx_descr">Націск на гэтую кнопку дадасьць GPX-кропку ў сярэдзіне экрана.</string>
+    <string name="quick_action_take_audio_note_descr">Націск на гэтую кнопку дадасць аўдыянататку на мапу ў сярэдзіне экрана.</string>
+    <string name="quick_action_take_video_note_descr">Націск на гэтую кнопку дадасць відэанататку на мапу ў сярэдзіне экрана.</string>
+    <string name="quick_action_take_photo_note_descr">Націск на гэтую кнопку дадасць фотанататку на мапу ў сярэдзіне экрана.</string>
+    <string name="quick_action_add_osm_bug_descr">Націск на гэтую кнопку дадасць OSM-нататку на мапу ў сярэдзіне экрана.</string>
+    <string name="quick_action_add_poi_descr">Націск на гэтую кнопку дадасць POI ў сярэдзіне экрана.</string>
+    <string name="quick_action_navigation_voice_descr">Націск на гэтую кнопку адключыць ці ўключыць галасавыя падказкі падчас навігацыі.</string>
+    <string name="quick_action_add_parking_descr">Націск на гэтую кнопку дадасьць месца паркоўкі ў сярэдзіне экрана.</string>
     <string name="quick_action_interim_dialog">Паказаць прамежкавы дыялёг</string>
     <string name="favorite_autofill_toast_text">" было захавана ў "</string>
     <string name="quick_action_duplicates">Назва для хуткага дзеяньня ўжо існуе. Назва будзе змененая на %1$s, каб пазбавіцца дубляваньня.</string>
     <string name="quick_action_duplicate">Знойдзены дублікат назвы</string>
-    <string name="quick_action_showhide_favorites_descr">Націсканне на кнопку пакажа ці схавае ўлюбёныя кропкі на мапе.</string>
-    <string name="quick_action_showhide_poi_descr">Націсканне на кнопку пакажа ці схавае POI на мапе.</string>
+    <string name="quick_action_showhide_favorites_descr">Націск на гэтую кнопку пакажа ці схавае ўлюбёныя кропкі на мапе.</string>
+    <string name="quick_action_showhide_poi_descr">Націск на гэтую кнопку пакажа ці схавае POI на мапе.</string>
     <string name="quick_action_add_create_items">Стварэнне элементаў</string>
     <string name="quick_action_gpx_category_descr">Абярыце катэгорыю (апцыянальна).</string>
-    <string name="quick_action_page_list_descr">Націсканне на кнопку гартае старонкі данага спісу.</string>
+    <string name="quick_action_page_list_descr">Націск на гэтую кнопку гартае старонкі данага спісу.</string>
     <string name="quick_action_map_overlay">Змяніць мапу пакрыцця</string>
     <string name="quick_action_map_overlay_title">Мапа пакрыцця</string>
     <string name="quick_action_map_overlay_action">Дадаць мапу пакрыцця</string>
@@ -2657,9 +2657,9 @@
     <string name="type_city_town">Увядзіце горад</string>
     <string name="type_postcode">Увядзіце паштовы індэкс</string>
     <string name="quick_action_auto_zoom_desc">Націск на гэтую кнопку ўключыць/адключыць аўтамаштабаванне мапы ў залежнасці ад хуткасці.</string>
-    <string name="quick_action_add_destination_desc">Націск на кнопку зробіць цэнтр экрана пунктам прызначэння, а папярэдні пункт прызначэння стане апошняй прамежкавай кропкай.</string>
-    <string name="quick_action_replace_destination_desc">Націск на кнопку зробіць цэнтр экрана пунктам прызначэння, замяняючы папярэдні пункт прызначэння, калі ён ёсць.</string>
-    <string name="quick_action_add_first_intermediate_desc">Націск на кнопку зробіць цэнтр экрана першым прамежкавым пунктам прызначэння .</string>
+    <string name="quick_action_add_destination_desc">Націск на гэтую кнопку зробіць цэнтр экрана пунктам прызначэння, а папярэдні пункт прызначэння стане апошняй прамежкавай кропкай.</string>
+    <string name="quick_action_replace_destination_desc">Націск на гэтую кнопку зробіць цэнтр экрана пунктам прызначэння, замяняючы папярэдні пункт прызначэння, калі ён ёсць.</string>
+    <string name="quick_action_add_first_intermediate_desc">Націск на гэтую кнопку зробіць цэнтр экрана першым прамежкавым пунктам прызначэння .</string>
     <string name="no_overlay">Няма пакрыцця</string>
     <string name="no_underlay">Няма падкладкі</string>
     <string name="subscribe_email_desc">Падпішыцеся на нашу паштовую рассылку аб зніжках на праграму і атрымайце 3 дадатковыя мапы!</string>
@@ -2704,7 +2704,7 @@
     <string name="quick_action_showhide_osmbugs_title">Паказаць/схаваць OSM-нататкі</string>
     <string name="quick_action_osmbugs_show">Паказаць OSM-нататкі</string>
     <string name="quick_action_osmbugs_hide">Схаваць OSM-нататкі</string>
-    <string name="quick_action_showhide_osmbugs_descr">Націск на гэтую кнопку дзеяння пакажа ці схавае OSM-нататкі на мапе.</string>
+    <string name="quick_action_showhide_osmbugs_descr">Націск на гэтую кнопку пакажа ці схавае OSM-нататкі на мапе.</string>
     <string name="sorted_by_distance">Адсартавана па адлегласці</string>
     <string name="search_favorites">Пошук улюбёных</string>
     <string name="shared_string_plugin">Дадатак</string>
