@@ -1032,7 +1032,7 @@ Proporcionális memória %4$s MB (Android korlát %5$s MB, Dalvik %6$s MB).</str
     <string name="recording_is_recorded">Hang/video felvétele. Leállításhoz koppints az A/V vezérlő stop gombjára.</string>
     <string name="recording_playing">A hangfelvétel lejátszása elindult…\n%1$s</string>
     <string name="recording_open_external_player">Külső lejátszó megnyitása</string>
-    <string name="recording_delete_confirm">Törlöd a felvételt?</string>
+    <string name="recording_delete_confirm">Törlöd az element?</string>
 
     <string name="recording_unavailable">nem elérhető</string>
     <string name="recording_context_menu_arecord">Hangjegyzet készítése</string>
@@ -3130,4 +3130,8 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="touring_view_render_descr">"Nagyon részletes stílus utazásokhoz. Tartalmazza az alapértelmezett stílus összes beállítási lehetőségét, valamint: annyi részletet jelenít meg, amennyit csak lehetséges, különösen az utak, ösvények és más utazásnál hasznos utak tekintetében.  Tisztán elkülönülnek a különféle úttípusok, felidézve az utazóatlaszok stílusát. Nagy kontrasztú színvilág kültéri használatra, nappali és éjszakai móddal."</string>
     <string name="default_render_descr">Általános célú stílus. Egyszerű, tiszta kinézet sűrűn lakott településeken. Főbb tulajdonságok: szintvonalak, útvonalak, útminőség, behajtási korlátozások, útszám pajzsok, ösvények megjelenítése SAC-skála szerint, vadvízi sportok.</string>
     <string name="shared_string_gpx_files">GPX fájlok</string>
+    <string name="quick_action_edit_actions">Szerkesztés műveletek</string>
+    <string name="shared_string_dont">Nem</string>
+    <string name="shared_string_do">Igen</string>
+    <string name="shared_string_total">Összesen</string>
     </resources>
