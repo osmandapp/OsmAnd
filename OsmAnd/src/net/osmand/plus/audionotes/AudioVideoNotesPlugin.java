@@ -3,6 +3,7 @@ package net.osmand.plus.audionotes;
 import android.Manifest;
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.ClipData;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -827,6 +828,9 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	public void captureImage(double lat, double lon, final MapActivity mapActivity) {
 		Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 		Uri fileUri = AndroidUtils.getUriForFile(mapActivity, getBaseFileName(lat, lon, app, IMG_EXTENSION));
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN && Build.VERSION.SDK_INT <= Build.VERSION_CODES.LOLLIPOP) {
+			intent.setClipData(ClipData.newRawUri("", fileUri));
+		}
 		intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri); // set the image file name
 		intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
 		// start the image capture Intent
@@ -841,8 +845,11 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 //			ext = THREEGP_EXTENSION;
 //		}
 		Uri fileUri = AndroidUtils.getUriForFile(mapActivity, getBaseFileName(lat, lon, app, ext));
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN && Build.VERSION.SDK_INT <= Build.VERSION_CODES.LOLLIPOP) {
+			intent.setClipData(ClipData.newRawUri("", fileUri));
+		}
 		intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri); // set the image file name
-		intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+		intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
 		intent.putExtra(MediaStore.EXTRA_VIDEO_QUALITY, 1); // set the video image quality to high
 		// start the video capture Intent
 		mapActivity.startActivityForResult(intent, 205);
@@ -1501,8 +1508,12 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 		final File f = getBaseFileName(lat, lon, app, IMG_EXTENSION);
 		lastTakingPhoto = f;
-		takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, AndroidUtils.getUriForFile(mapActivity,f));
-		takePictureIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+		Uri uri = AndroidUtils.getUriForFile(mapActivity, f);
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN && Build.VERSION.SDK_INT <= Build.VERSION_CODES.LOLLIPOP) {
+			takePictureIntent.setClipData(ClipData.newRawUri("", uri));
+		}
+		takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
+		takePictureIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
 		try {
 			mapActivity.startActivityForResult(takePictureIntent, 205);
 		} catch (Exception e) {
