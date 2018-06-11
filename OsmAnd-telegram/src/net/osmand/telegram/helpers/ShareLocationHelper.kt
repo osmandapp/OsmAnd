@@ -52,29 +52,33 @@ class ShareLocationHelper(private val app: TelegramApplication) {
     }
 
     fun startSharingLocation() {
-        sharingLocation = true
+        if (!sharingLocation) {
+            sharingLocation = true
 
-        app.startLocationService()
+            app.startMyLocationService()
 
-        refreshNotification()
+            refreshNotification()
+        }
     }
 
     fun stopSharingLocation() {
-        sharingLocation = false
+        if (sharingLocation) {
+            sharingLocation = false
 
-        app.stopLocationService()
-        lastLocation = null
-        lastTimeInMillis = 0L
-        distance = 0
-        duration = 0
+            app.stopMyLocationService()
+            lastLocation = null
+            lastTimeInMillis = 0L
+            distance = 0
+            duration = 0
 
-        refreshNotification()
+            refreshNotification()
+        }
     }
 
     fun pauseSharingLocation() {
         sharingLocation = false
 
-        app.stopLocationService()
+        app.stopMyLocationService()
         lastLocation = null
         lastTimeInMillis = 0L
 

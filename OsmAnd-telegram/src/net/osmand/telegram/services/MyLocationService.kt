@@ -1,4 +1,4 @@
-package net.osmand.telegram
+package net.osmand.telegram.services
 
 import android.app.Service
 import android.content.Context
@@ -14,10 +14,13 @@ import android.util.Log
 import android.widget.Toast
 import net.osmand.telegram.notifications.TelegramNotification
 import net.osmand.PlatformUtil
+import net.osmand.telegram.R
+import net.osmand.telegram.TelegramApplication
 
-class LocationService : Service(), LocationListener {
+class MyLocationService : Service(), LocationListener {
 
     private val binder = LocationServiceBinder()
+    private fun app() = application as TelegramApplication
 
     var handler: Handler? = null
 
@@ -28,7 +31,7 @@ class LocationService : Service(), LocationListener {
     }
 
     fun stopIfNeeded(ctx: Context) {
-        val serviceIntent = Intent(ctx, LocationService::class.java)
+        val serviceIntent = Intent(ctx, MyLocationService::class.java)
         ctx.stopService(serviceIntent)
     }
 
@@ -36,13 +39,13 @@ class LocationService : Service(), LocationListener {
         handler = Handler()
         val app = app()
 
-        app.locationService = this
+        app.myLocationService = this
 
         // requesting
         // request location updates
         val locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
         try {
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0f, this@LocationService)
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0f, this@MyLocationService)
         } catch (e: SecurityException) {
             Toast.makeText(this, R.string.no_location_permission, Toast.LENGTH_LONG).show()
             Log.d(PlatformUtil.TAG, "Location service permission not granted")
@@ -51,8 +54,6 @@ class LocationService : Service(), LocationListener {
             Log.d(PlatformUtil.TAG, "GPS location provider not available")
         }
 
-        // registering icon at top level
-        // Leave icon visible even for navigation for proper display
         val notification = app.notificationHelper.buildTopNotification()
         if (notification != null) {
             startForeground(TelegramNotification.TOP_NOTIFICATION_SERVICE_ID, notification)
@@ -62,12 +63,10 @@ class LocationService : Service(), LocationListener {
         return Service.START_REDELIVER_INTENT
     }
 
-    private fun app() = application as TelegramApplication
-
     override fun onDestroy() {
         super.onDestroy()
         val app = app()
-        app.locationService = null
+        app.myLocationService = null
 
         // remove updates
         val locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
@@ -107,8 +106,9 @@ class LocationService : Service(), LocationListener {
     override fun onTaskRemoved(rootIntent: Intent) {
         val app = app()
         app.notificationHelper.removeNotifications()
-        if (app.locationService != null) {
-            this@LocationService.stopSelf()
+        if (app.myLocationService != null) {
+            // Do not stop service after UI task was dismissed
+            //this@MyLocationService.stopSelf()
         }
     }
 

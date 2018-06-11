@@ -17,6 +17,7 @@ class TelegramHelper private constructor() {
     companion object {
         private val log = PlatformUtil.getLog(TelegramHelper::class.java)
         private const val CHATS_LIMIT = 100
+        private const val CHAT_LIVE_USERS_LIMIT = 100
         private const val IGNORED_ERROR_CODE = 406
 
         private var helper: TelegramHelper? = null
@@ -40,6 +41,8 @@ class TelegramHelper private constructor() {
     private val chatList = TreeSet<OrderedChat>()
     private val chatLiveMessages = ConcurrentHashMap<Long, Long>()
 
+    private val usersLiveMessages = ConcurrentHashMap<Long, TdApi.Message>()
+
     private val usersFullInfo = ConcurrentHashMap<Int, TdApi.UserFullInfo>()
     private val basicGroupsFullInfo = ConcurrentHashMap<Int, TdApi.BasicGroupFullInfo>()
     private val supergroupsFullInfo = ConcurrentHashMap<Int, TdApi.SupergroupFullInfo>()
@@ -61,6 +64,7 @@ class TelegramHelper private constructor() {
     private val liveLocationMessageUpdatesHandler = LiveLocationMessageUpdatesHandler()
 
     var listener: TelegramListener? = null
+    var incomingMessagesListener: TelegramIncomingMessagesListener? = null
 
     fun getChatList(): TreeSet<OrderedChat> {
         synchronized(chatList) {
@@ -74,6 +78,21 @@ class TelegramHelper private constructor() {
 
     fun getChat(id: Long): TdApi.Chat? {
         return chats[id]
+    }
+
+    fun getUser(id: Int): TdApi.User? {
+        return users[id]
+    }
+
+    fun getChatMessages(chatTitle: String): List<TdApi.Message> {
+        val res = mutableListOf<TdApi.Message>()
+        for (message in usersLiveMessages.values) {
+            val title = chats[message.chatId]?.title
+            if (title == chatTitle) {
+                res.add(message)
+            }
+        }
+        return res
     }
 
     private fun updateChatTitles() {
@@ -109,6 +128,10 @@ class TelegramHelper private constructor() {
         fun onTelegramChatsChanged()
         fun onTelegramError(code: Int, message: String)
         fun onSendLiveLicationError(code: Int, message: String)
+    }
+
+    interface TelegramIncomingMessagesListener {
+        fun onReceiveChatLocationMessages(chatTitle: String, vararg messages: TdApi.Message)
     }
 
     interface TelegramAuthorizationRequestListener {
@@ -174,7 +197,7 @@ class TelegramHelper private constructor() {
         }
     }
 
-    fun requestChats(reload: Boolean = false) {
+    private fun requestChats(reload: Boolean = false) {
         synchronized(chatList) {
             if (reload) {
                 chatList.clear()
@@ -214,7 +237,39 @@ class TelegramHelper private constructor() {
             }
         }
         updateChatTitles()
+        getChatRecentLocationMessages(chatTitles.keys)
         listener?.onTelegramChatsRead()
+    }
+
+    private fun getChatRecentLocationMessages(chatTitles: Set<String>) {
+        if (haveAuthorization) {
+            for (chatTitle in chatTitles) {
+                val chatId = this.chatTitles[chatTitle]
+                if (chatId != null) {
+                    client?.send(TdApi.SearchChatRecentLocationMessages(chatId, CHAT_LIVE_USERS_LIMIT), { obj ->
+                        when (obj.constructor) {
+                            TdApi.Error.CONSTRUCTOR -> {
+                                val error = obj as TdApi.Error
+                                val code = error.code
+                                if (code != IGNORED_ERROR_CODE && code != 400) {
+                                    listener?.onTelegramError(code, error.message)
+                                }
+                            }
+                            TdApi.Messages.CONSTRUCTOR -> {
+                                val messages = (obj as TdApi.Messages).messages
+                                for (message in messages) {
+                                    if (!message.isOutgoing) {
+                                        usersLiveMessages[message.id] = message
+                                    }
+                                }
+                                incomingMessagesListener?.onReceiveChatLocationMessages(chatTitle, *messages)
+                            }
+                            else -> listener?.onTelegramError(-1, "Receive wrong response from TDLib: $obj")
+                        }
+                    })
+                }
+            }
+        }
     }
 
     /**
@@ -338,7 +393,7 @@ class TelegramHelper private constructor() {
         }
     }
 
-    private inner class LiveLocationMessageUpdatesHandler: ResultHandler {
+    private inner class LiveLocationMessageUpdatesHandler : ResultHandler {
         override fun onResult(obj: TdApi.Object) {
             when (obj.constructor) {
                 TdApi.Error.CONSTRUCTOR -> {
@@ -562,6 +617,28 @@ class TelegramHelper private constructor() {
                     val chat = chats[updateChat.chatId]
                     synchronized(chat!!) {
                         chat.unreadMentionCount = updateChat.unreadMentionCount
+                    }
+                }
+                TdApi.UpdateMessageContent.CONSTRUCTOR -> {
+                    val updateMessageContent = obj as TdApi.UpdateMessageContent
+                    val message = usersLiveMessages[updateMessageContent.messageId]
+                    if (message != null && !message.isOutgoing) {
+                        message.content = updateMessageContent.newContent
+                        val chatTitle = chats[message.chatId]?.title
+                        if (chatTitle != null) {
+                            incomingMessagesListener?.onReceiveChatLocationMessages(chatTitle, message)
+                        }
+                    }
+                }
+                TdApi.UpdateNewMessage.CONSTRUCTOR -> {
+                    val updateNewMessage = obj as TdApi.UpdateNewMessage
+                    val message = updateNewMessage.message
+                    if (!message.isOutgoing && message.content is TdApi.MessageLocation) {
+                        usersLiveMessages[message.id] = message
+                        val chatTitle = chats[message.chatId]?.title
+                        if (chatTitle != null) {
+                            incomingMessagesListener?.onReceiveChatLocationMessages(chatTitle, message)
+                        }
                     }
                 }
                 TdApi.UpdateMessageMentionRead.CONSTRUCTOR -> {

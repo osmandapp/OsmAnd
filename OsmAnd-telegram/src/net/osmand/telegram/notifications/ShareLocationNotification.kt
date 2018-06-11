@@ -14,6 +14,14 @@ import net.osmand.util.Algorithms
 
 class ShareLocationNotification(app: TelegramApplication) : TelegramNotification(app, GROUP_NAME) {
 
+    companion object {
+
+        const val OSMAND_START_LOCATION_SHARING_SERVICE_ACTION = "osmand_start_location_sharing_service_action"
+        const val OSMAND_PAUSE_LOCATION_SHARING_SERVICE_ACTION = "osmand_pause_location_sharing_service_action"
+        const val OSMAND_STOP_LOCATION_SHARING_SERVICE_ACTION = "osmand_stop_location_sharing_service_action"
+        const val GROUP_NAME = "share_location"
+    }
+
     private var wasNoDataDismissed: Boolean = false
     private var lastBuiltNoData: Boolean = false
 
@@ -25,7 +33,7 @@ class ShareLocationNotification(app: TelegramApplication) : TelegramNotification
 
     override val isActive: Boolean
         get() {
-            val service = app.locationService
+            val service = app.myLocationService
             return isEnabled && service != null
         }
 
@@ -140,13 +148,5 @@ class ShareLocationNotification(app: TelegramApplication) : TelegramNotification
         }
 
         return notificationBuilder
-    }
-
-    companion object {
-
-        const val OSMAND_START_LOCATION_SHARING_SERVICE_ACTION = "osmand_start_location_sharing_service_action"
-        const val OSMAND_PAUSE_LOCATION_SHARING_SERVICE_ACTION = "osmand_pause_location_sharing_service_action"
-        const val OSMAND_STOP_LOCATION_SHARING_SERVICE_ACTION = "osmand_stop_location_sharing_service_action"
-        const val GROUP_NAME = "share_location"
     }
 }

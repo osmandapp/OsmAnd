@@ -56,6 +56,18 @@ class OsmandAidlHelper(private val app: Application) {
 
     private var mIOsmAndAidlInterface: IOsmAndAidlInterface? = null
 
+    var initialized: Boolean = false
+        private set
+
+    var bound: Boolean = false
+        private set
+
+    var listener: OsmandHelperListener? = null
+
+    interface OsmandHelperListener {
+        fun onOsmandConnectionStateChanged(connected: Boolean)
+    }
+
     /**
      * Class for interacting with the main interface of the service.
      */
@@ -68,18 +80,25 @@ class OsmandAidlHelper(private val app: Application) {
             // service through an IDL interface, so get a client-side
             // representation of that from the raw service object.
             mIOsmAndAidlInterface = IOsmAndAidlInterface.Stub.asInterface(service)
-            Toast.makeText(app, "OsmAnd service connected", Toast.LENGTH_SHORT).show()
+            initialized = true
+            Toast.makeText(app, "OsmAnd connected", Toast.LENGTH_SHORT).show()
+            listener?.onOsmandConnectionStateChanged(true)
         }
 
         override fun onServiceDisconnected(className: ComponentName) {
             // This is called when the connection with the service has been
             // unexpectedly disconnected -- that is, its process crashed.
             mIOsmAndAidlInterface = null
-            Toast.makeText(app, "OsmAnd service disconnected", Toast.LENGTH_SHORT).show()
+            Toast.makeText(app, "OsmAnd disconnected", Toast.LENGTH_SHORT).show()
+            listener?.onOsmandConnectionStateChanged(false)
         }
     }
 
     fun isOsmandBound(): Boolean {
+        return bound
+    }
+
+    fun isOsmandConnected(): Boolean {
         return mIOsmAndAidlInterface != null
     }
 
@@ -96,7 +115,7 @@ class OsmandAidlHelper(private val app: Application) {
                     if (mIOsmAndAidlInterface!!.getActiveGpx(res)) {
                         return res
                     }
-                } catch (e: RemoteException) {
+                } catch (e: Throwable) {
                     e.printStackTrace()
                 }
 
@@ -106,10 +125,17 @@ class OsmandAidlHelper(private val app: Application) {
 
     init {
         when {
-            bindService(OSMAND_PLUS_PACKAGE_NAME) -> OSMAND_PACKAGE_NAME = OSMAND_PLUS_PACKAGE_NAME
-            bindService(OSMAND_FREE_PACKAGE_NAME) -> OSMAND_PACKAGE_NAME = OSMAND_FREE_PACKAGE_NAME
+            bindService(OSMAND_PLUS_PACKAGE_NAME) -> {
+                OSMAND_PACKAGE_NAME = OSMAND_PLUS_PACKAGE_NAME
+                bound = true
+            }
+            bindService(OSMAND_FREE_PACKAGE_NAME) -> {
+                OSMAND_PACKAGE_NAME = OSMAND_FREE_PACKAGE_NAME
+                bound = true
+            }
             else -> {
-                Toast.makeText(app, "OsmAnd service NOT bind", Toast.LENGTH_SHORT).show()
+                bound = false
+                initialized = true
             }
         }
     }
@@ -118,13 +144,7 @@ class OsmandAidlHelper(private val app: Application) {
         return if (mIOsmAndAidlInterface == null) {
             val intent = Intent("net.osmand.aidl.OsmandAidlService")
             intent.`package` = packageName
-            val res = app.bindService(intent, mConnection, Context.BIND_AUTO_CREATE)
-            if (res) {
-                Toast.makeText(app, "OsmAnd service bind", Toast.LENGTH_SHORT).show()
-                true
-            } else {
-                false
-            }
+            app.bindService(intent, mConnection, Context.BIND_AUTO_CREATE)
         } else {
             true
         }
@@ -443,7 +463,7 @@ class OsmandAidlHelper(private val app: Application) {
      * @param zOrder - z-order position of layer. Default value is 5.5f
      * @param points - initial list of points. Nullable.
      */
-    fun addMapLayer(id: String, name: String, zOrder: Float, points: List<AMapPoint>): Boolean {
+    fun addMapLayer(id: String, name: String, zOrder: Float, points: List<AMapPoint>?): Boolean {
         if (mIOsmAndAidlInterface != null) {
             try {
                 val layer = AMapLayer(id, name, zOrder, points)
@@ -464,7 +484,7 @@ class OsmandAidlHelper(private val app: Application) {
      * @param zOrder - z-order position of layer. Default value is 5.5f
      * @param points - list of points. Nullable.
      */
-    fun updateMapLayer(id: String, name: String, zOrder: Float, points: List<AMapPoint>): Boolean {
+    fun updateMapLayer(id: String, name: String, zOrder: Float, points: List<AMapPoint>?): Boolean {
         if (mIOsmAndAidlInterface != null) {
             try {
                 val layer = AMapLayer(id, name, zOrder, points)
@@ -507,7 +527,7 @@ class OsmandAidlHelper(private val app: Application) {
      * @param details - list of details. Displayed under context menu.
      */
     fun addMapPoint(layerId: String, pointId: String, shortName: String, fullName: String,
-                    typeName: String, color: Int, location: ALatLon, details: List<String>): Boolean {
+                    typeName: String, color: Int, location: ALatLon, details: List<String>?): Boolean {
         if (mIOsmAndAidlInterface != null) {
             try {
                 val point = AMapPoint(pointId, shortName, fullName, typeName, color, location, details)
@@ -533,7 +553,7 @@ class OsmandAidlHelper(private val app: Application) {
      * @param details - list of details. Displayed under context menu.
      */
     fun updateMapPoint(layerId: String, pointId: String, shortName: String, fullName: String,
-                       typeName: String, color: Int, location: ALatLon, details: List<String>): Boolean {
+                       typeName: String, color: Int, location: ALatLon, details: List<String>?): Boolean {
         if (mIOsmAndAidlInterface != null) {
             try {
                 val point = AMapPoint(pointId, shortName, fullName, typeName, color, location, details)

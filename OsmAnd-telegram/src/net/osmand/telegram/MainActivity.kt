@@ -44,6 +44,7 @@ class MainActivity : AppCompatActivity(), TelegramListener {
         get() = application as TelegramApplication
 
     private val telegramHelper get() = app.telegramHelper
+    private val osmandHelper get() = app.osmandHelper
     private val settings get() = app.settings
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -92,7 +93,7 @@ class MainActivity : AppCompatActivity(), TelegramListener {
 
         if (settings.hasAnyChatToShareLocation() && !AndroidUtils.isLocationPermissionAvailable(this)) {
             requestLocationPermission()
-        } else if (settings.hasAnyChatToShowOnMap() && !app.osmandHelper.isOsmandBound()) {
+        } else if (settings.hasAnyChatToShowOnMap() && osmandHelper.initialized && !osmandHelper.isOsmandBound()) {
             showOsmandMissingDialog()
         }
     }
@@ -292,7 +293,7 @@ class MainActivity : AppCompatActivity(), TelegramListener {
                         app.shareLocationHelper.startSharingLocation()
                     }
                 }
-                if (settings.hasAnyChatToShowOnMap() && app.osmandHelper.isOsmandBound()) {
+                if (settings.hasAnyChatToShowOnMap() && osmandHelper.initialized && !osmandHelper.isOsmandBound()) {
                     showOsmandMissingDialog()
                 }
             }
@@ -362,18 +363,26 @@ class MainActivity : AppCompatActivity(), TelegramListener {
 
             holder.showOnMapSwitch?.setOnCheckedChangeListener(null)
             holder.showOnMapSwitch?.isChecked = settings.isShowingChatOnMap(chatTitle)
-            holder.showOnMapSwitch?.setOnCheckedChangeListener { view, isChecked ->
+            holder.showOnMapSwitch?.setOnCheckedChangeListener { _, isChecked ->
                 settings.showChatOnMap(chatTitle, isChecked)
                 if (settings.hasAnyChatToShowOnMap()) {
-                    if (!app.osmandHelper.isOsmandBound()) {
+                    if (osmandHelper.initialized && !osmandHelper.isOsmandBound()) {
                         if (isChecked) {
                             showOsmandMissingDialog()
                         }
                     } else {
-                        //app.shareLocationHelper.startSharingLocation()
+                        if (isChecked) {
+                            app.showLocationHelper.showChatMessages(chatTitle)
+                        } else {
+                            app.showLocationHelper.hideChatMessages(chatTitle)
+                        }
+                        app.showLocationHelper.startShowingLocation()
                     }
                 } else {
-                    //app.shareLocationHelper.stopSharingLocation()
+                    app.showLocationHelper.stopShowingLocation()
+                    if (!isChecked) {
+                        app.showLocationHelper.hideChatMessages(chatTitle)
+                    }
                 }
             }
         }

@@ -20,8 +20,8 @@
 
         <activity
             android:name=".MainActivity"
-            android:launchMode="singleTask"
             android:configChanges="orientation|screenSize"
+            android:launchMode="singleTask"
             android:windowSoftInputMode="adjustResize">
 
             <intent-filter>
@@ -33,13 +33,23 @@
         </activity>
 
         <service
+            android:name=".services.MyLocationService"
             android:label="@string/process_location_service"
-            android:name="net.osmand.telegram.LocationService"
-            android:stopWithTask="true">
+            android:stopWithTask="false">
             <intent-filter>
-                <action android:name="net.osmand.telegram.LocationService" />
+                <action android:name="net.osmand.telegram.services.MyLocationService" />
             </intent-filter>
         </service>
+
+        <service
+            android:name=".services.UserLocationService"
+            android:label="@string/process_location_service"
+            android:stopWithTask="false">
+            <intent-filter>
+                <action android:name="net.osmand.telegram.services.UserLocationService" />
+            </intent-filter>
+        </service>
+
 
         <receiver android:name=".notifications.NotificationDismissReceiver" />
     </application>
