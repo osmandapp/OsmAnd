@@ -27,7 +27,6 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
@@ -524,7 +523,7 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 		return card;
 	}
 
-	private View createDescriptionCard(final Context context, @NonNull String descHtml) {
+	private View createDescriptionCard(final Context context, @NonNull final String descHtml) {
 		String desc = Html.fromHtml(descHtml).toString().trim();
 		if (!TextUtils.isEmpty(desc)) {
 			View card = LayoutInflater.from(context).inflate(R.layout.gpx_description_card, null);
@@ -534,7 +533,14 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 			readBtn.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					Toast.makeText(context, "Read", Toast.LENGTH_SHORT).show(); // FIXME
+					TrackActivity activity = getTrackActivity();
+					if (activity != null) {
+						Bundle args = new Bundle();
+						args.putString(GpxDescriptionDialogFragment.CONTENT_KEY, descHtml);
+						GpxDescriptionDialogFragment fragment = new GpxDescriptionDialogFragment();
+						fragment.setArguments(args);
+						fragment.show(activity.getSupportFragmentManager(), GpxDescriptionDialogFragment.TAG);
+					}
 				}
 			});
 			return card;
