@@ -33,25 +33,14 @@
         </activity>
 
         <service
-            android:name=".services.MyLocationService"
-            android:label="@string/process_location_service"
+            android:name=".TelegramService"
+            android:label="@string/process_service"
             android:stopWithTask="false">
             <intent-filter>
-                <action android:name="net.osmand.telegram.services.MyLocationService" />
+                <action android:name="net.osmand.telegram.TelegramService" />
             </intent-filter>
         </service>
 
-        <service
-            android:name=".services.UserLocationService"
-            android:label="@string/process_location_service"
-            android:stopWithTask="false">
-            <intent-filter>
-                <action android:name="net.osmand.telegram.services.UserLocationService" />
-            </intent-filter>
-        </service>
-
-
-        <receiver android:name=".notifications.NotificationDismissReceiver" />
     </application>
 
 </manifest>

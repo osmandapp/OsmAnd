@@ -13,11 +13,9 @@ abstract class TelegramNotification(protected var app: TelegramApplication, val 
 
 	companion object {
 
-		const val SHARE_LOCATION_NOTIFICATION_SERVICE_ID = 6
-		const val SHOW_LOCATION_NOTIFICATION_SERVICE_ID = 7
+		const val LOCATION_NOTIFICATION_SERVICE_ID = 6
 
-		const val WEAR_SHARE_LOCATION_NOTIFICATION_SERVICE_ID = 1006
-		const val WEAR_SHOW_LOCATION_NOTIFICATION_SERVICE_ID = 1006
+		const val WEAR_LOCATION_NOTIFICATION_SERVICE_ID = 1006
 	}
 
 	protected var ongoing = true
@@ -37,8 +35,7 @@ abstract class TelegramNotification(protected var app: TelegramApplication, val 
 	abstract val isEnabled: Boolean
 
 	enum class NotificationType {
-		SHARE_LOCATION,
-		SHOW_LOCATION
+		LOCATION,
 	}
 
 	@SuppressLint("InlinedApi")

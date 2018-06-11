@@ -819,7 +819,10 @@ public class OsmandAidlApi {
 
 	boolean updateMapLayer(AMapLayer layer) {
 		if (layer != null && layers.containsKey(layer.getId())) {
-			layers.put(layer.getId(), layer);
+			AMapLayer existingLayer = layers.get(layer.getId());
+			for (AMapPoint point : layer.getPoints()) {
+				existingLayer.putPoint(point);
+			}
 			refreshMap();
 			return true;
 		} else {

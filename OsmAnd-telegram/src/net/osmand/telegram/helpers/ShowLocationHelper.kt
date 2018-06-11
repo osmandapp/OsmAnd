@@ -7,77 +7,77 @@ import org.drinkless.td.libcore.telegram.TdApi
 
 class ShowLocationHelper(private val app: TelegramApplication) {
 
-    companion object {
-        private const val MAP_LAYER_ID = "telegram_layer"
-    }
+	companion object {
+		private const val MAP_LAYER_ID = "telegram_layer"
+	}
 
-    private val telegramHelper = app.telegramHelper
-    private val osmandHelper = app.osmandHelper
+	private val telegramHelper = app.telegramHelper
+	private val osmandHelper = app.osmandHelper
 
-    var showingLocation: Boolean = false
-        private set
+	var showingLocation: Boolean = false
+		private set
 
-    private fun setMapLayer() {
-        osmandHelper.addMapLayer(MAP_LAYER_ID, "Telegram", 5.5f, null)
-    }
+	private fun setMapLayer() {
+		osmandHelper.addMapLayer(MAP_LAYER_ID, "Telegram", 5.5f, null)
+	}
 
-    fun showLocationOnMap(chatTitle: String, message: TdApi.Message) {
-        if (osmandHelper.isOsmandConnected()) {
-            val content = message.content
-            if (content is TdApi.MessageLocation) {
-                var userName = ""
-                val user = telegramHelper.getUser(message.senderUserId)
-                if (user != null) {
-                    userName = "${user.firstName} ${user.lastName}".trim()
-                    if (userName.isEmpty()) {
-                        userName = user.username
-                    }
-                    if (userName.isEmpty()) {
-                        userName = user.phoneNumber
-                    }
-                }
-                if (userName.isEmpty()) {
-                    userName = message.senderUserId.toString()
-                }
-                setMapLayer()
-                osmandHelper.addMapPoint(MAP_LAYER_ID, "${chatTitle}_${message.senderUserId}", userName, userName,
-                        chatTitle, Color.RED, ALatLon(content.location.latitude, content.location.longitude), null)
-            }
-        }
-    }
-    
-    fun showChatMessages(chatTitle: String) {
-        if (osmandHelper.isOsmandConnected()) {
-            val messages = telegramHelper.getChatMessages(chatTitle)
-            for (message in messages) {
-                showLocationOnMap(chatTitle, message)
-            }
-        }
-    }
+	fun showLocationOnMap(chatTitle: String, message: TdApi.Message) {
+		if (osmandHelper.isOsmandConnected()) {
+			val content = message.content
+			if (content is TdApi.MessageLocation) {
+				var userName = ""
+				val user = telegramHelper.getUser(message.senderUserId)
+				if (user != null) {
+					userName = "${user.firstName} ${user.lastName}".trim()
+					if (userName.isEmpty()) {
+						userName = user.username
+					}
+					if (userName.isEmpty()) {
+						userName = user.phoneNumber
+					}
+				}
+				if (userName.isEmpty()) {
+					userName = message.senderUserId.toString()
+				}
+				setMapLayer()
+				osmandHelper.addMapPoint(MAP_LAYER_ID, "${chatTitle}_${message.senderUserId}", userName, userName,
+						chatTitle, Color.RED, ALatLon(content.location.latitude, content.location.longitude), null)
+			}
+		}
+	}
 
-    fun hideChatMessages(chatTitle: String) {
-        if (osmandHelper.isOsmandConnected()) {
-            val messages = telegramHelper.getChatMessages(chatTitle)
-            for (message in messages) {
-                val user = telegramHelper.getUser(message.senderUserId)
-                if (user != null) {
-                    osmandHelper.removeMapPoint(MAP_LAYER_ID, "${chatTitle}_${message.senderUserId}")
-                }
-            }
-        }
-    }
+	fun showChatMessages(chatTitle: String) {
+		if (osmandHelper.isOsmandConnected()) {
+			val messages = telegramHelper.getChatMessages(chatTitle)
+			for (message in messages) {
+				showLocationOnMap(chatTitle, message)
+			}
+		}
+	}
 
-    fun startShowingLocation() {
-        if (!showingLocation) {
-            showingLocation = true
-            app.startUserLocationService()
-        }
-    }
+	fun hideChatMessages(chatTitle: String) {
+		if (osmandHelper.isOsmandConnected()) {
+			val messages = telegramHelper.getChatMessages(chatTitle)
+			for (message in messages) {
+				val user = telegramHelper.getUser(message.senderUserId)
+				if (user != null) {
+					osmandHelper.removeMapPoint(MAP_LAYER_ID, "${chatTitle}_${message.senderUserId}")
+				}
+			}
+		}
+	}
 
-    fun stopShowingLocation() {
-        if (showingLocation) {
-            showingLocation = false
-            app.stopUserLocationService()
-        }
-    }
+	fun startShowingLocation() {
+		if (!showingLocation) {
+			showingLocation = true
+			app.startUserLocationService()
+		}
+	}
+
+	fun stopShowingLocation() {
+		if (showingLocation) {
+			showingLocation = false
+			app.stopUserLocationService()
+		}
+	}
 }
