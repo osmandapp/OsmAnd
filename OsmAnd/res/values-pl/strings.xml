@@ -287,7 +287,7 @@
     
     <string name="gpx_files_not_found">Nie odnaleziono plików GPX w katalogu śladów</string>
     <string name="layer_gpx_layer">Pliki GPX…</string>
-    <string name="error_reading_gpx">Błąd odczytu danych GPX</string>
+    <string name="error_reading_gpx">Nie można odczytać danych GPX</string>
     <string name="vector_data">Wektorowe mapy offline</string>
     <string name="transport_context_menu">Wyszukaj komunikację na przystanku</string>
 
@@ -306,10 +306,10 @@
     <string name="no_fav_to_save">Brak ulubionych punktów do zapisania</string>
     <string name="shared_string_import">Importuj</string>
 
-    <string name="error_occurred_loading_gpx">Wystąpił błąd podczas wczytywania GPX</string>
+    <string name="error_occurred_loading_gpx">Nie można wczytać GPX</string>
     <string name="send_report">Wyślij zgłoszenie</string>
     <string name="none_region_found">Nie znaleziono pobranych map na karcie pamięci.</string>
-    <string name="poi_namefinder_query_empty">Wprowadź zapytanie by znaleźć POI</string>
+    <string name="poi_namefinder_query_empty">Napisz, aby odnaleźć POI</string>
     <string name="any_poi">Jakiekolwiek</string>
     
     <string name="thanks_yandex_traffic">Podziękowania dla Yandex za informację o korkach.</string>
@@ -433,7 +433,7 @@
 
 
     <string name="downloading_list_indexes">Pobieranie listy dostępnych regionów…</string>
-    <string name="list_index_files_was_not_loaded">Lista regionów nie została pobrana z https://osmand.net.</string>
+    <string name="list_index_files_was_not_loaded">Nie można uzyskać listy regionów z https://osmand.net.</string>
     <string name="select_index_file_to_download">Nic nie odnaleziono. Jeśli nie można odnaleźć danych dla regionu, można je przygotować samemu (zobacz https://osmand.net).</string>
 
     <string name="fav_points_edited">Ulubiony punkt został zmieniony</string>
@@ -1044,7 +1044,7 @@
     <string name="recording_is_recorded">Nagrywanie dźwięku/obrazu. Aby zatrzymać naciśnij przycisk na widżecie.</string>
     <string name="recording_playing">Dźwięk z wybranego nagrania jest odtwarzany.\n%1$s</string>
     <string name="recording_open_external_player">Otwórz zewnętrzny odtwarzacz</string>
-    <string name="recording_delete_confirm">Usunąć ten ślad?</string>
+    <string name="recording_delete_confirm">Usunąć ten element?</string>
 
     <string name="recording_unavailable">niedostępne</string>
     <string name="layer_recordings">Warstwa nagrywania</string>
@@ -2007,8 +2007,8 @@ Długość %2$s</string>
     <string name="show_free_version_banner">Baner darmowej wersji</string>
     <string name="show_free_version_banner_description">Wyświetla baner wersji darmowej w przypadku zainstalowania wersji płatnej.</string>
     <string name="buy">Kup</string>
-    <string name="activate_seamarks_plugin">Proszę włączyć wtyczkę latarni morskich</string>
-    <string name="activate_srtm_plugin">Proszę włączyć wtyczkę \"SRTM\"</string>
+    <string name="activate_seamarks_plugin">Prosimy włączyć wtyczkę \"Widoku mapy morskiej\"</string>
+    <string name="activate_srtm_plugin">Prosimy włączyć wtyczkę \"Linii konturowych\"</string>
     <string name="later">Później</string>
     <string name="get_full_version">Pełna wersja</string>
     <string name="downloads">Pobierz</string>
@@ -2258,7 +2258,7 @@ Długość %2$s</string>
     <string name="shared_string_topbar">Górny pasek</string>
     <string name="osm_user_stat">Edycji %1$s, range %2$s, zmian łącznie %3$s</string>
     <string name="osm_live_subscription">Subskrypcja OsmAnd Live</string>
-    <string name="osm_live_email_desc">Wymagany, aby dostarczyć informacje o wkładzie.</string>
+    <string name="osm_live_email_desc">Do informowania Ciebie o wkładzie.</string>
     <string name="osm_live_user_public_name">Nazwa publiczna</string>
     <string name="osm_live_hide_user_name">Ukrywanie nazwy w raportach</string>
     <string name="osm_live_support_region">Wspierane regiony</string>
@@ -2903,10 +2903,10 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="show_arrows_descr">Wyświetla na mapie jedną lub dwie strzałki wskazujące kierunek do aktywnych znaczników.</string>
     <string name="distance_indication_descr">Wybiera sposób wyświetlania odległości od aktywnego znacznika.</string>
     <string name="active_markers_descr">Wybiera liczbę wyświetlanych aktywnych znaczników.</string>
-    <string name="looking_for_tracks_with_waypoints">Wyszukiwanie plików GPX z punktami</string>
+    <string name="looking_for_tracks_with_waypoints">Wyszukiwanie ścieżek z punktami</string>
     <string name="shared_string_more_without_dots">Więcej</string>
     <string name="appearance_on_the_map">Wygląd na mapie</string>
-    <string name="add_track_to_markers_descr">Wybierz plik GPX, aby dodać punkty dla znaczników.</string>
+    <string name="add_track_to_markers_descr">Wybierz ścieżkę, aby dodać punkty dla znaczników.</string>
     <string name="shared_string_paste">Wklej</string>
     <string name="coordinate_input_accuracy_description">Przechodzi automatycznie do następnego pola po wprowadzeniu %1$d cyfr zmiennoprzecinkowych.</string>
     <string name="coordinate_input_accuracy">%1$d cyfr</string>
@@ -3021,7 +3021,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
 \n • czas wędrówki uwzględnia ukształtowanie terenu (reguła Naismitha).</string>
     <string name="osm_edits_export_desc">Wybierz typ zapisu: notatki OSM, POI, lub obie.</string>
     <string name="empty_state_osm_edits_descr">Twórz lub modyfikuj OSM POI, otwórz lub skomentuj notatki OSM, oraz udostępniaj nagrane pliki GPX.</string>
-    <string name="empty_state_markers_groups_desc">Importowanie grup z ulubionych lub punktów GPX jako znaczniki.</string>
+    <string name="empty_state_markers_groups_desc">Importowanie grup z ulubionych lub punktów jako znaczniki.</string>
     <string name="rendering_attr_whiteWaterSports_name">Sporty spływowe</string>
     <string name="group_deleted">Usunięto grupę</string>
     <string name="clear_all_intermediates">Wyczyść wszystkie punkty pośrednie</string>
@@ -3102,12 +3102,12 @@ Reprezentuje obszar: %1$s x %2$s</string>
 \n • Możesz zobaczyć swoją prędkość i wysokość
 \n • Opcja nagrywania GPX umożliwia nagranie podróży i podzielenie się nią
 \n • Za pomocą dodatkowej wtyczki możesz włączyć poziomice i cieniowanie terenu</string>
-    <string name="osmand_extended_description_part6">Spacery, wędrówki, zwiedzanie miast
-\n • Mapa pokazuje ci trasy piesze
-\n • Wikipedia w wybranym przez ciebie języku powie ci wiele podczas wycieczki po mieście
-\n • Przystanki komunikacji publicznej (autobusy, tramwaje, pociągi), w tym nazwy linii, pomogą ci się poruszać w nowym mieście
-\n • Nawigacja GPS w trybie pieszym tworzy trasę używając dróg pieszych
-\n • Możesz wysłać i śledzić trasę GPX lub nagrać i udostępnić swoją własną
+    <string name="osmand_extended_description_part6">Spacery, wędrówki, zwiedzanie miast 
+\n • Mapa pokazuje ci trasy piesze 
+\n • Wikipedia w wybranym przez ciebie języku powie ci wiele podczas wycieczki po mieście 
+\n • Przystanki komunikacji publicznej (autobusy, tramwaje, pociągi), w tym nazwy linii, pomogą ci się poruszać w nowym mieście 
+\n • Nawigacja GPS w trybie pieszym tworzy trasę używając dróg pieszych 
+\n • Wysłanie i śledzenie trasy GPX lub nagrywanie i udostępnianie swojej własnej
 \n</string>
     <string name="osmand_extended_description_part8">OsmAnd jest aktywnie rozwijanym oprogramowaniem open-source. Każdy może wnieść wkład w aplikację zgłaszając błędy, poprawiając tłumaczenia i kodując nowe funkcje. Projekt jest w stanie ciągłego udoskonalania dzięki tym formom interakcji między twórcami a użytkownikami. Postępy projektu zależą również od wkładów finansowych fundujących kodowanie i testowanie nowych funkcjonalności.
 \nPrzybliżone pokrycie i dokładność map:
@@ -3146,14 +3146,14 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="open_wikipedia_link_online_description">Odnośnik zostanie otwarty w przeglądarce internetowej.</string>
     <string name="how_to_open_link">Jak otwierać odnośniki?</string>
     <string name="release_3_0">• Nowość: Obsługiwanie światowych przewodników turystycznych offline. Opisane miejsca są powiązane z mapą. Wstępne dane z Wikipodróży
-\n
+\n 
 \n • Wikipedia: Nowy wygląd, obsługiwanie aktywnych odnośników i obrazów
-\n
+\n 
 \n • Open Track UI: Obsługiwanie grup punktów trasy
-\n
+\n 
 \n • Znaczniki mapy: Importowanie wybranych grup z plików GPX, wprowadzanie współrzędnych, nowy wygląd
-\n
-\n • Dane OsmAnd Live (subskrypcja) teraz obsługują wszystkie funkcje OsmAnd
+\n 
+\n • Subskrypcja OsmAnd Live obsługuje teraz wszystkie funkcje OsmAnd
 \n</string>
     <string name="import_gpx_file_description">może zostać zaimportowany jako ulubione lub plik GPX.</string>
     <string name="import_as_favorites">Zapisz plik jako ulubione</string>
@@ -3167,7 +3167,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="light_rs_render_descr">Uproszczony styl dla nawigacji samochodowej o dużym kontraście. Nie męczy oczu w trybie nocnym. Kluczowe cechy: poziomice, kontrastujące drogi w kolorze pomarańczowym, mniej rozpraszające drugoplanowe obiekty mapy.</string>
     <string name="topo_render_descr">Styl o dużym kontraście zaprojektowany pierwotnie do wędrówek górskich, wędrówek i jazdy na rowerze poza obszarami miejskimi. Zapewnia dobrą czytelność przy dużym oświetleniu zewnętrznym. Kluczowe cechy: kontrastujące drogi i obiekty naturalne, różne rodzaje tras, poziomice z zaawansowanymi ustawieniami wyświetlania, więcej szczegółów przy odpowiadających stopniach przybliżenia niż w stylu domyślnym. Opcja spójności nawierzchni umożliwia różnicowanie jakości nawierzchni drogi. Brak trybu nocnego.</string>
     <string name="mapnik_render_descr">Stary, domyślny styl renderowania wzorowany na stylu „Mapnik”. Kluczowe cechy: kolory podobne do użytych w stylu „Mapnik”.</string>
-    <string name="touring_view_render_descr">"Styl o dużej ilości szczegółów, przeznaczony do podróżowania. Zawiera wszystkie opcje konfiguracyjne domyślnego stylu i dodatkowo wyświetla możliwie dużo szczegółów, a zwłaszcza wszystkie drogi, ścieżki i inne obiekty związane z podróżowaniem. Odróżnia wizualnie różne rodzaje dróg,  przypominając w tym wiele atlasów podróżniczych. Zapewnia duży kontrast podczas używania na zewnątrz budynków oraz tryb dzienny i nocny."</string>
+    <string name="touring_view_render_descr">Styl o dużej ilości szczegółów, przeznaczony do podróżowania. Zawiera wszystkie opcje konfiguracyjne domyślnego stylu i dodatkowo wyświetla możliwie dużo szczegółów, a zwłaszcza wszystkie drogi, ścieżki i inne obiekty związane z podróżowaniem. Odróżnia wizualnie różne rodzaje dróg, przypominając w tym wiele atlasów podróżniczych. Zapewnia duży kontrast podczas używania na zewnątrz budynków oraz tryb dzienny i nocny.</string>
     <string name="default_render_descr">Styl ogólnego przeznaczenia. Zapewnia uproszczone renderowanie w gęsto zaludnionych miastach. Kluczowe cechy: poziomice, drogi, jakość nawierzchni, ograniczenia dostępu, oznaczenia dróg, renderowanie ścieżek z uwzględnieniem klasyfikacji trudności, obiekty sportów spływowych.</string>
     <string name="contour_lines_hillshade_maps">Poziomice i cieniowanie rzeźby terenu</string>
     <string name="get_osmand_live">Zdobądź OsmAnd Live i odblokuj wszystkie funkcjonalności: dzienne uaktualnienia map z nieograniczoną liczbą pobrań, wszystkie płatne i nieodpłatne wtyczki, Wikipedię, przewodniki Wikipodróży i wiele innych.</string>
@@ -3176,4 +3176,5 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="read_wikipedia_offline_description">Zasubskrybuj OsmAnd Live, by czytać artykuły Wikipedii i Wikipodróży offline.</string>
     <string name="read_wikipedia_offline">Czytaj Wikipedię offline</string>
     <string name="shared_string_gpx_files">Pliki GPX</string>
+    <string name="quick_action_edit_actions">Edycja działań</string>
     </resources>

@@ -3865,4 +3865,20 @@
 
 	<string name="poi_barbecue_grill">Grill barbecue: tak</string>
 
-	</resources>
+	<string name="poi_service_vehicle_alignment_yes">Regulacja</string>
+	<string name="poi_climbing_adventure">Wyprawy wspinaczkowe</string>
+
+	<string name="poi_glacier_type_outlet">Odpływ</string>
+	<string name="poi_glacier_type_shelf">Szelf</string>
+	<string name="poi_glacier_type_remnant">Pozostałość</string>
+	<string name="poi_checkpoint_hiking">Baza wspinaczkowa</string>
+	<string name="poi_checkpoint_type_stamp">Punkt stemplowania</string>
+	<string name="poi_checkpoint_type_code">Kodowy</string>
+	<string name="poi_checkpoint_type_notebook">Zapisywany w dziennik</string>
+	<string name="poi_checkpoint_type_needler">Maszyna igłowa</string>
+	<string name="poi_checkpoint_type_electronic">Elektroniczny</string>
+	<string name="poi_rock">Skała</string>
+
+	<string name="poi_end_date">Data ukończenia</string>
+
+</resources>
