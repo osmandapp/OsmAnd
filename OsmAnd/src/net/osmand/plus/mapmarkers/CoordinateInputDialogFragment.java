@@ -47,6 +47,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import net.osmand.AndroidUtils;
 import net.osmand.Location;
 import net.osmand.data.LatLon;
@@ -57,10 +58,7 @@ import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities.UpdateLocationViewCache;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.MapViewTrackingUtilities;
-import net.osmand.plus.dashboard.DashLocationFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapmarkers.CoordinateInputBottomSheetDialogFragment.CoordinateInputFormatChangeListener;
 import net.osmand.plus.mapmarkers.adapters.CoordinateInputAdapter;
@@ -185,12 +183,10 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 	}
 
 	private void registerMainView() {
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity == null) {
+		final Context ctx = getContext();
+		if (ctx == null) {
 			return;
 		}
-
-		final Context ctx = getContext();
 
 		if (orientationPortrait) {
 			View.OnClickListener backspaceOnClickListener = new View.OnClickListener() {
@@ -272,7 +268,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 				}
 			}
 		});
-		adapter = new CoordinateInputAdapter(mapActivity, mapMarkers);
+		adapter = new CoordinateInputAdapter(getMyApplication(), mapMarkers);
 		RecyclerView recyclerView = (RecyclerView) mainView.findViewById(R.id.markers_recycler_view);
 		recyclerView.setLayoutManager(new LinearLayoutManager(ctx));
 		recyclerView.setAdapter(adapter);
@@ -1022,10 +1018,6 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 
 	private Drawable getColoredIcon(@DrawableRes int resId, @ColorRes int colorResId) {
 		return getMyApplication().getUIUtilities().getIcon(resId, colorResId);
-	}
-
-	private MapActivity getMapActivity() {
-		return (MapActivity) getActivity();
 	}
 
 	private OsmandApplication getMyApplication() {

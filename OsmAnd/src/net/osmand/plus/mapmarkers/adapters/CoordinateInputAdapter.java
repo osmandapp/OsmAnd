@@ -1,51 +1,52 @@
 package net.osmand.plus.mapmarkers.adapters;
 
-import java.util.List;
-
-import net.osmand.AndroidUtils;
-import net.osmand.plus.MapMarkersHelper.MapMarker;
-import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
-import net.osmand.plus.UiUtilities.UpdateLocationViewCache;
-import net.osmand.plus.activities.MapActivity;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.ColorInt;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
+import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import net.osmand.AndroidUtils;
+import net.osmand.plus.MapMarkersHelper.MapMarker;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
+import net.osmand.plus.UiUtilities.UpdateLocationViewCache;
+
+import java.util.List;
+
 public class CoordinateInputAdapter extends RecyclerView.Adapter<MapMarkerItemViewHolder> {
 
-	private MapActivity mapActivity;
-	private UiUtilities iconsCache;
+	private OsmandApplication app;
 	private List<MapMarker> mapMarkers;
 
-	private boolean nightTheme;
+	private UiUtilities uiUtilities;
 	private UpdateLocationViewCache updateViewCache;
 
-	public CoordinateInputAdapter(MapActivity mapActivity, List<MapMarker> mapMarkers) {
-		this.mapActivity = mapActivity;
-		iconsCache = mapActivity.getMyApplication().getUIUtilities();
-		updateViewCache = iconsCache.getUpdateLocationViewCache();
+	private boolean nightTheme;
+
+	public CoordinateInputAdapter(OsmandApplication app, List<MapMarker> mapMarkers) {
+		this.app = app;
 		this.mapMarkers = mapMarkers;
-		nightTheme = !mapActivity.getMyApplication().getSettings().isLightContent();
+		uiUtilities = app.getUIUtilities();
+		updateViewCache = uiUtilities.getUpdateLocationViewCache();
+		nightTheme = !app.getSettings().isLightContent();
 	}
 
-
-
-
+	@NonNull
 	@Override
-	public MapMarkerItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+	public MapMarkerItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 		View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.map_marker_item_new, parent, false);
 		return new MapMarkerItemViewHolder(view);
 	}
 
 	@Override
-	public void onBindViewHolder(final MapMarkerItemViewHolder holder, int position) {
+	public void onBindViewHolder(@NonNull final MapMarkerItemViewHolder holder, int position) {
 		final MapMarker mapMarker = getItem(position);
 
 		holder.iconDirection.setVisibility(View.VISIBLE);
@@ -79,8 +80,8 @@ public class CoordinateInputAdapter extends RecyclerView.Adapter<MapMarkerItemVi
 		holder.bottomShadow.setVisibility(lastItem ? View.VISIBLE : View.GONE);
 		holder.divider.setVisibility((!singleItem && !lastItem) ? View.VISIBLE : View.GONE);
 
-		holder.title.setText(mapMarker.getName(mapActivity));
-		mapActivity.getMyApplication().getUIUtilities().updateLocationView(updateViewCache,
+		holder.title.setText(mapMarker.getName(app));
+		uiUtilities.updateLocationView(updateViewCache,
 				holder.iconDirection, holder.distance, mapMarker.getLatitude(), mapMarker.getLongitude());
 	}
 
@@ -101,18 +102,18 @@ public class CoordinateInputAdapter extends RecyclerView.Adapter<MapMarkerItemVi
 		if (nightTheme) {
 			return AndroidUtils.createPressedStateListDrawable(
 					getColoredIcon(R.drawable.marker_circle_background_dark_n_with_inset, R.color.keyboard_item_control_dark_bg),
-					ContextCompat.getDrawable(mapActivity, R.drawable.marker_circle_background_p_with_inset)
+					ContextCompat.getDrawable(app, R.drawable.marker_circle_background_p_with_inset)
 			);
 		}
-		return ContextCompat.getDrawable(mapActivity, R.drawable.marker_circle_background_light_with_inset);
+		return ContextCompat.getDrawable(app, R.drawable.marker_circle_background_light_with_inset);
 	}
 
 	private Drawable getColoredIcon(@DrawableRes int resId, @ColorRes int colorResId) {
-		return iconsCache.getIcon(resId, colorResId);
+		return uiUtilities.getIcon(resId, colorResId);
 	}
 
 	@ColorInt
 	private int getResolvedColor(@ColorRes int colorResId) {
-		return ContextCompat.getColor(mapActivity, colorResId);
+		return ContextCompat.getColor(app, colorResId);
 	}
 }
