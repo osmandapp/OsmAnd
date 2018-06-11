@@ -12,6 +12,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,7 +24,7 @@ public class TravelLocalDataHelper {
 
 	private WikivoyageLocalDataDbHelper dbHelper;
 
-	private Map<String, WikivoyageSearchHistoryItem> historyMap;
+	private Map<String, WikivoyageSearchHistoryItem> historyMap = new HashMap<>();
 	private List<TravelArticle> savedArticles = new ArrayList<>();
 
 	private Listener listener;

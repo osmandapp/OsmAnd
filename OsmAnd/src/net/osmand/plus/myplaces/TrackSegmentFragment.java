@@ -119,6 +119,7 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 				GpxDisplayItemType.TRACK_SEGMENT);
 		fragmentAdapter.setShowMapOnly(false);
 		fragmentAdapter.setTrackBitmapSelectionSupported(true);
+		fragmentAdapter.setShowDescriptionCard(false);
 		fragmentAdapter.onCreateView(view);
 
 		adapter = new SegmentGPXAdapter(inflater.getContext(), new ArrayList<GpxDisplayItem>());
