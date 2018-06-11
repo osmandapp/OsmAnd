@@ -1239,10 +1239,10 @@ public class GPXUtilities {
 	}
 
     public static String asString(GPXFile file, OsmandApplication ctx) {
-           final Writer writer = new StringWriter();
-           GPXUtilities.writeGpx(writer, file, ctx);
-           return writer.toString();
-       }
+		final Writer writer = new StringWriter();
+		GPXUtilities.writeGpx(writer, file, ctx);
+		return writer.toString();
+	}
 
 	public static String writeGpxFile(File fout, GPXFile file, OsmandApplication ctx) {
 		Writer output = null;
@@ -1251,10 +1251,10 @@ public class GPXUtilities {
 				fout.getParentFile().mkdirs();
 			}
 			output = new OutputStreamWriter(new FileOutputStream(fout), "UTF-8"); //$NON-NLS-1$
-			String msg = writeGpx(output, file, ctx);
 			if(Algorithms.isEmpty(file.path)) {
 				file.path = fout.getAbsolutePath();
 			}
+			String msg = writeGpx(output, file, ctx);
 			return msg;
 		} catch (IOException e) {
 			log.error("Error saving gpx", e); //$NON-NLS-1$
@@ -1290,12 +1290,15 @@ public class GPXUtilities {
 			serializer.attribute(null, "xsi:schemaLocation",
 					"http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd");
 
+			String trackName = getFilename(file.path);
+			serializer.startTag(null, "metadata");
+			writeNotNullText(serializer, "name", trackName);
 			if (file.metadata != null) {
-				serializer.startTag(null, "metadata");
 				writeNotNullText(serializer, "desc", file.metadata.desc);
 				writeExtensions(serializer, file.metadata);
-				serializer.endTag(null, "metadata");
 			}
+			serializer.endTag(null, "metadata");
+
 
 			for (Track track : file.tracks) {
 				if (!track.generalTrack) {
@@ -1349,6 +1352,20 @@ public class GPXUtilities {
 			return ctx.getString(R.string.error_occurred_saving_gpx);
 		}
 		return null;
+	}
+
+	private static String getFilename(String path) {
+		if(path != null) {
+            int i = path.lastIndexOf('/');
+            if(i > 0) {
+                path = path.substring(i + 1);
+            }
+            i = path.lastIndexOf('.');
+            if(i > 0) {
+                path = path.substring(0, i);
+            }
+        }
+		return path;
 	}
 
 	private static void writeNotNullText(XmlSerializer serializer, String tag, String value) throws IOException {
