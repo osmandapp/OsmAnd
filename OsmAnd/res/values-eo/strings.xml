@@ -3050,4 +3050,5 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="get_osmand_live">Akiru OsmAnd-Live por malŝlosi ĉiujn eblaĵojn: ĉiutagajn map-ĝisdatigojn, senlimigitajn elŝutojn, ĉiujn pagendajn kaj senpagajn kromprogramojn, Vikipedion, Vikivojaĝon kaj pli.</string>
     <string name="shared_string_gpx_files">GPX-dosieroj</string>
     <string name="quick_action_edit_actions">Redakti agojn</string>
+    <string name="error_notification_desc">Bonvolu sendi ekrankopion de tiu ĉi averto al support@osmand.net</string>
     </resources>
