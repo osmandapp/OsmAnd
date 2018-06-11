@@ -2,28 +2,28 @@ package net.osmand.plus.notifications;
 
 import android.annotation.SuppressLint;
 import android.app.Notification;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationCompat.Builder;
 import android.support.v4.app.NotificationManagerCompat;
-import android.support.v4.app.NotificationCompat;
+
 import net.osmand.plus.NotificationHelper;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 
 public abstract class OsmandNotification {
 
 	public final static int NAVIGATION_NOTIFICATION_SERVICE_ID = 5;
 	public final static int GPX_NOTIFICATION_SERVICE_ID = 6;
+	public final static int ERROR_NOTIFICATION_SERVICE_ID = 7;
 	public final static int TOP_NOTIFICATION_SERVICE_ID = 100;
 
 	public final static int WEAR_NAVIGATION_NOTIFICATION_SERVICE_ID = 1005;
 	public final static int WEAR_GPX_NOTIFICATION_SERVICE_ID = 1006;
-	
+	public final static int WEAR_ERROR_NOTIFICATION_SERVICE_ID = 1007;
+
 
 	protected OsmandApplication app;
 	protected boolean ongoing = true;
@@ -36,7 +36,8 @@ public abstract class OsmandNotification {
 	public enum NotificationType {
 		NAVIGATION,
 		GPX,
-		GPS
+		GPS,
+		ERROR,
 	}
 
 	public OsmandNotification(OsmandApplication app, String groupName) {
@@ -69,7 +70,7 @@ public abstract class OsmandNotification {
 				PendingIntent.FLAG_UPDATE_CURRENT);
 		if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
 			app.getNotificationHelper().createNotificationChannel();
-	    }
+		}
 		Builder builder = new Builder(app, NotificationHelper.NOTIFICATION_CHANEL_ID)
 				.setVisibility(android.support.v4.app.NotificationCompat.VISIBILITY_PUBLIC)
 				.setPriority(top ? NotificationCompat.PRIORITY_HIGH : getPriority())

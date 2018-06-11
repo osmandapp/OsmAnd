@@ -3,15 +3,19 @@ package net.osmand.plus;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.osmand.plus.notifications.ErrorNotification;
 import net.osmand.plus.notifications.GpxNotification;
 import net.osmand.plus.notifications.NavigationNotification;
 import net.osmand.plus.notifications.OsmandNotification;
 import net.osmand.plus.notifications.OsmandNotification.NotificationType;
+
 import android.annotation.TargetApi;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat.Builder;
 import android.support.v4.app.NotificationManagerCompat;
 
@@ -22,6 +26,7 @@ public class NotificationHelper {
 
 	private NavigationNotification navigationNotification;
 	private GpxNotification gpxNotification;
+	private ErrorNotification errorNotification;
 	private List<OsmandNotification> all = new ArrayList<>();
 
 	public NotificationHelper(OsmandApplication app) {
@@ -32,29 +37,43 @@ public class NotificationHelper {
 	private void init() {
 		navigationNotification = new NavigationNotification(app);
 		gpxNotification = new GpxNotification(app);
+		errorNotification = new ErrorNotification(app);
 		all.add(navigationNotification);
 		all.add(gpxNotification);
 	}
 
+	@NonNull
 	public Notification buildTopNotification() {
 		OsmandNotification notification = acquireTopNotification();
 		if (notification != null) {
 			removeNotification(notification.getType());
 			setTopNotification(notification);
 			Builder notificationBuilder = notification.buildNotification(false);
-			return notificationBuilder.build();
+			if (notificationBuilder != null) {
+				return notificationBuilder.build();
+			} else {
+				return buildErrorNotification();
+			}
+		} else {
+			return buildErrorNotification();
 		}
-		return null;
 	}
 
+	private Notification buildErrorNotification() {
+		removeNotification(errorNotification.getType());
+		setTopNotification(errorNotification);
+		return errorNotification.buildNotification(false).build();
+	}
+
+	@Nullable
 	private OsmandNotification acquireTopNotification() {
-		OsmandNotification notification = null;
 		if (navigationNotification.isEnabled()) {
-			notification = navigationNotification;
+			return navigationNotification;
 		} else if (gpxNotification.isEnabled() && gpxNotification.isActive()) {
-			notification = gpxNotification;
+			return gpxNotification;
+		} else {
+			return null;
 		}
-		return notification;
 	}
 
 	public void updateTopNotification() {
