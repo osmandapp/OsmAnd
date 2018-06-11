@@ -19,6 +19,7 @@ class TelegramService : Service(), LocationListener, TelegramIncomingMessagesLis
 	private fun app() = application as TelegramApplication
 	private val binder = LocationServiceBinder()
 	private val executor = Executors.newSingleThreadExecutor()
+	private var shouldCleanupResources: Boolean = false
 
 	var handler: Handler? = null
 	var usedBy = 0
@@ -34,8 +35,11 @@ class TelegramService : Service(), LocationListener, TelegramIncomingMessagesLis
 			usedBy -= usageIntent
 		}
 		if (usedBy == 0) {
+			shouldCleanupResources = false
 			val serviceIntent = Intent(ctx, TelegramService::class.java)
 			ctx.stopService(serviceIntent)
+		} else if (!needLocation()) {
+			removeLocationUpdates()
 		}
 	}
 
@@ -48,17 +52,7 @@ class TelegramService : Service(), LocationListener, TelegramIncomingMessagesLis
 		app.telegramHelper.incomingMessagesListener = this
 
 		if (needLocation()) {
-			// request location updates
-			val locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
-			try {
-				locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0f, this@TelegramService)
-			} catch (e: SecurityException) {
-				Toast.makeText(this, R.string.no_location_permission, Toast.LENGTH_LONG).show()
-				Log.d(PlatformUtil.TAG, "Location service permission not granted")
-			} catch (e: IllegalArgumentException) {
-				Toast.makeText(this, R.string.gps_not_available, Toast.LENGTH_LONG).show()
-				Log.d(PlatformUtil.TAG, "GPS location provider not available")
-			}
+			initLocationUpdates()
 		}
 
 		val locationNotification = app.notificationHelper.locationNotification
@@ -76,6 +70,31 @@ class TelegramService : Service(), LocationListener, TelegramIncomingMessagesLis
 
 		usedBy = 0
 
+		removeLocationUpdates()
+
+		if (shouldCleanupResources) {
+			app.cleanupResources()
+		}
+
+		// remove notification
+		stopForeground(java.lang.Boolean.TRUE)
+	}
+
+	private fun initLocationUpdates() {
+		// request location updates
+		val locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
+		try {
+			locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0f, this@TelegramService)
+		} catch (e: SecurityException) {
+			Toast.makeText(this, R.string.no_location_permission, Toast.LENGTH_LONG).show()
+			Log.d(PlatformUtil.TAG, "Location service permission not granted")
+		} catch (e: IllegalArgumentException) {
+			Toast.makeText(this, R.string.gps_not_available, Toast.LENGTH_LONG).show()
+			Log.d(PlatformUtil.TAG, "GPS location provider not available")
+		}
+	}
+
+	private fun removeLocationUpdates() {
 		// remove updates
 		val locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
 		try {
@@ -83,9 +102,6 @@ class TelegramService : Service(), LocationListener, TelegramIncomingMessagesLis
 		} catch (e: SecurityException) {
 			Log.d(PlatformUtil.TAG, "Location service permission not granted")
 		}
-
-		// remove notification
-		stopForeground(java.lang.Boolean.TRUE)
 	}
 
 	private fun needLocation(): Boolean {
@@ -112,6 +128,7 @@ class TelegramService : Service(), LocationListener, TelegramIncomingMessagesLis
 	override fun onTaskRemoved(rootIntent: Intent) {
 		val app = app()
 		if (app.telegramService != null) {
+			shouldCleanupResources = true
 			// Do not stop service after UI task was dismissed
 			//this@TelegramService.stopSelf()
 		}

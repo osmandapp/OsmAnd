@@ -8,13 +8,14 @@ import android.net.NetworkInfo
 import android.os.Build
 import android.os.Handler
 import net.osmand.telegram.helpers.OsmandAidlHelper
+import net.osmand.telegram.helpers.OsmandAidlHelper.OsmandHelperListener
 import net.osmand.telegram.helpers.ShareLocationHelper
 import net.osmand.telegram.helpers.ShowLocationHelper
 import net.osmand.telegram.helpers.TelegramHelper
 import net.osmand.telegram.notifications.NotificationHelper
 import net.osmand.telegram.utils.AndroidUtils
 
-class TelegramApplication : Application() {
+class TelegramApplication : Application(), OsmandHelperListener {
 
 	val telegramHelper = TelegramHelper.instance
 	lateinit var settings: TelegramSettings private set
@@ -82,6 +83,10 @@ class TelegramApplication : Application() {
 			internetConnectionAvailable = isInternetConnected
 		}
 		return internetConnectionAvailable
+	}
+
+	override fun onOsmandConnectionStateChanged(connected: Boolean) {
+		showLocationHelper.setupMapLayer()
 	}
 
 	private fun startTelegramService(intent: Int) {

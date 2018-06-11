@@ -56,11 +56,8 @@ class OsmandAidlHelper(private val app: Application) {
 
 	private var mIOsmAndAidlInterface: IOsmAndAidlInterface? = null
 
-	var initialized: Boolean = false
-		private set
-
-	var bound: Boolean = false
-		private set
+	private var initialized: Boolean = false
+	private var bound: Boolean = false
 
 	var listener: OsmandHelperListener? = null
 
@@ -95,7 +92,11 @@ class OsmandAidlHelper(private val app: Application) {
 	}
 
 	fun isOsmandBound(): Boolean {
-		return bound
+		return initialized && bound
+	}
+
+	fun isOsmandNotInstalled(): Boolean {
+		return initialized && !bound
 	}
 
 	fun isOsmandConnected(): Boolean {
@@ -124,6 +125,10 @@ class OsmandAidlHelper(private val app: Application) {
 		}
 
 	init {
+		connectOsmand()
+	}
+
+	fun connectOsmand() {
 		when {
 			bindService(OSMAND_PLUS_PACKAGE_NAME) -> {
 				OSMAND_PACKAGE_NAME = OSMAND_PLUS_PACKAGE_NAME
@@ -151,8 +156,13 @@ class OsmandAidlHelper(private val app: Application) {
 	}
 
 	fun cleanupResources() {
-		if (mIOsmAndAidlInterface != null) {
-			app.unbindService(mConnection)
+		try {
+			if (mIOsmAndAidlInterface != null) {
+				mIOsmAndAidlInterface = null
+				app.unbindService(mConnection)
+			}
+		} catch (e: Throwable) {
+			e.printStackTrace()
 		}
 	}
 

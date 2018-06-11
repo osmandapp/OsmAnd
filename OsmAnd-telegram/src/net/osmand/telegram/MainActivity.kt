@@ -81,7 +81,13 @@ class MainActivity : AppCompatActivity(), TelegramListener {
 			}
 		})
 		telegramHelper.listener = this
-		telegramHelper.init()
+		if (!telegramHelper.isInit()) {
+			telegramHelper.init()
+		}
+
+		if (osmandHelper.isOsmandBound() && !osmandHelper.isOsmandConnected()) {
+			osmandHelper.connectOsmand()
+		}
 	}
 
 	override fun onResume() {
@@ -90,16 +96,19 @@ class MainActivity : AppCompatActivity(), TelegramListener {
 
 		invalidateOptionsMenu()
 		updateTitle()
+		updateChatsList()
 
 		if (settings.hasAnyChatToShareLocation() && !AndroidUtils.isLocationPermissionAvailable(this)) {
 			requestLocationPermission()
-		} else if (settings.hasAnyChatToShowOnMap() && osmandHelper.initialized && !osmandHelper.isOsmandBound()) {
+		} else if (settings.hasAnyChatToShowOnMap() && osmandHelper.isOsmandNotInstalled()) {
 			showOsmandMissingDialog()
 		}
 	}
 
 	override fun onPause() {
 		super.onPause()
+		telegramHelper.listener = null
+
 		paused = true
 	}
 
@@ -111,7 +120,9 @@ class MainActivity : AppCompatActivity(), TelegramListener {
 	override fun onDestroy() {
 		super.onDestroy()
 
-		app.cleanupResources()
+		if (app.telegramService == null) {
+			app.cleanupResources()
+		}
 	}
 
 	override fun onTelegramStatusChanged(prevTelegramAuthorizationState: TelegramAuthorizationState,
@@ -299,7 +310,7 @@ class MainActivity : AppCompatActivity(), TelegramListener {
 						app.shareLocationHelper.startSharingLocation()
 					}
 				}
-				if (settings.hasAnyChatToShowOnMap() && osmandHelper.initialized && !osmandHelper.isOsmandBound()) {
+				if (settings.hasAnyChatToShowOnMap() && osmandHelper.isOsmandNotInstalled()) {
 					showOsmandMissingDialog()
 				}
 			}
@@ -372,7 +383,7 @@ class MainActivity : AppCompatActivity(), TelegramListener {
 			holder.showOnMapSwitch?.setOnCheckedChangeListener { _, isChecked ->
 				settings.showChatOnMap(chatTitle, isChecked)
 				if (settings.hasAnyChatToShowOnMap()) {
-					if (osmandHelper.initialized && !osmandHelper.isOsmandBound()) {
+					if (osmandHelper.isOsmandNotInstalled()) {
 						if (isChecked) {
 							showOsmandMissingDialog()
 						}

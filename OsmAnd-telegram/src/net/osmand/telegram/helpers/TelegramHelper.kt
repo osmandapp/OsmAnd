@@ -197,6 +197,10 @@ class TelegramHelper private constructor() {
 		}
 	}
 
+	fun isInit(): Boolean {
+		return client != null && haveAuthorization
+	}
+
 	private fun requestChats(reload: Boolean = false) {
 		synchronized(chatList) {
 			if (reload) {
