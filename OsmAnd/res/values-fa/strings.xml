@@ -3263,4 +3263,5 @@
     <string name="shared_string_gpx_files">فایل‌های GPX</string>
     <string name="get_osmand_live">‏‏OsmAnd Live را تهیه کنید تا همهٔ این قابلیت‌ها باز شود: به‌روزآوری روزانهٔ نقشه و دانلودهای نامحدود، همهٔ افزونه‌های رایگان و پولی، ویکی‌پدیا، ویکی‌سفر و...</string>
     <string name="quick_action_edit_actions">ویرایش عملیات</string>
+    <string name="error_notification_desc">لطفاً از این اعلان عکس بگیرید و به support@osmand.net بفرستید</string>
     </resources>
