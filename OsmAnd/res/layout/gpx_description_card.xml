@@ -7,9 +7,9 @@
 	android:orientation="vertical">
 
 	<LinearLayout
+		android:id="@+id/background_view"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:background="?attr/wikivoyage_card_bg_color"
 		android:orientation="vertical"
 		android:paddingBottom="@dimen/bottom_sheet_content_padding_small"
 		android:paddingTop="@dimen/content_padding">

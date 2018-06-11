@@ -48,6 +48,7 @@ public class GpxDescriptionDialogFragment extends BaseOsmAndDialogFragment {
 
 		WebView webView = new WebView(ctx);
 		webView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+		webView.getSettings().setTextZoom((int) (getResources().getConfiguration().fontScale * 100f));
 		Bundle args = getArguments();
 		if (args != null) {
 			String content = args.getString(CONTENT_KEY);

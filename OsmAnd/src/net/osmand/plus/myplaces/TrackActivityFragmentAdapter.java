@@ -483,6 +483,8 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 
 	private View createTravelArticleCard(final Context context, @NonNull final TravelArticle article) {
 		View card = LayoutInflater.from(context).inflate(R.layout.wikivoyage_article_card, null);
+		card.findViewById(R.id.background_view).setBackgroundColor(ContextCompat.getColor(context,
+				app.getSettings().isLightContent() ? R.color.list_item_light : R.color.list_item_dark));
 		((TextView) card.findViewById(R.id.title)).setText(article.getTitle());
 		((TextView) card.findViewById(R.id.content)).setText(WikiArticleHelper.getPartialContent(article.getContent()));
 		((TextView) card.findViewById(R.id.part_of)).setText(article.getGeoDescription());
@@ -527,6 +529,8 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 		String desc = Html.fromHtml(descHtml).toString().trim();
 		if (!TextUtils.isEmpty(desc)) {
 			View card = LayoutInflater.from(context).inflate(R.layout.gpx_description_card, null);
+			card.findViewById(R.id.background_view).setBackgroundColor(ContextCompat.getColor(context,
+					app.getSettings().isLightContent() ? R.color.list_item_light : R.color.list_item_dark));
 			((TextView) card.findViewById(R.id.description)).setText(desc);
 			TextView readBtn = (TextView) card.findViewById(R.id.read_button);
 			readBtn.setCompoundDrawablesWithIntrinsicBounds(getReadIcon(), null, null, null);
