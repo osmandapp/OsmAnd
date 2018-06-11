@@ -760,6 +760,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 					for (TransportStop transportStop : transportStops) {
 						if (transportStop.getName().startsWith(amenity.getName())) {
 							amenityTransportStops.add(transportStop);
+							transportStop.setAmenity(amenity);
 						}
 					}
 					if (amenityTransportStops.size() > 0) {

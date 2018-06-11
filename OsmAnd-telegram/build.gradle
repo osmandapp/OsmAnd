@@ -6,9 +6,16 @@ apply plugin: 'kotlin-android-extensions'
 android {
     compileSdkVersion 27
 
-    sourceSets.main {
-        jniLibs.srcDir 'libs'
-        jni.srcDirs = [] //disable automatic ndk-build call
+    sourceSets {
+        main {
+            manifest.srcFile "AndroidManifest.xml"
+            jni.srcDirs = []
+            jniLibs.srcDirs = ["libs"]
+            aidl.srcDirs = ["src"]
+            java.srcDirs = ["src"]
+            resources.srcDirs = ["src"]
+            res.srcDirs = ["res"]
+        }
     }
 
     defaultConfig {
@@ -19,7 +26,6 @@ android {
         versionCode System.getenv("APK_NUMBER_VERSION") ? System.getenv("APK_NUMBER_VERSION").toInteger() : versionCode
         versionName "1.0"
         versionName System.getenv("APK_VERSION")? System.getenv("APK_VERSION").toString(): versionName
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 
     flavorDimensions "abi"
@@ -97,7 +103,7 @@ task copyNativeLibs(type: Copy) {
 task copyJavaSources(type: Copy)  {
     dependsOn downloadTdLibzip
     from "tdlib/libtd/src/main/java/org/drinkless/td"
-    into "src/main/java/org/drinkless/td"
+    into "src/org/drinkless/td"
 }
 
 task downloadPrebuiltTelegram {
@@ -116,15 +122,10 @@ dependencies {
     implementation project(path: ':OsmAnd-java', configuration: 'android')
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'com.android.support:appcompat-v7:27.1.1'
-    implementation 'com.android.support.constraint:constraint-layout:1.1.0'
     implementation 'com.android.support:support-annotations:27.1.1'
     implementation 'commons-logging:commons-logging-api:1.1'
     implementation 'com.android.support:recyclerview-v7:27.1.1'
     implementation 'com.vividsolutions:jts-core:1.14.0'
-
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 }

@@ -11,7 +11,7 @@ local.properties
 obj/
 out/
 use/
-src/main/java/org/drinkless/td/
+src/org/drinkless/td/
 
 # Android Studio
 /.idea
