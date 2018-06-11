@@ -13,56 +13,13 @@ import java.util.*
 
 class NotificationHelper(private val app: TelegramApplication) {
 
-    private var shareLocationNotification: ShareLocationNotification? = null
-    private val all = ArrayList<TelegramNotification>()
+    val shareLocationNotification = ShareLocationNotification(app)
+    val showLocationNotification = ShowLocationNotification(app)
 
-    init {
-        init()
-    }
+	private val all = listOf(shareLocationNotification, showLocationNotification)
 
-    private fun init() {
-        val shareLocationNotification = ShareLocationNotification(app)
-        this.shareLocationNotification = shareLocationNotification
-        all.add(shareLocationNotification)
-    }
-
-    fun buildTopNotification(): Notification? {
-        val notification = acquireTopNotification()
-        if (notification != null) {
-            removeNotification(notification.type)
-            setTopNotification(notification)
-            val notificationBuilder = notification.buildNotification(false)
-            return notificationBuilder?.build()
-        }
-        return null
-    }
-
-    private fun acquireTopNotification(): TelegramNotification? {
-        var notification: TelegramNotification? = null
-        if (shareLocationNotification!!.isEnabled && shareLocationNotification!!.isActive) {
-            notification = shareLocationNotification
-        }
-        return notification
-    }
-
-    fun updateTopNotification() {
-        val notification = acquireTopNotification()
-        setTopNotification(notification)
-    }
-
-    private fun setTopNotification(notification: TelegramNotification?) {
-        for (n in all) {
-            n.isTop = n === notification
-        }
-    }
-
-    fun showNotifications() {
-        if (!hasAnyTopNotification()) {
-            removeTopNotification()
-        }
-        for (notification in all) {
-            notification.showNotification()
-        }
+    fun buildNotification(telegramNotification: TelegramNotification): Notification {
+        return telegramNotification.buildNotification(false).build()
     }
 
     fun refreshNotification(notificationType: NotificationType) {
@@ -71,53 +28,6 @@ class NotificationHelper(private val app: TelegramApplication) {
                 notification.refreshNotification()
                 break
             }
-        }
-    }
-
-    fun onNotificationDismissed(notificationType: NotificationType) {
-        for (notification in all) {
-            if (notification.type == notificationType) {
-                notification.onNotificationDismissed()
-                break
-            }
-        }
-    }
-
-    fun hasAnyTopNotification(): Boolean {
-        for (notification in all) {
-            if (notification.isTop) {
-                return true
-            }
-        }
-        return false
-    }
-
-    fun refreshNotifications() {
-        if (!hasAnyTopNotification()) {
-            removeTopNotification()
-        }
-        for (notification in all) {
-            notification.refreshNotification()
-        }
-    }
-
-    fun removeTopNotification() {
-        val notificationManager = NotificationManagerCompat.from(app)
-        notificationManager.cancel(TelegramNotification.TOP_NOTIFICATION_SERVICE_ID)
-    }
-
-    fun removeNotification(notificationType: NotificationType) {
-        for (notification in all) {
-            if (notification.type == notificationType) {
-                notification.removeNotification()
-                break
-            }
-        }
-    }
-
-    fun removeNotifications() {
-        for (notification in all) {
-            notification.removeNotification()
         }
     }
 

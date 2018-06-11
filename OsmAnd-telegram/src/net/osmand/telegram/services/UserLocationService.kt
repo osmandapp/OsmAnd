@@ -9,7 +9,6 @@ import android.os.Handler
 import android.os.IBinder
 import net.osmand.telegram.TelegramApplication
 import net.osmand.telegram.helpers.TelegramHelper.TelegramIncomingMessagesListener
-import net.osmand.telegram.notifications.TelegramNotification
 import org.drinkless.td.libcore.telegram.TdApi
 import java.util.concurrent.Executors
 
@@ -46,9 +45,10 @@ class UserLocationService : Service(), TelegramIncomingMessagesListener {
         app.userLocationService = this
         app.telegramHelper.incomingMessagesListener = this
 
-        //val notification = app.notificationHelper.buildTopNotification()
-        //startForeground(TelegramNotification.TOP_NOTIFICATION_SERVICE_ID, notification)
-
+        val showLocationNotification = app.notificationHelper.showLocationNotification
+        val notification = app.notificationHelper.buildNotification(showLocationNotification)
+        startForeground(showLocationNotification.telegramNotificationId, notification)
+        app.notificationHelper.refreshNotification(showLocationNotification.type)
         return Service.START_REDELIVER_INTENT
     }
 

@@ -31,6 +31,8 @@
     <string name="osmand_logo">OsmAnd logo</string>
     <string name="install_osmand_dialog_message">You need to install free or paid version of OsmAnd first</string>
     <string name="install_osmand">Install OsmAnd</string>
+    <string name="show_users_on_map">Show users on map</string>
+    <string name="active_chats">Active chats</string>
 
     <string name="yard">yd</string>
     <string name="foot">ft</string>
