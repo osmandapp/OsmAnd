@@ -3867,4 +3867,8 @@
 	<string name="poi_checkpoint_type_electronic">Elektronikus</string>
 	<string name="poi_rock">Szikla</string>
 
-	</resources>
+	<string name="poi_checkpoint_type_notebook">Jegyzetfüzet</string>
+	<string name="poi_checkpoint_type_needler">Lyukasztó</string>
+	<string name="poi_end_date">Befejező dátum</string>
+
+</resources>
