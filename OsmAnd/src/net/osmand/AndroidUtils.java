@@ -116,7 +116,11 @@ public class AndroidUtils {
 	}
 
 	public static Uri getUriForFile(Context context, File file) {
-		return FileProvider.getUriForFile(context, context.getPackageName() + ".fileprovider", file);
+		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
+			return Uri.fromFile(file);
+		} else {
+			return FileProvider.getUriForFile(context, context.getPackageName() + ".fileprovider", file);
+		}
 	}
 
 	public static Spannable replaceCharsWithIcon(String text, Drawable icon, String[] chars) {
