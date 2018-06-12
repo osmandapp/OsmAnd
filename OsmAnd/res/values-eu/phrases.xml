@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources><string name="poi_shop">Denda</string>
 		<string name="poi_shop_food">Auzoko denda eta supermerkatua</string>
-	<string name="poi_emergency">Larrialdia</string>
+	<string name="poi_emergency">Larrialdiak</string>
 	<string name="poi_transportation">Garraioa</string>
 		<string name="poi_road_obstacle">Errepideko oztopoa</string>
 		<string name="poi_filling_station">Gasolindegia</string>
@@ -315,7 +315,7 @@
 	<string name="poi_traffic_calming_rumble_strip">Burrunba-banda</string>
 	<string name="poi_car_repair">Kotxe konponketa</string>
 	<string name="poi_vehicle_inspection">Ibilgailuen azterketa</string>
-	<string name="poi_electricity_combined_charging">Birkargarako estazioa</string>
+	<string name="poi_electricity_combined_charging">Kargatze-estazioa</string>
 	<string name="poi_medical_supply">Medikuntza gaiak</string>
 	<string name="poi_vehicle_ramp">Ibilgailuen arrapala</string>
 	<string name="poi_public_transport_stop_position">Garraio publikoaren geldigunea</string>
@@ -1075,7 +1075,7 @@
 	<string name="poi_attraction_water_slide">Ur-txirrista</string>
 
 	<string name="poi_hotel">Hotela</string>
-	<string name="poi_hostel">Hostatua</string>
+	<string name="poi_hostel">Ostatua</string>
 	<string name="poi_chalet">Txaleta</string>
 	<string name="poi_alpine_hut">Mendi-aterpea</string>
 	<string name="poi_apartment">Apartamentua</string>
@@ -1179,7 +1179,7 @@
 	<string name="poi_piste_ice_skate">izotz-irristailu</string>
 	<string name="poi_ski_rental">Eski alokairua</string>
 
-	<string name="poi_library">Biblioteka</string>
+	<string name="poi_library">Liburutegia</string>
 	<string name="poi_length">Luzera</string>
 
 	<string name="poi_spices">Espezia denda</string>
@@ -2220,7 +2220,7 @@
 	<string name="poi_water_purification">Ur arazketa</string>
 	<string name="poi_climbing_style">Eskalada estiloa</string>
 
-<string name="poi_seamark_building">Eraikuntza nautikoa</string>
+<string name="poi_seamark_building">Eraikin nautikoa</string>
 	<string name="poi_seamark_bridge">Zubi nautikoa</string>
 	<string name="poi_buoy_cardinal">Buia kardinala</string>
 	<string name="poi_buoy_isolated_danger">Buia, arrisku isolatua</string>
@@ -2772,7 +2772,7 @@
 
 	<string name="poi_intermittent">Intermitentea</string>
 
-	<string name="poi_building">Eraikuntza</string>
+	<string name="poi_building">Eraikina</string>
 	<string name="poi_int_name">Izen internazionala</string>
 	<string name="poi_nat_name">Izen nazionala</string>
 	<string name="poi_reg_name">Izen erregionala</string>
@@ -3478,7 +3478,7 @@
 	<string name="poi_cuisine_soba">Soba (fideo japoniarrak)</string>
 	<string name="poi_cuisine_hotdog">Saltxitxak</string>
 	<string name="poi_cuisine_deli">Delicatessen</string>
-	<string name="poi_cuisine_couscous">Couscous</string>
+	<string name="poi_cuisine_couscous">Kuskus</string>
 	<string name="poi_cuisine_snack">Ahamena</string>
 	<string name="poi_cuisine_empanada">Enpanada</string>
 	<string name="poi_cuisine_crepes">Krepeak</string>
@@ -3498,5 +3498,16 @@
 	<string name="poi_tower_construction_dish">Eraikuntza: Parabolikoa</string>
 	<string name="poi_tower_construction_dome">Eraikuntza: Kupula</string>
 	<string name="poi_tower_construction_concealed">Eraikuntza: Ostendua</string>
+
+	<string name="poi_kissing_gate">V formako atea</string>
+	<string name="poi_sally_port">Ate altxagarria</string>
+	<string name="poi_swing_gate">Ate biragarria</string>
+	<string name="poi_turnstile">"Molinilla "</string>
+	<string name="poi_kent_carriage_gap">Zaldi gurdientzako pasabidea</string>
+	<string name="poi_logging">Baso-mozketa</string>
+	<string name="poi_windfall">Zuhaitzetik eroritako fruitua</string>
+	<string name="poi_fitness_station">Kale gimnasioa</string>
+
+	<string name="poi_gambling">Apustu etxea</string>
 
 	</resources>
