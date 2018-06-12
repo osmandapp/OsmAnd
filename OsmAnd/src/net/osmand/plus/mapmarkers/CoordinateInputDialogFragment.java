@@ -61,12 +61,15 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapmarkers.CoordinateInputBottomSheetDialogFragment.CoordinateInputFormatChangeListener;
+import net.osmand.plus.mapmarkers.CoordinateInputFormats.DDM;
+import net.osmand.plus.mapmarkers.CoordinateInputFormats.DMS;
 import net.osmand.plus.mapmarkers.CoordinateInputFormats.Format;
 import net.osmand.plus.mapmarkers.adapters.CoordinateInputAdapter;
 import net.osmand.plus.widgets.EditTextEx;
 import net.osmand.util.LocationParser;
 import net.osmand.util.MapUtils;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -79,6 +82,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 	public static final String TAG = "CoordinateInputDialogFragment";
 
 	private final List<MapMarker> mapMarkers = new ArrayList<>();
+	private MapMarker selectedMarker;
 	private OnMapMarkersSavedListener listener;
 
 	private View mainView;
@@ -270,7 +274,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			}
 		});
 		adapter = new CoordinateInputAdapter(getMyApplication(), mapMarkers);
-		RecyclerView recyclerView = (RecyclerView) mainView.findViewById(R.id.markers_recycler_view);
+		final RecyclerView recyclerView = (RecyclerView) mainView.findViewById(R.id.markers_recycler_view);
 		recyclerView.setLayoutManager(new LinearLayoutManager(ctx));
 		recyclerView.setAdapter(adapter);
 		recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -280,11 +284,24 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 				compassUpdateAllowed = newState == RecyclerView.SCROLL_STATE_IDLE;
 			}
 		});
+		adapter.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				int pos = recyclerView.getChildAdapterPosition(v);
+				if (pos == RecyclerView.NO_POSITION) {
+					return;
+				}
+				enterEditingMode(adapter.getItem(pos));
+			}
+		});
 
 		setBackgroundColor(R.id.bottom_controls_container, lightTheme
 				? R.color.keyboard_item_control_light_bg : R.color.keyboard_item_control_dark_bg);
 		TextView addButton = (TextView) mainView.findViewById(R.id.add_marker_button);
 		addButton.setBackgroundResource(lightTheme ? R.drawable.route_info_go_btn_bg_light : R.drawable.route_info_go_btn_bg_dark);
+		if (selectedMarker != null) {
+			addButton.setText(R.string.shared_string_save);
+		}
 		addButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
@@ -495,7 +512,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 	@Override
 	public void onResume() {
 		super.onResume();
-		
+
 		startLocationUpdate();
 
 		final View focusedView = getDialog().getCurrentFocus();
@@ -779,7 +796,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			}
 			if (et.getId() != R.id.point_name_et) {
 				et.addTextChangedListener(textWatcher);
-			}else {
+			} else {
 				et.setOnFocusChangeListener(new View.OnFocusChangeListener() {
 					@Override
 					public void onFocusChange(View v, boolean hasFocus) {
@@ -802,12 +819,12 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 	private void setupEditTextEx(@IdRes int etId, int symbols, boolean lat) {
 		EditTextEx et = (EditTextEx) mainView.findViewById(etId);
 		et.setMaxSymbolsCount(symbols);
-		et.setHint(createHint(symbols, lat ? 'x' : 'y'));
+		et.setHint(createString(symbols, lat ? 'x' : 'y'));
 		((LinearLayout.LayoutParams) et.getLayoutParams()).weight = symbols;
 		et.requestLayout();
 	}
 
-	private String createHint(int symbolsCount, char symbol) {
+	private String createString(int symbolsCount, char symbol) {
 		StringBuilder sb = new StringBuilder();
 		for (int i = 0; i < symbolsCount; i++) {
 			sb.append(symbol);
@@ -859,12 +876,14 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 
 			@Override
 			public void onInputSettingsChanged() {
+				dismissEditingMode();
 				registerInputs();
 			}
 		};
 	}
 
 	private void changeHand() {
+		dismissEditingMode();
 		((FrameLayout) mainView.findViewById(R.id.left_container)).removeViewAt(0);
 		((FrameLayout) mainView.findViewById(R.id.right_container)).removeViewAt(0);
 		registerMainView();
@@ -904,13 +923,104 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 	}
 
 	private int getEditTextIndById(int id) {
-		int res = -1;
 		for (int i = 0; i < editTexts.size(); i++) {
 			if (id == editTexts.get(i).getId()) {
 				return i;
 			}
 		}
-		return res;
+		return -1;
+	}
+
+	@Nullable
+	private EditText getEditTextById(int id) {
+		for (EditText et : editTexts) {
+			if (et.getId() == id) {
+				return et;
+			}
+		}
+		return null;
+	}
+
+	private DecimalFormat createDecimalFormat(int accuracy) {
+		return new DecimalFormat("###." + createString(accuracy, '#'));
+	}
+
+	private void dismissEditingMode() {
+		selectedMarker = null;
+		((TextView) mainView.findViewById(R.id.add_marker_button)).setText(R.string.shared_string_add);
+	}
+
+	private void enterEditingMode(MapMarker marker) {
+		selectedMarker = marker;
+		Format format = getMyApplication().getSettings().COORDS_INPUT_FORMAT.get();
+		double lat = Math.abs(marker.point.getLatitude());
+		double lon = Math.abs(marker.point.getLongitude());
+		if (format == Format.DD_MM_MMM || format == Format.DD_MM_MMMM) {
+			int accuracy = format.getThirdPartSymbolsCount();
+			updateInputsDdm(true, CoordinateInputFormats.ddToDdm(lat), accuracy);
+			updateInputsDdm(false, CoordinateInputFormats.ddToDdm(lon), accuracy);
+		} else if (format == Format.DD_DDDDD || format == Format.DD_DDDDDD) {
+			int accuracy = format.getSecondPartSymbolsCount();
+			updateInputsDd(true, lat, accuracy);
+			updateInputsDd(false, lon, accuracy);
+		} else if (format == Format.DD_MM_SS) {
+			updateInputsDms(true, CoordinateInputFormats.ddToDms(lat));
+			updateInputsDms(false, CoordinateInputFormats.ddToDms(lon));
+		}
+		boolean latPositive = marker.point.getLatitude() > 0;
+		if ((latPositive && !north) || (!latPositive && north)) {
+			updateSideOfTheWorldBtn(mainView.findViewById(R.id.lat_side_of_the_world_btn), true);
+		}
+		boolean lonPositive = marker.point.getLongitude() > 0;
+		if ((lonPositive && !east) || (!lonPositive && east)) {
+			updateSideOfTheWorldBtn(mainView.findViewById(R.id.lon_side_of_the_world_btn), true);
+		}
+		((EditText) mainView.findViewById(R.id.point_name_et)).setText(marker.getName(getContext()));
+		((TextView) mainView.findViewById(R.id.add_marker_button)).setText(R.string.shared_string_save);
+	}
+
+	private void updateInputsDdm(boolean lat, DDM ddm, int accuracy) {
+		String[] minutes = createDecimalFormat(accuracy).format(ddm.decimalMinutes).split("\\.");
+		updateText(getFirstEt(lat), String.valueOf(ddm.degrees));
+		updateText(getSecondEt(lat), minutes[0]);
+		if (minutes.length > 1) {
+			updateText(getThirdEt(lat), minutes[1]);
+		}
+	}
+
+	private void updateInputsDd(boolean lat, double decimalDegrees, int accuracy) {
+		String[] degrees = createDecimalFormat(accuracy).format(decimalDegrees).split("\\.");
+		updateText(getFirstEt(lat), degrees[0]);
+		if (degrees.length > 1) {
+			updateText(getSecondEt(lat), degrees[1]);
+		}
+	}
+
+	private void updateInputsDms(boolean lat, DMS dms) {
+		updateText(getFirstEt(lat), String.valueOf(dms.degrees));
+		updateText(getSecondEt(lat), String.valueOf(dms.minutes));
+		updateText(getThirdEt(lat), String.valueOf((int) dms.seconds));
+	}
+
+	private void updateText(@Nullable EditText et, @NonNull String text) {
+		if (et != null) {
+			et.setText(text);
+		}
+	}
+
+	@Nullable
+	private EditText getFirstEt(boolean lat) {
+		return getEditTextById(lat ? R.id.lat_first_input_et : R.id.lon_first_input_et);
+	}
+
+	@Nullable
+	private EditText getSecondEt(boolean lat) {
+		return getEditTextById(lat ? R.id.lat_second_input_et : R.id.lon_second_input_et);
+	}
+
+	@Nullable
+	private EditText getThirdEt(boolean lat) {
+		return getEditTextById(lat ? R.id.lat_third_input_et : R.id.lon_third_input_et);
 	}
 
 	private void addMapMarker() {
@@ -926,7 +1036,11 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			double lat = parseCoordinate(latitude);
 			double lon = parseCoordinate(longitude);
 			String name = ((EditText) mainView.findViewById(R.id.point_name_et)).getText().toString();
-			addMapMarker(new LatLon(lat, lon), name);
+			if (selectedMarker != null) {
+				updateSelectedMarker(new LatLon(lat, lon), name);
+			} else {
+				addMapMarker(new LatLon(lat, lon), name);
+			}
 		}
 	}
 
@@ -974,6 +1088,14 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			coordinate = d.get(0);
 		}
 		return coordinate;
+	}
+
+	private void updateSelectedMarker(LatLon latLon, String name) {
+		selectedMarker.point = latLon;
+		selectedMarker.setName(name);
+		dismissEditingMode();
+		adapter.notifyDataSetChanged();
+		clearInputs();
 	}
 
 	private void addMapMarker(LatLon latLon, String name) {
