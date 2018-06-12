@@ -1497,7 +1497,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		OsmandApplication app = getMyApplication();
 		if (app != null && view != null) {
 			View compassView = view.findViewById(R.id.compass_layout);
-			if (menu.displayDistanceDirection() && menu.getCurrentMenuState() != MenuState.FULL_SCREEN) {
+			if (menu.displayDistanceDirection()) {
 				updateDistanceDirection();
 				compassView.setVisibility(View.VISIBLE);
 			} else {
