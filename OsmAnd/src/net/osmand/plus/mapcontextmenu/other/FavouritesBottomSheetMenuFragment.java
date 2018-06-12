@@ -58,7 +58,7 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 		if (savedInstanceState != null && savedInstanceState.getBoolean(IS_SORTED)) {
 			sortByDist = savedInstanceState.getBoolean(SORTED_BY_TYPE);
 		}
-		favouritePoints = getMyApplication().getFavorites().getVisibleFavouritePoints();
+		favouritePoints = getMyApplication().getFavorites().getFavouritePoints();
 		recyclerView = new RecyclerView(getContext());
 		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 		recyclerView = (RecyclerView) View.inflate(new ContextThemeWrapper(getContext(), themeRes),
