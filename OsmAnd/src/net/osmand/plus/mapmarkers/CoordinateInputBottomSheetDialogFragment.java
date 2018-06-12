@@ -16,7 +16,7 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.SubtitleDividerItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.SubtitleItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.mapmarkers.CoordinateInputFormats.CoordinateInputFormatDef;
+import net.osmand.plus.mapmarkers.CoordinateInputFormats.Format;
 
 public class CoordinateInputBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
 
@@ -103,12 +103,12 @@ public class CoordinateInputBottomSheetDialogFragment extends MenuBottomSheetDia
 
 		items.add(new SubtitleItem(getString(R.string.coordinates_format)));
 
-		int selectedFormat = settings.COORDS_INPUT_FORMAT.get();
+		Format selectedFormat = settings.COORDS_INPUT_FORMAT.get();
 		Drawable formatIcon = getContentIcon(R.drawable.ic_action_coordinates_latitude);
 		View.OnClickListener formatsOnClickListener = new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				int format = (int) v.getTag();
+				Format format = (Format) v.getTag();
 				settings.COORDS_INPUT_FORMAT.set(format);
 				if (listener != null) {
 					listener.onInputSettingsChanged();
@@ -117,7 +117,7 @@ public class CoordinateInputBottomSheetDialogFragment extends MenuBottomSheetDia
 			}
 		};
 
-		for (@CoordinateInputFormatDef int format : CoordinateInputFormats.VALUES) {
+		for (Format format : Format.values()) {
 			boolean selectedItem = format == selectedFormat;
 
 			BaseBottomSheetItem formatItem = new BottomSheetItemWithCompoundButton.Builder()
@@ -126,7 +126,7 @@ public class CoordinateInputBottomSheetDialogFragment extends MenuBottomSheetDia
 							? ColorStateList.valueOf(getResolvedColor(getActiveColorId()))
 							: null)
 					.setIcon(selectedItem ? getActiveIcon(R.drawable.ic_action_coordinates_latitude) : formatIcon)
-					.setTitle(CoordinateInputFormats.formatToHumanString(context, format))
+					.setTitle(format.toHumanString(context))
 					.setTitleColorId(selectedItem ? getActiveColorId() : BaseBottomSheetItem.INVALID_ID)
 					.setLayoutId(R.layout.bottom_sheet_item_with_radio_btn)
 					.setOnClickListener(formatsOnClickListener)

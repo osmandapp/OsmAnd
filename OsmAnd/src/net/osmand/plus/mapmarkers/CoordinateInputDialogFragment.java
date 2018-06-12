@@ -61,6 +61,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapmarkers.CoordinateInputBottomSheetDialogFragment.CoordinateInputFormatChangeListener;
+import net.osmand.plus.mapmarkers.CoordinateInputFormats.Format;
 import net.osmand.plus.mapmarkers.adapters.CoordinateInputAdapter;
 import net.osmand.plus.widgets.EditTextEx;
 import net.osmand.util.LocationParser;
@@ -737,20 +738,20 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 
 		clearInputs();
 
-		int format = getMyApplication().getSettings().COORDS_INPUT_FORMAT.get();
+		Format format = getMyApplication().getSettings().COORDS_INPUT_FORMAT.get();
 		boolean useTwoDigitsLongtitude = getMyApplication().getSettings().COORDS_INPUT_TWO_DIGITS_LONGTITUDE.get();
-		setupEditTextEx(R.id.lat_first_input_et, CoordinateInputFormats.getFirstPartSymbolsCount(format, true, useTwoDigitsLongtitude), true);
-		setupEditTextEx(R.id.lon_first_input_et, CoordinateInputFormats.getFirstPartSymbolsCount(format, false, useTwoDigitsLongtitude), false);
+		setupEditTextEx(R.id.lat_first_input_et, format.getFirstPartSymbolsCount(true, useTwoDigitsLongtitude), true);
+		setupEditTextEx(R.id.lon_first_input_et, format.getFirstPartSymbolsCount(false, useTwoDigitsLongtitude), false);
 
-		String firstSeparator = CoordinateInputFormats.getFirstSeparator(format);
+		String firstSeparator = format.getFirstSeparator();
 		((TextView) mainView.findViewById(R.id.lat_first_separator_tv)).setText(firstSeparator);
 		((TextView) mainView.findViewById(R.id.lon_first_separator_tv)).setText(firstSeparator);
 
-		int secondPartSymbols = CoordinateInputFormats.getSecondPartSymbolsCount(format);
+		int secondPartSymbols = format.getSecondPartSymbolsCount();
 		setupEditTextEx(R.id.lat_second_input_et, secondPartSymbols, true);
 		setupEditTextEx(R.id.lon_second_input_et, secondPartSymbols, false);
 
-		boolean containsThirdPart = CoordinateInputFormats.containsThirdPart(format);
+		boolean containsThirdPart = format.isContainsThirdPart();
 
 		int visibility = containsThirdPart ? View.VISIBLE : View.GONE;
 		mainView.findViewById(R.id.lat_second_separator_tv).setVisibility(visibility);
@@ -759,11 +760,11 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		mainView.findViewById(R.id.lon_third_input_et).setVisibility(visibility);
 
 		if (containsThirdPart) {
-			String secondSeparator = CoordinateInputFormats.getSecondSeparator(format);
+			String secondSeparator = format.getSecondSeparator();
 			((TextView) mainView.findViewById(R.id.lat_second_separator_tv)).setText(secondSeparator);
 			((TextView) mainView.findViewById(R.id.lon_second_separator_tv)).setText(secondSeparator);
 
-			int thirdPartSymbols = CoordinateInputFormats.getThirdPartSymbolsCount(format);
+			int thirdPartSymbols = format.getThirdPartSymbolsCount();
 			setupEditTextEx(R.id.lat_third_input_et, thirdPartSymbols, true);
 			setupEditTextEx(R.id.lon_third_input_et, thirdPartSymbols, false);
 		}
@@ -948,17 +949,17 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			secondPart = "0";
 		}
 
-		int format = getMyApplication().getSettings().COORDS_INPUT_FORMAT.get();
+		Format format = getMyApplication().getSettings().COORDS_INPUT_FORMAT.get();
 		StringBuilder res = new StringBuilder();
 		if ((latitude && !north) || (!latitude && !east)) {
 			res.append("-");
 		}
 		res.append(firstPart);
 		if (!secondPart.isEmpty()) {
-			res.append(CoordinateInputFormats.getFirstSeparator(format)).append(secondPart);
+			res.append(format.getFirstSeparator()).append(secondPart);
 		}
-		if (!thirdPart.isEmpty() && CoordinateInputFormats.containsThirdPart(format)) {
-			res.append(CoordinateInputFormats.getSecondSeparator(format)).append(thirdPart);
+		if (!thirdPart.isEmpty() && format.isContainsThirdPart()) {
+			res.append(format.getSecondSeparator()).append(thirdPart);
 		}
 		return res.toString();
 	}

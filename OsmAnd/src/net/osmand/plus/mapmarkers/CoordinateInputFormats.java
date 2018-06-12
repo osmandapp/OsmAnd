@@ -1,108 +1,69 @@
 package net.osmand.plus.mapmarkers;
 
 import android.content.Context;
-import android.support.annotation.IntDef;
 
 import net.osmand.plus.R;
 
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-
 public class CoordinateInputFormats {
 
-	public static final int DD_MM_MMM = 0;
-	public static final int DD_MM_MMMM = 1;
-	public static final int DD_DDDDD = 2;
-	public static final int DD_DDDDDD = 3;
-	public static final int DD_MM_SS = 4;
+	public enum Format {
 
-	public static int[] VALUES = new int[]{DD_MM_MMM, DD_MM_MMMM, DD_DDDDD, DD_DDDDDD, DD_MM_SS};
+		DD_MM_MMM(R.string.dd_mm_mmm_format, true, 2, 3, "°", "."),
+		DD_MM_MMMM(R.string.dd_mm_mmmm_format, true, 2, 4, "°", "."),
+		DD_DDDDD(R.string.dd_ddddd_format, false, 5, 0, ".", "°"),
+		DD_DDDDDD(R.string.dd_dddddd_format, false, 6, 0, ".", "°"),
+		DD_MM_SS(R.string.dd_mm_ss_format, true, 2, 2, "°", "′");
 
-	@Retention(RetentionPolicy.SOURCE)
-	@IntDef({DD_MM_MMM, DD_MM_MMMM, DD_DDDDD, DD_DDDDDD, DD_MM_SS})
-	@interface CoordinateInputFormatDef {
-	}
+		private final int humanStringId;
+		private final boolean containsThirdPart;
+		private final int secondPartSymbolsCount;
+		private final int thirdPartSymbolsCount;
+		private final String firstSeparator;
+		private final String secondSeparator;
 
-	public static String formatToHumanString(Context ctx, @CoordinateInputFormatDef int format) {
-		switch (format) {
-			case DD_MM_MMM:
-				return ctx.getString(R.string.dd_mm_mmm_format);
-			case DD_MM_MMMM:
-				return ctx.getString(R.string.dd_mm_mmmm_format);
-			case DD_DDDDD:
-				return ctx.getString(R.string.dd_ddddd_format);
-			case DD_DDDDDD:
-				return ctx.getString(R.string.dd_dddddd_format);
-			case DD_MM_SS:
-				return ctx.getString(R.string.dd_mm_ss_format);
+		Format(int humanStringId,
+			   boolean containsThirdPart,
+			   int secondPartSymbolsCount,
+			   int thirdPartSymbolsCount,
+			   String firstSeparator,
+			   String secondSeparator) {
+			this.humanStringId = humanStringId;
+			this.containsThirdPart = containsThirdPart;
+			this.secondPartSymbolsCount = secondPartSymbolsCount;
+			this.thirdPartSymbolsCount = thirdPartSymbolsCount;
+			this.firstSeparator = firstSeparator;
+			this.secondSeparator = secondSeparator;
 		}
-		return "Unknown format";
-	}
 
-	public static boolean containsThirdPart(@CoordinateInputFormatDef int format) {
-		return format == DD_MM_MMM || format == DD_MM_MMMM || format == DD_MM_SS;
-	}
-
-	public static int getFirstPartSymbolsCount(@CoordinateInputFormatDef int format, boolean latitude, boolean isTwoDigitsLongtitute) {
-		if (latitude) {
-			return 2;
-		} else {
-			return isTwoDigitsLongtitute ? 2 : 3;
+		public String toHumanString(Context context) {
+			return context.getString(humanStringId);
 		}
-	}
 
-	public static int getSecondPartSymbolsCount(@CoordinateInputFormatDef int format) {
-		switch (format) {
-			case DD_MM_MMM:
-			case DD_MM_MMMM:
-			case DD_MM_SS:
+		public boolean isContainsThirdPart() {
+			return containsThirdPart;
+		}
+
+		public int getFirstPartSymbolsCount(boolean latitude, boolean twoDigitsLongitude) {
+			if (latitude) {
 				return 2;
-			case DD_DDDDD:
-				return 5;
-			case DD_DDDDDD:
-				return 6;
+			}
+			return twoDigitsLongitude ? 2 : 3;
 		}
-		return 0;
-	}
 
-	public static int getThirdPartSymbolsCount(@CoordinateInputFormatDef int format) {
-		switch (format) {
-			case DD_MM_MMM:
-				return 3;
-			case DD_MM_MMMM:
-				return 4;
-			case DD_MM_SS:
-				return 2;
-			case DD_DDDDD:
-			case DD_DDDDDD:
+		public int getSecondPartSymbolsCount() {
+			return secondPartSymbolsCount;
 		}
-		return 0;
-	}
 
-	public static String getFirstSeparator(@CoordinateInputFormatDef int format) {
-		switch (format) {
-			case DD_MM_MMM:
-			case DD_MM_MMMM:
-			case DD_MM_SS:
-				return "°";
-			case DD_DDDDD:
-			case DD_DDDDDD:
-				return ".";
+		public int getThirdPartSymbolsCount() {
+			return thirdPartSymbolsCount;
 		}
-		return "";
-	}
 
-	public static String getSecondSeparator(@CoordinateInputFormatDef int format) {
-		switch (format) {
-			case DD_MM_MMM:
-			case DD_MM_MMMM:
-				return ".";
-			case DD_DDDDD:
-			case DD_DDDDDD:
-				return "°";
-			case DD_MM_SS:
-				return "′";
+		public String getFirstSeparator() {
+			return firstSeparator;
 		}
-		return "";
+
+		public String getSecondSeparator() {
+			return secondSeparator;
+		}
 	}
 }
