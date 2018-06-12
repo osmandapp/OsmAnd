@@ -79,7 +79,7 @@ public class CoordinateInputFormats {
 		DMS res = new DMS();
 		res.degrees = ddm.degrees;
 		res.minutes = (int) ddm.decimalMinutes;
-		res.seconds = (int) ((ddm.decimalMinutes - res.minutes) * 60);
+		res.seconds = (ddm.decimalMinutes - res.minutes) * 60;
 		return res;
 	}
 
@@ -91,6 +91,6 @@ public class CoordinateInputFormats {
 	public static class DMS {
 		public int degrees;
 		public int minutes;
-		public int seconds;
+		public double seconds;
 	}
 }
