@@ -66,4 +66,31 @@ public class CoordinateInputFormats {
 			return secondSeparator;
 		}
 	}
+
+	public static DDM ddToDdm(double decimalDegrees) {
+		DDM res = new DDM();
+		res.degrees = (int) decimalDegrees;
+		res.decimalMinutes = (decimalDegrees - res.degrees) * 60;
+		return res;
+	}
+
+	public static DMS ddToDms(double decimalDegrees) {
+		DDM ddm = ddToDdm(decimalDegrees);
+		DMS res = new DMS();
+		res.degrees = ddm.degrees;
+		res.minutes = (int) ddm.decimalMinutes;
+		res.seconds = (int) ((ddm.decimalMinutes - res.minutes) * 60);
+		return res;
+	}
+
+	public static class DDM {
+		public int degrees;
+		public double decimalMinutes;
+	}
+
+	public static class DMS {
+		public int degrees;
+		public int minutes;
+		public int seconds;
+	}
 }
