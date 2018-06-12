@@ -3158,4 +3158,5 @@
     <string name="shared_string_gpx_files">Αρχεία GPX</string>
     <string name="get_osmand_live">Εγγραφείτε στο OsmAnd Live για να ξεκλειδώσετε όλα τα χαρακτηριστικά: Ημερήσιες ενημερώσεις χαρτών με απεριόριστες λήψεις, όλα πληρωμένα και χωρίς πρόσθετα, βικιπαίδεια, βικιταξίδια και πολλά άλλα.</string>
     <string name="quick_action_edit_actions">Επεξεργασία ενεργειών</string>
+    <string name="error_notification_desc">Παρακαλούμε, στείλτε στιγμιότυπο αυτής της ειδοποίησης στο support@osmand.net</string>
     </resources>
