@@ -145,10 +145,10 @@
   <string name="intermediate_points_change_order">Ordena aldatu</string>
   <string name="srtm_paid_version_msg">Baloratu \'Sestra-kurbak\' gehigarriagatik ordaintzea honen garapena babesteko.</string>
   <string name="srtm_paid_version_title">Sestra-kurben gehigarria</string>
-  <string name="av_def_action_choose">Eskariaren arabera hautatu</string>
-  <string name="av_def_action_video">Bideoa grabatu</string>
-  <string name="av_def_action_audio">Audioa grabatu</string>
-  <string name="av_widget_action_descr">Aukeratu trepetaren ekintza lehenetsia.</string>
+  <string name="av_def_action_choose">Hautatu eskariaren arabera</string>
+  <string name="av_def_action_video">Grabatu bideoa</string>
+  <string name="av_def_action_audio">Grabatu audioa</string>
+  <string name="av_widget_action_descr">Hautatu trepetaren ekintza lehenetsia.</string>
   <string name="av_widget_action">Trepetaren ekintza lehenetsia</string>
   <string name="av_video_format_descr">Aukeratu bideo formatua.</string>
   <string name="av_video_format">Bideoaren formatua</string>
@@ -861,7 +861,7 @@ Biltegiratzean {1} MB erabiliko dira.
   <string name="items_were_selected">{0} elementu aukeratuta</string>
   <string name="filter_existing_indexes">Deskargatuta</string>
   
-  <string name="shared_string_select_all">Guztia hautatu</string>
+  <string name="shared_string_select_all">Hautatu guztiak</string>
   <string name="shared_string_refresh">Birkargatu</string>
   <string name="fast_route_mode">Ibilbiderik azkarrena</string>
   <string name="fast_route_mode_descr">Gaitu ibilbiderik azkarrena kalkulatzeko, edo ezgaitu erregaia aurrezten duen ibilbidea kalkulatzeko.</string>
@@ -883,7 +883,7 @@ Biltegiratzean {1} MB erabiliko dira.
   <string name="use_high_res_maps">Erresoluzio handiko bistaratzea</string>
   <string name="use_high_res_maps_descr">Ez luzatu (eta lausotu) mapa teselak erresoluzio handiko bistaratzetan.</string>
   
-  <string name="context_menu_item_search_transport">Garraio publikoa bilatu</string>
+  <string name="context_menu_item_search_transport">Bilatu garraio publikoa</string>
   <string name="transport_searching_transport">Garraioaren emaitzak (helmugarik gabe):</string>
   <string name="transport_searching_route">Garraioaren emaitzak ({0} helmuga):</string>
   
@@ -1104,10 +1104,10 @@ Biltegiratzean {1} MB erabiliko dira.
   <string name="use_english_names">Erabili izen ingelesak mapetan</string>
   <string name="app_settings">Aplikazioaren ezarpenak</string>
   <string name="search_address">Bilatu helbidea</string>
-  <string name="choose_building">Eraikina aukeratu</string>
-  <string name="choose_street">Kalea aukeratu</string>
-  <string name="choose_city">Aukeratu herria edo postakodea</string>
-  <string name="ChooseCountry">Herrialdea aukeratu</string>
+  <string name="choose_building">Aukeratu eraikina</string>
+  <string name="choose_street">Aukeratu kalea</string>
+  <string name="choose_city">Aukeratu herria edo posta-kodea</string>
+  <string name="ChooseCountry">Aukeratu herrialdea</string>
   <string name="show_view_angle">Erakutsi ikuspegiaren norabidea</string>
   <string name="map_view_3d_descr">Gaitu maparen 3D ikuspegia.</string>
   <string name="map_view_3d">3D Mapa Ikuspegia</string>
@@ -3125,7 +3125,7 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="group_deleted">Taldea ezabatuta</string>
     <string name="rendering_attr_whiteWaterSports_name">Ur arinetako kirolak</string>
     <string name="clear_all_intermediates">Garbitu tarteko puntu guztiak</string>
-    <string name="select_waypoints_category_description">Gehitu lorratzaren bide-puntu guztiak, edo hainbat hautatu kategoria.</string>
+    <string name="select_waypoints_category_description">Gehitu lorratzaren bide-puntu guztiak, edo hautatu hainbat kategoria.</string>
     <string name="shared_string_total">Guztira</string>
     <string name="nothing_found_in_radius">Ez da ezer aurkitu:</string>
     <string name="shared_string_dont">Ez</string>
