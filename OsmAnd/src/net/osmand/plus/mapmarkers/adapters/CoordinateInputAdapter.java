@@ -30,6 +30,12 @@ public class CoordinateInputAdapter extends RecyclerView.Adapter<MapMarkerItemVi
 
 	private boolean nightTheme;
 
+	private View.OnClickListener listener;
+
+	public void setOnClickListener(View.OnClickListener listener) {
+		this.listener = listener;
+	}
+
 	public CoordinateInputAdapter(OsmandApplication app, List<MapMarker> mapMarkers) {
 		this.app = app;
 		this.mapMarkers = mapMarkers;
@@ -42,6 +48,7 @@ public class CoordinateInputAdapter extends RecyclerView.Adapter<MapMarkerItemVi
 	@Override
 	public MapMarkerItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 		View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.map_marker_item_new, parent, false);
+		view.setOnClickListener(listener);
 		return new MapMarkerItemViewHolder(view);
 	}
 
