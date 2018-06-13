@@ -3040,4 +3040,5 @@
 \n
 \n • Бирање између целокупних података регије или само мреже путева (пример: цео Јапан је 700MB, а само путеви су 200MB)</string>
     <string name="quick_action_edit_actions">Измени радње</string>
+    <string name="error_notification_desc">Молимо пошаљите снимак екрана овог обавештења на support@osmand.net</string>
     </resources>
