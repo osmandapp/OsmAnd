@@ -4,6 +4,8 @@ import android.Manifest
 import android.app.Dialog
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.ActivityCompat
@@ -164,6 +166,12 @@ class MainActivity : AppCompatActivity(), TelegramListener {
 		}
 	}
 
+	override fun onTelegramChatChanged(chat: TdApi.Chat) {
+		runOnUi {
+			updateChat(chat)
+		}
+	}
+
 	override fun onTelegramError(code: Int, message: String) {
 		runOnUi {
 			Toast.makeText(this@MainActivity, "$code - $message", Toast.LENGTH_LONG).show()
@@ -190,6 +198,15 @@ class MainActivity : AppCompatActivity(), TelegramListener {
 			}
 		}
 		chatViewAdapter.chats = chats
+	}
+
+	private fun updateChat(chat: TdApi.Chat) {
+		val chatIndex = telegramHelper.getChatIndex(chat.id)
+		if (chatIndex != -1) {
+			chatViewAdapter.notifyItemChanged(chatIndex)
+		} else {
+			updateChatsList()
+		}
 	}
 
 	fun logoutTelegram(silent: Boolean = false) {
@@ -358,9 +375,24 @@ class MainActivity : AppCompatActivity(), TelegramListener {
 		}
 
 		override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-			val chatTitle = chats[position].title
+			val chat = chats[position]
+			val chatTitle = chat.title
 			holder.groupName?.text = chatTitle
 
+			var drawable: Drawable? = null
+			var bitmap: Bitmap? = null
+			val chatPhoto = chat.photo?.small
+			if (chatPhoto != null && chatPhoto.local.path.isNotEmpty()) {
+				bitmap = app.uiUtils.getCircleBitmap(chatPhoto.local.path)
+			}
+			if (bitmap == null) {
+				drawable = app.uiUtils.getThemedIcon(R.drawable.ic_group)
+			}
+			if (bitmap != null) {
+				holder.icon?.setImageBitmap(bitmap)
+			} else {
+				holder.icon?.setImageDrawable(drawable)
+			}
 			holder.shareLocationSwitch?.setOnCheckedChangeListener(null)
 			holder.shareLocationSwitch?.isChecked = settings.isSharingLocationToChat(chatTitle)
 			holder.shareLocationSwitch?.setOnCheckedChangeListener { view, isChecked ->

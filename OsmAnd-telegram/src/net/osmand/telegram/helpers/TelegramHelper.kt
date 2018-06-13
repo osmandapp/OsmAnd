@@ -41,6 +41,8 @@ class TelegramHelper private constructor() {
 	private val chatList = TreeSet<OrderedChat>()
 	private val chatLiveMessages = ConcurrentHashMap<Long, Long>()
 
+	private val downloadChatFilesMap = ConcurrentHashMap<String, TdApi.Chat>()
+
 	private val usersLiveMessages = ConcurrentHashMap<Long, TdApi.Message>()
 
 	private val usersFullInfo = ConcurrentHashMap<Int, TdApi.UserFullInfo>()
@@ -70,6 +72,17 @@ class TelegramHelper private constructor() {
 		synchronized(chatList) {
 			return TreeSet<OrderedChat>(chatList)
 		}
+	}
+
+	fun getChatIndex(chatId: Long): Int {
+		synchronized(chatList) {
+			for ((i, chat) in chatList.withIndex()) {
+				if (chat.chatId == chatId) {
+					return i
+				}
+			}
+		}
+		return -1
 	}
 
 	fun getChatTitles(): List<String> {
@@ -126,6 +139,7 @@ class TelegramHelper private constructor() {
 
 		fun onTelegramChatsRead()
 		fun onTelegramChatsChanged()
+		fun onTelegramChatChanged(chat: TdApi.Chat)
 		fun onTelegramError(code: Int, message: String)
 		fun onSendLiveLicationError(code: Int, message: String)
 	}
@@ -434,8 +448,8 @@ class TelegramHelper private constructor() {
 				parameters.databaseDirectory = File(appDir, "tdlib").absolutePath
 				parameters.useMessageDatabase = true
 				parameters.useSecretChats = true
-				parameters.apiId = 94575
-				parameters.apiHash = "a3406de8d171bb422bb6ddf3bbd800e2"
+				parameters.apiId = 293148
+				parameters.apiHash = "d1942abd0f1364efe5020e2bfed2ed15"
 				parameters.systemLanguageCode = "en"
 				parameters.deviceModel = "Android"
 				parameters.systemVersion = "OsmAnd Telegram"
@@ -551,7 +565,34 @@ class TelegramHelper private constructor() {
 					synchronized(chat!!) {
 						if (chat.type !is TdApi.ChatTypeSupergroup || !(chat.type as TdApi.ChatTypeSupergroup).isChannel) {
 							chats[chat.id] = chat
-
+							val localPhoto = chat.photo?.small?.local
+							val hasLocalPhoto = if (localPhoto != null) {
+								localPhoto.canBeDownloaded && localPhoto.isDownloadingCompleted && localPhoto.path.isNotEmpty()
+							} else {
+								false
+							}
+							if (!hasLocalPhoto) {
+								val remotePhoto = chat.photo?.small?.remote
+								if (remotePhoto != null && remotePhoto.id.isNotEmpty()) {
+									downloadChatFilesMap[remotePhoto.id] = chat
+									client!!.send(TdApi.GetRemoteFile(remotePhoto.id, null), { obj ->
+										when (obj.constructor) {
+											TdApi.Error.CONSTRUCTOR -> {
+												val error = obj as TdApi.Error
+												val code = error.code
+												if (code != IGNORED_ERROR_CODE) {
+													listener?.onTelegramError(code, error.message)
+												}
+											}
+											TdApi.File.CONSTRUCTOR -> {
+												val file = obj as TdApi.File
+												client!!.send(TdApi.DownloadFile(file.id, 10), defaultHandler)
+											}
+											else -> listener?.onTelegramError(-1, "Receive wrong response from TDLib: $obj")
+										}
+									})
+								}
+							}
 							val order = chat.order
 							chat.order = 0
 							setChatOrder(chat, order)
@@ -567,7 +608,7 @@ class TelegramHelper private constructor() {
 						chat.title = updateChat.title
 					}
 					updateChatTitles()
-					listener?.onTelegramChatsChanged()
+					listener?.onTelegramChatChanged(chat)
 				}
 				TdApi.UpdateChatPhoto.CONSTRUCTOR -> {
 					val updateChat = obj as TdApi.UpdateChatPhoto
@@ -575,7 +616,7 @@ class TelegramHelper private constructor() {
 					synchronized(chat!!) {
 						chat.photo = updateChat.photo
 					}
-					listener?.onTelegramChatsChanged()
+					listener?.onTelegramChatChanged(chat)
 				}
 				TdApi.UpdateChatLastMessage.CONSTRUCTOR -> {
 					val updateChat = obj as TdApi.UpdateChatLastMessage
@@ -693,6 +734,18 @@ class TelegramHelper private constructor() {
 						val chat = chats[(update.scope as TdApi.NotificationSettingsScopeChat).chatId]
 						synchronized(chat!!) {
 							chat.notificationSettings = update.notificationSettings
+						}
+					}
+				}
+
+				TdApi.UpdateFile.CONSTRUCTOR -> {
+					val updateFile = obj as TdApi.UpdateFile
+					if (updateFile.file.local.isDownloadingCompleted) {
+						val remoteId = updateFile.file.remote.id
+						val chat = downloadChatFilesMap.remove(remoteId)
+						if (chat != null) {
+							chat.photo?.small = updateFile.file
+							listener?.onTelegramChatChanged(chat)
 						}
 					}
 				}
