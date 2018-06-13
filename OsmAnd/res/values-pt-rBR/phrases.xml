@@ -382,7 +382,7 @@
 	<string name="poi_hamlet">Lugarejo</string>
 	<string name="poi_isolated_dwelling">Moradia isolada</string>
 	<string name="poi_suburb">Bairro</string>
-	<string name="poi_quarter">Quarteirão</string>
+	<string name="poi_quarter">Bairro menor</string>
 	<string name="poi_residential">Área residencial</string>
 
 	<string name="poi_healthcare_yes">Instalação médica</string>
@@ -980,7 +980,7 @@
 	<string name="poi_recycling_shoes">Calçados</string>
 	<string name="poi_recycling_aluminium">Alumínio</string>
 	<string name="poi_recycling_organic">Orgânico</string>
-	<string name="poi_recycling_beverage_cartons">Caixas de bebidas</string>
+	<string name="poi_recycling_beverage_cartons">Embalagem longa vida</string>
 	<string name="poi_recycling_garden_waste">Resíduos de jardim</string>
 	<string name="poi_recycling_low_energy_bulbs">Lâmpadas de baixo consumo</string>
 	<string name="poi_recycling_fluorescent_tubes">Lâmpadas fluorescentes</string>

@@ -3048,4 +3048,5 @@
     <string name="access_intermediate_arrival_time">Промежуточное время прибытия</string>
     <string name="map_widget_intermediate_time">Промежуточное время</string>
     <string name="quick_action_edit_actions">Редактировать действие</string>
+    <string name="error_notification_desc">Пожалуйста, пришлите скриншот этого уведомления на support@osmand.net</string>
     </resources>
