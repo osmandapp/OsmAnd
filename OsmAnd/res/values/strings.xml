@@ -411,7 +411,7 @@
     <string name="routing_attr_driving_style_speed_name">Shorter routes</string>
     <string name="routing_attr_driving_style_balance_name">Balanced</string>
     <string name="routing_attr_driving_style_safety_name">Prefer byways</string>
-    <string name="relief_smoothness_factor_descr">Preferred terrain: Flat or hilly.</string>
+    <string name="relief_smoothness_factor_descr">Preferred terrain: flat or hilly.</string>
     <string name="shared_string_slope">Slope</string>
     <string name="add_new_folder">Add new folder</string>
     <string name="points_delete_multiple_succesful">Point(s) deleted.</string>
