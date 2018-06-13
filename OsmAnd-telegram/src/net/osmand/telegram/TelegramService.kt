@@ -11,7 +11,6 @@ import android.location.LocationManager
 import android.os.*
 import android.util.Log
 import android.widget.Toast
-import net.osmand.OnNavigationServiceAlarmReceiver
 import net.osmand.PlatformUtil
 import net.osmand.telegram.helpers.TelegramHelper.TelegramIncomingMessagesListener
 import net.osmand.telegram.notifications.TelegramNotification.NotificationType
@@ -65,7 +64,7 @@ class TelegramService : Service(), LocationListener, TelegramIncomingMessagesLis
 
 				val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
 				pendingIntent = PendingIntent.getBroadcast(this, 0, Intent(this, OnNavigationServiceAlarmReceiver::class.java), PendingIntent.FLAG_UPDATE_CURRENT)
-				alarmManager.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime() + 500, serviceOffInterval.toLong(), pendingIntent)
+				alarmManager.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime() + 500, serviceOffInterval, pendingIntent)
 			}
 			app.notificationHelper.refreshNotification(NotificationType.LOCATION)
 		}
@@ -111,6 +110,13 @@ class TelegramService : Service(), LocationListener, TelegramIncomingMessagesLis
 
 		removeLocationUpdates()
 
+		if (!isContinuous()) {
+			val lock = getLock(this)
+			if (lock.isHeld) {
+				lock.release()
+			}
+		}
+
 		if (shouldCleanupResources) {
 			app.cleanupResources()
 		}
@@ -120,16 +126,23 @@ class TelegramService : Service(), LocationListener, TelegramIncomingMessagesLis
 	}
 
 	private fun initLocationUpdates() {
-		// request location updates
-		val locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
-		try {
-			locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0f, this@TelegramService)
-		} catch (e: SecurityException) {
-			Toast.makeText(this, R.string.no_location_permission, Toast.LENGTH_LONG).show()
-			Log.d(PlatformUtil.TAG, "Location service permission not granted")
-		} catch (e: IllegalArgumentException) {
-			Toast.makeText(this, R.string.gps_not_available, Toast.LENGTH_LONG).show()
-			Log.d(PlatformUtil.TAG, "GPS location provider not available")
+		// requesting
+		if (isContinuous()) {
+			// request location updates
+			val locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
+			try {
+				locationManager.requestLocationUpdates(serviceOffProvider, 0, 0f, this@TelegramService)
+			} catch (e: SecurityException) {
+				Toast.makeText(this, R.string.no_location_permission, Toast.LENGTH_LONG).show()
+				Log.d(PlatformUtil.TAG, "Location service permission not granted") //$NON-NLS-1$
+			} catch (e: IllegalArgumentException) {
+				Toast.makeText(this, R.string.gps_not_available, Toast.LENGTH_LONG).show()
+				Log.d(PlatformUtil.TAG, "GPS location provider not available") //$NON-NLS-1$
+			}
+		} else {
+			val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
+			pendingIntent = PendingIntent.getBroadcast(this, 0, Intent(this, OnNavigationServiceAlarmReceiver::class.java), PendingIntent.FLAG_UPDATE_CURRENT)
+			alarmManager.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime() + 500, serviceOffInterval, pendingIntent)
 		}
 	}
 
@@ -154,6 +167,20 @@ class TelegramService : Service(), LocationListener, TelegramIncomingMessagesLis
 	override fun onLocationChanged(l: Location?) {
 		if (l != null) {
 			val location = convertLocation(l)
+			if (!isContinuous()) {
+				// unregister listener and wait next time
+				val locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
+				try {
+					locationManager.removeUpdates(this)
+				} catch (e: SecurityException) {
+					Log.d(PlatformUtil.TAG, "Location service permission not granted") //$NON-NLS-1$
+				}
+
+				val lock = getLock(this)
+				if (lock.isHeld) {
+					lock.release()
+				}
+			}
 			app().shareLocationHelper.updateLocation(location)
 		}
 	}
@@ -206,13 +233,13 @@ class TelegramService : Service(), LocationListener, TelegramIncomingMessagesLis
 		@Synchronized
 		fun getLock(context: Context): PowerManager.WakeLock {
 			var lockStatic = lockStatic
-			if (lockStatic == null) {
+			return if (lockStatic == null) {
 				val mgr = context.getSystemService(Context.POWER_SERVICE) as PowerManager
 				lockStatic = mgr.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "OsmandServiceLock")
 				this.lockStatic = lockStatic
-				return lockStatic
+				lockStatic
 			} else {
-				return lockStatic
+				lockStatic
 			}
 		}
 

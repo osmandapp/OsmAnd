@@ -1,4 +1,4 @@
-package net.osmand
+package net.osmand.telegram
 
 import android.annotation.SuppressLint
 import android.content.BroadcastReceiver

@@ -78,7 +78,7 @@ class OsmandAidlHelper(private val app: Application) {
 			// representation of that from the raw service object.
 			mIOsmAndAidlInterface = IOsmAndAidlInterface.Stub.asInterface(service)
 			initialized = true
-			Toast.makeText(app, "OsmAnd connected", Toast.LENGTH_SHORT).show()
+			//Toast.makeText(app, "OsmAnd connected", Toast.LENGTH_SHORT).show()
 			listener?.onOsmandConnectionStateChanged(true)
 		}
 
@@ -86,7 +86,7 @@ class OsmandAidlHelper(private val app: Application) {
 			// This is called when the connection with the service has been
 			// unexpectedly disconnected -- that is, its process crashed.
 			mIOsmAndAidlInterface = null
-			Toast.makeText(app, "OsmAnd disconnected", Toast.LENGTH_SHORT).show()
+			//Toast.makeText(app, "OsmAnd disconnected", Toast.LENGTH_SHORT).show()
 			listener?.onOsmandConnectionStateChanged(false)
 		}
 	}
