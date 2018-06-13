@@ -38,11 +38,11 @@ import net.osmand.data.PointDescription;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
 import net.osmand.plus.MapMarkersHelper;
-import net.osmand.plus.MapMarkersHelper.MapMarkersGroup;
-import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.base.FavoriteImageDrawable;
 import net.osmand.plus.base.OsmandExpandableListFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -64,7 +64,7 @@ import java.util.Map;
 import java.util.Set;
 
 
-public class FavoritesTreeFragment extends OsmandExpandableListFragment {
+public class FavoritesTreeFragment extends OsmandExpandableListFragment implements OsmAndLocationProvider.OsmAndCompassListener {
 
 	public static final int SEARCH_ID = -1;
 	//	public static final int EXPORT_ID = 0;
@@ -81,32 +81,32 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 	private FavouritesDbHelper helper;
 
 	private OsmandApplication app;
+	private UiUtilities uiUtilities;
+	private UiUtilities.UpdateLocationViewCache updateLocationViewCache;
+
 	private boolean selectionMode = false;
 	private LinkedHashMap<String, Set<FavouritePoint>> favoritesSelected = new LinkedHashMap<>();
 	private Set<FavoriteGroup> groupsToDelete = new LinkedHashSet<>();
 	private ActionMode actionMode;
-	Drawable arrowImage;
-	Drawable arrowImageDisabled;
+	private Drawable arrowImageDisabled;
 	private HashMap<String, OsmandSettings.OsmandPreference<Boolean>> preferenceCache = new HashMap<>();
 	private View footerView;
 
+	private Float heading;
+	private boolean locationUpdateStarted;
+	private boolean compassUpdateAllowed = true;
+	
 	@Override
 	public void onAttach(Context context) {
 		super.onAttach(context);
 		this.app = (OsmandApplication) getActivity().getApplication();
-
+		uiUtilities = app.getUIUtilities();
+		updateLocationViewCache = uiUtilities.getUpdateLocationViewCache();
 		helper = getMyApplication().getFavorites();
 		favouritesAdapter.synchronizeGroups();
 		setAdapter(favouritesAdapter);
 
 		boolean light = getMyApplication().getSettings().isLightContent();
-		arrowImage = ContextCompat.getDrawable(context, R.drawable.ic_direction_arrow);
-		arrowImage.mutate();
-		if (light) {
-			arrowImage.setColorFilter(ContextCompat.getColor(context, R.color.color_distance), PorterDuff.Mode.MULTIPLY);
-		} else {
-			arrowImage.setColorFilter(ContextCompat.getColor(context, R.color.color_distance), PorterDuff.Mode.MULTIPLY);
-		}
 		arrowImageDisabled = ContextCompat.getDrawable(context, R.drawable.ic_direction_arrow);
 		arrowImageDisabled.mutate();
 		arrowImageDisabled.setColorFilter(ContextCompat.getColor(
@@ -223,6 +223,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 	@Override
 	public void onResume() {
 		super.onResume();
+		startLocationUpdate();
 		favouritesAdapter.synchronizeGroups();
 		initListExpandedState();
 	}
@@ -230,6 +231,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 	@Override
 	public void onPause() {
 		super.onPause();
+		stopLocationUpdate();
 		if (actionMode != null) {
 			actionMode.finish();
 		}
@@ -684,6 +686,48 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 		MapActivity.launchMapActivityMoveToTop(getActivity());
 	}
 
+	@Override
+	public void updateCompassValue(float value) {
+		if (Math.abs(MapUtils.degreesDiff(heading, value)) > 5) {
+			heading = value;
+			updateLocationUi();
+		}
+	}
+
+	private void updateLocationUi() {
+		if (!compassUpdateAllowed) {
+			return;
+		}
+		if (app != null && adapter != null) {
+			app.runInUIThread(new Runnable() {
+				@Override
+				public void run() {
+					favouritesAdapter.notifyDataSetChanged();
+				}
+			});
+		}
+	}
+
+	private void startLocationUpdate() {
+		OsmandApplication app = getMyApplication();
+		if (app != null && !locationUpdateStarted) {
+			locationUpdateStarted = true;
+			app.getLocationProvider().removeCompassListener(app.getLocationProvider().getNavigationInfo());
+			app.getLocationProvider().addCompassListener(this);
+			updateLocationUi();
+		}
+	}
+
+	private void stopLocationUpdate() {
+		OsmandApplication app = getMyApplication();
+		if (app != null && locationUpdateStarted) {
+			locationUpdateStarted = false;
+			app.getLocationProvider().removeCompassListener(this);
+			app.getLocationProvider().addCompassListener(app.getLocationProvider().getNavigationInfo());
+		}
+	}
+
+
 	class FavouritesAdapter extends OsmandBaseExpandableListAdapter implements Filterable {
 
 		private static final boolean showOptionsButton = false;
@@ -889,27 +933,19 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 			}
 			icon.setImageDrawable(FavoriteImageDrawable.getOrCreate(getActivity(),
 					visible ? model.getColor() : getResources().getColor(disabledIconColor), false));
-			LatLon lastKnownMapLocation = getMyApplication().getSettings().getLastKnownMapLocation();
-			int dist = (int) (MapUtils.getDistance(model.getLatitude(), model.getLongitude(),
-					lastKnownMapLocation.getLatitude(), lastKnownMapLocation.getLongitude()));
-			String distance = OsmAndFormatter.getFormattedDistance(dist, getMyApplication()) + "  ";
+			
 			name.setText(model.getName(), TextView.BufferType.SPANNABLE);
 			name.setTypeface(Typeface.DEFAULT, visible ? Typeface.NORMAL : Typeface.ITALIC);
 			name.setTextColor(getResources().getColor(visible ? enabledColor : disabledColor));
-			distanceText.setText(distance);
-			if (visible) {
-				distanceText.setTextColor(getResources().getColor(R.color.color_distance));
-			} else {
-				distanceText.setTextColor(getResources().getColor(disabledColor));
-			}
 			row.findViewById(R.id.group_image).setVisibility(View.GONE);
 
 			ImageView direction = (ImageView) row.findViewById(R.id.direction);
 			direction.setVisibility(View.VISIBLE);
 			if (visible) {
-				direction.setImageDrawable(arrowImage);
+				uiUtilities.updateLocationView(updateLocationViewCache, direction, distanceText, model.getLatitude(), model.getLongitude());
 			} else {
 				direction.setImageDrawable(arrowImageDisabled);
+				distanceText.setTextColor(getResources().getColor(disabledColor));
 			}
 
 			final CheckBox ch = (CheckBox) row.findViewById(R.id.toggle_item);
