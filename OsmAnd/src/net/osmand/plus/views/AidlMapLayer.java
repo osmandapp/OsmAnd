@@ -93,7 +93,7 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 				canvas.drawCircle(x, y, r + (float)Math.ceil(tileBox.getDensity()), pointOuter);
 				canvas.drawCircle(x, y, r - (float)Math.ceil(tileBox.getDensity()), pointInnerCircle);
 				paintTextIcon.setTextSize(r * 3 / 2);
-				canvas.drawText(point.getShortName(), x, y + r / 2, paintTextIcon);
+				canvas.drawText(point.getShortName(), x, y + r * 2.5f, paintTextIcon);
 			}
 		}
 	}
