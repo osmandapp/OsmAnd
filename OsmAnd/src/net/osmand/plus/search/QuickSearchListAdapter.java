@@ -486,7 +486,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 		ImageView direction = (ImageView) view.findViewById(R.id.direction);
 		SearchPhrase phrase = listItem.getSearchResult().requiredSearchPhrase;
 		updateLocationViewCache.specialFrom =  null;
-		if(phrase != null && useMapCenter) {
+		if (phrase != null && !Algorithms.isEmpty(phrase.getUnknownSearchPhrase()) && useMapCenter) {
 			updateLocationViewCache.specialFrom = phrase.getSettings().getOriginalLocation();
 		}
 		LatLon toloc = listItem.getSearchResult().location;
