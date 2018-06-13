@@ -54,8 +54,8 @@
     <string name="welcome_to_open_beta">Welcome to the open beta</string>
     <string name="wikivoyage_travel_guide">Travel Guides</string>
     <string name="wikivoyage_travel_guide_descr">Guides to the most interesting places on the planet, inside OsmAnd, without a connection to the Internet.</string>
-    <string name="monthly_map_updates">Map updates: <b>Every month</b></string>
-    <string name="daily_map_updates">Map updates: <b>Every hour</b></string>
+    <string name="monthly_map_updates">Map updates: <b>every month</b></string>
+    <string name="daily_map_updates">Map updates: <b>every hour</b></string>
     <string name="in_app_purchase">In-app purchase</string>
     <string name="in_app_purchase_desc">One-time payment</string>
     <string name="in_app_purchase_desc_ex">Once purchased, it will be permanently available to you.</string>
@@ -85,7 +85,7 @@
     <string name="download_maps_travel">Travel guides</string>
     <string name="shared_string_wikivoyage">Wikivoyage</string>
     <string name="article_removed">Article removed</string>
-    <string name="wikivoyage_search_hint">Search: Country, city, province</string>
+    <string name="wikivoyage_search_hint">Search: country, city, province</string>
     <string name="shared_string_read">Read</string>
     <string name="saved_articles">Bookmarked articles</string>
     <string name="shared_string_explore">Explore</string>
@@ -100,8 +100,8 @@
     <string name="clear_all_intermediates">Clear all intermediate points</string>
     <string name="group_deleted">Group deleted</string>
     <string name="rendering_attr_whiteWaterSports_name">Whitewater sports</string>
-    <string name="distance_farthest">Distance: Farthest first</string>
-    <string name="distance_nearest">Distance: Nearest first</string>
+    <string name="distance_farthest">Distance: farthest first</string>
+    <string name="distance_nearest">Distance: nearest first</string>
     <string name="enter_lon">Enter longitude</string>
     <string name="enter_lat">Enter latitude</string>
     <string name="enter_lat_and_lon">Enter latitude and longitude</string>
@@ -195,7 +195,7 @@
     <string name="show_guide_line_descr">Show directional line from your position to the active marker locations.</string>
     <string name="show_arrows_descr">Show one or two arrows indicating the direction to the active markers.</string>
     <string name="distance_indication_descr">Choose how to display the distance to active markers.</string>
-    <string name="active_markers_descr">Choose the number of active markers to display.</string>
+    <string name="active_markers_descr">Choose how many direction indicators to display.</string>
     <string name="digits_quantity">Number of decimal digits</string>
     <string name="shared_string_right">Right</string>
     <string name="shared_string_left">Left</string>
@@ -208,9 +208,9 @@
     <string name="tap_on_map_to_hide_interface_descr">A tap on the map toggles the control buttons and widgets.</string>
     <string name="tap_on_map_to_hide_interface">Fullscreen mode</string>
     <string name="mark_passed">Mark passed</string>
-    <string name="import_gpx_file_description">can be imported as favorites or GPX file.</string>
+    <string name="import_gpx_file_description">can be imported as Favorites or a GPX file.</string>
     <string name="import_as_gpx">Import as GPX file</string>
-    <string name="import_as_favorites">Import as favorite</string>
+    <string name="import_as_favorites">Import as Favorites</string>
     <string name="import_file">Import file</string>
 	<string name="wrong_input">Wrong input</string>
 	<string name="enter_new_name">Enter new name</string>
@@ -334,7 +334,7 @@
     <string name="mapillary_descr">Online street-level photos for everyone. Discover places, collaborate, capture the world.</string>
     <string name="mapillary">Mapillary</string>
     <string name="plugin_mapillary_descr">Street-level photos for everyone. Discover places, collaborate, capture the world.</string>
-    <string name="private_access_routing_req">Your destination is located in an area with private access. Trespass private roads for this trip?</string>
+    <string name="private_access_routing_req">Your destination is located in an area with private access. Allow access to the private roads for this trip?</string>
     <string name="restart_search">Restart search</string>
     <string name="increase_search_radius">Increase search radius</string>
     <string name="nothing_found">Nothing found</string>
@@ -342,11 +342,11 @@
     <string name="quick_action_showhide_osmbugs_title">Toggle OSM Notes</string>
     <string name="quick_action_osmbugs_show">Show OSM Notes</string>
     <string name="quick_action_osmbugs_hide">Hide OSM Notes</string>
-    <string name="quick_action_showhide_osmbugs_descr">Tapping this action button shows or hides OSM notes on the map.</string>
+    <string name="quick_action_showhide_osmbugs_descr">Tapping this action button shows or hides OSM Notes on the map.</string>
     <string name="sorted_by_distance">Sorted by distance</string>
     <string name="search_favorites">Search favorites</string>
-    <string name="hillshade_menu_download_descr">Download the \'Hillshade Overlay\' map to hillshade this region.</string>
-    <string name="hillshade_purchase_header">Install the \'Contour Lines\' plugin to show them on the map</string>
+    <string name="hillshade_menu_download_descr">To see relief hillshading on the map, download the hillshade overlay map of this region.</string>
+    <string name="hillshade_purchase_header">To see relief hillshading on the map, you need to buy and install the \'Contour Lines\' plugin</string>
     <string name="hide_from_zoom_level">Hide from zoom level</string>
     <string name="srtm_menu_download_descr">Download the \'Contour Line\' map for use in this region.</string>
     <string name="shared_string_plugin">Plugin</string>
@@ -389,7 +389,7 @@
     <string name="index_item_depth_contours_osmand_ext">Nautical depth contours</string>
 
     <string name="index_item_world_wikivoyage">Worldwide Wikivoyage articles</string>
-    <string name="index_item_depth_points_southern_hemisphere">Southern hemisphere nautical depth points </string>
+    <string name="index_item_depth_points_southern_hemisphere">Southern hemisphere nautical depth points</string>
     <string name="index_item_depth_points_northern_hemisphere">Northern hemisphere nautical depth points</string>
     <string name="download_depth_countours">Nautical depth contours</string>
     <string name="nautical_maps">Nautical maps</string>
@@ -411,7 +411,7 @@
     <string name="routing_attr_driving_style_speed_name">Shorter routes</string>
     <string name="routing_attr_driving_style_balance_name">Balanced</string>
     <string name="routing_attr_driving_style_safety_name">Prefer byways</string>
-    <string name="relief_smoothness_factor_descr">Preferred terrain: Flat or hilly.</string>
+    <string name="relief_smoothness_factor_descr">Preferred terrain: flat or hilly.</string>
     <string name="shared_string_slope">Slope</string>
     <string name="add_new_folder">Add new folder</string>
     <string name="points_delete_multiple_succesful">Point(s) deleted.</string>
@@ -424,8 +424,8 @@
     <string name="shared_string_time_moving">Time moving</string>
     <string name="shared_string_time_span">Time span</string>
     <string name="shared_string_max">Max</string>
-    <string name="shared_string_start_time">Departure</string>
-    <string name="shared_string_end_time">Arrival</string>
+    <string name="shared_string_start_time">Start time</string>
+    <string name="shared_string_end_time">End time</string>
     <string name="shared_string_color">Color</string>
     <string name="select_gpx_folder">Select GPX file folder</string>
     <string name="file_can_not_be_moved">File can not be moved.</string>
@@ -560,7 +560,7 @@
     <string name="get_it">Get it</string>
     <string name="get_for">Get for %1$s</string>
     <string name="get_for_month">Get for %1$s month</string>
-    <string name="osm_live_banner_desc">Get unlimited map downloads, and map updates more than once a month: Weekly, daily, or hourly.</string>
+    <string name="osm_live_banner_desc">Get unlimited map downloads, and map updates more than once a month: weekly, daily, or hourly.</string>
     <string name="osmand_plus_banner_desc">Unlimited map downloads, updates, and Wikipedia plugin.</string>
     <string name="si_mi_meters">Miles/meters</string>
     <string name="skip_map_downloading">Skip downloading maps</string>
@@ -576,7 +576,7 @@
     <string name="storage_place_description">OsmAnd\'s data storage (for maps, GPX files, etc.): %1$s.</string>
     <string name="give_permission">Grant permission</string>
     <string name="allow_access_location">Allow location access</string>
-    <string name="first_usage_greeting">Get directions and discover new places without a connection to the Internet</string>
+    <string name="first_usage_greeting">Get directions and discover new places without an Internet connection</string>
     <string name="search_my_location">Find my position</string>
     <string name="no_update_info_desc">Do not check for new versions or OsmAnd related discounts.</string>
     <string name="no_update_info">Do not show new versions</string>
@@ -590,7 +590,7 @@
     <string name="get_started">Get started</string>
     <string name="route_stops_before">%1$s stops before</string>
     <string name="coords_search">Coordinates search</string>
-    <string name="advanced_coords_search">Advanced coordinate search</string>
+    <string name="advanced_coords_search">Advanced coordinates search</string>
     <string name="back_to_search">Back to search</string>
     <string name="confirmation_to_delete_history_items">Remove selected items from \'History\'?</string>
     <string name="show_something_on_map">Show %1$s on the map</string>
@@ -691,7 +691,7 @@
     <string name="osm_editors_ranking">OSM Editors ranking</string>
     <string name="osm_live_subscription">OsmAnd Live subscription</string>
     <string name="osm_live_subscribe_btn">Subscribe</string>
-    <string name="osm_live_email_desc">For your info about contributions.</string>
+    <string name="osm_live_email_desc">Needed to provide you information about contributions.</string>
     <string name="osm_live_user_public_name">Public Name</string>
     <string name="osm_live_hide_user_name">Do not show my name in reports</string>
     <string name="osm_live_support_region">Support region</string>
@@ -854,7 +854,7 @@
     <string name="share_geo">geo:</string>
     <string name="share_menu_location">Share location</string>
     <string name="shared_string_send">Send</string>
-    <string name="favorite_category_dublicate_message">Please use a category name that doens\'t already exist.</string>
+    <string name="favorite_category_dublicate_message">Please use a category name that doesn\'t already exist.</string>
     <string name="favorite_category_name">Category name</string>
     <string name="favorite_category_add_new_title">Add new category</string>
     <string name="regions">Regions</string>
@@ -890,7 +890,7 @@
     <string name="av_locations">Locations</string>
     <string name="plugin_settings">Plugins</string>
     <string name="routing_attr_avoid_shuttle_train_name">Avoid shuttle train</string>
-    <string name="routing_attr_avoid_shuttle_train_description">Avoid using the shuttle train</string>
+    <string name="routing_attr_avoid_shuttle_train_description">Avoid using shuttle trains</string>
     <string name="traffic_warning_hazard">Hazard</string>
     <string name="rendering_value_boldOutline_name">Bold outline</string>
     <string name="no_updates_available">No updates available</string>
@@ -976,7 +976,7 @@
     <string name="rendering_value_walkingRoutesOSMC_name">Color by OSMC hiking symbol</string>
     <string name="shared_string_logoff">Log Off</string>
     <string name="rendering_attr_hideHouseNumbers_name">House numbers</string>
-    <string name="application_dir_change_warning3">Copy its data files to the new destination?</string>
+    <string name="application_dir_change_warning3">Copy OsmAnd data files to the new destination?</string>
     <string name="specified_directiory_not_writeable">Maps could not be created in specified directory</string>
     <string name="copying_osmand_file_failed">Copying files failed</string>
     <string name="storage_directory_external">External storage</string>
@@ -1500,7 +1500,7 @@
     <string name="disable_complex_routing_descr">Disable two-phase routing for car navigation.</string>
     <string name="disable_complex_routing">Disable complex routing</string>
     <string name="amenity_type_seamark">Seamark</string>
-    <string name="app_modes_choose_descr">Select the use profiles to be visible in the app.</string>
+    <string name="app_modes_choose_descr">Select the profiles to be visible in the app.</string>
     <string name="app_modes_choose">App Profiles</string>
     <string name="map_widget_map_rendering">Map rendering</string>
     <string name="app_mode_hiking">Hiking</string>
@@ -2301,9 +2301,9 @@
     <string name="overlay_transparency">Overlay transparency</string>
     <string name="map_transparency_descr">Modify the base map transparency.</string>
     <string name="map_transparency">Base map transparency</string>
-    <string name="layer_underlay">Underlaying map…</string>
+    <string name="layer_underlay">Underlay map…</string>
     <string name="map_underlay">Underlay map</string>
-    <string name="map_underlay_descr">Choose the underlaying map.</string>
+    <string name="map_underlay_descr">Choose the underlay map.</string>
     <string name="layer_overlay">Overlay map…</string>
     <string name="map_overlay">Overlay map</string>
     <string name="map_overlay_descr">Choose the overlay map.</string>
