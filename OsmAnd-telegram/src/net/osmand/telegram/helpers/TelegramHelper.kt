@@ -562,7 +562,7 @@ class TelegramHelper private constructor() {
 				TdApi.UpdateNewChat.CONSTRUCTOR -> {
 					val updateNewChat = obj as TdApi.UpdateNewChat
 					val chat = updateNewChat.chat
-					synchronized(chat!!) {
+					synchronized(chat) {
 						if (chat.type !is TdApi.ChatTypeSupergroup || !(chat.type as TdApi.ChatTypeSupergroup).isChannel) {
 							chats[chat.id] = chat
 							val localPhoto = chat.photo?.small?.local
@@ -604,75 +604,94 @@ class TelegramHelper private constructor() {
 				TdApi.UpdateChatTitle.CONSTRUCTOR -> {
 					val updateChat = obj as TdApi.UpdateChatTitle
 					val chat = chats[updateChat.chatId]
-					synchronized(chat!!) {
-						chat.title = updateChat.title
+					if (chat != null) {
+						synchronized(chat) {
+							chat.title = updateChat.title
+						}
+						updateChatTitles()
+						listener?.onTelegramChatChanged(chat)
 					}
-					updateChatTitles()
-					listener?.onTelegramChatChanged(chat)
 				}
 				TdApi.UpdateChatPhoto.CONSTRUCTOR -> {
 					val updateChat = obj as TdApi.UpdateChatPhoto
 					val chat = chats[updateChat.chatId]
-					synchronized(chat!!) {
-						chat.photo = updateChat.photo
+					if (chat != null) {
+						synchronized(chat) {
+							chat.photo = updateChat.photo
+						}
+						listener?.onTelegramChatChanged(chat)
 					}
-					listener?.onTelegramChatChanged(chat)
 				}
 				TdApi.UpdateChatLastMessage.CONSTRUCTOR -> {
 					val updateChat = obj as TdApi.UpdateChatLastMessage
 					val chat = chats[updateChat.chatId]
-					synchronized(chat!!) {
-						chat.lastMessage = updateChat.lastMessage
-						setChatOrder(chat, updateChat.order)
+					if (chat != null) {
+						synchronized(chat) {
+							chat.lastMessage = updateChat.lastMessage
+							setChatOrder(chat, updateChat.order)
+						}
 					}
 				}
 				TdApi.UpdateChatOrder.CONSTRUCTOR -> {
 					val updateChat = obj as TdApi.UpdateChatOrder
 					val chat = chats[updateChat.chatId]
-					synchronized(chat!!) {
-						setChatOrder(chat, updateChat.order)
+					if (chat != null) {
+						synchronized(chat) {
+							setChatOrder(chat, updateChat.order)
+						}
+						listener?.onTelegramChatsChanged()
 					}
-					listener?.onTelegramChatsChanged()
 				}
 				TdApi.UpdateChatIsPinned.CONSTRUCTOR -> {
 					val updateChat = obj as TdApi.UpdateChatIsPinned
 					val chat = chats[updateChat.chatId]
-					synchronized(chat!!) {
-						chat.isPinned = updateChat.isPinned
-						setChatOrder(chat, updateChat.order)
+					if (chat != null) {
+						synchronized(chat) {
+							chat.isPinned = updateChat.isPinned
+							setChatOrder(chat, updateChat.order)
+						}
 					}
 				}
 				TdApi.UpdateChatReadInbox.CONSTRUCTOR -> {
 					val updateChat = obj as TdApi.UpdateChatReadInbox
 					val chat = chats[updateChat.chatId]
-					synchronized(chat!!) {
-						chat.lastReadInboxMessageId = updateChat.lastReadInboxMessageId
-						chat.unreadCount = updateChat.unreadCount
+					if (chat != null) {
+						synchronized(chat) {
+							chat.lastReadInboxMessageId = updateChat.lastReadInboxMessageId
+							chat.unreadCount = updateChat.unreadCount
+						}
 					}
 				}
 				TdApi.UpdateChatReadOutbox.CONSTRUCTOR -> {
 					val updateChat = obj as TdApi.UpdateChatReadOutbox
 					val chat = chats[updateChat.chatId]
-					synchronized(chat!!) {
-						chat.lastReadOutboxMessageId = updateChat.lastReadOutboxMessageId
+					if (chat != null) {
+						synchronized(chat) {
+							chat.lastReadOutboxMessageId = updateChat.lastReadOutboxMessageId
+						}
 					}
 				}
 				TdApi.UpdateChatUnreadMentionCount.CONSTRUCTOR -> {
 					val updateChat = obj as TdApi.UpdateChatUnreadMentionCount
 					val chat = chats[updateChat.chatId]
-					synchronized(chat!!) {
-						chat.unreadMentionCount = updateChat.unreadMentionCount
+					if (chat != null) {
+						synchronized(chat) {
+							chat.unreadMentionCount = updateChat.unreadMentionCount
+						}
 					}
 				}
 				TdApi.UpdateMessageContent.CONSTRUCTOR -> {
 					val updateMessageContent = obj as TdApi.UpdateMessageContent
 					val message = usersLiveMessages[updateMessageContent.messageId]
 					if (message != null && !message.isOutgoing) {
-						message.content = updateMessageContent.newContent
+						synchronized(message) {
+							message.content = updateMessageContent.newContent
+						}
 						val chatTitle = chats[message.chatId]?.title
 						if (chatTitle != null) {
 							incomingMessagesListener?.onReceiveChatLocationMessages(chatTitle, message)
 						}
+
 					}
 				}
 				TdApi.UpdateNewMessage.CONSTRUCTOR -> {
@@ -689,8 +708,10 @@ class TelegramHelper private constructor() {
 				TdApi.UpdateMessageMentionRead.CONSTRUCTOR -> {
 					val updateChat = obj as TdApi.UpdateMessageMentionRead
 					val chat = chats[updateChat.chatId]
-					synchronized(chat!!) {
-						chat.unreadMentionCount = updateChat.unreadMentionCount
+					if (chat != null) {
+						synchronized(chat) {
+							chat.unreadMentionCount = updateChat.unreadMentionCount
+						}
 					}
 				}
 				TdApi.UpdateMessageSendFailed.CONSTRUCTOR -> {
@@ -716,24 +737,30 @@ class TelegramHelper private constructor() {
 				TdApi.UpdateChatReplyMarkup.CONSTRUCTOR -> {
 					val updateChat = obj as TdApi.UpdateChatReplyMarkup
 					val chat = chats[updateChat.chatId]
-					synchronized(chat!!) {
-						chat.replyMarkupMessageId = updateChat.replyMarkupMessageId
+					if (chat != null) {
+						synchronized(chat) {
+							chat.replyMarkupMessageId = updateChat.replyMarkupMessageId
+						}
 					}
 				}
 				TdApi.UpdateChatDraftMessage.CONSTRUCTOR -> {
 					val updateChat = obj as TdApi.UpdateChatDraftMessage
 					val chat = chats[updateChat.chatId]
-					synchronized(chat!!) {
-						chat.draftMessage = updateChat.draftMessage
-						setChatOrder(chat, updateChat.order)
+					if (chat != null) {
+						synchronized(chat) {
+							chat.draftMessage = updateChat.draftMessage
+							setChatOrder(chat, updateChat.order)
+						}
 					}
 				}
 				TdApi.UpdateNotificationSettings.CONSTRUCTOR -> {
 					val update = obj as TdApi.UpdateNotificationSettings
 					if (update.scope is TdApi.NotificationSettingsScopeChat) {
 						val chat = chats[(update.scope as TdApi.NotificationSettingsScopeChat).chatId]
-						synchronized(chat!!) {
-							chat.notificationSettings = update.notificationSettings
+						if (chat != null) {
+							synchronized(chat) {
+								chat.notificationSettings = update.notificationSettings
+							}
 						}
 					}
 				}
@@ -744,8 +771,10 @@ class TelegramHelper private constructor() {
 						val remoteId = updateFile.file.remote.id
 						val chat = downloadChatFilesMap.remove(remoteId)
 						if (chat != null) {
-							chat.photo?.small = updateFile.file
-							listener?.onTelegramChatChanged(chat)
+							synchronized(chat) {
+								chat.photo?.small = updateFile.file
+								listener?.onTelegramChatChanged(chat)
+							}
 						}
 					}
 				}
