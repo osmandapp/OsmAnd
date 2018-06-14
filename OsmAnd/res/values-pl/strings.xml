@@ -2712,7 +2712,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="increase_search_radius">Zwiększ promień wyszukiwania</string>
     <string name="nothing_found">Nic nie odnaleziono</string>
     <string name="nothing_found_descr">Proszę zmienić zapytanie lub zwiększyć promień wyszukiwania.</string>
-    <string name="private_access_routing_req">Cel podróży jest położony na obszarze o charakterze prywatnym. Umożliwić dostęp do prywatnych dróg dla tej trasy?</string>
+    <string name="private_access_routing_req">Cel podróży jest położony na obszarze z dostępem prywatnym. Umożliwić dostęp do prywatnych dróg dla tej trasy?</string>
     <string name="search_favorites">Szukaj ulubionych</string>
     <string name="mapillary">Mapillary</string>
     <string name="mapillary_widget">Widżet Mapillary</string>
@@ -2999,8 +2999,8 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="map_import_error">Błąd importowania mapy</string>
     <string name="map_imported_successfully">Zaimportowano mapę</string>
     <string name="osm_recipient_stat">%1$s edycji, w sumie %2$s mBTC</string>
-    <string name="distance_farthest">Odległość: Najpierw najdalsze</string>
-    <string name="distance_nearest">Odległość: Najpierw najbliższe</string>
+    <string name="distance_farthest">Odległość: najpierw najdalsze</string>
+    <string name="distance_nearest">Odległość: najpierw najbliższe</string>
     <string name="day_off_label">poza</string>
     <string name="release_2_9">• Uaktualnione menu podręczne: wyświetlanie czasu otwarcia / zamknięcia użytecznych miejsc,
 \n
@@ -3177,4 +3177,5 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="read_wikipedia_offline">Czytaj Wikipedię offline</string>
     <string name="shared_string_gpx_files">Pliki GPX</string>
     <string name="quick_action_edit_actions">Edycja działań</string>
+    <string name="error_notification_desc">Prosimy o przesłanie zrzutów ekranu tego powiadomienia na support@osmand.net</string>
     </resources>
