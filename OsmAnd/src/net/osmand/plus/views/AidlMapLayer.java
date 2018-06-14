@@ -115,6 +115,7 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 				int x = (int) tileBox.getPixXFromLatLon(l.getLatitude(), l.getLongitude());
 				int y = (int) tileBox.getPixYFromLatLon(l.getLatitude(), l.getLongitude());
 				if (tileBox.containsPoint(x, y, maxRadius)) {
+					boolean hasBitmap = false;
 					Map<String, String> params = point.getParams();
 					String imageUriStr = params.get(AMapPoint.POINT_IMAGE_URI_PARAM);
 					if (!TextUtils.isEmpty(imageUriStr)) {
@@ -122,10 +123,12 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 						if (bitmap == null) {
 							imageRequests.add(imageUriStr);
 						} else {
+							hasBitmap = true;
 							canvas.drawBitmap(bitmap, x - bitmap.getHeight() / 2, y - bitmap.getWidth() / 2, bitmapPaint);
 							canvas.drawText(point.getShortName(), x, y + maxRadius * 0.9f, paintTextIcon);
 						}
-					} else {
+					}
+					if (!hasBitmap) {
 						pointInnerCircle.setColor(point.getColor());
 						pointOuter.setColor(POINT_OUTER_COLOR);
 						canvas.drawCircle(x, y, radius + density, pointOuter);
@@ -233,10 +236,10 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 		@Override
 		protected Void doInBackground(String... imageUriStrs) {
 			for (String imageUriStr : imageUriStrs) {
-				Uri fileUri = Uri.parse(imageUriStr);
 				try {
 					AidlMapLayer layer = layerRef.get();
-					if (layer != null) {
+					Uri fileUri = Uri.parse(imageUriStr);
+					if (layer != null && fileUri != null) {
 						try {
 							InputStream ims = layer.map.getContentResolver().openInputStream(fileUri);
 							if (ims != null) {
