@@ -1210,7 +1210,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="app_mode_boat">Båd</string>
     <string name="app_mode_aircraft">Fly</string>
     <string name="map_widget_map_rendering">Kort-rendering</string>
-    <string name="app_modes_choose_descr">Vælg at brugsprofilerne skal være synlige i programmet.</string>
+    <string name="app_modes_choose_descr">Vælg de profiler der skal være synlige.</string>
     <string name="app_modes_choose">Programprofiler</string>
     <string name="amenity_type_seamark">Sømærke</string>
 
@@ -1947,7 +1947,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="offline_maps_and_navigation">Offline kort\n&amp; navigation</string>
     <string name="commit_poi">Overfør IP</string>
     <string name="routing_attr_avoid_shuttle_train_name">Undgå shuttletog</string>
-    <string name="routing_attr_avoid_shuttle_train_description">Undgå at bruge shuttletog</string>
+    <string name="routing_attr_avoid_shuttle_train_description">Undgå at bruge shuttle-tog</string>
     <string name="plugin_settings">Udvidelser</string>
     <string name="tab_title_advanced">Udvidet</string>
     <string name="building_number">Bygningsnummer</string>
@@ -2631,8 +2631,8 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="shared_string_move">Flyt</string>
     <string name="shared_string_time_span">Varighed</string>
     <string name="shared_string_max">Maks</string>
-    <string name="shared_string_start_time">Afgang</string>
-    <string name="shared_string_end_time">Ankomst</string>
+    <string name="shared_string_start_time">Starttidspunkt</string>
+    <string name="shared_string_end_time">Sluttidspunkt</string>
     <string name="shared_string_color">Farve</string>
     <string name="shared_string_time_moving">Tid i bevægelse</string>
     <string name="max_speed">Maksimal hastighed</string>
@@ -2651,7 +2651,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="routing_attr_driving_style_speed_name">Kortere ruter</string>
     <string name="routing_attr_driving_style_balance_name">Balanceret</string>
     <string name="routing_attr_driving_style_safety_name">Foretrækk biveje</string>
-    <string name="relief_smoothness_factor_descr">Foretruknet terræn: fladt eller kuperet.</string>
+    <string name="relief_smoothness_factor_descr">Foretrukket terræn: fladt eller kuperet.</string>
     <string name="routing_attr_relief_smoothness_factor_name">Vælg terræntype</string>
     <string name="full_version_thanks">Tak for købet af den betalte version af OsmAnd.</string>
     <string name="parking_options">Parkeringsmuligheder</string>
@@ -2839,7 +2839,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="increase_search_radius">Øg søgeradius</string>
     <string name="nothing_found">Fandt intet</string>
     <string name="nothing_found_descr">Ændr søgningen eller øg søgeradius.</string>
-    <string name="private_access_routing_req">Destinationen ligger i et område med privat adgang. Tillad uautoriseret adgang til private veje for denne tur?</string>
+    <string name="private_access_routing_req">Destinationen ligger i et område med privat adgang. Giv adgang til de private veje for denne tur?</string>
     <string name="mapillary">Mapillary</string>
     <string name="mapillary_widget">Mapillary-modul</string>
     <string name="mapillary_widget_descr">Tillader hurtige bidrag til Mapillary.</string>
@@ -3012,9 +3012,9 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="shared_string_back">Tilbage</string>
     <string name="shared_string_view">Vis</string>
 	<string name="waypoints_added_to_map_markers">Rutepunkter føjet til kortmarkører</string>
-	<string name="import_gpx_file_description">kan importeres som favoritter eller GPX-fil.</string>
+	<string name="import_gpx_file_description">kan importeres som Favoritter eller en GPX-fil.</string>
     <string name="import_as_gpx">Importer som GPX-fil</string>
-    <string name="import_as_favorites">Importer som favorit</string>
+    <string name="import_as_favorites">Importer som Favoritter</string>
     <string name="import_file">Importer fil</string>
 	<string name="tap_on_map_to_hide_interface_descr">Et tryk på kortet skifter mellem at vise eller skjule kontrolknapper og moduler.</string>
     <string name="tap_on_map_to_hide_interface">Fuldskærmstilstand</string>
@@ -3034,7 +3034,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="show_guide_line_descr">Vis retningsbestemt linje fra position til de aktive markørplaceringer.</string>
     <string name="show_arrows_descr">Vis en eller to pile der angiver retningen til de aktive markører.</string>
     <string name="distance_indication_descr">Vælg hvordan afstanden til de aktive markører skal vises.</string>
-    <string name="active_markers_descr">Vælg antallet af aktive markører der vises.</string>
+    <string name="active_markers_descr">Vælg hvor mange retningsindikatorer der skal vises.</string>
     <string name="add_track_to_markers_descr">Vælg et spor for at tilføje dens rutepunkter til markører.</string>
     <string name="add_favourites_group_to_markers_descr">Vælg en favoritkategori, der skal tilføjes markørerne.</string>
     <string name="shared_string_gpx_waypoints">Sporrutepunkter</string>
