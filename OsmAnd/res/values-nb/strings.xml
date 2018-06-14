@@ -1254,7 +1254,7 @@
     <string name="download_type_to_filter">Filtrer</string>
     <string name="get_plugin">Hent</string>
     <string name="shared_string_is_open">Åpen nå</string>
-    <string name="application_dir_change_warning3">Kopiere datafiler til det nye målet?</string>
+    <string name="application_dir_change_warning3">Kopiere OsmAnd-datafiler til det nye målet?</string>
     <string name="specified_directiory_not_writeable">Kart kunne ikke opprettes i angitte mappe</string>
     <string name="copying_osmand_file_failed">Kopiering av filer mislyktes</string>
     <string name="storage_directory_external">Ekstern lagring</string>
@@ -2025,7 +2025,7 @@
     <string name="complex_route_calculation_failed">Rask ruteberegning mislyktes (%s), faller tilbake på treg beregning.</string>
     <string name="disable_complex_routing_descr">Slå av to-fase ruteplanlegging for bilnavigering.</string>
     <string name="disable_complex_routing">Slå av kompleks ruteplanlegging</string>
-    <string name="app_modes_choose_descr">Velg bruksprofilene som skal være synlige i programmet.</string>
+    <string name="app_modes_choose_descr">Velg profilene som skal være synlige i programmet.</string>
     <string name="local_index_tile_data_zooms">Zoomnivåer nedlastet: %1$s</string>
     <string name="edit_tilesource_successfully">Fliskilde %1$s lagret</string>
     <string name="intermediate_items_sort_by_distance">Sorter dør-til-dør</string>
