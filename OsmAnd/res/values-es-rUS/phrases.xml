@@ -297,7 +297,7 @@
 	<string name="poi_silo">Silo</string>
 	<string name="poi_storage_tank">Tanque de almacenamiento</string>
 	<string name="poi_college">Instituto superior</string>
-	<string name="poi_driving_school">Autoescuela</string>
+	<string name="poi_driving_school">Escuela de conducción</string>
 	<string name="poi_kindergarten">Jardín de infantes</string>
 	<string name="poi_school">Escuela</string>
 	<string name="poi_training">Centro de capacitación</string>
@@ -349,7 +349,7 @@
 	<string name="poi_psychotherapist">Psicoterapeuta</string>
 	<string name="poi_healthcare_rehabilitation">Rehabilitación</string>
 	<string name="poi_speech_therapist">Fonoaudiólogo</string>
-	<string name="poi_healthcare_yes">Centro médico</string>
+	<string name="poi_healthcare_yes">Instalación médica</string>
 	<string name="poi_company">Empresa privada</string>
 	<string name="poi_insurance">Aseguradora</string>
 	<string name="poi_estate_agent">Inmobiliaria</string>
@@ -555,7 +555,7 @@
 	<string name="poi_arts_centre">Centro de arte</string>
 	<string name="poi_cinema">Cine</string>
 	<string name="poi_casino">Casino</string>
-	<string name="poi_community_centre">Centro comunal</string>
+	<string name="poi_community_centre">Centro comunitario</string>
 	<string name="poi_social_centre">Centro social</string>
 	<string name="poi_theatre">Teatro</string>
 	<string name="poi_theatre_genre_circus">Circo</string>
@@ -690,8 +690,8 @@
 	<string name="poi_strait">Estrecho</string>
 	<string name="poi_island">Isla</string>
 	<string name="poi_islet">Islote</string>
-	<string name="poi_anchorage">Amarradero</string>
-	<string name="poi_anchor_berth">Fondeadero</string>
+	<string name="poi_anchorage">Fondeadero</string>
+	<string name="poi_anchor_berth">Fondeadero con ancla</string>
 	<string name="poi_beacon">Baliza</string>
 	<string name="poi_beacon_cardinal">Baliza cardinal</string>
 	<string name="poi_beacon_lateral">Baliza lateral</string>
@@ -1088,7 +1088,7 @@
 	<string name="poi_content_beer">Contenido: cerveza</string>
 	<string name="poi_content_salt">Contenido: sal</string>
 	<string name="poi_content_grain">Contenido: granos</string>
-	<string name="poi_bunker_silo">Silo bunker</string>
+	<string name="poi_bunker_silo">Silo de búnker</string>
 	<string name="poi_content_slurry">Contenido: mezcla</string>
 	<string name="poi_brownfield">Suelo abandonado urbanizable</string>
 	<string name="poi_greenfield">Suelo virgen urbanizable</string>
@@ -1801,8 +1801,8 @@
 	<string name="poi_service_bicycle_diy_no">Herramientas para autoreparación: no</string>
 	<string name="poi_service_bicycle_cleaning_yes">Limpieza</string>
 	<string name="poi_service_bicycle_cleaning_no">Limpian bicicletas: no</string>
-	<string name="poi_service_bicycle_chaintool_yes">Cadenas de bicicletas</string>
-	<string name="poi_service_bicycle_chaintool_no">Cadenas de bicicletas: no</string>
+	<string name="poi_service_bicycle_chaintool_yes">Herramientas para cadenas</string>
+	<string name="poi_service_bicycle_chaintool_no">Herramientas para cadenas: no</string>
 	<string name="poi_service_bicycle_second_hand_yes">Venta de bicicletas usadas</string>
 	<string name="poi_service_bicycle_second_hand_no">Venden bicicletas usadas: no</string>
 	<string name="poi_wildlife_hide">Observatorio de vida salvaje</string>
@@ -3143,7 +3143,7 @@
 <string name="poi_emergency_infrastructure">Infraestructura de emergencias</string>
 	<string name="poi_cliff">Acantilado</string>
 
-	<string name="poi_animal_keeping">Refugio de animales</string>
+	<string name="poi_animal_keeping">Corral de animales</string>
 	<string name="poi_animal_keeping_horse">Refugio para: caballos</string>
 	<string name="poi_animal_keeping_sheep">Refugio para: ovejas</string>
 	<string name="poi_animal_keeping_type_paddock">Tipo de refugio: potrero</string>
@@ -3463,7 +3463,7 @@
 
 <string name="poi_depot">Depósito</string>
 
-<string name="poi_letter_box">Buzón postal</string>
+<string name="poi_letter_box">Buzón postal (privado)</string>
 	<string name="poi_post_street">Calle</string>
 	<string name="poi_post_housenumber">Número de portal</string>
 	<string name="poi_post_flats">Piso de oficina</string>
