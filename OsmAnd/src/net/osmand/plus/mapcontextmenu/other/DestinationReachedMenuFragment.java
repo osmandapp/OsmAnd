@@ -1,7 +1,6 @@
 package net.osmand.plus.mapcontextmenu.other;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -21,8 +20,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.search.SearchActivity;
-import net.osmand.plus.activities.search.SearchPOIActivity;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.poi.PoiUIFilter;
 
@@ -124,14 +121,11 @@ public class DestinationReachedMenuFragment extends Fragment {
 		findParkingButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				PoiFiltersHelper helper = getMapActivity().getMyApplication().getPoiFilters();
-				//PoiType place = getMapActivity().getMyApplication().getPoiTypes().getPoiTypeByKey("parking");
-				PoiUIFilter parkingFilter = helper.getFilterById(PoiUIFilter.STD_PREFIX + "parking");
-				if (parkingFilter != null) {
-					final Intent newIntent = new Intent(getActivity(), SearchPOIActivity.class);
-					newIntent.putExtra(SearchPOIActivity.AMENITY_FILTER, parkingFilter.getFilterId());
-					newIntent.putExtra(SearchActivity.SEARCH_NEARBY, true);
-					startActivityForResult(newIntent, 0);
+				MapActivity mapActivity = getMapActivity();
+				if (mapActivity != null) {
+					PoiFiltersHelper helper = getMapActivity().getMyApplication().getPoiFilters();
+					PoiUIFilter parkingFilter = helper.getFilterById(PoiUIFilter.STD_PREFIX + "parking");
+					mapActivity.showQuickSearch(parkingFilter);
 				}
 				dismissMenu();
 			}
