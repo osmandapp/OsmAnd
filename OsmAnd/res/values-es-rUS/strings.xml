@@ -66,8 +66,8 @@ Lon %2$s</string>
     <string name="shared_string_enable">Activar</string>
     <string name="shared_string_disable">Desactivar</string>
     <string name="shared_string_ok">Aplicar</string>
-    <string name="shared_string_on">Activado</string>
-    <string name="shared_string_off">Desactivado</string>
+    <string name="shared_string_on">Sí</string>
+    <string name="shared_string_off">No</string>
     <string name="shared_string_enabled">Activado</string>
     <string name="shared_string_disabled">Desactivado</string>
     <string name="shared_string_selected">Seleccionado</string>
@@ -625,7 +625,7 @@ Lon %2$s</string>
     <string name="map_magnifier">Ampliar mapa</string>
     <string name="base_world_map">Mapa base mundial</string>
     <string name="about_version">Versión:</string>
-    <string name="shared_string_about">Acerca de</string>
+    <string name="shared_string_about">Información</string>
     <string name="about_settings_descr">Información de la versión, licencias, miembros del proyecto</string>
     <string name="local_index_tile_data_zooms">Zooms descargados: %1$s</string>
     <string name="local_index_tile_data_expire">Expira (minutos): %1$s</string>
@@ -1040,7 +1040,7 @@ Lon %2$s</string>
     <string name="back_to_location">Volver a la ubicación</string>
     <string name="accessibility_mode">Modo accesibilidad</string>
     <string name="accessibility_mode_descr">Activa las funciones para usuarios discapacitados.</string>
-    <string name="accessibility_default">Según los ajustes del sistema Android</string>
+    <string name="accessibility_default">Según los ajustes del sistema</string>
     <string name="backToMenu">Volver al menú</string>
     <string name="zoomOut">Alejar</string>
     <string name="zoomIn">Acercar</string>
@@ -2359,7 +2359,7 @@ Lon %2$s</string>
     <string name="quick_action_fav_name_descr">Dejar el campo vacío para usar la dirección o el nombre del lugar.</string>
     <string name="quick_action_bug_descr">Este mensaje se incluye en el campo del comentario.</string>
     <string name="quick_action_bug_message">Mensaje</string>
-    <string name="quick_action_category_descr">Marcar la categoría en la que deseas guardar el favorito.</string>
+    <string name="quick_action_category_descr">Marca la categoría en la que quieres guardar el Favorito.</string>
     <string name="quick_action_gpx_category_descr">Elige una categoría opcional.</string>
     <string name="quick_action_poi_list">Lista de PDI</string>
     <string name="quick_action_sh_poi_descr">Añade una o más categorías de PDI a mostrar en el mapa.</string>
@@ -2456,7 +2456,7 @@ Lon %2$s</string>
     <string name="routing_attr_driving_style_safety_name">Preferir caminos secundarios</string>
     <string name="relief_smoothness_factor_descr">Terreno preferido: Llano o empinado.</string>
     <string name="do_not_send_anonymous_app_usage">No enviar estadísticas de uso anónimas de la aplicación</string>
-    <string name="do_not_send_anonymous_app_usage_desc">OsmAnd recopila información acerca de las secciones que abres en la aplicación. No recopilamos datos de ubicación, ingresos en la aplicación o datos relacionados con las áreas que visualizas, buscas o descargas.</string>
+    <string name="do_not_send_anonymous_app_usage_desc">OsmAnd recopila información sobre las secciones que abres en la aplicación. No recopilamos datos de ubicación, ingresos en la aplicación o datos relacionados con las áreas que visualizas, buscas o descargas.</string>
     <string name="do_not_show_startup_messages">Ocultar mensajes de inicio</string>
     <string name="do_not_show_startup_messages_desc">Oculta los descuentos de la aplicación y los mensajes especiales de eventos locales.</string>
     <string name="parking_options">Opciones de estacionamiento</string>
