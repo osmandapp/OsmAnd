@@ -172,6 +172,10 @@ class MainActivity : AppCompatActivity(), TelegramListener {
 		}
 	}
 
+	override fun onTelegramUserChanged(user: TdApi.User) {
+
+	}
+
 	override fun onTelegramError(code: Int, message: String) {
 		runOnUi {
 			Toast.makeText(this@MainActivity, "$code - $message", Toast.LENGTH_LONG).show()

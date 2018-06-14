@@ -8,7 +8,6 @@ import android.content.ServiceConnection
 import android.net.Uri
 import android.os.IBinder
 import android.os.RemoteException
-import android.widget.Toast
 import net.osmand.aidl.IOsmAndAidlInterface
 import net.osmand.aidl.favorite.AFavorite
 import net.osmand.aidl.favorite.AddFavoriteParams
@@ -537,10 +536,10 @@ class OsmandAidlHelper(private val app: Application) {
 	 * @param details - list of details. Displayed under context menu.
 	 */
 	fun addMapPoint(layerId: String, pointId: String, shortName: String, fullName: String,
-					typeName: String, color: Int, location: ALatLon, details: List<String>?): Boolean {
+					typeName: String, color: Int, location: ALatLon, details: List<String>?, params: Map<String, String>?): Boolean {
 		if (mIOsmAndAidlInterface != null) {
 			try {
-				val point = AMapPoint(pointId, shortName, fullName, typeName, color, location, details)
+				val point = AMapPoint(pointId, shortName, fullName, typeName, color, location, details, params)
 				return mIOsmAndAidlInterface!!.addMapPoint(AddMapPointParams(layerId, point))
 			} catch (e: RemoteException) {
 				e.printStackTrace()
@@ -563,10 +562,10 @@ class OsmandAidlHelper(private val app: Application) {
 	 * @param details - list of details. Displayed under context menu.
 	 */
 	fun updateMapPoint(layerId: String, pointId: String, shortName: String, fullName: String,
-					   typeName: String, color: Int, location: ALatLon, details: List<String>?): Boolean {
+					   typeName: String, color: Int, location: ALatLon, details: List<String>?, params: Map<String, String>?): Boolean {
 		if (mIOsmAndAidlInterface != null) {
 			try {
-				val point = AMapPoint(pointId, shortName, fullName, typeName, color, location, details)
+				val point = AMapPoint(pointId, shortName, fullName, typeName, color, location, details, params)
 				return mIOsmAndAidlInterface!!.updateMapPoint(UpdateMapPointParams(layerId, point))
 			} catch (e: RemoteException) {
 				e.printStackTrace()

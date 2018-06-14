@@ -5,14 +5,17 @@ import android.app.Activity
 import android.content.Context
 import android.content.pm.PackageManager
 import android.content.res.Configuration
+import android.net.Uri
+import android.os.Build
 import android.support.annotation.AttrRes
 import android.support.annotation.ColorInt
 import android.support.v4.app.ActivityCompat
-import android.support.v4.content.ContextCompat
+import android.support.v4.content.FileProvider
 import android.util.TypedValue
 import android.util.TypedValue.COMPLEX_UNIT_DIP
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import java.io.File
 
 object AndroidUtils {
 
@@ -60,5 +63,13 @@ object AndroidUtils {
 		val color = ta.getColor(0, defaultColor)
 		ta.recycle()
 		return color
+	}
+
+	fun getUriForFile(context: Context, file: File): Uri {
+		return if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
+			Uri.fromFile(file)
+		} else {
+			FileProvider.getUriForFile(context,  "net.osmand.telegram.fileprovider", file)
+		}
 	}
 }

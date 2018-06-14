@@ -42,6 +42,7 @@ class TelegramHelper private constructor() {
 	private val chatLiveMessages = ConcurrentHashMap<Long, Long>()
 
 	private val downloadChatFilesMap = ConcurrentHashMap<String, TdApi.Chat>()
+	private val downloadUserFilesMap = ConcurrentHashMap<String, TdApi.User>()
 
 	private val usersLiveMessages = ConcurrentHashMap<Long, TdApi.Message>()
 
@@ -140,6 +141,7 @@ class TelegramHelper private constructor() {
 		fun onTelegramChatsRead()
 		fun onTelegramChatsChanged()
 		fun onTelegramChatChanged(chat: TdApi.Chat)
+		fun onTelegramUserChanged(user: TdApi.User)
 		fun onTelegramError(code: Int, message: String)
 		fun onSendLiveLicationError(code: Int, message: String)
 	}
@@ -213,6 +215,54 @@ class TelegramHelper private constructor() {
 
 	fun isInit(): Boolean {
 		return client != null && haveAuthorization
+	}
+
+	fun getUserPhotoPath(user: TdApi.User):String? {
+		return if (hasLocalUserPhoto(user)) {
+			user.profilePhoto?.small?.local?.path
+		} else {
+			if (hasRemoteUserPhoto(user)) {
+				requestUserPhoto(user)
+			}
+			null
+		}
+	}
+
+	private fun hasLocalUserPhoto(user: TdApi.User): Boolean {
+		val localPhoto = user.profilePhoto?.small?.local
+		return if (localPhoto != null) {
+			localPhoto.canBeDownloaded && localPhoto.isDownloadingCompleted && localPhoto.path.isNotEmpty()
+		} else {
+			false
+		}
+	}
+
+	private fun hasRemoteUserPhoto(user: TdApi.User): Boolean {
+		val remotePhoto = user.profilePhoto?.small?.remote
+		return remotePhoto?.id?.isNotEmpty() ?: false
+	}
+
+	private fun requestUserPhoto(user: TdApi.User) {
+		val remotePhoto = user.profilePhoto?.small?.remote
+		if (remotePhoto != null && remotePhoto.id.isNotEmpty()) {
+			downloadUserFilesMap[remotePhoto.id] = user
+			client!!.send(TdApi.GetRemoteFile(remotePhoto.id, null)) { obj ->
+				when (obj.constructor) {
+					TdApi.Error.CONSTRUCTOR -> {
+						val error = obj as TdApi.Error
+						val code = error.code
+						if (code != IGNORED_ERROR_CODE) {
+							listener?.onTelegramError(code, error.message)
+						}
+					}
+					TdApi.File.CONSTRUCTOR -> {
+						val file = obj as TdApi.File
+						client!!.send(TdApi.DownloadFile(file.id, 10), defaultHandler)
+					}
+					else -> listener?.onTelegramError(-1, "Receive wrong response from TDLib: $obj")
+				}
+			}
+		}
 	}
 
 	private fun requestChats(reload: Boolean = false) {
@@ -776,8 +826,17 @@ class TelegramHelper private constructor() {
 						if (chat != null) {
 							synchronized(chat) {
 								chat.photo?.small = updateFile.file
-								listener?.onTelegramChatChanged(chat)
 							}
+							listener?.onTelegramChatChanged(chat)
+							return
+						}
+						val user = downloadUserFilesMap.remove(remoteId)
+						if (user != null) {
+							synchronized(user) {
+								user.profilePhoto?.small = updateFile.file
+							}
+							listener?.onTelegramUserChanged(user)
+							return
 						}
 					}
 				}

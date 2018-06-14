@@ -7,7 +7,9 @@ import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.PointF;
 import android.graphics.drawable.ClipDrawable;
@@ -99,6 +101,20 @@ public class AndroidUtils {
 
 	}
 
+	public static Bitmap scaleBitmap(Bitmap bm, int newWidth, int newHeight, boolean keepOriginalBitmap) {
+		int width = bm.getWidth();
+		int height = bm.getHeight();
+		float scaleWidth = ((float) newWidth) / width;
+		float scaleHeight = ((float) newHeight) / height;
+		Matrix matrix = new Matrix();
+		matrix.postScale(scaleWidth, scaleHeight);
+		Bitmap resizedBitmap = Bitmap.createBitmap(bm, 0, 0, width, height, matrix, false);
+		if (!keepOriginalBitmap) {
+			bm.recycle();
+		}
+		return resizedBitmap;
+	}
+
 	public static ColorStateList createBottomNavColorStateList(Context ctx, boolean nightMode) {
 		return AndroidUtils.createCheckedColorStateList(ctx, nightMode,
 				R.color.icon_color, R.color.wikivoyage_active_light,
@@ -130,7 +146,7 @@ public class AndroidUtils {
 			while (i < text.length() && i != -1) {
 				ImageSpan span = new ImageSpan(icon) {
 					public void draw(Canvas canvas, CharSequence text, int start, int end,
-					                 float x, int top, int y, int bottom, Paint paint) {
+									 float x, int top, int y, int bottom, Paint paint) {
 						Drawable drawable = getDrawable();
 						canvas.save();
 						int transY = bottom - drawable.getBounds().bottom;
@@ -168,13 +184,13 @@ public class AndroidUtils {
 	public static String formatDate(Context ctx, long time) {
 		return DateFormat.getDateFormat(ctx).format(new Date(time));
 	}
-	
+
 	public static String formatDateTime(Context ctx, long time) {
 		Date d = new Date(time);
 		return DateFormat.getDateFormat(ctx).format(d) +
 				" " + DateFormat.getTimeFormat(ctx).format(d);
 	}
-	
+
 	public static String formatTime(Context ctx, long time) {
 		return DateFormat.getTimeFormat(ctx).format(new Date(time));
 	}
@@ -197,7 +213,7 @@ public class AndroidUtils {
 		ViewParent viewParent = view.getParent();
 
 		while (viewParent != null && viewParent instanceof View) {
-			View parentView = (View)viewParent;
+			View parentView = (View) viewParent;
 			if (parentView.getId() == id)
 				return parentView;
 

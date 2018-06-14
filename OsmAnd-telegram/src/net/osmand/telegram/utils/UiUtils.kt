@@ -93,7 +93,7 @@ class UiUtils(private val app: TelegramApplication) {
 		return getDrawable(id, if (light) R.color.icon_color_light else 0)
 	}
 
-	fun createCircleBitmap(source: Bitmap, recycleSource: Boolean = false): Bitmap {
+	private fun createCircleBitmap(source: Bitmap, recycleSource: Boolean = false): Bitmap {
 		val size = Math.min(source.width, source.height)
 
 		val width = (source.width - size) / 2

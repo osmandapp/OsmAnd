@@ -1,9 +1,15 @@
 package net.osmand.telegram.helpers
 
+import android.content.Intent
 import android.graphics.Color
+import android.net.Uri
+import android.text.TextUtils
 import net.osmand.aidl.map.ALatLon
+import net.osmand.aidl.maplayer.point.AMapPoint
 import net.osmand.telegram.TelegramApplication
+import net.osmand.telegram.utils.AndroidUtils
 import org.drinkless.td.libcore.telegram.TdApi
+import java.io.File
 
 class ShowLocationHelper(private val app: TelegramApplication) {
 
@@ -26,6 +32,7 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 			val content = message.content
 			if (content is TdApi.MessageLocation) {
 				var userName = ""
+				var photoUri: Uri? = null
 				val user = telegramHelper.getUser(message.senderUserId)
 				if (user != null) {
 					userName = "${user.firstName} ${user.lastName}".trim()
@@ -35,13 +42,22 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 					if (userName.isEmpty()) {
 						userName = user.phoneNumber
 					}
+					val photoPath = telegramHelper.getUserPhotoPath(user)
+					if (!TextUtils.isEmpty(photoPath)) {
+						photoUri = AndroidUtils.getUriForFile(app, File(photoPath))
+						app.grantUriPermission("net.osmand.plus", photoUri, Intent.FLAG_GRANT_READ_URI_PERMISSION)
+					}
 				}
 				if (userName.isEmpty()) {
 					userName = message.senderUserId.toString()
 				}
 				setupMapLayer()
+				val params = mutableMapOf<String, String>()
+				if (photoUri != null) {
+					params[AMapPoint.POINT_IMAGE_URI_PARAM] = photoUri.toString()
+				}
 				osmandHelper.addMapPoint(MAP_LAYER_ID, "${chatTitle}_${message.senderUserId}", userName, userName,
-						chatTitle, Color.RED, ALatLon(content.location.latitude, content.location.longitude), null)
+						chatTitle, Color.RED, ALatLon(content.location.latitude, content.location.longitude), null, params)
 			}
 		} else if (osmandHelper.isOsmandBound()) {
 			osmandHelper.connectOsmand()

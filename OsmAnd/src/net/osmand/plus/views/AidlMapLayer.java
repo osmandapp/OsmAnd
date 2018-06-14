@@ -1,13 +1,16 @@
 package net.osmand.plus.views;
 
-import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PointF;
-import android.util.DisplayMetrics;
-import android.view.WindowManager;
+import android.net.Uri;
+import android.os.AsyncTask;
+import android.text.TextUtils;
 
+import net.osmand.AndroidUtils;
 import net.osmand.aidl.map.ALatLon;
 import net.osmand.aidl.maplayer.AMapLayer;
 import net.osmand.aidl.maplayer.point.AMapPoint;
@@ -17,8 +20,18 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.views.ContextMenuLayer.IContextMenuProvider;
+import net.osmand.plus.widgets.tools.CropCircleTransformation;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.lang.ref.WeakReference;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
+
+import static net.osmand.aidl.maplayer.point.AMapPoint.POINT_IMAGE_SIZE_PX;
 
 public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider {
 	private static int POINT_OUTER_COLOR = 0x88555555;
@@ -29,8 +42,11 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 	private OsmandMapTileView view;
 	private Paint pointInnerCircle;
 	private Paint pointOuter;
+	private Paint bitmapPaint;
 	private final static float startZoom = 7;
 	private Paint paintTextIcon;
+
+	private Map<String, Bitmap> pointImages = new ConcurrentHashMap<>();
 
 	public AidlMapLayer(MapActivity map, AMapLayer aidlLayer) {
 		this.map = map;
@@ -40,9 +56,6 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 	@Override
 	public void initLayer(OsmandMapTileView view) {
 		this.view = view;
-		DisplayMetrics dm = new DisplayMetrics();
-		WindowManager wmgr = (WindowManager) view.getContext().getSystemService(Context.WINDOW_SERVICE);
-		wmgr.getDefaultDisplay().getMetrics(dm);
 
 		pointInnerCircle = new Paint();
 		pointInnerCircle.setColor(view.getApplication().getResources().getColor(R.color.poi_background));
@@ -60,6 +73,11 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 		pointOuter.setColor(POINT_OUTER_COLOR);
 		pointOuter.setAntiAlias(true);
 		pointOuter.setStyle(Paint.Style.FILL_AND_STROKE);
+
+		bitmapPaint = new Paint();
+		bitmapPaint.setAntiAlias(true);
+		bitmapPaint.setDither(true);
+		bitmapPaint.setFilterBitmap(true);
 	}
 
 	private int getRadiusPoi(RotatedTileBox tb) {
@@ -78,23 +96,47 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 	}
 
 	@Override
-	public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings nightMode) {
-		final int r = getRadiusPoi(tileBox);
+	public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
+	}
+
+	@Override
+	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
+		float density = (float) Math.ceil(tileBox.getDensity());
+		final int radius = getRadiusPoi(tileBox);
+		final int maxRadius = (int) (Math.max(radius, POINT_IMAGE_SIZE_PX) + density);
 		canvas.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
+		paintTextIcon.setTextSize(radius * 3 / 2);
+
+		Set<String> imageRequests = new HashSet<>();
 		List<AMapPoint> points = aidlLayer.getPoints();
 		for (AMapPoint point : points) {
 			ALatLon l = point.getLocation();
 			if (l != null) {
 				int x = (int) tileBox.getPixXFromLatLon(l.getLatitude(), l.getLongitude());
 				int y = (int) tileBox.getPixYFromLatLon(l.getLatitude(), l.getLongitude());
-				pointInnerCircle.setColor(point.getColor());
-				pointOuter.setColor(POINT_OUTER_COLOR);
-				paintTextIcon.setColor(PAINT_TEXT_ICON_COLOR);
-				canvas.drawCircle(x, y, r + (float)Math.ceil(tileBox.getDensity()), pointOuter);
-				canvas.drawCircle(x, y, r - (float)Math.ceil(tileBox.getDensity()), pointInnerCircle);
-				paintTextIcon.setTextSize(r * 3 / 2);
-				canvas.drawText(point.getShortName(), x, y + r * 2.5f, paintTextIcon);
+				if (tileBox.containsPoint(x, y, maxRadius)) {
+					Map<String, String> params = point.getParams();
+					String imageUriStr = params.get(AMapPoint.POINT_IMAGE_URI_PARAM);
+					if (!TextUtils.isEmpty(imageUriStr)) {
+						Bitmap bitmap = pointImages.get(imageUriStr);
+						if (bitmap == null) {
+							imageRequests.add(imageUriStr);
+						} else {
+							canvas.drawBitmap(bitmap, x - bitmap.getHeight() / 2, y - bitmap.getWidth() / 2, bitmapPaint);
+							canvas.drawText(point.getShortName(), x, y + maxRadius * 0.9f, paintTextIcon);
+						}
+					} else {
+						pointInnerCircle.setColor(point.getColor());
+						pointOuter.setColor(POINT_OUTER_COLOR);
+						canvas.drawCircle(x, y, radius + density, pointOuter);
+						canvas.drawCircle(x, y, radius - density, pointInnerCircle);
+						canvas.drawText(point.getShortName(), x, y + radius * 2.5f, paintTextIcon);
+					}
+				}
 			}
+		}
+		if (imageRequests.size() > 0) {
+			executeTaskInBackground(new PointImageReaderTask(this), imageRequests.toArray(new String[imageRequests.size()]));
 		}
 	}
 
@@ -176,6 +218,49 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 					}
 				}
 			}
+		}
+	}
+
+	private static class PointImageReaderTask extends AsyncTask<String, Void, Void> {
+
+		private WeakReference<AidlMapLayer> layerRef;
+		private CropCircleTransformation circleTransformation = new CropCircleTransformation();
+
+		PointImageReaderTask(AidlMapLayer layer) {
+			this.layerRef = new WeakReference<>(layer);
+		}
+
+		@Override
+		protected Void doInBackground(String... imageUriStrs) {
+			for (String imageUriStr : imageUriStrs) {
+				Uri fileUri = Uri.parse(imageUriStr);
+				try {
+					AidlMapLayer layer = layerRef.get();
+					if (layer != null) {
+						try {
+							InputStream ims = layer.map.getContentResolver().openInputStream(fileUri);
+							if (ims != null) {
+								Bitmap bitmap = BitmapFactory.decodeStream(ims);
+								if (bitmap != null) {
+									bitmap = circleTransformation.transform(bitmap);
+									if (bitmap.getWidth() != POINT_IMAGE_SIZE_PX || bitmap.getHeight() != POINT_IMAGE_SIZE_PX) {
+										bitmap = AndroidUtils.scaleBitmap(bitmap, POINT_IMAGE_SIZE_PX, POINT_IMAGE_SIZE_PX, false);
+									}
+									layer.pointImages.put(imageUriStr, bitmap);
+								}
+								ims.close();
+							}
+						} catch (IOException e) {
+							// ignore
+						}
+					} else {
+						break;
+					}
+				} catch (Throwable e) {
+					// ignore
+				}
+			}
+			return null;
 		}
 	}
 }
