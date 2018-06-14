@@ -117,7 +117,7 @@
     <string name="choose_osmand_theme">Выгляд</string>
     <string name="accessibility_options">Налады даступнасьці</string>
     <string name="select_address_activity">Абраць адрас</string>
-    <string name="favourites_list_activity">Абярыце з улюбёных</string>
+    <string name="favourites_list_activity">Абярыце улюбёны</string>
     <string name="local_openstreetmap_act_title">Мадыфікацыі OSM</string>    
 	
     <string name="layer_hillshade">Слой рэльефу мясцовасьці</string>
@@ -427,7 +427,7 @@
 	<string name="address_search_desc">Пошук па адрасе</string>
 	<string name="navpoint_search_desc">Каардынаты</string>
 	<string name="transport_search_desc">Пошук грамадзкага транспарту</string>
-	<string name="favourites_search_desc">Спосаб пошуку улюбёных</string>
+	<string name="favourites_search_desc">Спосаб пошуку ўлюбёных</string>
 	
 	<string name="offline_navigation_not_available">Аўтаномная навігацыя OsmAnd часова недаступная.</string>
 	<string name="left_side_navigation">Левабаковы рух</string>
@@ -884,7 +884,7 @@
 	<string name="fav_imported_sucessfully">Улюблёныя імпартаваныя</string>
 	<string name="fav_file_to_load_not_found">GPX-файл з улюбёнымі ня знойдзены ў {0}</string>
 	<string name="fav_saved_sucessfully">Улюбёныя захаваныя ў {0}</string>
-	<string name="no_fav_to_save">Няма любімых месцаў для захоўваньня</string>
+	<string name="no_fav_to_save">Няма любімых месцаў для захоўвання</string>
 	
 	<string name="error_occurred_loading_gpx">Не атрымалася загрузіць GPX</string>
 	<string name="send_report">Даслаць справаздачу</string>
@@ -1123,12 +1123,12 @@
 	<string name="context_menu_item_update_map">Абнавіць мапу</string>
 	
 	<string name="context_menu_item_create_poi">Стварыць POI</string>
-	<string name="add_favorite_dialog_top_text">Калі ласка, увядзіце імя ўлюбёнага</string>
+	<string name="add_favorite_dialog_top_text">Увядзіце назву ўпадабанага</string>
 	<string name="add_favorite_dialog_default_favourite_name">Улюбёнае</string>
 	<string name="add_favorite_dialog_favourite_added_template">Улюбёная кропка «{0}» дададзеная.</string>
-	<string name="favourites_context_menu_edit">Рэдагаваньне ўлюбёнага</string>
-	<string name="favourites_context_menu_delete">Выдаліць улюбёнае</string>
-	<string name="favourites_remove_dialog_msg">Выдаліць улюбёную кропку \'%s\' з закладак?</string>
+	<string name="favourites_context_menu_edit">Рэдагаваць упадабаны</string>
+	<string name="favourites_context_menu_delete">Выдаліць упадабаны</string>
+	<string name="favourites_remove_dialog_msg">Выдаліць упадабаную кропку «%s» з закладак?</string>
 	<string name="favourites_remove_dialog_success">Улюбёная кропка {0} выдаленая.</string>
 	
 	
@@ -1291,7 +1291,7 @@
 \n Заўвага 2: У новым месцы захоўваньня будзе немагчыма адначасова выкарыстоўваць файлы ў OsmAnd і OsmAnd+.</string>
     
 	
-    <string name="app_modes_choose_descr">Абярыце профілі карыстання, бачныя ў праграме.</string>
+    <string name="app_modes_choose_descr">Абярыце профілі, бачныя ў праграме.</string>
     <string name="voice_pref_title">Голас</string>
     <string name="misc_pref_title">Рознае</string>
     <string name="localization_pref_title">Лякалізацыя</string>
@@ -1564,10 +1564,10 @@
     <string name="text_size">Памер тэксту</string>
     <string name="speed_limit_exceed">Дапушчальнае значэнне перавышэння хуткасці</string>
 	<string name="speed_limit_exceed_message">Задаць дапушчалнае значэнне перавышэння хуткасці, пры якім вы атрымаеце галасавое паведамленне.</string>
-	<string name="fav_point_emoticons_message">Назва ўлюбёнага пункту была зьменена на %1$s для магчымасьці захаваньня радка з эматыконам ў файл.</string>
+	<string name="fav_point_emoticons_message">Назва ўлюбёнага была змененая на %1$s для магчымасьці захаваньня радка з эматыконам ў файл.</string>
     <string name="print_route">Паказаць маршрут</string>
     <string name="fav_point_dublicate">Дубляваньне назвы ўлюбёнага пункту</string>
-    <string name="fav_point_dublicate_message">Улюбёны пункт з такой назвай ўжо існуе, таму будзе выкарыстана %1$s для прадухіленьня дубляваньня імёнаў.</string>
+    <string name="fav_point_dublicate_message">Улюбёны з такой назвай ўжо існуе, таму будзе выкарыстана %1$s для прадухіленьня дубляваньня імёнаў.</string>
     
     
     <string name="local_index_description">Націсьніце на любы элемэнт сьпісу для прагляду больш падрабязнай інфармацыі, доўга ўтрымлівайце, каб зьмясьціць у архіў ці выдаліць. Наяўныя дадзеныя на прыстасаваньні (%1$s вольна):</string>
@@ -1846,7 +1846,7 @@
     <string name="storage_directory_external">Вонкавы носьбіт інфармацыі</string>
     <string name="storage_directory">Захоўваньне мапы</string>
     <string name="storage_directory_multiuser">Агульнае сховішча</string>
-    <string name="application_dir_change_warning3">Скапіяваць файлы даных у новае месца прызначэньня?</string>
+    <string name="application_dir_change_warning3">Скапіяваць файлы даных OsmAnd у новае месца?</string>
     <string name="rendering_attr_hideHouseNumbers_name">Нумары дамоў</string>
     
 	<string name="routing_attr_avoid_borders_description">Пазбягаць перасячэння нацыянальных меж</string>
@@ -1983,7 +1983,7 @@
 <string name="shared_string_wikipedia">Вікіпэдыя</string>
     <string name="roads">Дарогі</string>
 <string name="favourites_edit_dialog_title">Зьвесткі пра ўлюбёнае</string>
-    <string name="favourites_context_menu_add">Дадаць улюбёнае</string>
+    <string name="favourites_context_menu_add">Дадаць упадабаны</string>
 	<string name="shared_string_trip_recording">Запіс падарожжа</string>
     <string name="shared_string_navigation">Навігацыя</string>
     <string name="osmand_running_in_background">Працуе ў фоне</string>
@@ -2283,7 +2283,7 @@
     <string name="shared_string_add_to_map_markers">Дадаць да маркераў мапы</string>
     <string name="no_map_markers_found">Калі ласка, дадайце маркеры праз экран мапы</string>
     <string name="storage_directory_readonly_desc">Пераключыліся на ўнутраную памяць, бо абраны каталог для захоўвання дадзеных толькі для чытання. Калі ласка, абярыце перазапісвальны каталог.</string>
-    <string name="osm_live_email_desc">Для вашай інфармацыі пра ўкладальнікаў.</string>
+    <string name="osm_live_email_desc">Неабходна, каб даць вам інфармацыю аб удзеле.</string>
     <string name="show_map_markers_description">Актывуе функцыю маркераў мапы.</string>
     <string name="no_waypoints_found">Не знайшлося шляхавых пунктаў</string>
     <string name="access_default_color">Колер па змаўчаньні</string>
@@ -2387,7 +2387,7 @@
     <string name="storage_place_description">Сховішча звестак OsmAnd (для мапаў, GPX-файлаў і г.д.): %1$s.</string>
     <string name="give_permission">Дазволіць</string>
     <string name="allow_access_location">Дазволіць доступ да месцазнаходжаньня</string>
-    <string name="first_usage_greeting">Пракладвайце маршруты і адкрывайце новыя месцы без злучэння</string>
+    <string name="first_usage_greeting">Пракладвайце маршруты і адкрывайце новыя месцы без Інтэрнэт-падлучэння</string>
     <string name="search_my_location">Знайсці маю пазіцыю</string>
     <string name="get_for">Атрымаць за %1$s</string>
     <string name="get_for_month">Атрымаць за %1$s у месяц</string>
@@ -2498,14 +2498,14 @@
     <string name="quick_action_add_gpx">Дадаць пункт да сьледу</string>
     <string name="quick_action_new_action">Дадаць дзеяньне</string>
     <string name="quick_action_edit_action">Рэдагаваць дзеяньне</string>
-    <string name="quick_action_add_favorite">Дадаць любімае</string>
+    <string name="quick_action_add_favorite">Дадаць упадабанае</string>
     <string name="dialog_add_action_title">Дадаць дзеяньне</string>
     <string name="quick_actions_delete">Выдаліць дзеяньне</string>
     <string name="quick_actions_delete_text">Вы ўпэўненыя, што хочаце выдаліць дзеяньне \"%s\"?</string>
     <string name="favorite_empty_place_name">Месца</string>
-    <string name="quick_action_showhide_favorites_title">Паказаць/схаваць улюбёныя</string>
-    <string name="quick_action_favorites_show">Паказаць улюбёныя</string>
-    <string name="quick_action_favorites_hide">Схаваць улюбёныя</string>
+    <string name="quick_action_showhide_favorites_title">Паказаць/схаваць упадабаныя</string>
+    <string name="quick_action_favorites_show">Паказаць упадабаныя</string>
+    <string name="quick_action_favorites_hide">Схаваць упадабаныя</string>
     <string name="quick_action_showhide_poi_title">Паказаць/схаваць POI</string>
     <string name="quick_action_poi_show">Паказаць %1$s</string>
     <string name="quick_action_poi_hide">Схаваць %1$s</string>
@@ -2515,7 +2515,7 @@
     <string name="quick_action_fav_name_descr">Пакіньце пустым, каб прымяніць адрас або назву гораду.</string>
     <string name="quick_action_bug_descr">Гэта паведамленьне уключанае ў поле камэнтара.</string>
     <string name="quick_action_bug_message">Паведамленьне</string>
-    <string name="quick_action_category_descr">Выберыце катэгорыю, каб захаваць улюблёнае там.</string>
+    <string name="quick_action_category_descr">Выберыце катэгорыю, каб захаваць упадабанае там.</string>
     <string name="quick_action_poi_list">Пералік POI</string>
     <string name="quick_action_sh_poi_descr">Дадаць адну або некалькі катэгорый POI для адлюстраваньня на мапе.</string>
     <string name="quick_action_map_style_action">Дадаць стыль мапы</string>
@@ -2565,8 +2565,8 @@
     <string name="shared_string_time_moving">Час руху</string>
     <string name="shared_string_time_span">Часавы дыяпазон</string>
     <string name="shared_string_max">Макс.</string>
-    <string name="shared_string_start_time">Адпраўленне</string>
-    <string name="shared_string_end_time">Прыбыццё</string>
+    <string name="shared_string_start_time">Час пачатку</string>
+    <string name="shared_string_end_time">Час закачэння</string>
     <string name="shared_string_color">Колер</string>
     <string name="select_gpx_folder">Абраць тэчку GPX-файлаў</string>
     <string name="file_can_not_be_moved">Файл не можа быць перамешчаны.</string>
@@ -2592,7 +2592,7 @@
     <string name="navigate_point_olc">Адкрыты код месцазнаходжання (OLC)</string>
     <string name="quick_action_add_osm_bug">Дадаць OSM-нататку</string>
     <string name="quick_action_navigation_voice">Голас укл/адкл</string>
-    <string name="quick_favorites_show_favorites_dialog">Паказаць дыялёг улюбёных</string>
+    <string name="quick_favorites_show_favorites_dialog">Паказаць дыялог упадабаных</string>
     <string name="quick_favorites_name_preset">Назва перадусталёўкі</string>
     <string name="quick_action_add_marker_descr">Націск на гэтую кнопку дадасць маркер на мапу ў цэнтры экрана.</string>
     <string name="quick_action_add_gpx_descr">Націск на гэтую кнопку дадасьць GPX-кропку ў сярэдзіне экрана.</string>
@@ -2607,7 +2607,7 @@
     <string name="favorite_autofill_toast_text">" было захавана ў "</string>
     <string name="quick_action_duplicates">Назва для хуткага дзеяньня ўжо існуе. Назва будзе змененая на %1$s, каб пазбавіцца дубляваньня.</string>
     <string name="quick_action_duplicate">Знойдзены дублікат назвы</string>
-    <string name="quick_action_showhide_favorites_descr">Націск на гэтую кнопку пакажа ці схавае ўлюбёныя кропкі на мапе.</string>
+    <string name="quick_action_showhide_favorites_descr">Націск на гэтую кнопку пакажа ці схавае ўпадабаныя кропкі на мапе.</string>
     <string name="quick_action_showhide_poi_descr">Націск на гэтую кнопку пакажа ці схавае POI на мапе.</string>
     <string name="quick_action_add_create_items">Стварэнне элементаў</string>
     <string name="quick_action_gpx_category_descr">Абярыце катэгорыю (апцыянальна).</string>
@@ -2712,8 +2712,8 @@
     <string name="srtm_color_scheme">Каляровая схема</string>
     <string name="routing_attr_allow_private_name">Дазволіць прыватны доступ</string>
     <string name="routing_attr_allow_private_description">Дазволіць доступ на прыватную тэрыторыю.</string>
-    <string name="hillshade_menu_download_descr">Спампаваць мапу «Hillshade Overlay» каб зацяніць рэльеф гэтага рэгіёна.</string>
-    <string name="hillshade_purchase_header">Спампаваць дадатак «Contour Lines» каб паказаць контурныя лінія на мапе</string>
+    <string name="hillshade_menu_download_descr">Каб убачыць зацяненне рэльефу, спампуйце мапу «Hillshade Overlay» гэтага рэгіёна.</string>
+    <string name="hillshade_purchase_header">Каб убачыць зацяненне рэльефу, вам неабходна набыць і ўсталяваць дадатак «Contour Lines»</string>
     <string name="hide_from_zoom_level">Схаваць ад узроўню маштабавання</string>
     <string name="srtm_menu_download_descr">Спампаваць мапу «Contour Line» для выкарыстання ў гэтым рэгіёне.</string>
     <string name="show_from_zoom_level">Паказваць ад узроўню маштабавання</string>
@@ -2910,7 +2910,7 @@
     <string name="empty_state_my_tracks">Дадаць GPX-файлы</string>
     <string name="empty_state_my_tracks_desc">Запісаць GPX-файлы ці запісаныя сляды.</string>
     <string name="empty_state_favourites">Дадаць ва Ўлюбёныя</string>
-    <string name="empty_state_favourites_desc">Імпартаваць улюбёныя ці дадаць з дапамогай маркіроўкі пунктаў на мапе.</string>
+    <string name="empty_state_favourites_desc">Імпартаваць упадабаныя ці дадаць з дапамогай маркіроўкі пунктаў на мапе.</string>
     <string name="import_track">Імпартаваць GPX-файл</string>
     <string name="import_track_desc">Файл %1$s не зьмяшчае кропкі шляху, імпартаваць як сьлед?</string>
     <string name="move_point">Перамясціць кропку</string>
@@ -3018,12 +3018,12 @@
     <string name="empty_state_markers_active">Стварыце маркеры мапы!</string>
     <string name="empty_state_markers_active_desc">Дакраніцеся месца і потым націсніце кнопку маркера.</string>
     <string name="empty_state_markers_groups">Імпартаваць групы</string>
-    <string name="empty_state_markers_groups_desc">Імпартаваць групы улюбёных ці шляхавыя кропкі як маркеры.</string>
+    <string name="empty_state_markers_groups_desc">Імпартаваць групы ўлюбёных ці шляхавыя кропкі як маркеры.</string>
     <string name="empty_state_markers_history_desc">Маркеры, пазначаныя як пройдзенныя, з\'явяцца на гэтым экране.</string>
     <string name="show_guide_line_descr">Паказвае лініі кірунку ад вашага становішча да актыўнага маркера.</string>
     <string name="show_arrows_descr">Паказвае адну ці дзьве стрэлкі, якія паказваюць кірунак да актыўных маркераў.</string>
     <string name="distance_indication_descr">Выберыце, як адлюстроўваць адлегласьць да актыўных маркераў.</string>
-    <string name="active_markers_descr">Абярыце колькасць актыўтыўных маркераў для адлюстравання.</string>
+    <string name="active_markers_descr">Абярыце, колькі ўказальнікаў напрамку адлюстроўваць.</string>
     <string name="appearance_on_the_map">Зьнешні выгляд на мапе</string>
     <string name="add_track_to_markers_descr">Абраць след каб дадаць яго шляхавые кропкі ў маркеры.</string>
     <string name="shared_string_right">Направа</string>
