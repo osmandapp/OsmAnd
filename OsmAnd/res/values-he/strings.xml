@@ -418,7 +418,7 @@
 	<string name="show_more_map_detail">הצגת יותר פרטים במפה</string>
 	<string name="show_more_map_detail_descr">הצגת חלק מהפרטים במפה בווקטורים (דרכים וכו׳) ברמות תקריב נמוכות.</string>
 	<string name="favourites_delete_multiple_succesful">הנקודות המועדפות נמחקו.</string>
-	<string name="favorite_delete_multiple">פעולה זו תמחק %1$d מועדפים ו־%2$d קבוצות. להמשיך?</string>
+	<string name="favorite_delete_multiple">פעולה זו תמחק %1$d מועדפים ו־%2$d קבוצות מועדפים. להמשיך?</string>
 	<string name="favorite_home_category">בית</string>
 	<string name="favorite_friends_category">חברים</string>
 	<string name="favorite_places_category">מקומות</string>
@@ -588,7 +588,7 @@
 	<string name="specified_dir_doesnt_exist">לא ניתן למצוא את התיקייה שצוינה.</string>
 	<string name="application_dir">תיקיית אחסון הנתונים</string>
 	
-	<string name="osmand_net_previously_installed">כל הנתונים הבלתי מקוונים מהיישומון הישן יתמכו על ידי היישומון החדש. אך את הנקודות המועדפות יש לייצא ביישומון הישן ולייבא לאחר מכן לחדש.</string>
+	<string name="osmand_net_previously_installed">כל הנתונים הבלתי מקוונים מהיישומון הישן יתמכו על ידי היישומון החדש. אך את הנקודות במועדפים יש לייצא ביישומון הישן ולייבא לאחר מכן לחדש.</string>
 	<string name="build_installed">הבנייה {0} הותקנה ({1}).</string>
 	
 	<string name="downloading_build">הבנייה מתקבלת…</string>
@@ -1533,7 +1533,7 @@
     <string name="tap_on_map_to_hide_interface_descr">נגיעה במפה מחליפה את תצוגת הכפתורים והווידג׳טים.</string>
     <string name="appearance_on_the_map">הופעה על המפה</string>
     <string name="add_track_to_markers_descr">נא לבחור מסלול כדי להוסיף את נקודות הדרך שלו לסמנים.</string>
-    <string name="add_favourites_group_to_markers_descr">נא לבחור קטגוריה מועדפת להוספה לסמנים.</string>
+    <string name="add_favourites_group_to_markers_descr">נא לבחור קטגוריה במועדפים להוספה לסמנים.</string>
     <string name="shared_string_gpx_waypoints">נקודות דרך במסלול</string>
     <string name="favourites_group">קטגוריית מועדפים</string>
     <string name="add_group">הוספת קבוצה</string>
@@ -2775,7 +2775,7 @@
     <string name="download_maps_travel">מדריכי תיירות</string>
     <string name="shared_string_wikivoyage">ויקימסע</string>
     <string name="article_removed">המאמר הוסר</string>
-    <string name="fav_point_emoticons_message">שם הנקודה המועדפת השתנה לביטוי %1$s כדי להתאים כראוי לשמירת המחרוזת עם הרגשונים לקובץ.</string>
+    <string name="fav_point_emoticons_message">שם המועדף השתנה לביטוי %1$s כדי להתאים כראוי לשמירת המחרוזת עם הרגשונים לקובץ.</string>
     <string name="save_track_interval_globally">הפרשי רישום</string>
     <string name="rendering_attr_hideWoodScrubs_name">עצים וצמחיה נמוכה</string>
     <string name="shared_string_waypoint">נקודת דרך</string>

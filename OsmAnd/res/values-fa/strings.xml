@@ -871,19 +871,19 @@
     
     
     
-    <string name="layer_hillshade">لایهٔ سایه‌تپه</string>
+    <string name="layer_hillshade">لایهٔ سایه‌روشن</string>
     
     <string name="index_name_openmaps">نقشه‌های اتحادیهٔ اروپا</string>
     
-    <string name="download_hillshade_maps">سایه‌تپه‌ها</string>
+    <string name="download_hillshade_maps">سایه‌روشن‌ها</string>
     
-    <string name="osmand_srtm_long_description_1000_chars">این افزونه دو لایهٔ منحنی‌های تراز و سایه‌تپه (عوارض زمین) را روی نقشه‌‌های استاندارد OsmAnd نمایش می‌دهد. 
+    <string name="osmand_srtm_long_description_1000_chars">این افزونه دو لایهٔ منحنی‌های تراز و سایه‌روشن (پستی‌بلندی‌ها) را روی نقشه‌‌های استاندارد OsmAnd نمایش می‌دهد. 
 \nورزشکاران، راه‌پیمایان، کوله‌گردان و همهٔ کسانی که به ساختار پستی‌وبلندی‌های زمین علاقه‌مند هستند از این ویژگی بهره می‌برند. 
 \nمبنای داده‌های جهانی یعنی بین ۷۰ درجهٔ شمالی و ۷۰ درجهٔ جنوبی اندازه‌گیری‌های SRTM (مأموریت توپوگرافی رادار شاتل) و ASTER (رادیومتر پیشرفتهٔ فضابرد بازتاب و گسیل حرارتی) است. 
 \n 
 \nاَستِر یک ابزار تصویربرداری است که بر روی ماهوارهٔ Terra نصب است و تِرا ماهوار‌ه‌ای فوق‌پیشرفته برای سامانهٔ دیده‌بانی زمینِ ناساست. 
 \nاَستِر محصول تلاش مشترک ناسا، وزارت اقتصاد، صنعت و تجارت ژاپن و سامانه‌های فضایی ژاپن است.</string>
-    <string name="srtm_plugin_description">این افزونه دو لایهٔ منحنی‌های تراز و سایه‌تپه (عوارض زمین) را روی نقشه‌‌های استاندارد OsmAnd نمایش می‌دهد. 
+    <string name="srtm_plugin_description">این افزونه دو لایهٔ منحنی‌های تراز و سایه‌روشن (پستی‌بلندی‌ها) را روی نقشه‌‌های استاندارد OsmAnd نمایش می‌دهد. 
 \nورزشکاران، راه‌پیمایان، کوله‌گردان و همهٔ کسانی که به ساختار پستی‌وبلندی‌های زمین علاقه‌مند هستند از این ویژگی بهره می‌برند. 
 \nمبنای داده‌های جهانی یعنی بین ۷۰ درجهٔ شمالی و ۷۰ درجهٔ جنوبی اندازه‌گیری‌های SRTM (مأموریت توپوگرافی رادار شاتل) و ASTER (رادیومتر پیشرفتهٔ فضابرد بازتاب و گسیل حرارتی) است. 
 \n 
@@ -1113,7 +1113,7 @@
 	
 	
 	<string name="asap">دراسرع‌وقت</string>
-	<string name="osmand_rastermaps_plugin_description">با استفاده از این افزونه به انواع مختلفی از نقشه‌های آنلاین (کاشی‌مانند یا رَستر) دسترسی پیدا می‌کنید. این نقشه‌ها از کاشی‌های پیش‌فرض OpenStreetMap (مانند مَپنیک) تا تصاویر ماهواره‌ای و لایه‌های خاص مانند نقشه‌های آب‌و‌هوایی، هواشناسی، جغرافیایی و لایه‌های تپه‌ماهوری و... را در بر می‌گیرد. 
+	<string name="osmand_rastermaps_plugin_description">با استفاده از این افزونه به انواع مختلفی از نقشه‌های آنلاین (کاشی‌مانند یا رَستر) دسترسی پیدا می‌کنید. این نقشه‌ها از کاشی‌های پیش‌فرض OpenStreetMap (مانند مَپنیک) تا تصاویر ماهواره‌ای و لایه‌های خاص مانند نقشه‌های آب‌و‌هوایی، هواشناسی، جغرافیایی و لایه‌های سایه‌روشن و... را در بر می‌گیرد. 
 \n 
 \nهرکدام از این نقشه‌ها هم به‌عنوان نقشهٔ پایه و هم به‌عنوان لایهٔ رویی یا زیری برای لایهٔ پایه (مثلاً نقشه‌های آفلاین و استاندارد OsmAnd) قابل‌نمایش هستند. برای اینکه لایهٔ زیری را نمایان‌تر کنید می‌توانید اجزای خاصی را در نقشه‌های بُرداری OsmAnd از طریق منوی «پیکربندی نقشه» مخفی کنید. 
 \n 
@@ -1292,7 +1292,7 @@
     <string name="app_mode_boat">قایق</string>
     <string name="app_mode_aircraft">هواپیما</string>
     <string name="amenity_type_seamark">علامت دریایی</string>
-    <string name="app_modes_choose_descr">پروفایل‌هایی را که لازم دارید از اینجا انتخاب کنید تا در برنامه ببینیدشان.</string>
+    <string name="app_modes_choose_descr">پروفایل‌ها را از اینجا انتخاب کنید تا در برنامه ببینیدشان.</string>
     <string name="app_modes_choose">پروفایل‌های برنامه</string>
 	<string name="map_widget_map_rendering">رسم نقشه</string>
     
@@ -1759,7 +1759,7 @@
     <string name="rendering_attr_trolleybusRoutes_name">مسیرهای اتوبوس برقی</string>
     <string name="rendering_attr_busRoutes_name">مسیرهای اتوبوس</string>
     <string name="rendering_category_routes">مسیرها</string>
-    <string name="fav_point_dublicate_message">این نام نقطهٔ برگزیده قبلاً استفاده شده است، جهت جلوگیری از نوشتن نام تکراری آن را به %1$s تغییر دادیم.</string>
+    <string name="fav_point_dublicate_message">نام نقطهٔ برگزیده تکراری است، برای جلوگیری از تکرار آن را به %1$s تغییر دادیم.</string>
     <string name="proxy_port_descr">شمارهٔ پورت پروکسی را تنظیم کنید (مثلاً 8118).</string>
 	<string name="proxy_host_descr">نام میزبان پروکسی را تنظیم کنید (مثلاً 127.0.0.1).</string>
 	<string name="plugin_install_needs_network">برای نصب این افزونه به اینترنت وصل شوید.</string>
@@ -1775,7 +1775,7 @@
 	<string name="speed_limit_exceed_message">محدودهٔ حداکثر سرعت را انتخاب کنید؛ با گذشتن از این مقدار، هشدار صوتی خواهید شنید.</string>
 	<string name="fav_point_emoticons_message">نام نقطهٔ برگزیده به %1$s تغییر کرد تا ذخیره‌سازی آن به‌همراه شکلک‌ها در فایل تسهیل شود.</string>
     <string name="rendering_attr_hideHouseNumbers_name">پلاک خانه‌ها</string>
-    <string name="application_dir_change_warning3">فایل‌های داده به مکان جدید کپی شود؟</string>
+    <string name="application_dir_change_warning3">فایل‌های دادهٔ OsmAnd به مکان جدید کپی شود؟</string>
     <string name="specified_directiory_not_writeable">نمی‌توان نقشه‌ها را در پوشهٔ موردنظر ایجاد کرد</string>
 	<string name="copying_osmand_file_failed">کپی‌کردن فایل‌ها ناموفق بود</string>    
     <string name="storage_directory_external">ذخیره‌گاه خارجی</string>
@@ -2107,8 +2107,8 @@
     <string name="max_speed">حداکثر سرعت</string>
     <string name="average_speed">میانگین سرعت</string>
     <string name="shared_string_max">حداکثر</string>
-    <string name="shared_string_start_time">زمان حرکت</string>
-    <string name="shared_string_end_time">زمان رسیدن</string>
+    <string name="shared_string_start_time">زمان شروع</string>
+    <string name="shared_string_end_time">زمان پایان</string>
     <string name="shared_string_color">رنگ</string>
     <string name="file_can_not_be_moved">امکان انتقال فایل وجود ندارد.</string>
     <string name="shared_string_move">جابه‌جایی</string>
@@ -2544,7 +2544,7 @@
     <string name="quick_action_fav_name_descr">خالی بگذارید تا از نشانی یا نام محل استفاده شود.</string>
     <string name="quick_action_bug_descr">این نوشته به‌صورت خودکار در قسمت پیام درج می‌شود.</string>
     <string name="quick_action_bug_message">پیام</string>
-    <string name="quick_action_category_descr">دسته‌ای را انتخاب کنید تا نقطهٔ برگزیده را در آن ذخیره کنید.</string>
+    <string name="quick_action_category_descr">دسته‌ای را انتخاب کنید تا نقطهٔ برگزیده در آن ذخیره شود.</string>
     <string name="quick_action_gpx_category_descr">یکی از دسته‌ها را انتخاب کنید.</string>
     <string name="quick_action_poi_list">لیست POI</string>
     <string name="quick_action_sh_poi_descr">یک یا چند دسته‌بندی POI را اضافه کنید تا روی نقشه نشان داده شوند.</string>
@@ -2638,7 +2638,7 @@
     <string name="mapillary_descr">تصاویر خیابانی آنلاین برای همه. مکان‌ها را کشف کنید، همکاری کنید و جهان را به‌تصویر درآورید.</string>
     <string name="mapillary">مپیلاری</string>
     <string name="plugin_mapillary_descr">تصاویر خیابانی آنلاین برای همه. مکان‌ها را کشف کنید، همکاری کنید و جهان را به‌تصویر درآورید.</string>
-    <string name="private_access_routing_req">مقصد شما در ناحیه‌ای با دسترسی خصوصی قرار دارد. دسترسی به مسیرهای خصوصی برای این سفر مجاز شود؟</string>
+    <string name="private_access_routing_req">مقصد شما در ناحیه‌ای با دسترسی خصوصی قرار دارد. برای این سفر دسترسی به مسیرهای خصوصی مجاز شود؟</string>
     <string name="restart_search">شروع مجدد جست‌وجو</string>
     <string name="nothing_found">"چیزی پیدا نشد "</string>
     <string name="quick_action_showhide_osmbugs_title">آشکار/پنهان‌کردن توضیحات ویرایشی</string>
@@ -2647,8 +2647,8 @@
     <string name="quick_action_showhide_osmbugs_descr">با لمس این دکمهٔ عملیاتی، توضیحات ویرایشی OSM را روی نقشه آشکار یا پنهان کنید.</string>
     <string name="sorted_by_distance">مرتب‌شده بر اساس مسافت</string>
     <string name="search_favorites">جست‌وجو در نقاط برگزیده</string>
-    <string name="hillshade_menu_download_descr">نقشهٔ تپه‌سایه را برای این منطقه دانلود کنید تا سایه‌تپهٔ پستی‌وبلندی‌ها را ببینید.</string>
-    <string name="hillshade_purchase_header">افزونهٔ منحنی‌های تراز را نصب کنید تا آن‌ها را روی نقشه ببینید</string>
+    <string name="hillshade_menu_download_descr">نقشهٔ سایه‌روشن را برای این منطقه دانلود کنید تا سایه‌روشن پستی‌بلندی‌ها را ببینید.</string>
+    <string name="hillshade_purchase_header">برای دیدن سایه‌روشن پستی‌بلندی‌ها روی نقشه باید افزونهٔ منحنی‌های تراز را بخرید و نصب کنید.</string>
     <string name="hide_from_zoom_level">از این زوم پنهان شود</string>
     <string name="srtm_menu_download_descr">نقشهٔ منحنی تراز این منطقه را دانلود کنید تا منحنی‌های تراز را روی نقشه ببینید.</string>
     <string name="shared_string_plugin">افزونه</string>
@@ -2703,11 +2703,11 @@
     <string name="lang_mk">مقدونی</string>
     <string name="lang_fy">فریسی غربی</string>
     <string name="lang_als">آلبانیایی (تُسک)</string>
-    <string name="hillshade_layer_disabled">لایهٔ تپه‌سایه غیرفعال شد</string>
+    <string name="hillshade_layer_disabled">لایهٔ سایه‌روشن غیرفعال شد</string>
     <string name="srtm_plugin_disabled">منحنی‌های تراز غیرفعال شد</string>
     <string name="av_locations">مکان‌ها</string>
     <string name="routing_attr_avoid_shuttle_train_name">پرهیز از قطار خطی</string>
-    <string name="routing_attr_avoid_shuttle_train_description">از قطار خطی پرهیز کن</string>
+    <string name="routing_attr_avoid_shuttle_train_description">از قطارهای خطی پرهیز کن</string>
     <string name="traffic_warning_hazard">خطر</string>
     <string name="rendering_value_boldOutline_name">لبهٔ برجسته</string>
     <string name="lang_ceb">سِبوانو</string>
@@ -2906,13 +2906,13 @@
 \nبرای غیرفعال‌کردن این نما دو راه دارید: از همین‌جا غیرفعالش کنید یا اینکه به این قسمت بروید: منو ← پیکربندی نقشه ← سبک نقشه؛ سپس سبک دیگری را انتخاب کنید.</string>
     <string name="osmand_extended_description_part4">اسکی
 \nبا استفاده از افزونهٔ نقشه‌های اسکی می‌توانید مسیرهای اسکی و میزان دشواری آن‌ها و یک‌سری اطلاعات دیگر را دربارهٔ آن‌ها ببینید؛ مانند نقاله‌ها و سایر امکانات.</string>
-    <string name="osmand_extended_description_part5">دوچرخه‌سواری
-\n • مسیرهای دوچرخه‌سواری را روی نقشه بیابید
-\n • در حالت دوچرخه، مسیریابی GPS بر اساس مسیرهای دوچرخه انجام می‌شود
-\n • ارتفاع و سرعتتان را مشاهده کنید
-\n
-\n • با استفاده از ضبط GPX مسیر سفرتان را ضبط کنید و به‌اشتراک بگذارید
-\n • با فعال‌کردن افزونه‌های دیگر می‌توانید منحنی‌های تراز و تپه‌سایه‌ها را فعال کنید</string>
+    <string name="osmand_extended_description_part5">دوچرخه‌سواری 
+\n • مسیرهای دوچرخه‌سواری را روی نقشه بیابید 
+\n • در حالت دوچرخه، مسیریابی GPS بر اساس مسیرهای دوچرخه انجام می‌شود 
+\n • ارتفاع و سرعتتان را مشاهده کنید 
+\n 
+\n • با استفاده از ضبط GPX مسیر سفرتان را ضبط کنید و به‌اشتراک بگذارید 
+\n • با فعال‌کردن افزونه‌های دیگر می‌توانید منحنی‌های تراز و سایه‌روشن‌ها را فعال کنید</string>
     <string name="osmand_extended_description_part6">پیاده‌روی، پیاده‌گردی و گردش در شهر 
 \n • مسیرهای پیاده‌روی و پیاده‌گردی را نقشه نشانتان می‌دهد 
 \n • هنگام گشت‌زدن در شهر، با ویکی‌پدیا اطلاعات مفیدی به زبان خودتان در مورد مکان‌ها به‌دست آورید
@@ -2980,13 +2980,13 @@
 \n • نمایش اختیاری محدودیت سرعت، با امکان هشدار در صورت تجاوز از سرعت مجاز
 \n • قابلیت اختیاری زوم وابسته به سرعت
 \n • مکانتان را با دوستانتان به‌اشتراک بگذارید تا شما را پیدا کنند</string>
-    <string name="osmand_plus_extended_description_part6">قابلیت‌های مخصوص به دوچرخه و پیاده
-\n • نمایش مسیرهای عبور پیاده، پیاده‌گردی و دوچرخه‌سواری؛ مناسب برای گشت و گذار
-\n • مسیریابی و حالت‌های نمایش اختصاصی برای دوچرخه و پیاده
-\n • ایستگاه‌های حمل‌ونقل عمومی (اتوبوس، تراموا، قطار) همراه با نام خطوط
-\n • قابلیت ضبط سفر و ذخیره‌کردن مسیر در فایل GPX یا فرستادن به سرویس‌های آنلاین
-\n • قابلیت نمایش سرعت و ارتفاع
-\n • امکان نمایش منحنی‌های تراز و سایه‌تپه‌ها (با نصب افزونه)</string>
+    <string name="osmand_plus_extended_description_part6">قابلیت‌های مخصوص به دوچرخه و پیاده 
+\n • نمایش مسیرهای عبور پیاده، پیاده‌گردی و دوچرخه‌سواری؛ مناسب برای گشت و گذار 
+\n • مسیریابی و حالت‌های نمایش اختصاصی برای دوچرخه و پیاده 
+\n • ایستگاه‌های حمل‌ونقل عمومی (اتوبوس، تراموا، قطار) همراه با نام خطوط 
+\n • قابلیت ضبط سفر و ذخیره‌کردن مسیر در فایل GPX یا فرستادن به سرویس‌های آنلاین 
+\n • قابلیت نمایش سرعت و ارتفاع 
+\n • امکان نمایش منحنی‌های تراز و سایه‌روشن‌ها (با نصب افزونه)</string>
     <string name="osmand_plus_extended_description_part7">مشارکت مستقیم در نقشهٔ باز شهری (OSM) 
 \n • گزارش مشکل در داده‌ها 
 \n • آپلود مسیرهای GPX به OSM مستقیماً از طریق برنامه 
@@ -3022,10 +3022,10 @@
     <string name="show_guide_line_descr">خطوط جهت‌داری را از موقعیت شما به‌سمت نشانه‌های فعال نمایش می‌دهد.</string>
     <string name="show_arrows_descr">با یک یا دو پیکان، سمت قرارگیری نشانه‌های فعال روی نقشه را نمایش می‌دهد.</string>
     <string name="distance_indication_descr">مشخص کنید مسافت شما تا نشانه‌های فعال کجا نشان داده شود.</string>
-    <string name="active_markers_descr">تعداد نشانه‌های فعال روی نقشه را مشخص کنید.</string>
+    <string name="active_markers_descr">تعداد جهت‌نماهای روی نقشه را مشخص کنید.</string>
     <string name="appearance_on_the_map">تنظیمات ظاهری</string>
     <string name="add_track_to_markers_descr">مسیری را انتخاب کنید تا نقاط بین‌راهیِ آن را به نشانه‌ها اضافه کنید.</string>
-    <string name="add_favourites_group_to_markers_descr">یک گروه از نقاط برگزیده را انتخاب کنید تا به نشانه‌ها اضافه شود.</string>
+    <string name="add_favourites_group_to_markers_descr">دسته‌ای از نقاط برگزیده را انتخاب کنید تا به نشانه‌ها اضافه شود.</string>
     <string name="shared_string_gpx_waypoints">نقاط بین‌راهی مسیر</string>
     <string name="favourites_group">گروه نقاط برگزیده</string>
     <string name="add_group">افزودن گروه</string>
@@ -3199,7 +3199,7 @@
     <string name="unlock_all_features">بازکردن همهٔ قابلیت‌های OsmAnd</string>
 
     <string name="monthly_map_updates">به‌روزرسانی نقشه: <b>ماهانه</b></string>
-    <string name="daily_map_updates">به‌روزرسانی نقشه: <b>روزانه، ساعتی</b></string>
+    <string name="daily_map_updates">به‌روزرسانی نقشه: <b>ساعتی</b></string>
     <string name="paid_app">برنامهٔ پولی</string>
     <string name="paid_plugin">افزونهٔ پولی</string>
     <string name="travel_card_update_descr">داده‌های تازهٔ ویکی‌سفر منتشر شده. به‌روز کنید و لذت ببرید.</string>
@@ -3212,7 +3212,7 @@
     <string name="start_editing">شروع ویرایش</string>
     <string name="get_unlimited_access">گرفتن دسترسی نامحدود</string>
     <string name="welcome_to_open_beta">به ارزیابی همگانی نسخهٔ بتا خوش آمدید</string>
-    <string name="contour_lines_hillshade_maps">نقشه‌های منحنی‌های تراز و سایه‌تپه‌ها</string>
+    <string name="contour_lines_hillshade_maps">نقشه‌های منحنی تراز و سایه‌روشن</string>
     <string name="download_wikipedia_description">با پرداخت %1$s مقاله‌های ویکی‌سفر را دانلود کنید تا آن‌ها را آفلاین بخوانید.</string>
     <string name="download_wikipedia_label">دریافت داده‌های ویکی‌پدیا</string>
     <string name="open_in_browser_wiki">بازکردن مقالهٔ آنلاین</string>
