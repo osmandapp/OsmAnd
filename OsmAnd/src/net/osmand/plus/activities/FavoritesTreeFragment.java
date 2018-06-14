@@ -32,6 +32,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import net.osmand.AndroidUtils;
+import net.osmand.Location;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -64,7 +65,7 @@ import java.util.Map;
 import java.util.Set;
 
 
-public class FavoritesTreeFragment extends OsmandExpandableListFragment implements OsmAndLocationProvider.OsmAndCompassListener {
+public class FavoritesTreeFragment extends OsmandExpandableListFragment implements OsmAndLocationProvider.OsmAndCompassListener, OsmAndLocationProvider.OsmAndLocationListener{
 
 	public static final int SEARCH_ID = -1;
 	//	public static final int EXPORT_ID = 0;
@@ -95,7 +96,8 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 	private Float heading;
 	private boolean locationUpdateStarted;
 	private boolean compassUpdateAllowed = true;
-	
+	private Location location;
+
 	@Override
 	public void onAttach(Context context) {
 		super.onAttach(context);
@@ -688,9 +690,14 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 
 	@Override
 	public void updateCompassValue(float value) {
-		if (Math.abs(MapUtils.degreesDiff(heading, value)) > 5) {
-			heading = value;
+		// 99 in next line used to one-time initialize arrows (with reference vs. fixed-north direction)
+		// on non-compass devices
+		float lastHeading = heading != null ? heading : 99;
+		heading = value;
+		if (Math.abs(MapUtils.degreesDiff(lastHeading, heading)) > 5) {
 			updateLocationUi();
+		} else {
+			heading = lastHeading;
 		}
 	}
 
@@ -714,6 +721,8 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 			locationUpdateStarted = true;
 			app.getLocationProvider().removeCompassListener(app.getLocationProvider().getNavigationInfo());
 			app.getLocationProvider().addCompassListener(this);
+			app.getLocationProvider().addLocationListener(this);
+			app.getLocationProvider().resumeAllUpdates();
 			updateLocationUi();
 		}
 	}
@@ -723,7 +732,21 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 		if (app != null && locationUpdateStarted) {
 			locationUpdateStarted = false;
 			app.getLocationProvider().removeCompassListener(this);
+			app.getLocationProvider().removeLocationListener(this);
+			app.getLocationProvider().pauseAllUpdates();
 			app.getLocationProvider().addCompassListener(app.getLocationProvider().getNavigationInfo());
+		}
+	}
+
+	@Override
+	public void updateLocation(Location location) {
+		boolean newLocation = this.location == null && location != null;
+		boolean locationChanged = this.location != null && location != null
+				&& this.location.getLatitude() != location.getLatitude()
+				&& this.location.getLongitude() != location.getLongitude();
+		if (newLocation || locationChanged) {
+			this.location = location;
+			updateLocationUi();
 		}
 	}
 
