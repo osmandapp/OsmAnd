@@ -203,6 +203,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	private boolean permissionGranted;
 
 	private boolean mIsDestroyed = false;
+	private boolean pendingPause = false;
 	private Timer splashScreenTimer;
 
 	private ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
@@ -1210,15 +1211,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	@Override
 	protected void onStop() {
-	//	if (app.getRoutingHelper().isFollowingMode()) {
-	//		mNotificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-	//		if (mNotificationManager != null) {
-	//			mNotificationManager.notify(APP_NOTIFICATION_ID, getNotification());
-	//		}
-	//	}
 		wakeLockHelper.onStop(this);
 		getMyApplication().getNotificationHelper().removeNotifications();
-		onPauseActivity();
+		if(pendingPause) {
+			onPauseActivity();
+		}
 		super.onStop();
 	}
 
@@ -1262,10 +1259,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	@Override
 	protected void onPause() {
 		super.onPause();
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-			if (!isInMultiWindowMode()) {
-				onPauseActivity();
-			}
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && isInMultiWindowMode()) {
+			pendingPause = true;
 		} else {
 			onPauseActivity();
 		}
@@ -1273,6 +1268,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	private void onPauseActivity() {
+		pendingPause = false;
 		mapView.setOnDrawMapListener(null);
 		cancelSplashScreenTimer();
 		app.getMapMarkersHelper().removeListener(this);
