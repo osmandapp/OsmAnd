@@ -117,7 +117,7 @@
     <string name="choose_osmand_theme">Выгляд</string>
     <string name="accessibility_options">Налады даступнасьці</string>
     <string name="select_address_activity">Абраць адрас</string>
-    <string name="favourites_list_activity">Абярыце улюбёны</string>
+    <string name="favourites_list_activity">Абярыце ўпадабанае</string>
     <string name="local_openstreetmap_act_title">Мадыфікацыі OSM</string>    
 	
     <string name="layer_hillshade">Слой рэльефу мясцовасьці</string>
@@ -269,46 +269,46 @@
 \nOsmAnd — праграмнае навігацыйнае дастасаванне з адкрытым кодам з доступам да розных картаграфічных дадзеных ад OpenStreetMap (OSM). Усе картаграфічныя дадзеныя (вектарныя і растравыя) могуць быць захаваныя на карце памяці для аўтаномнага выкарыстання. Аўтаномная і анлайн-маршрутызацыя падтрымліваецца таксама, уключаючы пакрокавае галасавое суправаджэнне. 
 \n 
 \nНекалькі асноўных магчымасцяў: 
-\n - паўнавартасная праца без інтэрнэт-злучэння (захоўвае вектарныя або растравыя дадзеныя ў памяці прыстасавання);
-\n - кампактная вектарная мапа ўсяго свету;
-\n - загрузка мапаў краін або рэгіёну непасрэдна ў праграме;
-\n - магчымасць адлюстравання звестак на мапе, напрыклад пласт для пракладкі маршруту або пласт з запісам GPX-следу, з POI, улюбёнымі, ізалініямі вышынь, грамадзкім транспартам, дадатковымі мапамі з магчымасцю налады ўзроўню празрыстасці;
-\n - аўтаномны пошук адрасоў і POI;
-\n - пракладка маршрутаў афлайн на кароткія адлегласці (эксперыментальная функцыя);
-\n - рэжымы для пешаходнай, аўтамабільнай і веланавігацыі з:
-\n - магчымасцю аўтаматычнага пераключэння дзённага/начнога адлюстравання;
-\n - аўтамаштабаваннем мапы ў адпаведнасці з хуткасцю руху;
+\n - паўнавартасная праца без інтэрнэт-злучэння (захоўвае вектарныя або растравыя дадзеныя ў памяці прыстасавання); 
+\n - кампактная вектарная мапа ўсяго свету; 
+\n - загрузка мапаў краін або рэгіёну непасрэдна ў праграме; 
+\n - магчымасць адлюстравання звестак на мапе, напрыклад пласт для пракладкі маршруту або пласт з запісам GPX-следу, з POI, упадабанымі, ізалініямі вышынь, грамадзкім транспартам, дадатковымі мапамі з магчымасцю налады ўзроўню празрыстасці; 
+\n - аўтаномны пошук адрасоў і POI; 
+\n - пракладка маршрутаў афлайн на кароткія адлегласці (эксперыментальная функцыя); 
+\n - рэжымы для пешаходнай, аўтамабільнай і веланавігацыі з: 
+\n - магчымасцю аўтаматычнага пераключэння дзённага/начнога адлюстравання; 
+\n - аўтамаштабаваннем мапы ў адпаведнасці з хуткасцю руху; 
 \n - магчымасцю арыентацыі мапы па компасе або кірунку руху, 
 \n - паказам руху па палосах і абмежаванняў хуткасці, запісанае і сінтэзуемае галасавое суправаджэнне. 
 \n 
-\nАбмежаванні бясплатнай вэрсіі:
+\nАбмежаванні бясплатнай вэрсіі: 
 \n - колькасць сцягванняў мапаў абмежаванае; 
-\n - адсутнічае афлайн доступ да інфармацыі з Вікіпэдыі для POI.
+\n - адсутнічае афлайн доступ да інфармацыі з Вікіпэдыі для POI. 
 \n 
 \nOsmAnd актыўна развіваецца, яго далейшае развіццё забяспечваецца фінансавымі паступленнямі ад яго карыстальнікаў, за кошт якіх адбываецца далейшая распрацоўка і тэставанне новых функцый. Калі ласка, разгледзьце магчымасць набыцця OsmAnd+ або падтрымайце распрацоўку пэўных функцый, або зрабіце дабрачынны ўнёсак на https://osmand.net.</string>
 	
 	<string name="osmand_plus_play_title_30_chars">OsmAnd+ Мапы й навігацыя</string>
 	<string name="osmand_plus_short_description_80_chars">Глабальная мабільная мапа і навігатар для аўтаномных і сеткавых мапаў OSM</string>
-	<string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OSM Automated Navigation Directions)
-\n
-\n OsmAnd+ — праграмнае навігацыйнае дастасаванне з адкрытым кодам з доступам да розных картаграфічных дадзеных ад OpenStreetMap (OSM). Усе картаграфічныя дадзеныя (вектарныя і растравыя) могуць быць захаваныя на карце памяці для далейшага аўтаномнага выкарыстання. Аўтаномная і анлайн-маршрутызацыя падтрымліваецца таксама, уключаючы пакрокавае галасавое суправаджэнне.
-\n
+	<string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OSM Automated Navigation Directions) 
+\n 
+\n OsmAnd+ — праграмнае навігацыйнае дастасаванне з адкрытым кодам з доступам да розных картаграфічных дадзеных ад OpenStreetMap (OSM). Усе картаграфічныя дадзеныя (вектарныя і растравыя) могуць быць захаваныя на карце памяці для далейшага аўтаномнага выкарыстання. Аўтаномная і анлайн-маршрутызацыя падтрымліваецца таксама, уключаючы пакрокавае галасавое суправаджэнне. 
+\n 
 \n OsmAnd+ — гэта платная версія, купляючы якую вы падтрымліваеце праект, фінансуеце распрацоўку новых функцый, і атрымліваеце апошнія абнаўленні. 
 \n 
-\n Некалькі асноўных магчымасцяў:
-\n - поўнасцю аўтаномная праца (захаванне вектарных або растравых мапаў у памяці прыстасавання);
-\n - кампактная вэктарная мапа для ўсяго cвету;
-\n - неабмежаваная колькасць сцягванняў мапаў асобнай краіны або рэгіёну непасрэдна ў праграме;
-\n - магчымасць аўтаномнай працы з дадзенымі Вікіпэдыі (загрузіце POI з Вікіпеэдыі) з\'яўляецца цудоўным інструмэнтам для падарожнікаў;
-\n - магчымасць адлюстравання звестак на мапе, напрыклад слой для пракладкі маршруту або слой з запісам GPX-следу, з POI, улюбёнымі, ізалініямі вышынь, грамадзкім транспартам, дадатковымі мапамі з магчымасцю налады ўзроўню празрыстасці;
-\n
-\n - аўтаномны пошук адрасоў і POI;
-\n - аўтаномная пракладка маршрутаў для сярэдніх адлегласцяў;
-\n - рэжымы для пешаходнай, аўтамабільнай і веланавігацыі з:
+\n Некалькі асноўных магчымасцяў: 
+\n - поўнасцю аўтаномная праца (захаванне вектарных або растравых мапаў у памяці прыстасавання); 
+\n - кампактная вэктарная мапа для ўсяго cвету; 
+\n - неабмежаваная колькасць сцягванняў мапаў асобнай краіны або рэгіёну непасрэдна ў праграме; 
+\n - магчымасць аўтаномнай працы з дадзенымі Вікіпэдыі (загрузіце POI з Вікіпеэдыі) з\'яўляецца цудоўным інструмэнтам для падарожнікаў; 
+\n - магчымасць адлюстравання звестак на мапе, напрыклад слой для пракладкі маршруту або слой з запісам GPX-следу, з POI, упадабанымі, ізалініямі вышынь, грамадзкім транспартам, дадатковымі мапамі з магчымасцю налады ўзроўню празрыстасці; 
+\n 
+\n - аўтаномны пошук адрасоў і POI; 
+\n - аўтаномная пракладка маршрутаў для сярэдніх адлегласцяў; 
+\n - рэжымы для пешаходнай, аўтамабільнай і веланавігацыі з: 
 \n - пераключэннем паміж дзённым і начным рэжымамі; 
 \n - маштабаваннем мапы ў адпаведнасці з хуткасцю руху; 
 \n - арыентацыяй мапы па компасе або кірунку руху; 
-\n - паказ палос руху і абмежаванняў хуткасці, галасавое суправаджэнне
+\n - паказ палос руху і абмежаванняў хуткасці, галасавое суправаджэнне 
 \n</string>
 	
 	
@@ -427,7 +427,7 @@
 	<string name="address_search_desc">Пошук па адрасе</string>
 	<string name="navpoint_search_desc">Каардынаты</string>
 	<string name="transport_search_desc">Пошук грамадзкага транспарту</string>
-	<string name="favourites_search_desc">Спосаб пошуку ўлюбёных</string>
+	<string name="favourites_search_desc">Спосаб пошуку ўпадабаных</string>
 	
 	<string name="offline_navigation_not_available">Аўтаномная навігацыя OsmAnd часова недаступная.</string>
 	<string name="left_side_navigation">Левабаковы рух</string>
@@ -578,7 +578,7 @@
 	<string name="index_name_tts_voice">Галасавыя падказкі (TTS, пажадана)</string>
 	<string name="amenity_type_osmwiki">Вікіпэдыя (пазасеціўная)</string>
 	<string name="amenity_type_user_defined">Вызначанае карыстальнікам</string>
-	<string name="fav_export_confirmation">Файл з экспартаванымі ўлюбёнымі ўжо існуе. Замяніць яго?</string>
+	<string name="fav_export_confirmation">Файл з экспартаванымі ўпадабанымі ўжо існуе. Замяніць яго?</string>
 	<string name="profile_settings">Налады профіля</string>
 	<string name="routing_settings">Навігацыя</string>
 	<string name="routing_settings_descr">Вызначыць налады навігацыі.</string>
@@ -645,7 +645,7 @@
 	<string name="search_position_current_location_search">Вызначэньне становішча…</string>
 	<string name="search_position_current_location_found">Маё становішча (знойдзена)</string>
 	<string name="search_position_address">Адрас…</string>
-	<string name="search_position_favorites">Улюбёныя…</string>
+	<string name="search_position_favorites">Упадабаныя…</string>
 	<string name="search_position_undefined">Нявызначана</string>
 	
 	
@@ -661,8 +661,8 @@
 	<string name="local_index_mi_upload_gpx">Адаслаць у OSM</string>
 	<string name="show_more_map_detail">Паказаць больш дэталей мапы</string>
 	<string name="show_more_map_detail_descr">Паказаць некаторыя дэталі вектарнай мапы (дарогі і іншыя) на меншым маштабе.</string>
-	<string name="favourites_delete_multiple_succesful">Улюбёныя пункты выдаленыя.</string>
-	<string name="favorite_delete_multiple">Вы збіраецеся выдаліць %1$d улюблёных і %2$d груп. Вы ўпэўненыя?</string>
+	<string name="favourites_delete_multiple_succesful">Упадабаныя пункты выдаленыя.</string>
+	<string name="favorite_delete_multiple">Вы збіраецеся выдаліць %1$d упадабаных і %2$d груп упадабаных. Вы ўпэўненыя?</string>
 	<string name="favorite_home_category">Дом</string>
 	<string name="favorite_friends_category">Сябры</string>
 	<string name="favorite_places_category">Месцы</string>
@@ -818,7 +818,7 @@
 	<string name="specified_dir_doesnt_exist">Указаны каталог не знойдзены.</string>
 	<string name="application_dir">Каталёг захоўваньня зьвестак</string>
 	
-	<string name="osmand_net_previously_installed">Усе аўтаномныя даныя ў старой усталяванай праграме будуць падтрымлівацца новай, але улюблёныя кропкі трэба экспартаваць са старой версіі і імпартаваць у новую.</string>
+	<string name="osmand_net_previously_installed">Усе аўтаномныя даныя ў старой усталяванай праграме будуць падтрымлівацца новай, але ўпадабаныя кропкі трэба экспартаваць са старой версіі і імпартаваць у новую.</string>
 	<string name="build_installed">Зборка {0} ўсталяваная ({1}).</string>
 	<string name="downloading_build">Сьцягваецца зборка…</string>
 	<string name="install_selected_build">Усталяваць OsmAnd - {0} з {1} {2} МБ?</string>
@@ -881,10 +881,10 @@
 	<string name="rotate_map_to_bearing_descr">Абраць раўнаваньне мапы.</string>
 	<string name="rotate_map_to_bearing">Арыентацыя мапы</string>
 	<string name="show_route">Падрабязнасьці маршруту</string>
-	<string name="fav_imported_sucessfully">Улюблёныя імпартаваныя</string>
-	<string name="fav_file_to_load_not_found">GPX-файл з улюбёнымі ня знойдзены ў {0}</string>
-	<string name="fav_saved_sucessfully">Улюбёныя захаваныя ў {0}</string>
-	<string name="no_fav_to_save">Няма любімых месцаў для захоўвання</string>
+	<string name="fav_imported_sucessfully">Упадабаныя імпартаваныя</string>
+	<string name="fav_file_to_load_not_found">GPX-файл з упадабанымі не знойдзены ў {0}</string>
+	<string name="fav_saved_sucessfully">Упадабаныя захаваныя ў {0}</string>
+	<string name="no_fav_to_save">Няма ўпадабаных месцаў для захоўвання</string>
 	
 	<string name="error_occurred_loading_gpx">Не атрымалася загрузіць GPX</string>
 	<string name="send_report">Даслаць справаздачу</string>
@@ -1005,7 +1005,7 @@
 	<string name="downloading_list_indexes">Сьцягваецца сьпіс даступных рэгіёнаў…</string>
 	<string name="list_index_files_was_not_loaded">Не ўдалося атрымаць спіс рэгіёнаў з https://osmand.net.</string>
 	
-	<string name="fav_points_edited">Улюбёны пункт быў зьменены</string>
+	<string name="fav_points_edited">Упадабаны пункт быў зьменены</string>
 	<string name="fav_points_not_exist">Няма ўпадабаных месцаў</string>
 	<string name="update_existing">Замяніць</string>
 	<string name="only_show">Паказаць маршрут</string>
@@ -1124,12 +1124,12 @@
 	
 	<string name="context_menu_item_create_poi">Стварыць POI</string>
 	<string name="add_favorite_dialog_top_text">Увядзіце назву ўпадабанага</string>
-	<string name="add_favorite_dialog_default_favourite_name">Улюбёнае</string>
-	<string name="add_favorite_dialog_favourite_added_template">Улюбёная кропка «{0}» дададзеная.</string>
-	<string name="favourites_context_menu_edit">Рэдагаваць упадабаны</string>
-	<string name="favourites_context_menu_delete">Выдаліць упадабаны</string>
-	<string name="favourites_remove_dialog_msg">Выдаліць упадабаную кропку «%s» з закладак?</string>
-	<string name="favourites_remove_dialog_success">Улюбёная кропка {0} выдаленая.</string>
+	<string name="add_favorite_dialog_default_favourite_name">Упадабанае</string>
+	<string name="add_favorite_dialog_favourite_added_template">Упадабаная кропка «{0}» дададзеная.</string>
+	<string name="favourites_context_menu_edit">Рэдагаваць упадабанае</string>
+	<string name="favourites_context_menu_delete">Выдаліць упадабанае</string>
+	<string name="favourites_remove_dialog_msg">Выдаліць упадабаную кропку «%s»?</string>
+	<string name="favourites_remove_dialog_success">Упадабаная кропка {0} выдаленая.</string>
 	
 	
 	
@@ -1333,7 +1333,7 @@
         
     
     
-	<string name="share_fav_subject">Улюбёныя адасланы праз OsmAnd</string>
+	<string name="share_fav_subject">Упадабаныя адасланы праз OsmAnd</string>
 	<string name="use_points_as_intermediates">Разлічыць маршрут паміж пунктамі</string>
     
     
@@ -1377,7 +1377,7 @@
     
     
     
-	<string name="import_file_favourites">Захаваць зьвесткі як GPX-файл або імпартаваць пункты ва Ўлюбёныя?</string>
+	<string name="import_file_favourites">Захаваць звесткі як GPX-файл або імпартаваць пункты ва ўпадабаныя?</string>
 	
 	
 	
@@ -1445,7 +1445,7 @@
 \nДоўга ўтрымлівайце, каб убачыць на мапе"</string>
     <string name="delay_navigation_start">Аўтаматычна пачаць навігацыю</string>
     <string name="gpx_info_diff_altitude">Перапад вышынь: %1$s</string>
-	<string name="save_as_favorites_points">Захаваць як групу ўлюбёных</string>
+	<string name="save_as_favorites_points">Захаваць як групу ўпадабаных</string>
     <string name="select_destination_and_intermediate_points">Выберыце прызначэньне</string>
     <string name="layer_amenity_label">Назвы POI-накладкі</string>
     <string name="show_zoom_buttons_navigation">Паказваць кнопкі маштабаваньня</string>
@@ -1534,7 +1534,7 @@
     
     <string name="shared_string_waypoints">Пункты шляху</string>
     <string name="way_alarms">Дарожныя папярэджаньні</string>
-    <string name="speak_favorites">Улюбёныя паблізу</string>
+    <string name="speak_favorites">Упадабаныя паблізу</string>
     <string name="speak_poi">Навакольныя POI</string>
     <string name="targets">Цэлі</string>
     <string name="shared_string_all">Усе</string>
@@ -1564,10 +1564,10 @@
     <string name="text_size">Памер тэксту</string>
     <string name="speed_limit_exceed">Дапушчальнае значэнне перавышэння хуткасці</string>
 	<string name="speed_limit_exceed_message">Задаць дапушчалнае значэнне перавышэння хуткасці, пры якім вы атрымаеце галасавое паведамленне.</string>
-	<string name="fav_point_emoticons_message">Назва ўлюбёнага была змененая на %1$s для магчымасьці захаваньня радка з эматыконам ў файл.</string>
+	<string name="fav_point_emoticons_message">Назва ўпадабанага была змененая на %1$s для магчымасьці захаваньня радка з эматыконам ў файл.</string>
     <string name="print_route">Паказаць маршрут</string>
-    <string name="fav_point_dublicate">Дубляваньне назвы ўлюбёнага пункту</string>
-    <string name="fav_point_dublicate_message">Улюбёны з такой назвай ўжо існуе, таму будзе выкарыстана %1$s для прадухіленьня дубляваньня імёнаў.</string>
+    <string name="fav_point_dublicate">Дубляванне назвы ўпадабанага пункту</string>
+    <string name="fav_point_dublicate_message">Упадабанае з такой назвай ўжо існуе, таму будзе выкарыстана %1$s для прадухілення дублявання імёнаў.</string>
     
     
     <string name="local_index_description">Націсьніце на любы элемэнт сьпісу для прагляду больш падрабязнай інфармацыі, доўга ўтрымлівайце, каб зьмясьціць у архіў ці выдаліць. Наяўныя дадзеныя на прыстасаваньні (%1$s вольна):</string>
@@ -1750,8 +1750,8 @@
 	<string name="shared_string_show_on_map">Паказаць на мапе</string>
 	<string name="shared_string_map">Мапа</string>
 	<string name="shared_string_favorite">Упадабанае</string>
-	<string name="shared_string_favorites">Улюбёныя</string>
-	<string name="shared_string_add_to_favorites">Дадаць да «Улюбёных»</string>
+	<string name="shared_string_favorites">Упадабаныя</string>
+	<string name="shared_string_add_to_favorites">Дадаць да «Упадабаных»</string>
 	
 	<string name="shared_string_my_places">Мае мясьціны</string>
 	
@@ -1790,7 +1790,7 @@
 	<string name="rename_failed">Перайменаванне не атрымалася.</string>
 	<string name="days_behind">д. таму абнаўлялі</string>
 	<string name="shared_string_release">Выдана</string>
-	<string name="shared_string_my_favorites">Улюбёныя</string>
+	<string name="shared_string_my_favorites">Упадабаныя</string>
 	<string name="confirmation_to_clear_history">Ачысьціць гісторыю?</string>
     <string name="delay_to_start_navigation_descr">Задайце час затрымкі на экране планавання маршруту.</string>
     <string name="delay_to_start_navigation">Пачаць пакрокавую навігацыю праз…</string>
@@ -1969,7 +1969,7 @@
 	<string name="poi_action_delete">выдаліць</string>
 	<string name="working_days">Працоўныя дні</string>
 	<string name="recent_places">Нядаўнія месцы</string>
-	<string name="favourites">Улюбёныя</string>
+	<string name="favourites">Упадабаныя</string>
 <string name="saved_at_time">Цяпер захаваны а %1$s</string>
 <string name="show_gpx">Паказаць GPX-даныя</string>
 <string name="poi_deleted_localy">POI будуць выдаленыя, як толькі вы загрузіце вашы зьмены</string>
@@ -1982,8 +1982,8 @@
     <string name="downloads_left_template">%1$s сьцягваньняў засталося</string>
 <string name="shared_string_wikipedia">Вікіпэдыя</string>
     <string name="roads">Дарогі</string>
-<string name="favourites_edit_dialog_title">Зьвесткі пра ўлюбёнае</string>
-    <string name="favourites_context_menu_add">Дадаць упадабаны</string>
+<string name="favourites_edit_dialog_title">Звесткі пра ўпадабанае</string>
+    <string name="favourites_context_menu_add">Дадаць упадабанае</string>
 	<string name="shared_string_trip_recording">Запіс падарожжа</string>
     <string name="shared_string_navigation">Навігацыя</string>
     <string name="osmand_running_in_background">Працуе ў фоне</string>
@@ -2369,7 +2369,7 @@
     <string name="get_started">Пачаць</string>
     <string name="routing_attr_short_way_name">Паліўна-ашчадны маршрут</string>
     <string name="routing_attr_short_way_description">Разлічвае паліва-ашчадны маршрут (звычайна найкарацейшы).</string>
-    <string name="replace_favorite_confirmation">Вы сапраўды хочаце замяніць улюбёны пункт %1$s?</string>
+    <string name="replace_favorite_confirmation">Вы сапраўды хочаце замяніць упадабанае %1$s?</string>
     <string name="update_all_maps_now">Абнавіць усе мапы зараз?</string>
     <string name="clear_tile_data">Ачысьціць кэш сеціўных мапаў</string>
     <string name="no_update_info_desc">Не правяраць новыя версій і зніжкі ад OsmAnd.</string>
@@ -2706,7 +2706,7 @@
     <string name="quick_action_osmbugs_hide">Схаваць OSM-нататкі</string>
     <string name="quick_action_showhide_osmbugs_descr">Націск на гэтую кнопку пакажа ці схавае OSM-нататкі на мапе.</string>
     <string name="sorted_by_distance">Адсартавана па адлегласці</string>
-    <string name="search_favorites">Пошук улюбёных</string>
+    <string name="search_favorites">Пошук упадабаных</string>
     <string name="shared_string_plugin">Дадатак</string>
     <string name="srtm_purchase_header">Для прагляду контурных ліній на мапе, вам неабходна набыць і ўсталяваць дадатак «Contour Lines»</string>
     <string name="srtm_color_scheme">Каляровая схема</string>
@@ -2722,13 +2722,13 @@
     <string name="osmand_extended_description_part4">Лыжня
 \nOsmAnd-дадатак лыжных мап дазваляе бачыць лыжныя трасы з узроўнем складанасці і некаторай дадатковай інфармацыяй, як размяшчэнне пад\'ёмнікаў і іншых аб\'ектаў.</string>
     <string name="save_poi_too_many_uppercase">Назва змяшчае занадта шмат вялікіх літар. Прадоўжыць?</string>
-    <string name="osmand_extended_description_part3">Мапа
-\n• Адлюстроўвае POI (пункт інтарэсаў) каля вас
-\n• Адаптуе мапу ў напрамку вашага руху (ці компаса)
-\n• Паказвае, дзе вы знаходзіцеся і куды вы глядзіце
-\n• Дзяліцеся сваім размяшчэннем, каб сябры змаглі знайсці вас
-\n• Захоўвае вашы самыя важныя месцы ва «Ўлюбёных»
-\n• Дазваляе вам абраць як адлюстроўваць назвы на мапе: на англійскай, лакальнай ці з фанетычным напісаннем
+    <string name="osmand_extended_description_part3">Мапа 
+\n• Адлюстроўвае POI (пункт інтарэсаў) каля вас 
+\n• Адаптуе мапу ў напрамку вашага руху (ці компаса) 
+\n• Паказвае, дзе вы знаходзіцеся і куды вы глядзіце 
+\n• Дзяліцеся сваім размяшчэннем, каб сябры змаглі знайсці вас 
+\n• Захоўвае вашы самыя важныя месцы ва «Ўпадабаных» 
+\n• Дазваляе вам абраць як адлюстроўваць назвы на мапе: на англійскай, лакальнай ці з фанетычным напісаннем 
 \n• Адлюстроўвае адмысловыя анлайн-тайлы, спадарожнікавыя здымкі (з Bing), розныя пазнакі, як турыстычныя/навігацыйныя GPX-трэкі і дадатковыя слаі з наладжвальнай празрыстасцю</string>
     <string name="osmand_extended_description_part5">Язда на ровары
 \n • Вы можаце знайсці рованыя шляхі на мапе
@@ -2793,12 +2793,12 @@
 \n Атрымоўвайце асалоду ад галасавай і візуальная навігацыі, праглядайце цікавыя кропкі (POI), запісвайце GPX-трэкі, выкарыстоўвайце візуалізацыю контурных ліній ды даных вышыні, пераключайцеся паміж рэжымамі кіравання, яздой на ровары ды шпацырамі, рэдагуйце OSM-даныя і шмат іншага.
 \n OsmAnd+ — платная версія праграмы. Пры набыцці, вы падтрымаеце праект, фінансуеце распрацоўку новых мажлівасцей ды атрымаеце апошнія абнаўленні.
 \nНекаторыя з галоўных мажлівасцей:</string>
-    <string name="osmand_plus_extended_description_part3">Прагляд мапы
-\n • Паказвае, дзе вы знаходзіся і куды глядзіце
-\n • Пры патрэбе выраўняе мапу па компасе ці па напрамку вашага руху
-\n • Зберагае вашы найважнейшыя месцы ва ўлюбёных
-\n • Адлюстроўвае цікавыя кропкі вакол вас
-\n • Паказвае адмысловыя анлайн-мапы, спадарожнікавыя здымкі (Bing), розныя накладкі накшталт турыстычных/навігацыйных GPX-трэкаў і дадатковыя слаі з наладжвальнай празрыстасцю
+    <string name="osmand_plus_extended_description_part3">Прагляд мапы 
+\n • Паказвае, дзе вы знаходзіся і куды глядзіце 
+\n • Пры патрэбе выраўняе мапу па компасе ці па напрамку вашага руху 
+\n • Зберагае вашы найважнейшыя месцы ва ўпадабаных 
+\n • Адлюстроўвае цікавыя кропкі вакол вас 
+\n • Паказвае адмысловыя анлайн-мапы, спадарожнікавыя здымкі (Bing), розныя накладкі накшталт турыстычных/навігацыйных GPX-трэкаў і дадатковыя слаі з наладжвальнай празрыстасцю 
 \n • Можа адлюстроўваць на мапе беларускія, англійскія, лакальныя назвы ці з фанетычным напісаннем</string>
     <string name="osmand_plus_extended_description_part4">Выкарыстоўваюцца даныя OSM ды Вікіпедыі
 \n • Высокаякасная інфармацыя ад найлепшых праектаў свету
@@ -2909,7 +2909,7 @@
     <string name="add_line">Дадаць лінію</string>
     <string name="empty_state_my_tracks">Дадаць GPX-файлы</string>
     <string name="empty_state_my_tracks_desc">Запісаць GPX-файлы ці запісаныя сляды.</string>
-    <string name="empty_state_favourites">Дадаць ва Ўлюбёныя</string>
+    <string name="empty_state_favourites">Дадаць упадабаныя</string>
     <string name="empty_state_favourites_desc">Імпартаваць упадабаныя ці дадаць з дапамогай маркіроўкі пунктаў на мапе.</string>
     <string name="import_track">Імпартаваць GPX-файл</string>
     <string name="import_track_desc">Файл %1$s не зьмяшчае кропкі шляху, імпартаваць як сьлед?</string>
@@ -2993,9 +2993,9 @@
 	<string name="shared_string_back">Назад</string>
 	<string name="shared_string_view">Праглядзець</string>
 	<string name="waypoints_added_to_map_markers">Кропкі маршрута дададзеныя ў маркеры мапы</string>
-	<string name="import_gpx_file_description">могуць быць імпартаваныя як «Улюбёныя» ці як GPX-файл.</string>
+	<string name="import_gpx_file_description">могуць быць імпартаваныя як «Упадабаныя» ці як GPX-файл.</string>
     <string name="import_as_gpx">Імпартаваць як GPX-файл</string>
-    <string name="import_as_favorites">Імпартаваць як улюбёныя</string>
+    <string name="import_as_favorites">Імпартаваць як упадабаныя</string>
     <string name="import_file">Імпартаваць файл</string>
 	<string name="tap_on_map_to_hide_interface_descr">Дотык на мапе пераключае кнопкі кіраваньня і віджэты.</string>
     <string name="tap_on_map_to_hide_interface">Поўныэкранны рэжым</string>
@@ -3010,15 +3010,15 @@
     <string name="rename_marker">Перайменаваць маркер</string>
     <string name="shared_string_two">Два</string>
     <string name="shared_string_one">Адзін</string>
-    <string name="add_favourites_group_to_markers_descr">Абярыце катэгорыю ўлюбёных, каб дадаць да маркераў.</string>
+    <string name="add_favourites_group_to_markers_descr">Абярыце катэгорыю ўпадабаных, каб дадаць да маркераў.</string>
     <string name="shared_string_gpx_waypoints">Кропкі следу</string>
-    <string name="favourites_group">Катэгорыя ўлюбёных</string>
+    <string name="favourites_group">Катэгорыя ўпадабаных</string>
     <string name="add_group">Дадаць групу</string>
-    <string name="add_group_descr">Імпартаваць групы з улюбёных ці GPX-кропак.</string>
+    <string name="add_group_descr">Імпартаваць групы з упадабаных ці GPX-кропак.</string>
     <string name="empty_state_markers_active">Стварыце маркеры мапы!</string>
     <string name="empty_state_markers_active_desc">Дакраніцеся месца і потым націсніце кнопку маркера.</string>
     <string name="empty_state_markers_groups">Імпартаваць групы</string>
-    <string name="empty_state_markers_groups_desc">Імпартаваць групы ўлюбёных ці шляхавыя кропкі як маркеры.</string>
+    <string name="empty_state_markers_groups_desc">Імпартаваць групы ўпадабаных ці шляхавыя кропкі як маркеры.</string>
     <string name="empty_state_markers_history_desc">Маркеры, пазначаныя як пройдзенныя, з\'явяцца на гэтым экране.</string>
     <string name="show_guide_line_descr">Паказвае лініі кірунку ад вашага становішча да актыўнага маркера.</string>
     <string name="show_arrows_descr">Паказвае адну ці дзьве стрэлкі, якія паказваюць кірунак да актыўных маркераў.</string>
