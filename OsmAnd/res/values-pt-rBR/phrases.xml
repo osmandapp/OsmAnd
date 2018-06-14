@@ -1381,7 +1381,7 @@
 	<string name="poi_garden_style_japanese">Jardim japonês</string>
 
 	<string name="poi_capacity">Capacidade</string>
-	<string name="poi_capacity_disabled_yes">Lugares reservados para pessoas com deficiência</string>
+	<string name="poi_capacity_disabled_yes">Sim</string>
 	<string name="poi_capacity_disabled_no">Não há lugares reservados para pessoas com deficiência</string>
 	<string name="poi_capacity_disabled">Lugares reservados para pessoas com deficiência</string>
 	<string name="poi_capacity_women_yes">Lugares reservados para mulheres</string>
@@ -1396,11 +1396,11 @@
 	<string name="poi_aerialway_occupancy">Capacidade de cabine/cadeira/carro</string>
 	<string name="poi_aerialway_capacity">Capacidade por hora</string>
 	<string name="poi_aerialway_duration">Tempo de viagem médio, minutos</string>
-	<string name="poi_aerialway_heating_yes">Calefação</string>
+	<string name="poi_aerialway_heating_yes">Sim</string>
 	<string name="poi_aerialway_heating_no">Sem calefação</string>
-	<string name="poi_aerialway_bicycle_yes">Bicicleta: permitido</string>
+	<string name="poi_aerialway_bicycle_yes">Permitido</string>
 	<string name="poi_aerialway_bicycle_no">Bicicleta: proibido</string>
-	<string name="poi_aerialway_bicycle_summer">Bicicleta: permitido somente no verão</string>
+	<string name="poi_aerialway_bicycle_summer">Permitido só no verão</string>
 	<string name="poi_aerialway_access_entry">Apenas entrada</string>
 	<string name="poi_aerialway_access_exit">Apenas saída</string>
 	<string name="poi_aerialway_access_both">Entrada e saída</string>
@@ -1424,46 +1424,46 @@
 
 	<string name="poi_love_hotel">Motel</string>
 
-	<string name="poi_payment_coins_yes">Aceita moedas</string>
+	<string name="poi_payment_coins_yes">Moedas</string>
 	<string name="poi_payment_coins_no">Não aceita moedas</string>
-	<string name="poi_payment_coins_0.5">Aceita moedas de $0,5</string>
-	<string name="poi_payment_coins_50c12">Aceita moedas de 50c, $1 e $2</string>
-	<string name="poi_payment_telephone_cards_yes">Aceita cartão telefônico</string>
+	<string name="poi_payment_coins_0.5">Moedas de $0,5</string>
+	<string name="poi_payment_coins_50c12">Moedas de 50c, $1 e $2</string>
+	<string name="poi_payment_telephone_cards_yes">Cartão telefônico</string>
 	<string name="poi_payment_telephone_cards_no">Não aceita cartão telefônico</string>
-	<string name="poi_payment_credit_cards_yes">Aceita cartão de crédito</string>
+	<string name="poi_payment_credit_cards_yes">Cartão de crédito</string>
 	<string name="poi_payment_credit_cards_no">Não aceita cartão de crédito</string>
-	<string name="poi_payment_notes_yes">Aceita nota promissória</string>
+	<string name="poi_payment_notes_yes">Cédulas</string>
 	<string name="poi_payment_notes_no">Não aceita nota promissória</string>
 	<string name="poi_traffic_calming_island">Ilha de trânsito</string>
 	<string name="poi_bicycle_parking_anchors">Âncora</string>
 	<string name="poi_windfall">Fruto caído</string>
-	<string name="poi_payment_electronic_purses_yes">Aceita carteira eletrônica</string>
+	<string name="poi_payment_electronic_purses_yes">Carteira eletrônica</string>
 	<string name="poi_payment_electronic_purses_no">Não aceita carteira eletrônica</string>
-	<string name="poi_payment_cash_yes">Aceita dinheiro</string>
+	<string name="poi_payment_cash_yes">Dinheiro</string>
 	<string name="poi_payment_cash_no">Não aceita dinheiro</string>
-	<string name="poi_payment_debit_cards_yes">Aceita cartão de débito</string>
+	<string name="poi_payment_debit_cards_yes">Cartão de débito</string>
 	<string name="poi_payment_debit_cards_no">Não aceita cartão de débito</string>
-	<string name="poi_payment_bitcoin_yes">Aceita Bitcoin</string>
+	<string name="poi_payment_bitcoin_yes">Bitcoin</string>
 	<string name="poi_payment_bitcoin_no">Não aceita Bitcoin</string>
-	<string name="poi_payment_visa_yes">Aceita cartão Visa</string>
+	<string name="poi_payment_visa_yes">Visa</string>
 	<string name="poi_payment_visa_no">Não aceita cartão Visa</string>
-	<string name="poi_payment_mastercard_yes">Aceita cartão MasterCard</string>
+	<string name="poi_payment_mastercard_yes">MasterCard</string>
 	<string name="poi_payment_mastercard_no">Não aceita cartão MasterCard</string>
 	<string name="poi_payment_none">Grátis</string>
-	<string name="poi_payment_account_cards_yes">Aceita cartão de crédito</string>
+	<string name="poi_payment_account_cards_yes">Cartão de crédito</string>
 	<string name="poi_payment_account_cards_no">Não aceita cartão de crédito</string>
-	<string name="poi_payment_maestro_yes">Aceita cartão Maestro</string>
+	<string name="poi_payment_maestro_yes">Cartão Maestro</string>
 	<string name="poi_payment_maestro_no">Não aceita cartão Maestro</string>
-	<string name="poi_payment_american_express_yes">Aceita cartão American Express (AMEX)</string>
+	<string name="poi_payment_american_express_yes">American Express (AMEX)</string>
 	<string name="poi_payment_american_express_no">Não aceita cartão American Express (AMEX)</string>
-	<string name="poi_payment_diners_club_yes">Aceita cartão Diners Club</string>
+	<string name="poi_payment_diners_club_yes">Diners Club</string>
 	<string name="poi_payment_diners_club_no">Não aceita cartão Diners Club</string>
 	<string name="poi_payment_dkv_yes">Aceita DKV</string>
 	<string name="poi_payment_dkv_no">Não aceita DKV</string>
 	<string name="poi_payment_uta_yes">Aceita cartão UTA</string>
 	<string name="poi_payment_uta_no">Não aceita cartão UTA</string>
-	<string name="poi_payment_efectivo_yes">Aceita efetivo</string>
-	<string name="poi_payment_efectivo_no">Não aceita efetivo</string>
+	<string name="poi_payment_efectivo_yes">Efectivo</string>
+	<string name="poi_payment_efectivo_no">Não aceita Efectivo</string>
 	<string name="poi_payment_girocard_yes">Aceita Girocard</string>
 	<string name="poi_payment_girocard_no">Não aceita Girocard</string>
 	<string name="poi_payment_discover_card_yes">Aceita Discover Card</string>
@@ -1472,7 +1472,7 @@
 	<string name="poi_payment_visa_electron_no">Não aceita Visa Electron</string>
 	<string name="poi_payment_litecoin_yes">Aceita Litecoin</string>
 	<string name="poi_payment_litecoin_no">Não aceita Litecoin</string>
-	<string name="poi_payment_cheque_yes">Aceita cheque</string>
+	<string name="poi_payment_cheque_yes">Cheque</string>
 	<string name="poi_payment_cheque_no">Não aceita cheque</string>
 	<string name="poi_payment_pikepass_yes">Aceita PIKEPASS</string>
 	<string name="poi_payment_pikepass_no">Não aceita PIKEPASS</string>
@@ -1480,7 +1480,7 @@
 	<string name="poi_payment_visa_debit_yes">Aceita cartão Visa Débito</string>
 	<string name="poi_payment_visa_debit_no">Não aceita cartão Visa Débito</string>
 	<string name="poi_payment_cryptocurrencies_no">Não aceita criptomoedas</string>
-	<string name="poi_payment_others_yes">Aceita outras formas de pagamento</string>
+	<string name="poi_payment_others_yes">Outros</string>
 	<string name="poi_payment_others_no">Não aceita outras formas de pagamento</string>
 	<string name="poi_payment_routex_yes">Aceita cartão de combustível Routex</string>
 	<string name="poi_payment_routex_no">Não aceita cartão de combustível Routex</string>
@@ -3875,4 +3875,8 @@
 
 	<string name="poi_end_date">Data final</string>
 
-</resources>
+<string name="poi_checkpoint_type_stamp">Ponto de carimbo</string>
+	<string name="poi_checkpoint_type_notebook">Caderno</string>
+	<string name="poi_checkpoint_type_needler">Needler</string>
+	<string name="poi_checkpoint_type_quize">Quize</string>
+	</resources>
