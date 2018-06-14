@@ -32,14 +32,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import net.osmand.AndroidUtils;
-import net.osmand.Location;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
 import net.osmand.plus.MapMarkersHelper;
-import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
@@ -50,7 +48,6 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.myplaces.FavoritesActivity;
 import net.osmand.util.Algorithms;
-import net.osmand.util.MapUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -65,7 +62,7 @@ import java.util.Map;
 import java.util.Set;
 
 
-public class FavoritesTreeFragment extends OsmandExpandableListFragment implements OsmAndLocationProvider.OsmAndCompassListener, OsmAndLocationProvider.OsmAndLocationListener{
+public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 
 	public static final int SEARCH_ID = -1;
 	//	public static final int EXPORT_ID = 0;
@@ -92,11 +89,6 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 	private Drawable arrowImageDisabled;
 	private HashMap<String, OsmandSettings.OsmandPreference<Boolean>> preferenceCache = new HashMap<>();
 	private View footerView;
-
-	private Float heading;
-	private boolean locationUpdateStarted;
-	private boolean compassUpdateAllowed = true;
-	private Location location;
 
 	@Override
 	public void onAttach(Context context) {
@@ -225,7 +217,6 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 	@Override
 	public void onResume() {
 		super.onResume();
-		startLocationUpdate();
 		favouritesAdapter.synchronizeGroups();
 		initListExpandedState();
 	}
@@ -233,7 +224,6 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 	@Override
 	public void onPause() {
 		super.onPause();
-		stopLocationUpdate();
 		if (actionMode != null) {
 			actionMode.finish();
 		}
@@ -688,69 +678,6 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 		MapActivity.launchMapActivityMoveToTop(getActivity());
 	}
 
-	@Override
-	public void updateCompassValue(float value) {
-		// 99 in next line used to one-time initialize arrows (with reference vs. fixed-north direction)
-		// on non-compass devices
-		float lastHeading = heading != null ? heading : 99;
-		heading = value;
-		if (Math.abs(MapUtils.degreesDiff(lastHeading, heading)) > 5) {
-			updateLocationUi();
-		} else {
-			heading = lastHeading;
-		}
-	}
-
-	private void updateLocationUi() {
-		if (!compassUpdateAllowed) {
-			return;
-		}
-		if (app != null && adapter != null) {
-			app.runInUIThread(new Runnable() {
-				@Override
-				public void run() {
-					favouritesAdapter.notifyDataSetChanged();
-				}
-			});
-		}
-	}
-
-	private void startLocationUpdate() {
-		OsmandApplication app = getMyApplication();
-		if (app != null && !locationUpdateStarted) {
-			locationUpdateStarted = true;
-			app.getLocationProvider().removeCompassListener(app.getLocationProvider().getNavigationInfo());
-			app.getLocationProvider().addCompassListener(this);
-			app.getLocationProvider().addLocationListener(this);
-			app.getLocationProvider().resumeAllUpdates();
-			updateLocationUi();
-		}
-	}
-
-	private void stopLocationUpdate() {
-		OsmandApplication app = getMyApplication();
-		if (app != null && locationUpdateStarted) {
-			locationUpdateStarted = false;
-			app.getLocationProvider().removeCompassListener(this);
-			app.getLocationProvider().removeLocationListener(this);
-			app.getLocationProvider().pauseAllUpdates();
-			app.getLocationProvider().addCompassListener(app.getLocationProvider().getNavigationInfo());
-		}
-	}
-
-	@Override
-	public void updateLocation(Location location) {
-		boolean newLocation = this.location == null && location != null;
-		boolean locationChanged = this.location != null && location != null
-				&& this.location.getLatitude() != location.getLatitude()
-				&& this.location.getLongitude() != location.getLongitude();
-		if (newLocation || locationChanged) {
-			this.location = location;
-			updateLocationUi();
-		}
-	}
-
-
 	class FavouritesAdapter extends OsmandBaseExpandableListAdapter implements Filterable {
 
 		private static final boolean showOptionsButton = false;
@@ -1026,6 +953,10 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 			}
 			return -1;
 		}
+	}
+
+	public void updateLocation() {
+		favouritesAdapter.notifyDataSetChanged();
 	}
 
 	public class FavoritesFilter extends Filter {
