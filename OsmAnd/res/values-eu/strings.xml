@@ -1166,7 +1166,7 @@ Biltegiratzean {1} MB erabiliko dira.
   <string name="shared_string_apply">Aplikatu</string>
   <string name="shared_string_add">Gehitu</string>
   <string name="shared_string_no">Ez</string>
-  <string name="add_favorite_dialog_top_text">Gogokoaren izena sartu</string>
+  <string name="add_favorite_dialog_top_text">Sartu gogokoaren izena</string>
   <string name="add_favorite_dialog_default_favourite_name">Gogokoa</string>
   <string name="add_favorite_dialog_favourite_added_template">\"{0}\" gogoko puntua gehituta.</string>
   <string name="favourites_context_menu_edit">Editatu gogokoa</string>
@@ -1797,8 +1797,8 @@ Lorratza %2$s</string>
     <string name="rendering_attr_showSurfaces_name">Bistaratu errepidearen azalera</string>
     <string name="roads">Errepideak</string>
     <string name="confirm_download_roadmaps">Errepideak-bakarrik mapa ez da behar dagoeneko mapa estandarra (osoa) duzulako, deskargatu hala ere?</string>
-    <string name="routing_attr_avoid_shuttle_train_description">Saihestu tren transbordadorea</string>
-    <string name="fav_point_dublicate_message">Zehaztutako gogoko izena erabiltzen ari zara jada, bikoizketa saihesteko %1$s izena eman zaio.</string>
+    <string name="routing_attr_avoid_shuttle_train_description">Saihestu tren transbordadoreak</string>
+    <string name="fav_point_dublicate_message">Emandako gogoko-izena erabiltzen ari zara jada, bikoizketa saihesteko %1$s izena eman zaio.</string>
     <string name="routing_attr_avoid_stairs_name">Saihestu eskailerak</string>
     <string name="routing_attr_avoid_stairs_description">Saihestu eskailerak</string>
     <string name="routing_attr_avoid_borders_name">Saihestu herrialde-mugak gurutzatzea</string>
@@ -1826,7 +1826,7 @@ Lorratza %2$s</string>
     <string name="osm_user_stat">Edizioak %1$s, maila %2$s, edizioak guztira %3$s</string>
     <string name="osm_editors_ranking">OSM editoreen mailaketa</string>
     <string name="osm_live_subscription">OsmAnd Live harpidetza</string>
-    <string name="osm_live_email_desc">Parte-hartzaileen informazioa.</string>
+    <string name="osm_live_email_desc">Parte-hartzaileen informazioa emateko beharrezkoa.</string>
     <string name="osm_live_support_region">Babestu eskualdea</string>
     <string name="osm_live_month_cost">Hileko kostua</string>
     <string name="osm_live_thanks">Eskerrik asko zuzeneko eguneraketetara harpidetzeagatik!
@@ -1972,7 +1972,7 @@ Eskuragarri {2} MB besterik ez daude.</string>
     <string name="disable_recording_once_app_killed">Eragotzi bigarren planoko egunkaria</string>
     <string name="disable_recording_once_app_killed_descrp">GPX erregistroa geldiaraziko du aplikazioa hiltzean (azken aplikazioak pantailaren bidez). (OsmAnd bigarren planoan dabilela adierazten duen ikonoa Android jakinarazpen barratik desagertuko da)</string>
     <string name="rendering_value_walkingRoutesOSMC_name">OSMC bidezidor kirol sinboloen araberako koloreztatzea</string>
-    <string name="application_dir_change_warning3">Kopiatu bere datu fitxategiak xede berrira ?</string>
+    <string name="application_dir_change_warning3">Kopiatu OsmAnd-en datu fitxategiak xede berrira ?</string>
     <string name="storage_directory_multiuser">Erabiltzaile anitzeko biltegiratzea</string>
     <string name="rendering_attr_OSMMapperAssistant_name">OSM kartografia laguntzailea</string>
     <string name="welcome_select_region">Trafiko seinaleak eta arauak ongi adierazteko, mesedez hautatu zure gidatze eremua:</string>
@@ -2331,7 +2331,7 @@ mapak eta nabigazioa</string>
 \nOsmAnd aplikaziorako gehigarri berezi honek itsas nabigaziorako marka eta ikur kartografikoak gehitzen ditu  itsaso zabalean zein kostatik hurbil. Itsas nabigaziorako marka bakoitzak identifikaziorako eta esanahia ulertzeko datuak dauzka (kategoria, forma, kolorea, zenbakia, erreferentzia, eta abar)
 \n
 \nOsmAnden ohiko mapa batetara itzultzeko, gehigarri hau desgaitu edo \'Mapa estiloa\' aldatu \'Konfiguratu mapa\' menuan."</string>
-    <string name="fav_point_emoticons_message">Gogoko puntuaren izena aldatu da eta orain %1$s da irriabartxoak dituen katea fitxategira gorde ahal izateko.</string>
+    <string name="fav_point_emoticons_message">"Gogokoaren izena 1$s-ra aldatu da  emotikonoak dituen katea fitxategi batera gorde ahal izateko."</string>
     <string name="activate_seamarks_plugin">Aktibatu \'Itsas-mapa ikuspegia\'</string>
     <string name="plugin_ski_descr">Gehigarri honek zure eskura jartzen ditu mundu osoko eskiatzeko aldapak, fondoko eski zirkuituak, trabesiako eski ibilbideak, teleferikoak, eta abar. Ibilbideak eta pistak zailtasunaren arabera koloreztatu dira, eta elurtutako paisaiaren itxura duen \'Negu\' estiloko mapa batean adierazten dira.
 \n
@@ -2361,7 +2361,7 @@ mapak eta nabigazioa</string>
     <string name="storage_place_description">OsmAnd datuen biltegiratzea (mapak, GPX fitxategiak, eta abar): %1$s.</string>
     <string name="give_permission">Eman baimena</string>
     <string name="allow_access_location">Eman kokapena atzitzeko baimena</string>
-    <string name="first_usage_greeting">Jaso jarraibideak eta aurkitu toki berriak Internetera konexiorik gabe</string>
+    <string name="first_usage_greeting">Jaso jarraibideak eta aurkitu toki berriak Internet konexiorik gabe</string>
     <string name="search_my_location">Aurkitu nire kokalekua</string>
     <string name="get_for">Eskuratu %1$sren truke</string>
     <string name="get_for_month">Eskuratu hilean %1$s(r)en truke</string>
@@ -2590,8 +2590,8 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="shared_string_time_moving">Denbora mugimenduan</string>
     <string name="shared_string_time_span">Denbora tartea</string>
     <string name="shared_string_max">Geh.</string>
-    <string name="shared_string_start_time">Irteera</string>
-    <string name="shared_string_end_time">Iritsiera</string>
+    <string name="shared_string_start_time">Hasiera ordua</string>
+    <string name="shared_string_end_time">Amaiera ordua</string>
     <string name="shared_string_color">Kolorea</string>
     <string name="select_gpx_folder">Hautatu GPX fitxategien karpeta</string>
     <string name="file_can_not_be_moved">Fitxategia ezin da lekuz aldatu.</string>
@@ -2677,7 +2677,7 @@ Area honi dagokio: %1$s x %2$s</string>
 \n• Zure ibilbidea grabatu dezakezu edo GPX lorratz bat kargatu eta jarraitu dezakezu</string>
     <string name="shared_string_overview">Ikuspegi orokorra</string>
     <string name="select_street">Aukeratu kalea</string>
-    <string name="private_access_routing_req">Zure helburua sarbide pribatu duen gune batean dago. Errepide pribatuetara sartu nahi duzu bidai honetan?</string>
+    <string name="private_access_routing_req">Zure helburua sarbide pribatu duen gune batean dago. Errepide pribatuetara sartzea baimendu bidai honetan?</string>
     <string name="restart_search">Berrasi bilaketa</string>
     <string name="increase_search_radius">Handitu bilaketaren erradioa</string>
     <string name="nothing_found">Ez da ezer aurkitu</string>
@@ -2733,8 +2733,8 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="mapillary_descr">Kale mailako argazkiak denontzat. Deskubritu tokiak, parte hartu, eskuratu mundua.</string>
     <string name="plugin_mapillary_descr">Kale mailako argazkiak denontzat. Deskubritu tokiak, parte hartu, eskuratu mundua.</string>
     <string name="srtm_purchase_header">Mapan sestra-kurbak ikusteko, \'Contour Lines\' gehigarria erosi eta instalatu behar duzu</string>
-    <string name="hillshade_menu_download_descr">Deskargatu erliebe-itzalen mapa-geruza eskualde honetako erliebe-itzalak mapan ikusteko.</string>
-    <string name="hillshade_purchase_header">Instalatu sestra-kurben gehigarria hauek mapan erakusteko</string>
+    <string name="hillshade_menu_download_descr">Erliebe-itzalak mapan ikusteko, deskargatu erliebe-itzalen mapa-geruza eskualde honetako .</string>
+    <string name="hillshade_purchase_header">Erliebe-itzalak mapan ikusteko, \'Sestra-kurbak\' gehigarria erosi eta deskargatu behar duzu</string>
     <string name="srtm_menu_download_descr">Deskargatu eskualde honetako sestra-kurben mapa-geruza.</string>
     <string name="animate_my_location_desc">Gaitu nire kokalekuaren zentratze animatua nabigazioan zehar.</string>
     <string name="shared_string_in_name">%1$s barne</string>
@@ -2965,7 +2965,7 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="shared_string_more_without_dots">Gehiago</string>
     <string name="appearance_on_the_map">Maparen itxura</string>
     <string name="add_track_to_markers_descr">Hautatu lorratz bat bere bide-puntuak markatzaileetara gehitzeko.</string>
-    <string name="add_favourites_group_to_markers_descr">Hautatu gogoko kategoria bat markatzaileetara gehitzeko.</string>
+    <string name="add_favourites_group_to_markers_descr">Hautatu gogokoen kategoria bat markatzaileetara gehitzeko.</string>
     <string name="shared_string_gpx_waypoints">Lorratzaren bide-puntuak</string>
     <string name="favourites_group">Gogokoak kategoria</string>
     <string name="add_group">Gehitu talde bat</string>
@@ -3161,7 +3161,7 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="purchase_dialog_travel_description">Erosi hauetako bat lineaz kanpoko bidai-giden funtzioa eskuratzeko:</string>
     <string name="purchase_dialog_subtitle">Hautatu elementu egokia:</string>
     <string name="monthly_map_updates">Mapen eguneraketak: <b>Hilero</b></string>
-    <string name="daily_map_updates">Mapen eguneraketak: <b>Egunero, orduero</b></string>
+    <string name="daily_map_updates">Mapen eguneraketak: <b>Orduero</b></string>
     <string name="in_app_purchase">Aplikazio barneko erosketa</string>
     <string name="in_app_purchase_desc">Ordainketa bakarra</string>
     <string name="in_app_purchase_desc_ex">Behin erosita, beti izango duzu eskuragarri.</string>
