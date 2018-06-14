@@ -2364,7 +2364,7 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
 \n et bien plus encore…"</string>
     <string name="update_all_maps_now">Mettre à jour toutes les cartes maintenant ?</string>
     <string name="clear_tile_data">Supprimer toutes les tuiles</string>
-    <string name="replace_favorite_confirmation">Êtes-vous sûr de vouloir remplacer le favori %1$s ?</string>
+    <string name="replace_favorite_confirmation">Êtes-vous certain de vouloir remplacer le favori %1$s ?</string>
     <string name="shared_string_change">Modifier</string>
     <string name="get_started">Démarrer</string>
     <string name="routing_attr_short_way_name">Trajet économe en carburant</string>
@@ -3006,11 +3006,11 @@ représentant la zone : %1$s x %2$s</string>
     <string name="go_to_next_field">Champ suivant</string>
     <string name="appearance_on_the_map">Apparence sur la carte</string>
     <string name="add_track_to_markers_descr">Sélectionnez une trace pour ajouter ses points de passage aux marques.</string>
-    <string name="add_favourites_group_to_markers_descr">Sélectionnez une catégorie de favoris à ajouter aux marques.</string>
+    <string name="add_favourites_group_to_markers_descr">Sélectionnez une catégorie de Favoris à ajouter aux marques.</string>
     <string name="shared_string_gpx_waypoints">Points de passage de la trace</string>
     <string name="favourites_group">Catégorie de favoris</string>
     <string name="add_group">Ajouter un groupe</string>
-    <string name="add_group_descr">"Importer des groupes depuis des favoris ou des points de passage GPX. "</string>
+    <string name="add_group_descr">Importer des groupes depuis des favoris ou des points de passage GPX.</string>
     <string name="empty_state_markers_active">Ajoutez des marques sur la carte !</string>
     <string name="empty_state_markers_active_desc">Sélectionnez des emplacements sur la carte puis appuyez sur le drapeau de marque.</string>
     <string name="empty_state_markers_groups">Importer des groupes</string>
