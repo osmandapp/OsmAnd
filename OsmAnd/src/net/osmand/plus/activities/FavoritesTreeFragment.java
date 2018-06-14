@@ -38,18 +38,16 @@ import net.osmand.data.PointDescription;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
 import net.osmand.plus.MapMarkersHelper;
-import net.osmand.plus.MapMarkersHelper.MapMarkersGroup;
-import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.base.FavoriteImageDrawable;
 import net.osmand.plus.base.OsmandExpandableListFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.myplaces.FavoritesActivity;
 import net.osmand.util.Algorithms;
-import net.osmand.util.MapUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -81,12 +79,14 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 	private FavouritesDbHelper helper;
 
 	private OsmandApplication app;
+	private UiUtilities uiUtilities;
+	private UiUtilities.UpdateLocationViewCache updateLocationViewCache;
+
 	private boolean selectionMode = false;
 	private LinkedHashMap<String, Set<FavouritePoint>> favoritesSelected = new LinkedHashMap<>();
 	private Set<FavoriteGroup> groupsToDelete = new LinkedHashSet<>();
 	private ActionMode actionMode;
-	Drawable arrowImage;
-	Drawable arrowImageDisabled;
+	private Drawable arrowImageDisabled;
 	private HashMap<String, OsmandSettings.OsmandPreference<Boolean>> preferenceCache = new HashMap<>();
 	private View footerView;
 
@@ -94,19 +94,13 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 	public void onAttach(Context context) {
 		super.onAttach(context);
 		this.app = (OsmandApplication) getActivity().getApplication();
-
+		uiUtilities = app.getUIUtilities();
+		updateLocationViewCache = uiUtilities.getUpdateLocationViewCache();
 		helper = getMyApplication().getFavorites();
 		favouritesAdapter.synchronizeGroups();
 		setAdapter(favouritesAdapter);
 
 		boolean light = getMyApplication().getSettings().isLightContent();
-		arrowImage = ContextCompat.getDrawable(context, R.drawable.ic_direction_arrow);
-		arrowImage.mutate();
-		if (light) {
-			arrowImage.setColorFilter(ContextCompat.getColor(context, R.color.color_distance), PorterDuff.Mode.MULTIPLY);
-		} else {
-			arrowImage.setColorFilter(ContextCompat.getColor(context, R.color.color_distance), PorterDuff.Mode.MULTIPLY);
-		}
 		arrowImageDisabled = ContextCompat.getDrawable(context, R.drawable.ic_direction_arrow);
 		arrowImageDisabled.mutate();
 		arrowImageDisabled.setColorFilter(ContextCompat.getColor(
@@ -889,27 +883,19 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 			}
 			icon.setImageDrawable(FavoriteImageDrawable.getOrCreate(getActivity(),
 					visible ? model.getColor() : getResources().getColor(disabledIconColor), false));
-			LatLon lastKnownMapLocation = getMyApplication().getSettings().getLastKnownMapLocation();
-			int dist = (int) (MapUtils.getDistance(model.getLatitude(), model.getLongitude(),
-					lastKnownMapLocation.getLatitude(), lastKnownMapLocation.getLongitude()));
-			String distance = OsmAndFormatter.getFormattedDistance(dist, getMyApplication()) + "  ";
+			
 			name.setText(model.getName(), TextView.BufferType.SPANNABLE);
 			name.setTypeface(Typeface.DEFAULT, visible ? Typeface.NORMAL : Typeface.ITALIC);
 			name.setTextColor(getResources().getColor(visible ? enabledColor : disabledColor));
-			distanceText.setText(distance);
-			if (visible) {
-				distanceText.setTextColor(getResources().getColor(R.color.color_distance));
-			} else {
-				distanceText.setTextColor(getResources().getColor(disabledColor));
-			}
 			row.findViewById(R.id.group_image).setVisibility(View.GONE);
 
 			ImageView direction = (ImageView) row.findViewById(R.id.direction);
 			direction.setVisibility(View.VISIBLE);
 			if (visible) {
-				direction.setImageDrawable(arrowImage);
+				uiUtilities.updateLocationView(updateLocationViewCache, direction, distanceText, model.getLatitude(), model.getLongitude());
 			} else {
 				direction.setImageDrawable(arrowImageDisabled);
+				distanceText.setTextColor(getResources().getColor(disabledColor));
 			}
 
 			final CheckBox ch = (CheckBox) row.findViewById(R.id.toggle_item);
@@ -967,6 +953,10 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 			}
 			return -1;
 		}
+	}
+
+	public void updateLocation() {
+		favouritesAdapter.notifyDataSetChanged();
 	}
 
 	public class FavoritesFilter extends Filter {

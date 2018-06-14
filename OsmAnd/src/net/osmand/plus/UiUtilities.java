@@ -135,6 +135,7 @@ public class UiUtilities {
 				fromLoc = new LatLon(loc.getLatitude(), loc.getLongitude());
 			} else {
 				useCenter = true;
+				stale = false;
 				fromLoc = app.getMapViewTrackingUtilities().getMapLocation();
 				h = app.getMapViewTrackingUtilities().getMapRotate();
 				if(h != null) {
