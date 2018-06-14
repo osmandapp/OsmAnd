@@ -2582,8 +2582,8 @@
     <string name="shared_string_time_moving">時間移動</string>
     <string name="shared_string_time_span">時間間隔</string>
     <string name="shared_string_max">最大</string>
-    <string name="shared_string_start_time">出發</string>
-    <string name="shared_string_end_time">抵達</string>
+    <string name="shared_string_start_time">開始時間</string>
+    <string name="shared_string_end_time">結束時間</string>
     <string name="shared_string_color">顏色</string>
     <string name="max_speed">最高速度</string>
     <string name="average_speed">平均速度</string>
@@ -2788,7 +2788,7 @@
     <string name="quick_action_osmbugs_hide">隱藏 OSM 註解</string>
     <string name="search_favorites">搜尋我的收藏</string>
     <string name="quick_action_showhide_osmbugs_descr">輕點這個動作按鈕會在地圖上顯示或隱藏 OSM 註解。</string>
-    <string name="private_access_routing_req">您的目的地位處私人通路的區域。這次旅程要進入這條路私人道路嗎？</string>
+    <string name="private_access_routing_req">您的目的地位處私人通路的區域。這次旅程允許進入這條路私人道路嗎？</string>
     <string name="restart_search">重新開始搜尋</string>
     <string name="increase_search_radius">增加搜尋半徑</string>
     <string name="nothing_found">没有找到</string>
@@ -3166,7 +3166,7 @@
     <string name="contour_lines_sea_depth">等高線 + 海洋深度</string>
     <string name="unlock_all_features">解鎖所有 OsmAnd 功能</string>
 
-    <string name="monthly_map_updates">地圖更新：<b>每月</b></string>
+    <string name="monthly_map_updates">地圖更新：<b>每個月</b></string>
     <string name="daily_map_updates">地圖更新：<b>每小時</b></string>
     <string name="paid_app">付費應用程式</string>
     <string name="paid_plugin">付費外掛程式</string>
