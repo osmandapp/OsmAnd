@@ -682,7 +682,7 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
 \n\t\n\tPer activar-lo aneu a «Menú» → «Configuració del mapa» → «Font de mapes…» → «Mapes de vectors fora de línia».</string>
     <string name="overlay_transparency_descr">Modifiqueu l\'opacitat de la capa superposada.</string>
     <string name="overlay_transparency">Opacitat de la capa superposada</string>
-    <string name="layer_underlay">Posant el mapa de fons…</string>
+    <string name="layer_underlay">Mapa de fons…</string>
     <string name="preferred_locale">Llengua de visualització</string>
     <string name="add_waypoint_dialog_added">La fita «{0}» de la traça GPX afegida</string>
     <string name="add_waypoint_dialog_title">Afegeix una fita a la traça GPX enregistrada</string>
@@ -1055,7 +1055,7 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="osb_comment_dialog_error">No s\'ha pogut afegir el comentari</string>
     <string name="osb_author_dialog_password">Contrasenya de l\'OSM (opcional)</string>
     <string name="amenity_type_seamark">Balisa marina</string>
-    <string name="app_modes_choose_descr">Seleccioneu els perfils d\'ús per ser visibles a l\'aplicació.</string>
+    <string name="app_modes_choose_descr">Seleccioneu els perfils per donar visibilitat en l\'aplicació.</string>
     <string name="app_modes_choose">Perfils de l\'aplicació</string>
     <string name="map_widget_map_rendering">Renderitzat del mapa</string>
     <string name="app_mode_hiking">Senderisme</string>
@@ -1659,7 +1659,7 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="index_name_netherlands">Europa - Països Baixos</string>
     <string name="rendering_value__name">Per defecte</string>
     <string name="rendering_value_highContrastRoads_name">Vies més contrastades</string>
-    <string name="application_dir_change_warning3">Voleu que copiï els seus fitxers de dades a la nova destinació?</string>
+    <string name="application_dir_change_warning3">Voleu copiar els fitxers de dades OsmAnd a la nova destinació?</string>
     <string name="specified_directiory_not_writeable">Creació de mapes al directori indicat fallida</string>
     <string name="copying_osmand_file_failed">Error en copiar fitxers</string>
     <string name="storage_directory_external">Emmagatzematge exterior</string>
@@ -1769,7 +1769,7 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="offline_maps_and_navigation">Mapes fora de línia\ni navegació</string>
     <string name="commit_poi">Publica els PDI</string>
     <string name="routing_attr_avoid_shuttle_train_name">Evita tren llançadora</string>
-    <string name="routing_attr_avoid_shuttle_train_description">Evita l\'ús de tren llançadora</string>
+    <string name="routing_attr_avoid_shuttle_train_description">Evita l\'ús de trens llançadora</string>
     <string name="plugin_settings">Connectors</string>
     <string name="tab_title_basic">Bàsic</string>
     <string name="tab_title_advanced">Estès</string>
@@ -1835,7 +1835,7 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="downloads">Baixades</string>
     <string name="activate_seamarks_plugin">Activeu el connector de \'Cartes marines\'</string>
     <string name="activate_srtm_plugin">Activeu el connector \'Corbes de nivell\'</string>
-    <string name="favorite_category_dublicate_message">Utilitzeu un nom de categoria nou que encara no existeixi.</string>
+    <string name="favorite_category_dublicate_message">Utilitzeu un nom de categoria que encara no existeixi.</string>
     <string name="favorite_category_name">Nom de categoria</string>
     <string name="favorite_category_add_new_title">Afegeix una nova categoria</string>
     <string name="confirm_download_roadmaps">"El mapa restringit a carreteres no cal, donat que ja teniu el mapa estàndard (complet).  Que baixi igualment?"</string>
@@ -2209,7 +2209,7 @@ L\'espai disponible és només de {2} MB.</string>
     <string name="si_mi_meters">Milles/metres</string>
     <string name="get_for">Obteniu-lo per %1$s</string>
     <string name="get_for_month">Obteniu-lo per %1$s al mes</string>
-    <string name="osm_live_banner_desc">Obteniu nous mapes i actualitzacions sense límit més d\'un cop al mes: Cada hora, dia o setmana.</string>
+    <string name="osm_live_banner_desc">Obteniu nous mapes i actualitzacions sense límit més d\'un cop al mes: cada hora, dia o setmana.</string>
     <string name="osmand_plus_banner_desc">Baixada il·limitada de mapes, actualitzacions i el connector Viquipèdia.</string>
     <string name="get_it">Obteniu-lo</string>
     <string name="osm_live_payment_desc">La subscripció es carregar mensualment. Cancel·leu-la amb Google Play quan ho desitgeu.</string>
@@ -2428,8 +2428,8 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="shared_string_time_moving">Temps en moviment</string>
     <string name="shared_string_time_span">Lapse temporal</string>
     <string name="shared_string_max">Màx.</string>
-    <string name="shared_string_start_time">Sortida</string>
-    <string name="shared_string_end_time">Arribada</string>
+    <string name="shared_string_start_time">Hora inicial</string>
+    <string name="shared_string_end_time">Hora de finalització</string>
     <string name="shared_string_color">Color</string>
     <string name="max_speed">Velocitat màxima</string>
     <string name="average_speed">Velocitat mitjana</string>
@@ -2447,7 +2447,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="routing_attr_driving_style_speed_name">Les rutes més curtes</string>
     <string name="routing_attr_driving_style_balance_name">Equilibrat</string>
     <string name="routing_attr_driving_style_safety_name">Amb preferència per pistes</string>
-    <string name="relief_smoothness_factor_descr">Predilecció del terreny: Pla o aturonat.</string>
+    <string name="relief_smoothness_factor_descr">Predilecció del terreny: pla o aturonat.</string>
     <string name="routing_attr_relief_smoothness_factor_name">Indiqueu la variació d\'alçat</string>
     <string name="full_version_thanks">Us agraïm la compra de la versió de pagament d\'OsmAnd.</string>
     <string name="do_not_send_anonymous_app_usage">No enviïs anònimament les estadístiques d\'ús de l\'aplicació</string>
@@ -2628,10 +2628,10 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="quick_action_showhide_osmbugs_title">Commuta Notes OSM</string>
     <string name="quick_action_osmbugs_show">Mostra notes OSM</string>
     <string name="quick_action_osmbugs_hide">Amaga notes OSM</string>
-    <string name="quick_action_showhide_osmbugs_descr">Prement aquest botó d\'acció es mostren o s\'amaguen notes OSM al mapa.</string>
+    <string name="quick_action_showhide_osmbugs_descr">Prement aquest botó d\'acció es mostren o s\'amaguen Notes OSM al mapa.</string>
     <string name="sorted_by_distance">Ordenat per distància</string>
     <string name="search_favorites">Cerca a preferits</string>
-    <string name="private_access_routing_req">La vostra destinació és dins una zona amb accés privat. Voleu creuar vies privades en aquest trajecte?</string>
+    <string name="private_access_routing_req">La vostra destinació és dins una zona amb accés privat. Tindreu accés a vies privades en aquest trajecte?</string>
     <string name="restart_search">Reprèn la cerca</string>
     <string name="increase_search_radius">Augmenta el radi de cerca</string>
     <string name="nothing_found">No s\'ha trobat res</string>
@@ -2811,9 +2811,9 @@ Abasta l\'àrea: %1$s x %2$s</string>
 	<string name="shared_string_back">Enrere</string>
 	<string name="shared_string_view">Visualització</string>
 	<string name="waypoints_added_to_map_markers">Fites afegides als marcadors</string>
-	<string name="import_gpx_file_description">es poden importar com a preferits o fitxer GPX.</string>
+	<string name="import_gpx_file_description">es poden importar com a Preferits o un fitxer GPX.</string>
     <string name="import_as_gpx">Importa com un arxiu GPX</string>
-    <string name="import_as_favorites">Importa com preferit</string>
+    <string name="import_as_favorites">Importa com Preferits</string>
     <string name="import_file">Importa fitxer</string>
 	<string name="tap_on_map_to_hide_interface_descr">Prement el mapa canvien els botons de control i els ginys.</string>
     <string name="tap_on_map_to_hide_interface">Mode de pantalla completa</string>
@@ -2845,7 +2845,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="show_guide_line_descr">Mostra una línia de direcció entre la vostra ubicació i les dels marcadors actius.</string>
     <string name="show_arrows_descr">Mostra una o dues fletxes indicant la direcció dels marcadors actius.</string>
     <string name="distance_indication_descr">Seleccioneu com indicar la distància als marcadors actius.</string>
-    <string name="active_markers_descr">Trieu quants indicadors actius voleu veure.</string>
+    <string name="active_markers_descr">Trieu quants indicadors de direcció voleu veure.</string>
     <string name="shared_string_more_without_dots">Més</string>
     <string name="looking_for_tracks_with_waypoints">Cercant traces amb fites</string>
     <string name="empty_state_osm_edits">Crea o modifica objectes OSM</string>
@@ -2942,8 +2942,8 @@ Abasta l\'àrea: %1$s x %2$s</string>
 \n"</string>
     <string name="make_as_start_point">Agafa aquest com a punt inicial</string>
     <string name="rendering_attr_whiteWaterSports_name">Esports d\'aigües braves</string>
-    <string name="distance_farthest">Distància: Primer el més llunyà</string>
-    <string name="distance_nearest">Distància: Primer el més proper</string>
+    <string name="distance_farthest">Distància: primer el més llunyà</string>
+    <string name="distance_nearest">Distància: primer el més proper</string>
     <string name="enter_lon">Introduïu la longitud</string>
     <string name="enter_lat">Introduïu la latitud</string>
     <string name="enter_lat_and_lon">Introduïu la latitud i la longitud</string>
@@ -2970,7 +2970,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="use_two_digits_longitude">Utilitza una longitud de dos dígits</string>
     <string name="shared_string_travel_guides">Viatge</string>
     <string name="waypoints_removed_from_map_markers">Fites eliminades dels marcadors de mapa</string>
-    <string name="wikivoyage_search_hint">Cerca: País, ciutat, província</string>
+    <string name="wikivoyage_search_hint">Cerca: país, ciutat, província</string>
     <string name="shared_string_read">Llegit</string>
     <string name="saved_articles">Articles seleccionats</string>
     <string name="shared_string_explore">Explora</string>
@@ -3005,8 +3005,8 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="start_editing">Comença l\'edició</string>
     <string name="get_unlimited_access">Assoliu accés il·limitat</string>
     <string name="welcome_to_open_beta">Benvingut a la beta oberta</string>
-    <string name="monthly_map_updates">Actualitzacions del mapa: <b>Cada mes</b></string>
-    <string name="daily_map_updates">Actualitzacions del mapa: <b>Cada hora</b></string>
+    <string name="monthly_map_updates">Actualitzacions del mapa: <b>cada mes</b></string>
+    <string name="daily_map_updates">Actualitzacions del mapa: <b>cada hora</b></string>
     <string name="download_wikipedia_description">Baixeu els articles de la Viquipèdia per %1$s per llegir-los fora de línia.</string>
     <string name="download_wikipedia_label">Baixa dades de la Viquipèdia</string>
     <string name="open_in_browser_wiki">Obre l\'article en línia</string>
