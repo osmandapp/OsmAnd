@@ -273,7 +273,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="address_search_desc">Adressesøgning</string>
     <string name="navpoint_search_desc">Koordinater</string>
     <string name="transport_search_desc">Kollektivtrafiksøgning</string>
-    <string name="favourites_search_desc">En måde at søge efter favoritter</string>
+    <string name="favourites_search_desc">En måde at søge efter Favoritter</string>
 
     <string name="offline_navigation_not_available">Offline navigation er midlertidig utilgængelig.</string>
     <string name="left_side_navigation">Venstrekørsel</string>
@@ -423,7 +423,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="index_name_voice">Talemeddelelser (optaget, begrænset funktionalitet)</string>
     <string name="index_name_tts_voice">Talemeddelelser (TTS generator, anbefalet)</string>
     <string name="amenity_type_user_defined">Brugerdefineret</string>
-    <string name="fav_export_confirmation">Fil med tidligere eksporterede favoritter eksisterer allerede. Overskriv?</string>
+    <string name="fav_export_confirmation">Fil med tidligere eksporterede Favoritter eksisterer allerede. Overskriv?</string>
     <string name="profile_settings">Profilspecifikke indstillinger</string>
     <string name="settings_preset">Standardprofil</string>
     <string name="settings_preset_descr">Kortvisnings- og navigationsindstillinger gemmes på hver profil. Indstil standardprofilen her.</string>
@@ -509,14 +509,14 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
 \nTryk og hold for valgmuligheder"</string>
 	
 	<string name="osmand_long_description_1000_chars">"OsmAnd (OSM Automated Navigation Directions) 
-\n 
-\nOsmAnd er et open source-navigationsprogram med adgang til en lang række af globale OpenStreetMap (OSM)-data. Alle kortdata (vektorkort eller kortbrikker) kan gemmes på enhedens hukommelseskort til offline-brug. OsmAnd tilbyder også offline- og online-rutefunktionalitet inklusive sving-for-sving-talevejledning. 
 \n
+\nOsmAnd er et open source-navigationsprogram med adgang til en lang række af globale OpenStreetMap (OSM)-data. Alle kortdata (vektorkort eller kortbrikker) kan gemmes på enhedens hukommelseskort til offline-brug. OsmAnd tilbyder også offline- og online-rutefunktionalitet inklusive sving-for-sving-talevejledning. 
+\n 
 \nNogle af hovedfunktionerne: 
 \n - Komplet offlinefunktionalitet (gemme hentede vektorkort eller kortbrikker i enhedens lager) 
 \n - Kompakte offlinevektorkort for hele verden er tilgængelige 
 \n - Kort for enkelte lande eller områder kan hentes direkte fra OsmAnd 
-\n - Overlejring af flere kortlag er muligt, som fx GPX- eller navigationsspor, interessepunkter (IP), favoritter, konturlinjer, stoppesteder for kollektiv trafik og flere kort med modificerebar gennemsigtighed 
+\n - Overlejring af flere kortlag er muligt, som fx GPX- eller navigationsspor, interessepunkter (IP), Favoritter, konturlinjer, stoppesteder for kollektiv trafik og flere kort med modificerebar gennemsigtighed 
 \n - Offlinesøgning efter adresser og steder (interessepunkter, IP) 
 \n - Offlineruteplanlægning for mellemlange afstande 
 \n - Bil-, cykel- og fodgængertilstand med: 
@@ -533,25 +533,25 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
 \n 
 \nOsmAnd bliver aktivt udviklet. Projektet og den videre udvikling afhænger af økonomiske bidrag til at drive udviklingen og test af nye funktioner. Overvej at købe OsmAnd+, betale for en specifik ny funktion eller lave en generel donation på https://osmand.net."</string>
     
-    <string name="osmand_plus_long_description_1000_chars">"OsmAnd+ (OSM Automated Navigation Directions)
-\n
-\n OsmAnd+ er et open source-navigationsprogram med adgang til en bred vifte af globale OpenStreetMap (OSM)-data. Alle kortdata (vektor eller kortbrikker) kan gemmes på enhedens hukommelseskort til offline-brug. OsmAnd tilbyder også offline og online ruteplanlægningsfunktionalitet, herunder sving-for-sving-talevejledning.
-\n
-\n OsmAnd+ er den betalte programversion; ved at købe den støtter man projektet, finansierer udviklingen af nye funktioner, og modtager de seneste opdateringer.
-\n
-\n Nogle af hovedfunktionerne:
-\n - Komplet offline-funktionalitet (gem hentede vektor- eller brikkort på enhedens hukommelsseskort)
-\n - Kompakte offline vektorkort for hele verden
-\n - Ubegrænset hentning af lande- eller områdekort direkte fra OsmAnd
-\n - Offline Wikipedia-funktioner (hent Wikipedia-interessepunkter (IP)), fantastisk til sightseeing
-\n - Overlejring af flere kortlag mulige, såsom GPX- eller navigationsspor, seværdigheder, favoritter, højdekurver, stoppesteder for kollektiv trafik, ekstra kort med brugerdefinerbar gennemsigtighed
-\n
-\n - Offline-søgning efter adresser og steder (IP)
-\n - Offline-ruteplanlægning til mediumafstande
-\n - Bil-, cykel- og fodgængertilstande med:
-\n - valgfri automatisk dag/nat-visning
-\n - valgfri hastighedsafhængig kortzoom
-\n - valgfri korttilpasning i henhold til kompas- eller bevægelsesretning
+    <string name="osmand_plus_long_description_1000_chars">"OsmAnd+ (OSM Automated Navigation Directions) 
+\n 
+\n OsmAnd+ er et open source-navigationsprogram med adgang til en bred vifte af globale OpenStreetMap (OSM)-data. Alle kortdata (vektor eller kortbrikker) kan gemmes på enhedens hukommelseskort til offline-brug. OsmAnd tilbyder også offline og online ruteplanlægningsfunktionalitet, herunder sving-for-sving-talevejledning. 
+\n 
+\n OsmAnd+ er den betalte programversion; ved at købe den støtter man projektet, finansierer udviklingen af nye funktioner, og modtager de seneste opdateringer. 
+\n 
+\n Nogle af hovedfunktionerne: 
+\n - Komplet offline-funktionalitet (gem hentede vektor- eller brikkort på enhedens hukommelsseskort) 
+\n - Kompakte offline vektorkort for hele verden 
+\n - Ubegrænset hentning af lande- eller områdekort direkte fra OsmAnd 
+\n - Offline Wikipedia-funktioner (hent Wikipedia-interessepunkter (IP)), fantastisk til sightseeing 
+\n - Overlejring af flere kortlag mulige, såsom GPX- eller navigationsspor, seværdigheder, Favoritter, højdekurver, stoppesteder for kollektiv trafik, ekstra kort med brugerdefinerbar gennemsigtighed 
+\n 
+\n - Offline-søgning efter adresser og steder (IP) 
+\n - Offline-ruteplanlægning til mediumafstande 
+\n - Bil-, cykel- og fodgængertilstande med: 
+\n - valgfri automatisk dag/nat-visning 
+\n - valgfri hastighedsafhængig kortzoom 
+\n - valgfri korttilpasning i henhold til kompas- eller bevægelsesretning 
 \n - valgfri vognbanevejledning, visning af hastighedsgrænser,  optagede stemmer eller TTS-stemmer"</string>
     
 
@@ -564,7 +564,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
 
     <string name="show_more_map_detail_descr">Vis nogle vektor-kortdetaljer (f.eks. veje) allerede ved lavere zoomniveauer .</string>
     <string name="favourites_delete_multiple_succesful">Favoritpunkter slettet.</string>
-    <string name="favorite_delete_multiple">%1$d favoritter og %2$d favoritgrupper slettes. Forsæt?</string>
+    <string name="favorite_delete_multiple">%1$d Favoritter og %2$d Favoritgrupper slettes. Forsæt?</string>
     <string name="basemap_missing">Hent verdensgrundkort for at få et overblik, der dækker hele verden ved lave zoom-niveauer.</string>
     <string name="vector_data_missing">Hent (\'offline\') data for at kunne bruge kort offline.</string>
 
@@ -766,9 +766,9 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="rotate_map_to_bearing">Kortorientering</string>
     <string name="show_route">Rutedetaljer</string>
     <string name="fav_imported_sucessfully">Favoritter importeret</string>
-    <string name="fav_file_to_load_not_found">GPX-fil med favoritter ikke fundet i {0}</string>
+    <string name="fav_file_to_load_not_found">GPX-fil med Favoritter ikke fundet i {0}</string>
     <string name="fav_saved_sucessfully">Favoritter gemt i {0}</string>
-    <string name="no_fav_to_save">Ingen favoritter at gemme</string>
+    <string name="no_fav_to_save">Ingen Favoritter at gemme</string>
 
     <string name="error_occurred_loading_gpx">Kunne ikke indlæse GPX</string>
     <string name="send_report">Send rapport</string>
@@ -829,9 +829,9 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="osb_comment_dialog_message">Meddelelse</string>
     
     <string name="favourites_remove_dialog_success">Favoritpunkt {0} slettet.</string>
-    <string name="favourites_remove_dialog_msg">Slet favoritpunkt \'%s\'?</string>
-    <string name="favourites_context_menu_delete">Slet</string>
-    <string name="favourites_context_menu_edit">Rediger</string>
+    <string name="favourites_remove_dialog_msg">Slet Favoritpunkt \'%s\'?</string>
+    <string name="favourites_context_menu_delete">Slet Favorit</string>
+    <string name="favourites_context_menu_edit">Rediger Favorit</string>
     <string name="amenity_type_emergency">Nødsituation</string>
     <string name="layer_poi">IP overlejring…</string>
     <string name="process_navigation_service">OsmAnd-navigationstjeneste</string>
@@ -875,7 +875,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="osb_comment_dialog_error">Kunne ikke tilføje kommentar</string>
     <string name="osb_comment_dialog_author">Forfatternavn</string>
     <string name="add_favorite_dialog_default_favourite_name">Favorit</string>
-    <string name="add_favorite_dialog_top_text">Indtast favoritnavn</string>
+    <string name="add_favorite_dialog_top_text">Indtast Favoritnavn</string>
     <string name="context_menu_item_create_poi">Opret interessepunkt</string>
     <string name="context_menu_item_update_map">Opdater kort</string>
 
@@ -891,7 +891,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="transport_stops">Stoppesteder</string>
 
 
-    <string name="osmand_net_previously_installed">Alle offline data er understøttet af det nye program, men favoritpunkter skal eksporteres fra den gamle version og derefter importeres i den nye.</string>
+    <string name="osmand_net_previously_installed">Alle offline data er understøttet af det nye program, men Favoritpunkter skal eksporteres fra den gamle version og derefter importeres i den nye.</string>
     <string name="voice_provider">Talevejledning</string>
     <string name="voice_data_initializing">Initialiserer taledata…</string>
     <string name="voice_data_not_supported">Ikke understøttet version af taledata</string>
@@ -946,7 +946,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="list_index_files_was_not_loaded">Kunne ikke hente liste over regioner fra https://osmand.net.</string>
 
     <string name="fav_points_edited">Favoritpunkt blev redigeret</string>
-    <string name="fav_points_not_exist">Der eksisterer ingen favoritpunkter</string>
+    <string name="fav_points_not_exist">Der eksisterer ingen Favoritpunkter</string>
     <string name="update_existing">Erstat</string>
     <string name="only_show">Vis rute</string>
     <string name="follow">Begynd navigation</string>
@@ -1068,7 +1068,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="navigate_point_format_DMS">DDD MM SS.SS</string>
     <string name="street_name">Gadenavn</string>
     <string name="select_address_activity">Vælg adresse</string>
-    <string name="favourites_list_activity">Vælg favorit</string>
+    <string name="favourites_list_activity">Vælg Favorit</string>
     <string name="hno">Husnummer</string>
     <string name="choose_osmand_theme_descr">Vælg udseende på programmet.</string>
     <string name="choose_osmand_theme">Tema</string>
@@ -1440,7 +1440,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="delay_navigation_start">Start sving-for-sving vejledning automatisk</string>
     <string name="gpx_split_interval">Opdelingsinterval</string>
     <string name="loading_smth">Indlæser %1$s…</string>
-    <string name="save_as_favorites_points">Gem som en gruppe af favoritter</string>
+    <string name="save_as_favorites_points">Gem som en gruppe af Favoritter</string>
     <string name="select_destination_and_intermediate_points">Vælg destinationer</string>
     <string name="layer_amenity_label">Overlejring af IP-etiketter</string>
     <string name="create_poi_link_to_osm_doc"><u>Online OSM</u> kort klassificering med billeder.</string>
@@ -1560,7 +1560,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="text_size_descr">Vælg tekststørrelsen på kortet.</string>
     <string name="text_size">Tekststørrelse</string>
     <string name="fav_point_dublicate">Favoritnavn dublet</string>
-    <string name="fav_point_dublicate_message">Angivne favoritnavn er allerede i brug, blev ændret til %1$s for at undgå dubletter.</string>
+    <string name="fav_point_dublicate_message">Angivne Favoritnavn er allerede i brug, blev ændret til %1$s for at undgå dubletter.</string>
 
 
     <string name="print_route">Udskriv rute</string>
@@ -1982,7 +1982,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="downloads_left_template">%1$s filhentninger tilbage</string>
     <string name="roads">Veje</string>
     <string name="favourites_edit_dialog_title">Favoritinfo</string>
-    <string name="favourites_context_menu_add">Tilføj favorit</string>
+    <string name="favourites_context_menu_add">Tilføj Favorit</string>
     <string name="shared_string_trip_recording">Optag ture</string>
     <string name="shared_string_navigation">Navigation</string>
     <string name="osmand_running_in_background">Kør i baggrunden</string>
@@ -2389,7 +2389,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
 
     <string name="routing_attr_short_way_name">Brændstofbesparende rute</string>
     <string name="routing_attr_short_way_description">Brug brændstofbesparende rute (normalt kortere).</string>
-    <string name="replace_favorite_confirmation">Erstat favorit %1$s?</string>
+    <string name="replace_favorite_confirmation">Erstat Favorit %1$s?</string>
     <string name="shared_string_change">Skift</string>
     <string name="get_started">Kom i gang</string>
     <string name="update_all_maps_now">Opdater alle kort nu?</string>
@@ -2521,11 +2521,11 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="quick_action_add_parking">Tilføj en parkeringsplads</string>
     <string name="quick_action_new_action">Tilføj genvej</string>
     <string name="quick_action_edit_action">Rediger genvej</string>
-    <string name="quick_action_add_favorite">Tilføj favorit</string>
+    <string name="quick_action_add_favorite">Tilføj Favorit</string>
     <string name="dialog_add_action_title">Tilføj genvej</string>
     <string name="quick_actions_delete">Slet genvej</string>
     <string name="quick_actions_delete_text">Bekræft sletning af genvej \"%s\"?</string>
-    <string name="quick_favorites_show_favorites_dialog">Vis dialogen favoritter</string>
+    <string name="quick_favorites_show_favorites_dialog">Vis dialogen Favoritter</string>
     <string name="quick_favorites_name_preset">Forudindstillet navn</string>
     <string name="quick_action_add_marker_descr">Tryk på genvejsknappen tilføjer en kortmarkør på skærmens centrum.</string>
     <string name="quick_action_add_gpx_descr">Tryk på genvejsknappen vil tilføje et GPX-rutepunkt i midten af skærmen.</string>
@@ -2540,11 +2540,11 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="favorite_empty_place_name">Sted</string>
     <string name="quick_action_duplicates">Angivne genvej er allerede i brug, navn ændret til %1$s at undgå overlapning.</string>
     <string name="quick_action_duplicate">Dublet genvejsnavn</string>
-    <string name="quick_action_showhide_favorites_descr">Tryk på genvejsknappen viser eller skjuler favoritpunkter på kortet.</string>
+    <string name="quick_action_showhide_favorites_descr">Tryk på genvejsknappen viser eller skjuler Favoritpunkter på kortet.</string>
     <string name="quick_action_showhide_poi_descr">Tryk på genvejsknappenviser eller skjuler interessepunkter på kortet.</string>
-    <string name="quick_action_showhide_favorites_title">Vis/skjul favoritter</string>
-    <string name="quick_action_favorites_show">Vis favoritter</string>
-    <string name="quick_action_favorites_hide">Skjul favoritter</string>
+    <string name="quick_action_showhide_favorites_title">Vis/skjul Favoritter</string>
+    <string name="quick_action_favorites_show">Vis Favoritter</string>
+    <string name="quick_action_favorites_hide">Skjul Favoritter</string>
     <string name="quick_action_showhide_poi_title">Vis/skjul intetessepunkt (IP)</string>
     <string name="quick_action_poi_show">Vis %1$s</string>
     <string name="quick_action_poi_hide">Skjul %1$s</string>
@@ -2555,7 +2555,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="quick_action_fav_name_descr">Lad være tomt for at bruge adressen eller stedets navn.</string>
     <string name="quick_action_bug_descr">Meddelelsen inkluderes i kommentarfeltet.</string>
     <string name="quick_action_bug_message">Meddelelse</string>
-    <string name="quick_action_category_descr">Vælg den kategori, som favoritten skal gemmes i.</string>
+    <string name="quick_action_category_descr">Vælg den kategori, som Favoritten skal gemmes i.</string>
     <string name="quick_action_gpx_category_descr">Vælg en valgfri kategori.</string>
     <string name="quick_action_poi_list">IP-liste</string>
     <string name="quick_action_sh_poi_descr">Tilføj en eller flere IP-kategorier der skal vises på kortet.</string>
@@ -2830,7 +2830,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="hillshade_purchase_header">Installer \'Højdekurve\' udvidelsen for at vise dem på kortet</string>
     <string name="hide_from_zoom_level">Skjul fra zoom-niveau</string>
     <string name="sorted_by_distance">Sorteret efter afstand</string>
-    <string name="search_favorites">Søg i favoritter</string>
+    <string name="search_favorites">Søg i Favoritter</string>
     <string name="quick_action_showhide_osmbugs_title">Skift visning af OSM-noter</string>
     <string name="quick_action_osmbugs_show">Vis OSM-noter</string>
     <string name="quick_action_osmbugs_hide">Skjul OSM-noter</string>
@@ -2931,7 +2931,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="empty_state_my_tracks">Tilføj GPX-filer</string>
     <string name="empty_state_my_tracks_desc">Importer GPX-filer eller optag spor.</string>
     <string name="empty_state_favourites">Tilføj favoritter</string>
-    <string name="empty_state_favourites_desc">Importer favoritter, eller tilføj via markering af punkter på kortet.</string>
+    <string name="empty_state_favourites_desc">Importer Favoritter, eller tilføj via markering af punkter på kortet.</string>
     <string name="import_track">Importer GPX-fil</string>
     <string name="import_track_desc">Filen %1$s indeholder ingen rutepunkter, importer den som et spor?</string>
     <string name="move_point">Flyt punkt</string>
@@ -3040,11 +3040,11 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="shared_string_gpx_waypoints">Sporrutepunkter</string>
     <string name="favourites_group">Favoritkategori</string>
     <string name="add_group">Tilføj en gruppe</string>
-    <string name="add_group_descr">Importer grupper fra favoritter eller et GPX-rutepunkter.</string>
+    <string name="add_group_descr">Importer grupper fra Favoritter eller et GPX-rutepunkter.</string>
     <string name="empty_state_markers_active">Opret kortmarkører!</string>
     <string name="empty_state_markers_active_desc">Tryk langt eller kort på \'Steder\', og tryk derefter på markørflagsknappen.</string>
     <string name="empty_state_markers_groups">Importer grupper</string>
-    <string name="empty_state_markers_groups_desc">Importer favoritgrupper eller rutepunkter som markører.</string>
+    <string name="empty_state_markers_groups_desc">Importer Favoritgrupper eller rutepunkter som markører.</string>
     <string name="empty_state_markers_history_desc">Markører, der er markeret som passeret, vil blive vist på denne skærm.</string>
     <string name="appearance_on_the_map">Udseende på kortet</string>
     <string name="looking_for_tracks_with_waypoints">Søger efter spor med rutepunkter</string>
