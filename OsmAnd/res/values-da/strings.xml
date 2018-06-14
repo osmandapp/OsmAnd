@@ -3036,7 +3036,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="distance_indication_descr">Vælg hvordan afstanden til de aktive markører skal vises.</string>
     <string name="active_markers_descr">Vælg hvor mange retningsindikatorer der skal vises.</string>
     <string name="add_track_to_markers_descr">Vælg et spor for at tilføje dens rutepunkter til markører.</string>
-    <string name="add_favourites_group_to_markers_descr">Vælg en favoritkategori, der skal tilføjes markørerne.</string>
+    <string name="add_favourites_group_to_markers_descr">Vælg en Favoritkategori, der skal tilføjes markørerne.</string>
     <string name="shared_string_gpx_waypoints">Sporrutepunkter</string>
     <string name="favourites_group">Favoritkategori</string>
     <string name="add_group">Tilføj en gruppe</string>

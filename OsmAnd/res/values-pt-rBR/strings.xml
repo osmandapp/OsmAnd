@@ -1181,7 +1181,7 @@ Pôr do Sol: %2$s</string>
 	<string name="route_tslr">Vire levemente à direita e siga</string>
 	<string name="route_tl">Vire à esquerda e siga</string>
 	<string name="route_tu">Faça um retorno e siga</string>
-	<string name="route_head">Em frente</string>
+	<string name="route_head">Siga</string>
 	<string name="first_time_continue">Depois</string>
 	<string name="first_time_download">Baixar regiões</string>
 	<string name="map_screen_orientation">Orientação do mapa</string>
