@@ -2951,4 +2951,11 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="download_wiki_region_placeholder">šis regionas</string>
     <string name="wiki_article_not_found">Straipsnis nerastas</string>
     <string name="how_to_open_wiki_title">Kaip atidaryti Wikipedia straipsnius?</string>
-</resources>
+<string name="quick_action_edit_actions">Redaguoti veiksmus</string>
+    <string name="get_osmand_live">Įsigykite OSmAnd jei norite išblokuoti visas funkcijas: kasdieniu žemėlapių atnaujinimus neribojant atsisiuntimų, visus mokamus ir nemokamus įskiepius, Wikipedia, Wikivoyage ar dar daugiau.</string>
+    <string name="shared_string_bookmark">Žymelė</string>
+    <string name="hide_full_description">Paslėpti visą aprašymą</string>
+    <string name="show_full_description">Rodyti visą aprašymą</string>
+    <string name="read_wikipedia_offline">Skaityti Wikipedia atjungus internetą</string>
+    <string name="maps_you_need">Jums reikalingi žemėlapiai</string>
+    </resources>
