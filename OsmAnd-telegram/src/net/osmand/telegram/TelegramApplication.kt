@@ -92,17 +92,24 @@ class TelegramApplication : Application(), OsmandHelperListener {
 		showLocationHelper.setupMapLayer()
 	}
 
-	private fun startTelegramService(intent: Int) {
+	private fun startTelegramService(intent: Int, serviceOffInterval: Long = 0) {
 		var i = intent
+		var interval = serviceOffInterval
 		val serviceIntent = Intent(this, TelegramService::class.java)
 
 		val telegramService = telegramService
 		if (telegramService != null) {
 			i = intent or telegramService.usedBy
+			interval = if (TelegramService.isOffIntervalDepended(intent)) {
+				Math.min(telegramService.serviceOffInterval, interval)
+			} else {
+				telegramService.serviceOffInterval
+			}
 			telegramService.stopSelf()
 		}
 
 		serviceIntent.putExtra(TelegramService.USAGE_INTENT, i)
+		serviceIntent.putExtra(TelegramService.USAGE_OFF_INTERVAL, interval)
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 			startForegroundService(serviceIntent)
 		} else {
@@ -111,7 +118,8 @@ class TelegramApplication : Application(), OsmandHelperListener {
 	}
 
 	fun startMyLocationService() {
-		startTelegramService(TelegramService.USED_BY_MY_LOCATION)
+		val interval = settings.sendMyLocationInterval
+		startTelegramService(TelegramService.USED_BY_MY_LOCATION, TelegramService.normalizeOffInterval(interval))
 	}
 
 	fun stopMyLocationService() {

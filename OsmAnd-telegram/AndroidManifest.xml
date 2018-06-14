@@ -41,6 +41,7 @@
             </intent-filter>
         </service>
 
+        <receiver android:name=".OnTelegramServiceAlarmReceiver" />
     </application>
 
 </manifest>

@@ -230,7 +230,7 @@ class TelegramHelper private constructor() {
 					offsetOrder = last.order
 					offsetChatId = last.chatId
 				}
-				client?.send(TdApi.GetChats(offsetOrder, offsetChatId, CHATS_LIMIT - chatList.size), { obj ->
+				client?.send(TdApi.GetChats(offsetOrder, offsetChatId, CHATS_LIMIT - chatList.size)) { obj ->
 					when (obj.constructor) {
 						TdApi.Error.CONSTRUCTOR -> {
 							val error = obj as TdApi.Error
@@ -250,7 +250,7 @@ class TelegramHelper private constructor() {
 						}
 						else -> listener?.onTelegramError(-1, "Receive wrong response from TDLib: $obj")
 					}
-				})
+				}
 				return
 			}
 		}
@@ -264,7 +264,7 @@ class TelegramHelper private constructor() {
 			for (chatTitle in chatTitles) {
 				val chatId = this.chatTitles[chatTitle]
 				if (chatId != null) {
-					client?.send(TdApi.SearchChatRecentLocationMessages(chatId, CHAT_LIVE_USERS_LIMIT), { obj ->
+					client?.send(TdApi.SearchChatRecentLocationMessages(chatId, CHAT_LIVE_USERS_LIMIT)) { obj ->
 						when (obj.constructor) {
 							TdApi.Error.CONSTRUCTOR -> {
 								val error = obj as TdApi.Error
@@ -284,7 +284,7 @@ class TelegramHelper private constructor() {
 							}
 							else -> listener?.onTelegramError(-1, "Receive wrong response from TDLib: $obj")
 						}
-					})
+					}
 				}
 			}
 		}
@@ -313,7 +313,7 @@ class TelegramHelper private constructor() {
 
 	private fun getActiveLiveLocationMessages(onComplete: (() -> Unit)?) {
 		requestingActiveLiveLocationMessages = true
-		client?.send(TdApi.GetActiveLiveLocationMessages(), { obj ->
+		client?.send(TdApi.GetActiveLiveLocationMessages()) { obj ->
 			when (obj.constructor) {
 				TdApi.Error.CONSTRUCTOR -> {
 					val error = obj as TdApi.Error
@@ -336,7 +336,7 @@ class TelegramHelper private constructor() {
 				else -> listener?.onSendLiveLicationError(-1, "Receive wrong response from TDLib: $obj")
 			}
 			requestingActiveLiveLocationMessages = false
-		})
+		}
 	}
 
 	private fun sendLiveLocationImpl(chatTitles: List<String>, livePeriod: Int = 61, latitude: Double, longitude: Double) {
@@ -575,7 +575,7 @@ class TelegramHelper private constructor() {
 								val remotePhoto = chat.photo?.small?.remote
 								if (remotePhoto != null && remotePhoto.id.isNotEmpty()) {
 									downloadChatFilesMap[remotePhoto.id] = chat
-									client!!.send(TdApi.GetRemoteFile(remotePhoto.id, null), { obj ->
+									client!!.send(TdApi.GetRemoteFile(remotePhoto.id, null)) { obj ->
 										when (obj.constructor) {
 											TdApi.Error.CONSTRUCTOR -> {
 												val error = obj as TdApi.Error
@@ -590,7 +590,7 @@ class TelegramHelper private constructor() {
 											}
 											else -> listener?.onTelegramError(-1, "Receive wrong response from TDLib: $obj")
 										}
-									})
+									}
 								}
 							}
 							val order = chat.order
@@ -630,6 +630,7 @@ class TelegramHelper private constructor() {
 							chat.lastMessage = updateChat.lastMessage
 							setChatOrder(chat, updateChat.order)
 						}
+						//listener?.onTelegramChatsChanged()
 					}
 				}
 				TdApi.UpdateChatOrder.CONSTRUCTOR -> {
@@ -650,6 +651,7 @@ class TelegramHelper private constructor() {
 							chat.isPinned = updateChat.isPinned
 							setChatOrder(chat, updateChat.order)
 						}
+						//listener?.onTelegramChatsChanged()
 					}
 				}
 				TdApi.UpdateChatReadInbox.CONSTRUCTOR -> {
@@ -751,6 +753,7 @@ class TelegramHelper private constructor() {
 							chat.draftMessage = updateChat.draftMessage
 							setChatOrder(chat, updateChat.order)
 						}
+						//listener?.onTelegramChatsChanged()
 					}
 				}
 				TdApi.UpdateNotificationSettings.CONSTRUCTOR -> {
