@@ -1297,7 +1297,7 @@
     <string name="mapillary_descr">תמונות מקוונות ברמת רחוב לכולם. היכרות עם מקומות חדשים, שיתוף פעולה וצילום העולם.</string>
     <string name="mapillary">Mapillary</string>
     <string name="plugin_mapillary_descr">תמונות ברמת הרחוב לכולם. להכיר מקומות, לשתף פעולה ולצלם את העולם.</string>
-    <string name="private_access_routing_req">היעד שלך ממוקם באיזור עם גישה פרטית. להסיג גבול לכבישים הפרטיים לצורך טיול זה?</string>
+    <string name="private_access_routing_req">היעד שלך ממוקם באיזור עם גישה פרטית. לאשר גישה לכבישים הפרטיים לצורך טיול זה?</string>
     <string name="restart_search">חיפוש מחדש</string>
     <string name="increase_search_radius">הגדלת רדיוס החיפוש</string>
     <string name="nothing_found">לא נמצא כלום</string>
@@ -1513,7 +1513,7 @@
     
     <string name="import_gpx_file_description">ניתן לייבא כמועדפים או כקובץ GPX.</string>
     <string name="import_as_gpx">ייבוא כקובץ GPX</string>
-    <string name="import_as_favorites">ייבוא כמועדף</string>
+    <string name="import_as_favorites">ייבוא כמועדפים</string>
     <string name="import_file">ייבוא קובץ</string>
 	<string name="wrong_input">קלט שגוי</string>
 	<string name="enter_new_name">נא להקליד שם חדש</string>
@@ -1547,7 +1547,7 @@
     <string name="show_guide_line_descr">הצגת קווי כיוון מהמיקום שלך למיקומי הסמנים הפעילים.</string>
     <string name="show_arrows_descr">הצגת חץ או שניים המציינים את כיוון הסמנים הפעילים.</string>
     <string name="distance_indication_descr">ניתן לבחור כיצד להציג את המרחק עד לסמנים הפעילים.</string>
-    <string name="active_markers_descr">נא לבחור כמה סמנים פעילים יופיעו.</string>
+    <string name="active_markers_descr">נא לבחור כמה מחווני כיוון יופיעו.</string>
     <string name="digits_quantity">כמות הספרות העשרוניות</string>
     <string name="shared_string_right">ימין</string>
     <string name="shared_string_left">שמאל</string>
@@ -1976,8 +1976,8 @@
     <string name="show_on_map_after_saving">הצגה על המפה לאחר השמירה</string>
     <string name="measurement_tool_action_bar">עיון במפה והוספת נקודות</string>
     <string name="measurement_tool">מדידת מרחק</string>
-    <string name="hillshade_menu_download_descr">עליך להוריד את ‚שכבת ההצללה’ של האזור הזה כדי לצפות בהצללה של אזור זה.</string>
-    <string name="hillshade_purchase_header">עליך להתקין את תוסף ‚קווי המתאר’ (Contour Lines) כדי להציג אותם על המפה</string>
+    <string name="hillshade_menu_download_descr">כדי לצפות בהצללה של אזור זה במפה, עליך להוריד את מפת שכבת ההצללה של האזור.</string>
+    <string name="hillshade_purchase_header">"כדי להציג הצללה על המפה, עליך לרכוש ולהתקין את תוסף ‚קווי המתאר’ (Contour Lines) "</string>
     <string name="hide_from_zoom_level">הסתרה החל מרמת תקריב</string>
     <string name="srtm_menu_download_descr">נא להוריד את מפת ‚קווי המתאר’ של האזור הזה.</string>
     <string name="shared_string_plugin">תוסף</string>
@@ -2086,7 +2086,7 @@
     <string name="number_of_recipients">מספר הנמענים</string>
     <string name="osm_editors_ranking">דירוגי עורכים ב־OSM</string>
     <string name="osm_live_subscribe_btn">עריכת מינוי</string>
-    <string name="osm_live_email_desc">למידע שלך על התרומות שלך.</string>
+    <string name="osm_live_email_desc">נדרש כדי לספק לך מידע על תרומות.</string>
     <string name="osm_live_user_public_name">שם ציבורי</string>
     <string name="osm_live_hide_user_name">לא להציג את השם שלי בדוחות</string>
     <string name="osm_live_support_region">אזור תמיכה</string>
@@ -2170,7 +2170,7 @@
     <string name="rendering_value_walkingRoutesScopeOSMC_name">צבע לפי שיוך לרשת</string>
     <string name="shared_string_logoff">יציאה</string>
     <string name="rendering_attr_hideHouseNumbers_name">מספרי בתים</string>
-    <string name="application_dir_change_warning3">להעתיק את קובצי הנתונים ליעד החדש?</string>
+    <string name="application_dir_change_warning3">להעתיק את קובצי הנתונים של OsmAnd ליעד החדש?</string>
     <string name="specified_directiory_not_writeable">לא ניתן ליצור מפות בתיקייה שצוינה</string>
     <string name="copying_osmand_file_failed">העתקת הקבצים נכשלה</string>
     <string name="storage_directory_external">אחסון חיצוני</string>
@@ -2284,7 +2284,7 @@
     <string name="get_started">יסודות</string>
     <string name="route_stops_before">%1$s תחנות לפני</string>
     <string name="coords_search">חיפוש נקודות ציון</string>
-    <string name="advanced_coords_search">חיפוש נקודת ציון מתקדם</string>
+    <string name="advanced_coords_search">חיפוש נקודות ציון מתקדם</string>
     <string name="back_to_search">חזרה לחיפוש</string>
     <string name="confirmation_to_delete_history_items">להסיר את הפריטים הנבחרים מה‚היסטוריה’?</string>
     <string name="show_something_on_map">הצגת %1$s במפה</string>
@@ -2782,7 +2782,7 @@
     <string name="delay_navigation_start">התחלת הנחייה לפי פניות אוטומטית</string>
     <string name="gpx_timespan">טווח זמן: %1$s</string>
     <string name="index_item_world_seamarks">נקודות ציון ימיות</string>
-    <string name="app_modes_choose_descr">נא לבחור את פרופילי השימוש שיופיעו ביישומון.</string>
+    <string name="app_modes_choose_descr">נא לבחור את הפרופילים שיופיעו ביישומון.</string>
     <string name="base_world_map">מפת בסיס עולמית</string>
     <string name="map_widget_fps_info">פרטי ניפוי שגיאות לתמונות לשנייה</string>
     <string name="osmand_plus_extended_description_part5">תכונות בטיחות
@@ -2869,7 +2869,7 @@
     <string name="app_mode_hiking">טיול רגלי</string>
     <string name="quick_action_duplicates">שם הפעולה המהירה כבר נמצא בשימוש, הוא הוחלף בשם %1$s כדי להמנע מכפילות.</string>
     <string name="monthly_map_updates">עדכוני מפה: <b>כל חודש</b></string>
-    <string name="daily_map_updates">עדכוני מפה: <b>כל יום, כל שעה</b></string>
+    <string name="daily_map_updates">עדכוני מפה: <b>כל שעה</b></string>
     <string name="in_app_purchase">רכישות בתוך היישומון</string>
     <string name="in_app_purchase_desc">תשלום חד־פעמי</string>
     <string name="in_app_purchase_desc_ex">לאחר הרכישה, הזמינות אליך תהיה לצמיתות.</string>
