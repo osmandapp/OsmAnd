@@ -323,7 +323,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="send_files_to_osm">Sende GPX-filer til OSM?</string>
     <string name="gpx_visibility_txt">Synlighed</string>
     <string name="gpx_description_txt">Beskrivelse</string>
-    <string name="validate_gpx_upload_name_pwd">Angiv OSM-brugernavn og -kodeord til at overføre GPX-filer.</string>
+    <string name="validate_gpx_upload_name_pwd">Angiv OSM brugernavn og kodeord til at overføre GPX-filer.</string>
     <string name="support_new_features">Støt nye funktioner</string>
     <string name="support_new_features_descr">Doner for at få nye funktioner i programmet.</string>
     <string name="show_ruler_level">Vis målestok</string>
@@ -870,12 +870,12 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="transport_to_go_before">efterfølgende afstand</string>
     <string name="transport_route_distance">Rutelængde</string>
     <string name="transport">Transport</string>
-    <string name="poi_remove_confirm_template">Slet {0} (angiv kommentar)?</string>
+    <string name="poi_remove_confirm_template">Slet {0} (skriv kommentar)?</string>
     
     <string name="osb_comment_dialog_error">Kunne ikke tilføje kommentar</string>
     <string name="osb_comment_dialog_author">Forfatternavn</string>
     <string name="add_favorite_dialog_default_favourite_name">Favorit</string>
-    <string name="add_favorite_dialog_top_text">Angiv favoritnavn</string>
+    <string name="add_favorite_dialog_top_text">Indtast favoritnavn</string>
     <string name="context_menu_item_create_poi">Opret interessepunkt</string>
     <string name="context_menu_item_update_map">Opdater kort</string>
 
@@ -924,9 +924,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="hint_search_online">Online-søgning: husnummer, gade, by</string>
     <string name="search_online_address">Online søgning</string>
     <string name="max_level_download_tile">Maks online zoom</string>
-    <string name="max_level_download_tile_descr">Angiv det maksimale zoomniveau der skal hentes for online kortbrik
-\n
-\nGennemse ikke online-kortbrikket for zoom-niveauer ud over dette.</string>
+    <string name="max_level_download_tile_descr">Gennemse ikke online-kortbrikket for zoom-niveauer ud over dette.</string>
 	
 	
 	
@@ -1038,7 +1036,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="app_mode_pedestrian">Fodgænger</string>
     <string name="position_on_map_center">Centrum</string>
     <string name="position_on_map_bottom">Bunden</string>
-    <string name="navigate_point_top_text">Angiv bredde(lat)- og længdegrad(lon) i det valgte format (D - grader, M - minutter, S - sekunder)</string>
+    <string name="navigate_point_top_text">Indtast bredde(lat)- og længdegrad(lon) i det valgte format (D - grader, M - minutter, S - sekunder)</string>
     <string name="navigate_point_latitude">Breddegrad</string>
     <string name="navigate_point_longitude">Længdegrad</string>
     <string name="navigate_point_format_D">GGG.GG</string>
@@ -2045,7 +2043,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="map_downloaded_descr">%1$s kortet er klar til brug.</string>
     <string name="go_to_map">Vis kortet</string>
     <string name="shared_string_qr_code">QR kode</string>
-    <string name="enter_country_name">Angiv landenavn</string>
+    <string name="enter_country_name">Indtast landenavn</string>
     <string name="world_map_download_descr">Verdensgrundkortet (dækker hele verden ved lave zoomniveauer) mangler eller er forældet. Hent det for en komplet oversigt.</string>
     <string name="new_version">Ny version</string>
     <string name="begin_with_osmand_menu_group">Kom godt i gang med OsmAnd</string>
@@ -2263,7 +2261,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="osm_live_month_cost_desc">Månedlig betaling</string>
     <string name="osm_live_active">Aktiv</string>
     <string name="osm_live_not_active">Inaktiv</string>
-    <string name="osm_live_enter_email">Angiv en gyldig e-mailadresse</string>
+    <string name="osm_live_enter_email">Indtast en gyldig e-mailadresse</string>
     <string name="osm_live_enter_user_name">Indtast offentligt navn</string>
     <string name="osm_live_thanks">Tak for støtte til OsmAnd!
 \nFor at aktivere alle nye funktioner, er det nødvendigt at genstarte OsmAnd.</string>
@@ -2309,9 +2307,9 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="map_mode">Korttilstand</string>
     <string name="access_default_color">Standardfarve</string>
     <string name="access_category_choice">Vælg kategori</string>
-    <string name="access_hint_enter_name">Angiv navn</string>
-    <string name="access_hint_enter_category">Angiv kategori</string>
-    <string name="access_hint_enter_description">Angiv beskrivelse.</string>
+    <string name="access_hint_enter_name">Indtast navn</string>
+    <string name="access_hint_enter_category">Indtast kategori</string>
+    <string name="access_hint_enter_description">Indtast beskrivelse.</string>
     <string name="access_map_linked_to_location">Kort forbundet til placering</string>
     <string name="access_collapsed_list">Minineret liste</string>
     <string name="access_expanded_list">Udvidet liste</string>
@@ -2430,7 +2428,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="save_filter">Gem filter</string>
     <string name="delete_filter">Slet filter</string>
     <string name="new_filter">Nyt filter</string>
-    <string name="new_filter_desc">Angiv et navn for det nye filter, det vil blive tilføjet til \'Kategorier\'.</string>
+    <string name="new_filter_desc">Indtast et navn for det nye filter, det vil blive tilføjet til \'Kategorier\'.</string>
     <string name="selected_categories">Valgte kategorier</string>
     <string name="create_custom_poi">Opret brugerdefineret filter</string>
     <string name="custom_search">Brugerdefineret søgning</string>
@@ -2581,8 +2579,8 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
 <string name="navigate_point_olc">Open Location Code (OLC)</string>
     <string name="navigate_point_olc_info_invalid">Ugyldig OLC
 </string>
-    <string name="navigate_point_olc_info_short">Kort OLC
-Angiv en fuldstændige kode</string>
+    <string name="navigate_point_olc_info_short">Kort OLC 
+\nIndtast en fuldstændige kode</string>
     <string name="navigate_point_olc_info_area">Gyldig fuldstændig OLC
 Repræsenterer område: %1$s x %2$s</string>
     <string name="quick_action_map_overlay_switch">Kortoverlejring ændret til \"%s\".</string>
@@ -3268,4 +3266,5 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="shared_string_gpx_files">GPX-filer</string>
     <string name="get_osmand_live">Abonner på OsmAnd Live og brug alle funktioner: daglige opdateringer af kort, alle gratis og betalte udvidelser, Wikipedia, Wikivoyage og meget mere.</string>
     <string name="quick_action_edit_actions">Rediger handlinger</string>
+    <string name="error_notification_desc">Send et skærmbillede af meddelelsen til support@osmand.net</string>
     </resources>

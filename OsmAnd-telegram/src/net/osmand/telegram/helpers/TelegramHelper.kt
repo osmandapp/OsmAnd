@@ -41,6 +41,8 @@ class TelegramHelper private constructor() {
 	private val chatList = TreeSet<OrderedChat>()
 	private val chatLiveMessages = ConcurrentHashMap<Long, Long>()
 
+	private val downloadChatFilesMap = ConcurrentHashMap<String, TdApi.Chat>()
+
 	private val usersLiveMessages = ConcurrentHashMap<Long, TdApi.Message>()
 
 	private val usersFullInfo = ConcurrentHashMap<Int, TdApi.UserFullInfo>()
@@ -70,6 +72,17 @@ class TelegramHelper private constructor() {
 		synchronized(chatList) {
 			return TreeSet<OrderedChat>(chatList)
 		}
+	}
+
+	fun getChatIndex(chatId: Long): Int {
+		synchronized(chatList) {
+			for ((i, chat) in chatList.withIndex()) {
+				if (chat.chatId == chatId) {
+					return i
+				}
+			}
+		}
+		return -1
 	}
 
 	fun getChatTitles(): List<String> {
@@ -126,6 +139,7 @@ class TelegramHelper private constructor() {
 
 		fun onTelegramChatsRead()
 		fun onTelegramChatsChanged()
+		fun onTelegramChatChanged(chat: TdApi.Chat)
 		fun onTelegramError(code: Int, message: String)
 		fun onSendLiveLicationError(code: Int, message: String)
 	}
@@ -434,8 +448,8 @@ class TelegramHelper private constructor() {
 				parameters.databaseDirectory = File(appDir, "tdlib").absolutePath
 				parameters.useMessageDatabase = true
 				parameters.useSecretChats = true
-				parameters.apiId = 94575
-				parameters.apiHash = "a3406de8d171bb422bb6ddf3bbd800e2"
+				parameters.apiId = 293148
+				parameters.apiHash = "d1942abd0f1364efe5020e2bfed2ed15"
 				parameters.systemLanguageCode = "en"
 				parameters.deviceModel = "Android"
 				parameters.systemVersion = "OsmAnd Telegram"
@@ -548,10 +562,37 @@ class TelegramHelper private constructor() {
 				TdApi.UpdateNewChat.CONSTRUCTOR -> {
 					val updateNewChat = obj as TdApi.UpdateNewChat
 					val chat = updateNewChat.chat
-					synchronized(chat!!) {
+					synchronized(chat) {
 						if (chat.type !is TdApi.ChatTypeSupergroup || !(chat.type as TdApi.ChatTypeSupergroup).isChannel) {
 							chats[chat.id] = chat
-
+							val localPhoto = chat.photo?.small?.local
+							val hasLocalPhoto = if (localPhoto != null) {
+								localPhoto.canBeDownloaded && localPhoto.isDownloadingCompleted && localPhoto.path.isNotEmpty()
+							} else {
+								false
+							}
+							if (!hasLocalPhoto) {
+								val remotePhoto = chat.photo?.small?.remote
+								if (remotePhoto != null && remotePhoto.id.isNotEmpty()) {
+									downloadChatFilesMap[remotePhoto.id] = chat
+									client!!.send(TdApi.GetRemoteFile(remotePhoto.id, null), { obj ->
+										when (obj.constructor) {
+											TdApi.Error.CONSTRUCTOR -> {
+												val error = obj as TdApi.Error
+												val code = error.code
+												if (code != IGNORED_ERROR_CODE) {
+													listener?.onTelegramError(code, error.message)
+												}
+											}
+											TdApi.File.CONSTRUCTOR -> {
+												val file = obj as TdApi.File
+												client!!.send(TdApi.DownloadFile(file.id, 10), defaultHandler)
+											}
+											else -> listener?.onTelegramError(-1, "Receive wrong response from TDLib: $obj")
+										}
+									})
+								}
+							}
 							val order = chat.order
 							chat.order = 0
 							setChatOrder(chat, order)
@@ -563,75 +604,94 @@ class TelegramHelper private constructor() {
 				TdApi.UpdateChatTitle.CONSTRUCTOR -> {
 					val updateChat = obj as TdApi.UpdateChatTitle
 					val chat = chats[updateChat.chatId]
-					synchronized(chat!!) {
-						chat.title = updateChat.title
+					if (chat != null) {
+						synchronized(chat) {
+							chat.title = updateChat.title
+						}
+						updateChatTitles()
+						listener?.onTelegramChatChanged(chat)
 					}
-					updateChatTitles()
-					listener?.onTelegramChatsChanged()
 				}
 				TdApi.UpdateChatPhoto.CONSTRUCTOR -> {
 					val updateChat = obj as TdApi.UpdateChatPhoto
 					val chat = chats[updateChat.chatId]
-					synchronized(chat!!) {
-						chat.photo = updateChat.photo
+					if (chat != null) {
+						synchronized(chat) {
+							chat.photo = updateChat.photo
+						}
+						listener?.onTelegramChatChanged(chat)
 					}
-					listener?.onTelegramChatsChanged()
 				}
 				TdApi.UpdateChatLastMessage.CONSTRUCTOR -> {
 					val updateChat = obj as TdApi.UpdateChatLastMessage
 					val chat = chats[updateChat.chatId]
-					synchronized(chat!!) {
-						chat.lastMessage = updateChat.lastMessage
-						setChatOrder(chat, updateChat.order)
+					if (chat != null) {
+						synchronized(chat) {
+							chat.lastMessage = updateChat.lastMessage
+							setChatOrder(chat, updateChat.order)
+						}
 					}
 				}
 				TdApi.UpdateChatOrder.CONSTRUCTOR -> {
 					val updateChat = obj as TdApi.UpdateChatOrder
 					val chat = chats[updateChat.chatId]
-					synchronized(chat!!) {
-						setChatOrder(chat, updateChat.order)
+					if (chat != null) {
+						synchronized(chat) {
+							setChatOrder(chat, updateChat.order)
+						}
+						listener?.onTelegramChatsChanged()
 					}
-					listener?.onTelegramChatsChanged()
 				}
 				TdApi.UpdateChatIsPinned.CONSTRUCTOR -> {
 					val updateChat = obj as TdApi.UpdateChatIsPinned
 					val chat = chats[updateChat.chatId]
-					synchronized(chat!!) {
-						chat.isPinned = updateChat.isPinned
-						setChatOrder(chat, updateChat.order)
+					if (chat != null) {
+						synchronized(chat) {
+							chat.isPinned = updateChat.isPinned
+							setChatOrder(chat, updateChat.order)
+						}
 					}
 				}
 				TdApi.UpdateChatReadInbox.CONSTRUCTOR -> {
 					val updateChat = obj as TdApi.UpdateChatReadInbox
 					val chat = chats[updateChat.chatId]
-					synchronized(chat!!) {
-						chat.lastReadInboxMessageId = updateChat.lastReadInboxMessageId
-						chat.unreadCount = updateChat.unreadCount
+					if (chat != null) {
+						synchronized(chat) {
+							chat.lastReadInboxMessageId = updateChat.lastReadInboxMessageId
+							chat.unreadCount = updateChat.unreadCount
+						}
 					}
 				}
 				TdApi.UpdateChatReadOutbox.CONSTRUCTOR -> {
 					val updateChat = obj as TdApi.UpdateChatReadOutbox
 					val chat = chats[updateChat.chatId]
-					synchronized(chat!!) {
-						chat.lastReadOutboxMessageId = updateChat.lastReadOutboxMessageId
+					if (chat != null) {
+						synchronized(chat) {
+							chat.lastReadOutboxMessageId = updateChat.lastReadOutboxMessageId
+						}
 					}
 				}
 				TdApi.UpdateChatUnreadMentionCount.CONSTRUCTOR -> {
 					val updateChat = obj as TdApi.UpdateChatUnreadMentionCount
 					val chat = chats[updateChat.chatId]
-					synchronized(chat!!) {
-						chat.unreadMentionCount = updateChat.unreadMentionCount
+					if (chat != null) {
+						synchronized(chat) {
+							chat.unreadMentionCount = updateChat.unreadMentionCount
+						}
 					}
 				}
 				TdApi.UpdateMessageContent.CONSTRUCTOR -> {
 					val updateMessageContent = obj as TdApi.UpdateMessageContent
 					val message = usersLiveMessages[updateMessageContent.messageId]
 					if (message != null && !message.isOutgoing) {
-						message.content = updateMessageContent.newContent
+						synchronized(message) {
+							message.content = updateMessageContent.newContent
+						}
 						val chatTitle = chats[message.chatId]?.title
 						if (chatTitle != null) {
 							incomingMessagesListener?.onReceiveChatLocationMessages(chatTitle, message)
 						}
+
 					}
 				}
 				TdApi.UpdateNewMessage.CONSTRUCTOR -> {
@@ -648,8 +708,10 @@ class TelegramHelper private constructor() {
 				TdApi.UpdateMessageMentionRead.CONSTRUCTOR -> {
 					val updateChat = obj as TdApi.UpdateMessageMentionRead
 					val chat = chats[updateChat.chatId]
-					synchronized(chat!!) {
-						chat.unreadMentionCount = updateChat.unreadMentionCount
+					if (chat != null) {
+						synchronized(chat) {
+							chat.unreadMentionCount = updateChat.unreadMentionCount
+						}
 					}
 				}
 				TdApi.UpdateMessageSendFailed.CONSTRUCTOR -> {
@@ -675,24 +737,44 @@ class TelegramHelper private constructor() {
 				TdApi.UpdateChatReplyMarkup.CONSTRUCTOR -> {
 					val updateChat = obj as TdApi.UpdateChatReplyMarkup
 					val chat = chats[updateChat.chatId]
-					synchronized(chat!!) {
-						chat.replyMarkupMessageId = updateChat.replyMarkupMessageId
+					if (chat != null) {
+						synchronized(chat) {
+							chat.replyMarkupMessageId = updateChat.replyMarkupMessageId
+						}
 					}
 				}
 				TdApi.UpdateChatDraftMessage.CONSTRUCTOR -> {
 					val updateChat = obj as TdApi.UpdateChatDraftMessage
 					val chat = chats[updateChat.chatId]
-					synchronized(chat!!) {
-						chat.draftMessage = updateChat.draftMessage
-						setChatOrder(chat, updateChat.order)
+					if (chat != null) {
+						synchronized(chat) {
+							chat.draftMessage = updateChat.draftMessage
+							setChatOrder(chat, updateChat.order)
+						}
 					}
 				}
 				TdApi.UpdateNotificationSettings.CONSTRUCTOR -> {
 					val update = obj as TdApi.UpdateNotificationSettings
 					if (update.scope is TdApi.NotificationSettingsScopeChat) {
 						val chat = chats[(update.scope as TdApi.NotificationSettingsScopeChat).chatId]
-						synchronized(chat!!) {
-							chat.notificationSettings = update.notificationSettings
+						if (chat != null) {
+							synchronized(chat) {
+								chat.notificationSettings = update.notificationSettings
+							}
+						}
+					}
+				}
+
+				TdApi.UpdateFile.CONSTRUCTOR -> {
+					val updateFile = obj as TdApi.UpdateFile
+					if (updateFile.file.local.isDownloadingCompleted) {
+						val remoteId = updateFile.file.remote.id
+						val chat = downloadChatFilesMap.remove(remoteId)
+						if (chat != null) {
+							synchronized(chat) {
+								chat.photo?.small = updateFile.file
+								listener?.onTelegramChatChanged(chat)
+							}
 						}
 					}
 				}

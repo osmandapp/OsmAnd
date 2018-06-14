@@ -14,11 +14,13 @@ import net.osmand.telegram.helpers.ShowLocationHelper
 import net.osmand.telegram.helpers.TelegramHelper
 import net.osmand.telegram.notifications.NotificationHelper
 import net.osmand.telegram.utils.AndroidUtils
+import net.osmand.telegram.utils.UiUtils
 
 class TelegramApplication : Application(), OsmandHelperListener {
 
 	val telegramHelper = TelegramHelper.instance
 	lateinit var settings: TelegramSettings private set
+	lateinit var uiUtils: UiUtils private set
 	lateinit var shareLocationHelper: ShareLocationHelper private set
 	lateinit var showLocationHelper: ShowLocationHelper private set
 	lateinit var notificationHelper: NotificationHelper private set
@@ -36,6 +38,7 @@ class TelegramApplication : Application(), OsmandHelperListener {
 		telegramHelper.appDir = filesDir.absolutePath
 
 		settings = TelegramSettings(this)
+		uiUtils = UiUtils(this)
 		osmandHelper = OsmandAidlHelper(this)
 		shareLocationHelper = ShareLocationHelper(this)
 		showLocationHelper = ShowLocationHelper(this)

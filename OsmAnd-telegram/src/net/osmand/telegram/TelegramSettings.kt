@@ -16,7 +16,8 @@ class TelegramSettings(private val app: TelegramApplication) {
 		private const val METRICS_CONSTANTS_KEY = "metrics_constants"
 		private const val SPEED_CONSTANTS_KEY = "speed_constants"
 
-		private const val SHOW_NOTIFICATION_ALWAYS_KEY = "show_notification_always"
+		private const val SEND_MY_LOCATION_INTERVAL_KEY = "send_my_location_interval"
+		private const val SEND_MY_LOCATION_INTERVAL_DEFAULT = 5000L
 	}
 
 	private var shareLocationChats: Set<String> = emptySet()
@@ -25,7 +26,7 @@ class TelegramSettings(private val app: TelegramApplication) {
 	var metricsConstants = MetricsConstants.KILOMETERS_AND_METERS
 	var speedConstants = SpeedConstants.KILOMETERS_PER_HOUR
 
-	var showNotificationAlways = true
+	var sendMyLocationInterval = SEND_MY_LOCATION_INTERVAL_DEFAULT
 
 	init {
 		read()
@@ -103,7 +104,7 @@ class TelegramSettings(private val app: TelegramApplication) {
 		edit.putString(METRICS_CONSTANTS_KEY, metricsConstants.name)
 		edit.putString(SPEED_CONSTANTS_KEY, speedConstants.name)
 
-		edit.putBoolean(SHOW_NOTIFICATION_ALWAYS_KEY, showNotificationAlways)
+		edit.putLong(SEND_MY_LOCATION_INTERVAL_KEY, sendMyLocationInterval)
 
 		edit.apply()
 	}
@@ -128,6 +129,6 @@ class TelegramSettings(private val app: TelegramApplication) {
 		metricsConstants = MetricsConstants.valueOf(prefs.getString(METRICS_CONSTANTS_KEY, MetricsConstants.KILOMETERS_AND_METERS.name))
 		speedConstants = SpeedConstants.valueOf(prefs.getString(SPEED_CONSTANTS_KEY, SpeedConstants.KILOMETERS_PER_HOUR.name))
 
-		showNotificationAlways = prefs.getBoolean(SHOW_NOTIFICATION_ALWAYS_KEY, true)
+		sendMyLocationInterval = prefs.getLong(SEND_MY_LOCATION_INTERVAL_KEY, SEND_MY_LOCATION_INTERVAL_DEFAULT)
 	}
 }
