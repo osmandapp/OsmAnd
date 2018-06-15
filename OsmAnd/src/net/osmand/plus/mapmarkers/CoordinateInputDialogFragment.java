@@ -296,6 +296,25 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 				enterEditingMode(adapter.getItem(pos));
 			}
 		});
+		adapter.setOnActionsClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				RecyclerView.ViewHolder viewHolder = recyclerView.findContainingViewHolder(v);
+				if (viewHolder != null) {
+					int pos = viewHolder.getAdapterPosition();
+					if (pos == RecyclerView.NO_POSITION) {
+						return;
+					}
+					Bundle args = new Bundle();
+					args.putInt(CoordinateInputAdapter.ADAPTER_POSITION, pos);
+					CoordinateInputActionsBottomSheet fragment = new CoordinateInputActionsBottomSheet();
+					fragment.setUsedOnMap(false);
+					fragment.setArguments(args);
+					fragment.setListener(createCoordinateInputActionsListener());
+					fragment.show(getChildFragmentManager(), CoordinateInputActionsBottomSheet.TAG);
+				}
+			}
+		});
 
 		setBackgroundColor(R.id.bottom_controls_container, lightTheme
 				? R.color.keyboard_item_control_light_bg : R.color.keyboard_item_control_dark_bg);
@@ -881,6 +900,22 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 				dismissEditingMode();
 				registerInputs();
 			}
+		};
+	}
+
+	private CoordinateInputActionsBottomSheet.CoordinateInputActionsListener createCoordinateInputActionsListener() {
+		return new CoordinateInputActionsBottomSheet.CoordinateInputActionsListener() {
+
+			@Override
+			public void removeItem(int position) {
+				adapter.removeItem(position);
+			}
+
+			@Override
+			public void editItem(int position) {
+				enterEditingMode(adapter.getItem(position));
+			}
+
 		};
 	}
 
