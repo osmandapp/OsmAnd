@@ -365,11 +365,11 @@ dependencies {
 	implementation 'com.android.support:customtabs:27.1.1'
 	implementation fileTree(include:  ['gnu-trove-osmand.jar', 'icu4j-49_1_patched.jar'], dir: 'libs')
 
-	implementation 'commons-logging:commons-logging-api:1.1'
+	implementation group: 'commons-logging', name: 'commons-logging', version: '1.2'
 	implementation 'commons-codec:commons-codec:1.11'
 	implementation 'it.unibo.alice.tuprolog:tuprolog:3.2.1'
 	implementation 'org.beanshell:bsh-core:2.0b4'
-	implementation 'fr.univ-valenciennes:bzip2:1.0'
+	implementation 'org.apache.commons:commons-compress:1.17'
 	implementation 'com.moparisthebest:junidecode:0.1.1'
 	implementation 'org.immutables:gson:2.5.0'
 	implementation 'com.vividsolutions:jts-core:1.14.0'
