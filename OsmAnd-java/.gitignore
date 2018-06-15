@@ -1,11 +1,10 @@
 bin
-c-src
-OsmAnd-core.jar
-protobuf-src/com
-OsmAnd-core-android.jar
+build
 src/net/osmand/core/jni/*
 result.*
-
+.settings
+.project
+.classpath
 # Android Studio
 /.idea
 *.iml
