@@ -49,8 +49,9 @@ public class SaveAsTrackBottomSheetDialogFragment extends BottomSheetDialogFragm
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		boolean isCoordInput = false;
 		int number = 0;
-		if (getArguments() != null) {
-			number = getArguments().getInt(ADDED_MARKERS_NUMBER_KEY);
+		Bundle args = getArguments();
+		if (args != null) {
+			number = args.getInt(ADDED_MARKERS_NUMBER_KEY);
 			if (number != 0)
 				isCoordInput = true;
 		}
