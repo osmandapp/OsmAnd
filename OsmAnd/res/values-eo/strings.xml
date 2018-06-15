@@ -7,7 +7,7 @@
     <string name="osm_editors_ranking">Ranglisto de OSM-redaktantoj</string>
     <string name="osm_live_subscription">Abono al OsmAnd-Live</string>
     <string name="osm_live_subscribe_btn">Ekaboni</string>
-    <string name="osm_live_email_desc">Por informoj pri viaj kontribuoj.</string>
+    <string name="osm_live_email_desc">Bezonata por provizi al vi informojn pri kontribuoj.</string>
     <string name="osm_live_user_public_name">Publika nomo</string>
     <string name="osm_live_hide_user_name">Ne montri mian nomon en raportoj</string>
     <string name="osm_live_support_region">Subteni regionon</string>
@@ -344,7 +344,7 @@
     
     <string name="shared_string_logoff">Elsaluti</string>
     <string name="rendering_attr_hideHouseNumbers_name">Numeroj de domoj</string>
-    <string name="application_dir_change_warning3">Ĉu kopii dosierojn de datumoj al la nova loko?</string>
+    <string name="application_dir_change_warning3">Ĉu kopii dosierojn de OsmAnd-datumoj al la nova loko?</string>
     <string name="specified_directiory_not_writeable">Ne povas krei mapojn en la difina dosierujo</string>
     <string name="copying_osmand_file_failed">Kopiado de dosieroj malsukcesis</string>
     <string name="storage_directory_external">Ekstera konservejo</string>
@@ -741,7 +741,7 @@ Lon: %2$s</string>
 \nTiu ĉi vido oni povas nuligi per malaktivigi ĝin tie ĉi, aŭ per ŝanĝi la ‘map-aspekton’ en la menuo ‘agordi mapon’.</string>
     <string name="show_zoom_buttons_navigation_descr">Montri butonojn por pligrandigo kaj malgrandigo dum navigado.</string>
     <string name="show_zoom_buttons_navigation">Montri butonojn de skalado</string>
-    <string name="save_as_favorites_points">Konservi kiel grupon da ŝatatoj</string>
+    <string name="save_as_favorites_points">Konservi kiel grupon da ŝatataj</string>
     <string name="select_destination_and_intermediate_points">Elekti celojn</string>
     <string name="voice_pref_title">Voĉo</string>
     <string name="lang_al">Albana</string>
@@ -953,7 +953,7 @@ Lon: %2$s</string>
     <string name="disable_complex_routing">Malaktivigi komplikan difinadon de vojo</string>
     <string name="amenity_type_seamark">Mara navigadpunkto</string>
     <string name="app_modes_choose">Profiloj de aplikaĵo</string>
-    <string name="app_modes_choose_descr">Elekti profilojn de uzado por esti videblaj en la aplikaĵo.</string>
+    <string name="app_modes_choose_descr">Elekti profilojn por vidigi en la aplikaĵo.</string>
     <string name="map_widget_map_rendering">Map-bildigado</string>
     <string name="app_mode_hiking">Piedirado</string>
     <string name="app_mode_motorcycle">Motorciklo</string>
@@ -1956,7 +1956,7 @@ Proporcia memoro %4$s MB (limito de Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="favourites_context_menu_add">Aldoni al ŝatataj</string>
     <string name="favourites_context_menu_edit">Redakti</string>
     <string name="favourites_context_menu_delete">Forigi</string>
-    <string name="favourites_remove_dialog_msg">Ĉu forigi la ŝatatan punkton \'%s\'?</string>
+    <string name="favourites_remove_dialog_msg">Ĉu forigi la ŝatatan punkton ‘%s’?</string>
     <string name="favourites_remove_dialog_success">Forigis ŝatatan punkton “{0}”.</string>
     <string name="poi_edit_title">Redakti interesejon</string>
     <string name="poi_create_title">Krei interesejon</string>
@@ -2133,41 +2133,25 @@ Proporcia memoro %4$s MB (limito de Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="advanced_coords_search">Detala koordinat-serĉo</string>
     <string name="route_stops_before">Post %1$s haltejoj</string>
     
-    <string name="osmand_plus_long_description_1000_chars">"OsmAnd (OSM Aŭtomata Navigado Direktanta al la celo) 
+    <string name="osmand_plus_long_description_1000_chars">OsmAnd (OSM Aŭtomata Navigado Direktanta al la celo) 
 \n
-\n 
-\nOsmAnd estas malfermkoda navigada aplikaĵo subtenanta diversajn mondajn mapojn de OpenStreetMap (OSM). Ĉiuj mapoj (vektoraj kaj kahelaj) povas esti konservitaj en la poŝtelefona memorejo por eksterreta uzado. OsmAnd ankaŭ ebligas uzi eksterretan kaj enretan navigadon kun turnon-post-turno voĉaj anoncoj. 
+\n OsmAnd estas malfermkoda navigada aplikaĵo subtenanta diversajn mondajn mapojn de OpenStreetMap (OSM). Ĉiuj mapoj (vektoraj kaj kahelaj) povas esti konservitaj en la poŝtelefona memorejo por eksterreta uzado. OsmAnd ankaŭ ebligas uzi eksterretan kaj enretan navigadon kun turnon-post-turno voĉaj anoncoj. 
 \n
-\n 
-\nOsmAnd+ estas pagenda versio de programo, per aĉeto de aplikaĵo, vi subtenas la projekton, donacas al novajn eblojn, kaj ricevos la plej novajn ĝisdatigojn. 
+\n OsmAnd+ estas pagenda versio de programo, per aĉeto de aplikaĵo, vi subtenas la projekton, donacas al novajn eblojn, kaj ricevos la plej novajn ĝisdatigojn. 
 \n
-\n 
-\nĈefaj ebloj: 
-\n
-\n 
-\n- Funkcias tute eksterrete (konservas elŝutitajn vektorajn aŭ kahelaj mapojn en la aparata konservejo) 
-\n
-\n- Kompaktaj vektoraj eksterretaj mapoj de la tuta mondo 
-\n
-\n- Senlime elŝuti landaj aŭ regionaj mapoj senpere en la aplikaĵo 
-\n
+\n Ĉefaj ebloj: 
+\n- funkcias tute eksterrete (konservas elŝutitajn vektorajn aŭ kahelaj mapojn en la aparata konservejo) 
+\n- kompaktaj vektoraj eksterretaj mapoj de la tuta mondo 
+\n- senlime elŝuti landaj aŭ regionaj mapoj senpere en la aplikaĵo 
 \n- Eksterreta Vikipedio (elŝuteblaj vikipediaj interesejoj), perfekte por vizitado 
-\n
-\n- Diversspecaj tavoloj de mapo: GPX aŭ navigadaj kursoj, interesejoj, ŝatataj ejoj, nivelkurboj, haltejoj de publik-transporto, ekstraj mapoj kun ŝanĝebla diafaneco 
-\n
-\n- Serĉi eksterrete adresojn kaj interesajn ejojn (interesejojn) 
-\n
-\n- Difini kursojn por mezaj distancoj eksterrete 
-\n
-\n- Aŭta, bicikla, kaj piediranta reĝimoj kun: 
-\n
-\n  - agordeblaj aŭtomata/taga/nokta aspektoj 
-\n
-\n  - agordebla rapid-dependa map-skalado 
-\n
-\n  - agordebla map-turniĝo laŭ direkto de movado aŭ kompaso 
-\n
-\n  - sciigoj pri koridoroj, rapidlimoj, antaŭregistritaj aŭ sintezitaj parolaj helpoj"</string>
+\n- diversspecaj tavoloj de mapo: GPX aŭ navigadaj kursoj, interesejoj, ŝatataj ejoj, nivelkurboj, haltejoj de publik-transporto, ekstraj mapoj kun ŝanĝebla diafaneco 
+\n- serĉi eksterrete adresojn kaj interesajn ejojn (interesejojn) 
+\n- difini kursojn por mezaj distancoj eksterrete 
+\n- aŭta, bicikla, kaj piediranta reĝimoj kun: 
+\n - agordeblaj aŭtomata/taga/nokta aspektoj 
+\n - agordebla rapid-dependa map-skalado 
+\n - agordebla map-turniĝo laŭ direkto de movado aŭ kompaso 
+\n - sciigoj pri koridoroj, rapidlimoj, antaŭregistritaj aŭ sintezitaj parolaj helpoj</string>
 	
     
     <string name="rendering_attr_hideOverground_name">Superteraj objektoj</string>
@@ -2714,7 +2698,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="empty_state_my_tracks">Aldoni GPX-dosierojn</string>
     <string name="empty_state_my_tracks_desc">Registru spurojn aŭ enportu GPX-dosierojn.</string>
     <string name="empty_state_favourites">Aldoni ŝatatajn</string>
-    <string name="empty_state_favourites_desc">Enportu ŝatatajn punktojn aŭ aldonu per map-markoj al la mapo.</string>
+    <string name="empty_state_favourites_desc">Enportu ŝatatajn punktojn aŭ aldonu ilin per map-markoj al la mapo.</string>
     <string name="import_track">Enporti GPX-dosieron</string>
     <string name="import_track_desc">Dosiero %1$s ne enhavas navigadpunktojn, ĉe enporti ĝin kiel spuron?</string>
     <string name="move_point">Movi punkton</string>
