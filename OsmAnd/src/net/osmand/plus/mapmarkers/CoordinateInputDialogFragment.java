@@ -369,6 +369,9 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 							case R.id.keyboard_item_next_field:
 								switchEditText(focusedEditText.getId(), true);
 								break;
+								case R.id.keyboard_item_hide:
+									changeOsmandKeyboardVisibility(false);
+								break;
 							default:
 								focusedEditText.setText(focusedEditText.getText().toString() + getItemObjectById(id));
 								focusedEditText.setSelection(focusedEditText.getText().length());
@@ -391,7 +394,8 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 				R.id.keyboard_item_9,
 				R.id.keyboard_item_clear,
 				R.id.keyboard_item_next_field,
-				R.id.keyboard_item_backspace);
+				R.id.keyboard_item_backspace,
+				R.id.keyboard_item_hide);
 
 		if (!isOsmandKeyboardOn() && isOsmandKeyboardCurrentlyVisible()) {
 			changeOsmandKeyboardVisibility(false);
@@ -458,7 +462,9 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		for (@IdRes int id : itemsIds) {
 			View itemView = keyboardView.findViewById(id);
 			Object item = getItemObjectById(id);
-			final boolean controlItem = id == R.id.keyboard_item_next_field || id == R.id.keyboard_item_backspace;
+			final boolean controlItem = id == R.id.keyboard_item_next_field 
+					|| id == R.id.keyboard_item_backspace
+					|| id == R.id.keyboard_item_hide;
 
 			itemView.setBackgroundResource(controlItem ? controlItemBg : itemBg);
 			itemView.setOnClickListener(listener);
@@ -531,6 +537,8 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 				return R.drawable.ic_keyboard_next_field;
 			case R.id.keyboard_item_backspace:
 				return R.drawable.ic_keyboard_backspace;
+			case R.id.keyboard_item_hide:
+				return R.drawable.ic_action_keyboard_hide;
 		}
 		return -1;
 	}
