@@ -2802,4 +2802,35 @@
 	<string name="poi_free_flying_paragliding_no">Αλεξίπτωτο πλαγιάς: όχι</string>
 	<string name="poi_free_flying_hanggliding_yes">Αιωροπτερισμός</string>
 	<string name="poi_free_flying_hanggliding_no">Αιωροπτερισμός: όχι</string>
+	<string name="poi_free_flying_site_orientation_n">Προσανατολισμός τόπου ελεύθερης πτήσης: Β</string>
+	<string name="poi_free_flying_site_orientation_ne">Προσανατολισμός τόπου ελεύθερης πτήσης: ΒΑ</string>
+	<string name="poi_free_flying_site_orientation_e">Προσανατολισμός τόπου ελεύθερης πτήσης: Α</string>
+	<string name="poi_free_flying_site_orientation_se">Προσανατολισμός τόπου ελεύθερης πτήσης: ΝΑ</string>
+	<string name="poi_free_flying_site_orientation_s">Προσανατολισμός τόπου ελεύθερης πτήσης: Ν</string>
+	<string name="poi_free_flying_site_orientation_sw">Προσανατολισμός τόπου ελεύθερης πτήσης: ΝΔ</string>
+	<string name="poi_free_flying_site_orientation_w">Προσανατολισμός τόπου ελεύθερης πτήσης: Δ</string>
+	<string name="poi_free_flying_site_orientation_nw">Προσανατολισμός τόπου ελεύθερης πτήσης: ΒΔ</string>
+	<string name="poi_free_flying_no_flight_time">Χωρίς χρόνο πτήσης (ελεύθερη πτήση)</string>
+	<string name="poi_free_flying_guest_guidelines_yes">Οδηγίες επισκεπτών: ναι</string>
+	<string name="poi_free_flying_guest_guidelines_no">Οδηγίες επισκεπτών: όχι</string>
+
+	<string name="poi_tanning_salon">Σολάριουμ</string>
+
+	<string name="poi_sanitary_dump_station">Σταθμός υγιεινής απόρριψης</string>
+
+	<string name="poi_medical_system_western_yes">Δυτικό</string>
+	<string name="poi_medical_system_chinese_yes">Παραδοσιακό κινέζικο</string>
+	<string name="poi_medical_system_ayurveeda_yes">Αγιουρβεντικό</string>
+	<string name="poi_medical_system_kampo_yes">Κάμπο</string>
+	<string name="poi_medical_system_mongolian_yes">Παραδοσιακό μογγολικό</string>
+	<string name="poi_medical_system_tibetan_yes">Παραδοσιακό θιβετιανό</string>
+	<string name="poi_medical_system_sidda_yes">Σίντα</string>
+	<string name="poi_medical_system_unani_yes">Ουνάνι</string>
+
+	<string name="poi_health_service_nursing_yes">Υπηρεσία υγείας: περίθαλψη: ναι</string>
+	<string name="poi_health_service_nursing_no">Υπηρεσία υγείας: περίθαλψη: όχι</string>
+	<string name="poi_health_service_counselling_yes">Υπηρεσία υγείας: συμβουλευτική: ναι</string>
+	<string name="poi_health_service_counselling_no">Υπηρεσία υγείας: συμβουλευτική: όχι</string>
+	<string name="poi_health_service_examination_yes">Υπηρεσία υγείας: εξετάσεις: ναι</string>
+	<string name="poi_health_service_examination_no">Υπηρεσία υγείας: εξετάσεις: όχι</string>
 	</resources>
