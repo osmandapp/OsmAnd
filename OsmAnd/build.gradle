@@ -288,33 +288,7 @@ task collectHelpContentsAssets(type: Copy) {
 	into "assets/feature_articles"
 }
 
-task collectRoutingResources(type: Sync) {
-	from "../../resources/routing"
-	into "src/net/osmand/router"
-	include "*.xml"
-}
 
-task collectMiscResources(type: Copy) {
-	into "src/net/osmand/osm"
-	from("../../resources/obf_creation") {
-		include "rendering_types.xml"
-	}
-	from("../../resources/poi") {
-		include "poi_types.xml"
-	}
-}
-
-task collectRenderingStylesResources(type: Sync) {
-	from "../../resources/rendering_styles"
-	into "src/net/osmand/render"
-	include "*.xml"
-}
-
-task collectRegionsInfoResources(type: Copy) {
-	from "../../resources/countries-info"
-	into "src/net/osmand/map"
-	include "regions.ocbf"
-}
 
 task copyStyleIcons(type: Copy) {
 	from "../../resources/rendering_styles/style-icons/"
@@ -327,10 +301,6 @@ task collectExternalResources {
 		collectFonts,
 		collectHelpContentsAssets,
 		collectHelpContentsStyle,
-		collectRoutingResources,
-		collectRenderingStylesResources,
-		collectRegionsInfoResources,
-		collectMiscResources,
 		copyStyleIcons,
 		updateNoTranslate,
 		validateTranslate

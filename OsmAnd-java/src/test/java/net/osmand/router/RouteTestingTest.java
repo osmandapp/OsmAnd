@@ -63,7 +63,7 @@ public class RouteTestingTest {
 
     @Test
 	public void testRouting() throws Exception {
-		String fl = "../../resources/test-resources/Routing_test.obf";
+		String fl = "src/test/resources/Routing_test.obf";
 		RandomAccessFile raf = new RandomAccessFile(fl, "r");
 		RoutePlannerFrontEnd fe = new RoutePlannerFrontEnd(false);
 

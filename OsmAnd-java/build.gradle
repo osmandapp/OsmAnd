@@ -5,15 +5,65 @@ configurations {
 	android
 }
 
-task androidJar(type: Jar) {
-	appendix = "android"
-	from sourceSets.main.java.outputDir
-	exclude("**/PlatformUtil.*")
+
+
+task collectRoutingResources(type: Sync) {
+	from "../../resources/routing"
+	into "src/main/resources/net/osmand/router"
+	include "*.xml"
 }
+
+task collectMiscResources(type: Copy) {
+	into "src/main/resources/net/osmand/osm"
+	from("../../resources/obf_creation") {
+		include "rendering_types.xml"
+	}
+	from("../../resources/poi") {
+		include "poi_types.xml"
+	}
+}
+
+task collectRenderingStylesResources(type: Sync) {
+	from "../../resources/rendering_styles"
+	into "src/main/resources/net/osmand/render"
+	include "*.xml"
+}
+
+task collectRegionsInfoResources(type: Copy) {
+	from "../../resources/countries-info"
+	into "src/main/resources/net/osmand/map"
+	include "regions.ocbf"
+}
+
+task collectTestResources(type: Copy) {
+	from "../../resources/test-resources"
+	into "src/main/test/resources/"
+	include "regions.ocbf"
+}
+
+
+task collectExternalResources {
+	dependsOn collectRoutingResources,
+		collectRenderingStylesResources,
+		collectRegionsInfoResources,
+		collectTestResources,
+		collectMiscResources
+}
+
+task androidJar(type: Jar) {
+	dependsOn collectExternalResources
+	appendix = "android"
+	from(sourceSets.main.java.outputDir) {
+		exclude("**/PlatformUtil.*")
+	}
+	from sourceSets.main.resources
+}
+
 
 artifacts {
 	android androidJar
 }
+
 
 dependencies {
 	testImplementation 'junit:junit:4.12'
