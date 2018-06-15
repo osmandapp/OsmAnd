@@ -46,7 +46,6 @@ public class RouteResultPreparationTest {
     @BeforeClass
     public static void setUp() throws Exception {
         String fileName = "src/test/resources/Turn_lanes_test.obf";
-
         File fl = new File(fileName);
 
         RandomAccessFile raf = new RandomAccessFile(fl, "r");

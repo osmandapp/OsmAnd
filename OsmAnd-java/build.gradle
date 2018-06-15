@@ -41,6 +41,7 @@ task collectRegionsInfoResources(type: Copy) {
 task collectTestResources(type: Copy) {
 	from "../../resources/test-resources"
 	into "src/test/resources/"
+	include "*"
 }
 
 
