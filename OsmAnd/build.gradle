@@ -193,15 +193,9 @@ android {
 
 	buildTypes {
 		debug {
-			// proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-project.txt'
-			// minifyEnabled true
-			// proguardFiles 'proguard-project.txt'
 			signingConfig signingConfigs.development
 		}
 		release {
-			// proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-project.txt'
-			// minifyEnabled true
-			//proguardFiles 'proguard-project.txt'
 			signingConfig signingConfigs.publishing
 		}
 	}
