@@ -2417,8 +2417,8 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="shared_string_time_moving">Tempo de movado</string>
     <string name="shared_string_time_span">Tempa variejo</string>
     <string name="shared_string_max">Maks.</string>
-    <string name="shared_string_start_time">Forveturo</string>
-    <string name="shared_string_end_time">Alveno</string>
+    <string name="shared_string_start_time">Komenca tempo</string>
+    <string name="shared_string_end_time">Fina tempo</string>
     <string name="shared_string_color">Koloro</string>
     <string name="average_speed">Mezuma rapido</string>
     <string name="max_speed">Maksimuma rapido</string>
@@ -2608,8 +2608,8 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="srtm_menu_download_descr">Elŝutu la mapon “nivelkurboj” por vidigi nivelkurbojn por tiu ĉi regiono.</string>
     <string name="shared_string_plugin">Kromprogramo</string>
     <string name="srtm_purchase_header">Por vidigi nivelkurbojn sur la mapo, vi devas aĉeti kaj instali la kromprogramon “nivelkurboj”.</string>
-    <string name="hillshade_menu_download_descr">Elŝutu la mapon “nivel-ombrumoj” por vidigi reliefon por tiu ĉi regiono.</string>
-    <string name="hillshade_purchase_header">Instalu la kromprogramon “nivelkurboj” por vidigi ilin sur la mapo.</string>
+    <string name="hillshade_menu_download_descr">Por vidigi reliefon sur la mapo, elŝutu surtavolon de nivelombrumo por tiu ĉi regiono.</string>
+    <string name="hillshade_purchase_header">Por vidigi nivelombrumon sur la mapo, aĉetu kaj instalu la kromprogramon “nivelukurboj”.</string>
     <string name="hide_from_zoom_level">Kaŝi de skal-nivelo</string>
     <string name="sorted_by_distance">Ordigitaj laŭ distanco</string>
     <string name="search_favorites">Serĉi en ŝatataj</string>
@@ -2621,7 +2621,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="increase_search_radius">Pliigi serĉan radiuson</string>
     <string name="nothing_found">Trovis nenion</string>
     <string name="nothing_found_descr">Bonvolu provi ŝanĝi serĉpeton aŭ pliigi radiuson de serĉo.</string>
-    <string name="private_access_routing_req">Via celloko troviĝas en privata tereno. Ĉu trapasi privatajn vojojn por tiu ĉi kurso?</string>
+    <string name="private_access_routing_req">Via celloko troviĝas en privata tereno. Ĉu permesi aliron al privataj vojoj por tiu ĉi kurso?</string>
     <string name="mapillary">Mapillary</string>
     <string name="mapillary_widget">Mapillary-fenestraĵo</string>
     <string name="mapillary_widget_descr">Ebligas rapide kontribui al Mapillary.</string>
@@ -2830,7 +2830,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="show_guide_line_descr">Vidigi direktantan linion el via pozicio al pozicioj de aktivaj map-markoj.</string>
     <string name="show_arrows_descr">Vidigi unu aŭ du sagetojn indikantajn direkton al map-markoj.</string>
     <string name="distance_indication_descr">Elekti kiel vidigi distancon al aktivaj map-markoj.</string>
-    <string name="active_markers_descr">Elekti nombron da aktivaj map-markoj por vidigi.</string>
+    <string name="active_markers_descr">Elekti nombron da indikiloj de direkto por vidigi.</string>
     <string name="looking_for_tracks_with_waypoints">Serĉado de kursoj kun navigadpunktoj</string>
     <string name="shared_string_more_without_dots">Pli</string>
     <string name="empty_state_osm_edits">Krei aŭ redakti OSM-objektojn</string>
