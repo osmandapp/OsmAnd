@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
@@ -16,6 +17,7 @@ import android.support.annotation.DrawableRes;
 import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
@@ -59,6 +61,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.TrackActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapmarkers.CoordinateInputBottomSheetDialogFragment.CoordinateInputFormatChangeListener;
 import net.osmand.plus.mapmarkers.CoordinateInputFormats.DDM;
@@ -82,6 +85,7 @@ import static net.osmand.plus.MapMarkersHelper.MAP_MARKERS_COLORS_COUNT;
 public class CoordinateInputDialogFragment extends DialogFragment implements OsmAndCompassListener, OsmAndLocationListener {
 
 	public static final String TAG = "CoordinateInputDialogFragment";
+	public static final String ADDED_MARKERS_NUMBER_KEY = "added_markers_number_key";
 
 	private final List<MapMarker> mapMarkers = new ArrayList<>();
 	private MapMarker selectedMarker;
@@ -91,6 +95,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 	private final List<EditTextEx> editTexts = new ArrayList<>();
 	private CoordinateInputAdapter adapter;
 	private ImageView showHideKeyboardIcon;
+	private Snackbar snackbar;
 
 	private boolean lightTheme;
 	private boolean orientationPortrait;
@@ -899,6 +904,50 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			public void onInputSettingsChanged() {
 				dismissEditingMode();
 				registerInputs();
+			}
+
+			@Override
+			public void saveAsTrack() {
+				OsmandApplication app = getMyApplication();
+				if (app != null) {
+					if (mapMarkers.isEmpty()) {
+						Toast.makeText(app, getString(R.string.plan_route_no_markers_toast), Toast.LENGTH_SHORT).show();
+					} else {
+						SaveAsTrackBottomSheetDialogFragment fragment = new SaveAsTrackBottomSheetDialogFragment();
+						Bundle args = new Bundle();
+						args.putInt(ADDED_MARKERS_NUMBER_KEY, mapMarkers.size());
+						fragment.setArguments(args);
+						fragment.setListener(createSaveAsTrackFragmentListener());
+						fragment.show(getChildFragmentManager(), SaveAsTrackBottomSheetDialogFragment.TAG);
+					}
+				}
+
+			}
+		};
+	}
+
+	private SaveAsTrackBottomSheetDialogFragment.MarkerSaveAsTrackFragmentListener createSaveAsTrackFragmentListener() {
+		return new SaveAsTrackBottomSheetDialogFragment.MarkerSaveAsTrackFragmentListener() {
+
+			final OsmandApplication app = getMyApplication();
+
+			@Override
+			public void saveGpx(final String fileName) {
+				final String gpxPath = app.getMapMarkersHelper().generateGpxFromList(fileName, mapMarkers);
+
+				snackbar = Snackbar.make(mainView, fileName + " " + getString(R.string.is_saved) + ".", Snackbar.LENGTH_LONG)
+						.setAction(R.string.shared_string_show, new View.OnClickListener() {
+							@Override
+							public void onClick(View view) {
+								Intent intent = new Intent(app, getMyApplication().getAppCustomization().getTrackActivity());
+								intent.putExtra(TrackActivity.TRACK_FILE_NAME, gpxPath);
+								intent.putExtra(TrackActivity.OPEN_POINTS_TAB, true);
+								intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+								startActivity(intent);
+							}
+						});
+				AndroidUtils.setSnackbarTextColor(snackbar, R.color.color_dialog_buttons_dark);
+				snackbar.show();
 			}
 		};
 	}

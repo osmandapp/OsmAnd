@@ -17,6 +17,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
@@ -30,6 +31,7 @@ import java.io.File;
 import java.util.Date;
 
 import static net.osmand.plus.helpers.ImportHelper.GPX_SUFFIX;
+import static net.osmand.plus.mapmarkers.CoordinateInputDialogFragment.ADDED_MARKERS_NUMBER_KEY;
 
 public class SaveAsTrackBottomSheetDialogFragment extends BottomSheetDialogFragment {
 
@@ -45,6 +47,13 @@ public class SaveAsTrackBottomSheetDialogFragment extends BottomSheetDialogFragm
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		boolean isCoordInput = false;
+		int number = 0;
+		if (getArguments() != null) {
+			number = getArguments().getInt(ADDED_MARKERS_NUMBER_KEY);
+			if (number != 0)
+				isCoordInput = true;
+		}
 		MapActivity mapActivity = (MapActivity) getActivity();
 		portrait = AndroidUiHelper.isOrientationPortrait(getActivity());
 		final boolean nightMode = !getMyApplication().getSettings().isLightContent();
@@ -52,6 +61,10 @@ public class SaveAsTrackBottomSheetDialogFragment extends BottomSheetDialogFragm
 
 		final View mainView = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.fragment_marker_save_as_track_bottom_sheet_dialog, container);
 		LinearLayout contentLayout = (LinearLayout) mainView.findViewById(R.id.content_linear_layout);
+		TextView titleTv = (TextView) mainView.findViewById(R.id.save_as_track_title);
+		titleTv.setText(isCoordInput ? R.string.coord_input_save_as_track : R.string.marker_save_as_track);
+		TextView descriptionTv = (TextView) mainView.findViewById(R.id.save_as_track_description);
+		descriptionTv.setText(isCoordInput ? getString(R.string.coord_input_save_as_track_descr, number) : getString(R.string.marker_save_as_track_descr));
 		int layoutRes;
 		if (Build.VERSION.SDK_INT > Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
 			layoutRes = R.layout.markers_track_name_text_field_box;

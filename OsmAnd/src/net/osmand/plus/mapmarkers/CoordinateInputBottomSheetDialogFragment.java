@@ -12,6 +12,8 @@ import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithCompoundButton;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
+import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
+import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerHalfItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.SubtitleDividerItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.SubtitleItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
@@ -34,6 +36,24 @@ public class CoordinateInputBottomSheetDialogFragment extends MenuBottomSheetDia
 		final OsmandSettings settings = getMyApplication().getSettings();
 
 		items.add(new TitleItem(getString(R.string.shared_string_options)));
+		BaseBottomSheetItem editItem = new SimpleBottomSheetItem.Builder()
+				.setIcon(getContentIcon(R.drawable.ic_action_save_to_file))
+				.setTitle(getString(R.string.coord_input_save_as_track))
+				.setLayoutId(R.layout.bottom_sheet_item_simple)
+				.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						if (listener != null) {
+							listener.saveAsTrack();
+						}
+						dismiss();
+					}
+				})
+				.create();
+		items.add(editItem);
+
+		items.add(new DividerHalfItem(context));
+		
 		boolean useOsmandKeyboard = settings.COORDS_INPUT_USE_OSMAND_KEYBOARD.get();
 
 		BaseBottomSheetItem useSystemKeyboardItem = new BottomSheetItemWithCompoundButton.Builder()
@@ -148,5 +168,7 @@ public class CoordinateInputBottomSheetDialogFragment extends MenuBottomSheetDia
 		void onHandChanged();
 
 		void onInputSettingsChanged();
+		
+		void saveAsTrack();
 	}
 }

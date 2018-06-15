@@ -1016,6 +1016,29 @@ public class MapMarkersHelper {
 		GPXUtilities.writeGpxFile(fout, file, ctx);
 		return fout.getAbsolutePath();
 	}
+	
+	public String generateGpxFromList(String fileName,  List<MapMarker> mapMarkers) {
+		final File dir = ctx.getAppPath(IndexConstants.GPX_INDEX_DIR + "/map markers");
+		if (!dir.exists()) {
+			dir.mkdirs();
+		}
+		File fout = new File(dir, fileName + ".gpx");
+		int ind = 1;
+		while (fout.exists()) {
+			fout = new File(dir, fileName + "_" + (++ind) + ".gpx");
+		}
+		GPXFile file = new GPXFile();
+		for (MapMarker marker : mapMarkers) {
+			WptPt wpt = new WptPt();
+			wpt.lat = marker.getLatitude();
+			wpt.lon = marker.getLongitude();
+			wpt.setColor(ctx.getResources().getColor(MapMarker.getColorId(marker.colorIndex)));
+			wpt.name = marker.getOnlyName();
+			file.addPoint(wpt);
+		}
+		GPXUtilities.writeGpxFile(fout, file, ctx);
+		return fout.getAbsolutePath();
+	}
 
 	// ---------------------------------------------------------------------------------------------
 
