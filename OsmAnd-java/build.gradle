@@ -1,10 +1,13 @@
+apply plugin: 'java'
+    
+    
 configurations {
 	android
 }
 
 task androidJar(type: Jar) {
 	appendix = "android"
-	from sourceSets.main.output
+	from sourceSets.main.java.outputDir
 	exclude("**/PlatformUtil.*")
 }
 
