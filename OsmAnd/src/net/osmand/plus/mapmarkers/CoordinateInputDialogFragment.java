@@ -311,7 +311,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 						return;
 					}
 					Bundle args = new Bundle();
-					args.putInt(CoordinateInputAdapter.ADAPTER_POSITION, pos);
+					args.putInt(CoordinateInputAdapter.ADAPTER_POSITION_KEY, pos);
 					CoordinateInputActionsBottomSheet fragment = new CoordinateInputActionsBottomSheet();
 					fragment.setUsedOnMap(false);
 					fragment.setArguments(args);

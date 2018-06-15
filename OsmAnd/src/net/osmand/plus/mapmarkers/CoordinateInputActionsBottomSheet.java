@@ -26,7 +26,7 @@ public class CoordinateInputActionsBottomSheet extends MenuBottomSheetDialogFrag
 		if (args == null) {
 			return;
 		}
-		final int position = args.getInt(CoordinateInputAdapter.ADAPTER_POSITION);
+		final int position = args.getInt(CoordinateInputAdapter.ADAPTER_POSITION_KEY);
 
 		items.add(new TitleItem(getString(R.string.shared_string_actions)));
 

@@ -22,7 +22,7 @@ import java.util.List;
 
 public class CoordinateInputAdapter extends RecyclerView.Adapter<MapMarkerItemViewHolder> {
 
-	public static final String ADAPTER_POSITION = "adapter_position";
+	public static final String ADAPTER_POSITION_KEY = "adapter_position_key";
 
 	private OsmandApplication app;
 	private List<MapMarker> mapMarkers;
