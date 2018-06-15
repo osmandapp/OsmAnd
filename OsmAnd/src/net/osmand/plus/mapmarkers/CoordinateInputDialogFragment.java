@@ -70,8 +70,10 @@ import net.osmand.util.LocationParser;
 import net.osmand.util.MapUtils;
 
 import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import static android.content.ClipDescription.MIMETYPE_TEXT_PLAIN;
 import static android.content.Context.CLIPBOARD_SERVICE;
@@ -942,7 +944,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 	}
 
 	private DecimalFormat createDecimalFormat(int accuracy) {
-		return new DecimalFormat("###." + createString(accuracy, '#'));
+		return new DecimalFormat("###." + createString(accuracy, '#'), new DecimalFormatSymbols(Locale.US));
 	}
 
 	private void dismissEditingMode() {
