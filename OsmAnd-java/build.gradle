@@ -5,7 +5,10 @@ configurations {
 	android
 }
 
-
+tasks.withType(JavaCompile) {
+	sourceCompatibility = "1.7"
+	targetCompatibility = "1.7"
+}
 
 task collectRoutingResources(type: Sync) {
 	from "../../resources/routing"
@@ -37,8 +40,7 @@ task collectRegionsInfoResources(type: Copy) {
 
 task collectTestResources(type: Copy) {
 	from "../../resources/test-resources"
-	into "src/main/test/resources/"
-	include "regions.ocbf"
+	into "src/test/resources/"
 }
 
 
@@ -51,9 +53,9 @@ task collectExternalResources {
 }
 
 task androidJar(type: Jar) {
-	dependsOn collectExternalResources
+	dependsOn collectExternalResources, build
 	appendix = "android"
-	from(sourceSets.main.java.outputDir) {
+	from (sourceSets.main.java.outputDir) {
 		exclude("**/PlatformUtil.*")
 	}
 	from sourceSets.main.resources
