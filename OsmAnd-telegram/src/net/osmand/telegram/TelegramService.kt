@@ -34,7 +34,10 @@ class TelegramService : Service(), LocationListener, TelegramIncomingMessagesLis
 		private set
 	var serviceErrorInterval = 0L
 		private set
+	var sendLocationInterval = 0L
+		private set
 
+	private var lastLocationSentTime = 0L
 	private var pendingIntent: PendingIntent? = null
 
 	class LocationServiceBinder : Binder()
@@ -56,10 +59,7 @@ class TelegramService : Service(), LocationListener, TelegramIncomingMessagesLis
 			if (app.settings.sendMyLocationInterval >= OFF_INTERVAL_THRESHOLD && serviceOffInterval == 0L) {
 				serviceOffInterval = app.settings.sendMyLocationInterval
 				setupServiceErrorInterval()
-
-				val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
-				pendingIntent = PendingIntent.getBroadcast(this, 0, Intent(this, OnTelegramServiceAlarmReceiver::class.java), PendingIntent.FLAG_UPDATE_CURRENT)
-				alarmManager.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime() + 500, serviceOffInterval, pendingIntent)
+				setupAlarm()
 			}
 			app.notificationHelper.refreshNotification(NotificationType.LOCATION)
 		}
@@ -71,6 +71,7 @@ class TelegramService : Service(), LocationListener, TelegramIncomingMessagesLis
 		usedBy = intent.getIntExtra(USAGE_INTENT, 0)
 
 		serviceOffInterval = intent.getLongExtra(USAGE_OFF_INTERVAL, 0)
+		sendLocationInterval = intent.getLongExtra(SEND_LOCATION_INTERVAL, 0)
 		setupServiceErrorInterval()
 
 		app.telegramService = this
@@ -141,10 +142,14 @@ class TelegramService : Service(), LocationListener, TelegramIncomingMessagesLis
 				Log.d(PlatformUtil.TAG, "GPS location provider not available") //$NON-NLS-1$
 			}
 		} else {
-			val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
-			pendingIntent = PendingIntent.getBroadcast(this, 0, Intent(this, OnTelegramServiceAlarmReceiver::class.java), PendingIntent.FLAG_UPDATE_CURRENT)
-			alarmManager.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime() + 500, serviceOffInterval, pendingIntent)
+			setupAlarm()
 		}
+	}
+
+	private fun setupAlarm() {
+		val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
+		pendingIntent = PendingIntent.getBroadcast(this, 0, Intent(this, OnTelegramServiceAlarmReceiver::class.java), PendingIntent.FLAG_UPDATE_CURRENT)
+		alarmManager.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime() + 500, serviceOffInterval, pendingIntent)
 	}
 
 	private fun removeLocationUpdates() {
@@ -169,7 +174,7 @@ class TelegramService : Service(), LocationListener, TelegramIncomingMessagesLis
 				val locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
 				try {
 					locationManager.removeUpdates(this)
-				} catch (e: SecurityException) {
+				} catch (e: Throwable) {
 					Log.d(PlatformUtil.TAG, "Location service permission not granted") //$NON-NLS-1$
 				}
 
@@ -177,8 +182,11 @@ class TelegramService : Service(), LocationListener, TelegramIncomingMessagesLis
 				if (lock.isHeld) {
 					lock.release()
 				}
+				app().shareLocationHelper.updateLocation(location)
+			} else if (System.currentTimeMillis() - lastLocationSentTime > sendLocationInterval) {
+				lastLocationSentTime = System.currentTimeMillis()
+				app().shareLocationHelper.updateLocation(location)
 			}
-			app().shareLocationHelper.updateLocation(location)
 		}
 	}
 
@@ -204,7 +212,7 @@ class TelegramService : Service(), LocationListener, TelegramIncomingMessagesLis
 	override fun onReceiveChatLocationMessages(chatTitle: String, vararg messages: TdApi.Message) {
 		val app = app()
 		if (app.settings.isShowingChatOnMap(chatTitle)) {
-			ShowMessagesTask(app, chatTitle).executeOnExecutor(executor, *messages)
+			ShowMessagesTask(app).executeOnExecutor(executor, *messages)
 		}
 	}
 
@@ -212,7 +220,7 @@ class TelegramService : Service(), LocationListener, TelegramIncomingMessagesLis
 		UpdateMessagesTask(app()).executeOnExecutor(executor)
 	}
 
-	private class ShowMessagesTask(private val app: TelegramApplication, private val chatTitle: String) : AsyncTask<TdApi.Message, Void, Void?>() {
+	private class ShowMessagesTask(private val app: TelegramApplication) : AsyncTask<TdApi.Message, Void, Void?>() {
 
 		override fun doInBackground(vararg messages: TdApi.Message): Void? {
 			for (message in messages) {
@@ -236,6 +244,7 @@ class TelegramService : Service(), LocationListener, TelegramIncomingMessagesLis
 		const val USED_BY_USERS_LOCATIONS: Int = 2
 		const val USAGE_INTENT = "SERVICE_USED_BY"
 		const val USAGE_OFF_INTERVAL = "SERVICE_OFF_INTERVAL"
+		const val SEND_LOCATION_INTERVAL = "SEND_LOCATION_INTERVAL"
 
 		const val OFF_INTERVAL_THRESHOLD: Long = 30000L
 

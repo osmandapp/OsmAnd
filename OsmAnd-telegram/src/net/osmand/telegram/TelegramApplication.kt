@@ -110,6 +110,7 @@ class TelegramApplication : Application(), OsmandHelperListener {
 
 		serviceIntent.putExtra(TelegramService.USAGE_INTENT, i)
 		serviceIntent.putExtra(TelegramService.USAGE_OFF_INTERVAL, interval)
+		serviceIntent.putExtra(TelegramService.SEND_LOCATION_INTERVAL, settings.sendMyLocationInterval)
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 			startForegroundService(serviceIntent)
 		} else {
