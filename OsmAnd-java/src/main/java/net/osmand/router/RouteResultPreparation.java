@@ -12,11 +12,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
 
 import net.osmand.PlatformUtil;
-import net.osmand.binary.BinaryInspector;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
 import net.osmand.binary.RouteDataObject;
@@ -24,8 +21,8 @@ import net.osmand.data.LatLon;
 import net.osmand.osm.MapRenderingTypes;
 import net.osmand.router.BinaryRoutePlanner.FinalRouteSegment;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;
-import net.osmand.router.RoutePlannerFrontEnd.RouteCalculationMode;
 import net.osmand.router.GeneralRouter.GeneralRouterProfile;
+import net.osmand.router.RoutePlannerFrontEnd.RouteCalculationMode;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -36,6 +33,7 @@ public class RouteResultPreparation {
 	public static boolean PRINT_TO_CONSOLE_ROUTE_INFORMATION_TO_TEST = false;
 	public static String PRINT_TO_GPX_FILE = null;
 	private static final float TURN_DEGREE_MIN = 45;
+	public static final int SHIFT_ID = 6;
 	private Log log = PlatformUtil.getLog(RouteResultPreparation.class);
 	/**
 	 * Helper method to prepare final result 
@@ -418,7 +416,7 @@ public class RouteResultPreparation {
 				additional.append("height = \"").append(Arrays.toString(res.getHeightValues())).append("\" ");
 				additional.append("description = \"").append(res.getDescription()).append("\" ");
 				println(MessageFormat.format("\t<segment id=\"{0}\" oid=\"{1}\" start=\"{2}\" end=\"{3}\" {4}/>",
-						(res.getObject().getId() >> (BinaryInspector.SHIFT_ID )) + "", res.getObject().getId() + "", 
+						(res.getObject().getId() >> (SHIFT_ID )) + "", res.getObject().getId() + "", 
 						res.getStartPointIndex() + "", res.getEndPointIndex() + "", additional.toString()));
 				int inc = res.getStartPointIndex() < res.getEndPointIndex() ? 1 : -1;
 				int indexnext = res.getStartPointIndex();
@@ -451,7 +449,7 @@ public class RouteResultPreparation {
 									serializer.endTag("","slope");
 								}
 								serializer.startTag("","desc");
-								serializer.text((res.getObject().getId() >> (BinaryInspector.SHIFT_ID )) + " " + index);
+								serializer.text((res.getObject().getId() >> (SHIFT_ID )) + " " + index);
 								serializer.endTag("","desc");
 								lastHeight = h;
 							} else if(lastHeight != -180){

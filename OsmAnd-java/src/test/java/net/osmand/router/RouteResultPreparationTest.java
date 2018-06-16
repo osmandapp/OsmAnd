@@ -1,10 +1,19 @@
 package net.osmand.router;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.RandomAccessFile;
+import java.io.Reader;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
 
 import net.osmand.PlatformUtil;
-import net.osmand.binary.BinaryInspector;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.LatLon;
 import net.osmand.util.Algorithms;
@@ -16,8 +25,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
-import java.io.*;
-import java.util.*;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 /**
  * Created by yurkiss on 04.03.16.
@@ -96,7 +105,7 @@ public class RouteResultPreparationTest {
                     String turnLanes = turn +":" +lanes;
                     String name = routeSegments.get(prevSegment).getDescription();
 
-                    long segmentId = routeSegments.get(prevSegment).getObject().getId() >> (BinaryInspector.SHIFT_ID );
+                    long segmentId = routeSegments.get(prevSegment).getObject().getId() >> (RouteResultPreparation.SHIFT_ID );
                     String expectedResult = expectedResults.get(segmentId);
                     if (expectedResult != null) {
                     	if(!Algorithms.objectEquals(expectedResult, turnLanes) &&
@@ -113,7 +122,7 @@ public class RouteResultPreparationTest {
             }
 
             if (i < routeSegments.size()) {
-                reachedSegments.add(routeSegments.get(i).getObject().getId() >> (BinaryInspector.SHIFT_ID ));
+                reachedSegments.add(routeSegments.get(i).getObject().getId() >> (RouteResultPreparation.SHIFT_ID ));
             }
         }
 

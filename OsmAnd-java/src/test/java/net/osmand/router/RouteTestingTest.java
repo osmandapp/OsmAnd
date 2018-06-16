@@ -6,22 +6,17 @@ import java.io.InputStreamReader;
 import java.io.RandomAccessFile;
 import java.io.Reader;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Iterator;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TreeSet;
 
-import net.osmand.binary.BinaryInspector;
 import net.osmand.binary.BinaryMapIndexReader;
-import net.osmand.data.LatLon;
 
 import org.junit.Assert;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -83,13 +78,13 @@ public class RouteTestingTest {
 			if (i == routeSegments.size() || routeSegments.get(i).getTurnType() != null) {
 				if (prevSegment >= 0) {
 					String name = routeSegments.get(prevSegment).getDescription();
-					long segmentId = routeSegments.get(prevSegment).getObject().getId() >> (BinaryInspector.SHIFT_ID);
+					long segmentId = routeSegments.get(prevSegment).getObject().getId() >> (RouteResultPreparation.SHIFT_ID);
 					System.out.println("segmentId: " + segmentId + " description: " + name);
 				}
 				prevSegment = i;
 			}
 			if (i < routeSegments.size()) {
-				reachedSegments.add(routeSegments.get(i).getObject().getId() >> (BinaryInspector.SHIFT_ID));
+				reachedSegments.add(routeSegments.get(i).getObject().getId() >> (RouteResultPreparation.SHIFT_ID));
 			}
 		}
 		Map<Long, String> expectedResults = te.getExpectedResults();
