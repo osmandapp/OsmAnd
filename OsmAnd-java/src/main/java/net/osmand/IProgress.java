@@ -25,6 +25,8 @@ public interface IProgress {
 	
 	public boolean isInterrupted();
 	
+	public void setGeneralProgress(String genProgress);
+	
 	public IProgress EMPTY_PROGRESS = new IProgress() {
 		
 		@Override
@@ -47,6 +49,11 @@ public interface IProgress {
 		
 		@Override
 		public void finishTask() {}
-	};  
+
+		@Override
+		public void setGeneralProgress(String genProgress) {}
+	};
+
+	  
 
 }

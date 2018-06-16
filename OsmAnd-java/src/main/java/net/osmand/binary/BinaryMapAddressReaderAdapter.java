@@ -87,6 +87,10 @@ public class BinaryMapAddressReaderAdapter {
 	public static class CitiesBlock extends BinaryIndexPart {
 		int type;
 
+		public int getType() {
+			return type;
+		}
+		
 		public String getPartName() {
 			return "City";
 		}

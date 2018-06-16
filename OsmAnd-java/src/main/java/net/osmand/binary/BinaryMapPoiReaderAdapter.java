@@ -43,10 +43,10 @@ public class BinaryMapPoiReaderAdapter {
 	private static final int BUCKET_SEARCH_BY_NAME = 5;
 
 	public static class PoiSubType {
-		boolean text;
-		String name;
+		public boolean text;
+		public String name;
 		//int estiatedSize;
-		List<String> possibleValues = null;
+		public List<String> possibleValues = null;
 	}
 
 	public static class PoiRegion extends BinaryIndexPart {
@@ -59,11 +59,40 @@ public class BinaryMapPoiReaderAdapter {
 		int right31;
 		int top31;
 		int bottom31;
+		
+		public int getLeft31() {
+			return left31;
+		}
+		
+		public int getRight31() {
+			return right31;
+		}
+		
+		public int getTop31() {
+			return top31;
+		}
+		
+		public int getBottom31() {
+			return bottom31;
+		}
 
 		public String getPartName() {
 			return "POI";
 		}
 
+		
+		public List<String> getCategories() {
+			return categories;
+		}
+		
+		public List<List<String>> getSubcategories() {
+			return subcategories;
+		}
+		
+		public List<PoiSubType> getSubTypes() {
+			return subTypes;
+		}
+		
 		public int getFieldNumber() {
 			return OsmandOdb.OsmAndStructure.POIINDEX_FIELD_NUMBER;
 		}
