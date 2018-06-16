@@ -95,6 +95,11 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 		return (int) (r * tb.getDensity());
 	}
 
+	private boolean hasBitmap(AMapPoint point) {
+		String imageUriStr = point.getParams().get(AMapPoint.POINT_IMAGE_URI_PARAM);
+		return !TextUtils.isEmpty(imageUriStr) && pointImages.containsKey(imageUriStr);
+	}
+
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
 	}
@@ -208,15 +213,16 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 			int ex = (int) point.x;
 			int ey = (int) point.y;
 			final int rp = getRadiusPoi(tb);
-			int compare = rp;
+			final int bitmapRadius = (int) (POINT_IMAGE_SIZE_PX / tb.getDensity());
+			int compare;
 			int radius = rp * 3 / 2;
 			for (AMapPoint p : aidlLayer.getPoints()) {
 				ALatLon position = p.getLocation();
 				if (position != null) {
+					compare = hasBitmap(p) ? bitmapRadius : radius;
 					int x = (int) tb.getPixXFromLatLon(position.getLatitude(), position.getLongitude());
 					int y = (int) tb.getPixYFromLatLon(position.getLatitude(), position.getLongitude());
 					if (Math.abs(x - ex) <= compare && Math.abs(y - ey) <= compare) {
-						compare = radius;
 						points.add(p);
 					}
 				}

@@ -50,7 +50,8 @@ class OsmandAidlHelper(private val app: Application) {
 	companion object {
 		private const val OSMAND_FREE_PACKAGE_NAME = "net.osmand"
 		private const val OSMAND_PLUS_PACKAGE_NAME = "net.osmand.plus"
-		private var OSMAND_PACKAGE_NAME = OSMAND_PLUS_PACKAGE_NAME
+		var OSMAND_PACKAGE_NAME = OSMAND_PLUS_PACKAGE_NAME
+			private set
 	}
 
 	private var mIOsmAndAidlInterface: IOsmAndAidlInterface? = null

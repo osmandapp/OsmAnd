@@ -17,7 +17,10 @@ class TelegramSettings(private val app: TelegramApplication) {
 		private const val SPEED_CONSTANTS_KEY = "speed_constants"
 
 		private const val SEND_MY_LOCATION_INTERVAL_KEY = "send_my_location_interval"
-		private const val SEND_MY_LOCATION_INTERVAL_DEFAULT = 5000L
+		private const val SEND_MY_LOCATION_INTERVAL_DEFAULT = 5L * 1000 // 5 seconds
+
+		private const val USER_LOCATION_EXPIRE_TIME_KEY = "user_location_expire_time"
+		private const val USER_LOCATION_EXPIRE_TIME_DEFAULT = 15L * 60 * 1000 // 15 minutes
 	}
 
 	private var shareLocationChats: Set<String> = emptySet()
@@ -27,6 +30,7 @@ class TelegramSettings(private val app: TelegramApplication) {
 	var speedConstants = SpeedConstants.KILOMETERS_PER_HOUR
 
 	var sendMyLocationInterval = SEND_MY_LOCATION_INTERVAL_DEFAULT
+	var userLocationExpireTime = USER_LOCATION_EXPIRE_TIME_DEFAULT
 
 	init {
 		read()
@@ -130,5 +134,6 @@ class TelegramSettings(private val app: TelegramApplication) {
 		speedConstants = SpeedConstants.valueOf(prefs.getString(SPEED_CONSTANTS_KEY, SpeedConstants.KILOMETERS_PER_HOUR.name))
 
 		sendMyLocationInterval = prefs.getLong(SEND_MY_LOCATION_INTERVAL_KEY, SEND_MY_LOCATION_INTERVAL_DEFAULT)
+		userLocationExpireTime = prefs.getLong(USER_LOCATION_EXPIRE_TIME_KEY, USER_LOCATION_EXPIRE_TIME_DEFAULT)
 	}
 }

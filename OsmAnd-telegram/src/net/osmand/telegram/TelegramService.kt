@@ -79,6 +79,9 @@ class TelegramService : Service(), LocationListener, TelegramIncomingMessagesLis
 		if (isUsedByMyLocation(usedBy)) {
 			initLocationUpdates()
 		}
+		if (isUsedByUsersLocations(usedBy)) {
+			app.telegramHelper.startLiveMessagesUpdates()
+		}
 
 		val locationNotification = app.notificationHelper.locationNotification
 		val notification = app.notificationHelper.buildNotification(locationNotification)
@@ -100,6 +103,7 @@ class TelegramService : Service(), LocationListener, TelegramIncomingMessagesLis
 	override fun onDestroy() {
 		super.onDestroy()
 		val app = app()
+		app.telegramHelper.stopLiveMessagesUpdates()
 		app.telegramHelper.incomingMessagesListener = null
 		app.telegramService = null
 
@@ -204,12 +208,24 @@ class TelegramService : Service(), LocationListener, TelegramIncomingMessagesLis
 		}
 	}
 
+	override fun updateLocationMessages() {
+		UpdateMessagesTask(app()).executeOnExecutor(executor)
+	}
+
 	private class ShowMessagesTask(private val app: TelegramApplication, private val chatTitle: String) : AsyncTask<TdApi.Message, Void, Void?>() {
 
 		override fun doInBackground(vararg messages: TdApi.Message): Void? {
 			for (message in messages) {
-				app.showLocationHelper.showLocationOnMap(chatTitle, message)
+				app.showLocationHelper.showLocationOnMap(message)
 			}
+			return null
+		}
+	}
+
+	private class UpdateMessagesTask(private val app: TelegramApplication) : AsyncTask<Void, Void, Void?>() {
+
+		override fun doInBackground(vararg params: Void?): Void? {
+			app.showLocationHelper.updateLocationsOnMap()
 			return null
 		}
 	}
@@ -240,6 +256,10 @@ class TelegramService : Service(), LocationListener, TelegramIncomingMessagesLis
 
 		fun isUsedByMyLocation(usedBy: Int): Boolean {
 			return (usedBy and USED_BY_MY_LOCATION) > 0
+		}
+
+		fun isUsedByUsersLocations(usedBy: Int): Boolean {
+			return (usedBy and USED_BY_USERS_LOCATIONS) > 0
 		}
 
 		fun isOffIntervalDepended(usedBy: Int): Boolean {
