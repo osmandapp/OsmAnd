@@ -131,4 +131,8 @@ public abstract class BasicProgressAsyncTask<Tag, Params, Progress, Result> exte
 	public Tag getTag() {
 		return tag;
 	}
+
+	@Override
+	public void setGeneralProgress(String genProgress) {
+	}
 }

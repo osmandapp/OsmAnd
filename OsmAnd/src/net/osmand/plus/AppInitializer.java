@@ -863,6 +863,10 @@ public class AppInitializer implements IProgress {
 	}
 
 
+	@Override
+	public void setGeneralProgress(String genProgress) {
+	}
+
 	public void removeListener(AppInitializeListener listener) {
 		this.listeners.remove(listener);
 	}

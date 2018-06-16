@@ -154,6 +154,10 @@ public class ProgressImplementation implements IProgress {
 	}
 
 	@Override
+	public void setGeneralProgress(String genProgress) {
+	}
+
+	@Override
 	public void progress(int deltaWork) {
 		if (!isIndeterminate() && dialog != null) {
 			this.deltaProgress += deltaWork;
