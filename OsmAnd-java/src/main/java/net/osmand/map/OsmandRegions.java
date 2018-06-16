@@ -15,7 +15,9 @@ import net.osmand.util.MapAlgorithms;
 import net.osmand.util.MapUtils;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.RandomAccessFile;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -92,6 +94,18 @@ public class OsmandRegions {
 	}
 
 
+	
+	public BinaryMapIndexReader prepareFile() throws IOException {
+		File regions = new File("regions.ocbf");
+		if (!regions.exists()) {
+			InputStream is = OsmandRegions.class.getResourceAsStream("regions.ocbf");
+			FileOutputStream fous = new FileOutputStream(regions);
+			Algorithms.streamCopy(is, fous);
+			fous.close();
+		}
+		return prepareFile(regions.getAbsolutePath());
+	}
+	
 	public BinaryMapIndexReader prepareFile(String fileName) throws IOException {
 		reader = new BinaryMapIndexReader(new RandomAccessFile(fileName, "r"), new File(fileName));
 //		final Collator clt = OsmAndCollator.primaryCollator();
