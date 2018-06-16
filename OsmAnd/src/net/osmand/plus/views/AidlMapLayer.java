@@ -213,7 +213,7 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 			int ex = (int) point.x;
 			int ey = (int) point.y;
 			final int rp = getRadiusPoi(tb);
-			final int bitmapRadius = (int) (POINT_IMAGE_SIZE_PX / tb.getDensity());
+			final int bitmapRadius = (int) ((POINT_IMAGE_SIZE_PX / tb.getDensity()) * 3 / 2);
 			int compare;
 			int radius = rp * 3 / 2;
 			for (AMapPoint p : aidlLayer.getPoints()) {
@@ -230,7 +230,7 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 		}
 	}
 
-	private static class PointImageReaderTask extends AsyncTask<String, Void, Void> {
+	private static class PointImageReaderTask extends AsyncTask<String, Void, Boolean> {
 
 		private WeakReference<AidlMapLayer> layerRef;
 		private CropCircleTransformation circleTransformation = new CropCircleTransformation();
@@ -240,7 +240,8 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 		}
 
 		@Override
-		protected Void doInBackground(String... imageUriStrs) {
+		protected Boolean doInBackground(String... imageUriStrs) {
+			boolean res = false;
 			for (String imageUriStr : imageUriStrs) {
 				try {
 					AidlMapLayer layer = layerRef.get();
@@ -256,6 +257,7 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 										bitmap = AndroidUtils.scaleBitmap(bitmap, POINT_IMAGE_SIZE_PX, POINT_IMAGE_SIZE_PX, false);
 									}
 									layer.pointImages.put(imageUriStr, bitmap);
+									res = true;
 								}
 								ims.close();
 							}
@@ -269,7 +271,15 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 					// ignore
 				}
 			}
-			return null;
+			return res;
+		}
+
+		@Override
+		protected void onPostExecute(Boolean res) {
+			AidlMapLayer layer = layerRef.get();
+			if (layer != null && res) {
+				layer.refresh();
+			}
 		}
 	}
 }
