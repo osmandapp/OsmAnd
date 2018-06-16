@@ -2188,7 +2188,7 @@ Derzeit sind nur {2} MB verfügbar.</string>
 \n und mehr…</string>
     <string name="full_report">Vollständiger Bericht</string>
     <string name="open_street_map_login_and_pass">OpenStreetMap-Benutzername und -Passwort</string>
-    <string name="osm_live_email_desc">Benötigt, um Ihnen Informationen zu Beiträgen zu geben.</string>
+    <string name="osm_live_email_desc">Benötigt, um Ihnen Informationen über Beiträge zur Verfügung zu stellen.</string>
     <string name="osm_live_support_region">Unterstützte Region</string>
     <string name="report">Bericht</string>
     <string name="storage_permission_restart_is_required">Die App darf nun auf den externen Speicher schreiben, dazu ist aber ein manueller Neustart nötig.</string>
