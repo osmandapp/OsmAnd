@@ -1282,4 +1282,29 @@
 	<string name="poi_wiki_lang_tr">ויקי בטורקית</string>
 	<string name="poi_wiki_lang_uk">ויקי באוקראינית</string>
 	<string name="poi_wiki_lang_vi">ויקי בווייטנאמית</string>
+	<string name="poi_pottery">כדרות</string>
+
+	<string name="poi_barbecue_grill">מנגל: יש</string>
+
+	<string name="poi_adult_gaming_centre">מרכז משחקים למבוגרים</string>
+
+	<string name="poi_service_vehicle_oil_change_yes">החלפת שמנים</string>
+	<string name="poi_service_vehicle_brakes_yes">בלמים</string>
+	<string name="poi_service_vehicle_car_parts_yes">חלקי רכב</string>
+	<string name="poi_service_vehicle_batteries_yes">מצברים</string>
+	<string name="poi_service_vehicle_air_conditioning_yes">מיזוג אוויר</string>
+	<string name="poi_service_vehicle_electrical_yes">חשמלי</string>
+	<string name="poi_service_vehicle_wheels_yes">גלגלים</string>
+	<string name="poi_service_vehicle_glass_yes">זכוכית</string>
+	<string name="poi_service_vehicle_muffler_yes">עמם</string>
+	<string name="poi_service_vehicle_alignment_yes">איזון</string>
+	<string name="poi_service_vehicle_transmission_repair_yes">תיקון תמסורת</string>
+	<string name="poi_service_vehicle_motor_yes">מנוע</string>
+	<string name="poi_service_vehicle_insurance_yes">ביטוח</string>
+	<string name="poi_service_vehicle_tyres_yes">צמיגים</string>
+
+	<string name="poi_glacier_ele_top">הנקודה הגבוהה ביותר</string>
+	<string name="poi_glacier_ele_bottom">הנקודה הנמוכה ביותר</string>
+	<string name="poi_glacier_slope">מדרון ממוצע</string>
+
 	</resources>

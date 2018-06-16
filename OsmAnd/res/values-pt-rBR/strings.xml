@@ -2506,7 +2506,7 @@ Pôr do Sol: %2$s</string>
     <string name="context_menu_points_of_group">Todos os pontos do grupo</string>
     <string name="open_from">Aberto a partir das</string>
     <string name="open_till">Aberto até</string>
-    <string name="will_close_at">Fechará às</string>
+    <string name="will_close_at">Fecha às</string>
     <string name="will_open_at">Abre às</string>
     <string name="will_open_on">Abrirá às</string>
     <string name="additional_actions">Ações adicionais</string>
@@ -2750,7 +2750,7 @@ Pôr do Sol: %2$s</string>
 <string name="shared_string_current">Atual</string>
     <string name="last_intermediate_dest_description">Adiciona parada intermediária</string>
     <string name="first_intermediate_dest_description">Adiciona parada inicial</string>
-    <string name="subsequent_dest_description">Mover destino para cima, e criar destino</string>
+    <string name="subsequent_dest_description">Mover destino para cima, e criar</string>
     <string name="gpx_file_desc">GPX - adequado para exportar para JOSM ou outros editores OSM.</string>
     <string name="osc_file_desc">OSC - adequado para exportar para OpenStreetMap.</string>
     <string name="osm_edits_export_desc">Selecione o tipo de exportação: notas OSM, POI, ou ambos.</string>
@@ -2826,7 +2826,7 @@ Pôr do Sol: %2$s</string>
     <string name="download_maps_travel">Guias de viagem</string>
     <string name="shared_string_wikivoyage">Wikivoyage</string>
     <string name="article_removed">Artigo excluído</string>
-    <string name="wikivoyage_search_hint">Pesquisar: País, cidade, estado</string>
+    <string name="wikivoyage_search_hint">Pesquisar: país, cidade, estado</string>
     <string name="shared_string_read">Ler</string>
     <string name="saved_articles">Artigos salvos</string>
     <string name="shared_string_explore">Explorar</string>
@@ -2852,8 +2852,8 @@ Pôr do Sol: %2$s</string>
 \n 
 \n• Terreno em aclive leva em conta tempo de caminhada (Regra de Naismith)
 \n</string>
-    <string name="wikivoyage_download_pics">Baixar fotos</string>
-    <string name="shared_string_wifi_only">Somente WiFi</string>
+    <string name="wikivoyage_download_pics">Baixar imagens</string>
+    <string name="shared_string_wifi_only">Somente com WiFi</string>
     <string name="select_travel_book">Selecione um livro de viagens</string>
     <string name="shared_string_travel_book">Livro de viagens</string>
     <string name="download_images">Baixar imagens</string>
@@ -2893,11 +2893,11 @@ Pôr do Sol: %2$s</string>
     <string name="download_wiki_region_placeholder">esta região</string>
     <string name="unlock_all_features">Desbloquear todos os recursos OsmAnd</string>
 
-    <string name="purchase_dialog_travel_description">Adquira um dos seguintes itens para ler artigos de viagem offline:</string>
+    <string name="purchase_dialog_travel_description">Adquira um dos seguintes itens para receber a funcionalidade de guia de viagens off-line:</string>
     <string name="shared_string_dont">Não</string>
     <string name="shared_string_do">Sim</string>
     <string name="shared_string_only_with_wifi">Só com Wi-Fi</string>
-    <string name="shared_string_restart">Reiniciar</string>
+    <string name="shared_string_restart">Reiniciar app</string>
     <string name="purchase_cancelled_dialog_descr">Renove a assinatura para continuar a usar todos os recursos:</string>
 
     <string name="maps_you_need_descr">Baseado nos artigos que você salvou, recomendamos você baixar os seguintes mapas:</string>
@@ -2936,4 +2936,7 @@ Pôr do Sol: %2$s</string>
     <string name="open_wikipedia_link_online">Abrir link da Wikipedia online</string>
     <string name="read_wikipedia_offline_description">Assine OsmAnd Live para ler artigos da Wikipédia e Wikivoyage offline.</string>
     <string name="ski_map_render_descr">Estilo esqui. Principais características: processa pistas, teleféricos e outros recursos de esqui de forma conveniente. Objetos de mapa secundário menos distrativos.</string>
+    <string name="error_notification_desc">Favor enviar a captura de tela desta notificação para support@osmand.net</string>
+    <string name="quick_action_edit_actions">Editar ações</string>
+    <string name="start_editing_card_description">Você pode e deve editar qualquer artigo do Wikivoyage. Compartilhe conhecimento, experiência, talento e sua atenção</string>
     </resources>
