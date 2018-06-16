@@ -3916,4 +3916,8 @@
 
 <string name="poi_checkpoint_type_needler">Perforadora</string>
 	<string name="poi_checkpoint_type_quize">Cuestionario</string>
-	</resources>
+	<string name="poi_appliance">Electrodomésticos</string>
+
+	<string name="poi_outcrop">Afloramiento</string>
+
+</resources>
