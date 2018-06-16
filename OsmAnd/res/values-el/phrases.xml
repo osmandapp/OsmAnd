@@ -2833,4 +2833,26 @@
 	<string name="poi_health_service_counselling_no">Υπηρεσία υγείας: συμβουλευτική: όχι</string>
 	<string name="poi_health_service_examination_yes">Υπηρεσία υγείας: εξετάσεις: ναι</string>
 	<string name="poi_health_service_examination_no">Υπηρεσία υγείας: εξετάσεις: όχι</string>
+	<string name="poi_free_flying_rigid_yes">Άκαμπτο</string>
+	<string name="poi_free_flying_rigid_no">Άκαμπτη ελεύθερη πτήση: όχι</string>
+	<string name="poi_health_service_child_care_yes">Υπηρεσία υγείας: φύλαξη παιδιών: ναι</string>
+	<string name="poi_health_service_child_care_no">Υπηρεσία υγείας: φύλαξη παιδιών: όχι</string>
+	<string name="poi_health_service_prevention_yes">Υπηρεσία υγείας: πρόληψη: ναι</string>
+	<string name="poi_health_service_prevention_no">Υπηρεσία υγείας: πρόληψη: όχι</string>
+	<string name="poi_health_service_prevention_vaccination_yes">Υπηρεσία υγείας: εμβολιασμός: ναι</string>
+	<string name="poi_health_service_prevention_vaccination_no">Υπηρεσία υγείας: εμβολιασμός: όχι</string>
+	<string name="poi_health_service_support_yes">Υπηρεσία υγείας: υποστήριξη: ναι</string>
+	<string name="poi_health_service_support_no">Υπηρεσία υγείας: υποστήριξη: όχι</string>
+	<string name="poi_health_service_test_yes">Υπηρεσία υγείας: εξέταση: ναι</string>
+	<string name="poi_health_service_test_no">Υπηρεσία υγείας: εξέταση: όχι</string>
+
+	<string name="poi_health_facility_type_office">Ιατρείο</string>
+	<string name="poi_health_facility_type_field_hospital">Τύπος ιατρικής εγκατάστασης: κινητό νοσοκομείο</string>
+	<string name="poi_health_facility_type_counselling_centre">Τύπος ιατρικής εγκατάστασης: συμβουλευτικό κέντρο</string>
+	<string name="poi_health_facility_type_laboratory">Τύπος ιατρικής εγκατάστασης: εργαστήριο</string>
+	<string name="poi_health_facility_type_therapy">Τύπος ιατρικής εγκατάστασης: θεραπεία</string>
+	<string name="poi_health_facility_type_department">Τύπος ιατρικής εγκατάστασης: τμήμα</string>
+	<string name="poi_health_facility_type_dispensary">Τύπος ιατρικής εγκατάστασης: κλινική</string>
+	<string name="poi_health_facility_type_first_aid">Τύπος ιατρικής εγκατάστασης: πρώτες βοήθειες</string>
+	<string name="poi_health_facility_type_nursing_home">Τύπος ιατρικής εγκατάστασης: γηροκομείο</string>
 	</resources>
