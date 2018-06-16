@@ -473,7 +473,7 @@
 	<string name="modify_transparency">Transparenz ändern (0 - durchsichtig, 255 - undurchsichtig)</string>
 	<string name="layer_underlay">Underlay-Karte…</string>
 	<string name="map_underlay">Underlay-Karte</string>
-	<string name="map_underlay_descr">Karte als Unterlage auswählen.</string>
+	<string name="map_underlay_descr">Underlay-Karte auswählen.</string>
 	<string name="layer_overlay">Overlay-Karte…</string>
 	<string name="shared_string_none">Keine(r/s)</string>
 	<string name="map_overlay">Overlay-Karte</string>
@@ -634,7 +634,7 @@
 	<string name="fav_imported_sucessfully">Favoriten importiert</string>
 	<string name="fav_file_to_load_not_found">GPX-Datei mit den Favoriten nicht gefunden unter {0}</string>
 	<string name="fav_saved_sucessfully">Favoriten unter {0} gespeichert</string>
-	<string name="no_fav_to_save">Keine Favoriten zu speichern</string>
+	<string name="no_fav_to_save">Keine Favoritenpunkte zum Speichern</string>
 	<string name="shared_string_import">Import</string>
 	
 	<string name="error_occurred_loading_gpx">GPX konnte nicht geladen werden</string>
@@ -1255,7 +1255,7 @@ Proportionaler Speicher %4$s MB (Android Limit %5$s MB, Dalvik %6$s MB).</string
 	<string name="local_osm_changes_delete_all_confirm">Sie löschen %1$d OSM-Änderung(en). Fortfahren?</string>
 	<string name="shared_string_delete_all">Alle löschen</string>
 	<string name="amenity_type_seamark">Schifffahrtsobjekte</string>
-	<string name="app_modes_choose_descr">Auswahl der Nutzungsprofile, die in der App angezeigt werden sollen.</string>
+	<string name="app_modes_choose_descr">Wählen Sie die Profile aus, die in der App sichtbar sein sollen.</string>
 	<string name="app_modes_choose">App-profile</string>
 	<string name="routing_attr_prefer_motorway_name">Autobahnen bevorzugen</string>
 	<string name="routing_attr_prefer_motorway_description">Autobahnen bevorzugen</string>
@@ -2188,7 +2188,7 @@ Derzeit sind nur {2} MB verfügbar.</string>
 \n und mehr…</string>
     <string name="full_report">Vollständiger Bericht</string>
     <string name="open_street_map_login_and_pass">OpenStreetMap-Benutzername und -Passwort</string>
-    <string name="osm_live_email_desc">Informationen zu Beiträgen.</string>
+    <string name="osm_live_email_desc">Benötigt, um Ihnen Informationen zu Beiträgen zu geben.</string>
     <string name="osm_live_support_region">Unterstützte Region</string>
     <string name="report">Bericht</string>
     <string name="storage_permission_restart_is_required">Die App darf nun auf den externen Speicher schreiben, dazu ist aber ein manueller Neustart nötig.</string>
@@ -2525,8 +2525,8 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="shared_string_time_moving">Zeit in Bewegung</string>
     <string name="shared_string_time_span">Dauer</string>
     <string name="shared_string_max">Max</string>
-    <string name="shared_string_start_time">Abreise</string>
-    <string name="shared_string_end_time">Ankunft</string>
+    <string name="shared_string_start_time">Startzeit</string>
+    <string name="shared_string_end_time">Beendigungszeit</string>
     <string name="shared_string_color">Farbe</string>
     <string name="max_speed">Höchstgeschwindigkeit</string>
     <string name="average_speed">Durchschnittsgeschwindigkeit</string>
@@ -2730,12 +2730,12 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="quick_action_showhide_osmbugs_descr">Drücken dieser Aktionstaste blendet OSM-Notizen auf der Karte ein oder aus.</string>
     <string name="sorted_by_distance">Nach Entfernung sortiert</string>
     <string name="search_favorites">Favoriten suchen</string>
-    <string name="hillshade_menu_download_descr">Das Geländerelief-Overlay zu dieser Region herunterladen, um das Geländeprofil zu schattieren.</string>
+    <string name="hillshade_menu_download_descr">Um das Geländeprofil auf der Karte zu sehen, laden Sie die Geländerelief-Overlay Karte für diese Region herunter.</string>
     <string name="shared_string_plugin">Erweiterung</string>
     <string name="srtm_purchase_header">Um Höhenlinien auf der Karte zu sehen, müssen Sie die Höhenlinien-Erweiterung erwerben und installieren</string>
     <string name="srtm_menu_download_descr">Laden Sie die Höhenlinienkarte zu dieser Region herunter.</string>
-    <string name="hillshade_purchase_header">Installieren Sie die Höhenlinien-Erweiterung, um sie auf der Karte anzuzeigen</string>
-    <string name="private_access_routing_req">Ihr Ziel liegt in einem Gebiet mit Privatzugang. Unbefugtes Betreten von Privatwegen für diese Reise zulassen?</string>
+    <string name="hillshade_purchase_header">"Um das Geländeprofil auf der Karte zu sehen,  müssen Sie die Höhenlinien-Erweiterung kaufen und installieren"</string>
+    <string name="private_access_routing_req">Ihr Ziel liegt in einem Gebiet mit Privatzugang. Betreten von Privatwegen für diese Reise zulassen?</string>
     <string name="restart_search">Suche wiederholen</string>
     <string name="increase_search_radius">Suchradius vergrößern</string>
     <string name="nothing_found">Kein Suchergebnis</string>
@@ -3009,7 +3009,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="show_guide_line_descr">Richtungsanzeiger von Ihrem Standort zu aktiven Markierungspunkten einblenden.</string>
     <string name="show_arrows_descr">Ein oder zwei Pfeile anzeigen, die die Richtung zu den aktiven Markierungen angeben.</string>
     <string name="distance_indication_descr">Wählen Sie aus, wie der Abstand zu aktiven Markierungen angezeigt werden soll.</string>
-    <string name="active_markers_descr">Wählen Sie die Anzahl der aktiven Markierungen, die angezeigt werden sollen.</string>
+    <string name="active_markers_descr">Wählen Sie aus, wie viele Richtungsanzeiger angezeigt werden sollen.</string>
     <string name="osm_recipient_stat">%1$s bearbeitet, Summe %2$s mBTC</string>
     <string name="osm_recipients_label">OSM-Empfänger</string>
     <string name="total_donations">Spenden insgesamt</string>
@@ -3106,8 +3106,8 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="welcome_to_open_beta">Willkommen zur Open Beta</string>
     <string name="wikivoyage_travel_guide">Reiseführer</string>
     <string name="wikivoyage_travel_guide_descr">Führt innerhalb von OsmAnd ohne Internetverbindung zu den interessantesten Orten der Welt.</string>
-    <string name="monthly_map_updates">Kartenaktualisierungen: <b>Jeden Monat</b></string>
-    <string name="daily_map_updates">Kartenaktualisierungen: <b>Jede Stunde</b></string>
+    <string name="monthly_map_updates">Kartenaktualisierungen: <b>jeden Monat</b></string>
+    <string name="daily_map_updates">Kartenaktualisierungen: <b>jede Stunde</b></string>
     <string name="in_app_purchase">In-App-Kauf</string>
     <string name="in_app_purchase_desc">Einmalige Zahlung</string>
     <string name="in_app_purchase_desc_ex">Nach dem Kauf steht es Ihnen dauerhaft zur Verfügung.</string>
