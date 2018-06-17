@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
   
   <string name="layer_map_appearance">Configureer scherm</string>
   <string name="show_lanes">Rijstroken</string>
@@ -240,7 +239,7 @@ Er is nu {2} MB beschikbaar</string>
   <string name="local_index_mi_restore">Activeer</string>
   <string name="local_index_mi_backup">Deactiveer</string>
   
-  <string name="local_index_mi_reload">Verversen van SD-kaart</string>  
+    
   <string name="local_index_poi_data">Interessepunt-gegevens</string>
   <string name="local_index_address_data">Adresgegevens</string>
   <string name="local_index_transport_data">OV-gegevens</string>
@@ -1182,7 +1181,7 @@ Proportioneel werkgeheugen %4$s MB (Android limiet %5$s MB, Dalvik %6$s MB).</st
     <string name="route_to">Naar:</string>
     <string name="route_via">Via:</string>
     <string name="osb_author_dialog_password">OSM-wachtwoord (optioneel)</string>
-	<string name="announce_gpx_waypoints">GPX-routepunten</string>
+	
     <string name="speak_title">Aankondigen…</string>
 	<string name="speak_descr">Aankondigen van straatnamen, waarschuwingen (verplicht stoppen, drempels), snelheidscamera\'s of snelheidsbeperkingen</string>
 	<string name="speak_street_names">Straatnamen (TTS)</string>
@@ -1552,7 +1551,7 @@ Wil je een nieuwe map maken op de toegestane locatie en de OsmAnd-bestanden daar
     <string name="download_additional_maps">Download ontbrekende kaarten %1$s (%2$d MB)?</string>
     
     <string name="shared_string_waypoints">Routepunt(en)</string>
-    <string name="targets">Bestemmingen</string>
+    
     <string name="way_alarms">Waarschuwingen</string>
     <string name="speak_favorites">Favorieten in de buurt</string>
     <string name="speak_poi">Interessepunt in de buurt</string>
@@ -2108,23 +2107,7 @@ Lengtegraad:\t\t%2$s</string>
     
     <string name="dashboard_or_drawer_description">Kies tussen het flexibele Dashboard of een vast Menu. Dit is altijd te wijzigen via de dashboard-instellingen.</string>
     <string name="copied_to_clipboard">Gekopieerd naar klembord</string>
-    <string name="release_2_2">\\022 Nieuw contextmenu bij het aantikken van plekken op de kaart en op andere schermen 
-\n 
-\n • De kaart wordt direct getoond, tenzij \'Toon dashboard bij starten van de app\' is gekozen 
-\n 
-\n • Kies welke kaarten worden getoond op het dashboard 
-\n 
-\n • Mogelijkheid menu te gebruiken in plaats van het dashboard 
-\n 
-\n • Kaarten downloaden door op de wereldkaart te tikken 
-\n 
-\n • Fijnmaziger zoeken van POI 
-\n 
-\n • Betere bewerkingsmogelijkheden van POI en OSM 
-\n 
-\n • Kaarten downloaden is makkelijker en overzichtelijker 
-\n 
-\n en meer…</string>
+    
     <string name="shared_string_commit">Bijdrage versturen</string>
 	
     <string name="context_menu_item_delete_waypoint">GPX-routepunt wissen?</string>
@@ -2283,17 +2266,7 @@ Er is nu {2} MB beschikbaar</string>
     <string name="shared_string_move_up">Omhoog</string>
     <string name="shared_string_move_down">Omlaag</string>
     <string name="finish_navigation">Navigatie stoppen</string>
-    <string name="release_2_3">\\022 OSM Live: Ondersteun bijdragers aan de kaart en ontwikkelaars en ontvang dagelijks kaart-updates. 
-\n 
-\n • Markeervlaggetjes: Een nieuwe manier op snel plekken op de kaart te kiezen. 
-\n 
-\n • Nog meer details op de kaart met landspecifieke routeschildjes en nog veel meer nieuwe mogelijkheden. 
-\n 
-\n • De route-voorbereiding is vernieuwd. 
-\n 
-\n • Vele verbeteringen in het kaart-context-menu, zoals adres-zoek-functie. 
-\n 
-\n en nog meer…</string>
+    
     <string name="storage_permission_restart_is_required">OsmAnd heeft nu toestemming om de externe opslag te gebruiken. Een handmatige herstart is noodzakelijk.</string>
     <string name="full_report">Volledig Verslag</string>
     <string name="open_street_map_login_and_pass">OpenStreetMap loginnaam and wachtwoord</string>
@@ -2364,19 +2337,7 @@ Er is nu {2} MB beschikbaar</string>
     <string name="back_to_search">Terug naar zoekscherm</string>
     <string name="confirmation_to_delete_history_items">Geselecteerde items verwijderen uit geschiedenis?</string>
     <string name="show_something_on_map">Toon %1$s op de kaart</string>
-    <string name="release_2_4">\\022 Nieuwe krachtige zoekfunctie 
-\n 
-\n • Audio via Bluetooth is verbeterd 
-\n 
-\n • Verbeterde route-instructies, gesproken aanwijzingen en rijstrook-informatie 
-\n 
-\n • Verbeterde weergave van Openbaar Vervoer-routes 
-\n 
-\n • Vertalingen in nieuwe talen; ook regionale talen worden nu ondersteund 
-\n 
-\n • Vele ander verbeteringen en bug-fixes 
-\n 
-\n en nog meer…</string>
+    
     <string name="dist_away_from_my_location">Zoek tot %1$s ver weg</string>
     
     <string name="share_history_subject">gedeeld via OsmAnd</string>
@@ -2455,19 +2416,7 @@ Er is nu {2} MB beschikbaar</string>
     <string name="gpx_logging_no_data">Geen gegevens</string>
     <string name="shared_string_recorded">Opgenomen</string>
     <string name="shared_string_record">Opname</string>
-    <string name="release_2_5">• Aanklikbare iconen op de kaart 
-\n 
-\n • Krachtige POI Filter Zoekfunctie: zoek naar bijvoorbeeld naar restaurants per keuken, campings met speciale voorzieningen 
-\n 
-\n • Nieuwe Topo kaartstijl, speciaal voor fietsers en wandelaars 
-\n 
-\n • Verbeterde GPX-opname, met nieuwe instellingen 
-\n 
-\n • Verbeterde navigatie-aanwijzingen (Android Wear) 
-\n 
-\n • Vele andere verbeteringen en bugfixes 
-\n 
-\n en nog meer…</string>
+    
     <string name="gpx_no_tracks_title">Je hebt nog geen GPX-tracks</string>
     <string name="gpx_no_tracks_title_folder">Je kunt ook GPX-tracks toevoegen aan de map</string>
     <string name="gpx_add_track">GPX-track toevoegen</string>
@@ -2500,25 +2449,7 @@ Er is nu {2} MB beschikbaar</string>
     <string name="rendering_attr_contourWidth_name">Hoogtelijnen dikte</string>
     <string name="rendering_attr_hideWaterPolygons_description">Watervlakten</string>
     <string name="rendering_attr_hideWaterPolygons_name">Verberg watervlakten</string>
-    <string name="release_2_6">"\\022 Nieuw: Sneltoets op de kaart: je favoriete acties snel bereikbaar 
-\n
-\n • Verbeterde reactie op  het touchscreen 
-\n 
-\n • Nieuw font ondersteunt meer talen op de kaart 
-\n 
-\n • TTS  voor regionale taalvarianten 
-\n 
-\n •  Duidelijker kaartweergave en betere weergave van Wikipedia 
-\n
-\n • Ondersteunt Open Location Code (OLC) 
-\n 
-\n • Weergave van een hoogte- en hellings-en snelheidsprofiel van een berekende route of een opgenomen GPX-track 
-\n 
-\n • Extra fietsnavigarltie-instellingen met rijstijl en hoogtegegevens 
-\n 
-\n • Diverse andere verbeteringen en bug fixes 
-\n 
-\n en meer …"</string>
+    
 	<string name="auto_split_recording_title">GPX-track automatisch splitsen na een onderbreking</string>
 	<string name="auto_split_recording_descr">Start een nieuw GPX-segment na een onderbreking van 6 minuten; een nieuwe GPX-track na 2 uur, of een nieuw bestand na een langere pauze na een datum wijziging.</string>
     <string name="navigate_point_olc">Open Location Code (OLC)</string>
@@ -2899,15 +2830,7 @@ voor Gebied: %1$s x %2$s</string>
     <string name="route_point_one">Punt 1 van de route</string>
     <string name="empty_state_my_tracks">Sporen toevoegen en vastleggen</string>
     <string name="map_widget_ruler_control">Cirkel</string>
-    <string name="release_2_7">"\\022 Mapillary-plugin met foto\'s van straten
-\n
-\n • Lineaal om afstanden te meten
-\n
-\n •  GPX splitsintervallen met gedetailleerde informatie over het traject
-\n
-\n • Andere verbeteringen en bugfixes
-\n
-\n"</string>
+    
     <string name="live_monitoring_max_interval_to_send">Tijdbuffer voor verzenden van live track</string>
     <string name="live_monitoring_max_interval_to_send_desrc">Geef een tijd op gedurende welke posties bewaard worden als er geen internetverbinding is</string>
     <string name="mappilary_no_internet_desc">U moet een internetverbinding hebben om Mapillary-foto\'s te bekijken</string>
@@ -2923,13 +2846,7 @@ voor Gebied: %1$s x %2$s</string>
     <string name="route_is_calculated">Route berekend</string>
     <string name="round_trip">Retour</string>
     <string name="osn_modify_dialog_error">Kan notitie niet bewerken</string>
-    <string name="release_2_8">\\022 Geheel vernieuwde kaartmarkeringen met lijnen en routeplanning
-\n
-\n• Afstandmeter kan vastklikken aan wegen en als track opslaan
-\n
-\n• OsmAnd Live: bugfixes, data op de server elke 15 minuten ververst, en updates van de navigatie
-\n
-\n</string>
+    
     <string name="rendering_value_darkyellow_name">Donkergeel</string>
     <string name="wrong_input">Foutieve invoer</string>
 	<string name="enter_new_name">Kies een nieuwe naam</string>

@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
     <string name="av_locations_selected_desc">Файл GPX с координатами и данными выбранных заметок.</string>
     <string name="av_locations_all_desc">Файл GPX с координатами и данными всех заметок.</string>
     <string name="favorite_empty_place_name">Место</string>
@@ -185,19 +184,7 @@
     <string name="shared_string_recorded">Записано</string>
     <string name="shared_string_record">Запись</string>
     <string name="gpx_logging_no_data">Нет данных</string>
-    <string name="release_2_5">• Нажимаемые иконки на карте
-\n
-\n • Гибкая фильтрация POI в поиске: ищите рестораны по типу кухни, кемпинги по наличию удобств
-\n
-\n • Новый стиль карты Topo для пешего туризма и велосипедистов
-\n
-\n • Улучшена запись поездки (новые настройки)
-\n
-\n • Улучшенные навигационные уведомления (Android Wear)
-\n
-\n • Множество других улучшений и исправлений ошибок
-\n
-\n и многое другое…</string>
+    
     <string name="save_track_min_speed">Минимальная скорость для записи</string>
     <string name="save_track_min_speed_descr">Фильтр: не записывать точки ниже этой скорости.</string>
     <string name="save_track_min_distance">Минимальное перемещение для записи</string>
@@ -496,7 +483,7 @@
     <string name="local_index_descr_title">Управление картами.</string>
     <string name="local_index_mi_restore">Активировать</string>
     <string name="local_index_mi_backup">Архивировать</string>
-    <string name="local_index_mi_reload">Перечитать с SD-накопителя</string>
+    
     <string name="shared_string_download">Загрузить</string>
     <string name="local_index_poi_data">POI</string>
     <string name="local_index_address_data">Адрес</string>
@@ -1336,7 +1323,7 @@
     <string name="speak_street_names">Названия улиц (TTS)</string>
     <string name="speak_title">Объявлять…</string>
     <string name="speak_descr">Настройка озвучивания названий улиц, предупреждений (лежачих полицейских, знаков \"Движение без остановки запрещено\"), камер контроля скорости, ограничений скорости.</string>
-    <string name="announce_gpx_waypoints">Маршрутные точки GPX</string>
+    
     <string name="osb_author_or_password_not_specified">Пожалуйста, укажите в настройках пароль и имя пользователя OSM</string>
     <string name="route_descr_map_location">Карта: </string>
     <string name="osb_author_dialog_password">Пароль OSM (опционально)</string>
@@ -1677,7 +1664,7 @@
     <string name="rendering_value_pedestrian_name">Пешеход</string>
     <string name="download_additional_maps">Скачать недостающие карты %1$s (%2$d MB)?</string>
     <string name="shared_string_waypoints">Путевые точки</string>
-    <string name="targets">Пункты назначения</string>
+    
     <string name="way_alarms">Дорожные предупреждения</string>
     <string name="speak_favorites">Близлежащие избранные</string>
     <string name="speak_poi">Близлежащие POI</string>
@@ -2267,17 +2254,7 @@
     <string name="updates_size">Размер обновления</string>
     <string name="reports_for">Отчет для</string>
 <string name="storage_permission_restart_is_required">Приложение получило разрешение на запись во внешнее хранилище. Требуется перезагрузка приложения.</string>
-    <string name="release_2_3">• OSM Live. Поддержка авторов и разработчиков карт и получение почасовых обновлений карты.
-\n
-\n• Маркеры. Новый способ для быстрого выбора мест на карте.
-\n
-\n• Более подробные OSM карты со специфическими дорожными знаками стран и с большим количеством новых функций.
-\n
-\n• Улучшен внешний вид и подготовка маршрута.
-\n
-\n• Множество улучшений в контекстном меню карты таких как поиск адреса.
-\n
-\nИ многое другое…</string>
+    
     <string name="report">Отчет</string>
     <string name="shared_string_move_up">Переместить ↑</string>
     <string name="shared_string_move_down">Переместить ↓</string>
@@ -2348,15 +2325,7 @@
     <string name="coords_format_descr">Формат для географических координат.</string>
   	<string name="app_mode_bus">Автобус</string>
  	<string name="app_mode_train">Поезд</string>
-    <string name="release_2_4">
-	\u2022 Новый полнотекстовый поиск\n\n
-	\u2022 Интеграция через Bluetooth автомобильных аудиосистем / колонок\n\n
-	\u2022 Улучшенная навигация по маршруту, голосовые подсказки, отображение полос движения\n\n
-	\u2022 Улучшенный слой транспорта с отображением маршрутов\n\n
-	\u2022 Больше поддерживаемых языков интерфейса\n\n
-	\u2022 Множество улучшений и исправлений ошибок\n\n
-	и многое другое…
-    </string>
+    
     <string name="rendering_attr_hideOverground_name">Надземные объекты</string>
 
     <string name="no_update_info_desc">Не проверять информацию о новых версиях и скидках от OsmAnd.</string>
@@ -2441,27 +2410,7 @@
     <string name="quick_action_map_styles">Стили карты</string>
     <string name="quick_action_btn_tutorial_title">Изменить положение кнопки</string>
 	<string name="shared_string_action_name">Название действия</string>
-<string name="release_2_6">\\022 Новая функция: кнопка быстрого действия 
-\n 
-\n• Улучшенный ответ на жесты сенсорного экрана (напр. перемещение и масштабирование)
-\n 
-\n• Новый шрифт карты, охватывающий больше языков 
-\n 
-\n• Поддержка TTS для вариантов региональных языков 
-\n 
-\n• Улучшение видимости в нескольких стилях карт и Википедии 
-\n 
-\n• Поддержка Open Location Code (OLC) 
-\n 
-\n• Отображение высоты, наклона и профиля скорости для записанного GPX и построенного маршрута 
-\n 
-\n• Настройка \"Стиль вождения\" и улучшение логики для велосипедного роутинга 
-\n 
-\n• Настройки для использования данных о высотах в велосипедном роутинге 
-\n 
-\n• Множество других улучшений и исправлений ошибок 
-\n 
-\nи многое другое…</string>
+
 	<string name="lang_sr_latn">Сербский (латиница)</string>
     <string name="quick_action_navigation_voice">Голос вкл/выкл</string>
     <string name="quick_action_navigation_voice_off">Голос выключен</string>
@@ -2494,15 +2443,7 @@
     <string name="map_widget_ruler_control">Радиус-линейка</string>
     <string name="open_mapillary">Открыть Mapillary</string>
     <string name="shared_string_install">Установить</string>
-    <string name="release_2_7">• Плагин Mapillary с фотографиями улиц
-\n
-\n• Виджет линейка для измерения расстояний
-\n
-\n• Разбивка Gpx на интервалы с подробной информацией о вашем треке
-\n
-\n• Другие улучшения и исправления ошибок
-\n
-\n</string>
+    
     <string name="shared_string_paused">Приостановлено</string>
     <string name="rendering_value_fine_name">Правильно</string>
     <string name="average">Средняя</string>
@@ -2530,23 +2471,7 @@
     <string name="mapillary_image">Фотография Mapillary</string>
     <string name="improve_coverage_mapillary">Улучшить фотопокрытие через Mapillary</string>
     <string name="hide_from_zoom_level">Скрыть от шкалы приближения</string>
-    <string name="release_2_2">"\\022 Новый контекстно-зависимый Графический Интерфейс для выделения локаций на карте  и других экранов
-\n
-\n • Теперь экран карты запускается напрямую, если не был выбран пункт \'Показать панель управления при запуске приложения\'
-\n
-\n • Настройка отображения вида и типа карт на панели управления
-\n
-\n • Пропускать панель управления, если вы предпочитаете управлять из основного меню
-\n
-\n • Чтобы загрузить карты, вам необходимо выбрать регионы на карте мира
-\n
-\n • Теперь поиск достопримечательностей (POI) поддерживает более конкретные запросы
-\n
-\n • Улучшена функциональность редактирования POI и OSM
-\n
-\n • Переработанны интерфейс труктура загрузки данных карты
-\n
-\nи прочее…"</string>
+    
     <string name="rendering_value_translucent_pink_name">Прозрачно-розовый</string>
     <string name="lang_ber">Берберский язык</string>
     <string name="move_all_to_history">Переместить все в историю</string>
@@ -2608,34 +2533,8 @@
     <string name="marker_moved_to_history">Маркер карты перемещен в историю</string>
     <string name="marker_moved_to_active">Маркер карты перемещен в действующие</string>
     <string name="show_direction">Указатель расстояния</string>
-    <string name="release_2_8">• Полностью переработанные маркеры карты, с направляющими линиями и планированием маршрута 
-\n 
-\n• Инструмент измерения расстояния, с привязкой к дороге и сохранением точек в качестве трека 
-\n 
-\n• OsmAnd Live: исправления ошибок, обновление данных на сервере каждые 30 минут, обновления учитываются в навигации
-\n
-\n</string>
-    <string name="release_2_9">• Обнаружение стоп-сигналов теперь учитывает направление движения 
-\n 
-\n • Новый алгоритм, предоставляющий действительные значения подъема/спуска для треков GPX 
-\n 
-\n • Время ходьбы в зависимости от местности (подъема) (правило Нейсмита) 
-\n
-\n• Обновили контекстное меню: показываем когда откроется/закроется POI
-\n
-\n • Меню транспорта: вынесли наверх все доступные маршруты
-\n
-\n • Википедия: добавили кнопку перехода к статье, обновили внешний вид статьи
-\n
-\n • Маршрут: добавили смену начальной и конечной точки
-\n
-\n • Заметки: добавили сортировку по типу и дате
-\n
-\n • OSM правки: показываем иконку и название категории POI, отображаем совершенное действие
-\n
-\n • Новый экран быстрого ввода координат, для быстрого создания маркеров
-\n
-\n</string>
+    
+    
     <string name="show_map">Показать карту</string>
     <string name="plan_route_no_markers_toast">Вы должны добавить по крайней мере один маркер, чтобы использовать эту функцию.</string>
     <string name="osn_modify_dialog_error">Не удалось изменить заметку</string>
@@ -2984,10 +2883,10 @@
     <string name="purchase_subscription_title">Подписаться - %1$s</string>
 
     <string name="wikivoyage_offline">Викигид в автономном режиме</string>
-    <string name="dayly_map_updates">Обновления карты: ежедневные</string>
+    
     <string name="unlimited_downloads">Неограниченные загрузки</string>
     <string name="wikipedia_offline">Википедия в автономном режиме</string>
-    <string name="contour_lines_sea_depth">Контурные линии + Морские глубины</string>
+    
     <string name="unlock_all_features">Разблокировать все функции OsmAnd</string>
 
     <string name="monthly_map_updates">Обновления карт: <b>ежемесячные</b></string>

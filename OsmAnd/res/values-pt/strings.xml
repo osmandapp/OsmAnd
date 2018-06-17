@@ -690,7 +690,7 @@
   <string name="local_index_mi_restore">Activar</string>
   <string name="local_index_mi_backup">Desactivar</string>
   
-  <string name="local_index_mi_reload">Refresh</string>
+  
   <string name="shared_string_download">Download</string>
   
   <string name="local_index_poi_data">Dados POI</string>
@@ -1127,7 +1127,7 @@
 	<string name="driving_region_uk">Reino Unido, Índia, Austrália e outras</string>
 	    
     
-    <string name="announce_gpx_waypoints">Anunciar pontos intermédios GPX</string>
+    
     <string name="speak_title">Anunciar…</string>
 	<string name="speak_descr">Configure para anunciar nomes das ruas, avisos de tráfego (paragens obrigatórias, lombas), avisos de radares, limites de velocidade</string>
 	<string name="speak_street_names">Anunciar nome das ruas (TTS)</string>
@@ -1677,7 +1677,7 @@ Clique no widget de medição para ver mais ações.</string>
     <string name="wake_on_voice">Acender a tela</string>
     <string name="configure_map">Configurar mapa</string>
     <string name="shared_string_waypoints">Pontos de parada</string>
-    <string name="targets">Destinos</string>
+    
     <string name="shared_string_dismiss">Descartar</string>
 	<string name="rendering_category_others">Outros atributos do mapa</string>
     <string name="rendering_attr_showAccess_name">Mostrar restrições de acesso</string>
@@ -1724,8 +1724,7 @@ Clique no widget de medição para ver mais ações.</string>
     <string name="show_on_start_description">\'Desligado\' lança directamente para a vista do mapa</string>
     <string name="show_on_start">Mostrar no arranque</string>
     <string name="copied_to_clipboard">Copiado para a Área de Transferências</string>
-    <string name="release_2_2">" • Novo interface do utilizador sensível ao contexto, ao tocar locais no mapa, ou em outras telas\n\n• Tela do Mapa é agora lançada diretamente, a menos que \'Mostrar Painel de instrumentos no arranque\' seja selecionado\n\n• Configure quais e de que forma os cartões são exibidos no Painel de instrumentos\n\n• Desactivar o Painel, se preferir um controle baseado em menus\n\n• Para fazer download de mapas, as regiões podem ser seleccionadas directamente, tocando no mapa do mundo\n\n• Busca por \'Pontos de Interesse\' agora oferece suporte a consultas mais específicas\n\n• Melhoria nos \'Pontos de Interesse\' e funcionalidades de edição OSM\n\n• Reformulação de estrutura e de interface para download de mapas de dados 
-\n\ne mais… "</string>
+    
     <string name="osm_save_offline">Guardar off-line</string>
     <string name="osm_edit_modified_poi">Ponto de Interesse OSM modificado</string>
     <string name="impassable_road_desc">Escolha as estradas que quer evitar durante a navegação</string>
@@ -2273,39 +2272,11 @@ Clique no widget de medição para ver mais ações.</string>
     <string name="routing_attr_height_obstacles_description">Utilizar dados de elevação de terreno provenientes de SRTM, ASTER e EU-DEM</string>
     <string name="rendering_attr_depthContours_description">Mostrar pontos e contornos de profundidade</string>
     <string name="rendering_attr_depthContours_name">Contornos de profundidade náuticos</string>
-    <string name="release_2_6">\\022 Nova funcionaldiade: Botão de ação rápida
-\n
-\n• Resposta melhorada a gestos do ecrã touch (ex. panorâmico e aproximação em simultâneo)
-\n
-\n• Novas fontes de mapas com mais localizações
-\n
-\n• Suporte de TTS para variantes de linguagem regionais (e sotaques)
-\n
-\n• Melhoria de visibilidade em múltiplos estilos de mapa e wikipedia
-\n
-\n• Suporte para Open Location Code (OLC)
-\n
-\n• Mostrar elevação, encosta, e perfil de velocidade para percursos GPX gravados e percursos calculados
-\n
-\n• Configuração \"Estilo de condução\" e melhorias lógicas em percursos de bicicleta
-\n
-\n• Definições para utilizar dados de altitude em rotas de bicicleta
-\n
-\n• Várias outras melhorias e correção de erros
-\n
-\ne muito mais…</string>
+    
     <string name="show_transparency_seekbar">Mostra a transparência da barra de navegação</string>
     <string name="shared_string_widgets">Widgets</string>
     <string name="rendering_attr_hideUnderground_name">Objectos subterrâneos</string>
-    <string name="release_2_7">\\022 Plugin Mapillary com imagens ao nível da rua
-\n
-\n • Widget de régua para medição da distância
-\n
-\n • Intervalos GPX com informação detalhada sobre o seu percurso
-\n
-\n • Outras melhores e correção de erros
-\n
-\n</string>
+    
     <string name="auto_split_recording_title">Divisão automática de gravações após separação</string>
     <string name="auto_split_recording_descr">Iniciar novo segmento após uma quebra de 6 min, novo percurso após quebra de 2 h, ou novo arquivo após quebra mais longa se a data se tiver alterado.</string>
     <string name="rendering_attr_contourDensity_description">Densidade de linhas de contorno</string>
@@ -2344,19 +2315,7 @@ Clique no widget de medição para ver mais ações.</string>
     <string name="shared_string_recorded">Gravado</string>
     <string name="shared_string_record">Registo</string>
     <string name="gpx_logging_no_data">Sem dados</string>
-    <string name="release_2_5">\\022 Icones selecionáveis no mapa
-\n
-\n • Pesquisa poderosa filtrada por pontos de interesse (POI): Pesquise, ex. restaurantes por cozinha, ou campgrounds with specific facilities 
-\n
-\n • Novo estilo de Mapa Topo para ciclistas e montanhistas 
-\n
-\n • Gravação de viagem melhorada
-\n
-\n • Notificações de navegação melhoradas (Android Wear)
-\n
-\n • Muitas outras melhorias e correção de erros
-\n
-\n e muitos mais…</string>
+    
     <string name="rendering_attr_contourColorScheme_description">Esquema de cores das linhas de contorno</string>
     <string name="save_track_min_speed">Velocidade mínima para registo</string>
     <string name="save_track_min_speed_descr">Filtro: Definir velocidade mínima para um ponto poder ser registado</string>

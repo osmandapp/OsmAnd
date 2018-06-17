@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
     <string name="rendering_attr_roadColors_description">選擇道路的色彩調配：</string>
     <string name="rendering_attr_roadColors_name">道路的色彩調配</string>
     <string name="map_widget_show_destination_arrow">顯示目的地方向</string>
@@ -451,7 +450,7 @@
     <string name="local_index_mi_restore">啟用</string>
     <string name="local_index_mi_backup">停用</string>
 
-    <string name="local_index_mi_reload">從記憶卡重新載入</string>
+    
     <string name="local_index_poi_data">POI 資料</string>
     <string name="local_index_address_data">地址資料</string>
     <string name="local_index_transport_data">公共交通資料</string>
@@ -1130,7 +1129,7 @@
     <string name="speak_cameras">測速照相</string>
     <string name="speak_traffic_warnings">交通狀況警示</string>
     <string name="osb_author_dialog_password">OSM 密碼 (選項)</string>
-    <string name="announce_gpx_waypoints">GPX 航點</string>
+    
     <string name="speak_title">通報…</string>
     <string name="speak_descr">組態通報街道名稱、交通流量警示（強制停止、減速丘）、測速照相警告、速限。</string>
     <string name="speak_street_names">街道名稱 (TTS)</string>
@@ -1507,7 +1506,7 @@
     <string name="download_additional_maps">要下載缺少的地圖 %1$s (%2$d MB) 嗎？</string>
 
     <string name="shared_string_waypoints">航點</string>
-    <string name="targets">目的地</string>
+    
     <string name="way_alarms">交通狀況提醒</string>
     <string name="speak_favorites">附近我的收藏</string>
     <string name="speak_poi">附近的 POI</string>
@@ -2067,25 +2066,7 @@
     <string name="rendering_attr_roadStyle_description">道路樣式</string>
     <string name="poi_dialog_reopen">重新開啟</string>
 	<string name="osm_save_offline">離線儲存</string>
-    <string name="release_2_2">"\\u2022 在地圖上和其它螢幕上，為點擊位置做了新的敏捷內容選單使用者界面 
-\n 
-\n • 地圖螢幕上現在除了直接啟動外，還有\'在應用程式時啟動顯示儀表板\'可選 
-\n 
-\n • 組態哪些以及何種卡可以在儀表板上顯示 
-\n 
-\n • 如果您喜歡基本選單的應用程式控制，繞過儀表板方式 
-\n 
-\n • 要下載地圖，可以直接在全球地圖上點選區域 
-\n 
-\n • 更好的重新計算路線（現在引擎經過反復的嘗試，建議一條不同的路線） 
-\n 
-\n •  POI (興趣點)搜尋現在支援更具體的查詢 
-\n 
-\n • 改善過的 POI (興趣點)和 OSM 編輯功能 
-\n 
-\n • 地圖資料下載結構和界面重新設計 
-\n 
-\n 還有更多…"</string>
+    
     <string name="copied_to_clipboard">複製到剪貼簿</string>
     
     
@@ -2239,17 +2220,7 @@
     <string name="report">報告</string>
     <string name="file_name_containes_illegal_char">檔案名稱含有違反規則的字符</string>
 <string name="storage_permission_restart_is_required">現在應用程式允許寫入外部記憶體。但是需要重新啟動程式。</string>
-    <string name="release_2_3">"\\u2022 OSM 即時。支援地圖貢獻者和開發者和每小時獲得地圖更新。
-\n 
-\n • 地圖標記。一種新的方式以快速在地圖上選擇地點。 
-\n 
-\n • 更詳細的 OSM 地圖與國家具體的公路標誌和許多新的地圖功能。 
-\n 
-\n • 改善外觀和感覺的路線準備。 
-\n 
-\n • 在地圖下拉選單中有許多改善，如下拉地址查找。 
-\n 
-\n  以及更多…"</string>
+    
     <string name="no_map_markers_found">請透過地圖增加地圖標記</string>
     <string name="no_waypoints_found">未發現任何航點</string>
     <string name="rendering_value_medium_name">中等</string>
@@ -2319,19 +2290,7 @@
     <string name="show_something_on_map">在地圖上顯示 %1$s</string>
     <string name="dist_away_from_my_location">查詢 %1$s 路線</string>
     
-    <string name="release_2_4">\\u2022 新加入非常強大的自由文字查詢
-\n 
-\n • 透過藍牙集成汽車音響系統 / 電話揚聲器 
-\n 
-\n • 改進的路線引導、 語音提示，和轉彎道指示 
-\n 
-\n • 改進了運輸層與路線繪製 
-\n 
-\n • 增加了更多的語言環境，現在支援區域的語言環境 
-\n 
-\n • 許多其它的改善和修正錯誤 
-\n 
-\n 以及更多…</string>
+    
     <string name="coords_search">座標查詢</string>
     <string name="advanced_coords_search">進階座標查詢</string>
     <string name="route_stops_before">%1$s 之前停止</string>
@@ -2410,19 +2369,7 @@
     
     
     <string name="shared_string_notifications">通知</string>
-    <string name="release_2_5">\\022 可輕點在地圖上的圖示 
-\n 
-\n• 非常強大的 POI 篩選查詢：例如依菜餚找餐館或附有特定設施的露營場地 
-\n 
-\n• 新的地形圖樣式給自行車和徒步旅行者 
-\n 
-\n• 加強的行程記錄 
-\n 
-\n• 改善了導航通知（Android Wear） 
-\n 
-\n• 許多其它的改善和錯誤修復 
-\n 
-\n和更多…</string>
+    
     <string name="gpx_no_tracks_title">您尚未有任何的 GPX 檔案</string>
     <string name="gpx_no_tracks_title_folder">您也可以增加 GPX 檔案到資料夾</string>
     <string name="gpx_add_track">增加 GPX 檔案</string>
@@ -2538,27 +2485,7 @@
     <string name="quick_action_page_list_descr">輕點這個動作按鈕會直達下面的清單。</string>
     <string name="auto_split_recording_title">自動分割錄製之後的間隙</string>
 	<string name="auto_split_recording_descr">如果日期已更改，開始新區段在6分鐘後的間隔，新軌跡在2小時後的間隔，或新檔案在更長的間隔之後。</string>
-    <string name="release_2_6">"\\u2022 新功能：快速動作按鈕 
-\n 
-\n •  改進了觸控螢幕手勢的回應(同時平移和縮放) 
-\n
-\n • 新的地圖字體覆蓋了更多的語言環境 
-\n
-\n • 支援 TTS 不同版本的區域語言(和語法) 
-\n
-\n • 在一些地圖樣式和維基百科的清晰度增強 
-\n
-\n • 支援開放位置碼 (OLC) 
-\n
-\n •  為記錄的 GPX 軌跡和預測的路線顯示海拔、坡度和速度的概貌 
-\n
-\n •  為自行車路線的「騎行樣式」設定和邏輯改進 
-\n
-\n •  給自行車路線的高度資料設定 
-\n
-\n •  其它的幾項改進和錯誤修復 
-\n
-\n 和更多…"</string>
+    
 	<string name="rendering_attr_depthContours_description">顯示等深線和標記。</string>
     <string name="rendering_attr_depthContours_name">航海等深線</string>
 	
@@ -2835,15 +2762,7 @@
     
     
     <string name="min_max">最小/最大</string>
-    <string name="release_2_7">\\u2022 Mapillary 外掛元件與街道等級影像
-\n
-\n • 用於距離測量的尺規小工具
-\n
-\n • GPX 分配間隔與關於您軌跡的詳細資訊
-\n
-\n • 其他改進和錯誤修正
-\n
-\n</string>
+    
     <string name="rendering_value_translucent_pink_name">半透明粉紅色</string>
     <string name="quick_action_resume_pause_navigation">暫停/繼續導航</string>
     <string name="quick_action_resume_pause_navigation_descr">輕點此按鈕以暫停或繼續導航。</string>
@@ -2949,13 +2868,7 @@
     <string name="osn_modify_dialog_error">無法修改註解</string>
     <string name="osn_modify_dialog_title">修改註解</string>
     <string name="context_menu_item_modify_note">修改 OSM 註解</string>
-    <string name="release_2_8">\\022 完全重做地圖標記偕同方向線和路線規劃 
-\n 
-\n • 測量距離工具嵌入快照於道路樣貌和儲存標點為軌跡 
-\n 
-\n • OsmAnd Live：修復錯誤，每30分鐘伺服器上最新的資料，更新應用到導航裡 
-\n 
-\n</string>
+    
     <string name="rendering_value_darkyellow_name">暗黃色</string>
     <string name="show_map">顯示地圖</string>
     <string name="route_is_calculated">路線計算</string>
@@ -3056,26 +2969,7 @@
     <string name="touring_view_renderer">旅遊風景</string>
     <string name="nautical_renderer">航海</string>
 <string name="rendering_attr_hidePOILabels_name">POI 標籤</string>
-    <string name="release_2_9">\\022 更新了快顯功能選單：顯示 POI 何時開啟/關閉
-\n 
-\n • 交通運輸選單：所有可用到的路線現在都在頂部
-\n
-\n • 維基百科：增加按鈕開啟原創文章，更新了文章的外觀
-\n 
-\n • 路線：增加了互換起點和終點的實用性只要一次點觸 
-\n 
-\n • 註解：按類型和日期增加排序 
-\n 
-\n • OSM 編輯：顯示 POI 類型的圖示和名稱，陳列已完成的操作 
-\n 
-\n • 為快速建立標記，新增了快速坐標輸入畫面 
-\n
-\n • 停止標誌的檢測現在考量了駕駛的方向
-\n
-\n • 為 GPX 軌跡提供有意義的上坡/下坡值的新運算法則
-\n
-\n • 地形（上坡）察覺登山健行時間（尼史密夫定律）
-\n</string>
+    
     <string name="will_open_tomorrow_at">明天營業於</string>
     <string name="copy_location_name">複製標點/POI 名稱</string>
     <string name="toast_empty_name_error">無名稱的位置</string>
@@ -3160,10 +3054,10 @@
     <string name="purchase_subscription_title">訂閱 - %1$s</string>
 
     <string name="wikivoyage_offline">離線維基導遊</string>
-    <string name="dayly_map_updates">地圖更新：每天</string>
+    
     <string name="unlimited_downloads">無限制的下載</string>
     <string name="wikipedia_offline">離線維基百科</string>
-    <string name="contour_lines_sea_depth">等高線 + 海洋深度</string>
+    
     <string name="unlock_all_features">解鎖所有 OsmAnd 功能</string>
 
     <string name="monthly_map_updates">地圖更新：<b>每個月</b></string>

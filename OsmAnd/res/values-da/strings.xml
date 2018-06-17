@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
     <string name="srtm_paid_version_msg">Overvej at betale for \'Højdekurve\' udvidelsen for at støtte videre udvikling.</string>
     <string name="av_def_action_video">Optag video</string>
     <string name="av_def_action_audio">Optag lyd</string>
@@ -579,7 +578,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="local_index_mi_restore">Aktiver</string>
     <string name="local_index_mi_backup">Deaktiver</string>
 
-    <string name="local_index_mi_reload">Genindlæs fra hukommelseskort</string>
+    
     <string name="local_index_address_data">Adressedata</string>
     <string name="local_index_transport_data">Kollektivtrafikdata</string>
     <string name="local_index_map_data">Kortdata</string>
@@ -1155,7 +1154,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="speak_title">Meddel…</string>
     <string name="speak_descr">Konfigurer til at meddele gadenavne, trafikadvarsler (tvungne stop, vejbump), fartkameraadvarsler, hastighedsgrænser.</string>
     <string name="speak_street_names">Gadenavne (talesyntese)</string>
-    <string name="announce_gpx_waypoints">GPX-rutepunkter</string>
+    
 
 
     <string name="driving_region_japan">Japan</string>
@@ -1529,7 +1528,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="download_additional_maps">Hent manglende kort %1$s (%2$d MB)?</string>
 
     <string name="shared_string_waypoints">Rutepunkter</string>
-    <string name="targets">Destinationer</string>
+    
     <string name="way_alarms">Trafikadvarsler</string>
     <string name="speak_favorites">Favoritter i nærheden</string>
     <string name="speak_poi">Interessepunkt (IP) i nærheden</string>
@@ -2108,23 +2107,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
 	<string name="osn_close_dialog_success">Note lukket</string>
 	<string name="osm_edit_modified_poi">Ændret OSM IP</string>
     <string name="osm_edit_deleted_poi">Slettet OSM IP</string>
-    <string name="release_2_2">• Ny kontekstafhængig brugergrænseflade når der vælges lokationer på kortet og på andre skærme 
-\n 
-\n • Kortskærmen vises direkte, medmindre \'Vis betjeningspanel ved start\' er valgt 
-\n 
-\n • Konfigurer hvordan og hvilket indhold der vises på betjeningspanelet 
-\n 
-\n • Forbigå betjeningspanel hvis der ønskes menubaseret kontrol 
-\n 
-\n • Hent kort, områder ved at trykke direkte på verdenskortet 
-\n 
-\n• IP søgning understøtter nu mere specifikke forespørgsler 
-\n 
-\n • Forbedret IP og OSM redigeringsfunktionalitet 
-\n 
-\n • Hentning af kortfiler, struktur og grænseflade er omarbejdet 
-\n 
-\n og mere…</string>
+    
     <string name="osm_save_offline">Gem offline</string>
     <string name="rendering_attr_currentTrackColor_description">GPX-farve</string>
     <string name="rendering_attr_currentTrackWidth_description">GPX-bredde</string>
@@ -2281,18 +2264,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="finish_navigation">Stop navigation</string>
     <string name="shared_string_move_up">Flyt ↑</string>
     <string name="shared_string_move_down">Flyt ↓</string>
-    <string name="release_2_3">• OSM Live. Støt bidragsyderne og udviklere af kortet og få kortopdateringer hver time. 
-\n 
-\n• Kortmarkører. En ny måde til hurtigt at vælge steder på kortet. 
-\n 
-\n• Mere detaljerede OSM-kort med landespecifikke vejskilte og masser af nye kortfunktioner. 
-\n 
-\n• Forbedret ruteplanlægning. 
-\n 
-\n• Mange forbedringer i kontekstmenuen på kortet, såsom indholdsbestemt adresseopslag. 
-\n 
-\nog mere…
-\n</string>
+    
     <string name="full_report">Fuldstændig rapport</string>
     <string name="open_street_map_login_and_pass">OpenStreetMap brugernavn og adgangskode</string>
     <string name="storage_permission_restart_is_required">Programmet har nu lov til at skrive til ekstern lager, men en genstart er påkrævet.</string>
@@ -2365,19 +2337,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="lang_hsb">Øvresorbisk</string>
     <string name="share_history_subject">delt via OsmAnd</string>
     
-    <string name="release_2_4">"• Ny meget stærk fritekstsøgning 
-\n 
-\n  • Integration med bilens lydsystem og telefon via Bluetooth 
-\n
-\n  • Forbedret rutevejledning, talevejledning og angivelse af svingbaner 
-\n
-\n • Forbedret transportlag med rutekort 
-\n
-\n  • Tilføjet flere sprog og understøtter nu regionale sprog 
-\n
-\n  • Mange andre forbedringer og fejlrettelser 
-\n
-\n  og mere…"</string>
+    
     <string name="show_something_on_map">Vis %1$s på kortet</string>
     <string name="dist_away_from_my_location">Søg %1$s væk</string>
     <string name="confirmation_to_delete_history_items">Fjern valgte elementer fra \'Historik\'?</string>
@@ -2457,19 +2417,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="shared_string_recorded">Optaget</string>
     <string name="shared_string_record">Optag</string>
     <string name="gpx_logging_no_data">Ingen data</string>
-    <string name="release_2_5">• Trykbare ikoner på kortet 
-\n 
-\n  • Fleksibel IP-filter søgning: Søg fx. restauranter efter køkkenstil, eller campingpladser med særlige faciliteter 
-\n 
-\n  • Nyt Topo kortstil til vandre- og cykelture 
-\n 
-\n  • Forbedret Tur optagelse (nye indstillinger) 
-\n 
-\n  • Forbedrede navigationsmeddelelser (Android Wear) 
-\n 
-\n  • Mange andre forbedringer og fejlrettelser 
-\n 
-\n  og mere…</string>
+    
     <string name="trip_rec_notification_settings">Aktiver hurtig start af optagelse</string>
     <string name="trip_rec_notification_settings_desc">Vis en systemmeddelelse, der giver mulighed for at starte optagelse af turen.</string>
     <string name="shared_string_notifications">Meddelelser</string>
@@ -2588,27 +2536,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="quick_action_page_list_descr">Tryk på genvejsknappen gennemløber nedenstående liste.</string>
     <string name="auto_split_recording_title">Opdel automatisk optagelser efter et ophold</string>
 	<string name="auto_split_recording_descr">Start et nyt segment efter ophold på 6 min., et nyt spor efter 2 t eller en ny fil efter let ængere ophold, hvis datoen er ændret.</string>
-    <string name="release_2_6">• Ny funktion: Genvejsknap 
-\n 
-\n  • Forbedret respons på berøringsskærm (fx samtidig panorering og zoom) 
-\n 
-\n  • Nye skrifttyper dækker flere landestandarder 
-\n 
-\n  • Understøtter talesyntese for regionale sprogvarianter (og accenter) 
-\n 
-\n  • Forbedringer af synlighed på flere kortstilarter og Wikipedia 
-\n 
-\n  • Understøtter Open Location Code (OLC) 
-\n 
-\n  • Få vist højde-, hældnings- og hastighedsprofil for indspillede GPX-spor og beregnede ruter 
-\n 
-\n  • \"Kørestils\"-indstilling og logikforbedringer for cykelruteplanlægning 
-\n 
-\n • Højdedata indstillinger for cykelruteplanlægning 
-\n 
-\n  • Adskillige andre forbedringer og fejlrettelser 
-\n 
-\n  og mere…</string>
+    
 	<string name="rendering_attr_depthContours_description">Vis dybdekonturer og -punkter.</string>
     <string name="rendering_attr_depthContours_name">Havdybdekonturer</string>
 	
@@ -2882,14 +2810,7 @@ Repræsenterer område: %1$s x %2$s</string>
     
     
     <string name="min_max">Min/maks</string>
-    <string name="release_2_7">"• Mapillary-udvidelse med billeder på gadeniveau 
-\n 
-\n • Linealmodul til afstandsmåling 
-\n 
-\n • GPX-opdelingsintervaller med detaljeret information om sporet 
-\n 
-\n • Andre forbedringer og fejlrettelser 
-\n "</string>
+    
     <string name="rendering_value_translucent_pink_name">Gennemsigtig lyserød</string>
     <string name="quick_action_resume_pause_navigation">Pause/genoptag navigation</string>
     <string name="quick_action_resume_pause_navigation_descr">Tryk på knappen for at sætte navigationen på pause eller genoptage den.</string>
@@ -2994,12 +2915,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="osn_modify_dialog_error">Kunne ikke ændre note</string>
     <string name="osn_modify_dialog_title">Ændr note</string>
     <string name="context_menu_item_modify_note">Ændr OSM-note</string>
-    <string name="release_2_8">"•  Helt omarbejdelse af kortmarkører med retningsbestemte linier og ruteplanlægning 
-\n 
-\n  • Værktøj til afstandsmåling tilbyder en fastgør til vejen funktion samt at gemmme punkter som spor 
-\n
-\n  •  OSM Live: fejlrettelser, nye data på serveren hvert 30. minut, opdateringer implementeres i navigationen 
-\n"</string>
+    
     <string name="rendering_value_darkyellow_name">Mørkegul</string>
     <string name="show_map">Vis kort</string>
     <string name="route_is_calculated">Ruten beregnes</string>
@@ -3100,27 +3016,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="touring_view_renderer">Touring</string>
     <string name="nautical_renderer">Nautisk</string>
 <string name="rendering_attr_hidePOILabels_name">IP-etiketter</string>
-    <string name="release_2_9">• Påvisning af stopskilt tager nu hensyn til kørselsretningen 
-\n 
-\n• Ny algoritme giver meningsfulde stignings-/nedstigningsværdier for GPX-spor 
-\n 
-\n• Vandretid tager hensyn til terræn (stigning) (Naismiths regel) 
-\n
-\n• Opdateret kontekstmenuen: viser, når et interessepunkt åbner / lukker 
-\n 
-\n• Transportmenu: alle tilgængelige ruter er nu øverst 
-\n 
-\n• Wikipedia: tilføjet en knap for at åbne den oprindelige artikel, opdateret udseende af artikler 
-\n 
-\n• Rute: tilføjet mulighed for at skifte start- og slutpunkt i et enkelt tryk 
-\n 
-\n• Noter: tilføjet sortering af type og dato 
-\n 
-\n• OSM-redigeringer: viser et ikon og et navn på IP-kategorien, vis udførte handlinger 
-\n 
-\n• Ny hurtig koordinat input skærm for hurtig markøroprettelse 
-\n 
-\n</string>
+    
     <string name="will_open_tomorrow_at">Åbner i morgen kl.</string>
     <string name="copy_location_name">Kopiér Punkt/IP-navn</string>
     <string name="toast_empty_name_error">Unavngiven placering</string>
@@ -3207,7 +3103,7 @@ Repræsenterer område: %1$s x %2$s</string>
     
     <string name="unlimited_downloads">Ubegrænset hentninger</string>
     <string name="wikipedia_offline">Wikipedia offline</string>
-    <string name="contour_lines_sea_depth">Højdekurver + havdybde</string>
+    
     <string name="unlock_all_features">Lås op for alle funktioner i OsmAnd</string>
 
     <string name="wikivoyage_travel_guide">Rejseguider</string>

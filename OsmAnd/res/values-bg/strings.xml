@@ -615,7 +615,7 @@
     <string name="local_index_mi_restore">Активиране</string>
     <string name="local_index_mi_backup">Деактивиране</string>
 
-    <string name="local_index_mi_reload">Презареди от SD-картата</string>
+    
     <string name="shared_string_download">Сваляне</string>
 
     <string name="local_index_poi_data">Данни за POI</string>
@@ -1115,7 +1115,7 @@
     <string name="av_camera_focus_continuous">Камерата се опитва да фокусира</string>
     <string name="av_photo_play_sound">Мелодия при снимане</string>
     <string name="av_photo_play_sound_descr">Възпроизвеждане на звук или мелодия при снимане</string>
-    <string name="announce_gpx_waypoints">GPX точки</string>
+    
     <string name="speak_title">Обявяване…</string>
     <string name="speak_street_names">Имена на улици (синтезиран глас)</string>
 
@@ -1221,7 +1221,7 @@
     <string name="index_tours">Пътувания</string>
     <string name="shared_string_all">Всички</string>
     <string name="shared_string_waypoints">Точки</string>
-    <string name="targets">Дестинации</string>
+    
     <string name="way_alarms">Предупреждения</string>
     <string name="speak_favorites">Записани места</string>
     <string name="speak_poi">POI наблизо</string>
@@ -1790,8 +1790,7 @@
     <string name="favourites_edit_dialog_title">Предпочитана информация</string>
     <string name="show_on_start">Да се показва при стартиране</string>
     <string name="copied_to_clipboard">Копирано</string>
-    <string name="release_2_2">" • Нов контекстно-ориентиран интерфейс\n\n • При стартиране на приложението се извежда картата, освен ако не е избрано  \'Показване на таблото при стартиране\'\n\n • Настройване на контролите върху таблото за управление\n\n • Пропускане на таблото, ако предпочитате приложение с меню\n\n • За сваляне на карти, регионите могат да бъдат директно избирани чрез докосване на световната карта\n\n • Търсенето на POI сега може да стане с подробни заявки\n\n • Подобрено редактиране на  POI и OSM\n\n • Преработен е интерфейса и свалянето на карти
-\n\n и още… "</string>
+    
     <string name="osm_save_offline">Запази офлайн</string>
     <string name="osm_edit_modified_poi">Модифицирани OSM POI</string>
     <string name="osm_edit_deleted_poi">Изтрити OSM POI</string>

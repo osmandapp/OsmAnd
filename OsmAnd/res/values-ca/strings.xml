@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
 
     <string name="show_warnings_title">Mostra alertes…</string>
     <string name="map_widget_fluorescent">Rutes amb fluorescència</string>
@@ -274,7 +273,7 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="local_index_descr_title">Gestioneu els fitxers de mapes.</string>
     <string name="local_index_mi_restore">Activa</string>
     <string name="local_index_mi_backup">Desactiva</string>
-    <string name="local_index_mi_reload">Torna a carregar des de la targeta de memòria</string>
+    
     <string name="shared_string_download">Baixa</string>
     <string name="local_index_poi_data">Dades dels PDI</string>
     <string name="local_index_address_data">Dades d\'adreces</string>
@@ -1045,7 +1044,7 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     
     <string name="poi_error_poi_not_found">No s\'ha trobat el node, o la instal·lació consta de diferents nodes, i això encara no s\'admet.</string>
     <string name="poi_error_io_error_template">S\'ha produït un error d\'E/S durant l\'acció {0}.</string>
-    <string name="announce_gpx_waypoints">Fites GPX</string>
+    
     <string name="speak_title">Anuncia…</string>
     <string name="speak_descr">Configureu la notificació dels noms de carrer, incidències de trànsit (cues, bandes sonores), avisos de radar, límits de velocitat.</string>
     <string name="speak_street_names">Noms de carrers (TTS)</string>
@@ -1442,7 +1441,7 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="shared_string_more">Més…</string>
     <string name="download_additional_maps">Voleu baixar els mapes que us manquen %1$s (%2$d MB)?</string>
     <string name="shared_string_waypoints">Fites</string>
-    <string name="targets">Destinacions</string>
+    
     <string name="way_alarms">Notificacions de trànsit</string>
     <string name="speak_favorites">Preferits propers</string>
     <string name="speak_poi">PDI propers</string>
@@ -1913,23 +1912,7 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="shared_string_location">Localització</string>
     <string name="poi_context_menu_modify_osm_change">Modifica el canvi OSM</string>
     <string name="copied_to_clipboard">S\'ha copiat al \tporta-retalls</string>
-    <string name="release_2_2">"\\u2022 Una nova IU contextual per designar ubicacions en el mapa i en altres pantalles
-\n 
-\n • La pantalla del mapa s\'obre directament excepte quan es selecciona  \'Mostra el tauler en iniciar\' 
-\n 
-\n • Configureu el tauler amb quines targetes es mostraran i com 
-\n 
-\n • Prescindiu del tauler si preferiu un control de l\'aplicació mitjançant menú 
-\n 
-\n • Per baixar mapes, les regions es poden seleccionar directament tocant sobre el mapa mundial 
-\n 
-\n • Ara, la cerca de PDI admet consultes més específiques 
-\n 
-\n • S\'ha millorat la funcionalitat d\'edició OSM i PDI 
-\n 
-\n • S\'han tornat a fer l\'estructura i la interfície de la baixada de mapes 
-\n 
-\n i encara més…"</string>
+    
     <string name="osm_save_offline">Desa en local</string>
     <string name="osm_edit_modified_poi">S\'ha modificat PDI d\'OSM</string>
     <string name="osm_edit_deleted_poi">S\'ha eliminat PDI d\'OSM</string>
@@ -2074,17 +2057,7 @@ L\'espai disponible és només de {2} MB.</string>
     <string name="full_report">Informe complert</string>
     <string name="open_street_map_login_and_pass">Nom d\'usuari i contrasenya d\'OpenStreetMap</string>
     <string name="osm_live_subscribe_btn">Subscriu</string>
-    <string name="release_2_3">\\u2022 OSM en directe. Recolzament a desenvolupadors i col·laboradors i obtenció de mapes actualitzats cada hora.
-\n
-\n • Marcadors de mapa. Una nova opció per seleccionar ràpidament llocs al mapa.
-\n
-\n • Els mapes OSM tenen més detalls amb la la simbologia específica de les carreteres del país i moltes noves característiques del mapa.
-\n
-\n • S\'ha millorat l\'aspecte i la experiència de la preparació de ruta. 
-\n
-\n • Moltes millores al menú contextual de mapa, com la cerca contextual d\'adreces .
-\n
-\n i encara més…</string>
+    
     <string name="osm_live_subscription">Subscripció a OsmAnd Live</string>
     <string name="osm_live_email_desc">Cal proporcionar-vos informació respecte les aportacions.</string>
     <string name="osm_live_support_region">Zona de suport</string>
@@ -2178,19 +2151,7 @@ L\'espai disponible és només de {2} MB.</string>
     <string name="lang_hsb">Alt sòrab</string>
     
     <string name="share_history_subject">compartit via OsmAnd</string>
-    <string name="release_2_4">\\u2022 Nova cerca de text lliure molt potent
-\n 
-\n • Integració via Bluetooth de l\'àudio del cotxe amb l\'altaveu del mòbil 
-\n 
-\n • Guia de navegació millorada, notificacions de veu i indicació dels carrils de gir 
-\n 
-\n • Millores a la capa de transport col·lectiu amb representació del trajecte 
-\n 
-\n• S\'han afegit més llocs i ara gestiona llocs regionals 
-\n 
-\n • Moltes més millores i correccions d\'errors 
-\n 
-\n i més…</string>
+    
     <string name="back_to_search">Torna a la cerca</string>
     <string name="confirmation_to_delete_history_items">Voleu esborrar els elements seleccionats d\' \'Historial\'?</string>
     <string name="show_something_on_map">Situa %1$s en el mapa</string>
@@ -2269,19 +2230,7 @@ L\'espai disponible és només de {2} MB.</string>
     <string name="shared_string_recorded">Enregistrat</string>
     <string name="shared_string_record">Enregistra</string>
     <string name="gpx_logging_no_data">No hi ha dades</string>
-    <string name="release_2_5">"\\022 Icones per tocar al mapa 
-\n 
-\n • Potent filtre de cerca de PDIs: cerca, p.e.  restaurants per tipus de cuina o càmpings amb equipaments determinats 
-\n
-\n • Nou estil de mapa topològic per ciclistes i senderistes 
-\n
-\n • Enregistrament de ruta millorat 
-\n
-\n • Notificacions de navegació millorades (Android Wear) 
-\n
-\n • Moltes més millores i correccions d\'errors 
-\n
-\n i més…"</string>
+    
     <string name="shared_string_notifications">Notificacions</string>
     <string name="trip_rec_notification_settings">Habilita l\'enregistrament d\'inici ràpid</string>
     <string name="trip_rec_notification_settings_desc">Mostra una notificació de sistema en permetre començar l\'enregistrament de la ruta.</string>
@@ -2401,27 +2350,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="quick_action_page_list_descr">Prement aquest botó d\'acció pagineu per la llista que segueix.</string>
     <string name="auto_split_recording_title">Divisió automàtica de les gravacions un cop aturades</string>
 	<string name="auto_split_recording_descr">Comença un nou segment desprès de 6 min d\'interrupció, una traça nova si es superen les 2 hores o un nou fitxer si encara dura més i ha canviat la data.</string>
-    <string name="release_2_6">\\u2022 Nova opció: botó d\'acció ràpida 
-\n 
-\n • Resposta millorada a les indicacions de la pantalla tàctil (p.e. gir de la pantalla i ampliació alhora) 
-\n 
-\n • Mapes provinents de noves fonts per recollir millor zones concretes 
-\n 
-\n • Suport de TTS a variants pròpies de l\'idioma (i accents) 
-\n 
-\n • Més visibilitat segons diferents mapes temàtics i Viquipèdia 
-\n 
-\n • Suport al codi de posicionament obert (OLC) 
-\n 
-\n • Mostra els perfils d\'elevació, pendent i velocitat de les traces GPX enregistrades i de les rutes calculades. 
-\n 
-\n • Configuració del \"estil de conducció\" i millores lògiques en el càlcul de rutes per bicicleta. 
-\n 
-\n • Configuració de les dades d\'elevació en el càlcul de rutes per bicicleta. 
-\n 
-\n • Altres millores i correccions d\'errors 
-\n 
-\ni encara més…</string>
+    
 	<string name="rendering_attr_depthContours_description">Mostra isòbates i fondàries puntuals.</string>
     <string name="rendering_attr_depthContours_name">Isòbates</string>
 	
@@ -2700,15 +2629,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="quick_action_show_navigation_finish_dialog">Mostra el diàleg \'Navegació finalitzada\'</string>
     <string name="quick_action_start_stop_navigation">Inicia/atura la navegació</string>
     <string name="quick_action_start_stop_navigation_descr">Premeu aquest botó per iniciar o per aturar la navegació.</string>
-    <string name="release_2_7">\\022 Connector Mapillary amb imatges a nivell de carrer
-\n
-\n• Giny mètric per el mesurament de distàncies
-\n
-\n• Registre GPX dividit en intervals amb informació detallada del vostre trajecte
-\n
-\n• Altres millores i correccions d\'errors
-\n
-\n</string>
+    
     <string name="rendering_value_translucent_pink_name">Rosa translúcid</string>
     <string name="live_monitoring_max_interval_to_send">Memòria intermèdia temporal pel seguiment en línia</string>
     <string name="live_monitoring_max_interval_to_send_desrc">Especifiqueu una memòria intermèdia temporal per desar les ubicacions a enviar mentre no hi ha connexió</string>
@@ -2809,13 +2730,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="osn_modify_dialog_error">La nota no s\'ha pogut modificar</string>
     <string name="osn_modify_dialog_title">Modifica nota</string>
     <string name="context_menu_item_modify_note">Modifica nota d\'OSM</string>
-    <string name="release_2_8">\\022 Marcadors revisats totalment amb orientacions i planificació de la ruta 
-\n 
-\n • Eina de mesura de distàncies amb capacitat per resseguir les vies i desar els punts com una traça 
-\n 
-\n • OsmAnd Live: Correcció d\'errors, actualització de dades al servidor cada 30 minuts, implementació d\'actualitzacions durant la navegació 
-\n 
-\n</string>
+    
     <string name="rendering_value_darkyellow_name">Groc fosc</string>
     <string name="show_map">Mostra el mapa</string>
     <string name="route_is_calculated">S\'ha calculat la ruta</string>
@@ -2936,27 +2851,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="last_intermediate_dest_description">Afegeix una parada intermèdia</string>
     <string name="first_intermediate_dest_description">Afegeix la primera parada</string>
     <string name="subsequent_dest_description">Desplaça amunt la destinació, i crea-la</string>
-    <string name="release_2_9">"\\022 Actualitzat el menú contextual: Mostra quan el PDI s\'obre / tanca 
-\n 
-\n• Menú de transport: totes les rutes disponibles ara són a la part superior 
-\n 
-\n• Viquipèdia: s\'ha afegit el botó per obrir l\'article original,  aparició de nous articles actualitzada 
-\n 
-\n• Ruta: s\'ha afegit la possibilitat de permutar els punts d\'inici i fi amb un botó 
-\n 
-\n• Notes: s\'ha afegit la classificació per tipus i data 
-\n 
-\n• Edició OSM: Mostra icona i nom de la categoria de PDI, visualitza les accions completades 
-\n 
-\n• Nova entrada ràpida de coordinades de pantalla per una creació àgil de marcadors 
-\n 
-\n• La detecció de senyals d\'estop ara té present la direcció de circulació 
-\n 
-\n• Nou algorisme que proporciona valors significatius de pujada/baixada a traces GPX 
-\n 
-\n• Durada del senderisme considerant el perfil del terreny (ascens) (estimació Naismith) 
-\n 
-\n"</string>
+    
     <string name="make_as_start_point">Agafa aquest com a punt inicial</string>
     <string name="rendering_attr_whiteWaterSports_name">Esports d\'aigües braves</string>
     <string name="distance_farthest">Distància: primer el més llunyà</string>

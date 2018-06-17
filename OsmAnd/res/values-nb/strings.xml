@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
     <string name="rendering_attr_roadColors_description">Velg fargeskjema for veier:</string>
     <string name="rendering_attr_roadColors_name">Veifargeskjema</string>
     <string name="map_widget_show_destination_arrow">Vis retning til målet</string>
@@ -271,7 +270,7 @@
     <string name="local_index_mi_restore">Aktiver</string>
     <string name="local_index_mi_backup">Deaktiver</string>
 
-    <string name="local_index_mi_reload">Last på nytt fra minnekort</string>
+    
     <string name="shared_string_download">Last ned</string>
 
     <string name="local_index_poi_data">Interessepunkt-data</string>
@@ -583,7 +582,7 @@
     <string name="driving_region">Region for bilkjøring</string>
 
 
-    <string name="announce_gpx_waypoints">GPX-rutepunkter</string>
+    
     <string name="speak_title">Meld om…</string>
     <string name="speak_descr">Innstilling for å annonsere gatenavn, trafikkvarsler (tvungne stopp, fartsdumper), fotoboksvarsler, fartsgrenser.</string>
     <string name="speak_street_names">Gatenavn (TTS)</string>
@@ -761,7 +760,7 @@
     <string name="way_alarms">Trafikkvarsler</string>
     <string name="save_track_interval_globally">Loggeintervall</string>
     <string name="shared_string_waypoints">Rutepunkter</string>
-    <string name="targets">Reisemål</string>
+    
     <string name="rendering_attr_hideBuildings_name">Bygninger</string>
     <string name="osmand_parking_warning">Varsel</string>
     <string name="wake_on_voice_descr">Slå på enhetens skjerm (hvis av) når du nærmer deg en sving.</string>
@@ -2072,32 +2071,8 @@
     <string name="rendering_attr_noAdminboundaries_description">Undertrykk visning av regionale grenser (administrasjonsnivåer 5-9).</string>
     <string name="close_changeset">Lukk endringssett</string>
     <string name="zxing_barcode_scanner_not_found">Programmet ZXing strekkodeskanner er ikke installert. Vil du søke på Google Play?</string>
-    <string name="release_2_5">• Klikkbare ikoner på kartet 
-\n 
-\n • Kraftig POI-filtersøk: Søk f.eks etter restauranter etter type kjøkken, eller campingsteder med gitte tjenestetilbud 
-\n 
-\n • Nytt topologisk kart for syklister og turgåere 
-\n 
-\n • Forbedret opptak av turer 
-\n 
-\n • Forbedrede navigasjonsmerknader (Android Wear) 
-\n 
-\n • Mange andre forbedringer og feilrettinger 
-\n 
-\n med mer…</string>
-    <string name="release_2_4">•\\022 Nytt og veldig kraftig fritekstsøk 
-\n 
-\n • Lydsystem i bil / høytalertelefonintegrasjon via Blåtann 
-\n 
-\n • Forbedret veivisning, stemmehjelp og filanvisning 
-\n 
-\n • Forbedret transportlag med rutetegning
-\n 
-\n • Flere lokaler er lagt til, og det er nå støtte for regionale språk 
-\n 
-\n • Mange andre forbedringer og feilrettinger
-\n 
-\n med mer…</string>
+    
+    
     
     <string name="lang_bpy">Bishnupriya manipuri</string>
     <string name="lang_new">Nepal bhasa</string>
@@ -2823,47 +2798,13 @@
     <string name="shared_string_read">Les</string>
     <string name="saved_articles">Bokmerkede artikler</string>
     <string name="shared_string_explore">Utforsk</string>
-    <string name="release_2_6">\\022 Ny funksjon: Hurtighandlingsknapp
-\n
-\n • Forbedret respons på pekeskjermsgester (f.eks. sammenhengende dragning og forstørrelse)
-\n
-\n • Nye kartskrifter som har støtte i flere lokaler
-\n
-\n • Støtte for TTT (TTS) for lokale språkvarianter (og dialekter)
-\n
-\n • Synlighetsforedringer i flere kartstiler og for Wikipedia
-\n
-\n • Støtte for Åpen Plasseringskode (OLC)
-\n
-\n • Vis høyde, variasjon, og hastighetsprofil for innsamlet GPX-spor og kalkulerte ruter
-\n
-\n • \"Kjørestil\"-innstilling og logiske forbedringer for sykkelveivising
-\n
-\n • Høydedatainnstillinger for sykkelveivising
-\n
-\n • Flere andre forbedringer og andre rettede feil
-\n
-\n med mer…</string>
+    
     <string name="confirm_usage_speed_cameras">I mange land (Tyskland, Frankrike, Italia og andre) er bruk av fotoboksvarsling ulovlig. OsmAnd påtar seg ikke noe ansvar hvis du bryter loven. Trykk \'Ja\' kun hvis du er berettiget til å bruke denne funksjonen.</string>
     <string name="osmand_net_previously_installed">Alle nettfrakoblede data i det gamle programmet vil bli støttet i det nye, men favorittpunkter må eksporteres fra det gamle programmet og så importeres i det nye.</string>
     <string name="min_km">min/km</string>
     <string name="shared_string_contents">Innhold</string>
-    <string name="release_2_7">\\022 Mapillary-programtillegg med bilder på gatenivå
-\n
-\n • Tomstokk-miniprogram for avstandsmåling
-\n
-\n • GPX med mellomtider for detaljert informasjon om ditt spor
-\n
-\n • Andre forbedringer og feilrettinger
-\n
-\n</string>
-    <string name="release_2_8">\\022 Fullstendig omarbeidede kartmarkører med veivisningslinjer og ruteplanlegging
-\n
-\n • Distansemålingsverktøy som tilbyr festing til vei og lagring av punkter som spor
-\n
-\n • OsmAnd Live: Feilrettinger, fresk data fra tjeneren hver halvtime, oppdateringer innarbeidet inn i navigasjonen
-\n
-\n</string>
+    
+    
     <string name="share_geo">geo:</string>
     <string name="nm">nmi</string>
     <string name="nm_h">kn</string>
@@ -2880,54 +2821,9 @@
     <string name="show_images">Vis bilder</string>
     <string name="online_webpage_warning">Siden er kun tilgjengelig på nett. Åpne i nettleser?</string>
     <string name="index_item_world_wikivoyage">Verdensomspennende Wikivoyage-artikler</string>
-    <string name="release_2_9">\\022 Oppdatert kontekstmeny: Viser når POI åpnes / lukkes
-\n • Transportmeny: Alle tilgjengelige ruter er nå på toppen
-\n
-\n • Wikpiedia: Knapp for åpning av originalartikkel, oppdatert visning av artikler
-\n
-\n • Rute: Mulighet for å bytte start og sluttpunkt med ett trykk lagt til
-\n
-\n • Notater: Lagt til sortering etter type og dato
-\n
-\n • OSM-redigeringer: Vis et ikon og navn for POI-kategorier, vis fullførte handlinger
-\n
-\n • Ny raskt koordinatinntastingssøk i egen skjerm for raskt markøropprettese
-\n
-\n • Oppdaging av stoppskilt tar nå hensikt til kjøreretning
-\n
-\n • Ny algoritme som gir meningsfylte ned/stigningsverdier for GPX-spor
-\n
-\n • Terreng (stignings-) oppmerksom gåtid (Nasimiths regel)
-\n
-\n</string>
-    <string name="release_2_3">\\022 Sanntids-OSM. Støtte for kartbidragsytere og utviklere, timevise oppdateringer.
-\n
-\n • Marktmarkører. En ny måte å velge steder på kartet raskt.
-\n
-\n • Mer detaljerte OSM-kart med landspesifikke veiskilt og mange ny kartfunksjoner.
-\n
-\n • Forbedret utseende og oppførsel for ruteforberedelse.
-\n
-\n • Mange forbedringer i kartkontekstmenyen, som kontekstuelt adresseoppslag.
-\n
-\n og mer…</string>
-    <string name="release_2_2">\\022 Ny kontekstavhegig brukergrenseflate når det velges plasseringer på kartet og på andre skjermer 
-\n 
-\n • Kartskjermen vises nå direkte, med mindre \"Vis betjeningspanel ved programstart\" er valgt 
-\n 
-\n • Sett opp hvilket innhold, og hvordan det vises på betjeningspanelet
-\n 
-\n • Forbigå betjeningspanel hvis det er ønskelig med meny-basert programkontroll
-\n 
-\n • Henting av kart kan gjøres ved å trykke direkte på verdenskartet 
-\n 
-\n• POI-søk støtter nå mer spesifikke spørringer 
-\n 
-\n • Forbedret POI- og OSM- redigeringsfunksjonalitet 
-\n 
-\n • Strukturen over nedlastinger og grensesnittet for den har blitt fornyet 
-\n 
-\n med mer…</string>
+    
+    
+    
     <string name="osmand_rastermaps_plugin_description">Programtillegget gir tilgang til mange typer av nettbaserte kart (såkalte flis- eller rasterkart), fra forhåndsdefinerte OpenStreetMap-kartfliser (som Mapnik) til satellittbilder og kartlag til spesielle formål som vær, klima, geologi, relieffskygger etc. 
 \n
 \nAlle disse kartene kan enten brukes som hovedkart (basiskart) som skal vises på kartskjermen til OsmAnd, eller som et overlegg eller underlag til et annet basiskart (som de nettfrakoblede standardkartene til OsmAnd). For å gjøre underlagskartet mer synlig, kan visse elementer i vektorkartene til OsmAnd skjules via menyen \'Kartinnstilling\'. 
@@ -2974,14 +2870,14 @@
     <string name="shared_string_travel_book">Reisebok</string>
     <string name="download_images">Last ned bilder</string>
     <string name="wikipedia_offline">Wikipedia offline</string>
-    <string name="contour_lines_sea_depth">Koter + havdybde</string>
+    
     <string name="in_app_purchase_desc">Engangsbetaling</string>
     <string name="purchase_unlim_title">Kjøp - %1$s</string>
     <string name="unlimited_downloads">Ubegrensede nedlastinger</string>
     <string name="unlock_all_features">Lås opp alle OsmAnd-funksjoner</string>
 
     <string name="purchase_dialog_title">Velg plan</string>
-    <string name="dayly_map_updates">Kartoppdateringer: Hver dag</string>
+    
     <string name="wikivoyage_offline">Wikivoyage offline</string>
     <string name="wikivoyage_travel_guide">Reiseguider</string>
     <string name="monthly_map_updates">Kartoppdateringer: <b>Hver måned</b></string>

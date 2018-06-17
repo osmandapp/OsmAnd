@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
 <string name="app_mode_bus">Bus</string>
  	<string name="app_mode_train">Ćah</string>
     <string name="map_widget_battery">Staw baterije</string>

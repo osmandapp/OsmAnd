@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
 <string name="nothing_found">Heç nə tapılmadı</string>
     <string name="restart_search">Axtarışı yenidən başlat</string>
     <string name="change_color">Rəngi dəyiş</string>
@@ -1097,7 +1096,7 @@
     <string name="local_index_items_restored">%1$d / %2$d obyekt aktivləşdirildi.</string>
     <string name="local_index_mi_restore">Aktivləşdir</string>
     <string name="local_index_mi_backup">Qeyri-aktiv et</string>
-    <string name="local_index_mi_reload">Yaddaş kartından yenidən yüklə</string>
+    
     <string name="local_index_transport_data">İctimai nəqliyyat məlumatları</string>
     <string name="installing_new_resources">Yeni məlumatlar açılır…</string>
     <string name="poi_filter_public_transport">İctimai nəqliyyat</string>
@@ -1241,7 +1240,7 @@
     <string name="rendering_category_transport">Nəqliyyat</string>
     <string name="print_route">Marşrutu çap et</string>
     <string name="index_tours">Turlar</string>
-    <string name="targets">Təyinat nöqtələri</string>
+    
     <string name="map_downloaded_descr">%1$s xəritəsi istifadəyə hazırdır.</string>
     <string name="go_to_map">Xəritəni göstər</string>
     <string name="favorite_category_dublicate_message">Zəhmət olmasa, artıq mövcud olmayan kateqoriya adı istifadə edin.</string>
@@ -1544,7 +1543,7 @@
     <string name="context_menu_item_delete_waypoint">GPX yol nöqtəsi silinsin?</string>
     <string name="context_menu_item_edit_waypoint">GPX nöqtəsinə düzəliş et</string>
     <string name="shared_string_waypoints">Yol nöqtələri</string>
-    <string name="announce_gpx_waypoints">GPX yol nöqtələri</string>
+    
     <string name="add_waypoint_dialog_added">GPX yol nöqtəsi “{0}” əlavə edildi</string>
     <string name="context_menu_item_add_waypoint">GPX yol nöqtəsi əlavə et</string>
     <string name="import_file_favourites">Məlumatlar GPX faylı olaraq saxlansın yoxsa yol nöqtələri “Favoritlər”ə idxal edilsin?</string>

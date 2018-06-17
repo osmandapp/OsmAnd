@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
     <string name="starting_point_too_far">Pradžios taškas yra per toli nuo artimiausio kelio.</string>
     <string name="shared_location">Bendrinta vieta</string>
     <string name="osmand_parking_warning">Dėmesio</string>
@@ -314,7 +313,7 @@ Tam prireiks {1} MB pastoviam saugojimui.
     <string name="local_index_mi_restore">Aktyvuoti</string>
     <string name="local_index_mi_backup">Deaktyvuoti</string>
 
-    <string name="local_index_mi_reload">Atnaujinti iš SD kortelės</string>
+    
     <string name="shared_string_download">Parsiųst</string>
 
     <string name="local_index_poi_data">LV duomenys</string>
@@ -1133,7 +1132,7 @@ Tam prireiks {1} MB pastoviam saugojimui.
     <string name="driving_region_uk">JK, Indija ir kitos</string>
 
 
-    <string name="announce_gpx_waypoints">GPX tarpiniai taškai</string>
+    
     <string name="speak_title">Pranešti…</string>
     <string name="speak_descr">Nustatyti gatvių pavadinimų, eismo perspėjimų (priverstinių sustojimų, greičio ribotuvų), greičio radarų, greičio apribojimų įgarsinimą.</string>
     <string name="speak_street_names">Gatvių pavadinimai (TTS)</string>
@@ -1539,7 +1538,7 @@ Tam prireiks {1} MB pastoviam saugojimui.
     <string name="download_additional_maps">Atsiųsti trūkstamus žemėlapius %1$s (%2$d MB)?</string>
     <string name="index_tours">Turai</string>
     <string name="shared_string_all">Visi</string>
-    <string name="targets">Tikslai</string>
+    
     <string name="shared_string_waypoints">Tarpiniai taškai</string>
     <string name="way_alarms">Eismo perspėjimai</string>
     <string name="speak_favorites">Artimiausios įsimintos vietos</string>
@@ -2103,23 +2102,7 @@ Ilguma %2$s</string>
     <string name="shared_string_near">Netoliese</string>
     <string name="av_audio_bitrate">Audio bitų sparta</string>
     <string name="av_audio_bitrate_descr">Pasirinkite audio bitų spartą.</string>
-    <string name="release_2_2">\\022 Nauja kontekstinė sąsaja skirta vietovės pasirinkimui žemėlapyje ir kituose languose
-\n
-\n • Žemėlapio ekranas rodomas iš karto, nebent pasirinkimas \"Rodyti valdymo skydelį startuojant programai\" yra pažymėtas
-\n
-\n • Nustatykite kaip ir kurios kortelės bus rodomos valdymo skydelyje
-\n
-\n • Nenaudokite valdymo skydelio jei jums patinka programos valdymas meniu pagalba
-\n
-\n • Tam, kad būtų atsiųsti žemėlapiai, pakanka paliesti regioną pasaulio žemėlapyje
-\n
-\n • LV paieškoje galima naudoti tikslesnes užklausas
-\n
-\n • Pagerintas LV ir OSM redagavimo funkcionalumas
-\n
-\n • Perdaryta žemėlapio atsisiuntimo struktūra bei sąsaja
-\n
-\n ir dar daugiau…</string>
+    
     <string name="access_from_map_description">Meniu mygtukas aktyvuoja valdymo skydelį, ne meniu</string>
     <string name="use_dashboard_btn">Naudoti duomenų skydelį</string>
     <string name="dashboard_or_drawer_description">Sukurta nauja galimybė naudoti programėlę duomenų skydelio arba statinio meniu pagalba. Savo pasirinkimą galite bet kada pakeisti duomenų skydelio nustatymuose.</string>
@@ -2276,19 +2259,7 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="back_to_search">Atgal į paiešką</string>
     <string name="confirmation_to_delete_history_items">Ištrinti pasirinktus įrašus iš \"Istorijos\"?</string>
     <string name="show_something_on_map">Rodyti %1$s žemėlapyje</string>
-    <string name="release_2_4">\\022 Nauja labai galinga pilno teksto paieška
-\n
-\n • Automobilio audio systemos / telefono garsiakalbio integravimas per Bluetooth
-\n
-\n • Patobulintos maršruto skaičivimas, balso nuorodos ir eismo juostų nuorodos
-\n
-\n • Patobulintas transporto sluoksnis su maršrutų atvaizdavimu
-\n
-\n • Pridėta daugiau lokalių ir dabar palaikomos regioninės lokalės
-\n
-\n • Daug kitų patobulinimų ir klaidų ištaisymų
-\n
-\n ir dar daugiau…</string>
+    
     <string name="dist_away_from_my_location">Ieškoti %1$s spinduliu</string>
     
     <string name="share_history_subject">bendrinta iš OsmAnd</string>
@@ -2298,17 +2269,7 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="rendering_attr_hideOverground_name">Antžeminiai objektai</string>
     <string name="shared_string_change">Pakeisti</string>
     <string name="get_started">Pradėti</string>
-    <string name="release_2_3">\\022 OSM Live. Paremkite žemėlapių sudarytojus ir programuotojus bei gaukite žemėlapių atnaujinimus kas valandą. 
-\n
-\n • Žemėlapio žymekliai. Naujas būdas greitai pasirinkti vietas žemėlapyje.
-\n
-\n • Detalesni OSM žemėlapiai su šalies specifiką atitinkančiais kelio ženklais ir daug naujų žemėlapio savybių.
-\n
-\n • Nauja maršruto sudarymo išvaizda ir veiksena. 
-\n
-\n • Daug žemėlapio kontekstinio meniu pakeitimų, pvz. kaip kontekstinė adreso paieška.
-\n
-\n ir dar daugiau…</string>
+    
     <string name="clear_updates_proposition_message">Pašalinti atsisiųstus atnaujinimus ir grįžti prie pradinio žemėlapio</string>
     <string name="search_another_country">Pasirinkite kitą regioną</string>
     <string name="search_map">Ieškomi žemėlapiai…</string>
@@ -2602,27 +2563,7 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="routing_attr_height_obstacles_description">Naudoti SRTM, ASTER ir EU-DEM pateikiamus vietovės aukščio duomenis.</string>
     <string name="rendering_attr_depthContours_description">Rodyti gylio kontūrus ir taškus.</string>
     <string name="rendering_attr_depthContours_name">Vandenyno gylio kontūrai</string>
-    <string name="release_2_6">\\u2022 Nauja funkcija: Greito veiksmo mygtukas 
-\n 
-\n • Patobulinta liečiamo ekrano veiksmų reakcija (t.y. mąstelio keitimas ir žemėlapio stūmimas tuo pačiu metu) 
-\n 
-\n • Nauji žemėlapio fontai tinkantys daugiau kalbų 
-\n 
-\n • Teksto vertimo į kalbą (TTS) palaikymas regioniniams kalbų variantams (ir akcentams) 
-\n 
-\n • Kelių žemėlapių stilių ir vikipedijos matomumo patobulinimai 
-\n 
-\n • Open Location Code (OLC) palaikymas 
-\n 
-\n • Aukščio, įkalnės ir greičio profilio rodymas į GPX įrašytiems ir apskaičiuotiems maršrutams 
-\n 
-\n • \"Vairavimo stiliaus\" nustatyms ir logikos patobulinimai dviračių maršrutų skaičiavimams 
-\n 
-\n • Nustatymai aukščio infromaciją dviračių maršrutų skaičiavimams 
-\n 
-\n • Keletas kitų patobulinimų ir klaidų ištaisymų 
-\n 
-\n ir dar daugiau…</string>
+    
     <string name="auto_split_recording_title">Automatinis įrašo padalinimas po pertraukimo</string>
     <string name="auto_split_recording_descr">Pradėti naują segmentą po 6 minučių tarpo, naują kelio įrašą po 2 valandų arba naują failą, jei po ilgesnio tarpo pasikeitė data.</string>
     <string name="rendering_attr_contourDensity_description">Kontūrų linijos tankis</string>
@@ -2636,19 +2577,7 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="gpx_no_tracks_title">Jūs dar neturite išsaugotų GPX failų</string>
     <string name="gpx_no_tracks_title_folder">Jūs taip pat galite išsaugoti GPX failus segtuve</string>
     <string name="trip_rec_notification_settings_desc">Rodyti pranešimą kuris leidžia pradėti kelionės įrašymą paspaudus \"Įrašyti\" mygtuką.</string>
-    <string name="release_2_5">\\u2022 Interaktyvios žemėlapio piktogramos
-\n 
-\n • Galingas LV paieškos filtras: ieškoti restoranų pvz. pagal virtuvę ar kempingų pagal su specifinėm paslaugom 
-\n 
-\n • Naujas Topo žemėlapio stilius dviratininkams ir keliautojams 
-\n 
-\n • Patobulintas kelionės įrašymas 
-\n 
-\n • Patobulinti navigaciniai pranešimai (Android Wear) 
-\n 
-\n • Daugelis kitų patobulinimų ir klaidų pataisymų 
-\n 
-\n ir dar daugiau…</string>
+    
     <string name="save_track_min_speed_descr">Filtras: Nustatyti minimalų greitų, kad taškas būtų pažymėtas.</string>
     <string name="save_track_min_distance">Minimalus atstumas pažymėjimui</string>
     <string name="save_track_min_distance_descr">Filtras: Nustatyti minimalų atstumą nuo ankstesnės pozicijos, kad taškas būtų išsaugotas.</string>
@@ -2660,15 +2589,7 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="quick_action_show_navigation_finish_dialog">Rodyti navigacijos užbaigimo dialogą</string>
     <string name="quick_action_start_stop_navigation">Pradėti/Baigti navigaciją</string>
     <string name="quick_action_start_stop_navigation_descr">Paspauskite šį mygtuką navigacijai pradėti arba sustabdyt.</string>
-    <string name="release_2_7">\\022 Mapillary įskiepis gatvės lygmens vaizdams 
-\n 
-\n • Liniuotė matuoti atstumą
-\n 
-\n • GPX padalijimo intervalai su detalia informacija apie jūsų kelią 
-\n 
-\n • Kiti patobulinimai ir klaidų ištaisymai 
-\n 
-\n</string>
+    
     <string name="rendering_value_translucent_pink_name">Permatoma rožinė</string>
     <string name="navigate_point_olc">Open Location kodas (OLC)</string>
     <string name="average">Vidurkis</string>

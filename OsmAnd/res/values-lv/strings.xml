@@ -239,7 +239,7 @@
   <string name="local_index_mi_restore">Atjaunot</string>
   <string name="local_index_mi_backup">Arhivēt</string>
   
-  <string name="local_index_mi_reload">Nolasīt no sd kartes</string>
+  
   <string name="shared_string_download">Lejupielādēt</string>
   
   <string name="local_index_poi_data">POI dati</string>
@@ -1031,7 +1031,7 @@ OsmAnd ir atvērtā koda navigācijas aplikācija ar piekļuvi vispusīgiem Open
 	<string name="driving_region_canada">Kanāda</string>
 	<string name="driving_region_europe_asia">Eiropa, Āzija, Latīņamerika</string>
 	<string name="driving_region_uk">Apvienotā Karaliste, Indija un citas</string>
-    <string name="announce_gpx_waypoints">GPX ceļapunkti</string>
+    
     <string name="speak_title">Paziņot…</string>
 	<string name="speak_descr">Ielu nosaukumus, satiksmes brīdinājumus (stopzīmes, ceļa rampas), fotoradarus, ātruma ierobežojumus</string>
 	<string name="speak_street_names">Ielu nosaukumi (TTS)</string>
@@ -1508,7 +1508,7 @@ OsmAnd ir atvērtā koda navigācijas aplikācija ar piekļuvi vispusīgiem Open
     <string name="index_tours">Braucieni</string>
     <string name="shared_string_all">Visi</string>
     <string name="shared_string_waypoints">Ceļapunkti</string>
-    <string name="targets">Galamērķi</string>
+    
     <string name="rendering_value_browse_map_name">Atvērt karti</string>  
     <string name="rendering_value_car_name">Auto</string>
     <string name="rendering_value_bicycle_name">Velobraucējs</string>
@@ -2197,22 +2197,7 @@ failu(s)?
     <string name="no_waypoints_found">Nav atrasts neviens ceļa punkts</string>
     <string name="report">Pārskats</string>
     <string name="storage_permission_restart_is_required">Aplikācijai ir piešķirta atļauja rakstīt ārējā glabātuvē. Ir nepieciešams aplikācijas restarts.</string>
-    <string name="release_2_3">" • OSM Live. Atbalstiet karšu izdevējus un veidotājus un saņemiet ik stundas karšu atjauninājumus.
-\n
-\n
-\n • Marķieri uz kartes. Jauns veids vietu atzīmēšanai kartē.
-\n
-\n
-\n • Detalizētākas OSM kartes ar valsts specifiskiem ceļu apzīmējumiem un jaunām kartes iespējām.
-\n
-\n
-\n• Vizuālas izmaiņas maršruta plānošanā.
-\n
-\n
-\n• Vairāki uzlabojumi kartes izvēlnē, kā piemēram, adrešu meklēšana pēc konteksta.
-\n
-\n
-\nun vēl... "</string>
+    
     <string name="shared_string_move_up">Uz augšu</string>
     <string name="shared_string_move_down">Uz leju</string>
     <string name="finish_navigation">Beigt navigāciju</string>
@@ -2244,23 +2229,7 @@ failu(s)?
     <string name="access_shared_string_navigate_up">Uz augšu</string>
     <string name="access_sort">Sakārtot</string>
     
-    <string name="release_2_2">" • Jauns satura-jūtīgs interfeiss, pieskaroties vietām uz kartes un citur aplikācijā
-\n
-\n • Kartes skats tiek atvērts uzreiz, ja vien nav atzīmēts \"rādīt manu izvēlni\", atverot aplikāciju
-\n
-\n • Definēt kā un kādas sadaļas tiks attēlotas Manā Izvēlnē
-\n
-\n • Izslēgt Manu Izvēlni, ja dodat priekšroku parastajām izvēlnēm
-\n 
-\n • Lai lejupielādētu kartes, vajadzīgos reģionus var atzīmēt uz pasaules kartes
-\n
-\n • POI meklēšana tagad atbalsta specifiskākus vaicājumus
-\n
-\n • Uzlabotas POI un OSM labošanas iespējas
-\n
-\n • Pārstrādāta karšu datu lejupielādes struktūra un interfeiss
-\n
-\nun vēl... "</string>
+    
     <string name="plugin_ski_descr">"Šis OsmAnd spraudnis ļauj piekļūt datiem par slēpošanas trasēm un maršrutiem, trošu vagoniem un pacēlājiem. Maršruti un trases tiek rādīti pēc krāsām, atkarībā no grūtības pakāpes un tiek attēlotas īpašā \"ziemas\" kartes stilā.
 \n
 \nAktivizējot spraudni, kartes stils tiek nomainīts uz \"Ziema un slēpošana,\" attēlojot visus ainavas elementus ziemas apstākļiem atbilstošus. Deaktivizēt spraudni var vai nu šeit vai nomainot kartes stilu kartes uzstādījumos. "</string>
@@ -2336,23 +2305,7 @@ failu(s)?
     <string name="back_to_search">Atpakaļ uz meklēt</string>
     <string name="confirmation_to_delete_history_items">Vai vēlaties izdzēst atzīmētās vienības no vēstures?</string>
     <string name="show_something_on_map">Rādīt %1$s uz kartes</string>
-    <string name="release_2_4">"
- Jauna pilnā teksta meklēšana
-
-
-Blutooth integrācija automašīnas audio
-
-Uzlabota maršruta vadība, balss uzvedne un pagriezienu indikācija
-
-Uzlabots transporta pārklājs ar maršruta renderēšanu
-
-Pievienots jaunu valodu un lokalizācijas atbalsts
-
-Daudz citu uzlabojumu un kļūdu labojumi
-
-Un vēl...
-…
- "</string>
+    
     <string name="dist_away_from_my_location">Meklēt %1$s no vietas</string>
     <string name="share_history_subject">" Koplietots OsmAnd"</string>
     <string name="search_categories">Kategorijas</string>
@@ -2519,46 +2472,10 @@ Apraksta laukumu: %1$s x %2$s</string>
     <string name="quick_action_btn_tutorial_title">Mainīt pogas pozīciju</string>
     <string name="quick_action_btn_tutorial_descr">Turiet nospiestu un velciet pogu, lai mainītu tās atrašanās vietu uz ekrāna</string>
 	<string name="shared_string_action_name">Darbības vārds</string>
-<string name="release_2_5">Klikojamas pogas kartē 
-\n 
-\nSpēcīgs POI filtrs: piemēram, restorānu meklēšana pēc virtuves tipa vai apmešanās vietas pēc piedāvātajiem servisiem 
-\n 
-\nJauns Topo Kartes stils velobraucējiem un ceļotājiem 
-\n 
-\nPaplašinātas ceļojuma ieraksta iespējas 
-\n 
-\nUzlabota navigācijas ziņojumjosla (Android Wear) 
-\n 
-\nDaudz citu uzlabojumu un kļūdu labojumu 
-\n 
-\nUn vēl…</string>
+
     <string name="auto_split_recording_descr">Sākt jaunu segmentu pēc 6 minūšu pārtraukuma, jaunu treku pēc 2 stundu pārtraukuma vai jaunu failu pēc ilgāka pārtraukuma, ja ir izmainīts datums.</string>
     <string name="auto_split_recording_title">Automātiski sadalīt ierakstus pēc pārtraukuma</string>
-	<string name="release_2_6">• Jauna iespēja: ātrās rīcības poga 
-\n 
-\n 
-\n • uzlabota žestu darbība skārienekrānā 
-\n 
-\n 
-\n • Jauni kartes fonti vēl vairāk valodām 
-\n 
-\n 
-\n • TTS atbalsts reğionālajām valodām (arī akcentiem) 
-\n 
-\n 
-\n • Vizuālie uzlabojumi dažādos kartes stilos un vikipēdijā 
-\n 
-\n 
-\n • Pievienots Open Location Code (OLC) atbalsts 
-\n 
-\n 
-\n • Uzrāda augstuma, slīpuma un ātruma profilus GPX ierakstiem un aprēķinātajiem maršrutiem 
-\n 
-\n 
-\n • Vēl citi uzlabojumi un kļūdu labojumi 
-\n 
-\n 
-\n Un vēl…</string>
+	
 	<string name="osmand_plus_long_description_1000_chars">"
  OsmAnd+ (OSM Automated Navigation Directions)
 

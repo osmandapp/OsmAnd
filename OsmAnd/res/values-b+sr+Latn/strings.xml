@@ -33,7 +33,7 @@
 	<string name="local_index_tile_data_minzoom">Minimalni zum: %1$s</string>
     
     
-    <string name="announce_gpx_waypoints">Najavi GPX waypoints</string>
+    
     <string name="speak_title">Najavi…</string>
 	<string name="speak_descr">Podešavanje najave naziva ulica, saobraćajnih upozorenja, ograničenja brzine</string>
 	<string name="speak_street_names">Obaveštenje - naziv ulice</string>
@@ -283,7 +283,7 @@
 	<string name="local_index_mi_backup">Isključi</string>
 	
 	
-	<string name="local_index_mi_reload">Učitaj ponovo sa SD kartice</string>
+	
 	<string name="shared_string_download">Preuzmi</string>
 	<string name="local_index_poi_data">Podaci POI-a</string>
 	<string name="local_index_address_data">Podaci adresa</string>

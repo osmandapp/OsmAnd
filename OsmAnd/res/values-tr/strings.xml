@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="close_changeset">Değişiklik listesini kapat</string>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources><string name="close_changeset">Değişiklik listesini kapat</string>
 	<string name="zxing_barcode_scanner_not_found">ZXing Barcode Scanner uygulaması kurulu değil. Uygulama marketinde aramak ister misiniz?</string>
 	<string name="rendering_attr_roadColors_description">Yol renk şemasını seç:</string>
 	<string name="rendering_attr_roadColors_name">Yol renk şeması</string>
@@ -288,7 +287,7 @@
 	<string name="favourites_edit_dialog_category">Kategori</string>
 	<string name="shared_string_no_thanks">Hayır, teşekkürler</string>
 	
-	<string name="local_index_mi_reload">Sd card\'tan tekrar yükle</string>
+	
 	<string name="shared_string_download">İndir</string>
 	<string name="search_offline_clear_search">Yeni Arama</string>
 	<string name="map_text_size_descr">Haritadaki yer adları için yazı boyutunu seçin</string>
@@ -795,7 +794,7 @@
     <string name="local_openstreetmap_act_title">OSM değişiklikleri</string>
     <string name="shared_string_more_actions">Diğer komutlar</string>
     <string name="local_indexes_cat_srtm">Kontür çizgileri</string>
-    <string name="announce_gpx_waypoints">GPX uğranacak-ara-noktaları</string>
+    
     <string name="about_version">Sürüm :</string>
     <string name="shared_string_about">Hakkında</string>
     <string name="about_settings_descr">Sürüm bilgisi, lisanslar, proje üyeleri</string>
@@ -1835,23 +1834,7 @@
     <string name="show_zoom_buttons_navigation">Yakınlaştırma düğmeleri göster</string>
     <string name="save_as_favorites_points">Sık grup olarak kaydet</string>
     <string name="android_19_location_disabled">Android sürümü 4.4 (KitKat) beri indirebilir ve önceki depolama klasörüne (% s) haritalar güncelleme olamaz. Eğer izin verilen depolama konumuna değiştirmek ve orada tüm Osmand dosyaları kopyalamak istiyor musunuz?\n  Not 1: Eski dosyaları bakir kalır (ancak elle silinebilir).\n  Not 2: yeni depolama konumu o Osmand ve Osmand + arasında dosya paylaşmak mümkün olmayacaktır.</string>
-    <string name="release_2_2">Harita üzerinde yerleri dokunarak ve diğer ekranlarda Yeni bağlam-duyarlı UI
-\n
-\n  • Artık \'Kontrol panelini başlangıçta göster\' özelliği seçilmediği sürece harita ekranı doğrudan başta başlatılır
-\n
-\n  • Kontrol panelinde hangi kartların nasıl görüntüleneceğini ayarlama
-\n
-\n  • Eğer menü tabanlı app kontrolünden hoşlanıyorsanız Kontrol Panelini başlatmadan pas geçme
-\n
-\n  • Haritaları indirmek için, Dünya haritası üzerine tıklayarak bölgeleri doğrudan seçme
-\n
-\n  • POI Arama artık daha özel sorgulamaları destekler
-\n
-\n  • Geliştirilmiş POI ve OSM düzenleme işlevselliği
-\n
-\n  • Yeinden tasarlanmış harita verileri indirme yapısı ve arayüz
-\n
-\n  ve dahası…</string>
+    
     <string name="share_geo">Yer:</string>
     <string name="region_maps">Bölge çapında haritalar</string>
     <string name="world_maps">Dünya Haritaları</string>
@@ -1978,7 +1961,7 @@
     <string name="index_tours">Turlar</string>
     <string name="shared_string_all">Tüm</string>
     <string name="shared_string_waypoints">Yol işaretleri</string>
-    <string name="targets">Varış noktaları</string>
+    
     <string name="download_additional_maps">Eksik haritalar %1$s (%2$d MB) indirilsinmi?</string>
     <string name="rendering_value_browse_map_name">Haritaya göz at</string>
     <string name="rendering_attr_coloredBuildings_name">Binalar türüne göre renk kodu</string>
@@ -2313,7 +2296,7 @@
     <string name="by_type">Tipe göre</string>
     <string name="shared_string_more_without_dots">Daha fazla</string>
     <string name="appearance_on_the_map">Harita üzerinde görünüş</string>
-    <string name="track_waypoints"/>
+    
     <string name="favourites_group">Favoriler kategorisi</string>
     <string name="add_group">Grup ekle</string>
     <string name="add_group_descr">Grupları, favorilerden veya işaretleri takip etden alabilirsiniz.</string>
@@ -2432,19 +2415,7 @@
     <string name="back_to_search">Aramaya geri dön</string>
     <string name="confirmation_to_delete_history_items">Seçilmiş nesneleri Geçmişten silmek istiyor musunuz?</string>
     <string name="show_something_on_map">%1$s \'ı haritada göster</string>
-    <string name="release_2_4">\\022 Yeni çok güçlü serbest metin arama
-\n
-\n • Araç ses sistemi / Bluetooth ile hoparlör telefon bağlantısı
-\n
-\n • Geliştirilmiş rota yönlendirme, sesli bilgilendirme, şerit değiştirme göstergesi
-\n
-\n • Improved transport layer with route rendering
-\n
-\n • Eklenen ilave yerler ve şimdi bölgesel yerlere destek 
-\n
-\n • Pek çok diğer geliştirmeler ve bug düzeltmeleri.
-\n
-\n ve dahası…</string>
+    
     <string name="share_history_subject">OsmAnd üzerinden paylaşıldı</string>
     <string name="postcode">Posta-kodu</string>
     <string name="shared_string_from">-dan</string>
@@ -2483,19 +2454,7 @@
     <string name="trip_rec_notification_settings_desc">Seyahati kaydetmeyi başlatmaya izin vermek için için bir sistem bildirimi göster.</string>
     <string name="shared_string_trip">Seyahat</string>
     <string name="shared_string_recorded">Kaydedildi</string>
-    <string name="release_2_5">\\022 Harita üzerinde tıklanabilir imgeler
-\n
-\n • Güçlü POI süzgeçli arama: Arama, örneğin: farklı yemek türlerine göre restoranlar ya da belirli tesislerine göre kamp alanları
-\n
-\n • Bisikletçiler ve yürüyüşçüler için yeni Topo Haritası tarzı 
-\n
-\n • Geliştirilmiş seyahat kaydedimi
-\n
-\n • Geliştirilmiş navigasyon bildirimleri (Android Wear)
-\n
-\n • Pek çok diğer geliştirmeler ve bug düzeltmeleri
-\n
-\n ve fazlası…</string>
+    
     <string name="create_custom_poi">Özel süzgeç oluştur</string>
     <string name="no_update_info_desc">Sürüm güncelleştirmeler veya OsmAnd ile ilgili indirimler kontrol edilmesin.</string>
     <string name="route_stops_before">öncesinde %1$s durak(lar)</string>
@@ -2566,17 +2525,7 @@
     <string name="access_smart_autoannounce_descr">Yalnızca hedef noktaya istikamet değişirse uyar.</string>
     <string name="access_autoannounce_period">Otomatik-sesli-bildirim periyodu</string>
     <string name="no_waypoints_found">Uğranacak-ara-noktalar bulunamadı</string>
-    <string name="release_2_3">\\022 OSM Live. Haritaya katkıda bulunanları ve geliştiricileri destekleyin ve saatlik harita güncelleştirmelerini alın. 
-\n
-\n • Harita işaretleyicileri. Haritada hızlıca bir yerler seçmek için yeni bir yol. 
-\n
-\n • Daha detaylı, ülkelere özgü trafik işaret levlaharı ve pek çok yeni harita özelliklerine sahip OSM haritaları.
-\n
-\n • Rota hazırlamada geliştirilmiş görünüm ve hissiyat. 
-\n
-\n • Harita içerik menüsünde bağlamsal adres arama gibi pek çok geliştirmeler.
-\n
-\n ve fazlası…</string>
+    
     <string name="lang_es_us">İspanyolca (Amerikan)</string>
     <string name="moving_time">Hareket Zamanı</string>
     <string name="purchase_dialog_title">Plan seçin</string>

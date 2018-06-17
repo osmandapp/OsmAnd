@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="recording_context_menu_show">اظهر</string>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources><string name="recording_context_menu_show">اظهر</string>
     <string name="av_def_action_picture">التقط صورة</string>
     
     <string name="av_def_action_video">تسجيل الفيديو</string>
@@ -207,7 +206,7 @@
 	<string name="driving_region_canada">كندا</string>
 	<string name="driving_region_europe_asia">أوروبا، آسيا، أمريكا اللاتينية، وغيرها</string>
 	<string name="driving_region_uk">المملكة المتحدة، الهند وما شابه ذلك</string>
-	<string name="announce_gpx_waypoints">نقاط الطريق GPX</string>
+	
     <string name="speak_title">أعلن…</string>
 	<string name="osb_author_or_password_not_specified">يرجى تحديد مستخدم OSM وكلمة سره في الإعدادات</string>
     <string name="clear_intermediate_points">محو الوجهات الوسيطة</string>
@@ -794,7 +793,7 @@
 	<string name="local_index_mi_restore">فعّل</string>
 	<string name="local_index_mi_backup">عطّل</string>
 	
-	<string name="local_index_mi_reload">حدّث من sdcard</string>
+	
 	<string name="shared_string_download">تحميل</string>
 	<string name="local_index_poi_data">بيانات POI</string>
 	<string name="local_index_address_data">بيانات العناوين</string>
@@ -1259,7 +1258,7 @@
     <string name="index_tours">الجولات</string>
     <string name="shared_string_all">جميع</string>
     <string name="shared_string_waypoints">نقاط الطريق</string>
-    <string name="targets">الوجهات</string>
+    
     <string name="rendering_value_browse_map_name">استعرض الخريطة</string>  
     <string name="rendering_value_car_name">سيارة</string>
     <string name="rendering_value_bicycle_name">دراجة</string>
@@ -1791,17 +1790,7 @@
     <string name="coords_format">نمط الاحداثيات</string>
     <string name="night">ليل</string>
     
-    <string name="release_2_3">/022 OSM على المباشر. ادعم مساهمي الخرائط والمطورين وحدث الخرائط كل ساعة.
-\n
-\n • العلامات الموضعية على الخريطة. طريقة جديدة لتحديد الاماكن على الخريطة بسرعة.
-\n
-\n • خرائط OSM مفصلة أكثر مع حدود الدول والعديد من مزايا الخرائط الجديدة.
-\n
-\n • مظهر محسن عند إعداد الطريق.
-\n
-\n • تحسينات عدة على قائمة محتوى الخريطة كمحتويات البحث عن العناوين.
-\n
-\nوغيرها…</string>
+    
     <string name="shared_string_move_up">حرك للاعلى</string>
     <string name="shared_string_move_down">تحرك للأسفل</string>
     <string name="open_street_map_login_and_pass">اسم المستخدم وكلمة المرور ل اوبن ستريت ماب</string>
@@ -2047,19 +2036,7 @@
     
     
     <string name="show_something_on_map">اظهر %1$s على الخريطة</string>
-    <string name="release_2_4">/022 باحث نصوص جديد مجاني وكفئ
-\n
-\n • توافق نظام صوت السيارة / مكبر الصوت مع الهاتف عبر البلوتوث
-\n
-\n • تحسينات في مرشد الطرقات، تنبيهات الدوران الصوتية
-\n
-\n • تحسين واجهة النقل مع تحديد طريق الوجهة
-\n
-\n • إضافة المزيد من اللغات المحلية والآن ندعم لغات إقليمية
-\n
-\n • العديد من التحسينات الأخرى وإصلاحات للأعطاب
-\n
-\nوغيرها…</string>
+    
     <string name="dist_away_from_my_location">ابحث %1$s بعيدا</string>
     
     <string name="share_history_subject">تمت مشاركته عبر OsmAnd</string>
@@ -2071,23 +2048,7 @@
     <string name="access_direction_haptic_feedback">توجيه رد فعل الهزاز</string>
     <string name="please_specify_poi_type_only_from_list">يرجى تحديد نوع POI الصحيح أو تخطيه.</string>
     <string name="show_on_start_description">\'إيقاف\' تطلق مباشرة واجهة الخريطة.</string>
-    <string name="release_2_2">/022 واجهة مستخدم جديدة حساسة للضغط على المواقع في الخريطة والواجهات الأخرى
-\n
-\n • واجهة الخريطة تقلع الآن مباشرة إلا إذا كانت \'اظهار لوحة التحكم عند بدء التطبيق\' مفعلة
-\n
-\n • اعداد كيف وأي بطاقة يتم عرضها على لوحة التحكم
-\n
-\n • تجاوز لوحة التحكم إذا كنت تحب التحكم في التطبيق عبر القوائم
-\n
-\n • لتنزيل الخرائط، يمكن تحديد المناطق على خريطة العالم مباشرة
-\n
-\n • البحث عن POI يدعم الآن متطلبات محددة أكثر
-\n
-\n • POI محسنة بالاضافة الى خاصية تعديل على OSM
-\n
-\n • إعادة صياغة بنية تحميل بيانات الخرائط والواجهة
-\n
-\nوغيرها…</string>
+    
     <string name="osm_edit_modified_poi">OSM POI معدل</string>
     <string name="osm_edit_commented_note">ملاحظة OSM معلق عليها</string>
     <string name="osm_edit_removed_note">ملاحظة OSM محذوفة</string>
@@ -2373,19 +2334,7 @@
     <string name="gpx_no_tracks_title">ليس لديك أية مسارات بعد</string>
     <string name="rendering_value_fine_name">غرامة</string>
     <string name="route_roundabout_short">خذ المخرج %1$d ثم واصل</string>
-    <string name="release_2_5">/022 رموز قابلة للنقر عليها على الخريطة
-\n
-\n  • فلتر بحث POI قوي: البحث عن، على سبيل المثال: مطاعم حسب نوع المطبخ، مخيمات مع مرافق محددة
-\n
-\n  • اسلوب توبو جديد للخريطة لراكبي الدراجات والمتنزهين
-\n
-\n  • خاصية محسنة لتسجيل الرحلة 
-\n
-\n  • إشعارات ملاحة محسنة (Android Wear)
-\n
-\n  • العديد من التحسينات الأخرى وإصلاح الأخطاء
-\n
-\n  وغيرها…</string>
+    
     <string name="search_map_hint">بحث عن مدينة أو منطقة</string>
     <string name="wiki_around">"تنصل وتذكير :
           إذا كنت تعمل على ترجمة الجمل، يرجى التأكد من:
@@ -2491,26 +2440,7 @@
 	<string name="navigate_point_olc_info_short">تقصير رمز التموضع المفتوح يُرجى تقديم رمزٍ كامل</string>
     <string name="quick_action_duplicate">إسم الإجراء السريع مكرر</string>
     <string name="quick_action_bug_descr">سوف تكون تتمة هذه الرسالة تلقائيةً في المجال المخصص للتعليق.</string>
-    <string name="release_2_6">/022 ميزة جديدة: رز الإجراء السريع
-\n
-\n • تحسين استجابة لمس الشاشة(كالتحريك والتكبير)
-\n
-\n • نمط خطوط جديدة للعديد من اللغات المحلية
-\n
-\n • دعم خدمة تحويل النص إلى كلام مع اعتبار اللغات الجهوية(واللكنات)
-\n
-\n • تحسينات شكلية في العديد من أنماط الخرائط وكذا ويكيبيديا
-\n
-\n • دعم رمز التموضع المفتوح (OLC)
-\n • عرض الارتفاع، الانحدار وسرعة تسجيل مسارات الGPX والطرق المحسوبة
-\n
-\n • \"نمط القيادة\" تحسين اعدادات وفعالية توجيه الدراجات
-\n
-\n • إعدادات استخدام بيانات الارتفاع في توجيه الدراجات
-\n
-\n • العديد من التحسينات الأخرى وإصلاح الأخطاء
-\n
-\n وغيرها…</string>
+    
 	<string name="add_new_folder">أضف ملفا جديدا</string>
     <string name="track_points_category_name">النقاط البارزة على هذا الطريق</string>
     <string name="max_speed">السرعة القصوى</string>
@@ -2691,12 +2621,7 @@
     <string name="max_min">أقصى/أدنى</string>
     
     <string name="min_max">الأدنى/الأقصى</string>
-    <string name="release_2_7">/022 اضافة برنامج مابيلاري المساعد بمستوى صور الشوارع
-\n • ويدجت مسطرة لقياس المسافة
-\n • تقسيم فترات فصل الـ GPX بمعلومات مفصلة حول مسارك
-\n • تحسينات وإصلاحات للشوائب
-\n
-\n</string>
+    
     <string name="rendering_value_translucent_pink_name">وردي شفاف</string>
     <string name="quick_action_resume_pause_navigation">استئناف/وقف الملاحة</string>
     <string name="quick_action_resume_pause_navigation_descr">اضغط هذا الزر لإيقاف أو استئناف الملاحة.</string>
@@ -2801,13 +2726,7 @@
     <string name="osn_modify_dialog_error">حدث استثناء: لم يتم تعديل الملاحظة</string>
     <string name="osn_modify_dialog_title">تعديل ملاحظة</string>
     <string name="context_menu_item_modify_note">تعديل ملاحظة OSM</string>
-    <string name="release_2_8">\\022 علامات خريطة معاد صياغتها بالكامل مع القواعد الارشادية وتخطيط الطريق
-\n
-\n • أداة قياس المسافة عرض الأداة الإضافية لميزة الطريق وحفظ النقاط كما تتبع
-\n
-\n • أوسماند مباشر: إصلاحات الشوائب، بيانات جديدة على السرفر كل 30 دقيقة، التحديثات مدرجة في الملاحة
-\n
-\n</string>
+    
     <string name="rendering_value_darkyellow_name">أصفر داكن</string>
     <string name="shared_string_road">طريق</string>
     <string name="show_map">اظهر الخريطة</string>

@@ -86,7 +86,7 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com --><resources>
 	<string name="local_index_mi_restore">Khôi phục</string>
 	<string name="local_index_mi_backup">Sao lưu</string>
 	
-	<string name="local_index_mi_reload">Làm tươi</string>
+	
 	<string name="shared_string_download">Tải xuống</string>
 	
 	<string name="local_index_poi_data">dữ liệu địa điểm</string>

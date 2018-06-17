@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="speak_pedestrian">Piešachodnyja pierachody</string>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources><string name="speak_pedestrian">Piešachodnyja pierachody</string>
     <string name="rendering_attr_roadStyle_name">Styl aŭtadaroh</string>
     <string name="rendering_value_default_name">Pa zmoŭčańnі</string>
     <string name="rendering_value_orange_name">Aranžavy</string>
@@ -131,8 +130,8 @@
     <string name="index_tours">Pajezdkі</string>
     <string name="shared_string_all">Usie</string>
     <string name="shared_string_waypoints">Punkty šlachu</string>
-    <string name="targets">Celi</string>
-    <string name="announce_gpx_waypoints">Punkty šlachu GPX</string>
+    
+    
     <string name="download_additional_maps">Ściahnuć mapy, što adsutnіčajuć, %1$s (%2$d MB)?</string>
     <string name="shared_string_more">Bolš…</string>
     <string name="rendering_value_browse_map_name">Prahlad mapy</string>  
@@ -1149,7 +1148,7 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
 	<string name="local_index_mi_backup">Deaktyvavać</string>
 	
 	
-	<string name="local_index_mi_reload">Pieračytać z kartkі SD</string>
+	
 	<string name="shared_string_download">Ściahnuć</string>
 	<string name="local_index_poi_data">Źviestkі POI</string>
 	<string name="local_index_address_data">Adras</string>
@@ -1710,17 +1709,7 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="report">Spravazdača</string>
     
     <string name="storage_permission_restart_is_required">Prykladannie maje dazvol na zapis na zniešni nośbit, alie patrabujecca pierazahruzka.</string>
-    <string name="release_2_3">\\022 OSM Live. Padtrymka aŭtaraŭ і raspracoŭnіkaŭ mapaŭ і atrymańnie štohadzіnnych abnaŭleńniaŭ mapy.
-\n
-\n • Markiery. Novy sposab dla chutkaha vybaru miescaŭ na mapie.
-\n
-\n • Bolš padrabiaznyja OSM mapy sa specyfіčnymі darožnymі znakamі kraіn і ź vialikaj kolkaściu novych funkcyj.
-\n 
-\n • Palepšany vonkavy vyhlad і padrychtoŭka maršrutu.
-\n
-\n • Mnostva palapšeńniaŭ u kantekstnym meniu mapy takіch jak pošuk adrasu.
-\n
-\n i šmatlikaje іnšaje…</string>
+    
     <string name="shared_string_move_up">Pieramiascić ↑</string>
     <string name="shared_string_move_down">Pieramiascić ↓</string>
     <string name="finish_navigation">Zaviaršyć navіhacyju</string>
@@ -1838,23 +1827,7 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="show_on_start_description">«Adkliučana» niepasredna zapuskaje ekran mapy.</string>
     <string name="show_on_start">Pakazvać pry zapusku</string>
     <string name="copied_to_clipboard">Skapіjavana ŭ bufier abmienu</string>
-    <string name="release_2_2">\\u2022 Novy kantekstna-zaliežny interfiejs dlia vybaru pazicyi na mapie i na inšych ekranach
-\n 
-\n • Ekran mapy ciapier zapuskajecca niepasredna, kali vy nie vybrali \"Pakazvać paneĺ kiravańnia pry zapusku\" 
-\n 
-\n • Ukladki kanfihuracyi adliustroŭvajecca na paneli kiravańnia 
-\n 
-\n • Paneĺ kiravańnia moža nie źjaŭliacca, kali vy addajacie pieravahu kiravańniu prahramaju praz meniu 
-\n 
-\n • Rehijony, dlia jakich vy chočacie spampavać mapu, zaraz možna vybrać niepasredna na mapie śvietu 
-\n 
-\n • POI pošuk zaraz dazvaliaje boĺš dakladnyja zapyty 
-\n 
-\n • Paliepšanaje redahavańnie POI i OSM 
-\n 
-\n • Pierapracavany interfiejs zahruzki mapy 
-\n 
-\n i mnohaje inšaje …</string>
+    
     <string name="osm_save_offline">Zachavać lakalna</string>
     <string name="osm_edit_modified_poi">OSM POI adredahavana</string>
     <string name="osm_edit_deleted_poi">OSM POI vydalenaja</string>
@@ -2314,19 +2287,7 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="back_to_search">Viarnucca da pošuka</string>
     <string name="confirmation_to_delete_history_items">Vydalić abranyja eliemienty z «Historyi»?</string>
     <string name="show_something_on_map">Pakazać %1$s na mapie</string>
-    <string name="release_2_4">\\u2022 Novy paŭnatekstavy pošuk
-\n 
-\n • Intehracyja praz Bluetooth aŭtamabiĺnych aŭdyjasistem / kalonak 
-\n 
-\n • Paliepšanaja navihacyja pa maršrucie, halasavyja padkazki, adliustravańnie palos ruchu 
-\n 
-\n • Paliepšany plast transparta z adliustravańniem maršrutaŭ 
-\n 
-\n • Boĺš moŭ interfiejsu 
-\n 
-\n • Mnostva paliapšeńniaŭ i vypraŭlieńniaŭ pamylak 
-\n 
-\n i mnohaje inšaje…</string>
+    
     <string name="dist_away_from_my_location">Šukać za %1$s ad miescaznachodžańnia</string>
     <string name="share_history_subject">padzialilisia praz OsmAnd</string>
     <string name="search_categories">Katehoryі</string>
@@ -2557,27 +2518,7 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="routing_attr_relief_smoothness_factor_name">Abrać pierasiečanasć miascovasci</string>
     <string name="routing_attr_height_obstacles_name">Vykarystoŭvać danyja vyšyni</string>
     <string name="rendering_attr_depthContours_name">Kontury marskich hlybiń</string>
-    <string name="release_2_6">• Novaja funkcyja: knopka chutkaha dziejańnia 
-\n 
-\n • Palepšany adkaz na žesty sensarnaha ekrana 
-\n 
-\n • Novy šryft mapy, jaki pakryvaje bolš łakalaju 
-\n 
-\n • Padtrymka TTS dla varyjantaŭ rehijanalnych moŭ 
-\n 
-\n • Palapšeńni vizualizacyi ŭ niekatorych stylach mapaŭ i Vikipedyi 
-\n 
-\n • Padtrymka Open Location Code (OLC) 
-\n 
-\n • Adlustavańnie profilu vyšyni, ŭchilu i chutkaści dia zapisnych GPX-trekaŭ i različanych maršrutaŭ 
-\n 
-\n • Nałady «Styl kiravańnia» i palapšeńnie łohiki ŭ rovarnaj maršrutyzacyi 
-\n 
-\n • Nałady dla vykarystańnia danych vyšyni ŭ rovarnaj maršrutyzacyi 
-\n 
-\n • Mnostva inšych palapšeńniaŭ i vypraŭleńniaŭ pamyłak 
-\n 
-\n i šmat inšaha…</string>
+    
     <string name="auto_split_recording_title">Aŭtamatyčnaje dzialiennie zapisaŭ paslia pieraryva</string>
     <string name="auto_split_recording_descr">Pačać novy siehmient paslia 6 minutnaha pierapynku, novy trek — paslia 2 hadzinnaha pierapynku, ci novy fajl paslia doŭhaha pierapynku (jak zmianiliasia data).</string>
     <string name="rendering_attr_contourDensity_name">Ščyĺnasć haryzantaliaŭ</string>
@@ -2595,19 +2536,7 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="trip_rec_notification_settings_desc">Pakazvać apaviaščennie, jakoje dazvolić pačać zapis padarožža.</string>
     <string name="shared_string_notifications">Paviedamleńni</string>
     <string name="shared_string_paused">Prypynieny</string>
-    <string name="release_2_5">• Ikonki na mapie, jakija moža naciskać 
-\n 
-\n • Pošuk lubych POI: Pošuk restaranaŭ pavodle kuchni abo kiempinhaŭ z peŭnymi vyhodami
-\n 
-\n • Novy styl mapy \"OsmAnd Topo\" dla vielasipiedystaŭ i piešych turystaŭ 
-\n 
-\n • Palapšeńnie zapisu śledu 
-\n 
-\n • Palapšeńnie apaviaščeńniaŭ pry navihacyi (Android Wear) 
-\n 
-\n • Mnostva inšych palapšeńniaŭ i vypraŭleńniaŭ 
-\n 
-\n i mnohaje inšaje…</string>
+    
     <string name="save_track_min_speed_descr">Fiĺtr: nie žurnaliavać kropki nižej hetaj chutkasci.</string>
     <string name="save_track_min_distance">Žurnaliavannie minimaĺnaha zrušennia</string>
     <string name="save_track_min_distance_descr">Fiĺtr: zadajcie minimaĺnuju adliehlasć ad kropki dlia žurnaliavannia novaj.</string>
@@ -2804,15 +2733,7 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     
     
     <string name="min_max">Min./Maks.</string>
-    <string name="release_2_7">• Dadatak Mapillary z vuličnymi vyjavami 
-\n 
-\n • Vidžet-liniejka dla vymiareńniaŭ dystancyj 
-\n 
-\n • Razdzielenyja GPX-intervaly z padrabiaznaj infarmacyjaj ab vašym treku 
-\n 
-\n • Inšyja palapšeńni i vypraŭleńni chibaŭ
-\n
-\n</string>
+    
     <string name="rendering_value_translucent_pink_name">Paŭprazrysty ružovy</string>
     <string name="measurement_tool">Vymiarać adlehłaść</string>
     <string name="quick_action_resume_pause_navigation">Prypynić/adnavić navihacyju</string>
@@ -2918,13 +2839,7 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="osn_modify_dialog_error">Nie atrymalasia zmianić natatku</string>
     <string name="osn_modify_dialog_title">Źmianić natatku</string>
     <string name="context_menu_item_modify_note">Źmianić OSM-natatku</string>
-    <string name="release_2_8">• Całkam pierapracavanyja markiery z linijami kirunku i planavańniem maršruta 
-\n 
-\n • Instrument vymiareńnia adlehłaściej z pryviazkaj da darohi i z zachavańniem kropak u śled 
-\n 
-\n • OsmAnd Live: vypraŭleńnie chibaŭ, abnaŭleńnie dadzienych na sierviery kožnyja 30 chvilin, abnaŭleńni realizavanyja ŭ navihacyi
-\n
-\n</string>
+    
     <string name="rendering_value_darkyellow_name">Ciomna-žoŭty</string>
     <string name="shared_string_road">Daroha</string>
     <string name="show_map">Pakazać mapu</string>
@@ -3017,27 +2932,7 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="lang_lo">Łaoskaja</string>
     <string name="will_open_tomorrow_at">Adčynicca zaŭtra a</string>
     <string name="rendering_attr_hidePOILabels_name">Nazvy POI</string>
-    <string name="release_2_9">• Vyjaŭliennie stop-sihnalaŭ ciapier uličvaje napramak ruchu
-\n
-\n • Navy alharytm, što nadaje dziejsnyja značenni padjomu/spusku dlia GPX-sliadoŭ
-\n
-\n • Čas chadźby ŭ zaliežnasci ad miascovasci (padjomu) (pravila Niejsmita)
-\n
-\n • Abnoŭlienaje kantekstnaje mieniu: pakazvaje kali adkryvajucca/zakryvajucca POI 
-\n 
-\n • Mieniu transparta: usie dastupnyja maršruty ciapier na miescie 
-\n 
-\n • Vikipiedyja: dabaŭliena knopka dlia adkrycca artykula, abnoŭlieny vyhliad artykulaŭ 
-\n 
-\n • Maršrut: dabaŭliena mahčymasć zmyny pačatkovaj i kačatkovaj kropak adnym dotykam 
-\n 
-\n • Natatki: dabaŭliena sartavannie pa typu i dacie 
-\n 
-\n • OSM praŭki: pakazvajecca značka i nazva POI-katehoryi, adliustroŭvajecca vykananaje dziejannie 
-\n 
-\n • Novy ekran chutkaha ŭvodu kaardynat dlia stvarennia markieraŭ 
-\n 
-\n</string>
+    
     <string name="day_off_label">vych.</string>
     <string name="winter_and_ski_renderer">Zimovy/lyžny</string>
     <string name="touring_view_renderer">Turystyčny (kantrast i detali)</string>

@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="email">電子郵件</string>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources><string name="email">電子郵件</string>
 	<string name="poi_dialog_opening_hours">打開</string>
 	<string name="poi_dialog_comment">評論</string>
 	<string name="poi_dialog_comment_default">改變POI</string>
@@ -437,7 +436,7 @@
 	<string name="driving_region_uk">英国、印度、澳大利亚及其他</string>
 	    
     
-    <string name="announce_gpx_waypoints">播报 GPX 途经点</string>
+    
     <string name="speak_title">播报…</string>
 	<string name="speak_descr">配置播报街道名称、交通信息(交通管制、拥堵)、测速电子眼警告、限速</string>
 	<string name="speak_speed_limit">播报限速</string>
@@ -669,7 +668,7 @@
 	<string name="local_index_installed">本地版本</string>
 	<string name="local_index_descr_title">数据管理</string>
 	
-	<string name="local_index_mi_reload">从SD卡中重新载入</string>
+	
 	<string name="shared_string_download">下载</string>
 	<string name="local_index_poi_data">POI 数据</string>
 	<string name="local_index_address_data">地址数据</string>
@@ -1231,19 +1230,7 @@
     
     
     <string name="shared_string_notifications">通知</string>
-    <string name="release_2_5">\\u2022 地图上可点击的图标
-\n 
-\n • 强大的兴趣点过滤搜索：例如，根据菜肴搜索餐馆，或者具有特定设施的场所 
-\n 
-\n • 新的 Topo 地图风格，为骑行爱好者和登山者设计 
-\n 
-\n • 增强的旅途记录功能 
-\n 
-\n • 改进了导航提醒功能（Android Wear） 
-\n 
-\n • 许多其它改进和缺陷修复 
-\n 
-\n 还有更多待你发现……</string>
+    
     <string name="christmas_poi">圣诞兴趣点</string>
     <string name="christmas_desc_q">显示圣诞兴趣点？</string>
     <string name="search_hint">输入城市、地址、兴趣点名称</string>
@@ -1303,17 +1290,7 @@
     <string name="rendering_value_light_brown_name">浅棕色</string>
     <string name="rendering_value_dark_brown_name">深棕色</string>
     <string name="use_osm_live_routing">OsmAnd 实时导航</string>
-    <string name="release_2_3">\\u2022 OSM 实时功能。支持地图贡献者和开发者获取每小时更新的地图。
-\n 
-\n • 地图标记。新的快速地图选点的方式。 
-\n 
-\n • 更多详细的国别特有的道路标志以及包含许多新地图功能的 OSM 地图。 
-\n 
-\n • 改进的导航准备界面外观显示。 
-\n
-\n • 上下文菜单的许多改进，例如上下文中的地址查找。 
-\n 
-\n还有更多……</string>
+    
     <string name="get_directions">导航</string>
     <string name="settings_privacy">隐私</string>
     <string name="proxy_pref_title">代理</string>
@@ -1634,19 +1611,7 @@
     <string name="back_to_search">返回到搜索</string>
     <string name="confirmation_to_delete_history_items">你想要从历史中删除所选的项目吗？</string>
     <string name="show_something_on_map">在地图上显示 %1$s</string>
-    <string name="release_2_4">\\u2022 新加入非常强大的自由文本查找
-\n
-\n • 透过蓝牙集成汽车音响系统 / 电话扬声器 
-\n
-\n • 改进的路线引导、 语音提示，和转弯道指示 
-\n
-\n • 改进了运输层与路线绘制 
-\n
-\n • 增加了更多的语言环境，现在支持区域的语言环境 
-\n
-\n • 许多其它的改善和修正错误 
-\n
-\n 以及更多…</string>
+    
     <string name="dist_away_from_my_location">搜索 %1$s 离开</string>
     <string name="share_history_subject">通过 OsmAnd 分享</string>
     <string name="postcode">邮政编码</string>
@@ -1726,25 +1691,7 @@
     <string name="no_camera_permission">应用程序没有权限访问摄像头。</string>
     <string name="no_microphone_permission">应用程序没有访问麦克风的权限。</string>
     <string name="show_on_start_description">“关闭”会直接启动地图屏幕</string>
-    <string name="release_2_2">\\u2022 在地图上和其它屏幕上，为点击位置做了新的敏捷内容菜单用户界面
-\n
-\n • 地图屏幕上现在除了直接启动外，还有\'在应用程序时启动显示仪表板\'可选 
-\n
-\n • 组态哪些以及何种卡可以在仪表板上显示 
-\n
-\n • 如果您喜欢基本菜单的应用程序控制，绕过仪表板方式 
-\n
-\n • 要下载地图，可以直接在全球地图上点击区域
-\n 
-\n • 更好的重新计算路线（现在引擎经过反复的尝试，建议一条不同的路线） 
-\n
-\n • 兴趣点搜索现在支持更具体的查找 
-\n
-\n • 改善过的兴趣点和 OSM 编辑功能 
-\n
-\n • 地图数据下载结构和界面重新设计 
-\n
-\n 还有更多…</string>
+    
     <string name="share_osm_edits_subject">通过 OsmAnd 协作编辑 OSM</string>
     <string name="lang_nds">低地德语</string>
     <string name="lang_mk">马其顿</string>
@@ -1752,27 +1699,7 @@
     <string name="lang_als">"阿尔巴尼亚  (Tosk)"</string>
     <string name="world_map_download_descr">世界底图（涵盖整个世界的缩小版）可能存在丢失或过期。请考虑下载它的全球概览。</string>
     <string name="map_downloaded_descr">已下载 %1$s 的地图，你现在可以开始使用它。</string>
-    <string name="release_2_6">"\\u2022 新功能：快速动作按钮
-\n
-\n •  改进了触摸屏幕手势的回应(同时平移和缩放) 
-\n
-\n • 新的地图字体覆盖了更多的语言环境 
-\n
-\n • 支持 TTS 不同版本的区域语言(和语法) 
-\n
-\n • 在一些地图样式和维基百科的清晰度增强 
-\n
-\n • 支持开放位置码 (OLC) 
-\n
-\n •  为记录的 GPX 轨迹和预测的路线显示海拔、坡度和速度的概貌 
-\n
-\n •  在自行车路线中\"驾驶样式\"设置和逻辑的改进 
-\n
-\n •  在自行车路线中使用高度数据的设置 
-\n
-\n •  一些其它的改进和错误修复 
-\n
-\n 以及更多…"</string>
+    
     <string name="simulate_initial_startup_descr">设置标志，指示第一个应用程序启动，保持所有其他设置保持不变</string>
     <string name="favorite_category_dublicate_message">指定的类别名称已存在。请使用一个不同的名称。</string>
     <string name="shared_string_trip_recording">旅行记录</string>
@@ -1960,7 +1887,7 @@
     <string name="index_tours">旅游</string>
     <string name="shared_string_all">全部</string>
     <string name="shared_string_waypoints">路标</string>
-    <string name="targets">目的地</string>
+    
     <string name="download_additional_maps">要下载缺少的地图 %1$s (%2$d MB) 吗？</string>
     <string name="rendering_value_browse_map_name">浏览地图</string>
     <string name="rendering_value_car_name">汽车</string>
@@ -2617,15 +2544,7 @@
     <string name="quick_action_show_navigation_finish_dialog">显示导航完成对话框</string>
     <string name="quick_action_start_stop_navigation">开始/停止导航</string>
     <string name="quick_action_start_stop_navigation_descr">点击该按钮以开始或结束导航。</string>
-    <string name="release_2_7">\\022 带有街道等级图像的 Mapillary 插件
-\n
-\n• 用于距离测量的量尺小部件
-\n
-\n • GPX 切分间隔，带有您的路径的详细信息
-\n
-\n • 其它改进和问题修复
-\n
-\n</string>
+    
     <string name="rendering_value_translucent_pink_name">半透明粉红色</string>
     <string name="empty_state_osm_edits">创建或修改 OSM 对象</string>
     <string name="import_as_gpx">作为 GPX 文件导入</string>
@@ -2648,13 +2567,7 @@
     <string name="yesterday">昨天</string>
     <string name="context_menu_read_full_article">阅读完整文章</string>
     <string name="context_menu_read_article">阅读文章</string>
-    <string name="release_2_8">\\022 彻底重新实现了地图标记功能，带有辅助线和路径规划
-\n
-\n • 距离测量工具，提供道路吸附功能和将点保存为轨迹的功能
-\n
-\n • OsmAnd 实时：缺陷修复、每 30 分钟即从服务器更新最新数据、在导航界面中实现了更新功能
-\n
-\n</string>
+    
     <string name="shared_string_without_name">没有名称</string>
     <string name="what_is_here">这里的内容:</string>
     <string name="parked_at">停在</string>
@@ -2763,7 +2676,7 @@
     <string name="purchase_subscription_title">订阅 - %1$s</string>
 
     <string name="wikivoyage_offline">Wikivoyage 离线</string>
-    <string name="dayly_map_updates">地图更新：每日</string>
+    
     <string name="unlimited_downloads">无限下载</string>
     <string name="wikipedia_offline">离线维基百科</string>
     <string name="open_wikipedia_link_online">在线打开维基百科链接</string>

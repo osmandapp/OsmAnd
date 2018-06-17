@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
     <string name="offline_edition">Modifications hors-ligne</string>
     <string name="offline_edition_descr">Toujours utiliser l\'édition hors-ligne.</string>
 
@@ -151,7 +150,7 @@
     <string name="local_index_mi_restore">Restaurer</string>
     <string name="local_index_mi_backup">Désactiver</string>
 
-    <string name="local_index_mi_reload">Recharger depuis la carte mémoire</string>
+    
     <string name="shared_string_download">Télécharger</string>
 
     <string name="local_index_poi_data">Points d\'intérêt</string>
@@ -1194,7 +1193,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="edit_tilesource_elliptic_tile">Mercator elliptique</string>
     <string name="edit_tilesource_choose_existing">Sélectionner existant…</string>
     <string name="maps_define_edit">Définir/Éditer…</string>
-    <string name="announce_gpx_waypoints">Points de passage GPX</string>
+    
     <string name="speak_descr">Annoncer les noms de rue, les avertissements (stops, ralentisseurs, radars), les limites de vitesse.</string>
     <string name="new_directions_point_dialog">Vous avez déjà défini des étapes intermédiaires.</string>
     <string name="context_menu_item_directions_to">Itinéraire vers</string>
@@ -1574,7 +1573,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="download_additional_maps">Télécharger les cartes manquantes %1$s (%2$d Mo) ?</string>
 
     <string name="shared_string_waypoints">Itinéraire</string>
-    <string name="targets">Destinations</string>
+    
     <string name="way_alarms">Alertes de circulation</string>
     <string name="speak_favorites">Favoris à proximité</string>
     <string name="speak_poi">Points d\'intérêt à proximité</string>
@@ -2110,23 +2109,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="routing_attr_avoid_stairs_name">Éviter les escaliers</string>
 	<string name="routing_attr_avoid_borders_name">Éviter le franchissement de frontières</string>
 	<string name="routing_attr_avoid_stairs_description">Éviter les escaliers</string>
-	<string name="release_2_2">\\022 Nouveaux menus contextuels sur un point de la carte 
-\n 
-\n • Choix de l\'affichage au démarrage (tableau de bord ou carte) 
-\n 
-\n • Personnalisation du contenu du tableau de bord 
-\n 
-\n • Possibilité d\'ignorer le tableau de bord et de n\'utiliser que les menus 
-\n 
-\n • Téléchargement des cartes des régions en appuyant directement sur la carte mondiale 
-\n 
-\n • Amélioration de la recherche des points d\'intérêt 
-\n 
-\n • Amélioration des points d\'intérêt et des contributions OSM 
-\n 
-\n • Refonte du téléchargement des cartes 
-\n 
-\n et bien plus encore …</string>
+	
     <string name="poi_context_menu_modify_osm_change">Modifier la contribution OSM</string>
     <string name="shared_string_near">Proche</string>
     <string name="shared_string_hide">Masquer</string>
@@ -2244,17 +2227,7 @@ Actuellement seuls {2} Mo sont disponibles.</string>
     <string name="storage_permission_restart_is_required">L\'application est maintenant autorisée à écrire sur la mémoire externe. Redémarrez l\'application pour prendre en compte cette modification.</string>
     <string name="full_report">Rapport complet</string>
     <string name="open_street_map_login_and_pass">Identifiant et mot de passe OpenStreetMap</string>
-    <string name="release_2_3">"022\\ OSM Live. Soutenez les contributeurs de carte et les développeurs pour obtenir des mises à jour horaires 
-\n
-\n  • Créations de carte : Une nouvelle façon de marquer des emplacements sur la carte 
-\n 
-\n • Cartes OSM plus détaillées avec des spécificités par pays et beaucoup de nouvelles fonctionnalités 
-\n 
-\n • Amélioration de l\'expérience utilisateur lors de la préparation d\'un itinéraire 
-\n
-\n • Beaucoup d\'autres améliorations sur les menus contextuels comme la recherche d\'adresses 
-\n
-\net bien plus encore…"</string>
+    
     <string name="storage_directory_readonly_desc">Bascule vers la mémoire interne car l\'emplacement de stockage précédemment sélectionné est en lecture seule. Merci de sélectionner un dossier où l\'écriture est autorisée.</string>
     <string name="osm_user_stat">Modifications %1$s, classement %2$s, nombre total de modifications %3$s</string>
     <string name="osm_live_subscription">Abonnement à OsmAnd Live</string>
@@ -2349,19 +2322,7 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="coords_search">Recherche par coordonnées</string>
     <string name="advanced_coords_search">Recherche avancée par coordonnées</string>
     <string name="dist_away_from_my_location">Recherche %1$s autour</string>
-    <string name="release_2_4">"\\022 Nouveau moteur de recherche pour les lieux permettant la saisie d\'un texte libre 
-\n 
-\n • Diffusion des instructions vocales vers  le système audio d\'un véhicule ou tout autre appareil Bluetooth 
-\n 
-\n • Instructions de guidage, annonces vocales, et indications de voies directionnelles améliorées 
-\n 
-\n • Amélioration du calque de transport en commun et affichage de l\'itinéraire 
-\n 
-\n • Ajout de paramètres locaux et support de paramètres régionaux 
-\n 
-\n • Autres améliorations et corrections d\'anomalies 
-\n 
-\n et bien plus encore…"</string>
+    
     <string name="update_all_maps_now">Mettre à jour toutes les cartes maintenant ?</string>
     <string name="clear_tile_data">Supprimer toutes les tuiles</string>
     <string name="replace_favorite_confirmation">Êtes-vous certain de vouloir remplacer le favori %1$s ?</string>
@@ -2433,19 +2394,7 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="shared_string_recorded">Enregistré</string>
     <string name="shared_string_record">Enregistrer</string>
     <string name="gpx_logging_no_data">Aucune donnée</string>
-    <string name="release_2_5">\\022 Icônes cliquables sur la carte 
-\n 
-\n • Recherche avancée des points d\'intérêt, exemple : recherche de restaurants par spécialité ... 
-\n 
-\n • Nouveau style OsmAnd Topo pour les cyclistes et les randonneurs 
-\n 
-\n • Amélioration de l’enregistrement d\'itinéraire 
-\n 
-\n • Android Wear : amélioration des notifications de navigation 
-\n 
-\n • Nombreuses améliorations et corrections de bugs 
-\n 
-\n et bien plus…</string>
+    
     <string name="shared_string_notifications">Notifications</string>
     <string name="trip_rec_notification_settings">Activer le démarrage rapide d\'enregistrement d\'itinéraire</string>
     <string name="trip_rec_notification_settings_desc">Afficher une notification permettant d’enregistrer l\'itinéraire</string>
@@ -2565,23 +2514,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="auto_split_recording_title">Découper automatiquement les enregistrements</string>
 	<string name="auto_split_recording_descr">Débuter un nouveau segment après une interruption de 6 min, une nouvelle trace après 2 h ou un nouveau fichier en cas de changement de date.</string>
     <string name="quick_action_page_list_descr">Un appui sur ce bouton d\'action fera défiler la liste.</string>
-    <string name="release_2_6">\\022 Nouvelle fonctionnalité : Bouton d\'action rapide 
-\n 
-\n • Réponses plus rapides aux gestes sur l\'écran 
-\n 
-\n • Nouveaux jeux de caractères permettant de gérer de nouvelles langues 
-\n 
-\n • Meilleure gestion des langues régionales avec TTS 
-\n 
-\n • Meilleure lisibilité de certains styles de cartes et de Wikipédia 
-\n 
-\n • Support d\'Open Location Code (OLC) 
-\n 
-\n • Affichage d\'un profil d’altitude, de pente et de vitesse pour les enregistrements GPX comme pour les itinéraires calculés 
-\n 
-\n • Améliorations des itinéraires à vélo : paramétrage du style de \"conduite\", possibilité d\'utiliser les données d\'altitude 
-\n 
-\n • Et de nombreuses autres améliorations et corrections d\'anomalies…</string>
+    
 	<string name="rendering_attr_depthContours_description">Afficher les lignes et points de sonde.</string>
     <string name="rendering_attr_depthContours_name">Lignes de sonde maritimes</string>
 	<string name="routing_attr_height_obstacles_name">Utiliser les données d\'altitude</string>
@@ -2825,15 +2758,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="measurement_tool">Mesurer une distance</string>
     
 
-    <string name="release_2_7">\\022 Greffon Mapillary avec les images de rue
-\n
-\n• Widget règle pour la mesure de distance
-\n
-\n• Les intervalles GPX ont des informations détaillées sur votre trace
-\n
-\n• D\'autres améliorations et corrections de bug
-\n
-\n</string>
+    
     <string name="show_on_map_after_saving">Afficher sur la carte après enregistrement</string>
     <string name="route_point_one">Point 1 de l\'itinéraire</string>
 <string name="none_point_error">Merci d\'ajouter au moins un point.</string>
@@ -2974,13 +2899,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="round_trip">Boucle</string>
     <string name="plan_route_no_markers_toast">Vous devez ajouter au minimum une marque pour utiliser cette fonction.</string>
     <string name="shared_string_road">Route</string>
-    <string name="release_2_8">\\022 Refonte complète des marques sur la carte avec indications de directions et planification d\'itinéraire 
-\n 
-\n • Outil de mesure de distance permettant un alignement sur la route et un enregistrement des points comme trace 
-\n 
-\n • OsmAnd Live : corrections de bugs, actualisation des données toutes les 30 minutes, prises en compte des mises à jour dans la navigation
-\n
-\n</string>
+    
     <string name="wrong_format">Format incorrect</string>
     <string name="wrong_input">Saisie erronée</string>
 	<string name="enter_new_name">Saisissez un nouveau nom</string>
@@ -3077,25 +2996,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="touring_view_renderer">Vue grand tourisme</string>
     <string name="nautical_renderer">Maritime</string>
 <string name="will_open_tomorrow_at">Ouvre demain à</string>
-    <string name="release_2_9">\\022 Menu contextuel : affichage des horaires d\'ouverture des points d\'intérêt 
-\n 
-\n • Menu Transport : les itinéraires possibles sont maintenant en haut 
-\n 
-\n • Wikipedia : ajout d\'un bouton pour ouvrir l\'article original, amélioration de l\'apparence des articles 
-\n 
-\n • Itinéraire : possibilité d\'inverser le point de départ et d\'arrivée en un appui 
-\n 
-\n • Notes : tri par type et date 
-\n 
-\n • Contributions OSM : affiche icône et nom de la catégorie ainsi que les actions terminées 
-\n 
-\n • Nouvel écran de saisie rapide des coordonnées pour la création de marques. 
-\n 
-\n • La détection des panneaux stop prend maintenant en compte la direction
-\n
-\n • Nouvel algorithme pour donner des valeurs correctes de dénivelés pour les traces GPX
-\n
-\n • Le temps de balade prend en compte le dénivelé (par la règle de Naismith)</string>
+    
     <string name="copy_location_name">Copier le nom du point</string>
     <string name="toast_empty_name_error">Emplacement sans nom</string>
 <string name="show_closed_notes">Afficher les notes fermées</string>
@@ -3179,10 +3080,10 @@ représentant la zone : %1$s x %2$s</string>
     <string name="purchase_subscription_title">Souscrire - %1$s</string>
 
     <string name="wikivoyage_offline">Wikivoyage hors-line</string>
-    <string name="dayly_map_updates">Mise à jour des cartes : quotidien</string>
+    
     <string name="unlimited_downloads">Téléchargements illimités</string>
     <string name="wikipedia_offline">Wikipedia hors-ligne</string>
-    <string name="contour_lines_sea_depth">Courbes de niveaux + Lignes de sonde marines</string>
+    
     <string name="unlock_all_features">Activez toutes les fonctionnalités d\'OsmAnd</string>
 
     <string name="monthly_map_updates">Mise à jour des cartes : <b>Tous les mois</b></string>

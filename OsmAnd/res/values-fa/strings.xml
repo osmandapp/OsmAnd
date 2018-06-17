@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="local_osm_changes_backup_failed">پشتیبان‌گیری از تغییرات OSM ناموفق بود</string>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources><string name="local_osm_changes_backup_failed">پشتیبان‌گیری از تغییرات OSM ناموفق بود</string>
     <string name="plugin_distance_point_time">زمان</string>
     <string name="plugin_distance_point_hdop">دقت</string>
     <string name="plugin_distance_point_speed">سرعت</string>
@@ -361,7 +360,7 @@
 	<string name="local_index_mi_restore">فعال‌کردن</string>
 	<string name="local_index_mi_backup">غیرفعال‌کردن</string>
 	
-	<string name="local_index_mi_reload">بارگیری مجدد از کارت حافظه</string>
+	
 	<string name="shared_string_download">دانلود</string>
 	<string name="local_index_poi_data">اطلاعات POI</string>
 	<string name="local_index_address_data">اطلاعات نشانی</string>
@@ -1235,7 +1234,7 @@
 	<string name="speak_descr">پیکربندی‌های مربوط به اعلام نام خیابان‌ها، هشدارهای ترافیکی (مانند توقف‌های اجباری، سرعتگیرها)، هشدار دوربین‌های کنترل سرعت و محدودیت‌های سرعت را انجام دهید.</string>
 	<string name="speak_street_names">نام خیابان‌ها (موتور صوتی)</string>
     
-    <string name="announce_gpx_waypoints">نقاط بین‌راهی GPX</string>
+    
         
     
     <string name="map_widget_fps_info">اطلاعات عیب‌یابی FPS</string>
@@ -1572,7 +1571,7 @@
     <string name="index_tours">سفرها</string>
     <string name="shared_string_all">همه</string>
     <string name="shared_string_waypoints">نقاط بین‌راهی</string>
-    <string name="targets">مقصدها</string>
+    
     <string name="way_alarms">هشدارهای ترافیکی</string>
     <string name="speak_favorites">نقاط برگزیدهٔ اطراف</string>
     <string name="speak_poi">مکان‌های POI نزدیک</string>
@@ -2218,18 +2217,7 @@
     <string name="line">خط</string>
     <string name="shared_string_options">گزینه‌ها</string>
     <string name="measurement_tool_save_as_new_track_descr">نقطه‌ها را به‌عنوان نقاط مسیر یا در قالب یک خط ذخیره کنید.</string>
-    <string name="release_2_4">"• شیوهٔ تازه و بسیار قدرتمند برای جست‌وجوی آزاد 
-\n
-\n • یکپارچه‌شدن با تلفن بلندگویی/سیستم صوتی اتومبیل از راه بلوتوث 
-\n
-\n • بهبود مسیریابی، راهنمای صوتی و اعلام گردش‌ها 
-\n
-\n • بهیود لایهٔ حمل‌ونقل با رسم مسیرها
-\n • اضافه‌شدن بومی‌سازی‌های بیشتر و پشتیبانی از نام‌های محلی 
-\n
-\n • رفع بسیاری از مشکلات دیگر و بهبود عملکرد برنامه 
-\n 
-\n  و…"</string>
+    
     <string name="osm_live_ask_for_purchase">لطفاً ابتدا اشتراک به‌روزرسانی پویا (OsmAnd Live) را بخرید</string>
     <string name="osm_live_header">با خرید این اشتراک نقشه‌های سراسر جهان را به‌صورت ساعتی به‌روز کنید. بخشی از درآمد حاصله به جامعهٔ OSM برمی‌گردد‌‌ و صرف همکاری‌ها با OSM می‌شود. اگر دوستدار OSM و OsmAnd هستید و مایلید حامی آن‌ها باشید و از خدمات پشتیبانی‌شان بهره‌مند شوید، بهترین راه همین تهیهٔ اشتراک است.</string>
     <string name="select_map_marker">نشانهٔ نقشه را انتخاب کنید</string>
@@ -2673,15 +2661,7 @@
     <string name="routing_attr_relief_smoothness_factor_more_plains_name">هموار</string>
     <string name="route_points_category_name">نقاطی که در این مسیر بر سر راهتان است</string>
     <string name="shared_string_time_moving">مدت حرکت</string>
-    <string name="release_2_7">• افزونهٔ مپیلاری با تصویرهای خیابانی 
-\n 
-\n • ابزارک خط‌کش برای اندازه‌گیری مسافت 
-\n 
-\n • تقسیم‌کردن GPX به چند بازه همراه با اطلاعات جزئی دربارهٔ مسیر 
-\n 
-\n • رفع بسیاری از مشکلات دیگر و بهبود عملکرد برنامه
-\n
-\n</string>
+    
     <string name="auto_split_recording_descr">بعد از ۶ دقیقه وقفه، بخش جدید شروع می‌شود. بعد از ۲ ساعت وقفه، مسیر جدید شروع می‌شود. بعد از وقفهٔ طولانی‌تر در صورتی که تاریخ تغییر کند فایل جدید ایجاد می‌شود.</string>
     <string name="upload_osm_note_description">توضیحات ویرایشی‌تان را به‌صورت ناشناس یا با نام کاربری‌تان در سایت OpenStreetMap.org آپلود کنید.</string>
     <string name="route_roundabout_short">خروجی %1$d را بگیرید و بروید</string>
@@ -2799,13 +2779,7 @@
 \n • جاهایی را که دوست دارید در قسمت نقاط برگزیده ذخیره کنید 
 \n • شیوهٔ نمایش نام‌های روی نقشه را انتخاب کنید: انگلیسی، محلی یا نویسه‌گردانی‌شده 
 \n • نمایش نقشه‌های تخصصی آنلاین، تصاویر ماهواره‌ای (بینگ) و رولایه‌های مختلف مانند مسیرهای گردشگردی یا راهبری GPX با امکان تنظیم شفافیت</string>
-    <string name="release_2_8">• نشانه‌های نقشه را به‌صورت کامل بازسازی کردیم و قابلیت‌های خطوط جهت‌دار و طرح‌ریزی مسیر نیز به آن افزوده شد 
-\n 
-\n • قابلیت چسبیدن به راه و ذخیره‌کردن نقاط به‌عنوان مسیر، به ابزار مسافت‌سنج اضافه شد 
-\n 
-\n • به‌روزرسانی پویا (OsmAnd Live): رفع ایرادات - داده‌های سرور هر ۳۰ دقیقه به‌روز می‌شود - به‌روزرسانی‌ها در مسیریابی استفاده می‌شود 
-\n 
-\n</string>
+    
     <string name="context_menu_item_delete_waypoint">نقطهٔ بین‌راهی GPX را حذف می‌کنید؟</string>
     <string name="context_menu_item_edit_waypoint">ویرایش نقطهٔ بین‌راهی GPX</string>
     <string name="rendering_value_darkyellow_name">زرد تیره</string>
@@ -2821,70 +2795,10 @@
     <string name="round_trip">سفر رفت‌وبرگشتی</string>
     <string name="plan_route_no_markers_toast">برای استفاده از این قابلیت باید حداقل یک نشانه اضافه کنید.</string>
     <string name="shared_string_road">جاده</string>
-    <string name="release_2_6">• قابلیت جدید: دکمهٔ عملیات فوری 
-\n 
-\n • بهبود عملکرد و پاسخگویی عملیات لمسی (مثلاً بزرگ‌نمایی و حرکت همزمان)
-\n 
-\n • فونت‌های جدید برای پشتیبانی از زبان‌های بیشتر 
-\n 
-\n • پشتیبانی از TTS برای گویش‌ها و لهجه‌های زبانی 
-\n 
-\n • بهبود نمایش سبک‌های نقشه و اطلاعات ویکی‌پدیا 
-\n 
-\n • پشتیبانی از کد مکانی باز (OLC) 
-\n 
-\n • نمایش ارتفاع، شیب و سرعت برای مسیرهای GPX ضبط‌شده و مسیرهای محاسبه‌شده 
-\n 
-\n • تنظیمات «حالت رانندگی» و بهبود مسیریابی برای دوچرخه 
-\n 
-\n • تنظیماتی برای داده‌های ارتفاع در مسیریابی برای دوچرخه 
-\n 
-\n • بهبود عملکرد برنامه و رفع بسیاری از مشکلات
-\n 
-\n و…</string>
-    <string name="release_2_5">• نمادهای روی نقشه با یک‌بار لمس‌کردن انتخاب می‌شوند
-\n
-\n • جست‌وجوی قوی برای نقاط محبوب (POI): مثلاً جست‌وجوی رستوران‌ها بر اساس نوع غذا یا جست‌وجوی مکان‌های اسکان بر اساس امکاناتشان
-\n
-\n • سبک جدید Topo برای نقشه، مناسب برای دوچرخه‌سواران و پیاده‌گردان
-\n
-\n • بهبود ضبط سفر
-\n
-\n • بهبود اعلان‌های مسیریابی (اندروید پوشیدنی)
-\n
-\n • پشتیبانی از کد مکانی باز (OLC)
-\n
-\n • رفع بسیاری از مشکلات دیگر و بهبود عملکرد برنامه 
-\n
-\n و…</string>
-    <string name="release_2_3">• OSM Live یا به‌روزرسانی پویا (برای نقشه‌های آفلاین): حمایت از مشارکت‌کنندگان و توسعه‌دهندگان با ارائهٔ به‌روزرسانی‌های ساعتی برای نقشه.
-\n
-\n • نشانه‌های نقشه: شیوه‌ای نو برای انتخاب سریع مکان‌های روی نقشه.
-\n
-\n • جزئیات بیشتر در نقشه‌های OSM با شماره‌گذاری جاده‌های هر کشور (به شکل خاص آن کشور) و خیلی امکانات دیگر برای نقشه.
-\n
-\n • بهبود ظاهر آماده‌سازی مسیر.
-\n
-\n • بهبودهای بسیار در منوی زمینه‌ای نقشه مانند جست‌وجوی نشانی‌های اطراف.
-\n
-\n و…</string>
-    <string name="release_2_2">• رابط کاربری جدید که به لمس‌های کاربر بر روی نقشه و سایر نقاط صفحه واکنش نشان می‌دهد
-\n
-\n • صفحهٔ نقشه مستقیماً نشان داده می‌شود مگر اینکه «نمایش پیشخوان با شروع برنامه» انتخاب شده باشد
-\n
-\n • مشخص کنید کدام کارت‌ها و چگونه در پیشخوان نشان داده شود
-\n
-\n • اگر مایلید نقشه را از طریق منوی ثابت کنترل کنید، می‌توانید پیشخوان را کنار بگذارید
-\n
-\n • برای دانلود نقشه‌ها، اگر نقشهٔ جهانی را انتخاب کنید نقشهٔ هر منطقه مستقیماً برای دانلود در اختیارتان قرار خواهد داشت
-\n
-\n • می‌توانید در جست‌وجوی POIها از پرسش‌های خاص‌تر استفاده کنید
-\n
-\n • قابلیت ویرایش POIها بهبود یافته است
-\n
-\n • رابط کاربری و شیوهٔ دانلود اطلاعات نقشه‌ها بازسازی شده است
-\n
-\n و…</string>
+    
+    
+    
+    
     <string name="av_locations_descr">فایل GPX از مکان‌های یادداشت‌دار.</string>
     <string name="osmand_plus_extended_description_part1">برنامهٔ OsmAnd+‎ (مخفف OSM Automated Navigation Directions به‌معنی راهبری خودکار با نقشهٔ OSM) یک نرم‌افزار نقشه و راهبری است که به گسترهٔ وسیعی از داده‌های نقشهٔ باز شهری (OpenStreetMap یا به‌صورت خلاصه OSM) دسترسی دارد. این داده‌های رایگان و جهانی با بالاترین کیفیت ارائه می‌شوند. 
 \n
@@ -3087,26 +3001,7 @@
     <string name="winter_and_ski_renderer">"زمستان و اسکی "</string>
     <string name="touring_view_renderer">نمای گردشگری</string>
     <string name="nautical_renderer">دریایی</string>
-<string name="release_2_9">• تشخیص علائم ایست با توجه به مسیر رانندگی
-\n
-\n• الگوریتم جدید برای تخصیص مقادیر صعود و نزولِ مناسب به مسیرهای GPX 
-\n
-\n• در نظر گرفتن ناهمواری (صعود) برای محاسبهٔ زمان پیاده‌گردی (قاعدهٔ نای‌اسمیت) 
-\n
-\n• به‌روزرسانی برای منوی زمینه: نمایش اوقات باز یا بسته‌شدن مکان (POI) 
-\n 
-\n• منوی حمل‌ونقل: همهٔ مسیرهای عبوری از یک ایستگاه در بالای منو نشان داده می‌شوند 
-\n 
-\n• ویکی‌پدیا: در نظر گرفتن دکمه‌ای برای بازکردن اصل مقاله، به‌روزرسانی ظاهر مقاله‌ها 
-\n 
-\n• مسیریابی: فقط با یک اشاره نقاط ابتدا و انتهای مسیر را با هم جابه‌جا کنید
-\n 
-\n• یادداشت‌ها: قابلیت مرتب‌سازی بر اساس نوع و تاریخ 
-\n 
-\n• ویرایش‌های OSM: نمایش آیکون و نام دسته‌ای که POI به آن تعلق دارد، نمایش عملیات‌های کامل‌شده 
-\n 
-\n• ایجاد سریع نشانه‌ها از طریق صفحهٔ ورود فوری مختصات 
-\n</string>
+
     <string name="will_open_tomorrow_at">فردا باز می‌شود، در ساعت</string>
     <string name="day_off_label">تعطیل</string>
     <string name="copy_location_name">کپی‌کردن نام نقطه/POI</string>
@@ -3192,10 +3087,10 @@
     <string name="purchase_subscription_title">اشتراک - %1$s</string>
 
     <string name="wikivoyage_offline">ویکی‌سفر آفلاین</string>
-    <string name="dayly_map_updates">به‌روزرسانی نقشه: روزانه</string>
+    
     <string name="unlimited_downloads">دانلود نامحدود</string>
     <string name="wikipedia_offline">ویکی‌پدیای آفلاین</string>
-    <string name="contour_lines_sea_depth">منحنی تراز + عمق دریا</string>
+    
     <string name="unlock_all_features">بازکردن همهٔ قابلیت‌های OsmAnd</string>
 
     <string name="monthly_map_updates">به‌روزرسانی نقشه: <b>ماهانه</b></string>

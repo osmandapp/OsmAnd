@@ -91,7 +91,7 @@
     <string name="index_tours">ടൂര്‍സ്</string>
     <string name="shared_string_all">എല്ലാം</string>
     <string name="shared_string_waypoints">വഴിത്തിരിവുകള്‍</string>
-    <string name="targets">ഉദ്ദിഷ്ടസ്ഥലങ്ങള്‍</string>
+    
     <string name="rendering_value_car_name">കാര്‍</string>
     <string name="rendering_value_bicycle_name">സൈക്കിള്‍</string>
     <string name="rendering_value_pedestrian_name">കാല്‍നടയാത്രക്കാരന്‍</string>
@@ -1273,7 +1273,7 @@
     <string name="search_radius_proximity">"അകത്ത് "</string>
     <string name="anonymous_user">"പേരുവയ്‌ക്കാത്ത ഉപയോക്താവ് "</string>
     <string name="text_size_descr">ഭൂപടത്തിലെ അക്ഷരവലിപ്പം ക്രമീകരിക്കുക.</string>
-    <string name="announce_gpx_waypoints">ജിപിഎക്സ് പാതബിന്ദുക്കള്‍</string>
+    
     <string name="live_monitoring_m_descr">ജിപിഎക്സ് റിക്കോഡിങ്ങ് സജീവമാക്കിയാല്‍ പാതവിവരങ്ങള്‍ നിര്‍ദ്ദിഷ്‌ട വെബ് സേവനത്തിന് അയക്കും.</string>
     <string name="rendering_attr_showSurfaceGrade_name">പാതയുടെ നിലവാരം കാണിക്കുക</string>
     <string name="rendering_attr_showCycleRoutes_name">സൈക്കിള്‍ റൂട്ടുകള്‍ കാണിക്കുക</string>

@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
 	<string name="shared_string_no">לא</string>
 	<string name="shared_string_yes">כן</string>
 	<string name="close_changeset">סגירת ערכת השינויים</string>
@@ -444,7 +443,7 @@
 	<string name="local_index_mi_restore">הפעלה</string>
 	<string name="local_index_mi_backup">נטרול</string>
 	
-	<string name="local_index_mi_reload">טעינה מחדש מכרטיס הזיכרון</string>
+	
 	<string name="shared_string_download">הורדה</string>
 	
 	<string name="local_index_poi_data">נתוני נ״ע</string>
@@ -1767,8 +1766,8 @@
     <string name="index_tours">סיורים</string>
     <string name="shared_string_all">הכול</string>
     <string name="shared_string_waypoints">נקודות דרך</string>
-    <string name="targets">יעדים</string>
-    <string name="announce_gpx_waypoints">נקודות דרך GPX</string>
+    
+    
     <string name="download_additional_maps">להוריד את המפות החסרות %1$s ‏(%2$d מ״ב)?</string>
     <string name="rendering_value_browse_map_name">עיון במפה</string>
     <string name="rendering_value_car_name">מכונית</string>
@@ -2465,15 +2464,7 @@
     <string name="altitude_range">טווח גבהים</string>
     <string name="routing_attr_relief_smoothness_factor_name">בחירת תנודת גובה</string>
     <string name="routing_attr_height_obstacles_name">שימוש בנתוני עלייה</string>
-    <string name="release_2_7">\\022 תוסף Mapillary עם צילומים ברמת רחוב
-\n
-\n • כלי סרגל למדידת מרחקים
-\n
-\n • טווחי פיצול GPX עם מידע מפורט על המסלול שלך
-\n
-\n • שיפורים ותיקונים נוספים
-\n
-\n</string>
+    
     <string name="auto_split_recording_title">פיצול הקלטות אוטומטית לאחר הפסקה</string>
     <string name="rendering_attr_contourDensity_description">צפיפות קו מתאר</string>
     <string name="rendering_attr_contourDensity_name">צפיפות קו מתאר</string>
@@ -2880,7 +2871,7 @@
     
     <string name="unlimited_downloads">הורדות ללא הגבלה</string>
     <string name="wikipedia_offline">ויקיפדיה בלתי מקוונת</string>
-    <string name="contour_lines_sea_depth">קווי מתאר + עומק הים</string>
+    
     <string name="unlock_all_features">שחרור כל התכונות של OsmAnd</string>
 
     <string name="android_19_location_disabled">החל מגרסה 4.4 של Android ‏(KitKat) לא ניתן להוריד ולעדכן מפות לתיקיית האחסון הישנה (%s). להעתיק את כל הקבצים של OsmAnd למיקום האחסון החדש? 
@@ -2905,47 +2896,9 @@
     <string name="wikivoyage_travel_guide_descr">מדריכים למקומות המעניינים ביותר בעולם, בתוך OsmAnd, ללא חיבור לאינטרנט.</string>
     <string name="contour_lines_hillshade_maps">קווי מתאר ומפות הצללה</string>
     <string name="popular_destinations">יעדים נפוצים</string>
-    <string name="release_2_8">\\022 סמני מפה שנבנו מחדש עם קווי הכוונה ותכנון מסלול 
-\n 
-\n • כלי מדידת מרחק המציע תכונת הצמדה לתוואי הדרך ושמירת נקודות כמסלול 
-\n 
-\n • OsmAnd חי: תיקוני באגים, נתונים חדשים בשרת כל חצי דקה, העדכונים מוטמעים בניווט 
-\n 
-\n</string>
-    <string name="release_2_9">\\022 תפריט ההקשר עודכן: הצגה כאשר נקודת העניין נפתחת / נסגרת
-\n
-\n • תפריט תעבורה: כל המסלולים הזמינים מופיעים למעלה
-\n
-\n • ויקיפדיה: נוסף כפתור לפתוח את הערך המקורי, תצוגת הערכים עודכנה
-\n
-\n • נתיב: נוספה אפשרות להחליף את נקודות ההתחלה והסיום בנגיעה אחת
-\n
-\n • הערות: הוספת מיון לפי סוג ותאריך
-\n
-\n • עריכת OSM: הצגת סמל ושם של קטגוריית נקודת העניין, הצגת פעולות שהושלמו
-\n
-\n • מסך הוספת נקודות ציון מהיר ליצירה מהירה של סמנים
-\n
-\n • זיהוי סימני עצור נחשב כעת להנחיית נהיגה
-\n
-\n • אלגוריתם חדש מספק ערכי עליה/ירידה משמעותיים למסלולי GPX
-\n
-\n • זמן טיול רגלי בהתחשבות בתנאי שטח (עליות - לפי כלל נייסמית׳)
-\n
-\n</string>
-    <string name="release_2_5">\\022 סמלים תומכי מגע על המפה
-\n
-\n • סינון בחיפוש רב עצמה של נקודות עניין: חיפוש מסעדות לפי סוג מטבח או מתחם לינה עם אמצעי נוחות מסוימים
-\n
-\n • סגנון מפה טופולוגית חדש לרוכבי אופניים ומטפסי הרים
-\n
-\n • הקלטת טיולים מורחבת
-\n
-\n • שיפור התרעות ניווט (Android Wear)
-\n
-\n • שיפורים ותיקוני באגים נוספים
-\n
-\n ועוד…</string>
+    
+    
+    
     <string name="osm_live_header">מינוי זה מאפשר לך לקבל עדכונים שעתיים של כל המפות ברחבי העולם. חלק מההכנסה חוזר אל קהילת OSM והוא מוענק לכל תורם OSM. אם OsmAnd ו־OSM נושאים חן בעיניך וברצונך לתמוך ולהיתמך על ידיהם, זו הדרך המושלמת לעשות זאת.</string>
     <string name="record_plugin_description">תוסף זה מפעיל את התכונה להקלטת ולשמירת המסלולים שלך על ידי נגיעה באופן ידני בווידג׳ט רישום ה־GPX במסך המפה, או גם לערוך רישום של כל נתיבי הניווט שלך לקובץ GPX.
 \n
@@ -3009,23 +2962,7 @@
     <string name="wiki_article_search_text">מתבצע חיפוש אחר ערך הוויקי המתאים</string>
     <string name="wiki_article_not_found">הערך לא נמצא</string>
     <string name="how_to_open_wiki_title">כיצד לפתוח ערכים בוויקיפדיה?</string>
-<string name="release_2_2">\\022 מנשק חדש מוכוון הקשר לנגיעה במקומות במפה ובמסכים אחרים
-\n
-\n • מסך המפה נטען כעת ישירות אלא אם כן בחרת באפשרות ‚הצגת לוח מחוונים עם התחלת היישומון’
-\n
-\n • להציג אילו וכיצד מופיעים כרטיסים בלוח הבקרה
-\n
-\n • מעקף של לוח הבקרה אם שליטה מבוססת תפריטים עדיפה בעיניך
-\n
-\n • כדי להוריד מפות, ניתן לבחור אזורים באופן ישיר על ידי נגיעה בהם במפת העולם
-\n
-\n • חיפוש נקודות עניין תומך כעת בשאילתות יותר ממוקדות
-\n
-\n • תכונת עריכה מתקדמת לנקודות עניין ול־OSM
-\n
-\n • מבנה הורדת נתוני המפות ומנשק המשתמש תוכננו מחדש
-\n
-\n ועוד…</string>
+
     <string name="plugin_touringview_descr">הפעלת תצוגה זו משנה את סגנון המפה של OsmAnd ל‚תצוגת סיור’, מדובר בתצוגה מיוחדת עם פרטים רבים למטיילים ולנהגים מקצועיים. 
 \n
 \nתצוגה זו מספקת, בכל רמת תקריב שהיא, את כמות הפרטים המרבית לצורך הטיול בנתוני המפה (בעיקר דרכים, מסילות, מסלולים וצייני כיוון). 
@@ -3067,54 +3004,12 @@
 \n • אנטארקטיקה: * 
 \n רוב המדינות מסביב לעולם זמינות להורדה! 
 \n ניתן לקבל נווט אמין למדינה שלך - בין אם זו ישראל, צרפת, גרמניה, מקסיקו, אנגליה, ספרד, הולנד, ארה״ב, רוסיה, ברזיל או כל מדינה אחרת.</string>
-    <string name="release_2_4">\\022 חיפוש טקסט חופשי חדש ועצמתי במיוחד
-\n
-\n • שילוב עם מערכת שמע / דיבורית למכונית דרך Bluetooth
-\n
-\n • הנחיית מסלול, דיווחים קוליים וחיווי מעבר נתיב משופרים
-\n
-\n • שכבת תעבורה משופרת עם עיבוד מסלול
-\n
-\n • נוספו שפות וניבים מקומיים
-\n
-\n • שיפורים ותיקוני באגים רבים נוספים
-\n
-\n ועוד…</string>
-    <string name="release_2_3">\\022 OSM חי. הבעת תמיכה בתורמי המפות והמפתחים לטובת קבלת עדכוני מפות כל שעה. 
-\n
-\n • סמני מפות. דרך חדשה לבחור מיקומים על המפה.
-\n
-\n • מפות OSM מפורטות יותר עם ציוני מספרי כבישים ומגוון תכונות מפה חדשות.
-\n
-\n • המראה והתחושה של הכנת המסלול השתפרו. 
-\n
-\n • שיפורים רבים בתפריט ההקשר של המפה כגון חיפוש כתובות לפי הקשר.
-\n
-\n ועוד…</string>
+    
+    
     <string name="nm">nmi</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">עיבוד מסלולים לפי עקבות OSMC.</string>
     <string name="routing_attr_height_obstacles_description">מקדם נתוני גובה פני קרקע (נתונים של SRTM,‏ ASTER ו־EU-DEM).</string>
-    <string name="release_2_6">\\022 תכונה חדש: כפתור פעולה מהירה
-\n
-\n • תגובה משופרת למחוות מסך מגע (למשל: גלילה ותקריב מהירים יותר)
-\n
-\n • גופנים נוספים למפה שמכסים שפות נוספות
-\n
-\n • תמיכה במערכות המרת טקסט לדיבור למגוון תת־סיווגי שפות (וניבים)
-\n
-\n • שיפורים חזותיים למגוון סגנונות מפה בוויקיפדיה
-\n
-\n • תמיכה בקוד מיקום פתוח (OLC - Open Location Code)
-\n
-\n • הצגת גבהים, מדרונים ופרופיל מהירות למסלולי GPX שהוקלטו ולמסלולים מחושבים
-\n
-\n • הגדרת „סגנון נהיגה” ושיפורים לוגיים לתכנון מסלול באופניים
-\n
-\n • הגדרות נתוני גובה לתכנון מסלול עם אופניים
-\n
-\n • מגוון שיפורים ותיקוני באגים נוספים
-\n
-\n ועוד…</string>
+    
     <string name="plugin_nautical_descr">תוסף זה מעשיר את המפה ואת הניווט של יישומון OsmAnd ומאפשר לייצר מפות ימיות לחתירה, הפלגה וסוגים נוספים של ספורט ימי. 
 \n
 \nתוסף מפה מיוחד ל־OsmAnd יספק את כל סימוני הניווט הימיים והסימנים הימיים המוסכמים, לניווט במקווי מים פנימיים לרבות ניווט באזורים הקרובים לחוף. התיאור של כל סימון ניווט מספק את הפרטים הנדרשים כדי לזהות אותם ואת המשמעות שלהם (קטגוריה, צורה, צבע, רצף, הפניה וכו׳). 
@@ -3128,7 +3023,7 @@
     <string name="map_widget_bearing">תכווין יחסי</string>
     <string name="rendering_value_walkingRoutesOSMC_name">צבע לפי סימול הליכת שטח של OSMC</string>
     <string name="osmand_team">צוות OsmAnd</string>
-    <string name="empty_state_markers_history">היסטוריה</string>
+    
     <string name="maps_you_need_descr">על סמך הערכים שהוספת לסימניות, נוכל להמליץ לך להוריד את המפות הבאות:</string>
     <string name="maps_you_need">מפות שדרושות לך</string>
     <string name="shared_string_restart">הפעלת היישומון מחדש</string>
