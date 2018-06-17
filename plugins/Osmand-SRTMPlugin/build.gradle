@@ -66,11 +66,11 @@ def analytics = System.getenv("USE_FIREBASE_FOR_PLUGINS")
 
 dependencies {
 	if (analytics) {
-		compile 'com.google.firebase:firebase-core:9.8.0'
-		compile 'com.google.firebase:firebase-config:9.8.0'
+		implementation 'com.google.firebase:firebase-core:9.8.0'
+		implementation 'com.google.firebase:firebase-config:9.8.0'
 	}
-	compile 'com.android.support:appcompat-v7:23.3.0'
-	compile 'com.android.support:design:23.3.0'
+	implementation 'com.android.support:appcompat-v7:23.3.0'
+	implementation 'com.android.support:design:23.3.0'
 }
 
 if (analytics) {
