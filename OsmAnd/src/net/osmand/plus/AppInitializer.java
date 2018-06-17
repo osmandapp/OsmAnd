@@ -351,7 +351,14 @@ public class AppInitializer implements IProgress {
 					Field f = R.string.class.getField("poi_" + keyName);
 					if (f != null) {
 						Integer in = (Integer) f.get(null);
-						return app.getString(in);
+						String val = app.getString(in);
+						if(val != null) {
+							int ind = val.indexOf(';');
+							if (ind > 0) {
+								return val.substring(0, ind);
+							}
+						}
+						return val;
 					}
 				} catch (Throwable e) {
 					LOG.info("No translation: " + keyName);
@@ -372,10 +379,18 @@ public class AppInitializer implements IProgress {
 			@Override
 			public String getSynonyms(String keyName) {
 				try {
-					Field f = R.string.class.getField("synonyms_poi_" + keyName);
+					Field f = R.string.class.getField("poi_" + keyName);
 					if (f != null) {
 						Integer in = (Integer) f.get(null);
-						return app.getString(in);
+						String val = app.getString(in);
+						if(val != null) {
+							int ind = val.indexOf(';');
+							if(ind > 0) {
+								return val.substring(ind + 1);
+							}
+							return val;
+						}
+						return val;
 					}
 				} catch (Exception e) {
 				}
