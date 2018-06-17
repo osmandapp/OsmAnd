@@ -16,6 +16,7 @@ android {
 			storePassword System.getenv("OSMAND_APK_PASSWORD")
 			keyAlias "osmand"
 			keyPassword System.getenv("OSMAND_APK_PASSWORD")
+		}
 	}
 
 	defaultConfig {
