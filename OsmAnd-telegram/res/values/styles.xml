@@ -1,19 +1,55 @@
 <resources>
 
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+	<!-- Base application theme. -->
+	<style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+		<item name="android:windowBackground">@color/bg_color_light</item>
+		<item name="android:colorBackground">@color/bg_color_light</item>
+		<item name="colorControlNormal">@color/primary_text_color_light</item>
+		<item name="colorControlActivated">@color/ctrl_active_color_light</item>
+		<item name="android:windowLightStatusBar">true</item>
 
-        <item name="bg_color">@color/bg_color_light</item>
-        <item name="icon_color">@color/icon_color_light</item>
-    </style>
+		<item name="colorPrimary">@color/ctrl_active_color_light</item>
+		<item name="colorPrimaryDark">@color/bg_color_light</item>
+		<item name="colorAccent">@color/ctrl_active_color_light</item>
+		<item name="android:textColorPrimary">@color/primary_text_color_light</item>
+		<item name="android:textColorSecondary">@color/secondary_text_color_light</item>
+		<item name="android:textColorTertiary">@color/description_text_color_light</item>
 
-    <style name="AppTheme.NoActionbar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-    </style>
+		<item name="bg_color">@color/bg_color_light</item>
+		<item name="icon_color">@color/icon_color_light</item>
+		<item name="ctrl_active_color">@color/ctrl_active_color_light</item>
+		<item name="ctrl_color">@color/ctrl_color_light</item>
+	</style>
+
+	<style name="AppTheme.NoActionbar">
+		<item name="windowActionBar">false</item>
+		<item name="windowNoTitle">true</item>
+	</style>
+
+	<style name="DialogActionButtonActive">
+		<item name="android:layout_width">wrap_content</item>
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:minHeight">@dimen/dialog_button_height</item>
+		<item name="android:paddingLeft">16dp</item>
+		<item name="android:paddingRight">16dp</item>
+		<item name="android:paddingTop">8dp</item>
+		<item name="android:paddingBottom">8dp</item>
+		<item name="android:textColor">@color/white_color</item>
+		<item name="android:textAllCaps">false</item>
+		<item name="android:background">@drawable/btn_round_blue</item>
+	</style>
+
+	<style name="DialogActionButton">
+		<item name="android:layout_width">wrap_content</item>
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:minHeight">@dimen/dialog_button_height</item>
+		<item name="android:paddingLeft">16dp</item>
+		<item name="android:paddingRight">16dp</item>
+		<item name="android:paddingTop">8dp</item>
+		<item name="android:paddingBottom">8dp</item>
+		<item name="android:textColor">@color/secondary_text_color_light</item>
+		<item name="android:textAllCaps">false</item>
+		<item name="android:background">@drawable/btn_round</item>
+	</style>
 
 </resources>

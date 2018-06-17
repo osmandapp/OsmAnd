@@ -25,6 +25,7 @@ object AndroidUtils {
 
 	fun softKeyboardDelayed(view: View) {
 		view.post {
+			view.requestFocus()
 			if (!isHardwareKeyboardAvailable(view.context)) {
 				val imm = view.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager?
 				imm?.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT)

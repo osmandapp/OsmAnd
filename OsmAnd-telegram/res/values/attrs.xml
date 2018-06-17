@@ -3,5 +3,7 @@
     <declare-styleable name="AppTheme">
         <attr name="bg_color" format="reference" />
         <attr name="icon_color" format="reference" />
+        <attr name="ctrl_active_color" format="reference" />
+        <attr name="ctrl_color" format="reference" />
     </declare-styleable>
 </resources>

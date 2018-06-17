@@ -7,7 +7,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/dialogTitleBackgroundColor"
+        android:background="?attr/ctrl_active_color"
         android:orientation="vertical"
         android:gravity="center_horizontal">
 
