@@ -388,7 +388,7 @@ public class AppInitializer implements IProgress {
 							if(ind > 0) {
 								return val.substring(ind + 1);
 							}
-							return val;
+							return "";
 						}
 						return val;
 					}
