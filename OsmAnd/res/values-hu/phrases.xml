@@ -55,7 +55,7 @@
 	<string name="poi_car_repair">Autószerelő</string>
 	<string name="poi_service_tyres">Autógumi-szerelő</string>
 	<string name="poi_car_wash">Autómosó</string>
-	<string name="poi_fuel">Benzinkút</string>
+	<string name="poi_fuel">Benzinkút;Töltőállomás;Gázolajtöltő-állomás</string>
 	<string name="poi_electricity_combined_charging">Elektromos töltőállomás</string>
 	<string name="poi_compressed_air">Sűrített levegő</string>
 	<string name="poi_parking">Parkoló</string>
@@ -3798,9 +3798,7 @@
 
 <string name="poi_service_car">Autós szolgáltatás</string>
 
-<string name="synonyms_poi_fuel">Benzinkút;Töltőállomás;Gázolajtöltő-állomás</string>
 
-	<string name="synonyms_poi_nightclub">Diszkó;Disco;Night club</string>
 	<string name="poi_barbecue_grill">Barbecue, grill</string>
 
 	<string name="poi_water_utility">Vízmű irodája</string>

@@ -372,7 +372,7 @@
 	<string name="poi_theatre">Teatru</string>
 	<string name="poi_theatre_genre_circus">Circu</string>
 	<string name="poi_dance_floor">Discoteca</string>
-	<string name="poi_nightclub">Nightclub</string>
+	<string name="poi_nightclub">Nightclub;Discoteca;Club noturnu;Nightclub</string>
 	<string name="poi_marina">Marina (portu minore)</string>
 	<string name="poi_swimming_pool">Piscina</string>
 	<string name="poi_park">Parcu</string>
@@ -548,7 +548,7 @@
 	<string name="poi_traffic_calming_table">Dossu a mesa</string>
 	<string name="poi_traffic_calming_choker">Restringhimentu de carrutzada rallentadore</string>
 	<string name="poi_car_wash">Autosabunadore</string>
-	<string name="poi_fuel">Rifornidore de carburante</string>
+	<string name="poi_fuel">Rifornidore de carburante;Distribudore de benzina;Istatzione de benzina;Istatzione de rifornimentu;Istatzione de servìtziu</string>
 	<string name="poi_skiing">Iscì</string>
 	<string name="poi_wreck">Relitu navale</string>
 	<string name="poi_alpine_hut">Pinnetu alpinu</string>
@@ -2987,9 +2987,7 @@
 	<string name="poi_service_car">Servìtziu pro sas automòbiles</string>
 	<string name="poi_glacier_type">Casta de astràrgiu</string>
 
-<string name="synonyms_poi_fuel">Rifornidore de carburante;Distribudore de benzina;Istatzione de benzina;Istatzione de rifornimentu;Istatzione de servìtziu</string>
 
-	<string name="synonyms_poi_nightclub">Discoteca;Club noturnu;Nightclub</string>
 	<string name="poi_lock_basin">Batzinu de serrada</string>
 	<string name="poi_counselling_type_addiction_yes">Consulèntzia professionale (dipendèntzia): eja</string>
 	<string name="poi_counselling_type_addiction_no">Consulèntzia professionale (dipendèntzia): nono</string>

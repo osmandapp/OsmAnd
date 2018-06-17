@@ -315,8 +315,7 @@
 	<string name="poi_service_tyres">Tires</string>
 	<string name="poi_vehicle_inspection">Vehicle inspection</string>
 	<string name="poi_car_wash">Car wash</string>
-	<string name="poi_fuel">Gas station</string>
-	<string name="synonyms_poi_fuel">Gas station;Gasoline station;Filling station;Petrol station</string>
+	<string name="poi_fuel">Gas station;Gasoline station;Filling station;Petrol station</string>
 
 	<string name="poi_fuel_diesel">Diesel</string>
 	<string name="poi_fuel_gtl_diesel">GTL diesel</string>
@@ -921,8 +920,7 @@
 	<string name="poi_theatre_genre_circus">Circus</string>
 	<string name="poi_gallery">Art gallery</string>
 	<string name="poi_dance_floor">Dance floor</string>
-	<string name="poi_nightclub">Nightclub</string>
-	<string name="synonyms_poi_nightclub">Disco;Disko</string>
+	<string name="poi_nightclub">Nightclub;Disco;Disko</string>
 	<string name="poi_stripclub">Stripclub</string>
 	<string name="poi_ski_resort">Ski resort</string>
 	<string name="poi_beach_resort">Beach resort</string>
@@ -2356,7 +2354,7 @@
 	<string name="poi_social_facility_for_drug_addicted">Drug addicted</string>
 	<string name="poi_social_facility_for_unemployed">Unemployed</string>
 	<string name="poi_social_facility_for_diseased">Diseased</string>
-	<string name="poi_social_facility_for_child_juvenile">Child;juvenile</string>
+	<string name="poi_social_facility_for_child_juvenile">Child juvenile</string>
 
 	<string name="poi_theatre_genre_philharmonic">Philharmonic</string>
 	<string name="poi_theatre_genre_musical">Musical</string>
@@ -2502,7 +2500,7 @@
 	<string name="poi_material_plastic">Material: plastic</string>
 	<string name="poi_material_sandstone">Material: sandstone</string>
 	<string name="poi_material_granite_stone">Material: granite stone</string>
-	<string name="poi_material_metal_wood">Material: metal;wood</string>
+	<string name="poi_material_metal_wood">Material: metal, wood</string>
 	<string name="poi_material_glass">Material: glass</string>
 	<string name="poi_material_bronze">Material: bronze</string>
 	<string name="poi_material_earth">Material: earth</string>
@@ -3407,7 +3405,7 @@
 
 	<string name="poi_motorcycle_sales_yes">Sales</string>
 	<string name="poi_motorcycle_sales_no">Sales: no</string>
-	<string name="poi_motorcycle_sales_yes_used">Sales: yes; used</string>
+	<string name="poi_motorcycle_sales_yes_used">Sales: yes, used</string>
 	<string name="poi_motorcycle_sales_used">Sales: used</string>
 	<string name="poi_motorcycle_rental_yes">Rental</string>
 	<string name="poi_motorcycle_rental_no">Rental: no</string>

@@ -142,7 +142,7 @@
 	<string name="poi_glaziery">Pordoj-k-fenestroj-vendejo</string>
 	<string name="poi_newsagent">Gazet-vendejo</string>
 	<string name="poi_fire_hydrant">Hidranto</string>
-	<string name="poi_fuel">Benzinejo</string>
+	<string name="poi_fuel">Benzinejo;benzinvendejo;benzinejo;benzinstacio;fuelejo;brulaĵvendejo;dizelpetrolvendejo</string>
 	<string name="poi_car_wash">Aŭtomobil-purigejo</string>
 	<string name="poi_bus_stop">Haltejo aŭtobusa</string>
 	<string name="poi_bridge">Ponto</string>
@@ -308,7 +308,7 @@
 	<string name="poi_religion_muslim">Islamo</string>
 	<string name="poi_theatre">Teatrejo</string>
 	<string name="poi_theatre_genre_circus">Cirko</string>
-	<string name="poi_nightclub">Noktoklubejo</string>
+	<string name="poi_nightclub">Noktoklubejo;noktoklubo;dancejo;diskoteko;diskejo;noktaklubo;noktklubo</string>
 	<string name="poi_playground">Infana ludejo</string>
 	<string name="poi_bank">Bankejo</string>
 	<string name="poi_beach">Sablobordo</string>
@@ -3796,11 +3796,8 @@
 
 <string name="poi_barbecue_grill">Rostigilo: jes</string>
 
-<string name="synonyms_poi_fuel">benzinvendejo;benzinejo;benzinstacio;fuelejo;brulaĵvendejo;dizelpetrolvendejo</string>
-
 	<string name="poi_water_utility">Oficejo de akvokonduka firmao</string>
 
-<string name="synonyms_poi_nightclub">noktoklubo;dancejo;diskoteko;diskejo;noktaklubo;noktklubo</string>
 	<string name="poi_amusement_arcade">Salono de ludoj</string>
 	<string name="poi_adult_gaming_centre">Salono de hazardaj ludoj</string>
 

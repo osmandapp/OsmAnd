@@ -154,7 +154,7 @@
 	<string name="poi_service_tyres">Шиномонтаж</string>
 	<string name="poi_vehicle_inspection">Пункт техосмотра</string>
 	<string name="poi_car_wash">Автомойка</string>
-	<string name="poi_fuel">Автомобильная заправка</string>
+	<string name="poi_fuel">Автомобильная заправка;Автозаправка;Бензоколонка;АЗС;Бензозаправка</string>
 	<string name="poi_electricity_combined_charging">Зарядная станция</string>
 	<string name="poi_vehicle_ramp">Ремонтная эстакада/яма</string>
 	<string name="poi_compressed_air">Подкачка шин</string>
@@ -548,8 +548,7 @@
 	<string name="poi_theatre">Театр, концертный зал</string>
 	<string name="poi_theatre_genre_circus">Цирк</string>
 	<string name="poi_dance_floor">Танцплощадка</string>
-	<string name="poi_nightclub">Ночной клуб</string>
-	<string name="synonyms_poi_nightclub">Диско</string>
+	<string name="poi_nightclub">Ночной клуб;Диско</string>
 	<string name="poi_stripclub">Стрипклуб</string>
 	<string name="poi_beach_resort">Пляжный комплекс</string>
 	<string name="poi_dog_park">Площадка для выгула собак</string>
@@ -3749,8 +3748,7 @@
 	<string name="poi_water_utility">Офис водоснабжения</string>
 	<string name="poi_energy_supplier">Офис поставщика электроэнергии</string>
 
-	<string name="synonyms_poi_fuel">Автомобильная заправка;Автозаправка;Бензоколонка;АЗС;Бензозаправка</string>
-
+	
 	<string name="poi_amusement_arcade">Игровой зал</string>
 	<string name="poi_adult_gaming_centre">Игровой зал для взрослых</string>
 

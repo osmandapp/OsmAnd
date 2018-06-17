@@ -295,7 +295,7 @@
 	<string name="poi_service_tyres">Däck</string>
 	<string name="poi_vehicle_inspection">Bilprovning</string>
 	<string name="poi_car_wash">Biltvätt</string>
-	<string name="poi_fuel">Bensinstation</string>
+	<string name="poi_fuel">Bensinstation;Bränslestation;Bränsle</string>
 	<string name="poi_fuel_diesel">Diesel</string>
 	<string name="poi_fuel_gtl_diesel">GTL-diesel</string>
 	<string name="poi_fuel_hgv_diesel">HGV-diesel</string>
@@ -887,7 +887,7 @@
 	<string name="poi_theatre_genre_circus">Cirkus</string>
 	<string name="poi_gallery">Konstgalleri</string>
 	<string name="poi_dance_floor">Dansgolv</string>
-	<string name="poi_nightclub">Nattklubb</string>
+	<string name="poi_nightclub">Nattklubb;Disco;Disko</string>
 	<string name="poi_stripclub">Strippklubb</string>
 	<string name="poi_ski_resort">Vintersemesteranläggning</string>
 	<string name="poi_beach_resort">Strandsemesteranläggning</string>
@@ -1956,7 +1956,7 @@
 	<string name="poi_barbecue_grill">Grill: ja</string>
 
 <string name="poi_buoy_safe_water">Mittledsboj</string>
-	<string name="synonyms_poi_fuel">Bensinstation;Bränslestation;Bränsle</string>
+	
 
 	<string name="poi_buoy_special_purpose">Specialboj</string>
 	<string name="poi_daymark">Båk</string>
@@ -2415,7 +2415,6 @@
 
 	<string name="poi_historic_civilization_ancient_roman">Civilisation: det antika romerska (753 F.KR – 284 E.KR.)</string>
 	<string name="poi_historic_civilization_nuragic">Civilisation: nuragherkulturen (18 F.KR – 2 E.KR)</string>
-	<string name="synonyms_poi_nightclub">Disco;Disko</string>
 	<string name="poi_social_facility_outreach">Uppsökande</string>
 	<string name="poi_historic_civilization_etruscan">Civilisation: etruskisk (500-talet F.Kr. - 1300-talet E.Kr.)</string>
 	<string name="poi_historic_civilization_prehistoric">Civilisation: förhistorisk</string>

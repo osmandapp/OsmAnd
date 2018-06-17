@@ -213,7 +213,7 @@
 	<string name="poi_fort">Festung</string>
 	<string name="poi_fountain">Brunnen</string>
 	<string name="poi_frame">Bilderrahmengeschäft</string>
-	<string name="poi_fuel">Tankstelle</string>
+	<string name="poi_fuel">Tankstelle;Tankanlage;Tankstation</string>
 	<string name="poi_funeral_directors">Bestatter</string>
 	<string name="poi_funicular">Seilbahn</string>
 	<string name="poi_furniture">Möbelgeschäft</string>
@@ -328,7 +328,7 @@
 	<string name="poi_newsagent">Zeitungshändler</string>
 	<string name="poi_newspaper">Zeitungsbüro</string>
 	<string name="poi_ngo">NGO</string>
-	<string name="poi_nightclub">Diskothek</string>
+	<string name="poi_nightclub">Diskothek;Disco;Disko</string>
 	<string name="poi_nursing_home">Pflegeheim</string>
 	<string name="poi_observatory">Sternwarte</string>
 	<string name="poi_occupational_therapist">Ergotherapeut/in</string>
@@ -3788,9 +3788,7 @@
 
 	<string name="poi_barbecue_grill">Barbecue-Grill: ja</string>
 
-<string name="synonyms_poi_fuel">Tankstelle;Tankanlage;Tankstation</string>
 
-	<string name="synonyms_poi_nightclub">Disco;Disko;Diskothek</string>
 	<string name="poi_amusement_arcade">Spielhalle</string>
 	<string name="poi_adult_gaming_centre">Spielkasino für Erwachsene</string>
 

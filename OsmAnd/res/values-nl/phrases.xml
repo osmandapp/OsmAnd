@@ -119,7 +119,7 @@
 	<string name="poi_traffic_calming_cushion">Rijbaankussen</string>
 	<string name="poi_traffic_signals">Verkeerslicht</string>
 
-	<string name="poi_fuel">Tankstation</string>
+	<string name="poi_fuel">Tankstation;Benzinestation;Benzinetankstation;Benzinepomp</string>
 	<string name="poi_parking">Parkeerplaats</string>
 	<string name="poi_motorcycle_parking">Motorparkeerplaats</string>
 	<string name="poi_parking_entrance">Parkeerplaats-toegang</string>
@@ -2494,7 +2494,6 @@
 	<string name="poi_climbing_style">Klimstijl</string>
 	<string name="poi_glacier_type">Soort gletsjer</string>
 
-<string name="synonyms_poi_fuel">Tankstation;Benzinestation;Benzinetankstation;Benzinepomp</string>
 
 	<string name="poi_wiki_lang_sh">Servo-Kroatische wiki</string>
 	<string name="poi_animal_shelter_wildlife">Wilde dieren</string>

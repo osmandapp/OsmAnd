@@ -301,9 +301,8 @@
 	<string name="poi_service_tyres">Ελαστικά</string>
 	<string name="poi_vehicle_inspection">ΚΤΕΟ</string>
 	<string name="poi_car_wash">Πλυντήριο αυτοκινήτων</string>
-	<string name="poi_fuel">Πρατήριο καυσίμων</string>
-	<string name="synonyms_poi_fuel">Πρατήριο καυσίμων;Βενζινάδικο</string>
-
+	<string name="poi_fuel">Πρατήριο καυσίμων;Βενζινάδικο</string>
+	
 	<string name="poi_fuel_diesel">Ντίζελ</string>
 	<string name="poi_fuel_gtl_diesel">Ντίζελ GTL</string>
 	<string name="poi_fuel_hgv_diesel">Ντίζελ HGV</string>
@@ -919,8 +918,7 @@
 	<string name="poi_theatre_genre_circus">Τσίρκο</string>
 	<string name="poi_gallery">Πινακοθήκη</string>
 	<string name="poi_dance_floor">Πίστα χορού</string>
-	<string name="poi_nightclub">Νυκτερινό κέντρο</string>
-	<string name="synonyms_poi_nightclub">Ντίσκο</string>
+	<string name="poi_nightclub">Νυκτερινό κέντρο;Ντίσκο</string>
 	<string name="poi_stripclub">Στριπτιζάδικο</string>
 	<string name="poi_beach_resort">Παραλιακό θέρετρο</string>
 	<string name="poi_dog_park">Πάρκο σκύλων</string>

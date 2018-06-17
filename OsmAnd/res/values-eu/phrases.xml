@@ -119,7 +119,7 @@
 
 	<string name="poi_service_tyres">Pneumatikoak</string>
 	<string name="poi_car_wash">Auto garbiketa</string>
-	<string name="poi_fuel">Gasolindegia</string>
+	<string name="poi_fuel">Gasolindegia;Zerbitzu estazioa;Erregai estazioa;Petrolio estazioa</string>
 	<string name="poi_fuel_diesel">Diesel</string>
 	<string name="poi_fuel_gtl_diesel">GTL diesel gasolioa</string>
 	<string name="poi_fuel_biodiesel">Biodiesel</string>
@@ -997,7 +997,7 @@
 	<string name="poi_theatre_genre_circus">Zirkoa</string>
 	<string name="poi_gallery">Arte galeria</string>
 	<string name="poi_dance_floor">Dantzarako pista</string>
-	<string name="poi_nightclub">Gau kluba</string>
+	<string name="poi_nightclub">Gau kluba;Disco;Disko</string>
 	<string name="poi_stripclub">Striptease kluba</string>
 	<string name="poi_ski_resort">Ski estazioa</string>
 	<string name="poi_dog_park">Txakur parkea</string>
@@ -3193,7 +3193,6 @@
 
 	<string name="poi_service_car">Kotxe zerbitzua</string>
 
-<string name="synonyms_poi_nightclub">Disco;Disko</string>
 	<string name="poi_glacier_type">Glaziar mota</string>
 
 <string name="poi_outdoor_seating_no">Kanpoko eserlekurik ez</string>
@@ -3210,7 +3209,6 @@
 	<string name="poi_resource_aggregate">Agregatua</string>
 	<string name="poi_checkpoint_type">Kontrol-postu mota</string>
 
-<string name="synonyms_poi_fuel">Gasolindegia; Zerbitzu estazioa;Erregai estazioa;Petrolio estazioa</string>
 
 	<string name="poi_tactile_paving_no">Ukimenezko zoladura gabe</string>
 	<string name="poi_capacity_disabled_no">Ez dago ezinduentzako toki berezirik</string>

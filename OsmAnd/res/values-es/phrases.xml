@@ -120,7 +120,7 @@
 	<string name="poi_car_repair">Taller mecánico</string>
 	<string name="poi_vehicle_inspection">Inspección de vehículos</string>
 	<string name="poi_car_wash">Lavadero de automóviles</string>
-	<string name="poi_fuel">Gasolinera</string>
+	<string name="poi_fuel">Gasolinera;Estación de servicio;Estación de combustible;Servicentro;Bencinera</string>
 	<string name="poi_fuel_diesel">Diésel</string>
 	<string name="poi_fuel_gtl_diesel">Diésel GTL</string>
 	<string name="poi_fuel_biodiesel">Biodiésel</string>
@@ -320,7 +320,7 @@
 	<string name="poi_social_centre">Centro social</string>
 	<string name="poi_theatre">Teatro</string>
 	<string name="poi_theatre_genre_circus">Circo</string>
-	<string name="poi_nightclub">Club nocturno</string>
+	<string name="poi_nightclub">Club nocturno;Disco;Boliche;Discoteca;Antro</string>
 	<string name="poi_stripclub">Club de striptease</string>
 	<string name="poi_dog_park">Parque canino</string>
 	<string name="poi_leisure_fishing">Lugar de pesca</string>
@@ -3774,9 +3774,7 @@
 	<string name="poi_socket_cee_blue_output_filter">Salida CEE azul</string>
 	<string name="poi_socket_schuko_output_filter">Salida Schuko</string>
 
-<string name="synonyms_poi_fuel">Gasolinera;Estación de servicio;Estación de combustible;Servicentro;Bencinera</string>
 
-	<string name="synonyms_poi_nightclub">Disco;Boliche;Discoteca;Antro;Club nocturno</string>
 	<string name="poi_socket_cee_blue_yes">CEE azul</string>
 	<string name="poi_socket_cee_red_16a_yes">CEE rojo 16A</string>
 	<string name="poi_socket_cee_red_32a_yes">CEE rojo 32A</string>

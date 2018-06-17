@@ -164,7 +164,7 @@
 	<string name="poi_service_tyres">Neumáticos</string>
 	<string name="poi_vehicle_inspection">Inspección de vehículos</string>
 	<string name="poi_car_wash">Lavadero de automóviles</string>
-	<string name="poi_fuel">Gasolinera</string>
+	<string name="poi_fuel">Gasolinera;Estación de servicio;Estación de combustible;Servicentro;Bencinera</string>
 	<string name="poi_fuel_diesel">Diésel (Euro)</string>
 	<string name="poi_fuel_gtl_diesel">Diésel GTL</string>
 	<string name="poi_fuel_hgv_diesel">Diésel de vehículos pesados</string>
@@ -561,7 +561,7 @@
 	<string name="poi_theatre_genre_circus">Circo</string>
 	<string name="poi_gallery">Galería de arte</string>
 	<string name="poi_dance_floor">Pista de baile</string>
-	<string name="poi_nightclub">Club nocturno</string>
+	<string name="poi_nightclub">Club nocturno;Disco;Boliche;Discoteca;Antro</string>
 	<string name="poi_stripclub">Club de striptease</string>
 	<string name="poi_ski_resort">Estación de esquí</string>
 	<string name="poi_beach_resort">Balneario</string>
@@ -3601,9 +3601,7 @@
 
 	<string name="poi_barbecue_grill">Parrilla de barbacoa: sí</string>
 
-<string name="synonyms_poi_fuel">Gasolinera;Estación de servicio;Estación de combustible;Servicentro;Bencinera</string>
 
-	<string name="synonyms_poi_nightclub">Disco;Boliche;Discoteca;Antro;Club nocturno</string>
 	<string name="poi_water_utility">Oficina de servicio de agua</string>
 
 <string name="poi_amusement_arcade">Salón recreativo</string>
