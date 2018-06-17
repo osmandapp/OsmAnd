@@ -909,7 +909,7 @@
 	<string name="poi_amperage">זרם חשמלי</string>
 	<string name="poi_charging_station_output">פלט תחנת הטעינה</string>
 
-	<string name="poi_map_type_topo">סוג המפה: טפוגרפית</string>
+	<string name="poi_map_type_topo">סוג המפה: טופוגרפית</string>
 	<string name="poi_map_type_street">סוג המפה: רחוב</string>
 	<string name="poi_map_type_scheme">סוג המפה: סכמה</string>
 	<string name="poi_map_type_toposcope">סוג המפה: כיוונים</string>
@@ -1307,4 +1307,110 @@
 	<string name="poi_glacier_ele_bottom">הנקודה הנמוכה ביותר</string>
 	<string name="poi_glacier_slope">מדרון ממוצע</string>
 
-	</resources>
+	<string name="poi_socket">שקע</string>
+	<string name="poi_socket_chademo_output_filter">פלט CHAdeMO</string>
+	<string name="poi_socket_type2_output_filter">פלט סוג 2</string>
+	<string name="poi_hunting_stand">עמדת ציד</string>
+	<string name="poi_miniature_golf">מיני גולף</string>
+	<string name="poi_playground">מגרש משחקים</string>
+	<string name="poi_bench">ספסל</string>
+	<string name="poi_swimming_pool">ברכת שחייה</string>
+	<string name="poi_water_park">פארק מים</string>
+	<string name="poi_park">פארק</string>
+	<string name="poi_recreation_ground">גן שעשועים</string>
+	<string name="poi_trail_riding_station">תחנת שביל רכיבה</string>
+
+	<string name="poi_cafe">בית קפה</string>
+	<string name="poi_biergarten">בירגרדן</string>
+	<string name="poi_restaurant">מסעדה</string>
+	<string name="poi_fast_food">מזון מהיר</string>
+	<string name="poi_bar">בר</string>
+	<string name="poi_pub">פאב</string>
+	<string name="poi_food_court">מתחם מזון</string>
+	<string name="poi_drinking_water">מי שתייה</string>
+	<string name="poi_barbecue">על האש</string>
+
+	<string name="poi_craft_agricultural_engines">מנועים לחקלאות</string>
+	<string name="poi_craft_basket_maker">קליעת סלים</string>
+	<string name="poi_craft_beekeeper">כוורנות</string>
+	<string name="poi_craft_blacksmith">נפחות</string>
+	<string name="poi_craft_brewery">מבשלה</string>
+	<string name="poi_craft_boatbuilder">בניית סירות</string>
+	<string name="poi_craft_bookbinder">כריכת ספרים</string>
+	<string name="poi_craft_carpenter">נגרות</string>
+	<string name="poi_craft_clockmaker">שענות</string>
+	<string name="poi_craft_dressmaker">תפירת שמלות</string>
+	<string name="poi_craft_electrician">חשמלאות</string>
+	<string name="poi_craft_gardener">גינון</string>
+	<string name="poi_craft_glaziery">יצירה בזכוכית</string>
+	<string name="poi_craft_handicraft">מלאכת יד</string>
+	<string name="poi_craft_hvac">חימום, אוורור, מיזוג אוויר</string>
+	<string name="poi_craft_insulation">בידוד</string>
+	<string name="poi_craft_jeweller">תכשיטנות</string>
+	<string name="poi_craft_locksmith">מנעולנות</string>
+	<string name="poi_craft_key_cutter">שכפול מפתחות</string>
+	<string name="poi_craft_metal_construction">יצירה במתכת</string>
+	<string name="poi_craft_optician">אופטיקה</string>
+	<string name="poi_craft_painter">ציור</string>
+	<string name="poi_craft_photographer">צילום</string>
+	<string name="poi_craft_photographic_laboratory">ספריית צילום</string>
+	<string name="poi_letter_box">תיבת מכתבים</string>
+	<string name="poi_post_street">רחוב</string>
+	<string name="poi_post_housenumber">מספר בית</string>
+	<string name="poi_post_flats">דירה</string>
+
+	<string name="poi_payment_centre">מרכז תשלום</string>
+	<string name="poi_money_transfer">העברת כסף</string>
+
+	<string name="poi_ref_post">מיקוד</string>
+
+	<string name="poi_climbing_sport_yes">ספורט: כן</string>
+	<string name="poi_climbing_sport_no">ספורט: לא</string>
+	<string name="poi_climbing_ice_yes">קרח: יש</string>
+	<string name="poi_climbing_ice_no">קרח: אין</string>
+	<string name="poi_climbing_mixed_yes">מעורב: כן</string>
+	<string name="poi_climbing_mixed_no">מעורב: לא</string>
+	<string name="poi_climbing_routes">נתיבי טיפוס</string>
+
+	<string name="poi_circumference">היקף</string>
+	<string name="poi_diameter_crown">קוטר הכתר</string>
+
+	<string name="poi_meadow_agricultural">סוג: חקלאי</string>
+	<string name="poi_meadow_perpetual">סוג: טבעי</string>
+	<string name="poi_meadow_pasture">סוג: מרעה</string>
+
+	<string name="poi_frozen_food">מזון קפוא</string>
+
+	<string name="poi_agrarian">חנות לציוד חקלאי</string>
+
+	<string name="poi_shop_fireplace">חנות קמינים</string>
+
+	<string name="poi_shop_boat">חנות סירות</string>
+
+	<string name="poi_cannabis">חנות קנביס</string>
+
+	<string name="poi_flooring">חנות ריצוף</string>
+	<string name="poi_outpost">נקודת חלוקה של חנות</string>
+
+	<string name="poi_aerialway_zip_line">אומגה</string>
+
+	<string name="poi_climbing_adventure">הרפתקת טיפוס</string>
+
+	<string name="poi_via_ferrata">ויה פרטה</string>
+	<string name="poi_glacier_type_icecap">כיפת קרח</string>
+	<string name="poi_glacier_type_icefield">שדה קרח</string>
+	<string name="poi_glacier_type_plateau">רמות</string>
+	<string name="poi_glacier_type_valley">עמק</string>
+	<string name="poi_glacier_type_mountain">הר</string>
+	<string name="poi_glacier_type_shelf">מדף קרח</string>
+	<string name="poi_glacier_type_ice_tongue">לשון קרח</string>
+
+	<string name="poi_rock">סלע</string>
+
+	<string name="poi_end_date">מועד סיום</string>
+
+	<string name="poi_appliance">חנות מוצרי חשמל</string>
+
+	<string name="poi_outcrop">מחשוף</string>
+
+</resources>
