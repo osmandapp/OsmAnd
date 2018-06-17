@@ -2855,4 +2855,30 @@
 	<string name="poi_health_facility_type_dispensary">Τύπος ιατρικής εγκατάστασης: κλινική</string>
 	<string name="poi_health_facility_type_first_aid">Τύπος ιατρικής εγκατάστασης: πρώτες βοήθειες</string>
 	<string name="poi_health_facility_type_nursing_home">Τύπος ιατρικής εγκατάστασης: γηροκομείο</string>
+	<string name="poi_health_facility_type_support_group_home">Τύπος εγκατάστασης υγείας: ίδρυμα υποστήριξης</string>
+
+	<string name="poi_suction_point">Σημείο αναρρόφησης</string>
+
+	<string name="poi_fire_hydrant_type_underground">Υπόγειος</string>
+	<string name="poi_fire_hydrant_type_pillar">Στύλος</string>
+	<string name="poi_fire_hydrant_type_dry_barrel">Ξηρό βαρέλι</string>
+	<string name="poi_fire_hydrant_type_pond">Δεξαμενή</string>
+	<string name="poi_fire_hydrant_type_wall">Τοίχος</string>
+
+	<string name="poi_health_amenity_type_first_aid_kit">Κουτί πρώτων βοηθειών</string>
+	<string name="poi_health_amenity_type_scales">Δημόσια ζυγαριά</string>
+
+	<string name="poi_health_person_type_assistant">Ρόλος του επαγγελματία υγείας: βοηθός</string>
+	<string name="poi_health_person_type_healer">Ρόλος του επαγγελματία υγείας: θεραπευτής</string>
+	<string name="poi_health_person_type_midwife">Ρόλος του επαγγελματία υγείας: μαία</string>
+	<string name="poi_health_person_type_nurse">Ρόλος του επαγγελματία υγείας: νοσοκόμος</string>
+	<string name="poi_health_person_type_paramedic">Ρόλος του επαγγελματία υγείας: παραϊατρικός</string>
+	<string name="poi_health_person_type_physician">Ρόλος του επαγγελματία υγείας: γιατρός</string>
+	<string name="poi_health_person_type_podologist">Ρόλος του επαγγελματία υγείας: ποδολόγος</string>
+	<string name="poi_health_person_type_psychologist">Ρόλος του επαγγελματία υγείας: ψυχολόγος</string>
+	<string name="poi_health_person_type_therapist">Ρόλος του επαγγελματία υγείας: θεραπευτής</string>
+	<string name="poi_health_person_type_physician_assitant">Ρόλος του επαγγελματία υγείας: βοηθός γιατρός</string>
+	<string name="poi_health_person_type_technician">Ρόλος του επαγγελματία υγείας: τεχνικός</string>
+	<string name="poi_health_person_type_witchdoctor">Ρόλος του επαγγελματία υγείας: μάγος-γιατρός</string>
+
 	</resources>
