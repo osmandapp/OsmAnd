@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources><string name="local_osm_changes_backup_failed">پشتیبان‌گیری از تغییرات OSM ناموفق بود</string>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="local_osm_changes_backup_failed">پشتیبان‌گیری از تغییرات OSM ناموفق بود</string>
     <string name="plugin_distance_point_time">زمان</string>
     <string name="plugin_distance_point_hdop">دقت</string>
     <string name="plugin_distance_point_speed">سرعت</string>
@@ -2636,7 +2637,7 @@
     <string name="sorted_by_distance">مرتب‌شده بر اساس مسافت</string>
     <string name="search_favorites">جست‌وجو در نقاط برگزیده</string>
     <string name="hillshade_menu_download_descr">نقشهٔ سایه‌روشن را برای این منطقه دانلود کنید تا سایه‌روشن پستی‌بلندی‌ها را ببینید.</string>
-    <string name="hillshade_purchase_header">برای دیدن سایه‌روشن پستی‌بلندی‌ها روی نقشه باید افزونهٔ منحنی‌های تراز را بخرید و نصب کنید.</string>
+    <string name="hillshade_purchase_header">برای اینکه سایه‌روشن پستی‌بلندی‌ها را روی نقشه ببینید باید افزونهٔ منحنی‌های تراز را بخرید و نصب کنید</string>
     <string name="hide_from_zoom_level">از این زوم پنهان شود</string>
     <string name="srtm_menu_download_descr">نقشهٔ منحنی تراز این منطقه را دانلود کنید تا منحنی‌های تراز را روی نقشه ببینید.</string>
     <string name="shared_string_plugin">افزونه</string>
