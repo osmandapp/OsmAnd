@@ -1,8 +1,8 @@
 apply plugin: 'com.android.application'
 
 android {
-	compileSdkVersion 23
-	buildToolsVersion "23.0.1"
+	compileSdkVersion 27
+	buildToolsVersion "27.0.3"
 
 	signingConfigs {
 		development {
@@ -66,11 +66,11 @@ def analytics = System.getenv("USE_FIREBASE_FOR_PLUGINS")
 
 dependencies {
 	if (analytics) {
-		implementation 'com.google.firebase:firebase-core:9.8.0'
-		implementation 'com.google.firebase:firebase-config:9.8.0'
+		implementation 'com.google.firebase:firebase-core:12.0.1'
+		implementation 'com.google.firebase:firebase-config:12.0.1'
 	}
-	implementation 'com.android.support:appcompat-v7:23.3.0'
-	implementation 'com.android.support:design:23.3.0'
+	implementation 'com.android.support:appcompat-v7:27.1.1'
+	implementation 'com.android.support:design:27.1.1'
 }
 
 if (analytics) {
