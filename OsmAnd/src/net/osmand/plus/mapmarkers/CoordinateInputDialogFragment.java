@@ -94,13 +94,11 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 	private View mainView;
 	private final List<EditTextEx> editTexts = new ArrayList<>();
 	private CoordinateInputAdapter adapter;
-	private ImageView showHideKeyboardIcon;
 	private Snackbar snackbar;
 
 	private boolean lightTheme;
 	private boolean orientationPortrait;
 
-	private boolean isSoftKeyboardShown;
 	private boolean north = true;
 	private boolean east = true;
 
@@ -220,7 +218,6 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			lonBackspaceBtn.setImageDrawable(getActiveIcon(R.drawable.ic_action_clear_all_fields));
 			lonBackspaceBtn.setOnClickListener(backspaceOnClickListener);
 
-			showHideKeyboardIcon = (ImageView) mainView.findViewById(R.id.show_hide_keyboard_icon);
 		} else {
 			boolean rightHand = getMyApplication().getSettings().COORDS_INPUT_USE_RIGHT_SIDE.get();
 			LinearLayout handContainer = (LinearLayout) mainView.findViewById(R.id.hand_container);
@@ -231,10 +228,6 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			setBackgroundColor(keyboardAndListView, lightTheme ? R.color.ctx_menu_info_view_bg_light : R.color.coordinate_input_markers_list_bg_dark);
 			((FrameLayout) handContainer.findViewById(R.id.left_container)).addView(rightHand ? dataAreaView : keyboardAndListView, 0);
 			((FrameLayout) handContainer.findViewById(R.id.right_container)).addView(rightHand ? keyboardAndListView : dataAreaView, 0);
-
-			showHideKeyboardIcon = (ImageView) dataAreaView.findViewById(rightHand ? R.id.show_hide_keyboard_icon_right : R.id.show_hide_keyboard_icon_left);
-			showHideKeyboardIcon.setVisibility(View.VISIBLE);
-			dataAreaView.findViewById(rightHand ? R.id.show_hide_keyboard_icon_left : R.id.show_hide_keyboard_icon_right).setVisibility(View.GONE);
 
 			handContainer.findViewById(R.id.input_area_top_padding).setVisibility(View.VISIBLE);
 			handContainer.findViewById(R.id.point_name_top_space).setVisibility(View.VISIBLE);
@@ -272,9 +265,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 					new Handler().postDelayed(new Runnable() {
 						@Override
 						public void run() {
-							isSoftKeyboardShown = true;
 							AndroidUtils.showSoftKeyboard(focusedView);
-							showHideKeyboardIcon.setImageDrawable(getActiveIcon(R.drawable.ic_action_keyboard_hide));
 						}
 					}, 200);
 				}
@@ -324,17 +315,25 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		setBackgroundColor(R.id.bottom_controls_container, lightTheme
 				? R.color.keyboard_item_control_light_bg : R.color.keyboard_item_control_dark_bg);
 		TextView addButton = (TextView) mainView.findViewById(R.id.add_marker_button);
-		addButton.setBackgroundResource(lightTheme ? R.drawable.route_info_go_btn_bg_light : R.drawable.route_info_go_btn_bg_dark);
-		if (selectedMarker != null) {
-			addButton.setText(R.string.shared_string_save);
-		}
+		@ColorRes int colorId = lightTheme ? R.color.wikivoyage_active_light : R.color.wikivoyage_active_dark;
+		addButton.setCompoundDrawablesWithIntrinsicBounds(null, null, getColoredIcon(R.drawable.ic_action_type_add, colorId), null);
+		addButton.setText(R.string.shared_string_add);
 		addButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
 				addMapMarker();
 			}
 		});
-
+		
+		TextView cancelButton = (TextView) mainView.findViewById(R.id.cancel_button);
+		cancelButton.setText(R.string.shared_string_cancel);
+		cancelButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				dismissEditingMode();
+				clearInputs();
+			}
+		});
 		mainView.findViewById(R.id.keyboard_layout).setBackgroundResource(lightTheme
 				? R.drawable.bg_bottom_menu_light : R.drawable.bg_coordinate_input_keyboard_dark);
 
@@ -400,52 +399,6 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		if (!isOsmandKeyboardOn() && isOsmandKeyboardCurrentlyVisible()) {
 			changeOsmandKeyboardVisibility(false);
 		}
-
-		showHideKeyboardIcon.setImageDrawable(getActiveIcon(R.drawable.ic_action_keyboard_hide));
-		showHideKeyboardIcon.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				boolean isCurrentlyVisible = isOsmandKeyboardCurrentlyVisible();
-				if (isOsmandKeyboardOn() && !isSoftKeyboardShown) {
-					changeOsmandKeyboardVisibility(!isCurrentlyVisible);
-				} else {
-					final View focusedView = getDialog().getCurrentFocus();
-					if (focusedView != null) {
-						if (isSoftKeyboardShown) {
-							isSoftKeyboardShown = false;
-							AndroidUtils.hideSoftKeyboard(getActivity(), focusedView);
-							showHideKeyboardIcon.setImageDrawable(getActiveIcon(R.drawable.ic_action_keyboard_show));
-						} else {
-							new Handler().postDelayed(new Runnable() {
-								@Override
-								public void run() {
-									isSoftKeyboardShown = true;
-									AndroidUtils.showSoftKeyboard(focusedView);
-									showHideKeyboardIcon.setImageDrawable(getActiveIcon(R.drawable.ic_action_keyboard_hide));
-								}
-							}, 200);
-						}
-						changeEditTextSelections();
-					}
-				}
-			}
-		});
-
-		mainView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-			@Override
-			public void onGlobalLayout() {
-				Rect r = new Rect();
-				mainView.getWindowVisibleDisplayFrame(r);
-				int screenHeight = mainView.getRootView().getHeight();
-				int keypadHeight = screenHeight - r.bottom;
-				if (keypadHeight > screenHeight * 0.15) {
-					isSoftKeyboardShown = true;
-					showHideKeyboardIcon.setImageDrawable(getActiveIcon(R.drawable.ic_action_keyboard_hide));
-				} else {
-					isSoftKeyboardShown = false;
-				}
-			}
-		});
 	}
 
 	private void setupKeyboardItems(View keyboardView, View.OnClickListener listener, @IdRes int... itemsIds) {
@@ -555,7 +508,6 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 				new Handler().postDelayed(new Runnable() {
 					@Override
 					public void run() {
-						isSoftKeyboardShown = true;
 						AndroidUtils.showSoftKeyboard(focusedView);
 					}
 				}, 200);
@@ -1003,9 +955,6 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		} else {
 			mainView.findViewById(R.id.keyboard_layout).setVisibility(visibility);
 		}
-		showHideKeyboardIcon.setImageDrawable(
-				getActiveIcon(show ? R.drawable.ic_action_keyboard_hide : R.drawable.ic_action_keyboard_show)
-		);
 	}
 
 	private void switchEditText(int currentId, boolean toNext) {
@@ -1041,7 +990,10 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 
 	private void dismissEditingMode() {
 		selectedMarker = null;
-		((TextView) mainView.findViewById(R.id.add_marker_button)).setText(R.string.shared_string_add);
+		TextView addButton = (TextView) mainView.findViewById(R.id.add_marker_button);
+		addButton.setText(R.string.shared_string_add);
+		@ColorRes int colorId = lightTheme ? R.color.wikivoyage_active_light : R.color.wikivoyage_active_dark;
+		addButton.setCompoundDrawablesWithIntrinsicBounds(null, null, getColoredIcon(R.drawable.ic_action_type_add, colorId), null);
 	}
 
 	private void enterEditingMode(MapMarker marker) {
@@ -1070,7 +1022,10 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			updateSideOfTheWorldBtn(mainView.findViewById(R.id.lon_side_of_the_world_btn), true);
 		}
 		((EditText) mainView.findViewById(R.id.point_name_et)).setText(marker.getName(getContext()));
-		((TextView) mainView.findViewById(R.id.add_marker_button)).setText(R.string.shared_string_save);
+		TextView addButton = (TextView) mainView.findViewById(R.id.add_marker_button);
+		addButton.setText(R.string.shared_string_apply);
+		@ColorRes int colorId = lightTheme ? R.color.wikivoyage_active_light : R.color.wikivoyage_active_dark;
+		addButton.setCompoundDrawablesWithIntrinsicBounds(null, null, getColoredIcon(R.drawable.ic_action_type_apply, colorId), null);
 	}
 
 	private void updateInputsDdm(boolean lat, DDM ddm, int accuracy) {

@@ -69,6 +69,7 @@ public class CoordinateInputAdapter extends RecyclerView.Adapter<MapMarkerItemVi
 		holder.title.setTextColor(getResolvedColor(nightTheme ? R.color.ctx_menu_title_color_dark : R.color.color_black));
 		holder.divider.setBackgroundColor(getResolvedColor(nightTheme ? R.color.route_info_divider_dark : R.color.dashboard_divider_light));
 		holder.optionsBtn.setImageDrawable(getColoredIcon(R.drawable.ic_overflow_menu_white, R.color.icon_color));
+		holder.optionsBtn.setBackgroundColor(ContextCompat.getColor(app, nightTheme ? R.color.ctx_menu_bg_dark : R.color.bg_color_light));
 		holder.iconReorder.setVisibility(View.GONE);
 		holder.numberText.setVisibility(View.VISIBLE);
 		holder.numberText.setText(String.valueOf(position + 1));
