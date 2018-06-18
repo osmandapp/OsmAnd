@@ -95,6 +95,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 
 	private boolean lightTheme;
 	private boolean orientationPortrait;
+	private boolean isGpxSaved;
 
 	private boolean north = true;
 	private boolean east = true;
@@ -116,6 +117,24 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		setStyle(STYLE_NO_FRAME, lightTheme ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme);
 	}
 
+	private void quit() {
+		if (!mapMarkers.isEmpty() && !isGpxSaved) {
+			showQuitDialog();
+		} else {
+			dismiss();
+		}
+	}
+
+	private void showQuitDialog() {
+		isGpxSaved = true;
+		SaveAsTrackBottomSheetDialogFragment fragment = new SaveAsTrackBottomSheetDialogFragment();
+		Bundle args = new Bundle();
+		args.putInt(ADDED_MARKERS_NUMBER_KEY, mapMarkers.size());
+		fragment.setArguments(args);
+		fragment.setListener(createSaveAsTrackFragmentListener());
+		fragment.show(getChildFragmentManager(), SaveAsTrackBottomSheetDialogFragment.TAG);
+	}
+	
 	@NonNull
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -126,8 +145,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 				if (isOsmandKeyboardCurrentlyVisible()) {
 					changeOsmandKeyboardVisibility(false);
 				} else {
-					saveMarkers();
-					super.onBackPressed();
+					quit();
 				}
 			}
 		};
@@ -319,6 +337,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			@Override
 			public void onClick(View view) {
 				addMapMarker();
+				isGpxSaved = false;
 			}
 		});
 		
@@ -731,6 +750,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 					switchEditText(textView.getId(), true);
 				} else if (i == EditorInfo.IME_ACTION_DONE) {
 					addMapMarker();
+					isGpxSaved = false;
 				}
 				return false;
 			}
@@ -891,7 +911,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			@Override
 			public void saveGpx(final String fileName) {
 				final String gpxPath = app.getMapMarkersHelper().generateGpxFromList(fileName, mapMarkers);
-
+				isGpxSaved = true;
 				snackbar = Snackbar.make(mainView, fileName + " " + getString(R.string.is_saved) + ".", Snackbar.LENGTH_LONG)
 						.setAction(R.string.shared_string_show, new View.OnClickListener() {
 							@Override
@@ -915,6 +935,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			@Override
 			public void removeItem(int position) {
 				adapter.removeItem(position);
+				isGpxSaved = false;
 			}
 
 			@Override
