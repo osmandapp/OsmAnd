@@ -1183,7 +1183,7 @@
     <string name="number_of_edits">Ličba změnow</string>
     <string name="file_name_containes_illegal_char">Mjeno dataje wobsahuje zakazany pismik</string>
     <string name="quick_action_map_style">Stil karty změnić</string>
-    <string name="show_arrows_on_the_map">Kłoki na karće pokazać</string>
+    <string name="show_arrows_on_the_map">Kłoki na karće pokazaćssss</string>
     <string name="today">dźensa</string>
     <string name="yesterday">wčera</string>
     <string name="last_seven_days">zašły tydźeń</string>
@@ -1367,7 +1367,7 @@
     <string name="fast_coordinates_input_descr">Format zapodaća koordinatow wubrać. Móžeš jón přeco změnić pod \"Nastajenja\".</string>
     <string name="marker_save_as_track">Jako GPX-dataju składować</string>
     <string name="move_to_history">Do archiwa přesunyć</string>
-    <string name="show_guide_line">Směrnicy pokazać</string>
+    <string name="show_guide_line">Směrnicy pokazaćs</string>
     <string name="descendingly">zestupujo</string>
     <string name="ascendingly">postupujo</string>
     <string name="order_by">Sortěrowanje po:</string>
@@ -1485,4 +1485,5 @@
     <string name="free">Swobodne %1$s</string>
     <string name="device_memory">Skład nastroje</string>
     <string name="free_downloads_used_description">Pokaza ličbu zbywacych bjezpłatnych sćehnjenjow.</string>
+    <string name="show_passed">safdsfdsfdsfds</string>
     </resources>
