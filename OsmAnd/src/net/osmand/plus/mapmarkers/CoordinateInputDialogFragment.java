@@ -121,6 +121,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		if (!mapMarkers.isEmpty() && !isGpxSaved) {
 			showQuitDialog();
 		} else {
+			saveMarkers();
 			dismiss();
 		}
 	}
