@@ -77,6 +77,7 @@ import net.osmand.plus.download.ui.LocalIndexesFragment;
 import net.osmand.plus.download.ui.LocalIndexesFragment.RenameCallback;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetType;
+import net.osmand.plus.mapmarkers.CoordinateInputDialogFragment;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
 import net.osmand.util.Algorithms;
@@ -474,12 +475,17 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 							});
 				} else if (itemId == R.string.gpx_add_track) {
 					addTrack();
+				}else if (itemId == R.string.coordinate_input) {
+					openCoordinatesInput();
 				}
 				return true;
 			}
 		};
 		optionsMenuAdapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.gpx_add_track, getActivity())
 				.setIcon(R.drawable.ic_action_plus)
+				.setListener(listener).createItem());
+		optionsMenuAdapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.coordinate_input, getActivity())
+				.setIcon(R.drawable.ic_action_coordinates_longitude)
 				.setListener(listener).createItem());
 		optionsMenuAdapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.shared_string_show_on_map, getActivity())
 				.setIcon(R.drawable.ic_show_on_map)
@@ -536,6 +542,12 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 
 	private void addTrack() {
 		((FavoritesActivity) getActivity()).addTrack();
+	}
+
+	private void openCoordinatesInput() {
+		CoordinateInputDialogFragment fragment = new CoordinateInputDialogFragment();
+		fragment.setRetainInstance(true);
+		fragment.show(getChildFragmentManager(), CoordinateInputDialogFragment.TAG);
 	}
 
 	public void showProgressBar() {

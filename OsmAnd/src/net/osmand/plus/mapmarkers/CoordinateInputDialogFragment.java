@@ -6,7 +6,6 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.ColorStateList;
-import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -38,7 +37,6 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
@@ -60,7 +58,6 @@ import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TrackActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapmarkers.CoordinateInputBottomSheetDialogFragment.CoordinateInputFormatChangeListener;
@@ -1225,9 +1222,9 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		if (!compassUpdateAllowed) {
 			return;
 		}
-		final MapActivity mapActivity = (MapActivity) getActivity();
-		if (mapActivity != null && adapter != null) {
-			mapActivity.getMyApplication().runInUIThread(new Runnable() {
+		final OsmandApplication app = getMyApplication();
+		if (app != null && adapter != null) {
+			app.runInUIThread(new Runnable() {
 				@Override
 				public void run() {
 					adapter.notifyDataSetChanged();

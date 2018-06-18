@@ -21,9 +21,9 @@ import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.widgets.OsmandTextFieldBoxes;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BottomSheetDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 
@@ -47,6 +47,7 @@ public class SaveAsTrackBottomSheetDialogFragment extends BottomSheetDialogFragm
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		final OsmandApplication app = getMyApplication();
 		boolean isCoordInput = false;
 		int number = 0;
 		Bundle args = getArguments();
@@ -55,9 +56,8 @@ public class SaveAsTrackBottomSheetDialogFragment extends BottomSheetDialogFragm
 			if (number != 0)
 				isCoordInput = true;
 		}
-		MapActivity mapActivity = (MapActivity) getActivity();
 		portrait = AndroidUiHelper.isOrientationPortrait(getActivity());
-		final boolean nightMode = !getMyApplication().getSettings().isLightContent();
+		final boolean nightMode = !app.getSettings().isLightContent();
 		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 
 		final View mainView = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.fragment_marker_save_as_track_bottom_sheet_dialog, container);
@@ -81,16 +81,16 @@ public class SaveAsTrackBottomSheetDialogFragment extends BottomSheetDialogFragm
 			if (textBox instanceof TextInputLayout) {
 				((TextInputLayout) textBox).setHintTextAppearance(R.style.TextAppearance_App_DarkTextInputLayout);
 			} else if (textBox instanceof OsmandTextFieldBoxes) {
-				((OsmandTextFieldBoxes) textBox).setPrimaryColor(ContextCompat.getColor(mapActivity, R.color.color_dialog_buttons_dark));
+				((OsmandTextFieldBoxes) textBox).setPrimaryColor(ContextCompat.getColor(app, R.color.color_dialog_buttons_dark));
 			}
 		}
 
-		final File dir = mapActivity.getMyApplication().getAppPath(IndexConstants.GPX_INDEX_DIR + "/map markers");
+		final File dir = app.getAppPath(IndexConstants.GPX_INDEX_DIR + "/map markers");
 		if (!dir.exists()) {
 			dir.mkdirs();
 		}
 		Date date = new Date();
-		final String suggestedName = mapActivity.getString(R.string.markers) + "_" + DateFormat.format("yyyy-MM-dd", date).toString();
+		final String suggestedName = app.getString(R.string.markers) + "_" + DateFormat.format("yyyy-MM-dd", date).toString();
 		String displayedName = suggestedName;
 		File fout = new File(dir, suggestedName + GPX_SUFFIX);
 		int ind = 1;
