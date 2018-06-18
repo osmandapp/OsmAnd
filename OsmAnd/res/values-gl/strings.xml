@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="fav_point_dublicate_message">O nome do punto favorito xa está usado; foi cambiado a %1$s para evitar os duplicados.</string>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources><string name="fav_point_dublicate_message">O nome do punto favorito xa está usado; foi cambiado a %1$s para evitar os duplicados.</string>
     <string name="text_size_descr">Configurar o tamaño da letra no mapa.</string>
     <string name="text_size">Tamaño da letra</string>
     <string name="traffic_warning_speed_limit">Límite de velocidade</string>
@@ -58,8 +57,8 @@ As pistas gravadas pódense compartir ou empregar colaborando con OSM. Os atleta
     <string name="index_tours">Visitas</string>
     <string name="shared_string_all">Todo</string>
     <string name="shared_string_waypoints">Puntos de pasaxe</string>
-    <string name="targets">Destinos</string>
-    <string name="announce_gpx_waypoints">Puntos de pasaxe do GPX</string>
+    
+    
     <string name="download_additional_maps">Descargar os mapas que faltan, %1$s (%2$d MB)?</string>
     <string name="shared_string_more">Máis…</string>
     <string name="rendering_value_browse_map_name">Examinar o mapa</string>  
@@ -1083,7 +1082,7 @@ Os mapas en teselas pódense obter directamente a través de recursos na rede ou
 	<string name="local_index_mi_backup">Desactivar</string>
 	
 	
-	<string name="local_index_mi_reload">Recargar desde o cartón SD</string>
+	
 	<string name="shared_string_download">Descargar</string>
 	<string name="local_index_poi_data">Datos de PDI</string>
 	<string name="local_index_address_data">Datos de enderezos</string>

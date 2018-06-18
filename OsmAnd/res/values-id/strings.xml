@@ -356,45 +356,9 @@
     <string name="routing_attr_height_obstacles_description">Gunakan data elevasi medan yang disediakan oleh SRTM, ASTER, dan EU-DEM.</string>
     <string name="rendering_attr_depthContours_description">Tampilkan kontur dan titik kedalaman.</string>
     <string name="rendering_attr_depthContours_name">Kontur kedalaman bahari</string>
-    <string name="release_2_6">\\ 022 Fitur baru: Tombol tindakan cepat
-\n
-\n • Respons gerakan layar sentuh yang ditingkatkan (misalnya panning dan pembesaran bersamaan)
-\n
-\n • Font peta baru yang mencakup lebih banyak tempat
-\n
-\n • Mendukung TTS untuk varian bahasa daerah (dan aksen)
-\n
-\n • Visibilitas perangkat tambahan dalam beberapa gaya peta dan wikipedia
-\n
-\n • Mendukung Open Location Code (OLC)
-\n
-\n • Ketinggian tampilan, kemiringan, dan profil kecepatan untuk trek GPX yang tercatat dan rute yang dihitung
-\n
-\n • Pengaturan \"Gaya Mengemudi\" dan perbaikan logika dalam perutean sepeda
-\n
-\n • Pengaturan untuk menggunakan data ketinggian dalam perutean sepeda
-\n
-\n • Beberapa perbaikan dan perbaikan bug lainnya
-\n
-\n dan banyak lagi …</string>
-    <string name="release_2_7">\\ 022 Mapillary plugin dengan citra tingkat jalan
-\n
-\n • Ruler widget untuk pengukuran jarak jauh
-\n
-\n • interval split GPX dengan info rinci tentang trek Anda
-\n
-\n • Perbaikan dan perbaikan bug lainnya
-\n
-\n</string>
-    <string name="release_2_8">\\ 022 Mapillary plugin dengan citra tingkat jalan
-\n
-\n • Ruler widget untuk pengukuran jarak jauh
-\n
-\n • interval split GPX dengan info rinci tentang trek Anda
-\n
-\n • Perbaikan dan perbaikan bug lainnya
-\n
-\n</string>
+    
+    
+    
     <string name="auto_split_recording_title">Rekaman split otomatis setelah jeda</string>
     <string name="auto_split_recording_descr">Mulai segmen baru setelah jeda 6 menit, lintasan baru setelah jeda 2 jam, atau file baru setelah jeda lebih lama jika tanggalnya sudah berubah.</string>
     <string name="rendering_attr_contourDensity_description">Kerapatan garis kontur</string>
@@ -434,19 +398,7 @@
     <string name="shared_string_recorded">Terekam</string>
     <string name="shared_string_record">Merekam</string>
     <string name="gpx_logging_no_data">Tidak ada Data</string>
-    <string name="release_2_5">\\ 022 Ikon yang dapat disentuh di peta
-\n
-\n • Penelusuran filter POI yang kuat: Cari, mis. restoran dengan masakan, atau tempat perkemahan dengan fasilitas khusus
-\n
-\n • Gaya New Topo Map untuk pengendara sepeda dan pejalan kaki
-\n
-\n • Rekaman perjalanan yang disempurnakan
-\n
-\n • Pemberitahuan navigasi yang ditingkatkan (Android Wear)
-\n
-\n • Banyak perbaikan dan perbaikan bug lainnya
-\n
-\n dan banyak lagi …</string>
+    
     <string name="rendering_attr_contourColorScheme_description">Garis warna berkontur skema</string>
     <string name="save_track_min_speed">Logging kecepatan minimum</string>
     <string name="save_track_min_speed_descr">Filter: Tetapkan kecepatan minimum untuk satu titik yang akan dicatat.</string>
@@ -516,19 +468,7 @@
     <string name="back_to_search">Kembali ke pencarian</string>
     <string name="confirmation_to_delete_history_items">Apakah Anda ingin menghapus item yang dipilih dari riwayat?</string>
     <string name="show_something_on_map">Tampilkan %1$s di peta</string>
-    <string name="release_2_4">\\ 022 Pencarian teks gratis yang sangat kuat
-\n
-\n • Car audio system / speaker phone integration via Bluetooth
-\n
-\n • Panduan rute yang ditingkatkan, dorongan suara, dan indikasi jalur putar
-\n
-\n • Lapisan transport yang ditingkatkan dengan rendering rute
-\n
-\n • Menambahkan lebih banyak lokasi dan sekarang mendukung daerah setempat
-\n
-\n • Banyak perbaikan dan perbaikan bug lainnya
-\n
-\n dan banyak lagi …</string>
+    
     <string name="dist_away_from_my_location">Cari %1$s pergi</string>
     <string name="share_history_subject">Bagikan melalui OsmAnd</string>
     <string name="search_categories">Kategori-kategori</string>

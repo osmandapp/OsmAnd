@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
     <string name="always_center_position_on_map">Ammustra sa positzione semper a su tzentru</string>
     <string name="voice_pref_title">Boghe</string>
     <string name="misc_pref_title">Mistura</string>
@@ -152,7 +151,7 @@
     <string name="driving_region_uk">UK, Ìndia, e sìmiles</string>
     <string name="driving_region_descr">Issèbera sa regione de ghia: USA, Europa, UK, Àsia e àteras.</string>
     <string name="driving_region_japan">Giapone</string>
-    <string name="announce_gpx_waypoints">Puntos de coladòrgiu GPX</string>
+    
     <string name="speak_title">Annuntzia…</string>
     <string name="speak_descr">Cunfigura pro annuntziare sos nùmenes de sas istradas, sos avèrtimentos (pasadas fortzadas, dossos), sos annuntzios de s’autovelox, sos lìmites de lestresa.</string>
     <string name="speak_street_names">Nùmenes de sas istradas (TTS)</string>
@@ -1037,7 +1036,7 @@ Memòria in proportzione %4$s MB (lìmite de Android %5$s MB, Dalvik %6$s MB).</
     <string name="local_index_mi_backup">Istuda</string>
 
 
-    <string name="local_index_mi_reload">Torra a carrigare dae s’ischeda de memòria</string>
+    
     <string name="shared_string_download">Iscàrriga</string>
     <string name="local_index_address_data">Datos indiritzos</string>
     <string name="local_index_transport_data">Datos trasportos pùblicos</string>
@@ -1535,7 +1534,7 @@ Memòria in proportzione %4$s MB (lìmite de Android %5$s MB, Dalvik %6$s MB).</
 
 
     <string name="shared_string_waypoints">Puntos de coladòrgiu</string>
-    <string name="targets">Destinatziones</string>
+    
     <string name="way_alarms">Avisos de tràficu</string>
     <string name="speak_favorites">Preferidos a curtzu</string>
     <string name="speak_poi">PDI a curtzu</string>
@@ -2066,23 +2065,7 @@ Lon %2$s</string>
     <string name="use_drawer_btn">Imprea sa mapa</string>
     <string name="access_from_map_description">Su butone de su menù alluet su pannellu de controllu, imbetzes de su menù</string>
     <string name="access_from_map">Intra dae sa mapa</string>
-    <string name="release_2_2">\\u2022 Interfache impitadore noa pro incarcare positziones in sa mapa e in àteros ischermos
-\n 
-\n • S\'ischermu de sa mapa est como postu come prima cosa a s’allumìngiu de s’aplicatzione, semper chi \'Ammustra pannellu de controllu in s\'allumìngiu\' no siet ischertadu 
-\n 
-\n • Como podes cunfigurare sas impostatziones pro isseberare cales sunt sas ischedas chi diant dèper’èssere ammustradas in su pannellu e comente 
-\n 
-\n • Brinca su pannellu de controllu, si preferis a impreare su menù pro sa gestione de s’aplicatzione 
-\n 
-\n • Pro iscarrigare mapas, sas regiones podent èssere ischertadas deretamente incarchende in sa mapa generale de su mundu 
-\n 
-\n • Sa chirca de PDI como suportat chircas prus dislindadas 
-\n 
-\n • Megioradas sas funtzionalidades de modìficas de PDI e OSM 
-\n 
-\n • Istrutura e s\'interfache de iscarrigamentu datos mapas torrada a fàghere 
-\n 
-\n e àteru…</string>
+    
     <string name="please_specify_poi_type_only_from_list">Dislinda sa casta curreta de PDI o brinca custa parte.</string>
     <string name="routing_attr_avoid_stairs_name">Istransi sas iscalas</string>
 	<string name="routing_attr_avoid_stairs_description">Istransi sas iscalas</string>
@@ -2224,17 +2207,7 @@ Lon %2$s</string>
     <string name="storage_directory_shared">Memòria cumpartzida</string>
     <string name="full_report">Raportu cumpridu</string>
     <string name="open_street_map_login_and_pass">Nùmene impreadore e crae de OpenStreetMap</string>
-    <string name="release_2_3">\\u2022 OSM Live. Suporta sos contribuidores a sa mapa e sos isvilupadores pro otènnere mapas agiornadas cada ora.
-\n
-\n • Marcadores mapa. Una manera noa de ischertare in manera lestra logos in sa mapa.
-\n
-\n • Mapas OSM prus a sa minuda cun caraterìsticas pro sas istradas pro cada istadu e unu muntone de àteras funtzionalidades.
-\n
-\n • Megioramentu de s’aparèntzia e de s’ammaniamentu de sas àndalas. 
-\n
-\n • Medas megioramentos in su menù de sa mapa, comente sa chirca cuntestuale de sos indiritzos.
-\n
-\n e àteru…</string>
+    
     <string name="storage_directory_readonly_desc">Coladu a sa memòria interna ca sa cartella de memorizatzione ischertada est in letura ebbia. Pro praghere issèbera una cartella de destinatzione vàlida.</string>
     <string name="no_map_markers_found">Annanghe sos marcadores mapa dae sa mapa</string>
     <string name="no_waypoints_found">Perunu puntu de coladòrgiu agatadu</string>
@@ -2309,19 +2282,7 @@ Lon %2$s</string>
     <string name="confirmation_to_delete_history_items">Iscantzellare sos elementos ischertados de s\'istòria?</string>
     <string name="coords_search">Chirca cun coordinatas</string>
     <string name="advanced_coords_search">Chirca avantzada cun coordinatas</string>
-    <string name="release_2_4">"\\u2022 Chirca de testu noa e potente meda
-\n 
-\n • Integratzione intre su sistema àudio de sa màchina e su telèfono pro mèdiu de Bluetooth 
-\n 
-\n • Boghe de ghia, interfàtzia vocale e indicatziones de bortada megioradas 
-\n 
-\n • Istratu de sos trasportos pùblicos megioradu cun sas  àndalas 
-\n 
-\n • Medas limbas noas, e como est istadu agiuntu fintzas su suportu pro limbas regionales e variantes 
-\n 
-\n • Meda àteros megioramentos e curretziones de errores 
-\n 
-\n e àteru…"</string>
+    
     <string name="route_stops_before">%1$s firmadas in antis</string>
     <string name="routing_attr_short_way_name">Àndala prus de atòliu pro sos consumos</string>
     <string name="routing_attr_short_way_description">Issèbera s\'àndala prus de atòliu pro sos consumos (sa prus curtza, de sòlitu).</string>
@@ -2394,19 +2355,7 @@ Lon %2$s</string>
     <string name="rendering_value_dark_brown_name">Castàngiu iscuru</string>
     <string name="rendering_attr_contourColorScheme_name">Ischema de colores pro sas curvas de livellu</string>
     <string name="rendering_attr_surfaceIntegrity_name">Integridade superfitziale istradale</string>
-    <string name="release_2_5">\\u2022 Iconas incarcàbiles in sa mapa
-\n 
-\n • Chirca filtrada de PDI potente meda: chirca sos ristorantes pro casta de coghina, o sos campègios cun caraterìsticas particulares 
-\n 
-\n • Istile topogràficu nou pro tziclistas e escursionistas 
-\n 
-\n • Registratzione de sos biàgios megiorada (impostatziones noas) 
-\n 
-\n • Notìficas pro su nàvigu megioradas (Android Wear) 
-\n 
-\n • Meda àteros megioramentos e errores isoltos 
-\n 
-\n e àteru…</string>
+    
     
     
     
@@ -2525,46 +2474,7 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="auto_split_recording_title">Iscroba automaticamente sas registratziones</string>
 	<string name="auto_split_recording_descr">Incumintza unu segmentu nou a pustis de una pàusa de 6 minutos, una rasta noa a pustis de 2 oras o unu documentu nou si sa pàusa est istada prus longa e sa data est cambiada.</string>
     <string name="quick_action_page_list_descr">Incarcare custu butone de atzione faghet iscùrrere sa lista in suta.</string>
-    <string name="release_2_6">"\\u2022 Funtzionalidae noa: Butone pro sas atziones lestras 
-\n 
-\n
-\n • Megioramentu de sa risposta de s\'ichermu a sos incarcos 
-\n
-\n 
-\n
-\n • Caràteres noos pro sa mapa, chi ant a permìtere de tènnere prus limbas 
-\n
-\n 
-\n
-\n • Suportu TTS pro variantes regionales de sas limbas 
-\n
-\n 
-\n
-\n • Megioramentos a sa visibilidade pro meda istiles de sa mapa e pro Wikipedia 
-\n
-\n 
-\n
-\n • Suportu pro su \"Còdighe Abertu pro sa Positzione\" (Open Location Code  - OLC) 
-\n
-\n 
-\n
-\n • Visualizatzione basilare pro sos profilos de s\'artària, de sa pendèntzia e de lestresa pro sas rastas GPX registradas e sas àndalas calculadas 
-\n
-\n 
-\n
-\n • Impostatzione \"Istile de ghia\" e megioramentos lògicos in su càlculu de sas àndalas pro bitzicletas 
-\n
-\n 
-\n
-\n • Impostatziones pro s\'impreu de sos datos de s\'artària pro su càlculu de sas àndalas pro bitzicletas 
-\n
-\n 
-\n
-\n • Meda àteros megioramentos e curretziones de errores 
-\n
-\n 
-\n
-\n e àteru…"</string>
+    
 	<string name="rendering_attr_depthContours_name">Lìnias nàuticas de profondidade</string>
 	<string name="rendering_attr_depthContours_description">Ammustra sas lìnias de profondidade.</string>
     
@@ -2832,15 +2742,7 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="moving_time">Tempus in movimentu</string>
     <string name="max_min">Mass/Min</string>
     <string name="min_max">Mìn/Màss</string>
-    <string name="release_2_7">\\u2022 Estensione Mapillary cun immàgines a livellu de s\'istrada
-\n
-\n • Widget righellu pro medire sas distàntzias
-\n
-\n • Intervallos iscrobados GPX cun informatziones a pitzu de sa rasta tua
-\n
-\n • Àteros megioramentos e curretziones de errores
-\n
-\n</string>
+    
     <string name="rendering_value_translucent_pink_name">Rosa translùtzidu</string>
     <string name="average">Mèdiu</string>
     <string name="ascent_descent">Ascendente/Discendente</string>
@@ -2952,13 +2854,7 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="route_is_calculated">Àndala calculada</string>
     <string name="round_trip">Àndala tzirculare</string>
     <string name="plan_route_no_markers_toast">Depes annànghere a su mancu unu marcadore pro impreare custa funtzionalidade.</string>
-    <string name="release_2_8">\\022 Marcadores de mapa noos cun lìnias diretzionales e càlculu de s\'àndala 
-\n 
-\n • Aina pro sa medidura de sas distàntzias chi permitit de ischertare puntos particulares de sa mapa e de sarvare puntos comente una rasta 
-\n 
-\n • OsmAnd Live: curretzione de errores, agiornamentu de sos datos in su server cada 30 minutos, agiornamentos impostados in su mentres de su nàvigu 
-\n 
-\n</string>
+    
     <string name="rendering_value_darkyellow_name">Grogu iscuru</string>
     <string name="wrong_format">Formatu isballiadu</string>
     <string name="wrong_input">Insertadura isballiada</string>
@@ -3055,27 +2951,7 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="touring_view_renderer">Vista pro su turismu</string>
     <string name="nautical_renderer">Nàutica</string>
 <string name="will_open_tomorrow_at">At a abèrrere cras a sas</string>
-    <string name="release_2_9">"\\022 Agiornadu su menù de cuntestu: ammustra cando unu PDI aberit / serrat 
-\n 
-\n • Menù trasportu pùblicu: totu sas àndalas disponìbiles como sunt in pitzos 
-\n 
-\n • Wikipedia: butone pro abèrrere s\'artìculu originale annantu, butone pro abèrrere s\'artìculu originale agiornadu, aspetu de sos artìculos agiornadu 
-\n 
-\n • Àndala: annanta sa possibilidade de cuncambiare su puntu de incumintzu e cussu de arrivu cun un\'incarcu ebbia 
-\n 
-\n • Notas: annanta sa possibilidade de las ordinare pro casta e data 
-\n 
-\n • Modìficas OSM: ammustra un\'icona e su nùmene de sa categoria de PDI, ammustra sas atziones cumpridas 
-\n 
-\n • Ischermada lestra noa pro s\'insertadura de sas coordinatas pro sa creatzione lestra de marcadores
-\n
-\n • S\'individuatzione de sos sinnales de stop como cunsiderat sa diretzione de ghia 
-\n 
-\n • Algoritmu nou chi frunit valores significativos ascendentes e discendentes pro sas rastas GPX 
-\n 
-\n • Su tempus calculadu pro acabare sas àndalas pro s\'escursionismu como tenet in cunsìderu sas artiadas (règula de Naismith) 
-\n  
-\n"</string>
+    
     <string name="day_off_label">serradu</string>
     <string name="copy_location_name">Còpia su nùmene de su Puntu/PDI</string>
     <string name="toast_empty_name_error">Logu chene nùmene</string>
@@ -3163,7 +3039,7 @@ Pro praghere iscrie su còdighe intreu</string>
     
     <string name="unlimited_downloads">Iscarrigamentos illimitados</string>
     <string name="wikipedia_offline">Wikipedia non in lìnia</string>
-    <string name="contour_lines_sea_depth">Curvas de livellu + Curvas de profundidade nàuticas</string>
+    
     <string name="unlock_all_features">Isbloca totu sas funtzionalidades de OsmAnd</string>
 
     <string name="wikivoyage_travel_guide">Ghias de biàgiu</string>

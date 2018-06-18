@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="installing_new_resources">新しいデータを展開中…</string>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources><string name="installing_new_resources">新しいデータを展開中…</string>
      <string name="internet_connection_required_for_online_route">オンライン経路案内を使用しようとしていますが
 インターネット接続されていません。</string>
      <string name="tts_language_not_supported_title">未サポート言語</string>
@@ -652,7 +651,7 @@ POIの更新は利用できません</string>
 	<string name="driving_region_uk">イギリス、インド、その他類似国</string>
 	    
     
-    <string name="announce_gpx_waypoints">GPX経由地点</string>
+    
     <string name="speak_title">音声アナウンス設定…</string>
 	<string name="speak_descr">道路名、交通指示警告(強制停止、スピードバンプ等含む)、スピードカメラ、法定速度の音声アナウンスの設定をします</string>
 	<string name="speak_street_names">通りの名前 (TTS形式音声のみ)</string>
@@ -1226,7 +1225,7 @@ POIの更新は利用できません</string>
 	<string name="local_index_mi_restore">有効化</string>
 	<string name="local_index_mi_backup">無効化</string>
 	
-	<string name="local_index_mi_reload">SDカードから再読み込み</string>
+	
 	<string name="shared_string_download">ダウンロード</string>
 	<string name="local_index_poi_data">POIデータ</string>
 	<string name="local_index_address_data">住所データ</string>
@@ -1654,7 +1653,7 @@ POIの更新は利用できません</string>
     <string name="index_tours">旅行</string>
     <string name="shared_string_all">全て</string>
     <string name="shared_string_waypoints">経由地点</string>
-    <string name="targets">目的地</string>
+    
     <string name="way_alarms">通行に関する警告</string>
     <string name="speak_favorites">周辺のお気に入り</string>
     <string name="speak_poi">周辺のPOI</string>
@@ -2098,23 +2097,7 @@ POIの更新は利用できません</string>
     <string name="access_from_map">マップ画面から開く</string>
     <string name="show_on_start_description">ONでOsmAnd起動時ダッシュボードを自動的に表示します</string>
     <string name="copied_to_clipboard">クリップボードにコピーしました</string>
-    <string name="release_2_2">" • マップ画面や他の画面で項目をタップした場合のコンテキストメニューの刷新
-\n
-\n • ダッシュボード設定で\'起動時に表示\'をOFFにすることで今まで通りにマップ画面が直接表示出来る様に、選択式に変更
-\n
-\n • ダッシュボード設定で任意の項目だけ表示できる様に変更可能
-\n
-\n • ダッシュボード設定で今まで通りメニューボタンでメニューが開ける様に設定可能
-\n
-\n • マップ画面で世界地図表示状態から任意の地点のマップデータをダウンロード可能に
-\n
-\n • POI検索時より具体的に検索できる様に変更
-\n
-\n • POIやOSMの項目編集機能を改善
-\n
-\n • マップやその他データのダウンロード構造とUIを刷新
-\n
-\n他多数… "</string>
+    
     <string name="osm_save_offline">ｵﾌﾗｲﾝで保存</string>
     <string name="osm_edit_modified_poi">OSMのPOIが変更されました</string>
     <string name="osm_edit_deleted_poi">OSMのPOIが削除されました</string>
@@ -2208,17 +2191,7 @@ POIの更新は利用できません</string>
     <string name="shared_string_not_selected">指定しない</string>
     <string name="report">レポート</string>
     <string name="storage_permission_restart_is_required">外部ストレージへの書き込みが許可されました。手動でアプリケーションを再起動してください。</string>
-    <string name="release_2_3">" ・ 『OSM Live』 地図作成者と開発者をサポートする機能と時間毎の地図更新に対応。
-\n
-\n・ 『マップマーカー』 マップにて場所を選択する新しい方法の採用。
-\n
-\n・ より詳細なOSMマップと国または地域別の道路標識とマップの新しい機能の追加。
-\n
-\n・ ルート指定方法を視覚的に分かりやすく改良。
-\n
-\n・ 住所検索などコンテキストメニューの大幅改良。
-\n
-\n等々… "</string>
+    
     <string name="shared_string_move_up">上に移動</string>
     <string name="shared_string_move_down">下に移動</string>
     <string name="finish_navigation">ナビゲーションの終了</string>
@@ -2390,19 +2363,7 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="back_to_search">検索に戻る</string>
     <string name="confirmation_to_delete_history_items">選択された履歴を削除しますか？</string>
     <string name="show_something_on_map">マップ上に%1$sを表示</string>
-    <string name="release_2_4">• 新しくなって、より強化されたフリーワード検索 
-\n 
-\n • Bluetooth関連の改善多数 
-\n 
-\n • 音声案内とターン及びレーン指示等のルート案内の改善 
-\n 
-\n • ルートレンダリング時のトランスポートレイヤの改善 
-\n 
-\n • 新たな言語と対象地域の追加 
-\n 
-\n • 他、多くの改善とバグ修正 
-\n 
-\n等々…</string>
+    
     <string name="dist_away_from_my_location">%1$s離れた場所を検索</string>
     
     <string name="share_history_subject">OsmAnd経由で共有</string>
@@ -2424,27 +2385,7 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="show_legacy_search_desc">メニューリストで旧型検索も使用できるようにします</string>
     <string name="routing_attr_allow_motorway_name">高速道路を許可</string>
     <string name="routing_attr_allow_motorway_description">高速道路を使用可能とみなします</string>
-    <string name="release_2_6">"\\022 新機能: クイックアクションボタンの実装 
-\n 
-\n • 画面タッチおよびジェスチャ時の応答改善 (例: 左右への移動や、マップの拡大縮小時など)
-\n 
-\n •  より多くの言語に応じたマップフォントを導入 
-\n 
-\n • 言語地域に応じたTTS音声をサポート (地域による訛り含む)
-\n 
-\n • いくつかのマップスタイルとwikipediaの視認性強化 
-\n 
-\n • オープンロケーションコード(OLC)をサポート 
-\n 
-\n • 記録済みGPXトラックとルート計算後での標高、勾配、および速度プロファイルを表示 
-\n 
-\n • 自転車の\"運転スタイル\"の設定とそれに応じたルート検索の改善 
-\n 
-\n • 自転車のルート検索で高度データを使用するための設定 
-\n 
-\n • その他いくつかの改善とバグ修正 
-\n 
-\n等々…"</string>
+    
 	<string name="auto_split_recording_title">空白検知で自動分割記録</string>
 	<string name="auto_split_recording_descr">6分、2時間、あるいは日付変更後に長い空白があった場合に新しいセグメントを開始します。</string>
     <string name="rendering_attr_contourDensity_description">等高線の密度</string>
@@ -2498,19 +2439,7 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="search_map_hint">市町村名または地域名で検索</string>
     <string name="route_roundabout_short">%1$d番目の出口から出て進みます</string>
     <string name="route_calculation">ルート計算</string>
-    <string name="release_2_5">\\022 地図上のアイコンをタップ可能に 
-\n 
-\n・ より強力な検索フィルター、料理別のレストランまたは施設の充実したキャンプ場など 
-\n 
-\n・ サイクリストやハイカー向けの新しい地形表記のあるマップ 
-\n 
-\n・ 旅程記録機能の強化 
-\n 
-\n・ ナビゲーション通知の改善(Android版) 
-\n 
-\n・ 他多くの改善とバグ修正 
-\n 
-\n等々…</string>
+    
     <string name="search_hint">市町村名、住所、POI名称を入力</string>
     <string name="osm_live_banner_desc">マップのダウンロード数は無制限になり、設定した更新頻度(月、週、日、時間)での自動ダウンロードが可能になります。</string>
     <string name="osmand_plus_banner_desc">マップの無制限ダウンロード、アップデート、Wikipediaプラグインも使用可能。</string>
@@ -3016,22 +2945,8 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="quick_action_show_navigation_finish_dialog">ナビゲーション終了の確認ダイアログを表示</string>
     <string name="quick_action_start_stop_navigation">ナビゲーションの開始/停止</string>
     <string name="quick_action_start_stop_navigation_descr">このボタンをタップするとナビゲーションを開始または終了します。</string>
-    <string name="release_2_7">\\022 Mapillary ストリート画像用プラグインの実装
-\n
-\n • 距離測定のための定規ウィジェット
-\n
-\n • GPXから作成した経路とその詳細部分の分割機能
-\n
-\n • その他改善といくつかのバグ修正
-\n
-\n</string>
-    <string name="release_2_8">\\022 複数の目的地とそれを踏まえたルート計画用に新しく生まれ変わったマップマーカーシステム
-\n
-\n • 距離測定ツールで道に沿って計測できる機能とそれを保存できる機能の追加
-\n
-\n • OsmAnd Liveのバグ修正、30分ごとに提供される新しいデータ、ナビゲーション内に実装された機能の更新
-\n
-\n</string>
+    
+    
     <string name="access_map_linked_to_location">マップの場所にリンクされています</string>
     <string name="rendering_value_darkyellow_name">ダークイエロー</string>
     <string name="rendering_value_translucent_pink_name">半透明ピンク</string>
@@ -3103,26 +3018,7 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="add_segment_to_the_track">GPX経路に追加</string>
     <string name="shared_string_current">現在</string>
     <string name="shared_string_actions">その他</string>
-    <string name="release_2_9">\\022 コンテキストメニュー周りを更新: POIを開いたり閉じたりするときなど
-\n
-\n• 移動メニュー:使用可能な全てのルートが一番上に表示可能に
-\n
-\n• Wikipedia:元記事を開くためのボタンを追加し、外観を変更
-\n
-\n• ルート:ワンタップで出発地点と目的地を入れ替えられるように
-\n
-\n• メモ:タイプ、日付でのソート機能の追加
-\n
-\n• OSM編集:動作後にPOIのアイコン、名称、カテゴリを表示するように
-\n
-\n• クイックマーカー作成時の座標入力画面を作成
-\n
-\n• 一時停止標識の案内は、車の向きを考慮するように変更
-\n
-\n• GPX経路に保存する上昇／下降値の算出を新しいアルゴリズムに変更
-\n
-\n• 地形(上り坂)を考慮した徒歩移動時間の算出(ネイスミスの法則を適用)
-\n</string>
+    
     <string name="use_two_digits_longitude">二桁の経度を使用</string>
     <string name="enter_lon">経度を入力してください</string>
     <string name="enter_lat">緯度を入力</string>

@@ -57,7 +57,7 @@
 	<string name="poi_service_tyres">Gommista</string>
 	<string name="poi_vehicle_inspection">Centro revisioni</string>
 	<string name="poi_car_wash">Autolavaggio</string>
-	<string name="poi_fuel">Stazione di servizio</string>
+	<string name="poi_fuel">Stazione di servizio;Distributore; Pompa benzina</string>
 	<string name="poi_electricity_combined_charging">Stazione di ricarica</string>
 	<string name="poi_compressed_air">Aria compressa</string>
 	<string name="poi_parking">Parcheggio</string>
@@ -436,7 +436,7 @@
 	<string name="poi_theatre">Teatro</string>
 	<string name="poi_theatre_genre_circus">Circo</string>
 	<string name="poi_dance_floor">Sala da ballo</string>
-	<string name="poi_nightclub">Discoteca</string>
+	<string name="poi_nightclub">Discoteca;Disko;Disco;Club notturno</string>
 	<string name="poi_stripclub">Strip club</string>
 	<string name="poi_hunting_stand">Postazione di caccia</string>
 	<string name="poi_miniature_golf">Mini golf</string>
@@ -2439,7 +2439,6 @@
 	<string name="poi_climbing_style">Stile arrampicata</string>
 	<string name="poi_glacier_type">Tipo di ghiacciaio</string>
 
-<string name="synonyms_poi_fuel">Distributore; Pompa benzina</string>
 
 	<string name="poi_power_cable_distribution_cabinet">Armadio distribuzione elettrica</string>
 	<string name="poi_lighting_tower">Torre faro</string>
@@ -2479,7 +2478,6 @@
 
 	<string name="poi_recycling_foil">Pellicola</string>
 	<string name="poi_prosecutor">Procuratore</string>
-	<string name="synonyms_poi_nightclub">Discoteca;Disko;Disco;Club notturno</string>
 	<string name="poi_religion_unitarian_universalist">Universalismo unitariano</string>
 	<string name="poi_payment_cheque_no">Assegni non accettati</string>
 	<string name="poi_payment_routex_no">Carte carburanti Routex non accettate</string>

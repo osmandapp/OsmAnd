@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
 
     <string name="switch_to_raster_map_to_see">Off-line vektorové mapy toto místo neobsahují. Mapová data můžete stáhnout v \'Nastavení\' (\'Stáhnout mapy\'), nebo se přepněte na modul \'Online mapy\'.</string>
     <string name="send_files_to_osm">Nahrát GPX soubory do OSM?</string>
@@ -194,7 +193,7 @@
     <string name="local_index_action_do">Chystáte se %1$s %2$s položek. Jste si jisti?</string>
     <string name="local_index_mi_restore">Obnovit</string>
     <string name="local_index_mi_backup">Zálohovat</string>
-    <string name="local_index_mi_reload">Znovu nahrát z paměťové karty</string>
+    
     <string name="shared_string_download">Stáhnout</string>
     <string name="local_index_poi_data">Data POI</string>
     <string name="local_index_address_data">Addresy</string>
@@ -1053,7 +1052,7 @@ Proporcionální paměť %4$s MB (limit Androidu %5$s MB, Dalvik %6$s MB).</stri
     <string name="new_directions_point_dialog">Mezicíle jsou již nastaveny.</string>
     <string name="context_menu_item_directions_to">Navigovat sem</string>
     <string name="context_menu_item_directions_from">Navigovat odsud</string>
-    <string name="announce_gpx_waypoints">GPX body</string>
+    
     <string name="speak_title">Hlásit…</string>
     <string name="speak_descr">Konfigurace hlášení názvů ulic, dopravních upozornění, radarů, rychlostních omezení.</string>
     <string name="speak_street_names">Názvy ulic (TTS)</string>
@@ -1416,7 +1415,7 @@ Proporcionální paměť %4$s MB (limit Androidu %5$s MB, Dalvik %6$s MB).</stri
     <string name="shared_string_all">Všechny</string>
     <string name="save_track_to_gpx_globally">"Ukládat trasu do GPX  souboru"</string>
     <string name="shared_string_waypoints">Body na trase</string>
-    <string name="targets">Cíle</string>
+    
     <string name="way_alarms">Dopravní varování</string>
     <string name="speak_favorites">Blízké oblíbené body</string>
     <string name="speak_poi">Blízké body zájmu POI</string>
@@ -1880,23 +1879,7 @@ Délka %2$s</string>
     <string name="access_from_map_description">Tlačítko menu zobrazí domovskou obrazovku místo menu</string>
     <string name="access_from_map">Přístup z mapy</string>
     <string name="copied_to_clipboard">Zkopírováno do schránky</string>
-    <string name="release_2_2">• nové kontextově závislé rozhraní pro označení umístění na mapě a ostatních obrazovkách
-\n
-\n • obrazovka mapy je nyní spouštěná přímo, pokud není zvoleno \'Zobrazit domovskou obrazovku po startu\'
-\n
-\n • konfigurace karet zobrazovaných na domovské obrazovce
-\n
-\n • domovskou obrazovku je možné obejít, pokud preferujete ovládání aplikace přes menu
-\n
-\n • regiony, pro něž chcete stáhnout mapu, je nyní možné vybrat přímo na mapě světa
-\n
-\n • vyhledávání POI nyní umožňuje přesnější dotazy
-\n
-\n • vylepšená editace POI a OSM
-\n 
-\n • přepracované rozhraní stahování map
-\n
-\n a další…</string>
+    
     <string name="osm_save_offline">Uložit off-line</string>
     <string name="osm_edit_modified_poi">Upravený OSM POI</string>
     <string name="osm_edit_deleted_poi">Smazaný OSM POI</string>
@@ -2162,19 +2145,7 @@ Délka %2$s</string>
     <string name="rendering_attr_hideOverground_name">Nadzemní objekty</string>
     <string name="shared_string_change">Změnit</string>
     <string name="get_started">Začít</string>
-    <string name="release_2_4">• Nové mocné vyhledávání libovolného textu
-\n
-\n • Propojení s audiosystémem v autě přes Bluetooth
-\n
-\n • Vylepšená navigace, hlasové pokyny a indikace jízdních pruhů
-\n
-\n • Vylepšená dopravní vrstva s vykreslením tras
-\n
-\n • Přidané další jazyky a regionální verze
-\n
-\n • Mnoho dalších vylepšení a oprav chyb
-\n
-\n a další…</string>
+    
     <string name="osm_live_payment_desc">Poplatek za předplatné bude stržen každý měsíc. Předplatné můžete zrušit kdykoli na Google Play.</string>
     <string name="donation_to_osm">Příspěvek komunitě OpenStreetMap</string>
     <string name="donation_to_osm_desc">Část příspěvku bude zaslaná uživatelům, kteří odesílají změny do OpenStreetMap. Cena předplatného zůstává stejná.</string>
@@ -2243,30 +2214,8 @@ Délka %2$s</string>
     <string name="wiki_around">Články Wikipedie v okolí</string>
     <string name="search_map_hint">Hledat město nebo oblast</string>
     <string name="show_legacy_search_desc">Přidat starší hledání do úvodního panelu.</string>
-    <string name="release_2_5">\\022 Klikatelné ikony na mapě 
-\n 
-\n • Podrobné filtrování POI: Například hledání restaurace dle kuchyně, kempy se speciálními službami, apod. 
-\n 
-\n • Nový styl topo mapy pro cyklisty a turisty 
-\n 
-\n • Vylepšení nahrávání cesty 
-\n 
-\n • Vylepšené notifikace navigace (Android Wear) 
-\n 
-\n • Mnohá další vylepšení a opravy chyb 
-\n 
-\n a další…</string>
-    <string name="release_2_3">• OSM Live. Podpořte tvůrce map a vývojáře a získejte aktualizace map každou hodinu.
-\n
-\n • Mapové značky. Nový způsob rychlého výběru míst na mapě.
-\n
-\n • Detailnější mapy z OSM s ikonami cest pro příslušné krajiny a nové objekty na mapě.
-\n
-\n • Vylepšený vzhled a použití tvorby trasy.
-\n
-\n • Vylepšení v menu mapy, jako například hledání adresy podle kontextu.
-\n
-\n a další…</string>
+    
+    
     <string name="lang_sr_latn">Srbsky (Latinka)</string>
     <string name="lang_zh_hk">Čínsky (Hong Kong)</string>
     <string name="rendering_attr_contourDensity_description">Hustota vrstevnic</string>
@@ -2365,27 +2314,7 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="quick_action_page_list_descr">Aktivace tlačítka akce posune seznam na další stranu.</string>
     <string name="rendering_attr_depthContours_description">Zobrazit hloubkové vrstevnice a body.</string>
     <string name="rendering_attr_depthContours_name">Námořní hloubkové vrstevnice</string>
-	<string name="release_2_6">• Nová funkce: Tlačítko rychlé akce
-\n
-\n• Vylepšená odezva dotykových gest
-\n
-\n• Nová mapová písma pokrývající více jazyků
-\n
-\n• Podpora TTS pro varianty jazykových regionů
-\n
-\n• Vylepšená viditelnost ve více mapových stylech a Wikipedii
-\n
-\n• Podpora Open Location Code (OLC)
-\n
-\n• Zobrazení nadmořské výšky, sklonu a rychlosti pro zaznamenané GPX a vypočítané trasy
-\n
-\n• Nastavení \"Stylu jízdy\" a vylepšení logiky cyklistické navigace
-\n
-\n• Nastavení pro použití výškových údajů při cyklo-navigaci
-\n
-\n• Další vylepšení a opravy chyb
-\n
-\na další…</string>
+	
 	<string name="navigate_point_olc">Open Location Code (OLC)</string>
     <string name="route_altitude">Stoupání trasy</string>
     <string name="altitude_descent">Klesání</string>
@@ -2548,15 +2477,7 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="quick_action_show_navigation_finish_dialog">Zobrazit zprávu o ukončení navigace</string>
     <string name="quick_action_start_stop_navigation">Spustit/ukončit navigaci</string>
     <string name="quick_action_start_stop_navigation_descr">Stiskněte toto tlačítko pro spuštění, nebo zastavení navigace.</string>
-    <string name="release_2_7">"\\022 Modul Mapillary se snímky ulic
-\n
-\n • Pravítko pro měření vzdálenosti
-\n
-\n • Intervaly rozdělení GPX  s detailními informacemi o trase
-\n
-\n • další vylepšení a opravy chyb
-\n
-\n"</string>
+    
     <string name="rendering_value_translucent_pink_name">Průhledná růžová</string>
     <string name="none_point_error">Prosím přidejte alespoň jeden bod.</string>
     <string name="enter_gpx_name">Název souboru GPX:</string>
@@ -2670,13 +2591,7 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="route_is_calculated">Trasa vypočítána</string>
     <string name="round_trip">Okružní trasa</string>
     <string name="plan_route_no_markers_toast">Pro použití této funkce musíte přidat alespoň jednu značku .</string>
-    <string name="release_2_8">\\022 Zcela přepracované mapové značky se směrovkami a plánováním trasy 
-\n 
-\n• Nástroj měření vzdálenosti nabízí funkci přichycení k cestě a uložení bodů jako trasu 
-\n 
-\n• OsmAnd Live: Opravy chyb, nová data na serveru každých 30 minut, aktualizace začleněné do navigace 
-\n 
-\n</string>
+    
     <string name="rendering_value_darkyellow_name">Tmavě žlutá</string>
     <string name="empty_state_osm_edits">Vytvořit nebo upravit OSM objekty</string>
     <string name="looking_for_tracks_with_waypoints">Hledání tras s trasovými body</string>
@@ -2748,27 +2663,7 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="nautical_renderer">Námořnictví</string>
 <string name="will_open_tomorrow_at">Otevře zítra v</string>
     <string name="shared_string_marker">Značka</string>
-    <string name="release_2_9">\\022 Aktualizováno kontextové menu: zobrazí, kdy POI otevírá / zavírá 
-\n 
-\n • Dopravní nabídka: všechny dostupné trasy jsou nyní nahoře 
-\n 
-\n • Wikipedie: přidáno tlačítko pro otevření původního článku, aktualizován vzhled článků 
-\n 
-\n • Trasa: přidána možnost vyměnit počáteční a koncové body jedním klepnutím 
-\n 
-\n • Poznámky: přidáno třídění podle typu a data 
-\n 
-\n • OSM úpravy: zobrazení ikony a názvu kategorie POI, zobrazení dokončených akcí 
-\n 
-\n • Nová obrazovka rychlých souřadnic pro rychlé vytváření značek 
-\n
-\n • Detekce značek \"stop\" zohledňuje směr jízdy 
-\n 
-\n • Nový algoritmus poskytuje smysluplné hodnoty pro stoupání/klesání v GPX trasách 
-\n 
-\n • Čas pěší trasy zohledňuje terén/stoupání (Naismithovo pravidlo) 
-\n
-\n</string>
+    
     <string name="osm_recipient_stat">Počet úprav %1$s, součet %2$s mBTC</string>
     <string name="lang_lo">Laosky</string>
     <string name="show_closed_notes">Zobrazit zavřené poznámky</string>
@@ -2859,10 +2754,10 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="purchase_subscription_title">Předplatit - %1$s</string>
 
     <string name="wikivoyage_offline">Wikivoyage v režimu offline</string>
-    <string name="dayly_map_updates">Aktualizace Map: každý den</string>
+    
     <string name="unlimited_downloads">Neomezené stahování</string>
     <string name="wikipedia_offline">Wikipedie v režimu offline</string>
-    <string name="contour_lines_sea_depth">Výškové a hloubkové vrstevnice</string>
+    
     <string name="unlock_all_features">Odemknout všechny funkce OsmAnd</string>
 
     <string name="purchase_dialog_title">Vyberte si předplatné</string>

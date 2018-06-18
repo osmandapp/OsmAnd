@@ -1,36 +1,92 @@
 apply plugin: 'java'
-apply plugin: 'application'
-mainClassName = "net.osmand.util.GeoPointParserUtil"
-compileJava.options.encoding = 'UTF-8'
+    
+    
+configurations {
+	android
+}
 
 tasks.withType(JavaCompile) {
 	sourceCompatibility = "1.7"
 	targetCompatibility = "1.7"
 }
 
-sourceSets {
-	main {
-		java {
-			srcDirs = ["src"]
-		}
+task collectRoutingResources(type: Sync) {
+	from "../../resources/routing"
+	into "src/main/resources/net/osmand/router"
+	include "*.xml"
+}
+
+task collectMiscResources(type: Copy) {
+	into "src/main/resources/net/osmand/osm"
+	from("../../resources/obf_creation") {
+		include "rendering_types.xml"
+	}
+	from("../../resources/poi") {
+		include "poi_types.xml"
 	}
 }
 
-configurations {
-	android
+task collectRenderingStylesResources(type: Sync) {
+	from "../../resources/rendering_styles"
+	into "src/main/resources/net/osmand/render"
+	include "*.xml"
+}
+
+task collectRegionsInfoResources(type: Copy) {
+	from "../../resources/countries-info"
+	into "src/main/resources/net/osmand/map"
+	include "regions.ocbf"
+}
+
+task collectTestResources(type: Copy) {
+	from "../../resources/test-resources"
+	into "src/test/resources/"
+	include "*"
+}
+
+
+task collectExternalResources {
+	dependsOn collectRoutingResources,
+		collectRenderingStylesResources,
+		collectRegionsInfoResources,
+		collectTestResources,
+		collectMiscResources
 }
 
 task androidJar(type: Jar) {
+	dependsOn collectExternalResources, build
 	appendix = "android"
-	from sourceSets.main.output
-	exclude("**/PlatformUtil.*")
+	from (sourceSets.main.java.outputDir) {
+		exclude("**/PlatformUtil.*")
+	}
+	from sourceSets.main.resources
+}
+
+compileJava {
+    dependsOn collectExternalResources
 }
 
 artifacts {
 	android androidJar
 }
 
+
 dependencies {
-	compile fileTree(dir: "libs", include: ["*.jar"])
+	testImplementation 'junit:junit:4.12'
+	testImplementation 'com.google.code.gson:gson:2.8.2'
+	testImplementation 'org.hamcrest:hamcrest-core:1.3'
+
+	implementation group: 'commons-logging', name: 'commons-logging', version: '1.2'
+	implementation group: 'org.json', name: 'json', version: '20171018' 
+	implementation 'it.unibo.alice.tuprolog:tuprolog:3.2.1'
+	implementation 'org.beanshell:bsh-core:2.0b4'
+	implementation 'org.apache.commons:commons-compress:1.17'
+	implementation 'com.moparisthebest:junidecode:0.1.1'
+	implementation 'com.vividsolutions:jts-core:1.14.0'
+
+	implementation 'net.sf.kxml:kxml2:2.1.8'
+	
+
+	implementation fileTree(dir: "libs", include: ["*.jar"])
 }
 

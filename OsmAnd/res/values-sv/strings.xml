@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
     <string name="screen_is_locked">För att låsa upp skärmen tryck på låsikonen</string>
     <string name="ChooseCountry">Välj land</string>
     <string name="choose_city">Välj stad eller postnummer</string>
@@ -433,7 +432,7 @@ Nyttjat utrymme är {1} MB.
     <string name="local_index_mi_restore">Aktivera</string>
     <string name="local_index_mi_backup">Inaktivera</string>
 
-    <string name="local_index_mi_reload">Ladda om från SD-kort</string>
+    
     <string name="local_index_poi_data">Intressepunktsdata</string>
     <string name="local_index_address_data">Adressdata</string>
     <string name="local_index_transport_data">Kollektivtrafikdata</string>
@@ -1106,7 +1105,7 @@ Nyttjat utrymme är {1} MB.
     <string name="speak_title">Läs upp …</string>
     <string name="speak_descr">Konfigurera för att läsa upp gatunamn, trafikvarningar (t.ex. fartbulor), varningar för fartkameror, hastighetsbegränsningar.</string>
     <string name="speak_street_names">Gatunamn (TTS)</string>
-    <string name="announce_gpx_waypoints">GPX-waypoints</string>
+    
 
 
     <string name="map_widget_fps_info">FPS-avbuggningsinfo</string>
@@ -1489,7 +1488,7 @@ Nyttjat utrymme är {1} MB.
     <string name="download_additional_maps">Ladda ner kartor som saknas %1$s (%2$d MB)?</string>
 
     <string name="shared_string_waypoints">Waypoints</string>
-    <string name="targets">Destinationer</string>
+    
     <string name="way_alarms">Trafikskyltar</string>
     <string name="speak_favorites">Närbelägna favoriter</string>
     <string name="speak_poi">Närbelägna intresssepunkter</string>
@@ -2027,23 +2026,7 @@ Long %2$s</string>
     <string name="access_from_map">Tillgång från kartan</string>
     <string name="rendering_attr_currentTrackColor_description">GPX-färg</string>
     <string name="rendering_attr_currentTrackWidth_description">GPX-bredd</string>
-    <string name="release_2_2">•\\022 Nytt kontextkänsligt gränssnitt för att peta på platser på kartan och på andra skärmar 
-\n 
-\n • Kartskärmen startar nu automatiskt om inte \'Visa panelen vid appstart\' är vald 
-\n 
-\n • Konfigurera vilka kort och hur de ska visas i panelen 
-\n 
-\n • Gå förbi panelen om du föredrar en menybaserad kontroll över appen 
-\n 
-\n • För att hämta kartor kan regioner väljas direkt genom att peta på världskartan 
-\n 
-\n • Sökning efter intressepunkter (POI) understöder nu mer specifika frågor 
-\n 
-\n • Förbättrad funktion för POI- och OSM-redigering 
-\n 
-\n • Strukturen för hämtning av kartdata och gränssnittet har omarbetats 
-\n 
-\n och mer …</string>
+    
     <string name="dashboard_or_drawer_description">Det finns ett nytt val att primärt kontrollera appen via den flexibla panelen eller via en statisk meny. Detta val kan du alltid ändra på under inställningarna i panelen.</string>
 <string name="use_dashboard_btn">Använd panelen</string>
     <string name="use_drawer_btn">Använd menyn</string>
@@ -2190,17 +2173,7 @@ Detta kräver {3} MB temporärt och {1} MB permanent.
     <string name="open_street_map_login_and_pass">OpenStreetMap inloggning och lösenord</string>
     <string name="no_map_markers_found">Lägg till kartmarkörer via kartan</string>
     <string name="no_waypoints_found">Hittar inga waypoints</string>
-    <string name="release_2_3">•\\022 OSM Live. Stöd bidragsgivare och utvecklare av kartor och erhåll kartuppdateringar varje timme. 
-\n
-\n • Kartmarkörer: ett nytt sätt att snabbt välja platser på kartan.
-\n
-\n • Mer detaljerade OSM-kartor med landsspecifika vägmärken samt massor av nya kartfunktioner.
-\n
-\n • Förbättrat utseende för ruttförberedelse. 
-\n
-\n • Många förbättringar i kartans kontextmeny såsom kontextuell adressökning.
-\n
-\n och ännu mer …</string>
+    
     <string name="map_widget_bearing">Relativ bäring</string>
     <string name="access_disable_offroute_recalc">Räkna inte om rutten när du lämnat den</string>
     <string name="access_disable_offroute_recalc_descr">Förhindrar automatiskt omberäkning av rutten när du lämnat den.</string>
@@ -2357,19 +2330,7 @@ Om du tycker om OsmAnd och OSM och vill stödja dem så är detta ett utmärkt s
     
     
     <string name="trip_rec_notification_settings">Aktivera snabbstart av inspelning</string>
-    <string name="release_2_5">• Klickbara ikoner på kartan 
-\n 
-\n • Kraftfull sökning med POI-filter: Sök t.ex. restauranger efter kvalitet, eller campingplatser med speciellta faciliteter 
-\n 
-\n • Ny Topo Map-stil för cyklister och vandrare 
-\n 
-\n • Förbättrad trippinspelning 
-\n 
-\n • Förbättrade navigationsaviseringar (Android Wear) 
-\n 
-\n • Många andra förbättringar och felkorrigeringar 
-\n 
-\n och mer …</string>
+    
     <string name="christmas_desc">Med tanke på den kommande julen och nyåret så kan du välja att visa POI som har med julen att göra: julgranar, julmarknader med mera.</string>
     <string name="rendering_attr_contourWidth_name">Bredd på konturlinjer</string>
     <string name="rendering_attr_hideWaterPolygons_description">Vatten</string>
@@ -2377,19 +2338,7 @@ Om du tycker om OsmAnd och OSM och vill stödja dem så är detta ett utmärkt s
     <string name="donation_to_osm_desc">En del av din donation kommer att skickas till OSM-användare som skickar in ändringar till OpenStreetMap. Prenumerationens kostnad fortsätter att vara densamma.</string>
     <string name="osm_live_subscription_desc">En prenumeration aktiverar uppdateringar varje timme, dag eller vecka och obegränsade nedladdningar av alla kartor globalt.</string>
     <string name="osm_live_banner_desc">Erhåll obegränsade nedladdningar av kartor samt kartuppdateringar oftare än en gång i månaden: varje vecka, varje dag eller varje timme.</string>
-    <string name="release_2_4">\\022 Ny mycket kraftfull fritextsökning 
-\n 
-\n• Ljudsystem för bil/högtalarintegrering via Blåtand 
-\n 
-\n• Förbättrad vägvisning, meddelanderöst och körfält för omdirigering 
-\n 
-\n• Förbättrat transportlager med vägrendering. 
-\n 
-\n• Fler språkversioner och nu stöd för regionala språk 
-\n 
-\n• Många fler förbättringar och felkorrigeringar 
-\n 
-\nmed mera…</string>
+    
     <string name="rendering_value_low_name">Låg</string>
     <string name="rendering_attr_contourWidth_description">Bredd på konturlinjer</string>
     <string name="rendering_value_high_name">Hög</string>
@@ -2807,64 +2756,10 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="download_depth_countours">Nautiska djupkonturer</string>
     <string name="do_not_send_anonymous_app_usage_desc">OsmAnd samlar in information om vilka delar av programmet som du öppnar. Din plats skickas aldrig, inte heller någonting du anger i appen eller detaljer om områden du visar, söker eller laddar ner.</string>
     <string name="routing_attr_relief_smoothness_factor_name">Välj höjdfluktuation</string>
-    <string name="release_2_6">\\022 Ny funktion: Snabbåtgärds-knappen
-\n
-\n• Förbättrad touchscreen-gest (t ex samtidig panorering och zoomning)
-\n
-\n• Nytt kartteckensnitt som omfattar fler språk
-\n
-\n• Stöd för TTS för regionala språkvarianter (och accenter)
-\n
-\n• Synlighetsförbättringar i flera kartstilar och wikipedia
-\n
-\n• Stödjer Open Location Code (OLC)
-\n
-\n• Visa höjd, lutning och hastighetsprofil för inspelade GPX-spår och beräknade rutter
-\n
-\n• \"Körstil\"-inställning och logikförbättringar i cykel-routing
-\n
-\n• Inställningar för att använda höjddata i cykelrutter
-\n
-\n• Flera andra förbättringar och buggfixar
-\n
-\noch mer…</string>
-    <string name="release_2_7">\\022 Mapillary-plugin med bilder på gatunivå
-\n
-\n• Linjal-widget för avståndsmätning
-\n
-\n• GPX-splitintervaller med detaljerad information om dina spår
-\n
-\n• Andra förbättringar och buggfixar
-\n
-\n</string>
-    <string name="release_2_8">\\022 Helt omarbetat kartmarkörer med guidelinjer och ruttplanering
-\n
-\n• Avståndsmätningsverktyg som erbjuder snap på vägar och sparar punkter som spår
-\n
-\n• OsmAnd Live: buggfixar, färska data på servern var 30:e minut, uppdateringar som genomförs till navigeringen
-\n
-\n</string>
-    <string name="release_2_9">\\022 Uppdaterad kontextmenyn: visa när IP-öppnar / stänger
-\n
-\n• Transportmeny: alla tillgängliga rutter är nu längst upp
-\n
-\n• Wikipedia: lagt till knapp för att öppna den ursprungliga artikeln, uppdaterat utseende i artiklarna
-\n
-\n• Rutt: lagt till möjlighet att byta start-och slutpunkter i ett tryck
-\n
-\n• Anteckningar: lade till möjlighet att sortera efter typ och datum
-\n
-\n• OSM-redigeringar: visar en ikon och ett namn på POI-kategorin, visa slutförda åtgärder
-\n
-\n• Ny snabb skärm för koordinatinmatning för snabbt skapande av markörer
-\n
-\n• Detektering av stoppskyltar går efter körriktning
-\n
-\n• Ny algoritm för att ge meningsfull ascent/descent värden för GPX-spår
-\n
-\n• Terräng (uppstigning) känner vandringstid (Naismith \' s regel)
-\n
-\n</string>
+    
+    
+    
+    
     <string name="auto_split_recording_title">Auto-split-inspelningar efter lucka</string>
     <string name="auto_split_recording_descr">Starta nytt segment efter en lucka av 6 min, nya spår efter lucka på 2 timmar eller nya filer efter ett längre gap om datumet har ändrats.</string>
     <string name="legacy_search">Äldre Sök</string>

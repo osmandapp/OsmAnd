@@ -14,7 +14,8 @@ fi
 function copyLibs {
 	if [ -d "$CORE_LOC/binaries/$1/$2" ]; then 
 		echo "Copy binaries $1 $2";
-		cp "$CORE_LOC"/binaries/$1/$2/Release/libosmand.so bin/osmand-$1-$3.lib
+		mkdir -p "$SCRIPT_LOC"/src/main/resources/
+		cp "$CORE_LOC"/binaries/$1/$2/Release/libosmand.so "$SCRIPT_LOC"/src/main/resources/osmand-$1-$3.lib
 	fi
 }
 

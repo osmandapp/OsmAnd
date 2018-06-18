@@ -58,3 +58,6 @@ assets/OsmAndCore_ResourcesBundle/
 /helpAssets
 /voiceAssets
 /resourcesSrc
+
+.project
+.classpath

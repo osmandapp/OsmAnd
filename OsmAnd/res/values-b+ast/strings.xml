@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
 	<string name="av_locations">Allugamientos</string>
 	<string name="plugin_settings">Complementos</string>
 	<string name="no_updates_available">Nun hai anovamientos disponibles</string>
@@ -217,7 +216,7 @@
 	<string name="duration">Duración</string>
 	<string name="distance">Distancia</string>
 	<string name="shared_string_all">Too</string>
-	<string name="targets">Destinos</string>
+	
 	<string name="rendering_value_car_name">Coche</string>
 	<string name="rendering_value_bicycle_name">Bicicleta</string>
 	<string name="rendering_value_pedestrian_name">Peatón</string>
@@ -765,27 +764,7 @@ Puntos</string>
 
     <string name="rendering_attr_depthContours_description">Amosar la batimetría y puntos.</string>
     <string name="rendering_attr_depthContours_name">Curves de fondura marina</string>
-	<string name="release_2_6">\\u2022 Nueva función: Botón d\'aición rápida
-\n 
-\n • Respuesta ameyorada a xestos en pantalles táctiles (p.ex. abasnar y ampliar al tiempu) 
-\n 
-\n • Nueves tipografíes del mapa que cubren más llingües 
-\n 
-\n • Soporte TTS pa variantes rexonales de llingua 
-\n 
-\n • Ameyoramientos de visibilidá en dellos estilos de mapes y Wikipedia 
-\n 
-\n • Encontu pa Open Location Code (OLC) 
-\n 
-\n • Ver el perfil d\'elevación, pendiente y velocidá pa les traces GPX grabaes y la ruta calculada 
-\n 
-\n • Opción «Estilu de conducción» y ameyoramientos na llóxica del cálculu de rutes pa bicicletes 
-\n 
-\n • Opciones para usar los datos d\'altitú nel cálculu de rutes pa bicicletes 
-\n 
-\n • Dellos ameyoramientos y errores iguaos más 
-\n 
-\n y más…</string>
+	
 	<string name="search_another_country">Esbillar otra rexón</string>
     <string name="shared_string_change">Camudar</string>
     <string name="mapillary_image">Imaxe de Mapillary</string>

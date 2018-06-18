@@ -641,7 +641,7 @@
 	<string name="poi_community_centre">Kulturní středisko</string>
 	<string name="poi_social_centre">Společenské centrum</string>
 	<string name="poi_dance_floor">Taneční parket</string>
-	<string name="poi_nightclub">Noční klub</string>
+	<string name="poi_nightclub">Noční klub;Diskotéka</string>
 	<string name="poi_stripclub">Striptýzový klub</string>
 	<string name="poi_beach_resort">Plážový areál</string>
 	<string name="poi_dog_park">Výběh pro psy</string>
@@ -3576,10 +3576,6 @@
 	<string name="poi_operational_status_needs_maintenance">Vyžaduje údržbu</string>
 
 	<string name="poi_service_car">Autoservis</string>
-
-<string name="synonyms_poi_fuel">Čerpací stanice</string>
-
-	<string name="synonyms_poi_nightclub">Diskotéka</string>
 	<string name="poi_water_purification_none">Žádné</string>
 	<string name="poi_water_purification_chlorine">Chlór</string>
 	<string name="poi_water_purification_reverse_osmosis">Reverzní osmóza</string>

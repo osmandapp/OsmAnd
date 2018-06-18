@@ -222,7 +222,7 @@
 	<string name="local_index_mi_restore">활성화</string>
 	<string name="local_index_mi_backup">비활성화</string>
 	
-	<string name="local_index_mi_reload">SD카드에서 다시 불러오기</string>	
+		
 	<string name="local_index_poi_data">POI 데이터</string>
 	<string name="local_index_address_data">주소 데이터</string>
 	<string name="local_index_transport_data">대중 교통 데이터</string>
@@ -880,7 +880,7 @@
 	<string name="driving_region_canada">캐나다</string>
 	<string name="driving_region_europe_asia">한국 &amp; 유럽</string>
 	<string name="driving_region_uk">영국, 인도, 호주 및 기타</string>
-    <string name="announce_gpx_waypoints">GPX 경유지</string>
+    
     <string name="speak_title">알리기…</string>
 	<string name="speak_descr">거리 이름, 교통 경고(강제 정지, 속도 범프), 속도 카메라 경고, 제한 속도를 알리기 위해  구성합니다</string>
 	<string name="speak_street_names">거리 이름 (TTS )</string>
@@ -1603,7 +1603,7 @@
     <string name="index_tours">여행</string>
     <string name="shared_string_all">모두</string>
     <string name="shared_string_waypoints">경유지</string>
-    <string name="targets">도착지</string>
+    
     <string name="way_alarms">교통 경고</string>
     <string name="speak_favorites">주변의 즐겨찾기</string>
     <string name="speak_poi">주변의 POI</string>

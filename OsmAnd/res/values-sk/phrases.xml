@@ -137,7 +137,7 @@
 	<string name="poi_service_tyres">Pneuservis</string>
 	<string name="poi_vehicle_inspection">Kontrola vozidla (technická/emisná)</string>
 	<string name="poi_car_wash">Autoumyváreň</string>
-	<string name="poi_fuel">Benzínová pumpa</string>
+	<string name="poi_fuel">Benzínová pumpa;Čerpacia stanica</string>
 	<string name="poi_electricity_combined_charging">Nabíjacia stanica</string>
 	<string name="poi_vehicle_ramp">Servisná rampa na auto</string>
 	<string name="poi_compressed_air">Stlačený vzduch</string>
@@ -423,7 +423,7 @@
 	<string name="poi_theatre">Divadlo</string>
 	<string name="poi_theatre_genre_circus">Cirkus</string>
 	<string name="poi_dance_floor">Tanečný parket</string>
-	<string name="poi_nightclub">Nočný zábavný klub</string>
+	<string name="poi_nightclub">Nočný zábavný klub;Diskotéka</string>
 	<string name="poi_stripclub">Striptízový klub</string>
 	<string name="poi_beach_resort">Plážový areál</string>
 	<string name="poi_dog_park">Výbeh pre psy</string>
@@ -3257,9 +3257,7 @@
 	<string name="poi_service_car">Služby pre autá</string>
 	<string name="poi_glacier_type">Typ ľadovca</string>
 
-<string name="synonyms_poi_fuel">Čerpacia stanica</string>
 
-	<string name="synonyms_poi_nightclub">Diskotéka</string>
 	<string name="poi_leisure_common">Obecná odpočinková zóna</string>
 	<string name="poi_architecture_new_objectivity">Architektúra: nový objektivizmus</string>
 	<string name="poi_architecture_timber_frame">Architektúra: drevená kostra</string>

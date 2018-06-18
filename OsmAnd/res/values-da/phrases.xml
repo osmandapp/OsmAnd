@@ -123,7 +123,7 @@
         <string name="poi_service_tyres">Dækservice</string>
         <string name="poi_vehicle_inspection">Bilsyn</string>
         <string name="poi_car_wash">Bilvask</string>
-        <string name="poi_fuel">Tankstation</string>
+        <string name="poi_fuel">Tankstation;Benzintank;Servicestation</string>
         <string name="poi_electricity_combined_charging">Ladestation</string>
         <string name="poi_vehicle_ramp">Kørerampe</string>
         <string name="poi_compressed_air">Trykluft</string>
@@ -415,7 +415,7 @@
         <string name="poi_theatre">Teater</string>
         <string name="poi_theatre_genre_circus">Cirkus</string>
         <string name="poi_dance_floor">Dansested</string>
-        <string name="poi_nightclub">Natklub</string>
+        <string name="poi_nightclub">Natklub;Diskotek;Disko;Disco</string>
         <string name="poi_stripclub">Stripklub</string>
         <string name="poi_beach_resort">Badeby</string>
         <string name="poi_dog_park">Hundeskov</string>
@@ -3865,9 +3865,6 @@
 <string name="poi_flooring">Gulvbutik</string>
 	<string name="poi_pottery">Keramik</string>
 
-<string name="synonyms_poi_fuel">Tankstation;Benzintank;Servicestation</string>
-
-	<string name="synonyms_poi_nightclub">Diskotek;Disko;Disco</string>
 	<string name="poi_whitewater_rapid_name">Strømfaldets navn</string>
 
 	<string name="poi_outpost">Butikkens leveringssted</string>

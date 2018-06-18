@@ -10,6 +10,9 @@ import org.drinkless.td.libcore.telegram.TdApi.AuthorizationState
 import java.io.File
 import java.util.*
 import java.util.concurrent.ConcurrentHashMap
+import java.util.concurrent.Executors
+import java.util.concurrent.ScheduledExecutorService
+import java.util.concurrent.TimeUnit
 
 
 class TelegramHelper private constructor() {
@@ -19,6 +22,7 @@ class TelegramHelper private constructor() {
 		private const val CHATS_LIMIT = 100
 		private const val CHAT_LIVE_USERS_LIMIT = 100
 		private const val IGNORED_ERROR_CODE = 406
+		private const val UPDATE_LIVE_MESSAGES_INTERVAL_SEC = 30L
 
 		private var helper: TelegramHelper? = null
 
@@ -66,6 +70,8 @@ class TelegramHelper private constructor() {
 	private val defaultHandler = DefaultHandler()
 	private val liveLocationMessageUpdatesHandler = LiveLocationMessageUpdatesHandler()
 
+	private var updateLiveMessagesExecutor: ScheduledExecutorService? = null
+
 	var listener: TelegramListener? = null
 	var incomingMessagesListener: TelegramIncomingMessagesListener? = null
 
@@ -98,6 +104,15 @@ class TelegramHelper private constructor() {
 		return users[id]
 	}
 
+	fun getUserMessage(user: TdApi.User): TdApi.Message? {
+		for (message in usersLiveMessages.values) {
+			if (message.senderUserId == user.id) {
+				return message
+			}
+		}
+		return null
+	}
+
 	fun getChatMessages(chatTitle: String): List<TdApi.Message> {
 		val res = mutableListOf<TdApi.Message>()
 		for (message in usersLiveMessages.values) {
@@ -107,6 +122,10 @@ class TelegramHelper private constructor() {
 			}
 		}
 		return res
+	}
+
+	fun getMessages(): List<TdApi.Message> {
+		return usersLiveMessages.values.toList()
 	}
 
 	private fun updateChatTitles() {
@@ -148,6 +167,7 @@ class TelegramHelper private constructor() {
 
 	interface TelegramIncomingMessagesListener {
 		fun onReceiveChatLocationMessages(chatTitle: String, vararg messages: TdApi.Message)
+		fun updateLocationMessages()
 	}
 
 	interface TelegramAuthorizationRequestListener {
@@ -217,7 +237,7 @@ class TelegramHelper private constructor() {
 		return client != null && haveAuthorization
 	}
 
-	fun getUserPhotoPath(user: TdApi.User):String? {
+	fun getUserPhotoPath(user: TdApi.User): String? {
 		return if (hasLocalUserPhoto(user)) {
 			user.profilePhoto?.small?.local?.path
 		} else {
@@ -226,6 +246,21 @@ class TelegramHelper private constructor() {
 			}
 			null
 		}
+	}
+
+	fun startLiveMessagesUpdates() {
+		stopLiveMessagesUpdates()
+
+		val updateLiveMessagesExecutor = Executors.newSingleThreadScheduledExecutor()
+		this.updateLiveMessagesExecutor = updateLiveMessagesExecutor
+		updateLiveMessagesExecutor.scheduleWithFixedDelay({
+			incomingMessagesListener?.updateLocationMessages()
+		}, UPDATE_LIVE_MESSAGES_INTERVAL_SEC, UPDATE_LIVE_MESSAGES_INTERVAL_SEC, TimeUnit.SECONDS);
+	}
+
+	fun stopLiveMessagesUpdates() {
+		updateLiveMessagesExecutor?.shutdown()
+		updateLiveMessagesExecutor?.awaitTermination(1, TimeUnit.MINUTES);
 	}
 
 	private fun hasLocalUserPhoto(user: TdApi.User): Boolean {
@@ -326,7 +361,7 @@ class TelegramHelper private constructor() {
 							TdApi.Messages.CONSTRUCTOR -> {
 								val messages = (obj as TdApi.Messages).messages
 								for (message in messages) {
-									if (!message.isOutgoing) {
+									if (!message.isOutgoing && message.content is TdApi.MessageLocation) {
 										usersLiveMessages[message.id] = message
 									}
 								}

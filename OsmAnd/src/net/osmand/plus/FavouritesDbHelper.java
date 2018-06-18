@@ -14,7 +14,7 @@ import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
 import net.osmand.util.Algorithms;
 
-import org.apache.tools.bzip2.CBZip2OutputStream;
+import org.apache.commons.compress.compressors.bzip2.BZip2CompressorOutputStream;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -324,15 +324,11 @@ public class FavouritesDbHelper {
 	private void backup(File backupFile, File externalFile) {
 		try {
 			File f = new File(backupFile.getParentFile(), backupFile.getName());
-			FileOutputStream fout = new FileOutputStream(f);
-			fout.write('B');
-			fout.write('Z');
-			CBZip2OutputStream out = new CBZip2OutputStream(fout);
+			BZip2CompressorOutputStream out = new BZip2CompressorOutputStream( new FileOutputStream(f));
 			FileInputStream fis = new FileInputStream(externalFile);
 			Algorithms.streamCopy(fis, out);
 			fis.close();
 			out.close();
-			fout.close();
 		} catch (Exception e) {
 			log.warn("Backup failed", e);
 		}

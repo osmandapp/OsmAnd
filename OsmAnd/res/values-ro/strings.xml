@@ -440,7 +440,7 @@
 	<string name="local_index_mi_restore">Activați</string>
 	<string name="local_index_mi_backup">Dezactivați</string>
 	
-	<string name="local_index_mi_reload">Reîncărcați de pe cardul SD</string>
+	
 	<string name="shared_string_download">Descărcați</string>
 	
 	<string name="local_index_poi_data">Date despre POI</string>
@@ -1100,7 +1100,7 @@
 	<string name="driving_region_canada">Canada</string>
 	<string name="driving_region_europe_asia">Europa și Asia</string>
 	<string name="driving_region_uk">Marea Britanie, India, Australia și altele</string>
-    <string name="announce_gpx_waypoints">Anunță punctele de referință GPX</string>
+    
     <string name="speak_title">Anunță…</string>
 	<string name="speak_street_names">Anunță numele străzilor (TTS)</string>
     <string name="speak_speed_limit">Anunță limitarea de viteză</string>
@@ -1208,7 +1208,7 @@
     <string name="distance">Distanță</string>
     <string name="shared_string_all">Toate</string>
     <string name="shared_string_waypoints">Puncte de referință</string>
-    <string name="targets">Destinații</string>
+    
     <string name="download_additional_maps">Descarcă hărțile lipsă %1$s (%2$d MB)?</string>
     <string name="shared_string_more">Mai mult…</string>
     <string name="rendering_value_browse_map_name">Derulează hartă</string>  
@@ -1602,7 +1602,7 @@
     <string name="access_from_map_description">Butonul de meniu lansează panoul frontal, nu meniul propriu-zis</string>
     <string name="show_on_start_description">\'Închide\' Lansează direct de pe ecranul cu harta</string>
     <string name="copied_to_clipboard">Copiat în clipboard</string>
-    <string name="release_2_2">" • O interfață nouă cu context sensibil la atingere a locațiilor pe hartă și alte ecrane\n\n • Harta este lansată direct, doar dacă nu este selectată \'Afișează panoul frontal la pornire\'\n\n • Configurează ce elemente să fie afișate pe panoul frontal\n\n • Ignoră panoul frontal dacă dorești utilizarea meniurilor în aplicație\n\n • Descărcarea hărților sau a regiunilor se poate face direct prin atingere pe harta lumii\n\n • Căutarea punctelor de interes (POI) suportă mai multe criterii\n\n • Îmbunatățit funcționalitatea de editare POI și OSM\n\n • Refăcută structura de descărcare a hărților și a interfeței\n\n și multe altele... "</string>
+    
     <string name="osm_edit_commented_note">Nota OSM comentată</string>
     <string name="osm_edit_removed_note">Nota OSM ștearsă</string>
     <string name="osm_edit_created_note">Nota OSM creată</string>

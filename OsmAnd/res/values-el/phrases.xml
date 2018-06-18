@@ -301,9 +301,8 @@
 	<string name="poi_service_tyres">Ελαστικά</string>
 	<string name="poi_vehicle_inspection">ΚΤΕΟ</string>
 	<string name="poi_car_wash">Πλυντήριο αυτοκινήτων</string>
-	<string name="poi_fuel">Πρατήριο καυσίμων</string>
-	<string name="synonyms_poi_fuel">Πρατήριο καυσίμων;Βενζινάδικο</string>
-
+	<string name="poi_fuel">Πρατήριο καυσίμων;Βενζινάδικο</string>
+	
 	<string name="poi_fuel_diesel">Ντίζελ</string>
 	<string name="poi_fuel_gtl_diesel">Ντίζελ GTL</string>
 	<string name="poi_fuel_hgv_diesel">Ντίζελ HGV</string>
@@ -919,8 +918,7 @@
 	<string name="poi_theatre_genre_circus">Τσίρκο</string>
 	<string name="poi_gallery">Πινακοθήκη</string>
 	<string name="poi_dance_floor">Πίστα χορού</string>
-	<string name="poi_nightclub">Νυκτερινό κέντρο</string>
-	<string name="synonyms_poi_nightclub">Ντίσκο</string>
+	<string name="poi_nightclub">Νυκτερινό κέντρο;Ντίσκο</string>
 	<string name="poi_stripclub">Στριπτιζάδικο</string>
 	<string name="poi_beach_resort">Παραλιακό θέρετρο</string>
 	<string name="poi_dog_park">Πάρκο σκύλων</string>
@@ -2802,4 +2800,57 @@
 	<string name="poi_free_flying_paragliding_no">Αλεξίπτωτο πλαγιάς: όχι</string>
 	<string name="poi_free_flying_hanggliding_yes">Αιωροπτερισμός</string>
 	<string name="poi_free_flying_hanggliding_no">Αιωροπτερισμός: όχι</string>
+	<string name="poi_free_flying_site_orientation_n">Προσανατολισμός τόπου ελεύθερης πτήσης: Β</string>
+	<string name="poi_free_flying_site_orientation_ne">Προσανατολισμός τόπου ελεύθερης πτήσης: ΒΑ</string>
+	<string name="poi_free_flying_site_orientation_e">Προσανατολισμός τόπου ελεύθερης πτήσης: Α</string>
+	<string name="poi_free_flying_site_orientation_se">Προσανατολισμός τόπου ελεύθερης πτήσης: ΝΑ</string>
+	<string name="poi_free_flying_site_orientation_s">Προσανατολισμός τόπου ελεύθερης πτήσης: Ν</string>
+	<string name="poi_free_flying_site_orientation_sw">Προσανατολισμός τόπου ελεύθερης πτήσης: ΝΔ</string>
+	<string name="poi_free_flying_site_orientation_w">Προσανατολισμός τόπου ελεύθερης πτήσης: Δ</string>
+	<string name="poi_free_flying_site_orientation_nw">Προσανατολισμός τόπου ελεύθερης πτήσης: ΒΔ</string>
+	<string name="poi_free_flying_no_flight_time">Χωρίς χρόνο πτήσης (ελεύθερη πτήση)</string>
+	<string name="poi_free_flying_guest_guidelines_yes">Οδηγίες επισκεπτών: ναι</string>
+	<string name="poi_free_flying_guest_guidelines_no">Οδηγίες επισκεπτών: όχι</string>
+
+	<string name="poi_tanning_salon">Σολάριουμ</string>
+
+	<string name="poi_sanitary_dump_station">Σταθμός υγιεινής απόρριψης</string>
+
+	<string name="poi_medical_system_western_yes">Δυτικό</string>
+	<string name="poi_medical_system_chinese_yes">Παραδοσιακό κινέζικο</string>
+	<string name="poi_medical_system_ayurveeda_yes">Αγιουρβεντικό</string>
+	<string name="poi_medical_system_kampo_yes">Κάμπο</string>
+	<string name="poi_medical_system_mongolian_yes">Παραδοσιακό μογγολικό</string>
+	<string name="poi_medical_system_tibetan_yes">Παραδοσιακό θιβετιανό</string>
+	<string name="poi_medical_system_sidda_yes">Σίντα</string>
+	<string name="poi_medical_system_unani_yes">Ουνάνι</string>
+
+	<string name="poi_health_service_nursing_yes">Υπηρεσία υγείας: περίθαλψη: ναι</string>
+	<string name="poi_health_service_nursing_no">Υπηρεσία υγείας: περίθαλψη: όχι</string>
+	<string name="poi_health_service_counselling_yes">Υπηρεσία υγείας: συμβουλευτική: ναι</string>
+	<string name="poi_health_service_counselling_no">Υπηρεσία υγείας: συμβουλευτική: όχι</string>
+	<string name="poi_health_service_examination_yes">Υπηρεσία υγείας: εξετάσεις: ναι</string>
+	<string name="poi_health_service_examination_no">Υπηρεσία υγείας: εξετάσεις: όχι</string>
+	<string name="poi_free_flying_rigid_yes">Άκαμπτο</string>
+	<string name="poi_free_flying_rigid_no">Άκαμπτη ελεύθερη πτήση: όχι</string>
+	<string name="poi_health_service_child_care_yes">Υπηρεσία υγείας: φύλαξη παιδιών: ναι</string>
+	<string name="poi_health_service_child_care_no">Υπηρεσία υγείας: φύλαξη παιδιών: όχι</string>
+	<string name="poi_health_service_prevention_yes">Υπηρεσία υγείας: πρόληψη: ναι</string>
+	<string name="poi_health_service_prevention_no">Υπηρεσία υγείας: πρόληψη: όχι</string>
+	<string name="poi_health_service_prevention_vaccination_yes">Υπηρεσία υγείας: εμβολιασμός: ναι</string>
+	<string name="poi_health_service_prevention_vaccination_no">Υπηρεσία υγείας: εμβολιασμός: όχι</string>
+	<string name="poi_health_service_support_yes">Υπηρεσία υγείας: υποστήριξη: ναι</string>
+	<string name="poi_health_service_support_no">Υπηρεσία υγείας: υποστήριξη: όχι</string>
+	<string name="poi_health_service_test_yes">Υπηρεσία υγείας: εξέταση: ναι</string>
+	<string name="poi_health_service_test_no">Υπηρεσία υγείας: εξέταση: όχι</string>
+
+	<string name="poi_health_facility_type_office">Ιατρείο</string>
+	<string name="poi_health_facility_type_field_hospital">Τύπος ιατρικής εγκατάστασης: κινητό νοσοκομείο</string>
+	<string name="poi_health_facility_type_counselling_centre">Τύπος ιατρικής εγκατάστασης: συμβουλευτικό κέντρο</string>
+	<string name="poi_health_facility_type_laboratory">Τύπος ιατρικής εγκατάστασης: εργαστήριο</string>
+	<string name="poi_health_facility_type_therapy">Τύπος ιατρικής εγκατάστασης: θεραπεία</string>
+	<string name="poi_health_facility_type_department">Τύπος ιατρικής εγκατάστασης: τμήμα</string>
+	<string name="poi_health_facility_type_dispensary">Τύπος ιατρικής εγκατάστασης: κλινική</string>
+	<string name="poi_health_facility_type_first_aid">Τύπος ιατρικής εγκατάστασης: πρώτες βοήθειες</string>
+	<string name="poi_health_facility_type_nursing_home">Τύπος ιατρικής εγκατάστασης: γηροκομείο</string>
 	</resources>

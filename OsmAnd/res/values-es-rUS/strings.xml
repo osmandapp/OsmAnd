@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
 
     <string name="rendering_attr_hideHouseNumbers_name">Números de casa</string>
     <string name="copying_osmand_file_failed">Falló al copiar archivos</string>
@@ -236,8 +235,8 @@ Lon %2$s</string>
     <string name="distance">Distancia</string>
     <string name="shared_string_all">Todos</string>
     <string name="shared_string_waypoints">Puntos de referencia</string>
-    <string name="targets">Destinos</string>
-    <string name="announce_gpx_waypoints">Puntos GPX</string>
+    
+    
     <string name="download_additional_maps">¿Descargar los %1$s mapas que faltan (%2$d MB)?</string>
     <string name="rendering_value_bicycle_name">Bicicleta</string>
     <string name="rendering_value_pedestrian_name">Peatón</string>
@@ -1223,7 +1222,7 @@ Lon %2$s</string>
     <string name="local_index_descr_title">Gestionar mapas.</string>
     <string name="local_index_mi_restore">Activar</string>
     <string name="local_index_mi_backup">Desactivar</string>
-    <string name="local_index_mi_reload">Recargar desde la tarjeta de memoria</string>
+    
     <string name="local_index_poi_data">Datos de PDI</string>
     <string name="local_index_address_data">Datos de direcciones</string>
     <string name="local_index_transport_data">Datos de transporte público</string>
@@ -1921,25 +1920,7 @@ Lon %2$s</string>
     <string name="rendering_attr_roadStyle_description">Estilo del camino</string>
     <string name="poi_dialog_reopen">Reabrir</string>
 	<string name="osm_save_offline">Guardar sin conexión</string>
-    <string name="release_2_2">• Nueva interfaz de usuario sensible al contexto para acceder a ubicaciones en el mapa y en otras pantallas. 
-\n 
-\n• La pantalla del mapa ahora se inicia directamente, a menos que «Mostrar panel de control al iniciar la aplicación», este seleccionado. 
-\n 
-\n• Configura cuál y cómo se mostrarán las tarjetas en el panel de control. 
-\n 
-\n• Omite el panel del control, si quieres controlar la aplicación desde el menú. 
-\n 
-\n• Para descargar mapas, las regiones pueden seleccionarse directamente pulsando sobre el mapa mundial. 
-\n 
-\n• Mejor recálculo de la ruta (después de reiterados intentos, el motor ahora sugiere una ruta diferente). 
-\n 
-\n• La búsqueda de PDI, ahora soporta consultas más específicas. 
-\n 
-\n• Mejoras en PDI y funcionalidad de edición OSM. 
-\n 
-\n• Se rediseñó la estructura e interfaz de los datos de mapas. 
-\n 
-\n y más…</string>
+    
     <string name="copied_to_clipboard">Copiado al portapapeles</string>
     <string name="use_dashboard_btn">Usar panel de control</string>
     <string name="use_drawer_btn">Usar menú</string>
@@ -2086,17 +2067,7 @@ Lon %2$s</string>
     <string name="shared_string_move_down">Bajar ↓</string>
     <string name="finish_navigation">Finalizar navegación</string>
     <string name="avoid_road">Evitar camino</string>
-    <string name="release_2_3">• OSM Live. Apoya a los editores y desarrolladores del mapa y obtén actualizaciones del mapa cada hora. 
-\n 
-\n • Marcadores del mapa. Una nueva forma de elegir rápidamente lugares en el mapa. 
-\n 
-\n • Mayor detalle en el mapa OSM con escudos viales de países específicos y muchas otras nuevas características. 
-\n 
-\n • Mejora visual en la preparación de la ruta. 
-\n 
-\n • Muchas mejoras en el menú contextual del mapa, como la búsqueda contextual de direcciones. 
-\n 
-\n y más…</string>
+    
     <string name="storage_permission_restart_is_required">La aplicación ya permite escribir en el almacenamiento externo, pero se debe reiniciar la aplicación.</string>
     <string name="full_report">Informe completo</string>
     <string name="open_street_map_login_and_pass">Nombre de usuario y contraseña de OpenStreetMap</string>
@@ -2168,19 +2139,7 @@ Lon %2$s</string>
     <string name="lang_hsb">Sorabo (Alto)</string>
     <string name="share_history_subject">compartido vía OsmAnd</string>
     
-    <string name="release_2_4">• Nueva y muy poderosa búsqueda por texto libre 
-\n 
-\n • Integración con el sistema de audio del automóvil y altavoces del teléfono vía Bluetooth 
-\n 
-\n • Mejoras en la guía de ruta, indicaciones por voz y de carriles de giro 
-\n 
-\n • Mejoras en la capa de transporte con visualización del recorrido 
-\n 
-\n • Se añadieron más idiomas y ahora soporta idiomas regionales 
-\n 
-\n • Muchas otras mejoras y correcciones de errores 
-\n 
-\n y más…</string>
+    
     <string name="confirmation_to_delete_history_items">¿Quitar elementos marcados del «Historial»?</string>
     <string name="show_something_on_map">Mostrar «%1$s» en el mapa</string>
     <string name="dist_away_from_my_location">Buscar en %1$s alrededor</string>
@@ -2260,19 +2219,7 @@ Lon %2$s</string>
     <string name="shared_string_recorded">Grabado</string>
     <string name="shared_string_record">Grabar</string>
     <string name="gpx_logging_no_data">Sin datos</string>
-    <string name="release_2_5">• Ahora se pueden pulsar los iconos del mapa 
-\n 
-\n • Nuevo filtro de búsqueda PDI potente: Busca, p.e. restaurantes por tipo de cocina o campamentos con instalaciones específicas 
-\n 
-\n • Nuevo estilo de mapa topográfico (Topo) para ciclistas y senderistas 
-\n 
-\n • Mejoras en la grabación de viaje 
-\n 
-\n • Mejoras en la notificación de navegación (Android Wear) 
-\n 
-\n • Muchas otras mejoras y correcciones de errores 
-\n 
-\n y más…</string>
+    
     <string name="trip_rec_notification_settings">Activar inicio rápido de grabación</string>
     <string name="trip_rec_notification_settings_desc">Muestra una notificación del sistema que permite iniciar la grabación del viaje.</string>
     <string name="shared_string_notifications">Notificaciones</string>
@@ -2391,27 +2338,7 @@ Lon %2$s</string>
     <string name="quick_action_page_list_descr">Este botón de acción, muestra la siguiente lista.</string>
     <string name="auto_split_recording_title">División automática de grabaciones en intervalos</string>
 	<string name="auto_split_recording_descr">Iniciar nuevo segmento luego de un hueco de 6 min, nueva traza luego de un hueco de 2 h, o nuevo archivo luego de un hueco más largo si ha cambiado la fecha.</string>
-    <string name="release_2_6">• Nueva función: Botón de acción rápida 
-\n 
-\n • Mejorada la respuesta de gestos táctiles (p.e. panorámicas y zooms simultáneos) 
-\n 
-\n • La tipografía del nuevo mapa abarca más regiones 
-\n 
-\n • Soporte TTS para idiomas regionales (y acentos) 
-\n 
-\n • Mejorada la visibilidad en varios estilos de mapas y Wikipedia 
-\n 
-\n • Soporte para «Código de Ubicación Abierto» (Open Location Code) 
-\n 
-\n • Visualización del perfil de elevación, pendiente y velocidad para las trazas GPX grabadas y la ruta calculada 
-\n 
-\n • Opción de «Estilo de conducción» y mejoras lógicas en el cálculo de rutas para bicicleta 
-\n 
-\n • Ajustes de datos de altitud en la navegación para bicicleta 
-\n 
-\n • Varias otras mejoras y corrección de errores 
-\n 
-\n y más…</string>
+    
 	<string name="rendering_attr_depthContours_description">Mostrar curvas y puntos de profundidad.</string>
     <string name="rendering_attr_depthContours_name">Curvas de profundidad náuticas</string>
 	<string name="route_altitude">Elevación de la ruta</string>
@@ -2688,15 +2615,7 @@ Lon %2$s</string>
     
     
     <string name="min_max">Min/Máx</string>
-    <string name="release_2_7">• Complemento de Mapillary con imágenes a nivel de calle 
-\n 
-\n • Control de regla para medir distancias 
-\n 
-\n • División de intervalos GPX con información detallada sobre la traza 
-\n 
-\n • Otras mejoras y corrección de errores
-\n
-\n</string>
+    
     <string name="rendering_value_translucent_pink_name">Rosa translúcido</string>
     <string name="quick_action_resume_pause_navigation">Pausar/reanudar navegación</string>
     <string name="quick_action_resume_pause_navigation_descr">Este botón de acción, pausa o reanuda la navegación.</string>
@@ -2802,12 +2721,7 @@ Lon %2$s</string>
     <string name="osn_modify_dialog_error">No se pudo modificar la nota</string>
     <string name="osn_modify_dialog_title">Modificar nota</string>
     <string name="context_menu_item_modify_note">Modificar nota de OSM</string>
-    <string name="release_2_8">"• Marcadores del mapa totalmente rediseñados con líneas direccionales y planificación de rutas 
-\n 
-\n • La herramienta de medición de distancias permite el ajuste al camino y guardar puntos como una traza 
-\n 
-\n • OSM Live: Corrección de errores, nuevos datos en el servidor cada 30 minutos, actualizaciones implementadas en la navegación 
-\n "</string>
+    
     <string name="rendering_value_darkyellow_name">Amarillo oscuro</string>
     <string name="show_map">Mostrar mapa</string>
     <string name="route_is_calculated">Ruta calculada</string>
@@ -2905,26 +2819,7 @@ Lon %2$s</string>
     <string name="lang_lo">Laosiana</string>
     <string name="will_open_tomorrow_at">Abre mañana a las</string>
     <string name="rendering_attr_hidePOILabels_name">Etiquetas de PDI</string>
-    <string name="release_2_9">• Menú contextual actualizado: Muestra cuando el PDI se encuentra abierto o cerrado. 
-\n 
-\n • Menú de transporte: Todas las rutas disponibles, están ahora en la parte superior. 
-\n 
-\n • Wikipedia: Se añadió el botón para abrir el artículo original y se actualizó la apariencia de los artículos 
-\n 
-\n • Navegación: Se añadió la posibilidad de intercambiar los puntos de inicio y fin con una sola pulsación 
-\n 
-\n • Notas multimedia: Se añadió el orden por tipo y fecha 
-\n 
-\n • Edición OSM: Ahora muestra un icono y el nombre de la categoría del PDI, también muestra las acciones completadas. 
-\n 
-\n • Ingreso rápido de coordenadas: Nueva pantalla de ingreso para la creación rápida de marcadores 
-\n 
-\n • La detección de señales de alto, ahora considera la dirección de desplazamiento 
-\n 
-\n • Nuevo algoritmo que proporciona valores significativos de ascenso y descenso para trazas GPX. 
-\n 
-\n • El tiempo de caminata es consciente del terreno ascendente (regla de Naismith). 
-\n</string>
+    
     <string name="day_off_label">cerrado (día libre)</string>
     <string name="winter_and_ski_renderer">Invierno y esquí</string>
     <string name="touring_view_renderer">Vista turística</string>
@@ -3018,7 +2913,7 @@ Lon %2$s</string>
     
     <string name="unlimited_downloads">Descargas ilimitadas</string>
     <string name="wikipedia_offline">Wikipedia sin conexión</string>
-    <string name="contour_lines_sea_depth">Curvas de nivel + Profundidad náutica</string>
+    
     <string name="unlock_all_features">Desbloquear todas las características de OsmAnd</string>
 
     <string name="travel_card_update_descr">Nuevos datos disponibles de Wikiviajes, actualiza para disfrutar de ellos.</string>

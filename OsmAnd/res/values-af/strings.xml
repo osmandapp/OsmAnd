@@ -327,7 +327,7 @@
   <string name="local_index_mi_restore">Aktiveer</string>
   <string name="local_index_mi_backup">Deaktiveer</string>
   
-  <string name="local_index_mi_reload">Herlaai van sd kaart</string>
+  
   <string name="shared_string_download">Aflaai</string>
   
   <string name="local_index_poi_data">Interessante plek inligting</string>
@@ -1162,7 +1162,7 @@
     <string name="route_via">Via:</string>
     <string name="route_from">Van:</string>
     <string name="osb_author_dialog_password">OSM kodewoord (opsioneel)</string>
-	<string name="announce_gpx_waypoints">Kondig GPX oorgangspunte aan</string>
+	
     <string name="speak_title">Aankondig…</string>
 	<string name="speak_descr">Verstel aankondig van straatname, verkeerswaarskuwings(geforseerde stoppe, spoed-hobbels), spoedkamera, spoedbeperkings</string>
 	<string name="speak_street_names">Kondig straatname aan(TTS)</string>

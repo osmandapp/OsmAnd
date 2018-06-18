@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
   <string name="asap">Швидко</string>
   
   <string name="route_roundabout">Круговий рух : %1$d з’їзд</string>
@@ -289,7 +288,7 @@
   <string name="local_index_mi_restore">Активувати</string>
   <string name="local_index_mi_backup">Деактивувати</string>
   
-  <string name="local_index_mi_reload">Оновити з SD-картки</string>
+  
   <string name="shared_string_download">Завантажити</string>
   
   <string name="local_index_poi_data">POI дані</string>
@@ -1225,7 +1224,7 @@
     <string name="context_menu_item_directions_to">Маршрут до</string>
     <string name="context_menu_item_directions_from">Маршрут від</string>
     <string name="route_to">До:</string>
-    <string name="announce_gpx_waypoints">Шляхові точки GPX</string>
+    
     <string name="speak_title">Оголошувати…</string>
 	<string name="speak_descr">Налаштувати оголошення назв вулиць, дорожніх обмежень (вимушені зупинки, лежачі поліцейські), попередження про камери контролю швидкості, обмеження швидкості.</string>
 	<string name="speak_street_names">Назви вулиць (TTS)</string>
@@ -1297,22 +1296,22 @@
     <string name="shared_string_tracks">Треки</string>
     <string name="shared_string_my_favorites">Закладки</string>
     <string name="shared_string_my_places">Місця</string>
-    <string name="osmo_user_joined">Користувач %1$s приєднався до групи %2$s</string>
-    <string name="osmo_user_left">Користувач %1$s покинув групу %2$s</string>
-    <string name="osmo_show_group_notifications">Показувати сповіщення групи</string>
-    <string name="osmo_show_group_notifications_descr">Показувати сповіщення, коли користувач приєднується або полишає групу.</string>
-    <string name="osmo_follow">Стежити</string>
-    <string name="osmo_sign_in">Увійти</string>
-    <string name="osmo_create_groups_confirm">Для створення групи, Ви повинні бути зареєстрованим користувачем OsMo.</string>
-    <string name="osmo_credentials_not_valid">Ваші облікові дані OsMo хибні.</string>
-    <string name="osmo_regenerate_login_ids_confirm">Ви впевнені у потребі перестворення персональних ID? Усі пристрої, зв’язані з Вами не зможуть відстежити ваше місцезнаходження.</string>
-    <string name="osmo_regenerate_login_ids">Перестворити ID користувача</string>
-    <string name="osmo_cancel_moving_target">Скасувати стеження</string>
-    <string name="osmo_center_location">По центру екрану</string>
-    <string name="osmo_set_moving_target">Почати стеження</string>
-    <string name="osmo_use_server_name">Зареєстроване ім’я</string>
-    <string name="osmo_connect_to_my_nickname">Прізвисько</string>
-    <string name="osmo_user_name">Користувач</string>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 	
 	<string name="rendering_value_pink_name">рожевий</string>
 	
@@ -1630,7 +1629,7 @@
     <string name="index_tours">Подорожі</string>
     <string name="shared_string_all">Усі</string>
     <string name="shared_string_waypoints">Шляхові точки</string>
-    <string name="targets">Цілі</string>
+    
     <string name="way_alarms">Перешкоди</string>
     <string name="speak_favorites">Довколишні закладки</string>
     <string name="speak_poi">Довколишні POI</string>
@@ -2220,23 +2219,7 @@
     <string name="av_locations_descr">Файл GPX з координатами нотаток.</string>
     <string name="show_free_version_banner_description">Навіть, якщо ви придбали платну версію, ви все ще можете бачити банер для безкоштовної версії.</string>
     <string name="dashboard_or_drawer_description">У вас зараз є вибір керувати застосунком через гнучку панель керування або через звичайне мені. Ваші вподобання завжди можна змінити в параметрах панелі керування.</string>
-    <string name="release_2_2">\\u2022 Нові елементи інтерфейсу, що залежать від поточного стану, для вибору місця на мапи та на інших екранах 
-\n 
-\n • Екран з мапою відкривається під час запуску, якщо тільки не активовано функцію „Показувати панель керування під час запуску“ 
-\n 
-\n • Налаштування того, які і як елементи будуть показуватись на панелі керування 
-\n 
-\n • Оминання панелі керування, якщо ви надаєте перевагу керуванню роботою через меню 
-\n 
-\n • Для завантаження мапи, територію можна обрати безпосередньо на мапі світу 
-\n 
-\n • Пошук ПОІ тепер підтримує більш конкретні запити 
-\n 
-\n • Покращено функції редагування ПОІ та додавання даних в OSM 
-\n 
-\n • Перероблено інтерфейс та структуру звантаження мап 
-\n 
-\n та багато іншого…</string>
+    
     
     <string name="map_marker_1st">Перша позначка мапи</string>
     <string name="map_marker_2nd">Друга позначка мапи</string>
@@ -2296,17 +2279,7 @@
     <string name="no_map_markers_found">Додайте позначки на мапі</string>
     <string name="no_waypoints_found">Точки шляху не знайдені</string>
     <string name="storage_permission_restart_is_required">Тепер застосунок має можливість записувати у зовнішнє сховище. Потрібне ручне перезавантаження.</string>
-    <string name="release_2_3">\\u2022 OSM Live. Підтримка маперів та розробників; надає щогодинне оновлення даних.
-\n
-\n • Позначки. Новий спосіб швидко позначити місце на мапі. 
-\n
-\n • Більш деталізовані мапи OSM з позначками доріг в залежності від країни та великою кількістю нових обʼєктів. 
-\n
-\n • Оновлений зовнішній вигляд та підготовка маршрутів. 
-\n
-\n • Багато покращень в контекстному меню мапи, наприклад контекстний пошук адреси. 
-\n
-\nта багато іншого…</string>
+    
     <string name="shared_string_move_up">Вгору</string>
     <string name="shared_string_move_down">Вниз</string>
     <string name="finish_navigation">Закінчити навігацію</string>
@@ -2386,19 +2359,7 @@
     <string name="shared_string_recorded">Записано</string>
     <string name="shared_string_record">Запис</string>
     <string name="gpx_logging_no_data">Немає даних</string>
-    <string name="release_2_5">Клікабельні іконки на мапі 
-\n 
-\n• Гнучка фільтрація POI в пошуку: шукайте ресторани за типом кухні, кемпінги за наявністю зручностей 
-\n 
-\n• Новий стиль мапи Topo для пішого туризму і велосипедистів 
-\n 
-\n• Покращений запис поїздки (нові налаштування) 
-\n 
-\n• Покращені навігаційні повідомлення (Android Wear) 
-\n 
-\n• Безліч інших поліпшень й виправлень помилок 
-\n 
-\nі багато іншого …</string>
+    
     <string name="rendering_attr_contourColorScheme_description">Колірна схема горизонталей</string>
     <string name="save_track_min_speed">Мінімальна швидкість для запису</string>
     <string name="save_track_min_speed_descr">Виберіть мінімальну швидкість, при перевищенні якої точка буде записана в трек.</string>
@@ -2468,19 +2429,7 @@
     <string name="back_to_search">Повернення до пошуку</string>
     <string name="confirmation_to_delete_history_items">Вилучити вибране з історії пошуку?</string>
     <string name="show_something_on_map">Показати %1$s на мапі</string>
-    <string name="release_2_4">\\u2022 Новий повнотекстовий пошук
-\n
-\n• Інтеграція через Bluetooth автомобільних аудіосистем/колонок 
-\n
-\n• Покращена навігація за маршрутом, голосові підказки, відображення смуг руху 
-\n
-\n• Покращений шар транспорту з відображенням маршрутів 
-\n
-\n• Більше підтримуваних мов інтерфейсу 
-\n
-\n• Безліч поліпшень й виправлень помилок 
-\n
-\nта багато іншого…</string>
+    
     <string name="dist_away_from_my_location">Шукати за %1$s від місця розташування</string>
     <string name="share_history_subject">поділилися через OsmAnd</string>
     <string name="search_categories">Категорії</string>
@@ -2565,27 +2514,7 @@
 	<string name="auto_split_recording_title">Авто-розрив запису після перерви</string>
 	<string name="auto_split_recording_descr">Почати новий сегмент після 6 хвилинної перерви, новий трек після 2 годинної перерви, або новий файл після тривалої перерви (якщо змінилася дата).</string>
     <string name="select_gpx_folder">Виберіть теку GPX-треку</string>
-    <string name="release_2_6">"\\u2022 Нова функція: кнопка швидкої дії
-\n 
-\n • Покращена відповідь на жести сенсорного екрану 
-\n 
-\n • Новий шрифт мапи охоплює більше мов 
-\n 
-\n • Підтримка синтезу мовлення (TTS) для варіантів регіональних мов 
-\n 
-\n • Покращення видимості в декількох стилях мап та Вікіпедії 
-\n 
-\n • Підтримка Open Location Code (OLC) 
-\n 
-\n • Показ профілю висоти й ухилу для записаного GPX (а також швидкості) і для побудованого маршруту 
-\n 
-\n • Параметр „Стиль водіння“ та покращення логіки для побудови маршруту для велосипеда 
-\n 
-\n • Налаштування для використання даних про висоти в побудові велосипедного маршруту 
-\n 
-\n • Кілька інших поліпшень й виправлень помилок 
-\n 
-\n  та багато іншого…"</string>
+    
 	<string name="navigate_point_olc_info_invalid">Некоректний OLC
 </string>
     <string name="navigate_point_olc_info_short">Короткий OLC 
@@ -2915,15 +2844,7 @@
     <string name="max_min">Макс/мін</string>
     
     <string name="min_max">Мін/макс</string>
-    <string name="release_2_7">• Втулок Mapillary з вуличними зображеннями 
-\n 
-\n • Віджет-лінійка для вимірювання дистанцій 
-\n 
-\n • Розділені GPX-інтервали з докладною інформацією про Ваш трек 
-\n 
-\n • Інші поліпшення й виправлення помилок
-\n
-\n</string>
+    
     <string name="rendering_value_translucent_pink_name">Напівпрозорий рожевий</string>
     <string name="quick_action_resume_pause_navigation">Відновити/призупинити навігацію</string>
     <string name="quick_action_resume_pause_navigation_descr">Натисніть цю кнопку, щоб призупинити або відновити навігацію.</string>
@@ -3034,11 +2955,7 @@
     <string name="route_is_calculated">Маршрут розраховується</string>
     <string name="round_trip">Подорож туди і назад</string>
     <string name="plan_route_no_markers_toast">Ви повинні додати принаймні один маркер, щоб використовувати цю функцію.</string>
-    <string name="release_2_8">• Повністю перероблені маркери мапи, з направляючими лініями і плануванням маршруту 
-\n• Інструмент вимірювання відстані, з прив’язкою до дороги і збереженням точок в якості треку 
-\n• OsmAnd Live: виправлення помилок, оновлення даних на сервері кожні 30 хвилин, поновлення враховуються в навігації
-\n
-\n</string>
+    
     <string name="rendering_value_darkyellow_name">Темно-жовтий</string>
     <string name="enter_new_name">Введіть нове ім’я</string>
     <string name="shared_string_back">Назад</string>
@@ -3140,16 +3057,7 @@
     <string name="will_open_tomorrow_at">Відкриється завтра о</string>
     <string name="rendering_attr_hidePOILabels_name">Підписи до цікавих точок</string>
     <string name="shared_string_without_name">Без назви</string>
-    <string name="release_2_9">• Виявлення стоп-сигналів тепер враховує напрямок руху
-\n• Новий алгоритм, що надає дійсні значення підйому/спуску для GPX-треків 
-\n• Час ходьби в залежності від місцевості (підйому) (правило Нейсміта)
-\n• Оновлення контекстного меню: вивід коли відкриється/закриється POI
-\n• Меню транспорту: винесено наверх усі доступні маршрути
-\n• Вікіпедія: додано кнопку переходу до статті, оновлено зовнішній вигляд статті
-\n• Маршрут: додано зміну початкової і кінцевої точки
-\n• Нотатки: додано сортування за типом й датою
-\n• OSM правки: вивід піктограми й назви категорії POI, відображення завершення дій
-\n• Новий екран швидкого введення координат, для швидкого створення маркерів</string>
+    
     <string name="lang_lo">Лаоська</string>
     <string name="copy_location_name">Копіювати назву точки/POI</string>
     <string name="toast_empty_name_error">Місце не має назви</string>

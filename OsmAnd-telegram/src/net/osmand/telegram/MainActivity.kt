@@ -66,7 +66,10 @@ class MainActivity : AppCompatActivity(), TelegramListener {
 
 			// specify an viewAdapter (see also next example)
 			adapter = chatViewAdapter
+		}
 
+		if (!LoginDialogFragment.welcomeDialogShown) {
+			LoginDialogFragment.showWelcomeDialog(supportFragmentManager)
 		}
 
 		telegramAuthorizationRequestHandler = telegramHelper.setTelegramAuthorizationRequestHandler(object : TelegramAuthorizationRequestListener {
@@ -132,9 +135,7 @@ class MainActivity : AppCompatActivity(), TelegramListener {
 		runOnUi {
 			val fm = supportFragmentManager
 			when (newTelegramAuthorizationState) {
-				TelegramAuthorizationState.READY,
-				TelegramAuthorizationState.CLOSED,
-				TelegramAuthorizationState.UNKNOWN -> LoginDialogFragment.dismiss(fm)
+				TelegramAuthorizationState.READY -> LoginDialogFragment.dismiss(fm)
 				else -> Unit
 			}
 			invalidateOptionsMenu()
@@ -173,7 +174,10 @@ class MainActivity : AppCompatActivity(), TelegramListener {
 	}
 
 	override fun onTelegramUserChanged(user: TdApi.User) {
-
+		val message = telegramHelper.getUserMessage(user)
+		if (message != null) {
+			app.showLocationHelper.showLocationOnMap(message)
+		}
 	}
 
 	override fun onTelegramError(code: Int, message: String) {
@@ -213,6 +217,13 @@ class MainActivity : AppCompatActivity(), TelegramListener {
 		}
 	}
 
+	fun loginTelegram() {
+		if (telegramHelper.getTelegramAuthorizationState() != TelegramAuthorizationState.CLOSED) {
+			telegramHelper.logout()
+		}
+		telegramHelper.init()
+	}
+
 	fun logoutTelegram(silent: Boolean = false) {
 		if (telegramHelper.getTelegramAuthorizationState() == TelegramAuthorizationState.READY) {
 			telegramHelper.logout()
@@ -238,7 +249,7 @@ class MainActivity : AppCompatActivity(), TelegramListener {
 	override fun onOptionsItemSelected(item: MenuItem?): Boolean {
 		return when (item?.itemId) {
 			LOGIN_MENU_ID -> {
-				telegramHelper.init()
+				loginTelegram()
 				true
 			}
 			LOGOUT_MENU_ID -> {
@@ -309,12 +320,11 @@ class MainActivity : AppCompatActivity(), TelegramListener {
 	}
 
 	fun applyAuthParam(loginDialogFragment: LoginDialogFragment?, loginDialogType: LoginDialogType, text: String) {
-		loginDialogFragment?.updateDialog(LoginDialogType.SHOW_PROGRESS)
+		loginDialogFragment?.showProgress()
 		when (loginDialogType) {
 			LoginDialogType.ENTER_PHONE_NUMBER -> telegramAuthorizationRequestHandler?.applyAuthenticationParameter(TelegramAuthenticationParameterType.PHONE_NUMBER, text)
 			LoginDialogType.ENTER_CODE -> telegramAuthorizationRequestHandler?.applyAuthenticationParameter(TelegramAuthenticationParameterType.CODE, text)
 			LoginDialogType.ENTER_PASSWORD -> telegramAuthorizationRequestHandler?.applyAuthenticationParameter(TelegramAuthenticationParameterType.PASSWORD, text)
-			else -> Unit
 		}
 	}
 
@@ -348,11 +358,11 @@ class MainActivity : AppCompatActivity(), TelegramListener {
 			val builder = AlertDialog.Builder(requireContext())
 			builder.setView(R.layout.install_osmand_dialog)
 					.setNegativeButton("Cancel", null)
-					.setPositiveButton("Install", { _, _ ->
+					.setPositiveButton("Install") { _, _ ->
 						val intent = Intent()
 						intent.data = Uri.parse("market://details?id=net.osmand.plus")
 						startActivity(intent)
-					})
+					}
 			return builder.create()
 		}
 	}

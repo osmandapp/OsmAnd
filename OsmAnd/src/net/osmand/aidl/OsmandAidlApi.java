@@ -67,7 +67,6 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import org.apache.commons.logging.Log;
 
-import scala.collection.immutable.HashMap;
 
 public class OsmandAidlApi {
 	private static final Log LOG = PlatformUtil.getLog(OsmandAidlApi.class);

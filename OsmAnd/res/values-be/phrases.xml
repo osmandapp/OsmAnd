@@ -127,7 +127,7 @@
 	<string name="poi_service_tyres">Шынамантаж</string>
 	<string name="poi_vehicle_inspection">Пункт тэхагляду</string>
 	<string name="poi_car_wash">Аўтамыйка</string>
-	<string name="poi_fuel">Запраўка</string>
+	<string name="poi_fuel">Запраўка;АЗС;Аўтазаправачная станцыя</string>
 	<string name="poi_electricity_combined_charging">Зарадная станцыя</string>
 	<string name="poi_vehicle_ramp">Рамонтная эстакада/яма</string>
 	<string name="poi_compressed_air">Кампрэсар для падпампоўкі шын</string>
@@ -458,7 +458,7 @@
 	<string name="poi_theatre">Тэатр, канцэртная заля</string>
 	<string name="poi_theatre_genre_circus">Цырк</string>
 	<string name="poi_dance_floor">Танцпляцоўка</string>
-	<string name="poi_nightclub">Начны клюб</string>
+	<string name="poi_nightclub">Начны клюб;Дыска</string>
 	<string name="poi_stripclub">Стрыпклюб</string>
 	<string name="poi_beach_resort">Пляжны комплекс</string>
 	<string name="poi_dog_park">Пляцоўка для выгулу сабак</string>
@@ -3425,7 +3425,7 @@
 
 <string name="poi_motorcycle_sales_yes">Продаж</string>
 	<string name="poi_motorcycle_sales_no">Продаж: не</string>
-	<string name="poi_motorcycle_sales_yes_used">Продаж: так; ужывалыя</string>
+	<string name="poi_motorcycle_sales_yes_used">Продаж: так, ужывалыя</string>
 	<string name="poi_motorcycle_sales_used">Продаж: ужывалыя</string>
 	<string name="poi_motorcycle_rental_yes">Арэнда</string>
 	<string name="poi_motorcycle_rental_no">Арэнда: не</string>
@@ -3828,9 +3828,7 @@
 
 <string name="poi_barbecue_grill">Мангал: так</string>
 
-<string name="synonyms_poi_fuel">АЗС;Аўтазаправачная станцыя</string>
 
-	<string name="synonyms_poi_nightclub">Дыска</string>
 	<string name="poi_water_utility">Офіс водазабяспячэння</string>
 
 <string name="poi_amusement_arcade">Гульнявая зала</string>

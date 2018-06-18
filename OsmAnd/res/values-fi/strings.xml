@@ -1467,8 +1467,8 @@ Maailmanlaajuiset tiedot (välillä 70 astetta pohjoista ja 70 astetta eteläist
     <string name="index_tours">Edestakainen matka</string>
     <string name="shared_string_all">Kaikki</string>
     <string name="shared_string_waypoints">Väyläpiste</string>
-    <string name="targets">Kohteet</string>
-    <string name="announce_gpx_waypoints">GPX väyläpisteet</string>
+    
+    
     <string name="download_additional_maps">Lataa puuttuvat kartat %1$s (%2$d MB)?</string>
     <string name="rendering_value_browse_map_name">Selaile karttaa</string>
     <string name="rendering_value_car_name">Auto</string>
@@ -1657,7 +1657,7 @@ Jälki %2$s</string>
     <string name="local_index_items_restored">%1$d yhteensä %2$d jäsenestä onnistuneesti aktivoitu.</string>
     <string name="local_index_no_items_to_do">%1$s ei sisällä jäseniä</string>
     <string name="local_index_descr_title">Hallinnoi karttatiedostoja</string>
-    <string name="local_index_mi_reload">Lataa uudelleen SD kortilta</string>
+    
     <string name="local_index_address_data">Osoitetiedot</string>
     <string name="local_index_transport_data">Julkisen liikenteen tiedot</string>
     <string name="local_index_map_data">Karttatiedot</string>
@@ -1750,27 +1750,7 @@ Jälki %2$s</string>
     <string name="upload_osm_note_description">Voit ladata huomautuksia OSM:iin anonyymisti tai OpenStreetMap.org-profiilillasi.</string>
     <string name="wiki_around">Lähimmät Wikipedia-artikkelit</string>
     <string name="upload_poi">Lataa (vie) POI:t</string>
-    <string name="release_2_5">"
- • Klikattavat ikonit kartalla
-
-
- • Tehokas POI suodatushaku: Hae esim. ravintolat keittiön tyylillä, tai leiriytymispaikat erityisillä palveluilla
-
-
- • Uusi topo karttojen tyyli pyöräilijöille ja retkeilijöille
-
-
- • Parannettu reitin nauhoitus
-
-
- • Parannettu suunnistamisen huomautukset (Android Wear)
-
-
- • Monia muita parannuksia ja virheiden korjauksia
-
-
- ja lisää...
- "</string>
+    
     <string name="no_update_info_desc">Älä tarkista mitään päivityksiä uusista versioista tai OsmAndiin liittyvistä alennuksista</string>
     <string name="lang_pms">Piemonte</string>
     <string name="lang_bn">Bengali</string>
@@ -1973,24 +1953,7 @@ Paina ja pidä nähdäksesi kartalla</string>
     
     
     
-    <string name="release_2_3">"
- • OSM Live. Tue kartta-avustajia ja kehittäjiä ja saa tunneittain karttapäivitykset.
-
-
- • Map markerit. Uusi tapa nopeasti valita paikkoja kartalla.
-
-
- • Yksityiskohtaisemmat OSM kartat maakohtaisin liikennemerkein sekä paljon uusia karttaominaisuuksia.
-
-
- • Parannettu vaikutelma ja näkymä reitin valmistelussa.
-
-
- • Monia parannuksia kartan sisältövalikoon kuten asiayhteyteydellinen osoitehaku.
-
-
- ja lisää…
- "</string>
+    
     <string name="storage_directory_readonly_desc">Valittuun datahakemistoon ei voi kirjoittaa. Datahakemisto on hetkellisesti vaihdettu sisäiseen muistiin. Ole hyvä ja valitse sopiva datahakemisto.</string>
     <string name="osm_live_email_desc">Tarvitsemme sen huolehtiaksemme tiedostasi maksuosuuksia varten</string>
     <string name="translit_name_if_miss">Translitteroi, jos nimi puuttuu kielellä %1$s</string>
@@ -2028,27 +1991,7 @@ Jos pidät OsmAndista ja OSMsta ja haluat tukea niitä, on tämä täydellinen t
     <string name="rendering_attr_hideWaterPolygons_description">Vesi</string>
     <string name="legacy_search">Vanha haku</string>
     <string name="show_legacy_search">Näytä vanha haku</string>
-    <string name="release_2_4">"
- • Uusi tehokas vapaa tekstihaku
-
-
- • Autoradiojärjestelmään tai handsfree-laitteeseen yhdistäminen Bluetoothin avulla
-
-
- • Parannettu reittiopastus, ääniviestitys ja kääntymiskaistojen osoitus
-
-
- • Parannettu liikennetaso reitin hahmottamisella
-
-
- • Lisätty kohteita sekä tuki paikallisille kohteille
-
-
- • Paljo muita parannuksia ja virheiden korjauksia
-
-
- ja lisää…
- "</string>
+    
     <string name="av_audio_bitrate">Audion bittinopeus</string>
     <string name="av_audio_bitrate_descr">Valitse audion bittinopeus</string>
     <string name="none_selected_gpx">GPX tiedostoa ei valittu. Valitaksesi paina ja pidä käytettävissä olevalla jäljellä.</string>

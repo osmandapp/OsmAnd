@@ -750,7 +750,7 @@
 	<string name="local_index_mi_backup">Isključi</string>
 	<string name="local_index_mi_restore">Uključi</string>
 	
-	<string name="local_index_mi_reload">Ponovno učitaj</string>
+	
 	<string name="local_index_descr_title">Upravljanje podacima</string>
 	<string name="local_index_items_backuped">%1$d od %2$d stavke uspješno su isključene.</string>
 	<string name="local_index_items_deleted">%1$d od %2$d stavke uspješno su izbrisane.</string>
@@ -941,7 +941,7 @@
 	<string name="driving_region_canada">Kanada</string>
 	<string name="driving_region_europe_asia">Europa i Azija</string>
 	<string name="driving_region_uk">Velika Britanija, Indija, Australija i ostalo</string>
-    <string name="announce_gpx_waypoints">Najavi GPX međutočke</string>
+    
     <string name="speak_title">Najaviti…</string>
 	<string name="route_descr_map_location">Karta: </string>
     <string name="clear_intermediate_points">Obriši srednje točke</string>
@@ -1145,7 +1145,7 @@
 	<string name="duration">Trajanje</string>
     <string name="distance">Udaljenost</string>
     <string name="shared_string_all">Sve</string>
-    <string name="targets">Destinacije</string>
+    
     <string name="way_alarms">Prometna upozorenja</string>
     <string name="speak_favorites">Najavi favorite u blizini</string>
     <string name="speak_poi">Najavi POI</string>

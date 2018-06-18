@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="shared_string_topbar">Supra breto</string>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources><string name="shared_string_topbar">Supra breto</string>
     <string name="recalculate_route">Rekalkuli kurson</string>
     <string name="donations">Donacoj</string>
     <string name="number_of_recipients">Nombro da ricevontoj</string>
@@ -7,7 +6,7 @@
     <string name="osm_editors_ranking">Ranglisto de OSM-redaktantoj</string>
     <string name="osm_live_subscription">Abono al OsmAnd-Live</string>
     <string name="osm_live_subscribe_btn">Ekaboni</string>
-    <string name="osm_live_email_desc">Por informoj pri viaj kontribuoj.</string>
+    <string name="osm_live_email_desc">Bezonata por provizi al vi informojn pri kontribuoj.</string>
     <string name="osm_live_user_public_name">Publika nomo</string>
     <string name="osm_live_hide_user_name">Ne montri mian nomon en raportoj</string>
     <string name="osm_live_support_region">Subteni regionon</string>
@@ -116,23 +115,7 @@
     <string name="show_on_start_description">‘Ek-butono rekte lanĉas map-ekranon.</string>
     <string name="copied_to_clipboard">Enpoŝigita</string>
     <string name="show_on_start">Montri dum starto</string>
-    <string name="release_2_2">\\u2022 Nova tekst-dependa fasado kiu ebligas tuŝi lokojn en la mapo kaj en aliaj ekranoj
-\n 
-\n • Mapekrano estas nun montrita rekte escepte se \'Montri stirpanelon dum aplikaĵa starto\' estas elektita 
-\n 
-\n • Agordi kiujn kaj kiamaniere langetojn estas montritaj en la stirpanelo 
-\n 
-\n • Preterpasi la stirpanelon se vi ŝatas menuo-bazitan aplikaĵ-stiradon 
-\n 
-\n • Por elŝuti mapojn, regionoj povas esti elektitaj rekte per tuŝado en mondmapo 
-\n 
-\n • Serĉado por interesejoj nun subtenas pli multe specifajn petojn 
-\n 
-\n • Plibonigitaj eblecoj por redakti interesejojn kaj la OSM-on 
-\n 
-\n • Mapdosiera elŝutada strukturo kaj interfaco rebonigitaj 
-\n 
-\n kaj pli…</string>
+    
     <string name="osm_save_offline">Konservi loke</string>
     <string name="osm_edit_modified_poi">Ŝanĝitaj OSM-aj interesejoj</string>
     <string name="osm_edit_deleted_poi">Forigitaj OSM-aj interesejoj</string>
@@ -232,17 +215,7 @@
     <string name="welcome_header">Saluton</string>
     <string name="shared_string_and">kaj</string>
     <string name="shared_string_or">aŭ</string>
-    <string name="release_2_3">\\u2022 OSM Live. Subtenu kontribuantojn kaj programistoj, kaj havigu ĉiuhorajn mapajn ĝisdatigojn. 
-\n 
-\n • Map-markoj. Nova maniero por rapide elekti lokojn sur la mapo. 
-\n 
-\n • Pli multe detalaj OSM mapoj kun landspecifaj specoj de vojoj kaj multe da novaj ebloj de mapoj. 
-\n 
-\n • Plibonigita fasado de antaŭaranĝo de kurso. 
-\n 
-\n • Multe da plibonigoj ĉe mapa kunteksta menuo ekz. kunteksta elserĉado de adreso. 
-\n 
-\n kaj pli…</string>
+    
     <string name="srtm_plugin_disabled">Nivelkurboj kaŝitaj</string>
     <string name="hillshade_layer_disabled">Tavolo de nivel-ombrumo kaŝita</string>
     <string name="favorite_category_add_new">Aldoni novan</string>
@@ -344,7 +317,7 @@
     
     <string name="shared_string_logoff">Elsaluti</string>
     <string name="rendering_attr_hideHouseNumbers_name">Numeroj de domoj</string>
-    <string name="application_dir_change_warning3">Ĉu kopii dosierojn de datumoj al la nova loko?</string>
+    <string name="application_dir_change_warning3">Ĉu kopii dosierojn de OsmAnd-datumoj al la nova loko?</string>
     <string name="specified_directiory_not_writeable">Ne povas krei mapojn en la difina dosierujo</string>
     <string name="copying_osmand_file_failed">Kopiado de dosieroj malsukcesis</string>
     <string name="storage_directory_external">Ekstera konservejo</string>
@@ -422,7 +395,7 @@
     <string name="index_tours">Ekskursoj</string>
     <string name="shared_string_all">Ĉiuj</string>
     <string name="shared_string_waypoints">Navigadpunktoj</string>
-    <string name="targets">Celoj</string>
+    
     <string name="lang_sw">Svahila</string>
     <string name="lang_he">Hebrea</string>
     <string name="misc_pref_title">Diversaj</string>
@@ -665,7 +638,7 @@ Lon: %2$s</string>
     <string name="monitoring_settings_descr">Agordi kiel registri spurojn.</string>
     <string name="duration">Daŭro</string>
     <string name="distance">Distanco</string>
-    <string name="announce_gpx_waypoints">GPX-aj navigadpunktoj</string>
+    
     <string name="download_additional_maps">Ĉu elŝuti mankajn mapojn de %1$s (%2$d MB)?</string>
     <string name="rendering_value_browse_map_name">Foliumi mapon</string>
     <string name="rendering_value_car_name">Aŭto</string>
@@ -741,7 +714,7 @@ Lon: %2$s</string>
 \nTiu ĉi vido oni povas nuligi per malaktivigi ĝin tie ĉi, aŭ per ŝanĝi la ‘map-aspekton’ en la menuo ‘agordi mapon’.</string>
     <string name="show_zoom_buttons_navigation_descr">Montri butonojn por pligrandigo kaj malgrandigo dum navigado.</string>
     <string name="show_zoom_buttons_navigation">Montri butonojn de skalado</string>
-    <string name="save_as_favorites_points">Konservi kiel grupon da ŝatatoj</string>
+    <string name="save_as_favorites_points">Konservi kiel grupon da ŝatataj</string>
     <string name="select_destination_and_intermediate_points">Elekti celojn</string>
     <string name="voice_pref_title">Voĉo</string>
     <string name="lang_al">Albana</string>
@@ -953,7 +926,7 @@ Lon: %2$s</string>
     <string name="disable_complex_routing">Malaktivigi komplikan difinadon de vojo</string>
     <string name="amenity_type_seamark">Mara navigadpunkto</string>
     <string name="app_modes_choose">Profiloj de aplikaĵo</string>
-    <string name="app_modes_choose_descr">Elekti profilojn de uzado por esti videblaj en la aplikaĵo.</string>
+    <string name="app_modes_choose_descr">Elekti profilojn por vidigi en la aplikaĵo.</string>
     <string name="map_widget_map_rendering">Map-bildigado</string>
     <string name="app_mode_hiking">Piedirado</string>
     <string name="app_mode_motorcycle">Motorciklo</string>
@@ -1529,7 +1502,7 @@ Proporcia memoro %4$s MB (limito de Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="local_index_descr_title">Administri map-dosierojn.</string>
     <string name="local_index_mi_restore">Aktivigi</string>
     <string name="local_index_mi_backup">Malaktivigi</string>
-    <string name="local_index_mi_reload">Reŝargi el memorkarto</string>
+    
     <string name="local_index_poi_data">Interesej-datumoj</string>
     <string name="local_index_address_data">Adres-datumoj</string>
     <string name="local_index_transport_data">Transport-publik-datumoj</string>
@@ -1956,7 +1929,7 @@ Proporcia memoro %4$s MB (limito de Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="favourites_context_menu_add">Aldoni al ŝatataj</string>
     <string name="favourites_context_menu_edit">Redakti</string>
     <string name="favourites_context_menu_delete">Forigi</string>
-    <string name="favourites_remove_dialog_msg">Ĉu forigi la ŝatatan punkton \'%s\'?</string>
+    <string name="favourites_remove_dialog_msg">Ĉu forigi la ŝatatan punkton ‘%s’?</string>
     <string name="favourites_remove_dialog_success">Forigis ŝatatan punkton “{0}”.</string>
     <string name="poi_edit_title">Redakti interesejon</string>
     <string name="poi_create_title">Krei interesejon</string>
@@ -2113,19 +2086,7 @@ Proporcia memoro %4$s MB (limito de Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="share_history_subject">kunhavigita per OsmAnd</string>
     
     <string name="show_something_on_map">Montri na %1$s sur la mapo</string>
-    <string name="release_2_4">\\u2022 Nova ebloplena tekstoserĉilo
-\n 
-\n • Konekto kun aŭd-sistemo/parolilo de aŭto per Bludento 
-\n 
-\n • Plibonigita navigado - voĉaj sciigoj kaj subdiroj pri koridoroj 
-\n 
-\n • Plibonigita tavolo de publik-transporto kun bildigado de kurso 
-\n 
-\n • Aldonitaj novaj lingvoj kaj subteno por dialektoj 
-\n 
-\n • Multaj aliaj plibonigoj kaj korektoj 
-\n 
-\n kaj pli…</string>
+    
     <string name="dist_away_from_my_location">Serĉi %1$s for</string>
     <string name="confirmation_to_delete_history_items">Ĉu forigi elektitajn elementojn el “historio”?</string>
     <string name="back_to_search">Reveni al serĉo</string>
@@ -2133,41 +2094,25 @@ Proporcia memoro %4$s MB (limito de Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="advanced_coords_search">Detala koordinat-serĉo</string>
     <string name="route_stops_before">Post %1$s haltejoj</string>
     
-    <string name="osmand_plus_long_description_1000_chars">"OsmAnd (OSM Aŭtomata Navigado Direktanta al la celo) 
+    <string name="osmand_plus_long_description_1000_chars">OsmAnd (OSM Aŭtomata Navigado Direktanta al la celo) 
 \n
-\n 
-\nOsmAnd estas malfermkoda navigada aplikaĵo subtenanta diversajn mondajn mapojn de OpenStreetMap (OSM). Ĉiuj mapoj (vektoraj kaj kahelaj) povas esti konservitaj en la poŝtelefona memorejo por eksterreta uzado. OsmAnd ankaŭ ebligas uzi eksterretan kaj enretan navigadon kun turnon-post-turno voĉaj anoncoj. 
+\n OsmAnd estas malfermkoda navigada aplikaĵo subtenanta diversajn mondajn mapojn de OpenStreetMap (OSM). Ĉiuj mapoj (vektoraj kaj kahelaj) povas esti konservitaj en la poŝtelefona memorejo por eksterreta uzado. OsmAnd ankaŭ ebligas uzi eksterretan kaj enretan navigadon kun turnon-post-turno voĉaj anoncoj. 
 \n
-\n 
-\nOsmAnd+ estas pagenda versio de programo, per aĉeto de aplikaĵo, vi subtenas la projekton, donacas al novajn eblojn, kaj ricevos la plej novajn ĝisdatigojn. 
+\n OsmAnd+ estas pagenda versio de programo, per aĉeto de aplikaĵo, vi subtenas la projekton, donacas al novajn eblojn, kaj ricevos la plej novajn ĝisdatigojn. 
 \n
-\n 
-\nĈefaj ebloj: 
-\n
-\n 
-\n- Funkcias tute eksterrete (konservas elŝutitajn vektorajn aŭ kahelaj mapojn en la aparata konservejo) 
-\n
-\n- Kompaktaj vektoraj eksterretaj mapoj de la tuta mondo 
-\n
-\n- Senlime elŝuti landaj aŭ regionaj mapoj senpere en la aplikaĵo 
-\n
+\n Ĉefaj ebloj: 
+\n- funkcias tute eksterrete (konservas elŝutitajn vektorajn aŭ kahelaj mapojn en la aparata konservejo) 
+\n- kompaktaj vektoraj eksterretaj mapoj de la tuta mondo 
+\n- senlime elŝuti landaj aŭ regionaj mapoj senpere en la aplikaĵo 
 \n- Eksterreta Vikipedio (elŝuteblaj vikipediaj interesejoj), perfekte por vizitado 
-\n
-\n- Diversspecaj tavoloj de mapo: GPX aŭ navigadaj kursoj, interesejoj, ŝatataj ejoj, nivelkurboj, haltejoj de publik-transporto, ekstraj mapoj kun ŝanĝebla diafaneco 
-\n
-\n- Serĉi eksterrete adresojn kaj interesajn ejojn (interesejojn) 
-\n
-\n- Difini kursojn por mezaj distancoj eksterrete 
-\n
-\n- Aŭta, bicikla, kaj piediranta reĝimoj kun: 
-\n
-\n  - agordeblaj aŭtomata/taga/nokta aspektoj 
-\n
-\n  - agordebla rapid-dependa map-skalado 
-\n
-\n  - agordebla map-turniĝo laŭ direkto de movado aŭ kompaso 
-\n
-\n  - sciigoj pri koridoroj, rapidlimoj, antaŭregistritaj aŭ sintezitaj parolaj helpoj"</string>
+\n- diversspecaj tavoloj de mapo: GPX aŭ navigadaj kursoj, interesejoj, ŝatataj ejoj, nivelkurboj, haltejoj de publik-transporto, ekstraj mapoj kun ŝanĝebla diafaneco 
+\n- serĉi eksterrete adresojn kaj interesajn ejojn (interesejojn) 
+\n- difini kursojn por mezaj distancoj eksterrete 
+\n- aŭta, bicikla, kaj piediranta reĝimoj kun: 
+\n - agordeblaj aŭtomata/taga/nokta aspektoj 
+\n - agordebla rapid-dependa map-skalado 
+\n - agordebla map-turniĝo laŭ direkto de movado aŭ kompaso 
+\n - sciigoj pri koridoroj, rapidlimoj, antaŭregistritaj aŭ sintezitaj parolaj helpoj</string>
 	
     
     <string name="rendering_attr_hideOverground_name">Superteraj objektoj</string>
@@ -2242,19 +2187,7 @@ Proporcia memoro %4$s MB (limito de Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="shared_string_recorded">Registrita</string>
     <string name="shared_string_record">Registri</string>
     <string name="gpx_logging_no_data">Neniuj datumoj</string>
-    <string name="release_2_5">\\u2022 Alklakeblaj piktogramoj sur la mapo
-\n 
-\n • Ebloplena filtrebla serĉado de interesejoj: serĉu restoraciojn laŭ kuirarto, kampadejojn kun difinitaj ebloj 
-\n 
-\n • Nova ‘OsmAnd Topo map-stilo por biciklistoj kaj piediradaj turistoj 
-\n 
-\n • Plibonigita registrado de kurso 
-\n 
-\n • Plibonigitaj navigadaj sciigoj (Android Wear) 
-\n 
-\n • Multe da aliaj plibonigoj kaj korektoj 
-\n 
-\nkaj pli…</string>
+    
     <string name="trip_rec_notification_settings">Aktivigi rapid-starton de registrado</string>
     <string name="trip_rec_notification_settings_desc">Montri sisteman sciigon kun eblo ekigi registradon de kurso.</string>
     <string name="shared_string_notifications">Sciigoj</string>
@@ -2373,27 +2306,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="quick_action_page_list_descr">Frapetu tiun ĉi ag-butonon por foliumi tra la suba listo.</string>
     <string name="auto_split_recording_title">Aŭtomate dividi registraĵojn post paŭzo</string>
 	<string name="auto_split_recording_descr">Komenci novan segmenton post 6 min paŭzo, novan registraĵon post 2 h, kaj novan dosieron post pli longaj paŭzoj, se dato ŝanĝiĝis.</string>
-    <string name="release_2_6">\\u2022 Nova eblo: butono de rapida ago
-\n 
-\n • Plibonigita respondeblo de ekrano al gestoj 
-\n 
-\n • Novaj mapaj tiparoj subtenataj pli da lingvoj 
-\n 
-\n • Subteno por dialektoj en parolsintezitaj dialogaj helpoj 
-\n 
-\n • Videblaj plibonigoj en kelkaj map-stiloj kaj en Vikipedio 
-\n 
-\n • Subteno por \'Malferma pozicia kodo\' (OLC) 
-\n 
-\n • Montrado de altitudo, klineco kaj rapid-profilo por registritaj GPX-spuroj kaj kalkulitaj kursoj 
-\n 
-\n • Agordo \'Veturada stilo\' kaj logikaj plibonigoj en bicikla difinado de vojo 
-\n 
-\n • Eblo uzi altitudajn datumojn por bicikla difinado de vojo 
-\n 
-\n • Kelkaj aliaj plibonigoj kaj erar-riparoj 
-\n 
-\n kaj pli…</string>
+    
 	<string name="rendering_attr_depthContours_description">Montri punktojn kaj kurbojn de profundo.</string>
     <string name="rendering_attr_depthContours_name">Maraj profundec-kurboj</string>
 	
@@ -2417,8 +2330,8 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="shared_string_time_moving">Tempo de movado</string>
     <string name="shared_string_time_span">Tempa variejo</string>
     <string name="shared_string_max">Maks.</string>
-    <string name="shared_string_start_time">Forveturo</string>
-    <string name="shared_string_end_time">Alveno</string>
+    <string name="shared_string_start_time">Komenca tempo</string>
+    <string name="shared_string_end_time">Fina tempo</string>
     <string name="shared_string_color">Koloro</string>
     <string name="average_speed">Mezuma rapido</string>
     <string name="max_speed">Maksimuma rapido</string>
@@ -2608,8 +2521,8 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="srtm_menu_download_descr">Elŝutu la mapon “nivelkurboj” por vidigi nivelkurbojn por tiu ĉi regiono.</string>
     <string name="shared_string_plugin">Kromprogramo</string>
     <string name="srtm_purchase_header">Por vidigi nivelkurbojn sur la mapo, vi devas aĉeti kaj instali la kromprogramon “nivelkurboj”.</string>
-    <string name="hillshade_menu_download_descr">Elŝutu la mapon “nivel-ombrumoj” por vidigi reliefon por tiu ĉi regiono.</string>
-    <string name="hillshade_purchase_header">Instalu la kromprogramon “nivelkurboj” por vidigi ilin sur la mapo.</string>
+    <string name="hillshade_menu_download_descr">Por vidigi reliefon sur la mapo, elŝutu surtavolon de nivelombrumo por tiu ĉi regiono.</string>
+    <string name="hillshade_purchase_header">Por vidigi nivelombrumon sur la mapo, aĉetu kaj instalu la kromprogramon “nivelukurboj”.</string>
     <string name="hide_from_zoom_level">Kaŝi de skal-nivelo</string>
     <string name="sorted_by_distance">Ordigitaj laŭ distanco</string>
     <string name="search_favorites">Serĉi en ŝatataj</string>
@@ -2621,7 +2534,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="increase_search_radius">Pliigi serĉan radiuson</string>
     <string name="nothing_found">Trovis nenion</string>
     <string name="nothing_found_descr">Bonvolu provi ŝanĝi serĉpeton aŭ pliigi radiuson de serĉo.</string>
-    <string name="private_access_routing_req">Via celloko troviĝas en privata tereno. Ĉu trapasi privatajn vojojn por tiu ĉi kurso?</string>
+    <string name="private_access_routing_req">Via celloko troviĝas en privata tereno. Ĉu permesi aliron al privataj vojoj por tiu ĉi kurso?</string>
     <string name="mapillary">Mapillary</string>
     <string name="mapillary_widget">Mapillary-fenestraĵo</string>
     <string name="mapillary_widget_descr">Ebligas rapide kontribui al Mapillary.</string>
@@ -2664,15 +2577,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     
     
     <string name="min_max">Min./maks.</string>
-    <string name="release_2_7">• Kromprogramo ‘Mapillary’ kun strat-nivela fotaro
-\n
-\n• Fenestraĵo de mezurilo por mezuri distancoj
-\n
-\n• GPX divid-intervaloj kun detalaj informoj pri via kurso
-\n
-\n• Aliaj plibonigoj kaj erar-riparoj
-\n
-\n</string>
+    
     <string name="rendering_value_translucent_pink_name">Rozkolora diafana</string>
     <string name="quick_action_resume_pause_navigation">Paŭzigi/daŭrigi navigadon</string>
     <string name="quick_action_resume_pause_navigation_descr">Premu tiun ĉi butonon por paŭzigi aŭ reaktivigi navigadon.</string>
@@ -2714,7 +2619,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="empty_state_my_tracks">Aldoni GPX-dosierojn</string>
     <string name="empty_state_my_tracks_desc">Registru spurojn aŭ enportu GPX-dosierojn.</string>
     <string name="empty_state_favourites">Aldoni ŝatatajn</string>
-    <string name="empty_state_favourites_desc">Enportu ŝatatajn punktojn aŭ aldonu per map-markoj al la mapo.</string>
+    <string name="empty_state_favourites_desc">Enportu ŝatatajn punktojn aŭ aldonu ilin per map-markoj al la mapo.</string>
     <string name="import_track">Enporti GPX-dosieron</string>
     <string name="import_track_desc">Dosiero %1$s ne enhavas navigadpunktojn, ĉe enporti ĝin kiel spuron?</string>
     <string name="move_point">Movi punkton</string>
@@ -2778,12 +2683,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="osn_modify_dialog_error">Ne povas ŝanĝi rimarkon</string>
     <string name="osn_modify_dialog_title">Redakti rimarkon</string>
     <string name="context_menu_item_modify_note">Redakti OSM-rimarkon</string>
-    <string name="release_2_8">• Tute refaritaj map-markoj kun direktaj linioj kaj planado de vojaĝo 
-\n 
-\n• Ilo por mezuri distancoj kun ebloj proksimumigi pozicion al vojo kaj konservi punktojn kiel kurson 
-\n 
-\n• OsmAnd-Live: erar-riparoj, freŝaj datumoj ĉe servilo je ĉiu 30 minutoj, ĝisdatigoj funkcias kun navigado 
-\n</string>
+    
     <string name="rendering_value_darkyellow_name">Flava malhela</string>
     <string name="shared_string_road">Vojo</string>
     <string name="show_map">Montri mapon</string>
@@ -2830,7 +2730,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="show_guide_line_descr">Vidigi direktantan linion el via pozicio al pozicioj de aktivaj map-markoj.</string>
     <string name="show_arrows_descr">Vidigi unu aŭ du sagetojn indikantajn direkton al map-markoj.</string>
     <string name="distance_indication_descr">Elekti kiel vidigi distancon al aktivaj map-markoj.</string>
-    <string name="active_markers_descr">Elekti nombron da aktivaj map-markoj por vidigi.</string>
+    <string name="active_markers_descr">Elekti nombron da indikiloj de direkto por vidigi.</string>
     <string name="looking_for_tracks_with_waypoints">Serĉado de kursoj kun navigadpunktoj</string>
     <string name="shared_string_more_without_dots">Pli</string>
     <string name="empty_state_osm_edits">Krei aŭ redakti OSM-objektojn</string>
@@ -2881,26 +2781,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="lang_lo">Laŭa</string>
     <string name="will_open_tomorrow_at">Malfermiĝos morgaŭ je</string>
     <string name="rendering_attr_hidePOILabels_name">Etikedoj de interesejoj</string>
-    <string name="release_2_9">• Plibonigita kunteksta menuo: montras kiam interesejoj (mal)fermiĝas
-\n
-\n• Transporta menuo: ĉiuj disponeblaj kursoj nun montriĝas ĉe supre 
-\n
-\n• Vikipedio: aldonis butonon por malfermi la originalan artikolon, plibonigita vidigo de artikoloj 
-\n
-\n• Kurso: aldonis eblon por interŝanĝi komencan punkton per fina je unu frapeto 
-\n
-\n• Notoj: aldonis ordigadon laŭ tipo aŭ dato 
-\n 
-\n• OSM-redaktoj: montras piktogramon kaj nomon de kategorion de interesejo, montras faritajn agojn 
-\n 
-\n• Nova rapida ekrano por enigi koordinatojn por rapide krei map-markojn 
-\n
-\n• Ekkonado de STOP-signoj nun konsideras direkton de veturo 
-\n 
-\n• Nova algoritmo liveranta sencplenajn valoroj de supreniro/malsupreniro por GPX-spuroj 
-\n 
-\n• Marŝada tempo konsideras profilon de tereno (regulo de Naismith)
-\n</string>
+    
     <string name="day_off_label">fermita</string>
     <string name="winter_and_ski_renderer">Vintro kaj skiado</string>
     <string name="touring_view_renderer">Turisma mapo</string>
@@ -2951,7 +2832,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="shared_string_total">Tute</string>
     <string name="nothing_found_in_radius">Ne trovis ion ajn:</string>
     <string name="shared_string_travel_guides">Vojaĝo</string>
-    <string name="shared_string_travel">Vojaĝaj gvidiloj</string>
+    
     <string name="waypoints_removed_from_map_markers">Forigis navigadpunktojn el map-markoj</string>
     <string name="use_two_digits_longitude">Uzi du-ciferan longitudon</string>
     <string name="shared_string_result">Rezulto</string>
@@ -2990,10 +2871,10 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="purchase_subscription_title">Aboni - %1$s</string>
 
     <string name="wikivoyage_offline">Vikivojaĝo eksterrete</string>
-    <string name="dayly_map_updates">Ĉiutagaj map-ĝisdatigoj</string>
+    
     <string name="unlimited_downloads">Senlimaj elŝutoj</string>
     <string name="wikipedia_offline">Vikipedio eksterrete</string>
-    <string name="contour_lines_sea_depth">Nivelkurboj teraj kaj maraj</string>
+    
     <string name="unlock_all_features">Malŝlosi ĉiujn eblojn de OsmAnd</string>
 
     <string name="monthly_map_updates">Map-ĝisdatigoj: <b>ĉiumonate</b></string>

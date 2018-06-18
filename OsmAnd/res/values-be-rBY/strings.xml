@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="speak_pedestrian">Piešachodnyja pierachody</string>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources><string name="speak_pedestrian">Piešachodnyja pierachody</string>
     <string name="rendering_attr_roadStyle_name">Styl aŭtadaroh</string>
     <string name="rendering_value_default_name">Pa zmoŭčańnі</string>
     <string name="rendering_value_orange_name">Aranžavy</string>
@@ -77,7 +76,7 @@
     <string name="logged_as">Vy ŭvajšli jak %1$s</string>
 	<string name="speed_limit_exceed">Dapuščalnaje značeńnie pieravyšeńnia chutkaścі</string>
 	<string name="speed_limit_exceed_message">Zadać dapuščalnaje značeńnie pieravyšeńnia chutkaścі, pry jakіm vy atrymajecie hałasavoje paviedamleńnie.</string>
-	<string name="fav_point_emoticons_message">Nazva ŭlubionaha punktu była źmieniena na %1$s dla mahčymaścі zachavańnia radka z ematykonam ŭ fajł.</string>
+	<string name="fav_point_emoticons_message">Nazva ŭpadabanaha byla zmienienaja na %1$s dlia mahčymaści zachavańnia radka z ematykonam ŭ fajl.</string>
     <string name="print_route">Pakazać maršrut</string>
     <string name="fav_point_dublicate">Dublavańnie nazvy ŭlubionaha punktu</string>
     <string name="fav_point_dublicate_message">Ulubiony punkt z takoj nazvaj ŭžo іsnuje, tamu budzie vykarystana %1$s dla praduchіleńnia dublavańnia іmionaŭ.</string>
@@ -131,8 +130,8 @@
     <string name="index_tours">Pajezdkі</string>
     <string name="shared_string_all">Usie</string>
     <string name="shared_string_waypoints">Punkty šlachu</string>
-    <string name="targets">Celi</string>
-    <string name="announce_gpx_waypoints">Punkty šlachu GPX</string>
+    
+    
     <string name="download_additional_maps">Ściahnuć mapy, što adsutnіčajuć, %1$s (%2$d MB)?</string>
     <string name="shared_string_more">Bolš…</string>
     <string name="rendering_value_browse_map_name">Prahlad mapy</string>  
@@ -882,7 +881,7 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
 	<string name="address_search_desc">Pošuk pa adrasie</string>
 	<string name="navpoint_search_desc">Kaardynaty</string>
 	<string name="transport_search_desc">Pošuk hramadzkaha transpartu</string>
-	<string name="favourites_search_desc">Pošuk ulubionych</string>
+	<string name="favourites_search_desc">Sposab pošuku ŭpadabanych</string>
 	
 	<string name="offline_navigation_not_available">Aŭtanomnaja navіhacyja OsmAnd časova niedastupnaja.</string>
 	<string name="left_side_navigation">Levaručny ruch</string>
@@ -1039,7 +1038,7 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
 	<string name="index_name_tts_voice">Hałasavyja padkazkі (TTS, pažadana)</string>
 	<string name="amenity_type_osmwiki">Vіkіpedyja (pazasiecіŭnaja)</string>
 	<string name="amenity_type_user_defined">Vyznačanaje karystalnіkam</string>
-	<string name="fav_export_confirmation">Fajł z ekspartavanymі ŭlubionymi ŭžo іsnuje. Cі chočacie zamianіć jaho ?</string>
+	<string name="fav_export_confirmation">Fajl z ekspartavanymi ŭpadabanymi ŭžo isnuje. Zamianić jaho?</string>
 	<string name="profile_settings">Nałady profіla</string>
 	<string name="routing_settings">Navіhacyja</string>
 	<string name="routing_settings_descr">Vyznačyć nalady navihacyi.</string>
@@ -1128,7 +1127,7 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
 	<string name="show_more_map_detail">Pakazać bolš detalej mapy</string>
 	<string name="show_more_map_detail_descr">Pakazać niekatoryja detali viektarnaj mapy (darohi i inšyja) na mienšym maštabie.</string>
 	<string name="favourites_delete_multiple_succesful">Ulubionyja punkty paśpiachova vydalenyja.</string>
-	<string name="favorite_delete_multiple">Vy źbіrajeciesia vydalić %1$d upadabanyja і %2$d hrupy. Vy ŭpeŭnienyja ?</string>
+	<string name="favorite_delete_multiple">Vy zbirajeciesia vydalić %1$d upadabanych i %2$d hrup upadabanych. Vy ŭpeŭnienyja?</string>
 	<string name="favorite_home_category">Dom</string>
 	<string name="favorite_friends_category">Siabry</string>
 	<string name="favorite_places_category">Miescy</string>
@@ -1149,7 +1148,7 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
 	<string name="local_index_mi_backup">Deaktyvavać</string>
 	
 	
-	<string name="local_index_mi_reload">Pieračytać z kartkі SD</string>
+	
 	<string name="shared_string_download">Ściahnuć</string>
 	<string name="local_index_poi_data">Źviestkі POI</string>
 	<string name="local_index_address_data">Adras</string>
@@ -1190,7 +1189,7 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
 	<string name="overlay_transparency">Prazrystaść nakładańnia</string>
 	<string name="map_transparency_descr">Zmianić prazrystasć asnoŭnaj mapy.</string>
 	<string name="map_transparency">Prazrystaść asnoŭnaj mapy</string>
-	<string name="layer_underlay">Mapa padkładkі…</string>
+	<string name="layer_underlay">Mapa padkladki…</string>
 	<string name="map_underlay">Mapa padkładkі</string>
 	<string name="map_underlay_descr">Abrać mapu dlia padkladki.</string>
 	<string name="layer_overlay">Mapa pakryćcia…</string>
@@ -1282,7 +1281,7 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
 	<string name="specified_dir_doesnt_exist">Ukazany katałoh nie znojdzieny.</string>
 	<string name="application_dir">Kataloh zachoŭvańnia źviestak</string>
 	
-	<string name="osmand_net_previously_installed">U vas ŭstalavanaja papiaredniaja viersіja OsmAnd. Usie lakalnyja dadzienyja padtrymlivajucca novaj viersіjaj. Ale zachavanyja punkty treba ekspartavać z papiaredniaj versіі і іmpartavać u novuju.</string>
+	<string name="osmand_net_previously_installed">Usie aŭtanomnyja danyja ŭ staroj ustaliavanaj prahramie buduć padtrymlivacca novaj, alie ŭpadabanyja kropki treba ekspartavać sa staroj viersii i impartavać u novuju.</string>
 	<string name="build_installed">Zborka {0} paśpiachova ŭstalavana ({1}).</string>
 	<string name="downloading_build">Ściahvajecca zborka…</string>
 	<string name="install_selected_build">Chočacie ŭstalavać OsmAnd - {0} z {1} {2} MB?</string>
@@ -1352,7 +1351,7 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
 	<string name="fav_imported_sucessfully">Ulubionyja paśpiachova іmpartavany</string>
 	<string name="import_file_favourites">Zachavać źviestkі jak GPX-fajł abo іmpartavać punkty va Ŭlubionyja?</string>
 	
-	<string name="fav_file_to_load_not_found">GPX fajł z ulubionymi nia znojdzieny ŭ {0}</string>
+	<string name="fav_file_to_load_not_found">GPX-fajl z upadabanymi nie znojdzieny ŭ {0}</string>
 	<string name="fav_saved_sucessfully">Ulubionyja paśpiachova zachavany ŭ {0}</string>
 	<string name="no_fav_to_save">Niama lubіmych miescaŭ dla zachoŭvańnia</string>
 	<string name="shared_string_import">Іmpartavać</string>
@@ -1710,17 +1709,7 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="report">Spravazdača</string>
     
     <string name="storage_permission_restart_is_required">Prykladannie maje dazvol na zapis na zniešni nośbit, alie patrabujecca pierazahruzka.</string>
-    <string name="release_2_3">\\022 OSM Live. Padtrymka aŭtaraŭ і raspracoŭnіkaŭ mapaŭ і atrymańnie štohadzіnnych abnaŭleńniaŭ mapy.
-\n
-\n • Markiery. Novy sposab dla chutkaha vybaru miescaŭ na mapie.
-\n
-\n • Bolš padrabiaznyja OSM mapy sa specyfіčnymі darožnymі znakamі kraіn і ź vialikaj kolkaściu novych funkcyj.
-\n 
-\n • Palepšany vonkavy vyhlad і padrychtoŭka maršrutu.
-\n
-\n • Mnostva palapšeńniaŭ u kantekstnym meniu mapy takіch jak pošuk adrasu.
-\n
-\n i šmatlikaje іnšaje…</string>
+    
     <string name="shared_string_move_up">Pieramiascić ↑</string>
     <string name="shared_string_move_down">Pieramiascić ↓</string>
     <string name="finish_navigation">Zaviaršyć navіhacyju</string>
@@ -1737,7 +1726,7 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="osm_editors_ranking">Rejtynh kartohrafaŭ OSM</string>
     <string name="osm_live_subscription">Padpiska OsmAnd Live</string>
     <string name="osm_live_subscribe_btn">Padpіsacca</string>
-    <string name="osm_live_email_desc">Dlia vašaj infarmacyi pra ŭkladaĺnikaŭ.</string>
+    <string name="osm_live_email_desc">Nieabchodna, kab dać vam infarmacyju ab udzielie.</string>
     <string name="osm_live_user_public_name">Publičnaje іmia</string>
     <string name="osm_live_hide_user_name">Nie pakazvać majo imia ŭ spravazdačach</string>
     <string name="osm_live_support_region">Padtrymoŭvany rehіjon</string>
@@ -1838,23 +1827,7 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="show_on_start_description">«Adkliučana» niepasredna zapuskaje ekran mapy.</string>
     <string name="show_on_start">Pakazvać pry zapusku</string>
     <string name="copied_to_clipboard">Skapіjavana ŭ bufier abmienu</string>
-    <string name="release_2_2">\\u2022 Novy kantekstna-zaliežny interfiejs dlia vybaru pazicyi na mapie i na inšych ekranach
-\n 
-\n • Ekran mapy ciapier zapuskajecca niepasredna, kali vy nie vybrali \"Pakazvać paneĺ kiravańnia pry zapusku\" 
-\n 
-\n • Ukladki kanfihuracyi adliustroŭvajecca na paneli kiravańnia 
-\n 
-\n • Paneĺ kiravańnia moža nie źjaŭliacca, kali vy addajacie pieravahu kiravańniu prahramaju praz meniu 
-\n 
-\n • Rehijony, dlia jakich vy chočacie spampavać mapu, zaraz možna vybrać niepasredna na mapie śvietu 
-\n 
-\n • POI pošuk zaraz dazvaliaje boĺš dakladnyja zapyty 
-\n 
-\n • Paliepšanaje redahavańnie POI i OSM 
-\n 
-\n • Pierapracavany interfiejs zahruzki mapy 
-\n 
-\n i mnohaje inšaje …</string>
+    
     <string name="osm_save_offline">Zachavać lakalna</string>
     <string name="osm_edit_modified_poi">OSM POI adredahavana</string>
     <string name="osm_edit_deleted_poi">OSM POI vydalenaja</string>
@@ -2009,7 +1982,7 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="rendering_value_walkingRoutesOSMC_name">Afarboŭka pa piešachodnamu simvalu OSMC</string>
     <string name="shared_string_logoff">Vyjścі</string>
     <string name="rendering_attr_hideHouseNumbers_name">Numary damoŭ</string>
-    <string name="application_dir_change_warning3">Skapijavać fajly danych u novaje miesca pryznačeńnia?</string>
+    <string name="application_dir_change_warning3">Skapijavać fajly danych OsmAnd u novaje miesca?</string>
     <string name="specified_directiory_not_writeable">Mapy nie mohuć być stvorany ŭ paznačanaj dyrektoryі</string>
     <string name="copying_osmand_file_failed">Kapіjavańnie fajłaŭ nie atrymałasia</string>
     <string name="storage_directory_external">Vonkavy nośbіt іnfarmacyі</string>
@@ -2296,7 +2269,7 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="storage_place_description">Schovišča zviestak OsmAnd (dlia mapaŭ, GPX-fajlaŭ i h.d.): %1$s.</string>
     <string name="give_permission">Dazvolić</string>
     <string name="allow_access_location">Dazvolić dostup da miescaznachodžańnia</string>
-    <string name="first_usage_greeting">Prakladvajcie maršruty i adkryvajcie novyja miescy biez zlučennia</string>
+    <string name="first_usage_greeting">Prakladvajcie maršruty i adkryvajcie novyja miescy biez Internet-padlučennia</string>
     <string name="search_my_location">Znajsci maju pazicyju</string>
     <string name="no_update_info_desc">Nie praviarać novyja viersij i znižki ad OsmAnd.</string>
     <string name="no_update_info">Nie pakazvać novyja viersii</string>
@@ -2304,7 +2277,7 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="clear_tile_data">Ačyścіć keš siecіŭnych mapaŭ</string>
     <string name="routing_attr_short_way_name">Paliŭna-aščadny maršrut</string>
     <string name="routing_attr_short_way_description">Različvaje paliva-aščadny maršrut (zvyčajna najkaraciejšy).</string>
-    <string name="replace_favorite_confirmation">Vy sapraŭdy chočacie zamianіć ulubiony punkt %1$s?</string>
+    <string name="replace_favorite_confirmation">Vy sapraŭdy chočacie zamianić upadabanaje %1$s?</string>
     <string name="rendering_attr_hideOverground_name">Nadziemnyja abjekty</string>
     <string name="shared_string_change">Źmianіć</string>
     <string name="get_started">Pačać</string>
@@ -2314,19 +2287,7 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="back_to_search">Viarnucca da pošuka</string>
     <string name="confirmation_to_delete_history_items">Vydalić abranyja eliemienty z «Historyi»?</string>
     <string name="show_something_on_map">Pakazać %1$s na mapie</string>
-    <string name="release_2_4">\\u2022 Novy paŭnatekstavy pošuk
-\n 
-\n • Intehracyja praz Bluetooth aŭtamabiĺnych aŭdyjasistem / kalonak 
-\n 
-\n • Paliepšanaja navihacyja pa maršrucie, halasavyja padkazki, adliustravańnie palos ruchu 
-\n 
-\n • Paliepšany plast transparta z adliustravańniem maršrutaŭ 
-\n 
-\n • Boĺš moŭ interfiejsu 
-\n 
-\n • Mnostva paliapšeńniaŭ i vypraŭlieńniaŭ pamylak 
-\n 
-\n i mnohaje inšaje…</string>
+    
     <string name="dist_away_from_my_location">Šukać za %1$s ad miescaznachodžańnia</string>
     <string name="share_history_subject">padzialilisia praz OsmAnd</string>
     <string name="search_categories">Katehoryі</string>
@@ -2357,7 +2318,7 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="quick_action_osmbugs_hide">Schavać OSM-natatki</string>
     <string name="quick_action_showhide_osmbugs_descr">Nacisk na hetuju knopku pakaža ci schavaje OSM-natatki na mapie.</string>
     <string name="sorted_by_distance">Adsartavana pa adlehłaści</string>
-    <string name="search_favorites">Pošuk ulubionych</string>
+    <string name="search_favorites">Pošuk upadabanych</string>
     <string name="srtm_menu_download_descr">Spampavać mapu «Contour Line» dlia vykarystannia ŭ hetym rehijonie.</string>
     <string name="shared_string_plugin">Dadatak</string>
     <string name="srtm_purchase_header">Dlia prahliadu konturnych linij na mapie, vam nieabchodna nabyć i ŭstaliavać dadatak «Contour Lines»</string>
@@ -2413,8 +2374,8 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="max_speed">Maksimaĺnaja chutkasć</string>
     <string name="average_speed">Siaredniaja chutkaść</string>
     <string name="shared_string_max">Maks.</string>
-    <string name="shared_string_start_time">Adpraŭliennie</string>
-    <string name="shared_string_end_time">Prybyccio</string>
+    <string name="shared_string_start_time">Čas pačatku</string>
+    <string name="shared_string_end_time">Čas zakačennia</string>
     <string name="shared_string_color">Koler</string>
     <string name="select_gpx_folder">Abrać tečku GPX-fajlaŭ</string>
     <string name="file_can_not_be_moved">Fajł nie moža być pieramieščany.</string>
@@ -2496,8 +2457,8 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="quick_action_add_first_intermediate">Dadać pieršy pramiežkavy punkt</string>
     <string name="quick_action_interim_dialog">Pakazać pramiežkavy dyjaloh</string>
     <string name="quick_action_showhide_favorites_title">Pakazać/schavać ulubionyja</string>
-    <string name="quick_action_favorites_show">Pakazać Ulubionyja</string>
-    <string name="quick_action_favorites_hide">Schavać Ulubionyja</string>
+    <string name="quick_action_favorites_show">Pakazać upadabanyja</string>
+    <string name="quick_action_favorites_hide">Schavać upadabanyja</string>
     <string name="quick_action_showhide_poi_title">Pakazać/schavać POI</string>
     <string name="quick_action_poi_show">Pakazać %1$s</string>
     <string name="quick_action_poi_hide">Schavać %1$s</string>
@@ -2534,8 +2495,8 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="rendering_attr_contourWidth_description">Taŭščynia haryzantaliaŭ (izahipsy)</string>
     <string name="rendering_attr_hideWaterPolygons_description">Vadu</string>
     <string name="rendering_attr_contourColorScheme_description">Koleravaja schema haryzantalaŭ</string>
-    <string name="hillshade_menu_download_descr">Spampavać mapu «Hillshade Overlay» kab zacianić reĺjef hetaha rehijona.</string>
-    <string name="hillshade_purchase_header">Spampavać dadatak «Contour Lines» kab pakazać konturnyja linija na mapie</string>
+    <string name="hillshade_menu_download_descr">Kab ubačyć zacianiennie reĺjefu, spampujcie mapu «Hillshade Overlay» hetaha rehijona.</string>
+    <string name="hillshade_purchase_header">Kab ubačyć zacianiennie reĺjefu, vam nieabchodna nabyć i ŭstaliavać dadatak «Contour Lines»</string>
     <string name="hide_from_zoom_level">Schavać ad uzroŭniu maštabavannia</string>
     <string name="show_from_zoom_level">Pakazvać ad uzroŭniu maštabavannia</string>
     <string name="animate_my_location_desc">Ukliučaje animacyju majoj pazicyi na mapie padčas navihacyi.</string>
@@ -2557,27 +2518,7 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="routing_attr_relief_smoothness_factor_name">Abrać pierasiečanasć miascovasci</string>
     <string name="routing_attr_height_obstacles_name">Vykarystoŭvać danyja vyšyni</string>
     <string name="rendering_attr_depthContours_name">Kontury marskich hlybiń</string>
-    <string name="release_2_6">• Novaja funkcyja: knopka chutkaha dziejańnia 
-\n 
-\n • Palepšany adkaz na žesty sensarnaha ekrana 
-\n 
-\n • Novy šryft mapy, jaki pakryvaje bolš łakalaju 
-\n 
-\n • Padtrymka TTS dla varyjantaŭ rehijanalnych moŭ 
-\n 
-\n • Palapšeńni vizualizacyi ŭ niekatorych stylach mapaŭ i Vikipedyi 
-\n 
-\n • Padtrymka Open Location Code (OLC) 
-\n 
-\n • Adlustavańnie profilu vyšyni, ŭchilu i chutkaści dia zapisnych GPX-trekaŭ i različanych maršrutaŭ 
-\n 
-\n • Nałady «Styl kiravańnia» i palapšeńnie łohiki ŭ rovarnaj maršrutyzacyi 
-\n 
-\n • Nałady dla vykarystańnia danych vyšyni ŭ rovarnaj maršrutyzacyi 
-\n 
-\n • Mnostva inšych palapšeńniaŭ i vypraŭleńniaŭ pamyłak 
-\n 
-\n i šmat inšaha…</string>
+    
     <string name="auto_split_recording_title">Aŭtamatyčnaje dzialiennie zapisaŭ paslia pieraryva</string>
     <string name="auto_split_recording_descr">Pačać novy siehmient paslia 6 minutnaha pierapynku, novy trek — paslia 2 hadzinnaha pierapynku, ci novy fajl paslia doŭhaha pierapynku (jak zmianiliasia data).</string>
     <string name="rendering_attr_contourDensity_name">Ščyĺnasć haryzantaliaŭ</string>
@@ -2595,19 +2536,7 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="trip_rec_notification_settings_desc">Pakazvać apaviaščennie, jakoje dazvolić pačać zapis padarožža.</string>
     <string name="shared_string_notifications">Paviedamleńni</string>
     <string name="shared_string_paused">Prypynieny</string>
-    <string name="release_2_5">• Ikonki na mapie, jakija moža naciskać 
-\n 
-\n • Pošuk lubych POI: Pošuk restaranaŭ pavodle kuchni abo kiempinhaŭ z peŭnymi vyhodami
-\n 
-\n • Novy styl mapy \"OsmAnd Topo\" dla vielasipiedystaŭ i piešych turystaŭ 
-\n 
-\n • Palapšeńnie zapisu śledu 
-\n 
-\n • Palapšeńnie apaviaščeńniaŭ pry navihacyi (Android Wear) 
-\n 
-\n • Mnostva inšych palapšeńniaŭ i vypraŭleńniaŭ 
-\n 
-\n i mnohaje inšaje…</string>
+    
     <string name="save_track_min_speed_descr">Fiĺtr: nie žurnaliavać kropki nižej hetaj chutkasci.</string>
     <string name="save_track_min_distance">Žurnaliavannie minimaĺnaha zrušennia</string>
     <string name="save_track_min_distance_descr">Fiĺtr: zadajcie minimaĺnuju adliehlasć ad kropki dlia žurnaliavannia novaj.</string>
@@ -2767,7 +2696,7 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="favorite_empty_place_name">Miesca</string>
     <string name="quick_action_duplicates">Nazva dla chutkaha dziejańnia ŭžo isnuje. Dziejańnie budzie zachovana jak %1$s kab pazbavicca dublavańnia.</string>
     <string name="quick_action_duplicate">Znojdzieny dublikat nazvy</string>
-    <string name="quick_action_showhide_favorites_descr">Pry naciskańni na knopku dziejańnia buduć pakazany ci schavany ŭlubionyja kropki na mapie.</string>
+    <string name="quick_action_showhide_favorites_descr">Nacisk na hetuju knopku pakaža ci schavaje ŭpadabanyja kropki na mapie.</string>
     <string name="quick_action_showhide_poi_descr">Pry naciskanni na knopku pakaža ci schavaje POI na mapie.</string>
     <string name="quick_action_add_create_items">Stvarennie eliemientaŭ</string>
     <string name="quick_action_fav_name_descr">Pakińcie pustym, kab aŭtamatyčna prymianić adras abo nazvu horadu.</string>
@@ -2804,15 +2733,7 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     
     
     <string name="min_max">Min./Maks.</string>
-    <string name="release_2_7">• Dadatak Mapillary z vuličnymi vyjavami 
-\n 
-\n • Vidžet-liniejka dla vymiareńniaŭ dystancyj 
-\n 
-\n • Razdzielenyja GPX-intervaly z padrabiaznaj infarmacyjaj ab vašym treku 
-\n 
-\n • Inšyja palapšeńni i vypraŭleńni chibaŭ
-\n
-\n</string>
+    
     <string name="rendering_value_translucent_pink_name">Paŭprazrysty ružovy</string>
     <string name="measurement_tool">Vymiarać adlehłaść</string>
     <string name="quick_action_resume_pause_navigation">Prypynić/adnavić navihacyju</string>
@@ -2854,7 +2775,7 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="empty_state_my_tracks">Dadać i zapisać slady</string>
     <string name="empty_state_my_tracks_desc">Zapisać ci impartavać sliady dlia prahliadu.</string>
     <string name="empty_state_favourites">Dadać va Ŭlubionyja</string>
-    <string name="empty_state_favourites_desc">Dadać ulubionyja na mapie ci impartavać z fajłavaj systemy.</string>
+    <string name="empty_state_favourites_desc">Impartavać upadabanyja ci dadać z dapamohaj markiroŭki punktaŭ na mapie.</string>
     <string name="import_track">Impartavać śled</string>
     <string name="import_track_desc">Fajł %1$s nie źmiaščaje kropki šlachu, impartavać jak śled?</string>
     <string name="move_point">Pieramiascić kropku</string>
@@ -2918,13 +2839,7 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="osn_modify_dialog_error">Nie atrymalasia zmianić natatku</string>
     <string name="osn_modify_dialog_title">Źmianić natatku</string>
     <string name="context_menu_item_modify_note">Źmianić OSM-natatku</string>
-    <string name="release_2_8">• Całkam pierapracavanyja markiery z linijami kirunku i planavańniem maršruta 
-\n 
-\n • Instrument vymiareńnia adlehłaściej z pryviazkaj da darohi i z zachavańniem kropak u śled 
-\n 
-\n • OsmAnd Live: vypraŭleńnie chibaŭ, abnaŭleńnie dadzienych na sierviery kožnyja 30 chvilin, abnaŭleńni realizavanyja ŭ navihacyi
-\n
-\n</string>
+    
     <string name="rendering_value_darkyellow_name">Ciomna-žoŭty</string>
     <string name="shared_string_road">Daroha</string>
     <string name="show_map">Pakazać mapu</string>
@@ -2937,30 +2852,30 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
 	<string name="shared_string_back">Nazad</string>
 	<string name="shared_string_view">Prahladzieć</string>
 	<string name="waypoints_added_to_map_markers">Kropki maršruta dadadzienyja ŭ markiery mapy</string>
-	<string name="import_gpx_file_description">mohuć być impartavanyja jak «Uliubionyja» ci jak GPX-fajl.</string>
+	<string name="import_gpx_file_description">mohuć być impartavanyja jak «Upadabanyja» ci jak GPX-fajl.</string>
     <string name="import_as_gpx">Impartavać jak GPX-fajł</string>
-    <string name="import_as_favorites">Impartavać jak uliubionyja</string>
+    <string name="import_as_favorites">Impartavać jak upadabanyja</string>
     <string name="import_file">Impartavać fajł</string>
 	<string name="tap_on_map_to_hide_interface_descr">Dotyk na mapie pierakliučaje knopki kiravańnia i vidžety.</string>
     <string name="tap_on_map_to_hide_interface">Poŭnyekranny režym</string>
     
     <string name="mark_passed">Adznačyć prajdzienyja</string>
-    <string name="add_favourites_group_to_markers_descr">Abiarycie katehoryju ŭlubionych, kab dadać da markieraŭ.</string>
+    <string name="add_favourites_group_to_markers_descr">Abiarycie katehoryju ŭpadabanych, kab dadać da markieraŭ.</string>
     <string name="shared_string_gpx_waypoints">Kropki sliedu</string>
     <string name="favourites_group">Katehoryja ŭlubionych</string>
     <string name="add_group">Dadać hrupu</string>
-    <string name="add_group_descr">Impartavać hrupy z uliubionych ci GPX-kropak.</string>
+    <string name="add_group_descr">Impartavać hrupy z upadabanych ci GPX-kropak.</string>
     <string name="empty_state_markers_active">Stvarycie markiery mapy!</string>
     <string name="empty_state_markers_active_desc">Dakraniciesia miesca i potym nacisnicie knopku markiera.</string>
     <string name="empty_state_markers_groups">Impartavać hrupy</string>
-    <string name="empty_state_markers_groups_desc">Impartavać hrupy uliubionych ci šliachavyja kropki jak markiery.</string>
+    <string name="empty_state_markers_groups_desc">Impartavać hrupy ŭpadabanych ci šliachavyja kropki jak markiery.</string>
     <string name="empty_state_markers_history_desc">Markiery, paznačanyja jak projdziennyja, z\'javiacca na hetym ekranie.</string>
     <string name="shared_string_two">Dva</string>
     <string name="shared_string_one">Adzin</string>
     <string name="show_guide_line_descr">Pakazvaje linii kirunku ad vašaha stanovišča da aktyŭnaha markiera.</string>
     <string name="show_arrows_descr">Pakazvaje adnu ci dźvie strelki, jakija pakazvajuć kirunak da aktyŭnych markieraŭ.</string>
     <string name="distance_indication_descr">Vybierycie, jak adlustroŭvać adlehłaść da aktyŭnych markieraŭ.</string>
-    <string name="active_markers_descr">Abiarycie koĺkasć aktyŭtyŭnych markieraŭ dlia adliustravannia.</string>
+    <string name="active_markers_descr">Abiarycie, koĺki ŭkazaĺnikaŭ napramku adliustroŭvać.</string>
     <string name="digits_quantity">Kolkaść dziesiatkovych ličbaŭ</string>
     <string name="show_number_pad">Pakazać ličbavuju paneĺ</string>
     <string name="shared_string_paste">Ustavić</string>
@@ -3017,27 +2932,7 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="lang_lo">Łaoskaja</string>
     <string name="will_open_tomorrow_at">Adčynicca zaŭtra a</string>
     <string name="rendering_attr_hidePOILabels_name">Nazvy POI</string>
-    <string name="release_2_9">• Vyjaŭliennie stop-sihnalaŭ ciapier uličvaje napramak ruchu
-\n
-\n • Navy alharytm, što nadaje dziejsnyja značenni padjomu/spusku dlia GPX-sliadoŭ
-\n
-\n • Čas chadźby ŭ zaliežnasci ad miascovasci (padjomu) (pravila Niejsmita)
-\n
-\n • Abnoŭlienaje kantekstnaje mieniu: pakazvaje kali adkryvajucca/zakryvajucca POI 
-\n 
-\n • Mieniu transparta: usie dastupnyja maršruty ciapier na miescie 
-\n 
-\n • Vikipiedyja: dabaŭliena knopka dlia adkrycca artykula, abnoŭlieny vyhliad artykulaŭ 
-\n 
-\n • Maršrut: dabaŭliena mahčymasć zmyny pačatkovaj i kačatkovaj kropak adnym dotykam 
-\n 
-\n • Natatki: dabaŭliena sartavannie pa typu i dacie 
-\n 
-\n • OSM praŭki: pakazvajecca značka i nazva POI-katehoryi, adliustroŭvajecca vykananaje dziejannie 
-\n 
-\n • Novy ekran chutkaha ŭvodu kaardynat dlia stvarennia markieraŭ 
-\n 
-\n</string>
+    
     <string name="day_off_label">vych.</string>
     <string name="winter_and_ski_renderer">Zimovy/lyžny</string>
     <string name="touring_view_renderer">Turystyčny (kantrast i detali)</string>
@@ -3185,4 +3080,12 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="shared_string_gpx_files">GPX-fajly</string>
     <string name="access_intermediate_arrival_time">Pramiežkavy čas prybyccia</string>
     <string name="map_widget_intermediate_time">Pramiežkavy čas</string>
-    </resources>
+    <string name="download_wikipedia_description">Spampavać artykuly Vikipedyi dlia %1$s dlia aŭtanomnaha čytannia.</string>
+    <string name="download_wikipedia_label">Spampavać danyja Vikipedyi</string>
+    <string name="open_in_browser_wiki">Adkryć artykul anlajn</string>
+    <string name="open_in_browser_wiki_description">Pahliadzieć artykul u braŭziery.</string>
+    <string name="download_wiki_region_placeholder">hety rehijon</string>
+    <string name="wiki_article_search_text">Pošuk adpaviednaha viki-artykula</string>
+    <string name="wiki_article_not_found">Artykul nie znojdzieny</string>
+    <string name="how_to_open_wiki_title">Jak adkryć artykuly Vikipedyi?</string>
+</resources>

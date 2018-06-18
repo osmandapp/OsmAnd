@@ -1,16 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+	<color name="white_color">#fff</color>
 
-    <color name="bg_color_light">#fff</color>
-    <color name="bg_color_dark">#333b40</color>
-    <color name="icon_color_light">#ccc</color>
-    <color name="icon_color_dark">#ff4f4f4f</color>
+	<color name="bg_color_light">#fff</color>
+	<color name="bg_color_dark">#222526</color>
 
-    <color name="osmand_orange">#ff8f00</color>
+	<color name="icon_color_light">#727272</color>
+	<color name="icon_color_dark">#727272</color>
 
-    <color name="dialogTitleBackgroundColor">#2f7af5</color>
+	<color name="osmand_orange">#ff8f00</color>
+
+	<color name="ctrl_active_color_light">#237bff</color>
+	<color name="ctrl_active_color_dark">#d28521</color>
+
+	<color name="ctrl_color_light">#f0f0f0</color>
+	<color name="ctrl_color_dark">#17191a</color>
+
+	<color name="primary_text_color_light">#212121</color>
+	<color name="primary_text_color_dark">#cccccc</color>
+
+	<color name="secondary_text_color_light">#727272</color>
+	<color name="secondary_text_color_dark">#727272</color>
+
+	<color name="description_text_color_light">#b3b3b3</color>
+	<color name="description_text_color_dark">#4d4d4d</color>
+
+	<color name="divider_color_light">#f0f0f0</color>
+	<color name="divider_color_dark">#2d3133</color>
 
 </resources>

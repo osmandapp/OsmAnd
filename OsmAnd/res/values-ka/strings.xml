@@ -265,7 +265,7 @@
   <string name="local_index_mi_restore">აქტივაცია</string>
   <string name="local_index_mi_backup">დეაქტივაცია</string>
   
-  <string name="local_index_mi_reload">განახლება SDCard-დან</string>
+  
   <string name="shared_string_download">ჩამოტვირთვა</string>
   
   <string name="local_index_poi_data">POI მონაცემები</string>
@@ -1100,7 +1100,7 @@
 	<string name="driving_region_canada">კანადა</string>
 	<string name="driving_region_europe_asia">ევროპა &amp; აზია</string>
 	<string name="driving_region_uk">UK, ინდოეთია, ავსტრალია &amp; სხვანი</string>
-    <string name="announce_gpx_waypoints">GPX წერტილების გაცხადება</string>
+    
     <string name="speak_title">გაცხადება…</string>
 	<string name="speak_descr">გაცხადებებში ქუჩის სახელების, სიჩქარის შეზღუდვის (იძულებითი გაჩერებების, სიჩქარის კონტროლის), ჩქაროსნული კამერების, სიჩქარის ლიმიტების მითითების ჩასწორება</string>
 	<string name="speak_street_names">ქუჩის სახელების გაცხადება</string>

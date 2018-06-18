@@ -1,143 +1,234 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fillViewport="true"
-    android:paddingBottom="@dimen/dialog_padding_vertical"
-    android:paddingLeft="@dimen/dialog_padding_horizontal"
-    android:paddingRight="@dimen/dialog_padding_horizontal"
-    android:paddingTop="@dimen/dialog_padding_vertical">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+	<LinearLayout
+		android:id="@+id/welcome_layout"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:layout_marginLeft="@dimen/dialog_padding_horizontal_edit"
+		android:layout_marginRight="@dimen/dialog_padding_horizontal_edit"
+		android:layout_marginTop="@dimen/dialog_padding_vertical"
+		android:orientation="vertical"
+		android:visibility="visible">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.2"
-            android:gravity="center"
-            android:text="@string/login_to_telegram"
-            android:textSize="@dimen/dialog_title_text_size"
-            android:textStyle="bold" />
+		<TextView
+			android:id="@+id/welcome_title"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:text="@string/shared_string_welcome"
+			android:textColor="?android:attr/textColorPrimary"
+			android:textSize="@dimen/title_text_size"
+			android:textStyle="bold" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_gravity="center"
-            android:layout_weight="0.6"
-            android:gravity="center"
-            android:orientation="vertical">
+		<ScrollView
+			android:layout_width="match_parent"
+			android:layout_height="0dp"
+			android:layout_marginTop="@dimen/dialog_padding_vertical"
+			android:layout_weight="1"
+			android:fillViewport="true">
 
-            <LinearLayout
-                android:id="@+id/enterPhoneNumberLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:visibility="visible">
+			<TextView
+				android:id="@+id/welcome_descr"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:textColor="?android:attr/textColorSecondary"
+				android:textSize="@dimen/descr_text_size"
+				tools:text="@string/welcome_descr" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/phone_number_title" />
+		</ScrollView>
 
-                <EditText
-                    android:id="@+id/phoneNumberEditText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/phone_number_title"
-                    android:inputType="phone"
-                    tools:text="+380661234567" />
+		<Button
+			android:id="@+id/welcome_continue_button"
+			style="@style/DialogActionButtonActive"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center"
+			android:layout_marginBottom="@dimen/dialog_padding_vertical"
+			android:layout_marginLeft="@dimen/content_padding_standard"
+			android:layout_marginRight="@dimen/content_padding_standard"
+			android:layout_marginTop="@dimen/content_padding_standard"
+			android:text="@string/shared_string_continue" />
 
-            </LinearLayout>
+	</LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/enterCodeLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:visibility="gone">
+	<LinearLayout
+		android:id="@+id/login_layout"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:orientation="vertical"
+		android:visibility="gone">
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/authentication_code" />
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:gravity="center_vertical"
+			android:minHeight="@dimen/action_bar_height"
+			android:orientation="horizontal">
 
-                <EditText
-                    android:id="@+id/codeEditText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/authentication_code"
-                    android:inputType="number"
-                    tools:text="123456" />
+			<android.support.v7.widget.AppCompatImageView
+				android:id="@+id/back_button"
+				android:layout_width="@dimen/dialog_button_height"
+				android:layout_height="@dimen/dialog_button_height"
+				android:layout_marginEnd="@dimen/content_padding_standard"
+				android:layout_marginLeft="@dimen/content_padding_half"
+				android:layout_marginRight="@dimen/content_padding_standard"
+				android:layout_marginStart="@dimen/content_padding_half"
+				android:background="?attr/selectableItemBackgroundBorderless"
+				android:scaleType="centerInside"
+				android:src="@drawable/ic_arrow_back"
+				android:tint="?attr/icon_color" />
 
-            </LinearLayout>
+			<TextView
+				android:id="@+id/login_title"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginEnd="@dimen/content_padding_standard"
+				android:layout_marginRight="@dimen/content_padding_standard"
+				android:textColor="?attr/ctrl_active_color"
+				android:textSize="@dimen/title_text_size"
+				android:textStyle="bold"
+				tools:text="@string/shared_string_authorization" />
 
-            <LinearLayout
-                android:id="@+id/enterPasswordLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:visibility="gone">
+		</LinearLayout>
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/shared_string_password" />
+		<TextView
+			android:id="@+id/login_description"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginBottom="@dimen/content_padding_standard"
+			android:layout_marginEnd="@dimen/dialog_padding_horizontal"
+			android:layout_marginLeft="@dimen/dialog_padding_horizontal"
+			android:layout_marginRight="@dimen/dialog_padding_horizontal"
+			android:layout_marginStart="@dimen/dialog_padding_horizontal"
+			android:layout_marginTop="@dimen/content_padding_standard"
+			android:textColor="?android:attr/textColorSecondary"
+			android:textSize="@dimen/descr_text_size"
+			tools:text="@string/shared_string_authorization_descr" />
 
-                <EditText
-                    android:id="@+id/passwordEditText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/shared_string_password"
-                    android:inputType="textPassword"
-                    tools:text="12345678" />
+		<ScrollView
+			android:layout_width="match_parent"
+			android:layout_height="0dp"
+			android:layout_weight="1"
+			android:fillViewport="true">
 
-            </LinearLayout>
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginEnd="@dimen/dialog_padding_horizontal_edit"
+				android:layout_marginLeft="@dimen/dialog_padding_horizontal_edit"
+				android:layout_marginRight="@dimen/dialog_padding_horizontal_edit"
+				android:layout_marginStart="@dimen/dialog_padding_horizontal_edit"
+				android:layout_marginTop="@dimen/content_padding_standard"
+				android:orientation="vertical">
 
-            <LinearLayout
-                android:id="@+id/progressLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:visibility="visible">
+				<LinearLayout
+					android:id="@+id/enter_phone_number_layout"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:orientation="vertical"
+					android:visibility="visible">
 
-                <ProgressBar
-                    android:layout_width="@dimen/progress_bar_size_small"
-                    android:layout_height="@dimen/progress_bar_size_small" />
+					<studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						app:hasClearButton="true"
+						app:labelText="@string/phone_number_title">
 
-            </LinearLayout>
+						<studio.carbonylgroup.textfieldboxes.ExtendedEditText
+							android:id="@+id/phone_number_edit_text"
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content"
+							android:inputType="phone"
+							android:text="@string/plus"
+							tools:text="+380661234567" />
 
-        </LinearLayout>
+					</studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.2"
-            android:gravity="bottom"
-            android:orientation="horizontal">
+				</LinearLayout>
 
-            <Button
-                android:id="@+id/calcelButton"
-                style="?android:attr/buttonBarButtonStyle"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/shared_string_cancel" />
+				<LinearLayout
+					android:id="@+id/enter_code_layout"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:orientation="vertical"
+					android:visibility="gone">
 
-            <Button
-                android:id="@+id/continueButton"
-                style="?android:attr/buttonBarButtonStyle"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/shared_string_continue" />
+					<studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						app:hasClearButton="true"
+						app:labelText="@string/authentication_code">
 
-        </LinearLayout>
+						<studio.carbonylgroup.textfieldboxes.ExtendedEditText
+							android:id="@+id/code_edit_text"
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content"
+							android:inputType="number"
+							tools:text="123456" />
 
-    </LinearLayout>
+					</studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
 
-</ScrollView>
+				</LinearLayout>
+
+				<LinearLayout
+					android:id="@+id/enter_password_layout"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:orientation="vertical"
+					android:visibility="gone">
+
+					<studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						app:hasClearButton="true"
+						app:labelText="@string/shared_string_password">
+
+						<studio.carbonylgroup.textfieldboxes.ExtendedEditText
+							android:id="@+id/password_edit_text"
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content"
+							android:inputType="textPassword"
+							tools:text="12345678" />
+
+					</studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+				</LinearLayout>
+
+				<LinearLayout
+					android:id="@+id/progress_layout"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:gravity="center"
+					android:orientation="vertical"
+					android:visibility="gone">
+
+					<ProgressBar
+						android:layout_width="@dimen/progress_bar_size_small"
+						android:layout_height="@dimen/progress_bar_size_small" />
+
+				</LinearLayout>
+
+			</LinearLayout>
+
+		</ScrollView>
+
+		<Button
+			android:id="@+id/continue_button"
+			style="@style/DialogActionButtonActive"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center"
+			android:layout_marginBottom="@dimen/dialog_padding_vertical"
+			android:layout_marginLeft="@dimen/content_padding_standard"
+			android:layout_marginRight="@dimen/content_padding_standard"
+			android:layout_marginTop="@dimen/content_padding_standard"
+			android:text="@string/shared_string_continue" />
+
+	</LinearLayout>
+
+</LinearLayout>

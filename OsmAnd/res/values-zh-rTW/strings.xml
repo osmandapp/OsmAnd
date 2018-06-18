@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
     <string name="rendering_attr_roadColors_description">選擇道路的色彩調配：</string>
     <string name="rendering_attr_roadColors_name">道路的色彩調配</string>
     <string name="map_widget_show_destination_arrow">顯示目的地方向</string>
@@ -48,28 +47,28 @@
     <string name="snap_to_road_descr">導航過程中對齊道路位置。</string>
     <string name="snap_to_road">對齊道路</string>
     <string name="osmand_short_description_80_chars">將離線與線上的 OSM 地圖，用在全球行動地圖檢視和導航</string>
-    <string name="osmand_long_description_1000_chars">OsmAnd (OSM Automated Navigation Directions)
-\n
-\nOsmAnd 是開放程式碼的軟體導航應用程式，存取各式各樣的全球性 OpenStreetMap (簡稱 OSM 開放街道地圖) 資料。所有圖資(向量圖或地圖圖磚)可存放於手機的記憶卡上，還可作離線與線上圖資導航，包含轉向建議(turn by turn)語音導航。
-\n
-\n一些主要功能：
-\n- 完整的離線功能（存放下載的向量圖或地圖圖磚於裝置儲存空間）
-\n- 提供細致的全球離線向量圖資
-\n- 直接從應用程式下載各國或區域圖資
-\n- 可疊加不同的多種地圖層於自訂的透明度，如 GPX 或導航軌跡、興趣點、我的收藏、公共運輸站
-\n- 離線查詢地址、場所(POI)
-\n- 中程距離的離線使用路線
-\n- 汽車、自行車、步行模式有下列選項：
-\n- 自動日夜模式切換
-\n- 可依據速度選擇地圖縮放
-\n- 根據羅盤或行進方向進行地圖對齊
-\n- 車道引導、速限顯示、使用真人語音或 TTS 語音
-\n
-\n這個 OsmAnd 免費版的限制：
-\n- 地圖下載次數有限制
-\n- 沒有離線維基百科 POI 的存取
-\n
-\nOsmAnd 正在積極開發我們的專案，並且其持續的發展，依賴資金捐助以用於開發和測試新的功能。請考慮購買 OsmAnd +或是資助特定的新功能，又或在 https://osmand.net 網站上作一般的捐贈。</string>
+    <string name="osmand_long_description_1000_chars">OsmAnd (OSM Automated Navigation Directions) 
+\n 
+\nOsmAnd 是開放程式碼的軟體導航應用程式，存取各式各樣的全球性 OpenStreetMap (簡稱 OSM 開放街道地圖) 資料。所有圖資(向量圖或地圖圖磚)可存放於手機的記憶卡上，還可作離線與線上圖資導航，包含轉向建議(turn by turn)語音導航。 
+\n 
+\n一些主要功能： 
+\n- 完整的離線功能（存放下載的向量圖或地圖圖磚於裝置儲存空間） 
+\n- 提供細致的全球離線向量圖資 
+\n- 直接從應用程式下載各國或區域圖資 
+\n- 可疊加不同的多種地圖層於自訂的透明度，如 GPX 或導航軌跡、興趣點、我的收藏、公共運輸站 
+\n- 離線查詢地址、場所(POI) 
+\n- 中程距離的離線使用路線 
+\n- 汽車、自行車、步行模式有下列選項： 
+\n- 自動日夜模式切換 
+\n- 可依據速度選擇地圖縮放 
+\n- 根據羅盤或行進方向進行地圖對齊 
+\n- 車道引導、速限顯示、使用真人語音或 TTS 語音 
+\n 
+\n這個 OsmAnd 免費版的限制： 
+\n- 地圖下載次數有限制 
+\n- 沒有離線維基百科 POI 的存取 
+\n 
+\nOsmAnd 正在積極開發我們的專案，並且其持續的發展，依賴資金捐助以用於開發和測試新的功能。請考慮購買 OsmAnd+ 或是資助特定的新功能，又或在 https://osmand.net 網站上作一般的捐贈。</string>
     <string name="osmand_plus_short_description_80_chars">將離線與線上的 OSM 地圖，用在全球行動地圖檢視和導航</string>
     <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OSM Automated Navigation Directions)
 \n
@@ -228,7 +227,7 @@
 	
 	<string name="osmand_rastermaps_plugin_description">有了這個外掛元件，您可以存取多種類型的網上（所謂的圖磚或網格）地圖，從預設的 OpenStreetMap 圖磚（如 Mapnik）到衛星圖像和特殊用途的圖層，比如天氣地圖、氣候地圖、地質地圖、地形陰影層等。 
 \n 
-\n這些地圖可以被用來作為主要的（基本）地圖，以便在 OsmAnd 地圖螢幕上顯示，或作為上層又或另外基本地圖的底層（如 OsmAnd 標準的離線地圖）。為了使任何的底層地圖可以看見，OsmAnd 向量地圖可以容易的根據需要透過 \'組態地圖\' 選單來隱藏某些構成。 
+\n這些地圖可以被用來作為主要的（基本）地圖，以便在 OsmAnd 地圖螢幕上顯示，或作為上層又或另外基本地圖的底層（如 OsmAnd 標準的離線地圖）。為了使任何的底層地圖可以看見，OsmAnd 向量地圖可以容易的根據需要透過「組態地圖」選單來隱藏某些構成。 
 \n 
 \n地圖圖磚可以直接透過線上資料來源獲得，或者可以使用準備好的離線地圖（手動複製到 OsmAnd 的資料檔案夾中） 作為一個 SQLite 資料庫，可以透過各種的第三方地圖編制工具產生。</string>
     <string name="osmand_background_plugin_description">透過週期性的喚醒 GPS 裝置，在背景（螢幕關閉）顯示設定，以開啟追蹤與導航。</string>
@@ -451,7 +450,7 @@
     <string name="local_index_mi_restore">啟用</string>
     <string name="local_index_mi_backup">停用</string>
 
-    <string name="local_index_mi_reload">從記憶卡重新載入</string>
+    
     <string name="local_index_poi_data">POI 資料</string>
     <string name="local_index_address_data">地址資料</string>
     <string name="local_index_transport_data">公共交通資料</string>
@@ -490,7 +489,7 @@
     <string name="map_transparency_descr">修改底圖的透明度。</string>
     <string name="map_transparency">底圖透明度</string>
     <string name="layer_underlay">底層地圖…</string>
-    <string name="map_underlay">下層地圖</string>
+    <string name="map_underlay">底層地圖</string>
     <string name="map_underlay_descr">選擇底層地圖。</string>
     <string name="layer_overlay">上層地圖…</string>
     <string name="map_overlay">上層地圖</string>
@@ -1130,7 +1129,7 @@
     <string name="speak_cameras">測速照相</string>
     <string name="speak_traffic_warnings">交通狀況警示</string>
     <string name="osb_author_dialog_password">OSM 密碼 (選項)</string>
-    <string name="announce_gpx_waypoints">GPX 航點</string>
+    
     <string name="speak_title">通報…</string>
     <string name="speak_descr">組態通報街道名稱、交通流量警示（強制停止、減速丘）、測速照相警告、速限。</string>
     <string name="speak_street_names">街道名稱 (TTS)</string>
@@ -1507,9 +1506,9 @@
     <string name="download_additional_maps">要下載缺少的地圖 %1$s (%2$d MB) 嗎？</string>
 
     <string name="shared_string_waypoints">航點</string>
-    <string name="targets">目的地</string>
+    
     <string name="way_alarms">交通狀況提醒</string>
-    <string name="speak_favorites">附近的收藏</string>
+    <string name="speak_favorites">附近我的收藏</string>
     <string name="speak_poi">附近的 POI</string>
     <string name="shared_string_all">全部</string>
     <string name="index_tours">旅遊</string>
@@ -1543,7 +1542,7 @@
 
 
     <string name="print_route">列印路線</string>
-    <string name="fav_point_emoticons_message">我的收藏標點名稱，已被修改為 %1$s，便於正確的儲存字串表情符號到檔案中。</string>
+    <string name="fav_point_emoticons_message">我的收藏名稱，已被修改為 %1$s，便於正確的儲存字串表情符號到檔案中。</string>
     <string name="speed_limit_exceed">速限容許餘裕</string>
     <string name="speed_limit_exceed_message">選擇速限容許餘裕界限，超過時您將會收到語音警告。</string>
     
@@ -1905,7 +1904,7 @@
     <string name="offline_maps_and_navigation">離線地圖\n和導航</string>
     <string name="commit_poi">提交 POI</string>
     <string name="routing_attr_avoid_shuttle_train_name">避開穿梭頻繁的鐵路</string>
-    <string name="routing_attr_avoid_shuttle_train_description">避開往返頻繁的鐵路</string>
+    <string name="routing_attr_avoid_shuttle_train_description">避開來往頻繁的鐵路</string>
     <string name="plugin_settings">外掛元件</string>
     <string name="tab_title_basic">基本</string>
     <string name="tab_title_advanced">展開</string>
@@ -2067,25 +2066,7 @@
     <string name="rendering_attr_roadStyle_description">道路樣式</string>
     <string name="poi_dialog_reopen">重新開啟</string>
 	<string name="osm_save_offline">離線儲存</string>
-    <string name="release_2_2">"\\u2022 在地圖上和其它螢幕上，為點擊位置做了新的敏捷內容選單使用者界面 
-\n 
-\n • 地圖螢幕上現在除了直接啟動外，還有\'在應用程式時啟動顯示儀表板\'可選 
-\n 
-\n • 組態哪些以及何種卡可以在儀表板上顯示 
-\n 
-\n • 如果您喜歡基本選單的應用程式控制，繞過儀表板方式 
-\n 
-\n • 要下載地圖，可以直接在全球地圖上點選區域 
-\n 
-\n • 更好的重新計算路線（現在引擎經過反復的嘗試，建議一條不同的路線） 
-\n 
-\n •  POI (興趣點)搜尋現在支援更具體的查詢 
-\n 
-\n • 改善過的 POI (興趣點)和 OSM 編輯功能 
-\n 
-\n • 地圖資料下載結構和界面重新設計 
-\n 
-\n 還有更多…"</string>
+    
     <string name="copied_to_clipboard">複製到剪貼簿</string>
     
     
@@ -2207,7 +2188,7 @@
     <string name="osm_user_stat">編輯 %1$s，等級 %2$s，合計編輯 %3$s</string>
     <string name="osm_editors_ranking">OSM 編輯排名</string>
     <string name="osm_live_subscribe_btn">捐助</string>
-    <string name="osm_live_email_desc">有關您捐款的資訊。</string>
+    <string name="osm_live_email_desc">需要為您提供有關捐款的資訊。</string>
     <string name="osm_live_user_public_name">公開名稱</string>
     <string name="osm_live_hide_user_name">不要在報告中顯示我的名稱</string>
     <string name="osm_live_support_region">支援地區</string>
@@ -2239,17 +2220,7 @@
     <string name="report">報告</string>
     <string name="file_name_containes_illegal_char">檔案名稱含有違反規則的字符</string>
 <string name="storage_permission_restart_is_required">現在應用程式允許寫入外部記憶體。但是需要重新啟動程式。</string>
-    <string name="release_2_3">"\\u2022 OSM 即時。支援地圖貢獻者和開發者和每小時獲得地圖更新。
-\n 
-\n • 地圖標記。一種新的方式以快速在地圖上選擇地點。 
-\n 
-\n • 更詳細的 OSM 地圖與國家具體的公路標誌和許多新的地圖功能。 
-\n 
-\n • 改善外觀和感覺的路線準備。 
-\n 
-\n • 在地圖下拉選單中有許多改善，如下拉地址查找。 
-\n 
-\n  以及更多…"</string>
+    
     <string name="no_map_markers_found">請透過地圖增加地圖標記</string>
     <string name="no_waypoints_found">未發現任何航點</string>
     <string name="rendering_value_medium_name">中等</string>
@@ -2319,19 +2290,7 @@
     <string name="show_something_on_map">在地圖上顯示 %1$s</string>
     <string name="dist_away_from_my_location">查詢 %1$s 路線</string>
     
-    <string name="release_2_4">\\u2022 新加入非常強大的自由文字查詢
-\n 
-\n • 透過藍牙集成汽車音響系統 / 電話揚聲器 
-\n 
-\n • 改進的路線引導、 語音提示，和轉彎道指示 
-\n 
-\n • 改進了運輸層與路線繪製 
-\n 
-\n • 增加了更多的語言環境，現在支援區域的語言環境 
-\n 
-\n • 許多其它的改善和修正錯誤 
-\n 
-\n 以及更多…</string>
+    
     <string name="coords_search">座標查詢</string>
     <string name="advanced_coords_search">進階座標查詢</string>
     <string name="route_stops_before">%1$s 之前停止</string>
@@ -2339,7 +2298,7 @@
 
     <string name="routing_attr_short_way_name">省油的方式</string>
     <string name="routing_attr_short_way_description">使用省油的方式 (通常路途較短)。</string>
-    <string name="replace_favorite_confirmation">您確定您想要替換收藏的 %1$s 嗎？</string>
+    <string name="replace_favorite_confirmation">您確定想要替換我的收藏 %1$s 嗎？</string>
     <string name="shared_string_change">更換</string>
     <string name="get_started">開始</string>
     <string name="update_all_maps_now">現在要更新所有地圖嗎？</string>
@@ -2356,7 +2315,7 @@
     <string name="storage_place_description">OsmAnd 資料存儲 (給地圖、GPX 檔案等)：%1$s。</string>
     <string name="give_permission">授予權限</string>
     <string name="allow_access_location">允許位置的存取</string>
-    <string name="first_usage_greeting">在沒有連線到網際網路的情況下，取得指引與探索新地點</string>
+    <string name="first_usage_greeting">在沒有網際網路連線的情況下，取得指引與探索新地點</string>
     <string name="search_my_location">尋找我的位置</string>
     <string name="no_update_info">不要顯示新版本</string>
     <string name="osm_live_banner_desc">獲得無限制的地圖下載和每個月超過一次以上的地圖更新︰每週、每天或每小時。</string>
@@ -2410,19 +2369,7 @@
     
     
     <string name="shared_string_notifications">通知</string>
-    <string name="release_2_5">\\022 可輕點在地圖上的圖示 
-\n 
-\n• 非常強大的 POI 篩選查詢：例如依菜餚找餐館或附有特定設施的露營場地 
-\n 
-\n• 新的地形圖樣式給自行車和徒步旅行者 
-\n 
-\n• 加強的行程記錄 
-\n 
-\n• 改善了導航通知（Android Wear） 
-\n 
-\n• 許多其它的改善和錯誤修復 
-\n 
-\n和更多…</string>
+    
     <string name="gpx_no_tracks_title">您尚未有任何的 GPX 檔案</string>
     <string name="gpx_no_tracks_title_folder">您也可以增加 GPX 檔案到資料夾</string>
     <string name="gpx_add_track">增加 GPX 檔案</string>
@@ -2492,7 +2439,7 @@
     <string name="quick_action_map_overlay">更改地圖上圖層</string>
     <string name="quick_action_map_overlay_title">地圖上圖層</string>
     <string name="quick_action_map_overlay_action">增加上圖層</string>
-    <string name="quick_action_map_underlay">更改地圖襯底層</string>
+    <string name="quick_action_map_underlay">更改地圖底層</string>
     <string name="quick_action_map_underlay_title">地圖襯底層</string>
     <string name="quick_action_map_underlay_action">增加襯底層</string>
     <string name="quick_action_map_source">更改地圖來源</string>
@@ -2538,27 +2485,7 @@
     <string name="quick_action_page_list_descr">輕點這個動作按鈕會直達下面的清單。</string>
     <string name="auto_split_recording_title">自動分割錄製之後的間隙</string>
 	<string name="auto_split_recording_descr">如果日期已更改，開始新區段在6分鐘後的間隔，新軌跡在2小時後的間隔，或新檔案在更長的間隔之後。</string>
-    <string name="release_2_6">"\\u2022 新功能：快速動作按鈕 
-\n 
-\n •  改進了觸控螢幕手勢的回應(同時平移和縮放) 
-\n
-\n • 新的地圖字體覆蓋了更多的語言環境 
-\n
-\n • 支援 TTS 不同版本的區域語言(和語法) 
-\n
-\n • 在一些地圖樣式和維基百科的清晰度增強 
-\n
-\n • 支援開放位置碼 (OLC) 
-\n
-\n •  為記錄的 GPX 軌跡和預測的路線顯示海拔、坡度和速度的概貌 
-\n
-\n •  為自行車路線的「騎行樣式」設定和邏輯改進 
-\n
-\n •  給自行車路線的高度資料設定 
-\n
-\n •  其它的幾項改進和錯誤修復 
-\n
-\n 和更多…"</string>
+    
 	<string name="rendering_attr_depthContours_description">顯示等深線和標記。</string>
     <string name="rendering_attr_depthContours_name">航海等深線</string>
 	
@@ -2779,8 +2706,8 @@
     <string name="srtm_menu_download_descr">下載「等高線」圖以使用在這個區域。</string>
     <string name="shared_string_plugin">外掛元件</string>
     <string name="srtm_purchase_header">要看到地圖上的等高線，您需要購買並安裝「等高線」外掛元件</string>
-    <string name="hillshade_menu_download_descr">下載「地形陰影層」地圖到這個區域的地形。</string>
-    <string name="hillshade_purchase_header">安裝「等高線」外掛元件以在地圖上顯示</string>
+    <string name="hillshade_menu_download_descr">要在地圖上看到地形陰影，請下載該區域的地形陰影覆疊圖層。</string>
+    <string name="hillshade_purchase_header">要在地圖上看到地形陰影，您需要購買並安裝「等高線」外掛元件</string>
     <string name="hide_from_zoom_level">從縮放級別來隱藏</string>
     <string name="sorted_by_distance">按距離排序</string>
     <string name="quick_action_showhide_osmbugs_title">切換 OSM 註解</string>
@@ -2835,15 +2762,7 @@
     
     
     <string name="min_max">最小/最大</string>
-    <string name="release_2_7">\\u2022 Mapillary 外掛元件與街道等級影像
-\n
-\n • 用於距離測量的尺規小工具
-\n
-\n • GPX 分配間隔與關於您軌跡的詳細資訊
-\n
-\n • 其他改進和錯誤修正
-\n
-\n</string>
+    
     <string name="rendering_value_translucent_pink_name">半透明粉紅色</string>
     <string name="quick_action_resume_pause_navigation">暫停/繼續導航</string>
     <string name="quick_action_resume_pause_navigation_descr">輕點此按鈕以暫停或繼續導航。</string>
@@ -2949,13 +2868,7 @@
     <string name="osn_modify_dialog_error">無法修改註解</string>
     <string name="osn_modify_dialog_title">修改註解</string>
     <string name="context_menu_item_modify_note">修改 OSM 註解</string>
-    <string name="release_2_8">\\022 完全重做地圖標記偕同方向線和路線規劃 
-\n 
-\n • 測量距離工具嵌入快照於道路樣貌和儲存標點為軌跡 
-\n 
-\n • OsmAnd Live：修復錯誤，每30分鐘伺服器上最新的資料，更新應用到導航裡 
-\n 
-\n</string>
+    
     <string name="rendering_value_darkyellow_name">暗黃色</string>
     <string name="show_map">顯示地圖</string>
     <string name="route_is_calculated">路線計算</string>
@@ -2999,7 +2912,7 @@
     <string name="shared_string_two">二</string>
     <string name="shared_string_one">一</string>
     <string name="distance_indication_descr">選擇如何顯示活動標記的距離。</string>
-    <string name="active_markers_descr">選擇要顯示活躍標記的數量。</string>
+    <string name="active_markers_descr">選擇要顯示多少方向指示。</string>
     <string name="empty_state_markers_history_desc">標記為已通過的標點將顯現在此螢幕上。</string>
     <string name="show_guide_line_descr">顯示指引路線到活動標記位置。</string>
     <string name="show_arrows_descr">顯示一個或兩個箭頭指示方向到活動標記。</string>
@@ -3056,26 +2969,7 @@
     <string name="touring_view_renderer">旅遊風景</string>
     <string name="nautical_renderer">航海</string>
 <string name="rendering_attr_hidePOILabels_name">POI 標籤</string>
-    <string name="release_2_9">\\022 更新了快顯功能選單：顯示 POI 何時開啟/關閉
-\n 
-\n • 交通運輸選單：所有可用到的路線現在都在頂部
-\n
-\n • 維基百科：增加按鈕開啟原創文章，更新了文章的外觀
-\n 
-\n • 路線：增加了互換起點和終點的實用性只要一次點觸 
-\n 
-\n • 註解：按類型和日期增加排序 
-\n 
-\n • OSM 編輯：顯示 POI 類型的圖示和名稱，陳列已完成的操作 
-\n 
-\n • 為快速建立標記，新增了快速坐標輸入畫面 
-\n
-\n • 停止標誌的檢測現在考量了駕駛的方向
-\n
-\n • 為 GPX 軌跡提供有意義的上坡/下坡值的新運算法則
-\n
-\n • 地形（上坡）察覺登山健行時間（尼史密夫定律）
-\n</string>
+    
     <string name="will_open_tomorrow_at">明天營業於</string>
     <string name="copy_location_name">複製標點/POI 名稱</string>
     <string name="toast_empty_name_error">無名稱的位置</string>
@@ -3160,10 +3054,10 @@
     <string name="purchase_subscription_title">訂閱 - %1$s</string>
 
     <string name="wikivoyage_offline">離線維基導遊</string>
-    <string name="dayly_map_updates">地圖更新：每天</string>
+    
     <string name="unlimited_downloads">無限制的下載</string>
     <string name="wikipedia_offline">離線維基百科</string>
-    <string name="contour_lines_sea_depth">等高線 + 海洋深度</string>
+    
     <string name="unlock_all_features">解鎖所有 OsmAnd 功能</string>
 
     <string name="monthly_map_updates">地圖更新：<b>每個月</b></string>

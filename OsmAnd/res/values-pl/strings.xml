@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
 
     <string name="use_transparent_map_theme">Przezroczysty styl</string>
     <string name="native_library_not_supported">To urządzenie nie obsługuje biblioteki renderowania natywnego.</string>
@@ -83,7 +82,7 @@
     <string name="local_index_mi_restore">Przywróć</string>
     <string name="local_index_mi_backup">Zarchiwizuj</string>
 
-    <string name="local_index_mi_reload">Wczytaj ponownie z karty pamięci</string>
+    
     <string name="shared_string_download">Pobierz</string>
 
     <string name="local_index_poi_data">Dane użytecznych miejsc</string>
@@ -1196,7 +1195,7 @@
     <string name="speak_title">Zapowiadanie…</string>
     <string name="speak_descr">Konfiguruje zapowiadanie nazw ulic, ostrzeżeń o ruchu (przymusowe przystanki, progi zwalniające), fotoradarów, ograniczeń prędkości.</string>
     <string name="speak_street_names">Nazwy ulic (syntezowane)</string>
-    <string name="announce_gpx_waypoints">Punkty śladu GPX</string>
+    
 
 
     <string name="driving_region_japan">Japonia</string>
@@ -1590,7 +1589,7 @@
     <string name="index_tours">Wycieczki</string>
     <string name="shared_string_all">Wszystkie</string>
     <string name="shared_string_waypoints">Punkty trasy</string>
-    <string name="targets">Cele podróży</string>
+    
     <string name="way_alarms">Ostrzeżenia ruchu drogowego</string>
     <string name="speak_favorites">Pobliskie ulubione miejsca</string>
     <string name="speak_poi">Pobliskie użyteczne miejsca</string>
@@ -2066,23 +2065,7 @@ Długość %2$s</string>
     <string name="access_from_map_description">Przycisk menu uruchamia kokpit zamiast menu</string>
     <string name="access_from_map">Dostęp z mapy</string>
     <string name="copied_to_clipboard">Skopiowane do schowka</string>
-    <string name="release_2_2">\\u2022 Nowe menu kontekstowe, przystosowane do wybierania lokacji na mapie oraz na innych ekranach
-\n 
-\n • Mapa jest teraz wyświetlana bezpośrednio, o ile nie wybrano opcji \'Pokaż pulpit podczas startu aplikacji\' 
-\n 
-\n • Można skonfigurować które zakładki oraz jak będą wyświetlane na pulpicie 
-\n 
-\n • Pomiń panel jeżeli chcesz kontrolować aplikacją poprzez menu 
-\n 
-\n • W celu pobrania map, interesujące nas regiony można wybrać bezpośrednio na mapie świata 
-\n 
-\n • Wyszukiwarka POI wspiera teraz bardziej precyzyjne zapytania 
-\n 
-\n • Poprawiona funkcjonalność POI oraz edytora OSM 
-\n 
-\n • Struktura oraz interfejs menu pobierania map zostały ulepszone 
-\n 
-\n i więcej…</string>
+    
     <string name="context_menu_item_open_note">Utwórz uwagę OSM</string>
     <string name="osn_bug_name">Uwaga OSM</string>
     <string name="osn_comment_dialog_title">Dodaj komentarz</string>
@@ -2241,17 +2224,7 @@ Długość %2$s</string>
     <string name="show_transparency_seekbar">Pasek przezroczystości</string>
     <string name="no_map_markers_found">Proszę dodać znacznik na mapie</string>
     <string name="no_waypoints_found">Nie znaleziono punktów</string>
-    <string name="release_2_3">\\u2022 OSM Live. Wspieraj współtwórców map i programistów, aby uzyskać bieżące aktualizacji mapy.
-\n 
-\n • Znaczniki mapy. Nowy sposób na szybkie oznaczenie położenia na mapie. 
-\n 
-\n • Bardziej szczegółowe mapy OSM z oznaczeniami numeracji dróg specyficznymi dla konkretnego kraju oraz wiele nowych funkcji map. 
-\n 
-\n • Ulepszony wygląd i przygotowanie trasy. 
-\n 
-\n • Wiele ulepszeń w menu kontekstowym mapy, takie jak kontekstowe odnośniki adresu. 
-\n 
-\n i więcej…</string>
+    
     <string name="shared_string_move_up">Przenieś ↑</string>
     <string name="shared_string_move_down">Przenieś ↓</string>
     <string name="finish_navigation">Zakończ nawigację</string>
@@ -2338,19 +2311,7 @@ Długość %2$s</string>
     <string name="share_history_subject">udostępnione przez OsmAnd</string>
     
     <string name="show_something_on_map">Wyświetl %1$s na mapie</string>
-    <string name="release_2_4">\\u2022 Nowa wszechstronna metoda wyszukiwania tekstowego
-\n 
-\n • Ulepszono integrację z zestawem audio Bluetooth 
-\n 
-\n • Ulepszona nawigacja - podpowiedzi głosowe i wskazówki dot. pasów ruchu 
-\n 
-\n • Ulepszenia w warstwie transportu publicznego i wyświetlanie kursów 
-\n 
-\n • Dodano nowe tłumaczenia i wsparcie dla dialektów 
-\n 
-\n • Mnóstwo innych ulepszeń i poprawek 
-\n 
-\n i więcej…</string>
+    
     <string name="dist_away_from_my_location">Szukaj w odległości %1$s</string>
     <string name="confirmation_to_delete_history_items">Usunąć wybrane elementy z \"Historii\"?</string>
     <string name="back_to_search">Powrót do wyszukiwania</string>
@@ -2429,19 +2390,7 @@ Długość %2$s</string>
     <string name="shared_string_recorded">Zarejestrowany</string>
     <string name="shared_string_record">Rejestruj</string>
     <string name="gpx_logging_no_data">Brak danych</string>
-    <string name="release_2_5">\\u2022 Ikony mapy, które można kliknąć
-\n 
-\n • wszechstronna wyszukiwarka użytecznych miejsc: wyszukiwanie restauracji wg kuchni, kempingów wg udogodnień 
-\n 
-\n • nowy styl mapy „OsmAnd Topo” dla rowerzystów i pieszych turystów 
-\n 
-\n • ulepszone rejestrowanie śladów 
-\n 
-\n • ulepszone powiadomienia nawigacji (Android Wear) 
-\n 
-\n • mnóstwo innych ulepszeń i poprawek błędów 
-\n 
-\n i więcej…</string>
+    
     <string name="trip_rec_notification_settings">Szybkie rozpoczęcie rejestrowania</string>
     <string name="trip_rec_notification_settings_desc">Wyświetla powiadomienie systemowe umożliwiające rozpoczęcia rejestrowania śladu.</string>
     <string name="shared_string_notifications">Powiadomienia</string>
@@ -2560,33 +2509,13 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="quick_action_page_list_descr">Naciśnięcie przycisku wyświetli poniższą listę.</string>
     <string name="auto_split_recording_title">Automatyczne dzielenie nagrań po przerwie</string>
 	<string name="auto_split_recording_descr">Rozpoczyna nowy segment po 6 min przerwy, nową trasę po 2 h i nowy plik po dłuższej przerwie, jeżeli data ulegnie zmianie.</string>
-    <string name="release_2_6">• Nowa funkcja: przycisk szybkiej czynności 
-\n 
-\n • Poprawiono odpowiedź na gesty ekranu dotykowego 
-\n 
-\n • Nowe kroje pisma wspierające więcej języków 
-\n 
-\n • Obsługa dialektów w generowaniu mowy 
-\n 
-\n • Ulepszenia wizualne w kilku stylach map i w Wikipedii 
-\n 
-\n • Obsługa otwartych kodów lokalizacyjnych (OLC) 
-\n 
-\n • Wyświetlanie wysokości, nachylenia i profilu prędkości dla nagranych śladów GPX i wyznaczonych tras 
-\n 
-\n • Ustawienie \'Styl jazdy\' i logiczne ulepszenia w wytyczaniu tras rowerowych 
-\n 
-\n • Ustawienie użycia danych wysokościowych w wytyczaniu tras rowerowych 
-\n 
-\n • Mnóstwo innych ulepszeń i poprawek 
-\n 
-\n i więcej…</string>
+    
 	<string name="rendering_attr_depthContours_description">Wyświetla kontury i punkty głębi.</string>
     <string name="rendering_attr_depthContours_name">Mapy batymetryczne</string>
 	
     <string name="routing_attr_height_obstacles_name">Użyj danych wysokościowych</string>
     <string name="routing_attr_height_obstacles_description">Używa danych wysokościowych (dane z SRTM, ASTER i EU-DEM).</string>
-    <string name="routing_attr_height_relief_smoothness_factor_description">Więcej równin lub więcej wzgórz</string>
+    
 
     <string name="route_altitude">Wysokość trasy</string>
     <string name="altitude_descent">Zjazdy</string>
@@ -2759,15 +2688,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="quick_action_start_stop_navigation">Rozpocznij/zatrzymaj nawigowanie</string>
     <string name="quick_action_start_stop_navigation_descr">Naciśnij ten przycisk, aby rozpocząć lub zakończyć nawigowanie.</string>
     <string name="quick_action_show_navigation_finish_dialog">Wyświetl ekran końca nawigowania</string>
-    <string name="release_2_7">• Wtyczka Mapillary z obrazami miejsc
-\n
-\n • Widżet linijki do mierzenia odległości
-\n
-\n • Interwały podziału śladu GPX ze szczegółowymi informacjami na temat śladu
-\n
-\n • Inne ulepszenia i naprawione błędy
-\n
-\n</string>
+    
     <string name="measurement_tool_action_bar">Przeglądanie mapy i dodawanie punktów</string>
     <string name="measurement_tool">Mierzenie odległości</string>
     <string name="enter_gpx_name">Nazwa pliku GPX:</string>
@@ -2878,13 +2799,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     
     <string name="fast_coordinates_input">Szybkie wprowadzanie współrzędnych</string>
     <string name="add_location_as_first_point_descr">Dodaj swoje położenie jako punkt początkowy, aby zaplanować idealną trasę.</string>
-    <string name="release_2_8">• Całkowicie odświeżone znaczniki mapy ze wskazówkami odnośnie planowania trasy
-\n
-\n• Narzędzie do pomiaru odległości z opcją przybliżania do drogi i zapisu punktów jako trasy
-\n
-\n• OsmAnd Live: poprawki błędów, świeże dane na serwerze co 30 minut, aktualizacje uwzględniane przy nawigacji
-\n
-\n</string>
+    
     <string name="rendering_value_darkyellow_name">Ciemno żółty</string>
     <string name="wrong_input">Nieprawidłowe dane</string>
 	<string name="enter_new_name">Wprowadź nową nazwę</string>
@@ -3002,23 +2917,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="distance_farthest">Odległość: najpierw najdalsze</string>
     <string name="distance_nearest">Odległość: najpierw najbliższe</string>
     <string name="day_off_label">poza</string>
-    <string name="release_2_9">• Uaktualnione menu podręczne: wyświetlanie czasu otwarcia / zamknięcia użytecznych miejsc,
-\n
-\n • menu transportu: wszystkie dostępne trasy są teraz widoczne u góry menu,
-\n
-\n • Wikipedia: dodano przycisk otwierający publikację, uaktualniono wygląd publikacji,
-\n
-\n • trasa: dodano możliwość zamiany punktu początkowego i końcowego jednym przyciskiem,
-\n
-\n • uwagi: dodano sortowanie wg rodzaju i daty,
-\n
-\n• nowy ekran szybkiego wprowadzania współrzędnych do szybkiego tworzenia znaczników, 
-\n
-\n• wykrywanie znaków stop uwzględnia teraz kierunek jazdy,
-\n
-\n • nowy algorytm udostępnia bardziej precyzyjne wartości podejścia/zejścia dla śladów GPX,
-\n
-\n • czas wędrówki uwzględnia ukształtowanie terenu (reguła Naismitha).</string>
+    
     <string name="osm_edits_export_desc">Wybierz typ zapisu: notatki OSM, POI, lub obie.</string>
     <string name="empty_state_osm_edits_descr">Twórz lub modyfikuj OSM POI, otwórz lub skomentuj notatki OSM, oraz udostępniaj nagrane pliki GPX.</string>
     <string name="empty_state_markers_groups_desc">Importowanie grup z ulubionych lub punktów jako znaczniki.</string>

@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
   <string name="local_index_tile_data_zooms">Deskargatutako zoomak: %1$s</string>
   <string name="local_index_tile_data_expire">Iraungitze epea (minutuak): %1$s</string>
   <string name="local_index_tile_data_downloadable">Deskargagarria: %1$s</string>
@@ -24,7 +23,7 @@
   <string name="driving_region_uk">Erresuma Batua, India edo antzekoa</string>
   
   
-  <string name="announce_gpx_waypoints">GPX bide-puntuak</string>
+  
   <string name="speak_title">Iragarri…</string>
   <string name="speak_descr">Konfiguratu kaleen izenen, trafiko abisuen (geldialdi behartuak, abiadura mugak) eta radarren berri emateko.</string>
   <string name="speak_street_names">Kaleen izenak (TTS)</string>
@@ -699,7 +698,7 @@ Biltegiratzean {1} MB erabiliko dira.
   <string name="local_index_mi_restore">Gaitu</string>
   <string name="local_index_mi_backup">Ezgaitu</string>
   
-  <string name="local_index_mi_reload">Birkargatu memoria txarteletik</string>
+  
   <string name="shared_string_download">Deskargatu</string>
   <string name="local_index_poi_data">POI datuak</string>
   <string name="local_index_address_data">Helbide datuak</string>
@@ -1811,17 +1810,7 @@ Lorratza %2$s</string>
 \n- Gailu eta taldeak zerbitzariarekin sinkronizatu; 
 \n- Talde eta gailuak kudeatu webguneko kontrol panel pertsonal batean.</string>
     
-    <string name="release_2_3">\\u2022 OSM Live. Babestu mapa egileak eta garatzaileak eta jaso orduz orduko eguneraketak.
-\n
-\n • Mapa-markatzaileak. Mapako lekuak atoan hautatzeko modu berri bat.
-\n
-\n • Xehetasun gehiagoko OSM mapak, herrialdeko bide seinaleekin eta mapa ezaugarri berri mordoarekin.
-\n
-\n • Ibilbide prestaketaren itxura berritua.
-\n
-\n • Maparen laster menuan hobekuntza ugari, hala nola helbide bilaketa zuzena.
-\n
-\n eta gehiago…</string>
+    
     <string name="storage_directory_readonly_desc">"Biltegiratze karpeta barne memoriara aldatu da hautatutako biltegiratze karpeta irakurtzeko soilik delako.  Hautatu idatzi daitekeen biltegiratze direktorio bat."</string>
     <string name="osm_user_stat">Edizioak %1$s, maila %2$s, edizioak guztira %3$s</string>
     <string name="osm_editors_ranking">OSM editoreen mailaketa</string>
@@ -1902,25 +1891,7 @@ Eskuragarri {2} MB besterik ez daude.</string>
     <string name="map_downloaded_descr">%1$sko mapa erabili dezakezu orain.</string>
     <string name="file_name_containes_illegal_char">Fitxategiaren izenak karaktere baliogaberen bat du</string>
 <string name="show_something_on_map">Erakutsi %1$s mapan</string>
-    <string name="release_2_4">\\u2022 Testu librearen bilaketa boteretsu berria.
-\n
-\n
-\n • Asko hobetutako Bluetooth bidezko audioa.
-\n
-\n
-\n • Hobetutako ibilbide gidaritza, ahots hitzemateak, erraia aldaketaren abisua.
-\n
-\n
-\n • Hobetutako garraio geruza, ibilbidearen marrazketarekin.
-\n
-\n
-\n • Hizkuntza gehiago eta eskualdeetako hizkuntzak gehitu dira
-\n
-\n
-\n • Hobekuntzak eta konpondutako arazoak.
-\n
-\n
-\neta gehiago…</string>
+    
     <string name="dist_away_from_my_location">Bilatu %1$sra</string>
     
     <string name="share_history_subject">OsmAnd bidez partekatua</string>
@@ -2065,7 +2036,7 @@ Eskuragarri {2} MB besterik ez daude.</string>
     <string name="distance">Distantzia</string>
     <string name="index_tours">Ibilaldiak</string>
     <string name="shared_string_all">Guztiak</string>
-    <string name="targets">Helburuak</string>
+    
     <string name="rendering_value_browse_map_name">Arakatu mapa</string>
     <string name="rendering_value_car_name">Kotxea</string>
     <string name="rendering_value_bicycle_name">Bizikleta</string>
@@ -2141,23 +2112,7 @@ Eskuragarri {2} MB besterik ez daude.</string>
 
     <string name="use_dashboard_btn">Erabili kontrol panela</string>
     <string name="dashboard_or_drawer_description">Aplikazioa kontrol panel aldakor batetik ala finkatutako menu estatiko batetik kudeatzeko aukera dago. Erabakia aldatzeko aukera duzu kontrol panelaren ezarpenetan.</string>
-    <string name="release_2_2">\\u2022 Testuinguruaren jakitun den interfazea mapan eta beste pantailetan kokalekuetan sakatzeko
-\n
-\n • Maparen pantaila orain zuzenean abiatzen da \"Bistaratu kontrol panela abioan\" markatu ezean
-\n
-\n • Konfiguratu kontrol panelean agertuko diren fitxak, eta nola
-\n
-\n • Saltatu panel kontrola menu bidezko kontrola nahiago baduzu
-\n
-\n • Mapak deskargatzeko, eskualdeak zuzenean aukeratu daitezke mapan sakatuz
-\n
-\n • POI bilaketak galdera zehatzagoak onartzen ditu orain
-\n
-\n • Hobetutako POI eta OSM edizio funtzionaltasuna
-\n
-\n • Mapen datuen deskargarako estruktura eta interfazea eraldatu da
-\n
-\n eta gehiago…</string>
+    
     <string name="speak_poi">Inguruko POI</string>
     
     <string name="show_zoom_buttons_navigation_descr">Erakutsi zoom botoiak nabigazioan.</string>
@@ -2409,25 +2364,7 @@ mapak eta nabigazioa</string>
     <string name="shared_string_recorded">Grabatuta</string>
     <string name="shared_string_record">Grabatu</string>
     <string name="gpx_logging_no_data">Daturik ez</string>
-    <string name="release_2_5">\\u2022 Sakatu daitezkeen ikonoak mapan 
-\n 
-\n 
-\n • Iragazki bidezko POI bilaketa ahaltsua: bilatu adibidez jatetxeak sukaldaritza motaren arabera, edo behar zehatzetarako kanpingak 
-\n 
-\n 
-\n • Topo estilo berria txirrindularieta mendizaleentzat 
-\n 
-\n 
-\n • Hobetutako bidai grabaketa 
-\n 
-\n 
-\n • Jakinarazpen hobetuak nabigazioan (Android Wear) 
-\n 
-\n 
-\n • Beste hobekuntza eta konponketa ugari 
-\n 
-\n 
-\n eta gehiago…</string>
+    
     <string name="trip_rec_notification_settings">Gaitu grabaketaren abio azkarra</string>
     <string name="trip_rec_notification_settings_desc">Bistaratu bidaiaren grabaketa abiatzea baimentzen duen jakinarazpen bat.</string>
     <string name="shared_string_notifications">Jakinarazpenak</string>
@@ -2548,37 +2485,7 @@ Area honi dagokio: %1$s x %2$s</string>
 	<string name="auto_split_recording_descr">Hasi segmentu berria 6 minututako hutsune bat eta gero, lorratz berria bi ordu eta gero, edo fitxategi berria hutsune luzeago bat eta gero data aldatzean.</string>
     <string name="rendering_attr_depthContours_description">Erakutsi sakonera sestra-kurbak eta puntuak.</string>
     <string name="rendering_attr_depthContours_name">Sakonera nautikoaren sestra-kurbak</string>
-	<string name="release_2_6">\\u2022 Ezaugarri berria: Ekintza azkarren botoia 
-\n 
-\n 
-\n • Pantaila ukigarriaren keinuen erantzuna hobetua 
-\n 
-\n 
-\n • Hizkuntza gehiago barne-hartzen dituen mapetarako letra-tipoa 
-\n 
-\n 
-\n • Tokiko hizkuntzen aldaerentzako TTS euskarria 
-\n 
-\n 
-\n • Ikusgaitasun hobekuntzak hainbat mapa estiloetan eta Wikipedian 
-\n 
-\n 
-\n • Open Location Code (OLC) euskarria 
-\n 
-\n 
-\n • Bistaratu elebazioa, malda, eta abiadura profilak grabatutako GPX fitxategietan eta kalkulatutako ibilbidea 
-\n 
-\n 
-\n • \"Gidatzeko estiloa\" ezarpena eta hobekuntzak bizikletentzako ibilbideetarako logikan 
-\n 
-\n 
-\n • Bizikletentzako ibilbideetan altuera-datuak 
-\n 
-\n 
-\n • Beste hainbat hobekuntza eta arazoen konponketa 
-\n 
-\n 
-\neta gehiago…</string>
+	
 	<string name="add_new_folder">Gehitu karpeta berria</string>
     <string name="points_delete_multiple_succesful">Puntuak ezabatu dira.</string>
     <string name="points_delete_multiple">%1$d puntu ezabatuko dituzu. Ziur zaude?</string>
@@ -2790,15 +2697,7 @@ Area honi dagokio: %1$s x %2$s</string>
 \n• Aukeran abiadura eta garaiera bistaratu 
 \n• Bistaratu sestra-kurbak eta erliebe-itzalak (plug-in gehigarriarekin)</string>
     <string name="min_max">Min/Max</string>
-    <string name="release_2_7">\\u2022 Mapillary gehigarria kale-mailako argazkiekin
-\n
-\n • DIstantzia nehurtzeko erregela
-\n
-\n • GPX banatze tarteak ibilbidearen xehetasunekin
-\n
-\n • Bestelako hobekuntza eta zuzenketak
-\n
-\n</string>
+    
     <string name="rendering_value_translucent_pink_name">Arrosa gardena</string>
     <string name="osmand_extended_description_part6">Oinez, mendian, hirian 
 \n• Mapak oinezko eta mendizaleentzako ibilbideak erakutsiko dizkizu 
@@ -3042,13 +2941,7 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="date_added">Data honetan gehituta</string>
     <string name="order_by">Ordenatu honela:</string>
     <string name="marker_show_distance_descr">Aukeratu nola adierazi mapa-markatzaileetara distantzia eta norabidea maparen pantailan:</string>
-    <string name="release_2_8">\\022 Guztiz eraldatutako mapa-markatzaileak norabide-lerroekin eta ibilbide plangintzarekin 
-\n 
-\n • Distantzien neurketarako tresna errepidera itsasteko eta puntuak lorratz gisa gordetzeko aukerekin 
-\n 
-\n • OsmAnd Live: Akatsen konponketa, datu berriak zerbitzarian 30 minutuero, nabigazioan ezarritako eguneraketak 
-\n 
-\n</string>
+    
     <string name="osm_recipient_stat">Edizioak %1$s, guztira %2$s mBTC</string>
     <string name="rendering_value_darkyellow_name">Hori iluna</string>
     <string name="lang_lo">Laosera</string>
@@ -3059,29 +2952,7 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="touring_view_renderer">Bidaiatze ikuspegia</string>
     <string name="nautical_renderer">Nautikoa</string>
 <string name="rendering_attr_hidePOILabels_name">POI etiketak</string>
-    <string name="release_2_9">\\022 Laster-menua eguneratuta: erakutsi POI-a irekitzean edo ixtean
-\n
-\n • Garraio menua: ibilbide eskuragarri guztiak orain goian daude
-\n
-\n • Wikipedia: jatorrizko artikulua irekitzeko botoia gehituta, artikuluen itxura eguneratua
-\n
-\n • Ibilbidea: hasiera eta amaiera puntuak behin sakatuta txandakatzeko aukera gehituta
-\n
-\n • Oharrak: mota eta dataren arabera ordenatzeko gaitasuna gehituta
-\n
-\n • OSM edizioak: erakutsi POI-aren kategoriaren ikono eta izena, bistaratu burututako ekintzak
-\n
-\n • Koordenatuen sarrerarako pantaila berria markatzaileek sorrera azkarrerako
-\n
-\n• Stop seinalean antzematean ibilbidearen norabidea kontuan hartzen da
-\n
-\n• Algoritmo berria GPX lorratzetako igiera/jaitsiera balio esanguratsuak emateko
-\n
-\n• Terrenoa (igoera) kontuan hartzen duen mendiko ibilbideen denbora (Naismith araua)
-\n
-\n
-\n
-\n</string>
+    
     <string name="will_open_tomorrow_at">Bihar irekiko du ordu honetan</string>
     <string name="copy_location_name">Kopiatu puntuaren / POI-aren izena</string>
     <string name="toast_empty_name_error">Izen gabeko kokalekua</string>
@@ -3172,7 +3043,7 @@ Area honi dagokio: %1$s x %2$s</string>
     
     <string name="unlimited_downloads">Deskarga mugagabeak</string>
     <string name="wikipedia_offline">Wikipedia konexiorik gabe</string>
-    <string name="contour_lines_sea_depth">Sestra-kurbak + Itsaso-sakonera</string>
+    
     <string name="unlock_all_features">Desblokeatu OsmAnd-en ezaugarri guztiak</string>
 
     <string name="osmand_team">OsmAnd taldea</string>

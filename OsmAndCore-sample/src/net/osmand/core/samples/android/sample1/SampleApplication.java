@@ -200,7 +200,14 @@ public class SampleApplication extends Application {
 					Field f = R.string.class.getField("poi_" + type.getIconKeyName());
 					if (f != null) {
 						Integer in = (Integer) f.get(null);
-						return getString(in);
+						String val = getString(in);
+						if(val != null) {
+							int ind = val.indexOf(';');
+							if (ind > 0) {
+								return val.substring(0, ind);
+							}
+						}
+						return val;
 					}
 				} catch (Exception e) {
 					System.err.println("No translation for "+ type.getIconKeyName() + " " + e.getMessage());
@@ -241,10 +248,17 @@ public class SampleApplication extends Application {
 			@Override
 			public String getSynonyms(String keyName) {
 				try {
-					Field f = R.string.class.getField("synonyms_poi_" + keyName);
+					Field f = R.string.class.getField("poi_" + keyName);
 					if (f != null) {
 						Integer in = (Integer) f.get(null);
-						return getString(in);
+						String val = getString(in);
+						if(val != null) {
+							int ind = val.indexOf(';');
+							if (ind > 0) {
+								return val.substring(ind + 1) ;
+							}
+						}
+						return val;
 					}
 				} catch (Exception e) {
 				}

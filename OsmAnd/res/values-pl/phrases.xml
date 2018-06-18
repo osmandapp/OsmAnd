@@ -123,7 +123,7 @@
 	<string name="poi_service_tyres">Opony</string>
 	<string name="poi_vehicle_inspection">Stacja diagnostyczna</string>
 	<string name="poi_car_wash">Myjnia samochodowa</string>
-	<string name="poi_fuel">Stacja benzynowa</string>
+	<string name="poi_fuel">Stacja benzynowa;Stacja paliw;CPN;Tanksztela</string>
 	<string name="poi_electricity_combined_charging">Stacja ładowania</string>
 	<string name="poi_vehicle_ramp">Podnośnik</string>
 	<string name="poi_compressed_air">Kompresor</string>
@@ -361,7 +361,7 @@
 	<string name="poi_theatre">Teatr</string>
 	<string name="poi_theatre_genre_circus">Cyrk</string>
 	<string name="poi_dance_floor">Parkiet taneczny</string>
-	<string name="poi_nightclub">Klub nocny</string>
+	<string name="poi_nightclub">Klub nocny;Disco;Dyskoteka;Nightclub</string>
 	<string name="poi_leisure_fishing">Miejsce połowów</string>
 	<string name="poi_harbour">Port</string>
 	<string name="poi_miniature_golf">Miniaturowy golf</string>
@@ -3752,9 +3752,7 @@
 	<string name="poi_circumference">Obwód</string>
 	<string name="poi_diameter_crown">Średnica korony</string>
 
-	<string name="synonyms_poi_fuel">Stacja paliw;CPN;Tanksztela</string>
-
-	<string name="synonyms_poi_nightclub">Disco;Dyskoteka;Nightclub</string>
+	
 	<string name="poi_flooring">Sklep z podłogami</string>
 	<string name="poi_pottery">Garncarz</string>
 

@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
 <string name="app_mode_bus">Bus</string>
  	<string name="app_mode_train">Ćah</string>
     <string name="map_widget_battery">Staw baterije</string>
@@ -741,7 +740,7 @@
     <string name="show_transport_over_map">Zastanišća pokazać</string>
     <string name="hello">Nawigacija OsmAnd</string>
     <string name="update_poi_success">POI-daty su so wuspěšnje zaktualizowali ({0} buchu začitane)</string>
-    <string name="update_poi_error_local">Zmylk při aktualizowanju lokalnych datow</string>
+    <string name="update_poi_error_local">Njemóžach aktualizować lokalne daty</string>
     <string name="update_poi_error_loading">Zmylk při sćehnjenju datow ze serwera</string>
     <string name="update_poi_no_offline_poi_index">Žane offline-daty za tutu kónčinu</string>
     <string name="update_poi_is_not_available_for_zoom">Aktualizowanje POI-městnow njeje móžne za małe zoomowe runiny</string>
@@ -766,7 +765,7 @@
     <string name="loading_poi_obj">Začituju POI…</string>
     <string name="auth_failed">Awtorizacija njeje so poradźiła</string>
     <string name="failed_op">njeje so poradźiło</string>
-    <string name="converting_names">Konwertěruju domjace/jendźelske mjena…</string>
+    <string name="converting_names">Konwertěruju lokalne/jendźelske mjena…</string>
     <string name="loading_streets_buildings">Začituju dróhi a čisła…</string>
     <string name="loading_postcodes">Začituju póstowe čisła…</string>
     <string name="loading_streets">Začituju dróhi…</string>
@@ -791,7 +790,7 @@
     <string name="update_tile">Kartowe kachlicy zaktualizować</string>
     <string name="reload_tile">Kachlicy zaktualizować</string>
     <string name="mark_point">Cil</string>
-    <string name="use_english_names_descr">Jendźelske abo domjace mjena wužiwać.</string>
+    <string name="use_english_names_descr">Jendźelske abo lokalne mjena wužiwać.</string>
     <string name="use_english_names">Jendźelske mjena wužiwać</string>
     <string name="app_settings">Nastajenja aplikacije</string>
     <string name="search_address">Adresu pytać</string>
@@ -879,7 +878,7 @@
     <string name="later">Pozdźišo</string>
     <string name="get_full_version">Połna wersija</string>
     <string name="downloads">Sćehnjenja</string>
-    <string name="confirm_download_roadmaps">Sy sej wěsty/wěsta, zo chceš sćahnyć karty jenož z dróhami, byrnjež maš hižo standardnu (dospołnu) kartu?</string>
+    <string name="confirm_download_roadmaps">Sy sej wěsty/wěsta, zo chceš sćahnyć jenož dróhowu kartu, hačrunjež maš hižo standardnu (dospołnu) kartu?</string>
     <string name="value_downloaded_of_max">%1$.1f wot %2$.1f MB</string>
     <string name="update_all">Zaktualizuj wšě (%1$s MB)</string>
     <string name="free_downloads_used">Wužiwane bjezpłatne sćehnjenja</string>
@@ -1474,4 +1473,11 @@
     <string name="save_current_track_descr">Tuchwilnu čaru nětko na SD-karće składować.</string>
     <string name="save_current_track">Tuchwilnu GPX-čaru składować</string>
     <string name="map_widget_plain_time">Tuchwilny čas</string>
+    <string name="download_tab_downloads">Wšitke dataje</string>
+    <string name="download_tab_local">Składowane</string>
+    <string name="download_hillshade_maps">Reliefowy pozadk</string>
+    <string name="download_regular_maps">Standardna karta</string>
+    <string name="download_roads_only_maps">Jenož dróhowa karta</string>
+    <string name="context_menu_item_update_map_confirm">Lokalne daty z interneta aktualizować?</string>
+    <string name="reading_indexes">Čitam lokalne daty…</string>
     </resources>

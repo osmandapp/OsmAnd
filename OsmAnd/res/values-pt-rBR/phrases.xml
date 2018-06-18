@@ -177,7 +177,7 @@
 	<string name="poi_service_tyres">Pneus</string>
 	<string name="poi_vehicle_inspection">Inspeção veicular</string>
 	<string name="poi_car_wash">Lavagem de carro</string>
-	<string name="poi_fuel">Posto de combustível</string>
+	<string name="poi_fuel">Posto de combustível;Posto de abastecimento;Posto de gasolina;Bomba de gasolina</string>
 	<string name="poi_fuel_diesel">Diesel</string>
 	<string name="poi_fuel_gtl_diesel">Diesel GPL</string>
 	<string name="poi_fuel_hgv_diesel">Diesel de veículos pesados</string>
@@ -601,7 +601,7 @@
 	<string name="poi_theatre_genre_circus">Circo</string>
 	<string name="poi_gallery">Galeria de arte</string>
 	<string name="poi_dance_floor">Pista de dança</string>
-	<string name="poi_nightclub">Danceteria</string>
+	<string name="poi_nightclub">Danceteria;Casa noturna;Boate</string>
 	<string name="poi_stripclub">Clube de striptease</string>
 	<string name="poi_ski_resort">Resort de esqui</string>
 	<string name="poi_beach_resort">Resort de praia</string>
@@ -3787,9 +3787,7 @@
 	<string name="poi_socket_tesla_roadster_yes">Tesla Roadster</string>
 	<string name="poi_whitewater_rapid_name">Nome das corredeiras</string>
 
-<string name="synonyms_poi_fuel">Posto de abastecimento;Posto de gasolina;Bomba de gasolina</string>
 
-	<string name="synonyms_poi_nightclub">Casa noturna;Boate</string>
 	<string name="poi_climbing_multipitch_yes">Rotas multi-pitch: sim</string>
 	<string name="poi_climbing_multipitch_no">Rotas multi-pitch: não</string>
 	<string name="poi_socket_cee_red_16a_yes">CEE vermelha 16A</string>

@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
     <string name="use_fluorescent_overlays">Sovrapposizioni fluorescenti</string>
     <string name="use_fluorescent_overlays_descr">Usa colori fluorescenti per visualizzare tracce e percorsi.</string>
     <string name="offline_edition">Modifiche offline</string>
@@ -138,7 +137,7 @@ La memoria utilizzata è  {1} MB.
     <string name="local_index_mi_restore">Attiva</string>
     <string name="local_index_mi_backup">Disattiva</string>
 
-    <string name="local_index_mi_reload">Ricarica dalla scheda SD</string>
+    
     <string name="local_index_poi_data">Dati PDI</string>
     <string name="local_index_address_data">Dati indirizzi</string>
     <string name="local_index_transport_data">Dati trasporti pubblici</string>
@@ -1142,7 +1141,7 @@ Memoria in proporzione %4$s MB (limite di Android %5$s MB, Dalvik %6$s MB).</str
     <string name="speak_title">Annuncia…</string>
     <string name="speak_descr">Configura per annunciare i nomi delle strade, gli avvertimenti di traffico (fermate forzate, dossi), gli avvisi autovelox, i limiti di velocità.</string>
     <string name="speak_street_names">Nomi delle strade (TTS)</string>
-    <string name="announce_gpx_waypoints">Punti GPX di passaggio</string>
+    
 
 
     <string name="driving_region_descr">Scegli la regione di guida: USA, Europa, UK, Asia o altre.</string>
@@ -1512,7 +1511,7 @@ Memoria in proporzione %4$s MB (limite di Android %5$s MB, Dalvik %6$s MB).</str
     <string name="download_additional_maps">Scaricare le mappe mancanti %1$s (%2$d MB)?</string>
 
     <string name="shared_string_waypoints">Punti intermedi</string>
-    <string name="targets">Destinazioni</string>
+    
     <string name="way_alarms">Avvisi del traffico</string>
     <string name="speak_favorites">Preferiti nelle vicinanze</string>
     <string name="speak_poi">PDI nelle vicinanze</string>
@@ -2089,31 +2088,7 @@ Attivando questa vista lo stile della mappa diventerà \'Inverno e sci\', mostra
     <string name="please_specify_poi_type_only_from_list">Specifica il corretto tipo di PDI o salta questo passaggio.</string>
     <string name="routing_attr_avoid_stairs_name">Evita le scale</string>
 	<string name="routing_attr_avoid_stairs_description">Evita le scale</string>
-	<string name="release_2_2">\\022 Nuova interfaccia utente sensibile al contesto per le località selezionate sulla mappa e negli altri schermi
-\n
-\n
-\n • La schermata della mappa è avviata direttamente se non è selezionato \"Mostra il pannello di controllo all\'avvio\"
-\n
-\n
-\n • Configura quali e come vengono visualizzate le voci nel pannello di controllo
-\n
-\n
-\n • Salta il pannello di controllo se preferisci i controlli dell\'app tipo menù
-\n
-\n
-\n • Per scaricare mappe, regioni è possibile selezionarle direttamente tappando sulla mappa mondiale
-\n
-\n
-\n • La ricerca di PDI ora supporta richieste più specifiche
-\n
-\n
-\n • Migliorata la funzionalità modifica di PDI e OSM
-\n
-\n
-\n • Riviste la struttura e l\'interfaccia di download dei dati della mappa
-\n
-\n
-\n e altro…</string>
+	
     <string name="dashboard_or_drawer_description">C\'è una nuova opzione per controllare l\'app attraverso il pannello di controllo personalizzabile o tramite il menù statico. La tua scelta può sempre essere modificata nelle impostazioni del pannello di controllo.</string>
 <string name="shared_string_near">Vicino</string>
     <string name="shared_string_hide">Nascondi</string>
@@ -2261,22 +2236,7 @@ Se ami OsmAnd e OSM e vuoi sostenerli, questo è un modo perfetto per farlo.</st
     <string name="file_name_containes_illegal_char">Il nome del file contiene caratteri non ammessi</string>
 <string name="no_map_markers_found">Aggiungi i marcatori sulla mappa</string>
     <string name="no_waypoints_found">Nessun punto intermedio trovato</string>
-    <string name="release_2_3">"\\022 OSM Live. Supporto ai contributori della mappa e gli sviluppatori e aggiornamenti orari della mappa.
-\n
-\n
-\n • Marcatori mappa. Un nuovo modo per selezionare facilmente i luoghi sulla mappa.
-\n
-\n
-\n • Mappe OSM più dettagliate con scudetti dei nomi delle strade specifici per ogni nazione  e molte nuove caratteristiche.
-\n
-\n
-\n • Aspetto e gestione migliorati della preparazione del percorso.
-\n
-\n
-\n • Molti miglioramenti nel menu contestuale della mappa e nella ricerca contestuale degli indirizzi.
-\n
-\n
-\n e altro…"</string>
+    
     <string name="rec_split">Frazionatore delle registrazioni</string>
     <string name="rec_split_title">Usa il frazionamento delle registrazioni</string>
     <string name="rendering_value_thin_name">Sottile</string>
@@ -2339,25 +2299,7 @@ Se ami OsmAnd e OSM e vuoi sostenerli, questo è un modo perfetto per farlo.</st
     <string name="back_to_search">Ritorna alla ricerca</string>
     <string name="confirmation_to_delete_history_items">Vuoi cancellare gli elementi della cronologia selezionati?</string>
     <string name="show_something_on_map">Mostra %1$s sulla mappa</string>
-    <string name="release_2_4">\\u2022 Nuova ricerca testuale molto potente
-\n 
-\n • Integrazione attraverso Bluetooth con il sistema audio dell\'auto/speaker 
-\n 
-\n 
-\n • Annunci vocali delle indicazioni vocali del percorso, cambio di corsia migliorati 
-\n
-\n 
-\n 
-\n • Mappa dei trasporti pubblici migliorata con calcolo del percorso 
-\n 
-\n 
-\n • Aggiunte più lingue e ora sono supportati anche i dialetti 
-\n 
-\n 
-\n • Molte altre migliorie e correzioni di errori 
-\n 
-\n 
-\n e altro…</string>
+    
     <string name="dist_away_from_my_location">Cerca a %1$s di distanza</string>
     
     <string name="share_history_subject">condiviso attraverso OsmAnd</string>
@@ -2437,24 +2379,7 @@ Se ami OsmAnd e OSM e vuoi sostenerli, questo è un modo perfetto per farlo.</st
     <string name="shared_string_recorded">Registrato</string>
     <string name="shared_string_record">Registra</string>
     <string name="gpx_logging_no_data">Nessun dato</string>
-    <string name="release_2_5">\\022 Icone sulla mappa cliccabili 
-\n 
-\n • Potente filtro di ricerca dei PDI: ricerca dei ristoranti per tipo di cucina, campeggi per esigenze specifiche 
-\n 
-\n 
-\n • Nuovo stile Topo per ciclisti ed escursionisti 
-\n 
-\n 
-\n • Registrazione viaggio migliorata 
-\n 
-\n 
-\n • Notifiche di navigazione migliorate (Android Wear) 
-\n 
-\n 
-\n • Molti altri miglioramenti e correzioni di bug 
-\n 
-\n 
-\n e altro…</string>
+    
     <string name="rendering_attr_contourColorScheme_description">Schema del colore dei contorni</string>
     <string name="save_track_min_speed">Velocità minima di registrazione</string>
     <string name="translit_name_if_miss">Traslittera se manca il nome in %1$s</string>
@@ -2578,42 +2503,7 @@ Rappresenta l\'area: %1$s x %2$s</string>
 	<string name="auto_split_recording_title">Divisione automatica delle registrazioni dopo un periodo</string>
 	<string name="auto_split_recording_descr">Inizia un nuovo segmento dopo 6 minuti, una nuova traccia dopo 2 ore, o un nuovo file dopo un intervallo maggiore.</string>
     <string name="rendering_attr_depthContours_description">Mostra contorni e punti in profondità.</string>
-    <string name="release_2_6">"\\022 Nuove funzionalità: Pulsante azione veloce 
-\n
-\n 
-\n
-\n • Migliorata la risposta del touch screen ai gesti (es. zoommare e allargare) 
-\n
-\n 
-\n • Nuovi caratteri della mappa  mappa per estendere la copertura di più lingue 
-\n
-\n 
-\n
-\n • Supporto TTS per le lingue locali (e accenti) 
-\n
-\n 
-\n
-\n • Miglioramento della visibilità in molti stili mappa e wikipedia 
-\n
-\n 
-\n
-\n • Supporto all\'Open Location Code (OLC) 
-\n
-\n 
-\n
-\n • Visualizzazione di un profilo altimetrico, pendenza, e velocità per i GPX registrati e percorsi calcolati 
-\n
-\n 
-\n
-\n • Impostazione e miglioramenti della logica dello \"Stile guida\" nella guida svolta per svolta in bicicletta 
-\n
-\n 
-\n
-\n • Molti altri miglioramenti e correzioni di errori 
-\n
-\n 
-\n
-\n e altro ancora…"</string>
+    
 	<string name="routing_attr_driving_style_name">Stile di guida</string>
     
     <string name="route_altitude">Profilo altimetrico del percorso</string>
@@ -2713,10 +2603,10 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="quick_action_showhide_osmbugs_title">Mostra/nascondi le Note OSM</string>
     <string name="quick_action_osmbugs_show">Mostra le note OSM</string>
     <string name="quick_action_osmbugs_hide">Nascondi le note OSM</string>
-    <string name="quick_action_showhide_osmbugs_descr">Toccando il pulsante azione verranno mostrate o nascoste le Note OSM sulla mappa.</string>
+    <string name="quick_action_showhide_osmbugs_descr">Toccando il pulsante azione verranno mostrate o nascoste le note OSM sulla mappa.</string>
     <string name="sorted_by_distance">Ordinato per distanza</string>
     <string name="search_favorites">Cerca preferiti</string>
-    <string name="hillshade_menu_download_descr">Scarica la mappa \'Hillshade Overlay\' per visualizzare la zona collinare di questa regione.</string>
+    <string name="hillshade_menu_download_descr">Scarica la mappa sovrapposta ombreggiatura dei rilievi per visualizzare l\'ombreggiatura dei rilievi di questa regione.</string>
     <string name="hillshade_purchase_header">Installa il componente aggiuntivo \'Linee Isoipse\' per visualizzarle nella mappa</string>
     <string name="hide_from_zoom_level">Nascondi dal livello di zoom</string>
     <string name="srtm_menu_download_descr">Scaricare la mappa \'Linee Isoipse\' per l\'utilizzo in questa regione.</string>
@@ -2803,15 +2693,7 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="max_min">Max/Min</string>
     <string name="min_max">Min/Max</string>
     <string name="quick_action_resume_pause_navigation">Riprendi/sospendi la navigazione</string>
-    <string name="release_2_7">\\022 Componente aggiuntivo Mapillary con immagini stradali 
-\n 
-\n • Widget righello per la misurazione della distanza 
-\n 
-\n • Scelta degli intervalli delle tracce GPX con informazioni dettagliate sul tuo percorso 
-\n 
-\n • Altre migliorie e correzioni di errori
-\n
-\n</string>
+    
     <string name="measurement_tool_action_bar">Esplora la mappa e aggiungi punti</string>
     <string name="measurement_tool">Misura la distanza</string>
     <string name="none_point_error">Aggiungi almeno un punto.</string>
@@ -2922,13 +2804,7 @@ Rappresenta l\'area: %1$s x %2$s</string>
 	<string name="shared_string_view">Visualizza</string>
 	<string name="waypoints_added_to_map_markers">Punti intermedi aggiunti ai marcatori della mappa</string>
 	<string name="wrong_format">Formato errato</string>
-    <string name="release_2_8">\\022 Rivisti completamente i marcatori, le indicazioni e la pianificazione del percorso 
-\n 
-\n • Lo strumento di misura della distanza offre l\'aderisci alle strade e il salvataggio come traccia 
-\n 
-\n • OsmAnd Live: correzione di errori, dati aggiornati sul server ogni 30 minuti, aggiornamenti implementati nella navigazione
-\n
-\n</string>
+    
     <string name="rendering_value_darkyellow_name">Giallo scuro</string>
     <string name="import_as_gpx">Importa come file GPX</string>
     <string name="import_as_favorites">Importa come preferito</string>
@@ -2940,7 +2816,7 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="import_gpx_file_description">può essere importato come preferito oppure come file GPX.</string>
     <string name="appearance_on_the_map">Visualizzazione nella mappa</string>
     <string name="add_track_to_markers_descr">Scegli una traccia per aggiornare i suoi punti intermedi ai marcatori.</string>
-    <string name="add_favourites_group_to_markers_descr">Scegli una categoria di luoghi preferiti da aggiungere ai marcatori.</string>
+    <string name="add_favourites_group_to_markers_descr">Scegli una categoria di Preferiti da aggiungere ai marcatori.</string>
     <string name="shared_string_gpx_waypoints">Punti intermedi della traccia</string>
     <string name="favourites_group">Categoria di luoghi preferiti</string>
     <string name="add_group">Aggiungi un gruppo</string>
@@ -2948,14 +2824,14 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="empty_state_markers_active">Crea i marcatori della mappa!</string>
     <string name="empty_state_markers_active_desc">Tap lungo o breve su Luoghi, poi tappa il pulsante bandiera del marcatore.</string>
     <string name="empty_state_markers_groups">Importa gruppi</string>
-    <string name="empty_state_markers_groups_desc">Importa gruppi di preferiti o punti intermedi come marcatori.</string>
+    <string name="empty_state_markers_groups_desc">Importa gruppi di Preferiti o punti intermedi come marcatori.</string>
     <string name="empty_state_markers_history_desc">Marcatori indicati come passati appariranno su questa schermata.</string>
     <string name="shared_string_two">Due</string>
     <string name="shared_string_one">Uno</string>
     <string name="show_guide_line_descr">Mostra la linea di direzione dalla tua posizione alle posizioni dei marcatori attivi.</string>
     <string name="show_arrows_descr">Visualizza una o due frecce, indicanti la direzione verso i marcatori attivi.</string>
     <string name="distance_indication_descr">Scegli come visualizzare la distanza verso marcatori attivi.</string>
-    <string name="active_markers_descr">Scegli il numero di marcatori attivi da visualizzare.</string>
+    <string name="active_markers_descr">Scegli il numero di indicatori di direzione da visualizzare.</string>
     <string name="digits_quantity">Numero di cifre decimali</string>
     <string name="shared_string_right">Destra</string>
     <string name="shared_string_left">Sinistra</string>
@@ -3001,19 +2877,7 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="shared_string_marker">Marcatore</string>
     <string name="shared_string_without_name">Senza nome</string>
     <string name="rendering_attr_hidePOILabels_name">Etichette PDI</string>
-    <string name="release_2_9">\\022 Aggiornato il menù contestuale: mostra quando i PDI aprono / chiudono 
-\n 
-\n • Menù trasporto pubblico: tutti i percorsi disponibili sono ora in alto 
-\n 
-\n • Wikipedia: aggiunto il pulsante per aprire l\'articolo originale, aggiornato l\'aspetto degli articoli 
-\n 
-\n • Percorso: aggiunta la possibilità di scambiare la partenza e la destinazione con un tocco 
-\n 
-\n • Note aggiunto l\'ordina per data e per tipo 
-\n 
-\n • Modifiche OSM: mostra un\'icona e il nome della categoria del PDI, mostra le azioni completate 
-\n 
-\n • Nuova schermata veloce per l\'inserimento delle coordinate per la creazione veloce di marcatori</string>
+    
     <string name="osm_recipient_stat">Modifiche %1$s, sum %2$s mBTC</string>
     <string name="copy_location_name">Copia il nome del punto/PDI</string>
     <string name="will_open_tomorrow_at">Aprirà domani alle</string>
@@ -3091,8 +2955,8 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="get_unlimited_access">Ottieni l\'accesso illimitato</string>
     <string name="welcome_to_open_beta">Benvenuti alla open beta</string>
     <string name="wikivoyage_travel_guide">Guide Viaggi</string>
-    <string name="monthly_map_updates">Aggiornamenti delle mappe: <b>Ogni mese</b></string>
-    <string name="daily_map_updates">Aggiornamenti delle mappe: <b>Ogni ora</b></string>
+    <string name="monthly_map_updates">Aggiornamento della mappa: <b>mensile</b></string>
+    <string name="daily_map_updates">Aggiornamento della mappa: <b>orario</b></string>
     <string name="in_app_purchase">Acquisto In-app</string>
     <string name="in_app_purchase_desc">Pagamento unico</string>
     <string name="in_app_purchase_desc_ex">Una volta acquistato, sarà permanentemente a vostra disposizione.</string>
@@ -3126,7 +2990,7 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="download_maps_travel">Guide di turistiche</string>
     <string name="shared_string_wikivoyage">Wikivoyage</string>
     <string name="article_removed">Articolo rimosso</string>
-    <string name="wikivoyage_search_hint">Cerca: Nazione, città, provincia</string>
+    <string name="wikivoyage_search_hint">Cerca: nazione, città, provincia</string>
     <string name="shared_string_read">Leggi</string>
     <string name="saved_articles">Articoli salvati</string>
     <string name="shared_string_explore">Esplora</string>
@@ -3213,4 +3077,5 @@ Rappresenta l\'area: %1$s x %2$s</string>
 \n
 \n"</string>
     <string name="quick_action_edit_actions">Modifica le azioni</string>
+    <string name="error_notification_desc">Per favore invia una schermata di questa notifica a support@osmand.net</string>
     </resources>

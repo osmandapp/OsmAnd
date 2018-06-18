@@ -119,7 +119,7 @@
 
 	<string name="poi_service_tyres">Pneumatikoak</string>
 	<string name="poi_car_wash">Auto garbiketa</string>
-	<string name="poi_fuel">Gasolindegia</string>
+	<string name="poi_fuel">Gasolindegia;Zerbitzu estazioa;Erregai estazioa;Petrolio estazioa</string>
 	<string name="poi_fuel_diesel">Diesel</string>
 	<string name="poi_fuel_gtl_diesel">GTL diesel gasolioa</string>
 	<string name="poi_fuel_biodiesel">Biodiesel</string>
@@ -843,7 +843,7 @@
 	<string name="poi_bench_yes">Bai</string>
 	<string name="poi_bench_no">Eserleku gabe</string>
 	<string name="poi_shelter_type_public_transport">Garraio publikoa</string>
-	<string name="poi_shelter_type_picnic_shelter"/>
+	<string name="poi_shelter_type_picnic_shelter">Piknik</string>
 	<string name="poi_shelter_type_weather_shelter">Eguraldiarentzat</string>
 	<string name="poi_shelter_type_basic_hut">Oinarrizko txabola</string>
 	<string name="poi_shelter_type_building">Eraikina</string>
@@ -997,7 +997,7 @@
 	<string name="poi_theatre_genre_circus">Zirkoa</string>
 	<string name="poi_gallery">Arte galeria</string>
 	<string name="poi_dance_floor">Dantzarako pista</string>
-	<string name="poi_nightclub">Gau kluba</string>
+	<string name="poi_nightclub">Gau kluba;Disco;Disko</string>
 	<string name="poi_stripclub">Striptease kluba</string>
 	<string name="poi_ski_resort">Ski estazioa</string>
 	<string name="poi_dog_park">Txakur parkea</string>
@@ -1405,10 +1405,10 @@
 	<string name="poi_sanitary_dump_station_customers">Komuneko hondakinen estazioa: bezeroak besterik ez</string>
 	<string name="poi_power_supply_yes">Bai</string>
 	<string name="poi_power_supply_no">Elektrizitate iturria: ez</string>
-	<string name="poi_power_supply_cee_17_blue">Elektrizitate iturria (hargunea): CEE 17 urdina</string>
-	<string name="poi_power_supply_cee_7_4">Elektrizitate iturria (hargunea): CEE 7/4</string>
-	<string name="poi_power_supply_cee_7_5">Elektrizitate iturria (hargunea): CEE 7/5</string>
-	<string name="poi_power_supply_nema_5_15">Elektrizitate iturria (hargunea): NEMA 5-15</string>
+	<string name="poi_power_supply_cee_17_blue">Elektrizitate iturria (entxufea): CEE 17 urdina</string>
+	<string name="poi_power_supply_cee_7_4">Elektrizitate iturria (entxufea): CEE 7/4</string>
+	<string name="poi_power_supply_cee_7_5">Elektrizitate iturria (entxufea): CEE 7/5</string>
+	<string name="poi_power_supply_nema_5_15">Elektrizitate iturria (entxufea): NEMA 5-15</string>
 
 	<string name="poi_capacity_tents">Gehieneko denda kopurua</string>
 	<string name="poi_capacity_caravans">Gehieneko karabana kopurua</string>
@@ -2342,7 +2342,7 @@
 	<string name="poi_car_wash_no">Kotxe-garbiketa: ez</string>
 
 
-	<string name="poi_public_bath">Bainu publikoa</string>
+	<string name="poi_public_bath">Komun publikoa</string>
 
 	<string name="poi_male_yes">Gizonezkoa</string>
 	<string name="poi_male_no">Gizonezkoentzat debekatua</string>
@@ -2538,66 +2538,66 @@
 	<string name="poi_water_place_access_family">Familia</string>
 	<string name="poi_water_place_access_multifamilies">Hainbat familia</string>
 
-	<string name="poi_socket_cee_blue">Konektorea: CEE urdina</string>
-	<string name="poi_socket_cee_blue_current">Konektorea: CEE urdina: korrontea</string>
-	<string name="poi_socket_cee_blue_output">Konektorea: CEE urdina: irteera</string>
-	<string name="poi_socket_cee_red_16a">Konektorea: CEE gorria 16A</string>
-	<string name="poi_socket_cee_red_16a_current">Konektorea: CEE gorria: korrontea</string>
-	<string name="poi_socket_cee_red_16a_output">Konektorea: CEE gorria: irteera</string>
-	<string name="poi_socket_cee_red_32a">Konektorea: CEE gorria 32A</string>
-	<string name="poi_socket_cee_red_32a_current">Konektorea: CEE gorria 32A: korrontea</string>
-	<string name="poi_socket_cee_red_32a_output">Konektorea: CEE gorria 32A: irteera</string>
-	<string name="poi_socket_cee_red_64a">Konektorea: CEE gorria 64A</string>
-	<string name="poi_socket_cee_red_64a_current">Konektorea: CEE gorria 64A: korrontea</string>
-	<string name="poi_socket_cee_red_64a_output">Konektorea: CEE gorria 64A: irteera</string>
-	<string name="poi_socket_cee_red_125a">Konektorea: CEE gorria 125A</string>
-	<string name="poi_socket_cee_red_125a_current">Konektorea: CEE gorria 125A: korrontea</string>
-	<string name="poi_socket_cee_red_125a_output">Konektorea: CEE gorria 125A: irteera</string>
-	<string name="poi_socket_type1">Konektorea: 1 mota</string>
-	<string name="poi_socket_type1_current">Konektorea: 1 mota: korrontea</string>
-	<string name="poi_socket_type1_output">Konektorea: 1 mota: irteera</string>
-	<string name="poi_socket_type1_combo">Konektorea: 1 mota konbinatua</string>
-	<string name="poi_socket_type1_combo_current">Konektorea: 1 mota konbinatua: korrontea</string>
-	<string name="poi_socket_type1_combo_output">Konektorea: 1 mota konbinatua: irteera</string>
-	<string name="poi_socket_type2">Konektorea: 2 mota</string>
-	<string name="poi_socket_type2_current">Konektorea: 2 mota: korrontea</string>
-	<string name="poi_socket_type2_output">Konektorea: 2 mota: irteera</string>
-	<string name="poi_socket_type2_combo">Konektorea: 2 mota konbinatua</string>
-	<string name="poi_socket_type2_combo_current">Konektorea: 2 mota: korrontea</string>
-	<string name="poi_socket_type2_combo_output">Konektorea: 2 mota: irteera</string>
-	<string name="poi_socket_type3">Konektorea: 3 mota</string>
-	<string name="poi_socket_type3_current">Konektorea: 2 mota: korrontea</string>
-	<string name="poi_socket_type3_output">Konektorea: 3 mota: irteera</string>
-	<string name="poi_socket_chademo">Konektorea: CHAdeMO</string>
-	<string name="poi_socket_chademo_current">Konektorea: CHAdeMO: korrontea</string>
-	<string name="poi_socket_chademo_output">Konektorea: CHAdeMO: irteera</string>
-	<string name="poi_socket_tesla_standard">Konektorea: Tesla estandarra</string>
-	<string name="poi_socket_tesla_standard_current">Konektorea: Tesla estandarra: korrontea</string>
-	<string name="poi_socket_tesla_standard_output">Konektorea: Tesla estandarra: irteera</string>
-	<string name="poi_socket_tesla_supercharger">Konektorea: Tesla superkargagailua</string>
-	<string name="poi_socket_tesla_supercharger_current">Konektorea: Tesla superkargagailua: korrontea</string>
-	<string name="poi_socket_tesla_supercharger_output">Konektorea: Tesla superkargagailua: irteera</string>
-	<string name="poi_socket_nema_5_15">Konektorea: NEMA 5-15R</string>
-	<string name="poi_socket_nema_5_15_current">Konektorea: NEMA 5-15R: korrontea</string>
-	<string name="poi_socket_nema_5_15_output">Konektorea: NEMA 5-15R: irteera</string>
-	<string name="poi_socket_nema_5_20">Konektorea: NEMA 5-20</string>
-	<string name="poi_socket_nema_5_20_current">Konektorea: NEMA 5-20: korrontea</string>
-	<string name="poi_socket_nema_5_20_output">Konektorea: NEMA 5-20: irteera</string>
-	<string name="poi_socket_nema_14_30">Konektorea: NEMA 14-30</string>
-	<string name="poi_socket_nema_14_30_current">Konektorea: NEMA 14-30: korrontea</string>
-	<string name="poi_socket_nema_14_30_output">Konektorea: NEMA 14-30: irteera</string>
-	<string name="poi_socket_nema_14_50">Konektorea: NEMA 14-50</string>
-	<string name="poi_socket_nema_14_50_current">Konektorea: NEMA 14-50: korrontea</string>
-	<string name="poi_socket_nema_14_50_output">Konektorea: NEMA 14-50: irteera</string>
-	<string name="poi_socket_schuko">Konektorea: Schuko</string>
-	<string name="poi_socket_schuko_current">Konektorea: Schuko: korrontea</string>
-	<string name="poi_socket_schuko_output">Konektorea: Schuko: irteera</string>
-	<string name="poi_socket_bs1363">Konektorea: BS 1363</string>
-	<string name="poi_socket_bs1363_current">Konektorea: BS 1363: korrontea</string>
-	<string name="poi_socket_bs1363_output">Konektorea: BS 1363: irteera</string>
-	<string name="poi_socket_as3112">Konektorea: AS/NZS 3112</string>
-	<string name="poi_socket_as3112_current">Konektorea: AS/NZS 3112: korrontea</string>
-	<string name="poi_socket_as3112_output">Konektorea: AS/NZS 3112: irteera</string>
+	<string name="poi_socket_cee_blue">Entxufea: CEE urdina</string>
+	<string name="poi_socket_cee_blue_current">Entxufea: CEE urdina: korrontea</string>
+	<string name="poi_socket_cee_blue_output">Entxufea: CEE urdina: irteera</string>
+	<string name="poi_socket_cee_red_16a">Entxufea: CEE gorria 16A</string>
+	<string name="poi_socket_cee_red_16a_current">Entxufea: CEE gorria: korrontea</string>
+	<string name="poi_socket_cee_red_16a_output">Entxufea: CEE gorria: irteera</string>
+	<string name="poi_socket_cee_red_32a">Entxufea: CEE gorria 32A</string>
+	<string name="poi_socket_cee_red_32a_current">Entxufea: CEE gorria 32A: korrontea</string>
+	<string name="poi_socket_cee_red_32a_output">Entxufea: CEE gorria 32A: irteera</string>
+	<string name="poi_socket_cee_red_64a">Entxufea: CEE gorria 64A</string>
+	<string name="poi_socket_cee_red_64a_current">Entxufea: CEE gorria 64A: korrontea</string>
+	<string name="poi_socket_cee_red_64a_output">Entxufea: CEE gorria 64A: irteera</string>
+	<string name="poi_socket_cee_red_125a">Entxufea: CEE gorria 125A</string>
+	<string name="poi_socket_cee_red_125a_current">Entxufea: CEE gorria 125A: korrontea</string>
+	<string name="poi_socket_cee_red_125a_output">Entxufea: CEE gorria 125A: irteera</string>
+	<string name="poi_socket_type1">Entxufea: 1 mota</string>
+	<string name="poi_socket_type1_current">Entxufea: 1 mota: korrontea</string>
+	<string name="poi_socket_type1_output">Entxufea: 1 mota: irteera</string>
+	<string name="poi_socket_type1_combo">Entxufea: 1 mota konbinatua</string>
+	<string name="poi_socket_type1_combo_current">Entxufea: 1 mota konbinatua: korrontea</string>
+	<string name="poi_socket_type1_combo_output">Entxufea: 1 mota konbinatua: irteera</string>
+	<string name="poi_socket_type2">Entxufea: 2 mota</string>
+	<string name="poi_socket_type2_current">Entxufea: 2 mota: korrontea</string>
+	<string name="poi_socket_type2_output">Entxufea: 2 mota: irteera</string>
+	<string name="poi_socket_type2_combo">Entxufea: 2 mota konbinatua</string>
+	<string name="poi_socket_type2_combo_current">Entxufea: 2 mota: korrontea</string>
+	<string name="poi_socket_type2_combo_output">Entxufea: 2 mota: irteera</string>
+	<string name="poi_socket_type3">Entxufea: 3 mota</string>
+	<string name="poi_socket_type3_current">Entxufea: 2 mota: korrontea</string>
+	<string name="poi_socket_type3_output">Entxufea: 3 mota: irteera</string>
+	<string name="poi_socket_chademo">Entxufea: CHAdeMO</string>
+	<string name="poi_socket_chademo_current">Entxufea: CHAdeMO: korrontea</string>
+	<string name="poi_socket_chademo_output">Entxufea: CHAdeMO: irteera</string>
+	<string name="poi_socket_tesla_standard">Entxufea: Tesla estandarra</string>
+	<string name="poi_socket_tesla_standard_current">Entxufea: Tesla estandarra: korrontea</string>
+	<string name="poi_socket_tesla_standard_output">Entxufea: Tesla estandarra: irteera</string>
+	<string name="poi_socket_tesla_supercharger">Entxufea: Tesla superkargagailua</string>
+	<string name="poi_socket_tesla_supercharger_current">Entxufea: Tesla superkargagailua: korrontea</string>
+	<string name="poi_socket_tesla_supercharger_output">Entxufea: Tesla superkargagailua: irteera</string>
+	<string name="poi_socket_nema_5_15">Entxufea: NEMA 5-15R</string>
+	<string name="poi_socket_nema_5_15_current">Entxufea: NEMA 5-15R: korrontea</string>
+	<string name="poi_socket_nema_5_15_output">Entxufea: NEMA 5-15R: irteera</string>
+	<string name="poi_socket_nema_5_20">Entxufea: NEMA 5-20</string>
+	<string name="poi_socket_nema_5_20_current">Entxufea: NEMA 5-20: korrontea</string>
+	<string name="poi_socket_nema_5_20_output">Entxufea: NEMA 5-20: irteera</string>
+	<string name="poi_socket_nema_14_30">Entxufea: NEMA 14-30</string>
+	<string name="poi_socket_nema_14_30_current">Entxufea: NEMA 14-30: korrontea</string>
+	<string name="poi_socket_nema_14_30_output">Entxufea: NEMA 14-30: irteera</string>
+	<string name="poi_socket_nema_14_50">Entxufea: NEMA 14-50</string>
+	<string name="poi_socket_nema_14_50_current">Entxufea: NEMA 14-50: korrontea</string>
+	<string name="poi_socket_nema_14_50_output">Entxufea: NEMA 14-50: irteera</string>
+	<string name="poi_socket_schuko">Entxufea: Schuko</string>
+	<string name="poi_socket_schuko_current">Entxufea: Schuko: korrontea</string>
+	<string name="poi_socket_schuko_output">Entxufea: Schuko: irteera</string>
+	<string name="poi_socket_bs1363">Entxufea: BS 1363</string>
+	<string name="poi_socket_bs1363_current">Entxufea: BS 1363: korrontea</string>
+	<string name="poi_socket_bs1363_output">Entxufea: BS 1363: irteera</string>
+	<string name="poi_socket_as3112">Entxufea: AS/NZS 3112</string>
+	<string name="poi_socket_as3112_current">Entxufea: AS/NZS 3112: korrontea</string>
+	<string name="poi_socket_as3112_output">Entxufea: AS/NZS 3112: irteera</string>
 
 	<string name="poi_car_yes">Kotxea: bai</string>
 	<string name="poi_car_no">Kotxea: ez</string>
@@ -2923,8 +2923,8 @@
 	<string name="poi_site_type_petroglyph">Petroglifoa</string>
 	<string name="poi_site_type_earthwork">Lur-obra</string>
 	<string name="poi_temperature">Tenperatura</string>
-	<string name="poi_bathing_yes">Bainua: bai</string>
-	<string name="poi_bathing_no">Bainua: ez</string>
+	<string name="poi_bathing_yes">Bainatzea: bai</string>
+	<string name="poi_bathing_no">Bainatzea: ez</string>
 
 	<string name="poi_cargo_passengers">Bidaiariak</string>
 	<string name="poi_cargo_vehicle">Ibilgailuak</string>
@@ -3134,7 +3134,7 @@
 	<string name="poi_generator_output_electricity_no">Irteera (elektrizitatea): ez</string>
 
 	<string name="poi_direction_n">Norabidea: iparra</string>
-	<string name="poi_socket">Hargunea</string>
+	<string name="poi_socket">Entxufea</string>
 
 <string name="poi_railway_crossing">Trenbideen gurutzea</string>
 	<string name="poi_railway_level_crossing">Maila bereko gurutzea</string>
@@ -3193,7 +3193,6 @@
 
 	<string name="poi_service_car">Kotxe zerbitzua</string>
 
-<string name="synonyms_poi_nightclub">Disco;Disko</string>
 	<string name="poi_glacier_type">Glaziar mota</string>
 
 <string name="poi_outdoor_seating_no">Kanpoko eserlekurik ez</string>
@@ -3210,7 +3209,6 @@
 	<string name="poi_resource_aggregate">Agregatua</string>
 	<string name="poi_checkpoint_type">Kontrol-postu mota</string>
 
-<string name="synonyms_poi_fuel">Gasolindegia; Zerbitzu estazioa;Erregai estazioa;Petrolio estazioa</string>
 
 	<string name="poi_tactile_paving_no">Ukimenezko zoladura gabe</string>
 	<string name="poi_capacity_disabled_no">Ez dago ezinduentzako toki berezirik</string>
@@ -3510,4 +3508,98 @@
 
 	<string name="poi_gambling">Apustu etxea</string>
 
+	<string name="poi_piste_grooming_backcountry">Pistaz kanpo</string>
+	<string name="poi_piste_grooming_mogul">Mogul</string>
+
+	<string name="poi_brushless_no">Eskuila gabekoa: ez</string>
+	<string name="poi_vending_parcel_pickup_mail_in">Pakete eta posta estazioa</string>
+	<string name="poi_vending_parcel_mail_in">Posta estazioa</string>
+	<string name="poi_vending_elongated_coin">Txanpon elongatua</string>
+	<string name="poi_vending_toll">Ticket salmenta</string>
+	<string name="poi_memorial_jizo">Jizo</string>
+	<string name="poi_memorial_prasat">Prasat</string>
+	<string name="poi_wetland_saltern">"Gatzaga "</string>
+	<string name="poi_wetland_tidalflat">Padura</string>
+	<string name="poi_wetland_saltmarsh">Gatz zingira</string>
+	<string name="poi_wetland_mangrove">Mangladia</string>
+	<string name="poi_wetland_string_bog">Zohikaztegia</string>
+	<string name="poi_wetland_fen">Fen (lurpeko zohikaztegia)</string>
+	<string name="poi_wetland_palsa_bog">Palsa zingira</string>
+	<string name="poi_wetland_mud">Lokatza</string>
+
+	<string name="poi_flagpole">"Banderaren zutoina "</string>
+
+	<string name="poi_shelter_type_lean_to">Estalpea</string>
+	<string name="poi_shelter_type_field_shelter">Naturarako aterpea</string>
+	<string name="poi_architecture_umgebinde">Arkitektura: umgebinde</string>
+	<string name="poi_architecture_timber_frame">Arkitektura: egurrezko estruktura</string>
+	<string name="poi_architecture_victorian">"Arkitektura: viktoriarra "</string>
+	<string name="poi_architecture_oldrussian">Arkitektura: antzinako errusiarra</string>
+	<string name="poi_architecture_postconstructivism">Arkitektura: postkonstruktibismoa</string>
+	<string name="poi_architecture_wilhelminian_style">Arkitektura: estilo gilerminista</string>
+	<string name="poi_architecture_renaissance">Arkitektura: pizkundea</string>
+	<string name="poi_architecture_romanesque">Arkitektura: erromanikoa</string>
+
+	<string name="poi_tunnel_waterway">Ur-tunela</string>
+	<string name="poi_bridge_waterway">Ur-zubia</string>
+	<string name="poi_bridge_movable_retractable">Zubiaren estruktura: ezkutagarria</string>
+
+	<string name="poi_industrial_timber">Mota: zura</string>
+	<string name="poi_industrial_auto_wrecker">Mota: autoak desegiteko lekua</string>
+	<string name="poi_industrial_brickyard">"Mota: adreilu ola "</string>
+	<string name="poi_industrial_intermodal_freight_terminal">Mota: merkantzien terminal intermodala</string>
+	<string name="poi_watering_place">Uraska</string>
+	<string name="poi_office_camping">Kanpineko bulegoa</string>
+	<string name="poi_model_aerodrome">Modelismorako aerodromoa</string>
+	<string name="poi_guide">Gidaren bulegoa</string>
+	<string name="poi_quango">Quango (Ia erabat autonomoa den gobernuz kanpoko erakundea)</string>
+	<string name="poi_consulting">Kontsultoreen bulegoa</string>
+	<string name="poi_cooperative">Kooperatibaren bulegoa</string>
+	<string name="poi_office_forestry">Basogintza bulegoa</string>
+	<string name="poi_logistics">Logistika bulegoa</string>
+	<string name="poi_parish">Parrokiaren bulegoa</string>
+	<string name="poi_publisher">Argitaratze bulegoa</string>
+
+	<string name="poi_fuel_91ul">91UL erregaia</string>
+	<string name="poi_fuel_autogas">Autogas</string>
+	<string name="poi_escape_lane">Larrialdiko geldigunea</string>
+
+	<string name="poi_clothes_denim">Denim (bakeroak)</string>
+	<string name="poi_historic_manor">Oinetxe historikoa</string>
+	<string name="poi_scout_no">Eskaut kanpamentua: ez</string>
+	<string name="poi_refugee_yes">Errefuxiatuentzako zerbitzuak</string>
+	<string name="poi_social_facility_group_home">Talde erresidentzia</string>
+	<string name="poi_social_facility_assisted_living">Zaindutako bizitza</string>
+	<string name="poi_social_facility_outreach">Tokian tokikoa</string>
+	<string name="poi_social_facility_food_bank">Janari bankua</string>
+	<string name="poi_social_facility_ambulatory_care">"Zaintza anbulatorioa "</string>
+	<string name="poi_social_facility_day_care">Eguneko zaintza</string>
+
+	<string name="poi_cairn">Cairn</string>
+
+	<string name="poi_tomb_rock_cut">"Mota: harri zulatua "</string>
+	<string name="poi_tomb_hypogeum">Mota: hipogeoa</string>
+	<string name="poi_tomb_vault">Mota: ganga</string>
+	<string name="poi_pumping_station">Ponpatze-estazioa</string>
+
+	<string name="poi_display_sundial_yes">Eguzki-erlojua</string>
+
+	<string name="poi_cuisine_smoothie">Fruta irabiakia</string>
+	<string name="poi_boat_pedalboat_rental_yes">Pedal-ontziak: bai</string>
+	<string name="poi_boat_pedalboat_rental_no">Pedal-ontzia: ez</string>
+	<string name="poi_boat_jetski_rental_yes">Uretarako motorrak: bai</string>
+	<string name="poi_boat_jetski_rental_no">Uretarako motorrak: ez</string>
+	<string name="poi_boat_sailboat_rental_yes">Belaontziak: bai</string>
+	<string name="poi_boat_sailboat_rental_no">Belaontziak: ez</string>
+	<string name="poi_boat_dinghy_rental_rental_yes">Txintxorroak: bai</string>
+	<string name="poi_boat_dinghy_rental_rental_no">Txintxorroak: ez</string>
+	<string name="poi_boat_kayak_rental_rental_yes">Kayakak: bai</string>
+	<string name="poi_boat_kayak_rental_rental_no">Kayakak: ez</string>
+	<string name="poi_boat_canoe_rental_rental_yes">Kanoak: bai</string>
+	<string name="poi_boat_canoe_rental_rental_no">Kanoak: ez</string>
+
+	<string name="poi_location_rooftop">Kokalekua: teilatupea</string>
+	<string name="poi_socket_tesla_roadster">Entxufea: Tesla Roadster</string>
+	<string name="poi_socket_tesla_roadster_current">Tesla Roadster: Tesla Roadster: korrontea</string>
+	<string name="poi_socket_tesla_roadster_output">Entxufea: Tesla Roadster: irteera</string>
 	</resources>

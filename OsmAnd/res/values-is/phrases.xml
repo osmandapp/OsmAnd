@@ -275,7 +275,7 @@
 
 	<string name="poi_service_tyres">Hjólbarðar</string>
 	<string name="poi_car_wash">Bílaþvottastöð</string>
-	<string name="poi_fuel">Bensínstöð</string>
+	<string name="poi_fuel">Bensínstöð;Eldsneytisáfylling;Eldsneytisafgreiðsla</string>
 	<string name="poi_fuel_diesel">Dísel</string>
 	<string name="poi_fuel_biodiesel">Lífdísel</string>
 	<string name="poi_fuel_octane_80">80 oktan</string>
@@ -2142,7 +2142,7 @@
 	<string name="poi_piste_ice_skate">Skautar</string>
 	<string name="poi_social_centre">Félagsmiðstöð</string>
 	<string name="poi_gallery">Listagallerí</string>
-	<string name="poi_nightclub">Næturklúbbur</string>
+	<string name="poi_nightclub">Næturklúbbur;Diskótek;Diskó</string>
 	<string name="poi_beach_resort">Strandbær</string>
 	<string name="poi_dog_park">Hundagarður</string>
 	<string name="poi_recreation_ground">Leikvöllur</string>
@@ -3716,7 +3716,6 @@
 
 <string name="poi_barbecue_grill">Steikingargrill: já</string>
 
-<string name="synonyms_poi_fuel">Bensínstöð;Eldsneytisáfylling;Eldsneytisafgreiðsla</string>
 
 	<string name="poi_denomination_congregational">Safnaðar (congregational)</string>
 	<string name="poi_health_specialty_podology_yes">Fótaheilsa</string>
@@ -3776,7 +3775,6 @@
 	<string name="poi_cuisine_sagardotegia">Sagardotegia eplavínstaður</string>
 	<string name="poi_water_utility">Vatnsveituskrifstofa</string>
 
-<string name="synonyms_poi_nightclub">Diskótek;Diskó</string>
 	<string name="poi_amusement_arcade">Spilasalur</string>
 	<string name="poi_adult_gaming_centre">Spilasalur fyrir fullorðna</string>
 
