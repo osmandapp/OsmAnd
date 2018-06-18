@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
 <string name="app_mode_bus">Bus</string>
  	<string name="app_mode_train">Ćah</string>
     <string name="map_widget_battery">Staw baterije</string>
@@ -1326,7 +1327,7 @@
     <string name="shared_string_change">Změnić</string>
     <string name="shared_string_close">Začinić</string>
     <string name="shared_string_add">Přidać</string>
-    <string name="osn_modify_dialog_error">Zmylk je so stał: notica njeje so změniła</string>
+    <string name="osn_modify_dialog_error">Njemóžach změnić noticu</string>
     <string name="context_menu_item_open_note">OSM-noticu wočinić</string>
     <string name="osm_edit_created_note">OSM-notica je so wutworiła</string>
     <string name="osn_reopen_dialog_title">Noticu znowa wočinić</string>
@@ -1354,7 +1355,7 @@
     <string name="notes_by_date">Noticy po datumje</string>
     <string name="by_date">po datumje</string>
     <string name="by_type">po družinje</string>
-    <string name="empty_state_markers_groups_desc">Móžeš faworitowe skupiny abo pućne dypki jako markěrowanja importować.</string>
+    <string name="empty_state_markers_groups_desc">Faworitowe skupiny abo pućne dypki jako markěrowanja importować.</string>
     <string name="show_number_pad">Ličbny blok pokazać</string>
     <string name="shared_string_paste">Zasadźić</string>
     <string name="go_to_next_field">Přichodne polo</string>
@@ -1364,7 +1365,7 @@
 	<string name="make_round_trip_descr">Kopiju wuchadźišća jako cil přidać.</string>
     <string name="shared_string_markers">Chorhojčki</string>
     <string name="fast_coordinates_input_descr">Format zapodaća koordinatow wubrać. Móžeš jón přeco změnić pod \"Nastajenja\".</string>
-    <string name="marker_save_as_track">Jako čaru składować</string>
+    <string name="marker_save_as_track">Jako GPX-dataju składować</string>
     <string name="move_to_history">Do archiwa přesunyć</string>
     <string name="show_guide_line">Směrnicy pokazać</string>
     <string name="descendingly">zestupujo</string>
@@ -1480,4 +1481,8 @@
     <string name="download_roads_only_maps">Jenož dróhowa karta</string>
     <string name="context_menu_item_update_map_confirm">Lokalne daty z interneta aktualizować?</string>
     <string name="reading_indexes">Čitam lokalne daty…</string>
+    <string name="start_editing_card_image_text">Swobodny pućowanski přewodnik, kotryž móže kóždy wobdźěłać.</string>
+    <string name="free">Swobodne %1$s</string>
+    <string name="device_memory">Skład nastroje</string>
+    <string name="free_downloads_used_description">Pokaza ličbu zbywacych bjezpłatnych sćehnjenjow.</string>
     </resources>

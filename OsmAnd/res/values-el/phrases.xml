@@ -2853,4 +2853,65 @@
 	<string name="poi_health_facility_type_dispensary">Τύπος ιατρικής εγκατάστασης: κλινική</string>
 	<string name="poi_health_facility_type_first_aid">Τύπος ιατρικής εγκατάστασης: πρώτες βοήθειες</string>
 	<string name="poi_health_facility_type_nursing_home">Τύπος ιατρικής εγκατάστασης: γηροκομείο</string>
+	<string name="poi_health_facility_type_support_group_home">Τύπος εγκατάστασης υγείας: ίδρυμα υποστήριξης</string>
+
+	<string name="poi_suction_point">Σημείο αναρρόφησης</string>
+
+	<string name="poi_fire_hydrant_type_underground">Υπόγειος</string>
+	<string name="poi_fire_hydrant_type_pillar">Στύλος</string>
+	<string name="poi_fire_hydrant_type_dry_barrel">Ξηρό βαρέλι</string>
+	<string name="poi_fire_hydrant_type_pond">Δεξαμενή</string>
+	<string name="poi_fire_hydrant_type_wall">Τοίχος</string>
+
+	<string name="poi_health_amenity_type_first_aid_kit">Κουτί πρώτων βοηθειών</string>
+	<string name="poi_health_amenity_type_scales">Δημόσια ζυγαριά</string>
+
+	<string name="poi_health_person_type_assistant">Ρόλος του επαγγελματία υγείας: βοηθός</string>
+	<string name="poi_health_person_type_healer">Ρόλος του επαγγελματία υγείας: θεραπευτής</string>
+	<string name="poi_health_person_type_midwife">Ρόλος του επαγγελματία υγείας: μαία</string>
+	<string name="poi_health_person_type_nurse">Ρόλος του επαγγελματία υγείας: νοσοκόμος</string>
+	<string name="poi_health_person_type_paramedic">Ρόλος του επαγγελματία υγείας: παραϊατρικός</string>
+	<string name="poi_health_person_type_physician">Ρόλος του επαγγελματία υγείας: γιατρός</string>
+	<string name="poi_health_person_type_podologist">Ρόλος του επαγγελματία υγείας: ποδολόγος</string>
+	<string name="poi_health_person_type_psychologist">Ρόλος του επαγγελματία υγείας: ψυχολόγος</string>
+	<string name="poi_health_person_type_therapist">Ρόλος του επαγγελματία υγείας: θεραπευτής</string>
+	<string name="poi_health_person_type_physician_assitant">Ρόλος του επαγγελματία υγείας: βοηθός γιατρός</string>
+	<string name="poi_health_person_type_technician">Ρόλος του επαγγελματία υγείας: τεχνικός</string>
+	<string name="poi_health_person_type_witchdoctor">Ρόλος του επαγγελματία υγείας: μάγος-γιατρός</string>
+
+	<string name="poi_counselling_type_addiction_yes">Συμβουλευτική (εθισμού): ναι</string>
+	<string name="poi_counselling_type_addiction_no">Συμβουλευτική (εθισμού): όχι</string>
+	<string name="poi_counselling_type_antenatal_yes">Συμβουλευτική (προγεννητική): ναι</string>
+	<string name="poi_counselling_type_antenatal_no">Συμβουλευτική (προγεννητική): όχι</string>
+	<string name="poi_counselling_type_child_guidance_yes">Συμβουλευτική (παιδική καθοδήγηση): ναι</string>
+	<string name="poi_counselling_type_child_guidance_no">Συμβουλευτική (παιδική καθοδήγηση): όχι</string>
+	<string name="poi_counselling_type_couple_yes">Συμβουλευτική (ζευγάρια): ναι</string>
+	<string name="poi_counselling_type_couple_no">Συμβουλευτική (ζευγάρια): όχι</string>
+	<string name="poi_counselling_type_crisis_yes">Συμβουλευτική (κρίση): ναι</string>
+	<string name="poi_counselling_type_crisis_no">Συμβουλευτική (κρίση): όχι</string>
+	<string name="poi_counselling_type_drugs_yes">Συμβουλευτική (ναρκωτικά): ναι</string>
+	<string name="poi_counselling_type_drugs_no">Συμβουλευτική (ναρκωτικά): όχι</string>
+	<string name="poi_counselling_type_education_yes">Συμβουλευτική (εκπαίδευση): ναι</string>
+	<string name="poi_counselling_type_education_no">Συμβουλευτική (εκπαίδευση): όχι</string>
+	<string name="poi_counselling_type_family_yes">Συμβουλευτική (οικογένεια): ναι</string>
+	<string name="poi_counselling_type_family_no">Συμβουλευτική (οικογένεια): όχι</string>
+	<string name="poi_counselling_type_homeless_yes">Συμβουλευτική (άστεγοι): ναι</string>
+	<string name="poi_counselling_type_homeless_no">Συμβουλευτική (άστεγοι): όχι</string>
+	<string name="poi_counselling_type_immigrant_yes">Συμβουλευτική (μετανάστες): ναι</string>
+	<string name="poi_counselling_type_immigrant_no">Συμβουλευτική (μετανάστες): όχι</string>
+	<string name="poi_counselling_type_marriage_yes">Συμβουλευτική (γάμος): ναι</string>
+	<string name="poi_counselling_type_marriage_no">Συμβουλευτική (γάμος): όχι</string>
+	<string name="poi_counselling_type_nutrition_yes">Συμβουλευτική (διατροφή): ναι</string>
+	<string name="poi_counselling_type_nutrition_nfire_hydo">Συμβουλευτική (διατροφή): όχι</string>
+	<string name="poi_counselling_type_rehabilitation_yes">Συμβουλευτική (αποκατάσταση): ναι</string>
+	<string name="poi_counselling_type_rehabilitation_no">Συμβουλευτική (αποκατάσταση): όχι</string>
+	<string name="poi_counselling_type_sexual_yes">Συμβουλευτική (σεξουαλική): ναι</string>
+	<string name="poi_counselling_type_sexual_no">Συμβουλευτική (σεξουαλική): όχι</string>
+	<string name="poi_counselling_type_sexual_abuse_yes">Συμβουλευτική (σεξουαλική κακοποίηση): ναι</string>
+	<string name="poi_counselling_type_sexual_abuse_no">Συμβουλευτική (σεξουαλική κακοποίηση): όχι</string>
+	<string name="poi_counselling_type_victim_yes">Συμβουλευτική (θύμα): ναι</string>
+	<string name="poi_counselling_type_victim_no">Συμβουλευτική (θύμα): όχι</string>
+	<string name="poi_counselling_type_violence_yes">Συμβουλευτική (βία): ναι</string>
+	<string name="poi_counselling_type_violence_no">Συμβουλευτική (βία): όχι</string>
+
 	</resources>
