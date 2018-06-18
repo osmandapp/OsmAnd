@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources><string name="shared_string_my_places">Meus lugares</string>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="shared_string_my_places">Meus lugares</string>
 	<string name="days_behind">dias atrás</string>
 	<string name="watch">Ver</string>
 	<string name="rendering_attr_pisteGrooming_name">Pista de preparação</string>
@@ -522,7 +523,7 @@
    	<string name="always_center_position_on_map">Sempre centralizar a posição no mapa</string>
     <string name="voice_pref_title">Voz</string>
     <string name="misc_pref_title">Diversos</string>
-    <string name="localization_pref_title">Localização</string>
+    <string name="localization_pref_title">Regionalização</string>
     <string name="index_item_nation_addresses">endereços nacionais</string>
 	<string name="index_item_world_altitude_correction">Correção de altitude mundial</string>
 	<string name="index_item_world_seamarks">Marcas marítimas mundiais</string>
@@ -703,7 +704,7 @@ Pôr do Sol: %2$s</string>
     <string name="use_distance_measurement_help">* Toque para marcar um ponto.\n * Toque e segure no mapa para apagar pontos anteriores.\n * Toque e segure no ponto para ver e anexar descrição.\n * Toque no widget de medição para ver mais ações.</string>
     <string name="distance_measurement_start_editing">Começar a edição</string>
     <string name="distance_measurement_finish_editing">Finalizar a edição</string>
-    <string name="distance_measurement_finish_subtrack">Começar um novo subtrilha</string>
+    <string name="distance_measurement_finish_subtrack">Começar uma nova subtrilha</string>
     <string name="distance_measurement_clear_route">Apagar todos os pontos</string>
     <string name="distance_measurement_load_gpx">Abrir GPX</string>
     <string name="wait_current_task_finished">Aguarde até que a tarefa seja concluída</string>
@@ -772,7 +773,7 @@ Pôr do Sol: %2$s</string>
     <string name="av_settings_descr">Configurar áudio e vídeo</string>
     <string name="recording_error">Ocorreu um erro durante a gravação</string>
     <string name="recording_camera_not_available">Câmera indisponível</string>
-    <string name="recording_is_recorded">Áudio/vídeo está sendo gravado. Para parar toque o widget AV.</string>
+    <string name="recording_is_recorded">Gravando áudio/vídeo. Para parar, toque no widget AV.</string>
     <string name="recording_playing">Reproduzindo áudio da gravação especificada.\n%1$s</string>
     <string name="recording_open_external_player">Abrir reprodutor externo</string>
     <string name="recording_delete_confirm">Você quer excluir esta gravação?</string>
@@ -2227,7 +2228,7 @@ Pôr do Sol: %2$s</string>
     <string name="routing_attr_avoid_ice_roads_fords_name">Evitar estradas de gelo, vaus</string>
     <string name="routing_attr_avoid_ice_roads_fords_description">Evitar estradas de gelo e vaus.</string>
     <string name="map_orientation_change_in_accordance_with_speed">Limite para orientação do mapa</string>
-    <string name="quick_action_show_navigation_finish_dialog">Mostrar diálogo de navegação finalizada</string>
+    <string name="quick_action_show_navigation_finish_dialog">Mostrar diálogo \'Navegação finalizada\'</string>
     <string name="mapillary_menu_title_tile_cache">Cache de quadrícula</string>
     <string name="map_widget_ruler_control">Régua de raio</string>
     <string name="show_from_zoom_level">Mostrar do nível de ampliação</string>
@@ -2497,7 +2498,7 @@ Pôr do Sol: %2$s</string>
     <string name="shared_string_actions">Ações</string>
     <string name="shared_string_marker">Marcador</string>
     <string name="access_autoannounce_period">Período de auto-anúncio</string>
-    <string name="access_map_linked_to_location">Mapa está vinculado a localização</string>
+    <string name="access_map_linked_to_location">Mapa vinculado à localização</string>
     <string name="access_shared_string_navigate_up">Navegue até</string>
     <string name="number_of_gpx_files_selected_pattern">%s arquivos GPX selecionados</string>
     <string name="rendering_value_fine_name">Mais fino</string>
@@ -2544,7 +2545,8 @@ Pôr do Sol: %2$s</string>
     <string name="lang_sr_latn">Sérvio (latino)</string>
     <string name="lang_zh_hk">Chinês (Hong Kong)</string>
     <string name="driving_region_australia">Austrália</string>
-    <string name="osmand_extended_description_part4">O plugin de mapas de ski Skiing OsmAnd permite que você veja pistas de ski com nível de complexidade e algumas informações adicionais, como localização de elevadores e outras facilidades.</string>
+    <string name="osmand_extended_description_part4">Esqui
+\n O plugin de mapas de ski Skiing OsmAnd permite que você veja pistas de ski com nível de complexidade e algumas informações adicionais, como localização de elevadores e outras facilidades.</string>
     <string name="live_monitoring_max_interval_to_send">Buffer de tempo para rastreamento on-line</string>
     <string name="save_poi_too_many_uppercase">Nome contém muitas letras maiúsculas. Você quer continuar?</string>
     <string name="file_name_containes_illegal_char">Nome do arquivo contém caracteres ilegais</string>
@@ -2555,9 +2557,9 @@ Pôr do Sol: %2$s</string>
     <string name="quick_action_add_poi">Adicionar POI</string>
     <string name="quick_action_map_style">Mudar estilo de mapa</string>
     <string name="quick_action_map_style_switch">O estilo do mapa foi alterado para \"%s\".</string>
-    <string name="quick_action_take_audio_note">Tome nota de áudio</string>
-    <string name="quick_action_take_video_note">Tome nota de vídeo</string>
-    <string name="quick_action_take_photo_note">Tome nota de foto</string>
+    <string name="quick_action_take_audio_note">Nova nota de áudio</string>
+    <string name="quick_action_take_video_note">Nova nota de vídeo</string>
+    <string name="quick_action_take_photo_note">Nova nota de foto</string>
     <string name="quick_action_add_osm_bug">Adicionar Nota OSM</string>
     <string name="quick_action_navigation_voice">Ligar/desligar voz</string>
     <string name="quick_action_navigation_voice_off">Voz desligada</string>
@@ -2570,7 +2572,7 @@ Pôr do Sol: %2$s</string>
     <string name="dialog_add_action_title">Adicionar ação</string>
     <string name="quick_actions_delete">Apagar ação</string>
     <string name="quick_actions_delete_text">Tem certeza de que deseja apagar a ação \"%s\"?</string>
-    <string name="quick_favorites_show_favorites_dialog">Mostrar diálogo favoritos</string>
+    <string name="quick_favorites_show_favorites_dialog">Mostrar diálogo Favoritos</string>
     <string name="quick_favorites_name_preset">Nome do preset</string>
     <string name="quick_action_add_marker_descr">Tocar no botão de ação adicionará um marcador de mapa no local do centro da tela.</string>
     <string name="quick_action_add_parking_descr">Tocar no botão de ação adicionará um lugar de estacionamento no local do centro da tela.</string>
@@ -2605,7 +2607,11 @@ Pôr do Sol: %2$s</string>
 \n • Através de plugin adicionais, você pode ativar curvas de nível e sombreamento de relevo</string>
     <string name="osmand_extended_description_part6">Passeio, caminhada, turismo pela cidade • O mapa mostra caminhos para passeios e caminhadas • A Wikipédia no seu idioma preferido pode dizer muito durante um turismo pela cidade • Paradas de transportes públicos (ônibus, troleibus, trem) incluindo nomes de linha, ajuda a navegar em uma nova cidade • Navegação GPS em modo pedestre constrói a sua rota usando caminhos para pedestres • Você pode fazer o upload e seguir uma rota GPX ou gravar e compartilhar a sua própria rota</string>
     <string name="osmand_extended_description_part7">Contribua para o OSM • Comunique falha de dados • Carregue trilhas GPX diretamente do app • Adicione POIs e carregue-os diretamente ao OSM (ou mais tarde se off-line)</string>
-    <string name="osmand_plus_extended_description_part5">Recursos de segurança • Alternância de exibição dia/noite automatizada opcional • Exibição de limite de velocidade opcional, com lembrete se você ultrapassá-lo • Zoom dependente da velocidade opcional • Compartilhe sua localização para que seus amigos possam encontrar você</string>
+    <string name="osmand_plus_extended_description_part5">Recursos de segurança
+\n• Alternância de exibição dia/noite automatizada opcional
+\n• Exibição de limite de velocidade opcional, com lembrete se você ultrapassá-lo
+\n• Zoom dependente da velocidade opcional
+\n• Compartilhe sua localização para que seus amigos possam encontrar você</string>
     <string name="live_monitoring_max_interval_to_send_desrc">Especificar um buffer de tempo para manter locais para enviar sem conexão</string>
     <string name="quick_action_take_audio_note_descr">Tocar no botão de ação adicionará uma nota de áudio no local do centro da tela.</string>
     <string name="quick_action_take_video_note_descr">Tocar no botão de ação adicionará uma nota de vídeo no local do centro da tela.</string>
