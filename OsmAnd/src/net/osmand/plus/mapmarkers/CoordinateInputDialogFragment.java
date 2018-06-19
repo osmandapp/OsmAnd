@@ -542,6 +542,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 				new Handler().postDelayed(new Runnable() {
 					@Override
 					public void run() {
+						isSoftKeyboardShown = true;
 						AndroidUtils.showSoftKeyboard(focusedView);
 					}
 				}, 200);
