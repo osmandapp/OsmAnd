@@ -995,7 +995,7 @@ public class MapMarkersHelper {
 	}
 
 	public String generateGpx(String fileName) {
-		final File dir = ctx.getAppPath(IndexConstants.GPX_INDEX_DIR + "/map markers");
+		final File dir = ctx.getAppPath(IndexConstants.GPX_INDEX_DIR + IndexConstants.MAP_MARKERS_INDEX_DIR);
 		if (!dir.exists()) {
 			dir.mkdirs();
 		}
@@ -1018,7 +1018,7 @@ public class MapMarkersHelper {
 	}
 	
 	public String generateGpxFromList(String fileName,  List<MapMarker> mapMarkers) {
-		final File dir = ctx.getAppPath(IndexConstants.GPX_INDEX_DIR + "/map markers");
+		final File dir = ctx.getAppPath(IndexConstants.GPX_INDEX_DIR + IndexConstants.MAP_MARKERS_INDEX_DIR);
 		if (!dir.exists()) {
 			dir.mkdirs();
 		}
