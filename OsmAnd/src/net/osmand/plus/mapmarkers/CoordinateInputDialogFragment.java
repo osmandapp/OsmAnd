@@ -948,13 +948,24 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		return new CoordinateInputActionsBottomSheet.CoordinateInputActionsListener() {
 
 			@Override
-			public void removeItem(int position) {
-				if (selectedMarker == adapter.getItem(position)) {
+			public void removeItem(final int position) {
+				final MapMarker mapMarker = adapter.getItem(position);
+				if (selectedMarker == mapMarker) {
 					dismissEditingMode();
 					clearInputs();
 				}
 				adapter.removeItem(position);
 				isGpxSaved = false;
+				snackbar = Snackbar.make(mainView, R.string.marker_moved_to_history, Snackbar.LENGTH_LONG)
+						.setAction(R.string.shared_string_undo, new View.OnClickListener() {
+							@Override
+							public void onClick(View view) {
+								mapMarkers.add(position, mapMarker);
+								adapter.notifyDataSetChanged();
+							}
+						});
+				AndroidUtils.setSnackbarTextColor(snackbar, R.color.color_dialog_buttons_dark);
+				snackbar.show();
 			}
 
 			@Override
