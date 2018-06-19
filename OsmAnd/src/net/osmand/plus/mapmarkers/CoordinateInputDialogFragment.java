@@ -97,7 +97,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 
 	private boolean lightTheme;
 	private boolean orientationPortrait;
-	private boolean isGpxSaveDialogShowed;
+	private boolean hasUnsavedChanges;
 
 	private boolean isSoftKeyboardShown;
 	private boolean north = true;
@@ -121,7 +121,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 	}
 
 	private void quit() {
-		if (!mapMarkers.isEmpty() && !isGpxSaveDialogShowed) {
+		if (!mapMarkers.isEmpty() && hasUnsavedChanges) {
 			showSaveDialog();
 		} else {
 			saveMarkers();
@@ -130,7 +130,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 	}
 
 	private void showSaveDialog() {
-		isGpxSaveDialogShowed = true;
+		hasUnsavedChanges = false;
 		SaveAsTrackBottomSheetDialogFragment fragment = new SaveAsTrackBottomSheetDialogFragment();
 		Bundle args = new Bundle();
 		args.putInt(ADDED_MARKERS_NUMBER_KEY, mapMarkers.size());
@@ -344,7 +344,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			@Override
 			public void onClick(View view) {
 				addMapMarker();
-				isGpxSaveDialogShowed = false;
+				hasUnsavedChanges = true;
 			}
 		});
 		
@@ -776,7 +776,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 					switchEditText(textView.getId(), true);
 				} else if (i == EditorInfo.IME_ACTION_DONE) {
 					addMapMarker();
-					isGpxSaveDialogShowed = false;
+					hasUnsavedChanges = true;
 				}
 				return false;
 			}
@@ -935,7 +935,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			@Override
 			public void saveGpx(final String fileName) {
 				final String gpxPath = app.getMapMarkersHelper().generateGpxFromList(fileName, mapMarkers);
-				isGpxSaveDialogShowed = true;
+				hasUnsavedChanges = false;
 				snackbar = Snackbar.make(mainView, fileName + " " + getString(R.string.is_saved) + ".", Snackbar.LENGTH_LONG)
 						.setAction(R.string.shared_string_show, new View.OnClickListener() {
 							@Override
@@ -964,7 +964,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 					clearInputs();
 				}
 				adapter.removeItem(position);
-				isGpxSaveDialogShowed = false;
+				hasUnsavedChanges = true;
 				snackbar = Snackbar.make(mainView, R.string.marker_moved_to_history, Snackbar.LENGTH_LONG)
 						.setAction(R.string.shared_string_undo, new View.OnClickListener() {
 							@Override
