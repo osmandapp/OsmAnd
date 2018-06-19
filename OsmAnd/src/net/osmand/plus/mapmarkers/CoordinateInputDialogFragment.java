@@ -878,11 +878,13 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		if (focusedView != null) {
 			if (useOsmandKeyboard) {
 				AndroidUtils.hideSoftKeyboard(getActivity(), focusedView);
+				isSoftKeyboardShown = false;
 			} else {
 				new Handler().postDelayed(new Runnable() {
 					@Override
 					public void run() {
 						AndroidUtils.showSoftKeyboard(focusedView);
+						isSoftKeyboardShown = true;
 					}
 				}, 200);
 			}
