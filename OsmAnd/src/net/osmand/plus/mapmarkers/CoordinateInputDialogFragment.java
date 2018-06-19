@@ -286,6 +286,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 					new Handler().postDelayed(new Runnable() {
 						@Override
 						public void run() {
+							isSoftKeyboardShown = true;
 							AndroidUtils.showSoftKeyboard(focusedView);
 						}
 					}, 200);
@@ -691,6 +692,13 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			public boolean onTouch(View view, MotionEvent motionEvent) {
 				if (isOsmandKeyboardOn()) {
 					if (!isOsmandKeyboardCurrentlyVisible()) {
+						if (isSoftKeyboardShown) {
+							if (view.getId() != R.id.point_name_et) {
+								AndroidUtils.hideSoftKeyboard(getActivity(), view);
+							} else {
+								return false;
+							}
+						}
 						changeOsmandKeyboardVisibility(true);
 					}
 					EditText editText = (EditText) view;
@@ -820,8 +828,9 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 				et.setOnFocusChangeListener(new View.OnFocusChangeListener() {
 					@Override
 					public void onFocusChange(View v, boolean hasFocus) {
-						if (!hasFocus && isOsmandKeyboardOn() && isOsmandKeyboardCurrentlyVisible()) {
+						if (!hasFocus && isOsmandKeyboardOn() && (isOsmandKeyboardCurrentlyVisible() || isSoftKeyboardShown)) {
 							AndroidUtils.hideSoftKeyboard(getActivity(), v);
+							isSoftKeyboardShown = false;
 						}
 					}
 				});
@@ -1082,15 +1091,19 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 	}
 
 	private void showKeyboard() {
+		View focusedView = null;
 		for (EditText et : editTexts) {
 			if (et.getId() == R.id.lat_first_input_et) {
 				et.requestFocus();
-				if (isOsmandKeyboardOn()) {
-					changeOsmandKeyboardVisibility(true);
-				} else {
-					AndroidUtils.softKeyboardDelayed(et);
-				}
+				focusedView = getDialog().getCurrentFocus();
 			}
+		}
+		if (isOsmandKeyboardOn()) {
+			if (!isOsmandKeyboardCurrentlyVisible()) {
+				changeOsmandKeyboardVisibility(true);
+			}
+		} else if (!isSoftKeyboardShown && focusedView != null) {
+			AndroidUtils.softKeyboardDelayed(focusedView);
 		}
 	}
 
@@ -1246,7 +1259,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			et.clearFocus();
 		}
 		if (editTexts.size() > 0) {
-			editTexts.get(0).requestFocus();
+			showKeyboard();
 		}
 	}
 
