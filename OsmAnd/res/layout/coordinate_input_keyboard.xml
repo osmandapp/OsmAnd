@@ -7,7 +7,11 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     tools:background="@color/keyboard_divider_dark">
-
+	
+	<View
+		android:layout_width="match_parent"
+		android:layout_height="1dp"/>
+	
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -98,7 +102,7 @@
             android:layout_height="match_parent"/>
 
         <include
-            android:id="@+id/keyboard_item_next_field"
+            android:id="@+id/keyboard_item_backspace"
             layout="@layout/coordinate_input_keyboard_item"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -190,12 +194,29 @@
             android:layout_width="1dp"
             android:layout_height="match_parent"/>
 
-        <include
-            android:id="@+id/keyboard_item_backspace"
-            layout="@layout/coordinate_input_keyboard_item"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"/>
+		<LinearLayout
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:orientation="vertical">
+
+			<include
+				android:id="@+id/keyboard_item_next_field"
+				layout="@layout/coordinate_input_keyboard_item"
+				android:layout_width="match_parent"
+				android:layout_height="@dimen/coords_input_keyboard_item_height"/>
+
+			<View
+				android:layout_width="match_parent"
+				android:layout_height="1dp"/>
+
+			<include
+				android:id="@+id/keyboard_item_hide"
+				layout="@layout/coordinate_input_keyboard_item"
+				android:layout_width="match_parent"
+				android:layout_height="@dimen/coords_input_keyboard_item_height"/>
+
+		</LinearLayout>
 
     </LinearLayout>
 

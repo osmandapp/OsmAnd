@@ -22,6 +22,8 @@ import java.util.List;
 
 public class CoordinateInputAdapter extends RecyclerView.Adapter<MapMarkerItemViewHolder> {
 
+	public static final String ADAPTER_POSITION_KEY = "adapter_position_key";
+
 	private OsmandApplication app;
 	private List<MapMarker> mapMarkers;
 
@@ -31,11 +33,16 @@ public class CoordinateInputAdapter extends RecyclerView.Adapter<MapMarkerItemVi
 	private boolean nightTheme;
 
 	private View.OnClickListener listener;
+	private View.OnClickListener actionsListener;
 
 	public void setOnClickListener(View.OnClickListener listener) {
 		this.listener = listener;
 	}
-
+	
+	public void setOnActionsClickListener(View.OnClickListener actionsListener) {
+		this.actionsListener = actionsListener;
+	}
+	
 	public CoordinateInputAdapter(OsmandApplication app, List<MapMarker> mapMarkers) {
 		this.app = app;
 		this.mapMarkers = mapMarkers;
@@ -61,23 +68,13 @@ public class CoordinateInputAdapter extends RecyclerView.Adapter<MapMarkerItemVi
 		holder.mainLayout.setBackgroundColor(getResolvedColor(nightTheme ? R.color.ctx_menu_bg_dark : R.color.bg_color_light));
 		holder.title.setTextColor(getResolvedColor(nightTheme ? R.color.ctx_menu_title_color_dark : R.color.color_black));
 		holder.divider.setBackgroundColor(getResolvedColor(nightTheme ? R.color.route_info_divider_dark : R.color.dashboard_divider_light));
-		holder.optionsBtn.setBackgroundDrawable(getRemoveBtnBgSelector());
-		holder.optionsBtn.setImageDrawable(getColoredIcon(R.drawable.ic_action_remove_small, R.color.icon_color));
+		holder.optionsBtn.setImageDrawable(getColoredIcon(R.drawable.ic_overflow_menu_white, R.color.icon_color));
+		holder.optionsBtn.setBackgroundColor(ContextCompat.getColor(app, nightTheme ? R.color.ctx_menu_bg_dark : R.color.bg_color_light));
 		holder.iconReorder.setVisibility(View.GONE);
 		holder.numberText.setVisibility(View.VISIBLE);
 		holder.numberText.setText(String.valueOf(position + 1));
 		holder.description.setVisibility(View.GONE);
-
-		holder.optionsBtn.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				int position = holder.getAdapterPosition();
-				if (position != RecyclerView.NO_POSITION) {
-					mapMarkers.remove(getItem(position));
-					notifyDataSetChanged();
-				}
-			}
-		});
+		holder.optionsBtn.setOnClickListener(actionsListener);
 
 		boolean singleItem = getItemCount() == 1;
 		boolean fistItem = position == 0;
@@ -105,14 +102,11 @@ public class CoordinateInputAdapter extends RecyclerView.Adapter<MapMarkerItemVi
 		return mapMarkers.get(position);
 	}
 
-	private Drawable getRemoveBtnBgSelector() {
-		if (nightTheme) {
-			return AndroidUtils.createPressedStateListDrawable(
-					getColoredIcon(R.drawable.marker_circle_background_dark_n_with_inset, R.color.keyboard_item_control_dark_bg),
-					ContextCompat.getDrawable(app, R.drawable.marker_circle_background_p_with_inset)
-			);
+	public void removeItem(int position) {
+		if (position != RecyclerView.NO_POSITION) {
+			mapMarkers.remove(getItem(position));
+			notifyDataSetChanged();
 		}
-		return ContextCompat.getDrawable(app, R.drawable.marker_circle_background_light_with_inset);
 	}
 
 	private Drawable getColoredIcon(@DrawableRes int resId, @ColorRes int colorResId) {

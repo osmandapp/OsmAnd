@@ -32,6 +32,7 @@
                 osmand:typeface="@string/font_roboto_medium"/>
 
             <TextView
+                android:id="@+id/save_as_track_description"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/bottom_sheet_descr_height"
                 android:paddingEnd="@dimen/content_padding"

@@ -17,12 +17,13 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.widgets.OsmandTextFieldBoxes;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BottomSheetDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 
@@ -30,6 +31,7 @@ import java.io.File;
 import java.util.Date;
 
 import static net.osmand.plus.helpers.ImportHelper.GPX_SUFFIX;
+import static net.osmand.plus.mapmarkers.CoordinateInputDialogFragment.ADDED_MARKERS_NUMBER_KEY;
 
 public class SaveAsTrackBottomSheetDialogFragment extends BottomSheetDialogFragment {
 
@@ -45,13 +47,25 @@ public class SaveAsTrackBottomSheetDialogFragment extends BottomSheetDialogFragm
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		MapActivity mapActivity = (MapActivity) getActivity();
+		final OsmandApplication app = getMyApplication();
+		boolean isCoordInput = false;
+		int number = 0;
+		Bundle args = getArguments();
+		if (args != null) {
+			number = args.getInt(ADDED_MARKERS_NUMBER_KEY);
+			if (number != 0)
+				isCoordInput = true;
+		}
 		portrait = AndroidUiHelper.isOrientationPortrait(getActivity());
-		final boolean nightMode = !getMyApplication().getSettings().isLightContent();
+		final boolean nightMode = !app.getSettings().isLightContent();
 		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 
 		final View mainView = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.fragment_marker_save_as_track_bottom_sheet_dialog, container);
 		LinearLayout contentLayout = (LinearLayout) mainView.findViewById(R.id.content_linear_layout);
+		TextView titleTv = (TextView) mainView.findViewById(R.id.save_as_track_title);
+		titleTv.setText(isCoordInput ? R.string.coord_input_save_as_track : R.string.marker_save_as_track);
+		TextView descriptionTv = (TextView) mainView.findViewById(R.id.save_as_track_description);
+		descriptionTv.setText(isCoordInput ? getString(R.string.coord_input_save_as_track_descr, number) : getString(R.string.marker_save_as_track_descr));
 		int layoutRes;
 		if (Build.VERSION.SDK_INT > Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
 			layoutRes = R.layout.markers_track_name_text_field_box;
@@ -67,16 +81,16 @@ public class SaveAsTrackBottomSheetDialogFragment extends BottomSheetDialogFragm
 			if (textBox instanceof TextInputLayout) {
 				((TextInputLayout) textBox).setHintTextAppearance(R.style.TextAppearance_App_DarkTextInputLayout);
 			} else if (textBox instanceof OsmandTextFieldBoxes) {
-				((OsmandTextFieldBoxes) textBox).setPrimaryColor(ContextCompat.getColor(mapActivity, R.color.color_dialog_buttons_dark));
+				((OsmandTextFieldBoxes) textBox).setPrimaryColor(ContextCompat.getColor(app, R.color.color_dialog_buttons_dark));
 			}
 		}
 
-		final File dir = mapActivity.getMyApplication().getAppPath(IndexConstants.GPX_INDEX_DIR + "/map markers");
+		final File dir = app.getAppPath(IndexConstants.GPX_INDEX_DIR + "/map markers");
 		if (!dir.exists()) {
 			dir.mkdirs();
 		}
 		Date date = new Date();
-		final String suggestedName = mapActivity.getString(R.string.markers) + "_" + DateFormat.format("yyyy-MM-dd", date).toString();
+		final String suggestedName = app.getString(R.string.markers) + "_" + DateFormat.format("yyyy-MM-dd", date).toString();
 		String displayedName = suggestedName;
 		File fout = new File(dir, suggestedName + GPX_SUFFIX);
 		int ind = 1;
