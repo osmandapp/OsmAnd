@@ -58,6 +58,8 @@ class ShareLocationHelper(private val app: TelegramApplication) {
 			app.startMyLocationService()
 
 			refreshNotification()
+		} else {
+			app.forceUpdateMyLocation()
 		}
 	}
 

@@ -127,6 +127,10 @@ class TelegramApplication : Application(), OsmandHelperListener {
 		telegramService?.stopIfNeeded(this, TelegramService.USED_BY_MY_LOCATION)
 	}
 
+	fun forceUpdateMyLocation() {
+		telegramService?.forceLocationUpdate()
+	}
+
 	fun startUserLocationService() {
 		startTelegramService(TelegramService.USED_BY_USERS_LOCATIONS)
 	}
