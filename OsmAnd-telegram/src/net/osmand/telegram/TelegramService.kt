@@ -130,6 +130,11 @@ class TelegramService : Service(), LocationListener, TelegramIncomingMessagesLis
 		stopForeground(java.lang.Boolean.TRUE)
 	}
 
+	fun forceLocationUpdate() {
+		val location = getFirstTimeRunDefaultLocation()
+		app().shareLocationHelper.updateLocation(location)
+	}
+
 	private fun initLocationUpdates() {
 		val firstLocation = getFirstTimeRunDefaultLocation()
 		app().shareLocationHelper.updateLocation(firstLocation)
