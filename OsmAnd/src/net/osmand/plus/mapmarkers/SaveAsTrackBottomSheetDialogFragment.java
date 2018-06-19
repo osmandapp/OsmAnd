@@ -36,6 +36,7 @@ import static net.osmand.plus.mapmarkers.CoordinateInputDialogFragment.ADDED_MAR
 public class SaveAsTrackBottomSheetDialogFragment extends BottomSheetDialogFragment {
 
 	public final static String TAG = "SaveAsTrackBottomSheetDialogFragment";
+	public static final String COORDINATE_INPUT_MODE_KEY = "coordinate_input_mode_key";
 
 	private boolean portrait;
 	private MarkerSaveAsTrackFragmentListener listener;
@@ -52,9 +53,10 @@ public class SaveAsTrackBottomSheetDialogFragment extends BottomSheetDialogFragm
 		int number = 0;
 		Bundle args = getArguments();
 		if (args != null) {
-			number = args.getInt(ADDED_MARKERS_NUMBER_KEY);
-			if (number != 0)
-				isCoordInput = true;
+			isCoordInput = args.getBoolean(COORDINATE_INPUT_MODE_KEY);
+			if (isCoordInput) {
+				number = args.getInt(ADDED_MARKERS_NUMBER_KEY);
+			}
 		}
 		portrait = AndroidUiHelper.isOrientationPortrait(getActivity());
 		final boolean nightMode = !app.getSettings().isLightContent();

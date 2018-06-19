@@ -54,6 +54,7 @@ import net.osmand.AndroidUtils;
 import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
@@ -80,14 +81,18 @@ import java.util.Locale;
 import static android.content.ClipDescription.MIMETYPE_TEXT_PLAIN;
 import static android.content.Context.CLIPBOARD_SERVICE;
 import static net.osmand.plus.MapMarkersHelper.MAP_MARKERS_COLORS_COUNT;
+import static net.osmand.plus.mapmarkers.SaveAsTrackBottomSheetDialogFragment.COORDINATE_INPUT_MODE_KEY;
 
 public class CoordinateInputDialogFragment extends DialogFragment implements OsmAndCompassListener, OsmAndLocationListener {
 
 	public static final String TAG = "CoordinateInputDialogFragment";
 	public static final String ADDED_MARKERS_NUMBER_KEY = "added_markers_number_key";
+	public static final String WAYPOINTS_MODE_KEY = "waypoints_mode_key";
 
 	private final List<MapMarker> mapMarkers = new ArrayList<>();
+	private List<GPXUtilities.WptPt> waypoints;
 	private MapMarker selectedMarker;
+	private GPXUtilities.GPXFile gpxFile;
 	private OnMapMarkersSavedListener listener;
 
 	private View mainView;
@@ -100,6 +105,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 	private boolean hasUnsavedChanges;
 
 	private boolean isSoftKeyboardShown;
+	private boolean isWptMode;
 	private boolean north = true;
 	private boolean east = true;
 
@@ -118,6 +124,17 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		super.onCreate(savedInstanceState);
 		lightTheme = getMyApplication().getSettings().isLightContent();
 		setStyle(STYLE_NO_FRAME, lightTheme ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme);
+		Bundle args = getArguments();
+		if (args != null) {
+			isWptMode = args.getBoolean(WAYPOINTS_MODE_KEY);
+			if (isWptMode && gpxFile != null) {
+				waypoints = gpxFile.getPoints();
+			}
+		}
+	}
+
+	public void setGpxFile(GPXUtilities.GPXFile gpxFile) {
+		this.gpxFile = gpxFile;
 	}
 
 	private void quit() {
@@ -134,6 +151,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		SaveAsTrackBottomSheetDialogFragment fragment = new SaveAsTrackBottomSheetDialogFragment();
 		Bundle args = new Bundle();
 		args.putInt(ADDED_MARKERS_NUMBER_KEY, mapMarkers.size());
+		args.putBoolean(COORDINATE_INPUT_MODE_KEY, true);
 		fragment.setArguments(args);
 		fragment.setListener(createSaveAsTrackFragmentListener());
 		fragment.show(getChildFragmentManager(), SaveAsTrackBottomSheetDialogFragment.TAG);
