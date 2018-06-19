@@ -2732,4 +2732,11 @@
 
 	<string name="poi_charging_station_filter">Oplaadpunt</string>
 
+	<string name="poi_checkpoint_type_electronic">Electronisch</string>
+	<string name="poi_course">Koers</string>
+
+	<string name="poi_rock">Rots</string>
+
+	<string name="poi_end_date">Einddatum</string>
+
 	</resources>
