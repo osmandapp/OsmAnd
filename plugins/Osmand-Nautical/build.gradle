@@ -20,8 +20,8 @@ android {
 	}
 
 	defaultConfig {
-		minSdkVersion 9
-		targetSdkVersion 21
+		minSdkVersion 15
+		targetSdkVersion 27
 	}
 
 	lintOptions {
