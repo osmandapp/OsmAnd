@@ -6,6 +6,7 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.ColorStateList;
+import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -37,6 +38,7 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
@@ -97,6 +99,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 	private boolean orientationPortrait;
 	private boolean isGpxSaved;
 
+	private boolean isSoftKeyboardShown;
 	private boolean north = true;
 	private boolean east = true;
 
@@ -416,6 +419,17 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		if (!isOsmandKeyboardOn() && isOsmandKeyboardCurrentlyVisible()) {
 			changeOsmandKeyboardVisibility(false);
 		}
+
+		mainView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+			@Override
+			public void onGlobalLayout() {
+				Rect r = new Rect();
+				mainView.getWindowVisibleDisplayFrame(r);
+				int screenHeight = mainView.getRootView().getHeight();
+				int keypadHeight = screenHeight - r.bottom;
+				isSoftKeyboardShown = keypadHeight > screenHeight * 0.15;
+			}
+		});
 	}
 
 	private void setupKeyboardItems(View keyboardView, View.OnClickListener listener, @IdRes int... itemsIds) {
@@ -935,6 +949,10 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 
 			@Override
 			public void removeItem(int position) {
+				if (selectedMarker == adapter.getItem(position)) {
+					dismissEditingMode();
+					clearInputs();
+				}
 				adapter.removeItem(position);
 				isGpxSaved = false;
 			}
