@@ -340,6 +340,10 @@ class MainActivity : AppCompatActivity(), TelegramListener {
 					if (settings.hasAnyChatToShareLocation()) {
 						app.shareLocationHelper.startSharingLocation()
 					}
+				} else {
+					settings.stopSharingLocationToChats()
+					app.shareLocationHelper.stopSharingLocation()
+					updateChatsList()
 				}
 				if (settings.hasAnyChatToShowOnMap() && osmandHelper.isOsmandNotInstalled()) {
 					showOsmandMissingDialog()

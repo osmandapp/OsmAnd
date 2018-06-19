@@ -1,34 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
+	android:orientation="vertical"
 	tools:context=".MainActivity">
 
-	<LinearLayout
+	<FrameLayout
 		android:layout_width="match_parent"
-		android:layout_height="match_parent"
-		android:orientation="vertical">
+		android:layout_height="0dp"
+		android:layout_weight="1">
 
 		<android.support.v7.widget.RecyclerView
 			android:id="@+id/groups_view"
 			android:layout_width="match_parent"
-			android:layout_height="0dp"
-			android:layout_weight="1"
+			android:layout_height="match_parent"
 			android:scrollbars="vertical" />
 
-		<android.support.design.widget.BottomNavigationView
-			android:id="@+id/bottom_navigation"
+		<net.osmand.telegram.views.LockableViewPager
+			android:id="@+id/pager"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:visibility="gone" />
+
+		<android.support.v7.widget.AppCompatImageView
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:visibility="visible"
-			app:itemBackground="?attr/bg_color"
-			app:menu="@menu/bottom_navigation_menu"
-			tools:itemIconTint="@color/ctrl_active_color_light"
-			tools:itemTextColor="@color/ctrl_active_color_light"
-			tools:visibility="visible" />
+			android:layout_gravity="bottom"
+			android:scaleType="fitXY"
+			android:src="?attr/bottom_nav_shadow" />
 
-	</LinearLayout>
+	</FrameLayout>
 
-</android.support.design.widget.CoordinatorLayout>
+	<android.support.design.widget.BottomNavigationView
+		android:id="@+id/bottom_navigation"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:visibility="visible"
+		app:itemBackground="?attr/bg_color"
+		app:menu="@menu/bottom_navigation_menu"
+		tools:itemIconTint="@color/ctrl_active_color_light"
+		tools:itemTextColor="@color/ctrl_active_color_light"
+		tools:visibility="visible" />
+
+</LinearLayout>

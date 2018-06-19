@@ -72,6 +72,10 @@ class TelegramSettings(private val app: TelegramApplication) {
 		this.shareLocationChats = shareLocationChats.toHashSet()
 	}
 
+	fun stopSharingLocationToChats() {
+		this.shareLocationChats = emptySet()
+	}
+
 	fun showChatOnMap(chatTitle: String, show: Boolean) {
 		val showOnMapChats = showOnMapChats.toMutableList()
 		if (show) {

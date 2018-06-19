@@ -1,5 +1,6 @@
 package net.osmand.telegram
 
+import android.annotation.SuppressLint
 import android.app.AlarmManager
 import android.app.PendingIntent
 import android.app.Service
@@ -14,7 +15,9 @@ import android.widget.Toast
 import net.osmand.PlatformUtil
 import net.osmand.telegram.helpers.TelegramHelper.TelegramIncomingMessagesListener
 import net.osmand.telegram.notifications.TelegramNotification.NotificationType
+import net.osmand.telegram.utils.AndroidUtils
 import org.drinkless.td.libcore.telegram.TdApi
+import java.util.ArrayList
 import java.util.concurrent.Executors
 
 class TelegramService : Service(), LocationListener, TelegramIncomingMessagesListener {
@@ -128,6 +131,9 @@ class TelegramService : Service(), LocationListener, TelegramIncomingMessagesLis
 	}
 
 	private fun initLocationUpdates() {
+		val firstLocation = getFirstTimeRunDefaultLocation()
+		app().shareLocationHelper.updateLocation(firstLocation)
+
 		// requesting
 		if (isContinuous()) {
 			// request location updates
@@ -144,6 +150,32 @@ class TelegramService : Service(), LocationListener, TelegramIncomingMessagesLis
 		} else {
 			setupAlarm()
 		}
+	}
+
+	@SuppressLint("MissingPermission")
+	private fun getFirstTimeRunDefaultLocation(): net.osmand.Location? {
+		val app = app()
+		if (!AndroidUtils.isLocationPermissionAvailable(app)) {
+			return null
+		}
+		val service = app.getSystemService(Context.LOCATION_SERVICE) as LocationManager
+		val ps = service.getProviders(true) ?: return null
+		val providers = ArrayList(ps)
+		// note, passive provider is from API_LEVEL 8 but it is a constant, we can check for it.
+		// constant should not be changed in future
+		val passiveFirst = providers.indexOf("passive") // LocationManager.PASSIVE_PROVIDER
+		// put passive provider to first place
+		if (passiveFirst > -1) {
+			providers.add(0, providers.removeAt(passiveFirst))
+		}
+		// find location
+		for (provider in providers) {
+			val location = convertLocation(service.getLastKnownLocation(provider))
+			if (location != null) {
+				return location
+			}
+		}
+		return null
 	}
 
 	private fun setupAlarm() {

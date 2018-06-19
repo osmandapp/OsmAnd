@@ -19,6 +19,8 @@
 		<item name="icon_color">@color/icon_color_light</item>
 		<item name="ctrl_active_color">@color/ctrl_active_color_light</item>
 		<item name="ctrl_color">@color/ctrl_color_light</item>
+
+		<item name="bottom_nav_shadow">@drawable/bg_bottom_bar_shadow_with_line_day</item>
 	</style>
 
 	<style name="AppTheme.NoActionbar">
