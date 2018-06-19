@@ -186,13 +186,15 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 
 		if (orientationPortrait) {
 			backBtn.setImageDrawable(getActiveIcon(R.drawable.ic_arrow_back));
-			((TextView) mainView.findViewById(R.id.toolbar_text))
-					.setTextColor(getResolvedColor(lightTheme ? R.color.color_black : R.color.color_white));
+			TextView toolbar = (TextView) mainView.findViewById(R.id.toolbar_text);
+			toolbar.setTextColor(getResolvedColor(lightTheme ? R.color.color_black : R.color.color_white));
+			toolbar.setText(R.string.coord_input_add_point);
 			setBackgroundColor(R.id.app_bar, lightTheme ? R.color.route_info_bg_light : R.color.route_info_bg_dark);
 			setBackgroundColor(mainView, lightTheme ? R.color.ctx_menu_info_view_bg_light : R.color.coordinate_input_markers_list_bg_dark);
 		} else {
-			((TextView) mainView.findViewById(R.id.toolbar_text))
-					.setTextColor(getResolvedColor(lightTheme ? R.color.color_white : R.color.ctx_menu_title_color_dark));
+			TextView toolbar = (TextView) mainView.findViewById(R.id.toolbar_text);
+			toolbar.setTextColor(getResolvedColor(lightTheme ? R.color.color_white : R.color.ctx_menu_title_color_dark));
+			toolbar.setText(R.string.coord_input_add_point);
 			setBackgroundColor(R.id.app_bar, lightTheme ? R.color.actionbar_light_color : R.color.route_info_bottom_view_bg_dark);
 		}
 
@@ -1042,6 +1044,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		addButton.setText(R.string.shared_string_add);
 		@ColorRes int colorId = lightTheme ? R.color.wikivoyage_active_light : R.color.wikivoyage_active_dark;
 		addButton.setCompoundDrawablesWithIntrinsicBounds(null, null, getColoredIcon(R.drawable.ic_action_type_add, colorId), null);
+		((TextView) mainView.findViewById(R.id.toolbar_text)).setText(R.string.coord_input_add_point);
 	}
 
 	private void enterEditingMode(MapMarker marker) {
@@ -1070,6 +1073,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			updateSideOfTheWorldBtn(mainView.findViewById(R.id.lon_side_of_the_world_btn), true);
 		}
 		((EditText) mainView.findViewById(R.id.point_name_et)).setText(marker.getName(getContext()));
+		((TextView) mainView.findViewById(R.id.toolbar_text)).setText(R.string.coord_input_edit_point);
 		TextView addButton = (TextView) mainView.findViewById(R.id.add_marker_button);
 		addButton.setText(R.string.shared_string_apply);
 		@ColorRes int colorId = lightTheme ? R.color.wikivoyage_active_light : R.color.wikivoyage_active_dark;
@@ -1078,15 +1082,14 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 	}
 
 	private void showKeyboard() {
-		if (isOsmandKeyboardOn()) {
-			if (!isOsmandKeyboardCurrentlyVisible()) {
-				editTexts.get(0).requestFocus();
-				changeOsmandKeyboardVisibility(true);
-			}
-		} else {
-			if (!isSoftKeyboardShown) {
-				editTexts.get(0).requestFocus();
-				AndroidUtils.softKeyboardDelayed(editTexts.get(0));
+		for (EditText et : editTexts) {
+			if (et.getId() == R.id.lat_first_input_et) {
+				et.requestFocus();
+				if (isOsmandKeyboardOn()) {
+					changeOsmandKeyboardVisibility(true);
+				} else {
+					AndroidUtils.softKeyboardDelayed(et);
+				}
 			}
 		}
 	}
