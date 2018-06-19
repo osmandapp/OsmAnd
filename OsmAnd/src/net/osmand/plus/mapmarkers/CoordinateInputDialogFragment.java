@@ -1063,6 +1063,21 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		addButton.setText(R.string.shared_string_apply);
 		@ColorRes int colorId = lightTheme ? R.color.wikivoyage_active_light : R.color.wikivoyage_active_dark;
 		addButton.setCompoundDrawablesWithIntrinsicBounds(null, null, getColoredIcon(R.drawable.ic_action_type_apply, colorId), null);
+		showKeyboard();
+	}
+
+	private void showKeyboard() {
+		if (isOsmandKeyboardOn()) {
+			if (!isOsmandKeyboardCurrentlyVisible()) {
+				editTexts.get(0).requestFocus();
+				changeOsmandKeyboardVisibility(true);
+			}
+		} else {
+			if (!isSoftKeyboardShown) {
+				editTexts.get(0).requestFocus();
+				AndroidUtils.softKeyboardDelayed(editTexts.get(0));
+			}
+		}
 	}
 
 	private void updateInputsDdm(boolean lat, DDM ddm, int accuracy) {
