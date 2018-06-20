@@ -2975,4 +2975,49 @@
 	<string name="poi_fire_hydrant_position_street">Οδός</string>
 	<string name="poi_fire_hydrant_position_underground">Υπόγειος</string>
 	<string name="poi_fire_hydrant_style_wsh">Μορφή κρουνού: wsh</string>
+	<string name="poi_fire_hydrant_style_water_source_main">Κύριο</string>
+	<string name="poi_fire_hydrant_style_water_source_pond">Δεξαμενή</string>
+	<string name="poi_fire_hydrant_style_water_source_stream">Ροή</string>
+	<string name="poi_fire_hydrant_style_water_source_cistern">Δεξαμενή</string>
+	<string name="poi_in_service_yes">Εν ενεργεία: ναι</string>
+
+	<string name="poi_street_cabinet_power">Τύπος ερμαρίου: ρεύμα</string>
+	<string name="poi_street_cabinet_telecom">Τύπος ερμαρίου: τηλεπικοινωνίες</string>
+	<string name="poi_street_cabinet_cable_tv">Τύπος ερμαρίου: καλωδιακή τηλεόραση</string>
+	<string name="poi_street_cabinet_gas">Τύπος ερμαρίου: αέριο</string>
+	<string name="poi_street_cabinet_postal_service">Τύπος ερμαρίου: ταχυδρομική υπηρεσία</string>
+	<string name="poi_street_cabinet_waste">Τύπος ερμαρίου: απορρίμματα</string>
+	<string name="poi_street_cabinet_water_management">Τύπος ερμαρίου: διαχείριση νερού</string>
+	<string name="poi_street_cabinet_street_lighting">Τύπος ερμαρίου: φωτισμός δρόμων</string>
+
+	<string name="poi_military_checkpoint">Στρατιωτικό σημείο ελέγχου</string>
+
+	<string name="poi_bicycle_parking_lockers">Ντουλάπια</string>
+	<string name="poi_bicycle_parking_tree">Δένδρο ποδηλάτου</string>
+	<string name="poi_bicycle_parking_streetpod">Υποδοχή δρόμου (Streetpod)</string>
+
+	<string name="poi_depth">Βάθος</string>
+
+	<string name="poi_salt_yes">Αλάτι</string>
+	<string name="poi_salt_no">Αλάτι: όχι</string>
+	<string name="poi_wheelchair_designated">Προσδιορισμένο</string>
+	<string name="poi_spoil_heap">Σωρός μπάζων</string>
+	
+	<string name="poi_summer_camp">Κατασκήνωση</string>
+	<string name="poi_recreation_center">Κέντρο αναψυχής</string>
+
+	<string name="poi_crossing_activation_automatic">Ενεργοποίηση διασταύρωσης: αυτόματη</string>
+	<string name="poi_crossing_activation_local">Ενεργοποίηση διασταύρωσης: τοπική</string>
+	<string name="poi_crossing_activation_remote">Ενεργοποίηση διασταύρωσης: από μακριά</string>
+	<string name="poi_crossing_barrier_no">Μπαριέρα διασταύρωσης: όχι</string>
+	<string name="poi_crossing_barrier_yes">Μπαριέρα διασταύρωσης</string>
+	<string name="poi_crossing_barrier_full">Μπαριέρα διασταύρωσης: πλήρης</string>
+	<string name="poi_crossing_barrier_half">Μπαριέρα διασταύρωσης: μισή</string>
+	<string name="poi_crossing_barrier_double_half">Μπαριέρα διασταύρωσης: δύο μισές</string>
+	<string name="poi_crossing_bell_yes">Κουδούνι διασταύρωσης</string>
+	<string name="poi_crossing_bell_no">Κουδούνι διασταύρωσης: όχι</string>
+	<string name="poi_crossing_light_yes">Φως διασταύρωσης</string>
+	<string name="poi_crossing_light_no">Φως διασταύρωσης: όχι</string>
+	<string name="poi_crossing_on_demand_yes">Διασταύρωση κατά παραγγελία</string>
+	<string name="poi_crossing_on_demand_no">Διασταύρωση κατά παραγγελία: όχι</string>
 	</resources>
