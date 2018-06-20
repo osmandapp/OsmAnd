@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources><string name="auto_zoom_none">Без аўтаматычнага маштабавання</string>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="auto_zoom_none">Без аўтаматычнага маштабавання</string>
     <string name="auto_zoom_close">Буйней</string>
     <string name="auto_zoom_far">Для сярэдняга маштабу</string>
     <string name="auto_zoom_farthest">Драбней</string>
@@ -3094,13 +3095,13 @@
     <string name="shared_string_travel_book">Дзённік падарожжаў</string>
     <string name="download_images">Спампаваць выявы</string>
     <string name="download_wikipedia_description">Спампаваць артыкулы Вікіпэдыі для %1$s для аўтаномнага чытання.</string>
-    <string name="download_wikipedia_label">Спампаваць даныя Вікіпэдыі</string>
-    <string name="open_in_browser_wiki">Адкрыць артыкул анлайн</string>
-    <string name="open_in_browser_wiki_description">Паглядзець артыкул у браўзеры.</string>
+    <string name="download_wikipedia_label">Спампаваць даныя Вікіпедыі</string>
+    <string name="open_in_browser_wiki">Адкрыць артыкул у сеціве</string>
+    <string name="open_in_browser_wiki_description">Праглядзець артыкул у браўзеры.</string>
     <string name="download_wiki_region_placeholder">гэты рэгіён</string>
-    <string name="wiki_article_search_text">Пошук адпаведнага вікі-артыкула</string>
+    <string name="wiki_article_search_text">Пошук адпаведнага артыкула вікіпедыі</string>
     <string name="wiki_article_not_found">Артыкул не знойдзены</string>
-    <string name="how_to_open_wiki_title">Як адкрыць артыкулы Вікіпэдыі?</string>
+    <string name="how_to_open_wiki_title">Як адкрыць артыкулы Вікіпедыі?</string>
 <string name="shared_string_restart">Перазапуск праграмы</string>
     <string name="purchase_cancelled_dialog_title">Вы анулявалі падпіску OsmAnd Live</string>
     <string name="purchase_cancelled_dialog_descr">Прадоўжыць падпіску, каб і далей карыстацца ўсімі функцыямі:</string>
@@ -3142,5 +3143,5 @@
 \n • Падпіска OsmAnd Live цяпер падтрымлівае ўсе функцыі OsmAnd
 \n
 \n</string>
-    <string name="error_notification_desc">Калі ласка, адпраўце здымак экрана гэтага апавяшчэння на support@osmand.net</string>
+    <string name="error_notification_desc">Калі ласка, адпраўце здымак экрана з гэтым апавяшчэннем на support@osmand.net</string>
     </resources>

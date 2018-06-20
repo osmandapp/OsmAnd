@@ -920,7 +920,7 @@
     <string name="route_point">dypk na čarje</string>
     <string name="edit_line">liniju wobdźěłać</string>
     <string name="shared_string_options">opcije</string>
-    <string name="measurement_tool_save_as_new_track_descr">Móžeš dypki składować pak jako dypki na čarje pak jako liniju.</string>
+    <string name="measurement_tool_save_as_new_track_descr">Składować dypki pak jako dypki na čarje pak jako liniju.</string>
     <string name="choose_navigation_type">Nawigaciski profil wubrać</string>
     <string name="none_point_error">Prošu dodaj znajmjeńša jedyn dypk.</string>
     <string name="enter_gpx_name">mjeno GPX-dataje:</string>
@@ -939,7 +939,7 @@
     <string name="improve_coverage_install_mapillary_desc">Instaluj Mapillary, zo by swójske wobrazy abo seriju wobrazow z tutym městnom zwjazał(a).</string>
     <string name="online_photos">Fota online</string>
     <string name="mapillary_widget">Asistent Mapillary</string>
-    <string name="private_access_routing_req">Twój cil leži w priwatnej kónčinje. Chceš dowolić za tutu jězbu přistup k priwatnym pućam?</string>
+    <string name="private_access_routing_req">Twój cil leži w priwatnej kónčinje. Za tutu jězbu přistup k priwatnym pućam dowolić?</string>
     <string name="restart_search">Pytanje wospjetować</string>
     <string name="increase_search_radius">Pytanski radius powjetšić</string>
     <string name="nothing_found">Žadyn pytanski wuslědk</string>
@@ -1183,7 +1183,7 @@
     <string name="number_of_edits">Ličba změnow</string>
     <string name="file_name_containes_illegal_char">Mjeno dataje wobsahuje zakazany pismik</string>
     <string name="quick_action_map_style">Stil karty změnić</string>
-    <string name="show_arrows_on_the_map">Kłoki na karće pokazać</string>
+    <string name="show_arrows_on_the_map">Kłoki na karće pokazaćssss</string>
     <string name="today">dźensa</string>
     <string name="yesterday">wčera</string>
     <string name="last_seven_days">zašły tydźeń</string>
@@ -1367,7 +1367,7 @@
     <string name="fast_coordinates_input_descr">Format zapodaća koordinatow wubrać. Móžeš jón přeco změnić pod \"Nastajenja\".</string>
     <string name="marker_save_as_track">Jako GPX-dataju składować</string>
     <string name="move_to_history">Do archiwa přesunyć</string>
-    <string name="show_guide_line">Směrnicy pokazać</string>
+    <string name="show_guide_line">Směrnicy pokazaćs</string>
     <string name="descendingly">zestupujo</string>
     <string name="ascendingly">postupujo</string>
     <string name="order_by">Sortěrowanje po:</string>
@@ -1376,7 +1376,7 @@
     <string name="marker_moved_to_active">Chorhojčka bu do aktiwnych přesunjena</string>
     <string name="shared_string_list">Lisćina</string>
     <string name="do_not_send_anonymous_app_usage">Anonymne wužiwanske statistiki njepósłać</string>
-    <string name="do_not_show_startup_messages">Zdźělenki při startowanju njepokazać</string>
+    <string name="do_not_show_startup_messages">Startowe zdźělenki njepokazać</string>
     <string name="shared_string_slope">spad</string>
     <string name="track_points_category_name">Wažne dypki na tutej čarje</string>
     <string name="shared_string_move">Přesunyć</string>
@@ -1485,4 +1485,5 @@
     <string name="free">Swobodne %1$s</string>
     <string name="device_memory">Skład nastroje</string>
     <string name="free_downloads_used_description">Pokaza ličbu zbywacych bjezpłatnych sćehnjenjow.</string>
+    <string name="show_passed">safdsfdsfdsfds</string>
     </resources>
