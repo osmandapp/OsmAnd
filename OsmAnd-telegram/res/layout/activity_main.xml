@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
@@ -16,20 +17,20 @@
 			android:id="@+id/groups_view"
 			android:layout_width="match_parent"
 			android:layout_height="match_parent"
-			android:scrollbars="vertical" />
+			android:scrollbars="vertical"/>
 
 		<net.osmand.telegram.ui.views.LockableViewPager
-			android:id="@+id/pager"
+			android:id="@+id/view_pager"
 			android:layout_width="match_parent"
 			android:layout_height="match_parent"
-			android:visibility="gone" />
+			android:visibility="gone"/>
 
 		<android.support.v7.widget.AppCompatImageView
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:layout_gravity="bottom"
 			android:scaleType="fitXY"
-			android:src="?attr/bottom_nav_shadow" />
+			android:src="?attr/bottom_nav_shadow"/>
 
 	</FrameLayout>
 
@@ -39,9 +40,6 @@
 		android:layout_height="wrap_content"
 		android:visibility="visible"
 		app:itemBackground="?attr/bg_color"
-		app:menu="@menu/bottom_navigation_menu"
-		tools:itemIconTint="@color/ctrl_active_color_light"
-		tools:itemTextColor="@color/ctrl_active_color_light"
-		tools:visibility="visible" />
+		app:menu="@menu/bottom_navigation_menu"/>
 
 </LinearLayout>

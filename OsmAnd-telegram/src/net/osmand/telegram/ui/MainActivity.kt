@@ -8,8 +8,11 @@ import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Bundle
+import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.ActivityCompat
 import android.support.v4.app.DialogFragment
+import android.support.v4.app.FragmentManager
+import android.support.v4.app.FragmentPagerAdapter
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.*
@@ -21,6 +24,7 @@ import net.osmand.telegram.TelegramApplication
 import net.osmand.telegram.helpers.TelegramHelper
 import net.osmand.telegram.helpers.TelegramHelper.*
 import net.osmand.telegram.ui.LoginDialogFragment.LoginDialogType
+import net.osmand.telegram.ui.views.LockableViewPager
 import net.osmand.telegram.utils.AndroidUtils
 import org.drinkless.td.libcore.telegram.TdApi
 
@@ -33,6 +37,9 @@ class MainActivity : AppCompatActivity(), TelegramListener {
 		private const val LOGIN_MENU_ID = 0
 		private const val LOGOUT_MENU_ID = 1
 		private const val PROGRESS_MENU_ID = 2
+
+		private const val MY_LOCATION_TAB_POS = 0
+		private const val LIVE_NOW_TAB_POS = 1
 	}
 
 	private val log = PlatformUtil.getLog(TelegramHelper::class.java)
@@ -68,6 +75,25 @@ class MainActivity : AppCompatActivity(), TelegramListener {
 
 			// specify an viewAdapter (see also next example)
 			adapter = chatViewAdapter
+		}
+
+		val viewPager = findViewById<LockableViewPager>(R.id.view_pager).apply {
+			swipeLocked = true
+			offscreenPageLimit = 2
+			adapter = ViewPagerAdapter(supportFragmentManager)
+		}
+
+		findViewById<BottomNavigationView>(R.id.bottom_navigation).setOnNavigationItemSelectedListener {
+			var pos = -1
+			when (it.itemId) {
+				R.id.action_my_location -> pos = MY_LOCATION_TAB_POS
+				R.id.action_live_now -> pos = LIVE_NOW_TAB_POS
+			}
+			if (pos != -1 && pos != viewPager.currentItem) {
+				viewPager.currentItem = pos
+				return@setOnNavigationItemSelectedListener true
+			}
+			false
 		}
 
 		if (!LoginDialogFragment.welcomeDialogShown) {
@@ -371,6 +397,15 @@ class MainActivity : AppCompatActivity(), TelegramListener {
 					}
 			return builder.create()
 		}
+	}
+
+	class ViewPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
+
+		private val fragments = listOf(MyLocationTabFragment(), LiveNowTabFragment())
+
+		override fun getItem(position: Int) = fragments[position]
+
+		override fun getCount() = fragments.size
 	}
 
 	inner class ChatsAdapter :
