@@ -39,7 +39,7 @@
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:visibility="visible"
-		app:itemBackground="?attr/bg_color"
+		app:itemBackground="?attr/card_bg_color"
 		app:menu="@menu/bottom_navigation_menu"/>
 
 </LinearLayout>

@@ -82,7 +82,7 @@ class UiUtils(private val app: TelegramApplication) {
 	}
 
 	fun getThemedIcon(@DrawableRes id: Int): Drawable? {
-		return getDrawable(id, if (isLightContent) R.color.icon_color_light else 0)
+		return getDrawable(id, if (isLightContent) R.color.icon_light else 0)
 	}
 
 	fun getIcon(@DrawableRes id: Int): Drawable? {
@@ -90,7 +90,7 @@ class UiUtils(private val app: TelegramApplication) {
 	}
 
 	fun getIcon(@DrawableRes id: Int, light: Boolean): Drawable? {
-		return getDrawable(id, if (light) R.color.icon_color_light else 0)
+		return getDrawable(id, if (light) R.color.icon_light else 0)
 	}
 
 	private fun createCircleBitmap(source: Bitmap, recycleSource: Boolean = false): Bitmap {
