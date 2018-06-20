@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
 
     <string name="rendering_attr_hideHouseNumbers_name">Números de casa</string>
     <string name="copying_osmand_file_failed">Falló al copiar archivos</string>
@@ -2969,4 +2970,8 @@ Lon %2$s</string>
     <string name="get_osmand_live">Obtén «OsmAnd Live» para desbloquear todas las características: Actualizaciones diarias de mapas con descargas ilimitadas, todos los complementos gratuitos y de pago, artículos de Wikipedia, Wikiviajes y mucho más.</string>
     <string name="quick_action_edit_actions">Editar acciones</string>
     <string name="error_notification_desc">Por favor, envía la captura de pantalla de esta notificación a support@osmand.net</string>
+    <string name="coord_input_edit_point">Editar punto</string>
+    <string name="coord_input_add_point">Añadir punto</string>
+    <string name="coord_input_save_as_track">Guardar como traza</string>
+    <string name="coord_input_save_as_track_descr">Añadiste %1$s puntos. Ingresa el nombre del archivo y haz clic en Guardar.</string>
     </resources>
