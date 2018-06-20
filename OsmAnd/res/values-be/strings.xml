@@ -3144,4 +3144,8 @@
 \n
 \n</string>
     <string name="error_notification_desc">Калі ласка, адпраўце здымак экрана з гэтым апавяшчэннем на support@osmand.net</string>
+    <string name="coord_input_edit_point">Рэдагаваць кропку</string>
+    <string name="coord_input_add_point">Дадаць кропку</string>
+    <string name="coord_input_save_as_track">Захаваць як след</string>
+    <string name="coord_input_save_as_track_descr">Вы дадалі %1$s кропак. Увядзіце назву файла і націсніце «захаваць».</string>
     </resources>
