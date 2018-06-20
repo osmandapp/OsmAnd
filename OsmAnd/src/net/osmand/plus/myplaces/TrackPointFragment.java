@@ -311,10 +311,10 @@ public class TrackPointFragment extends OsmandExpandableListFragment implements 
 	private void openCoordinatesInput() {
 		Bundle args = new Bundle();
 		args.putBoolean(WAYPOINTS_MODE_KEY, true);
+		args.putString("wptCategory", "Waypoints");
 		CoordinateInputDialogFragment fragment = new CoordinateInputDialogFragment();
 		fragment.setRetainInstance(true);
 		fragment.setArguments(args);
-		fragment.setGpxFile(getGpx());
 		fragment.show(getChildFragmentManager(), CoordinateInputDialogFragment.TAG);
 	}
 

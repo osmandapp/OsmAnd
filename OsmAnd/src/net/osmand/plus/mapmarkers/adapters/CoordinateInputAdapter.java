@@ -11,21 +11,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import net.osmand.AndroidUtils;
-import net.osmand.plus.MapMarkersHelper.MapMarker;
+import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.UiUtilities.UpdateLocationViewCache;
 
-import java.util.List;
 
 public class CoordinateInputAdapter extends RecyclerView.Adapter<MapMarkerItemViewHolder> {
 
 	public static final String ADAPTER_POSITION_KEY = "adapter_position_key";
+	private final GPXUtilities.GPXFile gpx;
 
 	private OsmandApplication app;
-	private List<MapMarker> mapMarkers;
 
 	private UiUtilities uiUtilities;
 	private UpdateLocationViewCache updateViewCache;
@@ -43,9 +41,10 @@ public class CoordinateInputAdapter extends RecyclerView.Adapter<MapMarkerItemVi
 		this.actionsListener = actionsListener;
 	}
 	
-	public CoordinateInputAdapter(OsmandApplication app, List<MapMarker> mapMarkers) {
+	public CoordinateInputAdapter(OsmandApplication app, GPXUtilities.GPXFile gpx) {
 		this.app = app;
-		this.mapMarkers = mapMarkers;
+		this.gpx = gpx;
+
 		uiUtilities = app.getUIUtilities();
 		updateViewCache = uiUtilities.getUpdateLocationViewCache();
 		nightTheme = !app.getSettings().isLightContent();
@@ -61,10 +60,10 @@ public class CoordinateInputAdapter extends RecyclerView.Adapter<MapMarkerItemVi
 
 	@Override
 	public void onBindViewHolder(@NonNull final MapMarkerItemViewHolder holder, int position) {
-		final MapMarker mapMarker = getItem(position);
+		GPXUtilities.WptPt wpt = getItem(position);
 
 		holder.iconDirection.setVisibility(View.VISIBLE);
-		holder.icon.setImageDrawable(getColoredIcon(R.drawable.ic_action_flag_dark, MapMarker.getColorId(mapMarker.colorIndex)));
+		holder.icon.setImageDrawable(getColoredIcon(R.drawable.ic_action_flag_dark, wpt.colourARGB));
 		holder.mainLayout.setBackgroundColor(getResolvedColor(nightTheme ? R.color.ctx_menu_bg_dark : R.color.bg_color_light));
 		holder.title.setTextColor(getResolvedColor(nightTheme ? R.color.ctx_menu_title_color_dark : R.color.color_black));
 		holder.divider.setBackgroundColor(getResolvedColor(nightTheme ? R.color.route_info_divider_dark : R.color.dashboard_divider_light));
@@ -84,27 +83,27 @@ public class CoordinateInputAdapter extends RecyclerView.Adapter<MapMarkerItemVi
 		holder.bottomShadow.setVisibility(lastItem ? View.VISIBLE : View.GONE);
 		holder.divider.setVisibility((!singleItem && !lastItem) ? View.VISIBLE : View.GONE);
 
-		holder.title.setText(mapMarker.getName(app));
-		uiUtilities.updateLocationView(updateViewCache,
-				holder.iconDirection, holder.distance, mapMarker.getLatitude(), mapMarker.getLongitude());
+		holder.title.setText(wpt.name);
+		uiUtilities.updateLocationView(updateViewCache, holder.iconDirection, holder.distance, wpt.lat, wpt.lon);
 	}
 
 	@Override
 	public int getItemCount() {
-		return mapMarkers.size();
+		return gpx.getPointsSize();
 	}
 
 	public boolean isEmpty() {
 		return getItemCount() == 0;
 	}
 
-	public MapMarker getItem(int position) {
-		return mapMarkers.get(position);
+
+	public GPXUtilities.WptPt getItem(int position) {
+		return gpx.getPoints().get(position);
 	}
 
 	public void removeItem(int position) {
 		if (position != RecyclerView.NO_POSITION) {
-			mapMarkers.remove(getItem(position));
+			gpx.deleteWptPt(getItem(position));
 			notifyDataSetChanged();
 		}
 	}

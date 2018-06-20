@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -51,27 +52,33 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import net.osmand.AndroidUtils;
+import net.osmand.IndexConstants;
 import net.osmand.Location;
 import net.osmand.data.LatLon;
-import net.osmand.data.PointDescription;
 import net.osmand.plus.GPXUtilities;
+import net.osmand.plus.GpxSelectionHelper;
+import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.activities.TrackActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.mapcontextmenu.editors.WptPtEditor;
 import net.osmand.plus.mapmarkers.CoordinateInputBottomSheetDialogFragment.CoordinateInputFormatChangeListener;
 import net.osmand.plus.mapmarkers.CoordinateInputFormats.DDM;
 import net.osmand.plus.mapmarkers.CoordinateInputFormats.DMS;
 import net.osmand.plus.mapmarkers.CoordinateInputFormats.Format;
 import net.osmand.plus.mapmarkers.adapters.CoordinateInputAdapter;
 import net.osmand.plus.widgets.EditTextEx;
+import net.osmand.util.Algorithms;
 import net.osmand.util.LocationParser;
 import net.osmand.util.MapUtils;
 
+import java.io.File;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
@@ -80,7 +87,6 @@ import java.util.Locale;
 
 import static android.content.ClipDescription.MIMETYPE_TEXT_PLAIN;
 import static android.content.Context.CLIPBOARD_SERVICE;
-import static net.osmand.plus.MapMarkersHelper.MAP_MARKERS_COLORS_COUNT;
 import static net.osmand.plus.mapmarkers.SaveAsTrackBottomSheetDialogFragment.COORDINATE_INPUT_MODE_KEY;
 
 public class CoordinateInputDialogFragment extends DialogFragment implements OsmAndCompassListener, OsmAndLocationListener {
@@ -89,11 +95,12 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 	public static final String ADDED_MARKERS_NUMBER_KEY = "added_markers_number_key";
 	public static final String WAYPOINTS_MODE_KEY = "waypoints_mode_key";
 
-	private final List<MapMarker> mapMarkers = new ArrayList<>();
-	private List<GPXUtilities.WptPt> waypoints;
-	private MapMarker selectedMarker;
-	private GPXUtilities.GPXFile gpxFile;
+	protected WptPtEditor editor;
+	private GPXUtilities.GPXFile newGpxFile;
 	private OnMapMarkersSavedListener listener;
+	protected GPXUtilities.WptPt selectedWpt;
+	private SavingTrackHelper savingTrackHelper;
+	private GpxSelectionHelper selectedGpxHelper;
 
 	private View mainView;
 	private final List<EditTextEx> editTexts = new ArrayList<>();
@@ -105,7 +112,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 	private boolean hasUnsavedChanges;
 
 	private boolean isSoftKeyboardShown;
-	private boolean isWptMode;
+	private String wptCategory;
 	private boolean north = true;
 	private boolean east = true;
 
@@ -124,24 +131,54 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		super.onCreate(savedInstanceState);
 		lightTheme = getMyApplication().getSettings().isLightContent();
 		setStyle(STYLE_NO_FRAME, lightTheme ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme);
+		newGpxFile = new GPXUtilities.GPXFile();
+		savingTrackHelper = getMyApplication().getSavingTrackHelper();
+		selectedGpxHelper = getMyApplication().getSelectedGpxHelper();
+
 		Bundle args = getArguments();
 		if (args != null) {
-			isWptMode = args.getBoolean(WAYPOINTS_MODE_KEY);
-			if (isWptMode && gpxFile != null) {
-				waypoints = gpxFile.getPoints();
-			}
+			wptCategory = args.getString("wptCategory");
 		}
 	}
 
-	public void setGpxFile(GPXUtilities.GPXFile gpxFile) {
-		this.gpxFile = gpxFile;
+	@Nullable
+	private GPXUtilities.GPXFile getGpx() {
+		TrackActivity activity = getTrackActivity();
+		return activity != null ? activity.getGpx() : newGpxFile;
+	}
+
+	@Nullable
+	public TrackActivity getTrackActivity() {
+		return (TrackActivity) getActivity();
+	}
+
+	private void syncGpx(GPXUtilities.GPXFile gpxFile) {
+		MapMarkersHelper helper = getMyApplication().getMapMarkersHelper();
+		MapMarkersHelper.MapMarkersGroup group = helper.getMarkersGroup(gpxFile);
+		if (group != null) {
+			helper.runSynchronization(group);
+		}
+	}
+
+	protected void addWpt(GPXUtilities.GPXFile gpx, String description, String name, String category, int color, double lat, double lon) {
+		gpx.addWptPt(lat, lon, System.currentTimeMillis(), description, name, category, color);
+	}
+	
+	protected void updateWpt(GPXUtilities.GPXFile gpx, String description, String name, String category, int color, double lat, double lon) {
+		gpx.updateWptPt(selectedWpt,lat, lon, System.currentTimeMillis(), description, name, category, color);
 	}
 
 	private void quit() {
-		if (!mapMarkers.isEmpty() && hasUnsavedChanges) {
-			showSaveDialog();
+		if (getGpx().hasWptPt() && hasUnsavedChanges) {
+			if (Algorithms.isEmpty(getGpx().path)) {
+				showSaveDialog();
+			} else {
+				GPXUtilities.GPXFile gpx = getGpx();
+				GPXUtilities.writeGpxFile(new File(gpx.path), gpx, getMyApplication());
+				syncGpx(gpx);
+				dismiss();
+			}
 		} else {
-			saveMarkers();
 			dismiss();
 		}
 	}
@@ -150,13 +187,13 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		hasUnsavedChanges = false;
 		SaveAsTrackBottomSheetDialogFragment fragment = new SaveAsTrackBottomSheetDialogFragment();
 		Bundle args = new Bundle();
-		args.putInt(ADDED_MARKERS_NUMBER_KEY, mapMarkers.size());
+		args.putInt(ADDED_MARKERS_NUMBER_KEY, getGpx().getPointsSize());
 		args.putBoolean(COORDINATE_INPUT_MODE_KEY, true);
 		fragment.setArguments(args);
 		fragment.setListener(createSaveAsTrackFragmentListener());
 		fragment.show(getChildFragmentManager(), SaveAsTrackBottomSheetDialogFragment.TAG);
 	}
-	
+
 	@NonNull
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -197,8 +234,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		backBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				saveMarkers();
-				dismiss();
+				quit();
 			}
 		});
 
@@ -311,7 +347,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 				}
 			}
 		});
-		adapter = new CoordinateInputAdapter(getMyApplication(), mapMarkers);
+		adapter = new CoordinateInputAdapter(getMyApplication(), getGpx());
 		final RecyclerView recyclerView = (RecyclerView) mainView.findViewById(R.id.markers_recycler_view);
 		recyclerView.setLayoutManager(new LinearLayoutManager(ctx));
 		recyclerView.setAdapter(adapter);
@@ -361,11 +397,11 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		addButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				addMapMarker();
+				addWptPt();
 				hasUnsavedChanges = true;
 			}
 		});
-		
+
 		TextView cancelButton = (TextView) mainView.findViewById(R.id.cancel_button);
 		cancelButton.setText(R.string.shared_string_cancel);
 		cancelButton.setOnClickListener(new View.OnClickListener() {
@@ -409,8 +445,8 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 							case R.id.keyboard_item_next_field:
 								switchEditText(focusedEditText.getId(), true);
 								break;
-								case R.id.keyboard_item_hide:
-									changeOsmandKeyboardVisibility(false);
+							case R.id.keyboard_item_hide:
+								changeOsmandKeyboardVisibility(false);
 								break;
 							default:
 								focusedEditText.setText(focusedEditText.getText().toString() + getItemObjectById(id));
@@ -467,7 +503,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		for (@IdRes int id : itemsIds) {
 			View itemView = keyboardView.findViewById(id);
 			Object item = getItemObjectById(id);
-			final boolean controlItem = id == R.id.keyboard_item_next_field 
+			final boolean controlItem = id == R.id.keyboard_item_next_field
 					|| id == R.id.keyboard_item_backspace
 					|| id == R.id.keyboard_item_hide;
 
@@ -646,13 +682,6 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		v.setBackgroundColor(getResolvedColor(colorResId));
 	}
 
-	private void saveMarkers() {
-		getMyApplication().getMapMarkersHelper().addMarkers(mapMarkers);
-		if (listener != null) {
-			listener.onMapMarkersSaved();
-		}
-	}
-
 	private void addEditTexts(@IdRes int... ids) {
 		editTexts.clear();
 		for (int id : ids) {
@@ -793,7 +822,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 				if (i == EditorInfo.IME_ACTION_NEXT) {
 					switchEditText(textView.getId(), true);
 				} else if (i == EditorInfo.IME_ACTION_DONE) {
-					addMapMarker();
+					addWptPt();
 					hasUnsavedChanges = true;
 				}
 				return false;
@@ -934,7 +963,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			public void saveAsTrack() {
 				OsmandApplication app = getMyApplication();
 				if (app != null) {
-					if (mapMarkers.isEmpty()) {
+					if (!getGpx().hasWptPt()) {
 						Toast.makeText(app, getString(R.string.plan_route_no_markers_toast), Toast.LENGTH_SHORT).show();
 					} else {
 						showSaveDialog();
@@ -952,15 +981,24 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 
 			@Override
 			public void saveGpx(final String fileName) {
-				final String gpxPath = app.getMapMarkersHelper().generateGpxFromList(fileName, mapMarkers);
+				final File dir = getMyApplication().getAppPath(IndexConstants.GPX_INDEX_DIR + IndexConstants.MAP_MARKERS_INDEX_DIR);
+				if (!dir.exists()) {
+					dir.mkdirs();
+				}
+				File fout = new File(dir, fileName + ".gpx");
+				GPXUtilities.writeGpxFile(fout, getGpx(), getMyApplication());
 				hasUnsavedChanges = false;
+				getMyApplication().getMapMarkersHelper().addOrEnableGroup(getGpx());
+				if (listener != null) {
+					listener.onMapMarkersSaved();
+				}
 				snackbar = Snackbar.make(mainView, fileName + " " + getString(R.string.is_saved) + ".", Snackbar.LENGTH_LONG)
 						.setAction(R.string.shared_string_show, new View.OnClickListener() {
 							@Override
 							public void onClick(View view) {
 								Intent intent = new Intent(app, getMyApplication().getAppCustomization().getTrackActivity());
-								intent.putExtra(TrackActivity.TRACK_FILE_NAME, gpxPath);
 								intent.putExtra(TrackActivity.OPEN_POINTS_TAB, true);
+								intent.putExtra(TrackActivity.TRACK_FILE_NAME, getGpx().path);
 								intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 								startActivity(intent);
 							}
@@ -976,8 +1014,8 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 
 			@Override
 			public void removeItem(final int position) {
-				final MapMarker mapMarker = adapter.getItem(position);
-				if (selectedMarker == mapMarker) {
+				final GPXUtilities.WptPt wpt = adapter.getItem(position);
+				if (selectedWpt == wpt) {
 					dismissEditingMode();
 					clearInputs();
 				}
@@ -987,7 +1025,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 						.setAction(R.string.shared_string_undo, new View.OnClickListener() {
 							@Override
 							public void onClick(View view) {
-								mapMarkers.add(position, mapMarker);
+								getGpx().addPoint(position, selectedWpt);
 								adapter.notifyDataSetChanged();
 							}
 						});
@@ -999,7 +1037,6 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			public void editItem(int position) {
 				enterEditingMode(adapter.getItem(position));
 			}
-
 		};
 	}
 
@@ -1064,7 +1101,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 	}
 
 	private void dismissEditingMode() {
-		selectedMarker = null;
+		selectedWpt = null;
 		TextView addButton = (TextView) mainView.findViewById(R.id.add_marker_button);
 		addButton.setText(R.string.shared_string_add);
 		@ColorRes int colorId = lightTheme ? R.color.wikivoyage_active_light : R.color.wikivoyage_active_dark;
@@ -1072,11 +1109,11 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		((TextView) mainView.findViewById(R.id.toolbar_text)).setText(R.string.coord_input_add_point);
 	}
 
-	private void enterEditingMode(MapMarker marker) {
-		selectedMarker = marker;
+	private void enterEditingMode(GPXUtilities.WptPt wptPt) {
+		selectedWpt = wptPt;
 		Format format = getMyApplication().getSettings().COORDS_INPUT_FORMAT.get();
-		double lat = Math.abs(marker.point.getLatitude());
-		double lon = Math.abs(marker.point.getLongitude());
+		double lat = Math.abs(wptPt.lat);
+		double lon = Math.abs(wptPt.lat);
 		if (format == Format.DD_MM_MMM || format == Format.DD_MM_MMMM) {
 			int accuracy = format.getThirdPartSymbolsCount();
 			updateInputsDdm(true, CoordinateInputFormats.ddToDdm(lat), accuracy);
@@ -1089,15 +1126,15 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			updateInputsDms(true, CoordinateInputFormats.ddToDms(lat));
 			updateInputsDms(false, CoordinateInputFormats.ddToDms(lon));
 		}
-		boolean latPositive = marker.point.getLatitude() > 0;
+		boolean latPositive = wptPt.lat > 0;
 		if ((latPositive && !north) || (!latPositive && north)) {
 			updateSideOfTheWorldBtn(mainView.findViewById(R.id.lat_side_of_the_world_btn), true);
 		}
-		boolean lonPositive = marker.point.getLongitude() > 0;
+		boolean lonPositive = wptPt.lon > 0;
 		if ((lonPositive && !east) || (!lonPositive && east)) {
 			updateSideOfTheWorldBtn(mainView.findViewById(R.id.lon_side_of_the_world_btn), true);
 		}
-		((EditText) mainView.findViewById(R.id.point_name_et)).setText(marker.getName(getContext()));
+		((EditText) mainView.findViewById(R.id.point_name_et)).setText(wptPt.name);
 		((TextView) mainView.findViewById(R.id.toolbar_text)).setText(R.string.coord_input_edit_point);
 		TextView addButton = (TextView) mainView.findViewById(R.id.add_marker_button);
 		addButton.setText(R.string.shared_string_apply);
@@ -1167,7 +1204,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		return getEditTextById(lat ? R.id.lat_third_input_et : R.id.lon_third_input_et);
 	}
 
-	private void addMapMarker() {
+	private void addWptPt() {
 		final String latitude = getStringCoordinate(true);
 		final String longitude = getStringCoordinate(false);
 		if (latitude.isEmpty() && longitude.isEmpty()) {
@@ -1180,12 +1217,15 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			double lat = parseCoordinate(latitude);
 			double lon = parseCoordinate(longitude);
 			String name = ((EditText) mainView.findViewById(R.id.point_name_et)).getText().toString();
-			if (selectedMarker != null) {
-				updateSelectedMarker(new LatLon(lat, lon), name);
+			if (selectedWpt != null) {
+				updateWpt(getGpx(), "", name, wptCategory, 0, lat, lon);
+				dismissEditingMode();
 			} else {
-				addMapMarker(new LatLon(lat, lon), name);
+				addWpt(getGpx(), "", name, wptCategory, 0, lat, lon);
 			}
 		}
+		adapter.notifyDataSetChanged();
+		clearInputs();
 	}
 
 	private String getStringCoordinate(boolean latitude) {
@@ -1232,30 +1272,6 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			coordinate = d.get(0);
 		}
 		return coordinate;
-	}
-
-	private void updateSelectedMarker(LatLon latLon, String name) {
-		selectedMarker.point = latLon;
-		selectedMarker.setName(name);
-		dismissEditingMode();
-		adapter.notifyDataSetChanged();
-		clearInputs();
-	}
-
-	private void addMapMarker(LatLon latLon, String name) {
-		PointDescription pointDescription = new PointDescription(PointDescription.POINT_TYPE_MAP_MARKER, name);
-		int colorIndex = mapMarkers.size() > 0 ? mapMarkers.get(mapMarkers.size() - 1).colorIndex : -1;
-		if (colorIndex == -1) {
-			colorIndex = 0;
-		} else {
-			colorIndex = (colorIndex + 1) % MAP_MARKERS_COLORS_COUNT;
-		}
-		MapMarker mapMarker = new MapMarker(latLon, pointDescription, colorIndex, false, 0);
-		mapMarker.history = false;
-		mapMarker.nextKey = MapMarkersDbHelper.TAIL_NEXT_VALUE;
-		mapMarkers.add(mapMarker);
-		adapter.notifyDataSetChanged();
-		clearInputs();
 	}
 
 	private void clearInputs(int... ids) {
