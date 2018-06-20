@@ -188,7 +188,7 @@ class MainActivity : AppCompatActivity(), TelegramListener {
 		}
 	}
 
-	override fun onSendLiveLicationError(code: Int, message: String) {
+	override fun onSendLiveLocationError(code: Int, message: String) {
 		log.error("Send live location error: $code - $message")
 		app.isInternetConnectionAvailable(true)
 	}

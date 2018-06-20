@@ -162,7 +162,7 @@ class TelegramHelper private constructor() {
 		fun onTelegramChatChanged(chat: TdApi.Chat)
 		fun onTelegramUserChanged(user: TdApi.User)
 		fun onTelegramError(code: Int, message: String)
-		fun onSendLiveLicationError(code: Int, message: String)
+		fun onSendLiveLocationError(code: Int, message: String)
 	}
 
 	interface TelegramIncomingMessagesListener {
@@ -404,7 +404,7 @@ class TelegramHelper private constructor() {
 					val error = obj as TdApi.Error
 					if (error.code != IGNORED_ERROR_CODE) {
 						needRefreshActiveLiveLocationMessages = true
-						listener?.onSendLiveLicationError(error.code, error.message)
+						listener?.onSendLiveLocationError(error.code, error.message)
 					}
 				}
 				TdApi.Messages.CONSTRUCTOR -> {
@@ -418,7 +418,7 @@ class TelegramHelper private constructor() {
 					}
 					onComplete?.invoke()
 				}
-				else -> listener?.onSendLiveLicationError(-1, "Receive wrong response from TDLib: $obj")
+				else -> listener?.onSendLiveLocationError(-1, "Receive wrong response from TDLib: $obj")
 			}
 			requestingActiveLiveLocationMessages = false
 		}
@@ -503,7 +503,7 @@ class TelegramHelper private constructor() {
 					val error = obj as TdApi.Error
 					if (error.code != IGNORED_ERROR_CODE) {
 						needRefreshActiveLiveLocationMessages = true
-						listener?.onSendLiveLicationError(error.code, error.message)
+						listener?.onSendLiveLocationError(error.code, error.message)
 					}
 				}
 				else -> {
@@ -511,7 +511,7 @@ class TelegramHelper private constructor() {
 						when (obj.sendingState?.constructor) {
 							TdApi.MessageSendingStateFailed.CONSTRUCTOR -> {
 								needRefreshActiveLiveLocationMessages = true
-								listener?.onSendLiveLicationError(-1, "Live location message ${obj.id} failed to send")
+								listener?.onSendLiveLocationError(-1, "Live location message ${obj.id} failed to send")
 							}
 						}
 					}
