@@ -129,8 +129,8 @@ public class DiscountHelper {
 					settings.DISCOUNT_TOTAL_SHOW.set(0);
 				}
 				if (discountChanged
-						|| app.getAppInitializer().getNumberOfStarts() - settings.DISCOUNT_SHOW_NUMBER_OF_STARTS.get() >= showStartFrequency
-						|| System.currentTimeMillis() - settings.DISCOUNT_SHOW_DATETIME_MS.get() > 1000L * 60 * 60 * 24 * showDayFrequency) {
+						|| (app.getAppInitializer().getNumberOfStarts() - settings.DISCOUNT_SHOW_NUMBER_OF_STARTS.get() >= showStartFrequency
+						&& System.currentTimeMillis() - settings.DISCOUNT_SHOW_DATETIME_MS.get() > 1000L * 60 * 60 * 24 * showDayFrequency) ) {
 					if(settings.DISCOUNT_TOTAL_SHOW.get() < maxTotalShow){
 						settings.DISCOUNT_ID.set(discountId);
 						settings.DISCOUNT_TOTAL_SHOW.set(settings.DISCOUNT_TOTAL_SHOW.get() + 1);
