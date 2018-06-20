@@ -2973,5 +2973,5 @@ Lon %2$s</string>
     <string name="coord_input_edit_point">Editar punto</string>
     <string name="coord_input_add_point">Añadir punto</string>
     <string name="coord_input_save_as_track">Guardar como traza</string>
-    <string name="coord_input_save_as_track_descr">Añadiste %1$s puntos. Ingresa el nombre del archivo y haz clic en Guardar.</string>
+    <string name="coord_input_save_as_track_descr">Añadiste %1$s puntos. Ingresa el nombre del archivo y pulsa en Guardar.</string>
     </resources>
