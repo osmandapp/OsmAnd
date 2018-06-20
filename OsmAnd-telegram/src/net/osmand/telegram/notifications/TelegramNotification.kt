@@ -5,7 +5,7 @@ import android.app.PendingIntent
 import android.content.Intent
 import android.support.v4.app.NotificationCompat
 import android.support.v4.app.NotificationManagerCompat
-import net.osmand.telegram.MainActivity
+import net.osmand.telegram.ui.MainActivity
 import net.osmand.telegram.TelegramApplication
 
 

@@ -2914,4 +2914,63 @@
 	<string name="poi_counselling_type_violence_yes">Συμβουλευτική (βία): ναι</string>
 	<string name="poi_counselling_type_violence_no">Συμβουλευτική (βία): όχι</string>
 
+	<string name="poi_provided_for_infant_yes">Παροχές για βρέφη: ναι</string>
+	<string name="poi_provided_for_infant_no">Παροχές για βρέφη: όχι</string>
+	<string name="poi_provided_for_toddler_yes">Παροχές για νήπια: ναι</string>
+	<string name="poi_provided_for_toddler_no">Παροχές για νήπια: όχι</string>
+	<string name="poi_provided_for_child_yes">Παροχές για παιδιά: ναι</string>
+	<string name="poi_provided_for_child_no">Παροχές για παιδιά: όχι</string>
+	<string name="poi_provided_for_adult_yes">Παροχές για ενήλικες: ναι</string>
+	<string name="poi_provided_for_adult_no">Παροχές για ενήλικες: όχι</string>
+	<string name="poi_provided_for_woman_yes">Παροχές για γυναίκες: ναι</string>
+	<string name="poi_provided_for_woman_no">Παροχές για γυναίκες: όχι</string>
+	<string name="poi_provided_for_senior_yes">Παροχές για ηλικιωμένους: ναι</string>
+	<string name="poi_provided_for_senior_no">Παροχές για ηλικιωμένους: όχι</string>
+	<string name="poi_provided_for_girl_yes">Παροχές για κορίτσια: ναι</string>
+	<string name="poi_provided_for_girl_no">Παροχές για κορίτσια: όχι</string>
+	<string name="poi_provided_for_man_yes">Παροχές για άνδρες: ναι</string>
+	<string name="poi_provided_for_man_no">Παροχές για άνδρες: όχι</string>
+	<string name="poi_provided_for_boy_yes">Παροχές για αγόρια: ναι</string>
+	<string name="poi_provided_for_boy_no">Παροχές για αγόρια: όχι</string>
+
+	<string name="poi_capacity_beds">Χωρητικότητα (κρεβάτια)</string>
+
+	<string name="poi_treat_inpatient_yes">Υπηρεσίες για νοσηλευόμενους: ναι</string>
+	<string name="poi_treat_inpatient_no">Υπηρεσίες για νοσηλευόμενους: όχι</string>
+	<string name="poi_treat_inpatient_only">Υπηρεσίες για νοσηλευόμενους: μόνο</string>
+	<string name="poi_counselling_yes">Συμβουλευτική: ναι</string>
+	<string name="poi_counselling_no">Συμβουλευτική: όχι</string>
+	<string name="poi_emergency_yes">Επείγοντα: ναι</string>
+	<string name="poi_emergency_no">Επείγοντα: όχι</string>
+	<string name="poi_home_visit_yes">Ναι</string>
+	<string name="poi_home_visit_no">Επίσκεψη κατ\' οίκο: όχι</string>
+
+	<string name="poi_disease_malaria_yes">Ελονοσία: ναι</string>
+	<string name="poi_disease_malaria_no">Ελονοσία: όχι</string>
+	<string name="poi_disease_ebola_yes">Έμπολα: ναι</string>
+	<string name="poi_disease_ebola_no">Έμπολα: όχι</string>
+	<string name="poi_disease_autism_yes">Αυτισμός: ναι</string>
+	<string name="poi_disease_autism_no">Αυτισμός: όχι</string>
+	<string name="poi_disease_aids_yes">AIDS: ναι</string>
+	<string name="poi_disease_aids_no">AIDS: όχι</string>
+
+	<string name="poi_office_physician">Ιατρείο</string>
+	<string name="poi_office_therapist">Ιατρείο θεραπευτή</string>
+	<string name="poi_office_podologist">Ιατρείο ποδολογίας</string>
+	<string name="poi_office_healer">Θεραπευτικό ιατρείο</string>
+	<string name="poi_office_psychologist">Ιατρείο ψυχολόγου</string>
+	<string name="poi_office_nursing_service">Υπηρεσία νοσηλευτικής</string>
+	<string name="poi_office_midwife">Ιατρείο μαίας</string>
+
+	<string name="poi_fire_hydrant_diameter">Διάμετρος κρουνού</string>
+	<string name="poi_fire_hydrant_pressure">Πίεση κρουνού</string>
+	<string name="poi_fire_hydrant_count">Αριθμός κρουνών</string>
+	<string name="poi_fire_hydrant_flow_capacity">Χωρητικότητα ροής κρούνου</string>
+	<string name="poi_fire_hydrant_position_sidewalk">Πεζοδρόμιο</string>
+	<string name="poi_fire_hydrant_position_green">Πράσινο</string>
+	<string name="poi_fire_hydrant_position_lane">Γραμμή</string>
+	<string name="poi_fire_hydrant_position_parking_lot">Χώρος στάθμευσης</string>
+	<string name="poi_fire_hydrant_position_street">Οδός</string>
+	<string name="poi_fire_hydrant_position_underground">Υπόγειος</string>
+	<string name="poi_fire_hydrant_style_wsh">Μορφή κρουνού: wsh</string>
 	</resources>

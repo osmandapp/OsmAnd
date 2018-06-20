@@ -1,4 +1,4 @@
-package net.osmand.telegram
+package net.osmand.telegram.ui
 
 import android.app.Dialog
 import android.content.DialogInterface
@@ -18,6 +18,7 @@ import android.view.inputmethod.EditorInfo
 import android.widget.Button
 import android.widget.TextView
 import net.osmand.PlatformUtil
+import net.osmand.telegram.R
 import net.osmand.telegram.utils.AndroidUtils
 import studio.carbonylgroup.textfieldboxes.ExtendedEditText
 
