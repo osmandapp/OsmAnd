@@ -1,4 +1,4 @@
-package net.osmand.telegram
+package net.osmand.telegram.ui
 
 import android.Manifest
 import android.app.Dialog
@@ -16,9 +16,11 @@ import android.support.v7.widget.*
 import android.view.*
 import android.widget.Toast
 import net.osmand.PlatformUtil
-import net.osmand.telegram.LoginDialogFragment.LoginDialogType
+import net.osmand.telegram.R
+import net.osmand.telegram.TelegramApplication
 import net.osmand.telegram.helpers.TelegramHelper
 import net.osmand.telegram.helpers.TelegramHelper.*
+import net.osmand.telegram.ui.LoginDialogFragment.LoginDialogType
 import net.osmand.telegram.utils.AndroidUtils
 import org.drinkless.td.libcore.telegram.TdApi
 
@@ -387,7 +389,7 @@ class MainActivity : AppCompatActivity(), TelegramListener {
 			val showOnMapSwitch: SwitchCompat? = view.findViewById(R.id.show_on_map_switch)
 		}
 
-		override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChatsAdapter.ViewHolder {
+		override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 			val view = LayoutInflater.from(parent.context).inflate(R.layout.chat_list_item, parent, false)
 			return ViewHolder(view)
 		}

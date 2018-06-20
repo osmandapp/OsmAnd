@@ -5,7 +5,7 @@
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
 	android:orientation="vertical"
-	tools:context=".MainActivity">
+	tools:context=".ui.MainActivity">
 
 	<FrameLayout
 		android:layout_width="match_parent"
@@ -18,7 +18,7 @@
 			android:layout_height="match_parent"
 			android:scrollbars="vertical" />
 
-		<net.osmand.telegram.views.LockableViewPager
+		<net.osmand.telegram.ui.views.LockableViewPager
 			android:id="@+id/pager"
 			android:layout_width="match_parent"
 			android:layout_height="match_parent"
