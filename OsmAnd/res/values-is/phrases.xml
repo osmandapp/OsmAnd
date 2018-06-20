@@ -1411,7 +1411,7 @@
 	<string name="poi_material_plastic">Efni: plast</string>
 	<string name="poi_material_sandstone">Efni: sandsteinn</string>
 	<string name="poi_material_granite_stone">Efni: granítsteinn</string>
-	<string name="poi_material_metal_wood">Efni: málmur: viður</string>
+	<string name="poi_material_metal_wood">Efni: málmur, viður</string>
 	<string name="poi_material_glass">Efni: gler</string>
 	<string name="poi_material_bronze">Efni: brons</string>
 	<string name="poi_material_earth">Efni: mold</string>
@@ -2545,7 +2545,7 @@
 	<string name="poi_social_facility_for_drug_addicted">Eiturlyfjafíklar</string>
 	<string name="poi_social_facility_for_unemployed">Atvinnulausir</string>
 	<string name="poi_social_facility_for_diseased">Sjúkir</string>
-	<string name="poi_social_facility_for_child_juvenile">Börn: ungmenni</string>
+	<string name="poi_social_facility_for_child_juvenile">Ungmenni</string>
 
 	<string name="poi_historic_civilization_nuragic">Menning: núrísk (18. öld f. Kr – 2. öld e.Kr.)</string>
 	<string name="poi_historic_civilization_imperial_chinese">Menning: kínverska keisaraveldið (221 f. Kr – 1911 e. Kr)</string>
@@ -2840,7 +2840,7 @@
 
 	<string name="poi_motorcycle_sales_yes">Sala</string>
 	<string name="poi_motorcycle_sales_no">Sala: nei</string>
-	<string name="poi_motorcycle_sales_yes_used">Sala: já; notað</string>
+	<string name="poi_motorcycle_sales_yes_used">Sala: já, notað</string>
 	<string name="poi_motorcycle_sales_used">Sala: notað</string>
 	<string name="poi_motorcycle_rental_yes">Leiga</string>
 	<string name="poi_motorcycle_rental_no">Leiga: nei</string>
@@ -3842,4 +3842,5 @@
 
 	<string name="poi_end_date">Lokadagsetning</string>
 
-</resources>
+<string name="poi_checkpoint_type_quize">Spurningalisti</string>
+	</resources>
