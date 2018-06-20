@@ -2932,4 +2932,8 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="get_osmand_live">Náðu í OsmAnd Live til að aflæsa öllum eiginleikum: Fáðu ótakmörkuð niðurhöl korta og daglegar kortauppfærslur, allar greiddar og ókeypis viðbætur, Wikipedia, Wikivoyage og margt fleira.</string>
     <string name="error_notification_desc">"Sendu skjámynd af þessari tilkynningu til  support@osmand.net"</string>
     <string name="quick_action_edit_actions">Breyta aðgerðum</string>
+    <string name="coord_input_edit_point">Breyta punkti</string>
+    <string name="coord_input_add_point">Bæta við punkti</string>
+    <string name="coord_input_save_as_track">Vista sem feril</string>
+    <string name="coord_input_save_as_track_descr">Þú bættir við %1$s punktum. Settu inn heitið á skránni og vistaðu.</string>
     </resources>
