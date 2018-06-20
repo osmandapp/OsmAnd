@@ -2179,7 +2179,7 @@
 	<string name="poi_social_facility_for_drug_addicted">Drogadictos</string>
 	<string name="poi_social_facility_for_unemployed">Desempleados</string>
 	<string name="poi_social_facility_for_diseased">Enfermos</string>
-	<string name="poi_social_facility_for_child_juvenile">Niños y juvenil</string>
+	<string name="poi_social_facility_for_child_juvenile">Niños, juvenil</string>
 
 	<string name="poi_theatre_genre_philharmonic">Filarmónica</string>
 	<string name="poi_theatre_genre_musical">Musical</string>
@@ -2327,7 +2327,7 @@
 	<string name="poi_material_plastic">Material: plástico</string>
 	<string name="poi_material_sandstone">Material: arenisca</string>
 	<string name="poi_material_granite_stone">Material: piedra de granito</string>
-	<string name="poi_material_metal_wood">Material: metal y madera</string>
+	<string name="poi_material_metal_wood">Material: metal, madera</string>
 	<string name="poi_material_glass">Material: vidrio</string>
 	<string name="poi_material_bronze">Material: bronce</string>
 	<string name="poi_material_earth">Material: tierra</string>
