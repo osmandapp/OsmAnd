@@ -2127,7 +2127,7 @@
 	<string name="poi_refugee_no">Vluchtelingen: nee</string>
 
 	<string name="poi_social_facility_group_home">Woongroep</string>
-	<string name="poi_social_facility_food_bank">Voedelbank</string>
+	<string name="poi_social_facility_food_bank">Voedselbank</string>
 	<string name="poi_social_facility_for_orphan">Weeshuis</string>
 	<string name="poi_social_facility_for_homeless">Dakloos</string>
 	<string name="poi_social_facility_for_migrant">Migranten</string>
@@ -2771,4 +2771,36 @@
 
 	<string name="poi_via_ferrata_scale">Moeilijkheid</string>
 
+	<string name="poi_wiki_lang_min">Minangkabau wiki</string>
+	<string name="poi_wiki_lang_ur">Urdu wiki</string>
+	<string name="poi_wiki_lang_jv">Javaanse wiki</string>
+	<string name="poi_wiki_lang_ky">Kyrgyzische wiki</string>
+	<string name="poi_wiki_lang_zhyue">Cantonese wiki</string>
+	<string name="poi_wiki_lang_tg">Tajik wiki</string>
+	<string name="poi_wiki_lang_ba">Bashkir wiki</string>
+	<string name="poi_wiki_lang_my">Burmese wiki</string>
+	<string name="poi_wiki_lang_an">Aragonese wiki</string>
+	<string name="poi_memorial_koshinto">Koshinto</string>
+	<string name="poi_crop_rice">Gewas: rijst</string>
+	<string name="poi_crop_grass">Gewas: gras</string>
+	<string name="poi_crop_corn">Gewas: graan</string>
+	<string name="poi_crop_cereal">Gewas: graan</string>
+	<string name="poi_crop_sugarcane">Gewas: suikerriet</string>
+	<string name="poi_crop_soy">Gewas: soja</string>
+	<string name="poi_crop_vegetables">Gewas: groenten</string>
+	<string name="poi_crop_lavender">Gewas: lavendel</string>
+	<string name="poi_crop_tea">Gewas: thee</string>
+	<string name="poi_crop_coffee">Gewas: koffie</string>
+	<string name="poi_crop_sunflower">Gewas: zonnebloem</string>
+	<string name="poi_crop_raspberry">Gewas: framboos</string>
+	<string name="poi_crop_tobacco">Gewas: tabak</string>
+	<string name="poi_crop_strawberry">Gewas: aardbei</string>
+	<string name="poi_crop_vegetables_flowers">Gewas: groenten, bloemen</string>
+	<string name="poi_crop_cassava">Gewas: cassave</string>
+	<string name="poi_crop_cranberry">Gewas: cranberry</string>
+	<string name="poi_crop_asparagus">Gewas: asperges</string>
+	<string name="poi_crop_flowers">Gewas: bloemen</string>
+
+	<string name="poi_social_facility_for_disabled">Gehandicapten</string>
+	<string name="poi_service_vehicle_muffler_yes">Geluiddemper</string>
 	</resources>
