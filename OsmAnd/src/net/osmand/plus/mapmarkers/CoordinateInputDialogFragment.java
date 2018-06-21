@@ -1,5 +1,6 @@
 package net.osmand.plus.mapmarkers;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.ClipData;
 import android.content.ClipboardManager;
@@ -54,11 +55,9 @@ import android.widget.Toast;
 import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.Location;
-import net.osmand.data.LatLon;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.MapMarkersHelper;
-import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.OsmandApplication;
@@ -149,7 +148,12 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 
 	@Nullable
 	public TrackActivity getTrackActivity() {
-		return (TrackActivity) getActivity();
+		Activity activity = getActivity();
+		if (activity instanceof TrackActivity) {
+			return (TrackActivity) getActivity();
+		} else {
+			return null;
+		}
 	}
 
 	private void syncGpx(GPXUtilities.GPXFile gpxFile) {
@@ -161,11 +165,55 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 	}
 
 	protected void addWpt(GPXUtilities.GPXFile gpx, String description, String name, String category, int color, double lat, double lon) {
-		gpx.addWptPt(lat, lon, System.currentTimeMillis(), description, name, category, color);
+		if (gpx != null) {
+			if (gpx.showCurrentTrack) {
+				savingTrackHelper.insertPointData(lat, lon, System.currentTimeMillis(), description, name, category, color);
+				selectedGpxHelper.setGpxFileToDisplay(gpx);
+			} else {
+				gpx.addWptPt(lat, lon, System.currentTimeMillis(), description, name, category, color);
+				new SaveGpxAsyncTask(getMyApplication(), gpx, false).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+			}
+			syncGpx(gpx);
+		}
 	}
-	
+
+	private static class SaveGpxAsyncTask extends AsyncTask<Void, Void, Void> {
+		private final OsmandApplication app;
+		private final GPXUtilities.GPXFile gpx;
+		private final boolean gpxSelected;
+
+		SaveGpxAsyncTask(OsmandApplication app, GPXUtilities.GPXFile gpx, boolean gpxSelected) {
+			this.app = app;
+			this.gpx = gpx;
+			this.gpxSelected = gpxSelected;
+		}
+
+		@Override
+		protected Void doInBackground(Void... params) {
+			GPXUtilities.writeGpxFile(new File(gpx.path), gpx, app);
+			return null;
+		}
+
+		@Override
+		protected void onPostExecute(Void aVoid) {
+			if (!gpxSelected) {
+				app.getSelectedGpxHelper().setGpxFileToDisplay(gpx);
+			}
+		}
+	}
+
 	protected void updateWpt(GPXUtilities.GPXFile gpx, String description, String name, String category, int color, double lat, double lon) {
-		gpx.updateWptPt(selectedWpt,lat, lon, System.currentTimeMillis(), description, name, category, color);
+
+		if (gpx != null) {
+			if (gpx.showCurrentTrack) {
+				savingTrackHelper.updatePointData(selectedWpt, lat, lon, System.currentTimeMillis(), description, name, category, color);
+				selectedGpxHelper.setGpxFileToDisplay(gpx);
+			} else {
+				gpx.updateWptPt(selectedWpt, lat, lon, System.currentTimeMillis(), description, name, category, color);
+				new SaveGpxAsyncTask(getMyApplication(), gpx, false).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+			}
+			syncGpx(gpx);
+		}
 	}
 
 	private void quit() {
@@ -176,6 +224,9 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 				GPXUtilities.GPXFile gpx = getGpx();
 				GPXUtilities.writeGpxFile(new File(gpx.path), gpx, getMyApplication());
 				syncGpx(gpx);
+				if (listener != null) {
+					listener.onMapMarkersSaved();
+				}
 				dismiss();
 			}
 		} else {
