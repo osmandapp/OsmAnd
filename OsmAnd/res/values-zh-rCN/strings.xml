@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources><string name="email">電子郵件</string>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="email">電子郵件</string>
 	<string name="poi_dialog_opening_hours">打開</string>
 	<string name="poi_dialog_comment">評論</string>
 	<string name="poi_dialog_comment_default">改變POI</string>
@@ -531,7 +532,7 @@
     <string name="non_optimal_route_calculation">长距离时计算结果可能非最优</string>
 	<string name="map_widget_monitoring_services">日志服务</string>
 	<string name="replace_destination_point">替换终点</string>
-    <string name="new_destination_point_dialog">您已经设置了终点：</string>
+    <string name="new_destination_point_dialog">您已经设置了一个目的地：</string>
     <string name="ending_point_too_far">结束点与最近道路太远。</string>
     <string name="add_tag">添加标记</string>
     <string name="btn_advanced_mode">高级模式…</string>
@@ -2162,7 +2163,7 @@
     <string name="add_as_last_destination_point">添加为最后的中转点</string>
     <string name="add_as_first_destination_point">添加为第一个中转点</string>
     <string name="intermediate_point_too_far">中转点 %1$s 离最近的路太远。</string>
-    <string name="arrived_at_intermediate_point">你已经到达你的中转点</string>
+    <string name="arrived_at_intermediate_point">您已经到达您的中转点</string>
     <string name="context_menu_item_intermediate_point">添加为中转点</string>
     <string name="show_warnings_descr">配置交通警告（车速限制、强制停止、减速带），测速相机警告和车道信息</string>
     <string name="use_compass_navigation_descr">没有检测到朝向的时候使用罗盘</string>
@@ -2697,4 +2698,6 @@
     <string name="paid_app">付费应用</string>
     <string name="paid_plugin">付费插件</string>
     <string name="travel_card_update_descr">新的 Wikivoyage 数据可用，请更新以继续享用。</string>
-	</resources>
+	<string name="get_unlimited_access">获取无限访问权限</string>
+    <string name="shared_string_options">选项</string>
+    </resources>

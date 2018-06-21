@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
     <string name="rendering_attr_roadColors_description">Velg fargeskjema for veier:</string>
     <string name="rendering_attr_roadColors_name">Veifargeskjema</string>
     <string name="map_widget_show_destination_arrow">Vis retning til målet</string>
@@ -3024,4 +3025,8 @@
     <string name="get_osmand_live">Skaff deg OsmAnd Live for å låse opp alle funksjoner: Daglige kartoppdateringer med ubegrensede nedlastinger, alle programtilleggene, Wikipedia, Wikivoyage og mye mer.</string>
     <string name="quick_action_edit_actions">Rediger handlinger</string>
     <string name="error_notification_desc">Send skjermavbildning av denne merknaden til support@osmand.net</string>
+    <string name="coord_input_edit_point">Rediger punkt</string>
+    <string name="coord_input_add_point">Legg til punkt</string>
+    <string name="coord_input_save_as_track">Lagre som spor</string>
+    <string name="coord_input_save_as_track_descr">Du har lagt til %1$s punkter. Skriv inn navnet på filen og klikk \"Lagre\".</string>
     </resources>

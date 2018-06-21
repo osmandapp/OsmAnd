@@ -3470,7 +3470,7 @@
 
 <string name="poi_motorcycle_sales_yes">Salg</string>
 	<string name="poi_motorcycle_sales_no">Salg: nej</string>
-	<string name="poi_motorcycle_sales_yes_used">Salg: ja; brugt</string>
+	<string name="poi_motorcycle_sales_yes_used">Salg: ja, brugt</string>
 	<string name="poi_motorcycle_sales_used">Salg: brugt</string>
 	<string name="poi_motorcycle_rental_yes">Udlejning</string>
 	<string name="poi_motorcycle_rental_no">Udlejning: nej</string>
@@ -3941,5 +3941,9 @@
 <string name="poi_rock">Klippe</string>
 
 	<string name="poi_end_date">Slutdato</string>
+
+<string name="poi_appliance">Elektronik butik</string>
+
+	<string name="poi_outcrop">Klippefremspring</string>
 
 </resources>

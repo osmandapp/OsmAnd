@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
 	<string name="shared_string_no">לא</string>
 	<string name="shared_string_yes">כן</string>
 	<string name="close_changeset">סגירת ערכת השינויים</string>
@@ -3055,4 +3056,8 @@
     <string name="get_osmand_live">ניתן להירשם ל־OsmAnd חי כדי לקבל גישה לכל התכונות: עדכוני מפה יומיים עם מספר בלתי מוגבל של הורדות, כל התוספים בתשלום ובחינם, ויקיפדיה, ויקימסע ועוד הרבה.</string>
     <string name="quick_action_edit_actions">עריכת פעולות</string>
     <string name="error_notification_desc">נא לשלוח צילום מסך של ההתרעה הזאת אל support@osmand.net</string>
+    <string name="coord_input_edit_point">עריכת נקודה</string>
+    <string name="coord_input_add_point">הוספת נקודה</string>
+    <string name="coord_input_save_as_track">שמירה כמסלול</string>
+    <string name="coord_input_save_as_track_descr">הוספת %1$s נקודות. נא להקליד את שם הקובץ וללחוץ על שמירה.</string>
     </resources>

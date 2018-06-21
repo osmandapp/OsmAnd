@@ -3146,5 +3146,5 @@ représentant la zone : %1$s x %2$s</string>
     <string name="coord_input_edit_point">Modifier le point</string>
     <string name="coord_input_add_point">Ajouter point</string>
     <string name="coord_input_save_as_track">Enregistrer comme trace</string>
-    <string name="coord_input_save_as_track_descr">Vous avez ajouté %1$s points. Indiquez un nom pour le fichier et cliquez sur Enregistrer.</string>
+    <string name="coord_input_save_as_track_descr">Vous avez ajouté %1$s points. Donnez un nom au fichier et cliquez sur Enregistrer.</string>
     </resources>
