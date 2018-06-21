@@ -1636,7 +1636,7 @@ Lon %2$s</string>
     <string name="poi_edit_title">Editar PDI</string>
     <string name="poi_create_title">Crear PDI</string>
     <string name="poi_error_poi_not_found">No se encontró el nodo, o el PDI se compone de varios nodos, lo cuál todavía no está soportado.</string>
-    <string name="poi_remove_confirm_template">¿Borrar {0} (añadir comentario)?</string>
+    <string name="poi_remove_confirm_template">¿Borrar {0} (comentario)?</string>
     <string name="poi_remove_title">Borrar PDI</string>
     <string name="poi_remove_success">PDI borrado</string>
     <string name="poi_action_add">añadir</string>
@@ -2846,7 +2846,7 @@ Lon %2$s</string>
     <string name="make_as_start_point">Reemplazar punto de inicio</string>
     <string name="map_import_error">Error de importación del mapa</string>
     <string name="map_imported_successfully">Mapa importado</string>
-    <string name="enter_the_file_name">Ingresar nombre del archivo.</string>
+    <string name="enter_the_file_name">Escribe el nombre del archivo.</string>
     <string name="transport_nearby_routes_within">Rutas a menos de</string>
     <string name="transport_nearby_routes">A menos de</string>
     <string name="distance_farthest">Distancia: más lejos primero</string>
@@ -2973,5 +2973,5 @@ Lon %2$s</string>
     <string name="coord_input_edit_point">Editar punto</string>
     <string name="coord_input_add_point">Añadir punto</string>
     <string name="coord_input_save_as_track">Guardar como traza</string>
-    <string name="coord_input_save_as_track_descr">Añadiste %1$s puntos. Ingresa el nombre del archivo y pulsa en Guardar.</string>
+    <string name="coord_input_save_as_track_descr">Añadiste %1$s puntos. Escribe un nombre de archivo y pulsa en «Guardar».</string>
     </resources>
