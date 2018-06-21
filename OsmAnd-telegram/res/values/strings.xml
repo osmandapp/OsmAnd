@@ -1,4 +1,5 @@
 <resources>
+	<string name="show_on_map">Show on map</string>
 	<string name="app_name">OsmAnd Telegram</string>
 	<string name="phone_number_title">Phone number</string>
 	<string name="phone_number_descr">Phone number in the international format</string>

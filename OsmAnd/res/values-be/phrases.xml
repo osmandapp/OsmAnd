@@ -2334,7 +2334,7 @@
 	<string name="poi_material_plastic">Матэрыял: плястык</string>
 	<string name="poi_material_sandstone">Матэрыял: пяшчанік</string>
 	<string name="poi_material_granite_stone">Матэрыял: граніт</string>
-	<string name="poi_material_metal_wood">Матэрыял: мэталь, дрэва</string>
+	<string name="poi_material_metal_wood">Матэрыял: метал, дрэва</string>
 	<string name="poi_material_glass">Матэрыял: шкло</string>
 	<string name="poi_material_bronze">Матэрыял: бронза</string>
 	<string name="poi_material_earth">Матэрыял: зямля</string>
@@ -3898,4 +3898,6 @@
 
 	<string name="poi_end_date">Дата закрыцця</string>
 
-</resources>
+<string name="poi_appliance">Бытавая тэхніка</string>
+
+	</resources>

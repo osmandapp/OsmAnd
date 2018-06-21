@@ -497,7 +497,7 @@
 	<string name="poi_hotel">Hotel</string>
 	<string name="poi_guest_house">Casa de huéspedes</string>
 	<string name="poi_hostel">Hostel;Hostal</string>
-	<string name="poi_motel">Motel;Telo</string>
+	<string name="poi_motel">Motel</string>
 	<string name="poi_alpine_hut">Cabaña alpina</string>
 	<string name="poi_chalet">Cabaña vacacional;Chalé</string>
 	<string name="poi_apartment">Departamento;Apartamento</string>
@@ -1918,7 +1918,7 @@
 	<string name="poi_surface_salt">Superficie: sal</string>
 	<string name="poi_surface_snow">Superficie: nieve</string>
 
-	<string name="poi_route_bus_ref">Colectivo;Autobús</string>
+	<string name="poi_route_bus_ref">Colectivo</string>
 	<string name="poi_route_share_taxi_ref">Taxi compartido</string>
 	<string name="poi_route_trolleybus_ref">Trolebús</string>
 	<string name="poi_route_tram_ref">Tranvía</string>
@@ -1926,7 +1926,7 @@
 	<string name="poi_route_light_rail_ref">Tren ligero</string>
 	<string name="poi_route_monorail_ref">Monorriel</string>
 	<string name="poi_route_funicular_ref">Funicular</string>
-	<string name="poi_route_ferry_ref">Transbordador;Ferri</string>
+	<string name="poi_route_ferry_ref">Transbordador (Ferri)</string>
 
 	<string name="poi_route_railway_ref">Ruta ferroviaria</string>
 
@@ -2179,7 +2179,7 @@
 	<string name="poi_social_facility_for_drug_addicted">Drogadictos</string>
 	<string name="poi_social_facility_for_unemployed">Desempleados</string>
 	<string name="poi_social_facility_for_diseased">Enfermos</string>
-	<string name="poi_social_facility_for_child_juvenile">Niños y juvenil</string>
+	<string name="poi_social_facility_for_child_juvenile">Niños, juvenil</string>
 
 	<string name="poi_theatre_genre_philharmonic">Filarmónica</string>
 	<string name="poi_theatre_genre_musical">Musical</string>
@@ -2327,7 +2327,7 @@
 	<string name="poi_material_plastic">Material: plástico</string>
 	<string name="poi_material_sandstone">Material: arenisca</string>
 	<string name="poi_material_granite_stone">Material: piedra de granito</string>
-	<string name="poi_material_metal_wood">Material: metal y madera</string>
+	<string name="poi_material_metal_wood">Material: metal, madera</string>
 	<string name="poi_material_glass">Material: vidrio</string>
 	<string name="poi_material_bronze">Material: bronce</string>
 	<string name="poi_material_earth">Material: tierra</string>
@@ -3709,7 +3709,7 @@
 <string name="poi_payment_centre">Centro de pagos</string>
 	<string name="poi_money_transfer">Transferencia de dinero</string>
 
-<string name="poi_route_subway_ref">Subte;Metro</string>
+<string name="poi_route_subway_ref">Subte</string>
 
 	<string name="poi_climbing_style">Estilo de escalada</string>
 

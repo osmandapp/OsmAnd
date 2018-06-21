@@ -3093,4 +3093,8 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="wiki_article_search_text">Pošuk adpaviednaha viki-artykula</string>
     <string name="wiki_article_not_found">Artykul nie znojdzieny</string>
     <string name="how_to_open_wiki_title">Jak adkryć artykuly Vikipedyi?</string>
-</resources>
+<string name="coord_input_edit_point">Redahavać kropku</string>
+    <string name="coord_input_add_point">Dadać kropku</string>
+    <string name="coord_input_save_as_track">Zachavać jak slied</string>
+    <string name="coord_input_save_as_track_descr">Vy dadali %1$s kropak. Uviadzicie nazvu fajla i nacisnicie «zachavać».</string>
+    </resources>

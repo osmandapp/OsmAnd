@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<declare-styleable name="AppTheme">
-		<attr name="bg_color" format="reference" />
+		<attr name="card_bg_color" format="reference" />
+		<attr name="card_divider_color" format="reference" />
+		<attr name="screen_bg_color" format="reference" />
 		<attr name="icon_color" format="reference" />
 		<attr name="ctrl_active_color" format="reference" />
 		<attr name="ctrl_color" format="reference" />
