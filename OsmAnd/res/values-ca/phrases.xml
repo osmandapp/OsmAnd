@@ -3135,4 +3135,12 @@
 	<string name="poi_seamark_clearance_height_open">Altura màxima (obert)</string>
 	<string name="poi_seamark_clearance_width">Amplada màxima</string>
 
+	<string name="poi_climbing_style">Estil d\'escalada</string>
+	<string name="poi_socket_chademo_output_filter">Connector CHAdeMO</string>
+	<string name="poi_socket_type2_output_filter">Connector tipus 2</string>
+	<string name="poi_socket_type2_combo_output_filter">Connector combinat tipus 2</string>
+	<string name="poi_socket_type3_output_filter">Connector tipus 3</string>
+	<string name="poi_socket_cee_blue_output_filter">Connector CEE blau</string>
+	<string name="poi_socket_schuko_output_filter">Connector Schuko</string>
+	<string name="poi_glacier_type">Tipus de glacera</string>
 	</resources>
