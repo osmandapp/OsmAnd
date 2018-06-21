@@ -23,6 +23,7 @@
 	<dimen name="list_item_icon_margin_right">20dp</dimen>
 
 	<dimen name="list_item_content_margin">64dp</dimen>
+	<dimen name="list_item_bottom_margin">3dp</dimen>
 
 	<dimen name="card_divider_bottom_margin">6dp</dimen>
 
