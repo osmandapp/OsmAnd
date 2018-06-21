@@ -2,8 +2,8 @@
 
 	<!-- Base application theme. -->
 	<style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-		<item name="android:windowBackground">@color/card_bg_light</item>
-		<item name="android:colorBackground">@color/card_bg_light</item>
+		<item name="android:windowBackground">@color/screen_bg_light</item>
+		<item name="android:colorBackground">@color/screen_bg_light</item>
 		<item name="colorControlNormal">@color/primary_text_light</item>
 		<item name="colorControlActivated">@color/ctrl_active_light</item>
 		<item name="android:windowLightStatusBar">true</item>
@@ -16,6 +16,7 @@
 		<item name="android:textColorTertiary">@color/description_text_light</item>
 
 		<item name="card_bg_color">@color/card_bg_light</item>
+		<item name="card_divider_color">@color/card_divider_light</item>
 		<item name="screen_bg_color">@color/screen_bg_light</item>
 		<item name="icon_color">@color/icon_light</item>
 		<item name="ctrl_active_color">@color/ctrl_active_light</item>

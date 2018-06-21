@@ -1,17 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<dimen name="content_padding_small">4dp</dimen>
 	<dimen name="content_padding_half">8dp</dimen>
 	<dimen name="content_padding_standard">16dp</dimen>
+
 	<dimen name="progress_bar_size_small">32dp</dimen>
-	<dimen name="dialog_title_text_size">22sp</dimen>
+
+	<dimen name="action_bar_height">60dp</dimen>
+
 	<dimen name="dialog_padding_vertical">24dp</dimen>
 	<dimen name="dialog_padding_horizontal">60dp</dimen>
 	<dimen name="dialog_padding_horizontal_edit">44dp</dimen>
-	<dimen name="list_item_height_min">48dp</dimen>
+
 	<dimen name="dialog_button_height">36dp</dimen>
 	<dimen name="dialog_button_radius">2dp</dimen>
+
+	<dimen name="list_item_height">60dp</dimen>
+	<dimen name="list_item_height_min">48dp</dimen>
+
+	<dimen name="list_item_icon_size">32dp</dimen>
+	<dimen name="list_item_icon_margin_left">12dp</dimen>
+	<dimen name="list_item_icon_margin_right">20dp</dimen>
+
+	<dimen name="list_item_content_margin">64dp</dimen>
+
+	<dimen name="card_divider_bottom_margin">6dp</dimen>
+
+	<dimen name="image_button_padding">12dp</dimen>
+
+	<!-- Text sizes -->
+
+	<dimen name="dialog_title_text_size">22sp</dimen>
+
 	<dimen name="title_text_size">18sp</dimen>
 	<dimen name="descr_text_size">16sp</dimen>
-	<dimen name="action_bar_height">60dp</dimen>
 
 </resources>
