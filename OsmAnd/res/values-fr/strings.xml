@@ -645,7 +645,7 @@
     <string name="poi_edit_title">Modifier le point d\'intérêt</string>
     <string name="poi_create_title">Créer un point d\'intérêt</string>
     <string name="poi_error_poi_not_found">L\'objet est introuvable ou est composé de plusieurs nœuds, ce qui n\'est pas possible actuellement.</string>
-    <string name="poi_remove_confirm_template">Voulez-vous vraiment supprimer {0} (inscrire commentaire) ?</string>
+    <string name="poi_remove_confirm_template">Supprimer {0} (commentaire) ?</string>
     <string name="poi_remove_title">Supprimer le point d\'intérêt</string>
     <string name="shared_string_delete">Supprimer</string>
     <string name="poi_remove_success">Point d\'intérêt supprimé</string>
@@ -1017,7 +1017,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="index_srtm_parts">parties</string>
 
 
-    <string name="audionotes_location_not_defined">La position associée à la note n\'est pas encore définie. Utilisez le menu \'Utiliser ce point\' pour indiquer la position de cette note.</string>
+    <string name="audionotes_location_not_defined">La position associée à la note n\'est pas encore définie. Utilisez le menu \"Utiliser la position...\" pour définir une position pour cette note.</string>
 
     <string name="map_widget_audionotes">Notes audio</string>
     <string name="audionotes_plugin_description">Ce greffon permet de prendre des notes (photos, audios ou vidéos) sur un itinéraire soit en utilisant un bouton affiché sur la carte, soit directement depuis le menu contextuel de n\'importe quel point sur la carte.</string>
