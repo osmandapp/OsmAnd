@@ -888,7 +888,7 @@
 	<string name="poi_internet_access_no">Internetcsatlakozás nincs</string>
 
 	<string name="poi_dance_floor">Tánctér</string>
-	<string name="poi_nightclub">Diszkó</string>
+	<string name="poi_nightclub">Night club; Diszkó</string>
 	<string name="poi_stripclub">Sztriptízbár</string>
 	<string name="poi_craft_agricultural_engines">Mezőgazdaságigép-gyártó</string>
 	<string name="poi_craft_carpet_layer">Szőnyegpadló-lerakó műhely</string>
@@ -1980,7 +1980,7 @@
 	<string name="poi_water_characteristic">Víz jellemzője</string>
 	<string name="poi_shoes_type">Cipőfajta</string>
 	<string name="poi_parking_type">Típus</string>
-	<string name="poi_parking_carports">Fedett, oldalról nyitott parkolóhelyek</string>
+	<string name="poi_parking_carports">Garázstető (oldalról nyitott)</string>
 
 	<string name="poi_parking_garage_boxes">Garázsok</string>
 	<string name="poi_bicycle_parking_type">Típus</string>
@@ -2345,7 +2345,7 @@
 	<string name="poi_social_facility_for_drug_addicted">Kábítószerfüggők</string>
 	<string name="poi_social_facility_for_unemployed">Munkanélküliek</string>
 	<string name="poi_social_facility_for_diseased">Betegek</string>
-	<string name="poi_social_facility_for_child_juvenile">Gyermekek; fiatalok</string>
+	<string name="poi_social_facility_for_child_juvenile">Gyermekek és fiatalok</string>
 
 	<string name="poi_kiln">Égetőkemence</string>
 	<string name="poi_product_brick">Termék: tégla</string>

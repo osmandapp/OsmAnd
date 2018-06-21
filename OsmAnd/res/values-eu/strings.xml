@@ -3112,4 +3112,8 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="map_widget_intermediate_time">Tarteko denbora</string>
     <string name="quick_action_edit_actions">Editatu ekintzak</string>
     <string name="error_notification_desc">Bidali jakinarazpen honen pantaila-argazkia support@osmand.net helbidera</string>
+    <string name="coord_input_edit_point">Editatu puntua</string>
+    <string name="coord_input_add_point">Gehitu puntua</string>
+    <string name="coord_input_save_as_track">Gorde lorratz gisa</string>
+    <string name="coord_input_save_as_track_descr">%1$s puntu gehitu dituzu. Sartu fitxategiaren izena eta sakatu gorde.</string>
     </resources>
