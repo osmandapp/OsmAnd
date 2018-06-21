@@ -38,6 +38,7 @@
 		android:id="@+id/bottom_navigation"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
+		android:background="?attr/card_bg_color"
 		android:visibility="visible"
 		app:itemBackground="?attr/card_bg_color"
 		app:menu="@menu/bottom_navigation_menu"/>

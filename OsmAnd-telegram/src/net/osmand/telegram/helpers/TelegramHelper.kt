@@ -128,6 +128,20 @@ class TelegramHelper private constructor() {
 		return usersLiveMessages.values.toList()
 	}
 
+	fun getMessagesByChatIds(): Map<Long, List<TdApi.Message>> {
+		val res = mutableMapOf<Long, MutableList<TdApi.Message>>()
+		for (message in usersLiveMessages.values) {
+			var messages = res[message.chatId]
+			if (messages != null) {
+				messages.add(message)
+			} else {
+				messages = mutableListOf(message)
+				res[message.chatId] = messages
+			}
+		}
+		return res
+	}
+
 	private fun updateChatTitles() {
 		chatTitles.clear()
 		for (chatEntry in chats.entries) {

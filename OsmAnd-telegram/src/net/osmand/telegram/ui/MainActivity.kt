@@ -9,10 +9,7 @@ import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
-import android.support.v4.app.ActivityCompat
-import android.support.v4.app.DialogFragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentPagerAdapter
+import android.support.v4.app.*
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.*
@@ -27,6 +24,7 @@ import net.osmand.telegram.ui.LoginDialogFragment.LoginDialogType
 import net.osmand.telegram.ui.views.LockableViewPager
 import net.osmand.telegram.utils.AndroidUtils
 import org.drinkless.td.libcore.telegram.TdApi
+import java.lang.ref.WeakReference
 
 
 class MainActivity : AppCompatActivity(), TelegramListener {
@@ -57,6 +55,8 @@ class MainActivity : AppCompatActivity(), TelegramListener {
 	private val telegramHelper get() = app.telegramHelper
 	private val osmandHelper get() = app.osmandHelper
 	private val settings get() = app.settings
+
+	private val listeners: MutableList<WeakReference<TelegramListener>> = mutableListOf()
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
@@ -90,6 +90,9 @@ class MainActivity : AppCompatActivity(), TelegramListener {
 				R.id.action_live_now -> pos = LIVE_NOW_TAB_POS
 			}
 			if (pos != -1 && pos != viewPager.currentItem) {
+				// FIXME
+				chatsView.visibility = if (pos == MY_LOCATION_TAB_POS) View.VISIBLE else View.GONE
+				viewPager.visibility = if (pos == LIVE_NOW_TAB_POS) View.VISIBLE else View.GONE
 				viewPager.currentItem = pos
 				return@setOnNavigationItemSelectedListener true
 			}
@@ -120,6 +123,12 @@ class MainActivity : AppCompatActivity(), TelegramListener {
 
 		if (osmandHelper.isOsmandBound() && !osmandHelper.isOsmandConnected()) {
 			osmandHelper.connectOsmand()
+		}
+	}
+
+	override fun onAttachFragment(fragment: Fragment?) {
+		if (fragment is TelegramListener) {
+			listeners.add(WeakReference(fragment))
 		}
 	}
 
@@ -179,6 +188,9 @@ class MainActivity : AppCompatActivity(), TelegramListener {
 				}
 				else -> Unit
 			}
+			listeners.forEach {
+				it.get()?.onTelegramStatusChanged(prevTelegramAuthorizationState, newTelegramAuthorizationState)
+			}
 		}
 	}
 
@@ -186,18 +198,21 @@ class MainActivity : AppCompatActivity(), TelegramListener {
 		runOnUi {
 			removeNonexistingChatsFromSettings()
 			updateChatsList()
+			listeners.forEach { it.get()?.onTelegramChatsRead() }
 		}
 	}
 
 	override fun onTelegramChatsChanged() {
 		runOnUi {
 			updateChatsList()
+			listeners.forEach { it.get()?.onTelegramChatsChanged() }
 		}
 	}
 
 	override fun onTelegramChatChanged(chat: TdApi.Chat) {
 		runOnUi {
 			updateChat(chat)
+			listeners.forEach { it.get()?.onTelegramChatChanged(chat) }
 		}
 	}
 
@@ -206,17 +221,24 @@ class MainActivity : AppCompatActivity(), TelegramListener {
 		if (message != null) {
 			app.showLocationHelper.showLocationOnMap(message)
 		}
+		runOnUi {
+			listeners.forEach { it.get()?.onTelegramUserChanged(user) }
+		}
 	}
 
 	override fun onTelegramError(code: Int, message: String) {
 		runOnUi {
 			Toast.makeText(this@MainActivity, "$code - $message", Toast.LENGTH_LONG).show()
+			listeners.forEach { it.get()?.onTelegramError(code, message) }
 		}
 	}
 
 	override fun onSendLiveLocationError(code: Int, message: String) {
 		log.error("Send live location error: $code - $message")
 		app.isInternetConnectionAvailable(true)
+		runOnUi {
+			listeners.forEach { it.get()?.onSendLiveLocationError(code, message) }
+		}
 	}
 
 	private fun removeNonexistingChatsFromSettings() {
