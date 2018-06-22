@@ -1339,7 +1339,7 @@
 	<string name="poi_material_plastic">Materiał: plastik</string>
 	<string name="poi_material_sandstone">Materiał: piaskowiec</string>
 	<string name="poi_material_granite_stone">Materiał: granit</string>
-	<string name="poi_material_metal_wood">Materiał: metal i drewno</string>
+	<string name="poi_material_metal_wood">Materiał: metal, drewno</string>
 	<string name="poi_material_glass">Materiał: szkło</string>
 	<string name="poi_material_bronze">Materiał: brąz</string>
 	<string name="poi_material_earth">Materiał: ziemia</string>
@@ -2337,7 +2337,7 @@
 	<string name="poi_social_facility_for_drug_addicted">Uzależnieni od narkotyków</string>
 	<string name="poi_social_facility_for_unemployed">Bezrobotni</string>
 	<string name="poi_social_facility_for_diseased">Chorzy</string>
-	<string name="poi_social_facility_for_child_juvenile">Dzieci i młodzież</string>
+	<string name="poi_social_facility_for_child_juvenile">Nieletni</string>
 
 	<string name="poi_theatre_genre_philharmonic">Filharmonia</string>
 	<string name="poi_theatre_genre_musical">Teatr muzyczny</string>
@@ -3428,7 +3428,7 @@
 	<string name="poi_motorcycle_type_dualsport">dual-sport</string>
 	<string name="poi_motorcycle_type_standard">standardowe</string>
 
-<string name="poi_animal_shelter_type">Akceptacja zwierząt</string>
+<string name="poi_animal_shelter_type">Przyjmowane zwierzęta</string>
 	<string name="poi_lock_basin">Zbiornik zamknięty</string>
 	<string name="poi_animal_shelter_wildlife">Dzikie zwierzęta</string>
 	<string name="poi_animal_shelter_horse">Konie</string>
@@ -3878,5 +3878,9 @@
 	<string name="poi_rock">Skała</string>
 
 	<string name="poi_end_date">Data ukończenia</string>
+
+<string name="poi_appliance">Sklep z AGD</string>
+
+	<string name="poi_outcrop">Wychodnia</string>
 
 </resources>

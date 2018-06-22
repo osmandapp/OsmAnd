@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
     <string name="av_locations_selected_desc">Файл GPX с координатами и данными выбранных заметок.</string>
     <string name="av_locations_all_desc">Файл GPX с координатами и данными всех заметок.</string>
     <string name="favorite_empty_place_name">Место</string>
@@ -2948,4 +2949,8 @@
     <string name="map_widget_intermediate_time">Промежуточное время</string>
     <string name="quick_action_edit_actions">Редактировать действие</string>
     <string name="error_notification_desc">Пожалуйста, пришлите скриншот этого уведомления на support@osmand.net</string>
+    <string name="coord_input_edit_point">Редактировать точку</string>
+    <string name="coord_input_add_point">Добавить точку</string>
+    <string name="coord_input_save_as_track">Сохранить как трек</string>
+    <string name="coord_input_save_as_track_descr">Добавлено вами точек - %1$s. Введите имя файла и нажмите «Сохранить».</string>
     </resources>

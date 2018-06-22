@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
 
     <string name="use_transparent_map_theme">Przezroczysty styl</string>
     <string name="native_library_not_supported">To urządzenie nie obsługuje biblioteki renderowania natywnego.</string>
@@ -400,7 +401,7 @@
     <string name="update_poi_error_local">Nie uaktualniono lokalnej listy UM</string>
     <string name="update_poi_error_loading">Nie pobrano danych z serwera</string>
     <string name="update_poi_no_offline_poi_index">Brak danych offline UM dla tego rejonu</string>
-    <string name="update_poi_is_not_available_for_zoom">Uaktualnianie UM jest niedostępne dla małych poziomów przybliżenia</string>
+    <string name="update_poi_is_not_available_for_zoom">Przybliż, żeby zaktualizować Użyteczne Miejsca</string>
     <string name="context_menu_item_update_poi">Uaktualnij użyteczne miejsce</string>
     <string name="context_menu_item_update_map_confirm">Uaktualnić dane lokalne przez Internet?</string>
     <string name="search_history_city">Miasto: {0}</string>
@@ -1932,7 +1933,7 @@ Długość %2$s</string>
     <string name="routing_attr_avoid_shuttle_train_name">Omijanie pociągów wahadłowych</string>
     <string name="routing_attr_avoid_shuttle_train_description">Omijanie pociągów wahadłowych transportujących auta</string>
     <string name="traffic_warning_hazard">Zagrożenie</string>
-    <string name="we_really_care_about_your_opinion">Zależy nam na opinii na temat programu i jest dla nas ważne, aby ją poznać.</string>
+    <string name="we_really_care_about_your_opinion">Zależy nam na na Twojej opinii i twoja odpowiedź jest dla nas ważna.</string>
     <string name="dahboard_options_dialog_title">Opcje kokpitu</string>
     <string name="shared_string_card_was_hidden">Ukryto kartę</string>
     <string name="shared_string_undo">Cofnij</string>
@@ -3077,4 +3078,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="shared_string_gpx_files">Pliki GPX</string>
     <string name="quick_action_edit_actions">Edycja działań</string>
     <string name="error_notification_desc">Prosimy o przesłanie zrzutów ekranu tego powiadomienia na support@osmand.net</string>
+    <string name="coord_input_edit_point">Edytuj punkt</string>
+    <string name="coord_input_add_point">Dodaj punkt</string>
+    <string name="coord_input_save_as_track_descr">Dodano %1$s punkty/ów. Wpisz nazwę pliku i naciśnij \"Zapisz\".</string>
     </resources>
