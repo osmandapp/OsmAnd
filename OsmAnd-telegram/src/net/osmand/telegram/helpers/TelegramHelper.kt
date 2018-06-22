@@ -314,21 +314,13 @@ class TelegramHelper private constructor() {
 		}
 	}
 
-	private fun requestChats(reload: Boolean = false) {
+	private fun requestChats(offsetOrder: Long = java.lang.Long.MAX_VALUE, offsetChatId: Long = 0, reload: Boolean = false) {
 		synchronized(chatList) {
 			if (reload) {
 				chatList.clear()
 				haveFullChatList = false
 			}
 			if (!haveFullChatList && CHATS_LIMIT > chatList.size) {
-				// have enough chats in the chat list or chat list is too small
-				var offsetOrder = java.lang.Long.MAX_VALUE
-				var offsetChatId: Long = 0
-				if (!chatList.isEmpty()) {
-					val last = chatList.last()
-					offsetOrder = last.order
-					offsetChatId = last.chatId
-				}
 				client?.send(TdApi.GetChats(offsetOrder, offsetChatId, CHATS_LIMIT - chatList.size)) { obj ->
 					when (obj.constructor) {
 						TdApi.Error.CONSTRUCTOR -> {
@@ -340,22 +332,33 @@ class TelegramHelper private constructor() {
 						TdApi.Chats.CONSTRUCTOR -> {
 							val chatIds = (obj as TdApi.Chats).chatIds
 							if (chatIds.isEmpty()) {
-								synchronized(chatList) {
-									haveFullChatList = true
+								chatsRead()
+							} else if (!chatList.isEmpty()) {
+								val last = chatList.last()
+								val nextOffsetChatId = last.chatId
+								if (nextOffsetChatId != offsetChatId) {
+									// chats had already been received through updates, let's retry request
+									requestChats(last.order, nextOffsetChatId)
+								} else {
+									chatsRead()
 								}
+							} else {
+								requestChats(java.lang.Long.MAX_VALUE, 0)
 							}
-							// chats had already been received through updates, let's retry request
-							requestChats()
 						}
 						else -> listener?.onTelegramError(-1, "Receive wrong response from TDLib: $obj")
 					}
 				}
-				return
 			}
 		}
-		updateChatTitles()
-		getChatRecentLocationMessages(chatTitles.keys)
-		listener?.onTelegramChatsRead()
+	}
+
+	private fun chatsRead() {
+		synchronized(chatList) {
+			haveFullChatList = true
+			getChatRecentLocationMessages(chatTitles.keys)
+			listener?.onTelegramChatsRead()
+		}
 	}
 
 	private fun getChatRecentLocationMessages(chatTitles: Set<String>) {
@@ -591,7 +594,7 @@ class TelegramHelper private constructor() {
 		if (wasAuthorized != haveAuthorization) {
 			needRefreshActiveLiveLocationMessages = true
 			if (haveAuthorization) {
-				requestChats(true)
+				requestChats(reload = true)
 			}
 		}
 		val newAuthState = getTelegramAuthorizationState()
