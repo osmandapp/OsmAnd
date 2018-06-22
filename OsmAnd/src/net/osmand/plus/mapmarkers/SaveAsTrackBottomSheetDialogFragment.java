@@ -31,7 +31,7 @@ import java.io.File;
 import java.util.Date;
 
 import static net.osmand.plus.helpers.ImportHelper.GPX_SUFFIX;
-import static net.osmand.plus.mapmarkers.CoordinateInputDialogFragment.ADDED_MARKERS_NUMBER_KEY;
+import static net.osmand.plus.mapmarkers.CoordinateInputDialogFragment.ADDED_POINTS_NUMBER_KEY;
 
 public class SaveAsTrackBottomSheetDialogFragment extends BottomSheetDialogFragment {
 
@@ -55,7 +55,7 @@ public class SaveAsTrackBottomSheetDialogFragment extends BottomSheetDialogFragm
 		if (args != null) {
 			isCoordInput = args.getBoolean(COORDINATE_INPUT_MODE_KEY);
 			if (isCoordInput) {
-				number = args.getInt(ADDED_MARKERS_NUMBER_KEY);
+				number = args.getInt(ADDED_POINTS_NUMBER_KEY);
 			}
 		}
 		portrait = AndroidUiHelper.isOrientationPortrait(getActivity());

@@ -21,7 +21,7 @@ import net.osmand.plus.UiUtilities.UpdateLocationViewCache;
 public class CoordinateInputAdapter extends RecyclerView.Adapter<MapMarkerItemViewHolder> {
 
 	public static final String ADAPTER_POSITION_KEY = "adapter_position_key";
-	private final GPXUtilities.GPXFile gpx;
+	private GPXUtilities.GPXFile gpx;
 
 	private OsmandApplication app;
 
@@ -63,7 +63,7 @@ public class CoordinateInputAdapter extends RecyclerView.Adapter<MapMarkerItemVi
 		GPXUtilities.WptPt wpt = getItem(position);
 
 		holder.iconDirection.setVisibility(View.VISIBLE);
-		holder.icon.setImageDrawable(getColoredIcon(R.drawable.ic_action_flag_dark, wpt.colourARGB));
+		holder.icon.setVisibility(View.GONE);
 		holder.mainLayout.setBackgroundColor(getResolvedColor(nightTheme ? R.color.ctx_menu_bg_dark : R.color.bg_color_light));
 		holder.title.setTextColor(getResolvedColor(nightTheme ? R.color.ctx_menu_title_color_dark : R.color.color_black));
 		holder.divider.setBackgroundColor(getResolvedColor(nightTheme ? R.color.route_info_divider_dark : R.color.dashboard_divider_light));
@@ -107,7 +107,11 @@ public class CoordinateInputAdapter extends RecyclerView.Adapter<MapMarkerItemVi
 			notifyDataSetChanged();
 		}
 	}
-
+	
+	public void setGpx(GPXUtilities.GPXFile gpx) {
+		this.gpx = gpx;
+	}
+	
 	private Drawable getColoredIcon(@DrawableRes int resId, @ColorRes int colorResId) {
 		return uiUtilities.getIcon(resId, colorResId);
 	}
