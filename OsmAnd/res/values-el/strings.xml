@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
     <string name="add_tag">Προσθήκη Ετικέτας</string>
     <string name="btn_advanced_mode">Λειτουργία για προχωρημένους…</string>
     <string name="poi_filter_parking">Στάθμευση</string>
@@ -923,7 +924,7 @@
 	<string name="poi_edit_title">Επεξεργασία ΣΕ</string>
 	<string name="poi_create_title">Δημιουργία ΣΕ</string>
 	<string name="poi_error_poi_not_found">Ο κόμβος δεν μπορεί να βρεθεί ή η υποδομή αποτελείται από πολλούς κόμβους, που δεν υποστηρίζεται ακόμα.</string>
-	<string name="poi_remove_confirm_template">Διαγραφή {0} (εισαγωγή σχολίου)?</string>
+	<string name="poi_remove_confirm_template">Διαγραφή {0} (σχολίου);</string>
 	<string name="poi_remove_title">Διαγραφή ΣΕ</string>
 	<string name="poi_remove_success">Το ΣΕ διαγράφτηκε</string>
 	<string name="poi_action_add">προσθήκη</string>
@@ -1872,7 +1873,7 @@
 	<string name="optional_point_name">Προαιρετικό όνομα σημείου</string>
     <string name="transport_nearby_routes_within">Κοντινές διαδρομές</string>
     <string name="transport_nearby_routes">Με</string>
-    <string name="enter_the_file_name">Εισάγετε το όνομα του αρχείου.</string>
+    <string name="enter_the_file_name">Πληκτρολογήστε το όνομα του αρχείου.</string>
     <string name="map_import_error">Σφάλμα εισαγωγής χάρτη</string>
     <string name="map_imported_successfully">Ο χάρτης εισήχθη</string>
     <string name="make_as_start_point">Κάντε αυτό το σημείο εκκίνησης</string>
@@ -3054,4 +3055,8 @@
     <string name="get_osmand_live">Εγγραφείτε στο OsmAnd Live για να ξεκλειδώσετε όλα τα χαρακτηριστικά: Ημερήσιες ενημερώσεις χαρτών με απεριόριστες λήψεις, όλα πληρωμένα και χωρίς πρόσθετα, βικιπαίδεια, βικιταξίδια και πολλά άλλα.</string>
     <string name="quick_action_edit_actions">Επεξεργασία ενεργειών</string>
     <string name="error_notification_desc">Παρακαλούμε, στείλτε στιγμιότυπο αυτής της ειδοποίησης στο support@osmand.net</string>
+    <string name="coord_input_edit_point">Επεξεργασία σημείου</string>
+    <string name="coord_input_add_point">Προσθήκη σημείου</string>
+    <string name="coord_input_save_as_track">Αποθήκευση ως ίχνος</string>
+    <string name="coord_input_save_as_track_descr">Προσθέσατε %1$s σημεία. Πληκτρολογήστε ένα όνομα αρχείου και πατήστε \"Αποθήκευση\".</string>
     </resources>

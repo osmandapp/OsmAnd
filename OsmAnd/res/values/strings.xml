@@ -13,7 +13,7 @@
     <string name="coord_input_edit_point">Edit point</string>
     <string name="coord_input_add_point">Add point</string>
     <string name="coord_input_save_as_track">Save as track</string>
-    <string name="coord_input_save_as_track_descr">You added %1$s points. Enter the name of the file and click save.</string>
+    <string name="coord_input_save_as_track_descr">You added %1$s points. Type a filename and tap \"Save\".</string>
     <string name="error_notification_desc">Please send screenshoot of this notification to support@osmand.net</string>
     <string name="quick_action_edit_actions">Edit actions</string>
     <string name="get_osmand_live">Get OsmAnd Live to unlock all features: Daily map updates with unlimited downloads, all paid and free plugins, Wikipedia, Wikivoyage and much more.</string>
@@ -121,7 +121,7 @@
 	<string name="optional_point_name">Optional point name</string>
     <string name="transport_nearby_routes_within">Nearby routes within</string>
     <string name="transport_nearby_routes">Within</string>
-    <string name="enter_the_file_name">Enter the filename.</string>
+    <string name="enter_the_file_name">Type the filename.</string>
     <string name="map_import_error">Map import error</string>
     <string name="map_imported_successfully">Map imported</string>
     <string name="make_as_start_point">Make this the start point</string>
@@ -1678,7 +1678,7 @@
     <string name="recording_default_name">Recording</string>
     <string name="map_widget_av_notes">Audio/video notes</string>
     <string name="map_widget_distancemeasurement">Distance measurement</string>
-    <string name="audionotes_location_not_defined">Location to associate with the note is not defined yet. \"Use location …\" to assign a note to the location specified.</string>
+    <string name="audionotes_location_not_defined">Location to associate with the note is not defined yet. \"Use location…\" to assign a note to the location specified.</string>
     <string name="map_widget_audionotes">Audio notes</string>
     <string name="index_srtm_parts">parts</string>
     <string name="index_srtm_ele">Contour lines</string>
@@ -2241,7 +2241,7 @@
     <string name="select_search_position">Origin:</string>
     <string name="context_menu_item_search">Search nearby</string>
     <string name="route_successfully_saved_at">Route saved as \'%1$s\'.</string>
-    <string name="filename_input">File name: </string>
+    <string name="filename_input">Filename: </string>
     <string name="file_with_name_already_exist">File with same name already exists.</string>
     <string name="local_index_upload_gpx_description">Upload GPX files to the OSM community, improving the maps.</string>
     <string name="local_index_items_uploaded">%1$d of %2$d item(s) uploaded.</string>
@@ -2657,7 +2657,7 @@
     <string name="poi_edit_title">Edit POI</string>
     <string name="poi_create_title">Create POI</string>
     <string name="poi_error_poi_not_found">Node cannot be found, or amenity consists of several nodes, which is not yet supported.</string>
-    <string name="poi_remove_confirm_template">Delete {0} (enter comment)?</string>
+    <string name="poi_remove_confirm_template">Delete {0} (comment)?</string>
     <string name="poi_remove_title">Delete POI</string>
     <string name="poi_remove_success">POI deleted</string>
     <string name="poi_action_add">add</string>

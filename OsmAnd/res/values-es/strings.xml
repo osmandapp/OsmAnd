@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
 
     <string name="layer_map_appearance">Configurar pantalla</string>
     <string name="show_lanes">Carriles</string>
@@ -51,7 +52,7 @@
     <string name="index_name_tts_voice">Voces TTS (sintetizadas, preferido)</string>
     <string name="amenity_type_osmwiki">Wikipedia (sin conexión)</string>
     <string name="amenity_type_user_defined">Definido por el usuario</string>
-    <string name="fav_export_confirmation">Ya existe un archivo con los favoritos exportados previamente. ¿Quiere sustituirlo?</string>
+    <string name="fav_export_confirmation">Ya existe un archivo con los Favoritos exportados previamente. ¿Quiere sustituirlo?</string>
     <string name="profile_settings">Ajustes de perfiles específicos</string>
     <string name="settings_preset">Perfil predefinido</string>
     <string name="settings_preset_descr">La vista del mapa y los ajustes de navegación se recuerdan por el perfil usado. Define tu perfil predefinido aquí.</string>
@@ -125,7 +126,7 @@
     <string name="show_more_map_detail">Mostrar más detalle del mapa</string>
     <string name="show_more_map_detail_descr">Muestra detalles del mapa vectorial (carreteras, etc.) a niveles inferiores de zoom.</string>
     <string name="favourites_delete_multiple_succesful">Puntos favoritos borrados.</string>
-    <string name="favorite_delete_multiple">¿Borrar %1$d favoritos y %2$d grupos de favoritos?</string>
+    <string name="favorite_delete_multiple">¿Borrar %1$d Favoritos y %2$d grupos de Favoritos?</string>
     <string name="favorite_home_category">Inicio</string>
     <string name="favorite_friends_category">Amigos</string>
     <string name="favorite_places_category">Sitios</string>
@@ -272,7 +273,7 @@
 \nNavegación cambiada temporalmente al servicio en línea CloudMade.</string>
     <string name="specified_dir_doesnt_exist">No se puede encontrar la carpeta indicada.</string>
     <string name="application_dir">Carpeta de almacenamiento de datos</string>
-    <string name="osmand_net_previously_installed">Todos los datos sin conexión en la versión vieja de OsmAnd son compatibles con la nueva versión, pero los puntos favoritos deben exportarse desde la versión vieja y luego, importarse en la nueva.</string>
+    <string name="osmand_net_previously_installed">Todos los datos sin conexión en la versión vieja de OsmAnd son compatibles con la nueva versión, pero los puntos Favoritos deben exportarse desde la versión vieja y luego, importarse en la nueva.</string>
     <string name="build_installed">Compilación {0} instalada ({1}).</string>
     <string name="downloading_build">Descargando compilación…</string>
     <string name="install_selected_build">¿Instalar OsmAnd - {0} de {1} {2} MB ?</string>
@@ -338,9 +339,9 @@
     <string name="rotate_map_to_bearing">Orientación del mapa</string>
     <string name="show_route">Detalle de la ruta</string>
     <string name="fav_imported_sucessfully">Favoritos importados</string>
-    <string name="fav_file_to_load_not_found">Archivo GPX de favoritos, no encontrado en {0}</string>
+    <string name="fav_file_to_load_not_found">Archivo GPX de Favoritos, no encontrado en {0}</string>
     <string name="fav_saved_sucessfully">Favoritos guardados en {0}</string>
-    <string name="no_fav_to_save">Sin puntos favoritos que guardar</string>
+    <string name="no_fav_to_save">Sin puntos Favoritos que guardar</string>
     <string name="shared_string_import">Importar</string>
     <string name="error_occurred_loading_gpx">No se pudieron cargar los datos GPX</string>
     <string name="send_report">Enviar informe</string>
@@ -465,7 +466,7 @@
     <string name="list_index_files_was_not_loaded">No se pudo obtener la lista de regiones desde https://osmand.net.</string>
     <string name="select_index_file_to_download">Nada encontrado. Si no encuentra su región, puede hacerla usted mismo (Ver https://osmand.net).</string>
     <string name="fav_points_edited">Punto favorito editado</string>
-    <string name="fav_points_not_exist">Sin puntos favoritos</string>
+    <string name="fav_points_not_exist">Sin puntos Favoritos</string>
     <string name="update_existing">Reemplazar</string>
     <string name="only_show">Mostrar ruta</string>
     <string name="follow">Seguir navegación</string>
@@ -579,12 +580,12 @@
     <string name="shared_string_apply">Aplicar</string>
     <string name="shared_string_add">Añadir</string>
     <string name="shared_string_no">No</string>
-    <string name="add_favorite_dialog_top_text">Ingresa nombre de favorito</string>
+    <string name="add_favorite_dialog_top_text">Ingresa nombre del Favorito</string>
     <string name="add_favorite_dialog_default_favourite_name">Favorito</string>
     <string name="add_favorite_dialog_favourite_added_template">Punto favorito «{0}» añadido.</string>
-    <string name="favourites_context_menu_edit">Editar favorito</string>
-    <string name="favourites_context_menu_delete">Borrar favorito</string>
-    <string name="favourites_remove_dialog_msg">¿Borrar el favorito «%s»?</string>
+    <string name="favourites_context_menu_edit">Editar Favorito</string>
+    <string name="favourites_context_menu_delete">Borrar Favorito</string>
+    <string name="favourites_remove_dialog_msg">¿Borrar el Favorito «%s»?</string>
     <string name="favourites_remove_dialog_success">Punto favorito {0} borrado.</string>
     <string name="osb_comment_dialog_message">Mensaje</string>
     <string name="osb_comment_dialog_author">Nombre del autor</string>
@@ -593,7 +594,7 @@
     <string name="poi_edit_title">Editar PDI</string>
     <string name="poi_create_title">Crear PDI</string>
     <string name="poi_error_poi_not_found">No se encontró el nodo, o el PDI se compone de varios nodos, lo cuál todavía no está soportado.</string>
-    <string name="poi_remove_confirm_template">¿Borrar {0} (añadir comentario)?</string>
+    <string name="poi_remove_confirm_template">¿Borrar {0} (comentario)?</string>
     <string name="poi_remove_title">Borrar PDI</string>
     <string name="shared_string_delete">Borrar</string>
     <string name="poi_remove_success">PDI borrado</string>
@@ -710,7 +711,7 @@
     <string name="address_search_desc">Buscar dirección</string>
     <string name="navpoint_search_desc">Coordenadas</string>
     <string name="transport_search_desc">Buscar transporte público</string>
-    <string name="favourites_search_desc">Una forma de buscar favoritos</string>
+    <string name="favourites_search_desc">Una forma de buscar Favoritos</string>
     <string name="rendering_attr_noPolygons_description">Hacer todas las características del terreno transparentes en el mapa.</string>
     <string name="rendering_attr_noPolygons_name">Polígonos</string>
     <string name="rendering_attr_appMode_name">Modo de dibujo</string>
@@ -803,14 +804,14 @@
     <string name="map_widget_renderer">Estilo del mapa</string>
     <string name="osmand_short_description_80_chars">Visor y navegador móvil global de mapas OSM con y sin conexión</string>
     <string name="osmand_long_description_1000_chars">"OsmAnd (OSM Automated Navigation Directions, y en español, Guía de Navegación Automatizada de OSM) 
-\n 
+\n
 \nOsmAnd es un software de navegación de código abierto con acceso a una amplia variedad de datos globales de OpenStreetMap (OSM). Todos los datos del mapa (vectores y teselas) pueden ser almacenados en la memoria del teléfono para su uso sin conexión. También ofrece funcionalidades de rutas con y sin conexión, incluyendo indicaciones giro-a-giro por voz. 
-\n 
+\n
 \n Algunas de las funciones fundamentales: 
 \n - Completa funcionalidad sin conexión (almacena los mapas vectoriales o teselas descargados en la memoria del dispositivo) 
 \n - Mapas vectoriales compactos disponibles de todo el planeta 
 \n - Descarga de mapas por país o región directamente desde la aplicación 
-\n - Posibilidad de superponer varias capas de mapa, como GPX o rutas de navegación, Puntos de Interés (PDI), favoritos, curvas de nivel, paradas de transporte público, mapas adicionales con transparencia personalizable 
+\n - Posibilidad de superponer varias capas de mapa, como GPX o rutas de navegación, Puntos de Interés (PDI), Favoritos, curvas de nivel, paradas de transporte público, mapas adicionales con transparencia personalizable 
 \n - Búsqueda sin conexión de direcciones y sitios (PDI) 
 \n - Navegación sin conexión para distancias de rango medio 
 \n - Modos de automóvil, bicicleta y peatón con opcional: 
@@ -818,44 +819,30 @@
 \n  - Zoom del mapa según la velocidad 
 \n  - Alineación del mapa, según la brújula o dirección del movimiento 
 \n  - Indicación de carriles, visualización de límites de velocidad, voces grabadas y sintetizadas 
-\n 
+\n
 \n Limitaciones de la versión gratuita de OsmAnd: 
 \n - Limitado número de mapas descargados 
 \n - Sin acceso a descargas de los PDI de Wikipedia. 
-\n 
+\n
 \n Los PDI de OsmAnd están siendo desarrollados activamente. Nuestro proyecto y su continuo progreso, se basa en contribuciones económicas para desarrollar y probar nuevas funcionalidades. Por favor, considere comprar OsmAnd+, financiar nuevas características o hacer una donación general en https://osmand.net."</string>
     <string name="osmand_plus_short_description_80_chars">Visor y navegador móvil global de mapas OSM con y sin conexión</string>
     <string name="osmand_plus_long_description_1000_chars">"OsmAnd+ (OSM Automated Navigation Directions, y en español, Guía de Navegación Automatizada de OSM) 
 \n
-\n 
 \nOsmAnd+ es un software de navegación de código abierto con acceso a una amplia variedad de datos globales de OpenStreetMap (OSM). Todos los datos del mapa (vectores y teselas), pueden ser almacenados en la memoria del teléfono para su uso sin conexión. Ofrece funcionalidades de rutas con y sin conexión, incluyendo guía de giro-a-giro por voz. 
 \n
-\n 
 \n OsmAnd+ es la versión de pago de la aplicación, comprándola das soporte al proyecto, financias el desarrollo de nuevas funciones, y recibes las últimas actualizaciones. 
 \n
-\n 
 \nAlgunas de las características fundamentales: 
-\n
 \n - Completa funcionalidad sin conexión (guarda los mapas vectoriales o teselas descargados en el almacenamiento del dispositivo) 
-\n
 \n - Mapas mundiales vectoriales compactos disponibles 
-\n
 \n - Descarga ilimitada de mapas de países o regiones directamente desde la aplicación 
-\n
-\n - Posibilidad de superponer varias capas de mapa, como GPX o rutas de navegación, Puntos de Interés, favoritos, curvas de nivel, paradas de transporte público, mapas adicionales con transparencia personalizable 
-\n
+\n - Posibilidad de superponer varias capas de mapa, como GPX o rutas de navegación, Puntos de Interés, Favoritos, curvas de nivel, paradas de transporte público, mapas adicionales con transparencia personalizable 
 \n - Búsqueda sin conexión de direcciones y sitios (PDI) 
-\n
 \n - Rutas sin conexión para distancias de rango medio 
-\n
 \n - Modos de automóvil, bicicleta y peatón con opcional: 
-\n
 \n  - Cambio automático de vista día/noche 
-\n
 \n  - Zoom del mapa según la velocidad 
-\n
 \n  - Alineación del mapa, según brújula o dirección del movimiento 
-\n
 \n  - Indicación de carriles, mostrar límites de velocidad, voces grabadas y sintetizadas"</string>
     <string name="avoid_motorway">Evitar autopistas</string>
     <string name="snap_to_road_descr">Ajusta la ubicación a las carreteras durante la navegación.</string>
@@ -999,7 +986,7 @@
     <string name="choose_osmand_theme">Tema</string>
     <string name="accessibility_options">Opciones de accesibilidad</string>
     <string name="select_address_activity">Seleccionar dirección</string>
-    <string name="favourites_list_activity">Seleccionar favorito</string>
+    <string name="favourites_list_activity">Seleccionar Favorito</string>
     <string name="local_openstreetmap_act_title">Cambios OSM</string>
     <string name="shared_string_more_actions">Más acciones</string>
     <string name="use_kalman_filter_compass_descr">Reduce el ruido en las lecturas de la brújula pero añade inercia.</string>
@@ -1123,7 +1110,7 @@
     <string name="amenity_type_seamark">Náutica</string>
     <string name="app_modes_choose">Perfiles de aplicación</string>
     <string name="map_widget_map_rendering">Renderizado del mapa</string>
-    <string name="app_modes_choose_descr">Elige los perfiles de uso visibles en la aplicación.</string>
+    <string name="app_modes_choose_descr">Elige los perfiles visibles en la aplicación.</string>
     <string name="guidance_preferences_descr">Preferencias de navegación</string>
     <string name="routing_preferences_descr">Preferencias de navegación</string>
     <string name="speech_rate_descr">Indica la velocidad en el habla sintetizada (TTS).</string>
@@ -1341,7 +1328,7 @@
     <string name="shared_string_waypoint">Punto de ruta</string>
     <string name="select_destination_and_intermediate_points">Marque los destinos</string>
     <string name="layer_amenity_label">Nombres de PDI superpuestos</string>
-    <string name="save_as_favorites_points">Guardar como grupo de favoritos</string>
+    <string name="save_as_favorites_points">Guardar como grupo de Favoritos</string>
     <string name="show_zoom_buttons_navigation_descr">Muestra los botones de zoom durante la navegación.</string>
     <string name="show_zoom_buttons_navigation">Mostrar botones de zoom</string>
     <string name="route_descr_destination">Destino</string>
@@ -1454,9 +1441,9 @@
     <string name="text_size_descr">Define el tamaño del texto en el mapa.</string>
     <string name="text_size">Tamaño del texto</string>
     <string name="fav_point_dublicate">Nombre del punto favorito duplicado</string>
-    <string name="fav_point_dublicate_message">Nombre del favorito en uso, cambiado a «%1$s» para evitar duplicación.</string>
+    <string name="fav_point_dublicate_message">Nombre del Favorito en uso, cambiado a «%1$s» para evitar duplicación.</string>
     <string name="print_route">Imprimir ruta</string>
-    <string name="fav_point_emoticons_message">Nombre del punto favorito cambiado a «%1$s», para facilitar el guardado de la cadena con emoticonos a un archivo.</string>
+    <string name="fav_point_emoticons_message">Nombre del Favorito cambiado a «%1$s», para facilitar el guardado de la cadena con emoticonos a un archivo.</string>
     <string name="speed_limit_exceed">Tolerancia del límite de velocidad</string>
     <string name="speed_limit_exceed_message">Seleccione el margen de tolerancia sobre el límite de velocidad, con el cual recibirá un aviso de voz.</string>
     
@@ -1667,7 +1654,7 @@
     <string name="storage_directory_default">Memoria interna</string>
     <string name="storage_directory">Almacenamiento del mapa</string>
     <string name="shared_string_copy">Copiar</string>
-    <string name="application_dir_change_warning3">¿Copiar los archivos de datos al nuevo destino?</string>
+    <string name="application_dir_change_warning3">¿Copiar los archivos de datos de OsmAnd al nuevo destino?</string>
     <string name="rendering_attr_hideHouseNumbers_name">Números de casa</string>
     <string name="routing_attr_avoid_borders_description">Evita cruzar las fronteras nacionales</string>
     <string name="routing_attr_height_name">Límite de altura</string>
@@ -1816,7 +1803,7 @@
     <string name="shared_string_navigation">Navegación</string>
     <string name="osmand_running_in_background">Ejecutar en segundo plano</string>
     <string name="favourites_edit_dialog_title">Información del favorito</string>
-    <string name="favourites_context_menu_add">Añadir favorito</string>
+    <string name="favourites_context_menu_add">Añadir Favorito</string>
     <string name="roads">Caminos</string>
     <string name="favorite_category_add_new">Añadir nuevo</string>
     <string name="favorite_category_select">Elegir categoría</string>
@@ -1834,7 +1821,7 @@
     <string name="later">Luego</string>
     <string name="get_full_version">Versión completa</string>
     <string name="downloads">Descargas</string>
-    <string name="favorite_category_dublicate_message">Utiliza un nombre de categoría que no exista ya.</string>
+    <string name="favorite_category_dublicate_message">Utilizar un nombre de categoría no existente.</string>
     <string name="favorite_category_name">Nombre de categoría</string>
     <string name="favorite_category_add_new_title">Añadir nueva categoría</string>
     <string name="confirm_download_roadmaps">El mapa de sólo carreteras es innecesario, ya que tiene el mapa estándar (completo). ¿Descargar de todos modos?</string>
@@ -2038,7 +2025,7 @@
     <string name="osm_editors_ranking">Clasificación de editores OSM</string>
     <string name="osm_live_subscription">Suscripción de OsmAnd Live</string>
     <string name="osm_live_subscribe_btn">Suscribirse</string>
-    <string name="osm_live_email_desc">Para proporcionarte información sobre las contribuciones.</string>
+    <string name="osm_live_email_desc">Necesario para proporcionar información sobre las contribuciones.</string>
     <string name="osm_live_user_public_name">Nombre público</string>
     <string name="osm_live_hide_user_name">Ocultar mi nombre en los informes</string>
     <string name="osm_live_support_region">Región soportada</string>
@@ -2146,7 +2133,7 @@
     <string name="clear_tile_data">Limpiar todas las teselas</string>
     <string name="routing_attr_short_way_name">Ruta de bajo consumo (corta)</string>
     <string name="routing_attr_short_way_description">Usa la ruta de menor consumo en combustible (usualmente la más corta).</string>
-    <string name="replace_favorite_confirmation">¿Reemplazar el favorito «%1$s»?</string>
+    <string name="replace_favorite_confirmation">¿Reemplazar el Favorito «%1$s»?</string>
     <string name="rendering_attr_hideOverground_name">Objetos en superficie</string>
     <string name="shared_string_change">Cambiar</string>
     <string name="get_started">Empezar</string>
@@ -2163,7 +2150,7 @@
     <string name="storage_place_description">Almacenamiento de datos de OsmAnd (para mapas, archivos GPX, etc.): %1$s.</string>
     <string name="give_permission">Conceder permiso</string>
     <string name="allow_access_location">Permitir el acceso a la ubicación</string>
-    <string name="first_usage_greeting">Obtenga direcciones y descubre lugares nuevos sin una conexión a Internet</string>
+    <string name="first_usage_greeting">Obtenga direcciones y descubra lugares nuevos, sin una conexión a Internet</string>
     <string name="search_my_location">Encontrar mi ubicación</string>
     <string name="no_update_info_desc">Omite la búsqueda de nuevas versiones o descuentos relacionados con OsmAnd.</string>
     <string name="no_update_info">Ocultar nuevas versiones</string>
@@ -2174,7 +2161,7 @@
     <string name="get_it">Obtener</string>
     <string name="get_for">Obtener por %1$s</string>
     <string name="get_for_month">Obtener por %1$s al mes</string>
-    <string name="osm_live_banner_desc">Obtén descargas ilimitada de mapas y más actualizaciones de mapas por mes: Cada semana, día u hora.</string>
+    <string name="osm_live_banner_desc">Obtén descargas ilimitada de mapas y más actualizaciones de mapas por mes: cada semana, día u hora.</string>
     <string name="osmand_plus_banner_desc">Descargas ilimitadas de mapas, actualizaciones y complemento de Wikipedia.</string>
     <string name="si_mi_meters">Millas/metros</string>
     <string name="driving_region_australia">Australia</string>
@@ -2265,11 +2252,11 @@
     <string name="quick_action_add_parking">Añadir lugar de estacionamiento</string>
     <string name="quick_action_new_action">Añadir acción</string>
     <string name="quick_action_edit_action">Editar acción</string>
-    <string name="quick_action_add_favorite">Añadir favorito</string>
+    <string name="quick_action_add_favorite">Añadir Favorito</string>
     <string name="dialog_add_action_title">Añadir acción</string>
     <string name="quick_actions_delete">Borrar acción</string>
     <string name="quick_actions_delete_text">¿Borrar la acción «%s»?</string>
-    <string name="quick_favorites_show_favorites_dialog">Mostrar diálogo de favoritos</string>
+    <string name="quick_favorites_show_favorites_dialog">Mostrar diálogo de Favoritos</string>
     <string name="quick_favorites_name_preset">Nombre predefinido</string>
     <string name="quick_action_add_marker_descr">Este botón de acción, añade un marcador en el centro de la pantalla.</string>
     <string name="quick_action_add_gpx_descr">Este botón de acción, añade un punto de ruta GPX en el centro de la pantalla.</string>
@@ -2285,11 +2272,11 @@
     <string name="favorite_empty_place_name">Lugar</string>
     <string name="quick_action_duplicates">El nombre de la acción rápida ya existe, cambiado a «%1$s» para evitar duplicados.</string>
     <string name="quick_action_duplicate">Nombre de la acción rápida duplicado</string>
-    <string name="quick_action_showhide_favorites_descr">Este botón de acción, muestra u oculta los favoritos en el mapa.</string>
+    <string name="quick_action_showhide_favorites_descr">Este botón de acción, muestra u oculta los Favoritos en el mapa.</string>
     <string name="quick_action_showhide_poi_descr">Este botón de acción, muestra u oculta los PDI en el mapa.</string>
-    <string name="quick_action_showhide_favorites_title">Alternar vista de favoritos</string>
-    <string name="quick_action_favorites_show">Mostrar favoritos</string>
-    <string name="quick_action_favorites_hide">Ocultar favoritos</string>
+    <string name="quick_action_showhide_favorites_title">Alternar vista de Favoritos</string>
+    <string name="quick_action_favorites_show">Mostrar Favoritos</string>
+    <string name="quick_action_favorites_hide">Ocultar Favoritos</string>
     <string name="quick_action_showhide_poi_title">Alternar vista de PDI</string>
     <string name="quick_action_poi_show">Mostrar %1$s</string>
     <string name="quick_action_poi_hide">Ocultar %1$s</string>
@@ -2300,7 +2287,7 @@
     <string name="quick_action_fav_name_descr">Dejar el campo vacío para usar la dirección o el nombre del lugar.</string>
     <string name="quick_action_bug_descr">Este mensaje se incluye en el campo del comentario.</string>
     <string name="quick_action_bug_message">Mensaje</string>
-    <string name="quick_action_category_descr">Selecciona la categoría en la que deseas guardar el favorito.</string>
+    <string name="quick_action_category_descr">Selecciona la categoría en la que deseas guardar el Favorito.</string>
     <string name="quick_action_gpx_category_descr">Selecciona una categoría opcional.</string>
     <string name="quick_action_poi_list">Lista de PDI</string>
     <string name="quick_action_sh_poi_descr">Añade una o más categorías de PDI a mostrar en el mapa.</string>
@@ -2365,8 +2352,8 @@
     <string name="shared_string_time_moving">Tiempo moviéndose</string>
     <string name="shared_string_time_span">Duración</string>
     <string name="shared_string_max">Máx</string>
-    <string name="shared_string_start_time">Salida</string>
-    <string name="shared_string_end_time">Llegada</string>
+    <string name="shared_string_start_time">Hora de inicio</string>
+    <string name="shared_string_end_time">Hora de fin</string>
     <string name="shared_string_color">Color</string>
     <string name="routing_attr_relief_smoothness_factor_hills_name">Empinado</string>
     <string name="routing_attr_relief_smoothness_factor_plains_name">Poco empinado</string>
@@ -2374,7 +2361,7 @@
     <string name="routing_attr_driving_style_speed_name">Rutas más cortas</string>
     <string name="routing_attr_driving_style_balance_name">Equilibrado</string>
     <string name="routing_attr_driving_style_safety_name">Preferir caminos secundarios</string>
-    <string name="relief_smoothness_factor_descr">Terreno preferido: Llano o empinado.</string>
+    <string name="relief_smoothness_factor_descr">Terreno preferido: llano o empinado.</string>
     <string name="lang_ber">Bereber (amazig)</string>
     <string name="do_not_send_anonymous_app_usage">No enviar estadísticas de uso anónimas de la aplicación</string>
     <string name="do_not_send_anonymous_app_usage_desc">OsmAnd recopila información acerca de las secciones que abres en la aplicación. No recopilamos datos de ubicación, ingresos en la aplicación o datos relacionados con las áreas que visualizas, buscas o descargas.</string>
@@ -2565,15 +2552,15 @@
     <string name="quick_action_osmbugs_hide">Ocultar notas de OSM</string>
     <string name="quick_action_showhide_osmbugs_descr">Este botón de acción, muestra u oculta las notas de OSM en el mapa.</string>
     <string name="sorted_by_distance">Ordenados por distancia</string>
-    <string name="search_favorites">Buscar favoritos</string>
+    <string name="search_favorites">Buscar Favoritos</string>
     <string name="hide_from_zoom_level">Ocultar desde el nivel de zoom</string>
     <string name="restart_search">Reiniciar búsqueda</string>
     <string name="increase_search_radius">Aumentar radio de búsqueda</string>
     <string name="nothing_found">Nada encontrado</string>
     <string name="nothing_found_descr">Modifica la consulta de búsqueda o aumenta el radio de búsqueda.</string>
-    <string name="hillshade_menu_download_descr">Descargar el mapa de «Superposición de sombreado» para esta región.</string>
-    <string name="hillshade_purchase_header">Instala el complemento «Curvas de nivel» para mostrarlas en el mapa</string>
-    <string name="private_access_routing_req">El destino se ubica en un área de acceso privado. ¿Acceder a los caminos privados para este viaje?</string>
+    <string name="hillshade_menu_download_descr">Para ver el sombreado del relieve en el mapa, debes descargar la superposición del sombreado de esta región.</string>
+    <string name="hillshade_purchase_header">Para ver el sombreado del relieve en el mapa, debes comprar e instalar el complemento «Curvas de nivel»</string>
+    <string name="private_access_routing_req">El destino se ubica en un área de acceso privado. ¿Permitir el acceso a los caminos privados para este viaje?</string>
     <string name="mapillary_widget">Control de Mapillary</string>
     <string name="mapillary_descr">Fotos a nivel de calle en línea para todos. Descubre lugares, colabora, captura el mundo.</string>
     <string name="mapillary">Mapillary</string>
@@ -2590,7 +2577,7 @@
     <string name="mapillary_image">Imagen de Mapillary</string>
     <string name="shared_string_permissions">Permisos</string>
     <string name="import_gpx_failed_descr">OsmAnd no puede importar el archivo. Comprueba si OsmAnd tiene permiso para leer archivos desde esta ubicación.</string>
-    <string name="distance_moving">Distancia corregida</string>
+    <string name="distance_moving">Distancia recorrida</string>
     <string name="store_tracks_in_monthly_directories">Guardar las trazas grabadas en carpetas mensuales</string>
     <string name="store_tracks_in_monthly_directories_descrp">Guarda las trazas grabadas en subcarpetas por mes de grabación (como 2018-01).</string>
     <string name="shared_string_reset">Restablecer</string>
@@ -2656,7 +2643,7 @@
     <string name="empty_state_my_tracks">Añadir archivos GPX</string>
     <string name="empty_state_my_tracks_desc">Importa archivos GPX o graba pistas.</string>
     <string name="empty_state_favourites">Añadir favoritos</string>
-    <string name="empty_state_favourites_desc">Importa favoritos, o añádelos marcando puntos en el mapa.</string>
+    <string name="empty_state_favourites_desc">Importa Favoritos, o añádelos marcando puntos en el mapa.</string>
     <string name="import_track">Importar archivo GPX</string>
     <string name="import_track_desc">El archivo «%1$s» no contiene puntos de ruta, ¿Quieres importarlo como una traza?</string>
     <string name="move_point">Mover punto</string>
@@ -2733,9 +2720,9 @@
     <string name="tap_on_map_to_hide_interface">Modo de pantalla completa</string>
     
     <string name="mark_passed">Descartar</string>
-    <string name="import_gpx_file_description">puede importarse como favorito, o como archivo GPX.</string>
+    <string name="import_gpx_file_description">puede importarse como Favorito, o como un archivo GPX.</string>
     <string name="import_as_gpx">Importar como archivo GPX</string>
-    <string name="import_as_favorites">Importar como favorito</string>
+    <string name="import_as_favorites">Importar como Favorito</string>
     <string name="import_file">Importar archivo</string>
 	<string name="digits_quantity">Número de dígitos decimales</string>
     <string name="shared_string_right">Derecha</string>
@@ -2748,22 +2735,22 @@
     <string name="rename_marker">Renombrar marcador</string>
     <string name="appearance_on_the_map">Apariencia en el mapa</string>
     <string name="add_track_to_markers_descr">Selecciona una pista para añadir sus puntos de referencia a los marcadores.</string>
-    <string name="add_favourites_group_to_markers_descr">Selecciona una categoría de favoritos para añadir a los marcadores.</string>
+    <string name="add_favourites_group_to_markers_descr">Selecciona una categoría de Favoritos para añadir a los marcadores.</string>
     <string name="shared_string_gpx_waypoints">Puntos de referencia de la traza</string>
     <string name="favourites_group">Categoría de favoritos</string>
     <string name="add_group">Añadir un grupo</string>
-    <string name="add_group_descr">Importa grupos desde favoritos o puntos de ruta GPX.</string>
+    <string name="add_group_descr">Importar grupos desde Favoritos o puntos de ruta GPX.</string>
     <string name="empty_state_markers_active">¡Crea marcadores del mapa!</string>
     <string name="empty_state_markers_active_desc">Pulsa en «Sitios» y luego pulsa la bandera del marcador.</string>
     <string name="empty_state_markers_groups">Importar grupos</string>
-    <string name="empty_state_markers_groups_desc">Importa grupos de favoritos o puntos de ruta como marcadores.</string>
+    <string name="empty_state_markers_groups_desc">Importar grupos de Favoritos o puntos de ruta como marcadores.</string>
     <string name="empty_state_markers_history_desc">Los marcadores descartados aparecerán en esta pantalla.</string>
     <string name="shared_string_two">Dos</string>
     <string name="shared_string_one">Uno</string>
     <string name="show_guide_line_descr">Muestra líneas direccionales desde su ubicación hasta los marcadores activos.</string>
     <string name="show_arrows_descr">Muestra una o dos flechas indicando la dirección a los marcadores activos.</string>
     <string name="distance_indication_descr">Elige cómo mostrar la distancia a los marcadores activos.</string>
-    <string name="active_markers_descr">Elige el número de marcadores activos a mostrar.</string>
+    <string name="active_markers_descr">Elige cuantos indicadores de dirección mostrar.</string>
     <string name="shared_string_more_without_dots">Más</string>
     <string name="looking_for_tracks_with_waypoints">Búsqueda de trazas con puntos de referencia</string>
     <string name="release_3_0">• Nuevo: Soporte para guías de viaje globales sin conexión a Internet Las ubicaciones de referencia están vinculadas al mapa. Datos iniciales de Wikivoyage.
@@ -2840,7 +2827,7 @@
     <string name="make_as_start_point">Reemplazar punto de inicio</string>
     <string name="transport_nearby_routes_within">Rutas a menos de</string>
     <string name="transport_nearby_routes">A menos de</string>
-    <string name="enter_the_file_name">Ingresar nombre del archivo.</string>
+    <string name="enter_the_file_name">Escribe el nombre del archivo.</string>
     <string name="map_import_error">Error de importación del mapa</string>
     <string name="map_imported_successfully">Mapa importado</string>
     <string name="shared_string_total">Total</string>
@@ -2851,8 +2838,8 @@
     <string name="select_waypoints_category_description">Añadir todos los puntos de ruta de la traza o seleccionar categorías separadas.</string>
     <string name="group_deleted">Grupo borrado</string>
     <string name="rendering_attr_whiteWaterSports_name">Deportes de aguas bravas</string>
-    <string name="distance_farthest">Distancia: Más lejos primero</string>
-    <string name="distance_nearest">Distancia: Más cerca primero</string>
+    <string name="distance_farthest">Distancia: más lejos primero</string>
+    <string name="distance_nearest">Distancia: más cerca primero</string>
     <string name="enter_lon">Ingresar longitud</string>
     <string name="enter_lat">Ingresar latitud</string>
     <string name="enter_lat_and_lon">Ingresar latitud y longitud</string>
@@ -2874,7 +2861,7 @@
     <string name="download_maps_travel">Guías turísticas</string>
     <string name="shared_string_wikivoyage">Wikiviajes</string>
     <string name="article_removed">Artículo borrado</string>
-    <string name="wikivoyage_search_hint">Buscar: País, ciudad, provincia</string>
+    <string name="wikivoyage_search_hint">Buscar: país, ciudad, provincia</string>
     <string name="shared_string_read">Leer</string>
     <string name="saved_articles">Artículos favoritos</string>
     <string name="shared_string_explore">Explorar</string>
@@ -2895,8 +2882,8 @@
     <string name="purchase_dialog_subtitle">Elegir el elemento adecuado:</string>
     <string name="wikivoyage_travel_guide_descr">Las guías de los lugares más interesantes del planeta, dentro de OsmAnd y sin conexión a Internet.</string>
     <string name="wikivoyage_travel_guide">Guías de viaje</string>
-    <string name="monthly_map_updates">Actualizaciones del mapa: <b>Cada mes</b></string>
-    <string name="daily_map_updates">Actualizaciones del mapa: <b>Cada hora</b></string>
+    <string name="monthly_map_updates">Actualizaciones del mapa: <b>cada mes</b></string>
+    <string name="daily_map_updates">Actualizaciones del mapa: <b>cada hora</b></string>
     <string name="in_app_purchase">Compras en la aplicación</string>
     <string name="in_app_purchase_desc">Único pago</string>
     <string name="in_app_purchase_desc_ex">Una vez comprado, estará permanentemente disponible para ti.</string>
@@ -2962,4 +2949,10 @@
     <string name="unirs_render_descr">Modificación del estilo estándar para aumentar el contraste de los caminos peatonales y ciclistas. Utiliza los colores heredados de Mapnik.</string>
     <string name="shared_string_gpx_files">Archivos GPX</string>
     <string name="get_osmand_live">Consigue OsmAnd Live para desbloquear todas las funciones: Actualizaciones diarias de mapas con descargas ilimitadas, todos los complemento gratuitos y de pago, Wikipedia, Wikivoyage y mucho más.</string>
+    <string name="coord_input_edit_point">Editar punto</string>
+    <string name="coord_input_add_point">Añadir punto</string>
+    <string name="coord_input_save_as_track">Guardar como traza</string>
+    <string name="coord_input_save_as_track_descr">Has añadido %1$s puntos. Escribe un nombre de archivo y pulsa en «Guardar».</string>
+    <string name="error_notification_desc">Por favor, envíe la captura de pantalla de esta notificación a support@osmand.net</string>
+    <string name="quick_action_edit_actions">Editar acciones</string>
     </resources>
