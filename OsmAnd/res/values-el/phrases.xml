@@ -2352,7 +2352,7 @@
 	<string name="poi_social_facility_for_drug_addicted">Τοξικομανείς</string>
 	<string name="poi_social_facility_for_unemployed">Άνεργοι</string>
 	<string name="poi_social_facility_for_diseased">Ασθενείς</string>
-	<string name="poi_social_facility_for_child_juvenile">Παιδιά, νέοι</string>
+	<string name="poi_social_facility_for_child_juvenile">Νεαρά παιδιά</string>
 
 	<string name="poi_theatre_genre_philharmonic">Φιλαρμονική</string>
 	<string name="poi_theatre_genre_musical">Μουσικά</string>
@@ -3018,4 +3018,73 @@
 	<string name="poi_crossing_light_no">Φως διασταύρωσης: όχι</string>
 	<string name="poi_crossing_on_demand_yes">Διασταύρωση κατά παραγγελία</string>
 	<string name="poi_crossing_on_demand_no">Διασταύρωση κατά παραγγελία: όχι</string>
+	<string name="poi_crossing_saltire_yes">Σήμα σε διασταύρωση σχήματος Χ</string>
+	<string name="poi_crossing_saltire_no">Σήμα σε διασταύρωση σχήματος Χ: όχι</string>
+	<string name="poi_crossing_supervision_yes">Επίβλεψη διασταύρωσης</string>
+	<string name="poi_crossing_supervision_no">Επίβλεψη διασταύρωσης: όχι</string>
+	<string name="poi_crossing_supervision_attendant">Επίβλεψη διασταύρωσης: φύλακας</string>
+	<string name="poi_crossing_supervision_camera">Επίβλεψη διασταύρωσης: κάμερα</string>
+
+	<string name="poi_dispensing_yes">Ναι</string>
+	<string name="poi_dispensing_no">Διάθεση: όχι</string>
+
+	<string name="poi_aerodrome_type_international">Διεθνές</string>
+	<string name="poi_aerodrome_type_regional">Τοπικό</string>
+	<string name="poi_aerodrome_type_public">Δημόσιο</string>
+	<string name="poi_aerodrome_type_military">Στρατιωτικό</string>
+	<string name="poi_aerodrome_type_military_public">Στρατιωτικό/δημόσιο</string>
+	<string name="poi_aerodrome_type_private">Ιδιωτικό</string>
+
+	<string name="poi_valley_balka">Μπάλκα</string>
+
+	<string name="poi_ventilation_shaft">Φρεάτιο εξαερισμού</string>
+
+	<string name="poi_pump_type_beam_pump">Τύπος αντλίας: αντλία δέσμης</string>
+	<string name="poi_pump_type_india_mk_2_3">Τύπος αντλίας: Ινδική Mk II ή III&gt;</string>
+	<string name="poi_pump_type_gravity">Τύπος αντλίας: βαρύτητα</string>
+	<string name="poi_pump_style_modern">Μορφή αντλίας: σύγχρονη</string>
+	<string name="poi_pump_style_historic">Μορφή αντλίας: ιστορική</string>
+	<string name="poi_pump_status_ok">Κατάσταση αντλίας: Σε λειτουργία</string>
+	<string name="poi_pump_status_broken">Κατάσταση αντλίας: χαλασμένη</string>
+	<string name="poi_pump_status_locked">Κατάσταση αντλίας: κλειδωμένη</string>
+
+	<string name="poi_payment_troika_yes">Troika</string>
+	<string name="poi_payment_troika_no">Μη αποδεκτή η κάρτα Troika</string>
+
+	<string name="poi_telescope">Τηλεσκόπιο</string>
+	<string name="poi_telescope_type_optical">Οπτικό</string>
+	<string name="poi_telescope_type_radio">Ράδιο</string>
+	<string name="poi_telescope_type_gamma">Γάμμα</string>
+	<string name="poi_telescope_diameter">Διάμετρος</string>
+	<string name="poi_telescope_spectrum">Φάσμα</string>
+	<string name="poi_telescope_usage_education">Χρήση: εκπαίδευση</string>
+	<string name="poi_telescope_usage_espionage">Χρήση: κατασκοπεία</string>
+	<string name="poi_telescope_usage_research">Χρήση: αναζήτηση</string>
+
+	<string name="poi_observatory_type_espionage">Χρήση: κατασκοπεία</string>
+	<string name="poi_observatory_type_meteorological">Μετεωρολογικό</string>
+	<string name="poi_observatory_type_gravitational">Βαρυτικό</string>
+
+	<string name="poi_greenhouse_horticulture">Κηπευτική θερμοκηπίου</string>
+
+	<string name="poi_voltage">Τάση</string>
+	<string name="poi_generator_output_electricity">Ισχύς εξόδου</string>
+	<string name="poi_generator_output_electricity_yes">Έξοδος: ηλεκτρισμός</string>
+	<string name="poi_generator_output_hot_water">Ισχύς εξόδου ζεστού νερού</string>
+	<string name="poi_generator_output_hot_water_yes">Έξοδος: ζεστό νερό</string>
+	<string name="poi_generator_output_steam_yes">Έξοδος: ατμός</string>
+	<string name="poi_generator_output_hot_air_yes">Έξοδος: ζεστός αέρας</string>
+	<string name="poi_generator_output_cold_water_yes">Έξοδος: κρύο νερό</string>
+	<string name="poi_generator_output_compressed_air">Ισχύς εξόδου πεπιεσμένου αέρα</string>
+	<string name="poi_generator_output_compressed_air_yes">Έξοδος: πεπιεσμένος αέρας</string>
+	<string name="poi_generator_output_vacuum_yes">Έξοδος: κενό</string>
+	<string name="poi_generator_output_biogas">Ισχύς εξόδου βιοαερίου</string>
+	<string name="poi_generator_output_biogas_yes">Έξοδος: βιοαέριο</string>
+
+	<string name="poi_pumping_station">Αντλιοστάσιο</string>
+
+	<string name="poi_display_yes">Οθόνη: ναι</string>
+	<string name="poi_display_no">Οθόνη: όχι</string>
+	<string name="poi_display_analog_yes">Αναλογική οθόνη</string>
+	<string name="poi_display_digital_yes">Ψηφιακή οθόνη</string>
 	</resources>
