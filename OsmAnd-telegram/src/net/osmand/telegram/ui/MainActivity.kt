@@ -211,7 +211,7 @@ class MainActivity : AppCompatActivity(), TelegramListener {
 
 	override fun onTelegramChatChanged(chat: TdApi.Chat) {
 		runOnUi {
-			updateChat(chat)
+			updateChatsList()
 			listeners.forEach { it.get()?.onTelegramChatChanged(chat) }
 		}
 	}
@@ -256,15 +256,6 @@ class MainActivity : AppCompatActivity(), TelegramListener {
 			}
 		}
 		chatViewAdapter.chats = chats
-	}
-
-	private fun updateChat(chat: TdApi.Chat) {
-		val chatIndex = telegramHelper.getChatIndex(chat.id)
-		if (chatIndex != -1) {
-			chatViewAdapter.notifyItemChanged(chatIndex)
-		} else {
-			updateChatsList()
-		}
 	}
 
 	fun loginTelegram() {

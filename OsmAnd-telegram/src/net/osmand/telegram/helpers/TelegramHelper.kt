@@ -81,17 +81,6 @@ class TelegramHelper private constructor() {
 		}
 	}
 
-	fun getChatIndex(chatId: Long): Int {
-		synchronized(chatList) {
-			for ((i, chat) in chatList.withIndex()) {
-				if (chat.chatId == chatId) {
-					return i
-				}
-			}
-		}
-		return -1
-	}
-
 	fun getChatTitles(): List<String> {
 		return chatTitles.keys().toList()
 	}
