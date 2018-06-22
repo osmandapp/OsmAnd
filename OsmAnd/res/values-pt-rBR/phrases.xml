@@ -2807,7 +2807,7 @@
 	<string name="poi_power_supply">Fonte de energia</string>
 	<string name="poi_medical_system">Sistema médico</string>
 	<string name="poi_home_visit">Visita domiciliar</string>
-	<string name="poi_dish">Prato</string>
+	<string name="poi_dish">Pratos</string>
 	<string name="poi_payment_transport_type">Tipo de pagamento (transporte)</string>
 	<string name="poi_social_facility_type">Tipo</string>
 	<string name="poi_social_facility_for">Público-alvo</string>
