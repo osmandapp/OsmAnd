@@ -77,7 +77,7 @@ class TelegramHelper private constructor() {
 
 	fun getChatList(): TreeSet<OrderedChat> {
 		synchronized(chatList) {
-			return TreeSet<OrderedChat>(chatList)
+			return TreeSet(chatList.filter { !it.isChannel })
 		}
 	}
 
@@ -498,14 +498,17 @@ class TelegramHelper private constructor() {
 
 	private fun setChatOrder(chat: TdApi.Chat, order: Long) {
 		synchronized(chatList) {
+			val type = chat.type
+			val isChannel = type is TdApi.ChatTypeSupergroup && type.isChannel
+
 			if (chat.order != 0L) {
-				chatList.remove(OrderedChat(chat.order, chat.id))
+				chatList.remove(OrderedChat(chat.order, chat.id, isChannel))
 			}
 
 			chat.order = order
 
 			if (chat.order != 0L) {
-				chatList.add(OrderedChat(chat.order, chat.id))
+				chatList.add(OrderedChat(chat.order, chat.id, isChannel))
 			}
 		}
 	}
@@ -598,7 +601,7 @@ class TelegramHelper private constructor() {
 		listener?.onTelegramStatusChanged(prevAuthState, newAuthState)
 	}
 
-	class OrderedChat internal constructor(internal val order: Long, internal val chatId: Long) : Comparable<OrderedChat> {
+	class OrderedChat internal constructor(internal val order: Long, internal val chatId: Long, internal val isChannel: Boolean) : Comparable<OrderedChat> {
 
 		override fun compareTo(other: OrderedChat): Int {
 			if (this.order != other.order) {
@@ -662,40 +665,38 @@ class TelegramHelper private constructor() {
 					val updateNewChat = obj as TdApi.UpdateNewChat
 					val chat = updateNewChat.chat
 					synchronized(chat) {
-						if (chat.type !is TdApi.ChatTypeSupergroup || !(chat.type as TdApi.ChatTypeSupergroup).isChannel) {
-							chats[chat.id] = chat
-							val localPhoto = chat.photo?.small?.local
-							val hasLocalPhoto = if (localPhoto != null) {
-								localPhoto.canBeDownloaded && localPhoto.isDownloadingCompleted && localPhoto.path.isNotEmpty()
-							} else {
-								false
-							}
-							if (!hasLocalPhoto) {
-								val remotePhoto = chat.photo?.small?.remote
-								if (remotePhoto != null && remotePhoto.id.isNotEmpty()) {
-									downloadChatFilesMap[remotePhoto.id] = chat
-									client!!.send(TdApi.GetRemoteFile(remotePhoto.id, null)) { obj ->
-										when (obj.constructor) {
-											TdApi.Error.CONSTRUCTOR -> {
-												val error = obj as TdApi.Error
-												val code = error.code
-												if (code != IGNORED_ERROR_CODE) {
-													listener?.onTelegramError(code, error.message)
-												}
+						chats[chat.id] = chat
+						val localPhoto = chat.photo?.small?.local
+						val hasLocalPhoto = if (localPhoto != null) {
+							localPhoto.canBeDownloaded && localPhoto.isDownloadingCompleted && localPhoto.path.isNotEmpty()
+						} else {
+							false
+						}
+						if (!hasLocalPhoto) {
+							val remotePhoto = chat.photo?.small?.remote
+							if (remotePhoto != null && remotePhoto.id.isNotEmpty()) {
+								downloadChatFilesMap[remotePhoto.id] = chat
+								client!!.send(TdApi.GetRemoteFile(remotePhoto.id, null)) { obj ->
+									when (obj.constructor) {
+										TdApi.Error.CONSTRUCTOR -> {
+											val error = obj as TdApi.Error
+											val code = error.code
+											if (code != IGNORED_ERROR_CODE) {
+												listener?.onTelegramError(code, error.message)
 											}
-											TdApi.File.CONSTRUCTOR -> {
-												val file = obj as TdApi.File
-												client!!.send(TdApi.DownloadFile(file.id, 10), defaultHandler)
-											}
-											else -> listener?.onTelegramError(-1, "Receive wrong response from TDLib: $obj")
 										}
+										TdApi.File.CONSTRUCTOR -> {
+											val file = obj as TdApi.File
+											client!!.send(TdApi.DownloadFile(file.id, 10), defaultHandler)
+										}
+										else -> listener?.onTelegramError(-1, "Receive wrong response from TDLib: $obj")
 									}
 								}
 							}
-							val order = chat.order
-							chat.order = 0
-							setChatOrder(chat, order)
 						}
+						val order = chat.order
+						chat.order = 0
+						setChatOrder(chat, order)
 					}
 					updateChatTitles()
 					listener?.onTelegramChatsChanged()
