@@ -3386,9 +3386,9 @@
 <string name="poi_motorcycle_services">Servo</string>
 	<string name="poi_motorcycle_type">Motorcikla speco</string>
 
-<string name="poi_motorcycle_sales_yes">Vendo</string>
-	<string name="poi_motorcycle_sales_no">Vendo: ne</string>
-	<string name="poi_motorcycle_sales_yes_used">Vendo, brokanto</string>
+<string name="poi_motorcycle_sales_yes">vendo</string>
+	<string name="poi_motorcycle_sales_no">vendo: ne</string>
+	<string name="poi_motorcycle_sales_yes_used">vendo, brokanto</string>
 	<string name="poi_motorcycle_sales_used">brokanto</string>
 	<string name="poi_motorcycle_rental_yes">luo</string>
 	<string name="poi_motorcycle_rental_no">Luo: ne</string>
