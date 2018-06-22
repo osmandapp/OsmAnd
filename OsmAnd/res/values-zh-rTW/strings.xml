@@ -909,7 +909,7 @@
     <string name="poi_edit_title">編輯 POI</string>
     <string name="poi_create_title">建立 POI</string>
     <string name="poi_error_poi_not_found">找不到節點或便利設施組成的一些節點，哪些尚不支援。</string>
-    <string name="poi_remove_confirm_template">刪除 {0} (輸入評論)？</string>
+    <string name="poi_remove_confirm_template">刪除 {0} (評論)？</string>
     <string name="poi_remove_title">刪除 POI</string>
     <string name="poi_remove_success">POI 已刪除</string>
     <string name="poi_action_add">新增</string>
@@ -1091,7 +1091,7 @@
     <string name="osmand_srtm_long_description_1000_chars">這個外掛元件同時提供了等高線上層和（地貌）地形陰影層，顯示在 OsmAnd 標準地圖的頂部。此功能會讓運動選手、健行旅遊者、背包客，和對起伏的地理構成感興趣的任何人。 
 \n 
 \n全球圖資（在北緯 70 ° 至南緯 70 ° 之間）的量測基礎在於 SRTM (Shuttle Radar Topography Mission)和 ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer)，安裝在美國太空總署地球觀測系統的旗艦衛星 Terra 上的遙測儀器，ASTER 是美國太空總署、日本經濟產業省(METI)、日本太空系統 (J-spacesystems)之間的通力合作產物。</string>
-    <string name="audionotes_location_not_defined">以位置去關聯的附註尚未下定義。\"使用位置 …\"，把註解分配給指定的位置。</string>
+    <string name="audionotes_location_not_defined">尚未定義以位置去關聯的註解。「使用位置 …」，把註解分配給指定的位置。</string>
     <string name="srtm_plugin_description">這個外掛元件同時提供了等高線上層和（地貌）地形陰影層，顯示在 OsmAnd 標準地圖的頂部。此功能會讓運動選手、健行旅遊者、背包客，和對起伏的地理構成感興趣的任何人。（請注意，等高線和地貌資料是各自獨立的，在外掛元件啟用後可以追加下載。） 
 \n 
 \n全球圖資（在 70 ° 以北和 70 ° 以南之間）的量測基礎在於 SRTM（Shuttle Radar Topography Mission）和 ASTER（Advanced Spaceborne Thermal Emission and Reflection Radiometer），安裝在美國太空總署地球觀測系統的旗艦衛星 Terra 上的遙測儀器，ASTER 是美國太空總署、日本經濟產業省（METI）、日本太空系統（J-spacesystems）之間的通力合作的產物。</string>
@@ -3120,5 +3120,5 @@
     <string name="coord_input_edit_point">編輯標點</string>
     <string name="coord_input_add_point">新增標點</string>
     <string name="coord_input_save_as_track">儲存為軌跡</string>
-    <string name="coord_input_save_as_track_descr">您已新增了 %1$s 標點。輸入檔案名稱和按下儲存。</string>
+    <string name="coord_input_save_as_track_descr">您已新增了 %1$s 標點。輸入檔案名稱並輕點「儲存」。</string>
     </resources>
