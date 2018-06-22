@@ -363,6 +363,10 @@ class TelegramHelper private constructor() {
 			for (chatTitle in chatTitles) {
 				val chatId = this.chatTitles[chatTitle]
 				if (chatId != null) {
+					val chat = chats[chatId]
+					if (chat == null || (chat.type is TdApi.ChatTypeSupergroup && (chat.type as TdApi.ChatTypeSupergroup).isChannel)) {
+						return
+					}
 					client?.send(TdApi.SearchChatRecentLocationMessages(chatId, CHAT_LIVE_USERS_LIMIT)) { obj ->
 						when (obj.constructor) {
 							TdApi.Error.CONSTRUCTOR -> {
