@@ -138,6 +138,10 @@ class TelegramHelper private constructor() {
 		}
 	}
 
+	private fun isChannel(chat: TdApi.Chat): Boolean {
+		return chat.type is TdApi.ChatTypeSupergroup && (chat.type as TdApi.ChatTypeSupergroup).isChannel
+	}
+
 	enum class TelegramAuthenticationParameterType {
 		PHONE_NUMBER,
 		CODE,
@@ -353,7 +357,7 @@ class TelegramHelper private constructor() {
 				val chatId = this.chatTitles[chatTitle]
 				if (chatId != null) {
 					val chat = chats[chatId]
-					if (chat == null || (chat.type is TdApi.ChatTypeSupergroup && (chat.type as TdApi.ChatTypeSupergroup).isChannel)) {
+					if (chat == null || isChannel(chat)) {
 						return
 					}
 					client?.send(TdApi.SearchChatRecentLocationMessages(chatId, CHAT_LIVE_USERS_LIMIT)) { obj ->
@@ -491,8 +495,7 @@ class TelegramHelper private constructor() {
 
 	private fun setChatOrder(chat: TdApi.Chat, order: Long) {
 		synchronized(chatList) {
-			val type = chat.type
-			val isChannel = type is TdApi.ChatTypeSupergroup && type.isChannel
+			val isChannel = isChannel(chat)
 
 			if (chat.order != 0L) {
 				chatList.remove(OrderedChat(chat.order, chat.id, isChannel))
