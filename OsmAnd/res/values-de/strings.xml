@@ -896,7 +896,7 @@
 	<string name="poi_edit_title">POI bearbeiten</string>
 	<string name="poi_create_title">POI erstellen</string>
 	<string name="poi_error_poi_not_found">Punkt wurde nicht gefunden oder das Objekt besteht aus mehreren Punkten, was noch nicht unterstützt wird.</string>
-	<string name="poi_remove_confirm_template">Sicher löschen: {0} (Kommentar eingeben)?</string>
+	<string name="poi_remove_confirm_template">Sicher löschen: {0} (Kommentar)?</string>
 	<string name="poi_remove_title">POI löschen</string>
 	<string name="shared_string_delete">Löschen</string>
 	<string name="poi_remove_success">POI wurde gelöscht</string>
@@ -3065,5 +3065,5 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="coord_input_edit_point">Punkt bearbeiten</string>
     <string name="coord_input_add_point">Punkt hinzufügen</string>
     <string name="coord_input_save_as_track">Als Track speichern</string>
-    <string name="coord_input_save_as_track_descr">Sie haben %1$s Punkte hinzugefügt. Geben Sie den Namen der Datei ein und klicken Sie auf Speichern.</string>
+    <string name="coord_input_save_as_track_descr">Sie haben %1$s Punkte hinzugefügt. Geben Sie den Dateinamen ein und klicken Sie auf \"Speichern\".</string>
     </resources>
