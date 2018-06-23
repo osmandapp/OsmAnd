@@ -2628,7 +2628,7 @@
 	<string name="poi_letter_box">Buzoia</string>
 	<string name="poi_post_street">Kalea</string>
 	<string name="poi_post_housenumber">Portal zenbakia</string>
-	<string name="poi_post_flats"/>
+	<string name="poi_post_flats">Pisua</string>
 
 	<string name="poi_money_transfer">Diru-transferentzia</string>
 
@@ -3114,7 +3114,7 @@
 
 	<string name="poi_motorcycle_sales_yes">Salmenta</string>
 	<string name="poi_motorcycle_sales_no">Salmenta: ez</string>
-	<string name="poi_motorcycle_sales_yes_used">Salmenta: bai; erabilitakoak</string>
+	<string name="poi_motorcycle_sales_yes_used">Salmenta: bai, erabilitakoak</string>
 	<string name="poi_motorcycle_sales_used">Salmenta: erabilitakoak</string>
 	<string name="poi_motorcycle_rental_yes">Alokairua</string>
 	<string name="poi_motorcycle_rental_no">Alokairua: ez</string>
@@ -3692,5 +3692,43 @@
 	<string name="poi_health_facility_type_office">Medikuaren kontsulta</string>
 	<string name="poi_material_masonry">Materiala: hargintza</string>
 	<string name="poi_pa">Pa (Maorien gotortutako kokalekua)</string>
+
+	<string name="poi_historic_threshing_floor">Larrain historikoa</string>
+	<string name="poi_prison_camp">Presondegi izandakoa</string>
+	<string name="poi_firepit">Sutokia</string>
+	<string name="poi_street_cabinet">Kaleko armairua</string>
+
+	<string name="poi_nuclear_explosion_height_of_burst">Eztandaren altuera</string>
+	<string name="poi_nuclear_explosion_ground_zero_altitude">Zero zonaren altitudea</string>
+	<string name="poi_free_flying_paragliding_yes">Parapentea</string>
+	<string name="poi_free_flying_paragliding_no">Parapentea: ez</string>
+	<string name="poi_free_flying_hanggliding_yes">Delta hegala</string>
+	<string name="poi_free_flying_hanggliding_no">Delta hegala: ez</string>
+	<string name="poi_cuisine_piadina">Piadina</string>
+	<string name="poi_cuisine_souvlaki">Souvlaki</string>
+	<string name="poi_cuisine_bubble_tea">"Burbuila tea "</string>
+	<string name="poi_cuisine_waffle">Gofrea</string>
+	<string name="poi_nutrition_supplements">Elikadura-osagarriak</string>
+	<string name="poi_motorcycle_type_offroad">Errepidez kanpokoa</string>
+	<string name="poi_motorcycle_type_dualsport">Helburu bikoitzekoa</string>
+	<string name="poi_spaceport">Jaurtigunea</string>
+
+	<string name="poi_depot">Biltegia</string>
+
+	<string name="poi_payment_centre">Ordainketa zentroa</string>
+	<string name="poi_climbing_length">Eskaladaren luzera</string>
+	<string name="poi_climbing_length_min">Eskaladaren gutxieneko luzera</string>
+	<string name="poi_climbing_length_max">Eskaladaren gehieneko luzera</string>
+	<string name="poi_climbing_rock_limestone">Eskaladaren arroka: kareharria</string>
+	<string name="poi_climbing_rock_granite">Eskaladaren arroka: granitoa</string>
+	<string name="poi_climbing_rock_sandstone">Eskaladaren arroka: hareharria</string>
+	<string name="poi_climbing_rock_quartzite">Eskaladaren arroka: kuartzita</string>
+	<string name="poi_climbing_rock_gneiss">Eskaladaren arroka: gneiss</string>
+	<string name="poi_climbing_rock_porphyry">Eskaladaren arroka: porfiroa</string>
+	<string name="poi_climbing_quality_solid">Eskaladaren kalitatea: solidoa</string>
+	<string name="poi_climbing_quality_fragile">Eskaladaren kalitatea: hauskorra</string>
+	<string name="poi_climbing_bolted_yes">Aingura finkoak: bai</string>
+	<string name="poi_climbing_bolted_no">Aingura finkoak: ez</string>
+	<string name="poi_climbing_routes">Eskalatzeko ibilbideak</string>
 
 	</resources>
