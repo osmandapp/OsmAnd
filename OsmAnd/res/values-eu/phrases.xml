@@ -413,7 +413,7 @@
 	<string name="poi_material_steel">Materiala: altzairua</string>
 	<string name="poi_material_brick">Materiala: adreilua</string>
 	<string name="poi_material_plastic">Materiala: plastikoa</string>
-	<string name="poi_material_metal_wood">Materiala: metala;zura</string>
+	<string name="poi_material_metal_wood">Materiala: metala, zura</string>
 	<string name="poi_material_glass">Materiala: beira</string>
 	<string name="poi_material_bronze">Materiala: brontzea</string>
 	<string name="poi_material_earth">Materiala: lurra</string>
@@ -1449,7 +1449,7 @@
 	<string name="poi_social_facility_for_drug_addicted">Drogamenpekoak</string>
 	<string name="poi_social_facility_for_unemployed">Langabeak</string>
 	<string name="poi_social_facility_for_diseased">Gaixoak</string>
-	<string name="poi_social_facility_for_child_juvenile">Haurrak;gazteak</string>
+	<string name="poi_social_facility_for_child_juvenile">Haurrak, gazteak</string>
 
 	<string name="poi_additional_atm_yes">Kutxazain automatikoa: bai</string>
 	<string name="poi_atm_no">Kutxazain automatikoa: ez</string>
@@ -3690,4 +3690,7 @@
 	<string name="poi_protection_object_water">Babestutakoa: Ura</string>
 
 	<string name="poi_health_facility_type_office">Medikuaren kontsulta</string>
+	<string name="poi_material_masonry">Materiala: hargintza</string>
+	<string name="poi_pa">Pa (Maorien gotortutako kokalekua)</string>
+
 	</resources>
