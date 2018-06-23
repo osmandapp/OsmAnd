@@ -3046,4 +3046,8 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="clear_all_intermediates">中間経由地点を全て消去</string>
     <string name="add_waypoint">経由地点を追加</string>
     <string name="show_tunnels">トンネル</string>
+    <string name="touring_view_render_descr">ツーリングを対象とした高詳細のマップスタイルで、デフォルトスタイルの全オプションが有効となっています。すべての道路、通路、その他の道、異なる道路タイプ間の視覚的区別を可能にし、道以外も可能な限り詳細を表示しており、ツーリング用地図帳を思い起こさせる見た目となっています。アウトドアでの利用や昼夜モードもハイコントラストで対応しています。</string>
+    <string name="default_render_descr">標準的な汎用スタイルです。人口密集地の場合描写の簡素化がなされます。主な機能としては等高線、ルート、路面品質、通行制限、道路標識、SACスケールの通路描写をサポートし、急流下りなどのウォータースポーツにも使用できます。</string>
+    <string name="open_wikipedia_link_online">Wikipediaをオンライン参照</string>
+    <string name="open_wikipedia_link_online_description">このリンクを開くとウェブブラウザで閲覧することができます。</string>
     </resources>
