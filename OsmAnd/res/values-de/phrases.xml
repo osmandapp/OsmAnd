@@ -1308,7 +1308,7 @@
 	<string name="poi_material_plastic">Martial: Plastik</string>
 	<string name="poi_material_sandstone">Material: Sandstein</string>
 	<string name="poi_material_granite_stone">Material: Granit</string>
-	<string name="poi_material_metal_wood">Material: Metall; Holz</string>
+	<string name="poi_material_metal_wood">Material: Metall, Holz</string>
 	<string name="poi_material_glass">Material: Glas</string>
 	<string name="poi_material_bronze">Material: Bronze</string>
 	<string name="poi_material_earth">Material: Erde</string>
@@ -3386,7 +3386,7 @@
 
 	<string name="poi_motorcycle_sales_yes">Verkauf</string>
 	<string name="poi_motorcycle_sales_no">Verkauf: nein</string>
-	<string name="poi_motorcycle_sales_yes_used">Verkauf: ja; gebraucht</string>
+	<string name="poi_motorcycle_sales_yes_used">Verkauf: ja, gebraucht</string>
 	<string name="poi_motorcycle_sales_used">Verkauf: gebraucht</string>
 	<string name="poi_motorcycle_rental_yes">Vermietung</string>
 	<string name="poi_motorcycle_rental_no">Vermietung: nein</string>
