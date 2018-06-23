@@ -314,7 +314,7 @@
 \n 
 \nSos datos globales (intre sos 70 grados nord e sos 70 grados sud) sunt basados in supra de sas medidas de su SRTM (Shuttle Radar Topography Mission) e de s’ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), un’aina medidora a bordu de Terra, su satellite de su sistema di osservatzione de sa terra de sa NASA. ASTER est un’isfortzu de coperassione intre sa NASA, su Ministeru de s’Economia Cummèrtziu e Industria (METI) de su Giapne, e su sistema ispatziale giaponesu (J-spacesystems).</string>
     <string name="map_widget_distancemeasurement">Medidura de sa distantzia</string>
-    <string name="audionotes_location_not_defined">Sa positzione da assotziare cun sa nota non est galu dessinida. \"Imprea positzione …\" pro assinzare una nota a sa positzione dislindada.</string>
+    <string name="audionotes_location_not_defined">Sa positzione da assotziare cun sa nota non est galu dessinida. \"Imprea positzione…\" pro assinzare una nota a sa positzione dislindada.</string>
 
     <string name="map_widget_audionotes">Notas àudio</string>
     <string name="audionotes_plugin_description">S’estensione pro sas notas àudio/vìdeo frunit sas funtzionalidades pro registrare notas àudio/foto/vìdeo durante su biàgiu, impreende su butone in s\'ischermu de sa mapa o su menù de cuntestu pro cale si siat positzione in sa mapa.</string>
@@ -1499,7 +1499,7 @@ Memòria in proportzione %4$s MB (lìmite de Android %5$s MB, Dalvik %6$s MB).</
     <string name="poi_edit_title">Muda PDI</string>
     <string name="poi_create_title">Crea PDI</string>
     <string name="poi_error_poi_not_found">Su nodu non podet èssere agatadu, o s’amenidade est fata de prus nodos, cosa chi no est galu suportada.</string>
-    <string name="poi_remove_confirm_template">Iscantzellare {0} (insertare unu cummentu)?</string>
+    <string name="poi_remove_confirm_template">Iscantzellare {0} (cummentu)?</string>
     <string name="poi_remove_title">Iscantzelladura PDI</string>
     <string name="shared_string_delete">Iscantzella</string>
     <string name="poi_remove_success">PDI iscantzelladu</string>
@@ -2975,7 +2975,7 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="subsequent_dest_description">Moe sa destinatzione in subra, e crea·la</string>
     <string name="map_import_error">Errore cun s\'importatzione de sa mapa</string>
     <string name="map_imported_successfully">Mapa importada</string>
-    <string name="enter_the_file_name">Inserta su nùmene de su documentu.</string>
+    <string name="enter_the_file_name">Iscrie su nùmene de su documentu.</string>
     <string name="enter_lon">Inserta sa longitùdine</string>
     <string name="enter_lat">Inserta sa latitùdine</string>
     <string name="enter_lat_and_lon">Inserta sa longitùdine e sa latitùdine</string>
@@ -3099,4 +3099,8 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="get_osmand_live">Abbona·ti a OsmAnd Live pro isblocare totu sas funtzionalidades: agiornamentos die pro die de sas mapas cun iscarrigamentos illimitados, totu sas estensiones de badas e a pagamentu, Wikipedia, Wikivoyage e meda àteru.</string>
     <string name="quick_action_edit_actions">Acontza sas atziones</string>
     <string name="error_notification_desc">Pro praghere imbia un\'ischermada de custa notìfica a support@osmand.net</string>
+    <string name="coord_input_edit_point">Modìfica su puntu</string>
+    <string name="coord_input_add_point">Annanghe puntu</string>
+    <string name="coord_input_save_as_track">Sarva comente rasta</string>
+    <string name="coord_input_save_as_track_descr">As annantu %1$s puntos. Iscrie unu nùmene pro su documentu e incarca \"Sarva\".</string>
     </resources>
