@@ -183,7 +183,7 @@
     <string name="map_widget_av_notes">Аўдыё/відэа-нататкі</string>
     <string name="osmand_srtm_short_description_80_chars">Модуль OsmAnd для пазасеткавых ізаліній вышынь</string>
     <string name="map_widget_distancemeasurement">Вымярэньне адлегласьці</string>
-    <string name="audionotes_location_not_defined">Месцазнаходжаньне для прывязкі нататкі пакуль яшчэ не вызначылася. «Выкарыстаць месцазнаходжаньне…» каб прызначыць нататку ў выбраным месцы.</string>
+    <string name="audionotes_location_not_defined">Месцазнаходжанне для прывязкі нататкі пакуль яшчэ не вызначылася. «Выкарыстаць месцазнаходжаньне…» каб прызначыць нататку ў выбраным месцы.</string>
     
     <string name="map_widget_audionotes">Аўдыё-нататкі</string>
     <string name="audionotes_plugin_description">Модуль для стварэньня аўдыё/відэа-нататак падчас падарожжаў, з дапамогай выкарыстаньня кнопкі на экране мапы або праз кантэкстнае мэню на любым месцы на мапе.</string>
@@ -653,7 +653,7 @@
 	<string name="select_search_position">Пачатак:</string>
 	<string name="context_menu_item_search">Шукаць навокал</string>
 	<string name="route_successfully_saved_at">Маршрут захаваны як \'%1$s\'.</string>
-	<string name="filename_input">Імя файла: </string>
+	<string name="filename_input">Назва файла:</string>
 	<string name="file_with_name_already_exist">Файл з такой назвай ужо існуе.</string>
 	
 	<string name="local_index_upload_gpx_description">Адаслаць GPX-файлы ў OSM-супальнасць для паляпшэння мап.</string>
@@ -1149,7 +1149,7 @@
 	<string name="poi_edit_title">Правіць POI</string>
 	<string name="poi_create_title">Стварыць POI</string>
 	<string name="poi_error_poi_not_found">Вузел не знойдзены або зручнасць (amenity) складаецца з некалькіх вузлоў, што не падтрымліваецца.</string>
-	<string name="poi_remove_confirm_template">Выдаліць {0} (дадаць каментар)?</string>
+	<string name="poi_remove_confirm_template">Выдаліць {0} (каментар)?</string>
 	<string name="poi_remove_title">Выдаліць POI</string>
 	<string name="poi_remove_success">POI выдаленая</string>
 	<string name="poi_action_add">дадаць</string>
@@ -3010,7 +3010,7 @@
 <string name="make_as_start_point">Зрабіць пачатковай кропкай</string>
     <string name="map_import_error">Памылка імпарту мапы</string>
     <string name="map_imported_successfully">Мапа імпартаваная</string>
-    <string name="enter_the_file_name">Увядзіце імя файла.</string>
+    <string name="enter_the_file_name">Увядзіце назву файла.</string>
     <string name="dd_mm_ss_format">DD°MM\'SS\"</string>
 	<string name="dd_dddddd_format">DD,DDDDDD°</string>
 	<string name="dd_ddddd_format">DD,DDDDD°</string>
