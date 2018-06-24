@@ -810,7 +810,7 @@
 	<string name="poi_water_transport">حمل و نقل آبی</string>
 	<string name="poi_node_networks">گره‌های شبکهٔ پیاده‌گردی/رکاب‌زنی</string>
 	<string name="poi_hiking_routes">مسیرهای پیاده‌گردی</string>
-	<string name="poi_traffic_enforcement">کنترل ترافیک</string>
+	<string name="poi_traffic_enforcement">اعمال قانون ترافیکی</string>
 	<string name="poi_communication">ارتباطات</string>
 	<string name="poi_trash_disposal">سطل زباله</string>
 	<string name="poi_landuse">کاربری زمین</string>
@@ -1007,10 +1007,13 @@
 	<string name="poi_historic_period_second_persian_period">دورهٔ تاریخی: دورهٔ دوم پارسی</string>
 	<string name="poi_cuisine_persian">ایرانی</string>
 	<string name="poi_party">لوازم مراسم</string>
-	<string name="poi_enforcement_traffic_signals"></string>
-	<string name="poi_enforcement_maxspeed"></string>
-	<string name="poi_enforcement_maxheight"></string>
-	<string name="poi_enforcement_mindistance"></string>
-	<string name="poi_enforcement_check"></string>
-	<string name="poi_enforcement_access"></string>
+	<string name="poi_enforcement_traffic_signals">اعمال قانون: چراغ راهنمایی</string>
+	<string name="poi_enforcement_maxspeed">اعمال قانون: سرعت مجاز</string>
+	<string name="poi_enforcement_maxheight">اعمال قانون: ارتفاع مجاز</string>
+	<string name="poi_enforcement_mindistance">اعمال قانون: فاصلهْ طولی مجاز</string>
+	<string name="poi_enforcement_check">اعمال قانون: بازرسی</string>
+	<string name="poi_enforcement_access">اعمال قانون: دسترسی</string>
+	<string name="poi_emergency_infrastructure">زیرساخت فوریتی</string>
+	<string name="poi_enforcement_toll">اعمال قانون: عوارضی</string>
+
 	</resources>
