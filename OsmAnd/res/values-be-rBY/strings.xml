@@ -632,7 +632,7 @@ Punktaŭ maršrutu %2$s</string>
 \n 
 \nHlabaĺnyja dadzienyja (pamiž 70 ° na poŭnačy i 70 ° na poŭdni) hruntujucca na vymiarenniach SRTM (Shuttle Radar Topography Mission) i ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), dadzienych instrumientu vizualizacyi Terra, flahmanskaha spadarožnika sistemy nazirannia Ziamli ad NASA. ASTER — heta vynik sumiesnaj pracy NASA, ministerstva ekanomiki Japonii, ministerstva handliu i pramyslovaści Japonii (METI), ahienctva kasmičnych sistem Japonii (J-spacesystems).</string>
     <string name="map_widget_distancemeasurement">Vymiareńnie adlehłaścі</string>
-    <string name="audionotes_location_not_defined">Miescaznachodžańnie dla pryviazki natatki pakul jašče nie vyznačyłasia. «Vykarystać miescaznachodžańnie…» kab pryznačyć natatku ŭ vybranym miescy.</string>
+    <string name="audionotes_location_not_defined">Miescaznachodžannie dlia pryviazki natatki pakuĺ jašče nie vyznačylasia. «Vykarystać miescaznachodžańnie…» kab pryznačyć natatku ŭ vybranym miescy.</string>
     
     <string name="map_widget_audionotes">Aŭdyjo-natatkі</string>
     <string name="audionotes_plugin_description">Modul dla stvareńnia aŭdyjo/vіdea-natatak padčas padarožžaŭ, z dapamohaj vykarystańnia knopkі na ekranie mapy abo praz kantekstnaje meniu na lubym miescy na mapie.</string>
@@ -1118,7 +1118,7 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
 	
 	<string name="shared_string_save_as_gpx">Zachavać jak novy GPX-fajl</string>
 	<string name="route_successfully_saved_at">Maršrut zachavany jak %1$s.</string>
-	<string name="filename_input">Imia fajla:</string>
+	<string name="filename_input">Nazva fajla:</string>
 	<string name="file_with_name_already_exist">Fajł z takoj nazvaj užo іsnuje.</string>
 	<string name="shared_string_save">Zachavać</string>
 	
@@ -1630,7 +1630,7 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
 	<string name="poi_edit_title">Pravіć POI</string>
 	<string name="poi_create_title">Stvaryć POI</string>
 	<string name="poi_error_poi_not_found">Vuziel nie znojdzieny abo zručnasć (amenity) skladajecca z niekaĺkich vuzloŭ, što nie padtrymlivajecca.</string>
-	<string name="poi_remove_confirm_template">Vydalić {0} (dadać kamientar)?</string>
+	<string name="poi_remove_confirm_template">Vydalić {0} (kamientar)?</string>
 	<string name="poi_remove_title">Vydalić POI</string>
 	<string name="shared_string_delete">Vydalić</string>
 	<string name="poi_remove_success">POI vydalienaja</string>
@@ -2963,7 +2963,7 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
 <string name="make_as_start_point">Zrabić pačatkovaj kropkaj</string>
     <string name="map_import_error">Pamyłka impartu mapy</string>
     <string name="map_imported_successfully">Mapa impartavanaja</string>
-    <string name="enter_the_file_name">Uviadzicie imia fajla.</string>
+    <string name="enter_the_file_name">Uviadzicie nazvu fajla.</string>
     <string name="enter_lon">Uviadzicie daŭhatu</string>
     <string name="enter_lat">Uviadzicie šyratu</string>
     <string name="enter_lat_and_lon">Uviadzicie šyratu i daŭhatu</string>
