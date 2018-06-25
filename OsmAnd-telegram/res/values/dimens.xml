@@ -31,6 +31,11 @@
 
 	<dimen name="image_button_padding">12dp</dimen>
 
+	<dimen name="my_location_image_height">168dp</dimen>
+	<dimen name="my_location_text_sides_margin">32dp</dimen>
+
+	<dimen name="search_box_height">48dp</dimen>
+
 	<!-- Text sizes -->
 
 	<dimen name="dialog_title_text_size">22sp</dimen>
