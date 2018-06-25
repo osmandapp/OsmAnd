@@ -3160,4 +3160,8 @@
     <string name="get_osmand_live">‏‏OsmAnd Live را تهیه کنید تا همهٔ این قابلیت‌ها باز شود: به‌روزآوری روزانهٔ نقشه و دانلودهای نامحدود، همهٔ افزونه‌های رایگان و پولی، ویکی‌پدیا، ویکی‌سفر و...</string>
     <string name="quick_action_edit_actions">ویرایش عملیات</string>
     <string name="error_notification_desc">لطفاً از این اعلان عکس بگیرید و به support@osmand.net بفرستید</string>
+    <string name="coord_input_edit_point">اصلاح نقطه</string>
+    <string name="coord_input_add_point">افزودن نقطه</string>
+    <string name="coord_input_save_as_track">ذخیره به‌عنوان مسیر</string>
+    <string name="coord_input_save_as_track_descr">%1$s نقطه افزودید. نام فایل را بنویسید و روی «ذخیره» بزنید.</string>
     </resources>

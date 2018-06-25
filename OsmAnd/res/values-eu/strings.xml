@@ -182,7 +182,7 @@
 \n 
 \nDatu globalak (iparraldera 70 gradu eta hegoaldera 70 gradu bitartean) STRM (Shuttle Radar Topography Mission) eta ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer) neurrietan oinarrituak daude, espazioko Terra irudi tresna, NASAren Lurra Behatzeko Sistemaren satelite enblematikoa. ASTER NASAren, Japoniako Ekonomi, Merkataritza eta Industria Ministerioaren (EMIM), eta Japoneko Espazio Sistemaren (J-espaziosistema) elkarlanaren ondorioz sortua izan da.</string>
   <string name="map_widget_distancemeasurement">Distantzia neurketa</string>
-  <string name="audionotes_location_not_defined">Ez da oharrari lotutako kokapenik zehaztu. \"Erabili kokapena …\" oharra zehaztutako kokapenera esleitzeko.</string>
+  <string name="audionotes_location_not_defined">Ez da oharrari lotutako kokapenik zehaztu. \"Erabili kokapena…\" oharra zehaztutako kokapenera esleitzeko.</string>
   
   <string name="map_widget_audionotes">Audio oharrak</string>
   <string name="audionotes_plugin_description">Audio/Bideo gehigarriak bidaian zehar audio/argazki/bideo oharrak hartzeko gaitasuna ematen du, zuzenean maparen pantailan botoi bat erabiliz edo mapako edozein posizioaren laster-menuan.</string>
@@ -1192,7 +1192,7 @@ Biltegiratzean {1} MB erabiliko dira.
   <string name="poi_edit_title">Editatu POI-a</string>
   <string name="poi_create_title">Sortu POI bat</string>
   <string name="poi_error_poi_not_found">Ezin da nodoa aurkitu, edo zerbitzua hainbat nodoz osatuta dago, eta ez dago horretarako euskarririk oraindik.</string>
-  <string name="poi_remove_confirm_template">{0} ezabatu (sartu iruzkina)?</string>
+  <string name="poi_remove_confirm_template">{0} ezabatu (iruzkina)?</string>
   <string name="poi_remove_title">Ezabatu POI-a</string>
   <string name="shared_string_delete">Ezabatu</string>
   <string name="poi_remove_success">POI-a ezabatuta</string>
@@ -2974,7 +2974,7 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="tunnel_warning">Tunela aurrean</string>
     <string name="show_tunnels">Tunelak</string>
 <string name="make_as_start_point">Bihurtu hau hasiera puntua</string>
-    <string name="enter_the_file_name">Idatzi fitxategiaren izena.</string>
+    <string name="enter_the_file_name">Idatzi fitxategi-izena.</string>
     <string name="map_import_error">Maparen inportazio errorea</string>
     <string name="map_imported_successfully">Mapa inportatu da</string>
     <string name="transport_nearby_routes_within">Inguruko ibilbideak</string>
@@ -3115,5 +3115,5 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="coord_input_edit_point">Editatu puntua</string>
     <string name="coord_input_add_point">Gehitu puntua</string>
     <string name="coord_input_save_as_track">Gorde lorratz gisa</string>
-    <string name="coord_input_save_as_track_descr">%1$s puntu gehitu dituzu. Sartu fitxategiaren izena eta sakatu gorde.</string>
+    <string name="coord_input_save_as_track_descr">%1$s puntu gehitu dituzu. Idatzi fitxategi-izena eta sakatu \"Gorde\".</string>
     </resources>

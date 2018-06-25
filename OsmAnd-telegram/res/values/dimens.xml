@@ -25,6 +25,8 @@
 	<dimen name="list_item_content_margin">64dp</dimen>
 	<dimen name="list_item_bottom_margin">3dp</dimen>
 
+	<dimen name="list_view_bottom_padding">52dp</dimen>
+
 	<dimen name="card_divider_bottom_margin">6dp</dimen>
 
 	<dimen name="image_button_padding">12dp</dimen>

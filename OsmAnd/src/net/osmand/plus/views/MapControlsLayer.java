@@ -1253,7 +1253,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 				final OsmandSettings.OsmandPreference<Float> mapDensity = view.getSettings().MAP_DENSITY;
 				final AlertDialog.Builder bld = new AlertDialog.Builder(view.getContext());
 				int p = (int) (mapDensity.get() * 100);
-				final TIntArrayList tlist = new TIntArrayList(new int[]{20, 25, 33, 50, 75, 100, 150, 200, 300, 400});
+				final TIntArrayList tlist = new TIntArrayList(new int[]{25, 33, 50, 75, 100, 125, 150, 200, 300, 400});
 				final List<String> values = new ArrayList<>();
 				int i = -1;
 				for (int k = 0; k <= tlist.size(); k++) {

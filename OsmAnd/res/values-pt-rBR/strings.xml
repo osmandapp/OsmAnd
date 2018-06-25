@@ -194,8 +194,12 @@
     <string name="rendering_attr_streetLighting_name">Iluminação pública</string>
     <string name="proxy_pref_title">Proxy</string>
     <string name="track_points">Pontos da trilha</string>
-	<string name="osmand_srtm_long_description_1000_chars">"Este complemento fornece curva de nível e camada de sombra de colinas (relevo) por cima do mapa padrão do OsmAnd. Esta funcionalidade será muito apreciada por atletas, viajantes e alguém interessado na estrutura de relevo da paisagem.\n\nOs dados globais (entre as latitudes 70º norte e 70º sul) são baseados em medições do SRTM (Shuttle Radar Topography Mission) e ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), um instrumento de imagens da Terra, o principal satélite do Sistema de Observação da Terra da NASA. ASTER é um esforço conjunto da NASA, do Ministério Japonês da Economia, Comércio e Indústria (METI) e do Sistema Espacial Japonês (J-spacesystems). "</string>
-	<string name="srtm_plugin_description">"Este complemento fornece camadas de curvas de nível e de sombras das colinas (relevo) por cima do mapa padrão do OsmAnd. Esta funcionalidade será muito apreciada por atletas, viajantes e alguém interessado na estrutura de relevo da paisagem.\n\nOs dados globais (entre as latitudes 70º norte e 70º sul) são baseados em medições do SRTM (Shuttle Radar Topography Mission) e ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), um instrumento de imagens da Terra, o principal satélite do Sistema de Observação da Terra da NASA. ASTER é um esforço conjunto da NASA, do Ministério Japonês da Economia, Comércio e Indústria (METI) e do Sistema Espacial Japonês (J-spacesystems). "</string>
+	<string name="osmand_srtm_long_description_1000_chars">"Este complemento fornece curva de nível e camada de sombra de colinas (relevo) por cima do mapa padrão do OsmAnd. Esta funcionalidade será muito apreciada por atletas, viajantes e alguém interessado na estrutura de relevo da paisagem.
+\n
+\nOs dados globais (entre as latitudes 70° norte e 70° sul) são baseados em medições do SRTM (Shuttle Radar Topography Mission) e ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), um instrumento de imagens da Terra, o principal satélite do Sistema de Observação da Terra da NASA. ASTER é um esforço conjunto da NASA, do Ministério Japonês da Economia, Comércio e Indústria (METI) e do Sistema Espacial Japonês (J-spacesystems). "</string>
+	<string name="srtm_plugin_description">"Este complemento fornece camadas de curvas de nível e de sombras das colinas (relevo) por cima do mapa padrão do OsmAnd. Esta funcionalidade será muito apreciada por atletas, viajantes e alguém interessado na estrutura de relevo da paisagem.
+\n
+\nOs dados globais (entre as latitudes 70° norte e 70° sul) são baseados em medições do SRTM (Shuttle Radar Topography Mission) e ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), um instrumento de imagens da Terra, o principal satélite do Sistema de Observação da Terra da NASA. ASTER é um esforço conjunto da NASA, do Ministério Japonês da Economia, Comércio e Indústria (METI) e do Sistema Espacial Japonês (J-spacesystems). "</string>
 	<string name="osmand_parking_plugin_description">O plugin de posição de estacionamento grava onde seu carro está estacionado e quanto tempo resta (se o estacionamento for de tempo limitado).
 \nVocê pode encontrar o seu lugar e tempo de estacionamento no painel de instrumentos e no widget do mapa. Pode ser adicionado um evento no calendário, se você quiser um lembrete.</string>
 	<string name="osm_editing_plugin_description">Este complemento do OsmAnd pode ser usado para fazer contribuições ao OSM como criar ou modificar POI, abertura ou comentários de erros do OSM e contribuir com arquivos GPX gravados. OSM é um projeto de mapeamento mundial dirigido pela comunidade e de domínio público. Para mais detalhes, consulte https://openstreetmap.org. Participação ativa é apreciada e as contribuições podem ser feitas diretamente do OsmAnd, se você especificar suas credenciais pessoais de OSM no app.</string>
@@ -206,7 +210,7 @@
 	<string name="navigation_over_track">Iniciar a navegação pela trilha?</string>
 	<string name="speak_pedestrian">Travessias de pedestre</string>
     <string name="rendering_attr_roadStyle_name">Estilo das vias</string>
-    <string name="avoid_roads_msg">Você pode obter uma rota alternativa, selecionando quais vias evitar</string>
+    <string name="avoid_roads_msg">Obter uma rota alternativa, selecionando quais vias evitar</string>
 	<string name="rendering_value__name">Predefinido</string>
     <string name="rendering_value_default_name">Predefinido</string>
     <string name="rendering_value_orange_name">Laranja</string>
@@ -642,12 +646,12 @@
     <string name="edit_tilesource_choose_existing">Escolher existente…</string>
     <string name="maps_define_edit">Definir/Editar…</string>
 	<string name="map_widget_fps_info">Informações de depuração FPS</string>
-	<string name="driving_region_descr">Selecionar região de direção</string>
+	<string name="driving_region_descr">Selecionar a região de direção.</string>
 	<string name="driving_region">Região de direção</string>
 	<string name="driving_region_japan">Japão</string>
 	<string name="driving_region_us">Estados Unidos</string>
 	<string name="driving_region_canada">Canadá</string>
-	<string name="driving_region_europe_asia">Europa e Ásia</string>
+	<string name="driving_region_europe_asia">Europa, Ásia, América Latina etc</string>
 	<string name="driving_region_uk">Reino Unido, Índia, Austrália e outras</string>
     <string name="speak_descr">Configurar para anunciar nomes de ruas, moderadores de tráfego (paradas obrigatórias, lombadas), radares, limites de velocidade</string>
 	<string name="speak_street_names">Nome das ruas (TTS)</string>
@@ -1971,7 +1975,7 @@ Pôr do Sol: %2$s</string>
     <string name="rec_split_clip_length_desc">Limite de tempo máximo para clipes gravados.</string>
     <string name="rec_split_storage_size">Limite de armazenamento</string>
     <string name="rec_split_storage_size_desc">Quantidade de espaço que pode ser ocupado por todos os clipes gravados.</string>
-    <string name="last_map_change">Última mudança de mapa: %s</string>
+    <string name="last_map_change">Última mudança: %s</string>
     <string name="hourly">A cada hora</string>
     <string name="daily">Diariamente</string>
     <string name="weekly">Semanalmente</string>
@@ -2222,7 +2226,7 @@ Pôr do Sol: %2$s</string>
     <string name="hide_from_zoom_level">Ocultar deste nível de ampliação</string>
     <string name="srtm_menu_download_descr">Para ver as curvas de nível no mapa, você precisa baixar o mapa de curvas de nível desta região.</string>
     <string name="shared_string_plugin">Complemento</string>
-    <string name="srtm_purchase_header">Para ver as curvas de nível no mapa, você precisa comprar e instalar o complemento Curvas de Nível</string>
+    <string name="srtm_purchase_header">Para ver as curvas de nível no mapa, você precisa comprar e instalar o plugin \'Curvas de Nível\'</string>
     <string name="srtm_color_scheme">Esquema de cores</string>
     <string name="make_round_trip">Fazer viagem de ida e volta</string>
     <string name="routing_attr_avoid_ice_roads_fords_name">Evitar estradas de gelo, vaus</string>
@@ -2329,7 +2333,7 @@ Pôr do Sol: %2$s</string>
     <string name="no_underlay">Sem camada inferior</string>
     <string name="subscribe_email_error">Erro</string>
     <string name="depth_contour_descr">Conjunto de mapas contendo as curvas batimétricas do mar e pontos náuticos.</string>
-    <string name="sea_depth_thanks">Obrigado por adquirir a batimetria náutica!</string>
+    <string name="sea_depth_thanks">Obrigado por adquirir a \'Batimetria náutica\'</string>
     <string name="index_item_depth_contours_osmand_ext">Batimetria náutica</string>
     <string name="index_item_depth_points_southern_hemisphere">Pontos de profundidade náuticos, Hemisfério Sul</string>
     <string name="index_item_depth_points_northern_hemisphere">Pontos de profundidade náuticos, Hemisfério Norte</string>
@@ -2411,7 +2415,7 @@ Pôr do Sol: %2$s</string>
     <string name="rendering_attr_contourColorScheme_description">Esquema de cores das curvas de nível</string>
     <string name="save_track_min_speed_descr">Filtro: Definir velocidade mínima para um ponto ser registrado.</string>
     <string name="save_track_min_distance">Deslocamento mínimo de registro</string>
-    <string name="save_track_min_distance_descr">Filtro: Definir a distância mínima da última posição para o ponto ser registrado.</string>
+    <string name="save_track_min_distance_descr">Filtro: Definir distância mínima de um ponto para registrar o próximo.</string>
     <string name="save_track_precision_descr">Filtro: Definir precisão mínima para um ponto ser registrado.</string>
     <string name="christmas_poi">POI de Natal</string>
     <string name="christmas_desc_q">Mostrar POI de Natal?</string>
@@ -2515,7 +2519,7 @@ Pôr do Sol: %2$s</string>
     <string name="osm_live_region_desc">Parte da sua doação será enviada para os usuários OSM que enviam alterações para o mapa da região.</string>
     <string name="osm_live_subscription_settings">Configurações de assinatura</string>
     <string name="osm_live_ask_for_purchase">Por favor, adquira a assinatura OsmAnd Live primeiro</string>
-    <string name="osm_live_header">Esta assinatura permite atualizações a cada hora para todos os mapas ao redor do mundo. Parte da renda retorna à Comunidade OSM e é pago por cada contribuição OSM. Se você ama OsmAnd e OSM e quer apoiá-los, esta é a maneira perfeita de fazê-lo.</string>
+    <string name="osm_live_header">Esta assinatura permite atualizações a cada hora para todos os mapas ao redor do mundo. Parte da renda retorna à Comunidade OSM e é pago por cada contribuição OSM. Se você gosta do OsmAnd e OSM e deseja apoiar e ser apoiado por eles, esta é a maneira perfeita de fazê-lo.</string>
     <string name="select_map_marker">Selecione marcador de mapa</string>
     <string name="map_markers_other">Outros marcadores</string>
     <string name="upload_anonymously">Enviar anonimamente</string>
@@ -2681,7 +2685,19 @@ Pôr do Sol: %2$s</string>
     <string name="osmand_plus_extended_description_part6">Recursos de ciclismo e pedestre • Visualização de caminhos a pé, pistas de caminhadas e ciclovias, ideal para atividades ao ar livre • Roteamento e modos de exibição especiais para bicicleta e pedestres • Paradas de transporte público opcionais (ônibus, troleibus, trem) incluindo nomes de linhas • Gravação opcional de viagem para arquivo GPX local ou serviço on-line • Exibição opcional de velocidade e altitudes • Exibição de curvas de nível e sombreamento de relevo (via plugin adicional)</string>
     <string name="shared_string_without_name">Sem nome</string>
     
-    <string name="osmand_plus_extended_description_part8">Cobertura de mapa e qualidade aproximada: • Europa Ocidental: **** • Europa Oriental: *** • Rússia: *** • América do Norte: *** • América do Sul: ** • Ásia: ** • Japão e Coreia: *** • Oriente Médio: ** • África: ** • Antártica: * A maioria dos países ao redor do globo disponível como downloads! Do Afeganistão ao Zimbabué, da Austrália aos Estados Unidos. Argentina, Brasil, Canadá, França, Alemanha, México, Reino Unido, Espanha,…</string>
+    <string name="osmand_plus_extended_description_part8">Cobertura de mapa e qualidade aproximada:
+\n• Europa Ocidental: ****
+\n• Europa Oriental: ***
+\n• Rússia: ***
+\n• América do Norte: ***
+\n• América do Sul: **
+\n• Ásia: **
+\n• Japão e Coreia: ***
+\n• Oriente Médio: **
+\n• África: **
+\n• Antártida: *
+\nA maioria dos países ao redor do globo disponível como downloads!
+\nDo Afeganistão ao Zimbabué, da Austrália aos Estados Unidos. Argentina, Brasil, Canadá, França, Alemanha, México, Reino Unido, Espanha,…</string>
     
     <string name="lang_lo">Laociano</string>
     <string name="show_closed_notes">Mostrar notas encerradas</string>
@@ -2841,4 +2857,25 @@ Pôr do Sol: %2$s</string>
     <string name="error_notification_desc">Favor enviar a captura de tela desta notificação para support@osmand.net</string>
     <string name="quick_action_edit_actions">Editar ações</string>
     <string name="start_editing_card_description">Você pode e deve editar qualquer artigo do Wikivoyage. Compartilhe conhecimento, experiência, talento e sua atenção</string>
+    <string name="coord_input_edit_point">Editar ponto</string>
+    <string name="coord_input_add_point">Adicionar ponto</string>
+    <string name="coord_input_save_as_track">Salvar como trilha</string>
+    <string name="coord_input_save_as_track_descr">Você adicionou %1$s pontos. Digite um nome de arquivo e toque em \"Salvar\".</string>
+    <string name="topo_render_descr">Estilo de contraste projetado principalmente para caminhadas, trekking e ciclismo na natureza. Boa legibilidade sob iluminação externa complexa. Principais características: estradas e objetos naturais contrastantes, diferentes tipos de rotas, curvas de nível com configurações avançadas, mais detalhes conforme níveis de zoom do que o estilo padrão. Opção de integridade de superfície permite distinguir a qualidade de superfície da estrada. Sem modo noite.</string>
+    <string name="mapnik_render_descr">Antigo estilo de renderização padrão do \'Mapnik\'. Principais características: as cores são similares ao estilo \'Mapnik\'.</string>
+    <string name="default_render_descr">Estilo de uso geral. Renderização simplificada mais limpa em cidades densamente povoadas. Principais características: curvas de nível, rotas, qualidade de superfície, restrições de acesso, escudos rodoviários, renderização de caminhos de acordo com a escala SAC, características de esporte em corredeiras.</string>
+    <string name="osmand_extended_description_part8">OsmAnd é um software aberto desenvolvido ativamente. Todos podem contribuir para o app reportando bugs, melhorando traduções ou programando novas funcionalidades. Além disso, o projeto conta com contribuições financeiras para financiar a programação e testes de novas funcionalidades.
+\nCobertura de mapa e qualidade aproximada:
+\n• Europa Ocidental: ****
+\n• Europa Oriental: ***
+\n• Rússia: ***
+\n• América do Norte: ***
+\n• América do Sul: **
+\n• Ásia: **
+\n• Japão e Coreia: ***
+\n• Oriente Médio: **
+\n• África: **
+\n• Antártida: *
+\nA maioria dos países ao redor do globo é disponível para download!
+\nObtenha um navegador confiável em seu país - seja ele França, Alemanha, México, Reino Unido, Espanha, Holanda, EUA, Rússia, Brasil ou qualquer outro.</string>
     </resources>

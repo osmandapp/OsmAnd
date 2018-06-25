@@ -406,7 +406,7 @@
 	<string name="show_more_map_detail_descr">Einige Vektor-Daten (Straßen etc.) bereits bei kleineren Vergrößerungen zeigen.</string>
 	<string name="favourites_delete_multiple_succesful">Favorit(en) gelöscht.</string>
 	<string name="favorite_delete_multiple">Es soll(en) %1$d Favorit(en) und %2$d Favoriten-Gruppe(n) gelöscht werden. Fortfahren?</string>
-	<string name="favorite_home_category">Zu Hause</string>
+	<string name="favorite_home_category">Zuhause</string>
 	<string name="favorite_friends_category">Freunde</string>
 	<string name="favorite_places_category">Sehenswertes</string>
 	<string name="shared_string_others">Andere</string>
@@ -571,7 +571,7 @@
 	<string name="select_build_to_install">OsmAnd-Build zur Installation auswählen</string>
 	<string name="contribution_activity">Versionen zur Installation</string>
 	<string name="gps_status_app_not_found">App \'GPS Status\' ist nicht installiert. Soll diese im Market gesucht werden werden?</string>
-	<string name="voice_is_not_available_msg">Keine Sprachansage verfügbar. Bitte unter \'Einstellungen\' → \'Allgemeine Einstellungen\' → \'Sprachansagen\' ein Sprachpaket auswählen oder herunterladen.</string>
+	<string name="voice_is_not_available_msg">Keine Sprachansage verfügbar. Bitte unter \'Einstellungen\' → \'Navigationseinstellungen\' → \'Sprachansagen\' ein Sprachpaket auswählen oder herunterladen.</string>
 	<string name="voice_is_not_available_title">Keine Sprachansage ausgewählt</string>
 	<string name="daynight_mode_day">Tag</string>
 	<string name="daynight_mode_night">Nacht</string>
@@ -896,7 +896,7 @@
 	<string name="poi_edit_title">POI bearbeiten</string>
 	<string name="poi_create_title">POI erstellen</string>
 	<string name="poi_error_poi_not_found">Punkt wurde nicht gefunden oder das Objekt besteht aus mehreren Punkten, was noch nicht unterstützt wird.</string>
-	<string name="poi_remove_confirm_template">Sicher löschen: {0} (Kommentar eingeben)?</string>
+	<string name="poi_remove_confirm_template">Sicher löschen: {0} (Kommentar)?</string>
 	<string name="poi_remove_title">POI löschen</string>
 	<string name="shared_string_delete">Löschen</string>
 	<string name="poi_remove_success">POI wurde gelöscht</string>
@@ -2291,7 +2291,7 @@ Derzeit sind nur {2} MB verfügbar.</string>
     <string name="custom_search">Benutzerdefinierte Suche</string>
     <string name="edit_filter">Kategorien bearbeiten</string>
     <string name="subcategories">Unterkategorien</string>
-    <string name="translit_names">Namen buchstabengetreu umschreiben</string>
+    <string name="translit_names">Namen transliteriren</string>
     <string name="translit_name_if_miss">Transliteration, wenn Namen in %1$s fehlen</string>
     <string name="rendering_value_light_brown_name">Hellbraun</string>
     <string name="rendering_value_dark_brown_name">Dunkelbraun</string>
@@ -3065,5 +3065,5 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="coord_input_edit_point">Punkt bearbeiten</string>
     <string name="coord_input_add_point">Punkt hinzufügen</string>
     <string name="coord_input_save_as_track">Als Track speichern</string>
-    <string name="coord_input_save_as_track_descr">Sie haben %1$s Punkte hinzugefügt. Geben Sie den Namen der Datei ein und klicken Sie auf Speichern.</string>
+    <string name="coord_input_save_as_track_descr">Sie haben %1$s Punkte hinzugefügt. Geben Sie den Dateinamen ein und klicken Sie auf \"Speichern\".</string>
     </resources>

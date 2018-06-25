@@ -1,5 +1,7 @@
 package net.osmand.telegram.ui
 
+import android.graphics.Bitmap
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
@@ -10,6 +12,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.Switch
 import android.widget.TextView
+import android.widget.Toast
 import net.osmand.telegram.R
 import net.osmand.telegram.TelegramApplication
 import net.osmand.telegram.helpers.TelegramHelper.TelegramAuthorizationState
@@ -27,6 +30,8 @@ class LiveNowTabFragment : Fragment(), TelegramListener {
 		get() = activity?.application as TelegramApplication
 
 	private val telegramHelper get() = app.telegramHelper
+	private val osmandHelper get() = app.osmandHelper
+	private val settings get() = app.settings
 
 	private val adapter = LiveNowListAdapter()
 
@@ -39,9 +44,23 @@ class LiveNowTabFragment : Fragment(), TelegramListener {
 		return mainView
 	}
 
+	override fun onResume() {
+		super.onResume()
+		updateList()
+	}
+
 	override fun onTelegramStatusChanged(prevTelegramAuthorizationState: TelegramAuthorizationState,
 										 newTelegramAuthorizationState: TelegramAuthorizationState) {
-		// TODO: update list
+		when (newTelegramAuthorizationState) {
+			TelegramAuthorizationState.READY -> {
+				updateList()
+			}
+			TelegramAuthorizationState.CLOSED,
+			TelegramAuthorizationState.UNKNOWN -> {
+				adapter.items = emptyList()
+			}
+			else -> Unit
+		}
 	}
 
 	override fun onTelegramChatsRead() {
@@ -107,6 +126,70 @@ class LiveNowTabFragment : Fragment(), TelegramListener {
 		}
 
 		override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+			val lastItem = position == itemCount - 1
+			val item = items[position]
+			if (item is TdApi.Chat && holder is ChatViewHolder) {
+				val nextItemIsContact = !lastItem && items[position + 1] is TdApi.User
+				val chatTitle = item.title
+
+				var drawable: Drawable? = null
+				var bitmap: Bitmap? = null
+				val chatPhoto = item.photo?.small
+				if (chatPhoto != null && chatPhoto.local.path.isNotEmpty()) {
+					bitmap = app.uiUtils.getCircleBitmap(chatPhoto.local.path)
+				}
+				if (bitmap == null) {
+					drawable = app.uiUtils.getThemedIcon(R.drawable.ic_group)
+				}
+				if (bitmap != null) {
+					holder.icon?.setImageBitmap(bitmap)
+				} else {
+					holder.icon?.setImageDrawable(drawable)
+				}
+				holder.title?.text = chatTitle
+				holder.description?.text = "Chat description" // FIXME
+				holder.imageButton?.setImageDrawable(app.uiUtils.getThemedIcon(R.drawable.ic_overflow_menu_white))
+				holder.imageButton?.setOnClickListener {
+					Toast.makeText(context, "Options", Toast.LENGTH_SHORT).show() // FIXME
+				}
+				holder.showOnMapRow?.setOnClickListener {
+					holder.showOnMapSwitch?.isChecked = !holder.showOnMapSwitch?.isChecked!!
+				}
+				holder.showOnMapSwitch?.setOnCheckedChangeListener(null)
+				holder.showOnMapSwitch?.isChecked = settings.isShowingChatOnMap(chatTitle)
+				holder.showOnMapSwitch?.setOnCheckedChangeListener { _, isChecked ->
+					settings.showChatOnMap(chatTitle, isChecked)
+					if (settings.hasAnyChatToShowOnMap()) {
+						if (osmandHelper.isOsmandNotInstalled()) {
+							if (isChecked) {
+								activity?.let {
+									MainActivity.OsmandMissingDialogFragment().show(it.supportFragmentManager, null)
+								}
+							}
+						} else {
+							if (isChecked) {
+								app.showLocationHelper.showChatMessages(chatTitle)
+							} else {
+								app.showLocationHelper.hideChatMessages(chatTitle)
+							}
+							app.showLocationHelper.startShowingLocation()
+						}
+					} else {
+						app.showLocationHelper.stopShowingLocation()
+						if (!isChecked) {
+							app.showLocationHelper.hideChatMessages(chatTitle)
+						}
+					}
+				}
+				holder.bottomDivider?.visibility = if (nextItemIsContact) View.VISIBLE else View.GONE
+				holder.bottomShadow?.visibility = if (lastItem) View.VISIBLE else View.GONE
+			} else if (item is TdApi.User && holder is ContactViewHolder) {
+				// telegramHelper.getUserPhotoPath(user)
+				holder.icon?.setImageDrawable(app.uiUtils.getThemedIcon(R.drawable.ic_group)) // FIXME
+				holder.title?.text = "${item.firstName} ${item.lastName}"
+				holder.description?.text = "User description" // FIXME
+				holder.bottomShadow?.visibility = if (lastItem) View.VISIBLE else View.GONE
+			}
 		}
 
 		override fun getItemCount() = items.size

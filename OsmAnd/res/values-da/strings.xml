@@ -34,7 +34,7 @@
 \n
 \nDe globale data (mellem 70° nord og 70° syd) er baseret på målinger af SRTM (Shuttle Radar Topografi Mission) og ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), et billeddannende instrument ombord på Terra satellitten, flagskibet i NASAs Earth Observering system. ASTER er et samarbejde mellem NASA, Japans Ministry of Economy, Trade and Industry  (METI), og Japan Space Systems (J-spacesystems)."</string>
     <string name="map_widget_distancemeasurement">Afstandsmåling</string>
-    <string name="audionotes_location_not_defined">Placering der skal tilknyttes til noten er ikke defineret endnu. \'Brug placering …\' til at knytte en note til den angivne placering.</string>
+    <string name="audionotes_location_not_defined">Placering der skal tilknyttes til noten er ikke defineret endnu. “Brug placering…“ til at knytte en note til den angivne placering.</string>
 
     <string name="map_widget_audionotes">Lydnoter</string>
     <string name="audionotes_plugin_description">Lyd-/videonoter udvidelse giver funktionalitet til at tage lyd-/foto-/videonoter under en tur, enten ved hjælp en knap på skærmen, eller direkte fra kontekstmenuen for en position på kortet.</string>
@@ -870,7 +870,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="transport_to_go_before">efterfølgende afstand</string>
     <string name="transport_route_distance">Rutelængde</string>
     <string name="transport">Transport</string>
-    <string name="poi_remove_confirm_template">Slet {0} (skriv kommentar)?</string>
+    <string name="poi_remove_confirm_template">Slet {0} (kommentar)?</string>
     
     <string name="osb_comment_dialog_error">Kunne ikke tilføje kommentar</string>
     <string name="osb_comment_dialog_author">Forfatternavn</string>
@@ -3167,5 +3167,5 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="coord_input_edit_point">Rediger punkt</string>
     <string name="coord_input_add_point">Tilføj punkt</string>
     <string name="coord_input_save_as_track">Gem som spor</string>
-    <string name="coord_input_save_as_track_descr">%1$s punkter tilføjet. Indtast filnavn og klik på gem.</string>
+    <string name="coord_input_save_as_track_descr">%1$s punkter tilføjet. Indtast et filnavn og tryk på “Gem“.</string>
     </resources>

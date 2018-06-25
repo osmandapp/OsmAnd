@@ -408,7 +408,7 @@
 	
 	<string name="shared_string_save_as_gpx">שמירה כקובץ GPX חדש</string>
 	<string name="route_successfully_saved_at">המסלול נשמר בתור ‚%1$s’.</string>
-	<string name="filename_input">שם הקובץ:</string>
+	<string name="filename_input">שם קובץ:</string>
 	<string name="file_with_name_already_exist">כבר קיים קובץ השם הזה.</string>
 	<string name="shared_string_save">שמירה</string>
 	
@@ -943,7 +943,7 @@
 	<string name="poi_edit_title">עריכת נ״ע</string>
 	<string name="poi_create_title">יצירת נ״ע</string>
 	<string name="poi_error_poi_not_found">לא ניתן למצוא את המפרק או שהמתחם מורכב ממספר מפרקים, מצב שלא נתמך עדיין.</string>
-	<string name="poi_remove_confirm_template">האם למחוק את {0} (להזין הערה)?</string>
+	<string name="poi_remove_confirm_template">למחוק את {0} (תגובה)?</string>
 	<string name="poi_remove_title">מחיקת נ״ע</string>
 	<string name="shared_string_delete">מחיקה</string>
 	<string name="poi_remove_success">נ״ע נמחקה</string>
@@ -2659,7 +2659,7 @@
     <string name="rendering_attr_hidePOILabels_name">תוויות נ״ע</string>
     <string name="copy_location_name">העתקת שם נקודה/נ״ע</string>
     <string name="toast_empty_name_error">מיקום ללא שם</string>
-<string name="enter_the_file_name">נא להזין את שם הקובץ.</string>
+<string name="enter_the_file_name">נא להקליד שם קובץ.</string>
     <string name="map_import_error">שגיאת ייבוא למפה</string>
     <string name="map_imported_successfully">המפה יובאה</string>
     <string name="make_as_start_point">סימון כנקודת התחלה</string>
@@ -3059,5 +3059,5 @@
     <string name="coord_input_edit_point">עריכת נקודה</string>
     <string name="coord_input_add_point">הוספת נקודה</string>
     <string name="coord_input_save_as_track">שמירה כמסלול</string>
-    <string name="coord_input_save_as_track_descr">הוספת %1$s נקודות. נא להקליד את שם הקובץ וללחוץ על שמירה.</string>
+    <string name="coord_input_save_as_track_descr">הוספת %1$s נקודות. נא להקליד שם קובץ וללחוץ על ‚שמירה’.</string>
     </resources>

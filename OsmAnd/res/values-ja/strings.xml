@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources><string name="installing_new_resources">新しいデータを展開中…</string>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="installing_new_resources">新しいデータを展開中…</string>
      <string name="internet_connection_required_for_online_route">オンライン経路案内を使用しようとしていますが
 インターネット接続されていません。</string>
      <string name="tts_language_not_supported_title">未サポート言語</string>
@@ -848,7 +849,7 @@ POIの更新は利用できません</string>
     <string name="poi_filter_sightseeing">観光(Sightseeing)</string>
     <string name="poi_filter_accomodation">収容施設(Accommodation)</string>
     <string name="show_warnings_title">警告の表示設定…</string>
-	<string name="show_warnings_descr">交通指示警告(法定速度、強制停止、スピードバンプ等含む)、スピードカメラ、車線等の通知を設定します</string>
+	<string name="show_warnings_descr">交通指示警告(法定速度、強制停止、スピードバンプ、トンネル等)、スピードカメラ、車線等の通知を設定します。</string>
 	<string name="use_compass_navigation_descr">方向が全く検出できない場合電子コンパスを使用します</string>
 	<string name="use_compass_navigation">電子コンパスを使用</string>
 	<string name="avoid_motorway">高速道路を使用しない</string>
@@ -2530,7 +2531,7 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="quick_favorites_show_favorites_dialog">お気に入りダイアログを表示</string>
     <string name="quick_favorites_name_preset">プリセットに名前を付ける</string>
     <string name="quick_action_add_marker_descr">アクションボタンをタップすると、画面中央アイコンの位置にマップマーカーが追加されます。</string>
-    <string name="quick_action_add_gpx_descr">アクションボタンをタップすると、画面中央アイコンの地点をGPX経由地点として追加します。</string>
+    <string name="quick_action_add_gpx_descr">このアクションボタンをタップすると、画面中央の地点をGPX経由地点として追加します。</string>
     <string name="quick_action_take_audio_note_descr">アクションボタンをタップすると画面中央アイコンの地点に音声メモを追加します。</string>
     <string name="quick_action_take_video_note_descr">アクションボタンをタップすると画面中央アイコンの地点に動画メモが追加されます。</string>
     <string name="quick_action_take_photo_note_descr">アクションボタンをタップすると画面中央アイコンの地点に写真メモが追加されます。</string>
@@ -3036,4 +3037,17 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="light_rs_render_descr">カーナビゲーション向けのシンプルでコントラストのハッキリしたスタイルです。 夜間モードはさらに目に優しい表示になります。主な特徴：等高線、対照的なオレンジ色の道路で表示、二次的な地図オブジェクトを排し散漫性を軽減します。</string>
     <string name="topo_render_descr">コントラストスタイルは主に自然の中を行き来するハイキング、トレッキング、サイクリングのために設計されています。 複雑な外部照明のある場所でも読み易さを重視しています。主な機能：道路や自然のオブジェクト強調、ルートの種類、拡張設定を用いた等高線、デフォルトのスタイルよりもズームレベルを細かく設定できます。 路面の状態を表示するオプションを使うことで、路面の品質(舗装済み、簡易舗装など)を区別できます。夜間モードはありません。</string>
     <string name="mapnik_render_descr">古い「Mapnik」風のデフォルトレンダリングスタイルです。主な特徴：配色を「Mapnik」スタイルに似せています。</string>
+    <string name="coord_input_edit_point">地点／座標の編集</string>
+    <string name="coord_input_add_point">座標の追加</string>
+    <string name="coord_input_save_as_track">経路として保存</string>
+    <string name="coord_input_save_as_track_descr">%1$sヶ所の座標を追加しました。ファイル名を付けて\"保存\"をタップしてください。</string>
+    <string name="error_notification_desc">この通知画面のスクリーンショットを、support@osmand.netに送信してください。</string>
+    <string name="quick_action_edit_actions">アクションの編集</string>
+    <string name="clear_all_intermediates">中間経由地点を全て消去</string>
+    <string name="add_waypoint">経由地点を追加</string>
+    <string name="show_tunnels">トンネル</string>
+    <string name="touring_view_render_descr">ツーリングを対象とした高詳細のマップスタイルで、デフォルトスタイルの全オプションが有効となっています。すべての道路、通路、その他の道、異なる道路タイプ間の視覚的区別を可能にし、道以外も可能な限り詳細を表示しており、ツーリング用地図帳を思い起こさせる見た目となっています。アウトドアでの利用や昼夜モードもハイコントラストで対応しています。</string>
+    <string name="default_render_descr">標準的な汎用スタイルです。人口密集地の場合描写の簡素化がなされます。主な機能としては等高線、ルート、路面品質、通行制限、道路標識、SACスケールの通路描写をサポートし、急流下りなどのウォータースポーツにも使用できます。</string>
+    <string name="open_wikipedia_link_online">Wikipediaをオンライン参照</string>
+    <string name="open_wikipedia_link_online_description">このリンクを開くとウェブブラウザで閲覧することができます。</string>
     </resources>
