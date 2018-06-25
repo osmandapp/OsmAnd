@@ -92,7 +92,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 	public static final String ADDED_POINTS_NUMBER_KEY = "added_points_number_key";
 
 	private GPXUtilities.GPXFile newGpxFile;
-	private OnMapMarkersSavedListener listener;
+	private OnPointsSavedListener listener;
 	protected GPXUtilities.WptPt selectedWpt;
 	private SavingTrackHelper savingTrackHelper;
 	private GpxSelectionHelper selectedGpxHelper;
@@ -117,7 +117,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 	private boolean compassUpdateAllowed = true;
 
 
-	public void setListener(OnMapMarkersSavedListener listener) {
+	public void setListener(OnPointsSavedListener listener) {
 		this.listener = listener;
 	}
 
@@ -189,7 +189,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 				new SaveGpxAsyncTask(getMyApplication(), gpx,null, false).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 				syncGpx(gpx);
 				if (listener != null) {
-					listener.onMapMarkersSaved();
+					listener.onPointsSaved();
 				}
 				dismiss();
 			}
@@ -1006,7 +1006,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 				hasUnsavedChanges = false;
 				app.getMapMarkersHelper().addOrEnableGroup(getGpx());
 				if (listener != null) {
-					listener.onMapMarkersSaved();
+					listener.onPointsSaved();
 				}
 				snackbar = Snackbar.make(mainView, fileName + " " + getString(R.string.is_saved) + ".", Snackbar.LENGTH_LONG)
 						.setAction(R.string.shared_string_show, new View.OnClickListener() {
@@ -1041,7 +1041,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 						.setAction(R.string.shared_string_undo, new View.OnClickListener() {
 							@Override
 							public void onClick(View view) {
-								getGpx().addPoint(position, selectedWpt);
+								getGpx().addPoint(position, wpt);
 								adapter.notifyDataSetChanged();
 							}
 						});
@@ -1422,7 +1422,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		}
 	}
 
-	interface OnMapMarkersSavedListener {
-		void onMapMarkersSaved();
+	public interface OnPointsSavedListener {
+		void onPointsSaved();
 	}
 }

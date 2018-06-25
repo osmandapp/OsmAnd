@@ -33,7 +33,7 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TrackActivity;
-import net.osmand.plus.mapmarkers.CoordinateInputDialogFragment.OnMapMarkersSavedListener;
+import net.osmand.plus.mapmarkers.CoordinateInputDialogFragment.OnPointsSavedListener;
 import net.osmand.plus.mapmarkers.DirectionIndicationDialogFragment.DirectionIndicationFragmentListener;
 import net.osmand.plus.mapmarkers.OptionsBottomSheetDialogFragment.MarkerOptionsFragmentListener;
 import net.osmand.plus.mapmarkers.OrderByBottomSheetDialogFragment.OrderByFragmentListener;
@@ -141,7 +141,7 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 		}
 		Fragment coordinateInputDialog = fragmentManager.findFragmentByTag(CoordinateInputDialogFragment.TAG);
 		if (coordinateInputDialog != null) {
-			((CoordinateInputDialogFragment) coordinateInputDialog).setListener(createOnMapMarkersSavedListener());
+			((CoordinateInputDialogFragment) coordinateInputDialog).setListener(createOnPointsSavedListener());
 		}
 
 		View mainView = inflater.inflate(R.layout.fragment_map_markers_dialog, container);
@@ -293,10 +293,10 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 		return (OsmandApplication) getActivity().getApplication();
 	}
 
-	private OnMapMarkersSavedListener createOnMapMarkersSavedListener() {
-		return new OnMapMarkersSavedListener() {
+	private OnPointsSavedListener createOnPointsSavedListener() {
+		return new OnPointsSavedListener() {
 			@Override
-			public void onMapMarkersSaved() {
+			public void onPointsSaved() {
 				updateAdapters();
 			}
 		};
@@ -392,7 +392,7 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 				if (mapActivity != null) {
 					CoordinateInputDialogFragment fragment = new CoordinateInputDialogFragment();
 					fragment.setRetainInstance(true);
-					fragment.setListener(createOnMapMarkersSavedListener());
+					fragment.setListener(createOnPointsSavedListener());
 					fragment.show(getChildFragmentManager(), CoordinateInputDialogFragment.TAG);
 				}
 			}

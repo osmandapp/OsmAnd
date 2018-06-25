@@ -313,10 +313,20 @@ public class TrackPointFragment extends OsmandExpandableListFragment implements 
 		if (fm != null) {
 			CoordinateInputDialogFragment fragment = new CoordinateInputDialogFragment();
 			fragment.setRetainInstance(true);
+			fragment.setListener(createOnPointsSavedListener());
 			fragment.show(fm, CoordinateInputDialogFragment.TAG);
 		}
 	}
 
+	private CoordinateInputDialogFragment.OnPointsSavedListener createOnPointsSavedListener() {
+		return new CoordinateInputDialogFragment.OnPointsSavedListener() {
+			@Override
+			public void onPointsSaved() {
+				setContent();
+			}
+		};
+	}
+	
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		menu.clear();
