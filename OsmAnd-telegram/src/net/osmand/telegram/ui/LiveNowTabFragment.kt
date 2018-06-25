@@ -132,20 +132,7 @@ class LiveNowTabFragment : Fragment(), TelegramListener {
 				val nextItemIsContact = !lastItem && items[position + 1] is TdApi.User
 				val chatTitle = item.title
 
-				var drawable: Drawable? = null
-				var bitmap: Bitmap? = null
-				val chatPhoto = item.photo?.small
-				if (chatPhoto != null && chatPhoto.local.path.isNotEmpty()) {
-					bitmap = app.uiUtils.getCircleBitmap(chatPhoto.local.path)
-				}
-				if (bitmap == null) {
-					drawable = app.uiUtils.getThemedIcon(R.drawable.ic_group)
-				}
-				if (bitmap != null) {
-					holder.icon?.setImageBitmap(bitmap)
-				} else {
-					holder.icon?.setImageDrawable(drawable)
-				}
+				setupIcon(holder.icon, item.photo?.small?.local?.path)
 				holder.title?.text = chatTitle
 				holder.description?.text = "Chat description" // FIXME
 				holder.imageButton?.setImageDrawable(app.uiUtils.getThemedIcon(R.drawable.ic_overflow_menu_white))
@@ -184,8 +171,7 @@ class LiveNowTabFragment : Fragment(), TelegramListener {
 				holder.bottomDivider?.visibility = if (nextItemIsContact) View.VISIBLE else View.GONE
 				holder.bottomShadow?.visibility = if (lastItem) View.VISIBLE else View.GONE
 			} else if (item is TdApi.User && holder is ContactViewHolder) {
-				// telegramHelper.getUserPhotoPath(user)
-				holder.icon?.setImageDrawable(app.uiUtils.getThemedIcon(R.drawable.ic_group)) // FIXME
+				setupIcon(holder.icon, telegramHelper.getUserPhotoPath(item))
 				holder.title?.text = "${item.firstName} ${item.lastName}"
 				holder.description?.text = "User description" // FIXME
 				holder.bottomShadow?.visibility = if (lastItem) View.VISIBLE else View.GONE
@@ -193,6 +179,22 @@ class LiveNowTabFragment : Fragment(), TelegramListener {
 		}
 
 		override fun getItemCount() = items.size
+
+		private fun setupIcon(iv: ImageView?, photoPath: String?) {
+			var drawable: Drawable? = null
+			var bitmap: Bitmap? = null
+			if (photoPath != null && photoPath.isNotEmpty()) {
+				bitmap = app.uiUtils.getCircleBitmap(photoPath)
+			}
+			if (bitmap == null) {
+				drawable = app.uiUtils.getThemedIcon(R.drawable.ic_group)
+			}
+			if (bitmap != null) {
+				iv?.setImageBitmap(bitmap)
+			} else {
+				iv?.setImageDrawable(drawable)
+			}
+		}
 
 		inner class ContactViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
 			val icon: ImageView? = view.findViewById(R.id.icon)
