@@ -1943,7 +1943,7 @@
 	<string name="poi_material_plastic">Materiál: plast</string>
 	<string name="poi_material_sandstone">Materiál: prieskovec</string>
 	<string name="poi_material_granite_stone">Materiál: granit/žula</string>
-	<string name="poi_material_metal_wood">Materiál: kov a drevo</string>
+	<string name="poi_material_metal_wood">Materiál: kov, drevo</string>
 	<string name="poi_material_glass">Materiál: sklo</string>
 	<string name="poi_material_bronze">Materiál: bronz</string>
 	<string name="poi_material_earth">Materiál: hlina</string>
@@ -3344,7 +3344,7 @@
 
 	<string name="poi_motorcycle_sales_yes">Predaj</string>
 	<string name="poi_motorcycle_sales_no">Predaj: nie</string>
-	<string name="poi_motorcycle_sales_yes_used">Predaj: áno; ojazdené</string>
+	<string name="poi_motorcycle_sales_yes_used">Predaj: áno, ojazdené</string>
 	<string name="poi_motorcycle_sales_used">Predaj: ojazdené</string>
 	<string name="poi_motorcycle_rental_yes">Prenájom</string>
 	<string name="poi_motorcycle_rental_no">Prenájom: nie</string>
