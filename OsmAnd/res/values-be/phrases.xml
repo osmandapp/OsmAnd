@@ -3900,4 +3900,6 @@
 
 <string name="poi_appliance">Бытавая тэхніка</string>
 
-	</resources>
+	<string name="poi_outcrop">Агаленне</string>
+
+</resources>

@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
     <string name="about_version">Верзија:</string>
     <string name="shared_string_about">О програму</string>
     <string name="about_settings_descr">Верзија инфо, лиценце, чланови пројекта</string>
@@ -2304,7 +2305,7 @@
     <string name="add_favorite_dialog_favourite_added_template">Омиљена тачка \"{0}\" додата.</string>
     <string name="poi_edit_title">Измени тачку од интереса</string>
     <string name="poi_create_title">Направи тачку од интереса</string>
-    <string name="poi_remove_confirm_template">Обриши {0} (унесите коментар)?</string>
+    <string name="poi_remove_confirm_template">Обриши {0} (коментар)?</string>
     <string name="poi_remove_title">Обриши тачку од интереса</string>
     <string name="poi_remove_success">Тачка од интереса избрисана</string>
     <string name="poi_action_succeded_template">Радња {0} извршена.</string>
@@ -2949,4 +2950,8 @@
 \n • Бирање између целокупних података регије или само мреже путева (пример: цео Јапан је 700MB, а само путеви су 200MB)</string>
     <string name="quick_action_edit_actions">Измени радње</string>
     <string name="error_notification_desc">Молимо пошаљите снимак екрана овог обавештења на support@osmand.net</string>
+    <string name="coord_input_edit_point">Измени тачку</string>
+    <string name="coord_input_add_point">Додај тачку</string>
+    <string name="coord_input_save_as_track">Сними као путању</string>
+    <string name="coord_input_save_as_track_descr">Додали сте %1$s тачке(и). Унесите име фајл и кликните \"Сними\".</string>
     </resources>
