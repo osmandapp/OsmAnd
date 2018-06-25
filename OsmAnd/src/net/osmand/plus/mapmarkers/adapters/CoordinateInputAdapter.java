@@ -16,6 +16,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.UiUtilities.UpdateLocationViewCache;
+import net.osmand.plus.base.FavoriteImageDrawable;
 
 
 public class CoordinateInputAdapter extends RecyclerView.Adapter<MapMarkerItemViewHolder> {
@@ -63,7 +64,7 @@ public class CoordinateInputAdapter extends RecyclerView.Adapter<MapMarkerItemVi
 		GPXUtilities.WptPt wpt = getItem(position);
 
 		holder.iconDirection.setVisibility(View.VISIBLE);
-		holder.icon.setVisibility(View.GONE);
+		holder.icon.setImageDrawable(FavoriteImageDrawable.getOrCreate(app, wpt.getColor(), false));
 		holder.mainLayout.setBackgroundColor(getResolvedColor(nightTheme ? R.color.ctx_menu_bg_dark : R.color.bg_color_light));
 		holder.title.setTextColor(getResolvedColor(nightTheme ? R.color.ctx_menu_title_color_dark : R.color.color_black));
 		holder.divider.setBackgroundColor(getResolvedColor(nightTheme ? R.color.route_info_divider_dark : R.color.dashboard_divider_light));
@@ -110,6 +111,7 @@ public class CoordinateInputAdapter extends RecyclerView.Adapter<MapMarkerItemVi
 	
 	public void setGpx(GPXUtilities.GPXFile gpx) {
 		this.gpx = gpx;
+		notifyDataSetChanged();
 	}
 	
 	private Drawable getColoredIcon(@DrawableRes int resId, @ColorRes int colorResId) {

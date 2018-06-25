@@ -849,6 +849,11 @@ public class GPXUtilities {
 			modifiedTime = System.currentTimeMillis();
 		}
 
+		public void addPoint(int position, WptPt point) {
+			points.add(position, point);
+			modifiedTime = System.currentTimeMillis();
+		}
+		
 		void addPoints(Collection<? extends WptPt> collection) {
 			points.addAll(collection);
 			modifiedTime = System.currentTimeMillis();
@@ -1230,11 +1235,6 @@ public class GPXUtilities {
 				}
 			}
 			return categories;
-		}
-
-		public void addPoint(int position, WptPt point) {
-			points.add(position, point);
-			modifiedTime = System.currentTimeMillis();
 		}
 	}
 

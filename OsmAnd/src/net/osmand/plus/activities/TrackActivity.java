@@ -408,11 +408,8 @@ public class TrackActivity extends TabActivity {
 					trackBitmapDrawer.setDrawEnabled(trackPointFragment.isUpdateEnable());
 				}
 				trackPointFragment.setContent();
-			} else if (frag instanceof CoordinateInputDialogFragment) {
-				CoordinateInputDialogFragment coordinateInputDialogFragment = (CoordinateInputDialogFragment) frag;
-				if (gpxFile != null) {
-					coordinateInputDialogFragment.setGpx(gpxFile);
-				}
+			} else if (gpxFile != null && frag instanceof CoordinateInputDialogFragment) {
+				((CoordinateInputDialogFragment) frag).setGpx(gpxFile);
 			}
 		}
 		OsmandFragmentPagerAdapter pagerAdapter = (OsmandFragmentPagerAdapter) viewPager.getAdapter();
