@@ -2609,7 +2609,12 @@ Pôr do Sol: %2$s</string>
 \n • Ver a sua velocidade e altitude
 \n • Opção de gravação GPX permite-lhe gravar a sua viagem e compartilhá-la
 \n • Através de plugin adicionais, você pode ativar curvas de nível e sombreamento de relevo</string>
-    <string name="osmand_extended_description_part6">Passeio, caminhada, turismo pela cidade • O mapa mostra caminhos para passeios e caminhadas • A Wikipédia no seu idioma preferido pode dizer muito durante um turismo pela cidade • Paradas de transportes públicos (ônibus, troleibus, trem) incluindo nomes de linha, ajuda a navegar em uma nova cidade • Navegação GPS em modo pedestre constrói a sua rota usando caminhos para pedestres • Você pode fazer o upload e seguir uma rota GPX ou gravar e compartilhar a sua própria rota</string>
+    <string name="osmand_extended_description_part6">Passeio, caminhada, turismo pela cidade
+\n• O mapa mostra caminhos para passeios e caminhadas
+\n• A Wikipédia no seu idioma preferido pode dizer muito durante um turismo pela cidade
+\n• Paradas de transportes públicos (ônibus, troleibus, trem) incluindo nomes de linha, ajuda a navegar em uma nova cidade
+\n• Navegação GPS em modo pedestre constrói a sua rota usando caminhos para pedestres
+\n• Fazer upload e seguir uma rota GPX ou gravar e compartilhar a sua própria rota</string>
     <string name="osmand_extended_description_part7">Contribua para o OSM • Comunique falha de dados • Carregue trilhas GPX diretamente do app • Adicione POIs e carregue-os diretamente ao OSM (ou mais tarde se off-line)</string>
     <string name="osmand_plus_extended_description_part5">Recursos de segurança
 \n• Alternância de exibição dia/noite automatizada opcional
@@ -2719,7 +2724,7 @@ Pôr do Sol: %2$s</string>
     <string name="rendering_attr_hidePOILabels_name">Rótulos POI</string>
     <string name="day_off_label">desligado</string>
     <string name="winter_and_ski_renderer">Inverno e esqui</string>
-    <string name="touring_view_renderer">Vista de turismo (contraste e detalhes)</string>
+    <string name="touring_view_renderer">Vista de turismo</string>
     <string name="nautical_renderer">Náutico</string>
     <string name="copy_location_name">Copiar nome de Ponto/POI</string>
     <string name="toast_empty_name_error">O local não tem nome</string>
@@ -2878,4 +2883,5 @@ Pôr do Sol: %2$s</string>
 \n• Antártida: *
 \nA maioria dos países ao redor do globo é disponível para download!
 \nObtenha um navegador confiável em seu país - seja ele França, Alemanha, México, Reino Unido, Espanha, Holanda, EUA, Rússia, Brasil ou qualquer outro.</string>
+    <string name="touring_view_render_descr">Estilo de elevado detalhe para fins de turismo. Inclui todas as opções de configuração de estilo padrão, além disso: exibe o máximo de detalhes possível, em particular todas as estradas, caminhos e outras maneiras de viajar. Distinção visual claro entre todos os tipos de caminhos diferentes, similar a muitos atlas turismo. Esquema de cores de alto contraste para uso ao ar livre, modo dia e noite.</string>
     </resources>

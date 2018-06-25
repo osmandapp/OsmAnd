@@ -3843,4 +3843,6 @@
 	<string name="poi_end_date">Lokadagsetning</string>
 
 <string name="poi_checkpoint_type_quize">Spurningalisti</string>
+	<string name="poi_appliance">Heimilistækjaverslun</string>
+
 	</resources>
