@@ -3087,4 +3087,60 @@
 	<string name="poi_display_no">Οθόνη: όχι</string>
 	<string name="poi_display_analog_yes">Αναλογική οθόνη</string>
 	<string name="poi_display_digital_yes">Ψηφιακή οθόνη</string>
+	<string name="poi_display_sundial_yes">Ηλιακό ρολόι</string>
+
+	<string name="poi_barometer_yes">Βαρόμετρο</string>
+	<string name="poi_barometer_no">Βαρόμετρο: όχι</string>
+	<string name="poi_thermometer_yes">Θερμόμετρο</string>
+	<string name="poi_thermometer_no">Θερμόμετρο: όχι</string>
+	<string name="poi_hygrometer_yes">Υγρόμετρο</string>
+	<string name="poi_hygrometer_no">Υγρόμετρο: όχι</string>
+	<string name="poi_date_yes">Εμφάνιση ημερομηνίας</string>
+	<string name="poi_date_no">Εμφάνιση ημερομηνίας: όχι</string>
+
+	<string name="poi_support_pole">Στήριγμα: στύλος</string>
+	<string name="poi_support_wall_mounted">Υποστήριξη: τοίχος</string>
+	<string name="poi_support_tree">Στήριγμα: δέντρο</string>
+	<string name="poi_support_pedestal">Στήριγμα: βάθρο</string>
+	<string name="poi_support_ground">Στήριγμα: έδαφος</string>
+	<string name="poi_support_billboard">Στήριγμα: πινακίδα</string>
+	<string name="poi_support_ceiling">Στήριγμα: ταβάνι</string>
+	<string name="poi_support_suspended">Στήριγμα: αιωρούμενο</string>
+	<string name="poi_support_roof">Στήριγμα: οροφή</string>
+	<string name="poi_support_tower">Στήριγμα: πύργος</string>
+
+	<string name="poi_passenger_information_display_yes">Εμφάνιση πληροφοριών επιβατών: ναι</string>
+	<string name="poi_passenger_information_display_no">Εμφάνιση πληροφοριών επιβατών: όχι</string>
+
+	<string name="poi_aquaculture">Υδατοκαλλιέργεια</string>
+	<string name="poi_aquaculture_shrimp">Υδατοκαλλιέργεια: γαρίδα</string>
+	<string name="poi_aquaculture_fish">Υδατοκαλλιέργεια: ψάρια</string>
+	<string name="poi_aquaculture_mussels">Υδατοκαλλιέργεια: μύδια</string>
+
+	<string name="poi_mdf">Κύριο πλαίσιο διανομής</string>
+	<string name="poi_min_age">Ελάχιστη ηλικία</string>
+
+	<string name="poi_organic_yes">Ναι</string>
+	<string name="poi_organic_no">Όχι</string>
+	<string name="poi_organic_only">Μόνο</string>
+
+	<string name="poi_traffic_mirror">Καθρέπτης κυκλοφορίας</string>
+
+	<string name="poi_diplomatic_consulate">Προξενείο</string>
+	<string name="poi_diplomatic_consulate_general">Γενικό προξενείο</string>
+	<string name="poi_diplomatic_honorary_consulate">Επίτιμος πρόξενος</string>
+	<string name="poi_diplomatic_permanent_mission">Μόνιμη αποστολή</string>
+	<string name="poi_diplomatic_delegation">Αντιπροσωπεία</string>
+	<string name="poi_diplomatic_ambassadors_residence">Κατοικία πρέσβη</string>
+	<string name="poi_diplomatic_high_commission">Ύπατη αρμοστεία</string>
+
+	<string name="poi_fire_operator">Μέσο κατάσβεσης</string>
+
+	<string name="poi_water_tank">Δεξαμενή νερού</string>
+
+	<string name="poi_toilets_disposal_flush">Εκκένωση τουαλέτας: καζανάκι</string>
+	<string name="poi_toilets_disposal_pitlatrine">Εκκένωση τουαλέτας: εξωτερική</string>
+	<string name="poi_toilets_disposal_chemical">Εκκένωση τουαλέτας: χημική</string>
+	<string name="poi_toilets_disposal_bucket">Εκκένωση τουαλέτας: κουβάς</string>
+
 	</resources>
