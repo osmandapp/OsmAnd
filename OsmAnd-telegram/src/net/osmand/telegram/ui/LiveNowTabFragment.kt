@@ -35,7 +35,11 @@ class LiveNowTabFragment : Fragment(), TelegramListener {
 
 	private val adapter = LiveNowListAdapter()
 
-	override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+	override fun onCreateView(
+		inflater: LayoutInflater,
+		container: ViewGroup?,
+		savedInstanceState: Bundle?
+	): View? {
 		val mainView = inflater.inflate(R.layout.fragment_live_now_tab, container, false)
 		mainView.findViewById<RecyclerView>(R.id.recycler_view).apply {
 			layoutManager = LinearLayoutManager(context)
@@ -49,8 +53,10 @@ class LiveNowTabFragment : Fragment(), TelegramListener {
 		updateList()
 	}
 
-	override fun onTelegramStatusChanged(prevTelegramAuthorizationState: TelegramAuthorizationState,
-										 newTelegramAuthorizationState: TelegramAuthorizationState) {
+	override fun onTelegramStatusChanged(
+		prevTelegramAuthorizationState: TelegramAuthorizationState,
+		newTelegramAuthorizationState: TelegramAuthorizationState
+	) {
 		when (newTelegramAuthorizationState) {
 			TelegramAuthorizationState.READY -> {
 				updateList()
@@ -120,8 +126,12 @@ class LiveNowTabFragment : Fragment(), TelegramListener {
 		override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 			val inflater = LayoutInflater.from(parent.context)
 			return when (viewType) {
-				CHAT_VIEW_TYPE -> ChatViewHolder(inflater.inflate(R.layout.live_now_chat_card, parent, false))
-				else -> ContactViewHolder(inflater.inflate(R.layout.live_now_contact_item, parent, false))
+				CHAT_VIEW_TYPE -> ChatViewHolder(
+					inflater.inflate(R.layout.live_now_chat_card, parent, false)
+				)
+				else -> ContactViewHolder(
+					inflater.inflate(R.layout.live_now_contact_item, parent, false)
+				)
 			}
 		}
 
@@ -129,7 +139,7 @@ class LiveNowTabFragment : Fragment(), TelegramListener {
 			val lastItem = position == itemCount - 1
 			val item = items[position]
 			if (item is TdApi.Chat && holder is ChatViewHolder) {
-				val nextItemIsContact = !lastItem && items[position + 1] is TdApi.User
+				val nextItemIsUser = !lastItem && items[position + 1] is TdApi.User
 				val chatTitle = item.title
 
 				setupIcon(holder.icon, item.photo?.small?.local?.path)
@@ -150,7 +160,8 @@ class LiveNowTabFragment : Fragment(), TelegramListener {
 						if (osmandHelper.isOsmandNotInstalled()) {
 							if (isChecked) {
 								activity?.let {
-									MainActivity.OsmandMissingDialogFragment().show(it.supportFragmentManager, null)
+									MainActivity.OsmandMissingDialogFragment()
+										.show(it.supportFragmentManager, null)
 								}
 							}
 						} else {
@@ -168,7 +179,7 @@ class LiveNowTabFragment : Fragment(), TelegramListener {
 						}
 					}
 				}
-				holder.bottomDivider?.visibility = if (nextItemIsContact) View.VISIBLE else View.GONE
+				holder.bottomDivider?.visibility = if (nextItemIsUser) View.VISIBLE else View.GONE
 				holder.bottomShadow?.visibility = if (lastItem) View.VISIBLE else View.GONE
 			} else if (item is TdApi.User && holder is ContactViewHolder) {
 				setupIcon(holder.icon, telegramHelper.getUserPhotoPath(item))
