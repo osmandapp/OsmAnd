@@ -31,6 +31,7 @@ import net.osmand.plus.OsmAndAppCustomization;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.mapmarkers.CoordinateInputDialogFragment;
 import net.osmand.plus.measurementtool.NewGpxData;
 import net.osmand.plus.myplaces.FavoritesActivity;
 import net.osmand.plus.myplaces.SplitSegmentDialogFragment;
@@ -407,6 +408,8 @@ public class TrackActivity extends TabActivity {
 					trackBitmapDrawer.setDrawEnabled(trackPointFragment.isUpdateEnable());
 				}
 				trackPointFragment.setContent();
+			} else if (gpxFile != null && frag instanceof CoordinateInputDialogFragment) {
+				((CoordinateInputDialogFragment) frag).setGpx(gpxFile);
 			}
 		}
 		OsmandFragmentPagerAdapter pagerAdapter = (OsmandFragmentPagerAdapter) viewPager.getAdapter();

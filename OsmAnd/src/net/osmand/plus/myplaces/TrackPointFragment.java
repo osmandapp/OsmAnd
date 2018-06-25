@@ -12,6 +12,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AlertDialog;
@@ -65,6 +66,7 @@ import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.activities.TrackActivity;
 import net.osmand.plus.base.FavoriteImageDrawable;
 import net.osmand.plus.base.OsmandExpandableListFragment;
+import net.osmand.plus.mapmarkers.CoordinateInputDialogFragment;
 import net.osmand.plus.myplaces.TrackBitmapDrawer.TrackBitmapDrawerListener;
 import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.util.Algorithms;
@@ -83,6 +85,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+
 public class TrackPointFragment extends OsmandExpandableListFragment implements TrackBitmapDrawerListener {
 
 	public static final int SEARCH_ID = -1;
@@ -90,6 +93,7 @@ public class TrackPointFragment extends OsmandExpandableListFragment implements 
 	public static final int DELETE_ACTION_ID = 3;
 	public static final int SHARE_ID = 4;
 	public static final int SELECT_MAP_MARKERS_ID = 5;
+	public static final int COORDINATE_INPUT_ID = 6;
 	//public static final int SELECT_MAP_MARKERS_ACTION_MODE_ID = 6;
 	public static final int SELECT_FAVORITES_ID = 7;
 	public static final int SELECT_FAVORITES_ACTION_MODE_ID = 8;
@@ -274,6 +278,9 @@ public class TrackPointFragment extends OsmandExpandableListFragment implements 
 		} else if (item.getItemId() == DELETE_ID) {
 			enterDeleteMode();
 			return true;
+		} else if (item.getItemId() == COORDINATE_INPUT_ID) {
+			openCoordinatesInput();
+			return true;
 		} else {
 			return super.onOptionsItemSelected(item);
 		}
@@ -301,6 +308,25 @@ public class TrackPointFragment extends OsmandExpandableListFragment implements 
 		}
 	}
 
+	private void openCoordinatesInput() {
+		FragmentManager fm = getFragmentManager();
+		if (fm != null) {
+			CoordinateInputDialogFragment fragment = new CoordinateInputDialogFragment();
+			fragment.setRetainInstance(true);
+			fragment.setListener(createOnPointsSavedListener());
+			fragment.show(fm, CoordinateInputDialogFragment.TAG);
+		}
+	}
+
+	private CoordinateInputDialogFragment.OnPointsSavedListener createOnPointsSavedListener() {
+		return new CoordinateInputDialogFragment.OnPointsSavedListener() {
+			@Override
+			public void onPointsSaved() {
+				setContent();
+			}
+		};
+	}
+	
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		menu.clear();
@@ -367,6 +393,8 @@ public class TrackPointFragment extends OsmandExpandableListFragment implements 
 					R.drawable.ic_action_fav_dark, MenuItem.SHOW_AS_ACTION_NEVER);
 			createMenuItem(menu, DELETE_ID, R.string.shared_string_delete, R.drawable.ic_action_delete_dark,
 					R.drawable.ic_action_delete_dark, MenuItem.SHOW_AS_ACTION_NEVER);
+			createMenuItem(menu, COORDINATE_INPUT_ID, R.string.coordinate_input, R.drawable.ic_action_coordinates_longitude,
+					R.drawable.ic_action_coordinates_longitude, MenuItem.SHOW_AS_ACTION_NEVER);
 		}
 		this.optionsMenu = menu;
 	}

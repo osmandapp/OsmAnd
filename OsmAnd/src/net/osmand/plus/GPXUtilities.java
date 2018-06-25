@@ -849,6 +849,11 @@ public class GPXUtilities {
 			modifiedTime = System.currentTimeMillis();
 		}
 
+		public void addPoint(int position, WptPt point) {
+			points.add(position, point);
+			modifiedTime = System.currentTimeMillis();
+		}
+		
 		void addPoints(Collection<? extends WptPt> collection) {
 			points.addAll(collection);
 			modifiedTime = System.currentTimeMillis();
@@ -1041,9 +1046,7 @@ public class GPXUtilities {
 			}
 
 			Route lastRoute = routes.get(routes.size() - 1);
-
 			lastRoute.points.addAll(points);
-
 			modifiedTime = System.currentTimeMillis();
 		}
 
@@ -1052,16 +1055,13 @@ public class GPXUtilities {
 			routes.add(new Route());
 			Route currentRoute = routes.get(routes.size() - 1);
 			currentRoute.points.addAll(points);
-
 			modifiedTime = System.currentTimeMillis();
 		}
 
 		public void updateWptPt(WptPt pt, double lat, double lon, long time, String description, String name, String category, int color) {
 			int index = points.indexOf(pt);
-
 			double latAdjusted = Double.parseDouble(latLonFormat.format(lat));
 			double lonAdjusted = Double.parseDouble(latLonFormat.format(lon));
-
 			pt.lat = latAdjusted;
 			pt.lon = lonAdjusted;
 			pt.time = time;

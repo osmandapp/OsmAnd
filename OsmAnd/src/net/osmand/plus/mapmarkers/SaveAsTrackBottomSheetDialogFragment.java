@@ -31,11 +31,12 @@ import java.io.File;
 import java.util.Date;
 
 import static net.osmand.plus.helpers.ImportHelper.GPX_SUFFIX;
-import static net.osmand.plus.mapmarkers.CoordinateInputDialogFragment.ADDED_MARKERS_NUMBER_KEY;
+import static net.osmand.plus.mapmarkers.CoordinateInputDialogFragment.ADDED_POINTS_NUMBER_KEY;
 
 public class SaveAsTrackBottomSheetDialogFragment extends BottomSheetDialogFragment {
 
 	public final static String TAG = "SaveAsTrackBottomSheetDialogFragment";
+	public static final String COORDINATE_INPUT_MODE_KEY = "coordinate_input_mode_key";
 
 	private boolean portrait;
 	private MarkerSaveAsTrackFragmentListener listener;
@@ -48,13 +49,14 @@ public class SaveAsTrackBottomSheetDialogFragment extends BottomSheetDialogFragm
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		final OsmandApplication app = getMyApplication();
-		boolean isCoordInput = false;
+		boolean openFromCoordinateInput = false;
 		int number = 0;
 		Bundle args = getArguments();
 		if (args != null) {
-			number = args.getInt(ADDED_MARKERS_NUMBER_KEY);
-			if (number != 0)
-				isCoordInput = true;
+			openFromCoordinateInput = args.getBoolean(COORDINATE_INPUT_MODE_KEY);
+			if (openFromCoordinateInput) {
+				number = args.getInt(ADDED_POINTS_NUMBER_KEY);
+			}
 		}
 		portrait = AndroidUiHelper.isOrientationPortrait(getActivity());
 		final boolean nightMode = !app.getSettings().isLightContent();
@@ -63,9 +65,9 @@ public class SaveAsTrackBottomSheetDialogFragment extends BottomSheetDialogFragm
 		final View mainView = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.fragment_marker_save_as_track_bottom_sheet_dialog, container);
 		LinearLayout contentLayout = (LinearLayout) mainView.findViewById(R.id.content_linear_layout);
 		TextView titleTv = (TextView) mainView.findViewById(R.id.save_as_track_title);
-		titleTv.setText(isCoordInput ? R.string.coord_input_save_as_track : R.string.marker_save_as_track);
+		titleTv.setText(openFromCoordinateInput ? R.string.coord_input_save_as_track : R.string.marker_save_as_track);
 		TextView descriptionTv = (TextView) mainView.findViewById(R.id.save_as_track_description);
-		descriptionTv.setText(isCoordInput ? getString(R.string.coord_input_save_as_track_descr, number) : getString(R.string.marker_save_as_track_descr));
+		descriptionTv.setText(openFromCoordinateInput ? getString(R.string.coord_input_save_as_track_descr, number) : getString(R.string.marker_save_as_track_descr));
 		int layoutRes;
 		if (Build.VERSION.SDK_INT > Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
 			layoutRes = R.layout.markers_track_name_text_field_box;
