@@ -17,13 +17,14 @@
 			android:id="@+id/groups_view"
 			android:layout_width="match_parent"
 			android:layout_height="match_parent"
-			android:scrollbars="vertical"/>
+			android:scrollbars="vertical"
+			android:visibility="gone"/>
 
 		<net.osmand.telegram.ui.views.LockableViewPager
 			android:id="@+id/view_pager"
 			android:layout_width="match_parent"
 			android:layout_height="match_parent"
-			android:visibility="gone"/>
+			android:visibility="visible"/>
 
 		<android.support.v7.widget.AppCompatImageView
 			android:layout_width="match_parent"

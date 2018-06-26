@@ -90,9 +90,6 @@ class MainActivity : AppCompatActivity(), TelegramListener {
 				R.id.action_live_now -> pos = LIVE_NOW_TAB_POS
 			}
 			if (pos != -1 && pos != viewPager.currentItem) {
-				// FIXME
-				chatsView.visibility = if (pos == MY_LOCATION_TAB_POS) View.VISIBLE else View.GONE
-				viewPager.visibility = if (pos == LIVE_NOW_TAB_POS) View.VISIBLE else View.GONE
 				viewPager.currentItem = pos
 				return@setOnNavigationItemSelectedListener true
 			}
