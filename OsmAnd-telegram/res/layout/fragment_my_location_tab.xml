@@ -4,8 +4,7 @@
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
-	android:layout_height="match_parent"
-	android:background="?attr/card_bg_color">
+	android:layout_height="match_parent">
 
 	<android.support.design.widget.AppBarLayout
 		android:id="@+id/app_bar_layout"
@@ -96,28 +95,12 @@
 
 	</android.support.design.widget.AppBarLayout>
 
-	<android.support.v4.widget.NestedScrollView
+	<android.support.v7.widget.RecyclerView
+		android:id="@+id/recycler_view"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
-		android:paddingTop="@dimen/content_padding_small"
-		app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-		<LinearLayout
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:orientation="vertical">
-
-			<View
-				android:layout_width="match_parent"
-				android:layout_height="350dp"/>
-
-			<View
-				android:layout_width="match_parent"
-				android:layout_height="350dp"
-				android:background="@android:color/holo_blue_light"/>
-
-		</LinearLayout>
-
-	</android.support.v4.widget.NestedScrollView>
+		android:clipToPadding="false"
+		android:paddingBottom="@dimen/list_view_bottom_padding"
+		app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
 </android.support.design.widget.CoordinatorLayout>

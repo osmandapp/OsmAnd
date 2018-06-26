@@ -411,7 +411,7 @@ class MainActivity : AppCompatActivity(), TelegramListener {
 
 	class ViewPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
 
-		private val fragments = listOf(MyLocationTabFragment(), LiveNowTabFragment())
+		private val fragments = listOf<Fragment>(MyLocationTabFragment(), LiveNowTabFragment())
 
 		override fun getItem(position: Int) = fragments[position]
 

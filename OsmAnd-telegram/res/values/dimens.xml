@@ -15,7 +15,7 @@
 	<dimen name="dialog_button_height">36dp</dimen>
 	<dimen name="dialog_button_radius">2dp</dimen>
 
-	<dimen name="list_item_height">60dp</dimen>
+	<dimen name="list_item_height">56dp</dimen>
 	<dimen name="list_item_height_min">48dp</dimen>
 
 	<dimen name="list_item_icon_size">32dp</dimen>
