@@ -508,7 +508,7 @@
     <string name="route_calculation">Route calculation</string>
     <string name="gpx_no_tracks_title">You do not have any GPX files yet</string>
     <string name="gpx_no_tracks_title_folder">You may also add GPX files to the folder</string>
-    <string name="gpx_add_track">Add GPX file</string>
+    <string name="gpx_add_track">Add more…</string>
     <string name="gpx_appearance">Appearance</string>
     <string name="trip_rec_notification_settings">Enable recording quick start</string>
     <string name="trip_rec_notification_settings_desc">Display a system notification allowing to start trip recording.</string>
@@ -2886,7 +2886,7 @@
     <string name="save_route_point">Save Route Point</string>
     <string name="waypoint_one">Waypoint 1</string>
     <string name="route_point_one">Route Point 1</string>
-    <string name="empty_state_my_tracks">Add GPX Files</string>
+    <string name="empty_state_my_tracks">Add GPX files</string>
     <string name="empty_state_my_tracks_desc">Import GPX files, or record tracks.</string>
     <string name="empty_state_favourites">Add Favorites</string>
     <string name="empty_state_favourites_desc">Import Favorites, or add via marking points on the map.</string>
