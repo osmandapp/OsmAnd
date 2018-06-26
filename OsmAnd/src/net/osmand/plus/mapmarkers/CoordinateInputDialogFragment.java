@@ -12,7 +12,6 @@ import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.ColorInt;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
@@ -98,7 +97,8 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 	private WptPt selectedWpt;
 	private SavingTrackHelper savingTrackHelper;
 	private GpxSelectionHelper selectedGpxHelper;
-
+	private RecyclerView recyclerView;
+		
 	private View mainView;
 	private final List<EditTextEx> editTexts = new ArrayList<>();
 	private CoordinateInputAdapter adapter;
@@ -363,12 +363,11 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 				final View focusedView = getDialog().getCurrentFocus();
 				if (focusedView != null) {
 					AndroidUtils.softKeyboardDelayed(focusedView);
-					isSoftKeyboardShown = true;
 				}
 			}
 		});
 		adapter = new CoordinateInputAdapter(getMyApplication(), getGpx());
-		final RecyclerView recyclerView = (RecyclerView) mainView.findViewById(R.id.markers_recycler_view);
+		recyclerView = (RecyclerView) mainView.findViewById(R.id.markers_recycler_view);
 		recyclerView.setLayoutManager(new LinearLayoutManager(ctx));
 		recyclerView.setAdapter(adapter);
 		recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -496,6 +495,9 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		if (!isOsmandKeyboardOn() && isOsmandKeyboardCurrentlyVisible()) {
 			changeOsmandKeyboardVisibility(false);
 		}
+		if (isSoftKeyboardShown || isOsmandKeyboardCurrentlyVisible()) {
+			moveLastPointToTop();
+		}
 
 		mainView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
 			@Override
@@ -504,11 +506,34 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 				mainView.getWindowVisibleDisplayFrame(r);
 				int screenHeight = mainView.getRootView().getHeight();
 				int keypadHeight = screenHeight - r.bottom;
+				if (!isSoftKeyboardShown) {
+					if (keypadHeight > screenHeight * 0.15) {
+						isSoftKeyboardShown = true;
+						moveLastPointToTop();
+					}
+				}
 				isSoftKeyboardShown = keypadHeight > screenHeight * 0.15;
 			}
 		});
 	}
 
+	private void moveLastPointToTop() {
+		final Context ctx = getContext();
+		if (ctx == null) {
+			return;
+		}
+		if (adapter.getItemCount() > 1) {
+			if (isOsmandKeyboardCurrentlyVisible()) {
+				View keyboardView = mainView.findViewById(R.id.keyboard_layout);
+				keyboardView.measure(View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED),
+						View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
+				int height = keyboardView.getMeasuredHeight();
+				recyclerView.setPadding(0, AndroidUtils.dpToPx(ctx, 16), 0, height);
+			}
+			((LinearLayoutManager) recyclerView.getLayoutManager()).scrollToPositionWithOffset(adapter.getItemCount() - 1, 0);
+		}
+	}
+	
 	private void setupKeyboardItems(View keyboardView, View.OnClickListener listener, @IdRes int... itemsIds) {
 		@DrawableRes int itemBg = lightTheme ? R.drawable.keyboard_item_light_bg : R.drawable.keyboard_item_dark_bg;
 		@DrawableRes int controlItemBg = lightTheme ? R.drawable.keyboard_item_control_light_bg : R.drawable.keyboard_item_control_dark_bg;
@@ -613,7 +638,6 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		final View focusedView = getDialog().getCurrentFocus();
 		if (focusedView != null) {
 			if (!isOsmandKeyboardOn()) {
-				isSoftKeyboardShown = true;
 				AndroidUtils.softKeyboardDelayed(focusedView);
 			}
 		}
@@ -893,7 +917,6 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 					public void onFocusChange(View v, boolean hasFocus) {
 						if (!hasFocus && isOsmandKeyboardOn() && (isOsmandKeyboardCurrentlyVisible() || isSoftKeyboardShown)) {
 							AndroidUtils.hideSoftKeyboard(getActivity(), v);
-							isSoftKeyboardShown = false;
 						}
 					}
 				});
@@ -941,10 +964,8 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		if (focusedView != null) {
 			if (useOsmandKeyboard) {
 				AndroidUtils.hideSoftKeyboard(getActivity(), focusedView);
-				isSoftKeyboardShown = false;
 			} else {
 				AndroidUtils.softKeyboardDelayed(focusedView);
-				isSoftKeyboardShown = true;
 			}
 		}
 		changeEditTextSelections();
@@ -1071,6 +1092,11 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			mainView.findViewById(R.id.keyboard_divider).setVisibility(visibility);
 		} else {
 			mainView.findViewById(R.id.keyboard_layout).setVisibility(visibility);
+		}
+		if (show) {
+			moveLastPointToTop();
+		} else {
+			recyclerView.setPadding(0, AndroidUtils.dpToPx(getMyApplication(), 16), 0, AndroidUtils.dpToPx(getMyApplication(), 72));
 		}
 	}
 
@@ -1230,10 +1256,11 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 				dismissEditingMode();
 			} else {
 				addWpt(getGpx(), null, name, null, 0, lat, lon);
+				moveLastPointToTop();
 			}
+			adapter.notifyDataSetChanged();
+			clearInputs();
 		}
-		adapter.notifyDataSetChanged();
-		clearInputs();
 	}
 
 	private String getStringCoordinate(boolean latitude) {
