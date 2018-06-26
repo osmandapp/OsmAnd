@@ -362,13 +362,8 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 				}
 				final View focusedView = getDialog().getCurrentFocus();
 				if (focusedView != null) {
-					new Handler().postDelayed(new Runnable() {
-						@Override
-						public void run() {
-							isSoftKeyboardShown = true;
-							AndroidUtils.showSoftKeyboard(focusedView);
-						}
-					}, 200);
+					AndroidUtils.softKeyboardDelayed(focusedView);
+					isSoftKeyboardShown = true;
 				}
 			}
 		});
@@ -618,13 +613,8 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		final View focusedView = getDialog().getCurrentFocus();
 		if (focusedView != null) {
 			if (!isOsmandKeyboardOn()) {
-				new Handler().postDelayed(new Runnable() {
-					@Override
-					public void run() {
-						isSoftKeyboardShown = true;
-						AndroidUtils.showSoftKeyboard(focusedView);
-					}
-				}, 200);
+				isSoftKeyboardShown = true;
+				AndroidUtils.softKeyboardDelayed(focusedView);
 			}
 		}
 	}
@@ -953,13 +943,8 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 				AndroidUtils.hideSoftKeyboard(getActivity(), focusedView);
 				isSoftKeyboardShown = false;
 			} else {
-				new Handler().postDelayed(new Runnable() {
-					@Override
-					public void run() {
-						AndroidUtils.showSoftKeyboard(focusedView);
-						isSoftKeyboardShown = true;
-					}
-				}, 200);
+				AndroidUtils.softKeyboardDelayed(focusedView);
+				isSoftKeyboardShown = true;
 			}
 		}
 		changeEditTextSelections();
@@ -1041,7 +1026,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 				}
 				adapter.removeItem(position);
 				hasUnsavedChanges = true;
-				snackbar = Snackbar.make(mainView, R.string.marker_moved_to_history, Snackbar.LENGTH_LONG)
+				snackbar = Snackbar.make(mainView, getString(R.string.coord_input_point_deleted, wpt.name), Snackbar.LENGTH_LONG)
 						.setAction(R.string.shared_string_undo, new View.OnClickListener() {
 							@Override
 							public void onClick(View view) {
@@ -1237,6 +1222,9 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			double lat = parseCoordinate(latitude);
 			double lon = parseCoordinate(longitude);
 			String name = ((EditText) mainView.findViewById(R.id.point_name_et)).getText().toString();
+			if (name.trim().isEmpty()) {
+				name = getString(R.string.short_location_on_map, latitude, longitude).replace('\n', ' ');
+			}
 			if (selectedWpt != null) {
 				updateWpt(getGpx(), null, name, null, 0, lat, lon);
 				dismissEditingMode();
