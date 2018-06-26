@@ -130,7 +130,7 @@ class LiveNowTabFragment : Fragment(), TelegramListener {
 					inflater.inflate(R.layout.live_now_chat_card, parent, false)
 				)
 				else -> ContactViewHolder(
-					inflater.inflate(R.layout.live_now_contact_item, parent, false)
+					inflater.inflate(R.layout.user_list_item, parent, false)
 				)
 			}
 		}
