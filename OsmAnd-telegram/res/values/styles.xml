@@ -22,6 +22,10 @@
 		<item name="ctrl_active_color">@color/ctrl_active_light</item>
 		<item name="ctrl_color">@color/ctrl_light</item>
 
+		<item name="primary_btn_bg">@drawable/primary_btn_bg_light</item>
+		<item name="primary_btn_text_color">@color/primary_btn_text_light</item>
+		<item name="secondary_btn_bg">@drawable/secondary_btn_bg_light</item>
+
 		<item name="bottom_nav_shadow">@drawable/bg_bottom_bar_shadow_with_line_day</item>
 	</style>
 

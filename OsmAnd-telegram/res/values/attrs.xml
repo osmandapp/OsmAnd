@@ -8,5 +8,8 @@
 		<attr name="ctrl_active_color" format="reference" />
 		<attr name="ctrl_color" format="reference" />
 		<attr name="bottom_nav_shadow" format="reference" />
+		<attr name="primary_btn_bg" format="reference" />
+		<attr name="primary_btn_text_color" format="reference" />
+		<attr name="secondary_btn_bg" format="reference" />
 	</declare-styleable>
 </resources>

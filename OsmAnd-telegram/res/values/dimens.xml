@@ -36,11 +36,15 @@
 
 	<dimen name="search_box_height">48dp</dimen>
 
+	<dimen name="text_button_letter_spacing" format="float">0.01</dimen>
+
 	<!-- Text sizes -->
 
 	<dimen name="dialog_title_text_size">22sp</dimen>
 
 	<dimen name="title_text_size">18sp</dimen>
 	<dimen name="descr_text_size">16sp</dimen>
+
+	<dimen name="text_button_text_size">15sp</dimen>
 
 </resources>
