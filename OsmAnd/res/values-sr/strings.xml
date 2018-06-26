@@ -1374,8 +1374,8 @@
     <string name="rendering_attr_horseRoutes_name">Коњске стазе</string>
     <string name="share_geo">положај:</string>
     <string name="lang_br">Бретонски</string>
-    <string name="hillshade_menu_download_descr">Преузмете посебну карту овог подручја са сенчењем да бисте видели рељеф.</string>
-    <string name="hillshade_purchase_header">Инсталирајте \"Изохипсе\" додатак да бисте их приказали на карти</string>
+    <string name="hillshade_menu_download_descr">Да бисте видели рељеф на карти, преузмете посебан слој карте овог подручја са сенчењем.</string>
+    <string name="hillshade_purchase_header">Да бисте видели рељеф на карти, треба да купите и инсталирате \"Изохипсе\" додатак</string>
     <string name="shared_string_plugin">Додатак</string>
     <string name="display_zoom_level">Приказ нивоа увеличања: %1$s</string>
     <string name="favorite_group_name">Име групе</string>
