@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import net.osmand.AndroidUtils;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -68,13 +69,14 @@ public class CoordinateInputAdapter extends RecyclerView.Adapter<MapMarkerItemVi
 		holder.mainLayout.setBackgroundColor(getResolvedColor(nightTheme ? R.color.ctx_menu_bg_dark : R.color.bg_color_light));
 		holder.title.setTextColor(getResolvedColor(nightTheme ? R.color.ctx_menu_title_color_dark : R.color.color_black));
 		holder.divider.setBackgroundColor(getResolvedColor(nightTheme ? R.color.route_info_divider_dark : R.color.dashboard_divider_light));
-		holder.optionsBtn.setImageDrawable(getColoredIcon(R.drawable.ic_overflow_menu_white, R.color.icon_color));
-		holder.optionsBtn.setBackgroundColor(ContextCompat.getColor(app, nightTheme ? R.color.ctx_menu_bg_dark : R.color.bg_color_light));
 		holder.iconReorder.setVisibility(View.GONE);
 		holder.numberText.setVisibility(View.VISIBLE);
 		holder.numberText.setText(String.valueOf(position + 1));
 		holder.description.setVisibility(View.GONE);
+		holder.optionsBtn.setFocusable(false);
+		holder.optionsBtn.setImageDrawable(app.getUIUtilities().getThemedIcon(R.drawable.ic_overflow_menu_white));
 		holder.optionsBtn.setOnClickListener(actionsListener);
+		AndroidUtils.setDashButtonBackground(app, holder.optionsBtn, nightTheme);
 
 		boolean singleItem = getItemCount() == 1;
 		boolean fistItem = position == 0;

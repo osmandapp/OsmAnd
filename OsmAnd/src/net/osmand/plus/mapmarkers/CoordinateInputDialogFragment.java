@@ -1044,6 +1044,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 				if (selectedWpt == wpt) {
 					dismissEditingMode();
 					clearInputs();
+					showKeyboard();
 				}
 				adapter.removeItem(position);
 				hasUnsavedChanges = true;
@@ -1324,9 +1325,6 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		for (EditText et : editTexts) {
 			et.setText("");
 			et.clearFocus();
-		}
-		if (editTexts.size() > 0) {
-			showKeyboard();
 		}
 	}
 
