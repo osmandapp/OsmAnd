@@ -2197,7 +2197,7 @@ Proporcia memoro %4$s MB (limito de Android %5$s MB, Dalvik %6$s MB).</string>
     
     <string name="gpx_no_tracks_title">Vi ankoraŭ havas neniujn GPX-dosierojn</string>
     <string name="gpx_no_tracks_title_folder">Vi ankaŭ povas aldoni GPX-dosierojn al la dosierujo</string>
-    <string name="gpx_add_track">Aldoni GPX-dosieron</string>
+    <string name="gpx_add_track">Aldoni pli…</string>
     <string name="gpx_appearance">Aspekto</string>
     <string name="rendering_value_fine_name">Eteta</string>
     <string name="route_calculation">Difinado de vojo</string>
