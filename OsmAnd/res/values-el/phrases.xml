@@ -3143,4 +3143,44 @@
 	<string name="poi_toilets_disposal_chemical">Εκκένωση τουαλέτας: χημική</string>
 	<string name="poi_toilets_disposal_bucket">Εκκένωση τουαλέτας: κουβάς</string>
 
+	<string name="poi_length">Μήκος</string>
+
+	<string name="poi_wiki_link">Βικιπαίδεια</string>
+
+	<string name="poi_xmas">Χριστούγεννα</string>
+	<string name="poi_xmas_event">Χριστουγεννιάτικη γιορτή</string>
+	<string name="poi_xmas_market">Χριστουγεννιατικές αγορές</string>
+	<string name="poi_xmas_pyramid">Πυραμίδα των Χριστουγέννων</string>
+	<string name="poi_xmas_shop">Χριστουγεννιάτικο κατάστημα</string>
+	<string name="poi_xmas_shop_christmas_tree">Κατάστημα με χριστουγεννιάτικα δέντρα</string>
+	<string name="poi_xmas_tree">Χριστουγεννιάτικο δέντρο</string>
+	<string name="poi_xmas_day_date">Χριστούγεννα: περίοδος εκδήλωσης</string>
+	<string name="poi_xmas_note">Χριστούγεννα: σημείωση</string>
+	<string name="poi_xmas_opening_hours">Χριστούγεννα: ώρες λειτουργίας</string>
+	<string name="poi_xmas_location">Χριστούγεννα: τοποθεσία</string>
+	<string name="poi_xmas_url">Χριστούγεννα: ιστότοπος</string>
+
+	<string name="poi_public_bookcase">Δημόσια βιβλιοθήκη</string>
+	<string name="poi_public_bookcase_type_phone_box">Τύπος: τηλεφωνικός θάλαμος</string>
+	<string name="poi_public_bookcase_type_reading_box">Τύπος: κιβώτιο ανάγνωσης</string>
+	<string name="poi_public_bookcase_type_wooden_cabinet">Τύπος: ξύλινο ερμάριο</string>
+	<string name="poi_public_bookcase_type_metal_cabinet">Τύπος: μεταλλικό ερμάριο</string>
+	<string name="poi_public_bookcase_type_shelf">Τύπος: ραφιέρα</string>
+
+	<string name="poi_cuisine">Κουζίνα</string>
+	<string name="poi_cuisine_pizza">Πίτσα</string>
+	<string name="poi_cuisine_burger">Μπέργκερ</string>
+	<string name="poi_cuisine_coffee">Καφές</string>
+	<string name="poi_cuisine_sandwich">Σάντουιτς</string>
+	<string name="poi_cuisine_kebab">Καλαμάκι (Κεμπάμπ)</string>
+	<string name="poi_cuisine_doner">Ντόνερ κεμπάμπ (σαουάρμα)</string>
+	<string name="poi_cuisine_chicken">Κοτόπουλο</string>
+	<string name="poi_cuisine_ice_cream">Παγωτό</string>
+	<string name="poi_cuisine_sushi">Σούσι</string>
+	<string name="poi_cuisine_fish_and_chips">Ψάρι και πατατάκια</string>
+	<string name="poi_cuisine_seafood">Θαλασσινά</string>
+	<string name="poi_cuisine_barbecue">Ψησταριά</string>
+	<string name="poi_cuisine_noodle">Ζυμαρικά (νουντλ)</string>
+	<string name="poi_cuisine_donut">Λουκουμάς (ντόνατ)</string>
+	<string name="poi_cuisine_ramen">Ράμεν</string>
 	</resources>
