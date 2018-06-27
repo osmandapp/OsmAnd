@@ -34,4 +34,6 @@
 	<color name="primary_btn_text_light">#ffffff</color>
 	<color name="primary_btn_text_dark">#cccccc</color>
 
+	<color name="app_bar_title_light">#333333</color>
+
 </resources>

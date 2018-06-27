@@ -6,7 +6,7 @@
 
 	<dimen name="progress_bar_size_small">32dp</dimen>
 
-	<dimen name="action_bar_height">60dp</dimen>
+	<dimen name="action_bar_height">56dp</dimen>
 
 	<dimen name="dialog_padding_vertical">24dp</dimen>
 	<dimen name="dialog_padding_horizontal">60dp</dimen>

@@ -6,6 +6,7 @@ import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
 import android.os.Build
 import android.os.Bundle
+import android.support.annotation.ColorRes
 import android.support.design.widget.AppBarLayout
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
@@ -218,20 +219,30 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 		val animatorSet = AnimatorSet()
 		animatorSet.duration = 200
 		animatorSet.playTogether(cornerAnimator, marginAnimator)
-		if (Build.VERSION.SDK_INT >= 21) {
-			if (appBarCollapsed) {
-				animatorSet.addListener(object : AnimatorListenerAdapter() {
-					override fun onAnimationEnd(animation: Animator?) {
-						if (Build.VERSION.SDK_INT >= 21 && appBarCollapsed) {
+		if (appBarCollapsed) {
+			animatorSet.addListener(object : AnimatorListenerAdapter() {
+				override fun onAnimationEnd(animation: Animator?) {
+					if (appBarCollapsed) {
+						updateTitleTextColor(R.color.app_bar_title_light)
+						if (Build.VERSION.SDK_INT >= 21) {
 							appBarLayout.outlineProvider = appBarOutlineProvider
 						}
 					}
-				})
-			} else {
+				}
+			})
+		} else {
+			updateTitleTextColor(R.color.ctrl_active_light)
+			if (Build.VERSION.SDK_INT >= 21) {
 				appBarLayout.outlineProvider = null
 			}
 		}
 		animatorSet.start()
+	}
+
+	private fun updateTitleTextColor(@ColorRes color: Int) {
+		context?.also {
+			title.setTextColor(ContextCompat.getColor(it, color))
+		}
 	}
 
 	private fun updateList() {
