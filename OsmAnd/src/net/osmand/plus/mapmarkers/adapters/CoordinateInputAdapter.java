@@ -73,7 +73,6 @@ public class CoordinateInputAdapter extends RecyclerView.Adapter<MapMarkerItemVi
 		holder.numberText.setVisibility(View.VISIBLE);
 		holder.numberText.setText(String.valueOf(position + 1));
 		holder.description.setVisibility(View.GONE);
-		holder.optionsBtn.setFocusable(false);
 		holder.optionsBtn.setImageDrawable(app.getUIUtilities().getThemedIcon(R.drawable.ic_overflow_menu_white));
 		holder.optionsBtn.setOnClickListener(actionsListener);
 		AndroidUtils.setDashButtonBackground(app, holder.optionsBtn, nightTheme);
