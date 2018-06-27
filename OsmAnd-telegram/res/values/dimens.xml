@@ -36,6 +36,8 @@
 
 	<dimen name="search_box_height">48dp</dimen>
 
+	<dimen name="buttons_bottom_bar_height">56dp</dimen>
+
 	<dimen name="text_button_letter_spacing" format="float">0.01</dimen>
 
 	<!-- Text sizes -->

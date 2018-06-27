@@ -49,11 +49,18 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 
 	private val selectedChats = HashSet<Long>()
 
+	private var actionButtonsListener: ActionButtonsListener? = null
+
 	override fun onCreateView(
 		inflater: LayoutInflater,
 		container: ViewGroup?,
 		savedInstanceState: Bundle?
 	): View? {
+		val activity = activity
+		if (activity is ActionButtonsListener) {
+			actionButtonsListener = activity
+		}
+
 		textMarginSmall = resources.getDimensionPixelSize(R.dimen.content_padding_standard)
 		textMarginBig = resources.getDimensionPixelSize(R.dimen.my_location_text_sides_margin)
 		searchBoxHeight = resources.getDimensionPixelSize(R.dimen.search_box_height)
@@ -61,6 +68,9 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 
 		savedInstanceState?.apply {
 			selectedChats.addAll(getLongArray(SELECTED_CHATS_KEY).toSet())
+			if (selectedChats.isNotEmpty()) {
+				actionButtonsListener?.switchButtonsVisibility(true)
+			}
 		}
 
 		val mainView = inflater.inflate(R.layout.fragment_my_location_tab, container, false)
@@ -162,6 +172,16 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 	}
 
 	override fun onSendLiveLocationError(code: Int, message: String) {
+	}
+
+	fun onPrimaryBtnClick() {
+		Toast.makeText(context, "Continue", Toast.LENGTH_SHORT).show()
+	}
+
+	fun onSecondaryBtnClick() {
+		selectedChats.clear()
+		adapter.notifyDataSetChanged()
+		actionButtonsListener?.switchButtonsVisibility(false)
 	}
 
 	private fun adjustText() {
@@ -270,6 +290,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 					} else {
 						selectedChats.remove(chat.id)
 					}
+					actionButtonsListener?.switchButtonsVisibility(selectedChats.isNotEmpty())
 				}
 			}
 			holder.bottomShadow?.visibility = if (lastItem) View.VISIBLE else View.GONE
@@ -289,5 +310,9 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 			val checkBox: CheckBox? = view.findViewById(R.id.check_box)
 			val bottomShadow: View? = view.findViewById(R.id.bottom_shadow)
 		}
+	}
+
+	interface ActionButtonsListener {
+		fun switchButtonsVisibility(visible: Boolean)
 	}
 }
