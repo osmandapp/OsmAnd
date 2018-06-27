@@ -47,6 +47,9 @@
 	<dimen name="title_text_size">18sp</dimen>
 	<dimen name="descr_text_size">16sp</dimen>
 
+	<dimen name="list_title_text_size">16sp</dimen>
+	<dimen name="list_item_description_text_size">12sp</dimen>
+
 	<dimen name="text_button_text_size">15sp</dimen>
 
 </resources>
