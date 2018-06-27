@@ -13,18 +13,10 @@
 		android:layout_height="0dp"
 		android:layout_weight="1">
 
-		<android.support.v7.widget.RecyclerView
-			android:id="@+id/groups_view"
-			android:layout_width="match_parent"
-			android:layout_height="match_parent"
-			android:scrollbars="vertical"
-			android:visibility="gone"/>
-
 		<net.osmand.telegram.ui.views.LockableViewPager
 			android:id="@+id/view_pager"
 			android:layout_width="match_parent"
-			android:layout_height="match_parent"
-			android:visibility="visible"/>
+			android:layout_height="match_parent"/>
 
 		<android.support.v7.widget.AppCompatImageView
 			android:layout_width="match_parent"
@@ -40,7 +32,6 @@
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:background="?attr/card_bg_color"
-		android:visibility="visible"
 		app:itemBackground="?attr/card_bg_color"
 		app:menu="@menu/bottom_navigation_menu"/>
 

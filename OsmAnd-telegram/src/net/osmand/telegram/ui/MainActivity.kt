@@ -12,7 +12,10 @@ import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.*
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.*
+import android.support.v7.widget.AppCompatImageView
+import android.support.v7.widget.AppCompatTextView
+import android.support.v7.widget.RecyclerView
+import android.support.v7.widget.SwitchCompat
 import android.view.*
 import android.widget.Toast
 import net.osmand.PlatformUtil
@@ -42,10 +45,6 @@ class MainActivity : AppCompatActivity(), TelegramListener {
 	private var telegramAuthorizationRequestHandler: TelegramAuthorizationRequestHandler? = null
 	private var paused: Boolean = false
 
-	private lateinit var chatsView: RecyclerView
-	private lateinit var chatViewAdapter: ChatsAdapter
-	private lateinit var chatViewManager: RecyclerView.LayoutManager
-
 	private val app: TelegramApplication
 		get() = application as TelegramApplication
 
@@ -60,19 +59,6 @@ class MainActivity : AppCompatActivity(), TelegramListener {
 		setContentView(R.layout.activity_main)
 
 		paused = false
-
-		chatViewManager = LinearLayoutManager(this)
-		chatViewAdapter = ChatsAdapter()
-
-		chatsView = findViewById<RecyclerView>(R.id.groups_view).apply {
-			//setHasFixedSize(true)
-
-			// use a linear layout manager
-			layoutManager = chatViewManager
-
-			// specify an viewAdapter (see also next example)
-			adapter = chatViewAdapter
-		}
 
 		val viewPager = findViewById<LockableViewPager>(R.id.view_pager).apply {
 			swipeLocked = true
@@ -132,7 +118,6 @@ class MainActivity : AppCompatActivity(), TelegramListener {
 
 		invalidateOptionsMenu()
 		updateTitle()
-		updateChatsList()
 
 		if (settings.hasAnyChatToShareLocation() && !AndroidUtils.isLocationPermissionAvailable(this)) {
 			requestLocationPermission()
@@ -172,16 +157,6 @@ class MainActivity : AppCompatActivity(), TelegramListener {
 			invalidateOptionsMenu()
 			updateTitle()
 
-			when (newTelegramAuthorizationState) {
-				TelegramAuthorizationState.READY -> {
-					updateChatsList()
-				}
-				TelegramAuthorizationState.CLOSED,
-				TelegramAuthorizationState.UNKNOWN -> {
-					chatViewAdapter.chats = emptyList()
-				}
-				else -> Unit
-			}
 			listeners.forEach {
 				it.get()?.onTelegramStatusChanged(prevTelegramAuthorizationState, newTelegramAuthorizationState)
 			}
@@ -191,21 +166,18 @@ class MainActivity : AppCompatActivity(), TelegramListener {
 	override fun onTelegramChatsRead() {
 		runOnUi {
 			removeNonexistingChatsFromSettings()
-			updateChatsList()
 			listeners.forEach { it.get()?.onTelegramChatsRead() }
 		}
 	}
 
 	override fun onTelegramChatsChanged() {
 		runOnUi {
-			updateChatsList()
 			listeners.forEach { it.get()?.onTelegramChatsChanged() }
 		}
 	}
 
 	override fun onTelegramChatChanged(chat: TdApi.Chat) {
 		runOnUi {
-			updateChatsList()
 			listeners.forEach { it.get()?.onTelegramChatChanged(chat) }
 		}
 	}
@@ -238,18 +210,6 @@ class MainActivity : AppCompatActivity(), TelegramListener {
 	private fun removeNonexistingChatsFromSettings() {
 		val presentChatTitles = telegramHelper.getChatTitles()
 		settings.removeNonexistingChats(presentChatTitles)
-	}
-
-	private fun updateChatsList() {
-		val chatList = telegramHelper.getChatList()
-		val chats: MutableList<TdApi.Chat> = mutableListOf()
-		for (orderedChat in chatList) {
-			val chat = telegramHelper.getChat(orderedChat.chatId)
-			if (chat != null) {
-				chats.add(chat)
-			}
-		}
-		chatViewAdapter.chats = chats
 	}
 
 	fun loginTelegram() {
@@ -378,7 +338,6 @@ class MainActivity : AppCompatActivity(), TelegramListener {
 				} else {
 					settings.stopSharingLocationToChats()
 					app.shareLocationHelper.stopSharingLocation()
-					updateChatsList()
 				}
 				if (settings.hasAnyChatToShowOnMap() && osmandHelper.isOsmandNotInstalled()) {
 					showOsmandMissingDialog()
