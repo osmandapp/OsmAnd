@@ -502,7 +502,7 @@ Lon: %2$s</string>
     <string name="roads_only">Nur vojoj</string>
     <string name="rendering_attr_pisteRoutes_name">Descendejoj</string>
     <string name="free">Libera %1$s</string>
-    <string name="gps_status">GPS-a stato</string>
+    <string name="gps_status">Stato de GPS</string>
     <string name="osmand_plus_play_title_30_chars">OsmAnd+ Mapoj kaj Navigado</string>
     <string name="map_widget_show_ruler">Mezurilo</string>
     <string name="osmand_rastermaps_plugin_description">Per tiu ĉi kromprogramo vi povas atingi multajn enretajn (ankaŭ nomitaj kiel kahelajn aŭ rastrumajn) mapojn, ekzemple: antaŭgeneritaj OpenStreetMap kaheloj (kiel Mapnik), satelitaj fotoj kaj mapoj por specialaj uzoj: veteraj, klimataj, tersciencaj mapoj, tavoloj de nivel-ombrumo, ktp. 

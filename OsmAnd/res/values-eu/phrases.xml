@@ -3357,7 +3357,7 @@
 	<string name="poi_inscription_e">Inskripzioa: E</string>
 	<string name="poi_inscription_ne">Inskripzioa: IE</string>
 
-	<string name="poi_nuclear_explosion_device">Leherketa: Gailua</string>
+	<string name="poi_nuclear_explosion_device">Leherketa: gailua</string>
 
 	<string name="poi_fire_hydrant_type_underground">Lurrazpikoa</string>
 	<string name="poi_fire_hydrant_type_pillar">Zutabea</string>
@@ -3730,5 +3730,84 @@
 	<string name="poi_climbing_bolted_yes">Aingura finkoak: bai</string>
 	<string name="poi_climbing_bolted_no">Aingura finkoak: ez</string>
 	<string name="poi_climbing_routes">Eskalatzeko ibilbideak</string>
+
+	<string name="poi_deadlock">Kale itsua</string>
+
+	<string name="poi_historic_period_villager">Garai historikoa: villak (I, II epokak 1580 K.a. – 133 K.o)</string>
+	<string name="poi_historic_period_urban">Garai historikoa: urbanoa (III epoka, 133 K.o. – 374 K.o.)</string>
+	<string name="poi_historic_period_classical">Garai historikoa: klasikoa (IV epoka, 374 K.o. – 900 K.o.)</string>
+	<string name="poi_historic_period_imperial">Garai historikoa: inperiala (V epoka, 900 K.o. – 1200 K.o.)</string>
+
+	<string name="poi_historic_era_chalcolithic">Garai historikoa: kalkolitoa (4. - 3. milenioak K.a.)</string>
+
+	<string name="poi_fortification_type_hill_fort">Gotorleku mota: Kastroa</string>
+	<string name="poi_fortification_type_limes">Gotorleku mota: limes</string>
+	<string name="poi_fortification_type_sconce">Gotorleku mota: sconce</string>
+	<string name="poi_fortification_type_ring_ditch">Gotorleku mota: ebakia eraztunean</string>
+
+	<string name="poi_concentration_camp">Mota: Kontzentrazio-esparrua</string>
+	<string name="poi_pow_camp">Mota: Gerrako presoentzako esparrua</string>
+	<string name="poi_labor_camp">Mota: Lan esparrua</string>
+	<string name="poi_health_specialty_dermatovenereology_yes">Dermatologia eta benereologia</string>
+	<string name="poi_netball">Netball</string>
+	<string name="poi_disc_golf">Disc golf</string>
+	<string name="poi_rc_car">Irrati-kontroleko kotxeen lasterketa</string>
+	<string name="poi_shuffleboard">Shuffleboard</string>
+	<string name="poi_lacrosse">Lacrosse</string>
+	<string name="poi_dolphin">Albako dukea</string>
+
+	<string name="poi_bandy">Bandy</string>
+
+	<string name="poi_nuclear_explosion_body_wave_magnitude">Uhin sismikoen magnitudea</string>
+	<string name="poi_nuclear_explosion_crater_diameter">Leherketa: kraterraren diametroa</string>
+	<string name="poi_nuclear_explosion_warhead">Leherketa: ojiba</string>
+	<string name="poi_free_flying_site_toplanding">Tontorreko lurreratzea</string>
+	<string name="poi_free_flying_site_towing">Arrastea</string>
+	<string name="poi_sanitary_dump_station">Komuna husteko estazioa</string>
+
+	<string name="poi_health_service_support_yes">Osasun zerbitzua: aholkua: bai</string>
+	<string name="poi_health_service_support_no">Osasun zerbitzua: aholkua: ez</string>
+	<string name="poi_health_service_test_yes">Osasun zerbitzua: probak: bai</string>
+	<string name="poi_health_service_test_no">Osasun zerbitzua: probak: ez</string>
+
+	<string name="poi_health_facility_type_field_hospital">"Osasun instalazio mota: kanpaina ospitalea  "</string>
+	<string name="poi_health_facility_type_counselling_centre">Osasun instalazio mota: aholkularitza zentroa</string>
+	<string name="poi_health_facility_type_laboratory">Osasun instalazio mota: laborategia</string>
+	<string name="poi_health_facility_type_therapy">Osasun instalazio mota: terapia</string>
+	<string name="poi_health_facility_type_department">Osasun instalazio mota: departamentua</string>
+	<string name="poi_health_facility_type_dispensary">Osasun instalazio mota: dispensarioa</string>
+	<string name="poi_health_facility_type_first_aid">Osasun instalazio mota: lehen sorospena</string>
+	<string name="poi_health_facility_type_nursing_home">Osasun instalazio mota: adinekoen egoitza</string>
+	<string name="poi_health_facility_type_support_group_home">Osasun instalazio mota: Elkar-laguntzarako taldeen egoitza</string>
+
+	<string name="poi_suction_point">Xurgatze-puntua</string>
+
+	<string name="poi_health_person_type_assistant">Osasun-langilearen rola: laguntzailea</string>
+	<string name="poi_health_person_type_healer">Osasun-langilearen rola: sendalaria</string>
+	<string name="poi_health_person_type_midwife">Osasun-langilearen rola: emagina</string>
+	<string name="poi_health_person_type_nurse">Osasun-langilearen mota: erizaina</string>
+	<string name="poi_health_person_type_paramedic">Osasun-langilearen rola: paramedikoa</string>
+	<string name="poi_health_person_type_physician">Osasun-langilearen rola: medikoa</string>
+	<string name="poi_health_person_type_podologist">Osasun-langilearen rola: podologoa</string>
+	<string name="poi_health_person_type_psychologist">Osasun-langilearen rola: psikologoa</string>
+	<string name="poi_health_person_type_therapist">Osasun-langilearen rola: terapeuta</string>
+	<string name="poi_health_person_type_physician_assitant">Osasun-langilearen rola: medikoaren laguntzailea</string>
+	<string name="poi_health_person_type_technician">Osasun-langilearen rola: teknikoa</string>
+	<string name="poi_health_person_type_witchdoctor">Osasun-langilearen rola: petrikiloa</string>
+
+	<string name="poi_treat_inpatient_yes">Ingresatuen zerbitzuak: bai</string>
+	<string name="poi_treat_inpatient_no">Ingresatuen zerbitzuak: ez</string>
+	<string name="poi_treat_inpatient_only">Ingresatuen zerbitzuak: besterik ez</string>
+	<string name="poi_office_healer">Osagilearen bulegoa</string>
+	<string name="poi_bicycle_parking_streetpod">Kale leka</string>
+
+	<string name="poi_spoil_heap">Hondakin meta</string>
+	
+	<string name="poi_crossing_saltire_yes">Trenbide-pasagunearen seinalea</string>
+	<string name="poi_crossing_saltire_no">Trenbide-pasagunearen seinalea: ez</string>
+	<string name="poi_valley_balka">Balka</string>
+
+	<string name="poi_pump_status_broken">Bonbaren egoera: izorratuta</string>
+	<string name="poi_greenhouse_horticulture">Negutegiko hortikultura</string>
 
 	</resources>

@@ -4,8 +4,7 @@
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
-	android:layout_height="match_parent"
-	android:background="?attr/card_bg_color">
+	android:layout_height="match_parent">
 
 	<android.support.design.widget.AppBarLayout
 		android:id="@+id/app_bar_layout"
@@ -21,8 +20,10 @@
 			app:layout_scrollFlags="scroll"/>
 
 		<LinearLayout
+			android:id="@+id/text_container"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
+			android:animateLayoutChanges="true"
 			android:orientation="vertical"
 			android:paddingLeft="@dimen/my_location_text_sides_margin"
 			android:paddingRight="@dimen/my_location_text_sides_margin">
@@ -41,8 +42,9 @@
 				android:id="@+id/description"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
+				android:layout_marginTop="@dimen/content_padding_half"
 				android:gravity="center"
-				android:text="@string/welcome_descr"
+				android:text="@string/location_sharing_description"
 				android:textColor="?android:attr/textColorSecondary"
 				android:textSize="@dimen/descr_text_size"/>
 
@@ -93,29 +95,12 @@
 
 	</android.support.design.widget.AppBarLayout>
 
-	<android.support.v4.widget.NestedScrollView
+	<android.support.v7.widget.RecyclerView
+		android:id="@+id/recycler_view"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
-		android:paddingTop="@dimen/content_padding_small"
-		app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-		<LinearLayout
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:orientation="vertical">
-
-			<View
-				android:layout_width="match_parent"
-				android:layout_height="350dp"
-				android:background="@android:color/darker_gray"/>
-
-			<View
-				android:layout_width="match_parent"
-				android:layout_height="350dp"
-				android:background="@android:color/holo_blue_light"/>
-
-		</LinearLayout>
-
-	</android.support.v4.widget.NestedScrollView>
+		android:clipToPadding="false"
+		android:paddingBottom="@dimen/list_view_bottom_padding"
+		app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
 </android.support.design.widget.CoordinatorLayout>

@@ -19,12 +19,10 @@ import net.osmand.telegram.helpers.TelegramHelper.TelegramAuthorizationState
 import net.osmand.telegram.helpers.TelegramHelper.TelegramListener
 import org.drinkless.td.libcore.telegram.TdApi
 
-class LiveNowTabFragment : Fragment(), TelegramListener {
+private const val CHAT_VIEW_TYPE = 0
+private const val CONTACT_VIEW_TYPE = 1
 
-	companion object {
-		private const val CHAT_VIEW_TYPE = 0
-		private const val CONTACT_VIEW_TYPE = 1
-	}
+class LiveNowTabFragment : Fragment(), TelegramListener {
 
 	private val app: TelegramApplication
 		get() = activity?.application as TelegramApplication
@@ -96,7 +94,7 @@ class LiveNowTabFragment : Fragment(), TelegramListener {
 		for ((id, messages) in telegramHelper.getMessagesByChatIds()) {
 			telegramHelper.getChat(id)?.let { chat ->
 				res.add(chat)
-				if (chat.type !is TdApi.ChatTypePrivate && chat.type !is TdApi.ChatTypeSecret && messages.size > 1) {
+				if (chat.type is TdApi.ChatTypeBasicGroup || chat.type is TdApi.ChatTypeSupergroup) {
 					messages.forEach { message ->
 						telegramHelper.getUser(message.senderUserId)?.let { user ->
 							res.add(user)
@@ -130,7 +128,7 @@ class LiveNowTabFragment : Fragment(), TelegramListener {
 					inflater.inflate(R.layout.live_now_chat_card, parent, false)
 				)
 				else -> ContactViewHolder(
-					inflater.inflate(R.layout.live_now_contact_item, parent, false)
+					inflater.inflate(R.layout.user_list_item, parent, false)
 				)
 			}
 		}

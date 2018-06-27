@@ -1,4 +1,5 @@
 <resources>
+	<string name="location_sharing_description">Select the contacts and groups with whom you want to share your location.</string>
 	<string name="my_location_search_hint">Search: group or contact</string>
 	<string name="start_location_sharing">Start location sharing</string>
 	<string name="show_on_map">Show on map</string>
