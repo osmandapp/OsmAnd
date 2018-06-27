@@ -358,7 +358,7 @@ class TelegramHelper private constructor() {
 				if (chatId != null) {
 					val chat = chats[chatId]
 					if (chat == null || isChannel(chat)) {
-						return
+						continue
 					}
 					client?.send(TdApi.SearchChatRecentLocationMessages(chatId, CHAT_LIVE_USERS_LIMIT)) { obj ->
 						when (obj.constructor) {

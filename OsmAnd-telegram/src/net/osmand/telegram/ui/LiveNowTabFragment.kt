@@ -94,7 +94,7 @@ class LiveNowTabFragment : Fragment(), TelegramListener {
 		for ((id, messages) in telegramHelper.getMessagesByChatIds()) {
 			telegramHelper.getChat(id)?.let { chat ->
 				res.add(chat)
-				if (chat.type !is TdApi.ChatTypePrivate && chat.type !is TdApi.ChatTypeSecret && messages.size > 1) {
+				if (chat.type is TdApi.ChatTypeBasicGroup || chat.type is TdApi.ChatTypeSupergroup) {
 					messages.forEach { message ->
 						telegramHelper.getUser(message.senderUserId)?.let { user ->
 							res.add(user)
