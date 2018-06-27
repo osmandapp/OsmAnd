@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources><string name="no_route">Ei reittiä</string>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="no_route">Ei reittiä</string>
 	<string name="delete_target_point">Poista päämäärä</string>
 	<string name="target_point">Päämäärä %1$s</string>
     <string name="intermediate_point">Välietappi %1$s</string>
@@ -2228,4 +2229,9 @@ Jos pidät OsmAndista ja OSMsta ja haluat tukea niitä, on tämä täydellinen t
     <string name="change_color">Muuta väri</string>
     <string name="edit_name">Muokkaa nimeä</string>
     <string name="animate_my_location">Sijaintini animaatio</string>
+    <string name="coord_input_edit_point">Muokkaa pistettä</string>
+    <string name="coord_input_add_point">Lisää piste</string>
+    <string name="coord_input_save_as_track">Tallenna jälkenä</string>
+    <string name="coord_input_save_as_track_descr">Lisäsit %1 pistettä. Kirjoita tiedostonimi ja paina \"Tallenna\".</string>
+    <string name="error_notification_desc">Ole kiltti ja lähetä tästä ilmoituksesta ruutukaappaus osoitteeseen support@osmand.net</string>
     </resources>
