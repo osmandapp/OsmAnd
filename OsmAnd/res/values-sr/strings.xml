@@ -1107,7 +1107,7 @@
     <string name="route_calculation">Прорачун путање</string>
     <string name="gpx_no_tracks_title">Још увек немате ниједан GPX фајл</string>
     <string name="gpx_no_tracks_title_folder">Такође, можете додати GPX фајлове у фасциклу</string>
-    <string name="gpx_add_track">Додај GPX фајл</string>
+    <string name="gpx_add_track">И још…</string>
     <string name="gpx_appearance">Приказ</string>
     
     
