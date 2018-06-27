@@ -2427,7 +2427,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     
     <string name="gpx_no_tracks_title">Endnu ingen GPX-filer</string>
     <string name="gpx_no_tracks_title_folder">Tilføj også GPX-filer til mappen</string>
-    <string name="gpx_add_track">Tilføj GPX-fil</string>
+    <string name="gpx_add_track">Tilføj flere…</string>
     <string name="gpx_appearance">Udseende</string>
     <string name="rendering_value_fine_name">Fin</string>
     <string name="route_calculation">Ruteberegning</string>
