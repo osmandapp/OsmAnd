@@ -7,11 +7,9 @@ import net.osmand.telegram.TelegramApplication
 import net.osmand.telegram.utils.OsmandFormatter
 import net.osmand.util.Algorithms
 
-class LocationNotification(app: TelegramApplication) : TelegramNotification(app, GROUP_NAME) {
+private const val GROUP_NAME = "share_location"
 
-	companion object {
-		const val GROUP_NAME = "share_location"
-	}
+class LocationNotification(app: TelegramApplication) : TelegramNotification(app, GROUP_NAME) {
 
 	override val type: TelegramNotification.NotificationType
 		get() = TelegramNotification.NotificationType.LOCATION

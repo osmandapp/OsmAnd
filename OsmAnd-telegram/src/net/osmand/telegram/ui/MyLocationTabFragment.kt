@@ -20,11 +20,9 @@ import net.osmand.telegram.helpers.TelegramHelper.TelegramListener
 import net.osmand.telegram.ui.MyLocationTabFragment.MyLocationListAdapter.ChatViewHolder
 import org.drinkless.td.libcore.telegram.TdApi
 
-class MyLocationTabFragment : Fragment(), TelegramListener {
+private const val SELECTED_CHATS_KEY = "selected_chats"
 
-	companion object {
-		private const val SELECTED_CHATS_KEY = "selected_chats"
-	}
+class MyLocationTabFragment : Fragment(), TelegramListener {
 
 	private var textMarginSmall: Int = 0
 	private var textMarginBig: Int = 0

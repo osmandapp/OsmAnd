@@ -26,19 +26,16 @@ import net.osmand.telegram.utils.AndroidUtils
 import org.drinkless.td.libcore.telegram.TdApi
 import java.lang.ref.WeakReference
 
+private const val PERMISSION_REQUEST_LOCATION = 1
+
+private const val LOGIN_MENU_ID = 0
+private const val LOGOUT_MENU_ID = 1
+private const val PROGRESS_MENU_ID = 2
+
+private const val MY_LOCATION_TAB_POS = 0
+private const val LIVE_NOW_TAB_POS = 1
 
 class MainActivity : AppCompatActivity(), TelegramListener {
-
-	companion object {
-		private const val PERMISSION_REQUEST_LOCATION = 1
-
-		private const val LOGIN_MENU_ID = 0
-		private const val LOGOUT_MENU_ID = 1
-		private const val PROGRESS_MENU_ID = 2
-
-		private const val MY_LOCATION_TAB_POS = 0
-		private const val LIVE_NOW_TAB_POS = 1
-	}
 
 	private val log = PlatformUtil.getLog(TelegramHelper::class.java)
 

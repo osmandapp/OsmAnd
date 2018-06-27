@@ -4,24 +4,21 @@ import android.content.Context
 import net.osmand.telegram.utils.OsmandFormatter.MetricsConstants
 import net.osmand.telegram.utils.OsmandFormatter.SpeedConstants
 
+private const val SETTINGS_NAME = "osmand_telegram_settings"
+
+private const val SHARE_LOCATION_CHATS_KEY = "share_location_chats"
+private const val SHOW_ON_MAP_CHATS_KEY = "show_on_map_chats"
+
+private const val METRICS_CONSTANTS_KEY = "metrics_constants"
+private const val SPEED_CONSTANTS_KEY = "speed_constants"
+
+private const val SEND_MY_LOCATION_INTERVAL_KEY = "send_my_location_interval"
+private const val SEND_MY_LOCATION_INTERVAL_DEFAULT = 5L * 1000 // 5 seconds
+
+private const val USER_LOCATION_EXPIRE_TIME_KEY = "user_location_expire_time"
+private const val USER_LOCATION_EXPIRE_TIME_DEFAULT = 15L * 60 * 1000 // 15 minutes
+
 class TelegramSettings(private val app: TelegramApplication) {
-
-	companion object {
-
-		private const val SETTINGS_NAME = "osmand_telegram_settings"
-
-		private const val SHARE_LOCATION_CHATS_KEY = "share_location_chats"
-		private const val SHOW_ON_MAP_CHATS_KEY = "show_on_map_chats"
-
-		private const val METRICS_CONSTANTS_KEY = "metrics_constants"
-		private const val SPEED_CONSTANTS_KEY = "speed_constants"
-
-		private const val SEND_MY_LOCATION_INTERVAL_KEY = "send_my_location_interval"
-		private const val SEND_MY_LOCATION_INTERVAL_DEFAULT = 5L * 1000 // 5 seconds
-
-		private const val USER_LOCATION_EXPIRE_TIME_KEY = "user_location_expire_time"
-		private const val USER_LOCATION_EXPIRE_TIME_DEFAULT = 15L * 60 * 1000 // 15 minutes
-	}
 
 	private var shareLocationChats: Set<String> = emptySet()
 	private var showOnMapChats: Set<String> = emptySet()

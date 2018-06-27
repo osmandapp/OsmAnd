@@ -4,11 +4,9 @@ import net.osmand.Location
 import net.osmand.telegram.TelegramApplication
 import net.osmand.telegram.notifications.TelegramNotification.NotificationType
 
-class ShareLocationHelper(private val app: TelegramApplication) {
+private const val MAX_LOCATION_MESSAGE_LIVE_PERIOD_SEC = 60 * 60 * 24 - 1 // day
 
-	companion object {
-		const val MAX_LOCATION_MESSAGE_LIVE_PERIOD_SEC = 60 * 60 * 24 - 1 // day
-	}
+class ShareLocationHelper(private val app: TelegramApplication) {
 
 	var sharingLocation: Boolean = false
 		private set

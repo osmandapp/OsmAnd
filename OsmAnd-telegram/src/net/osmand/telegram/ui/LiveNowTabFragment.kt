@@ -19,12 +19,10 @@ import net.osmand.telegram.helpers.TelegramHelper.TelegramAuthorizationState
 import net.osmand.telegram.helpers.TelegramHelper.TelegramListener
 import org.drinkless.td.libcore.telegram.TdApi
 
-class LiveNowTabFragment : Fragment(), TelegramListener {
+private const val CHAT_VIEW_TYPE = 0
+private const val CONTACT_VIEW_TYPE = 1
 
-	companion object {
-		private const val CHAT_VIEW_TYPE = 0
-		private const val CONTACT_VIEW_TYPE = 1
-	}
+class LiveNowTabFragment : Fragment(), TelegramListener {
 
 	private val app: TelegramApplication
 		get() = activity?.application as TelegramApplication

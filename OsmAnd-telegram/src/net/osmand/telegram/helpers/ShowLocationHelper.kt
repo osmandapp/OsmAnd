@@ -11,11 +11,9 @@ import net.osmand.telegram.utils.AndroidUtils
 import org.drinkless.td.libcore.telegram.TdApi
 import java.io.File
 
-class ShowLocationHelper(private val app: TelegramApplication) {
+private const val MAP_LAYER_ID = "telegram_layer"
 
-	companion object {
-		private const val MAP_LAYER_ID = "telegram_layer"
-	}
+class ShowLocationHelper(private val app: TelegramApplication) {
 
 	private val telegramHelper = app.telegramHelper
 	private val osmandHelper = app.osmandHelper
