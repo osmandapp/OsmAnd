@@ -1026,7 +1026,7 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="shared_string_downloading">S\'està baixant</string>
     <string name="commiting_node">S\'està enviant el node…</string>
     <string name="choose_intersected_street">Seleccioneu la intersecció</string>
-    <string name="poi_remove_confirm_template">Voleu suprimir {0} (escriviu un comentari)?</string>
+    <string name="poi_remove_confirm_template">Voleu suprimir {0} (comentari)?</string>
     <string name="poi_dialog_comment_default">Canvis en el PDI</string>
     <string name="context_menu_item_destination_point">Estableix com a destinació</string>
     <string name="local_osm_changes_backup_successful">Fitxer de canvis OSM %1$s estava generat</string>
@@ -2240,7 +2240,7 @@ L\'espai disponible és només de {2} MB.</string>
     
     <string name="gpx_no_tracks_title">No teniu encara cap fitxer GPX</string>
     <string name="gpx_no_tracks_title_folder">També podeu afegir fitxers GPX a la carpeta</string>
-    <string name="gpx_add_track">Afegeix fitxer GPX</string>
+    <string name="gpx_add_track">Afegeix més…</string>
     <string name="gpx_appearance">Aparença</string>
     <string name="rendering_value_fine_name">Bé</string>
     <string name="route_calculation">Càlcul de ruta</string>
@@ -2982,5 +2982,5 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="coord_input_edit_point">Edita punt</string>
     <string name="coord_input_add_point">Afegeix un punt</string>
     <string name="coord_input_save_as_track">Desa com una traça</string>
-    <string name="coord_input_save_as_track_descr">Heu afegit %1$s punts. Introduïu un nom de fitxer i cliqueu per desar.</string>
+    <string name="coord_input_save_as_track_descr">Heu afegit %1$s punts. Introduïu un nom de fitxer i premeu \"Desa\".</string>
     </resources>
