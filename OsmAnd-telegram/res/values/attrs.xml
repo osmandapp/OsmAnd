@@ -12,4 +12,8 @@
 		<attr name="primary_btn_text_color" format="reference" />
 		<attr name="secondary_btn_bg" format="reference" />
 	</declare-styleable>
+
+	<declare-styleable name="TextViewEx">
+		<attr name="typeface" format="reference|string" />
+	</declare-styleable>
 </resources>

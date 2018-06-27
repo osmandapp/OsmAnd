@@ -12,6 +12,7 @@ obj/
 out/
 use/
 src/org/drinkless/td/
+assets/fonts/*
 
 # Android Studio
 /.idea

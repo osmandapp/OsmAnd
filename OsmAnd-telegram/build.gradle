@@ -111,10 +111,19 @@ task downloadPrebuiltTelegram {
 	dependsOn downloadTdLibzip, copyNativeLibs, copyJavaSources
 }
 
+task collectFonts(type: Copy) {
+	from "../../resources/fonts"
+	into "assets/fonts"
+	include "*.ttf"
+}
+
+task collectExternalResources {
+	dependsOn collectFonts
+}
 
 afterEvaluate {
 	android.applicationVariants.all { variant ->
-		variant.javaCompiler.dependsOn(downloadPrebuiltTelegram)
+		variant.javaCompiler.dependsOn(downloadPrebuiltTelegram, collectExternalResources)
 		variant.preBuild.dependsOn(downloadPrebuiltTelegram)
 	}
 }
