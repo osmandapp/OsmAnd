@@ -2365,7 +2365,7 @@ Lon %2$s</string>
     <string name="shared_string_notifications">Notìficas</string>
     <string name="gpx_no_tracks_title">Non tenes galu documentos GPX</string>
     <string name="gpx_no_tracks_title_folder">Podes fintzas annànghere documentos GPX a sa cartella</string>
-    <string name="gpx_add_track">Annanghe unu documentu GPX</string>
+    <string name="gpx_add_track">Annanghe àteru…</string>
     <string name="gpx_appearance">Aparèntzia</string>
     <string name="rendering_value_fine_name">Bonu</string>
     <string name="route_calculation">Càlculu de s\'àndala</string>
