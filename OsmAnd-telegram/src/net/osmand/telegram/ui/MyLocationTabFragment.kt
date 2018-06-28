@@ -1,8 +1,6 @@
 package net.osmand.telegram.ui
 
 import android.animation.*
-import android.graphics.Bitmap
-import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
 import android.os.Build
 import android.os.Bundle
@@ -17,6 +15,7 @@ import net.osmand.telegram.R
 import net.osmand.telegram.TelegramApplication
 import net.osmand.telegram.helpers.TelegramHelper
 import net.osmand.telegram.helpers.TelegramHelper.TelegramListener
+import net.osmand.telegram.helpers.TelegramUiHelper
 import net.osmand.telegram.ui.MyLocationTabFragment.MyLocationListAdapter.ChatViewHolder
 import org.drinkless.td.libcore.telegram.TdApi
 
@@ -273,20 +272,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 			val chat = chats[position]
 			val lastItem = position == itemCount - 1
 
-			var drawable: Drawable? = null
-			var bitmap: Bitmap? = null
-			val chatPhoto = chat.photo?.small
-			if (chatPhoto != null && chatPhoto.local.path.isNotEmpty()) {
-				bitmap = app.uiUtils.getCircleBitmap(chatPhoto.local.path)
-			}
-			if (bitmap == null) {
-				drawable = app.uiUtils.getThemedIcon(R.drawable.ic_group)
-			}
-			if (bitmap != null) {
-				holder.icon?.setImageBitmap(bitmap)
-			} else {
-				holder.icon?.setImageDrawable(drawable)
-			}
+			TelegramUiHelper.setupPhoto(app, holder.icon, chat.photo?.small?.local?.path)
 			holder.title?.text = chat.title
 			holder.description?.text = "Some description" // FIXME
 			holder.checkBox?.apply {
