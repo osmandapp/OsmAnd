@@ -3946,4 +3946,7 @@
 
 	<string name="poi_outcrop">Klippefremspring</string>
 
+<string name="poi_payment_contactless_yes">Kontaktløs</string>
+	<string name="poi_payment_contactless_no">Kontaktløs ikke accepteret</string>
+
 </resources>
