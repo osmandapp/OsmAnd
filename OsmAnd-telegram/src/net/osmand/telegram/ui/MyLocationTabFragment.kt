@@ -6,7 +6,6 @@ import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
 import android.os.Build
 import android.os.Bundle
-import android.support.annotation.ColorRes
 import android.support.design.widget.AppBarLayout
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
@@ -216,30 +215,27 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 			searchBox.layoutParams = params
 		}
 
-		val animatorSet = AnimatorSet()
-		animatorSet.duration = 200
-		animatorSet.playTogether(cornerAnimator, marginAnimator)
-		if (appBarCollapsed) {
-			animatorSet.addListener(object : AnimatorListenerAdapter() {
+		AnimatorSet().apply {
+			duration = 200
+			playTogether(cornerAnimator, marginAnimator)
+			addListener(object : AnimatorListenerAdapter() {
 				override fun onAnimationEnd(animation: Animator?) {
-					if (appBarCollapsed) {
-						updateTitleTextColor(R.color.app_bar_title_light)
-						if (Build.VERSION.SDK_INT >= 21) {
-							appBarLayout.outlineProvider = appBarOutlineProvider
-						}
+					updateTitleTextColor()
+					if (appBarCollapsed && Build.VERSION.SDK_INT >= 21) {
+						appBarLayout.outlineProvider = appBarOutlineProvider
 					}
 				}
 			})
-		} else {
-			updateTitleTextColor(R.color.ctrl_active_light)
-			if (Build.VERSION.SDK_INT >= 21) {
-				appBarLayout.outlineProvider = null
-			}
+			start()
 		}
-		animatorSet.start()
+
+		if (!appBarCollapsed && Build.VERSION.SDK_INT >= 21) {
+			appBarLayout.outlineProvider = null
+		}
 	}
 
-	private fun updateTitleTextColor(@ColorRes color: Int) {
+	private fun updateTitleTextColor() {
+		val color = if (appBarCollapsed) R.color.app_bar_title_light else R.color.ctrl_active_light
 		context?.also {
 			title.setTextColor(ContextCompat.getColor(it, color))
 		}
