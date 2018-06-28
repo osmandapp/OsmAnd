@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources><string name="recording_context_menu_show">اظهر</string>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="recording_context_menu_show">اظهر</string>
     <string name="av_def_action_picture">التقط صورة</string>
     
     <string name="av_def_action_video">تسجيل الفيديو</string>
@@ -2326,7 +2327,7 @@
     <string name="trip_rec_notification_settings_desc">عرض اشعار نظامي للسماح ببدء تسجيل الرحلة.</string>
     <string name="shared_string_notifications">الإشعارات</string>
     <string name="gpx_no_tracks_title_folder">يمكنك أيضا إضافة مسارات إلى المجلد</string>
-    <string name="gpx_add_track">إضافة مسار</string>
+    <string name="gpx_add_track">إضافة المزيد …</string>
     <string name="gpx_appearance">المظهر</string>
     
     <string name="upload_poi">رفع POI</string>
@@ -2660,7 +2661,7 @@
     <string name="choose_navigation_type">اختر بروفايل الملاحة</string>
     <string name="add_route_points">إضافة نقاط مسار</string>
     <string name="add_line">إضافة خط</string>
-    <string name="empty_state_my_tracks">إضافة وتسجيل المسارات</string>
+    <string name="empty_state_my_tracks">إضافة ملفات GPX</string>
     <string name="empty_state_my_tracks_desc">تسجيل أو استيراد مسارات للعرض.</string>
     <string name="empty_state_favourites">إضافة المفضلات</string>
     <string name="empty_state_favourites_desc">إضافة المفضلة على الخريطة أو استيرادها من ملف.</string>
@@ -2796,7 +2797,7 @@
     <string name="osm_recipients_label">مساهمي OSM المستفيدون</string>
     <string name="winter_and_ski_renderer">الشتاء و التزحلق</string>
     <string name="nautical_renderer">الملاحة البحرية</string>
-<string name="nothing_found_in_radius">لم نتمكن مِن العثور على أي شيء في هذا القُطر :</string>
+<string name="nothing_found_in_radius">لم نتمكن مِن العثور على أي شيء :</string>
     <string name="select_waypoints_category_description">بإمكانك إضافة كل نقاط المسار أو إختيار فئات أخرى.</string>
     <string name="shared_string_total">الإجمالي</string>
     <string name="clear_all_intermediates">إزالة كافة النقاط الوسيطة</string>
@@ -2894,6 +2895,6 @@
     <string name="how_to_open_link">كيف يُفتح الرابط ؟</string>
     <string name="read_wikipedia_offline">قراءة ويكيبيديا مِن دون اتصال</string>
     <string name="download_all">تنزيل الكل</string>
-    <string name="shared_string_restart">إعادة التشغيل</string>
+    <string name="shared_string_restart">إعادة تشغيل التطبيق</string>
     <string name="shared_string_bookmark">إشارة مرجعية</string>
     </resources>
