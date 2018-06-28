@@ -1267,4 +1267,29 @@
 	<string name="poi_payment_mastercard_no">MasterCard er ikke akseptert</string>
 	<string name="poi_access_permissive">Adgang tillatt</string>
 	<string name="poi_toilets_access_permissive">Toalettadgang: Tillatt</string>
+	<string name="poi_tactile_paving">Korrugert fortau</string>
+	<string name="poi_ferry_terminal_cargo">Gods</string>
+	<string name="poi_observatory_designation">Betegnelse</string>
+	<string name="poi_pharmacy_dispensing">Utlevering</string>
+	<string name="poi_denomination">Betegnelse</string>
+	<string name="poi_information_type">Type</string>
+	<string name="poi_scout_camp">Speiderleir</string>
+	<string name="poi_theatre_genre">Sjanger</string>
+	<string name="poi_water_characteristic">Vannegenskap</string>
+	<string name="poi_health_specialty">Helsespesialitet</string>
+	<string name="poi_climbing_style">Klatringsstil</string>
+	<string name="poi_socket">Uttak</string>
+	<string name="poi_checkpoint_type">Kontrollpunktstype</string>
+
+<string name="poi_emergency_infrastructure">Kriseinfrastruktur</string>
+	<string name="poi_chemist">Apotek</string>
+	<string name="poi_clothes_children">Barneklær</string>
+	<string name="poi_fishing">Fiskeutstyr</string>
+	<string name="poi_free_flying">Fluefiskeutstyr</string>
+<string name="poi_garden_furniture">Hagemøbelbutikk</string>
+	<string name="poi_gas">Gassbutikk</string>
+	<string name="poi_glaziery">Glassmester</string>
+	<string name="poi_video">Videobutikk</string>
+	<string name="poi_window_blind">Solskjermingsbutikk</string>
+	<string name="poi_atv">Firhjulingsbutikk</string>
 	</resources>
