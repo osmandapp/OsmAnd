@@ -12,7 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import net.osmand.AndroidUtils;
-import net.osmand.plus.GPXUtilities;
+import net.osmand.plus.GPXUtilities.GPXFile;
+import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -23,7 +24,7 @@ import net.osmand.plus.base.FavoriteImageDrawable;
 public class CoordinateInputAdapter extends RecyclerView.Adapter<MapMarkerItemViewHolder> {
 
 	public static final String ADAPTER_POSITION_KEY = "adapter_position_key";
-	private GPXUtilities.GPXFile gpx;
+	private GPXFile gpx;
 
 	private OsmandApplication app;
 
@@ -43,7 +44,7 @@ public class CoordinateInputAdapter extends RecyclerView.Adapter<MapMarkerItemVi
 		this.actionsListener = actionsListener;
 	}
 	
-	public CoordinateInputAdapter(OsmandApplication app, GPXUtilities.GPXFile gpx) {
+	public CoordinateInputAdapter(OsmandApplication app, GPXFile gpx) {
 		this.app = app;
 		this.gpx = gpx;
 
@@ -62,7 +63,7 @@ public class CoordinateInputAdapter extends RecyclerView.Adapter<MapMarkerItemVi
 
 	@Override
 	public void onBindViewHolder(@NonNull final MapMarkerItemViewHolder holder, int position) {
-		GPXUtilities.WptPt wpt = getItem(position);
+		WptPt wpt = getItem(position);
 
 		holder.iconDirection.setVisibility(View.VISIBLE);
 		holder.icon.setImageDrawable(FavoriteImageDrawable.getOrCreate(app, wpt.getColor(), false));
@@ -99,8 +100,12 @@ public class CoordinateInputAdapter extends RecyclerView.Adapter<MapMarkerItemVi
 	}
 
 
-	public GPXUtilities.WptPt getItem(int position) {
+	public WptPt getItem(int position) {
 		return gpx.getPoints().get(position);
+	}
+
+	public int getItemPosition(WptPt wptPt) {
+		return gpx.getPoints().indexOf(wptPt);
 	}
 
 	public void removeItem(int position) {
@@ -110,7 +115,7 @@ public class CoordinateInputAdapter extends RecyclerView.Adapter<MapMarkerItemVi
 		}
 	}
 	
-	public void setGpx(GPXUtilities.GPXFile gpx) {
+	public void setGpx(GPXFile gpx) {
 		this.gpx = gpx;
 		notifyDataSetChanged();
 	}
