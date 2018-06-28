@@ -2373,7 +2373,7 @@
     
     <string name="gpx_no_tracks_title">您尚未有任何的 GPX 檔案</string>
     <string name="gpx_no_tracks_title_folder">您也可以增加 GPX 檔案到資料夾</string>
-    <string name="gpx_add_track">增加 GPX 檔案</string>
+    <string name="gpx_add_track">增加更多…</string>
     <string name="gpx_appearance">外表</string>
     
     <string name="trip_rec_notification_settings">啟用錄製快速開始</string>
