@@ -114,6 +114,7 @@ task downloadPrebuiltTelegram {
 
 task collectFonts(type: Copy) {
 	from "../../resources/fonts"
+	from "../../resources/fonts-telegram"
 	into "assets/fonts"
 	include "*.ttf"
 }

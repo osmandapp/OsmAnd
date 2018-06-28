@@ -3,22 +3,25 @@ package net.osmand.telegram.helpers
 import android.content.Context
 import android.graphics.Typeface
 import android.util.Log
+import net.osmand.telegram.R
 import java.util.concurrent.ConcurrentHashMap
 
 private const val TAG = "FontCache"
-private const val ROBOTO_MEDIUM = "fonts/Roboto-Medium.ttf"
-private const val ROBOTO_REGULAR = "fonts/Roboto-Regular.ttf"
 
 object FontCache {
 
 	private val fontsMap = ConcurrentHashMap<String, Typeface>()
 
 	fun getRobotoMedium(context: Context): Typeface? {
-		return getFont(context, ROBOTO_MEDIUM)
+		return getFont(context, context.getString(R.string.font_roboto_medium))
 	}
 
 	fun getRobotoRegular(context: Context): Typeface? {
-		return getFont(context, ROBOTO_REGULAR)
+		return getFont(context, context.getString(R.string.font_roboto_regular))
+	}
+
+	fun getRobotoMonoBold(context: Context): Typeface? {
+		return getFont(context, context.getString(R.string.font_roboto_mono_bold))
 	}
 
 	fun getFont(context: Context, fontName: String): Typeface? {
