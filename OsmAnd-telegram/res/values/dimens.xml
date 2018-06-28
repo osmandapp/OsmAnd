@@ -3,10 +3,13 @@
 	<dimen name="content_padding_small">4dp</dimen>
 	<dimen name="content_padding_half">8dp</dimen>
 	<dimen name="content_padding_standard">16dp</dimen>
+	<dimen name="content_padding_big">24dp</dimen>
 
 	<dimen name="progress_bar_size_small">32dp</dimen>
 
 	<dimen name="action_bar_height">56dp</dimen>
+	<dimen name="action_bar_descr_bottom_margin">12dp</dimen>
+	<dimen name="action_bar_row_button_height">52dp</dimen>
 
 	<dimen name="dialog_padding_vertical">24dp</dimen>
 	<dimen name="dialog_padding_horizontal">60dp</dimen>

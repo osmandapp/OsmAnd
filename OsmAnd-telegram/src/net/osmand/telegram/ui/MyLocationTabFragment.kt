@@ -175,7 +175,9 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 	}
 
 	fun onPrimaryBtnClick() {
-		Toast.makeText(context, "Continue", Toast.LENGTH_SHORT).show()
+		activity?.supportFragmentManager?.also {
+			SetTimeDialogFragment.showInstance(it, selectedChats)
+		}
 	}
 
 	fun onSecondaryBtnClick() {
