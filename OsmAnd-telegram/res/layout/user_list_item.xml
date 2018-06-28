@@ -70,6 +70,25 @@
 				android:visibility="gone"
 				tools:visibility="visible"/>
 
+			<net.osmand.telegram.ui.views.TextViewEx
+				android:id="@+id/text_in_area"
+				android:layout_width="wrap_content"
+				android:layout_height="@dimen/dialog_button_height"
+				android:layout_marginEnd="@dimen/image_button_padding"
+				android:layout_marginRight="@dimen/image_button_padding"
+				android:background="?attr/secondary_btn_bg"
+				android:ellipsize="end"
+				android:gravity="center"
+				android:maxLines="1"
+				android:paddingLeft="@dimen/image_button_padding"
+				android:paddingRight="@dimen/image_button_padding"
+				android:textColor="?attr/ctrl_active_color"
+				android:textSize="@dimen/text_button_text_size"
+				android:visibility="gone"
+				app:typeface="@string/font_roboto_medium"
+				tools:text="1 h"
+				tools:visibility="visible"/>
+
 		</LinearLayout>
 
 	</FrameLayout>
