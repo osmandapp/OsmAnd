@@ -32,7 +32,7 @@
 				android:layout_width="match_parent"
 				android:layout_height="@dimen/action_bar_height">
 
-				<TextView
+				<net.osmand.telegram.ui.views.TextViewEx
 					android:id="@+id/title"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
@@ -41,7 +41,7 @@
 					android:text="@string/start_location_sharing"
 					android:textColor="?attr/ctrl_active_color"
 					android:textSize="@dimen/title_text_size"
-					android:textStyle="bold"/>
+					app:typeface="@string/font_roboto_mono_bold"/>
 
 			</FrameLayout>
 
