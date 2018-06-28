@@ -3815,4 +3815,7 @@
 
 	<string name="poi_outcrop">Обнажение пород</string>
 
+	<string name="poi_payment_contactless_yes">Бесконтактная оплата</string>
+	<string name="poi_payment_contactless_no">Бесконтактная оплата не принимается</string>
+
 </resources>
