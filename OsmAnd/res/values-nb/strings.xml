@@ -203,7 +203,7 @@
     <string name="index_name_tts_voice">Talemeldinger (TTS-syntetisert, anbefales)</string>
     <string name="amenity_type_osmwiki">Wikipedia (offline)</string>
     <string name="amenity_type_user_defined">Brukerdefinert</string>
-    <string name="fav_export_confirmation">Fil som inneholder tidligere eksporterte favoritter finnes allerede. Erstatt den?</string>
+    <string name="fav_export_confirmation">Fil som inneholder tidligere eksporterte favoritter finnes allerede. Vil du erstatte den?</string>
     <string name="profile_settings">Profilspesifikke innstillinger</string>
     <string name="settings_preset">Standardprofil</string>
     <string name="settings_preset_descr">Kartvisning- og navigeringsinnstillinger lagres per profil. Sett din standardprofil her.</string>
@@ -549,7 +549,7 @@
     <string name="osb_comment_dialog_message">Melding</string>
     <string name="poi_edit_title">Rediger interessepunkt</string>
     <string name="poi_create_title">Opprett interessepunkt</string>
-    <string name="poi_remove_confirm_template">Slette {0} (skriv kommentar)?</string>
+    <string name="poi_remove_confirm_template">Slette {0} (kommentar)?</string>
     <string name="poi_remove_title">Slett interessepunkt</string>
     <string name="poi_remove_success">Interessepunkt slettet</string>
     <string name="poi_action_add">legg til</string>
@@ -1883,7 +1883,7 @@
     <string name="translit_name_if_miss">Transkriber hvis %1$s navn mangler</string>
     <string name="translit_names">Transkriber navn</string>
     <string name="get_for_month">Få for %1$s måned</string>
-    <string name="osm_live_banner_desc">Få ubegrensede kartnedlastinger, og kartoppdateringer mer enn en gang i måneden: Ukentlig, daglig eller hver time.</string>
+    <string name="osm_live_banner_desc">Få ubegrensede kartnedlastinger og kartoppdateringer mer enn en gang i måneden: Ukentlig, daglig eller hver time.</string>
     <string name="access_direction_audio_feedback">Lydbaserte anvisninger</string>
     <string name="access_direction_audio_feedback_descr">Indiker retning til målpunkt med lyd.</string>
     <string name="access_direction_haptic_feedback">Anvisninger med vibrasjon</string>
@@ -1900,7 +1900,7 @@
     
     <string name="osm_user_stat">Redigeringer %1$s, rang %2$s, redigeringer totalt %3$s</string>
     <string name="osm_editors_ranking">Rangering av OSM-bidragsytere</string>
-    <string name="osm_live_email_desc">For å gi deg informasjon om bidrag.</string>
+    <string name="osm_live_email_desc">Behøves for å gi deg informasjon om bidrag.</string>
     <string name="osm_live_support_region">Støttet region</string>
     <string name="osm_live_thanks">Takk for at du støtter OsmAnd!
 \nFor å aktivere alle nye funksjoner må du starte OsmAnd på nytt.</string>
@@ -2109,8 +2109,8 @@
     <string name="route_roundabout">Rundkjøring: Ta avkjøring %1$d og fortsett</string>
     <string name="support_new_features">Støtt nye funksjoner</string>
     <string name="max_speed">Maksimumshastighet</string>
-    <string name="shared_string_start_time">Avreise</string>
-    <string name="shared_string_end_time">Ankomst</string>
+    <string name="shared_string_start_time">Starttid</string>
+    <string name="shared_string_end_time">Sluttid</string>
     <string name="shared_string_color">Farge</string>
     <string name="file_can_not_be_moved">Filen kan ikke flyttes.</string>
     <string name="shared_string_move">Flytt</string>
@@ -2216,7 +2216,7 @@
     <string name="configure_screen_quick_action">Hurtighandling</string>
     <string name="quick_action_new_action">Legg til handling</string>
     <string name="dialog_add_action_title">Legg til handling</string>
-    <string name="private_access_routing_req">Reisemålet ditt ligger i et område med privat adgang. Bruk private veier for denne turen?</string>
+    <string name="private_access_routing_req">Reisemålet ditt ligger i et område med privat adgang. Tillate adgang til de private veiene for denne turen?</string>
     <string name="restart_search">Start søk på nytt</string>
     <string name="increase_search_radius">Øk søkeradius</string>
     <string name="nothing_found">Ingenting funnet</string>
@@ -2331,7 +2331,7 @@
     <string name="full_version_thanks">Takk for at du kjøpte betalingsversjonen av OsmAnd.</string>
     <string name="routing_attr_driving_style_speed_name">Kortere ruter</string>
     <string name="routing_attr_driving_style_balance_name">Balansert</string>
-    <string name="track_points_category_name">Rutepunkter, fremtredende punkter på denne ruten, navngitte karakteristika.</string>
+    <string name="track_points_category_name">Rutepunkter, interessepunkter, navngitte objekter</string>
     <string name="shared_string_time_moving">Tid i bevegelse</string>
     <string name="shared_string_time_span">Varighet</string>
     <string name="shared_string_max">Maks.</string>
@@ -2509,8 +2509,8 @@
     <string name="quick_action_fav_name_descr">La stå tomt for å bruke adressen eller stedsnavnet.</string>
     <string name="quick_action_bug_descr">Denne meldingen inkluderes i kommentarfeltet.</string>
     <string name="mappilary_no_internet_desc">Du må være koblet til internett for å vise bilder fra Mapillary.</string>
-    <string name="hillshade_menu_download_descr">Last ned relieffskyggeoverleggskartet for å se relieffskygger for denne regionen.</string>
-    <string name="hillshade_purchase_header">Installer programtillegget for koter for å vise relieffskygger på kartet</string>
+    <string name="hillshade_menu_download_descr">Last ned relieffskyggeoverleggskartet for denne regionen for å se relieffskygger på kartet.</string>
+    <string name="hillshade_purchase_header">Kjøp og installer programtillegget for koter for å se relieffskygger på kartet</string>
     <string name="enter_new_name">Oppfør nytt navn</string>
 	<string name="shared_string_back">Tilbake</string>
 	<string name="waypoints_added_to_map_markers">Rutepunkter lagt til kartmarkører</string>
@@ -2526,10 +2526,10 @@
     <string name="srtm_menu_download_descr">Last ned kotekartet for denne regionen.</string>
     <string name="shared_string_view">Vis</string>
 	<string name="import_as_gpx">Importer som GPX-fil</string>
-    <string name="import_as_favorites">Importer som favoritt</string>
+    <string name="import_as_favorites">Importer som favoritter</string>
     <string name="import_file">Importer fil</string>
 	<string name="marker_show_distance_descr">Velg hvordan avstand og retning til kartmarkører på kartskjermen angis:</string>
-    <string name="import_gpx_file_description">kan importeres som favoritt, eller GPX-fil.</string>
+    <string name="import_gpx_file_description">kan importeres som favoritter eller en GPX-fil.</string>
     <string name="tap_on_map_to_hide_interface">Fullskjermmodus</string>
     
     <string name="appearance_on_the_map">Utseende på kartet</string>
@@ -2571,14 +2571,14 @@
     <string name="rendering_value_darkyellow_name">Mørkegul</string>
     <string name="rendering_value_translucent_pink_name">Gjennomskinnelig rosa</string>
     <string name="modify_the_search_query">Endre søkeord.</string>
-    <string name="looking_for_tracks_with_waypoints">Ser etter GPX-filer med rutepunkter</string>
+    <string name="looking_for_tracks_with_waypoints">Ser etter spor med rutepunkter</string>
     <string name="shared_string_gpx_waypoints">Spor-rutepunkter</string>
     <string name="add_group_descr">Importer grupper fra favoritter eller GPX-rutepunkter.</string>
     <string name="empty_state_markers_groups_desc">Importer favorittgrupper eller rutepunkter som markører.</string>
     <string name="show_guide_line_descr">Vis veivisningslinjer fra din posisjon til de aktive markørplasseringene.</string>
     <string name="show_arrows_descr">Vis én eller to piler som indikerer retningen til de aktive markørene.</string>
     <string name="distance_indication_descr">Velg hvordan avstanden til aktive markører skal vises.</string>
-    <string name="active_markers_descr">Velg antall aktive markører som skal vises.</string>
+    <string name="active_markers_descr">Velg hvor mange retningsindikatorer som skal vises.</string>
     <string name="tap_on_map_to_hide_interface_descr">Et trykk på kartet skjuler/viser kontrollknappene og miniprogrammene.</string>
     <string name="mark_passed">Marker som passert</string>
     <string name="osn_modify_dialog_error">Kunne ikke endre notatet</string>
@@ -2676,7 +2676,7 @@
     <string name="disable_recording_once_app_killed_descrp">Vil sette GPX-logging i pausemodus når programmet avsluttes (via nylig brukte apper). (OsmAnds bakgrunnsindikasjon forsvinner fra Android-varslingslinjen.)</string>
     <string name="route_is_too_long_v2">Legg til mellomliggende reisemål hvis denne lange ruten ikke er beregnet innen 10 minutter.</string>
     <string name="intermediate_items_sort_return">Optimalisert rekkefølge av mellomliggende reisemål underveis til målet.</string>
-    <string name="audionotes_location_not_defined">Sted å assosiere med notatet er ikke definert ennå. \"Bruk posisjon …\" for å tilordne et notat til det angitte stedet.</string>
+    <string name="audionotes_location_not_defined">Sted å assosiere med notatet er ikke definert ennå. \"Bruk posisjon…\" for å tilordne et notat til det angitte stedet.</string>
     <string name="add_waypoint_dialog_title">Legg til rutepunkt i innspilt GPX-spor</string>
     <string name="voice_is_not_available_msg">Taleveiledning er ikke tilgjengelig, gå til \'Innstillinger\' → \'Navigeringsinnstillinger\' → \'Taleveiledning\' og velg eller last ned en språkpakke.</string>
     <string name="use_fast_recalculation_desc">For lange turer, beregn på nytt bare den første delen av ruten.</string>
@@ -2833,7 +2833,7 @@
     <string name="record_plugin_description">Dette programtillegget aktiverer funksjoner for å ta opp og lagre sporene dine ved å manuelt trykke på miniprogrammet for GPX-logging på kartskjermen, eller også for å automatisk logge alle dine navigeringsruter til en GPX-fil. 
 \n
 \nSpor som er tatt opp kan deles med dine venner eller brukes som OSM-bidrag. Idrettsutøvere kan bruke innspilte spor til å følge treningen sin. Noe grunnleggende sporingsanalyse kan utføres direkte i OsmAnd, som rundetider, gjennomsnittshastighet etc., og spor kan selvfølgelig også analyseres senere i spesielle tredjeparts analyseprogrammer.</string>
-    <string name="osmand_development_plugin_description">Dette programtillegget viser innstillinger for utvikling og feilrettingsfunksjoner, for testing eller simulering av veivisning, skjermtegningsytelse, eller stemmeanvisning. Disse innstillingene er ment for utviklere, og trengs ikke for vanlige brukere.</string>
+    <string name="osmand_development_plugin_description">Dette programtillegget viser innstillinger for utvikling og feilrettingsfunksjoner som testing eller simulering av ruteberegning, skjermopptegningsytelse eller talemeldinger. Disse innstillingene er ment for utviklere og trengs ikke for vanlige brukere.</string>
     <string name="osmand_extended_description_part2">GPS-navigering
 \n • Velg mellom frakoblet modus (ingen roaming-kostnader når du er utenlands) eller nettbasert modus (raskere)
 \n • Taleveiledning sving-for-sving leder deg langs veien (innspilt og syntetisert tale)
@@ -2963,22 +2963,21 @@
     <string name="osmand_distance_planning_plugin_description">Dette programtillegget tilbyr et miniprogram for kartskjermen der du kan opprette stier ved å trykke på kartet, eller ved å endre eksisterende GPX-filer, for å planlegge en tur og måle avstanden mellom punkter. Resultatet kan lagres som en GPX-fil, som senere kan brukes for veiledning.</string>
     <string name="osm_editing_plugin_description">Via dette programtillegget kan OsmAnd brukes til å sende inn OSM-bidrag, som opprettelse eller endring av OSM-POI-objekter, åpning eller kommentering av OSM-notater, og bidrag til GPX-spor. OSM er et verdensomspennende kartprosjekt i offentlig eiendom. For detaljer, se https://openstreetmap.org. Aktiv deltagelse verdsettes, og bidrag kan gjøres direkte fra OsmAnd, hvis du angir din personlige OSM-innloggingsinfo i programmet.</string>
     <string name="osmand_extended_description_part3">Kart
-\n • Viser POI-er (interessepunkter) rundt deg
-\n • Orienterer kartet i fartsretning (eller etter kompass)
-\n • Viser din plassering og retningen du ser i
-\n • Del din plassering slik at dine venner kan finne deg
+\n • Viser interessepunkter rundt deg
+\n • Orienterer kartet etter bevegelsesretning (eller kompass)
+\n • Viser din posisjon og retningen du ser i
+\n • Del din posisjon slik at dine venner kan finne deg
 \n • Beholder dine viktigste steder i \"Favoritter\"
-\n • Tillater deg å velge hvordan du vil vise navn i kartet: På engelsk, lokale navn, eller fonetisk staving
-\n • Viser spesialiserte nettbaserte flis, satellittvisning (fra Bing), forskjellige overleggslag, som tur/navigasjon-GPX-spor og ytterligere lag med tilpassbar gjennomsiktighet
+\n • Lar deg velge hvordan du vil vise navn på kartet: På engelsk, lokale navn, eller fonetisk staving
+\n • Viser spesialiserte nettbaserte kartfliser, satellittvisning (fra Bing), forskjellige overlegg som GPX-spor til tur/navigering og ytterligere lag med tilpassbar gjennomsiktighet
 \n</string>
     <string name="osmand_plus_extended_description_part3">Kartvisning
 \n • Vis din posisjon og retning
-\n • Valgfri rotasjon av kartet mot kompass eller fartsretning
+\n • Eventuelt orienter kartet etter kompass eller bevegelsesretning
 \n • Lagre dine viktigste steder som favoritter
-\n • Vis POI-er (interessepunkter) rundt deg
-\n • Vis spesialiserte nettbaserte fil, satellittvisning (fra Bing), forskjellige overleggslag, som tur/navigasjons-GPX-spor og ytterligere lag med tilpassbar gjennomsiktighet
-\n • Valgfri visning av stedsnavn på Engelsk, lokal, eller fonetisk staving
-\n</string>
+\n • Vis interessepunkter rundt deg
+\n • Vis spesialiserte nettbaserte kartfliser, satellittvisning (fra Bing), forskjellige overlegg som GPX-spor til tur/navigering og ytterligere lag med tilpassbar gjennomsiktighet
+\n • Valgfri visning av stedsnavn på engelsk, lokalt språk, eller fonetisk staving</string>
     <string name="osmand_plus_extended_description_part4">Bruk OSM- og Wikipedia-data
 \n • Høykvalitetsinfo fra de beste samarbeidsprosjektene i verden
 \n • OSM-data tilgjengelig per land eller region
@@ -3028,5 +3027,5 @@
     <string name="coord_input_edit_point">Rediger punkt</string>
     <string name="coord_input_add_point">Legg til punkt</string>
     <string name="coord_input_save_as_track">Lagre som spor</string>
-    <string name="coord_input_save_as_track_descr">Du har lagt til %1$s punkter. Skriv inn navnet på filen og klikk \"Lagre\".</string>
+    <string name="coord_input_save_as_track_descr">Du har lagt til %1$s punkter. Skriv inn navnet på filen og trykk \"Lagre\".</string>
     </resources>
