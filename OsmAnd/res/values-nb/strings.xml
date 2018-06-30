@@ -1415,7 +1415,7 @@
     <string name="get_full_version">Fullversjon</string>
     <string name="confirm_download_roadmaps">Det rene veikartet er ikke nødvendig siden du har det fullstendige standardkartet. Laste det ned likevel?</string>
     <string name="later">Senere</string>
-    <string name="activate_srtm_plugin">Aktiver \"koter\" -tillegget</string>
+    <string name="activate_srtm_plugin">Aktiver programtillegget for koter</string>
     <string name="opening_at">Åpner</string>
     <string name="closing_at">Lukker</string>
     
@@ -2158,7 +2158,7 @@
     <string name="points_delete_multiple_succesful">Punkt(er) slettet.</string>
     <string name="points_delete_multiple">Du skal slette %1$d punkt(er). Er du sikker?</string>
     <string name="average_speed">Gjennomsnittshastighet</string>
-    <string name="select_gpx_folder">Velg GPX-fil -mappe</string>
+    <string name="select_gpx_folder">Velg mappe for GPX-fil</string>
     <string name="osmand_extended_description_part1">OsmAnd (OSM Automated Navigation Directions) er et kart- og navigeringsprogram med tilgang til gratis, verdensomspennende og høykvalitets data fra OpenStreetMap (OSM).
 \n
 \n Gled deg over tale og visuell navigering, visning av interessepunkter, oppretting og behandling av GPX-spor, bruk av kotevisualisering og høydeinformasjon (gjennom programtillegg), et valg mellom kjøring, sykling, fotgjenger-modus, OSM-redigering og mye mer.</string>
@@ -2246,7 +2246,7 @@
     <string name="add_new_folder">Legg til ny mappe</string>
     <string name="shared_string_gpx_track">GPX-spor</string>
     <string name="routing_attr_height_obstacles_name">Bruk høydedata</string>
-    <string name="routing_attr_height_obstacles_description">Ta hensyn til terrenghøydedata (fra SRTM-, ASTER- og EU-DEM -data).</string>
+    <string name="routing_attr_height_obstacles_description">Faktor i terrenghøyde (data fra SRTM, ASTER og EU-DEM).</string>
     <string name="quick_action_bug_message">Melding</string>
     <string name="shared_string_permissions">Tillatelser</string>
     <string name="import_gpx_failed_descr">OsmAnd kan ikke importere filen. Kontroller om OsmAnd har leserettighet for fillagringsstedet.</string>
@@ -2462,7 +2462,7 @@
     <string name="error_calculating_route_occured">Kunne ikke beregne rute</string>
     <string name="empty_route_calculated">Beregnet rute er tom</string>
     <string name="new_route_calculated_dist">Ny rute beregnet, distanse</string>
-    <string name="saving_gpx_tracks">Lagrer GPX-fil til SD-kort…</string>
+    <string name="saving_gpx_tracks">Lagrer GPX-fil…</string>
     <string name="data_settings_descr">Angi språk, last ned/gjeninnlast data.</string>
     <string name="av_camera_focus">Kameraets fokusmetode</string>
     <string name="av_camera_focus_descr">Velg fokusmodus for kameraet.</string>
@@ -2526,10 +2526,10 @@
     <string name="srtm_menu_download_descr">Last ned kotekartet for denne regionen.</string>
     <string name="shared_string_view">Vis</string>
 	<string name="import_as_gpx">Importer som GPX-fil</string>
-    <string name="import_as_favorites">Importer som favoritter</string>
+    <string name="import_as_favorites">Importer som favoritt</string>
     <string name="import_file">Importer fil</string>
 	<string name="marker_show_distance_descr">Velg hvordan avstand og retning til kartmarkører på kartskjermen angis:</string>
-    <string name="import_gpx_file_description">kan importeres som favoritter eller en GPX-fil.</string>
+    <string name="import_gpx_file_description">kan importeres som favoritt eller en GPX-fil.</string>
     <string name="tap_on_map_to_hide_interface">Fullskjermmodus</string>
     
     <string name="appearance_on_the_map">Utseende på kartet</string>
@@ -2575,7 +2575,7 @@
     <string name="shared_string_gpx_waypoints">Spor-rutepunkter</string>
     <string name="add_group_descr">Importer grupper fra favoritter eller GPX-rutepunkter.</string>
     <string name="empty_state_markers_groups_desc">Importer favorittgrupper eller rutepunkter som markører.</string>
-    <string name="show_guide_line_descr">Vis veivisningslinjer fra din posisjon til de aktive markørplasseringene.</string>
+    <string name="show_guide_line_descr">Vis retningslinjer fra din posisjon til de aktive markørplasseringene.</string>
     <string name="show_arrows_descr">Vis én eller to piler som indikerer retningen til de aktive markørene.</string>
     <string name="distance_indication_descr">Velg hvordan avstanden til aktive markører skal vises.</string>
     <string name="active_markers_descr">Velg hvor mange retningsindikatorer som skal vises.</string>
@@ -2941,17 +2941,17 @@
 \n De fleste landene i verden kan lastes ned.
 \n Få pålitelig navigering i ditt land - det være seg Frankrike, Tyskland, Mexico, Storbritannia, Spania, Nederland, USA, Russland, Brasil eller andre.</string>
     <string name="osmand_team">OsmAnd-laget</string>
-    <string name="plugin_touringview_descr">"Aktivering av denne visningen endrer OsmAnds kartstil til \"Turvisning, dette er et spesielt høydetaljskart for dem på reisefot og folk i transportbransjen. 
+    <string name="plugin_touringview_descr">Aktivering av denne visningen endrer kartstilen til \'Turvisning\', dette er en spesielt detaljert visning for reisende og yrkessjåfører.
 \n
-\nDenne visningen gir, uansett forstørrelsesnivå, høyest antall reisedetaljer tilgjengelig i kartdataen (i særdeleshet veier, småveier, stier  og orienteringsmerker). 
-\n 
-\nDet viser også alle typer veier, klart adskilt med fargemerking, som er nyttig når du kjører for eksempel store kjøretøy. 
+\nDenne visningen gir, uansett zoomnivå, det høyeste antall reisedetaljer tilgjengelig i kartdataene (i særdeleshet veier, småveier, stier og orienteringsmerker).
 \n
-\nDet gir også spesielle turvalg, som visning av sykkelveier eller fjellruter. 
-\n 
-\nMan trenger ikke å laste ned noe ekstra, visningen lages basert på standardkart. 
-\n 
-\nDenne visningen kan tilbakestilles enten ved å deaktivere den igjen her, eller å endre \"Kartstil\" under \"Sett opp kart\" man ønsker."</string>
+\nViser også alle typer veier klart adskilt med fargemerking, som er nyttig ved kjøring av f.eks. store kjøretøy.
+\n
+\nGir også spesielle turvalg som visning av sykkelruter eller fjellruter.
+\n
+\nMan trenger ikke laste ned noe ekstra, visningen lages basert på standardkart.
+\n
+\nVisningen kan tilbakestilles enten ved å deaktivere den igjen her, eller ved å endre \'Kartstil\' under \"Kartinnstilling\" som ønsket.</string>
     <string name="plugin_nautical_descr">Dette programtillegget beriker OsmAnds kart og navigasjonsprogram til også å tjene som sjøkart, for båt, seiling eller andre typer vannsport.
 \n
 \nDette spesielle karttillegget for OsmAnd gir alle sjømerker, for innom-, og utenskjærs bruk. Beskrivelsen av hvert av dem gir detaljer nok til å identifisere dem og deres mening (kategori, form, farge, sekvens, referanse, osv.).
@@ -2989,9 +2989,9 @@
     <string name="osmand_plus_extended_description_part7">Bidra direkte til OSM
 \n • Rapporter datafeil
 \n • Last opp GPX-spor til OSM direkte fra programmet
-\n • Legg til POI-er og last dem opp direkte til OSM (eller senere hvis du ikke har nett)
-\n • Valgfri turopptaksmodus i bakgrunnen (mens enheten er i dvalemodus)
-\n OsmAnd er aktivt utviklet fri programvare. Alle kan bidra til programmet ved å rapportere feil, forbedre oversettelser, eller kode nye funksjoner. Ytterligere avhenger prosjektet av finansielle bidrag for å støtte koding og testing av ny funksjonalitet.
+\n • Legg til interessepunkter og last dem opp direkte til OSM (eller senere hvis uten internett)
+\n • Valgfri turopptakelse også i bakgrunnsmodus (mens enheten er i dvalemodus)
+\n OsmAnd er aktivt utviklet programvare med åpen kildekode. Alle kan bidra til programmet ved å rapportere feil, forbedre oversettelser eller kode nye funksjoner. I tillegg avhenger prosjektet av finansielle bidrag for å støtte koding og testing av nye funksjoner.
 \n</string>
     <string name="hide_full_description">Skjul full beskrivelse</string>
     <string name="show_full_description">Vis full beskrivelse</string>
