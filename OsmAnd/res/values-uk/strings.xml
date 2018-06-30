@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
   <string name="asap">Швидко</string>
   
   <string name="route_roundabout">Круговий рух : %1$d з’їзд</string>
@@ -3083,4 +3084,12 @@
     <string name="distance_nearest">Відстань: спочатку найближче</string>
     <string name="group_deleted">Групу було видалено</string>
     <string name="rendering_attr_whiteWaterSports_name">Сплавний спорт</string>
+    <string name="coord_input_edit_point">Редагувати точку</string>
+    <string name="coord_input_add_point">Додати точку</string>
+    <string name="coord_input_save_as_track">Зберегти як трек</string>
+    <string name="quick_action_edit_actions">Редагувати дії</string>
+    <string name="get_osmand_live">Отримайте OsmAnd Live, аби розблокувати всі функції: щоденні оновлення карт з необмеженим завантаженням, всі платні та безкоштовні додатки, Вікіпедія, Вікімандри та багато іншого.</string>
+    <string name="shared_string_bookmark">Закладка</string>
+    <string name="hide_full_description">Приховати повний опис</string>
+    <string name="show_full_description">Показати повний опис</string>
     </resources>
