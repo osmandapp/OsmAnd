@@ -2954,4 +2954,5 @@
     <string name="coord_input_add_point">Додај тачку</string>
     <string name="coord_input_save_as_track">Сними као путању</string>
     <string name="coord_input_save_as_track_descr">Додали сте %1$s тачке(и). Унесите име фајл и кликните \"Сними\".</string>
+    <string name="plugin_touringview_descr">Укључивањем овог погледа се мења стил мапе на \"СТил</string>
     </resources>
