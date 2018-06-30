@@ -2575,7 +2575,7 @@
     <string name="shared_string_gpx_waypoints">Spor-rutepunkter</string>
     <string name="add_group_descr">Importer grupper fra favoritter eller GPX-rutepunkter.</string>
     <string name="empty_state_markers_groups_desc">Importer favorittgrupper eller rutepunkter som markører.</string>
-    <string name="show_guide_line_descr">Vis retningslinjer fra din posisjon til de aktive markørplasseringene.</string>
+    <string name="show_guide_line_descr">Vis retningsbestemte linjer fra din posisjon til de aktive markørplasseringene.</string>
     <string name="show_arrows_descr">Vis én eller to piler som indikerer retningen til de aktive markørene.</string>
     <string name="distance_indication_descr">Velg hvordan avstanden til aktive markører skal vises.</string>
     <string name="active_markers_descr">Velg hvor mange retningsindikatorer som skal vises.</string>
