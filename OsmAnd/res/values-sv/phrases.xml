@@ -1,20 +1,7 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="poi_shoes">Skoaffär</string>
-	<string name="poi_computer">Datorbutik</string>
-	<string name="poi_shop">Butik</string>
-		<string name="poi_shop_food">Matbutik</string>
-	<string name="poi_emergency">Nödläge</string>
-	<string name="poi_transportation">Transport</string>
-		<string name="poi_road_obstacle">Väghinder</string>
-		<string name="poi_personal_transport">Privat transport</string>
-		<string name="poi_public_transport">Offentlig transport</string>
-		<string name="poi_air_transport">Lufttransport</string>
-		<string name="poi_water_transport">Transport på vatten</string>
-		<string name="poi_bicycle_transport">Transport med cykel</string>
-		<string name="poi_filling_station">Tankstation</string>
-		<string name="poi_aerialway_transport">Luftvägstransport</string>
-		<string name="poi_node_networks">Nätverksnoder för hajk/cykling</string>
-		<string name="poi_fuel_type">Bränsletyp</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+<!--  poi additional categories -->
+	<string name="poi_fuel_type">Bränsletyp</string>
 	<string name="poi_fuel_avia_type">Typ av drivmedel (avia)</string>
 	<string name="poi_payment_type">Betalningsmetod</string>
 	<string name="poi_payment_fuel_type">Bränslekort</string>
@@ -40,7 +27,6 @@
 	<string name="poi_subway_station_filter">Tunnelbanestation</string>
 	<string name="poi_ferry_terminal_cargo">Gods</string>
 	<string name="poi_bicycle_parking_type">Typ</string>
-	<string name="poi_hiking_routes">Vandringsleder</string>
 	<string name="poi_aerialway_bicycle">Cykeltransport</string>
 	<string name="poi_aerialway_heating">Uppvärmning</string>
 	<string name="poi_pump">Pump</string>
@@ -63,6 +49,7 @@
 	<string name="poi_backcountry">Backcountry</string>
 	<string name="poi_resort_type">Typ</string>
 	<string name="poi_piste_difficulty">Svårighet</string>
+	<string name="poi_piste_grooming">Underhåll</string>
 	<string name="poi_theatre_genre">Genre</string>
 	<string name="poi_outdoor_seating">Uteservering</string>
 	<string name="poi_fee">Avgift</string>
@@ -99,8 +86,42 @@
 	<string name="poi_vacuum_cleaner_filter">Dammsugare</string>
 	<string name="poi_free_flying_characteristic">Kännetecken</string>
 	<string name="poi_cafeteria">Kafeteria</string>
+	<string name="poi_zoo_type">Typ</string>
+	<string name="poi_motorcycle_services">Tjänster</string>
+	<string name="poi_motorcycle_type">Motorcykeltyp</string>
+	<string name="poi_animal_shelter_type">Djur accepteras</string>
+	<string name="poi_animal_shelter_purpose">Syfte</string>
+	<string name="poi_boat_rental_type">Hyrda båtar</string>
+	<string name="poi_operational_status">Driftstatus</string>
+	<string name="poi_water_supply_type">Vattenförsörjning</string>
+	<string name="poi_water_purification">Vattenrening</string>
+	<string name="poi_water_place_access">Tillgång till vattenplats</string>
+	<string name="poi_climbing_style">Klättringsstil</string>
+	<string name="poi_socket">Uttag</string>
+	<string name="poi_socket_chademo_output_filter">CHAdeMO-utgång</string>
+	<string name="poi_socket_type2_output_filter">Typ 2-utgång</string>
+	<string name="poi_socket_type2_combo_output_filter">Typ 2-combo-utgång</string>
+	<string name="poi_socket_type3_output_filter">Typ 3-utgång</string>
+	<string name="poi_socket_cee_blue_output_filter">CEE blå utgång</string>
+	<string name="poi_socket_schuko_output_filter">Schuko-utgång</string>
+	<string name="poi_service_car">Bilservice</string>
 
-<string name="poi_emergency_infrastructure">Nödsituationsinfrastruktur</string>
+<!--  categories -->
+	<string name="poi_shop">Butik</string>
+	<string name="poi_shop_food">Matbutik</string>
+	<string name="poi_emergency">Nödläge</string>
+	<string name="poi_emergency_infrastructure">Nödsituationsinfrastruktur</string>
+	<string name="poi_transportation">Transport</string>
+	<string name="poi_road_obstacle">Väghinder</string>
+	<string name="poi_filling_station">Tankstation</string>
+	<string name="poi_personal_transport">Privat transport</string>
+	<string name="poi_public_transport">Offentlig transport</string>
+	<string name="poi_air_transport">Lufttransport</string>
+	<string name="poi_water_transport">Transport på vatten</string>
+	<string name="poi_bicycle_transport">Transport med cykel</string>
+	<string name="poi_aerialway_transport">Luftvägstransport</string>
+	<string name="poi_node_networks">Nätverksnoder för hajk/cykling</string>
+	<string name="poi_hiking_routes">Vandringsleder</string>
 	<string name="poi_traffic_enforcement">Trafikhantering</string>
 	<string name="poi_man_made">Konstgjort</string>
 	<string name="poi_transport_construction">Transportkonstruktion</string>
@@ -144,7 +165,6 @@
 	<string name="poi_butcher">Köttaffär</string>
 	<string name="poi_deli">Deli</string>
 	<string name="poi_farm">Gårdsbutik</string>
-	<string name="poi_piste_grooming">Underhåll</string>
 	<string name="poi_greengrocer">Grönsakshandlare</string>
 	<string name="poi_seafood">Fisk- och skaldjursaffär</string>
 	<string name="poi_confectionery">Godis</string>
@@ -160,26 +180,7 @@
 	<string name="poi_bicycle">Cykelaffär</string>
 	<string name="poi_anime">Animeaffär</string>
 	<string name="poi_antiques">Antikhandel</string>
-	<string name="poi_zoo_type">Typ</string>
-	<string name="poi_motorcycle_services">Tjänster</string>
-	<string name="poi_motorcycle_type">Motorcykeltyp</string>
-	<string name="poi_animal_shelter_type">Djur accepteras</string>
-	<string name="poi_animal_shelter_purpose">Syfte</string>
-	<string name="poi_boat_rental_type">Hyrda båtar</string>
-	<string name="poi_operational_status">Driftstatus</string>
-	<string name="poi_water_supply_type">Vattenförsörjning</string>
-	<string name="poi_water_purification">Vattenrening</string>
-	<string name="poi_water_place_access">Tillgång till vattenplats</string>
-	<string name="poi_climbing_style">Klättringsstil</string>
-	<string name="poi_socket">Uttag</string>
-	<string name="poi_socket_chademo_output_filter">CHAdeMO-utgång</string>
-	<string name="poi_socket_type2_output_filter">Typ 2-utgång</string>
-	<string name="poi_socket_type2_combo_output_filter">Typ 2-combo-utgång</string>
-	<string name="poi_socket_type3_output_filter">Typ 3-utgång</string>
-	<string name="poi_socket_cee_blue_output_filter">CEE blå utgång</string>
-	<string name="poi_socket_schuko_output_filter">Schuko-utgång</string>
-
-<string name="poi_art">Konstbutik</string>
+	<string name="poi_art">Konstbutik</string>
 	<string name="poi_baby_goods">Baby-varor</string>
 	<string name="poi_bag">Väskbutik</string>
 	<string name="poi_bathroom_furnishing">Badrumsinredning</string>
@@ -191,11 +192,14 @@
 	<string name="poi_chemist">Apotek</string>
 	<string name="poi_clothes">Klädbutik</string>
 	<string name="poi_clothes_children">Barnkläder</string>
+	<string name="poi_shoes">Skoaffär</string>
 	<string name="poi_candles">Ljusbutik</string>
+	<string name="poi_computer">Datorbutik</string>
 	<string name="poi_copyshop">Kopieringsfirma</string>
 	<string name="poi_curtain">Gardinbutik</string>
 	<string name="poi_fabric">Tygaffär</string>
-<string name="poi_dive">Dykutrustning</string>
+<!--	-->
+	<string name="poi_dive">Dykutrustning</string>
 	<string name="poi_doityourself">Hemförbättringsbutik</string>
 	<string name="poi_doors">Dörrar</string>
 	<string name="poi_erotic">Erotisk butik</string>
@@ -203,6 +207,8 @@
 	<string name="poi_fishing">Fiskeredskap</string>
 	<string name="poi_florist">Blomsteraffär</string>
 	<string name="poi_frame">Ramaffär</string>
+	<string name="poi_free_flying">Freflying-tillbehör</string>
+<!--	-->
 	<string name="poi_furniture">Möbelaffär</string>
 	<string name="poi_garden_centre">Trädgårdscenter</string>
 	<string name="poi_garden_furniture">Trädgårdsmöbelbutik</string>
@@ -233,7 +239,9 @@
 	<string name="poi_paint">Färghandel</string>
 	<string name="poi_pet">Djuraffär</string>
 	<string name="poi_photo">Fotoaffär</string>
+	<string name="poi_radiotechnics">Radioteknikbutik</string>
 	<string name="poi_second_hand">Second hand-butik</string>
+	<string name="poi_scuba_diving_shop">Scubadykningsbutik</string>
 	<string name="poi_ship_chandler">Skeppshandlaren</string>
 	<string name="poi_sports">Sportartiklar</string>
 	<string name="poi_stationery">Pappershandel</string>
@@ -241,12 +249,15 @@
 	<string name="poi_ticket">Biljettförsäljning</string>
 	<string name="poi_tobacco">Tobakshandel</string>
 	<string name="poi_toys">Leksaksaffär</string>
+	<string name="poi_trade">Handelsplats</string>
 	<string name="poi_tyres">Däckbutik</string>
 	<string name="poi_vacuum_cleaner">Dammsugarbutik</string>
+	<string name="poi_variety_store">Bazar</string>
 	<string name="poi_video">Videobutik</string>
 	<string name="poi_window_blind">Persiennbutik</string>
 	<string name="poi_department_store">Varuhus</string>
 	<string name="poi_electronics">Elektronikaffär</string>
+	<string name="poi_energy">Energibutik</string>
 	<string name="poi_car">Bilhandlare</string>
 	<string name="poi_car_parts">Bildelar</string>
 	<string name="poi_atv">Fyrhjulingsbutik</string>
@@ -254,6 +265,7 @@
 	<string name="poi_marketplace">Marknadsplats</string>
 	<string name="poi_sewing">Sytillbehör</string>
 	<string name="poi_watches">Klockaffär</string>
+	<string name="poi_swimming_pool_shop">Swimmingpooltillbehör</string>
 	<string name="poi_games">Spel</string>
 	<string name="poi_model">Skalenliga modeller</string>
 	<string name="poi_trophy">Troféer, utmärkelser</string>
@@ -262,6 +274,7 @@
 	<string name="poi_weapons">Vapenbutik</string>
 	<string name="poi_perfumery">Parfymbutik</string>
 	<string name="poi_spices">Kryddaffär</string>
+	<string name="poi_shop_craft">Konst- och hantverksbutik</string>
 	<string name="poi_honey">Honungsbutik</string>
 	<string name="poi_religion">Religiösa varor</string>
 
@@ -270,11 +283,16 @@
 	<string name="poi_emergency_phone">Nödtelefon</string>
 	<string name="poi_fire_hydrant">Brandpost</string>
 	<string name="poi_fire_extinguisher">Brandsläckare</string>
+	<string name="poi_fire_flapper">Brandpiska</string>
 	<string name="poi_fire_hose">Brandslang</string>
 	<string name="poi_fire_water_pond">Branddamm</string>
 	<string name="poi_grit_bin">Gruslåda</string>
 	<string name="poi_ambulance_station">Ambulansstation</string>
+	<string name="poi_ses_station">SES-station</string>
+	<string name="poi_emergency_access_point">Nödpunkt</string>
+
 	<string name="poi_ford">Vadställe</string>
+	<string name="poi_ford_stepping_stones">Stenstegsbro</string>
 	<string name="poi_mountain_pass">Bergspass</string>
 	<string name="poi_gate">Grind</string>
 	<string name="poi_city_wall">Stadsmur</string>
@@ -296,6 +314,7 @@
 	<string name="poi_vehicle_inspection">Bilprovning</string>
 	<string name="poi_car_wash">Biltvätt</string>
 	<string name="poi_fuel">Bensinstation;Bränslestation;Bränsle</string>
+
 	<string name="poi_fuel_diesel">Diesel</string>
 	<string name="poi_fuel_gtl_diesel">GTL-diesel</string>
 	<string name="poi_fuel_hgv_diesel">HGV-diesel</string>
@@ -365,10 +384,12 @@
 	<string name="poi_aerialway_chair_lift">Stollift</string>
 	<string name="poi_aerialway_t_bar">T-lift</string>
 	<string name="poi_aerialway_j_bar">J-lift</string>
+	<string name="poi_aerialway_platter">Släplift</string>
 	<string name="poi_aerialway_mixed_lift">Blandad lift</string>
 	<string name="poi_aerialway_drag_lift">Släplift</string>
 	<string name="poi_aerialway_rope_tow">Replift</string>
 	<string name="poi_aerialway_goods">Varulift</string>
+	<string name="poi_aerialway_magic_carpet">Mattlift</string>
 	<string name="poi_aerialway_pylon">Liftpelare</string>
 
 	<string name="poi_tunnel">Tunnel</string>
@@ -571,6 +592,7 @@
 	<string name="poi_first_aid">Första hjälpen</string>
 	<string name="poi_dentist">Tandläkare</string>
 	<string name="poi_nursing_home">Vårdhem</string>
+	<string name="poi_baby_hatch">Bebislucka</string>
 	<string name="poi_veterinary">Veterinär</string>
 	<string name="poi_sanatorium">Sanatorium</string>
 	<string name="poi_healthcare_alternative">Alternativ medicin</string>
@@ -697,11 +719,13 @@
 	<string name="poi_historic_ship">Historiskt skepp</string>
 	<string name="poi_historic_mine">Historisk gruva</string>
 	<string name="poi_monument">Monument</string>
+	<string name="poi_zoo">Zoo</string>
 	<string name="poi_aquarium">Akvarium</string>
 	<string name="poi_theme_park">Temapark</string>
 
 	<string name="poi_attraction">Turistattraktion</string>
-<string name="poi_tourism_yes">Turist-objekt</string>
+<!--	-->
+	<string name="poi_tourism_yes">Turist-objekt</string>
 	<string name="poi_attraction_amusement_ride">Nöjespark</string>
 	<string name="poi_attraction_animal">Djur (attraktion)</string>
 	<string name="poi_attraction_big_wheel">Pariserhjul</string>
@@ -724,6 +748,7 @@
 	<string name="poi_apartment">Lägenhet</string>
 	<string name="poi_wilderness_hut">Vildmarksstuga</string>
 	<string name="poi_cabin">Stuga</string>
+	<string name="poi_lean_to">Vindskydd</string>
 	<string name="poi_hunting_lodge">Jaktstuga</string>
 
 	<string name="poi_place_of_worship">Plats för tillbedjan</string>
@@ -818,7 +843,8 @@
 	<string name="poi_internet_access_fee_no">Tillgång till Internet - ingen avgift</string>
 
 	<string name="poi_monastery">Kloster</string>
-<string name="poi_religious">Religiöst område</string>
+<!--	-->
+	<string name="poi_religious">Religiöst område</string>
 	<string name="poi_wayside_cross">Vägkors</string>
 	<string name="poi_wayside_shrine">Vägaltare</string>
 	<string name="poi_information">Information</string>
@@ -874,6 +900,11 @@
 	<string name="poi_piste_downhill">Nedför pisten</string>
 	<string name="poi_piste_nordic">Nordiska pisten</string>
 	<string name="poi_piste_skitour">Skitour pisten</string>
+	<string name="poi_piste_hike">Vandringspist</string>
+	<string name="poi_piste_sleigh">Slädpist</string>
+	<string name="poi_piste_sled">Slädpist</string>
+	<string name="poi_piste_snow_park">Snöpark</string>
+	<string name="poi_piste_playground">Lekpist</string>
 	<string name="poi_piste_ice_skate">Skridskor</string>
 	<string name="poi_ski_rental">Skiduthyrning</string>
 
@@ -954,8 +985,10 @@
 	<string name="poi_craft_scaffolder">Byggnadsställningsmontage</string>
 	<string name="poi_craft_sculptor">Skulptör</string>
 	<string name="poi_craft_shoemaker">Skomakare</string>
+	<string name="poi_craft_stand_builder">Utställningsbyggare</string>
 	<string name="poi_craft_stonemason">Stenhuggare</string>
 	<string name="poi_craft_sun_protection">Solskydd</string>
+	<string name="poi_craft_sweep">Sotare</string>
 	<string name="poi_craft_tailor">Skräddare</string>
 	<string name="poi_craft_tiler">Plattsättare</string>
 	<string name="poi_craft_tinsmith">Plåtslagare</string>
@@ -976,6 +1009,7 @@
 	<string name="poi_car_sharing">Samåkning</string>
 	<string name="poi_boat_sharing">Båtdelning</string>
 	<string name="poi_dock">Kaj</string>
+	<string name="poi_cutline">Snittlinje</string>
 	<string name="poi_toilets">Toalett</string>
 	<string name="poi_shower">Dusch</string>
 	<string name="poi_sauna">Bastu</string>
@@ -1023,9 +1057,53 @@
 	<string name="poi_islet">Holme</string>
 
 	<string name="poi_anchorage">Anchorage</string>
+	<string name="poi_anchor_berth">Förankringsplats</string>
 	<string name="poi_beacon">Sändare</string>
 	<string name="poi_beacon_cardinal">Kardinalsändare</string>
+	<string name="poi_beacon_lateral">Lateral signal</string>
+	<string name="poi_beacon_safe_water">Mittledsmärke</string>
+	<string name="poi_beacon_special_purpose">Specialmärke</string>
+	<string name="poi_berth">Kajplats</string>
+	<string name="poi_seamark_building">Sjömärke byggnad</string>
+	<string name="poi_seamark_bridge">Sjömärke bro</string>
+	<string name="poi_buoy_cardinal">Kardinalboj</string>
+	<string name="poi_buoy_installation">Installationsboj</string>
+	<string name="poi_buoy_isolated_danger">Boj, punktmärke</string>
+	<string name="poi_buoy_lateral">Lateralboj</string>
+	<string name="poi_buoy_safe_water">Mittledsboj</string>
+	<string name="poi_buoy_special_purpose">Specialboj</string>
+	<string name="poi_daymark">Båk</string>
+	<string name="poi_distance_mark">Distansmärke</string>
+	<string name="poi_dry_dock">Torrdocka</string>
+	<string name="poi_seamark_dyke">Sjömärke vall</string>
+	<string name="poi_floating_dock">Flytdocka</string>
+	<string name="poi_fog_signal">Dimmsignal</string>
+	<string name="poi_harbour_basin">Hamnbassäng</string>
+	<string name="poi_seamark_harbour">Hamn</string>
+	<string name="poi_landmark">Landmärke</string>
+	<string name="poi_seamark_light">Fyr, sjömärke</string>
+	<string name="poi_seamark_light_major">Större fyr, sjömärke</string>
+	<string name="poi_seamark_light_minor">Mindre fyr, sjömärke</string>
+	<string name="poi_seamark_light_float">Flytande fyr, sjömärke</string>
+	<string name="poi_seamark_light_vessel">Fartygsljus, sjömärke</string>
+	<string name="poi_mooring">Förtöjning</string>
+	<string name="poi_lock_basin">Slussbassäng</string>
+	<string name="poi_notice">Varning, sjömärke</string>
+	<string name="poi_pile">Påle</string>
+	<string name="poi_radar_transponder">Radartransponder, sjömärke</string>
 	<string name="poi_radio_station">Radiostation, seamark</string>
+	<string name="poi_signal_station_traffic">Signalstation, trafik</string>
+	<string name="poi_signal_station_warning">Signalstation, varning</string>
+	<string name="poi_small_craft_facility">Småfartygsanläggning</string>
+	<string name="poi_topmark">Toppmärke, sjömärke</string>
+	<string name="poi_seamark_rock">Sten, sjömärke</string>
+	<string name="poi_seamark_wreck">Vrak, sjömärke</string>
+
+	<string name="poi_seamark_clearance_height">Segelhöjd</string>
+	<string name="poi_seamark_clearance_height_closed">Segelhöjd (stängd)</string>
+	<string name="poi_seamark_clearance_height_open">Segelhöjd (öppen)</string>
+	<string name="poi_seamark_clearance_width">Segelbredd</string>
+
 	<string name="poi_military_landuse">Militär zon</string>
 	<string name="poi_military_airfield">Militärt flygfält</string>
 	<string name="poi_military_bunker">Militär bunker</string>
@@ -1152,13 +1230,19 @@
 	<string name="poi_bus_trap">Bussfälla</string>
 	<string name="poi_cattle_grid">Färist</string>
 	<string name="poi_full_height_turnstile">Fullhöjds-vändkors</string>
+	<string name="poi_bump_gate">Knuffgrind</string>
 	<string name="poi_general_barrier">Allmänt hinder</string>
 	<string name="poi_stile">Stätta</string>
 	<string name="poi_debris">Skräp</string>
 	<string name="poi_jersey_barrier">Träbarriär</string>
 	<string name="poi_height_restrictor">Höjdbegränsning</string>
 	<string name="poi_horse_stile">Häststätta</string>
+	<string name="poi_kissing_gate">Kissing gate</string>
+	<string name="poi_sally_port">Sally port</string>
+	<string name="poi_swing_gate">Svängport</string>
 	<string name="poi_turnstile">Vändkors</string>
+	<string name="poi_kent_carriage_gap">Kent carriage gap</string>
+	<string name="poi_barrier_entrance">Passage i en mur eller ett staket</string>
 	<string name="poi_entrance_main">Huvudentré</string>
 	<string name="poi_entrance">Ingång</string>
 	<string name="poi_entrance_exit">Utgång</string>
@@ -1178,6 +1262,8 @@
 	<string name="poi_route_hiking_nwn_poi">Nationell vandringsrutt</string>
 	<string name="poi_route_hiking_rwn_poi">Regional vandringsrutt</string>
 	<string name="poi_route_hiking_lwn_poi">Lokal vandringsrutt</string>
+	<string name="poi_route_hiking_ref_poi">Vandringsruttreferens</string>
+
 	<string name="poi_opening_hours">Öppettider</string>
 	<string name="poi_collection_times">Hämtningstid</string>
 	<string name="poi_description">Beskrivning</string>
@@ -1207,58 +1293,6 @@
 	<string name="poi_fee_yes">Ja</string>
 	<string name="poi_fee_no">Nej</string>
 	<string name="poi_drinking_water_yes">Ja</string>
-	<string name="poi_whitewater_rapid_name">Namn på flodforsar</string>
-
-	<string name="poi_outpost">Butiken är utlämningsställe</string>
-
-<string name="poi_free_flying">Freflying-tillbehör</string>
-<string name="poi_radiotechnics">Radioteknikbutik</string>
-	<string name="poi_scuba_diving_shop">Scubadykningsbutik</string>
-	<string name="poi_trade">Handelsplats</string>
-	<string name="poi_variety_store">Bazar</string>
-	<string name="poi_energy">Energibutik</string>
-	<string name="poi_swimming_pool_shop">Swimmingpooltillbehör</string>
-	<string name="poi_shop_craft">Konst- och hantverksbutik</string>
-	<string name="poi_fire_flapper">Brandpiska</string>
-	<string name="poi_ses_station">SES-station</string>
-	<string name="poi_emergency_access_point">Nödpunkt</string>
-
-	<string name="poi_ford_stepping_stones">Stenstegsbro</string>
-	<string name="poi_aerialway_platter">Släplift</string>
-	<string name="poi_aerialway_magic_carpet">Mattlift</string>
-	<string name="poi_baby_hatch">Bebislucka</string>
-	<string name="poi_zoo">Zoo</string>
-	<string name="poi_lean_to">Vindskydd</string>
-	<string name="poi_piste_hike">Vandringspist</string>
-	<string name="poi_piste_sleigh">Slädpist</string>
-	<string name="poi_piste_sled">Slädpist</string>
-	<string name="poi_piste_snow_park">Snöpark</string>
-	<string name="poi_piste_playground">Lekpist</string>
-	<string name="poi_craft_stand_builder">Utställningsbyggare</string>
-	<string name="poi_craft_sweep">Sotare</string>
-	<string name="poi_cutline">Snittlinje</string>
-	<string name="poi_anchor_berth">Förankringsplats</string>
-	<string name="poi_beacon_lateral">Lateral signal</string>
-	<string name="poi_beacon_safe_water">Mittledsmärke</string>
-	<string name="poi_beacon_special_purpose">Specialmärke</string>
-	<string name="poi_berth">Kajplats</string>
-	<string name="poi_seamark_building">Sjömärke byggnad</string>
-	<string name="poi_seamark_bridge">Sjömärke bro</string>
-	<string name="poi_buoy_cardinal">Kardinalboj</string>
-	<string name="poi_buoy_installation">Installationsboj</string>
-	<string name="poi_buoy_isolated_danger">Boj, punktmärke</string>
-	<string name="poi_buoy_lateral">Lateralboj</string>
-	<string name="poi_distance_mark">Distansmärke</string>
-	<string name="poi_dry_dock">Torrdocka</string>
-	<string name="poi_floating_dock">Flytdocka</string>
-	<string name="poi_fog_signal">Dimmsignal</string>
-	<string name="poi_harbour_basin">Hamnbassäng</string>
-	<string name="poi_seamark_harbour">Hamn</string>
-	<string name="poi_landmark">Landmärke</string>
-	<string name="poi_mooring">Förtöjning</string>
-	<string name="poi_lock_basin">Slussbassäng</string>
-	<string name="poi_small_craft_facility">Småfartygsanläggning</string>
-	<string name="poi_barrier_entrance">Passage i en mur eller ett staket</string>
 	<string name="poi_drinking_water_no">Inga</string>
 	<string name="poi_supervised_yes">Övervakad</string>
 	<string name="poi_supervised_no">Ej övervakad</string>
@@ -1386,6 +1420,8 @@
 	<string name="poi_seats">Platser</string>
 	<string name="poi_backrest_yes">Ryggstöd: Ja</string>
 	<string name="poi_backrest_no">Ryggstöd: nej</string>
+
+	<string name="poi_intermittent">Återkommande</string>
 
 	<string name="poi_building">Byggnad</string>
 	<string name="poi_deadlock">Baklås</string>
@@ -1559,7 +1595,7 @@
 
 	<string name="poi_payment_coins_yes">Mynt</string>
 	<string name="poi_payment_coins_no">Mynt ej accepterat</string>
-	<string name="poi_payment_coins_0.5">$0,5 mynt</string>
+	<string name="poi_payment_coins_0.5">$0.5 coins</string>
 	<string name="poi_payment_coins_50c12">50c, 1€ och 2€ mynt</string>
 	<string name="poi_payment_telephone_cards_yes">Telefonkort</string>
 	<string name="poi_payment_telephone_cards_no">Telefonkort accepteras inte</string>
@@ -1626,6 +1662,7 @@
 	<string name="poi_payment_ep_quick_no">Quick accepteras ej</string>
 	<string name="poi_payment_eurowag_yes">Eurowag</string>
 	<string name="poi_payment_eurowag_no">Eurowag-kort accepteras ej</string>
+	<string name="poi_payment_e_zpass_yes">E‑ZPass</string>
 	<string name="poi_payment_e_zpass_no">E‑ZPass accepteras ej</string>
 	<string name="poi_payment_euroshell_yes">Euroshell</string>
 	<string name="poi_payment_euroshell_no">Euroshell-bränslekort accepteras ej</string>
@@ -1802,7 +1839,7 @@
 
 	<string name="poi_maxstay">Parkeringsgräns</string>
 
-	<string name="poi_vending_parking_tickets">Parkeringsböter</string>
+	<string name="poi_vending_parking_tickets">Parkeringsbiljetter</string>
 	<string name="poi_vending_cigarettes">Cigaretter</string>
 	<string name="poi_vending_excrement_bags">Bajspåsar</string>
 	<string name="poi_vending_public_transport_tickets">Biljetter till kollektivtrafiken</string>
@@ -1943,56 +1980,19 @@
 	<string name="poi_shelter_type_public_transport">Kollektivtrafik</string>
 	<string name="poi_shelter_type_picnic_shelter">Picknick</string>
 	<string name="poi_shelter_type_weather_shelter">Väder</string>
+	<string name="poi_shelter_type_lean_to">Lutande mot</string>
 	<string name="poi_shelter_type_basic_hut">Enkel hydda</string>
 	<string name="poi_shelter_type_building">Byggnad</string>
+	<string name="poi_shelter_type_wildlife_hide">Vildmarksgömma</string>
 	<string name="poi_shelter_type_rock_shelter">Bergrum</string>
 	<string name="poi_shelter_type_sun_shelter">Solskydd</string>
+	<string name="poi_shelter_type_field_shelter">Fältgömma</string>
 	<string name="poi_shelter_type_tent">Skyddstyp: tält</string>
 	<string name="poi_shelter_type_abandoned">Skyddstyp: övergivet</string>
 
 	<string name="poi_internet_access_type_wlan">Wi-Fi</string>
 	<string name="poi_internet_access_type_terminal">Terminal</string>
 	<string name="poi_internet_access_type_wired">Trådbundet</string>
-	<string name="poi_barbecue_grill">Grill: ja</string>
-
-<string name="poi_buoy_safe_water">Mittledsboj</string>
-	
-
-	<string name="poi_buoy_special_purpose">Specialboj</string>
-	<string name="poi_daymark">Båk</string>
-	<string name="poi_seamark_dyke">Sjömärke vall</string>
-	<string name="poi_seamark_light">Fyr, sjömärke</string>
-	<string name="poi_seamark_light_major">Större fyr, sjömärke</string>
-	<string name="poi_seamark_light_minor">Mindre fyr, sjömärke</string>
-	<string name="poi_seamark_light_float">Flytande fyr, sjömärke</string>
-	<string name="poi_seamark_light_vessel">Fartygsljus, sjömärke</string>
-	<string name="poi_notice">Varning, sjömärke</string>
-	<string name="poi_pile">Påle</string>
-	<string name="poi_radar_transponder">Radartransponder, sjömärke</string>
-	<string name="poi_signal_station_traffic">Signalstation, trafik</string>
-	<string name="poi_signal_station_warning">Signalstation, varning</string>
-	<string name="poi_topmark">Toppmärke, sjömärke</string>
-	<string name="poi_seamark_rock">Sten, sjömärke</string>
-	<string name="poi_seamark_wreck">Vrak, sjömärke</string>
-
-	<string name="poi_seamark_clearance_height">Segelhöjd</string>
-	<string name="poi_seamark_clearance_height_closed">Segelhöjd (stängd)</string>
-	<string name="poi_seamark_clearance_height_open">Segelhöjd (öppen)</string>
-	<string name="poi_seamark_clearance_width">Segelbredd</string>
-
-	<string name="poi_bump_gate">Knuffgrind</string>
-	<string name="poi_kissing_gate">Kissing gate</string>
-	<string name="poi_sally_port">Sally port</string>
-	<string name="poi_swing_gate">Svängport</string>
-	<string name="poi_kent_carriage_gap">Kent carriage gap</string>
-	<string name="poi_route_hiking_ref_poi">Vandringsruttreferens</string>
-
-	<string name="poi_intermittent">Återkommande</string>
-
-	<string name="poi_payment_e_zpass_yes">E‑ZPass</string>
-	<string name="poi_shelter_type_lean_to">Lutande mot</string>
-	<string name="poi_shelter_type_wildlife_hide">Vildmarksgömma</string>
-	<string name="poi_shelter_type_field_shelter">Fältgömma</string>
 	<string name="poi_internet_access_type_public">Internetåtkomst: allmän</string>
 	<string name="poi_internet_access_type_service">Internetåtkomst: service</string>
 	<string name="poi_internet_access_type_no">Ingen internetåtkomst</string>
@@ -2333,6 +2333,7 @@
 
 	<string name="poi_social_facility_group_home">Gruppboende</string>
 	<string name="poi_social_facility_assisted_living">Hemtjänst</string>
+	<string name="poi_social_facility_outreach">Uppsökande</string>
 	<string name="poi_social_facility_food_bank">Matbank</string>
 	<string name="poi_social_facility_shelter">Tak-över-huvudet</string>
 	<string name="poi_social_facility_ambulatory_care">Ambulerande vård</string>
@@ -2415,7 +2416,6 @@
 
 	<string name="poi_historic_civilization_ancient_roman">Civilisation: det antika romerska (753 F.KR – 284 E.KR.)</string>
 	<string name="poi_historic_civilization_nuragic">Civilisation: nuragherkulturen (18 F.KR – 2 E.KR)</string>
-	<string name="poi_social_facility_outreach">Uppsökande</string>
 	<string name="poi_historic_civilization_etruscan">Civilisation: etruskisk (500-talet F.Kr. - 1300-talet E.Kr.)</string>
 	<string name="poi_historic_civilization_prehistoric">Civilisation: förhistorisk</string>
 	<string name="poi_historic_civilization_ancient_greek">Civilisation: det antika grekiska</string>
@@ -2870,9 +2870,7 @@
 	<string name="poi_health_person_type_healer">Roll av hälso-och sjukvårdspersonal: healer</string>
 	<string name="poi_health_person_type_midwife">Roll av hälso-och sjukvårdspersonal: barnmorska</string>
 	<string name="poi_health_person_type_nurse">Roll av hälso-och sjukvårdspersonal: sjuksköterska</string>
-	<string name="poi_service_car">Bilservice</string>
-
-<string name="poi_health_person_type_paramedic">Roll av hälso- och sjukvårdspersonal: sjukvårdare</string>
+	<string name="poi_health_person_type_paramedic">Roll av hälso- och sjukvårdspersonal: sjukvårdare</string>
 	<string name="poi_health_person_type_physician">Roll för hälso- och sjukvårdspersonal: läkare</string>
 	<string name="poi_health_person_type_podologist">Roll av hälso- och sjukvårdspersonal: fotvårdsspecialist</string>
 	<string name="poi_health_person_type_psychologist">Roll för hälso- och sjukvårdspersonal: psykolog</string>
@@ -3020,4 +3018,825 @@
 	<string name="poi_crossing_light_no">Korsning med ljussignaler: nej</string>
 	<string name="poi_crossing_on_demand_yes">Korsande vid behov</string>
 	<string name="poi_crossing_on_demand_no">Korsning vid behov: nej</string>
-	</resources>
+	
+	
+	
+	
+	
+	
+
+	
+	
+
+	
+	
+	
+	
+	
+	
+
+	
+
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+
+	
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+	
+	
+	
+
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+	
+
+	
+	
+	
+	
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+	
+	
+
+	
+	
+	
+	
+
+	
+	
+
+	
+	
+	
+
+	
+
+	
+	
+	
+	
+	
+	
+	
+
+	
+
+	
+
+	
+	
+	
+	
+
+	
+
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+	
+	
+	
+	
+	
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+	
+
+	
+	
+	
+	
+	
+	
+
+	
+	
+	
+	
+	
+	
+
+	
+
+	
+
+	
+	
+
+	
+
+	
+	
+	
+	
+	
+
+	
+	
+	
+	
+	
+
+	
+
+	
+
+	
+
+	
+	
+	
+
+	
+
+	
+	
+	
+	
+
+	
+	
+	
+
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+	
+
+	
+
+	
+	
+	
+	
+
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+	
+	
+	
+	
+	
+	
+	
+
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+
+	
+
+	
+	
+	
+
+	
+	
+	
+	
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+	
+	
+	
+
+	
+	
+	
+	
+	
+
+	
+	
+
+	
+	
+	
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+
+	
+	
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+
+	
+	
+	
+
+	
+	
+
+	
+	
+	
+	
+	
+	
+	
+
+	
+
+	
+
+	
+	
+	
+	
+
+	
+	
+
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<string name="poi_climbing_ice_yes">Is: ja</string>
+	<string name="poi_climbing_ice_no">Is: nej</string>
+	<string name="poi_climbing_mixed_yes">Mixad: ja</string>
+	<string name="poi_climbing_mixed_no">Mixad: nej</string>
+	
+	
+
+	<string name="poi_climbing_length">Klättringsledens distans</string>
+	<string name="poi_climbing_length_min">Kortaste distansen för klättringsleden</string>
+	<string name="poi_climbing_length_max">Längsta distansen för klättringsleden</string>
+	<string name="poi_climbing_rock_limestone">Stentyp: kalksten</string>
+	<string name="poi_climbing_rock_granite">Stentyp: granit</string>
+	<string name="poi_climbing_rock_sandstone">Stentyp: sandsten</string>
+	<string name="poi_climbing_rock_quartzite">Stentyp: kvartsit</string>
+	<string name="poi_climbing_rock_gneiss">Stentyp: gnejs</string>
+	<string name="poi_climbing_rock_porphyry">Stentyp: porfyr</string>
+	<string name="poi_climbing_quality_solid">Klättringsväggens kvalitet: fast</string>
+	<string name="poi_climbing_quality_fragile">klättringsväggens kvalitet: skör</string>
+	
+	
+	<string name="poi_climbing_orientation_n">Väggens riktning: Nordlig</string>
+	<string name="poi_climbing_orientation_ne">Väggens riktning: Nordost</string>
+	<string name="poi_climbing_orientation_e">Väggens riktning: Östlig</string>
+	<string name="poi_climbing_orientation_se">Väggens riktning: Sydost</string>
+	<string name="poi_climbing_orientation_s">Väggens riktning: Sydlig</string>
+	<string name="poi_climbing_orientation_sw">Väggens riktning: Sydväst</string>
+	<string name="poi_climbing_orientation_w">Väggens riktning: Västlig</string>
+	<string name="poi_climbing_orientation_nw">Väggens riktning: Nordväst</string>
+	
+	
+	<string name="poi_climbing_routes">Klättringsleder</string>
+
+	
+	
+
+	
+	
+	
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+	
+	
+
+	<string name="poi_whitewater_rapid_name">Namn på flodforsar</string>
+
+	<string name="poi_outpost">Butiken är utlämningsställe</string>
+
+	<string name="poi_barbecue_grill">Grill: ja</string>
+
+	
+
+	
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+	
+
+	
+
+	
+	
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+	
+	
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	
+
+</resources>

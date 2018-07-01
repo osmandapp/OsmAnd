@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="compass">Kompass</string>
+    <string name="shared_string_my_location">Min position</string>
+    <string name="shared_string_search">Sök</string>
+    <string name="yard">yd</string>
+    <string name="foot">ft</string>
+    <string name="mile">mi</string>
+    <string name="km">km</string>
+    <string name="m">m</string>
+    <string name="nm">nmi</string>
+    <string name="min_mile">min/m</string>
+    <string name="min_km">min/km</string>
+    <string name="nm_h">nmi/h</string>
+    <string name="m_s">m/s</string>
+    <string name="km_h">km/h</string>
+    <string name="mile_per_hour">mph</string>
+    <string name="si_kmh">Kilometer i timmen</string>
+    <string name="si_mph">Engelska mil i timmen</string>
+    <string name="si_m_s">Meter i sekunden</string>
+    <string name="si_min_km">Minuter per kilometer</string>
+    <string name="si_min_m">Minuter per engelsk mil</string>
+    <string name="si_nm_h">Sjömil i timmen (knop)</string>
+    <string name="si_mi_feet">Eng. mil/fot</string>
+    <string name="si_mi_yard">Eng. mil/yard</string>
+    <string name="si_km_m">Kilometer/meter</string>
+    <string name="si_nm">Sjömil</string>
+    <string name="si_mi_meters">Mil/metrar</string>
+    <string name="shared_string_cancel">Avbryt</string>
+    <string name="app_name">OsmAnd - parkering</string>
+    <string name="zoomIn">Zooma in</string>
+    <string name="zoomOut">Zooma ut</string>
+    <string name="search_hint">Skriv in stad, adress och POI-namn</string>
+    <string name="shared_string_close">Stäng</string>
+</resources>
