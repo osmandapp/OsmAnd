@@ -1,5 +1,6 @@
 package net.osmand.telegram.ui
 
+import android.app.TimePickerDialog
 import android.os.Bundle
 import android.support.v4.app.DialogFragment
 import android.support.v4.app.FragmentManager
@@ -16,6 +17,7 @@ import net.osmand.telegram.TelegramApplication
 import net.osmand.telegram.helpers.TelegramUiHelper
 import net.osmand.telegram.ui.SetTimeDialogFragment.SetTimeListAdapter.ChatViewHolder
 import org.drinkless.td.libcore.telegram.TdApi
+import java.util.concurrent.TimeUnit
 
 class SetTimeDialogFragment : DialogFragment() {
 
@@ -26,7 +28,7 @@ class SetTimeDialogFragment : DialogFragment() {
 
 	private val adapter = SetTimeListAdapter()
 
-	private val chatIds = HashSet<Long>()
+	private val chatIdsToDuration = HashMap<Long, Long>()
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
@@ -38,9 +40,7 @@ class SetTimeDialogFragment : DialogFragment() {
 		container: ViewGroup?,
 		savedInstanceState: Bundle?
 	): View? {
-		arguments?.apply {
-			chatIds.addAll(getLongArray(CHATS_KEY).toSet())
-		}
+		readFromBundle(savedInstanceState ?: arguments)
 
 		val view = inflater.inflate(R.layout.fragment_set_time_dialog, container)
 
@@ -50,7 +50,7 @@ class SetTimeDialogFragment : DialogFragment() {
 			)
 			findViewById<TextView>(R.id.time_for_all_value).text = "1 hour"
 			setOnClickListener {
-				Toast.makeText(context, "Time for all", Toast.LENGTH_SHORT).show()
+				selectDuration()
 			}
 		}
 
@@ -81,11 +81,65 @@ class SetTimeDialogFragment : DialogFragment() {
 		updateList()
 	}
 
+	override fun onSaveInstanceState(outState: Bundle) {
+		super.onSaveInstanceState(outState)
+		val chats = mutableListOf<Long>()
+		for ((id, duration) in chatIdsToDuration) {
+			chats.add(id)
+			chats.add(duration)
+		}
+		outState.putLongArray(CHATS_KEY, chats.toLongArray())
+	}
+
+	private fun readFromBundle(bundle: Bundle?) {
+		chatIdsToDuration.clear()
+		bundle?.getLongArray(CHATS_KEY)?.also {
+			for (i in 0 until it.size step 2) {
+				chatIdsToDuration[it[i]] = it[i + 1]
+			}
+		}
+	}
+
+	private fun selectDuration(id: Long? = null) {
+		val (defHours, defMinutes) = secondsToHoursAndMinutes(DEFAULT_VISIBLE_TIME_SECONDS)
+		TimePickerDialog(
+			context,
+			TimePickerDialog.OnTimeSetListener { _, hours, minutes ->
+				val seconds = TimeUnit.HOURS.toSeconds(hours.toLong()) +
+						TimeUnit.MINUTES.toSeconds(minutes.toLong())
+				if (id != null) {
+					chatIdsToDuration[id] = seconds
+				} else {
+					chatIdsToDuration.keys.forEach {
+						chatIdsToDuration[it] = seconds
+					}
+				}
+				adapter.notifyDataSetChanged()
+			}, defHours, defMinutes, true
+		).show()
+	}
+
+	private fun secondsToHoursAndMinutes(seconds: Long): Pair<Int, Int> {
+		val hours = TimeUnit.SECONDS.toHours(seconds)
+		val minutes = TimeUnit.SECONDS.toMinutes(seconds - TimeUnit.HOURS.toSeconds(hours))
+		return Pair(hours.toInt(), minutes.toInt())
+	}
+
+	private fun formatDuration(seconds: Long): String {
+		val (hours, minutes) = secondsToHoursAndMinutes(seconds)
+		return when {
+			hours != 0 && minutes == 0 -> String.format("%d h", hours)
+			hours == 0 && minutes != 0 -> String.format("%02d m", minutes)
+			else -> String.format("%d h, %02d m", hours, minutes)
+		}
+	}
+
 	private fun updateList() {
 		val chats: MutableList<TdApi.Chat> = mutableListOf()
-		telegramHelper.getChatList().filter { chatIds.contains(it.chatId) }.forEach { orderedChat ->
-			telegramHelper.getChat(orderedChat.chatId)?.also { chats.add(it) }
-		}
+		telegramHelper.getChatList().filter { chatIdsToDuration.keys.contains(it.chatId) }
+			.forEach { orderedChat ->
+				telegramHelper.getChat(orderedChat.chatId)?.also { chats.add(it) }
+			}
 		adapter.chats = chats
 	}
 
@@ -111,11 +165,11 @@ class SetTimeDialogFragment : DialogFragment() {
 			holder.description?.text = "Some description" // FIXME
 			holder.textInArea?.apply {
 				visibility = View.VISIBLE
-				text = "1 h"
+				chatIdsToDuration[chat.id]?.also { text = formatDuration(it) }
 			}
 			holder.bottomShadow?.visibility = View.GONE
 			holder.itemView.setOnClickListener {
-				Toast.makeText(context, chat.title, Toast.LENGTH_SHORT).show()
+				selectDuration(chat.id)
 			}
 		}
 
@@ -134,14 +188,19 @@ class SetTimeDialogFragment : DialogFragment() {
 
 		private const val TAG = "SetTimeDialogFragment"
 		private const val CHATS_KEY = "chats_key"
+		private const val DEFAULT_VISIBLE_TIME_SECONDS = 60 * 60L // 1 hour
 
-		fun showInstance(fm: FragmentManager, chats: Set<Long>): Boolean {
+		fun showInstance(fm: FragmentManager, chatIds: Set<Long>): Boolean {
 			return try {
-				val fragment = SetTimeDialogFragment()
-				fragment.arguments = Bundle().apply {
-					putLongArray(CHATS_KEY, chats.toLongArray())
+				val chats = mutableListOf<Long>()
+				for (id in chatIds) {
+					chats.add(id)
+					chats.add(DEFAULT_VISIBLE_TIME_SECONDS)
 				}
-				fragment.show(fm, TAG)
+				SetTimeDialogFragment().apply {
+					arguments = Bundle().apply { putLongArray(CHATS_KEY, chats.toLongArray()) }
+					show(fm, TAG)
+				}
 				true
 			} catch (e: RuntimeException) {
 				false
