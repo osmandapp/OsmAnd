@@ -581,6 +581,7 @@ class TelegramHelper private constructor() {
 			is TdApi.MessageLocation -> true
 			is TdApi.MessageText -> {
 				if (content.text.text.startsWith("{")) {
+					// TODO: get user from library if null
 					if (users[senderUserId]?.username == OSMAND_BOT_USERNAME) {
 						return true
 					}
@@ -775,6 +776,7 @@ class TelegramHelper private constructor() {
 				TdApi.UpdateMessageContent.CONSTRUCTOR -> {
 					val updateMessageContent = obj as TdApi.UpdateMessageContent
 					val message = getMessageById(updateMessageContent.messageId)
+					// TODO: get message from library if null
 					if (message != null) {
 						synchronized(message) {
 							message.content = updateMessageContent.newContent
