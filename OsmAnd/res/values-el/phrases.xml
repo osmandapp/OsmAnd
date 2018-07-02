@@ -3183,4 +3183,23 @@
 	<string name="poi_cuisine_noodle">Ζυμαρικά (νουντλ)</string>
 	<string name="poi_cuisine_donut">Λουκουμάς (ντόνατ)</string>
 	<string name="poi_cuisine_ramen">Ράμεν</string>
+	<string name="poi_cuisine_crepe">Κρέπα</string>
+	<string name="poi_cuisine_breakfast">Πρωινό</string>
+	<string name="poi_cuisine_beef_bowl">Γκίντον (βόειο κρέας με ρύζι)</string>
+	<string name="poi_cuisine_steak">Μπριζόλα</string>
+	<string name="poi_cuisine_tapas">Τάπας</string>
+	<string name="poi_cuisine_gastropub">Γαστρονομικό μπαρ</string>
+	<string name="poi_cuisine_heuriger">Χόιριγκερ (είδος ταβέρνας)</string>
+	<string name="poi_cuisine_curry">Κάρι</string>
+	<string name="poi_cuisine_buschenschank">Μπούσενσανκ (είδος ταβέρνας)</string>
+	<string name="poi_cuisine_grill">Ψητά</string>
+	<string name="poi_cuisine_bagel">Κουλούρι</string>
+	<string name="poi_cuisine_diner">Γεύμα</string>
+	<string name="poi_cuisine_sausage">Λουκάνικο</string>
+	<string name="poi_cuisine_cake">Γλυκό (κέικ)</string>
+	<string name="poi_cuisine_pancake">Τηγανίτα</string>
+	<string name="poi_cuisine_pasta">Ζυμαρικά</string>
+	<string name="poi_cuisine_fast_food">Ταχυφαγείο</string>
+	<string name="poi_cuisine_juice">Χυμός</string>
+	<string name="poi_cuisine_soba">Σόμπα (μαυροσίταρο)</string>
 	</resources>
