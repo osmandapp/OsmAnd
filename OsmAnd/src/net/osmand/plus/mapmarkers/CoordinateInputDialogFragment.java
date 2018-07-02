@@ -93,6 +93,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 	public static final String TAG = "CoordinateInputDialogFragment";
 	public static final String ADDED_POINTS_NUMBER_KEY = "added_points_number_key";
 
+	private static final String SELECTED_POINT_KEY = "selected_point_key";
 	private static final double SOFT_KEYBOARD_MIN_DETECTION_SIZE = 0.15;
 
 	private GPXFile newGpxFile;
@@ -252,6 +253,12 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 	@Nullable
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+		if (savedInstanceState != null) {
+			int pos = savedInstanceState.getInt(SELECTED_POINT_KEY, -1);
+			if (pos != -1) {
+				selectedWpt = adapter.getItem(pos);
+			}
+		}
 		orientationPortrait = AndroidUiHelper.isOrientationPortrait(getActivity());
 
 		Fragment optionsFragment = getChildFragmentManager().findFragmentByTag(CoordinateInputBottomSheetDialogFragment.TAG);
@@ -442,19 +449,6 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		final View keyboardLayout = mainView.findViewById(R.id.keyboard_layout);
 		keyboardLayout.setBackgroundResource(lightTheme
 				? R.drawable.bg_bottom_menu_light : R.drawable.bg_coordinate_input_keyboard_dark);
-
-		keyboardLayout.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-			@Override
-			public void onGlobalLayout() {
-				int height = keyboardLayout.getHeight();
-				if (keyboardViewHeight != height) {
-					keyboardViewHeight = height;
-					if (isOsmandKeyboardCurrentlyVisible() && selectedWpt == null) {
-						scrollToPoint(adapter.getItemCount() - 1);
-					}
-				}
-			}
-		});
 		
 		View keyboardView = mainView.findViewById(R.id.keyboard_view);
 
@@ -518,6 +512,13 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		if (!isOsmandKeyboardOn() && isOsmandKeyboardCurrentlyVisible()) {
 			changeOsmandKeyboardVisibility(false);
 		}
+		if (selectedWpt == null) {
+			if ((isOsmandKeyboardCurrentlyVisible() || softKeyboardShown)) {
+				scrollToLastPoint();
+			}
+		} else {
+			enterEditingMode(selectedWpt);
+		}
 
 		mainView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
 			@Override
@@ -533,11 +534,36 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 						shouldShowOsmandKeyboard = false;
 					}
 				} else if (!softKeyboardShown && softKeyboardVisible && selectedWpt == null) {
-					scrollToPoint(adapter.getItemCount() - 1);
+					scrollToLastPoint();
 				}
 				softKeyboardShown = softKeyboardVisible;
+
+				int height = keyboardLayout.getHeight();
+
+				if (height > keyboardViewHeight) {
+					keyboardViewHeight = height;
+					if (isOsmandKeyboardCurrentlyVisible()) {
+						if (selectedWpt == null && adapter.getItemCount() > 1) {
+							scrollToLastPoint();
+						} else {
+							setPaddingToRecyclerViewBottom(keyboardViewHeight);
+						}
+					}
+				}
 			}
 		});
+	}
+
+	@Override
+	public void onSaveInstanceState(Bundle outState) {
+		if (selectedWpt != null) {
+			outState.putInt(SELECTED_POINT_KEY, adapter.getItemPosition(selectedWpt));
+		}
+		super.onSaveInstanceState(outState);
+	}
+
+	private void scrollToLastPoint() {
+		scrollToPoint(adapter.getItemCount() - 1);
 	}
 
 	private void scrollToPoint(WptPt point) {
@@ -551,10 +577,10 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		if ((position < 0) || !(itemsSize > 1) || (itemsSize < position)) {
 			return;
 		}
-		if (isOsmandKeyboardCurrentlyVisible()) {
+		if (isOsmandKeyboardCurrentlyVisible() && keyboardViewHeight > 0) {
 			setPaddingToRecyclerViewBottom(keyboardViewHeight);
 		}
-		recyclerView.scrollToPosition(position);
+		((LinearLayoutManager) recyclerView.getLayoutManager()).scrollToPositionWithOffset(position, 0);
 	}
 
 	private void setPaddingToRecyclerViewBottom(int padding) {
@@ -676,6 +702,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 	@Override
 	public void onPause() {
 		super.onPause();
+		keyboardViewHeight = 0;
 		stopLocationUpdate();
 	}
 
@@ -1085,7 +1112,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 				}
 				adapter.removeItem(position);
 				hasUnsavedChanges = true;
-				snackbar = Snackbar.make(mainView, getString(R.string.coord_input_point_deleted, wpt.name), Snackbar.LENGTH_LONG)
+				snackbar = Snackbar.make(mainView, getString(R.string.point_deleted, wpt.name), Snackbar.LENGTH_LONG)
 						.setAction(R.string.shared_string_undo, new View.OnClickListener() {
 							@Override
 							public void onClick(View view) {
@@ -1131,7 +1158,11 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		} else {
 			mainView.findViewById(R.id.keyboard_layout).setVisibility(visibility);
 		}
-		if (!show) {
+		if (show) {
+			if (selectedWpt == null) {
+				scrollToLastPoint();
+			}
+		} else {
 			setPaddingToRecyclerViewBottom(AndroidUtils.dpToPx(getMyApplication(), 72));
 		}
 	}
@@ -1180,7 +1211,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		selectedWpt = wptPt;
 		Format format = getMyApplication().getSettings().COORDS_INPUT_FORMAT.get();
 		double lat = Math.abs(wptPt.lat);
-		double lon = Math.abs(wptPt.lat);
+		double lon = Math.abs(wptPt.lon);
 		if (format == Format.DD_MM_MMM || format == Format.DD_MM_MMMM) {
 			int accuracy = format.getThirdPartSymbolsCount();
 			updateInputsDdm(true, CoordinateInputFormats.ddToDdm(lat), accuracy);
@@ -1298,7 +1329,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 				dismissEditingMode();
 			} else {
 				addWpt(getGpx(), null, name, null, 0, lat, lon);
-				scrollToPoint(adapter.getItemCount() - 1);
+				scrollToLastPoint();
 			}
 			adapter.notifyDataSetChanged();
 			clearInputs();
