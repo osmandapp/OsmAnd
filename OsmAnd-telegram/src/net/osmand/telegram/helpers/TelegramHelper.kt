@@ -51,8 +51,6 @@ class TelegramHelper private constructor() {
 	private val downloadChatFilesMap = ConcurrentHashMap<String, TdApi.Chat>()
 	private val downloadUserFilesMap = ConcurrentHashMap<String, TdApi.User>()
 
-	private val usersLiveMessages = ConcurrentHashMap<Long, TdApi.Message>()
-
 	// Can contain TdApi.MessageLocation or TdApi.MessageText from osmand_bot
 	private val usersLocationMessages = ConcurrentHashMap<Long, TdApi.Message>()
 
@@ -108,7 +106,7 @@ class TelegramHelper private constructor() {
 	}
 
 	fun getUserMessage(user: TdApi.User): TdApi.Message? {
-		for (message in usersLiveMessages.values) {
+		for (message in usersLocationMessages.values) {
 			if (message.senderUserId == user.id) {
 				return message
 			}
@@ -118,7 +116,7 @@ class TelegramHelper private constructor() {
 
 	fun getChatMessages(chatTitle: String): List<TdApi.Message> {
 		val res = mutableListOf<TdApi.Message>()
-		for (message in usersLiveMessages.values) {
+		for (message in usersLocationMessages.values) {
 			val title = chats[message.chatId]?.title
 			if (title == chatTitle) {
 				res.add(message)
@@ -128,12 +126,12 @@ class TelegramHelper private constructor() {
 	}
 
 	fun getMessages(): List<TdApi.Message> {
-		return usersLiveMessages.values.toList()
+		return usersLocationMessages.values.toList()
 	}
 
 	fun getMessagesByChatIds(): Map<Long, List<TdApi.Message>> {
 		val res = mutableMapOf<Long, MutableList<TdApi.Message>>()
-		for (message in usersLiveMessages.values) {
+		for (message in usersLocationMessages.values) {
 			var messages = res[message.chatId]
 			if (messages != null) {
 				messages.add(message)
@@ -361,43 +359,7 @@ class TelegramHelper private constructor() {
 			}
 		}
 		updateChatTitles()
-		getChatRecentLocationMessages(chatTitles.keys)
 		listener?.onTelegramChatsRead()
-	}
-
-	private fun getChatRecentLocationMessages(chatTitles: Set<String>) {
-		if (haveAuthorization) {
-			for (chatTitle in chatTitles) {
-				val chatId = this.chatTitles[chatTitle]
-				if (chatId != null) {
-					val chat = chats[chatId]
-					if (chat == null || isChannel(chat)) {
-						continue
-					}
-					client?.send(TdApi.SearchChatRecentLocationMessages(chatId, CHAT_LIVE_USERS_LIMIT)) { obj ->
-						when (obj.constructor) {
-							TdApi.Error.CONSTRUCTOR -> {
-								val error = obj as TdApi.Error
-								val code = error.code
-								if (code != IGNORED_ERROR_CODE && code != 400) {
-									listener?.onTelegramError(code, error.message)
-								}
-							}
-							TdApi.Messages.CONSTRUCTOR -> {
-								val messages = (obj as TdApi.Messages).messages
-								for (message in messages) {
-									if (!message.isOutgoing && message.content is TdApi.MessageLocation) {
-										usersLiveMessages[message.id] = message
-									}
-								}
-								incomingMessagesListeners.forEach { it.onReceiveChatLocationMessages(chatTitle, *messages) }
-							}
-							else -> listener?.onTelegramError(-1, "Receive wrong response from TDLib: $obj")
-						}
-					}
-				}
-			}
-		}
 	}
 
 	/**
