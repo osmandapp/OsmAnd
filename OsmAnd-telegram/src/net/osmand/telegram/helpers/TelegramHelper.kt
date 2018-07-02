@@ -357,6 +357,32 @@ class TelegramHelper private constructor() {
 		listener?.onTelegramChatsRead()
 	}
 
+	private fun requestMessage(chatId: Long, messageId: Long, onComplete: (TdApi.Message) -> Unit) {
+		client?.send(TdApi.GetMessage(chatId, messageId)) { obj ->
+			when (obj.constructor) {
+				TdApi.Error.CONSTRUCTOR -> {
+					val error = obj as TdApi.Error
+					if (error.code != IGNORED_ERROR_CODE) {
+						listener?.onTelegramError(error.code, error.message)
+					}
+				}
+				TdApi.Message.CONSTRUCTOR -> onComplete(obj as TdApi.Message)
+			}
+		}
+	}
+
+	private fun addNewMessage(message: TdApi.Message) {
+		if (message.isAppropriate()) {
+			usersLocationMessages[message.senderUserId] = message
+			val chatTitle = chats[message.chatId]?.title
+			if (chatTitle != null) {
+				incomingMessagesListeners.forEach {
+					it.onReceiveChatLocationMessages(chatTitle, message)
+				}
+			}
+		}
+	}
+
 	/**
 	 * @chatId Id of the chat
 	 * @livePeriod Period for which the location can be updated, in seconds; should be between 60 and 86400 for a live location and 0 otherwise.
@@ -776,8 +802,11 @@ class TelegramHelper private constructor() {
 				TdApi.UpdateMessageContent.CONSTRUCTOR -> {
 					val updateMessageContent = obj as TdApi.UpdateMessageContent
 					val message = getMessageById(updateMessageContent.messageId)
-					// TODO: get message from library if null
-					if (message != null) {
+					if (message == null) {
+						updateMessageContent.apply {
+							requestMessage(chatId, chatId, this@TelegramHelper::addNewMessage)
+						}
+					} else {
 						synchronized(message) {
 							message.content = updateMessageContent.newContent
 						}
@@ -790,17 +819,7 @@ class TelegramHelper private constructor() {
 					}
 				}
 				TdApi.UpdateNewMessage.CONSTRUCTOR -> {
-					val updateNewMessage = obj as TdApi.UpdateNewMessage
-					val message = updateNewMessage.message
-					if (message.isAppropriate()) {
-						usersLocationMessages[message.senderUserId] = message
-						val chatTitle = chats[message.chatId]?.title
-						if (chatTitle != null) {
-							incomingMessagesListeners.forEach {
-								it.onReceiveChatLocationMessages(chatTitle, message)
-							}
-						}
-					}
+					addNewMessage((obj as TdApi.UpdateNewMessage).message)
 				}
 				TdApi.UpdateMessageMentionRead.CONSTRUCTOR -> {
 					val updateChat = obj as TdApi.UpdateMessageMentionRead
