@@ -17,7 +17,7 @@ import net.osmand.telegram.helpers.TelegramHelper.TelegramIncomingMessagesListen
 import net.osmand.telegram.notifications.TelegramNotification.NotificationType
 import net.osmand.telegram.utils.AndroidUtils
 import org.drinkless.td.libcore.telegram.TdApi
-import java.util.ArrayList
+import java.util.*
 import java.util.concurrent.Executors
 
 class TelegramService : Service(), LocationListener, TelegramIncomingMessagesListener {
@@ -78,7 +78,7 @@ class TelegramService : Service(), LocationListener, TelegramIncomingMessagesLis
 		setupServiceErrorInterval()
 
 		app.telegramService = this
-		app.telegramHelper.incomingMessagesListener = this
+		app.telegramHelper.addIncomingMessagesListener(this)
 
 		if (isUsedByMyLocation(usedBy)) {
 			initLocationUpdates()
@@ -108,7 +108,7 @@ class TelegramService : Service(), LocationListener, TelegramIncomingMessagesLis
 		super.onDestroy()
 		val app = app()
 		app.telegramHelper.stopLiveMessagesUpdates()
-		app.telegramHelper.incomingMessagesListener = null
+		app.telegramHelper.removeIncomingMessagesListener(this)
 		app.telegramService = null
 
 		usedBy = 0

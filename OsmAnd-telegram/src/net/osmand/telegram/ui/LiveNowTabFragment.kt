@@ -13,15 +13,14 @@ import android.widget.TextView
 import android.widget.Toast
 import net.osmand.telegram.R
 import net.osmand.telegram.TelegramApplication
-import net.osmand.telegram.helpers.TelegramHelper.TelegramAuthorizationState
-import net.osmand.telegram.helpers.TelegramHelper.TelegramListener
+import net.osmand.telegram.helpers.TelegramHelper.*
 import net.osmand.telegram.helpers.TelegramUiHelper
 import org.drinkless.td.libcore.telegram.TdApi
 
 private const val CHAT_VIEW_TYPE = 0
 private const val CONTACT_VIEW_TYPE = 1
 
-class LiveNowTabFragment : Fragment(), TelegramListener {
+class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessagesListener {
 
 	private val app: TelegramApplication
 		get() = activity?.application as TelegramApplication
@@ -48,6 +47,12 @@ class LiveNowTabFragment : Fragment(), TelegramListener {
 	override fun onResume() {
 		super.onResume()
 		updateList()
+		telegramHelper.addIncomingMessagesListener(this)
+	}
+
+	override fun onPause() {
+		super.onPause()
+		telegramHelper.removeIncomingMessagesListener(this)
 	}
 
 	override fun onTelegramStatusChanged(
@@ -86,6 +91,13 @@ class LiveNowTabFragment : Fragment(), TelegramListener {
 	}
 
 	override fun onSendLiveLocationError(code: Int, message: String) {
+	}
+
+	override fun onReceiveChatLocationMessages(chatTitle: String, vararg messages: TdApi.Message) {
+		updateList()
+	}
+
+	override fun updateLocationMessages() {
 	}
 
 	private fun updateList() {

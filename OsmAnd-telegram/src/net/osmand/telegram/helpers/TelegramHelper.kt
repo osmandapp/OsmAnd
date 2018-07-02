@@ -13,6 +13,7 @@ import java.util.concurrent.ConcurrentHashMap
 import java.util.concurrent.Executors
 import java.util.concurrent.ScheduledExecutorService
 import java.util.concurrent.TimeUnit
+import kotlin.collections.HashSet
 
 
 class TelegramHelper private constructor() {
@@ -73,7 +74,15 @@ class TelegramHelper private constructor() {
 	private var updateLiveMessagesExecutor: ScheduledExecutorService? = null
 
 	var listener: TelegramListener? = null
-	var incomingMessagesListener: TelegramIncomingMessagesListener? = null
+	private val incomingMessagesListeners = HashSet<TelegramIncomingMessagesListener>()
+
+	fun addIncomingMessagesListener(listener: TelegramIncomingMessagesListener) {
+		incomingMessagesListeners.add(listener)
+	}
+
+	fun removeIncomingMessagesListener(listener: TelegramIncomingMessagesListener) {
+		incomingMessagesListeners.remove(listener)
+	}
 
 	fun getChatList(): TreeSet<OrderedChat> {
 		synchronized(chatList) {
@@ -261,7 +270,7 @@ class TelegramHelper private constructor() {
 		val updateLiveMessagesExecutor = Executors.newSingleThreadScheduledExecutor()
 		this.updateLiveMessagesExecutor = updateLiveMessagesExecutor
 		updateLiveMessagesExecutor.scheduleWithFixedDelay({
-			incomingMessagesListener?.updateLocationMessages()
+			incomingMessagesListeners.forEach { it.updateLocationMessages() }
 		}, UPDATE_LIVE_MESSAGES_INTERVAL_SEC, UPDATE_LIVE_MESSAGES_INTERVAL_SEC, TimeUnit.SECONDS);
 	}
 
@@ -376,7 +385,7 @@ class TelegramHelper private constructor() {
 										usersLiveMessages[message.id] = message
 									}
 								}
-								incomingMessagesListener?.onReceiveChatLocationMessages(chatTitle, *messages)
+								incomingMessagesListeners.forEach { it.onReceiveChatLocationMessages(chatTitle, *messages) }
 							}
 							else -> listener?.onTelegramError(-1, "Receive wrong response from TDLib: $obj")
 						}
@@ -787,7 +796,9 @@ class TelegramHelper private constructor() {
 						}
 						val chatTitle = chats[message.chatId]?.title
 						if (chatTitle != null) {
-							incomingMessagesListener?.onReceiveChatLocationMessages(chatTitle, message)
+							incomingMessagesListeners.forEach {
+								it.onReceiveChatLocationMessages(chatTitle, message)
+							}
 						}
 
 					}
@@ -799,7 +810,9 @@ class TelegramHelper private constructor() {
 						usersLiveMessages[message.id] = message
 						val chatTitle = chats[message.chatId]?.title
 						if (chatTitle != null) {
-							incomingMessagesListener?.onReceiveChatLocationMessages(chatTitle, message)
+							incomingMessagesListeners.forEach {
+								it.onReceiveChatLocationMessages(chatTitle, message)
+							}
 						}
 					}
 				}
