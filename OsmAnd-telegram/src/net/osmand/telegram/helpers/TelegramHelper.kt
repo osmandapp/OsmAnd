@@ -804,7 +804,7 @@ class TelegramHelper private constructor() {
 					val message = getMessageById(updateMessageContent.messageId)
 					if (message == null) {
 						updateMessageContent.apply {
-							requestMessage(chatId, chatId, this@TelegramHelper::addNewMessage)
+							requestMessage(chatId, messageId, this@TelegramHelper::addNewMessage)
 						}
 					} else {
 						synchronized(message) {
