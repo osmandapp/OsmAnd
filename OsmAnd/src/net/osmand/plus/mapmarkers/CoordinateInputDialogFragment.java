@@ -556,10 +556,10 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
 		if (selectedWpt != null) {
 			outState.putInt(SELECTED_POINT_KEY, adapter.getItemPosition(selectedWpt));
 		}
-		super.onSaveInstanceState(outState);
 	}
 
 	private void scrollToLastPoint() {
