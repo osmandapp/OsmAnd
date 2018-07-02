@@ -10,6 +10,7 @@
 	- For wording and consistency, please note http://osmand.net/help-online?id=technical-articles#Creating_a_Consistent_User_Experience
 	Thx - Hardy
 -->
+    <string name="point_deleted">Point %1$s deleted</string>
     <string name="coord_input_edit_point">Edit point</string>
     <string name="coord_input_add_point">Add point</string>
     <string name="coord_input_save_as_track">Save as track</string>

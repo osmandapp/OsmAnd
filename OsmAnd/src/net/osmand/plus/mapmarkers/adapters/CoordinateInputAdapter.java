@@ -11,7 +11,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import net.osmand.plus.GPXUtilities;
+import net.osmand.AndroidUtils;
+import net.osmand.plus.GPXUtilities.GPXFile;
+import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -22,7 +24,7 @@ import net.osmand.plus.base.FavoriteImageDrawable;
 public class CoordinateInputAdapter extends RecyclerView.Adapter<MapMarkerItemViewHolder> {
 
 	public static final String ADAPTER_POSITION_KEY = "adapter_position_key";
-	private GPXUtilities.GPXFile gpx;
+	private GPXFile gpx;
 
 	private OsmandApplication app;
 
@@ -42,7 +44,7 @@ public class CoordinateInputAdapter extends RecyclerView.Adapter<MapMarkerItemVi
 		this.actionsListener = actionsListener;
 	}
 	
-	public CoordinateInputAdapter(OsmandApplication app, GPXUtilities.GPXFile gpx) {
+	public CoordinateInputAdapter(OsmandApplication app, GPXFile gpx) {
 		this.app = app;
 		this.gpx = gpx;
 
@@ -61,20 +63,20 @@ public class CoordinateInputAdapter extends RecyclerView.Adapter<MapMarkerItemVi
 
 	@Override
 	public void onBindViewHolder(@NonNull final MapMarkerItemViewHolder holder, int position) {
-		GPXUtilities.WptPt wpt = getItem(position);
+		WptPt wpt = getItem(position);
 
 		holder.iconDirection.setVisibility(View.VISIBLE);
 		holder.icon.setImageDrawable(FavoriteImageDrawable.getOrCreate(app, wpt.getColor(), false));
 		holder.mainLayout.setBackgroundColor(getResolvedColor(nightTheme ? R.color.ctx_menu_bg_dark : R.color.bg_color_light));
 		holder.title.setTextColor(getResolvedColor(nightTheme ? R.color.ctx_menu_title_color_dark : R.color.color_black));
 		holder.divider.setBackgroundColor(getResolvedColor(nightTheme ? R.color.route_info_divider_dark : R.color.dashboard_divider_light));
-		holder.optionsBtn.setImageDrawable(getColoredIcon(R.drawable.ic_overflow_menu_white, R.color.icon_color));
-		holder.optionsBtn.setBackgroundColor(ContextCompat.getColor(app, nightTheme ? R.color.ctx_menu_bg_dark : R.color.bg_color_light));
 		holder.iconReorder.setVisibility(View.GONE);
 		holder.numberText.setVisibility(View.VISIBLE);
 		holder.numberText.setText(String.valueOf(position + 1));
 		holder.description.setVisibility(View.GONE);
+		holder.optionsBtn.setImageDrawable(app.getUIUtilities().getThemedIcon(R.drawable.ic_overflow_menu_white));
 		holder.optionsBtn.setOnClickListener(actionsListener);
+		AndroidUtils.setDashButtonBackground(app, holder.optionsBtn, nightTheme);
 
 		boolean singleItem = getItemCount() == 1;
 		boolean fistItem = position == 0;
@@ -98,8 +100,12 @@ public class CoordinateInputAdapter extends RecyclerView.Adapter<MapMarkerItemVi
 	}
 
 
-	public GPXUtilities.WptPt getItem(int position) {
+	public WptPt getItem(int position) {
 		return gpx.getPoints().get(position);
+	}
+
+	public int getItemPosition(WptPt wptPt) {
+		return gpx.getPoints().indexOf(wptPt);
 	}
 
 	public void removeItem(int position) {
@@ -109,7 +115,7 @@ public class CoordinateInputAdapter extends RecyclerView.Adapter<MapMarkerItemVi
 		}
 	}
 	
-	public void setGpx(GPXUtilities.GPXFile gpx) {
+	public void setGpx(GPXFile gpx) {
 		this.gpx = gpx;
 		notifyDataSetChanged();
 	}
