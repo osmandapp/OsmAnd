@@ -52,7 +52,7 @@ class TelegramHelper private constructor() {
 	private val downloadUserFilesMap = ConcurrentHashMap<String, TdApi.User>()
 
 	// Can contain TdApi.MessageLocation or TdApi.MessageText from osmand_bot
-	private val usersLocationMessages = ConcurrentHashMap<Long, TdApi.Message>()
+	private val usersLocationMessages = ConcurrentHashMap<Int, TdApi.Message>()
 
 	private val usersFullInfo = ConcurrentHashMap<Int, TdApi.UserFullInfo>()
 	private val basicGroupsFullInfo = ConcurrentHashMap<Int, TdApi.BasicGroupFullInfo>()
@@ -105,14 +105,9 @@ class TelegramHelper private constructor() {
 		return users[id]
 	}
 
-	fun getUserMessage(user: TdApi.User): TdApi.Message? {
-		for (message in usersLocationMessages.values) {
-			if (message.senderUserId == user.id) {
-				return message
-			}
-		}
-		return null
-	}
+	fun getUserMessage(user: TdApi.User) = usersLocationMessages[user.id]
+
+	fun getMessageById(id: Long) = usersLocationMessages.values.firstOrNull { it.id == id }
 
 	fun getChatMessages(chatTitle: String): List<TdApi.Message> {
 		val res = mutableListOf<TdApi.Message>()
@@ -779,7 +774,7 @@ class TelegramHelper private constructor() {
 				}
 				TdApi.UpdateMessageContent.CONSTRUCTOR -> {
 					val updateMessageContent = obj as TdApi.UpdateMessageContent
-					val message = usersLocationMessages[updateMessageContent.messageId]
+					val message = getMessageById(updateMessageContent.messageId)
 					if (message != null) {
 						synchronized(message) {
 							message.content = updateMessageContent.newContent
@@ -796,7 +791,7 @@ class TelegramHelper private constructor() {
 					val updateNewMessage = obj as TdApi.UpdateNewMessage
 					val message = updateNewMessage.message
 					if (message.isAppropriate()) {
-						usersLocationMessages[message.id] = message
+						usersLocationMessages[message.senderUserId] = message
 						val chatTitle = chats[message.chatId]?.title
 						if (chatTitle != null) {
 							incomingMessagesListeners.forEach {
