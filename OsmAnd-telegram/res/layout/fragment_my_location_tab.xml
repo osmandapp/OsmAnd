@@ -28,21 +28,27 @@
 			android:paddingLeft="@dimen/my_location_text_sides_margin"
 			android:paddingRight="@dimen/my_location_text_sides_margin">
 
-			<TextView
-				android:id="@+id/title"
+			<FrameLayout
 				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:gravity="center"
-				android:text="@string/start_location_sharing"
-				android:textColor="?attr/ctrl_active_color"
-				android:textSize="@dimen/title_text_size"
-				android:textStyle="bold"/>
+				android:layout_height="@dimen/action_bar_height">
+
+				<net.osmand.telegram.ui.views.TextViewEx
+					android:id="@+id/title"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_gravity="center_vertical"
+					android:gravity="center"
+					android:text="@string/start_location_sharing"
+					android:textColor="?attr/ctrl_active_color"
+					android:textSize="@dimen/title_text_size"
+					app:typeface="@string/font_roboto_mono_bold"/>
+
+			</FrameLayout>
 
 			<TextView
 				android:id="@+id/description"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:layout_marginTop="@dimen/content_padding_half"
 				android:gravity="center"
 				android:text="@string/location_sharing_description"
 				android:textColor="?android:attr/textColorSecondary"

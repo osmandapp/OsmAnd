@@ -203,7 +203,7 @@
     <string name="index_name_tts_voice">Talemeldinger (TTS-syntetisert, anbefales)</string>
     <string name="amenity_type_osmwiki">Wikipedia (offline)</string>
     <string name="amenity_type_user_defined">Brukerdefinert</string>
-    <string name="fav_export_confirmation">Fil som inneholder tidligere eksporterte favoritter finnes allerede. Erstatt den?</string>
+    <string name="fav_export_confirmation">Fil inneholdende tidligere eksporterte favoritter finnes allerede. Vil du erstatte den?</string>
     <string name="profile_settings">Profilspesifikke innstillinger</string>
     <string name="settings_preset">Standardprofil</string>
     <string name="settings_preset_descr">Kartvisning- og navigeringsinnstillinger lagres per profil. Sett din standardprofil her.</string>
@@ -549,7 +549,7 @@
     <string name="osb_comment_dialog_message">Melding</string>
     <string name="poi_edit_title">Rediger interessepunkt</string>
     <string name="poi_create_title">Opprett interessepunkt</string>
-    <string name="poi_remove_confirm_template">Slette {0} (skriv kommentar)?</string>
+    <string name="poi_remove_confirm_template">Slette {0} (kommentar)?</string>
     <string name="poi_remove_title">Slett interessepunkt</string>
     <string name="poi_remove_success">Interessepunkt slettet</string>
     <string name="poi_action_add">legg til</string>
@@ -1415,7 +1415,7 @@
     <string name="get_full_version">Fullversjon</string>
     <string name="confirm_download_roadmaps">Det rene veikartet er ikke nødvendig siden du har det fullstendige standardkartet. Laste det ned likevel?</string>
     <string name="later">Senere</string>
-    <string name="activate_srtm_plugin">Aktiver \"koter\" -tillegget</string>
+    <string name="activate_srtm_plugin">Aktiver programtillegget for koter</string>
     <string name="opening_at">Åpner</string>
     <string name="closing_at">Lukker</string>
     
@@ -1845,27 +1845,27 @@
     <string name="rendering_attr_contourWidth_description">Kotebredde</string>
     <string name="rendering_attr_contourWidth_name">Kotebredde</string>
     <string name="srtm_paid_version_msg">Overvei å betale for kote-programtillegget for å støtte videre utvikling.</string>
-    <string name="osmand_long_description_1000_chars">OsmAnd (OSM Automated Navigation Directions)
-\n
-\n OsmAnd er et navigeringsprogram med åpen kildekode og med tilgang til et bredt mangfold av globale data fra OpenStreetMap (OSM). Alle kartdata (vektor- eller fliskart) kan lagres på telefonens minnekort for nettfrakoblet bruk. Frakoblet og nettbasert rutefunksjon tilbys også, inkludert talebaserte anvisninger.
-\n
-\n Noen av kjernefunksjonene:
-\n - Fullstendig nettfrakoblet funksjonalitet (lagre nedlastede vektor- eller fliskart i enhetens lagringsmedium)
-\n - Kompakte frakoblede vektorkart fra hele verden tilgjengelige
-\n - Last ned lands- eller regionkart direkte fra programmet
-\n - Overlegg av flere kartlag mulig, som GPX og navigeringsspor, interessepunkter, favoritter, koter, stoppesteder for offentlig transport, ytterligere kart med egendefinert gjennomsiktighet
-\n - Frakoblet søk etter adresser og steder (interessepunkter)
-\n - Frakoblet ruteplanlegging for middels avstander
-\n - Bil, sykkel eller fotgjengermoduser med valgfri:
-\n - Automatisk skifting mellom dag/natt-visning
-\n - Fartsavhengig kart-zooming
-\n - Kartjustering etter kompass- eller bevegelsesretning
-\n - Filhenvisning, fartsgrensevisning, innspilte og TTS-tale
-\n
-\n Begrensninger i gratisversjonen av OsmAnd:
-\n - Antall kartnedlastinger er begrenset
-\n - Ingen nettfrakoblet tilgang til interessepunkter fra Wikipedia
-\n
+    <string name="osmand_long_description_1000_chars">OsmAnd (OSM Automated Navigation Directions) 
+\n 
+\n OsmAnd er et navigeringsprogram med åpen kildekode og med tilgang til et bredt mangfold av globale data fra OpenStreetMap (OSM). Alle kartdata (vektor- eller fliskart) kan lagres på telefonens minnekort for nettfrakoblet bruk. Frakoblet og nettbasert rutefunksjon tilbys også, inkludert talebaserte anvisninger. 
+\n 
+\n Noen av kjernefunksjonene: 
+\n - Fullstendig nettfrakoblet funksjonalitet (lagre nedlastede vektor- eller fliskart i enhetens lagringsmedium) 
+\n - Kompakte frakoblede vektorkart fra hele verden tilgjengelige 
+\n - Last ned lands- eller regionkart direkte fra programmet 
+\n - Overlegg av flere kartlag mulig, som GPX og navigeringsspor, interessepunkter, favoritter, koter, stoppesteder for offentlig transport, ytterligere kart med egendefinert gjennomsiktighet 
+\n - Frakoblet søk etter adresser og steder (interessepunkter) 
+\n - Frakoblet ruteplanlegging for middels avstander 
+\n - Bil, sykkel eller fotgjengermoduser med valgfri: 
+\n - Automatisk skifting mellom dag/natt-visning 
+\n - Fartsavhengig kartforstørring
+\n - Kartjustering etter kompass- eller bevegelsesretning 
+\n - Filhenvisning, fartsgrensevisning, innspilte og TTS-tale 
+\n 
+\n Begrensninger i gratisversjonen av OsmAnd: 
+\n - Antall kartnedlastinger er begrenset 
+\n - Ingen nettfrakoblet tilgang til interessepunkter fra Wikipedia 
+\n 
 \n OsmAnd utvikles aktivt, og prosjektet vårt og dets videre framdrift avhenger av finansielle bidrag for å drive utviklingen og testingen av nye funksjoner. Overvei å kjøpe OsmAnd+ eller støtte spesifikke nye funksjoner eller bidra med en generell donasjon på https://osmand.net.</string>
 	<string name="upload_osm_note_description">Last opp ditt OSM-notat anonymt eller ved å bruke din profil hos OpenStreetMap.org</string>
     <string name="gpx_no_tracks_title">Du har ingen GPX-filer enda</string>
@@ -1883,7 +1883,7 @@
     <string name="translit_name_if_miss">Transkriber hvis %1$s navn mangler</string>
     <string name="translit_names">Transkriber navn</string>
     <string name="get_for_month">Få for %1$s måned</string>
-    <string name="osm_live_banner_desc">Få ubegrensede kartnedlastinger, og kartoppdateringer mer enn en gang i måneden: Ukentlig, daglig eller hver time.</string>
+    <string name="osm_live_banner_desc">Få ubegrensede kartnedlastinger og kartoppdateringer mer enn en gang i måneden: Ukentlig, daglig eller timevist.</string>
     <string name="access_direction_audio_feedback">Lydbaserte anvisninger</string>
     <string name="access_direction_audio_feedback_descr">Indiker retning til målpunkt med lyd.</string>
     <string name="access_direction_haptic_feedback">Anvisninger med vibrasjon</string>
@@ -1900,7 +1900,7 @@
     
     <string name="osm_user_stat">Redigeringer %1$s, rang %2$s, redigeringer totalt %3$s</string>
     <string name="osm_editors_ranking">Rangering av OSM-bidragsytere</string>
-    <string name="osm_live_email_desc">For å gi deg informasjon om bidrag.</string>
+    <string name="osm_live_email_desc">Behøves for å gi deg informasjon om bidrag.</string>
     <string name="osm_live_support_region">Støttet region</string>
     <string name="osm_live_thanks">Takk for at du støtter OsmAnd!
 \nFor å aktivere alle nye funksjoner må du starte OsmAnd på nytt.</string>
@@ -2109,8 +2109,8 @@
     <string name="route_roundabout">Rundkjøring: Ta avkjøring %1$d og fortsett</string>
     <string name="support_new_features">Støtt nye funksjoner</string>
     <string name="max_speed">Maksimumshastighet</string>
-    <string name="shared_string_start_time">Avreise</string>
-    <string name="shared_string_end_time">Ankomst</string>
+    <string name="shared_string_start_time">Starttid</string>
+    <string name="shared_string_end_time">Sluttid</string>
     <string name="shared_string_color">Farge</string>
     <string name="file_can_not_be_moved">Filen kan ikke flyttes.</string>
     <string name="shared_string_move">Flytt</string>
@@ -2158,29 +2158,29 @@
     <string name="points_delete_multiple_succesful">Punkt(er) slettet.</string>
     <string name="points_delete_multiple">Du skal slette %1$d punkt(er). Er du sikker?</string>
     <string name="average_speed">Gjennomsnittshastighet</string>
-    <string name="select_gpx_folder">Velg GPX-fil -mappe</string>
+    <string name="select_gpx_folder">Velg mappe for GPX-fil</string>
     <string name="osmand_extended_description_part1">OsmAnd (OSM Automated Navigation Directions) er et kart- og navigeringsprogram med tilgang til gratis, verdensomspennende og høykvalitets data fra OpenStreetMap (OSM).
 \n
 \n Gled deg over tale og visuell navigering, visning av interessepunkter, oppretting og behandling av GPX-spor, bruk av kotevisualisering og høydeinformasjon (gjennom programtillegg), et valg mellom kjøring, sykling, fotgjenger-modus, OSM-redigering og mye mer.</string>
-    <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OSM Automated Navigation Directions)
-\n
-\n OsmAnd+ er et navigeringsprogram med åpen kildekode og med tilgang til et bredt mangfold av globale data fra OpenStreetMap (OSM). Alle kartdata (vektor- eller fliskart) kan lagres på telefonens minnekort for nettfrakoblet bruk. Frakoblet og nettbasert rutefunksjon tilbys også, inkludert talebaserte anvisninger.
-\n
-\n OsmAnd+ er betalingsversjonen, ved å kjøpe den støtter du prosjektet, finansierer utviklingen av nye funksjoner, og mottar de siste oppdateringene.
-\n
-\n Noen av kjernefunksjonene:
-\n - Fullstendig nettfrakoblet funksjonalitet (lagre nedlastede vektor- eller fliskart i enhetens lagringsmedium)
-\n - Kompakte frakoblede vektorkart fra hele verden tilgjengelige
-\n - Ubegrenset nedlasting av lands- eller regionkart direkte fra programmet
-\n - Frakoblede Wikipedia-funksjoner (last ned Wikipedia-interessepunkter), flott for sightseeing
-\n - Overlegg av flere kartlag mulig, som GPX og navigeringsspor, interessepunkter, favoritter, koter, stoppesteder for offentlig transport, ytterligere kart med egendefinert gjennomsiktighet
-\n - Frakoblet søk etter adresser og steder (interessepunkter)
-\n - Frakoblet ruteplanlegging for middels avstander
-\n - Bil, sykkel eller fotgjengermoduser med valgfri:
-\n - Automatisk skifting mellom dag/natt-visning
-\n - Fartsavhengig kart-zooming
-\n - Kartjustering etter kompass- eller bevegelsesretning
-\n - Filhenvisning, fartsgrensevisning, innspilte og TTS-tale
+    <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OSM Automated Navigation Directions) 
+\n 
+\n OsmAnd+ er et navigeringsprogram med åpen kildekode og med tilgang til et bredt mangfold av globale data fra OpenStreetMap (OSM). Alle kartdata (vektor- eller fliskart) kan lagres på telefonens minnekort for nettfrakoblet bruk. Frakoblet og nettbasert rutefunksjon tilbys også, inkludert talebaserte anvisninger. 
+\n 
+\n OsmAnd+ er betalingsversjonen, ved å kjøpe den støtter du prosjektet, finansierer utviklingen av nye funksjoner, og mottar de siste oppdateringene. 
+\n 
+\n Noen av kjernefunksjonene: 
+\n - Fullstendig nettfrakoblet funksjonalitet (lagre nedlastede vektor- eller fliskart i enhetens lagringsmedium) 
+\n - Kompakte frakoblede vektorkart fra hele verden tilgjengelige 
+\n - Ubegrenset nedlasting av lands- eller regionkart direkte fra programmet 
+\n - Frakoblede Wikipedia-funksjoner (last ned Wikipedia-interessepunkter), flott for sightseeing 
+\n - Overlegg av flere kartlag mulig, som GPX og navigeringsspor, interessepunkter, favoritter, koter, stoppesteder for offentlig transport, ytterligere kart med egendefinert gjennomsiktighet 
+\n - Frakoblet søk etter adresser og steder (interessepunkter) 
+\n - Frakoblet ruteplanlegging for middels avstander 
+\n - Bil, sykkel eller fotgjengermoduser med valgfri: 
+\n - Automatisk skifting mellom dag/natt-visning 
+\n - Fartsavhengig kartforstørring
+\n - Kartjustering etter kompass- eller bevegelsesretning 
+\n - Filhenvisning, fartsgrensevisning, innspilte og TTS-tale 
 \n</string>
     <string name="osmand_plus_extended_description_part1">OsmAnd+ (OSM Automated Navigation Directions) er et kart- og navigeringsprogram med tilgang til gratis, verdensomspennende og høykvalitets data fra OpenStreetMap (OSM).
 \n Gled deg over tale og visuell navigering, visning av interessepunkter, oppretting og behandling av GPX-spor, bruk av kotevisualisering og høydeinformasjon, et valg mellom kjøring, sykling, fotgjenger-modus, OSM-redigering og mye mer.
@@ -2212,11 +2212,11 @@
     <string name="quick_action_navigation_voice_off">Tale er av</string>
     <string name="quick_action_navigation_voice_on">Tale er på</string>
     <string name="sorted_by_distance">Sortert etter avstand</string>
-    <string name="search_favorites">Søk favoritter</string>
+    <string name="search_favorites">Søk blandt favoritter</string>
     <string name="configure_screen_quick_action">Hurtighandling</string>
     <string name="quick_action_new_action">Legg til handling</string>
     <string name="dialog_add_action_title">Legg til handling</string>
-    <string name="private_access_routing_req">Reisemålet ditt ligger i et område med privat adgang. Bruk private veier for denne turen?</string>
+    <string name="private_access_routing_req">Reisemålet ditt ligger i et område med privat adgang. Tillate adgang til de private veiene for denne turen?</string>
     <string name="restart_search">Start søk på nytt</string>
     <string name="increase_search_radius">Øk søkeradius</string>
     <string name="nothing_found">Ingenting funnet</string>
@@ -2246,7 +2246,7 @@
     <string name="add_new_folder">Legg til ny mappe</string>
     <string name="shared_string_gpx_track">GPX-spor</string>
     <string name="routing_attr_height_obstacles_name">Bruk høydedata</string>
-    <string name="routing_attr_height_obstacles_description">Ta hensyn til terrenghøydedata (fra SRTM-, ASTER- og EU-DEM -data).</string>
+    <string name="routing_attr_height_obstacles_description">Ta hensyn til terrenghøyde (data fra SRTM, ASTER og EU-DEM).</string>
     <string name="quick_action_bug_message">Melding</string>
     <string name="shared_string_permissions">Tillatelser</string>
     <string name="import_gpx_failed_descr">OsmAnd kan ikke importere filen. Kontroller om OsmAnd har leserettighet for fillagringsstedet.</string>
@@ -2331,7 +2331,7 @@
     <string name="full_version_thanks">Takk for at du kjøpte betalingsversjonen av OsmAnd.</string>
     <string name="routing_attr_driving_style_speed_name">Kortere ruter</string>
     <string name="routing_attr_driving_style_balance_name">Balansert</string>
-    <string name="track_points_category_name">Rutepunkter, fremtredende punkter på denne ruten, navngitte karakteristika.</string>
+    <string name="track_points_category_name">Rutepunkter, interessepunkter, navngitte objekter</string>
     <string name="shared_string_time_moving">Tid i bevegelse</string>
     <string name="shared_string_time_span">Varighet</string>
     <string name="shared_string_max">Maks.</string>
@@ -2462,7 +2462,7 @@
     <string name="error_calculating_route_occured">Kunne ikke beregne rute</string>
     <string name="empty_route_calculated">Beregnet rute er tom</string>
     <string name="new_route_calculated_dist">Ny rute beregnet, distanse</string>
-    <string name="saving_gpx_tracks">Lagrer GPX-fil til SD-kort…</string>
+    <string name="saving_gpx_tracks">Lagrer GPX-fil…</string>
     <string name="data_settings_descr">Angi språk, last ned/gjeninnlast data.</string>
     <string name="av_camera_focus">Kameraets fokusmetode</string>
     <string name="av_camera_focus_descr">Velg fokusmodus for kameraet.</string>
@@ -2509,8 +2509,8 @@
     <string name="quick_action_fav_name_descr">La stå tomt for å bruke adressen eller stedsnavnet.</string>
     <string name="quick_action_bug_descr">Denne meldingen inkluderes i kommentarfeltet.</string>
     <string name="mappilary_no_internet_desc">Du må være koblet til internett for å vise bilder fra Mapillary.</string>
-    <string name="hillshade_menu_download_descr">Last ned relieffskyggeoverleggskartet for å se relieffskygger for denne regionen.</string>
-    <string name="hillshade_purchase_header">Installer programtillegget for koter for å vise relieffskygger på kartet</string>
+    <string name="hillshade_menu_download_descr">Last ned relieffskyggeoverleggskartet for denne regionen for å se relieffskygger på kartet.</string>
+    <string name="hillshade_purchase_header">Kjøp og installer programtillegget for koter for å se relieffskygger på kartet</string>
     <string name="enter_new_name">Oppfør nytt navn</string>
 	<string name="shared_string_back">Tilbake</string>
 	<string name="waypoints_added_to_map_markers">Rutepunkter lagt til kartmarkører</string>
@@ -2529,7 +2529,7 @@
     <string name="import_as_favorites">Importer som favoritt</string>
     <string name="import_file">Importer fil</string>
 	<string name="marker_show_distance_descr">Velg hvordan avstand og retning til kartmarkører på kartskjermen angis:</string>
-    <string name="import_gpx_file_description">kan importeres som favoritt, eller GPX-fil.</string>
+    <string name="import_gpx_file_description">kan importeres som favoritt eller GPX-fil.</string>
     <string name="tap_on_map_to_hide_interface">Fullskjermmodus</string>
     
     <string name="appearance_on_the_map">Utseende på kartet</string>
@@ -2571,14 +2571,14 @@
     <string name="rendering_value_darkyellow_name">Mørkegul</string>
     <string name="rendering_value_translucent_pink_name">Gjennomskinnelig rosa</string>
     <string name="modify_the_search_query">Endre søkeord.</string>
-    <string name="looking_for_tracks_with_waypoints">Ser etter GPX-filer med rutepunkter</string>
+    <string name="looking_for_tracks_with_waypoints">Ser etter spor med rutepunkter</string>
     <string name="shared_string_gpx_waypoints">Spor-rutepunkter</string>
     <string name="add_group_descr">Importer grupper fra favoritter eller GPX-rutepunkter.</string>
     <string name="empty_state_markers_groups_desc">Importer favorittgrupper eller rutepunkter som markører.</string>
-    <string name="show_guide_line_descr">Vis veivisningslinjer fra din posisjon til de aktive markørplasseringene.</string>
+    <string name="show_guide_line_descr">Vis retningsbestemte linjer fra din posisjon til de aktive markørplasseringene.</string>
     <string name="show_arrows_descr">Vis én eller to piler som indikerer retningen til de aktive markørene.</string>
     <string name="distance_indication_descr">Velg hvordan avstanden til aktive markører skal vises.</string>
-    <string name="active_markers_descr">Velg antall aktive markører som skal vises.</string>
+    <string name="active_markers_descr">Velg hvor mange retningsindikatorer som skal vises.</string>
     <string name="tap_on_map_to_hide_interface_descr">Et trykk på kartet skjuler/viser kontrollknappene og miniprogrammene.</string>
     <string name="mark_passed">Marker som passert</string>
     <string name="osn_modify_dialog_error">Kunne ikke endre notatet</string>
@@ -2676,7 +2676,7 @@
     <string name="disable_recording_once_app_killed_descrp">Vil sette GPX-logging i pausemodus når programmet avsluttes (via nylig brukte apper). (OsmAnds bakgrunnsindikasjon forsvinner fra Android-varslingslinjen.)</string>
     <string name="route_is_too_long_v2">Legg til mellomliggende reisemål hvis denne lange ruten ikke er beregnet innen 10 minutter.</string>
     <string name="intermediate_items_sort_return">Optimalisert rekkefølge av mellomliggende reisemål underveis til målet.</string>
-    <string name="audionotes_location_not_defined">Sted å assosiere med notatet er ikke definert ennå. \"Bruk posisjon …\" for å tilordne et notat til det angitte stedet.</string>
+    <string name="audionotes_location_not_defined">Sted å assosiere med notatet er ikke definert ennå. \"Bruk posisjon…\" for å tilordne et notat til det angitte stedet.</string>
     <string name="add_waypoint_dialog_title">Legg til rutepunkt i innspilt GPX-spor</string>
     <string name="voice_is_not_available_msg">Taleveiledning er ikke tilgjengelig, gå til \'Innstillinger\' → \'Navigeringsinnstillinger\' → \'Taleveiledning\' og velg eller last ned en språkpakke.</string>
     <string name="use_fast_recalculation_desc">For lange turer, beregn på nytt bare den første delen av ruten.</string>
@@ -2833,7 +2833,7 @@
     <string name="record_plugin_description">Dette programtillegget aktiverer funksjoner for å ta opp og lagre sporene dine ved å manuelt trykke på miniprogrammet for GPX-logging på kartskjermen, eller også for å automatisk logge alle dine navigeringsruter til en GPX-fil. 
 \n
 \nSpor som er tatt opp kan deles med dine venner eller brukes som OSM-bidrag. Idrettsutøvere kan bruke innspilte spor til å følge treningen sin. Noe grunnleggende sporingsanalyse kan utføres direkte i OsmAnd, som rundetider, gjennomsnittshastighet etc., og spor kan selvfølgelig også analyseres senere i spesielle tredjeparts analyseprogrammer.</string>
-    <string name="osmand_development_plugin_description">Dette programtillegget viser innstillinger for utvikling og feilrettingsfunksjoner, for testing eller simulering av veivisning, skjermtegningsytelse, eller stemmeanvisning. Disse innstillingene er ment for utviklere, og trengs ikke for vanlige brukere.</string>
+    <string name="osmand_development_plugin_description">Dette programtillegget viser innstillinger for utvikling og feilrettingsfunksjoner som testing eller simulering av ruteberegning, skjermopptegningsytelse eller talemeldinger. Disse innstillingene er ment for utviklere og trengs ikke for vanlige brukere.</string>
     <string name="osmand_extended_description_part2">GPS-navigering
 \n • Velg mellom frakoblet modus (ingen roaming-kostnader når du er utenlands) eller nettbasert modus (raskere)
 \n • Taleveiledning sving-for-sving leder deg langs veien (innspilt og syntetisert tale)
@@ -2941,17 +2941,17 @@
 \n De fleste landene i verden kan lastes ned.
 \n Få pålitelig navigering i ditt land - det være seg Frankrike, Tyskland, Mexico, Storbritannia, Spania, Nederland, USA, Russland, Brasil eller andre.</string>
     <string name="osmand_team">OsmAnd-laget</string>
-    <string name="plugin_touringview_descr">"Aktivering av denne visningen endrer OsmAnds kartstil til \"Turvisning, dette er et spesielt høydetaljskart for dem på reisefot og folk i transportbransjen. 
+    <string name="plugin_touringview_descr">Aktivering av denne visningen endrer kartstilen til \'Turvisning\', dette er en spesielt detaljert visning for reisende og yrkessjåfører.
 \n
-\nDenne visningen gir, uansett forstørrelsesnivå, høyest antall reisedetaljer tilgjengelig i kartdataen (i særdeleshet veier, småveier, stier  og orienteringsmerker). 
-\n 
-\nDet viser også alle typer veier, klart adskilt med fargemerking, som er nyttig når du kjører for eksempel store kjøretøy. 
+\nDenne visningen gir, uansett zoomnivå, det høyeste antall reisedetaljer tilgjengelig i kartdataene (i særdeleshet veier, småveier, stier og orienteringsmerker).
 \n
-\nDet gir også spesielle turvalg, som visning av sykkelveier eller fjellruter. 
-\n 
-\nMan trenger ikke å laste ned noe ekstra, visningen lages basert på standardkart. 
-\n 
-\nDenne visningen kan tilbakestilles enten ved å deaktivere den igjen her, eller å endre \"Kartstil\" under \"Sett opp kart\" man ønsker."</string>
+\nViser også alle typer veier klart adskilt med fargemerking, som er nyttig ved kjøring av f.eks. store kjøretøy.
+\n
+\nGir også spesielle turvalg som visning av sykkelruter eller fjellruter.
+\n
+\nMan trenger ikke laste ned noe ekstra, visningen lages basert på standardkart.
+\n
+\nVisningen kan tilbakestilles enten ved å deaktivere den igjen her, eller ved å endre \'Kartstil\' under \"Kartinnstilling\" som ønsket.</string>
     <string name="plugin_nautical_descr">Dette programtillegget beriker OsmAnds kart og navigasjonsprogram til også å tjene som sjøkart, for båt, seiling eller andre typer vannsport.
 \n
 \nDette spesielle karttillegget for OsmAnd gir alle sjømerker, for innom-, og utenskjærs bruk. Beskrivelsen av hvert av dem gir detaljer nok til å identifisere dem og deres mening (kategori, form, farge, sekvens, referanse, osv.).
@@ -2963,22 +2963,21 @@
     <string name="osmand_distance_planning_plugin_description">Dette programtillegget tilbyr et miniprogram for kartskjermen der du kan opprette stier ved å trykke på kartet, eller ved å endre eksisterende GPX-filer, for å planlegge en tur og måle avstanden mellom punkter. Resultatet kan lagres som en GPX-fil, som senere kan brukes for veiledning.</string>
     <string name="osm_editing_plugin_description">Via dette programtillegget kan OsmAnd brukes til å sende inn OSM-bidrag, som opprettelse eller endring av OSM-POI-objekter, åpning eller kommentering av OSM-notater, og bidrag til GPX-spor. OSM er et verdensomspennende kartprosjekt i offentlig eiendom. For detaljer, se https://openstreetmap.org. Aktiv deltagelse verdsettes, og bidrag kan gjøres direkte fra OsmAnd, hvis du angir din personlige OSM-innloggingsinfo i programmet.</string>
     <string name="osmand_extended_description_part3">Kart
-\n • Viser POI-er (interessepunkter) rundt deg
-\n • Orienterer kartet i fartsretning (eller etter kompass)
-\n • Viser din plassering og retningen du ser i
-\n • Del din plassering slik at dine venner kan finne deg
+\n • Viser interessepunkter rundt deg
+\n • Orienterer kartet etter bevegelsesretning (eller kompass)
+\n • Viser din posisjon og retningen du ser i
+\n • Del din posisjon slik at dine venner kan finne deg
 \n • Beholder dine viktigste steder i \"Favoritter\"
-\n • Tillater deg å velge hvordan du vil vise navn i kartet: På engelsk, lokale navn, eller fonetisk staving
-\n • Viser spesialiserte nettbaserte flis, satellittvisning (fra Bing), forskjellige overleggslag, som tur/navigasjon-GPX-spor og ytterligere lag med tilpassbar gjennomsiktighet
+\n • Lar deg velge hvordan du vil vise navn på kartet: På engelsk, lokale navn, eller fonetisk staving
+\n • Viser spesialiserte nettbaserte kartfliser, satellittvisning (fra Bing), forskjellige overlegg som GPX-spor til tur/navigering og ytterligere lag med tilpassbar gjennomsiktighet
 \n</string>
     <string name="osmand_plus_extended_description_part3">Kartvisning
 \n • Vis din posisjon og retning
-\n • Valgfri rotasjon av kartet mot kompass eller fartsretning
+\n • Eventuelt orienter kartet etter kompass eller bevegelsesretning
 \n • Lagre dine viktigste steder som favoritter
-\n • Vis POI-er (interessepunkter) rundt deg
-\n • Vis spesialiserte nettbaserte fil, satellittvisning (fra Bing), forskjellige overleggslag, som tur/navigasjons-GPX-spor og ytterligere lag med tilpassbar gjennomsiktighet
-\n • Valgfri visning av stedsnavn på Engelsk, lokal, eller fonetisk staving
-\n</string>
+\n • Vis interessepunkter rundt deg
+\n • Vis spesialiserte nettbaserte kartfliser, satellittvisning (fra Bing), forskjellige overlegg som GPX-spor til tur/navigering og ytterligere lag med tilpassbar gjennomsiktighet
+\n • Valgfri visning av stedsnavn på engelsk, lokalt språk, eller fonetisk staving</string>
     <string name="osmand_plus_extended_description_part4">Bruk OSM- og Wikipedia-data
 \n • Høykvalitetsinfo fra de beste samarbeidsprosjektene i verden
 \n • OSM-data tilgjengelig per land eller region
@@ -2990,9 +2989,9 @@
     <string name="osmand_plus_extended_description_part7">Bidra direkte til OSM
 \n • Rapporter datafeil
 \n • Last opp GPX-spor til OSM direkte fra programmet
-\n • Legg til POI-er og last dem opp direkte til OSM (eller senere hvis du ikke har nett)
-\n • Valgfri turopptaksmodus i bakgrunnen (mens enheten er i dvalemodus)
-\n OsmAnd er aktivt utviklet fri programvare. Alle kan bidra til programmet ved å rapportere feil, forbedre oversettelser, eller kode nye funksjoner. Ytterligere avhenger prosjektet av finansielle bidrag for å støtte koding og testing av ny funksjonalitet.
+\n • Legg til interessepunkter og last dem opp direkte til OSM (eller senere hvis uten Internett)
+\n • Valgfri turopptak også i bakgrunnsmodus (mens enheten er i dvalemodus)
+\n OsmAnd er aktivt utviklet programvare med åpen kildekode. Alle kan bidra til programmet ved å rapportere feil, forbedre oversettelser eller kode nye funksjoner. I tillegg avhenger prosjektet av finansielle bidrag for å støtte koding og testing av nye funksjoner.
 \n</string>
     <string name="hide_full_description">Skjul full beskrivelse</string>
     <string name="show_full_description">Vis full beskrivelse</string>
@@ -3028,5 +3027,5 @@
     <string name="coord_input_edit_point">Rediger punkt</string>
     <string name="coord_input_add_point">Legg til punkt</string>
     <string name="coord_input_save_as_track">Lagre som spor</string>
-    <string name="coord_input_save_as_track_descr">Du har lagt til %1$s punkter. Skriv inn navnet på filen og klikk \"Lagre\".</string>
+    <string name="coord_input_save_as_track_descr">Du har lagt til %1$s punkter. Skriv inn navnet på filen og trykk \"Lagre\".</string>
     </resources>

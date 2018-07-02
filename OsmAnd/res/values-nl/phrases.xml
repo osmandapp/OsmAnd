@@ -2803,4 +2803,58 @@
 
 	<string name="poi_social_facility_for_disabled">Gehandicapten</string>
 	<string name="poi_service_vehicle_muffler_yes">Geluiddemper</string>
+	<string name="poi_social_facility_assisted_living">Begeleid wonen</string>
+	<string name="poi_social_facility_shelter">Opvang</string>
+	<string name="poi_social_facility_workshop">Workshop</string>
+	<string name="poi_social_facility_day_care">Dagzorg</string>
+
+	<string name="poi_social_facility_for_senior">Senioren</string>
+	<string name="poi_social_facility_for_child">Kinderen</string>
+	<string name="poi_social_facility_for_mental_health">Patiënten met mentale beperkingen</string>
+	<string name="poi_social_facility_for_juvenile">Jeugdig</string>
+	<string name="poi_historic_civilization_ancient_roman">Beschaving: oude romeinen (753 v.Chr. – 284 n.Chr.)</string>
+	<string name="poi_animal_training_dog">Hond</string>
+	<string name="poi_animal_training_horse">Paard</string>
+
+	<string name="poi_horse_yes">Paarden toegestaan</string>
+	<string name="poi_horse_no">Paarden niet toegestaan</string>
+	<string name="poi_animal_yes">Dieren toegestaan</string>
+	<string name="poi_animal_no">Dieren niet toegestaan</string>
+
+	<string name="poi_microwave_oven_yes">Magnetron: ja</string>
+	<string name="poi_microwave_oven_no">Magnetron: nee</string>
+	<string name="poi_water_heater_yes">Waterkoker: ja</string>
+	<string name="poi_water_heater_no">Waterkoker: nee</string>
+
+	<string name="poi_parking_garage_boxes">Garageboxen</string>
+	<string name="poi_parking_carports">Carports</string>
+
+	<string name="poi_badminton">Badminton</string>
+	<string name="poi_judo">Judo</string>
+	<string name="poi_squash">Squash</string>
+	<string name="poi_socket_nema_14_30_yes">NEMA 14-30</string>
+	<string name="poi_socket_nema_14_50_yes">NEMA 14-50</string>
+	<string name="poi_socket_schuko_yes">Schuko</string>
+	<string name="poi_socket_bs1363_yes">BS 1363</string>
+	<string name="poi_socket_as3112_yes">AS/NZS 3112</string>
+
+	<string name="poi_socket_chademo_output_high">Hoog</string>
+	<string name="poi_socket_chademo_output_medium">Middel</string>
+	<string name="poi_socket_chademo_output_low">Laag</string>
+	<string name="poi_socket_type2_output_high">Hoog</string>
+	<string name="poi_socket_type2_output_medium">Middel</string>
+	<string name="poi_socket_type2_output_low">Laag</string>
+	<string name="poi_socket_type2_combo_output_high">Hoog</string>
+	<string name="poi_socket_type2_combo_output_medium">Middel</string>
+	<string name="poi_socket_type2_combo_output_low">Laag</string>
+	<string name="poi_socket_type3_output_high">Hoog</string>
+	<string name="poi_socket_type3_output_medium">Middel</string>
+	<string name="poi_socket_type3_output_low">Laag</string>
+	<string name="poi_socket_cee_blue_output_high">Hoog</string>
+	<string name="poi_socket_cee_blue_output_medium">Middel</string>
+	<string name="poi_socket_cee_blue_output_low">Laag</string>
+	<string name="poi_socket_schuko_output_high">Hoog</string>
+	<string name="poi_socket_schuko_output_medium">Middel</string>
+	<string name="poi_socket_schuko_output_low">Laag</string>
+
 	</resources>

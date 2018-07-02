@@ -130,7 +130,7 @@
 	<string name="shared_string_favorites">Favoritos</string>
 	<string name="shared_string_address">Endereço</string>
 	<string name="shared_string_add">Adicionar</string>
-	<string name="shared_string_add_to_favorites">Adicionar aos favoritos</string>
+	<string name="shared_string_add_to_favorites">Adicionar aos \'Favoritos\'</string>
 	<string name="shared_string_my_location">Minha posição</string>
 	<string name="shared_string_my_favorites">Meus favoritos</string>
 	<string name="shared_string_tracks">Minhas trilhas</string>
@@ -194,12 +194,12 @@
     <string name="rendering_attr_streetLighting_name">Iluminação pública</string>
     <string name="proxy_pref_title">Proxy</string>
     <string name="track_points">Pontos da trilha</string>
-	<string name="osmand_srtm_long_description_1000_chars">"Este complemento fornece curva de nível e camada de sombra de colinas (relevo) por cima do mapa padrão do OsmAnd. Esta funcionalidade será muito apreciada por atletas, viajantes e alguém interessado na estrutura de relevo da paisagem.
+	<string name="osmand_srtm_long_description_1000_chars">Este plugin fornece curvas de nível e camada de sombras de relevo por cima do mapa padrão do OsmAnd. Esta funcionalidade será muito apreciada por atletas, viajantes e alguém interessado na estrutura de relevo da paisagem. 
 \n
-\nOs dados globais (entre as latitudes 70° norte e 70° sul) são baseados em medições do SRTM (Shuttle Radar Topography Mission) e ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), um instrumento de imagens da Terra, o principal satélite do Sistema de Observação da Terra da NASA. ASTER é um esforço conjunto da NASA, do Ministério Japonês da Economia, Comércio e Indústria (METI) e do Sistema Espacial Japonês (J-spacesystems). "</string>
-	<string name="srtm_plugin_description">"Este complemento fornece camadas de curvas de nível e de sombras das colinas (relevo) por cima do mapa padrão do OsmAnd. Esta funcionalidade será muito apreciada por atletas, viajantes e alguém interessado na estrutura de relevo da paisagem.
-\n
-\nOs dados globais (entre as latitudes 70° norte e 70° sul) são baseados em medições do SRTM (Shuttle Radar Topography Mission) e ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), um instrumento de imagens da Terra, o principal satélite do Sistema de Observação da Terra da NASA. ASTER é um esforço conjunto da NASA, do Ministério Japonês da Economia, Comércio e Indústria (METI) e do Sistema Espacial Japonês (J-spacesystems). "</string>
+\nOs dados globais (entre as latitudes 70° norte e 70° sul) são baseados em medições do SRTM (Shuttle Radar Topography Mission) e ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), um instrumento de imagens Terra, o satélite principal do Sistema de Observação da Terra da NASA. ASTER é um esforço conjunto da NASA, do Ministério da Economia, Comércio e Indústria do Japão (METI) e do Sistema Espacial Japonês (J-spacesystems).</string>
+	<string name="srtm_plugin_description">Este plugin fornece curvas de nível e camada de sombras de relevo por cima do mapa padrão do OsmAnd. Esta funcionalidade será muito apreciada por atletas, viajantes e qualquer interessado na estrutura de relevo da paisagem. (Por favor, note que as curvas de nível e/ou dados de relevo são downloads adicionais separados disponíveis depois de ativar o plugin.)
+\n 
+\nOs dados globais (entre as latitudes 70° norte e 70° sul) são baseados em medições do SRTM (Shuttle Radar Topography Mission) e ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), um instrumento de imagens Terra, o satélite principal do Sistema de Observação da Terra da NASA. ASTER é um esforço conjunto da NASA, do Ministério da Economia, Comércio e Indústria do Japão (METI) e do Sistema Espacial Japonês (J-spacesystems).</string>
 	<string name="osmand_parking_plugin_description">O plugin de posição de estacionamento grava onde seu carro está estacionado e quanto tempo resta (se o estacionamento for de tempo limitado).
 \nVocê pode encontrar o seu lugar e tempo de estacionamento no painel de instrumentos e no widget do mapa. Pode ser adicionado um evento no calendário, se você quiser um lembrete.</string>
 	<string name="osm_editing_plugin_description">Este complemento do OsmAnd pode ser usado para fazer contribuições ao OSM como criar ou modificar POI, abertura ou comentários de erros do OSM e contribuir com arquivos GPX gravados. OSM é um projeto de mapeamento mundial dirigido pela comunidade e de domínio público. Para mais detalhes, consulte https://openstreetmap.org. Participação ativa é apreciada e as contribuições podem ser feitas diretamente do OsmAnd, se você especificar suas credenciais pessoais de OSM no app.</string>
@@ -270,7 +270,7 @@
     <string name="logged_as">Conectado como %1$s</string>
 	<string name="speed_limit_exceed">Tolerância do limite de velocidade</string>
 	<string name="speed_limit_exceed_message">Selecione a margem de tolerância de limite de velocidade, acima do qual você receberá um aviso de voz.</string>
-	<string name="fav_point_emoticons_message">O nome do favorito foi modificado para %1$s para facilitar a salvar corretamente a seqüência de caracteres com emoticons para um arquivo.</string>
+	<string name="fav_point_emoticons_message">O nome do Favorito foi modificado para %1$s para facilitar salvar corretamente a sequência de caracteres com emoticons para um arquivo.</string>
     <string name="speak_title">Anunciar…</string>
 	<string name="show_pedestrian_warnings">Faixas de pedestre</string>
     <string name="routing_attr_no_new_routing_description">Não use as regras de roteamento introduzidas na v1.9</string>
@@ -587,7 +587,7 @@
     <string name="index_name_italy">Europa - Itália</string>
     <string name="index_name_gb">Europa - Grã-Bretanha</string>
     <string name="calculate_osmand_route_without_internet">Calcular segmento de rota OsmAnd sem Internet</string>
-    <string name="keep_and_add_destination_point">Adicionar como ponto de destino</string>
+    <string name="keep_and_add_destination_point">Adicionar como destino seguinte</string>
     <string name="select_gpx">Selecionar GPX…</string>
     <string name="route_descr_select_destination">Selecionar destino</string>
     <string name="route_preferences">Preferências de rota</string>
@@ -686,7 +686,7 @@ Pôr do Sol: %2$s</string>
 	<string name="avoid_in_routing_descr">Evitar vias com pedágio, não-pavimentadas, balsas</string>
 	<string name="bg_service_sleep_mode_off">Ativar\n modo segundo plano</string>
 	<string name="show_cameras">Radares</string>
-	<string name="show_traffic_warnings">Moderadores de tráfego</string>
+	<string name="show_traffic_warnings">Alertas de trânsito</string>
 	<string name="destination_point">Destino %1$s</string>
     <string name="context_menu_item_destination_point">Definir como destino</string>
     <string name="please_select_address">Selecionar primeiro a cidade ou rua</string>
@@ -1591,7 +1591,7 @@ Pôr do Sol: %2$s</string>
 	<string name="navigate_point_top_text">Insira a latitude e longitude no formato selecionado (D - graus, M - minutos, S - segundos)</string>
 	<string name="navigate_point_latitude">Latitude</string>
 	<string name="navigate_point_longitude">Longitude</string>
-	<string name="navigate_point_format_D">DDD.DD</string>
+	<string name="navigate_point_format_D">GGG.GG</string>
 	<string name="navigate_point_format_DM">DDD MM.MM</string>
 	<string name="navigate_point_format_DMS">DDD MM SS.SS</string>
 	<string name="search_address_top_text">Escolher endereço</string>
@@ -1775,7 +1775,7 @@ Pôr do Sol: %2$s</string>
 	<string name="building_number">Número de edifício</string>
 	<string name="next_proceed">Próximo</string>
 	<string name="opening_at">Abre às</string>
-	<string name="closing_at">Fecha em</string>
+	<string name="closing_at">Fecha às</string>
 <string name="av_locations_descr">Arquivo GPX com notas de posição.</string>
     <string name="av_locations">Posições</string>
     
@@ -1877,7 +1877,7 @@ Pôr do Sol: %2$s</string>
     <string name="shared_string_navigation">Navegação</string>
     <string name="osmand_running_in_background">Rodando em segundo plano</string>
     <string name="lang_fy">Frisão</string>
-    <string name="favourites_edit_dialog_title">Informação do favorito</string>
+    <string name="favourites_edit_dialog_title">Informação do Favorito</string>
     <string name="simulate_your_location_stop_descr">Parar de simular sua posição.</string>
     <string name="simulate_your_location_descr">Simular a sua posição usando uma rota calculada ou uma trilha GPX gravada.</string>
     <string name="rendering_attr_currentTrackColor_description">Cor do GPX</string>
@@ -2008,7 +2008,7 @@ Pôr do Sol: %2$s</string>
     <string name="find_parking">Achar estacionamento</string>
     <string name="show_polygons">Mostrar polígonos de áreas</string>
     
-    <string name="add_points_to_map_markers_q">Você quer adicionar todos os pontos aos marcadores de mapa?</string>
+    <string name="add_points_to_map_markers_q">Adicionar todos os pontos como marcadores de mapa?</string>
     <string name="shared_string_add_to_map_markers">Adicionar aos marcadores de mapa</string>
     <string name="select_map_markers">Selecionar marcadores de mapa</string>
     <string name="shared_string_reverse_order">Ordem inversa</string>
@@ -2054,7 +2054,7 @@ Pôr do Sol: %2$s</string>
     <string name="skip_map_downloading_desc">Você não possui mapas offlines. Você deve escolher um mapa da lista ou baixar mapas mais tarde pelo Menu - %1$s.</string>
     <string name="search_another_country">Selecione um outro local</string>
     <string name="search_map">Procurando mapas…</string>
-    <string name="first_usage_wizard_desc">Deixar OsmAnd determinar o seu local e sugerir mapas da região para baixar.</string>
+    <string name="first_usage_wizard_desc">Deixe o OsmAnd determinar o seu local e sugerir mapas da região para baixar.</string>
     <string name="location_not_found">Local não encontrado</string>
     <string name="no_inet_connection">Sem conexão à Internet</string>
     <string name="no_inet_connection_desc_map">É necessário baixar os mapas.</string>
@@ -2067,7 +2067,7 @@ Pôr do Sol: %2$s</string>
     <string name="no_update_info">Não mostrar atualizações</string>
     <string name="update_all_maps_now">Atualizar todos os mapas agora?</string>
     <string name="clear_tile_data">Limpar todos os títulos</string>
-    <string name="replace_favorite_confirmation">Você tem certeza que deseja substituir seu favorito %1$s?</string>
+    <string name="replace_favorite_confirmation">Você tem certeza que deseja substituir o Favorito %1$s?</string>
     <string name="shared_string_change">Mudar</string>
     <string name="coords_search">Busca de coordenadas</string>
     <string name="advanced_coords_search">Busca avançada de coordenadas</string>
@@ -2111,7 +2111,7 @@ Pôr do Sol: %2$s</string>
     <string name="total_distance">Distância total</string>
     <string name="shared_string_slope">Inclinação</string>
     <string name="open_street_map_login_and_pass">Usuário e senha do OpenStreetMap</string>
-    <string name="osn_modify_dialog_error">Ocorreu exceção: a anotação não foi modificada</string>
+    <string name="osn_modify_dialog_error">Não foi possível modificar a nota</string>
     <string name="osn_modify_dialog_title">Modificar anotação</string>
     <string name="context_menu_item_modify_note">Modificar anotação do OSM</string>
     <string name="make_round_trip_descr">Adicionar cópia do ponto de partida como destino.</string>
@@ -2119,28 +2119,28 @@ Pôr do Sol: %2$s</string>
     <string name="shared_string_markers">Marcações</string>
     <string name="coordinates_format">Formato das coordenadas</string>
     <string name="use_system_keyboard">Usar teclado do sistema</string>
-    <string name="fast_coordinates_input_descr">Escolha o formato de inserção de coordenadas. Você sempre pode alterá-la tocando em Opções.</string>
+    <string name="fast_coordinates_input_descr">Escolha o formato de inserção de coordenadas. Você sempre pode alterá-la tocando em \'Opções\'.</string>
     <string name="fast_coordinates_input">Inserção de coordenadas rápida</string>
     <string name="use_location">Usar posição</string>
-    <string name="add_location_as_first_point_descr">Adicione sua posição como ponto de partida para planejar uma rota perfeita.</string>
+    <string name="add_location_as_first_point_descr">Adicione sua posição como ponto de partida para planejar a rota perfeita.</string>
     <string name="my_location">Minha posição</string>
     <string name="shared_string_finish">Terminar</string>
     <string name="plan_route">Planejar rota</string>
     <string name="shared_string_sort">Classificar</string>
     <string name="coordinate_input">Inserção de coordenada</string>
     <string name="is_saved">está salvo</string>
-    <string name="marker_save_as_track_descr">Exporte suas marcações para um arquivo que você pode especificar aqui:</string>
-    <string name="marker_save_as_track">Salvar como trilha</string>
+    <string name="marker_save_as_track_descr">Exporte seus marcadores para o seguinte arquivo GPX:</string>
+    <string name="marker_save_as_track">Salvar como arquivo GPX</string>
     <string name="move_to_history">Mover para o histórico</string>
-    <string name="group_will_be_removed_after_restart">O grupo será excluído na próxima vez que reiniciar o aplicativo.</string>
+    <string name="group_will_be_removed_after_restart">O grupo será excluído na próxima vez em que reiniciar o aplicativo.</string>
     <string name="show_arrows_on_the_map">Mostrar setas no mapa</string>
-    <string name="remove_from_map_markers">Excluir das Marcações de Mapa</string>
+    <string name="remove_from_map_markers">Excluir dos marcadores de mapa</string>
     <string name="descendingly">decrescente</string>
     <string name="ascendingly">ascendente</string>
     <string name="date_added">Data adicionada</string>
     <string name="order_by">Ordenar por:</string>
     <string name="marker_show_distance_descr">Selecionar como indicar distância e orientação para marcadores de mapa na tela do mapa:</string>
-    <string name="map_orientation_change_in_accordance_with_speed_descr">Selecione a baixo em qual velocidade a orientação do mapa alterna de \'Na direção do movimento\' para \'Pela bússola\'.</string>
+    <string name="map_orientation_change_in_accordance_with_speed_descr">Selecione a baixo em qual velocidade a orientação do mapa muda de \'Na direção do movimento\' para \'Pela bússola\'.</string>
     <string name="all_markers_moved_to_history">Todas as marcações de mapa foram movidas para o histórico</string>
     <string name="marker_moved_to_history">O marcador de mapa foi movido para o histórico</string>
     <string name="marker_moved_to_active">O marcador de mapa foi movido para ativo</string>
@@ -2155,7 +2155,7 @@ Pôr do Sol: %2$s</string>
     <string name="move_all_to_history">Mover tudo para o histórico</string>
     <string name="show_direction">Indicação de distância</string>
     <string name="sort_by">Classificar por</string>
-    <string name="do_not_use_animations">Não usar animações</string>
+    <string name="do_not_use_animations">Sem animações</string>
     <string name="do_not_use_animations_descr">Desabilitar animações no aplicativo.</string>
     <string name="keep_showing_on_map">Manter mostrando no aplicativo</string>
     <string name="exit_without_saving">Sair sem salvar?</string>
@@ -2168,7 +2168,7 @@ Pôr do Sol: %2$s</string>
     <string name="add_point_after">Adicionar ponto após</string>
     <string name="shared_string_options">Opções</string>
     <string name="measurement_tool_snap_to_road_descr">OsmAnd irá conectar os pontos com rotas para o perfil selecionado.</string>
-    <string name="measurement_tool_save_as_new_track_descr">Você pode salvar os pontos tanto como pontos da rota quanto como uma linha.</string>
+    <string name="measurement_tool_save_as_new_track_descr">Salve os pontos ou como pontos da rota ou como uma linha.</string>
     <string name="choose_navigation_type">Selecionar perfil de navegação</string>
     <string name="none_point_error">Favor adicionar ao menos um ponto.</string>
     <string name="enter_gpx_name">Nome do arquivo GPX:</string>
@@ -2180,11 +2180,11 @@ Pôr do Sol: %2$s</string>
     <string name="quick_action_start_stop_navigation">Iniciar/parar navegação</string>
     <string name="quick_action_start_stop_navigation_descr">Toque neste botão para iniciar ou parar a navegação.</string>
     <string name="store_tracks_in_monthly_directories">Armazenar trilhas gravadas em pastas mensais</string>
-    <string name="store_tracks_in_monthly_directories_descrp">Armazenar trilhas gravadas em subpastas por mês gravado (como 2017-01).</string>
+    <string name="store_tracks_in_monthly_directories_descrp">Armazenar trilhas gravadas em subpastas por mês (ex.: 2018-01).</string>
     <string name="shared_string_reset">Redefinir</string>
     <string name="shared_string_reload">Recarregar</string>
     <string name="mapillary_menu_descr_tile_cache">Recarregar ladrilhos para visualizar dados atualizados.</string>
-    <string name="wrong_user_name">Nome de usuário errado!</string>
+    <string name="wrong_user_name">Nome de usuário errado</string>
     <string name="shared_string_to">Para</string>
     <string name="mapillary_menu_date_from">De</string>
     <string name="mapillary_menu_descr_dates">Ver somente imagens adicionadas</string>
@@ -2206,25 +2206,25 @@ Pôr do Sol: %2$s</string>
     <string name="no_photos_descr">Não temos fotos para este local.</string>
     <string name="mapillary_action_descr">Contribuir com suas próprias vistas de rua deste local através do Mapillary.</string>
     <string name="mapillary_widget">Ferramenta Mapillary</string>
-    <string name="mapillary_widget_descr">Permite que você contribua rapidamente ao Mapillary.</string>
+    <string name="mapillary_widget_descr">Permite contribuições rápidas ao Mapillary.</string>
     <string name="mapillary_descr">Fotos ao nível da rua, online, para todos. Descobrir lugares, colaborar, capturar o mundo.</string>
     <string name="mapillary">Mapillary</string>
     <string name="plugin_mapillary_descr">Fotos ao nível da rua para todos. Descubra lugares, colabore, capture o mundo.</string>
-    <string name="private_access_routing_req">Seu destino está localizado em uma área de acesso privado. Você quer permitir acesso às estradas privadas para esta viagem?</string>
+    <string name="private_access_routing_req">Seu destino está localizado numa área de acesso privado. Permitir acesso às vias privadas para esta viagem?</string>
     <string name="restart_search">Reiniciar pesquisa</string>
     <string name="increase_search_radius">Aumentar o raio de busca</string>
-    <string name="nothing_found">Nada encontrado :(</string>
+    <string name="nothing_found">Nada encontrado</string>
     <string name="nothing_found_descr">Modifique o texto da pesquisa ou aumente o raio de busca.</string>
     <string name="quick_action_showhide_osmbugs_title">Mostrar/ocultar notas OSM</string>
     <string name="quick_action_osmbugs_show">Mostrar Anotações do OSM</string>
     <string name="quick_action_osmbugs_hide">Ocultar notas OSM</string>
-    <string name="quick_action_showhide_osmbugs_descr">Tocar neste botão de ação mostra ou oculta as notas OSM no mapa.</string>
+    <string name="quick_action_showhide_osmbugs_descr">Tocar neste botão de ação mostra ou oculta as Notas OSM no mapa.</string>
     <string name="sorted_by_distance">Classificado por distância</string>
-    <string name="search_favorites">Pesquisar favoritos</string>
-    <string name="hillshade_menu_download_descr">Para ver o sombreamento do relevo no mapa, você precisa baixar a camada de mapa de sombreamento de relevo desta região.</string>
-    <string name="hillshade_purchase_header">Para ver o sombreamento de relevo no mapa, você precisa comprar e instalar o plugin de Curvas de Nível</string>
-    <string name="hide_from_zoom_level">Ocultar deste nível de ampliação</string>
-    <string name="srtm_menu_download_descr">Para ver as curvas de nível no mapa, você precisa baixar o mapa de curvas de nível desta região.</string>
+    <string name="search_favorites">Pesquisar Favoritos</string>
+    <string name="hillshade_menu_download_descr">Para ver as sombras de relevo no mapa, baixe a camada de sombras de relevo desta região.</string>
+    <string name="hillshade_purchase_header">Para ver o sombreamento de relevo no mapa, você precisa comprar e instalar o plugin \'Curvas de Nível\'</string>
+    <string name="hide_from_zoom_level">Ocultar a partir do nível de zoom</string>
+    <string name="srtm_menu_download_descr">Baixe o mapa \'Curvas de nível\' para usar nesta região.</string>
     <string name="shared_string_plugin">Complemento</string>
     <string name="srtm_purchase_header">Para ver as curvas de nível no mapa, você precisa comprar e instalar o plugin \'Curvas de Nível\'</string>
     <string name="srtm_color_scheme">Esquema de cores</string>
@@ -2235,15 +2235,15 @@ Pôr do Sol: %2$s</string>
     <string name="quick_action_show_navigation_finish_dialog">Mostrar diálogo \'Navegação finalizada\'</string>
     <string name="mapillary_menu_title_tile_cache">Cache de quadrícula</string>
     <string name="map_widget_ruler_control">Régua de raio</string>
-    <string name="show_from_zoom_level">Mostrar do nível de ampliação</string>
+    <string name="show_from_zoom_level">Exibir a partir do nível de zoom</string>
     <string name="routing_attr_allow_private_name">Permitir acesso privado</string>
     <string name="routing_attr_allow_private_description">Permitir acesso a áreas privadas.</string>
-    <string name="display_zoom_level">Mostrar nível de ampliação: %1$s</string>
+    <string name="display_zoom_level">Nível de zoom mín.: %1$s</string>
     <string name="favorite_group_name">Nome do grupo</string>
     <string name="change_color">Alterar cor</string>
     <string name="edit_name">Editar nome</string>
     <string name="animate_my_location">Animar Minha Posição</string>
-    <string name="animate_my_location_desc">Ativar animação de deslizamento de mapa da Minha Posição durante a navegação.</string>
+    <string name="animate_my_location_desc">Ativar animação de deslizamento de mapa da \'Minha Posição\' durante a navegação.</string>
     <string name="shared_string_overview">Visão geral</string>
     <string name="select_street">Selecionar rua</string>
     <string name="shared_string_in_name">em %1$s</string>
@@ -2289,21 +2289,21 @@ Pôr do Sol: %2$s</string>
     <string name="looking_for_tracks_with_waypoints">Procurando trilhas com pontos de passagem</string>
     <string name="shared_string_more_without_dots">Mais</string>
     <string name="appearance_on_the_map">Aparência no mapa</string>
-    <string name="add_track_to_markers_descr">Pontos de passagem podem ser adicionados a marcadores selecionando uma dessas trilhas que os tem.</string>
-    <string name="add_favourites_group_to_markers_descr">Selecione uma categoria favorita para adicionar aos marcadores.</string>
+    <string name="add_track_to_markers_descr">Selecione uma trilha para adicionar seus pontos de passagem aos marcadores.</string>
+    <string name="add_favourites_group_to_markers_descr">Selecione uma categoria dos Favoritos para adicionar aos marcadores.</string>
     <string name="shared_string_gpx_waypoints">Pontos de passagem de trilhas</string>
     <string name="favourites_group">Categoria favoritos</string>
     <string name="add_group">Adicionar um grupo</string>
-    <string name="add_group_descr">Você pode importar grupos dos favoritos ou pontos de passagem de trilhas.</string>
+    <string name="add_group_descr">Importar grupos dos Favoritos ou pontos de passagem de trilhas.</string>
     <string name="empty_state_markers_active">Crie marcadores de mapa!</string>
     <string name="empty_state_markers_active_desc">Toque longo ou rápido em \'Lugares\', e em seguida toque no botão de bandeira.</string>
     <string name="empty_state_markers_groups">Importar grupos</string>
-    <string name="empty_state_markers_groups_desc">Você pode importar grupos de favoritos ou pontos de passagem de trilhas como marcadores.</string>
+    <string name="empty_state_markers_groups_desc">Importar grupos de Favoritos ou pontos de passagem de trilhas como marcadores.</string>
     <string name="empty_state_markers_history_desc">Marcadores marcados como visitados aparecerão nesta tela.</string>
     <string name="shared_string_two">Dois</string>
     <string name="shared_string_one">Um</string>
-    <string name="show_guide_line_descr">Exibir as linhas de guia desde a sua posição até os locais dos marcadores ativos.</string>
-    <string name="show_arrows_descr">Exibir uma ou duas setas indicando a direção para os marcadores ativos.</string>
+    <string name="show_guide_line_descr">Mostrar linha direcional desde a sua posição até os locais dos marcadores ativos.</string>
+    <string name="show_arrows_descr">Mostrar uma ou duas setas indicando a direção para os marcadores ativos.</string>
     <string name="distance_indication_descr">Escolher como exibir a distância para os marcadores ativos.</string>
     <string name="active_markers_descr">Escolha o número de indicadores de direção a exibir.</string>
     <string name="digits_quantity">Número de casas decimais</string>
@@ -2318,7 +2318,7 @@ Pôr do Sol: %2$s</string>
     <string name="tap_on_map_to_hide_interface_descr">Um toque no mapa mostra/oculta os botões de controle e widgets.</string>
     <string name="tap_on_map_to_hide_interface">Modo tela cheia</string>
     <string name="mark_passed">Marcador visitado</string>
-    <string name="import_gpx_file_description">pode ser importado como pontos favoritos, ou como arquivo de trilha.</string>
+    <string name="import_gpx_file_description">pode ser importado como Favoritos ou arquivo GPX.</string>
     <string name="import_as_gpx">Importar como arquivo GPX</string>
     <string name="import_as_favorites">Importar como Favoritos</string>
     <string name="import_file">Importar arquivo</string>
@@ -2328,7 +2328,7 @@ Pôr do Sol: %2$s</string>
     <string name="shared_string_road">Via</string>
     <string name="round_trip">Ida e volta</string>
     <string name="plan_route_no_markers_toast">Você precisa adicionar ao menos um marcador para usar esta função.</string>
-    <string name="show_guide_line">Mostrar linhas de guia</string>
+    <string name="show_guide_line">Mostrar linhas direcionais</string>
     <string name="no_overlay">Sem camada superior</string>
     <string name="no_underlay">Sem camada inferior</string>
     <string name="subscribe_email_error">Erro</string>
@@ -2398,8 +2398,8 @@ Pôr do Sol: %2$s</string>
     <string name="upload_poi">Subir POI</string>
     <string name="route_calculation">Cálculo da rota</string>
     <string name="gpx_no_tracks_title">Você não tem trilhas ainda</string>
-    <string name="gpx_no_tracks_title_folder">Você pode também adicionar trilhas para a pasta</string>
-    <string name="gpx_add_track">Adicionar trilha</string>
+    <string name="gpx_no_tracks_title_folder">Você pode também adicionar arquivos GPX na pasta</string>
+    <string name="gpx_add_track">Adicionar…</string>
     <string name="gpx_appearance">Aparência</string>
     
     
@@ -2427,7 +2427,7 @@ Pôr do Sol: %2$s</string>
     <string name="translit_name_if_miss">Transliterar se o nome %1$s for ausente</string>
     <string name="translit_names">Transliterar nomes</string>
     <string name="import_track_desc">Arquivo %1$s não possui pontos de passagem, importe-o como uma trilha?</string>
-    <string name="add_segment_to_the_track">Adicionar a uma trilha GPX</string>
+    <string name="add_segment_to_the_track">Adicionar a um arquivo GPX</string>
 <string name="empty_state_av_notes_desc">Adicionar nota de áudio, vídeo ou foto para cada ponto no mapa, usando o widget ou o menu de contexto.</string>
     <string name="quick_action_add_destination_desc">Tocar no botão de ação adicionará um destino no local do centro da tela. O destino anteriormente definido se torna o último destino intermediário.</string>
     <string name="quick_action_replace_destination_desc">Tocar no botão de ação substituirá o destino com o local do centro da tela.</string>
@@ -2701,8 +2701,8 @@ Pôr do Sol: %2$s</string>
 \n• Oriente Médio: **
 \n• África: **
 \n• Antártida: *
-\nA maioria dos países ao redor do globo disponível como downloads!
-\nDo Afeganistão ao Zimbabué, da Austrália aos Estados Unidos. Argentina, Brasil, Canadá, França, Alemanha, México, Reino Unido, Espanha,…</string>
+\nA maioria dos países ao redor do globo disponível como downloads! 
+\nDo Afeganistão ao Zimbabue, da Austrália aos Estados Unidos. Argentina, Brasil, Canadá, França, Alemanha, México, Reino Unido, Espanha, …</string>
     
     <string name="lang_lo">Laociano</string>
     <string name="show_closed_notes">Mostrar notas encerradas</string>
@@ -2744,14 +2744,14 @@ Pôr do Sol: %2$s</string>
 	<string name="south_abbreviation">S</string>
 	<string name="north_abbreviation">N</string>
 	<string name="optional_point_name">Nome do ponto opcional</string>
-    <string name="transport_nearby_routes_within">Rotas a menos de</string>
+    <string name="transport_nearby_routes_within">Rotas próximas a</string>
     <string name="transport_nearby_routes">Cerca de</string>
     <string name="enter_the_file_name">Digite o nome do arquivo.</string>
     <string name="map_import_error">Erro de importação de mapa</string>
     <string name="map_imported_successfully">Mapa importado</string>
     <string name="rendering_attr_whiteWaterSports_name">Esportes em corredeiras</string>
     <string name="make_as_start_point">Converter em ponto de partida</string>
-    <string name="select_waypoints_category_description">Você pode adicionar todos os pontos da trilha, ou selecione categorias separadas.</string>
+    <string name="select_waypoints_category_description">Adicione todos os pontos da trilha, ou selecione categorias separadas.</string>
     <string name="shared_string_total">Total</string>
     <string name="clear_all_intermediates">Limpar todos os pontos intermédios</string>
     <string name="group_deleted">Grupo excluído</string>
@@ -2762,7 +2762,13 @@ Pôr do Sol: %2$s</string>
     <string name="waypoints_removed_from_map_markers">Pontos de passagem removidos dos marcadores de mapa</string>
     <string name="shared_string_result">Resultado</string>
     
-    <string name="osmand_plus_extended_description_part2">Navegação • Funciona on-line (rápido) ou offline (sem custo de roaming quando estiver no exterior) • Orientação por voz passo-a-passo (vozes gravadas e sintetizadas) • Orientação de faixas opcional, exibição do nome da rua e tempo estimado de chegada • Suporta pontos intermediários do seu itinerário • Correção de rota automático sempre que você sair da rota • Busque lugares por endereço, pelo tipo (ex.: restaurante, hotel, posto de gasolina, museu), ou por coordenadas geográficas</string>
+    <string name="osmand_plus_extended_description_part2">Navegação
+\n• Funciona on-line (rápido) ou offline (sem custo de roaming quando estiver no exterior)
+\n• Orientação por voz passo-a-passo (vozes gravadas e sintetizadas)
+\n• Orientação de faixas opcional, exibição do nome da rua e tempo estimado de chegada
+\n• Suporta pontos intermediários do seu itinerário
+\n• Correção de rota automático sempre que você sair da rota
+\n• Busque lugares por endereço, pelo tipo (ex.: restaurante, hotel, posto de gasolina, museu), ou por coordenadas geográficas</string>
     <string name="osmand_plus_extended_description_part3">Visualização de mapa
 \n• Exiba sua posição e orientação
 \n• Opcionalmente alinhe a tela de acordo com a bússola ou a direção de seu movimento
@@ -2780,7 +2786,7 @@ Pôr do Sol: %2$s</string>
     <string name="article_removed">Artigo excluído</string>
     <string name="wikivoyage_search_hint">Pesquisar: país, cidade, estado</string>
     <string name="shared_string_read">Ler</string>
-    <string name="saved_articles">Artigos salvos</string>
+    <string name="saved_articles">Artigos marcados</string>
     <string name="shared_string_explore">Explorar</string>
     <string name="shared_string_contents">Conteúdos</string>
     <string name="index_item_world_wikivoyage">Artigos Wikivoyage mundiais</string>
@@ -2833,13 +2839,13 @@ Pôr do Sol: %2$s</string>
     <string name="shared_string_restart">Reiniciar app</string>
     <string name="purchase_cancelled_dialog_descr">Renove a assinatura para continuar a usar todos os recursos:</string>
 
-    <string name="maps_you_need_descr">Baseado nos artigos que você salvou, recomendamos você baixar os seguintes mapas:</string>
+    <string name="maps_you_need_descr">Baseado nos artigos que você marcou, recomendamos você baixar os seguintes mapas:</string>
     <string name="maps_you_need">Mapas que você precisa</string>
     <string name="travel_card_download_descr">Baixe guias de viagem Wikivoyage para ver os artigos sobre lugares ao redor do mundo sem uma conexão à Internet.</string>
-	<string name="welcome_to_open_beta_description">Travel baseia-se no Wikivoyage. Teste todos os recursos durante o teste beta aberto, de graça. Depois, Travel estará disponível para assinantes OsmAnd Unlimited e proprietários de OsmAnd+.</string>
+	<string name="welcome_to_open_beta_description">Os guias de viagem atualmente baseiam-se no Wikivoyage. Teste todos os recursos durante o teste beta aberto, de graça. Depois, os guias estarão disponíveis para assinantes OsmAnd Unlimited e proprietários do OsmAnd+.</string>
     
     <string name="download_wikipedia_description">Baixe artigos da Wikipédia por %1$s para lê-los offline.</string>
-    <string name="wiki_article_search_text">Procurando o artigo wiki necessário</string>
+    <string name="wiki_article_search_text">Procurando o artigo wiki correspondente</string>
     <string name="shared_string_bookmark">Marcador</string>
     <string name="hide_full_description">Ocultar descrição completa</string>
     <string name="show_full_description">Mostrar descrição completa</string>
@@ -2884,4 +2890,38 @@ Pôr do Sol: %2$s</string>
 \nA maioria dos países ao redor do globo é disponível para download!
 \nObtenha um navegador confiável em seu país - seja ele França, Alemanha, México, Reino Unido, Espanha, Holanda, EUA, Rússia, Brasil ou qualquer outro.</string>
     <string name="touring_view_render_descr">Estilo de elevado detalhe para fins de turismo. Inclui todas as opções de configuração de estilo padrão, além disso: exibe o máximo de detalhes possível, em particular todas as estradas, caminhos e outras maneiras de viajar. Distinção visual claro entre todos os tipos de caminhos diferentes, similar a muitos atlas turismo. Esquema de cores de alto contraste para uso ao ar livre, modo dia e noite.</string>
+    <string name="wikivoyage_download_pics_descr">Imagens do artigo podem ser baixadas para uso offline.
+\nSempre disponível em \'Explorar\' → \'Opções\'.</string>
+    <string name="osmand_extended_description_part2">Navegação GPS
+\n• Escolha entre modos off-line (sem tarifa de roaming quando estiver no exterior) ou on-line (mais rápido)
+\n• Orientação por voz passo-a-passo lhe guia ao longo do caminho (vozes gravadas e sintetizadas)
+\n• A rota se recalcula sempre que se desviar dela
+\n• Orientação de pista, nomes de ruas e tempo estimado de chegada ajudará ao longo do caminho
+\n• Para fazer sua viagem mais segura, modo dia/noite se alterna automaticamente
+\n• Visualize limites de velocidade e receba aviso se ultrapassá-los
+\n• Zoom do mapa se ajusta a sua velocidade
+\n• Pesquise destinos pelo endereço, tipo (p. ex.: estacionamento, restaurante, hotel, posto de gasolina, museu), ou coordenadas geográficas
+\n• Suporta pontos intermédios em seu itinerário
+\n• Grave ou carregue uma trilha GPX e siga-a
+\n</string>
+    <string name="osmand_extended_description_part3">Mapa
+\n• Exibe POIs (ponto de interesse) em torno de você
+\n• Ajusta o mapa na sua direção de movimento (ou bússola)
+\n• Mostra a sua posição e direção para onde está olhando
+\n• Compartilhe sua posição para que seus amigos possam encontrá-lo
+\n• Mantém seus lugares mais importantes em \'Favoritos\'
+\n• Permite-lhe escolher como exibir nomes no mapa: em inglês, local ou escrita fonética
+\n• Exibe mapas on-line especializados, vista de satélite (do Bing), camadas diferentes como trilhas GPX de navegação/turismo e camadas adicionais com transparência personalizável</string>
+    <string name="osmand_plus_extended_description_part1">OsmAnd+ (OSM Automated Navigation Directions) é um aplicativo de mapa e navegação com acesso a dados do OpenStreetMap (OSM) livre, em todo o mundo e alta qualidade.
+\nDesfrute da navegação visual ou por voz, exibindo POIs (pontos de interesse), criando e gerenciando trilhas GPX, usando informação de altitude e curvas de nível, escolher entre modos dirigir, andar de bicicleta e pedestres, editar o OSM e muito mais.
+\n
+\nOsmAnd+ é a versão paga do app. Ao comprá-lo, você apoiar o projeto, financia o desenvolvimento de novas funcionalidades e recebe as últimas atualizações.
+\n
+\nAlgumas das principais características:</string>
+    <string name="osmand_plus_extended_description_part7">Contribuia diretamente para o OSM
+\n• Avisar erros dados
+\n• Fazer upload de trilhas GPX para o OSM diretamente do app
+\n• Adicionar POIs e fazer o upload diretamente para OSM (ou mais tarde se off-line)
+\n• Gravação de viagem opcional também em modo background (enquanto o dispositivo está no modo sleep)
+\nOsmAnd é um software de código aberto desenvolvido ativamente. Todos podem contribuir para o app, reportando bugs, melhorando as traduções ou programando novas funcionalidades. Além disso, o projeto conta com as contribuições financeiras para financiar o desenvolvimento e testes de novas funcionalidades.</string>
     </resources>

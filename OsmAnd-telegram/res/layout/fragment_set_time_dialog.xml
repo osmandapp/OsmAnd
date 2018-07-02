@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="?attr/card_bg_color"
+	android:orientation="vertical">
+
+	<android.support.design.widget.AppBarLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:background="?attr/card_bg_color">
+
+		<net.osmand.telegram.ui.views.TextViewEx
+			android:layout_width="match_parent"
+			android:layout_height="@dimen/action_bar_height"
+			android:ellipsize="end"
+			android:gravity="center_vertical"
+			android:maxLines="1"
+			android:paddingLeft="@dimen/content_padding_standard"
+			android:paddingRight="@dimen/content_padding_standard"
+			android:text="@string/set_time"
+			android:textColor="@color/app_bar_title_light"
+			android:textSize="@dimen/title_text_size"
+			app:typeface="@string/font_roboto_mono_bold"/>
+
+		<TextView
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginBottom="@dimen/action_bar_descr_bottom_margin"
+			android:paddingLeft="@dimen/content_padding_standard"
+			android:paddingRight="@dimen/content_padding_standard"
+			android:text="@string/set_time_description"
+			android:textColor="?android:attr/textColorSecondary"
+			android:textSize="@dimen/descr_text_size"/>
+
+		<LinearLayout
+			android:id="@+id/time_for_all_row"
+			android:layout_width="match_parent"
+			android:layout_height="@dimen/action_bar_row_button_height"
+			android:background="?attr/selectableItemBackground"
+			android:gravity="center_vertical"
+			android:paddingLeft="@dimen/content_padding_standard"
+			android:paddingRight="@dimen/content_padding_standard">
+
+			<ImageView
+				android:id="@+id/time_for_all_icon"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginEnd="@dimen/content_padding_big"
+				android:layout_marginRight="@dimen/content_padding_big"
+				tools:src="@drawable/ic_action_time_span"
+				tools:tint="@color/ctrl_active_light"/>
+
+			<TextView
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_marginEnd="@dimen/content_padding_standard"
+				android:layout_marginRight="@dimen/content_padding_standard"
+				android:layout_weight="1"
+				android:ellipsize="end"
+				android:maxLines="1"
+				android:text="@string/visible_time_for_all"
+				android:textColor="?android:attr/textColorPrimary"
+				android:textSize="@dimen/descr_text_size"/>
+
+			<net.osmand.telegram.ui.views.TextViewEx
+				android:id="@+id/time_for_all_value"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:ellipsize="end"
+				android:maxLines="1"
+				android:textColor="?attr/ctrl_active_color"
+				android:textSize="@dimen/text_button_text_size"
+				app:typeface="@string/font_roboto_medium"
+				tools:text="1 hour"/>
+
+		</LinearLayout>
+
+	</android.support.design.widget.AppBarLayout>
+
+	<FrameLayout
+		android:layout_width="match_parent"
+		android:layout_height="0dp"
+		android:layout_weight="1">
+
+		<android.support.v7.widget.RecyclerView
+			android:id="@+id/recycler_view"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:clipToPadding="false"
+			android:paddingTop="9dp"/>
+
+		<ImageView
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_gravity="bottom"
+			android:scaleType="fitXY"
+			android:src="?attr/bottom_nav_shadow"/>
+
+	</FrameLayout>
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="@dimen/buttons_bottom_bar_height"
+		android:gravity="center_vertical"
+		android:paddingLeft="@dimen/content_padding_half"
+		android:paddingRight="@dimen/content_padding_half">
+
+		<include
+			layout="@layout/secondary_btn"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"/>
+
+		<View
+			android:layout_width="@dimen/content_padding_half"
+			android:layout_height="match_parent"/>
+
+		<include
+			layout="@layout/primary_btn"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"/>
+
+	</LinearLayout>
+
+</LinearLayout>

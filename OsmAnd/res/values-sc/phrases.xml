@@ -3880,4 +3880,7 @@
 
 	<string name="poi_outcrop">Afioramentu (bessida a pitzu) de roca</string>
 
+<string name="poi_payment_contactless_yes">Chene cuntatu (Contactless)</string>
+	<string name="poi_payment_contactless_no">Cartas chene cuntatu non atzetadas</string>
+
 </resources>

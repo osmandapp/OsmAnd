@@ -910,7 +910,7 @@
 	<string name="poi_theatre_genre_circus">Цирк</string>
 	<string name="poi_gallery">Художня галерея</string>
 	<string name="poi_dance_floor">Танцмайданчик</string>
-	<string name="poi_nightclub">Нічний клуб</string>
+	<string name="poi_nightclub">Нічний клуб;Диско</string>
 	<string name="poi_stripclub">Клуб з показом стриптизу</string>
 	<string name="poi_ski_resort">Гірськолижний курорт</string>
 	<string name="poi_beach_resort">Пляжний комплекс</string>
@@ -3379,7 +3379,7 @@
 
 <string name="poi_motorcycle_sales_yes">Продаж</string>
 	<string name="poi_motorcycle_sales_no">Продаж: немає</string>
-	<string name="poi_motorcycle_sales_yes_used">Продаж: є; також б/у</string>
+	<string name="poi_motorcycle_sales_yes_used">Продаж: є, також б/у</string>
 	<string name="poi_motorcycle_sales_used">Продаж: б/у</string>
 	<string name="poi_motorcycle_rental_yes">Оренда</string>
 	<string name="poi_motorcycle_rental_no">Оренда: немає</string>
@@ -3774,4 +3774,40 @@
 
 	<string name="poi_whitewater_rapid_name">Назва річкових порогів</string>
 
-</resources>
+<string name="poi_service_car">Автопослуги</string>
+	<string name="poi_glacier_type">Тип льодовика</string>
+	<string name="poi_checkpoint_type">Тип контрольного пункту</string>
+
+<string name="poi_outpost">Пункт видачі замовлень</string>
+
+	<string name="poi_barbecue_grill">Мангал: є</string>
+
+	<string name="poi_water_utility">Офіс водопостачання</string>
+
+	<string name="poi_amusement_arcade">Ігровий зал</string>
+	<string name="poi_adult_gaming_centre">Ігровий зал для дорослих</string>
+
+	<string name="poi_service_vehicle_car_repair_yes">Авторемонт</string>
+	<string name="poi_service_vehicle_oil_change_yes">Заміна мастила</string>
+	<string name="poi_service_vehicle_used_car_sales_yes">Продаж вживаних авто</string>
+	<string name="poi_service_vehicle_brakes_yes">Гальма</string>
+	<string name="poi_service_vehicle_new_car_sales_yes">Продаж нових авто</string>
+	<string name="poi_service_vehicle_diagnostics_yes">Діагностика</string>
+	<string name="poi_service_vehicle_car_parts_yes">Автозапчастини</string>
+	<string name="poi_service_vehicle_batteries_yes">Акумулятори</string>
+	<string name="poi_service_vehicle_air_conditioning_yes">Кондиціонери</string>
+	<string name="poi_service_vehicle_body_repair_yes">Ремонт кузова</string>
+	<string name="poi_service_vehicle_electrical_yes">Електрика</string>
+	<string name="poi_service_vehicle_wheels_yes">Колеса</string>
+	<string name="poi_service_vehicle_glass_yes">Скло</string>
+	<string name="poi_service_vehicle_truck_repair_yes">Ремонт вантажівок</string>
+	<string name="poi_service_vehicle_muffler_yes">Глушник</string>
+	<string name="poi_service_vehicle_alignment_yes">Розвал-сходження</string>
+	<string name="poi_service_vehicle_transmission_repair_yes">Ремонт трансмісії</string>
+	<string name="poi_service_vehicle_motor_yes">Двигун</string>
+	<string name="poi_service_vehicle_insurance_yes">Страхування</string>
+	<string name="poi_service_vehicle_tyres_yes">Шиномонтаж</string>
+
+	<string name="poi_via_ferrata_scale">Складність</string>
+
+	</resources>

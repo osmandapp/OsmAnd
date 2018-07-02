@@ -3871,4 +3871,7 @@
 
 	<string name="poi_outcrop">Rok-malfermejo</string>
 
+<string name="poi_payment_contactless_yes">senkontakta (alproksima)</string>
+	<string name="poi_payment_contactless_no">Senkontakta pagmaniero malakceptata</string>
+
 </resources>

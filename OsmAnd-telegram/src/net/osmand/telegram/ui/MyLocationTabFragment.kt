@@ -1,8 +1,6 @@
 package net.osmand.telegram.ui
 
 import android.animation.*
-import android.graphics.Bitmap
-import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
 import android.os.Build
 import android.os.Bundle
@@ -17,6 +15,7 @@ import net.osmand.telegram.R
 import net.osmand.telegram.TelegramApplication
 import net.osmand.telegram.helpers.TelegramHelper
 import net.osmand.telegram.helpers.TelegramHelper.TelegramListener
+import net.osmand.telegram.helpers.TelegramUiHelper
 import net.osmand.telegram.ui.MyLocationTabFragment.MyLocationListAdapter.ChatViewHolder
 import org.drinkless.td.libcore.telegram.TdApi
 
@@ -49,11 +48,18 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 
 	private val selectedChats = HashSet<Long>()
 
+	private var actionButtonsListener: ActionButtonsListener? = null
+
 	override fun onCreateView(
 		inflater: LayoutInflater,
 		container: ViewGroup?,
 		savedInstanceState: Bundle?
 	): View? {
+		val activity = activity
+		if (activity is ActionButtonsListener) {
+			actionButtonsListener = activity
+		}
+
 		textMarginSmall = resources.getDimensionPixelSize(R.dimen.content_padding_standard)
 		textMarginBig = resources.getDimensionPixelSize(R.dimen.my_location_text_sides_margin)
 		searchBoxHeight = resources.getDimensionPixelSize(R.dimen.search_box_height)
@@ -61,6 +67,9 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 
 		savedInstanceState?.apply {
 			selectedChats.addAll(getLongArray(SELECTED_CHATS_KEY).toSet())
+			if (selectedChats.isNotEmpty()) {
+				actionButtonsListener?.switchButtonsVisibility(true)
+			}
 		}
 
 		val mainView = inflater.inflate(R.layout.fragment_my_location_tab, container, false)
@@ -164,6 +173,18 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 	override fun onSendLiveLocationError(code: Int, message: String) {
 	}
 
+	fun onPrimaryBtnClick() {
+		activity?.supportFragmentManager?.also {
+			SetTimeDialogFragment.showInstance(it, selectedChats)
+		}
+	}
+
+	fun onSecondaryBtnClick() {
+		selectedChats.clear()
+		adapter.notifyDataSetChanged()
+		actionButtonsListener?.switchButtonsVisibility(false)
+	}
+
 	private fun adjustText() {
 		val gravity = if (appBarCollapsed) Gravity.START else Gravity.CENTER
 		val padding = if (appBarCollapsed) textMarginSmall else textMarginBig
@@ -195,23 +216,30 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 			searchBox.layoutParams = params
 		}
 
-		val animatorSet = AnimatorSet()
-		animatorSet.duration = 200
-		animatorSet.playTogether(cornerAnimator, marginAnimator)
-		if (Build.VERSION.SDK_INT >= 21) {
-			if (appBarCollapsed) {
-				animatorSet.addListener(object : AnimatorListenerAdapter() {
-					override fun onAnimationEnd(animation: Animator?) {
-						if (Build.VERSION.SDK_INT >= 21 && appBarCollapsed) {
-							appBarLayout.outlineProvider = appBarOutlineProvider
-						}
+		AnimatorSet().apply {
+			duration = 200
+			playTogether(cornerAnimator, marginAnimator)
+			addListener(object : AnimatorListenerAdapter() {
+				override fun onAnimationEnd(animation: Animator?) {
+					updateTitleTextColor()
+					if (appBarCollapsed && Build.VERSION.SDK_INT >= 21) {
+						appBarLayout.outlineProvider = appBarOutlineProvider
 					}
-				})
-			} else {
-				appBarLayout.outlineProvider = null
-			}
+				}
+			})
+			start()
 		}
-		animatorSet.start()
+
+		if (!appBarCollapsed && Build.VERSION.SDK_INT >= 21) {
+			appBarLayout.outlineProvider = null
+		}
+	}
+
+	private fun updateTitleTextColor() {
+		val color = if (appBarCollapsed) R.color.app_bar_title_light else R.color.ctrl_active_light
+		context?.also {
+			title.setTextColor(ContextCompat.getColor(it, color))
+		}
 	}
 
 	private fun updateList() {
@@ -244,20 +272,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 			val chat = chats[position]
 			val lastItem = position == itemCount - 1
 
-			var drawable: Drawable? = null
-			var bitmap: Bitmap? = null
-			val chatPhoto = chat.photo?.small
-			if (chatPhoto != null && chatPhoto.local.path.isNotEmpty()) {
-				bitmap = app.uiUtils.getCircleBitmap(chatPhoto.local.path)
-			}
-			if (bitmap == null) {
-				drawable = app.uiUtils.getThemedIcon(R.drawable.ic_group)
-			}
-			if (bitmap != null) {
-				holder.icon?.setImageBitmap(bitmap)
-			} else {
-				holder.icon?.setImageDrawable(drawable)
-			}
+			TelegramUiHelper.setupPhoto(app, holder.icon, chat.photo?.small?.local?.path)
 			holder.title?.text = chat.title
 			holder.description?.text = "Some description" // FIXME
 			holder.checkBox?.apply {
@@ -270,6 +285,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 					} else {
 						selectedChats.remove(chat.id)
 					}
+					actionButtonsListener?.switchButtonsVisibility(selectedChats.isNotEmpty())
 				}
 			}
 			holder.bottomShadow?.visibility = if (lastItem) View.VISIBLE else View.GONE
@@ -289,5 +305,9 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 			val checkBox: CheckBox? = view.findViewById(R.id.check_box)
 			val bottomShadow: View? = view.findViewById(R.id.bottom_shadow)
 		}
+	}
+
+	interface ActionButtonsListener {
+		fun switchButtonsVisibility(visible: Boolean)
 	}
 }

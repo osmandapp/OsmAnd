@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
@@ -36,23 +37,26 @@
 				android:layout_weight="1"
 				android:orientation="vertical">
 
-				<TextView
+				<net.osmand.telegram.ui.views.TextViewEx
 					android:id="@+id/title"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:ellipsize="end"
 					android:maxLines="1"
-					android:textAppearance="?attr/textAppearanceListItem"
-					android:textStyle="bold"
+					android:textColor="?android:textColorPrimary"
+					android:textSize="@dimen/list_item_title_text_size"
+					app:typeface="@string/font_roboto_regular"
 					tools:text="Share location"/>
 
-				<TextView
+				<net.osmand.telegram.ui.views.TextViewEx
 					android:id="@+id/description"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:ellipsize="end"
 					android:maxLines="1"
-					android:textAppearance="?attr/textAppearanceListItemSecondary"
+					android:textColor="?attr/android:textColorSecondary"
+					android:textSize="@dimen/list_item_description_text_size"
+					app:typeface="@string/font_roboto_regular"
 					tools:text="Live: 1 • All: 36"/>
 
 			</LinearLayout>
@@ -64,6 +68,25 @@
 				android:layout_marginEnd="@dimen/content_padding_standard"
 				android:layout_marginRight="@dimen/content_padding_standard"
 				android:visibility="gone"
+				tools:visibility="visible"/>
+
+			<net.osmand.telegram.ui.views.TextViewEx
+				android:id="@+id/text_in_area"
+				android:layout_width="wrap_content"
+				android:layout_height="@dimen/dialog_button_height"
+				android:layout_marginEnd="@dimen/image_button_padding"
+				android:layout_marginRight="@dimen/image_button_padding"
+				android:background="?attr/secondary_btn_bg"
+				android:ellipsize="end"
+				android:gravity="center"
+				android:maxLines="1"
+				android:paddingLeft="@dimen/image_button_padding"
+				android:paddingRight="@dimen/image_button_padding"
+				android:textColor="?attr/ctrl_active_color"
+				android:textSize="@dimen/text_button_text_size"
+				android:visibility="gone"
+				app:typeface="@string/font_roboto_medium"
+				tools:text="1 h"
 				tools:visibility="visible"/>
 
 		</LinearLayout>

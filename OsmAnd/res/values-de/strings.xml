@@ -2325,7 +2325,7 @@ Derzeit sind nur {2} MB verfügbar.</string>
     <string name="route_calculation">Routenberechnung</string>
     <string name="gpx_no_tracks_title">Sie haben noch keine GPX-Dateien</string>
     <string name="gpx_no_tracks_title_folder">GPX-Dateien können dem Ordner hinzugefügt werden</string>
-    <string name="gpx_add_track">GPX-Datei hinzufügen</string>
+    <string name="gpx_add_track">Weitere hinzufügen…</string>
     <string name="upload_poi">POI hochladen</string>
     <string name="route_roundabout_short">Nehmen Sie die %1$d Ausfahrt</string>
     <string name="search_map_hint">Suche Stadt oder Region</string>

@@ -3,10 +3,13 @@
 	<dimen name="content_padding_small">4dp</dimen>
 	<dimen name="content_padding_half">8dp</dimen>
 	<dimen name="content_padding_standard">16dp</dimen>
+	<dimen name="content_padding_big">24dp</dimen>
 
 	<dimen name="progress_bar_size_small">32dp</dimen>
 
-	<dimen name="action_bar_height">60dp</dimen>
+	<dimen name="action_bar_height">56dp</dimen>
+	<dimen name="action_bar_descr_bottom_margin">12dp</dimen>
+	<dimen name="action_bar_row_button_height">52dp</dimen>
 
 	<dimen name="dialog_padding_vertical">24dp</dimen>
 	<dimen name="dialog_padding_horizontal">60dp</dimen>
@@ -36,6 +39,8 @@
 
 	<dimen name="search_box_height">48dp</dimen>
 
+	<dimen name="buttons_bottom_bar_height">56dp</dimen>
+
 	<dimen name="text_button_letter_spacing" format="float">0.01</dimen>
 
 	<!-- Text sizes -->
@@ -44,6 +49,9 @@
 
 	<dimen name="title_text_size">18sp</dimen>
 	<dimen name="descr_text_size">16sp</dimen>
+
+	<dimen name="list_item_title_text_size">16sp</dimen>
+	<dimen name="list_item_description_text_size">12sp</dimen>
 
 	<dimen name="text_button_text_size">15sp</dimen>
 

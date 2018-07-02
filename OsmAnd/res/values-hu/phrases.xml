@@ -410,8 +410,8 @@
 	<string name="poi_office_administrative">Közigazgatási hivatal</string>
 	<string name="poi_customs">Vámhivatal</string>
 	<string name="poi_isolated_dwelling">Magányos lakóhely</string>
-	<string name="poi_suburb">Jelentős városrész</string>
-	<string name="poi_quarter">Városnegyed</string>
+	<string name="poi_suburb">Városrész</string>
+	<string name="poi_quarter">Kis városrész</string>
 	<string name="poi_neighbourhood">Környék</string>
 	<string name="poi_place_allotments">Kiskertes településrész</string>
 	<string name="poi_place_farm">Tanya</string>
@@ -3871,4 +3871,7 @@
 
 <string name="poi_appliance">Háztartásigép-bolt</string>
 
-	</resources>
+	<string name="poi_payment_contactless_yes">Érintés nélküli</string>
+	<string name="poi_payment_contactless_no">Érintés nélkülit nem fogad el</string>
+
+</resources>

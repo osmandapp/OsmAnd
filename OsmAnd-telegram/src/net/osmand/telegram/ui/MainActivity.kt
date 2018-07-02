@@ -17,6 +17,8 @@ import android.support.v7.widget.AppCompatTextView
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.SwitchCompat
 import android.view.*
+import android.widget.LinearLayout
+import android.widget.TextView
 import android.widget.Toast
 import net.osmand.PlatformUtil
 import net.osmand.telegram.R
@@ -24,6 +26,7 @@ import net.osmand.telegram.TelegramApplication
 import net.osmand.telegram.helpers.TelegramHelper
 import net.osmand.telegram.helpers.TelegramHelper.*
 import net.osmand.telegram.ui.LoginDialogFragment.LoginDialogType
+import net.osmand.telegram.ui.MyLocationTabFragment.ActionButtonsListener
 import net.osmand.telegram.ui.views.LockableViewPager
 import net.osmand.telegram.utils.AndroidUtils
 import org.drinkless.td.libcore.telegram.TdApi
@@ -38,7 +41,7 @@ private const val PROGRESS_MENU_ID = 2
 private const val MY_LOCATION_TAB_POS = 0
 private const val LIVE_NOW_TAB_POS = 1
 
-class MainActivity : AppCompatActivity(), TelegramListener {
+class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListener {
 
 	private val log = PlatformUtil.getLog(TelegramHelper::class.java)
 
@@ -54,6 +57,11 @@ class MainActivity : AppCompatActivity(), TelegramListener {
 
 	private val listeners: MutableList<WeakReference<TelegramListener>> = mutableListOf()
 
+	private var myLocationTabFragment: MyLocationTabFragment? = null
+
+	private lateinit var buttonsBar: LinearLayout
+	private lateinit var bottomNav: BottomNavigationView
+
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 		setContentView(R.layout.activity_main)
@@ -66,17 +74,34 @@ class MainActivity : AppCompatActivity(), TelegramListener {
 			adapter = ViewPagerAdapter(supportFragmentManager)
 		}
 
-		findViewById<BottomNavigationView>(R.id.bottom_navigation).setOnNavigationItemSelectedListener {
-			var pos = -1
-			when (it.itemId) {
-				R.id.action_my_location -> pos = MY_LOCATION_TAB_POS
-				R.id.action_live_now -> pos = LIVE_NOW_TAB_POS
+		bottomNav = findViewById<BottomNavigationView>(R.id.bottom_navigation).apply {
+			setOnNavigationItemSelectedListener {
+				var pos = -1
+				when (it.itemId) {
+					R.id.action_my_location -> pos = MY_LOCATION_TAB_POS
+					R.id.action_live_now -> pos = LIVE_NOW_TAB_POS
+				}
+				if (pos != -1 && pos != viewPager.currentItem) {
+					viewPager.currentItem = pos
+					return@setOnNavigationItemSelectedListener true
+				}
+				false
 			}
-			if (pos != -1 && pos != viewPager.currentItem) {
-				viewPager.currentItem = pos
-				return@setOnNavigationItemSelectedListener true
+		}
+
+		buttonsBar = findViewById<LinearLayout>(R.id.buttons_bar).apply {
+			findViewById<TextView>(R.id.primary_btn).apply {
+				text = getString(R.string.shared_string_continue)
+				setOnClickListener {
+					myLocationTabFragment?.onPrimaryBtnClick()
+				}
 			}
-			false
+			findViewById<TextView>(R.id.secondary_btn).apply {
+				text = getString(R.string.shared_string_cancel)
+				setOnClickListener {
+					myLocationTabFragment?.onSecondaryBtnClick()
+				}
+			}
 		}
 
 		if (!LoginDialogFragment.welcomeDialogShown) {
@@ -109,6 +134,9 @@ class MainActivity : AppCompatActivity(), TelegramListener {
 	override fun onAttachFragment(fragment: Fragment?) {
 		if (fragment is TelegramListener) {
 			listeners.add(WeakReference(fragment))
+		}
+		if (fragment is MyLocationTabFragment) {
+			myLocationTabFragment = fragment
 		}
 	}
 
@@ -204,6 +232,14 @@ class MainActivity : AppCompatActivity(), TelegramListener {
 		app.isInternetConnectionAvailable(true)
 		runOnUi {
 			listeners.forEach { it.get()?.onSendLiveLocationError(code, message) }
+		}
+	}
+
+	override fun switchButtonsVisibility(visible: Boolean) {
+		val buttonsVisibility = if (visible) View.VISIBLE else View.GONE
+		if (buttonsBar.visibility != buttonsVisibility) {
+			buttonsBar.visibility = buttonsVisibility
+			bottomNav.visibility = if (visible) View.GONE else View.VISIBLE
 		}
 	}
 

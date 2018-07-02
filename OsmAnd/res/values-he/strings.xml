@@ -1235,7 +1235,7 @@
     
     <string name="shared_string_pause">הפסקה</string>
     <string name="map_markers_other">סמנים אחרים</string>
-    <string name="gpx_add_track">הוספת קובץ GPX</string>
+    <string name="gpx_add_track">הוספת עוד…</string>
     <string name="gpx_no_tracks_title">עדיין אין לך קובצי GPX</string>
     <string name="rendering_value_dark_brown_name">חום כהה</string>
     <string name="rendering_value_light_brown_name">חום בהיר</string>
