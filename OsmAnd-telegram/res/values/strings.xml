@@ -1,4 +1,5 @@
 <resources>
+	<string name="shared_string_install">Install</string>
 	<string name="shared_string_share">Share</string>
 	<string name="shared_string_back">Back</string>
 	<string name="visible_time_for_all">Visible time for all</string>

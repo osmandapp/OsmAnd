@@ -391,8 +391,8 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 		override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
 			val builder = AlertDialog.Builder(requireContext())
 			builder.setView(R.layout.install_osmand_dialog)
-					.setNegativeButton("Cancel", null)
-					.setPositiveButton("Install") { _, _ ->
+					.setNegativeButton(R.string.shared_string_cancel, null)
+					.setPositiveButton(R.string.shared_string_install) { _, _ ->
 						val intent = Intent()
 						intent.data = Uri.parse("market://details?id=net.osmand.plus")
 						startActivity(intent)
