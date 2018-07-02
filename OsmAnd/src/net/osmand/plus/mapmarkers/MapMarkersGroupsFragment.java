@@ -17,6 +17,8 @@ import net.osmand.plus.mapmarkers.SelectionMarkersGroupBottomSheetDialogFragment
 import net.osmand.plus.mapmarkers.adapters.MapMarkerItemViewHolder;
 import net.osmand.plus.mapmarkers.adapters.MapMarkersGroupsAdapter;
 import net.osmand.plus.widgets.EmptyStateRecyclerView;
+import net.osmand.util.MapUtils;
+
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -44,14 +46,16 @@ public class MapMarkersGroupsFragment extends Fragment implements OsmAndCompassL
 	public static final String TAG = "MapMarkersGroupsFragment";
 
 	private MapMarkersGroupsAdapter adapter;
-	private boolean locationUpdateStarted;
 	private Paint backgroundPaint = new Paint();
 	private Paint iconPaint = new Paint();
 	private Paint textPaint = new Paint();
 	private Snackbar snackbar;
-	private boolean compassUpdateAllowed = true;
 	private View mainView;
 	private String groupIdToOpen;
+	private Location location;
+	private Float heading;
+	private boolean locationUpdateStarted;
+	private boolean compassUpdateAllowed = true;
 
 	@Nullable
 	@Override
@@ -435,12 +439,27 @@ public class MapMarkersGroupsFragment extends Fragment implements OsmAndCompassL
 
 	@Override
 	public void updateLocation(Location location) {
-		updateLocationUi();
+		boolean newLocation = this.location == null && location != null;
+		boolean locationChanged = this.location != null && location != null
+				&& this.location.getLatitude() != location.getLatitude()
+				&& this.location.getLongitude() != location.getLongitude();
+		if (newLocation || locationChanged) {
+			this.location = location;
+			updateLocationUi();
+		}
 	}
 
 	@Override
 	public void updateCompassValue(float value) {
-		updateLocationUi();
+		// 99 in next line used to one-time initialize arrows (with reference vs. fixed-north direction)
+		// on non-compass devices
+		float lastHeading = heading != null ? heading : 99;
+		heading = value;
+		if (Math.abs(MapUtils.degreesDiff(lastHeading, heading)) > 5) {
+			updateLocationUi();
+		} else {
+			heading = lastHeading;
+		}
 	}
 
 	private OsmandApplication getMyApplication() {
@@ -459,6 +478,9 @@ public class MapMarkersGroupsFragment extends Fragment implements OsmAndCompassL
 			mapActivity.getMyApplication().runInUIThread(new Runnable() {
 				@Override
 				public void run() {
+					if (location == null) {
+						location = mapActivity.getMyApplication().getLocationProvider().getLastKnownLocation();
+					}
 					adapter.notifyDataSetChanged();
 				}
 			});
