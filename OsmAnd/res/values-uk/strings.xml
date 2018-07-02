@@ -836,8 +836,8 @@
   <string name="osmand_parking_pm">PM</string>
   <string name="osmand_parking_am">AM</string>
   <string name="osmand_parking_position_name">Місце стоянки</string>
-  <string name="osmand_parking_plugin_description">Втулок „Місце стоянки“ дозволить вам запам’ятати, коли ви поставили автівку на стоянку та скільки часу залишилось, якщо стоянка обмежена часом. 
-\n
+  <string name="osmand_parking_plugin_description">Втулок „Місце стоянки“ дозволить вам занотувати, де ви поставили автівку на стоянку та скільки часу залишилось, якщо стоянка обмежена часом. 
+\n 
 \nВи можете знайти місце стоянки та час на панелі керування та на відповідному віджеті на мапі. Також він додає нагадування в календар, якщо ви бажаєте отримати нагадування.</string>
   <string name="osmand_parking_plugin_name">Місце стоянки</string>
   <string name="context_menu_item_add_parking_point">Відмітити місце стоянки</string>
@@ -916,7 +916,7 @@
     <string name="dropbox_plugin_name">Втулок Dropbox</string>
     
     <string name="intermediate_points_change_order">Змінити порядок</string>
-    <string name="srtm_paid_version_msg">Розгляньте, будь ласка, можливість придбання втулка «Ізолінії висот» на Маркеті, це підтримає його подальшу розробку.</string>
+    <string name="srtm_paid_version_msg">Розгляньте, будь ласка, можливість придбання втулка «Ізолінії висот» для підтримки його подальшої розробки.</string>
     <string name="srtm_paid_version_title">Втулок Ізолінії висот</string>
     <string name="av_def_action_video">Запис відео</string>
     <string name="av_def_action_audio">Запис аудіо</string>
@@ -2397,7 +2397,7 @@
     <string name="get_for">Отримати на %1$s</string>
     <string name="get_for_month">Отримати за %1$s на місяць</string>
     <string name="osm_live_banner_desc">Отримайте необмежені завантаження для мап, а також оновлення мап частіше ніж один раз на місяць: щотижня, щодня або щогодини.</string>
-    <string name="osmand_plus_banner_desc">Необмежений доступ до мап, оновлень й втулка Wikipedia.</string>
+    <string name="osmand_plus_banner_desc">Втулок для необмеженого доступу до мап, їх оновлень та отримання інформації з Wikipedia.</string>
     <string name="si_mi_meters">Милі, метри</string>
     <string name="skip_map_downloading">Пропустити звантаження мап</string>
     <string name="skip_map_downloading_desc">У вас немає звантажених мап. Ви можете вибрати мапу зі списку або звантажити її пізніше за допомогою меню — %1$s.</string>
@@ -2597,11 +2597,11 @@
     <string name="sorted_by_distance">Відсортоване за відстанню</string>
     <string name="search_favorites">Пошук у закладках</string>
     <string name="hillshade_menu_download_descr">Для того, щоб відобразити затінення рельєфу, Вам потрібно звантажити спеціальну мапу для цієї області.</string>
-    <string name="hillshade_purchase_header">Для того, щоб відобразити затінення рельєфу, Вам потрібно купити та встановити втулок</string>
+    <string name="hillshade_purchase_header">Для того, щоб показати затінення рельєфу, Вам потрібно купити та встановити втулок \'Contour Lines\'</string>
     <string name="hide_from_zoom_level">Приховати від рівня масштабування</string>
     <string name="srtm_menu_download_descr">Для того, щоб відобразити лінії контурів рельєфу, Вам потрібно звантажити спеціальну мапу для цієї області.</string>
     <string name="shared_string_plugin">Втулок</string>
-    <string name="srtm_purchase_header">Для того, щоб відобразити лінії контурів рельєфу, Вам потрібно купити і встановити втулок</string>
+    <string name="srtm_purchase_header">Для того, щоб показати лінії контурів рельєфу, Вам потрібно купити і встановити втулок \'Contour Lines\'</string>
     <string name="srtm_color_scheme">Схема кольорів</string>
     <string name="show_from_zoom_level">Відображення від рівня масштабування</string>
     <string name="routing_attr_allow_private_name">Дозволити приватний доступ</string>
@@ -3088,8 +3088,12 @@
     <string name="coord_input_add_point">Додати точку</string>
     <string name="coord_input_save_as_track">Зберегти як трек</string>
     <string name="quick_action_edit_actions">Редагувати дії</string>
-    <string name="get_osmand_live">Отримайте OsmAnd Live, аби розблокувати всі функції: щоденні оновлення карт з необмеженим завантаженням, всі платні та безкоштовні додатки, Вікіпедія, Вікімандри та багато іншого.</string>
+    <string name="get_osmand_live">Отримайте OsmAnd Live, аби розблокувати всі функції: щоденні оновлення мапи з необмеженим завантаженням, всі платні та безкоштовні втулки, Вікіпедія, Вікімандри та багато іншого.</string>
     <string name="shared_string_bookmark">Закладка</string>
     <string name="hide_full_description">Приховати повний опис</string>
     <string name="show_full_description">Показати повний опис</string>
+    <string name="coord_input_save_as_track_descr">Додано точок – %1$s. Введіть назву файлу та натисніть \"Зберегти\".</string>
+    <string name="error_notification_desc">Надішліть знімок екрану цього повідомлення на support@osmand.net</string>
+    <string name="unirs_render_descr">Змінені типові кольори для підвищення контрасту пішохідних та велодоріжок. Використовуються старі кольори Mapnik.</string>
+    <string name="paid_plugin">Платний втулок</string>
     </resources>
