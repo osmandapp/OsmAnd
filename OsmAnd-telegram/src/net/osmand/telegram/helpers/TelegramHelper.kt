@@ -21,7 +21,6 @@ class TelegramHelper private constructor() {
 	companion object {
 		private val log = PlatformUtil.getLog(TelegramHelper::class.java)
 		private const val CHATS_LIMIT = 100
-		private const val CHAT_LIVE_USERS_LIMIT = 100
 		private const val IGNORED_ERROR_CODE = 406
 		private const val UPDATE_LIVE_MESSAGES_INTERVAL_SEC = 30L
 		private const val MESSAGE_ACTIVE_TIME_SEC = 24 * 60 * 60 // 24 hours
@@ -93,36 +92,21 @@ class TelegramHelper private constructor() {
 		}
 	}
 
-	fun getChatTitles(): List<String> {
-		return chatTitles.keys().toList()
-	}
+	fun getChatTitles() = chatTitles.keys().toList()
 
-	fun getChat(id: Long): TdApi.Chat? {
-		return chats[id]
-	}
+	fun getChat(id: Long) = chats[id]
 
-	fun getUser(id: Int): TdApi.User? {
-		return users[id]
-	}
+	fun getUser(id: Int) = users[id]
 
 	fun getUserMessage(user: TdApi.User) = usersLocationMessages[user.id]
 
 	fun getMessageById(id: Long) = usersLocationMessages.values.firstOrNull { it.id == id }
 
 	fun getChatMessages(chatTitle: String): List<TdApi.Message> {
-		val res = mutableListOf<TdApi.Message>()
-		for (message in usersLocationMessages.values) {
-			val title = chats[message.chatId]?.title
-			if (title == chatTitle) {
-				res.add(message)
-			}
-		}
-		return res
+		return usersLocationMessages.values.filter { chats[it.chatId]?.title == chatTitle }
 	}
 
-	fun getMessages(): List<TdApi.Message> {
-		return usersLocationMessages.values.toList()
-	}
+	fun getMessages() = usersLocationMessages.values.toList()
 
 	fun getMessagesByChatIds(): Map<Long, List<TdApi.Message>> {
 		val res = mutableMapOf<Long, MutableList<TdApi.Message>>()
@@ -233,7 +217,6 @@ class TelegramHelper private constructor() {
 		} catch (e: Throwable) {
 			log.error("Failed to load tdlib", e)
 		}
-
 	}
 
 	fun init(): Boolean {
@@ -247,9 +230,7 @@ class TelegramHelper private constructor() {
 		}
 	}
 
-	fun isInit(): Boolean {
-		return client != null && haveAuthorization
-	}
+	fun isInit() = client != null && haveAuthorization
 
 	fun getUserPhotoPath(user: TdApi.User): String? {
 		return if (hasLocalUserPhoto(user)) {
@@ -269,12 +250,12 @@ class TelegramHelper private constructor() {
 		this.updateLiveMessagesExecutor = updateLiveMessagesExecutor
 		updateLiveMessagesExecutor.scheduleWithFixedDelay({
 			incomingMessagesListeners.forEach { it.updateLocationMessages() }
-		}, UPDATE_LIVE_MESSAGES_INTERVAL_SEC, UPDATE_LIVE_MESSAGES_INTERVAL_SEC, TimeUnit.SECONDS);
+		}, UPDATE_LIVE_MESSAGES_INTERVAL_SEC, UPDATE_LIVE_MESSAGES_INTERVAL_SEC, TimeUnit.SECONDS)
 	}
 
 	fun stopLiveMessagesUpdates() {
 		updateLiveMessagesExecutor?.shutdown()
-		updateLiveMessagesExecutor?.awaitTermination(1, TimeUnit.MINUTES);
+		updateLiveMessagesExecutor?.awaitTermination(1, TimeUnit.MINUTES)
 	}
 
 	private fun hasLocalUserPhoto(user: TdApi.User): Boolean {
