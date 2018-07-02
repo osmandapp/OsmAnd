@@ -573,20 +573,20 @@ class TelegramHelper private constructor() {
 		listener?.onTelegramStatusChanged(prevAuthState, newAuthState)
 	}
 
-	private fun isAppropriateMessage(message: TdApi.Message): Boolean {
-		if (message.isOutgoing || message.isChannelPost) {
+	private fun TdApi.Message.isAppropriate(): Boolean {
+		if (isOutgoing || isChannelPost) {
 			return false
 		}
-		val lastEdited = Math.max(message.date, message.editDate)
+		val lastEdited = Math.max(date, editDate)
 		if (TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis()) - lastEdited > MESSAGE_ACTIVE_TIME_SEC) {
 			return false
 		}
-		val content = message.content
+		val content = content
 		return when (content) {
 			is TdApi.MessageLocation -> true
 			is TdApi.MessageText -> {
 				if (content.text.text.startsWith("{")) {
-					if (users[message.senderUserId]?.username == OSMAND_BOT_USERNAME) {
+					if (users[senderUserId]?.username == OSMAND_BOT_USERNAME) {
 						return true
 					}
 				}
@@ -795,7 +795,7 @@ class TelegramHelper private constructor() {
 				TdApi.UpdateNewMessage.CONSTRUCTOR -> {
 					val updateNewMessage = obj as TdApi.UpdateNewMessage
 					val message = updateNewMessage.message
-					if (isAppropriateMessage(message)) {
+					if (message.isAppropriate()) {
 						usersLocationMessages[message.id] = message
 						val chatTitle = chats[message.chatId]?.title
 						if (chatTitle != null) {
