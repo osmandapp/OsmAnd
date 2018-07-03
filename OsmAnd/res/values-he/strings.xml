@@ -3060,4 +3060,5 @@
     <string name="coord_input_add_point">הוספת נקודה</string>
     <string name="coord_input_save_as_track">שמירה כמסלול</string>
     <string name="coord_input_save_as_track_descr">הוספת %1$s נקודות. נא להקליד שם קובץ וללחוץ על ‚שמירה’.</string>
+    <string name="point_deleted">הנקודה %1$s נמחקה</string>
     </resources>
