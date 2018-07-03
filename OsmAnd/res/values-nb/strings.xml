@@ -3028,4 +3028,5 @@
     <string name="coord_input_add_point">Legg til punkt</string>
     <string name="coord_input_save_as_track">Lagre som spor</string>
     <string name="coord_input_save_as_track_descr">Du har lagt til %1$s punkter. Skriv inn navnet på filen og trykk \"Lagre\".</string>
+    <string name="point_deleted">Punkt %1$s slettet</string>
     </resources>
