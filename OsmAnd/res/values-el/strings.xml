@@ -3059,4 +3059,5 @@
     <string name="coord_input_add_point">Προσθήκη σημείου</string>
     <string name="coord_input_save_as_track">Αποθήκευση ως ίχνος</string>
     <string name="coord_input_save_as_track_descr">Προσθέσατε %1$s σημεία. Πληκτρολογήστε ένα όνομα αρχείου και πατήστε \"Αποθήκευση\".</string>
+    <string name="point_deleted">Διαγράφηκε το σημείο %1$s</string>
     </resources>
