@@ -1,4 +1,8 @@
 <resources>
+	<string name="set_visible_time_for_all">Set visible time for all</string>
+	<string name="hours_and_minutes_format">%1$d h %2$d m</string>
+	<string name="minutes_format">%1$d m</string>
+	<string name="hours_format">%1$d h</string>
 	<string name="shared_string_install">Install</string>
 	<string name="shared_string_share">Share</string>
 	<string name="shared_string_back">Back</string>

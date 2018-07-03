@@ -55,6 +55,7 @@
 				tools:tint="@color/ctrl_active_light"/>
 
 			<TextView
+				android:id="@+id/time_for_all_title"
 				android:layout_width="0dp"
 				android:layout_height="wrap_content"
 				android:layout_marginEnd="@dimen/content_padding_standard"
@@ -62,9 +63,9 @@
 				android:layout_weight="1"
 				android:ellipsize="end"
 				android:maxLines="1"
-				android:text="@string/visible_time_for_all"
 				android:textColor="?android:attr/textColorPrimary"
-				android:textSize="@dimen/descr_text_size"/>
+				android:textSize="@dimen/descr_text_size"
+				tools:text="@string/visible_time_for_all"/>
 
 			<net.osmand.telegram.ui.views.TextViewEx
 				android:id="@+id/time_for_all_value"

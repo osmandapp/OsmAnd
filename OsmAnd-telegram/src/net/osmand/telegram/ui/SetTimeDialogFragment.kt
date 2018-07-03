@@ -14,6 +14,7 @@ import android.widget.TextView
 import android.widget.Toast
 import net.osmand.telegram.R
 import net.osmand.telegram.TelegramApplication
+import net.osmand.telegram.helpers.ShareLocationHelper
 import net.osmand.telegram.helpers.TelegramUiHelper
 import net.osmand.telegram.ui.SetTimeDialogFragment.SetTimeListAdapter.ChatViewHolder
 import org.drinkless.td.libcore.telegram.TdApi
@@ -27,6 +28,9 @@ class SetTimeDialogFragment : DialogFragment() {
 	private val telegramHelper get() = app.telegramHelper
 
 	private val adapter = SetTimeListAdapter()
+
+	private lateinit var timeForAllTitle: TextView
+	private lateinit var timeForAllValue: TextView
 
 	private val chatIdsToDuration = HashMap<Long, Long>()
 
@@ -48,11 +52,14 @@ class SetTimeDialogFragment : DialogFragment() {
 			findViewById<ImageView>(R.id.time_for_all_icon).setImageDrawable(
 				app.uiUtils.getIcon(R.drawable.ic_action_time_span, R.color.ctrl_active_light)
 			)
-			findViewById<TextView>(R.id.time_for_all_value).text = "1 hour"
+			timeForAllTitle = findViewById(R.id.time_for_all_title)
+			timeForAllValue = findViewById(R.id.time_for_all_value)
 			setOnClickListener {
 				selectDuration()
 			}
 		}
+
+		updateTimeForAllRow()
 
 		view.findViewById<RecyclerView>(R.id.recycler_view).apply {
 			layoutManager = LinearLayoutManager(context)
@@ -100,21 +107,53 @@ class SetTimeDialogFragment : DialogFragment() {
 		}
 	}
 
+	private fun getTimeForAll(useDefValue: Boolean = false): Long {
+		val returnVal = if (useDefValue) DEFAULT_VISIBLE_TIME_SECONDS else NO_VALUE
+		val iterator = chatIdsToDuration.values.iterator()
+		if (!iterator.hasNext()) {
+			return returnVal
+		}
+		val first = iterator.next()
+		while (iterator.hasNext()) {
+			if (first != iterator.next()) {
+				return returnVal
+			}
+		}
+		return first
+	}
+
+	private fun updateTimeForAllRow() {
+		val timeForAll = getTimeForAll()
+		if (timeForAll != NO_VALUE) {
+			timeForAllTitle.text = getString(R.string.visible_time_for_all)
+			timeForAllValue.visibility = View.VISIBLE
+			timeForAllValue.text = formatDuration(timeForAll)
+		} else {
+			timeForAllTitle.text = getString(R.string.set_visible_time_for_all)
+			timeForAllValue.visibility = View.GONE
+		}
+	}
+
 	private fun selectDuration(id: Long? = null) {
-		val (defHours, defMinutes) = secondsToHoursAndMinutes(DEFAULT_VISIBLE_TIME_SECONDS)
+		val timeForAll = getTimeForAll(true)
+		val defSeconds = if (id == null) timeForAll else chatIdsToDuration[id] ?: timeForAll
+		val (defHours, defMinutes) = secondsToHoursAndMinutes(defSeconds)
 		TimePickerDialog(
 			context,
 			TimePickerDialog.OnTimeSetListener { _, hours, minutes ->
 				val seconds = TimeUnit.HOURS.toSeconds(hours.toLong()) +
 						TimeUnit.MINUTES.toSeconds(minutes.toLong())
-				if (id != null) {
-					chatIdsToDuration[id] = seconds
-				} else {
-					chatIdsToDuration.keys.forEach {
-						chatIdsToDuration[it] = seconds
+				if (seconds >= ShareLocationHelper.MIN_LOCATION_MESSAGE_LIVE_PERIOD_SEC) {
+					if (id != null) {
+						chatIdsToDuration[id] = seconds
+					} else {
+						chatIdsToDuration.keys.forEach {
+							chatIdsToDuration[it] = seconds
+						}
 					}
+					updateTimeForAllRow()
+					adapter.notifyDataSetChanged()
 				}
-				adapter.notifyDataSetChanged()
 			}, defHours, defMinutes, true
 		).show()
 	}
@@ -128,9 +167,9 @@ class SetTimeDialogFragment : DialogFragment() {
 	private fun formatDuration(seconds: Long): String {
 		val (hours, minutes) = secondsToHoursAndMinutes(seconds)
 		return when {
-			hours != 0 && minutes == 0 -> String.format("%d h", hours)
-			hours == 0 && minutes != 0 -> String.format("%02d m", minutes)
-			else -> String.format("%d h, %02d m", hours, minutes)
+			hours != 0 && minutes == 0 -> getString(R.string.hours_format, hours)
+			hours == 0 && minutes != 0 -> getString(R.string.minutes_format, minutes)
+			else -> getString(R.string.hours_and_minutes_format, hours, minutes)
 		}
 	}
 
@@ -189,6 +228,7 @@ class SetTimeDialogFragment : DialogFragment() {
 		private const val TAG = "SetTimeDialogFragment"
 		private const val CHATS_KEY = "chats_key"
 		private const val DEFAULT_VISIBLE_TIME_SECONDS = 60 * 60L // 1 hour
+		private const val NO_VALUE = -1L
 
 		fun showInstance(fm: FragmentManager, chatIds: Set<Long>): Boolean {
 			return try {
