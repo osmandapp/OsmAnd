@@ -3103,4 +3103,5 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="coord_input_add_point">Annanghe puntu</string>
     <string name="coord_input_save_as_track">Sarva comente rasta</string>
     <string name="coord_input_save_as_track_descr">As annantu %1$s puntos. Iscrie unu nùmene pro su documentu e incarca \"Sarva\".</string>
+    <string name="point_deleted">Puntu %1$s iscantzelladu</string>
     </resources>
