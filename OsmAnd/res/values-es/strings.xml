@@ -2955,4 +2955,5 @@
     <string name="coord_input_save_as_track_descr">Has añadido %1$s puntos. Escribe un nombre de archivo y pulsa en «Guardar».</string>
     <string name="error_notification_desc">Por favor, envíe la captura de pantalla de esta notificación a support@osmand.net</string>
     <string name="quick_action_edit_actions">Editar acciones</string>
+    <string name="point_deleted">Punto %1$s eliminado</string>
     </resources>
