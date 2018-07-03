@@ -1,0 +1,42 @@
+<resources>
+	<string name="shared_string_share">Dela</string>
+	<string name="shared_string_back">Bakåt</string>
+	<string name="app_name">OsmAnd - parkering</string>
+	<string name="shared_string_continue">Fortsätt</string>
+	<string name="shared_string_cancel">Avbryt</string>
+	<string name="gps_network_not_enabled">Platstjänsten är inte aktiverad. Vill du slå på den?</string>
+	<string name="shared_string_settings">Inställningar</string>
+	<string name="no_location_permission">Appen har inte tillräckliga behörigheter för att komma åt platsdata.</string>
+	<string name="gps_not_available">Aktivera GPS i inställningarna</string>
+	<string name="osmand_service">Bakgrundsläge</string>
+	<string name="osmand_service_descr">OsmAnd körs i bakgrunden medan skärmen är avstängd.</string>
+	<string name="shared_string_paused">Pausad</string>
+	<string name="shared_string_pause">Pausa</string>
+
+	<string name="yard">yd</string>
+	<string name="foot">ft</string>
+	<string name="mile">mi</string>
+	<string name="km">km</string>
+	<string name="m">m</string>
+	<string name="nm">nmi</string>
+	<string name="min_mile">min/m</string>
+	<string name="min_km">min/km</string>
+	<string name="nm_h">nmi/h</string>
+	<string name="m_s">m/s</string>
+	<string name="km_h">km/h</string>
+	<string name="mile_per_hour">mph</string>
+	<string name="si_kmh">Kilometer i timmen</string>
+	<string name="si_mph">Engelska mil i timmen</string>
+	<string name="si_m_s">Meter i sekunden</string>
+	<string name="si_min_km">Minuter per kilometer</string>
+	<string name="si_min_m">Minuter per engelsk mil</string>
+	<string name="si_nm_h">Sjömil i timmen (knop)</string>
+	<string name="si_mi_feet">Eng. mil/fot</string>
+	<string name="si_mi_yard">Eng. mil/yard</string>
+	<string name="si_km_m">Kilometer/meter</string>
+	<string name="si_nm">Sjömil</string>
+	<string name="si_mi_meters">Mil/metrar</string>
+	<string name="my_location">Min plats</string>
+
+
+</resources>
