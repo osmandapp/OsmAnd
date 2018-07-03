@@ -2645,7 +2645,7 @@
     <string name="retry">重试</string>
     <string name="save_gpx_waypoint">保存 GPX 航点</string>
     <string name="import_track">导入轨迹</string>
-    <string name="make_as_start_point">标记为起始点</string>
+    <string name="make_as_start_point">标记该点为起始点</string>
     <string name="tap_on_map_to_hide_interface_descr">可以轻触屏幕切换显示控制按钮和小工具。</string>
     <string name="routing_attr_avoid_ice_roads_fords_name">避开结冰路面和浅滩</string>
     <string name="routing_attr_avoid_ice_roads_fords_description">避开结冰路面和浅滩。</string>
@@ -2681,15 +2681,15 @@
     <string name="unlimited_downloads">无限下载</string>
     <string name="wikipedia_offline">离线维基百科</string>
     <string name="open_wikipedia_link_online">在线打开维基百科链接</string>
-    <string name="open_wikipedia_link_online_description">OsmAnd 会将您重定向至浏览器并在线打开链接。</string>
+    <string name="open_wikipedia_link_online_description">链接将在网页浏览器中打开。</string>
     <string name="read_wikipedia_offline_description">获取 OsmAnd Live 订阅以离线阅读维基百科和 Wikivoyage 文章。</string>
     <string name="how_to_open_link">如何打开链接？</string>
     <string name="read_wikipedia_offline">离线阅读维基百科</string>
     <string name="download_all">下载全部</string>
-    <string name="shared_string_restart">重新开始</string>
+    <string name="shared_string_restart">应用重启</string>
     <string name="show_images">显示图像</string>
-    <string name="purchase_cancelled_dialog_title">您已取消 OsmAnd Live 订阅</string>
-    <string name="purchase_cancelled_dialog_descr">续订以继续使用以下全部功能：</string>
+    <string name="purchase_cancelled_dialog_title">您已取消您的 OsmAnd Live 订阅</string>
+    <string name="purchase_cancelled_dialog_descr">续订以继续使用全部功能：</string>
 
     <string name="maps_you_need_descr">基于您保存的文章，我们推荐您下载下列地图：</string>
     <string name="maps_you_need">您需要的地图</string>
@@ -2700,4 +2700,8 @@
     <string name="travel_card_update_descr">新的 Wikivoyage 数据可用，请更新以继续享用。</string>
 	<string name="get_unlimited_access">获取无限访问权限</string>
     <string name="shared_string_options">选项</string>
+    <string name="coord_input_save_as_track">保存为轨迹</string>
+    <string name="error_notification_desc">请将该通知的屏幕截图发送至 support@osmand.net</string>
+    <string name="hide_full_description">隐藏完整描述</string>
+    <string name="show_full_description">显示完整描述</string>
     </resources>
