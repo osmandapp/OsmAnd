@@ -3020,4 +3020,80 @@
 	<string name="poi_crossing_light_no">Korsning med ljussignaler: nej</string>
 	<string name="poi_crossing_on_demand_yes">Korsande vid behov</string>
 	<string name="poi_crossing_on_demand_no">Korsning vid behov: nej</string>
+	<string name="poi_glacier_type">Typ av glaciär</string>
+	<string name="poi_checkpoint_type">Kontrollpunktstyp</string>
+
+<string name="poi_crossing_saltire_yes">Korsning med kryss</string>
+	<string name="poi_crossing_saltire_no">Korsning med kryss: nej</string>
+	<string name="poi_crossing_supervision_yes">Korsning med övervakning</string>
+	<string name="poi_crossing_supervision_no">Korsning med övervakning: nej</string>
+	<string name="poi_crossing_supervision_attendant">Korsningsövervakning: ledsagad</string>
+	<string name="poi_crossing_supervision_camera">Korsningsövervakning: kamera</string>
+
+	<string name="poi_dispensing_yes">Ja</string>
+	<string name="poi_dispensing_no">Utlämning: nej</string>
+
+	<string name="poi_aerodrome_type_international">Internationellt</string>
+	<string name="poi_aerodrome_type_regional">regional</string>
+	<string name="poi_aerodrome_type_public">Offentlig</string>
+	<string name="poi_aerodrome_type_military">Militär</string>
+	<string name="poi_aerodrome_type_military_public">Militär och offentliga</string>
+	<string name="poi_aerodrome_type_private">Privat</string>
+
+	<string name="poi_valley_balka">Balka</string>
+
+	<string name="poi_ventilation_shaft">Ventilationsschakt</string>
+
+	<string name="poi_telescope">Teleskop</string>
+	<string name="poi_telescope_type_optical">Optiskt</string>
+	<string name="poi_telescope_type_radio">Radio</string>
+	<string name="poi_telescope_type_gamma">Gamma</string>
+	<string name="poi_telescope_diameter">Diameter</string>
+	<string name="poi_telescope_spectrum">Spektrum</string>
+	<string name="poi_telescope_usage_education">Användning: utbildning</string>
+	<string name="poi_telescope_usage_espionage">Användning: spionage</string>
+	<string name="poi_telescope_usage_research">Användning: forskning</string>
+
+	<string name="poi_observatory_type_espionage">Användning: spionage</string>
+	<string name="poi_observatory_type_meteorological">Meteorologiskt</string>
+	<string name="poi_observatory_type_gravitational">Gravitationellt</string>
+
+	<string name="poi_greenhouse_horticulture">Växthusodling</string>
+
+	<string name="poi_voltage">Spänning</string>
+	<string name="poi_generator_output_electricity">Uteffekt</string>
+	<string name="poi_generator_output_electricity_yes">Effekt: el</string>
+	<string name="poi_generator_output_hot_water">Uteffekten från varmvatten</string>
+	<string name="poi_generator_output_hot_water_yes">Effekt: varmvatten</string>
+	<string name="poi_generator_output_steam_yes">Effekt: ånga</string>
+	<string name="poi_generator_output_hot_air_yes">Effekt: varmluft</string>
+	<string name="poi_generator_output_cold_water_yes">Effekt: kallt vatten</string>
+	<string name="poi_generator_output_compressed_air">Uteffekt av tryckluft</string>
+	<string name="poi_generator_output_compressed_air_yes">Uteffekt: tryckluft</string>
+	<string name="poi_generator_output_vacuum_yes">Effekt: vakuum</string>
+	<string name="poi_generator_output_biogas">Uteffekt av biogas</string>
+	<string name="poi_generator_output_biogas_yes">Effekt: biogas</string>
+
+	<string name="poi_pumping_station">Pumpstation</string>
+
+	<string name="poi_display_yes">Display: ja</string>
+	<string name="poi_display_no">Display: nej</string>
+	<string name="poi_display_analog_yes">Analog display</string>
+	<string name="poi_display_digital_yes">Digital display</string>
+	<string name="poi_display_sundial_yes">Solur</string>
+
+	<string name="poi_barometer_yes">Barometer</string>
+	<string name="poi_barometer_no">Barometer: nej</string>
+	<string name="poi_thermometer_yes">Termometer</string>
+	<string name="poi_thermometer_no">Termometer: nej</string>
+	<string name="poi_hygrometer_yes">Hygrometer</string>
+	<string name="poi_hygrometer_no">Hygrometer: nej</string>
+	<string name="poi_date_yes">Datumvisning</string>
+	<string name="poi_date_no">Datumvisning: nej</string>
+
+	<string name="poi_support_pole">Stöd: stolpe</string>
+	<string name="poi_support_wall_mounted">Stöd: vägg</string>
+	<string name="poi_support_tree">Stöd: träd</string>
+	<string name="poi_support_pedestal">Stöd: pedestal</string>
+	<string name="poi_support_ground">Stöd: mark</string>
 	</resources>
