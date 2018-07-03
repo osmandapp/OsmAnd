@@ -26,6 +26,10 @@ class TelegramHelper private constructor() {
 		private const val MESSAGE_ACTIVE_TIME_SEC = 24 * 60 * 60 // 24 hours
 		private const val OSMAND_BOT_USERNAME = "osmand_bot"
 
+		// min and max values for the Telegram API
+		const val MIN_LOCATION_MESSAGE_LIVE_PERIOD_SEC = 61
+		const val MAX_LOCATION_MESSAGE_LIVE_PERIOD_SEC = 60 * 60 * 24 - 1 // one day
+
 		private var helper: TelegramHelper? = null
 
 		val instance: TelegramHelper
@@ -414,7 +418,11 @@ class TelegramHelper private constructor() {
 	}
 
 	private fun sendLiveLocationImpl(chatTitles: List<String>, livePeriod: Int, latitude: Double, longitude: Double) {
-		val lp = livePeriod.coerceAtLeast(ShareLocationHelper.MIN_LOCATION_MESSAGE_LIVE_PERIOD_SEC)
+		val lp = when {
+			livePeriod < MIN_LOCATION_MESSAGE_LIVE_PERIOD_SEC -> MIN_LOCATION_MESSAGE_LIVE_PERIOD_SEC
+			livePeriod > MAX_LOCATION_MESSAGE_LIVE_PERIOD_SEC -> MAX_LOCATION_MESSAGE_LIVE_PERIOD_SEC
+			else -> livePeriod
+		}
 		val location = TdApi.Location(latitude, longitude)
 		val content = TdApi.InputMessageLocation(location, lp)
 

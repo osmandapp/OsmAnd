@@ -91,7 +91,8 @@ class ShareLocationHelper(private val app: TelegramApplication) {
 
 	companion object {
 
-		const val MIN_LOCATION_MESSAGE_LIVE_PERIOD_SEC = 61
-		const val MAX_LOCATION_MESSAGE_LIVE_PERIOD_SEC = 60 * 60 * 24 - 1 // one day
+		// min and max values for the UI
+		const val MIN_LOCATION_MESSAGE_LIVE_PERIOD_SEC = TelegramHelper.MIN_LOCATION_MESSAGE_LIVE_PERIOD_SEC - 1
+		const val MAX_LOCATION_MESSAGE_LIVE_PERIOD_SEC = TelegramHelper.MAX_LOCATION_MESSAGE_LIVE_PERIOD_SEC + 1
 	}
 }
