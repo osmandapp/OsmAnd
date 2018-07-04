@@ -16,6 +16,8 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import android.view.inputmethod.EditorInfo
 import android.widget.Button
+import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import net.osmand.PlatformUtil
 import net.osmand.telegram.R
@@ -92,13 +94,14 @@ class LoginDialogFragment : DialogFragment() {
 	private var dismissedManually = false
 
 	enum class LoginDialogType(val viewId: Int, val editorId: Int,
-							   @StringRes val titleId: Int, @StringRes val descriptionId: Int) {
+							   @StringRes val titleId: Int, @StringRes val descriptionId: Int,
+							   @StringRes val inputTypeDescriptionId: Int) {
 		ENTER_PHONE_NUMBER(R.id.enter_phone_number_layout, R.id.phone_number_edit_text,
-				R.string.shared_string_authorization, R.string.shared_string_authorization_descr),
+				R.string.shared_string_authorization, R.string.shared_string_authorization_descr, R.string.enter_phone_number),
 		ENTER_CODE(R.id.enter_code_layout, R.id.code_edit_text,
-				R.string.enter_code, R.string.authentication_code_descr),
+				R.string.enter_code, R.string.authentication_code_descr, R.string.enter_authentication_code),
 		ENTER_PASSWORD(R.id.enter_password_layout, R.id.password_edit_text,
-				R.string.enter_password, R.string.password_descr);
+				R.string.enter_password, R.string.password_descr, R.string.enter_password);
 	}
 
 	override fun onCreate(savedInstanceState: Bundle?) {
@@ -149,6 +152,13 @@ class LoginDialogFragment : DialogFragment() {
 			} else {
 				view?.findViewById<TextView>(R.id.welcome_descr)?.text = Html.fromHtml(getString(R.string.welcome_descr))
 			}
+			val welcomeImage = view?.findViewById<ImageView>(R.id.welcome_image)
+			if (Build.VERSION.SDK_INT >= 18) {
+				welcomeImage?.setImageResource(R.drawable.bg_introduction_image_top)
+			} else {
+				welcomeImage?.visibility = View.GONE
+			}
+
 			val continueButton = view?.findViewById<Button>(R.id.welcome_continue_button)
 			continueButton?.setOnClickListener {
 				showWelcomeDialog = false
@@ -175,8 +185,12 @@ class LoginDialogFragment : DialogFragment() {
 					if (layout != null) {
 						val titleView: TextView? = view.findViewById(R.id.login_title)
 						val descriptionView: TextView? = view.findViewById(R.id.login_description)
+						val inputTypeDescriptionView: TextView? = view.findViewById(R.id.login_input_type_descr)
+						val inputTypeDescription = getText(t.inputTypeDescriptionId).toString() + ":"
+
 						titleView?.text = getText(t.titleId)
 						descriptionView?.text = getText(t.descriptionId)
+						inputTypeDescriptionView?.text = inputTypeDescription
 
 						layout.visibility = View.VISIBLE
 						val editText: ExtendedEditText? = layout.findViewById(t.editorId)
@@ -193,6 +207,21 @@ class LoginDialogFragment : DialogFragment() {
 								AndroidUtils.softKeyboardDelayed(editText)
 								focusRequested = true
 							}
+						}
+
+						val noTelegramViewContainer: LinearLayout? = view.findViewById(R.id.no_telegram)
+						if (loginDialogActiveType == LoginDialogType.ENTER_PHONE_NUMBER) {
+							val noTelegramAccountTitleView: TextView? = view.findViewById(R.id.no_telegram_title)
+							val noTelegramAccountButton: ImageView? = view.findViewById(R.id.no_telegram_button)
+							val phoneNumberFormatHintView: TextView? = view.findViewById(R.id.phone_number_format)
+
+							noTelegramAccountTitleView?.text = getText(R.string.do_not_have_telegram)
+							phoneNumberFormatHintView?.text = getText(R.string.phone_number_descr)
+							noTelegramAccountButton?.setImageResource(R.drawable.ic_arrow_forward)
+
+							noTelegramViewContainer?.visibility = View.VISIBLE
+						} else {
+							noTelegramViewContainer?.visibility = View.GONE
 						}
 					}
 				}
@@ -212,6 +241,7 @@ class LoginDialogFragment : DialogFragment() {
 				continueButton.setOnClickListener(null)
 			} else {
 				continueButton.setOnClickListener {
+					showWelcomeDialog = false
 					for (t in LoginDialogType.values()) {
 						val layout: View? = view.findViewById(t.viewId)
 						val contains = t == loginDialogActiveType
@@ -227,10 +257,15 @@ class LoginDialogFragment : DialogFragment() {
 			}
 		}
 		val cancelButton: AppCompatImageView? = view?.findViewById(R.id.back_button)
-		cancelButton?.visibility = if (loginDialogActiveType == LoginDialogType.ENTER_PHONE_NUMBER) View.INVISIBLE else View.VISIBLE
+		cancelButton?.visibility = if (showWelcomeDialog) View.INVISIBLE else View.VISIBLE
 		cancelButton?.setOnClickListener {
-			showProgress()
-			getMainActivity()?.loginTelegram()
+			if (loginDialogActiveType == LoginDialogType.ENTER_PHONE_NUMBER) {
+				showWelcomeDialog = true
+				buildDialog(view)
+			} else {
+				showProgress()
+				getMainActivity()?.loginTelegram()
+			}
 		}
 	}
 

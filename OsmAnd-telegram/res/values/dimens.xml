@@ -12,11 +12,15 @@
 	<dimen name="action_bar_row_button_height">52dp</dimen>
 
 	<dimen name="dialog_padding_vertical">24dp</dimen>
-	<dimen name="dialog_padding_horizontal">60dp</dimen>
+	<dimen name="dialog_padding_horizontal">64dp</dimen>
 	<dimen name="dialog_padding_horizontal_edit">44dp</dimen>
+	<dimen name="dialog_welcome_padding_horizontal">48dp</dimen>
 
 	<dimen name="dialog_button_height">36dp</dimen>
 	<dimen name="dialog_button_radius">2dp</dimen>
+	<dimen name="dialog_button_bottom_padding">40dp</dimen>
+	<dimen name="dialog_welcome_title_bottom_padding">96dp</dimen>
+	<dimen name="dialog_welcome_title_top_padding">120dp</dimen>
 
 	<dimen name="list_item_height">56dp</dimen>
 	<dimen name="list_item_height_min">48dp</dimen>
@@ -48,6 +52,8 @@
 	<dimen name="dialog_title_text_size">22sp</dimen>
 
 	<dimen name="title_text_size">18sp</dimen>
+	<dimen name="title_login_text_size">20sp</dimen>
+	<dimen name="title_welcome_text_size">32sp</dimen>
 	<dimen name="descr_text_size">16sp</dimen>
 
 	<dimen name="list_item_title_text_size">16sp</dimen>

@@ -1,4 +1,8 @@
 <resources>
+	<string name="authorization_already_registered_in_telegram">You need an already registered account and phone number in Telegram</string>
+	<string name="do_not_have_telegram">I don`t have Telegram account</string>
+	<string name="enter_phone_number">Enter phone number</string>
+	<string name="enter_authentication_code">Enter authentication code</string>
 	<string name="set_visible_time_for_all">Set visible time for all</string>
 	<string name="hours_and_minutes_format">%1$d h %2$d m</string>
 	<string name="minutes_format">%1$d m</string>
