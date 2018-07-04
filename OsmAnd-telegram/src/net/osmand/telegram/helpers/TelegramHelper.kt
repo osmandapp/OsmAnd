@@ -56,7 +56,7 @@ class TelegramHelper private constructor() {
 	private val downloadUserFilesMap = ConcurrentHashMap<String, TdApi.User>()
 
 	// value.content can be TdApi.MessageLocation or MessageOsmAndBotLocation
-	private val usersLocationMessages = ConcurrentHashMap<Int, TdApi.Message>()
+	private val usersLocationMessages = ConcurrentHashMap<Long, TdApi.Message>()
 
 	private val usersFullInfo = ConcurrentHashMap<Int, TdApi.UserFullInfo>()
 	private val basicGroupsFullInfo = ConcurrentHashMap<Int, TdApi.BasicGroupFullInfo>()
@@ -103,13 +103,11 @@ class TelegramHelper private constructor() {
 
 	fun getUser(id: Int) = users[id]
 
-	fun getUserMessage(user: TdApi.User) = usersLocationMessages[user.id]
+	fun getUserMessage(user: TdApi.User) =
+		usersLocationMessages.values.firstOrNull { it.senderUserId == user.id }
 
-	fun getMessageById(id: Long) = usersLocationMessages.values.firstOrNull { it.id == id }
-
-	fun getChatMessages(chatTitle: String): List<TdApi.Message> {
-		return usersLocationMessages.values.filter { chats[it.chatId]?.title == chatTitle }
-	}
+	fun getChatMessages(chatTitle: String) =
+		usersLocationMessages.values.filter { chats[it.chatId]?.title == chatTitle }
 
 	fun getMessages() = usersLocationMessages.values.toList()
 
@@ -363,11 +361,22 @@ class TelegramHelper private constructor() {
 			if (oldContent is TdApi.MessageText) {
 				message.content = parseOsmAndBotLocation(oldContent.text.text)
 			}
-			usersLocationMessages[message.senderUserId] = message
+			removeOldMessages(message.senderUserId)
+			usersLocationMessages[message.id] = message
 			val chatTitle = chats[message.chatId]?.title
 			if (chatTitle != null) {
 				incomingMessagesListeners.forEach {
 					it.onReceiveChatLocationMessages(chatTitle, message)
+				}
+			}
+		}
+	}
+
+	private fun removeOldMessages(userId: Int) {
+		users[userId]?.also { user ->
+			if (user.username != OSMAND_BOT_USERNAME) {
+				usersLocationMessages.values.filter { it.senderUserId == userId }.forEach {
+					usersLocationMessages.remove(it.id)
 				}
 			}
 		}
@@ -829,7 +838,7 @@ class TelegramHelper private constructor() {
 				}
 				TdApi.UpdateMessageContent.CONSTRUCTOR -> {
 					val updateMessageContent = obj as TdApi.UpdateMessageContent
-					val message = getMessageById(updateMessageContent.messageId)
+					val message = usersLocationMessages[updateMessageContent.messageId]
 					if (message == null) {
 						updateMessageContent.apply {
 							requestMessage(chatId, messageId, this@TelegramHelper::addNewMessage)
