@@ -3810,4 +3810,17 @@
 
 	<string name="poi_via_ferrata_scale">Складність</string>
 
-	</resources>
+	<string name="poi_cable_number">Кількість тросів</string>
+	<string name="poi_glacier_type_mountain">Гірський</string>
+	<string name="poi_glacier_type_hanging">Висячий</string>
+	<string name="poi_checkpoint_type_code">Код</string>
+	<string name="poi_checkpoint_type_notebook">Блокнот</string>
+	<string name="poi_checkpoint_type_electronic">Електронний</string>
+	<string name="poi_course">Маршрут</string>
+
+	<string name="poi_end_date">Дата закриття</string>
+
+	<string name="poi_payment_contactless_yes">Безконтактна оплата</string>
+	<string name="poi_payment_contactless_no">Безконтактна оплата не приймається</string>
+
+</resources>

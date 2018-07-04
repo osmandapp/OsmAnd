@@ -2953,4 +2953,5 @@
     <string name="coord_input_add_point">Добавить точку</string>
     <string name="coord_input_save_as_track">Сохранить как трек</string>
     <string name="coord_input_save_as_track_descr">Добавлено вами точек - %1$s. Введите имя файла и нажмите «Сохранить».</string>
+    <string name="point_deleted">Точка %1$s удалена</string>
     </resources>
