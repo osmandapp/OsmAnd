@@ -33,21 +33,13 @@ class TelegramSettings(private val app: TelegramApplication) {
 		read()
 	}
 
-	fun hasAnyChatToShareLocation(): Boolean {
-		return shareLocationChats.isNotEmpty()
-	}
+	fun hasAnyChatToShareLocation() = shareLocationChats.isNotEmpty()
 
-	fun isSharingLocationToChat(chatTitle: String): Boolean {
-		return shareLocationChats.contains(chatTitle)
-	}
+	fun isSharingLocationToChat(chatTitle: String) = shareLocationChats.contains(chatTitle)
 
-	fun hasAnyChatToShowOnMap(): Boolean {
-		return showOnMapChats.isNotEmpty()
-	}
+	fun hasAnyChatToShowOnMap() = showOnMapChats.isNotEmpty()
 
-	fun isShowingChatOnMap(chatTitle: String): Boolean {
-		return showOnMapChats.contains(chatTitle)
-	}
+	fun isShowingChatOnMap(chatTitle: String) = showOnMapChats.contains(chatTitle)
 
 	fun removeNonexistingChats(presentChatTitles: List<String>) {
 		val shareLocationChats = shareLocationChats.toMutableList()
@@ -84,6 +76,7 @@ class TelegramSettings(private val app: TelegramApplication) {
 	}
 
 	fun getShareLocationChats() = ArrayList(shareLocationChats)
+
 	fun getShowOnMapChats() = ArrayList(showOnMapChats)
 
 	fun getShowOnMapChatsCount() = showOnMapChats.size
@@ -131,10 +124,16 @@ class TelegramSettings(private val app: TelegramApplication) {
 		}
 		this.showOnMapChats = showOnMapChats
 
-		metricsConstants = MetricsConstants.valueOf(prefs.getString(METRICS_CONSTANTS_KEY, MetricsConstants.KILOMETERS_AND_METERS.name))
-		speedConstants = SpeedConstants.valueOf(prefs.getString(SPEED_CONSTANTS_KEY, SpeedConstants.KILOMETERS_PER_HOUR.name))
+		metricsConstants = MetricsConstants.valueOf(
+			prefs.getString(METRICS_CONSTANTS_KEY, MetricsConstants.KILOMETERS_AND_METERS.name)
+		)
+		speedConstants = SpeedConstants.valueOf(
+			prefs.getString(SPEED_CONSTANTS_KEY, SpeedConstants.KILOMETERS_PER_HOUR.name)
+		)
 
-		sendMyLocationInterval = prefs.getLong(SEND_MY_LOCATION_INTERVAL_KEY, SEND_MY_LOCATION_INTERVAL_DEFAULT)
-		userLocationExpireTime = prefs.getLong(USER_LOCATION_EXPIRE_TIME_KEY, USER_LOCATION_EXPIRE_TIME_DEFAULT)
+		sendMyLocationInterval =
+				prefs.getLong(SEND_MY_LOCATION_INTERVAL_KEY, SEND_MY_LOCATION_INTERVAL_DEFAULT)
+		userLocationExpireTime =
+				prefs.getLong(USER_LOCATION_EXPIRE_TIME_KEY, USER_LOCATION_EXPIRE_TIME_DEFAULT)
 	}
 }
