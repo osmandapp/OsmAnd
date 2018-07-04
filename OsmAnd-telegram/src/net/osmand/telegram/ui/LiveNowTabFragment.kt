@@ -13,6 +13,7 @@ import android.widget.TextView
 import android.widget.Toast
 import net.osmand.telegram.R
 import net.osmand.telegram.TelegramApplication
+import net.osmand.telegram.helpers.TelegramHelper
 import net.osmand.telegram.helpers.TelegramHelper.*
 import net.osmand.telegram.helpers.TelegramUiHelper
 import org.drinkless.td.libcore.telegram.TdApi
@@ -103,14 +104,19 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 	private fun updateList() {
 		val res = mutableListOf<Any>()
 		for ((id, messages) in telegramHelper.getMessagesByChatIds()) {
-			telegramHelper.getChat(id)?.let { chat ->
+			telegramHelper.getChat(id)?.also { chat ->
 				res.add(chat)
-				if (chat.type is TdApi.ChatTypeBasicGroup || chat.type is TdApi.ChatTypeSupergroup) {
+				val type = chat.type
+				if (type is TdApi.ChatTypeBasicGroup || type is TdApi.ChatTypeSupergroup) {
 					messages.forEach { message ->
-						telegramHelper.getUser(message.senderUserId)?.let { user ->
-							res.add(user)
+						if (message.content is MessageOsmAndBotLocation) {
+							res.add(message.content)
+						} else {
+							telegramHelper.getUser(message.senderUserId)?.also { res.add(it) }
 						}
 					}
+				} else if (type is TdApi.ChatTypePrivate && telegramHelper.getUser(type.userId)?.username == TelegramHelper.OSMAND_BOT_USERNAME) {
+					res.addAll(messages.filter { it.content is MessageOsmAndBotLocation })
 				}
 			}
 		}
@@ -194,6 +200,11 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 				TelegramUiHelper.setupPhoto(app, holder.icon, telegramHelper.getUserPhotoPath(item))
 				holder.title?.text = "${item.firstName} ${item.lastName}"
 				holder.description?.text = "User description" // FIXME
+				holder.bottomShadow?.visibility = if (lastItem) View.VISIBLE else View.GONE
+			} else if (item is MessageOsmAndBotLocation && holder is ContactViewHolder) {
+				holder.icon?.setImageDrawable(app.uiUtils.getThemedIcon(R.drawable.ic_group))
+				holder.title?.text = item.name
+				holder.description?.text = "Location from osmand_bot" // FIXME
 				holder.bottomShadow?.visibility = if (lastItem) View.VISIBLE else View.GONE
 			}
 		}

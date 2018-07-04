@@ -7,6 +7,7 @@ import org.drinkless.td.libcore.telegram.Client
 import org.drinkless.td.libcore.telegram.Client.ResultHandler
 import org.drinkless.td.libcore.telegram.TdApi
 import org.drinkless.td.libcore.telegram.TdApi.AuthorizationState
+import org.json.JSONObject
 import java.io.File
 import java.util.*
 import java.util.concurrent.ConcurrentHashMap
@@ -19,12 +20,13 @@ import kotlin.collections.HashSet
 class TelegramHelper private constructor() {
 
 	companion object {
+		const val OSMAND_BOT_USERNAME = "osmand_bot"
+
 		private val log = PlatformUtil.getLog(TelegramHelper::class.java)
 		private const val CHATS_LIMIT = 100
 		private const val IGNORED_ERROR_CODE = 406
 		private const val UPDATE_LIVE_MESSAGES_INTERVAL_SEC = 30L
 		private const val MESSAGE_ACTIVE_TIME_SEC = 24 * 60 * 60 // 24 hours
-		private const val OSMAND_BOT_USERNAME = "osmand_bot"
 
 		// min and max values for the Telegram API
 		const val MIN_LOCATION_MESSAGE_LIVE_PERIOD_SEC = 61
@@ -54,8 +56,8 @@ class TelegramHelper private constructor() {
 	private val downloadChatFilesMap = ConcurrentHashMap<String, TdApi.Chat>()
 	private val downloadUserFilesMap = ConcurrentHashMap<String, TdApi.User>()
 
-	// Can contain TdApi.MessageLocation or TdApi.MessageText from osmand_bot
-	private val usersLocationMessages = ConcurrentHashMap<Int, TdApi.Message>()
+	// value.content can be TdApi.MessageLocation or MessageOsmAndBotLocation
+	private val usersLocationMessages = ConcurrentHashMap<Long, TdApi.Message>()
 
 	private val usersFullInfo = ConcurrentHashMap<Int, TdApi.UserFullInfo>()
 	private val basicGroupsFullInfo = ConcurrentHashMap<Int, TdApi.BasicGroupFullInfo>()
@@ -102,13 +104,11 @@ class TelegramHelper private constructor() {
 
 	fun getUser(id: Int) = users[id]
 
-	fun getUserMessage(user: TdApi.User) = usersLocationMessages[user.id]
+	fun getUserMessage(user: TdApi.User) =
+		usersLocationMessages.values.firstOrNull { it.senderUserId == user.id }
 
-	fun getMessageById(id: Long) = usersLocationMessages.values.firstOrNull { it.id == id }
-
-	fun getChatMessages(chatTitle: String): List<TdApi.Message> {
-		return usersLocationMessages.values.filter { chats[it.chatId]?.title == chatTitle }
-	}
+	fun getChatMessages(chatTitle: String) =
+		usersLocationMessages.values.filter { chats[it.chatId]?.title == chatTitle }
 
 	fun getMessages() = usersLocationMessages.values.toList()
 
@@ -358,11 +358,26 @@ class TelegramHelper private constructor() {
 
 	private fun addNewMessage(message: TdApi.Message) {
 		if (message.isAppropriate()) {
-			usersLocationMessages[message.senderUserId] = message
+			val oldContent = message.content
+			if (oldContent is TdApi.MessageText) {
+				message.content = parseOsmAndBotLocation(oldContent.text.text)
+			}
+			removeOldMessages(message.senderUserId)
+			usersLocationMessages[message.id] = message
 			val chatTitle = chats[message.chatId]?.title
 			if (chatTitle != null) {
 				incomingMessagesListeners.forEach {
 					it.onReceiveChatLocationMessages(chatTitle, message)
+				}
+			}
+		}
+	}
+
+	private fun removeOldMessages(userId: Int) {
+		users[userId]?.also { user ->
+			if (user.username != OSMAND_BOT_USERNAME) {
+				usersLocationMessages.values.filter { it.senderUserId == userId }.forEach {
+					usersLocationMessages.remove(it.id)
 				}
 			}
 		}
@@ -607,6 +622,40 @@ class TelegramHelper private constructor() {
 		}
 	}
 
+	private fun parseOsmAndBotLocation(json: String): MessageOsmAndBotLocation {
+		val obj = JSONObject(json)
+		return MessageOsmAndBotLocation(
+			obj.optString("name", ""),
+			obj.optDouble("lat", -1.0),
+			obj.optDouble("lon", -1.0),
+			obj.optDouble("alt", -1.0),
+			obj.optDouble("azi", -1.0),
+			obj.optDouble("spd", -1.0),
+			obj.optInt("updAgo", -1),
+			obj.optInt("locAgo", -1),
+			obj.optInt("updId", -1),
+			obj.optInt("updTime", -1)
+		)
+	}
+
+	class MessageOsmAndBotLocation internal constructor(
+		val name: String,
+		val lat: Double,
+		val lon: Double,
+		val alt: Double,
+		val azi: Double,
+		val spd: Double,
+		val updAgo: Int,
+		val locAgo: Int,
+		val updId: Int,
+		val updTime: Int
+	) : TdApi.MessageContent() {
+
+		override fun getConstructor() = -1
+
+		fun isValid() = name != "" && lat != -1.0 && lon != -1.0
+	}
+
 	class OrderedChat internal constructor(internal val order: Long, internal val chatId: Long, internal val isChannel: Boolean) : Comparable<OrderedChat> {
 
 		override fun compareTo(other: OrderedChat): Int {
@@ -790,14 +839,19 @@ class TelegramHelper private constructor() {
 				}
 				TdApi.UpdateMessageContent.CONSTRUCTOR -> {
 					val updateMessageContent = obj as TdApi.UpdateMessageContent
-					val message = getMessageById(updateMessageContent.messageId)
+					val message = usersLocationMessages[updateMessageContent.messageId]
 					if (message == null) {
 						updateMessageContent.apply {
 							requestMessage(chatId, messageId, this@TelegramHelper::addNewMessage)
 						}
 					} else {
 						synchronized(message) {
-							message.content = updateMessageContent.newContent
+							val newContent = updateMessageContent.newContent
+							message.content = if (newContent is TdApi.MessageText) {
+								parseOsmAndBotLocation(newContent.text.text)
+							} else {
+								newContent
+							}
 						}
 						val chatTitle = chats[message.chatId]?.title
 						if (chatTitle != null) {
