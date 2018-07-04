@@ -2511,7 +2511,7 @@ Vänligen tillhandahåll fullständig kod</string>
 	<string name="wrong_format">Fel format</string>
     <string name="shared_string_road">Väg</string>
     <string name="show_map">Visa kartan</string>
-    <string name="route_is_calculated">Rutten är beräknad</string>
+    <string name="route_is_calculated">Rutten beräknad</string>
     <string name="round_trip">Rundtur</string>
     <string name="make_round_trip">Gör en rundtur</string>
     
@@ -2521,12 +2521,12 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="my_location">Min plats</string>
     <string name="shared_string_sort">Sortera</string>
     <string name="is_saved">har sparats</string>
-    <string name="marker_save_as_track">Spara som spår</string>
+    <string name="marker_save_as_track">Spara som GPX-fil</string>
     <string name="move_to_history">Flytta till historiken</string>
     <string name="show_arrows_on_the_map">Visa pilar på kartan</string>
     <string name="show_passed">Visa passerade</string>
     <string name="hide_passed">Dölj passerade</string>
-    <string name="remove_from_map_markers">Tag bort från Kartmarkörer</string>
+    <string name="remove_from_map_markers">Tag bort från kartmarkörer\'</string>
     <string name="shared_string_list">Lista</string>
     <string name="shared_string_groups">Grupper</string>
     <string name="passed">Senast använt: %1$s</string>
@@ -2557,17 +2557,17 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="shared_string_paused">Pausad</string>
     <string name="retry">Försök igen</string>
     <string name="plan_route_no_markers_toast">Du måste lägga till åtminstone en markör för att använda denna funktion.</string>
-    <string name="osn_modify_dialog_error">Ett undantagsfel inträffade: anteckningen ändrades inte</string>
+    <string name="osn_modify_dialog_error">Kunde ej ändra anteckning</string>
     <string name="osn_modify_dialog_title">Ändra anteckning</string>
     <string name="context_menu_item_modify_note">Ändra OSM-anteckning</string>
     <string name="coordinates_format">Koordinatformat</string>
     <string name="use_system_keyboard">Använd systemets tangentbord</string>
-    <string name="fast_coordinates_input_descr">Välj koordinatformat. Du kan alltid ändra det genom att peta på Alternativ.</string>
+    <string name="fast_coordinates_input_descr">Välj koordinatformat. Du kan alltid ändra det genom att trycka på \'Alternativ\'.</string>
     <string name="use_location">Använd platsen</string>
     <string name="shared_string_finish">Avsluta</string>
     <string name="plan_route">Planera rutt</string>
-    <string name="marker_save_as_track_descr">Exportera dina markörer till en fil:</string>
-    <string name="group_will_be_removed_after_restart">Gruppen tas bort efter nästa omstart av appen.</string>
+    <string name="marker_save_as_track_descr">Exportera dina markörer till följande GPX-fil:</string>
+    <string name="group_will_be_removed_after_restart">Gruppen kommer att försvinna nästa gång du startar appen.</string>
     <string name="date_added">Datum tillagd</string>
     <string name="order_by">Ordna efter:</string>
     <string name="all_markers_moved_to_history">Alla kartmarkörer har flyttats till historiken</string>
@@ -2601,15 +2601,15 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="store_tracks_in_monthly_directories_descrp">Spara inspelade spår i undermappar efter inspelad månad (typ 2017-01).</string>
     <string name="mapillary_menu_descr_dates">Visa endast tillagda bilder</string>
     <string name="mapillary_menu_descr_username">Visa endast bilder tillagda av</string>
-    <string name="import_gpx_file_description">kan importeras som favoritpunkter eller som spårfil.</string>
+    <string name="import_gpx_file_description">kan importeras som favoriter eller som GPX-fil.</string>
     <string name="import_as_gpx">Importera som GPX-fil</string>
-    <string name="import_as_favorites">Importera som favorit</string>
+    <string name="import_as_favorites">Importera som favoriter</string>
     <string name="import_file">Importera fil</string>
 	<string name="wrong_input">Felaktig inmatning</string>
 	<string name="waypoints_added_to_map_markers">Waypoints tillagda i kartmarkörer</string>
 	<string name="make_round_trip_descr">Lägg till kopia av startpunkten som destination.</string>
     <string name="fast_coordinates_input">Snabbinmatning av koordinater</string>
-    <string name="add_location_as_first_point_descr">Lägg till din position som första punkt för att planera en perfekt rutt.</string>
+    <string name="add_location_as_first_point_descr">Lägg till din position som första punkt för att planera den perfekta rutten.</string>
     <string name="coordinate_input">Koordinatinmatning</string>
     <string name="modify_the_search_query">Ändra sökningen.</string>
     <string name="empty_state_osm_edits">Skapa eller ändra OSM-objekt</string>
@@ -2622,7 +2622,7 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="notes_by_date">Anteckningar efter datum</string>
     <string name="by_date">Efter datum</string>
     <string name="by_type">Efter typ</string>
-    <string name="looking_for_tracks_with_waypoints">Söker spår med waypoints</string>
+    <string name="looking_for_tracks_with_waypoints">Söker efter spår med waypoints</string>
     <string name="shared_string_more_without_dots">Mer</string>
     <string name="appearance_on_the_map">Utseende på kartan</string>
     <string name="what_is_here">Det som finns här:</string>
@@ -2684,23 +2684,23 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="one_tap_active_descr">Tryck på en markör på kartan för att flytta den till toppen av de aktiva markörerna utan att öppna sammanhangsmenyn.</string>
     <string name="one_tap_active">Ett tryck för att aktivera</string>
     <string name="empty_state_av_notes_desc">Lägg till ljud-, video- eller fotonotering för varje punkt på kartan, med hjälp av widgeten eller menyn.</string>
-    <string name="add_track_to_markers_descr">Välj ett spår att lägga till sina waypoints till markörer. (Endast spår med waypoints visas.)</string>
+    <string name="add_track_to_markers_descr">Välj ett spår för att lägga till dess waypoints till markörer.</string>
     <string name="add_favourites_group_to_markers_descr">Välj en favoritkategori för att lägga till markörer.</string>
     <string name="shared_string_gpx_waypoints">Spåra waypoints</string>
     <string name="favourites_group">Kategorin Favoriter</string>
     <string name="add_group">Lägg till en grupp</string>
-    <string name="add_group_descr">Du kan importera grupper från favoriter eller spår-waypoints.</string>
+    <string name="add_group_descr">Importera grupper från favoriter eller GPX-waypoints.</string>
     <string name="empty_state_markers_active">Skapa kartmarkörer!</string>
-    <string name="empty_state_markers_active_desc">Tryck långt eller kort på platser, tryck sedan på flaggknappen.</string>
+    <string name="empty_state_markers_active_desc">Tryck långt eller kort på \'Platser\', tryck sedan på flaggknappen.</string>
     <string name="empty_state_markers_groups">Importera grupper</string>
-    <string name="empty_state_markers_groups_desc">Du kan importera Favoritgrupper eller spåra waypoints som markörer.</string>
+    <string name="empty_state_markers_groups_desc">Importera Favoritgrupper eller waypoints som markörer.</string>
     <string name="empty_state_markers_history_desc">Markörer markerade som godkända visas på denna skärm.</string>
     <string name="shared_string_two">Två</string>
     <string name="shared_string_one">En</string>
-    <string name="show_guide_line_descr">Visa styrlinjer från din position till de aktiva markörslägena.</string>
+    <string name="show_guide_line_descr">Visa styrlinjer från din position till de aktiva markörlägena.</string>
     <string name="show_arrows_descr">Visa en eller två pilar som anger riktningen till de aktiva markörerna.</string>
     <string name="distance_indication_descr">Välj hur du vill visa avståndet till aktiva markörer.</string>
-    <string name="active_markers_descr">Välj hur många riktningsindikatorer som visas.</string>
+    <string name="active_markers_descr">Välj hur många riktningsindikatorer som ska visas.</string>
     <string name="digits_quantity">Antal decimaler</string>
     <string name="shared_string_right">Höger</string>
     <string name="shared_string_left">Vänster</string>
@@ -2708,12 +2708,12 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="shared_string_paste">Klistra in</string>
     <string name="coordinate_input_accuracy_description">Växla automatiskt till nästa fält efter du skrivit in %1$d decimaler.</string>
     <string name="coordinate_input_accuracy">%1$d decimaler</string>
-    <string name="go_to_next_field">Gå till nästa fält</string>
+    <string name="go_to_next_field">Nästa fält</string>
     <string name="rename_marker">Byt namn på markör</string>
     <string name="tap_on_map_to_hide_interface_descr">Ett tryck på kartan växlar kontrollknappar och widgets.</string>
     <string name="tap_on_map_to_hide_interface">Helskärmsläge</string>
     <string name="mark_passed">Markör godkänd</string>
-    <string name="show_guide_line">Visa stödlinjer</string>
+    <string name="show_guide_line">Visa riktlinjer</string>
     <string name="marker_show_distance_descr">Välj hur du vill ange avstånd och riktning till kartmarkörer på kartan:</string>
     <string name="map_orientation_change_in_accordance_with_speed">Kartorienteringströskel</string>
     <string name="map_orientation_change_in_accordance_with_speed_descr">Välj nedan vilken hastighet kartläget växlar från \"riktning\" till \"kompass\".</string>
@@ -2997,4 +2997,15 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="get_osmand_live">Skaffa OsmAnd Live för att låsa upp alla features: Dagliga kartuppdateringar med obegränsat antal nedladdningar, alla betal-och gratistillägg, Wikipedia, Wikivoyage och mycket mer.</string>
     <string name="unirs_render_descr">Ändring av standardstilen för att öka kontrasten av gång och cykelvägar. Använder färger från tidigare versioner av Mapink.</string>
     <string name="shared_string_gpx_files">GPX-filer</string>
+    <string name="release_3_0">• Nyhet: Stöd för globala offline reseguider. Refererade platser är länkade till kartan. Datan kommer initialt från Wikivoyage.
+\n
+\n • Wikipedia: Nytt utseende, aktiva länkar, stöd för bilder
+\n
+\n • Open Track UI: Stöd för waypoint-grupper
+\n
+\n • Kartmarkörer: Importering av valda grupper från GPX-filer, koordinatinmatning, nytt utseende
+\n
+\n • OsmAnd Live-prenumeration stödjer nu alla OsmAnd features
+\n
+\n</string>
     </resources>
