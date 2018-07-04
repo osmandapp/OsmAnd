@@ -988,7 +988,7 @@
 	<string name="poi_wheelchair_yes">Да</string>
 	<string name="poi_wheelchair_no">Не</string>
 	<string name="poi_wheelchair_limited">Ограничен</string>
-	<string name="poi_wholesale"></string>
+	<string name="poi_wholesale"/>
 
 	<string name="poi_access_private">Приватни посед</string>
 	<string name="poi_access_no">Без приступа</string>
@@ -1018,7 +1018,7 @@
 
 	<string name="poi_bicycle_parking_informal">Неформалан</string>
 
-	<string name="poi_leaf_type_broadleaved"></string>
+	<string name="poi_leaf_type_broadleaved"/>
 	<string name="poi_trees_olive">Маслина</string>
 	<string name="poi_trees_apple">Јабука</string>
 	<string name="poi_trees_oil">Палмино уље</string>
@@ -1134,4 +1134,108 @@
 	<string name="poi_grass">Трава</string>
 	<string name="poi_sand">Песак</string>
 
+	<string name="poi_bicycle_parking_stands">Штандови</string>
+	<string name="poi_bicycle_parking_building">Специјална зграда</string>
+	<string name="poi_bicycle_parking_shed">Шупа</string>
+	<string name="poi_leaf_type_mixed">Мешано</string>
+	<string name="poi_species">Врсте</string>
+	<string name="poi_genus">Род</string>
+	<string name="poi_taxon">Таксон</string>
+
+	<string name="poi_intermittent">Повремено</string>
+
+	<string name="poi_information_board">Табла</string>
+	<string name="poi_information_trail_blaze">Маркација на дрвету</string>
+	<string name="poi_information_route_marker">Маркер пута</string>
+	<string name="poi_board_type_notice">Огласна табла</string>
+	<string name="poi_fireplace_no">Нема огњишта</string>
+
+	<string name="poi_smoking_dedicated">За пушаче</string>
+
+	<string name="poi_toll_yes">Путарина</string>
+	<string name="poi_toll_no">Без путарине</string>
+	<string name="poi_dead_wood">Мртво дрво</string>
+
+	<string name="poi_level">Ниво</string>
+	<string name="poi_piste_difficulty_easy">Лака</string>
+	<string name="poi_piste_difficulty_intermediate">Средња</string>
+	<string name="poi_piste_difficulty_advanced">Напредна</string>
+	<string name="poi_piste_difficulty_novice">Почетничка</string>
+	<string name="poi_piste_difficulty_expert">Експертска</string>
+	<string name="poi_piste_difficulty_freeride">Слободна вожња</string>
+	<string name="poi_piste_grooming_classic">Класично</string>
+	<string name="poi_piste_grooming_classic_skating">Класично+клизање</string>
+	<string name="poi_piste_grooming_scooter">Скутером</string>
+	<string name="poi_piste_grooming_skating">Клизање</string>
+	<string name="poi_piste_grooming_no">Не</string>
+	<string name="poi_piste_grooming_mogul">Могул</string>
+
+	<string name="poi_garden_type_residential">Тип баште: стамбена</string>
+	<string name="poi_garden_type_community">Тип баште: јавна</string>
+	<string name="poi_garden_type_private">Тип баште: приватна</string>
+	<string name="poi_garden_type_botanical">Тип баште: ботаничка</string>
+
+	<string name="poi_garden_style_kitchen">Тип баште: кухињска</string>
+	<string name="poi_garden_style_rosarium">Тип баште: розаријум</string>
+	<string name="poi_garden_style_french">Тип баште: француски</string>
+	<string name="poi_garden_style_english">Тип баште: енглески</string>
+	<string name="poi_garden_style_japanese">Тип баште: јапански</string>
+
+	<string name="poi_capacity">Капацитет</string>
+	<string name="poi_capacity_disabled_yes">Да</string>
+	<string name="poi_capacity_disabled_no">Нема посебних места за особе са инвалидитетом</string>
+	<string name="poi_capacity_disabled">Посебна места за особе са инвалидитетом</string>
+	<string name="poi_capacity_women_yes">Посебна места за жене</string>
+	<string name="poi_capacity_women_no">Нема посебних места за жене</string>
+	<string name="poi_capacity_women">Посебна места за жене</string>
+	<string name="poi_capacity_pupils">Посебна места за ученике</string>
+	<string name="poi_capacity_teachers">Посебна места за наставнике</string>
+	<string name="poi_capacity_parent_yes">Посебна места за родитеље</string>
+	<string name="poi_capacity_parent_no">Без посебних места за родитеље</string>
+	<string name="poi_capacity_parent">Посебна места за родитеље</string>
+
+	<string name="poi_aerialway_capacity">Капацитет на сат</string>
+	<string name="poi_aerialway_duration">Просечно време путовања, у минутима</string>
+	<string name="poi_aerialway_bubble_yes">Балон</string>
+	<string name="poi_aerialway_bubble_no">Без балона</string>
+	<string name="poi_aerialway_heating_yes">Да</string>
+	<string name="poi_aerialway_heating_no">Без грејања</string>
+	<string name="poi_aerialway_bicycle_yes">Дозвољене</string>
+	<string name="poi_aerialway_bicycle_no">Бицикле: недозвољене</string>
+	<string name="poi_aerialway_bicycle_summer">Дозвољене само лети</string>
+	<string name="poi_aerialway_access_entry">Само улаз</string>
+	<string name="poi_aerialway_access_exit">Само излаз</string>
+	<string name="poi_aerialway_access_both">Улаз и излаз</string>
+	<string name="poi_aerialway_summer_access_entry">Летњи приступ: само улаз</string>
+	<string name="poi_aerialway_summer_access_exit">Летњи приступ: само излаз</string>
+	<string name="poi_aerialway_summer_access_both">Летњи приступ: улаз и излаз</string>
+
+	<string name="poi_rooms">Собе</string>
+
+	<string name="poi_love_hotel">Љубавни хотел</string>
+
+	<string name="poi_payment_coins_yes">Кованице</string>
+	<string name="poi_payment_coins_no">Кованице се не прихватају</string>
+	<string name="poi_payment_coins_0.5">$0.5 кованице</string>
+	<string name="poi_payment_coins_50c12">50c, 1€ и 2€ кованице</string>
+	<string name="poi_payment_telephone_cards_yes">Телефонске картице</string>
+	<string name="poi_payment_telephone_cards_no">Телефонске картице се не прихватају</string>
+	<string name="poi_payment_credit_cards_yes">Кредитне картице</string>
+	<string name="poi_payment_credit_cards_no">Кредитне картице се не прихватају</string>
+	<string name="poi_payment_notes_yes">Новчанице</string>
+	<string name="poi_payment_notes_no">Новчанице се не прихватају</string>
+	<string name="poi_payment_electronic_purses_yes">Електронске ташне</string>
+	<string name="poi_payment_electronic_purses_no">Електронске ташне се не прихватају</string>
+	<string name="poi_payment_cash_yes">Кеш</string>
+	<string name="poi_payment_cash_no">Кеш се не прихвата</string>
+	<string name="poi_payment_debit_cards_yes">Дебитне картице</string>
+	<string name="poi_payment_debit_cards_no">Дебитне картице се не прихватају</string>
+	<string name="poi_payment_bitcoin_yes">Биткоин</string>
+	<string name="poi_payment_bitcoin_no">Биткоин се не прихвата</string>
+	<string name="poi_payment_visa_yes">Visa картице</string>
+	<string name="poi_payment_visa_no">Visa картице се не прихватају</string>
+	<string name="poi_payment_mastercard_yes">MasterCard картице</string>
+	<string name="poi_payment_mastercard_no">MasterCard картице се не прихватају</string>
+	<string name="poi_payment_maestro_yes">Maestro картице</string>
+	<string name="poi_payment_maestro_no">Maestro картице се не прихватају</string>
 	</resources>
