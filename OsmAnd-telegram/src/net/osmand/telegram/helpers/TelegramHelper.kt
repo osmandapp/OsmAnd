@@ -20,12 +20,13 @@ import kotlin.collections.HashSet
 class TelegramHelper private constructor() {
 
 	companion object {
+		const val OSMAND_BOT_USERNAME = "osmand_bot"
+
 		private val log = PlatformUtil.getLog(TelegramHelper::class.java)
 		private const val CHATS_LIMIT = 100
 		private const val IGNORED_ERROR_CODE = 406
 		private const val UPDATE_LIVE_MESSAGES_INTERVAL_SEC = 30L
 		private const val MESSAGE_ACTIVE_TIME_SEC = 24 * 60 * 60 // 24 hours
-		private const val OSMAND_BOT_USERNAME = "osmand_bot"
 
 		// min and max values for the Telegram API
 		const val MIN_LOCATION_MESSAGE_LIVE_PERIOD_SEC = 61
