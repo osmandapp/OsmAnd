@@ -95,7 +95,7 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 	}
 
 	override fun onReceiveChatLocationMessages(chatTitle: String, vararg messages: TdApi.Message) {
-		updateList()
+		app.runInUIThread { updateList() }
 	}
 
 	override fun updateLocationMessages() {
