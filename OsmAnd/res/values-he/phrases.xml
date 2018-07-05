@@ -412,7 +412,7 @@
 	<string name="poi_service_tyres">צמיגים</string>
 	<string name="poi_vehicle_inspection">מבחן רישוי שנתי לרכב</string>
 	<string name="poi_car_wash">שטיפת רכב</string>
-	<string name="poi_fuel">תחנת דלק</string>
+	<string name="poi_fuel">תחנת דלק;תחנת תדלוק;תחנת מילוי דלק;תחנת בנזין</string>
 	<string name="poi_fuel_diesel">דיזל</string>
 	<string name="poi_fuel_gtl_diesel">דיזל מגז</string>
 	<string name="poi_fuel_biodiesel">ביו דיזל</string>
@@ -1576,4 +1576,28 @@
 	<string name="poi_payment_contactless_yes">ללא מגע</string>
 	<string name="poi_payment_contactless_no">לא מקבלים ללא מגע</string>
 
-</resources>
+<string name="poi_aerialway_magic_carpet">מסוע שטיח</string>
+	<string name="poi_waterway_turning_point">נקודת מפנה במסלול שיט</string>
+	<string name="poi_power_substation">תחנת משנה</string>
+	<string name="poi_power_transformer">שנאי</string>
+	<string name="poi_recycling_cans">פחיות</string>
+	<string name="poi_recycling_scrap_metal">מתכת</string>
+	<string name="poi_recycling_low_energy_bulbs">מנורות מתח נמוך</string>
+	<string name="poi_recycling_fluorescent_tubes">צינורות פלורוסנט</string>
+	<string name="poi_recycling_tetrapak">טטרה פק</string>
+	<string name="poi_recycling_foil">נייר אלומיניום</string>
+	<string name="poi_recycling_chipboard">שבבית</string>
+	<string name="poi_waste_disposal">השלכת אשפה</string>
+	<string name="poi_landuse_railway">אזור מסילות</string>
+	<string name="poi_commercial">שימוש קרקע מסחרי</string>
+	<string name="poi_retail">שימוש קרקע קמעונאי</string>
+
+	<string name="poi_anchorage">מעגן</string>
+	<string name="poi_entrance">כניסה</string>
+	<string name="poi_entrance_exit">יציאה</string>
+
+	<string name="poi_icn_ref">מפרק ברשת רכיבה בינלאומית</string>
+	<string name="poi_ncn_ref">מפרק ברשת רכיבה לאומית</string>
+	<string name="poi_rcn_ref">מפרק ברשת רכיבה אזורית</string>
+	<string name="poi_lcn_ref">מפרק ברשת רכיבה מקומית</string>
+	</resources>

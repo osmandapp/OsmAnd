@@ -3246,4 +3246,124 @@
 	<string name="poi_cuisine_pita">Πίτα</string>
 	<string name="poi_cuisine_fondue">Φόντυ</string>
 	<string name="poi_cuisine_baguette">Μπαγκέτα (ψωμί)</string>
+	<string name="poi_cuisine_pastel">Εμπανάντα (παστέλ)</string>
+	<string name="poi_cuisine_burrito">Μπουρίτο</string>
+	<string name="poi_cuisine_teriyaki">Τεριγιάκι</string>
+	<string name="poi_cuisine_shawarma">Σαουάρμα</string>
+
+	<string name="poi_cuisine_regional">Τοπικό</string>
+	<string name="poi_cuisine_italian">Ιταλικό</string>
+	<string name="poi_cuisine_chinese">Κινέζικο</string>
+	<string name="poi_cuisine_mexican">Μεξικάνικο</string>
+	<string name="poi_cuisine_japanese">Γιαπωνέζικο</string>
+	<string name="poi_cuisine_german">Γερμανικό</string>
+	<string name="poi_cuisine_indian">Ινδικό</string>
+	<string name="poi_cuisine_american">Αμερικάνικο</string>
+	<string name="poi_cuisine_asian">Ασιατικό</string>
+	<string name="poi_cuisine_french">Γαλλικό</string>
+	<string name="poi_cuisine_greek">Ελληνικό</string>
+	<string name="poi_cuisine_thai">Τάι</string>
+	<string name="poi_cuisine_international">Διεθνές</string>
+	<string name="poi_cuisine_turkish">Τούρκικο</string>
+	<string name="poi_cuisine_spanish">Ισπανικό</string>
+	<string name="poi_cuisine_vietnamese">Βιετναμέζικο</string>
+	<string name="poi_cuisine_korean">Κορεάτικο</string>
+	<string name="poi_cuisine_mediterranean">Μεσογειακό</string>
+	<string name="poi_cuisine_bavarian">Βαβαρικό</string>
+	<string name="poi_cuisine_lebanese">Λιβανέζικο</string>
+	<string name="poi_cuisine_russian">Ρώσικο</string>
+	<string name="poi_cuisine_filipino">Φιλιπινέζικο</string>
+	<string name="poi_cuisine_portuguese">Πορτογαλλικό</string>
+	<string name="poi_cuisine_georgian">Γεωργιανό</string>
+	<string name="poi_cuisine_polish">Πολωνικό</string>
+	<string name="poi_cuisine_brazilian">Βραζιλιάνικο</string>
+	<string name="poi_cuisine_arab">Αραβικό</string>
+	<string name="poi_cuisine_danish">Δανικό</string>
+	<string name="poi_cuisine_indonesian">Ινδονησιακό</string>
+	<string name="poi_cuisine_african">Αφρικανικό</string>
+	<string name="poi_cuisine_caribbean">Καραϊβικής</string>
+	<string name="poi_cuisine_argentinian">Αργεντίνικο</string>
+	<string name="poi_cuisine_balkan">Βαλκανικό</string>
+	<string name="poi_cuisine_peruvian">Περουβιανό</string>
+	<string name="poi_cuisine_croatian">Κροατικό</string>
+	<string name="poi_cuisine_bolivian">Βολιβιανό</string>
+	<string name="poi_cuisine_malagasy">Μαδαγασκάρης</string>
+	<string name="poi_cuisine_persian">Περσικό</string>
+	<string name="poi_cuisine_moroccan">Μαροκινό</string>
+	<string name="poi_cuisine_austrian">Αυστριακό</string>
+	<string name="poi_cuisine_malaysian">Μαλαισιανό</string>
+	<string name="poi_cuisine_irish">Ιρλανδικό</string>
+	<string name="poi_cuisine_ethiopian">Αιθιοπικό</string>
+	<string name="poi_cuisine_hungarian">Ουγγρικό</string>
+	<string name="poi_cuisine_lao">Λάο</string>
+	<string name="poi_cuisine_european">Ευρωπαϊκό</string>
+	<string name="poi_cuisine_uzbek">Ουζμπέκικο</string>
+	<string name="poi_cuisine_czech">Τσέχικο</string>
+	<string name="poi_cuisine_cuban">Κουβανικό</string>
+	<string name="poi_cuisine_british">Βρετανικό</string>
+	<string name="poi_cuisine_latin_american">Λατινοαμερικάνικο</string>
+	<string name="poi_cuisine_nepalese">Νεπαλέζικο</string>
+	<string name="poi_cuisine_mongolian">Μογγολικό</string>
+	<string name="poi_cuisine_middle_eastern">Μέσης Ανατολής</string>
+	<string name="poi_cuisine_ukrainian">Ουκρανικό</string>
+	<string name="poi_cuisine_afghan">Αφγανικό</string>
+	<string name="poi_cuisine_belgian">Βελγικό</string>
+	<string name="poi_cuisine_basque">Βασκικό</string>
+	<string name="poi_cuisine_swiss">Ελβετικό</string>
+	<string name="poi_cuisine_cantonese">Καντονέζικο</string>
+	<string name="poi_cuisine_swedish">Σουηδικό</string>
+	<string name="poi_cuisine_jamaican">Τζαμάικας</string>
+	<string name="poi_cuisine_armenian">Αρμενικό</string>
+	<string name="poi_cuisine_hawaiian">Χαβανέζικο</string>
+	<string name="poi_cuisine_english">Αγγλικό</string>
+	<string name="poi_cuisine_pakistani">Πακιστανικό</string>
+	<string name="poi_cuisine_taiwanese">Ταϊβανέζικο</string>
+	<string name="poi_cuisine_tex_mex">Τέξας-Μεξικό</string>
+	<string name="poi_cuisine_dutch">Ολλανδικό</string>
+	<string name="poi_cuisine_syrian">Συριακό</string>
+	<string name="poi_cuisine_australian">Αυστραλέζικο</string>
+	<string name="poi_cuisine_cajun">Κατζούν</string>
+	<string name="poi_cuisine_egyptian">Αιγυπτιακό</string>
+	<string name="poi_cuisine_senegalese">Σενεγαλέζικο</string>
+	<string name="poi_cuisine_jewish">Εβραϊκό</string>
+	<string name="poi_cuisine_bulgarian">Βουλγάρικο</string>
+	<string name="poi_cuisine_tibetan">Θιβετιανό</string>
+
+	<string name="poi_feeding_place">Τόπος για τάισμα ζώων</string>
+
+	<string name="poi_party">Προμήθειες γιορτής</string>
+	<string name="poi_electrical">Ηλεκτρικό κατάστημα</string>
+	<string name="poi_locksmith">Κλειδαράδικο</string>
+	<string name="poi_lighting">Φωτισμός</string>
+	<string name="poi_lottery">Λαχείο</string>
+	<string name="poi_gambling">Αίθουσα τυχερών παιχνιδιών</string>
+
+	<string name="poi_gambling_type">Τύπος</string>
+	<string name="poi_gambling_lottery">Λοταρία</string>
+	<string name="poi_gambling_pachinko">Πατσίνκο</string>
+	<string name="poi_gambling_slot_machines">Κουλοχέρης</string>
+	<string name="poi_gambling_betting">Στοίχημα</string>
+	<string name="poi_gambling_bingo">Μπίνγκο</string>
+
+	<string name="poi_e_cigarette">Ηλεκτρονικά τσιγάρα</string>
+
+	<string name="poi_locomotive">Μηχανή τρένου</string>
+
+	<string name="poi_nutrition_supplements">Συμπληρώματα διατροφής</string>
+	<string name="poi_photo_studio">Φωτογραφείο</string>
+
+	<string name="poi_cliff">Γκρεμός</string>
+
+	<string name="poi_animal_keeping">Φύλαξη ζώων</string>
+	<string name="poi_animal_keeping_horse">Φύλαξη ζώων: άλογα</string>
+	<string name="poi_animal_keeping_sheep">Φύλαξη ζώων: πρόβατα</string>
+	<string name="poi_animal_keeping_type_paddock">Τύπος: μάντρα</string>
+	<string name="poi_animal_keeping_type_open_stable">Τύπος: ανοιχτός στάβλος</string>
+
+	<string name="poi_tower_construction_lattice">Κατασκευή: πλέγμα</string>
+	<string name="poi_tower_construction_freestanding">Κατασκευή: ελεύθερη</string>
+	<string name="poi_tower_construction_dish">Κατασκευή: πιάτο</string>
+	<string name="poi_tower_construction_dome">Κατασκευή: θόλος</string>
+	<string name="poi_tower_construction_concealed">Κατασκευή: κρυφή</string>
+
 	</resources>
