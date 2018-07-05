@@ -1,4 +1,8 @@
 <resources>
+	<string name="get_telegram_title">Registration in Telegram</string>
+	<string name="get_telegram_description_first">You need an account in Telegram to use the capabilities of OsmAnd Location Sharing.</string>
+	<string name="get_telegram_description_second">If you want to continue, please install the Telegram from Google Play and register your account.</string>
+	<string name="get_telegram_description_third">After creating an account, you can use this application.</string>
 	<string name="shared_string_all">All</string>
 	<string name="shared_string_off">Off</string>
 	<string name="authorization_already_registered_in_telegram">You need an already registered account and phone number in Telegram</string>

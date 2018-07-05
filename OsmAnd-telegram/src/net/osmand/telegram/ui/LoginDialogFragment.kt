@@ -10,19 +10,19 @@ import android.support.v4.app.FragmentManager
 import android.support.v7.widget.AppCompatImageView
 import android.text.Html
 import android.text.TextUtils
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.view.WindowManager
 import android.view.inputmethod.EditorInfo
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.TextView
+import android.widget.*
 import net.osmand.PlatformUtil
 import net.osmand.telegram.R
 import net.osmand.telegram.utils.AndroidUtils
 import studio.carbonylgroup.textfieldboxes.ExtendedEditText
+import android.content.Intent
+import android.graphics.Rect
+import android.net.Uri
+import android.view.*
+import android.view.ViewGroup
+import android.text.Editable
+import android.text.TextWatcher
 
 
 class LoginDialogFragment : DialogFragment() {
@@ -35,9 +35,14 @@ class LoginDialogFragment : DialogFragment() {
 		private const val LOGIN_DIALOG_TYPE_PARAM_KEY = "login_dialog_type_param"
 		private const val SHOW_PROGRESS_PARAM_KEY = "show_progress_param"
 		private const val SHOW_WELCOME_DIALOG_PARAM_KEY = "show_welcome_dialog_param"
+		private const val TELEGRAM_PLAY_MARKET_LINK = "market://details?id=org.telegram.messenger"
+		private const val TELEGRAM_NO_PLAY_MARKET_LINK = "https://play.google.com/store/apps/details?id=org.telegram.messenger"
+		private const val SOFT_KEYBOARD_MIN_DETECTION_SIZE = 0.15
 
 		var welcomeDialogShown = false
 			private set
+
+		private var softKeyboardShown: Boolean = false
 
 		fun showWelcomeDialog(fragmentManager: FragmentManager) {
 			welcomeDialogShown = true
@@ -101,12 +106,14 @@ class LoginDialogFragment : DialogFragment() {
 		ENTER_CODE(R.id.enter_code_layout, R.id.code_edit_text,
 				R.string.enter_code, R.string.authentication_code_descr, R.string.enter_authentication_code),
 		ENTER_PASSWORD(R.id.enter_password_layout, R.id.password_edit_text,
-				R.string.enter_password, R.string.password_descr, R.string.enter_password);
+				R.string.enter_password, R.string.password_descr, R.string.enter_password),
+		GET_TELEGRAM(R.id.get_telegram_layout, 0,
+				R.string.get_telegram_title, R.string.get_telegram_description_first, 0);
 	}
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
-		setStyle(DialogFragment.STYLE_NO_FRAME, R.style.AppTheme_NoActionbar)
+		setStyle(DialogFragment.STYLE_NO_FRAME, R.style.AppTheme_NoActionbar_Translucent)
 		val activity = requireActivity()
 		val window = activity.window
 		window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
@@ -124,6 +131,31 @@ class LoginDialogFragment : DialogFragment() {
 		}
 		val view = inflater.inflate(R.layout.login_dialog, container)
 		buildDialog(view)
+		view.viewTreeObserver.addOnGlobalLayoutListener {
+			val r = Rect()
+			view.getWindowVisibleDisplayFrame(r)
+			val screenHeight = view.rootView.height
+			val keypadHeight = screenHeight - r.bottom
+			val softKeyboardVisible = keypadHeight > screenHeight * SOFT_KEYBOARD_MIN_DETECTION_SIZE
+			if (!softKeyboardShown && softKeyboardVisible) {
+				softKeyboardShown = softKeyboardVisible
+				val continueButton = view?.findViewById<Button>(R.id.continue_button)
+				if (continueButton?.layoutParams is ViewGroup.MarginLayoutParams) {
+					val p = continueButton.layoutParams as ViewGroup.MarginLayoutParams
+					p.setMargins(p.leftMargin, p.topMargin, p.rightMargin, AndroidUtils.dpToPx(context!!, 16F))
+					continueButton.requestLayout()
+				}
+			} else if (softKeyboardShown && !softKeyboardVisible) {
+				softKeyboardShown = softKeyboardVisible
+				val continueButton = view?.findViewById<Button>(R.id.continue_button)
+				if (continueButton?.layoutParams is ViewGroup.MarginLayoutParams) {
+					val p = continueButton.layoutParams as ViewGroup.MarginLayoutParams
+					p.setMargins(p.leftMargin, p.topMargin, p.rightMargin, AndroidUtils.dpToPx(context!!, 40F))
+					continueButton.requestLayout()
+				}
+			}
+			softKeyboardShown = softKeyboardVisible
+		}
 		return view
 	}
 
@@ -186,11 +218,15 @@ class LoginDialogFragment : DialogFragment() {
 						val titleView: TextView? = view.findViewById(R.id.login_title)
 						val descriptionView: TextView? = view.findViewById(R.id.login_description)
 						val inputTypeDescriptionView: TextView? = view.findViewById(R.id.login_input_type_descr)
-						val inputTypeDescription = getText(t.inputTypeDescriptionId).toString() + ":"
+						if (t.inputTypeDescriptionId != 0) {
+							val inputTypeDescription = getText(t.inputTypeDescriptionId).toString() + ":"
+							inputTypeDescriptionView?.text = inputTypeDescription
+						} else {
+							inputTypeDescriptionView?.visibility = View.GONE
+						}
 
 						titleView?.text = getText(t.titleId)
 						descriptionView?.text = getText(t.descriptionId)
-						inputTypeDescriptionView?.text = inputTypeDescription
 
 						layout.visibility = View.VISIBLE
 						val editText: ExtendedEditText? = layout.findViewById(t.editorId)
@@ -207,21 +243,58 @@ class LoginDialogFragment : DialogFragment() {
 								AndroidUtils.softKeyboardDelayed(editText)
 								focusRequested = true
 							}
+							editText.addTextChangedListener(object : TextWatcher {
+								override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
+								override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
+								override fun afterTextChanged(s: Editable) {
+									val continueButton: Button? = view.findViewById(R.id.continue_button)
+									if (s.isEmpty()) {
+										continueButton?.setBackgroundResource(R.drawable.btn_round_blue)
+//                                        continueButton?.set()
+									} else {
+										continueButton?.setBackgroundResource(R.drawable.btn_round_purple)
+//                                        continueButton?.setTextColor(R.color.secondary_text_light)
+									}
+								}
+							})
 						}
 
 						val noTelegramViewContainer: LinearLayout? = view.findViewById(R.id.no_telegram)
 						if (loginDialogActiveType == LoginDialogType.ENTER_PHONE_NUMBER) {
-							val noTelegramAccountTitleView: TextView? = view.findViewById(R.id.no_telegram_title)
-							val noTelegramAccountButton: ImageView? = view.findViewById(R.id.no_telegram_button)
-							val phoneNumberFormatHintView: TextView? = view.findViewById(R.id.phone_number_format)
+							view.findViewById<TextView>(R.id.no_telegram_title)?.text = getText(R.string.do_not_have_telegram)
+							view.findViewById<TextView>(R.id.phone_number_format)?.text = getText(R.string.phone_number_descr)
+							view.findViewById<ImageView>(R.id.no_telegram_button)?.setImageResource(R.drawable.ic_arrow_forward)
 
-							noTelegramAccountTitleView?.text = getText(R.string.do_not_have_telegram)
-							phoneNumberFormatHintView?.text = getText(R.string.phone_number_descr)
-							noTelegramAccountButton?.setImageResource(R.drawable.ic_arrow_forward)
-
+							noTelegramViewContainer?.setOnClickListener {
+								val focusedView = dialog.currentFocus
+								if (focusedView != null && softKeyboardShown) {
+									AndroidUtils.hideSoftKeyboard(activity!!, focusedView)
+								}
+								updateDialog(LoginDialogType.GET_TELEGRAM, false)
+							}
 							noTelegramViewContainer?.visibility = View.VISIBLE
 						} else {
 							noTelegramViewContainer?.visibility = View.GONE
+						}
+
+						val getTelegramViewContainer: LinearLayout? = view.findViewById(R.id.get_telegram_layout)
+						if (loginDialogActiveType == LoginDialogType.GET_TELEGRAM) {
+							view.findViewById<TextView>(R.id.get_telegram_description_first)?.text = getText(R.string.get_telegram_description_second)
+							view.findViewById<TextView>(R.id.get_telegram_description_second)?.text = getText(R.string.get_telegram_description_third)
+							val getTelegramButton: ImageView? = view.findViewById(R.id.google_play_button)
+							getTelegramButton?.setImageResource(R.drawable.google_play_badge)
+							getTelegramButton?.setOnClickListener {
+								try {
+									startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(TELEGRAM_PLAY_MARKET_LINK)))
+								} catch (anfe: android.content.ActivityNotFoundException) {
+									startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(TELEGRAM_NO_PLAY_MARKET_LINK)))
+								}
+							}
+							view.findViewById<Button>(R.id.continue_button).visibility = View.GONE
+							getTelegramViewContainer?.visibility = View.VISIBLE
+						} else {
+							getTelegramViewContainer?.visibility = View.GONE
+							view.findViewById<Button>(R.id.continue_button).visibility = View.VISIBLE
 						}
 					}
 				}
@@ -261,6 +334,10 @@ class LoginDialogFragment : DialogFragment() {
 		cancelButton?.setOnClickListener {
 			if (loginDialogActiveType == LoginDialogType.ENTER_PHONE_NUMBER) {
 				showWelcomeDialog = true
+				val focusedView = dialog.currentFocus
+				if (focusedView != null && softKeyboardShown) {
+					AndroidUtils.hideSoftKeyboard(activity!!, focusedView)
+				}
 				buildDialog(view)
 			} else {
 				showProgress()

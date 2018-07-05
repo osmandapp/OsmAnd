@@ -18,6 +18,7 @@
 
 	<dimen name="dialog_button_height">36dp</dimen>
 	<dimen name="dialog_button_radius">2dp</dimen>
+	<dimen name="dialog_continue_button_radius">4dp</dimen>
 	<dimen name="dialog_button_bottom_padding">40dp</dimen>
 	<dimen name="dialog_welcome_title_bottom_padding">96dp</dimen>
 	<dimen name="dialog_welcome_title_top_padding">120dp</dimen>
@@ -55,6 +56,7 @@
 	<dimen name="title_login_text_size">20sp</dimen>
 	<dimen name="title_welcome_text_size">32sp</dimen>
 	<dimen name="descr_text_size">16sp</dimen>
+	<dimen name="continue_btn_text_size">14sp</dimen>
 
 	<dimen name="list_item_title_text_size">16sp</dimen>
 	<dimen name="list_item_description_text_size">12sp</dimen>

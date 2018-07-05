@@ -11,7 +11,8 @@
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
 		android:fillViewport="true"
-		android:visibility="visible">
+		android:visibility="visible"
+		tools:visibility="gone">
 
 		<FrameLayout
 			android:layout_width="match_parent"
@@ -56,7 +57,7 @@
 
 				<Button
 					android:id="@+id/welcome_continue_button"
-					style="@style/DialogActionButtonActive"
+					style="@style/DialogActionButtonActive.Welcome"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:layout_gravity="center"
@@ -115,19 +116,6 @@
 
 		</LinearLayout>
 
-		<TextView
-			android:id="@+id/login_description"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:layout_marginBottom="@dimen/content_padding_standard"
-			android:layout_marginEnd="@dimen/dialog_welcome_padding_horizontal"
-			android:layout_marginLeft="@dimen/dialog_padding_horizontal"
-			android:layout_marginRight="@dimen/dialog_welcome_padding_horizontal"
-			android:layout_marginStart="@dimen/dialog_padding_horizontal"
-			android:layout_marginTop="@dimen/content_padding_standard"
-			android:textColor="@color/app_bar_title_light"
-			android:textSize="@dimen/descr_text_size"
-			tools:text="@string/authorization_already_registered_in_telegram" />
 
 		<ScrollView
 			android:layout_width="match_parent"
@@ -138,164 +126,234 @@
 			<LinearLayout
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:layout_marginEnd="@dimen/dialog_welcome_padding_horizontal"
-				android:layout_marginLeft="@dimen/dialog_welcome_padding_horizontal"
-				android:layout_marginRight="@dimen/dialog_welcome_padding_horizontal"
-				android:layout_marginStart="@dimen/dialog_welcome_padding_horizontal"
-				android:layout_marginTop="@dimen/content_padding_standard"
 				android:orientation="vertical">
 
-				<LinearLayout
-					android:id="@+id/no_telegram"
-					android:layout_width="match_parent"
-					android:layout_height="wrap_content"
-					android:layout_marginBottom="@dimen/dialog_padding_vertical"
-					android:background="@drawable/no_telegram_btn_bg"
-					android:gravity="center_vertical"
-					android:visibility="gone"
-					tools:visibility="visible">
-
-					<TextView
-						android:id="@+id/no_telegram_title"
-						android:layout_width="0dp"
-						android:layout_height="wrap_content"
-						android:layout_marginBottom="@dimen/content_padding_standard"
-						android:layout_marginLeft="@dimen/content_padding_standard"
-						android:layout_marginRight="@dimen/content_padding_standard"
-						android:layout_marginTop="@dimen/content_padding_standard"
-						android:layout_weight="1"
-						android:ellipsize="end"
-						android:gravity="center_vertical"
-						android:maxLines="2"
-						android:text="@string/do_not_have_telegram"
-						android:textColor="?attr/ctrl_active_color"
-						android:textSize="@dimen/descr_text_size"
-						android:textStyle="bold" />
-
-					<ImageView
-						android:id="@+id/no_telegram_button"
-						android:layout_width="wrap_content"
-						android:layout_height="wrap_content"
-						android:layout_marginEnd="@dimen/content_padding_standard"
-						android:layout_marginRight="@dimen/content_padding_standard"
-						android:background="?attr/selectableItemBackgroundBorderless"
-						android:contentDescription="@string/do_not_have_telegram"
-						android:scaleType="centerInside"
-						android:src="@drawable/ic_arrow_forward"
-						android:tint="?attr/icon_color"
-						tools:tint="@color/icon_light" />
-
-				</LinearLayout>
-
-				<net.osmand.telegram.ui.views.TextViewEx
-					android:id="@+id/login_input_type_descr"
+				<TextView
+					android:id="@+id/login_description"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
 					android:layout_marginBottom="@dimen/content_padding_standard"
-					android:layout_marginEnd="@dimen/content_padding_standard"
-					android:layout_marginLeft="@dimen/content_padding_standard"
-					android:layout_marginRight="@dimen/content_padding_standard"
-					android:layout_marginStart="@dimen/content_padding_standard"
-					android:text="@string/enter_phone_number"
+					android:layout_marginEnd="@dimen/dialog_welcome_padding_horizontal"
+					android:layout_marginLeft="@dimen/dialog_padding_horizontal"
+					android:layout_marginRight="@dimen/dialog_welcome_padding_horizontal"
+					android:layout_marginStart="@dimen/dialog_padding_horizontal"
+					android:layout_marginTop="@dimen/content_padding_standard"
 					android:textColor="@color/app_bar_title_light"
-					android:textSize="@dimen/title_text_size"
-					android:textStyle="bold" />
+					android:textSize="@dimen/descr_text_size"
+					tools:text="@string/authorization_already_registered_in_telegram" />
 
 				<LinearLayout
-					android:id="@+id/enter_phone_number_layout"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
-					android:orientation="vertical"
-					android:visibility="visible">
+					android:layout_marginEnd="@dimen/dialog_welcome_padding_horizontal"
+					android:layout_marginLeft="@dimen/dialog_welcome_padding_horizontal"
+					android:layout_marginRight="@dimen/dialog_welcome_padding_horizontal"
+					android:layout_marginStart="@dimen/dialog_welcome_padding_horizontal"
+					android:layout_marginTop="@dimen/content_padding_standard"
+					android:orientation="vertical">
 
-					<studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+					<LinearLayout
+						android:id="@+id/no_telegram"
 						android:layout_width="match_parent"
 						android:layout_height="wrap_content"
-						app:hasClearButton="true">
+						android:layout_marginBottom="@dimen/dialog_padding_vertical"
+						android:background="@drawable/no_telegram_btn_bg"
+						android:gravity="center_vertical"
+						android:visibility="gone"
+						tools:visibility="gone">
 
-						<studio.carbonylgroup.textfieldboxes.ExtendedEditText
-							android:id="@+id/phone_number_edit_text"
-							android:layout_width="match_parent"
+						<TextView
+							android:id="@+id/no_telegram_title"
+							android:layout_width="0dp"
 							android:layout_height="wrap_content"
-							android:hint="@string/phone_number_title"
-							android:inputType="phone" />
+							android:layout_marginBottom="@dimen/content_padding_standard"
+							android:layout_marginLeft="@dimen/content_padding_standard"
+							android:layout_marginRight="@dimen/content_padding_standard"
+							android:layout_marginTop="@dimen/content_padding_standard"
+							android:layout_weight="1"
+							android:ellipsize="end"
+							android:gravity="center_vertical"
+							android:maxLines="2"
+							android:text="@string/do_not_have_telegram"
+							android:textColor="?attr/ctrl_active_color"
+							android:textSize="@dimen/descr_text_size"
+							android:textStyle="bold" />
 
-					</studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+						<ImageView
+							android:id="@+id/no_telegram_button"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_marginEnd="@dimen/content_padding_standard"
+							android:layout_marginRight="@dimen/content_padding_standard"
+							android:contentDescription="@string/do_not_have_telegram"
+							android:scaleType="centerInside"
+							android:src="@drawable/ic_arrow_forward"
+							android:tint="?attr/icon_color"
+							tools:tint="@color/icon_light" />
 
-					<TextView
-						android:id="@+id/phone_number_format"
+					</LinearLayout>
+
+					<net.osmand.telegram.ui.views.TextViewEx
+						android:id="@+id/login_input_type_descr"
 						android:layout_width="match_parent"
 						android:layout_height="wrap_content"
 						android:layout_marginBottom="@dimen/content_padding_standard"
+						android:layout_marginEnd="@dimen/content_padding_standard"
 						android:layout_marginLeft="@dimen/content_padding_standard"
 						android:layout_marginRight="@dimen/content_padding_standard"
-						android:layout_marginTop="@dimen/content_padding_standard"
-						android:text="@string/phone_number_descr"
-						android:textSize="@dimen/descr_text_size" />
+						android:layout_marginStart="@dimen/content_padding_standard"
+						android:text="@string/enter_phone_number"
+						android:textColor="@color/app_bar_title_light"
+						android:textSize="@dimen/title_text_size"
+						android:textStyle="bold"
+						tools:visibility="visible" />
 
-				</LinearLayout>
-
-				<LinearLayout
-					android:id="@+id/enter_code_layout"
-					android:layout_width="match_parent"
-					android:layout_height="wrap_content"
-					android:orientation="vertical"
-					android:paddingBottom="@dimen/content_padding_standard"
-					android:visibility="gone">
-
-					<studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+					<LinearLayout
+						android:id="@+id/enter_phone_number_layout"
 						android:layout_width="match_parent"
 						android:layout_height="wrap_content"
-						app:hasClearButton="true"
-						app:labelText="@string/authentication_code">
+						android:orientation="vertical"
+						android:visibility="visible"
+						tools:visibility="visible">
 
-						<studio.carbonylgroup.textfieldboxes.ExtendedEditText
-							android:id="@+id/code_edit_text"
+						<studio.carbonylgroup.textfieldboxes.TextFieldBoxes
 							android:layout_width="match_parent"
 							android:layout_height="wrap_content"
-							android:inputType="number"
-							tools:text="123456" />
+							app:hasClearButton="true">
 
-					</studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+							<studio.carbonylgroup.textfieldboxes.ExtendedEditText
+								android:id="@+id/phone_number_edit_text"
+								android:layout_width="match_parent"
+								android:layout_height="wrap_content"
+								android:hint="@string/phone_number_title"
+								android:inputType="phone" />
 
-				</LinearLayout>
+						</studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
 
-				<LinearLayout
-					android:id="@+id/enter_password_layout"
-					android:layout_width="match_parent"
-					android:layout_height="wrap_content"
-					android:orientation="vertical"
-					android:paddingBottom="@dimen/content_padding_standard"
-					android:visibility="gone">
+						<TextView
+							android:id="@+id/phone_number_format"
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content"
+							android:layout_marginBottom="@dimen/content_padding_standard"
+							android:layout_marginLeft="@dimen/content_padding_standard"
+							android:layout_marginRight="@dimen/content_padding_standard"
+							android:layout_marginTop="@dimen/content_padding_standard"
+							android:text="@string/phone_number_descr"
+							android:textSize="@dimen/descr_text_size" />
 
-					<studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+					</LinearLayout>
+
+					<LinearLayout
+						android:id="@+id/enter_code_layout"
 						android:layout_width="match_parent"
 						android:layout_height="wrap_content"
-						app:hasClearButton="true"
-						app:labelText="@string/shared_string_password">
+						android:orientation="vertical"
+						android:paddingBottom="@dimen/content_padding_standard"
+						android:visibility="gone">
 
-						<studio.carbonylgroup.textfieldboxes.ExtendedEditText
-							android:id="@+id/password_edit_text"
+						<studio.carbonylgroup.textfieldboxes.TextFieldBoxes
 							android:layout_width="match_parent"
 							android:layout_height="wrap_content"
-							android:inputType="textPassword"
-							tools:text="12345678" />
+							app:hasClearButton="true"
+							app:labelText="@string/authentication_code">
 
-					</studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+							<studio.carbonylgroup.textfieldboxes.ExtendedEditText
+								android:id="@+id/code_edit_text"
+								android:layout_width="match_parent"
+								android:layout_height="wrap_content"
+								android:inputType="number"
+								tools:text="123456" />
 
-				</LinearLayout>
+						</studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
 
-				<LinearLayout
-					android:id="@+id/progress_layout"
-					android:layout_width="match_parent"
-					android:layout_height="wrap_content"
-					android:gravity="center"
-					android:orientation="vertical"
-					android:visibility="gone">
+					</LinearLayout>
 
-					<ProgressBar
-						android:layout_width="@dimen/progress_bar_size_small"
-						android:layout_height="@dimen/progress_bar_size_small" />
+					<LinearLayout
+						android:id="@+id/enter_password_layout"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:orientation="vertical"
+						android:paddingBottom="@dimen/content_padding_standard"
+						android:visibility="gone">
+
+						<studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content"
+							app:hasClearButton="true"
+							app:labelText="@string/shared_string_password">
+
+							<studio.carbonylgroup.textfieldboxes.ExtendedEditText
+								android:id="@+id/password_edit_text"
+								android:layout_width="match_parent"
+								android:layout_height="wrap_content"
+								android:inputType="textPassword"
+								tools:text="12345678" />
+
+						</studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+					</LinearLayout>
+
+					<LinearLayout
+						android:id="@+id/get_telegram_layout"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:orientation="vertical"
+						android:paddingBottom="@dimen/content_padding_standard"
+						android:visibility="gone"
+						tools:visibility="gone">
+
+						<TextView
+							android:id="@+id/get_telegram_description_first"
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content"
+							android:layout_marginBottom="@dimen/content_padding_standard"
+							android:layout_marginEnd="@dimen/content_padding_standard"
+							android:layout_marginLeft="@dimen/content_padding_standard"
+							android:layout_marginRight="@dimen/content_padding_standard"
+							android:layout_marginStart="@dimen/content_padding_standard"
+							android:textColor="@color/app_bar_title_light"
+							android:textSize="@dimen/descr_text_size"
+							tools:text="@string/get_telegram_description_second" />
+
+						<ImageView
+							android:id="@+id/google_play_button"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_marginBottom="@dimen/content_padding_standard"
+							android:layout_marginEnd="@dimen/content_padding_standard"
+							android:layout_marginLeft="@dimen/content_padding_standard"
+							android:layout_marginRight="@dimen/content_padding_standard"
+							android:layout_marginStart="@dimen/content_padding_standard"
+							android:src="@drawable/google_play_badge" />
+
+						<TextView
+							android:id="@+id/get_telegram_description_second"
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content"
+							android:layout_marginBottom="@dimen/content_padding_standard"
+							android:layout_marginEnd="@dimen/content_padding_standard"
+							android:layout_marginLeft="@dimen/content_padding_standard"
+							android:layout_marginRight="@dimen/content_padding_standard"
+							android:layout_marginStart="@dimen/content_padding_standard"
+							android:textColor="@color/app_bar_title_light"
+							android:textSize="@dimen/descr_text_size"
+							tools:text="@string/get_telegram_description_third" />
+
+					</LinearLayout>
+
+					<LinearLayout
+						android:id="@+id/progress_layout"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:gravity="center"
+						android:orientation="vertical"
+						android:visibility="gone">
+
+						<ProgressBar
+							android:layout_width="@dimen/progress_bar_size_small"
+							android:layout_height="@dimen/progress_bar_size_small" />
+
+					</LinearLayout>
 
 				</LinearLayout>
 
