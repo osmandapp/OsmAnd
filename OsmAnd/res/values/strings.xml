@@ -323,7 +323,7 @@
     <string name="map_widget_ruler_control">Radius ruler</string>
     <string name="shared_string_permissions">Permissions</string>
     <string name="import_gpx_failed_descr">OsmAnd cannot import the file. Please check if OsmAnd has permission to read file from its location.</string>
-    <string name="distance_moving">Distance travelled</string>
+    <string name="distance_moving">Corrected distance</string>
     <string name="mapillary_image">Mapillary image</string>
     <string name="open_mapillary">Open Mapillary</string>
     <string name="shared_string_install">Install</string>
