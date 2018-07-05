@@ -147,9 +147,14 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 		invalidateOptionsMenu()
 		updateTitle()
 
-		if (settings.hasAnyChatToShareLocation() && !AndroidUtils.isLocationPermissionAvailable(this)) {
+		app.locationProvider.checkIfLastKnownLocationIsValid()
+
+		if (AndroidUtils.isLocationPermissionAvailable(this)) {
+			app.locationProvider.resumeAllUpdates()
+		} else {
 			requestLocationPermission()
-		} else if (settings.hasAnyChatToShowOnMap() && osmandHelper.isOsmandNotInstalled()) {
+		}
+		if (settings.hasAnyChatToShowOnMap() && osmandHelper.isOsmandNotInstalled()) {
 			showOsmandMissingDialog()
 		}
 	}
@@ -157,6 +162,8 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 	override fun onPause() {
 		super.onPause()
 		telegramHelper.listener = null
+
+		app.locationProvider.pauseAllUpdates()
 
 		paused = true
 	}
@@ -365,12 +372,16 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 
 	override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
 		super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+		if (grantResults.isEmpty()) {
+			return
+		}
 		when (requestCode) {
 			PERMISSION_REQUEST_LOCATION -> {
 				if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 					if (settings.hasAnyChatToShareLocation()) {
 						app.shareLocationHelper.startSharingLocation()
 					}
+					app.locationProvider.resumeAllUpdates()
 				} else {
 					settings.stopSharingLocationToChats()
 					app.shareLocationHelper.stopSharingLocation()
