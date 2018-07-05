@@ -27,7 +27,7 @@
 				android:layout_marginLeft="@dimen/list_item_icon_margin_left"
 				android:layout_marginRight="@dimen/list_item_icon_margin_right"
 				android:layout_marginStart="@dimen/list_item_icon_margin_left"
-				tools:src="@drawable/ic_launcher_background"/>
+				tools:src="@drawable/img_user_picture"/>
 
 			<LinearLayout
 				android:layout_width="0dp"
