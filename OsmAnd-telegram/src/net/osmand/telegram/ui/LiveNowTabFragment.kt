@@ -1,21 +1,24 @@
 package net.osmand.telegram.ui
 
+import android.graphics.Paint
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.ListPopupWindow
 import android.support.v7.widget.RecyclerView
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.ImageView
-import android.widget.Switch
 import android.widget.TextView
-import android.widget.Toast
 import net.osmand.telegram.R
 import net.osmand.telegram.TelegramApplication
 import net.osmand.telegram.helpers.TelegramHelper
 import net.osmand.telegram.helpers.TelegramHelper.*
 import net.osmand.telegram.helpers.TelegramUiHelper
+import net.osmand.telegram.utils.AndroidUtils
 import org.drinkless.td.libcore.telegram.TdApi
 
 private const val CHAT_VIEW_TYPE = 0
@@ -30,7 +33,7 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 	private val osmandHelper get() = app.osmandHelper
 	private val settings get() = app.settings
 
-	private val adapter = LiveNowListAdapter()
+	private lateinit var adapter: LiveNowListAdapter
 
 	override fun onCreateView(
 		inflater: LayoutInflater,
@@ -38,6 +41,7 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 		savedInstanceState: Bundle?
 	): View? {
 		val mainView = inflater.inflate(R.layout.fragment_live_now_tab, container, false)
+		adapter = LiveNowListAdapter()
 		mainView.findViewById<RecyclerView>(R.id.recycler_view).apply {
 			layoutManager = LinearLayoutManager(context)
 			adapter = this@LiveNowTabFragment.adapter
@@ -125,6 +129,9 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 
 	inner class LiveNowListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
+		private val menuList =
+			listOf(getString(R.string.shared_string_off), getString(R.string.shared_string_all))
+
 		var items: List<Any> = emptyList()
 			set(value) {
 				field = value
@@ -156,44 +163,14 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 			if (item is TdApi.Chat && holder is ChatViewHolder) {
 				val nextItemIsUser = !lastItem && items[position + 1] is TdApi.User
 				val chatTitle = item.title
+				val stateTextInd = if (settings.isShowingChatOnMap(chatTitle)) 1 else 0
 
 				TelegramUiHelper.setupPhoto(app, holder.icon, item.photo?.small?.local?.path)
 				holder.title?.text = chatTitle
 				holder.description?.text = "Chat description" // FIXME
-				holder.imageButton?.setImageDrawable(app.uiUtils.getThemedIcon(R.drawable.ic_overflow_menu_white))
-				holder.imageButton?.setOnClickListener {
-					Toast.makeText(context, "Options", Toast.LENGTH_SHORT).show() // FIXME
-				}
-				holder.showOnMapRow?.setOnClickListener {
-					holder.showOnMapSwitch?.isChecked = !holder.showOnMapSwitch?.isChecked!!
-				}
-				holder.showOnMapSwitch?.setOnCheckedChangeListener(null)
-				holder.showOnMapSwitch?.isChecked = settings.isShowingChatOnMap(chatTitle)
-				holder.showOnMapSwitch?.setOnCheckedChangeListener { _, isChecked ->
-					settings.showChatOnMap(chatTitle, isChecked)
-					if (settings.hasAnyChatToShowOnMap()) {
-						if (osmandHelper.isOsmandNotInstalled()) {
-							if (isChecked) {
-								activity?.let {
-									MainActivity.OsmandMissingDialogFragment()
-										.show(it.supportFragmentManager, null)
-								}
-							}
-						} else {
-							if (isChecked) {
-								app.showLocationHelper.showChatMessages(chatTitle)
-							} else {
-								app.showLocationHelper.hideChatMessages(chatTitle)
-							}
-							app.showLocationHelper.startShowingLocation()
-						}
-					} else {
-						app.showLocationHelper.stopShowingLocation()
-						if (!isChecked) {
-							app.showLocationHelper.hideChatMessages(chatTitle)
-						}
-					}
-				}
+				holder.imageButton?.visibility = View.GONE
+				holder.showOnMapRow?.setOnClickListener { showPopupMenu(holder, chatTitle) }
+				holder.showOnMapState?.text = menuList[stateTextInd]
 				holder.bottomDivider?.visibility = if (nextItemIsUser) View.VISIBLE else View.GONE
 				holder.bottomShadow?.visibility = if (lastItem) View.VISIBLE else View.GONE
 			} else if (item is TdApi.User && holder is ContactViewHolder) {
@@ -211,6 +188,56 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 
 		override fun getItemCount() = items.size
 
+		private fun showPopupMenu(holder: ChatViewHolder, chatTitle: String) {
+			val ctx = holder.itemView.context
+
+			val paint = Paint()
+			paint.textSize =
+					resources.getDimensionPixelSize(R.dimen.list_item_title_text_size).toFloat()
+			val textWidth = Math.max(paint.measureText(menuList[0]), paint.measureText(menuList[1]))
+			val itemWidth = textWidth.toInt() + AndroidUtils.dpToPx(ctx, 32F)
+			val minWidth = AndroidUtils.dpToPx(ctx, 100F)
+
+			ListPopupWindow(ctx).apply {
+				isModal = true
+				anchorView = holder.showOnMapState
+				setContentWidth(Math.max(minWidth, itemWidth))
+				setDropDownGravity(Gravity.END or Gravity.TOP)
+				setAdapter(ArrayAdapter(ctx, R.layout.popup_list_text_item, menuList))
+				setOnItemClickListener { _, _, position, _ ->
+					val allSelected = position == 1
+
+					settings.showChatOnMap(chatTitle, allSelected)
+					if (settings.hasAnyChatToShowOnMap()) {
+						if (osmandHelper.isOsmandNotInstalled()) {
+							if (allSelected) {
+								activity?.let {
+									MainActivity.OsmandMissingDialogFragment()
+										.show(it.supportFragmentManager, null)
+								}
+							}
+						} else {
+							if (allSelected) {
+								app.showLocationHelper.showChatMessages(chatTitle)
+							} else {
+								app.showLocationHelper.hideChatMessages(chatTitle)
+							}
+							app.showLocationHelper.startShowingLocation()
+						}
+					} else {
+						app.showLocationHelper.stopShowingLocation()
+						if (!allSelected) {
+							app.showLocationHelper.hideChatMessages(chatTitle)
+						}
+					}
+
+					holder.showOnMapState?.text = menuList[position]
+					dismiss()
+				}
+				show()
+			}
+		}
+
 		inner class ContactViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
 			val icon: ImageView? = view.findViewById(R.id.icon)
 			val title: TextView? = view.findViewById(R.id.title)
@@ -224,7 +251,7 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 			val description: TextView? = view.findViewById(R.id.description)
 			val imageButton: ImageView? = view.findViewById(R.id.image_button)
 			val showOnMapRow: View? = view.findViewById(R.id.show_on_map_row)
-			val showOnMapSwitch: Switch? = view.findViewById(R.id.show_on_map_switch)
+			val showOnMapState: TextView? = view.findViewById(R.id.show_on_map_state)
 			val bottomDivider: View? = view.findViewById(R.id.bottom_divider)
 			val bottomShadow: View? = view.findViewById(R.id.bottom_shadow)
 		}
