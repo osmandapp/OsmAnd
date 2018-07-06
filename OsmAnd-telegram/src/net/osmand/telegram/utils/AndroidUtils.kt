@@ -4,15 +4,12 @@ import android.Manifest
 import android.app.Activity
 import android.content.Context
 import android.content.pm.PackageManager
-import android.content.res.ColorStateList
 import android.content.res.Configuration
 import android.net.Uri
 import android.os.Build
 import android.support.annotation.AttrRes
 import android.support.annotation.ColorInt
-import android.support.annotation.ColorRes
 import android.support.v4.app.ActivityCompat
-import android.support.v4.content.ContextCompat
 import android.support.v4.content.FileProvider
 import android.util.TypedValue
 import android.util.TypedValue.COMPLEX_UNIT_DIP
@@ -47,7 +44,7 @@ object AndroidUtils {
 			}
 		}
 	}
-    
+
 	fun isLocationPermissionAvailable(context: Context): Boolean {
 		return ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
 	}
