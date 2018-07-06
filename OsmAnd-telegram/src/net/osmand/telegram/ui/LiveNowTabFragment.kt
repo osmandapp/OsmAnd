@@ -240,8 +240,7 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 					app.uiUtils.updateLocationView(
 						holder.directionIcon,
 						holder.distanceText,
-						location!!.latitude,
-						location!!.longitude,
+						item.latLon,
 						locationViewCache
 					)
 				} else {
@@ -262,8 +261,7 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 					app.uiUtils.updateLocationView(
 						holder.directionIcon,
 						holder.distanceText,
-						location!!.latitude,
-						location!!.longitude,
+						item.latLon,
 						locationViewCache
 					)
 				} else {
