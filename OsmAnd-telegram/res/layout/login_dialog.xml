@@ -321,6 +321,7 @@
 								android:layout_marginBottom="@dimen/content_padding_standard"
 								android:layout_marginLeft="@dimen/content_padding_standard"
 								android:layout_marginRight="@dimen/content_padding_standard"
+								android:layout_marginTop="@dimen/dialog_description_margin"
 								android:letterSpacing="@dimen/text_description_letter_spacing"
 								android:lineSpacingMultiplier="@dimen/text_description_line_spacing_multiplier"
 								android:textColor="@color/app_bar_title_light"
@@ -331,7 +332,7 @@
 								android:id="@+id/google_play_button"
 								android:layout_width="wrap_content"
 								android:layout_height="wrap_content"
-								android:layout_marginBottom="@dimen/content_padding_standard"
+								android:layout_marginBottom="@dimen/content_padding_half"
 								android:layout_marginLeft="@dimen/content_padding_standard"
 								android:layout_marginRight="@dimen/content_padding_standard"
 								android:src="@drawable/img_google_play_badge" />
@@ -343,6 +344,8 @@
 								android:layout_marginBottom="@dimen/content_padding_standard"
 								android:layout_marginLeft="@dimen/content_padding_standard"
 								android:layout_marginRight="@dimen/content_padding_standard"
+								android:letterSpacing="@dimen/text_description_letter_spacing"
+								android:lineSpacingMultiplier="@dimen/text_description_line_spacing_multiplier"
 								android:textColor="@color/app_bar_title_light"
 								android:textSize="@dimen/descr_text_size"
 								tools:text="@string/get_telegram_after_creating_account" />
