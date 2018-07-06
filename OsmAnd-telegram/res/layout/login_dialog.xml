@@ -41,8 +41,8 @@
 					android:layout_height="wrap_content"
 					android:layout_marginBottom="@dimen/dialog_welcome_title_bottom_padding"
 					android:layout_marginTop="@dimen/dialog_welcome_title_top_margin"
-					android:letterSpacing="-0.03"
-					android:text="Hello!"
+					android:letterSpacing="@dimen/title_letter_spacing"
+					android:text="@string/shared_string_welcome"
 					android:textColor="?attr/ctrl_active_color"
 					android:textSize="@dimen/title_welcome_text_size"
 					app:typeface="@string/font_roboto_mono_bold" />

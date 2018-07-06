@@ -1,4 +1,5 @@
 <resources>
+	<string name="versionFeatures">+play_market -amazon -blackberry</string>
 	<string name="get_telegram_title">Registration in Telegram</string>
 	<string name="get_telegram_account_first">You need an account in Telegram to use the capabilities of OsmAnd Location Sharing.</string>
 	<string name="get_telegram_description_continue">If you want to continue, please install the Telegram from Google Play and register your account.</string>
@@ -7,8 +8,8 @@
 	<string name="shared_string_off">Off</string>
 	<string name="already_registered_in_telegram">You need an already registered account and phone number in Telegram</string>
 	<string name="do_not_have_telegram">I don`t have Telegram account</string>
-	<string name="enter_phone_number">Enter phone number</string>
-	<string name="enter_authentication_code">Enter authentication code</string>
+	<string name="enter_phone_number">Введите номер телефона</string>
+	<string name="enter_authentication_code">Введите код авторизации</string>
 	<string name="set_visible_time_for_all">Set visible time for all</string>
 	<string name="hours_and_minutes_format">%1$d h %2$d m</string>
 	<string name="minutes_format">%1$d m</string>
@@ -25,11 +26,11 @@
 	<string name="show_on_map">Show on map</string>
 	<string name="app_name">OsmAnd Telegram</string>
 	<string name="phone_number_title">Phone number</string>
-	<string name="phone_number_descr">Phone number in the international format</string>
+	<string name="phone_number_descr">Номер должен быть в международном формате: +380 99 888 77 66</string>
 	<string name="shared_string_password">Password</string>
-	<string name="enter_code">Enter code</string>
+	<string name="enter_code">Введите код</string>
 	<string name="authentication_code">Authentication code</string>
-	<string name="authentication_code_descr">You have been sent a code by Telegram. It will be used by OsmAnd to login into your account.</string>
+	<string name="authentication_code_descr">Telegram отправил вам код авторизации, который разрешить OsmAnd подключиться к вашей учетной записи.</string>
 	<string name="enter_password">Enter password</string>
 	<string name="password_descr">Please enter your Telegram account\'s password to finish authorization</string>
 	<string name="shared_string_login">Login</string>
@@ -61,8 +62,8 @@
 	<string name="install_osmand">Install OsmAnd</string>
 	<string name="show_users_on_map">Show users on map</string>
 	<string name="active_chats">Active chats</string>
-	<string name="shared_string_authorization">Authorization</string>
-	<string name="shared_string_authorization_descr">Please enter the phone number of your Telegram account in the international format</string>
+	<string name="shared_string_authorization">Авторизация</string>
+	<string name="shared_string_authorization_descr">Вам необходим уже зарегестрированный аккаунт и номер телефона в Telegram.</string>
 	<string name="shared_string_welcome">Welcome</string>
 
 	<string name="yard">yd</string>
@@ -91,7 +92,7 @@
 	<string name="shared_string_hour_short">h</string>
 	<string name="shared_string_minute_short">min</string>
 	<string name="plus">+</string>
-	<string name="welcome_descr"><![CDATA[<b>OsmAnd Location Sharing</b> allows you to share your location and see locations of other people in the OsmAnd.<br/><br/>The application works on base of Telegram API. To use this app you must have a Telegram account.]]></string>
+	<string name="welcome_descr">Делитесь вашим ........... местоположение, и просматривайте местоположение ваших контактов на карте в OsmAnd.</string>
 	<string name="my_location">My location</string>
 	<string name="live_now">Live now</string>
 

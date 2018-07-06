@@ -49,6 +49,7 @@
 	<dimen name="text_button_letter_spacing" format="float">0.07</dimen>
 	<dimen name="text_description_letter_spacing" format="float">0.0156</dimen>
 	<dimen name="text_description_line_spacing_multiplier" format="float">1.25</dimen>
+	<dimen name="title_letter_spacing" format="float">-0.03</dimen>
 
 	<!-- Text sizes -->
 
