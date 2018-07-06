@@ -207,7 +207,7 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 
 		override fun getItemViewType(position: Int): Int {
 			return when (items[position]) {
-				is TdApi.Chat -> CHAT_VIEW_TYPE
+				is ChatItem -> CHAT_VIEW_TYPE
 				else -> LOCATION_ITEM_VIEW_TYPE
 			}
 		}
