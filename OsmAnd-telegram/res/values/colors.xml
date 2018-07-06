@@ -38,5 +38,6 @@
 	
 	<color name="dialog_continue_btn_active_bg">#5959ff</color>
 	<color name="dialog_continue_btn_non_active_bg">#f0f0f0</color>
+	<color name="dialog_no_telegram_bg">#f0f0f0</color>
 
 </resources>
