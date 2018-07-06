@@ -23,6 +23,7 @@ import android.view.ViewGroup
 import android.text.Editable
 import android.text.Html
 import android.text.TextWatcher
+import android.util.TypedValue
 
 
 class LoginDialogFragment : DialogFragment() {
@@ -194,10 +195,11 @@ class LoginDialogFragment : DialogFragment() {
 					if (layout != null) {
 						val titleView: TextView? = view.findViewById(R.id.login_title)
 						val descriptionView: TextView? = view.findViewById(R.id.login_description)
-						val inputTypeDescriptionView: TextView? = view.findViewById(R.id.login_input_type_descr)
+						val inputTypeDescriptionView: TextView? = view.findViewById(R.id.edittext_descr)
 						if (t.inputTypeDescriptionId != 0) {
 							val inputTypeDescription = getText(t.inputTypeDescriptionId).toString() + ":"
 							inputTypeDescriptionView?.text = inputTypeDescription
+							inputTypeDescriptionView?.visibility = View.VISIBLE
 						} else {
 							inputTypeDescriptionView?.visibility = View.GONE
 						}
@@ -206,8 +208,7 @@ class LoginDialogFragment : DialogFragment() {
 						descriptionView?.text = getText(t.descriptionId)
 
 						layout.visibility = View.VISIBLE
-						val editText: ExtendedEditText? = layout.findViewById<ExtendedEditText>(t.editorId)
-						val continueButton: Button? = view.findViewById(R.id.continue_button)
+						val editText: ExtendedEditText? = layout.findViewById(t.editorId)
 						if (editText != null && !showWelcomeDialog) {
 							editText.setOnEditorActionListener { _, actionId, _ ->
 								if (actionId == EditorInfo.IME_ACTION_DONE) {
@@ -225,14 +226,11 @@ class LoginDialogFragment : DialogFragment() {
 								override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
 								override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
 								override fun afterTextChanged(s: Editable) {
-									if (continueButton != null) {
-										changeContinueButtonEnabled(!s.isEmpty())
-									}
+									changeContinueButtonEnabled(!s.isEmpty())
 								}
 							})
-							if (continueButton != null) {
-								changeContinueButtonEnabled(!editText.text.isEmpty())
-							}
+							changeContinueButtonEnabled(!editText.text.isEmpty())
+							editText.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16F)
 						}
 
 						val noTelegramViewContainer: LinearLayout? = view.findViewById(R.id.no_telegram)
@@ -258,7 +256,7 @@ class LoginDialogFragment : DialogFragment() {
 							view.findViewById<TextView>(R.id.get_telegram_description_first)?.text = getText(R.string.get_telegram_description_continue)
 							view.findViewById<TextView>(R.id.get_telegram_description_second)?.text = getText(R.string.get_telegram_after_creating_account)
 							val getTelegramButton: ImageView? = view.findViewById(R.id.google_play_button)
-							getTelegramButton?.setImageResource(R.drawable.google_play_badge)
+							getTelegramButton?.setImageResource(R.drawable.img_google_play_badge)
 							getTelegramButton?.setOnClickListener {
 								val app = getMainActivity()?.application
 								if (app != null) {
@@ -282,23 +280,21 @@ class LoginDialogFragment : DialogFragment() {
 				progressView?.visibility = View.GONE
 			}
 		}
-		if (continueButton != null) {
-			continueButton.isEnabled = !showProgress && continueButton.isEnabled
-			if (showProgress) {
-				continueButton.setOnClickListener(null)
-			} else {
-				continueButton.setOnClickListener {
-					showWelcomeDialog = false
-					for (t in LoginDialogType.values()) {
-						val layout: View? = view?.findViewById(t.viewId)
-						val contains = t == loginDialogActiveType
-						if (contains && layout != null) {
-							val editText: ExtendedEditText? = layout.findViewById(t.editorId)
-							val text = editText?.text.toString()
-							if (!TextUtils.isEmpty(text) && text.length > 1) {
-								continueButton.setTextColor(ContextCompat.getColor(context!!, R.color.secondary_text_light))
-								applyAuthParam(t, text)
-							}
+		continueButton.isEnabled = !showProgress && continueButton.isEnabled
+		if (showProgress) {
+			continueButton.setOnClickListener(null)
+		} else {
+			continueButton.setOnClickListener {
+				showWelcomeDialog = false
+				for (t in LoginDialogType.values()) {
+					val layout: View? = view?.findViewById(t.viewId)
+					val contains = t == loginDialogActiveType
+					if (contains && layout != null) {
+						val editText: ExtendedEditText? = layout.findViewById(t.editorId)
+						val text = editText?.text.toString()
+						if (!TextUtils.isEmpty(text) && text.length > 1) {
+							continueButton.setTextColor(ContextCompat.getColor(context!!, R.color.secondary_text_light))
+							applyAuthParam(t, text)
 						}
 					}
 				}
