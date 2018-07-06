@@ -16,13 +16,14 @@ import android.widget.TextView
 import net.osmand.Location
 import net.osmand.telegram.R
 import net.osmand.telegram.TelegramApplication
+import net.osmand.telegram.TelegramLocationProvider.TelegramCompassListener
 import net.osmand.telegram.TelegramLocationProvider.TelegramLocationListener
 import net.osmand.telegram.helpers.TelegramHelper
 import net.osmand.telegram.helpers.TelegramHelper.*
 import net.osmand.telegram.helpers.TelegramUiHelper
 import net.osmand.telegram.helpers.TelegramUiHelper.LocationItem
 import net.osmand.telegram.utils.AndroidUtils
-import net.osmand.telegram.utils.OsmandFormatter
+import net.osmand.telegram.utils.UiUtils.UpdateLocationViewCache
 import net.osmand.util.MapUtils
 import org.drinkless.td.libcore.telegram.TdApi
 
@@ -30,7 +31,7 @@ private const val CHAT_VIEW_TYPE = 0
 private const val LOCATION_ITEM_VIEW_TYPE = 1
 
 class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessagesListener,
-	TelegramLocationListener {
+	TelegramLocationListener, TelegramCompassListener {
 
 	private val app: TelegramApplication
 		get() = activity?.application as TelegramApplication
@@ -40,8 +41,11 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 	private val settings get() = app.settings
 
 	private lateinit var adapter: LiveNowListAdapter
+	private lateinit var locationViewCache: UpdateLocationViewCache
 
 	private var location: Location? = null
+	private var heading: Float? = null
+	private var locationUiUpdateAllowed: Boolean = true
 
 	override fun onCreateView(
 		inflater: LayoutInflater,
@@ -53,12 +57,19 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 		mainView.findViewById<RecyclerView>(R.id.recycler_view).apply {
 			layoutManager = LinearLayoutManager(context)
 			adapter = this@LiveNowTabFragment.adapter
+			addOnScrollListener(object : RecyclerView.OnScrollListener() {
+				override fun onScrollStateChanged(recyclerView: RecyclerView?, newState: Int) {
+					super.onScrollStateChanged(recyclerView, newState)
+					locationUiUpdateAllowed = newState == RecyclerView.SCROLL_STATE_IDLE
+				}
+			})
 		}
 		return mainView
 	}
 
 	override fun onResume() {
 		super.onResume()
+		locationViewCache = app.uiUtils.getUpdateLocationViewCache()
 		updateList()
 		telegramHelper.addIncomingMessagesListener(this)
 		startLocationUpdate()
@@ -124,17 +135,33 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 		}
 	}
 
+	override fun updateCompassValue(value: Float) {
+		// 99 in next line used to one-time initialize arrows (with reference vs. fixed-north direction)
+		// on non-compass devices
+		val lastHeading = heading ?: 99f
+		heading = value
+		if (Math.abs(MapUtils.degreesDiff(lastHeading.toDouble(), value.toDouble())) > 5) {
+			updateLocationUi()
+		} else {
+			heading = lastHeading
+		}
+	}
+
 	fun startLocationUpdate() {
 		app.locationProvider.addLocationListener(this)
+		app.locationProvider.addCompassListener(this)
 		updateLocationUi()
 	}
 
 	fun stopLocationUpdate() {
 		app.locationProvider.removeLocationListener(this)
+		app.locationProvider.removeCompassListener(this)
 	}
 
 	private fun updateLocationUi() {
-		adapter.notifyDataSetChanged()
+		if (locationUiUpdateAllowed) {
+			app.runInUIThread { adapter.notifyDataSetChanged() }
+		}
 	}
 
 	private fun updateList() {
@@ -219,14 +246,19 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 				TelegramUiHelper.setupPhoto(app, holder.icon, item.photoPath, item.placeholderId)
 				holder.title?.text = item.name
 				if (location != null) {
-					val dist = MapUtils.getDistance(
-						location!!.latitude, location!!.longitude,
-						item.lat, item.lon
-					).toFloat()
-					holder.description?.text = OsmandFormatter.getFormattedDistance(dist, app)
+					holder.locationViewContainer?.visibility = View.VISIBLE
+					// TODO: locationViewCache.outdatedLocation
+					app.uiUtils.updateLocationView(
+						holder.directionIcon,
+						holder.distanceText,
+						location!!.latitude,
+						location!!.longitude,
+						locationViewCache
+					)
 				} else {
-					holder.description?.text = "Current location is not available"
+					holder.locationViewContainer?.visibility = View.GONE
 				}
+				holder.description?.text = "Some description"
 				holder.bottomShadow?.visibility = if (lastItem) View.VISIBLE else View.GONE
 			}
 		}
@@ -286,6 +318,9 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 		inner class ContactViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
 			val icon: ImageView? = view.findViewById(R.id.icon)
 			val title: TextView? = view.findViewById(R.id.title)
+			val locationViewContainer: View? = view.findViewById(R.id.location_view_container)
+			val directionIcon: ImageView? = view.findViewById(R.id.direction_icon)
+			val distanceText: TextView? = view.findViewById(R.id.distance_text)
 			val description: TextView? = view.findViewById(R.id.description)
 			val bottomShadow: View? = view.findViewById(R.id.bottom_shadow)
 		}

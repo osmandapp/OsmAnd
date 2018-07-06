@@ -58,6 +58,7 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 	private val listeners: MutableList<WeakReference<TelegramListener>> = mutableListOf()
 
 	private var myLocationTabFragment: MyLocationTabFragment? = null
+	private var liveNowTabFragment: LiveNowTabFragment? = null
 
 	private lateinit var buttonsBar: LinearLayout
 	private lateinit var bottomNav: BottomNavigationView
@@ -82,6 +83,10 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 					R.id.action_live_now -> pos = LIVE_NOW_TAB_POS
 				}
 				if (pos != -1 && pos != viewPager.currentItem) {
+					when (pos) {
+						MY_LOCATION_TAB_POS -> liveNowTabFragment?.stopLocationUpdate()
+						LIVE_NOW_TAB_POS -> liveNowTabFragment?.startLocationUpdate()
+					}
 					viewPager.currentItem = pos
 					return@setOnNavigationItemSelectedListener true
 				}
@@ -137,6 +142,8 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 		}
 		if (fragment is MyLocationTabFragment) {
 			myLocationTabFragment = fragment
+		} else if (fragment is LiveNowTabFragment) {
+			liveNowTabFragment = fragment
 		}
 	}
 
