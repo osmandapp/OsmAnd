@@ -34,6 +34,27 @@ object TelegramUiHelper {
 		}
 	}
 
+	fun chatToChatItem(
+		helper: TelegramHelper,
+		chat: TdApi.Chat,
+		messages: List<TdApi.Message>
+	): ChatItem {
+		val res = ChatItem().apply {
+			title = chat.title
+			photoPath = chat.photo?.small?.local?.path
+			placeholderId = R.drawable.ic_group
+		}
+		val chatType = chat.type
+		if (chatType is TdApi.ChatTypePrivate && !helper.isBot(chatType.userId)) {
+			val content = messages.firstOrNull()?.content
+			if (content is TdApi.MessageLocation) {
+				res.lat = content.location.latitude
+				res.lon = content.location.longitude
+			}
+		}
+		return res
+	}
+
 	fun messageToLocationItem(helper: TelegramHelper, message: TdApi.Message): LocationItem? {
 		val content = message.content
 		return when (content) {
@@ -75,6 +96,19 @@ object TelegramUiHelper {
 			photoPath = helper.getUserPhotoPath(user)
 			placeholderId = R.drawable.ic_group
 		}
+	}
+
+	class ChatItem {
+		var title: String = ""
+			internal set
+		var lat: Double = 0.0
+			internal set
+		var lon: Double = 0.0
+			internal set
+		var photoPath: String? = null
+			internal set
+		var placeholderId: Int = 0
+			internal set
 	}
 
 	class LocationItem {

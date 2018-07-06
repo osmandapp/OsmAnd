@@ -18,9 +18,9 @@ import net.osmand.telegram.R
 import net.osmand.telegram.TelegramApplication
 import net.osmand.telegram.TelegramLocationProvider.TelegramCompassListener
 import net.osmand.telegram.TelegramLocationProvider.TelegramLocationListener
-import net.osmand.telegram.helpers.TelegramHelper
 import net.osmand.telegram.helpers.TelegramHelper.*
 import net.osmand.telegram.helpers.TelegramUiHelper
+import net.osmand.telegram.helpers.TelegramUiHelper.ChatItem
 import net.osmand.telegram.helpers.TelegramUiHelper.LocationItem
 import net.osmand.telegram.utils.AndroidUtils
 import net.osmand.telegram.utils.UiUtils.UpdateLocationViewCache
@@ -168,7 +168,7 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 		val res = mutableListOf<Any>()
 		for ((id, messages) in telegramHelper.getMessagesByChatIds()) {
 			telegramHelper.getChat(id)?.also { chat ->
-				res.add(chat)
+				res.add(TelegramUiHelper.chatToChatItem(telegramHelper, chat, messages))
 				if (needLocationItems(chat.type)) {
 					res.addAll(convertToLocationItems(messages))
 				}
@@ -181,9 +181,7 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 		return when (type) {
 			is TdApi.ChatTypeBasicGroup -> true
 			is TdApi.ChatTypeSupergroup -> true
-			is TdApi.ChatTypePrivate -> {
-				telegramHelper.getUser(type.userId)?.username == TelegramHelper.OSMAND_BOT_USERNAME
-			}
+			is TdApi.ChatTypePrivate -> telegramHelper.isOsmAndBot(type.userId)
 			else -> false
 		}
 	}
@@ -229,18 +227,31 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 		override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 			val lastItem = position == itemCount - 1
 			val item = items[position]
-			if (item is TdApi.Chat && holder is ChatViewHolder) {
-				val nextItemIsUser = !lastItem && items[position + 1] is TdApi.User
+			if (item is ChatItem && holder is ChatViewHolder) {
+				val nextIsLocation = !lastItem && items[position + 1] is LocationItem
 				val chatTitle = item.title
 				val stateTextInd = if (settings.isShowingChatOnMap(chatTitle)) 1 else 0
 
-				TelegramUiHelper.setupPhoto(app, holder.icon, item.photo?.small?.local?.path)
+				TelegramUiHelper.setupPhoto(app, holder.icon, item.photoPath, item.placeholderId)
 				holder.title?.text = chatTitle
+				if (location != null) {
+					holder.locationViewContainer?.visibility = View.VISIBLE
+					// TODO: locationViewCache.outdatedLocation
+					app.uiUtils.updateLocationView(
+						holder.directionIcon,
+						holder.distanceText,
+						location!!.latitude,
+						location!!.longitude,
+						locationViewCache
+					)
+				} else {
+					holder.locationViewContainer?.visibility = View.GONE
+				}
 				holder.description?.text = "Chat description" // FIXME
 				holder.imageButton?.visibility = View.GONE
 				holder.showOnMapRow?.setOnClickListener { showPopupMenu(holder, chatTitle) }
 				holder.showOnMapState?.text = menuList[stateTextInd]
-				holder.bottomDivider?.visibility = if (nextItemIsUser) View.VISIBLE else View.GONE
+				holder.bottomDivider?.visibility = if (nextIsLocation) View.VISIBLE else View.GONE
 				holder.bottomShadow?.visibility = if (lastItem) View.VISIBLE else View.GONE
 			} else if (item is LocationItem && holder is ContactViewHolder) {
 				TelegramUiHelper.setupPhoto(app, holder.icon, item.photoPath, item.placeholderId)
@@ -328,6 +339,9 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 		inner class ChatViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
 			val icon: ImageView? = view.findViewById(R.id.icon)
 			val title: TextView? = view.findViewById(R.id.title)
+			val locationViewContainer: View? = view.findViewById(R.id.location_view_container)
+			val directionIcon: ImageView? = view.findViewById(R.id.direction_icon)
+			val distanceText: TextView? = view.findViewById(R.id.distance_text)
 			val description: TextView? = view.findViewById(R.id.description)
 			val imageButton: ImageView? = view.findViewById(R.id.image_button)
 			val showOnMapRow: View? = view.findViewById(R.id.show_on_map_row)
