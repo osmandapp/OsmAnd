@@ -376,6 +376,8 @@
 				android:layout_height="wrap_content"
 				android:layout_gravity="bottom|center_horizontal"
 				android:layout_marginBottom="@dimen/dialog_button_bottom_padding"
+				android:layout_marginLeft="@dimen/content_padding_half"
+				android:layout_marginRight="@dimen/content_padding_half"
 				android:text="@string/shared_string_continue" />
 
 		</FrameLayout>

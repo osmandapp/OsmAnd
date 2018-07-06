@@ -16,6 +16,7 @@ import net.osmand.telegram.R
 import net.osmand.telegram.utils.AndroidUtils
 import studio.carbonylgroup.textfieldboxes.ExtendedEditText
 import android.content.Intent
+import android.graphics.Rect
 import android.net.Uri
 import android.support.v4.content.ContextCompat
 import android.view.*
@@ -37,9 +38,12 @@ class LoginDialogFragment : DialogFragment() {
 		private const val SHOW_PROGRESS_PARAM_KEY = "show_progress_param"
 		private const val SHOW_WELCOME_DIALOG_PARAM_KEY = "show_welcome_dialog_param"
 		private const val TELEGRAM_PACKAGE = "org.telegram.messenger"
+		private const val SOFT_KEYBOARD_MIN_DETECTION_SIZE = 0.15
 
 		var welcomeDialogShown = false
 			private set
+
+		private var softKeyboardShown: Boolean = false
 
 		fun showWelcomeDialog(fragmentManager: FragmentManager) {
 			welcomeDialogShown = true
@@ -134,7 +138,35 @@ class LoginDialogFragment : DialogFragment() {
 		}
 
 		buildDialog(view)
+		view.viewTreeObserver.addOnGlobalLayoutListener {
+			val r = Rect()
+			view.getWindowVisibleDisplayFrame(r)
+			val screenHeight = view.rootView.height
+			val keypadHeight = screenHeight - r.bottom
+			val softKeyboardVisible = keypadHeight > screenHeight * SOFT_KEYBOARD_MIN_DETECTION_SIZE
+			if (!softKeyboardShown && softKeyboardVisible) {
+				softKeyboardShown = softKeyboardVisible
+				setContinueButtonSize(true)
+			} else if (softKeyboardShown && !softKeyboardVisible) {
+				setContinueButtonSize(false)
+			}
+			softKeyboardShown = softKeyboardVisible
+		}
 		return view
+	}
+
+	private fun setContinueButtonSize(isWide: Boolean) {
+		val params = continueButton.layoutParams
+		if (params is ViewGroup.MarginLayoutParams) {
+			if (isWide) {
+				params.setMargins(params.leftMargin, params.topMargin, params.rightMargin, AndroidUtils.dpToPx(context!!, 16F))
+				params.width = ViewGroup.LayoutParams.MATCH_PARENT
+			} else {
+				params.setMargins(params.leftMargin, params.topMargin, params.rightMargin, AndroidUtils.dpToPx(context!!, 40F))
+				params.width = ViewGroup.LayoutParams.WRAP_CONTENT
+			}
+			continueButton.requestLayout()
+		}
 	}
 
 	override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
