@@ -174,7 +174,7 @@ class UiUtils(private val app: TelegramApplication) {
 
 		if (text != null) {
 			text.setTextColor(ContextCompat.getColor(app, colorId))
-			val meters = if (fromLoc == null || toLoc == null) 0f else mes[1]
+			val meters = if (fromLoc == null || toLoc == null) 0f else mes[0]
 			text.text = OsmandFormatter.getFormattedDistance(meters, app)
 		}
 	}
