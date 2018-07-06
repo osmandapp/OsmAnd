@@ -19,6 +19,7 @@ import studio.carbonylgroup.textfieldboxes.ExtendedEditText
 import android.content.Intent
 import android.graphics.Rect
 import android.net.Uri
+import android.support.v4.content.ContextCompat
 import android.view.*
 import android.view.ViewGroup
 import android.text.Editable
@@ -96,6 +97,7 @@ class LoginDialogFragment : DialogFragment() {
 
 	private var showWelcomeDialog = false
 	private var showProgress = false
+	private var continueButtonEnabled = false
 	private var dismissedManually = false
 
 	enum class LoginDialogType(val viewId: Int, val editorId: Int,
@@ -229,7 +231,8 @@ class LoginDialogFragment : DialogFragment() {
 						descriptionView?.text = getText(t.descriptionId)
 
 						layout.visibility = View.VISIBLE
-						val editText: ExtendedEditText? = layout.findViewById(t.editorId)
+						val editText: ExtendedEditText? = layout.findViewById<ExtendedEditText>(t.editorId)
+						val continueButton: Button? = view.findViewById(R.id.continue_button)
 						if (editText != null && !showWelcomeDialog) {
 							editText.setOnEditorActionListener { _, actionId, _ ->
 								if (actionId == EditorInfo.IME_ACTION_DONE) {
@@ -247,16 +250,22 @@ class LoginDialogFragment : DialogFragment() {
 								override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
 								override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
 								override fun afterTextChanged(s: Editable) {
-									val continueButton: Button? = view.findViewById(R.id.continue_button)
-									if (s.isEmpty()) {
-										continueButton?.setBackgroundResource(R.drawable.btn_round_blue)
-//                                        continueButton?.set()
-									} else {
-										continueButton?.setBackgroundResource(R.drawable.btn_round_purple)
-//                                        continueButton?.setTextColor(R.color.secondary_text_light)
+									if (continueButton != null) {
+										if (s.isEmpty()) {
+											changeContinueButton(continueButton, false)
+										} else {
+											changeContinueButton(continueButton, true)
+										}
 									}
 								}
 							})
+							if (continueButton != null) {
+								if (editText.text.isEmpty()) {
+									changeContinueButton(continueButton, false)
+								} else {
+									changeContinueButton(continueButton, true)
+								}
+							}
 						}
 
 						val noTelegramViewContainer: LinearLayout? = view.findViewById(R.id.no_telegram)
@@ -309,7 +318,7 @@ class LoginDialogFragment : DialogFragment() {
 		}
 		val continueButton: Button? = view?.findViewById(R.id.continue_button)
 		if (continueButton != null) {
-			continueButton.isEnabled = !showProgress
+			continueButton.isEnabled = !showProgress && continueButtonEnabled
 			if (showProgress) {
 				continueButton.setOnClickListener(null)
 			} else {
@@ -322,6 +331,7 @@ class LoginDialogFragment : DialogFragment() {
 							val editText: ExtendedEditText? = layout.findViewById(t.editorId)
 							val text = editText?.text.toString()
 							if (!TextUtils.isEmpty(text) && text.length > 1) {
+								continueButton.setTextColor(ContextCompat.getColor(context!!, R.color.secondary_text_light))
 								applyAuthParam(t, text)
 							}
 						}
@@ -379,5 +389,19 @@ class LoginDialogFragment : DialogFragment() {
 	fun showProgress() {
 		showProgress = true
 		buildDialog(view)
+	}
+
+	private fun changeContinueButton(continueButton: Button, isActive: Boolean = false) {
+		if (isActive) {
+			continueButton.setBackgroundResource(R.drawable.btn_round_purple)
+			continueButton.setTextColor(ContextCompat.getColor(context!!, R.color.white))
+			continueButtonEnabled = isActive
+			continueButton.isEnabled = continueButtonEnabled
+		} else {
+			continueButton.setBackgroundResource(R.drawable.btn_round_blue)
+			continueButton.setTextColor(ContextCompat.getColor(context!!, R.color.secondary_text_light))
+			continueButtonEnabled = isActive
+			continueButton.isEnabled = continueButtonEnabled
+		}
 	}
 }
