@@ -1,15 +1,25 @@
 package net.osmand.telegram.utils
 
+import android.content.Context
 import android.graphics.*
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.LayerDrawable
+import android.hardware.Sensor
+import android.hardware.SensorManager
 import android.support.annotation.ColorInt
 import android.support.annotation.ColorRes
 import android.support.annotation.DrawableRes
 import android.support.v4.content.ContextCompat
 import android.support.v4.graphics.drawable.DrawableCompat
+import android.view.Surface
+import android.view.WindowManager
+import android.widget.ImageView
+import android.widget.TextView
+import net.osmand.Location
+import net.osmand.data.LatLon
 import net.osmand.telegram.R
 import net.osmand.telegram.TelegramApplication
+import net.osmand.telegram.ui.views.DirectionDrawable
 import java.util.*
 
 class UiUtils(private val app: TelegramApplication) {
@@ -121,5 +131,85 @@ class UiUtils(private val app: TelegramApplication) {
 		}
 
 		return bitmap
+	}
+
+	fun updateLocationView(
+		arrow: ImageView?,
+		text: TextView?,
+		lat: Double,
+		lon: Double,
+		cache: UpdateLocationViewCache
+	) {
+		updateLocationView(arrow, text, LatLon(lat, lon), cache)
+	}
+
+	fun updateLocationView(
+		arrow: ImageView?,
+		text: TextView?,
+		toLoc: LatLon,
+		cache: UpdateLocationViewCache
+	) {
+		val fromLoc = app.locationProvider.lastKnownLocationLatLon
+		val heading = app.locationProvider.heading
+		val mes = FloatArray(2)
+		val locPassive = fromLoc == null || cache.outdatedLocation
+		val colorId = if (locPassive) R.color.icon_light else R.color.ctrl_active_light
+
+		fromLoc?.also { l ->
+			Location.distanceBetween(toLoc.latitude, toLoc.longitude, l.latitude, l.longitude, mes)
+		}
+
+		if (arrow != null) {
+			var newImage = false
+			val drawable = arrow.drawable
+			val dd = if (drawable is DirectionDrawable) {
+				drawable
+			} else {
+				newImage = true
+				DirectionDrawable(app)
+			}
+			dd.setImage(R.drawable.ic_direction_arrow, colorId)
+			if (fromLoc == null || heading == null) {
+				dd.setAngle(0f)
+			} else {
+				dd.setAngle(mes[1] - heading + 180 + cache.screenOrientation)
+			}
+			if (newImage) {
+				arrow.setImageDrawable(dd)
+			}
+			arrow.invalidate()
+		}
+
+		if (text != null) {
+			text.setTextColor(ContextCompat.getColor(app, colorId))
+			val meters = if (fromLoc == null) 0f else mes[1]
+			text.text = OsmandFormatter.getFormattedDistance(meters, app)
+		}
+	}
+
+	fun getUpdateLocationViewCache() =
+		UpdateLocationViewCache().apply { screenOrientation = getScreenOrientation() }
+
+	private fun getScreenOrientation(): Int {
+		// screenOrientation correction must not be applied for devices without compass
+		val sensorManager = app.getSystemService(Context.SENSOR_SERVICE) as SensorManager?
+		if (sensorManager?.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD) == null) {
+			return 0
+		}
+
+		val windowManager = app.getSystemService(Context.WINDOW_SERVICE) as WindowManager?
+		val rotation = windowManager?.defaultDisplay?.rotation ?: return 0
+
+		return when (rotation) {
+			Surface.ROTATION_90 -> 90
+			Surface.ROTATION_180 -> 180
+			Surface.ROTATION_270 -> 270
+			else -> 0
+		}
+	}
+
+	class UpdateLocationViewCache {
+		var screenOrientation: Int = 0
+		var outdatedLocation: Boolean = false
 	}
 }
