@@ -49,16 +49,61 @@
 					app:typeface="@string/font_roboto_regular"
 					tools:text="Share location"/>
 
-				<net.osmand.telegram.ui.views.TextViewEx
-					android:id="@+id/description"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:ellipsize="end"
-					android:maxLines="1"
-					android:textColor="?attr/android:textColorSecondary"
-					android:textSize="@dimen/list_item_description_text_size"
-					app:typeface="@string/font_roboto_regular"
-					tools:text="Live: 1 • All: 36"/>
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content">
+
+					<LinearLayout
+						android:id="@+id/location_view_container"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:gravity="center_vertical"
+						android:visibility="gone"
+						tools:visibility="visible">
+
+						<ImageView
+							android:id="@+id/direction_icon"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_marginEnd="4dp"
+							android:layout_marginRight="4dp"
+							tools:src="@drawable/ic_direction_arrow"
+							tools:tint="@color/ctrl_active_light"/>
+
+						<net.osmand.telegram.ui.views.TextViewEx
+							android:id="@+id/distance_text"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:maxLines="1"
+							android:textSize="@dimen/list_item_description_text_size"
+							app:typeface="@string/font_roboto_medium"
+							tools:text="213 m"
+							tools:textColor="@color/ctrl_active_light"/>
+
+						<TextView
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_marginLeft="4dp"
+							android:layout_marginRight="4dp"
+							android:text="•"
+							android:textColor="?attr/android:textColorSecondary"
+							android:textSize="@dimen/list_item_description_text_size"/>
+
+					</LinearLayout>
+
+					<net.osmand.telegram.ui.views.TextViewEx
+						android:id="@+id/description"
+						android:layout_width="0dp"
+						android:layout_height="wrap_content"
+						android:layout_weight="1"
+						android:ellipsize="end"
+						android:maxLines="1"
+						android:textColor="?attr/android:textColorSecondary"
+						android:textSize="@dimen/list_item_description_text_size"
+						app:typeface="@string/font_roboto_regular"
+						tools:text="Live: 1 • All: 36"/>
+
+				</LinearLayout>
 
 			</LinearLayout>
 

@@ -247,6 +247,10 @@ class TelegramHelper private constructor() {
 		}
 	}
 
+	fun isOsmAndBot(userId: Int) = users[userId]?.username == OSMAND_BOT_USERNAME
+
+	fun isBot(userId: Int) = users[userId]?.type is TdApi.UserTypeBot
+
 	fun startLiveMessagesUpdates() {
 		stopLiveMessagesUpdates()
 
@@ -612,7 +616,7 @@ class TelegramHelper private constructor() {
 			is TdApi.MessageText -> {
 				if (content.text.text.startsWith("{")) {
 					// TODO: get user from library if null
-					if (users[senderUserId]?.username == OSMAND_BOT_USERNAME) {
+					if (isOsmAndBot(senderUserId)) {
 						return true
 					}
 				}
