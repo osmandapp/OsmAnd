@@ -147,7 +147,7 @@ class UiUtils(private val app: TelegramApplication) {
 
 		if (fromLoc != null && toLoc != null) {
 			Location.distanceBetween(
-				fromLoc.latitude, fromLoc.longitude, toLoc.latitude, toLoc.longitude, mes
+				toLoc.latitude, toLoc.longitude, fromLoc.latitude, fromLoc.longitude, mes
 			)
 		}
 

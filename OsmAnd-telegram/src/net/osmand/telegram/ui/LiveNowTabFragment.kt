@@ -187,11 +187,11 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 	}
 
 	private fun convertToLocationItems(messages: List<TdApi.Message>): List<LocationItem> {
-		return mutableListOf<LocationItem>().apply {
-			messages.forEach { message ->
-				TelegramUiHelper.messageToLocationItem(telegramHelper, message)?.also { add(it) }
-			}
+		val res = mutableListOf<LocationItem>()
+		messages.forEach { message ->
+			TelegramUiHelper.messageToLocationItem(telegramHelper, message)?.also { res.add(it) }
 		}
+		return res
 	}
 
 	inner class LiveNowListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -234,7 +234,7 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 
 				TelegramUiHelper.setupPhoto(app, holder.icon, item.photoPath, item.placeholderId)
 				holder.title?.text = chatTitle
-				if (location != null) {
+				if (location != null && item.latLon != null) {
 					holder.locationViewContainer?.visibility = View.VISIBLE
 					// TODO: locationViewCache.outdatedLocation
 					app.uiUtils.updateLocationView(
@@ -255,7 +255,7 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 			} else if (item is LocationItem && holder is ContactViewHolder) {
 				TelegramUiHelper.setupPhoto(app, holder.icon, item.photoPath, item.placeholderId)
 				holder.title?.text = item.name
-				if (location != null) {
+				if (location != null && item.latLon != null) {
 					holder.locationViewContainer?.visibility = View.VISIBLE
 					// TODO: locationViewCache.outdatedLocation
 					app.uiUtils.updateLocationView(
