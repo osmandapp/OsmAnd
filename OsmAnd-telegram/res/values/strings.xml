@@ -5,7 +5,7 @@
 	<string name="get_telegram_after_creating_account">After creating an account, you can use this application.</string>
 	<string name="shared_string_all">All</string>
 	<string name="shared_string_off">Off</string>
-	<string name="authorization_already_registered_in_telegram">You need an already registered account and phone number in Telegram</string>
+	<string name="already_registered_in_telegram">You need an already registered account and phone number in Telegram</string>
 	<string name="do_not_have_telegram">I don`t have Telegram account</string>
 	<string name="enter_phone_number">Enter phone number</string>
 	<string name="enter_authentication_code">Enter authentication code</string>

@@ -3,20 +3,21 @@
 
 	<item android:state_pressed="true">
 		<shape android:shape="rectangle">
-			<solid android:color="@color/dialog_continue_btn_active_bg" />
-			<corners android:radius="@dimen/dialog_continue_button_radius" />
+			<solid android:color="@color/ctrl_light" />
+			<corners android:radius="@dimen/dialog_button_radius" />
 		</shape>
 	</item>
 	<item android:state_enabled="false">
 		<shape android:shape="rectangle">
 			<solid android:color="@color/ctrl_light" />
-			<corners android:radius="@dimen/dialog_continue_button_radius" />
+			<corners android:radius="@dimen/dialog_button_radius" />
 		</shape>
 	</item>
 	<item>
 		<shape android:shape="rectangle">
-			<solid android:color="@color/dialog_continue_btn_non_active_bg" />
-			<corners android:radius="@dimen/dialog_continue_button_radius" />
+			<solid android:color="@null" />
+			<corners android:radius="@dimen/dialog_button_radius" />
+			<stroke android:width="1dp" android:color="#f0f0f0" />
 		</shape>
 	</item>
 
