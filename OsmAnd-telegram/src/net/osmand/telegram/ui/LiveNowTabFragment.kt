@@ -13,18 +13,24 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.TextView
+import net.osmand.Location
 import net.osmand.telegram.R
 import net.osmand.telegram.TelegramApplication
+import net.osmand.telegram.TelegramLocationProvider.TelegramLocationListener
 import net.osmand.telegram.helpers.TelegramHelper
 import net.osmand.telegram.helpers.TelegramHelper.*
 import net.osmand.telegram.helpers.TelegramUiHelper
+import net.osmand.telegram.helpers.TelegramUiHelper.LocationItem
 import net.osmand.telegram.utils.AndroidUtils
+import net.osmand.telegram.utils.OsmandFormatter
+import net.osmand.util.MapUtils
 import org.drinkless.td.libcore.telegram.TdApi
 
 private const val CHAT_VIEW_TYPE = 0
-private const val CONTACT_VIEW_TYPE = 1
+private const val LOCATION_ITEM_VIEW_TYPE = 1
 
-class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessagesListener {
+class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessagesListener,
+	TelegramLocationListener {
 
 	private val app: TelegramApplication
 		get() = activity?.application as TelegramApplication
@@ -34,6 +40,8 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 	private val settings get() = app.settings
 
 	private lateinit var adapter: LiveNowListAdapter
+
+	private var location: Location? = null
 
 	override fun onCreateView(
 		inflater: LayoutInflater,
@@ -53,11 +61,13 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 		super.onResume()
 		updateList()
 		telegramHelper.addIncomingMessagesListener(this)
+		startLocationUpdate()
 	}
 
 	override fun onPause() {
 		super.onPause()
 		telegramHelper.removeIncomingMessagesListener(this)
+		stopLocationUpdate()
 	}
 
 	override fun onTelegramStatusChanged(
@@ -92,17 +102,39 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 		updateList()
 	}
 
-	override fun onTelegramError(code: Int, message: String) {
-	}
+	override fun onTelegramError(code: Int, message: String) {}
 
-	override fun onSendLiveLocationError(code: Int, message: String) {
-	}
+	override fun onSendLiveLocationError(code: Int, message: String) {}
 
 	override fun onReceiveChatLocationMessages(chatTitle: String, vararg messages: TdApi.Message) {
 		app.runInUIThread { updateList() }
 	}
 
-	override fun updateLocationMessages() {
+	override fun updateLocationMessages() {}
+
+	override fun updateLocation(location: Location?) {
+		val loc = this.location
+		val newLocation = loc == null && location != null
+		val locationChanged = loc != null && location != null
+				&& loc.latitude != location.latitude
+				&& loc.longitude != location.longitude
+		if (newLocation || locationChanged) {
+			this.location = location
+			updateLocationUi()
+		}
+	}
+
+	fun startLocationUpdate() {
+		app.locationProvider.addLocationListener(this)
+		updateLocationUi()
+	}
+
+	fun stopLocationUpdate() {
+		app.locationProvider.removeLocationListener(this)
+	}
+
+	private fun updateLocationUi() {
+		adapter.notifyDataSetChanged()
 	}
 
 	private fun updateList() {
@@ -110,21 +142,31 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 		for ((id, messages) in telegramHelper.getMessagesByChatIds()) {
 			telegramHelper.getChat(id)?.also { chat ->
 				res.add(chat)
-				val type = chat.type
-				if (type is TdApi.ChatTypeBasicGroup || type is TdApi.ChatTypeSupergroup) {
-					messages.forEach { message ->
-						if (message.content is MessageOsmAndBotLocation) {
-							res.add(message.content)
-						} else {
-							telegramHelper.getUser(message.senderUserId)?.also { res.add(it) }
-						}
-					}
-				} else if (type is TdApi.ChatTypePrivate && telegramHelper.getUser(type.userId)?.username == TelegramHelper.OSMAND_BOT_USERNAME) {
-					res.addAll(messages.filter { it.content is MessageOsmAndBotLocation })
+				if (needLocationItems(chat.type)) {
+					res.addAll(convertToLocationItems(messages))
 				}
 			}
 		}
 		adapter.items = res
+	}
+
+	private fun needLocationItems(type: TdApi.ChatType): Boolean {
+		return when (type) {
+			is TdApi.ChatTypeBasicGroup -> true
+			is TdApi.ChatTypeSupergroup -> true
+			is TdApi.ChatTypePrivate -> {
+				telegramHelper.getUser(type.userId)?.username == TelegramHelper.OSMAND_BOT_USERNAME
+			}
+			else -> false
+		}
+	}
+
+	private fun convertToLocationItems(messages: List<TdApi.Message>): List<LocationItem> {
+		return mutableListOf<LocationItem>().apply {
+			messages.forEach { message ->
+				TelegramUiHelper.messageToLocationItem(telegramHelper, message)?.also { add(it) }
+			}
+		}
 	}
 
 	inner class LiveNowListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -141,7 +183,7 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 		override fun getItemViewType(position: Int): Int {
 			return when (items[position]) {
 				is TdApi.Chat -> CHAT_VIEW_TYPE
-				else -> CONTACT_VIEW_TYPE
+				else -> LOCATION_ITEM_VIEW_TYPE
 			}
 		}
 
@@ -173,15 +215,18 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 				holder.showOnMapState?.text = menuList[stateTextInd]
 				holder.bottomDivider?.visibility = if (nextItemIsUser) View.VISIBLE else View.GONE
 				holder.bottomShadow?.visibility = if (lastItem) View.VISIBLE else View.GONE
-			} else if (item is TdApi.User && holder is ContactViewHolder) {
-				TelegramUiHelper.setupPhoto(app, holder.icon, telegramHelper.getUserPhotoPath(item))
-				holder.title?.text = "${item.firstName} ${item.lastName}"
-				holder.description?.text = "User description" // FIXME
-				holder.bottomShadow?.visibility = if (lastItem) View.VISIBLE else View.GONE
-			} else if (item is MessageOsmAndBotLocation && holder is ContactViewHolder) {
-				holder.icon?.setImageDrawable(app.uiUtils.getThemedIcon(R.drawable.ic_group))
+			} else if (item is LocationItem && holder is ContactViewHolder) {
+				TelegramUiHelper.setupPhoto(app, holder.icon, item.photoPath, item.placeholderId)
 				holder.title?.text = item.name
-				holder.description?.text = "Location from osmand_bot" // FIXME
+				if (location != null) {
+					val dist = MapUtils.getDistance(
+						location!!.latitude, location!!.longitude,
+						item.lat, item.lon
+					).toFloat()
+					holder.description?.text = OsmandFormatter.getFormattedDistance(dist, app)
+				} else {
+					holder.description?.text = "Current location is not available"
+				}
 				holder.bottomShadow?.visibility = if (lastItem) View.VISIBLE else View.GONE
 			}
 		}
