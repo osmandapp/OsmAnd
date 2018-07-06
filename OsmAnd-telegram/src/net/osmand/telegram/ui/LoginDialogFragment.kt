@@ -110,7 +110,7 @@ class LoginDialogFragment : DialogFragment() {
 		ENTER_PASSWORD(R.id.enter_password_layout, R.id.password_edit_text,
 				R.string.enter_password, R.string.password_descr, R.string.enter_password),
 		GET_TELEGRAM(R.id.get_telegram_layout, 0,
-				R.string.get_telegram_title, R.string.get_telegram_description_first, 0);
+				R.string.get_telegram_title, R.string.get_telegram_account_first, 0);
 	}
 
 	override fun onCreate(savedInstanceState: Bundle?) {
@@ -288,8 +288,8 @@ class LoginDialogFragment : DialogFragment() {
 
 						val getTelegramViewContainer: LinearLayout? = view.findViewById(R.id.get_telegram_layout)
 						if (loginDialogActiveType == LoginDialogType.GET_TELEGRAM) {
-							view.findViewById<TextView>(R.id.get_telegram_description_first)?.text = getText(R.string.get_telegram_description_second)
-							view.findViewById<TextView>(R.id.get_telegram_description_second)?.text = getText(R.string.get_telegram_description_third)
+							view.findViewById<TextView>(R.id.get_telegram_description_first)?.text = getText(R.string.get_telegram_description_continue)
+							view.findViewById<TextView>(R.id.get_telegram_description_second)?.text = getText(R.string.get_telegram_after_creating_account)
 							val getTelegramButton: ImageView? = view.findViewById(R.id.google_play_button)
 							getTelegramButton?.setImageResource(R.drawable.google_play_badge)
 							getTelegramButton?.setOnClickListener {
@@ -398,7 +398,7 @@ class LoginDialogFragment : DialogFragment() {
 			continueButtonEnabled = isActive
 			continueButton.isEnabled = continueButtonEnabled
 		} else {
-			continueButton.setBackgroundResource(R.drawable.btn_round_blue)
+			continueButton.setBackgroundResource(R.drawable.btn_round_4dp)
 			continueButton.setTextColor(ContextCompat.getColor(context!!, R.color.secondary_text_light))
 			continueButtonEnabled = isActive
 			continueButton.isEnabled = continueButtonEnabled

@@ -11,8 +11,7 @@
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
 		android:fillViewport="true"
-		android:visibility="visible"
-		tools:visibility="gone">
+		android:visibility="visible">
 
 		<FrameLayout
 			android:layout_width="match_parent"
@@ -80,8 +79,7 @@
 		android:background="?attr/card_bg_color"
 		android:fitsSystemWindows="true"
 		android:orientation="vertical"
-		android:visibility="gone"
-		tools:visibility="visible">
+		android:visibility="gone">
 
 		<LinearLayout
 			android:layout_width="match_parent"
@@ -159,10 +157,9 @@
 						android:layout_marginBottom="@dimen/dialog_padding_vertical"
 						android:background="@drawable/no_telegram_btn_bg"
 						android:gravity="center_vertical"
-						android:visibility="gone"
-						tools:visibility="gone">
+						android:visibility="gone">
 
-						<TextView
+						<net.osmand.telegram.ui.views.TextViewEx
 							android:id="@+id/no_telegram_title"
 							android:layout_width="0dp"
 							android:layout_height="wrap_content"
@@ -177,7 +174,7 @@
 							android:text="@string/do_not_have_telegram"
 							android:textColor="?attr/ctrl_active_color"
 							android:textSize="@dimen/descr_text_size"
-							android:textStyle="bold" />
+							app:typeface="@string/font_roboto_mono_bold" />
 
 						<ImageView
 							android:id="@+id/no_telegram_button"
@@ -205,16 +202,14 @@
 						android:text="@string/enter_phone_number"
 						android:textColor="@color/app_bar_title_light"
 						android:textSize="@dimen/title_text_size"
-						android:textStyle="bold"
-						tools:visibility="visible" />
+						app:typeface="@string/font_roboto_mono_bold" />
 
 					<LinearLayout
 						android:id="@+id/enter_phone_number_layout"
 						android:layout_width="match_parent"
 						android:layout_height="wrap_content"
 						android:orientation="vertical"
-						android:visibility="visible"
-						tools:visibility="visible">
+						android:visibility="visible">
 
 						<studio.carbonylgroup.textfieldboxes.TextFieldBoxes
 							android:layout_width="match_parent"
@@ -299,8 +294,7 @@
 						android:layout_height="wrap_content"
 						android:orientation="vertical"
 						android:paddingBottom="@dimen/content_padding_standard"
-						android:visibility="gone"
-						tools:visibility="gone">
+						android:visibility="gone">
 
 						<TextView
 							android:id="@+id/get_telegram_description_first"
@@ -313,7 +307,7 @@
 							android:layout_marginStart="@dimen/content_padding_standard"
 							android:textColor="@color/app_bar_title_light"
 							android:textSize="@dimen/descr_text_size"
-							tools:text="@string/get_telegram_description_second" />
+							tools:text="@string/get_telegram_description_continue" />
 
 						<ImageView
 							android:id="@+id/google_play_button"
@@ -337,7 +331,7 @@
 							android:layout_marginStart="@dimen/content_padding_standard"
 							android:textColor="@color/app_bar_title_light"
 							android:textSize="@dimen/descr_text_size"
-							tools:text="@string/get_telegram_description_third" />
+							tools:text="@string/get_telegram_after_creating_account" />
 
 					</LinearLayout>
 

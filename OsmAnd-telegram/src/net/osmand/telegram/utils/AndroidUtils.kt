@@ -47,37 +47,6 @@ object AndroidUtils {
 			}
 		}
 	}
-
-    fun createCheckedColorStateList(ctx: Context, @ColorRes normal: Int, @ColorRes checked: Int): ColorStateList {
-        return createCheckedColorStateList(ctx, false, normal, checked, 0, 0)
-    }
-
-    fun createCheckedColorStateList(ctx: Context, night: Boolean,
-                                    @ColorRes lightNormal: Int, @ColorRes lightChecked: Int,
-                                    @ColorRes darkNormal: Int, @ColorRes darkChecked: Int): ColorStateList {
-        return createColorStateList(ctx, night, android.R.attr.state_checked,
-                lightNormal, lightChecked, darkNormal, darkChecked)
-    }
-    
-    fun createPressedColorStateList(ctx: Context, @ColorRes normal: Int, @ColorRes pressed: Int): ColorStateList {
-        return createPressedColorStateList(ctx, false, normal, pressed, 0, 0)
-    }
-
-    fun createPressedColorStateList(ctx: Context, night: Boolean,
-                                    @ColorRes lightNormal: Int, @ColorRes lightPressed: Int,
-                                    @ColorRes darkNormal: Int, @ColorRes darkPressed: Int): ColorStateList {
-        return createColorStateList(ctx, night, android.R.attr.state_pressed,
-                lightNormal, lightPressed, darkNormal, darkPressed)
-    }
-
-    private fun createColorStateList(ctx: Context, night: Boolean, state: Int,
-                                     @ColorRes lightNormal: Int, @ColorRes lightState: Int,
-                                     @ColorRes darkNormal: Int, @ColorRes darkState: Int): ColorStateList {
-        return ColorStateList(
-                arrayOf(intArrayOf(state), intArrayOf()),
-                intArrayOf(ContextCompat.getColor(ctx, if (night) darkState else lightState), ContextCompat.getColor(ctx, if (night) darkNormal else lightNormal))
-        )
-    }
     
 	fun isLocationPermissionAvailable(context: Context): Boolean {
 		return ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
