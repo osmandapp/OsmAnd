@@ -3,6 +3,7 @@ package net.osmand.telegram.helpers
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.widget.ImageView
+import net.osmand.data.LatLon
 import net.osmand.telegram.R
 import net.osmand.telegram.TelegramApplication
 import net.osmand.telegram.helpers.TelegramHelper.MessageOsmAndBotLocation
@@ -48,8 +49,7 @@ object TelegramUiHelper {
 		if (chatType is TdApi.ChatTypePrivate && !helper.isBot(chatType.userId)) {
 			val content = messages.firstOrNull()?.content
 			if (content is TdApi.MessageLocation) {
-				res.lat = content.location.latitude
-				res.lon = content.location.longitude
+				res.latLon = LatLon(content.location.latitude, content.location.longitude)
 			}
 		}
 		return res
@@ -68,8 +68,7 @@ object TelegramUiHelper {
 		return if (content.isValid()) {
 			LocationItem().apply {
 				name = content.name
-				lat = content.lat
-				lon = content.lon
+				latLon = LatLon(content.lat, content.lon)
 				placeholderId = R.drawable.ic_group
 			}
 		} else {
@@ -91,8 +90,7 @@ object TelegramUiHelper {
 			if (name.isEmpty()) {
 				name = user.phoneNumber
 			}
-			lat = content.location.latitude
-			lon = content.location.longitude
+			latLon = LatLon(content.location.latitude, content.location.longitude)
 			photoPath = helper.getUserPhotoPath(user)
 			placeholderId = R.drawable.ic_group
 		}
@@ -101,9 +99,7 @@ object TelegramUiHelper {
 	class ChatItem {
 		var title: String = ""
 			internal set
-		var lat: Double = 0.0
-			internal set
-		var lon: Double = 0.0
+		var latLon: LatLon? = null
 			internal set
 		var photoPath: String? = null
 			internal set
@@ -114,9 +110,7 @@ object TelegramUiHelper {
 	class LocationItem {
 		var name: String = ""
 			internal set
-		var lat: Double = 0.0
-			internal set
-		var lon: Double = 0.0
+		var latLon: LatLon? = null
 			internal set
 		var photoPath: String? = null
 			internal set

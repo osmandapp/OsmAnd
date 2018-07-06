@@ -136,27 +136,19 @@ class UiUtils(private val app: TelegramApplication) {
 	fun updateLocationView(
 		arrow: ImageView?,
 		text: TextView?,
-		lat: Double,
-		lon: Double,
-		cache: UpdateLocationViewCache
-	) {
-		updateLocationView(arrow, text, LatLon(lat, lon), cache)
-	}
-
-	fun updateLocationView(
-		arrow: ImageView?,
-		text: TextView?,
-		toLoc: LatLon,
+		toLoc: LatLon?,
 		cache: UpdateLocationViewCache
 	) {
 		val fromLoc = app.locationProvider.lastKnownLocationLatLon
 		val heading = app.locationProvider.heading
 		val mes = FloatArray(2)
-		val locPassive = fromLoc == null || cache.outdatedLocation
+		val locPassive = fromLoc == null || toLoc == null || cache.outdatedLocation
 		val colorId = if (locPassive) R.color.icon_light else R.color.ctrl_active_light
 
-		fromLoc?.also { l ->
-			Location.distanceBetween(toLoc.latitude, toLoc.longitude, l.latitude, l.longitude, mes)
+		if (fromLoc != null && toLoc != null) {
+			Location.distanceBetween(
+				toLoc.latitude, toLoc.longitude, fromLoc.latitude, fromLoc.longitude, mes
+			)
 		}
 
 		if (arrow != null) {
@@ -169,7 +161,7 @@ class UiUtils(private val app: TelegramApplication) {
 				DirectionDrawable(app)
 			}
 			dd.setImage(R.drawable.ic_direction_arrow, colorId)
-			if (fromLoc == null || heading == null) {
+			if (fromLoc == null || toLoc == null || heading == null) {
 				dd.setAngle(0f)
 			} else {
 				dd.setAngle(mes[1] - heading + 180 + cache.screenOrientation)
@@ -182,7 +174,7 @@ class UiUtils(private val app: TelegramApplication) {
 
 		if (text != null) {
 			text.setTextColor(ContextCompat.getColor(app, colorId))
-			val meters = if (fromLoc == null) 0f else mes[1]
+			val meters = if (fromLoc == null || toLoc == null) 0f else mes[1]
 			text.text = OsmandFormatter.getFormattedDistance(meters, app)
 		}
 	}
