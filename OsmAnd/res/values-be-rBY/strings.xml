@@ -1292,7 +1292,7 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
 	<string name="loading_builds">Zahružajucca zborkі OsmAnd…</string>
 	<string name="select_build_to_install">Vybierycie zborku OsmAnd dla ŭstanoŭkі</string>
 	<string name="gps_status_app_not_found">Dastasavańnie stanu GPS nie ŭstaliavanaja. Pašukać ŭ kramie?</string>
-	<string name="voice_is_not_available_msg">Hałasavyja kamandy nie dastupnyja. Kali łaska, pierajdzіcie ŭ \"Nałady\" → \"Ahulnyja\" → \"Hałasavyja dadzienyja\" і abiarycie cі ściahnіcie pakiet hałasavych padkazak.</string>
+	<string name="voice_is_not_available_msg">Halasavyja kamandy niedastupnyja. Kali laska, pierajdzicie ŭ «Nalady» → «Nalady navihacyi» → «Halasavyja dadzienyja» i abiarycie ci sciahnicie pakiet halasavych padkazak.</string>
 	<string name="voice_is_not_available_title">Hałasavyja padkazkі nie abranyja</string>
 	<string name="daynight_mode_day">Dzień</string>
 	<string name="daynight_mode_night">Noč</string>
@@ -3097,4 +3097,5 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="coord_input_add_point">Dadać kropku</string>
     <string name="coord_input_save_as_track">Zachavać jak slied</string>
     <string name="coord_input_save_as_track_descr">Vy dadali %1$s kropak. Uviadzicie nazvu fajla i nacisnicie «zachavać».</string>
+    <string name="point_deleted">Kropka %1$s vydalienaja</string>
     </resources>
