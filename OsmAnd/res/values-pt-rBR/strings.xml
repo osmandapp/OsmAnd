@@ -1969,7 +1969,7 @@ Pôr do Sol: %2$s</string>
     <string name="update_time">Quando atualizar</string>
 <string name="updates_size">Tamanho da atualização</string>
 <string name="rec_split">Dividir gravação</string>
-    <string name="rec_split_title">Usar o separador de gravação</string>
+    <string name="rec_split_title">Usar separador de gravação</string>
     <string name="rec_split_desc">Sobrescrever clipes quando o espaço usado exceder o limite de armazenamento.</string>
     <string name="rec_split_clip_length">Duração do clipe</string>
     <string name="rec_split_clip_length_desc">Limite de tempo máximo para clipes gravados.</string>
