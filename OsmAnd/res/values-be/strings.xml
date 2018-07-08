@@ -826,7 +826,7 @@
 	<string name="loading_builds">Загружаюцца зборкі OsmAnd…</string>
 	<string name="select_build_to_install">Выберыце зборку OsmAnd для ўстаноўкі</string>
 	<string name="gps_status_app_not_found">Дастасаваньне стану GPS не ўсталяваная. Пашукаць ў краме?</string>
-	<string name="voice_is_not_available_msg">Галасавыя каманды не даступныя. Калі ласка, перайдзіце ў \"Налады\" → \"Агульныя\" → \"Галасавыя дадзеныя\" і абярыце ці сьцягніце пакет галасавых падказак.</string>
+	<string name="voice_is_not_available_msg">Галасавыя каманды недаступныя. Калі ласка, перайдзіце ў «Налады» → «Налады навігацыі» → «Галасавыя дадзеныя» і абярыце ці сцягніце пакет галасавых падказак.</string>
 	<string name="voice_is_not_available_title">Галасавыя падказкі не абраныя</string>
 	<string name="daynight_mode_day">Дзень</string>
 	<string name="daynight_mode_night">Ноч</string>
