@@ -1450,7 +1450,7 @@
 	<string name="poi_cemetery">בית עלמין</string>
 	<string name="poi_grave_yard">בית קברות</string>
 	<string name="poi_tomb">מצבה</string>
-	<string name="poi_shelter">מחסה</string>
+	<string name="poi_shelter">מקלט</string>
 	<string name="poi_funicular">פוניקולר</string>
 	<string name="poi_hanami">הנאמי</string>
 	<string name="poi_wine_cellar">מרתף יין</string>
@@ -1688,4 +1688,118 @@
 	<string name="poi_socket_tesla_supercharger_yes">מטען על טסלה</string>
 	<string name="poi_service_vehicle_car_repair_yes">תיקון מכוניות</string>
 	<string name="poi_service_vehicle_used_car_sales_yes">מכירת מכוניות משומשות</string>
+	<string name="poi_socket_type2_combo_output_filter">פלט סוג 2 משולב</string>
+	<string name="poi_socket_type3_output_filter">פלט סוג 3</string>
+	<string name="poi_socket_cee_blue_output_filter">פלט CEE כחול</string>
+	<string name="poi_paddle_tennis">פאדל טניס</string>
+	<string name="poi_cabin">בקתה</string>
+	<string name="poi_lean_to">בית מושען</string>
+	<string name="poi_hunting_lodge">אכסניית ציד</string>
+
+	<string name="poi_denomination_roman_catholic">קתוליות רומית</string>
+	<string name="poi_denomination_sunni">סוני</string>
+	<string name="poi_denomination_protestant">פרוטסטנטי</string>
+	<string name="poi_denomination_methodist">מתודיזם</string>
+	<string name="poi_denomination_anglican">אנגליקנית</string>
+	<string name="poi_denomination_presbyterian">פרסביטריאניזם</string>
+	<string name="poi_denomination_evangelical">אוונגליזם</string>
+	<string name="poi_denomination_russian_orthodox">אורתודוקסי רוסי</string>
+	<string name="poi_denomination_pentecostal">פנטקוסטליזם</string>
+	<string name="poi_denomination_mormon">מורמוניזם</string>
+	<string name="poi_denomination_greek_orthodox">אורתודוקסי יווני</string>
+	<string name="poi_denomination_reformed">קלוויניזם</string>
+	<string name="poi_denomination_seventh_day_adventist">אדוונטיסטית של היום השביעי</string>
+	<string name="poi_denomination_new_apostolic">אפוסטולית חדשה</string>
+	<string name="poi_denomination_church_of_england">כנסייה אנגליקנית</string>
+	<string name="poi_denomination_greek_catholic">קתולי יווני</string>
+	<string name="poi_denomination_scientist">מדענות</string>
+	<string name="poi_resort">אתר נופש</string>
+	<string name="poi_club_freemasonry">לשכת בונים חופשיים</string>
+	<string name="poi_piste">מסלול סקי</string>
+	<string name="poi_piste_downhill">מסלול סקי במורד</string>
+	<string name="poi_piste_nordic">מסלול סקי נורדי</string>
+	<string name="poi_piste_skitour">מסלול טיול סקי</string>
+	<string name="poi_ski_rental">השכרת סקי</string>
+
+	<string name="poi_library">ספרייה</string>
+	<string name="poi_arts_centre">מרכז אומנויות</string>
+	<string name="poi_cinema">קולנוע</string>
+	<string name="poi_casino">קזינו</string>
+	<string name="poi_community_centre">מרכז קהילתי</string>
+	<string name="poi_social_centre">מרכז חברתי</string>
+	<string name="poi_theatre">תאטרון</string>
+	<string name="poi_theatre_genre_circus">קרקס</string>
+	<string name="poi_gallery">גלריית אומנות</string>
+	<string name="poi_dance_floor">רחבת ריקודים</string>
+	<string name="poi_nightclub">מועדון לילה;מועדון ריקודים;דיסקוטק;דיסקו</string>
+	<string name="poi_stripclub">מועדון חשפנות</string>
+	<string name="poi_ski_resort">אתר נופש סקי</string>
+	<string name="poi_beach_resort">אתר נופש על החוף</string>
+	<string name="poi_dog_park">פארק כלבים</string>
+	<string name="poi_leisure_fishing">אזור דיג</string>
+	<string name="poi_harbour">נמל</string>
+	<string name="poi_marina">מרינה</string>
+	<string name="poi_village_green">ירוק כפרי</string>
+	<string name="poi_craft_carpet_layer">התקנת שטיחים</string>
+	<string name="poi_craft_caterer">הסעדה</string>
+	<string name="poi_craft_parquet_layer">התקנת פרקטים</string>
+	<string name="poi_craft_plasterer">עבודות גבס</string>
+	<string name="poi_craft_plumber">שרברבות</string>
+	<string name="poi_craft_pottery">קדרות</string>
+	<string name="poi_craft_sweep">ניקוי ארובות</string>
+	<string name="poi_sand">חול</string>
+
+	<string name="poi_level">רמה</string>
+	<string name="poi_cross">צלב</string>
+	<string name="poi_summit_cross">צלב פסגה: יש</string>
+
+	<string name="poi_prison_camp">מחנה כליאה לשעבר</string>
+	<string name="poi_concentration_camp">סוג: מחנה ריכוז</string>
+	<string name="poi_pow_camp">סוג: מחנה שבויי מלחמה</string>
+	<string name="poi_labor_camp">סוג: מחנה עבודה</string>
+	<string name="poi_concentration_camp_nazism">סוג: נאצי</string>
+	<string name="poi_concentration_camp_gulag">סוג: גולאג</string>
+
+	<string name="poi_temperature">טמפרטורה</string>
+	<string name="poi_bathing_yes">רחצה: יש</string>
+	<string name="poi_bathing_no">רחצה: אין</string>
+
+	<string name="poi_boat_storage">אחסון סירות</string>
+
+	<string name="poi_cargo_passengers">נוסעים</string>
+	<string name="poi_cargo_vehicle">כלי רכב</string>
+	<string name="poi_cargo_bicycle">אופניים</string>
+	<string name="poi_cargo_container">מכולות</string>
+	<string name="poi_cargo_hgv">משאיות סחורה</string>
+
+	<string name="poi_fitness_station">תחנת כושר</string>
+
+	<string name="poi_hackerspace">מתחם למפתחים</string>
+
+
+	<string name="poi_craft_electronics_repair">תיקון אלקטרוניקה</string>
+	<string name="poi_fireworks">חנות זיקוקים</string>
+
+	<string name="poi_aerialway_length">אורך</string>
+
+	<string name="poi_health_specialty_general_yes">רפואה כללית</string>
+	<string name="poi_health_specialty_ophthalmology_yes">רפואת עיניים</string>
+	<string name="poi_health_specialty_gynaecology_yes">רפואת נשים</string>
+	<string name="poi_health_specialty_internal_medicine_yes">רפואה פנימית</string>
+	<string name="poi_health_specialty_orthopaedics_yes">אורתופדיה</string>
+	<string name="poi_health_specialty_otolaryngology_yes">אף אוזן גרון</string>
+	<string name="poi_health_specialty_paediatrics_yes">רפואת ילדים</string>
+	<string name="poi_health_specialty_paediatrics_no">התמחות רפואית: ילדים: לא</string>
+	<string name="poi_health_specialty_dermatology_yes">רפואת עור</string>
+	<string name="poi_health_specialty_urology_yes">אורולוגיה</string>
+	<string name="poi_health_specialty_surgery_yes">ניתוח כללי</string>
+	<string name="poi_health_specialty_radiology_yes">רדיולוגיה</string>
+	<string name="poi_health_specialty_psychiatry_yes">בריאות הנפש</string>
+	<string name="poi_health_specialty_neurology_yes">ניורולוגיה</string>
+	<string name="poi_health_specialty_dermatovenereology_yes">רפואת מין</string>
+	<string name="poi_health_specialty_cardiology_yes">קרדיולוגיה</string>
+	<string name="poi_health_specialty_trauma_yes">טראומטולוגיה</string>
+	<string name="poi_health_specialty_osteopathy_yes">אוסטאופתיה</string>
+	<string name="poi_health_specialty_anaesthetics_yes">תרופות הרדמה</string>
+	<string name="poi_health_specialty_pulmonology_yes">רפואת דרכי הנשימה</string>
 	</resources>
