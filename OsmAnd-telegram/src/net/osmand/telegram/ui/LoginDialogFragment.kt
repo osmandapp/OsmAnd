@@ -132,10 +132,7 @@ class LoginDialogFragment : DialogFragment() {
 			showWelcomeDialog = args.getBoolean(SHOW_WELCOME_DIALOG_PARAM_KEY, false)
 		}
 		val view = inflater.inflate(R.layout.login_dialog, container)
-		val button = view?.findViewById<Button>(R.id.continue_button)
-		if (button != null) {
-			continueButton = button
-		}
+		continueButton = view.findViewById(R.id.continue_button)
 
 		buildDialog(view)
 		view.viewTreeObserver.addOnGlobalLayoutListener {
@@ -146,27 +143,24 @@ class LoginDialogFragment : DialogFragment() {
 			val softKeyboardVisible = keypadHeight > screenHeight * SOFT_KEYBOARD_MIN_DETECTION_SIZE
 			if (!softKeyboardShown && softKeyboardVisible) {
 				softKeyboardShown = softKeyboardVisible
-				setContinueButtonSize(true)
+				transformContinueButton(true)
 			} else if (softKeyboardShown && !softKeyboardVisible) {
-				setContinueButtonSize(false)
+				transformContinueButton(false)
 			}
 			softKeyboardShown = softKeyboardVisible
 		}
 		return view
 	}
 
-	private fun setContinueButtonSize(isWide: Boolean) {
-		val params = continueButton.layoutParams
-		if (params is ViewGroup.MarginLayoutParams) {
-			if (isWide) {
-				params.setMargins(params.leftMargin, params.topMargin, params.rightMargin, AndroidUtils.dpToPx(context!!, 16F))
-				params.width = ViewGroup.LayoutParams.MATCH_PARENT
-			} else {
-				params.setMargins(params.leftMargin, params.topMargin, params.rightMargin, AndroidUtils.dpToPx(context!!, 40F))
-				params.width = ViewGroup.LayoutParams.WRAP_CONTENT
-			}
-			continueButton.requestLayout()
+	private fun transformContinueButton(expanded: Boolean) {
+		val params = continueButton.layoutParams as ViewGroup.MarginLayoutParams
+		val margin = if (expanded) 16f else 40f
+		val width = if (expanded) ViewGroup.LayoutParams.MATCH_PARENT else ViewGroup.LayoutParams.WRAP_CONTENT
+		params.apply {
+			setMargins(leftMargin, topMargin, rightMargin, AndroidUtils.dpToPx(context!!, margin))
+			this.width = width
 		}
+		continueButton.requestLayout()
 	}
 
 	override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -385,11 +379,10 @@ class LoginDialogFragment : DialogFragment() {
 	}
 
 	private fun changeContinueButtonEnabled(enabled: Boolean) {
-		if (enabled) {
-			continueButton.setTextColor(ContextCompat.getColor(context!!, R.color.white))
-		} else {
-			continueButton.setTextColor(ContextCompat.getColor(context!!, R.color.secondary_text_light))
+		if (enabled != continueButton.isEnabled) {
+			val color = if (enabled) R.color.white else R.color.secondary_text_light
+			continueButton.setTextColor(ContextCompat.getColor(context!!, color))
+			continueButton.isEnabled = enabled
 		}
-		continueButton.isEnabled = enabled
 	}
 }
