@@ -73,4 +73,21 @@ object AndroidUtils {
 			FileProvider.getUriForFile(context,  "net.osmand.telegram.fileprovider", file)
 		}
 	}
+
+	fun isGooglePlayInstalled(ctx: Context): Boolean {
+		try {
+			ctx.packageManager.getPackageInfo("com.android.vending", 0)
+		} catch (e: PackageManager.NameNotFoundException) {
+			return false
+		}
+
+		return true
+	}
+
+	fun getPlayMarketLink(ctx: Context, packageName: String): String {
+		if (isGooglePlayInstalled(ctx)) {
+			return "market://details?id=$packageName"
+		}
+		return "https://play.google.com/store/apps/details?id=$packageName"
+	}
 }

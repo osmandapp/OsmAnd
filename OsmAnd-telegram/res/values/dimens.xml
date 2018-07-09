@@ -12,11 +12,16 @@
 	<dimen name="action_bar_row_button_height">52dp</dimen>
 
 	<dimen name="dialog_padding_vertical">24dp</dimen>
-	<dimen name="dialog_padding_horizontal">60dp</dimen>
+	<dimen name="dialog_padding_horizontal">64dp</dimen>
 	<dimen name="dialog_padding_horizontal_edit">44dp</dimen>
+	<dimen name="dialog_welcome_padding_horizontal">48dp</dimen>
+	<dimen name="dialog_description_margin">12dp</dimen>
 
 	<dimen name="dialog_button_height">36dp</dimen>
-	<dimen name="dialog_button_radius">2dp</dimen>
+	<dimen name="dialog_button_radius">4dp</dimen>
+	<dimen name="dialog_button_bottom_padding">40dp</dimen>
+	<dimen name="dialog_welcome_title_bottom_padding">70dp</dimen>
+	<dimen name="dialog_welcome_title_top_margin">85dp</dimen>
 
 	<dimen name="list_item_height">56dp</dimen>
 	<dimen name="list_item_height_min">48dp</dimen>
@@ -41,14 +46,20 @@
 
 	<dimen name="buttons_bottom_bar_height">56dp</dimen>
 
-	<dimen name="text_button_letter_spacing" format="float">0.01</dimen>
+	<dimen name="text_button_letter_spacing" format="float">0.07</dimen>
+	<dimen name="text_description_letter_spacing" format="float">0.0156</dimen>
+	<dimen name="text_description_line_spacing_multiplier" format="float">1.25</dimen>
+	<dimen name="title_letter_spacing" format="float">-0.03</dimen>
 
 	<!-- Text sizes -->
 
 	<dimen name="dialog_title_text_size">22sp</dimen>
 
 	<dimen name="title_text_size">18sp</dimen>
+	<dimen name="title_login_text_size">20sp</dimen>
+	<dimen name="title_welcome_text_size">32sp</dimen>
 	<dimen name="descr_text_size">16sp</dimen>
+	<dimen name="hint_text_size">14sp</dimen>
 
 	<dimen name="list_item_title_text_size">16sp</dimen>
 	<dimen name="list_item_description_text_size">12sp</dimen>
