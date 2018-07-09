@@ -571,7 +571,7 @@
 	<string name="select_build_to_install">OsmAnd-Build zur Installation auswählen</string>
 	<string name="contribution_activity">Versionen zur Installation</string>
 	<string name="gps_status_app_not_found">App \'GPS Status\' ist nicht installiert. Soll diese im Market gesucht werden werden?</string>
-	<string name="voice_is_not_available_msg">Keine Sprachansage verfügbar. Bitte unter \'Einstellungen\' → \'Navigationseinstellungen\' → \'Sprachansagen\' ein Sprachpaket auswählen oder herunterladen.</string>
+	<string name="voice_is_not_available_msg">Keine Sprachführung verfügbar, bitte gehen Sie zu \'Einstellungen\' → \'Navigationseinstellungen\' → \'Sprachführung\' und wählen Sie ein Sprachpaket aus oder laden Sie es herunter.</string>
 	<string name="voice_is_not_available_title">Keine Sprachansage ausgewählt</string>
 	<string name="daynight_mode_day">Tag</string>
 	<string name="daynight_mode_night">Nacht</string>
