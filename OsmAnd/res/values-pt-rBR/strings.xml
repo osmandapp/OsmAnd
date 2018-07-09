@@ -147,8 +147,8 @@
 \n\nTrilhas gravadas podem ser compartilhadas com seus amigos ou serem usadas para contribuições ao OSM. Atletas podem usar trilhas gravadas para monitorar seus treinos. Algumas análises básicas da trilha podem ser feitas diretamente no OsmAnd, como tempos de percurso, velocidade média, etc. E, claro, trilhas também podem ser analisadas mais tarde em ferramentas de terceiros. "</string>
 	
 	
-	<string name="srtm_paid_version_title">Complemento de curvas de nível</string>
-	<string name="osmand_srtm_short_description_80_chars">Complemento do OsmAnd para curvas de nível off-line</string>
+	<string name="srtm_paid_version_title">Plugin de curvas de nível</string>
+	<string name="osmand_srtm_short_description_80_chars">Plugin do OsmAnd para curvas de nível off-line</string>
 	<string name="srtm_plugin_name">Curvas de nível</string>
 	<string name="plugin_touringview_name">Visão de mapa turístico</string>
 	<string name="plugin_touringview_descr">"Ativar este modo de exibição altera o estilo do mapa do OsmAnd para \'Visão turística\', que é uma visão detalhada especial para os viajantes e motoristas profissionais.
@@ -165,7 +165,7 @@
 	<string name="plugin_ski_descr">"Este complemento para o OsmAnd coloca ao seu alcance detalhes de pistas de descida de esqui, de travessia, rotas de esqui alpino, teleféricos e elevadores de esqui. Rotas e pistas são mostradas com codificação de cores por dificuldade e retratadas em um estilo especial de mapa \'Inverno\' que assimila uma paisagem de inverno cor de neve.
 \n\nAtivando esta mudança na visão do estilo de mapa de \'Inverno e esqui\', mostrando todas as características da paisagem em condições invernais. Essa visão pode ser revertida desativando aqui ou alterando o \'Estilo de mapa\' em \'Configurar mapa\' quando desejado. "</string>
 	<string name="audionotes_plugin_name">Notas de áudio/vídeo</string>
-	<string name="audionotes_plugin_description">O complemento de notas de áudio/vídeo fornece a funcionalidade para tomar notas de áudio/fotografia/vídeo durante uma viagem, usando um botão na tela do mapa ou diretamente do menu de contexto para qualquer posição no mapa.</string>
+	<string name="audionotes_plugin_description">O plugin de notas de áudio/vídeo fornece a funcionalidade para tomar notas de áudio/fotografia/vídeo durante uma viagem, usando um botão na tela do mapa ou diretamente do menu de contexto para qualquer posição no mapa.</string>
 	<string name="osmand_parking_plugin_name">Estacionamento</string>
 	<string name="osmand_distance_planning_plugin_name">Calculadora de distância e ferramenta de planeamento</string>
 	<string name="osmand_distance_planning_plugin_description">Este complemento fornece um widget da tela mapa permitindo criar caminhos tocando no mapa, ou usar ou modificar arquivos GPX existentes, para planejar uma viagem e medir a distância entre pontos. Os resultados podem ser salvos como um arquivo GPX, que mais tarde pode ser usado para orientação.</string>
@@ -194,8 +194,8 @@
     <string name="rendering_attr_streetLighting_name">Iluminação pública</string>
     <string name="proxy_pref_title">Proxy</string>
     <string name="track_points">Pontos da trilha</string>
-	<string name="osmand_srtm_long_description_1000_chars">Este plugin fornece curvas de nível e camada de sombras de relevo por cima do mapa padrão do OsmAnd. Esta funcionalidade será muito apreciada por atletas, viajantes e alguém interessado na estrutura de relevo da paisagem. 
-\n
+	<string name="osmand_srtm_long_description_1000_chars">Fornece curvas de nível e camada de sombras de relevo por cima do mapa padrão do OsmAnd. Esta funcionalidade será muito apreciada por atletas, viajantes e alguém interessado na estrutura de relevo da paisagem. 
+\n 
 \nOs dados globais (entre as latitudes 70° norte e 70° sul) são baseados em medições do SRTM (Shuttle Radar Topography Mission) e ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), um instrumento de imagens Terra, o satélite principal do Sistema de Observação da Terra da NASA. ASTER é um esforço conjunto da NASA, do Ministério da Economia, Comércio e Indústria do Japão (METI) e do Sistema Espacial Japonês (J-spacesystems).</string>
 	<string name="srtm_plugin_description">Este plugin fornece curvas de nível e camada de sombras de relevo por cima do mapa padrão do OsmAnd. Esta funcionalidade será muito apreciada por atletas, viajantes e qualquer interessado na estrutura de relevo da paisagem. (Por favor, note que as curvas de nível e/ou dados de relevo são downloads adicionais separados disponíveis depois de ativar o plugin.)
 \n 
@@ -762,7 +762,7 @@ Pôr do Sol: %2$s</string>
     <string name="dropbox_plugin_description">O complemento do Dropbox permite sincronizar trilhas e notas de áudio/vídeo com a sua conta.</string>
     <string name="dropbox_plugin_name">Complemento Dropbox</string>
     <string name="intermediate_points_change_order">Alterar ordem</string>
-    <string name="srtm_paid_version_msg">Por favor, considere comprar o complemento Curvas de nível na loja de apps para apoiar o desenvolvimento.</string>
+    <string name="srtm_paid_version_msg">Por favor, considere comprar o plugin \'Curvas de nível\' para apoiar o desenvolvimento.</string>
     <string name="av_def_action_choose">Selecionar a pedido</string>
     <string name="av_def_action_video">Gravar vídeo</string>
     <string name="av_def_action_audio">Gravar áudio</string>
@@ -909,7 +909,7 @@ Pôr do Sol: %2$s</string>
 	<string name="rendering_attr_roadColors_description">Selecionar um esquema de cores das vias:</string>
 	<string name="rendering_attr_roadColors_name">Esquema de cores das vias</string>
     <string name="map_widget_show_destination_arrow">Mostrar a direção do destino</string>
-    <string name="enable_plugin_monitoring_services">Ativar complemento de gravação de viagem para usar serviços de registro de posição (registro de GPX, rastreamento on-line)</string>
+    <string name="enable_plugin_monitoring_services">Ativar plugin de gravação de viagem para usar serviços de registro de posição (registro GPX, rastreamento on-line)</string>
     <string name="non_optimal_route_calculation">Calcular rota possivelmente não ideal em longas distâncias</string>
 	<string name="gps_not_available">Por favor, ative o GPS nas configurações</string>
     
@@ -1004,7 +1004,7 @@ Pôr do Sol: %2$s</string>
 	<string name="basemap_was_selected_to_download">O Mapa Base é necessário para o funcionamento adequado do aplicativo e foi selecionado para baixar.</string>
 	<string name="local_indexes_cat_tile">Quadrículas de mapa online e em cache</string>
 	<string name="local_indexes_cat_map">Mapa padrão (vectorial)</string>
-	<string name="map_online_plugin_is_not_installed">Ativar o complemento de mapas on-line, para selecionar diferentes fontes de mapa</string>
+	<string name="map_online_plugin_is_not_installed">Ative o plugin \'Mapas on-line\' para selecionar diferentes fontes de mapa</string>
 	<string name="map_online_data">Mapas e quadrículas on-line</string>
 	<string name="map_online_data_descr">Usar mapas on-line (baixar e armazenar quadrículas)</string>
 	<string name="online_map_settings_descr">Configurar fontes de quadrículas de mapas on-line ou off-line</string>
@@ -1015,7 +1015,7 @@ Pôr do Sol: %2$s</string>
 	<string name="play_commands_of_currently_selected_voice">Tocar comando de voz selecionado</string>
 	<string name="native_rendering">Renderização nativa</string>
 	<string name="test_voice_prompts">Testar comandos de voz</string>    
-	<string name="switch_to_raster_map_to_see">Nenhum mapa vetorial off-line presente para esta região. Você pode baixar um em Configurações (Gerenciar mapas) ou mudar para mapas on-line (para isso, ative complemento de mapas on-line).</string>
+	<string name="switch_to_raster_map_to_see">Não há mapa vetorial off-line presente para esta região. Baixe um em \'Configurações\' (\'Gerenciar mapas\'), ou mude para o plugin \'Mapas on-line\'.</string>
 	
 	<string name="send_files_to_osm">Enviar arquivos GPX para o OSM?</string>
 	<string name="gpx_visibility_txt">Visibilidade</string>
@@ -1663,7 +1663,7 @@ Pôr do Sol: %2$s</string>
 	<string name="av_camera_pic_size_descr">Selecionar tamanho de imagem da foto</string>
     <string name="navigation_intent_invalid">Formato inválido: %s</string>
 	<string name="plugin_description_title">Descrição</string>
-	<string name="plugin_install_needs_network">Você precisa de uma conexão com a Internet para instalar este complemento.</string>
+	<string name="plugin_install_needs_network">Você precisa estar conectado à Internet para instalar este plugin.</string>
 	<string name="get_plugin">Obter</string>
 	
 	
@@ -1894,8 +1894,8 @@ Pôr do Sol: %2$s</string>
     <string name="show_free_version_banner">Mostrar banner da versão gratuita</string>
     <string name="show_free_version_banner_description">Mesmo se você tem a versão paga você ainda pode ver o banner da versão gratuita</string>
     <string name="buy">COMPRAR</string>
-    <string name="activate_seamarks_plugin">Ative o complemento de marcas marítimas</string>
-    <string name="activate_srtm_plugin">Ative o complemento SRTM</string>
+    <string name="activate_seamarks_plugin">Favor ativar o plugin \'Mapa náutico\'</string>
+    <string name="activate_srtm_plugin">Favor ativar o plugin \'Curvas de nível\'</string>
     <string name="later">Depois</string>
     <string name="get_full_version">Versão completa</string>
     <string name="downloads">Transferências</string>
@@ -1969,7 +1969,7 @@ Pôr do Sol: %2$s</string>
     <string name="update_time">Quando atualizar</string>
 <string name="updates_size">Tamanho da atualização</string>
 <string name="rec_split">Dividir gravação</string>
-    <string name="rec_split_title">Usar o separador de gravação</string>
+    <string name="rec_split_title">Usar separador de gravação</string>
     <string name="rec_split_desc">Sobrescrever clipes quando o espaço usado exceder o limite de armazenamento.</string>
     <string name="rec_split_clip_length">Duração do clipe</string>
     <string name="rec_split_clip_length_desc">Limite de tempo máximo para clipes gravados.</string>
@@ -2048,7 +2048,7 @@ Pôr do Sol: %2$s</string>
     <string name="new_filter">Novo filtro</string>
     <string name="new_filter_desc">Por favor, inserir um nome para o novo filtro. Ele será adicionado à sua guia Categorias.</string>
     <string name="donation_to_osm">Doação para a comunidade OpenStreetMap</string>
-    <string name="osmand_plus_banner_desc">Download ilimitado de mapas, atualizações e plugin para Wikipedia.</string>
+    <string name="osmand_plus_banner_desc">Download ilimitado de mapas, atualizações e plugin Wikipédia.</string>
     <string name="si_mi_meters">Milhas/metros</string>
     <string name="skip_map_downloading">Pular download de mapas</string>
     <string name="skip_map_downloading_desc">Você não possui mapas offlines. Você deve escolher um mapa da lista ou baixar mapas mais tarde pelo Menu - %1$s.</string>
@@ -2238,7 +2238,7 @@ Pôr do Sol: %2$s</string>
     <string name="show_from_zoom_level">Exibir a partir do nível de zoom</string>
     <string name="routing_attr_allow_private_name">Permitir acesso privado</string>
     <string name="routing_attr_allow_private_description">Permitir acesso a áreas privadas.</string>
-    <string name="display_zoom_level">Nível de zoom mín.: %1$s</string>
+    <string name="display_zoom_level">Zoom mínimo: %1$s</string>
     <string name="favorite_group_name">Nome do grupo</string>
     <string name="change_color">Alterar cor</string>
     <string name="edit_name">Editar nome</string>
@@ -2332,7 +2332,7 @@ Pôr do Sol: %2$s</string>
     <string name="no_overlay">Sem camada superior</string>
     <string name="no_underlay">Sem camada inferior</string>
     <string name="subscribe_email_error">Erro</string>
-    <string name="depth_contour_descr">Conjunto de mapas contendo as curvas batimétricas do mar e pontos náuticos.</string>
+    <string name="depth_contour_descr">Curvas batimétricas do mar e pontos náuticos.</string>
     <string name="sea_depth_thanks">Obrigado por adquirir a \'Batimetria náutica\'</string>
     <string name="index_item_depth_contours_osmand_ext">Batimetria náutica</string>
     <string name="index_item_depth_points_southern_hemisphere">Pontos de profundidade náuticos, Hemisfério Sul</string>
@@ -2347,7 +2347,7 @@ Pôr do Sol: %2$s</string>
     <string name="driving_region_automatic">Automático</string>
     <string name="do_not_send_anonymous_app_usage">Não enviar estatísticas de uso de aplicativo anônimas</string>
     <string name="parking_options">Opções de estacionamento</string>
-    <string name="full_version_thanks">Obrigado por adquirir a versão completa do OsmAnd!</string>
+    <string name="full_version_thanks">Obrigado por adquirir a versão completa do OsmAnd.</string>
     <string name="routing_attr_relief_smoothness_factor_hills_name">Montanhoso</string>
     <string name="routing_attr_relief_smoothness_factor_plains_name">Menos montanhoso</string>
     <string name="routing_attr_relief_smoothness_factor_more_plains_name">Plano</string>
@@ -2356,9 +2356,9 @@ Pôr do Sol: %2$s</string>
     <string name="routing_attr_driving_style_safety_name">Preferir caminhos</string>
     <string name="relief_smoothness_factor_descr">Terreno preferido: plano ou montanhoso.</string>
     <string name="add_new_folder">Adicionar nova pasta</string>
-    <string name="points_delete_multiple_succesful">Ponto(s) excluído(s) com êxito.</string>
+    <string name="points_delete_multiple_succesful">Ponto(s) excluído(s).</string>
     <string name="points_delete_multiple">Você vai eliminar %1$d ponto(s). Tem a certeza?</string>
-    <string name="track_points_category_name">Pontos de destaque nesta rota</string>
+    <string name="track_points_category_name">Pontos de passagem, de interesse, elementos com nome</string>
     <string name="shared_string_gpx_track">Trilha</string>
     <string name="max_speed">Velocidade máxima</string>
     <string name="shared_string_time_moving">Tempo em movimento</string>
@@ -2367,7 +2367,7 @@ Pôr do Sol: %2$s</string>
     <string name="shared_string_start_time">Hora de início</string>
     <string name="shared_string_end_time">Hora de fim</string>
     <string name="shared_string_color">Cor</string>
-    <string name="select_gpx_folder">Selecionar pasta da trilha</string>
+    <string name="select_gpx_folder">Selecionar pasta de arquivo GPX</string>
     <string name="file_can_not_be_moved">Arquivo não pode ser movido.</string>
     <string name="shared_string_move">Mover</string>
     <string name="shared_string_gpx_tracks">Trilhas</string>
@@ -2375,7 +2375,7 @@ Pôr do Sol: %2$s</string>
     <string name="route_altitude">Altitude da rota</string>
     <string name="routing_attr_relief_smoothness_factor_name">Selecionar a flutuação de altimetria</string>
     <string name="routing_attr_height_obstacles_name">Usar dados altimétricos</string>
-    <string name="routing_attr_height_obstacles_description">Usar dados altimétricos do terreno fornecidos pelo SRTM, ASTER, e EU-DEM.</string>
+    <string name="routing_attr_height_obstacles_description">Considerar altimetria do terreno (via dados SRTM, ASTER e EU-DEM).</string>
     <string name="rendering_attr_depthContours_description">Mostrar curvas e pontos batimétricos.</string>
     <string name="rendering_attr_depthContours_name">Batimetria náutica</string>
     <string name="rendering_attr_contourDensity_description">Densidade das curvas de nível</string>
@@ -2436,7 +2436,7 @@ Pôr do Sol: %2$s</string>
     <string name="do_not_send_anonymous_app_usage_desc">OsmAnd coleta informações sobre quais partes do aplicativo você abrir. A sua localização nunca é enviada, nem qualquer coisa digitada no aplicativo ou detalhes das áreas que você visualizar, pesquisar ou baixar.</string>
     <string name="auto_split_recording_title">Autodividir gravações após um intervalo</string>
     <string name="auto_split_recording_descr">Iniciar novo segmento após intervalo de 6 min, uma nova trilha após intervalo de 2 h, ou um novo arquivo depois de um longo intervalo se a data foi alterada.</string>
-    <string name="upload_osm_note_description">Você pode enviar sua nota de OSM anonimamente ou usando seu perfil OpenStreetMap.org.</string>
+    <string name="upload_osm_note_description">Envie sua Nota OSM anonimamente ou através do seu perfil do OpenStreetMap.org.</string>
     <string name="trip_rec_notification_settings_desc">Exiba uma notificação de sistema que permite iniciar a gravação de viagem.</string>
     <string name="christmas_desc">Antecipando os feriados de Natal e ano novo, você pode optar por exibir o POI associado com o Natal: árvores de Natal, mercados, etc.</string>
     <string name="osm_live_payment_desc">A assinatura será cobrada mensalmente. Você pode cancelar a sua assinatura no Google Play a qualquer momento.</string>
@@ -2687,7 +2687,12 @@ Pôr do Sol: %2$s</string>
     <string name="import_track">Importar trilha</string>
     <string name="move_point">Mover Ponto</string>
     <string name="osm_recipients_label">Destinatários OSM</string>
-    <string name="osmand_plus_extended_description_part6">Recursos de ciclismo e pedestre • Visualização de caminhos a pé, pistas de caminhadas e ciclovias, ideal para atividades ao ar livre • Roteamento e modos de exibição especiais para bicicleta e pedestres • Paradas de transporte público opcionais (ônibus, troleibus, trem) incluindo nomes de linhas • Gravação opcional de viagem para arquivo GPX local ou serviço on-line • Exibição opcional de velocidade e altitudes • Exibição de curvas de nível e sombreamento de relevo (via plugin adicional)</string>
+    <string name="osmand_plus_extended_description_part6">Recursos de ciclismo e pedestre
+\n• Visualização de caminhos a pé, pistas de caminhadas e ciclovias, ideal para atividades ao ar livre
+\n• Roteamento e modos de exibição especiais para bicicleta e pedestres
+\n• Paradas de transporte público opcionais (ônibus, troleibus, trem) incluindo nomes de linhas
+\n• Gravação opcional de viagem para arquivo GPX local ou serviço on-line • Exibição opcional de velocidade e altitudes
+\n• Exibição de curvas de nível e sombreamento de relevo (via plugin adicional)</string>
     <string name="shared_string_without_name">Sem nome</string>
     
     <string name="osmand_plus_extended_description_part8">Cobertura de mapa e qualidade aproximada:
@@ -2756,7 +2761,9 @@ Pôr do Sol: %2$s</string>
     <string name="clear_all_intermediates">Limpar todos os pontos intermédios</string>
     <string name="group_deleted">Grupo excluído</string>
     <string name="nothing_found_in_radius">Nada encontrado:</string>
-    <string name="osmand_extended_description_part1">OsmAnd (sigla em inglês de Direções de Navegação Automatizada do OSM) é um aplicativo de mapa e navegação com acesso a dados livres, mundiais e de alta qualidade do OpenStreetMap (OSM). Poderá usar o navegador visual e por voz, exibir POIs (pontos de interesse), criar e gerenciar trilhas GPX, usar (através de plugin) curvas de nível e dados de altitude, escolher entre os modos motorista, ciclista e pedestre, editar o OSM e muito mais.</string>
+    <string name="osmand_extended_description_part1">OsmAnd (sigla em inglês de Direções de Navegação Automatizada do OSM) é um aplicativo de mapa e navegação com acesso a dados livres, mundiais e de alta qualidade do OpenStreetMap (OSM).
+\n
+\nPoderá usar o navegador visual e por voz, exibir POIs (pontos de interesse), criar e gerenciar trilhas GPX, usar (através de plugin) curvas de nível e dados de altitude, escolher entre os modos motorista, ciclista e pedestre, editar o OSM e muito mais.</string>
     <string name="use_two_digits_longitude">"Use longitude com dois dígitos "</string>
     <string name="shared_string_travel_guides">Guias de viagem</string>
     <string name="waypoints_removed_from_map_markers">Pontos de passagem removidos dos marcadores de mapa</string>
@@ -2924,4 +2931,5 @@ Pôr do Sol: %2$s</string>
 \n• Adicionar POIs e fazer o upload diretamente para OSM (ou mais tarde se off-line)
 \n• Gravação de viagem opcional também em modo background (enquanto o dispositivo está no modo sleep)
 \nOsmAnd é um software de código aberto desenvolvido ativamente. Todos podem contribuir para o app, reportando bugs, melhorando as traduções ou programando novas funcionalidades. Além disso, o projeto conta com as contribuições financeiras para financiar o desenvolvimento e testes de novas funcionalidades.</string>
+    <string name="point_deleted">Ponto %1$s foi excluído</string>
     </resources>

@@ -9,8 +9,10 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.ParcelFileDescriptor;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
+
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.aidl.favorite.AFavorite;
@@ -52,6 +54,8 @@ import net.osmand.plus.views.mapwidgets.MapWidgetRegistry.MapWidgetRegInfo;
 import net.osmand.plus.views.mapwidgets.TextInfoWidget;
 import net.osmand.util.Algorithms;
 
+import org.apache.commons.logging.Log;
+
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileDescriptor;
@@ -64,8 +68,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.concurrent.ConcurrentHashMap;
-
-import org.apache.commons.logging.Log;
 
 
 public class OsmandAidlApi {
@@ -151,6 +153,10 @@ public class OsmandAidlApi {
 			}
 		}
 		receivers = new TreeMap<String, BroadcastReceiver>();
+	}
+
+	public OsmandMapLayer getMapLayer(@NonNull String id) {
+		return mapLayers.get(id);
 	}
 
 	private void registerRefreshMapReceiver(final MapActivity mapActivity) {

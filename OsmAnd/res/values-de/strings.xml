@@ -571,7 +571,7 @@
 	<string name="select_build_to_install">OsmAnd-Build zur Installation auswählen</string>
 	<string name="contribution_activity">Versionen zur Installation</string>
 	<string name="gps_status_app_not_found">App \'GPS Status\' ist nicht installiert. Soll diese im Market gesucht werden werden?</string>
-	<string name="voice_is_not_available_msg">Keine Sprachansage verfügbar. Bitte unter \'Einstellungen\' → \'Navigationseinstellungen\' → \'Sprachansagen\' ein Sprachpaket auswählen oder herunterladen.</string>
+	<string name="voice_is_not_available_msg">Keine Sprachführung verfügbar, bitte gehen Sie zu \'Einstellungen\' → \'Navigationseinstellungen\' → \'Sprachführung\' und wählen Sie ein Sprachpaket aus oder laden Sie es herunter.</string>
 	<string name="voice_is_not_available_title">Keine Sprachansage ausgewählt</string>
 	<string name="daynight_mode_day">Tag</string>
 	<string name="daynight_mode_night">Nacht</string>
@@ -2913,7 +2913,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="rendering_attr_hidePOILabels_name">POI-Beschriftungen</string>
     <string name="shared_string_without_name">Ohne Name</string>
     <string name="lang_lo">Laotisch</string>
-    <string name="day_off_label">aus</string>
+    <string name="day_off_label">geschlossen</string>
     <string name="winter_and_ski_renderer">Winter und Ski</string>
     <string name="touring_view_renderer">Tourenansicht</string>
     <string name="nautical_renderer">Nautisch</string>
@@ -3066,4 +3066,5 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="coord_input_add_point">Punkt hinzufügen</string>
     <string name="coord_input_save_as_track">Als Track speichern</string>
     <string name="coord_input_save_as_track_descr">Sie haben %1$s Punkte hinzugefügt. Geben Sie den Dateinamen ein und klicken Sie auf \"Speichern\".</string>
+    <string name="point_deleted">Punkt %1$s gelöscht</string>
     </resources>

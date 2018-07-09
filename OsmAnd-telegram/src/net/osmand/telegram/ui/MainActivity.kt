@@ -52,7 +52,7 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 		get() = application as TelegramApplication
 
 	private val telegramHelper get() = app.telegramHelper
-	private val osmandHelper get() = app.osmandHelper
+	private val osmandAidlHelper get() = app.osmandAidlHelper
 	private val settings get() = app.settings
 
 	private val listeners: MutableList<WeakReference<TelegramListener>> = mutableListOf()
@@ -131,8 +131,8 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 			telegramHelper.init()
 		}
 
-		if (osmandHelper.isOsmandBound() && !osmandHelper.isOsmandConnected()) {
-			osmandHelper.connectOsmand()
+		if (osmandAidlHelper.isOsmandBound() && !osmandAidlHelper.isOsmandConnected()) {
+			osmandAidlHelper.connectOsmand()
 		}
 	}
 
@@ -161,7 +161,7 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 		} else {
 			requestLocationPermission()
 		}
-		if (settings.hasAnyChatToShowOnMap() && osmandHelper.isOsmandNotInstalled()) {
+		if (settings.hasAnyChatToShowOnMap() && osmandAidlHelper.isOsmandNotInstalled()) {
 			showOsmandMissingDialog()
 		}
 	}
@@ -393,7 +393,7 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 					settings.stopSharingLocationToChats()
 					app.shareLocationHelper.stopSharingLocation()
 				}
-				if (settings.hasAnyChatToShowOnMap() && osmandHelper.isOsmandNotInstalled()) {
+				if (settings.hasAnyChatToShowOnMap() && osmandAidlHelper.isOsmandNotInstalled()) {
 					showOsmandMissingDialog()
 				}
 			}
@@ -490,7 +490,7 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 			holder.showOnMapSwitch?.setOnCheckedChangeListener { _, isChecked ->
 				settings.showChatOnMap(chatTitle, isChecked)
 				if (settings.hasAnyChatToShowOnMap()) {
-					if (osmandHelper.isOsmandNotInstalled()) {
+					if (osmandAidlHelper.isOsmandNotInstalled()) {
 						if (isChecked) {
 							showOsmandMissingDialog()
 						}

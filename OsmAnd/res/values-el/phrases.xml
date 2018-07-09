@@ -3366,4 +3366,109 @@
 	<string name="poi_tower_construction_dome">Κατασκευή: θόλος</string>
 	<string name="poi_tower_construction_concealed">Κατασκευή: κρυφή</string>
 
+	<string name="poi_railway_yard">Εμπορευματικός σταθμός</string>
+
+	<string name="poi_coworking_space">Συνεργατικός χώρος</string>
+
+	<string name="poi_fast_food_cafeteria">Ναι</string>
+
+	<string name="poi_drink_wine_yes">Κρασί: ναι</string>
+	<string name="poi_drink_wine_retail">Κρασί: λιανική</string>
+	<string name="poi_drink_wine_served">Κρασί: σερβιρισμένο</string>
+
+	<string name="poi_energy_supplier">Γραφείο παροχής ενέργειας</string>
+
+	<string name="poi_electronics_repair_computer">Ηλεκτρονικές επισκευές: υπολογιστές</string>
+	<string name="poi_electronics_repair_appliance">Ηλεκτρονικές επισκευές: Συσκευές</string>
+	<string name="poi_electronics_repair_phone">Ηλεκτρονικές επισκευές: τηλέφωνα</string>
+	<string name="poi_electronics_repair_tv">Ηλεκτρονικές επισκευές: τηλεοράσεις</string>
+
+	<string name="poi_resort_kids_camp">Παιδότοπος</string>
+	<string name="poi_music_school">Μουσικό σχολείο</string>
+	<string name="poi_language_school">Γλωσσικό σχολείο</string>
+
+	<string name="poi_life_ring">Σωσίβια</string>
+
+	<string name="poi_zoo_petting_zoo">Ζωολογικός κήπος</string>
+	<string name="poi_zoo_wildlife_park">Πάρκο άγριας ζωής</string>
+	<string name="poi_zoo_enclosure">Περίφραξη</string>
+	<string name="poi_zoo_safari_park">Ζωολογικό πάρκο</string>
+	<string name="poi_zoo_birds">Πουλιά</string>
+	<string name="poi_zoo_aviary">Κλουβιά</string>
+	<string name="poi_zoo_falconry">Ιερακοτροφία</string>
+	<string name="poi_zoo_reptile">Ερπετά</string>
+
+	<string name="poi_motorcycle_sales_yes">Πωλήσεις</string>
+	<string name="poi_motorcycle_sales_no">Πωλήσεις: όχι</string>
+	<string name="poi_motorcycle_sales_yes_used">Πωλήσεις: ναι, χρησιμοποιημένες</string>
+	<string name="poi_motorcycle_sales_used">Πωλήσεις: χρησιμοποιημένες</string>
+	<string name="poi_motorcycle_rental_yes">Ενοικίαση</string>
+	<string name="poi_motorcycle_rental_no">Ενοικίαση: όχι</string>
+	<string name="poi_motorcycle_repair_yes">Επισκευές</string>
+	<string name="poi_motorcycle_repair_no">Επισκευές: όχι</string>
+	<string name="poi_motorcycle_parts_yes">Ανταλλακτικά</string>
+	<string name="poi_motorcycle_parts_no">Ανταλλακτικά: όχι</string>
+	<string name="poi_motorcycle_tyres_yes">Ελαστικά</string>
+	<string name="poi_motorcycle_tyres_no">Ελαστικά: όχι</string>
+	<string name="poi_motorcycle_clothes_yes">Ρούχα μοτοσικλετών</string>
+	<string name="poi_motorcycle_clothes_no">Ρούχα μοτοσικλετών: όχι</string>
+	<string name="poi_motorcycle_type_scooter">Βέσπα</string>
+	<string name="poi_motorcycle_type_sportbike">Μηχανή αγώνων</string>
+	<string name="poi_motorcycle_type_chopper">Τσόπερ</string>
+	<string name="poi_motorcycle_type_offroad">Εκτός δρόμου</string>
+	<string name="poi_motorcycle_type_dualsport">Εντός και εκτός δρόμου (εντούρο)</string>
+	<string name="poi_motorcycle_type_standard">Τυπικός</string>
+
+	<string name="poi_generator_output_electricity_no">Έξοδος (ηλεκτρισμός): όχι</string>
+
+	<string name="poi_owner">Κάτοχος</string>
+
+	<string name="poi_animal_shelter_purpose_adoption_yes">Υιοθεσία: ναι</string>
+	<string name="poi_animal_shelter_purpose_adoption_no">Υιοθεσία: όχι</string>
+	<string name="poi_animal_shelter_purpose_release_yes">Απελευθέρωση: ναι</string>
+	<string name="poi_animal_shelter_purpose_release_no">Απελευθέρωση: όχι</string>
+
+	<string name="poi_spaceport">Διαστημοδρόμιο</string>
+
+	<string name="poi_direction_n">Κατεύθυνση: βορράς</string>
+	<string name="poi_direction_nne">Κατεύθυνση: βόρεια-βορειοανατολικά</string>
+	<string name="poi_direction_ne">Κατεύθυνση: βορειοανατολικά</string>
+	<string name="poi_direction_ene">Κατεύθυνση: ανατολικά-βόρειοανατολικά</string>
+	<string name="poi_direction_e">Κατεύθυνση: ανατολικά</string>
+	<string name="poi_direction_ese">Κατεύθυνση: ανατολικά-νοτιοανατολικά</string>
+	<string name="poi_direction_se">Κατεύθυνση: νοτιοανατολικά</string>
+	<string name="poi_direction_sse">Κατεύθυνση: νότια-νοτιοανατολικά</string>
+	<string name="poi_direction_s">Κατεύθυνση: νότια</string>
+	<string name="poi_direction_ssw">Κατεύθυνση: νότια-νοτιοδυτικά</string>
+	<string name="poi_direction_sw">Κατεύθυνση: νοτιοδυτικά</string>
+	<string name="poi_direction_wsw">Κατεύθυνση: δυτικά-νοτιοδυτικά</string>
+	<string name="poi_direction_w">Κατεύθυνση: δυτικά</string>
+	<string name="poi_direction_wnw">Κατεύθυνση: δυτικά-βορειοδυτικά</string>
+	<string name="poi_direction_nw">Κατεύθυνση: βορειοδυτικά</string>
+	<string name="poi_direction_nnw">Κατεύθυνση: βόρεια-βορειοδυτικά</string>
+	<string name="poi_direction_forward">Κατεύθυνση: προς τα εμπρός</string>
+	<string name="poi_direction_backward">Κατεύθυνση: προς τα πίσω</string>
+	<string name="poi_direction_clockwise">Κατεύθυνση: δεξιόστροφα</string>
+	<string name="poi_direction_anticlockwise">Κατεύθυνση: αριστερόστροφα</string>
+	<string name="poi_direction_up">Κατεύθυνση: προς τα πάνω</string>
+	<string name="poi_direction_down">Κατεύθυνση: προς τα κάτω</string>
+	<string name="poi_direction_entrance">Κατεύθυνση: είσοδος</string>
+	<string name="poi_direction_exit">Κατεύθυνση: έξοδος</string>
+	<string name="poi_direction_all">Κατεύθυνση: όλες</string>
+
+	<string name="poi_winter_room_yes">Χειμερινό δωμάτιο: ναι</string>
+	<string name="poi_winter_room_no">Χειμερινό δωμάτιο: όχι</string>
+	<string name="poi_reservation_required">Κράτηση: απαιτείται</string>
+	<string name="poi_reservation_recommended">Κράτηση: συνιστάται</string>
+	<string name="poi_reservation_yes">Κράτηση: ναι</string>
+	<string name="poi_reservation_no">Κράτηση: όχι</string>
+	<string name="poi_reservation_members_only">Κράτηση: μόνο μέλη</string>
+
+	<string name="poi_beds">Κρεβάτια</string>
+
+	<string name="poi_boat_rental">Ενοικίαση σκάφους</string>
+	<string name="poi_boat_motorboat_rental_yes">Μηχανοκίνητα σκάφη: ναι</string>
+	<string name="poi_boat_motorboat_rental_no">Μηχανοκίνητα σκάφη: όχι</string>
+	<string name="poi_boat_houseboat_rental_yes">Πλωτά σπίτια: ναι</string>
+	<string name="poi_boat_houseboat_rental_no">Πλωτά σπίτια: όχι</string>
 	</resources>

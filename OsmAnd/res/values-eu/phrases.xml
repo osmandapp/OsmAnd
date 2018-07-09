@@ -2634,8 +2634,8 @@
 
 	<string name="poi_ref_post">Posta-kodea</string>
 
-	<string name="poi_climbing_sport_yes">Kirola: bai</string>
-	<string name="poi_climbing_sport_no">Kirola: ez</string>
+	<string name="poi_climbing_sport_yes">Kirol-eskalada: bai</string>
+	<string name="poi_climbing_sport_no">Kirol-eskalada: ez</string>
 	<string name="poi_climbing_trad_yes">Tradizionala: bai</string>
 	<string name="poi_climbing_trad_no">Tradizionala: ez</string>
 	<string name="poi_climbing_ice_yes">Izotza: bai</string>
@@ -3809,5 +3809,15 @@
 
 	<string name="poi_pump_status_broken">Bonbaren egoera: izorratuta</string>
 	<string name="poi_greenhouse_horticulture">Negutegiko hortikultura</string>
+
+	<string name="poi_diplomatic_high_commission">Goi komisarioa</string>
+
+	<string name="poi_fire_operator">Sute-operadorea</string>
+
+	<string name="poi_cuisine_gastropub">Gastropub</string>
+	<string name="poi_cuisine_heuriger">Heuriger (ardo dastaketa)</string>
+	<string name="poi_cuisine_bagel">Bagel ogia</string>
+	<string name="poi_cuisine_fine_dining">Goi sukaldaritza</string>
+	<string name="poi_railway_yard">Merkantzietarako estazioa</string>
 
 	</resources>

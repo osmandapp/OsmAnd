@@ -19,7 +19,7 @@ public class AlarmInfo implements LocationPoint {
 		PEDESTRIAN(8, R.string.traffic_warning_pedestrian),
 		HAZARD(9, R.string.traffic_warning_hazard),
 		MAXIMUM(10, R.string.traffic_warning),
-		TUNNEL(8, R.string.tunnel_warning);
+		TUNNEL(11, R.string.tunnel_warning);
 		
 		private int priority;
 		private int string;

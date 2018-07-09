@@ -2963,4 +2963,5 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="coord_input_add_point">Pridať bod</string>
     <string name="coord_input_save_as_track">Uložiť ako stopu</string>
     <string name="coord_input_save_as_track_descr">Pridali ste %1$s bodov. Zadajte názov súboru a stlačte \"Uložiť\".</string>
+    <string name="point_deleted">Bod %1$s vymazaný</string>
     </resources>

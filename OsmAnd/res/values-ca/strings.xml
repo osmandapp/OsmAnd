@@ -709,7 +709,7 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="downloading_build">Baixant compilació…</string>
     <string name="loading_builds">Carregant paquets de l\'OsmAnd…</string>
     <string name="select_build_to_install">Seleccioneu un dels paquets de l\'OsmAnd per instal·lar-lo</string>
-    <string name="voice_is_not_available_msg">El guiatge per veu no està disponible. Aneu a «Configuració» → «Paràmetres generals» → «Guiatge per veu» i seleccioneu o baixeu un paquet d\'indicadors de veu.</string>
+    <string name="voice_is_not_available_msg">El guiatge per veu no està disponible. Aneu a «Configuració» → «Paràmetres de navegació» → «Guiatge per veu» i seleccioneu o baixeu un paquet d\'indicacions de veu.</string>
     <string name="voice_is_not_available_title">Cap guiatge de veu seleccionat</string>
     <string name="daynight_descr">Indiqueu el criteri de commutació entre el mode nocturn i el diürn.</string>
     <string name="maps_could_not_be_downloaded">Aquest mapa podria no haver-se baixat</string>

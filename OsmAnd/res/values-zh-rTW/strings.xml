@@ -583,7 +583,7 @@
     <string name="select_build_to_install">選擇 OsmAnd 編譯安裝</string>
     <string name="contribution_activity">安裝的版本</string>
     <string name="gps_status_app_not_found">沒安裝 GPS 狀態應用程式，要到商場搜尋嗎？</string>
-    <string name="voice_is_not_available_msg">語音導航無法使用時。請到\'設定\'→ \'一般設定\' → \'語音導航\'，選取或下載提示語音包。</string>
+    <string name="voice_is_not_available_msg">語音導航無法使用時。請到「設定」→「導航設定」→「語音導航」，選取或下載語音提示套件。</string>
     <string name="voice_is_not_available_title">未選定語音導航</string>
     <string name="daynight_mode_day">日間</string>
     <string name="daynight_mode_night">夜間</string>

@@ -597,7 +597,7 @@
 	<string name="select_build_to_install">Επιλέξτε ένα από τα OsmAnd builds προς εγκατάσταση</string>
 	<string name="contribution_activity">Εγκατάσταση έκδοσης</string>
 	<string name="gps_status_app_not_found">Η εφαρμογή κατάστασης GPS δεν είναι εγκατεστημένη. Αναζήτηση στην αγορά ;</string>
-	<string name="voice_is_not_available_msg">"Δεν υπάρχει διαθέσιμη φωνητική καθοδήγηση, παρακαλούμε μεταβείτε στο \'Ρυθμίσεις\' →  \'Γενικές\' → \'Φωνητική καθοδήγηση\' και επιλέξτε ή κατεβάστε ένα πακέτο φωνητικών οδηγιών."</string>
+	<string name="voice_is_not_available_msg">"Δεν υπάρχει διαθέσιμη φωνητική καθοδήγηση, παρακαλούμε μεταβείτε στο \'Ρυθμίσεις\' →  \'Ρυθμίσεις πλοήγησης\' → \'Φωνητική καθοδήγηση\' και επιλέξτε ή κατεβάστε ένα πακέτο φωνητικών οδηγιών."</string>
 	<string name="voice_is_not_available_title">Δεν επιλέχτηκε φωνητική καθοδήγηση</string>
 	<string name="daynight_mode_day">Ημέρα</string>
 	<string name="daynight_mode_night">Νύχτα</string>

@@ -17,14 +17,14 @@ private const val MAP_LAYER_ID = "telegram_layer"
 class ShowLocationHelper(private val app: TelegramApplication) {
 
 	private val telegramHelper = app.telegramHelper
-	private val osmandHelper = app.osmandHelper
+	private val osmandAidlHelper = app.osmandAidlHelper
 
 	var showingLocation: Boolean = false
 		private set
 
 	fun setupMapLayer() {
 		execOsmandApi {
-			osmandHelper.addMapLayer(MAP_LAYER_ID, "Telegram", 5.5f, null)
+			osmandAidlHelper.addMapLayer(MAP_LAYER_ID, "Telegram", 5.5f, null)
 		}
 	}
 
@@ -72,12 +72,12 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 				if (photoUri != null) {
 					params[AMapPoint.POINT_IMAGE_URI_PARAM] = photoUri.toString()
 				}
-				osmandHelper.addMapPoint(MAP_LAYER_ID, "${chatTitle}_${message.senderUserId}", userName, userName,
+				osmandAidlHelper.addMapPoint(MAP_LAYER_ID, "${chatTitle}_${message.senderUserId}", userName, userName,
 						chatTitle, Color.RED, ALatLon(content.location.latitude, content.location.longitude), null, params)
 			} else if (chatTitle != null && content is MessageOsmAndBotLocation && content.isValid()) {
 				val name = content.name
 				setupMapLayer()
-				osmandHelper.addMapPoint(MAP_LAYER_ID, "${chatTitle}_$name", name, name,
+				osmandAidlHelper.addMapPoint(MAP_LAYER_ID, "${chatTitle}_$name", name, name,
 						chatTitle, Color.RED, ALatLon(content.lat, content.lon), null, null)
 			}
 		}
@@ -121,17 +121,17 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 	private fun removeMapPoint(chatTitle: String, message: TdApi.Message) {
 		val content = message.content
 		if (content is TdApi.MessageLocation) {
-			osmandHelper.removeMapPoint(MAP_LAYER_ID, "${chatTitle}_${message.senderUserId}")
+			osmandAidlHelper.removeMapPoint(MAP_LAYER_ID, "${chatTitle}_${message.senderUserId}")
 		} else if (content is MessageOsmAndBotLocation) {
-			osmandHelper.removeMapPoint(MAP_LAYER_ID, "${chatTitle}_${content.name}")
+			osmandAidlHelper.removeMapPoint(MAP_LAYER_ID, "${chatTitle}_${content.name}")
 		}
 	}
 
 	private fun execOsmandApi(action: (() -> Unit)) {
-		if (osmandHelper.isOsmandConnected()) {
+		if (osmandAidlHelper.isOsmandConnected()) {
 			action.invoke()
-		} else if (osmandHelper.isOsmandBound()) {
-			osmandHelper.connectOsmand()
+		} else if (osmandAidlHelper.isOsmandBound()) {
+			osmandAidlHelper.connectOsmand()
 		}
 	}
 }

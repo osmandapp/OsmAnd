@@ -2810,7 +2810,7 @@
     <string name="osmand_background_plugin_description">Приказује подешавања за укључивање праћења у позадини и навођења тако што се GPS уређај периодично буди (а екран остаје угашен).</string>
     <string name="choose_audio_stream_descr">Одаберите говорника да пустите гласовно навођење.</string>
     <string name="send_location_email_pattern">Да видите положај, пратите везу ка веб локацији %1$s или Андроид intent везу %2$s</string>
-    <string name="voice_is_not_available_msg">Нема доступног гласовног навођења, идите у \"Поставке\" → \"Опште\" → \"Гласовно навођење\" и одаберите или скините пакет са гласовима.</string>
+    <string name="voice_is_not_available_msg">Нема доступног гласовног навођења, идите у \"Поставке\" → \"Поставке навођења\" → \"Гласовно навођење\" и одаберите или скините пакет са гласовима.</string>
     <string name="number_of_rows_in_dash">Број редова на табли %1$s</string>
     <string name="shared_string_bookmark">Забележи</string>
     <string name="switch_to_vector_map_to_see">Постојеће векторске карте за овај положај. 
