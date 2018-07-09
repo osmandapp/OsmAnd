@@ -6,9 +6,9 @@ import android.util.Log
 import net.osmand.telegram.R
 import java.util.concurrent.ConcurrentHashMap
 
-private const val TAG = "FontCache"
-
 object FontCache {
+
+	private const val TAG = "FontCache"
 
 	private val fontsMap = ConcurrentHashMap<String, Typeface>()
 
