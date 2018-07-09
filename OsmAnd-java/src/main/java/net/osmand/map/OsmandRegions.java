@@ -777,4 +777,19 @@ public class OsmandRegions {
 		}
 		return mapDataObjects;
 	}
+
+
+
+	public List<String> getRegions(double lat, double lon, List<String> keyNames) throws IOException {
+		keyNames.clear();
+		int x31 = MapUtils.get31TileNumberX(lon);
+		int y31 = MapUtils.get31TileNumberY(lat);
+		List<BinaryMapDataObject> cs = query(x31, y31);
+		for (BinaryMapDataObject b : cs) {
+			if (contain(b, x31, y31)) {
+				keyNames.add(getDownloadName(b));
+			}
+		}
+		return keyNames;
+	}
 }
