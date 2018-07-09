@@ -3820,4 +3820,13 @@
 	<string name="poi_cuisine_fine_dining">Goi sukaldaritza</string>
 	<string name="poi_railway_yard">Merkantzietarako estazioa</string>
 
+	<string name="poi_forestry_compartment">Seinale zutoina: Baso konpartimentua</string>
+	<string name="poi_forestry_allotment">Seinale zutoina: baso banaketa</string>
+	<string name="poi_nuclear_explosion_salvo_first_detonation">Leherketa salbuespena: salbuespen test baten lehenengo detonazioa</string>
+	<string name="poi_nuclear_explosion_salvo_second_or_later_detonation">Eztanda salbuespena: salbuespen proba baten bigarren edo geroago detonazioa</string>
+	<string name="poi_mdf">Banaketa-marko nagusia</string>
+	<string name="poi_climbing_boulder_yes">Boulder: bai</string>
+	<string name="poi_climbing_boulder_no">Boulder: ez</string>
+	<string name="poi_climbing_summit_log_yes">Eskalatutako tontorreko liburua: bai</string>
+	<string name="poi_climbing_summit_log_no">Eskalatutako tontorreko liburua: ez</string>
 	</resources>

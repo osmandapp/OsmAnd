@@ -598,7 +598,7 @@
 	<string name="select_build_to_install">יש לבחור את אחת הבניות של OsmAnd להתקנה</string>
 	<string name="contribution_activity">התקנת הגרסה</string>
 	<string name="gps_status_app_not_found">יישומון מצב ה־GPS לא מותקן. לחפש בחנות?</string>
-	<string name="voice_is_not_available_msg">אין קריינות זמינה. נא לגשת ל‚הגדרות’ ← ‚כללי’ ← ‚קריינות’ ולבחור או להוריד חבילת קריינות.</string>
+	<string name="voice_is_not_available_msg">אין קריינות זמינה. נא לגשת ל‚הגדרות’ ← ‚הגדרות ניווט’ ← ‚קריינות’ ולבחור או להוריד חבילת קריינות.</string>
 	<string name="voice_is_not_available_title">לא נבחר ניווט קולי</string>
 	<string name="daynight_mode_day">יום</string>
 	<string name="daynight_mode_night">לילה</string>

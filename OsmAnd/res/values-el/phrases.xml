@@ -3471,4 +3471,119 @@
 	<string name="poi_boat_motorboat_rental_no">Μηχανοκίνητα σκάφη: όχι</string>
 	<string name="poi_boat_houseboat_rental_yes">Πλωτά σπίτια: ναι</string>
 	<string name="poi_boat_houseboat_rental_no">Πλωτά σπίτια: όχι</string>
+	<string name="poi_stands">Βάσεις</string>
+
+	<string name="poi_boat_pedalboat_rental_yes">Ποδοκίνητα σκάφη: ναι</string>
+	<string name="poi_boat_pedalboat_rental_no">Ποδοκίνητα σκάφη: όχι</string>
+	<string name="poi_boat_sailboat_rental_yes">Ιστιοφόρα: ναι</string>
+	<string name="poi_boat_sailboat_rental_no">Ιστιοφόρα: όχι</string>
+	<string name="poi_boat_dinghy_rental_rental_yes">Φουσκωτά σκάφη: ναι</string>
+	<string name="poi_boat_dinghy_rental_rental_no">Φουσκωτά σκάφη: όχι</string>
+	<string name="poi_boat_kayak_rental_rental_yes">Καγιάκ: ναι</string>
+	<string name="poi_boat_kayak_rental_rental_no">Καγιάκ: όχι</string>
+	<string name="poi_boat_canoe_rental_rental_yes">Κανό: ναι</string>
+	<string name="poi_boat_canoe_rental_rental_no">Κανό: όχι</string>
+
+	<string name="poi_network">Δίκτυο</string>
+
+	<string name="poi_government_archive">Αρχείο</string>
+	<string name="poi_government_ministry">Υπουργείο</string>
+	<string name="poi_government_public_service">Δημόσια υπηρεσία</string>
+	<string name="poi_government_social_security">Κοινωνική ασφάλιση</string>
+	<string name="poi_government_social_services">Κοινωνικές υπηρεσίες</string>
+	<string name="poi_government_treasury">Υπουργείο οικονομικών</string>
+	<string name="poi_government_transportation">Υπουργείο μεταφορών</string>
+	<string name="poi_government_legislative">Βουλή</string>
+
+	<string name="poi_vhf">Κανάλι VHF</string>
+
+	<string name="poi_gorge">Χαράδρα</string>
+	<string name="poi_couloir">Διάδρομος</string>
+	<string name="poi_mountain_area">Ορεινή ζώνη</string>
+
+	<string name="poi_surface_clay">Πηλός</string>
+	<string name="poi_surface_tartan">Ταρτάν</string>
+	<string name="poi_surface_artificial_turf">Τεχνητός χλοοτάπητας</string>
+	<string name="poi_surface_decoturf">DecoTurf (είδος χλοοτάπητα)</string>
+	<string name="poi_surface_metal_grid">Μεταλλικό πλέγμα</string>
+
+	<string name="poi_location_underground">Τοποθεσία: υπόγεια</string>
+	<string name="poi_location_underwater">Τοποθεσία: υποβρύχια</string>
+	<string name="poi_location_overground">Τοποθεσία: υπέργεια</string>
+	<string name="poi_location_overhead">Τοποθεσία: εναέρια</string>
+	<string name="poi_location_roof">Τοποθεσία: στέγη</string>
+	<string name="poi_location_rooftop">Τοποθεσία: ταράτσα</string>
+	<string name="poi_location_outdoor">Τοποθεσία: εξωτερικά</string>
+	<string name="poi_location_indoor">Τοποθεσία: εσωτερικά</string>
+	<string name="poi_location_platform">Τοποθεσία: εξέδρα</string>
+	<string name="poi_location_kiosk">Τοποθεσία: περίπτερο</string>
+	<string name="poi_location_bridge">Τοποθεσία: γέφυρα</string>
+	<string name="poi_location_wall">Τοποθεσία: τοίχος</string>
+	<string name="poi_location_entrance">Τοποθεσία: είσοδος</string>
+
+	<string name="poi_visibility_house">Ορατότητα: σπίτι</string>
+	<string name="poi_visibility_street">Ορατότητα: δρόμος</string>
+	<string name="poi_visibility_area">Ορατότητα: περιοχή</string>
+
+	<string name="poi_operational_status_open">Ανοικτό</string>
+	<string name="poi_operational_status_closed">Κλειστό</string>
+	<string name="poi_operational_status_restricted">Περιορισμένο</string>
+	<string name="poi_operational_status_broken">Χαλασμένο</string>
+	<string name="poi_operational_status_needs_maintenance">Χρειάζεται συντήρηση</string>
+
+	<string name="poi_water_purification_none">Κανένας</string>
+	<string name="poi_water_purification_chlorine">Χλώριο</string>
+	<string name="poi_water_purification_reverse_osmosis">Αντίστροφη όσμωση</string>
+	<string name="poi_water_purification_aquatabs">Ταμπλέτες καθαρισμού του νερού</string>
+
+	<string name="poi_water_supply_water_well">Πηγάδι</string>
+	<string name="poi_water_supply_pipeline">Αγωγός</string>
+	<string name="poi_water_supply_running_water">Τρεχούμενο νερό</string>
+	<string name="poi_water_supply_pump">Αντλία</string>
+	<string name="poi_water_supply_borehole">Γεώτρηση</string>
+	<string name="poi_water_supply_water_trucking">Υδροφόρα</string>
+	<string name="poi_water_supply_water_tank">Δεξαμενή νερού</string>
+	<string name="poi_water_supply_bottled_water">Εμφιαλωμένο νερό</string>
+
+	<string name="poi_water_place_access_community">Κοινότητα</string>
+	<string name="poi_water_place_access_family">Οικογένεια</string>
+	<string name="poi_water_place_access_multifamilies">Πολλές οικογένειες</string>
+
+	<string name="poi_socket_cee_blue">Ρευματοδότης: γαλάζιος CEE</string>
+	<string name="poi_socket_cee_blue_current">Ρευματοδότης: Γαλάζιος CEE: ρεύμα</string>
+	<string name="poi_socket_cee_blue_output">Ρευματοδότης: γαλάζιος CEE: έξοδος</string>
+	<string name="poi_socket_cee_red_16a">Ρευματοδότης: κόκκινος CEE 16Α</string>
+	<string name="poi_socket_cee_red_16a_current">Ρευματοδότης: κόκκινος CEE 16A: ρεύμα</string>
+	<string name="poi_socket_cee_red_16a_output">Ρευματοδότης: κόκκινος CEE 16A: έξοδος</string>
+	<string name="poi_socket_cee_red_32a">"Ρευματοδότης: κόκκινος CEE 32A "</string>
+	<string name="poi_socket_cee_red_32a_current">Ρευματοδότης: κόκκινος CEE 32A: ρεύμα</string>
+	<string name="poi_socket_cee_red_32a_output">Ρευματοδότης: κόκκινος CEE 32A: έξοδος</string>
+	<string name="poi_socket_cee_red_64a">Ρευματοδότης: κόκκινος CEE 64A</string>
+	<string name="poi_socket_cee_red_64a_current">Ρευματοδότης: κόκκινος CEE 64A: ρεύμα</string>
+	<string name="poi_socket_cee_red_64a_output">Ρευματοδότης: κόκκινος CEE 64A: έξοδος</string>
+	<string name="poi_socket_cee_red_125a">Ρευματοδότης: κόκκινος CEE 125A</string>
+	<string name="poi_socket_cee_red_125a_current">Ρευματοδότης: κόκκινος CEE 125A: ρεύμα</string>
+	<string name="poi_socket_cee_red_125a_output">Ρευματοδότης: κόκκινος CEE 125A: έξοδος</string>
+	<string name="poi_socket_type1">Ρευματοδότης: Τύπος 1</string>
+	<string name="poi_socket_type1_current">Ρευματοδότης: Τύπος 1: ρεύμα</string>
+	<string name="poi_socket_type1_output">Ρευματοδότης: Τύπος 1: έξοδος</string>
+	<string name="poi_socket_type1_combo">Ρευματοδότης: σύνθετος τύπος 1</string>
+	<string name="poi_socket_type1_combo_current">Ρευματοδότης: σύνθετος τύπος 1: ρεύμα</string>
+	<string name="poi_socket_type1_combo_output">Ρευματοδότης: σύνθετος τύπος 1: έξοδος</string>
+	<string name="poi_socket_type2">Ρευματοδότης: Τύπος 2</string>
+	<string name="poi_socket_type2_current">Ρευματοδότης: Τύπος 2: ρεύμα</string>
+	<string name="poi_socket_type2_output">Ρευματοδότης: Τύπος 2: έξοδος</string>
+	<string name="poi_socket_type2_combo">Ρευματοδότης: σύνθετος τύπος 2</string>
+	<string name="poi_socket_type2_combo_current">Ρευματοδότης: σύνθετος τύπος 2: ρεύμα</string>
+	<string name="poi_socket_type2_combo_output">Ρευματοδότης: σύνθετος τύπος 2: έξοδος</string>
+	<string name="poi_socket_type3">Ρευματοδότης: Τύπος 3</string>
+	<string name="poi_socket_type3_current">Ρευματοδότης: Τύπος 3: ρεύμα</string>
+	<string name="poi_socket_type3_output">Ρευματοδότης: Τύπος 3: έξοδος</string>
+	<string name="poi_socket_chademo">Ρευματοδότης: CHAdeMO</string>
+	<string name="poi_socket_chademo_current">Ρευματοδότης: CHAdeMO: ρεύμα</string>
+	<string name="poi_socket_chademo_output">Ρευματοδότης: CHAdeMO: έξοδος</string>
+	<string name="poi_socket_tesla_standard">Ρευματοδότης: τυπικός Τέσλα</string>
+	<string name="poi_socket_tesla_standard_current">Ρευματοδότης: τυπικός Τέσλα: ρεύμα</string>
+	<string name="poi_socket_tesla_standard_output">Ρευματοδότης: τυπικός Τέσλα: έξοδος</string>
+	<string name="poi_socket_tesla_supercharger">Ρευματοδότης: Υπερφορτιστής Τέσλα</string>
 	</resources>
