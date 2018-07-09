@@ -366,7 +366,7 @@ class TelegramHelper private constructor() {
 			if (oldContent is TdApi.MessageText) {
 				message.content = parseOsmAndBotLocation(oldContent.text.text)
 			}
-			removeOldMessages(message.senderUserId)
+			removeOldMessages(message.senderUserId, message.chatId)
 			usersLocationMessages[message.id] = message
 			val chatTitle = chats[message.chatId]?.title
 			if (chatTitle != null) {
@@ -377,13 +377,13 @@ class TelegramHelper private constructor() {
 		}
 	}
 
-	private fun removeOldMessages(userId: Int) {
-		users[userId]?.also { user ->
-			if (user.username != OSMAND_BOT_USERNAME) {
-				usersLocationMessages.values.filter { it.senderUserId == userId }.forEach {
+	private fun removeOldMessages(userId: Int, chatId: Long) {
+		val user = users[userId]
+		if (user != null && user.username != OSMAND_BOT_USERNAME) {
+			usersLocationMessages.values.filter { it.senderUserId == userId && it.chatId == chatId }
+				.forEach {
 					usersLocationMessages.remove(it.id)
 				}
-			}
 		}
 	}
 
