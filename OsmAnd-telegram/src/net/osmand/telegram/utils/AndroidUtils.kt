@@ -3,6 +3,7 @@ package net.osmand.telegram.utils
 import android.Manifest
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.res.Configuration
 import android.net.Uri
@@ -90,4 +91,7 @@ object AndroidUtils {
 		}
 		return "https://play.google.com/store/apps/details?id=$packageName"
 	}
+
+	fun isIntentSafe(ctx: Context, intent: Intent) =
+		ctx.packageManager.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY).isNotEmpty()
 }

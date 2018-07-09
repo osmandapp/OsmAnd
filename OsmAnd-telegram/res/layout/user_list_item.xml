@@ -13,6 +13,7 @@
 		android:background="?attr/card_bg_color">
 
 		<LinearLayout
+			android:id="@+id/main_view"
 			android:layout_width="match_parent"
 			android:layout_height="@dimen/list_item_height"
 			android:layout_marginBottom="@dimen/list_item_bottom_margin"

@@ -12,7 +12,7 @@ import net.osmand.telegram.utils.AndroidUtils
 import org.drinkless.td.libcore.telegram.TdApi
 import java.io.File
 
-private const val MAP_LAYER_ID = "telegram_layer"
+const val MAP_LAYER_ID = "telegram_layer"
 
 class ShowLocationHelper(private val app: TelegramApplication) {
 

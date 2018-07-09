@@ -47,6 +47,7 @@ object TelegramUiHelper {
 		}
 		val chatType = chat.type
 		if (chatType is TdApi.ChatTypePrivate && !helper.isBot(chatType.userId)) {
+			res.userId = chatType.userId
 			val content = messages.firstOrNull()?.content
 			if (content is TdApi.MessageLocation) {
 				res.latLon = LatLon(content.location.latitude, content.location.longitude)
@@ -55,18 +56,26 @@ object TelegramUiHelper {
 		return res
 	}
 
-	fun messageToLocationItem(helper: TelegramHelper, message: TdApi.Message): LocationItem? {
+	fun messageToLocationItem(
+		helper: TelegramHelper,
+		chat: TdApi.Chat,
+		message: TdApi.Message
+	): LocationItem? {
 		val content = message.content
 		return when (content) {
-			is MessageOsmAndBotLocation -> botMessageToLocationItem(content)
-			is TdApi.MessageLocation -> locationMessageToLocationItem(helper, message)
+			is MessageOsmAndBotLocation -> botMessageToLocationItem(chat, content)
+			is TdApi.MessageLocation -> locationMessageToLocationItem(helper, chat, message)
 			else -> null
 		}
 	}
 
-	private fun botMessageToLocationItem(content: MessageOsmAndBotLocation): LocationItem? {
+	private fun botMessageToLocationItem(
+		chat: TdApi.Chat,
+		content: MessageOsmAndBotLocation
+	): LocationItem? {
 		return if (content.isValid()) {
 			LocationItem().apply {
+				chatTitle = chat.title
 				name = content.name
 				latLon = LatLon(content.lat, content.lon)
 				placeholderId = R.drawable.ic_group
@@ -78,11 +87,13 @@ object TelegramUiHelper {
 
 	private fun locationMessageToLocationItem(
 		helper: TelegramHelper,
+		chat: TdApi.Chat,
 		message: TdApi.Message
 	): LocationItem? {
 		val user = helper.getUser(message.senderUserId) ?: return null
 		val content = message.content as TdApi.MessageLocation
 		return LocationItem().apply {
+			chatTitle = chat.title
 			name = "${user.firstName} ${user.lastName}".trim()
 			if (name.isEmpty()) {
 				name = user.username
@@ -93,6 +104,7 @@ object TelegramUiHelper {
 			latLon = LatLon(content.location.latitude, content.location.longitude)
 			photoPath = helper.getUserPhotoPath(user)
 			placeholderId = R.drawable.ic_group
+			senderUserId = message.senderUserId
 		}
 	}
 
@@ -105,9 +117,15 @@ object TelegramUiHelper {
 			internal set
 		var placeholderId: Int = 0
 			internal set
+		var userId: Int = 0
+			internal set
+
+		fun canBeOpenedOnMap() = latLon != null && userId != 0
 	}
 
 	class LocationItem {
+		var chatTitle: String = ""
+			internal set
 		var name: String = ""
 			internal set
 		var latLon: LatLon? = null
@@ -116,5 +134,9 @@ object TelegramUiHelper {
 			internal set
 		var placeholderId: Int = 0
 			internal set
+		var senderUserId: Int = 0
+			internal set
+
+		fun canBeOpenedOnMap() = latLon != null
 	}
 }

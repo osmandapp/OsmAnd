@@ -18,6 +18,7 @@ import net.osmand.telegram.R
 import net.osmand.telegram.TelegramApplication
 import net.osmand.telegram.TelegramLocationProvider.TelegramCompassListener
 import net.osmand.telegram.TelegramLocationProvider.TelegramLocationListener
+import net.osmand.telegram.helpers.OsmandHelper
 import net.osmand.telegram.helpers.TelegramHelper.*
 import net.osmand.telegram.helpers.TelegramUiHelper
 import net.osmand.telegram.helpers.TelegramUiHelper.ChatItem
@@ -170,7 +171,7 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 			telegramHelper.getChat(id)?.also { chat ->
 				res.add(TelegramUiHelper.chatToChatItem(telegramHelper, chat, messages))
 				if (needLocationItems(chat.type)) {
-					res.addAll(convertToLocationItems(messages))
+					res.addAll(convertToLocationItems(chat, messages))
 				}
 			}
 		}
@@ -186,10 +187,15 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 		}
 	}
 
-	private fun convertToLocationItems(messages: List<TdApi.Message>): List<LocationItem> {
+	private fun convertToLocationItems(
+		chat: TdApi.Chat,
+		messages: List<TdApi.Message>
+	): List<LocationItem> {
 		val res = mutableListOf<LocationItem>()
 		messages.forEach { message ->
-			TelegramUiHelper.messageToLocationItem(telegramHelper, message)?.also { res.add(it) }
+			TelegramUiHelper.messageToLocationItem(telegramHelper, chat, message)?.also {
+				res.add(it)
+			}
 		}
 		return res
 	}
@@ -231,7 +237,16 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 				val nextIsLocation = !lastItem && items[position + 1] is LocationItem
 				val chatTitle = item.title
 				val stateTextInd = if (settings.isShowingChatOnMap(chatTitle)) 1 else 0
+				val canBeOpenedOnMap = item.canBeOpenedOnMap()
 
+				holder.userRow?.isEnabled = canBeOpenedOnMap
+				if (canBeOpenedOnMap) {
+					holder.userRow?.setOnClickListener {
+						OsmandHelper.showUserOnMap(activity, item)
+					}
+				} else {
+					holder.userRow?.setOnClickListener(null)
+				}
 				TelegramUiHelper.setupPhoto(app, holder.icon, item.photoPath, item.placeholderId)
 				holder.title?.text = chatTitle
 				if (location != null && item.latLon != null) {
@@ -253,6 +268,16 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 				holder.bottomDivider?.visibility = if (nextIsLocation) View.VISIBLE else View.GONE
 				holder.bottomShadow?.visibility = if (lastItem) View.VISIBLE else View.GONE
 			} else if (item is LocationItem && holder is ContactViewHolder) {
+				val canBeOpenedOnMap = item.canBeOpenedOnMap()
+
+				holder.mainView?.isEnabled = canBeOpenedOnMap
+				if (canBeOpenedOnMap) {
+					holder.mainView?.setOnClickListener {
+						OsmandHelper.showUserOnMap(activity, item)
+					}
+				} else {
+					holder.mainView?.setOnClickListener(null)
+				}
 				TelegramUiHelper.setupPhoto(app, holder.icon, item.photoPath, item.placeholderId)
 				holder.title?.text = item.name
 				if (location != null && item.latLon != null) {
@@ -325,6 +350,7 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 		}
 
 		inner class ContactViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
+			val mainView: View? = view.findViewById(R.id.main_view)
 			val icon: ImageView? = view.findViewById(R.id.icon)
 			val title: TextView? = view.findViewById(R.id.title)
 			val locationViewContainer: View? = view.findViewById(R.id.location_view_container)
@@ -335,6 +361,7 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 		}
 
 		inner class ChatViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
+			val userRow: View? = view.findViewById(R.id.user_row)
 			val icon: ImageView? = view.findViewById(R.id.icon)
 			val title: TextView? = view.findViewById(R.id.title)
 			val locationViewContainer: View? = view.findViewById(R.id.location_view_container)
