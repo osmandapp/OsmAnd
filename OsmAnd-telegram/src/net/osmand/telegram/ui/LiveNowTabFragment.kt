@@ -37,7 +37,7 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 		get() = activity?.application as TelegramApplication
 
 	private val telegramHelper get() = app.telegramHelper
-	private val osmandHelper get() = app.osmandHelper
+	private val osmandAidlHelper get() = app.osmandAidlHelper
 	private val settings get() = app.settings
 
 	private lateinit var adapter: LiveNowListAdapter
@@ -295,7 +295,7 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 
 					settings.showChatOnMap(chatTitle, allSelected)
 					if (settings.hasAnyChatToShowOnMap()) {
-						if (osmandHelper.isOsmandNotInstalled()) {
+						if (osmandAidlHelper.isOsmandNotInstalled()) {
 							if (allSelected) {
 								activity?.let {
 									MainActivity.OsmandMissingDialogFragment()

@@ -24,7 +24,7 @@ class TelegramApplication : Application(), OsmandHelperListener {
 	lateinit var shareLocationHelper: ShareLocationHelper private set
 	lateinit var showLocationHelper: ShowLocationHelper private set
 	lateinit var notificationHelper: NotificationHelper private set
-	lateinit var osmandHelper: OsmandAidlHelper private set
+	lateinit var osmandAidlHelper: OsmandAidlHelper private set
 	lateinit var locationProvider: TelegramLocationProvider private set
 
 	var telegramService: TelegramService? = null
@@ -40,7 +40,7 @@ class TelegramApplication : Application(), OsmandHelperListener {
 
 		settings = TelegramSettings(this)
 		uiUtils = UiUtils(this)
-		osmandHelper = OsmandAidlHelper(this)
+		osmandAidlHelper = OsmandAidlHelper(this)
 		shareLocationHelper = ShareLocationHelper(this)
 		showLocationHelper = ShowLocationHelper(this)
 		notificationHelper = NotificationHelper(this)
@@ -55,7 +55,7 @@ class TelegramApplication : Application(), OsmandHelperListener {
 	}
 
 	fun cleanupResources() {
-		osmandHelper.cleanupResources()
+		osmandAidlHelper.cleanupResources()
 		telegramHelper.close()
 	}
 
