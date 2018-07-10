@@ -673,5 +673,22 @@ public class Algorithms {
 	public static int compare(long x, long y) {
 		return (x < y) ? -1 : ((x == y) ? 0 : 1);
 	}
+	
+	public static int compare(final String str1, final String str2) {
+		return compare(str1, str2, false);
+	}
+	
+	public static int compare(final String str1, final String str2, final boolean nullIsLess) {
+        if (str1 == str2) {
+            return 0;
+        }
+        if (str1 == null) {
+            return nullIsLess ? -1 : 1;
+        }
+        if (str2 == null) {
+            return nullIsLess ? 1 : - 1;
+        }
+        return str1.compareTo(str2);
+    }
 
 }
