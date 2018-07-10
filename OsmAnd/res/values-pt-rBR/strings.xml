@@ -2281,7 +2281,7 @@ Pôr do Sol: %2$s</string>
     <string name="shared_string_added">Adicionado</string>
     <string name="marker_activated">Marcador %s foi ativado.</string>
     <string name="one_tap_active_descr">Toque num marcador do mapa para movê-lo para o topo dos marcadores ativos sem abrir o menu de contexto.</string>
-    <string name="one_tap_active">Ativar com um toque</string>
+    <string name="one_tap_active">Ativo com \'um toque\'</string>
     <string name="empty_state_av_notes">Tome notas!</string>
     <string name="notes_by_date">Notas por data</string>
     <string name="by_date">Por data</string>
@@ -2429,7 +2429,7 @@ Pôr do Sol: %2$s</string>
     <string name="import_track_desc">Arquivo %1$s não possui pontos de passagem, importe-o como uma trilha?</string>
     <string name="add_segment_to_the_track">Adicionar a um arquivo GPX</string>
 <string name="empty_state_av_notes_desc">Adicionar nota de áudio, vídeo ou foto para cada ponto no mapa, usando o widget ou o menu de contexto.</string>
-    <string name="quick_action_add_destination_desc">Tocar no botão de ação adicionará um destino no local do centro da tela. O destino anteriormente definido se torna o último destino intermediário.</string>
+    <string name="quick_action_add_destination_desc">Tocando neste botão de ação marcará o centro da tela como o destino da rota, qualquer destino anteriormente definido se torna o último destino intermediário.</string>
     <string name="quick_action_replace_destination_desc">Tocar no botão de ação substituirá o destino com o local do centro da tela.</string>
     <string name="quick_action_add_first_intermediate_desc">Tocar neste botão de ação adicionará o primeiro ponto intermédio no centro da tela.</string>
     <string name="subscribe_email_desc">Assine a nossa lista de e-mail sobre descontos do aplicativo e obtenha mais 3 downloads de mapa!</string>
