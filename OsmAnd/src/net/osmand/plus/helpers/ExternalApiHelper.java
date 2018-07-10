@@ -7,13 +7,11 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.ParcelFileDescriptor;
 import android.support.v7.app.AlertDialog;
-import android.text.TextUtils;
 
 import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
-import net.osmand.aidl.maplayer.point.AMapPoint;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -33,8 +31,6 @@ import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
 import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
-import net.osmand.plus.views.AidlMapLayer;
-import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.router.TurnType;
 import net.osmand.util.Algorithms;
 
@@ -78,9 +74,6 @@ public class ExternalApiHelper {
 	public static final String PARAM_LON = "lon";
 	public static final String PARAM_COLOR = "color";
 	public static final String PARAM_VISIBLE = "visible";
-
-	public static final String PARAM_AMAP_LAYER_ID = "amap_layer_id";
-	public static final String PARAM_AMAP_POINT_ID = "amap_point_id";
 
 	public static final String PARAM_PATH = "path";
 	public static final String PARAM_URI = "uri";
@@ -395,22 +388,7 @@ public class ExternalApiHelper {
 			} else if (API_CMD_SHOW_LOCATION.equals(cmd)) {
 				double lat = Double.parseDouble(uri.getQueryParameter(PARAM_LAT));
 				double lon = Double.parseDouble(uri.getQueryParameter(PARAM_LON));
-				String layerId = uri.getQueryParameter(PARAM_AMAP_LAYER_ID);
-				String pointId = uri.getQueryParameter(PARAM_AMAP_POINT_ID);
-				Object obj = null;
-				PointDescription desc = null;
-				if (!TextUtils.isEmpty(layerId) && !TextUtils.isEmpty(pointId)) {
-					OsmandMapLayer layer = mapActivity.getMyApplication().getAidlApi().getMapLayer(layerId);
-					if (layer != null && layer instanceof AidlMapLayer) {
-						AidlMapLayer aidlMapLayer = (AidlMapLayer) layer;
-						AMapPoint point = aidlMapLayer.getPoint(pointId);
-						if (point != null) {
-							obj = point;
-							desc = aidlMapLayer.getObjectName(point);
-						}
-					}
-				}
-				showOnMap(lat, lon, obj, desc);
+				showOnMap(lat, lon, null, null);
 				resultCode = Activity.RESULT_OK;
 			} else if (API_CMD_START_GPX_REC.equals(cmd)) {
 				OsmandMonitoringPlugin plugin = OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class);
@@ -551,7 +529,7 @@ public class ExternalApiHelper {
 
 			if (API_CMD_SHOW_LOCATION.equals(command)) {
 				// test location
-				uri = Uri.parse("osmand.api://show_location?lat=" + lat + "&lon=" + lon + "&amap_layer_id=layer_id&amap_point_id=point_id");
+				uri = Uri.parse("osmand.api://show_location?lat=" + lat + "&lon=" + lon);
 			}
 
 			if (API_CMD_ADD_FAVORITE.equals(command)) {
