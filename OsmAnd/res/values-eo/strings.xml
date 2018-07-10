@@ -1695,7 +1695,7 @@ Proporcia memoro %4$s MB (limito de Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="gps_status_app_not_found">Aplikaĵo por stato de GPS ne estas instalita. Ĉu serĉi ĝin en la vendejo?</string>
     <string name="unzipping_file">Elarĥivigado de dosiero…</string>
     <string name="voice_is_not_available_title">Gvidada voĉo ne elektita</string>
-    <string name="voice_is_not_available_msg">Neniu gvidada voĉo elektita, bonvolu iri al \'Agordoj\' → \'Ĝeneralaj\' → \'Gvidada voĉo\' kaj elektu kaj elŝutu pakaĵon de voĉaj sciigoj.</string>
+    <string name="voice_is_not_available_msg">Neniu gvidada voĉo elektita, iru al agordoj → navigadaj → gvidada voĉo kaj elektu kaj elŝutu pakaĵon de voĉaj sciigoj.</string>
     <string name="tiles_to_download_estimated_size">Elŝuti {1} kahelojn ĉe skal-nivelo {0} ({2} MB)</string>
     <string name="select_max_zoom_preload_area">Elekti maksimuman skal-nivelon por elŝuti</string>
     <string name="maps_could_not_be_downloaded">Tiu ĉi mapo ne povas esti elŝutita</string>
