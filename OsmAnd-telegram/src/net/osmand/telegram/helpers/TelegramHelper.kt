@@ -126,6 +126,10 @@ class TelegramHelper private constructor() {
 		return res
 	}
 
+	fun getBasicGroupFullInfo(id: Int) = basicGroupsFullInfo[id]
+
+	fun getSupergroupFullInfo(id: Int) = supergroupsFullInfo[id]
+
 	private fun updateChatTitles() {
 		chatTitles.clear()
 		for (chatEntry in chats.entries) {

@@ -45,15 +45,35 @@ object TelegramUiHelper {
 			photoPath = chat.photo?.small?.local?.path
 			placeholderId = R.drawable.ic_group
 		}
-		val chatType = chat.type
-		if (chatType is TdApi.ChatTypePrivate && !helper.isBot(chatType.userId)) {
-			res.userId = chatType.userId
-			val content = messages.firstOrNull()?.content
-			if (content is TdApi.MessageLocation) {
-				res.latLon = LatLon(content.location.latitude, content.location.longitude)
+		val type = chat.type
+		if (type is TdApi.ChatTypePrivate || type is TdApi.ChatTypeSecret) {
+			val userId = getUserIdFromChatType(type)
+			val chatWithBot = helper.isBot(userId)
+			res.privateChat = true
+			res.chatWithBot = chatWithBot
+			if (!chatWithBot) {
+				res.userId = userId
+				val content = messages.firstOrNull()?.content
+				if (content is TdApi.MessageLocation) {
+					res.latLon = LatLon(content.location.latitude, content.location.longitude)
+				}
 			}
+		} else if (type is TdApi.ChatTypeBasicGroup) {
+			res.membersCount = helper.getBasicGroupFullInfo(type.basicGroupId)?.members?.size ?: 0
+		} else if (type is TdApi.ChatTypeSupergroup) {
+			res.membersCount = helper.getSupergroupFullInfo(type.supergroupId)?.memberCount ?: 0
 		}
+		if (!res.privateChat) {
+			res.liveMembersCount = messages.size
+		}
+
 		return res
+	}
+
+	private fun getUserIdFromChatType(type: TdApi.ChatType) = when (type) {
+		is TdApi.ChatTypePrivate -> type.userId
+		is TdApi.ChatTypeSecret -> type.userId
+		else -> 0
 	}
 
 	fun messageToLocationItem(
@@ -128,7 +148,16 @@ object TelegramUiHelper {
 
 	class ChatItem : ListItem() {
 
-		override fun canBeOpenedOnMap() = latLon != null && userId != 0
+		var privateChat: Boolean = false
+			internal set
+		var chatWithBot: Boolean = false
+			internal set
+		var membersCount: Int = 0
+			internal set
+		var liveMembersCount: Int = 0
+			internal set
+
+		override fun canBeOpenedOnMap() = latLon != null && !chatWithBot
 
 		override fun getMapPointId() = "${chatTitle}_$userId"
 	}
