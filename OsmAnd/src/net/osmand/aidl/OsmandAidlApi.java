@@ -114,6 +114,8 @@ public class OsmandAidlApi {
 			ApplicationMode.PEDESTRIAN
 	};
 
+	private static final int DEFAULT_ZOOM = 15;
+
 	private OsmandApplication app;
 	private Map<String, AMapWidget> widgets = new ConcurrentHashMap<>();
 	private Map<String, TextInfoWidget> widgetControls = new ConcurrentHashMap<>();
@@ -840,7 +842,7 @@ public class OsmandAidlApi {
 					app.getSettings().setMapLocationToShow(
 							point.getLocation().getLatitude(),
 							point.getLocation().getLongitude(),
-							15,
+							DEFAULT_ZOOM,
 							new PointDescription(PointDescription.POINT_TYPE_MARKER, point.getFullName()),
 							false,
 							point
