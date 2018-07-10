@@ -4,6 +4,7 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
 import android.os.RemoteException;
+
 import net.osmand.PlatformUtil;
 import net.osmand.aidl.calculateroute.CalculateRouteParams;
 import net.osmand.aidl.favorite.AddFavoriteParams;
@@ -22,6 +23,7 @@ import net.osmand.aidl.gpx.StopGpxRecordingParams;
 import net.osmand.aidl.map.SetMapLocationParams;
 import net.osmand.aidl.maplayer.AddMapLayerParams;
 import net.osmand.aidl.maplayer.RemoveMapLayerParams;
+import net.osmand.aidl.maplayer.ShowLayerPointOnMapParams;
 import net.osmand.aidl.maplayer.UpdateMapLayerParams;
 import net.osmand.aidl.maplayer.point.AddMapPointParams;
 import net.osmand.aidl.maplayer.point.RemoveMapPointParams;
@@ -35,15 +37,15 @@ import net.osmand.aidl.mapwidget.UpdateMapWidgetParams;
 import net.osmand.aidl.navigation.NavigateGpxParams;
 import net.osmand.aidl.navigation.NavigateParams;
 import net.osmand.aidl.note.StartAudioRecordingParams;
+import net.osmand.aidl.note.StartVideoRecordingParams;
 import net.osmand.aidl.note.StopRecordingParams;
 import net.osmand.aidl.note.TakePhotoNoteParams;
-import net.osmand.aidl.note.StartVideoRecordingParams;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.util.Algorithms;
 
-import java.util.List;
-
 import org.apache.commons.logging.Log;
+
+import java.util.List;
 
 public class OsmandAidlService extends Service {
 	
@@ -194,6 +196,16 @@ public class OsmandAidlService extends Service {
 		public boolean updateMapWidget(UpdateMapWidgetParams params) throws RemoteException {
 			try {
 				return params != null && getApi("updateMapWidget").updateMapWidget(params.getWidget());
+			} catch (Exception e) {
+				handleException(e);
+				return false;
+			}
+		}
+
+		@Override
+		public boolean showLayerPointOnMap(ShowLayerPointOnMapParams params) throws RemoteException {
+			try {
+				return params != null && getApi("showLayerPointOnMap").showLayerPointOnMap(params.getLayerId(), params.getPointId());
 			} catch (Exception e) {
 				handleException(e);
 				return false;

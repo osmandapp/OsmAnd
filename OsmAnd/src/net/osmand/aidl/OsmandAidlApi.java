@@ -9,8 +9,8 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.ParcelFileDescriptor;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
+import android.text.TextUtils;
 import android.view.View;
 
 import net.osmand.IndexConstants;
@@ -153,10 +153,6 @@ public class OsmandAidlApi {
 			}
 		}
 		receivers = new TreeMap<String, BroadcastReceiver>();
-	}
-
-	public OsmandMapLayer getMapLayer(@NonNull String id) {
-		return mapLayers.get(id);
 	}
 
 	private void registerRefreshMapReceiver(final MapActivity mapActivity) {
@@ -833,6 +829,27 @@ public class OsmandAidlApi {
 		} else {
 			return false;
 		}
+	}
+
+	boolean showLayerPointOnMap(String layerId, String pointId) {
+		if (!TextUtils.isEmpty(layerId) && !TextUtils.isEmpty(pointId)) {
+			AMapLayer layer = layers.get(layerId);
+			if (layer != null) {
+				AMapPoint point = layer.getPoint(pointId);
+				if (point != null) {
+					app.getSettings().setMapLocationToShow(
+							point.getLocation().getLatitude(),
+							point.getLocation().getLongitude(),
+							15,
+							new PointDescription(PointDescription.POINT_TYPE_MARKER, point.getFullName()),
+							false,
+							point
+					);
+					MapActivity.launchMapActivityMoveToTop(app);
+				}
+			}
+		}
+		return false;
 	}
 
 	boolean putMapPoint(String layerId, AMapPoint point) {
