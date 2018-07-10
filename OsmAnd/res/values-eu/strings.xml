@@ -849,7 +849,7 @@ Biltegiratzean {1} MB erabiliko dira.
   <string name="loading_builds">Eraikitako OsmAndak kargatzen…</string>
   <string name="select_build_to_install">Instalatzeko eraikitako OsmAnd bat aukeratu</string>
   <string name="gps_status_app_not_found">GPS status aplikazioa ez dago instalatua. Bilatu?</string>
-  <string name="voice_is_not_available_msg">"Ahots bidezko gidaritza ez dago eskuragarri. Mesedez joan \'Ezarpenak\' → \'Orokorra\' → \'Ahots bidezko gidaritza\'  atalera eta deskargatu ahots pakete bat."</string>
+  <string name="voice_is_not_available_msg">"Ahots bidezko gidaritza ez dago eskuragarri. Mesedez joan \'Ezarpenak\' → \'Nabigazio ezarpenak\' → \'Ahots bidezko gidaritza\'  atalera eta deskargatu ahots pakete bat."</string>
   <string name="voice_is_not_available_title">Ez da ahots bidezko gidaritzarik aukeratu</string>
   <string name="daynight_mode_day">Eguna</string>
   <string name="daynight_mode_night">Gaua</string>
