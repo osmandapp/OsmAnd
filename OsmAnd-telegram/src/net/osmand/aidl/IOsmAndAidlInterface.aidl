@@ -51,6 +51,8 @@ import net.osmand.aidl.note.StopRecordingParams;
 
 import net.osmand.aidl.gpx.RemoveGpxParams;
 
+import net.osmand.aidl.maplayer.ShowLayerPointOnMapParams;
+
 // NOTE: Add new methods at the end of file!!!
 
 interface IOsmAndAidlInterface {
@@ -101,4 +103,6 @@ interface IOsmAndAidlInterface {
     boolean navigateGpx(in NavigateGpxParams params);
 
     boolean removeGpx(in RemoveGpxParams params);
+
+    boolean showLayerPointOnMap(in ShowLayerPointOnMapParams params);
 }

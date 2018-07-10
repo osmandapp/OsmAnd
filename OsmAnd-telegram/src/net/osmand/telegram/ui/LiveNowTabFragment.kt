@@ -18,7 +18,7 @@ import net.osmand.telegram.R
 import net.osmand.telegram.TelegramApplication
 import net.osmand.telegram.TelegramLocationProvider.TelegramCompassListener
 import net.osmand.telegram.TelegramLocationProvider.TelegramLocationListener
-import net.osmand.telegram.helpers.OsmandHelper
+import net.osmand.telegram.helpers.ShowLocationHelper
 import net.osmand.telegram.helpers.TelegramHelper.*
 import net.osmand.telegram.helpers.TelegramUiHelper
 import net.osmand.telegram.helpers.TelegramUiHelper.ChatItem
@@ -202,6 +202,12 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 		return res
 	}
 
+	private fun showOsmAndMissingDialog() {
+		activity?.let {
+			MainActivity.OsmandMissingDialogFragment().show(it.supportFragmentManager, null)
+		}
+	}
+
 	inner class LiveNowListAdapter : RecyclerView.Adapter<BaseViewHolder>() {
 
 		private val menuList =
@@ -242,7 +248,14 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 			openOnMapView?.isEnabled = canBeOpenedOnMap
 			if (canBeOpenedOnMap) {
 				openOnMapView?.setOnClickListener {
-					OsmandHelper.showUserOnMap(activity, item)
+					if (osmandAidlHelper.isOsmandNotInstalled()) {
+						showOsmAndMissingDialog()
+					} else {
+						osmandAidlHelper.showLayerPointOnMap(
+							ShowLocationHelper.MAP_LAYER_ID,
+							item.getMapPointId()
+						)
+					}
 				}
 			} else {
 				openOnMapView?.setOnClickListener(null)
@@ -303,10 +316,7 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 					if (settings.hasAnyChatToShowOnMap()) {
 						if (osmandAidlHelper.isOsmandNotInstalled()) {
 							if (allSelected) {
-								activity?.let {
-									MainActivity.OsmandMissingDialogFragment()
-										.show(it.supportFragmentManager, null)
-								}
+								showOsmAndMissingDialog()
 							}
 						} else {
 							if (allSelected) {

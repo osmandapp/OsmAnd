@@ -20,10 +20,7 @@ import net.osmand.aidl.favorite.group.UpdateFavoriteGroupParams
 import net.osmand.aidl.gpx.*
 import net.osmand.aidl.map.ALatLon
 import net.osmand.aidl.map.SetMapLocationParams
-import net.osmand.aidl.maplayer.AMapLayer
-import net.osmand.aidl.maplayer.AddMapLayerParams
-import net.osmand.aidl.maplayer.RemoveMapLayerParams
-import net.osmand.aidl.maplayer.UpdateMapLayerParams
+import net.osmand.aidl.maplayer.*
 import net.osmand.aidl.maplayer.point.AMapPoint
 import net.osmand.aidl.maplayer.point.AddMapPointParams
 import net.osmand.aidl.maplayer.point.RemoveMapPointParams
@@ -520,6 +517,17 @@ class OsmandAidlHelper(private val app: Application) {
 				e.printStackTrace()
 			}
 
+		}
+		return false
+	}
+
+	fun showLayerPointOnMap(layerId: String, pointId: String): Boolean {
+		if (mIOsmAndAidlInterface != null) {
+			try {
+				return mIOsmAndAidlInterface!!.showLayerPointOnMap(ShowLayerPointOnMapParams(layerId, pointId))
+			} catch (e: RemoteException) {
+				e.printStackTrace()
+			}
 		}
 		return false
 	}
