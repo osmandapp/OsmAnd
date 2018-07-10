@@ -392,7 +392,7 @@
     <string name="select_build_to_install">Vyberte zostavu OsmAndu na nainštalovanie</string>
     <string name="contribution_activity">Nainštalovať verziu</string>
     <string name="gps_status_app_not_found">Aplikácia pre stav GPS nie je nainštalovaná. Nájsť ju v obchode?</string>
-    <string name="voice_is_not_available_msg">"Hlasové navigovanie nie je dostupné, prosím choďte do Nastavenia → \'Všeobecné\' → \'Hlasové povely\'  a zvoľte alebo stiahnite balík hlasových povelov."</string>
+    <string name="voice_is_not_available_msg">"Hlasové navigovanie nie je dostupné, prosím choďte do \'Nastavenia\' → \'Navigačné nastavenia\' → \'Hlasové povely\'  a zvoľte alebo stiahnite balík hlasových povelov."</string>
     <string name="voice_is_not_available_title">Hlasové údaje nie sú určené</string>
     <string name="daynight_mode_day">Denný režim</string>
     <string name="daynight_mode_night">Nočný režim</string>
