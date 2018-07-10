@@ -3,8 +3,7 @@ package net.osmand.telegram.helpers
 import android.content.Intent
 import android.net.Uri
 import android.support.v4.app.FragmentActivity
-import net.osmand.telegram.helpers.TelegramUiHelper.ChatItem
-import net.osmand.telegram.helpers.TelegramUiHelper.LocationItem
+import net.osmand.telegram.helpers.TelegramUiHelper.ListItem
 import net.osmand.telegram.ui.MainActivity
 import net.osmand.telegram.utils.AndroidUtils
 
@@ -20,26 +19,13 @@ object OsmandHelper {
 	private const val PARAM_AMAP_LAYER_ID = "amap_layer_id"
 	private const val PARAM_AMAP_POINT_ID = "amap_point_id"
 
-	fun showUserOnMap(activity: FragmentActivity?, chatItem: ChatItem) {
-		if (chatItem.canBeOpenedOnMap()) {
+	fun showUserOnMap(activity: FragmentActivity?, listItem: ListItem) {
+		if (listItem.canBeOpenedOnMap()) {
 			showLocationPointOnMap(
 				activity,
-				chatItem.latLon?.latitude,
-				chatItem.latLon?.longitude,
-				"${chatItem.title}_${chatItem.userId}"
-			)
-		}
-	}
-
-	fun showUserOnMap(activity: FragmentActivity?, locationItem: LocationItem) {
-		if (locationItem.canBeOpenedOnMap()) {
-			val userId = locationItem.senderUserId
-			val id = if (userId != 0) userId.toString() else locationItem.name
-			showLocationPointOnMap(
-				activity,
-				locationItem.latLon?.latitude,
-				locationItem.latLon?.longitude,
-				"${locationItem.chatTitle}_$id"
+				listItem.latLon?.latitude,
+				listItem.latLon?.longitude,
+				listItem.getMapPointId()
 			)
 		}
 	}

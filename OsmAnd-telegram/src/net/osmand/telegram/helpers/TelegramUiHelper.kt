@@ -41,7 +41,7 @@ object TelegramUiHelper {
 		messages: List<TdApi.Message>
 	): ChatItem {
 		val res = ChatItem().apply {
-			title = chat.title
+			chatTitle = chat.title
 			photoPath = chat.photo?.small?.local?.path
 			placeholderId = R.drawable.ic_group
 		}
@@ -104,12 +104,13 @@ object TelegramUiHelper {
 			latLon = LatLon(content.location.latitude, content.location.longitude)
 			photoPath = helper.getUserPhotoPath(user)
 			placeholderId = R.drawable.ic_group
-			senderUserId = message.senderUserId
+			userId = message.senderUserId
 		}
 	}
 
-	class ChatItem {
-		var title: String = ""
+	abstract class ListItem {
+
+		var chatTitle: String = ""
 			internal set
 		var latLon: LatLon? = null
 			internal set
@@ -120,23 +121,28 @@ object TelegramUiHelper {
 		var userId: Int = 0
 			internal set
 
-		fun canBeOpenedOnMap() = latLon != null && userId != 0
+		abstract fun canBeOpenedOnMap(): Boolean
+
+		abstract fun getMapPointId(): String
 	}
 
-	class LocationItem {
-		var chatTitle: String = ""
-			internal set
+	class ChatItem : ListItem() {
+
+		override fun canBeOpenedOnMap() = latLon != null && userId != 0
+
+		override fun getMapPointId() = "${chatTitle}_$userId"
+	}
+
+	class LocationItem : ListItem() {
+
 		var name: String = ""
 			internal set
-		var latLon: LatLon? = null
-			internal set
-		var photoPath: String? = null
-			internal set
-		var placeholderId: Int = 0
-			internal set
-		var senderUserId: Int = 0
-			internal set
 
-		fun canBeOpenedOnMap() = latLon != null
+		override fun canBeOpenedOnMap() = latLon != null
+
+		override fun getMapPointId(): String {
+			val id = if (userId != 0) userId.toString() else name
+			return "${chatTitle}_$id"
+		}
 	}
 }
