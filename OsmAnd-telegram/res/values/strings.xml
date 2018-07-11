@@ -1,4 +1,6 @@
 <resources>
+	<string name="shared_string_live">Live</string>
+	<string name="shared_string_bot">Bot</string>
 	<string name="get_telegram_title">Registration in Telegram</string>
 	<string name="get_telegram_account_first">You need an account in Telegram to use the capabilities of OsmAnd Location Sharing.</string>
 	<string name="get_telegram_description_continue">If you want to continue, please install the Telegram from Google Play and register your account.</string>

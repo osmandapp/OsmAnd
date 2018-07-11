@@ -276,7 +276,7 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 				val chatTitle = item.chatTitle
 				val stateTextInd = if (settings.isShowingChatOnMap(chatTitle)) 1 else 0
 
-				holder.description?.text = "Chat description" // FIXME
+				holder.description?.text = getChatItemDescription(item)
 				holder.imageButton?.visibility = View.GONE
 				holder.showOnMapRow?.setOnClickListener { showPopupMenu(holder, chatTitle) }
 				holder.showOnMapState?.text = menuList[stateTextInd]
@@ -287,6 +287,16 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 		}
 
 		override fun getItemCount() = items.size
+
+		private fun getChatItemDescription(item: ChatItem): String {
+			return when {
+				item.chatWithBot -> getString(R.string.shared_string_bot)
+				item.privateChat -> "Chat description" // FIXME
+				else -> "${getString(R.string.shared_string_live)}: ${item.liveMembersCount} • ${getString(
+					R.string.shared_string_all
+				)}: ${item.membersCount}"
+			}
+		}
 
 		private fun showPopupMenu(holder: ChatViewHolder, chatTitle: String) {
 			val ctx = holder.itemView.context
