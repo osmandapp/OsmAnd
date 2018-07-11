@@ -2439,7 +2439,7 @@ Pôr do Sol: %2$s</string>
     <string name="upload_osm_note_description">Envie sua Nota OSM anonimamente ou através do seu perfil do OpenStreetMap.org.</string>
     <string name="trip_rec_notification_settings_desc">Exiba uma notificação de sistema que permite iniciar a gravação de viagem.</string>
     <string name="christmas_desc">Antecipando os feriados de Natal e ano novo, você pode optar por exibir o POI associado com o Natal: árvores de Natal, mercados, etc.</string>
-    <string name="osm_live_payment_desc">Assinatura cobrada mensalmente. Pode ser cancelado no Google Play a qualquer momento.</string>
+    <string name="osm_live_payment_desc">Assinatura cobrada mensalmente. Pode ser cancelada no Google Play a qualquer momento.</string>
     <string name="donation_to_osm_desc">Parte de sua doação será enviada aos usuários OSM que enviam alterações ao OpenStreetMap. O custo da assinatura permanece o mesmo.</string>
     <string name="osm_live_subscription_desc">A assinatura permite atualizações a cada hora, diariamente e semanais, e downloads ilimitados para todos os mapas globalmente.</string>
     <string name="get_it">Adquira já</string>
