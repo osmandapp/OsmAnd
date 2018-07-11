@@ -144,6 +144,8 @@ object TelegramUiHelper {
 		abstract fun canBeOpenedOnMap(): Boolean
 
 		abstract fun getMapPointId(): String
+
+		abstract fun getVisibleName(): String
 	}
 
 	class ChatItem : ListItem() {
@@ -160,6 +162,8 @@ object TelegramUiHelper {
 		override fun canBeOpenedOnMap() = latLon != null && !chatWithBot
 
 		override fun getMapPointId() = "${chatTitle}_$userId"
+
+		override fun getVisibleName() = chatTitle
 	}
 
 	class LocationItem : ListItem() {
@@ -173,5 +177,7 @@ object TelegramUiHelper {
 			val id = if (userId != 0) userId.toString() else name
 			return "${chatTitle}_$id"
 		}
+
+		override fun getVisibleName() = name
 	}
 }

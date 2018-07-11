@@ -244,16 +244,14 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 			val openOnMapView = holder.getOpenOnMapClickView()
 
 			TelegramUiHelper.setupPhoto(app, holder.icon, item.photoPath, item.placeholderId)
+			holder.title?.text = item.getVisibleName()
 			openOnMapView?.isEnabled = canBeOpenedOnMap
 			if (canBeOpenedOnMap) {
 				openOnMapView?.setOnClickListener {
 					if (osmandAidlHelper.isOsmandNotInstalled()) {
 						showOsmAndMissingDialog()
 					} else {
-//						osmandAidlHelper.showLayerPointOnMap(
-//							ShowLocationHelper.MAP_LAYER_ID,
-//							item.getMapPointId()
-//						)
+						app.showLocationHelper.showLocationOnMap(item)
 					}
 				}
 			} else {
@@ -278,14 +276,12 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 				val chatTitle = item.chatTitle
 				val stateTextInd = if (settings.isShowingChatOnMap(chatTitle)) 1 else 0
 
-				holder.title?.text = chatTitle
 				holder.description?.text = "Chat description" // FIXME
 				holder.imageButton?.visibility = View.GONE
 				holder.showOnMapRow?.setOnClickListener { showPopupMenu(holder, chatTitle) }
 				holder.showOnMapState?.text = menuList[stateTextInd]
 				holder.bottomDivider?.visibility = if (nextIsLocation) View.VISIBLE else View.GONE
 			} else if (item is LocationItem && holder is ContactViewHolder) {
-				holder.title?.text = item.name
 				holder.description?.text = "Some description"
 			}
 		}
