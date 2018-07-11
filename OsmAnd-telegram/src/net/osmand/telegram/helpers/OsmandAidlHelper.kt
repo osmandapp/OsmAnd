@@ -20,11 +20,11 @@ import net.osmand.aidl.favorite.group.UpdateFavoriteGroupParams
 import net.osmand.aidl.gpx.*
 import net.osmand.aidl.map.ALatLon
 import net.osmand.aidl.map.SetMapLocationParams
-import net.osmand.aidl.maplayer.*
-import net.osmand.aidl.maplayer.point.AMapPoint
-import net.osmand.aidl.maplayer.point.AddMapPointParams
-import net.osmand.aidl.maplayer.point.RemoveMapPointParams
-import net.osmand.aidl.maplayer.point.UpdateMapPointParams
+import net.osmand.aidl.maplayer.AMapLayer
+import net.osmand.aidl.maplayer.AddMapLayerParams
+import net.osmand.aidl.maplayer.RemoveMapLayerParams
+import net.osmand.aidl.maplayer.UpdateMapLayerParams
+import net.osmand.aidl.maplayer.point.*
 import net.osmand.aidl.mapmarker.AMapMarker
 import net.osmand.aidl.mapmarker.AddMapMarkerParams
 import net.osmand.aidl.mapmarker.RemoveMapMarkerParams
@@ -521,10 +521,24 @@ class OsmandAidlHelper(private val app: Application) {
 		return false
 	}
 
-	fun showLayerPointOnMap(layerId: String, pointId: String): Boolean {
+	/**
+	 * Show AMapPoint on map in OsmAnd.
+	 *
+	 * @param layerId - layer id. Note: layer should be added first.
+	 * @param pointId - point id.
+	 * @param shortName - short name (single char). Displayed on the map.
+	 * @param fullName - full name. Displayed in the context menu on first row.
+	 * @param typeName - type name. Displayed in context menu on second row.
+	 * @param color - color of circle's background.
+	 * @param location - location of the point.
+	 * @param details - list of details. Displayed under context menu.
+	 */
+	fun showMapPoint(layerId: String, pointId: String, shortName: String, fullName: String,
+							typeName: String, color: Int, location: ALatLon, details: List<String>?, params: Map<String, String>?): Boolean {
 		if (mIOsmAndAidlInterface != null) {
 			try {
-				return mIOsmAndAidlInterface!!.showLayerPointOnMap(ShowLayerPointOnMapParams(layerId, pointId))
+				val point = AMapPoint(pointId, shortName, fullName, typeName, color, location, details, params)
+				return mIOsmAndAidlInterface!!.showMapPoint(ShowMapPointParams(layerId, point))
 			} catch (e: RemoteException) {
 				e.printStackTrace()
 			}
