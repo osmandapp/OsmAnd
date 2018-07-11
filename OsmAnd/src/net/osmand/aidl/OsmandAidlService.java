@@ -23,10 +23,10 @@ import net.osmand.aidl.gpx.StopGpxRecordingParams;
 import net.osmand.aidl.map.SetMapLocationParams;
 import net.osmand.aidl.maplayer.AddMapLayerParams;
 import net.osmand.aidl.maplayer.RemoveMapLayerParams;
-import net.osmand.aidl.maplayer.ShowLayerPointOnMapParams;
 import net.osmand.aidl.maplayer.UpdateMapLayerParams;
 import net.osmand.aidl.maplayer.point.AddMapPointParams;
 import net.osmand.aidl.maplayer.point.RemoveMapPointParams;
+import net.osmand.aidl.maplayer.point.ShowMapPointParams;
 import net.osmand.aidl.maplayer.point.UpdateMapPointParams;
 import net.osmand.aidl.mapmarker.AddMapMarkerParams;
 import net.osmand.aidl.mapmarker.RemoveMapMarkerParams;
@@ -203,9 +203,9 @@ public class OsmandAidlService extends Service {
 		}
 
 		@Override
-		public boolean showLayerPointOnMap(ShowLayerPointOnMapParams params) throws RemoteException {
+		public boolean showMapPoint(ShowMapPointParams params) throws RemoteException {
 			try {
-				return params != null && getApi("showLayerPointOnMap").showLayerPointOnMap(params.getLayerId(), params.getPointId());
+				return params != null && getApi("showMapPoint").showMapPoint(params.getLayerId(), params.getPoint());
 			} catch (Exception e) {
 				handleException(e);
 				return false;

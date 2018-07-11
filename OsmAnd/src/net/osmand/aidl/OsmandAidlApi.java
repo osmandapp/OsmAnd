@@ -833,23 +833,28 @@ public class OsmandAidlApi {
 		}
 	}
 
-	boolean showLayerPointOnMap(String layerId, String pointId) {
-		if (!TextUtils.isEmpty(layerId) && !TextUtils.isEmpty(pointId)) {
-			AMapLayer layer = layers.get(layerId);
-			if (layer != null) {
-				AMapPoint point = layer.getPoint(pointId);
-				if (point != null) {
-					app.getSettings().setMapLocationToShow(
-							point.getLocation().getLatitude(),
-							point.getLocation().getLongitude(),
-							DEFAULT_ZOOM,
-							new PointDescription(PointDescription.POINT_TYPE_MARKER, point.getFullName()),
-							false,
-							point
-					);
-					MapActivity.launchMapActivityMoveToTop(app);
+	boolean showMapPoint(String layerId, AMapPoint point) {
+		if (point != null) {
+			if (!TextUtils.isEmpty(layerId)) {
+				AMapLayer layer = layers.get(layerId);
+				if (layer != null) {
+					AMapPoint p = layer.getPoint(point.getId());
+					if (p != null) {
+						point = p;
+					}
 				}
 			}
+			app.getSettings().setMapLocationToShow(
+					point.getLocation().getLatitude(),
+					point.getLocation().getLongitude(),
+					DEFAULT_ZOOM,
+					new PointDescription(PointDescription.POINT_TYPE_MARKER, point.getFullName()),
+					false,
+					point
+			);
+			MapActivity.launchMapActivityMoveToTop(app);
+
+			return true;
 		}
 		return false;
 	}
