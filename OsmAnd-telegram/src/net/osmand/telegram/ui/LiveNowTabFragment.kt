@@ -292,9 +292,11 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 			return when {
 				item.chatWithBot -> getString(R.string.shared_string_bot)
 				item.privateChat -> "Chat description" // FIXME
-				else -> "${getString(R.string.shared_string_live)}: ${item.liveMembersCount} • ${getString(
-					R.string.shared_string_all
-				)}: ${item.membersCount}"
+				else -> {
+					val live = getString(R.string.shared_string_live)
+					val all = getString(R.string.shared_string_all)
+					"$live ${item.liveMembersCount} • $all ${item.membersCount}"
+				}
 			}
 		}
 
