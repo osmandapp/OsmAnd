@@ -261,7 +261,7 @@ class TelegramService : Service(), LocationListener, TelegramIncomingMessagesLis
 
 		override fun doInBackground(vararg messages: TdApi.Message): Void? {
 			for (message in messages) {
-				app.showLocationHelper.showLocationOnMap(message)
+				app.showLocationHelper.addLocationToMap(message)
 			}
 			return null
 		}

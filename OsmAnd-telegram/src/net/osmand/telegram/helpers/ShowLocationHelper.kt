@@ -44,7 +44,7 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 		}
 	}
 
-	fun showLocationOnMap(message: TdApi.Message) {
+	fun addLocationToMap(message: TdApi.Message) {
 		execOsmandApi {
 			val chatTitle = telegramHelper.getChat(message.chatId)?.title
 			val content = message.content
@@ -89,7 +89,7 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 		execOsmandApi {
 			val messages = telegramHelper.getChatMessages(chatTitle)
 			for (message in messages) {
-				showLocationOnMap(message)
+				addLocationToMap(message)
 			}
 		}
 	}

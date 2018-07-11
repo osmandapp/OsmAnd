@@ -227,7 +227,7 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 	override fun onTelegramUserChanged(user: TdApi.User) {
 		val message = telegramHelper.getUserMessage(user)
 		if (message != null) {
-			app.showLocationHelper.showLocationOnMap(message)
+			app.showLocationHelper.addLocationToMap(message)
 		}
 		runOnUi {
 			listeners.forEach { it.get()?.onTelegramUserChanged(user) }
