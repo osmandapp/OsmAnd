@@ -3063,4 +3063,9 @@ voor Gebied: %1$s x %2$s</string>
     <string name="how_to_open_wiki_title">Hoe Wikipedia-artikelen te openen?</string>
 <string name="quick_action_edit_actions">Wijzig acties</string>
     <string name="shared_string_bookmark">Bladwijzer</string>
+    <string name="point_deleted">"Punt %1$s  verwijderd"</string>
+    <string name="coord_input_edit_point">Punt bewerken</string>
+    <string name="coord_input_add_point">Punt toevoegen</string>
+    <string name="coord_input_save_as_track_descr">Je hebt %1$s punten toegevoegd. Geef een bestandsnaam en tik op \"Opslaan\".</string>
+    <string name="error_notification_desc">Stuur alsjeblieft een screenshot van deze melding naar support@osmand.net</string>
     </resources>
