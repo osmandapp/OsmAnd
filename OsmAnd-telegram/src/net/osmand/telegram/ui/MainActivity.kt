@@ -452,6 +452,7 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 		override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 			val chat = chats[position]
 			val chatTitle = chat.title
+			val chatId = chat.id
 			holder.groupName?.text = chatTitle
 
 			var drawable: Drawable? = null
@@ -469,9 +470,9 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 				holder.icon?.setImageDrawable(drawable)
 			}
 			holder.shareLocationSwitch?.setOnCheckedChangeListener(null)
-			holder.shareLocationSwitch?.isChecked = settings.isSharingLocationToChat(chatTitle)
+			holder.shareLocationSwitch?.isChecked = settings.isSharingLocationToChat(chatId)
 			holder.shareLocationSwitch?.setOnCheckedChangeListener { view, isChecked ->
-				settings.shareLocationToChat(chatTitle, isChecked)
+				settings.shareLocationToChat(chatId, isChecked)
 				if (settings.hasAnyChatToShareLocation()) {
 					if (!AndroidUtils.isLocationPermissionAvailable(view.context)) {
 						if (isChecked) {
@@ -486,9 +487,9 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 			}
 
 			holder.showOnMapSwitch?.setOnCheckedChangeListener(null)
-			holder.showOnMapSwitch?.isChecked = settings.isShowingChatOnMap(chatTitle)
+			holder.showOnMapSwitch?.isChecked = settings.isShowingChatOnMap(chatId)
 			holder.showOnMapSwitch?.setOnCheckedChangeListener { _, isChecked ->
-				settings.showChatOnMap(chatTitle, isChecked)
+				settings.showChatOnMap(chatId, isChecked)
 				if (settings.hasAnyChatToShowOnMap()) {
 					if (osmandAidlHelper.isOsmandNotInstalled()) {
 						if (isChecked) {
@@ -496,16 +497,16 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 						}
 					} else {
 						if (isChecked) {
-							app.showLocationHelper.showChatMessages(chatTitle)
+							app.showLocationHelper.showChatMessages(chatId)
 						} else {
-							app.showLocationHelper.hideChatMessages(chatTitle)
+							app.showLocationHelper.hideChatMessages(chatId)
 						}
 						app.showLocationHelper.startShowingLocation()
 					}
 				} else {
 					app.showLocationHelper.stopShowingLocation()
 					if (!isChecked) {
-						app.showLocationHelper.hideChatMessages(chatTitle)
+						app.showLocationHelper.hideChatMessages(chatId)
 					}
 				}
 			}

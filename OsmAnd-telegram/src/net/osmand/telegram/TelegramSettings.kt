@@ -20,8 +20,8 @@ private const val USER_LOCATION_EXPIRE_TIME_DEFAULT = 15L * 60 * 1000 // 15 minu
 
 class TelegramSettings(private val app: TelegramApplication) {
 
-	private var shareLocationChats: Set<String> = emptySet()
-	private var showOnMapChats: Set<String> = emptySet()
+	private var shareLocationChats: Set<Long> = emptySet()
+	private var showOnMapChats: Set<Long> = emptySet()
 
 	var metricsConstants = MetricsConstants.KILOMETERS_AND_METERS
 	var speedConstants = SpeedConstants.KILOMETERS_PER_HOUR
@@ -35,28 +35,28 @@ class TelegramSettings(private val app: TelegramApplication) {
 
 	fun hasAnyChatToShareLocation() = shareLocationChats.isNotEmpty()
 
-	fun isSharingLocationToChat(chatTitle: String) = shareLocationChats.contains(chatTitle)
+	fun isSharingLocationToChat(id: Long) = shareLocationChats.contains(id)
 
 	fun hasAnyChatToShowOnMap() = showOnMapChats.isNotEmpty()
 
-	fun isShowingChatOnMap(chatTitle: String) = showOnMapChats.contains(chatTitle)
+	fun isShowingChatOnMap(id: Long) = showOnMapChats.contains(id)
 
-	fun removeNonexistingChats(presentChatTitles: List<String>) {
+	fun removeNonexistingChats(presentChatIds: List<Long>) {
 		val shareLocationChats = shareLocationChats.toMutableList()
-		shareLocationChats.intersect(presentChatTitles)
+		shareLocationChats.intersect(presentChatIds)
 		this.shareLocationChats = shareLocationChats.toHashSet()
 
 		val showOnMapChats = showOnMapChats.toMutableList()
-		showOnMapChats.intersect(presentChatTitles)
+		showOnMapChats.intersect(presentChatIds)
 		this.showOnMapChats = showOnMapChats.toHashSet()
 	}
 
-	fun shareLocationToChat(chatTitle: String, share: Boolean) {
+	fun shareLocationToChat(id: Long, share: Boolean) {
 		val shareLocationChats = shareLocationChats.toMutableList()
 		if (share) {
-			shareLocationChats.add(chatTitle)
+			shareLocationChats.add(id)
 		} else {
-			shareLocationChats.remove(chatTitle)
+			shareLocationChats.remove(id)
 		}
 		this.shareLocationChats = shareLocationChats.toHashSet()
 	}
@@ -65,12 +65,12 @@ class TelegramSettings(private val app: TelegramApplication) {
 		this.shareLocationChats = emptySet()
 	}
 
-	fun showChatOnMap(chatTitle: String, show: Boolean) {
+	fun showChatOnMap(id: Long, show: Boolean) {
 		val showOnMapChats = showOnMapChats.toMutableList()
 		if (show) {
-			showOnMapChats.add(chatTitle)
+			showOnMapChats.add(id)
 		} else {
-			showOnMapChats.remove(chatTitle)
+			showOnMapChats.remove(id)
 		}
 		this.showOnMapChats = showOnMapChats.toHashSet()
 	}
@@ -85,20 +85,6 @@ class TelegramSettings(private val app: TelegramApplication) {
 		val prefs = app.getSharedPreferences(SETTINGS_NAME, Context.MODE_PRIVATE)
 		val edit = prefs.edit()
 
-		val shareLocationChatsSet = mutableSetOf<String>()
-		val shareLocationChats = ArrayList(shareLocationChats)
-		for (chatTitle in shareLocationChats) {
-			shareLocationChatsSet.add(chatTitle)
-		}
-		edit.putStringSet(SHARE_LOCATION_CHATS_KEY, shareLocationChatsSet)
-
-		val showOnMapChatsSet = mutableSetOf<String>()
-		val showOnMapChats = ArrayList(showOnMapChats)
-		for (chatTitle in showOnMapChats) {
-			showOnMapChatsSet.add(chatTitle)
-		}
-		edit.putStringSet(SHOW_ON_MAP_CHATS_KEY, showOnMapChatsSet)
-
 		edit.putString(METRICS_CONSTANTS_KEY, metricsConstants.name)
 		edit.putString(SPEED_CONSTANTS_KEY, speedConstants.name)
 
@@ -109,20 +95,6 @@ class TelegramSettings(private val app: TelegramApplication) {
 
 	fun read() {
 		val prefs = app.getSharedPreferences(SETTINGS_NAME, Context.MODE_PRIVATE)
-
-		val shareLocationChats = mutableSetOf<String>()
-		val shareLocationChatsSet = prefs.getStringSet(SHARE_LOCATION_CHATS_KEY, mutableSetOf())
-		for (chatTitle in shareLocationChatsSet) {
-			shareLocationChats.add(chatTitle)
-		}
-		this.shareLocationChats = shareLocationChats
-
-		val showOnMapChats = mutableSetOf<String>()
-		val showOnMapChatsSet = prefs.getStringSet(SHOW_ON_MAP_CHATS_KEY, mutableSetOf())
-		for (chatTitle in showOnMapChatsSet) {
-			showOnMapChats.add(chatTitle)
-		}
-		this.showOnMapChats = showOnMapChats
 
 		metricsConstants = MetricsConstants.valueOf(
 			prefs.getString(METRICS_CONSTANTS_KEY, MetricsConstants.KILOMETERS_AND_METERS.name)
