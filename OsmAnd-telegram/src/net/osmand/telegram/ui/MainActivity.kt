@@ -52,6 +52,7 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 		get() = application as TelegramApplication
 
 	private val telegramHelper get() = app.telegramHelper
+	private val telegramLocalDataHelper get() = app.telegramDbHelper
 	private val osmandAidlHelper get() = app.osmandAidlHelper
 	private val settings get() = app.settings
 
@@ -159,7 +160,7 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 		if (AndroidUtils.isLocationPermissionAvailable(this)) {
 			app.locationProvider.resumeAllUpdates()
 		} else {
-			requestLocationPermission()
+			AndroidUtils.requestLocationPermission(this)
 		}
 		if (settings.hasAnyChatToShowOnMap() && osmandAidlHelper.isOsmandNotInstalled()) {
 			showOsmandMissingDialog()
@@ -265,6 +266,7 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 	fun loginTelegram() {
 		if (telegramHelper.getTelegramAuthorizationState() != TelegramAuthorizationState.CLOSED) {
 			telegramHelper.logout()
+			telegramLocalDataHelper.clearAll()
 		}
 		telegramHelper.init()
 	}
@@ -272,6 +274,7 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 	fun logoutTelegram(silent: Boolean = false) {
 		if (telegramHelper.getTelegramAuthorizationState() == TelegramAuthorizationState.READY) {
 			telegramHelper.logout()
+			telegramLocalDataHelper.clearAll()
 		} else {
 			invalidateOptionsMenu()
 			updateTitle()
@@ -373,10 +376,6 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 		}
 	}
 
-	private fun requestLocationPermission() {
-		ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), PERMISSION_REQUEST_LOCATION)
-	}
-
 	override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
 		super.onRequestPermissionsResult(requestCode, permissions, grantResults)
 		if (grantResults.isEmpty()) {
@@ -475,7 +474,7 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 				if (settings.hasAnyChatToShareLocation()) {
 					if (!AndroidUtils.isLocationPermissionAvailable(view.context)) {
 						if (isChecked) {
-							requestLocationPermission()
+							AndroidUtils.requestLocationPermission(this@MainActivity)
 						}
 					} else {
 						app.shareLocationHelper.startSharingLocation()

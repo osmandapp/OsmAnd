@@ -17,6 +17,7 @@ import net.osmand.telegram.TelegramApplication
 import net.osmand.telegram.helpers.ShareLocationHelper
 import net.osmand.telegram.helpers.TelegramUiHelper
 import net.osmand.telegram.ui.SetTimeDialogFragment.SetTimeListAdapter.ChatViewHolder
+import net.osmand.telegram.utils.AndroidUtils
 import org.drinkless.td.libcore.telegram.TdApi
 import java.util.concurrent.TimeUnit
 
@@ -25,7 +26,9 @@ class SetTimeDialogFragment : DialogFragment() {
 	private val app: TelegramApplication
 		get() = activity?.application as TelegramApplication
 
+	private val settings get() = app.settings
 	private val telegramHelper get() = app.telegramHelper
+	private val telegramDbHelper get() = app.telegramDbHelper
 
 	private val adapter = SetTimeListAdapter()
 
@@ -33,7 +36,7 @@ class SetTimeDialogFragment : DialogFragment() {
 	private lateinit var timeForAllValue: TextView
 
 	private val chatIdsToDuration = HashMap<Long, Long>()
-
+	private val chatsTitles = ArrayList<String>()
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 		setStyle(DialogFragment.STYLE_NO_FRAME, R.style.AppTheme_NoActionbar)
@@ -77,6 +80,16 @@ class SetTimeDialogFragment : DialogFragment() {
 			text = getString(R.string.shared_string_share)
 			setOnClickListener {
 				Toast.makeText(context, "Share", Toast.LENGTH_SHORT).show()
+				settings.shareLocationToChats(chatsTitles, true)
+				if (settings.hasAnyChatToShareLocation()) {
+					if (!AndroidUtils.isLocationPermissionAvailable(view.context)) {
+						AndroidUtils.requestLocationPermission(activity!!)
+					} else {
+						app.shareLocationHelper.startSharingLocation()
+					}
+				} else {
+					app.shareLocationHelper.stopSharingLocation()
+				}
 			}
 		}
 
@@ -102,7 +115,8 @@ class SetTimeDialogFragment : DialogFragment() {
 		chatIdsToDuration.clear()
 		bundle?.getLongArray(CHATS_KEY)?.also {
 			for (i in 0 until it.size step 2) {
-				chatIdsToDuration[it[i]] = it[i + 1]
+				val expireTime = telegramDbHelper.getChatExpireTime(it[i])
+				chatIdsToDuration[it[i]] = expireTime ?: it[i + 1]
 			}
 		}
 	}
@@ -139,22 +153,24 @@ class SetTimeDialogFragment : DialogFragment() {
 		val defSeconds = if (id == null) timeForAll else chatIdsToDuration[id] ?: timeForAll
 		val (defHours, defMinutes) = secondsToHoursAndMinutes(defSeconds)
 		TimePickerDialog(
-			context,
-			TimePickerDialog.OnTimeSetListener { _, hours, minutes ->
-				val seconds = TimeUnit.HOURS.toSeconds(hours.toLong()) +
-						TimeUnit.MINUTES.toSeconds(minutes.toLong())
-				if (seconds >= ShareLocationHelper.MIN_LOCATION_MESSAGE_LIVE_PERIOD_SEC) {
-					if (id != null) {
-						chatIdsToDuration[id] = seconds
-					} else {
-						chatIdsToDuration.keys.forEach {
-							chatIdsToDuration[it] = seconds
+				context,
+				TimePickerDialog.OnTimeSetListener { _, hours, minutes ->
+					val seconds = TimeUnit.HOURS.toSeconds(hours.toLong()) +
+							TimeUnit.MINUTES.toSeconds(minutes.toLong())
+					if (seconds >= ShareLocationHelper.MIN_LOCATION_MESSAGE_LIVE_PERIOD_SEC) {
+						if (id != null) {
+							chatIdsToDuration[id] = seconds
+							telegramDbHelper.addOrUpdateChatProps(id, seconds)
+						} else {
+							chatIdsToDuration.keys.forEach {
+								chatIdsToDuration[it] = seconds
+								telegramDbHelper.addOrUpdateChatProps(it, seconds)
+							}
 						}
+						updateTimeForAllRow()
+						adapter.notifyDataSetChanged()
 					}
-					updateTimeForAllRow()
-					adapter.notifyDataSetChanged()
-				}
-			}, defHours, defMinutes, true
+				}, defHours, defMinutes, true
 		).show()
 	}
 
@@ -176,9 +192,12 @@ class SetTimeDialogFragment : DialogFragment() {
 	private fun updateList() {
 		val chats: MutableList<TdApi.Chat> = mutableListOf()
 		telegramHelper.getChatList().filter { chatIdsToDuration.keys.contains(it.chatId) }
-			.forEach { orderedChat ->
-				telegramHelper.getChat(orderedChat.chatId)?.also { chats.add(it) }
-			}
+				.forEach { orderedChat ->
+					telegramHelper.getChat(orderedChat.chatId)?.also {
+						chats.add(it)
+						chatsTitles.add(it.title)
+					}
+				}
 		adapter.chats = chats
 	}
 
