@@ -1,5 +1,4 @@
 apply plugin: 'com.android.application'
-apply plugin: 'com.github.ksoichiro.eclipse.aar'
 
 // Global Parameters accepted
 // TARGET_APP_NAME    - app name
@@ -23,14 +22,7 @@ def analytics = (!System.getenv("APP_FEATURES") || System.getenv("APP_FEATURES")
 		getGradle().getStartParameter().getTaskRequests().toString().contains("Free")
 
 
-eclipseAar {
-    // See "Configurations" for details
-    androidTarget = 'android-27'
-    aarDependenciesDir = 'aarDependencies'
-    targetConfigurations = ['compile']
 
-//    cleanLibsDirectoryEnabled = true
-}
 
 task printc {
 	configurations.each { if(it.isCanBeResolved())  println it.name }
