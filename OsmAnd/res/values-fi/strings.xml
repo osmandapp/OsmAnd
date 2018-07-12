@@ -2434,4 +2434,14 @@ Jos pidät OsmAndista ja OSMsta ja haluat tukea niitä, on tämä täydellinen t
     <string name="quick_action_add_destination">Lisää määränpää</string>
     <string name="quick_action_replace_destination">Korvaa määränpää</string>
     <string name="quick_action_add_first_intermediate">Lisää ensimmäinen välietappi</string>
-    </resources>
+    <string name="quick_action_add_marker_descr">Näpäyttämällä tätä toimintonäppäintä lisäät karttamarkerin sijaintiin ruudun keskellä.</string>
+    <string name="quick_action_add_gpx_descr">Näpäyttämällä tätä toimintonäppäintä lisäät GPX väyläpisteen ruudun keskelle.</string>
+    <string name="quick_action_take_audio_note_descr">Näpäyttämällä tätä toimintonäppäintä lisää äänimerkinnän ruudun keskelle.</string>
+    <string name="quick_action_take_video_note_descr">Näpäyttämällä tätä toimintonäppäintä lisäät videomerkinnän ruudun keskelle.</string>
+    <string name="quick_action_take_photo_note_descr">Näpäyttämällä tätä toimintonäppäintä lisäät kuvamerkinnän ruudun keskelle.</string>
+    <string name="quick_action_add_osm_bug_descr">Näpäyttämällä tätä toimintonäppäintä lisää OSM merkinnän ruudun keskelle.</string>
+    <string name="quick_action_add_poi_descr">Näpäyttämällä tätä toimintonäppäintä lisää POIn ruudtun keskelle.</string>
+    <string name="quick_action_navigation_voice_descr">Näpäyttämällä tätä toimintonäppäintä otat tai poistat ääniohjauksen käytöstä navigoinnin aikana.</string>
+    <string name="open_in_browser_wiki_description">Näytä artikkeli selaimessa.</string>
+    <string name="how_to_open_wiki_title">Kuinka avata Wikipedia artikkelit?</string>
+</resources>
