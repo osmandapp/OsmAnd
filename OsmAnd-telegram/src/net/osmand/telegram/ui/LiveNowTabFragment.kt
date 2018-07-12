@@ -55,6 +55,7 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 		savedInstanceState: Bundle?
 	): View? {
 		val mainView = inflater.inflate(R.layout.fragment_live_now_tab, container, false)
+		AndroidUtils.addStatusBarPadding19v(context!!, mainView)
 		adapter = LiveNowListAdapter()
 		mainView.findViewById<RecyclerView>(R.id.recycler_view).apply {
 			layoutManager = LinearLayoutManager(context)

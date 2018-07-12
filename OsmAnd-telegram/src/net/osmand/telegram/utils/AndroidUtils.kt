@@ -68,6 +68,14 @@ object AndroidUtils {
 		return result
 	}
 
+	fun addStatusBarPadding19v(ctx: Context, view: View) {
+		if (Build.VERSION.SDK_INT >= 19) {
+			view.apply {
+				setPadding(paddingLeft, paddingTop + getStatusBarHeight(ctx), paddingRight, paddingBottom)
+			}
+		}
+	}
+
 	@ColorInt
 	fun getAttrColor(ctx: Context, @AttrRes attrId: Int, @ColorInt defaultColor: Int = 0): Int {
 		val ta = ctx.theme.obtainStyledAttributes(intArrayOf(attrId))
