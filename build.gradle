@@ -13,7 +13,6 @@ buildscript {
     }
 }
 
-apply plugin: 'com.github.ksoichiro.eclipse.aar'
 allprojects {
 
     repositories {
