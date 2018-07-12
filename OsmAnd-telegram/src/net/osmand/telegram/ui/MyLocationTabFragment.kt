@@ -101,9 +101,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 
 		optionsBtn = mainView.findViewById<ImageView>(R.id.options).apply {
 			setImageDrawable(app.uiUtils.getThemedIcon(R.drawable.ic_action_other_menu))
-			setOnClickListener {
-				showPopupMenu()
-			}
+			setOnClickListener { showPopupMenu() }
 		}
 
 		textContainer = mainView.findViewById<LinearLayout>(R.id.text_container).apply {
@@ -140,60 +138,6 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 		}
 
 		return mainView
-	}
-
-
-	private fun showPopupMenu() {
-		val menuList = ArrayList<String>()
-		val logout = getString(R.string.shared_string_logout)
-		val login = getString(R.string.shared_string_login)
-		if (telegramHelper.getTelegramAuthorizationState() == TelegramHelper.TelegramAuthorizationState.READY) {
-			menuList.add(0, logout)
-		} else if (telegramHelper.getTelegramAuthorizationState() == TelegramHelper.TelegramAuthorizationState.CLOSED) {
-			menuList.add(0, login)
-		}
-		val paint = Paint()
-		paint.textSize = resources.getDimensionPixelSize(R.dimen.list_item_title_text_size).toFloat()
-		val textWidth = paint.measureText(menuList[0])
-		val itemWidth = textWidth.toInt() + AndroidUtils.dpToPx(context!!, 32F)
-		val minWidth = AndroidUtils.dpToPx(context!!, 100F)
-
-		ListPopupWindow(context!!).apply {
-			isModal = true
-			anchorView = optionsBtn
-			setContentWidth(Math.max(minWidth, itemWidth))
-			setDropDownGravity(Gravity.END or Gravity.TOP)
-			setAdapter(ArrayAdapter(context, R.layout.popup_list_text_item, menuList))
-			setOnItemClickListener { _, _, position, _ ->
-				when (position) {
-					menuList.indexOf(logout) -> {
-						logoutTelegram()
-					}
-					menuList.indexOf(login) -> {
-						loginTelegram()
-					}
-				}
-				dismiss()
-			}
-			show()
-		}
-	}
-
-	fun logoutTelegram(silent: Boolean = false) {
-		if (telegramHelper.getTelegramAuthorizationState() == TelegramHelper.TelegramAuthorizationState.READY) {
-			telegramHelper.logout()
-		} else {
-			if (!silent) {
-				Toast.makeText(context, R.string.not_logged_in, Toast.LENGTH_SHORT).show()
-			}
-		}
-	}
-
-	fun loginTelegram() {
-		if (telegramHelper.getTelegramAuthorizationState() != TelegramHelper.TelegramAuthorizationState.CLOSED) {
-			telegramHelper.logout()
-		}
-		telegramHelper.init()
 	}
 
 	override fun onResume() {
@@ -254,6 +198,58 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 		selectedChats.clear()
 		adapter.notifyDataSetChanged()
 		actionButtonsListener?.switchButtonsVisibility(false)
+	}
+
+	private fun showPopupMenu() {
+		val ctx = context ?: return
+
+		val menuList = ArrayList<String>()
+		val logout = getString(R.string.shared_string_logout)
+		val login = getString(R.string.shared_string_login)
+
+		when (telegramHelper.getTelegramAuthorizationState()) {
+			TelegramHelper.TelegramAuthorizationState.READY -> menuList.add(logout)
+			TelegramHelper.TelegramAuthorizationState.CLOSED -> menuList.add(login)
+			else -> return
+		}
+
+		val paint = Paint()
+		paint.textSize =
+				resources.getDimensionPixelSize(R.dimen.list_item_title_text_size).toFloat()
+		val textWidth = paint.measureText(menuList[0])
+		val itemWidth = textWidth.toInt() + AndroidUtils.dpToPx(ctx, 32F)
+		val minWidth = AndroidUtils.dpToPx(ctx, 100F)
+
+		ListPopupWindow(ctx).apply {
+			isModal = true
+			anchorView = optionsBtn
+			setContentWidth(Math.max(minWidth, itemWidth))
+			setDropDownGravity(Gravity.END or Gravity.TOP)
+			setAdapter(ArrayAdapter(ctx, R.layout.popup_list_text_item, menuList))
+			setOnItemClickListener { _, _, position, _ ->
+				when (position) {
+					menuList.indexOf(logout) -> logoutTelegram()
+					menuList.indexOf(login) -> loginTelegram()
+				}
+				dismiss()
+			}
+			show()
+		}
+	}
+
+	private fun logoutTelegram(silent: Boolean = false) {
+		if (telegramHelper.getTelegramAuthorizationState() == TelegramHelper.TelegramAuthorizationState.READY) {
+			telegramHelper.logout()
+		} else if (!silent) {
+			Toast.makeText(context, R.string.not_logged_in, Toast.LENGTH_SHORT).show()
+		}
+	}
+
+	private fun loginTelegram() {
+		if (telegramHelper.getTelegramAuthorizationState() != TelegramHelper.TelegramAuthorizationState.CLOSED) {
+			telegramHelper.logout()
+		}
+		telegramHelper.init()
 	}
 
 	private fun adjustText() {
