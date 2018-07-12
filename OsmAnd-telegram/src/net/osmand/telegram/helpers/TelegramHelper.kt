@@ -27,6 +27,7 @@ class TelegramHelper private constructor() {
 		private const val IGNORED_ERROR_CODE = 406
 		private const val UPDATE_LIVE_MESSAGES_INTERVAL_SEC = 30L
 		private const val MESSAGE_ACTIVE_TIME_SEC = 24 * 60 * 60 // 24 hours
+		private const val LOCATION_MESSAGE_DEFAULT_LIVE_TIME_SEC = 60 * 60 // 1 hour
 
 		// min and max values for the Telegram API
 		const val MIN_LOCATION_MESSAGE_LIVE_PERIOD_SEC = 61
@@ -397,15 +398,15 @@ class TelegramHelper private constructor() {
 	 * @latitude Latitude of the location
 	 * @longitude Longitude of the location
 	 */
-	fun sendLiveLocationMessage(chatTitles: List<String>, livePeriod: Int, latitude: Double, longitude: Double): Boolean {
+	fun sendLiveLocationMessage(chatTitles: List<String>, savedChatProps: List<ChatProps>, latitude: Double, longitude: Double): Boolean {
 		if (!requestingActiveLiveLocationMessages && haveAuthorization) {
 			if (needRefreshActiveLiveLocationMessages) {
 				getActiveLiveLocationMessages {
-					sendLiveLocationImpl(chatTitles, livePeriod, latitude, longitude)
+					sendLiveLocationImpl(chatTitles, savedChatProps, latitude, longitude)
 				}
 				needRefreshActiveLiveLocationMessages = false
 			} else {
-				sendLiveLocationImpl(chatTitles, livePeriod, latitude, longitude)
+				sendLiveLocationImpl(chatTitles, savedChatProps, latitude, longitude)
 			}
 			return true
 		}
@@ -440,30 +441,35 @@ class TelegramHelper private constructor() {
 		}
 	}
 
-	private fun sendLiveLocationImpl(chatTitles: List<String>, livePeriod: Int, latitude: Double, longitude: Double) {
-		val lp = when {
-			livePeriod < MIN_LOCATION_MESSAGE_LIVE_PERIOD_SEC -> MIN_LOCATION_MESSAGE_LIVE_PERIOD_SEC
-			livePeriod > MAX_LOCATION_MESSAGE_LIVE_PERIOD_SEC -> MAX_LOCATION_MESSAGE_LIVE_PERIOD_SEC
-			else -> livePeriod
-		}
-		val location = TdApi.Location(latitude, longitude)
-		val content = TdApi.InputMessageLocation(location, lp)
-
-		for (chatTitle in chatTitles) {
-			val chatId = this.chatTitles[chatTitle]
-			if (chatId != null) {
-				val msgId = chatLiveMessages[chatId]
-				if (msgId != null) {
-					if (msgId != 0L) {
-						client?.send(TdApi.EditMessageLiveLocation(chatId, msgId, null, location), liveLocationMessageUpdatesHandler)
-					}
-				} else {
-					chatLiveMessages[chatId] = 0L
-					client?.send(TdApi.SendMessage(chatId, 0, false, true, null, content), liveLocationMessageUpdatesHandler)
-				}
-			}
-		}
-	}
+    private fun sendLiveLocationImpl(chatTitles: List<String>, savedChatProps: List<ChatProps>, latitude: Double, longitude: Double) {
+        val location = TdApi.Location(latitude, longitude)
+        var livePeriod: Int = LOCATION_MESSAGE_DEFAULT_LIVE_TIME_SEC
+        for (chatTitle in chatTitles) {
+            val chatId = this.chatTitles[chatTitle]
+            if (chatId != null) {
+                savedChatProps.forEach { chat ->
+                    if (chat.id == chatId) {
+                        livePeriod = chat.expireTime.toInt()
+                    }
+                }
+                livePeriod = when {
+                    livePeriod < MIN_LOCATION_MESSAGE_LIVE_PERIOD_SEC -> MIN_LOCATION_MESSAGE_LIVE_PERIOD_SEC
+                    livePeriod > MAX_LOCATION_MESSAGE_LIVE_PERIOD_SEC -> MAX_LOCATION_MESSAGE_LIVE_PERIOD_SEC
+                    else -> livePeriod
+                }
+                val content = TdApi.InputMessageLocation(location, livePeriod)
+                val msgId = chatLiveMessages[chatId]
+                if (msgId != null) {
+                    if (msgId != 0L) {
+                        client?.send(TdApi.EditMessageLiveLocation(chatId, msgId, null, location), liveLocationMessageUpdatesHandler)
+                    }
+                } else {
+                    chatLiveMessages[chatId] = 0L
+                    client?.send(TdApi.SendMessage(chatId, 0, false, true, null, content), liveLocationMessageUpdatesHandler)
+                }
+            }
+        }
+    }
 
 	/**
 	 * @chatId Id of the chat

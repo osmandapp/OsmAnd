@@ -60,6 +60,16 @@ class TelegramSettings(private val app: TelegramApplication) {
 		}
 		this.shareLocationChats = shareLocationChats.toHashSet()
 	}
+	
+	fun shareLocationToChats(chatTitles: List<String>, share: Boolean) {
+		val shareLocationChats = shareLocationChats.toMutableList()
+		if (share) {
+			shareLocationChats.addAll(chatTitles)
+		} else {
+			shareLocationChats.removeAll(chatTitles)
+		}
+		this.shareLocationChats = shareLocationChats.toHashSet()
+	}
 
 	fun stopSharingLocationToChats() {
 		this.shareLocationChats = emptySet()
