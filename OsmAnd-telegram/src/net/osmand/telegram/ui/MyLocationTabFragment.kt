@@ -1,6 +1,7 @@
 package net.osmand.telegram.ui
 
 import android.animation.*
+import android.graphics.Paint
 import android.graphics.drawable.GradientDrawable
 import android.os.Build
 import android.os.Bundle
@@ -8,6 +9,7 @@ import android.support.design.widget.AppBarLayout
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.ListPopupWindow
 import android.support.v7.widget.RecyclerView
 import android.view.*
 import android.widget.*
@@ -17,6 +19,7 @@ import net.osmand.telegram.helpers.TelegramHelper
 import net.osmand.telegram.helpers.TelegramHelper.TelegramListener
 import net.osmand.telegram.helpers.TelegramUiHelper
 import net.osmand.telegram.ui.MyLocationTabFragment.MyLocationListAdapter.ChatViewHolder
+import net.osmand.telegram.utils.AndroidUtils
 import org.drinkless.td.libcore.telegram.TdApi
 
 private const val SELECTED_CHATS_KEY = "selected_chats"
@@ -34,6 +37,8 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 	private val telegramHelper get() = app.telegramHelper
 
 	private lateinit var appBarLayout: AppBarLayout
+	private lateinit var userImage: ImageView
+	private lateinit var optionsBtn: ImageView
 	private lateinit var textContainer: LinearLayout
 	private lateinit var title: TextView
 	private lateinit var description: TextView
@@ -85,7 +90,19 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 					appBarCollapsed = collapsed
 					adjustText()
 					adjustSearchBox()
+					optionsBtn.visibility = if (collapsed) View.VISIBLE else View.GONE
 				}
+			}
+		}
+
+		userImage = mainView.findViewById<ImageView>(R.id.my_location_user_image).apply {
+			setImageResource(R.drawable.img_my_location_user)
+		}
+
+		optionsBtn = mainView.findViewById<ImageView>(R.id.options).apply {
+			setImageDrawable(app.uiUtils.getThemedIcon(R.drawable.ic_action_other_menu))
+			setOnClickListener {
+				showPopupMenu()
 			}
 		}
 
@@ -123,6 +140,60 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 		}
 
 		return mainView
+	}
+
+
+	private fun showPopupMenu() {
+		val menuList = ArrayList<String>()
+		val logout = getString(R.string.shared_string_logout)
+		val login = getString(R.string.shared_string_login)
+		if (telegramHelper.getTelegramAuthorizationState() == TelegramHelper.TelegramAuthorizationState.READY) {
+			menuList.add(0, logout)
+		} else if (telegramHelper.getTelegramAuthorizationState() == TelegramHelper.TelegramAuthorizationState.CLOSED) {
+			menuList.add(0, login)
+		}
+		val paint = Paint()
+		paint.textSize = resources.getDimensionPixelSize(R.dimen.list_item_title_text_size).toFloat()
+		val textWidth = paint.measureText(menuList[0])
+		val itemWidth = textWidth.toInt() + AndroidUtils.dpToPx(context!!, 32F)
+		val minWidth = AndroidUtils.dpToPx(context!!, 100F)
+
+		ListPopupWindow(context!!).apply {
+			isModal = true
+			anchorView = optionsBtn
+			setContentWidth(Math.max(minWidth, itemWidth))
+			setDropDownGravity(Gravity.END or Gravity.TOP)
+			setAdapter(ArrayAdapter(context, R.layout.popup_list_text_item, menuList))
+			setOnItemClickListener { _, _, position, _ ->
+				when (position) {
+					menuList.indexOf(logout) -> {
+						logoutTelegram()
+					}
+					menuList.indexOf(login) -> {
+						loginTelegram()
+					}
+				}
+				dismiss()
+			}
+			show()
+		}
+	}
+
+	fun logoutTelegram(silent: Boolean = false) {
+		if (telegramHelper.getTelegramAuthorizationState() == TelegramHelper.TelegramAuthorizationState.READY) {
+			telegramHelper.logout()
+		} else {
+			if (!silent) {
+				Toast.makeText(context, R.string.not_logged_in, Toast.LENGTH_SHORT).show()
+			}
+		}
+	}
+
+	fun loginTelegram() {
+		if (telegramHelper.getTelegramAuthorizationState() != TelegramHelper.TelegramAuthorizationState.CLOSED) {
+			telegramHelper.logout()
+		}
+		telegramHelper.init()
 	}
 
 	override fun onResume() {
