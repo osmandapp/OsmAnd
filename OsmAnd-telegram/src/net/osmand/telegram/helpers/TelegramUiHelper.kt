@@ -15,7 +15,7 @@ object TelegramUiHelper {
 		app: TelegramApplication,
 		iv: ImageView?,
 		photoPath: String?,
-		placeholderId: Int = R.drawable.ic_group
+		placeholderId: Int = R.drawable.img_user_picture
 	) {
 		if (iv == null) {
 			return
@@ -26,7 +26,7 @@ object TelegramUiHelper {
 			bitmap = app.uiUtils.getCircleBitmap(photoPath)
 		}
 		if (bitmap == null) {
-			drawable = app.uiUtils.getThemedIcon(placeholderId)
+			drawable = app.uiUtils.getIcon(placeholderId)
 		}
 		if (bitmap != null) {
 			iv.setImageBitmap(bitmap)
@@ -43,7 +43,7 @@ object TelegramUiHelper {
 		val res = ChatItem().apply {
 			chatTitle = chat.title
 			photoPath = chat.photo?.small?.local?.path
-			placeholderId = R.drawable.ic_group
+			placeholderId = R.drawable.img_user_picture
 		}
 		val type = chat.type
 		if (type is TdApi.ChatTypePrivate || type is TdApi.ChatTypeSecret) {
@@ -98,7 +98,7 @@ object TelegramUiHelper {
 				chatTitle = chat.title
 				name = content.name
 				latLon = LatLon(content.lat, content.lon)
-				placeholderId = R.drawable.ic_group
+				placeholderId = R.drawable.img_user_picture
 			}
 		} else {
 			null
@@ -123,7 +123,7 @@ object TelegramUiHelper {
 			}
 			latLon = LatLon(content.location.latitude, content.location.longitude)
 			photoPath = helper.getUserPhotoPath(user)
-			placeholderId = R.drawable.ic_group
+			placeholderId = R.drawable.img_user_picture
 			userId = message.senderUserId
 		}
 	}

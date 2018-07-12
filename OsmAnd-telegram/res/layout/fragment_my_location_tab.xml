@@ -12,12 +12,27 @@
 		android:layout_height="wrap_content"
 		android:background="?attr/card_bg_color">
 
-		<ImageView
-			android:id="@+id/my_location_image"
+		<FrameLayout
 			android:layout_width="match_parent"
 			android:layout_height="@dimen/my_location_image_height"
-			android:background="@android:color/holo_green_light"
-			app:layout_scrollFlags="scroll"/>
+			app:layout_scrollFlags="scroll">
+
+			<ImageView
+				android:id="@+id/my_location_bg_image"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:scaleType="center"
+				android:src="@drawable/img_my_location_roadbg" />
+
+			<ImageView
+				android:id="@+id/my_location_user_image"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center_horizontal"
+				android:paddingTop="@dimen/content_padding_standard"
+				tools:src="@drawable/img_my_location_user" />
+
+		</FrameLayout>
 
 		<LinearLayout
 			android:id="@+id/text_container"
@@ -28,7 +43,7 @@
 			android:paddingLeft="@dimen/my_location_text_sides_margin"
 			android:paddingRight="@dimen/my_location_text_sides_margin">
 
-			<FrameLayout
+			<LinearLayout
 				android:layout_width="match_parent"
 				android:layout_height="@dimen/action_bar_height">
 
@@ -37,13 +52,27 @@
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
 					android:layout_gravity="center_vertical"
+					android:layout_weight="1"
 					android:gravity="center"
 					android:text="@string/start_location_sharing"
 					android:textColor="?attr/ctrl_active_color"
 					android:textSize="@dimen/title_text_size"
 					app:typeface="@string/font_roboto_mono_bold"/>
 
-			</FrameLayout>
+				<ImageView
+					android:id="@+id/options"
+					android:layout_width="wrap_content"
+					android:layout_height="match_parent"
+					android:layout_weight="0"
+					android:background="?attr/selectableItemBackgroundBorderless"
+					android:paddingLeft="@dimen/content_padding_half"
+					android:paddingRight="@dimen/content_padding_half"
+					android:visibility="gone"
+					tools:src="@drawable/ic_action_other_menu"
+					tools:tint="@color/icon_light"
+					tools:visiblity="visible" />
+
+			</LinearLayout>
 
 			<TextView
 				android:id="@+id/description"

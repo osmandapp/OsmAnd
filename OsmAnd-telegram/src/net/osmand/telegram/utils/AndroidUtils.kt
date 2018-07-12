@@ -59,6 +59,15 @@ object AndroidUtils {
 		).toInt()
 	}
 
+	fun getStatusBarHeight(ctx: Context): Int {
+		var result = 0
+		val resourceId = ctx.resources.getIdentifier("status_bar_height", "dimen", "android")
+		if (resourceId > 0) {
+			result = ctx.resources.getDimensionPixelSize(resourceId)
+		}
+		return result
+	}
+
 	@ColorInt
 	fun getAttrColor(ctx: Context, @AttrRes attrId: Int, @ColorInt defaultColor: Int = 0): Int {
 		val ta = ctx.theme.obtainStyledAttributes(intArrayOf(attrId))
