@@ -1,6 +1,7 @@
 package net.osmand.telegram
 
 import android.content.Context
+import net.osmand.telegram.helpers.TelegramHelper
 import net.osmand.telegram.utils.OsmandFormatter.MetricsConstants
 import net.osmand.telegram.utils.OsmandFormatter.SpeedConstants
 
@@ -18,9 +19,13 @@ private const val SEND_MY_LOCATION_INTERVAL_DEFAULT = 5L * 1000 // 5 seconds
 private const val USER_LOCATION_EXPIRE_TIME_KEY = "user_location_expire_time"
 private const val USER_LOCATION_EXPIRE_TIME_DEFAULT = 15L * 60 * 1000 // 15 minutes
 
+private const val DEFAULT_VISIBLE_TIME_SECONDS = 60 * 60L // 1 hour
+
 private const val TITLES_REPLACED_WITH_IDS = "changed_to_chat_id"
 
 class TelegramSettings(private val app: TelegramApplication) {
+
+	var chatLivePeriods = mutableMapOf<Long, Long>()
 
 	private var shareLocationChats: Set<Long> = emptySet()
 	private var showOnMapChats: Set<Long> = emptySet()
@@ -52,20 +57,34 @@ class TelegramSettings(private val app: TelegramApplication) {
 		val showOnMapChats = showOnMapChats.toMutableList()
 		showOnMapChats.intersect(presentChatIds)
 		this.showOnMapChats = showOnMapChats.toHashSet()
+
+		chatLivePeriods = chatLivePeriods.filter { (key, _) ->
+			presentChatIds.contains(key)
+		}.toMutableMap()
 	}
 
-	fun shareLocationToChat(chatId: Long, share: Boolean) {
+	fun shareLocationToChat(chatId: Long, share: Boolean, livePeriod: Long = DEFAULT_VISIBLE_TIME_SECONDS) {
 		val shareLocationChats = shareLocationChats.toMutableList()
 		if (share) {
+			val lp: Long = when {
+				livePeriod < TelegramHelper.MIN_LOCATION_MESSAGE_LIVE_PERIOD_SEC -> TelegramHelper.MIN_LOCATION_MESSAGE_LIVE_PERIOD_SEC.toLong()
+				livePeriod > TelegramHelper.MAX_LOCATION_MESSAGE_LIVE_PERIOD_SEC -> TelegramHelper.MAX_LOCATION_MESSAGE_LIVE_PERIOD_SEC.toLong()
+				else -> livePeriod
+			}
+			chatLivePeriods[chatId] = lp
 			shareLocationChats.add(chatId)
 		} else {
 			shareLocationChats.remove(chatId)
+			chatLivePeriods.remove(chatId)
 		}
 		this.shareLocationChats = shareLocationChats.toHashSet()
 	}
 
+	fun getChatLivePeriod(chatId: Long) = chatLivePeriods[chatId]
+
 	fun stopSharingLocationToChats() {
 		this.shareLocationChats = emptySet()
+		this.chatLivePeriods.clear()
 	}
 
 	fun showChatOnMap(chatId: Long, show: Boolean) {
