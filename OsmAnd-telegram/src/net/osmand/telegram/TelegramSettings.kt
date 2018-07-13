@@ -25,7 +25,7 @@ private const val TITLES_REPLACED_WITH_IDS = "changed_to_chat_id"
 
 class TelegramSettings(private val app: TelegramApplication) {
 
-	var chatLocLivePeriods = mutableMapOf<Long, Long>()
+	var chatLivePeriods = mutableMapOf<Long, Long>()
 
 	private var shareLocationChats: Set<Long> = emptySet()
 	private var showOnMapChats: Set<Long> = emptySet()
@@ -58,7 +58,7 @@ class TelegramSettings(private val app: TelegramApplication) {
 		showOnMapChats.intersect(presentChatIds)
 		this.showOnMapChats = showOnMapChats.toHashSet()
 
-		chatLocLivePeriods = chatLocLivePeriods.filter { (key, _) ->
+		chatLivePeriods = chatLivePeriods.filter { (key, _) ->
 			presentChatIds.contains(key)
 		}.toMutableMap()
 	}
@@ -71,20 +71,20 @@ class TelegramSettings(private val app: TelegramApplication) {
 				duration > TelegramHelper.MAX_LOCATION_MESSAGE_LIVE_PERIOD_SEC -> TelegramHelper.MAX_LOCATION_MESSAGE_LIVE_PERIOD_SEC.toLong()
 				else -> duration
 			}
-			chatLocLivePeriods[chatId] = lp
+			chatLivePeriods[chatId] = lp
 			shareLocationChats.add(chatId)
 		} else {
 			shareLocationChats.remove(chatId)
-			chatLocLivePeriods.remove(chatId)
+			chatLivePeriods.remove(chatId)
 		}
 		this.shareLocationChats = shareLocationChats.toHashSet()
 	}
 
-	fun getChatExpireTime(chatId: Long) = chatLocLivePeriods[chatId]
+	fun getChatExpireTime(chatId: Long) = chatLivePeriods[chatId]
 
 	fun stopSharingLocationToChats() {
 		this.shareLocationChats = emptySet()
-		this.chatLocLivePeriods.clear()
+		this.chatLivePeriods.clear()
 	}
 
 	fun showChatOnMap(chatId: Long, show: Boolean) {

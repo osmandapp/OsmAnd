@@ -33,7 +33,7 @@ class SetTimeDialogFragment : DialogFragment() {
 	private lateinit var timeForAllTitle: TextView
 	private lateinit var timeForAllValue: TextView
 
-	private val chatIdsToDuration = HashMap<Long, Long>()
+	private val chatLivePeriods = HashMap<Long, Long>()
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
@@ -80,7 +80,7 @@ class SetTimeDialogFragment : DialogFragment() {
 				if (!AndroidUtils.isLocationPermissionAvailable(view.context)) {
 					AndroidUtils.requestLocationPermission(activity!!)
 				} else {
-					chatIdsToDuration.forEach { chatId, expireTime ->
+					chatLivePeriods.forEach { chatId, expireTime ->
 						settings.shareLocationToChat(chatId, true, expireTime)
 					}
 					app.shareLocationHelper.startSharingLocation()
@@ -100,7 +100,7 @@ class SetTimeDialogFragment : DialogFragment() {
 	override fun onSaveInstanceState(outState: Bundle) {
 		super.onSaveInstanceState(outState)
 		val chats = mutableListOf<Long>()
-		for ((id, duration) in chatIdsToDuration) {
+		for ((id, duration) in chatLivePeriods) {
 			chats.add(id)
 			chats.add(duration)
 		}
@@ -108,18 +108,18 @@ class SetTimeDialogFragment : DialogFragment() {
 	}
 
 	private fun readFromBundle(bundle: Bundle?) {
-		chatIdsToDuration.clear()
+		chatLivePeriods.clear()
 		bundle?.getLongArray(CHATS_KEY)?.also {
 			for (i in 0 until it.size step 2) {
 				val expireTime = settings.getChatExpireTime(it[i])
-				chatIdsToDuration[it[i]] = expireTime ?: it[i + 1]
+				chatLivePeriods[it[i]] = expireTime ?: it[i + 1]
 			}
 		}
 	}
 
 	private fun getTimeForAll(useDefValue: Boolean = false): Long {
 		val returnVal = if (useDefValue) DEFAULT_VISIBLE_TIME_SECONDS else NO_VALUE
-		val iterator = chatIdsToDuration.values.iterator()
+		val iterator = chatLivePeriods.values.iterator()
 		if (!iterator.hasNext()) {
 			return returnVal
 		}
@@ -146,7 +146,7 @@ class SetTimeDialogFragment : DialogFragment() {
 
 	private fun selectDuration(id: Long? = null) {
 		val timeForAll = getTimeForAll(true)
-		val defSeconds = if (id == null) timeForAll else chatIdsToDuration[id] ?: timeForAll
+		val defSeconds = if (id == null) timeForAll else chatLivePeriods[id] ?: timeForAll
 		val (defHours, defMinutes) = secondsToHoursAndMinutes(defSeconds)
 		TimePickerDialog(
 			context,
@@ -155,10 +155,10 @@ class SetTimeDialogFragment : DialogFragment() {
 						TimeUnit.MINUTES.toSeconds(minutes.toLong())
 				if (seconds >= ShareLocationHelper.MIN_LOCATION_MESSAGE_LIVE_PERIOD_SEC) {
 					if (id != null) {
-						chatIdsToDuration[id] = seconds
+						chatLivePeriods[id] = seconds
 					} else {
-						chatIdsToDuration.keys.forEach {
-							chatIdsToDuration[it] = seconds
+						chatLivePeriods.keys.forEach {
+							chatLivePeriods[it] = seconds
 						}
 					}
 					updateTimeForAllRow()
@@ -185,7 +185,7 @@ class SetTimeDialogFragment : DialogFragment() {
 
 	private fun updateList() {
 		val chats: MutableList<TdApi.Chat> = mutableListOf()
-		telegramHelper.getChatList().filter { chatIdsToDuration.keys.contains(it.chatId) }
+		telegramHelper.getChatList().filter { chatLivePeriods.keys.contains(it.chatId) }
 			.forEach { orderedChat ->
 				telegramHelper.getChat(orderedChat.chatId)?.also { chats.add(it) }
 			}
@@ -214,7 +214,7 @@ class SetTimeDialogFragment : DialogFragment() {
 			holder.description?.text = "Some description" // FIXME
 			holder.textInArea?.apply {
 				visibility = View.VISIBLE
-				chatIdsToDuration[chat.id]?.also { text = formatDuration(it) }
+				chatLivePeriods[chat.id]?.also { text = formatDuration(it) }
 			}
 			holder.bottomShadow?.visibility = View.GONE
 			holder.itemView.setOnClickListener {
