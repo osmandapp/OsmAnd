@@ -108,7 +108,7 @@ class TelegramHelper private constructor() {
 		usersLocationMessages.values.firstOrNull { it.senderUserId == user.id }
 
 	fun getChatMessages(chatId: Long) =
-			usersLocationMessages.values.filter { chats[it.chatId]?.id == chatId }
+			usersLocationMessages.values.filter { it.chatId == chatId }
 
 	fun getMessages() = usersLocationMessages.values.toList()
 
