@@ -1,22 +1,18 @@
 package net.osmand.telegram.ui
 
-import android.Manifest
 import android.app.Dialog
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.Bitmap
-import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
-import android.support.v4.app.*
+import android.support.v4.app.DialogFragment
+import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentManager
+import android.support.v4.app.FragmentPagerAdapter
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.AppCompatImageView
-import android.support.v7.widget.AppCompatTextView
-import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.SwitchCompat
-import android.view.*
+import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
@@ -33,10 +29,6 @@ import org.drinkless.td.libcore.telegram.TdApi
 import java.lang.ref.WeakReference
 
 private const val PERMISSION_REQUEST_LOCATION = 1
-
-private const val LOGIN_MENU_ID = 0
-private const val LOGOUT_MENU_ID = 1
-private const val PROGRESS_MENU_ID = 2
 
 private const val MY_LOCATION_TAB_POS = 0
 private const val LIVE_NOW_TAB_POS = 1
@@ -151,9 +143,6 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 		super.onResume()
 		paused = false
 
-		invalidateOptionsMenu()
-		updateTitle()
-
 		app.locationProvider.checkIfLastKnownLocationIsValid()
 
 		if (AndroidUtils.isLocationPermissionAvailable(this)) {
@@ -196,8 +185,6 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 				TelegramAuthorizationState.READY -> LoginDialogFragment.dismiss(fm)
 				else -> Unit
 			}
-			invalidateOptionsMenu()
-			updateTitle()
 
 			listeners.forEach {
 				it.get()?.onTelegramStatusChanged(prevTelegramAuthorizationState, newTelegramAuthorizationState)
@@ -269,18 +256,6 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 		telegramHelper.init()
 	}
 
-	fun logoutTelegram(silent: Boolean = false) {
-		if (telegramHelper.getTelegramAuthorizationState() == TelegramAuthorizationState.READY) {
-			telegramHelper.logout()
-		} else {
-			invalidateOptionsMenu()
-			updateTitle()
-			if (!silent) {
-				Toast.makeText(this, R.string.not_logged_in, Toast.LENGTH_SHORT).show()
-			}
-		}
-	}
-
 	fun closeTelegram() {
 		telegramHelper.close()
 	}
@@ -288,71 +263,6 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 	private fun runOnUi(action: (() -> Unit)) {
 		if (!paused) {
 			runOnUiThread(action)
-		}
-	}
-
-	override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-		return when (item?.itemId) {
-			LOGIN_MENU_ID -> {
-				loginTelegram()
-				true
-			}
-			LOGOUT_MENU_ID -> {
-				logoutTelegram()
-				true
-			}
-			else -> super.onOptionsItemSelected(item)
-		}
-	}
-
-	override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-		if (menu != null) {
-			menu.clear()
-			when (telegramHelper.getTelegramAuthorizationState()) {
-				TelegramAuthorizationState.UNKNOWN,
-				TelegramAuthorizationState.WAIT_PARAMETERS,
-				TelegramAuthorizationState.WAIT_PHONE_NUMBER,
-				TelegramAuthorizationState.WAIT_CODE,
-				TelegramAuthorizationState.WAIT_PASSWORD,
-				TelegramAuthorizationState.LOGGING_OUT,
-				TelegramAuthorizationState.CLOSING -> createProgressMenuItem(menu)
-				TelegramAuthorizationState.READY -> createMenuItem(menu, LOGOUT_MENU_ID, R.string.shared_string_logout,
-						MenuItem.SHOW_AS_ACTION_WITH_TEXT or MenuItem.SHOW_AS_ACTION_ALWAYS)
-				TelegramAuthorizationState.CLOSED -> createMenuItem(menu, LOGIN_MENU_ID, R.string.shared_string_login,
-						MenuItem.SHOW_AS_ACTION_WITH_TEXT or MenuItem.SHOW_AS_ACTION_ALWAYS)
-			}
-		}
-		return super.onCreateOptionsMenu(menu)
-	}
-
-	private fun createMenuItem(m: Menu, id: Int, titleRes: Int, menuItemType: Int): MenuItem {
-		val menuItem = m.add(0, id, 0, titleRes)
-		menuItem.setOnMenuItemClickListener { item -> onOptionsItemSelected(item) }
-		menuItem.setShowAsAction(menuItemType)
-		return menuItem
-	}
-
-	private fun createProgressMenuItem(m: Menu): MenuItem {
-
-		val menuItem = m.add(0, PROGRESS_MENU_ID, 0, "")
-		menuItem.actionView = layoutInflater.inflate(R.layout.action_progress_bar, null)
-		menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS)
-		return menuItem
-	}
-
-	private fun updateTitle() {
-		title = when (telegramHelper.getTelegramAuthorizationState()) {
-
-			TelegramAuthorizationState.UNKNOWN,
-			TelegramAuthorizationState.WAIT_PHONE_NUMBER,
-			TelegramAuthorizationState.WAIT_CODE,
-			TelegramAuthorizationState.WAIT_PASSWORD,
-			TelegramAuthorizationState.READY,
-			TelegramAuthorizationState.CLOSED -> getString(R.string.app_name)
-
-			TelegramAuthorizationState.WAIT_PARAMETERS -> getString(R.string.initialization) + "..."
-			TelegramAuthorizationState.LOGGING_OUT -> getString(R.string.logging_out) + "..."
-			TelegramAuthorizationState.CLOSING -> getString(R.string.closing) + "..."
 		}
 	}
 
@@ -396,7 +306,7 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 		}
 	}
 
-	fun showOsmandMissingDialog() {
+	private fun showOsmandMissingDialog() {
 		OsmandMissingDialogFragment().show(supportFragmentManager, null)
 	}
 
@@ -422,91 +332,5 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 		override fun getItem(position: Int) = fragments[position]
 
 		override fun getCount() = fragments.size
-	}
-
-	inner class ChatsAdapter :
-			RecyclerView.Adapter<ChatsAdapter.ViewHolder>() {
-
-		var chats: List<TdApi.Chat> = emptyList()
-			set(value) {
-				field = value
-				notifyDataSetChanged()
-			}
-
-		inner class ViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
-			val icon: AppCompatImageView? = view.findViewById(R.id.icon)
-			val groupName: AppCompatTextView? = view.findViewById(R.id.name)
-			val shareLocationSwitch: SwitchCompat? = view.findViewById(R.id.share_location_switch)
-			val showOnMapSwitch: SwitchCompat? = view.findViewById(R.id.show_on_map_switch)
-		}
-
-		override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-			val view = LayoutInflater.from(parent.context).inflate(R.layout.chat_list_item, parent, false)
-			return ViewHolder(view)
-		}
-
-		override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-			val chat = chats[position]
-			val chatId = chat.id
-			holder.groupName?.text = chat.title
-
-			var drawable: Drawable? = null
-			var bitmap: Bitmap? = null
-			val chatPhoto = chat.photo?.small
-			if (chatPhoto != null && chatPhoto.local.path.isNotEmpty()) {
-				bitmap = app.uiUtils.getCircleBitmap(chatPhoto.local.path)
-			}
-			if (bitmap == null) {
-				drawable = app.uiUtils.getThemedIcon(R.drawable.ic_group)
-			}
-			if (bitmap != null) {
-				holder.icon?.setImageBitmap(bitmap)
-			} else {
-				holder.icon?.setImageDrawable(drawable)
-			}
-			holder.shareLocationSwitch?.setOnCheckedChangeListener(null)
-			holder.shareLocationSwitch?.isChecked = settings.isSharingLocationToChat(chatId)
-			holder.shareLocationSwitch?.setOnCheckedChangeListener { view, isChecked ->
-				settings.shareLocationToChat(chatId, isChecked)
-				if (settings.hasAnyChatToShareLocation()) {
-					if (!AndroidUtils.isLocationPermissionAvailable(view.context)) {
-						if (isChecked) {
-							AndroidUtils.requestLocationPermission(this@MainActivity)
-						}
-					} else {
-						app.shareLocationHelper.startSharingLocation()
-					}
-				} else {
-					app.shareLocationHelper.stopSharingLocation()
-				}
-			}
-
-			holder.showOnMapSwitch?.setOnCheckedChangeListener(null)
-			holder.showOnMapSwitch?.isChecked = settings.isShowingChatOnMap(chatId)
-			holder.showOnMapSwitch?.setOnCheckedChangeListener { _, isChecked ->
-				settings.showChatOnMap(chatId, isChecked)
-				if (settings.hasAnyChatToShowOnMap()) {
-					if (osmandAidlHelper.isOsmandNotInstalled()) {
-						if (isChecked) {
-							showOsmandMissingDialog()
-						}
-					} else {
-						if (isChecked) {
-							app.showLocationHelper.showChatMessages(chatId)
-						} else {
-							app.showLocationHelper.hideChatMessages(chatId)
-						}
-						app.showLocationHelper.startShowingLocation()
-					}
-				} else {
-					app.showLocationHelper.stopShowingLocation()
-					if (!isChecked) {
-						app.showLocationHelper.hideChatMessages(chatId)
-					}
-				}
-			}
-		}
-
-		override fun getItemCount() = chats.size
 	}
 }
