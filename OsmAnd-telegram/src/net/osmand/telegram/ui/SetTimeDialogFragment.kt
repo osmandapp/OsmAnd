@@ -78,7 +78,6 @@ class SetTimeDialogFragment : DialogFragment() {
 		view.findViewById<TextView>(R.id.primary_btn).apply {
 			text = getString(R.string.shared_string_share)
 			setOnClickListener {
-				Toast.makeText(context, "Share", Toast.LENGTH_SHORT).show()
 				chatIdsToDuration.forEach { chatId, expireTime ->
 					settings.shareLocationToChat(chatId, true)
 					settings.addChatIdToDuration(chatId, expireTime)
@@ -92,6 +91,7 @@ class SetTimeDialogFragment : DialogFragment() {
 				} else {
 					app.shareLocationHelper.stopSharingLocation()
 				}
+				dismiss()
 			}
 		}
 
