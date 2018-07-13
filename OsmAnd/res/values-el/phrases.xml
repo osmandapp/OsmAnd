@@ -3632,4 +3632,69 @@
 	<string name="poi_amperage">Αμπέρ</string>
 	<string name="poi_charging_station_output">Έξοδος σταθμού φόρτισης</string>
 
+	<string name="poi_map_type_topo">Τύπος χάρτη: τοπογραφικός</string>
+	<string name="poi_map_type_street">Τύπος χάρτη: δρόμος</string>
+	<string name="poi_map_type_scheme">Τύπος χάρτη: σχήμα</string>
+	<string name="poi_map_type_toposcope">Τύπος χάρτη: τοποσκοπικός</string>
+	<string name="poi_map_size_site">Μέγεθος χάρτη: τόπος</string>
+	<string name="poi_map_size_city">Μέγεθος χάρτη: πόλη</string>
+	<string name="poi_map_size_region">Μέγεθος χάρτη: περιοχή</string>
+
+	<string name="poi_charging_station_filter">Σταθμός φόρτισης</string>
+
+	<string name="poi_depot">Αμαξοστάσιο</string>
+
+	<string name="poi_letter_box">Γραμματοκιβώτιο</string>
+	<string name="poi_post_street">Δρόμος</string>
+	<string name="poi_post_housenumber">Αριθμός σπιτιού</string>
+	<string name="poi_post_flats">Διαμέρισμα</string>
+
+	<string name="poi_payment_centre">Κέντρο πληρωμών</string>
+	<string name="poi_money_transfer">Μεταφορά χρημάτων</string>
+
+	<string name="poi_ref_post">Ταχυδρομικός κώδικας</string>
+
+	<string name="poi_climbing_sport_yes">Αθλητισμός: ναι</string>
+	<string name="poi_climbing_sport_no">Αθλητισμός: όχι</string>
+	<string name="poi_climbing_boulder_yes">Μπούλντερινγκ: ναι</string>
+	<string name="poi_climbing_boulder_no">Μπούλντερινγκ: όχι</string>
+	<string name="poi_climbing_toprope_yes">Αναρρίχηση με σχοινί από πάνω: ναι</string>
+	<string name="poi_climbing_toprope_no">Αναρρίχηση με σχοινί από πάνω: όχι</string>
+	<string name="poi_climbing_trad_yes">Παραδοσιακά: ναι</string>
+	<string name="poi_climbing_trad_no">Παραδοσιακά: όχι</string>
+	<string name="poi_climbing_multipitch_yes">Διαδρομές πολλαπλών σχοινιών: ναι</string>
+	<string name="poi_climbing_multipitch_no">Διαδρομές πολλαπλών σχοινιών: ναι</string>
+	<string name="poi_climbing_ice_yes">Πάγος: ναι</string>
+	<string name="poi_climbing_ice_no">Πάγος: όχι</string>
+	<string name="poi_climbing_mixed_yes">Ανάμεικτο: ναι</string>
+	<string name="poi_climbing_mixed_no">Ανάμεικτο: όχι</string>
+	<string name="poi_climbing_deepwater_yes">Μόνος σε βαθιά νερά: ναι</string>
+	<string name="poi_climbing_deepwater_no">Μόνος σε βαθιά νερά: όχι</string>
+
+	<string name="poi_climbing_length">Μήκος αναρρίχησης</string>
+	<string name="poi_climbing_length_min">Ελάχιστο μήκος αναρρίχησης</string>
+	<string name="poi_climbing_length_max">Μέγιστο μήκος αναρρίχησης</string>
+	<string name="poi_climbing_rock_limestone">Πέτρωμα αναρρίχησης: ασβεστόλιθος</string>
+	<string name="poi_climbing_rock_granite">Πέτρωμα αναρρίχησης: γρανίτης</string>
+	<string name="poi_climbing_rock_sandstone">Πέτρωμα αναρρίχησης: ψαμμίτης</string>
+	<string name="poi_climbing_rock_quartzite">Πέτρωμα αναρρίχησης: χαλαζίτης</string>
+	<string name="poi_climbing_rock_gneiss">Πέτρωμα αναρρίχησης: γνεύσιος</string>
+	<string name="poi_climbing_rock_porphyry">Πέτρωμα αναρρίχησης: πορφυρίτης</string>
+	<string name="poi_climbing_quality_solid">Πέτρωμα αναρρίχησης: στερεό</string>
+	<string name="poi_climbing_quality_fragile">Πέτρωμα αναρρίχησης: εύθριπτο</string>
+	<string name="poi_climbing_bolted_yes">Σταθερά σημεία: ναι</string>
+	<string name="poi_climbing_bolted_no">Σταθερά σημεία: όχι</string>
+	<string name="poi_climbing_orientation_n">Προσανατολισμός του τοίχου: Β</string>
+	<string name="poi_climbing_orientation_ne">Προσανατολισμός του τοίχου: ΒΑ</string>
+	<string name="poi_climbing_orientation_e">Προσανατολισμός του τοίχου: Α</string>
+	<string name="poi_climbing_orientation_se">Προσανατολισμός του τοίχου: ΝΑ</string>
+	<string name="poi_climbing_orientation_s">Προσανατολισμός του τοίχου: Ν</string>
+	<string name="poi_climbing_orientation_sw">Προσανατολισμός του τοίχου: ΝΔ</string>
+	<string name="poi_climbing_orientation_w">Προσανατολισμός του τοίχου: Δ</string>
+	<string name="poi_climbing_orientation_nw">Προσανατολισμός του τοίχου: ΒΔ</string>
+	<string name="poi_climbing_summit_log_yes">Καταγραφή κορυφής αναρρίχησης: ναι</string>
+	<string name="poi_climbing_summit_log_no">Καταγραφή κορυφής αναρρίχησης: όχι</string>
+	<string name="poi_climbing_routes">Διαδρομές αναρρίχησης</string>
+
+	<string name="poi_circumference">Περίμετρος</string>
 	</resources>
