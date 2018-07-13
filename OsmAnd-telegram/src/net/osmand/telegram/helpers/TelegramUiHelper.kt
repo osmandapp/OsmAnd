@@ -15,7 +15,8 @@ object TelegramUiHelper {
 		app: TelegramApplication,
 		iv: ImageView?,
 		photoPath: String?,
-		placeholderId: Int = R.drawable.img_user_picture
+		placeholderId: Int,
+		useThemedIcon: Boolean
 	) {
 		if (iv == null) {
 			return
@@ -26,7 +27,11 @@ object TelegramUiHelper {
 			bitmap = app.uiUtils.getCircleBitmap(photoPath)
 		}
 		if (bitmap == null) {
-			drawable = app.uiUtils.getIcon(placeholderId)
+			drawable = if (useThemedIcon) {
+				app.uiUtils.getThemedIcon(placeholderId)
+			} else {
+				app.uiUtils.getIcon(placeholderId)
+			}
 		}
 		if (bitmap != null) {
 			iv.setImageBitmap(bitmap)
@@ -60,8 +65,10 @@ object TelegramUiHelper {
 				}
 			}
 		} else if (type is TdApi.ChatTypeBasicGroup) {
+			res.placeholderId = R.drawable.img_group_picture
 			res.membersCount = helper.getBasicGroupFullInfo(type.basicGroupId)?.members?.size ?: 0
 		} else if (type is TdApi.ChatTypeSupergroup) {
+			res.placeholderId = R.drawable.img_group_picture
 			res.membersCount = helper.getSupergroupFullInfo(type.supergroupId)?.memberCount ?: 0
 		}
 		if (!res.privateChat) {
