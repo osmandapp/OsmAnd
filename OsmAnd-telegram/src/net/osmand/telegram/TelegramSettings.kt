@@ -16,8 +16,9 @@ private const val SEND_MY_LOCATION_INTERVAL_KEY = "send_my_location_interval"
 private const val SEND_MY_LOCATION_INTERVAL_DEFAULT = 5L * 1000 // 5 seconds
 
 private const val USER_LOCATION_EXPIRE_TIME_KEY = "user_location_expire_time"
-private const val CHANGED_TO_CHAT_ID_KEY = "changed_to_chat_id"
 private const val USER_LOCATION_EXPIRE_TIME_DEFAULT = 15L * 60 * 1000 // 15 minutes
+
+private const val TITLES_REPLACED_WITH_IDS = "changed_to_chat_id"
 
 class TelegramSettings(private val app: TelegramApplication) {
 
@@ -29,19 +30,19 @@ class TelegramSettings(private val app: TelegramApplication) {
 
 	var sendMyLocationInterval = SEND_MY_LOCATION_INTERVAL_DEFAULT
 	var userLocationExpireTime = USER_LOCATION_EXPIRE_TIME_DEFAULT
-	var afterMovingChatTitleToChatId = false
 
 	init {
+		updatePrefs()
 		read()
 	}
 
 	fun hasAnyChatToShareLocation() = shareLocationChats.isNotEmpty()
 
-	fun isSharingLocationToChat(id: Long) = shareLocationChats.contains(id)
+	fun isSharingLocationToChat(chatId: Long) = shareLocationChats.contains(chatId)
 
 	fun hasAnyChatToShowOnMap() = showOnMapChats.isNotEmpty()
 
-	fun isShowingChatOnMap(id: Long) = showOnMapChats.contains(id)
+	fun isShowingChatOnMap(chatId: Long) = showOnMapChats.contains(chatId)
 
 	fun removeNonexistingChats(presentChatIds: List<Long>) {
 		val shareLocationChats = shareLocationChats.toMutableList()
@@ -53,12 +54,12 @@ class TelegramSettings(private val app: TelegramApplication) {
 		this.showOnMapChats = showOnMapChats.toHashSet()
 	}
 
-	fun shareLocationToChat(id: Long, share: Boolean) {
+	fun shareLocationToChat(chatId: Long, share: Boolean) {
 		val shareLocationChats = shareLocationChats.toMutableList()
 		if (share) {
-			shareLocationChats.add(id)
+			shareLocationChats.add(chatId)
 		} else {
-			shareLocationChats.remove(id)
+			shareLocationChats.remove(chatId)
 		}
 		this.shareLocationChats = shareLocationChats.toHashSet()
 	}
@@ -67,12 +68,12 @@ class TelegramSettings(private val app: TelegramApplication) {
 		this.shareLocationChats = emptySet()
 	}
 
-	fun showChatOnMap(id: Long, show: Boolean) {
+	fun showChatOnMap(chatId: Long, show: Boolean) {
 		val showOnMapChats = showOnMapChats.toMutableList()
 		if (show) {
-			showOnMapChats.add(id)
+			showOnMapChats.add(chatId)
 		} else {
-			showOnMapChats.remove(id)
+			showOnMapChats.remove(chatId)
 		}
 		this.showOnMapChats = showOnMapChats.toHashSet()
 	}
@@ -103,7 +104,6 @@ class TelegramSettings(private val app: TelegramApplication) {
 
 		edit.putString(METRICS_CONSTANTS_KEY, metricsConstants.name)
 		edit.putString(SPEED_CONSTANTS_KEY, speedConstants.name)
-		edit.putBoolean(CHANGED_TO_CHAT_ID_KEY, afterMovingChatTitleToChatId)
 
 		edit.putLong(SEND_MY_LOCATION_INTERVAL_KEY, sendMyLocationInterval)
 
@@ -112,41 +112,45 @@ class TelegramSettings(private val app: TelegramApplication) {
 
 	fun read() {
 		val prefs = app.getSharedPreferences(SETTINGS_NAME, Context.MODE_PRIVATE)
-		afterMovingChatTitleToChatId =
-				prefs.getBoolean(CHANGED_TO_CHAT_ID_KEY, false)
 
 		val shareLocationChats = mutableSetOf<Long>()
 		val shareLocationChatsSet = prefs.getStringSet(SHARE_LOCATION_CHATS_KEY, mutableSetOf())
-
-		val showOnMapChats = mutableSetOf<Long>()
-		val showOnMapChatsSet = prefs.getStringSet(SHOW_ON_MAP_CHATS_KEY, mutableSetOf())
-
-		if (!afterMovingChatTitleToChatId) {
-			showOnMapChatsSet.clear()
-			shareLocationChatsSet.clear()
-			afterMovingChatTitleToChatId = true
-		}
-
 		for (chatId in shareLocationChatsSet) {
 			shareLocationChats.add(chatId.toLong())
 		}
 		this.shareLocationChats = shareLocationChats
 
+		val showOnMapChats = mutableSetOf<Long>()
+		val showOnMapChatsSet = prefs.getStringSet(SHOW_ON_MAP_CHATS_KEY, mutableSetOf())
 		for (chatId in showOnMapChatsSet) {
 			showOnMapChats.add(chatId.toLong())
 		}
 		this.showOnMapChats = showOnMapChats
 
 		metricsConstants = MetricsConstants.valueOf(
-				prefs.getString(METRICS_CONSTANTS_KEY, MetricsConstants.KILOMETERS_AND_METERS.name)
+			prefs.getString(METRICS_CONSTANTS_KEY, MetricsConstants.KILOMETERS_AND_METERS.name)
 		)
 		speedConstants = SpeedConstants.valueOf(
-				prefs.getString(SPEED_CONSTANTS_KEY, SpeedConstants.KILOMETERS_PER_HOUR.name)
+			prefs.getString(SPEED_CONSTANTS_KEY, SpeedConstants.KILOMETERS_PER_HOUR.name)
 		)
 
 		sendMyLocationInterval =
 				prefs.getLong(SEND_MY_LOCATION_INTERVAL_KEY, SEND_MY_LOCATION_INTERVAL_DEFAULT)
 		userLocationExpireTime =
 				prefs.getLong(USER_LOCATION_EXPIRE_TIME_KEY, USER_LOCATION_EXPIRE_TIME_DEFAULT)
+	}
+
+	private fun updatePrefs() {
+		val prefs = app.getSharedPreferences(SETTINGS_NAME, Context.MODE_PRIVATE)
+		val idsInUse = prefs.getBoolean(TITLES_REPLACED_WITH_IDS, false)
+		if (!idsInUse) {
+			val edit = prefs.edit()
+
+			edit.putStringSet(SHARE_LOCATION_CHATS_KEY, emptySet())
+			edit.putStringSet(SHOW_ON_MAP_CHATS_KEY, emptySet())
+			edit.putBoolean(TITLES_REPLACED_WITH_IDS, true)
+
+			edit.apply()
+		}
 	}
 }
