@@ -105,7 +105,7 @@ class TelegramHelper private constructor() {
 	fun getUser(id: Int) = users[id]
 
 	fun getUserMessage(user: TdApi.User) =
-		usersLocationMessages.values.firstOrNull { it.senderUserId == user.id }
+			usersLocationMessages.values.firstOrNull { it.senderUserId == user.id }
 
 	fun getChatMessages(chatId: Long) =
 			usersLocationMessages.values.filter { it.chatId == chatId }
@@ -133,7 +133,7 @@ class TelegramHelper private constructor() {
 	private fun updateChatIds() {
 		chatTitles.clear()
 		for (chatEntry in chats.entries) {
-            chatTitles[chatEntry.value.title] = chatEntry.key
+			chatTitles[chatEntry.value.title] = chatEntry.key
 		}
 	}
 
