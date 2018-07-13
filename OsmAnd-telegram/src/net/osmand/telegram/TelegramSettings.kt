@@ -117,7 +117,7 @@ class TelegramSettings(private val app: TelegramApplication) {
 
 		val shareLocationChats = mutableSetOf<Long>()
 		val shareLocationChatsSet = prefs.getStringSet(SHARE_LOCATION_CHATS_KEY, mutableSetOf())
-        
+
 		val showOnMapChats = mutableSetOf<Long>()
 		val showOnMapChatsSet = prefs.getStringSet(SHOW_ON_MAP_CHATS_KEY, mutableSetOf())
 
@@ -126,22 +126,22 @@ class TelegramSettings(private val app: TelegramApplication) {
 			shareLocationChatsSet.clear()
 			afterMovingChatTitleToChatId = true
 		}
-        
-        for (chatId in shareLocationChatsSet) {
-            shareLocationChats.add(chatId.toLong())
-        }
-        this.shareLocationChats = shareLocationChats
 
-        for (chatId in showOnMapChatsSet) {
+		for (chatId in shareLocationChatsSet) {
+			shareLocationChats.add(chatId.toLong())
+		}
+		this.shareLocationChats = shareLocationChats
+
+		for (chatId in showOnMapChatsSet) {
 			showOnMapChats.add(chatId.toLong())
 		}
 		this.showOnMapChats = showOnMapChats
 
 		metricsConstants = MetricsConstants.valueOf(
-			prefs.getString(METRICS_CONSTANTS_KEY, MetricsConstants.KILOMETERS_AND_METERS.name)
+				prefs.getString(METRICS_CONSTANTS_KEY, MetricsConstants.KILOMETERS_AND_METERS.name)
 		)
 		speedConstants = SpeedConstants.valueOf(
-			prefs.getString(SPEED_CONSTANTS_KEY, SpeedConstants.KILOMETERS_PER_HOUR.name)
+				prefs.getString(SPEED_CONSTANTS_KEY, SpeedConstants.KILOMETERS_PER_HOUR.name)
 		)
 
 		sendMyLocationInterval =
