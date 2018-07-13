@@ -78,19 +78,14 @@ class SetTimeDialogFragment : DialogFragment() {
 			text = getString(R.string.shared_string_share)
 			setOnClickListener {
 				chatIdsToDuration.forEach { chatId, expireTime ->
-					settings.shareLocationToChat(chatId, true)
-					settings.updateChatIdToDuration(chatId, expireTime)
+					settings.shareLocationToChat(chatId, true, expireTime)
 				}
-				if (settings.hasAnyChatToShareLocation()) {
-					if (!AndroidUtils.isLocationPermissionAvailable(view.context)) {
-						AndroidUtils.requestLocationPermission(activity!!)
-					} else {
-						app.shareLocationHelper.startSharingLocation()
-					}
+				if (!AndroidUtils.isLocationPermissionAvailable(view.context)) {
+					AndroidUtils.requestLocationPermission(activity!!)
 				} else {
-					app.shareLocationHelper.stopSharingLocation()
+					app.shareLocationHelper.startSharingLocation()
+					dismiss()
 				}
-				dismiss()
 			}
 		}
 
