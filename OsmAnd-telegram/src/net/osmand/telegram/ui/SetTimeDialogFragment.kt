@@ -80,8 +80,8 @@ class SetTimeDialogFragment : DialogFragment() {
 				if (!AndroidUtils.isLocationPermissionAvailable(view.context)) {
 					AndroidUtils.requestLocationPermission(activity!!)
 				} else {
-					chatLivePeriods.forEach { chatId, expireTime ->
-						settings.shareLocationToChat(chatId, true, expireTime)
+					chatLivePeriods.forEach { chatId, livePeriod ->
+						settings.shareLocationToChat(chatId, true, livePeriod)
 					}
 					app.shareLocationHelper.startSharingLocation()
 					dismiss()
@@ -111,8 +111,8 @@ class SetTimeDialogFragment : DialogFragment() {
 		chatLivePeriods.clear()
 		bundle?.getLongArray(CHATS_KEY)?.also {
 			for (i in 0 until it.size step 2) {
-				val expireTime = settings.getChatLivePeriod(it[i])
-				chatLivePeriods[it[i]] = expireTime ?: it[i + 1]
+				val livePeriod = settings.getChatLivePeriod(it[i])
+				chatLivePeriods[it[i]] = livePeriod ?: it[i + 1]
 			}
 		}
 	}
