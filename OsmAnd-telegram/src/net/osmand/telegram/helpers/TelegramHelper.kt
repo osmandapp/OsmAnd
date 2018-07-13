@@ -104,10 +104,10 @@ class TelegramHelper private constructor() {
 	fun getUser(id: Int) = users[id]
 
 	fun getUserMessage(user: TdApi.User) =
-			usersLocationMessages.values.firstOrNull { it.senderUserId == user.id }
+		usersLocationMessages.values.firstOrNull { it.senderUserId == user.id }
 
 	fun getChatMessages(chatId: Long) =
-			usersLocationMessages.values.filter { it.chatId == chatId }
+		usersLocationMessages.values.filter { it.chatId == chatId }
 
 	fun getMessages() = usersLocationMessages.values.toList()
 
@@ -363,9 +363,8 @@ class TelegramHelper private constructor() {
 			}
 			removeOldMessages(message.senderUserId, message.chatId)
 			usersLocationMessages[message.id] = message
-			val chatId = message.chatId
-				incomingMessagesListeners.forEach {
-					it.onReceiveChatLocationMessages(chatId, message)
+			incomingMessagesListeners.forEach {
+				it.onReceiveChatLocationMessages(message.chatId, message)
 			}
 		}
 	}
@@ -840,9 +839,8 @@ class TelegramHelper private constructor() {
 						synchronized(message) {
 							message.editDate = updateMessageEdited.editDate
 						}
-						val chatId = message.chatId
 						incomingMessagesListeners.forEach {
-							it.onReceiveChatLocationMessages(chatId, message)
+							it.onReceiveChatLocationMessages(message.chatId, message)
 						}
 					}
 				}
@@ -862,9 +860,8 @@ class TelegramHelper private constructor() {
 								newContent
 							}
 						}
-						val chatId = message.chatId
 						incomingMessagesListeners.forEach {
-							it.onReceiveChatLocationMessages(chatId, message)
+							it.onReceiveChatLocationMessages(message.chatId, message)
 						}
 					}
 				}
