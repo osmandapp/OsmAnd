@@ -355,7 +355,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 		override fun onBindViewHolder(holder: ChatViewHolder, position: Int) {
 			val chat = chats[position]
 			val lastItem = position == itemCount - 1
-			val placeholderId: Int = if (telegramHelper.isGroup(chat)) R.drawable.img_group_picture else R.drawable.img_user_picture
+			val placeholderId = if (telegramHelper.isGroup(chat)) R.drawable.img_group_picture else R.drawable.img_user_picture
 			val live = app.settings.isSharingLocationToChat(chat.id)
 
 			TelegramUiHelper.setupPhoto(app, holder.icon, chat.photo?.small?.local?.path, placeholderId, false)
