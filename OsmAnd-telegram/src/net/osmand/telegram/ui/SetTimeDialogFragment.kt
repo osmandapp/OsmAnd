@@ -3,6 +3,7 @@ package net.osmand.telegram.ui
 import android.app.TimePickerDialog
 import android.os.Bundle
 import android.support.v4.app.DialogFragment
+import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
@@ -84,6 +85,9 @@ class SetTimeDialogFragment : DialogFragment() {
 						settings.shareLocationToChat(chatId, true, livePeriod)
 					}
 					app.shareLocationHelper.startSharingLocation()
+					targetFragment?.also {
+						it.onActivityResult(targetRequestCode, LOCATION_SHARED_REQUEST_CODE, null)
+					}
 					dismiss()
 				}
 			}
@@ -235,12 +239,14 @@ class SetTimeDialogFragment : DialogFragment() {
 
 	companion object {
 
+		const val LOCATION_SHARED_REQUEST_CODE = 0
+
 		private const val TAG = "SetTimeDialogFragment"
 		private const val CHATS_KEY = "chats_key"
 		private const val DEFAULT_VISIBLE_TIME_SECONDS = 60 * 60L // 1 hour
 		private const val NO_VALUE = -1L
 
-		fun showInstance(fm: FragmentManager, chatIds: Set<Long>): Boolean {
+		fun showInstance(fm: FragmentManager, chatIds: Set<Long>, target: Fragment): Boolean {
 			return try {
 				val chats = mutableListOf<Long>()
 				for (id in chatIds) {
@@ -249,6 +255,7 @@ class SetTimeDialogFragment : DialogFragment() {
 				}
 				SetTimeDialogFragment().apply {
 					arguments = Bundle().apply { putLongArray(CHATS_KEY, chats.toLongArray()) }
+					setTargetFragment(target, LOCATION_SHARED_REQUEST_CODE)
 					show(fm, TAG)
 				}
 				true
