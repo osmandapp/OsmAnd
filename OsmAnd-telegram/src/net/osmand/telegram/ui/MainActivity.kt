@@ -1,6 +1,5 @@
 package net.osmand.telegram.ui
 
-import android.Manifest
 import android.app.Dialog
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -52,6 +51,7 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 		get() = application as TelegramApplication
 
 	private val telegramHelper get() = app.telegramHelper
+	private val localDataHelper get() = app.localDataHelper
 	private val osmandAidlHelper get() = app.osmandAidlHelper
 	private val settings get() = app.settings
 
@@ -159,9 +159,9 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 		if (AndroidUtils.isLocationPermissionAvailable(this)) {
 			app.locationProvider.resumeAllUpdates()
 		} else {
-			requestLocationPermission()
+			AndroidUtils.requestLocationPermission(this)
 		}
-		if (settings.hasAnyChatToShowOnMap() && osmandAidlHelper.isOsmandNotInstalled()) {
+		if (localDataHelper.hasAnyChatToShowOnMap() && osmandAidlHelper.isOsmandNotInstalled()) {
 			showOsmandMissingDialog()
 		}
 	}
@@ -207,7 +207,7 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 
 	override fun onTelegramChatsRead() {
 		runOnUi {
-			removeNonexistingChatsFromSettings()
+			removeNonexistingChatsFromDatabase()
 			listeners.forEach { it.get()?.onTelegramChatsRead() }
 		}
 	}
@@ -257,9 +257,9 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 		}
 	}
 
-	private fun removeNonexistingChatsFromSettings() {
-		val presentChatTitles = telegramHelper.getChatTitles()
-		settings.removeNonexistingChats(presentChatTitles)
+	private fun removeNonexistingChatsFromDatabase() {
+		val presentChatTitles = telegramHelper.getChatIds()
+        localDataHelper.removeNonexistingChats(presentChatTitles)
 	}
 
 	fun loginTelegram() {
@@ -272,6 +272,7 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 	fun logoutTelegram(silent: Boolean = false) {
 		if (telegramHelper.getTelegramAuthorizationState() == TelegramAuthorizationState.READY) {
 			telegramHelper.logout()
+            localDataHelper.clearAll()
 		} else {
 			invalidateOptionsMenu()
 			updateTitle()
@@ -373,10 +374,6 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 		}
 	}
 
-	private fun requestLocationPermission() {
-		ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), PERMISSION_REQUEST_LOCATION)
-	}
-
 	override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
 		super.onRequestPermissionsResult(requestCode, permissions, grantResults)
 		if (grantResults.isEmpty()) {
@@ -385,15 +382,15 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 		when (requestCode) {
 			PERMISSION_REQUEST_LOCATION -> {
 				if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-					if (settings.hasAnyChatToShareLocation()) {
+					if (localDataHelper.hasAnyChatToShareLocation()) {
 						app.shareLocationHelper.startSharingLocation()
 					}
 					app.locationProvider.resumeAllUpdates()
 				} else {
-					settings.stopSharingLocationToChats()
+                    localDataHelper.stopSharingLocationToChats()
 					app.shareLocationHelper.stopSharingLocation()
 				}
-				if (settings.hasAnyChatToShowOnMap() && osmandAidlHelper.isOsmandNotInstalled()) {
+				if (localDataHelper.hasAnyChatToShowOnMap() && osmandAidlHelper.isOsmandNotInstalled()) {
 					showOsmandMissingDialog()
 				}
 			}
@@ -452,6 +449,7 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 		override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 			val chat = chats[position]
 			val chatTitle = chat.title
+			val chatId = chat.id
 			holder.groupName?.text = chatTitle
 
 			var drawable: Drawable? = null
@@ -469,13 +467,13 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 				holder.icon?.setImageDrawable(drawable)
 			}
 			holder.shareLocationSwitch?.setOnCheckedChangeListener(null)
-			holder.shareLocationSwitch?.isChecked = settings.isSharingLocationToChat(chatTitle)
+			holder.shareLocationSwitch?.isChecked = localDataHelper.isSharingLocationToChat(chatId)
 			holder.shareLocationSwitch?.setOnCheckedChangeListener { view, isChecked ->
-				settings.shareLocationToChat(chatTitle, isChecked)
-				if (settings.hasAnyChatToShareLocation()) {
+                localDataHelper.shareLocationToChat(chatId, isChecked)
+				if (localDataHelper.hasAnyChatToShareLocation()) {
 					if (!AndroidUtils.isLocationPermissionAvailable(view.context)) {
 						if (isChecked) {
-							requestLocationPermission()
+							AndroidUtils.requestLocationPermission(this@MainActivity)
 						}
 					} else {
 						app.shareLocationHelper.startSharingLocation()
@@ -486,26 +484,26 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 			}
 
 			holder.showOnMapSwitch?.setOnCheckedChangeListener(null)
-			holder.showOnMapSwitch?.isChecked = settings.isShowingChatOnMap(chatTitle)
+			holder.showOnMapSwitch?.isChecked = localDataHelper.isShowingChatOnMap(chatId)
 			holder.showOnMapSwitch?.setOnCheckedChangeListener { _, isChecked ->
-				settings.showChatOnMap(chatTitle, isChecked)
-				if (settings.hasAnyChatToShowOnMap()) {
+                localDataHelper.showChatOnMap(chatId, isChecked)
+				if (localDataHelper.hasAnyChatToShowOnMap()) {
 					if (osmandAidlHelper.isOsmandNotInstalled()) {
 						if (isChecked) {
 							showOsmandMissingDialog()
 						}
 					} else {
 						if (isChecked) {
-							app.showLocationHelper.showChatMessages(chatTitle)
+							app.showLocationHelper.showChatMessages(chatId)
 						} else {
-							app.showLocationHelper.hideChatMessages(chatTitle)
+							app.showLocationHelper.hideChatMessages(chatId)
 						}
 						app.showLocationHelper.startShowingLocation()
 					}
 				} else {
 					app.showLocationHelper.stopShowingLocation()
 					if (!isChecked) {
-						app.showLocationHelper.hideChatMessages(chatTitle)
+						app.showLocationHelper.hideChatMessages(chatId)
 					}
 				}
 			}

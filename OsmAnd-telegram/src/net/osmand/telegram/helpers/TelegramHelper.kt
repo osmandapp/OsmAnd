@@ -27,6 +27,7 @@ class TelegramHelper private constructor() {
 		private const val IGNORED_ERROR_CODE = 406
 		private const val UPDATE_LIVE_MESSAGES_INTERVAL_SEC = 30L
 		private const val MESSAGE_ACTIVE_TIME_SEC = 24 * 60 * 60 // 24 hours
+		private const val LOCATION_MESSAGE_DEFAULT_LIVE_TIME_SEC = 60 * 60 // 1 hour
 
 		// min and max values for the Telegram API
 		const val MIN_LOCATION_MESSAGE_LIVE_PERIOD_SEC = 61
@@ -98,7 +99,7 @@ class TelegramHelper private constructor() {
 		}
 	}
 
-	fun getChatTitles() = chatTitles.keys().toList()
+	fun getChatIds() = chats.keys().toList()
 
 	fun getChat(id: Long) = chats[id]
 
@@ -107,8 +108,8 @@ class TelegramHelper private constructor() {
 	fun getUserMessage(user: TdApi.User) =
 		usersLocationMessages.values.firstOrNull { it.senderUserId == user.id }
 
-	fun getChatMessages(chatTitle: String) =
-		usersLocationMessages.values.filter { chats[it.chatId]?.title == chatTitle }
+	fun getChatMessages(chatId: Long) =
+		usersLocationMessages.values.filter { chats[it.chatId]?.id == chatId }
 
 	fun getMessages() = usersLocationMessages.values.toList()
 
@@ -172,7 +173,7 @@ class TelegramHelper private constructor() {
 	}
 
 	interface TelegramIncomingMessagesListener {
-		fun onReceiveChatLocationMessages(chatTitle: String, vararg messages: TdApi.Message)
+		fun onReceiveChatLocationMessages(chatId: Long, vararg messages: TdApi.Message)
 		fun updateLocationMessages()
 	}
 
@@ -372,12 +373,10 @@ class TelegramHelper private constructor() {
 			}
 			removeOldMessages(message.senderUserId, message.chatId)
 			usersLocationMessages[message.id] = message
-			val chatTitle = chats[message.chatId]?.title
-			if (chatTitle != null) {
-				incomingMessagesListeners.forEach {
-					it.onReceiveChatLocationMessages(chatTitle, message)
-				}
-			}
+			val chatId = message.chatId
+            incomingMessagesListeners.forEach {
+                it.onReceiveChatLocationMessages(chatId, message)
+            }
 		}
 	}
 
@@ -397,15 +396,15 @@ class TelegramHelper private constructor() {
 	 * @latitude Latitude of the location
 	 * @longitude Longitude of the location
 	 */
-	fun sendLiveLocationMessage(chatTitles: List<String>, livePeriod: Int, latitude: Double, longitude: Double): Boolean {
+	fun sendLiveLocationMessage(chatIds: List<Long>, savedChatProps: List<ChatProps>, latitude: Double, longitude: Double): Boolean {
 		if (!requestingActiveLiveLocationMessages && haveAuthorization) {
 			if (needRefreshActiveLiveLocationMessages) {
 				getActiveLiveLocationMessages {
-					sendLiveLocationImpl(chatTitles, livePeriod, latitude, longitude)
+					sendLiveLocationImpl(chatIds, savedChatProps, latitude, longitude)
 				}
 				needRefreshActiveLiveLocationMessages = false
 			} else {
-				sendLiveLocationImpl(chatTitles, livePeriod, latitude, longitude)
+				sendLiveLocationImpl(chatIds, savedChatProps, latitude, longitude)
 			}
 			return true
 		}
@@ -440,27 +439,29 @@ class TelegramHelper private constructor() {
 		}
 	}
 
-	private fun sendLiveLocationImpl(chatTitles: List<String>, livePeriod: Int, latitude: Double, longitude: Double) {
-		val lp = when {
-			livePeriod < MIN_LOCATION_MESSAGE_LIVE_PERIOD_SEC -> MIN_LOCATION_MESSAGE_LIVE_PERIOD_SEC
-			livePeriod > MAX_LOCATION_MESSAGE_LIVE_PERIOD_SEC -> MAX_LOCATION_MESSAGE_LIVE_PERIOD_SEC
-			else -> livePeriod
-		}
+	private fun sendLiveLocationImpl(chatIds: List<Long>, savedChatProps: List<ChatProps>, latitude: Double, longitude: Double) {
 		val location = TdApi.Location(latitude, longitude)
-		val content = TdApi.InputMessageLocation(location, lp)
-
-		for (chatTitle in chatTitles) {
-			val chatId = this.chatTitles[chatTitle]
-			if (chatId != null) {
-				val msgId = chatLiveMessages[chatId]
-				if (msgId != null) {
-					if (msgId != 0L) {
-						client?.send(TdApi.EditMessageLiveLocation(chatId, msgId, null, location), liveLocationMessageUpdatesHandler)
-					}
-				} else {
-					chatLiveMessages[chatId] = 0L
-					client?.send(TdApi.SendMessage(chatId, 0, false, true, null, content), liveLocationMessageUpdatesHandler)
+		var livePeriod: Int = LOCATION_MESSAGE_DEFAULT_LIVE_TIME_SEC
+		for (chatId in chatIds) {
+			savedChatProps.forEach { chat ->
+				if (chat.id == chatId) {
+					livePeriod = chat.expireTime.toInt()
 				}
+			}
+			livePeriod = when {
+				livePeriod < MIN_LOCATION_MESSAGE_LIVE_PERIOD_SEC -> MIN_LOCATION_MESSAGE_LIVE_PERIOD_SEC
+				livePeriod > MAX_LOCATION_MESSAGE_LIVE_PERIOD_SEC -> MAX_LOCATION_MESSAGE_LIVE_PERIOD_SEC
+				else -> livePeriod
+			}
+			val content = TdApi.InputMessageLocation(location, livePeriod)
+			val msgId = chatLiveMessages[chatId]
+			if (msgId != null) {
+				if (msgId != 0L) {
+					client?.send(TdApi.EditMessageLiveLocation(chatId, msgId, null, location), liveLocationMessageUpdatesHandler)
+				}
+			} else {
+				chatLiveMessages[chatId] = 0L
+				client?.send(TdApi.SendMessage(chatId, 0, false, true, null, content), liveLocationMessageUpdatesHandler)
 			}
 		}
 	}
@@ -856,12 +857,10 @@ class TelegramHelper private constructor() {
 						synchronized(message) {
 							message.editDate = updateMessageEdited.editDate
 						}
-						val chatTitle = chats[message.chatId]?.title
-						if (chatTitle != null) {
-							incomingMessagesListeners.forEach {
-								it.onReceiveChatLocationMessages(chatTitle, message)
-							}
-						}
+                        val chatId = message.chatId
+                        incomingMessagesListeners.forEach {
+                            it.onReceiveChatLocationMessages(chatId, message)
+                        }
 					}
 				}
 				TdApi.UpdateMessageContent.CONSTRUCTOR -> {
@@ -880,13 +879,11 @@ class TelegramHelper private constructor() {
 								newContent
 							}
 						}
-						val chatTitle = chats[message.chatId]?.title
-						if (chatTitle != null) {
-							incomingMessagesListeners.forEach {
-								it.onReceiveChatLocationMessages(chatTitle, message)
-							}
-						}
-					}
+						val chatId = message.chatId
+                        incomingMessagesListeners.forEach {
+                            it.onReceiveChatLocationMessages(chatId, message)
+                        }
+                    }
 				}
 				TdApi.UpdateNewMessage.CONSTRUCTOR -> {
 					addNewMessage((obj as TdApi.UpdateNewMessage).message)
