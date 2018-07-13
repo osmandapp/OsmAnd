@@ -249,29 +249,14 @@ Du hittar din parkeringsplats och -tid på instrumentbrädan och i widgeten på 
     <string name="test_voice_prompts">Test av röstmeddelanden</string>
     <string name="switch_to_raster_map_to_see">Det finns ingen offline vektorkarta för den här platsen. Du kan ladda ner en i Inställningar (Hantera kartfiler) eller byta till online-kartor (aktivera modulen för online-kartor för detta).</string>
 
-    <string name="osmand_long_description_1000_chars">"
- OsmAnd (Open Street Maps Automated Navigation Directions)
-
-OsmAnd är ett öpen källkodsprogram med tillgång till ett brett utbud av global OpenStreetMap-data. All kartdata (vektor- eller rasterkartor) kan lagras i telefonens minneskort för offlineanvändning. OsmAnd erbjuder även navigering offline och online, inklusive röstguidning.
-Några av de viktigaste funktionerna:
-- Komplett offline-funktionalitet (lagra nedladdade vektorkartor eller kartbitar på enheten)
-- Kompakta offline-vektorkartor för hela världen finns tillgängliga
-- Nedladdning av land- eller regionkartor direkt från appen
-- Överlägg av flera kartlager möjligt, som GPX- eller navigationsspår, sevärdheter, favoriter, höjddata, offentliga hållplatser, extra kartor med anpassningsbara transparens
-- Sökning offline efter adresser och platser (POIs)
-- Offline-dirigering för medellånga sträckor (experimentell)
-- Bil-, cykel- och fotgängarlägen med:
-- Tillval automatisk växling mellan dag- och nattvisning
-- Tillval hastighetsberoende zoomning
-- Valfri inställningen enligt kompass eller färdriktningen
-- Frivillig körfältsvägledning, visning av hastighetsgräns, inspelade röster samt TTS-röster
-
-Begränsningar i denna gratisversion av OsmAnd:
-- Antalet nedladdningar av kartor är begränsad
-- Ingen tillgång till Wikipedia offline POIs
-
-OsmAnd utvecklas aktivt och vårt projekt och dess fortsatta framsteg bygger på ekonomiska bidrag för att finansiera utveckling och testning av ny funktionalitet. Vänligen överväg att köpa OsmAnd+, finansiera specifika nya funktioner eller göra en allmän donation på osmand.net.
- "</string>
+    <string name="osmand_long_description_1000_chars">"OsmAnd (Open Street Maps Automated Navigation Directions)
+\n
+\nOsmAnd är ett öppen källkodsprogram med tillgång till ett brett utbud av global OpenStreetMap-data. Alla kartdata (vektor- eller rasterkartor) kan lagras i telefonens minneskort för offlineanvändning. OsmAnd erbjuder även navigering offline och online, inklusive röstguidning. Några av de viktigaste funktionerna: - Komplett offline-funktionalitet (lagra nedladdade vektorkartor eller kartbitar på enheten) - Kompakta offline-vektorkartor för hela världen finns tillgängliga - Nedladdning av land- eller regionkartor direkt från appen - Överlägg av flera kartlager möjligt, som GPX- eller navigationsspår, sevärdheter, favoriter, höjddata, offentliga hållplatser, extra kartor med anpassningsbara transparens - Sökning offline efter adresser och platser (POIs) - Offline-dirigering för medellånga sträckor (experimentell) - Bil-, cykel- och fotgängarlägen med: - Tillval automatisk växling mellan dag- och nattvisning - Tillval hastighetsberoende zoomning - Valfri inställningen enligt kompass eller färdriktningen - Frivillig körfältsvägledning, visning av hastighetsgräns, inspelade röster samt TTS-röster
+\n
+\nBegränsningar i denna gratisversion av OsmAnd: - Antalet nedladdningar av kartor är begränsat - Ingen tillgång till Wikipedia offline POIs
+\n
+\nOsmAnd utvecklas aktivt och vårt projekt och dess fortsatta framsteg bygger på ekonomiska bidrag för att finansiera utveckling och testning av ny funktionalitet. Vänligen överväg att köpa OsmAnd+, finansiera specifika nya funktioner eller göra en allmän donation på osmand.net.
+\n "</string>
     <string name="native_rendering">Inbyggd rendering</string>
     <string name="default_buttons_support">Support</string>
     <string name="support_new_features">Ge stöd till nya funktioner</string>
@@ -746,7 +731,7 @@ Nyttjat utrymme är {1} MB.
     <string name="update_poi_no_offline_poi_index">Inga offline POI-data tillgängliga för detta område</string>
     <string name="update_poi_is_not_available_for_zoom">Det går inte att uppdatera POI för små zoomnivåer</string>
     <string name="context_menu_item_update_poi">Uppdatera intressepunkt</string>
-    <string name="context_menu_item_update_map_confirm">Uppdatera lokala data via Internet?</string>
+    <string name="context_menu_item_update_map_confirm">Uppdatera lokala data från Internet?</string>
     <string name="search_history_city">Stad: {0}</string>
     <string name="search_history_street">Gata: {0},{1}</string>
     <string name="search_history_building">Byggnad: {0},{1},{2}</string>
@@ -762,7 +747,7 @@ Nyttjat utrymme är {1} MB.
     <string name="route_general_information">Total sträcka %1$s, restid %2$d h %3$d min.</string>
     <string name="router_service_descr">Välj en online- eller offline-navigeringstjänst.</string>
     <string name="router_service">Navigeringstjänst</string>
-    <string name="sd_dir_not_accessible">Datalagringsmappen på SD-kortet är inte tillgänglig!</string>
+    <string name="sd_dir_not_accessible">Datalagringsmappen på minneskortet är inte tillgänglig!</string>
     <string name="download_question">Ladda ner {0} - {1}?</string>
     <string name="download_question_exist">Offline-data för {0} finns redan ({1}). Vill du uppdatera den ({2})?</string>
     <string name="address">Adresser</string>
@@ -912,8 +897,8 @@ Nyttjat utrymme är {1} MB.
     <string name="av_settings">Inställningar för ljud och video </string>
     <string name="recording_error">Ett fel uppstod under inspelningen </string>
     <string name="recording_camera_not_available">Ingen kamera tillgänglig</string>
-    <string name="srtm_plugin_description">"Denna modul erbjuder överlägg med höjdkurvor som kan visas i kombination med OsmAnds standardkartor. Denna funktion kommer att uppskattas av idrottsmän, vandrare och alla som är intresserade av höjdskillnander i landskapet.
-\n
+    <string name="srtm_plugin_description">"Denna modul erbjuder överlägg med höjdkurvor som kan visas i kombination med OsmAnds standardkartor. Denna funktion kommer att uppskattas av idrottsmän, vandrare och alla som är intresserade av höjdskillnader i landskapet. 
+\n 
 \nDessa globala data (mellan 70 grader norr och 70 grader syd) baseras på mätningar av SRTM (Shuttle Radar Topography Mission) och ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), ett bildinstrument ombord Terra, flaggskeppet i NASA:s Earth Observing System. ASTER är ett samprojekt mellan NASA, Japans Ministry of Economy, Trade and Industry (METI), and Japan Space Systems (J-spacesystems). "</string>
     <string name="delete_target_point">Ta bort destination</string>
     <string name="intermediate_point">Mellanliggande destination %1$s</string>
@@ -1405,7 +1390,7 @@ Nyttjat utrymme är {1} MB.
     <string name="arrival_distance_descr">Hur tidigt vill du höra ankomstmeddelandet?</string>
 
     <string name="create_poi_link_to_osm_doc"><u>Online OSM</u>-kartklassificering med bilder.</string>
-    <string name="import_file_favourites">Spara data som GPX-fil eller importera waypoints till favoriter?</string>
+    <string name="import_file_favourites">Spara data som GPX-fil eller importera waypoints till \"Favoriter\"?</string>
     <string name="share_fav_subject">Favoriter utdelade via OsmAnd</string>
     <string name="commiting_node">Skickar nod…</string>
     <string name="none_selected_gpx">Inga GPX-filer markerade. För att markera tryck och håll ned ett tillgängligt spår.</string>
@@ -2803,7 +2788,7 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="nothing_found_in_radius">Kunde inte hitta något inom:</string>
     <string name="select_waypoints_category_description">Lägg till alla spårens vägpunkter, eller välj separata kategorier.</string>
     <string name="shared_string_total">Totalt</string>
-    <string name="osmand_plus_extended_description_part1">OsmAnd+ (OSM Automated Navigation Directions) är en kartnavigationsapp med tillgång till gratis världsomfattande och högkvalitativa OpenStreetMap(OSM)-data. Njut av röst- och visuell navigation, visning av POI(points of interest - intressepunkter), att skapa och hantera GPX-spår, se höjdkurvor och höjdinfo, välja mellan bil-cykel- och fotgängarlägen, OSM-redigering och mycket mer. OsmAnd+ är en betald version av appen. Genom att köpa den, stödjer du projektet, finansierar utveckling av nya funktioner, och får de senaste uppdateringarna. Några av de viktigaste funktionerna:</string>
+    <string name="osmand_plus_extended_description_part1">OsmAnd+ (OSM Automated Navigation Directions) är en kartnavigationsapp med tillgång till gratis världsomfattande och högkvalitativa OpenStreetMap (OSM)-data. Njut av röst- och visuell navigation, visning av POI (points of interest - intressepunkter), att skapa och hantera GPX-spår, se höjdkurvor och höjdinfo, välja mellan bil-cykel- och fotgängarlägen, OSM-redigering och mycket mer. OsmAnd+ är en betalversion av appen. Genom att köpa den, stödjer du projektet, finansierar utveckling av nya funktioner, och får de senaste uppdateringarna. Några av de viktigaste funktionerna:</string>
     <string name="osmand_plus_extended_description_part2">Navigering • Fungerar på nätet (snabb) eller offline (inga roaming-avgifter när du är utomlands) • Sväng-för-sväng-röstguidning (inspelade och syntetiska röster) • Valfri körfältsguide, gatunamn visas, och beräknad ankomsttid • Stödjer mellanliggande punkter på din resplan • Automatisk omdirigering när du avviker från rutten • Sök platser efter adress eller typ (t ex: restaurang, hotell, bensinstation, museum), eller med geografiska koordinater</string>
     <string name="osmand_plus_extended_description_part3">Kartvisning • Visa din position och orientering • Eventuellt justera bilden i förhållande till kompass eller din riktning • Spara dina mest viktiga platser som Favoriter • Visa POI(Points Of Interests - intressepunkter) runt omkring dig • Visa specialiserade onlineraster, satellitvisning (Bing), olika lager som turnering/navigering GPX-spår och ytterligare lager med anpassningsbar transparens • Alternativt visa namn på engelska, lokalt språk eller fonetisk stavning</string>
     <string name="live_monitoring_max_interval_to_send">Tidsbuffert för online-spårning</string>
@@ -2913,13 +2898,13 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="index_item_world_wikivoyage">Världsomspännande Wikivoyage-artiklar</string>
     <string name="access_intermediate_arrival_time">Mellanliggande ankomsttid</string>
     <string name="map_widget_intermediate_time">Mellanliggande tid</string>
-    <string name="osmand_plus_extended_description_part4">Använda OSM-Data och Wikipedia
-\n• Högkvalitetsinformation från de bästa samarbetsprojekten i världen
-\n• OSM-data som är tillgängliga per land eller region
-\n• Wikipedia Intressepunkter, perfekt för sightseeing
-\n• Obegränsat antal gratis nedladdningar, direkt från appen
-\n• Kompakt offline vektorkartor uppdateras minst en gång i månaden
-\n
+    <string name="osmand_plus_extended_description_part4">Använda data från OSM och Wikipedia 
+\n• Högkvalitetsinformation från de bästa samarbetsprojekten i världen 
+\n• OSM-data som är tillgängliga per land eller region 
+\n• Wikipedia Intressepunkter, perfekt för sightseeing 
+\n• Obegränsat antal gratis nedladdningar, direkt från appen 
+\n• Kompakta offline vektorkartor som uppdateras minst en gång i månaden 
+\n 
 \n• Val mellan hela regionen data och bara vägnätet (Exempel: Hela Japan är 700 MB eller endast vägnätet för 200 MB)</string>
     <string name="osmand_plus_extended_description_part5">Säkerhetsfunktioner • Valfri växling mellan dag-/nattläge • Valfri visning av hastighet, med en påminnelse om du överskrider den • Valfri hastighetsbaserad zoomning • Dela din position så att dina vänner kan hitta dig</string>
     <string name="osmand_plus_extended_description_part6">Funktioner för cykel och gående • Se vägar för gående och cyklande samt vandringsstigar, utmärkta för utomhusaktiviteter • Speciella ruttval och visningsläge för cykel och gående • Valfria kollektivtrafiksplatser (buss, spårvagn, tåg) inklusive linjenamn • Valfri reseinspelning till lokal GPX-fil eller onlinetjänst • Valfri visning av hastighet och höjd • Visa konturlinjer och höjdreliefer (via separat plugin)</string>
