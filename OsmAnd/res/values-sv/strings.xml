@@ -114,7 +114,7 @@ Proportionellt minne %4$s MB (Android-gräns %5$s MB, Dalvik %6$s MB).</string>
     <string name="osmand_parking_warning">Varning</string>
     <string name="osmand_parking_warning_text">En avisering om att hämta din bil har lagts till i din kalender. Den kommer att finnas där tills du tar bort den manuellt.</string>
     <string name="osmand_parking_time_limit_title">Ange tidsgränsen för parkeringen</string>
-    <string name="osmand_parking_delete_confirm">Vill du ta bort markören för parkeringsplatsen?</string>
+    <string name="osmand_parking_delete_confirm">Ta bort markören för parkeringsplatsen?</string>
     <string name="osmand_parking_delete">Ta bort P-markering</string>
     <string name="osmand_parking_choose_type">Välj typ av parkering</string>
     <string name="osmand_parking_lim_text">Tidsbegränsad</string>
@@ -819,9 +819,9 @@ Nyttjat utrymme är {1} MB.
     <string name="edit_filter_create_message">Filter {0} har skapats</string>
     <string name="poi_error_info_not_loaded">Info om noden laddades inte</string>
     <string name="poi_action_change">ändra</string>
-    <string name="poi_action_succeded_template">Åtgärden {0} slutfördes utan problem.</string>
+    <string name="poi_action_succeded_template">Åtgärden {0} slutfördes.</string>
     <string name="poi_error_unexpected_template">Ett oväntat fel uppstod vid åtgärden {0}.</string>
-    <string name="poi_error_io_error_template">Ett I/O-fel inträffade under åtgärden {0}.</string>
+    <string name="poi_error_io_error_template">I/O-fel när åtgärden {0} utfördes.</string>
     <string name="poi_remove_success">POI togs bort utan problem</string>
     <string name="poi_action_add">lägg till</string>
     <string name="add_favorite_dialog_favourite_added_template">Favoritpunkten \"{0}\" lades till utan problem.</string>
@@ -1750,7 +1750,7 @@ Long %2$s</string>
     <string name="welcome_header">Välkommen</string>
     <string name="agps_info">A-GPS-info</string>
     <string name="shared_string_message">Meddelande</string>
-    <string name="agps_data_last_downloaded">A-GPS-data senast nedladdat: %1$s</string>
+    <string name="agps_data_last_downloaded">A-GPS-data senast nedladdade: %1$s</string>
     <string name="shared_string_do_not_use">Använd inte</string>
     <string name="shared_string_address">Adress</string>
     <string name="shared_string_show_description">Visa beskrivning.</string>
@@ -1765,7 +1765,7 @@ Long %2$s</string>
     <string name="index_name_netherlands">Europa - Nederländerna</string>
     <string name="rendering_value_highContrastRoads_name">Högkontrastvägar</string>
     <string name="rendering_value__name">Standard</string>
-    <string name="application_dir_change_warning3">Vill du att OsmAnd kopierar även sina datafiler till den nya destinationen?</string>
+    <string name="application_dir_change_warning3">Kopiera OsmAnds datafiler till den nya destinationen?</string>
     <string name="specified_directiory_not_writeable">Kunde inte skapa kartor i den angivna mappen</string>
     <string name="copying_osmand_file_failed">Kopieringen misslyckades</string>
     <string name="storage_directory_external">Extern lagring</string>
@@ -1796,8 +1796,8 @@ Long %2$s</string>
     <string name="shared_string_import2osmand">Importera till OsmAnd</string>
     <string name="gps_network_not_enabled">Platstjänsten är inte aktiverad. Vill du slå på den?</string>
     <string name="disable_recording_once_app_killed_descrp">Gör paus i GPX-loggningen när appen stängs (via tidigare appar). (OsmAnds bakgrundsindikation försvinner från Androids aviseringsfält.)</string>
-    <string name="archive_wikipedia_data">Du har hämtat gamla och inkompatibla data från Wikipedia. Vill du arkivera dem?</string>
-    <string name="download_wikipedia_files">Vill du hämta ytterligare data från Wikipedia (%1$s MB)?</string>
+    <string name="archive_wikipedia_data">Du har gamla och inkompatibla data från Wikipedia. Vill du arkivera dem?</string>
+    <string name="download_wikipedia_files">Hämta ytterligare data från Wikipedia (%1$s MB)?</string>
     <string name="lang_vo">Volapük</string>
     <string name="lang_th">Thai</string>
     <string name="lang_te">Telugu</string>
@@ -2262,7 +2262,7 @@ Om du tycker om OsmAnd och OSM och vill stödja dem så är detta ett utmärkt s
     <string name="shared_string_filters">Filter</string>
     <string name="apply_filters">Applicera filter</string>
     <string name="save_filter">Spara filter</string>
-    <string name="delete_filter">Radera filter</string>
+    <string name="delete_filter">Ta bort filter</string>
     <string name="new_filter">Nytt filter</string>
     <string name="new_filter_desc">Ange ett namn på det nya filtret. Det kommer att finnas på kategorifliken.</string>
     <string name="translit_name_if_miss">"Transkribera om  %1$s namn saknas"</string>
@@ -2664,7 +2664,7 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="osc_file">OSC-fil</string>
     <string name="choose_file_type">Välj filtyp</string>
     <string name="osm_edits_export_desc">Välj typ av export: OSM-anteckningar, POI, eller båda.</string>
-    <string name="all_data">All data</string>
+    <string name="all_data">Alla data</string>
     <string name="osm_notes">OSM-anteckningar</string>
     <string name="will_open_tomorrow_at">Öppnar imorgon vid</string>
     <string name="rendering_attr_hidePOILabels_name">POI-etiketter</string>
@@ -2719,7 +2719,7 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="map_orientation_change_in_accordance_with_speed_descr">Välj nedan vilken hastighet kartläget växlar från \"riktning\" till \"kompass\".</string>
     <string name="show_direction">Avståndsindikering</string>
     <string name="measurement_tool_snap_to_road_descr">Charlott ansluter punkter med vägar för den valda profilen.</string>
-    <string name="mapillary_menu_descr_tile_cache">Ladda tiles för att se aktuell data.</string>
+    <string name="mapillary_menu_descr_tile_cache">Ladda tiles för att se aktuella data.</string>
     <string name="mapillary_menu_title_tile_cache">Tile-cache</string>
     <string name="mapillary_menu_filter_description">Filtrera bilderna enligt inlämnare eller datum. Filter tillämpas endast för närbildszoom.</string>
     <string name="map_widget_ruler_control">Radielinjal</string>
@@ -2986,12 +2986,12 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="wiki_article_not_found">Artikeln hittades inte</string>
     <string name="how_to_open_wiki_title">Hur man öppnar Wikipedia-artiklar?</string>
 <string name="point_deleted">Punkt %1$s borttagen</string>
-    <string name="coord_input_edit_point">Editera punkt</string>
+    <string name="coord_input_edit_point">Redigera punkt</string>
     <string name="coord_input_add_point">Lägg till punkt</string>
     <string name="coord_input_save_as_track">Spara som spår</string>
     <string name="coord_input_save_as_track_descr">Du lade till %1$s punkter. Skriv ett filnamn och tryck sedan på \"Spara\".</string>
-    <string name="error_notification_desc">Skicka gärna en skärmdump av det här meddelandet till support@osmand.net</string>
-    <string name="quick_action_edit_actions">Editera handlingar</string>
+    <string name="error_notification_desc">Skicka gärna en skärmdump av detta meddelande till support@osmand.net</string>
+    <string name="quick_action_edit_actions">Redigera åtgärder</string>
     <string name="get_osmand_live">Skaffa OsmAnd Live för att låsa upp alla features: Dagliga kartuppdateringar med obegränsat antal nedladdningar, alla betal-och gratistillägg, Wikipedia, Wikivoyage och mycket mer.</string>
     <string name="unirs_render_descr">Ändring av standardstilen för att öka kontrasten av gång och cykelvägar. Använder färger från tidigare versioner av Mapink.</string>
     <string name="shared_string_gpx_files">GPX-filer</string>
@@ -3006,4 +3006,5 @@ Vänligen tillhandahåll fullständig kod</string>
 \n • OsmAnd Live-prenumeration stödjer nu alla OsmAnd features
 \n
 \n</string>
+    <string name="quick_action_page_list_descr">Att trycka på denna åtgärdsknapp bläddrar genom listan nedan.</string>
     </resources>

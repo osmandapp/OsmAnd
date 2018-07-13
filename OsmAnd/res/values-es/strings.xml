@@ -282,7 +282,7 @@
     <string name="select_build_to_install">Seleccione una compilación OsmAnd a instalar</string>
     <string name="contribution_activity">Instalar compilación</string>
     <string name="gps_status_app_not_found">La aplicación «GPS Status» no está instalada. ¿Buscar en la tienda de aplicaciones?</string>
-    <string name="voice_is_not_available_msg">Las indicaciones por voz no están disponibles, vaya a «Ajustes» → «Ajustes de navegación» → «Indicaciones por voz» y elige o descarga un paquete de indicaciones por voz.</string>
+    <string name="voice_is_not_available_msg">Las indicaciones por voz no están disponibles, ve a «Ajustes» → «Ajustes de navegación» → «Indicaciones por voz» y elige o descarga un paquete de indicaciones por voz.</string>
     <string name="voice_is_not_available_title">No se eligieron indicaciones por voz</string>
     <string name="daynight_mode_day">Día</string>
     <string name="daynight_mode_night">Noche</string>
@@ -2174,7 +2174,7 @@
     <string name="search_map_hint">Buscar ciudad o región</string>
     <string name="gpx_no_tracks_title">Aún no tienes archivos GPX</string>
     <string name="gpx_no_tracks_title_folder">También puedes añadir archivos GPX a la carpeta</string>
-    <string name="gpx_add_track">Añadir archivo GPX</string>
+    <string name="gpx_add_track">Añadir GPX</string>
     <string name="gpx_appearance">Aspecto</string>
     
     

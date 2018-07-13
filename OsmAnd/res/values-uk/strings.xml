@@ -3096,4 +3096,11 @@
     <string name="error_notification_desc">Надішліть знімок екрану цього повідомлення на support@osmand.net</string>
     <string name="unirs_render_descr">Змінені типові кольори для підвищення контрасту пішохідних та велодоріжок. Використовуються старі кольори Mapnik.</string>
     <string name="paid_plugin">Платний втулок</string>
+    <string name="point_deleted">Точку %1$s видалено</string>
+    <string name="nautical_render_descr">Стиль морської навігації. Ключові особливості: буї, маяки, річкові шляхи, морські шляхи та знаки, гавані, послуги морських судів, контури глибин.</string>
+    <string name="ski_map_render_descr">Стиль для катання на лижах. Ключові особливості: відображення трас, витягів та інших лижний об\'єктів. Менше вторинних об\'єктів на карті, що відволікають.</string>
+    <string name="how_to_open_link">Я відкрити посилання?</string>
+    <string name="download_all">Завантажити все</string>
+    <string name="shared_string_restart">Перезапуск</string>
+    <string name="show_images">Показати зображення</string>
     </resources>
