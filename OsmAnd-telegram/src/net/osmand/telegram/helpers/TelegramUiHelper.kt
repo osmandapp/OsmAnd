@@ -26,7 +26,12 @@ object TelegramUiHelper {
 			bitmap = app.uiUtils.getCircleBitmap(photoPath)
 		}
 		if (bitmap == null) {
-			drawable = app.uiUtils.getIcon(placeholderId)
+			drawable =
+					if (placeholderId == R.drawable.img_user_picture || placeholderId == R.drawable.img_group_picture) {
+						app.uiUtils.getIcon(placeholderId)
+					} else {
+						app.uiUtils.getThemedIcon(placeholderId)
+					}
 		}
 		if (bitmap != null) {
 			iv.setImageBitmap(bitmap)

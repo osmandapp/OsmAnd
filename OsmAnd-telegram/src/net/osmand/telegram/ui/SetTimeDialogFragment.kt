@@ -208,8 +208,14 @@ class SetTimeDialogFragment : DialogFragment() {
 
 		override fun onBindViewHolder(holder: ChatViewHolder, position: Int) {
 			val chat = chats[position]
+			val placeholderId: Int =
+				if (chat.type is TdApi.ChatTypeBasicGroup || chat.type is TdApi.ChatTypeSupergroup) {
+					R.drawable.img_group_picture
+				} else {
+					R.drawable.img_user_picture
+				}
 
-			TelegramUiHelper.setupPhoto(app, holder.icon, chat.photo?.small?.local?.path)
+			TelegramUiHelper.setupPhoto(app, holder.icon, chat.photo?.small?.local?.path, placeholderId)
 			holder.title?.text = chat.title
 			holder.description?.text = "Some description" // FIXME
 			holder.textInArea?.apply {
