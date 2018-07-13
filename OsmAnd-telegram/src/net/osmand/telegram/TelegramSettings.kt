@@ -25,9 +25,10 @@ private const val TITLES_REPLACED_WITH_IDS = "changed_to_chat_id"
 
 class TelegramSettings(private val app: TelegramApplication) {
 
+	var chatLocLivePeriods = mutableMapOf<Long, Long>()
+
 	private var shareLocationChats: Set<Long> = emptySet()
 	private var showOnMapChats: Set<Long> = emptySet()
-	private var chatIdsToDuration = mutableMapOf<Long, Long>()
 
 	var metricsConstants = MetricsConstants.KILOMETERS_AND_METERS
 	var speedConstants = SpeedConstants.KILOMETERS_PER_HOUR
@@ -57,7 +58,7 @@ class TelegramSettings(private val app: TelegramApplication) {
 		showOnMapChats.intersect(presentChatIds)
 		this.showOnMapChats = showOnMapChats.toHashSet()
 
-		chatIdsToDuration = chatIdsToDuration.filter { (key, _) ->
+		chatLocLivePeriods = chatLocLivePeriods.filter { (key, _) ->
 			presentChatIds.contains(key)
 		}.toMutableMap()
 	}
@@ -70,20 +71,20 @@ class TelegramSettings(private val app: TelegramApplication) {
 				duration > TelegramHelper.MAX_LOCATION_MESSAGE_LIVE_PERIOD_SEC -> TelegramHelper.MAX_LOCATION_MESSAGE_LIVE_PERIOD_SEC.toLong()
 				else -> duration
 			}
-			chatIdsToDuration[chatId] = lp
+			chatLocLivePeriods[chatId] = lp
 			shareLocationChats.add(chatId)
 		} else {
 			shareLocationChats.remove(chatId)
-			chatIdsToDuration.remove(chatId)
+			chatLocLivePeriods.remove(chatId)
 		}
 		this.shareLocationChats = shareLocationChats.toHashSet()
 	}
 
-	fun getChatExpireTime(chatId: Long) = chatIdsToDuration[chatId]
+	fun getChatExpireTime(chatId: Long) = chatLocLivePeriods[chatId]
 
 	fun stopSharingLocationToChats() {
 		this.shareLocationChats = emptySet()
-		this.chatIdsToDuration.clear()
+		this.chatLocLivePeriods.clear()
 	}
 
 	fun showChatOnMap(chatId: Long, show: Boolean) {
@@ -99,8 +100,6 @@ class TelegramSettings(private val app: TelegramApplication) {
 	fun getShareLocationChats() = ArrayList(shareLocationChats)
 
 	fun getShowOnMapChats() = ArrayList(showOnMapChats)
-
-	fun getChatIdsToDuration() = chatIdsToDuration
 
 	fun getShowOnMapChatsCount() = showOnMapChats.size
 
