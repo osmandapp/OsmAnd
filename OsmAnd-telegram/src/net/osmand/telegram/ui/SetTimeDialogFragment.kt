@@ -17,6 +17,7 @@ import net.osmand.telegram.TelegramApplication
 import net.osmand.telegram.helpers.ShareLocationHelper
 import net.osmand.telegram.helpers.TelegramUiHelper
 import net.osmand.telegram.ui.SetTimeDialogFragment.SetTimeListAdapter.ChatViewHolder
+import net.osmand.telegram.utils.AndroidUtils
 import org.drinkless.td.libcore.telegram.TdApi
 import java.util.concurrent.TimeUnit
 
@@ -26,6 +27,7 @@ class SetTimeDialogFragment : DialogFragment() {
 		get() = activity?.application as TelegramApplication
 
 	private val telegramHelper get() = app.telegramHelper
+	private val settings get() = app.settings
 
 	private val adapter = SetTimeListAdapter()
 
@@ -77,6 +79,19 @@ class SetTimeDialogFragment : DialogFragment() {
 			text = getString(R.string.shared_string_share)
 			setOnClickListener {
 				Toast.makeText(context, "Share", Toast.LENGTH_SHORT).show()
+				chatIdsToDuration.forEach { chatId, expireTime ->
+					settings.shareLocationToChat(chatId, true)
+					settings.addChatIdToDuration(chatId, expireTime)
+				}
+				if (settings.hasAnyChatToShareLocation()) {
+					if (!AndroidUtils.isLocationPermissionAvailable(view.context)) {
+						AndroidUtils.requestLocationPermission(activity!!)
+					} else {
+						app.shareLocationHelper.startSharingLocation()
+					}
+				} else {
+					app.shareLocationHelper.stopSharingLocation()
+				}
 			}
 		}
 
@@ -102,7 +117,8 @@ class SetTimeDialogFragment : DialogFragment() {
 		chatIdsToDuration.clear()
 		bundle?.getLongArray(CHATS_KEY)?.also {
 			for (i in 0 until it.size step 2) {
-				chatIdsToDuration[it[i]] = it[i + 1]
+				val expireTime = settings.getChatExpireTime(it[i])
+				chatIdsToDuration[it[i]] = expireTime ?: it[i + 1]
 			}
 		}
 	}

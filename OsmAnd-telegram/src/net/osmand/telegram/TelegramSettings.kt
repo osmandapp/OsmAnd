@@ -1,6 +1,7 @@
 package net.osmand.telegram
 
 import android.content.Context
+import net.osmand.telegram.helpers.TelegramHelper
 import net.osmand.telegram.utils.OsmandFormatter.MetricsConstants
 import net.osmand.telegram.utils.OsmandFormatter.SpeedConstants
 
@@ -17,6 +18,7 @@ private const val SEND_MY_LOCATION_INTERVAL_DEFAULT = 5L * 1000 // 5 seconds
 
 private const val USER_LOCATION_EXPIRE_TIME_KEY = "user_location_expire_time"
 private const val USER_LOCATION_EXPIRE_TIME_DEFAULT = 15L * 60 * 1000 // 15 minutes
+private const val DEFAULT_VISIBLE_TIME_SECONDS = 60 * 60L // 1 hour
 
 private const val TITLES_REPLACED_WITH_IDS = "changed_to_chat_id"
 
@@ -24,6 +26,7 @@ class TelegramSettings(private val app: TelegramApplication) {
 
 	private var shareLocationChats: Set<Long> = emptySet()
 	private var showOnMapChats: Set<Long> = emptySet()
+	private var chatIdsToDuration = emptyMap<Long,Long>()
 
 	var metricsConstants = MetricsConstants.KILOMETERS_AND_METERS
 	var speedConstants = SpeedConstants.KILOMETERS_PER_HOUR
@@ -52,20 +55,48 @@ class TelegramSettings(private val app: TelegramApplication) {
 		val showOnMapChats = showOnMapChats.toMutableList()
 		showOnMapChats.intersect(presentChatIds)
 		this.showOnMapChats = showOnMapChats.toHashSet()
+
+		val chatIdsToDuration = HashMap<Long, Long>()
+		this.chatIdsToDuration.forEach { chatId, duration ->
+			if (presentChatIds.contains(chatId)) {
+				chatIdsToDuration[chatId] = duration
+			}
+		}
+		this.chatIdsToDuration = chatIdsToDuration.toMap()
 	}
 
 	fun shareLocationToChat(chatId: Long, share: Boolean) {
 		val shareLocationChats = shareLocationChats.toMutableList()
+		val chatIdsToDuration = chatIdsToDuration.toMutableMap()
 		if (share) {
 			shareLocationChats.add(chatId)
+			chatIdsToDuration[chatId] = DEFAULT_VISIBLE_TIME_SECONDS
 		} else {
 			shareLocationChats.remove(chatId)
+			chatIdsToDuration.remove(chatId)
 		}
 		this.shareLocationChats = shareLocationChats.toHashSet()
+		this.chatIdsToDuration = chatIdsToDuration.toMap()
+	}
+
+	fun addChatIdToDuration(chatId: Long, duration: Long) {
+		val chatIdsToDuration = chatIdsToDuration.toMutableMap()
+		val lp: Long = when {
+			duration < TelegramHelper.MIN_LOCATION_MESSAGE_LIVE_PERIOD_SEC -> TelegramHelper.MIN_LOCATION_MESSAGE_LIVE_PERIOD_SEC.toLong()
+			duration > TelegramHelper.MAX_LOCATION_MESSAGE_LIVE_PERIOD_SEC -> TelegramHelper.MAX_LOCATION_MESSAGE_LIVE_PERIOD_SEC.toLong()
+			else -> duration
+		}
+		chatIdsToDuration[chatId] = lp
+		this.chatIdsToDuration = chatIdsToDuration.toMap()
+	}
+	
+	fun getChatExpireTime(chatId: Long): Long? {
+		return chatIdsToDuration[chatId]
 	}
 
 	fun stopSharingLocationToChats() {
 		this.shareLocationChats = emptySet()
+		this.chatIdsToDuration = emptyMap()
 	}
 
 	fun showChatOnMap(chatId: Long, show: Boolean) {
@@ -81,6 +112,8 @@ class TelegramSettings(private val app: TelegramApplication) {
 	fun getShareLocationChats() = ArrayList(shareLocationChats)
 
 	fun getShowOnMapChats() = ArrayList(showOnMapChats)
+
+	fun getChatIdsToDuration() = chatIdsToDuration
 
 	fun getShowOnMapChatsCount() = showOnMapChats.size
 

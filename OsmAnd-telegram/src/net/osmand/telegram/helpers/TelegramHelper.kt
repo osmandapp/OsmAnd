@@ -385,15 +385,15 @@ class TelegramHelper private constructor() {
 	 * @latitude Latitude of the location
 	 * @longitude Longitude of the location
 	 */
-	fun sendLiveLocationMessage(chatIds: List<Long>, livePeriod: Int, latitude: Double, longitude: Double): Boolean {
+	fun sendLiveLocationMessage(chatIdsToDuration: Map<Long, Long>, latitude: Double, longitude: Double): Boolean {
 		if (!requestingActiveLiveLocationMessages && haveAuthorization) {
 			if (needRefreshActiveLiveLocationMessages) {
 				getActiveLiveLocationMessages {
-					sendLiveLocationImpl(chatIds, livePeriod, latitude, longitude)
+					sendLiveLocationImpl(chatIdsToDuration, latitude, longitude)
 				}
 				needRefreshActiveLiveLocationMessages = false
 			} else {
-				sendLiveLocationImpl(chatIds, livePeriod, latitude, longitude)
+				sendLiveLocationImpl(chatIdsToDuration, latitude, longitude)
 			}
 			return true
 		}
@@ -428,24 +428,24 @@ class TelegramHelper private constructor() {
 		}
 	}
 
-	private fun sendLiveLocationImpl(chatIds: List<Long>, livePeriod: Int, latitude: Double, longitude: Double) {
-		val lp = when {
-			livePeriod < MIN_LOCATION_MESSAGE_LIVE_PERIOD_SEC -> MIN_LOCATION_MESSAGE_LIVE_PERIOD_SEC
-			livePeriod > MAX_LOCATION_MESSAGE_LIVE_PERIOD_SEC -> MAX_LOCATION_MESSAGE_LIVE_PERIOD_SEC
-			else -> livePeriod
-		}
+	private fun sendLiveLocationImpl(chatIdsToDuration: Map<Long, Long>, latitude: Double, longitude: Double) {
 		val location = TdApi.Location(latitude, longitude)
-		val content = TdApi.InputMessageLocation(location, lp)
-
-		for (chatId in chatIds) {
+		chatIdsToDuration.forEach { chatId, duration ->
+			val content = TdApi.InputMessageLocation(location, duration.toInt())
 			val msgId = chatLiveMessages[chatId]
 			if (msgId != null) {
 				if (msgId != 0L) {
-					client?.send(TdApi.EditMessageLiveLocation(chatId, msgId, null, location), liveLocationMessageUpdatesHandler)
+					client?.send(
+						TdApi.EditMessageLiveLocation(chatId, msgId, null, location),
+						liveLocationMessageUpdatesHandler
+					)
 				}
 			} else {
 				chatLiveMessages[chatId] = 0L
-				client?.send(TdApi.SendMessage(chatId, 0, false, true, null, content), liveLocationMessageUpdatesHandler)
+				client?.send(
+					TdApi.SendMessage(chatId, 0, false, true, null, content),
+					liveLocationMessageUpdatesHandler
+				)
 			}
 		}
 	}
