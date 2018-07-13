@@ -132,8 +132,8 @@
 	<string name="shared_string_add">Adicionar</string>
 	<string name="shared_string_add_to_favorites">Adicionar aos \'Favoritos\'</string>
 	<string name="shared_string_my_location">Minha posição</string>
-	<string name="shared_string_my_favorites">Meus favoritos</string>
-	<string name="shared_string_tracks">Minhas trilhas</string>
+	<string name="shared_string_my_favorites">Favoritos</string>
+	<string name="shared_string_tracks">Trilhas</string>
 	<string name="shared_string_currently_recording_track">Gravando trilha</string>
 	<string name="shared_string_audio">Áudio</string>
 	<string name="shared_string_video">Vídeo</string>
@@ -265,7 +265,10 @@
     <string name="search_radius_proximity">Na proximidade de</string>
     
     
-    <string name="anonymous_user_hint">Um usuário anônimo não pode:\n- criar grupos;\n- sincronizar aparelhos e grupos com o servidor;\n- gerenciar grupos e aparelhos no painel de controle do website.</string>
+    <string name="anonymous_user_hint">Um usuário anônimo não pode:
+\n- Criar grupos;
+\n- Sincronizar aparelhos e grupos com o servidor;
+\n- Gerenciar grupos e aparelhos no painel de controle do website.</string>
     <string name="anonymous_user">Usuário anônimo</string>
     <string name="logged_as">Conectado como %1$s</string>
 	<string name="speed_limit_exceed">Tolerância do limite de velocidade</string>
@@ -2051,7 +2054,7 @@ Pôr do Sol: %2$s</string>
     <string name="osmand_plus_banner_desc">Download ilimitado de mapas, atualizações e plugin Wikipédia.</string>
     <string name="si_mi_meters">Milhas/metros</string>
     <string name="skip_map_downloading">Pular download de mapas</string>
-    <string name="skip_map_downloading_desc">Você não possui mapas offlines. Você deve escolher um mapa da lista ou baixar mapas mais tarde pelo Menu - %1$s.</string>
+    <string name="skip_map_downloading_desc">Você não possui mapas offlines. Você pode escolher um mapa da lista ou baixar mapas mais tarde pelo \'Menu - %1$s\'.</string>
     <string name="search_another_country">Selecione um outro local</string>
     <string name="search_map">Procurando mapas…</string>
     <string name="first_usage_wizard_desc">Deixe o OsmAnd determinar o seu local e sugerir mapas da região para baixar.</string>
@@ -2063,7 +2066,7 @@ Pôr do Sol: %2$s</string>
     <string name="give_permission">Dar permissão</string>
     <string name="allow_access_location">Permitir acesso à localização</string>
     <string name="search_my_location">Encontrar a minha posição</string>
-    <string name="no_update_info_desc">Não verificar se há atualizações de versão ou descontos relacionados ao OsmAnd.</string>
+    <string name="no_update_info_desc">Não verificar se há novas versões ou descontos relacionados ao OsmAnd.</string>
     <string name="no_update_info">Não mostrar novas versões</string>
     <string name="update_all_maps_now">Atualizar todos os mapas agora?</string>
     <string name="clear_tile_data">Limpar todos os títulos</string>
@@ -2440,16 +2443,16 @@ Pôr do Sol: %2$s</string>
     <string name="trip_rec_notification_settings_desc">Exiba uma notificação de sistema que permite iniciar a gravação de viagem.</string>
     <string name="christmas_desc">Antecipando os feriados de Natal e ano novo, você pode optar por exibir o POI associado com o Natal: árvores de Natal, mercados, etc.</string>
     <string name="osm_live_payment_desc">Assinatura cobrada mensalmente. Pode ser cancelada no Google Play a qualquer momento.</string>
-    <string name="donation_to_osm_desc">Parte de sua doação será enviada aos usuários OSM que enviam alterações ao OpenStreetMap. O custo da assinatura permanece o mesmo.</string>
+    <string name="donation_to_osm_desc">Parte de sua doação é enviada aos usuários do OSM que enviam alterações ao OpenStreetMap. O custo da assinatura permanece o mesmo.</string>
     <string name="osm_live_subscription_desc">A assinatura permite atualizações a cada hora, diariamente e semanais, e downloads ilimitados para todos os mapas globalmente.</string>
     <string name="get_it">Adquira já</string>
     <string name="get_for">Adquira por %1$s</string>
     <string name="get_for_month">Adquira por %1$s mês</string>
-    <string name="osm_live_banner_desc">Obter downloads ilimitados de mapa e atualizações de mapas mais de uma vez por mês: por hora, diária ou semanal.</string>
+    <string name="osm_live_banner_desc">Obtenha downloads ilimitados de mapa e atualizações de mapas mais de uma vez por mês: semanalmente, a cada dia ou hora.</string>
     <string name="quick_action_add_gpx_descr">Tocar no botão de ação adicionará um ponto de passagem GPX no local do centro da tela.</string>
     <string name="av_locations_all_desc">Arquivo GPX com coordenadas e dados de todas as notas.</string>
 	<string name="storage_place_description">Armazenamento de dados do OsmAnd (para mapas, arquivos GPX, etc.): %1$s.</string>
-    <string name="first_usage_greeting">Obtenha direções e descobra novos lugares sem precisar de conexão com Internet</string>
+    <string name="first_usage_greeting">Obtenha direções e descobra novos lugares sem precisar de conexão com a Internet</string>
     <string name="rendering_attr_hideOverground_name">Objetos superficiais</string>
     <string name="get_started">Vamos começar</string>
     <string name="route_stops_before">%1$s paradas antes</string>
@@ -2470,8 +2473,8 @@ Pôr do Sol: %2$s</string>
     <string name="no_map_markers_found">Por favor, adicione marcadores de mapa pelo mapa</string>
     <string name="no_waypoints_found">Não há pontos de passagem encontrados</string>
     <string name="storage_permission_restart_is_required">O aplicativo agora pode gravar no armazenamento externo, mas precisa ser reiniciado para tal.</string>
-    <string name="shared_string_move_up">Mover para cima</string>
-    <string name="shared_string_move_down">Mover para baixo</string>
+    <string name="shared_string_move_up">Mover ↑</string>
+    <string name="shared_string_move_down">Mover ↓</string>
     <string name="finish_navigation">Finalizar a navegação</string>
     <string name="avoid_road">Evitar estrada</string>
     <string name="osm_live_subscription">Assinatura OsmAnd Live</string>
