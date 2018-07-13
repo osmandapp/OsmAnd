@@ -373,12 +373,10 @@ class TelegramHelper private constructor() {
 			}
 			removeOldMessages(message.senderUserId, message.chatId)
 			usersLocationMessages[message.id] = message
-			val chatId = chats[message.chatId]?.id
-			if (chatId != null) {
-				incomingMessagesListeners.forEach {
-					it.onReceiveChatLocationMessages(chatId, message)
-				}
-			}
+			val chatId = message.chatId
+            incomingMessagesListeners.forEach {
+                it.onReceiveChatLocationMessages(chatId, message)
+            }
 		}
 	}
 
@@ -859,12 +857,10 @@ class TelegramHelper private constructor() {
 						synchronized(message) {
 							message.editDate = updateMessageEdited.editDate
 						}
-						val chatId = chats[message.chatId]?.id
-						if (chatId != null) {
-							incomingMessagesListeners.forEach {
-								it.onReceiveChatLocationMessages(chatId, message)
-							}
-						}
+                        val chatId = message.chatId
+                        incomingMessagesListeners.forEach {
+                            it.onReceiveChatLocationMessages(chatId, message)
+                        }
 					}
 				}
 				TdApi.UpdateMessageContent.CONSTRUCTOR -> {
@@ -883,13 +879,11 @@ class TelegramHelper private constructor() {
 								newContent
 							}
 						}
-						val chatId = chats[message.chatId]?.id
-						if (chatId != null) {
-							incomingMessagesListeners.forEach {
-								it.onReceiveChatLocationMessages(chatId, message)
-							}
-						}
-					}
+						val chatId = message.chatId
+                        incomingMessagesListeners.forEach {
+                            it.onReceiveChatLocationMessages(chatId, message)
+                        }
+                    }
 				}
 				TdApi.UpdateNewMessage.CONSTRUCTOR -> {
 					addNewMessage((obj as TdApi.UpdateNewMessage).message)
