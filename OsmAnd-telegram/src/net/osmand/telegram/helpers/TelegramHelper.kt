@@ -385,15 +385,15 @@ class TelegramHelper private constructor() {
 	 * @latitude Latitude of the location
 	 * @longitude Longitude of the location
 	 */
-	fun sendLiveLocationMessage(chatIdsToDuration: Map<Long, Long>, latitude: Double, longitude: Double): Boolean {
+	fun sendLiveLocationMessage(chatLivePeriods: Map<Long, Long>, latitude: Double, longitude: Double): Boolean {
 		if (!requestingActiveLiveLocationMessages && haveAuthorization) {
 			if (needRefreshActiveLiveLocationMessages) {
 				getActiveLiveLocationMessages {
-					sendLiveLocationImpl(chatIdsToDuration, latitude, longitude)
+					sendLiveLocationImpl(chatLivePeriods, latitude, longitude)
 				}
 				needRefreshActiveLiveLocationMessages = false
 			} else {
-				sendLiveLocationImpl(chatIdsToDuration, latitude, longitude)
+				sendLiveLocationImpl(chatLivePeriods, latitude, longitude)
 			}
 			return true
 		}
@@ -428,9 +428,9 @@ class TelegramHelper private constructor() {
 		}
 	}
 
-	private fun sendLiveLocationImpl(chatIdsToDuration: Map<Long, Long>, latitude: Double, longitude: Double) {
+	private fun sendLiveLocationImpl(chatLivePeriods: Map<Long, Long>, latitude: Double, longitude: Double) {
 		val location = TdApi.Location(latitude, longitude)
-		chatIdsToDuration.forEach { chatId, duration ->
+		chatLivePeriods.forEach { chatId, duration ->
 			val content = TdApi.InputMessageLocation(location, duration.toInt())
 			val msgId = chatLiveMessages[chatId]
 			if (msgId != null) {
