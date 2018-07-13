@@ -49,7 +49,6 @@ object TelegramUiHelper {
 			chatId = chat.id
 			chatTitle = chat.title
 			photoPath = chat.photo?.small?.local?.path
-			placeholderId = R.drawable.img_user_picture
 		}
 		val type = chat.type
 		if (type is TdApi.ChatTypePrivate || type is TdApi.ChatTypeSecret) {
@@ -64,9 +63,12 @@ object TelegramUiHelper {
 					res.latLon = LatLon(content.location.latitude, content.location.longitude)
 				}
 			}
+			res.placeholderId = R.drawable.img_user_picture
 		} else if (type is TdApi.ChatTypeBasicGroup) {
+			res.placeholderId = R.drawable.img_group_picture
 			res.membersCount = helper.getBasicGroupFullInfo(type.basicGroupId)?.members?.size ?: 0
 		} else if (type is TdApi.ChatTypeSupergroup) {
+			res.placeholderId = R.drawable.img_group_picture
 			res.membersCount = helper.getSupergroupFullInfo(type.supergroupId)?.memberCount ?: 0
 		}
 		if (!res.privateChat) {
