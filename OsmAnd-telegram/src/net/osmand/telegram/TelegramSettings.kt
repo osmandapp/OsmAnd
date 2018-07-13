@@ -80,7 +80,7 @@ class TelegramSettings(private val app: TelegramApplication) {
 		this.shareLocationChats = shareLocationChats.toHashSet()
 	}
 
-	fun getChatExpireTime(chatId: Long) = chatLivePeriods[chatId]
+	fun getChatLivePeriod(chatId: Long) = chatLivePeriods[chatId]
 
 	fun stopSharingLocationToChats() {
 		this.shareLocationChats = emptySet()

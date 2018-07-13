@@ -111,7 +111,7 @@ class SetTimeDialogFragment : DialogFragment() {
 		chatLivePeriods.clear()
 		bundle?.getLongArray(CHATS_KEY)?.also {
 			for (i in 0 until it.size step 2) {
-				val expireTime = settings.getChatExpireTime(it[i])
+				val expireTime = settings.getChatLivePeriod(it[i])
 				chatLivePeriods[it[i]] = expireTime ?: it[i + 1]
 			}
 		}
