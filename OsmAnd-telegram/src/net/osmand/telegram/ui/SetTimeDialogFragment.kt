@@ -137,7 +137,7 @@ class SetTimeDialogFragment : DialogFragment() {
 		if (timeForAll != NO_VALUE) {
 			timeForAllTitle.text = getString(R.string.visible_time_for_all)
 			timeForAllValue.visibility = View.VISIBLE
-			timeForAllValue.text = formatDuration(timeForAll)
+			timeForAllValue.text = formatLivePeriod(timeForAll)
 		} else {
 			timeForAllTitle.text = getString(R.string.set_visible_time_for_all)
 			timeForAllValue.visibility = View.GONE
@@ -174,7 +174,7 @@ class SetTimeDialogFragment : DialogFragment() {
 		return Pair(hours.toInt(), minutes.toInt())
 	}
 
-	private fun formatDuration(seconds: Long): String {
+	private fun formatLivePeriod(seconds: Long): String {
 		val (hours, minutes) = secondsToHoursAndMinutes(seconds)
 		return when {
 			hours != 0 && minutes == 0 -> getString(R.string.hours_format, hours)
@@ -214,7 +214,7 @@ class SetTimeDialogFragment : DialogFragment() {
 			holder.description?.text = "Some description" // FIXME
 			holder.textInArea?.apply {
 				visibility = View.VISIBLE
-				chatLivePeriods[chat.id]?.also { text = formatDuration(it) }
+				chatLivePeriods[chat.id]?.also { text = formatLivePeriod(it) }
 			}
 			holder.bottomShadow?.visibility = View.GONE
 			holder.itemView.setOnClickListener {
