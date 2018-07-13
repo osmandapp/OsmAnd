@@ -244,7 +244,7 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 			val canBeOpenedOnMap = item.canBeOpenedOnMap()
 			val openOnMapView = holder.getOpenOnMapClickView()
 
-			TelegramUiHelper.setupPhoto(app, holder.icon, item.photoPath, item.placeholderId)
+			TelegramUiHelper.setupPhoto(app, holder.icon, item.photoPath, item.placeholderId, false)
 			holder.title?.text = item.getVisibleName()
 			openOnMapView?.isEnabled = canBeOpenedOnMap
 			if (canBeOpenedOnMap) {
