@@ -100,9 +100,9 @@ class SetTimeDialogFragment : DialogFragment() {
 	override fun onSaveInstanceState(outState: Bundle) {
 		super.onSaveInstanceState(outState)
 		val chats = mutableListOf<Long>()
-		for ((id, duration) in chatLivePeriods) {
+		for ((id, livePeriod) in chatLivePeriods) {
 			chats.add(id)
-			chats.add(duration)
+			chats.add(livePeriod)
 		}
 		outState.putLongArray(CHATS_KEY, chats.toLongArray())
 	}

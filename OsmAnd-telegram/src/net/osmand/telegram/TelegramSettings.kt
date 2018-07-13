@@ -63,13 +63,13 @@ class TelegramSettings(private val app: TelegramApplication) {
 		}.toMutableMap()
 	}
 
-	fun shareLocationToChat(chatId: Long, share: Boolean, duration: Long = DEFAULT_VISIBLE_TIME_SECONDS) {
+	fun shareLocationToChat(chatId: Long, share: Boolean, livePeriod: Long = DEFAULT_VISIBLE_TIME_SECONDS) {
 		val shareLocationChats = shareLocationChats.toMutableList()
 		if (share) {
 			val lp: Long = when {
-				duration < TelegramHelper.MIN_LOCATION_MESSAGE_LIVE_PERIOD_SEC -> TelegramHelper.MIN_LOCATION_MESSAGE_LIVE_PERIOD_SEC.toLong()
-				duration > TelegramHelper.MAX_LOCATION_MESSAGE_LIVE_PERIOD_SEC -> TelegramHelper.MAX_LOCATION_MESSAGE_LIVE_PERIOD_SEC.toLong()
-				else -> duration
+				livePeriod < TelegramHelper.MIN_LOCATION_MESSAGE_LIVE_PERIOD_SEC -> TelegramHelper.MIN_LOCATION_MESSAGE_LIVE_PERIOD_SEC.toLong()
+				livePeriod > TelegramHelper.MAX_LOCATION_MESSAGE_LIVE_PERIOD_SEC -> TelegramHelper.MAX_LOCATION_MESSAGE_LIVE_PERIOD_SEC.toLong()
+				else -> livePeriod
 			}
 			chatLivePeriods[chatId] = lp
 			shareLocationChats.add(chatId)
