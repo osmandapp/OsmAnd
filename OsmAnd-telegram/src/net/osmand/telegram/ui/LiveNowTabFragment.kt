@@ -119,7 +119,7 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 
 	override fun onSendLiveLocationError(code: Int, message: String) {}
 
-	override fun onReceiveChatLocationMessages(chatTitle: String, vararg messages: TdApi.Message) {
+	override fun onReceiveChatLocationMessages(chatId: Long, vararg messages: TdApi.Message) {
 		app.runInUIThread { updateList() }
 	}
 
@@ -273,12 +273,12 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 
 			if (item is ChatItem && holder is ChatViewHolder) {
 				val nextIsLocation = !lastItem && items[position + 1] is LocationItem
-				val chatTitle = item.chatTitle
-				val stateTextInd = if (settings.isShowingChatOnMap(chatTitle)) 1 else 0
+				val chatId = item.chatId
+				val stateTextInd = if (settings.isShowingChatOnMap(chatId)) 1 else 0
 
 				holder.description?.text = getChatItemDescription(item)
 				holder.imageButton?.visibility = View.GONE
-				holder.showOnMapRow?.setOnClickListener { showPopupMenu(holder, chatTitle) }
+				holder.showOnMapRow?.setOnClickListener { showPopupMenu(holder, chatId) }
 				holder.showOnMapState?.text = menuList[stateTextInd]
 				holder.bottomDivider?.visibility = if (nextIsLocation) View.VISIBLE else View.GONE
 			} else if (item is LocationItem && holder is ContactViewHolder) {
@@ -300,7 +300,7 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 			}
 		}
 
-		private fun showPopupMenu(holder: ChatViewHolder, chatTitle: String) {
+		private fun showPopupMenu(holder: ChatViewHolder, chatId: Long) {
 			val ctx = holder.itemView.context
 
 			val paint = Paint()
@@ -319,7 +319,7 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 				setOnItemClickListener { _, _, position, _ ->
 					val allSelected = position == 1
 
-					settings.showChatOnMap(chatTitle, allSelected)
+					settings.showChatOnMap(chatId, allSelected)
 					if (settings.hasAnyChatToShowOnMap()) {
 						if (osmandAidlHelper.isOsmandNotInstalled()) {
 							if (allSelected) {
@@ -327,16 +327,16 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 							}
 						} else {
 							if (allSelected) {
-								app.showLocationHelper.showChatMessages(chatTitle)
+								app.showLocationHelper.showChatMessages(chatId)
 							} else {
-								app.showLocationHelper.hideChatMessages(chatTitle)
+								app.showLocationHelper.hideChatMessages(chatId)
 							}
 							app.showLocationHelper.startShowingLocation()
 						}
 					} else {
 						app.showLocationHelper.stopShowingLocation()
 						if (!allSelected) {
-							app.showLocationHelper.hideChatMessages(chatTitle)
+							app.showLocationHelper.hideChatMessages(chatId)
 						}
 					}
 

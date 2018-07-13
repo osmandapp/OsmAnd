@@ -41,6 +41,7 @@ object TelegramUiHelper {
 		messages: List<TdApi.Message>
 	): ChatItem {
 		val res = ChatItem().apply {
+			chatId = chat.id
 			chatTitle = chat.title
 			photoPath = chat.photo?.small?.local?.path
 			placeholderId = R.drawable.img_user_picture
@@ -95,6 +96,7 @@ object TelegramUiHelper {
 	): LocationItem? {
 		return if (content.isValid()) {
 			LocationItem().apply {
+				chatId = chat.id
 				chatTitle = chat.title
 				name = content.name
 				latLon = LatLon(content.lat, content.lon)
@@ -113,6 +115,7 @@ object TelegramUiHelper {
 		val user = helper.getUser(message.senderUserId) ?: return null
 		val content = message.content as TdApi.MessageLocation
 		return LocationItem().apply {
+			chatId = chat.id
 			chatTitle = chat.title
 			name = "${user.firstName} ${user.lastName}".trim()
 			if (name.isEmpty()) {
@@ -130,6 +133,8 @@ object TelegramUiHelper {
 
 	abstract class ListItem {
 
+		var chatId: Long = 0
+			internal set
 		var chatTitle: String = ""
 			internal set
 		var latLon: LatLon? = null
@@ -161,7 +166,7 @@ object TelegramUiHelper {
 
 		override fun canBeOpenedOnMap() = latLon != null && !chatWithBot
 
-		override fun getMapPointId() = "${chatTitle}_$userId"
+		override fun getMapPointId() = "${chatId}_$userId"
 
 		override fun getVisibleName() = chatTitle
 	}
@@ -175,7 +180,7 @@ object TelegramUiHelper {
 
 		override fun getMapPointId(): String {
 			val id = if (userId != 0) userId.toString() else name
-			return "${chatTitle}_$id"
+			return "${chatId}_$id"
 		}
 
 		override fun getVisibleName() = name
