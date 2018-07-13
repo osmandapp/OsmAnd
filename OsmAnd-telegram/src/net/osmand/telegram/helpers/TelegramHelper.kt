@@ -49,7 +49,6 @@ class TelegramHelper private constructor() {
 	private val secretChats = ConcurrentHashMap<Int, TdApi.SecretChat>()
 
 	private val chats = ConcurrentHashMap<Long, TdApi.Chat>()
-	private val chatTitles = ConcurrentHashMap<String, Long>()
 	private val chatList = TreeSet<OrderedChat>()
 	private val chatLiveMessages = ConcurrentHashMap<Long, Long>()
 
@@ -98,7 +97,7 @@ class TelegramHelper private constructor() {
 		}
 	}
 
-	fun getChatTitles() = chatTitles.keys().toList()
+	fun getChatIds() = chats.keys().toList()
 
 	fun getChat(id: Long) = chats[id]
 
@@ -107,8 +106,8 @@ class TelegramHelper private constructor() {
 	fun getUserMessage(user: TdApi.User) =
 		usersLocationMessages.values.firstOrNull { it.senderUserId == user.id }
 
-	fun getChatMessages(chatTitle: String) =
-		usersLocationMessages.values.filter { chats[it.chatId]?.title == chatTitle }
+	fun getChatMessages(chatId: Long) =
+		usersLocationMessages.values.filter { it.chatId == chatId }
 
 	fun getMessages() = usersLocationMessages.values.toList()
 
@@ -129,13 +128,6 @@ class TelegramHelper private constructor() {
 	fun getBasicGroupFullInfo(id: Int) = basicGroupsFullInfo[id]
 
 	fun getSupergroupFullInfo(id: Int) = supergroupsFullInfo[id]
-
-	private fun updateChatTitles() {
-		chatTitles.clear()
-		for (chatEntry in chats.entries) {
-			chatTitles[chatEntry.value.title] = chatEntry.key
-		}
-	}
 
 	private fun isChannel(chat: TdApi.Chat): Boolean {
 		return chat.type is TdApi.ChatTypeSupergroup && (chat.type as TdApi.ChatTypeSupergroup).isChannel
@@ -172,7 +164,7 @@ class TelegramHelper private constructor() {
 	}
 
 	interface TelegramIncomingMessagesListener {
-		fun onReceiveChatLocationMessages(chatTitle: String, vararg messages: TdApi.Message)
+		fun onReceiveChatLocationMessages(chatId: Long, vararg messages: TdApi.Message)
 		fun updateLocationMessages()
 	}
 
@@ -346,7 +338,6 @@ class TelegramHelper private constructor() {
 				return
 			}
 		}
-		updateChatTitles()
 		listener?.onTelegramChatsRead()
 	}
 
@@ -372,11 +363,8 @@ class TelegramHelper private constructor() {
 			}
 			removeOldMessages(message.senderUserId, message.chatId)
 			usersLocationMessages[message.id] = message
-			val chatTitle = chats[message.chatId]?.title
-			if (chatTitle != null) {
-				incomingMessagesListeners.forEach {
-					it.onReceiveChatLocationMessages(chatTitle, message)
-				}
+			incomingMessagesListeners.forEach {
+				it.onReceiveChatLocationMessages(message.chatId, message)
 			}
 		}
 	}
@@ -397,15 +385,15 @@ class TelegramHelper private constructor() {
 	 * @latitude Latitude of the location
 	 * @longitude Longitude of the location
 	 */
-	fun sendLiveLocationMessage(chatTitles: List<String>, livePeriod: Int, latitude: Double, longitude: Double): Boolean {
+	fun sendLiveLocationMessage(chatIds: List<Long>, livePeriod: Int, latitude: Double, longitude: Double): Boolean {
 		if (!requestingActiveLiveLocationMessages && haveAuthorization) {
 			if (needRefreshActiveLiveLocationMessages) {
 				getActiveLiveLocationMessages {
-					sendLiveLocationImpl(chatTitles, livePeriod, latitude, longitude)
+					sendLiveLocationImpl(chatIds, livePeriod, latitude, longitude)
 				}
 				needRefreshActiveLiveLocationMessages = false
 			} else {
-				sendLiveLocationImpl(chatTitles, livePeriod, latitude, longitude)
+				sendLiveLocationImpl(chatIds, livePeriod, latitude, longitude)
 			}
 			return true
 		}
@@ -440,7 +428,7 @@ class TelegramHelper private constructor() {
 		}
 	}
 
-	private fun sendLiveLocationImpl(chatTitles: List<String>, livePeriod: Int, latitude: Double, longitude: Double) {
+	private fun sendLiveLocationImpl(chatIds: List<Long>, livePeriod: Int, latitude: Double, longitude: Double) {
 		val lp = when {
 			livePeriod < MIN_LOCATION_MESSAGE_LIVE_PERIOD_SEC -> MIN_LOCATION_MESSAGE_LIVE_PERIOD_SEC
 			livePeriod > MAX_LOCATION_MESSAGE_LIVE_PERIOD_SEC -> MAX_LOCATION_MESSAGE_LIVE_PERIOD_SEC
@@ -449,18 +437,15 @@ class TelegramHelper private constructor() {
 		val location = TdApi.Location(latitude, longitude)
 		val content = TdApi.InputMessageLocation(location, lp)
 
-		for (chatTitle in chatTitles) {
-			val chatId = this.chatTitles[chatTitle]
-			if (chatId != null) {
-				val msgId = chatLiveMessages[chatId]
-				if (msgId != null) {
-					if (msgId != 0L) {
-						client?.send(TdApi.EditMessageLiveLocation(chatId, msgId, null, location), liveLocationMessageUpdatesHandler)
-					}
-				} else {
-					chatLiveMessages[chatId] = 0L
-					client?.send(TdApi.SendMessage(chatId, 0, false, true, null, content), liveLocationMessageUpdatesHandler)
+		for (chatId in chatIds) {
+			val msgId = chatLiveMessages[chatId]
+			if (msgId != null) {
+				if (msgId != 0L) {
+					client?.send(TdApi.EditMessageLiveLocation(chatId, msgId, null, location), liveLocationMessageUpdatesHandler)
 				}
+			} else {
+				chatLiveMessages[chatId] = 0L
+				client?.send(TdApi.SendMessage(chatId, 0, false, true, null, content), liveLocationMessageUpdatesHandler)
 			}
 		}
 	}
@@ -761,7 +746,6 @@ class TelegramHelper private constructor() {
 						chat.order = 0
 						setChatOrder(chat, order)
 					}
-					updateChatTitles()
 					listener?.onTelegramChatsChanged()
 				}
 				TdApi.UpdateChatTitle.CONSTRUCTOR -> {
@@ -771,7 +755,6 @@ class TelegramHelper private constructor() {
 						synchronized(chat) {
 							chat.title = updateChat.title
 						}
-						updateChatTitles()
 						listener?.onTelegramChatChanged(chat)
 					}
 				}
@@ -856,11 +839,8 @@ class TelegramHelper private constructor() {
 						synchronized(message) {
 							message.editDate = updateMessageEdited.editDate
 						}
-						val chatTitle = chats[message.chatId]?.title
-						if (chatTitle != null) {
-							incomingMessagesListeners.forEach {
-								it.onReceiveChatLocationMessages(chatTitle, message)
-							}
+						incomingMessagesListeners.forEach {
+							it.onReceiveChatLocationMessages(message.chatId, message)
 						}
 					}
 				}
@@ -880,11 +860,8 @@ class TelegramHelper private constructor() {
 								newContent
 							}
 						}
-						val chatTitle = chats[message.chatId]?.title
-						if (chatTitle != null) {
-							incomingMessagesListeners.forEach {
-								it.onReceiveChatLocationMessages(chatTitle, message)
-							}
+						incomingMessagesListeners.forEach {
+							it.onReceiveChatLocationMessages(message.chatId, message)
 						}
 					}
 				}
