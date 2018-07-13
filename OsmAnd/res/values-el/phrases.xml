@@ -3589,4 +3589,47 @@
 	<string name="poi_water_place_durability_durable">Διατηρησιμότητα νερόλακκου: σταθερή</string>
 	<string name="poi_water_place_durability_emergency">Διατηρησιμότητα νερόλακκου: επείγουσα</string>
 
+	<string name="poi_socket_tesla_supercharger_current">Ρευματοδότης: Υπερφορτιστής Τέσλα: ρεύμα</string>
+	<string name="poi_socket_tesla_supercharger_output">Ρευματοδότης: Υπερφορτιστής Τέσλα: έξοδος</string>
+	<string name="poi_socket_tesla_roadster">Ρευματοδότης: Ρόντστερ Τέσλα</string>
+	<string name="poi_socket_tesla_roadster_current">Ρευματοδότης: Ρόντστερ Τέσλα: ρεύμα</string>
+	<string name="poi_socket_tesla_roadster_output">Ρευματοδότης: Ρόντστερ Τέσλα: έξοδος</string>
+	<string name="poi_socket_nema_5_15">Ρευματοδότης: NEMA 5-15R</string>
+	<string name="poi_socket_nema_5_15_current">Ρευματοδότης: NEMA 5-15R: ρεύμα</string>
+	<string name="poi_socket_nema_5_15_output">Ρευματοδότης: NEMA 5-15R: έξοδος</string>
+	<string name="poi_socket_nema_5_20">Ρευματοδότης: NEMA 5-20</string>
+	<string name="poi_socket_nema_5_20_current">Ρευματοδότης: NEMA 5-20: ρεύμα</string>
+	<string name="poi_socket_nema_5_20_output">Ρευματοδότης: NEMA 5-20: έξοδος</string>
+	<string name="poi_socket_nema_14_30">Ρευματοδότης: NEMA 14-30</string>
+	<string name="poi_socket_nema_14_30_current">Ρευματοδότης: NEMA 14-30: ρεύμα</string>
+	<string name="poi_socket_nema_14_30_output">Ρευματοδότης: NEMA 14-30: έξοδος</string>
+	<string name="poi_socket_nema_14_50">Ρευματοδότης: NEMA 14-50</string>
+	<string name="poi_socket_nema_14_50_current">Ρευματοδότης: NEMA 14-50: ρεύμα</string>
+	<string name="poi_socket_nema_14_50_output">Ρευματοδότης: NEMA 14-50: έξοδος</string>
+	<string name="poi_socket_schuko">Ρευματοδότης: Σούκο</string>
+	<string name="poi_socket_schuko_current">Ρευματοδότης: Σούκο: ρεύμα</string>
+	<string name="poi_socket_schuko_output">Ρευματοδότης: σούκο: έξοδος</string>
+	<string name="poi_socket_bs1363">Ρευματοδότης: BS 1363</string>
+	<string name="poi_socket_bs1363_current">Ρευματοδότης: BS 1363: ρεύμα</string>
+	<string name="poi_socket_bs1363_output">Ρευματοδότης: BS 1363: έξοδος</string>
+	<string name="poi_socket_as3112">Ρευματοδότης: AS/NZS 3112</string>
+	<string name="poi_socket_as3112_current">Ρευματοδότης: AS/NZS 3112: ρεύμα</string>
+	<string name="poi_socket_as3112_output">Ρευματοδότης: AS/NZS 3112: έξοδος</string>
+
+	<string name="poi_car_yes">Αυτοκίνητο: ναι</string>
+	<string name="poi_car_no">Αυτοκίνητο: όχι</string>
+	<string name="poi_bicycle_yes">Ποδήλατο: ναι</string>
+	<string name="poi_bicycle_no">Ποδήλατο: όχι</string>
+	<string name="poi_scooter_yes">Σκούτερ: ναι</string>
+	<string name="poi_scooter_no">Σκούτερ: όχι</string>
+	<string name="poi_truck_yes">Φορτηγό: ναι</string>
+	<string name="poi_truck_no">Φορτηγό: όχι</string>
+
+	<string name="poi_parking_fee_yes">Τέλος στάθμευσης: ναι</string>
+	<string name="poi_parking_fee_no">Τέλος στάθμευσης: όχι</string>
+	<string name="poi_parking_fee">Τέλος στάθμευσης</string>
+
+	<string name="poi_amperage">Αμπέρ</string>
+	<string name="poi_charging_station_output">Έξοδος σταθμού φόρτισης</string>
+
 	</resources>
