@@ -734,7 +734,7 @@
 
 	<string name="poi_anchorage">Ancoragem</string>
 	<string name="poi_anchor_berth">Ancoradouro</string>
-	<string name="poi_beacon_cardinal">Baliza luminosa cardinal</string>
+	<string name="poi_beacon_cardinal">Baliza cardinal</string>
 	<string name="poi_beacon_lateral">Baliza luminosa lateral</string>
 	<string name="poi_beacon_safe_water">Baliza luminosa de águas seguras</string>
 	<string name="poi_beacon_special_purpose">Baliza luminosa de propósito especial</string>
