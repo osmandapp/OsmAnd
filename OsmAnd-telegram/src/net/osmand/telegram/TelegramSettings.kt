@@ -26,7 +26,7 @@ class TelegramSettings(private val app: TelegramApplication) {
 
 	private var shareLocationChats: Set<Long> = emptySet()
 	private var showOnMapChats: Set<Long> = emptySet()
-	private var chatIdsToDuration = emptyMap<Long,Long>()
+	private var chatIdsToDuration: Map<Long, Long> = emptyMap()
 
 	var metricsConstants = MetricsConstants.KILOMETERS_AND_METERS
 	var speedConstants = SpeedConstants.KILOMETERS_PER_HOUR
@@ -79,7 +79,7 @@ class TelegramSettings(private val app: TelegramApplication) {
 		this.chatIdsToDuration = chatIdsToDuration.toMap()
 	}
 
-	fun addChatIdToDuration(chatId: Long, duration: Long) {
+	fun updateChatIdToDuration(chatId: Long, duration: Long) {
 		val chatIdsToDuration = chatIdsToDuration.toMutableMap()
 		val lp: Long = when {
 			duration < TelegramHelper.MIN_LOCATION_MESSAGE_LIVE_PERIOD_SEC -> TelegramHelper.MIN_LOCATION_MESSAGE_LIVE_PERIOD_SEC.toLong()
