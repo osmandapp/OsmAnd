@@ -15,7 +15,8 @@ object TelegramUiHelper {
 		app: TelegramApplication,
 		iv: ImageView?,
 		photoPath: String?,
-		placeholderId: Int = R.drawable.img_user_picture
+		placeholderId: Int = R.drawable.img_user_picture,
+		useThemedIcon: Boolean = true
 	) {
 		if (iv == null) {
 			return
@@ -26,12 +27,11 @@ object TelegramUiHelper {
 			bitmap = app.uiUtils.getCircleBitmap(photoPath)
 		}
 		if (bitmap == null) {
-			drawable =
-					if (placeholderId == R.drawable.img_user_picture || placeholderId == R.drawable.img_group_picture) {
-						app.uiUtils.getIcon(placeholderId)
-					} else {
-						app.uiUtils.getThemedIcon(placeholderId)
-					}
+			drawable = if (useThemedIcon) {
+				app.uiUtils.getThemedIcon(placeholderId)
+			} else {
+				app.uiUtils.getIcon(placeholderId)
+			}
 		}
 		if (bitmap != null) {
 			iv.setImageBitmap(bitmap)

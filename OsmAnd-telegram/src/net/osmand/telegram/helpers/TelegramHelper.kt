@@ -129,6 +129,10 @@ class TelegramHelper private constructor() {
 
 	fun getSupergroupFullInfo(id: Int) = supergroupsFullInfo[id]
 
+	fun isGroup(chat: TdApi.Chat): Boolean {
+		return chat.type is TdApi.ChatTypeSupergroup || chat.type is TdApi.ChatTypeBasicGroup
+	}
+
 	private fun isChannel(chat: TdApi.Chat): Boolean {
 		return chat.type is TdApi.ChatTypeSupergroup && (chat.type as TdApi.ChatTypeSupergroup).isChannel
 	}
