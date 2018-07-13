@@ -53,10 +53,10 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 		execOsmandApi {
 			val messages = telegramHelper.getMessages()
 			for (message in messages) {
-				val chatId = telegramHelper.getChat(message.chatId)?.id
+				val chatId = message.chatId
 				val date = Math.max(message.date, message.editDate) * 1000L
 				val expired = System.currentTimeMillis() - date > app.settings.userLocationExpireTime
-				if (chatId != null && expired) {
+				if (expired) {
 					removeMapPoint(chatId, message)
 				}
 			}
@@ -65,7 +65,7 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 
 	fun addLocationToMap(message: TdApi.Message) {
 		execOsmandApi {
-			val chatId = telegramHelper.getChat(message.chatId)?.id
+			val chatId = message.chatId
 			val chatTitle = telegramHelper.getChat(message.chatId)?.title
 			val content = message.content
 			if (chatTitle != null && content is TdApi.MessageLocation) {

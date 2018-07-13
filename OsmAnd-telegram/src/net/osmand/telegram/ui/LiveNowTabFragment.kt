@@ -39,6 +39,7 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 		get() = activity?.application as TelegramApplication
 
 	private val telegramHelper get() = app.telegramHelper
+	private val localDataHelper get() = app.localDataHelper
 	private val osmandAidlHelper get() = app.osmandAidlHelper
 	private val settings get() = app.settings
 
@@ -274,7 +275,7 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 			if (item is ChatItem && holder is ChatViewHolder) {
 				val nextIsLocation = !lastItem && items[position + 1] is LocationItem
 				val chatId = item.chatId
-				val stateTextInd = if (settings.isShowingChatOnMap(chatId)) 1 else 0
+				val stateTextInd = if (localDataHelper.isShowingChatOnMap(chatId)) 1 else 0
 
 				holder.description?.text = getChatItemDescription(item)
 				holder.imageButton?.visibility = View.GONE
@@ -319,8 +320,8 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 				setOnItemClickListener { _, _, position, _ ->
 					val allSelected = position == 1
 
-					settings.showChatOnMap(chatId, allSelected)
-					if (settings.hasAnyChatToShowOnMap()) {
+					localDataHelper.showChatOnMap(chatId, allSelected)
+					if (localDataHelper.hasAnyChatToShowOnMap()) {
 						if (osmandAidlHelper.isOsmandNotInstalled()) {
 							if (allSelected) {
 								showOsmAndMissingDialog()

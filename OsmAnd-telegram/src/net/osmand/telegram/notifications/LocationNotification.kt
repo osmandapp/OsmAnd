@@ -24,7 +24,7 @@ class LocationNotification(app: TelegramApplication) : TelegramNotification(app,
 		}
 
 	override val isEnabled: Boolean
-		get() = app.settings.hasAnyChatToShareLocation() || app.settings.hasAnyChatToShowOnMap()
+		get() = app.localDataHelper.hasAnyChatToShareLocation() || app.localDataHelper.hasAnyChatToShowOnMap()
 
 	override val telegramNotificationId: Int
 		get() = TelegramNotification.LOCATION_NOTIFICATION_SERVICE_ID
@@ -46,7 +46,7 @@ class LocationNotification(app: TelegramApplication) : TelegramNotification(app,
 					+ ": " + OsmandFormatter.getFormattedDistance(sharedDistance, app))
 		} else {
 			notificationTitle = app.getString(R.string.show_users_on_map)
-			notificationText = app.getString(R.string.active_chats) + ": " + app.settings.getShowOnMapChatsCount()
+			notificationText = app.getString(R.string.active_chats) + ": " + app.localDataHelper.getShowOnMapChatsCount()
 			color = 0
 			icon = R.drawable.ic_action_view
 		}

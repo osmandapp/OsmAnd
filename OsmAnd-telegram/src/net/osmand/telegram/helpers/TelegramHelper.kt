@@ -27,6 +27,7 @@ class TelegramHelper private constructor() {
 		private const val IGNORED_ERROR_CODE = 406
 		private const val UPDATE_LIVE_MESSAGES_INTERVAL_SEC = 30L
 		private const val MESSAGE_ACTIVE_TIME_SEC = 24 * 60 * 60 // 24 hours
+		private const val LOCATION_MESSAGE_DEFAULT_LIVE_TIME_SEC = 60 * 60 // 1 hour
 
 		// min and max values for the Telegram API
 		const val MIN_LOCATION_MESSAGE_LIVE_PERIOD_SEC = 61
@@ -49,7 +50,7 @@ class TelegramHelper private constructor() {
 	private val secretChats = ConcurrentHashMap<Int, TdApi.SecretChat>()
 
 	private val chats = ConcurrentHashMap<Long, TdApi.Chat>()
-	private val chatIds = TreeSet<Long>()
+	private val chatTitles = ConcurrentHashMap<String, Long>()
 	private val chatList = TreeSet<OrderedChat>()
 	private val chatLiveMessages = ConcurrentHashMap<Long, Long>()
 
@@ -98,7 +99,7 @@ class TelegramHelper private constructor() {
 		}
 	}
 
-	fun getChatTitles() = chatIds.toList()
+	fun getChatIds() = chats.keys().toList()
 
 	fun getChat(id: Long) = chats[id]
 
@@ -131,9 +132,9 @@ class TelegramHelper private constructor() {
 	fun getSupergroupFullInfo(id: Int) = supergroupsFullInfo[id]
 
 	private fun updateChatTitles() {
-		chatIds.clear()
+		chatTitles.clear()
 		for (chatEntry in chats.entries) {
-			chatIds.add(chatEntry.key)
+			chatTitles[chatEntry.value.title] = chatEntry.key
 		}
 	}
 
@@ -397,15 +398,15 @@ class TelegramHelper private constructor() {
 	 * @latitude Latitude of the location
 	 * @longitude Longitude of the location
 	 */
-	fun sendLiveLocationMessage(chatIds: List<Long>, livePeriod: Int, latitude: Double, longitude: Double): Boolean {
+	fun sendLiveLocationMessage(chatIds: List<Long>, savedChatProps: List<ChatProps>, latitude: Double, longitude: Double): Boolean {
 		if (!requestingActiveLiveLocationMessages && haveAuthorization) {
 			if (needRefreshActiveLiveLocationMessages) {
 				getActiveLiveLocationMessages {
-					sendLiveLocationImpl(chatIds, livePeriod, latitude, longitude)
+					sendLiveLocationImpl(chatIds, savedChatProps, latitude, longitude)
 				}
 				needRefreshActiveLiveLocationMessages = false
 			} else {
-				sendLiveLocationImpl(chatIds, livePeriod, latitude, longitude)
+				sendLiveLocationImpl(chatIds, savedChatProps, latitude, longitude)
 			}
 			return true
 		}
@@ -440,16 +441,21 @@ class TelegramHelper private constructor() {
 		}
 	}
 
-	private fun sendLiveLocationImpl(chatIds: List<Long>, livePeriod: Int, latitude: Double, longitude: Double) {
-		val lp = when {
-			livePeriod < MIN_LOCATION_MESSAGE_LIVE_PERIOD_SEC -> MIN_LOCATION_MESSAGE_LIVE_PERIOD_SEC
-			livePeriod > MAX_LOCATION_MESSAGE_LIVE_PERIOD_SEC -> MAX_LOCATION_MESSAGE_LIVE_PERIOD_SEC
-			else -> livePeriod
-		}
+	private fun sendLiveLocationImpl(chatIds: List<Long>, savedChatProps: List<ChatProps>, latitude: Double, longitude: Double) {
 		val location = TdApi.Location(latitude, longitude)
-		val content = TdApi.InputMessageLocation(location, lp)
-
+		var livePeriod: Int = LOCATION_MESSAGE_DEFAULT_LIVE_TIME_SEC
 		for (chatId in chatIds) {
+			savedChatProps.forEach { chat ->
+				if (chat.id == chatId) {
+					livePeriod = chat.expireTime.toInt()
+				}
+			}
+			livePeriod = when {
+				livePeriod < MIN_LOCATION_MESSAGE_LIVE_PERIOD_SEC -> MIN_LOCATION_MESSAGE_LIVE_PERIOD_SEC
+				livePeriod > MAX_LOCATION_MESSAGE_LIVE_PERIOD_SEC -> MAX_LOCATION_MESSAGE_LIVE_PERIOD_SEC
+				else -> livePeriod
+			}
+			val content = TdApi.InputMessageLocation(location, livePeriod)
 			val msgId = chatLiveMessages[chatId]
 			if (msgId != null) {
 				if (msgId != 0L) {

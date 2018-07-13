@@ -248,7 +248,7 @@ class TelegramService : Service(), LocationListener, TelegramIncomingMessagesLis
 
 	override fun onReceiveChatLocationMessages(chatId: Long, vararg messages: TdApi.Message) {
 		val app = app()
-		if (app.settings.isShowingChatOnMap(chatId)) {
+		if (app.localDataHelper.isShowingChatOnMap(chatId)) {
 			ShowMessagesTask(app).executeOnExecutor(executor, *messages)
 		}
 	}
