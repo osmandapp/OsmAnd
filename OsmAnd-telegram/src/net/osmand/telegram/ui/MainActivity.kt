@@ -258,7 +258,7 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 	}
 
 	private fun removeNonexistingChatsFromSettings() {
-		val presentChatTitles = telegramHelper.getChatTitles()
+		val presentChatTitles = telegramHelper.getChatIds()
 		settings.removeNonexistingChats(presentChatTitles)
 	}
 

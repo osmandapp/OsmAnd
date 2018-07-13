@@ -17,7 +17,6 @@ import net.osmand.telegram.TelegramApplication
 import net.osmand.telegram.helpers.ShareLocationHelper
 import net.osmand.telegram.helpers.TelegramUiHelper
 import net.osmand.telegram.ui.SetTimeDialogFragment.SetTimeListAdapter.ChatViewHolder
-import net.osmand.telegram.utils.AndroidUtils
 import org.drinkless.td.libcore.telegram.TdApi
 import java.util.concurrent.TimeUnit
 
@@ -78,7 +77,6 @@ class SetTimeDialogFragment : DialogFragment() {
 			text = getString(R.string.shared_string_share)
 			setOnClickListener {
 				Toast.makeText(context, "Share", Toast.LENGTH_SHORT).show()
-				
 			}
 		}
 
@@ -148,9 +146,6 @@ class SetTimeDialogFragment : DialogFragment() {
 				if (seconds >= ShareLocationHelper.MIN_LOCATION_MESSAGE_LIVE_PERIOD_SEC) {
 					if (id != null) {
 						chatIdsToDuration[id] = seconds
-						app.settings.shareLocationToChat(id, true)
-						app.shareLocationHelper.startSharingLocation()
-
 					} else {
 						chatIdsToDuration.keys.forEach {
 							chatIdsToDuration[it] = seconds

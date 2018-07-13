@@ -49,7 +49,6 @@ class TelegramHelper private constructor() {
 	private val secretChats = ConcurrentHashMap<Int, TdApi.SecretChat>()
 
 	private val chats = ConcurrentHashMap<Long, TdApi.Chat>()
-	private val chatTitles = ConcurrentHashMap<String, Long>()
 	private val chatList = TreeSet<OrderedChat>()
 	private val chatLiveMessages = ConcurrentHashMap<Long, Long>()
 
@@ -98,7 +97,7 @@ class TelegramHelper private constructor() {
 		}
 	}
 
-	fun getChatTitles() = chatTitles.toList()
+	fun getChatIds() = chats.keys().toList()
 
 	fun getChat(id: Long) = chats[id]
 
@@ -129,13 +128,6 @@ class TelegramHelper private constructor() {
 	fun getBasicGroupFullInfo(id: Int) = basicGroupsFullInfo[id]
 
 	fun getSupergroupFullInfo(id: Int) = supergroupsFullInfo[id]
-
-	private fun updateChatIds() {
-		chatTitles.clear()
-		for (chatEntry in chats.entries) {
-			chatTitles[chatEntry.value.title] = chatEntry.key
-		}
-	}
 
 	private fun isChannel(chat: TdApi.Chat): Boolean {
 		return chat.type is TdApi.ChatTypeSupergroup && (chat.type as TdApi.ChatTypeSupergroup).isChannel
@@ -346,7 +338,6 @@ class TelegramHelper private constructor() {
 				return
 			}
 		}
-		updateChatIds()
 		listener?.onTelegramChatsRead()
 	}
 
@@ -756,7 +747,6 @@ class TelegramHelper private constructor() {
 						chat.order = 0
 						setChatOrder(chat, order)
 					}
-					updateChatIds()
 					listener?.onTelegramChatsChanged()
 				}
 				TdApi.UpdateChatTitle.CONSTRUCTOR -> {
@@ -766,7 +756,6 @@ class TelegramHelper private constructor() {
 						synchronized(chat) {
 							chat.title = updateChat.title
 						}
-						updateChatIds()
 						listener?.onTelegramChatChanged(chat)
 					}
 				}
