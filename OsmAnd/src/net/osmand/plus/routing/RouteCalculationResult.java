@@ -415,9 +415,25 @@ public class RouteCalculationResult {
 				} else if(delta < 150){
 					type = TurnType.valueOf(TurnType.TSHL, leftSide);
 					description = ctx.getString( R.string.route_tshl);
-				} else if(delta < 210){
+				} else if(delta < 180){
+					if(leftSide) {
+						type = TurnType.valueOf(TurnType.TSHL, leftSide);
+						description = ctx.getString( R.string.route_tshl);
+					} else {
+						type = TurnType.valueOf(TurnType.TU, leftSide);
+						description = ctx.getString( R.string.route_tu);
+					}
+				} else if(delta == 180){
 					type = TurnType.valueOf(TurnType.TU, leftSide);
 					description = ctx.getString( R.string.route_tu);
+				} else if(delta < 210){
+					if(leftSide) {
+						type = TurnType.valueOf(TurnType.TU, leftSide);
+						description = ctx.getString( R.string.route_tu);
+					} else {
+						description = ctx.getString( R.string.route_tshr);
+						type = TurnType.valueOf(TurnType.TSHR, leftSide);
+					}
 				} else if(delta < 240){
 					description = ctx.getString( R.string.route_tshr);
 					type = TurnType.valueOf(TurnType.TSHR, leftSide);
