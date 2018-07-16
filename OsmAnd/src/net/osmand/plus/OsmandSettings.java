@@ -1907,25 +1907,6 @@ public class OsmandSettings {
 		return settingsAPI.edit(globalPreferences).remove(INTERMEDIATE_POINTS).remove(INTERMEDIATE_POINTS_DESCRIPTION).commit();
 	}
 
-	public boolean clearActiveMapMarkers() {
-		return settingsAPI.edit(globalPreferences)
-				.remove(MAP_MARKERS_POINT)
-				.remove(MAP_MARKERS_DESCRIPTION)
-				.remove(MAP_MARKERS_COLOR)
-				.remove(MAP_MARKERS_SELECTION)
-				.remove(MAP_MARKERS_CREATION_DATE)
-				.commit();
-	}
-
-	public boolean clearMapMarkersHistory() {
-		return settingsAPI.edit(globalPreferences)
-				.remove(MAP_MARKERS_HISTORY_POINT)
-				.remove(MAP_MARKERS_HISTORY_DESCRIPTION)
-				.remove(MAP_MARKERS_HISTORY_COLOR)
-				.remove(MAP_MARKERS_HISTORY_CREATION_DATE)
-				.commit();
-	}
-
 	public final CommonPreference<Boolean> USE_INTERMEDIATE_POINTS_NAVIGATION =
 			new BooleanPreference("use_intermediate_points_navigation", false).makeGlobal().cache();
 
@@ -2046,48 +2027,6 @@ public class OsmandSettings {
 					.commit();
 		}
 
-		public boolean insertPoint(double latitude, double longitude,
-								   PointDescription historyDescription, int colorIndex,
-								   long creationDate, int index) {
-			List<LatLon> ps = getPoints();
-			List<String> ds = getPointDescriptions(ps.size());
-			List<Integer> cs = getColors(ps.size());
-			List<Long> cds = getCreationDates(ps.size());
-			ps.add(index, new LatLon(latitude, longitude));
-			ds.add(index, PointDescription.serializeToString(historyDescription));
-			cs.add(index, colorIndex);
-			cds.add(index, creationDate);
-			if (historyDescription != null && !historyDescription.isSearchingAddress(ctx)) {
-				SearchHistoryHelper.getInstance(ctx).addNewItemToHistory(latitude, longitude, historyDescription);
-			}
-			return savePoints(ps, ds, cs, cds);
-		}
-
-		public boolean updatePoint(double latitude, double longitude,
-								   PointDescription historyDescription, int colorIndex,
-								   long creationDate) {
-			List<LatLon> ps = getPoints();
-			List<String> ds = getPointDescriptions(ps.size());
-			List<Integer> cs = getColors(ps.size());
-			List<Long> cds = getCreationDates(ps.size());
-			int index = ps.indexOf(new LatLon(latitude, longitude));
-			if (index != -1) {
-				ds.set(index, PointDescription.serializeToString(historyDescription));
-				if (cs.size() > index) {
-					cs.set(index, colorIndex);
-				}
-				if (cds.size() > index) {
-					cds.set(index, creationDate);
-				}
-				if (historyDescription != null && !historyDescription.isSearchingAddress(ctx)) {
-					SearchHistoryHelper.getInstance(ctx).addNewItemToHistory(latitude, longitude, historyDescription);
-				}
-				return savePoints(ps, ds, cs, cds);
-			} else {
-				return false;
-			}
-		}
-
 		@Override
 		public boolean deletePoint(int index) {
 			List<LatLon> ps = getPoints();
@@ -2190,118 +2129,6 @@ public class OsmandSettings {
 				list.add(0L);
 			}
 			return list;
-		}
-
-		public boolean insertPoint(double latitude, double longitude,
-								   PointDescription historyDescription, int colorIndex,
-								   boolean selected, long creationDate, int index) {
-			List<LatLon> ps = getPoints();
-			List<String> ds = getPointDescriptions(ps.size());
-			List<Integer> cs = getColors(ps.size());
-			List<Boolean> bs = getSelections(ps.size());
-			List<Long> cds = getCreationDates(ps.size());
-			ps.add(index, new LatLon(latitude, longitude));
-			ds.add(index, PointDescription.serializeToString(historyDescription));
-			cs.add(index, colorIndex);
-			bs.add(index, selected);
-			cds.add(index, creationDate == 0 ? System.currentTimeMillis() : creationDate);
-			if (historyDescription != null && !historyDescription.isSearchingAddress(ctx)) {
-				SearchHistoryHelper.getInstance(ctx).addNewItemToHistory(latitude, longitude, historyDescription);
-			}
-			return savePoints(ps, ds, cs, bs, cds);
-		}
-
-		public boolean insertPoints(double[] latitudes, double[] longitudes,
-									List<PointDescription> historyDescriptions, int[] colorIndexes,
-									int[] positions, boolean[] selections, int[] indexes) {
-			List<LatLon> ps = getPoints();
-			List<String> ds = getPointDescriptions(ps.size());
-			List<Integer> cs = getColors(ps.size());
-			List<Boolean> bs = getSelections(ps.size());
-			List<Long> cds = getCreationDates(ps.size());
-			for (int i = 0; i < latitudes.length; i++) {
-				double latitude = latitudes[i];
-				double longitude = longitudes[i];
-				PointDescription historyDescription = historyDescriptions.get(i);
-				int colorIndex = colorIndexes[i];
-				boolean selected = selections[i];
-				int index = indexes[i];
-				ps.add(index, new LatLon(latitude, longitude));
-				ds.add(index, PointDescription.serializeToString(historyDescription));
-				cs.add(index, colorIndex);
-				bs.add(index, selected);
-				cds.add(index, System.currentTimeMillis());
-				if (historyDescription != null && !historyDescription.isSearchingAddress(ctx)) {
-					SearchHistoryHelper.getInstance(ctx).addNewItemToHistory(latitude, longitude, historyDescription);
-				}
-			}
-			return savePoints(ps, ds, cs, bs, cds);
-		}
-
-		public boolean updatePoint(double latitude, double longitude,
-								   PointDescription historyDescription, int colorIndex,
-								   boolean selected, long creationDate) {
-			List<LatLon> ps = getPoints();
-			List<String> ds = getPointDescriptions(ps.size());
-			List<Integer> cs = getColors(ps.size());
-			List<Boolean> bs = getSelections(ps.size());
-			List<Long> cds = getCreationDates(ps.size());
-			int index = ps.indexOf(new LatLon(latitude, longitude));
-			if (index != -1) {
-				ds.set(index, PointDescription.serializeToString(historyDescription));
-				if (cs.size() > index) {
-					cs.set(index, colorIndex);
-				}
-				if (bs.size() > index) {
-					bs.set(index, selected);
-				}
-				if (cds.size() > index) {
-					cds.set(index, creationDate);
-				}
-				if (historyDescription != null && !historyDescription.isSearchingAddress(ctx)) {
-					SearchHistoryHelper.getInstance(ctx).addNewItemToHistory(latitude, longitude, historyDescription);
-				}
-				return savePoints(ps, ds, cs, bs, cds);
-			} else {
-				return false;
-			}
-		}
-
-		public boolean movePoint(LatLon latLonEx,
-								 LatLon latLonNew,
-								 PointDescription historyDescription,
-								 int colorIndex,
-								 boolean selected,
-								 long creationDate) {
-			List<LatLon> ps = getPoints();
-			List<String> ds = getPointDescriptions(ps.size());
-			List<Integer> cs = getColors(ps.size());
-			List<Boolean> bs = getSelections(ps.size());
-			List<Long> cds = getCreationDates(ps.size());
-			int index = ps.indexOf(latLonEx);
-			if (index != -1) {
-				if (ps.size() > index) {
-					ps.set(index, latLonNew);
-				}
-				ds.set(index, PointDescription.serializeToString(historyDescription));
-				if (cs.size() > index) {
-					cs.set(index, colorIndex);
-				}
-				if (bs.size() > index) {
-					bs.set(index, selected);
-				}
-				if (cds.size() > index) {
-					cds.set(index, creationDate);
-				}
-				if (historyDescription != null && !historyDescription.isSearchingAddress(ctx)) {
-					double lat = latLonNew.getLatitude();
-					double lon = latLonNew.getLongitude();
-					SearchHistoryHelper.getInstance(ctx).addNewItemToHistory(lat, lon, historyDescription);
-				}
-				return savePoints(ps, ds, cs, bs, cds);
-			} else {
-				return false;
-			}
 		}
 
 		@Override
@@ -2563,56 +2390,9 @@ public class OsmandSettings {
 		return mapMarkersStorage.getColors(sz);
 	}
 
-	public List<Boolean> getMapMarkersSelections(int sz) {
-		return mapMarkersStorage.getSelections(sz);
-	}
-
-	public List<Long> getMapMarkersCreationDates(int sz) {
-		return mapMarkersStorage.getCreationDates(sz);
-	}
-
 	public List<LatLon> getMapMarkersPoints() {
 		return mapMarkersStorage.getPoints();
 	}
-
-	public boolean insertMapMarker(double latitude, double longitude,
-								   PointDescription historyDescription, int colorIndex,
-								   boolean selected, long creationDate, int index) {
-		return mapMarkersStorage.insertPoint(latitude, longitude, historyDescription, colorIndex,
-				selected, creationDate, index);
-	}
-
-	public boolean insertMapMarkers(double[] latitudes, double[] longitudes,
-									List<PointDescription> historyDescriptions, int[] colorIndexes,
-									int[] positions, boolean[] selections, int[] indexes) {
-		return mapMarkersStorage.insertPoints(latitudes, longitudes, historyDescriptions, colorIndexes,
-				positions, selections, indexes);
-	}
-
-	public boolean updateMapMarker(double latitude, double longitude,
-								   PointDescription historyDescription, int colorIndex, boolean selected,
-								   long creationDate) {
-		return mapMarkersStorage.updatePoint(latitude, longitude, historyDescription, colorIndex, selected, creationDate);
-	}
-
-	public boolean moveMapMarker(LatLon latLonEx,
-								 LatLon latLonNew,
-								 PointDescription historyDescription,
-								 int colorIndex,
-								 boolean selected,
-								 long creationDate) {
-		return mapMarkersStorage.movePoint(latLonEx, latLonNew, historyDescription, colorIndex, selected, creationDate);
-	}
-
-	public boolean deleteMapMarker(int index) {
-		return mapMarkersStorage.deletePoint(index);
-	}
-
-	public boolean saveMapMarkers(List<LatLon> ps, List<String> ds, List<Integer> cs, List<Boolean> bs,
-								  List<Long> cds) {
-		return mapMarkersStorage.savePoints(ps, ds, cs, bs, cds);
-	}
-
 
 	public List<String> getMapMarkersHistoryPointDescriptions(int sz) {
 		return mapMarkersHistoryStorage.getPointDescriptions(sz);
@@ -2622,31 +2402,8 @@ public class OsmandSettings {
 		return mapMarkersHistoryStorage.getPoints();
 	}
 
-	public List<Long> getMapMarkersHistoryCreationDates(int sz) {
-		return mapMarkersHistoryStorage.getCreationDates(sz);
-	}
-
 	public List<Integer> getMapMarkersHistoryColors(int sz) {
 		return mapMarkersHistoryStorage.getColors(sz);
-	}
-
-	public boolean insertMapMarkerHistory(double latitude, double longitude,
-										  PointDescription historyDescription, int colorIndex,
-										  long creationDate, int index) {
-		return mapMarkersHistoryStorage.insertPoint(latitude, longitude, historyDescription, colorIndex, creationDate, index);
-	}
-
-	public boolean updateMapMarkerHistory(double latitude, double longitude,
-										  PointDescription historyDescription, int colorIndex, long creationDate) {
-		return mapMarkersHistoryStorage.updatePoint(latitude, longitude, historyDescription, colorIndex, creationDate);
-	}
-
-	public boolean deleteMapMarkerHistory(int index) {
-		return mapMarkersHistoryStorage.deletePoint(index);
-	}
-
-	public boolean saveMapMarkersHistory(List<LatLon> ps, List<String> ds, List<Integer> cs, List<Long> cds) {
-		return mapMarkersHistoryStorage.savePoints(ps, ds, cs, cds);
 	}
 
 
