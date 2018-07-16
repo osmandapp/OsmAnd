@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.util.DisplayMetrics;
 import android.view.View;
@@ -329,6 +330,10 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 	}
 
 	public void saveCurrentTrack() {
+		saveCurrentTrack(null);
+	}
+
+	public void saveCurrentTrack(@Nullable final Runnable onComplete) {
 		app.getTaskManager().runInBackground(new OsmAndTaskRunnable<Void, Void, Void>() {
 
 			@Override
@@ -354,6 +359,9 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 				isSaving = false;
 				app.getNotificationHelper().refreshNotifications();
 				updateControl();
+				if (onComplete != null) {
+					onComplete.run();
+				}
 			}
 		}, (Void) null);
 	}

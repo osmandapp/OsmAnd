@@ -265,7 +265,14 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		save.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				plugin.saveCurrentTrack();
+				plugin.saveCurrentTrack(new Runnable() {
+					@Override
+					public void run() {
+						if (isResumed()) {
+							reloadTracks();
+						}
+					}
+				});
 				updateCurrentTrack();
 			}
 		});
