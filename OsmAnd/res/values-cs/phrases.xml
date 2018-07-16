@@ -3603,9 +3603,9 @@
 	<string name="poi_water_supply_water_trucking">Dovážení autem</string>
 	<string name="poi_water_place_access_multifamilies">Pro více rodin</string>
 
-	<string name="poi_socket_cee_blue">Konektor: CEE modrý (karavanový)</string>
-	<string name="poi_socket_cee_blue_current">Konektor: CEE Modrý (karavanový): Maximální proud</string>
-	<string name="poi_socket_cee_blue_output">Konektor: CEE Modrý (karavanový): Maximální výkon</string>
+	<string name="poi_socket_cee_blue">Počet zásuvek typu CEE modrá (kulatá karavanová)</string>
+	<string name="poi_socket_cee_blue_current">Maximální proud zásuvky CEE Modrá (kulatá karavanová) A</string>
+	<string name="poi_socket_cee_blue_output">Maximální výkon zásuvky CEE Modrá (kulatá karavanová) kW</string>
 	<string name="poi_socket_cee_red_16a">Konektor: CEE Červený 16A (pětikolík malý)</string>
 	<string name="poi_socket_cee_red_16a_current">Konektor: CEE Červený 16A (pětikolík malý): Maximální proud</string>
 	<string name="poi_socket_cee_red_16a_output">Konektor: CEE Červený 16A (pětikolík malý): Maximální výkon</string>
