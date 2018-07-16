@@ -245,9 +245,9 @@ public class TransportRouteController extends MenuController {
 	@Override
 	public String getNameStr() {
 		if (transportRoute.refStop != null && !TextUtils.isEmpty(transportRoute.refStop.getName())) {
-			return transportRoute.refStop.getName();
+			return transportRoute.refStop.getName(getPreferredMapLang(), isTransliterateNames());
 		} else if (transportRoute.stop != null && !TextUtils.isEmpty(transportRoute.stop.getName())) {
-			return transportRoute.stop.getName();
+			return transportRoute.stop.getName(getPreferredMapLang(), isTransliterateNames());
 		} else if (!TextUtils.isEmpty(getPointDescription().getTypeName())) {
 			return getPointDescription().getTypeName();
 		} else {
