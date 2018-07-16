@@ -3697,4 +3697,143 @@
 	<string name="poi_climbing_routes">Διαδρομές αναρρίχησης</string>
 
 	<string name="poi_circumference">Περίμετρος</string>
-	</resources>
+	<string name="poi_diameter_crown">Διάμετρος κορυφής</string>
+
+	<string name="poi_meadow_agricultural">Τύπος: αγροτικός</string>
+	<string name="poi_meadow_perpetual">Τύπος: συνεχής</string>
+	<string name="poi_meadow_transitional">Τύπος: μεταβατικός</string>
+	<string name="poi_meadow_pasture">Τύπος: βοσκότοπος</string>
+
+	<string name="poi_frozen_food">Παγωμένη τροφή</string>
+
+	<string name="poi_agrarian">Αγροτικό κατάστημα</string>
+
+	<string name="poi_shop_fireplace">Κατάστημα τζακιών</string>
+
+	<string name="poi_shop_boat">Κατάστημα σκαφών</string>
+
+	<string name="poi_cannabis">Κατάστημα κάνναβις</string>
+
+	<string name="poi_socket_cee_blue_yes">Γαλάζιος CEE</string>
+	<string name="poi_socket_cee_red_16a_yes">CEE κόκκινο 16A</string>
+	<string name="poi_socket_cee_red_32a_yes">CEE κόκκινο 32A</string>
+	<string name="poi_socket_cee_red_64a_yes">CEE κόκκινο 64A</string>
+	<string name="poi_socket_cee_red_125a_yes">CEE κόκκινο 125A</string>
+	<string name="poi_socket_type1_yes">Τύπος 1</string>
+	<string name="poi_socket_type1_combo_yes">Τύπος 1 σύνθετος</string>
+	<string name="poi_socket_type2_yes">Τύπος 2</string>
+	<string name="poi_socket_type2_combo_yes">Τύπος 2 σύνθετος</string>
+	<string name="poi_socket_type3_yes">Τύπος 3</string>
+	<string name="poi_socket_chademo_yes">CHAdeMO</string>
+	<string name="poi_socket_tesla_standard_yes">Πρότυπο Τέσλα</string>
+	<string name="poi_socket_tesla_supercharger_yes">Υπερφορτιστής Τέσλα</string>
+	<string name="poi_socket_tesla_roadster_yes">Ρόουντστερ Τέσλα</string>
+	<string name="poi_socket_nema_5_15_yes">NEMA 5-15R</string>
+	<string name="poi_socket_nema_5_20_yes">NEMA 5-20</string>
+	<string name="poi_socket_nema_14_30_yes">NEMA 14-30</string>
+	<string name="poi_socket_nema_14_50_yes">NEMA 14-50</string>
+	<string name="poi_socket_schuko_yes">Σούκο</string>
+	<string name="poi_socket_bs1363_yes">BS 1363</string>
+	<string name="poi_socket_as3112_yes">AS/NZS 3112</string>
+
+	<string name="poi_socket_chademo_output_high">Υψηλή</string>
+	<string name="poi_socket_chademo_output_medium">Μεσαία</string>
+	<string name="poi_socket_chademo_output_low">Χαμηλή</string>
+	<string name="poi_socket_type2_output_high">Υψηλή</string>
+	<string name="poi_socket_type2_output_medium">Μεσαία</string>
+	<string name="poi_socket_type2_output_low">Χαμηλή</string>
+	<string name="poi_socket_type2_combo_output_high">Υψηλή</string>
+	<string name="poi_socket_type2_combo_output_medium">Μεσαία</string>
+	<string name="poi_socket_type2_combo_output_low">Χαμηλή</string>
+	<string name="poi_socket_type3_output_high">Υψηλή</string>
+	<string name="poi_socket_type3_output_medium">Μεσαία</string>
+	<string name="poi_socket_type3_output_low">Χαμηλή</string>
+	<string name="poi_socket_cee_blue_output_high">Υψηλή</string>
+	<string name="poi_socket_cee_blue_output_medium">Μεσαία</string>
+	<string name="poi_socket_cee_blue_output_low">Χαμηλή</string>
+	<string name="poi_socket_schuko_output_high">Υψηλή</string>
+	<string name="poi_socket_schuko_output_medium">Μεσαία</string>
+	<string name="poi_socket_schuko_output_low">Χαμηλή</string>
+
+	<string name="poi_flooring">Κατάστημα δαπέδων</string>
+	<string name="poi_pottery">Κεραμικά</string>
+
+	<string name="poi_whitewater_rapid_name">Όνομα των γρήγορων ποταμιών</string>
+
+	<string name="poi_outpost">Σημείο παράδοσης καταστήματος</string>
+
+	<string name="poi_barbecue_grill">Σχάρα ψησταριάς: ναι</string>
+
+	<string name="poi_water_utility">Γραφείο υπηρεσίας νερού</string>
+
+	<string name="poi_amusement_arcade">Ηλεκτρονική διασκέδαση</string>
+	<string name="poi_adult_gaming_centre">Κέντρο παιχνιδιών ενηλίκων</string>
+
+	<string name="poi_service_vehicle_car_repair_yes">Επισκευή αυτοκινήτου</string>
+	<string name="poi_service_vehicle_oil_change_yes">Αλλαγή λαδιών</string>
+	<string name="poi_service_vehicle_used_car_sales_yes">Πωλήσεις μεταχειρισμένων οχημάτων</string>
+	<string name="poi_service_vehicle_brakes_yes">Φρένα</string>
+	<string name="poi_service_vehicle_new_car_sales_yes">Πωλήσεις καινούργιων οχημάτων</string>
+	<string name="poi_service_vehicle_diagnostics_yes">Διαγνωστικά</string>
+	<string name="poi_service_vehicle_car_parts_yes">Ανταλλακτικά οχημάτων</string>
+	<string name="poi_service_vehicle_batteries_yes">Μπαταρίες</string>
+	<string name="poi_service_vehicle_air_conditioning_yes">Κλιματισμός</string>
+	<string name="poi_service_vehicle_body_repair_yes">Επισκευή αμαξώματος</string>
+	<string name="poi_service_vehicle_electrical_yes">Ηλεκτρικά</string>
+	<string name="poi_service_vehicle_wheels_yes">Ελαστικά</string>
+	<string name="poi_service_vehicle_glass_yes">Τζάμια</string>
+	<string name="poi_service_vehicle_truck_repair_yes">Επισκευή φορτηγών</string>
+	<string name="poi_service_vehicle_muffler_yes">Σιγαστήρες</string>
+	<string name="poi_service_vehicle_alignment_yes">Ευθυγράμμιση</string>
+	<string name="poi_service_vehicle_transmission_repair_yes">Επισκευή κιβωτίου ταχυτήτων</string>
+	<string name="poi_service_vehicle_motor_yes">Κινητήρας</string>
+	<string name="poi_service_vehicle_insurance_yes">Ασφάλεια</string>
+	<string name="poi_service_vehicle_tyres_yes">Ελαστικά</string>
+
+	<string name="poi_aerialway_zip_line">Εναέρια τροχαλία</string>
+
+	<string name="poi_climbing_adventure">Περιπετειώδης αναρρίχηση</string>
+
+	<string name="poi_via_ferrata">Αναρρίχηση με καλώδιο (Via ferrata)</string>
+	<string name="poi_cable_number">Αριθμός καλωδίου</string>
+	<string name="poi_via_ferrata_scale">Δυσκολία</string>
+
+	<string name="poi_glacier_type_icecap">Παγοκάλυμμα</string>
+	<string name="poi_glacier_type_icefield">Παγονησίδα</string>
+	<string name="poi_glacier_type_plateau">Υψίπεδο</string>
+	<string name="poi_glacier_type_valley">Πεδιάδα</string>
+	<string name="poi_glacier_type_outlet">Στόμιο</string>
+	<string name="poi_glacier_type_tidewater">Νερά παλίρροιας</string>
+	<string name="poi_glacier_type_mountain">Βουνό</string>
+	<string name="poi_glacier_type_hanging">Αιωρούμενος</string>
+	<string name="poi_glacier_type_icefall">Παγοκαταρράκτης</string>
+	<string name="poi_glacier_type_rock">Πέτρα</string>
+	<string name="poi_glacier_type_shelf">Ράφι πάγου (Shelf)</string>
+	<string name="poi_glacier_type_remnant">Υπόλοιπα</string>
+	<string name="poi_glacier_type_ice_tongue">Γλώσσα πάγου</string>
+
+	<string name="poi_glacier_ele_top">Υψηλότερο σημείο</string>
+	<string name="poi_glacier_ele_bottom">Χαμηλότερο σημείο</string>
+	<string name="poi_glacier_slope">Μέση κλίση</string>
+
+	<string name="poi_checkpoint_hiking">Σημείο ελέγχου πεζοπορίας</string>
+	<string name="poi_checkpoint_type_stamp">Σημείο επισήμανσης</string>
+	<string name="poi_checkpoint_type_code">Κωδικός</string>
+	<string name="poi_checkpoint_type_notebook">Σημειωματάριο</string>
+	<string name="poi_checkpoint_type_needler">Ένεση</string>
+	<string name="poi_checkpoint_type_quize">Εξέταση</string>
+	<string name="poi_checkpoint_type_electronic">Ηλεκτρονικό</string>
+	<string name="poi_course">Πορεία</string>
+
+	<string name="poi_rock">Πέτρα</string>
+
+	<string name="poi_end_date">Τελική ημερομηνία</string>
+
+	<string name="poi_appliance">Κατάστημα συσκευών</string>
+
+	<string name="poi_outcrop">Εμφάνιση</string>
+
+	<string name="poi_payment_contactless_yes">Ανέπαφα</string>
+	<string name="poi_payment_contactless_no">Μη αποδεκτά ανέπαφα</string>
+
+</resources>
