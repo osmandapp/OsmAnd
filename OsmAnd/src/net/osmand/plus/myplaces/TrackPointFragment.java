@@ -41,7 +41,6 @@ import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
 import net.osmand.Collator;
-import net.osmand.IndexConstants;
 import net.osmand.OsmAndCollator;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
@@ -301,7 +300,7 @@ public class TrackPointFragment extends OsmandExpandableListFragment implements 
 		GPXFile gpxFile = getGpx();
 		if (gpxFile != null) {
 			if (gpxFile.path.isEmpty() && getTrackActivity() != null) {
-				new SaveGpxAsyncTask(this, gpxFile).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+				new SaveAndShareTask(this, gpxFile).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 			} else {
 				shareGpx(gpxFile.path);
 			}
@@ -1234,12 +1233,12 @@ public class TrackPointFragment extends OsmandExpandableListFragment implements 
 		}
 	}
 
-	public static class SaveGpxAsyncTask extends AsyncTask<Void, Void, Boolean> {
+	public static class SaveAndShareTask extends AsyncTask<Void, Void, Boolean> {
 		private final GPXFile gpx;
 		private final OsmandApplication app;
 		private final WeakReference<TrackPointFragment> fragmentRef;
 
-		SaveGpxAsyncTask(@NonNull TrackPointFragment fragment, @NonNull GPXFile gpx) {
+		SaveAndShareTask(@NonNull TrackPointFragment fragment, @NonNull GPXFile gpx) {
 			this.gpx = gpx;
 			fragmentRef = new WeakReference<>(fragment);
 			app = fragment.getMyApplication();
