@@ -45,7 +45,9 @@ import java.io.InputStreamReader;
 import java.io.Serializable;
 import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider {
 
@@ -292,18 +294,27 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 						current.id = Long.parseLong(readText(parser, "id"));
 					} else if (parser.getName().equals("comment")) {
 						commentIndex++;
+						if (current != null) {
+							current.usersComments.add(commentIndex, new Comment());
+						}
 					} else if (parser.getName().equals("user") && current != null) {
+						String user = readText(parser, "user");
 						if (commentIndex == current.users.size()) {
-							current.users.add(readText(parser, "user"));
+							current.users.add(user);
 						}
+						current.usersComments.get(commentIndex).setUser(user);
 					} else if (parser.getName().equals("date") && current != null) {
+						String date = readText(parser, "date");
 						if (commentIndex == current.dates.size()) {
-							current.dates.add(readText(parser, "date"));
+							current.dates.add(date);
 						}
+						current.usersComments.get(commentIndex).setData(date);
 					} else if (parser.getName().equals("text") && current != null) {
+						String text = readText(parser, "text");
 						if (commentIndex == current.comments.size()) {
-							current.comments.add(readText(parser, "text"));
+							current.comments.add(text);
 						}
+						current.usersComments.get(commentIndex).setComment(text);
 					}
 				}
 			}
@@ -555,6 +566,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 		private List<String> dates = new ArrayList<>();
 		private List<String> comments = new ArrayList<>();
 		private List<String> users = new ArrayList<>();
+		private List<Comment> usersComments = new ArrayList<>();
 		private long id;
 		private boolean opened;
 
@@ -579,6 +591,9 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 				}
 				if (users.size() > 0) {
 					users.remove(0);
+				}
+				if (usersComments.size() > 0) {
+					usersComments.remove(0);
 				}
 			}
 		}
@@ -639,6 +654,29 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 			}
 			return res;
 		}
+		
+		public List<String> getCommentDescriptionList2() {
+			List<String> res = new ArrayList<>(usersComments.size());
+			for (int i = 0; i < usersComments.size(); i++) {
+				StringBuilder sb = new StringBuilder();
+				boolean needLineFeed = false;
+				Comment comment = usersComments.get(i);
+				if (!comment.data.isEmpty()) {
+					sb.append(comment.data).append(" ");
+					needLineFeed = true;
+				}
+				if (!comment.user.isEmpty()) {
+					sb.append(comment.user).append(":");
+					needLineFeed = true;
+				}
+				if (needLineFeed) {
+					sb.append("\n");
+				}
+				sb.append(comment.comment);
+				res.add(sb.toString());
+			}
+			return res;
+		}
 
 		public long getId() {
 			return id;
@@ -663,7 +701,37 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 		public void setLocal(boolean local) {
 			this.local = local;
 		}
+
+		
 	}
+	class Comment implements Serializable {
 
+		String data = "";
+		String comment = "";
+		String user = "";
 
+		public String getData() {
+			return data;
+		}
+
+		public void setData(String data) {
+			this.data = data;
+		}
+
+		public String getComment() {
+			return comment;
+		}
+
+		public void setComment(String comment) {
+			this.comment = comment;
+		}
+
+		public String getUser() {
+			return user;
+		}
+
+		public void setUser(String user) {
+			this.user = user;
+		}
+	}
 }
