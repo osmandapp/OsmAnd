@@ -38,7 +38,6 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
@@ -187,8 +186,7 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppPurc
 						regionNameHeaderTextView.setText(R.string.default_buttons_support);
 						countryName = getString(R.string.osmand_team);
 					} else {
-						WorldRegion world = getMyApplication().getRegions().getWorldRegion();
-						countryName = world.getLocaleName();
+						countryName = getString(R.string.shared_string_world);
 					}
 				}
 				regionNameTextView.setText(countryName);

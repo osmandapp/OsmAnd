@@ -26,6 +26,7 @@ import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.util.Algorithms;
 
 import java.io.Serializable;
+import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -129,11 +130,12 @@ public class CountrySelectionFragment extends BaseOsmAndDialogFragment {
 	}
 
 
-	public void initCountries(OsmandApplication app) {
+	public void initCountries(final OsmandApplication app) {
 		final WorldRegion root = app.getRegions().getWorldRegion();
 		ArrayList<WorldRegion> groups = new ArrayList<>();
 		groups.add(root);
 		processGroup(root, groups);
+		final Collator collator = Collator.getInstance();
 		Collections.sort(groups, new Comparator<WorldRegion>() {
 			@Override
 			public int compare(WorldRegion lhs, WorldRegion rhs) {
@@ -143,11 +145,11 @@ public class CountrySelectionFragment extends BaseOsmAndDialogFragment {
 				if (rhs == root) {
 					return 1;
 				}
-				return getHumanReadableName(lhs).compareTo(getHumanReadableName(rhs));
+				return collator.compare(getHumanReadableName(app, lhs), getHumanReadableName(app, rhs));
 			}
 		});
 		for (WorldRegion group : groups) {
-			String name = getHumanReadableName(group);
+			String name = getHumanReadableName(app, group);
 			if (group == root) {
 				countryItems.add(new CountryItem(name, ""));
 			} else {
@@ -169,9 +171,11 @@ public class CountrySelectionFragment extends BaseOsmAndDialogFragment {
 		}
 	}
 
-	private static String getHumanReadableName(WorldRegion group) {
+	private String getHumanReadableName(OsmandApplication app, WorldRegion group) {
 		String name;
-		if (group.getLevel() > 2 || (group.getLevel() == 2
+		if (group.getLevel() == 0) {
+			name = app.getString(R.string.shared_string_world);
+		} else if (group.getLevel() > 2 || (group.getLevel() == 2
 				&& group.getSuperregion().getRegionId().equals(WorldRegion.RUSSIA_REGION_ID))) {
 			WorldRegion parent = group.getSuperregion();
 			WorldRegion parentsParent = group.getSuperregion().getSuperregion();
