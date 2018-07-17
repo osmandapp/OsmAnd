@@ -1806,4 +1806,9 @@
 	<string name="poi_health_specialty_emergency_medicine_yes">רפואת חירום</string>
 	<string name="poi_health_specialty_emergency_medicine_no">התמחות רפואית: רפואת חירום: לא</string>
 	<string name="poi_health_specialty_plastic_surgery_yes">נתיחה פלסטית</string>
+	<string name="poi_health_specialty_orthodontics_yes">אורתודנטיה</string>
+	<string name="poi_health_specialty_physiotherapy_yes">פיזיותרפיה</string>
+	<string name="poi_health_specialty_biochemistry_yes">ביוכימיה</string>
+	<string name="poi_health_specialty_occupational_yes">ריפוי בעיסוק</string>
+	<string name="poi_health_specialty_child_psychiatry_yes">פסיכיאטריית ילדים</string>
 	</resources>
