@@ -186,6 +186,8 @@ public class ConfigureMapMenu {
 				} else {
 					showGpxSelectionDialog(adapter, adapter.getItem(pos));
 				}
+			} else if (itemId == R.string.map_markers) {
+				settings.SHOW_MAP_MARKERS.set(isChecked);
 			} else if (itemId == R.string.layer_map) {
 				if (OsmandPlugin.getEnabledPlugin(OsmandRasterMapsPlugin.class) == null) {
 					Intent intent = new Intent(ma, PluginActivity.class);
@@ -464,6 +466,15 @@ public class ConfigureMapMenu {
 				.setIcon(R.drawable.ic_action_polygom_dark)
 				.setSecondaryIcon(R.drawable.ic_action_additional_option)
 				.setListener(l).createItem());
+
+		selected = settings.SHOW_MAP_MARKERS.get();
+		adapter.addItem(new ContextMenuItem.ItemBuilder()
+				.setTitleId(R.string.map_markers, activity)
+				.setSelected(selected)
+				.setColor(selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
+				.setIcon(R.drawable.ic_action_flag_dark)
+				.setListener(l).createItem());
+
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
 				.setTitleId(R.string.layer_map, activity)
 				.setIcon(R.drawable.ic_world_globe_dark)
