@@ -1249,10 +1249,7 @@ public class TrackPointFragment extends OsmandExpandableListFragment implements 
 		protected void onPreExecute() {
 			TrackPointFragment fragment = fragmentRef.get();
 			if (fragment != null) {
-				TrackActivity activity = fragment.getTrackActivity();
-				if (activity != null) {
-					activity.setSupportProgressBarIndeterminateVisibility(true);
-				}
+				fragment.showProgressBar();
 			}
 		}
 
@@ -1283,6 +1280,7 @@ public class TrackPointFragment extends OsmandExpandableListFragment implements 
 			TrackPointFragment fragment = fragmentRef.get();
 			if (gpx != null) {
 				if (fragment != null && fragment.getTrackActivity() != null) {
+					fragment.hideProgressBar();
 					fragment.shareGpx(gpx.path);
 				}
 				if (shouldClearPath) {
