@@ -243,7 +243,7 @@ Du hittar din parkeringsplats och -tid på instrumentbrädan och i widgeten på 
     <string name="prefs_plugins_descr">Insticksmoduler aktiverar avancerade inställningar samt ger ytterligare funktionalitet.</string>
     <string name="prefs_plugins">Insticksmoduler</string>
 
-    <string name="osm_editing_plugin_description">"Med denna modul kan OsmAnd användas för att göra bidrag till OSM såsom samlande/modifierande av OSM POI-objekt, öppnande/kommenterande av OSM-anteckningar, och bidragande med inspelade GPX-filer. OSM är ett globalt kartprojekt inom public domain, För mer info, se  https://openstreetmap.org. Aktivt deltagande uppskattas och bidrag kan ges direkt i OsmAnd om du anger dina personiga OSM-referenser i appen."</string>
+    <string name="osm_editing_plugin_description">"Med denna modul kan OsmAnd användas för att göra bidrag till OSM såsom skapa eller modifiera OSM POI-objekt, öppna eller kommentera OSM-anteckningar, och bidra med inspelade GPX-filer. OSM är ett globalt kartprojekt inom public domain, För mer info, se  https://openstreetmap.org. Aktivt deltagande uppskattas och bidrag kan göras direkt från OsmAnd om du anger dina autentiseringsuppgifter till OSM i appen."</string>
     <string name="vector_maps_may_display_faster_on_some_devices">Vektorkartor ritas sannolikt upp snabbare. Fungerar kanske inte så bra på vissa enheter.</string>
     <string name="play_commands_of_currently_selected_voice">Spela upp kommandon med vald röst</string>
     <string name="test_voice_prompts">Test av röstmeddelanden</string>
@@ -331,7 +331,7 @@ Du hittar din parkeringsplats och -tid på instrumentbrädan och i widgeten på 
     <string name="global_settings">Globala inställningar</string>
     <string name="general_settings">Allmänna inställningar</string>
     <string name="general_settings_descr">Konfigurera globala inställningar.</string>
-    <string name="global_app_settings">Globala inställningar</string>
+    <string name="global_app_settings">Globala app-inställningar</string>
     <string name="user_name">Ditt OSM-användarnamn</string>
     <string name="open_street_map_login_descr">Behövs för ändringar i openstreetmap.org.</string>
     <string name="user_password">Ditt OSM-lösenord</string>
@@ -377,7 +377,7 @@ Nyttjat utrymme är {1} MB.
     <string name="old_poi_file_should_be_deleted">POI-datafilen \'%1$s\' är överflödig och kan tas bort.</string>
     <string name="update_poi_file_not_found">Lokal fil att upprätthålla POI förändringar inte hittas och kunde inte skapas.</string>
     <string name="button_upgrade_osmandplus">Uppgradera OsmAnd+</string>
-    <string name="map_version_changed_info">Servern innehåller kartfiler som inte är kompatibla med din nuvarande version av programmet. För att ladda ner och använda dem bör du uppgradera programmet till en nyare version.</string>
+    <string name="map_version_changed_info">Ladda ner den nya versionen av appen för att kunna använda de nya kartfilerna.</string>
     <string name="search_position_current_location_search">Söker plats …</string>
     <string name="search_position_current_location_found">Min position (hittad)</string>
     <string name="search_position_address">Adresser …</string>
@@ -989,7 +989,7 @@ Nyttjat utrymme är {1} MB.
 
     <string name="download_hillshade_maps">Skuggad relief</string>
 
-    <string name="av_use_external_camera_descr">Andvänd systemets app för foton.</string>
+    <string name="av_use_external_camera_descr">Andvänd systemappen för foton.</string>
     <string name="av_use_external_camera">Använd kamera-app</string>
     <string name="max_speed_none">Ingen</string>
     <string name="prefer_motorways">Föredra motorvägar</string>
@@ -1155,7 +1155,7 @@ Nyttjat utrymme är {1} MB.
     <string name="app_mode_aircraft">Flyg</string>
     <string name="map_widget_map_rendering">Kartrendering</string>
     <string name="amenity_type_seamark">Sjömärke</string>
-    <string name="app_modes_choose">Applikationsprofiler</string>
+    <string name="app_modes_choose">App-profiler</string>
 
 
     <string name="osb_author_dialog_password">OSM-lösenord (frivilligt)</string>
@@ -1244,7 +1244,7 @@ Nyttjat utrymme är {1} MB.
     <string name="lang_zh">Kinesiska</string>
     <string name="lang_pt_br">Portugisiska (Brasilien)</string>
     <string name="index_name_canada">Nordamerika - Kanada</string>
-    <string name="app_modes_choose_descr">Välj vilka användningsprofiler som ska visas i appen.</string>
+    <string name="app_modes_choose_descr">Välj vilka profiler som ska visas i appen.</string>
     <string name="index_item_nation_addresses">adresser (hela landet)</string>
     <string name="index_item_world_altitude_correction">Rättning av höjd (världen)</string>
     <string name="index_item_world_seamarks">Sjömärken (världen)</string>
@@ -1622,10 +1622,11 @@ Nyttjat utrymme är {1} MB.
     <string name="notes">Anteckningar</string>
     <string name="online_map">Online-karta</string>
     <string name="share_note">Dela anteckning</string>
-	<string name="plugin_nautical_descr">Om du aktiverar denna vy ändras kartstilen till Nautisk och visar alla sjömärken och sjökortssymboler.
-		\n\nEn kartfil som innehåller alla nautiska symboler globalt finns tillgänglig som en enda nedladdning med namnet \'World seamarks\'.
-		\n\nDenna vy kan ändras genom att antingen inaktivera den här igen eller genom att ändra kartstilen under Konfigurera kartor.
-	</string>
+	<string name="plugin_nautical_descr">Om du aktiverar denna vy ändras kartstilen till Nautisk och visar alla sjömärken och sjökortssymboler. 
+\n
+\nEn kartfil som innehåller alla nautiska symboler globalt finns tillgänglig som en enda nedladdning med namnet \'World seamarks\'. 
+\n
+\nDenna vy kan ändras genom att antingen inaktivera den här igen eller genom att ändra kartstilen under Konfigurera kartor.</string>
 	<string name="plugin_ski_descr">"Om du aktiverar denna vy ändras kartstilen till Vinter och skidor, och visar landskapet i vinterskrud.
 \n\nEn global karta med alla pister och längdskidspår i denna vy finns tillgänglig under Alla kartor som \'World ski map\'.
 \n\nDenna vy kan ändras genom att antingen inaktivera den här igen eller genom att ändra kartstilen under Konfigurera kartor. "</string>
@@ -2731,7 +2732,7 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="quick_action_add_destination_desc">Knackning på åtgärdsknappen kommer att lägga till en destination från skärmens mitt. Tidigare inställda destinationen blir den sista mellanliggande destinationen.</string>
     <string name="quick_action_replace_destination_desc">Knackning på åtgärdsknappen kommer att ersätta destinationen med skärmens mittläge.</string>
     <string name="quick_action_add_first_intermediate_desc">Knackning på åtgärdsknappen kommer att lägga en första mellanliggande punkt från skärmens mittpunkt.</string>
-    <string name="subscribe_email_desc">Prenumerera på vår e-postlista om apprabatter och få 3 fler kartanedladdningar!</string>
+    <string name="subscribe_email_desc">Prenumerera på vår e-postlista om apprabatter och få 3 fler kartnedladdningar!</string>
     <string name="depth_contour_descr">Kartor som innehåller havsdjupskonturer och nautiska punkter.</string>
     <string name="sea_depth_thanks">Tack för att du köpt nautiska djupkonturer!</string>
     <string name="index_item_depth_contours_osmand_ext">Nautiska djupkonturer</string>
@@ -2756,7 +2757,7 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="rec_split_desc">Skriv om klipp när använt utrymme överskrider lagringsstorleken.</string>
     <string name="rec_split_clip_length_desc">Övre tidsgräns för inspelade klipp.</string>
     <string name="rec_split_storage_size_desc">Mängden utrymme som kan upptas av alla inspelade klipp.</string>
-    <string name="simulate_initial_startup_descr">Anger flagga som indikerar första start av program, håller alla andra inställningar oförändrade.</string>
+    <string name="simulate_initial_startup_descr">Anger flagga som indikerar första start av appen, håller alla andra inställningar oförändrade.</string>
     <string name="rendering_value_darkyellow_name">Mörkgul</string>
     <string name="rendering_value_translucent_pink_name">Genomskinlig rosa</string>
     <string name="lang_lo">Laotiska</string>
@@ -2783,8 +2784,8 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="osmand_extended_description_part7">Bidra till OSM • Rapportera databuggar • Ladda upp GPX-spår till OSM direkt från appen • Lägg till POI och ladda upp dem direkt till OSM (eller senare om offline)</string>
     <string name="clear_all_intermediates">Rensa alla mellanliggande punkter</string>
     <string name="rendering_attr_whiteWaterSports_name">Forsränning</string>
-    <string name="osmand_extended_description_part8">OsmAnd är open-source och är utvecklas aktivt. Alla kan bidra till programmet genom att rapportera buggar, förbättra översättningar eller programmera nya funktioner. Projektet är i ett dynamiskt tillstånd av kontinuerlig förbättring av alla dessa former genom utvecklare och interaktion med användare. Projektet är också beroende av ekonomiska bidrag för att finansiera kodning och testning av nya funktioner. Ungefärlig karttäckning och kvalitet: • Västeuropa: **** • Östeuropa: *** • Ryssland: *** • Nordamerika: *** • Sydamerika: ** • Asien: ** • Japan &amp; Korea: *** • Mellanöstern: ** • Afrika: ** • Antarktis: * De flesta länder runt om i världen finns tillgängliga för nedladdning! Få en tillförlitlig navigator i ditt land - det kan vara Tyskland, Frankrike, Mexiko, Storbritannien, Spanien, Nederländerna, USA, Ryssland, Brasilien eller något annat.</string>
-    <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OSM Automated Navigation Directions) OsmAnd+ är ett open source-navigationsprogram med tillgång till ett brett utbud av global OpenStreetMap(OSM)-data. Alla kartdata (vektor- eller rasterkartor) kan sparas på telefonens minneskort för användning offline. OsmAnd erbjuder även offline och online-ruttunktioner, inklusive turn-by-turn röstguidning. OsmAnd+ är den betalda appversionen, genom att köpa det stödjer du projektet, finansierar utveckling av nya funktioner, och får de senaste uppdateringarna. Några av de centrala funktionerna: - Komplett offline-funktionalitet (spara vektor- eller rasterkartor i enhetens lagring) - Kompakta offline vektorkartor för hela världen finns tillgängliga - Obegränsad nedladdning av land- eller regionkartor direkt från appen - Offline Wikipedia-artiklar (ladda ner Wikipedia POI), utmärkt för sightseeing - Överlagring av flera kartskikt är möjligt, som GPX eller navigeringsspår, Punkter av Intresse, favoriter, höjdkurvor, hållplatser för kollektivtrafiken, fler kartor med anpassningsbar genomskinlighet- Offlinesökning efter adresser och intressepunkter (POI) - Offline routing för mediumdistansavstånd - Bil-, cykel- och fotgängarelägen med: - tillval automatiskt byte av dag/nattläge - valfri hastighetsbunden kartzoom - valfri kartjustering enligt kompass eller riktning - som tillval körfältsguide, hastighetsgräns visas, inspelade- och TTS-röster</string>
+    <string name="osmand_extended_description_part8">OsmAnd är open-source och är utvecklas aktivt. Alla kan bidra till appen genom att rapportera buggar, förbättra översättningar eller programmera nya funktioner. Projektet är i ett dynamiskt tillstånd av kontinuerlig förbättring av alla dessa former genom utvecklare och interaktion med användare. Projektet är också beroende av ekonomiska bidrag för att finansiera kodning och testning av nya funktioner. Ungefärlig karttäckning och kvalitet: • Västeuropa: **** • Östeuropa: *** • Ryssland: *** • Nordamerika: *** • Sydamerika: ** • Asien: ** • Japan &amp; Korea: *** • Mellanöstern: ** • Afrika: ** • Antarktis: * De flesta länder runt om i världen finns tillgängliga för nedladdning! Få en tillförlitlig navigator i ditt land - det kan vara Tyskland, Frankrike, Mexiko, Storbritannien, Spanien, Nederländerna, USA, Ryssland, Brasilien eller något annat.</string>
+    <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OSM Automated Navigation Directions) OsmAnd+ är ett open source-navigationsapp med tillgång till ett brett utbud av global OpenStreetMap(OSM)-data. Alla kartdata (vektor- eller rasterkartor) kan sparas på telefonens minneskort för användning offline. OsmAnd erbjuder även offline och online-ruttunktioner, inklusive turn-by-turn röstguidning. OsmAnd+ är den betalversionenen av appeb, genom att köpa det stödjer du projektet, finansierar utveckling av nya funktioner, och får de senaste uppdateringarna. Några av de centrala funktionerna: - Komplett offline-funktionalitet (spara vektor- eller rasterkartor i enhetens lagring) - Kompakta offline vektorkartor för hela världen finns tillgängliga - Obegränsad nedladdning av land- eller regionkartor direkt från appen - Offline Wikipedia-artiklar (ladda ner Wikipedia POI), utmärkt för sightseeing - Överlagring av flera kartskikt är möjligt, som GPX eller navigeringsspår, Punkter av Intresse, favoriter, höjdkurvor, hållplatser för kollektivtrafiken, fler kartor med anpassningsbar genomskinlighet- Offlinesökning efter adresser och intressepunkter (POI) - Offline routing för mediumdistansavstånd - Bil-, cykel- och fotgängarelägen med: - tillval automatiskt byte av dag/nattläge - valfri hastighetsbunden kartzoom - valfri kartjustering enligt kompass eller riktning - som tillval körfältsguide, hastighetsgräns visas, inspelade- och TTS-röster</string>
     <string name="nothing_found_in_radius">Kunde inte hitta något inom:</string>
     <string name="select_waypoints_category_description">Lägg till alla spårens vägpunkter, eller välj separata kategorier.</string>
     <string name="shared_string_total">Totalt</string>
@@ -2898,14 +2899,14 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="index_item_world_wikivoyage">Världsomspännande Wikivoyage-artiklar</string>
     <string name="access_intermediate_arrival_time">Mellanliggande ankomsttid</string>
     <string name="map_widget_intermediate_time">Mellanliggande tid</string>
-    <string name="osmand_plus_extended_description_part4">Använda data från OSM och Wikipedia 
+    <string name="osmand_plus_extended_description_part4">Använd data från OSM och Wikipedia Data
 \n• Högkvalitetsinformation från de bästa samarbetsprojekten i världen 
 \n• OSM-data som är tillgängliga per land eller region 
 \n• Wikipedia Intressepunkter, perfekt för sightseeing 
 \n• Obegränsat antal gratis nedladdningar, direkt från appen 
 \n• Kompakta offline vektorkartor som uppdateras minst en gång i månaden 
 \n 
-\n• Val mellan hela regionen data och bara vägnätet (Exempel: Hela Japan är 700 MB eller endast vägnätet för 200 MB)</string>
+\n• Val mellan data för hela regionen och bara vägnätet (Exempel: Hela Japan är 700 MB eller endast vägnätet för 200 MB)</string>
     <string name="osmand_plus_extended_description_part5">Säkerhetsfunktioner • Valfri växling mellan dag-/nattläge • Valfri visning av hastighet, med en påminnelse om du överskrider den • Valfri hastighetsbaserad zoomning • Dela din position så att dina vänner kan hitta dig</string>
     <string name="osmand_plus_extended_description_part6">Funktioner för cykel och gående • Se vägar för gående och cyklande samt vandringsstigar, utmärkta för utomhusaktiviteter • Speciella ruttval och visningsläge för cykel och gående • Valfria kollektivtrafiksplatser (buss, spårvagn, tåg) inklusive linjenamn • Valfri reseinspelning till lokal GPX-fil eller onlinetjänst • Valfri visning av hastighet och höjd • Visa konturlinjer och höjdreliefer (via separat plugin)</string>
     <string name="osmand_plus_extended_description_part7">Bidra direkt till OSM
