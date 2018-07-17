@@ -41,6 +41,7 @@ import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
 import net.osmand.Collator;
+import net.osmand.IndexConstants;
 import net.osmand.OsmAndCollator;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
@@ -50,7 +51,6 @@ import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.WptPt;
-import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItemType;
@@ -300,20 +300,16 @@ public class TrackPointFragment extends OsmandExpandableListFragment implements 
 	private void shareItems() {
 		GPXFile gpxFile = getGpx();
 		if (gpxFile != null) {
-			TrackActivity activity = getTrackActivity();
-			if (gpxFile.path.isEmpty() && activity != null) {
-				boolean showOnMap = fragmentAdapter.isShowOnMap();
-				GpxSelectionHelper.SelectedGpxFile sf = app.getSelectedGpxHelper().selectGpxFile(gpxFile, showOnMap, false);
-				new SaveGpxAsyncTask(activity, TrackPointFragment.this, gpxFile, showOnMap ? sf : null)
-						.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+			if (gpxFile.path.isEmpty() && getTrackActivity() != null) {
+				new SaveGpxAsyncTask(this, gpxFile).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 			} else {
-				shareGpx(gpxFile);
+				shareGpx(gpxFile.path);
 			}
 		}
 	}
 
-	private void shareGpx(GPXFile gpxFile) {
-		final Uri fileUri = AndroidUtils.getUriForFile(getMyApplication(), new File(gpxFile.path));
+	private void shareGpx(String path) {
+		final Uri fileUri = AndroidUtils.getUriForFile(getMyApplication(), new File(path));
 		final Intent sendIntent = new Intent(Intent.ACTION_SEND);
 		sendIntent.putExtra(Intent.EXTRA_STREAM, fileUri);
 		sendIntent.setType("application/gpx+xml");
@@ -1238,51 +1234,59 @@ public class TrackPointFragment extends OsmandExpandableListFragment implements 
 		}
 	}
 
-	public static class SaveGpxAsyncTask extends AsyncTask<Void, Void, Void> {
+	public static class SaveGpxAsyncTask extends AsyncTask<Void, Void, Boolean> {
 		private final GPXFile gpx;
-		private final GpxSelectionHelper.SelectedGpxFile selectedGpx;
 		private final OsmandApplication app;
-		private final WeakReference<TrackActivity> activityRef;
 		private final WeakReference<TrackPointFragment> fragmentRef;
 
-		SaveGpxAsyncTask(@NonNull TrackActivity activity,
-		                 @NonNull TrackPointFragment fragment,
-		                 @NonNull GPXFile gpx,
-		                 @Nullable GpxSelectionHelper.SelectedGpxFile selectedGpx) {
+		SaveGpxAsyncTask(@NonNull TrackPointFragment fragment, @NonNull GPXFile gpx) {
 			this.gpx = gpx;
-			activityRef = new WeakReference<>(activity);
 			fragmentRef = new WeakReference<>(fragment);
-			app = activity.getMyApplication();
-			this.selectedGpx = selectedGpx;
+			app = fragment.getMyApplication();
 		}
 
 		@Override
 		protected void onPreExecute() {
-			TrackActivity activity = activityRef.get();
-			if (activity != null) {
-				activity.setSupportProgressBarIndeterminateVisibility(true);
+			TrackPointFragment fragment = fragmentRef.get();
+			if (fragment != null) {
+				TrackActivity activity = fragment.getTrackActivity();
+				if (activity != null) {
+					activity.setSupportProgressBarIndeterminateVisibility(true);
+				}
 			}
 		}
 
 		@Override
-		protected Void doInBackground(Void... params) {
+		protected Boolean doInBackground(Void... params) {
 			SavingTrackHelper savingTrackHelper = app.getSavingTrackHelper();
 			Map<String, GPXFile> files = savingTrackHelper.collectRecordedData();
-			File dir = app.getAppCustomization().getTracksDir();
+			File dir;
+			boolean shouldClearPath = false;
+			if (gpx.path.isEmpty()) {
+				dir = app.getAppPath(IndexConstants.TEMP_DIR);
+				shouldClearPath = true;
+			} else {
+				dir = app.getAppCustomization().getTracksDir();
+			}
+			if (!dir.exists()) {
+				dir.mkdir();
+			}
 			for (final String f : files.keySet()) {
 				File fout = new File(dir, f + ".gpx");
 				GPXUtilities.writeGpxFile(fout, gpx, app);
 			}
-			return null;
+			return shouldClearPath;
 		}
 
 		@Override
-		protected void onPostExecute(Void aVoid) {
-			TrackActivity activity = activityRef.get();
+		protected void onPostExecute(Boolean shouldClearPath) {
 			TrackPointFragment fragment = fragmentRef.get();
-			if (activity != null && fragment != null) {
-				if (selectedGpx != null) {
-					fragment.shareGpx(selectedGpx.getGpxFile());
+			if (gpx != null) {
+				if (fragment != null && fragment.getTrackActivity() != null) {
+					fragment.shareGpx(gpx.path);
+				}
+				if (shouldClearPath) {
+					gpx.path = "";
 				}
 			}
 		}
