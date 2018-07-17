@@ -1260,7 +1260,7 @@ public class TrackPointFragment extends OsmandExpandableListFragment implements 
 			File dir;
 			boolean shouldClearPath = false;
 			if (gpx.path.isEmpty()) {
-				dir = app.getAppPath(IndexConstants.TEMP_DIR);
+				dir = app.getCacheDir();
 				shouldClearPath = true;
 			} else {
 				dir = app.getAppCustomization().getTracksDir();
@@ -1279,7 +1279,7 @@ public class TrackPointFragment extends OsmandExpandableListFragment implements 
 		protected void onPostExecute(Boolean shouldClearPath) {
 			TrackPointFragment fragment = fragmentRef.get();
 			if (gpx != null) {
-				if (fragment != null && fragment.getTrackActivity() != null) {
+				if (fragment != null && fragment.isResumed()) {
 					fragment.hideProgressBar();
 					fragment.shareGpx(gpx.path);
 				}

@@ -48,7 +48,6 @@ public class IndexConstants {
 	public static final String INDEX_DOWNLOAD_DOMAIN = "download.osmand.net";
 	public static final String APP_DIR = "osmand/"; //$NON-NLS-1$
 	public static final String MAPS_PATH = "";
-	public static final String TEMP_DIR = "temp/";
 	public static final String BACKUP_INDEX_DIR= "backup/";
 	public static final String GPX_INDEX_DIR = "tracks/";
 	public static final String MAP_MARKERS_INDEX_DIR = "/map markers";
