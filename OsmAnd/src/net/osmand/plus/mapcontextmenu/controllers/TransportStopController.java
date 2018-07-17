@@ -84,6 +84,12 @@ public class TransportStopController extends MenuController {
 
 	@NonNull
 	@Override
+	public String getNameStr() {
+		return transportStop.getName(getPreferredMapLang(), isTransliterateNames());
+	}
+
+	@NonNull
+	@Override
 	public String getTypeStr() {
 		return getPointDescription().getTypeName();
 	}
