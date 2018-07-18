@@ -233,6 +233,11 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings nightMode) {
+		OsmandSettings settings = map.getMyApplication().getSettings();
+		if (!settings.SHOW_MAP_MARKERS.get()) {
+			return;
+		}
+
 		Location myLoc;
 		if (useFingerLocation && fingerLocation != null) {
 			myLoc = new Location("");
@@ -243,7 +248,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		}
 		MapMarkersHelper markersHelper = map.getMyApplication().getMapMarkersHelper();
 		List<MapMarker> activeMapMarkers = markersHelper.getMapMarkers();
-		int displayedWidgets = map.getMyApplication().getSettings().DISPLAYED_MARKERS_WIDGETS_COUNT.get();
+		int displayedWidgets = settings.DISPLAYED_MARKERS_WIDGETS_COUNT.get();
 
 		if (route != null && route.points.size() > 0) {
 			planRouteAttrs.updatePaints(view, nightMode, tileBox);
@@ -252,7 +257,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 			route.drawRenderers(view.getZoom(), defaultAppMode ? planRouteAttrs.paint : planRouteAttrs.paint2, canvas, tileBox);
 		}
 
-		if (map.getMyApplication().getSettings().SHOW_LINES_TO_FIRST_MARKERS.get() && myLoc != null) {
+		if (settings.SHOW_LINES_TO_FIRST_MARKERS.get() && myLoc != null) {
 			textAttrs.paint.setTextSize(textSize);
 			textAttrs.paint2.setTextSize(textSize);
 
@@ -262,7 +267,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 
 			textPaint.set(textAttrs.paint);
 
-			boolean drawMarkerName = map.getMyApplication().getSettings().DISPLAYED_MARKERS_WIDGETS_COUNT.get() == 1;
+			boolean drawMarkerName = settings.DISPLAYED_MARKERS_WIDGETS_COUNT.get() == 1;
 
 			int locX;
 			int locY;
@@ -325,7 +330,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		widgetsFactory.updateInfo(useFingerLocation ? fingerLocation : null, tileBox.getZoom());
 		OsmandSettings settings = map.getMyApplication().getSettings();
 
-		if (tileBox.getZoom() < 3) {
+		if (tileBox.getZoom() < 3 || !settings.SHOW_MAP_MARKERS.get()) {
 			return;
 		}
 
@@ -499,8 +504,12 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 
 	@Override
 	public boolean runExclusiveAction(Object o, boolean unknownLocation) {
-		if (unknownLocation || o == null || !(o instanceof MapMarker)
-				|| !map.getMyApplication().getSettings().SELECT_MARKER_ON_SINGLE_TAP.get()) {
+		OsmandSettings settings = map.getMyApplication().getSettings();
+		if (unknownLocation
+				|| o == null
+				|| !(o instanceof MapMarker)
+				|| !settings.SELECT_MARKER_ON_SINGLE_TAP.get()
+				|| !settings.SHOW_MAP_MARKERS.get()) {
 			return false;
 		}
 		final MapMarkersHelper helper = map.getMyApplication().getMapMarkersHelper();
@@ -520,7 +529,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 
 	@Override
 	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> o, boolean unknownLocation) {
-		if (tileBox.getZoom() < 3) {
+		if (tileBox.getZoom() < 3 || !map.getMyApplication().getSettings().SHOW_MAP_MARKERS.get()) {
 			return;
 		}
 		amenities.clear();
