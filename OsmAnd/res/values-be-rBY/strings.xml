@@ -3098,4 +3098,5 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="coord_input_save_as_track">Zachavać jak slied</string>
     <string name="coord_input_save_as_track_descr">Vy dadali %1$s kropak. Uviadzicie nazvu fajla i nacisnicie «zachavać».</string>
     <string name="point_deleted">Kropka %1$s vydalienaja</string>
+    <string name="shared_string_world">Sviet</string>
     </resources>
