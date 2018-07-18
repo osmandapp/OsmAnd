@@ -110,18 +110,9 @@ public abstract class BasicProgressAsyncTask<Tag, Params, Progress, Result> exte
 
 	public int getProgressPercentage() {
 		if (work > 0) {
-			int progressPercentage = (progress * 100) / work;
-			if (progressPercentage <= 100) {
-				return progressPercentage;
-			} else {
-				return 99;
-			}
+			return getCheckedProgressPercentage((progress * 100) / work);
 		}
-		if (progress <= 100) {
-			return progress;
-		} else {
-			return 99;
-		}
+		return getCheckedProgressPercentage(progress);
 	}
 
 	public void setInterrupted(boolean interrupted) {
@@ -143,5 +134,13 @@ public abstract class BasicProgressAsyncTask<Tag, Params, Progress, Result> exte
 
 	@Override
 	public void setGeneralProgress(String genProgress) {
+	}
+
+	private int getCheckedProgressPercentage(int progress) {
+		if (progress <= 100) {
+			return progress;
+		} else {
+			return 99;
+		}
 	}
 }
