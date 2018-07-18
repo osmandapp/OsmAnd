@@ -110,9 +110,18 @@ public abstract class BasicProgressAsyncTask<Tag, Params, Progress, Result> exte
 
 	public int getProgressPercentage() {
 		if (work > 0) {
-			return (progress * 100) / work;
+			int progressPercentage = (progress * 100) / work;
+			if (progressPercentage <= 100 && progressPercentage >= 0) {
+				return progressPercentage;
+			} else {
+				return 0;
+			}
 		}
-		return progress;
+		if (progress <= 100 && progress >= 0) {
+			return progress;
+		} else {
+			return 0;
+		}
 	}
 
 	public void setInterrupted(boolean interrupted) {
