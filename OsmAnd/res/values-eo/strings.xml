@@ -2938,4 +2938,5 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="coord_input_save_as_track">Konservi kiel spuron</string>
     <string name="coord_input_save_as_track_descr">Vi aldonis %1$s punktojn. Entajpu dosiernomon kaj frapetu “konservi”.</string>
     <string name="point_deleted">Forigis la punkton %1$s</string>
+    <string name="shared_string_world">Mondo</string>
     </resources>
