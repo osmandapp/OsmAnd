@@ -3149,4 +3149,5 @@
     <string name="coord_input_save_as_track">Захаваць як след</string>
     <string name="coord_input_save_as_track_descr">Вы дадалі %1$s кропак. Увядзіце назву файла і націсніце «захаваць».</string>
     <string name="point_deleted">Кропка %1$s выдаленая</string>
+    <string name="shared_string_world">Свет</string>
     </resources>
