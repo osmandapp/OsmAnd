@@ -555,13 +555,11 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 
 		private void acquireDescriptionAndType() {
 			if (comments.size() > 0) {
-				String sb = comments.get(0).date + " " + comments.get(0).user;
-				description = comments.get(0).text;
-				typeName = sb;
-			}
-			if (description != null && description.length() < 100) {
-				if (comments.size() > 0) {
-					comments.remove(0);
+				Comment comment = comments.get(0);
+				description = comment.text;
+				typeName = comment.date + " " + comment.user;
+				if (description != null && description.length() < 100) {
+					comments.remove(comment);
 				}
 			}
 		}
