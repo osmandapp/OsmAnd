@@ -3169,4 +3169,5 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="coord_input_save_as_track">Gem som spor</string>
     <string name="coord_input_save_as_track_descr">%1$s punkter tilføjet. Indtast et filnavn og tryk på “Gem“.</string>
     <string name="point_deleted">Punkt %1$s er blevet slettet</string>
+    <string name="shared_string_world">Verden</string>
     </resources>
