@@ -858,6 +858,13 @@ public class RouteProvider {
 					}
 				}
 			}
+			if (res.isEmpty()) {
+				for (Route r : gpxFile.routes) {
+					for (WptPt p : r.points) {
+						res.add(createLocation(p));
+					}
+				}
+			}
 		}
 		float[] distanceToEnd  = new float[res.size()];
 		for (int i = res.size() - 2; i >= 0; i--) {
@@ -893,8 +900,12 @@ public class RouteProvider {
 					} 
 					// save time as a speed because we don't know distance of the route segment
 					float avgSpeed = time;
-					if(!iterator.hasNext() && time > 0) {
-						avgSpeed = distanceToEnd[offset] / time;
+					if (!iterator.hasNext() && time > 0) {
+						if (distanceToEnd.length > offset) {
+							avgSpeed = distanceToEnd[offset] / time;
+						} else {
+							avgSpeed = defSpeed;
+						}
 					}
 					String stype = item.getExtensionsToRead().get("turn"); //$NON-NLS-1$
 					TurnType turnType;
