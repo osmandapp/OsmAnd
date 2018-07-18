@@ -356,7 +356,7 @@
 	<string name="local_index_tile_data_minzoom">Zoom mínimo: %1$s</string>
     <string name="edit_tilesource_successfully">A fonte da quadrícula %1$s foi salva com sucesso</string>
     <string name="speak_traffic_warnings">Moderadores de tráfego</string>
-    <string name="context_menu_item_directions_from">Direções de</string>
+    <string name="context_menu_item_directions_from">Rota a partir daqui</string>
     <string name="app_mode_default">Explorar</string>
 	<string name="local_indexes_cat_av">Dados de Áudio/Vídeo</string>
     <string name="stop_routing_confirm">Confirma que quer parar a navegação?</string>
@@ -2935,4 +2935,5 @@ Pôr do Sol: %2$s</string>
 \n• Gravação de viagem opcional também em modo background (enquanto o dispositivo está no modo sleep)
 \nOsmAnd é um software de código aberto desenvolvido ativamente. Todos podem contribuir para o app, reportando bugs, melhorando as traduções ou programando novas funcionalidades. Além disso, o projeto conta com as contribuições financeiras para financiar o desenvolvimento e testes de novas funcionalidades.</string>
     <string name="point_deleted">Ponto %1$s foi excluído</string>
+    <string name="shared_string_world">Mundo</string>
     </resources>
