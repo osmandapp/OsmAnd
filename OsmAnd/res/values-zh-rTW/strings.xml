@@ -3122,4 +3122,5 @@
     <string name="coord_input_save_as_track">儲存為軌跡</string>
     <string name="coord_input_save_as_track_descr">您已新增了 %1$s 標點。輸入檔案名稱並輕點「儲存」。</string>
     <string name="point_deleted">已刪除標點 %1$s</string>
+    <string name="shared_string_world">世界</string>
     </resources>
