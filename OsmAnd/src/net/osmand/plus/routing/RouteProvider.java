@@ -884,8 +884,12 @@ public class RouteProvider {
 					if(directions.size() > 0) {
 						RouteDirectionInfo last = directions.get(directions.size() - 1);
 						// update speed using time and idstance
-						last.setAverageSpeed((distanceToEnd[last.routePointOffset] - distanceToEnd[offset])/last.getAverageSpeed());
-						last.distance = (int) Math.round(distanceToEnd[last.routePointOffset] - distanceToEnd[offset]);
+						if (distanceToEnd.length > last.routePointOffset && distanceToEnd.length > offset) {
+							float lastDistanceToEnd = distanceToEnd[last.routePointOffset];
+							float currentDistanceToEnd = distanceToEnd[offset];
+							last.setAverageSpeed((lastDistanceToEnd - currentDistanceToEnd) / last.getAverageSpeed());
+							last.distance = (int) Math.round(lastDistanceToEnd - currentDistanceToEnd);
+						}
 					} 
 					// save time as a speed because we don't know distance of the route segment
 					float avgSpeed = time;
