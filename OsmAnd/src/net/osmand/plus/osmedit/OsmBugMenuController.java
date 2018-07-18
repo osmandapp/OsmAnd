@@ -98,7 +98,7 @@ public class OsmBugMenuController extends MenuController {
 	@Override
 	public void addPlainMenuItems(String typeStr, PointDescription pointDescription, LatLon latLon) {
 		super.addPlainMenuItems(typeStr, pointDescription, latLon);
-		for (String description : bug.getCommentDescriptionList2()) {
+		for (String description : bug.getCommentDescriptionList()) {
 			addPlainMenuItem(R.drawable.ic_action_note_dark, null, description, true, false, null);
 		}
 	}
