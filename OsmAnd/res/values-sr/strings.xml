@@ -2966,4 +2966,5 @@
 \n
 \nОвај поглед се може искључити тако што се или овде деактивира, или тако што се, по жељи, промени \"Стил карте\" под \"Подеси карту\".</string>
     <string name="point_deleted">Тачка %1$s обрисана</string>
+    <string name="shared_string_world">Свет</string>
     </resources>
