@@ -858,13 +858,6 @@ public class RouteProvider {
 					}
 				}
 			}
-			if (res.isEmpty()) {
-				for (Route r : gpxFile.routes) {
-					for (WptPt p : r.points) {
-						res.add(createLocation(p));
-					}
-				}
-			}
 		}
 		float[] distanceToEnd  = new float[res.size()];
 		for (int i = res.size() - 2; i >= 0; i--) {
