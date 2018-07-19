@@ -5,6 +5,7 @@ import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.plus.views.DirectionDrawable;
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.hardware.Sensor;
@@ -97,6 +98,12 @@ public class UiUtilities {
 		return light ? R.color.icon_color : R.color.color_white;
 	}
 
+	@ColorInt
+	public static int getContrastColor(Context context, @ColorInt int color, boolean transparent) {
+		// Counting the perceptive luminance - human eye favors green color...
+		double luminance = 1 - (0.299 * Color.red(color) + 0.587 * Color.green(color) + 0.114 * Color.blue(color)) / 255;
+		return luminance < 0.5 ? transparent ? ContextCompat.getColor(context, R.color.color_black_transparent) : Color.BLACK : Color.WHITE;
+	}
 
 	public UpdateLocationViewCache getUpdateLocationViewCache(){
 		UpdateLocationViewCache uvc = new UpdateLocationViewCache();
