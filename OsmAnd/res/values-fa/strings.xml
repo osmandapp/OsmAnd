@@ -3165,4 +3165,5 @@
     <string name="coord_input_save_as_track">ذخیره به‌عنوان مسیر</string>
     <string name="coord_input_save_as_track_descr">%1$s نقطه افزودید. نام فایل را بنویسید و روی «ذخیره» بزنید.</string>
     <string name="point_deleted">نقطهٔ %1$s پاک شد</string>
+    <string name="shared_string_world">جهان</string>
     </resources>

@@ -429,8 +429,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	private void createProgressBarForRouting() {
 		final ProgressBar pb = (ProgressBar) findViewById(R.id.map_horizontal_progress);
-		final View pbExtView = findViewById(R.id.progress_layout_external);
-		final ProgressBar pbExt = (ProgressBar) findViewById(R.id.map_horizontal_progress_external);
 
 		app.getRoutingHelper().setProgressBar(new RouteCalculationProgressCallback() {
 
@@ -446,11 +444,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			@Override
 			public void updateProgress(int progress) {
 				mapLayers.getMapControlsLayer().getMapRouteInfoMenu().updateRouteCalculationProgress(progress);
+				dashboardOnMap.updateRouteCalculationProgress(progress);
 				if (findViewById(R.id.MapHudButtonsOverlay).getVisibility() == View.VISIBLE) {
-					if (pbExtView.getVisibility() == View.VISIBLE) {
-						pbExtView.setVisibility(View.GONE);
-					}
-					if (MapRouteInfoMenu.isVisible()) {
+					if (MapRouteInfoMenu.isVisible() || dashboardOnMap.isVisible()) {
 						pb.setVisibility(View.GONE);
 						return;
 					}
@@ -460,16 +456,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 					pb.setProgress(progress);
 					pb.invalidate();
 					pb.requestLayout();
-				} else {
-					if (pb.getVisibility() == View.VISIBLE) {
-						pb.setVisibility(View.GONE);
-					}
-					if (pbExtView.getVisibility() == View.GONE) {
-						pbExtView.setVisibility(View.VISIBLE);
-					}
-					pbExt.setProgress(progress);
-					pbExt.invalidate();
-					pbExt.requestLayout();
 				}
 			}
 
@@ -507,7 +493,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			@Override
 			public void finish() {
 				mapLayers.getMapControlsLayer().getMapRouteInfoMenu().routeCalculationFinished();
-				pbExtView.setVisibility(View.GONE);
+				dashboardOnMap.routeCalculationFinished();
 				pb.setVisibility(View.GONE);
 			}
 		});
