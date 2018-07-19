@@ -2984,4 +2984,5 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="coord_input_save_as_track">Desa com una traça</string>
     <string name="coord_input_save_as_track_descr">Heu afegit %1$s punts. Introduïu un nom de fitxer i premeu \"Desa\".</string>
     <string name="point_deleted">El punt %1$s s\'ha esborrat</string>
+    <string name="shared_string_world">Mundial</string>
     </resources>
