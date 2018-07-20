@@ -1135,18 +1135,21 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 				for (SearchResult sr : res.getCurrentSearchResults()) {
 					rows.add(new QuickSearchListItem(app, sr));
 				}
-				if (OsmandPlugin.getEnabledPlugin(OsmandRasterMapsPlugin.class) != null) {
-					rows.add(new QuickSearchButtonListItem(app, R.drawable.ic_world_globe_dark,
-							app.getString(R.string.search_online_address), new OnClickListener() {
-						@Override
-						public void onClick(View view) {
-							startOnlineSearch();
-							mainSearchFragment.getAdapter().clear();
-							updateTabbarVisibility(false);
-							openKeyboard();
+				rows.add(new QuickSearchButtonListItem(app, R.drawable.ic_world_globe_dark,
+						app.getString(R.string.search_online_address), new OnClickListener() {
+					@Override
+					public void onClick(View view) {
+						final OsmandSettings settings = app.getSettings();
+						if (!settings.isInternetConnectionAvailable()) {
+							Toast.makeText(app, R.string.internet_not_available, Toast.LENGTH_LONG).show();
+							return;
 						}
-					}));
-				}
+						startOnlineSearch();
+						mainSearchFragment.getAdapter().clear();
+						updateTabbarVisibility(false);
+						openKeyboard();
+					}
+				}));
 				rows.add(new QuickSearchButtonListItem(app, R.drawable.ic_action_search_dark,
 						app.getString(R.string.custom_search), new OnClickListener() {
 					@Override
