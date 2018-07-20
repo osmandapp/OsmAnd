@@ -3818,4 +3818,12 @@
 	<string name="poi_payment_contactless_yes">Бесконтактная оплата</string>
 	<string name="poi_payment_contactless_no">Бесконтактная оплата не принимается</string>
 
+	<string name="poi_hazard_nuclear">Радиационная опасность</string>
+	<string name="poi_hazard_erosion">Эрозия</string>
+	<string name="poi_hazard_avalanche">Опасность лавины</string>
+	<string name="poi_hazard_slippery_road">Скользкая дорога</string>
+	<string name="poi_hazard_flood">Опасность затопления</string>
+	<string name="poi_hazard_minefield">Минное поле</string>
+
+
 </resources>
