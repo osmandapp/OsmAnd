@@ -65,7 +65,7 @@ public class SavedArticlesTabFragment extends BaseOsmAndFragment implements Trav
 	public void onResume() {
 		super.onResume();
 		if (dataHelper != null) {
-			dataHelper.setListener(this);
+			dataHelper.addListener(this);
 		}
 		WikivoyageExploreActivity exploreActivity = getExploreActivity();
 		if (exploreActivity != null) {
@@ -77,7 +77,7 @@ public class SavedArticlesTabFragment extends BaseOsmAndFragment implements Trav
 	public void onPause() {
 		super.onPause();
 		if (dataHelper != null) {
-			dataHelper.setListener(null);
+			dataHelper.removeListener(this);
 		}
 	}
 
