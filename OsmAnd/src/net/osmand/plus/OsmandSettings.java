@@ -613,6 +613,8 @@ public class OsmandSettings {
 	}
 	///////////// PREFERENCES classes ////////////////
 
+	public static final String NUMBER_OF_FREE_DOWNLOADS_ID = "free_downloads_v3";
+
 	// this value string is synchronized with settings_pref.xml preference name
 	private final OsmandPreference<String> PLUGINS = new StringPreference("enabled_plugins", MapillaryPlugin.ID).makeGlobal();
 
@@ -2508,7 +2510,7 @@ public class OsmandSettings {
 
 //	public final OsmandPreference<Integer> NUMBER_OF_FREE_DOWNLOADS_V2 = new IntPreference("free_downloads_v2", 0).makeGlobal();
 
-	public final OsmandPreference<Integer> NUMBER_OF_FREE_DOWNLOADS = new IntPreference("free_downloads_v3", 0).makeGlobal();
+	public final OsmandPreference<Integer> NUMBER_OF_FREE_DOWNLOADS = new IntPreference(NUMBER_OF_FREE_DOWNLOADS_ID, 0).makeGlobal();
 
 	// For DashRateUsFragment
 	public final OsmandPreference<Long> LAST_DISPLAY_TIME =
