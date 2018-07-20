@@ -3905,4 +3905,12 @@
 <string name="poi_payment_contactless_yes">Безкантактная</string>
 	<string name="poi_payment_contactless_no">Безкантактная аплата не прымаецца</string>
 
+<string name="poi_hazard_nuclear">Ядзерная небяспека</string>
+	<string name="poi_hazard_erosion">Небяспека эрозіі</string>
+	<string name="poi_hazard_avalanche">Небяспека лавіны</string>
+	<string name="poi_hazard_slippery_road">Слізкая дарога</string>
+	<string name="poi_hazard_flood">Небяспека паводкі</string>
+	<string name="poi_hazard_minefield">Міннае поле</string>
+
+
 </resources>
