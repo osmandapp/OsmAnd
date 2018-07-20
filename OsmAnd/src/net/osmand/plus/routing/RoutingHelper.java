@@ -957,7 +957,8 @@ public class RoutingHelper {
 			params.intermediates = intermediates;
 			params.gpxRoute = gpxRoute == null ? null : gpxRoute.build(start, settings);
 			params.onlyStartPointChanged = onlyStartPointChanged;
-			if(recalculateCountInInterval < RECALCULATE_THRESHOLD_COUNT_CAUSING_FULL_RECALCULATE) {
+			if (recalculateCountInInterval < RECALCULATE_THRESHOLD_COUNT_CAUSING_FULL_RECALCULATE
+					|| (gpxRoute != null && gpxRoute.isPassWholeRoute() && isDeviatedFromRoute)) {
 				params.previousToRecalculate = previousRoute;
 			} else {
 				recalculateCountInInterval = 0;

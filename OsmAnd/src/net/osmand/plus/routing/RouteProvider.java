@@ -366,6 +366,18 @@ public class RouteProvider {
 		int[] endI = new int[]{gpxParams.points.size()}; 
 		if(routeParams.gpxRoute.passWholeRoute) {
 			gpxRoute = gpxParams.points;
+			if (routeParams.previousToRecalculate != null && routeParams.onlyStartPointChanged) {
+				List<Location> routeLocations = routeParams.previousToRecalculate.getRouteLocations();
+				if (routeLocations != null) {
+					Location loc = routeParams.previousToRecalculate.getNextRouteLocation();
+					LatLon nextRouteLocation = new LatLon(loc.getLatitude(), loc.getLongitude());
+					List<Location> routeToNextRouteLocation = findStartAndEndLocationsFromRoute(routeLocations,
+							routeParams.start, nextRouteLocation, null, null);
+					gpxRoute = new ArrayList<>(routeToNextRouteLocation);
+					gpxRoute.addAll(new ArrayList<>(routeLocations));
+					endI = new int[]{gpxRoute.size()};
+				}
+			}
 		} else {
 			gpxRoute = findStartAndEndLocationsFromRoute(gpxParams.points,
 					routeParams.start, routeParams.end, startI, endI);
