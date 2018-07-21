@@ -2956,4 +2956,5 @@
     <string name="error_notification_desc">Por favor, envíe la captura de pantalla de esta notificación a support@osmand.net</string>
     <string name="quick_action_edit_actions">Editar acciones</string>
     <string name="point_deleted">Punto %1$s eliminado</string>
+    <string name="shared_string_world">Mundo</string>
     </resources>
