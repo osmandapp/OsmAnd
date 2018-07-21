@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="poi_fuel_avia_type"></string>
+<resources><string name="poi_fuel_avia_type"/>
 	<string name="poi_payment_type">支付类别</string>
 	<string name="poi_clothes_type">类型</string>
 	<string name="poi_shoes_type">类型</string>
@@ -25,4 +25,5 @@
 	<string name="poi_osmwiki">维基百科</string>
 	<string name="poi_user_defined_other">用户自定义</string>
 
+	<string name="poi_hazard_flood">洪水灾害</string>
 	</resources>
