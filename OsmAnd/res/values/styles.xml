@@ -124,6 +124,7 @@
         <item name="pstsTextColor">@color/color_white</item>
         <item name="pstsInactiveTextColor">@color/icon_color</item>
         <item name="btn_flat_bg">@drawable/btn_flat</item>
+        <item name="btn_border_bg">@drawable/btn_border_bg_light</item>
         <item name="android:windowContentOverlay">@null</item>
         <item name="actionModeBackground">@color/actionbar_light_color</item>
         <item name="actionBarStyle">@style/Widget.Styled.ActionBarLight</item>
@@ -352,6 +353,7 @@
         <item name="pstsTextColor">@color/color_white</item>
         <item name="pstsInactiveTextColor">@color/dash_search_icon_dark</item>
         <item name="btn_flat_bg">@drawable/btn_flat_night</item>
+        <item name="btn_border_bg">@drawable/btn_border_bg_dark</item>
         <item name="actionModeBackground">@color/actionbar_dark_color</item>
         <item name="actionBarStyle">@style/Widget.Styled.ActionBarDark</item>
         <item name="bg_color">@color/bg_color_dark</item>

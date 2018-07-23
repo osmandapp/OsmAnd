@@ -10,6 +10,10 @@
 	- For wording and consistency, please note http://osmand.net/help-online?id=technical-articles#Creating_a_Consistent_User_Experience
 	Thx - Hardy
 -->
+    <string name="send_search_query_description"><![CDATA[We will send your search query: <b>"%1$s"</b>, as well as your location.<br/><br/>
+        We do not collect personal information, we only need search data to improve the search algorithm.<br/>]]></string>
+    <string name="search_no_results_description">No results?\nTell us about this.</string>
+    <string name="send_search_query">Send search query?</string>
     <string name="shared_string_world">World</string>
     <string name="point_deleted">Point %1$s deleted</string>
     <string name="coord_input_edit_point">Edit point</string>
