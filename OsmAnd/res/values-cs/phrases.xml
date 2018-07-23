@@ -51,7 +51,7 @@
 	<string name="poi_service_tyres">Pneuservis</string>
 	<string name="poi_car_wash">Myčka</string>
 	<string name="poi_fuel">Čerpací stanice;Benzínová pumpa</string>
-	<string name="poi_electricity_combined_charging">Dobíjecí stanice</string>
+	<string name="poi_electricity_combined_charging">Nabíjecí stanice</string>
 	<string name="poi_parking">Parkoviště</string>
 	<string name="poi_garages">Garáže</string>
 
@@ -218,7 +218,7 @@
 	<string name="poi_traffic_calming_bump">Retardér</string>
 	<string name="poi_traffic_calming_hump">Dlouhý retardér</string>
 	<string name="poi_vehicle_inspection">Kontrola vozidel</string>
-	<string name="poi_parking_entrance">Vjezd parkoviště</string>
+	<string name="poi_parking_entrance">Vjezd na parkoviště</string>
 	<string name="poi_tram_stop">Tramvajová zastávka</string>
 	<string name="poi_historic_mine">Historický důl</string>
 	<string name="poi_education">Vzdělání</string>
@@ -3674,4 +3674,63 @@
 	<string name="poi_socket_type2">Počet konektorů typu 2 (tzv.Mennekes)</string>
 	<string name="poi_socket_type2_current">Maximální proud konektoru typu 2 (tzv. Mennekes) [A]</string>
 	<string name="poi_socket_type2_output">Maximální výkon konektoru typu 2 (tzv. Mennekes) [kW]</string>
+	<string name="poi_socket_type1_combo">"Počet konektorů typu 1 combo "</string>
+	<string name="poi_socket_type1_combo_current">Maximální proud konektoru 1 combo [A]</string>
+	<string name="poi_socket_type1_combo_output">Maximální výkon konektoru typu 1 combo [kW]</string>
+	<string name="poi_socket_type2_combo">Počet konektorů typu CCS (Typ 2 kombinovaný)</string>
+	<string name="poi_socket_type2_combo_current">Maximální proud konektoru CCS (Typ 2 kombinovaný) [A]</string>
+	<string name="poi_socket_type2_combo_output">Maximální výkon konektoru CCS (Typ 2 kombinovaný) [kW]</string>
+	<string name="poi_socket_chademo">Počet konektorů CHAdeMO</string>
+	<string name="poi_socket_chademo_current">Maximální proud konektoru CHAdeMO [A]</string>
+	<string name="poi_socket_chademo_output">Maximální výkon konektoru CHAdeMO [kW]</string>
+	<string name="poi_socket_tesla_supercharger">Počet stanic Tesla Supercharger</string>
+	<string name="poi_socket_tesla_supercharger_current">Maximální proud stanice Tesla Supercharger [A]</string>
+	<string name="poi_socket_tesla_supercharger_output">Maximální výkon stanice Tesla Supercharger [kW]</string>
+	<string name="poi_socket_nema_5_15">Počet zásuvek amerického typu NEMA 5-15R</string>
+	<string name="poi_socket_nema_5_20">Počet zásuvek amerického typu NEMA 5-20</string>
+	<string name="poi_socket_nema_14_30">Počet zásuvek amerického typu NEMA 14-30</string>
+	<string name="poi_socket_nema_14_50">Počet zásuvek amerického typu NEMA 14-50</string>
+	<string name="poi_socket_schuko">Počet zásuvek typu Schuko</string>
+	<string name="poi_socket_schuko_current">Maximální proud zásuvky Schuko [A]</string>
+	<string name="poi_socket_schuko_output">Maximální výkon zásuvky Schuko [kW]</string>
+	<string name="poi_socket_bs1363">Počet zásuvek britského typu BS 1363</string>
+	<string name="poi_socket_bs1363_current">Maximální proud zásuvky britského typu BS 1363 [A]</string>
+	<string name="poi_socket_bs1363_output">Maximální výkon zásuvky britského typu BS 1363 [kW]</string>
+	<string name="poi_socket_as3112">Počet zásuvek australského typu AS 3112</string>
+	<string name="poi_socket_as3112_current">Maximální proud zásuvky australského typu AS 3112 [A]</string>
+	<string name="poi_socket_as3112_output">Maximální výkon zásuvky australského typu AS 3112 [kW]</string>
+
+	<string name="poi_car_yes">Vjezd autem povolen</string>
+	<string name="poi_car_no">Vjezd autem zakázán</string>
+	<string name="poi_bicycle_yes">Vjezd na kole povolen</string>
+	<string name="poi_bicycle_no">Vjezd na kole zakázán</string>
+	<string name="poi_scooter_yes">Vjezd na skútru povolen</string>
+	<string name="poi_scooter_no">Vjezd na skútru zakázán</string>
+	<string name="poi_truck_yes">Vjezd nákladním autem povolen</string>
+	<string name="poi_truck_no">Vjezd nákladním autem zakázán</string>
+
+	<string name="poi_parking_fee_yes">Parkoviště s poplatkem</string>
+	<string name="poi_parking_fee_no">Parkoviště bez poplatku</string>
+	<string name="poi_parking_fee">Poplatek za parkování</string>
+
+	<string name="poi_amperage">Maximální proud [A]</string>
+	<string name="poi_charging_station_output">Maximální výkon nabíjecí stanice [kW]</string>
+
+	<string name="poi_map_type_topo">Topografická mapa</string>
+	<string name="poi_map_type_street">Podrobná mapa okolí</string>
+	<string name="poi_map_type_scheme">Schematická mapa</string>
+	<string name="poi_map_type_toposcope">Toposkop (tabulka s významnými body nadohled)</string>
+	<string name="poi_map_size_site">Zobrazuje jen nejbližší okolí</string>
+	<string name="poi_map_size_city">Zobrazuje celou obec</string>
+	<string name="poi_map_size_region">Zobrazuje okolní region</string>
+
+	<string name="poi_charging_station_filter">Nabíjecí stanice</string>
+
+	<string name="poi_depot">Depo</string>
+
+	<string name="poi_letter_box">Poštovní schránka</string>
+	<string name="poi_post_street">Ulice</string>
+	<string name="poi_post_housenumber">Číslo popisné</string>
+	<string name="poi_ref_post">PSČ</string>
+
 	</resources>

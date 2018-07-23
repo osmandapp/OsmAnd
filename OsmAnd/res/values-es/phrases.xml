@@ -3062,7 +3062,7 @@
 	<string name="poi_payment_fuel_type">Tarjetas de combustible</string>
 	<string name="poi_additional_type">Adicional</string>
 	<string name="poi_internet_access_type">Tipo de conexión a Internet</string>
-	<string name="poi_vending_type">Tipo de expendio</string>
+	<string name="poi_vending_type">Tipo de expendedora</string>
 	<string name="poi_bicycle_service">Servicio para bicicletas</string>
 	<string name="poi_clothes_type">Tipo</string>
 	<string name="poi_shoes_type">Tipo</string>
@@ -3082,7 +3082,7 @@
 	<string name="poi_subway_station_filter">Estación de metro</string>
 	<string name="poi_ferry_terminal_cargo">Mercancías</string>
 	<string name="poi_bicycle_parking_type">Tipo</string>
-	<string name="poi_aerialway_bicycle">Transporte para bicicletas</string>
+	<string name="poi_aerialway_bicycle">Transporte de bicicletas</string>
 	<string name="poi_aerialway_heating">Calefacción</string>
 	<string name="poi_pump">Bomba</string>
 	<string name="poi_observatory_designation">Designación</string>
@@ -3093,7 +3093,7 @@
 	<string name="poi_healthcare_alternative_types">Especialidad</string>
 	<string name="poi_free_flying_characteristics">Característica</string>
 	<string name="poi_archaeological_site_type">Tipo</string>
-	<string name="poi_star_rating">Valoración de estrellas</string>
+	<string name="poi_star_rating">Valoración por estrellas</string>
 	<string name="poi_religion_type">Religión</string>
 	<string name="poi_denomination">Denominación</string>
 	<string name="poi_information_type">Tipo</string>
@@ -3899,5 +3899,16 @@
 	<string name="poi_appliance">Tienda de electrodomésticos</string>
 
 	<string name="poi_outcrop">Afloramiento</string>
+
+<string name="poi_payment_contactless_yes">Sin contacto</string>
+	<string name="poi_payment_contactless_no">Sin contacto: no se acepta</string>
+
+	<string name="poi_hazard_nuclear">Peligro nuclear</string>
+	<string name="poi_hazard_erosion">Peligro de erosión</string>
+	<string name="poi_hazard_avalanche">Peligro de avalancha</string>
+	<string name="poi_hazard_slippery_road">Carretera resbaladiza</string>
+	<string name="poi_hazard_flood">Peligro de inundación</string>
+	<string name="poi_hazard_minefield">Campo de minas</string>
+
 
 </resources>
