@@ -1811,4 +1811,12 @@
 	<string name="poi_health_specialty_biochemistry_yes">ביוכימיה</string>
 	<string name="poi_health_specialty_occupational_yes">ריפוי בעיסוק</string>
 	<string name="poi_health_specialty_child_psychiatry_yes">פסיכיאטריית ילדים</string>
-	</resources>
+	<string name="poi_hazard_nuclear">סכנה גרעינית</string>
+	<string name="poi_hazard_erosion">סכנת סחף</string>
+	<string name="poi_hazard_avalanche">סכנת מפולת שלגים</string>
+	<string name="poi_hazard_slippery_road">כביש חלק</string>
+	<string name="poi_hazard_flood">סכנת הצפה</string>
+	<string name="poi_hazard_minefield">שדה מוקשים</string>
+
+
+</resources>
