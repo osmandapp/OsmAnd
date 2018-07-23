@@ -14,6 +14,7 @@
         <attr name="searchbar_text_hint" format="color"/>
 		<attr name="list_divider" format="color"/>
 		<attr name="btn_flat_bg" format="reference" />
+		<attr name="btn_border_bg" format="reference" />
 		<attr name="expandable_list_item_background" format="color"/>
 		<attr name="expandable_list_background" format="color"/>
 		<attr name="bg_color" format="reference" />

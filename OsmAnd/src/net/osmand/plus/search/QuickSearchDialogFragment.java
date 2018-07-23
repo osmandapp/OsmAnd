@@ -33,6 +33,7 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -102,6 +103,8 @@ import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import static net.osmand.plus.search.SendSearchQueryBottomSheet.MISSING_SEARCH_LOCATION_KEY;
+import static net.osmand.plus.search.SendSearchQueryBottomSheet.MISSING_SEARCH_QUERY_KEY;
 import static net.osmand.search.core.ObjectType.POI_TYPE;
 import static net.osmand.search.core.ObjectType.SEARCH_STARTED;
 import static net.osmand.search.core.SearchCoreFactory.SEARCH_AMENITY_TYPE_PRIORITY;
@@ -134,9 +137,12 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	private View tabsView;
 	private View searchView;
 	private View buttonToolbarView;
+	private View sendEmptySearchView;
 	private ImageView buttonToolbarImage;
 	private ImageButton buttonToolbarFilter;
 	private TextView buttonToolbarText;
+	private TextView sendEmptySearchText;
+	private FrameLayout sendEmptySearchButton;
 	private QuickSearchMainListFragment mainSearchFragment;
 	private QuickSearchHistoryListFragment historySearchFragment;
 	private QuickSearchCategoriesListFragment categoriesSearchFragment;
@@ -178,6 +184,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	private boolean expired;
 	private boolean poiFilterApplied;
 	private boolean fabVisible;
+	private boolean sendEmptySearchBottomBarVisible;
 	private boolean runSearchFirstTime;
 	private boolean phraseDefined;
 	private boolean addressSearch;
@@ -555,6 +562,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 						updateClearButtonVisibility(true);
 						boolean textEmpty = newQueryText.length() == 0;
 						updateTabbarVisibility(textEmpty && !isOnlineSearch());
+						updateSendEmptySearchBottomBar(false);
 						if (textEmpty) {
 							if (addressSearch) {
 								startAddressSearch();
@@ -609,6 +617,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 							updateClearButtonVisibility(true);
 							startLocationUpdate();
 						}
+						updateSendEmptySearchBottomBar(false);
 						updateToolbarButton();
 					}
 				}
@@ -624,6 +633,31 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		updateFab();
 
 		setupSearch(mapActivity);
+
+		sendEmptySearchView = view.findViewById(R.id.no_search_results_bottom_bar);
+		sendEmptySearchText = view.findViewById(R.id.no_search_results_description);
+		sendEmptySearchButton = view.findViewById(R.id.send_empty_search_button);
+		sendEmptySearchButton.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				OsmandApplication app = getMyApplication();
+				if (app != null) {
+					if (!app.getSettings().isInternetConnectionAvailable()) {
+						Toast.makeText(app, R.string.internet_not_available, Toast.LENGTH_LONG).show();
+					} else {
+						if (location != null && searchQuery != null) {
+							Bundle args = new Bundle();
+							SendSearchQueryBottomSheet fragment = new SendSearchQueryBottomSheet();
+							args.putString(MISSING_SEARCH_LOCATION_KEY, location.toString());
+							args.putString(MISSING_SEARCH_QUERY_KEY, searchQuery);
+							fragment.setArguments(args);
+							fragment.show(mapActivity.getSupportFragmentManager(), SendSearchQueryBottomSheet.TAG);
+						}
+					}
+				}
+			}
+		});
+		updateFab();
 
 		return view;
 	}
@@ -1135,18 +1169,21 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 				for (SearchResult sr : res.getCurrentSearchResults()) {
 					rows.add(new QuickSearchListItem(app, sr));
 				}
-				if (OsmandPlugin.getEnabledPlugin(OsmandRasterMapsPlugin.class) != null) {
-					rows.add(new QuickSearchButtonListItem(app, R.drawable.ic_world_globe_dark,
-							app.getString(R.string.search_online_address), new OnClickListener() {
-						@Override
-						public void onClick(View view) {
-							startOnlineSearch();
-							mainSearchFragment.getAdapter().clear();
-							updateTabbarVisibility(false);
-							openKeyboard();
+				rows.add(new QuickSearchButtonListItem(app, R.drawable.ic_world_globe_dark,
+						app.getString(R.string.search_online_address), new OnClickListener() {
+					@Override
+					public void onClick(View view) {
+						final OsmandSettings settings = app.getSettings();
+						if (!settings.isInternetConnectionAvailable()) {
+							Toast.makeText(app, R.string.internet_not_available, Toast.LENGTH_LONG).show();
+							return;
 						}
-					}));
-				}
+						startOnlineSearch();
+						mainSearchFragment.getAdapter().clear();
+						updateTabbarVisibility(false);
+						openKeyboard();
+					}
+				}));
 				rows.add(new QuickSearchButtonListItem(app, R.drawable.ic_action_search_dark,
 						app.getString(R.string.custom_search), new OnClickListener() {
 					@Override
@@ -1845,6 +1882,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			moreListItem.setOnlineSearch(isOnlineSearch());
 			moreListItem.setSearchMoreAvailable(searchMoreAvailable);
 			mainSearchFragment.addListItem(moreListItem);
+			updateSendEmptySearchBottomBar(isResultEmpty() && !interruptedSearch);
 		}
 	}
 
@@ -1856,6 +1894,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 				for (final SearchResult sr : res.getCurrentSearchResults()) {
 					rows.add(new QuickSearchListItem(app, sr));
 				}
+				updateSendEmptySearchBottomBar(false);
 			}
 			mainSearchFragment.updateListAdapter(rows, append);
 		}
@@ -2109,6 +2148,12 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 	private void updateFab() {
 		fab.setVisibility(fabVisible ? View.VISIBLE : View.GONE);
+	}
+
+	private void updateSendEmptySearchBottomBar(boolean sendSearchQueryVisible) {
+		sendEmptySearchView.setVisibility(sendSearchQueryVisible ? View.VISIBLE : View.GONE);
+		sendEmptySearchText.setVisibility(sendSearchQueryVisible ? View.VISIBLE : View.GONE);
+		sendEmptySearchButton.setVisibility(sendSearchQueryVisible ? View.VISIBLE : View.GONE);
 	}
 
 	public interface SearchResultListener {
