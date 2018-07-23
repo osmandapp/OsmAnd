@@ -880,6 +880,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		@Override
 		protected void onPreExecute() {
 			((OsmandActionBarActivity) getActivity()).setSupportProgressBarIndeterminateVisibility(true);
+			listView.setEmptyView(null);
 			allGpxAdapter.clear();
 		}
 
@@ -913,6 +914,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 			if (getActivity() != null) {
 				((OsmandActionBarActivity) getActivity()).setSupportProgressBarIndeterminateVisibility(false);
 			}
+			listView.setEmptyView(emptyView);
 			if (allGpxAdapter.getGroupCount() > 0 &&
 					allGpxAdapter.isShowingSelection()) {
 				getExpandableListView().expandGroup(0);
