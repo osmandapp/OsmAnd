@@ -30,6 +30,6 @@ function compile {
 }
 
 compile amd64
-compile i686
+#compile i686
 copyLibs linux amd64 amd64 so
-copyLibs linux i686 x86 so
+#copyLibs linux i686 x86 so
