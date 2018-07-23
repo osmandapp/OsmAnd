@@ -87,7 +87,7 @@ public class FavouritesDbHelper {
 		}
 		sortAll();
 		recalculateCachedFavPoints();
-		if (changed) {
+		if (changed || !getExternalFile().exists()) {
 			saveCurrentPointsIntoFile();
 		}
 		favouritesUpdated();
