@@ -238,7 +238,7 @@ public class NativeLibrary {
 
 	public static boolean load(String libBaseName, String path) {
 		// look for a pre-installed library
-		if (path != null) {
+		if (path != null && path.length() > 0) {
 			try {
 				System.load(path + "/" + System.mapLibraryName(libBaseName));
 				return true;
