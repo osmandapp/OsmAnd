@@ -2976,4 +2976,8 @@ Lon %2$s</string>
     <string name="coord_input_save_as_track_descr">Añadiste %1$s puntos. Escribe un nombre de archivo y pulsa en «Guardar».</string>
     <string name="point_deleted">Punto %1$s borrado</string>
     <string name="shared_string_world">Mundo</string>
+    <string name="send_search_query_description">Enviaremos la consulta de búsqueda: <b>«%1$s»</b>, así como la ubicación.<br/><br/> No recopilamos información personal, sólo necesitamos datos de búsqueda para mejorar el algoritmo de búsqueda.<br/></string>
+    <string name="search_no_results_description">¿Sin resultados?
+\nCuéntanos sobre esto.</string>
+    <string name="send_search_query">¿Enviar consulta de búsqueda?</string>
     </resources>
