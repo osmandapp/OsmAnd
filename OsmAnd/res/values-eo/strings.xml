@@ -2939,4 +2939,8 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="coord_input_save_as_track_descr">Vi aldonis %1$s punktojn. Entajpu dosiernomon kaj frapetu “konservi”.</string>
     <string name="point_deleted">Forigis la punkton %1$s</string>
     <string name="shared_string_world">Mondo</string>
+    <string name="send_search_query_description">Ni sendos vian serĉ-peton: <b>“%1$s”</b> kun via pozicio.<br/><br/>Ni ne kolektas personajn informojn, ni nur bezonas serĉajn datumojn por plibonigi la algoritmon.<br/></string>
+    <string name="search_no_results_description">Neniuj rezultoj?
+\nSciigu nin pri tio.</string>
+    <string name="send_search_query">Ĉu sendi serĉ-peton?</string>
     </resources>
