@@ -6,8 +6,10 @@ import android.text.Html;
 import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import net.osmand.AndroidNetworkUtils;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
@@ -61,8 +63,15 @@ public class SendSearchQueryBottomSheet extends MenuBottomSheetDialogFragment {
 
 	@Override
 	protected void onRightBottomButtonClick() {
-		AndroidNetworkUtils.sendRequestAsync(getMyApplication(), "http://osmand.net/api/missing_search", params,
-				null, true, true, null);
+		OsmandApplication app = getMyApplication();
+		if (app != null) {
+			if (!app.getSettings().isInternetConnectionAvailable()) {
+				Toast.makeText(app, R.string.internet_not_available, Toast.LENGTH_LONG).show();
+			} else {
+				AndroidNetworkUtils.sendRequestAsync(app, "http://osmand.net/api/missing_search", params,
+						null, true, true, null);
+			}
+		}
 		dismiss();
 	}
 }
