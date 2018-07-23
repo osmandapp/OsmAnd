@@ -259,7 +259,7 @@ public class NativeLibrary {
 		if (osname.startsWith("sunos"))
 			osname = "solaris";
 		if (osarch.startsWith("i") && osarch.endsWith("86"))
-			osarch = "amd64";
+			osarch = "x86";
 		String libname = libBaseName + "-" + osname + '-' + osarch + ".lib";
 
 		// try a bundled library
