@@ -545,14 +545,6 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 			File dst = null;
 
 			@Override
-			protected Void doInBackground(Void... params) {
-				if (group != null) {
-					helper.saveFile(group.points, dst);
-				}
-				return null;
-			}
-
-			@Override
 			protected void onPreExecute() {
 				showProgressBar();
 				File dir = new File(getActivity().getCacheDir(), "share");
@@ -563,6 +555,14 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 					src = helper.getExternalFile();
 				}
 				dst = new File(dir, src != null ? src.getName() : FavouritesDbHelper.FILE_TO_SAVE);
+			}
+
+			@Override
+			protected Void doInBackground(Void... params) {
+				if (group != null) {
+					helper.saveFile(group.points, dst);
+				}
+				return null;
 			}
 
 			@Override
