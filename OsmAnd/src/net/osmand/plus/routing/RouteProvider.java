@@ -372,7 +372,9 @@ public class RouteProvider {
 					gpxRoute = new ArrayList<>();
 					Location trackStart = routeLocations.get(0);
 					Location realStart = routeParams.start;
-					if (realStart != null && trackStart != null && realStart.distanceTo(trackStart) > 60) {
+					if (realStart != null && trackStart != null
+							&& realStart.distanceTo(trackStart) > 60
+							&& !gpxParams.calculateOsmAndRouteParts) {
 						LatLon nextRouteLocation = new LatLon(trackStart.getLatitude(), trackStart.getLongitude());
 						RouteCalculationResult newRes = findOfflineRouteSegment(routeParams, realStart, nextRouteLocation);
 						if (newRes != null && newRes.isCalculated()) {
