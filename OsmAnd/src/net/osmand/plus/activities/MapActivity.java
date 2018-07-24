@@ -434,11 +434,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 			@Override
 			public void start() {
-				boolean night = getMyApplication().getDaynightHelper().isNightModeForMapControls();
-				int bgColor = ContextCompat.getColor(app, night
-						? R.color.map_progress_bar_bg_dark : R.color.map_progress_bar_bg_light);
-				pb.setProgressDrawable(AndroidUtils
-						.createProgressDrawable(bgColor, mapLayers.getRouteLayer().getRouteLineColor(night)));
+				setupRouteCalculationProgressBar(pb);
 			}
 
 			@Override
@@ -497,6 +493,22 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				pb.setVisibility(View.GONE);
 			}
 		});
+	}
+
+	public void setupRouteCalculationProgressBar(@NonNull ProgressBar pb) {
+		DayNightHelper dayNightHelper = getMyApplication().getDaynightHelper();
+
+		boolean nightMode = dayNightHelper.isNightModeForMapControls();
+		boolean useRouteLineColor = nightMode == dayNightHelper.isNightMode();
+
+		int bgColorId = nightMode ? R.color.map_progress_bar_bg_dark : R.color.map_progress_bar_bg_light;
+		int bgColor = ContextCompat.getColor(this, bgColorId);
+
+		int progressColor = useRouteLineColor
+				? mapLayers.getRouteLayer().getRouteLineColor(nightMode)
+				: ContextCompat.getColor(this, R.color.wikivoyage_active_light);
+
+		pb.setProgressDrawable(AndroidUtils.createProgressDrawable(bgColor, progressColor));
 	}
 
 	private void changeKeyguardFlags() {

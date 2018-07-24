@@ -840,11 +840,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 		AndroidUtils.setTextSecondaryColor(mapActivity, listEmptyTextView, nightMode);
 
 		if (planRouteProgressBar != null) {
-			int bgColor = ContextCompat.getColor(mapActivity, nightMode
-					? R.color.map_progress_bar_bg_dark : R.color.map_progress_bar_bg_light);
-			planRouteProgressBar.setProgressDrawable(AndroidUtils.createProgressDrawable(
-					bgColor, mapActivity.getMapLayers().getRouteLayer().getRouteLineColor(nightMode)
-			));
+			mapActivity.setupRouteCalculationProgressBar(planRouteProgressBar);
 		}
 	}
 
