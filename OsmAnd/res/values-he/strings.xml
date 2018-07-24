@@ -3062,4 +3062,8 @@
     <string name="coord_input_save_as_track_descr">הוספת %1$s נקודות. נא להקליד שם קובץ וללחוץ על ‚שמירה’.</string>
     <string name="point_deleted">הנקודה %1$s נמחקה</string>
     <string name="shared_string_world">עולם</string>
+    <string name="send_search_query_description">אנו נשלח את שאילתת החיפוש שלך: <b>\"%1$s\"</b>, לרבות המקום שלך.<br/><br/> איננו אוספים פרטים אישיים, אנחנו רק צריכים נתוני חיפושים כדי לשפר את אלגוריתם החיפוש.<br/></string>
+    <string name="search_no_results_description">אין תוצאות?
+\nנשמח לקבל דיווח על כך.</string>
+    <string name="send_search_query">לשלוח את שאילתת החיפוש?</string>
     </resources>
