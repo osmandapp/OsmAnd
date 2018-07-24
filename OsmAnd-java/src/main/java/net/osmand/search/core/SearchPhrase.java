@@ -662,6 +662,10 @@ public class SearchPhrase {
 	public int getRadiusSearch(int meters) {
 		return (1 << (getRadiusLevel() - 1)) * meters;
 	}
+	
+	public int getNextRadiusSearch(int meters) {
+		return (1 << (getRadiusLevel())) * meters;
+	}
 
 	public static int icompare(int x, int y) {
         return (x < y) ? -1 : ((x == y) ? 0 : 1);

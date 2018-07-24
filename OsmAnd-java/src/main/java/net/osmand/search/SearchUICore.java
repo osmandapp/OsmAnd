@@ -527,6 +527,17 @@ public class SearchUICore {
 		return radius;
 	}
 
+	public int getNextSearchRadius(SearchPhrase phrase) {
+		int radius = Integer.MAX_VALUE;
+		for (SearchCoreAPI api : apis) {
+			int apiNextSearchRadius = api.getNextSearchRadius(phrase);
+			if (apiNextSearchRadius > 0 && apiNextSearchRadius < radius) {
+				radius = apiNextSearchRadius;
+			}
+		}
+		return radius;
+	}
+
 	private void searchInBackground(final SearchPhrase phrase, SearchResultMatcher matcher) {
 		preparePhrase(phrase);
 		ArrayList<SearchCoreAPI> lst = new ArrayList<>(apis);
