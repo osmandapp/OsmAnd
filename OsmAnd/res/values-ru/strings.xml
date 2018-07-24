@@ -2955,4 +2955,8 @@
     <string name="coord_input_save_as_track_descr">Добавлено вами точек - %1$s. Введите имя файла и нажмите «Сохранить».</string>
     <string name="point_deleted">Точка %1$s удалена</string>
     <string name="shared_string_world">Мир</string>
+    <string name="send_search_query_description">Мы отправим ваш поисковый запрос: <b>\"%1$s\"</b>, а также ваше местоположение. <br/><br/> Мы не собираем личную информацию, нам нужны только данные поиска, чтобы улучшить алгоритм поиска.<br/></string>
+    <string name="search_no_results_description">Нет результатов?
+\nРасскажите нам об этом.</string>
+    <string name="send_search_query">Отправить поисковый запрос?</string>
     </resources>
