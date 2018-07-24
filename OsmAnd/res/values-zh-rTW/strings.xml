@@ -3123,4 +3123,8 @@
     <string name="coord_input_save_as_track_descr">您已新增了 %1$s 標點。輸入檔案名稱並輕點「儲存」。</string>
     <string name="point_deleted">已刪除標點 %1$s</string>
     <string name="shared_string_world">世界</string>
+    <string name="send_search_query_description">我們將送出您的搜尋查詢：<b>\"%1$s\"</b>，以及您的位置。<br/><br/>我們不會收集個人的資訊，我們只需要搜尋資料以改進搜尋演算法。<br/></string>
+    <string name="search_no_results_description">沒有結果？
+\n告訴我們這件事。</string>
+    <string name="send_search_query">送出搜尋查詢？</string>
     </resources>
