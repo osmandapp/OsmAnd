@@ -675,16 +675,6 @@ public class MapMarkersHelper {
 		}
 	}
 
-	public void addMarkers(List<MapMarker> markers) {
-		if (markers != null) {
-			markersDbHelper.addMarkers(markers);
-			addToMapMarkersList(markers);
-			reorderActiveMarkersIfNeeded();
-			addMarkersToGroups(markers);
-			refresh();
-		}
-	}
-
 	public void addMarker(MapMarker marker) {
 		if (marker != null) {
 			markersDbHelper.addMarker(marker);
@@ -995,29 +985,6 @@ public class MapMarkersHelper {
 	}
 
 	public String generateGpx(String fileName) {
-		final File dir = ctx.getAppPath(IndexConstants.GPX_INDEX_DIR + IndexConstants.MAP_MARKERS_INDEX_DIR);
-		if (!dir.exists()) {
-			dir.mkdirs();
-		}
-		File fout = new File(dir, fileName + ".gpx");
-		int ind = 1;
-		while (fout.exists()) {
-			fout = new File(dir, fileName + "_" + (++ind) + ".gpx");
-		}
-		GPXFile file = new GPXFile();
-		for (MapMarker marker : mapMarkers) {
-			WptPt wpt = new WptPt();
-			wpt.lat = marker.getLatitude();
-			wpt.lon = marker.getLongitude();
-			wpt.setColor(ctx.getResources().getColor(MapMarker.getColorId(marker.colorIndex)));
-			wpt.name = marker.getOnlyName();
-			file.addPoint(wpt);
-		}
-		GPXUtilities.writeGpxFile(fout, file, ctx);
-		return fout.getAbsolutePath();
-	}
-	
-	public String generateGpxFromList(String fileName,  List<MapMarker> mapMarkers) {
 		final File dir = ctx.getAppPath(IndexConstants.GPX_INDEX_DIR + IndexConstants.MAP_MARKERS_INDEX_DIR);
 		if (!dir.exists()) {
 			dir.mkdirs();
