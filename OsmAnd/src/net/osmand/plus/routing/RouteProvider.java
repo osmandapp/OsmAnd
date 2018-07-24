@@ -368,12 +368,19 @@ public class RouteProvider {
 			gpxRoute = gpxParams.points;
 			if (routeParams.previousToRecalculate != null && routeParams.onlyStartPointChanged) {
 				List<Location> routeLocations = routeParams.previousToRecalculate.getRouteLocations();
-				if (routeLocations != null) {
-					Location loc = routeParams.previousToRecalculate.getNextRouteLocation();
-					LatLon nextRouteLocation = new LatLon(loc.getLatitude(), loc.getLongitude());
-					List<Location> routeToNextRouteLocation = findStartAndEndLocationsFromRoute(routeLocations,
-							routeParams.start, nextRouteLocation, null, null);
-					gpxRoute = new ArrayList<>(routeToNextRouteLocation);
+				if (routeLocations != null && routeLocations.size() >= 1) {
+					gpxRoute = new ArrayList<>();
+					Location trackStart = routeLocations.get(0);
+					Location realStart = routeParams.start;
+					if (realStart != null && trackStart != null && realStart.distanceTo(trackStart) > 60) {
+						LatLon nextRouteLocation = new LatLon(trackStart.getLatitude(), trackStart.getLongitude());
+						RouteCalculationResult newRes = findOfflineRouteSegment(routeParams, realStart, nextRouteLocation);
+						if (newRes != null && newRes.isCalculated()) {
+							gpxRoute.addAll(0, newRes.getImmutableAllLocations());
+						} else {
+							gpxRoute.add(0, realStart);
+						}
+					}
 					gpxRoute.addAll(new ArrayList<>(routeLocations));
 					endI = new int[]{gpxRoute.size()};
 				}
