@@ -2957,4 +2957,8 @@
     <string name="quick_action_edit_actions">Editar acciones</string>
     <string name="point_deleted">Punto %1$s eliminado</string>
     <string name="shared_string_world">Mundo</string>
+    <string name="send_search_query_description">Enviaremos tu consulta de búsqueda <b>\"%1$s\"</b>, así como tu ubicación.<br/><br/>No recopilamos información personal, solo necesitamos los daots de búsqueda para mejor el algoritmo de búsqueda.<br/></string>
+    <string name="search_no_results_description">¿Sin resultados?
+\nCuéntanos sobre esto.</string>
+    <string name="send_search_query">¿Enviar consulta de búsqueda?</string>
     </resources>
