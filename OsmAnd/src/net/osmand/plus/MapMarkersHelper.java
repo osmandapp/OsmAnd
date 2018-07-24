@@ -858,6 +858,7 @@ public class MapMarkersHelper {
 							@Nullable List<WptPt> wptPts,
 							@Nullable List<String> mapObjNames) {
 		if (points.size() > 0) {
+			settings.SHOW_MAP_MARKERS.set(true);
 			int colorIndex = -1;
 			List<MapMarker> addedMarkers = new ArrayList<>();
 			for (int i = 0; i < points.size(); i++) {
