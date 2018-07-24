@@ -123,6 +123,10 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 		this.onDismissListener = onDismissListener;
 	}
 
+	public boolean isSelectFromMapTouch() {
+		return selectFromMapTouch;
+	}
+
 	public void cancelSelectionFromMap() {
 		selectFromMapTouch = false;
 	}

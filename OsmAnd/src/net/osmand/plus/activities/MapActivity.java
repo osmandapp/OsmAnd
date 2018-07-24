@@ -1734,6 +1734,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	@Override
 	public void newRouteIsCalculated(boolean newRoute, ValueHolder<Boolean> showToast) {
+		MapRouteInfoMenu routeInfoMenu = mapLayers.getMapControlsLayer().getMapRouteInfoMenu();
+		if (routeInfoMenu.isSelectFromMapTouch()) {
+			return;
+		}
+
 		RoutingHelper rh = app.getRoutingHelper();
 		if (newRoute && rh.isRoutePlanningMode() && mapView != null) {
 			Location lt = rh.getLastProjection();
@@ -1762,7 +1767,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				int tileBoxWidthPx = 0;
 				int tileBoxHeightPx = 0;
 
-				MapRouteInfoMenu routeInfoMenu = mapLayers.getMapControlsLayer().getMapRouteInfoMenu();
 				WeakReference<MapRouteInfoMenuFragment> fragmentRef = routeInfoMenu.findMenuFragment();
 				if (fragmentRef != null) {
 					MapRouteInfoMenuFragment f = fragmentRef.get();
