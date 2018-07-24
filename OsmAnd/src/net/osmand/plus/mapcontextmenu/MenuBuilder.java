@@ -811,7 +811,9 @@ public class MenuBuilder {
 		GradientDrawable shape = new GradientDrawable();
 		shape.setShape(GradientDrawable.RECTANGLE);
 		shape.setCornerRadius(dpToPx(3));
-		shape.setColor(route.getColor(mapActivity.getMyApplication(), !light));
+		int bgColor = route.getColor(app, !light);
+		shape.setColor(bgColor);
+		transportRect.setTextColor(UiUtilities.getContrastColor(app, bgColor, true));
 
 		transportRect.setBackgroundDrawable(shape);
 		transportRect.setText(adjustRouteRef(route.route.getRef()));
