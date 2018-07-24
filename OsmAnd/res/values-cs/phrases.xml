@@ -217,7 +217,7 @@
 	<string name="poi_lift_gate">Zvedací brána</string>
 	<string name="poi_traffic_calming_bump">Retardér</string>
 	<string name="poi_traffic_calming_hump">Dlouhý retardér</string>
-	<string name="poi_vehicle_inspection">Kontrola vozidel</string>
+	<string name="poi_vehicle_inspection">Stanice STK a měření emisí</string>
 	<string name="poi_parking_entrance">Vjezd na parkoviště</string>
 	<string name="poi_tram_stop">Tramvajová zastávka</string>
 	<string name="poi_historic_mine">Historický důl</string>
@@ -323,7 +323,7 @@
 	<string name="poi_traffic_calming_choker">Zůžení</string>
 	<string name="poi_fuel_diesel">Nafta</string>
 	<string name="poi_fuel_gtl_diesel">Vysoce kvalitní nafta</string>
-	<string name="poi_fuel_hgv_diesel">Nafta (tlakový přívod)</string>
+	<string name="poi_fuel_hgv_diesel">Nafta s pistolí pro nákladní vozidla</string>
 	<string name="poi_fuel_biodiesel">Bionafta</string>
 	<string name="poi_fuel_lpg">LPG</string>
 	<string name="poi_fuel_octane_80">80 oktanů</string>
@@ -3733,4 +3733,12 @@
 	<string name="poi_post_housenumber">Číslo popisné</string>
 	<string name="poi_ref_post">PSČ</string>
 
-	</resources>
+	<string name="poi_hazard_nuclear">Nebezpečná radioaktivita</string>
+	<string name="poi_hazard_erosion">Nebezpečí eroze</string>
+	<string name="poi_hazard_avalanche">Lavinové nebezpečí</string>
+	<string name="poi_hazard_slippery_road">Kluzká cesta</string>
+	<string name="poi_hazard_flood">Nebezpečí záplavy</string>
+	<string name="poi_hazard_minefield">Minové pole</string>
+
+
+</resources>
