@@ -64,33 +64,34 @@ public class MapTextLayer extends OsmandMapLayer {
 
 			paintTextIcon.setFakeBoldText(provider.isFakeBoldText());
 			for (Object o : textObjects.get(l)) {
-				double lat = provider.getTextLocation(o).getLatitude();
-				double lon = provider.getTextLocation(o).getLongitude();
-				int x = (int) tileBox.getPixXFromLatLon(lat, lon);
-				int y = (int) tileBox.getPixYFromLatLon(lat, lon);
-				int tx = tileBox.getPixXFromLonNoRot(lon);
-				int ty = tileBox.getPixYFromLatNoRot(lat);
+				LatLon loc = provider.getTextLocation(o);
 				String name = provider.getText(o);
+				if (loc == null || TextUtils.isEmpty(name)) {
+					continue;
+				}
 
-				if (!TextUtils.isEmpty(name)) {
-					int lines = 0;
-					while (lines < TEXT_LINES) {
-						if (set.contains(division(tx, ty, 0, lines)) || set.contains(division(tx, ty, -1, lines))
-								|| set.contains(division(tx, ty, +1, lines))) {
-							break;
-						}
-						lines++;
+				int x = (int) tileBox.getPixXFromLatLon(loc.getLatitude(), loc.getLongitude());
+				int y = (int) tileBox.getPixYFromLatLon(loc.getLatitude(), loc.getLongitude());
+				int tx = tileBox.getPixXFromLonNoRot(loc.getLongitude());
+				int ty = tileBox.getPixYFromLatNoRot(loc.getLatitude());
+
+				int lines = 0;
+				while (lines < TEXT_LINES) {
+					if (set.contains(division(tx, ty, 0, lines)) || set.contains(division(tx, ty, -1, lines))
+							|| set.contains(division(tx, ty, +1, lines))) {
+						break;
 					}
-					if (lines != 0) {
-						int r = provider.getTextShift(o, tileBox);
-						drawWrappedText(canvas, name, paintTextIcon.getTextSize(), x,
-								y + r + 2 + paintTextIcon.getTextSize() / 2, lines);
-						while (lines > 0) {
-							set.add(division(tx, ty, 1, lines - 1));
-							set.add(division(tx, ty, -1, lines - 1));
-							set.add(division(tx, ty, 0, lines - 1));
-							lines--;
-						}
+					lines++;
+				}
+				if (lines != 0) {
+					int r = provider.getTextShift(o, tileBox);
+					drawWrappedText(canvas, name, paintTextIcon.getTextSize(), x,
+							y + r + 2 + paintTextIcon.getTextSize() / 2, lines);
+					while (lines > 0) {
+						set.add(division(tx, ty, 1, lines - 1));
+						set.add(division(tx, ty, -1, lines - 1));
+						set.add(division(tx, ty, 0, lines - 1));
+						lines--;
 					}
 				}
 			}
