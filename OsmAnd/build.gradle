@@ -131,7 +131,7 @@ android {
 		fat {
 			dimension "abi"
 			ndk {
-				abiFilter 'arm64-v8a', 'x86', 'armeabi-v7a'
+				abiFilters 'arm64-v8a', 'x86', 'armeabi-v7a'
 			}
 		}
 
