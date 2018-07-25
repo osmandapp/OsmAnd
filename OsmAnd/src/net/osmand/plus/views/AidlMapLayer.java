@@ -3,7 +3,6 @@ package net.osmand.plus.views;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PointF;
 import android.net.Uri;
@@ -35,9 +34,8 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import static net.osmand.aidl.maplayer.point.AMapPoint.POINT_IMAGE_SIZE_PX;
 
-public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider {
+public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider, MapTextLayer.MapTextProvider<AMapPoint> {
 	private static int POINT_OUTER_COLOR = 0x88555555;
-	private static int PAINT_TEXT_ICON_COLOR = Color.BLACK;
 
 	private final MapActivity map;
 	private AMapLayer aidlLayer;
@@ -46,7 +44,8 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 	private Paint pointOuter;
 	private Paint bitmapPaint;
 	private final static float startZoom = 7;
-	private Paint paintTextIcon;
+
+	private MapTextLayer mapTextLayer;
 
 	private Map<String, Bitmap> pointImages = new ConcurrentHashMap<>();
 
@@ -64,13 +63,6 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 		pointInnerCircle.setStyle(Paint.Style.FILL);
 		pointInnerCircle.setAntiAlias(true);
 
-		paintTextIcon = new Paint();
-		paintTextIcon.setTextSize(10 * view.getDensity());
-		paintTextIcon.setTextAlign(Paint.Align.CENTER);
-		paintTextIcon.setFakeBoldText(true);
-		paintTextIcon.setColor(PAINT_TEXT_ICON_COLOR);
-		paintTextIcon.setAntiAlias(true);
-
 		pointOuter = new Paint();
 		pointOuter.setColor(POINT_OUTER_COLOR);
 		pointOuter.setAntiAlias(true);
@@ -80,6 +72,8 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 		bitmapPaint.setAntiAlias(true);
 		bitmapPaint.setDither(true);
 		bitmapPaint.setFilterBitmap(true);
+
+		mapTextLayer = view.getLayerByClass(MapTextLayer.class);
 	}
 
 	private int getRadiusPoi(RotatedTileBox tb) {
@@ -112,7 +106,6 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 		final int radius = getRadiusPoi(tileBox);
 		final int maxRadius = (int) (Math.max(radius, POINT_IMAGE_SIZE_PX) + density);
 		canvas.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
-		paintTextIcon.setTextSize(radius * 3 / 2);
 
 		Set<String> imageRequests = new HashSet<>();
 		List<AMapPoint> points = aidlLayer.getPoints();
@@ -132,7 +125,6 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 						} else {
 							hasBitmap = true;
 							canvas.drawBitmap(bitmap, x - bitmap.getHeight() / 2, y - bitmap.getWidth() / 2, bitmapPaint);
-							canvas.drawText(point.getShortName(), x, y + maxRadius * 0.9f, paintTextIcon);
 						}
 					}
 					if (!hasBitmap) {
@@ -140,7 +132,6 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 						pointOuter.setColor(POINT_OUTER_COLOR);
 						canvas.drawCircle(x, y, radius + density, pointOuter);
 						canvas.drawCircle(x, y, radius - density, pointInnerCircle);
-						canvas.drawText(point.getShortName(), x, y + radius * 2.5f, paintTextIcon);
 					}
 				}
 			}
@@ -148,6 +139,7 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 		if (imageRequests.size() > 0) {
 			executeTaskInBackground(new PointImageReaderTask(this), imageRequests.toArray(new String[imageRequests.size()]));
 		}
+		mapTextLayer.putData(this, points);
 	}
 
 	@Override
@@ -235,6 +227,39 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 				}
 			}
 		}
+	}
+
+	@Override
+	public LatLon getTextLocation(AMapPoint o) {
+		ALatLon loc = o.getLocation();
+		if (loc != null) {
+			return new LatLon(loc.getLatitude(), loc.getLongitude());
+		}
+		return null;
+	}
+
+	@Override
+	public int getTextShift(AMapPoint o, RotatedTileBox rb) {
+		int radius = getRadiusPoi(rb);
+		if (hasBitmap(o)) {
+			return (int) (POINT_IMAGE_SIZE_PX * 0.6);
+		}
+		return (int) (radius * 1.5);
+	}
+
+	@Override
+	public String getText(AMapPoint o) {
+		return o.getShortName();
+	}
+
+	@Override
+	public boolean isTextVisible() {
+		return true;
+	}
+
+	@Override
+	public boolean isFakeBoldText() {
+		return true;
 	}
 
 	private static class PointImageReaderTask extends AsyncTask<String, Void, Boolean> {
