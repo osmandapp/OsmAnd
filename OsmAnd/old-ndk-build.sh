@@ -23,6 +23,6 @@ fi
 export ANDROID_SDK_ROOT=$ANDROID_HOME
 export ANDROID_NDK_ROOT=$ANDROID_NDK
 #export ANDROID_NDK_TOOLCHAIN_VERSION=4.7
-# export BUILD_ONLY_OLD_LIB=1
+export BUILD_ONLY_OLD_LIB=1
 "$SCRIPT_LOC/../../core-legacy/externals/configure.sh"
 (cd "$SCRIPT_LOC" && "$ANDROID_NDK/ndk-build" -j2)
