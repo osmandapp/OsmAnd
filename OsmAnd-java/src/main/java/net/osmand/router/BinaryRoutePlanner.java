@@ -623,16 +623,17 @@ public class BinaryRoutePlanner {
 		}
 		ctx.segmentsToVisitPrescripted.clear();
 		ctx.segmentsToVisitNotForbidden.clear();
-		processRestriction(ctx, inputNext, reverseWay, false, road);
+		processRestriction(ctx, inputNext, reverseWay, 0, road);
 		if (parent != null) {
-			processRestriction(ctx, inputNext, reverseWay, true, parent.getRoad());
+			processRestriction(ctx, inputNext, reverseWay, road.id, parent.getRoad());
 		}
 		return true;
 	}
 
 
-	protected void processRestriction(RoutingContext ctx, RouteSegment inputNext, boolean reverseWay, boolean via,
+	protected void processRestriction(RoutingContext ctx, RouteSegment inputNext, boolean reverseWay, long viaId,
 			RouteDataObject road) {
+		boolean via = viaId != 0;
 		RouteSegment next = inputNext;
 		boolean exclusiveRestriction = false;
 		while (next != null) {
@@ -640,8 +641,10 @@ public class BinaryRoutePlanner {
 			if (!reverseWay) {
 				for (int i = 0; i < road.getRestrictionLength(); i++) {
 					if (road.getRestrictionId(i) == next.road.id) {
-						type = road.getRestrictionType(i);
-						break;
+						if(!via || road.getRestrictionVia(i) == viaId) {
+							type = road.getRestrictionType(i);
+							break;
+						}
 					}
 				}
 			} else {
@@ -649,8 +652,10 @@ public class BinaryRoutePlanner {
 					int rt = next.road.getRestrictionType(i);
 					long restrictedTo = next.road.getRestrictionId(i);
 					if (restrictedTo == road.id) {
-						type = rt;
-						break;
+						if(!via || next.road.getRestrictionVia(i) == viaId) {
+							type = rt;
+							break;
+						}
 					}
 
 					// Check if there is restriction only to the other than current road
