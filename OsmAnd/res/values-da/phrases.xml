@@ -3949,7 +3949,7 @@
 <string name="poi_payment_contactless_yes">Kontaktløs</string>
 	<string name="poi_payment_contactless_no">Kontaktløs ikke accepteret</string>
 
-<string name="poi_hazard_nuclear">Nukleare fare</string>
+<string name="poi_hazard_nuclear">Nuklear fare</string>
 	<string name="poi_hazard_erosion">Erosionsfare</string>
 	<string name="poi_hazard_avalanche">Lavinefare</string>
 	<string name="poi_hazard_slippery_road">Glat vejbane</string>
