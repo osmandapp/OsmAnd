@@ -405,7 +405,7 @@ public class RouteDataObject {
 		if(restrictionsVia != null && k < restrictionsVia.length) {
 			ri.viaWay = restrictionsVia[k];
 		}
-		return null;
+		return ri;
 	}
 	
 	public long getRestrictionVia(int i) {
