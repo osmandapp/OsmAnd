@@ -76,6 +76,7 @@ import btools.routingapp.IBRouterService;
 public class RouteProvider {
 	private static final org.apache.commons.logging.Log log = PlatformUtil.getLog(RouteProvider.class);
 	private static final String OSMAND_ROUTER = "OsmAndRouter";
+	private static final int MIN_DISTANCE_FOR_INSERTING_ROUTE_SEGMENT = 60;
 
 	public enum RouteService {
 			OSMAND("OsmAnd (offline)"), YOURS("YOURS"), 
@@ -372,8 +373,9 @@ public class RouteProvider {
 					gpxRoute = new ArrayList<>();
 					Location trackStart = routeLocations.get(0);
 					Location realStart = routeParams.start;
+					//insert route segment from current location to next route location if user deviated from route
 					if (realStart != null && trackStart != null
-							&& realStart.distanceTo(trackStart) > 60
+							&& realStart.distanceTo(trackStart) > MIN_DISTANCE_FOR_INSERTING_ROUTE_SEGMENT
 							&& !gpxParams.calculateOsmAndRouteParts) {
 						LatLon nextRouteLocation = new LatLon(trackStart.getLatitude(), trackStart.getLongitude());
 						RouteCalculationResult newRes = findOfflineRouteSegment(routeParams, realStart, nextRouteLocation);
@@ -476,7 +478,7 @@ public class RouteProvider {
 			Location routeEnd = points.get(points.size() - 1);
 			LatLon e = routeEnd == null ? null : new LatLon(routeEnd.getLatitude(), routeEnd.getLongitude());
 			LatLon finalEnd = routeParams.end;
-			if (finalEnd != null && MapUtils.getDistance(finalEnd, e) > 60) {
+			if (finalEnd != null && MapUtils.getDistance(finalEnd, e) > MIN_DISTANCE_FOR_INSERTING_ROUTE_SEGMENT) {
 				RouteCalculationResult newRes = null;
 				if (calculateOsmAndRouteParts) {
 					newRes = findOfflineRouteSegment(routeParams, routeEnd, finalEnd);
@@ -506,7 +508,7 @@ public class RouteProvider {
 	public void insertInitialSegment(RouteCalculationParams routeParams, List<Location> points,
 			List<RouteDirectionInfo> directions, boolean calculateOsmAndRouteParts) {
 		Location realStart = routeParams.start;
-		if (realStart != null && points.size() > 0 && realStart.distanceTo(points.get(0)) > 60) {
+		if (realStart != null && points.size() > 0 && realStart.distanceTo(points.get(0)) > MIN_DISTANCE_FOR_INSERTING_ROUTE_SEGMENT) {
 			Location trackStart = points.get(0);
 			RouteCalculationResult newRes = null;
 			if (calculateOsmAndRouteParts) {
