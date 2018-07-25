@@ -2988,4 +2988,5 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="send_search_query_description">Enviarem la vostra consulta de cerca: <b>\"%1$s\"</b>, així com la vostra ubicació.<br/><br/> No desem cap informació personal, només volem les dades de la cerca per millorar-ne l\'algorisme.<br/></string>
     <string name="search_no_results_description">Cap resultat?
 \nParleu-nos-en al respecte.</string>
+    <string name="send_search_query">Voleu enviar la consulta de cerca?</string>
     </resources>
