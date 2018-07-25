@@ -36,6 +36,8 @@ public class MapTextLayer extends OsmandMapLayer {
 		String getText(T o);
 
 		boolean isTextVisible();
+
+		boolean isFakeBoldText();
 	}
 
 	public void putData(OsmandMapLayer ml, Collection<?> objects) {
@@ -60,6 +62,7 @@ public class MapTextLayer extends OsmandMapLayer {
 				continue;
 			}
 
+			paintTextIcon.setFakeBoldText(provider.isFakeBoldText());
 			for (Object o : textObjects.get(l)) {
 				double lat = provider.getTextLocation(o).getLatitude();
 				double lon = provider.getTextLocation(o).getLongitude();

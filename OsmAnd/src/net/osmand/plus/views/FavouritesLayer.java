@@ -263,6 +263,11 @@ public class FavouritesLayer extends OsmandMapLayer implements ContextMenuLayer.
 		return settings.SHOW_POI_LABEL.get();
 	}
 
+	@Override
+	public boolean isFakeBoldText() {
+		return false;
+	}
+
 
 	@Override
 	public boolean isObjectMovable(Object o) {

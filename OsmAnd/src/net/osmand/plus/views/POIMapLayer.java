@@ -421,6 +421,11 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 	}
 
 	@Override
+	public boolean isFakeBoldText() {
+		return false;
+	}
+
+	@Override
 	public void newRouteIsCalculated(boolean newRoute, ValueHolder<Boolean> showToast) {
 	}
 

@@ -637,6 +637,11 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 		return view.getSettings().SHOW_POI_LABEL.get();
 	}
 
+	@Override
+	public boolean isFakeBoldText() {
+		return false;
+	}
+
 
 	public void setGivenGpx(GPXFile gpx) {
 		this.gpx = gpx;
