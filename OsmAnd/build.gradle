@@ -116,10 +116,10 @@ android {
 				abiFilter "armeabi-v7a"
 			}
 		}
-		armv5 {
+		arm64 {
 			dimension "abi"
 			ndk {
-				abiFilter "armeabi"
+				abiFilter "arm64-v8a"
 			}
 		}
 		x86 {
@@ -128,14 +128,11 @@ android {
 				abiFilter "x86"
 			}
 		}
-		mips {
-			dimension "abi"
-			ndk {
-				abiFilter "mips"
-			}
-		}
 		fat {
 			dimension "abi"
+			ndk {
+				abiFilter "arm64-v8a", "x86", "armeabi-v7a"
+			}
 		}
 
 		// Version
