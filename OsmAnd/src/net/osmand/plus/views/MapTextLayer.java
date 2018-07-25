@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Align;
 import android.graphics.Paint.Style;
+import android.text.TextUtils;
 
 import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
@@ -25,7 +26,6 @@ public class MapTextLayer extends OsmandMapLayer {
 	private Map<OsmandMapLayer, Collection<?>> textObjects = new LinkedHashMap<>();
 	private Paint paintTextIcon;
 	private OsmandMapTileView view;
-	private boolean alwaysVisible;
 
 	public interface MapTextProvider<T> {
 
@@ -34,6 +34,8 @@ public class MapTextLayer extends OsmandMapLayer {
 		int getTextShift(T o, RotatedTileBox rb);
 
 		String getText(T o);
+
+		boolean isTextVisible();
 	}
 
 	public void putData(OsmandMapLayer ml, Collection<?> objects) {
@@ -48,54 +50,43 @@ public class MapTextLayer extends OsmandMapLayer {
 		}
 	}
 
-	public boolean isAlwaysVisible() {
-		return alwaysVisible;
-	}
-
-	public void setAlwaysVisible(boolean alwaysVisible) {
-		this.alwaysVisible = alwaysVisible;
-	}
-
-	public boolean isVisible() {
-		return view.getSettings().SHOW_POI_LABEL.get() || isAlwaysVisible();
-	}
-
 	@SuppressWarnings("unchecked")
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
-		if (!isVisible()) {
-			return;
-		}
 		TIntHashSet set = new TIntHashSet();
 		for (OsmandMapLayer l : textObjects.keySet()) {
-			if (view.isLayerVisible(l)) {
-				for (Object o : textObjects.get(l)) {
-					MapTextProvider provider = (MapTextProvider) l;
-					LatLon location = provider.getTextLocation(o);
-					int x = (int) tileBox.getPixXFromLatLon(location.getLatitude(), location.getLongitude());
-					int y = (int) tileBox.getPixYFromLatLon(location.getLatitude(), location.getLongitude());
-					int tx = tileBox.getPixXFromLonNoRot(location.getLongitude());
-					int ty = tileBox.getPixYFromLatNoRot(location.getLatitude());
-					String name = provider.getText(o);
-					if (name != null && name.length() > 0) {
-						int lines = 0;
-						while (lines < TEXT_LINES) {
-							if (set.contains(division(tx, ty, 0, lines)) || set.contains(division(tx, ty, -1, lines))
-									|| set.contains(division(tx, ty, +1, lines))) {
-								break;
-							}
-							lines++;
+			MapTextProvider provider = (MapTextProvider) l;
+			if (!view.isLayerVisible(l) || !provider.isTextVisible()) {
+				continue;
+			}
+
+			for (Object o : textObjects.get(l)) {
+				double lat = provider.getTextLocation(o).getLatitude();
+				double lon = provider.getTextLocation(o).getLongitude();
+				int x = (int) tileBox.getPixXFromLatLon(lat, lon);
+				int y = (int) tileBox.getPixYFromLatLon(lat, lon);
+				int tx = tileBox.getPixXFromLonNoRot(lon);
+				int ty = tileBox.getPixYFromLatNoRot(lat);
+				String name = provider.getText(o);
+
+				if (!TextUtils.isEmpty(name)) {
+					int lines = 0;
+					while (lines < TEXT_LINES) {
+						if (set.contains(division(tx, ty, 0, lines)) || set.contains(division(tx, ty, -1, lines))
+								|| set.contains(division(tx, ty, +1, lines))) {
+							break;
 						}
-						if (lines != 0) {
-							int r = provider.getTextShift(o, tileBox);
-							drawWrappedText(canvas, name, paintTextIcon.getTextSize(), x,
-									y + r + 2 + paintTextIcon.getTextSize() / 2, lines);
-							while (lines > 0) {
-								set.add(division(tx, ty, 1, lines - 1));
-								set.add(division(tx, ty, -1, lines - 1));
-								set.add(division(tx, ty, 0, lines - 1));
-								lines--;
-							}
+						lines++;
+					}
+					if (lines != 0) {
+						int r = provider.getTextShift(o, tileBox);
+						drawWrappedText(canvas, name, paintTextIcon.getTextSize(), x,
+								y + r + 2 + paintTextIcon.getTextSize() / 2, lines);
+						while (lines > 0) {
+							set.add(division(tx, ty, 1, lines - 1));
+							set.add(division(tx, ty, -1, lines - 1));
+							set.add(division(tx, ty, 0, lines - 1));
+							lines--;
 						}
 					}
 				}
