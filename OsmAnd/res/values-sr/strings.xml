@@ -2967,7 +2967,7 @@
 \nОвај поглед се може искључити тако што се или овде деактивира, или тако што се, по жељи, промени \"Стил карте\" под \"Подеси карту\".</string>
     <string name="point_deleted">Тачка %1$s обрисана</string>
     <string name="shared_string_world">Свет</string>
-    <string name="send_search_query_description">Послаћемо упит Ваше претраге: <b>\"%1$s\"</b>, као и Вашу локацију.<br/><br/> We do not collect personal information, we only need search data to improve the search algorithm.<br/></string>
+    <string name="send_search_query_description">Послаћемо упит Ваше претраге: <b>\"%1$s\"</b>, као и Вашу локацију.<br/><br/> Не сакупљамо личне податке, само нам требају подаци о претрагама да бисмо побољшавали алгоритам претраге.<br/></string>
     <string name="search_no_results_description">Нема резултата?
 \nРеците нам о овоме.</string>
     <string name="send_search_query">Пошаљи упит претраге?</string>

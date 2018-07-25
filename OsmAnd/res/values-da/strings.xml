@@ -3172,6 +3172,6 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="shared_string_world">Verden</string>
     <string name="send_search_query_description">Send søgestrengen: <b>\"%1$s\"</b> samt lokationen.<br/><br/>" Der indsamles ikke personlige oplysninger,  data bruges kun til  at forbedre søgealgoritmen."<br/></string>
     <string name="search_no_results_description">Ingen resultater?
-\nFortæl om det.</string>
+\nRapporter det.</string>
     <string name="send_search_query">Send søgeforespørgsel?</string>
     </resources>
