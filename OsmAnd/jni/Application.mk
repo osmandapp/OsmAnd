@@ -15,6 +15,7 @@ APP_PLATFORM := android-14
 # else
 # 	NDK_TOOLCHAIN_VERSION := 4.7
 # endif
+NDK_TOOLCHAIN_VERSION := clang
 
 APP_ABI := x86 armeabi-v7a arm64-v8a
 ifndef OSMAND_DEBUG_NATIVE
