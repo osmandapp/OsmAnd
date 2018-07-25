@@ -421,6 +421,10 @@ public abstract class MenuController extends BaseMenuController implements Colla
 		return null;
 	}
 
+	public boolean isBigRightIcon() {
+		return false;
+	}
+
 	@Nullable
 	public Drawable getSecondLineTypeIcon() {
 		return null;
