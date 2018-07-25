@@ -113,25 +113,25 @@ android {
 		armv7 {
 			dimension "abi"
 			ndk {
-				abiFilter "armeabi-v7a"
+				abiFilter 'armeabi-v7a'
 			}
 		}
 		arm64 {
 			dimension "abi"
 			ndk {
-				abiFilter "arm64-v8a"
+				abiFilter 'arm64-v8a'
 			}
 		}
 		x86 {
 			dimension "abi"
 			ndk {
-				abiFilter "x86"
+				abiFilter 'x86'
 			}
 		}
 		fat {
 			dimension "abi"
 			ndk {
-				abiFilter "arm64-v8a", "x86", "armeabi-v7a"
+				abiFilter 'arm64-v8a', 'x86', 'armeabi-v7a'
 			}
 		}
 
