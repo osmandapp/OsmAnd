@@ -344,6 +344,8 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		AmenityInfoRow cuisineRow = null;
 		List<PoiType> collectedPoiTypes = new ArrayList<>();
 
+		boolean osmEditingEnabled = OsmandPlugin.getEnabledPlugin(OsmEditingPlugin.class) != null;
+
 		for (Map.Entry<String, String> e : amenity.getAdditionalInfo().entrySet()) {
 			int iconId = 0;
 			Drawable icon = null;
@@ -351,7 +353,10 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			String key = e.getKey();
 			String vl = e.getValue();
 
-			if (key.equals("image") || key.equals("mapillary") || key.equals("subway_region")) {
+			if (key.equals("image")
+					|| key.equals("mapillary")
+					|| key.equals("subway_region")
+					|| (key.equals("note") && !osmEditingEnabled)) {
 				continue;
 			}
 
@@ -632,7 +637,6 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			buildAmenityRow(view, wikiInfo);
 		}
 
-		boolean osmEditingEnabled = OsmandPlugin.getEnabledPlugin(OsmEditingPlugin.class) != null;
 		if (osmEditingEnabled && amenity.getId() != null
 				&& amenity.getId() > 0 &&
 				(amenity.getId() % 2 == 0 || (amenity.getId() >> 1) < Integer.MAX_VALUE)) {
