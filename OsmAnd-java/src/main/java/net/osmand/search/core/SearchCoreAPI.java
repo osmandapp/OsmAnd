@@ -27,4 +27,10 @@ public interface SearchCoreAPI {
 	 * @return minimal search radius in meters
 	 */
 	int getMinimalSearchRadius(SearchPhrase phrase);
+
+	/**
+	 * @param phrase
+	 * @return next search radius in meters
+	 */
+	int getNextSearchRadius(SearchPhrase phrase);
 }

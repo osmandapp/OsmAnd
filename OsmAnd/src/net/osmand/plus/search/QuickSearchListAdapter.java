@@ -15,7 +15,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import net.osmand.AndroidUtils;
 import net.osmand.CollatorStringMatcher;
-import net.osmand.Location;
 import net.osmand.access.AccessibilityAssistant;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
@@ -24,7 +23,6 @@ import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities.UpdateLocationViewCache;
-import net.osmand.plus.dashboard.DashLocationFragment;
 import net.osmand.plus.search.listitems.QuickSearchHeaderListItem;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
 import net.osmand.plus.search.listitems.QuickSearchListItemType;
@@ -32,12 +30,15 @@ import net.osmand.plus.search.listitems.QuickSearchMoreListItem;
 import net.osmand.plus.search.listitems.QuickSearchSelectAllListItem;
 import net.osmand.search.SearchUICore;
 import net.osmand.search.core.SearchPhrase;
+import net.osmand.search.core.SearchWord;
 import net.osmand.util.Algorithms;
 import net.osmand.util.OpeningHoursParser;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+
+import static net.osmand.search.core.ObjectType.POI_TYPE;
 
 public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 
@@ -212,10 +213,22 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 			view.findViewById(R.id.empty_search).setVisibility(emptySearchVisible ? View.VISIBLE : View.GONE);
 			view.findViewById(R.id.more_divider).setVisibility(moreDividerVisible ? View.VISIBLE : View.GONE);
 			SearchUICore searchUICore = app.getSearchUICore().getCore();
+			SearchPhrase searchPhrase = searchUICore.getPhrase();
+
 			String textTitle = app.getString(R.string.nothing_found_in_radius) + " "
-					+ OsmAndFormatter.getFormattedDistance(searchUICore.getMinimalSearchRadius(searchUICore.getPhrase()), app);
+					+ OsmAndFormatter.getFormattedDistance(searchUICore.getMinimalSearchRadius(searchPhrase), app);
 			((TextView) view.findViewById(R.id.empty_search_title)).setText(textTitle);
 			View increaseRadiusRow = view.findViewById(R.id.increase_radius_row);
+
+			SearchWord word = searchPhrase.getLastSelectedWord();
+			if (word != null && word.getType() != null && word.getType().equals(POI_TYPE)) {
+				String textIncreaseRadiusTo = app.getString(R.string.increase_search_radius_to,
+						OsmAndFormatter.getFormattedDistance(searchUICore.getNextSearchRadius(searchPhrase), app));
+				((TextView) view.findViewById(R.id.title)).setText(textIncreaseRadiusTo);
+			} else {
+				((TextView) view.findViewById(R.id.title)).setText(app.getString(R.string.increase_search_radius));
+			}
+			
 			increaseRadiusRow.setVisibility(searchMoreItem.isSearchMoreAvailable() ? View.VISIBLE : View.GONE);
 			increaseRadiusRow.setOnClickListener(new View.OnClickListener() {
 				@Override
