@@ -3072,4 +3072,5 @@ Abgedeckte Fläche: %1$s x %2$s</string>
 \nNehmen Sie Kontakt mit uns auf.</string>
     <string name="send_search_query">Suchanfrage senden?</string>
     <string name="shared_string_world">Welt</string>
+    <string name="increase_search_radius_to">Vergrößerung des Suchradius auf %1$s</string>
     </resources>
