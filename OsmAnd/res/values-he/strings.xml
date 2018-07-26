@@ -3066,4 +3066,5 @@
     <string name="search_no_results_description">אין תוצאות?
 \nנשמח לקבל דיווח על כך.</string>
     <string name="send_search_query">לשלוח את שאילתת החיפוש?</string>
+    <string name="increase_search_radius_to">הגדלת רדיוס החיפוש ל־%1$s</string>
     </resources>
