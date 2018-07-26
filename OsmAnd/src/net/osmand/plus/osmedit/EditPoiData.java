@@ -90,10 +90,10 @@ public class EditPoiData {
 		}
 	}
 	
-	private void initTags(Entity node) {
+	private void initTags(Entity entity) {
 		checkNotInEdit();
-		for (String s : node.getTagKeySet()) {
-			tryAddTag(s, node.getTag(s));
+		for (String s : entity.getTagKeySet()) {
+			tryAddTag(s, entity.getTag(s));
 		}
 		retrieveType();
 	}

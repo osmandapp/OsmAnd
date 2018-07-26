@@ -236,7 +236,7 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 		}
 		ser.endTag(null, "node"); //$NON-NLS-1$
 	}
-	
+
 	private void writeWay(Way way, EntityInfo i, XmlSerializer ser, long changeSetId, String user)
 			throws IllegalArgumentException, IllegalStateException, IOException {
 		ser.startTag(null, "way"); //$NON-NLS-1$
@@ -356,17 +356,22 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 
 	}
 
-	public EntityInfo loadNode(Node n) {
-		long nodeId = n.getId(); // >> 1;
+	public EntityInfo loadEntity(Entity n) {
+		long entityId = n.getId(); // >> 1;
+		boolean isWay = false;
+		if (n instanceof Way) { // check if entity is a way
+			isWay = true;
+		}
 		try {
-			String res = sendRequest(
-					getSiteApi() + "api/0.6/node/" + nodeId, "GET", null, ctx.getString(R.string.loading_poi_obj) + nodeId, false); //$NON-NLS-1$ //$NON-NLS-2$
+			String api = isWay ? "api/0.6/way/" : "api/0.6/node/";
+			String res = sendRequest(getSiteApi() + api + entityId, "GET", null,
+					ctx.getString(R.string.loading_poi_obj) + entityId, false); //$NON-NLS-1$ //$NON-NLS-2$
 			if (res != null) {
 				OsmBaseStorage st = new OsmBaseStorage();
 				st.setConvertTagsToLC(false);
 				st.parseOSM(new ByteArrayInputStream(res.getBytes("UTF-8")), null, null, true); //$NON-NLS-1$
-				EntityId id = new Entity.EntityId(EntityType.NODE, nodeId);
-				Node entity = (Node) st.getRegisteredEntities().get(id);
+				EntityId id = new Entity.EntityId(isWay ? EntityType.WAY : EntityType.NODE, entityId);
+				Entity entity = st.getRegisteredEntities().get(id);
 				// merge non existing tags
 				Map<String, String> updatedTags = new HashMap<>();
 				for (String tagKey : entity.getTagKeySet()) {
@@ -382,7 +387,7 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 					}
 				}
 				n.replaceTags(updatedTags);
-				if(MapUtils.getDistance(n.getLatLon(), entity.getLatLon()) < 10) {
+				if (!isWay && MapUtils.getDistance(n.getLatLon(), entity.getLatLon()) < 10) {
 					// avoid shifting due to round error
 					n.setLatitude(entity.getLatitude());
 					n.setLongitude(entity.getLongitude());
@@ -393,7 +398,7 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 			}
 
 		} catch (IOException | XmlPullParserException e) {
-			log.error("Loading node failed " + nodeId, e); //$NON-NLS-1$
+			log.error("Loading entity failed " + entityId, e); //$NON-NLS-1$
 			Toast.makeText(ctx, ctx.getResources().getString(R.string.shared_string_io_error),
 					Toast.LENGTH_LONG).show();
 		}
@@ -406,8 +411,8 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 		}
 	}
 
-	private boolean deletedTag(Node node, String tag) {
-		return node.getTagKeySet().contains(EditPoiData.REMOVE_TAG_PREFIX + tag);
+	private boolean deletedTag(Entity entity, String tag) {
+		return entity.getTagKeySet().contains(EditPoiData.REMOVE_TAG_PREFIX + tag);
 	}
 
 	@Override

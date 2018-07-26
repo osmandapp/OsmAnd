@@ -54,13 +54,7 @@ public class UploadOpenstreetmapPointAsyncTask
 				OpenstreetmapPoint p = (OpenstreetmapPoint) point;
 				EntityInfo entityInfo = null;
 				if (OsmPoint.Action.CREATE != p.getAction()) {
-					Entity entity = p.getEntity();
-					if (entity instanceof Node) {
-						entityInfo = remotepoi.loadNode((Node) entity);
-					} else {
-						loadErrorsMap.put(point, "Entity is not node");
-						return loadErrorsMap;
-					}
+					entityInfo = remotepoi.loadEntity(p.getEntity());
 				}
 				Entity n = remotepoi.commitEntityImpl(p.getAction(), p.getEntity(), entityInfo,
 						p.getComment(), false, null);
