@@ -3082,4 +3082,23 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="coord_input_add_point">Dodaj punkt</string>
     <string name="coord_input_save_as_track_descr">Dodano %1$s punktów. Proszę wprowadzić nazwę pliku i nacisnąć „Zapisz”.</string>
     <string name="coord_input_save_as_track">Zapisz jako ślad</string>
+    <string name="release_3_1">• Nawigacja: naprawiono pasek postępu, szybka zamiana punktu początkowego i końcowego trasy
+\n
+\n• Znaczniki mapy: naprawiono włączanie/wyłączanie grup, możliwość ukrycia znaczników na mapie
+\n
+\n• Edytowanie OSM: możliwość edycji tagów dla niepunktowych obiektów, naprawiono brakujące komentarze do uwag, kopia zapasowa edycji
+\n
+\n• Ulepszono analizowanie Wikipedii i Wikipodróży, zaktualizowane pliki są już dostępne 
+\n
+\n• Menu kontekstowe: poprawiono kolor tarcz transportowych w trybie nocnym, naprawiono dodatkowe rozmiary menu
+\n
+\n• Inne poprawki błędów
+\n</string>
+    <string name="increase_search_radius_to">Zwiększ promień wyszukiwania do %1$s</string>
+    <string name="send_search_query_description">Wyślemy twoje zapytanie: <b>\"%1$s\"</b>, oraz twoje położenie.<br/><br/> Nie zbieramy informacji osobistych, potrzebujemy tylko danych wyszukiwania do poprawienia algorytmu wyszukiwania.<br/></string>
+    <string name="search_no_results_description">Brak wyników?
+\nPowiedz nam o tym.</string>
+    <string name="send_search_query">Wysłać zapytanie?</string>
+    <string name="shared_string_world">Świat</string>
+    <string name="point_deleted">Usunięto punkt %1$s</string>
     </resources>
