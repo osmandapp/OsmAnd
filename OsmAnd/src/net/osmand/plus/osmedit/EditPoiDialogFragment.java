@@ -53,9 +53,11 @@ import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
+import net.osmand.osm.edit.Entity;
 import net.osmand.osm.edit.EntityInfo;
 import net.osmand.osm.edit.Node;
 import net.osmand.osm.edit.OSMSettings;
+import net.osmand.osm.edit.Way;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
@@ -82,7 +84,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 	public static final String TAG = "EditPoiDialogFragment";
 	private static final Log LOG = PlatformUtil.getLog(EditPoiDialogFragment.class);
 
-	private static final String KEY_AMENITY_NODE = "key_amenity_node";
+	private static final String KEY_AMENITY_ENTITY = "key_amenity_node";
 	private static final String TAGS_LIST = "tags_list";
 	private static final String IS_ADDING_POI = "is_adding_poi";
 
@@ -115,8 +117,8 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 			mOpenstreetmapUtil = plugin.getPoiModificationRemoteUtil();
 		}
 
-		Node node = (Node) getArguments().getSerializable(KEY_AMENITY_NODE);
-		editPoiData = new EditPoiData(node, getMyApplication());
+		Entity entity = (Entity) getArguments().getSerializable(KEY_AMENITY_ENTITY);
+		editPoiData = new EditPoiData(entity, getMyApplication());
 	}
 
 	@Override
@@ -448,14 +450,23 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 	}
 
 	private void save() {
-		Node original = editPoiData.getEntity();
+		Entity original = editPoiData.getEntity();
+
 		final boolean offlineEdit = mOpenstreetmapUtil instanceof OpenstreetmapLocalUtil;
-		Node node = new Node(original.getLatitude(), original.getLongitude(), original.getId());
-		Action action = node.getId() < 0 ? Action.CREATE : Action.MODIFY;
+		Entity entity;
+		if (original instanceof Node) {
+			entity = new Node(original.getLatitude(), original.getLongitude(), original.getId());
+		} else if (original instanceof Way) {
+			entity = new Way(original.getId(), ((Way) original).getNodeIds(), original.getLatitude(), original.getLongitude());
+		} else {
+			return;
+		}
+
+		Action action = entity.getId() < 0 ? Action.CREATE : Action.MODIFY;
 		for (Map.Entry<String, String> tag : editPoiData.getTagValues().entrySet()) {
 			if (!Algorithms.isEmpty(tag.getKey()) && !Algorithms.isEmpty(tag.getValue()) && 
 					!tag.getKey().equals(EditPoiData.POI_TYPE_TAG)) {
-				node.putTagNoLC(tag.getKey(), tag.getValue());
+				entity.putTagNoLC(tag.getKey(), tag.getValue());
 			}
 		}
 		String poiTypeTag = editPoiData.getTagValues().get(EditPoiData.POI_TYPE_TAG);
@@ -463,29 +474,29 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 		if (poiTypeTag != null) {
 			final PoiType poiType = editPoiData.getAllTranslatedSubTypes().get(poiTypeTag.trim().toLowerCase());
 			if (poiType != null) {
-				node.putTagNoLC(poiType.getEditOsmTag(), poiType.getEditOsmValue());
-				node.removeTag(EditPoiData.REMOVE_TAG_PREFIX + poiType.getEditOsmTag());
+				entity.putTagNoLC(poiType.getEditOsmTag(), poiType.getEditOsmValue());
+				entity.removeTag(EditPoiData.REMOVE_TAG_PREFIX + poiType.getEditOsmTag());
 				if (poiType.getOsmTag2() != null) {
-					node.putTagNoLC(poiType.getOsmTag2(), poiType.getOsmValue2());
-					node.removeTag(EditPoiData.REMOVE_TAG_PREFIX + poiType.getOsmTag2());
+					entity.putTagNoLC(poiType.getOsmTag2(), poiType.getOsmValue2());
+					entity.removeTag(EditPoiData.REMOVE_TAG_PREFIX + poiType.getOsmTag2());
 				}
 			} else if (!Algorithms.isEmpty(poiTypeTag)) {
 				PoiCategory category = editPoiData.getPoiCategory();
 				if (category != null) {
-					node.putTagNoLC(category.getDefaultTag(), poiTypeTag);
+					entity.putTagNoLC(category.getDefaultTag(), poiTypeTag);
 				}
 			}
 			if (offlineEdit && !Algorithms.isEmpty(poiTypeTag)) {
-				node.putTagNoLC(EditPoiData.POI_TYPE_TAG, poiTypeTag);
+				entity.putTagNoLC(EditPoiData.POI_TYPE_TAG, poiTypeTag);
 			}
 			String actionString = action == Action.CREATE ? getString(R.string.default_changeset_add) : getString(R.string.default_changeset_edit);
 			comment = actionString + " " + poiTypeTag;
 		}
-		commitNode(action, node, mOpenstreetmapUtil.getEntityInfo(node.getId()), comment, false,
-				new CallbackWithObject<Node>() {
+		commitEntity(action, entity, mOpenstreetmapUtil.getEntityInfo(entity.getId()), comment, false,
+				new CallbackWithObject<Entity>() {
 
 					@Override
-					public boolean processResult(Node result) {
+					public boolean processResult(Entity result) {
 						if (result != null) {
 							OsmEditingPlugin plugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
 							if (plugin != null && offlineEdit) {
@@ -533,12 +544,12 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 		poiTypeEditText.setText(subCategory);
 	}
 
-	public static void commitNode(final Action action,
-								  final Node node,
+	public static void commitEntity(final Action action,
+								  final Entity entity,
 								  final EntityInfo info,
 								  final String comment,
 								  final boolean closeChangeSet,
-								  final CallbackWithObject<Node> postExecute,
+								  final CallbackWithObject<Entity> postExecute,
 								  final Activity activity,
 								  final OpenstreetmapUtil openstreetmapUtil,
 								  @Nullable final Set<String> changedTags) {
@@ -546,7 +557,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 			Toast.makeText(activity, activity.getResources().getString(R.string.poi_error_info_not_loaded), Toast.LENGTH_LONG).show();
 			return;
 		}
-		new AsyncTask<Void, Void, Node>() {
+		new AsyncTask<Void, Void, Entity>() {
 			ProgressDialog progress;
 
 			@Override
@@ -556,12 +567,12 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 			}
 
 			@Override
-			protected Node doInBackground(Void... params) {
-				return openstreetmapUtil.commitNodeImpl(action, node, info, comment, closeChangeSet, changedTags);
+			protected Entity doInBackground(Void... params) {
+				return openstreetmapUtil.commitEntityImpl(action, entity, info, comment, closeChangeSet, changedTags);
 			}
 
 			@Override
-			protected void onPostExecute(Node result) {
+			protected void onPostExecute(Entity result) {
 				progress.dismiss();
 				if (postExecute != null) {
 					postExecute.processResult(result);
@@ -652,19 +663,19 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 		return createInstance(node, true);
 	}
 
-	public static EditPoiDialogFragment createInstance(Node node, boolean isAddingPoi) {
+	public static EditPoiDialogFragment createInstance(Entity entity, boolean isAddingPoi) {
 		EditPoiDialogFragment editPoiDialogFragment = new EditPoiDialogFragment();
 		Bundle args = new Bundle();
-		args.putSerializable(KEY_AMENITY_NODE, node);
+		args.putSerializable(KEY_AMENITY_ENTITY, entity);
 		args.putBoolean(IS_ADDING_POI, isAddingPoi);
 		editPoiDialogFragment.setArguments(args);
 		return editPoiDialogFragment;
 	}
 
-	public static EditPoiDialogFragment createInstance(Node node, boolean isAddingPoi, Map<String, String> tagList) {
+	public static EditPoiDialogFragment createInstance(Entity entity, boolean isAddingPoi, Map<String, String> tagList) {
 		EditPoiDialogFragment editPoiDialogFragment = new EditPoiDialogFragment();
 		Bundle args = new Bundle();
-		args.putSerializable(KEY_AMENITY_NODE, node);
+		args.putSerializable(KEY_AMENITY_ENTITY, entity);
 		args.putBoolean(IS_ADDING_POI, isAddingPoi);
 		args.putSerializable(TAGS_LIST, (Serializable) Collections.unmodifiableMap(tagList));
 		editPoiDialogFragment.setArguments(args);
@@ -683,16 +694,16 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 		} else {
 			openstreetmapUtilToLoad = plugin.getPoiModificationRemoteUtil();
 		}
-		new AsyncTask<Void, Void, Node>() {
+		new AsyncTask<Void, Void, Entity>() {
 			@Override
-			protected Node doInBackground(Void... params) {
-				return openstreetmapUtilToLoad.loadNode(amenity);
+			protected Entity doInBackground(Void... params) {
+				return openstreetmapUtilToLoad.loadEntity(amenity);
 			}
 
-			protected void onPostExecute(Node n) {
-				if (n != null) {
+			protected void onPostExecute(Entity entity) {
+				if (entity != null) {
 					EditPoiDialogFragment fragment =
-							EditPoiDialogFragment.createInstance(n, false);
+							EditPoiDialogFragment.createInstance(entity, false);
 					fragment.show(activity.getSupportFragmentManager(), TAG);
 				} else {
 					Toast.makeText(activity,
@@ -750,22 +761,22 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 		}
 
 		public void deletePoiWithDialog(Amenity amenity) {
-			new AsyncTask<Amenity, Void, Node>() {
+			new AsyncTask<Amenity, Void, Entity>() {
 
 				@Override
-				protected Node doInBackground(Amenity... params) {
-					return openstreetmapUtil.loadNode(params[0]);
+				protected Entity doInBackground(Amenity... params) {
+					return openstreetmapUtil.loadEntity(params[0]);
 				}
 
 				@Override
-				protected void onPostExecute(Node node) {
-					deletePoiWithDialog(node);
+				protected void onPostExecute(Entity entity) {
+					deletePoiWithDialog(entity);
 				}
 			}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, amenity);
 		}
 
-		public void deletePoiWithDialog(final Node n) {
-			if (n == null) {
+		public void deletePoiWithDialog(final Entity entity) {
+			if (entity == null) {
 				Toast.makeText(activity, activity.getResources().getString(R.string.poi_error_poi_not_found), Toast.LENGTH_LONG).show();
 				return;
 			}
@@ -793,24 +804,24 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 			builder.setPositiveButton(isLocalEdit ? R.string.shared_string_save : R.string.shared_string_delete, new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					String c = comment == null ? null : comment.getText().toString();
-					boolean closeChangeSet = closeChangesetCheckBox != null
-							&& closeChangesetCheckBox.isChecked();
-					deleteNode(n, c, closeChangeSet);
+					if (entity instanceof Node) {
+						String c = comment == null ? null : comment.getText().toString();
+						boolean closeChangeSet = closeChangesetCheckBox != null
+								&& closeChangesetCheckBox.isChecked();
+						deleteNode((Node) entity, c, closeChangeSet);
+					}
 				}
-
-
 			});
 			builder.create().show();
 		}
 
-		private void deleteNode(final Node n, final String c, final boolean closeChangeSet) {
+		private void deleteNode(final Entity entity, final String c, final boolean closeChangeSet) {
 			final boolean isLocalEdit = openstreetmapUtil instanceof OpenstreetmapLocalUtil;
-			commitNode(Action.DELETE, n, openstreetmapUtil.getEntityInfo(n.getId()), c, closeChangeSet,
-					new CallbackWithObject<Node>() {
+			commitEntity(Action.DELETE, entity, openstreetmapUtil.getEntityInfo(entity.getId()), c, closeChangeSet,
+					new CallbackWithObject<Entity>() {
 
 						@Override
-						public boolean processResult(Node result) {
+						public boolean processResult(Entity result) {
 							if (result != null) {
 								if (callback != null) {
 									callback.poiDeleted();

@@ -31,7 +31,7 @@ import android.widget.Toast;
 
 import net.osmand.AndroidUtils;
 import net.osmand.data.PointDescription;
-import net.osmand.osm.edit.Node;
+import net.osmand.osm.edit.Entity;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.WptPt;
@@ -537,7 +537,7 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 			@Override
 			public void onModifyOsmChangeClick(OsmPoint osmPoint) {
 				OpenstreetmapPoint i = (OpenstreetmapPoint) getPointAfterModify(osmPoint);
-				final Node entity = i.getEntity();
+				final Entity entity = i.getEntity();
 				refreshId = entity.getId();
 				EditPoiDialogFragment.createInstance(entity, false).show(getActivity().getSupportFragmentManager(), "edit_poi");
 			}

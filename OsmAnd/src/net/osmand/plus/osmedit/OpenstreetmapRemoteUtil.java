@@ -5,12 +5,14 @@ import android.widget.Toast;
 
 import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
+import net.osmand.data.LatLon;
 import net.osmand.osm.PoiType;
 import net.osmand.osm.edit.Entity;
 import net.osmand.osm.edit.Entity.EntityId;
 import net.osmand.osm.edit.Entity.EntityType;
 import net.osmand.osm.edit.EntityInfo;
 import net.osmand.osm.edit.Node;
+import net.osmand.osm.edit.Way;
 import net.osmand.osm.io.Base64;
 import net.osmand.osm.io.NetworkUtils;
 import net.osmand.osm.io.OsmBaseStorage;
@@ -234,6 +236,32 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 		}
 		ser.endTag(null, "node"); //$NON-NLS-1$
 	}
+	
+	private void writeWay(Way way, EntityInfo i, XmlSerializer ser, long changeSetId, String user)
+			throws IllegalArgumentException, IllegalStateException, IOException {
+		ser.startTag(null, "way"); //$NON-NLS-1$
+		ser.attribute(null, "id", way.getId() + ""); //$NON-NLS-1$ //$NON-NLS-2$
+		if (i != null) {
+			// ser.attribute(null, "timestamp", i.getETimestamp());
+			// ser.attribute(null, "uid", i.getUid());
+			// ser.attribute(null, "user", i.getUser());
+			ser.attribute(null, "visible", i.getVisible()); //$NON-NLS-1$
+			ser.attribute(null, "version", i.getVersion()); //$NON-NLS-1$
+		}
+		ser.attribute(null, "changeset", changeSetId + ""); //$NON-NLS-1$ //$NON-NLS-2$
+
+		for (String k : way.getTagKeySet()) {
+			String val = way.getTag(k);
+			if (val.length() == 0 || k.length() == 0 || EditPoiData.POI_TYPE_TAG.equals(k) ||
+					k.startsWith(EditPoiData.REMOVE_TAG_PREFIX) || k.contains(EditPoiData.REMOVE_TAG_PREFIX))
+				continue;
+			ser.startTag(null, "tag"); //$NON-NLS-1$
+			ser.attribute(null, "k", k); //$NON-NLS-1$
+			ser.attribute(null, "v", val); //$NON-NLS-1$
+			ser.endTag(null, "tag"); //$NON-NLS-1$
+		}
+		ser.endTag(null, "way"); //$NON-NLS-1$
+	}
 
 	private boolean isNewChangesetRequired() {
 		// first commit
@@ -251,7 +279,7 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 	}
 
 	@Override
-	public Node commitNodeImpl(OsmPoint.Action action, final Node n, EntityInfo info, String comment,
+	public Entity commitEntityImpl(OsmPoint.Action action, final Entity n, EntityInfo info, String comment,
 							   boolean closeChangeSet, Set<String> changedTags) {
 		if (isNewChangesetRequired()) {
 			changeSetId = openChangeSet(comment);
@@ -262,7 +290,7 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 		}
 
 		try {
-			Node newN = n;
+			Entity newE = n;
 			StringWriter writer = new StringWriter(256);
 			XmlSerializer ser = Xml.newSerializer();
 			try {
@@ -274,7 +302,12 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 				ser.startTag(null, OsmPoint.stringAction.get(action));
 				ser.attribute(null, "version", "0.6"); //$NON-NLS-1$ //$NON-NLS-2$
 				ser.attribute(null, "generator", Version.getAppName(ctx)); //$NON-NLS-1$
-				writeNode(n, info, ser, changeSetId, settings.USER_NAME.get());
+				if (n instanceof Node) {
+					writeNode((Node) n, info, ser, changeSetId, settings.USER_NAME.get());
+
+				} else if (n instanceof Way) {
+					writeWay((Way) n, info, ser, changeSetId, settings.USER_NAME.get());
+				}
 				ser.endTag(null, OsmPoint.stringAction.get(action));
 				ser.endTag(null, "osmChange"); //$NON-NLS-1$
 				ser.endDocument();
@@ -293,12 +326,16 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 						int end = res.indexOf('\"', i); //$NON-NLS-1$
 						if (end > 0) {
 							newId = Long.parseLong(res.substring(i, end)); // << 1;
-							newN = new Node(n, newId);
+							if (n instanceof Node) {
+								newE = new Node((Node) n, newId);
+							} else if (n instanceof Way) {
+								newE = new Way(newId, ((Way) n).getNodeIds(), n.getLatitude(), n.getLongitude());
+							}
 						}
 					}
 				}
 				changeSetTimeStamp = System.currentTimeMillis();
-				return newN;
+				return newE;
 			}
 			return null;
 		} finally {
@@ -374,39 +411,39 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 	}
 
 	@Override
-	public Node loadNode(Amenity n) {
-		if (n.getId() % 2 == 1) {
-			// that's way id
-			return null;
-		}
-		long nodeId = n.getId() >> 1;
+	public Entity loadEntity(Amenity n) {
+		boolean isWay = n.getId() % 2 == 1;// check if amenity is a way
+		long entityId = n.getId() >> 1;
 		try {
-			String res = sendRequest(
-					getSiteApi() + "api/0.6/node/" + nodeId, "GET", null, ctx.getString(R.string.loading_poi_obj) + nodeId, false); //$NON-NLS-1$ //$NON-NLS-2$
+			String api = isWay ? "api/0.6/way/" : "api/0.6/node/";
+			String res = sendRequest(getSiteApi() + api + entityId, "GET", null,
+					ctx.getString(R.string.loading_poi_obj) + entityId, false); //$NON-NLS-1$ //$NON-NLS-2$
 			if (res != null) {
 				OsmBaseStorage st = new OsmBaseStorage();
 				st.setConvertTagsToLC(false);
 				st.parseOSM(new ByteArrayInputStream(res.getBytes("UTF-8")), null, null, true); //$NON-NLS-1$
-				EntityId id = new Entity.EntityId(EntityType.NODE, nodeId);
-				Node entity = (Node) st.getRegisteredEntities().get(id);
+				EntityId id = new Entity.EntityId(isWay ? EntityType.WAY : EntityType.NODE, entityId);
+				Entity entity = (Entity) st.getRegisteredEntities().get(id);
 				entityInfo = st.getRegisteredEntityInfo().get(id);
 				entityInfoId = id;
-				// check whether this is node (because id of node could be the same as relation)
-				if (entity != null && MapUtils.getDistance(entity.getLatLon(), n.getLocation()) < 50) {
-					PoiType poiType = n.getType().getPoiTypeByKeyName(n.getSubType());
-					if(poiType.getEditOsmValue().equals(entity.getTag(poiType.getEditOsmTag()))) {
-						entity.removeTag(poiType.getEditOsmTag());
-						entity.putTagNoLC(EditPoiData.POI_TYPE_TAG, poiType.getTranslation());
-					} else {
-						// later we could try to determine tags
+				if (entity != null) {
+					if (!isWay && entity instanceof Node) {
+						// check whether this is node (because id of node could be the same as relation)
+						if (MapUtils.getDistance(entity.getLatLon(), n.getLocation()) < 50) {
+							return replaceEditOsnTags(n, entity);
+						}
+					} else if (isWay && entity instanceof Way) {
+						LatLon loc = n.getLocation();
+						entity.setLatitude(loc.getLatitude());
+						entity.setLongitude(loc.getLongitude());
+						return replaceEditOsnTags(n, entity);
 					}
-					return entity;
 				}
 				return null;
 			}
 
 		} catch (Exception e) {
-			log.error("Loading node failed " + nodeId, e); //$NON-NLS-1$
+			log.error("Loading entity failed " + entityId, e); //$NON-NLS-1$
 			ctx.runInUIThread(new Runnable() {
 
 				@Override
@@ -419,6 +456,17 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 		return null;
 	}
 
+	private Entity replaceEditOsnTags(Amenity amenity, Entity entity) {
+		PoiType poiType = amenity.getType().getPoiTypeByKeyName(amenity.getSubType());
+		if (poiType.getEditOsmValue().equals(entity.getTag(poiType.getEditOsmTag()))) {
+			entity.removeTag(poiType.getEditOsmTag());
+			entity.putTagNoLC(EditPoiData.POI_TYPE_TAG, poiType.getTranslation());
+		} else {
+			// later we could try to determine tags
+		}
+		return entity;
+	}
+
 	private void showWarning(final String msg) {
 		ctx.runInUIThread(new Runnable() {
 			@Override
@@ -427,5 +475,4 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 			}
 		});
 	}
-
 }

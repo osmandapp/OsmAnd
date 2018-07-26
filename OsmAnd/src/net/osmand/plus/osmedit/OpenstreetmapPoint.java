@@ -1,12 +1,12 @@
 package net.osmand.plus.osmedit;
 
-import net.osmand.osm.edit.Node;
+import net.osmand.osm.edit.Entity;
 import net.osmand.osm.edit.OSMSettings.OSMTagKey;
 import net.osmand.util.Algorithms;
 
 public class OpenstreetmapPoint extends OsmPoint {
 	private static final long serialVersionUID = 729654300829771467L;
-	private Node entity;
+	private Entity entity;
 	private String comment;
 
 	public OpenstreetmapPoint(){
@@ -59,7 +59,7 @@ public class OpenstreetmapPoint extends OsmPoint {
 	}
 
 
-	public Node getEntity() {
+	public Entity getEntity() {
 		return entity;
 	}
 
@@ -67,7 +67,7 @@ public class OpenstreetmapPoint extends OsmPoint {
 		return comment;
 	}
 
-	public void setEntity(Node entity) {
+	public void setEntity(Entity entity) {
 		this.entity = entity;
 	}
 

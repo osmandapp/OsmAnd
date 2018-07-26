@@ -21,7 +21,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
 import net.osmand.data.TransportStop;
 import net.osmand.osm.PoiType;
-import net.osmand.osm.edit.Node;
+import net.osmand.osm.edit.Entity;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.ItemClickListener;
 import net.osmand.plus.ContextMenuItem;
@@ -200,7 +200,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 					EditPoiDialogFragment.showEditInstance(selectedObj instanceof TransportStop ?
 							((TransportStop) selectedObj).getAmenity() : (Amenity) selectedObj, mapActivity);
 				} else if (resId == R.string.poi_context_menu_modify_osm_change) {
-					final Node entity = ((OpenstreetmapPoint) selectedObj).getEntity();
+					final Entity entity = ((OpenstreetmapPoint) selectedObj).getEntity();
 					EditPoiDialogFragment.createInstance(entity, false)
 							.show(mapActivity.getSupportFragmentManager(), EditPoiDialogFragment.TAG);
 				}
