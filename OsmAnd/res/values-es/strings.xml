@@ -1463,7 +1463,7 @@
     <string name="map_widget_left">Panel izquierdo</string>
     <string name="shared_string_show">Mostrar</string>
     <string name="configure_map">Configurar mapa</string>
-    <string name="search_radius_proximity">En un radio de</string>
+    <string name="search_radius_proximity">A menos de</string>
     <string name="rendering_category_routes">Rutas</string>
     <string name="impassable_road">Evitar caminos…</string>
     <string name="rendering_attr_tramTrainRoutes_name">Rutas de tranvía y tren</string>
