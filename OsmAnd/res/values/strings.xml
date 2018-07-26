@@ -10,6 +10,15 @@
 	- For wording and consistency, please note http://osmand.net/help-online?id=technical-articles#Creating_a_Consistent_User_Experience
 	Thx - Hardy
 -->
+
+    <string name="release_3_1">
+    • Navigation: Fix progress bar, fast swapping of the start and end point of the route\n\n
+    • Map markers: fix turn on/off groups, ability to hide markers from the map\n\n
+    • OSM Edit: Ability to edit tags for non-point objects, fix missing comments on notes, backup of edits\n\n
+    • Improve Wikipedia and Wikivoyage parsing, updated files are already available\n\n
+    • Context menu: fix transport shields color in the night mode, fix additional menu sizes\n\n
+    • Other bug fixes\n\n
+    </string>
     <string name="increase_search_radius_to">Increase search radius to %1$s</string>
     <string name="send_search_query_description"><![CDATA[We will send your search query: <b>\"%1$s\"</b>, as well as your location.<br/><br/>
         We do not collect personal information, we only need search data to improve the search algorithm.<br/>]]></string>
