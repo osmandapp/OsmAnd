@@ -16,6 +16,13 @@ public class AMapLayer implements Parcelable {
 	private float zOrder = 5.5f;
 	private Map<String, AMapPoint> points = new ConcurrentHashMap<>();
 
+	private int circlePointMinZoom = 0;
+	private int circlePointMaxZoom = 6;
+	private int smallPointMinZoom = 7;
+	private int smallPointMaxZoom = 13;
+	private int bigPointMinZoom = 14;
+	private int bigPointMaxZoom = 22;
+
 	public AMapLayer(String id, String name, float zOrder, List<AMapPoint> pointList) {
 		this.id = id;
 		this.name = name;
@@ -74,11 +81,65 @@ public class AMapLayer implements Parcelable {
 		points.remove(pointId);
 	}
 
+	public void copyZoomBounds(AMapLayer layer) {
+		circlePointMinZoom = layer.circlePointMinZoom;
+		circlePointMaxZoom = layer.circlePointMaxZoom;
+		smallPointMinZoom = layer.smallPointMinZoom;
+		smallPointMaxZoom = layer.smallPointMaxZoom;
+		bigPointMinZoom = layer.bigPointMinZoom;
+		bigPointMaxZoom = layer.bigPointMaxZoom;
+	}
+
+	public void setCirclePointZoomBounds(int min, int max) {
+		circlePointMinZoom = min;
+		circlePointMaxZoom = max;
+	}
+
+	public void setSmallPointZoomBounds(int min, int max) {
+		smallPointMinZoom = min;
+		smallPointMaxZoom = max;
+	}
+
+	public void setBigPointZoomBounds(int min, int max) {
+		bigPointMinZoom = min;
+		bigPointMaxZoom = max;
+	}
+
+	public int getCirclePointMinZoom() {
+		return circlePointMinZoom;
+	}
+
+	public int getCirclePointMaxZoom() {
+		return circlePointMaxZoom;
+	}
+
+	public int getSmallPointMinZoom() {
+		return smallPointMinZoom;
+	}
+
+	public int getSmallPointMaxZoom() {
+		return smallPointMaxZoom;
+	}
+
+	public int getBigPointMinZoom() {
+		return bigPointMinZoom;
+	}
+
+	public int getBigPointMaxZoom() {
+		return bigPointMaxZoom;
+	}
+
 	public void writeToParcel(Parcel out, int flags) {
 		out.writeString(id);
 		out.writeString(name);
 		out.writeFloat(zOrder);
 		out.writeTypedList(new ArrayList<>(points.values()));
+		out.writeInt(circlePointMinZoom);
+		out.writeInt(circlePointMaxZoom);
+		out.writeInt(smallPointMinZoom);
+		out.writeInt(smallPointMaxZoom);
+		out.writeInt(bigPointMinZoom);
+		out.writeInt(bigPointMaxZoom);
 	}
 
 	private void readFromParcel(Parcel in) {
@@ -90,6 +151,12 @@ public class AMapLayer implements Parcelable {
 		for (AMapPoint p : pointList) {
 			this.points.put(p.getId(), p);
 		}
+		circlePointMinZoom = in.readInt();
+		circlePointMaxZoom = in.readInt();
+		smallPointMinZoom = in.readInt();
+		smallPointMaxZoom = in.readInt();
+		bigPointMinZoom = in.readInt();
+		bigPointMaxZoom = in.readInt();
 	}
 
 	public int describeContents() {
