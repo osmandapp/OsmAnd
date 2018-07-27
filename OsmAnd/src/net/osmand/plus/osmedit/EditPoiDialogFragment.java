@@ -84,7 +84,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 	public static final String TAG = "EditPoiDialogFragment";
 	private static final Log LOG = PlatformUtil.getLog(EditPoiDialogFragment.class);
 
-	private static final String KEY_AMENITY_ENTITY = "key_amenity_node";
+	private static final String KEY_AMENITY_ENTITY = "key_amenity_entity";
 	private static final String TAGS_LIST = "tags_list";
 	private static final String IS_ADDING_POI = "is_adding_poi";
 
@@ -314,7 +314,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 			}
 		});
 
-		if (!isAddingPoi) {
+		if (!isAddingPoi && Entity.EntityType.valueOf(editPoiData.getEntity()) == Entity.EntityType.NODE) {
 			Button deleteButton = (Button) view.findViewById(R.id.deleteButton);
 			deleteButton.setVisibility(View.VISIBLE);
 			deleteButton.setOnClickListener(new View.OnClickListener() {
@@ -808,7 +808,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 						String c = comment == null ? null : comment.getText().toString();
 						boolean closeChangeSet = closeChangesetCheckBox != null
 								&& closeChangesetCheckBox.isChecked();
-						deleteNode((Node) entity, c, closeChangeSet);
+						deleteNode(entity, c, closeChangeSet);
 					}
 				}
 			});

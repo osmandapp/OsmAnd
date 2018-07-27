@@ -6,6 +6,7 @@ import android.widget.Toast;
 import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
+import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
 import net.osmand.osm.edit.Entity;
 import net.osmand.osm.edit.Entity.EntityId;
@@ -462,12 +463,16 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 	}
 
 	private Entity replaceEditOsnTags(Amenity amenity, Entity entity) {
-		PoiType poiType = amenity.getType().getPoiTypeByKeyName(amenity.getSubType());
-		if (poiType.getEditOsmValue().equals(entity.getTag(poiType.getEditOsmTag()))) {
-			entity.removeTag(poiType.getEditOsmTag());
-			entity.putTagNoLC(EditPoiData.POI_TYPE_TAG, poiType.getTranslation());
-		} else {
-			// later we could try to determine tags
+		PoiCategory type = amenity.getType();
+		String subType = amenity.getSubType();
+		if (type != null && subType != null) {
+			PoiType poiType = type.getPoiTypeByKeyName(subType);
+			if (poiType != null && poiType.getEditOsmValue().equals(entity.getTag(poiType.getEditOsmTag()))) {
+				entity.removeTag(poiType.getEditOsmTag());
+				entity.putTagNoLC(EditPoiData.POI_TYPE_TAG, poiType.getTranslation());
+			} else {
+				// later we could try to determine tags
+			}
 		}
 		return entity;
 	}

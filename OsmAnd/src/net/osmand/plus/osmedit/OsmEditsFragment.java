@@ -32,6 +32,8 @@ import android.widget.Toast;
 import net.osmand.AndroidUtils;
 import net.osmand.data.PointDescription;
 import net.osmand.osm.edit.Entity;
+import net.osmand.osm.edit.Node;
+import net.osmand.osm.edit.Way;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.WptPt;
@@ -817,22 +819,14 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 				if (point.getGroup() == Group.POI) {
 					OpenstreetmapPoint p = (OpenstreetmapPoint) point;
 					if (p.getAction() == a) {
-						sz.startTag("", "node");
-						sz.attribute("", "lat", p.getLatitude() + "");
-						sz.attribute("", "lon", p.getLongitude() + "");
-						sz.attribute("", "id", p.getId() + "");
-						sz.attribute("", "version", "1");
-						for (String tag : p.getEntity().getTagKeySet()) {
-							String val = p.getEntity().getTag(tag);
-							if (isNotValid(tag, val)) {
-								continue;
+						Entity entity = p.getEntity();
+						if (entity != null) {
+							if (Entity.EntityType.valueOf(entity) == Entity.EntityType.NODE) {
+								writeNode(sz, (Node) p.getEntity());
+							} else if (Entity.EntityType.valueOf(entity) == Entity.EntityType.WAY) {
+								writeWay(sz, (Way) p.getEntity());
 							}
-							sz.startTag("", "tag");
-							sz.attribute("", "k", tag);
-							sz.attribute("", "v", val);
-							sz.endTag("", "tag");
 						}
-						sz.endTag("", "node");
 					}
 				} else if (point.getGroup() == Group.BUG) {
 					OsmNotesPoint p = (OsmNotesPoint) point;
@@ -850,6 +844,61 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 			}
 		}
 
+		private void writeNode(XmlSerializer sz, Node p) {
+			try {
+				sz.startTag("", "node");
+				sz.attribute("", "lat", p.getLatitude() + "");
+				sz.attribute("", "lon", p.getLongitude() + "");
+				sz.attribute("", "id", p.getId() + "");
+				sz.attribute("", "version", "1");
+				writeTags(sz, p);
+				sz.endTag("", "node");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+
+		private void writeWay(XmlSerializer sz, Way p) {
+			try {
+				sz.startTag("", "way");
+				sz.attribute("", "id", p.getId() + "");
+				sz.attribute("", "version", "1");
+				for (Long nodeRefId : p.getNodeIds().toArray()) {
+					String val = String.valueOf(nodeRefId);
+					if (val.isEmpty()) {
+						continue;
+					}
+					try {
+						sz.startTag("", "nd");
+						sz.attribute("", "ref", val);
+						sz.endTag("", "nd");
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
+				writeTags(sz, p);
+				sz.endTag("", "way");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+
+		private void writeTags(XmlSerializer sz, Entity p) {
+			for (String tag : p.getTagKeySet()) {
+				String val = p.getTag(tag);
+				if (isNotValid(tag, val)) {
+					continue;
+				}
+				try {
+					sz.startTag("", "tag");
+					sz.attribute("", "k", tag);
+					sz.attribute("", "v", val);
+					sz.endTag("", "tag");
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
 
 		@Override
 		protected void onPreExecute() {
