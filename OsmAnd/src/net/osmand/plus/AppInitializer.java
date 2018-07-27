@@ -46,6 +46,7 @@ import net.osmand.plus.search.QuickSearchHelper;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.plus.voice.CommandPlayerException;
+import net.osmand.plus.voice.JSTTSCommandPlayerImpl;
 import net.osmand.plus.voice.MediaCommandPlayerImpl;
 import net.osmand.plus.voice.TTSCommandPlayerImpl;
 import net.osmand.plus.wikivoyage.data.TravelDbHelper;
@@ -577,7 +578,9 @@ public class AppInitializer implements IProgress {
 					if (!voiceDir.exists()) {
 						throw new CommandPlayerException(ctx.getString(R.string.voice_data_unavailable));
 					}
-
+					if (app.getSettings().USE_JS_VOICE_GUIDANCE.get()) {
+						return new JSTTSCommandPlayerImpl(osmandApplication, applicationMode, osmandApplication.getRoutingHelper().getVoiceRouter(), voiceProvider);
+					}
 					if (MediaCommandPlayerImpl.isMyData(voiceDir)) {
 						return new MediaCommandPlayerImpl(osmandApplication, applicationMode, osmandApplication.getRoutingHelper().getVoiceRouter(), voiceProvider);
 					} else if (TTSCommandPlayerImpl.isMyData(voiceDir)) {

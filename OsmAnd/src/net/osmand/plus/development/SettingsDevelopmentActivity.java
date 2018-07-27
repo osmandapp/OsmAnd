@@ -63,6 +63,9 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 				R.string.animate_my_location,
 				R.string.animate_my_location_desc));
 
+		cat.addPreference(createCheckBoxPreference(settings.USE_JS_VOICE_GUIDANCE, getString(R.string.use_js_voice_guidance),
+				getString(R.string.use_js_voice_guidance_description)));
+
 		final Preference firstRunPreference = new Preference(this);
 		firstRunPreference.setTitle(R.string.simulate_initial_startup);
 		firstRunPreference.setSummary(R.string.simulate_initial_startup_descr);

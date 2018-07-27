@@ -69,6 +69,8 @@ public class VoiceRouter {
 	private static RouteDirectionInfo nextRouteDirection;
 	private Term empty;
 
+	private boolean useJS;
+
 	public interface VoiceMessageListener {
 		void onVoiceMessage();
 	}
@@ -78,6 +80,7 @@ public class VoiceRouter {
 	public VoiceRouter(RoutingHelper router, final OsmandSettings settings) {
 		this.router = router;
 		this.settings = settings;
+		useJS = settings.USE_JS_VOICE_GUIDANCE.get();
 		this.mute = settings.VOICE_MUTE.get();
 		empty = new Struct("");
 		voiceMessageListeners = new ConcurrentHashMap<VoiceRouter.VoiceMessageListener, Integer>();
