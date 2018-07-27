@@ -154,6 +154,9 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 	}
 
 	private void drawPoint(Canvas canvas, int x, int y, RotatedTileBox tb, AMapPoint point, Bitmap image) {
+		if (image == null) {
+			image = placeholder;
+		}
 		if (pointsType == PointType.STANDARD) {
 			int radius = getRadiusPoi(tb);
 			float density = tb.getDensity();
@@ -161,37 +164,33 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 			canvas.drawCircle(x, y, radius + density, pointOuterCircle);
 			canvas.drawCircle(x, y, radius - density, pointInnerCircle);
 		} else if (pointsType == PointType.CIRCLE) {
-			bitmapPaint.setColorFilter(new PorterDuffColorFilter(point.getColor(), PorterDuff.Mode.MULTIPLY));
-			canvas.drawBitmap(circle, x - circle.getWidth() / 2, y - circle.getHeight() / 2, bitmapPaint);
+			drawColoredBitmap(canvas, x, y, circle, point.getColor());
 		} else if (pointsType == PointType.SMALL_ICON) {
-			drawImagePoint(canvas, x, y, smallIconBg.getHeight() / 2, smallIconBg, y, smallIconSize / 2, image);
+			drawColoredBitmap(canvas, x, y, smallIconBg, point.getColor());
+			bitmapPaint.setColorFilter(null);
+			canvas.drawBitmap(image, null, getDstRect(x, y, smallIconSize / 2), bitmapPaint);
 		} else if (pointsType == PointType.BIG_ICON) {
-			// FIXME: y offset
-			float bgVerticalOffset = bigIconBg.getHeight() * 0.9f;
-			float imageCenterY = y - bgVerticalOffset + bigIconBg.getHeight() / 2;
-			drawImagePoint(canvas, x, y, bgVerticalOffset, bigIconBg, (int) imageCenterY, bigIconSize / 2, image);
+			bitmapPaint.setColorFilter(null);
+			// FIXME: vertical offset
+			float vOffset = bigIconBg.getHeight() * 0.9f;
+			int imageCenterY = (int) (y - vOffset + bigIconBg.getHeight() / 2);
+			canvas.drawBitmap(bigIconBg, x - bigIconBg.getWidth() / 2, y - vOffset, bitmapPaint);
+			canvas.drawBitmap(image, null, getDstRect(x, imageCenterY, bigIconSize / 2), bitmapPaint);
 		}
 	}
 
-	private void drawImagePoint(Canvas canvas,
-								int bgCenterX,
-								int bgCenterY,
-								float bgVerticalOffset,
-								Bitmap bg,
-								int imageCenterY,
-								int imageOffset,
-								Bitmap image) {
-		bitmapPaint.setColorFilter(null);
-		canvas.drawBitmap(bg, bgCenterX - bg.getWidth() / 2, bgCenterY - bgVerticalOffset, bitmapPaint);
-		if (image == null) {
-			image = placeholder;
-		}
+	private void drawColoredBitmap(Canvas canvas, int x, int y, Bitmap bitmap, int color) {
+		bitmapPaint.setColorFilter(new PorterDuffColorFilter(color, PorterDuff.Mode.MULTIPLY));
+		canvas.drawBitmap(bitmap, x - bitmap.getWidth() / 2, y - bitmap.getHeight() / 2, bitmapPaint);
+	}
+
+	private Rect getDstRect(int centerX, int centerY, int offset) {
 		Rect rect = new Rect();
-		rect.left = bgCenterX - imageOffset;
-		rect.top = imageCenterY - imageOffset;
-		rect.right = bgCenterX + imageOffset;
-		rect.bottom = imageCenterY + imageOffset;
-		canvas.drawBitmap(image, null, rect, bitmapPaint);
+		rect.left = centerX - offset;
+		rect.top = centerY - offset;
+		rect.right = centerX + offset;
+		rect.bottom = centerY + offset;
+		return rect;
 	}
 
 	@Override
@@ -326,26 +325,31 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 		return (int) (r * tb.getDensity());
 	}
 
-	private boolean hasBitmap(AMapPoint point) {
-		String imageUriStr = point.getParams().get(AMapPoint.POINT_IMAGE_URI_PARAM);
-		return !TextUtils.isEmpty(imageUriStr) && pointImages.containsKey(imageUriStr);
+	private int getPointRadius(RotatedTileBox tb) {
+		int r = 0;
+		if (pointsType == PointType.STANDARD) {
+			r = getRadiusPoi(tb);
+		} else if (pointsType == PointType.CIRCLE) {
+			r = circle.getHeight() / 2;
+		} else if (pointsType == PointType.SMALL_ICON) {
+			r = smallIconSize / 2;
+		} else if (pointsType == PointType.BIG_ICON) {
+			r = bigIconSize / 2;
+		}
+		return r * 3 / 2;
 	}
 
 	private void getFromPoint(RotatedTileBox tb, PointF point, List<? super AMapPoint> points) {
 		if (view != null) {
 			int ex = (int) point.x;
 			int ey = (int) point.y;
-			final int rp = getRadiusPoi(tb);
-			final int bitmapRadius = (int) ((bigIconSize / tb.getDensity()) * 3 / 2);
-			int compare;
-			int radius = rp * 3 / 2;
+			int radius = getPointRadius(tb);
 			for (AMapPoint p : aidlLayer.getPoints()) {
 				ALatLon position = p.getLocation();
 				if (position != null) {
-					compare = hasBitmap(p) ? bitmapRadius : radius;
 					int x = (int) tb.getPixXFromLatLon(position.getLatitude(), position.getLongitude());
 					int y = (int) tb.getPixYFromLatLon(position.getLatitude(), position.getLongitude());
-					if (Math.abs(x - ex) <= compare && Math.abs(y - ey) <= compare) {
+					if (Math.abs(x - ex) <= radius && Math.abs(y - ey) <= radius) {
 						points.add(p);
 					}
 				}
