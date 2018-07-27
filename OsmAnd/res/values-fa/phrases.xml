@@ -705,7 +705,7 @@
 	<string name="poi_pump">پنجرگیری دوچرخه</string>
 	<string name="poi_observatory_designation">رصدخانه</string>
 	<string name="poi_pharmacy_dispensing">داروخانه</string>
-	<string name="poi_star_rating">ستاره دار</string>
+	<string name="poi_star_rating">رتبه‌بندی ستاره‌ای</string>
 	<string name="poi_clock_option">تنظیمات ساعت</string>
 	<string name="poi_scout_camp">کمپ گردشگری</string>
 	<string name="poi_backcountry">پشت صحنه</string>
@@ -1016,4 +1016,6 @@
 	<string name="poi_emergency_infrastructure">زیرساخت فوریتی</string>
 	<string name="poi_enforcement_toll">اعمال قانون: عوارضی</string>
 
+	<string name="poi_start_date">تاریخ شروع</string>
+	<string name="poi_stars_2">۲ (استاندارد)</string>
 	</resources>
