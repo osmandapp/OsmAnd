@@ -133,6 +133,11 @@ public class SearchCoreFactory {
 		public int getMinimalSearchRadius(SearchPhrase phrase) {
 			return 0;
 		}
+		
+		@Override
+		public int getNextSearchRadius(SearchPhrase phrase) {
+			return 0;
+		}
 
 		protected void subSearchApiOrPublish(SearchPhrase phrase,
 											 SearchResultMatcher resultMatcher, SearchResult res, SearchBaseAPI api)
@@ -266,6 +271,11 @@ public class SearchCoreFactory {
 		@Override
 		public int getMinimalSearchRadius(SearchPhrase phrase) {
 			return phrase.getRadiusSearch(DEFAULT_ADDRESS_BBOX_RADIUS);
+		}
+		
+		@Override
+		public int getNextSearchRadius(SearchPhrase phrase) {
+			return phrase.getNextRadiusSearch(DEFAULT_ADDRESS_BBOX_RADIUS);
 		}
 
 		@Override
@@ -592,6 +602,11 @@ public class SearchCoreFactory {
 		public int getMinimalSearchRadius(SearchPhrase phrase) {
 			return phrase.getRadiusSearch(BBOX_RADIUS);
 		}
+		
+		@Override
+		public int getNextSearchRadius(SearchPhrase phrase) {
+			return phrase.getNextRadiusSearch(BBOX_RADIUS);
+		}
 	}
 
 
@@ -734,6 +749,11 @@ public class SearchCoreFactory {
 		@Override
 		public int getMinimalSearchRadius(SearchPhrase phrase) {
 			return phrase.getRadiusSearch(BBOX_RADIUS);
+		}
+		
+		@Override
+		public int getNextSearchRadius(SearchPhrase phrase) {
+			return phrase.getNextRadiusSearch(BBOX_RADIUS);
 		}
 
 		private Map<PoiCategory, LinkedHashSet<String>> acceptedTypes = new LinkedHashMap<PoiCategory,

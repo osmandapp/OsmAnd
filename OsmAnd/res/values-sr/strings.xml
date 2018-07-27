@@ -1164,7 +1164,7 @@
     <string name="skip_map_downloading_desc">Немате уграђених карата. Можете изабрати карту са списка или преузети карте касније преко \'Мени - %1$s\'.</string>
     <string name="search_another_country">Одаберите другу област</string>
     <string name="search_map">Претражујем карте…</string>
-    <string name="first_usage_wizard_desc">Нека OsmAnd одреди Ваш положај и предложи карте за преузимање те области према томе.</string>
+    <string name="first_usage_wizard_desc">Пусти да OsmAnd одреди Ваш положај и да према томе предложи карте за преузимање те области.</string>
     <string name="location_not_found">Није препознат положај</string>
     <string name="no_inet_connection">Нема мрежне везе</string>
     <string name="no_inet_connection_desc_map">Захтеване за преузимање.</string>
@@ -1173,7 +1173,7 @@
     <string name="storage_place_description">OsmAnd складиште података (за карте, GPX фајлове итд.): %1$s.</string>
     <string name="give_permission">Дајте дозволе</string>
     <string name="allow_access_location">Омогућите приступ одређивању положаја</string>
-    <string name="first_usage_greeting">Добави упутства и откриј нова места без везе са интернетом</string>
+    <string name="first_usage_greeting">Узми упутства и откриј нова места, и без интернета</string>
     <string name="search_my_location">Пронађи мој положај</string>
     <string name="no_update_info_desc">Не проверавај да ли постоје нове верзије нити за OsmAnd попусте.</string>
     <string name="no_update_info">Не приказуј нове верзије</string>
@@ -2966,4 +2966,9 @@
 \n
 \nОвај поглед се може искључити тако што се или овде деактивира, или тако што се, по жељи, промени \"Стил карте\" под \"Подеси карту\".</string>
     <string name="point_deleted">Тачка %1$s обрисана</string>
+    <string name="shared_string_world">Свет</string>
+    <string name="send_search_query_description">Послаћемо упит Ваше претраге: <b>\"%1$s\"</b>, као и Вашу локацију.<br/><br/> Не сакупљамо личне податке, само нам требају подаци о претрагама да бисмо побољшавали алгоритам претраге.<br/></string>
+    <string name="search_no_results_description">Нема резултата?
+\nРеците нам о овоме.</string>
+    <string name="send_search_query">Пошаљи упит претраге?</string>
     </resources>

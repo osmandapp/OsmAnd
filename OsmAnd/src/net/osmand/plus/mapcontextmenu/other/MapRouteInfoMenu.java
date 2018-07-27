@@ -123,6 +123,10 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 		this.onDismissListener = onDismissListener;
 	}
 
+	public boolean isSelectFromMapTouch() {
+		return selectFromMapTouch;
+	}
+
 	public void cancelSelectionFromMap() {
 		selectFromMapTouch = false;
 	}
@@ -331,8 +335,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 					targetPointsHelper.setStartPoint(endPoint.point, false, endPoint.getPointDescription(mapActivity));
 					targetPointsHelper.updateRouteAndRefresh(true);
 
-					updateFromIcon();
-					updateToIcon(parentView);
+					updateInfo(parentView);
 				}
 			}
 		});

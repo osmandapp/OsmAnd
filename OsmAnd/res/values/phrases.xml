@@ -3841,4 +3841,12 @@
 	<string name="poi_payment_contactless_yes">Contactless</string>
 	<string name="poi_payment_contactless_no">Contactless not accepted</string>
 
+	<string name="poi_hazard_nuclear">Nuclear hazard</string>
+	<string name="poi_hazard_erosion">Erosion hazard</string>
+	<string name="poi_hazard_avalanche">Avalanche hazard</string>
+	<string name="poi_hazard_slippery_road">Slippery road</string>
+	<string name="poi_hazard_flood">Flood hazard</string>
+	<string name="poi_hazard_minefield">Minefield</string>
+
+
 </resources>

@@ -1,19 +1,7 @@
 package net.osmand.plus.monitoring;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URI;
-import java.net.URL;
-import java.text.MessageFormat;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.ConcurrentLinkedQueue;
-
-import javax.net.ssl.HostnameVerifier;
-import javax.net.ssl.HttpsURLConnection;
-import javax.net.ssl.SSLSession;
+import android.content.Context;
+import android.os.AsyncTask;
 
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
@@ -25,8 +13,16 @@ import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
 
-import android.content.Context;
-import android.os.AsyncTask;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URI;
+import java.net.URL;
+import java.text.MessageFormat;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class LiveMonitoringHelper  {
 	
@@ -180,16 +176,6 @@ public class LiveMonitoringHelper  {
 
 			urlConnection.setConnectTimeout(15000);
 			urlConnection.setReadTimeout(15000);
-
-			// allow certificates where hostnames doesn't match CN
-			if (url.getProtocol().equals("https")) {
-				((HttpsURLConnection) urlConnection).setHostnameVerifier(
-						new HostnameVerifier() {
-							public boolean verify(String host, SSLSession session) {
-								return (true);
-							}
-						});
-			}
 
 			log.info("Monitor " + uri);
 

@@ -3,6 +3,7 @@ package net.osmand.telegram.ui
 import android.app.TimePickerDialog
 import android.os.Bundle
 import android.support.v4.app.DialogFragment
+import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
@@ -11,12 +12,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import net.osmand.telegram.R
 import net.osmand.telegram.TelegramApplication
 import net.osmand.telegram.helpers.ShareLocationHelper
 import net.osmand.telegram.helpers.TelegramUiHelper
 import net.osmand.telegram.ui.SetTimeDialogFragment.SetTimeListAdapter.ChatViewHolder
+import net.osmand.telegram.utils.AndroidUtils
 import org.drinkless.td.libcore.telegram.TdApi
 import java.util.concurrent.TimeUnit
 
@@ -26,13 +27,14 @@ class SetTimeDialogFragment : DialogFragment() {
 		get() = activity?.application as TelegramApplication
 
 	private val telegramHelper get() = app.telegramHelper
+	private val settings get() = app.settings
 
 	private val adapter = SetTimeListAdapter()
 
 	private lateinit var timeForAllTitle: TextView
 	private lateinit var timeForAllValue: TextView
 
-	private val chatIdsToDuration = HashMap<Long, Long>()
+	private val chatLivePeriods = HashMap<Long, Long>()
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
@@ -76,7 +78,18 @@ class SetTimeDialogFragment : DialogFragment() {
 		view.findViewById<TextView>(R.id.primary_btn).apply {
 			text = getString(R.string.shared_string_share)
 			setOnClickListener {
-				Toast.makeText(context, "Share", Toast.LENGTH_SHORT).show()
+				if (!AndroidUtils.isLocationPermissionAvailable(view.context)) {
+					AndroidUtils.requestLocationPermission(activity!!)
+				} else {
+					chatLivePeriods.forEach { chatId, livePeriod ->
+						settings.shareLocationToChat(chatId, true, livePeriod)
+					}
+					app.shareLocationHelper.startSharingLocation()
+					targetFragment?.also {
+						it.onActivityResult(targetRequestCode, LOCATION_SHARED_REQUEST_CODE, null)
+					}
+					dismiss()
+				}
 			}
 		}
 
@@ -91,25 +104,26 @@ class SetTimeDialogFragment : DialogFragment() {
 	override fun onSaveInstanceState(outState: Bundle) {
 		super.onSaveInstanceState(outState)
 		val chats = mutableListOf<Long>()
-		for ((id, duration) in chatIdsToDuration) {
+		for ((id, livePeriod) in chatLivePeriods) {
 			chats.add(id)
-			chats.add(duration)
+			chats.add(livePeriod)
 		}
 		outState.putLongArray(CHATS_KEY, chats.toLongArray())
 	}
 
 	private fun readFromBundle(bundle: Bundle?) {
-		chatIdsToDuration.clear()
+		chatLivePeriods.clear()
 		bundle?.getLongArray(CHATS_KEY)?.also {
 			for (i in 0 until it.size step 2) {
-				chatIdsToDuration[it[i]] = it[i + 1]
+				val livePeriod = settings.getChatLivePeriod(it[i])
+				chatLivePeriods[it[i]] = livePeriod ?: it[i + 1]
 			}
 		}
 	}
 
 	private fun getTimeForAll(useDefValue: Boolean = false): Long {
 		val returnVal = if (useDefValue) DEFAULT_VISIBLE_TIME_SECONDS else NO_VALUE
-		val iterator = chatIdsToDuration.values.iterator()
+		val iterator = chatLivePeriods.values.iterator()
 		if (!iterator.hasNext()) {
 			return returnVal
 		}
@@ -127,7 +141,7 @@ class SetTimeDialogFragment : DialogFragment() {
 		if (timeForAll != NO_VALUE) {
 			timeForAllTitle.text = getString(R.string.visible_time_for_all)
 			timeForAllValue.visibility = View.VISIBLE
-			timeForAllValue.text = formatDuration(timeForAll)
+			timeForAllValue.text = formatLivePeriod(timeForAll)
 		} else {
 			timeForAllTitle.text = getString(R.string.set_visible_time_for_all)
 			timeForAllValue.visibility = View.GONE
@@ -136,7 +150,7 @@ class SetTimeDialogFragment : DialogFragment() {
 
 	private fun selectDuration(id: Long? = null) {
 		val timeForAll = getTimeForAll(true)
-		val defSeconds = if (id == null) timeForAll else chatIdsToDuration[id] ?: timeForAll
+		val defSeconds = if (id == null) timeForAll else chatLivePeriods[id] ?: timeForAll
 		val (defHours, defMinutes) = secondsToHoursAndMinutes(defSeconds)
 		TimePickerDialog(
 			context,
@@ -145,10 +159,10 @@ class SetTimeDialogFragment : DialogFragment() {
 						TimeUnit.MINUTES.toSeconds(minutes.toLong())
 				if (seconds >= ShareLocationHelper.MIN_LOCATION_MESSAGE_LIVE_PERIOD_SEC) {
 					if (id != null) {
-						chatIdsToDuration[id] = seconds
+						chatLivePeriods[id] = seconds
 					} else {
-						chatIdsToDuration.keys.forEach {
-							chatIdsToDuration[it] = seconds
+						chatLivePeriods.keys.forEach {
+							chatLivePeriods[it] = seconds
 						}
 					}
 					updateTimeForAllRow()
@@ -164,7 +178,7 @@ class SetTimeDialogFragment : DialogFragment() {
 		return Pair(hours.toInt(), minutes.toInt())
 	}
 
-	private fun formatDuration(seconds: Long): String {
+	private fun formatLivePeriod(seconds: Long): String {
 		val (hours, minutes) = secondsToHoursAndMinutes(seconds)
 		return when {
 			hours != 0 && minutes == 0 -> getString(R.string.hours_format, hours)
@@ -175,7 +189,7 @@ class SetTimeDialogFragment : DialogFragment() {
 
 	private fun updateList() {
 		val chats: MutableList<TdApi.Chat> = mutableListOf()
-		telegramHelper.getChatList().filter { chatIdsToDuration.keys.contains(it.chatId) }
+		telegramHelper.getChatList().filter { chatLivePeriods.keys.contains(it.chatId) }
 			.forEach { orderedChat ->
 				telegramHelper.getChat(orderedChat.chatId)?.also { chats.add(it) }
 			}
@@ -198,13 +212,14 @@ class SetTimeDialogFragment : DialogFragment() {
 
 		override fun onBindViewHolder(holder: ChatViewHolder, position: Int) {
 			val chat = chats[position]
+			val placeholderId = if (telegramHelper.isGroup(chat)) R.drawable.img_group_picture else R.drawable.img_user_picture
 
-			TelegramUiHelper.setupPhoto(app, holder.icon, chat.photo?.small?.local?.path)
+			TelegramUiHelper.setupPhoto(app, holder.icon, chat.photo?.small?.local?.path, placeholderId, false)
 			holder.title?.text = chat.title
 			holder.description?.text = "Some description" // FIXME
 			holder.textInArea?.apply {
 				visibility = View.VISIBLE
-				chatIdsToDuration[chat.id]?.also { text = formatDuration(it) }
+				chatLivePeriods[chat.id]?.also { text = formatLivePeriod(it) }
 			}
 			holder.bottomShadow?.visibility = View.GONE
 			holder.itemView.setOnClickListener {
@@ -225,12 +240,14 @@ class SetTimeDialogFragment : DialogFragment() {
 
 	companion object {
 
+		const val LOCATION_SHARED_REQUEST_CODE = 0
+
 		private const val TAG = "SetTimeDialogFragment"
 		private const val CHATS_KEY = "chats_key"
 		private const val DEFAULT_VISIBLE_TIME_SECONDS = 60 * 60L // 1 hour
 		private const val NO_VALUE = -1L
 
-		fun showInstance(fm: FragmentManager, chatIds: Set<Long>): Boolean {
+		fun showInstance(fm: FragmentManager, chatIds: Set<Long>, target: Fragment): Boolean {
 			return try {
 				val chats = mutableListOf<Long>()
 				for (id in chatIds) {
@@ -239,6 +256,7 @@ class SetTimeDialogFragment : DialogFragment() {
 				}
 				SetTimeDialogFragment().apply {
 					arguments = Bundle().apply { putLongArray(CHATS_KEY, chats.toLongArray()) }
+					setTargetFragment(target, LOCATION_SHARED_REQUEST_CODE)
 					show(fm, TAG)
 				}
 				true

@@ -1,35 +1,23 @@
 APP_STL := gnustl_shared
+# APP_STL := c++_shared
 APP_CPPFLAGS := -std=c++11 -fexceptions -frtti
 APP_SHORT_COMMANDS := true
 
 # Specify least supported Android platform version
-APP_PLATFORM := android-9
+APP_PLATFORM := android-14
 
-ifeq ($(wildcard $(ANDROID_NDK)/toolchains/*-4.7),)
-	ifeq ($(wildcard $(ANDROID_NDK)/toolchains/*-4.8),)
-		NDK_TOOLCHAIN_VERSION := 4.9
-	else
-		NDK_TOOLCHAIN_VERSION := 4.8
-	endif
-else
-	NDK_TOOLCHAIN_VERSION := 4.7
-endif
+# ifeq ($(wildcard $(ANDROID_NDK)/toolchains/*-4.7),)
+# 	ifeq ($(wildcard $(ANDROID_NDK)/toolchains/*-4.8),)
+# 		NDK_TOOLCHAIN_VERSION := 4.9
+# 	else
+# 		NDK_TOOLCHAIN_VERSION := 4.8
+# 	endif
+# else
+# 	NDK_TOOLCHAIN_VERSION := 4.7
+# endif
+NDK_TOOLCHAIN_VERSION := clang
 
-APP_ABI :=
-ifneq ($(filter x86,$(OSMAND_ARCHITECTURES_SET)),)
-    APP_ABI += x86
-endif
-ifneq ($(filter mips,$(OSMAND_ARCHITECTURES_SET)),)
-    APP_ABI += mips
-endif
-ifneq ($(filter arm,$(OSMAND_ARCHITECTURES_SET)),)
-    APP_ABI += armeabi armeabi-v7a
-else
-    ifneq ($(filter armv7,$(OSMAND_ARCHITECTURES_SET)),)
-        APP_ABI += armeabi-v7a
-    endif
-endif
-    
+APP_ABI := x86 armeabi-v7a arm64-v8a
 ifndef OSMAND_DEBUG_NATIVE
     # Force release compilation in release optimizations, even if application is debuggable by manifest
     APP_OPTIM := release

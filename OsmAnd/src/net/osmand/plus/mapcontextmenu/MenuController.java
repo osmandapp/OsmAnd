@@ -421,6 +421,10 @@ public abstract class MenuController extends BaseMenuController implements Colla
 		return null;
 	}
 
+	public boolean isBigRightIcon() {
+		return false;
+	}
+
 	@Nullable
 	public Drawable getSecondLineTypeIcon() {
 		return null;
@@ -476,7 +480,7 @@ public abstract class MenuController extends BaseMenuController implements Colla
 				}
 			}
 			return open ? R.color.ctx_menu_amenity_opened_text_color : R.color.ctx_menu_amenity_closed_text_color;
-		} else if (indexItem != null) {
+		} else if (shouldShowMapSize()) {
 			return R.color.icon_color;
 		}
 		return 0;
@@ -507,7 +511,7 @@ public abstract class MenuController extends BaseMenuController implements Colla
 				}
 				return infoStr;
 
-			} else if (indexItem != null) {
+			} else if (shouldShowMapSize()) {
 				return mapActivity.getString(R.string.file_size_in_mb, indexItem.getArchiveSizeMB());
 			}
 		}
@@ -518,10 +522,14 @@ public abstract class MenuController extends BaseMenuController implements Colla
 	public int getAdditionalInfoIconRes() {
 		if (openingHoursInfo != null) {
 			return R.drawable.ic_action_opening_hour_16;
-		} else if (indexItem != null) {
+		} else if (shouldShowMapSize()) {
 			return R.drawable.ic_sdcard_16;
 		}
 		return 0;
+	}
+
+	private boolean shouldShowMapSize() {
+		return indexItem != null && !downloaded;
 	}
 
 	@NonNull

@@ -20,6 +20,7 @@ import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewAnimationUtils;
@@ -35,6 +36,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -164,6 +166,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 	private long lastUpOrCancelMotionEventTime;
 	private TextView listEmptyTextView;
 	private int[] animationCoordinates;
+	private ProgressBar planRouteProgressBar;
 
 	int baseColor;
 
@@ -213,6 +216,21 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 
 	public WaypointDialogHelper getWaypointDialogHelper() {
 		return waypointDialogHelper;
+	}
+
+	public void updateRouteCalculationProgress(int progress) {
+		if (planRouteProgressBar != null) {
+			if (planRouteProgressBar.getVisibility() != View.VISIBLE) {
+				planRouteProgressBar.setVisibility(View.VISIBLE);
+			}
+			planRouteProgressBar.setProgress(progress);
+		}
+	}
+
+	public void routeCalculationFinished() {
+		if (planRouteProgressBar != null) {
+			planRouteProgressBar.setVisibility(View.GONE);
+		}
 	}
 
 	public void createDashboardView() {
@@ -381,6 +399,10 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 		}
 		dashboardView.findViewById(R.id.animateContent).setOnClickListener(listener);
 		dashboardView.findViewById(R.id.map_part_dashboard).setOnClickListener(listener);
+
+		View pbContainer = LayoutInflater.from(mapActivity).inflate(R.layout.plan_route_progress_bar, null);
+		planRouteProgressBar = (ProgressBar) pbContainer.findViewById(R.id.progress_bar);
+		listView.addHeaderView(pbContainer);
 
 		initActionButtons();
 		dashboardView.addView(actionButton);
@@ -756,12 +778,6 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 			}
 			mapActivity.findViewById(R.id.toolbar_back).setVisibility(isBackButtonVisible() ? View.VISIBLE : View.GONE);
 			mapActivity.getMapLayers().getMapControlsLayer().hideMapControls();
-			boolean portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
-			if (!portrait) {
-				AndroidUiHelper.updateVisibility(mapActivity.findViewById(R.id.map_route_land_left_margin_external), true);
-				mapActivity.getMapView().setMapPositionX(1);
-				mapActivity.refreshMap();
-			}
 
 			updateToolbarActions();
 			//fabButton.showFloatingActionButton();
@@ -772,13 +788,6 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 		} else {
 			mapActivity.getMapViewTrackingUtilities().setDashboard(null);
 			hide(animation);
-
-			if (!MapRouteInfoMenu.isVisible()) {
-				AndroidUiHelper.updateVisibility(mapActivity.findViewById(R.id.map_route_land_left_margin_external), false);
-				mapActivity.getMapView().setMapPositionX(0);
-				mapActivity.getMapView().refreshMap();
-			}
-
 			mapActivity.getMapLayers().getMapControlsLayer().showMapControlsIfHidden();
 			hideActionButton();
 			for (WeakReference<DashBaseFragment> df : fragList) {
@@ -829,6 +838,10 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 			listView.setDivider(null);
 		}
 		AndroidUtils.setTextSecondaryColor(mapActivity, listEmptyTextView, nightMode);
+
+		if (planRouteProgressBar != null) {
+			mapActivity.setupRouteCalculationProgressBar(planRouteProgressBar);
+		}
 	}
 
 	private int dpToPx(float dp) {
@@ -1372,17 +1385,14 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 
 	private void updateListAdapter(ArrayAdapter<?> listAdapter, OnItemClickListener listener) {
 		this.listAdapter = listAdapter;
-		this.listAdapterOnClickListener = listener;
-		if (this.listView != null) {
+		listAdapterOnClickListener = listener;
+		if (listView != null) {
 			listView.setAdapter(listAdapter);
-			if (!portrait) {
-				listView.setOnItemClickListener(this.listAdapterOnClickListener);
-			} else if (this.listAdapterOnClickListener != null) {
+			if (listAdapterOnClickListener != null) {
 				listView.setOnItemClickListener(new OnItemClickListener() {
-
 					@Override
 					public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-						listAdapterOnClickListener.onItemClick(parent, view, position - 1, id);
+						listAdapterOnClickListener.onItemClick(parent, view, position - listView.getHeaderViewsCount(), id);
 					}
 				});
 			} else {

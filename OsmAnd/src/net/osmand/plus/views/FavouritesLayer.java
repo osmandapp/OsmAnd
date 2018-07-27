@@ -151,7 +151,7 @@ public class FavouritesLayer extends OsmandMapLayer implements ContextMenuLayer.
 				this.smallObjectsLatLon = smallObjectsLatLon;
 			}
 		}
-		if(textLayer.isVisible()) {
+		if(isTextVisible()) {
 			textLayer.putData(this, cache);
 		}
 
@@ -258,7 +258,17 @@ public class FavouritesLayer extends OsmandMapLayer implements ContextMenuLayer.
 		return PointDescription.getSimpleName(o, view.getContext());
 	}
 
-	
+	@Override
+	public boolean isTextVisible() {
+		return settings.SHOW_POI_LABEL.get();
+	}
+
+	@Override
+	public boolean isFakeBoldText() {
+		return false;
+	}
+
+
 	@Override
 	public boolean isObjectMovable(Object o) {
 		return o instanceof FavouritePoint;

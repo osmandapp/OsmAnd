@@ -1,6 +1,8 @@
 package net.osmand.telegram.ui
 
 import android.animation.*
+import android.content.Intent
+import android.graphics.Paint
 import android.graphics.drawable.GradientDrawable
 import android.os.Build
 import android.os.Bundle
@@ -8,6 +10,7 @@ import android.support.design.widget.AppBarLayout
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.ListPopupWindow
 import android.support.v7.widget.RecyclerView
 import android.view.*
 import android.widget.*
@@ -17,6 +20,7 @@ import net.osmand.telegram.helpers.TelegramHelper
 import net.osmand.telegram.helpers.TelegramHelper.TelegramListener
 import net.osmand.telegram.helpers.TelegramUiHelper
 import net.osmand.telegram.ui.MyLocationTabFragment.MyLocationListAdapter.ChatViewHolder
+import net.osmand.telegram.utils.AndroidUtils
 import org.drinkless.td.libcore.telegram.TdApi
 
 private const val SELECTED_CHATS_KEY = "selected_chats"
@@ -28,12 +32,16 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 	private var searchBoxHeight: Int = 0
 	private var searchBoxSidesMargin: Int = 0
 
+	private var appBarScrollRange: Int = -1
+
 	private val app: TelegramApplication
 		get() = activity?.application as TelegramApplication
 
 	private val telegramHelper get() = app.telegramHelper
 
 	private lateinit var appBarLayout: AppBarLayout
+	private lateinit var userImage: ImageView
+	private lateinit var optionsBtn: ImageView
 	private lateinit var textContainer: LinearLayout
 	private lateinit var title: TextView
 	private lateinit var description: TextView
@@ -80,19 +88,33 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 				outlineProvider = null
 			}
 			addOnOffsetChangedListener { appBar, offset ->
-				val collapsed = Math.abs(offset) == appBar.totalScrollRange
+				if (appBarScrollRange == -1) {
+					appBarScrollRange = appBar.totalScrollRange
+				}
+				val collapsed = Math.abs(offset) == appBarScrollRange
 				if (collapsed != appBarCollapsed) {
 					appBarCollapsed = collapsed
 					adjustText()
 					adjustSearchBox()
+					optionsBtn.visibility = if (collapsed) View.VISIBLE else View.GONE
 				}
 			}
+		}
+
+		userImage = mainView.findViewById<ImageView>(R.id.my_location_user_image).apply {
+			setImageResource(R.drawable.img_my_location_user)
+		}
+
+		optionsBtn = mainView.findViewById<ImageView>(R.id.options).apply {
+			setImageDrawable(app.uiUtils.getThemedIcon(R.drawable.ic_action_other_menu))
+			setOnClickListener { showPopupMenu() }
 		}
 
 		textContainer = mainView.findViewById<LinearLayout>(R.id.text_container).apply {
 			if (Build.VERSION.SDK_INT >= 16) {
 				layoutTransition.enableTransitionType(LayoutTransition.CHANGING)
 			}
+			AndroidUtils.addStatusBarPadding19v(context!!, this)
 			title = findViewById(R.id.title)
 			description = findViewById(R.id.description)
 		}
@@ -135,6 +157,13 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 		outState.putLongArray(SELECTED_CHATS_KEY, selectedChats.toLongArray())
 	}
 
+	override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+		super.onActivityResult(requestCode, resultCode, data)
+		if (requestCode == SetTimeDialogFragment.LOCATION_SHARED_REQUEST_CODE) {
+			clearSelection()
+		}
+	}
+
 	override fun onTelegramStatusChanged(
 		prevTelegramAuthorizationState: TelegramHelper.TelegramAuthorizationState,
 		newTelegramAuthorizationState: TelegramHelper.TelegramAuthorizationState
@@ -174,15 +203,70 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 	}
 
 	fun onPrimaryBtnClick() {
-		activity?.supportFragmentManager?.also {
-			SetTimeDialogFragment.showInstance(it, selectedChats)
-		}
+		val fm = fragmentManager ?: return
+		SetTimeDialogFragment.showInstance(fm, selectedChats, this)
 	}
 
 	fun onSecondaryBtnClick() {
+		clearSelection()
+	}
+
+	private fun clearSelection() {
 		selectedChats.clear()
 		adapter.notifyDataSetChanged()
 		actionButtonsListener?.switchButtonsVisibility(false)
+	}
+
+	private fun showPopupMenu() {
+		val ctx = context ?: return
+
+		val menuList = ArrayList<String>()
+		val logout = getString(R.string.shared_string_logout)
+		val login = getString(R.string.shared_string_login)
+
+		when (telegramHelper.getTelegramAuthorizationState()) {
+			TelegramHelper.TelegramAuthorizationState.READY -> menuList.add(logout)
+			TelegramHelper.TelegramAuthorizationState.CLOSED -> menuList.add(login)
+			else -> return
+		}
+
+		val paint = Paint()
+		paint.textSize =
+				resources.getDimensionPixelSize(R.dimen.list_item_title_text_size).toFloat()
+		val textWidth = paint.measureText(menuList[0])
+		val itemWidth = textWidth.toInt() + AndroidUtils.dpToPx(ctx, 32F)
+		val minWidth = AndroidUtils.dpToPx(ctx, 100F)
+
+		ListPopupWindow(ctx).apply {
+			isModal = true
+			anchorView = optionsBtn
+			setContentWidth(Math.max(minWidth, itemWidth))
+			setDropDownGravity(Gravity.END or Gravity.TOP)
+			setAdapter(ArrayAdapter(ctx, R.layout.popup_list_text_item, menuList))
+			setOnItemClickListener { _, _, position, _ ->
+				when (position) {
+					menuList.indexOf(logout) -> logoutTelegram()
+					menuList.indexOf(login) -> loginTelegram()
+				}
+				dismiss()
+			}
+			show()
+		}
+	}
+
+	private fun logoutTelegram(silent: Boolean = false) {
+		if (telegramHelper.getTelegramAuthorizationState() == TelegramHelper.TelegramAuthorizationState.READY) {
+			telegramHelper.logout()
+		} else if (!silent) {
+			Toast.makeText(context, R.string.not_logged_in, Toast.LENGTH_SHORT).show()
+		}
+	}
+
+	private fun loginTelegram() {
+		if (telegramHelper.getTelegramAuthorizationState() != TelegramHelper.TelegramAuthorizationState.CLOSED) {
+			telegramHelper.logout()
+		}
+		telegramHelper.init()
 	}
 
 	private fun adjustText() {
@@ -271,27 +355,44 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 		override fun onBindViewHolder(holder: ChatViewHolder, position: Int) {
 			val chat = chats[position]
 			val lastItem = position == itemCount - 1
+			val placeholderId = if (telegramHelper.isGroup(chat)) R.drawable.img_group_picture else R.drawable.img_user_picture
+			val live = app.settings.isSharingLocationToChat(chat.id)
 
-			TelegramUiHelper.setupPhoto(app, holder.icon, chat.photo?.small?.local?.path)
+			TelegramUiHelper.setupPhoto(app, holder.icon, chat.photo?.small?.local?.path, placeholderId, false)
 			holder.title?.text = chat.title
 			holder.description?.text = "Some description" // FIXME
-			holder.checkBox?.apply {
-				visibility = View.VISIBLE
-				setOnCheckedChangeListener(null)
-				isChecked = selectedChats.contains(chat.id)
-				setOnCheckedChangeListener { _, isChecked ->
-					if (isChecked) {
-						selectedChats.add(chat.id)
-					} else {
-						selectedChats.remove(chat.id)
+			if (live) {
+				holder.checkBox?.visibility = View.GONE
+				holder.textInArea?.visibility = View.VISIBLE
+				holder.textInArea?.text = getString(R.string.shared_string_live)
+			} else {
+				holder.textInArea?.visibility = View.GONE
+				holder.checkBox?.apply {
+					visibility = View.VISIBLE
+					setOnCheckedChangeListener(null)
+					isChecked = selectedChats.contains(chat.id)
+					setOnCheckedChangeListener { _, isChecked ->
+						if (isChecked) {
+							selectedChats.add(chat.id)
+						} else {
+							selectedChats.remove(chat.id)
+						}
+						actionButtonsListener?.switchButtonsVisibility(selectedChats.isNotEmpty())
 					}
-					actionButtonsListener?.switchButtonsVisibility(selectedChats.isNotEmpty())
 				}
 			}
 			holder.bottomShadow?.visibility = if (lastItem) View.VISIBLE else View.GONE
 			holder.itemView.setOnClickListener {
-				holder.checkBox?.apply {
-					isChecked = !isChecked
+				if (live) {
+					app.settings.shareLocationToChat(chat.id, false)
+					if (!app.settings.hasAnyChatToShareLocation()) {
+						app.shareLocationHelper.stopSharingLocation()
+					}
+					notifyItemChanged(position)
+				} else {
+					holder.checkBox?.apply {
+						isChecked = !isChecked
+					}
 				}
 			}
 		}
@@ -302,6 +403,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 			val icon: ImageView? = view.findViewById(R.id.icon)
 			val title: TextView? = view.findViewById(R.id.title)
 			val description: TextView? = view.findViewById(R.id.description)
+			val textInArea: TextView? = view.findViewById(R.id.text_in_area)
 			val checkBox: CheckBox? = view.findViewById(R.id.check_box)
 			val bottomShadow: View? = view.findViewById(R.id.bottom_shadow)
 		}

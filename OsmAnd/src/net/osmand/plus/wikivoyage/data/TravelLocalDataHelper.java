@@ -3,6 +3,7 @@ package net.osmand.plus.wikivoyage.data;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
@@ -13,9 +14,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 
 public class TravelLocalDataHelper {
@@ -27,10 +30,14 @@ public class TravelLocalDataHelper {
 	private Map<String, WikivoyageSearchHistoryItem> historyMap = new HashMap<>();
 	private List<TravelArticle> savedArticles = new ArrayList<>();
 
-	private Listener listener;
+	private Set<Listener> listeners = new HashSet<>();
 
-	public void setListener(Listener listener) {
-		this.listener = listener;
+	public void addListener(Listener listener) {
+		listeners.add(listener);
+	}
+
+	public void removeListener(Listener listener) {
+		listeners.remove(listener);
 	}
 
 	TravelLocalDataHelper(OsmandApplication app) {
@@ -139,7 +146,7 @@ public class TravelLocalDataHelper {
 	}
 
 	private void notifySavedUpdated() {
-		if (listener != null) {
+		for (Listener listener : listeners) {
 			listener.savedArticlesUpdated();
 		}
 	}

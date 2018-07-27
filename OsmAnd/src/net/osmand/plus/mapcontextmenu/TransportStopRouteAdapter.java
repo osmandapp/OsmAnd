@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.transport.TransportStopRoute;
 
 import java.util.List;
@@ -43,7 +44,9 @@ public class TransportStopRouteAdapter extends ArrayAdapter<TransportStopRoute> 
 			TextView transportStopRouteTextView = (TextView) convertView.findViewById(R.id.transport_stop_route_text);
 			transportStopRouteTextView.setText(getAdjustedRouteRef(transportStopRoute.route.getRef()));
 			GradientDrawable gradientDrawableBg = (GradientDrawable) transportStopRouteTextView.getBackground();
-			gradientDrawableBg.setColor(transportStopRoute.getColor(app, nightMode));
+			int bgColor = transportStopRoute.getColor(app, nightMode);
+			gradientDrawableBg.setColor(bgColor);
+			transportStopRouteTextView.setTextColor(UiUtilities.getContrastColor(app, bgColor, true));
 		}
 
 		convertView.setOnClickListener(new View.OnClickListener() {

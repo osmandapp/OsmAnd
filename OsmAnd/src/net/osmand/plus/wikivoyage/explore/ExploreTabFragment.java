@@ -28,6 +28,7 @@ import net.osmand.plus.download.DownloadValidationManager;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
 import net.osmand.plus.wikivoyage.data.TravelDbHelper;
+import net.osmand.plus.wikivoyage.data.TravelLocalDataHelper;
 import net.osmand.plus.wikivoyage.explore.travelcards.ArticleTravelCard;
 import net.osmand.plus.wikivoyage.explore.travelcards.BaseTravelCard;
 import net.osmand.plus.wikivoyage.explore.travelcards.HeaderTravelCard;
@@ -42,7 +43,7 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadEvents {
+public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadEvents, TravelLocalDataHelper.Listener {
 
 	private static final String WORLD_WIKIVOYAGE_FILE_NAME = "World_wikivoyage.sqlite";
 
@@ -85,9 +86,22 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadEv
 	@Override
 	public void onResume() {
 		super.onResume();
+		OsmandApplication app = getMyApplication();
+		if (app != null) {
+			app.getTravelDbHelper().getLocalDataHelper().addListener(this);
+		}
 		WikivoyageExploreActivity exploreActivity = getExploreActivity();
 		if (exploreActivity != null) {
 			exploreActivity.onTabFragmentResume(this);
+		}
+	}
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		OsmandApplication app = getMyApplication();
+		if (app != null) {
+			app.getTravelDbHelper().getLocalDataHelper().removeListener(this);
 		}
 	}
 
@@ -127,6 +141,13 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadEv
 			} else {
 				removeRedundantCards();
 			}
+		}
+	}
+
+	@Override
+	public void savedArticlesUpdated() {
+		if (adapter != null && isAdded()) {
+			adapter.notifyDataSetChanged();
 		}
 	}
 

@@ -2975,4 +2975,22 @@ Lon %2$s</string>
     <string name="coord_input_save_as_track">Guardar como traza</string>
     <string name="coord_input_save_as_track_descr">Añadiste %1$s puntos. Escribe un nombre de archivo y pulsa en «Guardar».</string>
     <string name="point_deleted">Punto %1$s borrado</string>
+    <string name="shared_string_world">Mundo</string>
+    <string name="send_search_query_description">Enviaremos la consulta de búsqueda: <b>«%1$s»</b>, así como la ubicación.<br/><br/> No recopilamos información personal, sólo necesitamos datos de búsqueda para mejorar el algoritmo de búsqueda.<br/></string>
+    <string name="search_no_results_description">¿Sin resultados?
+\nCuéntanos sobre esto.</string>
+    <string name="send_search_query">¿Enviar consulta de búsqueda?</string>
+    <string name="release_3_1">• Navegación: Corrección en la barra de progreso, intercambio rápido del punto inicial y final de la ruta
+\n
+\n • Marcadores del mapa: corregido el des/activar grupos, capacidad para ocultar marcadores del mapa
+\n
+\n • Edición de OSM: Capacidad para editar etiquetas en objetos sin puntos, corrección de los comentarios vacíos en las notas, copia de seguridad de ediciones
+\n
+\n • Mejor análisis de Wikipedia y Wikiviajes, los archivos actualizados ya están disponibles
+\n
+\n • Menú contextual: corregido el color de los escudos de transporte en el modo nocturno y los tamaños de menú adicionales
+\n
+\n • Otras correcciones de errores
+\n</string>
+    <string name="increase_search_radius_to">Aumentar el radio de búsqueda a %1$s</string>
     </resources>

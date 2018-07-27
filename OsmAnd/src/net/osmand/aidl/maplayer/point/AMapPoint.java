@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.Map;
 
 public class AMapPoint implements Parcelable {
-	public static final int POINT_IMAGE_SIZE_PX = 160;
 	public static final String POINT_IMAGE_URI_PARAM = "point_image_uri_param";
 
 	private String id;

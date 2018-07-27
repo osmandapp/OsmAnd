@@ -299,13 +299,21 @@ public class TrackPointFragment extends OsmandExpandableListFragment implements 
 	private void shareItems() {
 		GPXFile gpxFile = getGpx();
 		if (gpxFile != null) {
-			final Uri fileUri = AndroidUtils.getUriForFile(getMyApplication(), new File(gpxFile.path));
-			final Intent sendIntent = new Intent(Intent.ACTION_SEND);
-			sendIntent.putExtra(Intent.EXTRA_STREAM, fileUri);
-			sendIntent.setType("application/gpx+xml");
-			sendIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-			startActivity(sendIntent);
+			if (gpxFile.path.isEmpty() && getTrackActivity() != null) {
+				new SaveAndShareTask(this, gpxFile).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+			} else {
+				shareGpx(gpxFile.path);
+			}
 		}
+	}
+
+	private void shareGpx(String path) {
+		final Uri fileUri = AndroidUtils.getUriForFile(getMyApplication(), new File(path));
+		final Intent sendIntent = new Intent(Intent.ACTION_SEND);
+		sendIntent.putExtra(Intent.EXTRA_STREAM, fileUri);
+		sendIntent.setType("application/gpx+xml");
+		sendIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+		startActivity(sendIntent);
 	}
 
 	private void openCoordinatesInput() {
@@ -1222,6 +1230,62 @@ public class TrackPointFragment extends OsmandExpandableListFragment implements 
 			}
 			adapter.notifyDataSetChanged();
 			expandAllGroups();
+		}
+	}
+
+	public static class SaveAndShareTask extends AsyncTask<Void, Void, Boolean> {
+		private final GPXFile gpx;
+		private final OsmandApplication app;
+		private final WeakReference<TrackPointFragment> fragmentRef;
+
+		SaveAndShareTask(@NonNull TrackPointFragment fragment, @NonNull GPXFile gpx) {
+			this.gpx = gpx;
+			fragmentRef = new WeakReference<>(fragment);
+			app = fragment.getMyApplication();
+		}
+
+		@Override
+		protected void onPreExecute() {
+			TrackPointFragment fragment = fragmentRef.get();
+			if (fragment != null) {
+				fragment.showProgressBar();
+			}
+		}
+
+		@Override
+		protected Boolean doInBackground(Void... params) {
+			SavingTrackHelper savingTrackHelper = app.getSavingTrackHelper();
+			Map<String, GPXFile> files = savingTrackHelper.collectRecordedData();
+			File dir;
+			boolean shouldClearPath = false;
+			if (gpx.path.isEmpty()) {
+				dir = app.getCacheDir();
+				shouldClearPath = true;
+			} else {
+				dir = app.getAppCustomization().getTracksDir();
+			}
+			if (!dir.exists()) {
+				dir.mkdir();
+			}
+			for (final String f : files.keySet()) {
+				File fout = new File(dir, f + ".gpx");
+				GPXUtilities.writeGpxFile(fout, gpx, app);
+			}
+			return shouldClearPath;
+		}
+
+		@Override
+		protected void onPostExecute(Boolean shouldClearPath) {
+			TrackPointFragment fragment = fragmentRef.get();
+			if (gpx != null) {
+				if (fragment != null && fragment.isResumed()) {
+					fragment.hideProgressBar();
+					fragment.shareGpx(gpx.path);
+				}
+				if (shouldClearPath) {
+					gpx.path = "";
+				}
+			}
 		}
 	}
 

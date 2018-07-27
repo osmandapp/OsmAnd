@@ -168,6 +168,7 @@
 	<dimen name="context_menu_transport_grid_item_height">18dp</dimen>
 	<dimen name="context_menu_transport_icon_size">16dp</dimen>
 	<dimen name="context_menu_transport_padding_top">12dp</dimen>
+	<dimen name="context_menu_big_icon_size">40dp</dimen>
 
 	<dimen name="fab_size_with_shadow">62dp</dimen>
     <dimen name="fab_margin_right">12dp</dimen>

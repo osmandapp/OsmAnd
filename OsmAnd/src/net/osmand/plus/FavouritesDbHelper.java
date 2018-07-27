@@ -87,7 +87,7 @@ public class FavouritesDbHelper {
 		}
 		sortAll();
 		recalculateCachedFavPoints();
-		if (changed) {
+		if (changed || !getExternalFile().exists()) {
 			saveCurrentPointsIntoFile();
 		}
 		favouritesUpdated();
@@ -187,6 +187,7 @@ public class FavouritesDbHelper {
 		if (p.getName().equals("") && flatGroups.containsKey(p.getCategory())) {
 			return true;
 		}
+		context.getSettings().SHOW_FAVORITES.set(true);
 		FavoriteGroup group = getOrCreateGroup(p, 0);
 
 		if (!p.getName().equals("")) {

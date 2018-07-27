@@ -3022,7 +3022,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="enter_the_file_name">Saisissez le nom du fichier.</string>
     <string name="dd_mm_ss_format">DD°MM′SS″</string>
 	<string name="dd_dddddd_format">DD.DDDDDD°</string>
-	<string name="transport_nearby_routes">Avec</string>
+	<string name="transport_nearby_routes">Dans</string>
     <string name="dd_ddddd_format">DD.DDDDD°</string>
 	<string name="dd_mm_mmmm_format">DD°MM.MMMM′</string>
 	<string name="dd_mm_mmm_format">DD°MM.MMM′</string>
@@ -3031,7 +3031,7 @@ représentant la zone : %1$s x %2$s</string>
 	<string name="south_abbreviation">S</string>
 	<string name="north_abbreviation">N</string>
 	<string name="optional_point_name">Nom optionnel du point</string>
-    <string name="transport_nearby_routes_within">Itinéraires à proximité avec</string>
+    <string name="transport_nearby_routes_within">Itinéraires à proximité dans</string>
     <string name="enter_lon">Saisissez la longitude</string>
     <string name="enter_lat">Saisissez la latitude</string>
     <string name="enter_lat_and_lon">Saisissez la latitude et la longitude</string>
@@ -3148,4 +3148,23 @@ représentant la zone : %1$s x %2$s</string>
     <string name="coord_input_save_as_track">Enregistrer comme trace</string>
     <string name="coord_input_save_as_track_descr">Vous avez ajouté %1$s points. Donnez un nom au fichier et cliquez sur Enregistrer.</string>
     <string name="point_deleted">Point %1$s supprimé</string>
+    <string name="shared_string_world">Monde</string>
+    <string name="send_search_query_description">Vous êtes sur le point d\'envoyer la recherche : <b>\"%1$s\"</b>, ainsi que votre position.<br/><br/>Nous ne collectons aucune donnée personnelle. Nous utiliserons ces informations seulement pour améliorer notre algorithme de recherche.<br/></string>
+    <string name="search_no_results_description">Aucun résultat ?
+\nSignalez-le nous.</string>
+    <string name="send_search_query">Envoyez votre recherche ?</string>
+    <string name="release_3_1">• Navigation : correction de la barre de progression, permutation facile entre le point de départ et le point d\'arrivée
+\n
+\n• Marque : correction pour l\'activation / désactivation des groupes, possibilité de masquer les marques sur la carte
+\n
+\n• Modifications OSM : possibilité de modifier les objets autres que les points, correction de la perte des commentaires et des notes, copie de sauvegarde des modifications
+\n
+\n• Amélioration de Wikipedia et Wikivoyage, les fichiers à jour sont déjà disponibles
+\n
+\n• Menu contextuel : correction de la taille des menus, correction des couleurs en mode nuit
+\n
+\n• Autres corrections
+\n
+\n</string>
+    <string name="increase_search_radius_to">Augmenter le rayon de recherche à %1$s</string>
     </resources>

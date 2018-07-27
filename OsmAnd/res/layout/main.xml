@@ -57,16 +57,6 @@
         </FrameLayout>
 
         <FrameLayout
-            android:id="@+id/progress_layout_external"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="gone">
-
-            <include layout="@layout/map_progress_top"/>
-
-        </FrameLayout>
-
-        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom">

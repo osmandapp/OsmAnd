@@ -474,6 +474,7 @@ class OsmandAidlHelper(private val app: Application) {
 		if (mIOsmAndAidlInterface != null) {
 			try {
 				val layer = AMapLayer(id, name, zOrder, points)
+				layer.isImagePoints = true
 				return mIOsmAndAidlInterface!!.addMapLayer(AddMapLayerParams(layer))
 			} catch (e: RemoteException) {
 				e.printStackTrace()
@@ -495,6 +496,7 @@ class OsmandAidlHelper(private val app: Application) {
 		if (mIOsmAndAidlInterface != null) {
 			try {
 				val layer = AMapLayer(id, name, zOrder, points)
+				layer.isImagePoints = true
 				return mIOsmAndAidlInterface!!.updateMapLayer(UpdateMapLayerParams(layer))
 			} catch (e: RemoteException) {
 				e.printStackTrace()

@@ -1,8 +1,8 @@
 
     OsmAnd – OSM Automated Navigation Directions – navigation software based on OpenStreetMap.
-    Copyright © 2010–2017 OsmAnd BV (Amstelveen, Netherlands - KvK 62066714, BTW 854627704B01).
+    Copyright © 2010–2018 OsmAnd BV (Amstelveen, Netherlands - KvK 62066714, BTW 854627704B01).
 
-    The code in that repository is mainly covered by *GPLv3* (for code) and [ CC-BY-NC-ND 4.0 ](https://creativecommons.org/licenses/by-nc-nd/4.0/) (for artwork with restriction), except some 3rd party libs and resources.
+    The code in this repository is covered by *GPLv3* (for code) and the artwork is covered by [ CC-BY-NC-ND 4.0 ](https://creativecommons.org/licenses/by-nc-nd/4.0/) (for artwork), except some 3rd party libs and resources.
     ATTENTION: please be aware that some artwork has proprietary license.
     
     Main AUTHORS (more detailed list in AUTHORS):

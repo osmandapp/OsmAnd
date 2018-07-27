@@ -76,6 +76,7 @@ import btools.routingapp.IBRouterService;
 public class RouteProvider {
 	private static final org.apache.commons.logging.Log log = PlatformUtil.getLog(RouteProvider.class);
 	private static final String OSMAND_ROUTER = "OsmAndRouter";
+	private static final int MIN_DISTANCE_FOR_INSERTING_ROUTE_SEGMENT = 60;
 
 	public enum RouteService {
 			OSMAND("OsmAnd (offline)"), YOURS("YOURS"), 
@@ -366,6 +367,28 @@ public class RouteProvider {
 		int[] endI = new int[]{gpxParams.points.size()}; 
 		if(routeParams.gpxRoute.passWholeRoute) {
 			gpxRoute = gpxParams.points;
+			if (routeParams.previousToRecalculate != null && routeParams.onlyStartPointChanged) {
+				List<Location> routeLocations = routeParams.previousToRecalculate.getRouteLocations();
+				if (routeLocations != null && routeLocations.size() >= 1) {
+					gpxRoute = new ArrayList<>();
+					Location trackStart = routeLocations.get(0);
+					Location realStart = routeParams.start;
+					//insert route segment from current location to next route location if user deviated from route
+					if (realStart != null && trackStart != null
+							&& realStart.distanceTo(trackStart) > MIN_DISTANCE_FOR_INSERTING_ROUTE_SEGMENT
+							&& !gpxParams.calculateOsmAndRouteParts) {
+						LatLon nextRouteLocation = new LatLon(trackStart.getLatitude(), trackStart.getLongitude());
+						RouteCalculationResult newRes = findOfflineRouteSegment(routeParams, realStart, nextRouteLocation);
+						if (newRes != null && newRes.isCalculated()) {
+							gpxRoute.addAll(0, newRes.getImmutableAllLocations());
+						} else {
+							gpxRoute.add(0, realStart);
+						}
+					}
+					gpxRoute.addAll(new ArrayList<>(routeLocations));
+					endI = new int[]{gpxRoute.size()};
+				}
+			}
 		} else {
 			gpxRoute = findStartAndEndLocationsFromRoute(gpxParams.points,
 					routeParams.start, routeParams.end, startI, endI);
@@ -455,7 +478,7 @@ public class RouteProvider {
 			Location routeEnd = points.get(points.size() - 1);
 			LatLon e = routeEnd == null ? null : new LatLon(routeEnd.getLatitude(), routeEnd.getLongitude());
 			LatLon finalEnd = routeParams.end;
-			if (finalEnd != null && MapUtils.getDistance(finalEnd, e) > 60) {
+			if (finalEnd != null && MapUtils.getDistance(finalEnd, e) > MIN_DISTANCE_FOR_INSERTING_ROUTE_SEGMENT) {
 				RouteCalculationResult newRes = null;
 				if (calculateOsmAndRouteParts) {
 					newRes = findOfflineRouteSegment(routeParams, routeEnd, finalEnd);
@@ -485,7 +508,7 @@ public class RouteProvider {
 	public void insertInitialSegment(RouteCalculationParams routeParams, List<Location> points,
 			List<RouteDirectionInfo> directions, boolean calculateOsmAndRouteParts) {
 		Location realStart = routeParams.start;
-		if (realStart != null && points.size() > 0 && realStart.distanceTo(points.get(0)) > 60) {
+		if (realStart != null && points.size() > 0 && realStart.distanceTo(points.get(0)) > MIN_DISTANCE_FOR_INSERTING_ROUTE_SEGMENT) {
 			Location trackStart = points.get(0);
 			RouteCalculationResult newRes = null;
 			if (calculateOsmAndRouteParts) {
@@ -884,13 +907,21 @@ public class RouteProvider {
 					if(directions.size() > 0) {
 						RouteDirectionInfo last = directions.get(directions.size() - 1);
 						// update speed using time and idstance
-						last.setAverageSpeed((distanceToEnd[last.routePointOffset] - distanceToEnd[offset])/last.getAverageSpeed());
-						last.distance = (int) Math.round(distanceToEnd[last.routePointOffset] - distanceToEnd[offset]);
+						if (distanceToEnd.length > last.routePointOffset && distanceToEnd.length > offset) {
+							float lastDistanceToEnd = distanceToEnd[last.routePointOffset];
+							float currentDistanceToEnd = distanceToEnd[offset];
+							last.setAverageSpeed((lastDistanceToEnd - currentDistanceToEnd) / last.getAverageSpeed());
+							last.distance = (int) Math.round(lastDistanceToEnd - currentDistanceToEnd);
+						}
 					} 
 					// save time as a speed because we don't know distance of the route segment
 					float avgSpeed = time;
-					if(!iterator.hasNext() && time > 0) {
-						avgSpeed = distanceToEnd[offset] / time;
+					if (!iterator.hasNext() && time > 0) {
+						if (distanceToEnd.length > offset) {
+							avgSpeed = distanceToEnd[offset] / time;
+						} else {
+							avgSpeed = defSpeed;
+						}
 					}
 					String stype = item.getExtensionsToRead().get("turn"); //$NON-NLS-1$
 					TurnType turnType;

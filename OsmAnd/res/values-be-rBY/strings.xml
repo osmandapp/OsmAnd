@@ -3098,4 +3098,9 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="coord_input_save_as_track">Zachavać jak slied</string>
     <string name="coord_input_save_as_track_descr">Vy dadali %1$s kropak. Uviadzicie nazvu fajla i nacisnicie «zachavać».</string>
     <string name="point_deleted">Kropka %1$s vydalienaja</string>
+    <string name="shared_string_world">Sviet</string>
+    <string name="send_search_query_description">Vy adpravim vaš pašukovy zapyt <b>«%1$s»</b>, a taksama vaša miescaznachodžannie. <br/><br/> My nie zbirajem asabistyja zviestki, nam patrebnyja toĺki danyja pošuku, kab paliepšyć alharytm.<br/></string>
+    <string name="search_no_results_description">Niama vynikaŭ?
+\nRaspaviadzicie nam ab hetym.</string>
+    <string name="send_search_query">Adpravić pašukovy zapyt?</string>
     </resources>

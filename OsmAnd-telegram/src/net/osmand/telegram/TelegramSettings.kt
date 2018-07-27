@@ -1,6 +1,7 @@
 package net.osmand.telegram
 
 import android.content.Context
+import net.osmand.telegram.helpers.TelegramHelper
 import net.osmand.telegram.utils.OsmandFormatter.MetricsConstants
 import net.osmand.telegram.utils.OsmandFormatter.SpeedConstants
 
@@ -18,10 +19,16 @@ private const val SEND_MY_LOCATION_INTERVAL_DEFAULT = 5L * 1000 // 5 seconds
 private const val USER_LOCATION_EXPIRE_TIME_KEY = "user_location_expire_time"
 private const val USER_LOCATION_EXPIRE_TIME_DEFAULT = 15L * 60 * 1000 // 15 minutes
 
+private const val DEFAULT_VISIBLE_TIME_SECONDS = 60 * 60L // 1 hour
+
+private const val TITLES_REPLACED_WITH_IDS = "changed_to_chat_id"
+
 class TelegramSettings(private val app: TelegramApplication) {
 
-	private var shareLocationChats: Set<String> = emptySet()
-	private var showOnMapChats: Set<String> = emptySet()
+	var chatLivePeriods = mutableMapOf<Long, Long>()
+
+	private var shareLocationChats: Set<Long> = emptySet()
+	private var showOnMapChats: Set<Long> = emptySet()
 
 	var metricsConstants = MetricsConstants.KILOMETERS_AND_METERS
 	var speedConstants = SpeedConstants.KILOMETERS_PER_HOUR
@@ -30,47 +37,62 @@ class TelegramSettings(private val app: TelegramApplication) {
 	var userLocationExpireTime = USER_LOCATION_EXPIRE_TIME_DEFAULT
 
 	init {
+		updatePrefs()
 		read()
 	}
 
 	fun hasAnyChatToShareLocation() = shareLocationChats.isNotEmpty()
 
-	fun isSharingLocationToChat(chatTitle: String) = shareLocationChats.contains(chatTitle)
+	fun isSharingLocationToChat(chatId: Long) = shareLocationChats.contains(chatId)
 
 	fun hasAnyChatToShowOnMap() = showOnMapChats.isNotEmpty()
 
-	fun isShowingChatOnMap(chatTitle: String) = showOnMapChats.contains(chatTitle)
+	fun isShowingChatOnMap(chatId: Long) = showOnMapChats.contains(chatId)
 
-	fun removeNonexistingChats(presentChatTitles: List<String>) {
+	fun removeNonexistingChats(presentChatIds: List<Long>) {
 		val shareLocationChats = shareLocationChats.toMutableList()
-		shareLocationChats.intersect(presentChatTitles)
+		shareLocationChats.intersect(presentChatIds)
 		this.shareLocationChats = shareLocationChats.toHashSet()
 
 		val showOnMapChats = showOnMapChats.toMutableList()
-		showOnMapChats.intersect(presentChatTitles)
+		showOnMapChats.intersect(presentChatIds)
 		this.showOnMapChats = showOnMapChats.toHashSet()
+
+		chatLivePeriods = chatLivePeriods.filter { (key, _) ->
+			presentChatIds.contains(key)
+		}.toMutableMap()
 	}
 
-	fun shareLocationToChat(chatTitle: String, share: Boolean) {
+	fun shareLocationToChat(chatId: Long, share: Boolean, livePeriod: Long = DEFAULT_VISIBLE_TIME_SECONDS) {
 		val shareLocationChats = shareLocationChats.toMutableList()
 		if (share) {
-			shareLocationChats.add(chatTitle)
+			val lp: Long = when {
+				livePeriod < TelegramHelper.MIN_LOCATION_MESSAGE_LIVE_PERIOD_SEC -> TelegramHelper.MIN_LOCATION_MESSAGE_LIVE_PERIOD_SEC.toLong()
+				livePeriod > TelegramHelper.MAX_LOCATION_MESSAGE_LIVE_PERIOD_SEC -> TelegramHelper.MAX_LOCATION_MESSAGE_LIVE_PERIOD_SEC.toLong()
+				else -> livePeriod
+			}
+			chatLivePeriods[chatId] = lp
+			shareLocationChats.add(chatId)
 		} else {
-			shareLocationChats.remove(chatTitle)
+			shareLocationChats.remove(chatId)
+			chatLivePeriods.remove(chatId)
 		}
 		this.shareLocationChats = shareLocationChats.toHashSet()
 	}
 
+	fun getChatLivePeriod(chatId: Long) = chatLivePeriods[chatId]
+
 	fun stopSharingLocationToChats() {
 		this.shareLocationChats = emptySet()
+		this.chatLivePeriods.clear()
 	}
 
-	fun showChatOnMap(chatTitle: String, show: Boolean) {
+	fun showChatOnMap(chatId: Long, show: Boolean) {
 		val showOnMapChats = showOnMapChats.toMutableList()
 		if (show) {
-			showOnMapChats.add(chatTitle)
+			showOnMapChats.add(chatId)
 		} else {
-			showOnMapChats.remove(chatTitle)
+			showOnMapChats.remove(chatId)
 		}
 		this.showOnMapChats = showOnMapChats.toHashSet()
 	}
@@ -87,15 +109,15 @@ class TelegramSettings(private val app: TelegramApplication) {
 
 		val shareLocationChatsSet = mutableSetOf<String>()
 		val shareLocationChats = ArrayList(shareLocationChats)
-		for (chatTitle in shareLocationChats) {
-			shareLocationChatsSet.add(chatTitle)
+		for (chatId in shareLocationChats) {
+			shareLocationChatsSet.add(chatId.toString())
 		}
 		edit.putStringSet(SHARE_LOCATION_CHATS_KEY, shareLocationChatsSet)
 
 		val showOnMapChatsSet = mutableSetOf<String>()
 		val showOnMapChats = ArrayList(showOnMapChats)
-		for (chatTitle in showOnMapChats) {
-			showOnMapChatsSet.add(chatTitle)
+		for (chatId in showOnMapChats) {
+			showOnMapChatsSet.add(chatId.toString())
 		}
 		edit.putStringSet(SHOW_ON_MAP_CHATS_KEY, showOnMapChatsSet)
 
@@ -110,17 +132,17 @@ class TelegramSettings(private val app: TelegramApplication) {
 	fun read() {
 		val prefs = app.getSharedPreferences(SETTINGS_NAME, Context.MODE_PRIVATE)
 
-		val shareLocationChats = mutableSetOf<String>()
+		val shareLocationChats = mutableSetOf<Long>()
 		val shareLocationChatsSet = prefs.getStringSet(SHARE_LOCATION_CHATS_KEY, mutableSetOf())
-		for (chatTitle in shareLocationChatsSet) {
-			shareLocationChats.add(chatTitle)
+		for (chatId in shareLocationChatsSet) {
+			shareLocationChats.add(chatId.toLong())
 		}
 		this.shareLocationChats = shareLocationChats
 
-		val showOnMapChats = mutableSetOf<String>()
+		val showOnMapChats = mutableSetOf<Long>()
 		val showOnMapChatsSet = prefs.getStringSet(SHOW_ON_MAP_CHATS_KEY, mutableSetOf())
-		for (chatTitle in showOnMapChatsSet) {
-			showOnMapChats.add(chatTitle)
+		for (chatId in showOnMapChatsSet) {
+			showOnMapChats.add(chatId.toLong())
 		}
 		this.showOnMapChats = showOnMapChats
 
@@ -135,5 +157,19 @@ class TelegramSettings(private val app: TelegramApplication) {
 				prefs.getLong(SEND_MY_LOCATION_INTERVAL_KEY, SEND_MY_LOCATION_INTERVAL_DEFAULT)
 		userLocationExpireTime =
 				prefs.getLong(USER_LOCATION_EXPIRE_TIME_KEY, USER_LOCATION_EXPIRE_TIME_DEFAULT)
+	}
+
+	private fun updatePrefs() {
+		val prefs = app.getSharedPreferences(SETTINGS_NAME, Context.MODE_PRIVATE)
+		val idsInUse = prefs.getBoolean(TITLES_REPLACED_WITH_IDS, false)
+		if (!idsInUse) {
+			val edit = prefs.edit()
+
+			edit.putStringSet(SHARE_LOCATION_CHATS_KEY, emptySet())
+			edit.putStringSet(SHOW_ON_MAP_CHATS_KEY, emptySet())
+			edit.putBoolean(TITLES_REPLACED_WITH_IDS, true)
+
+			edit.apply()
+		}
 	}
 }

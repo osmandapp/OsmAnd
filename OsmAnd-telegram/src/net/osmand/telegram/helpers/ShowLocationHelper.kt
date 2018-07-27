@@ -53,11 +53,10 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 		execOsmandApi {
 			val messages = telegramHelper.getMessages()
 			for (message in messages) {
-				val chatTitle = telegramHelper.getChat(message.chatId)?.title
 				val date = Math.max(message.date, message.editDate) * 1000L
 				val expired = System.currentTimeMillis() - date > app.settings.userLocationExpireTime
-				if (chatTitle != null && expired) {
-					removeMapPoint(chatTitle, message)
+				if (expired) {
+					removeMapPoint(message.chatId, message)
 				}
 			}
 		}
@@ -65,6 +64,7 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 
 	fun addLocationToMap(message: TdApi.Message) {
 		execOsmandApi {
+			val chatId = message.chatId
 			val chatTitle = telegramHelper.getChat(message.chatId)?.title
 			val content = message.content
 			if (chatTitle != null && content is TdApi.MessageLocation) {
@@ -86,33 +86,33 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 				}
 				setupMapLayer()
 				val params = generatePhotoParams(photoPath)
-				osmandAidlHelper.addMapPoint(MAP_LAYER_ID, "${chatTitle}_${message.senderUserId}", userName, userName,
+				osmandAidlHelper.addMapPoint(MAP_LAYER_ID, "${chatId}_${message.senderUserId}", userName, userName,
 						chatTitle, Color.RED, ALatLon(content.location.latitude, content.location.longitude), null, params)
 			} else if (chatTitle != null && content is MessageOsmAndBotLocation && content.isValid()) {
 				val name = content.name
 				setupMapLayer()
-				osmandAidlHelper.addMapPoint(MAP_LAYER_ID, "${chatTitle}_$name", name, name,
+				osmandAidlHelper.addMapPoint(MAP_LAYER_ID, "${chatId}_$name", name, name,
 						chatTitle, Color.RED, ALatLon(content.lat, content.lon), null, null)
 			}
 		}
 	}
 
-	fun showChatMessages(chatTitle: String) {
+	fun showChatMessages(chatId: Long) {
 		execOsmandApi {
-			val messages = telegramHelper.getChatMessages(chatTitle)
+			val messages = telegramHelper.getChatMessages(chatId)
 			for (message in messages) {
 				addLocationToMap(message)
 			}
 		}
 	}
 
-	fun hideChatMessages(chatTitle: String) {
+	fun hideChatMessages(chatId: Long) {
 		execOsmandApi {
-			val messages = telegramHelper.getChatMessages(chatTitle)
+			val messages = telegramHelper.getChatMessages(chatId)
 			for (message in messages) {
 				val user = telegramHelper.getUser(message.senderUserId)
 				if (user != null) {
-					removeMapPoint(chatTitle, message)
+					removeMapPoint(chatId, message)
 				}
 			}
 		}
@@ -145,12 +145,12 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 		return mapOf(AMapPoint.POINT_IMAGE_URI_PARAM to photoUri.toString())
 	}
 
-	private fun removeMapPoint(chatTitle: String, message: TdApi.Message) {
+	private fun removeMapPoint(chatId: Long, message: TdApi.Message) {
 		val content = message.content
 		if (content is TdApi.MessageLocation) {
-			osmandAidlHelper.removeMapPoint(MAP_LAYER_ID, "${chatTitle}_${message.senderUserId}")
+			osmandAidlHelper.removeMapPoint(MAP_LAYER_ID, "${chatId}_${message.senderUserId}")
 		} else if (content is MessageOsmAndBotLocation) {
-			osmandAidlHelper.removeMapPoint(MAP_LAYER_ID, "${chatTitle}_${content.name}")
+			osmandAidlHelper.removeMapPoint(MAP_LAYER_ID, "${chatId}_${content.name}")
 		}
 	}
 

@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
 <string name="nothing_found">Heç nə tapılmadı</string>
     <string name="restart_search">Axtarışı yenidən başlat</string>
     <string name="change_color">Rəngi dəyiş</string>
@@ -2141,4 +2142,11 @@
     <string name="download_wiki_region_placeholder">bu region</string>
     <string name="wiki_article_not_found">Məqalə tapılmadı</string>
     <string name="how_to_open_wiki_title">Vikipediya məqalələri necə açılır?</string>
-</resources>
+<string name="point_deleted">Nöqtə %1$s silindi</string>
+    <string name="coord_input_edit_point">Nöqtəyə düzəliş et</string>
+    <string name="coord_input_add_point">Nöqtə əlavə et</string>
+    <string name="coord_input_save_as_track">İz kimi saxla</string>
+    <string name="coord_input_save_as_track_descr">%1$s nöqtə əlavə etdiniz. Fayl adını yazıb “Saxla” düyməsinə toxunun.</string>
+    <string name="error_notification_desc">Bu bildirişin ekran şəklini support@osmand.net ünvanına göndərin</string>
+    <string name="get_osmand_live">Bütün xüsusiyyətləri açmaq üçün OsmAnd Live əldə edin: Limitsiz endirmələr ilə günlük xəritəsi yeniləmələri, bütün pullu və pulsuz qoşmalar, Vikipediya, Vikisəyahət və daha çoxu.</string>
+    </resources>

@@ -416,6 +416,16 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 	}
 
 	@Override
+	public boolean isTextVisible() {
+		return app.getSettings().SHOW_POI_LABEL.get();
+	}
+
+	@Override
+	public boolean isFakeBoldText() {
+		return false;
+	}
+
+	@Override
 	public void newRouteIsCalculated(boolean newRoute, ValueHolder<Boolean> showToast) {
 	}
 

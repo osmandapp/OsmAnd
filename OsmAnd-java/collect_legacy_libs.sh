@@ -21,12 +21,15 @@ function copyLibs {
 
 function compile {
 	"$CORE_LOC/externals/configure.sh"
-	if [ ! -d "$CORE_LOC/targets/amd64-linux-gcc-amd64-linux-gcc-release.baked" ]; then 
-		"$CORE_LOC/targets/amd64-linux-gcc.sh" release
+	ARCH=$1
+	if [ ! -d "$CORE_LOC/targets/$ARCH-linux-gcc-$ARCH-linux-gcc-release.baked" ]; then 
+		"$CORE_LOC/targets/$ARCH-linux-gcc.sh" release
 	fi
-	(cd "$CORE_LOC/targets/amd64-linux-gcc-amd64-linux-gcc-release.baked" && make -j$OSMAND_BUILD_CPU_CORES_NUM)
+	(cd "$CORE_LOC/targets/$ARCH-linux-gcc-$ARCH-linux-gcc-release.baked" && make -j$OSMAND_BUILD_CPU_CORES_NUM)
+
 }
 
-compile
+compile amd64
+#compile i686
 copyLibs linux amd64 amd64 so
-# copyLibs linux i686 x86 so
+#copyLibs linux i686 x86 so

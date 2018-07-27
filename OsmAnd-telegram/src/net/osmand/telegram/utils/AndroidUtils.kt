@@ -19,6 +19,8 @@ import android.view.inputmethod.InputMethodManager
 import java.io.File
 
 object AndroidUtils {
+	
+	private const val PERMISSION_REQUEST_LOCATION = 1
 
 	private fun isHardwareKeyboardAvailable(context: Context): Boolean {
 		return context.resources.configuration.keyboard != Configuration.KEYBOARD_NOKEYS
@@ -50,6 +52,11 @@ object AndroidUtils {
 		return ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
 	}
 
+
+	fun requestLocationPermission(activity: Activity) {
+		ActivityCompat.requestPermissions(activity, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), PERMISSION_REQUEST_LOCATION)
+	}
+	
 	fun dpToPx(ctx: Context, dp: Float): Int {
 		val r = ctx.resources
 		return TypedValue.applyDimension(
@@ -57,6 +64,23 @@ object AndroidUtils {
 				dp,
 				r.displayMetrics
 		).toInt()
+	}
+
+	fun getStatusBarHeight(ctx: Context): Int {
+		var result = 0
+		val resourceId = ctx.resources.getIdentifier("status_bar_height", "dimen", "android")
+		if (resourceId > 0) {
+			result = ctx.resources.getDimensionPixelSize(resourceId)
+		}
+		return result
+	}
+
+	fun addStatusBarPadding19v(ctx: Context, view: View) {
+		if (Build.VERSION.SDK_INT >= 19) {
+			view.apply {
+				setPadding(paddingLeft, paddingTop + getStatusBarHeight(ctx), paddingRight, paddingBottom)
+			}
+		}
 	}
 
 	@ColorInt

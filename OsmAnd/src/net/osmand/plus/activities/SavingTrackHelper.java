@@ -33,7 +33,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.TimeZone;
 
 public class SavingTrackHelper extends SQLiteOpenHelper {
 	
@@ -584,6 +583,8 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 			if (db != null) {
 				db.execSQL(script, objects);
 			}
+		} catch (RuntimeException e) {
+			log.error(e.getMessage(), e);
 		} finally {
 			if (db != null) {
 				db.close();

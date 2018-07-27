@@ -3165,4 +3165,10 @@
     <string name="coord_input_save_as_track">ذخیره به‌عنوان مسیر</string>
     <string name="coord_input_save_as_track_descr">%1$s نقطه افزودید. نام فایل را بنویسید و روی «ذخیره» بزنید.</string>
     <string name="point_deleted">نقطهٔ %1$s پاک شد</string>
+    <string name="shared_string_world">جهان</string>
+    <string name="send_search_query_description">ما عبارت جست‌وجویتان: <b>«%1$s»</b> و نیز مکانتان را ارسال خواهیم کرد.<br/><br/> ما اطلاعات خصوصی را جمع‌آوری نمی‌کنیم و داده‌های جست‌وجو را هم فقط به این خاطر نیاز داریم که الگوریتم جست‌وجو را بهتر کنیم.<br/></string>
+    <string name="search_no_results_description">چیزی پیدا نشد؟
+\nدر این باره با ما صحبت کنید.</string>
+    <string name="send_search_query">عبارت جست‌وجویتان ارسال شود؟</string>
+    <string name="increase_search_radius_to">افزایش شعاع جست‌وجو به %1$s</string>
     </resources>

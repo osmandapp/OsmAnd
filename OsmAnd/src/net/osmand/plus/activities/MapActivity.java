@@ -429,28 +429,20 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	private void createProgressBarForRouting() {
 		final ProgressBar pb = (ProgressBar) findViewById(R.id.map_horizontal_progress);
-		final View pbExtView = findViewById(R.id.progress_layout_external);
-		final ProgressBar pbExt = (ProgressBar) findViewById(R.id.map_horizontal_progress_external);
 
 		app.getRoutingHelper().setProgressBar(new RouteCalculationProgressCallback() {
 
 			@Override
 			public void start() {
-				boolean night = getMyApplication().getDaynightHelper().isNightModeForMapControls();
-				int bgColor = ContextCompat.getColor(app, night
-						? R.color.map_progress_bar_bg_dark : R.color.map_progress_bar_bg_light);
-				pb.setProgressDrawable(AndroidUtils
-						.createProgressDrawable(bgColor, mapLayers.getRouteLayer().getRouteLineColor(night)));
+				setupRouteCalculationProgressBar(pb);
 			}
 
 			@Override
 			public void updateProgress(int progress) {
 				mapLayers.getMapControlsLayer().getMapRouteInfoMenu().updateRouteCalculationProgress(progress);
+				dashboardOnMap.updateRouteCalculationProgress(progress);
 				if (findViewById(R.id.MapHudButtonsOverlay).getVisibility() == View.VISIBLE) {
-					if (pbExtView.getVisibility() == View.VISIBLE) {
-						pbExtView.setVisibility(View.GONE);
-					}
-					if (MapRouteInfoMenu.isVisible()) {
+					if (MapRouteInfoMenu.isVisible() || dashboardOnMap.isVisible()) {
 						pb.setVisibility(View.GONE);
 						return;
 					}
@@ -460,16 +452,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 					pb.setProgress(progress);
 					pb.invalidate();
 					pb.requestLayout();
-				} else {
-					if (pb.getVisibility() == View.VISIBLE) {
-						pb.setVisibility(View.GONE);
-					}
-					if (pbExtView.getVisibility() == View.GONE) {
-						pbExtView.setVisibility(View.VISIBLE);
-					}
-					pbExt.setProgress(progress);
-					pbExt.invalidate();
-					pbExt.requestLayout();
 				}
 			}
 
@@ -507,10 +489,26 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			@Override
 			public void finish() {
 				mapLayers.getMapControlsLayer().getMapRouteInfoMenu().routeCalculationFinished();
-				pbExtView.setVisibility(View.GONE);
+				dashboardOnMap.routeCalculationFinished();
 				pb.setVisibility(View.GONE);
 			}
 		});
+	}
+
+	public void setupRouteCalculationProgressBar(@NonNull ProgressBar pb) {
+		DayNightHelper dayNightHelper = getMyApplication().getDaynightHelper();
+
+		boolean nightMode = dayNightHelper.isNightModeForMapControls();
+		boolean useRouteLineColor = nightMode == dayNightHelper.isNightMode();
+
+		int bgColorId = nightMode ? R.color.map_progress_bar_bg_dark : R.color.map_progress_bar_bg_light;
+		int bgColor = ContextCompat.getColor(this, bgColorId);
+
+		int progressColor = useRouteLineColor
+				? mapLayers.getRouteLayer().getRouteLineColor(nightMode)
+				: ContextCompat.getColor(this, R.color.wikivoyage_active_light);
+
+		pb.setProgressDrawable(AndroidUtils.createProgressDrawable(bgColor, progressColor));
 	}
 
 	private void changeKeyguardFlags() {
@@ -1736,6 +1734,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	@Override
 	public void newRouteIsCalculated(boolean newRoute, ValueHolder<Boolean> showToast) {
+		MapRouteInfoMenu routeInfoMenu = mapLayers.getMapControlsLayer().getMapRouteInfoMenu();
+		if (routeInfoMenu.isSelectFromMapTouch()) {
+			return;
+		}
+
 		RoutingHelper rh = app.getRoutingHelper();
 		if (newRoute && rh.isRoutePlanningMode() && mapView != null) {
 			Location lt = rh.getLastProjection();
@@ -1764,7 +1767,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				int tileBoxWidthPx = 0;
 				int tileBoxHeightPx = 0;
 
-				MapRouteInfoMenu routeInfoMenu = mapLayers.getMapControlsLayer().getMapRouteInfoMenu();
 				WeakReference<MapRouteInfoMenuFragment> fragmentRef = routeInfoMenu.findMenuFragment();
 				if (fragmentRef != null) {
 					MapRouteInfoMenuFragment f = fragmentRef.get();

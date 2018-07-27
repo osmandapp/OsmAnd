@@ -1523,7 +1523,7 @@
 	<string name="poi_microbrewery_yes">Minibrauerei</string>
 	<string name="poi_microbrewery_no">Keine Minibrauerei</string>
 
-	<string name="poi_takeaway_yes">Zum mitnehmen</string>
+	<string name="poi_takeaway_yes">Zum Mitnehmen</string>
 	<string name="poi_takeaway_no">Nicht zum Mitnehmen</string>
 	<string name="poi_takeaway_only">nur zum Mitnehmen</string>
 
@@ -3866,5 +3866,13 @@
 
 <string name="poi_payment_contactless_yes">Kontaktlos</string>
 	<string name="poi_payment_contactless_no">Kontaktlos nicht akzeptiert</string>
+
+<string name="poi_hazard_nuclear">nukleare Gefahr</string>
+	<string name="poi_hazard_erosion">Erosionsgefahr</string>
+	<string name="poi_hazard_avalanche">Lawinengefahr</string>
+	<string name="poi_hazard_slippery_road">Rutschgefahr</string>
+	<string name="poi_hazard_flood">Überschwemmungsgefahr</string>
+	<string name="poi_hazard_minefield">Minenfeld</string>
+
 
 </resources>

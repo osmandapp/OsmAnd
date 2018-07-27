@@ -6,11 +6,11 @@ import gnu.trove.map.hash.TIntObjectHashMap;
 import java.text.MessageFormat;
 import java.util.Arrays;
 
+import net.osmand.Location;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
-import net.osmand.Location;
 import net.sf.junidecode.Junidecode;
 
 
@@ -26,6 +26,7 @@ public class RouteDataObject {
 	public int[] pointsX;
 	public int[] pointsY;
 	public long[] restrictions;
+	public long[] restrictionsVia;
 	public int[][] pointTypes;
 	public String[][] pointNames;
 	public int[][] pointNameTypes;
@@ -58,6 +59,7 @@ public class RouteDataObject {
 		this.types = copy.types;
 		this.names = copy.names;
 		this.restrictions = copy.restrictions;
+		this.restrictionsVia = copy.restrictionsVia;
 		this.pointTypes = copy.pointTypes;
 		this.pointNames = copy.pointNames;
 		this.pointNameTypes = copy.pointNameTypes;
@@ -77,6 +79,7 @@ public class RouteDataObject {
 			
 			boolean equals = true;
 			equals = equals && Arrays.equals(this.restrictions, thatObj.restrictions);
+			equals = equals && Arrays.equals(this.restrictionsVia, thatObj.restrictionsVia);
 			
 			if (equals) {
 				if (this.types == null || thatObj.types == null) {
@@ -395,10 +398,23 @@ public class RouteDataObject {
 		return (int) (restrictions[i] & RESTRICTION_MASK);
 	}
 	
-	public long getRawRestriction(int i) {
-		return restrictions[i];
+	public RestrictionInfo getRestrictionInfo(int k) {
+		RestrictionInfo ri = new RestrictionInfo();
+		ri.toWay = getRestrictionId(k);
+		ri.type = getRestrictionType(k);
+		if(restrictionsVia != null && k < restrictionsVia.length) {
+			ri.viaWay = restrictionsVia[k];
+		}
+		return ri;
 	}
-
+	
+	public long getRestrictionVia(int i) {
+		if(restrictionsVia != null && restrictionsVia.length > i) {
+			return restrictionsVia[i];
+		}
+		return 0;
+	}
+	
 	public long getRestrictionId(int i) {
 		return restrictions[i] >> RESTRICTION_SHIFT;
 	}
@@ -832,4 +848,40 @@ public class RouteDataObject {
 		return MessageFormat.format("Road id {0} name {1} ref {2}", (getId() / 64) + "", name == null ? "" : name,
 				rf == null ? "" : rf);
 	}
+	
+	public static class RestrictionInfo {
+		public int type;
+		public long toWay;
+		public long viaWay;
+		
+		public RestrictionInfo next; // optional to simulate linked list
+		
+		public int length() {
+			if(next == null) {
+				return 1;
+			} 
+			return next.length() + 1;
+		}
+	}
+
+	public void setRestriction(int k, long to, int type, long viaWay) {
+		long valto = (to << RouteDataObject.RESTRICTION_SHIFT) | ((long) type & RouteDataObject.RESTRICTION_MASK);
+		restrictions[k] = valto;
+		if(viaWay != 0) {
+			setRestrictionVia(k, viaWay);
+		}
+	}
+
+	public void setRestrictionVia(int k, long viaWay) {
+		if(restrictionsVia != null) {
+			long[] nrestrictionsVia = new long[Math.max(k + 1, restrictions.length)];
+			System.arraycopy(restrictions, 0, nrestrictionsVia, 0, restrictions.length);
+			restrictionsVia  = nrestrictionsVia;
+		} else {
+			restrictionsVia = new long[k + 1];
+		}
+		restrictionsVia[k] = viaWay;
+	}
+
+	
 }

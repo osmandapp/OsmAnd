@@ -7,7 +7,6 @@ import net.osmand.data.PointDescription;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.MapMarkersHelper.MapMarkersGroup;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
 import net.osmand.plus.helpers.SearchHistoryHelper;
@@ -135,7 +134,6 @@ public class MapMarkersDbHelper {
 	private void onCreate(SQLiteConnection db) {
 		db.execSQL(MARKERS_TABLE_CREATE);
 		db.execSQL(GROUPS_TABLE_CREATE);
-		saveExistingMarkersToDb();
 	}
 
 	private void onUpgrade(SQLiteConnection db, int oldVersion, int newVersion) {
@@ -164,37 +162,6 @@ public class MapMarkersDbHelper {
 		}
 		if (oldVersion < 13) {
 			db.execSQL("ALTER TABLE " + GROUPS_TABLE_NAME + " ADD " + GROUPS_COL_CATEGORIES + " TEXT");
-		}
-	}
-
-	private void saveExistingMarkersToDb() {
-		OsmandSettings settings = context.getSettings();
-
-		List<LatLon> ips = settings.getMapMarkersPoints();
-		List<String> desc = settings.getMapMarkersPointDescriptions(ips.size());
-		List<Integer> colors = settings.getMapMarkersColors(ips.size());
-		int colorIndex = 0;
-		for (int i = 0; i < ips.size(); i++) {
-			if (colors.size() > i) {
-				colorIndex = colors.get(i);
-			}
-			MapMarker marker = new MapMarker(ips.get(i), PointDescription.deserializeFromString(desc.get(i), ips.get(i)),
-					colorIndex, false, i);
-			marker.history = false;
-			addMarker(marker, true);
-		}
-
-		ips = settings.getMapMarkersHistoryPoints();
-		desc = settings.getMapMarkersHistoryPointDescriptions(ips.size());
-		colors = settings.getMapMarkersHistoryColors(ips.size());
-		for (int i = 0; i < ips.size(); i++) {
-			if (colors.size() > i) {
-				colorIndex = colors.get(i);
-			}
-			MapMarker marker = new MapMarker(ips.get(i), PointDescription.deserializeFromString(desc.get(i), ips.get(i)),
-					colorIndex, false, i);
-			marker.history = true;
-			addMarker(marker, true);
 		}
 	}
 

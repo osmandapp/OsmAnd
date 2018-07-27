@@ -292,18 +292,15 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 						current.id = Long.parseLong(readText(parser, "id"));
 					} else if (parser.getName().equals("comment")) {
 						commentIndex++;
+						if (current != null) {
+							current.comments.add(commentIndex, new Comment());
+						}
 					} else if (parser.getName().equals("user") && current != null) {
-						if (commentIndex == current.users.size()) {
-							current.users.add(readText(parser, "user"));
-						}
+						current.comments.get(commentIndex).user = readText(parser, "user");
 					} else if (parser.getName().equals("date") && current != null) {
-						if (commentIndex == current.dates.size()) {
-							current.dates.add(readText(parser, "date"));
-						}
+						current.comments.get(commentIndex).date = readText(parser, "date");
 					} else if (parser.getName().equals("text") && current != null) {
-						if (commentIndex == current.comments.size()) {
-							current.comments.add(readText(parser, "text"));
-						}
+						current.comments.get(commentIndex).text = readText(parser, "text");
 					}
 				}
 			}
@@ -552,33 +549,17 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 		private double longitude;
 		private String description;
 		private String typeName;
-		private List<String> dates = new ArrayList<>();
-		private List<String> comments = new ArrayList<>();
-		private List<String> users = new ArrayList<>();
+		private List<Comment> comments = new ArrayList<>();
 		private long id;
 		private boolean opened;
 
 		private void acquireDescriptionAndType() {
 			if (comments.size() > 0) {
-				StringBuilder sb = new StringBuilder();
-				if (dates.size() > 0) {
-					sb.append(dates.get(0)).append(" ");
-				}
-				if (users.size() > 0) {
-					sb.append(users.get(0));
-				}
-				description = comments.get(0);
-				typeName = sb.toString();
-			}
-			if (description != null && description.length() < 100) {
-				if (comments.size() > 0) {
-					comments.remove(0);
-				}
-				if (dates.size() > 0) {
-					dates.remove(0);
-				}
-				if (users.size() > 0) {
-					users.remove(0);
+				Comment comment = comments.get(0);
+				description = comment.text;
+				typeName = comment.date + " " + comment.user;
+				if (description != null && description.length() < 100) {
+					comments.remove(comment);
 				}
 			}
 		}
@@ -623,18 +604,19 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 			for (int i = 0; i < comments.size(); i++) {
 				StringBuilder sb = new StringBuilder();
 				boolean needLineFeed = false;
-				if (i < dates.size()) {
-					sb.append(dates.get(i)).append(" ");
+				Comment comment = comments.get(i);
+				if (!comment.date.isEmpty()) {
+					sb.append(comment.date).append(" ");
 					needLineFeed = true;
 				}
-				if (i < users.size()) {
-					sb.append(users.get(i)).append(":");
+				if (!comment.user.isEmpty()) {
+					sb.append(comment.user).append(":");
 					needLineFeed = true;
 				}
 				if (needLineFeed) {
 					sb.append("\n");
 				}
-				sb.append(comments.get(i));
+				sb.append(comment.text);
 				res.add(sb.toString());
 			}
 			return res;
@@ -665,5 +647,22 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 		}
 	}
 
+	class Comment implements Serializable {
 
+		private String date = "";
+		private String text = "";
+		private String user = "";
+
+		public String getDate() {
+			return date;
+		}
+
+		public String getText() {
+			return text;
+		}
+
+		public String getUser() {
+			return user;
+		}
+	}
 }

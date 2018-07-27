@@ -826,6 +826,7 @@ public class OsmandAidlApi {
 			for (AMapPoint point : layer.getPoints()) {
 				existingLayer.putPoint(point);
 			}
+			existingLayer.copyZoomBounds(layer);
 			refreshMap();
 			return true;
 		} else {

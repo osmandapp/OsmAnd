@@ -1486,4 +1486,10 @@
 	<string name="poi_wetland_mud">Блато</string>
 
 	<string name="poi_beach_sand">Песак</string>
+	<string name="poi_denomination_old_believers">Староверци</string>
+	<string name="poi_denomination_spiritist">Спиритисти</string>
+	<string name="poi_denomination_armenian_apostolic">Јерменски апостоли</string>
+	<string name="poi_denomination_dutch_reformed">Холандски реформисти</string>
+	<string name="poi_denomination_apostolic">Апостолска црква</string>
+	<string name="poi_denomination_reform">Реформисти</string>
 	</resources>

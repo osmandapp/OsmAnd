@@ -110,9 +110,9 @@ public abstract class BasicProgressAsyncTask<Tag, Params, Progress, Result> exte
 
 	public int getProgressPercentage() {
 		if (work > 0) {
-			return (progress * 100) / work;
+			return normalizeProgress((progress * 100) / work);
 		}
-		return progress;
+		return normalizeProgress(progress);
 	}
 
 	public void setInterrupted(boolean interrupted) {
@@ -134,5 +134,15 @@ public abstract class BasicProgressAsyncTask<Tag, Params, Progress, Result> exte
 
 	@Override
 	public void setGeneralProgress(String genProgress) {
+	}
+
+	private int normalizeProgress(int progress) {
+		if (progress < 0) {
+			return 0;
+		} else if (progress <= 100) {
+			return progress;
+		} else {
+			return 99;
+		}
 	}
 }

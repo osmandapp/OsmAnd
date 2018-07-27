@@ -399,7 +399,7 @@
 	<string name="poi_recycling_rubble">ŝtonrubo</string>
 	<string name="poi_works">Fabriko</string>
 	<string name="poi_driving_school">Stirlernejo</string>
-	<string name="poi_college">Kolegio</string>
+	<string name="poi_college">Postmezgrada lernejo</string>
 	<string name="poi_waterway_turning_point">Marnavigada turniĝejo</string>
 	<string name="poi_dam">Akvobaraĵo</string>
 	<string name="poi_weir">Riversojlo</string>
@@ -2811,8 +2811,8 @@
 	<string name="poi_support_suspended">Muntita sur: pendigita</string>
 	<string name="poi_support_tower">Muntita sur: turo</string>
 
-	<string name="poi_passenger_information_display_yes">Vidigilo kun informoj por pasaĝeroj: jes</string>
-	<string name="poi_passenger_information_display_no">Vidigilo kun informoj por pasaĝeroj: ne</string>
+	<string name="poi_passenger_information_display_yes">Elektronika tabulo de forveturoj: jes</string>
+	<string name="poi_passenger_information_display_no">Elektronika tabulo de forveturoj: ne</string>
 
 	<string name="poi_aquaculture">Akvokulturo</string>
 	<string name="poi_aquaculture_shrimp">Akvokulturo: salikokoj</string>
@@ -3376,8 +3376,8 @@
 	<string name="poi_zoo_wildlife_park">sovaĝ-besta parko</string>
 	<string name="poi_zoo_enclosure">kaĝita</string>
 	<string name="poi_zoo_safari_park">safari-parko</string>
-	<string name="poi_zoo_birds">bird-kaĝoj</string>
-	<string name="poi_zoo_aviary">birdejo</string>
+	<string name="poi_zoo_birds">bird-parko</string>
+	<string name="poi_zoo_aviary">birdarkaĝo</string>
 	<string name="poi_zoo_falconry">rabbirda parko</string>
 	<string name="poi_zoo_reptile">rampulejo</string>
 
@@ -3873,5 +3873,13 @@
 
 <string name="poi_payment_contactless_yes">senkontakta (alproksima)</string>
 	<string name="poi_payment_contactless_no">Senkontakta pagmaniero malakceptata</string>
+
+<string name="poi_hazard_nuclear">Danĝero: radiado</string>
+	<string name="poi_hazard_erosion">Danĝero: terglitejo</string>
+	<string name="poi_hazard_avalanche">Danĝero: lavango</string>
+	<string name="poi_hazard_slippery_road">Danĝero: glita vojo</string>
+	<string name="poi_hazard_flood">Danĝero: superakvego</string>
+	<string name="poi_hazard_minefield">Danĝero: minkampo</string>
+
 
 </resources>

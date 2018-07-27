@@ -15,6 +15,7 @@ public abstract class MenuTitleController {
 
 	protected int rightIconId;
 	protected Drawable rightIcon;
+	protected boolean bigRightIcon;
 	protected String nameStr = "";
 	protected String typeStr = "";
 	protected String commonTypeStr = "";
@@ -87,6 +88,10 @@ public abstract class MenuTitleController {
 		return rightIcon;
 	}
 
+	public boolean isBigRightIcon() {
+		return bigRightIcon;
+	}
+
 	public Drawable getTypeIcon() {
 		return secondLineTypeIcon;
 	}
@@ -144,11 +149,13 @@ public abstract class MenuTitleController {
 
 		rightIconId = 0;
 		rightIcon = null;
+		bigRightIcon = false;
 		secondLineTypeIcon = null;
 
 		if (menuController != null) {
 			rightIconId = menuController.getRightIconId();
 			rightIcon = menuController.getRightIcon();
+			bigRightIcon = menuController.isBigRightIcon();
 			secondLineTypeIcon = menuController.getSecondLineTypeIcon();
 		}
 	}

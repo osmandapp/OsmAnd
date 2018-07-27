@@ -11,6 +11,7 @@ import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.View;
 
 import net.osmand.IProgress;
@@ -211,12 +212,14 @@ public abstract class OsmandPlugin {
 			final MapActivity mapActivity = (MapActivity) activity;
 			plugin.updateLayers(mapActivity.getMapView(), mapActivity);
 			mapActivity.getDashboard().refreshDashboardFragments();
-			if (!enable && plugin.getCardFragment() != null) {
-				Fragment fragment = mapActivity.getSupportFragmentManager()
-						.findFragmentByTag(plugin.getCardFragment().tag);
-				LOG.debug("fragment=" + fragment);
-				mapActivity.getSupportFragmentManager().beginTransaction()
-						.remove(fragment).commit();
+
+			DashFragmentData fragmentData = plugin.getCardFragment();
+			if (!enable && fragmentData != null) {
+				FragmentManager fm = mapActivity.getSupportFragmentManager();
+				Fragment fragment = fm.findFragmentByTag(fragmentData.tag);
+				if (fragment != null) {
+					fm.beginTransaction().remove(fragment).commit();
+				}
 			}
 		}
 		return true;

@@ -109,7 +109,8 @@ public abstract class AbstractCard {
 		wv.setBackgroundColor(Color.argb(1, 0, 0, 0));
 		wv.getSettings().setJavaScriptEnabled(true);
 		if (hasImageUrl) {
-			wv.loadData("<html><body style='margin:0;padding:0'><img style='max-width:100%;max-height:100%;' src='" + url + "'/></body></html>", "text/html", "UTF-8");
+			String data = "<html><body style='margin:0;padding:0'><img style='max-width:100%;max-height:100%;' src='" + url + "'/></body></html>";
+			wv.loadDataWithBaseURL(null, data, "text/html", "UTF-8", null);
 		} else {
 			wv.loadUrl(url);
 		}

@@ -2576,9 +2576,9 @@
     <string name="without_time_limit">没有时间限制</string>
     <string name="context_menu_points_of_group">组中所有的点</string>
     <string name="open_from">开始营业于</string>
-    <string name="will_close_at">将要关闭于</string>
-    <string name="will_open_at">将要打开于</string>
-    <string name="will_open_on">将要打开于</string>
+    <string name="will_close_at">关闭于</string>
+    <string name="will_open_at">开始营业于</string>
+    <string name="will_open_on">开始营业于</string>
     <string name="additional_actions">额外的活动</string>
     <string name="av_locations_selected_desc">GPX文件，包含所选笔记的坐标和数据。</string>
     <string name="av_locations_all_desc">GPX文件，包含所有注释的坐标和数据。</string>
@@ -2667,7 +2667,7 @@
 	<string name="north_abbreviation">北</string>
 	<string name="enter_the_file_name">输入文件名。</string>
     <string name="map_import_error">地图导入错误</string>
-    <string name="map_imported_successfully">地图成功导入</string>
+    <string name="map_imported_successfully">地图已导入</string>
     <string name="shared_string_current">当前</string>
     <string name="clear_all_intermediates">清空所有中间点</string>
     <string name="in_app_purchase">应用内购买</string>
@@ -2691,7 +2691,7 @@
     <string name="purchase_cancelled_dialog_title">您已取消您的 OsmAnd Live 订阅</string>
     <string name="purchase_cancelled_dialog_descr">续订以继续使用全部功能：</string>
 
-    <string name="maps_you_need_descr">基于您保存的文章，我们推荐您下载下列地图：</string>
+    <string name="maps_you_need_descr">基于您书签记录的文章，我们推荐您下载下列地图：</string>
     <string name="maps_you_need">您需要的地图</string>
     <string name="osmand_team">OsmAnd 团队</string>
     <string name="popular_destinations">热门目的地</string>
@@ -2704,4 +2704,15 @@
     <string name="error_notification_desc">请将该通知的屏幕截图发送至 support@osmand.net</string>
     <string name="hide_full_description">隐藏完整描述</string>
     <string name="show_full_description">显示完整描述</string>
+    <string name="shared_string_world">世界</string>
+    <string name="coord_input_edit_point">编辑点</string>
+    <string name="coord_input_add_point">添加点</string>
+    <string name="get_osmand_live">获取 OsmAnd Live 以解锁全部功能：每日无限量地图下载与更新、所有付费与免费插件、维基百科、维基导游等等。</string>
+    <string name="shared_string_bookmark">书签</string>
+    <string name="how_to_open_wiki_title">如何打开维基百科文章？</string>
+<string name="search_no_results_description">没有结果？
+\n请告诉我们这个问题。</string>
+    <string name="download_wikipedia_label">下载维基百科数据</string>
+    <string name="open_in_browser_wiki">在线打开文章</string>
+    <string name="wiki_article_not_found">文章未找到</string>
     </resources>

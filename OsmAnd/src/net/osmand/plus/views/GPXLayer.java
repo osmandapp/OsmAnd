@@ -204,7 +204,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 				drawSelectedFilesSplits(canvas, tileBox, selectedGPXFiles, settings);
 				drawSelectedFilesPoints(canvas, tileBox, selectedGPXFiles);
 			}
-			if (textLayer != null && textLayer.isVisible()) {
+			if (textLayer != null && isTextVisible()) {
 				textLayer.putData(this, cache);
 			}
 		}
@@ -630,6 +630,16 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 	@Override
 	public String getText(WptPt o) {
 		return o.name;
+	}
+
+	@Override
+	public boolean isTextVisible() {
+		return view.getSettings().SHOW_POI_LABEL.get();
+	}
+
+	@Override
+	public boolean isFakeBoldText() {
+		return false;
 	}
 
 
