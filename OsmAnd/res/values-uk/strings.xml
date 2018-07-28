@@ -653,7 +653,7 @@
   <string name="loading_streets">Завантажуються вулиці…</string>
   <string name="loading_cities">Завантажуються міста…</string>
   
-  <string name="poi">POI</string>
+  <string name="poi">Корисне місце</string>
   <string name="error_occurred_saving_gpx">Помилка збереження шляху в GPX файл</string>
   <string name="error_calculating_route">Помилка розрахунку маршруту</string>
   <string name="error_calculating_route_occured">Помилка прокладання маршруту</string>
@@ -1010,8 +1010,8 @@
     <string name="intermediate_point">Проміжний пункт %1$s</string>
     <string name="context_menu_item_last_intermediate_point">Додати як останню проміжну точку</string>
     <string name="context_menu_item_first_intermediate_point">Додати як першу проміжну точку</string>
-    <string name="add_as_last_destination_point">Додати як останню проміжну точку</string>
-    <string name="add_as_first_destination_point">Додати як першу проміжну точку</string>
+    <string name="add_as_last_destination_point">Додати як останній проміжний пункт призначення</string>
+    <string name="add_as_first_destination_point">Додати як перший проміжний пункт призначення</string>
     <string name="replace_destination_point">Замінити пункт призначення</string>
     <string name="new_destination_point_dialog">Ви вже встановили пункт призначення:</string>
     <string name="shared_string_target_points">Точки призначення</string>
@@ -1508,7 +1508,7 @@
     <string name="calculate_osmand_route_without_internet">Розрахувати ділянку маршруту OsmAnd без Інтернету</string>
     <string name="gpx_option_calculate_first_last_segment">Обчислити маршрут OsmAnd для першого та останнього сегментів маршруту</string>
     <string name="use_displayed_track_for_navigation">Чи Ви хочете використовувати відображення треку для навігації?</string>
-    <string name="keep_and_add_destination_point">Додати як наступний пункт призначення</string>
+    <string name="keep_and_add_destination_point">Додати наступним пунктом призначення</string>
     <string name="select_gpx">Виберіть GPX…</string>
     <string name="route_descr_select_destination">Виберіть пункт призначення</string>
     <string name="shared_string_select_on_map">Виберіть на мапі</string>
@@ -2169,7 +2169,7 @@
     <string name="add_time_span">Додати часовий проміжок</string>
     <string name="road_blocked">Дорога заблокована</string>
     <string name="shared_string_select">Вибрати</string>
-    <string name="switch_start_finish">Поміняти місцями точки призначення та початку</string>
+    <string name="switch_start_finish">Поміняти місцями пункт відправлення і пункт призначення</string>
     <string name="rendering_attr_hideIcons_name">Значки POI</string>
     <string name="item_removed">Елемент видалено</string>
     <string name="n_items_removed">Елементи видалено</string>
@@ -3040,7 +3040,7 @@
 
 <string name="map_import_error">Помилка імпорту мапи</string>
     <string name="map_imported_successfully">Мапа успішна імпортована</string>
-    <string name="make_as_start_point">Зробити початковою точкою</string>
+    <string name="make_as_start_point">Зробити пунктом відправлення</string>
     <string name="shared_string_current">Поточний</string>
     <string name="last_intermediate_dest_description">Додає останню зупинку на маршруті</string>
     <string name="first_intermediate_dest_description">Додає першу зупинку на маршруті</string>
@@ -3107,4 +3107,31 @@
     <string name="light_rs_render_descr">Простий і контрастний стиль для автомобільної навігації. Комфортний для очей в нічному режимі. Ключові особливості: контурні лінії, контрастні помаранчеві дороги, менше відволікаючих другорядних об\'єктів на мапі.</string>
     <string name="topo_render_descr">Контрастний стиль, призначений в основному для піших прогулянок, походів і велосипедних прогулянок на природі. Хороша читабельність при складному зовнішньому освітленні. Ключові особливості: контрастні дороги і природні об\'єкти, різні типи маршрутів, контурні лінії з розширеними настройками, більш детальна інформація при відповідних рівнях масштабування, ніж в стилі за замовчуванням. Опція „Якість дорожнього покриття“ дозволяє розрізняти дороги з різною якістю поверхні. Немає нічного режиму.</string>
     <string name="mapnik_render_descr">Старий стиль відображення за умовчанням „Mapnik“. Ключові особливості: кольору схожі на стиль „Mapnik“.</string>
+    <string name="touring_view_render_descr">Високо деталізований стиль для туристичних цілей. Включає усі параметри конфігурації стилю за умованням, крім того: відображає якомога більше деталей, зокрема, усі дороги, стежки та інші способи переміщення. Чітка візуальна відмінність між усіма типами доріг, ремінісценція багатьох туристичних атласів. Висококонтрастна колірна схема для вуличного використання, денний і нічний режим.</string>
+    <string name="default_render_descr">Стиль загального призначення. Спрощений рендеринг в густонаселених містах. Ключові особливості: контурні лінії, маршрути, якість поверхні, обмеження доступу, дорожні щити, візуалізація маршрутів за шкалою SAC, характеристики спортивних сплавів.</string>
+    <string name="open_wikipedia_link_online">Відкрити посилання Вікіпедії в онлайні</string>
+    <string name="open_wikipedia_link_online_description">Посилання буде відкрите в веб-браузері.</string>
+    <string name="read_wikipedia_offline_description">Отримайте підписку на OsmAnd Live, щоб читати статті у Вікіпедії та вікімандри в автономному режимі.</string>
+    <string name="read_wikipedia_offline">Читати Вікіпедію в автономному режимі</string>
+    <string name="purchase_cancelled_dialog_title">Ви скасували підписку OsmAnd Live</string>
+    <string name="purchase_cancelled_dialog_descr">Відновіть підписку, щоб продовжити використовувати усі функції:</string>
+
+    <string name="maps_you_need_descr">На основі збережених Вами статей ми рекомендуємо Вам звантажити наступні мапи:</string>
+    <string name="maps_you_need">Потрібні Вам мапи</string>
+    <string name="osmand_team">Команда OsmAnd</string>
+    <string name="popular_destinations">Популярні напрямки</string>
+    <string name="paid_app">Платний додаток</string>
+    <string name="travel_card_update_descr">Доступні нові дані ВікіМандри, оновіть їх та насолоджуйтеся.</string>
+	<string name="travel_card_download_descr">Завантажте путівники ВікіМандри, щоб переглянути статті про місця в усьому світі без підключення до Інтернету.</string>
+	<string name="update_is_available">Оновлення доступне</string>
+	<string name="download_file">Звантажити файл</string>
+    <string name="start_editing_card_image_text">Вільний всесвітній путівник, який може редагувати кожен.</string>
+    <string name="welcome_to_open_beta_description">Туристичні путівники в даний час засновані на Вікімандрах. Перевірте усі функції безкоштовно під час відкритого бета-тестування. Потім путівники будуть доступні передплатникам OsmAnd Unlimited і власником OsmAnd+.</string>
+    <string name="start_editing_card_description">Вам можна і слід редагувати будь-яку статтю на Вікімандрах. Діліться знаннями, досвідом, талантом і вашої увагою</string>
+    <string name="start_editing">Розпочати редагування</string>
+    <string name="get_unlimited_access">Отримати необмежений доступ</string>
+    <string name="welcome_to_open_beta">Ласкаво просимо на відкрите бета-тестування</string>
+    <string name="wikivoyage_travel_guide">Туристичний путівник</string>
+    <string name="wikivoyage_travel_guide_descr">Переглядайте путівники Вікімандів про найцікавіші місця на планеті всередині OsmAnd без підключення до інтернету.</string>
+    <string name="clear_all_intermediates">Очистити усі проміжні точки</string>
     </resources>
