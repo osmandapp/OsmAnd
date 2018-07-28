@@ -46,6 +46,7 @@ public class JSTTSCommandPlayerImpl extends AbstractJSCommandPlayer {
     @Override
     public JSCommandBuilder newCommandBuilder() {
         JSCommandBuilder commandBuilder = new JSCommandBuilder(this);
+        commandBuilder.setJSContext(app.getSettings().VOICE_PROVIDER.get() + "en_tts.js");
         commandBuilder.setParameters(app.getSettings().METRIC_SYSTEM.get().toHumanString(app), true);
         return commandBuilder;
     }
@@ -91,7 +92,7 @@ public class JSTTSCommandPlayerImpl extends AbstractJSCommandPlayer {
 
     @Override
     public String getLanguage() {
-        return null;
+        return "en";
     }
 
     @Override

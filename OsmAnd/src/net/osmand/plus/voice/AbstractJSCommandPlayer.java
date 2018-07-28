@@ -39,7 +39,7 @@ public class AbstractJSCommandPlayer implements CommandPlayer {
 
     @Override
     public String getLanguage() {
-        return null;
+        return "en";
     }
 
     @Override

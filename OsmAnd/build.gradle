@@ -363,6 +363,8 @@ dependencies {
 	implementation 'com.vividsolutions:jts-core:1.14.0'
 
 	implementation 'com.squareup.picasso:picasso:2.71828'
+	// JS core
+	//implementation 'com.github.LiquidPlayer:LiquidCore:0.4.6'
 // size restrictions
 // implementation 'com.ibm.icu:icu4j:50.1' 
 // implementation 'net.sf.trove4j:trove4j:3.0.3'
