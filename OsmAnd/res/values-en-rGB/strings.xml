@@ -4,6 +4,12 @@
 		This file is manually maintained in res/values-en-rGB and should ONLY contain strings where a different spelling should be used for English as used in the United Kingdom
 	-->
 
+	<string name="rendering_attr_currentTrackColor_name">GPX colour</string>
+	<string name="rendering_attr_currentTrackColor_description">GPX colour</string>
+	<string name="shared_string_color">Colour</string>
+	<string name="mapnik_render_descr">Old \'Mapnik\'-style default rendering style. Key features: colours are similar to \'Mapnik\' style.</string>
+	<string name="touring_view_render_descr">High detail style for touring purposes. Includes all configuration options of default style, in addition: Displays as much detail as possible, in particular all roads, paths, and other ways to travel. Clear visual distinction between all different road types, reminiscent of many touring atlases. High contrast colour scheme for outdoor use, day and night mode.</string>
+	<string name="unirs_render_descr">Modification of the default style to increase contrast of pedestrian and bicycle roads. Uses legacy Mapnik colours.</string>
 	<string name="add_favourites_group_to_markers_descr">Select a Favourite category to add to the markers.</string>
 	<string name="favourites_group">Favourites category</string>
 	<string name="add_group_descr">You can import groups from favourites or track waypoints.</string>
