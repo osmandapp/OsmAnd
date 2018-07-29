@@ -3531,4 +3531,19 @@
 	<string name="poi_cable_number">Počet lán</string>
 	<string name="poi_via_ferrata_scale">Náročnosť</string>
 
-	</resources>
+	<string name="poi_checkpoint_type">Typ kontrolného stanovišťa</string>
+
+<string name="poi_appliance">Obchod so spotrebičmi</string>
+
+	<string name="poi_payment_contactless_yes">Bezkontaktne</string>
+	<string name="poi_payment_contactless_no">Bezkontaktne nie je možné platiť</string>
+
+	<string name="poi_hazard_nuclear">Nebezpečenstvo rádioaktivity</string>
+	<string name="poi_hazard_erosion">Nebezpečenstvo erózie</string>
+	<string name="poi_hazard_avalanche">Nebezpečenstvo lavín</string>
+	<string name="poi_hazard_slippery_road">Klzká cesta</string>
+	<string name="poi_hazard_flood">Nebezpečenstvo záplav</string>
+	<string name="poi_hazard_minefield">Mínové pole</string>
+
+
+</resources>
