@@ -1422,7 +1422,7 @@ Proporčná pamäť %4$s MB (Limit Androidu %5$s MB, Dalvik %6$s MB).</string>
     <string name="map_widget_right">Pravý panel</string>
     <string name="map_widget_left">Ľavý panel</string>
     <string name="configure_map">Nastaviť mapu</string>
-    <string name="search_radius_proximity">Vovnútri</string>
+    <string name="search_radius_proximity">Do vzdialenosti</string>
     <string name="rendering_category_routes">Trasy</string>
     <string name="rendering_attr_trainLightrailRoutes_name">Vlakové linky</string>
     <string name="rendering_attr_tramRoutes_name">Električkové linky</string>
