@@ -3118,4 +3118,9 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="coord_input_save_as_track_descr">%1$s puntu gehitu dituzu. Idatzi fitxategi-izena eta sakatu \"Gorde\".</string>
     <string name="point_deleted">%1$s puntua ezabatuta</string>
     <string name="shared_string_world">Mundua</string>
+    <string name="increase_search_radius_to">Handitu bilaketa-erradioa %1$s-ra</string>
+    <string name="send_search_query_description">Zure bilaketa <b>\"%1$s\"</b> eta kokapena bidaliko dugu. <br/><br/>Ez dugu informazio pertsonala bilduko, bilaketa datuak algoritmoa hobetzeko biltzen ditugu.<br/></string>
+    <string name="search_no_results_description">Emaitzarik ez?
+\nEman iezaguzu horren berri.</string>
+    <string name="send_search_query">Bilaketa-kontsulta bidali?</string>
     </resources>
