@@ -183,7 +183,7 @@
 	<string name="poi_service_tyres">Шини</string>
 	<string name="poi_vehicle_inspection">Огляд автомобіля</string>
 	<string name="poi_car_wash">Мийка автомобіля</string>
-	<string name="poi_fuel">АЗС</string>
+	<string name="poi_fuel">АЗС;Автомобільна заправка;Автозаправка;Бензоколонка;Бензозаправка</string>
 	<string name="poi_fuel_diesel">Дизель</string>
 	<string name="poi_fuel_gtl_diesel">Високоякісний дизель</string>
 	<string name="poi_fuel_hgv_diesel">TIR дизель</string>
@@ -3854,4 +3854,12 @@
 
 	<string name="poi_outcrop">Оголення порід</string>
 
-	</resources>
+	<string name="poi_hazard_nuclear">Радіаційна небезпека</string>
+	<string name="poi_hazard_erosion">Ерозійна небезпека</string>
+	<string name="poi_hazard_avalanche">Небезпека лавини</string>
+	<string name="poi_hazard_slippery_road">Слизька дорога</string>
+	<string name="poi_hazard_flood">Небезпека затоплення</string>
+	<string name="poi_hazard_minefield">Мінне поле</string>
+
+
+</resources>
