@@ -1326,4 +1326,9 @@
 	<string name="poi_aeroway_fuel">Flybrenselstasjon</string>
 	<string name="poi_waterway_fuel">Båtbensinstasjon</string>
 	<string name="poi_helipad">Helikopterlandingsplass</string>
+	<string name="poi_fire_water_pond">Branndam</string>
+	<string name="poi_fuel_octane_80">80-oktan</string>
+	<string name="poi_communication_tower">Kommunikasjonstårn</string>
+	<string name="poi_observation_tower">Utkikkstårn</string>
+	<string name="poi_lighting_tower">Lysmast</string>
 	</resources>
