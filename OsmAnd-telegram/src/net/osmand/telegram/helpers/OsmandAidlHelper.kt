@@ -868,10 +868,10 @@ class OsmandAidlHelper(private val app: Application) {
 		return false
 	}
 
-	fun addOpenAppNavDrawerItem(itemName: String, uri: String, flags: Int): Boolean {
+	fun addOpenAppNavDrawerItem(itemName: String, uri: String, appPackage: String, flags: Int): Boolean {
 		if (mIOsmAndAidlInterface != null) {
 			try {
-				return mIOsmAndAidlInterface!!.addOpenAppNavDrawerItem(AddOpenAppNavDrawerItemParams(itemName, uri, flags))
+				return mIOsmAndAidlInterface!!.addOpenAppNavDrawerItem(AddOpenAppNavDrawerItemParams(itemName, uri, appPackage, flags))
 			} catch (e: RemoteException) {
 				e.printStackTrace()
 			}
