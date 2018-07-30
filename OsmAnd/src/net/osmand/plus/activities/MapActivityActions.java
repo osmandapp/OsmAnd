@@ -795,7 +795,7 @@ public class MapActivityActions implements DialogProvider {
 					}
 				}).createItem());
 
-		app.getAidlApi().registerNavDrawerItem(mapActivity, optionsMenuHelper);
+		app.getAidlApi().registerNavDrawerItems(mapActivity, optionsMenuHelper);
 
 		optionsMenuHelper.addItem(new ItemBuilder().setTitleId(R.string.layer_map_appearance, mapActivity)
 				.setIcon(R.drawable.ic_configure_screen_dark)
