@@ -6,22 +6,22 @@ import android.os.Parcelable;
 public class AddOpenAppNavDrawerItemParams implements Parcelable {
 
 	private String itemName;
-	private String appPackage;
+	private String uri;
 	private int flags;
 
-	public AddOpenAppNavDrawerItemParams(String itemName, String appPackage) {
-		this(itemName, appPackage, -1);
+	public AddOpenAppNavDrawerItemParams(String itemName, String uri) {
+		this(itemName, uri, -1);
 	}
 
-	public AddOpenAppNavDrawerItemParams(String itemName, String appPackage, int flags) {
+	public AddOpenAppNavDrawerItemParams(String itemName, String uri, int flags) {
 		this.itemName = itemName;
-		this.appPackage = appPackage;
+		this.uri = uri;
 		this.flags = flags;
 	}
 
 	protected AddOpenAppNavDrawerItemParams(Parcel in) {
 		itemName = in.readString();
-		appPackage = in.readString();
+		uri = in.readString();
 		flags = in.readInt();
 	}
 
@@ -29,8 +29,8 @@ public class AddOpenAppNavDrawerItemParams implements Parcelable {
 		return itemName;
 	}
 
-	public String getAppPackage() {
-		return appPackage;
+	public String getUri() {
+		return uri;
 	}
 
 	public int getFlags() {
@@ -40,7 +40,7 @@ public class AddOpenAppNavDrawerItemParams implements Parcelable {
 	@Override
 	public void writeToParcel(Parcel dest, int flags) {
 		dest.writeString(itemName);
-		dest.writeString(appPackage);
+		dest.writeString(uri);
 		dest.writeInt(flags);
 	}
 

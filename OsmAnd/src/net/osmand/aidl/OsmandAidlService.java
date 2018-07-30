@@ -462,7 +462,7 @@ public class OsmandAidlService extends Service {
 		@Override
 		public boolean addOpenAppNavDrawerItem(AddOpenAppNavDrawerItemParams params) throws RemoteException {
 			try {
-				return params != null && getApi("addOpenAppNavDrawerItem").addOpenAppNavDrawerItem(params.getItemName(), params.getAppPackage(), params.getFlags());
+				return params != null && getApi("addOpenAppNavDrawerItem").addOpenAppNavDrawerItem(params.getItemName(), params.getUri(), params.getFlags());
 			} catch (Exception e) {
 				handleException(e);
 				return false;

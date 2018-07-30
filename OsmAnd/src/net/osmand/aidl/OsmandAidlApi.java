@@ -1192,11 +1192,11 @@ public class OsmandAidlApi {
 		return true;
 	}
 
-	boolean addOpenAppNavDrawerItem(String itemName, String appPackage, int flags) {
-		if (!TextUtils.isEmpty(itemName) && !TextUtils.isEmpty(appPackage)) {
+	boolean addOpenAppNavDrawerItem(String itemName, String uri, int flags) {
+		if (!TextUtils.isEmpty(itemName) && !TextUtils.isEmpty(uri)) {
 			OsmandSettings settings = app.getSettings();
 			settings.API_NAV_DRAWER_ITEM_NAME.set(itemName);
-			settings.API_NAV_DRAWER_ITEM_APP_PACKAGE.set(appPackage);
+			settings.API_NAV_DRAWER_ITEM_URI.set(uri);
 			settings.API_NAV_DRAWER_ITEM_FLAGS.set(flags);
 			return true;
 		}
@@ -1206,10 +1206,10 @@ public class OsmandAidlApi {
 	public void registerNavDrawerItem(final Activity activity, ContextMenuAdapter adapter) {
 		final OsmandSettings settings = app.getSettings();
 		final String itemName = settings.API_NAV_DRAWER_ITEM_NAME.get();
-		final String appPackage = settings.API_NAV_DRAWER_ITEM_APP_PACKAGE.get();
-		if (!TextUtils.isEmpty(itemName) && !TextUtils.isEmpty(appPackage)) {
-			final Intent intent = activity.getPackageManager().getLaunchIntentForPackage(appPackage);
-			if (intent != null) {
+		final String uri = settings.API_NAV_DRAWER_ITEM_URI.get();
+		if (!TextUtils.isEmpty(itemName) && !TextUtils.isEmpty(uri)) {
+			final Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+			if (intent.resolveActivity(activity.getPackageManager()) != null) {
 				int flags = settings.API_NAV_DRAWER_ITEM_FLAGS.get();
 				if (flags != -1) {
 					intent.addFlags(flags);

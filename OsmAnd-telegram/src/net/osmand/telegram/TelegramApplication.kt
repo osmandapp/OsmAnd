@@ -44,9 +44,7 @@ class TelegramApplication : Application(), OsmandHelperListener {
 		osmandAidlHelper.listener = object  : OsmandAidlHelper.OsmandHelperListener {
 			override fun onOsmandConnectionStateChanged(connected: Boolean) {
 				if (connected) {
-					val basePackage = "net.osmand.telegram"
-					val appPackage = if (BuildConfig.DEBUG) "$basePackage.debug" else basePackage
-					osmandAidlHelper.addOpenAppNavDrawerItem(getString(R.string.app_name), appPackage, -1)
+					osmandAidlHelper.addOpenAppNavDrawerItem(getString(R.string.app_name), "osmand_telegram://main_activity", -1)
 				}
 			}
 		}
