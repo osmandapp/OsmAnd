@@ -3942,9 +3942,9 @@
 
 	<string name="poi_end_date">Slutdato</string>
 
-<string name="poi_appliance">Elektronik butik</string>
+<string name="poi_appliance">Butik for hårde hvidevarer</string>
 
-	<string name="poi_outcrop">Klippefremspring</string>
+	<string name="poi_outcrop">Blotlagt klippe</string>
 
 <string name="poi_payment_contactless_yes">Kontaktløs</string>
 	<string name="poi_payment_contactless_no">Kontaktløs ikke accepteret</string>
