@@ -11,6 +11,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.ParcelFileDescriptor;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.view.View;
@@ -76,6 +77,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -1199,30 +1201,25 @@ public class OsmandAidlApi {
 		return true;
 	}
 
-	boolean addOpenAppNavDrawerItem(String itemName, String appPackage, String uri, int flags) {
-		if (!TextUtils.isEmpty(itemName) && !TextUtils.isEmpty(appPackage) && !TextUtils.isEmpty(uri)) {
-			List<NavDrawerItem> items = getNavDrawerItems();
+	boolean addNavDrawerItems(String appPackage, Set<net.osmand.aidl.navdrawer.NavDrawerItem> items) {
+		if (!TextUtils.isEmpty(appPackage) && items != null && !items.isEmpty()) {
+			List<NavDrawerItem> existing = getNavDrawerItems();
 
-			int count = 0;
-			for (NavDrawerItem item : items) {
-				if (appPackage.equals(item.appPackage)) {
-					count++;
-				}
-			}
-			if (count >= MAX_NAV_DRAWER_ITEMS_PER_APP) {
-				for (Iterator<NavDrawerItem> it = items.iterator(); it.hasNext(); ) {
-					if (appPackage.equals(it.next().appPackage)) {
-						it.remove();
-						count--;
-						if (count < MAX_NAV_DRAWER_ITEMS_PER_APP) {
-							break;
-						}
-					}
+			for (Iterator<NavDrawerItem> it = existing.iterator(); it.hasNext(); ) {
+				if (appPackage.equals(it.next().appPackage)) {
+					it.remove();
 				}
 			}
 
-			items.add(new NavDrawerItem(itemName, appPackage, uri, flags));
-			saveNavDrawerItems(items);
+			int counter = 0;
+			for (net.osmand.aidl.navdrawer.NavDrawerItem item : items) {
+				existing.add(new NavDrawerItem(item.getName(), appPackage, item.getUri(), item.getIconName(), item.getFlags()));
+				if (++counter >= MAX_NAV_DRAWER_ITEMS_PER_APP) {
+					break;
+				}
+			}
+
+			saveNavDrawerItems(existing);
 
 			return true;
 		}
@@ -1249,6 +1246,7 @@ public class OsmandAidlApi {
 				final Intent finalIntent = intent;
 				adapter.addItem(new ContextMenuItem.ItemBuilder()
 						.setTitle(item.name)
+						.setIcon(getIconId(item.iconName))
 						.setListener(new ContextMenuAdapter.ItemClickListener() {
 							@Override
 							public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int position, boolean isChecked, int[] viewCoordinates) {
@@ -1261,6 +1259,14 @@ public class OsmandAidlApi {
 		}
 	}
 
+	private int getIconId(@Nullable String iconName) {
+		if (!TextUtils.isEmpty(iconName)) {
+			int id = app.getResources().getIdentifier(iconName, "drawable", app.getPackageName());
+			return id == 0 ? -1 : id;
+		}
+		return -1;
+	}
+
 	private void saveNavDrawerItems(List<NavDrawerItem> items) {
 		JSONArray jArray = new JSONArray();
 		for (NavDrawerItem item : items) {
@@ -1269,6 +1275,7 @@ public class OsmandAidlApi {
 				obj.put(NavDrawerItem.NAME_KEY, item.name);
 				obj.put(NavDrawerItem.APP_PACKAGE_KEY, item.appPackage);
 				obj.put(NavDrawerItem.URI_KEY, item.uri);
+				obj.put(NavDrawerItem.ICON_NAME_KEY, item.iconName);
 				obj.put(NavDrawerItem.FLAGS_KEY, item.flags);
 				jArray.put(obj);
 			} catch (JSONException e) {
@@ -1288,6 +1295,7 @@ public class OsmandAidlApi {
 						obj.optString(NavDrawerItem.NAME_KEY),
 						obj.optString(NavDrawerItem.APP_PACKAGE_KEY),
 						obj.optString(NavDrawerItem.URI_KEY),
+						obj.optString(NavDrawerItem.ICON_NAME_KEY),
 						obj.optInt(NavDrawerItem.FLAGS_KEY, -1)
 				));
 			}
@@ -1302,17 +1310,20 @@ public class OsmandAidlApi {
 		static final String NAME_KEY = "name";
 		static final String APP_PACKAGE_KEY = "pack";
 		static final String URI_KEY = "uri";
+		static final String ICON_NAME_KEY = "icon_name";
 		static final String FLAGS_KEY = "flags";
 
 		private String name;
 		private String appPackage;
 		private String uri;
+		private String iconName;
 		private int flags;
 
-		NavDrawerItem(String name, String appPackage, String uri, int flags) {
+		NavDrawerItem(String name, String appPackage, String uri, String iconName, int flags) {
 			this.name = name;
 			this.appPackage = appPackage;
 			this.uri = uri;
+			this.iconName = iconName;
 			this.flags = flags;
 		}
 	}

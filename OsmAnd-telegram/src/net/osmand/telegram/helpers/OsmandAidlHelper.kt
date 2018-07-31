@@ -33,7 +33,8 @@ import net.osmand.aidl.mapwidget.AMapWidget
 import net.osmand.aidl.mapwidget.AddMapWidgetParams
 import net.osmand.aidl.mapwidget.RemoveMapWidgetParams
 import net.osmand.aidl.mapwidget.UpdateMapWidgetParams
-import net.osmand.aidl.navdrawer.AddOpenAppNavDrawerItemParams
+import net.osmand.aidl.navdrawer.AddNavDrawerItemsParams
+import net.osmand.aidl.navdrawer.NavDrawerItem
 import net.osmand.aidl.navigation.NavigateGpxParams
 import net.osmand.aidl.navigation.NavigateParams
 import net.osmand.aidl.note.StartAudioRecordingParams
@@ -42,6 +43,7 @@ import net.osmand.aidl.note.StopRecordingParams
 import net.osmand.aidl.note.TakePhotoNoteParams
 import java.io.File
 import java.util.*
+import kotlin.collections.LinkedHashSet
 
 class OsmandAidlHelper(private val app: Application) {
 
@@ -868,10 +870,14 @@ class OsmandAidlHelper(private val app: Application) {
 		return false
 	}
 
-	fun addOpenAppNavDrawerItem(itemName: String, appPackage: String, uri: String, flags: Int): Boolean {
+	fun addOpenAppNavDrawerItem(appPackage: String, names: List<String>, uris: List<String>, iconNames: List<String>, flags: List<Int>): Boolean {
 		if (mIOsmAndAidlInterface != null) {
 			try {
-				return mIOsmAndAidlInterface!!.addOpenAppNavDrawerItem(AddOpenAppNavDrawerItemParams(itemName, appPackage, uri, flags))
+				val items = LinkedHashSet<NavDrawerItem>()
+				for (i in names.indices) {
+					items.add(NavDrawerItem(names[i], uris[i], iconNames[i], flags[i]))
+				}
+				return mIOsmAndAidlInterface!!.addNavDrawerItems(AddNavDrawerItemsParams(appPackage, items))
 			} catch (e: RemoteException) {
 				e.printStackTrace()
 			}

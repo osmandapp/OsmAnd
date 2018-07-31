@@ -34,7 +34,7 @@ import net.osmand.aidl.mapmarker.UpdateMapMarkerParams;
 import net.osmand.aidl.mapwidget.AddMapWidgetParams;
 import net.osmand.aidl.mapwidget.RemoveMapWidgetParams;
 import net.osmand.aidl.mapwidget.UpdateMapWidgetParams;
-import net.osmand.aidl.navdrawer.AddOpenAppNavDrawerItemParams;
+import net.osmand.aidl.navdrawer.AddNavDrawerItemsParams;
 import net.osmand.aidl.navigation.NavigateGpxParams;
 import net.osmand.aidl.navigation.NavigateParams;
 import net.osmand.aidl.note.StartAudioRecordingParams;
@@ -460,9 +460,9 @@ public class OsmandAidlService extends Service {
 		}
 
 		@Override
-		public boolean addOpenAppNavDrawerItem(AddOpenAppNavDrawerItemParams params) throws RemoteException {
+		public boolean addNavDrawerItems(AddNavDrawerItemsParams params) throws RemoteException {
 			try {
-				return params != null && getApi("addOpenAppNavDrawerItem").addOpenAppNavDrawerItem(params.getItemName(), params.getAppPackage(), params.getUri(), params.getFlags());
+				return params != null && getApi("addNavDrawerItems").addNavDrawerItems(params.getAppPackage(), params.getItems());
 			} catch (Exception e) {
 				handleException(e);
 				return false;
