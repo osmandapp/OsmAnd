@@ -77,7 +77,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.TreeMap;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -1201,7 +1200,7 @@ public class OsmandAidlApi {
 		return true;
 	}
 
-	boolean addNavDrawerItems(String appPackage, Set<net.osmand.aidl.navdrawer.NavDrawerItem> items) {
+	boolean addNavDrawerItems(String appPackage, List<net.osmand.aidl.navdrawer.NavDrawerItem> items) {
 		if (!TextUtils.isEmpty(appPackage) && items != null && !items.isEmpty()) {
 			List<NavDrawerItem> existing = getNavDrawerItems();
 			for (Iterator<NavDrawerItem> it = existing.iterator(); it.hasNext(); ) {

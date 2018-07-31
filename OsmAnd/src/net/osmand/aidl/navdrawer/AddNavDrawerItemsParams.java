@@ -5,31 +5,29 @@ import android.os.Parcelable;
 import android.support.annotation.NonNull;
 
 import java.util.ArrayList;
-import java.util.LinkedHashSet;
 import java.util.List;
 
 public class AddNavDrawerItemsParams implements Parcelable {
 
 	private String appPackage;
-	private LinkedHashSet<NavDrawerItem> items;
+	private List<NavDrawerItem> items;
 
-	public AddNavDrawerItemsParams(@NonNull String appPackage, @NonNull LinkedHashSet<NavDrawerItem> items) {
+	public AddNavDrawerItemsParams(@NonNull String appPackage, @NonNull List<NavDrawerItem> items) {
 		this.appPackage = appPackage;
 		this.items = items;
 	}
 
 	protected AddNavDrawerItemsParams(Parcel in) {
 		appPackage = in.readString();
-		List<NavDrawerItem> list = new ArrayList<>();
-		in.readTypedList(list, NavDrawerItem.CREATOR);
-		items = new LinkedHashSet<>(list);
+		items = new ArrayList<>();
+		in.readTypedList(items, NavDrawerItem.CREATOR);
 	}
 
 	public String getAppPackage() {
 		return appPackage;
 	}
 
-	public LinkedHashSet<NavDrawerItem> getItems() {
+	public List<NavDrawerItem> getItems() {
 		return items;
 	}
 

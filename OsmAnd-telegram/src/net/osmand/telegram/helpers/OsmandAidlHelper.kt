@@ -43,7 +43,6 @@ import net.osmand.aidl.note.StopRecordingParams
 import net.osmand.aidl.note.TakePhotoNoteParams
 import java.io.File
 import java.util.*
-import kotlin.collections.LinkedHashSet
 
 class OsmandAidlHelper(private val app: Application) {
 
@@ -873,7 +872,7 @@ class OsmandAidlHelper(private val app: Application) {
 	fun addOpenAppNavDrawerItem(appPackage: String, names: List<String>, uris: List<String>, iconNames: List<String>, flags: List<Int>): Boolean {
 		if (mIOsmAndAidlInterface != null) {
 			try {
-				val items = LinkedHashSet<NavDrawerItem>()
+				val items = mutableListOf<NavDrawerItem>()
 				for (i in names.indices) {
 					items.add(NavDrawerItem(names[i], uris[i], iconNames[i], flags[i]))
 				}
