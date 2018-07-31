@@ -3170,4 +3170,5 @@
     <string name="search_no_results_description">چیزی پیدا نشد؟
 \nدر این باره با ما صحبت کنید.</string>
     <string name="send_search_query">عبارت جست‌وجویتان ارسال شود؟</string>
+    <string name="increase_search_radius_to">افزایش شعاع جست‌وجو به %1$s</string>
     </resources>

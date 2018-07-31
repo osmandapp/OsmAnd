@@ -33,6 +33,7 @@ import net.osmand.aidl.mapwidget.AMapWidget
 import net.osmand.aidl.mapwidget.AddMapWidgetParams
 import net.osmand.aidl.mapwidget.RemoveMapWidgetParams
 import net.osmand.aidl.mapwidget.UpdateMapWidgetParams
+import net.osmand.aidl.navdrawer.AddOpenAppNavDrawerItemParams
 import net.osmand.aidl.navigation.NavigateGpxParams
 import net.osmand.aidl.navigation.NavigateParams
 import net.osmand.aidl.note.StartAudioRecordingParams
@@ -474,6 +475,7 @@ class OsmandAidlHelper(private val app: Application) {
 		if (mIOsmAndAidlInterface != null) {
 			try {
 				val layer = AMapLayer(id, name, zOrder, points)
+				layer.isImagePoints = true
 				return mIOsmAndAidlInterface!!.addMapLayer(AddMapLayerParams(layer))
 			} catch (e: RemoteException) {
 				e.printStackTrace()
@@ -495,6 +497,7 @@ class OsmandAidlHelper(private val app: Application) {
 		if (mIOsmAndAidlInterface != null) {
 			try {
 				val layer = AMapLayer(id, name, zOrder, points)
+				layer.isImagePoints = true
 				return mIOsmAndAidlInterface!!.updateMapLayer(UpdateMapLayerParams(layer))
 			} catch (e: RemoteException) {
 				e.printStackTrace()
@@ -861,6 +864,17 @@ class OsmandAidlHelper(private val app: Application) {
 				e.printStackTrace()
 			}
 
+		}
+		return false
+	}
+
+	fun addOpenAppNavDrawerItem(itemName: String, appPackage: String, flags: Int): Boolean {
+		if (mIOsmAndAidlInterface != null) {
+			try {
+				return mIOsmAndAidlInterface!!.addOpenAppNavDrawerItem(AddOpenAppNavDrawerItemParams(itemName, appPackage, flags))
+			} catch (e: RemoteException) {
+				e.printStackTrace()
+			}
 		}
 		return false
 	}

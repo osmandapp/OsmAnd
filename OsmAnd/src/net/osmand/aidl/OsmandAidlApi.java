@@ -1,5 +1,6 @@
 package net.osmand.aidl;
 
+import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -12,6 +13,7 @@ import android.os.ParcelFileDescriptor;
 import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.ArrayAdapter;
 
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
@@ -28,6 +30,8 @@ import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.ApplicationMode;
+import net.osmand.plus.ContextMenuAdapter;
+import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.GPXUtilities;
@@ -38,6 +42,7 @@ import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
@@ -826,6 +831,7 @@ public class OsmandAidlApi {
 			for (AMapPoint point : layer.getPoints()) {
 				existingLayer.putPoint(point);
 			}
+			existingLayer.copyZoomBounds(layer);
 			refreshMap();
 			return true;
 		} else {
@@ -1184,5 +1190,42 @@ public class OsmandAidlApi {
 		intent.putExtra(AIDL_FORCE, force);
 		app.sendBroadcast(intent);
 		return true;
+	}
+
+	boolean addOpenAppNavDrawerItem(String itemName, String appPackage, int flags) {
+		if (!TextUtils.isEmpty(itemName) && !TextUtils.isEmpty(appPackage)) {
+			OsmandSettings settings = app.getSettings();
+			settings.API_NAV_DRAWER_ITEM_NAME.set(itemName);
+			settings.API_NAV_DRAWER_ITEM_APP_PACKAGE.set(appPackage);
+			settings.API_NAV_DRAWER_ITEM_FLAGS.set(flags);
+			return true;
+		}
+		return false;
+	}
+
+	public void registerNavDrawerItem(final Activity activity, ContextMenuAdapter adapter) {
+		final OsmandSettings settings = app.getSettings();
+		final String itemName = settings.API_NAV_DRAWER_ITEM_NAME.get();
+		final String appPackage = settings.API_NAV_DRAWER_ITEM_APP_PACKAGE.get();
+		if (!TextUtils.isEmpty(itemName) && !TextUtils.isEmpty(appPackage)) {
+			final Intent intent = activity.getPackageManager().getLaunchIntentForPackage(appPackage);
+			if (intent != null) {
+				int flags = settings.API_NAV_DRAWER_ITEM_FLAGS.get();
+				if (flags != -1) {
+					intent.addFlags(flags);
+				}
+
+				adapter.addItem(new ContextMenuItem.ItemBuilder()
+						.setTitle(itemName)
+						.setListener(new ContextMenuAdapter.ItemClickListener() {
+							@Override
+							public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int position, boolean isChecked, int[] viewCoordinates) {
+								activity.startActivity(intent);
+								return true;
+							}
+						})
+						.createItem());
+			}
+		}
 	}
 }

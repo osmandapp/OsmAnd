@@ -34,6 +34,7 @@ import net.osmand.aidl.mapmarker.UpdateMapMarkerParams;
 import net.osmand.aidl.mapwidget.AddMapWidgetParams;
 import net.osmand.aidl.mapwidget.RemoveMapWidgetParams;
 import net.osmand.aidl.mapwidget.UpdateMapWidgetParams;
+import net.osmand.aidl.navdrawer.AddOpenAppNavDrawerItemParams;
 import net.osmand.aidl.navigation.NavigateGpxParams;
 import net.osmand.aidl.navigation.NavigateParams;
 import net.osmand.aidl.note.StartAudioRecordingParams;
@@ -452,6 +453,16 @@ public class OsmandAidlService extends Service {
 		public boolean navigateGpx(NavigateGpxParams params) throws RemoteException {
 			try {
 				return params != null && getApi("navigateGpx").navigateGpx(params.getData(), params.getUri(), params.isForce());
+			} catch (Exception e) {
+				handleException(e);
+				return false;
+			}
+		}
+
+		@Override
+		public boolean addOpenAppNavDrawerItem(AddOpenAppNavDrawerItemParams params) throws RemoteException {
+			try {
+				return params != null && getApi("addOpenAppNavDrawerItem").addOpenAppNavDrawerItem(params.getItemName(), params.getAppPackage(), params.getFlags());
 			} catch (Exception e) {
 				handleException(e);
 				return false;

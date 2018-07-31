@@ -2897,4 +2897,5 @@
     <string name="download_all">تنزيل الكل</string>
     <string name="shared_string_restart">إعادة تشغيل التطبيق</string>
     <string name="shared_string_bookmark">إشارة مرجعية</string>
+    <string name="waypoints_removed_from_map_markers">نقاط بالطريق تم إزالتها من علامات الخريطة</string>
     </resources>
