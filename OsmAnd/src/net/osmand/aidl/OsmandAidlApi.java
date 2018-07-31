@@ -75,6 +75,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -1202,51 +1203,53 @@ public class OsmandAidlApi {
 
 	boolean addNavDrawerItems(String appPackage, List<net.osmand.aidl.navdrawer.NavDrawerItem> items) {
 		if (!TextUtils.isEmpty(appPackage) && items != null && !items.isEmpty()) {
-			List<NavDrawerItem> existing = getNavDrawerItems();
-			for (Iterator<NavDrawerItem> it = existing.iterator(); it.hasNext(); ) {
-				if (appPackage.equals(it.next().appPackage)) {
-					it.remove();
-				}
-			}
-			int counter = 0;
-			for (net.osmand.aidl.navdrawer.NavDrawerItem item : items) {
-				existing.add(new NavDrawerItem(item.getName(), appPackage, item.getUri(), item.getIconName(), item.getFlags()));
-				if (++counter >= MAX_NAV_DRAWER_ITEMS_PER_APP) {
+			List<NavDrawerItem> newItems = new ArrayList<>(MAX_NAV_DRAWER_ITEMS_PER_APP);
+			boolean success = true;
+			for (int i = 0; i < items.size() && i <= MAX_NAV_DRAWER_ITEMS_PER_APP; i++) {
+				net.osmand.aidl.navdrawer.NavDrawerItem item = items.get(i);
+				String name = item.getName();
+				String uri = item.getUri();
+				if (!TextUtils.isEmpty(name) && !TextUtils.isEmpty(uri)) {
+					newItems.add(new NavDrawerItem(name, uri, item.getIconName(), item.getFlags()));
+				} else {
+					success = false;
 					break;
 				}
 			}
-			saveNavDrawerItems(existing);
-			return true;
+			if (success) {
+				saveNavDrawerItems(appPackage, newItems);
+			}
+			return success;
 		}
 		return false;
 	}
 
 	public void registerNavDrawerItems(final Activity activity, ContextMenuAdapter adapter) {
 		PackageManager pm = activity.getPackageManager();
-		for (NavDrawerItem item : getNavDrawerItems()) {
-			if (TextUtils.isEmpty(item.name) || TextUtils.isEmpty(item.appPackage) || TextUtils.isEmpty(item.uri)) {
-				continue;
-			}
-			Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(item.uri));
-			if (intent.resolveActivity(pm) == null) {
-				intent = pm.getLaunchIntentForPackage(item.appPackage);
-			}
-			if (intent != null) {
-				if (item.flags != -1) {
-					intent.addFlags(item.flags);
+		for (Map.Entry<String, List<NavDrawerItem>> entry : getNavDrawerItems().entrySet()) {
+			String appPackage = entry.getKey();
+			for (NavDrawerItem item : entry.getValue()) {
+				Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(item.uri));
+				if (intent.resolveActivity(pm) == null) {
+					intent = pm.getLaunchIntentForPackage(appPackage);
 				}
-				final Intent finalIntent = intent;
-				adapter.addItem(new ContextMenuItem.ItemBuilder()
-						.setTitle(item.name)
-						.setIcon(getIconId(item.iconName))
-						.setListener(new ContextMenuAdapter.ItemClickListener() {
-							@Override
-							public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int position, boolean isChecked, int[] viewCoordinates) {
-								activity.startActivity(finalIntent);
-								return true;
-							}
-						})
-						.createItem());
+				if (intent != null) {
+					if (item.flags != -1) {
+						intent.addFlags(item.flags);
+					}
+					final Intent finalIntent = intent;
+					adapter.addItem(new ContextMenuItem.ItemBuilder()
+							.setTitle(item.name)
+							.setIcon(getIconId(item.iconName))
+							.setListener(new ContextMenuAdapter.ItemClickListener() {
+								@Override
+								public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int position, boolean isChecked, int[] viewCoordinates) {
+									activity.startActivity(finalIntent);
+									return true;
+								}
+							})
+							.createItem());
+				}
 			}
 		}
 	}
@@ -1259,37 +1262,43 @@ public class OsmandAidlApi {
 		return -1;
 	}
 
-	private void saveNavDrawerItems(List<NavDrawerItem> items) {
-		JSONArray jArray = new JSONArray();
-		for (NavDrawerItem item : items) {
-			try {
+	private void saveNavDrawerItems(String appPackage, List<NavDrawerItem> items) {
+		try {
+			JSONArray jArray = new JSONArray();
+			for (NavDrawerItem item : items) {
 				JSONObject obj = new JSONObject();
 				obj.put(NavDrawerItem.NAME_KEY, item.name);
-				obj.put(NavDrawerItem.APP_PACKAGE_KEY, item.appPackage);
 				obj.put(NavDrawerItem.URI_KEY, item.uri);
 				obj.put(NavDrawerItem.ICON_NAME_KEY, item.iconName);
 				obj.put(NavDrawerItem.FLAGS_KEY, item.flags);
 				jArray.put(obj);
-			} catch (JSONException e) {
-				e.printStackTrace();
 			}
+			JSONObject allItems = new JSONObject(app.getSettings().API_NAV_DRAWER_ITEMS_JSON.get());
+			allItems.put(appPackage, jArray);
+			app.getSettings().API_NAV_DRAWER_ITEMS_JSON.set(allItems.toString());
+		} catch (JSONException e) {
+			e.printStackTrace();
 		}
-		app.getSettings().API_NAV_DRAWER_ITEMS_JSON.set(jArray.toString());
 	}
 
-	private List<NavDrawerItem> getNavDrawerItems() {
-		List<NavDrawerItem> res = new ArrayList<>();
+	private Map<String, List<NavDrawerItem>> getNavDrawerItems() {
+		Map<String, List<NavDrawerItem>> res = new LinkedHashMap<>();
 		try {
-			JSONArray jArray = new JSONArray(app.getSettings().API_NAV_DRAWER_ITEMS_JSON.get());
-			for (int i = 0; i < jArray.length(); i++) {
-				JSONObject obj = jArray.getJSONObject(i);
-				res.add(new NavDrawerItem(
-						obj.optString(NavDrawerItem.NAME_KEY),
-						obj.optString(NavDrawerItem.APP_PACKAGE_KEY),
-						obj.optString(NavDrawerItem.URI_KEY),
-						obj.optString(NavDrawerItem.ICON_NAME_KEY),
-						obj.optInt(NavDrawerItem.FLAGS_KEY, -1)
-				));
+			JSONObject allItems = new JSONObject(app.getSettings().API_NAV_DRAWER_ITEMS_JSON.get());
+			for (Iterator<?> it = allItems.keys(); it.hasNext(); ) {
+				String appPackage = (String) it.next();
+				JSONArray jArray = allItems.getJSONArray(appPackage);
+				List<NavDrawerItem> list = new ArrayList<>();
+				for (int i = 0; i < jArray.length(); i++) {
+					JSONObject obj = jArray.getJSONObject(i);
+					list.add(new NavDrawerItem(
+							obj.optString(NavDrawerItem.NAME_KEY),
+							obj.optString(NavDrawerItem.URI_KEY),
+							obj.optString(NavDrawerItem.ICON_NAME_KEY),
+							obj.optInt(NavDrawerItem.FLAGS_KEY, -1)
+					));
+				}
+				res.put(appPackage, list);
 			}
 		} catch (JSONException e) {
 			e.printStackTrace();
@@ -1300,20 +1309,17 @@ public class OsmandAidlApi {
 	private static class NavDrawerItem {
 
 		static final String NAME_KEY = "name";
-		static final String APP_PACKAGE_KEY = "pack";
 		static final String URI_KEY = "uri";
 		static final String ICON_NAME_KEY = "icon_name";
 		static final String FLAGS_KEY = "flags";
 
 		private String name;
-		private String appPackage;
 		private String uri;
 		private String iconName;
 		private int flags;
 
-		NavDrawerItem(String name, String appPackage, String uri, String iconName, int flags) {
+		NavDrawerItem(String name, String uri, String iconName, int flags) {
 			this.name = name;
-			this.appPackage = appPackage;
 			this.uri = uri;
 			this.iconName = iconName;
 			this.flags = flags;
