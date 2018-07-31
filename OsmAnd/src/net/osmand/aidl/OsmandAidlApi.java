@@ -1202,7 +1202,11 @@ public class OsmandAidlApi {
 	}
 
 	boolean setNavDrawerItems(String appPackage, List<net.osmand.aidl.navdrawer.NavDrawerItem> items) {
-		if (!TextUtils.isEmpty(appPackage) && items != null && !items.isEmpty()) {
+		if (!TextUtils.isEmpty(appPackage) && items != null) {
+			if (items.isEmpty()) {
+				clearNavDrawerItems(appPackage);
+				return true;
+			}
 			List<NavDrawerItem> newItems = new ArrayList<>(MAX_NAV_DRAWER_ITEMS_PER_APP);
 			boolean success = true;
 			for (int i = 0; i < items.size() && i <= MAX_NAV_DRAWER_ITEMS_PER_APP; i++) {
@@ -1260,6 +1264,16 @@ public class OsmandAidlApi {
 			return id == 0 ? -1 : id;
 		}
 		return -1;
+	}
+
+	private void clearNavDrawerItems(String appPackage) {
+		try {
+			JSONObject allItems = new JSONObject(app.getSettings().API_NAV_DRAWER_ITEMS_JSON.get());
+			allItems.put(appPackage, null);
+			app.getSettings().API_NAV_DRAWER_ITEMS_JSON.set(allItems.toString());
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
 	}
 
 	private void saveNavDrawerItems(String appPackage, List<NavDrawerItem> items) {
