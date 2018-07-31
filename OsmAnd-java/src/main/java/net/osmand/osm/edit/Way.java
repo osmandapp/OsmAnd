@@ -39,6 +39,11 @@ public class Way extends Entity {
 		}
 	}
 
+	public Way(long id, TLongArrayList nodeIds, double lat, double lon) {
+		super(id, lat, lon);
+		this.nodeIds = nodeIds;
+	}
+
 	public void addNode(long id) {
 		if (nodeIds == null) {
 			nodeIds = new TLongArrayList();

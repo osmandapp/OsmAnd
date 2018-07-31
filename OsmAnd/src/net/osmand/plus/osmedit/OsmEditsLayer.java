@@ -13,7 +13,7 @@ import android.widget.Toast;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.osm.edit.Node;
+import net.osmand.osm.edit.Entity;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.views.ContextMenuLayer;
@@ -209,9 +209,9 @@ public class OsmEditsLayer extends OsmandMapLayer implements ContextMenuLayer.IC
 		if (o instanceof OsmPoint) {
 			if (o instanceof OpenstreetmapPoint) {
 				OpenstreetmapPoint objectInMotion = (OpenstreetmapPoint) o;
-				Node node = objectInMotion.getEntity();
-				node.setLatitude(position.getLatitude());
-				node.setLongitude(position.getLongitude());
+				Entity entity = objectInMotion.getEntity();
+				entity.setLatitude(position.getLatitude());
+				entity.setLongitude(position.getLongitude());
 				new SaveOsmChangeAsyncTask(mOsmChangeUtil, callback, objectInMotion).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 			} else if (o instanceof OsmNotesPoint) {
 				OsmNotesPoint objectInMotion = (OsmNotesPoint) o;
@@ -223,7 +223,7 @@ public class OsmEditsLayer extends OsmandMapLayer implements ContextMenuLayer.IC
 		}
 	}
 
-	static class SaveOsmChangeAsyncTask extends AsyncTask<Void, Void, Node> {
+	static class SaveOsmChangeAsyncTask extends AsyncTask<Void, Void, Entity> {
 		private final OpenstreetmapLocalUtil mOpenstreetmapUtil;
 		@Nullable
 		private final ContextMenuLayer.ApplyMovedObjectCallback mCallback;
@@ -237,16 +237,16 @@ public class OsmEditsLayer extends OsmandMapLayer implements ContextMenuLayer.IC
 		}
 
 		@Override
-		protected Node doInBackground(Void... params) {
-			Node node = objectInMotion.getEntity();
-			return mOpenstreetmapUtil.commitNodeImpl(objectInMotion.getAction(), node,
-					mOpenstreetmapUtil.getEntityInfo(node.getId()), "", false, null);
+		protected Entity doInBackground(Void... params) {
+			Entity entity = objectInMotion.getEntity();
+			return mOpenstreetmapUtil.commitEntityImpl(objectInMotion.getAction(), entity,
+					mOpenstreetmapUtil.getEntityInfo(entity.getId()), "", false, null);
 		}
 
 		@Override
-		protected void onPostExecute(Node newNode) {
+		protected void onPostExecute(Entity newEntity) {
 			if (mCallback != null) {
-				mCallback.onApplyMovedObject(newNode != null, objectInMotion);
+				mCallback.onApplyMovedObject(newEntity != null, objectInMotion);
 			}
 		}
 	}

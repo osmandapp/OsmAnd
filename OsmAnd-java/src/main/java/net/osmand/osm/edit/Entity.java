@@ -54,7 +54,7 @@ public abstract class Entity implements Serializable {
 			result = prime * result + ((type == null) ? 0 : type.hashCode());
 			return result;
 		}
-		
+
 		@Override
 		public String toString() {
 			return type + " " + id; //$NON-NLS-1$
@@ -108,6 +108,8 @@ public abstract class Entity implements Serializable {
 	private boolean dataLoaded;
 	private int modify;
 	private int version;
+	private double latitude;
+	private double longitude;
 	public static final int MODIFY_UNKNOWN = 0;
 	public static final int MODIFY_DELETED = -1;
 	public static final int MODIFY_MODIFIED = 1;
@@ -117,6 +119,11 @@ public abstract class Entity implements Serializable {
 		this.id = id;
 	}
 
+	public Entity(long id, double latitude, double longitude) {
+		this.id = id;
+		this.latitude = latitude;
+		this.longitude = longitude;
+	}
 
 	public Entity(Entity copy, long id) {
 		this.id = id;
@@ -124,6 +131,8 @@ public abstract class Entity implements Serializable {
 			putTagNoLC(t, copy.getTag(t));
 		}
 		this.dataLoaded = copy.dataLoaded;
+		this.latitude = copy.latitude;
+		this.longitude = copy.longitude;
 	}
 
 	public Set<String> getChangedTags() {
@@ -144,6 +153,22 @@ public abstract class Entity implements Serializable {
 
 	public long getId() {
 		return id;
+	}
+
+	public double getLatitude() {
+		return latitude;
+	}
+
+	public double getLongitude() {
+		return longitude;
+	}
+
+	public void setLatitude(double latitude) {
+		this.latitude = latitude;
+	}
+
+	public void setLongitude(double longitude) {
+		this.longitude = longitude;
 	}
 
 	public String removeTag(String key) {

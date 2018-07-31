@@ -19,6 +19,7 @@
     • Context menu: fix transport shields color in the night mode, fix additional menu sizes\n\n
     • Other bug fixes\n\n
     </string>
+    <string name="commiting_way">Committing way…</string>
     <string name="increase_search_radius_to">Increase search radius to %1$s</string>
     <string name="send_search_query_description"><![CDATA[We will send your search query: <b>\"%1$s\"</b>, as well as your location.<br/><br/>
         We do not collect personal information, we only need search data to improve the search algorithm.<br/>]]></string>

@@ -5,7 +5,7 @@ import android.support.annotation.Nullable;
 import net.osmand.PlatformUtil;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
-import net.osmand.osm.edit.Node;
+import net.osmand.osm.edit.Entity;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.util.Algorithms;
 
@@ -23,7 +23,7 @@ public class EditPoiData {
 	private Set<TagsChangedListener> mListeners = new HashSet<>();
 	private LinkedHashMap<String, String > tagValues = new LinkedHashMap<String, String>();
 	private boolean isInEdit = false;
-	private Node entity;
+	private Entity entity;
 	
 	public static final String POI_TYPE_TAG = "poi_type_tag";
 	public static final String REMOVE_TAG_PREFIX = "----";
@@ -34,11 +34,11 @@ public class EditPoiData {
 
 	private Set<String> changedTags = new HashSet<>();
 	
-	public EditPoiData(Node node, OsmandApplication app) {
+	public EditPoiData(Entity entity, OsmandApplication app) {
 		allTranslatedSubTypes = app.getPoiTypes().getAllTranslatedNames(true);
 		category = app.getPoiTypes().getOtherPoiCategory();
-		entity = node;
-		initTags(node);
+		this.entity = entity;
+		initTags(entity);
 		updateTypeTag(getPoiTypeString(), false);
 	}
 	
@@ -68,7 +68,7 @@ public class EditPoiData {
 		return s == null ? "" : s;
 	}
 
-	public Node getEntity() {
+	public Entity getEntity() {
 		return entity;
 	}
 	
@@ -90,10 +90,10 @@ public class EditPoiData {
 		}
 	}
 	
-	private void initTags(Node node) {
+	private void initTags(Entity entity) {
 		checkNotInEdit();
-		for (String s : node.getTagKeySet()) {
-			tryAddTag(s, node.getTag(s));
+		for (String s : entity.getTagKeySet()) {
+			tryAddTag(s, entity.getTag(s));
 		}
 		retrieveType();
 	}

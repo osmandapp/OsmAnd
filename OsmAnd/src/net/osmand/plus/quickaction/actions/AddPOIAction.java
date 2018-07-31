@@ -32,6 +32,7 @@ import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
+import net.osmand.osm.edit.Entity;
 import net.osmand.osm.edit.Node;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
@@ -91,9 +92,9 @@ public class AddPOIAction extends QuickAction {
 		node.replaceTags(getTagsFromParams());
 		EditPoiData editPoiData = new EditPoiData(node, activity.getMyApplication());
 		if (Boolean.valueOf(getParams().get(KEY_DIALOG))) {
-			Node newNode = editPoiData.getEntity();
+			Entity newEntity = editPoiData.getEntity();
 			EditPoiDialogFragment editPoiDialogFragment =
-					EditPoiDialogFragment.createInstance(newNode, true, getTagsFromParams());
+					EditPoiDialogFragment.createInstance(newEntity, true, getTagsFromParams());
 			editPoiDialogFragment.show(activity.getSupportFragmentManager(),
 					EditPoiDialogFragment.TAG);
 		} else {
@@ -129,11 +130,11 @@ public class AddPOIAction extends QuickAction {
 					newNode.putTagNoLC(tag.getKey(), tag.getValue());
 				}
 			}
-			EditPoiDialogFragment.commitNode(action, newNode, mOpenstreetmapUtil.getEntityInfo(newNode.getId()), "", false,
-					new CallbackWithObject<Node>() {
+			EditPoiDialogFragment.commitEntity(action, newNode, mOpenstreetmapUtil.getEntityInfo(newNode.getId()), "", false,
+					new CallbackWithObject<Entity>() {
 
 						@Override
-						public boolean processResult(Node result) {
+						public boolean processResult(Entity result) {
 							if (result != null) {
 								OsmEditingPlugin plugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
 								if (plugin != null && offlineEdit) {
