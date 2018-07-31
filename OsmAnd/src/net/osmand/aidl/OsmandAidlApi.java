@@ -1204,13 +1204,11 @@ public class OsmandAidlApi {
 	boolean addNavDrawerItems(String appPackage, Set<net.osmand.aidl.navdrawer.NavDrawerItem> items) {
 		if (!TextUtils.isEmpty(appPackage) && items != null && !items.isEmpty()) {
 			List<NavDrawerItem> existing = getNavDrawerItems();
-
 			for (Iterator<NavDrawerItem> it = existing.iterator(); it.hasNext(); ) {
 				if (appPackage.equals(it.next().appPackage)) {
 					it.remove();
 				}
 			}
-
 			int counter = 0;
 			for (net.osmand.aidl.navdrawer.NavDrawerItem item : items) {
 				existing.add(new NavDrawerItem(item.getName(), appPackage, item.getUri(), item.getIconName(), item.getFlags()));
@@ -1218,9 +1216,7 @@ public class OsmandAidlApi {
 					break;
 				}
 			}
-
 			saveNavDrawerItems(existing);
-
 			return true;
 		}
 		return false;
@@ -1232,17 +1228,14 @@ public class OsmandAidlApi {
 			if (TextUtils.isEmpty(item.name) || TextUtils.isEmpty(item.appPackage) || TextUtils.isEmpty(item.uri)) {
 				continue;
 			}
-
 			Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(item.uri));
 			if (intent.resolveActivity(pm) == null) {
 				intent = pm.getLaunchIntentForPackage(item.appPackage);
 			}
-
 			if (intent != null) {
 				if (item.flags != -1) {
 					intent.addFlags(item.flags);
 				}
-
 				final Intent finalIntent = intent;
 				adapter.addItem(new ContextMenuItem.ItemBuilder()
 						.setTitle(item.name)
