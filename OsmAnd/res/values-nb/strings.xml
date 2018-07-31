@@ -3030,4 +3030,8 @@
     <string name="coord_input_save_as_track_descr">Du har lagt til %1$s punkter. Skriv inn navnet på filen og trykk \"Lagre\".</string>
     <string name="point_deleted">Punkt %1$s slettet</string>
     <string name="shared_string_world">Verden</string>
+    <string name="increase_search_radius_to">Øk søkeradius til %1$s</string>
+    <string name="search_no_results_description">Resultatløst?
+\nLa det komme oss for øre.</string>
+    <string name="send_search_query">Send søkeforespørsel?</string>
     </resources>
