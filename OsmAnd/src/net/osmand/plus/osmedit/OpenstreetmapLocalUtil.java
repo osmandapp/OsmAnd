@@ -79,16 +79,21 @@ public class OpenstreetmapLocalUtil implements OpenstreetmapUtil {
 	@Override
 	public Entity loadEntity(Amenity n) {
 		PoiType poiType = n.getType().getPoiTypeByKeyName(n.getSubType());
-		if(n.getId() % 2 == 1 || poiType == null){
-			// that's way id
+		boolean isWay = n.getId() % 2 == 1; // check if amenity is a way
+		if (poiType == null) {
 			return null;
 		}
-		long nodeId = n.getId() >> 1;
+		long entityId = n.getId() >> 1;
 
-//		EntityId id = new Entity.EntityId(EntityType.NODE, nodeId);
-		Node entity = new Node(n.getLocation().getLatitude(),
-							   n.getLocation().getLongitude(),
-							   nodeId);
+//		EntityId id = new Entity.EntityId(EntityType.NODE, entityId);
+		Entity entity;
+		if (isWay) {
+			entity = new Way(entityId, null, n.getLocation().getLatitude(), n.getLocation().getLongitude());
+		} else {
+			entity = new Node(n.getLocation().getLatitude(),
+					n.getLocation().getLongitude(),
+					entityId);
+		}
 		entity.putTagNoLC(EditPoiData.POI_TYPE_TAG, poiType.getTranslation());
 		if(poiType.getOsmTag2() != null) {
 			entity.putTagNoLC(poiType.getOsmTag2(), poiType.getOsmValue2());
@@ -111,7 +116,9 @@ public class OpenstreetmapLocalUtil implements OpenstreetmapUtil {
 		}
 
 		// check whether this is node (because id of node could be the same as relation)
-		if(entity != null && MapUtils.getDistance(entity.getLatLon(), n.getLocation()) < 50){
+		if (entity instanceof Node && MapUtils.getDistance(entity.getLatLon(), n.getLocation()) < 50) {
+			return entity;
+		} else if (entity instanceof Way) {
 			return entity;
 		}
 		return null;
