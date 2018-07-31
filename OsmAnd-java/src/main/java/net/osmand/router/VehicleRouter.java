@@ -77,12 +77,20 @@ public interface VehicleRouter {
 	public boolean restrictionsAware();
 	
 	/**
+	 * @param obj
+	 * @return if road supports area routing
+	 */
+	public boolean isArea(RouteDataObject obj);
+	
+	/**
 	 * Calculate turn time 
 	 */
 	public double calculateTurnTime(RouteSegment segment, int segmentEnd, RouteSegment prev, int prevSegmentEnd);
 	
 		
 	public VehicleRouter build(Map<String, String> params);
+
+	
 
 	
 	

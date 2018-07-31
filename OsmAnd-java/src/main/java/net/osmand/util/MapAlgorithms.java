@@ -291,8 +291,8 @@ public class MapAlgorithms {
   	     return true;
   	}
   	
-  	public static boolean containsPoint(Collection<Node> polyNodes, double latitude, double longitude){
-		return  countIntersections(polyNodes, latitude, longitude) % 2 == 1;
+	public static boolean containsPoint(Collection<Node> polyNodes, double latitude, double longitude) {
+		return countIntersections(polyNodes, latitude, longitude) % 2 == 1;
 	}
 	
 	/**

@@ -24,6 +24,7 @@ import net.osmand.router.BinaryRoutePlanner.RouteSegment;
 import net.osmand.router.GeneralRouter.GeneralRouterProfile;
 import net.osmand.router.RoutePlannerFrontEnd.RouteCalculationMode;
 import net.osmand.util.Algorithms;
+import net.osmand.util.MapAlgorithms;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
@@ -40,8 +41,120 @@ public class RouteResultPreparation {
 	 */
 	List<RouteSegmentResult> prepareResult(RoutingContext ctx, FinalRouteSegment finalSegment) throws IOException {
 		List<RouteSegmentResult> result  = convertFinalSegmentToResults(ctx, finalSegment);
+		combineWayPointsForAreaRouting(ctx, result);
 		prepareResult(ctx, result);
 		return result;
+	}
+	
+	private static class CombineAreaRoutePoint {
+		int x31;
+		int y31;
+		int originalIndex;
+	}
+
+	private void combineWayPointsForAreaRouting(RoutingContext ctx, List<RouteSegmentResult> result) {
+		for(int i = 0; i < result.size(); i++) {
+			RouteSegmentResult rsr = result.get(i);
+			RouteDataObject obj = rsr.getObject();
+			boolean area = false;
+			if(obj.getPoint31XTile(0) == obj.getPoint31XTile(obj.getPointsLength() - 1) &&
+					obj.getPoint31YTile(0) == obj.getPoint31YTile(obj.getPointsLength() - 1)) {
+				area = true;
+			}
+			if(!area || !ctx.getRouter().isArea(obj)) {
+				continue;
+			}
+			List<CombineAreaRoutePoint> originalWay = new ArrayList<CombineAreaRoutePoint>();
+			List<CombineAreaRoutePoint> routeWay = new ArrayList<CombineAreaRoutePoint>();
+			for(int j = 0;  j < obj.getPointsLength(); j++) {
+				CombineAreaRoutePoint pnt = new CombineAreaRoutePoint();
+				pnt.x31 = obj.getPoint31XTile(j);
+				pnt.y31 = obj.getPoint31YTile(j);
+				pnt.originalIndex = j;
+				
+				originalWay.add(pnt);
+				if(j >= rsr.getStartPointIndex() && j <= rsr.getEndPointIndex()) {
+					routeWay.add(pnt);
+				} else if(j <= rsr.getStartPointIndex() && j >= rsr.getEndPointIndex()) {
+					routeWay.add(0, pnt);
+				}
+			}
+			int originalSize = routeWay.size();
+			simplifyAreaRouteWay(routeWay, originalWay);
+			int newsize = routeWay.size();
+			if (routeWay.size() != originalSize) {
+				RouteDataObject nobj = new RouteDataObject(obj);
+				nobj.pointsX = new int[newsize];
+				nobj.pointsY = new int[newsize];
+				for (int k = 0; k < newsize; k++) {
+					nobj.pointsX[k] = routeWay.get(k).x31;
+					nobj.pointsY[k] = routeWay.get(k).y31;
+				}
+				// in future point names might be used
+				nobj.restrictions = null;
+				nobj.restrictionsVia = null;
+				nobj.pointTypes = null;
+				nobj.pointNames = null;
+				nobj.pointNameTypes = null;
+				RouteSegmentResult nrsr = new RouteSegmentResult(nobj, 0, newsize - 1);
+				result.set(i, nrsr);
+			}
+		}
+	}
+
+	private void simplifyAreaRouteWay(List<CombineAreaRoutePoint> routeWay, List<CombineAreaRoutePoint> originalWay) {
+		boolean changed = true;
+		while (changed) {
+			changed = false;
+			int connectStart = -1;
+			int connectLen = 0;
+			double dist = 0;
+			int length = routeWay.size() - 1;
+			while (length > 0 && connectLen == 0) {
+				for (int i = 0; i < routeWay.size() - length; i++) {
+					CombineAreaRoutePoint p = routeWay.get(i);
+					CombineAreaRoutePoint n = routeWay.get(i + length);
+					if (segmentLineBelongsToPolygon(p, n, originalWay)) {
+						double ndist = BinaryRoutePlanner.squareRootDist(p.x31, p.y31, n.x31, n.y31);
+						if (ndist > dist) {
+							ndist = dist;
+							connectStart = i;
+							connectLen = length;
+						}
+					}
+				}
+				length--;
+			}
+			while (connectLen > 1) {
+				routeWay.remove(connectStart + 1);
+				connectLen--;
+				changed = true;
+			}
+		}
+		
+	}
+
+	private boolean segmentLineBelongsToPolygon(CombineAreaRoutePoint p, CombineAreaRoutePoint n,
+			List<CombineAreaRoutePoint> originalWay) {
+		int intersections = 0;
+		int mx = p.x31 / 2 + n.x31 / 2;
+		int my = p.y31 / 2 + n.y31 / 2;
+		for(int i = 1; i < originalWay.size(); i++) {
+			CombineAreaRoutePoint p2 = originalWay.get(i -1);
+			CombineAreaRoutePoint n2 = originalWay.get(i);
+			if(p.originalIndex != i && p.originalIndex != i - 1) {
+				if(n.originalIndex != i && n.originalIndex != i - 1) {
+					if(MapAlgorithms.linesIntersect(p.x31, p.y31, n.x31, n.y31, p2.x31, p2.y31, n2.x31, n2.y31)) {
+						return false;
+					}
+				}
+			}
+			int fx = MapAlgorithms.ray_intersect_x(p2.x31, p2.y31, n2.x31, n2.y31, my);
+			if (Integer.MIN_VALUE != fx && mx >= fx) {
+				intersections++;
+			}
+		}
+		return intersections % 2 == 1;
 	}
 
 	List<RouteSegmentResult> prepareResult(RoutingContext ctx, List<RouteSegmentResult> result) throws IOException {

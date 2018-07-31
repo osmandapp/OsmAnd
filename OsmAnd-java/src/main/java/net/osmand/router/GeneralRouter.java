@@ -68,7 +68,8 @@ public class GeneralRouter implements VehicleRouter {
 		ROUTING_OBSTACLES("obstacle"),
 		ONEWAY("oneway"),
 		PENALTY_TRANSITION("penalty_transition"),
-		OBSTACLE_SRTM_ALT_SPEED("obstacle_srtm_alt_speed");
+		OBSTACLE_SRTM_ALT_SPEED("obstacle_srtm_alt_speed"),
+		AREA("area");
 		public final String nm; 
 		RouteDataObjectAttribute(String name) {
 			nm = name;
@@ -342,6 +343,11 @@ public class GeneralRouter implements VehicleRouter {
 	@Override
 	public int isOneWay(RouteDataObject road) {
 		return getObjContext(RouteDataObjectAttribute.ONEWAY).evaluateInt(road, 0);
+	}
+	
+	@Override
+	public boolean isArea(RouteDataObject road) {
+		return getObjContext(RouteDataObjectAttribute.AREA).evaluateInt(road, 0) == 1;
 	}
 	
 	@Override
