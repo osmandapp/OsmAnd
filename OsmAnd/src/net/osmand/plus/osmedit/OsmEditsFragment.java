@@ -820,12 +820,8 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 					OpenstreetmapPoint p = (OpenstreetmapPoint) point;
 					if (p.getAction() == a) {
 						Entity entity = p.getEntity();
-						if (entity != null) {
-							if (Entity.EntityType.valueOf(entity) == Entity.EntityType.NODE) {
-								writeNode(sz, (Node) p.getEntity());
-							} else if (Entity.EntityType.valueOf(entity) == Entity.EntityType.WAY) {
-								writeWay(sz, (Way) p.getEntity());
-							}
+						if (entity != null && entity instanceof Node) {
+							writeNode(sz, (Node) entity);
 						}
 					}
 				} else if (point.getGroup() == Group.BUG) {
@@ -853,31 +849,6 @@ public class OsmEditsFragment extends OsmAndListFragment implements SendPoiDialo
 				sz.attribute("", "version", "1");
 				writeTags(sz, p);
 				sz.endTag("", "node");
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-
-		private void writeWay(XmlSerializer sz, Way p) {
-			try {
-				sz.startTag("", "way");
-				sz.attribute("", "id", p.getId() + "");
-				sz.attribute("", "version", "1");
-				for (Long nodeRefId : p.getNodeIds().toArray()) {
-					String val = String.valueOf(nodeRefId);
-					if (val.isEmpty()) {
-						continue;
-					}
-					try {
-						sz.startTag("", "nd");
-						sz.attribute("", "ref", val);
-						sz.endTag("", "nd");
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-				}
-				writeTags(sz, p);
-				sz.endTag("", "way");
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

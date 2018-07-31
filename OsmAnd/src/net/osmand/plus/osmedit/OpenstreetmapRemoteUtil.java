@@ -298,7 +298,6 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 				ser.attribute(null, "generator", Version.getAppName(ctx)); //$NON-NLS-1$
 				if (n instanceof Node) {
 					writeNode((Node) n, info, ser, changeSetId, settings.USER_NAME.get());
-
 				} else if (n instanceof Way) {
 					writeWay((Way) n, info, ser, changeSetId, settings.USER_NAME.get());
 				}
