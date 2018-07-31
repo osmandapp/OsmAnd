@@ -3848,4 +3848,11 @@
 	<string name="poi_payment_contactless_yes">Snertilaust</string>
 	<string name="poi_payment_contactless_no">Ekki tekið við snertilausum kortum</string>
 
+<string name="poi_hazard_nuclear">Kjarnorkuvá</string>
+	<string name="poi_hazard_avalanche">Snjóflóðahætta</string>
+	<string name="poi_hazard_slippery_road">Hálka á vegi</string>
+	<string name="poi_hazard_flood">Flóðahætta</string>
+	<string name="poi_hazard_minefield">Jarðsprengjusvæði</string>
+
+
 </resources>
