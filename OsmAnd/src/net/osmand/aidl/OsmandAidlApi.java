@@ -1201,7 +1201,7 @@ public class OsmandAidlApi {
 		return true;
 	}
 
-	boolean addNavDrawerItems(String appPackage, List<net.osmand.aidl.navdrawer.NavDrawerItem> items) {
+	boolean setNavDrawerItems(String appPackage, List<net.osmand.aidl.navdrawer.NavDrawerItem> items) {
 		if (!TextUtils.isEmpty(appPackage) && items != null && !items.isEmpty()) {
 			List<NavDrawerItem> newItems = new ArrayList<>(MAX_NAV_DRAWER_ITEMS_PER_APP);
 			boolean success = true;

@@ -7,17 +7,17 @@ import android.support.annotation.NonNull;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AddNavDrawerItemsParams implements Parcelable {
+public class SetNavDrawerItemsParams implements Parcelable {
 
 	private String appPackage;
 	private List<NavDrawerItem> items;
 
-	public AddNavDrawerItemsParams(@NonNull String appPackage, @NonNull List<NavDrawerItem> items) {
+	public SetNavDrawerItemsParams(@NonNull String appPackage, @NonNull List<NavDrawerItem> items) {
 		this.appPackage = appPackage;
 		this.items = items;
 	}
 
-	protected AddNavDrawerItemsParams(Parcel in) {
+	protected SetNavDrawerItemsParams(Parcel in) {
 		appPackage = in.readString();
 		items = new ArrayList<>();
 		in.readTypedList(items, NavDrawerItem.CREATOR);
@@ -42,15 +42,15 @@ public class AddNavDrawerItemsParams implements Parcelable {
 		return 0;
 	}
 
-	public static final Creator<AddNavDrawerItemsParams> CREATOR = new Creator<AddNavDrawerItemsParams>() {
+	public static final Creator<SetNavDrawerItemsParams> CREATOR = new Creator<SetNavDrawerItemsParams>() {
 		@Override
-		public AddNavDrawerItemsParams createFromParcel(Parcel in) {
-			return new AddNavDrawerItemsParams(in);
+		public SetNavDrawerItemsParams createFromParcel(Parcel in) {
+			return new SetNavDrawerItemsParams(in);
 		}
 
 		@Override
-		public AddNavDrawerItemsParams[] newArray(int size) {
-			return new AddNavDrawerItemsParams[size];
+		public SetNavDrawerItemsParams[] newArray(int size) {
+			return new SetNavDrawerItemsParams[size];
 		}
 	};
 }

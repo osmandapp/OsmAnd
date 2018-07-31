@@ -46,7 +46,7 @@ class TelegramApplication : Application(), OsmandHelperListener {
 				if (connected) {
 					val basePackage = "net.osmand.telegram"
 					val appPackage = if (BuildConfig.DEBUG) "$basePackage.debug" else basePackage
-					osmandAidlHelper.addOpenAppNavDrawerItem(
+					osmandAidlHelper.setNavDrawerItems(
 						appPackage,
 						listOf(getString(R.string.app_name)),
 						listOf("osmand_telegram://main_activity"),
