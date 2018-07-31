@@ -423,6 +423,9 @@ public class GeoPointParserUtil {
 			if (schemeSpecific == null) {
 				return null;
 			}
+			if(uri.getRawSchemeSpecificPart().contains("%2B")) {
+				schemeSpecific = schemeSpecific.replace("+", "%2B");
+			}
 
 			String name = null;
 			final Pattern namePattern = Pattern.compile("[\\+\\s]*\\((.*)\\)[\\+\\s]*$");
@@ -441,8 +444,9 @@ public class GeoPointParserUtil {
 				positionPart = schemeSpecific;
 			} else {
 				positionPart = schemeSpecific.substring(0, queryStartIndex);
-				if (queryStartIndex < schemeSpecific.length())
+				if (queryStartIndex < schemeSpecific.length()) {
 					queryPart = schemeSpecific.substring(queryStartIndex + 1);
+				}
 			}
 
 			final Pattern positionPattern = Pattern.compile(
