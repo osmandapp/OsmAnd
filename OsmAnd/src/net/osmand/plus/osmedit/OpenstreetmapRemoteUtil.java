@@ -225,16 +225,7 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 		}
 		ser.attribute(null, "changeset", changeSetId + ""); //$NON-NLS-1$ //$NON-NLS-2$
 
-		for (String k : n.getTagKeySet()) {
-			String val = n.getTag(k);
-			if (val.length() == 0 || k.length() == 0 || EditPoiData.POI_TYPE_TAG.equals(k) ||
-					k.startsWith(EditPoiData.REMOVE_TAG_PREFIX) || k.contains(EditPoiData.REMOVE_TAG_PREFIX))
-				continue;
-			ser.startTag(null, "tag"); //$NON-NLS-1$
-			ser.attribute(null, "k", k); //$NON-NLS-1$
-			ser.attribute(null, "v", val); //$NON-NLS-1$
-			ser.endTag(null, "tag"); //$NON-NLS-1$
-		}
+		writeTags(n, ser);
 		ser.endTag(null, "node"); //$NON-NLS-1$
 	}
 
@@ -243,16 +234,19 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 		ser.startTag(null, "way"); //$NON-NLS-1$
 		ser.attribute(null, "id", way.getId() + ""); //$NON-NLS-1$ //$NON-NLS-2$
 		if (i != null) {
-			// ser.attribute(null, "timestamp", i.getETimestamp());
-			// ser.attribute(null, "uid", i.getUid());
-			// ser.attribute(null, "user", i.getUser());
 			ser.attribute(null, "visible", i.getVisible()); //$NON-NLS-1$
 			ser.attribute(null, "version", i.getVersion()); //$NON-NLS-1$
 		}
 		ser.attribute(null, "changeset", changeSetId + ""); //$NON-NLS-1$ //$NON-NLS-2$
 
-		for (String k : way.getTagKeySet()) {
-			String val = way.getTag(k);
+		writeTags(way, ser);
+		ser.endTag(null, "way"); //$NON-NLS-1$
+	}
+
+	private void writeTags(Entity entity, XmlSerializer ser)
+			throws IllegalArgumentException, IllegalStateException, IOException {
+		for (String k : entity.getTagKeySet()) {
+			String val = entity.getTag(k);
 			if (val.length() == 0 || k.length() == 0 || EditPoiData.POI_TYPE_TAG.equals(k) ||
 					k.startsWith(EditPoiData.REMOVE_TAG_PREFIX) || k.contains(EditPoiData.REMOVE_TAG_PREFIX))
 				continue;
@@ -261,7 +255,6 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 			ser.attribute(null, "v", val); //$NON-NLS-1$
 			ser.endTag(null, "tag"); //$NON-NLS-1$
 		}
-		ser.endTag(null, "way"); //$NON-NLS-1$
 	}
 
 	private boolean isNewChangesetRequired() {
@@ -436,13 +429,13 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 					if (!isWay && entity instanceof Node) {
 						// check whether this is node (because id of node could be the same as relation)
 						if (MapUtils.getDistance(entity.getLatLon(), n.getLocation()) < 50) {
-							return replaceEditOsnTags(n, entity);
+							return replaceEditOsmTags(n, entity);
 						}
 					} else if (isWay && entity instanceof Way) {
 						LatLon loc = n.getLocation();
 						entity.setLatitude(loc.getLatitude());
 						entity.setLongitude(loc.getLongitude());
-						return replaceEditOsnTags(n, entity);
+						return replaceEditOsmTags(n, entity);
 					}
 				}
 				return null;
@@ -462,7 +455,7 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 		return null;
 	}
 
-	private Entity replaceEditOsnTags(Amenity amenity, Entity entity) {
+	private Entity replaceEditOsmTags(Amenity amenity, Entity entity) {
 		PoiCategory type = amenity.getType();
 		String subType = amenity.getSubType();
 		if (type != null && subType != null) {
