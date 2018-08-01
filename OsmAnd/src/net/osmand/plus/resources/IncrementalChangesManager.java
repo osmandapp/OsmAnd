@@ -81,7 +81,7 @@ public class IncrementalChangesManager {
 			List<String> list = new ArrayList<String>(regionUpdateFiles.monthUpdates.keySet());
 			for (String month : list) {
 				RegionUpdate ru = regionUpdateFiles.monthUpdates.get(month);
-				if (ru.obfCreated < dateCreated || checkIfItemOutdated(ru, dateCreated)) {
+				if (checkIfItemOutdated(ru, dateCreated)) {
 					log.info("Delete overlapping month update " + ru.file.getName());
 					resourceManager.closeFile(ru.file.getName());
 					regionUpdateFiles.monthUpdates.remove(month);
@@ -101,7 +101,7 @@ public class IncrementalChangesManager {
 					if(ru == null) {
 						continue;
 					}
-					if (ru.obfCreated < dateCreated || (checkIfItemOutdated(ru, dateCreated)) ||
+					if ((checkIfItemOutdated(ru, dateCreated)) ||
 							(monthRu != null && ru.obfCreated < monthRu.obfCreated)) {
 						log.info("Delete overlapping day update " + ru.file.getName());
 						resourceManager.closeFile(ru.file.getName());
@@ -420,7 +420,9 @@ public class IncrementalChangesManager {
 		boolean outdated = false;
 		Date strDate = null;
 		String date = ru.date;
-		if (!Algorithms.isEmpty(date) && ru.obfCreated == dateMainMapCreated) {
+		if (ru.obfCreated < dateMainMapCreated) {
+			outdated = true;
+		} else if (!Algorithms.isEmpty(date) && ru.obfCreated == dateMainMapCreated) {
 			try {
 				if (date.endsWith("00")) {
 					strDate = new SimpleDateFormat("yy_MM", Locale.getDefault()).parse(date);
