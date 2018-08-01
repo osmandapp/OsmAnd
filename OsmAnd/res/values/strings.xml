@@ -19,6 +19,7 @@
     • Context menu: fix transport shields color in the night mode, fix additional menu sizes\n\n
     • Other bug fixes\n\n
     </string>
+    <string name="commiting_way">Committing way…</string>
     <string name="increase_search_radius_to">Increase search radius to %1$s</string>
     <string name="send_search_query_description"><![CDATA[We will send your search query: <b>\"%1$s\"</b>, as well as your location.<br/><br/>
         We do not collect personal information, we only need search data to improve the search algorithm.<br/>]]></string>
@@ -30,7 +31,7 @@
     <string name="coord_input_add_point">Add point</string>
     <string name="coord_input_save_as_track">Save as track</string>
     <string name="coord_input_save_as_track_descr">You added %1$s points. Type a filename and tap \"Save\".</string>
-    <string name="error_notification_desc">Please send screenshoot of this notification to support@osmand.net</string>
+    <string name="error_notification_desc">Please send a screenshot of this notification to support@osmand.net</string>
     <string name="quick_action_edit_actions">Edit actions</string>
     <string name="get_osmand_live">Get OsmAnd Live to unlock all features: Daily map updates with unlimited downloads, all paid and free plugins, Wikipedia, Wikivoyage and much more.</string>
     <string name="unirs_render_descr">Modification of the default style to increase contrast of pedestrian and bicycle roads. Uses legacy Mapnik colors.</string>

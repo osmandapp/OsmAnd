@@ -33,7 +33,8 @@ import net.osmand.aidl.mapwidget.AMapWidget
 import net.osmand.aidl.mapwidget.AddMapWidgetParams
 import net.osmand.aidl.mapwidget.RemoveMapWidgetParams
 import net.osmand.aidl.mapwidget.UpdateMapWidgetParams
-import net.osmand.aidl.navdrawer.AddOpenAppNavDrawerItemParams
+import net.osmand.aidl.navdrawer.NavDrawerItem
+import net.osmand.aidl.navdrawer.SetNavDrawerItemsParams
 import net.osmand.aidl.navigation.NavigateGpxParams
 import net.osmand.aidl.navigation.NavigateParams
 import net.osmand.aidl.note.StartAudioRecordingParams
@@ -868,10 +869,14 @@ class OsmandAidlHelper(private val app: Application) {
 		return false
 	}
 
-	fun addOpenAppNavDrawerItem(itemName: String, appPackage: String, flags: Int): Boolean {
+	fun setNavDrawerItems(appPackage: String, names: List<String>, uris: List<String>, iconNames: List<String>, flags: List<Int>): Boolean {
 		if (mIOsmAndAidlInterface != null) {
 			try {
-				return mIOsmAndAidlInterface!!.addOpenAppNavDrawerItem(AddOpenAppNavDrawerItemParams(itemName, appPackage, flags))
+				val items = mutableListOf<NavDrawerItem>()
+				for (i in names.indices) {
+					items.add(NavDrawerItem(names[i], uris[i], iconNames[i], flags[i]))
+				}
+				return mIOsmAndAidlInterface!!.setNavDrawerItems(SetNavDrawerItemsParams(appPackage, items))
 			} catch (e: RemoteException) {
 				e.printStackTrace()
 			}

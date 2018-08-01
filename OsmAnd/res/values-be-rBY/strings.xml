@@ -3103,4 +3103,5 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="search_no_results_description">Niama vynikaŭ?
 \nRaspaviadzicie nam ab hetym.</string>
     <string name="send_search_query">Adpravić pašukovy zapyt?</string>
+    <string name="increase_search_radius_to">Pavialičyć radyus pošuku da %1$s</string>
     </resources>

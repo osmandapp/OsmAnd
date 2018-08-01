@@ -742,9 +742,7 @@ public class OsmandSettings {
 	public final CommonPreference<Boolean> SHOW_DASHBOARD_ON_START = new BooleanPreference("should_show_dashboard_on_start", false).makeGlobal();
 	public final CommonPreference<Boolean> SHOW_DASHBOARD_ON_MAP_SCREEN = new BooleanPreference("show_dashboard_on_map_screen", false).makeGlobal();
 
-	public final CommonPreference<String> API_NAV_DRAWER_ITEM_NAME = new StringPreference("api_nav_drawer_item_name", "").makeGlobal();
-	public final CommonPreference<String> API_NAV_DRAWER_ITEM_APP_PACKAGE = new StringPreference("api_nav_drawer_item_app_package", "").makeGlobal();
-	public final CommonPreference<Integer> API_NAV_DRAWER_ITEM_FLAGS = new IntPreference("api_nav_drawer_item_flags", -1).makeGlobal();
+	public final CommonPreference<String> API_NAV_DRAWER_ITEMS_JSON = new StringPreference("api_nav_drawer_items_json", "{}").makeGlobal();
 
 	public final CommonPreference<Integer> NUMBER_OF_STARTS_FIRST_XMAS_SHOWN = new IntPreference("number_of_starts_first_xmas_shown", 0).makeGlobal();
 

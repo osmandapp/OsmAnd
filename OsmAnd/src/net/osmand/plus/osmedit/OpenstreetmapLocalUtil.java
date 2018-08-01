@@ -5,9 +5,11 @@ import net.osmand.data.Amenity;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiType;
+import net.osmand.osm.edit.Entity;
 import net.osmand.osm.edit.EntityInfo;
 import net.osmand.osm.edit.Node;
 import net.osmand.osm.edit.OSMSettings.OSMTagKey;
+import net.osmand.osm.edit.Way;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -46,18 +48,24 @@ public class OpenstreetmapLocalUtil implements OpenstreetmapUtil {
 	}
 	
 	@Override
-	public Node commitNodeImpl(OsmPoint.Action action, Node n, EntityInfo info, String comment,
-							   boolean closeChangeSet, Set<String> changedTags){
-		Node newNode = n;
-		if (n.getId() == -1) {
-			newNode = new Node(n, Math.min(-2, plugin.getDBPOI().getMinID() - 1)); // generate local id for the created node
+	public Entity commitEntityImpl(OsmPoint.Action action, Entity entity, EntityInfo info, String comment,
+	                               boolean closeChangeSet, Set<String> changedTags) {
+		Entity newEntity = entity;
+		if (entity.getId() == -1) {
+			if (entity instanceof Node) {
+				newEntity = new Node((Node) entity, Math.min(-2, plugin.getDBPOI().getMinID() - 1));
+			} else if (entity instanceof Way) {
+				newEntity = new Way(Math.min(-2, plugin.getDBPOI().getMinID() - 1), ((Way) entity).getNodeIds(), entity.getLatitude(), entity.getLongitude());
+			} else {
+				return null;
+			}
 		}
 		OpenstreetmapPoint p = new OpenstreetmapPoint();
-		newNode.setChangedTags(changedTags);
-		p.setEntity(newNode);
+		newEntity.setChangedTags(changedTags);
+		p.setEntity(newEntity);
 		p.setAction(action);
 		p.setComment(comment);
-		if (p.getAction() == OsmPoint.Action.DELETE && newNode.getId() < 0) { //if it is our local poi
+		if (p.getAction() == OsmPoint.Action.DELETE && newEntity.getId() < 0) { //if it is our local poi
 			plugin.getDBPOI().deletePOI(p);
 		} else {
 			plugin.getDBPOI().addOpenstreetmap(p);
@@ -65,22 +73,27 @@ public class OpenstreetmapLocalUtil implements OpenstreetmapUtil {
 		for (OnNodeCommittedListener listener : listeners) {
 			listener.onNoteCommitted();
 		}
-		return newNode;
+		return newEntity;
 	}
 	
 	@Override
-	public Node loadNode(Amenity n) {
+	public Entity loadEntity(Amenity n) {
 		PoiType poiType = n.getType().getPoiTypeByKeyName(n.getSubType());
-		if(n.getId() % 2 == 1 || poiType == null){
-			// that's way id
+		boolean isWay = n.getId() % 2 == 1; // check if amenity is a way
+		if (poiType == null) {
 			return null;
 		}
-		long nodeId = n.getId() >> 1;
+		long entityId = n.getId() >> 1;
 
-//		EntityId id = new Entity.EntityId(EntityType.NODE, nodeId);
-		Node entity = new Node(n.getLocation().getLatitude(),
-							   n.getLocation().getLongitude(),
-							   nodeId);
+//		EntityId id = new Entity.EntityId(EntityType.NODE, entityId);
+		Entity entity;
+		if (isWay) {
+			entity = new Way(entityId, null, n.getLocation().getLatitude(), n.getLocation().getLongitude());
+		} else {
+			entity = new Node(n.getLocation().getLatitude(),
+					n.getLocation().getLongitude(),
+					entityId);
+		}
 		entity.putTagNoLC(EditPoiData.POI_TYPE_TAG, poiType.getTranslation());
 		if(poiType.getOsmTag2() != null) {
 			entity.putTagNoLC(poiType.getOsmTag2(), poiType.getOsmValue2());
@@ -103,7 +116,9 @@ public class OpenstreetmapLocalUtil implements OpenstreetmapUtil {
 		}
 
 		// check whether this is node (because id of node could be the same as relation)
-		if(entity != null && MapUtils.getDistance(entity.getLatLon(), n.getLocation()) < 50){
+		if (entity instanceof Node && MapUtils.getDistance(entity.getLatLon(), n.getLocation()) < 50) {
+			return entity;
+		} else if (entity instanceof Way) {
 			return entity;
 		}
 		return null;

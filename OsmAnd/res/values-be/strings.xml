@@ -3154,4 +3154,5 @@
     <string name="search_no_results_description">Няма вынікаў?
 \nРаспавядзіце нам аб гэтым.</string>
     <string name="send_search_query">Адправіць пашуковы запыт?</string>
+    <string name="increase_search_radius_to">Павялічыць радыус пошуку да %1$s</string>
     </resources>

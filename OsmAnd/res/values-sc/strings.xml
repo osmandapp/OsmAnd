@@ -3109,4 +3109,18 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="search_no_results_description">Perunu risultadu?
 \nFaghide·nos·lu ischire.</string>
     <string name="send_search_query">Imbiare sos tèrmines de chirca?</string>
+    <string name="release_3_1">• Nàvigu: Barra de progressu acontzada, cuncàmbiu lestru intre sos puntos de incumintzu e de acabu de s\'àndala
+\n
+\n • Marcadores de sa mapa: acontzu de s\'allughidura/istudadura de sos grupos, possibilidade de istichire marcadores dae sa mapa
+\n
+\n • Modìficas OSM: Possibilidade de modificare sas etichetas pro sos ogetos chi non sunt puntos, acontzu de su problema de sos cummentos chi mancaiant in sas notas, còpia de seguresa de sas modìficas
+\n
+\n • Anàlisi de Wikipedia e de Wikivoyage megioradas, sos documentos agiornados sunt giai disponìbiles
+\n
+\n • Menù de cuntestu: colores de sos iscudos de trasportu in sa modalidade pro sa note acontzados, mannàrias pro sos menùs additzionales acontzadas
+\n
+\n • Àteros acontzos de errores
+\n
+\n</string>
+    <string name="increase_search_radius_to">Ismànnia su raju de chirca finas a %1$s</string>
     </resources>

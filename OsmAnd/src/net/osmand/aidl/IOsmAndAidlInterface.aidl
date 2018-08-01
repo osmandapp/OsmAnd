@@ -53,7 +53,7 @@ import net.osmand.aidl.gpx.RemoveGpxParams;
 
 import net.osmand.aidl.maplayer.point.ShowMapPointParams;
 
-import net.osmand.aidl.navdrawer.AddOpenAppNavDrawerItemParams;
+import net.osmand.aidl.navdrawer.SetNavDrawerItemsParams;
 
 // NOTE: Add new methods at the end of file!!!
 
@@ -108,5 +108,5 @@ interface IOsmAndAidlInterface {
 
     boolean showMapPoint(in ShowMapPointParams params);
 
-    boolean addOpenAppNavDrawerItem(in AddOpenAppNavDrawerItemParams params);
+    boolean setNavDrawerItems(in SetNavDrawerItemsParams params);
 }

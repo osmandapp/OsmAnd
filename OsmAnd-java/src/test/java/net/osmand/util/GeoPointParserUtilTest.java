@@ -1,14 +1,24 @@
 package net.osmand.util;
 
+
 import java.net.URI;
 import java.net.URLEncoder;
 import java.util.Map;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import net.osmand.util.GeoPointParserUtil.GeoParsedPoint;
 
 public class GeoPointParserUtilTest {
+	
+	@Test
+	public void testGeoPointUrlDecode() {
+		// bug in get scheme getSchemeSpecificPart()
+		// equal results for : URI.create("geo:0,0?q=86HJV99P+29") && URI.create("geo:0,0?q=86HJV99P%2B29");
+		GeoParsedPoint test = GeoPointParserUtil.parse("geo:0,0?q=86HJV99P%2B29");
+		Assert.assertEquals(test.getQuery(), "86HJV99P+29");
+	}
 
 	@Test
 	public void testGeoPoint() {

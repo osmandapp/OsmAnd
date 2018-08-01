@@ -3,6 +3,7 @@ package net.osmand.plus.osmedit;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
 
+import net.osmand.osm.edit.Entity;
 import net.osmand.osm.edit.EntityInfo;
 import net.osmand.osm.edit.Node;
 import net.osmand.plus.dialogs.ProgressDialogFragment;
@@ -53,9 +54,9 @@ public class UploadOpenstreetmapPointAsyncTask
 				OpenstreetmapPoint p = (OpenstreetmapPoint) point;
 				EntityInfo entityInfo = null;
 				if (OsmPoint.Action.CREATE != p.getAction()) {
-					entityInfo = remotepoi.loadNode(p.getEntity());
+					entityInfo = remotepoi.loadEntity(p.getEntity());
 				}
-				Node n = remotepoi.commitNodeImpl(p.getAction(), p.getEntity(), entityInfo,
+				Entity n = remotepoi.commitEntityImpl(p.getAction(), p.getEntity(), entityInfo,
 						p.getComment(), false, null);
 				if (n != null) {
 					uploaded = true;

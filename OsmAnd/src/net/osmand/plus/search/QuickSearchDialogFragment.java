@@ -1871,6 +1871,11 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 						@Override
 						public void onlineSearchOnClick() {
+							final OsmandSettings settings = app.getSettings();
+							if (!settings.isInternetConnectionAvailable()) {
+								Toast.makeText(app, R.string.internet_not_available, Toast.LENGTH_LONG).show();
+								return;
+							}
 							startOnlineSearch();
 							mainSearchFragment.getAdapter().clear();
 							updateTabbarVisibility(false);

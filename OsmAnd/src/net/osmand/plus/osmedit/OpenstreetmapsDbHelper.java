@@ -5,7 +5,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import net.osmand.osm.edit.Entity;
 import net.osmand.osm.edit.Node;
+import net.osmand.osm.edit.Way;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -16,9 +18,10 @@ import java.util.List;
 import java.util.Map.Entry;
 import java.util.Set;
 
+
 public class OpenstreetmapsDbHelper extends SQLiteOpenHelper {
 
-	private static final int DATABASE_VERSION = 5;
+	private static final int DATABASE_VERSION = 6;
 	public static final String OPENSTREETMAP_DB_NAME = "openstreetmap"; //$NON-NLS-1$
 	private static final String OPENSTREETMAP_TABLE_NAME = "openstreetmaptable"; //$NON-NLS-1$
 	private static final String OPENSTREETMAP_COL_ID = "id"; //$NON-NLS-1$
@@ -28,11 +31,14 @@ public class OpenstreetmapsDbHelper extends SQLiteOpenHelper {
 	private static final String OPENSTREETMAP_COL_ACTION = "action"; //$NON-NLS-1$
 	private static final String OPENSTREETMAP_COL_COMMENT = "comment"; //$NON-NLS-1$
 	private static final String OPENSTREETMAP_COL_CHANGED_TAGS = "changed_tags";
+	private static final String OPENSTREETMAP_COL_ENTITY_TYPE = "entity_type";
+
 	private static final String OPENSTREETMAP_TABLE_CREATE = "CREATE TABLE " + OPENSTREETMAP_TABLE_NAME + " (" + //$NON-NLS-1$ //$NON-NLS-2$
 			OPENSTREETMAP_COL_ID + " bigint,"+
 			OPENSTREETMAP_COL_LAT + " double," + OPENSTREETMAP_COL_LON + " double," +
 			OPENSTREETMAP_COL_TAGS + " VARCHAR(2048)," +
-			OPENSTREETMAP_COL_ACTION + " TEXT, " + OPENSTREETMAP_COL_COMMENT + " TEXT, " + OPENSTREETMAP_COL_CHANGED_TAGS + " TEXT);";
+			OPENSTREETMAP_COL_ACTION + " TEXT, " + OPENSTREETMAP_COL_COMMENT + " TEXT," +
+			" " + OPENSTREETMAP_COL_CHANGED_TAGS + " TEXT, " + OPENSTREETMAP_COL_ENTITY_TYPE + " TEXT);";
 	List<OpenstreetmapPoint> cache = null; 	
 
 	public OpenstreetmapsDbHelper(Context context) {
@@ -53,6 +59,11 @@ public class OpenstreetmapsDbHelper extends SQLiteOpenHelper {
 		if (oldVersion < 5) {
 			db.execSQL("ALTER TABLE " + OPENSTREETMAP_TABLE_NAME + " ADD " + OPENSTREETMAP_COL_CHANGED_TAGS + " TEXT");
 		}
+		if (oldVersion < 6) {
+			db.execSQL("ALTER TABLE " + OPENSTREETMAP_TABLE_NAME + " ADD " + OPENSTREETMAP_COL_ENTITY_TYPE + " TEXT");
+			db.execSQL("UPDATE " + OPENSTREETMAP_TABLE_NAME + " SET " + OPENSTREETMAP_COL_ENTITY_TYPE + " = ? " +
+					"WHERE " + OPENSTREETMAP_COL_ENTITY_TYPE + " IS NULL", new String[]{Entity.EntityType.NODE.toString()});
+		}
 	}
 
 	public List<OpenstreetmapPoint> getOpenstreetmapPoints() {
@@ -66,7 +77,8 @@ public class OpenstreetmapsDbHelper extends SQLiteOpenHelper {
 		SQLiteDatabase db = getWritableDatabase();
 		if (db != null) {
 			StringBuilder tags = new StringBuilder();
-			Iterator<Entry<String, String>> eit = p.getEntity().getTags().entrySet().iterator();
+			Entity entity = p.getEntity();
+			Iterator<Entry<String, String>> eit = entity.getTags().entrySet().iterator();
 			while(eit.hasNext()) {
 				Entry<String, String> e = eit.next();
 				if(Algorithms.isEmpty(e.getKey()) || Algorithms.isEmpty(e.getValue())) {
@@ -97,18 +109,19 @@ public class OpenstreetmapsDbHelper extends SQLiteOpenHelper {
 							OPENSTREETMAP_COL_TAGS + ", " +
 							OPENSTREETMAP_COL_ACTION + ", " +
 							OPENSTREETMAP_COL_COMMENT + ", " +
-							OPENSTREETMAP_COL_CHANGED_TAGS + ")" +
-							" VALUES (?, ?, ?, ?, ?, ?, ?)",
+							OPENSTREETMAP_COL_CHANGED_TAGS + ", " +
+							OPENSTREETMAP_COL_ENTITY_TYPE + ")" +
+							" VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
 					new Object[]{p.getId(), p.getLatitude(), p.getLongitude(), tags.toString(),
-							OsmPoint.stringAction.get(p.getAction()), p.getComment(), chTags == null ? null : changedTags.toString()});
+							OsmPoint.stringAction.get(p.getAction()), p.getComment(),
+							chTags == null ? null : changedTags.toString(), Entity.EntityType.valueOf(entity)});
+			
 			db.close();
 			checkOpenstreetmapPoints();
 			return true;
 		}
 		return false;
 	}
-	
-	
 	
 	public boolean deletePOI(OpenstreetmapPoint p) {
 		SQLiteDatabase db = getWritableDatabase();
@@ -122,7 +135,6 @@ public class OpenstreetmapsDbHelper extends SQLiteOpenHelper {
 		return false;
 	}
 	
-
 	private List<OpenstreetmapPoint> checkOpenstreetmapPoints(){
 		SQLiteDatabase db = getReadableDatabase();
 		List<OpenstreetmapPoint> points = new ArrayList<OpenstreetmapPoint>();
@@ -134,27 +146,39 @@ public class OpenstreetmapsDbHelper extends SQLiteOpenHelper {
 					OPENSTREETMAP_COL_ACTION + "," +
 					OPENSTREETMAP_COL_COMMENT + "," +
 					OPENSTREETMAP_COL_TAGS + "," +
-					OPENSTREETMAP_COL_CHANGED_TAGS +
+					OPENSTREETMAP_COL_CHANGED_TAGS + "," +
+					OPENSTREETMAP_COL_ENTITY_TYPE +
 					" FROM " + OPENSTREETMAP_TABLE_NAME, null);
 			if (query.moveToFirst()) {
 				do {
 					OpenstreetmapPoint p = new OpenstreetmapPoint();
-					Node entity = new Node(query.getDouble(1),
-										   query.getDouble(2),
-										   query.getLong(0));
-					String tags = query.getString(5);
-					String[] split = tags.split("\\$\\$\\$");
-					for(int i=0; i<split.length - 1; i+= 2){
-						entity.putTagNoLC(split[i].trim(), split[i+1].trim());
+					String entityType = query.getString(7);
+					Entity entity = null;
+					if (entityType != null && Entity.EntityType.valueOf(entityType) == Entity.EntityType.NODE) {
+						entity = new Node(query.getDouble(1),
+								query.getDouble(2),
+								query.getLong(0));
+					} else if (entityType != null && Entity.EntityType.valueOf(entityType) == Entity.EntityType.WAY) {
+						entity = new Way(query.getLong(0), null,
+								query.getDouble(1),
+								query.getDouble(2));
 					}
-					String changedTags = query.getString(6);
-					if (changedTags != null) {
-						entity.setChangedTags(new HashSet<>(Arrays.asList(changedTags.split("\\$\\$\\$"))));
+					if (entity != null) {
+						String tags = query.getString(5);
+						String[] split = tags.split("\\$\\$\\$");
+						for (int i = 0; i < split.length - 1; i += 2) {
+							entity.putTagNoLC(split[i].trim(), split[i + 1].trim());
+						}
+						String changedTags = query.getString(6);
+						if (changedTags != null) {
+							entity.setChangedTags(new HashSet<>(Arrays.asList(changedTags.split("\\$\\$\\$"))));
+						}
+						p.setEntity(entity);
+						p.setAction(query.getString(3));
+						p.setComment(query.getString(4));
+						points.add(p);
 					}
-					p.setEntity(entity);
-					p.setAction(query.getString(3));
-					p.setComment(query.getString(4));
-					points.add(p);
+
 				} while (query.moveToNext());
 			}
 			query.close();

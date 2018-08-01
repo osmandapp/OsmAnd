@@ -2955,7 +2955,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
 	<string name="north_abbreviation">N</string>
 	<string name="optional_point_name">Optionaler Punktname</string>
     <string name="transport_nearby_routes_within">Nahegelegene Routen innerhalb von</string>
-    <string name="transport_nearby_routes">Innerhalb von</string>
+    <string name="transport_nearby_routes">Innerhalb</string>
     <string name="group_deleted">Gruppe gelöscht</string>
     <string name="rendering_attr_whiteWaterSports_name">Wildwasser-Sportarten</string>
     <string name="clear_all_intermediates">Alle Zwischenpunkte löschen</string>
@@ -3073,4 +3073,16 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="send_search_query">Suchanfrage senden?</string>
     <string name="shared_string_world">Welt</string>
     <string name="increase_search_radius_to">Vergrößerung des Suchradius auf %1$s</string>
+    <string name="release_3_1">• Navigation Fix: Fortschrittsbalken, schneller Wechsel des Start- und Endpunkts der Route
+\n
+\n• Map-Marker Fix: Gruppen An-/Ausschalten, Möglichkeit Marker auf der Karte zu verstecken
+\n
+\n• OSM-Bearbeitung: Bearbeitung für Nicht-Punkt-Objekte, Behebung fehlender Kommentare zu Notizen, Sicherung von Änderungen
+\n
+\n• Verbessere Wikipedia und Wikivoyage Parsing, aktualisierte Dateien sind bereits verfügbar
+\n
+\n• Kontextmenü: fixieren Sie die Transportschilderfarbe im Nachtmodus, fixieren Sie zusätzliche Menügrößen
+\n
+\n• Andere Fehlerbehebungen
+\n</string>
     </resources>

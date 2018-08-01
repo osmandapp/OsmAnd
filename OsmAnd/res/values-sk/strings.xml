@@ -1422,7 +1422,7 @@ Proporčná pamäť %4$s MB (Limit Androidu %5$s MB, Dalvik %6$s MB).</string>
     <string name="map_widget_right">Pravý panel</string>
     <string name="map_widget_left">Ľavý panel</string>
     <string name="configure_map">Nastaviť mapu</string>
-    <string name="search_radius_proximity">Vovnútri</string>
+    <string name="search_radius_proximity">Do vzdialenosti</string>
     <string name="rendering_category_routes">Trasy</string>
     <string name="rendering_attr_trainLightrailRoutes_name">Vlakové linky</string>
     <string name="rendering_attr_tramRoutes_name">Električkové linky</string>
@@ -2853,7 +2853,7 @@ Zodpovedá oblasti: %1$s x %2$s</string>
 	<string name="north_abbreviation">S</string>
 	<string name="optional_point_name">Voliteľný názov bodu</string>
     <string name="transport_nearby_routes_within">Blízke trasy do</string>
-    <string name="transport_nearby_routes">Vovnútri</string>
+    <string name="transport_nearby_routes">Do vzdialenosti</string>
     <string name="rendering_attr_whiteWaterSports_name">Divoká voda</string>
     <string name="group_deleted">Skupina odstránená</string>
     <string name="waypoints_removed_from_map_markers">Body trasy odstránené z mapových značiek</string>
@@ -2965,4 +2965,22 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="coord_input_save_as_track_descr">Pridali ste %1$s bodov. Zadajte názov súboru a stlačte \"Uložiť\".</string>
     <string name="point_deleted">Bod %1$s vymazaný</string>
     <string name="shared_string_world">Celý svet</string>
+    <string name="release_3_1">• Navigácia: Opravený indikátor postupu, rýchle prepínanie začiatočného a koncového bodu trasy 
+\n 
+\n • Mapové značky: opravené zapínanie a vypínanie skupín, možnosť skryť značky z mapy 
+\n 
+\n • Úpravy OSM: Možnosť meniť značky nebodových objektov, oprava chýbajúcich komentárov na poznámkach, záloha úprav 
+\n 
+\n • Vylepšené čítanie Wikipédie a Wikivoyage, aktualizované súbory sú už k dispozícii 
+\n 
+\n • Kontextové menu: opravené farby znakov ciest v nočnom režime, opravené doplnkové veľkosti menu 
+\n 
+\n • Opravy ďalších chýb 
+\n 
+\n</string>
+    <string name="increase_search_radius_to">Zväčšiť polomer hľadania na %1$s</string>
+    <string name="send_search_query_description">Odošleme váš vyhľadávaciu požiadavku: <b>\"%1$s\"</b>, ako aj vašu polohu.<br/><br/> Nezbierame osobné údaje, potrebujeme len údaje vyhľadávania na vylepšenie vyhľadávací algoritmus.<br/></string>
+    <string name="search_no_results_description">Žiadne výsledky?
+\nPovedzte nám o tom.</string>
+    <string name="send_search_query">Odoslať vyhľadávaciu požiadavku?</string>
     </resources>

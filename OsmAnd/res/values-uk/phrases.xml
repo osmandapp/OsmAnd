@@ -183,7 +183,7 @@
 	<string name="poi_service_tyres">Шини</string>
 	<string name="poi_vehicle_inspection">Огляд автомобіля</string>
 	<string name="poi_car_wash">Мийка автомобіля</string>
-	<string name="poi_fuel">АЗС</string>
+	<string name="poi_fuel">АЗС;Автомобільна заправка;Автозаправка;Бензоколонка;Бензозаправка</string>
 	<string name="poi_fuel_diesel">Дизель</string>
 	<string name="poi_fuel_gtl_diesel">Високоякісний дизель</string>
 	<string name="poi_fuel_hgv_diesel">TIR дизель</string>
@@ -3825,4 +3825,41 @@
 
 <string name="poi_aerialway_zip_line">Зіплайн</string>
 
-	</resources>
+	<string name="poi_climbing_adventure">Пригоди з скелелазенням</string>
+
+	<string name="poi_via_ferrata">Віа феррата</string>
+	<string name="poi_glacier_type_icecap">Льодовиковий покрив</string>
+	<string name="poi_glacier_type_icefield">Льодовикове поле</string>
+	<string name="poi_glacier_type_plateau">Плато</string>
+	<string name="poi_glacier_type_valley">Долинний льодовик</string>
+	<string name="poi_glacier_type_outlet">Відтік</string>
+	<string name="poi_glacier_type_tidewater">Стічна вода</string>
+	<string name="poi_glacier_type_icefall">Льодоспад</string>
+	<string name="poi_glacier_type_rock">Скала</string>
+	<string name="poi_glacier_type_shelf">Шельфовий</string>
+	<string name="poi_glacier_type_remnant">Залишок</string>
+	<string name="poi_glacier_type_ice_tongue">Льодовий язик</string>
+
+	<string name="poi_glacier_ele_top">Найвища точка</string>
+	<string name="poi_glacier_ele_bottom">Найнижча точка</string>
+	<string name="poi_glacier_slope">Середній схил</string>
+
+	<string name="poi_checkpoint_hiking">Пішохідний контрольний пункт</string>
+	<string name="poi_checkpoint_type_stamp">Пункт штампування</string>
+	<string name="poi_checkpoint_type_needler">Голкова машина</string>
+	<string name="poi_checkpoint_type_quize">Вікторина</string>
+	<string name="poi_rock">Скеля</string>
+
+	<string name="poi_appliance">Магазин побутової техніки</string>
+
+	<string name="poi_outcrop">Оголення порід</string>
+
+	<string name="poi_hazard_nuclear">Радіаційна небезпека</string>
+	<string name="poi_hazard_erosion">Ерозійна небезпека</string>
+	<string name="poi_hazard_avalanche">Небезпека лавини</string>
+	<string name="poi_hazard_slippery_road">Слизька дорога</string>
+	<string name="poi_hazard_flood">Небезпека затоплення</string>
+	<string name="poi_hazard_minefield">Мінне поле</string>
+
+
+</resources>

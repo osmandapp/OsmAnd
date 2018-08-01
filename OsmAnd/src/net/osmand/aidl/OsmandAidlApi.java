@@ -6,10 +6,12 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.ParcelFileDescriptor;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.view.View;
@@ -42,7 +44,6 @@ import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
@@ -60,6 +61,9 @@ import net.osmand.plus.views.mapwidgets.TextInfoWidget;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -69,6 +73,9 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -120,6 +127,8 @@ public class OsmandAidlApi {
 	};
 
 	private static final int DEFAULT_ZOOM = 15;
+
+	private static final int MAX_NAV_DRAWER_ITEMS_PER_APP = 3;
 
 	private OsmandApplication app;
 	private Map<String, AMapWidget> widgets = new ConcurrentHashMap<>();
@@ -1192,40 +1201,142 @@ public class OsmandAidlApi {
 		return true;
 	}
 
-	boolean addOpenAppNavDrawerItem(String itemName, String appPackage, int flags) {
-		if (!TextUtils.isEmpty(itemName) && !TextUtils.isEmpty(appPackage)) {
-			OsmandSettings settings = app.getSettings();
-			settings.API_NAV_DRAWER_ITEM_NAME.set(itemName);
-			settings.API_NAV_DRAWER_ITEM_APP_PACKAGE.set(appPackage);
-			settings.API_NAV_DRAWER_ITEM_FLAGS.set(flags);
-			return true;
+	boolean setNavDrawerItems(String appPackage, List<net.osmand.aidl.navdrawer.NavDrawerItem> items) {
+		if (!TextUtils.isEmpty(appPackage) && items != null) {
+			if (items.isEmpty()) {
+				clearNavDrawerItems(appPackage);
+				return true;
+			}
+			List<NavDrawerItem> newItems = new ArrayList<>(MAX_NAV_DRAWER_ITEMS_PER_APP);
+			boolean success = true;
+			for (int i = 0; i < items.size() && i <= MAX_NAV_DRAWER_ITEMS_PER_APP; i++) {
+				net.osmand.aidl.navdrawer.NavDrawerItem item = items.get(i);
+				String name = item.getName();
+				String uri = item.getUri();
+				if (!TextUtils.isEmpty(name) && !TextUtils.isEmpty(uri)) {
+					newItems.add(new NavDrawerItem(name, uri, item.getIconName(), item.getFlags()));
+				} else {
+					success = false;
+					break;
+				}
+			}
+			if (success) {
+				saveNavDrawerItems(appPackage, newItems);
+			}
+			return success;
 		}
 		return false;
 	}
 
-	public void registerNavDrawerItem(final Activity activity, ContextMenuAdapter adapter) {
-		final OsmandSettings settings = app.getSettings();
-		final String itemName = settings.API_NAV_DRAWER_ITEM_NAME.get();
-		final String appPackage = settings.API_NAV_DRAWER_ITEM_APP_PACKAGE.get();
-		if (!TextUtils.isEmpty(itemName) && !TextUtils.isEmpty(appPackage)) {
-			final Intent intent = activity.getPackageManager().getLaunchIntentForPackage(appPackage);
-			if (intent != null) {
-				int flags = settings.API_NAV_DRAWER_ITEM_FLAGS.get();
-				if (flags != -1) {
-					intent.addFlags(flags);
+	public void registerNavDrawerItems(final Activity activity, ContextMenuAdapter adapter) {
+		PackageManager pm = activity.getPackageManager();
+		for (Map.Entry<String, List<NavDrawerItem>> entry : getNavDrawerItems().entrySet()) {
+			String appPackage = entry.getKey();
+			for (NavDrawerItem item : entry.getValue()) {
+				Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(item.uri));
+				if (intent.resolveActivity(pm) == null) {
+					intent = pm.getLaunchIntentForPackage(appPackage);
 				}
-
-				adapter.addItem(new ContextMenuItem.ItemBuilder()
-						.setTitle(itemName)
-						.setListener(new ContextMenuAdapter.ItemClickListener() {
-							@Override
-							public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int position, boolean isChecked, int[] viewCoordinates) {
-								activity.startActivity(intent);
-								return true;
-							}
-						})
-						.createItem());
+				if (intent != null) {
+					if (item.flags != -1) {
+						intent.addFlags(item.flags);
+					}
+					final Intent finalIntent = intent;
+					adapter.addItem(new ContextMenuItem.ItemBuilder()
+							.setTitle(item.name)
+							.setIcon(getIconId(item.iconName))
+							.setListener(new ContextMenuAdapter.ItemClickListener() {
+								@Override
+								public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int position, boolean isChecked, int[] viewCoordinates) {
+									activity.startActivity(finalIntent);
+									return true;
+								}
+							})
+							.createItem());
+				}
 			}
+		}
+	}
+
+	private int getIconId(@Nullable String iconName) {
+		if (!TextUtils.isEmpty(iconName)) {
+			int id = app.getResources().getIdentifier(iconName, "drawable", app.getPackageName());
+			return id == 0 ? -1 : id;
+		}
+		return -1;
+	}
+
+	private void clearNavDrawerItems(String appPackage) {
+		try {
+			JSONObject allItems = new JSONObject(app.getSettings().API_NAV_DRAWER_ITEMS_JSON.get());
+			allItems.put(appPackage, null);
+			app.getSettings().API_NAV_DRAWER_ITEMS_JSON.set(allItems.toString());
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void saveNavDrawerItems(String appPackage, List<NavDrawerItem> items) {
+		try {
+			JSONArray jArray = new JSONArray();
+			for (NavDrawerItem item : items) {
+				JSONObject obj = new JSONObject();
+				obj.put(NavDrawerItem.NAME_KEY, item.name);
+				obj.put(NavDrawerItem.URI_KEY, item.uri);
+				obj.put(NavDrawerItem.ICON_NAME_KEY, item.iconName);
+				obj.put(NavDrawerItem.FLAGS_KEY, item.flags);
+				jArray.put(obj);
+			}
+			JSONObject allItems = new JSONObject(app.getSettings().API_NAV_DRAWER_ITEMS_JSON.get());
+			allItems.put(appPackage, jArray);
+			app.getSettings().API_NAV_DRAWER_ITEMS_JSON.set(allItems.toString());
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private Map<String, List<NavDrawerItem>> getNavDrawerItems() {
+		Map<String, List<NavDrawerItem>> res = new LinkedHashMap<>();
+		try {
+			JSONObject allItems = new JSONObject(app.getSettings().API_NAV_DRAWER_ITEMS_JSON.get());
+			for (Iterator<?> it = allItems.keys(); it.hasNext(); ) {
+				String appPackage = (String) it.next();
+				JSONArray jArray = allItems.getJSONArray(appPackage);
+				List<NavDrawerItem> list = new ArrayList<>();
+				for (int i = 0; i < jArray.length(); i++) {
+					JSONObject obj = jArray.getJSONObject(i);
+					list.add(new NavDrawerItem(
+							obj.optString(NavDrawerItem.NAME_KEY),
+							obj.optString(NavDrawerItem.URI_KEY),
+							obj.optString(NavDrawerItem.ICON_NAME_KEY),
+							obj.optInt(NavDrawerItem.FLAGS_KEY, -1)
+					));
+				}
+				res.put(appPackage, list);
+			}
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		return res;
+	}
+
+	private static class NavDrawerItem {
+
+		static final String NAME_KEY = "name";
+		static final String URI_KEY = "uri";
+		static final String ICON_NAME_KEY = "icon_name";
+		static final String FLAGS_KEY = "flags";
+
+		private String name;
+		private String uri;
+		private String iconName;
+		private int flags;
+
+		NavDrawerItem(String name, String uri, String iconName, int flags) {
+			this.name = name;
+			this.uri = uri;
+			this.iconName = iconName;
+			this.flags = flags;
 		}
 	}
 }
