@@ -20,6 +20,7 @@ import net.osmand.util.Algorithms;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.MessageFormat;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -82,7 +83,7 @@ public class SendSearchQueryBottomSheet extends MenuBottomSheetDialogFragment {
 										if (!obj.has("error")) {
 											Toast.makeText(app, getString(R.string.thank_you_for_feedback), Toast.LENGTH_SHORT).show();
 										} else {
-											Toast.makeText(app, "Error: " + obj.getString("error"), Toast.LENGTH_SHORT).show();
+											Toast.makeText(app, MessageFormat.format(getString(R.string.error_message_pattern), obj.getString("error")), Toast.LENGTH_SHORT).show();
 										}
 									} catch (JSONException e) {
 
