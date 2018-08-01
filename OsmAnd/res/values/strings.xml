@@ -12,21 +12,21 @@
 -->
 
     <string name="thank_you_for_feedback">Thank you for feedback</string>
-    <string name="poi_cannot_be_found">Node or way cannot be found.</string>
-    <string name="search_no_results_feedback">No search results?\nGive us feedback</string>
+    <string name="poi_cannot_be_found">Could not find node or waypoint.</string>
+    <string name="search_no_results_feedback">No search results?\nProvide feedback</string>
     <string name="release_3_1">
     • Navigation: Fix progress bar, fast swapping of the start and end point of the route\n\n
-    • Map markers: fix turn on/off groups, ability to hide markers from the map\n\n
+    • Map markers: Fix turn on/off groups, ability to hide markers from the map\n\n
     • OSM Edit: Ability to edit tags for non-point objects and ways, fix missing comments on notes, backup of edits\n\n
     • Improve Wikipedia and Wikivoyage parsing, updated files are already available\n\n
-    • Context menu: fix transport shields color in the night mode, fix additional menu sizes\n\n
-    • Boat navigation: support for waterway fairway\n\n
+    • Context menu: Fix transport shields color in the night mode, fix additional menu sizes\n\n
+    • Boat navigation: Support for waterway fairway\n\n
     • Other bug fixes\n\n
     </string>
-    <string name="commiting_way">Committing way…</string>
-    <string name="increase_search_radius_to">Increase search radius to %1$s</string>
-    <string name="send_search_query_description"><![CDATA[We will send your search query: <b>\"%1$s\"</b>, as well as your location.<br/><br/>
-        We do not collect personal information, we only need search data to improve the search algorithm.<br/>]]></string>
+    <string name="commiting_way">Committing waypoint…</string>
+    <string name="increase_search_radius_to">Extend search radius to %1$s</string>
+    <string name="send_search_query_description"><![CDATA[Your search query is sent: <b>\"%1$s\"</b>, as well as your location.<br/><br/>
+        Personal info is not collected, only search data is needed to improve the search.<br/>]]></string>
     <string name="send_search_query">Send search query?</string>
     <string name="shared_string_world">World</string>
     <string name="point_deleted">Point %1$s deleted</string>
@@ -36,7 +36,7 @@
     <string name="coord_input_save_as_track_descr">You added %1$s points. Type a filename and tap \"Save\".</string>
     <string name="error_notification_desc">Please send a screenshot of this notification to support@osmand.net</string>
     <string name="quick_action_edit_actions">Edit actions</string>
-    <string name="get_osmand_live">Get OsmAnd Live to unlock all features: Daily map updates with unlimited downloads, all paid and free plugins, Wikipedia, Wikivoyage and much more.</string>
+    <string name="get_osmand_live">Get OsmAnd Live to unlock all features: Daily map updates with unlimited downloads, all paid and gratis plugins, Wikipedia, Wikivoyage and much more.</string>
     <string name="unirs_render_descr">Modification of the default style to increase contrast of pedestrian and bicycle roads. Uses legacy Mapnik colors.</string>
     <string name="shared_string_bookmark">Bookmark</string>
     <string name="hide_full_description">Hide full description</string>
@@ -342,7 +342,7 @@
     <string name="mapillary_menu_filter_description">Filter images by submitter or by date. Only active in closeup zoom.</string>
     <string name="map_widget_ruler_control">Radius ruler</string>
     <string name="shared_string_permissions">Permissions</string>
-    <string name="import_gpx_failed_descr">OsmAnd cannot import the file. Please check if OsmAnd has permission to read file from its location.</string>
+    <string name="import_gpx_failed_descr">Could not import file. Please ensure OsmAnd has permission to read it.</string>
     <string name="distance_moving">Distance corrected</string>
     <string name="mapillary_image">Mapillary image</string>
     <string name="open_mapillary">Open Mapillary</string>
@@ -351,7 +351,7 @@
     <string name="improve_coverage_install_mapillary_desc">Install Mapillary to add one or more photos to this map location.</string>
     <string name="online_photos">Online photos</string>
     <string name="shared_string_add_photos">Add photos</string>
-    <string name="no_photos_descr">We do not have photos for this location.</string>
+    <string name="no_photos_descr">No photos for this location.</string>
     <string name="mapillary_action_descr">Contribute your own street-level view of this location via Mapillary.</string>
     <string name="mapillary_widget">Mapillary widget</string>
     <string name="mapillary_widget_descr">Allows quick contributions to Mapillary.</string>
@@ -686,7 +686,7 @@
     <string name="rendering_value_bold_name">Bold</string>
     <string name="no_map_markers_found">Please add map markers via map</string>
     <string name="no_waypoints_found">No waypoints found</string>
-    <string name="anonymous_user_hint">An anonymous user cannot:\n- Create groups;\n- Sync groups and devices with the server;\n- Manage groups and devices in a personal dashboard on the website.</string>
+    <string name="anonymous_user_hint">Anonymous users can not:\n- Create groups;\n- Sync groups and devices with the server;\n- Manage groups and devices in a personal dashboard on the website.</string>
     <string name="report">Report</string>
     
     <string name="storage_permission_restart_is_required">The app is now allowed to write to external storage, but needs to be started again to do so.</string>
@@ -715,7 +715,7 @@
     <string name="osm_editors_ranking">OSM Editors ranking</string>
     <string name="osm_live_subscription">OsmAnd Live subscription</string>
     <string name="osm_live_subscribe_btn">Subscribe</string>
-    <string name="osm_live_email_desc">Needed to provide you information about contributions.</string>
+    <string name="osm_live_email_desc">Needed to provide you info about contributions.</string>
     <string name="osm_live_user_public_name">Public Name</string>
     <string name="osm_live_hide_user_name">Do not show my name in reports</string>
     <string name="osm_live_support_region">Support region</string>
@@ -1508,7 +1508,7 @@
     <string name="routing_attr_weight_description">Specify permitted vehicle weight limit on routes.</string>
     <string name="routing_attr_height_name">Height limit</string>
     <string name="routing_attr_height_description">Specify vehicle height to be permitted on routes.</string>
-    <string name="android_19_location_disabled">Since Android version 4.4 (KitKat) you cannot download and update maps to the old storage folder (%s). Copy all OsmAnd files to new storage location?
+    <string name="android_19_location_disabled">Android 4.4 (KitKat) and later versions can not download or update maps to the old storage folder (%s). Copy all OsmAnd files to new storage location?
         \n Note 1: Your old files will remain untouched (but can be deleted manually).
         \n Note 2: In the new storage location it will not be possible to share files between OsmAnd and OsmAnd+.</string>
     <string name="copying_osmand_one_file_descr">Copying file (%s) to the new destination…</string>
@@ -2320,7 +2320,7 @@
     <string name="voice_stream_voice_call">Phone call audio (also to interrupt car BT stereos)</string>
     <string name="voice_stream_notification">Notification audio</string>
     <string name="voice_stream_music">Media/music audio</string>
-    <string name="warning_tile_layer_not_downloadable">The app cannot download the map layer %1$s, reinstalling it might help.</string>
+    <string name="warning_tile_layer_not_downloadable">Could not download map layer %1$s, reinstalling it might help.</string>
     <string name="overlay_transparency_descr">Modify the overlay transparency.</string>
     <string name="overlay_transparency">Overlay transparency</string>
     <string name="map_transparency_descr">Modify the base map transparency.</string>
