@@ -12,6 +12,8 @@ import android.text.TextUtils;
 import net.osmand.aidl.maplayer.point.AMapPoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
@@ -23,6 +25,9 @@ import java.io.IOException;
 import java.io.InputStream;
 
 public class AMapPointMenuController extends MenuController {
+
+	private static final float NO_SPEED = -1;
+	private static final int NO_ICON = 0;
 
 	private AMapPoint point;
 
@@ -74,11 +79,11 @@ public class AMapPointMenuController extends MenuController {
 
 	@Override
 	public Drawable getSecondLineTypeIcon() {
-		if (!Algorithms.isEmpty(point.getShortName())) {
-			return getIcon(R.drawable.ic_small_group);
-		} else {
-			return null;
+		int id = getPointTypeIconId();
+		if (id != NO_ICON) {
+			return getIcon(id);
 		}
+		return null;
 	}
 
 	@NonNull
@@ -103,8 +108,61 @@ public class AMapPointMenuController extends MenuController {
 	}
 
 	@Override
+	public int getAdditionalInfoColorId() {
+		return R.color.icon_color;
+	}
+
+	@Override
+	public CharSequence getAdditionalInfoStr() {
+		MapActivity activity = getMapActivity();
+		if (activity != null) {
+			float speed = getPointSpeed();
+			if (speed != NO_SPEED) {
+				String formatted = OsmAndFormatter.getFormattedSpeed(speed, activity.getMyApplication());
+				return activity.getString(R.string.map_widget_speed) + ": " + formatted;
+			}
+		}
+		return super.getAdditionalInfoStr();
+	}
+
+	@Override
+	public int getAdditionalInfoIconRes() {
+		if (getPointSpeed() != NO_SPEED) {
+			return R.drawable.ic_action_speed_16;
+		}
+		return super.getAdditionalInfoIconRes();
+	}
+
+	@Override
 	public boolean needStreetName() {
 		return false;
+	}
+
+	private int getPointTypeIconId() {
+		MapActivity activity = getMapActivity();
+		if (activity != null) {
+			String iconName = point.getParams().get(AMapPoint.POINT_TYPE_ICON_NAME_PARAM);
+			if (!TextUtils.isEmpty(iconName)) {
+				OsmandApplication app = activity.getMyApplication();
+				return app.getResources().getIdentifier(iconName, "drawable", app.getPackageName());
+			}
+		}
+		if (!TextUtils.isEmpty(point.getShortName())) {
+			return R.drawable.ic_small_group;
+		}
+		return NO_ICON;
+	}
+
+	private float getPointSpeed() {
+		String speed = point.getParams().get(AMapPoint.POINT_SPEED_PARAM);
+		if (!TextUtils.isEmpty(speed)) {
+			try {
+				return Float.parseFloat(speed);
+			} catch (NumberFormatException e) {
+				return NO_SPEED;
+			}
+		}
+		return NO_SPEED;
 	}
 
 	@Nullable
