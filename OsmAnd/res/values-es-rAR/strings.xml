@@ -2996,4 +2996,8 @@ Lon %2$s</string>
 \n</string>
     <string name="increase_search_radius_to">Aumentar el radio de búsqueda a %1$s</string>
     <string name="commiting_way">Enviando vía…</string>
+    <string name="thank_you_for_feedback">Gracias por su comentario</string>
+    <string name="poi_cannot_be_found">No se puede encontrar el nodo o la vía.</string>
+    <string name="search_no_results_feedback">¿Sin resultados de búsqueda?
+\nDanos tu opinión</string>
     </resources>
