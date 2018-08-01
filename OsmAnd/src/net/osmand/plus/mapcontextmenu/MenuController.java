@@ -528,10 +528,6 @@ public abstract class MenuController extends BaseMenuController implements Colla
 		return 0;
 	}
 
-	public boolean isShowInfoCompassSeparator() {
-		return false;
-	}
-
 	private boolean shouldShowMapSize() {
 		return indexItem != null && !downloaded;
 	}

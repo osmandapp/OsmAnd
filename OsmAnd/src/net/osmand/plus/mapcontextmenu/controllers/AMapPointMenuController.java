@@ -134,11 +134,6 @@ public class AMapPointMenuController extends MenuController {
 	}
 
 	@Override
-	public boolean isShowInfoCompassSeparator() {
-		return getPointSpeed() != NO_SPEED;
-	}
-
-	@Override
 	public boolean needStreetName() {
 		return false;
 	}

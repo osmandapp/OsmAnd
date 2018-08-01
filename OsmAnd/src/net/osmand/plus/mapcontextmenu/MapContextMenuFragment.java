@@ -1479,7 +1479,8 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			TextView additionalInfoTextView = (TextView) view.findViewById(R.id.additional_info_text_view);
 			CharSequence additionalInfoStr = menu.getAdditionalInfo();
 			boolean showAdditionalImage = false;
-			if (!TextUtils.isEmpty(additionalInfoStr)) {
+			boolean showAdditionalInfo = !TextUtils.isEmpty(additionalInfoStr);
+			if (showAdditionalInfo) {
 				int colorId = menu.getAdditionalInfoColor();
 				int additionalInfoIconRes = menu.getAdditionalInfoIconRes();
 				if (colorId != 0) {
@@ -1497,8 +1498,9 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			}
 			additionalInfoImageView.setVisibility(showAdditionalImage ? View.VISIBLE : View.GONE);
 
+			boolean showSeparator = showAdditionalInfo && menu.displayDistanceDirection();
 			view.findViewById(R.id.info_compass_separator)
-					.setVisibility(menu.isShowInfoCompassSeparator() ? View.VISIBLE : View.GONE);
+					.setVisibility(showSeparator ? View.VISIBLE : View.GONE);
 		}
 		updateCompassVisibility();
 		updateAdditionalInfoVisibility();
