@@ -432,7 +432,7 @@ public class IncrementalChangesManager {
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}
-			if (new Date(dateMainMapCreated).after(strDate)) {
+			if (strDate != null && dateMainMapCreated > strDate.getTime()) {
 				outdated = true;
 			}
 		}
