@@ -3,12 +3,18 @@ package net.osmand.plus.voice;
 import net.osmand.PlatformUtil;
 
 import org.apache.commons.logging.Log;
-//import org.liquidplayer.javascript.JSContext;
+import org.json.JSONObject;
+import org.mozilla.javascript.Callable;
+import org.mozilla.javascript.Context;
+import org.mozilla.javascript.Function;
+import org.mozilla.javascript.NativeJSON;
+import org.mozilla.javascript.Scriptable;
+import org.mozilla.javascript.ScriptableObject;
+import org.mozilla.javascript.WrapFactory;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -18,33 +24,63 @@ public class JSCommandBuilder extends CommandBuilder {
 
     private static final Log log = PlatformUtil.getLog(JSCommandBuilder.class);
 
-//    private JSContext jsContext;
+    private Context jsContext;
     private List<String> listStruct = new ArrayList<>();
+    ScriptableObject jsScope;
 
     public JSCommandBuilder(CommandPlayer commandPlayer) {
         super(commandPlayer);
-//        jsContext = new JSContext();
     }
 
     public void setJSContext(String path) {
-//        String script = null;
-//        try {
-//            byte[] encoded = Files.readAllBytes(Paths.get(path));
-//            script = new String(encoded, "UTF-8");
-//        } catch (IOException e) {
-//            log.error(e.getMessage());
-//        }
-//        if (script != null)
-////            jsContext.evaluateScript(script);
+        String script = readFileContents(path);
+        jsContext = Context.enter();
+        jsContext.setOptimizationLevel(-1);
+        jsScope = jsContext.initStandardObjects();
+        jsContext.evaluateString(jsScope, script, "JS", 1, null);
+    }
+
+    private Object convertStreetName(Map<String, String> streetName) {
+        return NativeJSON.parse(jsContext, jsScope, new JSONObject(streetName).toString(), new NullCallable());
+    }
+
+
+    private String readFileContents(String path) {
+        FileInputStream fis = null;
+        StringBuilder fileContent = new StringBuilder("");
+        try {
+            fis = new FileInputStream(new File(path));
+            byte[] buffer = new byte[1024];
+            int n;
+            while ((n = fis.read(buffer)) != -1)
+            {
+                fileContent.append(new String(buffer, 0, n));
+            }
+        } catch (IOException e) {
+            log.error(e.getMessage(), e);
+        }
+        return fileContent.toString();
     }
 
     public void setParameters(String metricCons, boolean tts) {
-        // TODO Set the parameters to js context
+//        jsContext.property("setMode").toFunction().call(jsContext, tts);
+        Object obj = jsScope.get("setMode", jsScope);
+
+        if (obj instanceof Function) {
+            Function jsFunction = (Function) obj;
+            jsFunction.call(jsContext, jsScope, jsScope, new Object[]{metricCons});
+            jsFunction.call(jsContext, jsScope, jsScope, new Object[]{tts});
+        }
     }
 
     private JSCommandBuilder addCommand(String name, Object... args){
         //  TODO add JSCore
-        listStruct.add(name);
+        Object obj = jsScope.get(name);
+        if (obj instanceof Function) {
+            Function jsFunction = (Function) obj;
+            Object jsResult = jsFunction.call(jsContext, jsScope, jsScope, args);
+            listStruct.add(Context.toString(jsResult));
+        }
         return this;
     }
 
@@ -53,7 +89,7 @@ public class JSCommandBuilder extends CommandBuilder {
     }
 
     public JSCommandBuilder goAhead(double dist, Map<String, String> streetName){
-        return addCommand(C_GO_AHEAD, dist, streetName);
+        return addCommand(C_GO_AHEAD, dist, convertStreetName(streetName));
     }
 
     public JSCommandBuilder makeUTwp(){
@@ -61,7 +97,7 @@ public class JSCommandBuilder extends CommandBuilder {
     }
 
     public JSCommandBuilder makeUT(Map<String, String> streetName){
-        return addCommand(C_MAKE_UT, streetName);
+        return addCommand(C_MAKE_UT, convertStreetName(streetName));
     }
     @Override
     public JSCommandBuilder speedAlarm(int maxSpeed, float speed){
@@ -81,20 +117,20 @@ public class JSCommandBuilder extends CommandBuilder {
     }
 
     public JSCommandBuilder makeUT(double dist, Map<String,String> streetName){
-        return addCommand(C_MAKE_UT, dist, streetName);
+        return addCommand(C_MAKE_UT, dist, convertStreetName(streetName));
     }
 
     public JSCommandBuilder prepareMakeUT(double dist, Map<String, String> streetName){
-        return addCommand(C_PREPARE_MAKE_UT, dist, streetName);
+        return addCommand(C_PREPARE_MAKE_UT, dist, convertStreetName(streetName));
     }
 
 
     public JSCommandBuilder turn(String param, Map<String, String> streetName) {
-        return addCommand(C_TURN, param, streetName);
+        return addCommand(C_TURN, param, convertStreetName(streetName));
     }
 
     public JSCommandBuilder turn(String param, double dist, Map<String, String> streetName){
-        return addCommand(C_TURN, param, dist, streetName);
+        return addCommand(C_TURN, param, dist, convertStreetName(streetName));
     }
 
     /**
@@ -104,15 +140,15 @@ public class JSCommandBuilder extends CommandBuilder {
      * @return
      */
     public JSCommandBuilder prepareTurn(String param, double dist, Map<String, String> streetName){
-        return addCommand(C_PREPARE_TURN, param, dist, streetName);
+        return addCommand(C_PREPARE_TURN, param, dist, convertStreetName(streetName));
     }
 
     public JSCommandBuilder prepareRoundAbout(double dist, int exit, Map<String, String> streetName){
-        return addCommand(C_PREPARE_ROUNDABOUT, dist, exit, streetName);
+        return addCommand(C_PREPARE_ROUNDABOUT, dist, exit, convertStreetName(streetName));
     }
 
     public JSCommandBuilder roundAbout(double dist, double angle, int exit, Map<String, String> streetName){
-        return addCommand(C_ROUNDABOUT, dist, angle, exit, streetName);
+        return addCommand(C_ROUNDABOUT, dist, angle, exit, convertStreetName(streetName));
     }
 
     public JSCommandBuilder roundAbout(double angle, int exit, Map<String, String> streetName) {
@@ -160,11 +196,11 @@ public class JSCommandBuilder extends CommandBuilder {
     }
 
     public JSCommandBuilder bearLeft(Map<String,String> streetName){
-        return addCommand(C_BEAR_LEFT, streetName);
+        return addCommand(C_BEAR_LEFT, convertStreetName(streetName));
     }
 
     public JSCommandBuilder bearRight(Map<String, String> streetName){
-        return addCommand(C_BEAR_RIGHT, streetName);
+        return addCommand(C_BEAR_RIGHT, convertStreetName(streetName));
     }
 
     @Override
@@ -201,5 +237,14 @@ public class JSCommandBuilder extends CommandBuilder {
     protected List<String> execute(){
         alreadyExecuted = true;
         return listStruct;
+    }
+
+    public class NullCallable implements Callable
+    {
+        @Override
+        public Object call(Context context, Scriptable scope, Scriptable holdable, Object[] objects)
+        {
+            return objects[1];
+        }
     }
 }

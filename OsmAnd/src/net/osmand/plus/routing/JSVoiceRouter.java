@@ -59,6 +59,7 @@ public class JSVoiceRouter extends VoiceRouter {
         } else {
             result.put("toRef", getSpeakablePointName(i.getRef()));
             result.put("toStreetName", getSpeakablePointName(i.getStreetName()));
+            result.put("toDest", "");
         }
         return result;
     }
@@ -67,6 +68,7 @@ public class JSVoiceRouter extends VoiceRouter {
      * Updates status of voice guidance
      * @param currentLocation
      */
+    @Override
     protected void updateStatus(Location currentLocation, boolean repeat) {
         // Directly after turn: goAhead (dist), unless:
         // < PREPARE_LONG_DISTANCE (e.g. 3500m):         playPrepareTurn (-not played any more-)

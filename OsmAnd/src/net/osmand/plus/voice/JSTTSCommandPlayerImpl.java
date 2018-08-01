@@ -7,11 +7,13 @@ import android.speech.tts.TextToSpeech;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 
+import net.osmand.IndexConstants;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.routing.VoiceRouter;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -46,7 +48,7 @@ public class JSTTSCommandPlayerImpl extends AbstractJSCommandPlayer {
     @Override
     public JSCommandBuilder newCommandBuilder() {
         JSCommandBuilder commandBuilder = new JSCommandBuilder(this);
-        commandBuilder.setJSContext(app.getSettings().VOICE_PROVIDER.get() + "en_tts.js");
+        commandBuilder.setJSContext(app.getAppPath(IndexConstants.VOICE_INDEX_DIR).getAbsolutePath() + "/" + voiceProvider + "/en_tts.js");
         commandBuilder.setParameters(app.getSettings().METRIC_SYSTEM.get().toHumanString(app), true);
         return commandBuilder;
     }
@@ -97,7 +99,7 @@ public class JSTTSCommandPlayerImpl extends AbstractJSCommandPlayer {
 
     @Override
     public boolean supportsStructuredStreetNames() {
-        return false;
+        return true;
     }
 
     @Override

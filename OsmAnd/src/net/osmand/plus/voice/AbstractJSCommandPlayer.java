@@ -4,7 +4,7 @@ import java.util.List;
 
 import alice.tuprolog.Struct;
 
-public class AbstractJSCommandPlayer implements CommandPlayer {
+public abstract class AbstractJSCommandPlayer implements CommandPlayer {
     @Override
     public String getCurrentVoice() {
         return null;
