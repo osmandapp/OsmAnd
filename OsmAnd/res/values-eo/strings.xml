@@ -1859,7 +1859,7 @@ Proporcia memoro %4$s MB (limito de Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="opening_hours">Malfermaj horoj</string>
     <string name="opening_changeset">Malfermado de ŝanĝaro…</string>
     <string name="closing_changeset">Fermado de ŝanĝaro…</string>
-    <string name="commiting_node">Enmetado de nodo…</string>
+    <string name="commiting_node">Alŝutado de nodo…</string>
     <string name="loading_poi_obj">Ŝargado de interesejoj…</string>
     <string name="auth_failed">Rajtigo malsukcesis</string>
     <string name="failed_op">malsukcesis</string>
