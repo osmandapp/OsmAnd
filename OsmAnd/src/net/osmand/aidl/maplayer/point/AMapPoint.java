@@ -12,6 +12,8 @@ import java.util.Map;
 
 public class AMapPoint implements Parcelable {
 	public static final String POINT_IMAGE_URI_PARAM = "point_image_uri_param";
+	public static final String POINT_SPEED_PARAM = "point_speed_param";
+	public static final String POINT_TYPE_ICON_NAME_PARAM = "point_type_icon_name_param";
 
 	private String id;
 	private String shortName;
