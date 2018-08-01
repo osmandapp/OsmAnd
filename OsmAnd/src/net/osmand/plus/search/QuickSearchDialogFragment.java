@@ -645,10 +645,10 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 					if (!app.getSettings().isInternetConnectionAvailable()) {
 						Toast.makeText(app, R.string.internet_not_available, Toast.LENGTH_LONG).show();
 					} else {
-						if (location != null && searchQuery != null) {
+						if (searchQuery != null) {
 							Bundle args = new Bundle();
 							SendSearchQueryBottomSheet fragment = new SendSearchQueryBottomSheet();
-							args.putString(MISSING_SEARCH_LOCATION_KEY, location.toString());
+							args.putString(MISSING_SEARCH_LOCATION_KEY, String.valueOf(location));
 							args.putString(MISSING_SEARCH_QUERY_KEY, searchQuery);
 							fragment.setArguments(args);
 							fragment.show(mapActivity.getSupportFragmentManager(), SendSearchQueryBottomSheet.TAG);

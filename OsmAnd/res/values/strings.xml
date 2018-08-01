@@ -11,6 +11,9 @@
 	Thx - Hardy
 -->
 
+	<string name="thank_you_for_feedback">Thank you for feedback</string>
+	<string name="poi_cannot_be_found">Node or way cannot be found.</string>
+	<string name="search_no_results_feedback">No search results?\nGive us feedback</string>
     <string name="release_3_1">
     • Navigation: Fix progress bar, fast swapping of the start and end point of the route\n\n
     • Map markers: fix turn on/off groups, ability to hide markers from the map\n\n
@@ -23,7 +26,6 @@
     <string name="increase_search_radius_to">Increase search radius to %1$s</string>
     <string name="send_search_query_description"><![CDATA[We will send your search query: <b>\"%1$s\"</b>, as well as your location.<br/><br/>
         We do not collect personal information, we only need search data to improve the search algorithm.<br/>]]></string>
-    <string name="search_no_results_description">No results?\nTell us about this.</string>
     <string name="send_search_query">Send search query?</string>
     <string name="shared_string_world">World</string>
     <string name="point_deleted">Point %1$s deleted</string>
@@ -2673,7 +2675,6 @@
     <string name="favourites_remove_dialog_success">Favorite point {0} deleted.</string>
     <string name="poi_edit_title">Edit POI</string>
     <string name="poi_create_title">Create POI</string>
-    <string name="poi_error_poi_not_found">Node cannot be found, or amenity consists of several nodes, which is not yet supported.</string>
     <string name="poi_remove_confirm_template">Delete {0} (comment)?</string>
     <string name="poi_remove_title">Delete POI</string>
     <string name="poi_remove_success">POI deleted</string>
