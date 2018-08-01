@@ -1279,6 +1279,13 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		return 0;
 	}
 
+	public boolean isShowInfoCompassSeparator() {
+		if (menuController != null) {
+			return menuController.isShowInfoCompassSeparator();
+		}
+		return false;
+	}
+
 	public boolean isMapDownloaded() {
 		return menuController != null && menuController.isMapDownloaded();
 	}

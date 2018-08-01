@@ -1,36 +1,5 @@
 package net.osmand.plus.mapcontextmenu;
 
-import static android.util.TypedValue.COMPLEX_UNIT_DIP;
-import static net.osmand.plus.mapcontextmenu.MenuBuilder.SHADOW_HEIGHT_TOP_DP;
-
-import java.util.List;
-
-import net.osmand.AndroidUtils;
-import net.osmand.data.LatLon;
-import net.osmand.data.PointDescription;
-import net.osmand.data.QuadPoint;
-import net.osmand.data.RotatedTileBox;
-import net.osmand.plus.LockableScrollView;
-import net.osmand.plus.OsmAndFormatter;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities.UpdateLocationViewCache;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BaseOsmAndFragment;
-import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
-import net.osmand.plus.mapcontextmenu.MenuController.MenuState;
-import net.osmand.plus.mapcontextmenu.MenuController.TitleButtonController;
-import net.osmand.plus.mapcontextmenu.MenuController.TitleProgressController;
-import net.osmand.plus.mapcontextmenu.controllers.TransportStopController;
-import net.osmand.plus.mapcontextmenu.other.MapRouteInfoMenu;
-import net.osmand.plus.transport.TransportStopRoute;
-import net.osmand.plus.views.AnimateDraggingMapThread;
-import net.osmand.plus.views.OsmandMapTileView;
-import net.osmand.plus.views.TransportStopsLayer;
-import net.osmand.plus.views.controls.HorizontalSwipeConfirm;
-import net.osmand.plus.views.controls.SingleTapConfirm;
-import net.osmand.util.Algorithms;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
@@ -65,6 +34,38 @@ import android.widget.LinearLayout;
 import android.widget.OverScroller;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import net.osmand.AndroidUtils;
+import net.osmand.data.LatLon;
+import net.osmand.data.PointDescription;
+import net.osmand.data.QuadPoint;
+import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.LockableScrollView;
+import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities.UpdateLocationViewCache;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
+import net.osmand.plus.mapcontextmenu.MenuController.MenuState;
+import net.osmand.plus.mapcontextmenu.MenuController.TitleButtonController;
+import net.osmand.plus.mapcontextmenu.MenuController.TitleProgressController;
+import net.osmand.plus.mapcontextmenu.controllers.TransportStopController;
+import net.osmand.plus.mapcontextmenu.other.MapRouteInfoMenu;
+import net.osmand.plus.transport.TransportStopRoute;
+import net.osmand.plus.views.AnimateDraggingMapThread;
+import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.TransportStopsLayer;
+import net.osmand.plus.views.controls.HorizontalSwipeConfirm;
+import net.osmand.plus.views.controls.SingleTapConfirm;
+import net.osmand.util.Algorithms;
+
+import java.util.List;
+
+import static android.util.TypedValue.COMPLEX_UNIT_DIP;
+import static net.osmand.plus.mapcontextmenu.MenuBuilder.SHADOW_HEIGHT_TOP_DP;
 
 
 public class MapContextMenuFragment extends BaseOsmAndFragment implements DownloadEvents {
@@ -1495,6 +1496,9 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 				additionalInfoTextView.setVisibility(View.GONE);
 			}
 			additionalInfoImageView.setVisibility(showAdditionalImage ? View.VISIBLE : View.GONE);
+
+			view.findViewById(R.id.info_compass_separator)
+					.setVisibility(menu.isShowInfoCompassSeparator() ? View.VISIBLE : View.GONE);
 		}
 		updateCompassVisibility();
 		updateAdditionalInfoVisibility();
