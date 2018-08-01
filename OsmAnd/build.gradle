@@ -364,7 +364,8 @@ dependencies {
 
 	implementation 'com.squareup.picasso:picasso:2.71828'
 	// JS core
-	//implementation 'com.github.LiquidPlayer:LiquidCore:0.4.6'
+    implementation group: 'org.mozilla', name: 'rhino', version: '1.7.9'
+
 // size restrictions
 // implementation 'com.ibm.icu:icu4j:50.1' 
 // implementation 'net.sf.trove4j:trove4j:3.0.3'
