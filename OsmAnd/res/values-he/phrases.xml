@@ -1837,4 +1837,20 @@
 	<string name="poi_resource_coal">פחם</string>
 	<string name="poi_resource_copper">נחושת</string>
 	<string name="poi_resource_diamond">יהלומים</string>
+	<string name="poi_climbing_deepwater_yes">חתירה יחידנית במים עמוקים: יש</string>
+	<string name="poi_climbing_deepwater_no">חתירה יחידנית במים עמוקים: אין</string>
+
+	<string name="poi_climbing_length">גובה הטיפוס</string>
+	<string name="poi_climbing_length_min">גובה טיפוס מזערי</string>
+	<string name="poi_climbing_length_max">גובה טיפוס מרבי</string>
+	<string name="poi_climbing_rock_limestone">סלע טיפוס: אבן גיר</string>
+	<string name="poi_climbing_rock_granite">סלע טיפוס: גרניט</string>
+	<string name="poi_climbing_rock_sandstone">סלע טיפוס: אבן חול</string>
+	<string name="poi_climbing_rock_quartzite">סלע טיפוס: קוורציט</string>
+	<string name="poi_climbing_rock_gneiss">סלע טיפוס: גנייס</string>
+	<string name="poi_climbing_rock_porphyry">סלע טיפוס: פורפיר</string>
+	<string name="poi_climbing_quality_solid">איכות טיפוס: אחידה</string>
+	<string name="poi_climbing_quality_fragile">איכות טיפוס: שבירה</string>
+	<string name="poi_climbing_bolted_yes">ידיות קבועות: יש</string>
+	<string name="poi_climbing_bolted_no">ידיות קבועות: אין</string>
 	</resources>

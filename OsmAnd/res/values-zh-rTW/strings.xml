@@ -3140,4 +3140,5 @@
 \n • 其他錯誤修復
 \n</string>
     <string name="increase_search_radius_to">將搜尋半徑增加到 %1$s</string>
+    <string name="commiting_way">正在提交路線…</string>
     </resources>
