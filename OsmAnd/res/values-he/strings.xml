@@ -3080,4 +3080,8 @@
 \n
 \n • תיקון תקלות נוספות
 \n</string>
+    <string name="thank_you_for_feedback">תודה לך על המשוב</string>
+    <string name="poi_cannot_be_found">לא ניתן למצוא את הצומת או הדרך.</string>
+    <string name="search_no_results_feedback">אין תוצאות חיפוש?
+\nנשמח לקבל משוב</string>
     </resources>
