@@ -280,17 +280,17 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 	}
 
 	private fun adjustSearchBox() {
-		val cornerRadiusFrom = if (appBarCollapsed) searchBoxHeight / 2 else 0
-		val cornerRadiusTo = if (appBarCollapsed) 0 else searchBoxHeight / 2
-		val marginFrom = if (appBarCollapsed) searchBoxSidesMargin else 0
-		val marginTo = if (appBarCollapsed) 0 else searchBoxSidesMargin
+//		val cornerRadiusFrom = if (appBarCollapsed) searchBoxHeight / 2 else 0
+//		val cornerRadiusTo = if (appBarCollapsed) 0 else searchBoxHeight / 2
+//		val marginFrom = if (appBarCollapsed) searchBoxSidesMargin else 0
+//		val marginTo = if (appBarCollapsed) 0 else searchBoxSidesMargin
 
-		val cornerAnimator = ObjectAnimator.ofFloat(
-			searchBoxBg,
-			"cornerRadius",
-			cornerRadiusFrom.toFloat(),
-			cornerRadiusTo.toFloat()
-		)
+//		val cornerAnimator = ObjectAnimator.ofFloat(
+//			searchBoxBg,
+//			"cornerRadius",
+//			cornerRadiusFrom.toFloat(),
+//			cornerRadiusTo.toFloat()
+//		)
 
 //		val marginAnimator = ValueAnimator.ofInt(marginFrom, marginTo)
 //		marginAnimator.addUpdateListener {
@@ -302,7 +302,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 
 		AnimatorSet().apply {
 			duration = 200
-			play(cornerAnimator)
+//			playTogether(cornerAnimator, marginAnimator)
 			addListener(object : AnimatorListenerAdapter() {
 				override fun onAnimationEnd(animation: Animator?) {
 					updateTitleTextColor()
