@@ -20,9 +20,6 @@ import net.osmand.util.Algorithms;
 
 import org.mozilla.javascript.ScriptableObject;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -71,7 +68,7 @@ public class JSTTSCommandPlayerImpl extends AbstractJSCommandPlayer {
     }
     private OsmandApplication app;
     private ApplicationMode appMode;
-    private VoiceRouter vrt;
+    private  VoiceRouter vrt;
     private String voiceProvider;
 
     private HashMap<String, String> params = new HashMap<String, String>();
@@ -95,7 +92,6 @@ public class JSTTSCommandPlayerImpl extends AbstractJSCommandPlayer {
         initializeEngine(app, ctx);
         params.put(TextToSpeech.Engine.KEY_PARAM_STREAM, app.getSettings().AUDIO_STREAM_GUIDANCE
                 .getModeValue(getApplicationMode()).toString());
-        setJSContext(app.getAppPath(IndexConstants.VOICE_INDEX_DIR).getAbsolutePath() + "/" + voiceProvider + "/" + language + "_tts.js");
     }
 
     private void initializeEngine(final Context ctx, final Activity act) {
@@ -224,34 +220,9 @@ public class JSTTSCommandPlayerImpl extends AbstractJSCommandPlayer {
     @Override
     public JSCommandBuilder newCommandBuilder() {
         JSCommandBuilder commandBuilder = new JSCommandBuilder(this);
-        commandBuilder.setJSContext(jsContext, jsScope);
+        commandBuilder.setJSContext(app.getAppPath(IndexConstants.VOICE_INDEX_DIR).getAbsolutePath() + "/" + voiceProvider + "/" + language + "_tts.js");
         commandBuilder.setParameters(app.getSettings().METRIC_SYSTEM.get().toTTSString(), true);
         return commandBuilder;
-    }
-
-    private String readFileContents(String path) {
-        StringBuilder fileContent = new StringBuilder("");
-        try {
-            FileInputStream fis = new FileInputStream(new File(path));
-            byte[] buffer = new byte[1024];
-            int n;
-            while ((n = fis.read(buffer)) != -1)
-            {
-                fileContent.append(new String(buffer, 0, n));
-            }
-            fis.close();
-        } catch (IOException e) {
-            log.error(e.getMessage(), e);
-        }
-        return fileContent.toString();
-    }
-
-    private void setJSContext(String path) {
-        String script = readFileContents(path);
-        jsContext = org.mozilla.javascript.Context.enter();
-        jsContext.setOptimizationLevel(-1);
-        jsScope = jsContext.initStandardObjects();
-        jsContext.evaluateString(jsScope, script, "JS", 1, null);
     }
 
     @Override
