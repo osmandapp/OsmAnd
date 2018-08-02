@@ -25,7 +25,7 @@
     </string>
     <string name="commiting_way">Committing waypoint…</string>
     <string name="increase_search_radius_to">Extend search radius to %1$s</string>
-    <string name="send_search_query_description"><![CDATA[Your search query is sent: <b>\"%1$s\"</b>, as well as your location.<br/><br/>
+    <string name="send_search_query_description"><![CDATA[Your search query will be sent to: <b>\"%1$s\"</b>, along with your location.<br/><br/>
         Personal info is not collected, only search data is needed to improve the search.<br/>]]></string>
     <string name="send_search_query">Send search query?</string>
     <string name="shared_string_world">World</string>
@@ -247,7 +247,7 @@
     <string name="route_is_calculated">Route calculated</string>
     <string name="round_trip">Round trip</string>
     <string name="plan_route_no_markers_toast">You must add at least one marker to use this function.</string>
-    <string name="osn_modify_dialog_error">Could not modify note</string>
+    <string name="osn_modify_dialog_error">Could not modify note.</string>
     <string name="osn_modify_dialog_title">Modify note</string>
     <string name="context_menu_item_modify_note">Modify OSM note</string>
     <string name="make_round_trip_descr">Add copy of starting point as destination.</string>
@@ -452,7 +452,7 @@
     <string name="shared_string_end_time">End time</string>
     <string name="shared_string_color">Color</string>
     <string name="select_gpx_folder">Select GPX file folder</string>
-    <string name="file_can_not_be_moved">File can not be moved.</string>
+    <string name="file_can_not_be_moved">Could not move file.</string>
     <string name="shared_string_move">Move</string>
     <string name="shared_string_gpx_tracks">Tracks</string>
     <string name="routing_attr_driving_style_name">Driving style</string>
@@ -686,7 +686,7 @@
     <string name="rendering_value_bold_name">Bold</string>
     <string name="no_map_markers_found">Please add map markers via map</string>
     <string name="no_waypoints_found">No waypoints found</string>
-    <string name="anonymous_user_hint">Anonymous users can not:\n- Create groups;\n- Sync groups and devices with the server;\n- Manage groups and devices in a personal dashboard on the website.</string>
+    <string name="anonymous_user_hint">Anonymous users are not allowed to:\n- Create groups;\n- Sync groups and devices with the server;\n- Manage groups and devices in a personal dashboard on the website.</string>
     <string name="report">Report</string>
     
     <string name="storage_permission_restart_is_required">The app is now allowed to write to external storage, but needs to be started again to do so.</string>
@@ -715,7 +715,7 @@
     <string name="osm_editors_ranking">OSM Editors ranking</string>
     <string name="osm_live_subscription">OsmAnd Live subscription</string>
     <string name="osm_live_subscribe_btn">Subscribe</string>
-    <string name="osm_live_email_desc">Needed to provide you info about contributions.</string>
+    <string name="osm_live_email_desc">Needed to inform you of your contributions.</string>
     <string name="osm_live_user_public_name">Public Name</string>
     <string name="osm_live_hide_user_name">Do not show my name in reports</string>
     <string name="osm_live_support_region">Support region</string>
@@ -845,13 +845,13 @@
     <string name="osn_reopen_dialog_title">Reopen note</string>
     <string name="osn_close_dialog_title">Close note</string>
     <string name="osn_add_dialog_success">Note created</string>
-    <string name="osn_add_dialog_error">Could not create note</string>
+    <string name="osn_add_dialog_error">Could not create note.</string>
     <string name="osn_close_dialog_success">Note closed</string>
-    <string name="osn_close_dialog_error">Could not close note</string>
+    <string name="osn_close_dialog_error">Could not close note.</string>
     <string name="osb_author_dialog_password">OSM password (optional)</string>
     <string name="osb_comment_dialog_message">Message</string>
     <string name="osb_comment_dialog_author">Author name</string>
-    <string name="osb_comment_dialog_error">Could not add comment</string>
+    <string name="osb_comment_dialog_error">Could not add comment.</string>
     <string name="osb_comment_dialog_success">Comment added</string>
     <string name="shared_string_commit">Commit</string>
     <string name="context_menu_item_delete_waypoint">Delete GPX waypoint?</string>
@@ -1508,7 +1508,7 @@
     <string name="routing_attr_weight_description">Specify permitted vehicle weight limit on routes.</string>
     <string name="routing_attr_height_name">Height limit</string>
     <string name="routing_attr_height_description">Specify vehicle height to be permitted on routes.</string>
-    <string name="android_19_location_disabled">Android 4.4 (KitKat) and later versions can not download or update maps to the old storage folder (%s). Copy all OsmAnd files to new storage location?
+    <string name="android_19_location_disabled">On Android 4.4 (KitKat) onwards, the old storage folder (%s) is deprecated. Copy all OsmAnd files to new storage location?
         \n Note 1: Your old files will remain untouched (but can be deleted manually).
         \n Note 2: In the new storage location it will not be possible to share files between OsmAnd and OsmAnd+.</string>
     <string name="copying_osmand_one_file_descr">Copying file (%s) to the new destination…</string>
@@ -1597,7 +1597,7 @@
     <string name="intermediate_items_sort_return">Optimized order of intermediate destinations en-route to the destination.</string>
     <string name="intermediate_items_sort_by_distance">Sort door-to-door</string>
     <string name="local_osm_changes_backup_successful">OSM change file was generated %1$s</string>
-    <string name="local_osm_changes_backup_failed">Could not back up OSM changes</string>
+    <string name="local_osm_changes_backup_failed">Could not back up OSM changes.</string>
     <string name="local_osm_changes_backup">Back up as OSM change</string>
     <string name="delete_point">Delete Point</string>
     <string name="plugin_distance_point_time">time</string>
@@ -1691,7 +1691,7 @@
     <string name="recording_context_menu_arecord">Take an audio note</string>
     <string name="recording_context_menu_vrecord">Take a video note</string>
     <string name="layer_recordings">Recording layer</string>
-    <string name="recording_can_not_be_played">Recording can not be played</string>
+    <string name="recording_can_not_be_played">Could not play recording.</string>
     <string name="recording_context_menu_delete">Delete recording</string>
     <string name="recording_context_menu_play">Play</string>
     <string name="recording_description">Recording %1$s %3$s %2$s</string>
@@ -2240,7 +2240,7 @@
     <string name="city_type_city">City</string>
     <string name="animate_route_off">Stop simulation</string>
     <string name="animate_route">Start simulation</string>
-    <string name="file_can_not_be_renamed">File can not be renamed.</string>
+    <string name="file_can_not_be_renamed">Could not rename file.</string>
     <string name="file_with_name_already_exists">File with that name already exists.</string>
     <string name="shared_string_gpx_route">GPX route</string>
     <string name="poi_query_by_name_matches_categories">Several POI categories found matching the query:</string>
@@ -2398,7 +2398,7 @@
     <string name="version_index_is_big_for_memory">The index \'\'{0}\'\' did not fit into memory</string>
     <string name="version_index_is_not_supported">The version of index \'\'{0}\'\' is not supported</string>
     <string name="osmand_routing_experimental">OsmAnd offline navigation is an experimental feature and it does not work for longer distances than about 20 km.\n\nNavigation temporarily switched to online CloudMade service.</string>
-    <string name="specified_dir_doesnt_exist">Can not find the specified folder.</string>
+    <string name="specified_dir_doesnt_exist">Could not find the specified folder.</string>
     <string name="osmand_net_previously_installed">All offline data in the old installed app will be supported by the new one, but Favorite points must be exported from the old app and then imported in the new one.</string>
     <string name="build_installed">Build {0} was installed ({1}).</string>
     <string name="downloading_build">Downloading build…</string>
@@ -2427,10 +2427,10 @@
     <string name="maps_could_not_be_downloaded">This map could not be downloaded</string>
     <string name="continuous_rendering">Continuous rendering</string>
     <string name="continuous_rendering_descr">Display continuous rendering instead of image-at-once.</string>
-    <string name="rendering_exception">Could not draw selected area</string>
+    <string name="rendering_exception">Could not draw selected area.</string>
     <string name="show_point_options">Use location…</string>
     <string name="renderer_load_sucess">Renderer loaded</string>
-    <string name="renderer_load_exception">Could not load renderer</string>
+    <string name="renderer_load_exception">Could not load renderer.</string>
     <string name="renderers">Vector renderer</string>
     <string name="renderers_descr">Choose the rendering appearance.</string>
     <string name="poi_context_menu_website">Show POI website</string>
@@ -2448,7 +2448,7 @@
     <!-- string name="map_route_by_gpx">Navigate using GPX</string-->
     <string name="gpx_files_not_found">No GPX files found in the tracks folder</string>
     <string name="layer_gpx_layer">GPX files…</string>
-    <string name="error_reading_gpx">Could not read GPX data</string>
+    <string name="error_reading_gpx">Could not read GPX data.</string>
     <string name="vector_data">Offline vector maps</string>
     <string name="transport_context_menu">Search transport at stop</string>
     <string name="poi_context_menu_modify">Modify POI</string>
@@ -2465,7 +2465,7 @@
     <string name="fav_saved_sucessfully">Favorites saved to {0}</string>
     <string name="no_fav_to_save">No Favorite points to save</string>
     <string name="share_fav_subject">Favorites shared via OsmAnd</string>
-    <string name="error_occurred_loading_gpx">Could not load GPX</string>
+    <string name="error_occurred_loading_gpx">Could not load GPX.</string>
     <string name="send_report">Send report</string>
     <string name="none_region_found">Could not find any downloaded maps on memory card.</string>
     <string name="poi_namefinder_query_empty">Type to find a POI</string>
@@ -2524,7 +2524,7 @@
     <string name="map_orientation_landscape">Landscape</string>
     <string name="map_screen_orientation">Screen orientation</string>
     <string name="map_screen_orientation_descr">Portrait, landscape, or device.</string>
-    <string name="opening_hours_not_supported">Opening hours format can not be changed</string>
+    <string name="opening_hours_not_supported">Could not change opening hours.</string>
     <string name="add_new_rule">Add new rule</string>
     <string name="transport_Routes">Routes</string>
     <string name="transport_Stop">Stop</string>
@@ -2542,8 +2542,8 @@
     <string name="show_transport_over_map">Show transport stops</string>
     <string name="hello">OsmAnd navigation app</string>
     <string name="update_poi_success">POI data was updated ({0} were loaded)</string>
-    <string name="update_poi_error_local">Could not update local POI list</string>
-    <string name="update_poi_error_loading">Could not load data from server</string>
+    <string name="update_poi_error_local">Could not update local POI list.</string>
+    <string name="update_poi_error_loading">Could not load data from server.</string>
     <string name="update_poi_no_offline_poi_index">No offline POI data available for this area</string>
     <string name="update_poi_is_not_available_for_zoom">Zooming in lets you update POIs</string>
     <string name="context_menu_item_update_poi">Update POI</string>
@@ -2593,9 +2593,9 @@
     <string name="loading_streets">Loading streets…</string>
     <string name="loading_cities">Loading cities…</string>
     <string name="poi">POI</string>
-    <string name="error_occurred_saving_gpx">Could not save GPX file</string>
-    <string name="error_calculating_route">Could not calculate route</string>
-    <string name="error_calculating_route_occured">Could not calculate route</string>
+    <string name="error_occurred_saving_gpx">Could not save GPX file.</string>
+    <string name="error_calculating_route">Could not calculate route.</string>
+    <string name="error_calculating_route_occured">Could not calculate route.</string>
     <string name="empty_route_calculated">Calculated route is empty</string>
     <string name="new_route_calculated_dist">New route calculated, distance</string>
     <string name="arrived_at_destination">You have arrived at your destination</string>
