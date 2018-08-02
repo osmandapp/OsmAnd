@@ -28,40 +28,44 @@ public class JSVoiceRouter extends VoiceRouter {
 
             // Issue 2377: Play Dest here only if not already previously announced, to avoid repetition
             if (includeDest == true) {
-                result.put("toRef", getSpeakablePointName(i.getRef()));
-                result.put("toStreetName", getSpeakablePointName(i.getStreetName()));
-                result.put("toDest", getSpeakablePointName(i.getDestinationName()));
+                result.put("toRef", getNonNullString(getSpeakablePointName(i.getRef())));
+                result.put("toStreetName", getNonNullString(getSpeakablePointName(i.getStreetName())));
+                result.put("toDest", getNonNullString(getSpeakablePointName(i.getDestinationName())));
             } else {
-                result.put("toRef", getSpeakablePointName(i.getRef()));
-                result.put("toStreetName", getSpeakablePointName(i.getStreetName()));
+                result.put("toRef", getNonNullString(getSpeakablePointName(i.getRef())));
+                result.put("toStreetName", getNonNullString(getSpeakablePointName(i.getStreetName())));
                 result.put("toDest", "");
             }
             if (currentSegment != null) {
                 // Issue 2377: Play Dest here only if not already previously announced, to avoid repetition
                 if (includeDest == true) {
                     RouteDataObject obj = currentSegment.getObject();
-                    result.put("fromRef", getSpeakablePointName(obj.getRef(settings.MAP_PREFERRED_LOCALE.get(),
-                            settings.MAP_TRANSLITERATE_NAMES.get(), currentSegment.isForwardDirection())));
-                    result.put("fromStreetName", getSpeakablePointName(obj.getName(settings.MAP_PREFERRED_LOCALE.get(),
-                            settings.MAP_TRANSLITERATE_NAMES.get())));
-                    result.put("fromDest", getSpeakablePointName(obj.getDestinationName(settings.MAP_PREFERRED_LOCALE.get(),
-                                    settings.MAP_TRANSLITERATE_NAMES.get(), currentSegment.isForwardDirection())));
+                    result.put("fromRef", getNonNullString(getSpeakablePointName(obj.getRef(settings.MAP_PREFERRED_LOCALE.get(),
+                            settings.MAP_TRANSLITERATE_NAMES.get(), currentSegment.isForwardDirection()))));
+                    result.put("fromStreetName", getNonNullString(getSpeakablePointName(obj.getName(settings.MAP_PREFERRED_LOCALE.get(),
+                            settings.MAP_TRANSLITERATE_NAMES.get()))));
+                    result.put("fromDest", getNonNullString(getSpeakablePointName(obj.getDestinationName(settings.MAP_PREFERRED_LOCALE.get(),
+                                    settings.MAP_TRANSLITERATE_NAMES.get(), currentSegment.isForwardDirection()))));
                 } else {
                     RouteDataObject obj = currentSegment.getObject();
-                    result.put("fromRef", getSpeakablePointName(obj.getRef(settings.MAP_PREFERRED_LOCALE.get(),
-                            settings.MAP_TRANSLITERATE_NAMES.get(), currentSegment.isForwardDirection())));
-                    result.put("fromStreetName", getSpeakablePointName(obj.getName(settings.MAP_PREFERRED_LOCALE.get(),
-                            settings.MAP_TRANSLITERATE_NAMES.get())));
+                    result.put("fromRef", getNonNullString(getSpeakablePointName(obj.getRef(settings.MAP_PREFERRED_LOCALE.get(),
+                            settings.MAP_TRANSLITERATE_NAMES.get(), currentSegment.isForwardDirection()))));
+                    result.put("fromStreetName", getNonNullString(getSpeakablePointName(obj.getName(settings.MAP_PREFERRED_LOCALE.get(),
+                            settings.MAP_TRANSLITERATE_NAMES.get()))));
                     result.put("fromDest", "");
                 }
             }
 
         } else {
-            result.put("toRef", getSpeakablePointName(i.getRef()));
-            result.put("toStreetName", getSpeakablePointName(i.getStreetName()));
+            result.put("toRef", getNonNullString(getSpeakablePointName(i.getRef())));
+            result.put("toStreetName", getNonNullString(getSpeakablePointName(i.getStreetName())));
             result.put("toDest", "");
         }
         return result;
+    }
+
+    private String getNonNullString(String speakablePointName) {
+        return  speakablePointName == null ? "" : speakablePointName;
     }
 
     /**
@@ -235,10 +239,10 @@ public class JSVoiceRouter extends VoiceRouter {
                 }
                 if (t.getValue() == TurnType.TL || t.getValue() == TurnType.TSHL || t.getValue() == TurnType.TSLL
                         || t.getValue() == TurnType.TU || t.getValue() == TurnType.KL ) {
-                    play.then().bearLeft( getSpeakableJSStreetName(currentSegment, next, false));
+                    play.then().bearLeft(getSpeakableJSStreetName(currentSegment, next, false));
                 } else if (t.getValue() == TurnType.TR || t.getValue() == TurnType.TSHR || t.getValue() == TurnType.TSLR
                         || t.getValue() == TurnType.TRU || t.getValue() == TurnType.KR) {
-                    play.then().bearRight( getSpeakableJSStreetName(currentSegment, next, false));
+                    play.then().bearRight(getSpeakableJSStreetName(currentSegment, next, false));
                 }
             }
             if (isPlay) {

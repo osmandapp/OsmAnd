@@ -10,7 +10,6 @@ import org.mozilla.javascript.Function;
 import org.mozilla.javascript.NativeJSON;
 import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.ScriptableObject;
-import org.mozilla.javascript.WrapFactory;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -23,12 +22,14 @@ import java.util.Map;
 public class JSCommandBuilder extends CommandBuilder {
 
     private static final Log log = PlatformUtil.getLog(JSCommandBuilder.class);
+    private static final String SET_MODE = "setMode";
+    private static final String SET_METRIC_CONST = "setMetricConst";
 
     private Context jsContext;
     private List<String> listStruct = new ArrayList<>();
-    ScriptableObject jsScope;
+    private ScriptableObject jsScope;
 
-    public JSCommandBuilder(CommandPlayer commandPlayer) {
+    JSCommandBuilder(CommandPlayer commandPlayer) {
         super(commandPlayer);
     }
 
@@ -46,16 +47,16 @@ public class JSCommandBuilder extends CommandBuilder {
 
 
     private String readFileContents(String path) {
-        FileInputStream fis = null;
         StringBuilder fileContent = new StringBuilder("");
         try {
-            fis = new FileInputStream(new File(path));
+            FileInputStream fis = new FileInputStream(new File(path));
             byte[] buffer = new byte[1024];
             int n;
             while ((n = fis.read(buffer)) != -1)
             {
                 fileContent.append(new String(buffer, 0, n));
             }
+            fis.close();
         } catch (IOException e) {
             log.error(e.getMessage(), e);
         }
@@ -63,18 +64,20 @@ public class JSCommandBuilder extends CommandBuilder {
     }
 
     public void setParameters(String metricCons, boolean tts) {
-//        jsContext.property("setMode").toFunction().call(jsContext, tts);
-        Object obj = jsScope.get("setMode", jsScope);
+        Object mode = jsScope.get(SET_MODE, jsScope);
+        Object metrics = jsScope.get(SET_METRIC_CONST, jsScope);
+        callVoidJsFunction(mode, new Object[]{tts});
+        callVoidJsFunction(metrics, new Object[]{metricCons});
+    }
 
-        if (obj instanceof Function) {
-            Function jsFunction = (Function) obj;
-            jsFunction.call(jsContext, jsScope, jsScope, new Object[]{metricCons});
-            jsFunction.call(jsContext, jsScope, jsScope, new Object[]{tts});
+    private void callVoidJsFunction(Object function, Object[] params) {
+        if (function instanceof Function) {
+            Function jsFunction = (Function) function;
+            jsFunction.call(jsContext, jsScope, jsScope, params);
         }
     }
 
     private JSCommandBuilder addCommand(String name, Object... args){
-        //  TODO add JSCore
         Object obj = jsScope.get(name);
         if (obj instanceof Function) {
             Function jsFunction = (Function) obj;
@@ -97,7 +100,7 @@ public class JSCommandBuilder extends CommandBuilder {
     }
 
     public JSCommandBuilder makeUT(Map<String, String> streetName){
-        return addCommand(C_MAKE_UT, convertStreetName(streetName));
+        return makeUT(-1, streetName);
     }
     @Override
     public JSCommandBuilder speedAlarm(int maxSpeed, float speed){
@@ -126,10 +129,10 @@ public class JSCommandBuilder extends CommandBuilder {
 
 
     public JSCommandBuilder turn(String param, Map<String, String> streetName) {
-        return addCommand(C_TURN, param, convertStreetName(streetName));
+        return turn(param, -1, streetName);
     }
 
-    public JSCommandBuilder turn(String param, double dist, Map<String, String> streetName){
+    public JSCommandBuilder turn(String param, double dist, Map<String, String> streetName) {
         return addCommand(C_TURN, param, dist, convertStreetName(streetName));
     }
 
