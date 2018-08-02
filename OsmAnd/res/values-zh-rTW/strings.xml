@@ -3127,20 +3127,24 @@
     <string name="search_no_results_description">沒有結果？
 \n告訴我們這件事。</string>
     <string name="send_search_query">送出搜尋查詢？</string>
-    <string name="release_3_1">• 導航：修復進度列，快速交換路線的起點和終點
+    <string name="release_3_1">• 導航：修復進度列，快速交換路線的起點和終點 
+\n 
+\n • 地圖標記：修復開/關群組，從地圖中隱藏標記的功能 
+\n 
+\n • OSM 編輯：能夠編輯非點物件標記，修復評論上遺漏的註解、編輯備份 
+\n 
+\n • 改善 Wikipedia 和維基導遊分析，更新檔案已經能用 
+\n 
+\n • 內容選單：在夜間模式下修復交通保護顏色，修復附加選單大小 
+\n 
+\n • 船艇導航：支援水運航道
 \n
-\n • 地圖標記：修復開/關群組，從地圖中隱藏標記的功能
-\n
-\n • OSM 編輯：能夠編輯非點物件標記，修復評論上遺漏的註解、編輯備份
-\n
-\n • 改善 Wikipedia 和維基導遊分析，更新檔案已經能用
-\n
-\n • 內容選單：在夜間模式下修復交通保護顏色，修復附加選單大小
-\n
-\n • 其他錯誤修復
+\n • 其他錯誤修復 
 \n</string>
     <string name="increase_search_radius_to">將搜尋半徑增加到 %1$s</string>
     <string name="commiting_way">正在提交路線…</string>
     <string name="thank_you_for_feedback">感謝您的意見反映</string>
     <string name="poi_cannot_be_found">找不到節點或路線。</string>
+    <string name="search_no_results_feedback">沒有搜尋結果？
+\n向我們反映</string>
     </resources>
