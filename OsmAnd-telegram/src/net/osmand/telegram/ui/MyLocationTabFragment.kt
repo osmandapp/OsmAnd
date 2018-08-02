@@ -95,7 +95,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 				if (collapsed != appBarCollapsed) {
 					appBarCollapsed = collapsed
 					adjustText()
-					adjustSearchBox()
+					adjustAppbar()
 					optionsBtn.visibility = if (collapsed) View.VISIBLE else View.GONE
 				}
 			}
@@ -279,44 +279,50 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 		description.gravity = gravity
 	}
 
+	private fun adjustAppbar() {
+		updateTitleTextColor()
+		if (Build.VERSION.SDK_INT >= 21) {
+			if (appBarCollapsed) {
+				appBarLayout.outlineProvider = appBarOutlineProvider
+			} else {
+				appBarLayout.outlineProvider = null
+			}
+		}
+	}
+
 	private fun adjustSearchBox() {
-//		val cornerRadiusFrom = if (appBarCollapsed) searchBoxHeight / 2 else 0
-//		val cornerRadiusTo = if (appBarCollapsed) 0 else searchBoxHeight / 2
-//		val marginFrom = if (appBarCollapsed) searchBoxSidesMargin else 0
-//		val marginTo = if (appBarCollapsed) 0 else searchBoxSidesMargin
+		val cornerRadiusFrom = if (appBarCollapsed) searchBoxHeight / 2 else 0
+		val cornerRadiusTo = if (appBarCollapsed) 0 else searchBoxHeight / 2
+		val marginFrom = if (appBarCollapsed) searchBoxSidesMargin else 0
+		val marginTo = if (appBarCollapsed) 0 else searchBoxSidesMargin
 
-//		val cornerAnimator = ObjectAnimator.ofFloat(
-//			searchBoxBg,
-//			"cornerRadius",
-//			cornerRadiusFrom.toFloat(),
-//			cornerRadiusTo.toFloat()
-//		)
+		val cornerAnimator = ObjectAnimator.ofFloat(
+			searchBoxBg,
+			"cornerRadius",
+			cornerRadiusFrom.toFloat(),
+			cornerRadiusTo.toFloat()
+		)
 
-//		val marginAnimator = ValueAnimator.ofInt(marginFrom, marginTo)
-//		marginAnimator.addUpdateListener {
-//			val value = it.animatedValue as Int
-//			val params = searchBox.layoutParams as LinearLayout.LayoutParams
-//			params.setMargins(value, params.topMargin, value, params.bottomMargin)
-//			searchBox.layoutParams = params
-//		}
+		val marginAnimator = ValueAnimator.ofInt(marginFrom, marginTo)
+		marginAnimator.addUpdateListener {
+			val value = it.animatedValue as Int
+			val params = searchBox.layoutParams as LinearLayout.LayoutParams
+			params.setMargins(value, params.topMargin, value, params.bottomMargin)
+			searchBox.layoutParams = params
+		}
 
 		AnimatorSet().apply {
 			duration = 200
-//			playTogether(cornerAnimator, marginAnimator)
+			playTogether(cornerAnimator, marginAnimator)
 			addListener(object : AnimatorListenerAdapter() {
 				override fun onAnimationEnd(animation: Animator?) {
-					updateTitleTextColor()
-					if (appBarCollapsed && Build.VERSION.SDK_INT >= 21) {
-						appBarLayout.outlineProvider = appBarOutlineProvider
-					}
+					adjustAppbar()
 				}
 			})
 			start()
 		}
 
-		if (!appBarCollapsed && Build.VERSION.SDK_INT >= 21) {
-			appBarLayout.outlineProvider = null
-		}
+		adjustAppbar()
 	}
 
 	private fun updateTitleTextColor() {
