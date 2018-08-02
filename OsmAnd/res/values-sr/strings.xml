@@ -428,7 +428,7 @@
 	<string name="osb_comment_dialog_author">Име аутора</string>
 	<string name="osb_comment_dialog_error">Коментар не може да се дода</string>
 	<string name="osb_comment_dialog_success">Коментар додат</string>
-	<string name="shared_string_commit">Отпреми</string>
+	<string name="shared_string_commit">Предај</string>
 	
     <string name="shared_string_location">Положај</string>
     <string name="lang_mk">Македонски</string>
@@ -2972,4 +2972,24 @@
 \nРеците нам о овоме.</string>
     <string name="send_search_query">Пошаљи упит претраге?</string>
     <string name="increase_search_radius_to">Повећај полупречник претраге на %1$s</string>
+    <string name="thank_you_for_feedback">Хвала за повратну информацију</string>
+    <string name="poi_cannot_be_found">Чвор или пут није нађен.</string>
+    <string name="search_no_results_feedback">Нема резултата у претрази?
+\nЈавите нам</string>
+    <string name="release_3_1">• Навођење: Исправка у траци прогреса, брза замена почетне и крајње тачке пута
+\n
+\n • Ознаке на карти: fix turn on/off groups, ability to hide markers from the map
+\n
+\n • OSM измене: Могућност измена ознака за објекте и путеве који нису обичне тачке, исправка недостајућих коментара на белешкама, прављење резервне копије измена
+\n
+\n • Побољшано парсирање Википедије и Wikivoyage-а, ажурирани фајлови су већ доступни
+\n
+\n • Контекстни мени: исправка боје превоза у ноћном режиму, исправка величине додатних менија
+\n
+\n • Бродско навођење: подршка за пловне канале
+\n
+\n • Остале исправке грешака
+\n
+\n</string>
+    <string name="commiting_way">Предајем пут…</string>
     </resources>
