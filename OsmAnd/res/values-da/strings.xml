@@ -3163,7 +3163,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="shared_string_gpx_files">GPX-filer</string>
     <string name="get_osmand_live">Abonner på OsmAnd Live og brug alle funktioner: daglige opdateringer af kort, alle gratis og betalte udvidelser, Wikipedia, Wikivoyage og meget mere.</string>
     <string name="quick_action_edit_actions">Rediger handlinger</string>
-    <string name="error_notification_desc">Send skærmbillede af meddelelsen til support@osmand.net</string>
+    <string name="error_notification_desc">Send et skærmbillede af meddelelsen til support@osmand.net</string>
     <string name="coord_input_edit_point">Rediger punkt</string>
     <string name="coord_input_add_point">Tilføj punkt</string>
     <string name="coord_input_save_as_track">Gem som spor</string>
@@ -3174,18 +3174,24 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="search_no_results_description">Ingen resultater?
 \nRapporter det.</string>
     <string name="send_search_query">Send søgeforespørgsel?</string>
-    <string name="release_3_1">• Navigation: Fix statuslinjen, hurtigt ombytning af start-og slutpunkt på ruten
+    <string name="release_3_1">• Navigation: rettet statuslinje, hurtigt ombytning af start-og slutpunkt på ruten 
+\n 
+\n• Kortmarkører: rettet tænd/sluk-grupper, evne til at skjule markører på kortet 
+\n 
+\n• OSM redigering: mulighed for at redigere mærker for ikke-punkt objekter, rettet manglende kommentarer til noter, sikkerhedskopiering af redigeringer 
+\n 
+\n• Forbedret Wikipedia og Wikivoyage parsing, opdaterede filer findes allerede 
+\n 
+\n• Kontekstmenu: rettet transport farve i nat-tilstand, rettet yderligere menustørrelser 
 \n
-\n• Kort markører: fastgør tænd/sluk-grupper, evne til at skjule markører på kortet
+\n• Bådnavigation: understøtter flodnavigation 
 \n
-\n• OSM redigering: mulighed for at redigere tags for ikke-punkt objekter, løs manglende kommentarer til noter, backup af redigeringer
-\n
-\n• Forbedre Wikipedia og Wikivoyage parsing, opdaterede filer findes allerede
-\n
-\n• Context menu: fix transport shields farve i nat-tilstand, fastsætte yderligere menu størrelser
-\n
-\n• Andre fejlrettelser
-\n
+\n• Andre fejlrettelser 
+\n 
 \n</string>
     <string name="increase_search_radius_to">Forøg søgeradius til %1$s</string>
+    <string name="thank_you_for_feedback">Tak for tilbagemelding</string>
+    <string name="poi_cannot_be_found">Node eller vej kan ikke findes.</string>
+    <string name="search_no_results_feedback">Ingen søgeresultater?
+\nGiv tilbagemelding</string>
     </resources>

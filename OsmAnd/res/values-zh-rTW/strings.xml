@@ -3141,4 +3141,6 @@
 \n</string>
     <string name="increase_search_radius_to">將搜尋半徑增加到 %1$s</string>
     <string name="commiting_way">正在提交路線…</string>
+    <string name="thank_you_for_feedback">感謝您的意見反映</string>
+    <string name="poi_cannot_be_found">找不到節點或路線。</string>
     </resources>
