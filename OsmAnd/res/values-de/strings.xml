@@ -3061,7 +3061,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="shared_string_gpx_files">GPX-Dateien</string>
     <string name="get_osmand_live">Holen Sie sich OsmAnd Live, um alle Funktionen freizuschalten: Tägliche Karten-Updates mit unbegrenzten Downloads, alle kostenpflichtigen und kostenlosen Plugins, Wikipedia, Wikivoyage und vieles mehr.</string>
     <string name="quick_action_edit_actions">Aktionen bearbeiten</string>
-    <string name="error_notification_desc">Bitte senden Sie Screenshots dieser Meldung an support@osmand.net</string>
+    <string name="error_notification_desc">Bitte senden Sie einen Screenshot dieser Meldung an support@osmand.net</string>
     <string name="coord_input_edit_point">Punkt bearbeiten</string>
     <string name="coord_input_add_point">Punkt hinzufügen</string>
     <string name="coord_input_save_as_track">Als Track speichern</string>
@@ -3073,16 +3073,17 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="send_search_query">Suchanfrage senden?</string>
     <string name="shared_string_world">Welt</string>
     <string name="increase_search_radius_to">Vergrößerung des Suchradius auf %1$s</string>
-    <string name="release_3_1">• Navigation Fix: Fortschrittsbalken, schneller Wechsel des Start- und Endpunkts der Route
+    <string name="release_3_1">• Navigation Fix: Fortschrittsbalken, schneller Wechsel des Start- und Endpunkts der Route 
+\n 
+\n • Map-Marker Fix: Gruppen An-/Ausschalten, Möglichkeit Marker auf der Karte zu verstecken 
+\n 
+\n • OSM-Bearbeitung: Bearbeitung für Nicht-Punkt-Objekte und Wege, Behebung fehlender Kommentare zu Notizen, Sicherung von Änderungen 
+\n 
+\n • Verbessere Wikipedia und Wikivoyage Parsing, aktualisierte Dateien sind bereits verfügbar 
+\n 
+\n • Kontextmenü: fix Transportschilderfarbe im Nachtmodus, fix zusätzliche Menügrößen 
 \n
-\n• Map-Marker Fix: Gruppen An-/Ausschalten, Möglichkeit Marker auf der Karte zu verstecken
-\n
-\n• OSM-Bearbeitung: Bearbeitung für Nicht-Punkt-Objekte, Behebung fehlender Kommentare zu Notizen, Sicherung von Änderungen
-\n
-\n• Verbessere Wikipedia und Wikivoyage Parsing, aktualisierte Dateien sind bereits verfügbar
-\n
-\n• Kontextmenü: fixieren Sie die Transportschilderfarbe im Nachtmodus, fixieren Sie zusätzliche Menügrößen
-\n
-\n• Andere Fehlerbehebungen
-\n</string>
+\n • Bootnavigation: Unterstützung für Fahrrinnen
+\n 
+\n • Andere Fehlerbehebungen</string>
     </resources>

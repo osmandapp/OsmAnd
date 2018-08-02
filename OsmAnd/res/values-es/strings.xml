@@ -2953,7 +2953,7 @@
     <string name="coord_input_add_point">Añadir punto</string>
     <string name="coord_input_save_as_track">Guardar como traza</string>
     <string name="coord_input_save_as_track_descr">Has añadido %1$s puntos. Escribe un nombre de archivo y pulsa en «Guardar».</string>
-    <string name="error_notification_desc">Por favor, envíe la captura de pantalla de esta notificación a support@osmand.net</string>
+    <string name="error_notification_desc">Por favor, envíe una captura de pantalla de esta notificación a support@osmand.net</string>
     <string name="quick_action_edit_actions">Editar acciones</string>
     <string name="point_deleted">Punto %1$s eliminado</string>
     <string name="shared_string_world">Mundo</string>
@@ -2961,17 +2961,24 @@
     <string name="search_no_results_description">¿Sin resultados?
 \nCuéntanos sobre esto.</string>
     <string name="send_search_query">¿Enviar consulta de búsqueda?</string>
-    <string name="release_3_1">• Navegación: Corrección en la barra de progreso, intercambio rápido del punto inicial y final de la ruta
+    <string name="release_3_1">• Navegación: Corrección en la barra de progreso, intercambio rápido del punto inicial y final de la ruta 
+\n 
+\n • Marcadores del mapa: corregido el des/activar grupos, capacidad para ocultar marcadores del mapa 
+\n 
+\n • Edición de OSM: Capacidad de edición de etiquetas para objetos que no sean puntos y de vías, corrección de los comentarios vacíos en las notas, copia de seguridad de ediciones 
+\n 
+\n • Mejor análisis de Wikipedia y Wikiviajes, los archivos actualizados ya están disponibles 
+\n 
+\n • Menú contextual: corregido el color de los escudos de transporte en el modo nocturno y los tamaños de menú adicionales 
 \n
-\n • Marcadores del mapa: corregido el des/activar grupos, capacidad para ocultar marcadores del mapa
-\n
-\n • Edición de OSM: Capacidad para editar etiquetas en objetos sin puntos, corrección de los comentarios vacíos en las notas, copia de seguridad de ediciones
-\n
-\n • Mejor análisis de Wikipedia y Wikiviajes, los archivos actualizados ya están disponibles
-\n
-\n • Menú contextual: corregido el color de los escudos de transporte en el modo nocturno y los tamaños de menú adicionales
-\n
-\n • Otras correcciones de errores
+\n • Navegación fluvial: soporte a la navegación fluvial 
+\n 
+\n • Otras correcciones de errores 
 \n</string>
     <string name="increase_search_radius_to">Aumentar el radio de búsqueda a %1$s</string>
+    <string name="thank_you_for_feedback">Gracias por su comentario</string>
+    <string name="poi_cannot_be_found">No se puede encontrar el nodo o la vía.</string>
+    <string name="search_no_results_feedback">¿Sin resultados de búsqueda?
+\nDenos su opinión</string>
+    <string name="commiting_way">Enviando vía…</string>
     </resources>

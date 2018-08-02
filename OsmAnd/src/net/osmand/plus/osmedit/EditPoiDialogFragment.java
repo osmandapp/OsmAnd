@@ -707,7 +707,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 					fragment.show(activity.getSupportFragmentManager(), TAG);
 				} else {
 					Toast.makeText(activity,
-							activity.getString(R.string.poi_error_poi_not_found),
+							activity.getString(R.string.poi_cannot_be_found),
 							Toast.LENGTH_LONG).show();
 				}
 			}
@@ -777,7 +777,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 
 		public void deletePoiWithDialog(final Entity entity) {
 			if (entity == null) {
-				Toast.makeText(activity, activity.getResources().getString(R.string.poi_error_poi_not_found), Toast.LENGTH_LONG).show();
+				Toast.makeText(activity, activity.getResources().getString(R.string.poi_cannot_be_found), Toast.LENGTH_LONG).show();
 				return;
 			}
 			AlertDialog.Builder builder = new AlertDialog.Builder(activity);
