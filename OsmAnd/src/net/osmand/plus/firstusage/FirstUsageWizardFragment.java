@@ -682,7 +682,7 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 				}
 				for (BinaryMapDataObject o : mapDataObjects) {
 					String fullName = osmandRegions.getFullName(o);
-					if (fullName.length() > selectedFullName.length()) {
+					if (fullName != null && fullName.length() > selectedFullName.length()) {
 						selectedFullName = fullName;
 					}
 				}
