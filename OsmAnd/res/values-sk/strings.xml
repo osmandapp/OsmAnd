@@ -2965,15 +2965,17 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="coord_input_save_as_track_descr">Pridali ste %1$s bodov. Zadajte názov súboru a stlačte \"Uložiť\".</string>
     <string name="point_deleted">Bod %1$s vymazaný</string>
     <string name="shared_string_world">Celý svet</string>
-    <string name="release_3_1">• Navigácia: Opravený indikátor postupu, rýchle prepínanie začiatočného a koncového bodu trasy 
+    <string name="release_3_1">• Navigácia: Opravený indikátor postupu, rýchle prepínanie začiatočného a koncového bodu trasy
 \n 
-\n • Mapové značky: opravené zapínanie a vypínanie skupín, možnosť skryť značky z mapy 
+\n • Mapové značky: opravené zapínanie a vypínanie skupín, možnosť skryť značky z mapy
 \n 
-\n • Úpravy OSM: Možnosť meniť značky nebodových objektov, oprava chýbajúcich komentárov na poznámkach, záloha úprav 
+\n • Úpravy OSM: Možnosť meniť značky nebodových objektov a ciest, oprava chýbajúcich komentárov na poznámkach, záloha úprav
 \n 
-\n • Vylepšené čítanie Wikipédie a Wikivoyage, aktualizované súbory sú už k dispozícii 
+\n • Vylepšené čítanie Wikipédie a Wikivoyage, aktualizované súbory sú už k dispozícii
 \n 
-\n • Kontextové menu: opravené farby znakov ciest v nočnom režime, opravené doplnkové veľkosti menu 
+\n • Kontextové menu: opravené farby znakov ciest v nočnom režime, opravené doplnkové veľkosti menu
+\n
+\n • Navigácia lodí: podpora pre vodné cesty
 \n 
 \n • Opravy ďalších chýb 
 \n 
@@ -2983,4 +2985,8 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="search_no_results_description">Žiadne výsledky?
 \nPovedzte nám o tom.</string>
     <string name="send_search_query">Odoslať vyhľadávaciu požiadavku?</string>
+    <string name="thank_you_for_feedback">Ďakujeme za vašu spätnú väzbu</string>
+    <string name="poi_cannot_be_found">Nebol nájdený bod ani cesta.</string>
+    <string name="search_no_results_feedback">Žiadne výsledky vyhľadávania?
+\nDajte nám spätnú väzbu</string>
     </resources>
