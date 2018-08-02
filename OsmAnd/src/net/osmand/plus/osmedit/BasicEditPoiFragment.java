@@ -5,6 +5,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -30,6 +31,8 @@ import net.osmand.util.OpeningHoursParser;
 import net.osmand.util.OpeningHoursParser.BasicOpeningHourRule;
 
 import org.apache.commons.logging.Log;
+
+import java.util.Map;
 
 import gnu.trove.list.array.TIntArrayList;
 
@@ -123,11 +126,12 @@ public class BasicEditPoiFragment extends BaseOsmAndFragment
 
 			@Override
 			public void afterTextChanged(Editable s) {
-				if (!getData().isInEdit()) {
+				EditPoiData data = getData();
+				if (data != null && !data.isInEdit()) {
 					if (!TextUtils.isEmpty(s)) {
-						getData().putTag(tag, s.toString());
+						data.putTag(tag, s.toString());
 					} else {
-						getData().removeTag(tag);
+						data.removeTag(tag);
 					}
 				}
 			}
@@ -145,30 +149,29 @@ public class BasicEditPoiFragment extends BaseOsmAndFragment
 		mOpeningHoursAdapter.setOpeningHoursRule(item, position);
 	}
 
-
-	private EditPoiDialogFragment getEditPoiFragment() {
-		return (EditPoiDialogFragment) getParentFragment();
-	}
-
 	private EditPoiData getData() {
-		return getEditPoiFragment().getEditPoiData();
+		Fragment parent = getParentFragment();
+		if (parent != null && parent instanceof EditPoiDialogFragment) {
+			return ((EditPoiDialogFragment) parent).getEditPoiData();
+		}
+		return null;
 	}
 
 	@Override
 	public void onFragmentActivated() {
-		streetEditText.setText(getData().getTagValues()
-				.get(OSMSettings.OSMTagKey.ADDR_STREET.getValue()));
-		houseNumberEditText.setText(getData().getTagValues()
-				.get(OSMSettings.OSMTagKey.ADDR_HOUSE_NUMBER.getValue()));
-		phoneEditText.setText(getData().getTagValues()
-				.get(OSMSettings.OSMTagKey.PHONE.getValue()));
-		webSiteEditText.setText(getData().getTagValues()
-				.get(OSMSettings.OSMTagKey.WEBSITE.getValue()));
-		descriptionEditText.setText(getData().getTagValues()
-				.get(OSMSettings.OSMTagKey.DESCRIPTION.getValue()));
+		EditPoiData data = getData();
+		if (data == null) {
+			return;
+		}
+		Map<String, String> tagValues = data.getTagValues();
+		streetEditText.setText(tagValues.get(OSMSettings.OSMTagKey.ADDR_STREET.getValue()));
+		houseNumberEditText.setText(tagValues.get(OSMSettings.OSMTagKey.ADDR_HOUSE_NUMBER.getValue()));
+		phoneEditText.setText(tagValues.get(OSMSettings.OSMTagKey.PHONE.getValue()));
+		webSiteEditText.setText(tagValues.get(OSMSettings.OSMTagKey.WEBSITE.getValue()));
+		descriptionEditText.setText(tagValues.get(OSMSettings.OSMTagKey.DESCRIPTION.getValue()));
 
 		OpeningHoursParser.OpeningHours openingHours =
-				OpeningHoursParser.parseOpenedHoursHandleErrors(getData().getTagValues()
+				OpeningHoursParser.parseOpenedHoursHandleErrors(tagValues
 						.get(OSMSettings.OSMTagKey.OPENING_HOURS.getValue()));
 		if (openingHours == null) {
 			openingHours = new OpeningHoursParser.OpeningHours();
