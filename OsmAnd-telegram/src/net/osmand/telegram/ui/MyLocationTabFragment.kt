@@ -292,17 +292,17 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 			cornerRadiusTo.toFloat()
 		)
 
-		val marginAnimator = ValueAnimator.ofInt(marginFrom, marginTo)
-		marginAnimator.addUpdateListener {
-			val value = it.animatedValue as Int
-			val params = searchBox.layoutParams as LinearLayout.LayoutParams
-			params.setMargins(value, params.topMargin, value, params.bottomMargin)
-			searchBox.layoutParams = params
-		}
+//		val marginAnimator = ValueAnimator.ofInt(marginFrom, marginTo)
+//		marginAnimator.addUpdateListener {
+//			val value = it.animatedValue as Int
+//			val params = searchBox.layoutParams as LinearLayout.LayoutParams
+//			params.setMargins(value, params.topMargin, value, params.bottomMargin)
+//			searchBox.layoutParams = params
+//		}
 
 		AnimatorSet().apply {
 			duration = 200
-			playTogether(cornerAnimator, marginAnimator)
+			play(cornerAnimator)
 			addListener(object : AnimatorListenerAdapter() {
 				override fun onAnimationEnd(animation: Animator?) {
 					updateTitleTextColor()
