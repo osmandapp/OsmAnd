@@ -124,6 +124,10 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 		app.runInUIThread { updateList() }
 	}
 
+	override fun onDeleteChatLocationMessages(chatId: Long, messages: List<TdApi.Message>) {
+		app.runInUIThread { updateList() }
+	}
+
 	override fun updateLocationMessages() {}
 
 	override fun updateLocation(location: Location?) {

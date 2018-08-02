@@ -174,6 +174,7 @@ class TelegramHelper private constructor() {
 
 	interface TelegramIncomingMessagesListener {
 		fun onReceiveChatLocationMessages(chatId: Long, vararg messages: TdApi.Message)
+		fun onDeleteChatLocationMessages(chatId: Long, messages: List<TdApi.Message>)
 		fun updateLocationMessages()
 	}
 
@@ -913,10 +914,16 @@ class TelegramHelper private constructor() {
 					val updateDeleteMessages = obj as TdApi.UpdateDeleteMessages
 					if (updateDeleteMessages.isPermanent) {
 						val chatId = updateDeleteMessages.chatId
+						val deletedMessages = mutableListOf<TdApi.Message>()
 						for (messageId in updateDeleteMessages.messageIds) {
 							if (chatLiveMessages[chatId] == messageId) {
 								chatLiveMessages.remove(chatId)
-								break
+							}
+							usersLocationMessages.remove(messageId)?.also { deletedMessages.add(it) }
+						}
+						if (deletedMessages.isNotEmpty()) {
+							incomingMessagesListeners.forEach {
+								it.onDeleteChatLocationMessages(chatId, deletedMessages)
 							}
 						}
 					}
