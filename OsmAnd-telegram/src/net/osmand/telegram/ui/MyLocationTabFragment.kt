@@ -329,9 +329,10 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 	private fun updateList() {
 		val chatList = telegramHelper.getChatList()
 		val chats: MutableList<TdApi.Chat> = mutableListOf()
+		val currentUserId = telegramHelper.getCurrentUserId()
 		for (orderedChat in chatList) {
 			val chat = telegramHelper.getChat(orderedChat.chatId)
-			if (chat != null) {
+			if (chat != null && (chat.id != currentUserId?.toLong())) {
 				chats.add(chat)
 			}
 		}
@@ -360,7 +361,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 
 			TelegramUiHelper.setupPhoto(app, holder.icon, chat.photo?.small?.local?.path, placeholderId, false)
 			holder.title?.text = chat.title
-			holder.description?.text = "Some description" // FIXME
+			holder.description?.visibility = View.GONE
 			if (live) {
 				holder.checkBox?.visibility = View.GONE
 				holder.textInArea?.visibility = View.VISIBLE
