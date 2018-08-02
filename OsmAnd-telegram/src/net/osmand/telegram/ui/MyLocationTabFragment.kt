@@ -95,7 +95,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 				if (collapsed != appBarCollapsed) {
 					appBarCollapsed = collapsed
 					adjustText()
-					adjustSearchBox()
+					adjustAppbar()
 					optionsBtn.visibility = if (collapsed) View.VISIBLE else View.GONE
 				}
 			}
@@ -279,6 +279,17 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 		description.gravity = gravity
 	}
 
+	private fun adjustAppbar() {
+		updateTitleTextColor()
+		if (Build.VERSION.SDK_INT >= 21) {
+			if (appBarCollapsed) {
+				appBarLayout.outlineProvider = appBarOutlineProvider
+			} else {
+				appBarLayout.outlineProvider = null
+			}
+		}
+	}
+
 	private fun adjustSearchBox() {
 		val cornerRadiusFrom = if (appBarCollapsed) searchBoxHeight / 2 else 0
 		val cornerRadiusTo = if (appBarCollapsed) 0 else searchBoxHeight / 2
@@ -329,9 +340,15 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 	private fun updateList() {
 		val chatList = telegramHelper.getChatList()
 		val chats: MutableList<TdApi.Chat> = mutableListOf()
+		val currentUser = telegramHelper.getCurrentUser()
 		for (orderedChat in chatList) {
 			val chat = telegramHelper.getChat(orderedChat.chatId)
 			if (chat != null) {
+				if (telegramHelper.isPrivateChat(chat)) {
+					if ((chat.type as TdApi.ChatTypePrivate).userId == currentUser?.id) {
+						continue
+					}
+				}
 				chats.add(chat)
 			}
 		}
@@ -360,7 +377,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 
 			TelegramUiHelper.setupPhoto(app, holder.icon, chat.photo?.small?.local?.path, placeholderId, false)
 			holder.title?.text = chat.title
-			holder.description?.text = "Some description" // FIXME
+			holder.description?.visibility = View.GONE
 			if (live) {
 				holder.checkBox?.visibility = View.GONE
 				holder.textInArea?.visibility = View.VISIBLE

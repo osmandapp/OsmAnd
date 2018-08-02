@@ -40,6 +40,7 @@
 			android:animateLayoutChanges="true"
 			android:orientation="vertical"
 			android:paddingLeft="@dimen/my_location_text_sides_margin"
+			android:layout_marginBottom="@dimen/content_padding_standard"
 			android:paddingRight="@dimen/my_location_text_sides_margin">
 
 			<LinearLayout
@@ -93,7 +94,7 @@
 			android:layout_height="wrap_content"
 			android:layout_marginLeft="@dimen/content_padding_half"
 			android:layout_marginRight="@dimen/content_padding_half"
-			android:layout_marginTop="@dimen/content_padding_standard"
+			android:visibility="gone"
 			tools:background="@drawable/btn_round">
 
 			<LinearLayout

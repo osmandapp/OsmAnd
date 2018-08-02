@@ -67,6 +67,7 @@ class TelegramHelper private constructor() {
 	private var telegramAuthorizationRequestHandler: TelegramAuthorizationRequestHandler? = null
 
 	private var client: Client? = null
+	private var currentUser: TdApi.User? = null
 
 	private var haveFullChatList: Boolean = false
 	private var needRefreshActiveLiveLocationMessages: Boolean = true
@@ -102,7 +103,9 @@ class TelegramHelper private constructor() {
 	fun getChat(id: Long) = chats[id]
 
 	fun getUser(id: Int) = users[id]
-
+	
+	fun getCurrentUser() = currentUser
+	
 	fun getUserMessage(user: TdApi.User) =
 		usersLocationMessages.values.firstOrNull { it.senderUserId == user.id }
 
@@ -133,6 +136,8 @@ class TelegramHelper private constructor() {
 		return chat.type is TdApi.ChatTypeSupergroup || chat.type is TdApi.ChatTypeBasicGroup
 	}
 
+	fun isPrivateChat(chat: TdApi.Chat): Boolean = chat.type is TdApi.ChatTypePrivate
+	
 	private fun isChannel(chat: TdApi.Chat): Boolean {
 		return chat.type is TdApi.ChatTypeSupergroup && (chat.type as TdApi.ChatTypeSupergroup).isChannel
 	}
@@ -345,6 +350,20 @@ class TelegramHelper private constructor() {
 		listener?.onTelegramChatsRead()
 	}
 
+	private fun requestCurrentUser(){
+		client?.send(TdApi.GetMe()) { obj ->
+			when (obj.constructor) {
+				TdApi.Error.CONSTRUCTOR -> {
+					val error = obj as TdApi.Error
+					if (error.code != IGNORED_ERROR_CODE) {
+						listener?.onTelegramError(error.code, error.message)
+					}
+				}
+				TdApi.User.CONSTRUCTOR -> currentUser = obj as TdApi.User
+			}
+		}
+	}
+	
 	private fun requestMessage(chatId: Long, messageId: Long, onComplete: (TdApi.Message) -> Unit) {
 		client?.send(TdApi.GetMessage(chatId, messageId)) { obj ->
 			when (obj.constructor) {
@@ -589,6 +608,7 @@ class TelegramHelper private constructor() {
 			needRefreshActiveLiveLocationMessages = true
 			if (haveAuthorization) {
 				requestChats(true)
+				requestCurrentUser()
 			}
 		}
 		val newAuthState = getTelegramAuthorizationState()
