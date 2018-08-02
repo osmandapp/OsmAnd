@@ -329,10 +329,15 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 	private fun updateList() {
 		val chatList = telegramHelper.getChatList()
 		val chats: MutableList<TdApi.Chat> = mutableListOf()
-		val currentUserId = telegramHelper.getCurrentUserId()
+		val currentUser = telegramHelper.getCurrentUser()
 		for (orderedChat in chatList) {
 			val chat = telegramHelper.getChat(orderedChat.chatId)
-			if (chat != null && (chat.id != currentUserId?.toLong())) {
+			if (chat != null) {
+				if (telegramHelper.isPrivateChat(chat)) {
+					if ((chat.type as TdApi.ChatTypePrivate).userId == currentUser?.id) {
+						continue
+					}
+				}
 				chats.add(chat)
 			}
 		}

@@ -106,8 +106,6 @@ class TelegramHelper private constructor() {
 	
 	fun getCurrentUser() = currentUser
 	
-	fun getCurrentUserId() = currentUser?.id
-
 	fun getUserMessage(user: TdApi.User) =
 		usersLocationMessages.values.firstOrNull { it.senderUserId == user.id }
 
@@ -138,6 +136,10 @@ class TelegramHelper private constructor() {
 		return chat.type is TdApi.ChatTypeSupergroup || chat.type is TdApi.ChatTypeBasicGroup
 	}
 
+	fun isPrivateChat(chat: TdApi.Chat): Boolean {
+		return chat.type is TdApi.ChatTypePrivate
+	}
+	
 	private fun isChannel(chat: TdApi.Chat): Boolean {
 		return chat.type is TdApi.ChatTypeSupergroup && (chat.type as TdApi.ChatTypeSupergroup).isChannel
 	}
