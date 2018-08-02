@@ -136,9 +136,7 @@ class TelegramHelper private constructor() {
 		return chat.type is TdApi.ChatTypeSupergroup || chat.type is TdApi.ChatTypeBasicGroup
 	}
 
-	fun isPrivateChat(chat: TdApi.Chat): Boolean {
-		return chat.type is TdApi.ChatTypePrivate
-	}
+	fun isPrivateChat(chat: TdApi.Chat): Boolean = chat.type is TdApi.ChatTypePrivate
 	
 	private fun isChannel(chat: TdApi.Chat): Boolean {
 		return chat.type is TdApi.ChatTypeSupergroup && (chat.type as TdApi.ChatTypeSupergroup).isChannel
