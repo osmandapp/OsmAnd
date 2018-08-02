@@ -14,14 +14,10 @@ import java.io.File;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URLEncoder;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
@@ -81,7 +77,7 @@ public class IncrementalChangesManager {
 			List<String> list = new ArrayList<String>(regionUpdateFiles.monthUpdates.keySet());
 			for (String month : list) {
 				RegionUpdate ru = regionUpdateFiles.monthUpdates.get(month);
-				if (checkIfItemOutdated(ru, dateCreated)) {
+				if (ru.obfCreated <= dateCreated) {
 					log.info("Delete overlapping month update " + ru.file.getName());
 					resourceManager.closeFile(ru.file.getName());
 					regionUpdateFiles.monthUpdates.remove(month);
@@ -101,7 +97,7 @@ public class IncrementalChangesManager {
 					if(ru == null) {
 						continue;
 					}
-					if ((checkIfItemOutdated(ru, dateCreated)) ||
+					if (ru.obfCreated <= dateCreated ||
 							(monthRu != null && ru.obfCreated < monthRu.obfCreated)) {
 						log.info("Delete overlapping day update " + ru.file.getName());
 						resourceManager.closeFile(ru.file.getName());
@@ -414,28 +410,5 @@ public class IncrementalChangesManager {
 			}
 		}
 		return timestamp;
-	}
-	
-	private boolean checkIfItemOutdated(RegionUpdate ru, long dateMainMapCreated) {
-		boolean outdated = false;
-		Date strDate = null;
-		String date = ru.date;
-		if (ru.obfCreated < dateMainMapCreated) {
-			outdated = true;
-		} else if (!Algorithms.isEmpty(date) && ru.obfCreated == dateMainMapCreated) {
-			try {
-				if (date.endsWith("00")) {
-					strDate = new SimpleDateFormat("yy_MM", Locale.getDefault()).parse(date);
-				} else {
-					strDate = new SimpleDateFormat("yy_MM_dd", Locale.getDefault()).parse(date);
-				}
-			} catch (ParseException e) {
-				e.printStackTrace();
-			}
-			if (strDate != null && dateMainMapCreated > strDate.getTime()) {
-				outdated = true;
-			}
-		}
-		return outdated;
 	}
 }
