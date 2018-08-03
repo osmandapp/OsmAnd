@@ -629,15 +629,7 @@ class TelegramHelper private constructor() {
 		val content = content
 		return when (content) {
 			is TdApi.MessageLocation -> true
-			is TdApi.MessageText -> {
-				if (content.text.text.startsWith("{")) {
-					// TODO: get user from library if null
-					if (isOsmAndBot(senderUserId)) {
-						return true
-					}
-				}
-				false
-			}
+			is TdApi.MessageText -> isOsmAndBot(senderUserId) || isOsmAndBot(viaBotUserId)
 			else -> false
 		}
 	}
