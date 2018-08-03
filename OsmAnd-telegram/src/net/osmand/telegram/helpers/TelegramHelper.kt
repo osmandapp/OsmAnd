@@ -392,7 +392,8 @@ class TelegramHelper private constructor() {
 			val oldContent = message.content
 			if (oldContent is TdApi.MessageText) {
 				message.content = parseOsmAndBotLocation(oldContent.text.text)
-			} else if (oldContent is TdApi.MessageLocation) {
+			} else if (oldContent is TdApi.MessageLocation &&
+				(isOsmAndBot(message.senderUserId) || isOsmAndBot(message.viaBotUserId))) {
 				message.content = parseOsmAndBotLocation(message)
 			}
 			removeOldMessages(message.senderUserId, message.chatId)
