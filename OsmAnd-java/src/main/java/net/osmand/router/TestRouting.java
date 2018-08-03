@@ -28,7 +28,6 @@ public class TestRouting {
 	public static boolean TEST_WO_HEURISTIC = false; 
 	public static boolean TEST_BOTH_DIRECTION = false;
 	public static NativeLibrary lib = null;
-	public static boolean oldRouting = false;
 	private static String vehicle = "car";
 	
 	
@@ -203,7 +202,7 @@ public class TestRouting {
 			return;
 		}
 		RoutingConfiguration rconfig = config.build(vehicle, MEMORY_TEST_LIMIT);
-		RoutePlannerFrontEnd router = new RoutePlannerFrontEnd(oldRouting);
+		RoutePlannerFrontEnd router = new RoutePlannerFrontEnd();
 		RoutingContext ctx = router.buildRoutingContext(rconfig, 
 				lib, rs);
 		String skip = parser.getAttributeValue("", "skip_comment");
@@ -308,7 +307,7 @@ public class TestRouting {
 		long ts = System.currentTimeMillis();
 		Builder config = RoutingConfiguration.getDefault();
 		RoutingConfiguration rconfig = config.build(vehicle, MEMORY_TEST_LIMIT);
-		RoutePlannerFrontEnd router = new RoutePlannerFrontEnd(oldRouting);
+		RoutePlannerFrontEnd router = new RoutePlannerFrontEnd();
 		RoutingContext ctx = router.buildRoutingContext(rconfig, lib, rs);
 		RouteSegment startSegment = router.findRouteSegment(startLat, startLon, ctx, null);
 		RouteSegment endSegment = router.findRouteSegment(endLat, endLon, ctx, null);
