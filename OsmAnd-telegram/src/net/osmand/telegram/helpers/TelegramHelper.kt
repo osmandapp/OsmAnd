@@ -85,6 +85,7 @@ class TelegramHelper private constructor() {
 
 	var listener: TelegramListener? = null
 	private val incomingMessagesListeners = HashSet<TelegramIncomingMessagesListener>()
+	private val fullInfoUpdatesListeners = HashSet<FullInfoUpdatesListener>()
 
 	fun addIncomingMessagesListener(listener: TelegramIncomingMessagesListener) {
 		incomingMessagesListeners.add(listener)
@@ -92,6 +93,14 @@ class TelegramHelper private constructor() {
 
 	fun removeIncomingMessagesListener(listener: TelegramIncomingMessagesListener) {
 		incomingMessagesListeners.remove(listener)
+	}
+
+	fun addFullInfoUpdatesListener(listener: FullInfoUpdatesListener) {
+		fullInfoUpdatesListeners.add(listener)
+	}
+
+	fun removeFullInfoUpdatesListener(listener: FullInfoUpdatesListener) {
+		fullInfoUpdatesListeners.remove(listener)
 	}
 
 	fun getChatList(): TreeSet<OrderedChat> {
@@ -130,9 +139,21 @@ class TelegramHelper private constructor() {
 		return res
 	}
 
-	fun getBasicGroupFullInfo(id: Int) = basicGroupsFullInfo[id]
+	fun getBasicGroupFullInfo(id: Int): TdApi.BasicGroupFullInfo? {
+		val res = basicGroupsFullInfo[id]
+		if (res == null) {
+			requestBasicGroupFullInfo(id)
+		}
+		return res
+	}
 
-	fun getSupergroupFullInfo(id: Int) = supergroupsFullInfo[id]
+	fun getSupergroupFullInfo(id: Int): TdApi.SupergroupFullInfo? {
+		val res = supergroupsFullInfo[id]
+		if (res == null) {
+			requestSupergroupFullInfo(id)
+		}
+		return res
+	}
 
 	fun isGroup(chat: TdApi.Chat): Boolean {
 		return chat.type is TdApi.ChatTypeSupergroup || chat.type is TdApi.ChatTypeBasicGroup
@@ -178,6 +199,11 @@ class TelegramHelper private constructor() {
 		fun onReceiveChatLocationMessages(chatId: Long, vararg messages: TdApi.Message)
 		fun onDeleteChatLocationMessages(chatId: Long, messages: List<TdApi.Message>)
 		fun updateLocationMessages()
+	}
+
+	interface FullInfoUpdatesListener {
+		fun onBasicGroupFullInfoUpdated(groupId: Int, info: TdApi.BasicGroupFullInfo)
+		fun onSupergroupFullInfoUpdated(groupId: Int, info: TdApi.SupergroupFullInfo)
 	}
 
 	interface TelegramAuthorizationRequestListener {
@@ -364,6 +390,42 @@ class TelegramHelper private constructor() {
 			}
 		}
 		listener?.onTelegramChatsRead()
+	}
+
+	private fun requestBasicGroupFullInfo(id: Int) {
+		client?.send(TdApi.GetBasicGroupFullInfo(id)) { obj ->
+			when (obj.constructor) {
+				TdApi.Error.CONSTRUCTOR -> {
+					val error = obj as TdApi.Error
+					if (error.code != IGNORED_ERROR_CODE) {
+						listener?.onTelegramError(error.code, error.message)
+					}
+				}
+				TdApi.BasicGroupFullInfo.CONSTRUCTOR -> {
+					val info = obj as TdApi.BasicGroupFullInfo
+					basicGroupsFullInfo[id] = info
+					fullInfoUpdatesListeners.forEach { it.onBasicGroupFullInfoUpdated(id, info) }
+				}
+			}
+		}
+	}
+
+	private fun requestSupergroupFullInfo(id: Int) {
+		client?.send(TdApi.GetSupergroupFullInfo(id)) { obj ->
+			when (obj.constructor) {
+				TdApi.Error.CONSTRUCTOR -> {
+					val error = obj as TdApi.Error
+					if (error.code != IGNORED_ERROR_CODE) {
+						listener?.onTelegramError(error.code, error.message)
+					}
+				}
+				TdApi.SupergroupFullInfo.CONSTRUCTOR -> {
+					val info = obj as TdApi.SupergroupFullInfo
+					supergroupsFullInfo[id] = info
+					fullInfoUpdatesListeners.forEach { it.onSupergroupFullInfoUpdated(id, info) }
+				}
+			}
+		}
 	}
 
 	private fun requestCurrentUser(){
@@ -1013,11 +1075,21 @@ class TelegramHelper private constructor() {
 				}
 				TdApi.UpdateBasicGroupFullInfo.CONSTRUCTOR -> {
 					val updateBasicGroupFullInfo = obj as TdApi.UpdateBasicGroupFullInfo
-					basicGroupsFullInfo[updateBasicGroupFullInfo.basicGroupId] = updateBasicGroupFullInfo.basicGroupFullInfo
+					val id = updateBasicGroupFullInfo.basicGroupId
+					if (basicGroupsFullInfo.containsKey(id)) {
+						val info = updateBasicGroupFullInfo.basicGroupFullInfo
+						basicGroupsFullInfo[id] = info
+						fullInfoUpdatesListeners.forEach { it.onBasicGroupFullInfoUpdated(id, info) }
+					}
 				}
 				TdApi.UpdateSupergroupFullInfo.CONSTRUCTOR -> {
 					val updateSupergroupFullInfo = obj as TdApi.UpdateSupergroupFullInfo
-					supergroupsFullInfo[updateSupergroupFullInfo.supergroupId] = updateSupergroupFullInfo.supergroupFullInfo
+					val id = updateSupergroupFullInfo.supergroupId
+					if (supergroupsFullInfo.containsKey(id)) {
+						val info = updateSupergroupFullInfo.supergroupFullInfo
+						supergroupsFullInfo[id] = info
+						fullInfoUpdatesListeners.forEach { it.onSupergroupFullInfoUpdated(id, info) }
+					}
 				}
 			}
 		}
