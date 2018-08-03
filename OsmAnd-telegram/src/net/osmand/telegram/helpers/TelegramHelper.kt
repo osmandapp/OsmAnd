@@ -253,6 +253,13 @@ class TelegramHelper private constructor() {
 		}
 	}
 
+	fun getOsmAndBotDeviceName(message: TdApi.Message): String {
+		val replyMarkup =
+			message.replyMarkup as TdApi.ReplyMarkupInlineKeyboard
+		val deviceName = replyMarkup.rows[0][1].text
+		return deviceName.split("\\s".toRegex())[1]
+	}
+	
 	fun isOsmAndBot(userId: Int) = users[userId]?.username == OSMAND_BOT_USERNAME
 
 	fun isBot(userId: Int) = users[userId]?.type is TdApi.UserTypeBot

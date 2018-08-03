@@ -79,6 +79,9 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 					if (userName.isEmpty()) {
 						userName = user.phoneNumber
 					}
+					if (telegramHelper.isOsmAndBot(user.id)) {
+						userName = telegramHelper.getOsmAndBotDeviceName(message)
+					}
 					photoPath = telegramHelper.getUserPhotoPath(user)
 				}
 				if (userName.isEmpty()) {
