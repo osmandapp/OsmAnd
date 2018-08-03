@@ -492,6 +492,7 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 				if (group.getType() == DownloadResourceGroupType.OTHER_MAPS_HEADER
 						|| group.getType() == DownloadResourceGroupType.VOICE_HEADER_REC
 						|| group.getType() == DownloadResourceGroupType.VOICE_HEADER_TTS
+						|| group.getType() == DownloadResourceGroupType.VOICE_HEADER_TTS_JS
 						|| group.getType() == DownloadResourceGroupType.FONTS_HEADER) {
 					if (group.getIndividualResources() != null) {
 						for (IndexItem item : group.getIndividualResources()) {

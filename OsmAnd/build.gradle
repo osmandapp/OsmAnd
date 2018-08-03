@@ -238,6 +238,7 @@ task collectVoiceAssets(type: Sync) {
 	from "../../resources/voice"
 	into "assets/voice"
 	include "**/*.p"
+	include "**/*.js"
 }
 
 task cleanNoTranslate(type: Delete) {

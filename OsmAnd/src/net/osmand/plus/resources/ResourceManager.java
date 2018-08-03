@@ -392,6 +392,13 @@ public class ResourceManager {
 						if (conf.exists()) {
 							indexFileNames.put(f.getName(), dateFormat.format(conf.lastModified())); //$NON-NLS-1$
 						}
+						if (f.getName().contains("-tts")) {
+							String lang = f.getName().replace("-tts", "");
+							File jsConf = new File(f, lang + "_" + IndexConstants.TTSVOICE_INDEX_EXT_JS);
+							if (jsConf.exists()) {
+								indexFileNames.put(f.getName(), dateFormat.format(jsConf.lastModified()));
+							}
+						}
 					}
 				}
 			}

@@ -28,7 +28,8 @@ public class DownloadGroupViewHolder {
 	private Drawable getIconForGroup(DownloadResourceGroup group) {
 		Drawable iconLeft;
 		if (group.getType() == DownloadResourceGroup.DownloadResourceGroupType.VOICE_REC
-				|| group.getType() == DownloadResourceGroup.DownloadResourceGroupType.VOICE_TTS) {
+				|| group.getType() == DownloadResourceGroup.DownloadResourceGroupType.VOICE_TTS
+				|| group.getType() == DownloadResourceGroup.DownloadResourceGroupType.VOICE_TTS_JS) {
 			iconLeft = ctx.getMyApplication().getUIUtilities().getThemedIcon(R.drawable.ic_action_volume_up);
 		} else if (group.getType() == DownloadResourceGroup.DownloadResourceGroupType.FONTS) {
 			iconLeft = ctx.getMyApplication().getUIUtilities().getThemedIcon(R.drawable.ic_action_map_language);

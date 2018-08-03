@@ -11,8 +11,10 @@ import org.mozilla.javascript.NativeJSON;
 import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.ScriptableObject;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -33,34 +35,14 @@ public class JSCommandBuilder extends CommandBuilder {
         super(commandPlayer);
     }
 
-    public void setJSContext(String path) {
-        String script = readFileContents(path);
+    public void setJSContext(ScriptableObject jsScope) {
         jsContext = Context.enter();
-        jsContext.setOptimizationLevel(-1);
-        jsScope = jsContext.initStandardObjects();
-        jsContext.evaluateString(jsScope, script, "JS", 1, null);
+        this.jsScope = jsScope;
     }
 
     private Object convertStreetName(Map<String, String> streetName) {
-        return NativeJSON.parse(jsContext, jsScope, new JSONObject(streetName).toString(), new NullCallable());
-    }
-
-
-    private String readFileContents(String path) {
-        StringBuilder fileContent = new StringBuilder("");
-        try {
-            FileInputStream fis = new FileInputStream(new File(path));
-            byte[] buffer = new byte[1024];
-            int n;
-            while ((n = fis.read(buffer)) != -1)
-            {
-                fileContent.append(new String(buffer, 0, n));
-            }
-            fis.close();
-        } catch (IOException e) {
-            log.error(e.getMessage(), e);
-        }
-        return fileContent.toString();
+        return NativeJSON.parse(jsContext, jsScope, new JSONObject(streetName).toString(),
+                new NullCallable());
     }
 
     public void setParameters(String metricCons, boolean tts) {

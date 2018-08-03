@@ -39,6 +39,7 @@ public class DownloadResourceGroup {
 		NAUTICAL_MAPS_HEADER(R.string.nautical_maps),
 		// headers with voice items
 		VOICE_HEADER_TTS(R.string.index_name_tts_voice),
+		VOICE_HEADER_TTS_JS(R.string.voice_tts_js),
 		VOICE_HEADER_REC(R.string.index_name_voice),
 		// headers with font items
 		FONTS_HEADER(R.string.fonts_header),
@@ -52,6 +53,7 @@ public class DownloadResourceGroup {
 		NAUTICAL_MAPS(R.string.nautical_maps),
 		WIKIVOYAGE_MAPS(R.string.download_maps_travel),
 		VOICE_TTS(R.string.index_name_tts_voice),
+		VOICE_TTS_JS(R.string.voice_tts_js),
 		FONTS(R.string.fonts_header),
 		VOICE_REC(R.string.index_name_voice),
 		OTHER_MAPS(R.string.download_select_map_types),
@@ -65,7 +67,7 @@ public class DownloadResourceGroup {
 		}
 
 		public boolean isScreen() {
-			return this == WORLD || this == REGION || this == VOICE_TTS
+			return this == WORLD || this == REGION || this == VOICE_TTS || this == VOICE_TTS_JS
 					|| this == VOICE_REC || this == OTHER_MAPS || this == FONTS || this == NAUTICAL_MAPS || this == WIKIVOYAGE_MAPS;
 		}
 
@@ -83,7 +85,8 @@ public class DownloadResourceGroup {
 		}
 
 		public boolean isHeader() {
-			return this == VOICE_HEADER_REC || this == VOICE_HEADER_TTS || this == SUBREGIONS
+			return this == VOICE_HEADER_REC || this == VOICE_HEADER_TTS || this == VOICE_HEADER_TTS_JS
+					|| this == SUBREGIONS
 					|| this == WORLD_MAPS || this == REGION_MAPS || this == OTHER_GROUP   
 					|| this == HILLSHADE_HEADER || this == SRTM_HEADER
 					|| this == OTHER_MAPS_HEADER || this == OTHER_MAPS_GROUP

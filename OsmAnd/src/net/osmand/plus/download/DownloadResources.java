@@ -299,8 +299,10 @@ public class DownloadResources extends DownloadResourceGroup {
 		DownloadResourceGroup otherGroup = new DownloadResourceGroup(this, DownloadResourceGroupType.OTHER_GROUP);
 		DownloadResourceGroup voiceScreenTTS = new DownloadResourceGroup(otherGroup, DownloadResourceGroupType.VOICE_TTS);
 		DownloadResourceGroup voiceScreenRec = new DownloadResourceGroup(otherGroup, DownloadResourceGroupType.VOICE_REC);
+		DownloadResourceGroup voiceScreenTTSJS = new DownloadResourceGroup(otherGroup, DownloadResourceGroupType.VOICE_TTS_JS);
 		DownloadResourceGroup fontScreen = new DownloadResourceGroup(otherGroup, DownloadResourceGroupType.FONTS);
 		DownloadResourceGroup voiceTTS = new DownloadResourceGroup(otherGroup, DownloadResourceGroupType.VOICE_HEADER_TTS);
+		DownloadResourceGroup voiceTTSJS = new DownloadResourceGroup(otherGroup, DownloadResourceGroupType.VOICE_HEADER_TTS_JS);
 		DownloadResourceGroup voiceRec = new DownloadResourceGroup(otherGroup, DownloadResourceGroupType.VOICE_HEADER_REC);
 		DownloadResourceGroup fonts = new DownloadResourceGroup(otherGroup, DownloadResourceGroupType.FONTS_HEADER);
 
@@ -320,6 +322,8 @@ public class DownloadResources extends DownloadResourceGroup {
 			if (ii.getType() == DownloadActivityType.VOICE_FILE) {
 				if (ii.getFileName().endsWith(IndexConstants.TTSVOICE_INDEX_EXT_ZIP)) {
 					voiceTTS.addItem(ii);
+				} else if (ii.getFileName().endsWith(IndexConstants.TTSVOICE_INDEX_EXT_JS)){
+					voiceTTSJS.addItem(ii);
 				} else {
 					voiceRec.addItem(ii);
 				}
@@ -414,12 +418,14 @@ public class DownloadResources extends DownloadResourceGroup {
 		}
 
 		voiceScreenTTS.addGroup(voiceTTS);
+		voiceScreenTTSJS.addGroup(voiceTTSJS);
 		voiceScreenRec.addGroup(voiceRec);
 		if (fonts.getIndividualResources() != null) {
 			fontScreen.addGroup(fonts);
 		}
 		otherGroup.addGroup(voiceScreenTTS);
 		otherGroup.addGroup(voiceScreenRec);
+		otherGroup.addGroup(voiceScreenTTSJS);
 		
 		
 		if (fonts.getIndividualResources() != null) {

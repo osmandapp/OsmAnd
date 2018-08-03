@@ -20,6 +20,10 @@ import net.osmand.util.Algorithms;
 
 import org.mozilla.javascript.ScriptableObject;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -35,7 +39,6 @@ public class JSTTSCommandPlayerImpl extends AbstractJSCommandPlayer {
     private boolean speechAllowed = false;
     private Context mTtsContext;
 
-    private org.mozilla.javascript.Context jsContext;
     private ScriptableObject jsScope;
 
     private float cSpeechRate = 1;
@@ -92,6 +95,20 @@ public class JSTTSCommandPlayerImpl extends AbstractJSCommandPlayer {
         initializeEngine(app, ctx);
         params.put(TextToSpeech.Engine.KEY_PARAM_STREAM, app.getSettings().AUDIO_STREAM_GUIDANCE
                 .getModeValue(getApplicationMode()).toString());
+        org.mozilla.javascript.Context context = org.mozilla.javascript.Context.enter();
+        context.setOptimizationLevel(-1);
+        jsScope = context.initSafeStandardObjects();
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(new File(
+                    app.getAppPath(IndexConstants.VOICE_INDEX_DIR).getAbsolutePath() +
+                            "/" + voiceProvider + "/" + language + "_tts.js")));
+            context.evaluateReader(jsScope, br, "JS", 1, null);
+            br.close();
+        } catch (IOException e) {
+            log.error(e.getMessage(), e);
+        } finally {
+            org.mozilla.javascript.Context.exit();
+        }
     }
 
     private void initializeEngine(final Context ctx, final Activity act) {
@@ -220,7 +237,7 @@ public class JSTTSCommandPlayerImpl extends AbstractJSCommandPlayer {
     @Override
     public JSCommandBuilder newCommandBuilder() {
         JSCommandBuilder commandBuilder = new JSCommandBuilder(this);
-        commandBuilder.setJSContext(app.getAppPath(IndexConstants.VOICE_INDEX_DIR).getAbsolutePath() + "/" + voiceProvider + "/" + language + "_tts.js");
+        commandBuilder.setJSContext(jsScope);
         commandBuilder.setParameters(app.getSettings().METRIC_SYSTEM.get().toTTSString(), true);
         return commandBuilder;
     }
@@ -305,6 +322,15 @@ public class JSTTSCommandPlayerImpl extends AbstractJSCommandPlayer {
         mTtsContext = null;
         ttsVoiceStatus = "";
         ttsVoiceUsed = "";
+    }
+
+    public static boolean isMyData(File voiceDir) {
+        for (File f : voiceDir.listFiles()) {
+            if (f.getName().contains(IndexConstants.TTSVOICE_INDEX_EXT_JS)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private AlertDialog.Builder createAlertDialog(int titleResID, int messageResID,

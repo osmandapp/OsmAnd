@@ -13,6 +13,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.SQLiteTileSource;
 import net.osmand.plus.download.ui.AbstractLoadLocalIndexTask;
+import net.osmand.plus.voice.JSTTSCommandPlayerImpl;
 import net.osmand.plus.voice.MediaCommandPlayerImpl;
 import net.osmand.plus.voice.TTSCommandPlayerImpl;
 import net.osmand.util.Algorithms;
@@ -86,6 +87,8 @@ public class LocalIndexHelper {
 		} else if (info.getType() == LocalIndexType.TRAVEL_DATA) {
 			info.setDescription(getInstalledDate(f));
 		} else if (info.getType() == LocalIndexType.TTS_VOICE_DATA) {
+			info.setDescription(getInstalledDate(f));
+		} else if (info.getType() == LocalIndexType.TTS_VOICE_DATA_JS) {
 			info.setDescription(getInstalledDate(f));
 		} else if (info.getType() == LocalIndexType.DEACTIVATED) {
 			info.setDescription(getInstalledDate(f));
@@ -216,11 +219,12 @@ public class LocalIndexHelper {
 	private void loadVoiceData(File voiceDir, List<LocalIndexInfo> result, boolean backup, AbstractLoadLocalIndexTask loadTask) {
 		if (voiceDir.canRead()) {
 			//First list TTS files, they are preferred
+			boolean useJs = app.getSettings().USE_JS_VOICE_GUIDANCE.get();
 			for (File voiceF : listFilesSorted(voiceDir)) {
-				if (voiceF.isDirectory() && !MediaCommandPlayerImpl.isMyData(voiceF) && (Build.VERSION.SDK_INT >= 4)) {
+				if (voiceF.isDirectory() && !MediaCommandPlayerImpl.isMyData(voiceF)) {
 					LocalIndexInfo info = null;
-					if (TTSCommandPlayerImpl.isMyData(voiceF)) {
-						info = new LocalIndexInfo(LocalIndexType.TTS_VOICE_DATA, voiceF, backup, app);
+					if (useJs ? JSTTSCommandPlayerImpl.isMyData(voiceF) : TTSCommandPlayerImpl.isMyData(voiceF)) {
+						info = new LocalIndexInfo(useJs ? LocalIndexType.TTS_VOICE_DATA_JS : LocalIndexType.TTS_VOICE_DATA, voiceF, backup, app);
 					}
 					if (info != null) {
 						updateDescription(info);
@@ -359,6 +363,7 @@ public class LocalIndexHelper {
 		WIKI_DATA(R.string.local_indexes_cat_wiki, R.drawable.ic_plugin_wikipedia, 50),
 		TRAVEL_DATA(R.string.download_maps_travel, R.drawable.ic_plugin_wikipedia, 60),
 		TTS_VOICE_DATA(R.string.local_indexes_cat_tts, R.drawable.ic_action_volume_up, 20),
+		TTS_VOICE_DATA_JS(R.string.voice_tts_js, R.drawable.ic_action_volume_up, 20),
 		VOICE_DATA(R.string.local_indexes_cat_voice, R.drawable.ic_action_volume_up, 30),
 		FONT_DATA(R.string.fonts_header, R.drawable.ic_action_map_language, 35),
 		DEACTIVATED(R.string.local_indexes_cat_backup, R.drawable.ic_type_archive, 1000);

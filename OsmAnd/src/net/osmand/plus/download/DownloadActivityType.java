@@ -298,6 +298,8 @@ public class DownloadActivityType {
 				return FileNameTranslationHelper.getVoiceName(ctx, getBasename(indexItem));
 			} else if (fileName.endsWith(IndexConstants.TTSVOICE_INDEX_EXT_ZIP)) {
 				return FileNameTranslationHelper.getVoiceName(ctx, getBasename(indexItem));
+			} else if (fileName.endsWith(IndexConstants.TTSVOICE_INDEX_EXT_JS)) {
+				return FileNameTranslationHelper.getVoiceName(ctx, getBasename(indexItem));
 			}
 			return getBasename(indexItem);
 		}
