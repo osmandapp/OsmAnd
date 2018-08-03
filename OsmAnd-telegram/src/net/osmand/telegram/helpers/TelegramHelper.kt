@@ -255,6 +255,19 @@ class TelegramHelper private constructor() {
 		}
 	}
 
+	fun getOsmAndBotDeviceName(message: TdApi.Message): String {
+		var deviceName = ""
+		if (message.replyMarkup is TdApi.ReplyMarkupInlineKeyboard) {
+			val replyMarkup = message.replyMarkup as TdApi.ReplyMarkupInlineKeyboard
+			try {
+				deviceName = replyMarkup.rows[0][1].text.split("\\s".toRegex())[1]
+			} catch (e: Exception) {
+
+			}
+		}
+		return deviceName
+	}
+	
 	fun isOsmAndBot(userId: Int) = users[userId]?.username == OSMAND_BOT_USERNAME
 
 	fun isBot(userId: Int) = users[userId]?.type is TdApi.UserTypeBot
@@ -386,6 +399,9 @@ class TelegramHelper private constructor() {
 			val oldContent = message.content
 			if (oldContent is TdApi.MessageText) {
 				message.content = parseOsmAndBotLocation(oldContent.text.text)
+			} else if (oldContent is TdApi.MessageLocation &&
+				(isOsmAndBot(message.senderUserId) || isOsmAndBot(message.viaBotUserId))) {
+				message.content = parseOsmAndBotLocation(message)
 			}
 			removeOldMessages(message.senderUserId, message.chatId)
 			usersLocationMessages[message.id] = message
@@ -634,6 +650,15 @@ class TelegramHelper private constructor() {
 		}
 	}
 
+	private fun parseOsmAndBotLocation(message: TdApi.Message): MessageOsmAndBotLocation {
+		val messageLocation = message.content as TdApi.MessageLocation
+		val res = MessageOsmAndBotLocation()
+		res.name = getOsmAndBotDeviceName(message)
+		res.lat = messageLocation.location.latitude
+		res.lon = messageLocation.location.longitude
+		return res
+	}
+	
 	private fun parseOsmAndBotLocation(text: String): MessageOsmAndBotLocation {
 		val res = MessageOsmAndBotLocation()
 		for (s in text.lines()) {
@@ -877,6 +902,9 @@ class TelegramHelper private constructor() {
 							val newContent = updateMessageContent.newContent
 							message.content = if (newContent is TdApi.MessageText) {
 								parseOsmAndBotLocation(newContent.text.text)
+							} else if (newContent is TdApi.MessageLocation &&
+								(isOsmAndBot(message.senderUserId) || isOsmAndBot(message.viaBotUserId))) {
+								parseOsmAndBotLocation(message)
 							} else {
 								newContent
 							}
