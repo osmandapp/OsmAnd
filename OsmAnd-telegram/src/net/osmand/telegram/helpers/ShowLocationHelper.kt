@@ -107,12 +107,15 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 	}
 
 	fun hideChatMessages(chatId: Long) {
+		hideMessages(telegramHelper.getChatMessages(chatId))
+	}
+
+	fun hideMessages(messages: List<TdApi.Message>) {
 		execOsmandApi {
-			val messages = telegramHelper.getChatMessages(chatId)
 			for (message in messages) {
 				val user = telegramHelper.getUser(message.senderUserId)
 				if (user != null) {
-					removeMapPoint(chatId, message)
+					removeMapPoint(message.chatId, message)
 				}
 			}
 		}

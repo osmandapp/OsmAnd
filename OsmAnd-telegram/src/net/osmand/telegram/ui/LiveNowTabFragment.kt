@@ -124,6 +124,10 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 		app.runInUIThread { updateList() }
 	}
 
+	override fun onDeleteChatLocationMessages(chatId: Long, messages: List<TdApi.Message>) {
+		app.runInUIThread { updateList() }
+	}
+
 	override fun updateLocationMessages() {}
 
 	override fun updateLocation(location: Location?) {
@@ -283,7 +287,7 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 				holder.showOnMapState?.text = menuList[stateTextInd]
 				holder.bottomDivider?.visibility = if (nextIsLocation) View.VISIBLE else View.GONE
 			} else if (item is LocationItem && holder is ContactViewHolder) {
-				holder.description?.text = "Some description"
+				holder.description?.visibility = View.GONE
 			}
 		}
 
@@ -292,11 +296,11 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 		private fun getChatItemDescription(item: ChatItem): String {
 			return when {
 				item.chatWithBot -> getString(R.string.shared_string_bot)
-				item.privateChat -> "Chat description" // FIXME
+				item.privateChat -> "" // FIXME
 				else -> {
 					val live = getString(R.string.shared_string_live)
-					val all = getString(R.string.shared_string_all)
-					"$live ${item.liveMembersCount} • $all ${item.membersCount}"
+//					val all = getString(R.string.shared_string_all)
+					"$live ${item.liveMembersCount}"
 				}
 			}
 		}

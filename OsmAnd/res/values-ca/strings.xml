@@ -2989,19 +2989,24 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="search_no_results_description">Cap resultat?
 \nParleu-nos-en al respecte.</string>
     <string name="send_search_query">Voleu enviar la consulta de cerca?</string>
-    <string name="release_3_1">• Navegació: Correcció en la barra de progrés, intercanvi ràpid del punt inicial i final de la ruta
-\n
-\n• Marcadors de mapa: Correcció de l\'activació/desactivació de grups, possibilitat d\'amagar marcadors del mapa
-\n
-\n• Edició OSM: Capacitat per editar les etiquetes per objectes no puntuals, correcció de la pèrdua de comentaris a les notes, còpia de seguretat de les edicions
-\n
-\n• Millora la anàlisi de Viquipèdia i Wikiviatge, els fitxers actualitzats ja estan disponibles
-\n
-\n• Menú contextual: Arregla el color dels indicadors de nom de via en el mode nocturn, correcció de la mida del menú addicional
-\n
-\n• Altres correccions d\'errors
-\n
-\n</string>
+    <string name="release_3_1">"• Navegació: Correcció en la barra de progrés, intercanvi ràpid del punt inicial i final de la ruta 
+\n 
+\n• Marcadors de mapa: Correcció de l\'activació/desactivació de grups, possibilitat d\'amagar marcadors del mapa 
+\n 
+\n• Edició OSM: Capacitat per editar les etiquetes per objectes no puntuals, correcció de la pèrdua de comentaris a les notes, còpia de seguretat de les edicions 
+\n 
+\n• Millora la anàlisi de Viquipèdia i Wikiviatge, els fitxers actualitzats ja estan disponibles 
+\n 
+\n• Menú contextual: Arregla el color dels indicadors de nom de via en el mode nocturn, correcció de la mida del menú addicional 
+\n 
+\n• Nàutica: guiatge pels canals de navegació 
+\n 
+\n• Altres correccions d\'errors  
+\n"</string>
     <string name="increase_search_radius_to">Augmenta el radi de cerca fins %1s</string>
     <string name="commiting_way">Executant via…</string>
+    <string name="thank_you_for_feedback">Gràcies per els comentaris</string>
+    <string name="poi_cannot_be_found">No es pot trobar el node o la via.</string>
+    <string name="search_no_results_feedback">Cap resultat en la cerca?
+\nComenteu-nos-ho</string>
     </resources>

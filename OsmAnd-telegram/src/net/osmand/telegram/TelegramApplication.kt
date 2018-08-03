@@ -50,7 +50,7 @@ class TelegramApplication : Application(), OsmandHelperListener {
 						appPackage,
 						listOf(getString(R.string.app_name)),
 						listOf("osmand_telegram://main_activity"),
-						listOf("ic_action_travel"),
+						listOf("ic_action_location_sharing_app"),
 						listOf(-1)
 					)
 				}

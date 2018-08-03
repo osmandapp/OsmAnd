@@ -3034,4 +3034,7 @@
     <string name="search_no_results_description">Resultatløst?
 \nLa det komme oss for øre.</string>
     <string name="send_search_query">Send søkeforespørsel?</string>
+    <string name="thank_you_for_feedback">Takk for din tilbakemelding</string>
+    <string name="search_no_results_feedback">Resultatløst?
+\nGi oss tilbakemelding</string>
     </resources>
