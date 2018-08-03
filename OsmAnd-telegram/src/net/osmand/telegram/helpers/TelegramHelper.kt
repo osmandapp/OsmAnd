@@ -643,6 +643,15 @@ class TelegramHelper private constructor() {
 		}
 	}
 
+	private fun parseOsmAndBotLocation(message: TdApi.Message): MessageOsmAndBotLocation {
+		val messageLocation = message.content as TdApi.MessageLocation
+		val res = MessageOsmAndBotLocation()
+		res.name = getOsmAndBotDeviceName(message)
+		res.lat = messageLocation.location.latitude
+		res.lon = messageLocation.location.longitude
+		return res
+	}
+	
 	private fun parseOsmAndBotLocation(text: String): MessageOsmAndBotLocation {
 		val res = MessageOsmAndBotLocation()
 		for (s in text.lines()) {
