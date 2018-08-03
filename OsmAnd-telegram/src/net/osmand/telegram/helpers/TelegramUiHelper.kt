@@ -131,9 +131,6 @@ object TelegramUiHelper {
 			if (name.isEmpty()) {
 				name = user.phoneNumber
 			}
-			if (helper.isOsmAndBot(user.id)) {
-				name = helper.getOsmAndBotDeviceName(message)
-			}
 			latLon = LatLon(content.location.latitude, content.location.longitude)
 			photoPath = helper.getUserPhotoPath(user)
 			placeholderId = R.drawable.img_user_picture

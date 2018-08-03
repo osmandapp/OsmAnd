@@ -391,6 +391,8 @@ class TelegramHelper private constructor() {
 			val oldContent = message.content
 			if (oldContent is TdApi.MessageText) {
 				message.content = parseOsmAndBotLocation(oldContent.text.text)
+			} else if (oldContent is TdApi.MessageLocation && isOsmAndBot(message.senderUserId)) {
+				message.content = parseOsmAndBotLocation(message)
 			}
 			removeOldMessages(message.senderUserId, message.chatId)
 			usersLocationMessages[message.id] = message
@@ -663,6 +665,22 @@ class TelegramHelper private constructor() {
 		)
 	}
 
+	private fun parseOsmAndBotLocation(message: TdApi.Message): MessageOsmAndBotLocation {
+		val messageLocation = message.content as TdApi.MessageLocation
+		return MessageOsmAndBotLocation(
+			getOsmAndBotDeviceName(message),
+			messageLocation.location.latitude,
+			messageLocation.location.longitude,
+			-1.0,
+			-1.0,
+			-1.0,
+			-1,
+			-1,
+			-1,
+			-1
+		)
+	}
+
 	class MessageOsmAndBotLocation internal constructor(
 		val name: String,
 		val lat: Double,
@@ -888,6 +906,8 @@ class TelegramHelper private constructor() {
 							val newContent = updateMessageContent.newContent
 							message.content = if (newContent is TdApi.MessageText) {
 								parseOsmAndBotLocation(newContent.text.text)
+							} else if (newContent is TdApi.MessageLocation && isOsmAndBot(message.senderUserId)) {
+								parseOsmAndBotLocation(message)
 							} else {
 								newContent
 							}
