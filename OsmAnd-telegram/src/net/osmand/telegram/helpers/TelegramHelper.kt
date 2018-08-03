@@ -7,7 +7,6 @@ import org.drinkless.td.libcore.telegram.Client
 import org.drinkless.td.libcore.telegram.Client.ResultHandler
 import org.drinkless.td.libcore.telegram.TdApi
 import org.drinkless.td.libcore.telegram.TdApi.AuthorizationState
-import org.json.JSONObject
 import java.io.File
 import java.util.*
 import java.util.concurrent.ConcurrentHashMap
@@ -27,6 +26,9 @@ class TelegramHelper private constructor() {
 		private const val IGNORED_ERROR_CODE = 406
 		private const val UPDATE_LIVE_MESSAGES_INTERVAL_SEC = 30L
 		private const val MESSAGE_ACTIVE_TIME_SEC = 24 * 60 * 60 // 24 hours
+
+		private const val DEVICE_PREFIX = "Device: "
+		private const val LOCATION_PREFIX = "Location: "
 
 		// min and max values for the Telegram API
 		const val MIN_LOCATION_MESSAGE_LIVE_PERIOD_SEC = 61
@@ -640,38 +642,40 @@ class TelegramHelper private constructor() {
 		}
 	}
 
-	private fun parseOsmAndBotLocation(json: String): MessageOsmAndBotLocation {
-		val obj = JSONObject(json)
-		return MessageOsmAndBotLocation(
-			obj.optString("name", ""),
-			obj.optDouble("lat", -1.0),
-			obj.optDouble("lon", -1.0),
-			obj.optDouble("alt", -1.0),
-			obj.optDouble("azi", -1.0),
-			obj.optDouble("spd", -1.0),
-			obj.optInt("updAgo", -1),
-			obj.optInt("locAgo", -1),
-			obj.optInt("updId", -1),
-			obj.optInt("updTime", -1)
-		)
+	private fun parseOsmAndBotLocation(text: String): MessageOsmAndBotLocation {
+		val res = MessageOsmAndBotLocation()
+		for (s in text.lines()) {
+			when {
+				s.startsWith(DEVICE_PREFIX) -> {
+					res.name = s.removePrefix(DEVICE_PREFIX)
+				}
+				s.startsWith(LOCATION_PREFIX) -> {
+					val locStr = s.removePrefix(LOCATION_PREFIX)
+					try {
+						val (latS, lonS) = locStr.split(" ")
+						res.lat = latS.dropLast(1).toDouble()
+						res.lon = lonS.toDouble()
+					} catch (e: Exception) {
+						e.printStackTrace()
+					}
+				}
+			}
+		}
+		return res
 	}
 
-	class MessageOsmAndBotLocation internal constructor(
-		val name: String,
-		val lat: Double,
-		val lon: Double,
-		val alt: Double,
-		val azi: Double,
-		val spd: Double,
-		val updAgo: Int,
-		val locAgo: Int,
-		val updId: Int,
-		val updTime: Int
-	) : TdApi.MessageContent() {
+	class MessageOsmAndBotLocation : TdApi.MessageContent() {
+
+		var name: String = ""
+			internal set
+		var lat: Double = Double.NaN
+			internal set
+		var lon: Double = Double.NaN
+			internal set
 
 		override fun getConstructor() = -1
 
-		fun isValid() = name != "" && lat != -1.0 && lon != -1.0
+		fun isValid() = name != "" && lat != Double.NaN && lon != Double.NaN
 	}
 
 	class OrderedChat internal constructor(internal val order: Long, internal val chatId: Long, internal val isChannel: Boolean) : Comparable<OrderedChat> {
