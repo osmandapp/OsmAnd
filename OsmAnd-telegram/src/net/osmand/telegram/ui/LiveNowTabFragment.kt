@@ -48,6 +48,7 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 	private var location: Location? = null
 	private var heading: Float? = null
 	private var locationUiUpdateAllowed: Boolean = true
+	private val LOCATION_TIMEOUT_TO_BE_STALE = (60 * 15) // 15 minutes
 
 	override fun onCreateView(
 		inflater: LayoutInflater,
@@ -264,7 +265,14 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 			}
 			if (location != null && item.latLon != null) {
 				holder.locationViewContainer?.visibility = View.VISIBLE
-				// TODO: locationViewCache.outdatedLocation
+				val current = System.currentTimeMillis() / 1000
+				val last = item.lastUpdate
+				val created = item.created
+				if (last > created) {
+					locationViewCache.outdatedLocation = current - last > LOCATION_TIMEOUT_TO_BE_STALE
+				} else {
+					locationViewCache.outdatedLocation = current - created > LOCATION_TIMEOUT_TO_BE_STALE
+				}
 				app.uiUtils.updateLocationView(
 					holder.directionIcon,
 					holder.distanceText,

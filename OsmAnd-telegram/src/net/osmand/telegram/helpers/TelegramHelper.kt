@@ -656,6 +656,19 @@ class TelegramHelper private constructor() {
 		res.name = getOsmAndBotDeviceName(message)
 		res.lat = messageLocation.location.latitude
 		res.lon = messageLocation.location.longitude
+		res.created = message.date
+		res.editDate = message.editDate
+		return res
+	}
+	
+	private fun parseOsmAndBotLocationContent(oldContent:MessageOsmAndBotLocation, content: TdApi.MessageContent): MessageOsmAndBotLocation {
+		val messageLocation = content as TdApi.MessageLocation
+		val res = MessageOsmAndBotLocation()
+		res.name = oldContent.name
+		res.lat = messageLocation.location.latitude
+		res.lon = messageLocation.location.longitude
+		res.created = oldContent.created
+		res.editDate = (System.currentTimeMillis() / 1000).toInt()
 		return res
 	}
 	
@@ -688,6 +701,10 @@ class TelegramHelper private constructor() {
 		var lat: Double = Double.NaN
 			internal set
 		var lon: Double = Double.NaN
+			internal set
+		var editDate: Int = 0
+			internal set
+		var created: Int = 0
 			internal set
 
 		override fun getConstructor() = -1
@@ -904,7 +921,7 @@ class TelegramHelper private constructor() {
 								parseOsmAndBotLocation(newContent.text.text)
 							} else if (newContent is TdApi.MessageLocation &&
 								(isOsmAndBot(message.senderUserId) || isOsmAndBot(message.viaBotUserId))) {
-								parseOsmAndBotLocation(message)
+								parseOsmAndBotLocationContent(message.content as MessageOsmAndBotLocation, newContent)
 							} else {
 								newContent
 							}
