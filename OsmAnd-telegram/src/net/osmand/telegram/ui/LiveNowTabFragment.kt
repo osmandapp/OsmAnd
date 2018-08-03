@@ -11,6 +11,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import net.osmand.Location
@@ -18,6 +19,7 @@ import net.osmand.telegram.R
 import net.osmand.telegram.TelegramApplication
 import net.osmand.telegram.TelegramLocationProvider.TelegramCompassListener
 import net.osmand.telegram.TelegramLocationProvider.TelegramLocationListener
+import net.osmand.telegram.helpers.OsmandAidlHelper
 import net.osmand.telegram.helpers.TelegramHelper.*
 import net.osmand.telegram.helpers.TelegramUiHelper
 import net.osmand.telegram.helpers.TelegramUiHelper.ChatItem
@@ -66,6 +68,12 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 					locationUiUpdateAllowed = newState == RecyclerView.SCROLL_STATE_IDLE
 				}
 			})
+		}
+		mainView.findViewById<Button>(R.id.open_osmand_btn).setOnClickListener {
+			val intent = activity?.packageManager?.getLaunchIntentForPackage(OsmandAidlHelper.OSMAND_PACKAGE_NAME)
+			if (intent != null) {
+				startActivity(intent)
+			}
 		}
 		return mainView
 	}
