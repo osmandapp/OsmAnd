@@ -256,8 +256,7 @@ class TelegramHelper private constructor() {
 	}
 
 	fun getOsmAndBotDeviceName(message: TdApi.Message): String {
-		val replyMarkup =
-			message.replyMarkup as TdApi.ReplyMarkupInlineKeyboard
+		val replyMarkup = message.replyMarkup as TdApi.ReplyMarkupInlineKeyboard
 		val deviceName = replyMarkup.rows[0][1].text
 		return deviceName.split("\\s".toRegex())[1]
 	}
@@ -393,7 +392,7 @@ class TelegramHelper private constructor() {
 			val oldContent = message.content
 			if (oldContent is TdApi.MessageText) {
 				message.content = parseOsmAndBotLocation(oldContent.text.text)
-			} else if (oldContent is TdApi.MessageLocation && isOsmAndBot(message.senderUserId)) {
+			} else if (oldContent is TdApi.MessageLocation) {
 				message.content = parseOsmAndBotLocation(message)
 			}
 			removeOldMessages(message.senderUserId, message.chatId)
