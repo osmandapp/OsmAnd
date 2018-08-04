@@ -738,7 +738,7 @@
 	<string name="fav_export_confirmation">قبلاً از نقاط برگزیده یک خروجی تهیه کرده‌اید و فایلش وجود دارد. خروجی جدید را جایگزین آن می‌کنید؟</string>
 	
 	
-	<string name="osmand_development_plugin_description">به‌وسیلهٔ این افزونه می‌توانید تنظیمات توسعه‌ای و امکانات عیب‌یابی را مشاهده کنید؛ مانند شبیه‌سازی مسیریابی، آزمایش عملکرد رندرینگ یا امتحان‌کردن پیام‌های صوتی. 
+	<string name="osmand_development_plugin_description">به‌وسیلهٔ این افزونه می‌توانید تنظیمات توسعه‌ای و امکانات عیب‌یابی را مشاهده کنید؛ مانند شبیه‌سازی مسیریابی، آزمایش عملکرد رندر یا امتحان‌کردن پیام‌های صوتی. 
 \nاین تنظیمات برای توسعه‌دهندگان فراهم شده است و به‌کار کاربران عادی نمی‌آید.</string>
 	<string name="animate_route_off">پایان شبیه‌سازی</string>
 	<string name="animate_route">شروع شبیه‌سازی</string>
@@ -892,7 +892,7 @@
     <string name="monitoring_control_start">GPX</string>
     <string name="rendering_attr_noPolygons_description">همهٔ عوارض زمین را روی نقشه ناپدید کنید.</string>
 	<string name="rendering_attr_noPolygons_name">چندضلعی‌ها</string>
-	<string name="rendering_attr_appMode_name">حالت رندرکردن</string>
+	<string name="rendering_attr_appMode_name">حالت رندرگیری</string>
 	<string name="rendering_attr_appMode_description">بهینه‌سازی نقشه برای</string>
 	<string name="rendering_attr_contourLines_description">از این زوم نمایان شود (نیازمند داده‌های منحنی تراز):</string>
 	<string name="rendering_attr_contourLines_name">نشان‌دادن منحنی‌های تراز</string>
@@ -1170,8 +1170,8 @@
 	<string name="local_index_no_items_to_do">هیچ‌موردی برای %1$s وجود ندارد</string>
 	<string name="local_index_action_do">دارید %2$s مورد را %1$s می‌کنید. ادامه می‌دهید؟</string>
 	
-	<string name="trace_rendering">اطلاعات عیب‌یابی رندرینگ</string>
-	<string name="trace_rendering_descr">عملکرد رندرینگ را نمایش می‌دهد.</string>
+	<string name="trace_rendering">اطلاعات عیب‌یابی رندرگیری</string>
+	<string name="trace_rendering_descr">عملکرد رندرگیری را نمایش می‌دهد.</string>
 	
 	<string name="choose_audio_stream_descr">بلندگوی پخش راهنمای صوتی را انتخاب کنید.</string>
 	<string name="voice_stream_voice_call">منبع صدای تماس تلفنی (همچنین برای وقفه‌انداختن در دستگاه پخش خودرو)</string>
@@ -1195,11 +1195,11 @@
 	
 	<string name="send_location_email_pattern">برای مشاهدهٔ مکان، پیوند اینترنتی %1$s یا پیوند اندرویدی %2$s را باز کنید</string>
 	<string name="amenity_type_geocache">Geocache</string>
-	<string name="continuous_rendering_descr">به‌جای نمایش یکبارهٔ تصویر از رندرینگ پیوسته استفاده شود.</string>
+	<string name="continuous_rendering_descr">به‌جای نمایش یکبارهٔ تصویر از رندرکردن پیوسته استفاده شود.</string>
 	<string name="renderer_load_sucess">رندرکننده بارگذاری شد</string>
 	<string name="renderer_load_exception">بارگذاری رندرکننده ناموفق بود</string>
-	<string name="renderers">رسم‌کنندهٔ بُرداری</string>
-	<string name="renderers_descr">شکل‌وشمایل رندر را انتخاب نمایید.</string>
+	<string name="renderers">رندرکنندهٔ بُرداری</string>
+	<string name="renderers_descr">شکل‌وشمایل رندرگیری را انتخاب نمایید.</string>
 	<string name="download_type_to_filter">فیلتر</string>
 	<string name="transport_context_menu">جست‌وجوی وسیلهٔ حمل‌ونقل در ایستگاه</string>
 	<string name="rotate_map_to_bearing_descr">نحوهٔ چرخش نقشه را انتخاب کنید.</string>
@@ -1751,8 +1751,8 @@
     <string name="download_tab_downloads">همهٔ دانلودها</string>
     <string name="download_tab_updates">به‌روز‌رسانی‌ها</string>
     <string name="shared_string_dismiss">بی‌خیال</string>
-    <string name="use_opengl_render">استفاده از رندرینگ OpenGL</string>
-    <string name="use_opengl_render_descr">از رندرینگ سرعت‌یافتهٔ سخت‌افزاری OpenGL استفاده کن (شاید مصرف باتری افزایش یابد یا روی دستگاه‌های خیلی قدیمی کار نکند).</string>
+    <string name="use_opengl_render">استفاده از رندرگیری OpenGL</string>
+    <string name="use_opengl_render_descr">از رندرگیری سرعت‌یافتهٔ سخت‌افزاری OpenGL استفاده کن (شاید مصرف باتری افزایش یابد یا روی دستگاه‌های خیلی قدیمی کار نکند).</string>
     <string name="lock_screen_request_explanation">%1$s به این مجوز نیاز دارد تا برای صرفه‌جویی در انرژی، بتواند نمایشگر را خاموش کند.</string>
     <string name="wake_on_voice_descr">قبل از رسیدن به پیچ، نمایشگر روشن شود (اگر خاموش است).</string>
     <string name="shared_string_never">هرگز</string>
@@ -2241,7 +2241,7 @@
     <string name="active_markers">نشانه‌های فعال</string>
     <string name="map_markers">نشانه‌های نقشه</string>
     <string name="map_marker">نشانهٔ نقشه</string>
-    <string name="consider_turning_polygons_off">توصیه می‌کنیم رسم چندضلعی‌ها را غیرفعال کنید.</string>
+    <string name="consider_turning_polygons_off">توصیه می‌کنیم رندرشدن چندضلعی‌ها را غیرفعال کنید.</string>
     <string name="rendering_attr_showMtbRoutes_name">نمایش مسیرهای دوچرخه‌سواری کوهستانی (MTB)</string>
     <string name="show_polygons">چندضلعی‌ها را نشان بده</string>
     <string name="shared_string_status">وضعیت</string>

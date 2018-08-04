@@ -7,7 +7,6 @@ import org.drinkless.td.libcore.telegram.Client
 import org.drinkless.td.libcore.telegram.Client.ResultHandler
 import org.drinkless.td.libcore.telegram.TdApi
 import org.drinkless.td.libcore.telegram.TdApi.AuthorizationState
-import org.json.JSONObject
 import java.io.File
 import java.util.*
 import java.util.concurrent.ConcurrentHashMap
@@ -27,6 +26,9 @@ class TelegramHelper private constructor() {
 		private const val IGNORED_ERROR_CODE = 406
 		private const val UPDATE_LIVE_MESSAGES_INTERVAL_SEC = 30L
 		private const val MESSAGE_ACTIVE_TIME_SEC = 24 * 60 * 60 // 24 hours
+
+		private const val DEVICE_PREFIX = "Device: "
+		private const val LOCATION_PREFIX = "Location: "
 
 		// min and max values for the Telegram API
 		const val MIN_LOCATION_MESSAGE_LIVE_PERIOD_SEC = 61
@@ -83,6 +85,7 @@ class TelegramHelper private constructor() {
 
 	var listener: TelegramListener? = null
 	private val incomingMessagesListeners = HashSet<TelegramIncomingMessagesListener>()
+	private val fullInfoUpdatesListeners = HashSet<FullInfoUpdatesListener>()
 
 	fun addIncomingMessagesListener(listener: TelegramIncomingMessagesListener) {
 		incomingMessagesListeners.add(listener)
@@ -90,6 +93,14 @@ class TelegramHelper private constructor() {
 
 	fun removeIncomingMessagesListener(listener: TelegramIncomingMessagesListener) {
 		incomingMessagesListeners.remove(listener)
+	}
+
+	fun addFullInfoUpdatesListener(listener: FullInfoUpdatesListener) {
+		fullInfoUpdatesListeners.add(listener)
+	}
+
+	fun removeFullInfoUpdatesListener(listener: FullInfoUpdatesListener) {
+		fullInfoUpdatesListeners.remove(listener)
 	}
 
 	fun getChatList(): TreeSet<OrderedChat> {
@@ -128,9 +139,21 @@ class TelegramHelper private constructor() {
 		return res
 	}
 
-	fun getBasicGroupFullInfo(id: Int) = basicGroupsFullInfo[id]
+	fun getBasicGroupFullInfo(id: Int): TdApi.BasicGroupFullInfo? {
+		val res = basicGroupsFullInfo[id]
+		if (res == null) {
+			requestBasicGroupFullInfo(id)
+		}
+		return res
+	}
 
-	fun getSupergroupFullInfo(id: Int) = supergroupsFullInfo[id]
+	fun getSupergroupFullInfo(id: Int): TdApi.SupergroupFullInfo? {
+		val res = supergroupsFullInfo[id]
+		if (res == null) {
+			requestSupergroupFullInfo(id)
+		}
+		return res
+	}
 
 	fun isGroup(chat: TdApi.Chat): Boolean {
 		return chat.type is TdApi.ChatTypeSupergroup || chat.type is TdApi.ChatTypeBasicGroup
@@ -176,6 +199,11 @@ class TelegramHelper private constructor() {
 		fun onReceiveChatLocationMessages(chatId: Long, vararg messages: TdApi.Message)
 		fun onDeleteChatLocationMessages(chatId: Long, messages: List<TdApi.Message>)
 		fun updateLocationMessages()
+	}
+
+	interface FullInfoUpdatesListener {
+		fun onBasicGroupFullInfoUpdated(groupId: Int, info: TdApi.BasicGroupFullInfo)
+		fun onSupergroupFullInfoUpdated(groupId: Int, info: TdApi.SupergroupFullInfo)
 	}
 
 	interface TelegramAuthorizationRequestListener {
@@ -253,6 +281,19 @@ class TelegramHelper private constructor() {
 		}
 	}
 
+	fun getOsmAndBotDeviceName(message: TdApi.Message): String {
+		var deviceName = ""
+		if (message.replyMarkup is TdApi.ReplyMarkupInlineKeyboard) {
+			val replyMarkup = message.replyMarkup as TdApi.ReplyMarkupInlineKeyboard
+			try {
+				deviceName = replyMarkup.rows[0][1].text.split("\\s".toRegex())[1]
+			} catch (e: Exception) {
+
+			}
+		}
+		return deviceName
+	}
+	
 	fun isOsmAndBot(userId: Int) = users[userId]?.username == OSMAND_BOT_USERNAME
 
 	fun isBot(userId: Int) = users[userId]?.type is TdApi.UserTypeBot
@@ -351,6 +392,42 @@ class TelegramHelper private constructor() {
 		listener?.onTelegramChatsRead()
 	}
 
+	private fun requestBasicGroupFullInfo(id: Int) {
+		client?.send(TdApi.GetBasicGroupFullInfo(id)) { obj ->
+			when (obj.constructor) {
+				TdApi.Error.CONSTRUCTOR -> {
+					val error = obj as TdApi.Error
+					if (error.code != IGNORED_ERROR_CODE) {
+						listener?.onTelegramError(error.code, error.message)
+					}
+				}
+				TdApi.BasicGroupFullInfo.CONSTRUCTOR -> {
+					val info = obj as TdApi.BasicGroupFullInfo
+					basicGroupsFullInfo[id] = info
+					fullInfoUpdatesListeners.forEach { it.onBasicGroupFullInfoUpdated(id, info) }
+				}
+			}
+		}
+	}
+
+	private fun requestSupergroupFullInfo(id: Int) {
+		client?.send(TdApi.GetSupergroupFullInfo(id)) { obj ->
+			when (obj.constructor) {
+				TdApi.Error.CONSTRUCTOR -> {
+					val error = obj as TdApi.Error
+					if (error.code != IGNORED_ERROR_CODE) {
+						listener?.onTelegramError(error.code, error.message)
+					}
+				}
+				TdApi.SupergroupFullInfo.CONSTRUCTOR -> {
+					val info = obj as TdApi.SupergroupFullInfo
+					supergroupsFullInfo[id] = info
+					fullInfoUpdatesListeners.forEach { it.onSupergroupFullInfoUpdated(id, info) }
+				}
+			}
+		}
+	}
+
 	private fun requestCurrentUser(){
 		client?.send(TdApi.GetMe()) { obj ->
 			when (obj.constructor) {
@@ -384,6 +461,9 @@ class TelegramHelper private constructor() {
 			val oldContent = message.content
 			if (oldContent is TdApi.MessageText) {
 				message.content = parseOsmAndBotLocation(oldContent.text.text)
+			} else if (oldContent is TdApi.MessageLocation &&
+				(isOsmAndBot(message.senderUserId) || isOsmAndBot(message.viaBotUserId))) {
+				message.content = parseOsmAndBotLocation(message)
 			}
 			removeOldMessages(message.senderUserId, message.chatId)
 			usersLocationMessages[message.id] = message
@@ -627,51 +707,54 @@ class TelegramHelper private constructor() {
 		val content = content
 		return when (content) {
 			is TdApi.MessageLocation -> true
-			is TdApi.MessageText -> {
-				if (content.text.text.startsWith("{")) {
-					// TODO: get user from library if null
-					if (isOsmAndBot(senderUserId)) {
-						return true
-					}
-				}
-				false
-			}
+			is TdApi.MessageText -> isOsmAndBot(senderUserId) || isOsmAndBot(viaBotUserId)
 			else -> false
 		}
 	}
 
-	private fun parseOsmAndBotLocation(json: String): MessageOsmAndBotLocation {
-		val obj = JSONObject(json)
-		return MessageOsmAndBotLocation(
-			obj.optString("name", ""),
-			obj.optDouble("lat", -1.0),
-			obj.optDouble("lon", -1.0),
-			obj.optDouble("alt", -1.0),
-			obj.optDouble("azi", -1.0),
-			obj.optDouble("spd", -1.0),
-			obj.optInt("updAgo", -1),
-			obj.optInt("locAgo", -1),
-			obj.optInt("updId", -1),
-			obj.optInt("updTime", -1)
-		)
+	private fun parseOsmAndBotLocation(message: TdApi.Message): MessageOsmAndBotLocation {
+		val messageLocation = message.content as TdApi.MessageLocation
+		val res = MessageOsmAndBotLocation()
+		res.name = getOsmAndBotDeviceName(message)
+		res.lat = messageLocation.location.latitude
+		res.lon = messageLocation.location.longitude
+		return res
+	}
+	
+	private fun parseOsmAndBotLocation(text: String): MessageOsmAndBotLocation {
+		val res = MessageOsmAndBotLocation()
+		for (s in text.lines()) {
+			when {
+				s.startsWith(DEVICE_PREFIX) -> {
+					res.name = s.removePrefix(DEVICE_PREFIX)
+				}
+				s.startsWith(LOCATION_PREFIX) -> {
+					val locStr = s.removePrefix(LOCATION_PREFIX)
+					try {
+						val (latS, lonS) = locStr.split(" ")
+						res.lat = latS.dropLast(1).toDouble()
+						res.lon = lonS.toDouble()
+					} catch (e: Exception) {
+						e.printStackTrace()
+					}
+				}
+			}
+		}
+		return res
 	}
 
-	class MessageOsmAndBotLocation internal constructor(
-		val name: String,
-		val lat: Double,
-		val lon: Double,
-		val alt: Double,
-		val azi: Double,
-		val spd: Double,
-		val updAgo: Int,
-		val locAgo: Int,
-		val updId: Int,
-		val updTime: Int
-	) : TdApi.MessageContent() {
+	class MessageOsmAndBotLocation : TdApi.MessageContent() {
+
+		var name: String = ""
+			internal set
+		var lat: Double = Double.NaN
+			internal set
+		var lon: Double = Double.NaN
+			internal set
 
 		override fun getConstructor() = -1
 
-		fun isValid() = name != "" && lat != -1.0 && lon != -1.0
+		fun isValid() = name != "" && lat != Double.NaN && lon != Double.NaN
 	}
 
 	class OrderedChat internal constructor(internal val order: Long, internal val chatId: Long, internal val isChannel: Boolean) : Comparable<OrderedChat> {
@@ -881,6 +964,9 @@ class TelegramHelper private constructor() {
 							val newContent = updateMessageContent.newContent
 							message.content = if (newContent is TdApi.MessageText) {
 								parseOsmAndBotLocation(newContent.text.text)
+							} else if (newContent is TdApi.MessageLocation &&
+								(isOsmAndBot(message.senderUserId) || isOsmAndBot(message.viaBotUserId))) {
+								parseOsmAndBotLocation(message)
 							} else {
 								newContent
 							}
@@ -989,11 +1075,21 @@ class TelegramHelper private constructor() {
 				}
 				TdApi.UpdateBasicGroupFullInfo.CONSTRUCTOR -> {
 					val updateBasicGroupFullInfo = obj as TdApi.UpdateBasicGroupFullInfo
-					basicGroupsFullInfo[updateBasicGroupFullInfo.basicGroupId] = updateBasicGroupFullInfo.basicGroupFullInfo
+					val id = updateBasicGroupFullInfo.basicGroupId
+					if (basicGroupsFullInfo.containsKey(id)) {
+						val info = updateBasicGroupFullInfo.basicGroupFullInfo
+						basicGroupsFullInfo[id] = info
+						fullInfoUpdatesListeners.forEach { it.onBasicGroupFullInfoUpdated(id, info) }
+					}
 				}
 				TdApi.UpdateSupergroupFullInfo.CONSTRUCTOR -> {
 					val updateSupergroupFullInfo = obj as TdApi.UpdateSupergroupFullInfo
-					supergroupsFullInfo[updateSupergroupFullInfo.supergroupId] = updateSupergroupFullInfo.supergroupFullInfo
+					val id = updateSupergroupFullInfo.supergroupId
+					if (supergroupsFullInfo.containsKey(id)) {
+						val info = updateSupergroupFullInfo.supergroupFullInfo
+						supergroupsFullInfo[id] = info
+						fullInfoUpdatesListeners.forEach { it.onSupergroupFullInfoUpdated(id, info) }
+					}
 				}
 			}
 		}

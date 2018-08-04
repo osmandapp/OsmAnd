@@ -5,12 +5,30 @@
 	android:layout_height="match_parent"
 	android:orientation="vertical">
 
-	<android.support.v7.widget.RecyclerView
-		android:id="@+id/recycler_view"
+	<FrameLayout
 		android:layout_width="match_parent"
-		android:layout_height="match_parent"
-		android:clipToPadding="false"
-		android:paddingBottom="@dimen/list_view_bottom_padding"
-		android:scrollbars="vertical"/>
+		android:layout_height="match_parent">
+
+		<android.support.v7.widget.RecyclerView
+			android:id="@+id/recycler_view"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:clipToPadding="false"
+			android:paddingBottom="@dimen/list_view_bottom_padding"
+			android:scrollbars="vertical"/>
+
+		<Button
+			android:id="@+id/open_osmand_btn"
+			style="@style/DialogActionButtonActive"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="bottom|center_horizontal"
+			android:layout_marginBottom="@dimen/content_padding_big"
+			android:drawableLeft="@drawable/ic_action_osmand_plus"
+			android:drawablePadding="@dimen/content_padding_standard"
+			android:drawableStart="@drawable/ic_action_osmand_plus"
+			android:text="@string/open_osmand"/>
+
+	</FrameLayout>
 
 </LinearLayout>

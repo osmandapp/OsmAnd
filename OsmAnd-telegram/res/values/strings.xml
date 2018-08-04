@@ -1,4 +1,5 @@
 <resources>
+	<string name="open_osmand">Open OsmAnd</string>
 	<string name="shared_string_live">Live</string>
 	<string name="shared_string_bot">Bot</string>
 	<string name="get_telegram_title">Registration in Telegram</string>
