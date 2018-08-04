@@ -25,7 +25,7 @@ public class FileNameTranslationHelper {
 		String basename = getBasename(fileName);
 		if (basename.endsWith(WIKI_NAME)) { //wiki files
 			return getWikiName(ctx, basename);
-		} else if (fileName.endsWith("tts")) { //tts files
+		} else if (fileName.endsWith("tts") || fileName.endsWith("tts-js")) { //tts files
 			return getVoiceName(ctx, fileName);
 		} else if (fileName.endsWith(IndexConstants.FONT_INDEX_EXT)) { //otf files
 			return getFontName(ctx, basename);
@@ -80,8 +80,11 @@ public class FileNameTranslationHelper {
 
 	public static String getVoiceName(Context ctx, String fileName) {
 		try {
-			String nm = fileName.replace('-', '_').replace(' ', '_');
-			if (nm.endsWith("_tts") || nm.endsWith("-tts")) {
+			String nm = fileName.replace('-', '_').replace(' ', '_')
+					.replace('.', '_');
+			if (nm.endsWith("_tts_js")) {
+				nm = nm.substring(0, nm.indexOf("_tts_js"));
+			} else if (nm.endsWith("_tts") || nm.endsWith("-tts")) {
 				nm = nm.substring(0, nm.length() - 4);
 			}
 			Field f = R.string.class.getField("lang_"+nm);

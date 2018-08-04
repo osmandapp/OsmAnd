@@ -219,17 +219,32 @@ public class LocalIndexHelper {
 	private void loadVoiceData(File voiceDir, List<LocalIndexInfo> result, boolean backup, AbstractLoadLocalIndexTask loadTask) {
 		if (voiceDir.canRead()) {
 			//First list TTS files, they are preferred
-			boolean useJs = app.getSettings().USE_JS_VOICE_GUIDANCE.get();
 			for (File voiceF : listFilesSorted(voiceDir)) {
 				if (voiceF.isDirectory() && !MediaCommandPlayerImpl.isMyData(voiceF)) {
 					LocalIndexInfo info = null;
-					if (useJs ? JSTTSCommandPlayerImpl.isMyData(voiceF) : TTSCommandPlayerImpl.isMyData(voiceF)) {
-						info = new LocalIndexInfo(useJs ? LocalIndexType.TTS_VOICE_DATA_JS : LocalIndexType.TTS_VOICE_DATA, voiceF, backup, app);
+					if (TTSCommandPlayerImpl.isMyData(voiceF)) {
+						info = new LocalIndexInfo(LocalIndexType.TTS_VOICE_DATA, voiceF, backup, app);
 					}
 					if (info != null) {
 						updateDescription(info);
 						result.add(info);
 						loadTask.loadFile(info);
+					}
+				}
+			}
+
+			if (app.getSettings().USE_JS_VOICE_GUIDANCE.get()) {
+				for (File voiceF : listFilesSorted(voiceDir)) {
+					if (voiceF.isDirectory() && !MediaCommandPlayerImpl.isMyData(voiceF)) {
+						LocalIndexInfo info = null;
+						if (JSTTSCommandPlayerImpl.isMyData(voiceF)) {
+							info = new LocalIndexInfo(LocalIndexType.TTS_VOICE_DATA_JS, voiceF, backup, app);
+						}
+						if (info != null) {
+							updateDescription(info);
+							result.add(info);
+							loadTask.loadFile(info);
+						}
 					}
 				}
 			}

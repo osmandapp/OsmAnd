@@ -253,7 +253,7 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 		entries[k++] = getString(R.string.shared_string_do_not_use);
 		for (String s : voiceFiles) {
 			entries[k] = (s.contains("tts") ? getString(R.string.ttsvoice) + " " : "") +
-					FileNameTranslationHelper.getVoiceName(this, s);
+					FileNameTranslationHelper.getVoiceName(this, s) + (s.contains("-js") ? " " + getString(R.string.js_tts_label) : "");
 			entrieValues[k] = s;
 			k++;
 		}
