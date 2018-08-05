@@ -91,7 +91,7 @@ public class TransportRoute extends MapObject {
 		}
 		if (forwardStops.size() > 0) {
 			// resort ways to stops order 
-			Map<Way, int[]> orderWays = new HashMap<Way, int[]>();
+			final Map<Way, int[]> orderWays = new HashMap<Way, int[]>();
 			for (Way w : forwardWays) {
 				int[] pair = new int[] { 0, 0 };
 				Node firstNode = w.getFirstNode();
