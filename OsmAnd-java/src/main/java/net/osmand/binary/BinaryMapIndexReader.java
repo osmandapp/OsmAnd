@@ -1731,6 +1731,7 @@ public class BinaryMapIndexReader {
 			searchResults = new ArrayList<T>();
 			cacheCoordinates.clear();
 			cacheTypes.clear();
+			stringTable = null;
 			land = false;
 			ocean = false;
 			numberOfVisitedObjects = 0;

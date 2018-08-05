@@ -49,7 +49,7 @@ public class TransportRoutePlanner {
 		
 	}
 
-	private List<TransportRouteResult> buildRoute(TransportRoutingContext ctx, LatLon start, LatLon end) throws IOException {
+	public List<TransportRouteResult> buildRoute(TransportRoutingContext ctx, LatLon start, LatLon end) throws IOException {
 		ctx.startCalcTime = System.currentTimeMillis();
 		List<TransportRouteSegment> startStops = ctx.getTransportStops(start);
 		List<TransportRouteSegment> endStops = ctx.getTransportStops(end);
@@ -250,6 +250,10 @@ public class TransportRoutePlanner {
 						route.getForwardStops().get(k + 1).getLocation());
 			}
 			return d;
+		}
+
+		public TransportStop getStop(int i) {
+			return route.getForwardStops().get(i);
 		}
 	}
 	

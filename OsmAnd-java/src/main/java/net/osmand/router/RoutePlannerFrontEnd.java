@@ -25,13 +25,11 @@ import org.apache.commons.logging.Log;
 
 public class RoutePlannerFrontEnd {
 
-	private boolean useOldVersion;
 	protected static final Log log = PlatformUtil.getLog(RoutePlannerFrontEnd.class);
 	public boolean useSmartRouteRecalculation = true;
 
 	
 	public RoutePlannerFrontEnd() {
-		this.useOldVersion = false;
 	}
 	
 	public enum RouteCalculationMode {

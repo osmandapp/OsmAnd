@@ -5,7 +5,7 @@ public class TransportRoutingConfiguration {
 	
 	public int ZOOM_TO_LOAD_TILES = 14;
 	
-	public int walkRadius = 3000;
+	public int walkRadius = 1500; // ? 3000
 	
 	public int walkChangeRadius = 300; 
 	
@@ -17,7 +17,7 @@ public class TransportRoutingConfiguration {
 	
 	public int changeTime = 300;
 	
-	public int maxNumberOfChanges = 7; 
+	public int maxNumberOfChanges = 5;  
 	
 	public int finishTimeSeconds = 1200;
 
