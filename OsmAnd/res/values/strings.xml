@@ -125,7 +125,7 @@
     <string name="group_deleted">Group deleted</string>
     <string name="rendering_attr_whiteWaterSports_name">Whitewater sports</string>
     <string name="distance_farthest">Farthest first</string>
-    <string name="distance_nearest">Nearby first</string>
+    <string name="distance_nearest">Nearest first</string>
     <string name="enter_lon">Enter longitude</string>
     <string name="enter_lat">Enter latitude</string>
     <string name="enter_lat_and_lon">Enter latitude and longitude</string>
