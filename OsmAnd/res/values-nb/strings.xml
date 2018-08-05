@@ -3008,7 +3008,7 @@
     <string name="how_to_open_link">Hvordan åpne lenken?</string>
     <string name="read_wikipedia_offline">Les Wikipedia frakoblet</string>
     <string name="download_all">Last ned alt</string>
-    <string name="shared_string_restart">Omstart</string>
+    <string name="shared_string_restart">Programomstart</string>
     <string name="purchase_cancelled_dialog_title">Du har kansellert ditt OsmAnd Live-abonnement</string>
     <string name="purchase_cancelled_dialog_descr">Forny abonnement for å fortsette å bruke alle funksjonene:</string>
 
@@ -3023,7 +3023,7 @@
     <string name="shared_string_gpx_files">GPX-filer</string>
     <string name="get_osmand_live">Skaff deg OsmAnd Live for å låse opp alle funksjoner: Daglige kartoppdateringer med ubegrensede nedlastinger, alle programtilleggene, Wikipedia, Wikivoyage og mye mer.</string>
     <string name="quick_action_edit_actions">Rediger handlinger</string>
-    <string name="error_notification_desc">Vennligst send et skjermdump av dette varselet til support@osmand.net</string>
+    <string name="error_notification_desc">Send en skjeravbildning av dette varselet til support@osmand.net</string>
     <string name="coord_input_edit_point">Rediger punkt</string>
     <string name="coord_input_add_point">Legg til punkt</string>
     <string name="coord_input_save_as_track">Lagre som spor</string>
@@ -3037,18 +3037,19 @@
     <string name="thank_you_for_feedback">Takk for din tilbakemelding</string>
     <string name="search_no_results_feedback">Resultatløst?
 \nGi oss tilbakemelding</string>
-    <string name="poi_cannot_be_found">Node eller måte kan ikke bli funnet.</string>
-    <string name="release_3_1">• Navigering: Løs fremdriftslinje, rask bytte av start og sluttpunkt på ruten
+    <string name="poi_cannot_be_found">Fant ikke node eller vei.</string>
+    <string name="release_3_1">• Navigering: Fiks for fremdriftsindikator, raskt bytte av start og sluttpunkt på ruten
 \n
-\n• Kartmarkører: fikse på / av grupper, mulighet til å skjule markører fra kartet
+\n• Kartmarkører: Fiks for å slå av og på grupper, mulighet til å skjule markører fra kartet
 \n
-\n• OSM Rediger: Mulighet til å redigere koder for ikke-punktsobjekter og måter, fikse manglende kommentarer på notater, sikkerhetskopiering av endringer
+\n• OSM-rediger: Mulighet til å redigere koder for ikke-punktsobjekter og veier, fiks for manglende kommentarer på notater, sikkerhetskopiering av endringer
 \n
-\n• Forbedre Wikipedia og Wikivoyage parsing, oppdaterte filer er allerede tilgjengelige
+\n• Forbedret Wikipedia- og Wikivoyage -fortolkning, oppdaterte filer er allerede tilgjengelige
 \n
-\n• Kontekstmeny: Fiks transportskjold farge i nattmodus, fikse tilleggsmenystørrelser
+\n• Kontekstmeny: Fiks for transportskjoldsfarge i nattmodus, fiks for tilleggsmenystørrelser
 \n
-\n• Båtnavigasjon: støtte for vannvei fairway
+\n• Båtnavigasjon: Støtte for vannvei-fairway
 \n
-\n• Andre feilrettinger</string>
+\n• Andre feilrettinger
+\n</string>
     </resources>
