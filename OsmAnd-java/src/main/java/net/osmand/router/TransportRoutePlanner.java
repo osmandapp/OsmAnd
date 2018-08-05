@@ -74,7 +74,7 @@ public class TransportRoutePlanner {
 				}
 				continue;
 			}
-			ctx.visitedSegmentsCount++;
+			ctx.visitedRoutesCount++;
 			ctx.visitedSegments.put(segment.getId(), segment);
 			if (segment.getDepth() > ctx.cfg.maxNumberOfChanges) {
 				continue;
@@ -152,9 +152,9 @@ public class TransportRoutePlanner {
 		List<TransportRouteResult> lst = new ArrayList<TransportRouteResult>();
 		System.out.println("FIX !!! " + ctx.wrongLoadedWays + " " + ctx.loadedWays + " " + 
 					(ctx.loadTime / (1000 * 1000)) + " ms");
-		System.out.println(String.format("Calculated %.1f seconds, found %d results, visited %d segments, loaded %d tiles ",
-				(System.currentTimeMillis() - ctx.startCalcTime) / 1000.0, results.size(), ctx.visitedSegmentsCount, 
-				ctx.quadTree.size()));
+		System.out.println(String.format("Calculated %.1f seconds, found %d results, visited %d routes, loaded %d tiles (%d ms read, %d ms total),",
+				(System.currentTimeMillis() - ctx.startCalcTime) / 1000.0, results.size(), ctx.visitedRoutesCount, 
+				ctx.quadTree.size(), ctx.readTime / (1000 * 1000), ctx.loadTime / (1000 * 1000)));
 		for(TransportRouteSegment res : results) {
 			TransportRouteResult route = new TransportRouteResult(ctx);
 			route.routeTime = res.distFromStart;
@@ -456,22 +456,24 @@ public class TransportRoutePlanner {
 	
 	public static class TransportRoutingContext {
 		
-		public long startCalcTime;
-		public int visitedSegmentsCount;
-		public int wrongLoadedWays;
-		public int loadedWays;
-		public long loadTime;
-		
 		public RouteCalculationProgress calculationProgress;
 		public TLongObjectHashMap<TransportRouteSegment> visitedSegments = new TLongObjectHashMap<TransportRouteSegment>();
-		
-		
 		public TransportRoutingConfiguration cfg;
 		
 		
 		public TLongObjectHashMap<List<TransportRouteSegment>> quadTree;
 		public final Map<BinaryMapIndexReader, TIntObjectHashMap<TransportRoute>> map = 
 				new LinkedHashMap<BinaryMapIndexReader, TIntObjectHashMap<TransportRoute>>();
+		
+		// stats
+		public long startCalcTime;
+		public int visitedRoutesCount;
+		public int wrongLoadedWays;
+		public int loadedWays;
+		public long loadTime;
+		public long readTime;
+		
+		
 		
 		private final int walkRadiusIn31;
 		private final int walkChangeRadiusIn31;
@@ -531,6 +533,7 @@ public class TransportRoutePlanner {
 
 
 		private List<TransportRouteSegment> loadTile(int x, int y) throws IOException {
+			long nanoTime = System.nanoTime();
 			List<TransportRouteSegment> lst = new ArrayList<TransportRouteSegment>();
 			int pz = (31 - cfg.ZOOM_TO_LOAD_TILES);
 			SearchRequest<TransportStop> sr = BinaryMapIndexReader.buildSearchTransportRequest(x << pz, (x + 1) << pz, 
@@ -553,6 +556,7 @@ public class TransportRoutePlanner {
 					loadTransportSegments(allPointsUnique, r, stops, lst);
 				}
 			}			
+			readTime += System.nanoTime() - nanoTime;
 			return lst;
 		}
 
