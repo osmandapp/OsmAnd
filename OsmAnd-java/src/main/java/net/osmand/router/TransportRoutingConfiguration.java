@@ -22,4 +22,5 @@ public class TransportRoutingConfiguration {
 	public int finishTimeSeconds = 1200;
 
 	public int maxRouteTime = 60 * 60 * 1000; // 1000 hours
+	
 }

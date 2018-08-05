@@ -25,6 +25,8 @@ import net.osmand.data.QuadRect;
 import net.osmand.data.QuadTree;
 import net.osmand.data.TransportRoute;
 import net.osmand.data.TransportStop;
+import net.osmand.osm.edit.Node;
+import net.osmand.osm.edit.Way;
 import net.osmand.util.MapUtils;
 
 public class TransportRoutePlanner {
@@ -243,6 +245,49 @@ public class TransportRoutePlanner {
 			return route.getForwardStops().get(end);
 		}
 		
+		public List<Way> getGeometry() {
+			List<Way> list = new ArrayList<Way>();
+			route.mergeForwardWays();
+			List<Way> fw = route.getForwardWays();
+			double minStart = 150;
+			double minEnd = 150;
+			LatLon str = getStart().getLocation();
+			LatLon en = getEnd().getLocation();
+			int endInd = -1;
+			List<Node> res = new ArrayList<Node>();
+			for(int i = 0;  i < fw.size() ; i++) {
+				List<Node> nodes = fw.get(i).getNodes();
+				for(int j = 0; j < nodes.size(); j++) {
+					Node n = nodes.get(j);
+					if(MapUtils.getDistance(str, n.getLatitude(), n.getLongitude()) < minStart) {
+						minStart = MapUtils.getDistance(str, n.getLatitude(), n.getLongitude());
+						res.clear();
+					}
+					res.add(n);
+					if(MapUtils.getDistance(en, n.getLatitude(), n.getLongitude()) < minEnd) {
+						endInd = res.size();
+						minEnd = MapUtils.getDistance(en, n.getLatitude(), n.getLongitude());
+					} 
+				}
+			}
+			Way way = new Way(-1);
+			if (res.isEmpty()) {
+				for (int i = start; i <= end; i++) {
+					LatLon l = getStop(i).getLocation();
+					Node n = new Node(l.getLatitude(), l.getLongitude(), -1);
+					way.addNode(n);
+				}
+				list.add(way);
+			} else {
+				for(int k = 0; k < res.size()  && k < endInd; k++) {
+					way.addNode(res.get(k));
+				}
+			}
+			list.add(way);
+			return list;
+			
+		}
+		
 		public double getTravelDist() {
 			double d = 0;
 			for (int k = start; k < end; k++) {
@@ -262,12 +307,10 @@ public class TransportRoutePlanner {
 		List<TransportRouteResultSegment> segments  = new ArrayList<TransportRouteResultSegment>(4);
 		double finishWalkDist;
 		double routeTime;
-		private final double walkSpeed;
-		private final double travelSpeed;
+		private final TransportRoutingConfiguration cfg;
 		
 		public TransportRouteResult(TransportRoutingContext ctx) {
-			walkSpeed = ctx.cfg.walkSpeed;
-			travelSpeed = ctx.cfg.travelSpeed;
+			cfg = ctx.cfg;
 		}
 		
 		public List<TransportRouteResultSegment> getSegments() {
@@ -280,6 +323,10 @@ public class TransportRoutePlanner {
 				d += s.walkDist;
 			}
 			return d;
+		}
+		
+		public double getRouteTime() {
+			return routeTime;
 		}
 		
 		public int getStops() {
@@ -298,6 +345,15 @@ public class TransportRoutePlanner {
 			return d;
 		}
 		
+		public double getTravelTime() {
+			return getTravelDist() / cfg.travelSpeed + cfg.stopTime * getStops() + 
+					cfg.changeTime * getChanges();
+		}
+		
+		public double getWalkTime() {
+			return getWalkDist() / cfg.walkSpeed;
+		}
+		
 		public int getChanges() {
 			return segments.size() - 1;
 		}
@@ -306,8 +362,8 @@ public class TransportRoutePlanner {
 		public String toString() {
 			StringBuilder bld = new StringBuilder();
 			bld.append(String.format("Route %d stops, %d changes, %.2f min: %.2f m (%.1f min) to walk, %.2f m (%.1f min) to travel\n",
-					getStops(), getChanges(), routeTime / 60, getWalkDist(), getWalkDist() / walkSpeed / 60.0, 
-					getTravelDist(), getTravelDist() / travelSpeed / 60.0));
+					getStops(), getChanges(), routeTime / 60, getWalkDist(), getWalkTime() / 60.0, 
+					getTravelDist(), getTravelTime() / 60.0));
 			for(int i = 0; i < segments.size(); i++) {
 				TransportRouteResultSegment s = segments.get(i);
 				bld.append(String.format(" %d. %s: walk %.1f m to '%s' and travel to '%s' by %s %d stops \n",
