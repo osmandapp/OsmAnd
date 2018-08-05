@@ -136,10 +136,10 @@ public class CurrentPositionHelper {
 			}
 			RoutingConfiguration cfg = app.getDefaultRoutingConfig().build(p, 10,
 					new HashMap<String, String>());
-			ctx = new RoutePlannerFrontEnd(false).buildRoutingContext(cfg, null, rs);
+			ctx = new RoutePlannerFrontEnd().buildRoutingContext(cfg, null, rs);
 			RoutingConfiguration defCfg = app.getDefaultRoutingConfig().build("geocoding", 10,
 					new HashMap<String, String>());
-			defCtx = new RoutePlannerFrontEnd(false).buildRoutingContext(defCfg, null, rs);
+			defCtx = new RoutePlannerFrontEnd().buildRoutingContext(defCfg, null, rs);
 		} else {
 			ctx = null;
 			defCtx = null;
