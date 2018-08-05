@@ -11,9 +11,7 @@ import java.io.RandomAccessFile;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Iterator;
 import java.util.LinkedHashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.PriorityQueue;
@@ -21,8 +19,6 @@ import java.util.PriorityQueue;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.data.LatLon;
-import net.osmand.data.QuadRect;
-import net.osmand.data.QuadTree;
 import net.osmand.data.TransportRoute;
 import net.osmand.data.TransportStop;
 import net.osmand.osm.edit.Node;
@@ -92,6 +88,7 @@ public class TransportRoutePlanner {
 			double travelDist = 0;
 			double travelTime = 0;
 			TransportStop prevStop = segment.getStop(segment.segStart);
+			List<TransportRouteSegment> sgms = new ArrayList<TransportRouteSegment>();
 			for (int ind = 1 + segment.segStart; ind < segment.getLength(); ind++) {
 				segmentId ++; 
 				ctx.visitedSegments.put(segmentId, segment);
@@ -100,7 +97,8 @@ public class TransportRoutePlanner {
 				double segmentDist = MapUtils.getDistance(prevStop.getLocation(), stop.getLocation());
 				travelDist += segmentDist;
 				travelTime += ctx.cfg.stopTime + segmentDist / ctx.cfg.travelSpeed;
-				List<TransportRouteSegment> sgms = ctx.getTransportStops(stop.x31, stop.y31, true);
+				sgms.clear();
+				sgms = ctx.getTransportStops(stop.x31, stop.y31, true, sgms);
 				for (TransportRouteSegment sgm : sgms) {
 					if (segment.wasVisited(sgm)) {
 						continue;
@@ -156,7 +154,7 @@ public class TransportRoutePlanner {
 					(ctx.loadTime / (1000 * 1000)) + " ms");
 		System.out.println(String.format("Calculated %.1f seconds, found %d results, visited %d segments, loaded %d tiles ",
 				(System.currentTimeMillis() - ctx.startCalcTime) / 1000.0, results.size(), ctx.visitedSegmentsCount, 
-				ctx.loadedTiles.size()));
+				ctx.quadTree.size()));
 		for(TransportRouteSegment res : results) {
 			TransportRouteResult route = new TransportRouteResult(ctx);
 			route.routeTime = res.distFromStart;
@@ -467,13 +465,11 @@ public class TransportRoutePlanner {
 		public RouteCalculationProgress calculationProgress;
 		public TLongObjectHashMap<TransportRouteSegment> visitedSegments = new TLongObjectHashMap<TransportRouteSegment>();
 		
-		public TLongObjectHashMap<TransportStop> loadedTransportStops = new TLongObjectHashMap<TransportStop>();
-		private TIntArrayList loadedTiles = new TIntArrayList();
+		
 		public TransportRoutingConfiguration cfg;
 		
 		
-		
-		public QuadTree<TransportRouteSegment> quadTree ;
+		public TLongObjectHashMap<List<TransportRouteSegment>> quadTree;
 		public final Map<BinaryMapIndexReader, TIntObjectHashMap<TransportRoute>> map = 
 				new LinkedHashMap<BinaryMapIndexReader, TIntObjectHashMap<TransportRoute>>();
 		
@@ -487,8 +483,7 @@ public class TransportRoutePlanner {
 			this.cfg = cfg;
 			walkRadiusIn31 = (int) (cfg.walkRadius / MapUtils.getTileDistanceWidth(31));
 			walkChangeRadiusIn31 = (int) (cfg.walkChangeRadius / MapUtils.getTileDistanceWidth(31));
-			quadTree = 
-					new QuadTree<TransportRouteSegment>(new QuadRect(0, 0, Integer.MAX_VALUE, Integer.MAX_VALUE), cfg.ZOOM_TO_LOAD_TILES, 0.55f);
+			quadTree = new TLongObjectHashMap<List<TransportRouteSegment>>();
 			for (BinaryMapIndexReader r : readers) {
 				map.put(r, new TIntObjectHashMap<TransportRoute>());
 			}
@@ -497,16 +492,15 @@ public class TransportRoutePlanner {
 		public List<TransportRouteSegment> getTransportStops(LatLon loc) throws IOException {
 			int y = MapUtils.get31TileNumberY(loc.getLatitude());
 			int x = MapUtils.get31TileNumberX(loc.getLongitude());
-			return getTransportStops(x, y, false);
+			return getTransportStops(x, y, false, new ArrayList<TransportRouteSegment>());
 		}
 		
-		public List<TransportRouteSegment> getTransportStops(int x, int y, boolean change) throws IOException {
-			return loadNativeTransportStops(x, y, change);
+		public List<TransportRouteSegment> getTransportStops(int x, int y, boolean change, List<TransportRouteSegment> res) throws IOException {
+			return loadNativeTransportStops(x, y, change, res);
 		}
 
-		private List<TransportRouteSegment> loadNativeTransportStops(int sx, int sy, boolean change) throws IOException {
+		private List<TransportRouteSegment> loadNativeTransportStops(int sx, int sy, boolean change, List<TransportRouteSegment> res) throws IOException {
 			long nanoTime = System.nanoTime();
-			List<TransportRouteSegment> allstops = new LinkedList<TransportRouteSegment>();
 			int d = change ? walkChangeRadiusIn31 : walkRadiusIn31;
 			int lx = (sx - d ) >> (31 - cfg.ZOOM_TO_LOAD_TILES);
 			int rx = (sx + d ) >> (31 - cfg.ZOOM_TO_LOAD_TILES);
@@ -514,37 +508,37 @@ public class TransportRoutePlanner {
 			int by = (sy + d ) >> (31 - cfg.ZOOM_TO_LOAD_TILES);
 			for(int x = lx; x <= rx; x++) {
 				for(int y = ty; y <= by; y++) {
-					loadTile(x, y);
-				}
-			}
-			quadTree.queryInBox(new QuadRect(sx - walkRadiusIn31, sy - walkRadiusIn31, sx + walkRadiusIn31, 
-					sy + walkRadiusIn31), allstops);
-			Iterator<TransportRouteSegment> it = allstops.iterator();
-			while(it.hasNext()) {
-				TransportRouteSegment r = it.next();
-				TransportStop st = r.getStop(r.segStart);
-				if (Math.abs(st.x31 - sx) > walkRadiusIn31 || Math.abs(st.y31 - sy) > walkRadiusIn31) {
-					wrongLoadedWays++;
-					it.remove();
-				} else {
-					loadedWays++;
+					int tileId = x << (cfg.ZOOM_TO_LOAD_TILES + 1) + y;
+					List<TransportRouteSegment> list = quadTree.get(tileId);
+					if(list == null) {
+						list = loadTile(x, y);
+						quadTree.put(tileId, list);
+					}
+					for(TransportRouteSegment r : list) {
+						TransportStop st = r.getStop(r.segStart);
+						if (Math.abs(st.x31 - sx) > walkRadiusIn31 || Math.abs(st.y31 - sy) > walkRadiusIn31) {
+							wrongLoadedWays++;
+						} else {
+							loadedWays++;
+							res.add(r);
+						}
+					}
 				}
 			}
 			loadTime += System.nanoTime() - nanoTime;
-			return allstops;
+			return res;
 		}
 
 
-		private void loadTile(int x, int y) throws IOException {
-			int tileId = x << (cfg.ZOOM_TO_LOAD_TILES + 1) + y;
-			if(loadedTiles.contains(tileId)) {
-				return;
-			}
+		private List<TransportRouteSegment> loadTile(int x, int y) throws IOException {
+			List<TransportRouteSegment> lst = new ArrayList<TransportRouteSegment>();
 			int pz = (31 - cfg.ZOOM_TO_LOAD_TILES);
 			SearchRequest<TransportStop> sr = BinaryMapIndexReader.buildSearchTransportRequest(x << pz, (x + 1) << pz, 
 					y << pz, (y + 1) << pz, -1, null);
 			TIntArrayList allPoints = new TIntArrayList();
 			TIntArrayList allPointsUnique = new TIntArrayList();
+			// should it be global?
+			TLongObjectHashMap<TransportStop> loadedTransportStops = new TLongObjectHashMap<TransportStop>();
 			for(BinaryMapIndexReader r : map.keySet()) {
 				sr.clearSearchResults();
 				List<TransportStop> stops = r.searchTransportIndex(sr);
@@ -552,37 +546,41 @@ public class TransportRoutePlanner {
 					if(!loadedTransportStops.contains(s.getId())) {
 						loadedTransportStops.put(s.getId(), s);
 						allPoints.addAll(s.getReferencesToRoutes());
-						
 					}
 				}
 				makeUnique(allPoints, allPointsUnique);
 				if(allPointsUnique.size() > 0) {
-					loadTransportSegments(allPointsUnique, r, stops);
+					loadTransportSegments(allPointsUnique, r, stops, lst);
 				}
 			}			
-			loadedTiles.add(tileId);
+			return lst;
 		}
 
 		private void loadTransportSegments(TIntArrayList allPointsUnique, BinaryMapIndexReader r,
-				List<TransportStop> stops) throws IOException {
+				List<TransportStop> stops, List<TransportRouteSegment> lst) throws IOException {
 			TIntObjectHashMap<TransportRoute> routes = r.getTransportRoutes(allPointsUnique.toArray());
 			map.get(r).putAll(routes);
 			for(TransportStop s : stops) {
-				for(int ref : s.getReferencesToRoutes()) {
+				for (int ref : s.getReferencesToRoutes()) {
 					TransportRoute route = routes.get(ref);
-					if(route != null) {
+					if (route != null) {
 						int stopIndex = -1;
-						for(int k = 0; k < route.getForwardStops().size(); k++) {
+						double dist = TransportRoute.SAME_STOP;
+						for (int k = 0; k < route.getForwardStops().size(); k++) {
 							TransportStop st = route.getForwardStops().get(k);
-							if(st.x31 == s.x31 && s.y31 == st.y31) {
+							double d = MapUtils.getDistance(st.getLocation(), s.getLocation());
+							if (d < dist) {
 								stopIndex = k;
-								break;
+								dist = d; 
 							}
 						}
-						if(stopIndex != -1) {
+						if (stopIndex != -1) {
 							TransportRouteSegment segment = new TransportRouteSegment(route, stopIndex);
-							quadTree.insert(segment, s.x31, s.y31);
+							lst.add(segment);
+						} else {
+							System.err.println("missing");
 						}
+						
 					}
 				}
 			}

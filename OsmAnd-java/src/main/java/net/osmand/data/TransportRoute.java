@@ -22,6 +22,7 @@ public class TransportRoute extends MapObject {
 	private Integer dist = null;
 	private String color;
 	private List<Way> forwardWays;
+	public static final double SAME_STOP = 25;
 	
 	public TransportRoute(){
 	}
@@ -43,7 +44,7 @@ public class TransportRoute extends MapObject {
 			Iterator<Way> it = forwardWays.iterator();
 			while (it.hasNext() && !changed) {
 				// scan to merge with the next segment
-				double d = 50;
+				double d = SAME_STOP;
 				Way w = it.next();
 				Way toCombine = null;
 				boolean reverseOriginal = false;
