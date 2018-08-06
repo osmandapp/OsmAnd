@@ -142,7 +142,7 @@ public class GeocodingUtilities {
 
 
 	public List<GeocodingResult> reverseGeocodingSearch(RoutingContext ctx, double lat, double lon, boolean allowEmptyNames) throws IOException {
-		RoutePlannerFrontEnd rp = new RoutePlannerFrontEnd(false);
+		RoutePlannerFrontEnd rp = new RoutePlannerFrontEnd();
 		List<GeocodingResult> lst = new ArrayList<GeocodingUtilities.GeocodingResult>();
 		List<RouteSegmentPoint> listR = new ArrayList<BinaryRoutePlanner.RouteSegmentPoint>();
 		rp.findRouteSegment(lat, lon, ctx, listR);

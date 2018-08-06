@@ -11,6 +11,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import net.osmand.Location
@@ -18,6 +19,7 @@ import net.osmand.telegram.R
 import net.osmand.telegram.TelegramApplication
 import net.osmand.telegram.TelegramLocationProvider.TelegramCompassListener
 import net.osmand.telegram.TelegramLocationProvider.TelegramLocationListener
+import net.osmand.telegram.helpers.OsmandAidlHelper
 import net.osmand.telegram.helpers.TelegramHelper.*
 import net.osmand.telegram.helpers.TelegramUiHelper
 import net.osmand.telegram.helpers.TelegramUiHelper.ChatItem
@@ -33,7 +35,7 @@ private const val CHAT_VIEW_TYPE = 0
 private const val LOCATION_ITEM_VIEW_TYPE = 1
 
 class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessagesListener,
-	TelegramLocationListener, TelegramCompassListener {
+	FullInfoUpdatesListener, TelegramLocationListener, TelegramCompassListener {
 
 	private val app: TelegramApplication
 		get() = activity?.application as TelegramApplication
@@ -68,6 +70,12 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 				}
 			})
 		}
+		mainView.findViewById<Button>(R.id.open_osmand_btn).setOnClickListener {
+			val intent = activity?.packageManager?.getLaunchIntentForPackage(OsmandAidlHelper.OSMAND_PACKAGE_NAME)
+			if (intent != null) {
+				startActivity(intent)
+			}
+		}
 		return mainView
 	}
 
@@ -76,12 +84,14 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 		locationViewCache = app.uiUtils.getUpdateLocationViewCache()
 		updateList()
 		telegramHelper.addIncomingMessagesListener(this)
+		telegramHelper.addFullInfoUpdatesListener(this)
 		startLocationUpdate()
 	}
 
 	override fun onPause() {
 		super.onPause()
 		telegramHelper.removeIncomingMessagesListener(this)
+		telegramHelper.removeFullInfoUpdatesListener(this)
 		stopLocationUpdate()
 	}
 
@@ -130,6 +140,14 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 	}
 
 	override fun updateLocationMessages() {}
+
+	override fun onBasicGroupFullInfoUpdated(groupId: Int, info: TdApi.BasicGroupFullInfo) {
+		app.runInUIThread { updateList() }
+	}
+
+	override fun onSupergroupFullInfoUpdated(groupId: Int, info: TdApi.SupergroupFullInfo) {
+		app.runInUIThread { updateList() }
+	}
 
 	override fun updateLocation(location: Location?) {
 		val loc = this.location
@@ -307,8 +325,9 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 				item.privateChat -> "" // FIXME
 				else -> {
 					val live = getString(R.string.shared_string_live)
-//					val all = getString(R.string.shared_string_all)
-					"$live ${item.liveMembersCount}"
+					val all = getString(R.string.shared_string_all)
+					val liveStr = "$live ${item.liveMembersCount}"
+					if (item.membersCount > 0) "$liveStr • $all ${item.membersCount}" else liveStr
 				}
 			}
 		}

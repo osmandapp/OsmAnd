@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
     <string name="use_fluorescent_overlays">Sovrapposizioni fluorescenti</string>
     <string name="use_fluorescent_overlays_descr">Usa colori fluorescenti per visualizzare tracce e percorsi.</string>
     <string name="offline_edition">Modifiche offline</string>
@@ -2555,8 +2556,8 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="full_version_thanks">Grazie per avere acquistato la versione completa di OsmAnd!</string>
     <string name="fonts_header">Caratteri della mappa</string>
     <string name="right_side_navigation">Guida a destra</string>
-    <string name="depth_contour_descr">Insieme di mappe che contengono le linee isoipse marine e i punti nautici.</string>
-    <string name="sea_depth_thanks">Grazie per avere acquistato le isoipse nautiche!</string>
+    <string name="depth_contour_descr">Mappe linee isoipse marine e i punti nautici.</string>
+    <string name="sea_depth_thanks">Grazie per avere acquistato le \'Linee isoipse nautiche\'</string>
     <string name="index_item_depth_contours_osmand_ext">Isoipse nautiche</string>
     <string name="index_item_depth_points_southern_hemisphere">Punti nautici sotto il livello del mare dell\'emisfero Australe</string>
     <string name="index_item_depth_points_northern_hemisphere">Punti nautici sotto il livello del mare dell\'emisfero boreale</string>
@@ -2919,7 +2920,7 @@ Rappresenta l\'area: %1$s x %2$s</string>
 	<string name="optional_point_name">Nome del punto facoltativo</string>
     <string name="transport_nearby_routes_within">Percorsi vicini entro</string>
     <string name="transport_nearby_routes">Entro</string>
-    <string name="enter_the_file_name">Immetti il nome del file.</string>
+    <string name="enter_the_file_name">Digit il nome del file.</string>
     <string name="map_import_error">Errore importazione mappa</string>
     <string name="map_imported_successfully">Mappa importata</string>
     <string name="winter_and_ski_renderer">Inverno e sci</string>
@@ -3078,4 +3079,32 @@ Rappresenta l\'area: %1$s x %2$s</string>
 \n"</string>
     <string name="quick_action_edit_actions">Modifica le azioni</string>
     <string name="error_notification_desc">Per favore invia una schermata di questa notifica a support@osmand.net</string>
+    <string name="poi_cannot_be_found">Il nodo o il percorso non è stato trovato.</string>
+    <string name="search_no_results_feedback">Nessun risultato di ricerca?
+\nDacci un ritorno</string>
+    <string name="release_3_1">• Navigazione: corretta la barra di avanzamento, veloce inversione dei punti d\'inizio e fine percorso
+\n
+\n • Marcatori mappa: corretto la visualizzazione o meno dei gruppi, la possibilità di non visualizzare i marcatori dalla mappa
+\n
+\n • Modifiche OSM: possibilità di modificare elementi non puntuali e segmenti, correzione di commenti mancanti nelle note, backup delle modifiche
+\n
+\n • Migliorati Wikipedia e predizione Wikivoyage, aggiornati file già disponibili
+\n
+\n • Menu contestuale: corretti il colore degli scudetti nella modalità notturna e le dimensioni dei menu addizionali 
+\n
+\n • Navigazione marittima: supporto ai fiumi navigabili
+\n
+\n • Altre correzioni di errori
+\n
+\n</string>
+    <string name="commiting_way">Sottoponi la via…</string>
+    <string name="increase_search_radius_to">Incrementa il raggio di ricerca a %1$s</string>
+    <string name="send_search_query_description">Invieremo le tue ricerche: <b>\"%1$s\"</b>, così come la tua localizzazione.<br/><br/> Non raccogliamo informazioni personali, abbiamo solo bisogno dei dati delle ricerche per migliorare l\'algoritmo di ricerca.<br/></string>
+    <string name="send_search_query">Inviare i dati delle ricerche?</string>
+    <string name="shared_string_world">Mondo</string>
+    <string name="point_deleted">Punto %1$s eliminato</string>
+    <string name="coord_input_edit_point">Modifica il punto</string>
+    <string name="coord_input_add_point">Aggiungi punto</string>
+    <string name="coord_input_save_as_track">Salva come traccia</string>
+    <string name="coord_input_save_as_track_descr">Hai aggiunto %1$s punti. Digita il nome del file e tappa su \"Salva\".</string>
     </resources>

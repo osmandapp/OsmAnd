@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources><string name="add_opening_hours">Lisa lahioleku ajad</string>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="add_opening_hours">Lisa lahioleku ajad</string>
 	<string name="description">Kirjeldus</string>
 	<string name="contact_info">Kontakti info</string>
 	
@@ -171,4 +172,42 @@
     <string name="quick_action_showhide_osmbugs_title">Näita/peida OSM Notes</string>
     <string name="quick_action_osmbugs_show">Näita OSM Notes</string>
     <string name="quick_action_osmbugs_hide">Peida OSM Notes</string>
+    <string name="thank_you_for_feedback">Täname tagasiside eest</string>
+    <string name="poi_cannot_be_found">Sõlme või teed ei leitud.</string>
+    <string name="search_no_results_feedback">Otsingutulemused puuduvad? Anna meile tagasisidet</string>
+    <string name="increase_search_radius_to">Suurenda otsingu raadiust kuni %1$s</string>
+    <string name="send_search_query">Saada otsingu päring?</string>
+    <string name="shared_string_world">Maailm</string>
+    <string name="point_deleted">Punkt %1$s kustutatud</string>
+    <string name="coord_input_edit_point">Muuda punkti</string>
+    <string name="coord_input_add_point">Lisa punkt</string>
+    <string name="coord_input_save_as_track">Salvesta jäljena</string>
+    <string name="coord_input_save_as_track_descr">Lisasid %1$s punkti. Sisesta faili nimi ja vajuta \"Salvesta\".</string>
+    <string name="error_notification_desc">Palun saada ekraanipilt sellest teatest aadressil support@osmand.net</string>
+    <string name="quick_action_edit_actions">Muuda tegevusi</string>
+    <string name="shared_string_bookmark">Järjehoidja</string>
+    <string name="hide_full_description">Peida täielik kirjeldus</string>
+    <string name="show_full_description">Näita täielikku kirjeldust</string>
+    <string name="open_wikipedia_link_online">Ava Wikipedia link veebis</string>
+    <string name="open_wikipedia_link_online_description">Link avatakse brauseris.</string>
+    <string name="how_to_open_link">Kuidas link avada?</string>
+    <string name="read_wikipedia_offline">Loe Wikipediat ilma võrguühenduseta</string>
+    <string name="download_all">Lae kõik alla</string>
+    <string name="shared_string_restart">Rakenduse taaskäivitamine</string>
+    <string name="show_images">Näita pilte</string>
+    <string name="maps_you_need">Kaardid, mida vajad</string>
+    <string name="osmand_team">OsmAnd meeskond</string>
+    <string name="popular_destinations">Populaarsed sihtkohad</string>
+    <string name="paid_app">Makstud rakendus</string>
+    <string name="paid_plugin">Makstud lisa</string>
+    <string name="update_is_available">Uuendus saadaval</string>
+	<string name="download_file">Lae fail alla</string>
+    <string name="start_editing">Alusta muutmist</string>
+    <string name="get_unlimited_access">Hangi piiramatu ligipääs</string>
+    <string name="monthly_map_updates">Kaardiuuendused: <b>iga kuu</b></string>
+    <string name="daily_map_updates">Kaardiuuendused: <b>iga tund</b></string>
+    <string name="in_app_purchase">Rakenduse sisene ost</string>
+    <string name="in_app_purchase_desc">Ühekordne makse</string>
+    <string name="purchase_unlim_title">Osta - %1$s</string>
+    <string name="purchase_subscription_title">Liitu - %1$s</string>
     </resources>

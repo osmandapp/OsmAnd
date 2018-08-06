@@ -197,9 +197,6 @@ public class RoutingContext {
 		return config.planRoadDirection;
 	}
 
-	public void setPlanRoadDirection(int planRoadDirection) {
-		config.planRoadDirection = planRoadDirection;
-	}
 
 	public int roadPriorityComparator(double o1DistanceFromStart, double o1DistanceToEnd, double o2DistanceFromStart, double o2DistanceToEnd) {
 		return BinaryRoutePlanner.roadPriorityComparator(o1DistanceFromStart, o1DistanceToEnd, o2DistanceFromStart, o2DistanceToEnd,
