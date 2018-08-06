@@ -33,6 +33,7 @@ import org.drinkless.td.libcore.telegram.TdApi
 
 private const val CHAT_VIEW_TYPE = 0
 private const val LOCATION_ITEM_VIEW_TYPE = 1
+private const val LOCATION_TIMEOUT_TO_BE_STALE = (60 * 15) // 15 minutes
 
 class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessagesListener,
 	FullInfoUpdatesListener, TelegramLocationListener, TelegramCompassListener {
@@ -50,7 +51,6 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 	private var location: Location? = null
 	private var heading: Float? = null
 	private var locationUiUpdateAllowed: Boolean = true
-	private val LOCATION_TIMEOUT_TO_BE_STALE = (60 * 15) // 15 minutes
 
 	override fun onCreateView(
 		inflater: LayoutInflater,
