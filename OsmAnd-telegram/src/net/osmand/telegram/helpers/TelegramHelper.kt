@@ -37,6 +37,13 @@ class TelegramHelper private constructor() {
 		private const val HOURS_AGO_SUFFIX = " hours ago"
 		private const val UTC_FORMAT_SUFFIX = " UTC"
 		
+		private val UTC_DATE_FORMAT = SimpleDateFormat("yyyy-MM-dd", Locale.US).apply {
+			timeZone = TimeZone.getTimeZone("UTC")
+		}
+
+		private val UTC_TIME_FORMAT = SimpleDateFormat("HH:mm:ss", Locale.US).apply {
+			timeZone = TimeZone.getTimeZone("UTC")
+		}
 		// min and max values for the Telegram API
 		const val MIN_LOCATION_MESSAGE_LIVE_PERIOD_SEC = 61
 		const val MAX_LOCATION_MESSAGE_LIVE_PERIOD_SEC = 60 * 60 * 24 - 1 // one day
@@ -467,8 +474,9 @@ class TelegramHelper private constructor() {
 		if (message.isAppropriate()) {
 			val oldContent = message.content
 			if (oldContent is TdApi.MessageText) {
-				message.content = parseOsmAndBotLocation(oldContent.text.text)
-				(message.content as MessageOsmAndBotLocation).created = message.date
+				val newContent = parseOsmAndBotLocation(oldContent.text.text)
+				newContent.created = message.date
+				message.content = newContent
 			} else if (oldContent is TdApi.MessageLocation &&
 				(isOsmAndBot(message.senderUserId) || isOsmAndBot(message.viaBotUserId))) {
 				message.content = parseOsmAndBotLocation(message)
@@ -722,24 +730,24 @@ class TelegramHelper private constructor() {
 
 	private fun parseOsmAndBotLocation(message: TdApi.Message): MessageOsmAndBotLocation {
 		val messageLocation = message.content as TdApi.MessageLocation
-		val res = MessageOsmAndBotLocation()
-		res.name = getOsmAndBotDeviceName(message)
-		res.lat = messageLocation.location.latitude
-		res.lon = messageLocation.location.longitude
-		res.created = message.date
-		res.editDate = message.editDate
-		return res
+		return MessageOsmAndBotLocation().apply {
+			name = getOsmAndBotDeviceName(message)
+			lat = messageLocation.location.latitude
+			lon = messageLocation.location.longitude
+			created = message.date
+			editDate = message.editDate
+		}
 	}
 	
 	private fun parseOsmAndBotLocationContent(oldContent:MessageOsmAndBotLocation, content: TdApi.MessageContent): MessageOsmAndBotLocation {
 		val messageLocation = content as TdApi.MessageLocation
-		val res = MessageOsmAndBotLocation()
-		res.name = oldContent.name
-		res.lat = messageLocation.location.latitude
-		res.lon = messageLocation.location.longitude
-		res.created = oldContent.created
-		res.editDate = (System.currentTimeMillis() / 1000).toInt()
-		return res
+		return MessageOsmAndBotLocation().apply {
+			name = oldContent.name
+			lat = messageLocation.location.latitude
+			lon = messageLocation.location.longitude
+			created = oldContent.created
+			editDate = (System.currentTimeMillis() / 1000).toInt()
+		}
 	}
 	
 	private fun parseOsmAndBotLocation(text: String): MessageOsmAndBotLocation {
@@ -754,10 +762,10 @@ class TelegramHelper private constructor() {
 					try {
 						val (latS, lonS) = locStr.split(" ")
 						val updatedS = locStr.substring(locStr.indexOf("(") + 1, locStr.indexOf(")"))
-						val timeInSeconds = parseTime(updatedS)
+						val timeSecs = parseTime(updatedS)
 						res.lat = latS.dropLast(1).toDouble()
 						res.lon = lonS.toDouble()
-						res.editDate = (System.currentTimeMillis() / 1000 - timeInSeconds).toInt()
+						res.editDate = (System.currentTimeMillis() / 1000 - timeSecs).toInt()
 					} catch (e: Exception) {
 						e.printStackTrace()
 					}
@@ -768,40 +776,35 @@ class TelegramHelper private constructor() {
 	}
 
 	private fun parseTime(timeS: String): Int {
-		when {
-			timeS.endsWith(FEW_SECONDS_AGO) -> {
-				return 5
+		try {
+			when {
+				timeS.endsWith(FEW_SECONDS_AGO) -> return 5
+				
+				timeS.endsWith(SECONDS_AGO_SUFFIX) -> {
+					val locStr = timeS.removeSuffix(SECONDS_AGO_SUFFIX)
+					return locStr.toInt()
+				}
+				timeS.endsWith(MINUTES_AGO_SUFFIX) -> {
+					val locStr = timeS.removeSuffix(MINUTES_AGO_SUFFIX)
+					val minutes = locStr.toInt()
+					return minutes * 60
+				}
+				timeS.endsWith(HOURS_AGO_SUFFIX) -> {
+					val locStr = timeS.removeSuffix(HOURS_AGO_SUFFIX)
+					val hours = locStr.toInt()
+					return hours * 60 * 60
+				}
+				timeS.endsWith(UTC_FORMAT_SUFFIX) -> {
+					val locStr = timeS.removeSuffix(UTC_FORMAT_SUFFIX)
+					val (latS, lonS) = locStr.split(" ")
+					val date = UTC_DATE_FORMAT.parse(latS)
+					val time = UTC_TIME_FORMAT.parse(lonS)
+					val res = date.time + time.time
+					return res.toInt()
+				}
 			}
-			timeS.endsWith(SECONDS_AGO_SUFFIX) -> {
-				val locStr = timeS.removeSuffix(SECONDS_AGO_SUFFIX)
-				return locStr.toInt()
-			}
-			timeS.endsWith(MINUTES_AGO_SUFFIX) -> {
-				val locStr = timeS.removeSuffix(MINUTES_AGO_SUFFIX)
-				val minutes = locStr.toInt()
-				return minutes * 60
-			}
-			timeS.endsWith(HOURS_AGO_SUFFIX) -> {
-				val locStr = timeS.removeSuffix(HOURS_AGO_SUFFIX)
-				val hours = locStr.toInt()
-				return hours * 60 * 60
-			}
-			timeS.endsWith(UTC_FORMAT_SUFFIX) -> {
-				val UTC_DATE_FORMAT = SimpleDateFormat()
-				UTC_DATE_FORMAT.applyPattern("yyyy-MM-dd")
-				UTC_DATE_FORMAT.timeZone = TimeZone.getTimeZone("UTC")
-
-				val UTC_TIME_FORMAT = SimpleDateFormat()
-				UTC_TIME_FORMAT.applyPattern("HH:mm:ss")
-				UTC_TIME_FORMAT.timeZone = TimeZone.getTimeZone("UTC")
-
-				val locStr = timeS.removeSuffix(UTC_FORMAT_SUFFIX)
-				val (latS, lonS) = locStr.split(" ")
-				val date = UTC_DATE_FORMAT.parse(latS)
-				val time = UTC_TIME_FORMAT.parse(lonS)
-				val res = date.time + time.time
-				return res.toInt()
-			}
+		} catch (e: Exception) {
+			e.printStackTrace()
 		}
 		return 0
 	}
