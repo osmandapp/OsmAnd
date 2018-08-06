@@ -754,10 +754,10 @@ class TelegramHelper private constructor() {
 					try {
 						val (latS, lonS) = locStr.split(" ")
 						val updatedS = locStr.substring(locStr.indexOf("(") + 1, locStr.indexOf(")"))
-						val time = parseTime(updatedS)
+						val timeInSeconds = parseTime(updatedS)
 						res.lat = latS.dropLast(1).toDouble()
 						res.lon = lonS.toDouble()
-						res.editDate = (System.currentTimeMillis() / 1000 - time).toInt()
+						res.editDate = (System.currentTimeMillis() / 1000 - timeInSeconds).toInt()
 					} catch (e: Exception) {
 						e.printStackTrace()
 					}
