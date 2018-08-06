@@ -436,7 +436,9 @@ public class MenuBuilder {
 							if (cardList.size() == 0) {
 								cards.add(new NoImagesCard(mapActivity));
 							}
-							onlinePhotoCardsRow.setCards(cards);
+							if (onlinePhotoCardsRow != null) {
+								onlinePhotoCardsRow.setCards(cards);
+							}
 							onlinePhotoCards = cards;
 						}
 					}
