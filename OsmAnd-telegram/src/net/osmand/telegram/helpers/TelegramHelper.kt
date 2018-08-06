@@ -8,6 +8,7 @@ import org.drinkless.td.libcore.telegram.Client.ResultHandler
 import org.drinkless.td.libcore.telegram.TdApi
 import org.drinkless.td.libcore.telegram.TdApi.AuthorizationState
 import java.io.File
+import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.ConcurrentHashMap
 import java.util.concurrent.Executors
@@ -30,6 +31,12 @@ class TelegramHelper private constructor() {
 		private const val DEVICE_PREFIX = "Device: "
 		private const val LOCATION_PREFIX = "Location: "
 
+		private const val FEW_SECONDS_AGO = "few seconds ago"
+		private const val SECONDS_AGO_SUFFIX = " seconds ago"
+		private const val MINUTES_AGO_SUFFIX = " minutes ago"
+		private const val HOURS_AGO_SUFFIX = " hours ago"
+		private const val UTC_FORMAT_SUFFIX = " UTC"
+		
 		// min and max values for the Telegram API
 		const val MIN_LOCATION_MESSAGE_LIVE_PERIOD_SEC = 61
 		const val MAX_LOCATION_MESSAGE_LIVE_PERIOD_SEC = 60 * 60 * 24 - 1 // one day
@@ -461,6 +468,7 @@ class TelegramHelper private constructor() {
 			val oldContent = message.content
 			if (oldContent is TdApi.MessageText) {
 				message.content = parseOsmAndBotLocation(oldContent.text.text)
+				(message.content as MessageOsmAndBotLocation).created = message.date
 			} else if (oldContent is TdApi.MessageLocation &&
 				(isOsmAndBot(message.senderUserId) || isOsmAndBot(message.viaBotUserId))) {
 				message.content = parseOsmAndBotLocation(message)
@@ -745,8 +753,11 @@ class TelegramHelper private constructor() {
 					val locStr = s.removePrefix(LOCATION_PREFIX)
 					try {
 						val (latS, lonS) = locStr.split(" ")
+						val updatedS = locStr.substring(locStr.indexOf("(") + 1, locStr.indexOf(")"))
+						val time = parseTime(updatedS)
 						res.lat = latS.dropLast(1).toDouble()
 						res.lon = lonS.toDouble()
+						res.editDate = (System.currentTimeMillis() / 1000 - time).toInt()
 					} catch (e: Exception) {
 						e.printStackTrace()
 					}
@@ -756,6 +767,45 @@ class TelegramHelper private constructor() {
 		return res
 	}
 
+	private fun parseTime(timeS: String): Int {
+		when {
+			timeS.endsWith(FEW_SECONDS_AGO) -> {
+				return 5
+			}
+			timeS.endsWith(SECONDS_AGO_SUFFIX) -> {
+				val locStr = timeS.removeSuffix(SECONDS_AGO_SUFFIX)
+				return locStr.toInt()
+			}
+			timeS.endsWith(MINUTES_AGO_SUFFIX) -> {
+				val locStr = timeS.removeSuffix(MINUTES_AGO_SUFFIX)
+				val minutes = locStr.toInt()
+				return minutes * 60
+			}
+			timeS.endsWith(HOURS_AGO_SUFFIX) -> {
+				val locStr = timeS.removeSuffix(HOURS_AGO_SUFFIX)
+				val hours = locStr.toInt()
+				return hours * 60 * 60
+			}
+			timeS.endsWith(UTC_FORMAT_SUFFIX) -> {
+				val UTC_DATE_FORMAT = SimpleDateFormat()
+				UTC_DATE_FORMAT.applyPattern("yyyy-MM-dd")
+				UTC_DATE_FORMAT.timeZone = TimeZone.getTimeZone("UTC")
+
+				val UTC_TIME_FORMAT = SimpleDateFormat()
+				UTC_TIME_FORMAT.applyPattern("HH:mm:ss")
+				UTC_TIME_FORMAT.timeZone = TimeZone.getTimeZone("UTC")
+
+				val locStr = timeS.removeSuffix(UTC_FORMAT_SUFFIX)
+				val (latS, lonS) = locStr.split(" ")
+				val date = UTC_DATE_FORMAT.parse(latS)
+				val time = UTC_TIME_FORMAT.parse(lonS)
+				val res = date.time + time.time
+				return res.toInt()
+			}
+		}
+		return 0
+	}
+	
 	class MessageOsmAndBotLocation : TdApi.MessageContent() {
 
 		var name: String = ""
@@ -963,6 +1013,9 @@ class TelegramHelper private constructor() {
 					} else {
 						synchronized(message) {
 							message.editDate = updateMessageEdited.editDate
+							if (message.content is MessageOsmAndBotLocation) {
+								(message.content as MessageOsmAndBotLocation).created = message.date
+							}
 						}
 						incomingMessagesListeners.forEach {
 							it.onReceiveChatLocationMessages(message.chatId, message)
@@ -986,6 +1039,9 @@ class TelegramHelper private constructor() {
 								parseOsmAndBotLocationContent(message.content as MessageOsmAndBotLocation, newContent)
 							} else {
 								newContent
+							}
+							if (message.content is MessageOsmAndBotLocation) {
+								(message.content as MessageOsmAndBotLocation).created = message.date
 							}
 						}
 						incomingMessagesListeners.forEach {

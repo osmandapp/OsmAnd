@@ -33,7 +33,7 @@ import org.drinkless.td.libcore.telegram.TdApi
 
 private const val CHAT_VIEW_TYPE = 0
 private const val LOCATION_ITEM_VIEW_TYPE = 1
-private const val LOCATION_TIMEOUT_TO_BE_STALE = (60 * 15) // 15 minutes
+private const val LOCATION_TIMEOUT_TO_BE_STALE = 60 * 15 // 15 minutes
 
 class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessagesListener,
 	FullInfoUpdatesListener, TelegramLocationListener, TelegramCompassListener {
@@ -284,12 +284,11 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 			if (location != null && item.latLon != null) {
 				holder.locationViewContainer?.visibility = View.VISIBLE
 				val current = System.currentTimeMillis() / 1000
-				val last = item.lastUpdate
-				val created = item.created
-				if (last > created) {
+				val last = item.lastUpdated
+				if (last != 0) {
 					locationViewCache.outdatedLocation = current - last > LOCATION_TIMEOUT_TO_BE_STALE
 				} else {
-					locationViewCache.outdatedLocation = current - created > LOCATION_TIMEOUT_TO_BE_STALE
+					locationViewCache.outdatedLocation = current - item.created > LOCATION_TIMEOUT_TO_BE_STALE
 				}
 				app.uiUtils.updateLocationView(
 					holder.directionIcon,
