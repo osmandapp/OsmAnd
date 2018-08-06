@@ -416,6 +416,9 @@ public class MenuBuilder {
 	}
 
 	private void startLoadingImages() {
+		if (onlinePhotoCardsRow == null) {
+			return;
+		}
 		onlinePhotoCards = new ArrayList<>();
 		onlinePhotoCardsRow.setProgressCard();
 		execute(new GetImageCardsTask(mapActivity, getLatLon(), getAdditionalCardParams(),
