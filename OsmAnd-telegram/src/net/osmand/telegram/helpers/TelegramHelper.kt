@@ -734,7 +734,7 @@ class TelegramHelper private constructor() {
 			lon = messageLocation.location.longitude
 			val date = message.editDate
 			lastUpdated = if (date != 0) {
-				message.editDate
+				date
 			} else {
 				message.date
 			}
