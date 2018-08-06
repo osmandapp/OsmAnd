@@ -474,9 +474,7 @@ class TelegramHelper private constructor() {
 		if (message.isAppropriate()) {
 			val oldContent = message.content
 			if (oldContent is TdApi.MessageText) {
-				val newContent = parseOsmAndBotLocation(oldContent.text.text)
-				newContent.created = message.date
-				message.content = newContent
+				message.content = parseOsmAndBotLocation(oldContent.text.text)
 			} else if (oldContent is TdApi.MessageLocation &&
 				(isOsmAndBot(message.senderUserId) || isOsmAndBot(message.viaBotUserId))) {
 				message.content = parseOsmAndBotLocation(message)
@@ -734,8 +732,12 @@ class TelegramHelper private constructor() {
 			name = getOsmAndBotDeviceName(message)
 			lat = messageLocation.location.latitude
 			lon = messageLocation.location.longitude
-			created = message.date
-			editDate = message.editDate
+			val date = message.editDate
+			lastUpdated = if (date != 0) {
+				message.editDate
+			} else {
+				message.date
+			}
 		}
 	}
 	
@@ -745,8 +747,7 @@ class TelegramHelper private constructor() {
 			name = oldContent.name
 			lat = messageLocation.location.latitude
 			lon = messageLocation.location.longitude
-			created = oldContent.created
-			editDate = (System.currentTimeMillis() / 1000).toInt()
+			lastUpdated = (System.currentTimeMillis() / 1000).toInt()
 		}
 	}
 	
@@ -765,7 +766,11 @@ class TelegramHelper private constructor() {
 						val timeSecs = parseTime(updatedS.removePrefix("(").removeSuffix(")"))
 						res.lat = latS.dropLast(1).toDouble()
 						res.lon = lonS.toDouble()
-						res.editDate = (System.currentTimeMillis() / 1000 - timeSecs).toInt()
+						if (timeSecs < MESSAGE_ACTIVE_TIME_SEC) {
+							res.lastUpdated = (System.currentTimeMillis() / 1000 - timeSecs).toInt()
+						} else {
+							res.lastUpdated = timeSecs
+						}
 					} catch (e: Exception) {
 						e.printStackTrace()
 					}
@@ -817,9 +822,7 @@ class TelegramHelper private constructor() {
 			internal set
 		var lon: Double = Double.NaN
 			internal set
-		var editDate: Int = 0
-			internal set
-		var created: Int = 0
+		var lastUpdated: Int = 0
 			internal set
 
 		override fun getConstructor() = -1
@@ -1016,9 +1019,6 @@ class TelegramHelper private constructor() {
 					} else {
 						synchronized(message) {
 							message.editDate = updateMessageEdited.editDate
-							if (message.content is MessageOsmAndBotLocation) {
-								(message.content as MessageOsmAndBotLocation).created = message.date
-							}
 						}
 						incomingMessagesListeners.forEach {
 							it.onReceiveChatLocationMessages(message.chatId, message)
@@ -1042,9 +1042,6 @@ class TelegramHelper private constructor() {
 								parseOsmAndBotLocationContent(message.content as MessageOsmAndBotLocation, newContent)
 							} else {
 								newContent
-							}
-							if (message.content is MessageOsmAndBotLocation) {
-								(message.content as MessageOsmAndBotLocation).created = message.date
 							}
 						}
 						incomingMessagesListeners.forEach {

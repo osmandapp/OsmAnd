@@ -54,7 +54,6 @@ object TelegramUiHelper {
 		val type = chat.type
 		val message = messages.firstOrNull()
 		if (message != null) {
-			res.created = message.date
 			res.lastUpdated = message.editDate
 		}
 		if (type is TdApi.ChatTypePrivate || type is TdApi.ChatTypeSecret) {
@@ -113,8 +112,7 @@ object TelegramUiHelper {
 				name = content.name
 				latLon = LatLon(content.lat, content.lon)
 				placeholderId = R.drawable.img_user_picture
-				lastUpdated = content.editDate
-				created = content.created
+				lastUpdated = content.lastUpdated
 			}
 		} else {
 			null
@@ -143,7 +141,6 @@ object TelegramUiHelper {
 			placeholderId = R.drawable.img_user_picture
 			userId = message.senderUserId
 			lastUpdated = message.editDate
-			created = message.date
 		}
 	}
 
@@ -160,8 +157,6 @@ object TelegramUiHelper {
 		var placeholderId: Int = 0
 			internal set
 		var userId: Int = 0
-			internal set
-		var created: Int = 0
 			internal set
 		var lastUpdated: Int = 0
 			internal set
