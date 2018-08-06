@@ -10,8 +10,8 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.LinearInterpolator
 import android.widget.ArrayAdapter
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import net.osmand.Location
@@ -47,6 +47,8 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 	private lateinit var adapter: LiveNowListAdapter
 	private lateinit var locationViewCache: UpdateLocationViewCache
 
+	private lateinit var openOsmAndBtn: View
+
 	private var location: Location? = null
 	private var heading: Float? = null
 	private var locationUiUpdateAllowed: Boolean = true
@@ -66,13 +68,19 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 				override fun onScrollStateChanged(recyclerView: RecyclerView?, newState: Int) {
 					super.onScrollStateChanged(recyclerView, newState)
 					locationUiUpdateAllowed = newState == RecyclerView.SCROLL_STATE_IDLE
+					when (newState) {
+						RecyclerView.SCROLL_STATE_DRAGGING -> animateOpenOsmAndBtn(false)
+						RecyclerView.SCROLL_STATE_IDLE -> animateOpenOsmAndBtn(true)
+					}
 				}
 			})
 		}
-		mainView.findViewById<Button>(R.id.open_osmand_btn).setOnClickListener {
-			val intent = activity?.packageManager?.getLaunchIntentForPackage(OsmandAidlHelper.OSMAND_PACKAGE_NAME)
-			if (intent != null) {
-				startActivity(intent)
+		openOsmAndBtn = mainView.findViewById<View>(R.id.open_osmand_btn).apply {
+			setOnClickListener {
+				activity?.packageManager?.getLaunchIntentForPackage(OsmandAidlHelper.OSMAND_PACKAGE_NAME)
+					?.also { intent ->
+						startActivity(intent)
+					}
 			}
 		}
 		return mainView
@@ -228,6 +236,16 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 		activity?.let {
 			MainActivity.OsmandMissingDialogFragment().show(it.supportFragmentManager, null)
 		}
+	}
+
+	private fun animateOpenOsmAndBtn(show: Boolean) {
+		val scale = if (show) 1f else 0f
+		openOsmAndBtn.animate()
+			.scaleX(scale)
+			.scaleY(scale)
+			.setDuration(200)
+			.setInterpolator(LinearInterpolator())
+			.start()
 	}
 
 	inner class LiveNowListAdapter : RecyclerView.Adapter<BaseViewHolder>() {
