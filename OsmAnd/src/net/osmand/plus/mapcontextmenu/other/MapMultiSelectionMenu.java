@@ -186,6 +186,7 @@ public class MapMultiSelectionMenu extends BaseMenuController {
 		return fragment != null;
 	}
 
+	@Nullable
 	public Fragment getFragmentByTag() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
