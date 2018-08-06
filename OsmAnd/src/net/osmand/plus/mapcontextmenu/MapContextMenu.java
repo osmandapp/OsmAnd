@@ -756,6 +756,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		}
 	}
 
+	@Nullable
 	public WeakReference<MapContextMenuFragment> findMenuFragment() {
 		Fragment fragment = mapActivity != null
 				? mapActivity.getSupportFragmentManager().findFragmentByTag(MapContextMenuFragment.TAG) : null;

@@ -10,6 +10,7 @@ import android.graphics.PointF;
 import android.os.Build;
 import android.os.Vibrator;
 import android.support.annotation.DimenRes;
+import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.util.Pair;
 import android.view.MotionEvent;
@@ -32,12 +33,15 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
+import net.osmand.plus.mapcontextmenu.MapContextMenuFragment;
+import net.osmand.plus.mapcontextmenu.other.MapMultiSelectionMenu;
 import net.osmand.plus.measurementtool.MeasurementToolLayer;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionFactory;
 import net.osmand.plus.quickaction.QuickActionRegistry;
 import net.osmand.plus.quickaction.QuickActionsWidget;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -381,15 +385,20 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionRe
     }
 
     private void setupQuickActionBtnVisibility() {
+        MapContextMenu contextMenu = mapActivity.getContextMenu();
+        MapMultiSelectionMenu multiSelectionMenu = contextMenu.getMultiSelectionMenu();
+        WeakReference<MapContextMenuFragment> contextMenuMenuFragmentRef = contextMenu.findMenuFragment();
+        MapContextMenuFragment contextMenuMenuFragment = contextMenuMenuFragmentRef != null ? contextMenuMenuFragmentRef.get() : null;
+        Fragment multiMenuFragment = multiSelectionMenu.getFragmentByTag();
         boolean hideQuickButton = !isLayerOn ||
                 contextMenuLayer.isInChangeMarkerPositionMode() ||
 				contextMenuLayer.isInGpxDetailsMode() ||
 				measurementToolLayer.isInMeasurementMode() ||
                 mapMarkersLayer.isInPlanRouteMode() ||
-                mapActivity.getContextMenu().isVisible() && !mapActivity.getContextMenu().findMenuFragment().get().isRemoving() ||
-                mapActivity.getContextMenu().isVisible() && mapActivity.getContextMenu().findMenuFragment().get().isAdded() ||
-                mapActivity.getContextMenu().getMultiSelectionMenu().isVisible() && mapActivity.getContextMenu().getMultiSelectionMenu().getFragmentByTag().isAdded() ||
-                mapActivity.getContextMenu().getMultiSelectionMenu().isVisible() && !mapActivity.getContextMenu().getMultiSelectionMenu().getFragmentByTag().isRemoving();
+                contextMenu.isVisible() && contextMenuMenuFragment != null && !contextMenuMenuFragment.isRemoving() ||
+                contextMenu.isVisible() && contextMenuMenuFragment != null && contextMenuMenuFragment.isAdded() ||
+                multiSelectionMenu.isVisible() && multiMenuFragment != null && multiMenuFragment.isAdded() ||
+                multiSelectionMenu.isVisible() && multiMenuFragment != null && !multiMenuFragment.isRemoving();
         quickActionButton.setVisibility(hideQuickButton ? View.GONE : View.VISIBLE);
     }
 
