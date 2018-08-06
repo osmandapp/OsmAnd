@@ -761,8 +761,8 @@ class TelegramHelper private constructor() {
 					val locStr = s.removePrefix(LOCATION_PREFIX)
 					try {
 						val (latS, lonS) = locStr.split(" ")
-						val updatedS = locStr.substring(locStr.indexOf("(") + 1, locStr.indexOf(")"))
-						val timeSecs = parseTime(updatedS)
+						val updatedS = locStr.substring(locStr.indexOf("("), locStr.length)
+						val timeSecs = parseTime(updatedS.removePrefix("(").removeSuffix(")"))
 						res.lat = latS.dropLast(1).toDouble()
 						res.lon = lonS.toDouble()
 						res.editDate = (System.currentTimeMillis() / 1000 - timeSecs).toInt()
