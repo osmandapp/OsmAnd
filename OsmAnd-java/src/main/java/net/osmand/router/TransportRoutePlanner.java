@@ -5,9 +5,7 @@ import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.map.hash.TIntObjectHashMap;
 import gnu.trove.map.hash.TLongObjectHashMap;
 
-import java.io.File;
 import java.io.IOException;
-import java.io.RandomAccessFile;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -28,24 +26,6 @@ import net.osmand.util.MapUtils;
 public class TransportRoutePlanner {
 	
 
-	public static void main(String[] args) throws IOException {
-		File fl = new File(System.getProperty("maps.dir"), "Netherlands_noord-holland_europe_2.obf");
-		RandomAccessFile raf = new RandomAccessFile(fl, "r");
-		BinaryMapIndexReader reader = new BinaryMapIndexReader(raf, fl);
-		
-		LatLon start = new LatLon(52.28094, 4.853248);
-//		LatLon end = new LatLon(52.320988, 4.87256);
-		LatLon end = new LatLon(52.349308, 4.9017425);
-		
-		TransportRoutingConfiguration cfg = new TransportRoutingConfiguration();
-		cfg.maxNumberOfChanges = 3;
-		cfg.walkRadius = 1500;
-//		cfg.walkChangeRadius = 500;
-		TransportRoutingContext ctx = new TransportRoutingContext(cfg, reader);
-		TransportRoutePlanner planner = new TransportRoutePlanner();
-		planner.buildRoute(ctx, start, end);
-		
-	}
 
 	public List<TransportRouteResult> buildRoute(TransportRoutingContext ctx, LatLon start, LatLon end) throws IOException {
 		ctx.startCalcTime = System.currentTimeMillis();
@@ -150,8 +130,6 @@ public class TransportRoutePlanner {
 	private List<TransportRouteResult> prepareResults(TransportRoutingContext ctx, List<TransportRouteSegment> results) {
 		Collections.sort(results, new SegmentsComparator(ctx));
 		List<TransportRouteResult> lst = new ArrayList<TransportRouteResult>();
-		System.out.println("FIX !!! " + ctx.wrongLoadedWays + " " + ctx.loadedWays + " " + 
-					(ctx.loadTime / (1000 * 1000)) + " ms");
 		System.out.println(String.format("Calculated %.1f seconds, found %d results, visited %d routes, loaded %d tiles (%d ms read, %d ms total),",
 				(System.currentTimeMillis() - ctx.startCalcTime) / 1000.0, results.size(), ctx.visitedRoutesCount, 
 				ctx.quadTree.size(), ctx.readTime / (1000 * 1000), ctx.loadTime / (1000 * 1000)));
