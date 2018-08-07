@@ -396,7 +396,7 @@ public class ResourceManager {
 							String lang = f.getName().replace("-tts-js", "");
 							File jsConf = new File(f, lang + "_" + IndexConstants.TTSVOICE_INDEX_EXT_JS);
 							if (jsConf.exists()) {
-								indexFileNames.put(jsConf.getName(), dateFormat.format(jsConf.lastModified()));
+								indexFileNames.put(f.getName(), dateFormat.format(jsConf.lastModified()));
 							}
 						}
 					}

@@ -339,7 +339,7 @@ public class DownloadActivityType {
 		// fileName.endsWith(IndexConstants.TTSVOICE_INDEX_EXT_ZIP)) {
 		if (this == VOICE_FILE) {
 			if (fileName.contains(".js")) {
-				return fileName;
+				return fileName.replace('_', '-').replace('.', '-');
 			}
 			int l = fileName.lastIndexOf('_');
 			if (l == -1) {
@@ -413,7 +413,7 @@ public class DownloadActivityType {
 			if (l == -1) {
 				l = fileName.length();
 			}
-			return fileName.endsWith(IndexConstants.TTSVOICE_INDEX_EXT_JS) ? fileName : fileName.substring(0, l);
+			return fileName.endsWith(IndexConstants.TTSVOICE_INDEX_EXT_JS) ? fileName.replace('_', '-').replace('.', '-') : fileName.substring(0, l);
 		}
 		if (this == FONT_FILE) {
 			int l = fileName.indexOf('.');

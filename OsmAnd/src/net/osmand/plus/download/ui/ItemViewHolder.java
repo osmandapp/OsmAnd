@@ -403,7 +403,7 @@ public class ItemViewHolder {
 					} else if (indexItem.getType() == DownloadActivityType.FONT_FILE) {
 						tp = LocalIndexType.FONT_DATA;
 					} else if (indexItem.getType() == DownloadActivityType.VOICE_FILE) {
-						tp = indexItem.getFileName().endsWith(IndexConstants.TTSVOICE_INDEX_EXT_JS) ? LocalIndexType.TTS_VOICE_DATA_JS :
+						tp = indexItem.getFileName().contains("-tts-js") ? LocalIndexType.TTS_VOICE_DATA_JS :
 								indexItem.getBasename().contains("tts") ? LocalIndexType.TTS_VOICE_DATA
 								: LocalIndexType.VOICE_DATA;
 					}
