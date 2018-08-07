@@ -1,6 +1,5 @@
 package net.osmand.telegram.ui
 
-import android.graphics.Paint
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
@@ -346,17 +345,10 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 		private fun showPopupMenu(holder: ChatViewHolder, chatId: Long) {
 			val ctx = holder.itemView.context
 
-			val paint = Paint()
-			paint.textSize =
-					resources.getDimensionPixelSize(R.dimen.list_item_title_text_size).toFloat()
-			val textWidth = Math.max(paint.measureText(menuList[0]), paint.measureText(menuList[1]))
-			val itemWidth = textWidth.toInt() + AndroidUtils.dpToPx(ctx, 32F)
-			val minWidth = AndroidUtils.dpToPx(ctx, 100F)
-
 			ListPopupWindow(ctx).apply {
 				isModal = true
 				anchorView = holder.showOnMapState
-				setContentWidth(Math.max(minWidth, itemWidth))
+				setContentWidth(AndroidUtils.getPopupMenuWidth(ctx, menuList))
 				setDropDownGravity(Gravity.END or Gravity.TOP)
 				setAdapter(ArrayAdapter(ctx, R.layout.popup_list_text_item, menuList))
 				setOnItemClickListener { _, _, position, _ ->

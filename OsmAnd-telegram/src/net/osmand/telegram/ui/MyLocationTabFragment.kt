@@ -2,7 +2,6 @@ package net.osmand.telegram.ui
 
 import android.animation.*
 import android.content.Intent
-import android.graphics.Paint
 import android.graphics.drawable.GradientDrawable
 import android.os.Build
 import android.os.Bundle
@@ -221,30 +220,28 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 		val ctx = context ?: return
 
 		val menuList = ArrayList<String>()
+		val settings = getString(R.string.shared_string_settings)
 		val logout = getString(R.string.shared_string_logout)
 		val login = getString(R.string.shared_string_login)
 
+		menuList.add(settings)
+		@Suppress("NON_EXHAUSTIVE_WHEN")
 		when (telegramHelper.getTelegramAuthorizationState()) {
 			TelegramHelper.TelegramAuthorizationState.READY -> menuList.add(logout)
 			TelegramHelper.TelegramAuthorizationState.CLOSED -> menuList.add(login)
-			else -> return
 		}
-
-		val paint = Paint()
-		paint.textSize =
-				resources.getDimensionPixelSize(R.dimen.list_item_title_text_size).toFloat()
-		val textWidth = paint.measureText(menuList[0])
-		val itemWidth = textWidth.toInt() + AndroidUtils.dpToPx(ctx, 32F)
-		val minWidth = AndroidUtils.dpToPx(ctx, 100F)
 
 		ListPopupWindow(ctx).apply {
 			isModal = true
 			anchorView = optionsBtn
-			setContentWidth(Math.max(minWidth, itemWidth))
+			setContentWidth(AndroidUtils.getPopupMenuWidth(ctx, menuList))
 			setDropDownGravity(Gravity.END or Gravity.TOP)
 			setAdapter(ArrayAdapter(ctx, R.layout.popup_list_text_item, menuList))
 			setOnItemClickListener { _, _, position, _ ->
 				when (position) {
+					menuList.indexOf(settings) -> {
+						fragmentManager?.also { SettingsDialogFragment.showInstance(it) }
+					}
 					menuList.indexOf(logout) -> logoutTelegram()
 					menuList.indexOf(login) -> loginTelegram()
 				}
