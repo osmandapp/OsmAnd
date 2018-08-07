@@ -8,6 +8,7 @@ import org.drinkless.td.libcore.telegram.Client.ResultHandler
 import org.drinkless.td.libcore.telegram.TdApi
 import org.drinkless.td.libcore.telegram.TdApi.AuthorizationState
 import java.io.File
+import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.ConcurrentHashMap
 import java.util.concurrent.Executors
@@ -30,6 +31,19 @@ class TelegramHelper private constructor() {
 		private const val DEVICE_PREFIX = "Device: "
 		private const val LOCATION_PREFIX = "Location: "
 
+		private const val FEW_SECONDS_AGO = "few seconds ago"
+		private const val SECONDS_AGO_SUFFIX = " seconds ago"
+		private const val MINUTES_AGO_SUFFIX = " minutes ago"
+		private const val HOURS_AGO_SUFFIX = " hours ago"
+		private const val UTC_FORMAT_SUFFIX = " UTC"
+		
+		private val UTC_DATE_FORMAT = SimpleDateFormat("yyyy-MM-dd", Locale.US).apply {
+			timeZone = TimeZone.getTimeZone("UTC")
+		}
+
+		private val UTC_TIME_FORMAT = SimpleDateFormat("HH:mm:ss", Locale.US).apply {
+			timeZone = TimeZone.getTimeZone("UTC")
+		}
 		// min and max values for the Telegram API
 		const val MIN_LOCATION_MESSAGE_LIVE_PERIOD_SEC = 61
 		const val MAX_LOCATION_MESSAGE_LIVE_PERIOD_SEC = 60 * 60 * 24 - 1 // one day
@@ -714,11 +728,27 @@ class TelegramHelper private constructor() {
 
 	private fun parseOsmAndBotLocation(message: TdApi.Message): MessageOsmAndBotLocation {
 		val messageLocation = message.content as TdApi.MessageLocation
-		val res = MessageOsmAndBotLocation()
-		res.name = getOsmAndBotDeviceName(message)
-		res.lat = messageLocation.location.latitude
-		res.lon = messageLocation.location.longitude
-		return res
+		return MessageOsmAndBotLocation().apply {
+			name = getOsmAndBotDeviceName(message)
+			lat = messageLocation.location.latitude
+			lon = messageLocation.location.longitude
+			val date = message.editDate
+			lastUpdated = if (date != 0) {
+				date
+			} else {
+				message.date
+			}
+		}
+	}
+	
+	private fun parseOsmAndBotLocationContent(oldContent:MessageOsmAndBotLocation, content: TdApi.MessageContent): MessageOsmAndBotLocation {
+		val messageLocation = content as TdApi.MessageLocation
+		return MessageOsmAndBotLocation().apply {
+			name = oldContent.name
+			lat = messageLocation.location.latitude
+			lon = messageLocation.location.longitude
+			lastUpdated = (System.currentTimeMillis() / 1000).toInt()
+		}
 	}
 	
 	private fun parseOsmAndBotLocation(text: String): MessageOsmAndBotLocation {
@@ -732,8 +762,15 @@ class TelegramHelper private constructor() {
 					val locStr = s.removePrefix(LOCATION_PREFIX)
 					try {
 						val (latS, lonS) = locStr.split(" ")
+						val updatedS = locStr.substring(locStr.indexOf("("), locStr.length)
+						val timeSecs = parseTime(updatedS.removePrefix("(").removeSuffix(")"))
 						res.lat = latS.dropLast(1).toDouble()
 						res.lon = lonS.toDouble()
+						if (timeSecs < MESSAGE_ACTIVE_TIME_SEC) {
+							res.lastUpdated = (System.currentTimeMillis() / 1000 - timeSecs).toInt()
+						} else {
+							res.lastUpdated = timeSecs
+						}
 					} catch (e: Exception) {
 						e.printStackTrace()
 					}
@@ -743,6 +780,40 @@ class TelegramHelper private constructor() {
 		return res
 	}
 
+	private fun parseTime(timeS: String): Int {
+		try {
+			when {
+				timeS.endsWith(FEW_SECONDS_AGO) -> return 5
+				
+				timeS.endsWith(SECONDS_AGO_SUFFIX) -> {
+					val locStr = timeS.removeSuffix(SECONDS_AGO_SUFFIX)
+					return locStr.toInt()
+				}
+				timeS.endsWith(MINUTES_AGO_SUFFIX) -> {
+					val locStr = timeS.removeSuffix(MINUTES_AGO_SUFFIX)
+					val minutes = locStr.toInt()
+					return minutes * 60
+				}
+				timeS.endsWith(HOURS_AGO_SUFFIX) -> {
+					val locStr = timeS.removeSuffix(HOURS_AGO_SUFFIX)
+					val hours = locStr.toInt()
+					return hours * 60 * 60
+				}
+				timeS.endsWith(UTC_FORMAT_SUFFIX) -> {
+					val locStr = timeS.removeSuffix(UTC_FORMAT_SUFFIX)
+					val (latS, lonS) = locStr.split(" ")
+					val date = UTC_DATE_FORMAT.parse(latS)
+					val time = UTC_TIME_FORMAT.parse(lonS)
+					val res = date.time + time.time
+					return res.toInt()
+				}
+			}
+		} catch (e: Exception) {
+			e.printStackTrace()
+		}
+		return 0
+	}
+	
 	class MessageOsmAndBotLocation : TdApi.MessageContent() {
 
 		var name: String = ""
@@ -750,6 +821,8 @@ class TelegramHelper private constructor() {
 		var lat: Double = Double.NaN
 			internal set
 		var lon: Double = Double.NaN
+			internal set
+		var lastUpdated: Int = 0
 			internal set
 
 		override fun getConstructor() = -1
@@ -966,7 +1039,7 @@ class TelegramHelper private constructor() {
 								parseOsmAndBotLocation(newContent.text.text)
 							} else if (newContent is TdApi.MessageLocation &&
 								(isOsmAndBot(message.senderUserId) || isOsmAndBot(message.viaBotUserId))) {
-								parseOsmAndBotLocation(message)
+								parseOsmAndBotLocationContent(message.content as MessageOsmAndBotLocation, newContent)
 							} else {
 								newContent
 							}

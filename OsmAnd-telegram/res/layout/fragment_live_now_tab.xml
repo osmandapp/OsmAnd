@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
 	android:orientation="vertical">
@@ -17,17 +18,21 @@
 			android:paddingBottom="@dimen/list_view_bottom_padding"
 			android:scrollbars="vertical"/>
 
-		<Button
+		<net.osmand.telegram.ui.views.TextViewEx
 			android:id="@+id/open_osmand_btn"
-			style="@style/DialogActionButtonActive"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_gravity="bottom|center_horizontal"
-			android:layout_marginBottom="@dimen/content_padding_big"
+			android:background="@drawable/img_shadow_fab"
 			android:drawableLeft="@drawable/ic_action_osmand_plus"
-			android:drawablePadding="@dimen/content_padding_standard"
+			android:drawablePadding="@dimen/content_padding_half"
 			android:drawableStart="@drawable/ic_action_osmand_plus"
-			android:text="@string/open_osmand"/>
+			android:gravity="center"
+			android:paddingLeft="32dp"
+			android:paddingRight="32dp"
+			android:text="@string/open_osmand"
+			android:textColor="@color/white"
+			app:typeface="@string/font_roboto_medium"/>
 
 	</FrameLayout>
 

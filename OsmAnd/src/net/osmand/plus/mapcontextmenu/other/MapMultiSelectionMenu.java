@@ -44,15 +44,16 @@ public class MapMultiSelectionMenu extends BaseMenuController {
 			this.pointDescription = pointDescription;
 			this.object = object;
 			this.mapActivity = mapActivity;
-			if (mapActivity != null) {
-				init();
-			}
+			init();
 		}
 
 		protected void init() {
-			controller = MenuController.getMenuController(mapActivity, latLon, pointDescription, object, MenuType.MULTI_LINE);
-			controller.setActive(true);
-			initTitle();
+			MapActivity mapActivity = getMapActivity();
+			if (mapActivity != null) {
+				controller = MenuController.getMenuController(mapActivity, latLon, pointDescription, object, MenuType.MULTI_LINE);
+				controller.setActive(true);
+				initTitle();
+			}
 		}
 
 		protected void deinit() {
@@ -160,7 +161,10 @@ public class MapMultiSelectionMenu extends BaseMenuController {
 	private void clearMenu() {
 		clearSelectedObjects();
 		objects.clear();
-		getMapActivity().refreshMap();
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			mapActivity.refreshMap();
+		}
 	}
 
 	public void show(LatLon latLon, Map<Object, IContextMenuProvider> selectedObjects) {
@@ -170,8 +174,11 @@ public class MapMultiSelectionMenu extends BaseMenuController {
 		this.latLon = latLon;
 		createCollection(selectedObjects);
 		updateNightMode();
-		MapMultiSelectionMenuFragment.showInstance(getMapActivity());
-		getMapActivity().refreshMap();
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			MapMultiSelectionMenuFragment.showInstance(mapActivity);
+			mapActivity.refreshMap();
+		}
 	}
 
 	public boolean isVisible() {
@@ -179,8 +186,14 @@ public class MapMultiSelectionMenu extends BaseMenuController {
 		return fragment != null;
 	}
 
+	@Nullable
 	public Fragment getFragmentByTag() {
-		return getMapActivity().getSupportFragmentManager().findFragmentByTag(MapMultiSelectionMenuFragment.TAG);
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			return mapActivity.getSupportFragmentManager().findFragmentByTag(MapMultiSelectionMenuFragment.TAG);
+		} else {
+			return null;
+		}
 	}
 
 	public void hide() {
@@ -199,8 +212,11 @@ public class MapMultiSelectionMenu extends BaseMenuController {
 	public void openContextMenu(@NonNull MenuObject menuObject) {
 		IContextMenuProvider provider = selectedObjects.remove(menuObject.getObject());
 		hide();
-		ContextMenuLayer contextMenuLayer = getMapActivity().getMapLayers().getContextMenuLayer();
-		contextMenuLayer.showContextMenu(menuObject.getLatLon(), menuObject.getPointDescription(), menuObject.getObject(), provider);
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			ContextMenuLayer contextMenuLayer = mapActivity.getMapLayers().getContextMenuLayer();
+			contextMenuLayer.showContextMenu(menuObject.getLatLon(), menuObject.getPointDescription(), menuObject.getObject(), provider);
+		}
 	}
 
 	private void clearSelectedObjects() {

@@ -1,6 +1,14 @@
 package net.osmand.router;
 
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.LinkedHashMap;
+import java.util.List;
+
 import net.osmand.NativeLibrary;
 import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapIndexReader;
@@ -15,24 +23,15 @@ import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.LinkedHashMap;
-import java.util.List;
-
 public class RoutePlannerFrontEnd {
 
-	private boolean useOldVersion;
 	protected static final Log log = PlatformUtil.getLog(RoutePlannerFrontEnd.class);
 	public boolean useSmartRouteRecalculation = true;
 
-	public RoutePlannerFrontEnd(boolean useOldVersion) {
-		this.useOldVersion = useOldVersion;
+	
+	public RoutePlannerFrontEnd() {
 	}
-
+	
 	public enum RouteCalculationMode {
 		BASE,
 		NORMAL,
@@ -345,11 +344,7 @@ public class RoutePlannerFrontEnd {
 		} else {
 			refreshProgressDistance(ctx);
 			// Split into 2 methods to let GC work in between
-			if (useOldVersion) {
-				new BinaryRoutePlannerOld().searchRouteInternal(ctx, start, end);
-			} else {
-				ctx.finalRouteSegment = new BinaryRoutePlanner().searchRouteInternal(ctx, start, end, recalculationEnd);
-			}
+			ctx.finalRouteSegment = new BinaryRoutePlanner().searchRouteInternal(ctx, start, end, recalculationEnd);
 			// 4. Route is found : collect all segments and prepare result
 			return new RouteResultPreparation().prepareResult(ctx, ctx.finalRouteSegment);
 		}

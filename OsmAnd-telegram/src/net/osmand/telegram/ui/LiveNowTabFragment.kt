@@ -10,8 +10,8 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.LinearInterpolator
 import android.widget.ArrayAdapter
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import net.osmand.Location
@@ -33,6 +33,7 @@ import org.drinkless.td.libcore.telegram.TdApi
 
 private const val CHAT_VIEW_TYPE = 0
 private const val LOCATION_ITEM_VIEW_TYPE = 1
+private const val LOCATION_TIMEOUT_TO_BE_STALE = 60 * 15 // 15 minutes
 
 class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessagesListener,
 	FullInfoUpdatesListener, TelegramLocationListener, TelegramCompassListener {
@@ -46,6 +47,8 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 
 	private lateinit var adapter: LiveNowListAdapter
 	private lateinit var locationViewCache: UpdateLocationViewCache
+
+	private lateinit var openOsmAndBtn: View
 
 	private var location: Location? = null
 	private var heading: Float? = null
@@ -66,13 +69,19 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 				override fun onScrollStateChanged(recyclerView: RecyclerView?, newState: Int) {
 					super.onScrollStateChanged(recyclerView, newState)
 					locationUiUpdateAllowed = newState == RecyclerView.SCROLL_STATE_IDLE
+					when (newState) {
+						RecyclerView.SCROLL_STATE_DRAGGING -> animateOpenOsmAndBtn(false)
+						RecyclerView.SCROLL_STATE_IDLE -> animateOpenOsmAndBtn(true)
+					}
 				}
 			})
 		}
-		mainView.findViewById<Button>(R.id.open_osmand_btn).setOnClickListener {
-			val intent = activity?.packageManager?.getLaunchIntentForPackage(OsmandAidlHelper.OSMAND_PACKAGE_NAME)
-			if (intent != null) {
-				startActivity(intent)
+		openOsmAndBtn = mainView.findViewById<View>(R.id.open_osmand_btn).apply {
+			setOnClickListener {
+				activity?.packageManager?.getLaunchIntentForPackage(OsmandAidlHelper.OSMAND_PACKAGE_NAME)
+					?.also { intent ->
+						startActivity(intent)
+					}
 			}
 		}
 		return mainView
@@ -230,6 +239,16 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 		}
 	}
 
+	private fun animateOpenOsmAndBtn(show: Boolean) {
+		val scale = if (show) 1f else 0f
+		openOsmAndBtn.animate()
+			.scaleX(scale)
+			.scaleY(scale)
+			.setDuration(200)
+			.setInterpolator(LinearInterpolator())
+			.start()
+	}
+
 	inner class LiveNowListAdapter : RecyclerView.Adapter<BaseViewHolder>() {
 
 		private val menuList =
@@ -282,7 +301,7 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 			}
 			if (location != null && item.latLon != null) {
 				holder.locationViewContainer?.visibility = View.VISIBLE
-				// TODO: locationViewCache.outdatedLocation
+				locationViewCache.outdatedLocation = System.currentTimeMillis() / 1000 - item.lastUpdated > LOCATION_TIMEOUT_TO_BE_STALE
 				app.uiUtils.updateLocationView(
 					holder.directionIcon,
 					holder.distanceText,

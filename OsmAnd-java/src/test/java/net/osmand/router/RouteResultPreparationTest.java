@@ -59,7 +59,7 @@ public class RouteResultPreparationTest {
 
         RandomAccessFile raf = new RandomAccessFile(fl, "r");
 
-        fe = new RoutePlannerFrontEnd(false);
+        fe = new RoutePlannerFrontEnd();
         RoutingConfiguration.Builder builder = RoutingConfiguration.getDefault();
         Map<String, String> params = new LinkedHashMap<String, String>();
         params.put("car", "true");

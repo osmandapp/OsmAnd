@@ -117,7 +117,7 @@ public class CurrentPositionHelper {
 		if (rs.length > 0) {
 			RoutingConfiguration defCfg = RoutingConfiguration.getDefault().build("geocoding", 10,
 					new HashMap<String, String>());
-			defCtx = new RoutePlannerFrontEnd(false).buildRoutingContext(defCfg, null, rs);
+			defCtx = new RoutePlannerFrontEnd().buildRoutingContext(defCfg, null, rs);
 		} else {
 			defCtx = null;
 		}

@@ -12,6 +12,7 @@ import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.view.ContextThemeWrapper;
@@ -89,6 +90,7 @@ public class MenuBuilder {
 	protected List<Amenity> nearestWiki = new ArrayList<>();
 	private List<OsmandPlugin> menuPlugins = new ArrayList<>();
 	private List<TransportStopRoute> routes = new ArrayList<>();
+	@Nullable
 	private CardsRowBuilder onlinePhotoCardsRow;
 	private List<AbstractCard> onlinePhotoCards;
 
@@ -416,6 +418,9 @@ public class MenuBuilder {
 	}
 
 	private void startLoadingImages() {
+		if (onlinePhotoCardsRow == null) {
+			return;
+		}
 		onlinePhotoCards = new ArrayList<>();
 		onlinePhotoCardsRow.setProgressCard();
 		execute(new GetImageCardsTask(mapActivity, getLatLon(), getAdditionalCardParams(),
@@ -433,7 +438,9 @@ public class MenuBuilder {
 							if (cardList.size() == 0) {
 								cards.add(new NoImagesCard(mapActivity));
 							}
-							onlinePhotoCardsRow.setCards(cards);
+							if (onlinePhotoCardsRow != null) {
+								onlinePhotoCardsRow.setCards(cards);
+							}
 							onlinePhotoCards = cards;
 						}
 					}

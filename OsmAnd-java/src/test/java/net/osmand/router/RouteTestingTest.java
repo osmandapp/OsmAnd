@@ -60,7 +60,7 @@ public class RouteTestingTest {
 	public void testRouting() throws Exception {
 		String fl = "src/test/resources/Routing_test.obf";
 		RandomAccessFile raf = new RandomAccessFile(fl, "r");
-		RoutePlannerFrontEnd fe = new RoutePlannerFrontEnd(false);
+		RoutePlannerFrontEnd fe = new RoutePlannerFrontEnd();
 
 		BinaryMapIndexReader[] binaryMapIndexReaders = { new BinaryMapIndexReader(raf, new File(fl)) };
 		RoutingConfiguration.Builder builder = RoutingConfiguration.getDefault();

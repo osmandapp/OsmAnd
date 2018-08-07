@@ -436,7 +436,7 @@ public class BinaryMapTransportReaderAdapter {
 			}
 		}
 		dataObject.setId(did);
-		dataObject.setLocation(MapUtils.getLatitudeFromTile(BinaryMapIndexReader.TRANSPORT_STOP_ZOOM, dy), MapUtils.getLongitudeFromTile(BinaryMapIndexReader.TRANSPORT_STOP_ZOOM, dx));
+		dataObject.setLocation(BinaryMapIndexReader.TRANSPORT_STOP_ZOOM, dx, dy);
 		return dataObject;
 	}
 	
@@ -461,7 +461,7 @@ public class BinaryMapTransportReaderAdapter {
 		req.cacheTypes.clear();
 		
 		TransportStop dataObject = new TransportStop();
-		dataObject.setLocation(MapUtils.getLatitudeFromTile(BinaryMapIndexReader.TRANSPORT_STOP_ZOOM, y), MapUtils.getLongitudeFromTile(BinaryMapIndexReader.TRANSPORT_STOP_ZOOM, x));
+		dataObject.setLocation(BinaryMapIndexReader.TRANSPORT_STOP_ZOOM, x, y);
 		dataObject.setFileOffset(shift);
 		while(true){
 			int t = codedIS.readTag();

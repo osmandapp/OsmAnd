@@ -118,10 +118,6 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 				}
 			}
 		})
-		telegramHelper.listener = this
-		if (!telegramHelper.isInit()) {
-			telegramHelper.init()
-		}
 
 		if (osmandAidlHelper.isOsmandBound() && !osmandAidlHelper.isOsmandConnected()) {
 			osmandAidlHelper.connectOsmand()
@@ -142,6 +138,11 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 	override fun onResume() {
 		super.onResume()
 		paused = false
+
+		telegramHelper.listener = this
+		if (!telegramHelper.isInit()) {
+			telegramHelper.init()
+		}
 
 		app.locationProvider.checkIfLastKnownLocationIsValid()
 
