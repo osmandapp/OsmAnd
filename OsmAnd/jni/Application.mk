@@ -1,5 +1,5 @@
-APP_STL := gnustl_shared
-# APP_STL := c++_shared
+# APP_STL := gnustl_shared
+APP_STL := c++_shared
 APP_CPPFLAGS := -std=c++11 -fexceptions -frtti
 APP_SHORT_COMMANDS := true
 

@@ -103,7 +103,7 @@ android {
 		}
 
 		legacy {
-			jniLibs.srcDirs = ["libgnustl"]
+			jniLibs.srcDirs = ["libc++"]
 		}
 	}
 
@@ -311,16 +311,12 @@ task cleanupDuplicatesInCore() {
 	dependsOn buildOsmAndCore
 	// doesn't work for legacy debug builds
 	doLast {
-		file("libgnustl/arm64-v8a").mkdirs()
-		file("libs/arm64-v8a/libgnustl_shared.so").renameTo(file("libgnustl/arm64-v8a/libgnustl_shared.so"))
-		file("libgnustl/armeabi").mkdirs()
-		file("libs/armeabi/libgnustl_shared.so").renameTo(file("libgnustl/armeabi/libgnustl_shared.so"))
-		file("libgnustl/armeabi-v7a").mkdirs()
-		file("libs/armeabi-v7a/libgnustl_shared.so").renameTo(file("libgnustl/armeabi-v7a/libgnustl_shared.so"))
-		file("libgnustl/mips").mkdirs()
-		file("libs/mips/libgnustl_shared.so").renameTo(file("libgnustl/mips/libgnustl_shared.so"))
-		file("libgnustl/x86").mkdirs()
-		file("libs/x86/libgnustl_shared.so").renameTo(file("libgnustl/x86/libgnustl_shared.so"))
+		file("libc++/armeabi-v7a").mkdirs()
+		file("libs/armeabi-v7a/libc++_shared.so").renameTo(file("libc++/armeabi-v7a/libc++_shared.so"))
+		file("libc++/arm64-v8a").mkdirs()
+		file("libs/arm64-v8a/libc++_shared.so").renameTo(file("libc++/arm64-v8a/libc++_shared.so"))
+		file("libc++/x86").mkdirs()
+		file("libs/x86/libc++_shared.so").renameTo(file("libc++/x86/libc++_shared.so"))
 	}
 }
 afterEvaluate {

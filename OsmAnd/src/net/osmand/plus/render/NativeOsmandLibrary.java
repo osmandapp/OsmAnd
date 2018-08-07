@@ -33,8 +33,8 @@ public class NativeOsmandLibrary extends NativeLibrary {
 				if (!isLoaded()) {
 					isNativeSupported = false;
 					try {
-						log.debug("Loading native gnustl_shared..."); //$NON-NLS-1$
-						System.loadLibrary("gnustl_shared");
+						log.debug("Loading native c++_shared..."); //$NON-NLS-1$
+						System.loadLibrary("c++_shared");
 						log.debug("Loading native libraries..."); //$NON-NLS-1$
                         System.loadLibrary("osmand");
 						log.debug("Creating NativeOsmandLibrary instance..."); //$NON-NLS-1$
