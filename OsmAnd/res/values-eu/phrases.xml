@@ -3829,4 +3829,41 @@
 	<string name="poi_climbing_boulder_no">Boulder: ez</string>
 	<string name="poi_climbing_summit_log_yes">Eskalatutako tontorreko liburua: bai</string>
 	<string name="poi_climbing_summit_log_no">Eskalatutako tontorreko liburua: ez</string>
-	</resources>
+	<string name="poi_cuisine_savory_pancakes">Pancake gaziak</string>
+	<string name="poi_cuisine_bistro">Bistro</string>
+	<string name="poi_cuisine_brasserie">Brasserie</string>
+	<string name="poi_climbing_toprope_yes">Goiko soka: bai</string>
+	<string name="poi_climbing_toprope_no">Goiko soka: ez</string>
+	<string name="poi_climbing_multipitch_yes">Hainbat mailatako ibilbideak: bai</string>
+	<string name="poi_climbing_multipitch_no">Hainbat mailatako ibilbideak: ez</string>
+	<string name="poi_climbing_deepwater_yes">Psicobloc: bai</string>
+	<string name="poi_climbing_deepwater_no">Psicobloc: ez</string>
+
+	<string name="poi_whitewater_rapid_name">Errekako ur-lasterren izena</string>
+
+	<string name="poi_barbecue_grill">Barbakoarako gresilla: bai</string>
+
+	<string name="poi_water_utility">Ur zerbitzuaren bulegoa</string>
+
+	<string name="poi_amusement_arcade">Bideo-joko jolastokia</string>
+	<string name="poi_aerialway_zip_line">Tirolina</string>
+
+	<string name="poi_glacier_type_icecap">Izotz-kaskoa</string>
+	<string name="poi_glacier_type_icefield">Izotz eremua</string>
+	<string name="poi_glacier_type_icefall">Izotz ur-jauzia</string>
+	<string name="poi_appliance">Etxetresna denda</string>
+
+	<string name="poi_outcrop">Azaleratzea</string>
+
+	<string name="poi_payment_contactless_yes">Kontaktu gabekoa</string>
+	<string name="poi_payment_contactless_no">Kontaktu gabekoa ez da onartzen</string>
+
+	<string name="poi_hazard_nuclear">Arrisku nuklearra</string>
+	<string name="poi_hazard_erosion">Higadura arriskua</string>
+	<string name="poi_hazard_avalanche">Elur-jausi arriskua</string>
+	<string name="poi_hazard_slippery_road">Errepide irristakorra</string>
+	<string name="poi_hazard_flood">Uholde arriskua</string>
+	<string name="poi_hazard_minefield">Minaturiko eremua</string>
+
+
+</resources>
