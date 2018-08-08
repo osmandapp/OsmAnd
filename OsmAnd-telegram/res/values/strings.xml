@@ -1,4 +1,6 @@
 <resources>
+	<string name="stop_sharing_all">Stop all sharing</string>
+	<string name="stop_sharing_chat">Stop chat sharing</string>
 	<string name="open_osmand">Open OsmAnd</string>
 	<string name="shared_string_live">Live</string>
 	<string name="shared_string_bot">Bot</string>

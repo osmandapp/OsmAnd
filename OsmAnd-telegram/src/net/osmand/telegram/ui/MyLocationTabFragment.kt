@@ -18,9 +18,9 @@ import net.osmand.telegram.TelegramApplication
 import net.osmand.telegram.helpers.TelegramHelper
 import net.osmand.telegram.helpers.TelegramHelper.TelegramListener
 import net.osmand.telegram.helpers.TelegramUiHelper
-import net.osmand.telegram.ui.MyLocationTabFragment.MyLocationListAdapter.ChatViewHolder
 import net.osmand.telegram.utils.AndroidUtils
 import org.drinkless.td.libcore.telegram.TdApi
+import java.util.concurrent.TimeUnit
 
 private const val SELECTED_CHATS_KEY = "selected_chats"
 
@@ -37,7 +37,9 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 		get() = activity?.application as TelegramApplication
 
 	private val telegramHelper get() = app.telegramHelper
+	private val settings get() = app.settings
 
+	private lateinit var mainView: View
 	private lateinit var appBarLayout: AppBarLayout
 	private lateinit var userImage: ImageView
 	private lateinit var optionsBtn: ImageView
@@ -45,6 +47,8 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 	private lateinit var title: TextView
 	private lateinit var description: TextView
 	private lateinit var searchBox: FrameLayout
+	private lateinit var recyclerView: RecyclerView
+	private lateinit var switch: Switch
 
 	private lateinit var searchBoxBg: GradientDrawable
 
@@ -56,6 +60,8 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 	private val selectedChats = HashSet<Long>()
 
 	private var actionButtonsListener: ActionButtonsListener? = null
+
+	private var hasAnyChatToShareLocation: Boolean = true
 
 	override fun onCreateView(
 		inflater: LayoutInflater,
@@ -79,7 +85,8 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 			}
 		}
 
-		val mainView = inflater.inflate(R.layout.fragment_my_location_tab, container, false)
+		mainView = inflater.inflate(R.layout.fragment_my_location_tab, container, false)
+		hasAnyChatToShareLocation = settings.hasAnyChatToShareLocation()
 
 		appBarLayout = mainView.findViewById<AppBarLayout>(R.id.app_bar_layout).apply {
 			if (Build.VERSION.SDK_INT >= 21) {
@@ -87,9 +94,9 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 				outlineProvider = null
 			}
 			addOnOffsetChangedListener { appBar, offset ->
-				if (appBarScrollRange == -1) {
-					appBarScrollRange = appBar.totalScrollRange
-				}
+//				if (appBarScrollRange == -1) {
+				appBarScrollRange = appBar.totalScrollRange
+//				}
 				val collapsed = Math.abs(offset) == appBarScrollRange
 				if (collapsed != appBarCollapsed) {
 					appBarCollapsed = collapsed
@@ -105,6 +112,11 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 		}
 
 		optionsBtn = mainView.findViewById<ImageView>(R.id.options).apply {
+			setImageDrawable(app.uiUtils.getThemedIcon(R.drawable.ic_action_other_menu))
+			setOnClickListener { showPopupMenu() }
+		}
+
+		mainView.findViewById<ImageView>(R.id.options_icon).apply {
 			setImageDrawable(app.uiUtils.getThemedIcon(R.drawable.ic_action_other_menu))
 			setOnClickListener { showPopupMenu() }
 		}
@@ -138,17 +150,37 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 				.setImageDrawable(app.uiUtils.getThemedIcon(R.drawable.ic_action_search_dark))
 		}
 
-		mainView.findViewById<RecyclerView>(R.id.recycler_view).apply {
+		recyclerView = mainView.findViewById<RecyclerView>(R.id.recycler_view).apply {
 			layoutManager = LinearLayoutManager(context)
 			adapter = this@MyLocationTabFragment.adapter
 		}
+		switch = mainView.findViewById<Switch>(R.id.stop_all_sharing_switcher).apply {
+			if (settings.hasAnyChatToShareLocation()) {
+				isChecked = true
+			}
+			setOnCheckedChangeListener { _, isChecked ->
+				run {
+					if (!isChecked) {
+						app.settings.stopSharingLocationToChats()
+						if (!app.settings.hasAnyChatToShareLocation()) {
+							app.shareLocationHelper.stopSharingLocation()
+						}
+						updateList()
+						updateSharingMode()
+					}
+				}
+			}
+		}
 
+		updateSharingMode()
+		
 		return mainView
 	}
 
 	override fun onResume() {
 		super.onResume()
 		updateList()
+		updateSharingMode()
 	}
 
 	override fun onSaveInstanceState(outState: Bundle) {
@@ -160,6 +192,8 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 		super.onActivityResult(requestCode, resultCode, data)
 		if (requestCode == SetTimeDialogFragment.LOCATION_SHARED_REQUEST_CODE) {
 			clearSelection()
+			updateList()
+			updateSharingMode()
 		}
 	}
 
@@ -170,6 +204,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 		when (newTelegramAuthorizationState) {
 			TelegramHelper.TelegramAuthorizationState.READY -> {
 				updateList()
+				updateSharingMode()
 			}
 			TelegramHelper.TelegramAuthorizationState.CLOSED,
 			TelegramHelper.TelegramAuthorizationState.UNKNOWN -> {
@@ -180,19 +215,23 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 	}
 
 	override fun onTelegramChatsRead() {
-		updateList()
+		updateList()	
+		updateSharingMode()
 	}
 
 	override fun onTelegramChatsChanged() {
 		updateList()
+		updateSharingMode()
 	}
 
 	override fun onTelegramChatChanged(chat: TdApi.Chat) {
 		updateList()
+		updateSharingMode()
 	}
 
 	override fun onTelegramUserChanged(user: TdApi.User) {
 		updateList()
+		updateSharingMode()
 	}
 
 	override fun onTelegramError(code: Int, message: String) {
@@ -214,6 +253,28 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 		selectedChats.clear()
 		adapter.notifyDataSetChanged()
 		actionButtonsListener?.switchButtonsVisibility(false)
+	}
+
+	private fun updateSharingMode() {
+		hasAnyChatToShareLocation = settings.hasAnyChatToShareLocation()
+		if (!hasAnyChatToShareLocation) {
+			mainView.findViewById<View>(R.id.tab_title).visibility = View.GONE
+			mainView.findViewById<View>(R.id.appbar_divider).visibility = View.GONE
+			mainView.findViewById<View>(R.id.stop_all_sharing_row).visibility = View.GONE
+			mainView.findViewById<View>(R.id.text_container).visibility = View.VISIBLE
+			mainView.findViewById<View>(R.id.background_image).visibility = View.VISIBLE
+		} else {
+			mainView.findViewById<View>(R.id.background_image).visibility = View.GONE
+			mainView.findViewById<View>(R.id.text_container).visibility = View.GONE
+			mainView.findViewById<View>(R.id.tab_title).visibility = View.VISIBLE
+			mainView.findViewById<View>(R.id.appbar_divider).visibility = View.VISIBLE
+			mainView.findViewById<View>(R.id.stop_all_sharing_row).visibility = View.VISIBLE
+			switch.apply {
+				if (hasAnyChatToShareLocation) {
+					isChecked = true
+				}
+			}
+		}
 	}
 
 	private fun showPopupMenu() {
@@ -335,24 +396,43 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 	}
 
 	private fun updateList() {
-		val chatList = telegramHelper.getChatList()
-		val chats: MutableList<TdApi.Chat> = mutableListOf()
-		val currentUser = telegramHelper.getCurrentUser()
-		for (orderedChat in chatList) {
-			val chat = telegramHelper.getChat(orderedChat.chatId)
-			if (chat != null) {
-				if (telegramHelper.isPrivateChat(chat)) {
-					if ((chat.type as TdApi.ChatTypePrivate).userId == currentUser?.id) {
-						continue
+		hasAnyChatToShareLocation = settings.hasAnyChatToShareLocation()
+		if (hasAnyChatToShareLocation) {
+			val chatList = settings.getShareLocationChats()
+			val chats: MutableList<TdApi.Chat> = mutableListOf()
+			val currentUser = telegramHelper.getCurrentUser()
+			for (orderedChat in chatList) {
+				val chat = telegramHelper.getChat(orderedChat)
+				if (chat != null) {
+					if (telegramHelper.isPrivateChat(chat)) {
+						if ((chat.type as TdApi.ChatTypePrivate).userId == currentUser?.id) {
+							continue
+						}
 					}
+					chats.add(chat)
 				}
-				chats.add(chat)
 			}
+			adapter.chats = chats
+		} else {
+			val chatList = telegramHelper.getChatList()
+			val chats: MutableList<TdApi.Chat> = mutableListOf()
+			val currentUser = telegramHelper.getCurrentUser()
+			for (orderedChat in chatList) {
+				val chat = telegramHelper.getChat(orderedChat.chatId)
+				if (chat != null) {
+					if (telegramHelper.isPrivateChat(chat)) {
+						if ((chat.type as TdApi.ChatTypePrivate).userId == currentUser?.id) {
+							continue
+						}
+					}
+					chats.add(chat)
+				}
+			}
+			adapter.chats = chats
 		}
-		adapter.chats = chats
 	}
 
-	inner class MyLocationListAdapter : RecyclerView.Adapter<ChatViewHolder>() {
+	inner class MyLocationListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
 		var chats: List<TdApi.Chat> = emptyList()
 			set(value) {
@@ -360,66 +440,146 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 				notifyDataSetChanged()
 			}
 
-		override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChatViewHolder {
-			val view = LayoutInflater.from(parent.context)
-				.inflate(R.layout.user_list_item, parent, false)
-			return ChatViewHolder(view)
+		override fun getItemViewType(position: Int): Int {
+			return if (settings.isSharingLocationToChat(chats[position].id)) {
+				1
+			} else {
+				0
+			}
 		}
 
-		override fun onBindViewHolder(holder: ChatViewHolder, position: Int) {
+		override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+			return if (viewType == 1) {
+				val view = LayoutInflater.from(parent.context)
+					.inflate(R.layout.live_now_chat_my_location, parent, false)
+				ChatViewHolder2(view)
+			} else {
+				val view = LayoutInflater.from(parent.context)
+					.inflate(R.layout.user_list_item, parent, false)
+				ChatViewHolder(view)
+			}
+		}
+
+		override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 			val chat = chats[position]
 			val lastItem = position == itemCount - 1
-			val placeholderId = if (telegramHelper.isGroup(chat)) R.drawable.img_group_picture else R.drawable.img_user_picture
+			val placeholderId =
+				if (telegramHelper.isGroup(chat)) R.drawable.img_group_picture else R.drawable.img_user_picture
 			val live = app.settings.isSharingLocationToChat(chat.id)
 
-			TelegramUiHelper.setupPhoto(app, holder.icon, chat.photo?.small?.local?.path, placeholderId, false)
-			holder.title?.text = chat.title
-			holder.description?.visibility = View.GONE
-			if (live) {
-				holder.checkBox?.visibility = View.GONE
-				holder.textInArea?.visibility = View.VISIBLE
-				holder.textInArea?.text = getString(R.string.shared_string_live)
-			} else {
-				holder.textInArea?.visibility = View.GONE
-				holder.checkBox?.apply {
-					visibility = View.VISIBLE
-					setOnCheckedChangeListener(null)
-					isChecked = selectedChats.contains(chat.id)
-					setOnCheckedChangeListener { _, isChecked ->
-						if (isChecked) {
-							selectedChats.add(chat.id)
-						} else {
-							selectedChats.remove(chat.id)
-						}
-						actionButtonsListener?.switchButtonsVisibility(selectedChats.isNotEmpty())
-					}
-				}
-			}
-			holder.bottomShadow?.visibility = if (lastItem) View.VISIBLE else View.GONE
-			holder.itemView.setOnClickListener {
+			if (holder is ChatViewHolder) {
+				TelegramUiHelper.setupPhoto(
+					app,
+					holder.icon,
+					chat.photo?.small?.local?.path,
+					placeholderId,
+					false
+				)
+				holder.title?.text = chat.title
+				holder.description?.visibility = View.GONE
 				if (live) {
-					app.settings.shareLocationToChat(chat.id, false)
-					if (!app.settings.hasAnyChatToShareLocation()) {
-						app.shareLocationHelper.stopSharingLocation()
-					}
-					notifyItemChanged(position)
+					holder.checkBox?.visibility = View.GONE
 				} else {
 					holder.checkBox?.apply {
-						isChecked = !isChecked
+						visibility = View.VISIBLE
+						setOnCheckedChangeListener(null)
+						isChecked = selectedChats.contains(chat.id)
+						setOnCheckedChangeListener { _, isChecked ->
+							if (isChecked) {
+								selectedChats.add(chat.id)
+							} else {
+								selectedChats.remove(chat.id)
+							}
+							actionButtonsListener?.switchButtonsVisibility(selectedChats.isNotEmpty())
+						}
 					}
+				}
+				holder.bottomShadow?.visibility = if (lastItem) View.VISIBLE else View.GONE
+				holder.itemView.setOnClickListener {
+					if (live) {
+						app.settings.shareLocationToChat(chat.id, false)
+						if (!app.settings.hasAnyChatToShareLocation()) {
+							app.shareLocationHelper.stopSharingLocation()
+						}
+						notifyItemChanged(position)
+					} else {
+						holder.checkBox?.apply {
+							isChecked = !isChecked
+						}
+					}
+				}
+			} else if (holder is ChatViewHolder2) {
+				TelegramUiHelper.setupPhoto(
+					app,
+					holder.icon,
+					chat.photo?.small?.local?.path,
+					placeholderId,
+					false
+				)
+				holder.title?.text = chat.title
+				holder.switcher?.apply {
+					if (live) {
+						isChecked = true
+					}
+					setOnCheckedChangeListener { _, isChecked ->
+						run {
+							if (!isChecked) {
+								app.settings.shareLocationToChat(chat.id, false)
+								if (!app.settings.hasAnyChatToShareLocation()) {
+									app.shareLocationHelper.stopSharingLocation()
+								}
+								updateList()
+								updateSharingMode()
+							}
+						}
+					}
+				}
+				val duration = settings.getChatLivePeriod(chat.id)
+				if (duration != null && duration > 0) {
+					holder.descriptionDuration?.text = formatTime(duration)
 				}
 			}
 		}
 
 		override fun getItemCount() = chats.size
 
+		private fun formatTime(timeSec: Long): String {
+			val hours = TimeUnit.SECONDS.toHours(timeSec)
+			val minutes = TimeUnit.SECONDS.toMinutes(timeSec) % 60
+			var hoursS = ""
+			var minutesS = ""
+			if (hours > 0) {
+				hoursS = String.format("%2d h ", hours)
+			}
+			if (minutes > 0) {
+				minutesS = String.format("%2d min", minutes)
+			}
+			return hoursS + minutesS
+		}
+
+		private fun formatTimeAt(timeSec: Long): String {
+			val hours = TimeUnit.SECONDS.toHours(timeSec)
+			val minutes = TimeUnit.SECONDS.toMinutes(timeSec) % 60
+			return String.format("%2d:%2d", hours, minutes)
+		}
+
 		inner class ChatViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
 			val icon: ImageView? = view.findViewById(R.id.icon)
 			val title: TextView? = view.findViewById(R.id.title)
 			val description: TextView? = view.findViewById(R.id.description)
-			val textInArea: TextView? = view.findViewById(R.id.text_in_area)
 			val checkBox: CheckBox? = view.findViewById(R.id.check_box)
 			val bottomShadow: View? = view.findViewById(R.id.bottom_shadow)
+		}
+
+		inner class ChatViewHolder2(val view: View) : RecyclerView.ViewHolder(view) {
+			val icon: ImageView? = view.findViewById(R.id.icon)
+			val title: TextView? = view.findViewById(R.id.title)
+			val description: TextView? = view.findViewById(R.id.description)
+			val descriptionDuration: TextView? = view.findViewById(R.id.duration)
+			val textInArea: TextView? = view.findViewById(R.id.text_in_area)
+			val switcher: Switch? = view.findViewById(R.id.switcher)
+			val stopTranslation: TextView? = view.findViewById(R.id.stop_translation_in_tv_1)
+			val stopIn: TextView? = view.findViewById(R.id.stop_translation_in_tv_2)
 		}
 	}
 

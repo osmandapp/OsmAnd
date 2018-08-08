@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:layout_marginLeft="@dimen/content_padding_half"
+	android:layout_marginRight="@dimen/content_padding_half"
+	android:layout_marginTop="@dimen/content_padding_standard"
+	android:orientation="vertical">
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:background="?attr/shared_chat_card_bg"
+		android:orientation="vertical">
+
+		<LinearLayout
+			android:id="@+id/user_row"
+			android:layout_width="match_parent"
+			android:layout_height="@dimen/list_item_height_big"
+			android:gravity="center_vertical">
+
+			<ImageView
+				android:id="@+id/icon"
+				android:layout_width="@dimen/list_item_icon_size"
+				android:layout_height="@dimen/list_item_icon_size"
+				android:layout_marginEnd="@dimen/list_item_icon_margin_left"
+				android:layout_marginLeft="@dimen/list_item_icon_margin_left"
+				android:layout_marginRight="@dimen/list_item_icon_margin_left"
+				android:layout_marginStart="@dimen/list_item_icon_margin_left"
+				tools:src="@drawable/img_user_picture" />
+
+			<LinearLayout
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_marginEnd="@dimen/content_padding_standard"
+				android:layout_marginRight="@dimen/content_padding_standard"
+				android:layout_weight="1"
+				android:orientation="vertical">
+
+				<net.osmand.telegram.ui.views.TextViewEx
+					android:id="@+id/title"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:ellipsize="end"
+					android:maxLines="1"
+					android:textColor="?android:textColorPrimary"
+					android:textSize="@dimen/list_item_title_text_size"
+					app:typeface="@string/font_roboto_regular"
+					tools:text="Share location" />
+
+				<LinearLayout
+					android:id="@+id/duration_row"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content">
+
+					<net.osmand.telegram.ui.views.TextViewEx
+						android:id="@+id/description"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:ellipsize="end"
+						android:maxLines="1"
+						android:text="Трансляция: "
+						android:textColor="?android:attr/textColorSecondary"
+						android:textSize="14sp" />
+
+					<net.osmand.telegram.ui.views.TextViewEx
+						android:id="@+id/duration"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:ellipsize="end"
+						android:maxLines="1"
+						android:text="1 ч"
+						android:textColor="?attr/ctrl_active_color"
+						android:textSize="14sp"
+						app:typeface="@string/font_roboto_medium" />
+
+				</LinearLayout>
+
+			</LinearLayout>
+
+			<net.osmand.telegram.ui.views.TextViewEx
+				android:id="@+id/text_in_area"
+				android:layout_width="wrap_content"
+				android:layout_height="@dimen/dialog_button_height"
+				android:layout_marginEnd="@dimen/image_button_padding"
+				android:layout_marginRight="@dimen/image_button_padding"
+				android:background="?attr/secondary_btn_bg"
+				android:ellipsize="end"
+				android:gravity="center"
+				android:maxLines="1"
+				android:paddingLeft="@dimen/content_padding_half"
+				android:paddingRight="@dimen/content_padding_half"
+				android:textColor="?attr/ctrl_active_color"
+				android:textSize="14sp"
+				android:visibility="gone"
+				app:typeface="@string/font_roboto_medium"
+				tools:text="+ 30 min"
+				tools:visibility="visible" />
+
+		</LinearLayout>
+
+		<View
+			android:layout_width="match_parent"
+			android:layout_height="1dp"
+			android:background="?attr/card_divider_color" />
+
+		<LinearLayout
+			android:id="@+id/show_on_map_row"
+			android:layout_width="match_parent"
+			android:layout_height="@dimen/list_item_height_big"
+			android:gravity="center_vertical"
+			android:orientation="horizontal"
+			android:paddingEnd="@dimen/content_padding_standard"
+			android:paddingLeft="@dimen/content_padding_standard"
+			android:paddingRight="@dimen/content_padding_standard"
+			android:paddingStart="@dimen/content_padding_standard">
+
+			<LinearLayout
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center_vertical"
+				android:layout_weight="1"
+				android:orientation="vertical">
+
+				<net.osmand.telegram.ui.views.TextViewEx
+					android:id="@+id/stop_translation_tv"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_gravity="center_vertical"
+					android:layout_marginEnd="@dimen/content_padding_standard"
+					android:layout_marginRight="@dimen/content_padding_standard"
+					android:text="@string/stop_sharing_chat"
+					android:textColor="?attr/ctrl_active_color"
+					android:textSize="14sp"
+					app:typeface="@string/font_roboto_medium" />
+
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:orientation="horizontal">
+
+					<net.osmand.telegram.ui.views.TextViewEx
+						android:id="@+id/stop_translation_in_tv"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_gravity="center_vertical"
+						android:text="Окончание через: "
+						android:textColor="?android:attr/textColorSecondary"
+						android:textSize="14sp"
+						app:typeface="@string/font_roboto_regular" />
+					
+					<net.osmand.telegram.ui.views.TextViewEx
+						android:id="@+id/stop_translation_in_tv_1"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_gravity="center_vertical"
+						android:text="01:15 "
+						android:textColor="?android:attr/textColorPrimary"
+						android:textSize="14sp"
+						app:typeface="@string/font_roboto_mono_bold" />
+					
+					<net.osmand.telegram.ui.views.TextViewEx
+						android:id="@+id/stop_translation_in_tv_2"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_gravity="center_vertical"
+						android:text="(в 12:34)"
+						android:textColor="?android:attr/textColorSecondary"
+						android:textSize="14sp"
+						app:typeface="@string/font_roboto_regular" />
+					
+				</LinearLayout>
+
+			</LinearLayout>
+
+			<Switch
+				android:id="@+id/switcher"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content" />
+
+		</LinearLayout>
+
+	</LinearLayout>
+
+</LinearLayout>
