@@ -23,6 +23,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.OsmandActionBarActivity;
 import net.osmand.plus.voice.AbstractPrologCommandPlayer;
 import net.osmand.plus.voice.JSCommandBuilder;
+import net.osmand.plus.voice.JSMediaCommandPlayerImpl;
 import net.osmand.plus.voice.JSTTSCommandPlayerImpl;
 import net.osmand.plus.voice.TTSCommandPlayerImpl;
 import net.osmand.plus.voice.CommandBuilder;
@@ -220,8 +221,8 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 	}
 
 	private void addButtons(final LinearLayout ll, CommandPlayer p) {
-		if (p instanceof JSTTSCommandPlayerImpl) {
-			addJSTTSPrompts(ll, (JSTTSCommandPlayerImpl) p);
+		if (p instanceof JSTTSCommandPlayerImpl || p instanceof JSMediaCommandPlayerImpl) {
+			addJSTTSPrompts(ll, p);
 			return;
 		}
 		addButton(ll, "Route calculated and number tests:", builder(p));
@@ -317,7 +318,7 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 		return res;
 	}
 
-	private void addJSTTSPrompts(LinearLayout ll, JSTTSCommandPlayerImpl p) {
+	private void addJSTTSPrompts(LinearLayout ll, CommandPlayer p) {
 		addButton(ll, "Route calculated and number tests:", jsBuilder(p));
 		addButton(ll, "\u25BA (1.1)  New route calculated, 150m, 230sec (00:03:50)", jsBuilder(p).newRouteCalculated(150, 230));
 		addButton(ll, "\u25BA (1.2)  New route calculated, 1350m, 3680sec (01:01:20)", jsBuilder(p).newRouteCalculated(1350, 3680));
@@ -398,8 +399,8 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 		return p.newCommandBuilder();
 	}
 
-	private JSCommandBuilder jsBuilder(JSTTSCommandPlayerImpl p) {
-		return p.newCommandBuilder();
+	private JSCommandBuilder jsBuilder(CommandPlayer p) {
+		return (JSCommandBuilder) p.newCommandBuilder();
 	}
 
 	public void addButton(ViewGroup layout, final String description, final CommandBuilder builder){
