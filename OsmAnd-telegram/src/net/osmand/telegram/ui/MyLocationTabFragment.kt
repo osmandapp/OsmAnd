@@ -111,9 +111,6 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 			setImageResource(R.drawable.img_my_location_user)
 		}
 
-		imageContainer = mainView.findViewById<FrameLayout>(R.id.image_container)
-		titleContainer = mainView.findViewById<LinearLayout>(R.id.title_container)
-
 		optionsBtn = mainView.findViewById<ImageView>(R.id.options).apply {
 			setImageDrawable(app.uiUtils.getThemedIcon(R.drawable.ic_action_other_menu))
 			setOnClickListener { showPopupMenu() }
@@ -123,7 +120,10 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 			setImageDrawable(app.uiUtils.getThemedIcon(R.drawable.ic_action_other_menu))
 			setOnClickListener { showPopupMenu() }
 		}
-
+		
+		imageContainer = mainView.findViewById<FrameLayout>(R.id.image_container)
+		titleContainer = mainView.findViewById<LinearLayout>(R.id.title_container)
+		
 		textContainer = mainView.findViewById<LinearLayout>(R.id.text_container).apply {
 			if (Build.VERSION.SDK_INT >= 16) {
 				layoutTransition.enableTransitionType(LayoutTransition.CHANGING)
@@ -564,7 +564,6 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 							Date(System.currentTimeMillis() + (content.expiresIn * 1000))
 						val df = SimpleDateFormat("HH:mm", Locale.getDefault())
 						val formattedDate = df.format(currentTime)
-						holder.textInArea?.text = "+ 30 min"
 						holder.stopSharingFirstPart?.text = time
 						holder.stopSharingSecondPart?.text = formattedDate
 					}

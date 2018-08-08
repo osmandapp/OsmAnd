@@ -94,8 +94,10 @@
 				android:paddingRight="@dimen/content_padding_half"
 				android:textColor="?attr/ctrl_active_color"
 				android:textSize="14sp"
+				android:visibility="gone"
 				app:typeface="@string/font_roboto_medium"
-				tools:text="+ 30 min" />
+				tools:text="+ 30 min"
+				tools:visibility="visible" />
 
 		</LinearLayout>
 
