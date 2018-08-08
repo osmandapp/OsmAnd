@@ -93,6 +93,7 @@
 	<string name="si_mi_meters">Miles/meters</string>
 	<string name="shared_string_hour_short">h</string>
 	<string name="shared_string_minute_short">min</string>
+	<string name="shared_string_second_short">sec</string>
 	<string name="plus">+</string>
 	<string name="welcome_descr"><![CDATA[<b>OsmAnd Location Sharing</b> allows you to share your location and see locations of other people in the OsmAnd.<br/><br/>The application works on base of Telegram API. To use this app you must have a Telegram account.]]></string>
 	<string name="my_location">My location</string>
