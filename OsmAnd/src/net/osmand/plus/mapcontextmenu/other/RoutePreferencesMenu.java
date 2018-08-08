@@ -280,7 +280,7 @@ public class RoutePreferencesMenu {
 		k++;
 		for (String s : voiceFiles) {
 			entries[k] = (s.contains("tts") ?  mapActivity.getResources().getString(R.string.ttsvoice) + " " : "") +
-					FileNameTranslationHelper.getVoiceName(mapActivity, s) + (s.contains("-js") ? " " + mapActivity.getString(R.string.js_tts_label) : "");
+					FileNameTranslationHelper.getVoiceName(mapActivity, s);
 			entrieValues[k] = s;
 			adapter.addItem(itemBuilder.setTitle(entries[k]).createItem());
 			if (s.equals(selectedValue)) {

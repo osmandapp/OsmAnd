@@ -325,7 +325,16 @@ public class JSTTSCommandPlayerImpl extends AbstractJSCommandPlayer {
     }
 
     public static boolean isMyData(File voiceDir) {
-        return voiceDir.getName().contains("-tts-js");
+        boolean isTTS = voiceDir.getName().contains("tts");
+        if (!isTTS) {
+            return false;
+        }
+        for (File f : voiceDir.listFiles()) {
+            if (f.getName().endsWith(IndexConstants.TTSVOICE_INDEX_EXT_JS)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private AlertDialog.Builder createAlertDialog(int titleResID, int messageResID,

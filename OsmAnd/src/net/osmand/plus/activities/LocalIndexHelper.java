@@ -88,8 +88,6 @@ public class LocalIndexHelper {
 			info.setDescription(getInstalledDate(f));
 		} else if (info.getType() == LocalIndexType.TTS_VOICE_DATA) {
 			info.setDescription(getInstalledDate(f));
-		} else if (info.getType() == LocalIndexType.TTS_VOICE_DATA_JS) {
-			info.setDescription(getInstalledDate(f));
 		} else if (info.getType() == LocalIndexType.DEACTIVATED) {
 			info.setDescription(getInstalledDate(f));
 		} else if (info.getType() == LocalIndexType.VOICE_DATA) {
@@ -218,33 +216,18 @@ public class LocalIndexHelper {
 
 	private void loadVoiceData(File voiceDir, List<LocalIndexInfo> result, boolean backup, AbstractLoadLocalIndexTask loadTask) {
 		if (voiceDir.canRead()) {
+			boolean useJs = app.getSettings().USE_JS_VOICE_GUIDANCE.get();
 			//First list TTS files, they are preferred
 			for (File voiceF : listFilesSorted(voiceDir)) {
 				if (voiceF.isDirectory() && !MediaCommandPlayerImpl.isMyData(voiceF)) {
 					LocalIndexInfo info = null;
-					if (TTSCommandPlayerImpl.isMyData(voiceF)) {
+					if ((TTSCommandPlayerImpl.isMyData(voiceF) && !useJs) || (JSTTSCommandPlayerImpl.isMyData(voiceF) && useJs)) {
 						info = new LocalIndexInfo(LocalIndexType.TTS_VOICE_DATA, voiceF, backup, app);
 					}
 					if (info != null) {
 						updateDescription(info);
 						result.add(info);
 						loadTask.loadFile(info);
-					}
-				}
-			}
-
-			if (app.getSettings().USE_JS_VOICE_GUIDANCE.get()) {
-				for (File voiceF : listFilesSorted(voiceDir)) {
-					if (voiceF.isDirectory() && !MediaCommandPlayerImpl.isMyData(voiceF)) {
-						LocalIndexInfo info = null;
-						if (JSTTSCommandPlayerImpl.isMyData(voiceF)) {
-							info = new LocalIndexInfo(LocalIndexType.TTS_VOICE_DATA_JS, voiceF, backup, app);
-						}
-						if (info != null) {
-							updateDescription(info);
-							result.add(info);
-							loadTask.loadFile(info);
-						}
 					}
 				}
 			}
@@ -378,7 +361,6 @@ public class LocalIndexHelper {
 		WIKI_DATA(R.string.local_indexes_cat_wiki, R.drawable.ic_plugin_wikipedia, 50),
 		TRAVEL_DATA(R.string.download_maps_travel, R.drawable.ic_plugin_wikipedia, 60),
 		TTS_VOICE_DATA(R.string.local_indexes_cat_tts, R.drawable.ic_action_volume_up, 20),
-		TTS_VOICE_DATA_JS(R.string.voice_tts_js, R.drawable.ic_action_volume_up, 20),
 		VOICE_DATA(R.string.local_indexes_cat_voice, R.drawable.ic_action_volume_up, 30),
 		FONT_DATA(R.string.fonts_header, R.drawable.ic_action_map_language, 35),
 		DEACTIVATED(R.string.local_indexes_cat_backup, R.drawable.ic_type_archive, 1000);

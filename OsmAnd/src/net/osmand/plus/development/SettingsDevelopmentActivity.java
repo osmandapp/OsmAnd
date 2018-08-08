@@ -14,6 +14,7 @@ import android.preference.PreferenceScreen;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 
+import net.osmand.StateChangedListener;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmAndLocationSimulation;
 import net.osmand.plus.OsmandApplication;
@@ -62,9 +63,15 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 		cat.addPreference(createCheckBoxPreference(settings.ANIMATE_MY_LOCATION,
 				R.string.animate_my_location,
 				R.string.animate_my_location_desc));
+		cat.addPreference(createCheckBoxPreference(settings.USE_JS_VOICE_GUIDANCE, "Use JS voice guidance",
+				"Use new voice guidance logic based on JavaScript"));
 
-		cat.addPreference(createCheckBoxPreference(settings.USE_JS_VOICE_GUIDANCE, getString(R.string.use_js_voice_guidance),
-				getString(R.string.use_js_voice_guidance_description)));
+		getMyApplication().getSettings().USE_JS_VOICE_GUIDANCE.addListener(new StateChangedListener<Boolean>() {
+			@Override
+			public void stateChanged(Boolean change) {
+				getMyApplication().getDownloadThread().runReloadIndexFilesSilent();
+			}
+		});
 
 		final Preference firstRunPreference = new Preference(this);
 		firstRunPreference.setTitle(R.string.simulate_initial_startup);

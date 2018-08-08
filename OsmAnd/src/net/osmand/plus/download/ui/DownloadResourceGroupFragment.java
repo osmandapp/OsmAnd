@@ -531,8 +531,7 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 		private Drawable getIconForGroup(DownloadResourceGroup group) {
 			Drawable iconLeft;
 			if (group.getType() == DownloadResourceGroupType.VOICE_REC
-					|| group.getType() == DownloadResourceGroupType.VOICE_TTS || group.getType() ==
-					DownloadResourceGroupType.VOICE_TTS_JS) {
+					|| group.getType() == DownloadResourceGroupType.VOICE_TTS) {
 				iconLeft = ctx.getMyApplication().getUIUtilities().getThemedIcon(R.drawable.ic_action_volume_up);
 			} else if (group.getType() == DownloadResourceGroupType.FONTS) {
 				iconLeft = ctx.getMyApplication().getUIUtilities().getThemedIcon(R.drawable.ic_action_map_language);
