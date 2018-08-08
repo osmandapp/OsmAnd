@@ -139,10 +139,6 @@ public class IndexItem implements Comparable<IndexItem> {
 		String basename;
 		if (type == DownloadActivityType.HILLSHADE_FILE) {
 			basename = (FileNameTranslationHelper.HILL_SHADE + getBasename()).replace("_", " ");
-		} else if (type == DownloadActivityType.VOICE_FILE && getFileName().endsWith(IndexConstants.TTSVOICE_INDEX_EXT_JS)){
-			return new File(type.getDownloadFolder(ctx, this),
-					getBasename().replaceAll("[_\\.]+", "-") + File.separator + getBasename().replaceFirst("-", "_")
-							.replace('-', '.'));
 		} else {
 			basename = getBasename();
 		}

@@ -19,7 +19,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import net.osmand.IndexConstants;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
@@ -403,7 +402,7 @@ public class ItemViewHolder {
 					} else if (indexItem.getType() == DownloadActivityType.FONT_FILE) {
 						tp = LocalIndexType.FONT_DATA;
 					} else if (indexItem.getType() == DownloadActivityType.VOICE_FILE) {
-						tp = indexItem.getFileName().contains("-tts-js") ? LocalIndexType.TTS_VOICE_DATA_JS :
+						tp = indexItem.getBasename().contains("-tts-js") ? LocalIndexType.TTS_VOICE_DATA_JS :
 								indexItem.getBasename().contains("tts") ? LocalIndexType.TTS_VOICE_DATA
 								: LocalIndexType.VOICE_DATA;
 					}
