@@ -4,9 +4,7 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
-	android:layout_marginLeft="@dimen/content_padding_half"
-	android:layout_marginRight="@dimen/content_padding_half"
-	android:layout_marginTop="@dimen/content_padding_standard"
+	android:layout_marginTop="@dimen/content_padding_half"
 	android:orientation="vertical">
 
 	<LinearLayout
@@ -61,7 +59,7 @@
 						android:layout_height="wrap_content"
 						android:ellipsize="end"
 						android:maxLines="1"
-						android:text="Трансляция: "
+						android:text="Трансляция:"
 						android:textColor="?android:attr/textColorSecondary"
 						android:textSize="14sp" />
 
@@ -69,6 +67,8 @@
 						android:id="@+id/duration"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
+						android:layout_marginLeft="4dp"
+						android:layout_marginRight="4dp"
 						android:ellipsize="end"
 						android:maxLines="1"
 						android:text="1 ч"
@@ -94,10 +94,8 @@
 				android:paddingRight="@dimen/content_padding_half"
 				android:textColor="?attr/ctrl_active_color"
 				android:textSize="14sp"
-				android:visibility="gone"
 				app:typeface="@string/font_roboto_medium"
-				tools:text="+ 30 min"
-				tools:visibility="visible" />
+				tools:text="+ 30 min" />
 
 		</LinearLayout>
 
@@ -121,6 +119,8 @@
 				android:layout_width="0dp"
 				android:layout_height="wrap_content"
 				android:layout_gravity="center_vertical"
+				android:layout_marginEnd="@dimen/content_padding_standard"
+				android:layout_marginRight="@dimen/content_padding_standard"
 				android:layout_weight="1"
 				android:orientation="vertical">
 
@@ -142,35 +142,37 @@
 					android:orientation="horizontal">
 
 					<net.osmand.telegram.ui.views.TextViewEx
-						android:id="@+id/stop_translation_in_tv"
+						android:id="@+id/ending_in"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
 						android:layout_gravity="center_vertical"
-						android:text="Окончание через: "
+						android:text="@string/ending_in"
 						android:textColor="?android:attr/textColorSecondary"
 						android:textSize="14sp"
 						app:typeface="@string/font_roboto_regular" />
-					
+
 					<net.osmand.telegram.ui.views.TextViewEx
-						android:id="@+id/stop_translation_in_tv_1"
+						android:id="@+id/ending_in_first_part"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
 						android:layout_gravity="center_vertical"
-						android:text="01:15 "
+						android:layout_marginLeft="4dp"
+						android:layout_marginRight="4dp"
 						android:textColor="?android:attr/textColorPrimary"
 						android:textSize="14sp"
-						app:typeface="@string/font_roboto_mono_bold" />
-					
+						app:typeface="@string/font_roboto_mono_bold"
+						tools:text="13:14" />
+
 					<net.osmand.telegram.ui.views.TextViewEx
-						android:id="@+id/stop_translation_in_tv_2"
-						android:layout_width="match_parent"
+						android:id="@+id/ending_in_second_part"
+						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
 						android:layout_gravity="center_vertical"
-						android:text="(в 12:34)"
 						android:textColor="?android:attr/textColorSecondary"
 						android:textSize="14sp"
-						app:typeface="@string/font_roboto_regular" />
-					
+						app:typeface="@string/font_roboto_regular"
+						tools:text="(in 12:34)" />
+
 				</LinearLayout>
 
 			</LinearLayout>

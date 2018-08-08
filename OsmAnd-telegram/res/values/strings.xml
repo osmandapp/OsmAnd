@@ -1,5 +1,7 @@
 <resources>
-	<string name="stop_sharing_all">Stop all sharing</string>
+	<string name="sharing_time">Sharing time:</string>
+	<string name="ending_in">Stop in:</string>
+	<string name="stop_sharing_all">Sharing is enabled (disable)</string>
 	<string name="stop_sharing_chat">Stop chat sharing</string>
 	<string name="open_osmand">Open OsmAnd</string>
 	<string name="shared_string_live">Live</string>

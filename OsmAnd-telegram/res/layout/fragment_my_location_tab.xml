@@ -13,7 +13,7 @@
 		android:background="?attr/card_bg_color">
 
 		<FrameLayout
-			android:id="@+id/background_image"
+			android:id="@+id/image_container"
 			android:layout_width="match_parent"
 			android:layout_height="@dimen/my_location_image_height"
 			app:layout_scrollFlags="scroll">
@@ -131,81 +131,95 @@
 			</LinearLayout>
 
 		</FrameLayout>
-	
-		<FrameLayout
-			android:id="@+id/tab_title"
-			android:layout_width="match_parent"
-			android:layout_height="@dimen/action_bar_height"
-			android:visibility="visible">
 
-			<LinearLayout
-				android:id="@+id/title_row"
+		<LinearLayout
+			android:id="@+id/title_container"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="vertical">
+
+			<FrameLayout
+				android:id="@+id/tab_title"
 				android:layout_width="match_parent"
 				android:layout_height="@dimen/action_bar_height"
-				android:gravity="center_vertical">
+				android:visibility="visible">
+
+				<LinearLayout
+					android:id="@+id/title_row"
+					android:layout_width="match_parent"
+					android:layout_height="@dimen/action_bar_height"
+					android:gravity="center_vertical">
+
+					<net.osmand.telegram.ui.views.TextViewEx
+						android:layout_width="0dp"
+						android:layout_height="@dimen/action_bar_height"
+						android:layout_weight="1"
+						android:ellipsize="end"
+						android:gravity="center_vertical"
+						android:letterSpacing="@dimen/title_letter_spacing"
+						android:maxLines="1"
+						android:paddingLeft="@dimen/content_padding_standard"
+						android:paddingRight="@dimen/content_padding_standard"
+						android:text="@string/my_location"
+						android:textColor="@color/app_bar_title_light"
+						android:textSize="@dimen/title_text_size"
+						app:typeface="@string/font_roboto_mono_bold" />
+
+					<ImageView
+						android:id="@+id/options_title"
+						android:layout_width="wrap_content"
+						android:layout_height="match_parent"
+						android:layout_marginEnd="@dimen/content_padding_standard"
+						android:layout_marginLeft="@dimen/content_padding_standard"
+						android:layout_marginRight="@dimen/content_padding_standard"
+						android:layout_marginStart="@dimen/content_padding_standard"
+						android:background="?attr/selectableItemBackgroundBorderless"
+						android:paddingLeft="@dimen/content_padding_half"
+						android:paddingRight="@dimen/content_padding_half"
+						tools:src="@drawable/ic_action_other_menu"
+						tools:tint="@color/icon_light"
+						tools:visibility="visible" />
+
+				</LinearLayout>
+
+			</FrameLayout>
+
+			<View
+				android:id="@+id/appbar_divider"
+				android:layout_width="match_parent"
+				android:layout_height="1dp"
+				android:layout_marginLeft="@dimen/content_padding_standard"
+				android:layout_marginStart="@dimen/content_padding_standard"
+				android:background="?attr/card_divider_color" />
+
+			<LinearLayout
+				android:id="@+id/stop_all_sharing_row"
+				android:layout_width="match_parent"
+				android:layout_height="@dimen/action_bar_height"
+				android:gravity="center_vertical"
+				android:paddingLeft="@dimen/content_padding_standard"
+				android:paddingRight="@dimen/content_padding_standard">
 
 				<net.osmand.telegram.ui.views.TextViewEx
+					android:id="@+id/stop_all_sharing_title"
 					android:layout_width="0dp"
-					android:layout_height="@dimen/action_bar_height"
-					android:layout_weight="1"
-					android:ellipsize="end"
-					android:gravity="center_vertical"
-					android:letterSpacing="@dimen/title_letter_spacing"
-					android:maxLines="1"
-					android:paddingLeft="@dimen/content_padding_standard"
-					android:paddingRight="@dimen/content_padding_standard"
-					android:text="@string/my_location"
-					android:textColor="@color/app_bar_title_light"
-					android:textSize="@dimen/title_text_size"
-					app:typeface="@string/font_roboto_mono_bold" />
-
-				<ImageView
-					android:id="@+id/options_icon"
-					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:layout_marginEnd="@dimen/content_padding_standard"
 					android:layout_marginRight="@dimen/content_padding_standard"
-					android:src="@drawable/ic_action_other_menu"
-					android:tint="@color/icon_light" />
+					android:layout_weight="1"
+					android:ellipsize="end"
+					android:maxLines="1"
+					android:text="@string/stop_sharing_all"
+					android:textColor="?attr/ctrl_active_color"
+					android:textSize="@dimen/descr_text_size"
+					app:typeface="@string/font_roboto_medium" />
+
+				<Switch
+					android:id="@+id/stop_all_sharing_switcher"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content" />
 
 			</LinearLayout>
-
-		</FrameLayout>
-
-		<View
-			android:id="@+id/appbar_divider"
-			android:layout_width="match_parent"
-			android:layout_height="1dp"
-			android:layout_marginLeft="@dimen/content_padding_standard"
-			android:layout_marginStart="@dimen/content_padding_standard"
-			android:background="?attr/card_divider_color" />
-
-		<LinearLayout
-			android:id="@+id/stop_all_sharing_row"
-			android:layout_width="match_parent"
-			android:layout_height="@dimen/action_bar_height"
-			android:gravity="center_vertical"
-			android:paddingLeft="@dimen/content_padding_standard"
-			android:paddingRight="@dimen/content_padding_standard">
-
-			<net.osmand.telegram.ui.views.TextViewEx
-				android:id="@+id/stop_all_sharing_title"
-				android:layout_width="0dp"
-				android:layout_height="wrap_content"
-				android:layout_marginEnd="@dimen/content_padding_standard"
-				android:layout_marginRight="@dimen/content_padding_standard"
-				android:layout_weight="1"
-				android:ellipsize="end"
-				android:maxLines="1"
-				android:text="@string/stop_sharing_all"
-				android:textColor="?attr/ctrl_active_color"
-				android:textSize="@dimen/descr_text_size"
-				app:typeface="@string/font_roboto_medium" />
-
-			<Switch
-				android:id="@+id/stop_all_sharing_switcher"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content" />
 
 		</LinearLayout>
 
