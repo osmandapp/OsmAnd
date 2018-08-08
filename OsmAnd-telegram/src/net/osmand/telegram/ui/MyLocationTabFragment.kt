@@ -263,7 +263,12 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 			mainView.findViewById<View>(R.id.stop_all_sharing_row).visibility = View.GONE
 			mainView.findViewById<View>(R.id.text_container).visibility = View.VISIBLE
 			mainView.findViewById<View>(R.id.background_image).visibility = View.VISIBLE
+			val headerParams = mainView.findViewById<View>(R.id.background_image).layoutParams as AppBarLayout.LayoutParams
+			headerParams.scrollFlags = AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL or
+					AppBarLayout.LayoutParams.SCROLL_FLAG_ENTER_ALWAYS
 		} else {
+			val headerParams = mainView.findViewById<View>(R.id.background_image).layoutParams as AppBarLayout.LayoutParams
+			headerParams.scrollFlags = 0
 			mainView.findViewById<View>(R.id.background_image).visibility = View.GONE
 			mainView.findViewById<View>(R.id.text_container).visibility = View.GONE
 			mainView.findViewById<View>(R.id.tab_title).visibility = View.VISIBLE
