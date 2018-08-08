@@ -444,6 +444,14 @@ public class GeneralRouter implements VehicleRouter {
 		return attributes.get(attribute);
 	}
 	
+	public float getFloatAttribute(String attribute, float v) {
+		return parseSilentFloat(getAttribute(attribute), v);
+	}
+	
+	public int getIntAttribute(String attribute, int v) {
+		return (int) parseSilentFloat(getAttribute(attribute), v);
+	}
+	
 	private static boolean parseSilentBoolean(String t, boolean v) {
 		if (t == null || t.length() == 0) {
 			return v;

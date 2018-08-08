@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.res.Configuration
+import android.graphics.Paint
 import android.net.Uri
 import android.os.Build
 import android.support.annotation.AttrRes
@@ -16,6 +17,7 @@ import android.util.TypedValue
 import android.util.TypedValue.COMPLEX_UNIT_DIP
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import net.osmand.telegram.R
 import java.io.File
 
 object AndroidUtils {
@@ -81,6 +83,18 @@ object AndroidUtils {
 				setPadding(paddingLeft, paddingTop + getStatusBarHeight(ctx), paddingRight, paddingBottom)
 			}
 		}
+	}
+
+	fun getPopupMenuWidth(ctx: Context, titles: Collection<String>): Int {
+		val txtSize = ctx.resources.getDimensionPixelSize(R.dimen.list_item_title_text_size)
+		val paint = Paint().apply { textSize = txtSize.toFloat() }
+		val maxTextWidth = titles.map { paint.measureText(it) }.max()
+		if (maxTextWidth != null) {
+			val maxItemWidth = maxTextWidth.toInt() + AndroidUtils.dpToPx(ctx, 32f)
+			val minWidth = AndroidUtils.dpToPx(ctx, 100f)
+			return maxOf(minWidth, maxItemWidth)
+		}
+		return 0
 	}
 
 	@ColorInt
