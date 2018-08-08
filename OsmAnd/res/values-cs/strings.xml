@@ -2820,4 +2820,7 @@ Zobrazená oblast: %1$s x %2$s</string>
 \n • Mapové značky: import vybraných skupin z GPX souborů, nový vzhled zadávání souřadnic
 \n 
 \n • Předplatné OsmAnd Live nyní zahrnuje všechny funkce OsmAnd</string>
+    <string name="error_notification_desc">Zašlete prosím kopii obrazovky s touto chybou na email support@osmand.net</string>
+    <string name="quick_action_edit_actions">Upravit akce</string>
+    <string name="get_osmand_live">Získejte OsmAnd Live pro odemknutí všech funkcí: Denní aktulizace mapových podkladů s neomezeným počtem stahování, všechny placené zásuvné moduly, propojení s Wikipedia, Wikivoyage a mnoho dalšího.</string>
     </resources>

@@ -3068,4 +3068,12 @@ voor Gebied: %1$s x %2$s</string>
     <string name="coord_input_add_point">Punt toevoegen</string>
     <string name="coord_input_save_as_track_descr">Je hebt %1$s punten toegevoegd. Geef een bestandsnaam en tik op \"Opslaan\".</string>
     <string name="error_notification_desc">Stuur alsjeblieft een screenshot van deze melding naar support@osmand.net</string>
+    <string name="thank_you_for_feedback">"Dank  voor feedback "</string>
+    <string name="poi_cannot_be_found">"Knoop of weg kan niet worden gevonden. "</string>
+    <string name="search_no_results_feedback">Geen zoekresultaten ?
+\nGeef ons jouw feedback</string>
+    <string name="increase_search_radius_to">Vergroot het zoekgebied tot %1$s</string>
+    <string name="send_search_query_description">We gebruiken uw zoekterm: <b>\"%1$s\"</b>, en uw locatie.<br/><br/> om ons zoekalgoritme te verbeteren. We verzamelen geen persoonlijke informatie <br/></string>
+    <string name="send_search_query">"Zoekterm versturen? "</string>
+    <string name="shared_string_world">Wereld</string>
     </resources>
