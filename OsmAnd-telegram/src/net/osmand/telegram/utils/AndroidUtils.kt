@@ -90,7 +90,7 @@ object AndroidUtils {
 		val paint = Paint().apply { textSize = txtSize.toFloat() }
 		val maxTextWidth = titles.map { paint.measureText(it) }.max()
 		if (maxTextWidth != null) {
-			val maxItemWidth = maxTextWidth.toInt() + AndroidUtils.dpToPx(ctx, 32f)
+			val maxItemWidth = maxTextWidth.toInt() + AndroidUtils.dpToPx(ctx, 33f)
 			val minWidth = AndroidUtils.dpToPx(ctx, 100f)
 			return maxOf(minWidth, maxItemWidth)
 		}

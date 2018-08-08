@@ -1,10 +1,8 @@
 package net.osmand.telegram.utils
 
 import android.content.Context
-
 import net.osmand.telegram.R
 import net.osmand.telegram.TelegramApplication
-
 import java.text.DecimalFormat
 import java.text.MessageFormat
 
@@ -26,19 +24,19 @@ object OsmandFormatter {
 		fixed2.minimumIntegerDigits = 1
 	}
 
-	fun getFormattedDuration(seconds: Int, ctx: TelegramApplication): String {
+	fun getFormattedDuration(ctx: Context, seconds: Int): String {
 		val hours = seconds / (60 * 60)
 		val minutes = seconds / 60 % 60
-		return if (hours > 0) {
-			(hours.toString() + " "
-					+ ctx.getString(R.string.shared_string_hour_short)
-					+ if (minutes > 0)
-				" " + minutes + " "
-						+ ctx.getString(R.string.shared_string_minute_short)
-			else
-				"")
-		} else {
-			minutes.toString() + " " + ctx.getString(R.string.shared_string_minute_short)
+		return when {
+			hours > 0 -> {
+				var res = "$hours ${ctx.getString(R.string.shared_string_hour_short)}"
+				if (minutes > 0) {
+					res += " $minutes ${ctx.getString(R.string.shared_string_minute_short)}"
+				}
+				res
+			}
+			minutes > 0 -> "$minutes ${ctx.getString(R.string.shared_string_minute_short)}"
+			else -> "$seconds ${ctx.getString(R.string.shared_string_second_short)}"
 		}
 	}
 
