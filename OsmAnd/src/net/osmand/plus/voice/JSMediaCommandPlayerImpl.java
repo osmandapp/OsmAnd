@@ -89,4 +89,13 @@ public class JSMediaCommandPlayerImpl extends MediaCommandPlayerImpl {
         return commandBuilder;
     }
 
+    public static boolean isMyData(File voiceDir) {
+        for (File f : voiceDir.listFiles()) {
+            if (f.getName().endsWith(IndexConstants.TTSVOICE_INDEX_EXT_JS)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

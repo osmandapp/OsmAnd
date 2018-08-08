@@ -583,7 +583,7 @@ public class AppInitializer implements IProgress {
 					if (useJs && JSTTSCommandPlayerImpl.isMyData(voiceDir)) {
 						return new JSTTSCommandPlayerImpl(ctx, applicationMode, osmandApplication.getRoutingHelper().getVoiceRouter(), voiceProvider);
 					} else if (MediaCommandPlayerImpl.isMyData(voiceDir)) {
-						return useJs ? new JSMediaCommandPlayerImpl(osmandApplication, applicationMode, osmandApplication.getRoutingHelper().getVoiceRouter(), voiceProvider)
+						return useJs && JSMediaCommandPlayerImpl.isMyData(voiceDir) ? new JSMediaCommandPlayerImpl(osmandApplication, applicationMode, osmandApplication.getRoutingHelper().getVoiceRouter(), voiceProvider)
 								: new MediaCommandPlayerImpl(osmandApplication, applicationMode, osmandApplication.getRoutingHelper().getVoiceRouter(), voiceProvider);
 					} else if (TTSCommandPlayerImpl.isMyData(voiceDir)) {
 						return new TTSCommandPlayerImpl(ctx, applicationMode, osmandApplication.getRoutingHelper().getVoiceRouter(), voiceProvider);

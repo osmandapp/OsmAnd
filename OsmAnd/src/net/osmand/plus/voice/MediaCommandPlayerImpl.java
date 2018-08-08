@@ -159,7 +159,7 @@ public class MediaCommandPlayerImpl extends AbstractPrologCommandPlayer implemen
 	 * @param file
 	 */
 	private void playFile(File file)  {
-		if (!file.exists()) {
+		if (!file.exists() || file.isDirectory()) {
 			log.error("Unable to play, does not exist: "+file);
 			playQueue();
 			return;
