@@ -23,6 +23,8 @@
 	<dimen name="dialog_welcome_title_bottom_padding">70dp</dimen>
 	<dimen name="dialog_welcome_title_top_margin">85dp</dimen>
 
+	<dimen name="list_header_height">48dp</dimen>
+
 	<dimen name="list_item_height">56dp</dimen>
 	<dimen name="list_item_height_min">48dp</dimen>
 
