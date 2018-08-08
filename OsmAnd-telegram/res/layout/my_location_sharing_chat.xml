@@ -23,10 +23,8 @@
 				android:id="@+id/icon"
 				android:layout_width="@dimen/list_item_icon_size"
 				android:layout_height="@dimen/list_item_icon_size"
-				android:layout_marginEnd="@dimen/list_item_icon_margin_left"
 				android:layout_marginLeft="@dimen/list_item_icon_margin_left"
 				android:layout_marginRight="@dimen/list_item_icon_margin_left"
-				android:layout_marginStart="@dimen/list_item_icon_margin_left"
 				tools:src="@drawable/img_user_picture" />
 
 			<LinearLayout
@@ -59,9 +57,9 @@
 						android:layout_height="wrap_content"
 						android:ellipsize="end"
 						android:maxLines="1"
-						android:text="Трансляция:"
 						android:textColor="?android:attr/textColorSecondary"
-						android:textSize="14sp" />
+						android:textSize="14sp"
+						tools:text="Sharing:" />
 
 					<net.osmand.telegram.ui.views.TextViewEx
 						android:id="@+id/duration"
@@ -71,10 +69,10 @@
 						android:layout_marginRight="4dp"
 						android:ellipsize="end"
 						android:maxLines="1"
-						android:text="1 ч"
 						android:textColor="?attr/ctrl_active_color"
 						android:textSize="14sp"
-						app:typeface="@string/font_roboto_medium" />
+						app:typeface="@string/font_roboto_medium"
+						tools:text="1 h" />
 
 				</LinearLayout>
 
@@ -112,10 +110,8 @@
 			android:layout_height="@dimen/list_item_height_big"
 			android:gravity="center_vertical"
 			android:orientation="horizontal"
-			android:paddingEnd="@dimen/content_padding_standard"
 			android:paddingLeft="@dimen/content_padding_standard"
-			android:paddingRight="@dimen/content_padding_standard"
-			android:paddingStart="@dimen/content_padding_standard">
+			android:paddingRight="@dimen/content_padding_standard">
 
 			<LinearLayout
 				android:layout_width="0dp"

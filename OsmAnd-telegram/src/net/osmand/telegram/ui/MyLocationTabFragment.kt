@@ -19,10 +19,10 @@ import net.osmand.telegram.helpers.TelegramHelper
 import net.osmand.telegram.helpers.TelegramHelper.TelegramListener
 import net.osmand.telegram.helpers.TelegramUiHelper
 import net.osmand.telegram.utils.AndroidUtils
+import net.osmand.telegram.utils.OsmandFormatter
 import org.drinkless.td.libcore.telegram.TdApi
 import java.util.concurrent.TimeUnit
 import java.util.*
-import java.text.SimpleDateFormat
 
 private const val SELECTED_CHATS_KEY = "selected_chats"
 private const val SHARE_LOCATION_CHAT = 1
@@ -41,7 +41,6 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 	private val telegramHelper get() = app.telegramHelper
 	private val settings get() = app.settings
 
-	private lateinit var mainView: View
 	private lateinit var appBarLayout: AppBarLayout
 	private lateinit var userImage: ImageView
 	private lateinit var imageContainer: FrameLayout
@@ -65,8 +64,6 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 
 	private var actionButtonsListener: ActionButtonsListener? = null
 
-	private var inSharingMode: Boolean = false
-
 	override fun onCreateView(
 		inflater: LayoutInflater,
 		container: ViewGroup?,
@@ -89,7 +86,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 			}
 		}
 
-		mainView = inflater.inflate(R.layout.fragment_my_location_tab, container, false)
+		val mainView = inflater.inflate(R.layout.fragment_my_location_tab, container, false)
 
 		appBarLayout = mainView.findViewById<AppBarLayout>(R.id.app_bar_layout).apply {
 			if (Build.VERSION.SDK_INT >= 21) {
@@ -113,17 +110,19 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 
 		optionsBtn = mainView.findViewById<ImageView>(R.id.options).apply {
 			setImageDrawable(app.uiUtils.getThemedIcon(R.drawable.ic_action_other_menu))
-			setOnClickListener { showPopupMenu() }
+			setOnClickListener { showPopupMenu(optionsBtn) }
 		}
 
 		optionsBtnTitle = mainView.findViewById<ImageView>(R.id.options_title).apply {
 			setImageDrawable(app.uiUtils.getThemedIcon(R.drawable.ic_action_other_menu))
-			setOnClickListener { showPopupMenu() }
+			setOnClickListener { showPopupMenu(optionsBtnTitle) }
 		}
-		
+
 		imageContainer = mainView.findViewById<FrameLayout>(R.id.image_container)
-		titleContainer = mainView.findViewById<LinearLayout>(R.id.title_container)
-		
+		titleContainer = mainView.findViewById<LinearLayout>(R.id.title_container).apply {
+			AndroidUtils.addStatusBarPadding19v(context, this)
+		}
+
 		textContainer = mainView.findViewById<LinearLayout>(R.id.text_container).apply {
 			if (Build.VERSION.SDK_INT >= 16) {
 				layoutTransition.enableTransitionType(LayoutTransition.CHANGING)
@@ -157,21 +156,17 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 			layoutManager = LinearLayoutManager(context)
 			adapter = this@MyLocationTabFragment.adapter
 		}
-		
+
 		stopSharingSwitcher = mainView.findViewById<Switch>(R.id.stop_all_sharing_switcher).apply {
-			if (settings.hasAnyChatToShareLocation()) {
-				isChecked = true
-			}
+			isChecked = settings.hasAnyChatToShareLocation()
 			setOnCheckedChangeListener { _, isChecked ->
-				run {
-					if (!isChecked) {
-						app.settings.stopSharingLocationToChats()
-						if (!app.settings.hasAnyChatToShareLocation()) {
-							app.shareLocationHelper.stopSharingLocation()
-						}
-						updateSharingMode()
-						updateList()
+				if (!isChecked) {
+					app.settings.stopSharingLocationToChats()
+					if (!app.settings.hasAnyChatToShareLocation()) {
+						app.shareLocationHelper.stopSharingLocation()
 					}
+					updateSharingMode()
+					updateList()
 				}
 			}
 		}
@@ -258,31 +253,22 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 	}
 
 	private fun updateSharingMode() {
+		val headerParams = imageContainer.layoutParams as AppBarLayout.LayoutParams
 		if (!settings.hasAnyChatToShareLocation()) {
 			imageContainer.visibility = View.VISIBLE
 			textContainer.visibility = View.VISIBLE
 			titleContainer.visibility = View.GONE
-			val headerParams = imageContainer.layoutParams as AppBarLayout.LayoutParams
 			headerParams.scrollFlags = AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL
-			if (inSharingMode) {
-				AndroidUtils.removeStatusBarPadding19v(context!!, titleContainer)
-			}
-			inSharingMode = false
 		} else {
 			imageContainer.visibility = View.GONE
 			textContainer.visibility = View.GONE
 			titleContainer.visibility = View.VISIBLE
-			val headerParams = imageContainer.layoutParams as AppBarLayout.LayoutParams
 			headerParams.scrollFlags = 0
-			stopSharingSwitcher.apply { isChecked = true }
-			if (!inSharingMode) {
-				AndroidUtils.addStatusBarPadding19v(context!!, titleContainer)
-			}
-			inSharingMode = true
+			stopSharingSwitcher.isChecked = true
 		}
 	}
 
-	private fun showPopupMenu() {
+	private fun showPopupMenu(anchor:View) {
 		val ctx = context ?: return
 
 		val menuList = ArrayList<String>()
@@ -299,11 +285,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 
 		ListPopupWindow(ctx).apply {
 			isModal = true
-			anchorView = if (app.settings.hasAnyChatToShareLocation()) {
-				optionsBtnTitle
-			} else {
-				optionsBtn
-			}
+			anchorView = anchor
 			setContentWidth(AndroidUtils.getPopupMenuWidth(ctx, menuList))
 			setDropDownGravity(Gravity.END or Gravity.TOP)
 			setAdapter(ArrayAdapter(ctx, R.layout.popup_list_text_item, menuList))
@@ -407,7 +389,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 	private fun updateList() {
 		val chats: MutableList<TdApi.Chat> = mutableListOf()
 		val currentUser = telegramHelper.getCurrentUser()
-		val chatList: ArrayList<Long> = if (settings.hasAnyChatToShareLocation()) {
+		val chatList = if (settings.hasAnyChatToShareLocation()) {
 			settings.getShareLocationChats()
 		} else {
 			telegramHelper.getChatListIds()
@@ -478,14 +460,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 				if (telegramHelper.isGroup(chat)) R.drawable.img_group_picture else R.drawable.img_user_picture
 			val live = app.settings.isSharingLocationToChat(chat.id)
 
-			if (holder is ChatViewHolder) {
-				TelegramUiHelper.setupPhoto(
-					app,
-					holder.icon,
-					chat.photo?.small?.local?.path,
-					placeholderId,
-					false
-				)
+			if (holder is ChatViewHolder) { TelegramUiHelper.setupPhoto(app, holder.icon, chat.photo?.small?.local?.path, placeholderId, false)
 				holder.title?.text = chat.title
 				holder.description?.visibility = View.GONE
 				if (live) {
@@ -520,13 +495,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 					}
 				}
 			} else if (holder is SharingChatViewHolder) {
-				TelegramUiHelper.setupPhoto(
-					app,
-					holder.icon,
-					chat.photo?.small?.local?.path,
-					placeholderId,
-					false
-				)
+				TelegramUiHelper.setupPhoto(app, holder.icon, chat.photo?.small?.local?.path, placeholderId, false)
 				holder.title?.text = chat.title
 				holder.switcher?.apply {
 					if (live) {
@@ -552,20 +521,16 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 				}
 				val duration = settings.getChatLivePeriod(chat.id)
 				if (duration != null && duration > 0) {
-					holder.descriptionDuration?.text = formatTime(duration, false)
+					holder.descriptionDuration?.text = OsmandFormatter.getFormattedDuration(context!!, duration.toInt())
 				}
 				val map = telegramHelper.getChatLiveMessages()
 				val message = map[chat.id]
 				if (message != null) {
 					val content = message.content
 					if (content is TdApi.MessageLocation) {
-						val time = formatTime(content.expiresIn.toLong(), true)
-						val currentTime =
-							Date(System.currentTimeMillis() + (content.expiresIn * 1000))
-						val df = SimpleDateFormat("HH:mm", Locale.getDefault())
-						val formattedDate = df.format(currentTime)
-						holder.stopSharingFirstPart?.text = time
-						holder.stopSharingSecondPart?.text = formattedDate
+						val currentTime = (System.currentTimeMillis() / 1000 + content.expiresIn).toInt()
+						holder.stopSharingFirstPart?.text = OsmandFormatter.getFormattedDuration(context!!, content.expiresIn)
+						holder.stopSharingSecondPart?.text = OsmandFormatter.getFormattedDuration(context!!, currentTime)
 					}
 				} else {
 					holder.textInArea?.visibility = View.INVISIBLE

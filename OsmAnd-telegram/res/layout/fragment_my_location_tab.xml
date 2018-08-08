@@ -138,51 +138,43 @@
 			android:layout_height="wrap_content"
 			android:orientation="vertical">
 
-			<FrameLayout
-				android:id="@+id/tab_title"
+			<LinearLayout
+				android:id="@+id/title_row"
 				android:layout_width="match_parent"
 				android:layout_height="@dimen/action_bar_height"
-				android:visibility="visible">
+				android:gravity="center_vertical">
 
-				<LinearLayout
-					android:id="@+id/title_row"
-					android:layout_width="match_parent"
+				<net.osmand.telegram.ui.views.TextViewEx
+					android:layout_width="0dp"
 					android:layout_height="@dimen/action_bar_height"
-					android:gravity="center_vertical">
+					android:layout_weight="1"
+					android:ellipsize="end"
+					android:gravity="center_vertical"
+					android:letterSpacing="@dimen/title_letter_spacing"
+					android:maxLines="1"
+					android:paddingLeft="@dimen/content_padding_standard"
+					android:paddingRight="@dimen/content_padding_standard"
+					android:text="@string/my_location"
+					android:textColor="@color/app_bar_title_light"
+					android:textSize="@dimen/title_text_size"
+					app:typeface="@string/font_roboto_mono_bold" />
 
-					<net.osmand.telegram.ui.views.TextViewEx
-						android:layout_width="0dp"
-						android:layout_height="@dimen/action_bar_height"
-						android:layout_weight="1"
-						android:ellipsize="end"
-						android:gravity="center_vertical"
-						android:letterSpacing="@dimen/title_letter_spacing"
-						android:maxLines="1"
-						android:paddingLeft="@dimen/content_padding_standard"
-						android:paddingRight="@dimen/content_padding_standard"
-						android:text="@string/my_location"
-						android:textColor="@color/app_bar_title_light"
-						android:textSize="@dimen/title_text_size"
-						app:typeface="@string/font_roboto_mono_bold" />
+				<ImageView
+					android:id="@+id/options_title"
+					android:layout_width="wrap_content"
+					android:layout_height="match_parent"
+					android:layout_marginEnd="@dimen/content_padding_standard"
+					android:layout_marginLeft="@dimen/content_padding_standard"
+					android:layout_marginRight="@dimen/content_padding_standard"
+					android:layout_marginStart="@dimen/content_padding_standard"
+					android:background="?attr/selectableItemBackgroundBorderless"
+					android:paddingLeft="@dimen/content_padding_half"
+					android:paddingRight="@dimen/content_padding_half"
+					tools:src="@drawable/ic_action_other_menu"
+					tools:tint="@color/icon_light"
+					tools:visibility="visible" />
 
-					<ImageView
-						android:id="@+id/options_title"
-						android:layout_width="wrap_content"
-						android:layout_height="match_parent"
-						android:layout_marginEnd="@dimen/content_padding_standard"
-						android:layout_marginLeft="@dimen/content_padding_standard"
-						android:layout_marginRight="@dimen/content_padding_standard"
-						android:layout_marginStart="@dimen/content_padding_standard"
-						android:background="?attr/selectableItemBackgroundBorderless"
-						android:paddingLeft="@dimen/content_padding_half"
-						android:paddingRight="@dimen/content_padding_half"
-						tools:src="@drawable/ic_action_other_menu"
-						tools:tint="@color/icon_light"
-						tools:visibility="visible" />
-
-				</LinearLayout>
-
-			</FrameLayout>
+			</LinearLayout>
 
 			<View
 				android:id="@+id/appbar_divider"

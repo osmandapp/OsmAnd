@@ -84,14 +84,6 @@ object AndroidUtils {
 			}
 		}
 	}
-	
-	fun removeStatusBarPadding19v(ctx: Context, view: View) {
-		if (Build.VERSION.SDK_INT >= 19) {
-			view.apply {
-				setPadding(paddingLeft, paddingTop - getStatusBarHeight(ctx), paddingRight, paddingBottom)
-			}
-		}
-	}
 
 	fun getPopupMenuWidth(ctx: Context, titles: Collection<String>): Int {
 		val txtSize = ctx.resources.getDimensionPixelSize(R.dimen.list_item_title_text_size)
