@@ -123,6 +123,9 @@ object AndroidUtils {
 		return true
 	}
 
+	fun getPlayMarketIntent(ctx: Context, packageName: String) =
+			Intent(Intent.ACTION_VIEW, Uri.parse(AndroidUtils.getPlayMarketLink(ctx, packageName)))
+
 	fun getPlayMarketLink(ctx: Context, packageName: String): String {
 		if (isGooglePlayInstalled(ctx)) {
 			return "market://details?id=$packageName"
