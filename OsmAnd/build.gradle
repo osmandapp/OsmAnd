@@ -363,7 +363,7 @@ dependencies {
 
 	implementation 'com.squareup.picasso:picasso:2.71828'
 	// JS core
-    implementation group: 'org.mozilla', name: 'rhino', version: '1.7.9'
+	implementation group: 'org.mozilla', name: 'rhino', version: '1.7.9'
 
 // size restrictions
 // implementation 'com.ibm.icu:icu4j:50.1' 
