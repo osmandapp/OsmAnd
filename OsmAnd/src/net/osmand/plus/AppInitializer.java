@@ -46,6 +46,7 @@ import net.osmand.plus.search.QuickSearchHelper;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.plus.voice.CommandPlayerException;
+import net.osmand.plus.voice.JSMediaCommandPlayerImpl;
 import net.osmand.plus.voice.JSTTSCommandPlayerImpl;
 import net.osmand.plus.voice.MediaCommandPlayerImpl;
 import net.osmand.plus.voice.TTSCommandPlayerImpl;
@@ -578,10 +579,12 @@ public class AppInitializer implements IProgress {
 					if (!voiceDir.exists()) {
 						throw new CommandPlayerException(ctx.getString(R.string.voice_data_unavailable));
 					}
-					if (app.getSettings().USE_JS_VOICE_GUIDANCE.get() && JSTTSCommandPlayerImpl.isMyData(voiceDir)) {
+					boolean useJs = app.getSettings().USE_JS_VOICE_GUIDANCE.get();
+					if (useJs && JSTTSCommandPlayerImpl.isMyData(voiceDir)) {
 						return new JSTTSCommandPlayerImpl(ctx, applicationMode, osmandApplication.getRoutingHelper().getVoiceRouter(), voiceProvider);
 					} else if (MediaCommandPlayerImpl.isMyData(voiceDir)) {
-						return new MediaCommandPlayerImpl(osmandApplication, applicationMode, osmandApplication.getRoutingHelper().getVoiceRouter(), voiceProvider);
+						return useJs ? new JSMediaCommandPlayerImpl(osmandApplication, applicationMode, osmandApplication.getRoutingHelper().getVoiceRouter(), voiceProvider)
+								: new MediaCommandPlayerImpl(osmandApplication, applicationMode, osmandApplication.getRoutingHelper().getVoiceRouter(), voiceProvider);
 					} else if (TTSCommandPlayerImpl.isMyData(voiceDir)) {
 						return new TTSCommandPlayerImpl(ctx, applicationMode, osmandApplication.getRoutingHelper().getVoiceRouter(), voiceProvider);
 					}
