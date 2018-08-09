@@ -134,9 +134,7 @@ class TelegramHelper private constructor() {
 		}
 	}
 
-	fun getChatListIds(): List<Long> {
-		return getChatList().map { it.chatId }
-	}
+	fun getChatListIds() = getChatList().map { it.chatId }
 
 	fun getChatIds() = chats.keys().toList()
 

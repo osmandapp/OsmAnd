@@ -35,7 +35,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener, ChatLiveMessagesList
 	private var searchBoxSidesMargin: Int = 0
 
 	private var appBarScrollRange: Int = -1
-	
+
 	private val app: TelegramApplication
 		get() = activity?.application as TelegramApplication
 
