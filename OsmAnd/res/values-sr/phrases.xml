@@ -1559,4 +1559,50 @@
 	<string name="poi_department_store">Робна кућа</string>
 	<string name="poi_energy">Енергетско одељење</string>
 	<string name="poi_car">Продавница аута</string>
+	<string name="poi_atv">Продавница точкаша</string>
+	<string name="poi_marketplace">Дракстор</string>
+	<string name="poi_model">Умањени модели</string>
+	<string name="poi_shop_craft">Продавница занатских реквизита</string>
+	<string name="poi_religion">Религиозна добра</string>
+
+	<string name="poi_emergency_phone">Хитан телефон</string>
+	<string name="poi_fire_flapper">Противпожарна метла</string>
+	<string name="poi_fire_water_pond">Противпожарни базен</string>
+	<string name="poi_grit_bin">Сандук соли</string>
+	<string name="poi_ford_stepping_stones">Пешачки камени мост</string>
+	<string name="poi_traffic_calming_hump">Испупчење</string>
+	<string name="poi_traffic_calming_rumble_strip">Трака неравнине</string>
+	<string name="poi_traffic_calming_table">Успоривачки сто</string>
+	<string name="poi_traffic_calming_choker">Потискивач</string>
+	<string name="poi_public_transport_stop_position">Стоп позиција јавног превоза</string>
+	<string name="poi_railway_platform">Перон пруге</string>
+	<string name="poi_halt">Пружни прелаз</string>
+	<string name="poi_railway_buffer_stop">Пружни предзаустављач</string>
+	<string name="poi_slipway">Бродоградилишна пруга</string>
+	<string name="poi_aerialway_station">Станица жичаре</string>
+	<string name="poi_aerialway_chair_lift">Седишта жичаре</string>
+	<string name="poi_aerialway_t_bar">Седишта са т-пречком</string>
+	<string name="poi_aerialway_j_bar">Седишта са ј-пречком</string>
+	<string name="poi_aerialway_platter">Превозна пречка жичаре</string>
+	<string name="poi_aerialway_mixed_lift">Жичара са гондолама и седиштима</string>
+	<string name="poi_aerialway_drag_lift">Вучна жичара</string>
+	<string name="poi_aerialway_rope_tow">Жичара са вучним конопцем</string>
+	<string name="poi_aerialway_pylon">Стуб жичаре</string>
+
+	<string name="poi_turning_circle">Кружни крај пута</string>
+	<string name="poi_motorway_junction">Аутопутна раскрсница</string>
+	<string name="poi_standpipe">Хидрант</string>
+	<string name="poi_boatyard">Бродски суви док</string>
+	<string name="poi_wastewater_plant">Фабрика отпадних вода</string>
+	<string name="poi_waterway_turning_point">Водени прелаз</string>
+	<string name="poi_weir">Ниска брана</string>
+	<string name="poi_groyne">Седиментна брана</string>
+
+	<string name="poi_power_substation">Подстаница</string>
+	<string name="poi_power_cable_distribution_cabinet">Одељење кабловског развода</string>
+	<string name="poi_power_tower">Електрични торањ</string>
+	<string name="poi_power_pole">Електрични стуб</string>
+
+	<string name="poi_bell_tower">Телефонски торањ</string>
+	<string name="poi_cooling_tower">Расхладни торањ</string>
 	</resources>
