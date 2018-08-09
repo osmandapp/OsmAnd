@@ -3194,4 +3194,5 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="poi_cannot_be_found">Node eller vej kan ikke findes.</string>
     <string name="search_no_results_feedback">Ingen søgeresultater?
 \nGiv tilbagemelding</string>
-    </resources>
+    <string name="test_voice_desrc">Tryk på en knap og lyt til den tilsvarende taletekst for at identificere manglende eller fejlagtige henvisninger.</string>
+</resources>
