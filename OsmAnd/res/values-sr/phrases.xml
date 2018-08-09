@@ -1543,4 +1543,20 @@
 	<string name="poi_garden_furniture">Продавница баштенског намештаја</string>
 	<string name="poi_shop_yes">Општа продавница</string>
 	<string name="poi_glaziery">Стаклара</string>
+	<string name="poi_hardware">Гвожђара</string>
+	<string name="poi_herbalist">Продавница биља</string>
+	<string name="poi_houseware">Продавница кућних потребштина</string>
+	<string name="poi_kitchen">Кухињски намештај</string>
+	<string name="poi_medical_supply">Медицинска достава</string>
+	<string name="poi_outdoor">Продавница спољње опреме</string>
+	<string name="poi_radiotechnics">Радиотехничка продавница</string>
+	<string name="poi_ship_chandler">Бродска опрема</string>
+	<string name="poi_stationery">Продавница канцеларијске опреме</string>
+	<string name="poi_tableware">Продавница прибора за јело</string>
+	<string name="poi_trade">Трговачки терминал</string>
+	<string name="poi_variety_store">Продавница мешане робе</string>
+	<string name="poi_window_blind">Продавница прозорских застора</string>
+	<string name="poi_department_store">Робна кућа</string>
+	<string name="poi_energy">Енергетско одељење</string>
+	<string name="poi_car">Продавница аута</string>
 	</resources>
