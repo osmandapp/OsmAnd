@@ -3000,4 +3000,5 @@ Lon %2$s</string>
     <string name="poi_cannot_be_found">No se puede encontrar el nodo o la vía.</string>
     <string name="search_no_results_feedback">¿Sin resultados de búsqueda?
 \nDanos tu opinión</string>
-    </resources>
+    <string name="test_voice_desrc">Pulsa un botón y escucha el aviso de voz correspondiente para identificar avisos faltantes o defectuosos.</string>
+</resources>
