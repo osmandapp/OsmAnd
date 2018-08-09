@@ -21,7 +21,7 @@ object OsmandFormatter {
 	private val fixed1 = DecimalFormat("0.0")
 	
 	private const val SHORT_TIME_FORMAT = "%02d:%02d"
-	private const val SHORT_SIMPLE_DATE_FORMAT = "HH:mm"
+	private const val SIMPLE_TIME_OF_DAY_FORMAT = "HH:mm"
 
 	private val dateFormatSymbols = DateFormatSymbols.getInstance()
 	private val localDaysStr = getLettersStringArray(dateFormatSymbols.shortWeekdays, 2)
@@ -56,9 +56,9 @@ object OsmandFormatter {
 		val calendar = Calendar.getInstance()
 		calendar.timeInMillis = System.currentTimeMillis() + (seconds * 1000)
 		return if (isSameDay(calendar, Calendar.getInstance())) {
-			SimpleDateFormat(SHORT_SIMPLE_DATE_FORMAT, Locale.getDefault()).format(calendar.time)
+			SimpleDateFormat(SIMPLE_TIME_OF_DAY_FORMAT, Locale.getDefault()).format(calendar.time)
 		} else {
-			SimpleDateFormat(SHORT_SIMPLE_DATE_FORMAT, Locale.getDefault()).format(calendar.time) +
+			SimpleDateFormat(SIMPLE_TIME_OF_DAY_FORMAT, Locale.getDefault()).format(calendar.time) +
 					" " + localDaysStr[calendar.get(Calendar.DAY_OF_WEEK)]
 		}
 	}
