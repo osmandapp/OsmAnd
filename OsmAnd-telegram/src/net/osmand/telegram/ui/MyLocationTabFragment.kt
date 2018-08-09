@@ -86,7 +86,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 				appBarOutlineProvider = outlineProvider
 				outlineProvider = null
 			}
-			addOnOffsetChangedListener { appBar, offset ->
+			addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBar, offset ->
 				if (appBarScrollRange == -1) {
 					appBarScrollRange = appBar.totalScrollRange
 				}
@@ -97,7 +97,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 					adjustAppbar()
 					optionsBtn.visibility = if (collapsed) View.VISIBLE else View.GONE
 				}
-			}
+			})
 		}
 
 		userImage = mainView.findViewById<ImageView>(R.id.my_location_user_image).apply {

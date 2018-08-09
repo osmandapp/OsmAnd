@@ -65,7 +65,7 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 			layoutManager = LinearLayoutManager(context)
 			adapter = this@LiveNowTabFragment.adapter
 			addOnScrollListener(object : RecyclerView.OnScrollListener() {
-				override fun onScrollStateChanged(recyclerView: RecyclerView?, newState: Int) {
+				override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
 					super.onScrollStateChanged(recyclerView, newState)
 					locationUiUpdateAllowed = newState == RecyclerView.SCROLL_STATE_IDLE
 					when (newState) {
