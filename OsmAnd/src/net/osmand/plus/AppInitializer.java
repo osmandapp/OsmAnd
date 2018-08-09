@@ -28,7 +28,6 @@ import net.osmand.plus.activities.LocalIndexInfo;
 import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.download.DownloadActivity;
-import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.download.ui.AbstractLoadLocalIndexTask;
 import net.osmand.plus.helpers.AvoidSpecificRoads;
 import net.osmand.plus.helpers.WaypointHelper;
