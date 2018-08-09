@@ -141,7 +141,7 @@ public class DownloadOsmandIndexesHelper {
 		return assets;
 	}
 	
-	private static void listVoiceAssets(IndexFileList result, AssetManager amanager, PackageManager pm, 
+	public static void listVoiceAssets(IndexFileList result, AssetManager amanager, PackageManager pm,
 			OsmandSettings settings) {
 		try {
 			String ext = DownloadActivityType.addVersionToExt(IndexConstants.TTSVOICE_INDEX_EXT_ZIP, IndexConstants.TTSVOICE_VERSION);
