@@ -31,8 +31,9 @@ import java.util.Set;
 
 //import net.osmand.plus.development.OsmandDevelopmentPlugin;
 
-public class SettingsDevelopmentActivity extends SettingsBaseActivity implements StateChangedListener<Boolean> {
+public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 
+	private StateChangedListener<Boolean> jsRoutingListener;
 
 	@SuppressLint("SimpleDateFormat")
 	@Override
@@ -63,10 +64,15 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity implements
 		cat.addPreference(createCheckBoxPreference(settings.ANIMATE_MY_LOCATION,
 				R.string.animate_my_location,
 				R.string.animate_my_location_desc));
-
+		jsRoutingListener = new StateChangedListener<Boolean>() {
+			@Override
+			public void stateChanged(Boolean change) {
+				getMyApplication().getDownloadThread().runReloadIndexFilesSilent();
+			}
+		};
 		cat.addPreference(createCheckBoxPreference(settings.USE_JS_VOICE_GUIDANCE, "Use JS voice guidance",
 				"Use new voice guidance logic based on JavaScript"));
-		settings.USE_JS_VOICE_GUIDANCE.addListener(this);
+		settings.USE_JS_VOICE_GUIDANCE.addListener(jsRoutingListener);
 
 		final Preference firstRunPreference = new Preference(this);
 		firstRunPreference.setTitle(R.string.simulate_initial_startup);
@@ -257,11 +263,6 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity implements
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		settings.USE_JS_VOICE_GUIDANCE.removeListener(this);
-	}
-
-	@Override
-	public void stateChanged(Boolean change) {
-		getMyApplication().getDownloadThread().runReloadIndexFilesSilent();
+		settings.USE_JS_VOICE_GUIDANCE.removeListener(jsRoutingListener);
 	}
 }
