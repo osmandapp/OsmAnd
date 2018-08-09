@@ -490,9 +490,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener, ChatLiveMessagesList
 					setOnCheckedChangeListener { _, isChecked ->
 						if (!isChecked) {
 							app.settings.shareLocationToChat(chat.id, false)
-							if (!app.settings.hasAnyChatToShareLocation()) {
-								app.shareLocationHelper.stopSharingLocation()
-							}
+							app.shareLocationHelper.stopSharingLocation()
 							removeItem(chat)
 						}
 					}
