@@ -110,6 +110,7 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 			TelegramAuthorizationState.READY -> {
 				updateList()
 			}
+			TelegramAuthorizationState.LOGGING_OUT,
 			TelegramAuthorizationState.CLOSED,
 			TelegramAuthorizationState.UNKNOWN -> {
 				adapter.items = emptyList()

@@ -171,6 +171,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 			TelegramHelper.TelegramAuthorizationState.READY -> {
 				updateList()
 			}
+			TelegramHelper.TelegramAuthorizationState.LOGGING_OUT,
 			TelegramHelper.TelegramAuthorizationState.CLOSED,
 			TelegramHelper.TelegramAuthorizationState.UNKNOWN -> {
 				adapter.chats = emptyList()
