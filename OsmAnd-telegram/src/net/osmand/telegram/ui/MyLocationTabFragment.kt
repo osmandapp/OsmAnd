@@ -528,20 +528,32 @@ class MyLocationTabFragment : Fragment(), TelegramListener, ChatLiveMessagesList
 								notifyItemChanged(position)
 							}
 						}
-						val stopDescription = "${getText(R.string.stop_at)}:"
-						holder.stopSharingDescr?.text = stopDescription
+						holder.stopSharingDescr?.apply {
+							visibility = View.VISIBLE
+							val stopDescription = "${getText(R.string.stop_at)}:"
+							text = stopDescription
+						}
 
-						holder.stopSharingFirstPart?.text = OsmandFormatter.getFormattedTime(expiresIn)
+						holder.stopSharingFirstPart?.apply {
+							visibility = View.VISIBLE
+							text = OsmandFormatter.getFormattedTime(expiresIn)
+						}
 
-						val stopSharingSecondPart = "(${getString(R.string.in_time,
-							OsmandFormatter.getFormattedDuration(context!!, expiresIn, true))})"
-						holder.stopSharingSecondPart?.text = stopSharingSecondPart
+						holder.stopSharingSecondPart?.apply {
+							visibility = View.VISIBLE
+							val stopSharingSecondPart = "(${getString(R.string.in_time,
+								OsmandFormatter.getFormattedDuration(context!!, expiresIn, true))})"
+							text = stopSharingSecondPart
+						}
 						if (expiresIn == 0) {
 							removeItem(chat)
 						}
 					}
 				} else {
 					holder.textInArea?.visibility = View.INVISIBLE
+					holder.stopSharingDescr?.visibility = View.INVISIBLE
+					holder.stopSharingFirstPart?.visibility = View.INVISIBLE
+					holder.stopSharingSecondPart?.visibility = View.INVISIBLE
 				}
 			}
 		}
