@@ -10,6 +10,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import net.osmand.binary.OsmandOdb.TransportRouteSchedule;
 import net.osmand.osm.edit.Node;
 import net.osmand.osm.edit.Way;
 import net.osmand.util.MapUtils;
@@ -22,10 +23,16 @@ public class TransportRoute extends MapObject {
 	private Integer dist = null;
 	private String color;
 	private List<Way> forwardWays;
+	private TransportRouteSchedule schedule;
 	public static final double SAME_STOP = 25;
 	
 	public TransportRoute(){
 	}
+	
+	public TransportRouteSchedule getSchedule() {
+		return schedule;
+	}
+	
 	
 	public List<TransportStop> getForwardStops() {
 		return forwardStops;
@@ -196,5 +203,9 @@ public class TransportRoute extends MapObject {
 			d += MapUtils.getDistance(forwardStops.get(i - 1).getLocation(), forwardStops.get(i).getLocation());
 		}
 		return d;
+	}
+
+	public void setSchedule(TransportRouteSchedule schedule) {
+		this.schedule = schedule;
 	}
 }
