@@ -40,6 +40,8 @@ import java.util.Set;
 import alice.tuprolog.Struct;
 import alice.tuprolog.Term;
 
+import static net.osmand.plus.mapcontextmenu.other.RoutePreferencesMenu.getVoiceFiles;
+
 
 /**
  * Test Voice activity
@@ -84,41 +86,11 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 		
 		selectVoice(ll);
 	}
-	
-	private Set<String> getVoiceFiles() {
-		// read available voice data
-		File extStorage = ((OsmandApplication) getApplication()).getAppPath(IndexConstants.VOICE_INDEX_DIR);
-		Set<String> setFiles = new LinkedHashSet<String>();
-		OsmandApplication app = (OsmandApplication) getApplication();
-		boolean addJS = app.getSettings().USE_JS_VOICE_GUIDANCE.get();
-		if (extStorage.exists()) {
-			for (File f : extStorage.listFiles()) {
-				if (f.isDirectory()) {
-					if (addJS && hasJavaScript(f)) {
-						setFiles.add(f.getName());
-					} else if (!addJS) {
-						setFiles.add(f.getName());
-					}
-
-				}
-			}
-		}
-		return setFiles;
-	}
-
-	private boolean hasJavaScript(File f) {
-		for (File file : f.listFiles()) {
-			if (file.getName().endsWith(IndexConstants.TTSVOICE_INDEX_EXT_JS)) {
-				return true;
-			}
-		}
-		return false;
-	}
 
 	private void selectVoice(final LinearLayout ll) {
 		String[] entries;
 		final String[] entrieValues;
-		Set<String> voiceFiles = getVoiceFiles();
+		Set<String> voiceFiles = getVoiceFiles(this);
 		entries = new String[voiceFiles.size() ];
 		entrieValues = new String[voiceFiles.size() ];
 		int k = 0;

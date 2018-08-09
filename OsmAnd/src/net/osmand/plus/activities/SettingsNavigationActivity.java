@@ -52,6 +52,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import static net.osmand.plus.mapcontextmenu.other.RoutePreferencesMenu.getVoiceFiles;
+
 public class SettingsNavigationActivity extends SettingsBaseActivity {
 
 	public static final String MORE_VALUE = "MORE_VALUE";
@@ -244,7 +246,7 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 	private void reloadVoiceListPreference(PreferenceScreen screen) {
 		String[] entries;
 		String[] entrieValues;
-		Set<String> voiceFiles = getVoiceFiles();
+		Set<String> voiceFiles = getVoiceFiles(this);
 		entries = new String[voiceFiles.size() + 2];
 		entrieValues = new String[voiceFiles.size() + 2];
 		int k = 0;
@@ -262,34 +264,6 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 		registerListPreference(settings.VOICE_PROVIDER, screen, entries, entrieValues);
 	}
 
-	private Set<String> getVoiceFiles() {
-		// read available voice data
-		File extStorage = ((OsmandApplication) getApplication()).getAppPath(IndexConstants.VOICE_INDEX_DIR);
-		Set<String> setFiles = new LinkedHashSet<String>();
-		boolean addJS = settings.USE_JS_VOICE_GUIDANCE.get();
-		if (extStorage.exists()) {
-			for (File f : extStorage.listFiles()) {
-				if (f.isDirectory()) {
-					if (addJS && hasJavaScript(f)) {
-						setFiles.add(f.getName());
-					} else if (!addJS) {
-						setFiles.add(f.getName());
-					}
-
-				}
-			}
-		}
-		return setFiles;
-	}
-
-	private boolean hasJavaScript(File f) {
-		for (File file : f.listFiles()) {
-			if (file.getName().endsWith(IndexConstants.TTSVOICE_INDEX_EXT_JS)) {
-				return true;
-			}
-		}
-		return false;
-	}
 
 	private void addVoicePrefs(PreferenceGroup cat) {
 		if (!Version.isBlackberry((OsmandApplication) getApplication())) {
