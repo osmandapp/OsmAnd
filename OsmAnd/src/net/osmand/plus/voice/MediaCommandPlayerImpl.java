@@ -29,10 +29,10 @@ public class MediaCommandPlayerImpl extends AbstractPrologCommandPlayer implemen
 	private static final Log log = PlatformUtil.getLog(MediaCommandPlayerImpl.class);
 	
 	// playing media
-	private MediaPlayer mediaPlayer;
+	MediaPlayer mediaPlayer;
 	// indicates that player is ready to play first file
-	private List<String> filesToPlay = Collections.synchronizedList(new ArrayList<String>());
-	private VoiceRouter vrt;
+	List<String> filesToPlay = Collections.synchronizedList(new ArrayList<String>());
+	VoiceRouter vrt;
 
 	
 	public MediaCommandPlayerImpl(OsmandApplication ctx, ApplicationMode applicationMode, VoiceRouter vrt, String voiceProvider)
@@ -95,7 +95,7 @@ public class MediaCommandPlayerImpl extends AbstractPrologCommandPlayer implemen
 		playQueue();
 	}
 	
-	private synchronized void playQueue() {
+	synchronized void playQueue() {
 		if (mediaPlayer == null) {
 			mediaPlayer = new MediaPlayer();
 		}
@@ -159,7 +159,7 @@ public class MediaCommandPlayerImpl extends AbstractPrologCommandPlayer implemen
 	 * @param file
 	 */
 	private void playFile(File file)  {
-		if (!file.exists()) {
+		if (!file.exists() || file.isDirectory()) {
 			log.error("Unable to play, does not exist: "+file);
 			playQueue();
 			return;

@@ -83,7 +83,8 @@ public class DownloadResourceGroup {
 		}
 
 		public boolean isHeader() {
-			return this == VOICE_HEADER_REC || this == VOICE_HEADER_TTS || this == SUBREGIONS
+			return this == VOICE_HEADER_REC || this == VOICE_HEADER_TTS
+					|| this == SUBREGIONS
 					|| this == WORLD_MAPS || this == REGION_MAPS || this == OTHER_GROUP   
 					|| this == HILLSHADE_HEADER || this == SRTM_HEADER
 					|| this == OTHER_MAPS_HEADER || this == OTHER_MAPS_GROUP

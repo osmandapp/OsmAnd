@@ -28,27 +28,27 @@ import android.media.SoundPool;
 
 public class VoiceRouter {
 	private static final int STATUS_UTWP_TOLD = -1;
-	private static final int STATUS_UNKNOWN = 0;
-	private static final int STATUS_LONG_PREPARE = 1;
-	private static final int STATUS_PREPARE = 2;
-	private static final int STATUS_TURN_IN = 3;
-	private static final int STATUS_TURN = 4;
-	private static final int STATUS_TOLD = 5;
+	static final int STATUS_UNKNOWN = 0;
+	static final int STATUS_LONG_PREPARE = 1;
+	static final int STATUS_PREPARE = 2;
+	static final int STATUS_TURN_IN = 3;
+	static final int STATUS_TURN = 4;
+	static final int STATUS_TOLD = 5;
 	
-	private final RoutingHelper router;
-	private static CommandPlayer player;
-	private final OsmandSettings settings;
+	protected final RoutingHelper router;
+	protected static CommandPlayer player;
+	protected final OsmandSettings settings;
 
 	private static boolean mute = false;
-	private static int currentStatus = STATUS_UNKNOWN;
-	private static boolean playedAndArriveAtTarget = false;
-	private static float playGoAheadDist = 0;
+	static int currentStatus = STATUS_UNKNOWN;
+	static boolean playedAndArriveAtTarget = false;
+	static float playGoAheadDist = 0;
 	private static long lastAnnouncedSpeedLimit = 0;
 	private static long waitAnnouncedSpeedLimit = 0;
 	private static long lastAnnouncedOffRoute = 0;
 	private static long waitAnnouncedOffRoute = 0;
-	private static boolean suppressDest = false;
-	private static boolean announceBackOnRoute = false;
+	static boolean suppressDest = false;
+	static boolean announceBackOnRoute = false;
 	// private static long lastTimeRouteRecalcAnnounced = 0;
 	// Remember when last announcement was made
 	private static long lastAnnouncement = 0;
@@ -66,8 +66,10 @@ public class VoiceRouter {
 	protected int TURN_DISTANCE = 0;
 	
 	protected static VoiceCommandPending pendingCommand = null;
-	private static RouteDirectionInfo nextRouteDirection;
+	static RouteDirectionInfo nextRouteDirection;
 	private Term empty;
+
+	private boolean useJS;
 
 	public interface VoiceMessageListener {
 		void onVoiceMessage();
@@ -78,6 +80,7 @@ public class VoiceRouter {
 	public VoiceRouter(RoutingHelper router, final OsmandSettings settings) {
 		this.router = router;
 		this.settings = settings;
+		useJS = settings.USE_JS_VOICE_GUIDANCE.get();
 		this.mute = settings.VOICE_MUTE.get();
 		empty = new Struct("");
 		voiceMessageListeners = new ConcurrentHashMap<VoiceRouter.VoiceMessageListener, Integer>();
@@ -164,7 +167,7 @@ public class VoiceRouter {
 		}
 	}
 
-	private double btScoDelayDistance = 0;
+	double btScoDelayDistance = 0;
 
 	public boolean isDistanceLess(float currentSpeed, double dist, double etalon, float defSpeed) {
 		if (defSpeed <= 0) {
@@ -201,7 +204,7 @@ public class VoiceRouter {
 		}
 	}
 
-	private void nextStatusAfter(int previousStatus) {
+	void nextStatusAfter(int previousStatus) {
 		//STATUS_UNKNOWN=0 -> STATUS_LONG_PREPARE=1 -> STATUS_PREPARE=2 -> STATUS_TURN_IN=3 -> STATUS_TURN=4 -> STATUS_TOLD=5
 		if (previousStatus != STATUS_TOLD) {
 			this.currentStatus = previousStatus + 1;
@@ -210,7 +213,7 @@ public class VoiceRouter {
 		}
 	}
 	
-	private boolean statusNotPassed(int statusToCheck) {
+	boolean statusNotPassed(int statusToCheck) {
 		return currentStatus <= statusToCheck;
 	}
 	
@@ -395,14 +398,14 @@ public class VoiceRouter {
 		}
 	}
 	
-	private boolean isTargetPoint(NextDirectionInfo info) {
+	boolean isTargetPoint(NextDirectionInfo info) {
 		boolean in = info != null && info.intermediatePoint;
 		boolean target = info == null || info.directionInfo == null
 				|| info.directionInfo.distance == 0;
 		return in || target;
 	}
 
-	private boolean needsInforming() {
+	boolean needsInforming() {
 		final Integer repeat = settings.KEEP_INFORMING.get();
 		if (repeat == null || repeat == 0) return false;
 
@@ -557,7 +560,7 @@ public class VoiceRouter {
 		return false;
 	}
 
-	private void playThen() {
+	void playThen() {
 		CommandBuilder play = getNewCommandPlayerToPlay();
 		if (play != null) {
 			notifyOnVoiceMessage();
@@ -715,7 +718,7 @@ public class VoiceRouter {
 		}
 	}
 	
-	private void playAndArriveAtDestination(NextDirectionInfo info) {
+	void playAndArriveAtDestination(NextDirectionInfo info) {
 		if (isTargetPoint(info)) {
 			String pointName = info == null ? "" : info.pointName;
 			CommandBuilder play = getNewCommandPlayerToPlay();
@@ -781,7 +784,7 @@ public class VoiceRouter {
 		}
 	}
 	
-	private String getTurnType(TurnType t) {
+	String getTurnType(TurnType t) {
 		if (TurnType.TL == t.getValue()) {
 			return AbstractPrologCommandPlayer.A_LEFT;
 		} else if (TurnType.TSHL == t.getValue()) {

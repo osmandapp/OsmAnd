@@ -165,6 +165,13 @@ public class DownloadOsmandIndexesHelper {
 					
 					result.add(new AssetIndexItem(voice + ext, "voice", date, dateModified, "0.1", destFile.length(), key,
 							destFile.getPath(), DownloadActivityType.VOICE_FILE));
+				} else if (target.endsWith(IndexConstants.TTSVOICE_INDEX_EXT_JS) && target.startsWith("voice/")) {
+					String lang = target.substring("voice/".length(), target.indexOf("-"));
+					File destFile = new File(voicePath, target.substring("voice/".length(),
+							target.indexOf("/", "voice/".length())) + "/" + lang + "_tts.js");
+					result.add(new AssetIndexItem(lang + "_" + IndexConstants.TTSVOICE_INDEX_EXT_JS,
+							"voice", date, dateModified, "0.1", destFile.length(), key,
+							destFile.getPath(), DownloadActivityType.VOICE_FILE));
 				}
 			}
 			result.sort();
