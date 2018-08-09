@@ -2961,7 +2961,7 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="add_track_to_markers_descr">マーカーとして追加する経由地点を経路データから選択してください。(経由地点を含む経路のみリストアップされます)</string>
     <string name="add_favourites_group_to_markers_descr">マーカーとして追加するお気に入りのカテゴリを選択してください。</string>
     
-    <string name="add_group_descr">お気に入り地点や経路データ内の経由地点をまとめてインポートできます。</string>
+    <string name="add_group_descr">お気に入り地点やGPX経由地点をグループとしてインポートできます。</string>
     <string name="empty_state_markers_groups">グループでインポート</string>
     <string name="empty_state_markers_groups_desc">お気に入り地点や経路データ内の経由地点をマーカーとしてまとめて追加できます。</string>
     <string name="shared_string_two">二つ</string>
@@ -3016,7 +3016,7 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="add_group">グループの追加</string>
     <string name="empty_state_osm_edits_descr">OSM編集はPOIの作成や更新、注釈の追加などが可能です。記録したGPXファイルを用いてあなたもOSMに貢献することができるでしょう。</string>
     <string name="mark_passed">通過済みにする</string>
-    <string name="add_segment_to_the_track">GPX経路に追加</string>
+    <string name="add_segment_to_the_track">GPXファイルに追加</string>
     <string name="shared_string_current">現在</string>
     <string name="shared_string_actions">その他</string>
     
@@ -3050,4 +3050,8 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="default_render_descr">標準的な汎用スタイルです。人口密集地の場合描写の簡素化がなされます。主な機能としては等高線、ルート、路面品質、通行制限、道路標識、SACスケールの通路描写をサポートし、急流下りなどのウォータースポーツにも使用できます。</string>
     <string name="open_wikipedia_link_online">Wikipediaをオンライン参照</string>
     <string name="open_wikipedia_link_online_description">このリンクを開くとウェブブラウザで閲覧することができます。</string>
+    <string name="import_as_gpx">GPXファイルとしてインポート</string>
+    <string name="empty_state_my_tracks">GPXファイルに追加しよう</string>
+    <string name="empty_state_my_tracks_desc">GPXファイルまたは記録した経路からインポートします。</string>
+    <string name="import_track">GPXファイルからインポート</string>
     </resources>
