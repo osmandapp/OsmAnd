@@ -1,6 +1,7 @@
 package net.osmand.telegram.ui
 
 import android.animation.*
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.drawable.GradientDrawable
 import android.os.Build
@@ -48,7 +49,6 @@ class MyLocationTabFragment : Fragment(), TelegramListener, ChatLiveMessagesList
 	private lateinit var textContainer: LinearLayout
 	private lateinit var titleContainer: LinearLayout
 	private lateinit var optionsBtn: ImageView
-	private lateinit var optionsBtnTitle: ImageView
 	private lateinit var title: TextView
 	private lateinit var description: TextView
 	private lateinit var searchBox: FrameLayout
@@ -114,12 +114,12 @@ class MyLocationTabFragment : Fragment(), TelegramListener, ChatLiveMessagesList
 
 		optionsBtn = mainView.findViewById<ImageView>(R.id.options).apply {
 			setImageDrawable(app.uiUtils.getThemedIcon(R.drawable.ic_action_other_menu))
-			setOnClickListener { showPopupMenu(optionsBtn) }
+			setOnClickListener { showPopupMenu(this) }
 		}
 
-		optionsBtnTitle = mainView.findViewById<ImageView>(R.id.options_title).apply {
+		mainView.findViewById<ImageView>(R.id.options_title).apply {
 			setImageDrawable(app.uiUtils.getThemedIcon(R.drawable.ic_action_other_menu))
-			setOnClickListener { showPopupMenu(optionsBtnTitle) }
+			setOnClickListener { showPopupMenu(this) }
 		}
 
 		imageContainer = mainView.findViewById<FrameLayout>(R.id.image_container)
@@ -166,9 +166,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener, ChatLiveMessagesList
 			setOnCheckedChangeListener { _, isChecked ->
 				if (!isChecked) {
 					app.settings.stopSharingLocationToChats()
-					if (!app.settings.hasAnyChatToShareLocation()) {
-						app.shareLocationHelper.stopSharingLocation()
-					}
+					app.shareLocationHelper.stopSharingLocation()
 					updateContent()
 				}
 			}
@@ -240,9 +238,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener, ChatLiveMessagesList
 	}
 
 	override fun onChatLiveMessagesUpdated(messages: List<TdApi.Message>) {
-		app.runInUIThread {
-			updateContent()
-		}
+		app.runInUIThread { updateContent() }
 	}
 
 	fun onPrimaryBtnClick() {
@@ -447,6 +443,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener, ChatLiveMessagesList
 			}
 		}
 
+		@SuppressLint("SetTextI18n")
 		override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
 			val chat = chats[position]
 			val lastItem = position == itemCount - 1
@@ -479,9 +476,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener, ChatLiveMessagesList
 				holder.itemView.setOnClickListener {
 					if (live) {
 						app.settings.shareLocationToChat(chat.id, false)
-						if (!app.settings.hasAnyChatToShareLocation()) {
-							app.shareLocationHelper.stopSharingLocation()
-						}
+						app.shareLocationHelper.stopSharingLocation()
 						notifyItemChanged(position)
 					} else {
 						holder.checkBox?.apply {
@@ -505,11 +500,10 @@ class MyLocationTabFragment : Fragment(), TelegramListener, ChatLiveMessagesList
 
 				val duration = settings.getChatLivePeriod(chat.id)?.toInt()
 				if (duration != null && duration > 0) {
-					holder.descriptionDuration?.text = OsmandFormatter.getFormattedDuration(context!!, duration, false)
+					holder.descriptionDuration?.text = OsmandFormatter.getFormattedDuration(context!!, duration)
 					holder.description?.apply {
 						visibility = View.VISIBLE
-						val sharingTimeDescription = "${getText(R.string.sharing_time)}:"
-						text = sharingTimeDescription
+						text = "${getText(R.string.sharing_time)}:"
 					}
 				}
 				val message = telegramHelper.getChatLiveMessages()[chat.id]
@@ -519,10 +513,8 @@ class MyLocationTabFragment : Fragment(), TelegramListener, ChatLiveMessagesList
 						val expiresIn = content.expiresIn
 						holder.textInArea?.apply {
 							visibility = View.VISIBLE
-							val addDuration = OsmandFormatter.getFormattedDuration(context!!,
-								TelegramHelper.MESSAGE_ADD_ACTIVE_TIME_SEC, false)
-							val textInAreaDescription = "${getText(R.string.plus)} $addDuration"
-							text = textInAreaDescription
+							text = "${getText(R.string.plus)} ${OsmandFormatter.getFormattedDuration(context!!,
+								TelegramHelper.MESSAGE_ADD_ACTIVE_TIME_SEC)}"
 							setOnClickListener {
 								var newLivePeriod = app.settings.getChatLivePeriod(chat.id)
 								if (newLivePeriod != null) {
@@ -536,8 +528,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener, ChatLiveMessagesList
 						}
 						holder.stopSharingDescr?.apply {
 							visibility = View.VISIBLE
-							val stopDescription = "${getText(R.string.stop_at)}:"
-							text = stopDescription
+							text = "${getText(R.string.stop_at)}:"
 						}
 
 						holder.stopSharingFirstPart?.apply {
@@ -547,9 +538,8 @@ class MyLocationTabFragment : Fragment(), TelegramListener, ChatLiveMessagesList
 
 						holder.stopSharingSecondPart?.apply {
 							visibility = View.VISIBLE
-							val stopSharingSecondPart = "(${getString(R.string.in_time,
+							text = "(${getString(R.string.in_time,
 								OsmandFormatter.getFormattedDuration(context!!, expiresIn, true))})"
-							text = stopSharingSecondPart
 						}
 						if (expiresIn == 0) {
 							removeItem(chat)

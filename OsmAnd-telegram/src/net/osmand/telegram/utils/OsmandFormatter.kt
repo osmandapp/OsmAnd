@@ -19,6 +19,9 @@ object OsmandFormatter {
 	val FEET_IN_ONE_METER = YARDS_IN_ONE_METER * 3f
 	private val fixed2 = DecimalFormat("0.00")
 	private val fixed1 = DecimalFormat("0.0")
+	
+	private const val SHORT_TIME_FORMAT = "%02d:%02d"
+	private const val SHORT_SIMPLE_DATE_FORMAT = "HH:mm"
 
 	private val dateFormatSymbols = DateFormatSymbols.getInstance()
 	private val localDaysStr = getLettersStringArray(dateFormatSymbols.shortWeekdays, 2)
@@ -30,11 +33,11 @@ object OsmandFormatter {
 		fixed2.minimumIntegerDigits = 1
 	}
 
-	fun getFormattedDuration(ctx: Context, seconds: Int, short: Boolean): String {
+	fun getFormattedDuration(ctx: Context, seconds: Int, short: Boolean = false): String {
 		val hours = seconds / (60 * 60)
 		val minutes = seconds / 60 % 60
 		if (short) {
-			return String.format("%02d:%02d", hours, minutes)
+			return String.format(SHORT_TIME_FORMAT, hours, minutes)
 		}
 		return when {
 			hours > 0 -> {
@@ -53,9 +56,9 @@ object OsmandFormatter {
 		val calendar = Calendar.getInstance()
 		calendar.timeInMillis = System.currentTimeMillis() + (seconds * 1000)
 		return if (isSameDay(calendar, Calendar.getInstance())) {
-			SimpleDateFormat("HH:mm", Locale.getDefault()).format(calendar.time)
+			SimpleDateFormat(SHORT_SIMPLE_DATE_FORMAT, Locale.getDefault()).format(calendar.time)
 		} else {
-			SimpleDateFormat("HH:mm", Locale.getDefault()).format(calendar.time) +
+			SimpleDateFormat(SHORT_SIMPLE_DATE_FORMAT, Locale.getDefault()).format(calendar.time) +
 					" " + localDaysStr[calendar.get(Calendar.DAY_OF_WEEK)]
 		}
 	}
@@ -127,11 +130,7 @@ object OsmandFormatter {
 	}
 
 	@JvmOverloads
-	fun getFormattedDistance(
-		meters: Float,
-		ctx: TelegramApplication,
-		forceTrailingZeros: Boolean = true
-	): String {
+	fun getFormattedDistance(meters: Float, ctx: TelegramApplication, forceTrailingZeros: Boolean = true): String {
 		val format1 = if (forceTrailingZeros) "{0,number,0.0} " else "{0,number,0.#} "
 		val format2 = if (forceTrailingZeros) "{0,number,0.00} " else "{0,number,0.##} "
 
@@ -150,39 +149,19 @@ object OsmandFormatter {
 		}
 
 		if (meters >= 100 * mainUnitInMeters) {
-			return (meters / mainUnitInMeters + 0.5).toInt().toString() + " " + ctx.getString(
-				mainUnitStr
-			) //$NON-NLS-1$
+			return (meters / mainUnitInMeters + 0.5).toInt().toString() + " " + ctx.getString(mainUnitStr) //$NON-NLS-1$
 		} else if (meters > 9.99f * mainUnitInMeters) {
-			return MessageFormat.format(
-				format1 + ctx.getString(mainUnitStr),
-				meters / mainUnitInMeters
-			).replace('\n', ' ') //$NON-NLS-1$
+			return MessageFormat.format(format1 + ctx.getString(mainUnitStr), meters / mainUnitInMeters).replace('\n', ' ') //$NON-NLS-1$
 		} else if (meters > 0.999f * mainUnitInMeters) {
-			return MessageFormat.format(
-				format2 + ctx.getString(mainUnitStr),
-				meters / mainUnitInMeters
-			).replace('\n', ' ') //$NON-NLS-1$
+			return MessageFormat.format(format2 + ctx.getString(mainUnitStr), meters / mainUnitInMeters).replace('\n', ' ') //$NON-NLS-1$
 		} else if (mc == MetricsConstants.MILES_AND_FEET && meters > 0.249f * mainUnitInMeters) {
-			return MessageFormat.format(
-				format2 + ctx.getString(mainUnitStr),
-				meters / mainUnitInMeters
-			).replace('\n', ' ') //$NON-NLS-1$
+			return MessageFormat.format(format2 + ctx.getString(mainUnitStr), meters / mainUnitInMeters).replace('\n', ' ') //$NON-NLS-1$
 		} else if (mc == MetricsConstants.MILES_AND_METERS && meters > 0.249f * mainUnitInMeters) {
-			return MessageFormat.format(
-				format2 + ctx.getString(mainUnitStr),
-				meters / mainUnitInMeters
-			).replace('\n', ' ') //$NON-NLS-1$
+			return MessageFormat.format(format2 + ctx.getString(mainUnitStr), meters / mainUnitInMeters).replace('\n', ' ') //$NON-NLS-1$
 		} else if (mc == MetricsConstants.MILES_AND_YARDS && meters > 0.249f * mainUnitInMeters) {
-			return MessageFormat.format(
-				format2 + ctx.getString(mainUnitStr),
-				meters / mainUnitInMeters
-			).replace('\n', ' ') //$NON-NLS-1$
+			return MessageFormat.format(format2 + ctx.getString(mainUnitStr), meters / mainUnitInMeters).replace('\n', ' ') //$NON-NLS-1$
 		} else if (mc == MetricsConstants.NAUTICAL_MILES && meters > 0.99f * mainUnitInMeters) {
-			return MessageFormat.format(
-				format2 + ctx.getString(mainUnitStr),
-				meters / mainUnitInMeters
-			).replace('\n', ' ') //$NON-NLS-1$
+			return MessageFormat.format(format2 + ctx.getString(mainUnitStr), meters / mainUnitInMeters).replace('\n', ' ') //$NON-NLS-1$
 		} else {
 			if (mc == MetricsConstants.KILOMETERS_AND_METERS || mc == MetricsConstants.MILES_AND_METERS) {
 				return (meters + 0.5).toInt().toString() + " " + ctx.getString(R.string.m) //$NON-NLS-1$
@@ -265,13 +244,6 @@ object OsmandFormatter {
 			return (kmh10 / 10f).toString() + " " + SpeedConstants.METERS_PER_SECOND.toShortString(ctx)
 		}
 	}
-	fun capitalizeFirstLetter(s: String?): String? {
-		return if (s != null && s.isNotEmpty()) {
-			Character.toUpperCase(s[0]) + if (s.length > 1) s.substring(1) else ""
-		} else {
-			s
-		}
-	}
 
 	private fun isSameDay(cal1: Calendar, cal2: Calendar): Boolean {
 		return cal1.get(Calendar.ERA) == cal2.get(Calendar.ERA) &&
@@ -283,9 +255,9 @@ object OsmandFormatter {
 		val newStrings = arrayOfNulls<String>(strings.size)
 		for (i in strings.indices) {
 			if (strings[i].length > letters) {
-				newStrings[i] = capitalizeFirstLetter(strings[i].substring(0, letters))
+				newStrings[i] = (strings[i].substring(0, letters)).capitalize()
 			} else {
-				newStrings[i] = capitalizeFirstLetter(strings[i])
+				newStrings[i] = strings[i].capitalize()
 			}
 		}
 		return newStrings

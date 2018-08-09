@@ -103,10 +103,10 @@ class SettingsDialogFragment : DialogFragment() {
 		listOf(30 * 60, 60 * 60, 90 * 60)
 	) {
 
-		override fun getCurrentValue() = OsmandFormatter.getFormattedDuration(app, values[0],false)
+		override fun getCurrentValue() = OsmandFormatter.getFormattedDuration(app, values[0])
 
 		override fun setCurrentValue(index: Int) {
-			val value = OsmandFormatter.getFormattedDuration(app, values[index],false)
+			val value = OsmandFormatter.getFormattedDuration(app, values[index])
 			Toast.makeText(context, value, Toast.LENGTH_SHORT).show()
 		}
 	}
@@ -119,10 +119,10 @@ class SettingsDialogFragment : DialogFragment() {
 		listOf(30 * 60, 60 * 60, 90 * 60)
 	) {
 
-		override fun getCurrentValue() = OsmandFormatter.getFormattedDuration(app, values[0],false)
+		override fun getCurrentValue() = OsmandFormatter.getFormattedDuration(app, values[0])
 
 		override fun setCurrentValue(index: Int) {
-			val value = OsmandFormatter.getFormattedDuration(app, values[index],false)
+			val value = OsmandFormatter.getFormattedDuration(app, values[index])
 			Toast.makeText(context, value, Toast.LENGTH_SHORT).show()
 		}
 	}
@@ -135,10 +135,10 @@ class SettingsDialogFragment : DialogFragment() {
 		listOf(30 * 60, 60 * 60, 90 * 60)
 	) {
 
-		override fun getCurrentValue() = OsmandFormatter.getFormattedDuration(app, values[0],false)
+		override fun getCurrentValue() = OsmandFormatter.getFormattedDuration(app, values[0])
 
 		override fun setCurrentValue(index: Int) {
-			val value = OsmandFormatter.getFormattedDuration(app, values[index],false)
+			val value = OsmandFormatter.getFormattedDuration(app, values[index])
 			Toast.makeText(context, value, Toast.LENGTH_SHORT).show()
 		}
 	}
@@ -154,7 +154,7 @@ class SettingsDialogFragment : DialogFragment() {
 
 		abstract fun setCurrentValue(index: Int)
 
-		fun getMenuItems() = values.map { OsmandFormatter.getFormattedDuration(app, it, false) }
+		fun getMenuItems() = values.map { OsmandFormatter.getFormattedDuration(app, it) }
 	}
 
 	private enum class AppConnect(
