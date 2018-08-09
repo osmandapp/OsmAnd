@@ -16,7 +16,6 @@ import android.support.v7.app.AlertDialog;
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
-import net.osmand.StateChangedListener;
 import net.osmand.aidl.OsmandAidlApi;
 import net.osmand.map.OsmandRegions;
 import net.osmand.map.OsmandRegions.RegionTranslation;

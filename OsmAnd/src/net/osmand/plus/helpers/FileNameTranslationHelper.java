@@ -80,7 +80,7 @@ public class FileNameTranslationHelper {
 
 	public static String getVoiceName(Context ctx, String fileName) {
 		try {
-            String nm = fileName.replace('-', '_').replace(' ', '_');
+			String nm = fileName.replace('-', '_').replace(' ', '_');
 			if (nm.endsWith("_tts") || nm.endsWith("-tts")) {
 				nm = nm.substring(0, nm.length() - 4);
 			}
