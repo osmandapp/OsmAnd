@@ -1,4 +1,12 @@
 <resources>
+	<string name="osmand_connect">OsmAnd connect</string>
+	<string name="location_history_desc">Hide contacts that are not updated their location after the specified period of time.</string>
+	<string name="location_history">Location history</string>
+	<string name="stale_location_desc">Time when contact last time sent an update to its location.</string>
+	<string name="stale_location">Stale location</string>
+	<string name="send_my_location_desc">Set minimum interval for location sharing.</string>
+	<string name="send_my_location">Send my location</string>
+	<string name="gps_and_location">GPS &amp; location</string>
 	<string name="open_osmand">Open OsmAnd</string>
 	<string name="shared_string_live">Live</string>
 	<string name="shared_string_bot">Bot</string>
@@ -93,6 +101,7 @@
 	<string name="si_mi_meters">Miles/meters</string>
 	<string name="shared_string_hour_short">h</string>
 	<string name="shared_string_minute_short">min</string>
+	<string name="shared_string_second_short">sec</string>
 	<string name="plus">+</string>
 	<string name="welcome_descr"><![CDATA[<b>OsmAnd Location Sharing</b> allows you to share your location and see locations of other people in the OsmAnd.<br/><br/>The application works on base of Telegram API. To use this app you must have a Telegram account.]]></string>
 	<string name="my_location">My location</string>

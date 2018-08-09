@@ -1,9 +1,7 @@
 package net.osmand.telegram.ui
 
 import android.app.Dialog
-import android.content.Intent
 import android.content.pm.PackageManager
-import android.net.Uri
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.DialogFragment
@@ -19,6 +17,7 @@ import android.widget.Toast
 import net.osmand.PlatformUtil
 import net.osmand.telegram.R
 import net.osmand.telegram.TelegramApplication
+import net.osmand.telegram.helpers.OsmandAidlHelper
 import net.osmand.telegram.helpers.TelegramHelper
 import net.osmand.telegram.helpers.TelegramHelper.*
 import net.osmand.telegram.ui.LoginDialogFragment.LoginDialogType
@@ -318,9 +317,9 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 			builder.setView(R.layout.install_osmand_dialog)
 					.setNegativeButton(R.string.shared_string_cancel, null)
 					.setPositiveButton(R.string.shared_string_install) { _, _ ->
-						val intent = Intent()
-						intent.data = Uri.parse("market://details?id=net.osmand.plus")
-						startActivity(intent)
+						context?.also {
+							startActivity(AndroidUtils.getPlayMarketIntent(it, OsmandAidlHelper.OSMAND_PLUS_PACKAGE_NAME))
+						}
 					}
 			return builder.create()
 		}
