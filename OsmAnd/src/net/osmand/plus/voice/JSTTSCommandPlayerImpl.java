@@ -72,7 +72,6 @@ public class JSTTSCommandPlayerImpl extends AbstractJSCommandPlayer {
     private OsmandApplication app;
     private ApplicationMode appMode;
     private  VoiceRouter vrt;
-    private String voiceProvider;
 
     private HashMap<String, String> params = new HashMap<String, String>();
 
@@ -83,7 +82,6 @@ public class JSTTSCommandPlayerImpl extends AbstractJSCommandPlayer {
         this.app = (OsmandApplication) ctx.getApplicationContext();
         this.appMode = applicationMode;
         this.vrt = vrt;
-        this.voiceProvider = voiceProvider;
         if (Algorithms.isEmpty(language)) {
             throw new CommandPlayerException(
                     ctx.getString(R.string.voice_data_corrupted));

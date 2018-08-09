@@ -89,15 +89,32 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 		// read available voice data
 		File extStorage = ((OsmandApplication) getApplication()).getAppPath(IndexConstants.VOICE_INDEX_DIR);
 		Set<String> setFiles = new LinkedHashSet<String>();
+		OsmandApplication app = (OsmandApplication) getApplication();
+		boolean addJS = app.getSettings().USE_JS_VOICE_GUIDANCE.get();
 		if (extStorage.exists()) {
 			for (File f : extStorage.listFiles()) {
 				if (f.isDirectory()) {
-					setFiles.add(f.getName());
+					if (addJS && hasJavaScript(f)) {
+						setFiles.add(f.getName());
+					} else if (!addJS) {
+						setFiles.add(f.getName());
+					}
+
 				}
 			}
 		}
 		return setFiles;
 	}
+
+	private boolean hasJavaScript(File f) {
+		for (File file : f.listFiles()) {
+			if (file.getName().endsWith(IndexConstants.TTSVOICE_INDEX_EXT_JS)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	private void selectVoice(final LinearLayout ll) {
 		String[] entries;
 		final String[] entrieValues;
@@ -221,55 +238,72 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 	}
 
 	private void addButtons(final LinearLayout ll, CommandPlayer p) {
-		if (p instanceof JSTTSCommandPlayerImpl || p instanceof JSMediaCommandPlayerImpl) {
-			addJSTTSPrompts(ll, p);
-			return;
-		}
+		boolean isJS = p instanceof JSTTSCommandPlayerImpl || p instanceof JSMediaCommandPlayerImpl;
 		addButton(ll, "Route calculated and number tests:", builder(p));
-		addButton(ll, "\u25BA (1.1)  New route calculated, 150m, 230sec (00:03:50)", builder(p).newRouteCalculated(150, 230));
-		addButton(ll, "\u25BA (1.2)  New route calculated, 1350m, 3680sec (01:01:20)", builder(p).newRouteCalculated(1350, 3680));
-		addButton(ll, "\u25BA (1.3)  New route calculated 3700m, 7320sec (02:02)", builder(p).newRouteCalculated(3700, 7320));
-		addButton(ll, "\u25BA (1.4)  New route calculated 9100m, 10980sec (03:03)", builder(p).newRouteCalculated(9100, 10980));
-		addButton(ll, "\u25BA (2.1)  Route recalculated 11500m, 18600sec (05:10)", builder(p).routeRecalculated(11500, 18600));
-		addButton(ll, "\u25BA (2.2)  Route recalculated 19633m, 26700sec (07:25)", builder(p).routeRecalculated(19633, 26700));
-		addButton(ll, "\u25BA (2.3)  Route recalculated 89750m, 55800sec (15:30)", builder(p).routeRecalculated(89750, 55800));
-		addButton(ll, "\u25BA (2.4)  Route recalculated 125900m, 92700sec (25:45)", builder(p).routeRecalculated(125900, 92700));
+		addButton(ll, "\u25BA (1.1)  New route calculated, 150m, 230sec (00:03:50)", !isJS ? builder(p).newRouteCalculated(150, 230) : jsBuilder(p).newRouteCalculated(150, 230));
+		addButton(ll, "\u25BA (1.2)  New route calculated, 1350m, 3680sec (01:01:20)", !isJS ? builder(p).newRouteCalculated(1350, 3680) : jsBuilder(p).newRouteCalculated(1350, 3680));
+		addButton(ll, "\u25BA (1.3)  New route calculated 3700m, 7320sec (02:02)", !isJS ? builder(p).newRouteCalculated(3700, 7320) : jsBuilder(p).newRouteCalculated(3700, 7320));
+		addButton(ll, "\u25BA (1.4)  New route calculated 9100m, 10980sec (03:03)", !isJS ? builder(p).newRouteCalculated(9100, 10980) : jsBuilder(p).newRouteCalculated(9100, 10980));
+		addButton(ll, "\u25BA (2.1)  Route recalculated 11500m, 18600sec (05:10)", !isJS ? builder(p).routeRecalculated(11500, 18600) : jsBuilder(p).routeRecalculated(11500, 18600));
+		addButton(ll, "\u25BA (2.2)  Route recalculated 19633m, 26700sec (07:25)", !isJS ? builder(p).routeRecalculated(19633, 26700) : jsBuilder(p).routeRecalculated(19633, 26700));
+		addButton(ll, "\u25BA (2.3)  Route recalculated 89750m, 55800sec (15:30)", !isJS ? builder(p).routeRecalculated(89750, 55800) : jsBuilder(p).routeRecalculated(89750, 55800));
+		addButton(ll, "\u25BA (2.4)  Route recalculated 125900m, 92700sec (25:45)", !isJS ? builder(p).routeRecalculated(125900, 92700) : jsBuilder(p).routeRecalculated(125900, 92700));
 
 		addButton(ll, "All turn types: prepareTurn, makeTurnIn, turn:", builder(p));
-		addButton(ll, "\u25BA (3.1)  After 1520m turn slightly left", builder(p).prepareTurn(AbstractPrologCommandPlayer.A_LEFT_SL, 1520, street(p, "")));
-		addButton(ll, "\u25BA (3.2)  In 450m turn sharply left onto 'Hauptstra"+"\u00df"+"e', then bear right", builder(p).turn(AbstractPrologCommandPlayer.A_LEFT_SH, 450, street(p, "Hauptstraße")).then().bearRight(street(p, "")));
-		addButton(ll, "\u25BA (3.3)  Turn left, then in 100m turn slightly right", builder(p).turn(AbstractPrologCommandPlayer.A_LEFT, street(p, "")).then().turn(AbstractPrologCommandPlayer.A_RIGHT_SL, 100, street(p, "")));
-		addButton(ll, "\u25BA (3.4)  After 3100m turn right onto 'SR 80' toward 'Rome'", builder(p).prepareTurn(AbstractPrologCommandPlayer.A_RIGHT, 3100, street(p, "", "SR 80", "Rome")));
-		addButton(ll, "\u25BA (3.5)  In 370m turn slightly right onto 'Route 23' 'Main Street', then bear left", builder(p).turn(AbstractPrologCommandPlayer.A_RIGHT_SL, 370, street(p, "Main Street", "Route 23")).then().bearLeft(street(p, "")));
-		addButton(ll, "\u25BA (3.6)  Turn sharply right onto 'Dr.-Quinn-Stra"+"\u00df"+"e'", builder(p).turn(AbstractPrologCommandPlayer.A_RIGHT_SH, street(p, "Dr.-Quinn-Straße")));
+		addButton(ll, "\u25BA (3.1)  After 1520m turn slightly left", !isJS ? builder(p).prepareTurn(AbstractPrologCommandPlayer.A_LEFT_SL, 1520, street(p, "")) :
+				jsBuilder(p).prepareTurn(AbstractPrologCommandPlayer.A_LEFT_SL, 1520, jsStreet(p, "")));
+		addButton(ll, "\u25BA (3.2)  In 450m turn sharply left onto 'Hauptstra"+"\u00df"+"e', then bear right", !isJS ? builder(p).turn(AbstractPrologCommandPlayer.A_LEFT_SH, 450, street(p, "Hauptstraße")).then().bearRight(street(p, "")) :
+				jsBuilder(p).turn(AbstractPrologCommandPlayer.A_LEFT_SH, 450, jsStreet(p, "Hauptstraße")).then().bearRight(jsStreet(p, "")));
+		addButton(ll, "\u25BA (3.3)  Turn left, then in 100m turn slightly right", !isJS ? builder(p).turn(AbstractPrologCommandPlayer.A_LEFT, street(p, "")).then().turn(AbstractPrologCommandPlayer.A_RIGHT_SL, 100, street(p, "")) :
+				jsBuilder(p).turn(AbstractPrologCommandPlayer.A_LEFT, jsStreet(p, "")).then().turn(AbstractPrologCommandPlayer.A_RIGHT_SL, 100, jsStreet(p, "")));
+		addButton(ll, "\u25BA (3.4)  After 3100m turn right onto 'SR 80' toward 'Rome'", !isJS ? builder(p).prepareTurn(AbstractPrologCommandPlayer.A_RIGHT, 3100, street(p, "", "SR 80", "Rome")) :
+				jsBuilder(p).prepareTurn(AbstractPrologCommandPlayer.A_RIGHT, 3100, jsStreet(p, "", "SR 80", "Rome")));
+		addButton(ll, "\u25BA (3.5)  In 370m turn slightly right onto 'Route 23' 'Main Street', then bear left", !isJS ? builder(p).turn(AbstractPrologCommandPlayer.A_RIGHT_SL, 370, street(p, "Main Street", "Route 23")).then().bearLeft(street(p, "")) :
+				jsBuilder(p).turn(AbstractPrologCommandPlayer.A_RIGHT_SL, 370, jsStreet(p, "Main jsStreet", "Route 23")).then().bearLeft(jsStreet(p, "")));
+		addButton(ll, "\u25BA (3.6)  Turn sharply right onto 'Dr.-Quinn-Stra"+"\u00df"+"e'", !isJS ? builder(p).turn(AbstractPrologCommandPlayer.A_RIGHT_SH, street(p, "Dr.-Quinn-Straße")) :
+				jsBuilder(p).turn(AbstractPrologCommandPlayer.A_RIGHT_SH, jsStreet(p, "Dr.-Quinn-Straße")));
 
 		addButton(ll, "Keep left/right: prepareTurn, makeTurnIn, turn:", builder(p));
-		addButton(ll, "\u25BA (4.1)  After 1810m keep left ' '", builder(p).prepareTurn(AbstractPrologCommandPlayer.A_LEFT_KEEP, 1810, street(p, "")));
-		addButton(ll, "\u25BA (4.2)  In 400m keep left ' ' then in 80m keep right onto 'A1'", builder(p).turn(AbstractPrologCommandPlayer.A_LEFT_KEEP, 400, street(p, "")).then().turn(AbstractPrologCommandPlayer.A_RIGHT_KEEP, 80, street(p,"", "A1")));
-		addButton(ll, "\u25BA (4.3)  Keep right on 'Highway 60'", builder(p).turn(AbstractPrologCommandPlayer.A_RIGHT_KEEP, street(p, "Highway 60", "", "", "Highway 60")));
-		addButton(ll, "\u25BA (4.4)  Turn left onto 'Broadway', then in 100m keep right and arrive at your destination 'Town Hall'",
+		addButton(ll, "\u25BA (4.1)  After 1810m keep left ' '", !isJS ? builder(p).prepareTurn(AbstractPrologCommandPlayer.A_LEFT_KEEP, 1810, street(p, "")) :
+				jsBuilder(p).prepareTurn(AbstractPrologCommandPlayer.A_LEFT_KEEP, 1810, jsStreet(p, "")));
+		addButton(ll, "\u25BA (4.2)  In 400m keep left ' ' then in 80m keep right onto 'A1'", !isJS ? builder(p).turn(AbstractPrologCommandPlayer.A_LEFT_KEEP, 400, street(p, "")).then().turn(AbstractPrologCommandPlayer.A_RIGHT_KEEP, 80, street(p,"", "A1")) :
+				jsBuilder(p).turn(AbstractPrologCommandPlayer.A_LEFT_KEEP, 400, jsStreet(p, "")).then().turn(AbstractPrologCommandPlayer.A_RIGHT_KEEP, 80, jsStreet(p,"", "A1")));
+		addButton(ll, "\u25BA (4.3)  Keep right on 'Highway 60'", !isJS ? builder(p).turn(AbstractPrologCommandPlayer.A_RIGHT_KEEP, street(p, "Highway 60", "", "", "Highway 60")) :
+				jsBuilder(p).turn(AbstractPrologCommandPlayer.A_RIGHT_KEEP, jsStreet(p, "Highway 60", "", "", "Highway 60")));
+		addButton(ll, "\u25BA (4.4)  Turn left onto 'Broadway', then in 100m keep right and arrive at your destination 'Town Hall'", !isJS ?
 				builder(p).turn(AbstractPrologCommandPlayer.A_LEFT, street(p, "Broadway"))
-				.then().turn(AbstractPrologCommandPlayer.A_RIGHT_KEEP, 100, street(p, "")).andArriveAtDestination("Town Hall"));
+				.then().turn(AbstractPrologCommandPlayer.A_RIGHT_KEEP, 100, street(p, "")).andArriveAtDestination("Town Hall") :
+				jsBuilder(p).turn(AbstractPrologCommandPlayer.A_LEFT, jsStreet(p, "Broadway"))
+						.then().turn(AbstractPrologCommandPlayer.A_RIGHT_KEEP, 100, jsStreet(p, "")).andArriveAtDestination("Town Hall"));
 
 		addButton(ll, "Roundabouts: prepareTurn, makeTurnIn, turn:", builder(p));
-		addButton(ll, "\u25BA (5.1)  After 1250m enter a roundabout", builder(p).prepareRoundAbout(1250, 3, street(p,"", "I 15", "Los Angeles")));
-		addButton(ll, "\u25BA (5.2)  In 450m enter the roundabout and take the 1st exit onto 'I 15' toward 'Los Angeles'", builder(p).roundAbout(450, 0, 1, street(p,"", "I 15", "Los Angeles")));
-		addButton(ll, "\u25BA (5.3)  Roundabout: Take the 2nd exit onto 'Highway 60'", builder(p).roundAbout(0, 2, street(p, "Highway 60")));
+		addButton(ll, "\u25BA (5.1)  After 1250m enter a roundabout", !isJS ? builder(p).prepareRoundAbout(1250, 3, street(p,"", "I 15", "Los Angeles")) :
+				jsBuilder(p).prepareRoundAbout(1250, 3, jsStreet(p,"", "I 15", "Los Angeles")));
+		addButton(ll, "\u25BA (5.2)  In 450m enter the roundabout and take the 1st exit onto 'I 15' toward 'Los Angeles'", isJS ? builder(p).roundAbout(450, 0, 1, street(p,"", "I 15", "Los Angeles")) :
+				jsBuilder(p).roundAbout(450, 0, 1, jsStreet(p,"", "I 15", "Los Angeles")));
+		addButton(ll, "\u25BA (5.3)  Roundabout: Take the 2nd exit onto 'Highway 60'", !isJS ? builder(p).roundAbout(0, 2, street(p, "Highway 60")) :
+				jsBuilder(p).roundAbout(0, 2, jsStreet(p, "Highway 60")));
 
 		addButton(ll, "U-turns: prepareTurn, makeTurnIn, turn, when possible:", builder(p));
-		addButton(ll, "\u25BA (6.1)  After 640m make a U-turn", builder(p).prepareMakeUT(640, street(p, "")));
-		addButton(ll, "\u25BA (6.2)  In 400m make a U-turn", builder(p).makeUT(400, street(p, "")));
-		addButton(ll, "\u25BA (6.3)  Make a U-turn on 'Riviera'", builder(p).makeUT(street(p, "Riviera", "", "", "Riviera")));
+		addButton(ll, "\u25BA (6.1)  After 640m make a U-turn", !isJS ? builder(p).prepareMakeUT(640, street(p, "")) :
+				jsBuilder(p).prepareMakeUT(640, jsStreet(p, "")));
+		addButton(ll, "\u25BA (6.2)  In 400m make a U-turn", !isJS ? builder(p).makeUT(400, street(p, "")) :
+				jsBuilder(p).makeUT(400, jsStreet(p, "")));
+		addButton(ll, "\u25BA (6.3)  Make a U-turn on 'Riviera'", !isJS ? builder(p).makeUT(street(p, "Riviera", "", "", "Riviera")) :
+				jsBuilder(p).makeUT(jsStreet(p, "Riviera", "", "", "Riviera")));
 		addButton(ll, "\u25BA (6.4)  When possible, make a U-turn", builder(p).makeUTwp());
 
 		addButton(ll, "Go straight, follow the road, approaching:", builder(p));
 		addButton(ll, "\u25BA (7.1)  Straight ahead", builder(p).goAhead());
-		addButton(ll, "\u25BA (7.2)  Continue for 2350m to ' '", builder(p).goAhead(2350, street(p, "")));
-		addButton(ll, "\u25BA (7.3)  Continue for 360m to 'Broadway' and arrive at your intermediate destination ' '", builder(p).goAhead(360, street(p,"Broadway")).andArriveAtIntermediatePoint(""));
-		addButton(ll, "\u25BA (7.4)  Continue for 800m to 'Dr Martin Luther King Jr Boulevard' and arrive at your destination ' '", builder(p).goAhead(800, street(p,"", "Dr Martin Luther King Jr Boulevard")).andArriveAtDestination(""));
-		addButton(ll, "\u25BA (7.5)  Continue for 200m and pass GPX waypoint 'Trailhead'", builder(p).goAhead(200, null).andArriveAtWayPoint("Trailhead"));
-		addButton(ll, "\u25BA (7.6)  Continue for 400m and pass favorite 'Brewery'", builder(p).goAhead(400, null).andArriveAtFavorite("Brewery"));
-		addButton(ll, "\u25BA (7.7)  Continue for 600m and pass POI 'Museum'", builder(p).goAhead(600, null).andArriveAtPoi("Museum"));
+		addButton(ll, "\u25BA (7.2)  Continue for 2350m to ' '", !isJS ? builder(p).goAhead(2350, street(p, "")) :
+				jsBuilder(p).goAhead(2350, jsStreet(p, "")));
+		addButton(ll, "\u25BA (7.3)  Continue for 360m to 'Broadway' and arrive at your intermediate destination ' '", !isJS ? builder(p).goAhead(360, street(p,"Broadway")).andArriveAtIntermediatePoint("") :
+				jsBuilder(p).goAhead(360, jsStreet(p,"Broadway")).andArriveAtIntermediatePoint(""));
+		addButton(ll, "\u25BA (7.4)  Continue for 800m to 'Dr Martin Luther King Jr Boulevard' and arrive at your destination ' '", !isJS ? builder(p).goAhead(800, street(p,"", "Dr Martin Luther King Jr Boulevard")).andArriveAtDestination("") :
+				jsBuilder(p).goAhead(800, jsStreet(p,"", "Dr Martin Luther King Jr Boulevard")).andArriveAtDestination(""));
+		addButton(ll, "\u25BA (7.5)  Continue for 200m and pass GPX waypoint 'Trailhead'", !isJS ? builder(p).goAhead(200, null).andArriveAtWayPoint("Trailhead") : jsBuilder(p).goAhead(200, new HashMap<String, String>()).andArriveAtWayPoint("Trailhead"));
+		addButton(ll, "\u25BA (7.6)  Continue for 400m and pass favorite 'Brewery'", !isJS ? builder(p).goAhead(400, null).andArriveAtFavorite("Brewery") : jsBuilder(p).goAhead(400, new HashMap<String, String>()).andArriveAtFavorite("Brewery"));
+		addButton(ll, "\u25BA (7.7)  Continue for 600m and pass POI 'Museum'", !isJS ? builder(p).goAhead(600, null).andArriveAtPoi("Museum") : jsBuilder(p).goAhead(600, new HashMap<String, String>()).andArriveAtPoi("Museum"));
 
 		addButton(ll, "Arriving and passing points:", builder(p));
 		addButton(ll, "\u25BA (8.1)  Arrive at your destination 'Home'", builder(p).arrivedAtDestination("Home"));
@@ -316,83 +350,6 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 			}
 		}
 		return res;
-	}
-
-	private void addJSTTSPrompts(LinearLayout ll, CommandPlayer p) {
-		addButton(ll, "Route calculated and number tests:", jsBuilder(p));
-		addButton(ll, "\u25BA (1.1)  New route calculated, 150m, 230sec (00:03:50)", jsBuilder(p).newRouteCalculated(150, 230));
-		addButton(ll, "\u25BA (1.2)  New route calculated, 1350m, 3680sec (01:01:20)", jsBuilder(p).newRouteCalculated(1350, 3680));
-		addButton(ll, "\u25BA (1.3)  New route calculated 3700m, 7320sec (02:02)", jsBuilder(p).newRouteCalculated(3700, 7320));
-		addButton(ll, "\u25BA (1.4)  New route calculated 9100m, 10980sec (03:03)", jsBuilder(p).newRouteCalculated(9100, 10980));
-		addButton(ll, "\u25BA (2.1)  Route recalculated 11500m, 18600sec (05:10)", jsBuilder(p).routeRecalculated(11500, 18600));
-		addButton(ll, "\u25BA (2.2)  Route recalculated 19633m, 26700sec (07:25)", jsBuilder(p).routeRecalculated(19633, 26700));
-		addButton(ll, "\u25BA (2.3)  Route recalculated 89750m, 55800sec (15:30)", jsBuilder(p).routeRecalculated(89750, 55800));
-		addButton(ll, "\u25BA (2.4)  Route recalculated 125900m, 92700sec (25:45)", jsBuilder(p).routeRecalculated(125900, 92700));
-
-		addButton(ll, "All turn types: prepareTurn, makeTurnIn, turn:", jsBuilder(p));
-		addButton(ll, "\u25BA (3.1)  After 1520m turn slightly left", jsBuilder(p).prepareTurn(AbstractPrologCommandPlayer.A_LEFT_SL, 1520, jsStreet(p, "")));
-		addButton(ll, "\u25BA (3.2)  In 450m turn sharply left onto 'Hauptstra"+"\u00df"+"e', then bear right", jsBuilder(p).turn(AbstractPrologCommandPlayer.A_LEFT_SH, 450, jsStreet(p, "Hauptstraße")).then().bearRight(jsStreet(p, "")));
-		addButton(ll, "\u25BA (3.3)  Turn left, then in 100m turn slightly right", jsBuilder(p).turn(AbstractPrologCommandPlayer.A_LEFT, jsStreet(p, "")).then().turn(AbstractPrologCommandPlayer.A_RIGHT_SL, 100, jsStreet(p, "")));
-		addButton(ll, "\u25BA (3.4)  After 3100m turn right onto 'SR 80' toward 'Rome'", jsBuilder(p).prepareTurn(AbstractPrologCommandPlayer.A_RIGHT, 3100, jsStreet(p, "", "SR 80", "Rome")));
-		addButton(ll, "\u25BA (3.5)  In 370m turn slightly right onto 'Route 23' 'Main jsStreet', then bear left", jsBuilder(p).turn(AbstractPrologCommandPlayer.A_RIGHT_SL, 370, jsStreet(p, "Main jsStreet", "Route 23")).then().bearLeft(jsStreet(p, "")));
-		addButton(ll, "\u25BA (3.6)  Turn sharply right onto 'Dr.-Quinn-Stra"+"\u00df"+"e'", jsBuilder(p).turn(AbstractPrologCommandPlayer.A_RIGHT_SH, jsStreet(p, "Dr.-Quinn-Straße")));
-
-		addButton(ll, "Keep left/right: prepareTurn, makeTurnIn, turn:", jsBuilder(p));
-		addButton(ll, "\u25BA (4.1)  After 1810m keep left ' '", jsBuilder(p).prepareTurn(AbstractPrologCommandPlayer.A_LEFT_KEEP, 1810, jsStreet(p, "")));
-		addButton(ll, "\u25BA (4.2)  In 400m keep left ' ' then in 80m keep right onto 'A1'", jsBuilder(p).turn(AbstractPrologCommandPlayer.A_LEFT_KEEP, 400, jsStreet(p, "")).then().turn(AbstractPrologCommandPlayer.A_RIGHT_KEEP, 80, jsStreet(p,"", "A1")));
-		addButton(ll, "\u25BA (4.3)  Keep right on 'Highway 60'", jsBuilder(p).turn(AbstractPrologCommandPlayer.A_RIGHT_KEEP, jsStreet(p, "Highway 60", "", "", "Highway 60")));
-		addButton(ll, "\u25BA (4.4)  Turn left onto 'Broadway', then in 100m keep right and arrive at your destination 'Town Hall'",
-				jsBuilder(p).turn(AbstractPrologCommandPlayer.A_LEFT, jsStreet(p, "Broadway"))
-						.then().turn(AbstractPrologCommandPlayer.A_RIGHT_KEEP, 100, jsStreet(p, "")).andArriveAtDestination("Town Hall"));
-
-		addButton(ll, "Roundabouts: prepareTurn, makeTurnIn, turn:", jsBuilder(p));
-		addButton(ll, "\u25BA (5.1)  After 1250m enter a roundabout", jsBuilder(p).prepareRoundAbout(1250, 3, jsStreet(p,"", "I 15", "Los Angeles")));
-		addButton(ll, "\u25BA (5.2)  In 450m enter the roundabout and take the 1st exit onto 'I 15' toward 'Los Angeles'", jsBuilder(p).roundAbout(450, 0, 1, jsStreet(p,"", "I 15", "Los Angeles")));
-		addButton(ll, "\u25BA (5.3)  Roundabout: Take the 2nd exit onto 'Highway 60'", jsBuilder(p).roundAbout(0, 2, jsStreet(p, "Highway 60")));
-
-		addButton(ll, "U-turns: prepareTurn, makeTurnIn, turn, when possible:", jsBuilder(p));
-		addButton(ll, "\u25BA (6.1)  After 640m make a U-turn", jsBuilder(p).prepareMakeUT(640, jsStreet(p, "")));
-		addButton(ll, "\u25BA (6.2)  In 400m make a U-turn", jsBuilder(p).makeUT(400, jsStreet(p, "")));
-		addButton(ll, "\u25BA (6.3)  Make a U-turn on 'Riviera'", jsBuilder(p).makeUT(jsStreet(p, "Riviera", "", "", "Riviera")));
-		addButton(ll, "\u25BA (6.4)  When possible, make a U-turn", jsBuilder(p).makeUTwp());
-
-		addButton(ll, "Go straight, follow the road, approaching:", jsBuilder(p));
-		addButton(ll, "\u25BA (7.1)  Straight ahead", jsBuilder(p).goAhead());
-		addButton(ll, "\u25BA (7.2)  Continue for 2350m to ' '", jsBuilder(p).goAhead(2350, jsStreet(p, "")));
-		addButton(ll, "\u25BA (7.3)  Continue for 360m to 'Broadway' and arrive at your intermediate destination ' '", jsBuilder(p).goAhead(360, jsStreet(p,"Broadway")).andArriveAtIntermediatePoint(""));
-		addButton(ll, "\u25BA (7.4)  Continue for 800m to 'Dr Martin Luther King Jr Boulevard' and arrive at your destination ' '", jsBuilder(p).goAhead(800, jsStreet(p,"", "Dr Martin Luther King Jr Boulevard")).andArriveAtDestination(""));
-		addButton(ll, "\u25BA (7.5)  Continue for 200m and pass GPX waypoint 'Trailhead'", jsBuilder(p).goAhead(200, new HashMap<String, String>()).andArriveAtWayPoint("Trailhead"));
-		addButton(ll, "\u25BA (7.6)  Continue for 400m and pass favorite 'Brewery'", jsBuilder(p).goAhead(400, new HashMap<String, String>()).andArriveAtFavorite("Brewery"));
-		addButton(ll, "\u25BA (7.7)  Continue for 600m and pass POI 'Museum'", jsBuilder(p).goAhead(600, new HashMap<String, String>()).andArriveAtPoi("Museum"));
-
-		addButton(ll, "Arriving and passing points:", jsBuilder(p));
-		addButton(ll, "\u25BA (8.1)  Arrive at your destination 'Home'", jsBuilder(p).arrivedAtDestination("Home"));
-		addButton(ll, "\u25BA (8.2)  Arrive at your intermediate destination 'Friend'", jsBuilder(p).arrivedAtIntermediatePoint("Friend"));
-		addButton(ll, "\u25BA (8.3)  Passing GPX waypoint 'Trailhead'", jsBuilder(p).arrivedAtWayPoint("Trailhead"));
-		addButton(ll, "\u25BA (8.4)  Passing favorite 'Brewery'", jsBuilder(p).arrivedAtFavorite("Brewery"));
-		addButton(ll, "\u25BA (8.5)  Passing POI 'Museum'", jsBuilder(p).arrivedAtPoi("Museum"));
-
-		addButton(ll, "Attention prompts:", jsBuilder(p));
-		addButton(ll, "\u25BA (9.1)  You are exceeding the speed limit '50' (18 m/s)", jsBuilder(p).speedAlarm(50, 18f));
-		addButton(ll, "\u25BA (9.2)  Attention, speed camera", jsBuilder(p).attention("SPEED_CAMERA"));
-		addButton(ll, "\u25BA (9.3)  Attention, border control", jsBuilder(p).attention("BORDER_CONTROL"));
-		addButton(ll, "\u25BA (9.4)  Attention, railroad crossing", jsBuilder(p).attention("RAILWAY"));
-		addButton(ll, "\u25BA (9.5)  Attention, traffic calming", jsBuilder(p).attention("TRAFFIC_CALMING"));
-		addButton(ll, "\u25BA (9.6)  Attention, toll booth", jsBuilder(p).attention("TOLL_BOOTH"));
-		addButton(ll, "\u25BA (9.7)  Attention, stop sign", jsBuilder(p).attention("STOP"));
-		addButton(ll, "\u25BA (9.8)  Attention, pedestrian crosswalk", jsBuilder(p).attention("PEDESTRIAN"));
-		addButton(ll, "\u25BA (9.9)  Attention, tunnel", jsBuilder(p).attention("TUNNEL"));
-
-		addButton(ll, "Other prompts:", jsBuilder(p));
-		addButton(ll, "\u25BA (10.1) GPS signal lost", jsBuilder(p).gpsLocationLost());
-		addButton(ll, "\u25BA (10.2) GPS signal recovered", jsBuilder(p).gpsLocationRecover());
-		addButton(ll, "\u25BA (10.3) You have been off the route for 1050m", jsBuilder(p).offRoute(1050));
-		addButton(ll, "\u25BA (10.4) You are back on the route", jsBuilder(p).backOnRoute());
-
-		addButton(ll, "Voice system info:", jsBuilder(p));
-		addButton(ll, "\u25BA (11.1) (Tap to refresh)\n" + getVoiceSystemInfo(), jsBuilder(p).attention(""));
-		addButton(ll, "\u25BA (11.2) Tap to change Phone call audio delay (if car stereo cuts off prompts). Default is 1500\u00A0ms.", jsBuilder(p).attention(""));
-		ll.forceLayout();
 	}
 
 	private CommandBuilder builder(CommandPlayer p){
