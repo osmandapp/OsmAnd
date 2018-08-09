@@ -34,6 +34,8 @@ class MyLocationTabFragment : Fragment(), TelegramListener, ChatLiveMessagesList
 	private var searchBoxHeight: Int = 0
 	private var searchBoxSidesMargin: Int = 0
 
+	private var appBarScrollRange: Int = -1
+	
 	private val app: TelegramApplication
 		get() = activity?.application as TelegramApplication
 
@@ -93,7 +95,10 @@ class MyLocationTabFragment : Fragment(), TelegramListener, ChatLiveMessagesList
 				outlineProvider = null
 			}
 			addOnOffsetChangedListener { appBar, offset ->
-				val collapsed = Math.abs(offset) == appBar.totalScrollRange
+				if (appBarScrollRange == -1) {
+					appBarScrollRange = appBar.totalScrollRange
+				}
+				val collapsed = Math.abs(offset) == appBarScrollRange
 				if (collapsed != appBarCollapsed) {
 					appBarCollapsed = collapsed
 					adjustText()
@@ -386,6 +391,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener, ChatLiveMessagesList
 		titleContainer.visibility = if (sharingMode) View.VISIBLE else View.GONE
 		headerParams.scrollFlags = if (sharingMode) 0 else AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL
 		stopSharingSwitcher.isChecked = sharingMode
+		appBarScrollRange = -1
 	}
 
 	private fun updateList() {
