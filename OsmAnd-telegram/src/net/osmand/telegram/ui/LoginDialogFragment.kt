@@ -2,29 +2,32 @@ package net.osmand.telegram.ui
 
 import android.app.Dialog
 import android.content.DialogInterface
+import android.graphics.Rect
 import android.os.Build
 import android.os.Bundle
 import android.support.annotation.StringRes
 import android.support.v4.app.DialogFragment
 import android.support.v4.app.FragmentManager
+import android.support.v4.content.ContextCompat
 import android.support.v7.widget.AppCompatImageView
+import android.text.Editable
+import android.text.Html
 import android.text.TextUtils
+import android.text.TextWatcher
+import android.util.TypedValue
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.view.WindowManager
 import android.view.inputmethod.EditorInfo
-import android.widget.*
+import android.widget.Button
+import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.TextView
 import net.osmand.PlatformUtil
 import net.osmand.telegram.R
 import net.osmand.telegram.utils.AndroidUtils
 import studio.carbonylgroup.textfieldboxes.ExtendedEditText
-import android.content.Intent
-import android.graphics.Rect
-import android.net.Uri
-import android.support.v4.content.ContextCompat
-import android.view.*
-import android.view.ViewGroup
-import android.text.Editable
-import android.text.Html
-import android.text.TextWatcher
-import android.util.TypedValue
 
 
 class LoginDialogFragment : DialogFragment() {
@@ -284,9 +287,8 @@ class LoginDialogFragment : DialogFragment() {
 							val getTelegramButton: ImageView? = view.findViewById(R.id.google_play_button)
 							getTelegramButton?.setImageResource(R.drawable.img_google_play_badge)
 							getTelegramButton?.setOnClickListener {
-								val app = getMainActivity()?.application
-								if (app != null) {
-									startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(AndroidUtils.getPlayMarketLink(app, TELEGRAM_PACKAGE))))
+								context?.also { ctx ->
+									startActivity(AndroidUtils.getPlayMarketIntent(ctx, TELEGRAM_PACKAGE))
 								}
 							}
 							view.findViewById<Button>(R.id.continue_button).visibility = View.GONE

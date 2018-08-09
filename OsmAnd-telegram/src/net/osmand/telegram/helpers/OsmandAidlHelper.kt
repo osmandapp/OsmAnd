@@ -47,8 +47,8 @@ import java.util.*
 class OsmandAidlHelper(private val app: Application) {
 
 	companion object {
-		private const val OSMAND_FREE_PACKAGE_NAME = "net.osmand"
-		private const val OSMAND_PLUS_PACKAGE_NAME = "net.osmand.plus"
+		const val OSMAND_FREE_PACKAGE_NAME = "net.osmand"
+		const val OSMAND_PLUS_PACKAGE_NAME = "net.osmand.plus"
 		var OSMAND_PACKAGE_NAME = OSMAND_PLUS_PACKAGE_NAME
 			private set
 	}

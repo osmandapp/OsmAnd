@@ -1,8 +1,108 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
+	android:fitsSystemWindows="true"
 	android:orientation="vertical">
+
+	<android.support.design.widget.AppBarLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:background="?attr/card_bg_color">
+
+		<android.support.v7.widget.Toolbar
+			android:id="@+id/toolbar"
+			android:layout_width="match_parent"
+			android:layout_height="@dimen/action_bar_height">
+
+			<net.osmand.telegram.ui.views.TextViewEx
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:ellipsize="end"
+				android:gravity="center_vertical"
+				android:maxLines="1"
+				android:text="@string/shared_string_settings"
+				android:textColor="@color/app_bar_title_light"
+				android:textSize="@dimen/title_text_size"
+				app:typeface="@string/font_roboto_mono_bold"/>
+
+		</android.support.v7.widget.Toolbar>
+
+	</android.support.design.widget.AppBarLayout>
+
+	<ScrollView
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content">
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="vertical">
+
+			<include layout="@layout/list_item_divider"/>
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:background="?attr/card_bg_color"
+				android:orientation="vertical">
+
+				<net.osmand.telegram.ui.views.TextViewEx
+					android:layout_width="match_parent"
+					android:layout_height="@dimen/list_header_height"
+					android:ellipsize="end"
+					android:gravity="center_vertical"
+					android:maxLines="1"
+					android:paddingLeft="@dimen/content_padding_standard"
+					android:paddingRight="@dimen/content_padding_standard"
+					android:text="@string/gps_and_location"
+					android:textColor="?android:textColorPrimary"
+					android:textSize="@dimen/list_item_title_text_size"
+					app:typeface="@string/font_roboto_medium"/>
+
+				<LinearLayout
+					android:id="@+id/gps_and_loc_container"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:orientation="vertical"/>
+
+			</LinearLayout>
+
+			<include layout="@layout/list_item_divider"/>
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:background="?attr/card_bg_color"
+				android:orientation="vertical">
+
+				<net.osmand.telegram.ui.views.TextViewEx
+					android:layout_width="match_parent"
+					android:layout_height="@dimen/list_header_height"
+					android:ellipsize="end"
+					android:gravity="center_vertical"
+					android:maxLines="1"
+					android:paddingLeft="@dimen/content_padding_standard"
+					android:paddingRight="@dimen/content_padding_standard"
+					android:text="@string/osmand_connect"
+					android:textColor="?android:textColorPrimary"
+					android:textSize="@dimen/list_item_title_text_size"
+					app:typeface="@string/font_roboto_medium"/>
+
+				<LinearLayout
+					android:id="@+id/osmand_connect_container"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:orientation="vertical"/>
+
+			</LinearLayout>
+
+			<include layout="@layout/card_bottom_divider"/>
+
+		</LinearLayout>
+
+	</ScrollView>
 
 </LinearLayout>

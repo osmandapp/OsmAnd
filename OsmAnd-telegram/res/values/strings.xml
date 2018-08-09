@@ -1,4 +1,12 @@
 <resources>
+	<string name="osmand_connect">OsmAnd connect</string>
+	<string name="location_history_desc">Hide contacts that are not updated their location after the specified period of time.</string>
+	<string name="location_history">Location history</string>
+	<string name="stale_location_desc">Time when contact last time sent an update to its location.</string>
+	<string name="stale_location">Stale location</string>
+	<string name="send_my_location_desc">Set minimum interval for location sharing.</string>
+	<string name="send_my_location">Send my location</string>
+	<string name="gps_and_location">GPS &amp; location</string>
 	<string name="sharing_time">Sharing time:</string>
 	<string name="ending_in">Stop in:</string>
 	<string name="stop_sharing_all">Sharing is enabled (disable)</string>
