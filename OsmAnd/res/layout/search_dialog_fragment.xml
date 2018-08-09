@@ -58,7 +58,7 @@
                         android:gravity="center_vertical"
                         android:lines="1"
                         android:singleLine="true"
-                        android:text="5 selected"
+                        tools:text="5 selected"
                         android:textColor="@color/color_white"
                         android:textSize="@dimen/default_list_text_size_large"/>
 
@@ -264,7 +264,7 @@
                     android:paddingLeft="@dimen/context_menu_padding_margin_small"
                     android:paddingRight="@dimen/context_menu_padding_margin_small"
                     android:paddingTop="@dimen/context_menu_padding_margin_small"
-                    android:text="Отправить"
+                    android:text="@string/shared_string_send"
                     android:textColor="?attr/wikivoyage_active_color"
                     android:textSize="@dimen/default_desc_text_size"
                     osmand:typeface="@string/font_roboto_medium" />
