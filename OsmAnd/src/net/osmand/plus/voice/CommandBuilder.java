@@ -53,8 +53,8 @@ public class CommandBuilder {
 	/**
 	 * 
 	 */
-	private final CommandPlayer commandPlayer;
-	private boolean alreadyExecuted = false;
+	protected final CommandPlayer commandPlayer;
+	protected boolean alreadyExecuted = false;
 	private List<Struct> listStruct = new ArrayList<Struct>();
 	
 	public CommandBuilder(CommandPlayer commandPlayer){

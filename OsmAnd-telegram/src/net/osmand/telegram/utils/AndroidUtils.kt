@@ -113,9 +113,9 @@ object AndroidUtils {
 		}
 	}
 
-	fun isGooglePlayInstalled(ctx: Context): Boolean {
+	fun isAppInstalled(ctx: Context, appPackage: String): Boolean {
 		try {
-			ctx.packageManager.getPackageInfo("com.android.vending", 0)
+			ctx.packageManager.getPackageInfo(appPackage, 0)
 		} catch (e: PackageManager.NameNotFoundException) {
 			return false
 		}
@@ -127,7 +127,7 @@ object AndroidUtils {
 			Intent(Intent.ACTION_VIEW, Uri.parse(AndroidUtils.getPlayMarketLink(ctx, packageName)))
 
 	fun getPlayMarketLink(ctx: Context, packageName: String): String {
-		if (isGooglePlayInstalled(ctx)) {
+		if (isAppInstalled(ctx, "com.android.vending")) {
 			return "market://details?id=$packageName"
 		}
 		return "https://play.google.com/store/apps/details?id=$packageName"

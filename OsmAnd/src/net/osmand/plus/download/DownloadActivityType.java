@@ -298,6 +298,8 @@ public class DownloadActivityType {
 				return FileNameTranslationHelper.getVoiceName(ctx, getBasename(indexItem));
 			} else if (fileName.endsWith(IndexConstants.TTSVOICE_INDEX_EXT_ZIP)) {
 				return FileNameTranslationHelper.getVoiceName(ctx, getBasename(indexItem));
+			} else if (fileName.endsWith(IndexConstants.TTSVOICE_INDEX_EXT_JS)) {
+				return FileNameTranslationHelper.getVoiceName(ctx, getBasename(indexItem));
 			}
 			return getBasename(indexItem);
 		}
@@ -336,6 +338,9 @@ public class DownloadActivityType {
 		// if(fileName.endsWith(IndexConstants.VOICE_INDEX_EXT_ZIP) ||
 		// fileName.endsWith(IndexConstants.TTSVOICE_INDEX_EXT_ZIP)) {
 		if (this == VOICE_FILE) {
+			if (fileName.contains(".js")) {
+				return fileName.replace('_', '-').replaceAll(".js", "");
+			}
 			int l = fileName.lastIndexOf('_');
 			if (l == -1) {
 				l = fileName.length();
@@ -408,7 +413,8 @@ public class DownloadActivityType {
 			if (l == -1) {
 				l = fileName.length();
 			}
-			return fileName.substring(0, l);
+			return fileName.endsWith(IndexConstants.TTSVOICE_INDEX_EXT_JS) ? fileName.replace('_', '-')
+					.replaceAll(".js", "") : fileName.substring(0, l);
 		}
 		if (this == FONT_FILE) {
 			int l = fileName.indexOf('.');

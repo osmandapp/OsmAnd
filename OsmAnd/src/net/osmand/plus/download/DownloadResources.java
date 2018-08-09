@@ -316,11 +316,14 @@ public class DownloadResources extends DownloadResourceGroup {
 
 		Map<WorldRegion, List<IndexItem> > groupByRegion = new LinkedHashMap<WorldRegion, List<IndexItem>>();
 		OsmandRegions regs = app.getRegions();
+		boolean useJS = app.getSettings().USE_JS_VOICE_GUIDANCE.get();
 		for (IndexItem ii : resources) {
 			if (ii.getType() == DownloadActivityType.VOICE_FILE) {
-				if (ii.getFileName().endsWith(IndexConstants.TTSVOICE_INDEX_EXT_ZIP)) {
+				if (ii.getFileName().endsWith(IndexConstants.TTSVOICE_INDEX_EXT_ZIP) && !useJS) {
 					voiceTTS.addItem(ii);
-				} else {
+				} else if (ii.getFileName().endsWith(IndexConstants.TTSVOICE_INDEX_EXT_JS) && useJS){
+					voiceTTS.addItem(ii);
+				} else if (ii.getFileName().endsWith(IndexConstants.VOICE_INDEX_EXT_ZIP)){
 					voiceRec.addItem(ii);
 				}
 				continue;

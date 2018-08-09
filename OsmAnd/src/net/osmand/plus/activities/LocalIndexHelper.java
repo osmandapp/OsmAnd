@@ -13,6 +13,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.SQLiteTileSource;
 import net.osmand.plus.download.ui.AbstractLoadLocalIndexTask;
+import net.osmand.plus.voice.JSTTSCommandPlayerImpl;
 import net.osmand.plus.voice.MediaCommandPlayerImpl;
 import net.osmand.plus.voice.TTSCommandPlayerImpl;
 import net.osmand.util.Algorithms;
@@ -215,11 +216,12 @@ public class LocalIndexHelper {
 
 	private void loadVoiceData(File voiceDir, List<LocalIndexInfo> result, boolean backup, AbstractLoadLocalIndexTask loadTask) {
 		if (voiceDir.canRead()) {
+			boolean useJs = app.getSettings().USE_JS_VOICE_GUIDANCE.get();
 			//First list TTS files, they are preferred
 			for (File voiceF : listFilesSorted(voiceDir)) {
-				if (voiceF.isDirectory() && !MediaCommandPlayerImpl.isMyData(voiceF) && (Build.VERSION.SDK_INT >= 4)) {
+				if (voiceF.isDirectory() && !MediaCommandPlayerImpl.isMyData(voiceF)) {
 					LocalIndexInfo info = null;
-					if (TTSCommandPlayerImpl.isMyData(voiceF)) {
+					if ((TTSCommandPlayerImpl.isMyData(voiceF) && !useJs) || (JSTTSCommandPlayerImpl.isMyData(voiceF) && useJs)) {
 						info = new LocalIndexInfo(LocalIndexType.TTS_VOICE_DATA, voiceF, backup, app);
 					}
 					if (info != null) {

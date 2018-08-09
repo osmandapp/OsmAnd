@@ -3763,6 +3763,8 @@
 	<string name="poi_payment_centre">Platební centrum</string>
 	<string name="poi_money_transfer">Služba převodu peněz</string>
 
-	<string name="poi_climbing_sport_yes">Sport: Ano</string>
-	<string name="poi_climbing_sport_no">Sport: Ne</string>
+	<string name="poi_climbing_sport_yes">Sportovní horolezectví: Ano</string>
+	<string name="poi_climbing_sport_no">Sportovní horolezectví: Ne</string>
+	<string name="poi_glacier_type_icecap">Ledovec typu ledová čepice</string>
+	<string name="poi_glacier_type_icefield">Ledovec typu ledové pole</string>
 	</resources>

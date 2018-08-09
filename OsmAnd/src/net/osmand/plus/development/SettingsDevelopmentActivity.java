@@ -14,6 +14,7 @@ import android.preference.PreferenceScreen;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 
+import net.osmand.StateChangedListener;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmAndLocationSimulation;
 import net.osmand.plus.OsmandApplication;
@@ -32,6 +33,7 @@ import java.util.Set;
 
 public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 
+	private StateChangedListener<Boolean> useJSVoiceGuidanceListener;
 
 	@SuppressLint("SimpleDateFormat")
 	@Override
@@ -62,6 +64,15 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 		cat.addPreference(createCheckBoxPreference(settings.ANIMATE_MY_LOCATION,
 				R.string.animate_my_location,
 				R.string.animate_my_location_desc));
+		useJSVoiceGuidanceListener = new StateChangedListener<Boolean>() {
+			@Override
+			public void stateChanged(Boolean change) {
+				getMyApplication().getDownloadThread().runReloadIndexFilesSilent();
+			}
+		};
+		cat.addPreference(createCheckBoxPreference(settings.USE_JS_VOICE_GUIDANCE, "Use JS voice guidance",
+				"Use new voice guidance logic based on JavaScript"));
+		settings.USE_JS_VOICE_GUIDANCE.addListener(useJSVoiceGuidanceListener);
 
 		final Preference firstRunPreference = new Preference(this);
 		firstRunPreference.setTitle(R.string.simulate_initial_startup);
@@ -249,6 +260,9 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 		b.show();
 	}
 
-
-
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		settings.USE_JS_VOICE_GUIDANCE.removeListener(useJSVoiceGuidanceListener);
+	}
 }
