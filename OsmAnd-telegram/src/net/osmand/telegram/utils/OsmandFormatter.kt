@@ -3,8 +3,11 @@ package net.osmand.telegram.utils
 import android.content.Context
 import net.osmand.telegram.R
 import net.osmand.telegram.TelegramApplication
+import java.text.DateFormatSymbols
 import java.text.DecimalFormat
 import java.text.MessageFormat
+import java.text.SimpleDateFormat
+import java.util.*
 
 object OsmandFormatter {
 
@@ -17,6 +20,9 @@ object OsmandFormatter {
 	private val fixed2 = DecimalFormat("0.00")
 	private val fixed1 = DecimalFormat("0.0")
 
+	private val dateFormatSymbols = DateFormatSymbols.getInstance()
+	private val localDaysStr = getLettersStringArray(dateFormatSymbols.shortWeekdays, 2)
+
 	init {
 		fixed2.minimumFractionDigits = 2
 		fixed1.minimumFractionDigits = 1
@@ -24,9 +30,12 @@ object OsmandFormatter {
 		fixed2.minimumIntegerDigits = 1
 	}
 
-	fun getFormattedDuration(ctx: Context, seconds: Int): String {
+	fun getFormattedDuration(ctx: Context, seconds: Int, short: Boolean): String {
 		val hours = seconds / (60 * 60)
 		val minutes = seconds / 60 % 60
+		if (short) {
+			return String.format("%02d:%02d", hours, minutes)
+		}
 		return when {
 			hours > 0 -> {
 				var res = "$hours ${ctx.getString(R.string.shared_string_hour_short)}"
@@ -37,6 +46,17 @@ object OsmandFormatter {
 			}
 			minutes > 0 -> "$minutes ${ctx.getString(R.string.shared_string_minute_short)}"
 			else -> "$seconds ${ctx.getString(R.string.shared_string_second_short)}"
+		}
+	}
+
+	fun getFormattedTime(seconds: Int): String {
+		val calendar = Calendar.getInstance()
+		calendar.timeInMillis = System.currentTimeMillis() + (seconds * 1000)
+		return if (isSameDay(calendar, Calendar.getInstance())) {
+			SimpleDateFormat("HH:mm", Locale.getDefault()).format(calendar.time)
+		} else {
+			SimpleDateFormat("HH:mm", Locale.getDefault()).format(calendar.time) +
+					" " + localDaysStr[calendar.get(Calendar.DAY_OF_WEEK)]
 		}
 	}
 
@@ -107,7 +127,11 @@ object OsmandFormatter {
 	}
 
 	@JvmOverloads
-	fun getFormattedDistance(meters: Float, ctx: TelegramApplication, forceTrailingZeros: Boolean = true): String {
+	fun getFormattedDistance(
+		meters: Float,
+		ctx: TelegramApplication,
+		forceTrailingZeros: Boolean = true
+	): String {
 		val format1 = if (forceTrailingZeros) "{0,number,0.0} " else "{0,number,0.#} "
 		val format2 = if (forceTrailingZeros) "{0,number,0.00} " else "{0,number,0.##} "
 
@@ -126,19 +150,39 @@ object OsmandFormatter {
 		}
 
 		if (meters >= 100 * mainUnitInMeters) {
-			return (meters / mainUnitInMeters + 0.5).toInt().toString() + " " + ctx.getString(mainUnitStr) //$NON-NLS-1$
+			return (meters / mainUnitInMeters + 0.5).toInt().toString() + " " + ctx.getString(
+				mainUnitStr
+			) //$NON-NLS-1$
 		} else if (meters > 9.99f * mainUnitInMeters) {
-			return MessageFormat.format(format1 + ctx.getString(mainUnitStr), meters / mainUnitInMeters).replace('\n', ' ') //$NON-NLS-1$
+			return MessageFormat.format(
+				format1 + ctx.getString(mainUnitStr),
+				meters / mainUnitInMeters
+			).replace('\n', ' ') //$NON-NLS-1$
 		} else if (meters > 0.999f * mainUnitInMeters) {
-			return MessageFormat.format(format2 + ctx.getString(mainUnitStr), meters / mainUnitInMeters).replace('\n', ' ') //$NON-NLS-1$
+			return MessageFormat.format(
+				format2 + ctx.getString(mainUnitStr),
+				meters / mainUnitInMeters
+			).replace('\n', ' ') //$NON-NLS-1$
 		} else if (mc == MetricsConstants.MILES_AND_FEET && meters > 0.249f * mainUnitInMeters) {
-			return MessageFormat.format(format2 + ctx.getString(mainUnitStr), meters / mainUnitInMeters).replace('\n', ' ') //$NON-NLS-1$
+			return MessageFormat.format(
+				format2 + ctx.getString(mainUnitStr),
+				meters / mainUnitInMeters
+			).replace('\n', ' ') //$NON-NLS-1$
 		} else if (mc == MetricsConstants.MILES_AND_METERS && meters > 0.249f * mainUnitInMeters) {
-			return MessageFormat.format(format2 + ctx.getString(mainUnitStr), meters / mainUnitInMeters).replace('\n', ' ') //$NON-NLS-1$
+			return MessageFormat.format(
+				format2 + ctx.getString(mainUnitStr),
+				meters / mainUnitInMeters
+			).replace('\n', ' ') //$NON-NLS-1$
 		} else if (mc == MetricsConstants.MILES_AND_YARDS && meters > 0.249f * mainUnitInMeters) {
-			return MessageFormat.format(format2 + ctx.getString(mainUnitStr), meters / mainUnitInMeters).replace('\n', ' ') //$NON-NLS-1$
+			return MessageFormat.format(
+				format2 + ctx.getString(mainUnitStr),
+				meters / mainUnitInMeters
+			).replace('\n', ' ') //$NON-NLS-1$
 		} else if (mc == MetricsConstants.NAUTICAL_MILES && meters > 0.99f * mainUnitInMeters) {
-			return MessageFormat.format(format2 + ctx.getString(mainUnitStr), meters / mainUnitInMeters).replace('\n', ' ') //$NON-NLS-1$
+			return MessageFormat.format(
+				format2 + ctx.getString(mainUnitStr),
+				meters / mainUnitInMeters
+			).replace('\n', ' ') //$NON-NLS-1$
 		} else {
 			if (mc == MetricsConstants.KILOMETERS_AND_METERS || mc == MetricsConstants.MILES_AND_METERS) {
 				return (meters + 0.5).toInt().toString() + " " + ctx.getString(R.string.m) //$NON-NLS-1$
@@ -221,7 +265,32 @@ object OsmandFormatter {
 			return (kmh10 / 10f).toString() + " " + SpeedConstants.METERS_PER_SECOND.toShortString(ctx)
 		}
 	}
+	fun capitalizeFirstLetter(s: String?): String? {
+		return if (s != null && s.isNotEmpty()) {
+			Character.toUpperCase(s[0]) + if (s.length > 1) s.substring(1) else ""
+		} else {
+			s
+		}
+	}
 
+	private fun isSameDay(cal1: Calendar, cal2: Calendar): Boolean {
+		return cal1.get(Calendar.ERA) == cal2.get(Calendar.ERA) &&
+				cal1.get(Calendar.YEAR) == cal2.get(Calendar.YEAR) &&
+				cal1.get(Calendar.DAY_OF_YEAR) == cal2.get(Calendar.DAY_OF_YEAR)
+	}
+
+	private fun getLettersStringArray(strings: Array<String>, letters: Int): Array<String?> {
+		val newStrings = arrayOfNulls<String>(strings.size)
+		for (i in strings.indices) {
+			if (strings[i].length > letters) {
+				newStrings[i] = capitalizeFirstLetter(strings[i].substring(0, letters))
+			} else {
+				newStrings[i] = capitalizeFirstLetter(strings[i])
+			}
+		}
+		return newStrings
+	}
+	
 	enum class MetricsConstants private constructor(private val key: Int) {
 		KILOMETERS_AND_METERS(R.string.si_km_m),
 		MILES_AND_FEET(R.string.si_mi_feet),

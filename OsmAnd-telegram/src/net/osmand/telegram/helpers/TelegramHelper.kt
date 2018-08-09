@@ -14,7 +14,6 @@ import java.util.concurrent.ConcurrentHashMap
 import java.util.concurrent.Executors
 import java.util.concurrent.ScheduledExecutorService
 import java.util.concurrent.TimeUnit
-import kotlin.collections.ArrayList
 import kotlin.collections.HashSet
 
 
@@ -22,6 +21,8 @@ class TelegramHelper private constructor() {
 
 	companion object {
 		const val OSMAND_BOT_USERNAME = "osmand_bot"
+		
+		const val MESSAGE_ADD_ACTIVE_TIME_SEC = 30 * 60 // 30 min
 
 		private val log = PlatformUtil.getLog(TelegramHelper::class.java)
 		private const val CHATS_LIMIT = 100
@@ -101,6 +102,7 @@ class TelegramHelper private constructor() {
 	var listener: TelegramListener? = null
 	private val incomingMessagesListeners = HashSet<TelegramIncomingMessagesListener>()
 	private val fullInfoUpdatesListeners = HashSet<FullInfoUpdatesListener>()
+	private val chatLiveMessagesListeners = HashSet<ChatLiveMessagesListener>()
 
 	fun addIncomingMessagesListener(listener: TelegramIncomingMessagesListener) {
 		incomingMessagesListeners.add(listener)
@@ -117,6 +119,14 @@ class TelegramHelper private constructor() {
 	fun removeFullInfoUpdatesListener(listener: FullInfoUpdatesListener) {
 		fullInfoUpdatesListeners.remove(listener)
 	}
+	
+	fun addChatLiveMessagesListener(listener: ChatLiveMessagesListener) {
+		chatLiveMessagesListeners.add(listener)
+	}
+
+	fun removeChatLiveMessagesListener(listener: ChatLiveMessagesListener) {
+		chatLiveMessagesListeners.remove(listener)
+	}
 
 	fun getChatList(): TreeSet<OrderedChat> {
 		synchronized(chatList) {
@@ -125,15 +135,7 @@ class TelegramHelper private constructor() {
 	}
 
 	fun getChatListIds(): List<Long> {
-		synchronized(chatList) {
-			val chatsIds = ArrayList<Long>()
-			chatList.forEach {
-				if (!it.isChannel) {
-					chatsIds.add(it.chatId)
-				}
-			}
-			return chatsIds
-		}
+		return getChatList().map { it.chatId }
 	}
 
 	fun getChatIds() = chats.keys().toList()
@@ -233,6 +235,10 @@ class TelegramHelper private constructor() {
 	interface FullInfoUpdatesListener {
 		fun onBasicGroupFullInfoUpdated(groupId: Int, info: TdApi.BasicGroupFullInfo)
 		fun onSupergroupFullInfoUpdated(groupId: Int, info: TdApi.SupergroupFullInfo)
+	}
+	
+	interface ChatLiveMessagesListener {
+		fun onChatLiveMessagesUpdated(messages: List<TdApi.Message>)
 	}
 
 	interface TelegramAuthorizationRequestListener {
@@ -553,6 +559,7 @@ class TelegramHelper private constructor() {
 							chatLiveMessages[chatId] = msg
 						}
 					}
+					chatLiveMessagesListeners.forEach { it.onChatLiveMessagesUpdated(messages.toList()) }
 					onComplete?.invoke()
 				}
 				else -> listener?.onSendLiveLocationError(-1, "Receive wrong response from TDLib: $obj")
@@ -718,7 +725,6 @@ class TelegramHelper private constructor() {
 			if (haveAuthorization) {
 				requestChats(true)
 				requestCurrentUser()
-				getActiveLiveLocationMessages(null)
 			}
 		}
 		val newAuthState = getTelegramAuthorizationState()

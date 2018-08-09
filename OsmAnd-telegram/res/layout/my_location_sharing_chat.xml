@@ -58,7 +58,7 @@
 						android:ellipsize="end"
 						android:maxLines="1"
 						android:textColor="?android:attr/textColorSecondary"
-						android:textSize="14sp"
+						android:textSize="@dimen/hint_text_size"
 						tools:text="Sharing:" />
 
 					<net.osmand.telegram.ui.views.TextViewEx
@@ -70,7 +70,7 @@
 						android:ellipsize="end"
 						android:maxLines="1"
 						android:textColor="?attr/ctrl_active_color"
-						android:textSize="14sp"
+						android:textSize="@dimen/hint_text_size"
 						app:typeface="@string/font_roboto_medium"
 						tools:text="1 h" />
 
@@ -91,7 +91,7 @@
 				android:paddingLeft="@dimen/content_padding_half"
 				android:paddingRight="@dimen/content_padding_half"
 				android:textColor="?attr/ctrl_active_color"
-				android:textSize="14sp"
+				android:textSize="@dimen/hint_text_size"
 				android:visibility="gone"
 				app:typeface="@string/font_roboto_medium"
 				tools:text="+ 30 min"
@@ -131,7 +131,7 @@
 					android:layout_marginRight="@dimen/content_padding_standard"
 					android:text="@string/stop_sharing_chat"
 					android:textColor="?attr/ctrl_active_color"
-					android:textSize="14sp"
+					android:textSize="@dimen/hint_text_size"
 					app:typeface="@string/font_roboto_medium" />
 
 				<LinearLayout
@@ -140,14 +140,14 @@
 					android:orientation="horizontal">
 
 					<net.osmand.telegram.ui.views.TextViewEx
-						android:id="@+id/ending_in"
+						android:id="@+id/stop_in"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
 						android:layout_gravity="center_vertical"
-						android:text="@string/ending_in"
 						android:textColor="?android:attr/textColorSecondary"
-						android:textSize="14sp"
-						app:typeface="@string/font_roboto_regular" />
+						android:textSize="@dimen/hint_text_size"
+						app:typeface="@string/font_roboto_regular"
+						tools:text="@string/stop_at" />
 
 					<net.osmand.telegram.ui.views.TextViewEx
 						android:id="@+id/ending_in_first_part"
@@ -157,9 +157,8 @@
 						android:layout_marginLeft="4dp"
 						android:layout_marginRight="4dp"
 						android:textColor="?android:attr/textColorPrimary"
-						android:textSize="14sp"
-						app:typeface="@string/font_roboto_mono_bold"
-						tools:text="13:14" />
+						android:textSize="@dimen/hint_text_size"
+						app:typeface="@string/font_roboto_mono_bold" />
 
 					<net.osmand.telegram.ui.views.TextViewEx
 						android:id="@+id/ending_in_second_part"
@@ -167,9 +166,8 @@
 						android:layout_height="wrap_content"
 						android:layout_gravity="center_vertical"
 						android:textColor="?android:attr/textColorSecondary"
-						android:textSize="14sp"
-						app:typeface="@string/font_roboto_regular"
-						tools:text="(in 12:34)" />
+						android:textSize="@dimen/hint_text_size"
+						app:typeface="@string/font_roboto_regular" />
 
 				</LinearLayout>
 
