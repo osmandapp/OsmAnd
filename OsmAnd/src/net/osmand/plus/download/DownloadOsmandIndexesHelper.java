@@ -19,6 +19,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.osm.io.NetworkUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.resources.ResourceManager;
 
 import org.apache.commons.logging.Log;
 import org.xmlpull.v1.XmlPullParser;
@@ -123,6 +124,25 @@ public class DownloadOsmandIndexesHelper {
 		listVoiceAssets(result, amanager, pm, app.getSettings());
 		return result;
 	}
+
+	public static void copyMissingJSAssets(OsmandApplication app) {
+		try {
+			Map<String, String> mapping = assetMapping(app.getAssets());
+			File appPath = app.getAppPath(null);
+			if (appPath.canWrite()) {
+				for (Map.Entry<String,String> entry : mapping.entrySet()) {
+					File jsFile = new File(appPath, entry.getValue());
+					if (jsFile.getParentFile().exists() && !jsFile.exists()) {
+						ResourceManager.copyAssets(app.getAssets(), entry.getKey(), jsFile);
+					}
+				}
+			}
+		} catch (XmlPullParserException e) {
+			log.error("Error while loading tts files from assets", e);
+		} catch (IOException e) {
+			log.error("Error while loading tts files from assets", e);
+		}
+	}
 	
 	private static Map<String, String>  assetMapping(AssetManager assetManager) throws XmlPullParserException, IOException {
 		XmlPullParser xmlParser = XmlPullParserFactory.newInstance().newPullParser(); 
@@ -141,7 +161,7 @@ public class DownloadOsmandIndexesHelper {
 		return assets;
 	}
 	
-	public static void listVoiceAssets(IndexFileList result, AssetManager amanager, PackageManager pm,
+	private static void listVoiceAssets(IndexFileList result, AssetManager amanager, PackageManager pm,
 			OsmandSettings settings) {
 		try {
 			String ext = DownloadActivityType.addVersionToExt(IndexConstants.TTSVOICE_INDEX_EXT_ZIP, IndexConstants.TTSVOICE_VERSION);

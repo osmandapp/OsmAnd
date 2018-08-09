@@ -29,6 +29,7 @@ import net.osmand.plus.activities.LocalIndexInfo;
 import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.download.DownloadActivity;
+import net.osmand.plus.download.DownloadOsmandIndexesHelper;
 import net.osmand.plus.download.ui.AbstractLoadLocalIndexTask;
 import net.osmand.plus.helpers.AvoidSpecificRoads;
 import net.osmand.plus.helpers.WaypointHelper;
@@ -180,8 +181,8 @@ public class AppInitializer implements IProgress {
 			if(prevAppVersion < VERSION_2_3) {
 				startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, VERSION_2_3).commit();
 			} else if (prevAppVersion < VERSION_3_2) {
+				DownloadOsmandIndexesHelper.copyMissingJSAssets(app);
 				startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, VERSION_3_2).commit();
-				app.getDownloadThread().copyJSVoiceGuidanceFiles();
 			}
 			startPrefs.edit().putString(VERSION_INSTALLED, Version.getFullVersion(app)).commit();
 			appVersionChanged = true;

@@ -100,43 +100,6 @@ public class DownloadIndexesThread {
 		}
 	}
 
-	public void copyJSVoiceGuidanceFiles() {
-		File extStorage = app.getAppPath(IndexConstants.VOICE_INDEX_DIR);
-		Map<String, IndexItem> jsFiles = getJSTTSIndexes();
-		if (extStorage.exists()) {
-			for (File f : extStorage.listFiles()) {
-				if (f.isDirectory()) {
-					if (jsFiles.containsKey(f.getName()) && !shouldSkip(f)) {
-						runDownloadFiles(jsFiles.get(f.getName()));
-					}
-				}
-			}
-		}
-	}
-
-	private boolean shouldSkip(File voiceDir) {
-		for (File f : voiceDir.listFiles()) {
-			if (f.getName().endsWith(IndexConstants.TTSVOICE_INDEX_EXT_JS)) {
-				return true;
-			}
-		}
-		return false;
-	}
-
-	private Map<String, IndexItem> getJSTTSIndexes() {
-		Map<String, IndexItem> items = new HashMap<>();
-		DownloadOsmandIndexesHelper.IndexFileList indexFileList = new DownloadOsmandIndexesHelper.IndexFileList();
-		DownloadOsmandIndexesHelper.listVoiceAssets(indexFileList, app.getAssets(), app.getPackageManager(), app.getSettings());
-		for (IndexItem item : indexFileList.getIndexFiles()) {
-			if (item.getType() == DownloadActivityType.VOICE_FILE && !item.isDownloaded()) {
-				if (item.getFileName().endsWith(IndexConstants.TTSVOICE_INDEX_EXT_JS)) {
-					items.put(item.getBasename(), item);
-				}
-			}
-		}
-		return items;
-	}
-
 	@UiThread
 	protected void downloadInProgress() {
 		if (uiActivity != null) {
