@@ -215,12 +215,36 @@
 
 	</android.support.design.widget.AppBarLayout>
 
-	<android.support.v7.widget.RecyclerView
-		android:id="@+id/recycler_view"
+	
+	<FrameLayout
 		android:layout_width="match_parent"
-		android:layout_height="match_parent"
-		android:clipToPadding="false"
-		android:paddingBottom="@dimen/list_view_bottom_padding"
-		app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+		app:layout_behavior="@string/appbar_scrolling_view_behavior"
+		android:layout_height="match_parent">
 
+		<android.support.v7.widget.RecyclerView
+			android:id="@+id/recycler_view"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:clipToPadding="false"
+			android:paddingBottom="@dimen/list_view_bottom_padding"/>
+
+		<net.osmand.telegram.ui.views.TextViewEx
+			android:id="@+id/start_sharing_btn"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="bottom|center_horizontal"
+			android:background="@drawable/img_shadow_fab"
+			android:drawableLeft="@drawable/ic_group"
+			android:drawablePadding="@dimen/content_padding_half"
+			android:drawableStart="@drawable/ic_group"
+			android:gravity="center"
+			android:paddingLeft="32dp"
+			android:paddingRight="32dp"
+			android:text="@string/share_location"
+			android:textColor="@color/white"
+			app:typeface="@string/font_roboto_medium"
+			android:visibility="gone"/>
+
+	</FrameLayout>
+	
 </android.support.design.widget.CoordinatorLayout>
