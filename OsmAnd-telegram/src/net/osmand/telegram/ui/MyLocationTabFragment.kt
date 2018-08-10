@@ -111,11 +111,12 @@ class MyLocationTabFragment : Fragment(), TelegramListener, ChatLiveMessagesList
 			setImageResource(R.drawable.img_my_location_user)
 		}
 
-		optionsBtn = mainView.findViewById<ImageView>(R.id.options)
-		(activity as MainActivity).setupOptionsBtn(optionsBtn)
+		with(activity as MainActivity) {
+			optionsBtn = mainView.findViewById<ImageView>(R.id.options)
+			activity.setupOptionsBtn(optionsBtn)
+			activity.setupOptionsBtn(mainView.findViewById<ImageView>(R.id.options_title))
+		}
 		
-		activity.setupOptionsBtn(mainView.findViewById<ImageView>(R.id.options_title))
-
 		imageContainer = mainView.findViewById<FrameLayout>(R.id.image_container)
 		titleContainer = mainView.findViewById<LinearLayout>(R.id.title_container).apply {
 			AndroidUtils.addStatusBarPadding19v(context, this)
