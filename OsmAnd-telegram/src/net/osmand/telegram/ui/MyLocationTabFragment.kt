@@ -10,7 +10,6 @@ import android.support.design.widget.AppBarLayout
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.ListPopupWindow
 import android.support.v7.widget.RecyclerView
 import android.view.*
 import android.widget.*
@@ -114,16 +113,12 @@ class MyLocationTabFragment : Fragment(), TelegramListener, ChatLiveMessagesList
 			setImageResource(R.drawable.img_my_location_user)
 		}
 
-		optionsBtn = mainView.findViewById<ImageView>(R.id.options).apply {
-			setImageDrawable(app.uiUtils.getThemedIcon(R.drawable.ic_action_other_menu))
-			setOnClickListener { showPopupMenu(this) }
+		optionsBtn = mainView.findViewById<ImageView>(R.id.options)
+		with(activity as MainActivity) {
+			setupOptionsBtn(optionsBtn)
+			setupOptionsBtn(mainView.findViewById<ImageView>(R.id.options_title))
 		}
-
-		mainView.findViewById<ImageView>(R.id.options_title).apply {
-			setImageDrawable(app.uiUtils.getThemedIcon(R.drawable.ic_action_other_menu))
-			setOnClickListener { showPopupMenu(this) }
-		}
-
+		
 		imageContainer = mainView.findViewById<FrameLayout>(R.id.image_container)
 		titleContainer = mainView.findViewById<LinearLayout>(R.id.title_container).apply {
 			AndroidUtils.addStatusBarPadding19v(context, this)
@@ -257,56 +252,6 @@ class MyLocationTabFragment : Fragment(), TelegramListener, ChatLiveMessagesList
 		selectedChats.clear()
 		adapter.notifyDataSetChanged()
 		actionButtonsListener?.switchButtonsVisibility(false)
-	}
-
-	private fun showPopupMenu(anchor: View) {
-		val ctx = context ?: return
-
-		val menuList = ArrayList<String>()
-		val settings = getString(R.string.shared_string_settings)
-		val logout = getString(R.string.shared_string_logout)
-		val login = getString(R.string.shared_string_login)
-
-		menuList.add(settings)
-		@Suppress("NON_EXHAUSTIVE_WHEN")
-		when (telegramHelper.getTelegramAuthorizationState()) {
-			TelegramHelper.TelegramAuthorizationState.READY -> menuList.add(logout)
-			TelegramHelper.TelegramAuthorizationState.CLOSED -> menuList.add(login)
-		}
-
-		ListPopupWindow(ctx).apply {
-			isModal = true
-			anchorView = anchor
-			setContentWidth(AndroidUtils.getPopupMenuWidth(ctx, menuList))
-			setDropDownGravity(Gravity.END or Gravity.TOP)
-			setAdapter(ArrayAdapter(ctx, R.layout.popup_list_text_item, menuList))
-			setOnItemClickListener { _, _, position, _ ->
-				when (position) {
-					menuList.indexOf(settings) -> {
-						fragmentManager?.also { SettingsDialogFragment.showInstance(it) }
-					}
-					menuList.indexOf(logout) -> logoutTelegram()
-					menuList.indexOf(login) -> loginTelegram()
-				}
-				dismiss()
-			}
-			show()
-		}
-	}
-
-	private fun logoutTelegram(silent: Boolean = false) {
-		if (telegramHelper.getTelegramAuthorizationState() == TelegramHelper.TelegramAuthorizationState.READY) {
-			telegramHelper.logout()
-		} else if (!silent) {
-			Toast.makeText(context, R.string.not_logged_in, Toast.LENGTH_SHORT).show()
-		}
-	}
-
-	private fun loginTelegram() {
-		if (telegramHelper.getTelegramAuthorizationState() != TelegramHelper.TelegramAuthorizationState.CLOSED) {
-			telegramHelper.logout()
-		}
-		telegramHelper.init()
 	}
 
 	private fun adjustText() {

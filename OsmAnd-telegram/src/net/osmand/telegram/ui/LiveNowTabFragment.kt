@@ -58,7 +58,8 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 		savedInstanceState: Bundle?
 	): View? {
 		val mainView = inflater.inflate(R.layout.fragment_live_now_tab, container, false)
-		AndroidUtils.addStatusBarPadding19v(context!!, mainView)
+		val appBarLayout = mainView.findViewById<View>(R.id.app_bar_layout)
+		AndroidUtils.addStatusBarPadding19v(context!!, appBarLayout)
 		adapter = LiveNowListAdapter()
 		mainView.findViewById<RecyclerView>(R.id.recycler_view).apply {
 			layoutManager = LinearLayoutManager(context)
@@ -74,6 +75,9 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 				}
 			})
 		}
+
+		(activity as MainActivity).setupOptionsBtn(mainView.findViewById<ImageView>(R.id.options))
+
 		openOsmAndBtn = mainView.findViewById<View>(R.id.open_osmand_btn).apply {
 			setOnClickListener {
 				activity?.packageManager?.getLaunchIntentForPackage(OsmandAidlHelper.OSMAND_PACKAGE_NAME)
