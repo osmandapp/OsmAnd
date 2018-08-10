@@ -3084,4 +3084,5 @@
     <string name="poi_cannot_be_found">לא ניתן למצוא את הצומת או הדרך.</string>
     <string name="search_no_results_feedback">אין תוצאות חיפוש?
 \nנשמח לקבל משוב</string>
-    </resources>
+    <string name="test_voice_desrc">יש ללחוץ על הכפתור ולהאזין להנחיה הקולית כדי לזהות הנחיות חסרות או שגויות.</string>
+</resources>
