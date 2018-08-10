@@ -12,8 +12,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import net.osmand.telegram.R
-import net.osmand.telegram.TelegramApplication
+import net.osmand.telegram.*
 import net.osmand.telegram.helpers.OsmandAidlHelper
 import net.osmand.telegram.helpers.TelegramHelper
 import net.osmand.telegram.helpers.TelegramUiHelper
@@ -161,19 +160,18 @@ class SettingsDialogFragment : DialogFragment() {
 		}
 	}
 
-	// FIXME
 	private inner class SendMyLocPref : DurationPref(
 		R.drawable.ic_action_share_location,
 		R.string.send_my_location,
 		R.string.send_my_location_desc,
-		listOf(30 * 60, 60 * 60, 90 * 60)
+		SEND_MY_LOC_VALUES_SEC
 	) {
 
-		override fun getCurrentValue() = OsmandFormatter.getFormattedDuration(app, values[0])
+		override fun getCurrentValue() =
+			OsmandFormatter.getFormattedDuration(app, settings.sendMyLocInterval)
 
 		override fun setCurrentValue(index: Int) {
-			val value = OsmandFormatter.getFormattedDuration(app, values[index])
-			Toast.makeText(context, value, Toast.LENGTH_SHORT).show()
+			settings.sendMyLocInterval = values[index]
 		}
 	}
 
@@ -182,30 +180,31 @@ class SettingsDialogFragment : DialogFragment() {
 		R.drawable.ic_action_share_location,
 		R.string.stale_location,
 		R.string.stale_location_desc,
-		listOf(30 * 60, 60 * 60, 90 * 60)
+		STALE_LOC_VALUES_SEC
 	) {
 
-		override fun getCurrentValue() = OsmandFormatter.getFormattedDuration(app, values[0])
+		override fun getCurrentValue() =
+			OsmandFormatter.getFormattedDuration(app, settings.staleLocTime)
 
 		override fun setCurrentValue(index: Int) {
-			val value = OsmandFormatter.getFormattedDuration(app, values[index])
-			Toast.makeText(context, value, Toast.LENGTH_SHORT).show()
+			settings.staleLocTime = values[index]
 		}
 	}
 
-	// FIXME
 	private inner class LocHistoryPref : DurationPref(
 		R.drawable.ic_action_time_span,
 		R.string.location_history,
 		R.string.location_history_desc,
-		listOf(30 * 60, 60 * 60, 90 * 60)
+		LOC_HISTORY_VALUES_SEC
 	) {
 
-		override fun getCurrentValue() = OsmandFormatter.getFormattedDuration(app, values[0])
+		override fun getCurrentValue() =
+			OsmandFormatter.getFormattedDuration(app, settings.locHistoryTime)
 
 		override fun setCurrentValue(index: Int) {
-			val value = OsmandFormatter.getFormattedDuration(app, values[index])
-			Toast.makeText(context, value, Toast.LENGTH_SHORT).show()
+			val value = values[index]
+			settings.locHistoryTime = value
+			telegramHelper.messageActiveTimeSec = value
 		}
 	}
 
@@ -213,7 +212,7 @@ class SettingsDialogFragment : DialogFragment() {
 		@DrawableRes val iconId: Int,
 		@StringRes val titleId: Int,
 		@StringRes val descriptionId: Int,
-		val values: List<Int>
+		val values: List<Long>
 	) {
 
 		abstract fun getCurrentValue(): String

@@ -28,6 +28,8 @@ private const val SELECTED_CHATS_KEY = "selected_chats"
 private const val SHARE_LOCATION_CHAT = 1
 private const val DEFAULT_CHAT = 0
 
+private const val MESSAGE_ADD_ACTIVE_TIME_SEC = 30 * 60L // 30 min
+
 class MyLocationTabFragment : Fragment(), TelegramListener, ChatLiveMessagesListener {
 
 	private var textMarginSmall: Int = 0
@@ -497,7 +499,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener, ChatLiveMessagesList
 					}
 				}
 
-				val duration = settings.getChatLivePeriod(chat.id)?.toInt()
+				val duration = settings.getChatLivePeriod(chat.id)
 				if (duration != null && duration > 0) {
 					holder.descriptionDuration?.text = OsmandFormatter.getFormattedDuration(context!!, duration)
 					holder.description?.apply {
@@ -513,13 +515,13 @@ class MyLocationTabFragment : Fragment(), TelegramListener, ChatLiveMessagesList
 						holder.textInArea?.apply {
 							visibility = View.VISIBLE
 							text = "${getText(R.string.plus)} ${OsmandFormatter.getFormattedDuration(context!!,
-								TelegramHelper.MESSAGE_ADD_ACTIVE_TIME_SEC)}"
+								MESSAGE_ADD_ACTIVE_TIME_SEC)}"
 							setOnClickListener {
 								var newLivePeriod = app.settings.getChatLivePeriod(chat.id)
 								if (newLivePeriod != null) {
-									newLivePeriod += TelegramHelper.MESSAGE_ADD_ACTIVE_TIME_SEC
+									newLivePeriod += MESSAGE_ADD_ACTIVE_TIME_SEC
 								} else {
-									newLivePeriod = TelegramHelper.MESSAGE_ADD_ACTIVE_TIME_SEC.toLong()
+									newLivePeriod = MESSAGE_ADD_ACTIVE_TIME_SEC
 								}
 								app.settings.shareLocationToChat(chat.id, true, newLivePeriod)
 								notifyItemChanged(position)
@@ -538,7 +540,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener, ChatLiveMessagesList
 						holder.stopSharingSecondPart?.apply {
 							visibility = View.VISIBLE
 							text = "(${getString(R.string.in_time,
-								OsmandFormatter.getFormattedDuration(context!!, expiresIn, true))})"
+								OsmandFormatter.getFormattedDuration(context!!, expiresIn.toLong(), true))})"
 						}
 						if (expiresIn == 0) {
 							removeItem(chat)

@@ -59,8 +59,8 @@ class TelegramService : Service(), LocationListener, TelegramIncomingMessagesLis
 			ctx.stopService(serviceIntent)
 		} else if (isUsedByMyLocation(usedBy)) {
 			val app = app()
-			if (app.settings.sendMyLocationInterval >= OFF_INTERVAL_THRESHOLD && serviceOffInterval == 0L) {
-				serviceOffInterval = app.settings.sendMyLocationInterval
+			if (app.settings.sendMyLocInterval >= OFF_INTERVAL_THRESHOLD && serviceOffInterval == 0L) {
+				serviceOffInterval = app.settings.sendMyLocInterval
 				setupServiceErrorInterval()
 				setupAlarm()
 			}
@@ -84,7 +84,7 @@ class TelegramService : Service(), LocationListener, TelegramIncomingMessagesLis
 			initLocationUpdates()
 		}
 		if (isUsedByUsersLocations(usedBy)) {
-			app.telegramHelper.startLiveMessagesUpdates()
+			app.telegramHelper.startLiveMessagesUpdates(app.settings.sendMyLocInterval)
 		}
 
 		val locationNotification = app.notificationHelper.locationNotification

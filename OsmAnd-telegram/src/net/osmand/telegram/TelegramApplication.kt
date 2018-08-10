@@ -18,7 +18,7 @@ import net.osmand.telegram.utils.UiUtils
 
 class TelegramApplication : Application(), OsmandHelperListener {
 
-	val telegramHelper = TelegramHelper.instance
+	lateinit var telegramHelper: TelegramHelper private set
 	lateinit var settings: TelegramSettings private set
 	lateinit var uiUtils: UiUtils private set
 	lateinit var shareLocationHelper: ShareLocationHelper private set
@@ -36,9 +36,10 @@ class TelegramApplication : Application(), OsmandHelperListener {
 
 	override fun onCreate() {
 		super.onCreate()
-		telegramHelper.appDir = filesDir.absolutePath
 
 		settings = TelegramSettings(this)
+		telegramHelper = TelegramHelper.getInstance(settings.locHistoryTime)
+		telegramHelper.appDir = filesDir.absolutePath
 		uiUtils = UiUtils(this)
 		osmandAidlHelper = OsmandAidlHelper(this)
 		osmandAidlHelper.listener = object : OsmandAidlHelper.OsmandHelperListener {
@@ -127,7 +128,7 @@ class TelegramApplication : Application(), OsmandHelperListener {
 
 		serviceIntent.putExtra(TelegramService.USAGE_INTENT, i)
 		serviceIntent.putExtra(TelegramService.USAGE_OFF_INTERVAL, interval)
-		serviceIntent.putExtra(TelegramService.SEND_LOCATION_INTERVAL, settings.sendMyLocationInterval)
+		serviceIntent.putExtra(TelegramService.SEND_LOCATION_INTERVAL, settings.sendMyLocInterval)
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 			startForegroundService(serviceIntent)
 		} else {
@@ -136,7 +137,7 @@ class TelegramApplication : Application(), OsmandHelperListener {
 	}
 
 	fun startMyLocationService() {
-		val interval = settings.sendMyLocationInterval
+		val interval = settings.sendMyLocInterval
 		startTelegramService(TelegramService.USED_BY_MY_LOCATION, TelegramService.normalizeOffInterval(interval))
 	}
 

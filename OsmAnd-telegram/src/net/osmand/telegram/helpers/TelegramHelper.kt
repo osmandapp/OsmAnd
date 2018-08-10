@@ -17,18 +17,14 @@ import java.util.concurrent.TimeUnit
 import kotlin.collections.HashSet
 
 
-class TelegramHelper private constructor() {
+class TelegramHelper private constructor(var messageActiveTimeSec: Long) {
 
 	companion object {
 		const val OSMAND_BOT_USERNAME = "osmand_bot"
-		
-		const val MESSAGE_ADD_ACTIVE_TIME_SEC = 30 * 60 // 30 min
 
 		private val log = PlatformUtil.getLog(TelegramHelper::class.java)
 		private const val CHATS_LIMIT = 100
 		private const val IGNORED_ERROR_CODE = 406
-		private const val UPDATE_LIVE_MESSAGES_INTERVAL_SEC = 30L
-		private const val MESSAGE_ACTIVE_TIME_SEC = 24 * 60 * 60 // 24 hours
 
 		private const val DEVICE_PREFIX = "Device: "
 		private const val LOCATION_PREFIX = "Location: "
@@ -38,7 +34,7 @@ class TelegramHelper private constructor() {
 		private const val MINUTES_AGO_SUFFIX = " minutes ago"
 		private const val HOURS_AGO_SUFFIX = " hours ago"
 		private const val UTC_FORMAT_SUFFIX = " UTC"
-		
+
 		private val UTC_DATE_FORMAT = SimpleDateFormat("yyyy-MM-dd", Locale.US).apply {
 			timeZone = TimeZone.getTimeZone("UTC")
 		}
@@ -52,13 +48,12 @@ class TelegramHelper private constructor() {
 
 		private var helper: TelegramHelper? = null
 
-		val instance: TelegramHelper
-			get() {
-				if (helper == null) {
-					helper = TelegramHelper()
-				}
-				return helper!!
+		fun getInstance(messageActiveTimeSec: Long): TelegramHelper {
+			if (helper == null) {
+				helper = TelegramHelper(messageActiveTimeSec)
 			}
+			return helper!!
+		}
 	}
 
 	private val users = ConcurrentHashMap<Int, TdApi.User>()
@@ -119,7 +114,7 @@ class TelegramHelper private constructor() {
 	fun removeFullInfoUpdatesListener(listener: FullInfoUpdatesListener) {
 		fullInfoUpdatesListeners.remove(listener)
 	}
-	
+
 	fun addChatLiveMessagesListener(listener: ChatLiveMessagesListener) {
 		chatLiveMessagesListeners.add(listener)
 	}
@@ -141,9 +136,9 @@ class TelegramHelper private constructor() {
 	fun getChat(id: Long) = chats[id]
 
 	fun getUser(id: Int) = users[id]
-	
+
 	fun getCurrentUser() = currentUser
-	
+
 	fun getUserMessage(user: TdApi.User) =
 		usersLocationMessages.values.firstOrNull { it.senderUserId == user.id }
 
@@ -151,7 +146,7 @@ class TelegramHelper private constructor() {
 		usersLocationMessages.values.filter { it.chatId == chatId }
 
 	fun getMessages() = usersLocationMessages.values.toList()
-	
+
 	fun getChatLiveMessages() = chatLiveMessages
 
 	fun getMessagesByChatIds(): Map<Long, List<TdApi.Message>> {
@@ -189,7 +184,7 @@ class TelegramHelper private constructor() {
 	}
 
 	fun isPrivateChat(chat: TdApi.Chat): Boolean = chat.type is TdApi.ChatTypePrivate
-	
+
 	private fun isChannel(chat: TdApi.Chat): Boolean {
 		return chat.type is TdApi.ChatTypeSupergroup && (chat.type as TdApi.ChatTypeSupergroup).isChannel
 	}
@@ -234,7 +229,7 @@ class TelegramHelper private constructor() {
 		fun onBasicGroupFullInfoUpdated(groupId: Int, info: TdApi.BasicGroupFullInfo)
 		fun onSupergroupFullInfoUpdated(groupId: Int, info: TdApi.SupergroupFullInfo)
 	}
-	
+
 	interface ChatLiveMessagesListener {
 		fun onChatLiveMessagesUpdated(messages: List<TdApi.Message>)
 	}
@@ -326,19 +321,19 @@ class TelegramHelper private constructor() {
 		}
 		return deviceName
 	}
-	
+
 	fun isOsmAndBot(userId: Int) = users[userId]?.username == OSMAND_BOT_USERNAME
 
 	fun isBot(userId: Int) = users[userId]?.type is TdApi.UserTypeBot
 
-	fun startLiveMessagesUpdates() {
+	fun startLiveMessagesUpdates(interval: Long) {
 		stopLiveMessagesUpdates()
 
 		val updateLiveMessagesExecutor = Executors.newSingleThreadScheduledExecutor()
 		this.updateLiveMessagesExecutor = updateLiveMessagesExecutor
 		updateLiveMessagesExecutor.scheduleWithFixedDelay({
 			incomingMessagesListeners.forEach { it.updateLocationMessages() }
-		}, UPDATE_LIVE_MESSAGES_INTERVAL_SEC, UPDATE_LIVE_MESSAGES_INTERVAL_SEC, TimeUnit.SECONDS)
+		}, interval, interval, TimeUnit.SECONDS)
 	}
 
 	fun stopLiveMessagesUpdates() {
@@ -474,7 +469,7 @@ class TelegramHelper private constructor() {
 			}
 		}
 	}
-	
+
 	private fun requestMessage(chatId: Long, messageId: Long, onComplete: (TdApi.Message) -> Unit) {
 		client?.send(TdApi.GetMessage(chatId, messageId)) { obj ->
 			when (obj.constructor) {
@@ -734,7 +729,7 @@ class TelegramHelper private constructor() {
 			return false
 		}
 		val lastEdited = Math.max(date, editDate)
-		if (TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis()) - lastEdited > MESSAGE_ACTIVE_TIME_SEC) {
+		if (TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis()) - lastEdited > messageActiveTimeSec) {
 			return false
 		}
 		val content = content
@@ -759,7 +754,7 @@ class TelegramHelper private constructor() {
 			}
 		}
 	}
-	
+
 	private fun parseOsmAndBotLocationContent(oldContent:MessageOsmAndBotLocation, content: TdApi.MessageContent): MessageOsmAndBotLocation {
 		val messageLocation = content as TdApi.MessageLocation
 		return MessageOsmAndBotLocation().apply {
@@ -769,7 +764,7 @@ class TelegramHelper private constructor() {
 			lastUpdated = (System.currentTimeMillis() / 1000).toInt()
 		}
 	}
-	
+
 	private fun parseOsmAndBotLocation(text: String): MessageOsmAndBotLocation {
 		val res = MessageOsmAndBotLocation()
 		for (s in text.lines()) {
@@ -785,7 +780,7 @@ class TelegramHelper private constructor() {
 						val timeSecs = parseTime(updatedS.removePrefix("(").removeSuffix(")"))
 						res.lat = latS.dropLast(1).toDouble()
 						res.lon = lonS.toDouble()
-						if (timeSecs < MESSAGE_ACTIVE_TIME_SEC) {
+						if (timeSecs < messageActiveTimeSec) {
 							res.lastUpdated = (System.currentTimeMillis() / 1000 - timeSecs).toInt()
 						} else {
 							res.lastUpdated = timeSecs
@@ -803,7 +798,7 @@ class TelegramHelper private constructor() {
 		try {
 			when {
 				timeS.endsWith(FEW_SECONDS_AGO) -> return 5
-				
+
 				timeS.endsWith(SECONDS_AGO_SUFFIX) -> {
 					val locStr = timeS.removeSuffix(SECONDS_AGO_SUFFIX)
 					return locStr.toInt()
@@ -832,7 +827,7 @@ class TelegramHelper private constructor() {
 		}
 		return 0
 	}
-	
+
 	class MessageOsmAndBotLocation : TdApi.MessageContent() {
 
 		var name: String = ""
