@@ -3147,4 +3147,5 @@
     <string name="poi_cannot_be_found">找不到節點或路線。</string>
     <string name="search_no_results_feedback">沒有搜尋結果？
 \n向我們反映</string>
-    </resources>
+    <string name="test_voice_desrc">輕點按鈕並聽取相應的語音提示，以確認遺漏或錯誤的提示。</string>
+</resources>
