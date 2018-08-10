@@ -18,7 +18,7 @@ import net.osmand.telegram.utils.UiUtils
 
 class TelegramApplication : Application(), OsmandHelperListener {
 
-	lateinit var telegramHelper: TelegramHelper private set
+	val telegramHelper = TelegramHelper.instance
 	lateinit var settings: TelegramSettings private set
 	lateinit var uiUtils: UiUtils private set
 	lateinit var shareLocationHelper: ShareLocationHelper private set
@@ -36,10 +36,10 @@ class TelegramApplication : Application(), OsmandHelperListener {
 
 	override fun onCreate() {
 		super.onCreate()
+		telegramHelper.appDir = filesDir.absolutePath
 
 		settings = TelegramSettings(this)
-		telegramHelper = TelegramHelper.getInstance(settings.locHistoryTime)
-		telegramHelper.appDir = filesDir.absolutePath
+		telegramHelper.messageActiveTimeSec = settings.locHistoryTime
 		uiUtils = UiUtils(this)
 		osmandAidlHelper = OsmandAidlHelper(this)
 		osmandAidlHelper.listener = object : OsmandAidlHelper.OsmandHelperListener {

@@ -17,7 +17,7 @@ import java.util.concurrent.TimeUnit
 import kotlin.collections.HashSet
 
 
-class TelegramHelper private constructor(var messageActiveTimeSec: Long) {
+class TelegramHelper private constructor() {
 
 	companion object {
 		const val OSMAND_BOT_USERNAME = "osmand_bot"
@@ -48,13 +48,16 @@ class TelegramHelper private constructor(var messageActiveTimeSec: Long) {
 
 		private var helper: TelegramHelper? = null
 
-		fun getInstance(messageActiveTimeSec: Long): TelegramHelper {
-			if (helper == null) {
-				helper = TelegramHelper(messageActiveTimeSec)
+		val instance: TelegramHelper
+			get() {
+				if (helper == null) {
+					helper = TelegramHelper()
+				}
+				return helper!!
 			}
-			return helper!!
-		}
 	}
+
+	var messageActiveTimeSec: Long = 0
 
 	private val users = ConcurrentHashMap<Int, TdApi.User>()
 	private val basicGroups = ConcurrentHashMap<Int, TdApi.BasicGroup>()
