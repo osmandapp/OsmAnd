@@ -68,7 +68,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener, ChatLiveMessagesList
 
 	private var actionButtonsListener: ActionButtonsListener? = null
 
-	private var sharingModeOn = false
+	private var sharingMode = false
 	
 	override fun onCreateView(
 		inflater: LayoutInflater,
@@ -85,7 +85,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener, ChatLiveMessagesList
 		searchBoxHeight = resources.getDimensionPixelSize(R.dimen.search_box_height)
 		searchBoxSidesMargin = resources.getDimensionPixelSize(R.dimen.content_padding_half)
 
-		sharingModeOn = settings.hasAnyChatToShareLocation()
+		sharingMode = settings.hasAnyChatToShareLocation()
 				
 		savedInstanceState?.apply {
 			selectedChats.addAll(getLongArray(SELECTED_CHATS_KEY).toSet())
@@ -174,10 +174,10 @@ class MyLocationTabFragment : Fragment(), TelegramListener, ChatLiveMessagesList
 		}
 
 		stopSharingSwitcher = mainView.findViewById<Switch>(R.id.stop_all_sharing_switcher).apply {
-			isChecked = sharingModeOn
+			isChecked = sharingMode
 			setOnCheckedChangeListener { _, isChecked ->
 				if (!isChecked) {
-					sharingModeOn = isChecked
+					sharingMode = isChecked
 					app.settings.stopSharingLocationToChats()
 					app.shareLocationHelper.stopSharingLocation()
 					updateContent()
@@ -186,9 +186,10 @@ class MyLocationTabFragment : Fragment(), TelegramListener, ChatLiveMessagesList
 		}
 
 		openOsmAndBtn = mainView.findViewById<View>(R.id.start_sharing_btn).apply {
-			visibility = if (sharingModeOn) View.VISIBLE else View.GONE
+			visibility = if (sharingMode) View.VISIBLE else View.GONE
 			setOnClickListener {
-				sharingModeOn = false
+				sharingMode = false
+				actionButtonsListener?.switchButtonsVisibility(true)
 				updateContent()
 			}
 		}
@@ -215,7 +216,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener, ChatLiveMessagesList
 	override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
 		super.onActivityResult(requestCode, resultCode, data)
 		if (requestCode == SetTimeDialogFragment.LOCATION_SHARED_REQUEST_CODE) {
-			sharingModeOn = settings.hasAnyChatToShareLocation()
+			sharingMode = settings.hasAnyChatToShareLocation()
 			clearSelection()
 			updateContent()
 		}
@@ -265,12 +266,18 @@ class MyLocationTabFragment : Fragment(), TelegramListener, ChatLiveMessagesList
 	}
 
 	fun onPrimaryBtnClick() {
-		val fm = fragmentManager ?: return
-		SetTimeDialogFragment.showInstance(fm, selectedChats, this)
+		if (selectedChats.isNotEmpty()) {
+			val fm = fragmentManager ?: return
+			SetTimeDialogFragment.showInstance(fm, selectedChats, this)
+		}
 	}
 
 	fun onSecondaryBtnClick() {
 		clearSelection()
+		if (settings.hasAnyChatToShareLocation()) {
+			sharingMode = true
+			updateContent()
+		}
 	}
 
 	private fun animateOpenOsmAndBtn(show: Boolean) {
@@ -364,11 +371,11 @@ class MyLocationTabFragment : Fragment(), TelegramListener, ChatLiveMessagesList
 
 	private fun updateSharingMode() {
 		val headerParams = imageContainer.layoutParams as AppBarLayout.LayoutParams
-		imageContainer.visibility = if (sharingModeOn) View.GONE else View.VISIBLE
-		textContainer.visibility = if (sharingModeOn) View.GONE else View.VISIBLE
-		titleContainer.visibility = if (sharingModeOn) View.VISIBLE else View.GONE
-		openOsmAndBtn.visibility = if (sharingModeOn) View.VISIBLE else View.GONE
-		headerParams.scrollFlags = if (sharingModeOn) 0 else AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL
+		imageContainer.visibility = if (sharingMode) View.GONE else View.VISIBLE
+		textContainer.visibility = if (sharingMode) View.GONE else View.VISIBLE
+		titleContainer.visibility = if (sharingMode) View.VISIBLE else View.GONE
+		openOsmAndBtn.visibility = if (sharingMode) View.VISIBLE else View.GONE
+		headerParams.scrollFlags = if (sharingMode) 0 else AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL
 		stopSharingSwitcher.isChecked = true
 		appBarScrollRange = -1
 	}
@@ -376,7 +383,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener, ChatLiveMessagesList
 	private fun updateList() {
 		val chats: MutableList<TdApi.Chat> = mutableListOf()
 		val currentUser = telegramHelper.getCurrentUser()
-		val chatList = if (sharingModeOn && settings.hasAnyChatToShareLocation()) {
+		val chatList = if (sharingMode && settings.hasAnyChatToShareLocation()) {
 			settings.getShareLocationChats()
 		} else {
 			telegramHelper.getChatListIds()
@@ -384,7 +391,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener, ChatLiveMessagesList
 		for (chatId in chatList) {
 			val chat = telegramHelper.getChat(chatId)
 			if (chat != null) {
-				if (settings.isSharingLocationToChat(chatId) && !sharingModeOn) {
+				if (settings.isSharingLocationToChat(chatId) && !sharingMode) {
 					continue
 				} else if (telegramHelper.isPrivateChat(chat)) {
 					if ((chat.type as TdApi.ChatTypePrivate).userId == currentUser?.id) {
@@ -405,7 +412,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener, ChatLiveMessagesList
 			}
 
 		override fun getItemViewType(position: Int): Int {
-			return if (settings.isSharingLocationToChat(chats[position].id) && sharingModeOn) {
+			return if (settings.isSharingLocationToChat(chats[position].id) && sharingMode) {
 				SHARE_LOCATION_CHAT
 			} else {
 				DEFAULT_CHAT
@@ -540,7 +547,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener, ChatLiveMessagesList
 		private fun removeItem(chat: TdApi.Chat) {
 			chats.remove(chat)
 			if (chats.isEmpty()) {
-				sharingModeOn = false
+				sharingMode = false
 				updateContent()
 			} else {
 				adapter.notifyDataSetChanged()
