@@ -14,7 +14,6 @@ import android.preference.PreferenceScreen;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 
-import net.osmand.IProgress;
 import net.osmand.StateChangedListener;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmAndLocationSimulation;
