@@ -290,7 +290,6 @@ class MyLocationTabFragment : Fragment(), TelegramListener, ChatLiveMessagesList
 				.setInterpolator(LinearInterpolator())
 				.start()
 		}
-
 	}
 	
 	private fun clearSelection() {
