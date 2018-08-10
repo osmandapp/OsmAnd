@@ -36,6 +36,7 @@ object OsmandFormatter {
 	fun getFormattedDuration(ctx: Context, seconds: Int, short: Boolean = false): String {
 		val hours = seconds / (60 * 60)
 		val minutes = seconds / 60 % 60
+		val secs = seconds - minutes * 60
 		if (short) {
 			return String.format(SHORT_TIME_FORMAT, hours, minutes)
 		}
@@ -47,7 +48,13 @@ object OsmandFormatter {
 				}
 				res
 			}
-			minutes > 0 -> "$minutes ${ctx.getString(R.string.shared_string_minute_short)}"
+			minutes > 0 -> {
+				var res = "$minutes ${ctx.getString(R.string.shared_string_minute_short)}"
+				if (secs > 0) {
+					res += " $secs ${ctx.getString(R.string.shared_string_second_short)}"
+				}
+				res
+			}
 			else -> "$seconds ${ctx.getString(R.string.shared_string_second_short)}"
 		}
 	}
