@@ -115,7 +115,7 @@ class SettingsDialogFragment : DialogFragment() {
 		}
 
 		mainView.findViewById<ImageView>(R.id.help_icon)
-			.setImageDrawable(uiUtils.getActiveIcon(R.drawable.ic_action_share_location))
+			.setImageDrawable(uiUtils.getActiveIcon(R.drawable.ic_action_help))
 		mainView.findViewById<View>(R.id.help_row).setOnClickListener {
 			// FIXME
 			Toast.makeText(context, "Logout help", Toast.LENGTH_SHORT).show()
@@ -175,9 +175,8 @@ class SettingsDialogFragment : DialogFragment() {
 		}
 	}
 
-	// FIXME
 	private inner class StaleLocPref : DurationPref(
-		R.drawable.ic_action_share_location,
+		R.drawable.ic_action_location_history,
 		R.string.stale_location,
 		R.string.stale_location_desc,
 		STALE_LOC_VALUES_SEC
