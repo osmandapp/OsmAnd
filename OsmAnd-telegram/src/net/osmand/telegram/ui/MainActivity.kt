@@ -10,7 +10,10 @@ import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.ListPopupWindow
+import android.view.Gravity
 import android.view.View
+import android.widget.ArrayAdapter
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
@@ -255,11 +258,52 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 		}
 		telegramHelper.init()
 	}
-
+	
+	private fun logoutTelegram(silent: Boolean = false) {
+		if (telegramHelper.getTelegramAuthorizationState() == TelegramHelper.TelegramAuthorizationState.READY) {
+			telegramHelper.logout()
+		} else if (!silent) {
+			Toast.makeText(this, R.string.not_logged_in, Toast.LENGTH_SHORT).show()
+		}
+	}
+	
 	fun closeTelegram() {
 		telegramHelper.close()
 	}
 
+	fun showOptionsPopupMenu(anchor: View) {
+		val menuList = ArrayList<String>()
+		val settings = getString(R.string.shared_string_settings)
+		val logout = getString(R.string.shared_string_logout)
+		val login = getString(R.string.shared_string_login)
+
+		menuList.add(settings)
+		@Suppress("NON_EXHAUSTIVE_WHEN")
+		when (telegramHelper.getTelegramAuthorizationState()) {
+			TelegramHelper.TelegramAuthorizationState.READY -> menuList.add(logout)
+			TelegramHelper.TelegramAuthorizationState.CLOSED -> menuList.add(login)
+		}
+
+		ListPopupWindow(this@MainActivity).apply {
+			isModal = true
+			anchorView = anchor
+			setContentWidth(AndroidUtils.getPopupMenuWidth(this@MainActivity, menuList))
+			setDropDownGravity(Gravity.END or Gravity.TOP)
+			setAdapter(ArrayAdapter(this@MainActivity, R.layout.popup_list_text_item, menuList))
+			setOnItemClickListener { _, _, position, _ ->
+				when (position) {
+					menuList.indexOf(settings) -> {
+						supportFragmentManager?.also { SettingsDialogFragment.showInstance(it) }
+					}
+					menuList.indexOf(logout) -> logoutTelegram()
+					menuList.indexOf(login) -> loginTelegram()
+				}
+				dismiss()
+			}
+			show()
+		}
+	}
+	
 	private fun runOnUi(action: (() -> Unit)) {
 		if (!paused) {
 			runOnUiThread(action)

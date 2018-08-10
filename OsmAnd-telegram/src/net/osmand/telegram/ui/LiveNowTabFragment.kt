@@ -1,6 +1,7 @@
 package net.osmand.telegram.ui
 
 import android.os.Bundle
+import android.support.design.widget.AppBarLayout
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.ListPopupWindow
@@ -47,6 +48,7 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 	private lateinit var adapter: LiveNowListAdapter
 	private lateinit var locationViewCache: UpdateLocationViewCache
 
+	private lateinit var appBarLayout: AppBarLayout
 	private lateinit var openOsmAndBtn: View
 
 	private var location: Location? = null
@@ -59,7 +61,8 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 		savedInstanceState: Bundle?
 	): View? {
 		val mainView = inflater.inflate(R.layout.fragment_live_now_tab, container, false)
-		AndroidUtils.addStatusBarPadding19v(context!!, mainView)
+		appBarLayout = mainView.findViewById<AppBarLayout>(R.id.app_bar_layout)
+		AndroidUtils.addStatusBarPadding19v(context!!, appBarLayout)
 		adapter = LiveNowListAdapter()
 		mainView.findViewById<RecyclerView>(R.id.recycler_view).apply {
 			layoutManager = LinearLayoutManager(context)
@@ -75,6 +78,12 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 				}
 			})
 		}
+
+		mainView.findViewById<ImageView>(R.id.options).apply {
+			setImageDrawable(app.uiUtils.getThemedIcon(R.drawable.ic_action_other_menu))
+			setOnClickListener { (activity as MainActivity).showOptionsPopupMenu(this) }
+		}
+		
 		openOsmAndBtn = mainView.findViewById<View>(R.id.open_osmand_btn).apply {
 			setOnClickListener {
 				activity?.packageManager?.getLaunchIntentForPackage(OsmandAidlHelper.OSMAND_PACKAGE_NAME)
