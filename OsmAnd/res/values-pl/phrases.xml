@@ -569,7 +569,7 @@
 	<string name="poi_place_farm">Gospodarstwo rolne</string>
 	<string name="poi_residential">Teren zamieszkania</string>
 
-	<string name="poi_podiatrist">Ortopeda</string>
+	<string name="poi_podiatrist">Podolog</string>
 	<string name="poi_it">Biuro IT</string>
 	<string name="poi_architect">Biuro architekta</string>
 	<string name="poi_leisure_track">Tor sportowy</string>
@@ -3885,5 +3885,18 @@
 
 <string name="poi_payment_contactless_yes">Zbliżeniowo</string>
 	<string name="poi_payment_contactless_no">Płatność zbliżeniowa nieakceptowana</string>
+
+<string name="poi_climbing_summit_log_yes">Rejestr szczytów wspinaczkowych: tak</string>
+	<string name="poi_climbing_summit_log_no">Rejestr szczytów wspinaczkowych: nie</string>
+	<string name="poi_checkpoint_type_quize">Quizy</string>
+	<string name="poi_course">Kierunek</string>
+
+	<string name="poi_hazard_nuclear">Zagrożenie nuklearne</string>
+	<string name="poi_hazard_erosion">Zagrożenie erozją</string>
+	<string name="poi_hazard_avalanche">Zagrożenie lawinowe</string>
+	<string name="poi_hazard_slippery_road">Śliska droga</string>
+	<string name="poi_hazard_flood">Zagrożenie powodziowe</string>
+	<string name="poi_hazard_minefield">Pole minowe</string>
+
 
 </resources>
