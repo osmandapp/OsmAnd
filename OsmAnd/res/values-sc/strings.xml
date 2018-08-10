@@ -3130,4 +3130,5 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="search_no_results_feedback">Perunu risultadu de chirca?
 \nDaghe·nos s\'opinione tua</string>
     <string name="commiting_way">Imbiende sa bia…</string>
-    </resources>
+    <string name="test_voice_desrc">Toca unu butone e ascurta su cummandu vocale chi li currispondet, pro identificare cummandos chi mancant o chi sunt isballiados.</string>
+</resources>

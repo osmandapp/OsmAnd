@@ -5,7 +5,6 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
-	android:layout_marginBottom="@dimen/list_item_bottom_margin"
 	android:background="?attr/selectableItemBackground"
 	android:paddingLeft="@dimen/content_padding_standard"
 	android:paddingRight="@dimen/content_padding_standard"
@@ -17,6 +16,7 @@
 		android:layout_height="wrap_content"
 		android:layout_marginEnd="@dimen/content_padding_big"
 		android:layout_marginRight="@dimen/content_padding_big"
+		android:layout_marginTop="@dimen/image_button_padding"
 		tools:src="@drawable/ic_action_live_now"
 		tools:tint="@color/icon_light"/>
 
@@ -33,16 +33,20 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:textColor="?android:textColorPrimary"
-			android:textSize="@dimen/title_text_size"
+			android:textSize="@dimen/list_item_title_text_size"
+			app:firstBaselineToTopHeight="25sp"
 			app:typeface="@string/font_roboto_regular"
 			tools:text="Some title"/>
 
-		<TextView
+		<net.osmand.telegram.ui.views.TextViewEx
 			android:id="@+id/description"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:textColor="?android:attr/textColorSecondary"
-			android:textSize="@dimen/descr_text_size"
+			android:textSize="@dimen/list_item_description_text_size"
+			app:firstBaselineToTopHeight="20sp"
+			app:lastBaselineToBottomHeight="16sp"
+			app:typeface="@string/font_roboto_regular"
 			tools:text="Some long description"/>
 
 	</LinearLayout>

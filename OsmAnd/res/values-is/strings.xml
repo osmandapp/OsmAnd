@@ -2956,4 +2956,9 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="search_no_results_description">Engar niðurstöður?
 \nSegðu okkur meira um þetta.</string>
     <string name="send_search_query">Senda leitarfyrirspurn?</string>
+    <string name="thank_you_for_feedback">Takk fyrir umsögn þína</string>
+    <string name="poi_cannot_be_found">Hnútur eða leið fannst ekki.</string>
+    <string name="search_no_results_feedback">Engar leitarniðurstöður?
+\nLáttu okkur vita</string>
+    <string name="commiting_way">Sendi leið inn…</string>
     </resources>

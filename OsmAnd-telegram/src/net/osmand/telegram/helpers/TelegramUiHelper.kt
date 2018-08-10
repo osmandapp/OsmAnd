@@ -88,6 +88,17 @@ object TelegramUiHelper {
 		else -> 0
 	}
 
+	fun getUserName(user: TdApi.User): String {
+		var name = "${user.firstName} ${user.lastName}".trim()
+		if (name.isEmpty()) {
+			name = user.username
+		}
+		if (name.isEmpty()) {
+			name = user.phoneNumber
+		}
+		return name
+	}
+
 	fun messageToLocationItem(
 		helper: TelegramHelper,
 		chat: TdApi.Chat,
@@ -129,13 +140,7 @@ object TelegramUiHelper {
 		return LocationItem().apply {
 			chatId = chat.id
 			chatTitle = chat.title
-			name = "${user.firstName} ${user.lastName}".trim()
-			if (name.isEmpty()) {
-				name = user.username
-			}
-			if (name.isEmpty()) {
-				name = user.phoneNumber
-			}
+			name = TelegramUiHelper.getUserName(user)
 			latLon = LatLon(content.location.latitude, content.location.longitude)
 			photoPath = helper.getUserPhotoPath(user)
 			placeholderId = R.drawable.img_user_picture

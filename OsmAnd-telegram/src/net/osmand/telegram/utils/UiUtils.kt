@@ -95,6 +95,10 @@ class UiUtils(private val app: TelegramApplication) {
 		return getDrawable(id, if (isLightContent) R.color.icon_light else 0)
 	}
 
+	fun getActiveIcon(@DrawableRes id: Int): Drawable? {
+		return getDrawable(id, if (isLightContent) R.color.ctrl_active_light else 0)
+	}
+
 	fun getIcon(@DrawableRes id: Int): Drawable? {
 		return getDrawable(id, 0)
 	}
