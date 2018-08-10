@@ -90,6 +90,9 @@ public class JSMediaCommandPlayerImpl extends MediaCommandPlayerImpl {
     }
 
     public static boolean isMyData(File voiceDir) {
+        if (voiceDir.getName().contains("tts")) {
+            return false;
+        }
         for (File f : voiceDir.listFiles()) {
             if (f.getName().endsWith(IndexConstants.TTSVOICE_INDEX_EXT_JS)) {
                 return true;
