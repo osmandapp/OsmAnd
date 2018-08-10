@@ -124,7 +124,7 @@ public class DownloadOsmandIndexesHelper {
 		return result;
 	}
 	
-	private static Map<String, String>  assetMapping(AssetManager assetManager) throws XmlPullParserException, IOException {
+	public static Map<String, String>  assetMapping(AssetManager assetManager) throws XmlPullParserException, IOException {
 		XmlPullParser xmlParser = XmlPullParserFactory.newInstance().newPullParser(); 
 		InputStream isBundledAssetsXml = assetManager.open("bundled_assets.xml");
 		xmlParser.setInput(isBundledAssetsXml, "UTF-8");
@@ -141,7 +141,7 @@ public class DownloadOsmandIndexesHelper {
 		return assets;
 	}
 	
-	private static void listVoiceAssets(IndexFileList result, AssetManager amanager, PackageManager pm, 
+	private static void listVoiceAssets(IndexFileList result, AssetManager amanager, PackageManager pm,
 			OsmandSettings settings) {
 		try {
 			String ext = DownloadActivityType.addVersionToExt(IndexConstants.TTSVOICE_INDEX_EXT_ZIP, IndexConstants.TTSVOICE_VERSION);

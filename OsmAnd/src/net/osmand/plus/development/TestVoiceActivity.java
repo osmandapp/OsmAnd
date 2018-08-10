@@ -251,7 +251,7 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 		addButton(ll, "Roundabouts: prepareTurn, makeTurnIn, turn:", builder(p));
 		addButton(ll, "\u25BA (5.1)  After 1250m enter a roundabout", !isJS ? builder(p).prepareRoundAbout(1250, 3, street(p,"", "I 15", "Los Angeles")) :
 				jsBuilder(p).prepareRoundAbout(1250, 3, jsStreet(p,"", "I 15", "Los Angeles")));
-		addButton(ll, "\u25BA (5.2)  In 450m enter the roundabout and take the 1st exit onto 'I 15' toward 'Los Angeles'", isJS ? builder(p).roundAbout(450, 0, 1, street(p,"", "I 15", "Los Angeles")) :
+		addButton(ll, "\u25BA (5.2)  In 450m enter the roundabout and take the 1st exit onto 'I 15' toward 'Los Angeles'", !isJS ? builder(p).roundAbout(450, 0, 1, street(p,"", "I 15", "Los Angeles")) :
 				jsBuilder(p).roundAbout(450, 0, 1, jsStreet(p,"", "I 15", "Los Angeles")));
 		addButton(ll, "\u25BA (5.3)  Roundabout: Take the 2nd exit onto 'Highway 60'", !isJS ? builder(p).roundAbout(0, 2, street(p, "Highway 60")) :
 				jsBuilder(p).roundAbout(0, 2, jsStreet(p, "Highway 60")));

@@ -67,6 +67,9 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 		useJSVoiceGuidanceListener = new StateChangedListener<Boolean>() {
 			@Override
 			public void stateChanged(Boolean change) {
+				if (change) {
+					getMyApplication().getResourceManager().copyMissingJSAssets();
+				}
 				getMyApplication().getDownloadThread().runReloadIndexFilesSilent();
 			}
 		};
