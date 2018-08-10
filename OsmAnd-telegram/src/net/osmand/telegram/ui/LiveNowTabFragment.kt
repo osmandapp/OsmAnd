@@ -18,7 +18,6 @@ import net.osmand.telegram.R
 import net.osmand.telegram.TelegramApplication
 import net.osmand.telegram.TelegramLocationProvider.TelegramCompassListener
 import net.osmand.telegram.TelegramLocationProvider.TelegramLocationListener
-import net.osmand.telegram.helpers.OsmandAidlHelper
 import net.osmand.telegram.helpers.TelegramHelper.*
 import net.osmand.telegram.helpers.TelegramUiHelper
 import net.osmand.telegram.helpers.TelegramUiHelper.ChatItem
@@ -46,7 +45,7 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 	private lateinit var adapter: LiveNowListAdapter
 	private lateinit var locationViewCache: UpdateLocationViewCache
 
-	private lateinit var openOsmAndBtn: View
+	private lateinit var openOsmAndBtn: TextView
 
 	private var location: Location? = null
 	private var heading: Float? = null
@@ -78,9 +77,9 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 
 		(activity as MainActivity).setupOptionsBtn(mainView.findViewById<ImageView>(R.id.options))
 
-		openOsmAndBtn = mainView.findViewById<View>(R.id.open_osmand_btn).apply {
+		openOsmAndBtn = mainView.findViewById<TextView>(R.id.open_osmand_btn).apply {
 			setOnClickListener {
-				activity?.packageManager?.getLaunchIntentForPackage(OsmandAidlHelper.OSMAND_PACKAGE_NAME)
+				activity?.packageManager?.getLaunchIntentForPackage(settings.appToConnectPackage)
 					?.also { intent ->
 						startActivity(intent)
 					}
@@ -96,6 +95,7 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 		telegramHelper.addIncomingMessagesListener(this)
 		telegramHelper.addFullInfoUpdatesListener(this)
 		startLocationUpdate()
+		updateOpenOsmAndIcon()
 	}
 
 	override fun onPause() {
@@ -184,13 +184,27 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 		}
 	}
 
-	fun startLocationUpdate() {
+	fun tabOpened() {
+		startLocationUpdate()
+		updateOpenOsmAndIcon()
+	}
+
+	fun tabClosed() {
+		stopLocationUpdate()
+	}
+
+	private fun updateOpenOsmAndIcon() {
+		val ic = SettingsDialogFragment.AppConnect.getWhiteIconId(settings.appToConnectPackage)
+		openOsmAndBtn.setCompoundDrawablesWithIntrinsicBounds(ic, 0, 0, 0)
+	}
+
+	private fun startLocationUpdate() {
 		app.locationProvider.addLocationListener(this)
 		app.locationProvider.addCompassListener(this)
 		updateLocationUi()
 	}
 
-	fun stopLocationUpdate() {
+	private fun stopLocationUpdate() {
 		app.locationProvider.removeLocationListener(this)
 		app.locationProvider.removeCompassListener(this)
 	}

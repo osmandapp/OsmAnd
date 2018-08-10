@@ -141,7 +141,7 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 		}
 		val photoUri = AndroidUtils.getUriForFile(app, File(photoPath))
 		app.grantUriPermission(
-			OsmandAidlHelper.OSMAND_PACKAGE_NAME,
+			app.settings.appToConnectPackage,
 			photoUri,
 			Intent.FLAG_GRANT_READ_URI_PERMISSION
 		)

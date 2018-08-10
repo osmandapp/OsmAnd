@@ -1,6 +1,5 @@
 package net.osmand.telegram.helpers
 
-import android.app.Application
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
@@ -41,22 +40,23 @@ import net.osmand.aidl.note.StartAudioRecordingParams
 import net.osmand.aidl.note.StartVideoRecordingParams
 import net.osmand.aidl.note.StopRecordingParams
 import net.osmand.aidl.note.TakePhotoNoteParams
+import net.osmand.telegram.TelegramApplication
 import java.io.File
 import java.util.*
 
-class OsmandAidlHelper(private val app: Application) {
+class OsmandAidlHelper(private val app: TelegramApplication) {
 
 	companion object {
 		const val OSMAND_FREE_PACKAGE_NAME = "net.osmand"
 		const val OSMAND_PLUS_PACKAGE_NAME = "net.osmand.plus"
-		var OSMAND_PACKAGE_NAME = OSMAND_PLUS_PACKAGE_NAME
-			private set
 	}
 
 	private var mIOsmAndAidlInterface: IOsmAndAidlInterface? = null
 
 	private var initialized: Boolean = false
 	private var bound: Boolean = false
+
+	private var boundPackage = ""
 
 	var listener: OsmandHelperListener? = null
 
@@ -127,20 +127,21 @@ class OsmandAidlHelper(private val app: Application) {
 		connectOsmand()
 	}
 
+	fun reconnectOsmand() {
+		if (boundPackage != app.settings.appToConnectPackage) {
+			cleanupResources()
+			connectOsmand()
+		}
+	}
+
 	fun connectOsmand() {
-		when {
-			bindService(OSMAND_PLUS_PACKAGE_NAME) -> {
-				OSMAND_PACKAGE_NAME = OSMAND_PLUS_PACKAGE_NAME
-				bound = true
-			}
-			bindService(OSMAND_FREE_PACKAGE_NAME) -> {
-				OSMAND_PACKAGE_NAME = OSMAND_FREE_PACKAGE_NAME
-				bound = true
-			}
-			else -> {
-				bound = false
-				initialized = true
-			}
+		if (bindService(app.settings.appToConnectPackage)) {
+			boundPackage = app.settings.appToConnectPackage
+			bound = true
+		} else {
+			boundPackage = ""
+			bound = false
+			initialized = true
 		}
 	}
 
@@ -656,7 +657,7 @@ class OsmandAidlHelper(private val app: Application) {
 	fun importGpxFromUri(gpxUri: Uri, fileName: String, color: String, show: Boolean): Boolean {
 		if (mIOsmAndAidlInterface != null) {
 			try {
-				app.grantUriPermission(OSMAND_PACKAGE_NAME, gpxUri, Intent.FLAG_GRANT_READ_URI_PERMISSION)
+				app.grantUriPermission(app.settings.appToConnectPackage, gpxUri, Intent.FLAG_GRANT_READ_URI_PERMISSION)
 				return mIOsmAndAidlInterface!!.importGpx(ImportGpxParams(gpxUri, fileName, color, show))
 			} catch (e: RemoteException) {
 				e.printStackTrace()
@@ -669,7 +670,7 @@ class OsmandAidlHelper(private val app: Application) {
 	fun navigateGpxFromUri(gpxUri: Uri, force: Boolean): Boolean {
 		if (mIOsmAndAidlInterface != null) {
 			try {
-				app.grantUriPermission(OSMAND_PACKAGE_NAME, gpxUri, Intent.FLAG_GRANT_READ_URI_PERMISSION)
+				app.grantUriPermission(app.settings.appToConnectPackage, gpxUri, Intent.FLAG_GRANT_READ_URI_PERMISSION)
 				return mIOsmAndAidlInterface!!.navigateGpx(NavigateGpxParams(gpxUri, force))
 			} catch (e: RemoteException) {
 				e.printStackTrace()

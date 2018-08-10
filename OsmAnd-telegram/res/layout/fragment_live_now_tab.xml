@@ -79,15 +79,15 @@
 			android:layout_height="wrap_content"
 			android:layout_gravity="bottom|center_horizontal"
 			android:background="@drawable/img_shadow_fab"
-			android:drawableLeft="@drawable/ic_action_osmand_plus"
 			android:drawablePadding="@dimen/content_padding_half"
-			android:drawableStart="@drawable/ic_action_osmand_plus"
 			android:gravity="center"
 			android:paddingLeft="32dp"
 			android:paddingRight="32dp"
 			android:text="@string/open_osmand"
 			android:textColor="@color/white"
-			app:typeface="@string/font_roboto_medium"/>
+			app:typeface="@string/font_roboto_medium"
+			tools:drawableLeft="@drawable/ic_action_osmand_plus"
+			tools:drawableStart="@drawable/ic_action_osmand_plus"/>
 
 	</FrameLayout>
 

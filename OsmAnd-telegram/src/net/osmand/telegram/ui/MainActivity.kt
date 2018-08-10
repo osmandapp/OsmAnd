@@ -75,8 +75,8 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 				}
 				if (pos != -1 && pos != viewPager.currentItem) {
 					when (pos) {
-						MY_LOCATION_TAB_POS -> liveNowTabFragment?.stopLocationUpdate()
-						LIVE_NOW_TAB_POS -> liveNowTabFragment?.startLocationUpdate()
+						MY_LOCATION_TAB_POS -> liveNowTabFragment?.tabClosed()
+						LIVE_NOW_TAB_POS -> liveNowTabFragment?.tabOpened()
 					}
 					viewPager.currentItem = pos
 					return@setOnNavigationItemSelectedListener true

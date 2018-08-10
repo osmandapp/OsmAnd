@@ -71,9 +71,13 @@ class SettingsDialogFragment : DialogFragment() {
 				findViewById<TextView>(R.id.title).text = appConn.title
 				if (installed) {
 					findViewById<View>(R.id.primary_btn).visibility = View.GONE
-					findViewById<RadioButton>(R.id.radio_button).visibility = View.VISIBLE
+					findViewById<RadioButton>(R.id.radio_button).apply {
+						visibility = View.VISIBLE
+						isChecked = pack == settings.appToConnectPackage
+					}
 					setOnClickListener {
-						// FIXME
+						settings.appToConnectPackage = appConn.appPackage
+						app.osmandAidlHelper.reconnectOsmand()
 						updateSelectedAppConn()
 					}
 				} else {
@@ -144,9 +148,10 @@ class SettingsDialogFragment : DialogFragment() {
 
 	private fun updateSelectedAppConn() {
 		view?.findViewById<ViewGroup>(R.id.osmand_connect_container)?.apply {
-			for (i in 0..childCount) {
+			for (i in 0 until childCount) {
 				getChildAt(i).apply {
-					// FIXME
+					findViewById<RadioButton>(R.id.radio_button).isChecked =
+							tag == settings.appToConnectPackage
 				}
 			}
 		}
@@ -221,21 +226,37 @@ class SettingsDialogFragment : DialogFragment() {
 		fun getMenuItems() = values.map { OsmandFormatter.getFormattedDuration(app, it) }
 	}
 
-	private enum class AppConnect(
+	enum class AppConnect(
 		@DrawableRes val iconId: Int,
+		@DrawableRes val whiteIconId: Int,
 		val title: String,
 		val appPackage: String
 	) {
 		OSMAND_PLUS(
 			R.drawable.ic_logo_osmand_plus,
+			R.drawable.ic_action_osmand_plus,
 			"OsmAnd+",
 			OsmandAidlHelper.OSMAND_PLUS_PACKAGE_NAME
 		),
 		OSMAND_FREE(
 			R.drawable.ic_logo_osmand_free,
+			R.drawable.ic_action_osmand_free,
 			"OsmAnd",
 			OsmandAidlHelper.OSMAND_FREE_PACKAGE_NAME
-		)
+		);
+
+		companion object {
+
+			@DrawableRes
+			fun getWhiteIconId(appPackage: String): Int {
+				for (item in values()) {
+					if (item.appPackage == appPackage) {
+						return item.whiteIconId
+					}
+				}
+				return 0
+			}
+		}
 	}
 
 	companion object {

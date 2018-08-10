@@ -1,6 +1,7 @@
 package net.osmand.telegram
 
 import android.content.Context
+import net.osmand.telegram.helpers.OsmandAidlHelper
 import net.osmand.telegram.helpers.TelegramHelper
 import net.osmand.telegram.utils.OsmandFormatter.MetricsConstants
 import net.osmand.telegram.utils.OsmandFormatter.SpeedConstants
@@ -38,6 +39,8 @@ private const val SEND_MY_LOC_INTERVAL_KEY = "send_my_loc_interval"
 private const val STALE_LOC_TIME_KEY = "stale_loc_time"
 private const val LOC_HISTORY_TIME_KEY = "loc_history_time"
 
+private const val APP_TO_CONNECT_PACKAGE_KEY = "app_to_connect_package"
+
 private const val DEFAULT_VISIBLE_TIME_SECONDS = 60 * 60L // 1 hour
 
 private const val TITLES_REPLACED_WITH_IDS = "changed_to_chat_id"
@@ -55,6 +58,8 @@ class TelegramSettings(private val app: TelegramApplication) {
 	var sendMyLocInterval = SEND_MY_LOC_VALUES_SEC[SEND_MY_LOC_DEFAULT_INDEX]
 	var staleLocTime = STALE_LOC_VALUES_SEC[STALE_LOC_DEFAULT_INDEX]
 	var locHistoryTime = LOC_HISTORY_VALUES_SEC[LOC_HISTORY_DEFAULT_INDEX]
+
+	var appToConnectPackage = OsmandAidlHelper.OSMAND_PLUS_PACKAGE_NAME
 
 	init {
 		updatePrefs()
@@ -152,6 +157,8 @@ class TelegramSettings(private val app: TelegramApplication) {
 		edit.putLong(STALE_LOC_TIME_KEY, staleLocTime)
 		edit.putLong(LOC_HISTORY_TIME_KEY, locHistoryTime)
 
+		edit.putString(APP_TO_CONNECT_PACKAGE_KEY, appToConnectPackage)
+
 		edit.apply()
 	}
 
@@ -185,6 +192,10 @@ class TelegramSettings(private val app: TelegramApplication) {
 		staleLocTime = prefs.getLong(STALE_LOC_TIME_KEY, staleLocDef)
 		val locHistoryDef = LOC_HISTORY_VALUES_SEC[LOC_HISTORY_DEFAULT_INDEX]
 		locHistoryTime = prefs.getLong(LOC_HISTORY_TIME_KEY, locHistoryDef)
+
+		appToConnectPackage = prefs.getString(
+			APP_TO_CONNECT_PACKAGE_KEY, OsmandAidlHelper.OSMAND_PLUS_PACKAGE_NAME
+		)
 	}
 
 	private fun updatePrefs() {
