@@ -68,6 +68,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import static net.osmand.plus.download.DownloadOsmandIndexesHelper.assetMapping;
+
 /**
  * Resource manager is responsible to work with all resources 
  * that could consume memory (especially with file resources).
@@ -417,6 +419,25 @@ public class ResourceManager {
 			}
 		}
 		return warnings;
+	}
+
+	public void copyMissingJSAssets() {
+		try {
+			Map<String, String> mapping = assetMapping(context.getAssets());
+			File appPath = context.getAppPath(null);
+			if (appPath.canWrite()) {
+				for (Map.Entry<String,String> entry : mapping.entrySet()) {
+					File jsFile = new File(appPath, entry.getValue());
+					if (jsFile.getParentFile().exists() && !jsFile.exists()) {
+						ResourceManager.copyAssets(context.getAssets(), entry.getKey(), jsFile);
+					}
+				}
+			}
+		} catch (XmlPullParserException e) {
+			log.error("Error while loading tts files from assets", e);
+		} catch (IOException e) {
+			log.error("Error while loading tts files from assets", e);
+		}
 	}
 	
 	public List<String> checkAssets(IProgress progress, boolean forceUpdate) {

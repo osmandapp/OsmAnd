@@ -23,7 +23,6 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.SettingsBaseActivity;
 import net.osmand.plus.activities.actions.AppModeDialog;
-import net.osmand.plus.download.DownloadOsmandIndexesHelper;
 import net.osmand.util.SunriseSunset;
 
 import java.text.SimpleDateFormat;
@@ -70,7 +69,7 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 			@Override
 			public void stateChanged(Boolean change) {
 				if (change) {
-					DownloadOsmandIndexesHelper.copyMissingJSAssets(getMyApplication());
+					getMyApplication().getResourceManager().copyMissingJSAssets();
 				}
 				getMyApplication().getDownloadThread().runReloadIndexFilesSilent();
 			}

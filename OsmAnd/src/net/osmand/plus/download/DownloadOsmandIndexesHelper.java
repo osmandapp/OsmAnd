@@ -124,27 +124,8 @@ public class DownloadOsmandIndexesHelper {
 		listVoiceAssets(result, amanager, pm, app.getSettings());
 		return result;
 	}
-
-	public static void copyMissingJSAssets(OsmandApplication app) {
-		try {
-			Map<String, String> mapping = assetMapping(app.getAssets());
-			File appPath = app.getAppPath(null);
-			if (appPath.canWrite()) {
-				for (Map.Entry<String,String> entry : mapping.entrySet()) {
-					File jsFile = new File(appPath, entry.getValue());
-					if (jsFile.getParentFile().exists() && !jsFile.exists()) {
-						ResourceManager.copyAssets(app.getAssets(), entry.getKey(), jsFile);
-					}
-				}
-			}
-		} catch (XmlPullParserException e) {
-			log.error("Error while loading tts files from assets", e);
-		} catch (IOException e) {
-			log.error("Error while loading tts files from assets", e);
-		}
-	}
 	
-	private static Map<String, String>  assetMapping(AssetManager assetManager) throws XmlPullParserException, IOException {
+	public static Map<String, String>  assetMapping(AssetManager assetManager) throws XmlPullParserException, IOException {
 		XmlPullParser xmlParser = XmlPullParserFactory.newInstance().newPullParser(); 
 		InputStream isBundledAssetsXml = assetManager.open("bundled_assets.xml");
 		xmlParser.setInput(isBundledAssetsXml, "UTF-8");

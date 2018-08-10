@@ -181,7 +181,7 @@ public class AppInitializer implements IProgress {
 			if(prevAppVersion < VERSION_2_3) {
 				startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, VERSION_2_3).commit();
 			} else if (prevAppVersion < VERSION_3_2) {
-				DownloadOsmandIndexesHelper.copyMissingJSAssets(app);
+				app.getResourceManager().copyMissingJSAssets();
 				startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, VERSION_3_2).commit();
 			}
 			startPrefs.edit().putString(VERSION_INSTALLED, Version.getFullVersion(app)).commit();
