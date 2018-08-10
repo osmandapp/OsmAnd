@@ -55,7 +55,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener, ChatLiveMessagesList
 	private lateinit var description: TextView
 	private lateinit var searchBox: FrameLayout
 	private lateinit var stopSharingSwitcher: Switch
-	private lateinit var openOsmAndBtn: View
+	private lateinit var startSharingBtn: View
 
 	private lateinit var searchBoxBg: GradientDrawable
 
@@ -166,8 +166,8 @@ class MyLocationTabFragment : Fragment(), TelegramListener, ChatLiveMessagesList
 				override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
 					super.onScrollStateChanged(recyclerView, newState)
 					when (newState) {
-						RecyclerView.SCROLL_STATE_DRAGGING -> animateOpenOsmAndBtn(false)
-						RecyclerView.SCROLL_STATE_IDLE -> animateOpenOsmAndBtn(true)
+						RecyclerView.SCROLL_STATE_DRAGGING -> animateStartSharingBtn(false)
+						RecyclerView.SCROLL_STATE_IDLE -> animateStartSharingBtn(true)
 					}
 				}
 			})
@@ -185,7 +185,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener, ChatLiveMessagesList
 			}
 		}
 
-		openOsmAndBtn = mainView.findViewById<View>(R.id.start_sharing_btn).apply {
+		startSharingBtn = mainView.findViewById<View>(R.id.start_sharing_btn).apply {
 			visibility = if (sharingMode) View.VISIBLE else View.GONE
 			setOnClickListener {
 				sharingMode = false
@@ -280,14 +280,17 @@ class MyLocationTabFragment : Fragment(), TelegramListener, ChatLiveMessagesList
 		}
 	}
 
-	private fun animateOpenOsmAndBtn(show: Boolean) {
-		val scale = if (show) 1f else 0f
-		openOsmAndBtn.animate()
-			.scaleX(scale)
-			.scaleY(scale)
-			.setDuration(200)
-			.setInterpolator(LinearInterpolator())
-			.start()
+	private fun animateStartSharingBtn(show: Boolean) {
+		if (startSharingBtn.visibility == View.VISIBLE) {
+			val scale = if (show) 1f else 0f
+			startSharingBtn.animate()
+				.scaleX(scale)
+				.scaleY(scale)
+				.setDuration(200)
+				.setInterpolator(LinearInterpolator())
+				.start()
+		}
+
 	}
 	
 	private fun clearSelection() {
@@ -374,7 +377,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener, ChatLiveMessagesList
 		imageContainer.visibility = if (sharingMode) View.GONE else View.VISIBLE
 		textContainer.visibility = if (sharingMode) View.GONE else View.VISIBLE
 		titleContainer.visibility = if (sharingMode) View.VISIBLE else View.GONE
-		openOsmAndBtn.visibility = if (sharingMode) View.VISIBLE else View.GONE
+		startSharingBtn.visibility = if (sharingMode) View.VISIBLE else View.GONE
 		headerParams.scrollFlags = if (sharingMode) 0 else AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL
 		stopSharingSwitcher.isChecked = true
 		appBarScrollRange = -1
