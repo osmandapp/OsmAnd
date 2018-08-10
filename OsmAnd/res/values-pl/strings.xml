@@ -966,7 +966,7 @@
 \n - Automatycznym przełączaniem widoku dzień/noc,
 \n - Skalowaniem map w zależności od prędkości,
 \n - Wyrównaniem map według kompasu lub kierunku ruchu,
-\n - Nagranymi lub syntezowanymi komunikatami o pasach ruchu, ograniczeniami prędkości.</string>
+\n - Nagranymi lub syntezowanymi komunikatami o pasach ruchu, ograniczeniami prędkości</string>
     <string name="select_navigation_mode">Wybierz tryb poruszania się</string>
 
 
