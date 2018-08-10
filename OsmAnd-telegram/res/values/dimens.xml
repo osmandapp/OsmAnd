@@ -27,6 +27,7 @@
 
 	<dimen name="list_item_height">56dp</dimen>
 	<dimen name="list_item_height_min">48dp</dimen>
+	<dimen name="list_item_height_big">64dp</dimen>
 
 	<dimen name="list_item_icon_size">40dp</dimen>
 	<dimen name="list_item_icon_margin_left">12dp</dimen>

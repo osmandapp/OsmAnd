@@ -216,7 +216,7 @@ class SetTimeDialogFragment : DialogFragment() {
 
 			TelegramUiHelper.setupPhoto(app, holder.icon, chat.photo?.small?.local?.path, placeholderId, false)
 			holder.title?.text = chat.title
-			holder.description?.text = "Some description" // FIXME
+			holder.description?.visibility = View.INVISIBLE
 			holder.textInArea?.apply {
 				visibility = View.VISIBLE
 				chatLivePeriods[chat.id]?.also { text = formatLivePeriod(it) }

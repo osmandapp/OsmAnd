@@ -2,6 +2,7 @@
 	<string name="logout_help_desc">How to disconnect OsmAnd Location Sharing from Telegram</string>
 	<string name="connected_account">Connected account</string>
 	<string name="shared_string_account">Account</string>
+	<string name="in_time">in %1$s</string>
 	<string name="osmand_connect">OsmAnd connect</string>
 	<string name="location_history_desc">Hide contacts that are not updated their location after the specified period of time.</string>
 	<string name="location_history">Location history</string>
@@ -10,6 +11,10 @@
 	<string name="send_my_location_desc">Set minimum interval for location sharing.</string>
 	<string name="send_my_location">Send my location</string>
 	<string name="gps_and_location">GPS &amp; location</string>
+	<string name="sharing_time">Sharing time</string>
+	<string name="stop_at">Stop at</string>
+	<string name="stop_sharing_all">Sharing is enabled (disable)</string>
+	<string name="stop_sharing_chat">Stop chat sharing</string>
 	<string name="open_osmand">Open OsmAnd</string>
 	<string name="shared_string_live">Live</string>
 	<string name="shared_string_bot">Bot</string>
