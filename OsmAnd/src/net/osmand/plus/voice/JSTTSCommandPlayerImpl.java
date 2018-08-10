@@ -323,8 +323,7 @@ public class JSTTSCommandPlayerImpl extends AbstractJSCommandPlayer {
     }
 
     public static boolean isMyData(File voiceDir) {
-        boolean isTTS = voiceDir.getName().contains("tts");
-        if (!isTTS) {
+        if (!voiceDir.getName().contains("tts")) {
             return false;
         }
         for (File f : voiceDir.listFiles()) {

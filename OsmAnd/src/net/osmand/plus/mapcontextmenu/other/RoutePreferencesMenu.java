@@ -43,6 +43,7 @@ import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.routing.RouteProvider;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.MapControlsLayer;
+import net.osmand.plus.voice.MediaCommandPlayerImpl;
 import net.osmand.router.GeneralRouter;
 import net.osmand.router.GeneralRouter.RoutingParameter;
 import net.osmand.util.Algorithms;
@@ -339,7 +340,7 @@ public class RoutePreferencesMenu {
 		if (extStorage.exists()) {
 			for (File f : extStorage.listFiles()) {
 				if (f.isDirectory()) {
-					if (addJS && hasJavaScript(f)) {
+					if ((addJS && hasJavaScript(f)) || MediaCommandPlayerImpl.isMyData(f)) {
 						setFiles.add(f.getName());
 					} else if (!addJS) {
 						setFiles.add(f.getName());
