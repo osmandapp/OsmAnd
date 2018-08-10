@@ -2981,4 +2981,5 @@
     <string name="search_no_results_feedback">¿Sin resultados de búsqueda?
 \nDenos su opinión</string>
     <string name="commiting_way">Enviando vía…</string>
-    </resources>
+    <string name="test_voice_desrc">Pulsa un botón y escucha el aviso de voz correspondiente para identificar las indicaciones que faltan o son defectuosas.</string>
+</resources>
