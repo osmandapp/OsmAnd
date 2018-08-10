@@ -243,7 +243,8 @@
 			android:text="@string/share_location"
 			android:textColor="@color/white"
 			app:typeface="@string/font_roboto_medium"
-			android:visibility="gone"/>
+			android:visibility="gone"
+			tools:visibility="visible"/>
 
 	</FrameLayout>
 	
