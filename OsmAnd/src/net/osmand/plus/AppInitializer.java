@@ -13,6 +13,7 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Build;
 import android.support.v7.app.AlertDialog;
+
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
@@ -69,6 +70,7 @@ import java.util.Locale;
 import java.util.Random;
 
 import btools.routingapp.BRouterServiceConnection;
+
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.getPendingIntent;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceLastCheck;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceLiveUpdatesOn;
@@ -84,6 +86,8 @@ public class AppInitializer implements IProgress {
 	public static final int VERSION_2_2 = 22;
 	// 23 - 2.3
 	public static final int VERSION_2_3 = 23;
+	// 32 - 3.2
+	public static final int VERSION_3_2 = 32;
 
 
 	public static final boolean TIPS_AND_TRICKS = false;
@@ -164,7 +168,7 @@ public class AppInitializer implements IProgress {
 			firstTime = true;
 			startPrefs.edit().putBoolean(FIRST_TIME_APP_RUN, true).commit();
 			startPrefs.edit().putString(VERSION_INSTALLED, Version.getFullVersion(app)).commit();
-			startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, VERSION_2_3).commit();
+			startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, VERSION_3_2).commit();
 		} else if (!Version.getFullVersion(app).equals(startPrefs.getString(VERSION_INSTALLED, ""))) {
 			prevAppVersion = startPrefs.getInt(VERSION_INSTALLED_NUMBER, 0);
 			if(prevAppVersion < VERSION_2_2) {
@@ -175,6 +179,9 @@ public class AppInitializer implements IProgress {
 			}
 			if(prevAppVersion < VERSION_2_3) {
 				startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, VERSION_2_3).commit();
+			} else if (prevAppVersion < VERSION_3_2) {
+				app.getResourceManager().copyMissingJSAssets();
+				startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, VERSION_3_2).commit();
 			}
 			startPrefs.edit().putString(VERSION_INSTALLED, Version.getFullVersion(app)).commit();
 			appVersionChanged = true;
