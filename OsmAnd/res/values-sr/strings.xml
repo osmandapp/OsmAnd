@@ -2992,4 +2992,5 @@
 \n
 \n</string>
     <string name="commiting_way">Предајем пут…</string>
-    </resources>
+    <string name="test_voice_desrc">Кликните дугме и слушајте одговарајуће гласовно навођење да би препознали недостајајућа или погрешна навођења.</string>
+</resources>

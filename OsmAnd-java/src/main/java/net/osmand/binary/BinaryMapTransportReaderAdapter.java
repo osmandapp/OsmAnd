@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.Arrays;
 
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
+import net.osmand.binary.OsmandOdb.TransportRouteSchedule;
 import net.osmand.data.TransportStop;
 import net.osmand.osm.edit.Node;
 import net.osmand.osm.edit.Way;
@@ -307,6 +308,12 @@ public class BinaryMapTransportReaderAdapter {
 			// deprecated
 //			case OsmandOdb.TransportRoute.REVERSESTOPS_FIELD_NUMBER:
 //				break;
+			case OsmandOdb.TransportRoute.SCHEDULETRIP_FIELD_NUMBER:
+				sizeL = codedIS.readRawVarint32();
+				pold = codedIS.pushLimit(sizeL);
+				dataObject.setSchedule(TransportRouteSchedule.parseFrom(codedIS));
+				codedIS.popLimit(pold);
+				break;
 			case OsmandOdb.TransportRoute.DIRECTSTOPS_FIELD_NUMBER:
 				if(onlyDescription){
 					end = true;

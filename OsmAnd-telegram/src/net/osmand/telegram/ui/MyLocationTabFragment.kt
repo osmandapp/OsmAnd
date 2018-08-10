@@ -94,7 +94,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener, ChatLiveMessagesList
 				appBarOutlineProvider = outlineProvider
 				outlineProvider = null
 			}
-			addOnOffsetChangedListener { appBar, offset ->
+			addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBar, offset ->
 				if (appBarScrollRange == -1) {
 					appBarScrollRange = appBar.totalScrollRange
 				}
@@ -105,7 +105,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener, ChatLiveMessagesList
 					adjustAppbar()
 					optionsBtn.visibility = if (collapsed) View.VISIBLE else View.GONE
 				}
-			}
+			})
 		}
 
 		userImage = mainView.findViewById<ImageView>(R.id.my_location_user_image).apply {
@@ -207,6 +207,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener, ChatLiveMessagesList
 			TelegramHelper.TelegramAuthorizationState.READY -> {
 				updateContent()
 			}
+			TelegramHelper.TelegramAuthorizationState.LOGGING_OUT,
 			TelegramHelper.TelegramAuthorizationState.CLOSED,
 			TelegramHelper.TelegramAuthorizationState.UNKNOWN -> {
 				adapter.chats = mutableListOf()

@@ -11,13 +11,12 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import net.osmand.telegram.R
 import net.osmand.telegram.TelegramApplication
 import net.osmand.telegram.helpers.OsmandAidlHelper
+import net.osmand.telegram.helpers.TelegramHelper
+import net.osmand.telegram.helpers.TelegramUiHelper
 import net.osmand.telegram.utils.AndroidUtils
 import net.osmand.telegram.utils.OsmandFormatter
 
@@ -66,12 +65,61 @@ class SettingsDialogFragment : DialogFragment() {
 
 		container = mainView.findViewById(R.id.osmand_connect_container)
 		for (appConn in AppConnect.values()) {
+			val pack = appConn.appPackage
+			val installed = AndroidUtils.isAppInstalled(context!!, pack)
 			inflater.inflate(R.layout.item_with_rb_and_btn, container, false).apply {
-				findViewById<ImageView>(R.id.icon).setImageDrawable(uiUtils.getThemedIcon(appConn.iconId))
+				findViewById<ImageView>(R.id.icon).setImageDrawable(uiUtils.getIcon(appConn.iconId))
 				findViewById<TextView>(R.id.title).text = appConn.title
-				// FIXME
+				if (installed) {
+					findViewById<View>(R.id.primary_btn).visibility = View.GONE
+					findViewById<RadioButton>(R.id.radio_button).visibility = View.VISIBLE
+					setOnClickListener {
+						// FIXME
+						updateSelectedAppConn()
+					}
+				} else {
+					findViewById<RadioButton>(R.id.radio_button).visibility = View.GONE
+					findViewById<TextView>(R.id.primary_btn).apply {
+						setText(R.string.shared_string_install)
+						setOnClickListener {
+							context?.also { ctx ->
+								startActivity(AndroidUtils.getPlayMarketIntent(ctx, pack))
+							}
+						}
+					}
+					setOnClickListener(null)
+					isClickable = false
+				}
+				tag = pack
 				container.addView(this)
 			}
+		}
+		updateSelectedAppConn()
+
+		val user = telegramHelper.getCurrentUser()
+		if (user != null) {
+			TelegramUiHelper.setupPhoto(
+				app,
+				mainView.findViewById(R.id.user_icon),
+				telegramHelper.getUserPhotoPath(user),
+				R.drawable.img_user_picture,
+				false
+			)
+			mainView.findViewById<TextView>(R.id.username).text = TelegramUiHelper.getUserName(user)
+		} else {
+			mainView.findViewById<View>(R.id.user_row).visibility = View.GONE
+		}
+
+		mainView.findViewById<View>(R.id.logout_btn).setOnClickListener {
+			logoutTelegram()
+			dismiss()
+		}
+
+		mainView.findViewById<ImageView>(R.id.help_icon)
+			.setImageDrawable(uiUtils.getActiveIcon(R.drawable.ic_action_share_location))
+		mainView.findViewById<View>(R.id.help_row).setOnClickListener {
+			// FIXME
+			Toast.makeText(context, "Logout help", Toast.LENGTH_SHORT).show()
 		}
 
 		return mainView
@@ -92,6 +140,24 @@ class SettingsDialogFragment : DialogFragment() {
 				dismiss()
 			}
 			show()
+		}
+	}
+
+	private fun updateSelectedAppConn() {
+		view?.findViewById<ViewGroup>(R.id.osmand_connect_container)?.apply {
+			for (i in 0..childCount) {
+				getChildAt(i).apply {
+					// FIXME
+				}
+			}
+		}
+	}
+
+	private fun logoutTelegram(silent: Boolean = false) {
+		if (telegramHelper.getTelegramAuthorizationState() == TelegramHelper.TelegramAuthorizationState.READY) {
+			telegramHelper.logout()
+		} else if (!silent) {
+			Toast.makeText(context, R.string.not_logged_in, Toast.LENGTH_SHORT).show()
 		}
 	}
 
@@ -163,12 +229,12 @@ class SettingsDialogFragment : DialogFragment() {
 		val appPackage: String
 	) {
 		OSMAND_PLUS(
-			R.drawable.ic_action_osmand_plus,
+			R.drawable.ic_logo_osmand_plus,
 			"OsmAnd+",
 			OsmandAidlHelper.OSMAND_PLUS_PACKAGE_NAME
 		),
 		OSMAND_FREE(
-			R.drawable.ic_action_osmand_free,
+			R.drawable.ic_logo_osmand_free,
 			"OsmAnd",
 			OsmandAidlHelper.OSMAND_FREE_PACKAGE_NAME
 		)

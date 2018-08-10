@@ -2743,7 +2743,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="one_tap_active_descr">Per frapeti markon sur la mapo, movi ĝin al komenco de la listo senmalfermante kuntekstan menuon.</string>
     <string name="one_tap_active">Aktivigi per unu frapeto</string>
     <string name="empty_state_av_notes">Fari notojn!</string>
-    <string name="empty_state_av_notes_desc">Aldoni sonajn, videajn aŭ fotajn notojn al iu ajn punkto sur la mapo per la fenestraĵo aŭ kunteksta menuo.</string>
+    <string name="empty_state_av_notes_desc">Aldonu sonajn, videajn aŭ fotajn notojn al iu ajn punkto sur la mapo per la fenestraĵo aŭ kunteksta menuo.</string>
     <string name="notes_by_date">Notoj laŭ dato</string>
     <string name="by_date">Laŭ dato</string>
     <string name="by_type">Laŭ speco</string>
@@ -2963,4 +2963,5 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="poi_cannot_be_found">Ne povis trovi nodon aŭ linion.</string>
     <string name="search_no_results_feedback">Neniuj serĉ-rezultoj?
 \nSciigu nin</string>
-    </resources>
+    <string name="test_voice_desrc">Premu butonon kaj aŭskultu rilatan voĉan sciigon por identigi mankajn aŭ erarajn sciigojn.</string>
+</resources>

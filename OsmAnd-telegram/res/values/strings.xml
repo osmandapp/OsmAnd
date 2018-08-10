@@ -1,4 +1,7 @@
 <resources>
+	<string name="logout_help_desc">How to disconnect OsmAnd Location Sharing from Telegram</string>
+	<string name="connected_account">Connected account</string>
+	<string name="shared_string_account">Account</string>
 	<string name="in_time">in %1$s</string>
 	<string name="osmand_connect">OsmAnd connect</string>
 	<string name="location_history_desc">Hide contacts that are not updated their location after the specified period of time.</string>

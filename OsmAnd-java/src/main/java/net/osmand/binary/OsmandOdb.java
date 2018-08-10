@@ -29456,6 +29456,31 @@ public final class OsmandOdb {
      * </pre>
      */
     com.google.protobuf.ByteString getGeometry();
+
+    // repeated .OsmAnd.OBF.TransportRouteSchedule scheduleTrip = 18;
+    /**
+     * <code>repeated .OsmAnd.OBF.TransportRouteSchedule scheduleTrip = 18;</code>
+     */
+    java.util.List<net.osmand.binary.OsmandOdb.TransportRouteSchedule> 
+        getScheduleTripList();
+    /**
+     * <code>repeated .OsmAnd.OBF.TransportRouteSchedule scheduleTrip = 18;</code>
+     */
+    net.osmand.binary.OsmandOdb.TransportRouteSchedule getScheduleTrip(int index);
+    /**
+     * <code>repeated .OsmAnd.OBF.TransportRouteSchedule scheduleTrip = 18;</code>
+     */
+    int getScheduleTripCount();
+    /**
+     * <code>repeated .OsmAnd.OBF.TransportRouteSchedule scheduleTrip = 18;</code>
+     */
+    java.util.List<? extends net.osmand.binary.OsmandOdb.TransportRouteScheduleOrBuilder> 
+        getScheduleTripOrBuilderList();
+    /**
+     * <code>repeated .OsmAnd.OBF.TransportRouteSchedule scheduleTrip = 18;</code>
+     */
+    net.osmand.binary.OsmandOdb.TransportRouteScheduleOrBuilder getScheduleTripOrBuilder(
+        int index);
   }
   /**
    * Protobuf type {@code OsmAnd.OBF.TransportRoute}
@@ -29569,6 +29594,14 @@ public final class OsmandOdb {
               geometry_ = input.readBytes();
               break;
             }
+            case 146: {
+              if (!((mutable_bitField0_ & 0x00000800) == 0x00000800)) {
+                scheduleTrip_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.TransportRouteSchedule>();
+                mutable_bitField0_ |= 0x00000800;
+              }
+              scheduleTrip_.add(input.readMessage(net.osmand.binary.OsmandOdb.TransportRouteSchedule.PARSER, extensionRegistry));
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -29582,6 +29615,9 @@ public final class OsmandOdb {
         }
         if (((mutable_bitField0_ & 0x00000200) == 0x00000200)) {
           reverseStops_ = java.util.Collections.unmodifiableList(reverseStops_);
+        }
+        if (((mutable_bitField0_ & 0x00000800) == 0x00000800)) {
+          scheduleTrip_ = java.util.Collections.unmodifiableList(scheduleTrip_);
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -29940,6 +29976,42 @@ public final class OsmandOdb {
       return geometry_;
     }
 
+    // repeated .OsmAnd.OBF.TransportRouteSchedule scheduleTrip = 18;
+    public static final int SCHEDULETRIP_FIELD_NUMBER = 18;
+    private java.util.List<net.osmand.binary.OsmandOdb.TransportRouteSchedule> scheduleTrip_;
+    /**
+     * <code>repeated .OsmAnd.OBF.TransportRouteSchedule scheduleTrip = 18;</code>
+     */
+    public java.util.List<net.osmand.binary.OsmandOdb.TransportRouteSchedule> getScheduleTripList() {
+      return scheduleTrip_;
+    }
+    /**
+     * <code>repeated .OsmAnd.OBF.TransportRouteSchedule scheduleTrip = 18;</code>
+     */
+    public java.util.List<? extends net.osmand.binary.OsmandOdb.TransportRouteScheduleOrBuilder> 
+        getScheduleTripOrBuilderList() {
+      return scheduleTrip_;
+    }
+    /**
+     * <code>repeated .OsmAnd.OBF.TransportRouteSchedule scheduleTrip = 18;</code>
+     */
+    public int getScheduleTripCount() {
+      return scheduleTrip_.size();
+    }
+    /**
+     * <code>repeated .OsmAnd.OBF.TransportRouteSchedule scheduleTrip = 18;</code>
+     */
+    public net.osmand.binary.OsmandOdb.TransportRouteSchedule getScheduleTrip(int index) {
+      return scheduleTrip_.get(index);
+    }
+    /**
+     * <code>repeated .OsmAnd.OBF.TransportRouteSchedule scheduleTrip = 18;</code>
+     */
+    public net.osmand.binary.OsmandOdb.TransportRouteScheduleOrBuilder getScheduleTripOrBuilder(
+        int index) {
+      return scheduleTrip_.get(index);
+    }
+
     private void initFields() {
       id_ = 0L;
       type_ = 0;
@@ -29952,6 +30024,7 @@ public final class OsmandOdb {
       directStops_ = java.util.Collections.emptyList();
       reverseStops_ = java.util.Collections.emptyList();
       geometry_ = com.google.protobuf.ByteString.EMPTY;
+      scheduleTrip_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -30014,6 +30087,9 @@ public final class OsmandOdb {
       if (((bitField0_ & 0x00000100) == 0x00000100)) {
         output.writeBytes(17, geometry_);
       }
+      for (int i = 0; i < scheduleTrip_.size(); i++) {
+        output.writeMessage(18, scheduleTrip_.get(i));
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -30066,6 +30142,10 @@ public final class OsmandOdb {
       if (((bitField0_ & 0x00000100) == 0x00000100)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(17, geometry_);
+      }
+      for (int i = 0; i < scheduleTrip_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(18, scheduleTrip_.get(i));
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -30177,6 +30257,7 @@ public final class OsmandOdb {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
           getDirectStopsFieldBuilder();
           getReverseStopsFieldBuilder();
+          getScheduleTripFieldBuilder();
         }
       }
       private static Builder create() {
@@ -30215,6 +30296,12 @@ public final class OsmandOdb {
         }
         geometry_ = com.google.protobuf.ByteString.EMPTY;
         bitField0_ = (bitField0_ & ~0x00000400);
+        if (scheduleTripBuilder_ == null) {
+          scheduleTrip_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000800);
+        } else {
+          scheduleTripBuilder_.clear();
+        }
         return this;
       }
 
@@ -30297,6 +30384,15 @@ public final class OsmandOdb {
           to_bitField0_ |= 0x00000100;
         }
         result.geometry_ = geometry_;
+        if (scheduleTripBuilder_ == null) {
+          if (((bitField0_ & 0x00000800) == 0x00000800)) {
+            scheduleTrip_ = java.util.Collections.unmodifiableList(scheduleTrip_);
+            bitField0_ = (bitField0_ & ~0x00000800);
+          }
+          result.scheduleTrip_ = scheduleTrip_;
+        } else {
+          result.scheduleTrip_ = scheduleTripBuilder_.build();
+        }
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -30393,6 +30489,32 @@ public final class OsmandOdb {
         }
         if (other.hasGeometry()) {
           setGeometry(other.getGeometry());
+        }
+        if (scheduleTripBuilder_ == null) {
+          if (!other.scheduleTrip_.isEmpty()) {
+            if (scheduleTrip_.isEmpty()) {
+              scheduleTrip_ = other.scheduleTrip_;
+              bitField0_ = (bitField0_ & ~0x00000800);
+            } else {
+              ensureScheduleTripIsMutable();
+              scheduleTrip_.addAll(other.scheduleTrip_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.scheduleTrip_.isEmpty()) {
+            if (scheduleTripBuilder_.isEmpty()) {
+              scheduleTripBuilder_.dispose();
+              scheduleTripBuilder_ = null;
+              scheduleTrip_ = other.scheduleTrip_;
+              bitField0_ = (bitField0_ & ~0x00000800);
+              scheduleTripBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getScheduleTripFieldBuilder() : null;
+            } else {
+              scheduleTripBuilder_.addAllMessages(other.scheduleTrip_);
+            }
+          }
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -31454,6 +31576,246 @@ public final class OsmandOdb {
         return this;
       }
 
+      // repeated .OsmAnd.OBF.TransportRouteSchedule scheduleTrip = 18;
+      private java.util.List<net.osmand.binary.OsmandOdb.TransportRouteSchedule> scheduleTrip_ =
+        java.util.Collections.emptyList();
+      private void ensureScheduleTripIsMutable() {
+        if (!((bitField0_ & 0x00000800) == 0x00000800)) {
+          scheduleTrip_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.TransportRouteSchedule>(scheduleTrip_);
+          bitField0_ |= 0x00000800;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+          net.osmand.binary.OsmandOdb.TransportRouteSchedule, net.osmand.binary.OsmandOdb.TransportRouteSchedule.Builder, net.osmand.binary.OsmandOdb.TransportRouteScheduleOrBuilder> scheduleTripBuilder_;
+
+      /**
+       * <code>repeated .OsmAnd.OBF.TransportRouteSchedule scheduleTrip = 18;</code>
+       */
+      public java.util.List<net.osmand.binary.OsmandOdb.TransportRouteSchedule> getScheduleTripList() {
+        if (scheduleTripBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(scheduleTrip_);
+        } else {
+          return scheduleTripBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.TransportRouteSchedule scheduleTrip = 18;</code>
+       */
+      public int getScheduleTripCount() {
+        if (scheduleTripBuilder_ == null) {
+          return scheduleTrip_.size();
+        } else {
+          return scheduleTripBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.TransportRouteSchedule scheduleTrip = 18;</code>
+       */
+      public net.osmand.binary.OsmandOdb.TransportRouteSchedule getScheduleTrip(int index) {
+        if (scheduleTripBuilder_ == null) {
+          return scheduleTrip_.get(index);
+        } else {
+          return scheduleTripBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.TransportRouteSchedule scheduleTrip = 18;</code>
+       */
+      public Builder setScheduleTrip(
+          int index, net.osmand.binary.OsmandOdb.TransportRouteSchedule value) {
+        if (scheduleTripBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureScheduleTripIsMutable();
+          scheduleTrip_.set(index, value);
+          onChanged();
+        } else {
+          scheduleTripBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.TransportRouteSchedule scheduleTrip = 18;</code>
+       */
+      public Builder setScheduleTrip(
+          int index, net.osmand.binary.OsmandOdb.TransportRouteSchedule.Builder builderForValue) {
+        if (scheduleTripBuilder_ == null) {
+          ensureScheduleTripIsMutable();
+          scheduleTrip_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          scheduleTripBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.TransportRouteSchedule scheduleTrip = 18;</code>
+       */
+      public Builder addScheduleTrip(net.osmand.binary.OsmandOdb.TransportRouteSchedule value) {
+        if (scheduleTripBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureScheduleTripIsMutable();
+          scheduleTrip_.add(value);
+          onChanged();
+        } else {
+          scheduleTripBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.TransportRouteSchedule scheduleTrip = 18;</code>
+       */
+      public Builder addScheduleTrip(
+          int index, net.osmand.binary.OsmandOdb.TransportRouteSchedule value) {
+        if (scheduleTripBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureScheduleTripIsMutable();
+          scheduleTrip_.add(index, value);
+          onChanged();
+        } else {
+          scheduleTripBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.TransportRouteSchedule scheduleTrip = 18;</code>
+       */
+      public Builder addScheduleTrip(
+          net.osmand.binary.OsmandOdb.TransportRouteSchedule.Builder builderForValue) {
+        if (scheduleTripBuilder_ == null) {
+          ensureScheduleTripIsMutable();
+          scheduleTrip_.add(builderForValue.build());
+          onChanged();
+        } else {
+          scheduleTripBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.TransportRouteSchedule scheduleTrip = 18;</code>
+       */
+      public Builder addScheduleTrip(
+          int index, net.osmand.binary.OsmandOdb.TransportRouteSchedule.Builder builderForValue) {
+        if (scheduleTripBuilder_ == null) {
+          ensureScheduleTripIsMutable();
+          scheduleTrip_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          scheduleTripBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.TransportRouteSchedule scheduleTrip = 18;</code>
+       */
+      public Builder addAllScheduleTrip(
+          java.lang.Iterable<? extends net.osmand.binary.OsmandOdb.TransportRouteSchedule> values) {
+        if (scheduleTripBuilder_ == null) {
+          ensureScheduleTripIsMutable();
+          super.addAll(values, scheduleTrip_);
+          onChanged();
+        } else {
+          scheduleTripBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.TransportRouteSchedule scheduleTrip = 18;</code>
+       */
+      public Builder clearScheduleTrip() {
+        if (scheduleTripBuilder_ == null) {
+          scheduleTrip_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000800);
+          onChanged();
+        } else {
+          scheduleTripBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.TransportRouteSchedule scheduleTrip = 18;</code>
+       */
+      public Builder removeScheduleTrip(int index) {
+        if (scheduleTripBuilder_ == null) {
+          ensureScheduleTripIsMutable();
+          scheduleTrip_.remove(index);
+          onChanged();
+        } else {
+          scheduleTripBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.TransportRouteSchedule scheduleTrip = 18;</code>
+       */
+      public net.osmand.binary.OsmandOdb.TransportRouteSchedule.Builder getScheduleTripBuilder(
+          int index) {
+        return getScheduleTripFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.TransportRouteSchedule scheduleTrip = 18;</code>
+       */
+      public net.osmand.binary.OsmandOdb.TransportRouteScheduleOrBuilder getScheduleTripOrBuilder(
+          int index) {
+        if (scheduleTripBuilder_ == null) {
+          return scheduleTrip_.get(index);  } else {
+          return scheduleTripBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.TransportRouteSchedule scheduleTrip = 18;</code>
+       */
+      public java.util.List<? extends net.osmand.binary.OsmandOdb.TransportRouteScheduleOrBuilder> 
+           getScheduleTripOrBuilderList() {
+        if (scheduleTripBuilder_ != null) {
+          return scheduleTripBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(scheduleTrip_);
+        }
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.TransportRouteSchedule scheduleTrip = 18;</code>
+       */
+      public net.osmand.binary.OsmandOdb.TransportRouteSchedule.Builder addScheduleTripBuilder() {
+        return getScheduleTripFieldBuilder().addBuilder(
+            net.osmand.binary.OsmandOdb.TransportRouteSchedule.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.TransportRouteSchedule scheduleTrip = 18;</code>
+       */
+      public net.osmand.binary.OsmandOdb.TransportRouteSchedule.Builder addScheduleTripBuilder(
+          int index) {
+        return getScheduleTripFieldBuilder().addBuilder(
+            index, net.osmand.binary.OsmandOdb.TransportRouteSchedule.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.TransportRouteSchedule scheduleTrip = 18;</code>
+       */
+      public java.util.List<net.osmand.binary.OsmandOdb.TransportRouteSchedule.Builder> 
+           getScheduleTripBuilderList() {
+        return getScheduleTripFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          net.osmand.binary.OsmandOdb.TransportRouteSchedule, net.osmand.binary.OsmandOdb.TransportRouteSchedule.Builder, net.osmand.binary.OsmandOdb.TransportRouteScheduleOrBuilder> 
+          getScheduleTripFieldBuilder() {
+        if (scheduleTripBuilder_ == null) {
+          scheduleTripBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              net.osmand.binary.OsmandOdb.TransportRouteSchedule, net.osmand.binary.OsmandOdb.TransportRouteSchedule.Builder, net.osmand.binary.OsmandOdb.TransportRouteScheduleOrBuilder>(
+                  scheduleTrip_,
+                  ((bitField0_ & 0x00000800) == 0x00000800),
+                  getParentForChildren(),
+                  isClean());
+          scheduleTrip_ = null;
+        }
+        return scheduleTripBuilder_;
+      }
+
       // @@protoc_insertion_point(builder_scope:OsmAnd.OBF.TransportRoute)
     }
 
@@ -31463,6 +31825,3075 @@ public final class OsmandOdb {
     }
 
     // @@protoc_insertion_point(class_scope:OsmAnd.OBF.TransportRoute)
+  }
+
+  public interface TransportRouteScheduleOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+
+    // repeated uint32 avgStopIntervals = 1;
+    /**
+     * <code>repeated uint32 avgStopIntervals = 1;</code>
+     *
+     * <pre>
+     * 10-seconds based intervals between stops arrivals;
+     * </pre>
+     */
+    java.util.List<java.lang.Integer> getAvgStopIntervalsList();
+    /**
+     * <code>repeated uint32 avgStopIntervals = 1;</code>
+     *
+     * <pre>
+     * 10-seconds based intervals between stops arrivals;
+     * </pre>
+     */
+    int getAvgStopIntervalsCount();
+    /**
+     * <code>repeated uint32 avgStopIntervals = 1;</code>
+     *
+     * <pre>
+     * 10-seconds based intervals between stops arrivals;
+     * </pre>
+     */
+    int getAvgStopIntervals(int index);
+
+    // repeated uint32 avgWaitIntervals = 2;
+    /**
+     * <code>repeated uint32 avgWaitIntervals = 2;</code>
+     *
+     * <pre>
+     * optional 10-seconds based (0, if non-provided or less &lt; 10 seconds)
+     * </pre>
+     */
+    java.util.List<java.lang.Integer> getAvgWaitIntervalsList();
+    /**
+     * <code>repeated uint32 avgWaitIntervals = 2;</code>
+     *
+     * <pre>
+     * optional 10-seconds based (0, if non-provided or less &lt; 10 seconds)
+     * </pre>
+     */
+    int getAvgWaitIntervalsCount();
+    /**
+     * <code>repeated uint32 avgWaitIntervals = 2;</code>
+     *
+     * <pre>
+     * optional 10-seconds based (0, if non-provided or less &lt; 10 seconds)
+     * </pre>
+     */
+    int getAvgWaitIntervals(int index);
+
+    // repeated uint32 tripIntervals = 3;
+    /**
+     * <code>repeated uint32 tripIntervals = 3;</code>
+     *
+     * <pre>
+     * 10-seconds delta based intervals for trips departing from first stop
+     * 1st trip is diff from 00:00:00
+     * </pre>
+     */
+    java.util.List<java.lang.Integer> getTripIntervalsList();
+    /**
+     * <code>repeated uint32 tripIntervals = 3;</code>
+     *
+     * <pre>
+     * 10-seconds delta based intervals for trips departing from first stop
+     * 1st trip is diff from 00:00:00
+     * </pre>
+     */
+    int getTripIntervalsCount();
+    /**
+     * <code>repeated uint32 tripIntervals = 3;</code>
+     *
+     * <pre>
+     * 10-seconds delta based intervals for trips departing from first stop
+     * 1st trip is diff from 00:00:00
+     * </pre>
+     */
+    int getTripIntervals(int index);
+
+    // repeated .OsmAnd.OBF.TransportRouteScheduleException exceptions = 8;
+    /**
+     * <code>repeated .OsmAnd.OBF.TransportRouteScheduleException exceptions = 8;</code>
+     *
+     * <pre>
+     * exceptions	
+     * </pre>
+     */
+    java.util.List<net.osmand.binary.OsmandOdb.TransportRouteScheduleException> 
+        getExceptionsList();
+    /**
+     * <code>repeated .OsmAnd.OBF.TransportRouteScheduleException exceptions = 8;</code>
+     *
+     * <pre>
+     * exceptions	
+     * </pre>
+     */
+    net.osmand.binary.OsmandOdb.TransportRouteScheduleException getExceptions(int index);
+    /**
+     * <code>repeated .OsmAnd.OBF.TransportRouteScheduleException exceptions = 8;</code>
+     *
+     * <pre>
+     * exceptions	
+     * </pre>
+     */
+    int getExceptionsCount();
+    /**
+     * <code>repeated .OsmAnd.OBF.TransportRouteScheduleException exceptions = 8;</code>
+     *
+     * <pre>
+     * exceptions	
+     * </pre>
+     */
+    java.util.List<? extends net.osmand.binary.OsmandOdb.TransportRouteScheduleExceptionOrBuilder> 
+        getExceptionsOrBuilderList();
+    /**
+     * <code>repeated .OsmAnd.OBF.TransportRouteScheduleException exceptions = 8;</code>
+     *
+     * <pre>
+     * exceptions	
+     * </pre>
+     */
+    net.osmand.binary.OsmandOdb.TransportRouteScheduleExceptionOrBuilder getExceptionsOrBuilder(
+        int index);
+  }
+  /**
+   * Protobuf type {@code OsmAnd.OBF.TransportRouteSchedule}
+   */
+  public static final class TransportRouteSchedule extends
+      com.google.protobuf.GeneratedMessage
+      implements TransportRouteScheduleOrBuilder {
+    // Use TransportRouteSchedule.newBuilder() to construct.
+    private TransportRouteSchedule(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private TransportRouteSchedule(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final TransportRouteSchedule defaultInstance;
+    public static TransportRouteSchedule getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public TransportRouteSchedule getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private TransportRouteSchedule(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              if (!((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+                avgStopIntervals_ = new java.util.ArrayList<java.lang.Integer>();
+                mutable_bitField0_ |= 0x00000001;
+              }
+              avgStopIntervals_.add(input.readUInt32());
+              break;
+            }
+            case 10: {
+              int length = input.readRawVarint32();
+              int limit = input.pushLimit(length);
+              if (!((mutable_bitField0_ & 0x00000001) == 0x00000001) && input.getBytesUntilLimit() > 0) {
+                avgStopIntervals_ = new java.util.ArrayList<java.lang.Integer>();
+                mutable_bitField0_ |= 0x00000001;
+              }
+              while (input.getBytesUntilLimit() > 0) {
+                avgStopIntervals_.add(input.readUInt32());
+              }
+              input.popLimit(limit);
+              break;
+            }
+            case 16: {
+              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+                avgWaitIntervals_ = new java.util.ArrayList<java.lang.Integer>();
+                mutable_bitField0_ |= 0x00000002;
+              }
+              avgWaitIntervals_.add(input.readUInt32());
+              break;
+            }
+            case 18: {
+              int length = input.readRawVarint32();
+              int limit = input.pushLimit(length);
+              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002) && input.getBytesUntilLimit() > 0) {
+                avgWaitIntervals_ = new java.util.ArrayList<java.lang.Integer>();
+                mutable_bitField0_ |= 0x00000002;
+              }
+              while (input.getBytesUntilLimit() > 0) {
+                avgWaitIntervals_.add(input.readUInt32());
+              }
+              input.popLimit(limit);
+              break;
+            }
+            case 24: {
+              if (!((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
+                tripIntervals_ = new java.util.ArrayList<java.lang.Integer>();
+                mutable_bitField0_ |= 0x00000004;
+              }
+              tripIntervals_.add(input.readUInt32());
+              break;
+            }
+            case 26: {
+              int length = input.readRawVarint32();
+              int limit = input.pushLimit(length);
+              if (!((mutable_bitField0_ & 0x00000004) == 0x00000004) && input.getBytesUntilLimit() > 0) {
+                tripIntervals_ = new java.util.ArrayList<java.lang.Integer>();
+                mutable_bitField0_ |= 0x00000004;
+              }
+              while (input.getBytesUntilLimit() > 0) {
+                tripIntervals_.add(input.readUInt32());
+              }
+              input.popLimit(limit);
+              break;
+            }
+            case 66: {
+              if (!((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
+                exceptions_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.TransportRouteScheduleException>();
+                mutable_bitField0_ |= 0x00000008;
+              }
+              exceptions_.add(input.readMessage(net.osmand.binary.OsmandOdb.TransportRouteScheduleException.PARSER, extensionRegistry));
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+          avgStopIntervals_ = java.util.Collections.unmodifiableList(avgStopIntervals_);
+        }
+        if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+          avgWaitIntervals_ = java.util.Collections.unmodifiableList(avgWaitIntervals_);
+        }
+        if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
+          tripIntervals_ = java.util.Collections.unmodifiableList(tripIntervals_);
+        }
+        if (((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
+          exceptions_ = java.util.Collections.unmodifiableList(exceptions_);
+        }
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return net.osmand.binary.OsmandOdb.internal_static_OsmAnd_OBF_TransportRouteSchedule_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return net.osmand.binary.OsmandOdb.internal_static_OsmAnd_OBF_TransportRouteSchedule_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              net.osmand.binary.OsmandOdb.TransportRouteSchedule.class, net.osmand.binary.OsmandOdb.TransportRouteSchedule.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<TransportRouteSchedule> PARSER =
+        new com.google.protobuf.AbstractParser<TransportRouteSchedule>() {
+      public TransportRouteSchedule parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new TransportRouteSchedule(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<TransportRouteSchedule> getParserForType() {
+      return PARSER;
+    }
+
+    // repeated uint32 avgStopIntervals = 1;
+    public static final int AVGSTOPINTERVALS_FIELD_NUMBER = 1;
+    private java.util.List<java.lang.Integer> avgStopIntervals_;
+    /**
+     * <code>repeated uint32 avgStopIntervals = 1;</code>
+     *
+     * <pre>
+     * 10-seconds based intervals between stops arrivals;
+     * </pre>
+     */
+    public java.util.List<java.lang.Integer>
+        getAvgStopIntervalsList() {
+      return avgStopIntervals_;
+    }
+    /**
+     * <code>repeated uint32 avgStopIntervals = 1;</code>
+     *
+     * <pre>
+     * 10-seconds based intervals between stops arrivals;
+     * </pre>
+     */
+    public int getAvgStopIntervalsCount() {
+      return avgStopIntervals_.size();
+    }
+    /**
+     * <code>repeated uint32 avgStopIntervals = 1;</code>
+     *
+     * <pre>
+     * 10-seconds based intervals between stops arrivals;
+     * </pre>
+     */
+    public int getAvgStopIntervals(int index) {
+      return avgStopIntervals_.get(index);
+    }
+
+    // repeated uint32 avgWaitIntervals = 2;
+    public static final int AVGWAITINTERVALS_FIELD_NUMBER = 2;
+    private java.util.List<java.lang.Integer> avgWaitIntervals_;
+    /**
+     * <code>repeated uint32 avgWaitIntervals = 2;</code>
+     *
+     * <pre>
+     * optional 10-seconds based (0, if non-provided or less &lt; 10 seconds)
+     * </pre>
+     */
+    public java.util.List<java.lang.Integer>
+        getAvgWaitIntervalsList() {
+      return avgWaitIntervals_;
+    }
+    /**
+     * <code>repeated uint32 avgWaitIntervals = 2;</code>
+     *
+     * <pre>
+     * optional 10-seconds based (0, if non-provided or less &lt; 10 seconds)
+     * </pre>
+     */
+    public int getAvgWaitIntervalsCount() {
+      return avgWaitIntervals_.size();
+    }
+    /**
+     * <code>repeated uint32 avgWaitIntervals = 2;</code>
+     *
+     * <pre>
+     * optional 10-seconds based (0, if non-provided or less &lt; 10 seconds)
+     * </pre>
+     */
+    public int getAvgWaitIntervals(int index) {
+      return avgWaitIntervals_.get(index);
+    }
+
+    // repeated uint32 tripIntervals = 3;
+    public static final int TRIPINTERVALS_FIELD_NUMBER = 3;
+    private java.util.List<java.lang.Integer> tripIntervals_;
+    /**
+     * <code>repeated uint32 tripIntervals = 3;</code>
+     *
+     * <pre>
+     * 10-seconds delta based intervals for trips departing from first stop
+     * 1st trip is diff from 00:00:00
+     * </pre>
+     */
+    public java.util.List<java.lang.Integer>
+        getTripIntervalsList() {
+      return tripIntervals_;
+    }
+    /**
+     * <code>repeated uint32 tripIntervals = 3;</code>
+     *
+     * <pre>
+     * 10-seconds delta based intervals for trips departing from first stop
+     * 1st trip is diff from 00:00:00
+     * </pre>
+     */
+    public int getTripIntervalsCount() {
+      return tripIntervals_.size();
+    }
+    /**
+     * <code>repeated uint32 tripIntervals = 3;</code>
+     *
+     * <pre>
+     * 10-seconds delta based intervals for trips departing from first stop
+     * 1st trip is diff from 00:00:00
+     * </pre>
+     */
+    public int getTripIntervals(int index) {
+      return tripIntervals_.get(index);
+    }
+
+    // repeated .OsmAnd.OBF.TransportRouteScheduleException exceptions = 8;
+    public static final int EXCEPTIONS_FIELD_NUMBER = 8;
+    private java.util.List<net.osmand.binary.OsmandOdb.TransportRouteScheduleException> exceptions_;
+    /**
+     * <code>repeated .OsmAnd.OBF.TransportRouteScheduleException exceptions = 8;</code>
+     *
+     * <pre>
+     * exceptions	
+     * </pre>
+     */
+    public java.util.List<net.osmand.binary.OsmandOdb.TransportRouteScheduleException> getExceptionsList() {
+      return exceptions_;
+    }
+    /**
+     * <code>repeated .OsmAnd.OBF.TransportRouteScheduleException exceptions = 8;</code>
+     *
+     * <pre>
+     * exceptions	
+     * </pre>
+     */
+    public java.util.List<? extends net.osmand.binary.OsmandOdb.TransportRouteScheduleExceptionOrBuilder> 
+        getExceptionsOrBuilderList() {
+      return exceptions_;
+    }
+    /**
+     * <code>repeated .OsmAnd.OBF.TransportRouteScheduleException exceptions = 8;</code>
+     *
+     * <pre>
+     * exceptions	
+     * </pre>
+     */
+    public int getExceptionsCount() {
+      return exceptions_.size();
+    }
+    /**
+     * <code>repeated .OsmAnd.OBF.TransportRouteScheduleException exceptions = 8;</code>
+     *
+     * <pre>
+     * exceptions	
+     * </pre>
+     */
+    public net.osmand.binary.OsmandOdb.TransportRouteScheduleException getExceptions(int index) {
+      return exceptions_.get(index);
+    }
+    /**
+     * <code>repeated .OsmAnd.OBF.TransportRouteScheduleException exceptions = 8;</code>
+     *
+     * <pre>
+     * exceptions	
+     * </pre>
+     */
+    public net.osmand.binary.OsmandOdb.TransportRouteScheduleExceptionOrBuilder getExceptionsOrBuilder(
+        int index) {
+      return exceptions_.get(index);
+    }
+
+    private void initFields() {
+      avgStopIntervals_ = java.util.Collections.emptyList();
+      avgWaitIntervals_ = java.util.Collections.emptyList();
+      tripIntervals_ = java.util.Collections.emptyList();
+      exceptions_ = java.util.Collections.emptyList();
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      for (int i = 0; i < avgStopIntervals_.size(); i++) {
+        output.writeUInt32(1, avgStopIntervals_.get(i));
+      }
+      for (int i = 0; i < avgWaitIntervals_.size(); i++) {
+        output.writeUInt32(2, avgWaitIntervals_.get(i));
+      }
+      for (int i = 0; i < tripIntervals_.size(); i++) {
+        output.writeUInt32(3, tripIntervals_.get(i));
+      }
+      for (int i = 0; i < exceptions_.size(); i++) {
+        output.writeMessage(8, exceptions_.get(i));
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      {
+        int dataSize = 0;
+        for (int i = 0; i < avgStopIntervals_.size(); i++) {
+          dataSize += com.google.protobuf.CodedOutputStream
+            .computeUInt32SizeNoTag(avgStopIntervals_.get(i));
+        }
+        size += dataSize;
+        size += 1 * getAvgStopIntervalsList().size();
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < avgWaitIntervals_.size(); i++) {
+          dataSize += com.google.protobuf.CodedOutputStream
+            .computeUInt32SizeNoTag(avgWaitIntervals_.get(i));
+        }
+        size += dataSize;
+        size += 1 * getAvgWaitIntervalsList().size();
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < tripIntervals_.size(); i++) {
+          dataSize += com.google.protobuf.CodedOutputStream
+            .computeUInt32SizeNoTag(tripIntervals_.get(i));
+        }
+        size += dataSize;
+        size += 1 * getTripIntervalsList().size();
+      }
+      for (int i = 0; i < exceptions_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(8, exceptions_.get(i));
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static net.osmand.binary.OsmandOdb.TransportRouteSchedule parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static net.osmand.binary.OsmandOdb.TransportRouteSchedule parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static net.osmand.binary.OsmandOdb.TransportRouteSchedule parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static net.osmand.binary.OsmandOdb.TransportRouteSchedule parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static net.osmand.binary.OsmandOdb.TransportRouteSchedule parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static net.osmand.binary.OsmandOdb.TransportRouteSchedule parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static net.osmand.binary.OsmandOdb.TransportRouteSchedule parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static net.osmand.binary.OsmandOdb.TransportRouteSchedule parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static net.osmand.binary.OsmandOdb.TransportRouteSchedule parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static net.osmand.binary.OsmandOdb.TransportRouteSchedule parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(net.osmand.binary.OsmandOdb.TransportRouteSchedule prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code OsmAnd.OBF.TransportRouteSchedule}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements net.osmand.binary.OsmandOdb.TransportRouteScheduleOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return net.osmand.binary.OsmandOdb.internal_static_OsmAnd_OBF_TransportRouteSchedule_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return net.osmand.binary.OsmandOdb.internal_static_OsmAnd_OBF_TransportRouteSchedule_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                net.osmand.binary.OsmandOdb.TransportRouteSchedule.class, net.osmand.binary.OsmandOdb.TransportRouteSchedule.Builder.class);
+      }
+
+      // Construct using net.osmand.binary.OsmandOdb.TransportRouteSchedule.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getExceptionsFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        avgStopIntervals_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000001);
+        avgWaitIntervals_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000002);
+        tripIntervals_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000004);
+        if (exceptionsBuilder_ == null) {
+          exceptions_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000008);
+        } else {
+          exceptionsBuilder_.clear();
+        }
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return net.osmand.binary.OsmandOdb.internal_static_OsmAnd_OBF_TransportRouteSchedule_descriptor;
+      }
+
+      public net.osmand.binary.OsmandOdb.TransportRouteSchedule getDefaultInstanceForType() {
+        return net.osmand.binary.OsmandOdb.TransportRouteSchedule.getDefaultInstance();
+      }
+
+      public net.osmand.binary.OsmandOdb.TransportRouteSchedule build() {
+        net.osmand.binary.OsmandOdb.TransportRouteSchedule result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public net.osmand.binary.OsmandOdb.TransportRouteSchedule buildPartial() {
+        net.osmand.binary.OsmandOdb.TransportRouteSchedule result = new net.osmand.binary.OsmandOdb.TransportRouteSchedule(this);
+        int from_bitField0_ = bitField0_;
+        if (((bitField0_ & 0x00000001) == 0x00000001)) {
+          avgStopIntervals_ = java.util.Collections.unmodifiableList(avgStopIntervals_);
+          bitField0_ = (bitField0_ & ~0x00000001);
+        }
+        result.avgStopIntervals_ = avgStopIntervals_;
+        if (((bitField0_ & 0x00000002) == 0x00000002)) {
+          avgWaitIntervals_ = java.util.Collections.unmodifiableList(avgWaitIntervals_);
+          bitField0_ = (bitField0_ & ~0x00000002);
+        }
+        result.avgWaitIntervals_ = avgWaitIntervals_;
+        if (((bitField0_ & 0x00000004) == 0x00000004)) {
+          tripIntervals_ = java.util.Collections.unmodifiableList(tripIntervals_);
+          bitField0_ = (bitField0_ & ~0x00000004);
+        }
+        result.tripIntervals_ = tripIntervals_;
+        if (exceptionsBuilder_ == null) {
+          if (((bitField0_ & 0x00000008) == 0x00000008)) {
+            exceptions_ = java.util.Collections.unmodifiableList(exceptions_);
+            bitField0_ = (bitField0_ & ~0x00000008);
+          }
+          result.exceptions_ = exceptions_;
+        } else {
+          result.exceptions_ = exceptionsBuilder_.build();
+        }
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof net.osmand.binary.OsmandOdb.TransportRouteSchedule) {
+          return mergeFrom((net.osmand.binary.OsmandOdb.TransportRouteSchedule)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(net.osmand.binary.OsmandOdb.TransportRouteSchedule other) {
+        if (other == net.osmand.binary.OsmandOdb.TransportRouteSchedule.getDefaultInstance()) return this;
+        if (!other.avgStopIntervals_.isEmpty()) {
+          if (avgStopIntervals_.isEmpty()) {
+            avgStopIntervals_ = other.avgStopIntervals_;
+            bitField0_ = (bitField0_ & ~0x00000001);
+          } else {
+            ensureAvgStopIntervalsIsMutable();
+            avgStopIntervals_.addAll(other.avgStopIntervals_);
+          }
+          onChanged();
+        }
+        if (!other.avgWaitIntervals_.isEmpty()) {
+          if (avgWaitIntervals_.isEmpty()) {
+            avgWaitIntervals_ = other.avgWaitIntervals_;
+            bitField0_ = (bitField0_ & ~0x00000002);
+          } else {
+            ensureAvgWaitIntervalsIsMutable();
+            avgWaitIntervals_.addAll(other.avgWaitIntervals_);
+          }
+          onChanged();
+        }
+        if (!other.tripIntervals_.isEmpty()) {
+          if (tripIntervals_.isEmpty()) {
+            tripIntervals_ = other.tripIntervals_;
+            bitField0_ = (bitField0_ & ~0x00000004);
+          } else {
+            ensureTripIntervalsIsMutable();
+            tripIntervals_.addAll(other.tripIntervals_);
+          }
+          onChanged();
+        }
+        if (exceptionsBuilder_ == null) {
+          if (!other.exceptions_.isEmpty()) {
+            if (exceptions_.isEmpty()) {
+              exceptions_ = other.exceptions_;
+              bitField0_ = (bitField0_ & ~0x00000008);
+            } else {
+              ensureExceptionsIsMutable();
+              exceptions_.addAll(other.exceptions_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.exceptions_.isEmpty()) {
+            if (exceptionsBuilder_.isEmpty()) {
+              exceptionsBuilder_.dispose();
+              exceptionsBuilder_ = null;
+              exceptions_ = other.exceptions_;
+              bitField0_ = (bitField0_ & ~0x00000008);
+              exceptionsBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getExceptionsFieldBuilder() : null;
+            } else {
+              exceptionsBuilder_.addAllMessages(other.exceptions_);
+            }
+          }
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        net.osmand.binary.OsmandOdb.TransportRouteSchedule parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (net.osmand.binary.OsmandOdb.TransportRouteSchedule) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      // repeated uint32 avgStopIntervals = 1;
+      private java.util.List<java.lang.Integer> avgStopIntervals_ = java.util.Collections.emptyList();
+      private void ensureAvgStopIntervalsIsMutable() {
+        if (!((bitField0_ & 0x00000001) == 0x00000001)) {
+          avgStopIntervals_ = new java.util.ArrayList<java.lang.Integer>(avgStopIntervals_);
+          bitField0_ |= 0x00000001;
+         }
+      }
+      /**
+       * <code>repeated uint32 avgStopIntervals = 1;</code>
+       *
+       * <pre>
+       * 10-seconds based intervals between stops arrivals;
+       * </pre>
+       */
+      public java.util.List<java.lang.Integer>
+          getAvgStopIntervalsList() {
+        return java.util.Collections.unmodifiableList(avgStopIntervals_);
+      }
+      /**
+       * <code>repeated uint32 avgStopIntervals = 1;</code>
+       *
+       * <pre>
+       * 10-seconds based intervals between stops arrivals;
+       * </pre>
+       */
+      public int getAvgStopIntervalsCount() {
+        return avgStopIntervals_.size();
+      }
+      /**
+       * <code>repeated uint32 avgStopIntervals = 1;</code>
+       *
+       * <pre>
+       * 10-seconds based intervals between stops arrivals;
+       * </pre>
+       */
+      public int getAvgStopIntervals(int index) {
+        return avgStopIntervals_.get(index);
+      }
+      /**
+       * <code>repeated uint32 avgStopIntervals = 1;</code>
+       *
+       * <pre>
+       * 10-seconds based intervals between stops arrivals;
+       * </pre>
+       */
+      public Builder setAvgStopIntervals(
+          int index, int value) {
+        ensureAvgStopIntervalsIsMutable();
+        avgStopIntervals_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated uint32 avgStopIntervals = 1;</code>
+       *
+       * <pre>
+       * 10-seconds based intervals between stops arrivals;
+       * </pre>
+       */
+      public Builder addAvgStopIntervals(int value) {
+        ensureAvgStopIntervalsIsMutable();
+        avgStopIntervals_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated uint32 avgStopIntervals = 1;</code>
+       *
+       * <pre>
+       * 10-seconds based intervals between stops arrivals;
+       * </pre>
+       */
+      public Builder addAllAvgStopIntervals(
+          java.lang.Iterable<? extends java.lang.Integer> values) {
+        ensureAvgStopIntervalsIsMutable();
+        super.addAll(values, avgStopIntervals_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated uint32 avgStopIntervals = 1;</code>
+       *
+       * <pre>
+       * 10-seconds based intervals between stops arrivals;
+       * </pre>
+       */
+      public Builder clearAvgStopIntervals() {
+        avgStopIntervals_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000001);
+        onChanged();
+        return this;
+      }
+
+      // repeated uint32 avgWaitIntervals = 2;
+      private java.util.List<java.lang.Integer> avgWaitIntervals_ = java.util.Collections.emptyList();
+      private void ensureAvgWaitIntervalsIsMutable() {
+        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
+          avgWaitIntervals_ = new java.util.ArrayList<java.lang.Integer>(avgWaitIntervals_);
+          bitField0_ |= 0x00000002;
+         }
+      }
+      /**
+       * <code>repeated uint32 avgWaitIntervals = 2;</code>
+       *
+       * <pre>
+       * optional 10-seconds based (0, if non-provided or less &lt; 10 seconds)
+       * </pre>
+       */
+      public java.util.List<java.lang.Integer>
+          getAvgWaitIntervalsList() {
+        return java.util.Collections.unmodifiableList(avgWaitIntervals_);
+      }
+      /**
+       * <code>repeated uint32 avgWaitIntervals = 2;</code>
+       *
+       * <pre>
+       * optional 10-seconds based (0, if non-provided or less &lt; 10 seconds)
+       * </pre>
+       */
+      public int getAvgWaitIntervalsCount() {
+        return avgWaitIntervals_.size();
+      }
+      /**
+       * <code>repeated uint32 avgWaitIntervals = 2;</code>
+       *
+       * <pre>
+       * optional 10-seconds based (0, if non-provided or less &lt; 10 seconds)
+       * </pre>
+       */
+      public int getAvgWaitIntervals(int index) {
+        return avgWaitIntervals_.get(index);
+      }
+      /**
+       * <code>repeated uint32 avgWaitIntervals = 2;</code>
+       *
+       * <pre>
+       * optional 10-seconds based (0, if non-provided or less &lt; 10 seconds)
+       * </pre>
+       */
+      public Builder setAvgWaitIntervals(
+          int index, int value) {
+        ensureAvgWaitIntervalsIsMutable();
+        avgWaitIntervals_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated uint32 avgWaitIntervals = 2;</code>
+       *
+       * <pre>
+       * optional 10-seconds based (0, if non-provided or less &lt; 10 seconds)
+       * </pre>
+       */
+      public Builder addAvgWaitIntervals(int value) {
+        ensureAvgWaitIntervalsIsMutable();
+        avgWaitIntervals_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated uint32 avgWaitIntervals = 2;</code>
+       *
+       * <pre>
+       * optional 10-seconds based (0, if non-provided or less &lt; 10 seconds)
+       * </pre>
+       */
+      public Builder addAllAvgWaitIntervals(
+          java.lang.Iterable<? extends java.lang.Integer> values) {
+        ensureAvgWaitIntervalsIsMutable();
+        super.addAll(values, avgWaitIntervals_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated uint32 avgWaitIntervals = 2;</code>
+       *
+       * <pre>
+       * optional 10-seconds based (0, if non-provided or less &lt; 10 seconds)
+       * </pre>
+       */
+      public Builder clearAvgWaitIntervals() {
+        avgWaitIntervals_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000002);
+        onChanged();
+        return this;
+      }
+
+      // repeated uint32 tripIntervals = 3;
+      private java.util.List<java.lang.Integer> tripIntervals_ = java.util.Collections.emptyList();
+      private void ensureTripIntervalsIsMutable() {
+        if (!((bitField0_ & 0x00000004) == 0x00000004)) {
+          tripIntervals_ = new java.util.ArrayList<java.lang.Integer>(tripIntervals_);
+          bitField0_ |= 0x00000004;
+         }
+      }
+      /**
+       * <code>repeated uint32 tripIntervals = 3;</code>
+       *
+       * <pre>
+       * 10-seconds delta based intervals for trips departing from first stop
+       * 1st trip is diff from 00:00:00
+       * </pre>
+       */
+      public java.util.List<java.lang.Integer>
+          getTripIntervalsList() {
+        return java.util.Collections.unmodifiableList(tripIntervals_);
+      }
+      /**
+       * <code>repeated uint32 tripIntervals = 3;</code>
+       *
+       * <pre>
+       * 10-seconds delta based intervals for trips departing from first stop
+       * 1st trip is diff from 00:00:00
+       * </pre>
+       */
+      public int getTripIntervalsCount() {
+        return tripIntervals_.size();
+      }
+      /**
+       * <code>repeated uint32 tripIntervals = 3;</code>
+       *
+       * <pre>
+       * 10-seconds delta based intervals for trips departing from first stop
+       * 1st trip is diff from 00:00:00
+       * </pre>
+       */
+      public int getTripIntervals(int index) {
+        return tripIntervals_.get(index);
+      }
+      /**
+       * <code>repeated uint32 tripIntervals = 3;</code>
+       *
+       * <pre>
+       * 10-seconds delta based intervals for trips departing from first stop
+       * 1st trip is diff from 00:00:00
+       * </pre>
+       */
+      public Builder setTripIntervals(
+          int index, int value) {
+        ensureTripIntervalsIsMutable();
+        tripIntervals_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated uint32 tripIntervals = 3;</code>
+       *
+       * <pre>
+       * 10-seconds delta based intervals for trips departing from first stop
+       * 1st trip is diff from 00:00:00
+       * </pre>
+       */
+      public Builder addTripIntervals(int value) {
+        ensureTripIntervalsIsMutable();
+        tripIntervals_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated uint32 tripIntervals = 3;</code>
+       *
+       * <pre>
+       * 10-seconds delta based intervals for trips departing from first stop
+       * 1st trip is diff from 00:00:00
+       * </pre>
+       */
+      public Builder addAllTripIntervals(
+          java.lang.Iterable<? extends java.lang.Integer> values) {
+        ensureTripIntervalsIsMutable();
+        super.addAll(values, tripIntervals_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated uint32 tripIntervals = 3;</code>
+       *
+       * <pre>
+       * 10-seconds delta based intervals for trips departing from first stop
+       * 1st trip is diff from 00:00:00
+       * </pre>
+       */
+      public Builder clearTripIntervals() {
+        tripIntervals_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000004);
+        onChanged();
+        return this;
+      }
+
+      // repeated .OsmAnd.OBF.TransportRouteScheduleException exceptions = 8;
+      private java.util.List<net.osmand.binary.OsmandOdb.TransportRouteScheduleException> exceptions_ =
+        java.util.Collections.emptyList();
+      private void ensureExceptionsIsMutable() {
+        if (!((bitField0_ & 0x00000008) == 0x00000008)) {
+          exceptions_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.TransportRouteScheduleException>(exceptions_);
+          bitField0_ |= 0x00000008;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+          net.osmand.binary.OsmandOdb.TransportRouteScheduleException, net.osmand.binary.OsmandOdb.TransportRouteScheduleException.Builder, net.osmand.binary.OsmandOdb.TransportRouteScheduleExceptionOrBuilder> exceptionsBuilder_;
+
+      /**
+       * <code>repeated .OsmAnd.OBF.TransportRouteScheduleException exceptions = 8;</code>
+       *
+       * <pre>
+       * exceptions	
+       * </pre>
+       */
+      public java.util.List<net.osmand.binary.OsmandOdb.TransportRouteScheduleException> getExceptionsList() {
+        if (exceptionsBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(exceptions_);
+        } else {
+          return exceptionsBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.TransportRouteScheduleException exceptions = 8;</code>
+       *
+       * <pre>
+       * exceptions	
+       * </pre>
+       */
+      public int getExceptionsCount() {
+        if (exceptionsBuilder_ == null) {
+          return exceptions_.size();
+        } else {
+          return exceptionsBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.TransportRouteScheduleException exceptions = 8;</code>
+       *
+       * <pre>
+       * exceptions	
+       * </pre>
+       */
+      public net.osmand.binary.OsmandOdb.TransportRouteScheduleException getExceptions(int index) {
+        if (exceptionsBuilder_ == null) {
+          return exceptions_.get(index);
+        } else {
+          return exceptionsBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.TransportRouteScheduleException exceptions = 8;</code>
+       *
+       * <pre>
+       * exceptions	
+       * </pre>
+       */
+      public Builder setExceptions(
+          int index, net.osmand.binary.OsmandOdb.TransportRouteScheduleException value) {
+        if (exceptionsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureExceptionsIsMutable();
+          exceptions_.set(index, value);
+          onChanged();
+        } else {
+          exceptionsBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.TransportRouteScheduleException exceptions = 8;</code>
+       *
+       * <pre>
+       * exceptions	
+       * </pre>
+       */
+      public Builder setExceptions(
+          int index, net.osmand.binary.OsmandOdb.TransportRouteScheduleException.Builder builderForValue) {
+        if (exceptionsBuilder_ == null) {
+          ensureExceptionsIsMutable();
+          exceptions_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          exceptionsBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.TransportRouteScheduleException exceptions = 8;</code>
+       *
+       * <pre>
+       * exceptions	
+       * </pre>
+       */
+      public Builder addExceptions(net.osmand.binary.OsmandOdb.TransportRouteScheduleException value) {
+        if (exceptionsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureExceptionsIsMutable();
+          exceptions_.add(value);
+          onChanged();
+        } else {
+          exceptionsBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.TransportRouteScheduleException exceptions = 8;</code>
+       *
+       * <pre>
+       * exceptions	
+       * </pre>
+       */
+      public Builder addExceptions(
+          int index, net.osmand.binary.OsmandOdb.TransportRouteScheduleException value) {
+        if (exceptionsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureExceptionsIsMutable();
+          exceptions_.add(index, value);
+          onChanged();
+        } else {
+          exceptionsBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.TransportRouteScheduleException exceptions = 8;</code>
+       *
+       * <pre>
+       * exceptions	
+       * </pre>
+       */
+      public Builder addExceptions(
+          net.osmand.binary.OsmandOdb.TransportRouteScheduleException.Builder builderForValue) {
+        if (exceptionsBuilder_ == null) {
+          ensureExceptionsIsMutable();
+          exceptions_.add(builderForValue.build());
+          onChanged();
+        } else {
+          exceptionsBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.TransportRouteScheduleException exceptions = 8;</code>
+       *
+       * <pre>
+       * exceptions	
+       * </pre>
+       */
+      public Builder addExceptions(
+          int index, net.osmand.binary.OsmandOdb.TransportRouteScheduleException.Builder builderForValue) {
+        if (exceptionsBuilder_ == null) {
+          ensureExceptionsIsMutable();
+          exceptions_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          exceptionsBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.TransportRouteScheduleException exceptions = 8;</code>
+       *
+       * <pre>
+       * exceptions	
+       * </pre>
+       */
+      public Builder addAllExceptions(
+          java.lang.Iterable<? extends net.osmand.binary.OsmandOdb.TransportRouteScheduleException> values) {
+        if (exceptionsBuilder_ == null) {
+          ensureExceptionsIsMutable();
+          super.addAll(values, exceptions_);
+          onChanged();
+        } else {
+          exceptionsBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.TransportRouteScheduleException exceptions = 8;</code>
+       *
+       * <pre>
+       * exceptions	
+       * </pre>
+       */
+      public Builder clearExceptions() {
+        if (exceptionsBuilder_ == null) {
+          exceptions_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000008);
+          onChanged();
+        } else {
+          exceptionsBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.TransportRouteScheduleException exceptions = 8;</code>
+       *
+       * <pre>
+       * exceptions	
+       * </pre>
+       */
+      public Builder removeExceptions(int index) {
+        if (exceptionsBuilder_ == null) {
+          ensureExceptionsIsMutable();
+          exceptions_.remove(index);
+          onChanged();
+        } else {
+          exceptionsBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.TransportRouteScheduleException exceptions = 8;</code>
+       *
+       * <pre>
+       * exceptions	
+       * </pre>
+       */
+      public net.osmand.binary.OsmandOdb.TransportRouteScheduleException.Builder getExceptionsBuilder(
+          int index) {
+        return getExceptionsFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.TransportRouteScheduleException exceptions = 8;</code>
+       *
+       * <pre>
+       * exceptions	
+       * </pre>
+       */
+      public net.osmand.binary.OsmandOdb.TransportRouteScheduleExceptionOrBuilder getExceptionsOrBuilder(
+          int index) {
+        if (exceptionsBuilder_ == null) {
+          return exceptions_.get(index);  } else {
+          return exceptionsBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.TransportRouteScheduleException exceptions = 8;</code>
+       *
+       * <pre>
+       * exceptions	
+       * </pre>
+       */
+      public java.util.List<? extends net.osmand.binary.OsmandOdb.TransportRouteScheduleExceptionOrBuilder> 
+           getExceptionsOrBuilderList() {
+        if (exceptionsBuilder_ != null) {
+          return exceptionsBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(exceptions_);
+        }
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.TransportRouteScheduleException exceptions = 8;</code>
+       *
+       * <pre>
+       * exceptions	
+       * </pre>
+       */
+      public net.osmand.binary.OsmandOdb.TransportRouteScheduleException.Builder addExceptionsBuilder() {
+        return getExceptionsFieldBuilder().addBuilder(
+            net.osmand.binary.OsmandOdb.TransportRouteScheduleException.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.TransportRouteScheduleException exceptions = 8;</code>
+       *
+       * <pre>
+       * exceptions	
+       * </pre>
+       */
+      public net.osmand.binary.OsmandOdb.TransportRouteScheduleException.Builder addExceptionsBuilder(
+          int index) {
+        return getExceptionsFieldBuilder().addBuilder(
+            index, net.osmand.binary.OsmandOdb.TransportRouteScheduleException.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .OsmAnd.OBF.TransportRouteScheduleException exceptions = 8;</code>
+       *
+       * <pre>
+       * exceptions	
+       * </pre>
+       */
+      public java.util.List<net.osmand.binary.OsmandOdb.TransportRouteScheduleException.Builder> 
+           getExceptionsBuilderList() {
+        return getExceptionsFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          net.osmand.binary.OsmandOdb.TransportRouteScheduleException, net.osmand.binary.OsmandOdb.TransportRouteScheduleException.Builder, net.osmand.binary.OsmandOdb.TransportRouteScheduleExceptionOrBuilder> 
+          getExceptionsFieldBuilder() {
+        if (exceptionsBuilder_ == null) {
+          exceptionsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              net.osmand.binary.OsmandOdb.TransportRouteScheduleException, net.osmand.binary.OsmandOdb.TransportRouteScheduleException.Builder, net.osmand.binary.OsmandOdb.TransportRouteScheduleExceptionOrBuilder>(
+                  exceptions_,
+                  ((bitField0_ & 0x00000008) == 0x00000008),
+                  getParentForChildren(),
+                  isClean());
+          exceptions_ = null;
+        }
+        return exceptionsBuilder_;
+      }
+
+      // @@protoc_insertion_point(builder_scope:OsmAnd.OBF.TransportRouteSchedule)
+    }
+
+    static {
+      defaultInstance = new TransportRouteSchedule(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:OsmAnd.OBF.TransportRouteSchedule)
+  }
+
+  public interface TransportRouteScheduleExceptionOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+
+    // repeated uint32 tripIndexes = 1;
+    /**
+     * <code>repeated uint32 tripIndexes = 1;</code>
+     *
+     * <pre>
+     * provided if exception applicable to the trips
+     * </pre>
+     */
+    java.util.List<java.lang.Integer> getTripIndexesList();
+    /**
+     * <code>repeated uint32 tripIndexes = 1;</code>
+     *
+     * <pre>
+     * provided if exception applicable to the trips
+     * </pre>
+     */
+    int getTripIndexesCount();
+    /**
+     * <code>repeated uint32 tripIndexes = 1;</code>
+     *
+     * <pre>
+     * provided if exception applicable to the trips
+     * </pre>
+     */
+    int getTripIndexes(int index);
+
+    // repeated uint32 stopIndexes = 2;
+    /**
+     * <code>repeated uint32 stopIndexes = 2;</code>
+     *
+     * <pre>
+     * provided if exception applicable to the stop
+     * </pre>
+     */
+    java.util.List<java.lang.Integer> getStopIndexesList();
+    /**
+     * <code>repeated uint32 stopIndexes = 2;</code>
+     *
+     * <pre>
+     * provided if exception applicable to the stop
+     * </pre>
+     */
+    int getStopIndexesCount();
+    /**
+     * <code>repeated uint32 stopIndexes = 2;</code>
+     *
+     * <pre>
+     * provided if exception applicable to the stop
+     * </pre>
+     */
+    int getStopIndexes(int index);
+
+    // optional bool available = 3;
+    /**
+     * <code>optional bool available = 3;</code>
+     *
+     * <pre>
+     * indicates whether the trip or stop available in certain restriction (default true)
+     * </pre>
+     */
+    boolean hasAvailable();
+    /**
+     * <code>optional bool available = 3;</code>
+     *
+     * <pre>
+     * indicates whether the trip or stop available in certain restriction (default true)
+     * </pre>
+     */
+    boolean getAvailable();
+
+    // repeated uint32 delayArrival = 5;
+    /**
+     * <code>repeated uint32 delayArrival = 5;</code>
+     *
+     * <pre>
+     * if 1 number is provided, the delay is applicable to all trips/stops, otherwise it has numbers for each route or stop
+     * delay is measured in X * 10 seconds
+     * </pre>
+     */
+    java.util.List<java.lang.Integer> getDelayArrivalList();
+    /**
+     * <code>repeated uint32 delayArrival = 5;</code>
+     *
+     * <pre>
+     * if 1 number is provided, the delay is applicable to all trips/stops, otherwise it has numbers for each route or stop
+     * delay is measured in X * 10 seconds
+     * </pre>
+     */
+    int getDelayArrivalCount();
+    /**
+     * <code>repeated uint32 delayArrival = 5;</code>
+     *
+     * <pre>
+     * if 1 number is provided, the delay is applicable to all trips/stops, otherwise it has numbers for each route or stop
+     * delay is measured in X * 10 seconds
+     * </pre>
+     */
+    int getDelayArrival(int index);
+
+    // repeated int32 deltaWaitInterval = 6;
+    /**
+     * <code>repeated int32 deltaWaitInterval = 6;</code>
+     */
+    java.util.List<java.lang.Integer> getDeltaWaitIntervalList();
+    /**
+     * <code>repeated int32 deltaWaitInterval = 6;</code>
+     */
+    int getDeltaWaitIntervalCount();
+    /**
+     * <code>repeated int32 deltaWaitInterval = 6;</code>
+     */
+    int getDeltaWaitInterval(int index);
+
+    // repeated uint32 dayOfWeekRestriction = 7;
+    /**
+     * <code>repeated uint32 dayOfWeekRestriction = 7;</code>
+     *
+     * <pre>
+     * day of week exceptions, Monday - 0, Sunday - 6
+     * </pre>
+     */
+    java.util.List<java.lang.Integer> getDayOfWeekRestrictionList();
+    /**
+     * <code>repeated uint32 dayOfWeekRestriction = 7;</code>
+     *
+     * <pre>
+     * day of week exceptions, Monday - 0, Sunday - 6
+     * </pre>
+     */
+    int getDayOfWeekRestrictionCount();
+    /**
+     * <code>repeated uint32 dayOfWeekRestriction = 7;</code>
+     *
+     * <pre>
+     * day of week exceptions, Monday - 0, Sunday - 6
+     * </pre>
+     */
+    int getDayOfWeekRestriction(int index);
+
+    // repeated uint32 dayOfYearRestriction = 8;
+    /**
+     * <code>repeated uint32 dayOfYearRestriction = 8;</code>
+     *
+     * <pre>
+     * day of year exceptions 01.01.2000 - 0, 01.02.2000 - 1
+     * </pre>
+     */
+    java.util.List<java.lang.Integer> getDayOfYearRestrictionList();
+    /**
+     * <code>repeated uint32 dayOfYearRestriction = 8;</code>
+     *
+     * <pre>
+     * day of year exceptions 01.01.2000 - 0, 01.02.2000 - 1
+     * </pre>
+     */
+    int getDayOfYearRestrictionCount();
+    /**
+     * <code>repeated uint32 dayOfYearRestriction = 8;</code>
+     *
+     * <pre>
+     * day of year exceptions 01.01.2000 - 0, 01.02.2000 - 1
+     * </pre>
+     */
+    int getDayOfYearRestriction(int index);
+  }
+  /**
+   * Protobuf type {@code OsmAnd.OBF.TransportRouteScheduleException}
+   */
+  public static final class TransportRouteScheduleException extends
+      com.google.protobuf.GeneratedMessage
+      implements TransportRouteScheduleExceptionOrBuilder {
+    // Use TransportRouteScheduleException.newBuilder() to construct.
+    private TransportRouteScheduleException(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private TransportRouteScheduleException(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final TransportRouteScheduleException defaultInstance;
+    public static TransportRouteScheduleException getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public TransportRouteScheduleException getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private TransportRouteScheduleException(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              if (!((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+                tripIndexes_ = new java.util.ArrayList<java.lang.Integer>();
+                mutable_bitField0_ |= 0x00000001;
+              }
+              tripIndexes_.add(input.readUInt32());
+              break;
+            }
+            case 10: {
+              int length = input.readRawVarint32();
+              int limit = input.pushLimit(length);
+              if (!((mutable_bitField0_ & 0x00000001) == 0x00000001) && input.getBytesUntilLimit() > 0) {
+                tripIndexes_ = new java.util.ArrayList<java.lang.Integer>();
+                mutable_bitField0_ |= 0x00000001;
+              }
+              while (input.getBytesUntilLimit() > 0) {
+                tripIndexes_.add(input.readUInt32());
+              }
+              input.popLimit(limit);
+              break;
+            }
+            case 16: {
+              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+                stopIndexes_ = new java.util.ArrayList<java.lang.Integer>();
+                mutable_bitField0_ |= 0x00000002;
+              }
+              stopIndexes_.add(input.readUInt32());
+              break;
+            }
+            case 18: {
+              int length = input.readRawVarint32();
+              int limit = input.pushLimit(length);
+              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002) && input.getBytesUntilLimit() > 0) {
+                stopIndexes_ = new java.util.ArrayList<java.lang.Integer>();
+                mutable_bitField0_ |= 0x00000002;
+              }
+              while (input.getBytesUntilLimit() > 0) {
+                stopIndexes_.add(input.readUInt32());
+              }
+              input.popLimit(limit);
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000001;
+              available_ = input.readBool();
+              break;
+            }
+            case 40: {
+              if (!((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
+                delayArrival_ = new java.util.ArrayList<java.lang.Integer>();
+                mutable_bitField0_ |= 0x00000008;
+              }
+              delayArrival_.add(input.readUInt32());
+              break;
+            }
+            case 42: {
+              int length = input.readRawVarint32();
+              int limit = input.pushLimit(length);
+              if (!((mutable_bitField0_ & 0x00000008) == 0x00000008) && input.getBytesUntilLimit() > 0) {
+                delayArrival_ = new java.util.ArrayList<java.lang.Integer>();
+                mutable_bitField0_ |= 0x00000008;
+              }
+              while (input.getBytesUntilLimit() > 0) {
+                delayArrival_.add(input.readUInt32());
+              }
+              input.popLimit(limit);
+              break;
+            }
+            case 48: {
+              if (!((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
+                deltaWaitInterval_ = new java.util.ArrayList<java.lang.Integer>();
+                mutable_bitField0_ |= 0x00000010;
+              }
+              deltaWaitInterval_.add(input.readInt32());
+              break;
+            }
+            case 50: {
+              int length = input.readRawVarint32();
+              int limit = input.pushLimit(length);
+              if (!((mutable_bitField0_ & 0x00000010) == 0x00000010) && input.getBytesUntilLimit() > 0) {
+                deltaWaitInterval_ = new java.util.ArrayList<java.lang.Integer>();
+                mutable_bitField0_ |= 0x00000010;
+              }
+              while (input.getBytesUntilLimit() > 0) {
+                deltaWaitInterval_.add(input.readInt32());
+              }
+              input.popLimit(limit);
+              break;
+            }
+            case 56: {
+              if (!((mutable_bitField0_ & 0x00000020) == 0x00000020)) {
+                dayOfWeekRestriction_ = new java.util.ArrayList<java.lang.Integer>();
+                mutable_bitField0_ |= 0x00000020;
+              }
+              dayOfWeekRestriction_.add(input.readUInt32());
+              break;
+            }
+            case 58: {
+              int length = input.readRawVarint32();
+              int limit = input.pushLimit(length);
+              if (!((mutable_bitField0_ & 0x00000020) == 0x00000020) && input.getBytesUntilLimit() > 0) {
+                dayOfWeekRestriction_ = new java.util.ArrayList<java.lang.Integer>();
+                mutable_bitField0_ |= 0x00000020;
+              }
+              while (input.getBytesUntilLimit() > 0) {
+                dayOfWeekRestriction_.add(input.readUInt32());
+              }
+              input.popLimit(limit);
+              break;
+            }
+            case 64: {
+              if (!((mutable_bitField0_ & 0x00000040) == 0x00000040)) {
+                dayOfYearRestriction_ = new java.util.ArrayList<java.lang.Integer>();
+                mutable_bitField0_ |= 0x00000040;
+              }
+              dayOfYearRestriction_.add(input.readUInt32());
+              break;
+            }
+            case 66: {
+              int length = input.readRawVarint32();
+              int limit = input.pushLimit(length);
+              if (!((mutable_bitField0_ & 0x00000040) == 0x00000040) && input.getBytesUntilLimit() > 0) {
+                dayOfYearRestriction_ = new java.util.ArrayList<java.lang.Integer>();
+                mutable_bitField0_ |= 0x00000040;
+              }
+              while (input.getBytesUntilLimit() > 0) {
+                dayOfYearRestriction_.add(input.readUInt32());
+              }
+              input.popLimit(limit);
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+          tripIndexes_ = java.util.Collections.unmodifiableList(tripIndexes_);
+        }
+        if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+          stopIndexes_ = java.util.Collections.unmodifiableList(stopIndexes_);
+        }
+        if (((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
+          delayArrival_ = java.util.Collections.unmodifiableList(delayArrival_);
+        }
+        if (((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
+          deltaWaitInterval_ = java.util.Collections.unmodifiableList(deltaWaitInterval_);
+        }
+        if (((mutable_bitField0_ & 0x00000020) == 0x00000020)) {
+          dayOfWeekRestriction_ = java.util.Collections.unmodifiableList(dayOfWeekRestriction_);
+        }
+        if (((mutable_bitField0_ & 0x00000040) == 0x00000040)) {
+          dayOfYearRestriction_ = java.util.Collections.unmodifiableList(dayOfYearRestriction_);
+        }
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return net.osmand.binary.OsmandOdb.internal_static_OsmAnd_OBF_TransportRouteScheduleException_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return net.osmand.binary.OsmandOdb.internal_static_OsmAnd_OBF_TransportRouteScheduleException_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              net.osmand.binary.OsmandOdb.TransportRouteScheduleException.class, net.osmand.binary.OsmandOdb.TransportRouteScheduleException.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<TransportRouteScheduleException> PARSER =
+        new com.google.protobuf.AbstractParser<TransportRouteScheduleException>() {
+      public TransportRouteScheduleException parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new TransportRouteScheduleException(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<TransportRouteScheduleException> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    // repeated uint32 tripIndexes = 1;
+    public static final int TRIPINDEXES_FIELD_NUMBER = 1;
+    private java.util.List<java.lang.Integer> tripIndexes_;
+    /**
+     * <code>repeated uint32 tripIndexes = 1;</code>
+     *
+     * <pre>
+     * provided if exception applicable to the trips
+     * </pre>
+     */
+    public java.util.List<java.lang.Integer>
+        getTripIndexesList() {
+      return tripIndexes_;
+    }
+    /**
+     * <code>repeated uint32 tripIndexes = 1;</code>
+     *
+     * <pre>
+     * provided if exception applicable to the trips
+     * </pre>
+     */
+    public int getTripIndexesCount() {
+      return tripIndexes_.size();
+    }
+    /**
+     * <code>repeated uint32 tripIndexes = 1;</code>
+     *
+     * <pre>
+     * provided if exception applicable to the trips
+     * </pre>
+     */
+    public int getTripIndexes(int index) {
+      return tripIndexes_.get(index);
+    }
+
+    // repeated uint32 stopIndexes = 2;
+    public static final int STOPINDEXES_FIELD_NUMBER = 2;
+    private java.util.List<java.lang.Integer> stopIndexes_;
+    /**
+     * <code>repeated uint32 stopIndexes = 2;</code>
+     *
+     * <pre>
+     * provided if exception applicable to the stop
+     * </pre>
+     */
+    public java.util.List<java.lang.Integer>
+        getStopIndexesList() {
+      return stopIndexes_;
+    }
+    /**
+     * <code>repeated uint32 stopIndexes = 2;</code>
+     *
+     * <pre>
+     * provided if exception applicable to the stop
+     * </pre>
+     */
+    public int getStopIndexesCount() {
+      return stopIndexes_.size();
+    }
+    /**
+     * <code>repeated uint32 stopIndexes = 2;</code>
+     *
+     * <pre>
+     * provided if exception applicable to the stop
+     * </pre>
+     */
+    public int getStopIndexes(int index) {
+      return stopIndexes_.get(index);
+    }
+
+    // optional bool available = 3;
+    public static final int AVAILABLE_FIELD_NUMBER = 3;
+    private boolean available_;
+    /**
+     * <code>optional bool available = 3;</code>
+     *
+     * <pre>
+     * indicates whether the trip or stop available in certain restriction (default true)
+     * </pre>
+     */
+    public boolean hasAvailable() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional bool available = 3;</code>
+     *
+     * <pre>
+     * indicates whether the trip or stop available in certain restriction (default true)
+     * </pre>
+     */
+    public boolean getAvailable() {
+      return available_;
+    }
+
+    // repeated uint32 delayArrival = 5;
+    public static final int DELAYARRIVAL_FIELD_NUMBER = 5;
+    private java.util.List<java.lang.Integer> delayArrival_;
+    /**
+     * <code>repeated uint32 delayArrival = 5;</code>
+     *
+     * <pre>
+     * if 1 number is provided, the delay is applicable to all trips/stops, otherwise it has numbers for each route or stop
+     * delay is measured in X * 10 seconds
+     * </pre>
+     */
+    public java.util.List<java.lang.Integer>
+        getDelayArrivalList() {
+      return delayArrival_;
+    }
+    /**
+     * <code>repeated uint32 delayArrival = 5;</code>
+     *
+     * <pre>
+     * if 1 number is provided, the delay is applicable to all trips/stops, otherwise it has numbers for each route or stop
+     * delay is measured in X * 10 seconds
+     * </pre>
+     */
+    public int getDelayArrivalCount() {
+      return delayArrival_.size();
+    }
+    /**
+     * <code>repeated uint32 delayArrival = 5;</code>
+     *
+     * <pre>
+     * if 1 number is provided, the delay is applicable to all trips/stops, otherwise it has numbers for each route or stop
+     * delay is measured in X * 10 seconds
+     * </pre>
+     */
+    public int getDelayArrival(int index) {
+      return delayArrival_.get(index);
+    }
+
+    // repeated int32 deltaWaitInterval = 6;
+    public static final int DELTAWAITINTERVAL_FIELD_NUMBER = 6;
+    private java.util.List<java.lang.Integer> deltaWaitInterval_;
+    /**
+     * <code>repeated int32 deltaWaitInterval = 6;</code>
+     */
+    public java.util.List<java.lang.Integer>
+        getDeltaWaitIntervalList() {
+      return deltaWaitInterval_;
+    }
+    /**
+     * <code>repeated int32 deltaWaitInterval = 6;</code>
+     */
+    public int getDeltaWaitIntervalCount() {
+      return deltaWaitInterval_.size();
+    }
+    /**
+     * <code>repeated int32 deltaWaitInterval = 6;</code>
+     */
+    public int getDeltaWaitInterval(int index) {
+      return deltaWaitInterval_.get(index);
+    }
+
+    // repeated uint32 dayOfWeekRestriction = 7;
+    public static final int DAYOFWEEKRESTRICTION_FIELD_NUMBER = 7;
+    private java.util.List<java.lang.Integer> dayOfWeekRestriction_;
+    /**
+     * <code>repeated uint32 dayOfWeekRestriction = 7;</code>
+     *
+     * <pre>
+     * day of week exceptions, Monday - 0, Sunday - 6
+     * </pre>
+     */
+    public java.util.List<java.lang.Integer>
+        getDayOfWeekRestrictionList() {
+      return dayOfWeekRestriction_;
+    }
+    /**
+     * <code>repeated uint32 dayOfWeekRestriction = 7;</code>
+     *
+     * <pre>
+     * day of week exceptions, Monday - 0, Sunday - 6
+     * </pre>
+     */
+    public int getDayOfWeekRestrictionCount() {
+      return dayOfWeekRestriction_.size();
+    }
+    /**
+     * <code>repeated uint32 dayOfWeekRestriction = 7;</code>
+     *
+     * <pre>
+     * day of week exceptions, Monday - 0, Sunday - 6
+     * </pre>
+     */
+    public int getDayOfWeekRestriction(int index) {
+      return dayOfWeekRestriction_.get(index);
+    }
+
+    // repeated uint32 dayOfYearRestriction = 8;
+    public static final int DAYOFYEARRESTRICTION_FIELD_NUMBER = 8;
+    private java.util.List<java.lang.Integer> dayOfYearRestriction_;
+    /**
+     * <code>repeated uint32 dayOfYearRestriction = 8;</code>
+     *
+     * <pre>
+     * day of year exceptions 01.01.2000 - 0, 01.02.2000 - 1
+     * </pre>
+     */
+    public java.util.List<java.lang.Integer>
+        getDayOfYearRestrictionList() {
+      return dayOfYearRestriction_;
+    }
+    /**
+     * <code>repeated uint32 dayOfYearRestriction = 8;</code>
+     *
+     * <pre>
+     * day of year exceptions 01.01.2000 - 0, 01.02.2000 - 1
+     * </pre>
+     */
+    public int getDayOfYearRestrictionCount() {
+      return dayOfYearRestriction_.size();
+    }
+    /**
+     * <code>repeated uint32 dayOfYearRestriction = 8;</code>
+     *
+     * <pre>
+     * day of year exceptions 01.01.2000 - 0, 01.02.2000 - 1
+     * </pre>
+     */
+    public int getDayOfYearRestriction(int index) {
+      return dayOfYearRestriction_.get(index);
+    }
+
+    private void initFields() {
+      tripIndexes_ = java.util.Collections.emptyList();
+      stopIndexes_ = java.util.Collections.emptyList();
+      available_ = false;
+      delayArrival_ = java.util.Collections.emptyList();
+      deltaWaitInterval_ = java.util.Collections.emptyList();
+      dayOfWeekRestriction_ = java.util.Collections.emptyList();
+      dayOfYearRestriction_ = java.util.Collections.emptyList();
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      for (int i = 0; i < tripIndexes_.size(); i++) {
+        output.writeUInt32(1, tripIndexes_.get(i));
+      }
+      for (int i = 0; i < stopIndexes_.size(); i++) {
+        output.writeUInt32(2, stopIndexes_.get(i));
+      }
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeBool(3, available_);
+      }
+      for (int i = 0; i < delayArrival_.size(); i++) {
+        output.writeUInt32(5, delayArrival_.get(i));
+      }
+      for (int i = 0; i < deltaWaitInterval_.size(); i++) {
+        output.writeInt32(6, deltaWaitInterval_.get(i));
+      }
+      for (int i = 0; i < dayOfWeekRestriction_.size(); i++) {
+        output.writeUInt32(7, dayOfWeekRestriction_.get(i));
+      }
+      for (int i = 0; i < dayOfYearRestriction_.size(); i++) {
+        output.writeUInt32(8, dayOfYearRestriction_.get(i));
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      {
+        int dataSize = 0;
+        for (int i = 0; i < tripIndexes_.size(); i++) {
+          dataSize += com.google.protobuf.CodedOutputStream
+            .computeUInt32SizeNoTag(tripIndexes_.get(i));
+        }
+        size += dataSize;
+        size += 1 * getTripIndexesList().size();
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < stopIndexes_.size(); i++) {
+          dataSize += com.google.protobuf.CodedOutputStream
+            .computeUInt32SizeNoTag(stopIndexes_.get(i));
+        }
+        size += dataSize;
+        size += 1 * getStopIndexesList().size();
+      }
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(3, available_);
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < delayArrival_.size(); i++) {
+          dataSize += com.google.protobuf.CodedOutputStream
+            .computeUInt32SizeNoTag(delayArrival_.get(i));
+        }
+        size += dataSize;
+        size += 1 * getDelayArrivalList().size();
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < deltaWaitInterval_.size(); i++) {
+          dataSize += com.google.protobuf.CodedOutputStream
+            .computeInt32SizeNoTag(deltaWaitInterval_.get(i));
+        }
+        size += dataSize;
+        size += 1 * getDeltaWaitIntervalList().size();
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < dayOfWeekRestriction_.size(); i++) {
+          dataSize += com.google.protobuf.CodedOutputStream
+            .computeUInt32SizeNoTag(dayOfWeekRestriction_.get(i));
+        }
+        size += dataSize;
+        size += 1 * getDayOfWeekRestrictionList().size();
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < dayOfYearRestriction_.size(); i++) {
+          dataSize += com.google.protobuf.CodedOutputStream
+            .computeUInt32SizeNoTag(dayOfYearRestriction_.get(i));
+        }
+        size += dataSize;
+        size += 1 * getDayOfYearRestrictionList().size();
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static net.osmand.binary.OsmandOdb.TransportRouteScheduleException parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static net.osmand.binary.OsmandOdb.TransportRouteScheduleException parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static net.osmand.binary.OsmandOdb.TransportRouteScheduleException parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static net.osmand.binary.OsmandOdb.TransportRouteScheduleException parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static net.osmand.binary.OsmandOdb.TransportRouteScheduleException parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static net.osmand.binary.OsmandOdb.TransportRouteScheduleException parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static net.osmand.binary.OsmandOdb.TransportRouteScheduleException parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static net.osmand.binary.OsmandOdb.TransportRouteScheduleException parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static net.osmand.binary.OsmandOdb.TransportRouteScheduleException parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static net.osmand.binary.OsmandOdb.TransportRouteScheduleException parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(net.osmand.binary.OsmandOdb.TransportRouteScheduleException prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code OsmAnd.OBF.TransportRouteScheduleException}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements net.osmand.binary.OsmandOdb.TransportRouteScheduleExceptionOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return net.osmand.binary.OsmandOdb.internal_static_OsmAnd_OBF_TransportRouteScheduleException_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return net.osmand.binary.OsmandOdb.internal_static_OsmAnd_OBF_TransportRouteScheduleException_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                net.osmand.binary.OsmandOdb.TransportRouteScheduleException.class, net.osmand.binary.OsmandOdb.TransportRouteScheduleException.Builder.class);
+      }
+
+      // Construct using net.osmand.binary.OsmandOdb.TransportRouteScheduleException.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        tripIndexes_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000001);
+        stopIndexes_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000002);
+        available_ = false;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        delayArrival_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000008);
+        deltaWaitInterval_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000010);
+        dayOfWeekRestriction_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000020);
+        dayOfYearRestriction_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000040);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return net.osmand.binary.OsmandOdb.internal_static_OsmAnd_OBF_TransportRouteScheduleException_descriptor;
+      }
+
+      public net.osmand.binary.OsmandOdb.TransportRouteScheduleException getDefaultInstanceForType() {
+        return net.osmand.binary.OsmandOdb.TransportRouteScheduleException.getDefaultInstance();
+      }
+
+      public net.osmand.binary.OsmandOdb.TransportRouteScheduleException build() {
+        net.osmand.binary.OsmandOdb.TransportRouteScheduleException result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public net.osmand.binary.OsmandOdb.TransportRouteScheduleException buildPartial() {
+        net.osmand.binary.OsmandOdb.TransportRouteScheduleException result = new net.osmand.binary.OsmandOdb.TransportRouteScheduleException(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((bitField0_ & 0x00000001) == 0x00000001)) {
+          tripIndexes_ = java.util.Collections.unmodifiableList(tripIndexes_);
+          bitField0_ = (bitField0_ & ~0x00000001);
+        }
+        result.tripIndexes_ = tripIndexes_;
+        if (((bitField0_ & 0x00000002) == 0x00000002)) {
+          stopIndexes_ = java.util.Collections.unmodifiableList(stopIndexes_);
+          bitField0_ = (bitField0_ & ~0x00000002);
+        }
+        result.stopIndexes_ = stopIndexes_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.available_ = available_;
+        if (((bitField0_ & 0x00000008) == 0x00000008)) {
+          delayArrival_ = java.util.Collections.unmodifiableList(delayArrival_);
+          bitField0_ = (bitField0_ & ~0x00000008);
+        }
+        result.delayArrival_ = delayArrival_;
+        if (((bitField0_ & 0x00000010) == 0x00000010)) {
+          deltaWaitInterval_ = java.util.Collections.unmodifiableList(deltaWaitInterval_);
+          bitField0_ = (bitField0_ & ~0x00000010);
+        }
+        result.deltaWaitInterval_ = deltaWaitInterval_;
+        if (((bitField0_ & 0x00000020) == 0x00000020)) {
+          dayOfWeekRestriction_ = java.util.Collections.unmodifiableList(dayOfWeekRestriction_);
+          bitField0_ = (bitField0_ & ~0x00000020);
+        }
+        result.dayOfWeekRestriction_ = dayOfWeekRestriction_;
+        if (((bitField0_ & 0x00000040) == 0x00000040)) {
+          dayOfYearRestriction_ = java.util.Collections.unmodifiableList(dayOfYearRestriction_);
+          bitField0_ = (bitField0_ & ~0x00000040);
+        }
+        result.dayOfYearRestriction_ = dayOfYearRestriction_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof net.osmand.binary.OsmandOdb.TransportRouteScheduleException) {
+          return mergeFrom((net.osmand.binary.OsmandOdb.TransportRouteScheduleException)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(net.osmand.binary.OsmandOdb.TransportRouteScheduleException other) {
+        if (other == net.osmand.binary.OsmandOdb.TransportRouteScheduleException.getDefaultInstance()) return this;
+        if (!other.tripIndexes_.isEmpty()) {
+          if (tripIndexes_.isEmpty()) {
+            tripIndexes_ = other.tripIndexes_;
+            bitField0_ = (bitField0_ & ~0x00000001);
+          } else {
+            ensureTripIndexesIsMutable();
+            tripIndexes_.addAll(other.tripIndexes_);
+          }
+          onChanged();
+        }
+        if (!other.stopIndexes_.isEmpty()) {
+          if (stopIndexes_.isEmpty()) {
+            stopIndexes_ = other.stopIndexes_;
+            bitField0_ = (bitField0_ & ~0x00000002);
+          } else {
+            ensureStopIndexesIsMutable();
+            stopIndexes_.addAll(other.stopIndexes_);
+          }
+          onChanged();
+        }
+        if (other.hasAvailable()) {
+          setAvailable(other.getAvailable());
+        }
+        if (!other.delayArrival_.isEmpty()) {
+          if (delayArrival_.isEmpty()) {
+            delayArrival_ = other.delayArrival_;
+            bitField0_ = (bitField0_ & ~0x00000008);
+          } else {
+            ensureDelayArrivalIsMutable();
+            delayArrival_.addAll(other.delayArrival_);
+          }
+          onChanged();
+        }
+        if (!other.deltaWaitInterval_.isEmpty()) {
+          if (deltaWaitInterval_.isEmpty()) {
+            deltaWaitInterval_ = other.deltaWaitInterval_;
+            bitField0_ = (bitField0_ & ~0x00000010);
+          } else {
+            ensureDeltaWaitIntervalIsMutable();
+            deltaWaitInterval_.addAll(other.deltaWaitInterval_);
+          }
+          onChanged();
+        }
+        if (!other.dayOfWeekRestriction_.isEmpty()) {
+          if (dayOfWeekRestriction_.isEmpty()) {
+            dayOfWeekRestriction_ = other.dayOfWeekRestriction_;
+            bitField0_ = (bitField0_ & ~0x00000020);
+          } else {
+            ensureDayOfWeekRestrictionIsMutable();
+            dayOfWeekRestriction_.addAll(other.dayOfWeekRestriction_);
+          }
+          onChanged();
+        }
+        if (!other.dayOfYearRestriction_.isEmpty()) {
+          if (dayOfYearRestriction_.isEmpty()) {
+            dayOfYearRestriction_ = other.dayOfYearRestriction_;
+            bitField0_ = (bitField0_ & ~0x00000040);
+          } else {
+            ensureDayOfYearRestrictionIsMutable();
+            dayOfYearRestriction_.addAll(other.dayOfYearRestriction_);
+          }
+          onChanged();
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        net.osmand.binary.OsmandOdb.TransportRouteScheduleException parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (net.osmand.binary.OsmandOdb.TransportRouteScheduleException) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      // repeated uint32 tripIndexes = 1;
+      private java.util.List<java.lang.Integer> tripIndexes_ = java.util.Collections.emptyList();
+      private void ensureTripIndexesIsMutable() {
+        if (!((bitField0_ & 0x00000001) == 0x00000001)) {
+          tripIndexes_ = new java.util.ArrayList<java.lang.Integer>(tripIndexes_);
+          bitField0_ |= 0x00000001;
+         }
+      }
+      /**
+       * <code>repeated uint32 tripIndexes = 1;</code>
+       *
+       * <pre>
+       * provided if exception applicable to the trips
+       * </pre>
+       */
+      public java.util.List<java.lang.Integer>
+          getTripIndexesList() {
+        return java.util.Collections.unmodifiableList(tripIndexes_);
+      }
+      /**
+       * <code>repeated uint32 tripIndexes = 1;</code>
+       *
+       * <pre>
+       * provided if exception applicable to the trips
+       * </pre>
+       */
+      public int getTripIndexesCount() {
+        return tripIndexes_.size();
+      }
+      /**
+       * <code>repeated uint32 tripIndexes = 1;</code>
+       *
+       * <pre>
+       * provided if exception applicable to the trips
+       * </pre>
+       */
+      public int getTripIndexes(int index) {
+        return tripIndexes_.get(index);
+      }
+      /**
+       * <code>repeated uint32 tripIndexes = 1;</code>
+       *
+       * <pre>
+       * provided if exception applicable to the trips
+       * </pre>
+       */
+      public Builder setTripIndexes(
+          int index, int value) {
+        ensureTripIndexesIsMutable();
+        tripIndexes_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated uint32 tripIndexes = 1;</code>
+       *
+       * <pre>
+       * provided if exception applicable to the trips
+       * </pre>
+       */
+      public Builder addTripIndexes(int value) {
+        ensureTripIndexesIsMutable();
+        tripIndexes_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated uint32 tripIndexes = 1;</code>
+       *
+       * <pre>
+       * provided if exception applicable to the trips
+       * </pre>
+       */
+      public Builder addAllTripIndexes(
+          java.lang.Iterable<? extends java.lang.Integer> values) {
+        ensureTripIndexesIsMutable();
+        super.addAll(values, tripIndexes_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated uint32 tripIndexes = 1;</code>
+       *
+       * <pre>
+       * provided if exception applicable to the trips
+       * </pre>
+       */
+      public Builder clearTripIndexes() {
+        tripIndexes_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000001);
+        onChanged();
+        return this;
+      }
+
+      // repeated uint32 stopIndexes = 2;
+      private java.util.List<java.lang.Integer> stopIndexes_ = java.util.Collections.emptyList();
+      private void ensureStopIndexesIsMutable() {
+        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
+          stopIndexes_ = new java.util.ArrayList<java.lang.Integer>(stopIndexes_);
+          bitField0_ |= 0x00000002;
+         }
+      }
+      /**
+       * <code>repeated uint32 stopIndexes = 2;</code>
+       *
+       * <pre>
+       * provided if exception applicable to the stop
+       * </pre>
+       */
+      public java.util.List<java.lang.Integer>
+          getStopIndexesList() {
+        return java.util.Collections.unmodifiableList(stopIndexes_);
+      }
+      /**
+       * <code>repeated uint32 stopIndexes = 2;</code>
+       *
+       * <pre>
+       * provided if exception applicable to the stop
+       * </pre>
+       */
+      public int getStopIndexesCount() {
+        return stopIndexes_.size();
+      }
+      /**
+       * <code>repeated uint32 stopIndexes = 2;</code>
+       *
+       * <pre>
+       * provided if exception applicable to the stop
+       * </pre>
+       */
+      public int getStopIndexes(int index) {
+        return stopIndexes_.get(index);
+      }
+      /**
+       * <code>repeated uint32 stopIndexes = 2;</code>
+       *
+       * <pre>
+       * provided if exception applicable to the stop
+       * </pre>
+       */
+      public Builder setStopIndexes(
+          int index, int value) {
+        ensureStopIndexesIsMutable();
+        stopIndexes_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated uint32 stopIndexes = 2;</code>
+       *
+       * <pre>
+       * provided if exception applicable to the stop
+       * </pre>
+       */
+      public Builder addStopIndexes(int value) {
+        ensureStopIndexesIsMutable();
+        stopIndexes_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated uint32 stopIndexes = 2;</code>
+       *
+       * <pre>
+       * provided if exception applicable to the stop
+       * </pre>
+       */
+      public Builder addAllStopIndexes(
+          java.lang.Iterable<? extends java.lang.Integer> values) {
+        ensureStopIndexesIsMutable();
+        super.addAll(values, stopIndexes_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated uint32 stopIndexes = 2;</code>
+       *
+       * <pre>
+       * provided if exception applicable to the stop
+       * </pre>
+       */
+      public Builder clearStopIndexes() {
+        stopIndexes_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000002);
+        onChanged();
+        return this;
+      }
+
+      // optional bool available = 3;
+      private boolean available_ ;
+      /**
+       * <code>optional bool available = 3;</code>
+       *
+       * <pre>
+       * indicates whether the trip or stop available in certain restriction (default true)
+       * </pre>
+       */
+      public boolean hasAvailable() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional bool available = 3;</code>
+       *
+       * <pre>
+       * indicates whether the trip or stop available in certain restriction (default true)
+       * </pre>
+       */
+      public boolean getAvailable() {
+        return available_;
+      }
+      /**
+       * <code>optional bool available = 3;</code>
+       *
+       * <pre>
+       * indicates whether the trip or stop available in certain restriction (default true)
+       * </pre>
+       */
+      public Builder setAvailable(boolean value) {
+        bitField0_ |= 0x00000004;
+        available_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional bool available = 3;</code>
+       *
+       * <pre>
+       * indicates whether the trip or stop available in certain restriction (default true)
+       * </pre>
+       */
+      public Builder clearAvailable() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        available_ = false;
+        onChanged();
+        return this;
+      }
+
+      // repeated uint32 delayArrival = 5;
+      private java.util.List<java.lang.Integer> delayArrival_ = java.util.Collections.emptyList();
+      private void ensureDelayArrivalIsMutable() {
+        if (!((bitField0_ & 0x00000008) == 0x00000008)) {
+          delayArrival_ = new java.util.ArrayList<java.lang.Integer>(delayArrival_);
+          bitField0_ |= 0x00000008;
+         }
+      }
+      /**
+       * <code>repeated uint32 delayArrival = 5;</code>
+       *
+       * <pre>
+       * if 1 number is provided, the delay is applicable to all trips/stops, otherwise it has numbers for each route or stop
+       * delay is measured in X * 10 seconds
+       * </pre>
+       */
+      public java.util.List<java.lang.Integer>
+          getDelayArrivalList() {
+        return java.util.Collections.unmodifiableList(delayArrival_);
+      }
+      /**
+       * <code>repeated uint32 delayArrival = 5;</code>
+       *
+       * <pre>
+       * if 1 number is provided, the delay is applicable to all trips/stops, otherwise it has numbers for each route or stop
+       * delay is measured in X * 10 seconds
+       * </pre>
+       */
+      public int getDelayArrivalCount() {
+        return delayArrival_.size();
+      }
+      /**
+       * <code>repeated uint32 delayArrival = 5;</code>
+       *
+       * <pre>
+       * if 1 number is provided, the delay is applicable to all trips/stops, otherwise it has numbers for each route or stop
+       * delay is measured in X * 10 seconds
+       * </pre>
+       */
+      public int getDelayArrival(int index) {
+        return delayArrival_.get(index);
+      }
+      /**
+       * <code>repeated uint32 delayArrival = 5;</code>
+       *
+       * <pre>
+       * if 1 number is provided, the delay is applicable to all trips/stops, otherwise it has numbers for each route or stop
+       * delay is measured in X * 10 seconds
+       * </pre>
+       */
+      public Builder setDelayArrival(
+          int index, int value) {
+        ensureDelayArrivalIsMutable();
+        delayArrival_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated uint32 delayArrival = 5;</code>
+       *
+       * <pre>
+       * if 1 number is provided, the delay is applicable to all trips/stops, otherwise it has numbers for each route or stop
+       * delay is measured in X * 10 seconds
+       * </pre>
+       */
+      public Builder addDelayArrival(int value) {
+        ensureDelayArrivalIsMutable();
+        delayArrival_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated uint32 delayArrival = 5;</code>
+       *
+       * <pre>
+       * if 1 number is provided, the delay is applicable to all trips/stops, otherwise it has numbers for each route or stop
+       * delay is measured in X * 10 seconds
+       * </pre>
+       */
+      public Builder addAllDelayArrival(
+          java.lang.Iterable<? extends java.lang.Integer> values) {
+        ensureDelayArrivalIsMutable();
+        super.addAll(values, delayArrival_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated uint32 delayArrival = 5;</code>
+       *
+       * <pre>
+       * if 1 number is provided, the delay is applicable to all trips/stops, otherwise it has numbers for each route or stop
+       * delay is measured in X * 10 seconds
+       * </pre>
+       */
+      public Builder clearDelayArrival() {
+        delayArrival_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000008);
+        onChanged();
+        return this;
+      }
+
+      // repeated int32 deltaWaitInterval = 6;
+      private java.util.List<java.lang.Integer> deltaWaitInterval_ = java.util.Collections.emptyList();
+      private void ensureDeltaWaitIntervalIsMutable() {
+        if (!((bitField0_ & 0x00000010) == 0x00000010)) {
+          deltaWaitInterval_ = new java.util.ArrayList<java.lang.Integer>(deltaWaitInterval_);
+          bitField0_ |= 0x00000010;
+         }
+      }
+      /**
+       * <code>repeated int32 deltaWaitInterval = 6;</code>
+       */
+      public java.util.List<java.lang.Integer>
+          getDeltaWaitIntervalList() {
+        return java.util.Collections.unmodifiableList(deltaWaitInterval_);
+      }
+      /**
+       * <code>repeated int32 deltaWaitInterval = 6;</code>
+       */
+      public int getDeltaWaitIntervalCount() {
+        return deltaWaitInterval_.size();
+      }
+      /**
+       * <code>repeated int32 deltaWaitInterval = 6;</code>
+       */
+      public int getDeltaWaitInterval(int index) {
+        return deltaWaitInterval_.get(index);
+      }
+      /**
+       * <code>repeated int32 deltaWaitInterval = 6;</code>
+       */
+      public Builder setDeltaWaitInterval(
+          int index, int value) {
+        ensureDeltaWaitIntervalIsMutable();
+        deltaWaitInterval_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated int32 deltaWaitInterval = 6;</code>
+       */
+      public Builder addDeltaWaitInterval(int value) {
+        ensureDeltaWaitIntervalIsMutable();
+        deltaWaitInterval_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated int32 deltaWaitInterval = 6;</code>
+       */
+      public Builder addAllDeltaWaitInterval(
+          java.lang.Iterable<? extends java.lang.Integer> values) {
+        ensureDeltaWaitIntervalIsMutable();
+        super.addAll(values, deltaWaitInterval_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated int32 deltaWaitInterval = 6;</code>
+       */
+      public Builder clearDeltaWaitInterval() {
+        deltaWaitInterval_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000010);
+        onChanged();
+        return this;
+      }
+
+      // repeated uint32 dayOfWeekRestriction = 7;
+      private java.util.List<java.lang.Integer> dayOfWeekRestriction_ = java.util.Collections.emptyList();
+      private void ensureDayOfWeekRestrictionIsMutable() {
+        if (!((bitField0_ & 0x00000020) == 0x00000020)) {
+          dayOfWeekRestriction_ = new java.util.ArrayList<java.lang.Integer>(dayOfWeekRestriction_);
+          bitField0_ |= 0x00000020;
+         }
+      }
+      /**
+       * <code>repeated uint32 dayOfWeekRestriction = 7;</code>
+       *
+       * <pre>
+       * day of week exceptions, Monday - 0, Sunday - 6
+       * </pre>
+       */
+      public java.util.List<java.lang.Integer>
+          getDayOfWeekRestrictionList() {
+        return java.util.Collections.unmodifiableList(dayOfWeekRestriction_);
+      }
+      /**
+       * <code>repeated uint32 dayOfWeekRestriction = 7;</code>
+       *
+       * <pre>
+       * day of week exceptions, Monday - 0, Sunday - 6
+       * </pre>
+       */
+      public int getDayOfWeekRestrictionCount() {
+        return dayOfWeekRestriction_.size();
+      }
+      /**
+       * <code>repeated uint32 dayOfWeekRestriction = 7;</code>
+       *
+       * <pre>
+       * day of week exceptions, Monday - 0, Sunday - 6
+       * </pre>
+       */
+      public int getDayOfWeekRestriction(int index) {
+        return dayOfWeekRestriction_.get(index);
+      }
+      /**
+       * <code>repeated uint32 dayOfWeekRestriction = 7;</code>
+       *
+       * <pre>
+       * day of week exceptions, Monday - 0, Sunday - 6
+       * </pre>
+       */
+      public Builder setDayOfWeekRestriction(
+          int index, int value) {
+        ensureDayOfWeekRestrictionIsMutable();
+        dayOfWeekRestriction_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated uint32 dayOfWeekRestriction = 7;</code>
+       *
+       * <pre>
+       * day of week exceptions, Monday - 0, Sunday - 6
+       * </pre>
+       */
+      public Builder addDayOfWeekRestriction(int value) {
+        ensureDayOfWeekRestrictionIsMutable();
+        dayOfWeekRestriction_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated uint32 dayOfWeekRestriction = 7;</code>
+       *
+       * <pre>
+       * day of week exceptions, Monday - 0, Sunday - 6
+       * </pre>
+       */
+      public Builder addAllDayOfWeekRestriction(
+          java.lang.Iterable<? extends java.lang.Integer> values) {
+        ensureDayOfWeekRestrictionIsMutable();
+        super.addAll(values, dayOfWeekRestriction_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated uint32 dayOfWeekRestriction = 7;</code>
+       *
+       * <pre>
+       * day of week exceptions, Monday - 0, Sunday - 6
+       * </pre>
+       */
+      public Builder clearDayOfWeekRestriction() {
+        dayOfWeekRestriction_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000020);
+        onChanged();
+        return this;
+      }
+
+      // repeated uint32 dayOfYearRestriction = 8;
+      private java.util.List<java.lang.Integer> dayOfYearRestriction_ = java.util.Collections.emptyList();
+      private void ensureDayOfYearRestrictionIsMutable() {
+        if (!((bitField0_ & 0x00000040) == 0x00000040)) {
+          dayOfYearRestriction_ = new java.util.ArrayList<java.lang.Integer>(dayOfYearRestriction_);
+          bitField0_ |= 0x00000040;
+         }
+      }
+      /**
+       * <code>repeated uint32 dayOfYearRestriction = 8;</code>
+       *
+       * <pre>
+       * day of year exceptions 01.01.2000 - 0, 01.02.2000 - 1
+       * </pre>
+       */
+      public java.util.List<java.lang.Integer>
+          getDayOfYearRestrictionList() {
+        return java.util.Collections.unmodifiableList(dayOfYearRestriction_);
+      }
+      /**
+       * <code>repeated uint32 dayOfYearRestriction = 8;</code>
+       *
+       * <pre>
+       * day of year exceptions 01.01.2000 - 0, 01.02.2000 - 1
+       * </pre>
+       */
+      public int getDayOfYearRestrictionCount() {
+        return dayOfYearRestriction_.size();
+      }
+      /**
+       * <code>repeated uint32 dayOfYearRestriction = 8;</code>
+       *
+       * <pre>
+       * day of year exceptions 01.01.2000 - 0, 01.02.2000 - 1
+       * </pre>
+       */
+      public int getDayOfYearRestriction(int index) {
+        return dayOfYearRestriction_.get(index);
+      }
+      /**
+       * <code>repeated uint32 dayOfYearRestriction = 8;</code>
+       *
+       * <pre>
+       * day of year exceptions 01.01.2000 - 0, 01.02.2000 - 1
+       * </pre>
+       */
+      public Builder setDayOfYearRestriction(
+          int index, int value) {
+        ensureDayOfYearRestrictionIsMutable();
+        dayOfYearRestriction_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated uint32 dayOfYearRestriction = 8;</code>
+       *
+       * <pre>
+       * day of year exceptions 01.01.2000 - 0, 01.02.2000 - 1
+       * </pre>
+       */
+      public Builder addDayOfYearRestriction(int value) {
+        ensureDayOfYearRestrictionIsMutable();
+        dayOfYearRestriction_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated uint32 dayOfYearRestriction = 8;</code>
+       *
+       * <pre>
+       * day of year exceptions 01.01.2000 - 0, 01.02.2000 - 1
+       * </pre>
+       */
+      public Builder addAllDayOfYearRestriction(
+          java.lang.Iterable<? extends java.lang.Integer> values) {
+        ensureDayOfYearRestrictionIsMutable();
+        super.addAll(values, dayOfYearRestriction_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated uint32 dayOfYearRestriction = 8;</code>
+       *
+       * <pre>
+       * day of year exceptions 01.01.2000 - 0, 01.02.2000 - 1
+       * </pre>
+       */
+      public Builder clearDayOfYearRestriction() {
+        dayOfYearRestriction_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000040);
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:OsmAnd.OBF.TransportRouteScheduleException)
+    }
+
+    static {
+      defaultInstance = new TransportRouteScheduleException(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:OsmAnd.OBF.TransportRouteScheduleException)
   }
 
   public interface TransportRouteStopOrBuilder
@@ -57850,6 +61281,16 @@ public final class OsmandOdb {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_OsmAnd_OBF_TransportRoute_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_OsmAnd_OBF_TransportRouteSchedule_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_OsmAnd_OBF_TransportRouteSchedule_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_OsmAnd_OBF_TransportRouteScheduleException_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_OsmAnd_OBF_TransportRouteScheduleException_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_OsmAnd_OBF_TransportRouteStop_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -58053,89 +61494,99 @@ public final class OsmandOdb {
       " \003(\t\022\030\n\020attributeTagIds2\030\021 \003(\r\022\030\n\020attrib" +
       "uteValues2\030\022 \003(\t\"=\n\017TransportRoutes\022*\n\006r" +
       "outes\030\006 \003(\0132\032.OsmAnd.OBF.TransportRoute\"" +
-      "\206\002\n\016TransportRoute\022\n\n\002id\030\001 \002(\004\022\014\n\004type\030\003" +
+      "\300\002\n\016TransportRoute\022\n\n\002id\030\001 \002(\004\022\014\n\004type\030\003" +
       " \001(\r\022\020\n\010operator\030\004 \001(\r\022\013\n\003ref\030\005 \001(\t\022\014\n\004n" +
       "ame\030\006 \001(\r\022\017\n\007name_en\030\007 \001(\r\022\020\n\010distance\030\010" +
       " \001(\r\022\r\n\005color\030\t \001(\r\0223\n\013directStops\030\017 \003(\013" +
       "2\036.OsmAnd.OBF.TransportRouteStop\0224\n\014reve",
       "rseStops\030\020 \003(\0132\036.OsmAnd.OBF.TransportRou" +
-      "teStop\022\020\n\010geometry\030\021 \001(\014\"W\n\022TransportRou" +
-      "teStop\022\n\n\002id\030\001 \002(\022\022\n\n\002dx\030\002 \002(\021\022\n\n\002dy\030\003 \002" +
-      "(\021\022\014\n\004name\030\006 \002(\r\022\017\n\007name_en\030\007 \001(\r\"b\n\rTra" +
-      "nsportStop\022\n\n\002dx\030\001 \002(\021\022\n\n\002dy\030\002 \002(\021\022\n\n\002id" +
-      "\030\005 \002(\022\022\014\n\004name\030\006 \002(\r\022\017\n\007name_en\030\007 \001(\r\022\016\n" +
-      "\006routes\030\020 \003(\r\"\272\001\n\022TransportStopsTree\022\014\n\004" +
-      "left\030\001 \002(\021\022\r\n\005right\030\002 \002(\021\022\013\n\003top\030\003 \002(\021\022\016" +
-      "\n\006bottom\030\004 \002(\021\0220\n\010subtrees\030\007 \003(\0132\036.OsmAn" +
-      "d.OBF.TransportStopsTree\022(\n\005leafs\030\010 \003(\0132",
-      "\031.OsmAnd.OBF.TransportStop\022\016\n\006baseId\030\020 \001" +
-      "(\004\"\256\001\n\024OsmAndTransportIndex\022\014\n\004name\030\001 \001(" +
-      "\t\022+\n\006routes\030\003 \001(\0132\033.OsmAnd.OBF.Transport" +
-      "Routes\022-\n\005stops\030\006 \001(\0132\036.OsmAnd.OBF.Trans" +
-      "portStopsTree\022,\n\013stringTable\030\t \002(\0132\027.Osm" +
-      "And.OBF.StringTable\"\312\002\n\016OsmAndPoiIndex\022\014" +
-      "\n\004name\030\001 \002(\t\022-\n\nboundaries\030\002 \002(\0132\031.OsmAn" +
-      "d.OBF.OsmAndTileBox\0228\n\017categoriesTable\030\003" +
-      " \003(\0132\037.OsmAnd.OBF.OsmAndCategoryTable\0221\n" +
-      "\tnameIndex\030\004 \001(\0132\036.OsmAnd.OBF.OsmAndPoiN",
-      "ameIndex\0226\n\rsubtypesTable\030\005 \001(\0132\037.OsmAnd" +
-      ".OBF.OsmAndSubtypesTable\022\'\n\005boxes\030\006 \003(\0132" +
-      "\030.OsmAnd.OBF.OsmAndPoiBox\022-\n\007poiData\030\t \003" +
-      "(\0132\034.OsmAnd.OBF.OsmAndPoiBoxData\"\331\001\n\022Osm" +
-      "AndPoiNameIndex\022-\n\005table\030\003 \002(\0132\036.OsmAnd." +
-      "OBF.IndexedStringTable\022C\n\004data\030\005 \003(\01325.O" +
-      "smAnd.OBF.OsmAndPoiNameIndex.OsmAndPoiNa" +
-      "meIndexData\032O\n\026OsmAndPoiNameIndexData\0225\n" +
-      "\005atoms\030\003 \003(\0132&.OsmAnd.OBF.OsmAndPoiNameI" +
-      "ndexDataAtom\"Q\n\032OsmAndPoiNameIndexDataAt",
-      "om\022\014\n\004zoom\030\002 \001(\r\022\t\n\001x\030\003 \001(\r\022\t\n\001y\030\004 \001(\r\022\017" +
-      "\n\007shiftTo\030\016 \001(\007\">\n\023OsmAndCategoryTable\022\020" +
-      "\n\010category\030\001 \002(\t\022\025\n\rsubcategories\030\003 \003(\t\"" +
-      "E\n\023OsmAndSubtypesTable\022.\n\010subtypes\030\004 \003(\013" +
-      "2\034.OsmAnd.OBF.OsmAndPoiSubtype\"\205\001\n\020OsmAn" +
-      "dPoiSubtype\022\014\n\004name\030\001 \002(\t\022\017\n\007tagname\030\002 \001" +
-      "(\t\022\016\n\006isText\030\003 \002(\010\022\021\n\tfrequency\030\005 \001(\r\022\031\n" +
-      "\021subtypeValuesSize\030\006 \001(\r\022\024\n\014subtypeValue" +
-      "\030\010 \003(\t\"\255\001\n\014OsmAndPoiBox\022\014\n\004zoom\030\001 \002(\r\022\014\n" +
-      "\004left\030\002 \002(\021\022\013\n\003top\030\003 \002(\021\0223\n\ncategories\030\004",
-      " \001(\0132\037.OsmAnd.OBF.OsmAndPoiCategories\022*\n" +
-      "\010subBoxes\030\n \003(\0132\030.OsmAnd.OBF.OsmAndPoiBo" +
-      "x\022\023\n\013shiftToData\030\016 \001(\007\"@\n\023OsmAndPoiCateg" +
-      "ories\022\022\n\ncategories\030\003 \003(\r\022\025\n\rsubcategori" +
-      "es\030\005 \003(\r\"i\n\020OsmAndPoiBoxData\022\014\n\004zoom\030\001 \001" +
-      "(\r\022\t\n\001x\030\002 \001(\r\022\t\n\001y\030\003 \001(\r\0221\n\007poiData\030\005 \003(" +
-      "\0132 .OsmAnd.OBF.OsmAndPoiBoxDataAtom\"\360\001\n\024" +
-      "OsmAndPoiBoxDataAtom\022\n\n\002dx\030\002 \002(\021\022\n\n\002dy\030\003" +
-      " \002(\021\022\022\n\ncategories\030\004 \003(\r\022\025\n\rsubcategorie" +
-      "s\030\005 \003(\r\022\014\n\004name\030\006 \001(\t\022\016\n\006nameEn\030\007 \001(\t\022\n\n",
-      "\002id\030\010 \001(\004\022\024\n\014openingHours\030\n \001(\t\022\014\n\004site\030" +
-      "\013 \001(\t\022\r\n\005phone\030\014 \001(\t\022\014\n\004note\030\r \001(\t\022\026\n\016te" +
-      "xtCategories\030\016 \003(\r\022\022\n\ntextValues\030\017 \003(\t\"\032" +
-      "\n\007IdTable\022\017\n\007routeId\030\001 \003(\022\"F\n\017Restrictio" +
-      "nData\022\014\n\004type\030\001 \002(\005\022\014\n\004from\030\002 \002(\005\022\n\n\002to\030" +
-      "\003 \002(\005\022\013\n\003via\030\004 \001(\005\"x\n\tRouteData\022\016\n\006point" +
-      "s\030\001 \002(\014\022\022\n\npointTypes\030\004 \001(\014\022\022\n\npointName" +
-      "s\030\005 \001(\014\022\r\n\005types\030\007 \002(\014\022\017\n\007routeId\030\014 \002(\005\022" +
-      "\023\n\013stringNames\030\016 \001(\014\"\304\005\n\022OsmAndRoutingIn" +
-      "dex\022\014\n\004name\030\001 \002(\t\022?\n\005rules\030\002 \003(\01320.OsmAn",
-      "d.OBF.OsmAndRoutingIndex.RouteEncodingRu" +
-      "le\022>\n\trootBoxes\030\003 \003(\0132+.OsmAnd.OBF.OsmAn" +
-      "dRoutingIndex.RouteDataBox\022A\n\014basemapBox" +
-      "es\030\004 \003(\0132+.OsmAnd.OBF.OsmAndRoutingIndex" +
-      ".RouteDataBox\022=\n\006blocks\030\005 \003(\0132-.OsmAnd.O" +
-      "BF.OsmAndRoutingIndex.RouteDataBlock\032;\n\021" +
-      "RouteEncodingRule\022\013\n\003tag\030\003 \002(\t\022\r\n\005value\030" +
-      "\005 \002(\t\022\n\n\002id\030\007 \001(\r\032\231\001\n\014RouteDataBox\022\014\n\004le" +
-      "ft\030\001 \002(\021\022\r\n\005right\030\002 \002(\021\022\013\n\003top\030\003 \002(\021\022\016\n\006" +
-      "bottom\030\004 \002(\021\022\023\n\013shiftToData\030\005 \001(\007\022:\n\005box",
-      "es\030\007 \003(\0132+.OsmAnd.OBF.OsmAndRoutingIndex" +
-      ".RouteDataBox\032\303\001\n\016RouteDataBlock\022$\n\007idTa" +
-      "ble\030\005 \001(\0132\023.OsmAnd.OBF.IdTable\022*\n\013dataOb" +
-      "jects\030\006 \003(\0132\025.OsmAnd.OBF.RouteData\0221\n\014re" +
-      "strictions\030\007 \003(\0132\033.OsmAnd.OBF.Restrictio" +
-      "nData\022,\n\013stringTable\030\010 \001(\0132\027.OsmAnd.OBF." +
-      "StringTableB\036\n\021net.osmand.binaryB\tOsmand" +
-      "Odb"
+      "teStop\022\020\n\010geometry\030\021 \001(\014\0228\n\014scheduleTrip" +
+      "\030\022 \003(\0132\".OsmAnd.OBF.TransportRouteSchedu" +
+      "le\"\244\001\n\026TransportRouteSchedule\022\030\n\020avgStop" +
+      "Intervals\030\001 \003(\r\022\030\n\020avgWaitIntervals\030\002 \003(" +
+      "\r\022\025\n\rtripIntervals\030\003 \003(\r\022?\n\nexceptions\030\010" +
+      " \003(\0132+.OsmAnd.OBF.TransportRouteSchedule" +
+      "Exception\"\313\001\n\037TransportRouteScheduleExce" +
+      "ption\022\023\n\013tripIndexes\030\001 \003(\r\022\023\n\013stopIndexe" +
+      "s\030\002 \003(\r\022\021\n\tavailable\030\003 \001(\010\022\024\n\014delayArriv",
+      "al\030\005 \003(\r\022\031\n\021deltaWaitInterval\030\006 \003(\005\022\034\n\024d" +
+      "ayOfWeekRestriction\030\007 \003(\r\022\034\n\024dayOfYearRe" +
+      "striction\030\010 \003(\r\"W\n\022TransportRouteStop\022\n\n" +
+      "\002id\030\001 \002(\022\022\n\n\002dx\030\002 \002(\021\022\n\n\002dy\030\003 \002(\021\022\014\n\004nam" +
+      "e\030\006 \002(\r\022\017\n\007name_en\030\007 \001(\r\"b\n\rTransportSto" +
+      "p\022\n\n\002dx\030\001 \002(\021\022\n\n\002dy\030\002 \002(\021\022\n\n\002id\030\005 \002(\022\022\014\n" +
+      "\004name\030\006 \002(\r\022\017\n\007name_en\030\007 \001(\r\022\016\n\006routes\030\020" +
+      " \003(\r\"\272\001\n\022TransportStopsTree\022\014\n\004left\030\001 \002(" +
+      "\021\022\r\n\005right\030\002 \002(\021\022\013\n\003top\030\003 \002(\021\022\016\n\006bottom\030" +
+      "\004 \002(\021\0220\n\010subtrees\030\007 \003(\0132\036.OsmAnd.OBF.Tra",
+      "nsportStopsTree\022(\n\005leafs\030\010 \003(\0132\031.OsmAnd." +
+      "OBF.TransportStop\022\016\n\006baseId\030\020 \001(\004\"\256\001\n\024Os" +
+      "mAndTransportIndex\022\014\n\004name\030\001 \001(\t\022+\n\006rout" +
+      "es\030\003 \001(\0132\033.OsmAnd.OBF.TransportRoutes\022-\n" +
+      "\005stops\030\006 \001(\0132\036.OsmAnd.OBF.TransportStops" +
+      "Tree\022,\n\013stringTable\030\t \002(\0132\027.OsmAnd.OBF.S" +
+      "tringTable\"\312\002\n\016OsmAndPoiIndex\022\014\n\004name\030\001 " +
+      "\002(\t\022-\n\nboundaries\030\002 \002(\0132\031.OsmAnd.OBF.Osm" +
+      "AndTileBox\0228\n\017categoriesTable\030\003 \003(\0132\037.Os" +
+      "mAnd.OBF.OsmAndCategoryTable\0221\n\tnameInde",
+      "x\030\004 \001(\0132\036.OsmAnd.OBF.OsmAndPoiNameIndex\022" +
+      "6\n\rsubtypesTable\030\005 \001(\0132\037.OsmAnd.OBF.OsmA" +
+      "ndSubtypesTable\022\'\n\005boxes\030\006 \003(\0132\030.OsmAnd." +
+      "OBF.OsmAndPoiBox\022-\n\007poiData\030\t \003(\0132\034.OsmA" +
+      "nd.OBF.OsmAndPoiBoxData\"\331\001\n\022OsmAndPoiNam" +
+      "eIndex\022-\n\005table\030\003 \002(\0132\036.OsmAnd.OBF.Index" +
+      "edStringTable\022C\n\004data\030\005 \003(\01325.OsmAnd.OBF" +
+      ".OsmAndPoiNameIndex.OsmAndPoiNameIndexDa" +
+      "ta\032O\n\026OsmAndPoiNameIndexData\0225\n\005atoms\030\003 " +
+      "\003(\0132&.OsmAnd.OBF.OsmAndPoiNameIndexDataA",
+      "tom\"Q\n\032OsmAndPoiNameIndexDataAtom\022\014\n\004zoo" +
+      "m\030\002 \001(\r\022\t\n\001x\030\003 \001(\r\022\t\n\001y\030\004 \001(\r\022\017\n\007shiftTo" +
+      "\030\016 \001(\007\">\n\023OsmAndCategoryTable\022\020\n\010categor" +
+      "y\030\001 \002(\t\022\025\n\rsubcategories\030\003 \003(\t\"E\n\023OsmAnd" +
+      "SubtypesTable\022.\n\010subtypes\030\004 \003(\0132\034.OsmAnd" +
+      ".OBF.OsmAndPoiSubtype\"\205\001\n\020OsmAndPoiSubty" +
+      "pe\022\014\n\004name\030\001 \002(\t\022\017\n\007tagname\030\002 \001(\t\022\016\n\006isT" +
+      "ext\030\003 \002(\010\022\021\n\tfrequency\030\005 \001(\r\022\031\n\021subtypeV" +
+      "aluesSize\030\006 \001(\r\022\024\n\014subtypeValue\030\010 \003(\t\"\255\001" +
+      "\n\014OsmAndPoiBox\022\014\n\004zoom\030\001 \002(\r\022\014\n\004left\030\002 \002",
+      "(\021\022\013\n\003top\030\003 \002(\021\0223\n\ncategories\030\004 \001(\0132\037.Os" +
+      "mAnd.OBF.OsmAndPoiCategories\022*\n\010subBoxes" +
+      "\030\n \003(\0132\030.OsmAnd.OBF.OsmAndPoiBox\022\023\n\013shif" +
+      "tToData\030\016 \001(\007\"@\n\023OsmAndPoiCategories\022\022\n\n" +
+      "categories\030\003 \003(\r\022\025\n\rsubcategories\030\005 \003(\r\"" +
+      "i\n\020OsmAndPoiBoxData\022\014\n\004zoom\030\001 \001(\r\022\t\n\001x\030\002" +
+      " \001(\r\022\t\n\001y\030\003 \001(\r\0221\n\007poiData\030\005 \003(\0132 .OsmAn" +
+      "d.OBF.OsmAndPoiBoxDataAtom\"\360\001\n\024OsmAndPoi" +
+      "BoxDataAtom\022\n\n\002dx\030\002 \002(\021\022\n\n\002dy\030\003 \002(\021\022\022\n\nc" +
+      "ategories\030\004 \003(\r\022\025\n\rsubcategories\030\005 \003(\r\022\014",
+      "\n\004name\030\006 \001(\t\022\016\n\006nameEn\030\007 \001(\t\022\n\n\002id\030\010 \001(\004" +
+      "\022\024\n\014openingHours\030\n \001(\t\022\014\n\004site\030\013 \001(\t\022\r\n\005" +
+      "phone\030\014 \001(\t\022\014\n\004note\030\r \001(\t\022\026\n\016textCategor" +
+      "ies\030\016 \003(\r\022\022\n\ntextValues\030\017 \003(\t\"\032\n\007IdTable" +
+      "\022\017\n\007routeId\030\001 \003(\022\"F\n\017RestrictionData\022\014\n\004" +
+      "type\030\001 \002(\005\022\014\n\004from\030\002 \002(\005\022\n\n\002to\030\003 \002(\005\022\013\n\003" +
+      "via\030\004 \001(\005\"x\n\tRouteData\022\016\n\006points\030\001 \002(\014\022\022" +
+      "\n\npointTypes\030\004 \001(\014\022\022\n\npointNames\030\005 \001(\014\022\r" +
+      "\n\005types\030\007 \002(\014\022\017\n\007routeId\030\014 \002(\005\022\023\n\013string" +
+      "Names\030\016 \001(\014\"\304\005\n\022OsmAndRoutingIndex\022\014\n\004na",
+      "me\030\001 \002(\t\022?\n\005rules\030\002 \003(\01320.OsmAnd.OBF.Osm" +
+      "AndRoutingIndex.RouteEncodingRule\022>\n\troo" +
+      "tBoxes\030\003 \003(\0132+.OsmAnd.OBF.OsmAndRoutingI" +
+      "ndex.RouteDataBox\022A\n\014basemapBoxes\030\004 \003(\0132" +
+      "+.OsmAnd.OBF.OsmAndRoutingIndex.RouteDat" +
+      "aBox\022=\n\006blocks\030\005 \003(\0132-.OsmAnd.OBF.OsmAnd" +
+      "RoutingIndex.RouteDataBlock\032;\n\021RouteEnco" +
+      "dingRule\022\013\n\003tag\030\003 \002(\t\022\r\n\005value\030\005 \002(\t\022\n\n\002" +
+      "id\030\007 \001(\r\032\231\001\n\014RouteDataBox\022\014\n\004left\030\001 \002(\021\022" +
+      "\r\n\005right\030\002 \002(\021\022\013\n\003top\030\003 \002(\021\022\016\n\006bottom\030\004 ",
+      "\002(\021\022\023\n\013shiftToData\030\005 \001(\007\022:\n\005boxes\030\007 \003(\0132" +
+      "+.OsmAnd.OBF.OsmAndRoutingIndex.RouteDat" +
+      "aBox\032\303\001\n\016RouteDataBlock\022$\n\007idTable\030\005 \001(\013" +
+      "2\023.OsmAnd.OBF.IdTable\022*\n\013dataObjects\030\006 \003" +
+      "(\0132\025.OsmAnd.OBF.RouteData\0221\n\014restriction" +
+      "s\030\007 \003(\0132\033.OsmAnd.OBF.RestrictionData\022,\n\013" +
+      "stringTable\030\010 \001(\0132\027.OsmAnd.OBF.StringTab" +
+      "leB\036\n\021net.osmand.binaryB\tOsmandOdb"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -58273,39 +61724,51 @@ public final class OsmandOdb {
           internal_static_OsmAnd_OBF_TransportRoute_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_OsmAnd_OBF_TransportRoute_descriptor,
-              new java.lang.String[] { "Id", "Type", "Operator", "Ref", "Name", "NameEn", "Distance", "Color", "DirectStops", "ReverseStops", "Geometry", });
-          internal_static_OsmAnd_OBF_TransportRouteStop_descriptor =
+              new java.lang.String[] { "Id", "Type", "Operator", "Ref", "Name", "NameEn", "Distance", "Color", "DirectStops", "ReverseStops", "Geometry", "ScheduleTrip", });
+          internal_static_OsmAnd_OBF_TransportRouteSchedule_descriptor =
             getDescriptor().getMessageTypes().get(17);
+          internal_static_OsmAnd_OBF_TransportRouteSchedule_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_OsmAnd_OBF_TransportRouteSchedule_descriptor,
+              new java.lang.String[] { "AvgStopIntervals", "AvgWaitIntervals", "TripIntervals", "Exceptions", });
+          internal_static_OsmAnd_OBF_TransportRouteScheduleException_descriptor =
+            getDescriptor().getMessageTypes().get(18);
+          internal_static_OsmAnd_OBF_TransportRouteScheduleException_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_OsmAnd_OBF_TransportRouteScheduleException_descriptor,
+              new java.lang.String[] { "TripIndexes", "StopIndexes", "Available", "DelayArrival", "DeltaWaitInterval", "DayOfWeekRestriction", "DayOfYearRestriction", });
+          internal_static_OsmAnd_OBF_TransportRouteStop_descriptor =
+            getDescriptor().getMessageTypes().get(19);
           internal_static_OsmAnd_OBF_TransportRouteStop_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_OsmAnd_OBF_TransportRouteStop_descriptor,
               new java.lang.String[] { "Id", "Dx", "Dy", "Name", "NameEn", });
           internal_static_OsmAnd_OBF_TransportStop_descriptor =
-            getDescriptor().getMessageTypes().get(18);
+            getDescriptor().getMessageTypes().get(20);
           internal_static_OsmAnd_OBF_TransportStop_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_OsmAnd_OBF_TransportStop_descriptor,
               new java.lang.String[] { "Dx", "Dy", "Id", "Name", "NameEn", "Routes", });
           internal_static_OsmAnd_OBF_TransportStopsTree_descriptor =
-            getDescriptor().getMessageTypes().get(19);
+            getDescriptor().getMessageTypes().get(21);
           internal_static_OsmAnd_OBF_TransportStopsTree_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_OsmAnd_OBF_TransportStopsTree_descriptor,
               new java.lang.String[] { "Left", "Right", "Top", "Bottom", "Subtrees", "Leafs", "BaseId", });
           internal_static_OsmAnd_OBF_OsmAndTransportIndex_descriptor =
-            getDescriptor().getMessageTypes().get(20);
+            getDescriptor().getMessageTypes().get(22);
           internal_static_OsmAnd_OBF_OsmAndTransportIndex_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_OsmAnd_OBF_OsmAndTransportIndex_descriptor,
               new java.lang.String[] { "Name", "Routes", "Stops", "StringTable", });
           internal_static_OsmAnd_OBF_OsmAndPoiIndex_descriptor =
-            getDescriptor().getMessageTypes().get(21);
+            getDescriptor().getMessageTypes().get(23);
           internal_static_OsmAnd_OBF_OsmAndPoiIndex_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_OsmAnd_OBF_OsmAndPoiIndex_descriptor,
               new java.lang.String[] { "Name", "Boundaries", "CategoriesTable", "NameIndex", "SubtypesTable", "Boxes", "PoiData", });
           internal_static_OsmAnd_OBF_OsmAndPoiNameIndex_descriptor =
-            getDescriptor().getMessageTypes().get(22);
+            getDescriptor().getMessageTypes().get(24);
           internal_static_OsmAnd_OBF_OsmAndPoiNameIndex_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_OsmAnd_OBF_OsmAndPoiNameIndex_descriptor,
@@ -58317,73 +61780,73 @@ public final class OsmandOdb {
               internal_static_OsmAnd_OBF_OsmAndPoiNameIndex_OsmAndPoiNameIndexData_descriptor,
               new java.lang.String[] { "Atoms", });
           internal_static_OsmAnd_OBF_OsmAndPoiNameIndexDataAtom_descriptor =
-            getDescriptor().getMessageTypes().get(23);
+            getDescriptor().getMessageTypes().get(25);
           internal_static_OsmAnd_OBF_OsmAndPoiNameIndexDataAtom_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_OsmAnd_OBF_OsmAndPoiNameIndexDataAtom_descriptor,
               new java.lang.String[] { "Zoom", "X", "Y", "ShiftTo", });
           internal_static_OsmAnd_OBF_OsmAndCategoryTable_descriptor =
-            getDescriptor().getMessageTypes().get(24);
+            getDescriptor().getMessageTypes().get(26);
           internal_static_OsmAnd_OBF_OsmAndCategoryTable_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_OsmAnd_OBF_OsmAndCategoryTable_descriptor,
               new java.lang.String[] { "Category", "Subcategories", });
           internal_static_OsmAnd_OBF_OsmAndSubtypesTable_descriptor =
-            getDescriptor().getMessageTypes().get(25);
+            getDescriptor().getMessageTypes().get(27);
           internal_static_OsmAnd_OBF_OsmAndSubtypesTable_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_OsmAnd_OBF_OsmAndSubtypesTable_descriptor,
               new java.lang.String[] { "Subtypes", });
           internal_static_OsmAnd_OBF_OsmAndPoiSubtype_descriptor =
-            getDescriptor().getMessageTypes().get(26);
+            getDescriptor().getMessageTypes().get(28);
           internal_static_OsmAnd_OBF_OsmAndPoiSubtype_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_OsmAnd_OBF_OsmAndPoiSubtype_descriptor,
               new java.lang.String[] { "Name", "Tagname", "IsText", "Frequency", "SubtypeValuesSize", "SubtypeValue", });
           internal_static_OsmAnd_OBF_OsmAndPoiBox_descriptor =
-            getDescriptor().getMessageTypes().get(27);
+            getDescriptor().getMessageTypes().get(29);
           internal_static_OsmAnd_OBF_OsmAndPoiBox_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_OsmAnd_OBF_OsmAndPoiBox_descriptor,
               new java.lang.String[] { "Zoom", "Left", "Top", "Categories", "SubBoxes", "ShiftToData", });
           internal_static_OsmAnd_OBF_OsmAndPoiCategories_descriptor =
-            getDescriptor().getMessageTypes().get(28);
+            getDescriptor().getMessageTypes().get(30);
           internal_static_OsmAnd_OBF_OsmAndPoiCategories_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_OsmAnd_OBF_OsmAndPoiCategories_descriptor,
               new java.lang.String[] { "Categories", "Subcategories", });
           internal_static_OsmAnd_OBF_OsmAndPoiBoxData_descriptor =
-            getDescriptor().getMessageTypes().get(29);
+            getDescriptor().getMessageTypes().get(31);
           internal_static_OsmAnd_OBF_OsmAndPoiBoxData_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_OsmAnd_OBF_OsmAndPoiBoxData_descriptor,
               new java.lang.String[] { "Zoom", "X", "Y", "PoiData", });
           internal_static_OsmAnd_OBF_OsmAndPoiBoxDataAtom_descriptor =
-            getDescriptor().getMessageTypes().get(30);
+            getDescriptor().getMessageTypes().get(32);
           internal_static_OsmAnd_OBF_OsmAndPoiBoxDataAtom_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_OsmAnd_OBF_OsmAndPoiBoxDataAtom_descriptor,
               new java.lang.String[] { "Dx", "Dy", "Categories", "Subcategories", "Name", "NameEn", "Id", "OpeningHours", "Site", "Phone", "Note", "TextCategories", "TextValues", });
           internal_static_OsmAnd_OBF_IdTable_descriptor =
-            getDescriptor().getMessageTypes().get(31);
+            getDescriptor().getMessageTypes().get(33);
           internal_static_OsmAnd_OBF_IdTable_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_OsmAnd_OBF_IdTable_descriptor,
               new java.lang.String[] { "RouteId", });
           internal_static_OsmAnd_OBF_RestrictionData_descriptor =
-            getDescriptor().getMessageTypes().get(32);
+            getDescriptor().getMessageTypes().get(34);
           internal_static_OsmAnd_OBF_RestrictionData_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_OsmAnd_OBF_RestrictionData_descriptor,
               new java.lang.String[] { "Type", "From", "To", "Via", });
           internal_static_OsmAnd_OBF_RouteData_descriptor =
-            getDescriptor().getMessageTypes().get(33);
+            getDescriptor().getMessageTypes().get(35);
           internal_static_OsmAnd_OBF_RouteData_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_OsmAnd_OBF_RouteData_descriptor,
               new java.lang.String[] { "Points", "PointTypes", "PointNames", "Types", "RouteId", "StringNames", });
           internal_static_OsmAnd_OBF_OsmAndRoutingIndex_descriptor =
-            getDescriptor().getMessageTypes().get(34);
+            getDescriptor().getMessageTypes().get(36);
           internal_static_OsmAnd_OBF_OsmAndRoutingIndex_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_OsmAnd_OBF_OsmAndRoutingIndex_descriptor,

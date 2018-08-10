@@ -3052,4 +3052,7 @@
 \n
 \n• Andre feilrettinger
 \n</string>
-    </resources>
+    <string name="commiting_way">Sender inn vei…</string>
+    <string name="send_search_query_description">Ditt søk <b>\"%1$s\"</b>, vil bli sent inn sammen med din plassering.<br/><br/> Ingen personvernsinfo samles inn, søkedata trengs kun til forbedring av søket.<br/></string>
+    <string name="test_voice_desrc">Trykk på en knapp og hør på tilhørende stemmeveiledning for å identifisere manglende eller feilaktige veiledninger.</string>
+</resources>
