@@ -2035,8 +2035,8 @@
     <string name="use_compass_navigation_descr">İstiqaməti başqa cür müəyyən etmək mümkün deyilsə, kompas istifadə et.</string>
     <string name="rotate_map_to_bearing_descr">Xəritənin fırlanma üsulunu seçin.</string>
     <string name="map_screen_orientation">Ekran istiqaməti</string>
-    <string name="distance_farthest">Məsafə: İlk ən uzaqdakı</string>
-    <string name="distance_nearest">Məsafə: İlk ən yaxındakı</string>
+    <string name="distance_farthest">Məsafə: ilk ən uzaqdakı</string>
+    <string name="distance_nearest">Məsafə: ilk ən yaxındakı</string>
     <string name="enter_lon">Uzunluq daxil edin</string>
     <string name="enter_lat">En daxil edin</string>
     <string name="enter_lat_and_lon">En və uzunluq daxil edin</string>
@@ -2107,7 +2107,7 @@
     <string name="waypoints_removed_from_map_markers">Yol nöqtələri xəritə işarələrindən silindi</string>
     <string name="nothing_found_in_radius">Heç bir şey tapılmadı:</string>
     <string name="shared_string_total">Cəmi</string>
-    <string name="wikivoyage_search_hint">Axtar: Ölkə, şəhər, əyalət</string>
+    <string name="wikivoyage_search_hint">Axtar: ölkə, şəhər, əyalət</string>
     <string name="shared_string_read">Oxu</string>
     <string name="saved_articles">Saxlanan məqalələr</string>
     <string name="shared_string_only_with_wifi">Yalnız Wi-Fi ilə</string>

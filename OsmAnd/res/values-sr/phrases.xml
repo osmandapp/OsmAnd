@@ -1605,4 +1605,17 @@
 
 	<string name="poi_bell_tower">Телефонски торањ</string>
 	<string name="poi_cooling_tower">Расхладни торањ</string>
+	<string name="poi_recycling_hardcore">Зидарски шут</string>
+	<string name="poi_recycling_chipboard">Иверица</string>
+	<string name="poi_recycling_plasterboard">Суви малтер</string>
+	<string name="poi_landfill">Депонија</string>
+	<string name="poi_brownfield">Претграђевински терен</string>
+	<string name="poi_greenfield">Новограђевински терен</string>
+	<string name="poi_adit">Подземни улаз</string>
+	<string name="poi_petroleum_well">Извор нафте</string>
+	<string name="poi_survey_point">Надзорна тачка</string>
+	<string name="poi_cricket_nets">Крикет мреже</string>
+	<string name="poi_register_office">Канцеларија за грађане</string>
+	<string name="poi_place_allotments">Парцелна група</string>
+	<string name="poi_baby_hatch">Прихватилиште беба</string>
 	</resources>

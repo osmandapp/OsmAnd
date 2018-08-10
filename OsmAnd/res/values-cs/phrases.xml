@@ -411,7 +411,7 @@
 	<string name="poi_quarry">Povrchový lom</string>
 	<string name="poi_orchard">Ovocný sad</string>
 	<string name="poi_allotments">Zahrádkářská kolonie</string>
-	<string name="poi_forest">Lesy udržované lidmi</string>
+	<string name="poi_forest">Obhospodařovaný les</string>
 	<string name="poi_farmyard">Farma</string>
 	<string name="poi_meadow">Louka</string>
 	<string name="poi_landuse_railway">Železniční prostor</string>
@@ -424,7 +424,7 @@
 	<string name="poi_tower">Věž</string>
 	<string name="poi_mast">Stožár</string>
 	<string name="poi_radar">Radar</string>
-	<string name="poi_construction">Stavební areál</string>
+	<string name="poi_construction">Staveniště</string>
 	<string name="poi_works">Továrna</string>
 	<string name="poi_mineshaft">Šachta</string>
 	<string name="poi_adit">Štola</string>
@@ -449,8 +449,8 @@
 	<string name="poi_tax_inspection">Daňová kontrola</string>
 	<string name="poi_office_administrative">Místní úřady</string>
 	<string name="poi_customs">Celní správa</string>
-	<string name="poi_city">Město</string>
-	<string name="poi_town">Velké město</string>
+	<string name="poi_city">Velké město</string>
+	<string name="poi_town">Město</string>
 	<string name="poi_village">Obec</string>
 	<string name="poi_hamlet">Osada</string>
 	<string name="poi_isolated_dwelling">Izolované obydlí</string>
@@ -482,7 +482,7 @@
 	<string name="poi_estate_agent">Realitní kancelář</string>
 	<string name="poi_office_telecommunication">Telekomunikace</string>
 	<string name="poi_ngo">Nezisková organizace</string>
-	<string name="poi_townhall">Radnice</string>
+	<string name="poi_townhall">Radnice/obecní úřad</string>
 	<string name="poi_employment_agency">Úřad práce</string>
 	<string name="poi_research">Výzkumný ústav</string>
 	<string name="poi_it">Informační technologie</string>
@@ -512,7 +512,7 @@
 	<string name="poi_boules">Petang</string>
 	<string name="poi_canadian_football">Kanadský fotbal</string>
 	<string name="poi_canoe">Pádlování</string>
-	<string name="poi_climbing">Šplh</string>
+	<string name="poi_climbing">Lezení</string>
 	<string name="poi_cycling">Jízda na kole</string>
 	<string name="poi_diving">Skoky do vody</string>
 	<string name="poi_scuba_diving">Potápění</string>
@@ -589,8 +589,8 @@
 	<string name="poi_internet_access_service">Internetové připojení: služba</string>
 	
 	<string name="poi_historic_monastery">Historický klášter</string>
-	<string name="poi_wayside_cross">Boží muka</string>
-	<string name="poi_wayside_shrine">Malá kaplička</string>
+	<string name="poi_wayside_cross">Kříž, křížek</string>
+	<string name="poi_wayside_shrine">Kaplička, boží muka</string>
 	<string name="poi_information">Informace</string>
 	<string name="poi_travel_agent">Cestovní kancelář</string>
 	<string name="poi_viewpoint">Vyhlídka</string>
@@ -629,7 +629,7 @@
 	<string name="poi_club_charity">Charitativní klub</string>
 
 	<string name="poi_piste_downhill">Sjezdová trať</string>
-	<string name="poi_piste_hike">Výletní lyžařská trasa</string>
+	<string name="poi_piste_hike">Zimní pěší trasa</string>
 	<string name="poi_piste_sleigh">Trať pro tažené saně</string>
 	<string name="poi_piste_sled">Trať pro saně</string>
 	<string name="poi_piste_snow_park">Zábavní sněhový park</string>
@@ -720,7 +720,7 @@
 	<string name="poi_valley">Údolí</string>
 	<string name="poi_water">Voda</string>
 	<string name="poi_wetland">Mokřina</string>
-	<string name="poi_wood">Háj</string>
+	<string name="poi_wood">Neobhospodařovaný les</string>
 	<string name="poi_anchor_berth">Kotviště</string>
 	<string name="poi_beacon_cardinal">Směrový maják</string>
 	<string name="poi_beacon_special_purpose">Maják pro speciální účely</string>
@@ -768,7 +768,7 @@
 	<string name="poi_bowls">Hra Bowls</string>
 	<string name="poi_paddle_tennis">Pádel tenis</string>
 	<string name="poi_piste">Sjezdovka</string>
-	<string name="poi_piste_skitour">Lyžařský okruh</string>
+	<string name="poi_piste_skitour">Skialpinismus</string>
 	<string name="poi_observation_tower">Rozhledna</string>
 	<string name="poi_bell_tower">Zvonice</string>
 	<string name="poi_general_tourist_attraction_yes">Všeobecná turistická atrakce</string>
@@ -784,7 +784,7 @@
 	<string name="poi_ski_resort">Lyžařské středisko</string>
 	<string name="poi_trail_riding_station">Jezdecká stanice</string>
 
-	<string name="poi_piste_nordic">Trať pro klasické lyžování</string>
+	<string name="poi_piste_nordic">Běžecká stopa</string>
 	<string name="poi_hunting_lodge">Lovecká chata</string>
 
 	<string name="poi_hanami">Japonské Hanami</string>
@@ -1171,7 +1171,7 @@
 	<string name="poi_content_salt">Obsah: sůl</string>
 	<string name="poi_content_grain">Obsah: zrno</string>
 
-	<string name="poi_trade_wood">Dřevo</string>
+	<string name="poi_trade_wood">Dřevoprodej</string>
 	<string name="poi_trade_tile">Kachličky</string>
 
 	<string name="poi_bicycle_parking_stands">Stojany</string>
@@ -1489,7 +1489,7 @@
 
 	<string name="poi_capacity">Kapacita</string>
 	<string name="poi_capacity_disabled_yes">Ano</string>
-	<string name="poi_capacity_disabled_no">Nevhodné pro postižené</string>
+	<string name="poi_capacity_disabled_no">Bez vyhrazených míst pro postižené</string>
 	<string name="poi_aerialway_occupancy">Kapacita kabinky/křesla/vozidla</string>
 	<string name="poi_aerialway_capacity">Kapacita za hodinu</string>
 	<string name="poi_aerialway_access_entry">Jen pro vstup</string>
@@ -1506,15 +1506,15 @@
 	<string name="poi_windfall">Polom</string>
 	<string name="poi_rtsa_scale">Stupnice RTSA</string>
 
-	<string name="poi_piste_difficulty_easy">Lehká</string>
-	<string name="poi_piste_difficulty_intermediate">Střední</string>
-	<string name="poi_piste_difficulty_advanced">Těžká</string>
-	<string name="poi_piste_difficulty_novice">Začátečníci</string>
-	<string name="poi_piste_difficulty_expert">Zkušení</string>
-	<string name="poi_piste_difficulty_freeride">Volný sjezd</string>
-	<string name="poi_piste_grooming_classic">Klasická</string>
-	<string name="poi_piste_grooming_classic_skating">Klasická+bruslení na lyžích</string>
-	<string name="poi_piste_grooming_backcountry">Přes krajinu</string>
+	<string name="poi_piste_difficulty_easy">Lehká (modrá)</string>
+	<string name="poi_piste_difficulty_intermediate">Střední (červená)</string>
+	<string name="poi_piste_difficulty_advanced">Těžká (černá)</string>
+	<string name="poi_piste_difficulty_novice">Začátečníci (zelená)</string>
+	<string name="poi_piste_difficulty_expert">Zkušení (oranžová)</string>
+	<string name="poi_piste_difficulty_freeride">Volný sjezd (žlutá)</string>
+	<string name="poi_piste_grooming_classic">Klasika</string>
+	<string name="poi_piste_grooming_classic_skating">Klasika+bruslení na lyžích</string>
+	<string name="poi_piste_grooming_backcountry">Neudržovaná</string>
 	<string name="poi_piste_grooming_skating">Bruslení na lyžích</string>
 	<string name="poi_garden_style_kitchen">Zahradní styl: kuchyň</string>
 	<string name="poi_garden_style_rosarium">Zahradní styl: rozárium</string>
@@ -2188,7 +2188,7 @@
 	<string name="poi_quango">Quango</string>
 	<string name="poi_consulting">Poradenská kancelář</string>
 	<string name="poi_cooperative">Družstevní kancelář</string>
-	<string name="poi_office_forestry">Kancelář lesnictví</string>
+	<string name="poi_office_forestry">Lesní správa</string>
 	<string name="poi_logistics">Zásobovací kancelář</string>
 	<string name="poi_parish">Farní úřad</string>
 	<string name="poi_fuel_91ul">Palivo 91UL</string>
@@ -2424,7 +2424,7 @@
 	<string name="poi_site_type_tumulus">Mohyla</string>
 	<string name="poi_site_type_fortification">Opevnění</string>
 	<string name="poi_site_type_settlement">Osada</string>
-	<string name="poi_site_type_city">Město</string>
+	<string name="poi_site_type_city">Velké město</string>
 	<string name="poi_site_type_hut_circle">Kruhová chatrč</string>
 	<string name="poi_site_type_necropolis">Nekropole</string>
 	<string name="poi_site_type_earthwork">Zemní práce</string>
@@ -3140,7 +3140,7 @@
 	<string name="poi_xmas_location">Vánoce: umístění</string>
 	<string name="poi_xmas_url">Vánoce: webové stránky</string>
 
-	<string name="poi_public_bookcase">Veřejná knihovna</string>
+	<string name="poi_public_bookcase">Knihobudka</string>
 	<string name="poi_public_bookcase_type_phone_box">Typ: telefonní budka</string>
 	<string name="poi_public_bookcase_type_reading_box">Typ: skřínka s knihami</string>
 	<string name="poi_public_bookcase_type_wooden_cabinet">Typ: dřevěná skříň</string>
@@ -3771,4 +3771,17 @@
 
 	<string name="poi_shop_boat">Lodě a čluny</string>
 
+	<string name="poi_climbing_boulder_yes">Bouldering: ano</string>
+	<string name="poi_climbing_boulder_no">Bouldering: ne</string>
+	<string name="poi_climbing_toprope_yes">Top Rope: ano</string>
+	<string name="poi_climbing_toprope_no">Top Rope: ne</string>
+	<string name="poi_climbing_trad_yes">Tradiční: ano</string>
+	<string name="poi_climbing_trad_no">Tradiční: ne</string>
+	<string name="poi_climbing_multipitch_yes">Vícedélkové cesty: ano</string>
+	<string name="poi_climbing_multipitch_no">Vícedélkové cesty: ne</string>
+	<string name="poi_climbing_ice_yes">Led: ano</string>
+	<string name="poi_climbing_ice_no">Led: ne</string>
+	<string name="poi_climbing_length">Délka lezení</string>
+	<string name="poi_climbing_length_min">Lezení min. délka</string>
+	<string name="poi_climbing_length_max">Lezení max. délka</string>
 	</resources>
