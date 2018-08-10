@@ -181,7 +181,7 @@ class SettingsDialogFragment : DialogFragment() {
 	}
 
 	private inner class StaleLocPref : DurationPref(
-		R.drawable.ic_action_location_history,
+		R.drawable.ic_action_time_span,
 		R.string.stale_location,
 		R.string.stale_location_desc,
 		STALE_LOC_VALUES_SEC
@@ -196,7 +196,7 @@ class SettingsDialogFragment : DialogFragment() {
 	}
 
 	private inner class LocHistoryPref : DurationPref(
-		R.drawable.ic_action_time_span,
+		R.drawable.ic_action_location_history,
 		R.string.location_history,
 		R.string.location_history_desc,
 		LOC_HISTORY_VALUES_SEC
