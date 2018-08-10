@@ -111,13 +111,10 @@ class MyLocationTabFragment : Fragment(), TelegramListener, ChatLiveMessagesList
 			setImageResource(R.drawable.img_my_location_user)
 		}
 
-		optionsBtn = mainView.findViewById<ImageView>(R.id.options).apply {
-			(activity as MainActivity).setupOptionsBtn(this)
-		}
-
-		mainView.findViewById<ImageView>(R.id.options_title).apply {
-			(activity as MainActivity).setupOptionsBtn(this)
-		}
+		optionsBtn = mainView.findViewById<ImageView>(R.id.options)
+		(activity as MainActivity).setupOptionsBtn(optionsBtn)
+		
+		activity.setupOptionsBtn(mainView.findViewById<ImageView>(R.id.options_title))
 
 		imageContainer = mainView.findViewById<FrameLayout>(R.id.image_container)
 		titleContainer = mainView.findViewById<LinearLayout>(R.id.title_container).apply {

@@ -77,10 +77,8 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 			})
 		}
 
-		mainView.findViewById<ImageView>(R.id.options).apply {
-			(activity as MainActivity).setupOptionsBtn(this)
-		}
-		
+		(activity as MainActivity).setupOptionsBtn(mainView.findViewById<ImageView>(R.id.options))
+
 		openOsmAndBtn = mainView.findViewById<View>(R.id.open_osmand_btn).apply {
 			setOnClickListener {
 				activity?.packageManager?.getLaunchIntentForPackage(OsmandAidlHelper.OSMAND_PACKAGE_NAME)
