@@ -19,7 +19,6 @@ import net.osmand.PlatformUtil;
 import net.osmand.osm.io.NetworkUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.resources.ResourceManager;
 
 import org.apache.commons.logging.Log;
 import org.xmlpull.v1.XmlPullParser;
