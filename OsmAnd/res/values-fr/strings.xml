@@ -3153,19 +3153,22 @@ représentant la zone : %1$s x %2$s</string>
     <string name="search_no_results_description">Aucun résultat ?
 \nSignalez-le nous.</string>
     <string name="send_search_query">Envoyez votre recherche ?</string>
-    <string name="release_3_1">• Navigation : correction de la barre de progression, permutation facile entre le point de départ et le point d\'arrivée
-\n
-\n• Marque : correction pour l\'activation / désactivation des groupes, possibilité de masquer les marques sur la carte
-\n
-\n• Modifications OSM : possibilité de modifier les objets autres que les points, correction de la perte des commentaires et des notes, copie de sauvegarde des modifications
-\n
-\n• Amélioration de Wikipedia et Wikivoyage, les fichiers à jour sont déjà disponibles
-\n
-\n• Menu contextuel : correction de la taille des menus, correction des couleurs en mode nuit
-\n
+    <string name="release_3_1">• Navigation : correction de la barre de progression, permutation facile entre le point de départ et le point d\'arrivée 
+\n 
+\n• Marque : correction pour l\'activation / désactivation des groupes, possibilité de masquer les marques sur la carte 
+\n 
+\n• Modifications OSM : possibilité de modifier les objets autres que les points et les routes, correction de la perte des commentaires et des notes, copie de sauvegarde des modifications 
+\n 
+\n• Amélioration de Wikipedia et Wikivoyage, les fichiers à jour sont déjà disponibles 
+\n 
+\n• Menu contextuel : correction de la taille des menus, correction des couleurs en mode nuit 
+\n 
 \n• Autres corrections
-\n
 \n</string>
     <string name="increase_search_radius_to">Augmenter le rayon de recherche à %1$s</string>
     <string name="thank_you_for_feedback">Merci pour vos retours</string>
-    </resources>
+    <string name="poi_cannot_be_found">Nœud ou Route introuvable.</string>
+    <string name="search_no_results_feedback">Aucun résultat pour cette recherche ?
+\nSignalez-le nous.</string>
+    <string name="test_voice_desrc">Appuyez sur un bouton pour écoutez l\'annonce vocale correspondante afin d\'identifier les annonces erronées ou manquantes.</string>
+</resources>

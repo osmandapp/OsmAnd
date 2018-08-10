@@ -68,7 +68,7 @@
 	<string name="poi_tunnel">Tunel</string>
 	<string name="poi_bridge">Most</string>
 
-	<string name="poi_turning_circle">Kruhový objezd</string>
+	<string name="poi_turning_circle">Obratiště</string>
 
 	<string name="poi_post_office">Pošta</string>
 	<string name="poi_post_box">Poštovní schránka</string>
@@ -76,9 +76,9 @@
 	<string name="poi_communication_tower">Komunikační věž</string>
 	<string name="poi_windmill">Větrný mlýn</string>
 	<string name="poi_vineyard">Vinohrad</string>
-	<string name="poi_school">Škola</string>
+	<string name="poi_school">Škola, střední škola</string>
 	<string name="poi_kindergarten">Školka</string>
-	<string name="poi_college">Střední škola</string>
+	<string name="poi_college">Vyšší odborná škola</string>
 	<string name="poi_university">Univerzita</string>
 
 	<string name="poi_prison">Vězení</string>
@@ -87,7 +87,7 @@
 	<string name="poi_dentist">Zubař</string>
 	<string name="poi_veterinary">Veterinář</string>
 	<string name="poi_blood_bank">Krevní banka</string>
-	<string name="poi_optometrist">Optik</string>
+	<string name="poi_optometrist">Oční lékař</string>
 	<string name="poi_physiotherapist">Fyzioterapeut</string>
 	<string name="poi_psychotherapist">Psychoterapeut</string>
 
@@ -113,13 +113,13 @@
 	<string name="poi_volleyball">Volejbal</string>
 
 	<string name="poi_attraction">Turistická atrakce</string>
-	<string name="poi_memorial">Pomník</string>
+	<string name="poi_memorial">Památník</string>
 	<string name="poi_castle">Hrad</string>
 	<string name="poi_city_gate">Městská brána</string>
 	<string name="poi_fort">Pevnost</string>
 	<string name="poi_fountain">Fontána</string>
 	<string name="poi_wreck">Vrak lodi</string>
-	<string name="poi_monument">Památník</string>
+	<string name="poi_monument">Monument</string>
 	<string name="poi_zoo">Zoo</string>
 	<string name="poi_hotel">Hotel</string>
 	<string name="poi_motel">Motel</string>
@@ -127,7 +127,7 @@
 	<string name="poi_monastery">Klášter</string>
 	<string name="poi_clock">Hodiny</string>
 	<string name="poi_cemetery">Hřbitov</string>
-	<string name="poi_grave_yard">Pohřebiště</string>
+	<string name="poi_grave_yard">Hřbitov u kostela</string>
 	<string name="poi_club_chess">Šachový klub</string>
 	<string name="poi_club_linux">Linux klub</string>
 	<string name="poi_library">Knihovna</string>
@@ -185,7 +185,7 @@
 	<string name="poi_dry_dock">Suchý dok</string>
 	<string name="poi_seamark_harbour">Přístav</string>
 	<string name="poi_military_barracks">Kasárna</string>
-	<string name="poi_military_danger_area">Nebezpečná oblast</string>
+	<string name="poi_military_danger_area">Zakázaná zóna</string>
 	<string name="poi_confectionery">Cukrárna</string>
 	<string name="poi_tea">Obchod čajem</string>
 	<string name="poi_dairy">Mlékárna</string>
@@ -232,7 +232,7 @@
 	
 	<string name="poi_wine">Vinotéka</string>
 
-	<string name="poi_shop">Obchod</string>
+	<string name="poi_shop">Obchod/služby</string>
 	<string name="poi_military_range">Vojenská střelnice</string>
 	<string name="poi_military_bunker">Bunkr</string>
 	<string name="poi_military_airfield">Vojenské letiště</string>
@@ -305,14 +305,14 @@
 	<string name="poi_tableware">Nádobí</string>
 	<string name="poi_ticket">Vstupenky</string>
 	<string name="poi_vacuum_cleaner">Vysavače</string>
-	<string name="poi_variety_store">Různé zboží</string>
+	<string name="poi_variety_store">Vše za xx</string>
 	<string name="poi_video">Videotéka</string>
 	<string name="poi_window_blind">Žaluzie</string>
 	<string name="poi_electronics">Elektro</string>
 	<string name="poi_car">Automobily</string>
 	<string name="poi_car_parts">Autodíly</string>
 	<string name="poi_atv">Terénní čtyřkolky</string>
-	<string name="poi_sewing">Textil</string>
+	<string name="poi_sewing">Švadlenka</string>
 
 	<string name="poi_grit_bin">Posypový kontejner</string>
 	<string name="poi_ses_station">Stanice civilní ochrany</string>
@@ -407,7 +407,7 @@
 	<string name="poi_waste_disposal">Shromaždiště odpadu</string>
 	<string name="poi_waste_basket">Odpadkový koš</string>
 
-	<string name="poi_industrial">Oblast továren</string>
+	<string name="poi_industrial">Průmysl</string>
 	<string name="poi_quarry">Povrchový lom</string>
 	<string name="poi_orchard">Ovocný sad</string>
 	<string name="poi_allotments">Zahrádkářská kolonie</string>
@@ -633,7 +633,7 @@
 	<string name="poi_piste_sleigh">Trať pro tažené saně</string>
 	<string name="poi_piste_sled">Trať pro saně</string>
 	<string name="poi_piste_snow_park">Zábavní sněhový park</string>
-	<string name="poi_piste_playground">Lyžařská škola</string>
+	<string name="poi_piste_playground">Dětská loučka</string>
 	<string name="poi_piste_ice_skate">Kluziště</string>
 
 	<string name="poi_arts_centre">Umělecké středisko</string>
@@ -2426,7 +2426,7 @@
 	<string name="poi_site_type_settlement">Osada</string>
 	<string name="poi_site_type_city">Město</string>
 	<string name="poi_site_type_hut_circle">Kruhová chatrč</string>
-	<string name="poi_site_type_necropolis">Pohřebiště</string>
+	<string name="poi_site_type_necropolis">Nekropole</string>
 	<string name="poi_site_type_earthwork">Zemní práce</string>
 	<string name="poi_fortification_type_hill_fort">Typ opevnění: hradiště</string>
 	<string name="poi_fortification_type_limes">Typ opevnění: římské hradby</string>
@@ -2479,7 +2479,7 @@
 	<string name="poi_cargo_container">Kontejnery</string>
 	<string name="poi_cargo_hgv">Nákladní auta</string>
 
-	<string name="poi_fitness_station">Místo na cvičení</string>
+	<string name="poi_fitness_station">Venkovní tělocvična</string>
 
 	<string name="poi_wiki_lang_af">Africká wiki</string>
 	<string name="poi_wiki_lang_als">Alsaská wiki</string>
@@ -3005,7 +3005,7 @@
 	<string name="poi_information_contents">Obsah</string>
 	<string name="poi_clock_option">Dodatečné</string>
 	<string name="poi_scout_camp">Skautský tábor</string>
-	<string name="poi_backcountry">Odlehlé místo</string>
+	<string name="poi_backcountry">Bez vybavení</string>
 	<string name="poi_piste_difficulty">Obtížnost sjezdovky</string>
 	<string name="poi_piste_grooming">Úprava sjezdovky</string>
 	<string name="poi_theatre_genre">Žánr</string>
@@ -3114,7 +3114,7 @@
 	<string name="poi_service_bicycle_charging_no">Nabíjení: ne</string>
 	<string name="poi_shower_filter_yes">Ano</string>
 	<string name="poi_social_facility_outreach">Nebytové zařízení</string>
-	<string name="poi_hackerspace">Komunitní místo</string>
+	<string name="poi_hackerspace">Hackerspace</string>
 
 
 	<string name="poi_health_specialty_palliative_medicine_yes">Paliativní medicína</string>
@@ -3728,7 +3728,7 @@
 
 	<string name="poi_depot">Depo</string>
 
-	<string name="poi_letter_box">Poštovní schránka</string>
+	<string name="poi_letter_box">Doručovací schránka</string>
 	<string name="poi_post_street">Ulice</string>
 	<string name="poi_post_housenumber">Číslo popisné</string>
 	<string name="poi_ref_post">PSČ</string>
@@ -3767,4 +3767,8 @@
 	<string name="poi_climbing_sport_no">Sportovní horolezectví: Ne</string>
 	<string name="poi_glacier_type_icecap">Ledovec typu ledová čepice</string>
 	<string name="poi_glacier_type_icefield">Ledovec typu ledové pole</string>
+	<string name="poi_shop_fireplace">Krby a kamna</string>
+
+	<string name="poi_shop_boat">Lodě a čluny</string>
+
 	</resources>
