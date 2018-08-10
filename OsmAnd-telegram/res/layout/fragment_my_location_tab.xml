@@ -233,7 +233,7 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_gravity="bottom|center_horizontal"
-			android:background="@drawable/img_shadow_fab"
+			android:background="@drawable/extended_fab_bg"
 			android:drawableLeft="@drawable/ic_group"
 			android:drawablePadding="@dimen/content_padding_half"
 			android:drawableStart="@drawable/ic_group"
