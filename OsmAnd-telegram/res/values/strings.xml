@@ -3,6 +3,7 @@
 	<string name="connected_account">Connected account</string>
 	<string name="shared_string_account">Account</string>
 	<string name="in_time">in %1$s</string>
+	<string name="osmand_connect_desc">Choose the OsmAnd version to which OsmAnd location sharing will refer for displaying the position.</string>
 	<string name="osmand_connect">OsmAnd connect</string>
 	<string name="location_history_desc">Hide contacts that are not updated their location after the specified period of time.</string>
 	<string name="location_history">Location history</string>
