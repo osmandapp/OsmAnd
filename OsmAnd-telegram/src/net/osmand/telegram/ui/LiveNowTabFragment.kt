@@ -78,8 +78,7 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 		}
 
 		mainView.findViewById<ImageView>(R.id.options).apply {
-			setImageDrawable(app.uiUtils.getThemedIcon(R.drawable.ic_action_other_menu))
-			setOnClickListener { (activity as MainActivity).showOptionsPopupMenu(this) }
+			(activity as MainActivity).setupOptionsBtn(this)
 		}
 		
 		openOsmAndBtn = mainView.findViewById<View>(R.id.open_osmand_btn).apply {

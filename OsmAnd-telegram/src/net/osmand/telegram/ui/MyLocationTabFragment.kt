@@ -112,11 +112,11 @@ class MyLocationTabFragment : Fragment(), TelegramListener, ChatLiveMessagesList
 		}
 
 		optionsBtn = mainView.findViewById<ImageView>(R.id.options).apply {
-			setupOptionsBtn(this)
+			(activity as MainActivity).setupOptionsBtn(this)
 		}
 
 		mainView.findViewById<ImageView>(R.id.options_title).apply {
-			setupOptionsBtn(this)
+			(activity as MainActivity).setupOptionsBtn(this)
 		}
 
 		imageContainer = mainView.findViewById<FrameLayout>(R.id.image_container)
@@ -313,11 +313,6 @@ class MyLocationTabFragment : Fragment(), TelegramListener, ChatLiveMessagesList
 		if (!appBarCollapsed && Build.VERSION.SDK_INT >= 21) {
 			appBarLayout.outlineProvider = null
 		}
-	}
-
-	private fun setupOptionsBtn(imageView: ImageView) {
-		imageView.setImageDrawable(app.uiUtils.getThemedIcon(R.drawable.ic_action_other_menu))
-		imageView.setOnClickListener { (activity as MainActivity).showOptionsPopupMenu(imageView) }
 	}
 
 	private fun updateTitleTextColor() {

@@ -13,10 +13,7 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.ListPopupWindow
 import android.view.Gravity
 import android.view.View
-import android.widget.ArrayAdapter
-import android.widget.LinearLayout
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import net.osmand.PlatformUtil
 import net.osmand.telegram.R
 import net.osmand.telegram.TelegramApplication
@@ -269,6 +266,11 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 	
 	fun closeTelegram() {
 		telegramHelper.close()
+	}
+
+	fun setupOptionsBtn(imageView: ImageView) {
+		imageView.setImageDrawable(app.uiUtils.getThemedIcon(R.drawable.ic_action_other_menu))
+		imageView.setOnClickListener { showOptionsPopupMenu(imageView) }
 	}
 
 	fun showOptionsPopupMenu(anchor: View) {
