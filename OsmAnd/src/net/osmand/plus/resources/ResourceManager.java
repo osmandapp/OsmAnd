@@ -428,8 +428,15 @@ public class ResourceManager {
 			if (appPath.canWrite()) {
 				for (Map.Entry<String,String> entry : mapping.entrySet()) {
 					File jsFile = new File(appPath, entry.getValue());
+					if (entry.getValue().contains("-tts") && entry.getValue()
+							.endsWith(IndexConstants.TTSVOICE_INDEX_EXT_JS)) {
+						File oggFile = new File(appPath, entry.getValue().replace("-tts", ""));
+						if (oggFile.getParentFile().exists() && !oggFile.exists()) {
+							copyAssets(context.getAssets(), entry.getKey(), oggFile);
+						}
+					}
 					if (jsFile.getParentFile().exists() && !jsFile.exists()) {
-						ResourceManager.copyAssets(context.getAssets(), entry.getKey(), jsFile);
+						copyAssets(context.getAssets(), entry.getKey(), jsFile);
 					}
 				}
 			}
