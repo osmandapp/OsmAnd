@@ -291,7 +291,7 @@
 
     <string name="internet_connection_required_for_online_route">En nettbasert navigeringstjeneste er valgt, men du er ikke koblet til internett.</string>
     <string name="tts_language_not_supported_title">Språk ikke støttet</string>
-    <string name="tts_language_not_supported">Det valgte språket støttes ikke av den installerte motoren for Android TTS (tekst-til-tale). Sjekk markedet for en annen TTS-motor? Ellers vil det forhåndsinnstilte TTS-språket brukes.</string>
+    <string name="tts_language_not_supported">Det valgte språket støttes ikke av den installerte motoren for Android TTS (tekst-til-tale). Vil du se etter en annen TTS-motor i markedet? Ellers vil det forhåndsinnstilte TTS-språket brukes.</string>
     <string name="tts_missing_language_data_title">Manglende data</string>
 	<string name="switch_to_vector_map_to_see">Offline-vektorkart foreligger for dette stedet.
 \n\t\n\tFor å bruke aktiver \'Meny\' → \'Kartinnstilling\' → \'Kartkilde…\' → \'Offline vektorkart\'.</string>
@@ -1883,7 +1883,7 @@
     <string name="translit_name_if_miss">Transkriber hvis %1$s navn mangler</string>
     <string name="translit_names">Transkriber navn</string>
     <string name="get_for_month">Få for %1$s måned</string>
-    <string name="osm_live_banner_desc">Få ubegrensede kartnedlastinger og kartoppdateringer mer enn en gang i måneden: Ukentlig, daglig eller timevist.</string>
+    <string name="osm_live_banner_desc">Få ubegrensede kartnedlastinger og kartoppdateringer mer enn en gang i måneden: Ukentlig, daglig eller hver time.</string>
     <string name="access_direction_audio_feedback">Lydbaserte anvisninger</string>
     <string name="access_direction_audio_feedback_descr">Indiker retning til målpunkt med lyd.</string>
     <string name="access_direction_haptic_feedback">Anvisninger med vibrasjon</string>
@@ -2377,7 +2377,7 @@
     <string name="quick_action_osmbugs_show">Vis OSM-notater</string>
     <string name="quick_action_osmbugs_hide">Skjul OSM-notater</string>
     <string name="quick_action_showhide_osmbugs_descr">Å trykke denne handlingsknappen viser eller skjuler OSM-notater på kartet.</string>
-    <string name="sea_depth_thanks">Takk for at du kjøpte \'Havdybdekonturer\'.</string>
+    <string name="sea_depth_thanks">Takk for at du kjøpte \'Havdybdekonturer\'</string>
     <string name="index_item_depth_contours_osmand_ext">Havdybdekonturer</string>
     <string name="download_depth_countours">Havdybdekonturer</string>
     <string name="route_points_category_name">Svinger å passere langs ruten</string>
@@ -2952,14 +2952,14 @@
 \nMan trenger ikke laste ned noe ekstra, visningen lages basert på standardkart.
 \n
 \nVisningen kan tilbakestilles enten ved å deaktivere den igjen her, eller ved å endre \'Kartstil\' under \"Kartinnstilling\" som ønsket.</string>
-    <string name="plugin_nautical_descr">Dette programtillegget beriker OsmAnds kart og navigasjonsprogram til også å tjene som sjøkart, for båt, seiling eller andre typer vannsport.
+    <string name="plugin_nautical_descr">Dette programtillegget beriker kart- og navigeringsprogrammet OsmAnd til også å kunne vise sjøkart for båtliv, seiling og andre typer vannsport. 
 \n
-\nDette spesielle karttillegget for OsmAnd gir alle sjømerker, for innom-, og utenskjærs bruk. Beskrivelsen av hvert av dem gir detaljer nok til å identifisere dem og deres mening (kategori, form, farge, sekvens, referanse, osv.).
+\nDette spesielle karttillegget for OsmAnd gir alle sjømerker og kartsymboler, for innlands vannveier såvel som for kystnær navigering. Beskrivelsen av hvert merke gir detaljer som behøves for å identifisere dem og deres mening (kategori, form, farge, sekvens, referanse, osv.). 
 \n
-\nFor å gå tilbake til OsmAnds mer konvensjonelle kartstiler, enten skru av dette tillegget igjen, eller endre \"Kartstil\" under \"Sett opp kart\" som du ønsker.</string>
-    <string name="plugin_ski_descr">Dette programtillegget for OsmAnd, gir deg detaljer om skibakker og løyper verden over, fjellskiløyper, taubaner og skiheiser. Ruter og løyper vises fargekodet etter vanskelighetsgrad, og tegnes i en spesiell \"Vinter\"-kartstil som ligner et snødekt landskap.
+\nFor å gå tilbake til en av de konvensjonelle kartstilene i OsmAnd, enten deaktiver tillegget igjen, eller endre \'Kartstil\' under \'Kartinnstilling\'.</string>
+    <string name="plugin_ski_descr">Dette programtillegget for OsmAnd gir deg detaljer om skibakker, langrennsløyper, alpine skiruter, taubaner og skiheiser. Ruter og løyper blir fargekodet etter vanskelighetsgrad, og vises i en spesiell \'Vinterkartstil\' som ligner et snødekt landskap. 
 \n
-\nAktivering av denne visningen endrer kartstilen til \"Vinter og ski\", som viser alle landskapsfunksjoner i vinterforhold. Dette kan endres tilbake ved å enten skru av tillegget her, eller endre \"Kartstil\" under \"Sett opp kart\", som du ønsker.</string>
+\nAktivering av denne visningen endrer kartstilen til \'Vinter og ski\', med alle kjennemerker for et landskap under vinterlige forhold. Denne visningen kan tilbakestilles enten ved å deaktivere tillegget igjen her, eller endre \'Kartstil\' under \'Kartinnstilling\'.</string>
     <string name="osmand_distance_planning_plugin_description">Dette programtillegget tilbyr et miniprogram for kartskjermen der du kan opprette stier ved å trykke på kartet, eller ved å endre eksisterende GPX-filer, for å planlegge en tur og måle avstanden mellom punkter. Resultatet kan lagres som en GPX-fil, som senere kan brukes for veiledning.</string>
     <string name="osm_editing_plugin_description">Via dette programtillegget kan OsmAnd brukes til å sende inn OSM-bidrag, som opprettelse eller endring av OSM-POI-objekter, åpning eller kommentering av OSM-notater, og bidrag til GPX-spor. OSM er et verdensomspennende kartprosjekt i offentlig eiendom. For detaljer, se https://openstreetmap.org. Aktiv deltagelse verdsettes, og bidrag kan gjøres direkte fra OsmAnd, hvis du angir din personlige OSM-innloggingsinfo i programmet.</string>
     <string name="osmand_extended_description_part3">Kart
@@ -2995,13 +2995,13 @@
 \n</string>
     <string name="hide_full_description">Skjul full beskrivelse</string>
     <string name="show_full_description">Vis full beskrivelse</string>
-    <string name="nautical_render_descr">Nautisk navigasjonsstil. Nøkkelfunksjoner: Bøyer, fyr, elver, sjø-leier og -merker, havner, sjømerketjenester, dybdekonturer.</string>
+    <string name="nautical_render_descr">Nautisk navigasjonsstil. Nøkkelfunksjoner: Bøyer, fyr, vannveier, skipsleder og merker, havner, sjømerketjenester, dybdekonturer.</string>
     <string name="ski_map_render_descr">Skistil. Nøkkelfunksjoner: Tegner bakker, heiser og andre skifunksjoner på en nyttig måte. Mindre distraherende sekundære kartobjekter.</string>
-    <string name="light_rs_render_descr">Enkel og kontrastrik stil for bilnavigering. Snill mot øyene i nattmodus. Nøkkelfunksjoner: Konturlinjer, kontrasterende oransje veier, mindre distraherende sekundære kartobjekter.</string>
-    <string name="topo_render_descr">Kontraststil designet primært for turgåing, ekskursjoner og sykling i naturen. God lesbarhet i komplekst eksternt lys. Nøkkelfunksjoner: Kontrasterende veier og naturlige objekter, forskjellige typer ruter, konturlinjer med avanserte innstillinger, flere detaljer i tilhørende forstørrelsesnivå enn forvalgt stil. Overflatevalg tillater visning av forskjeller i veioverflate. Inget nattmodus.</string>
+    <string name="light_rs_render_descr">Enkel og kontrastrik stil for bilnavigering. Skånsom for øynene i nattmodusen. Nøkkelfunksjoner: Koter, kontrasterende oransje veier, mindre distraherende sekundære kartobjekter.</string>
+    <string name="topo_render_descr">Kontraststil designet primært for turgåing, vandring og sykling i naturen. God lesbarhet ved kompleks utendørs belysning. Nøkkelfunksjoner: Kontrasterende veier og naturlige objekter, forskjellige typer ruter, koter med avanserte innstillinger, flere detaljer ved tilsvarende zoomnivåer enn standardstilen. Overflatevalg gjør det mulig å skjelne mellom veier med forskjellig overflatekvalitet. Ingen nattmodus.</string>
     <string name="mapnik_render_descr">Gammel forvalgt opptegning i \'Mapnik\'-stil. Nøkkelfunksjoner: Farger ligner \'Mapnik\'-stilen.</string>
-    <string name="touring_view_render_descr">Høydetaljsstil i reiseøyemed. Inkluderer alle oppsettsvalg for forvalgt stil, i tillegg til: VIsning av så mye detaljer som mulig, i særdeleshet alle veier, stier og andre måter å reise. Klar visuell forskjell mellom alle typer veier, noe som minner om mange reiseatlas. Høykontrastfargedrakt for utendørsbruk, dag og nattmodus.</string>
-    <string name="default_render_descr">Gjengs allbruksstil. Forenklet renere opptegning i tettbebygde byer. Nøkkelfunksjoner: Konturlinjer, ruter, veikvalitet, tilgangsbegrensninger, veinummerering, stiopptegning i henhold til SAC-skala, raftingsfunksjoner.</string>
+    <string name="touring_view_render_descr">Høydetaljert stil for turformål. Inkluderer alle innstillingsmulighetene til standardstilen, i tillegg: Viser så mange detaljer som mulig, i særdeleshet alle veier, stier og andre måter å reise på. Klar visuell forskjell mellom alle ulike typer veier, noe som minner om mange reiseatlas. Fargeskjema med høy kontrast for utendørs bruk, dag- og nattmodus.</string>
+    <string name="default_render_descr">Stil for generell bruk. Forenklet renere opptegning i tett befolkede byer. Nøkkelfunksjoner: Koter, ruter, overflatekvalitet, tilgangsbegrensninger, veinummer, stiopptegning i henhold til SAC-skala, raftingsfunksjoner.</string>
     <string name="open_wikipedia_link_online">Åpne Wikipedia-lenke på nett</string>
     <string name="open_wikipedia_link_online_description">Lenken vil åpnes i en nettleser.</string>
     <string name="read_wikipedia_offline_description">Skaff OsmAnd Live-abonnement for å lese Wikipedia og Wikivoyage-artikler på nett.</string>
@@ -3015,15 +3015,14 @@
     <string name="maps_you_need_descr">Basert på artiklene du har bokmerket, anbefales du å laste ned følgende kart:</string>
     <string name="maps_you_need">Kart du trenger</string>
     <string name="shared_string_bookmark">Bokmerk</string>
-    <string name="off_road_render_descr">Nytt for bruk under villmarkskjøring. Nyttig for bruk med grønne satellittbilder som underlagskart. Nøkkelpunkter: Redusert tykkelse for hovedveier, økt tykkelse for småveier, stier, sykkel- og andre -ruter.
-\nBasert på Topo-stil.</string>
+    <string name="off_road_render_descr">Egnet for off-road bruk. Egnet for bruk med grønne satellittbilder som underlagskart. Hovedpunkter: Redusert tykkelse for hovedveier, økt tykkelse for småveier, stier, sykkelveier og andre ruter. Basert på \'Topo\'-stil.</string>
     <string name="access_intermediate_arrival_time">Mellomliggende ankomsttid</string>
     <string name="map_widget_intermediate_time">Mellomliggende tid</string>
     <string name="unirs_render_descr">Endrer den forvalgte stilen for å øke kontrasten på gangveier og sykkelstier. Bruker de opprinnelige Mapnik-fargene.</string>
     <string name="shared_string_gpx_files">GPX-filer</string>
     <string name="get_osmand_live">Skaff deg OsmAnd Live for å låse opp alle funksjoner: Daglige kartoppdateringer med ubegrensede nedlastinger, alle programtilleggene, Wikipedia, Wikivoyage og mye mer.</string>
     <string name="quick_action_edit_actions">Rediger handlinger</string>
-    <string name="error_notification_desc">Send en skjeravbildning av dette varselet til support@osmand.net</string>
+    <string name="error_notification_desc">Send et skjermbilde av dette varselet til support@osmand.net</string>
     <string name="coord_input_edit_point">Rediger punkt</string>
     <string name="coord_input_add_point">Legg til punkt</string>
     <string name="coord_input_save_as_track">Lagre som spor</string>
@@ -3054,5 +3053,5 @@
 \n</string>
     <string name="commiting_way">Sender inn vei…</string>
     <string name="send_search_query_description">Ditt søk <b>\"%1$s\"</b>, vil bli sent inn sammen med din plassering.<br/><br/> Ingen personvernsinfo samles inn, søkedata trengs kun til forbedring av søket.<br/></string>
-    <string name="test_voice_desrc">Trykk på en knapp og hør på tilhørende stemmeveiledning for å identifisere manglende eller feilaktige veiledninger.</string>
+    <string name="test_voice_desrc">Trykk på en knapp og lytt til den tilhørende talemeldingen for å identifisere manglende eller feilaktige meldinger.</string>
 </resources>
