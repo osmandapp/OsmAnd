@@ -449,6 +449,9 @@ public class ResourceManager {
 	
 	public List<String> checkAssets(IProgress progress, boolean forceUpdate) {
 		String fv = Version.getFullVersion(context);
+		if(context.getAppInitializer().isAppVersionChanged()) {
+			copyMissingJSAssets();
+		}
 		if (!fv.equalsIgnoreCase(context.getSettings().PREVIOUS_INSTALLED_VERSION.get()) || forceUpdate) {
 			File applicationDataDir = context.getAppPath(null);
 			applicationDataDir.mkdirs();
