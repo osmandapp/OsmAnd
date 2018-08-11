@@ -2959,4 +2959,5 @@
     <string name="search_no_results_description">Нет результатов?
 \nРасскажите нам об этом.</string>
     <string name="send_search_query">Отправить поисковый запрос?</string>
-    </resources>
+    <string name="test_voice_desrc">Нажмите кнопку и прослушайте соответствующую голосовую подсказку, чтобы определить отсутствующие или ошибочные подсказки.</string>
+</resources>
