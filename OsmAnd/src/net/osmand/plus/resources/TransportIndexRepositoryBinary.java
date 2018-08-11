@@ -67,8 +67,8 @@ public class TransportIndexRepositoryBinary implements TransportIndexRepository 
 				Collections.sort(lst, new Comparator<TransportRoute>() {
 					@Override
 					public int compare(TransportRoute o1, TransportRoute o2) {
-						int i1 = Algorithms.extractFirstIntegerNumber(o1);
-						int i2 = Algorithms.extractFirstIntegerNumber(o2);
+						int i1 = Algorithms.extractFirstIntegerNumber(o1.getRef());
+						int i2 = Algorithms.extractFirstIntegerNumber(o2.getRef());
 						int r = Integer.compare(i1, i2);
 						if( r == 0){
 							r = Algorithms.compare(o1.getName(), o2.getName());
@@ -76,7 +76,7 @@ public class TransportIndexRepositoryBinary implements TransportIndexRepository 
 						return r;
 					}
 				});
-				return res;
+				return lst;
 			}
 		} catch (IOException e) {
 			log.error("Disk error ", e); //$NON-NLS-1$
