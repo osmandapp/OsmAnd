@@ -1857,4 +1857,28 @@
 	<string name="poi_memorial_obelisk">אובליסק</string>
 	<string name="poi_memorial_column">עמוד</string>
 	<string name="poi_memorial_stupa">סטופה</string>
+	<string name="poi_power_cable_distribution_cabinet">ארון חשמל חיצוני</string>
+	<string name="poi_telephone_exchange">מרכזייה</string>
+
+	<string name="poi_recycling_sheet_metal">פח</string>
+	<string name="poi_recycling_hardcore">תוצרי בנייה</string>
+	<string name="poi_farmyard">חצר משק</string>
+	<string name="poi_brownfield">שדה זיבורית</string>
+	<string name="poi_greenfield">קרקע טבעית</string>
+	<string name="poi_works">מפעל תעשייה</string>
+	<string name="poi_mineshaft">מכרה נטוש</string>
+	<string name="poi_adit">פתח של מכרה</string>
+	<string name="poi_salt_pond">בריכת מלח</string>
+	<string name="poi_cricket_nets">רשתות קריקט</string>
+	<string name="poi_social_facility">מתקן חברתי</string>
+	<string name="poi_register_office">משרד מרשם אוכלוסין</string>
+	<string name="poi_bailiff">פקיד בית משפט</string>
+	<string name="poi_prosecutor">תובע</string>
+	<string name="poi_pension_fund">קרן פנסיה</string>
+	<string name="poi_tax_inspection">חקירת מס</string>
+	<string name="poi_office_administrative">משרד ניהולי</string>
+	<string name="poi_association">משרד אגודה</string>
+	<string name="poi_ice_stock">קרלינג בווארי</string>
+	<string name="poi_paragliding">מצנחי רחיפה</string>
+	<string name="poi_pelota">פלוט באסק</string>
 	</resources>
