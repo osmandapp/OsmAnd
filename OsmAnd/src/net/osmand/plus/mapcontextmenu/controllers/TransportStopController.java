@@ -125,11 +125,14 @@ public class TransportStopController extends MenuController {
 
 				@Override
 				public int compare(TransportStopRoute o1, TransportStopRoute o2) {
-					if (o1.distance != o2.distance) {
-						return Algorithms.compare(o1.distance, o2.distance);
-					}
-					int i1 = Algorithms.extractFirstIntegerNumber(o1.desc);
-					int i2 = Algorithms.extractFirstIntegerNumber(o2.desc);
+//					int radEqual = 50;
+//					int dist1 = o1.distance / radEqual;
+//					int dist2 = o2.distance / radEqual;
+//					if (dist1 != dist2) {
+//						return Algorithms.compare(dist1, dist2);
+//					}
+					int i1 = Algorithms.extractFirstIntegerNumber(o1.route.getRef());
+					int i2 = Algorithms.extractFirstIntegerNumber(o2.route.getRef());
 					if (i1 != i2) {
 						return Algorithms.compare(i1, i2);
 					}
