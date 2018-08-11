@@ -64,7 +64,7 @@
 	<asset source="voice/hu/hu_tts.js" destination="voice/hu-tts/hu_tts.js" mode="overwriteOnlyIfExists" />
 	<!--<asset source="voice/hu-formal/hu-formal_tts.js" destination="voice/hu_formal-tts/hu-formal_tts.js" mode="overwriteOnlyIfExists" />-->
 	<asset source="voice/it/it_tts.js" destination="voice/it-tts/it_tts.js" mode="alwaysOverwriteOrCopy" />
-	<!--<asset source="voice/ja/ja_tts.js" destination="voice/ja-tts/ja_tts.js" mode="alwaysOverwriteOrCopy" />-->
+	<asset source="voice/ja/ja_tts.js" destination="voice/ja-tts/ja_tts.js" mode="alwaysOverwriteOrCopy" />
 	<!--<asset source="voice/ko/ko_tts.js" destination="voice/ko-tts/ko_tts.js" mode="overwriteOnlyIfExists" />-->
 	<!--<asset source="voice/lv/lv_tts.js" destination="voice/lv-tts/lv_tts.js" mode="overwriteOnlyIfExists" />-->
 	<asset source="voice/nl/nl_tts.js" destination="voice/nl-tts/nl_tts.js" mode="alwaysOverwriteOrCopy" />
