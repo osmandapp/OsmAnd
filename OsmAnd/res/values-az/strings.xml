@@ -934,8 +934,8 @@
     <string name="routing_attr_avoid_ferries_description">Bərələrdən yayın</string>
     <string name="routing_attr_avoid_motorway_name">Avtomagistrallardan yayın</string>
     <string name="routing_attr_avoid_motorway_description">Avtomagistrallardan yayın</string>
-    <string name="android_19_location_disabled">Android 4.4 (KitKat) versiyasından bu yana xəritələri əvvəlki saxlama qovluğuna (%s) endirə və yeniləyə bilməzsiniz. İcazə verilən saxlama yerinə keçmək və bütün OsmAnd fayllarını ora kopyalamaq istəyirsiniz?
-\n Qeyd 1: Köhnə fayllarınıza toxunulmayacaq (amma əllə silmək olar).
+    <string name="android_19_location_disabled">Android 4.4 (KitKat) versiyasından bu yana xəritələri köhnə saxlama qovluğuna (%s) endirə və yeniləyə bilməzsiniz. Bütün OsmAnd faylları yeni saxlama yerinə kopyalansın? 
+\n Qeyd 1: Köhnə fayllarınıza toxunulmayacaq (amma əllə silmək olar). 
 \n Qeyd 2: Yeni saxlama yerində OsmAnd və OsmAnd+ arasında fayl paylaşmaq mümkün olmayacaq.</string>
     <string name="copying_osmand_one_file_descr">Fayl (%s) yeni təyinat yerinə kopyalanır…</string>
     <string name="copying_osmand_files_descr">OsmAnd məlumat faylları yeni təyinat yerinə kopyalanır (%s)…</string>
@@ -1195,7 +1195,7 @@
     <string name="add_favorite_dialog_favourite_added_template">Favorit nöqtə “{0}” əlavə edildi.</string>
     <string name="favourites_remove_dialog_msg">“%s” favorit nöqtəsi silinsin?</string>
     <string name="favourites_remove_dialog_success">Favorit nöqtə {0} silindi.</string>
-    <string name="poi_remove_confirm_template">{0} silinsin (rəy daxil edin) ?</string>
+    <string name="poi_remove_confirm_template">{0} silinsin (rəy)?</string>
     <string name="poi_action_succeded_template">{0} əməliyyatı tamamlandı.</string>
     <string name="poi_error_unexpected_template">{0} əməliyyatı zamanı gözlənilməz səhv.</string>
     <string name="poi_error_io_error_template">{0} əməliyyatı zamanı I/O səhvi.</string>
@@ -1288,7 +1288,20 @@
     <string name="av_camera_focus_continuous">Kamera fasiləsiz fokuslamağa çalışsın</string>
     <string name="av_photo_play_sound">Şəkil çəkərkən səs çal</string>
     <string name="mapillary_image">Mapillary təsviri</string>
-    <string name="osmand_plus_extended_description_part8">Təxmini xəritənin əhatə dairəsi və keyfiyyəti: • Qərbi Avropa: **** • Şərqi Avropa: *** • Rusiya: *** • Şimali Amerika: *** • Cənubi Amerika: ** • Asiya: ** • Yaponiya &amp; Koreya: *** • Yaxın Şərq: ** • Afrika: ** • Antarktida: * Dünyanın bir çox ölkəsi endirmək üçün mövcuddur! Əfqanıstandan Zimbabveyə, Avstraliyadan ABŞ-a. Argentina, Braziliya, Kanada, Fransa, Almaniya, Meksika, Böyük Britaniya, İspaniya, …</string>
+    <string name="osmand_plus_extended_description_part8">Təxmini xəritənin əhatə dairəsi və keyfiyyəti:
+\n• Qərbi Avropa: ****
+\n• Şərqi Avropa: ***
+\n• Rusiya: ***
+\n• Şimali Amerika: ***
+\n• Cənubi Amerika: **
+\n• Asiya: **
+\n• Yaponiya &amp; Koreya: ***
+\n• Yaxın Şərq: **
+\n• Afrika: **
+\n• Antarktida: *
+\nDünyanın bir çox ölkəsi endirmək üçün mövcuddur
+\nƏfqanıstandan Zimbabveyə, Avstraliyadan ABŞ-a. Argentina, Braziliya, Kanada, Fransa, Almaniya, Meksika, Böyük Britaniya, İspaniya, …
+\n</string>
     <string name="avoid_in_routing_title">Yayın…</string>
     <string name="map_widget_distance">Təyinat nöqtəsi</string>
     <string name="quick_action_add_first_intermediate">Birinci aralığı əlavə et</string>
@@ -1433,7 +1446,7 @@
     <string name="disable_complex_routing_descr">Avtomobil naviqasiyası üçün iki mərhələli marşrutlamanı söndür.</string>
     <string name="disable_complex_routing">Mürəkkəb marşrutlamanı söndür</string>
     <string name="amenity_type_seamark">Dəniz işarəsi</string>
-    <string name="app_modes_choose_descr">Proqramda görünəcək istifadə profillərini seçin.</string>
+    <string name="app_modes_choose_descr">Proqramda görünəcək profilləri seçin.</string>
     <string name="map_widget_map_rendering">Xəritənin göstərilməsi</string>
     <string name="app_mode_hiking">Piyada turizm</string>
     <string name="app_mode_motorcycle">Motosiklet</string>
@@ -1964,7 +1977,7 @@
     <string name="map_import_error">Xəritə idxalı səhvi</string>
     <string name="map_imported_successfully">Xəritə idxal edildi</string>
     <string name="empty_state_my_tracks">GPX faylları əlavə et</string>
-    <string name="empty_state_my_tracks_desc">Baxmaq üçün izləri qeyd edin və ya idxal edin.</string>
+    <string name="empty_state_my_tracks_desc">GPX faylları idxal edin və ya izlər qeyd edin.</string>
     <string name="enter_the_file_name">Fayl adını daxil edin.</string>
     <string name="distance_indication_descr">Aktiv işarələrə qədər məsafənin necə göstəriləcəyini seçin.</string>
     <string name="tunnel_warning">İrəlidə tunel</string>
