@@ -117,6 +117,8 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 				}
 			}
 		})
+		telegramHelper.listener = this
+		telegramHelper.requestAuthorizationState()
 
 		if (osmandAidlHelper.isOsmandBound() && !osmandAidlHelper.isOsmandConnected()) {
 			osmandAidlHelper.connectOsmand()
@@ -138,9 +140,8 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 		super.onResume()
 		paused = false
 
-		telegramHelper.listener = this
-		if (!telegramHelper.isInit()) {
-			telegramHelper.init()
+		if (telegramHelper.listener != this) {
+			telegramHelper.listener = this
 		}
 
 		app.locationProvider.checkIfLastKnownLocationIsValid()
@@ -167,6 +168,7 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 	override fun onStop() {
 		super.onStop()
 		settings.save()
+		app.messagesDbHelper.saveMessages()
 	}
 
 	override fun onDestroy() {
@@ -253,7 +255,7 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 		if (telegramHelper.getTelegramAuthorizationState() != TelegramAuthorizationState.CLOSED) {
 			telegramHelper.logout()
 		}
-		telegramHelper.init()
+		// FIXME: update UI
 	}
 	
 	private fun logoutTelegram(silent: Boolean = false) {

@@ -7,11 +7,8 @@ import android.net.ConnectivityManager
 import android.net.NetworkInfo
 import android.os.Build
 import android.os.Handler
-import net.osmand.telegram.helpers.OsmandAidlHelper
+import net.osmand.telegram.helpers.*
 import net.osmand.telegram.helpers.OsmandAidlHelper.OsmandHelperListener
-import net.osmand.telegram.helpers.ShareLocationHelper
-import net.osmand.telegram.helpers.ShowLocationHelper
-import net.osmand.telegram.helpers.TelegramHelper
 import net.osmand.telegram.notifications.NotificationHelper
 import net.osmand.telegram.utils.AndroidUtils
 import net.osmand.telegram.utils.UiUtils
@@ -26,6 +23,7 @@ class TelegramApplication : Application(), OsmandHelperListener {
 	lateinit var notificationHelper: NotificationHelper private set
 	lateinit var osmandAidlHelper: OsmandAidlHelper private set
 	lateinit var locationProvider: TelegramLocationProvider private set
+	lateinit var messagesDbHelper: MessagesDbHelper private set
 
 	var telegramService: TelegramService? = null
 
@@ -37,6 +35,7 @@ class TelegramApplication : Application(), OsmandHelperListener {
 	override fun onCreate() {
 		super.onCreate()
 		telegramHelper.appDir = filesDir.absolutePath
+		telegramHelper.init()
 
 		settings = TelegramSettings(this)
 		telegramHelper.messageActiveTimeSec = settings.locHistoryTime
@@ -61,6 +60,7 @@ class TelegramApplication : Application(), OsmandHelperListener {
 		showLocationHelper = ShowLocationHelper(this)
 		notificationHelper = NotificationHelper(this)
 		locationProvider = TelegramLocationProvider(this)
+		messagesDbHelper = MessagesDbHelper(this)
 
 		if (settings.hasAnyChatToShareLocation() && AndroidUtils.isLocationPermissionAvailable(this)) {
 			shareLocationHelper.startSharingLocation()
