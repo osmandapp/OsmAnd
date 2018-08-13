@@ -36,7 +36,9 @@ class MessagesDbHelper(val app: TelegramApplication) {
 
 	fun saveMessages() {
 		sqliteHelper.clearMessages()
-		sqliteHelper.addMessages(messages)
+		synchronized(messages) {
+			sqliteHelper.addMessages(messages)
+		}
 	}
 
 	private fun addMessage(chatId: Long, messageId: Long) {
