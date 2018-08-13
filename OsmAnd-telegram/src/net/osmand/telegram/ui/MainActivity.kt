@@ -168,7 +168,7 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 	override fun onStop() {
 		super.onStop()
 		settings.save()
-		app.messagesDbHelper.save()
+		app.messagesDbHelper.saveMessages()
 	}
 
 	override fun onDestroy() {

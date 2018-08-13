@@ -34,7 +34,7 @@ class MessagesDbHelper(val app: TelegramApplication) {
 		})
 	}
 
-	fun save() {
+	fun saveMessages() {
 		sqliteHelper.clearMessages()
 		sqliteHelper.addMessages(messages)
 	}
