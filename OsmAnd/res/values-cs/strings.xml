@@ -989,7 +989,7 @@ Proporcionální paměť %4$s MB (limit Androidu %5$s MB, Dalvik %6$s MB).</stri
     <string name="shared_string_more_actions">Další akce</string>
     <string name="monitoring_settings_descr">Konfigurace záznamů vašich cest.</string>
     <string name="install_paid">Instalovat plnou verzi</string>
-    <string name="cancel_navigation">Zastavit navigaci</string>
+    <string name="cancel_navigation">Ukončit navigaci</string>
     <string name="use_kalman_filter_compass_descr">Sníží šum v hodnotách z kompasu, ale zpomalí změny směru.</string>
     <string name="use_kalman_filter_compass">Použít Kalmanův filtr</string>
     <string name="use_magnetic_sensor">Používat magnetický senzor</string>
@@ -2709,7 +2709,7 @@ Zobrazená oblast: %1$s x %2$s</string>
 	<string name="north_abbreviation">S</string>
 	<string name="optional_point_name">Volitelný název bodu</string>
     <string name="transport_nearby_routes_within">Trasy v okruhu</string>
-    <string name="transport_nearby_routes">POBLÍŽ</string>
+    <string name="transport_nearby_routes">V okruhu</string>
     <string name="distance_farthest">Vzdálenost: nejvzdálenější jako první</string>
     <string name="distance_nearest">Vzdálenost: nejbližší jako první</string>
     <string name="rendering_attr_whiteWaterSports_name">Divoká voda</string>
@@ -2741,9 +2741,9 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="osmand_plus_extended_description_part8">Přibližné pokrytí a kvalita map: • Západní Evropa: **** • Východní Evropa: *** • Rusko: *** • Severní Amerika: *** • Jižní Amerika: ** • Asie: ** • Japonsko &amp; Korea: *** • Střední Východ: ** • Afrika: ** • Antarktida: * Mapy většiny států na zeměkouli jsou dostupné ke stažení! Od Afghánistánu po Zimbabwe, od Austrálie po USA, Argentinu, Brazílii, Kanadu, Francii, Německo, Mexiko, Spojené království, Španělsko, …</string>
     <string name="group_deleted">Skupina smazána</string>
     <string name="clear_all_intermediates">Smazat všechny mezicíle</string>
-    <string name="select_waypoints_category_description">Můžete přidat všechny mezicíle na trase, nebo vybrat jednotlivé kategorie.</string>
+    <string name="select_waypoints_category_description">Přidat všechny mezicíle na trase nebo vybrat jednotlivé kategorie.</string>
     <string name="shared_string_total">Celkem</string>
-    <string name="nothing_found_in_radius">Nebylo nalezeno nic v okruhu:</string>
+    <string name="nothing_found_in_radius">Nebylo nic nalezeno:</string>
     <string name="shared_string_result">Výsledek</string>
     <string name="use_two_digits_longitude">Použít dvě číslice pro délku</string>
     <string name="shared_string_travel_guides">Cesta</string>
@@ -2823,4 +2823,51 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="error_notification_desc">Zašlete prosím kopii obrazovky s touto chybou na email support@osmand.net</string>
     <string name="quick_action_edit_actions">Upravit akce</string>
     <string name="get_osmand_live">Získejte OsmAnd Live pro odemknutí všech funkcí: Denní aktulizace mapových podkladů s neomezeným počtem stahování, všechny placené zásuvné moduly, propojení s Wikipedia, Wikivoyage a mnoho dalšího.</string>
-    </resources>
+    <string name="thank_you_for_feedback">Děkujeme za Vaši zpětnou vazbu</string>
+    <string name="poi_cannot_be_found">Na Váš dotaz nebylo nic nalezeno.</string>
+    <string name="search_no_results_feedback">Žádný výsledek vyhledávání?
+\nDejte nám o tom vědět, ať to můžeme zlepšit</string>
+    <string name="release_3_1">• Navigace: opravený indikátor průběhu, přidána možnost pro rychlé prohození začátku a konce trasy
+\n
+\n • Mapové značky: opravena možnost zapnutí/vypnutí skupin, nově možnost skrýt značky na mapě
+\n
+\n • Úpravy OSM: nově možnost upravovat tagy všech objektů zájmu v mapě, (nejen bodových jako dosud), opraveny chybějící komentáře v poznámkách, přidána možnost zálohy úprav
+\n
+\n • Vylepšené vykreslování článků Wikipedie a Wikivoyage, upravené soubory jsou již k dispozici ke stažení
+\n
+\n • Nabídka: opraveny barvy znaků v nočním režimu, opraveny velikosti dodatečných menu
+\n
+\n • Lodní navigace: nově podpora vodních cest
+\n
+\n • Menší opravy nahlášených chyb
+\n</string>
+    <string name="commiting_way">Odesílání cesty…</string>
+    <string name="increase_search_radius_to">Zvětšit okruh hledání na %1$s</string>
+    <string name="send_search_query_description">Bude odeslán Váš dotaz pro vyhledávání: <b>\"%1$s\"</b>, spolu s Vaší polohou. <br/><br/> Odeslaná data jsou plně anonymní a nedocházi k žádnému shromažďování Vašich osobních údajů. Zaslaná data slouží pouze k vylepšení vyhledávacího algoritmu.<br/></string>
+    <string name="send_search_query">Odeslat data?</string>
+    <string name="shared_string_world">Celý svět</string>
+    <string name="point_deleted">Bod %1$s byl smazán</string>
+    <string name="coord_input_edit_point">Upravit bod</string>
+    <string name="coord_input_add_point">Přidat bod</string>
+    <string name="coord_input_save_as_track">Uložit jako stopu</string>
+    <string name="coord_input_save_as_track_descr">Bylo přidáno %1$s bodů. Zadejte název a klepněte na \"Uložit\".</string>
+    <string name="unirs_render_descr">Upravený základní styl pro zvýšení kontrastu pěších a cyklistických cest. Používá starší barvy Mapnik.</string>
+    <string name="shared_string_bookmark">Záložka</string>
+    <string name="off_road_render_descr">Vhodný pro off-road terénní jízdu. Vhodný pro použití se zelenými satelitními snímky použitými jako podkladová vrstva. Zmenšená tloušťka hlavních cest a naopak zvětšená tloušťka polních cest, pěšin, cyklotras a dalších cest. Založeno na \"Topo\" stylu.</string>
+    <string name="open_wikipedia_link_online">Otevřít odkaz Wikipedia na internetu</string>
+    <string name="open_wikipedia_link_online_description">Odkaz bude otevřen v intenetovém prohlížeči.</string>
+    <string name="read_wikipedia_offline_description">Stahování Wikipedia a Wikivoyage článkú do zařízení pro pozdější použití bez přístupu k internetu je dostupné pouze předplatitelům OsmAnd Live.</string>
+    <string name="how_to_open_link">Jak otevřít odkaz?</string>
+    <string name="read_wikipedia_offline">Číst Wikipedia bez internetu</string>
+    <string name="download_all">Stáhnout vše</string>
+    <string name="purchase_cancelled_dialog_title">Zrušili jste Vaše předplatné OsmAnd Live</string>
+    <string name="paid_app">Placená aplikace</string>
+    <string name="paid_plugin">Placený zásuvný modul</string>
+    <string name="travel_card_update_descr">Jsou dostupná nová data Wikivoyage, aktualizujte je na nejnovější verzi.</string>
+	<string name="wikivoyage_travel_guide">Turistický Průvodce Wikivoyage</string>
+    <string name="wikivoyage_travel_guide_descr">Průvodce Wikivoyage Vám ukáže nejzajímavější místa planety, přímo v aplikaci OsmAnd a bez nutnosti připojení k internetu.</string>
+    <string name="shared_string_gpx_files">Soubory GPX</string>
+    <string name="access_intermediate_arrival_time">Čas příjezdu do mezicíle</string>
+    <string name="map_widget_intermediate_time">Do Průjezdního bodu</string>
+    <string name="test_voice_desrc">Klepněte na tlačítko pro vyslechnutí odpovídajícího hlasového pokynu, aby jste zjistili chybné nebo chybějící pokyny.</string>
+</resources>
