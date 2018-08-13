@@ -180,6 +180,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener, ChatLiveMessagesList
 					sharingMode = isChecked
 					app.settings.stopSharingLocationToChats()
 					app.shareLocationHelper.stopSharingLocation()
+					telegramHelper.stopSendingLiveLocationMessages()
 					updateContent()
 				}
 			}
@@ -484,7 +485,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener, ChatLiveMessagesList
 					setOnCheckedChangeListener { _, isChecked ->
 						if (!isChecked) {
 							app.settings.shareLocationToChat(chat.id, false)
-							app.shareLocationHelper.stopSharingLocation()
+							telegramHelper.stopSendingLiveLocationToChat(chat.id)
 							removeItem(chat)
 						}
 					}
@@ -551,6 +552,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener, ChatLiveMessagesList
 			if (chats.isEmpty()) {
 				sharingMode = false
 				updateContent()
+				app.shareLocationHelper.stopSharingLocation()
 			} else {
 				adapter.notifyDataSetChanged()
 			}
