@@ -47,7 +47,8 @@ private const val TITLES_REPLACED_WITH_IDS = "changed_to_chat_id"
 
 class TelegramSettings(private val app: TelegramApplication) {
 
-	var chatLivePeriods = mutableMapOf<Long, Long>()
+	private var chatLivePeriods = mutableMapOf<Long, Long>()
+	var chatShareLocStartSec = mutableMapOf<Long, Long>()
 
 	private var shareLocationChats: Set<Long> = emptySet()
 	private var showOnMapChats: Set<Long> = emptySet()
@@ -86,6 +87,10 @@ class TelegramSettings(private val app: TelegramApplication) {
 		chatLivePeriods = chatLivePeriods.filter { (key, _) ->
 			presentChatIds.contains(key)
 		}.toMutableMap()
+
+		chatShareLocStartSec = chatShareLocStartSec.filter { (key, _) ->
+			presentChatIds.contains(key)
+		}.toMutableMap()
 	}
 
 	fun shareLocationToChat(
@@ -101,19 +106,44 @@ class TelegramSettings(private val app: TelegramApplication) {
 				else -> livePeriod
 			}
 			chatLivePeriods[chatId] = lp
+			chatShareLocStartSec[chatId] = (System.currentTimeMillis()/1000)
 			shareLocationChats.add(chatId)
 		} else {
 			shareLocationChats.remove(chatId)
 			chatLivePeriods.remove(chatId)
+			chatShareLocStartSec.remove(chatId)
 		}
 		this.shareLocationChats = shareLocationChats.toHashSet()
 	}
 
 	fun getChatLivePeriod(chatId: Long) = chatLivePeriods[chatId]
 
+	fun getChatLivePeriods(): Map<Long, Long> {
+		return chatLivePeriods.filter {
+			getChatLiveMessageExpireTime(it.key) > 0
+		}
+	}
+
+	fun getChatShareLocStartSec(chatId: Long) = chatShareLocStartSec[chatId]
+
+	fun getChatLiveMessageExpireTime(chatId: Long): Long {
+		val startTime = getChatShareLocStartSec(chatId)
+		val livePeriod = getChatLivePeriod(chatId)
+		return if (startTime != null && livePeriod != null) {
+			livePeriod - ((System.currentTimeMillis() / 1000) - startTime)
+		} else {
+			0
+		}
+	}
+	
+	fun updateChatShareLocStartSec(chatId: Long, startTime: Long) {
+		chatShareLocStartSec[chatId] = startTime
+	} 
+	
 	fun stopSharingLocationToChats() {
 		this.shareLocationChats = emptySet()
 		this.chatLivePeriods.clear()
+		this.chatShareLocStartSec.clear()
 	}
 
 	fun showChatOnMap(chatId: Long, show: Boolean) {
