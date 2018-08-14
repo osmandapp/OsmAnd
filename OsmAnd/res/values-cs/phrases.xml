@@ -1489,7 +1489,7 @@
 
 	<string name="poi_capacity">Kapacita</string>
 	<string name="poi_capacity_disabled_yes">Ano</string>
-	<string name="poi_capacity_disabled_no">Bez vyhrazených míst pro postižené</string>
+	<string name="poi_capacity_disabled_no">Bez vyhrazených míst pro invalidy</string>
 	<string name="poi_aerialway_occupancy">Kapacita kabinky/křesla/vozidla</string>
 	<string name="poi_aerialway_capacity">Kapacita za hodinu</string>
 	<string name="poi_aerialway_access_entry">Jen pro vstup</string>
@@ -1520,12 +1520,12 @@
 	<string name="poi_garden_style_rosarium">Zahradní styl: rozárium</string>
 	<string name="poi_capacity_disabled">Vyhrazená místa pro invalidy</string>
 	<string name="poi_capacity_women_yes">Vyhrazená místa pro ženy</string>
-	<string name="poi_capacity_women_no">Žádná vyhrazená místa pro ženy</string>
+	<string name="poi_capacity_women_no">Bez vyhrazených míst pro ženy</string>
 	<string name="poi_capacity_women">Vyhrazená místa pro ženy</string>
 	<string name="poi_capacity_pupils">Vyhrazená místa pro studenty</string>
 	<string name="poi_capacity_teachers">Vyhrazená místa pro učitele</string>
 	<string name="poi_capacity_parent_yes">Vyhrazená místa pro rodiče</string>
-	<string name="poi_capacity_parent_no">Žádná vyhrazená místa pro rodiče</string>
+	<string name="poi_capacity_parent_no">Bez vyhrazených míst pro rodiče</string>
 	<string name="poi_capacity_parent">Vyhrazená místa pro rodiče</string>
 
 	<string name="poi_aerialway_duration">Průměrný čas cesty v minutách</string>
