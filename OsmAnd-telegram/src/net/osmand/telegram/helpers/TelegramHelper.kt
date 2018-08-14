@@ -542,29 +542,19 @@ class TelegramHelper private constructor() {
 
 	fun stopSendingLiveLocationToChat(chatId: Long) {
 		val msgId = chatLiveMessages[chatId]?.id
-		if (msgId != null) {
-			if (msgId != 0L) {
-				client?.send(
-					TdApi.EditMessageLiveLocation(chatId, msgId, null, null),
-					liveLocationMessageUpdatesHandler
-				)
-			}
+		if (msgId != null && msgId != 0L) {
+			client?.send(
+				TdApi.EditMessageLiveLocation(chatId, msgId, null, null),
+				liveLocationMessageUpdatesHandler
+			)
 		}
-		chatLiveMessages.remove(chatId)
 		needRefreshActiveLiveLocationMessages = true
 	}
 
 	fun stopSendingLiveLocationMessages() {
-		chatLiveMessages.forEach { chatId, message ->
-			if (message.id != 0L) {
-				client?.send(
-					TdApi.EditMessageLiveLocation(chatId, message.id, null, null),
-					liveLocationMessageUpdatesHandler
-				)
-			}
+		chatLiveMessages.forEach { chatId, _ ->
+			stopSendingLiveLocationToChat(chatId)
 		}
-		chatLiveMessages.clear()
-		needRefreshActiveLiveLocationMessages = true
 	}
 	
 	private fun getActiveLiveLocationMessages(onComplete: (() -> Unit)?) {

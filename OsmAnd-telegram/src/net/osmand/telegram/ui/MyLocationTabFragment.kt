@@ -73,6 +73,8 @@ class MyLocationTabFragment : Fragment(), TelegramListener, ChatLiveMessagesList
 
 	private var sharingMode = false
 	
+	private var updateEnable: Boolean = false
+
 	override fun onCreateView(
 		inflater: LayoutInflater,
 		container: ViewGroup?,
@@ -197,7 +199,6 @@ class MyLocationTabFragment : Fragment(), TelegramListener, ChatLiveMessagesList
 				updateContent()
 			}
 		}
-		startAdapterUpdate()
 		
 		return mainView
 	}
@@ -206,10 +207,13 @@ class MyLocationTabFragment : Fragment(), TelegramListener, ChatLiveMessagesList
 		super.onResume()
 		telegramHelper.addChatLiveMessagesListener(this)
 		updateContent()
+		updateEnable = true
+		startHandler()
 	}
 
 	override fun onPause() {
 		super.onPause()
+		updateEnable = false
 		telegramHelper.removeChatLiveMessagesListener(this)
 	}
 	
@@ -285,28 +289,26 @@ class MyLocationTabFragment : Fragment(), TelegramListener, ChatLiveMessagesList
 		}
 	}
 
-	private fun startAdapterUpdate() {
-		val handler = Handler()
-		handler.postDelayed(object : Runnable {
-			override fun run() {
-				if (sharingMode) {
-					val iterator = adapter.chats.iterator()
-					while (iterator.hasNext()) {
-						val chat = iterator.next()
-						if (getChatLiveMessageExpireTime(chat.id) <= 0) {
-							app.settings.shareLocationToChat(chat.id, false)
-							iterator.remove()
-						}
-					}
-					if (adapter.chats.isNotEmpty()) {
-						adapter.notifyDataSetChanged()
-					} else {
-						sharingMode = false
-						updateContent()
+	private fun startHandler() {
+		val updateCurrentRecordingTrack = Handler()
+		updateCurrentRecordingTrack.postDelayed({
+			if (sharingMode && updateEnable) {
+				val iterator = adapter.chats.iterator()
+				while (iterator.hasNext()) {
+					val chat = iterator.next()
+					if (app.settings.getChatLiveMessageExpireTime(chat.id) <= 0) {
+						app.settings.shareLocationToChat(chat.id, false)
+						iterator.remove()
 					}
 				}
-				handler.postDelayed(this, ADAPTER_UPDATE_INTERVAL_MIL)
+				if (adapter.chats.isNotEmpty()) {
+					adapter.notifyDataSetChanged()
+				} else {
+					sharingMode = false
+					updateContent()
+				}
 			}
+			startHandler()
 		}, ADAPTER_UPDATE_INTERVAL_MIL)
 	}
 	
@@ -427,7 +429,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener, ChatLiveMessagesList
 					if (sharingMode) {
 						val message = telegramHelper.getChatLiveMessages()[chat.id]
 						if (message != null) {
-							settings.updateChatLiveMessageStartTime(chatId, message.date.toLong())
+							settings.updateChatShareLocStartSec(chatId, message.date.toLong())
 						}
 					} else {
 						continue
@@ -441,16 +443,6 @@ class MyLocationTabFragment : Fragment(), TelegramListener, ChatLiveMessagesList
 			}
 		}
 		adapter.chats = chats
-	}
-
-	private fun getChatLiveMessageExpireTime(chatId: Long): Long {
-		val startTime = settings.getChatLiveMessageStartTime(chatId)
-		val livePeriod = settings.getChatLivePeriod(chatId)
-		return if (startTime != null && livePeriod != null) {
-			livePeriod - ((System.currentTimeMillis() / 1000) - startTime)
-		} else {
-			0
-		}
 	}
 	
 	inner class MyLocationListAdapter : RecyclerView.Adapter<MyLocationListAdapter.BaseViewHolder>() {
@@ -546,14 +538,14 @@ class MyLocationTabFragment : Fragment(), TelegramListener, ChatLiveMessagesList
 					}
 				}
 
-				val expiresIn = getChatLiveMessageExpireTime(chat.id)
+				val expiresIn = app.settings.getChatLiveMessageExpireTime(chat.id)
 				
 				holder.textInArea?.apply {
 					visibility = View.VISIBLE
 					text = "${getText(R.string.plus)} ${OsmandFormatter.getFormattedDuration(context!!,
 						MESSAGE_ADD_ACTIVE_TIME_SEC)}"
 					setOnClickListener {
-						val newLivePeriod = getChatLiveMessageExpireTime(chat.id) + MESSAGE_ADD_ACTIVE_TIME_SEC
+						val newLivePeriod = app.settings.getChatLiveMessageExpireTime(chat.id) + MESSAGE_ADD_ACTIVE_TIME_SEC
 						telegramHelper.stopSendingLiveLocationToChat(chat.id)
 						app.settings.shareLocationToChat(chat.id, true, newLivePeriod)
 						app.forceUpdateMyLocation()
