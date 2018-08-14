@@ -73,4 +73,13 @@
 		<item name="android:background">@drawable/btn_round</item>
 	</style>
 
+	<style name="Animations"/>
+
+	<style name="Animations.PopUpMenu"/>
+
+	<style name="Animations.PopUpMenu.Bottom">
+		<item name="android:windowEnterAnimation">@anim/slide_in_bottom</item>
+		<item name="android:windowExitAnimation">@anim/slide_out_bottom</item>
+	</style>
+
 </resources>
