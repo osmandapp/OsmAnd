@@ -121,8 +121,7 @@ class SettingsDialogFragment : DialogFragment() {
 		mainView.findViewById<ImageView>(R.id.help_icon)
 			.setImageDrawable(uiUtils.getActiveIcon(R.drawable.ic_action_help))
 		mainView.findViewById<View>(R.id.help_row).setOnClickListener {
-			// FIXME
-			Toast.makeText(context, "Logout help", Toast.LENGTH_SHORT).show()
+			DisconnectTelegramBottomSheet.showInstance(childFragmentManager)
 		}
 
 		return mainView

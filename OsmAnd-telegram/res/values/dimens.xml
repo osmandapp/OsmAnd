@@ -54,6 +54,8 @@
 	<dimen name="text_description_line_spacing_multiplier" format="float">1.25</dimen>
 	<dimen name="title_letter_spacing" format="float">-0.03</dimen>
 
+	<dimen name="bottom_sheet_peek_height">300dp</dimen>
+
 	<!-- Text sizes -->
 
 	<dimen name="dialog_title_text_size">22sp</dimen>
