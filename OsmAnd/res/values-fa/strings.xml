@@ -657,8 +657,8 @@
 	<string name="settings_preset_descr">نمای نقشه و تنظیمات راهبری برای هر پروفایل جداگانه ذخیره می‌شود. پروفایل پیش‌فرض خود را اینجا تنظیم کنید.</string>
     <string name="osmand_background_plugin_description">تنظیمات مربوط به فعال‌سازی ردگیری و راهبری در پس‌زمینه را نشان می‌دهد که با ارسال پیام‌های بیدارباش متناوب به جی‌پی‌اس دستگاه این کار را انجام می‌دهد (با نمایشگر خاموش).</string>
     <string name="av_def_action_choose">انتخاب برحسب تقاضا</string>
-    <string name="audionotes_location_not_defined">مکانی برای یادداشت‌گذاری تعیین نشده است.
-\nمکانی را مشخص و از طریق منوی زمینه اقدام کنید.</string>
+    <string name="audionotes_location_not_defined">مکانی برای یادداشت‌گذاری تعیین نشده. 
+\nمکانی را مشخص و از منوی زمینه اقدام کنید.</string>
     <string name="rendering_attr_showRoadMaps_description">انتخاب کنید چه زمانی نقشه‌های فقط-جاده‌ای نشان داده شود:</string>
 	<string name="shared_string_target_points">مقصدها</string>
     <string name="ending_point_too_far">نقطهٔ پایانی از نزدیک‌ترین جاده خیلی دور است.</string>
@@ -999,7 +999,7 @@
 	<string name="loading_builds_failed">بازیابی لیست ساخت‌های OsmAnd ناموفق بود</string>
 	<string name="loading_builds">بارگیری ساخت‌های OsmAnd…</string>
 	<string name="select_build_to_install">یک ساخت OsmAnd را برای نصب انتخاب کنید</string>
-	<string name="gps_status_app_not_found">برنامهٔ GPS Status نصب نیست. در فروشگاه اندروید جست‌وجو می‌کنید؟</string>
+	<string name="gps_status_app_not_found">این برنامهٔ وضعیت GPS نصب نیست. در بازار اندروید بگردیم؟</string>
 	<string name="voice_is_not_available_msg">راهنمای صوتی موجود نیست. لطفاً به «تنطیمات» ← «تنظیمات راهبری» ← «راهنمای صوتی» بروید و یکی از بسته‌های پیام صوتی را انتخاب یا دانلود کنید.</string>
 	<string name="voice_is_not_available_title">راهنمای صوتی انتخاب نشده</string>
 	<string name="download_files_question">آیا {0} فایل دانلود شود ({1} مگابایت)؟</string>

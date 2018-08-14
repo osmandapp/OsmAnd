@@ -292,10 +292,17 @@ class TelegramHelper private constructor() {
 		return if (libraryLoaded) {
 			// create client
 			client = Client.create(UpdatesHandler(), null, null)
-			client!!.send(TdApi.GetAuthorizationState(), defaultHandler)
 			true
 		} else {
 			false
+		}
+	}
+
+	fun requestAuthorizationState() {
+		client?.send(TdApi.GetAuthorizationState()) { obj ->
+			if (obj is TdApi.AuthorizationState) {
+				onAuthorizationStateUpdated(obj)
+			}
 		}
 	}
 
@@ -471,6 +478,10 @@ class TelegramHelper private constructor() {
 				TdApi.User.CONSTRUCTOR -> currentUser = obj as TdApi.User
 			}
 		}
+	}
+
+	fun loadMessage(chatId: Long, messageId: Long) {
+		requestMessage(chatId, messageId, this@TelegramHelper::addNewMessage)
 	}
 
 	private fun requestMessage(chatId: Long, messageId: Long, onComplete: (TdApi.Message) -> Unit) {

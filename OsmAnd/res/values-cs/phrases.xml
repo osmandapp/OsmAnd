@@ -597,7 +597,7 @@
 	<string name="poi_camp_site">Kemp</string>
 	<string name="poi_caravan_site">Autokemp</string>
 	<string name="poi_picnic_site">Místo pro piknik</string>
-	<string name="poi_spring">Pramen</string>
+	<string name="poi_spring">Studánka (pramen)</string>
 	<string name="poi_hot_spring">Horký pramen</string>
 	<string name="poi_geyser">Gejzír</string>
 	<string name="poi_tomb">Hrobka</string>
@@ -3700,14 +3700,14 @@
 	<string name="poi_socket_as3112_current">Maximální proud zásuvky australského typu AS 3112 [A]</string>
 	<string name="poi_socket_as3112_output">Maximální výkon zásuvky australského typu AS 3112 [kW]</string>
 
-	<string name="poi_car_yes">Vhodné pro Osobní automobily</string>
-	<string name="poi_car_no">Nevhodné pro Osobní automobily</string>
-	<string name="poi_bicycle_yes">Vhodné pro jízdní kola</string>
-	<string name="poi_bicycle_no">Nevhodné pro jízdní kola</string>
-	<string name="poi_scooter_yes">Vhodné pro skútry</string>
-	<string name="poi_scooter_no">Nevhodné pro skútry</string>
-	<string name="poi_truck_yes">Vhodné pro nákladní automobily</string>
-	<string name="poi_truck_no">Nevhodné pro nákladní automobily</string>
+	<string name="poi_car_yes">Osobní auta: Ano</string>
+	<string name="poi_car_no">Osobní auta: Ne</string>
+	<string name="poi_bicycle_yes">Jízdní kola: Ano</string>
+	<string name="poi_bicycle_no">Jízdní kola: Ne</string>
+	<string name="poi_scooter_yes">Skútry a motorky: Ano</string>
+	<string name="poi_scooter_no">Skútry a motorky: Ne</string>
+	<string name="poi_truck_yes">Nákladní automobily: Ano</string>
+	<string name="poi_truck_no">Nákladní automobily: Ne</string>
 
 	<string name="poi_parking_fee_yes">S poplatkem za parkování</string>
 	<string name="poi_parking_fee_no">Bez poplatku za parkování</string>
