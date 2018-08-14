@@ -73,7 +73,7 @@
 	<!--<asset source="voice/pt-br/pt-br_tts.js" destination="voice/pt-br-tts/pt-br_tts.js" mode="overwriteOnlyIfExists" />-->
 	<!--<asset source="voice/ro/ro_tts.js" destination="voice/ro-tts/ro_tts.js" mode="overwriteOnlyIfExists" />-->
 	<asset source="voice/ru/ru_tts.js" destination="voice/ru-tts/ru_tts.js" mode="alwaysOverwriteOrCopy" />
-	<!--<asset source="voice/sc/sc_tts.js" destination="voice/sc-tts/sc_tts.js" mode="overwriteOnlyIfExists" />-->
+	<asset source="voice/sc/sc_tts.js" destination="voice/sc-tts/sc_tts.js" mode="overwriteOnlyIfExists" />
 	<!--<asset source="voice/sk/sk_tts.js" destination="voice/sk-tts/sk_tts.js" mode="overwriteOnlyIfExists" />-->
 	<!--<asset source="voice/sl/sl_tts.js" destination="voice/sl-tts/sl_tts.js" mode="overwriteOnlyIfExists" />-->
 	<!--<asset source="voice/sv/sv_tts.js" destination="voice/sv-tts/sv_tts.js" mode="overwriteOnlyIfExists" />-->
