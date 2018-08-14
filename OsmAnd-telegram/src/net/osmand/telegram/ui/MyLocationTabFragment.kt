@@ -290,8 +290,8 @@ class MyLocationTabFragment : Fragment(), TelegramListener, ChatLiveMessagesList
 	}
 
 	private fun startHandler() {
-		val updateCurrentRecordingTrack = Handler()
-		updateCurrentRecordingTrack.postDelayed({
+		val updateAdapter = Handler()
+		updateAdapter.postDelayed({
 			if (sharingMode && updateEnable) {
 				val iterator = adapter.chats.iterator()
 				while (iterator.hasNext()) {
