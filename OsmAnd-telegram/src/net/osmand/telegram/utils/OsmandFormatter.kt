@@ -59,7 +59,7 @@ object OsmandFormatter {
 		}
 	}
 
-	fun getFormattedTime(seconds: Int): String {
+	fun getFormattedTime(seconds: Long): String {
 		val calendar = Calendar.getInstance()
 		calendar.timeInMillis = System.currentTimeMillis() + (seconds * 1000)
 		return if (isSameDay(calendar, Calendar.getInstance())) {
