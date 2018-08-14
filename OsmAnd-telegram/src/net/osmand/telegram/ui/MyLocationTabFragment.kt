@@ -197,6 +197,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener, ChatLiveMessagesList
 				updateContent()
 			}
 		}
+		startAdapterUpdate()
 		
 		return mainView
 	}
@@ -205,7 +206,6 @@ class MyLocationTabFragment : Fragment(), TelegramListener, ChatLiveMessagesList
 		super.onResume()
 		telegramHelper.addChatLiveMessagesListener(this)
 		updateContent()
-		startAdapterUpdate()
 	}
 
 	override fun onPause() {
