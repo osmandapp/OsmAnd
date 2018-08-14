@@ -486,14 +486,8 @@ class TelegramHelper private constructor() {
 
 	private fun requestMessage(chatId: Long, messageId: Long, onComplete: (TdApi.Message) -> Unit) {
 		client?.send(TdApi.GetMessage(chatId, messageId)) { obj ->
-			when (obj.constructor) {
-				TdApi.Error.CONSTRUCTOR -> {
-					val error = obj as TdApi.Error
-					if (error.code != IGNORED_ERROR_CODE) {
-						listener?.onTelegramError(error.code, error.message)
-					}
-				}
-				TdApi.Message.CONSTRUCTOR -> onComplete(obj as TdApi.Message)
+			if (obj is TdApi.Message) {
+				onComplete(obj)
 			}
 		}
 	}
