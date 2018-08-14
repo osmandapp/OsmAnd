@@ -41,6 +41,13 @@
 		<item name="android:windowTranslucentStatus">true</item>
 	</style>
 
+	<style name="AppTheme.BottomSheet">
+		<item name="android:statusBarColor">@android:color/transparent</item>
+		<item name="android:windowBackground">@android:color/transparent</item>
+		<item name="android:backgroundDimAmount">0.5</item>
+		<item name="android:backgroundDimEnabled">true</item>
+	</style>
+
 	<style name="DialogActionButtonActive">
 		<item name="android:layout_width">wrap_content</item>
 		<item name="android:layout_height">wrap_content</item>

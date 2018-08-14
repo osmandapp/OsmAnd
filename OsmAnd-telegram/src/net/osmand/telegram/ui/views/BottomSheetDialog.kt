@@ -10,7 +10,7 @@ import android.view.Window
 import android.view.WindowManager
 import net.osmand.telegram.R
 
-class BottomSheetDialog(ctx: Context, themeId: Int) : Dialog(ctx, themeId) {
+class BottomSheetDialog(ctx: Context) : Dialog(ctx, R.style.AppTheme_BottomSheet) {
 
 	init {
 		requestWindowFeature(Window.FEATURE_NO_TITLE)
