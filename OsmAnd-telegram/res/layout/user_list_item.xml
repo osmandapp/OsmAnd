@@ -88,7 +88,7 @@
 							android:text="•"
 							android:textColor="?attr/android:textColorSecondary"
 							android:textSize="@dimen/list_item_description_text_size"
-							android:visibility="invisible" />
+							android:visibility="visible" />
 
 					</LinearLayout>
 

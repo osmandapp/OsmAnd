@@ -25,6 +25,7 @@ import net.osmand.telegram.helpers.TelegramUiHelper.ListItem
 import net.osmand.telegram.helpers.TelegramUiHelper.LocationItem
 import net.osmand.telegram.ui.LiveNowTabFragment.LiveNowListAdapter.BaseViewHolder
 import net.osmand.telegram.utils.AndroidUtils
+import net.osmand.telegram.utils.OsmandFormatter
 import net.osmand.telegram.utils.UiUtils.UpdateLocationViewCache
 import net.osmand.util.MapUtils
 import org.drinkless.td.libcore.telegram.TdApi
@@ -341,7 +342,7 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 				holder.showOnMapState?.text = menuList[stateTextInd]
 				holder.bottomDivider?.visibility = if (nextIsLocation) View.VISIBLE else View.GONE
 			} else if (item is LocationItem && holder is ContactViewHolder) {
-				holder.description?.visibility = View.GONE
+				holder.description?.text = getListItemLiveTimeDescr(item)
 			}
 		}
 
@@ -350,7 +351,7 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 		private fun getChatItemDescription(item: ChatItem): String {
 			return when {
 				item.chatWithBot -> getString(R.string.shared_string_bot)
-				item.privateChat -> "" // FIXME
+				item.privateChat -> { getListItemLiveTimeDescr(item) }
 				else -> {
 					val live = getString(R.string.shared_string_live)
 					val all = getString(R.string.shared_string_all)
@@ -360,6 +361,13 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 			}
 		}
 
+		private fun getListItemLiveTimeDescr(item: ListItem):String {
+			return getString(R.string.shared_string_live) +
+					": ${OsmandFormatter.getFormattedDuration(app, getListItemLiveTime(item))}"
+		}
+
+		private fun getListItemLiveTime(item: ListItem): Long = (System.currentTimeMillis() / 1000) - item.created
+		
 		private fun showPopupMenu(holder: ChatViewHolder, chatId: Long) {
 			val ctx = holder.itemView.context
 
