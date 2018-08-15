@@ -3107,4 +3107,5 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="coord_input_add_point">Aggiungi punto</string>
     <string name="coord_input_save_as_track">Salva come traccia</string>
     <string name="coord_input_save_as_track_descr">Hai aggiunto %1$s punti. Digita il nome del file e tappa su \"Salva\".</string>
-    </resources>
+    <string name="test_voice_desrc">Tap sul pulsante e ascolta l\'avviso vocale corrispondente per identificare gli avvisi errati o mancanti</string>
+</resources>

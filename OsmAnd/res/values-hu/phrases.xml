@@ -538,7 +538,7 @@
 	<string name="poi_leisure_fishing">Horgászhely</string>
 	<string name="poi_harbour">Kikötő</string>
 	<string name="poi_bench">Pad</string>
-	<string name="poi_water_park">Aquapark</string>
+	<string name="poi_water_park">Élményfürdő, strand</string>
 	<string name="poi_recreation_ground">Szabadidőpark</string>
 	<string name="poi_village_green">Faluközponti zöldterület (Anglia &amp; Wales)</string>
 	<string name="poi_trail_riding_station">Lovastúra-állomás</string>
@@ -3876,4 +3876,12 @@
 
 <string name="poi_outcrop">Alapkőzet-kibúvás</string>
 
-	</resources>
+	<string name="poi_hazard_nuclear">Sugárzásveszély</string>
+	<string name="poi_hazard_erosion">Földcsuszamlásveszély</string>
+	<string name="poi_hazard_avalanche">Lavinaveszély</string>
+	<string name="poi_hazard_slippery_road">Csúszásveszély</string>
+	<string name="poi_hazard_flood">Áradásveszély</string>
+	<string name="poi_hazard_minefield">Aknamező</string>
+
+
+</resources>
