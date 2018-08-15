@@ -120,7 +120,7 @@ public class JSTTSCommandPlayerImpl extends AbstractJSCommandPlayer {
             ttsRequests = 0;
             final float speechRate = cSpeechRate;
 
-            final String[] lsplit = (language + "____.").split("[_\\-]");
+            final String[] lsplit = (language.replaceAll("_formal", "") + "____.").split("[_\\-]");
             // constructor supports lang_country_variant
             Locale newLocale0 = new Locale(lsplit[0], lsplit[1], lsplit[2]);
             // #3344: Try Locale builder instead of constructor (only available from API 21). Also supports script (for now supported as trailing x_x_x_Scrp)
