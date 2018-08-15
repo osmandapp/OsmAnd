@@ -33,7 +33,7 @@ private const val ADAPTER_UPDATE_INTERVAL_MIL = 5 * 1000L // 5 sec
 
 private const val MESSAGE_ADD_ACTIVE_TIME_SEC = 30 * 60L // 30 min
 
-class MyLocationTabFragment : Fragment(), TelegramListener, ChatLiveMessagesListener {
+class MyLocationTabFragment : Fragment(), TelegramListener {
 
 	private var textMarginSmall: Int = 0
 	private var textMarginBig: Int = 0
@@ -206,7 +206,6 @@ class MyLocationTabFragment : Fragment(), TelegramListener, ChatLiveMessagesList
 
 	override fun onResume() {
 		super.onResume()
-		telegramHelper.addChatLiveMessagesListener(this)
 		telegramHelper.getActiveLiveLocationMessages(null)
 		updateContent()
 		updateEnable = true
@@ -216,7 +215,6 @@ class MyLocationTabFragment : Fragment(), TelegramListener, ChatLiveMessagesList
 	override fun onPause() {
 		super.onPause()
 		updateEnable = false
-		telegramHelper.removeChatLiveMessagesListener(this)
 	}
 	
 	override fun onSaveInstanceState(outState: Bundle) {
@@ -272,10 +270,6 @@ class MyLocationTabFragment : Fragment(), TelegramListener, ChatLiveMessagesList
 	override fun onSendLiveLocationError(code: Int, message: String) {
 	}
 
-	override fun onChatLiveMessagesUpdated(messages: List<TdApi.Message>) {
-		updateExistingLiveMessages(messages)
-	}
-
 	fun onPrimaryBtnClick() {
 		if (selectedChats.isNotEmpty()) {
 			val fm = fragmentManager ?: return
@@ -296,7 +290,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener, ChatLiveMessagesList
 		updateAdapter.postDelayed({
 			if (updateEnable) {
 				if (sharingMode) {
-					updateExistingLiveMessages(telegramHelper.getChatLiveMessages().values.toList())
+					updateExistingLiveMessages()
 					val iterator = adapter.chats.iterator()
 					while (iterator.hasNext()) {
 						val chat = iterator.next()
@@ -455,13 +449,9 @@ class MyLocationTabFragment : Fragment(), TelegramListener, ChatLiveMessagesList
 		}
 	}
 
-	private fun updateExistingLiveMessages(messages: List<TdApi.Message>) {
-		messages.forEach {
-			if (settings.isSharingLocationToChat(it.chatId)
-				&& (settings.getChatShareLocStartSec(it.chatId) == null || settings.getChatLivePeriod(it.chatId) == null)) {
-				settings.shareLocationToChat(it.chatId, true, (it.content as TdApi.MessageLocation).livePeriod.toLong())
-				settings.updateChatShareLocStartSec(it.chatId, it.date.toLong())
-			}
+	private fun updateExistingLiveMessages() {
+		if (activity is MainActivity) {
+			(activity as MainActivity).updateExistingLiveMessages()
 		}
 		sharingMode = settings.hasAnyChatToShareLocation()
 		if (!shareLocationHelper.sharingLocation && sharingMode && AndroidUtils.isLocationPermissionAvailable(app)) {

@@ -32,7 +32,7 @@ private const val PERMISSION_REQUEST_LOCATION = 1
 private const val MY_LOCATION_TAB_POS = 0
 private const val LIVE_NOW_TAB_POS = 1
 
-class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListener {
+class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListener, ChatLiveMessagesListener {
 
 	private val log = PlatformUtil.getLog(TelegramHelper::class.java)
 
@@ -143,6 +143,7 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 		if (telegramHelper.listener != this) {
 			telegramHelper.listener = this
 		}
+		telegramHelper.addChatLiveMessagesListener(this)
 
 		app.locationProvider.checkIfLastKnownLocationIsValid()
 
@@ -159,6 +160,7 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 	override fun onPause() {
 		super.onPause()
 		telegramHelper.listener = null
+		telegramHelper.removeChatLiveMessagesListener(this)
 
 		app.locationProvider.pauseAllUpdates()
 
@@ -238,6 +240,10 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 		}
 	}
 
+	override fun onChatLiveMessagesUpdated(messages: List<TdApi.Message>) {
+		updateExistingLiveMessages()
+	}
+	
 	override fun switchButtonsVisibility(visible: Boolean) {
 		val buttonsVisibility = if (visible) View.VISIBLE else View.GONE
 		if (buttonsBar.visibility != buttonsVisibility) {
@@ -305,6 +311,16 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 				dismiss()
 			}
 			show()
+		}
+	}
+
+	fun updateExistingLiveMessages() {
+		telegramHelper.getChatLiveMessages().values.forEach {
+			if (settings.isSharingLocationToChat(it.chatId)
+				&& (settings.getChatShareLocStartSec(it.chatId) == null || settings.getChatLivePeriod(it.chatId) == null)) {
+				settings.shareLocationToChat(it.chatId, true, (it.content as TdApi.MessageLocation).livePeriod.toLong())
+				settings.updateChatShareLocStartSec(it.chatId, it.date.toLong())
+			}
 		}
 	}
 	
