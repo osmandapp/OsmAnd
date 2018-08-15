@@ -1068,7 +1068,9 @@ class TelegramHelper private constructor() {
 						synchronized(message) {
 							val newContent = updateMessageContent.newContent
 							message.content = if (newContent is TdApi.MessageText) {
-								parseOsmAndBotLocation(newContent.text.text)
+								val messageOsmAndBotLocation = parseOsmAndBotLocation(newContent.text.text)
+								messageOsmAndBotLocation.created = message.date
+								messageOsmAndBotLocation
 							} else if (newContent is TdApi.MessageLocation &&
 								(isOsmAndBot(message.senderUserId) || isOsmAndBot(message.viaBotUserId))) {
 								parseOsmAndBotLocationContent(message.content as MessageOsmAndBotLocation, newContent)
