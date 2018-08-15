@@ -184,6 +184,11 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 		runOnUi {
 			val fm = supportFragmentManager
 			when (newTelegramAuthorizationState) {
+				TelegramAuthorizationState.LOGGING_OUT -> LoginDialogFragment.showWelcomeDialog(fm)
+				TelegramAuthorizationState.CLOSED -> {
+					telegramHelper.init()
+					telegramHelper.requestAuthorizationState()
+				}
 				TelegramAuthorizationState.READY -> LoginDialogFragment.dismiss(fm)
 				else -> Unit
 			}
@@ -258,9 +263,13 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 		// FIXME: update UI
 	}
 	
-	private fun logoutTelegram(silent: Boolean = false) {
+	fun logoutTelegram(silent: Boolean = false) {
 		if (telegramHelper.getTelegramAuthorizationState() == TelegramHelper.TelegramAuthorizationState.READY) {
-			telegramHelper.logout()
+			if (app.isInternetConnectionAvailable) {
+				telegramHelper.logout()
+			} else {
+				Toast.makeText(this, R.string.logout_no_internet_msg, Toast.LENGTH_SHORT).show()
+			}
 		} else if (!silent) {
 			Toast.makeText(this, R.string.not_logged_in, Toast.LENGTH_SHORT).show()
 		}
