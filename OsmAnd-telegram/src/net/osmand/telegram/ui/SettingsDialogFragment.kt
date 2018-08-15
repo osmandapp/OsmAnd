@@ -176,6 +176,7 @@ class SettingsDialogFragment : DialogFragment() {
 
 		override fun setCurrentValue(index: Int) {
 			settings.sendMyLocInterval = values[index]
+			app.updateSendLocationInterval()
 		}
 	}
 

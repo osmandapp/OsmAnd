@@ -18,7 +18,6 @@ import android.widget.*
 import net.osmand.telegram.R
 import net.osmand.telegram.TelegramApplication
 import net.osmand.telegram.helpers.TelegramHelper
-import net.osmand.telegram.helpers.TelegramHelper.ChatLiveMessagesListener
 import net.osmand.telegram.helpers.TelegramHelper.TelegramListener
 import net.osmand.telegram.helpers.TelegramUiHelper
 import net.osmand.telegram.utils.AndroidUtils
@@ -29,11 +28,11 @@ private const val SELECTED_CHATS_KEY = "selected_chats"
 private const val SHARE_LOCATION_CHAT = 1
 private const val DEFAULT_CHAT = 0
 
-private const val ADAPTER_UPDATE_INTERVAL_MIL = 30 * 1000L // 30 sec
+private const val ADAPTER_UPDATE_INTERVAL_MIL = 5 * 1000L // 5 sec
 
 private const val MESSAGE_ADD_ACTIVE_TIME_SEC = 30 * 60L // 30 min
 
-class MyLocationTabFragment : Fragment(), TelegramListener, ChatLiveMessagesListener {
+class MyLocationTabFragment : Fragment(), TelegramListener {
 
 	private var textMarginSmall: Int = 0
 	private var textMarginBig: Int = 0
@@ -46,6 +45,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener, ChatLiveMessagesList
 		get() = activity?.application as TelegramApplication
 
 	private val telegramHelper get() = app.telegramHelper
+	private val shareLocationHelper get() = app.shareLocationHelper
 	private val settings get() = app.settings
 
 	private lateinit var appBarLayout: AppBarLayout
@@ -183,8 +183,8 @@ class MyLocationTabFragment : Fragment(), TelegramListener, ChatLiveMessagesList
 			setOnCheckedChangeListener { _, isChecked ->
 				if (!isChecked) {
 					sharingMode = isChecked
-					app.settings.stopSharingLocationToChats()
-					app.shareLocationHelper.stopSharingLocation()
+					settings.stopSharingLocationToChats()
+					shareLocationHelper.stopSharingLocation()
 					telegramHelper.stopSendingLiveLocationMessages()
 					updateContent()
 				}
@@ -205,7 +205,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener, ChatLiveMessagesList
 
 	override fun onResume() {
 		super.onResume()
-		telegramHelper.addChatLiveMessagesListener(this)
+		telegramHelper.getActiveLiveLocationMessages(null)
 		updateContent()
 		updateEnable = true
 		startHandler()
@@ -214,7 +214,6 @@ class MyLocationTabFragment : Fragment(), TelegramListener, ChatLiveMessagesList
 	override fun onPause() {
 		super.onPause()
 		updateEnable = false
-		telegramHelper.removeChatLiveMessagesListener(this)
 	}
 	
 	override fun onSaveInstanceState(outState: Bundle) {
@@ -270,10 +269,6 @@ class MyLocationTabFragment : Fragment(), TelegramListener, ChatLiveMessagesList
 	override fun onSendLiveLocationError(code: Int, message: String) {
 	}
 
-	override fun onChatLiveMessagesUpdated(messages: List<TdApi.Message>) {
-		app.runInUIThread { updateContent() }
-	}
-
 	fun onPrimaryBtnClick() {
 		if (selectedChats.isNotEmpty()) {
 			val fm = fragmentManager ?: return
@@ -292,23 +287,27 @@ class MyLocationTabFragment : Fragment(), TelegramListener, ChatLiveMessagesList
 	private fun startHandler() {
 		val updateAdapter = Handler()
 		updateAdapter.postDelayed({
-			if (sharingMode && updateEnable) {
-				val iterator = adapter.chats.iterator()
-				while (iterator.hasNext()) {
-					val chat = iterator.next()
-					if (app.settings.getChatLiveMessageExpireTime(chat.id) <= 0) {
-						app.settings.shareLocationToChat(chat.id, false)
-						iterator.remove()
+			if (updateEnable) {
+				if (sharingMode) {
+					updateExistingLiveMessages()
+					val iterator = adapter.chats.iterator()
+					while (iterator.hasNext()) {
+						val chat = iterator.next()
+						if (settings.getChatLiveMessageExpireTime(chat.id) <= 0) {
+							settings.shareLocationToChat(chat.id, false)
+							iterator.remove()
+						}
+					}
+					if (adapter.chats.isNotEmpty()) {
+						adapter.chats = sortAdapterItems(adapter.chats)
+						adapter.notifyDataSetChanged()
+					} else {
+						sharingMode = false
+						updateContent()
 					}
 				}
-				if (adapter.chats.isNotEmpty()) {
-					adapter.notifyDataSetChanged()
-				} else {
-					sharingMode = false
-					updateContent()
-				}
+				startHandler()
 			}
-			startHandler()
 		}, ADAPTER_UPDATE_INTERVAL_MIL)
 	}
 	
@@ -442,7 +441,30 @@ class MyLocationTabFragment : Fragment(), TelegramListener, ChatLiveMessagesList
 				chats.add(chat)
 			}
 		}
-		adapter.chats = chats
+		if (sharingMode && settings.hasAnyChatToShareLocation()) {
+			adapter.chats = sortAdapterItems(chats)
+		} else {
+			adapter.chats = chats
+		}
+	}
+
+	private fun updateExistingLiveMessages() {
+		telegramHelper.getChatLiveMessages().values.forEach {
+			if (settings.isSharingLocationToChat(it.chatId)
+				&& (settings.getChatShareLocStartSec(it.chatId) == null || settings.getChatLivePeriod(it.chatId) == null)) {
+				settings.shareLocationToChat(it.chatId, true, (it.content as TdApi.MessageLocation).livePeriod.toLong())
+				settings.updateChatShareLocStartSec(it.chatId, it.date.toLong())
+			}
+		}
+		sharingMode = settings.hasAnyChatToShareLocation()
+		if (!shareLocationHelper.sharingLocation && sharingMode && AndroidUtils.isLocationPermissionAvailable(app)) {
+			shareLocationHelper.startSharingLocation()
+		}
+	}
+
+	private fun sortAdapterItems(list: MutableList<TdApi.Chat>): MutableList<TdApi.Chat> {
+		list.sortWith(Comparator<TdApi.Chat> { o1, o2 -> o1.title.compareTo(o2.title) })
+		return list
 	}
 	
 	inner class MyLocationListAdapter : RecyclerView.Adapter<MyLocationListAdapter.BaseViewHolder>() {
@@ -481,7 +503,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener, ChatLiveMessagesList
 			val chat = chats[position]
 			val lastItem = position == itemCount - 1
 			val placeholderId = if (telegramHelper.isGroup(chat)) R.drawable.img_group_picture else R.drawable.img_user_picture
-			val live = app.settings.isSharingLocationToChat(chat.id)
+			val live = settings.isSharingLocationToChat(chat.id)
 
 			TelegramUiHelper.setupPhoto(app, holder.icon, chat.photo?.small?.local?.path, placeholderId, false)
 			holder.title?.text = chat.title
@@ -508,8 +530,8 @@ class MyLocationTabFragment : Fragment(), TelegramListener, ChatLiveMessagesList
 				holder.bottomShadow?.visibility = if (lastItem) View.VISIBLE else View.GONE
 				holder.itemView.setOnClickListener {
 					if (live) {
-						app.settings.shareLocationToChat(chat.id, false)
-						app.shareLocationHelper.stopSharingLocation()
+						settings.shareLocationToChat(chat.id, false)
+						shareLocationHelper.stopSharingLocation()
 						notifyItemChanged(position)
 					} else {
 						holder.checkBox?.apply {
@@ -522,7 +544,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener, ChatLiveMessagesList
 					isChecked = live
 					setOnCheckedChangeListener { _, isChecked ->
 						if (!isChecked) {
-							app.settings.shareLocationToChat(chat.id, false)
+							settings.shareLocationToChat(chat.id, false)
 							telegramHelper.stopSendingLiveLocationToChat(chat.id)
 							removeItem(chat)
 						}
@@ -538,16 +560,17 @@ class MyLocationTabFragment : Fragment(), TelegramListener, ChatLiveMessagesList
 					}
 				}
 
-				val expiresIn = app.settings.getChatLiveMessageExpireTime(chat.id)
+				val expiresIn = settings.getChatLiveMessageExpireTime(chat.id)
 				
 				holder.textInArea?.apply {
 					visibility = View.VISIBLE
 					text = "${getText(R.string.plus)} ${OsmandFormatter.getFormattedDuration(context!!,
 						MESSAGE_ADD_ACTIVE_TIME_SEC)}"
 					setOnClickListener {
-						val newLivePeriod = app.settings.getChatLiveMessageExpireTime(chat.id) + MESSAGE_ADD_ACTIVE_TIME_SEC
+						val newLivePeriod = settings.getChatLiveMessageExpireTime(chat.id) + MESSAGE_ADD_ACTIVE_TIME_SEC
+						settings.shareLocationToChat(chat.id, false)
 						telegramHelper.stopSendingLiveLocationToChat(chat.id)
-						app.settings.shareLocationToChat(chat.id, true, newLivePeriod)
+						settings.shareLocationToChat(chat.id, true, newLivePeriod)
 						app.forceUpdateMyLocation()
 						notifyItemChanged(position)
 					}
@@ -576,7 +599,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener, ChatLiveMessagesList
 			if (chats.isEmpty()) {
 				sharingMode = false
 				updateContent()
-				app.shareLocationHelper.stopSharingLocation()
+				shareLocationHelper.stopSharingLocation()
 			} else {
 				adapter.notifyDataSetChanged()
 			}
