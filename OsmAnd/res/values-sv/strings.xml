@@ -2993,4 +2993,8 @@ Vänligen tillhandahåll fullständig kod</string>
 \n
 \n</string>
     <string name="quick_action_page_list_descr">Att trycka på denna åtgärdsknapp bläddrar genom listan nedan.</string>
+    <string name="poi_cannot_be_found">Nod eller väg kan inte hittas.</string>
+    <string name="search_no_results_feedback">Inga sökresultat?
+\nGe oss feedback</string>
+    <string name="increase_search_radius_to">Öka sökradie till %1$s</string>
     </resources>
