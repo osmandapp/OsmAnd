@@ -286,7 +286,7 @@
 	<string name="poi_traffic_calming_cushion">Kudde</string>
 	<string name="poi_traffic_calming_chicane">Chikan</string>
 	<string name="poi_traffic_calming_rumble_strip">Bullerräfflor</string>
-	<string name="poi_traffic_calming_table">Yta</string>
+	<string name="poi_traffic_calming_table">Plan</string>
 	<string name="poi_traffic_calming_choker">Försmalning</string>
 	<string name="poi_traffic_calming_island">Refug</string>
 	<string name="poi_traffic_signals">Stoppljus</string>
@@ -1331,7 +1331,7 @@
 	<string name="poi_bicycle_parking_informal">Spontan</string>
 
 	<string name="poi_leaf_type_broadleaved">Bredbladig</string>
-	<string name="poi_leaf_type_needleleaved">Nålblad</string>
+	<string name="poi_leaf_type_needleleaved">Nålbladig</string>
 	<string name="poi_leaf_type_mixed">Blandat</string>
 	<string name="poi_leaf_type_leafless">Utan löv</string>
 	<string name="poi_species">Art</string>
@@ -1991,7 +1991,7 @@
 
 	<string name="poi_payment_e_zpass_yes">E‑ZPass</string>
 	<string name="poi_shelter_type_lean_to">Lutande mot</string>
-	<string name="poi_shelter_type_wildlife_hide">Vildmarksgömma</string>
+	<string name="poi_shelter_type_wildlife_hide">Naturlivsgömma</string>
 	<string name="poi_shelter_type_field_shelter">Fältgömma</string>
 	<string name="poi_internet_access_type_public">Internetåtkomst: allmän</string>
 	<string name="poi_internet_access_type_service">Internetåtkomst: service</string>
@@ -2415,7 +2415,7 @@
 
 	<string name="poi_historic_civilization_ancient_roman">Civilisation: det antika romerska (753 F.KR – 284 E.KR.)</string>
 	<string name="poi_historic_civilization_nuragic">Civilisation: nuragherkulturen (18 F.KR – 2 E.KR)</string>
-	<string name="poi_social_facility_outreach">Uppsökande</string>
+	<string name="poi_social_facility_outreach">Sträckande hand</string>
 	<string name="poi_historic_civilization_etruscan">Civilisation: etruskisk (500-talet F.Kr. - 1300-talet E.Kr.)</string>
 	<string name="poi_historic_civilization_prehistoric">Civilisation: förhistorisk</string>
 	<string name="poi_historic_civilization_ancient_greek">Civilisation: det antika grekiska</string>
