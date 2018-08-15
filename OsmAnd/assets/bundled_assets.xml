@@ -53,13 +53,13 @@
 	<asset source="voice/en/en_tts.js" destination="voice/en-tts/en_tts.js" mode="alwaysOverwriteOrCopy" />
 	<asset source="voice/en-gb/en-gb_tts.js" destination="voice/en-gb-tts/en-gb_tts.js" mode="overwriteOnlyIfExists" />
 	<asset source="voice/es/es_tts.js" destination="voice/es-tts/es_tts.js" mode="alwaysOverwriteOrCopy" />
-	<!--<asset source="voice/es-ar/es-ar_tts.js" destination="voice/es-ar-tts/es-ar_tts.js" mode="overwriteOnlyIfExists" />-->
-	<!--<asset source="voice/et/et_tts.js" destination="voice/et-tts/et_tts.js" mode="overwriteOnlyIfExists" />-->
-	<!--<asset source="voice/fa/fa_tts.js" destination="voice/fa-tts/fa_tts.js" mode="overwriteOnlyIfExists" />-->
+	<asset source="voice/es-ar/es-ar_tts.js" destination="voice/es-ar-tts/es-ar_tts.js" mode="overwriteOnlyIfExists" />
+	<asset source="voice/et/et_tts.js" destination="voice/et-tts/et_tts.js" mode="overwriteOnlyIfExists" />
+	<asset source="voice/fa/fa_tts.js" destination="voice/fa-tts/fa_tts.js" mode="overwriteOnlyIfExists" />
 	<!--<asset source="voice/fi/fi_tts.js" destination="voice/fi-tts/fi_tts.js" mode="overwriteOnlyIfExists" />-->
 	<asset source="voice/fr/fr_tts.js" destination="voice/fr-tts/fr_tts.js" mode="alwaysOverwriteOrCopy" />
 	<!--<asset source="voice/he/he_tts.js" destination="voice/he-tts/he_tts.js" mode="overwriteOnlyIfExists" />-->
-	<!--<asset source="voice/hi/hi_tts.js" destination="voice/hi-tts/hi_tts.js" mode="overwriteOnlyIfExists" />-->
+	<asset source="voice/hi/hi_tts.js" destination="voice/hi-tts/hi_tts.js" mode="overwriteOnlyIfExists" />
 	<!--<asset source="voice/hr/hr_tts.js" destination="voice/hr-tts/hr_tts.js" mode="overwriteOnlyIfExists" />-->
 	<asset source="voice/hu/hu_tts.js" destination="voice/hu-tts/hu_tts.js" mode="overwriteOnlyIfExists" />
 	<!--<asset source="voice/hu-formal/hu-formal_tts.js" destination="voice/hu_formal-tts/hu-formal_tts.js" mode="overwriteOnlyIfExists" />-->
