@@ -2050,4 +2050,26 @@
 	<string name="poi_wetland_marsh">בית עשב</string>
 	<string name="poi_wetland_swamp">ביצה</string>
 	<string name="poi_wetland_saltern">מפעל מלח</string>
+	<string name="poi_wetland_mangrove">מנגרובים</string>
+	<string name="poi_wetland_fen">אדמת ביצה</string>
+	<string name="poi_wetland_mud">בוץ</string>
+
+	<string name="poi_beach_sand">חול</string>
+	<string name="poi_beach_shingle">רעף</string>
+	<string name="poi_beach_rocky">סלעי</string>
+
+	<string name="poi_chimney">ארובה</string>
+	<string name="poi_palm">דקל</string>
+	<string name="poi_cypress">ברוש</string>
+	<string name="poi_flagpole">תורן דגל</string>
+
+	<string name="poi_bench_yes">יש</string>
+	<string name="poi_bench_no">ללא ספסל</string>
+	<string name="poi_bin_yes">עם סל</string>
+	<string name="poi_bin_no">ללא סל</string>
+
+	<string name="poi_shelter_type_public_transport">תחבורה ציבורית</string>
+	<string name="poi_shelter_type_picnic_shelter">פיקניק</string>
+	<string name="poi_shelter_type_weather_shelter">מזג אוויר</string>
+	<string name="poi_shelter_type_lean_to">סככה פתוחה</string>
 	</resources>
