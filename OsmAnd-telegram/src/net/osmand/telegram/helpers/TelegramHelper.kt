@@ -100,7 +100,6 @@ class TelegramHelper private constructor() {
 	var listener: TelegramListener? = null
 	private val incomingMessagesListeners = HashSet<TelegramIncomingMessagesListener>()
 	private val fullInfoUpdatesListeners = HashSet<FullInfoUpdatesListener>()
-	private val chatLiveMessagesListeners = HashSet<ChatLiveMessagesListener>()
 
 	fun addIncomingMessagesListener(listener: TelegramIncomingMessagesListener) {
 		incomingMessagesListeners.add(listener)
@@ -116,14 +115,6 @@ class TelegramHelper private constructor() {
 
 	fun removeFullInfoUpdatesListener(listener: FullInfoUpdatesListener) {
 		fullInfoUpdatesListeners.remove(listener)
-	}
-
-	fun addChatLiveMessagesListener(listener: ChatLiveMessagesListener) {
-		chatLiveMessagesListeners.add(listener)
-	}
-
-	fun removeChatLiveMessagesListener(listener: ChatLiveMessagesListener) {
-		chatLiveMessagesListeners.remove(listener)
 	}
 
 	fun getChatList(): TreeSet<OrderedChat> {
@@ -231,10 +222,6 @@ class TelegramHelper private constructor() {
 	interface FullInfoUpdatesListener {
 		fun onBasicGroupFullInfoUpdated(groupId: Int, info: TdApi.BasicGroupFullInfo)
 		fun onSupergroupFullInfoUpdated(groupId: Int, info: TdApi.SupergroupFullInfo)
-	}
-
-	interface ChatLiveMessagesListener {
-		fun onChatLiveMessagesUpdated(messages: List<TdApi.Message>)
 	}
 
 	interface TelegramAuthorizationRequestListener {
@@ -578,7 +565,6 @@ class TelegramHelper private constructor() {
 							chatLiveMessages[chatId] = msg
 						}
 					}
-					chatLiveMessagesListeners.forEach { it.onChatLiveMessagesUpdated(messages.toList()) }
 					onComplete?.invoke()
 				}
 				else -> listener?.onSendLiveLocationError(-1, "Receive wrong response from TDLib: $obj")

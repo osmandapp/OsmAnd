@@ -18,7 +18,6 @@ import android.widget.*
 import net.osmand.telegram.R
 import net.osmand.telegram.TelegramApplication
 import net.osmand.telegram.helpers.TelegramHelper
-import net.osmand.telegram.helpers.TelegramHelper.ChatLiveMessagesListener
 import net.osmand.telegram.helpers.TelegramHelper.TelegramListener
 import net.osmand.telegram.helpers.TelegramUiHelper
 import net.osmand.telegram.utils.AndroidUtils
@@ -450,8 +449,12 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 	}
 
 	private fun updateExistingLiveMessages() {
-		if (activity is MainActivity) {
-			(activity as MainActivity).updateExistingLiveMessages()
+		telegramHelper.getChatLiveMessages().values.forEach {
+			if (settings.isSharingLocationToChat(it.chatId)
+				&& (settings.getChatShareLocStartSec(it.chatId) == null || settings.getChatLivePeriod(it.chatId) == null)) {
+				settings.shareLocationToChat(it.chatId, true, (it.content as TdApi.MessageLocation).livePeriod.toLong())
+				settings.updateChatShareLocStartSec(it.chatId, it.date.toLong())
+			}
 		}
 		sharingMode = settings.hasAnyChatToShareLocation()
 		if (!shareLocationHelper.sharingLocation && sharingMode && AndroidUtils.isLocationPermissionAvailable(app)) {
