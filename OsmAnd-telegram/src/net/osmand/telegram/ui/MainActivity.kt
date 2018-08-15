@@ -237,7 +237,7 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 			listeners.forEach { it.get()?.onSendLiveLocationError(code, message) }
 		}
 	}
-	
+
 	override fun switchButtonsVisibility(visible: Boolean) {
 		val buttonsVisibility = if (visible) View.VISIBLE else View.GONE
 		if (buttonsBar.visibility != buttonsVisibility) {
