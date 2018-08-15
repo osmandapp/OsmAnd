@@ -42,7 +42,7 @@ public abstract class AbstractJSCommandPlayer implements CommandPlayer, StateCha
             log.info("Initializing prolog system : " + (System.currentTimeMillis() - time)); //$NON-NLS-1$
         }
         this.streamType = ctx.getSettings().AUDIO_STREAM_GUIDANCE.getModeValue(applicationMode);
-        language = voiceProvider.substring(0, voiceProvider.indexOf("-"));
+        language = voiceProvider.substring(0, voiceProvider.indexOf("-tts"));
     }
 
     @Override
