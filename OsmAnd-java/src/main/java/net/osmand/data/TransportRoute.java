@@ -8,7 +8,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import net.osmand.binary.OsmandOdb.TransportRouteSchedule;
 import net.osmand.osm.edit.Node;
 import net.osmand.osm.edit.Way;
 import net.osmand.util.MapUtils;
@@ -21,13 +20,20 @@ public class TransportRoute extends MapObject {
 	private Integer dist = null;
 	private String color;
 	private List<Way> forwardWays;
-	private TransportRouteSchedule schedule;
+	private TransportSchedule schedule;
 	public static final double SAME_STOP = 25;
 	
 	public TransportRoute(){
 	}
 	
-	public TransportRouteSchedule getSchedule() {
+	public TransportSchedule getSchedule() {
+		return schedule;
+	}
+	
+	public TransportSchedule getOrCreateSchedule() {
+		if(schedule == null) {
+			schedule = new TransportSchedule();
+		}
 		return schedule;
 	}
 	
@@ -203,7 +209,4 @@ public class TransportRoute extends MapObject {
 		return d;
 	}
 
-	public void setSchedule(TransportRouteSchedule schedule) {
-		this.schedule = schedule;
-	}
 }

@@ -23,6 +23,15 @@ public class TransportRoutingConfiguration {
 	public int finishTimeSeconds = 1200;
 
 	public int maxRouteTime = 60 * 60 * 1000; // 1000 hours
+
+	public boolean useSchedule;
+	
+	// 10 seconds based
+	public int scheduleTimeOfDay = 60 * 6 * 12; // 12:00 - 60*6*12
+	
+	// day since 2000
+	public int scheduleDayNumber;
+	
 	
 	
 	public TransportRoutingConfiguration(RoutingConfiguration.Builder builder) {
@@ -38,8 +47,6 @@ public class TransportRoutingConfiguration {
 			walkSpeed =  router.getFloatAttribute("defaultWalkSpeed", (float) walkSpeed);
 			stopTime =  router.getIntAttribute("defaultStopTime", stopTime);
 			changeTime =  router.getIntAttribute("defaultChangeTime", changeTime);
-			
-			
 		}
 	}
 	

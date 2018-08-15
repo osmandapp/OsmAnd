@@ -468,11 +468,15 @@ public class BinaryMapIndexReader {
 	}
 
 
+	public TIntObjectHashMap<TransportRoute> getTransportRoutes(int[] filePointers) throws IOException {
+		TIntObjectHashMap<TransportRoute> result = new TIntObjectHashMap<TransportRoute>();
+		loadTransportRoutes(filePointers, result);
+		return result;
+	}
 	/**
 	 * Transport public methods
 	 */
-	public TIntObjectHashMap<TransportRoute> getTransportRoutes(int[] filePointers) throws IOException {
-		TIntObjectHashMap<TransportRoute> result = new TIntObjectHashMap<TransportRoute>();
+	public void loadTransportRoutes(int[] filePointers, TIntObjectHashMap<TransportRoute> result) throws IOException {
 		Map<TransportIndex, TIntArrayList> groupPoints = new HashMap<TransportIndex, TIntArrayList>();
 		for (int filePointer : filePointers) {
 			TransportIndex ind = getTransportIndex(filePointer);
@@ -500,7 +504,6 @@ public class BinaryMapIndexReader {
 				transportAdapter.initializeNames(false, r, stringTable);
 			}
 		}
-		return result;
 	}
 
 	

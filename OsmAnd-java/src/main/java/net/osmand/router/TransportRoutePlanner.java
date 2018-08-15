@@ -18,6 +18,7 @@ import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.data.LatLon;
 import net.osmand.data.TransportRoute;
+import net.osmand.data.TransportSchedule;
 import net.osmand.data.TransportStop;
 import net.osmand.osm.edit.Node;
 import net.osmand.osm.edit.Way;
@@ -76,7 +77,13 @@ public class TransportRoutePlanner {
 				// could be geometry size
 				double segmentDist = MapUtils.getDistance(prevStop.getLocation(), stop.getLocation());
 				travelDist += segmentDist;
-				travelTime += ctx.cfg.stopTime + segmentDist / ctx.cfg.travelSpeed;
+				if(ctx.cfg.useSchedule) {
+					TransportSchedule sc = segment.road.getSchedule();
+					int interval = sc.avgStopIntervals.get(ind - 1);
+					travelTime += interval * 10;
+				} else {
+					travelTime += ctx.cfg.stopTime + segmentDist / ctx.cfg.travelSpeed;
+				}
 				sgms.clear();
 				sgms = ctx.getTransportStops(stop.x31, stop.y31, true, sgms);
 				for (TransportRouteSegment sgm : sgms) {
@@ -322,6 +329,16 @@ public class TransportRoutePlanner {
 		}
 		
 		public double getTravelTime() {
+			if(cfg.useSchedule) {
+				int t = 0;
+				for(TransportRouteResultSegment s : segments) {
+					TransportSchedule sts = s.route.getSchedule();
+					for (int k = s.start; k < s.end; k++) {
+						t += sts.getAvgStopIntervals()[k] * 10;
+					}
+				}
+				return t;
+			}
 			return getTravelDist() / cfg.travelSpeed + cfg.stopTime * getStops() + 
 					cfg.changeTime * getChanges();
 		}
@@ -356,6 +373,7 @@ public class TransportRoutePlanner {
 		
 		final int segStart;
 		final TransportRoute road;
+		final int departureTime;
 		private static final int SHIFT = 10; // assume less than 1024 stops
 		
 		TransportRouteSegment parentRoute = null;
@@ -369,14 +387,24 @@ public class TransportRoutePlanner {
 		double distFromStart = 0;
 		
 		
+		
+		
 		public TransportRouteSegment(TransportRoute road, int stopIndex) {
 			this.road = road;
 			this.segStart = (short) stopIndex;
+			this.departureTime = -1;
+		}
+		
+		public TransportRouteSegment(TransportRoute road, int stopIndex, int depTime) {
+			this.road = road;
+			this.segStart = (short) stopIndex;
+			this.departureTime = depTime;
 		}
 		
 		public TransportRouteSegment(TransportRouteSegment c) {
 			this.road = c.road;
 			this.segStart = c.segStart;
+			this.departureTime = c.departureTime;
 		}
 		
 		
@@ -440,7 +468,7 @@ public class TransportRoutePlanner {
 		
 		
 		public TLongObjectHashMap<List<TransportRouteSegment>> quadTree;
-		public final Map<BinaryMapIndexReader, TIntObjectHashMap<TransportRoute>> map = 
+		public final Map<BinaryMapIndexReader, TIntObjectHashMap<TransportRoute>> routeMap = 
 				new LinkedHashMap<BinaryMapIndexReader, TIntObjectHashMap<TransportRoute>>();
 		
 		// stats
@@ -465,7 +493,7 @@ public class TransportRoutePlanner {
 			walkChangeRadiusIn31 = (int) (cfg.walkChangeRadius / MapUtils.getTileDistanceWidth(31));
 			quadTree = new TLongObjectHashMap<List<TransportRouteSegment>>();
 			for (BinaryMapIndexReader r : readers) {
-				map.put(r, new TIntObjectHashMap<TransportRoute>());
+				routeMap.put(r, new TIntObjectHashMap<TransportRoute>());
 			}
 		}
 		
@@ -517,11 +545,14 @@ public class TransportRoutePlanner {
 			SearchRequest<TransportStop> sr = BinaryMapIndexReader.buildSearchTransportRequest(x << pz, (x + 1) << pz, 
 					y << pz, (y + 1) << pz, -1, null);
 			TIntArrayList allPoints = new TIntArrayList();
-			TIntArrayList allPointsUnique = new TIntArrayList();
+			TIntArrayList allPointsLoad = new TIntArrayList();
 			// should it be global?
 			TLongObjectHashMap<TransportStop> loadedTransportStops = new TLongObjectHashMap<TransportStop>();
-			for(BinaryMapIndexReader r : map.keySet()) {
+			for(BinaryMapIndexReader r : routeMap.keySet()) {
 				sr.clearSearchResults();
+				allPoints.clear();
+				allPointsLoad.clear();
+				
 				List<TransportStop> stops = r.searchTransportIndex(sr);
 				for(TransportStop s : stops) {
 					if(!loadedTransportStops.contains(s.getId())) {
@@ -529,19 +560,34 @@ public class TransportRoutePlanner {
 						allPoints.addAll(s.getReferencesToRoutes());
 					}
 				}
-				makeUnique(allPoints, allPointsUnique);
-				if(allPointsUnique.size() > 0) {
-					loadTransportSegments(allPointsUnique, r, stops, lst);
+				
+				if(allPoints.size() > 0) {
+					allPoints.sort();
+					TIntObjectHashMap<TransportRoute> loadedRoutes = routeMap.get(r);
+					TIntObjectHashMap<TransportRoute> routes  = new TIntObjectHashMap<TransportRoute>();
+					TIntIterator it = allPoints.iterator();
+					int p = allPoints.get(0) + 1; // different
+					while(it.hasNext()) {
+						int nxt = it.next();
+						if (p != nxt) {
+							if (loadedRoutes.contains(nxt)) {
+								routes.put(nxt, loadedRoutes.get(nxt));
+							} else {
+								allPointsLoad.add(nxt);
+							}
+						}
+					}
+					r.loadTransportRoutes(allPointsLoad.toArray(), routes);
+					loadedRoutes.putAll(routes);
+					loadTransportSegments(routes, r, stops, lst);
 				}
 			}			
 			readTime += System.nanoTime() - nanoTime;
 			return lst;
 		}
 
-		private void loadTransportSegments(TIntArrayList allPointsUnique, BinaryMapIndexReader r,
+		private void loadTransportSegments(TIntObjectHashMap<TransportRoute> routes, BinaryMapIndexReader r,
 				List<TransportStop> stops, List<TransportRouteSegment> lst) throws IOException {
-			TIntObjectHashMap<TransportRoute> routes = r.getTransportRoutes(allPointsUnique.toArray());
-			map.get(r).putAll(routes);
 			for(TransportStop s : stops) {
 				for (int ref : s.getReferencesToRoutes()) {
 					TransportRoute route = routes.get(ref);
@@ -557,10 +603,26 @@ public class TransportRoutePlanner {
 							}
 						}
 						if (stopIndex != -1) {
-							TransportRouteSegment segment = new TransportRouteSegment(route, stopIndex);
-							lst.add(segment);
+							if(cfg.useSchedule) {
+								if(route.getSchedule() != null) {
+									TIntArrayList ti = route.getSchedule().tripIntervals;
+									int cnt = ti.size();
+									int t = 0;
+									for(int i = 0; i < cnt; i++) {
+										t += ti.getQuick(i);
+										if(t >= cfg.scheduleTimeOfDay) {
+											TransportRouteSegment segment = new TransportRouteSegment(route, stopIndex, t);
+											lst.add(segment);
+											break;
+										}
+									}
+								}
+							} else {
+								TransportRouteSegment segment = new TransportRouteSegment(route, stopIndex);
+								lst.add(segment);
+							}
 						} else {
-							System.err.println("missing");
+							System.err.println("Routing error: missing stop in route");
 						}
 						
 					}
@@ -568,18 +630,7 @@ public class TransportRoutePlanner {
 			}
 		}
 
-		private void makeUnique(TIntArrayList allPoints, TIntArrayList allPointsUnique) {
-			allPoints.sort();
-			int p = 0;
-			TIntIterator it = allPoints.iterator();
-			while(it.hasNext()) {
-				int nxt = it.next();
-				if(p != nxt) {
-					allPointsUnique.add(nxt);
-					p = nxt;
-				}
-			}			
-		}
+		
 
 	}
 

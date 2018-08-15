@@ -31830,86 +31830,63 @@ public final class OsmandOdb {
   public interface TransportRouteScheduleOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
 
-    // repeated uint32 avgStopIntervals = 1;
+    // optional bytes avgStopIntervals = 1;
     /**
-     * <code>repeated uint32 avgStopIntervals = 1;</code>
+     * <code>optional bytes avgStopIntervals = 1;</code>
      *
      * <pre>
+     * array of raw var int
      * 10-seconds based intervals between stops arrivals;
      * </pre>
      */
-    java.util.List<java.lang.Integer> getAvgStopIntervalsList();
+    boolean hasAvgStopIntervals();
     /**
-     * <code>repeated uint32 avgStopIntervals = 1;</code>
+     * <code>optional bytes avgStopIntervals = 1;</code>
      *
      * <pre>
+     * array of raw var int
      * 10-seconds based intervals between stops arrivals;
      * </pre>
      */
-    int getAvgStopIntervalsCount();
-    /**
-     * <code>repeated uint32 avgStopIntervals = 1;</code>
-     *
-     * <pre>
-     * 10-seconds based intervals between stops arrivals;
-     * </pre>
-     */
-    int getAvgStopIntervals(int index);
+    com.google.protobuf.ByteString getAvgStopIntervals();
 
-    // repeated uint32 avgWaitIntervals = 2;
+    // optional bytes avgWaitIntervals = 2;
     /**
-     * <code>repeated uint32 avgWaitIntervals = 2;</code>
+     * <code>optional bytes avgWaitIntervals = 2;</code>
      *
      * <pre>
      * optional 10-seconds based (0, if non-provided or less &lt; 10 seconds)
      * </pre>
      */
-    java.util.List<java.lang.Integer> getAvgWaitIntervalsList();
+    boolean hasAvgWaitIntervals();
     /**
-     * <code>repeated uint32 avgWaitIntervals = 2;</code>
+     * <code>optional bytes avgWaitIntervals = 2;</code>
      *
      * <pre>
      * optional 10-seconds based (0, if non-provided or less &lt; 10 seconds)
      * </pre>
      */
-    int getAvgWaitIntervalsCount();
-    /**
-     * <code>repeated uint32 avgWaitIntervals = 2;</code>
-     *
-     * <pre>
-     * optional 10-seconds based (0, if non-provided or less &lt; 10 seconds)
-     * </pre>
-     */
-    int getAvgWaitIntervals(int index);
+    com.google.protobuf.ByteString getAvgWaitIntervals();
 
-    // repeated uint32 tripIntervals = 3;
+    // optional bytes tripIntervals = 3;
     /**
-     * <code>repeated uint32 tripIntervals = 3;</code>
+     * <code>optional bytes tripIntervals = 3;</code>
      *
      * <pre>
      * 10-seconds delta based intervals for trips departing from first stop
      * 1st trip is diff from 00:00:00
      * </pre>
      */
-    java.util.List<java.lang.Integer> getTripIntervalsList();
+    boolean hasTripIntervals();
     /**
-     * <code>repeated uint32 tripIntervals = 3;</code>
+     * <code>optional bytes tripIntervals = 3;</code>
      *
      * <pre>
      * 10-seconds delta based intervals for trips departing from first stop
      * 1st trip is diff from 00:00:00
      * </pre>
      */
-    int getTripIntervalsCount();
-    /**
-     * <code>repeated uint32 tripIntervals = 3;</code>
-     *
-     * <pre>
-     * 10-seconds delta based intervals for trips departing from first stop
-     * 1st trip is diff from 00:00:00
-     * </pre>
-     */
-    int getTripIntervals(int index);
+    com.google.protobuf.ByteString getTripIntervals();
 
     // repeated .OsmAnd.OBF.TransportRouteScheduleException exceptions = 8;
     /**
@@ -32007,67 +31984,19 @@ public final class OsmandOdb {
               }
               break;
             }
-            case 8: {
-              if (!((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
-                avgStopIntervals_ = new java.util.ArrayList<java.lang.Integer>();
-                mutable_bitField0_ |= 0x00000001;
-              }
-              avgStopIntervals_.add(input.readUInt32());
-              break;
-            }
             case 10: {
-              int length = input.readRawVarint32();
-              int limit = input.pushLimit(length);
-              if (!((mutable_bitField0_ & 0x00000001) == 0x00000001) && input.getBytesUntilLimit() > 0) {
-                avgStopIntervals_ = new java.util.ArrayList<java.lang.Integer>();
-                mutable_bitField0_ |= 0x00000001;
-              }
-              while (input.getBytesUntilLimit() > 0) {
-                avgStopIntervals_.add(input.readUInt32());
-              }
-              input.popLimit(limit);
-              break;
-            }
-            case 16: {
-              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
-                avgWaitIntervals_ = new java.util.ArrayList<java.lang.Integer>();
-                mutable_bitField0_ |= 0x00000002;
-              }
-              avgWaitIntervals_.add(input.readUInt32());
+              bitField0_ |= 0x00000001;
+              avgStopIntervals_ = input.readBytes();
               break;
             }
             case 18: {
-              int length = input.readRawVarint32();
-              int limit = input.pushLimit(length);
-              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002) && input.getBytesUntilLimit() > 0) {
-                avgWaitIntervals_ = new java.util.ArrayList<java.lang.Integer>();
-                mutable_bitField0_ |= 0x00000002;
-              }
-              while (input.getBytesUntilLimit() > 0) {
-                avgWaitIntervals_.add(input.readUInt32());
-              }
-              input.popLimit(limit);
-              break;
-            }
-            case 24: {
-              if (!((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
-                tripIntervals_ = new java.util.ArrayList<java.lang.Integer>();
-                mutable_bitField0_ |= 0x00000004;
-              }
-              tripIntervals_.add(input.readUInt32());
+              bitField0_ |= 0x00000002;
+              avgWaitIntervals_ = input.readBytes();
               break;
             }
             case 26: {
-              int length = input.readRawVarint32();
-              int limit = input.pushLimit(length);
-              if (!((mutable_bitField0_ & 0x00000004) == 0x00000004) && input.getBytesUntilLimit() > 0) {
-                tripIntervals_ = new java.util.ArrayList<java.lang.Integer>();
-                mutable_bitField0_ |= 0x00000004;
-              }
-              while (input.getBytesUntilLimit() > 0) {
-                tripIntervals_.add(input.readUInt32());
-              }
-              input.popLimit(limit);
+              bitField0_ |= 0x00000004;
+              tripIntervals_ = input.readBytes();
               break;
             }
             case 66: {
@@ -32086,15 +32015,6 @@ public final class OsmandOdb {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
-        if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
-          avgStopIntervals_ = java.util.Collections.unmodifiableList(avgStopIntervals_);
-        }
-        if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
-          avgWaitIntervals_ = java.util.Collections.unmodifiableList(avgWaitIntervals_);
-        }
-        if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
-          tripIntervals_ = java.util.Collections.unmodifiableList(tripIntervals_);
-        }
         if (((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
           exceptions_ = java.util.Collections.unmodifiableList(exceptions_);
         }
@@ -32129,112 +32049,81 @@ public final class OsmandOdb {
       return PARSER;
     }
 
-    // repeated uint32 avgStopIntervals = 1;
+    private int bitField0_;
+    // optional bytes avgStopIntervals = 1;
     public static final int AVGSTOPINTERVALS_FIELD_NUMBER = 1;
-    private java.util.List<java.lang.Integer> avgStopIntervals_;
+    private com.google.protobuf.ByteString avgStopIntervals_;
     /**
-     * <code>repeated uint32 avgStopIntervals = 1;</code>
+     * <code>optional bytes avgStopIntervals = 1;</code>
      *
      * <pre>
+     * array of raw var int
      * 10-seconds based intervals between stops arrivals;
      * </pre>
      */
-    public java.util.List<java.lang.Integer>
-        getAvgStopIntervalsList() {
+    public boolean hasAvgStopIntervals() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional bytes avgStopIntervals = 1;</code>
+     *
+     * <pre>
+     * array of raw var int
+     * 10-seconds based intervals between stops arrivals;
+     * </pre>
+     */
+    public com.google.protobuf.ByteString getAvgStopIntervals() {
       return avgStopIntervals_;
     }
-    /**
-     * <code>repeated uint32 avgStopIntervals = 1;</code>
-     *
-     * <pre>
-     * 10-seconds based intervals between stops arrivals;
-     * </pre>
-     */
-    public int getAvgStopIntervalsCount() {
-      return avgStopIntervals_.size();
-    }
-    /**
-     * <code>repeated uint32 avgStopIntervals = 1;</code>
-     *
-     * <pre>
-     * 10-seconds based intervals between stops arrivals;
-     * </pre>
-     */
-    public int getAvgStopIntervals(int index) {
-      return avgStopIntervals_.get(index);
-    }
 
-    // repeated uint32 avgWaitIntervals = 2;
+    // optional bytes avgWaitIntervals = 2;
     public static final int AVGWAITINTERVALS_FIELD_NUMBER = 2;
-    private java.util.List<java.lang.Integer> avgWaitIntervals_;
+    private com.google.protobuf.ByteString avgWaitIntervals_;
     /**
-     * <code>repeated uint32 avgWaitIntervals = 2;</code>
+     * <code>optional bytes avgWaitIntervals = 2;</code>
      *
      * <pre>
      * optional 10-seconds based (0, if non-provided or less &lt; 10 seconds)
      * </pre>
      */
-    public java.util.List<java.lang.Integer>
-        getAvgWaitIntervalsList() {
+    public boolean hasAvgWaitIntervals() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional bytes avgWaitIntervals = 2;</code>
+     *
+     * <pre>
+     * optional 10-seconds based (0, if non-provided or less &lt; 10 seconds)
+     * </pre>
+     */
+    public com.google.protobuf.ByteString getAvgWaitIntervals() {
       return avgWaitIntervals_;
     }
-    /**
-     * <code>repeated uint32 avgWaitIntervals = 2;</code>
-     *
-     * <pre>
-     * optional 10-seconds based (0, if non-provided or less &lt; 10 seconds)
-     * </pre>
-     */
-    public int getAvgWaitIntervalsCount() {
-      return avgWaitIntervals_.size();
-    }
-    /**
-     * <code>repeated uint32 avgWaitIntervals = 2;</code>
-     *
-     * <pre>
-     * optional 10-seconds based (0, if non-provided or less &lt; 10 seconds)
-     * </pre>
-     */
-    public int getAvgWaitIntervals(int index) {
-      return avgWaitIntervals_.get(index);
-    }
 
-    // repeated uint32 tripIntervals = 3;
+    // optional bytes tripIntervals = 3;
     public static final int TRIPINTERVALS_FIELD_NUMBER = 3;
-    private java.util.List<java.lang.Integer> tripIntervals_;
+    private com.google.protobuf.ByteString tripIntervals_;
     /**
-     * <code>repeated uint32 tripIntervals = 3;</code>
+     * <code>optional bytes tripIntervals = 3;</code>
      *
      * <pre>
      * 10-seconds delta based intervals for trips departing from first stop
      * 1st trip is diff from 00:00:00
      * </pre>
      */
-    public java.util.List<java.lang.Integer>
-        getTripIntervalsList() {
+    public boolean hasTripIntervals() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional bytes tripIntervals = 3;</code>
+     *
+     * <pre>
+     * 10-seconds delta based intervals for trips departing from first stop
+     * 1st trip is diff from 00:00:00
+     * </pre>
+     */
+    public com.google.protobuf.ByteString getTripIntervals() {
       return tripIntervals_;
-    }
-    /**
-     * <code>repeated uint32 tripIntervals = 3;</code>
-     *
-     * <pre>
-     * 10-seconds delta based intervals for trips departing from first stop
-     * 1st trip is diff from 00:00:00
-     * </pre>
-     */
-    public int getTripIntervalsCount() {
-      return tripIntervals_.size();
-    }
-    /**
-     * <code>repeated uint32 tripIntervals = 3;</code>
-     *
-     * <pre>
-     * 10-seconds delta based intervals for trips departing from first stop
-     * 1st trip is diff from 00:00:00
-     * </pre>
-     */
-    public int getTripIntervals(int index) {
-      return tripIntervals_.get(index);
     }
 
     // repeated .OsmAnd.OBF.TransportRouteScheduleException exceptions = 8;
@@ -32294,9 +32183,9 @@ public final class OsmandOdb {
     }
 
     private void initFields() {
-      avgStopIntervals_ = java.util.Collections.emptyList();
-      avgWaitIntervals_ = java.util.Collections.emptyList();
-      tripIntervals_ = java.util.Collections.emptyList();
+      avgStopIntervals_ = com.google.protobuf.ByteString.EMPTY;
+      avgWaitIntervals_ = com.google.protobuf.ByteString.EMPTY;
+      tripIntervals_ = com.google.protobuf.ByteString.EMPTY;
       exceptions_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
@@ -32311,14 +32200,14 @@ public final class OsmandOdb {
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
-      for (int i = 0; i < avgStopIntervals_.size(); i++) {
-        output.writeUInt32(1, avgStopIntervals_.get(i));
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeBytes(1, avgStopIntervals_);
       }
-      for (int i = 0; i < avgWaitIntervals_.size(); i++) {
-        output.writeUInt32(2, avgWaitIntervals_.get(i));
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeBytes(2, avgWaitIntervals_);
       }
-      for (int i = 0; i < tripIntervals_.size(); i++) {
-        output.writeUInt32(3, tripIntervals_.get(i));
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeBytes(3, tripIntervals_);
       }
       for (int i = 0; i < exceptions_.size(); i++) {
         output.writeMessage(8, exceptions_.get(i));
@@ -32332,32 +32221,17 @@ public final class OsmandOdb {
       if (size != -1) return size;
 
       size = 0;
-      {
-        int dataSize = 0;
-        for (int i = 0; i < avgStopIntervals_.size(); i++) {
-          dataSize += com.google.protobuf.CodedOutputStream
-            .computeUInt32SizeNoTag(avgStopIntervals_.get(i));
-        }
-        size += dataSize;
-        size += 1 * getAvgStopIntervalsList().size();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(1, avgStopIntervals_);
       }
-      {
-        int dataSize = 0;
-        for (int i = 0; i < avgWaitIntervals_.size(); i++) {
-          dataSize += com.google.protobuf.CodedOutputStream
-            .computeUInt32SizeNoTag(avgWaitIntervals_.get(i));
-        }
-        size += dataSize;
-        size += 1 * getAvgWaitIntervalsList().size();
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(2, avgWaitIntervals_);
       }
-      {
-        int dataSize = 0;
-        for (int i = 0; i < tripIntervals_.size(); i++) {
-          dataSize += com.google.protobuf.CodedOutputStream
-            .computeUInt32SizeNoTag(tripIntervals_.get(i));
-        }
-        size += dataSize;
-        size += 1 * getTripIntervalsList().size();
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(3, tripIntervals_);
       }
       for (int i = 0; i < exceptions_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
@@ -32480,11 +32354,11 @@ public final class OsmandOdb {
 
       public Builder clear() {
         super.clear();
-        avgStopIntervals_ = java.util.Collections.emptyList();
+        avgStopIntervals_ = com.google.protobuf.ByteString.EMPTY;
         bitField0_ = (bitField0_ & ~0x00000001);
-        avgWaitIntervals_ = java.util.Collections.emptyList();
+        avgWaitIntervals_ = com.google.protobuf.ByteString.EMPTY;
         bitField0_ = (bitField0_ & ~0x00000002);
-        tripIntervals_ = java.util.Collections.emptyList();
+        tripIntervals_ = com.google.protobuf.ByteString.EMPTY;
         bitField0_ = (bitField0_ & ~0x00000004);
         if (exceptionsBuilder_ == null) {
           exceptions_ = java.util.Collections.emptyList();
@@ -32519,19 +32393,17 @@ public final class OsmandOdb {
       public net.osmand.binary.OsmandOdb.TransportRouteSchedule buildPartial() {
         net.osmand.binary.OsmandOdb.TransportRouteSchedule result = new net.osmand.binary.OsmandOdb.TransportRouteSchedule(this);
         int from_bitField0_ = bitField0_;
-        if (((bitField0_ & 0x00000001) == 0x00000001)) {
-          avgStopIntervals_ = java.util.Collections.unmodifiableList(avgStopIntervals_);
-          bitField0_ = (bitField0_ & ~0x00000001);
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
         }
         result.avgStopIntervals_ = avgStopIntervals_;
-        if (((bitField0_ & 0x00000002) == 0x00000002)) {
-          avgWaitIntervals_ = java.util.Collections.unmodifiableList(avgWaitIntervals_);
-          bitField0_ = (bitField0_ & ~0x00000002);
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
         }
         result.avgWaitIntervals_ = avgWaitIntervals_;
-        if (((bitField0_ & 0x00000004) == 0x00000004)) {
-          tripIntervals_ = java.util.Collections.unmodifiableList(tripIntervals_);
-          bitField0_ = (bitField0_ & ~0x00000004);
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
         }
         result.tripIntervals_ = tripIntervals_;
         if (exceptionsBuilder_ == null) {
@@ -32543,6 +32415,7 @@ public final class OsmandOdb {
         } else {
           result.exceptions_ = exceptionsBuilder_.build();
         }
+        result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
       }
@@ -32558,35 +32431,14 @@ public final class OsmandOdb {
 
       public Builder mergeFrom(net.osmand.binary.OsmandOdb.TransportRouteSchedule other) {
         if (other == net.osmand.binary.OsmandOdb.TransportRouteSchedule.getDefaultInstance()) return this;
-        if (!other.avgStopIntervals_.isEmpty()) {
-          if (avgStopIntervals_.isEmpty()) {
-            avgStopIntervals_ = other.avgStopIntervals_;
-            bitField0_ = (bitField0_ & ~0x00000001);
-          } else {
-            ensureAvgStopIntervalsIsMutable();
-            avgStopIntervals_.addAll(other.avgStopIntervals_);
-          }
-          onChanged();
+        if (other.hasAvgStopIntervals()) {
+          setAvgStopIntervals(other.getAvgStopIntervals());
         }
-        if (!other.avgWaitIntervals_.isEmpty()) {
-          if (avgWaitIntervals_.isEmpty()) {
-            avgWaitIntervals_ = other.avgWaitIntervals_;
-            bitField0_ = (bitField0_ & ~0x00000002);
-          } else {
-            ensureAvgWaitIntervalsIsMutable();
-            avgWaitIntervals_.addAll(other.avgWaitIntervals_);
-          }
-          onChanged();
+        if (other.hasAvgWaitIntervals()) {
+          setAvgWaitIntervals(other.getAvgWaitIntervals());
         }
-        if (!other.tripIntervals_.isEmpty()) {
-          if (tripIntervals_.isEmpty()) {
-            tripIntervals_ = other.tripIntervals_;
-            bitField0_ = (bitField0_ & ~0x00000004);
-          } else {
-            ensureTripIntervalsIsMutable();
-            tripIntervals_.addAll(other.tripIntervals_);
-          }
-          onChanged();
+        if (other.hasTripIntervals()) {
+          setTripIntervals(other.getTripIntervals());
         }
         if (exceptionsBuilder_ == null) {
           if (!other.exceptions_.isEmpty()) {
@@ -32641,282 +32493,157 @@ public final class OsmandOdb {
       }
       private int bitField0_;
 
-      // repeated uint32 avgStopIntervals = 1;
-      private java.util.List<java.lang.Integer> avgStopIntervals_ = java.util.Collections.emptyList();
-      private void ensureAvgStopIntervalsIsMutable() {
-        if (!((bitField0_ & 0x00000001) == 0x00000001)) {
-          avgStopIntervals_ = new java.util.ArrayList<java.lang.Integer>(avgStopIntervals_);
-          bitField0_ |= 0x00000001;
-         }
-      }
+      // optional bytes avgStopIntervals = 1;
+      private com.google.protobuf.ByteString avgStopIntervals_ = com.google.protobuf.ByteString.EMPTY;
       /**
-       * <code>repeated uint32 avgStopIntervals = 1;</code>
+       * <code>optional bytes avgStopIntervals = 1;</code>
        *
        * <pre>
+       * array of raw var int
        * 10-seconds based intervals between stops arrivals;
        * </pre>
        */
-      public java.util.List<java.lang.Integer>
-          getAvgStopIntervalsList() {
-        return java.util.Collections.unmodifiableList(avgStopIntervals_);
+      public boolean hasAvgStopIntervals() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>repeated uint32 avgStopIntervals = 1;</code>
+       * <code>optional bytes avgStopIntervals = 1;</code>
        *
        * <pre>
+       * array of raw var int
        * 10-seconds based intervals between stops arrivals;
        * </pre>
        */
-      public int getAvgStopIntervalsCount() {
-        return avgStopIntervals_.size();
+      public com.google.protobuf.ByteString getAvgStopIntervals() {
+        return avgStopIntervals_;
       }
       /**
-       * <code>repeated uint32 avgStopIntervals = 1;</code>
+       * <code>optional bytes avgStopIntervals = 1;</code>
        *
        * <pre>
+       * array of raw var int
        * 10-seconds based intervals between stops arrivals;
        * </pre>
        */
-      public int getAvgStopIntervals(int index) {
-        return avgStopIntervals_.get(index);
-      }
-      /**
-       * <code>repeated uint32 avgStopIntervals = 1;</code>
-       *
-       * <pre>
-       * 10-seconds based intervals between stops arrivals;
-       * </pre>
-       */
-      public Builder setAvgStopIntervals(
-          int index, int value) {
-        ensureAvgStopIntervalsIsMutable();
-        avgStopIntervals_.set(index, value);
+      public Builder setAvgStopIntervals(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        avgStopIntervals_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>repeated uint32 avgStopIntervals = 1;</code>
+       * <code>optional bytes avgStopIntervals = 1;</code>
        *
        * <pre>
-       * 10-seconds based intervals between stops arrivals;
-       * </pre>
-       */
-      public Builder addAvgStopIntervals(int value) {
-        ensureAvgStopIntervalsIsMutable();
-        avgStopIntervals_.add(value);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated uint32 avgStopIntervals = 1;</code>
-       *
-       * <pre>
-       * 10-seconds based intervals between stops arrivals;
-       * </pre>
-       */
-      public Builder addAllAvgStopIntervals(
-          java.lang.Iterable<? extends java.lang.Integer> values) {
-        ensureAvgStopIntervalsIsMutable();
-        super.addAll(values, avgStopIntervals_);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated uint32 avgStopIntervals = 1;</code>
-       *
-       * <pre>
+       * array of raw var int
        * 10-seconds based intervals between stops arrivals;
        * </pre>
        */
       public Builder clearAvgStopIntervals() {
-        avgStopIntervals_ = java.util.Collections.emptyList();
         bitField0_ = (bitField0_ & ~0x00000001);
+        avgStopIntervals_ = getDefaultInstance().getAvgStopIntervals();
         onChanged();
         return this;
       }
 
-      // repeated uint32 avgWaitIntervals = 2;
-      private java.util.List<java.lang.Integer> avgWaitIntervals_ = java.util.Collections.emptyList();
-      private void ensureAvgWaitIntervalsIsMutable() {
-        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
-          avgWaitIntervals_ = new java.util.ArrayList<java.lang.Integer>(avgWaitIntervals_);
-          bitField0_ |= 0x00000002;
-         }
-      }
+      // optional bytes avgWaitIntervals = 2;
+      private com.google.protobuf.ByteString avgWaitIntervals_ = com.google.protobuf.ByteString.EMPTY;
       /**
-       * <code>repeated uint32 avgWaitIntervals = 2;</code>
+       * <code>optional bytes avgWaitIntervals = 2;</code>
        *
        * <pre>
        * optional 10-seconds based (0, if non-provided or less &lt; 10 seconds)
        * </pre>
        */
-      public java.util.List<java.lang.Integer>
-          getAvgWaitIntervalsList() {
-        return java.util.Collections.unmodifiableList(avgWaitIntervals_);
+      public boolean hasAvgWaitIntervals() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>repeated uint32 avgWaitIntervals = 2;</code>
+       * <code>optional bytes avgWaitIntervals = 2;</code>
        *
        * <pre>
        * optional 10-seconds based (0, if non-provided or less &lt; 10 seconds)
        * </pre>
        */
-      public int getAvgWaitIntervalsCount() {
-        return avgWaitIntervals_.size();
+      public com.google.protobuf.ByteString getAvgWaitIntervals() {
+        return avgWaitIntervals_;
       }
       /**
-       * <code>repeated uint32 avgWaitIntervals = 2;</code>
+       * <code>optional bytes avgWaitIntervals = 2;</code>
        *
        * <pre>
        * optional 10-seconds based (0, if non-provided or less &lt; 10 seconds)
        * </pre>
        */
-      public int getAvgWaitIntervals(int index) {
-        return avgWaitIntervals_.get(index);
-      }
-      /**
-       * <code>repeated uint32 avgWaitIntervals = 2;</code>
-       *
-       * <pre>
-       * optional 10-seconds based (0, if non-provided or less &lt; 10 seconds)
-       * </pre>
-       */
-      public Builder setAvgWaitIntervals(
-          int index, int value) {
-        ensureAvgWaitIntervalsIsMutable();
-        avgWaitIntervals_.set(index, value);
+      public Builder setAvgWaitIntervals(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        avgWaitIntervals_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>repeated uint32 avgWaitIntervals = 2;</code>
-       *
-       * <pre>
-       * optional 10-seconds based (0, if non-provided or less &lt; 10 seconds)
-       * </pre>
-       */
-      public Builder addAvgWaitIntervals(int value) {
-        ensureAvgWaitIntervalsIsMutable();
-        avgWaitIntervals_.add(value);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated uint32 avgWaitIntervals = 2;</code>
-       *
-       * <pre>
-       * optional 10-seconds based (0, if non-provided or less &lt; 10 seconds)
-       * </pre>
-       */
-      public Builder addAllAvgWaitIntervals(
-          java.lang.Iterable<? extends java.lang.Integer> values) {
-        ensureAvgWaitIntervalsIsMutable();
-        super.addAll(values, avgWaitIntervals_);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated uint32 avgWaitIntervals = 2;</code>
+       * <code>optional bytes avgWaitIntervals = 2;</code>
        *
        * <pre>
        * optional 10-seconds based (0, if non-provided or less &lt; 10 seconds)
        * </pre>
        */
       public Builder clearAvgWaitIntervals() {
-        avgWaitIntervals_ = java.util.Collections.emptyList();
         bitField0_ = (bitField0_ & ~0x00000002);
+        avgWaitIntervals_ = getDefaultInstance().getAvgWaitIntervals();
         onChanged();
         return this;
       }
 
-      // repeated uint32 tripIntervals = 3;
-      private java.util.List<java.lang.Integer> tripIntervals_ = java.util.Collections.emptyList();
-      private void ensureTripIntervalsIsMutable() {
-        if (!((bitField0_ & 0x00000004) == 0x00000004)) {
-          tripIntervals_ = new java.util.ArrayList<java.lang.Integer>(tripIntervals_);
-          bitField0_ |= 0x00000004;
-         }
-      }
+      // optional bytes tripIntervals = 3;
+      private com.google.protobuf.ByteString tripIntervals_ = com.google.protobuf.ByteString.EMPTY;
       /**
-       * <code>repeated uint32 tripIntervals = 3;</code>
+       * <code>optional bytes tripIntervals = 3;</code>
        *
        * <pre>
        * 10-seconds delta based intervals for trips departing from first stop
        * 1st trip is diff from 00:00:00
        * </pre>
        */
-      public java.util.List<java.lang.Integer>
-          getTripIntervalsList() {
-        return java.util.Collections.unmodifiableList(tripIntervals_);
+      public boolean hasTripIntervals() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
-       * <code>repeated uint32 tripIntervals = 3;</code>
+       * <code>optional bytes tripIntervals = 3;</code>
        *
        * <pre>
        * 10-seconds delta based intervals for trips departing from first stop
        * 1st trip is diff from 00:00:00
        * </pre>
        */
-      public int getTripIntervalsCount() {
-        return tripIntervals_.size();
+      public com.google.protobuf.ByteString getTripIntervals() {
+        return tripIntervals_;
       }
       /**
-       * <code>repeated uint32 tripIntervals = 3;</code>
+       * <code>optional bytes tripIntervals = 3;</code>
        *
        * <pre>
        * 10-seconds delta based intervals for trips departing from first stop
        * 1st trip is diff from 00:00:00
        * </pre>
        */
-      public int getTripIntervals(int index) {
-        return tripIntervals_.get(index);
-      }
-      /**
-       * <code>repeated uint32 tripIntervals = 3;</code>
-       *
-       * <pre>
-       * 10-seconds delta based intervals for trips departing from first stop
-       * 1st trip is diff from 00:00:00
-       * </pre>
-       */
-      public Builder setTripIntervals(
-          int index, int value) {
-        ensureTripIntervalsIsMutable();
-        tripIntervals_.set(index, value);
+      public Builder setTripIntervals(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        tripIntervals_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>repeated uint32 tripIntervals = 3;</code>
-       *
-       * <pre>
-       * 10-seconds delta based intervals for trips departing from first stop
-       * 1st trip is diff from 00:00:00
-       * </pre>
-       */
-      public Builder addTripIntervals(int value) {
-        ensureTripIntervalsIsMutable();
-        tripIntervals_.add(value);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated uint32 tripIntervals = 3;</code>
-       *
-       * <pre>
-       * 10-seconds delta based intervals for trips departing from first stop
-       * 1st trip is diff from 00:00:00
-       * </pre>
-       */
-      public Builder addAllTripIntervals(
-          java.lang.Iterable<? extends java.lang.Integer> values) {
-        ensureTripIntervalsIsMutable();
-        super.addAll(values, tripIntervals_);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated uint32 tripIntervals = 3;</code>
+       * <code>optional bytes tripIntervals = 3;</code>
        *
        * <pre>
        * 10-seconds delta based intervals for trips departing from first stop
@@ -32924,8 +32651,8 @@ public final class OsmandOdb {
        * </pre>
        */
       public Builder clearTripIntervals() {
-        tripIntervals_ = java.util.Collections.emptyList();
         bitField0_ = (bitField0_ & ~0x00000004);
+        tripIntervals_ = getDefaultInstance().getTripIntervals();
         onChanged();
         return this;
       }
@@ -61503,8 +61230,8 @@ public final class OsmandOdb {
       "teStop\022\020\n\010geometry\030\021 \001(\014\0228\n\014scheduleTrip" +
       "\030\022 \003(\0132\".OsmAnd.OBF.TransportRouteSchedu" +
       "le\"\244\001\n\026TransportRouteSchedule\022\030\n\020avgStop" +
-      "Intervals\030\001 \003(\r\022\030\n\020avgWaitIntervals\030\002 \003(" +
-      "\r\022\025\n\rtripIntervals\030\003 \003(\r\022?\n\nexceptions\030\010" +
+      "Intervals\030\001 \001(\014\022\030\n\020avgWaitIntervals\030\002 \001(" +
+      "\014\022\025\n\rtripIntervals\030\003 \001(\014\022?\n\nexceptions\030\010" +
       " \003(\0132+.OsmAnd.OBF.TransportRouteSchedule" +
       "Exception\"\313\001\n\037TransportRouteScheduleExce" +
       "ption\022\023\n\013tripIndexes\030\001 \003(\r\022\023\n\013stopIndexe" +
