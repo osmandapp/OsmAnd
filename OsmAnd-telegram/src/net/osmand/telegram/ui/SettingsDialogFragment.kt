@@ -11,10 +11,12 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.ArrayAdapter
+import android.widget.ImageView
+import android.widget.RadioButton
+import android.widget.TextView
 import net.osmand.telegram.*
 import net.osmand.telegram.helpers.OsmandAidlHelper
-import net.osmand.telegram.helpers.TelegramHelper
 import net.osmand.telegram.helpers.TelegramUiHelper
 import net.osmand.telegram.utils.AndroidUtils
 import net.osmand.telegram.utils.OsmandFormatter
@@ -156,12 +158,9 @@ class SettingsDialogFragment : DialogFragment() {
 		}
 	}
 
-	private fun logoutTelegram(silent: Boolean = false) {
-		if (telegramHelper.getTelegramAuthorizationState() == TelegramHelper.TelegramAuthorizationState.READY) {
-			telegramHelper.logout()
-		} else if (!silent) {
-			Toast.makeText(context, R.string.not_logged_in, Toast.LENGTH_SHORT).show()
-		}
+	private fun logoutTelegram() {
+		val act = activity ?: return
+		(act as MainActivity).logoutTelegram()
 	}
 
 	private inner class SendMyLocPref : DurationPref(
