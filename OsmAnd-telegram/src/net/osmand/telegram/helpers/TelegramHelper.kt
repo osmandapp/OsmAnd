@@ -548,6 +548,7 @@ class TelegramHelper private constructor() {
 				liveLocationMessageUpdatesHandler
 			)
 		}
+		chatLiveMessages.remove(chatId)
 		needRefreshActiveLiveLocationMessages = true
 	}
 
@@ -557,7 +558,7 @@ class TelegramHelper private constructor() {
 		}
 	}
 	
-	private fun getActiveLiveLocationMessages(onComplete: (() -> Unit)?) {
+	fun getActiveLiveLocationMessages(onComplete: (() -> Unit)?) {
 		requestingActiveLiveLocationMessages = true
 		client?.send(TdApi.GetActiveLiveLocationMessages()) { obj ->
 			when (obj.constructor) {
