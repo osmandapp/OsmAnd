@@ -11,7 +11,7 @@
 		<string name="poi_air_transport">Lufttransport</string>
 		<string name="poi_water_transport">Transport på vatten</string>
 		<string name="poi_bicycle_transport">Transport med cykel</string>
-		<string name="poi_filling_station">Tankstation</string>
+		<string name="poi_filling_station">Bensinstation</string>
 		<string name="poi_aerialway_transport">Luftvägstransport</string>
 		<string name="poi_node_networks">Nätverksnoder för hajk/cykling</string>
 		<string name="poi_fuel_type">Bränsletyp</string>
@@ -286,7 +286,7 @@
 	<string name="poi_traffic_calming_cushion">Kudde</string>
 	<string name="poi_traffic_calming_chicane">Chikan</string>
 	<string name="poi_traffic_calming_rumble_strip">Bullerräfflor</string>
-	<string name="poi_traffic_calming_table">Yta</string>
+	<string name="poi_traffic_calming_table">Plan</string>
 	<string name="poi_traffic_calming_choker">Försmalning</string>
 	<string name="poi_traffic_calming_island">Refug</string>
 	<string name="poi_traffic_signals">Stoppljus</string>
@@ -1213,7 +1213,7 @@
 
 <string name="poi_free_flying">Freflying-tillbehör</string>
 <string name="poi_radiotechnics">Radioteknikbutik</string>
-	<string name="poi_scuba_diving_shop">Scubadykningsbutik</string>
+	<string name="poi_scuba_diving_shop">Dykningsbutik</string>
 	<string name="poi_trade">Handelsplats</string>
 	<string name="poi_variety_store">Bazar</string>
 	<string name="poi_energy">Energibutik</string>
@@ -1331,7 +1331,7 @@
 	<string name="poi_bicycle_parking_informal">Spontan</string>
 
 	<string name="poi_leaf_type_broadleaved">Bredbladig</string>
-	<string name="poi_leaf_type_needleleaved">Nålblad</string>
+	<string name="poi_leaf_type_needleleaved">Nålbladig</string>
 	<string name="poi_leaf_type_mixed">Blandat</string>
 	<string name="poi_leaf_type_leafless">Utan löv</string>
 	<string name="poi_species">Art</string>
@@ -1802,7 +1802,7 @@
 
 	<string name="poi_maxstay">Parkeringsgräns</string>
 
-	<string name="poi_vending_parking_tickets">Parkeringsböter</string>
+	<string name="poi_vending_parking_tickets">Parkeringsbiljetter</string>
 	<string name="poi_vending_cigarettes">Cigaretter</string>
 	<string name="poi_vending_excrement_bags">Bajspåsar</string>
 	<string name="poi_vending_public_transport_tickets">Biljetter till kollektivtrafiken</string>
@@ -1825,7 +1825,7 @@
 	<string name="poi_vending_coffee">Kaffe</string>
 	<string name="poi_vending_toll">Tullförsäljning</string>
 	<string name="poi_vending_tickets">Biljettmaskin</string>
-	<string name="poi_vending_water">Varuautomat</string>
+	<string name="poi_vending_water">Vattenautomat</string>
 	<string name="poi_vending_telephone_vouchers">Telefonkort</string>
 	<string name="poi_vending_animal_food">Djurfoder</string>
 	<string name="poi_vending_public_transport_plans">Kollektivtrafikplaner</string>
@@ -1991,7 +1991,7 @@
 
 	<string name="poi_payment_e_zpass_yes">E‑ZPass</string>
 	<string name="poi_shelter_type_lean_to">Lutande mot</string>
-	<string name="poi_shelter_type_wildlife_hide">Vildmarksgömma</string>
+	<string name="poi_shelter_type_wildlife_hide">Naturlivsgömma</string>
 	<string name="poi_shelter_type_field_shelter">Fältgömma</string>
 	<string name="poi_internet_access_type_public">Internetåtkomst: allmän</string>
 	<string name="poi_internet_access_type_service">Internetåtkomst: service</string>
@@ -2351,7 +2351,7 @@
 	<string name="poi_social_facility_for_drug_addicted">Drogmissbrukare</string>
 	<string name="poi_social_facility_for_unemployed">Arbetslösa</string>
 	<string name="poi_social_facility_for_diseased">Sjuka</string>
-	<string name="poi_social_facility_for_child_juvenile">Barn;ungdomsbrottslighet</string>
+	<string name="poi_social_facility_for_child_juvenile">Behandlingshem</string>
 
 	<string name="poi_theatre_genre_philharmonic">Filharmonisk</string>
 	<string name="poi_theatre_genre_musical">Musikal</string>
@@ -2415,7 +2415,7 @@
 
 	<string name="poi_historic_civilization_ancient_roman">Civilisation: det antika romerska (753 F.KR – 284 E.KR.)</string>
 	<string name="poi_historic_civilization_nuragic">Civilisation: nuragherkulturen (18 F.KR – 2 E.KR)</string>
-	<string name="poi_social_facility_outreach">Uppsökande</string>
+	<string name="poi_social_facility_outreach">Sträckande hand</string>
 	<string name="poi_historic_civilization_etruscan">Civilisation: etruskisk (500-talet F.Kr. - 1300-talet E.Kr.)</string>
 	<string name="poi_historic_civilization_prehistoric">Civilisation: förhistorisk</string>
 	<string name="poi_historic_civilization_ancient_greek">Civilisation: det antika grekiska</string>
@@ -3096,4 +3096,13 @@
 	<string name="poi_support_tree">Stöd: träd</string>
 	<string name="poi_support_pedestal">Stöd: pedestal</string>
 	<string name="poi_support_ground">Stöd: mark</string>
+	<string name="poi_pump_type_gravity">Pump typ: gravitation</string>
+	<string name="poi_pump_style_modern">Pumpstil: modern</string>
+	<string name="poi_pump_style_historic">Pumpstil: historisk</string>
+	<string name="poi_pump_status_ok">Pumpstatus: ok</string>
+	<string name="poi_pump_status_broken">Pumpstatus: trasig</string>
+	<string name="poi_pump_status_locked">Pumpstatus: låst</string>
+
+	<string name="poi_payment_troika_yes">Troika</string>
+	<string name="poi_support_ceiling">Stöd: tak</string>
 	</resources>

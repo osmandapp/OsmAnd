@@ -2891,7 +2891,7 @@
     <string name="paid_plugin">Betalt tillegg</string>
     <string name="contour_lines_hillshade_maps">Kart for koter og relieffskygger</string>
     <string name="wikivoyage_travel_guide_descr">Guider til de mest spennende stedene, inne i OsmAnd, uten å ha internettforbindelse.</string>
-    <string name="purchase_dialog_travel_description">Kjøp én av følgende for å få funksjonen for reiseguider i frakoblet modus:</string>
+    <string name="purchase_dialog_travel_description">Kjøp én av følgende for reiseguidefunksjon i frakoblet modus:</string>
     <string name="purchase_dialog_subtitle">Velg passende element:</string>
     <string name="travel_card_download_descr">Last ned Wikivoyage-reiseguider for å se artikler om steder rundt om i verden uten å ha internettforbindelse.</string>
 	<string name="popular_destinations">Populære reisemål</string>
@@ -2997,10 +2997,10 @@
     <string name="show_full_description">Vis full beskrivelse</string>
     <string name="nautical_render_descr">Nautisk navigasjonsstil. Nøkkelfunksjoner: Bøyer, fyr, vannveier, skipsleder og merker, havner, sjømerketjenester, dybdekonturer.</string>
     <string name="ski_map_render_descr">Skistil. Nøkkelfunksjoner: Tegner bakker, heiser og andre skifunksjoner på en nyttig måte. Mindre distraherende sekundære kartobjekter.</string>
-    <string name="light_rs_render_descr">Enkel og kontrastrik stil for bilnavigering. Skånsom for øynene i nattmodusen. Nøkkelfunksjoner: Koter, kontrasterende oransje veier, mindre distraherende sekundære kartobjekter.</string>
-    <string name="topo_render_descr">Kontraststil designet primært for turgåing, vandring og sykling i naturen. God lesbarhet ved kompleks utendørs belysning. Nøkkelfunksjoner: Kontrasterende veier og naturlige objekter, forskjellige typer ruter, koter med avanserte innstillinger, flere detaljer ved tilsvarende zoomnivåer enn standardstilen. Overflatevalg gjør det mulig å skjelne mellom veier med forskjellig overflatekvalitet. Ingen nattmodus.</string>
+    <string name="light_rs_render_descr">Enkel og kontrastrik stil for bilnavigering. Skånsom for øynene i nattmodus. Nøkkelfunksjoner: Koter, kontrasterende oransje veier, mindre distraherende sekundære kartobjekter.</string>
+    <string name="topo_render_descr">Kontraststil designet primært for turgåing, vandring og sykling i naturen. God lesbarhet ved kompleks utendørs belysning. Nøkkelfunksjoner: Kontrasterende veier og naturlige objekter, forskjellige typer ruter, koter med avanserte innstillinger, flere detaljer ved tilsvarende forstørrelsesnivå enn forvalgsstilen. Overflatevalg muliggjør skjelning mellom veier av forskjellig overflatekvalitet. Inget nattmodus.</string>
     <string name="mapnik_render_descr">Gammel forvalgt opptegning i \'Mapnik\'-stil. Nøkkelfunksjoner: Farger ligner \'Mapnik\'-stilen.</string>
-    <string name="touring_view_render_descr">Høydetaljert stil for turformål. Inkluderer alle innstillingsmulighetene til standardstilen, i tillegg: Viser så mange detaljer som mulig, i særdeleshet alle veier, stier og andre måter å reise på. Klar visuell forskjell mellom alle ulike typer veier, noe som minner om mange reiseatlas. Fargeskjema med høy kontrast for utendørs bruk, dag- og nattmodus.</string>
+    <string name="touring_view_render_descr">Høydetaljert stil for turformål. Inkluderer alle innstillingsmulighetene til forvalgsstilen, i tillegg: Så høy detaljvisning som mulig, i særdeleshet alle veier, stier og andre måter å reise på. Klar visuell forskjell mellom alle ulike typer veier, noe som minner om mange reiseatlas. Fargeskjema med høy kontrast for utendørs bruk, dag- og nattmodus.</string>
     <string name="default_render_descr">Stil for generell bruk. Forenklet renere opptegning i tett befolkede byer. Nøkkelfunksjoner: Koter, ruter, overflatekvalitet, tilgangsbegrensninger, veinummer, stiopptegning i henhold til SAC-skala, raftingsfunksjoner.</string>
     <string name="open_wikipedia_link_online">Åpne Wikipedia-lenke på nett</string>
     <string name="open_wikipedia_link_online_description">Lenken vil åpnes i en nettleser.</string>
@@ -3015,14 +3015,14 @@
     <string name="maps_you_need_descr">Basert på artiklene du har bokmerket, anbefales du å laste ned følgende kart:</string>
     <string name="maps_you_need">Kart du trenger</string>
     <string name="shared_string_bookmark">Bokmerk</string>
-    <string name="off_road_render_descr">Egnet for off-road bruk. Egnet for bruk med grønne satellittbilder som underlagskart. Hovedpunkter: Redusert tykkelse for hovedveier, økt tykkelse for småveier, stier, sykkelveier og andre ruter. Basert på \'Topo\'-stil.</string>
+    <string name="off_road_render_descr">Egnet for terrengkjøringsbruk. Egnet for bruk med grønne satellittbilder som underlagskart. Hovedpunkter: Redusert tykkelse for hovedveier, økt tykkelse for småveier, stier, sykkelveier og andre ruter. Basert på \'Topo\'-stilen.</string>
     <string name="access_intermediate_arrival_time">Mellomliggende ankomsttid</string>
     <string name="map_widget_intermediate_time">Mellomliggende tid</string>
     <string name="unirs_render_descr">Endrer den forvalgte stilen for å øke kontrasten på gangveier og sykkelstier. Bruker de opprinnelige Mapnik-fargene.</string>
     <string name="shared_string_gpx_files">GPX-filer</string>
     <string name="get_osmand_live">Skaff deg OsmAnd Live for å låse opp alle funksjoner: Daglige kartoppdateringer med ubegrensede nedlastinger, alle programtilleggene, Wikipedia, Wikivoyage og mye mer.</string>
     <string name="quick_action_edit_actions">Rediger handlinger</string>
-    <string name="error_notification_desc">Send et skjermbilde av dette varselet til support@osmand.net</string>
+    <string name="error_notification_desc">Send en skjeravbildning av dette varselet til support@osmand.net</string>
     <string name="coord_input_edit_point">Rediger punkt</string>
     <string name="coord_input_add_point">Legg til punkt</string>
     <string name="coord_input_save_as_track">Lagre som spor</string>
@@ -3053,5 +3053,5 @@
 \n</string>
     <string name="commiting_way">Sender inn vei…</string>
     <string name="send_search_query_description">Ditt søk <b>\"%1$s\"</b>, vil bli sent inn sammen med din plassering.<br/><br/> Ingen personvernsinfo samles inn, søkedata trengs kun til forbedring av søket.<br/></string>
-    <string name="test_voice_desrc">Trykk på en knapp og lytt til den tilhørende talemeldingen for å identifisere manglende eller feilaktige meldinger.</string>
+    <string name="test_voice_desrc">Trykk på en knapp og lytt til tilhørende talemelding for å identifisere manglende eller feilaktige meldinger.</string>
 </resources>
