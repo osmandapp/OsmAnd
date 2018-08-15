@@ -483,7 +483,9 @@ class TelegramHelper private constructor() {
 		if (message.isAppropriate()) {
 			val oldContent = message.content
 			if (oldContent is TdApi.MessageText) {
-				message.content = parseOsmAndBotLocation(oldContent.text.text)
+				val messageOsmAndBotLocation = parseOsmAndBotLocation(oldContent.text.text)
+				messageOsmAndBotLocation.created = message.date
+				message.content = messageOsmAndBotLocation
 			} else if (oldContent is TdApi.MessageLocation &&
 				(isOsmAndBot(message.senderUserId) || isOsmAndBot(message.viaBotUserId))) {
 				message.content = parseOsmAndBotLocation(message)
@@ -758,6 +760,7 @@ class TelegramHelper private constructor() {
 			name = getOsmAndBotDeviceName(message)
 			lat = messageLocation.location.latitude
 			lon = messageLocation.location.longitude
+			created = message.date
 			val date = message.editDate
 			lastUpdated = if (date != 0) {
 				date
@@ -773,6 +776,7 @@ class TelegramHelper private constructor() {
 			name = oldContent.name
 			lat = messageLocation.location.latitude
 			lon = messageLocation.location.longitude
+			created = oldContent.created
 			lastUpdated = (System.currentTimeMillis() / 1000).toInt()
 		}
 	}
@@ -849,6 +853,8 @@ class TelegramHelper private constructor() {
 		var lon: Double = Double.NaN
 			internal set
 		var lastUpdated: Int = 0
+			internal set
+		var created: Int = 0
 			internal set
 
 		override fun getConstructor() = -1
@@ -1062,7 +1068,9 @@ class TelegramHelper private constructor() {
 						synchronized(message) {
 							val newContent = updateMessageContent.newContent
 							message.content = if (newContent is TdApi.MessageText) {
-								parseOsmAndBotLocation(newContent.text.text)
+								val messageOsmAndBotLocation = parseOsmAndBotLocation(newContent.text.text)
+								messageOsmAndBotLocation.created = message.date
+								messageOsmAndBotLocation
 							} else if (newContent is TdApi.MessageLocation &&
 								(isOsmAndBot(message.senderUserId) || isOsmAndBot(message.viaBotUserId))) {
 								parseOsmAndBotLocationContent(message.content as MessageOsmAndBotLocation, newContent)
