@@ -577,22 +577,24 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 				}
 
 				holder.stopSharingDescr?.apply {
-					visibility = View.VISIBLE
+					visibility = getStopSharingVisibility(expiresIn)
 					text = "${getText(R.string.stop_at)}:"
 				}
 
 				holder.stopSharingFirstPart?.apply {
-					visibility = View.VISIBLE
+					visibility = getStopSharingVisibility(expiresIn)
 					text = OsmandFormatter.getFormattedTime(expiresIn)
 				}
 
 				holder.stopSharingSecondPart?.apply {
-					visibility = View.VISIBLE
+					visibility = getStopSharingVisibility(expiresIn)
 					text = "(${getString(R.string.in_time,
 						OsmandFormatter.getFormattedDuration(context!!, expiresIn, true))})"
 				}
 			}
 		}
+
+		private fun getStopSharingVisibility(expiresIn: Long) = if (expiresIn > 0) View.VISIBLE else View.INVISIBLE
 
 		private fun removeItem(chat: TdApi.Chat) {
 			chats.remove(chat)

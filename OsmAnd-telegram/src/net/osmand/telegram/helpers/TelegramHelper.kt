@@ -177,6 +177,8 @@ class TelegramHelper private constructor() {
 		return chat.type is TdApi.ChatTypeSupergroup || chat.type is TdApi.ChatTypeBasicGroup
 	}
 
+	fun getLastUpdatedTime(message: TdApi.Message) = Math.max(message.editDate, message.date)
+
 	fun isPrivateChat(chat: TdApi.Chat): Boolean = chat.type is TdApi.ChatTypePrivate
 
 	private fun isChannel(chat: TdApi.Chat): Boolean {
@@ -485,9 +487,7 @@ class TelegramHelper private constructor() {
 			val viaBot = isOsmAndBot(message.viaBotUserId)
 			val oldContent = message.content
 			if (oldContent is TdApi.MessageText) {
-				message.content = parseOsmAndBotLocation(oldContent.text.text).apply {
-					created = message.date
-				}
+				message.content = parseOsmAndBotLocation(oldContent.text.text)
 			} else if (oldContent is TdApi.MessageLocation && (fromBot || viaBot)) {
 				message.content = parseOsmAndBotLocation(message)
 			}
@@ -761,13 +761,7 @@ class TelegramHelper private constructor() {
 			name = getOsmAndBotDeviceName(message)
 			lat = messageLocation.location.latitude
 			lon = messageLocation.location.longitude
-			created = message.date
-			val date = message.editDate
-			lastUpdated = if (date != 0) {
-				date
-			} else {
-				message.date
-			}
+			lastUpdated = getLastUpdatedTime(message)
 		}
 	}
 
@@ -777,7 +771,6 @@ class TelegramHelper private constructor() {
 			name = oldContent.name
 			lat = messageLocation.location.latitude
 			lon = messageLocation.location.longitude
-			created = oldContent.created
 			lastUpdated = (System.currentTimeMillis() / 1000).toInt()
 		}
 	}
@@ -1069,9 +1062,7 @@ class TelegramHelper private constructor() {
 						synchronized(message) {
 							val newContent = updateMessageContent.newContent
 							message.content = if (newContent is TdApi.MessageText) {
-								val messageOsmAndBotLocation = parseOsmAndBotLocation(newContent.text.text)
-								messageOsmAndBotLocation.created = message.date
-								messageOsmAndBotLocation
+								parseOsmAndBotLocation(newContent.text.text)
 							} else if (newContent is TdApi.MessageLocation &&
 								(isOsmAndBot(message.senderUserId) || isOsmAndBot(message.viaBotUserId))) {
 								parseOsmAndBotLocationContent(message.content as MessageOsmAndBotLocation, newContent)

@@ -12,16 +12,23 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import net.osmand.Location
+import net.osmand.data.LatLon
 import net.osmand.telegram.R
 import net.osmand.telegram.TelegramApplication
+import net.osmand.telegram.TelegramLocationProvider.TelegramLocationListener
+import net.osmand.telegram.TelegramLocationProvider.TelegramCompassListener
 import net.osmand.telegram.helpers.ShareLocationHelper
 import net.osmand.telegram.helpers.TelegramUiHelper
 import net.osmand.telegram.ui.SetTimeDialogFragment.SetTimeListAdapter.ChatViewHolder
 import net.osmand.telegram.utils.AndroidUtils
+import net.osmand.telegram.utils.OsmandFormatter
+import net.osmand.telegram.utils.UiUtils
+import net.osmand.util.MapUtils
 import org.drinkless.td.libcore.telegram.TdApi
 import java.util.concurrent.TimeUnit
 
-class SetTimeDialogFragment : DialogFragment() {
+class SetTimeDialogFragment : DialogFragment(), TelegramLocationListener, TelegramCompassListener {
 
 	private val app: TelegramApplication
 		get() = activity?.application as TelegramApplication
@@ -29,6 +36,7 @@ class SetTimeDialogFragment : DialogFragment() {
 	private val telegramHelper get() = app.telegramHelper
 	private val settings get() = app.settings
 
+	private lateinit var locationViewCache: UiUtils.UpdateLocationViewCache
 	private val adapter = SetTimeListAdapter()
 
 	private lateinit var timeForAllTitle: TextView
@@ -36,6 +44,10 @@ class SetTimeDialogFragment : DialogFragment() {
 
 	private val chatLivePeriods = HashMap<Long, Long>()
 
+	private var location: Location? = null
+	private var heading: Float? = null
+	private var locationUiUpdateAllowed: Boolean = true
+	
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 		setStyle(DialogFragment.STYLE_NO_FRAME, R.style.AppTheme_NoActionbar)
@@ -66,6 +78,12 @@ class SetTimeDialogFragment : DialogFragment() {
 		view.findViewById<RecyclerView>(R.id.recycler_view).apply {
 			layoutManager = LinearLayoutManager(context)
 			adapter = this@SetTimeDialogFragment.adapter
+			addOnScrollListener(object : RecyclerView.OnScrollListener() {
+				override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+					super.onScrollStateChanged(recyclerView, newState)
+					locationUiUpdateAllowed = newState == RecyclerView.SCROLL_STATE_IDLE
+				}
+			})
 		}
 
 		view.findViewById<TextView>(R.id.secondary_btn).apply {
@@ -98,9 +116,16 @@ class SetTimeDialogFragment : DialogFragment() {
 
 	override fun onResume() {
 		super.onResume()
+		locationViewCache = app.uiUtils.getUpdateLocationViewCache()
+		startLocationUpdate()
 		updateList()
 	}
 
+	override fun onPause() {
+		super.onPause()
+		stopLocationUpdate()
+	}
+	
 	override fun onSaveInstanceState(outState: Bundle) {
 		super.onSaveInstanceState(outState)
 		val chats = mutableListOf<Long>()
@@ -111,6 +136,47 @@ class SetTimeDialogFragment : DialogFragment() {
 		outState.putLongArray(CHATS_KEY, chats.toLongArray())
 	}
 
+	override fun updateLocation(location: Location?) {
+		val loc = this.location
+		val newLocation = loc == null && location != null
+		val locationChanged = loc != null && location != null
+				&& loc.latitude != location.latitude
+				&& loc.longitude != location.longitude
+		if (newLocation || locationChanged) {
+			this.location = location
+			updateLocationUi()
+		}
+	}
+
+	override fun updateCompassValue(value: Float) {
+		// 99 in next line used to one-time initialize arrows (with reference vs. fixed-north direction)
+		// on non-compass devices
+		val lastHeading = heading ?: 99f
+		heading = value
+		if (Math.abs(MapUtils.degreesDiff(lastHeading.toDouble(), value.toDouble())) > 5) {
+			updateLocationUi()
+		} else {
+			heading = lastHeading
+		}
+	}
+
+	private fun startLocationUpdate() {
+		app.locationProvider.addLocationListener(this)
+		app.locationProvider.addCompassListener(this)
+		updateLocationUi()
+	}
+
+	private fun stopLocationUpdate() {
+		app.locationProvider.removeLocationListener(this)
+		app.locationProvider.removeCompassListener(this)
+	}
+
+	private fun updateLocationUi() {
+		if (locationUiUpdateAllowed) {
+			app.runInUIThread { adapter.notifyDataSetChanged() }
+		}
+	}
+	
 	private fun readFromBundle(bundle: Bundle?) {
 		chatLivePeriods.clear()
 		bundle?.getLongArray(CHATS_KEY)?.also {
@@ -216,7 +282,35 @@ class SetTimeDialogFragment : DialogFragment() {
 
 			TelegramUiHelper.setupPhoto(app, holder.icon, chat.photo?.small?.local?.path, placeholderId, false)
 			holder.title?.text = chat.title
-			holder.description?.visibility = View.INVISIBLE
+
+			if (telegramHelper.isGroup(chat)) {
+				holder.locationViewContainer?.visibility = View.GONE
+				holder.description?.visibility = View.VISIBLE
+				holder.description?.text = getString(R.string.shared_string_group)
+			} else {
+				val message = telegramHelper.getChatMessages(chat.id).firstOrNull()
+				val content = message?.content
+				if (message != null && content is TdApi.MessageLocation && (location != null && content.location != null)) {
+					val lastUpdated = telegramHelper.getLastUpdatedTime(message)
+					holder.description?.visibility = View.VISIBLE
+					holder.description?.text = getListItemLiveTimeDescr(lastUpdated)
+
+					holder.locationViewContainer?.visibility = View.VISIBLE
+					locationViewCache.outdatedLocation = System.currentTimeMillis() / 1000 -
+							lastUpdated > settings.staleLocTime
+
+					app.uiUtils.updateLocationView(
+						holder.directionIcon,
+						holder.distanceText,
+						LatLon(content.location.latitude, content.location.longitude),
+						locationViewCache
+					)
+				} else {
+					holder.locationViewContainer?.visibility = View.GONE
+					holder.description?.visibility = View.INVISIBLE
+				}
+			}
+
 			holder.textInArea?.apply {
 				visibility = View.VISIBLE
 				chatLivePeriods[chat.id]?.also { text = formatLivePeriod(it) }
@@ -229,9 +323,21 @@ class SetTimeDialogFragment : DialogFragment() {
 
 		override fun getItemCount() = chats.size
 
+		private fun getListItemLiveTimeDescr(lastUpdated: Int): String {
+			val formattedTime = OsmandFormatter.getFormattedDuration(app, getListItemLiveTime(lastUpdated))
+			return "$formattedTime " + getString(R.string.time_ago)
+		}
+
+		private fun getListItemLiveTime(lastUpdated: Int): Long {
+			return (System.currentTimeMillis() / 1000) - lastUpdated
+		}
+
 		inner class ChatViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
 			val icon: ImageView? = view.findViewById(R.id.icon)
 			val title: TextView? = view.findViewById(R.id.title)
+			val directionIcon: ImageView? = view.findViewById(R.id.direction_icon)
+			val distanceText: TextView? = view.findViewById(R.id.distance_text)
+			val locationViewContainer: View? = view.findViewById(R.id.location_view_container)
 			val description: TextView? = view.findViewById(R.id.description)
 			val textInArea: TextView? = view.findViewById(R.id.text_in_area)
 			val bottomShadow: View? = view.findViewById(R.id.bottom_shadow)

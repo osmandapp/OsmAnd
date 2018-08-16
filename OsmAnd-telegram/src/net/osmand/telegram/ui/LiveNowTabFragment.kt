@@ -361,12 +361,12 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 			}
 		}
 
-		private fun getListItemLiveTimeDescr(item: ListItem):String {
-			return getString(R.string.shared_string_live) +
-					": ${OsmandFormatter.getFormattedDuration(app, getListItemLiveTime(item))}"
+		private fun getListItemLiveTimeDescr(item: ListItem): String {
+			val formattedTime = OsmandFormatter.getFormattedDuration(app, getListItemLiveTime(item))
+			return getString(R.string.last_response) + ": $formattedTime " + getString(R.string.time_ago)
 		}
 
-		private fun getListItemLiveTime(item: ListItem): Long = (System.currentTimeMillis() / 1000) - item.created
+		private fun getListItemLiveTime(item: ListItem): Long = (System.currentTimeMillis() / 1000) - item.lastUpdated
 		
 		private fun showPopupMenu(holder: ChatViewHolder, chatId: Long) {
 			val ctx = holder.itemView.context
