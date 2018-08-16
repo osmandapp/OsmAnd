@@ -28,6 +28,7 @@ class TelegramHelper private constructor() {
 
 		private const val DEVICE_PREFIX = "Device: "
 		private const val LOCATION_PREFIX = "Location: "
+		private const val LAST_LOCATION_PREFIX = "Last location: "
 
 		private const val FEW_SECONDS_AGO = "few seconds ago"
 		private const val SECONDS_AGO_SUFFIX = " seconds ago"
@@ -789,26 +790,40 @@ class TelegramHelper private constructor() {
 
 	private fun parseOsmAndBotLocation(text: String): MessageOsmAndBotLocation {
 		val res = MessageOsmAndBotLocation()
+		var locationNA = false;
 		for (s in text.lines()) {
 			when {
 				s.startsWith(DEVICE_PREFIX) -> {
 					res.name = s.removePrefix(DEVICE_PREFIX)
 				}
-				s.startsWith(LOCATION_PREFIX) -> {
-					val locStr = s.removePrefix(LOCATION_PREFIX)
-					try {
-						val (latS, lonS) = locStr.split(" ")
-						val updatedS = locStr.substring(locStr.indexOf("("), locStr.length)
-						val timeSecs = parseTime(updatedS.removePrefix("(").removeSuffix(")"))
-						res.lat = latS.dropLast(1).toDouble()
-						res.lon = lonS.toDouble()
-						if (timeSecs < messageActiveTimeSec) {
-							res.lastUpdated = (System.currentTimeMillis() / 1000 - timeSecs).toInt()
-						} else {
-							res.lastUpdated = timeSecs
+				s.startsWith(LOCATION_PREFIX) || s.startsWith(LAST_LOCATION_PREFIX) -> {
+					var locStr: String;
+					var parse = true;
+					if (s.startsWith(LAST_LOCATION_PREFIX)) {
+						locStr = s.removePrefix(LAST_LOCATION_PREFIX);
+						if (!locationNA) {
+							parse = false;
 						}
-					} catch (e: Exception) {
-						e.printStackTrace()
+					} else {
+						locStr = s.removePrefix(LOCATION_PREFIX);
+						if (locStr.trim() == "n/a") {
+							locationNA = true;
+							parse = false;
+						}
+					}
+					if (parse) {
+						try {
+							val (latS, lonS) = locStr.split(" ")
+							val updatedS = locStr.substring(locStr.indexOf("("), locStr.length)
+
+							res.lastUpdated =
+									(parseTime(updatedS.removePrefix("(").removeSuffix(")")) / 1000).toInt()
+							res.lat = latS.dropLast(1).toDouble()
+							res.lon = lonS.toDouble()
+
+						} catch (e: Exception) {
+							e.printStackTrace()
+						}
 					}
 				}
 			}
@@ -816,24 +831,24 @@ class TelegramHelper private constructor() {
 		return res
 	}
 
-	private fun parseTime(timeS: String): Int {
+	private fun parseTime(timeS: String): Long {
 		try {
 			when {
-				timeS.endsWith(FEW_SECONDS_AGO) -> return 5
+				timeS.endsWith(FEW_SECONDS_AGO) -> return System.currentTimeMillis() - 5000
 
 				timeS.endsWith(SECONDS_AGO_SUFFIX) -> {
 					val locStr = timeS.removeSuffix(SECONDS_AGO_SUFFIX)
-					return locStr.toInt()
+					return System.currentTimeMillis() - locStr.toInt() * 1000
 				}
 				timeS.endsWith(MINUTES_AGO_SUFFIX) -> {
 					val locStr = timeS.removeSuffix(MINUTES_AGO_SUFFIX)
 					val minutes = locStr.toInt()
-					return minutes * 60
+					return System.currentTimeMillis() - minutes * 60 * 1000
 				}
 				timeS.endsWith(HOURS_AGO_SUFFIX) -> {
 					val locStr = timeS.removeSuffix(HOURS_AGO_SUFFIX)
 					val hours = locStr.toInt()
-					return hours * 60 * 60
+					return (System.currentTimeMillis() -  hours * 60 * 60 * 1000)
 				}
 				timeS.endsWith(UTC_FORMAT_SUFFIX) -> {
 					val locStr = timeS.removeSuffix(UTC_FORMAT_SUFFIX)
@@ -841,7 +856,7 @@ class TelegramHelper private constructor() {
 					val date = UTC_DATE_FORMAT.parse(latS)
 					val time = UTC_TIME_FORMAT.parse(lonS)
 					val res = date.time + time.time
-					return res.toInt()
+					return res
 				}
 			}
 		} catch (e: Exception) {

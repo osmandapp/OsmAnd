@@ -29,6 +29,7 @@ import net.osmand.telegram.utils.OsmandFormatter
 import net.osmand.telegram.utils.UiUtils.UpdateLocationViewCache
 import net.osmand.util.MapUtils
 import org.drinkless.td.libcore.telegram.TdApi
+import java.util.*
 
 private const val CHAT_VIEW_TYPE = 0
 private const val LOCATION_ITEM_VIEW_TYPE = 1
@@ -320,7 +321,7 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 			}
 			if (location != null && item.latLon != null) {
 				holder.locationViewContainer?.visibility = View.VISIBLE
-				locationViewCache.outdatedLocation = System.currentTimeMillis() / 1000 - item.lastUpdated > settings.staleLocTime
+				locationViewCache.outdatedLocation = System.currentTimeMillis() / 1000  - item.lastUpdated > settings.staleLocTime
 				app.uiUtils.updateLocationView(
 					holder.directionIcon,
 					holder.distanceText,
@@ -363,11 +364,18 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 		}
 
 		private fun getListItemLiveTimeDescr(item: ListItem): String {
-			val formattedTime = OsmandFormatter.getFormattedDuration(app, getListItemLiveTime(item))
+			val duration = System.currentTimeMillis() / 1000 - item.lastUpdated
+			var formattedTime = OsmandFormatter.getFormattedDuration(app, duration)
+			if(duration > 48 * 60 * 60) {
+				// TODO make constant
+				formattedTime = Date(item.lastUpdated * 1000.toLong()).toString();
+			}
+			
+			
 			return getString(R.string.last_response) + ": $formattedTime " + getString(R.string.time_ago)
 		}
 
-		private fun getListItemLiveTime(item: ListItem): Long = (System.currentTimeMillis() / 1000) - item.lastUpdated
+		
 		
 		private fun showPopupMenu(holder: ChatViewHolder, chatId: Long) {
 			val ctx = holder.itemView.context
