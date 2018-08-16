@@ -507,12 +507,14 @@ class TelegramHelper private constructor() {
 			if (newMessage.chatId == message.chatId) {
 				val sameSender = newMessage.senderUserId == message.senderUserId
 				val viaSameBot = newMessage.viaBotUserId == message.viaBotUserId
-				if ((fromBot && sameSender) || (viaBot && viaSameBot)) {
-					val newCont = newMessage.content
-					val cont = message.content
-					if (newCont is MessageOsmAndBotLocation && cont is MessageOsmAndBotLocation) {
-						if (newCont.name == cont.name) {
-							iterator.remove()
+				if (fromBot || viaBot) {
+					if ((fromBot && sameSender) || (viaBot && viaSameBot)) {
+						val newCont = newMessage.content
+						val cont = message.content
+						if (newCont is MessageOsmAndBotLocation && cont is MessageOsmAndBotLocation) {
+							if (newCont.name == cont.name) {
+								iterator.remove()
+							}
 						}
 					}
 				} else if (sameSender) {
