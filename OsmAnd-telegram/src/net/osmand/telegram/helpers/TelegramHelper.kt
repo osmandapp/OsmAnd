@@ -177,14 +177,8 @@ class TelegramHelper private constructor() {
 		return chat.type is TdApi.ChatTypeSupergroup || chat.type is TdApi.ChatTypeBasicGroup
 	}
 
-	fun getLastUpdatedTime(message: TdApi.Message): Int {
-		return if (message.editDate != 0) {
-			message.editDate
-		} else {
-			message.date
-		}
-	}
-	
+	fun getLastUpdatedTime(message: TdApi.Message) = Math.max(message.editDate, message.date)
+
 	fun isPrivateChat(chat: TdApi.Chat): Boolean = chat.type is TdApi.ChatTypePrivate
 
 	private fun isChannel(chat: TdApi.Chat): Boolean {
