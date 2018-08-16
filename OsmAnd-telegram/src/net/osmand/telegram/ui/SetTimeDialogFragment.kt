@@ -291,11 +291,7 @@ class SetTimeDialogFragment : DialogFragment(), TelegramLocationListener, Telegr
 				val message = telegramHelper.getChatMessages(chat.id).firstOrNull()
 				val content = message?.content
 				if (message != null && content is TdApi.MessageLocation && (location != null && content.location != null)) {
-					val lastUpdated = if (message.editDate != 0) {
-						message.editDate
-					} else {
-						message.date
-					}
+					val lastUpdated = telegramHelper.getLastUpdatedTime(message)
 					holder.description?.visibility = View.VISIBLE
 					holder.description?.text = getListItemLiveTimeDescr(lastUpdated)
 
@@ -328,8 +324,8 @@ class SetTimeDialogFragment : DialogFragment(), TelegramLocationListener, Telegr
 		override fun getItemCount() = chats.size
 
 		private fun getListItemLiveTimeDescr(lastUpdated: Int): String {
-			return getString(R.string.last_response) +
-					": ${OsmandFormatter.getFormattedDuration(app, getListItemLiveTime(lastUpdated))}"
+			return "${OsmandFormatter.getFormattedDuration(app, getListItemLiveTime(lastUpdated))} " +
+					getString(R.string.time_ago)
 		}
 
 		private fun getListItemLiveTime(lastUpdated: Int): Long {

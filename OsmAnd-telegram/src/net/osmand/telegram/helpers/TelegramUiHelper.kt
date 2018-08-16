@@ -54,13 +54,7 @@ object TelegramUiHelper {
 		val type = chat.type
 		val message = messages.firstOrNull()
 		if (message != null) {
-			val lastUpdated = message.editDate
-			res.lastUpdated = if (lastUpdated != 0) {
-				lastUpdated
-			} else {
-				message.date
-			}
-			res.created = message.date
+			res.lastUpdated = helper.getLastUpdatedTime(message)
 		}
 		if (type is TdApi.ChatTypePrivate || type is TdApi.ChatTypeSecret) {
 			val userId = getUserIdFromChatType(type)
@@ -130,7 +124,6 @@ object TelegramUiHelper {
 				latLon = LatLon(content.lat, content.lon)
 				placeholderId = R.drawable.img_user_picture
 				lastUpdated = content.lastUpdated
-				created = content.created
 			}
 		} else {
 			null
@@ -152,13 +145,7 @@ object TelegramUiHelper {
 			photoPath = helper.getUserPhotoPath(user)
 			placeholderId = R.drawable.img_user_picture
 			userId = message.senderUserId
-			val editDate = message.editDate
-			lastUpdated = if (editDate != 0) {
-				editDate
-			} else {
-				message.date
-			}
-			created = message.date
+			lastUpdated = helper.getLastUpdatedTime(message)
 		}
 	}
 
@@ -177,8 +164,6 @@ object TelegramUiHelper {
 		var userId: Int = 0
 			internal set
 		var lastUpdated: Int = 0
-			internal set
-		var created: Int = 0
 			internal set
 
 		abstract fun canBeOpenedOnMap(): Boolean
