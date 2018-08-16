@@ -28,6 +28,7 @@ class TelegramHelper private constructor() {
 
 		private const val DEVICE_PREFIX = "Device: "
 		private const val LOCATION_PREFIX = "Location: "
+		private const val LAST_LOCATION_PREFIX = "Last location: "
 
 		private const val FEW_SECONDS_AGO = "few seconds ago"
 		private const val SECONDS_AGO_SUFFIX = " seconds ago"
@@ -176,6 +177,8 @@ class TelegramHelper private constructor() {
 	fun isGroup(chat: TdApi.Chat): Boolean {
 		return chat.type is TdApi.ChatTypeSupergroup || chat.type is TdApi.ChatTypeBasicGroup
 	}
+
+	fun getLastUpdatedTime(message: TdApi.Message) = Math.max(message.editDate, message.date)
 
 	fun isPrivateChat(chat: TdApi.Chat): Boolean = chat.type is TdApi.ChatTypePrivate
 
@@ -481,16 +484,15 @@ class TelegramHelper private constructor() {
 
 	private fun addNewMessage(message: TdApi.Message) {
 		if (message.isAppropriate()) {
+			val fromBot = isOsmAndBot(message.senderUserId)
+			val viaBot = isOsmAndBot(message.viaBotUserId)
 			val oldContent = message.content
 			if (oldContent is TdApi.MessageText) {
-				val messageOsmAndBotLocation = parseOsmAndBotLocation(oldContent.text.text)
-				messageOsmAndBotLocation.created = message.date
-				message.content = messageOsmAndBotLocation
-			} else if (oldContent is TdApi.MessageLocation &&
-				(isOsmAndBot(message.senderUserId) || isOsmAndBot(message.viaBotUserId))) {
+				message.content = parseOsmAndBotLocation(oldContent.text.text)
+			} else if (oldContent is TdApi.MessageLocation && (fromBot || viaBot)) {
 				message.content = parseOsmAndBotLocation(message)
 			}
-			removeOldMessages(message.senderUserId, message.chatId)
+			removeOldMessages(message, fromBot, viaBot)
 			usersLocationMessages[message.id] = message
 			incomingMessagesListeners.forEach {
 				it.onReceiveChatLocationMessages(message.chatId, message)
@@ -498,13 +500,25 @@ class TelegramHelper private constructor() {
 		}
 	}
 
-	private fun removeOldMessages(userId: Int, chatId: Long) {
-		val user = users[userId]
-		if (user != null && user.username != OSMAND_BOT_USERNAME) {
-			usersLocationMessages.values.filter { it.senderUserId == userId && it.chatId == chatId }
-				.forEach {
-					usersLocationMessages.remove(it.id)
+	private fun removeOldMessages(newMessage: TdApi.Message, fromBot: Boolean, viaBot: Boolean) {
+		val iterator = usersLocationMessages.entries.iterator()
+		while (iterator.hasNext()) {
+			val message = iterator.next().value
+			if (newMessage.chatId == message.chatId) {
+				val sameSender = newMessage.senderUserId == message.senderUserId
+				val viaSameBot = newMessage.viaBotUserId == message.viaBotUserId
+				if ((fromBot && sameSender) || (viaBot && viaSameBot)) {
+					val newCont = newMessage.content
+					val cont = message.content
+					if (newCont is MessageOsmAndBotLocation && cont is MessageOsmAndBotLocation) {
+						if (newCont.name == cont.name) {
+							iterator.remove()
+						}
+					}
+				} else if (sameSender) {
+					iterator.remove()
 				}
+			}
 		}
 	}
 
@@ -749,7 +763,8 @@ class TelegramHelper private constructor() {
 		val content = content
 		return when (content) {
 			is TdApi.MessageLocation -> true
-			is TdApi.MessageText -> isOsmAndBot(senderUserId) || isOsmAndBot(viaBotUserId)
+			is TdApi.MessageText -> (isOsmAndBot(senderUserId) || isOsmAndBot(viaBotUserId))
+					&& content.text.text.startsWith(DEVICE_PREFIX)
 			else -> false
 		}
 	}
@@ -760,13 +775,7 @@ class TelegramHelper private constructor() {
 			name = getOsmAndBotDeviceName(message)
 			lat = messageLocation.location.latitude
 			lon = messageLocation.location.longitude
-			created = message.date
-			val date = message.editDate
-			lastUpdated = if (date != 0) {
-				date
-			} else {
-				message.date
-			}
+			lastUpdated = getLastUpdatedTime(message)
 		}
 	}
 
@@ -776,33 +785,46 @@ class TelegramHelper private constructor() {
 			name = oldContent.name
 			lat = messageLocation.location.latitude
 			lon = messageLocation.location.longitude
-			created = oldContent.created
 			lastUpdated = (System.currentTimeMillis() / 1000).toInt()
 		}
 	}
 
 	private fun parseOsmAndBotLocation(text: String): MessageOsmAndBotLocation {
 		val res = MessageOsmAndBotLocation()
+		var locationNA = false
 		for (s in text.lines()) {
 			when {
 				s.startsWith(DEVICE_PREFIX) -> {
 					res.name = s.removePrefix(DEVICE_PREFIX)
 				}
-				s.startsWith(LOCATION_PREFIX) -> {
-					val locStr = s.removePrefix(LOCATION_PREFIX)
-					try {
-						val (latS, lonS) = locStr.split(" ")
-						val updatedS = locStr.substring(locStr.indexOf("("), locStr.length)
-						val timeSecs = parseTime(updatedS.removePrefix("(").removeSuffix(")"))
-						res.lat = latS.dropLast(1).toDouble()
-						res.lon = lonS.toDouble()
-						if (timeSecs < messageActiveTimeSec) {
-							res.lastUpdated = (System.currentTimeMillis() / 1000 - timeSecs).toInt()
-						} else {
-							res.lastUpdated = timeSecs
+				s.startsWith(LOCATION_PREFIX) || s.startsWith(LAST_LOCATION_PREFIX) -> {
+					var locStr: String
+					var parse = true
+					if (s.startsWith(LAST_LOCATION_PREFIX)) {
+						locStr = s.removePrefix(LAST_LOCATION_PREFIX)
+						if (!locationNA) {
+							parse = false
 						}
-					} catch (e: Exception) {
-						e.printStackTrace()
+					} else {
+						locStr = s.removePrefix(LOCATION_PREFIX)
+						if (locStr.trim() == "n/a") {
+							locationNA = true
+							parse = false
+						}
+					}
+					if (parse) {
+						try {
+							val (latS, lonS) = locStr.split(" ")
+							val updatedS = locStr.substring(locStr.indexOf("("), locStr.length)
+
+							res.lastUpdated =
+									(parseTime(updatedS.removePrefix("(").removeSuffix(")")) / 1000).toInt()
+							res.lat = latS.dropLast(1).toDouble()
+							res.lon = lonS.toDouble()
+
+						} catch (e: Exception) {
+							e.printStackTrace()
+						}
 					}
 				}
 			}
@@ -810,24 +832,24 @@ class TelegramHelper private constructor() {
 		return res
 	}
 
-	private fun parseTime(timeS: String): Int {
+	private fun parseTime(timeS: String): Long {
 		try {
 			when {
-				timeS.endsWith(FEW_SECONDS_AGO) -> return 5
+				timeS.endsWith(FEW_SECONDS_AGO) -> return System.currentTimeMillis() - 5000
 
 				timeS.endsWith(SECONDS_AGO_SUFFIX) -> {
 					val locStr = timeS.removeSuffix(SECONDS_AGO_SUFFIX)
-					return locStr.toInt()
+					return System.currentTimeMillis() - locStr.toLong() * 1000
 				}
 				timeS.endsWith(MINUTES_AGO_SUFFIX) -> {
 					val locStr = timeS.removeSuffix(MINUTES_AGO_SUFFIX)
-					val minutes = locStr.toInt()
-					return minutes * 60
+					val minutes = locStr.toLong()
+					return System.currentTimeMillis() - minutes * 60 * 1000
 				}
 				timeS.endsWith(HOURS_AGO_SUFFIX) -> {
 					val locStr = timeS.removeSuffix(HOURS_AGO_SUFFIX)
-					val hours = locStr.toInt()
-					return hours * 60 * 60
+					val hours = locStr.toLong()
+					return (System.currentTimeMillis() -  hours * 60 * 60 * 1000)
 				}
 				timeS.endsWith(UTC_FORMAT_SUFFIX) -> {
 					val locStr = timeS.removeSuffix(UTC_FORMAT_SUFFIX)
@@ -835,7 +857,7 @@ class TelegramHelper private constructor() {
 					val date = UTC_DATE_FORMAT.parse(latS)
 					val time = UTC_TIME_FORMAT.parse(lonS)
 					val res = date.time + time.time
-					return res.toInt()
+					return res
 				}
 			}
 		} catch (e: Exception) {
@@ -1068,9 +1090,7 @@ class TelegramHelper private constructor() {
 						synchronized(message) {
 							val newContent = updateMessageContent.newContent
 							message.content = if (newContent is TdApi.MessageText) {
-								val messageOsmAndBotLocation = parseOsmAndBotLocation(newContent.text.text)
-								messageOsmAndBotLocation.created = message.date
-								messageOsmAndBotLocation
+								parseOsmAndBotLocation(newContent.text.text)
 							} else if (newContent is TdApi.MessageLocation &&
 								(isOsmAndBot(message.senderUserId) || isOsmAndBot(message.viaBotUserId))) {
 								parseOsmAndBotLocationContent(message.content as MessageOsmAndBotLocation, newContent)

@@ -52,11 +52,6 @@ object TelegramUiHelper {
 			placeholderId = R.drawable.img_user_picture
 		}
 		val type = chat.type
-		val message = messages.firstOrNull()
-		if (message != null) {
-			res.lastUpdated = message.editDate
-			res.created = message.date
-		}
 		if (type is TdApi.ChatTypePrivate || type is TdApi.ChatTypeSecret) {
 			val userId = getUserIdFromChatType(type)
 			val chatWithBot = helper.isBot(userId)
@@ -64,9 +59,13 @@ object TelegramUiHelper {
 			res.chatWithBot = chatWithBot
 			if (!chatWithBot) {
 				res.userId = userId
-				val content = message?.content
-				if (content is TdApi.MessageLocation) {
-					res.latLon = LatLon(content.location.latitude, content.location.longitude)
+				val message = messages.firstOrNull { it.viaBotUserId == 0 }
+				if (message != null) {
+					res.lastUpdated = helper.getLastUpdatedTime(message)
+					val content = message.content
+					if (content is TdApi.MessageLocation) {
+						res.latLon = LatLon(content.location.latitude, content.location.longitude)
+					}
 				}
 			}
 		} else if (type is TdApi.ChatTypeBasicGroup) {
@@ -125,7 +124,6 @@ object TelegramUiHelper {
 				latLon = LatLon(content.lat, content.lon)
 				placeholderId = R.drawable.img_user_picture
 				lastUpdated = content.lastUpdated
-				created = content.created
 			}
 		} else {
 			null
@@ -147,8 +145,7 @@ object TelegramUiHelper {
 			photoPath = helper.getUserPhotoPath(user)
 			placeholderId = R.drawable.img_user_picture
 			userId = message.senderUserId
-			lastUpdated = message.editDate
-			created = message.date
+			lastUpdated = helper.getLastUpdatedTime(message)
 		}
 	}
 
@@ -167,8 +164,6 @@ object TelegramUiHelper {
 		var userId: Int = 0
 			internal set
 		var lastUpdated: Int = 0
-			internal set
-		var created: Int = 0
 			internal set
 
 		abstract fun canBeOpenedOnMap(): Boolean

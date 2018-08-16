@@ -1,4 +1,7 @@
 <resources>
+	<string name="time_ago">ago</string>
+	<string name="last_response">Last response</string>
+	<string name="shared_string_group">Group</string>
 	<string name="logout_no_internet_msg">To properly log out from your Telegram account, the Internet is needed.</string>
 	<string name="shared_string_close">Close</string>
 	<string name="disconnect_from_telegram_desc">To invoke access to your Telegram account from OsmAnd, open Telegram, go to Settings - Privacy and Security - Sessions and terminate OsmAnd Telegram session. After that, OsmAnd Location Sharing will no longer have access to your account, and you will not be able to use this app until you log in again.</string>

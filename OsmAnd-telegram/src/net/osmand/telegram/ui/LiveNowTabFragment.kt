@@ -29,6 +29,8 @@ import net.osmand.telegram.utils.OsmandFormatter
 import net.osmand.telegram.utils.UiUtils.UpdateLocationViewCache
 import net.osmand.util.MapUtils
 import org.drinkless.td.libcore.telegram.TdApi
+import java.text.SimpleDateFormat
+import java.util.*
 
 private const val CHAT_VIEW_TYPE = 0
 private const val LOCATION_ITEM_VIEW_TYPE = 1
@@ -221,31 +223,32 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 		for ((id, messages) in telegramHelper.getMessagesByChatIds()) {
 			telegramHelper.getChat(id)?.also { chat ->
 				res.add(TelegramUiHelper.chatToChatItem(telegramHelper, chat, messages))
-				if (needLocationItems(chat.type)) {
+				val type = chat.type
+				if (type is TdApi.ChatTypeBasicGroup || type is TdApi.ChatTypeSupergroup) {
 					res.addAll(convertToLocationItems(chat, messages))
+				} else if (type is TdApi.ChatTypePrivate) {
+					if (telegramHelper.isOsmAndBot(type.userId)) {
+						res.addAll(convertToLocationItems(chat, messages))
+					} else if (messages.firstOrNull { it.viaBotUserId != 0 } != null) {
+						res.addAll(convertToLocationItems(chat, messages, true))
+					}
 				}
 			}
 		}
 		adapter.items = res
 	}
 
-	private fun needLocationItems(type: TdApi.ChatType): Boolean {
-		return when (type) {
-			is TdApi.ChatTypeBasicGroup -> true
-			is TdApi.ChatTypeSupergroup -> true
-			is TdApi.ChatTypePrivate -> telegramHelper.isOsmAndBot(type.userId)
-			else -> false
-		}
-	}
-
 	private fun convertToLocationItems(
 		chat: TdApi.Chat,
-		messages: List<TdApi.Message>
+		messages: List<TdApi.Message>,
+		addOnlyViaBotMessages: Boolean = false
 	): List<LocationItem> {
 		val res = mutableListOf<LocationItem>()
 		messages.forEach { message ->
-			TelegramUiHelper.messageToLocationItem(telegramHelper, chat, message)?.also {
-				res.add(it)
+			if (!addOnlyViaBotMessages || message.viaBotUserId != 0) {
+				TelegramUiHelper.messageToLocationItem(telegramHelper, chat, message)?.also {
+					res.add(it)
+				}
 			}
 		}
 		return res
@@ -319,7 +322,7 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 			}
 			if (location != null && item.latLon != null) {
 				holder.locationViewContainer?.visibility = View.VISIBLE
-				locationViewCache.outdatedLocation = System.currentTimeMillis() / 1000 - item.lastUpdated > settings.staleLocTime
+				locationViewCache.outdatedLocation = System.currentTimeMillis() / 1000  - item.lastUpdated > settings.staleLocTime
 				app.uiUtils.updateLocationView(
 					holder.directionIcon,
 					holder.distanceText,
@@ -361,13 +364,19 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 			}
 		}
 
-		private fun getListItemLiveTimeDescr(item: ListItem):String {
-			return getString(R.string.shared_string_live) +
-					": ${OsmandFormatter.getFormattedDuration(app, getListItemLiveTime(item))}"
+		private fun getListItemLiveTimeDescr(item: ListItem): String {
+			val duration = System.currentTimeMillis() / 1000 - item.lastUpdated
+			var formattedTime = OsmandFormatter.getFormattedDuration(app, duration)
+			return if (duration > 48 * 60 * 60) {
+				// TODO make constant
+				val day = SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault())
+				formattedTime = day.format(Date(item.lastUpdated * 1000.toLong()))
+				getString(R.string.last_response) + ": $formattedTime"
+			} else {
+				getString(R.string.last_response) + ": $formattedTime " + getString(R.string.time_ago)
+			}
 		}
 
-		private fun getListItemLiveTime(item: ListItem): Long = (System.currentTimeMillis() / 1000) - item.created
-		
 		private fun showPopupMenu(holder: ChatViewHolder, chatId: Long) {
 			val ctx = holder.itemView.context
 
