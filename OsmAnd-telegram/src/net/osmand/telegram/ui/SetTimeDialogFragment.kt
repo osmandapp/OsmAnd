@@ -277,14 +277,16 @@ class SetTimeDialogFragment : DialogFragment(), TelegramLocationListener, Telegr
 			TelegramUiHelper.setupPhoto(app, holder.icon, chat.photo?.small?.local?.path, placeholderId, false)
 			holder.title?.text = chat.title
 
-			val message = telegramHelper.getChatMessages(chat.id).firstOrNull()
-			if (message != null) {
-				val content = message.content
-				if (content is TdApi.MessageLocation && (location != null && content.location != null)) {
-					holder.description?.visibility = View.VISIBLE
-					if (telegramHelper.isGroup(chat)) {
-						holder.description?.text = getString(R.string.shared_string_group)
-					} else {
+			if (telegramHelper.isGroup(chat)) {
+				holder.locationViewContainer?.visibility = View.GONE
+				holder.description?.visibility = View.VISIBLE
+				holder.description?.text = getString(R.string.shared_string_group)
+			} else {
+				val message = telegramHelper.getChatMessages(chat.id).firstOrNull()
+				if (message != null) {
+					val content = message.content
+					if (content is TdApi.MessageLocation && (location != null && content.location != null)) {
+						holder.description?.visibility = View.VISIBLE
 						holder.description?.text = getListItemLiveTimeDescr(message)
 
 						holder.locationViewContainer?.visibility = View.VISIBLE
@@ -297,12 +299,14 @@ class SetTimeDialogFragment : DialogFragment(), TelegramLocationListener, Telegr
 							LatLon(content.location.latitude, content.location.longitude),
 							locationViewCache
 						)
+					} else {
+						holder.locationViewContainer?.visibility = View.GONE
+						holder.description?.visibility = View.INVISIBLE
 					}
 				} else {
 					holder.locationViewContainer?.visibility = View.GONE
+					holder.description?.visibility = View.INVISIBLE
 				}
-			} else {
-				holder.description?.visibility = View.INVISIBLE
 			}
 
 			holder.textInArea?.apply {
