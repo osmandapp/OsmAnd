@@ -791,25 +791,25 @@ class TelegramHelper private constructor() {
 
 	private fun parseOsmAndBotLocation(text: String): MessageOsmAndBotLocation {
 		val res = MessageOsmAndBotLocation()
-		var locationNA = false;
+		var locationNA = false
 		for (s in text.lines()) {
 			when {
 				s.startsWith(DEVICE_PREFIX) -> {
 					res.name = s.removePrefix(DEVICE_PREFIX)
 				}
 				s.startsWith(LOCATION_PREFIX) || s.startsWith(LAST_LOCATION_PREFIX) -> {
-					var locStr: String;
-					var parse = true;
+					var locStr: String
+					var parse = true
 					if (s.startsWith(LAST_LOCATION_PREFIX)) {
-						locStr = s.removePrefix(LAST_LOCATION_PREFIX);
+						locStr = s.removePrefix(LAST_LOCATION_PREFIX)
 						if (!locationNA) {
-							parse = false;
+							parse = false
 						}
 					} else {
-						locStr = s.removePrefix(LOCATION_PREFIX);
+						locStr = s.removePrefix(LOCATION_PREFIX)
 						if (locStr.trim() == "n/a") {
-							locationNA = true;
-							parse = false;
+							locationNA = true
+							parse = false
 						}
 					}
 					if (parse) {
@@ -839,16 +839,16 @@ class TelegramHelper private constructor() {
 
 				timeS.endsWith(SECONDS_AGO_SUFFIX) -> {
 					val locStr = timeS.removeSuffix(SECONDS_AGO_SUFFIX)
-					return System.currentTimeMillis() - locStr.toInt() * 1000
+					return System.currentTimeMillis() - locStr.toLong() * 1000
 				}
 				timeS.endsWith(MINUTES_AGO_SUFFIX) -> {
 					val locStr = timeS.removeSuffix(MINUTES_AGO_SUFFIX)
-					val minutes = locStr.toInt()
+					val minutes = locStr.toLong()
 					return System.currentTimeMillis() - minutes * 60 * 1000
 				}
 				timeS.endsWith(HOURS_AGO_SUFFIX) -> {
 					val locStr = timeS.removeSuffix(HOURS_AGO_SUFFIX)
-					val hours = locStr.toInt()
+					val hours = locStr.toLong()
 					return (System.currentTimeMillis() -  hours * 60 * 60 * 1000)
 				}
 				timeS.endsWith(UTC_FORMAT_SUFFIX) -> {

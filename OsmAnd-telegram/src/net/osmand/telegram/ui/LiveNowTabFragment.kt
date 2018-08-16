@@ -29,6 +29,7 @@ import net.osmand.telegram.utils.OsmandFormatter
 import net.osmand.telegram.utils.UiUtils.UpdateLocationViewCache
 import net.osmand.util.MapUtils
 import org.drinkless.td.libcore.telegram.TdApi
+import java.text.SimpleDateFormat
 import java.util.*
 
 private const val CHAT_VIEW_TYPE = 0
@@ -366,17 +367,16 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 		private fun getListItemLiveTimeDescr(item: ListItem): String {
 			val duration = System.currentTimeMillis() / 1000 - item.lastUpdated
 			var formattedTime = OsmandFormatter.getFormattedDuration(app, duration)
-			if(duration > 48 * 60 * 60) {
+			return if (duration > 48 * 60 * 60) {
 				// TODO make constant
-				formattedTime = Date(item.lastUpdated * 1000.toLong()).toString();
+				val day = SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault())
+				formattedTime = day.format(Date(item.lastUpdated * 1000.toLong()))
+				getString(R.string.last_response) + ": $formattedTime"
+			} else {
+				getString(R.string.last_response) + ": $formattedTime " + getString(R.string.time_ago)
 			}
-			
-			
-			return getString(R.string.last_response) + ": $formattedTime " + getString(R.string.time_ago)
 		}
 
-		
-		
 		private fun showPopupMenu(holder: ChatViewHolder, chatId: Long) {
 			val ctx = holder.itemView.context
 
