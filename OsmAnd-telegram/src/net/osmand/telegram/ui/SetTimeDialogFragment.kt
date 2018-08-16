@@ -283,26 +283,26 @@ class SetTimeDialogFragment : DialogFragment(), TelegramLocationListener, Telegr
 				holder.description?.text = getString(R.string.shared_string_group)
 			} else {
 				val message = telegramHelper.getChatMessages(chat.id).firstOrNull()
-				if (message != null) {
-					val content = message.content
-					if (content is TdApi.MessageLocation && (location != null && content.location != null)) {
-						holder.description?.visibility = View.VISIBLE
-						holder.description?.text = getListItemLiveTimeDescr(message)
-
-						holder.locationViewContainer?.visibility = View.VISIBLE
-						locationViewCache.outdatedLocation = System.currentTimeMillis() / 1000 -
-								message.editDate > settings.staleLocTime
-
-						app.uiUtils.updateLocationView(
-							holder.directionIcon,
-							holder.distanceText,
-							LatLon(content.location.latitude, content.location.longitude),
-							locationViewCache
-						)
+				val content = message?.content
+				if (message != null && content is TdApi.MessageLocation && (location != null && content.location != null)) {
+					val lastUpdated = if (message.editDate != 0) {
+						message.editDate
 					} else {
-						holder.locationViewContainer?.visibility = View.GONE
-						holder.description?.visibility = View.INVISIBLE
+						message.date
 					}
+					holder.description?.visibility = View.VISIBLE
+					holder.description?.text = getListItemLiveTimeDescr(lastUpdated)
+
+					holder.locationViewContainer?.visibility = View.VISIBLE
+					locationViewCache.outdatedLocation = System.currentTimeMillis() / 1000 -
+							lastUpdated > settings.staleLocTime
+
+					app.uiUtils.updateLocationView(
+						holder.directionIcon,
+						holder.distanceText,
+						LatLon(content.location.latitude, content.location.longitude),
+						locationViewCache
+					)
 				} else {
 					holder.locationViewContainer?.visibility = View.GONE
 					holder.description?.visibility = View.INVISIBLE
@@ -321,12 +321,14 @@ class SetTimeDialogFragment : DialogFragment(), TelegramLocationListener, Telegr
 
 		override fun getItemCount() = chats.size
 
-		private fun getListItemLiveTimeDescr(message: TdApi.Message): String {
-			return getString(R.string.shared_string_live) +
-					": ${OsmandFormatter.getFormattedDuration(app, getListItemLiveTime(message))}"
+		private fun getListItemLiveTimeDescr(lastUpdated: Int): String {
+			return getString(R.string.last_response) +
+					": ${OsmandFormatter.getFormattedDuration(app, getListItemLiveTime(lastUpdated))}"
 		}
 
-		private fun getListItemLiveTime(message: TdApi.Message): Long = (System.currentTimeMillis() / 1000) - message.date
+		private fun getListItemLiveTime(lastUpdated: Int): Long {
+			return (System.currentTimeMillis() / 1000) - lastUpdated
+		}
 
 		inner class ChatViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
 			val icon: ImageView? = view.findViewById(R.id.icon)

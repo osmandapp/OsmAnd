@@ -1,4 +1,5 @@
 <resources>
+	<string name="last_response">Last response</string>
 	<string name="shared_string_group">Group</string>
 	<string name="logout_no_internet_msg">To properly log out from your Telegram account, the Internet is needed.</string>
 	<string name="shared_string_close">Close</string>
