@@ -1978,7 +1978,7 @@
     <string name="avoid_unpaved">Avoid unpaved roads</string>
     <string name="avoid_ferries">Avoid ferries</string>
     <string name="avoid_in_routing_title">Avoid…</string>
-    <string name="avoid_in_routing_descr">Avoid toll roads, unpaved, ferries.</string>
+    <string name="avoid_in_routing_descr">Avoid e.g. toll roads, unpaved, ferries.</string>
     <string name="map_widget_fluorescent">Fluorescent routes</string>
     <string name="map_widget_show_ruler">Ruler</string>
     <string name="map_widget_view_direction">Viewing direction</string>
