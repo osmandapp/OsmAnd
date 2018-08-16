@@ -577,19 +577,33 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 				}
 
 				holder.stopSharingDescr?.apply {
-					visibility = View.VISIBLE
-					text = "${getText(R.string.stop_at)}:"
+					if (expiresIn > 0) {
+						visibility = View.VISIBLE
+						text = "${getText(R.string.stop_at)}:"
+					} else {
+						visibility = View.INVISIBLE
+					}
 				}
 
 				holder.stopSharingFirstPart?.apply {
-					visibility = View.VISIBLE
-					text = OsmandFormatter.getFormattedTime(expiresIn)
+					if (expiresIn > 0) {
+						visibility = View.VISIBLE
+						text = OsmandFormatter.getFormattedTime(expiresIn)
+					} else {
+						visibility = View.INVISIBLE
+					}
 				}
 
 				holder.stopSharingSecondPart?.apply {
-					visibility = View.VISIBLE
-					text = "(${getString(R.string.in_time,
-						OsmandFormatter.getFormattedDuration(context!!, expiresIn, true))})"
+					if (expiresIn > 0) {
+						visibility = View.VISIBLE
+						text = "(${getString(
+							R.string.in_time,
+							OsmandFormatter.getFormattedDuration(context!!, expiresIn, true)
+						)})"
+					} else {
+						visibility = View.INVISIBLE
+					}
 				}
 			}
 		}

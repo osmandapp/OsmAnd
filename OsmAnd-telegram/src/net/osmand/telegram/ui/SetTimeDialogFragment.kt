@@ -324,7 +324,6 @@ class SetTimeDialogFragment : DialogFragment(), TelegramLocationListener, Telegr
 
 		private fun getListItemLiveTime(message: TdApi.Message): Long = (System.currentTimeMillis() / 1000) - message.date
 
-
 		inner class ChatViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
 			val icon: ImageView? = view.findViewById(R.id.icon)
 			val title: TextView? = view.findViewById(R.id.title)
