@@ -481,13 +481,14 @@ class TelegramHelper private constructor() {
 
 	private fun addNewMessage(message: TdApi.Message) {
 		if (message.isAppropriate()) {
+			val fromBot = isOsmAndBot(message.senderUserId)
+			val viaBot = isOsmAndBot(message.viaBotUserId)
 			val oldContent = message.content
 			if (oldContent is TdApi.MessageText) {
-				val messageOsmAndBotLocation = parseOsmAndBotLocation(oldContent.text.text)
-				messageOsmAndBotLocation.created = message.date
-				message.content = messageOsmAndBotLocation
-			} else if (oldContent is TdApi.MessageLocation &&
-				(isOsmAndBot(message.senderUserId) || isOsmAndBot(message.viaBotUserId))) {
+				message.content = parseOsmAndBotLocation(oldContent.text.text).apply {
+					created = message.date
+				}
+			} else if (oldContent is TdApi.MessageLocation && (fromBot || viaBot)) {
 				message.content = parseOsmAndBotLocation(message)
 			}
 			removeOldMessages(message.senderUserId, message.chatId)
