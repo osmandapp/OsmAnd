@@ -221,31 +221,32 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 		for ((id, messages) in telegramHelper.getMessagesByChatIds()) {
 			telegramHelper.getChat(id)?.also { chat ->
 				res.add(TelegramUiHelper.chatToChatItem(telegramHelper, chat, messages))
-				if (needLocationItems(chat.type)) {
+				val type = chat.type
+				if (type is TdApi.ChatTypeBasicGroup || type is TdApi.ChatTypeSupergroup) {
 					res.addAll(convertToLocationItems(chat, messages))
+				} else if (type is TdApi.ChatTypePrivate) {
+					if (telegramHelper.isOsmAndBot(type.userId)) {
+						res.addAll(convertToLocationItems(chat, messages))
+					} else if (messages.firstOrNull { it.viaBotUserId != 0 } != null) {
+						res.addAll(convertToLocationItems(chat, messages, true))
+					}
 				}
 			}
 		}
 		adapter.items = res
 	}
 
-	private fun needLocationItems(type: TdApi.ChatType): Boolean {
-		return when (type) {
-			is TdApi.ChatTypeBasicGroup -> true
-			is TdApi.ChatTypeSupergroup -> true
-			is TdApi.ChatTypePrivate -> telegramHelper.isOsmAndBot(type.userId)
-			else -> false
-		}
-	}
-
 	private fun convertToLocationItems(
 		chat: TdApi.Chat,
-		messages: List<TdApi.Message>
+		messages: List<TdApi.Message>,
+		addOnlyViaBotMessages: Boolean = false
 	): List<LocationItem> {
 		val res = mutableListOf<LocationItem>()
 		messages.forEach { message ->
-			TelegramUiHelper.messageToLocationItem(telegramHelper, chat, message)?.also {
-				res.add(it)
+			if (!addOnlyViaBotMessages || message.viaBotUserId != 0) {
+				TelegramUiHelper.messageToLocationItem(telegramHelper, chat, message)?.also {
+					res.add(it)
+				}
 			}
 		}
 		return res

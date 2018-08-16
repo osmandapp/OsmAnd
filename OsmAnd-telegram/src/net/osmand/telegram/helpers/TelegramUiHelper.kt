@@ -52,10 +52,6 @@ object TelegramUiHelper {
 			placeholderId = R.drawable.img_user_picture
 		}
 		val type = chat.type
-		val message = messages.firstOrNull()
-		if (message != null) {
-			res.lastUpdated = helper.getLastUpdatedTime(message)
-		}
 		if (type is TdApi.ChatTypePrivate || type is TdApi.ChatTypeSecret) {
 			val userId = getUserIdFromChatType(type)
 			val chatWithBot = helper.isBot(userId)
@@ -63,9 +59,13 @@ object TelegramUiHelper {
 			res.chatWithBot = chatWithBot
 			if (!chatWithBot) {
 				res.userId = userId
-				val content = message?.content
-				if (content is TdApi.MessageLocation) {
-					res.latLon = LatLon(content.location.latitude, content.location.longitude)
+				val message = messages.firstOrNull { it.viaBotUserId == 0 }
+				if (message != null) {
+					res.lastUpdated = helper.getLastUpdatedTime(message)
+					val content = message.content
+					if (content is TdApi.MessageLocation) {
+						res.latLon = LatLon(content.location.latitude, content.location.longitude)
+					}
 				}
 			}
 		} else if (type is TdApi.ChatTypeBasicGroup) {

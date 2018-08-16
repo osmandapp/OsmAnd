@@ -491,7 +491,7 @@ class TelegramHelper private constructor() {
 			} else if (oldContent is TdApi.MessageLocation && (fromBot || viaBot)) {
 				message.content = parseOsmAndBotLocation(message)
 			}
-			removeOldMessages(message.senderUserId, message.chatId)
+			removeOldMessages(message, fromBot, viaBot)
 			usersLocationMessages[message.id] = message
 			incomingMessagesListeners.forEach {
 				it.onReceiveChatLocationMessages(message.chatId, message)
@@ -499,13 +499,25 @@ class TelegramHelper private constructor() {
 		}
 	}
 
-	private fun removeOldMessages(userId: Int, chatId: Long) {
-		val user = users[userId]
-		if (user != null && user.username != OSMAND_BOT_USERNAME) {
-			usersLocationMessages.values.filter { it.senderUserId == userId && it.chatId == chatId }
-				.forEach {
-					usersLocationMessages.remove(it.id)
+	private fun removeOldMessages(newMessage: TdApi.Message, fromBot: Boolean, viaBot: Boolean) {
+		val iterator = usersLocationMessages.entries.iterator()
+		while (iterator.hasNext()) {
+			val message = iterator.next().value
+			if (newMessage.chatId == message.chatId) {
+				val sameSender = newMessage.senderUserId == message.senderUserId
+				val viaSameBot = newMessage.viaBotUserId == message.viaBotUserId
+				if ((fromBot && sameSender) || (viaBot && viaSameBot)) {
+					val newCont = newMessage.content
+					val cont = message.content
+					if (newCont is MessageOsmAndBotLocation && cont is MessageOsmAndBotLocation) {
+						if (newCont.name == cont.name) {
+							iterator.remove()
+						}
+					}
+				} else if (sameSender) {
+					iterator.remove()
 				}
+			}
 		}
 	}
 
