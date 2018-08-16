@@ -361,10 +361,9 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 			}
 		}
 
-		private fun getListItemLiveTimeDescr(item: ListItem):String {
-			return getString(R.string.last_response) +
-					": ${OsmandFormatter.getFormattedDuration(app, getListItemLiveTime(item))} " +
-					getString(R.string.time_ago)
+		private fun getListItemLiveTimeDescr(item: ListItem): String {
+			val formattedTime = OsmandFormatter.getFormattedDuration(app, getListItemLiveTime(item))
+			return getString(R.string.last_response) + ": $formattedTime " + getString(R.string.time_ago)
 		}
 
 		private fun getListItemLiveTime(item: ListItem): Long = (System.currentTimeMillis() / 1000) - item.lastUpdated

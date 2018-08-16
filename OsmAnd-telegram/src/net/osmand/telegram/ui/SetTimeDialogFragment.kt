@@ -324,8 +324,8 @@ class SetTimeDialogFragment : DialogFragment(), TelegramLocationListener, Telegr
 		override fun getItemCount() = chats.size
 
 		private fun getListItemLiveTimeDescr(lastUpdated: Int): String {
-			return "${OsmandFormatter.getFormattedDuration(app, getListItemLiveTime(lastUpdated))} " +
-					getString(R.string.time_ago)
+			val formattedTime = OsmandFormatter.getFormattedDuration(app, getListItemLiveTime(lastUpdated))
+			return "$formattedTime " + getString(R.string.time_ago)
 		}
 
 		private fun getListItemLiveTime(lastUpdated: Int): Long {
