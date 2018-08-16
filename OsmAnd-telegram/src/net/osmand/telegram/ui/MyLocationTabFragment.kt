@@ -588,10 +588,8 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 
 				holder.stopSharingSecondPart?.apply {
 					visibility = getStopSharingVisibility(expiresIn)
-					text = "(${getString(
-						R.string.in_time,
-						OsmandFormatter.getFormattedDuration(context!!, expiresIn, true)
-					)})"
+					text = "(${getString(R.string.in_time,
+						OsmandFormatter.getFormattedDuration(context!!, expiresIn, true))})"
 				}
 			}
 		}
