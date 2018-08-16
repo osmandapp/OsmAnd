@@ -78,6 +78,12 @@ class SetTimeDialogFragment : DialogFragment(), TelegramLocationListener, Telegr
 		view.findViewById<RecyclerView>(R.id.recycler_view).apply {
 			layoutManager = LinearLayoutManager(context)
 			adapter = this@SetTimeDialogFragment.adapter
+			addOnScrollListener(object : RecyclerView.OnScrollListener() {
+				override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+					super.onScrollStateChanged(recyclerView, newState)
+					locationUiUpdateAllowed = newState == RecyclerView.SCROLL_STATE_IDLE
+				}
+			})
 		}
 
 		view.findViewById<TextView>(R.id.secondary_btn).apply {
