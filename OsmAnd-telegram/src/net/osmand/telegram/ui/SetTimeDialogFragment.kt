@@ -325,13 +325,17 @@ class SetTimeDialogFragment : DialogFragment(), TelegramLocationListener, Telegr
 		override fun getItemCount() = chats.size
 
 		private fun getListItemLiveTimeDescr(lastUpdated: Int): String {
-			val duration = System.currentTimeMillis() / 1000 - lastUpdated
-			var formattedTime = OsmandFormatter.getFormattedDuration(app, duration)
-			if (duration > 48 * 60 * 60) {
-				// TODO make constant
-				formattedTime = Date(lastUpdated * 1000.toLong()).toString();
+			var description = ""
+			if (lastUpdated > 0) {
+				val duration = System.currentTimeMillis() / 1000 - lastUpdated
+				description = if (duration > OsmandFormatter.MIN_DURATION_FOR_DATE_FORMAT) {
+					OsmandFormatter.getFormattedDate(duration)
+				} else {
+					val formattedTime = OsmandFormatter.getFormattedDuration(app, duration)
+					"$formattedTime " + getString(R.string.time_ago)
+				}
 			}
-			return "$formattedTime " + getString(R.string.time_ago)
+			return description
 		}
 
 		inner class ChatViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
