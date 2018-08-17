@@ -29,8 +29,6 @@ import net.osmand.telegram.utils.OsmandFormatter
 import net.osmand.telegram.utils.UiUtils.UpdateLocationViewCache
 import net.osmand.util.MapUtils
 import org.drinkless.td.libcore.telegram.TdApi
-import java.text.SimpleDateFormat
-import java.util.*
 
 private const val CHAT_VIEW_TYPE = 0
 private const val LOCATION_ITEM_VIEW_TYPE = 1
@@ -276,6 +274,8 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 	}
 
 	inner class LiveNowListAdapter : RecyclerView.Adapter<BaseViewHolder>() {
+		
+		private var lastResponseStr = getString(R.string.last_response) + ": "
 
 		private val menuList =
 			listOf(getString(R.string.shared_string_off), getString(R.string.shared_string_all))
@@ -326,7 +326,7 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 				openOnMapView?.setOnClickListener(null)
 			}
 			if (location != null && item.latLon != null) {
-				holder.locationViewContainer?.visibility = View.VISIBLE
+				holder.locationViewContainer?.visibility = if (item.lastUpdated > 0) View.VISIBLE else View.GONE
 				locationViewCache.outdatedLocation = System.currentTimeMillis() / 1000  - item.lastUpdated > settings.staleLocTime
 				app.uiUtils.updateLocationView(
 					holder.directionIcon,
@@ -350,7 +350,7 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 				holder.showOnMapState?.text = menuList[stateTextInd]
 				holder.bottomDivider?.visibility = if (nextIsLocation) View.VISIBLE else View.GONE
 			} else if (item is LocationItem && holder is ContactViewHolder) {
-				holder.description?.text = getListItemLiveTimeDescr(item)
+				holder.description?.text =  OsmandFormatter.getListItemLiveTimeDescr(app, item.lastUpdated, lastResponseStr)
 			}
 		}
 
@@ -359,26 +359,13 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 		private fun getChatItemDescription(item: ChatItem): String {
 			return when {
 				item.chatWithBot -> getString(R.string.shared_string_bot)
-				item.privateChat -> { getListItemLiveTimeDescr(item) }
+				item.privateChat -> { OsmandFormatter.getListItemLiveTimeDescr(app, item.lastUpdated, lastResponseStr) }
 				else -> {
 					val live = getString(R.string.shared_string_live)
 					val all = getString(R.string.shared_string_all)
 					val liveStr = "$live ${item.liveMembersCount}"
 					if (item.membersCount > 0) "$liveStr • $all ${item.membersCount}" else liveStr
 				}
-			}
-		}
-
-		private fun getListItemLiveTimeDescr(item: ListItem): String {
-			val duration = System.currentTimeMillis() / 1000 - item.lastUpdated
-			var formattedTime = OsmandFormatter.getFormattedDuration(app, duration)
-			return if (duration > 48 * 60 * 60) {
-				// TODO make constant
-				val day = SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault())
-				formattedTime = day.format(Date(item.lastUpdated * 1000.toLong()))
-				getString(R.string.last_response) + ": $formattedTime"
-			} else {
-				getString(R.string.last_response) + ": $formattedTime " + getString(R.string.time_ago)
 			}
 		}
 

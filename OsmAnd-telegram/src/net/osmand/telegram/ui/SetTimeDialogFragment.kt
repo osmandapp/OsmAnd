@@ -294,9 +294,9 @@ class SetTimeDialogFragment : DialogFragment(), TelegramLocationListener, Telegr
 				if (message != null && content is TdApi.MessageLocation && (location != null && content.location != null)) {
 					val lastUpdated = telegramHelper.getLastUpdatedTime(message)
 					holder.description?.visibility = View.VISIBLE
-					holder.description?.text = getListItemLiveTimeDescr(lastUpdated)
+					holder.description?.text = OsmandFormatter.getListItemLiveTimeDescr(app, lastUpdated)
 
-					holder.locationViewContainer?.visibility = View.VISIBLE
+					holder.locationViewContainer?.visibility = if (lastUpdated > 0) View.VISIBLE else View.GONE
 					locationViewCache.outdatedLocation = System.currentTimeMillis() / 1000 -
 							lastUpdated > settings.staleLocTime
 
@@ -323,16 +323,6 @@ class SetTimeDialogFragment : DialogFragment(), TelegramLocationListener, Telegr
 		}
 
 		override fun getItemCount() = chats.size
-
-		private fun getListItemLiveTimeDescr(lastUpdated: Int): String {
-			val duration = System.currentTimeMillis() / 1000 - lastUpdated
-			var formattedTime = OsmandFormatter.getFormattedDuration(app, duration)
-			if (duration > 48 * 60 * 60) {
-				// TODO make constant
-				formattedTime = Date(lastUpdated * 1000.toLong()).toString();
-			}
-			return "$formattedTime " + getString(R.string.time_ago)
-		}
 
 		inner class ChatViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
 			val icon: ImageView? = view.findViewById(R.id.icon)

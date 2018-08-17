@@ -22,6 +22,9 @@ object OsmandFormatter {
 	
 	private const val SHORT_TIME_FORMAT = "%02d:%02d"
 	private const val SIMPLE_TIME_OF_DAY_FORMAT = "HH:mm"
+	private const val SIMPLE_DATE_FORMAT = "dd MMM HH:mm:ss"
+
+	private const val MIN_DURATION_FOR_DATE_FORMAT = 48 * 60 * 60
 
 	private val dateFormatSymbols = DateFormatSymbols.getInstance()
 	private val localDaysStr = getLettersStringArray(dateFormatSymbols.shortWeekdays, 2)
@@ -67,6 +70,23 @@ object OsmandFormatter {
 		} else {
 			SimpleDateFormat(SIMPLE_TIME_OF_DAY_FORMAT, Locale.getDefault()).format(calendar.time) +
 					" " + localDaysStr[calendar.get(Calendar.DAY_OF_WEEK)]
+		}
+	}
+
+	fun getFormattedDate(seconds: Long): String =
+		SimpleDateFormat(SIMPLE_DATE_FORMAT, Locale.getDefault()).format(seconds * 1000L)
+
+	fun getListItemLiveTimeDescr(ctx: TelegramApplication, lastUpdated: Int, prefix: String = ""): String {
+		return if (lastUpdated > 0) {
+			val duration = System.currentTimeMillis() / 1000 - lastUpdated
+			if (duration > MIN_DURATION_FOR_DATE_FORMAT) {
+				prefix + getFormattedDate(lastUpdated.toLong())
+			} else {
+				prefix + getFormattedDuration(ctx, duration) + " " +
+						ctx.getString(R.string.time_ago)
+			}
+		} else {
+			""
 		}
 	}
 
