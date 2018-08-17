@@ -151,7 +151,7 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 		} else {
 			AndroidUtils.requestLocationPermission(this)
 		}
-		if (settings.hasAnyChatToShowOnMap() && osmandAidlHelper.isOsmandNotInstalled()) {
+		if (settings.hasAnyChatToShowOnMap() && !isOsmAndInstalled()) {
 			showOsmandMissingDialog()
 		}
 	}
@@ -316,6 +316,8 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 			show()
 		}
 	}
+
+	private fun isOsmAndInstalled() = AndroidUtils.isAppInstalled(this, settings.appToConnectPackage)
 	
 	private fun runOnUi(action: (() -> Unit)) {
 		if (!paused) {
@@ -356,7 +358,7 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 					settings.stopSharingLocationToChats()
 					app.shareLocationHelper.stopSharingLocation()
 				}
-				if (settings.hasAnyChatToShowOnMap() && osmandAidlHelper.isOsmandNotInstalled()) {
+				if (settings.hasAnyChatToShowOnMap() && !isOsmAndInstalled()) {
 					showOsmandMissingDialog()
 				}
 			}

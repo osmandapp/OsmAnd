@@ -158,10 +158,11 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 	}
 
 	private fun execOsmandApi(action: (() -> Unit)) {
+		if (!osmandAidlHelper.isOsmandConnected() && osmandAidlHelper.isOsmandBound()) {
+			osmandAidlHelper.connectOsmand()
+		}
 		if (osmandAidlHelper.isOsmandConnected()) {
 			action.invoke()
-		} else if (osmandAidlHelper.isOsmandBound()) {
-			osmandAidlHelper.connectOsmand()
 		}
 	}
 }

@@ -270,6 +270,11 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 			.start()
 	}
 
+	private fun isOsmAndInstalled(): Boolean {
+		val ctx = context ?: return false
+		return AndroidUtils.isAppInstalled(ctx, settings.appToConnectPackage)
+	}
+
 	inner class LiveNowListAdapter : RecyclerView.Adapter<BaseViewHolder>() {
 
 		private val menuList =
@@ -311,7 +316,7 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 			openOnMapView?.isEnabled = canBeOpenedOnMap
 			if (canBeOpenedOnMap) {
 				openOnMapView?.setOnClickListener {
-					if (osmandAidlHelper.isOsmandNotInstalled()) {
+					if (!isOsmAndInstalled()) {
 						showOsmAndMissingDialog()
 					} else {
 						app.showLocationHelper.showLocationOnMap(item)
@@ -391,7 +396,7 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 
 					settings.showChatOnMap(chatId, allSelected)
 					if (settings.hasAnyChatToShowOnMap()) {
-						if (osmandAidlHelper.isOsmandNotInstalled()) {
+						if (!isOsmAndInstalled()) {
 							if (allSelected) {
 								showOsmAndMissingDialog()
 							}
