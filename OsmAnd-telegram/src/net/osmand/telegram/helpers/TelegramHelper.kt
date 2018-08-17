@@ -291,7 +291,7 @@ class TelegramHelper private constructor() {
 	fun requestAuthorizationState() {
 		client?.send(TdApi.GetAuthorizationState()) { obj ->
 			if (obj is TdApi.AuthorizationState) {
-				onAuthorizationStateUpdated(obj)
+				onAuthorizationStateUpdated(obj, true)
 			}
 		}
 	}
@@ -689,31 +689,35 @@ class TelegramHelper private constructor() {
 		}
 	}
 
-	private fun onAuthorizationStateUpdated(authorizationState: AuthorizationState?) {
+	private fun onAuthorizationStateUpdated(authorizationState: AuthorizationState?, info: Boolean = false) {
 		val prevAuthState = getTelegramAuthorizationState()
 		if (authorizationState != null) {
 			this.authorizationState = authorizationState
 		}
 		when (this.authorizationState?.constructor) {
 			TdApi.AuthorizationStateWaitTdlibParameters.CONSTRUCTOR -> {
-				log.info("Init tdlib parameters")
+				if (!info) {
+					log.info("Init tdlib parameters")
 
-				val parameters = TdApi.TdlibParameters()
-				parameters.databaseDirectory = File(appDir, "tdlib").absolutePath
-				parameters.useMessageDatabase = true
-				parameters.useSecretChats = true
-				parameters.apiId = 293148
-				parameters.apiHash = "d1942abd0f1364efe5020e2bfed2ed15"
-				parameters.systemLanguageCode = "en"
-				parameters.deviceModel = "Android"
-				parameters.systemVersion = "OsmAnd Telegram"
-				parameters.applicationVersion = "1.0"
-				parameters.enableStorageOptimizer = true
+					val parameters = TdApi.TdlibParameters()
+					parameters.databaseDirectory = File(appDir, "tdlib").absolutePath
+					parameters.useMessageDatabase = true
+					parameters.useSecretChats = true
+					parameters.apiId = 293148
+					parameters.apiHash = "d1942abd0f1364efe5020e2bfed2ed15"
+					parameters.systemLanguageCode = "en"
+					parameters.deviceModel = "Android"
+					parameters.systemVersion = "OsmAnd Telegram"
+					parameters.applicationVersion = "1.0"
+					parameters.enableStorageOptimizer = true
 
-				client!!.send(TdApi.SetTdlibParameters(parameters), AuthorizationRequestHandler())
+					client!!.send(TdApi.SetTdlibParameters(parameters), AuthorizationRequestHandler())
+				}
 			}
 			TdApi.AuthorizationStateWaitEncryptionKey.CONSTRUCTOR -> {
-				client!!.send(TdApi.CheckDatabaseEncryptionKey(), AuthorizationRequestHandler())
+				if (!info) {
+					client!!.send(TdApi.CheckDatabaseEncryptionKey(), AuthorizationRequestHandler())
+				}
 			}
 			TdApi.AuthorizationStateWaitPhoneNumber.CONSTRUCTOR -> {
 				log.info("Request phone number")
