@@ -11,8 +11,6 @@ import java.util.*
 
 object OsmandFormatter {
 
-	const val MIN_DURATION_FOR_DATE_FORMAT = 48 * 60 * 60
-
 	val METERS_IN_KILOMETER = 1000f
 	val METERS_IN_ONE_MILE = 1609.344f // 1609.344
 	val METERS_IN_ONE_NAUTICALMILE = 1852f // 1852
@@ -25,6 +23,8 @@ object OsmandFormatter {
 	private const val SHORT_TIME_FORMAT = "%02d:%02d"
 	private const val SIMPLE_TIME_OF_DAY_FORMAT = "HH:mm"
 	private const val SIMPLE_DATE_FORMAT = "dd MMM HH:mm:ss"
+
+	private const val MIN_DURATION_FOR_DATE_FORMAT = 48 * 60 * 60
 
 	private val dateFormatSymbols = DateFormatSymbols.getInstance()
 	private val localDaysStr = getLettersStringArray(dateFormatSymbols.shortWeekdays, 2)
@@ -75,29 +75,19 @@ object OsmandFormatter {
 
 	fun getFormattedDate(seconds: Long): String =
 		SimpleDateFormat(SIMPLE_DATE_FORMAT, Locale.getDefault()).format(seconds * 1000L)
-	
-	fun getListItemLiveTimeDescr(ctx: TelegramApplication, lastUpdated: Int, lastResponse: Boolean = false): String {
-		var description = ""
-		if (lastUpdated > 0) {
+
+	fun getListItemLiveTimeDescr(ctx: TelegramApplication, lastUpdated: Int, prefix: String = ""): String {
+		return if (lastUpdated > 0) {
 			val duration = System.currentTimeMillis() / 1000 - lastUpdated
-			description = if (duration > MIN_DURATION_FOR_DATE_FORMAT) {
-				val formattedTime = getFormattedDate(lastUpdated.toLong())
-				if (lastResponse) {
-					ctx.getString(R.string.last_response) + ": $formattedTime"
-				} else {
-					formattedTime
-				}
+			if (duration > MIN_DURATION_FOR_DATE_FORMAT) {
+				prefix + getFormattedDate(lastUpdated.toLong())
 			} else {
-				val formattedTime = getFormattedDuration(ctx, duration)
-				if (lastResponse) {
-					ctx.getString(R.string.last_response) + ": $formattedTime " +
-							ctx.getString(R.string.time_ago)
-				} else {
-					"$formattedTime " + ctx.getString(R.string.time_ago)
-				}
+				prefix + getFormattedDuration(ctx, duration) + " " +
+						ctx.getString(R.string.time_ago)
 			}
+		} else {
+			""
 		}
-		return description
 	}
 
 	fun calculateRoundedDist(distInMeters: Double, ctx: TelegramApplication): Double {

@@ -269,6 +269,8 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 	}
 
 	inner class LiveNowListAdapter : RecyclerView.Adapter<BaseViewHolder>() {
+		
+		private var lastResponseStr = getString(R.string.last_response) + ": "
 
 		private val menuList =
 			listOf(getString(R.string.shared_string_off), getString(R.string.shared_string_all))
@@ -343,7 +345,7 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 				holder.showOnMapState?.text = menuList[stateTextInd]
 				holder.bottomDivider?.visibility = if (nextIsLocation) View.VISIBLE else View.GONE
 			} else if (item is LocationItem && holder is ContactViewHolder) {
-				holder.description?.text =  OsmandFormatter.getListItemLiveTimeDescr(app, item.lastUpdated, true)
+				holder.description?.text =  OsmandFormatter.getListItemLiveTimeDescr(app, item.lastUpdated, lastResponseStr)
 			}
 		}
 
@@ -352,7 +354,7 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 		private fun getChatItemDescription(item: ChatItem): String {
 			return when {
 				item.chatWithBot -> getString(R.string.shared_string_bot)
-				item.privateChat -> { OsmandFormatter.getListItemLiveTimeDescr(app, item.lastUpdated, true) }
+				item.privateChat -> { OsmandFormatter.getListItemLiveTimeDescr(app, item.lastUpdated, lastResponseStr) }
 				else -> {
 					val live = getString(R.string.shared_string_live)
 					val all = getString(R.string.shared_string_all)
