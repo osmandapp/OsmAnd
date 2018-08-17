@@ -368,7 +368,7 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 				val duration = System.currentTimeMillis() / 1000 - item.lastUpdated
 				var formattedTime = OsmandFormatter.getFormattedDuration(app, duration)
 				if (duration > OsmandFormatter.MIN_DURATION_FOR_DATE_FORMAT) {
-					formattedTime = OsmandFormatter.getFormattedDate(duration)
+					formattedTime = OsmandFormatter.getFormattedDate(item.lastUpdated.toLong())
 					description = getString(R.string.last_response) + ": $formattedTime"
 				} else {
 					description = getString(R.string.last_response) + ": $formattedTime " +

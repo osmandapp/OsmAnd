@@ -24,7 +24,7 @@ object OsmandFormatter {
 	
 	private const val SHORT_TIME_FORMAT = "%02d:%02d"
 	private const val SIMPLE_TIME_OF_DAY_FORMAT = "HH:mm"
-	private const val SIMPLE_DATE_FORMAT = "dd MMM, HH:mm:ss"
+	private const val SIMPLE_DATE_FORMAT = "dd MMM HH:mm:ss"
 
 	private val dateFormatSymbols = DateFormatSymbols.getInstance()
 	private val localDaysStr = getLettersStringArray(dateFormatSymbols.shortWeekdays, 2)
