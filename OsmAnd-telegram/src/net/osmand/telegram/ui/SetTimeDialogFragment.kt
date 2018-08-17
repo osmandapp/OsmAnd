@@ -296,7 +296,7 @@ class SetTimeDialogFragment : DialogFragment(), TelegramLocationListener, Telegr
 					holder.description?.visibility = View.VISIBLE
 					holder.description?.text = getListItemLiveTimeDescr(lastUpdated)
 
-					holder.locationViewContainer?.visibility = View.VISIBLE
+					holder.locationViewContainer?.visibility = if (lastUpdated > 0) View.VISIBLE else View.INVISIBLE
 					locationViewCache.outdatedLocation = System.currentTimeMillis() / 1000 -
 							lastUpdated > settings.staleLocTime
 

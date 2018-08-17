@@ -319,7 +319,7 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 				openOnMapView?.setOnClickListener(null)
 			}
 			if (location != null && item.latLon != null) {
-				holder.locationViewContainer?.visibility = View.VISIBLE
+				holder.locationViewContainer?.visibility = if (item.lastUpdated > 0) View.VISIBLE else View.INVISIBLE
 				locationViewCache.outdatedLocation = System.currentTimeMillis() / 1000  - item.lastUpdated > settings.staleLocTime
 				app.uiUtils.updateLocationView(
 					holder.directionIcon,
