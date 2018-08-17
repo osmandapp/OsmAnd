@@ -343,7 +343,7 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 				holder.showOnMapState?.text = menuList[stateTextInd]
 				holder.bottomDivider?.visibility = if (nextIsLocation) View.VISIBLE else View.GONE
 			} else if (item is LocationItem && holder is ContactViewHolder) {
-				holder.description?.text = getListItemLiveTimeDescr(item)
+				holder.description?.text =  OsmandFormatter.getListItemLiveTimeDescr(app, item.lastUpdated, true)
 			}
 		}
 
@@ -352,7 +352,7 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 		private fun getChatItemDescription(item: ChatItem): String {
 			return when {
 				item.chatWithBot -> getString(R.string.shared_string_bot)
-				item.privateChat -> { getListItemLiveTimeDescr(item) }
+				item.privateChat -> { OsmandFormatter.getListItemLiveTimeDescr(app, item.lastUpdated, true) }
 				else -> {
 					val live = getString(R.string.shared_string_live)
 					val all = getString(R.string.shared_string_all)
@@ -360,22 +360,6 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 					if (item.membersCount > 0) "$liveStr • $all ${item.membersCount}" else liveStr
 				}
 			}
-		}
-
-		private fun getListItemLiveTimeDescr(item: ListItem): String {
-			var description = ""
-			if (item.lastUpdated > 0) {
-				val duration = System.currentTimeMillis() / 1000 - item.lastUpdated
-				description = if (duration > OsmandFormatter.MIN_DURATION_FOR_DATE_FORMAT) {
-					val formattedTime = OsmandFormatter.getFormattedDate(item.lastUpdated.toLong())
-					getString(R.string.last_response) + ": $formattedTime"
-				} else {
-					val formattedTime = OsmandFormatter.getFormattedDuration(app, duration)
-					getString(R.string.last_response) + ": $formattedTime " +
-							getString(R.string.time_ago)
-				}
-			}
-			return description
 		}
 
 		private fun showPopupMenu(holder: ChatViewHolder, chatId: Long) {

@@ -76,6 +76,29 @@ object OsmandFormatter {
 	fun getFormattedDate(seconds: Long): String =
 		SimpleDateFormat(SIMPLE_DATE_FORMAT, Locale.getDefault()).format(seconds * 1000L)
 	
+	fun getListItemLiveTimeDescr(ctx: TelegramApplication, lastUpdated: Int, lastResponse: Boolean = false): String {
+		var description = ""
+		if (lastUpdated > 0) {
+			val duration = System.currentTimeMillis() / 1000 - lastUpdated
+			description = if (duration > MIN_DURATION_FOR_DATE_FORMAT) {
+				val formattedTime = getFormattedDate(lastUpdated.toLong())
+				if (lastResponse) {
+					ctx.getString(R.string.last_response) + ": $formattedTime"
+				} else {
+					formattedTime
+				}
+			} else {
+				val formattedTime = getFormattedDuration(ctx, duration)
+				if (lastResponse) {
+					ctx.getString(R.string.last_response) + ": $formattedTime " +
+							ctx.getString(R.string.time_ago)
+				} else {
+					"$formattedTime " + ctx.getString(R.string.time_ago)
+				}
+			}
+		}
+		return description
+	}
 
 	fun calculateRoundedDist(distInMeters: Double, ctx: TelegramApplication): Double {
 		val mc = ctx.settings.metricsConstants
