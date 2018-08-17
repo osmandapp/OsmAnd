@@ -73,10 +73,9 @@ object OsmandFormatter {
 		}
 	}
 
-	fun getFormattedDate(seconds: Long): String {
-		val day = SimpleDateFormat(SIMPLE_DATE_FORMAT, Locale.getDefault())
-		return day.format(Date(seconds * 1000L))
-	}
+	fun getFormattedDate(seconds: Long): String =
+		SimpleDateFormat(SIMPLE_DATE_FORMAT, Locale.getDefault()).format(seconds * 1000L)
+	
 
 	fun calculateRoundedDist(distInMeters: Double, ctx: TelegramApplication): Double {
 		val mc = ctx.settings.metricsConstants
