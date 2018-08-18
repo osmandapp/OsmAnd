@@ -710,7 +710,7 @@
 	<string name="poi_saddle">Passo de montanha</string>
 	<string name="poi_volcano">Vulcão</string>
 	<string name="poi_crater">Cratera</string>
-	<string name="poi_ridge">Tergo</string>
+	<string name="poi_ridge">Cumeeira</string>
 	<string name="poi_glacier">Geleira</string>
 	<string name="poi_sinkhole">Sumidouro</string>
 	<string name="poi_waterfall">Queda-d\'água</string>
@@ -3883,5 +3883,13 @@
 
 <string name="poi_payment_contactless_yes">Contactless</string>
 	<string name="poi_payment_contactless_no">Não aceita Contactless</string>
+
+<string name="poi_hazard_nuclear">"Risco nuclear "</string>
+	<string name="poi_hazard_erosion">Risco de erosão</string>
+	<string name="poi_hazard_avalanche">Risco de avalanche</string>
+	<string name="poi_hazard_slippery_road">Via escorregadia</string>
+	<string name="poi_hazard_flood">Risco de inundação</string>
+	<string name="poi_hazard_minefield">Campo minado</string>
+
 
 </resources>
