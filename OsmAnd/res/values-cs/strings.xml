@@ -1120,7 +1120,7 @@ Proporcionální paměť %4$s MB (limit Androidu %5$s MB, Dalvik %6$s MB).</stri
     <string name="routing_attr_avoid_toll_name">Vyhnout se placeným silnicím</string>
     <string name="routing_attr_avoid_toll_description">Vyhnout se placeným silnicím.</string>
     <string name="routing_attr_avoid_unpaved_name">Vyhnout se nezpevněným cestám</string>
-    <string name="routing_attr_avoid_unpaved_description">Vyhnout se nezpevněným cestám.</string>
+    <string name="routing_attr_avoid_unpaved_description">Povede trasu mimo nezpevněné a polní cesty.</string>
     <string name="routing_attr_avoid_ferries_name">Vyhnout se trajektům</string>
     <string name="routing_attr_avoid_ferries_description">Vyhnout se trajektům.</string>
     <string name="routing_attr_avoid_motorway_name">Vyhnout se dálnicím</string>
@@ -1971,7 +1971,7 @@ Délka %2$s</string>
 <string name="shared_string_remove">Odstranit</string>
     <string name="rendering_attr_hideIcons_name">Ikony POI</string>
     <string name="shared_string_select">Zvolit</string>
-    <string name="road_blocked">Cesta je blokovaná</string>
+    <string name="road_blocked">Cesta je zablokovaná</string>
     <string name="switch_start_finish">Prohodit počátek a cíl</string>
     <string name="data_is_not_available">Data nedostupná</string>
     <string name="clear_updates_proposition_message">Můžete smazat stažené aktualizace a vrátit se k původní verzi mapy</string>
@@ -2037,13 +2037,13 @@ Délka %2$s</string>
     <string name="map_marker_2nd">Druhá mapová značka</string>
     <string name="shared_string_toolbar">Panel nástrojů</string>
     <string name="shared_string_widgets">Nástroje</string>
-    <string name="add_points_to_map_markers_q">Chcete přidat všechny body do mapových značek?</string>
+    <string name="add_points_to_map_markers_q">Přidat všechny body do mapových značek?</string>
     <string name="shared_string_add_to_map_markers">Přidat do mapových značek</string>
     <string name="select_map_markers">Zvolit mapové značky</string>
     <string name="shared_string_reverse_order">Otočit pořadí</string>
     <string name="show_map_markers_description">Aktivovat funkci mapových značek.</string>
-    <string name="clear_active_markers_q">Chcete odebrat všechny aktivní značky?</string>
-    <string name="clear_markers_history_q">Chcete vymazat historii mapových značek?</string>
+    <string name="clear_active_markers_q">Odebrat všechny aktivní značky?</string>
+    <string name="clear_markers_history_q">Vymazat historii mapových značek?</string>
     <string name="active_markers">Aktivní značky</string>
     <string name="map_markers">Mapové značky</string>
     <string name="map_marker">Mapová značka</string>
@@ -2160,7 +2160,7 @@ Délka %2$s</string>
     <string name="si_mi_meters">Míle/metry</string>
     <string name="lang_hsb">Hornolužická srbština</string>
     <string name="gpx_no_tracks_title">Nemáte zatím žádné GPX soubory</string>
-    <string name="gpx_no_tracks_title_folder">Můžete také přidat trasy do složky</string>
+    <string name="gpx_no_tracks_title_folder">Do složky můžete také přidat GPX soubory</string>
     <string name="gpx_add_track">Přidat další…</string>
     <string name="gpx_appearance">Vzhled</string>
     
@@ -2202,7 +2202,7 @@ Délka %2$s</string>
     <string name="save_filter">Uložit filtr</string>
     <string name="delete_filter">Odstranit filtr</string>
     <string name="new_filter">Nový filtr</string>
-    <string name="new_filter_desc">Zadejte prosím název pro nový filtr, který bude přidán na kartu „Kategorie“.</string>
+    <string name="new_filter_desc">Zadejte prosím název pro nový filtr, který bude přidán na záložku \"Kategorie“.</string>
     <string name="rendering_value_fine_name">Jemné</string>
     <string name="lang_kab">Kabylsky</string>
     <string name="driving_region_australia">Austrálie</string>
@@ -2286,7 +2286,7 @@ Délka %2$s</string>
     <string name="quick_action_poi_list">Seznam POI</string>
     <string name="quick_action_sh_poi_descr">Můžete přidat jednu nebo více kategorií POI pro zobrazení na mapě.</string>
     <string name="quick_action_map_style_action">Přidat styl mapy</string>
-    <string name="quick_action_empty_param_error">Parametry by neměly být prázdné</string>
+    <string name="quick_action_empty_param_error">Vyplňte všechny parametry</string>
     <string name="quick_action_map_styles">Styly mapy</string>
     <string name="quick_action_map_overlay">Změnit překryvnou mapu</string>
     <string name="quick_action_map_overlay_title">Překryvy mapy</string>
@@ -2299,7 +2299,7 @@ Délka %2$s</string>
     <string name="quick_action_map_source_action">Přidat zdroj mapy</string>
     <string name="quick_action_map_source_switch">Zdroj mapy se změnil na \"%s\".</string>
     <string name="quick_action_btn_tutorial_title">Změnit polohu tlačítka</string>
-    <string name="quick_action_btn_tutorial_descr">Dlouze stiskněte a přetáhněte tlačítko pro změnu jeho umístění na obrazovce.</string>
+    <string name="quick_action_btn_tutorial_descr">Podržení a potáhnutí tlačítka změní jeho umístění na obrazovce.</string>
 	<string name="shared_string_action_name">Název akce</string>
 <string name="navigate_point_olc_info_invalid">Neplatný OLC
 </string>
@@ -2328,7 +2328,7 @@ Zobrazená oblast: %1$s x %2$s</string>
     
     
     <string name="routing_attr_height_obstacles_name">Použít údaje o nadmořské výšce</string>
-    <string name="routing_attr_height_obstacles_description">Použít údaje o nadmořské výšce terénu od SRTM, ASTER a EU-DEM.</string>
+    <string name="routing_attr_height_obstacles_description">Zohlednit převýšení terénu (data od SRTM, ASTER a EU-DEM).</string>
 
     <string name="routing_attr_driving_style_name">Styl jízdy</string>
     
@@ -2389,8 +2389,8 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="quick_action_showhide_osmbugs_descr">Klepnutím na toto tlačítko zobrazíte nebo skryjete OpenStreetMap poznámky na mapě.</string>
     <string name="sorted_by_distance">Seřazeno podle vzdálenosti</string>
     <string name="search_favorites">Najít Oblíbené</string>
-    <string name="hillshade_menu_download_descr">Stáhnout mapu stínování kopců tohoto regionu.</string>
-    <string name="hillshade_purchase_header">Nainstalovat modul Vrstevnic pro jejich zobrazení na mapě</string>
+    <string name="hillshade_menu_download_descr">Pro zobrazení vrstevnic a stínování kopců je potřeba stáhnout překryvnou mapu této oblasti.</string>
+    <string name="hillshade_purchase_header">Pro zobrazení vrstevnic a stínování kopců je třeba zakoupit a aktivovat modul \"Vrstevnice\"</string>
     <string name="hide_from_zoom_level">Skrýt od úrovně přiblížení</string>
     <string name="srtm_menu_download_descr">Stáhnout mapu vrstevnic tohoto regionu.</string>
     <string name="shared_string_plugin">Modul</string>
@@ -2415,7 +2415,7 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="no_underlay">Bez podkladové vrstvy</string>
     <string name="subscribe_email_error">Chyba</string>
     <string name="subscribe_email_desc">Přihlaste se k odběru novinek o slevách aplikace a získejte 3 další mapy ke stažení!</string>
-    <string name="depth_contour_descr">Hloubkové vrstevnice a mapové body v moři.</string>
+    <string name="depth_contour_descr">Hloubkové vrstevnice a námořní značky.</string>
     <string name="sea_depth_thanks">Děkujeme Vám za nákup modulu \"Plavební hloubkové vrstevnice\"</string>
     <string name="index_item_depth_contours_osmand_ext">Námořní hloubkové vrstevnice</string>
     <string name="index_item_depth_points_southern_hemisphere">Námořní hloubkové body jižní polokoule</string>
@@ -2528,7 +2528,7 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="do_not_use_animations_descr">Zakáže animace v aplikaci.</string>
     <string name="keep_showing_on_map">Stále zobrazovat na mapě</string>
     <string name="exit_without_saving">Ukončit bez uložení?</string>
-    <string name="map_orientation_change_in_accordance_with_speed">Práh změny orientace mapy</string>
+    <string name="map_orientation_change_in_accordance_with_speed">Práh pro změnu orientace mapy</string>
     <string name="map_orientation_change_in_accordance_with_speed_descr">Zvolte rychlost, při níž se orientace mapy změní z \"Ve směru pohybu\" na \"Podle kompasu\".</string>
     <string name="all_markers_moved_to_history">Všechny mapové značky přesunuty do historie</string>
     <string name="marker_moved_to_history">Mapová značka přesunuta do historie</string>
@@ -2551,7 +2551,7 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="shared_string_sort">Seřadit</string>
     <string name="coordinate_input">Zadání souřadnic</string>
     <string name="is_saved">je uložen</string>
-    <string name="marker_save_as_track_descr">Exportovat vaše značky do souboru, který můžete určit zde:</string>
+    <string name="marker_save_as_track_descr">Vyexportuje Vaše značky do tohoto GPX souboru:</string>
     <string name="marker_save_as_track">Uložit jako soubor GPX</string>
     <string name="move_to_history">Přesunout do historie</string>
     <string name="group_will_be_removed_after_restart">Skupina bude odstraněna po příštím restartu aplikace.</string>
@@ -2567,8 +2567,8 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="use_system_keyboard">Použít systémovou klávesnici</string>
     <string name="fast_coordinates_input_descr">Zvolte formát souřadnicového vstupu. Můžete ho kdykoli změnit klepnutím na \'Možnosti\'.</string>
     <string name="fast_coordinates_input">Rychlé zadávání souřadnic</string>
-    <string name="routing_attr_avoid_ice_roads_fords_name">Vyhnout se ledovým cestám, brodům</string>
-    <string name="routing_attr_avoid_ice_roads_fords_description">Vyhnout se ledovým cestám a brodům.</string>
+    <string name="routing_attr_avoid_ice_roads_fords_name">Vyhnout brodům a ledovým cestám</string>
+    <string name="routing_attr_avoid_ice_roads_fords_description">Povede trasu mimo brody přes vodu a mimo ledové cesty.</string>
     <string name="show_passed">Zobrazit prošlé</string>
     <string name="hide_passed">Skrýt prošlé</string>
     <string name="marker_show_distance_descr">Vyberte, jak ukazovat vzdálenost a směr k mapovým značkám na obrazovce mapy:</string>
@@ -2578,7 +2578,7 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="make_round_trip_descr">Přidat počátečního bod také jako cíl pro vytvoření okruhu.</string>
     <string name="make_round_trip">Vytvořit okružní trasu</string>
     
-    <string name="import_gpx_file_description">může být importováno jako Oblíbené, nebo trasa.</string>
+    <string name="import_gpx_file_description">Může být importováno jako Oblíbené nebo jako GPX soubor.</string>
     <string name="import_as_gpx">Importovat jako soubor GPX</string>
     <string name="import_as_favorites">Importovat jako Oblíbené</string>
     <string name="import_file">Importovat soubor</string>
@@ -2747,7 +2747,7 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="nothing_found_in_radius">Nebylo nic nalezeno:</string>
     <string name="shared_string_result">Výsledek</string>
     <string name="use_two_digits_longitude">Použijte dvojciferné číslo pro délku</string>
-    <string name="shared_string_travel_guides">Cesta</string>
+    <string name="shared_string_travel_guides">Cestovní průvodce</string>
     <string name="waypoints_removed_from_map_markers">Body trasy odstraněny z mapových značek</string>
     <string name="in_app_purchase">Nákup z aplikace</string>
     <string name="in_app_purchase_desc">Jednorázová platba</string>
@@ -2807,7 +2807,7 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="open_in_browser_wiki">Otevřít článek online</string>
     <string name="open_in_browser_wiki_description">Zobrazit článek ve webovém prohlížeči.</string>
     <string name="download_wiki_region_placeholder">tato oblast</string>
-    <string name="wiki_article_search_text">Hledání potřebného wiki článku</string>
+    <string name="wiki_article_search_text">Hledání příslušného wiki článku</string>
     <string name="wiki_article_not_found">Článek nebyl nalezen</string>
     <string name="how_to_open_wiki_title">Jak otevřít články Wikipedie?</string>
 <string name="hide_full_description">Skrýt plný popis</string>
@@ -2823,7 +2823,7 @@ Zobrazená oblast: %1$s x %2$s</string>
 \n • Předplatné OsmAnd Live nyní zahrnuje všechny funkce OsmAnd</string>
     <string name="error_notification_desc">Zašlete prosím kopii obrazovky s touto chybou na email support@osmand.net</string>
     <string name="quick_action_edit_actions">Upravit akce</string>
-    <string name="get_osmand_live">Získejte OsmAnd Live pro odemknutí všech funkcí: Denní aktulizace mapových podkladů s neomezeným počtem stahování, všechny placené zásuvné moduly, propojení s Wikipedia, Wikivoyage a mnoho dalšího.</string>
+    <string name="get_osmand_live">Získejte OsmAnd Live pro odemknutí všech funkcí: Denní aktulizace mapových podkladů s neomezeným počtem stahování, všechny placené moduly, propojení s Wikipedia, Wikivoyage a mnoho dalšího.</string>
     <string name="thank_you_for_feedback">Děkujeme za Vaši zpětnou vazbu</string>
     <string name="poi_cannot_be_found">Na Váš dotaz nebylo nic nalezeno.</string>
     <string name="search_no_results_feedback">Žádný výsledek vyhledávání?
@@ -2863,7 +2863,7 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="download_all">Stáhnout vše</string>
     <string name="purchase_cancelled_dialog_title">Zrušili jste Vaše předplatné OsmAnd Live</string>
     <string name="paid_app">Placená aplikace</string>
-    <string name="paid_plugin">Placený zásuvný modul</string>
+    <string name="paid_plugin">Placený modul</string>
     <string name="travel_card_update_descr">Jsou dostupná nová data Wikivoyage, aktualizujte je na nejnovější verzi.</string>
 	<string name="wikivoyage_travel_guide">Turistický Průvodce Wikivoyage</string>
     <string name="wikivoyage_travel_guide_descr">Průvodce Wikivoyage Vám ukáže nejzajímavější místa planety, přímo v aplikaci OsmAnd a bez nutnosti připojení k internetu.</string>
@@ -2874,4 +2874,7 @@ Zobrazená oblast: %1$s x %2$s</string>
 <string name="nautical_render_descr">Plavební navigační styl. Klíčové vlastnosti: Bóje, majáky, plavební cesty, mořské cesty a značky, přístavy, námořní služby, plavební hloubka.</string>
     <string name="ski_map_render_descr">Zimní režim. Klíčové vlastnosti: Vykresluje sjezdovky, lyžařské vleky a další praktické objekty pro lyžaře a snowboardisty. Nedůležité objekty jsou na mapě méně výrazné.</string>
     <string name="welcome_to_open_beta">Vítejte v otevřené beta verzi</string>
+    <string name="light_rs_render_descr">Jednoduchý a kontrastní styl pro automobilovou navigaci. Příjemný na oči v nočním režimu. Klíčové vlastnosti: Vrstevnice, kontrastní oranžové silnice, druhořadé objekty jsou méně výrazné.</string>
+    <string name="topo_render_descr">Kontrastní styl určený primárně pro pěší turistiku a cyklistiku v přírodě. Dobrá čitelnost při složitém venkovním osvětlením. Klíčové vlastnosti: kontrastní silnice a přírodních objekty, různé typy tras, vrstevnice s rozšířeným nastavením, více detailů při odpovídající úrovni zvětšení než ve výchozím stylu. Umožňuje rozlišit kvalitu povrchu vozovky. Nemá noční režim.</string>
+    <string name="mapnik_render_descr">Starý styl vykreslení jako výchozí \"Mapnik\". Klíčové vlastnosti: barvy jsou podobné \"Mapnik\" stylu.</string>
     </resources>
