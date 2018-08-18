@@ -493,7 +493,7 @@
     <string name="gpxup_public">İctimai</string>
     <string name="gpxup_private">Xüsusi</string>
     <string name="address_search_desc">Ünvan axtar</string>
-    <string name="favourites_search_desc">Favoritləri axtar</string>
+    <string name="favourites_search_desc">Favoritləri axtarmağın bir yolu</string>
     <string name="confirm_interrupt_download">Faylın endirilməsi ləğv edilsin?</string>
     <string name="index_settings_descr">Oflayn xəritə fayllarını cihazınıza endirin və idarə edin.</string>
     <string name="send_files_to_osm">GPX faylları OSM-a göndərilsin?</string>
@@ -697,7 +697,7 @@
     <string name="search_address_street">Küçə</string>
     <string name="context_menu_item_update_map">Xəritəni yenilə</string>
     <string name="context_menu_item_create_poi">POI yarat</string>
-    <string name="add_favorite_dialog_top_text">Favorit ad daxil edin</string>
+    <string name="add_favorite_dialog_top_text">Favorit adı daxil edin</string>
     <string name="add_favorite_dialog_default_favourite_name">Favorit</string>
     <string name="favourites_context_menu_add">Favorit əlavə et</string>
     <string name="favourites_context_menu_edit">Favoritə düzəliş et</string>
@@ -854,7 +854,7 @@
     <string name="replace_favorite_confirmation">%1$s favoritini əvəz etmək istəyirsiniz?</string>
     <string name="rendering_attr_hideOverground_name">Yerüstü obyektlər</string>
     <string name="coords_search">Koordinatlarla axtar</string>
-    <string name="advanced_coords_search">Təkmil koordinat axtarışı</string>
+    <string name="advanced_coords_search">Təkmil koordinatlar axtarışı</string>
     <string name="confirmation_to_delete_history_items">Seçilən elementlər “Tarixçə”dən silinsin?</string>
     <string name="dist_away_from_my_location">%1$s uzaqda axtar</string>
     <string name="shared_string_from">buradan:</string>
@@ -979,7 +979,7 @@
     <string name="routing_attr_relief_smoothness_factor_plains_name">Az dağlıq</string>
     <string name="routing_attr_relief_smoothness_factor_more_plains_name">Düzənlik</string>
     <string name="routing_attr_driving_style_safety_name">Yolları üstün tut</string>
-    <string name="relief_smoothness_factor_descr">Üstün tutulan relyef: Düzənlik və ya dağlıq.</string>
+    <string name="relief_smoothness_factor_descr">Üstün tutulan relyef: düzənlik və ya dağlıq.</string>
     <string name="shared_string_slope">Yamac</string>
     <string name="points_delete_multiple_succesful">Nöqtə(lər) silindi.</string>
     <string name="points_delete_multiple">%1$d nöqtəni silmək üzrəsiniz. Əminsiniz?</string>
@@ -1053,7 +1053,7 @@
     <string name="avoid_toll_roads">Pullu yollardan yayın</string>
     <string name="starting_point_too_far">Başlanğıc nöqtə ən yaxın yoldan çox uzaqdır.</string>
     <string name="roads">Yollar</string>
-    <string name="confirm_download_roadmaps">Standart (tam) xəritənizin olmasına baxmayaraq, yalnız yollar xəritəsini endirmək istədiyinizə əminsiniz?</string>
+    <string name="confirm_download_roadmaps">Standart (tam) xəritəyə sahib olduğunuzdan yalnız yollar xəritəsinə ehtiyac yoxdur. Hər halda endirilsin?</string>
     <string name="north_north_east">şimal-şimal-şərq</string>
     <string name="east_north_east">şərq-şimal-şərq</string>
     <string name="east">şərq</string>
@@ -1371,7 +1371,7 @@
     <string name="shared_string_gpx_tracks">İzlər</string>
     <string name="gpx_no_tracks_title">Hələ hər hansı GPX fayllarınız yoxdur</string>
     <string name="gpx_no_tracks_title_folder">Qovluğa GPX fayllar da əlavə edə bilərsiniz</string>
-    <string name="gpx_add_track">GPX faylı əlavə et</string>
+    <string name="gpx_add_track">Daha çox əlavə et…</string>
     <string name="storage_place_description">OsmAnd-ın məlumat saxlama yeri (xəritələr, GPX faylları və s.): %1$s.</string>
     <string name="shared_string_save_as_gpx">Yeni GPX faylı olaraq saxla</string>
     <string name="shared_string_tracks">İzlər</string>
@@ -1385,11 +1385,11 @@
     <string name="save_current_track">Hazırkı izi saxla</string>
     <string name="save_track_to_gpx">Naviqasiya zamanı izi avtomatik qeyd et</string>
     <string name="save_track_to_gpx_descrp">Naviqasiya zamanı iz GPX formatında izlər qovluğunda avtomatik saxlanacaq.</string>
-    <string name="none_selected_gpx">GPX faylı seçilməyib. Birini seçmək üçün mövcud izə basıb saxlayın.</string>
+    <string name="none_selected_gpx">GPX faylı seçilməyib. Toxunub saxlayaraq birini seçin.</string>
     <string name="gpx_info_subtracks">Alt izlər: %1$s</string>
     <string name="gpx_selection_track">%1$s
 \nİz %2$s</string>
-    <string name="gpx_file_is_empty">GPX iz boşdur</string>
+    <string name="gpx_file_is_empty">Boş GPX faylı</string>
     
     
     
@@ -2104,7 +2104,7 @@
     <string name="gps_wake_up_timer">GPS oyandırma intervalı</string>
     <string name="rendering_value_purple_name">Bənövşəyi</string>
     <string name="rendering_value_translucent_purple_name">Şəffaf bənövşəyi</string>
-    <string name="application_dir_change_warning3">Məlumat faylları yeni yerə kopyalansın?</string>
+    <string name="application_dir_change_warning3">OsmAnd məlumat faylları yeni yerə kopyalansın?</string>
     <string name="specified_directiory_not_writeable">Göstərilən yerdə xəritələr yaradıla bilmədi</string>
     <string name="delay_to_start_navigation_descr">Marşrut planlaşdırma ekranında qalmaq üçün gözləmə müddətini göstərin.</string>
     <string name="osmand_parking_overdue">vaxtı keçmiş</string>
@@ -2162,4 +2162,23 @@
     <string name="coord_input_save_as_track_descr">%1$s nöqtə əlavə etdiniz. Fayl adını yazıb “Saxla” düyməsinə toxunun.</string>
     <string name="error_notification_desc">Bu bildirişin ekran şəklini support@osmand.net ünvanına göndərin</string>
     <string name="get_osmand_live">Bütün xüsusiyyətləri açmaq üçün OsmAnd Live əldə edin: Limitsiz endirmələr ilə günlük xəritəsi yeniləmələri, bütün pullu və pulsuz qoşmalar, Vikipediya, Vikisəyahət və daha çoxu.</string>
+    <string name="thank_you_for_feedback">Əks əlaqə üçün təşəkkürlər</string>
+    <string name="send_search_query_description">Axtarış sorğunuzu göndərəcəyik: <b>\"%1$s\"</b>, eləcə də məkanınızı.<br/><br/> Şəxsi məlumatları toplamırıq, yalnız axtarış alqoritmini yaxşılaşdırmaq üçün axtarış məlumatlarına ehtiyacımız var.<br/></string>
+    <string name="send_search_query">Axtarış sorğusu göndərilsin?</string>
+    <string name="shared_string_world">Dünya</string>
+    <string name="read_wikipedia_offline_description">Vikipediya və Vikisəyahət məqalələrini oflayn oxumaq üçün OsmAnd Live abunəliyi alın.</string>
+    <string name="read_wikipedia_offline">Vikipediya-nı oflayn oxu</string>
+    <string name="show_images">Şəkilləri göstər</string>
+    <string name="purchase_cancelled_dialog_title">OsmAnd Live abunəliyinizi ləğv etdiniz</string>
+    <string name="osmand_team">OsmAnd komandası</string>
+    <string name="monthly_map_updates">Xəritə yeniləmələri: <b>hər ay</b></string>
+    <string name="daily_map_updates">Xəritə yeniləmələri: <b>hər saat</b></string>
+    <string name="in_app_purchase">Proqram daxili alışlar</string>
+    <string name="wikivoyage_offline">Vikisəyahət oflayn</string>
+    <string name="wikipedia_offline">Vikipediya oflayn</string>
+    <string name="online_webpage_warning">Səhifə yalnız onlayn mümkündür. Veb brauzerdə açılsın?</string>
+    <string name="shared_string_wikivoyage">Vikisəyahət</string>
+    <string name="shared_string_topbar">Üst panel</string>
+    <string name="osm_recipient_stat">%1$s düzəliş, cəmi %2$s mBTC</string>
+    <string name="shared_string_gpx_files">GPX faylları</string>
     </resources>
