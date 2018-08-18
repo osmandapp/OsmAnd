@@ -2854,7 +2854,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="shared_string_groups">Groupes</string>
     <string name="last_seven_days">Ces 7 derniers jours</string>
     <string name="this_year">Cette année</string>
-    <string name="make_active">Marquer comme actif</string>
+    <string name="make_active">Activer la marque</string>
     
     <string name="remove_from_map_markers">Supprimer des marques</string>
     <string name="descendingly">Ordre décroissant</string>
