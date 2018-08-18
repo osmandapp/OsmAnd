@@ -54,7 +54,7 @@
     <string name="map_widget_renderer">Kartstil</string>
     <string name="layer_map_appearance">Skjerminnstilling</string>
     <string name="show_lanes">Kjørefelt</string>
-    <string name="avoid_unpaved">Unngå uasfalterte veier</string>
+    <string name="avoid_unpaved">Unngå veier uten fast dekke</string>
     <string name="avoid_ferries">Unngå ferger</string>
     <string name="avoid_in_routing_title">Unngå…</string>
     <string name="avoid_in_routing_descr">Unngå f.eks. bomveier, veier uten fast dekke, ferger.</string>
@@ -803,8 +803,8 @@
     
     <string name="routing_attr_avoid_toll_name">Unngå bomveier</string>
     <string name="routing_attr_avoid_toll_description">Unngå bomveier</string>
-    <string name="routing_attr_avoid_unpaved_name">Unngå uasfalterte veier</string>
-    <string name="routing_attr_avoid_unpaved_description">Unngå uasfalterte veier.</string>
+    <string name="routing_attr_avoid_unpaved_name">Unngå veier uten fast dekke</string>
+    <string name="routing_attr_avoid_unpaved_description">Unngå veier uten fast dekke.</string>
     <string name="routing_attr_avoid_ferries_name">Unngå ferger</string>
     <string name="routing_attr_avoid_ferries_description">Unngå ferger</string>
     <string name="routing_attr_avoid_motorway_name">Unngå motorveier</string>
