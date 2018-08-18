@@ -57,7 +57,7 @@
     <string name="avoid_unpaved">Unngå uasfalterte veier</string>
     <string name="avoid_ferries">Unngå ferger</string>
     <string name="avoid_in_routing_title">Unngå…</string>
-    <string name="avoid_in_routing_descr">Unngå bomveier, uasfalterte, ferger.</string>
+    <string name="avoid_in_routing_descr">Unngå f.eks. bomveier, veier uten fast dekke, ferger.</string>
     <string name="map_widget_fluorescent">Fluorescerende ruter</string>
     <string name="map_widget_show_ruler">Målestokk</string>
 
