@@ -102,7 +102,7 @@
 	<string name="safe_mode">Abgesicherter Modus</string>
 	<string name="native_library_not_running">Die App läuft im abgesicherten Modus (kann in den Einstellungen deaktiviert werden).</string>
 	<string name="background_service_is_enabled_question">OsmAnd-Hintergrunddienst läuft noch. Ebenfalls beenden?</string>
-	<string name="rendering_attr_roadColors_description">Auswahl eines Straßenfarbschemas:</string>
+	<string name="rendering_attr_roadColors_description">Auswahl eines Straßen-Farbschemas:</string>
 	<string name="rendering_attr_roadColors_name">Straßenfarbschema</string>
 	<string name="show_warnings_title">Warnungen anzeigen …</string>
 	<string name="show_warnings_descr">Verkehrswarnungen (Tempolimits, Stoppzeichen, Rüttelschwellen, Tunnel), stationäre Radarkontrollen und Fahrspuranzeige konfigurieren.</string>
@@ -826,7 +826,7 @@
 	<string name="show_view_angle">Blickrichtung einblenden</string>
 	<string name="map_view_3d_descr">3D-Kartenansicht verwenden.</string>
 	<string name="map_view_3d">3D-Kartenansicht</string>
-	<string name="show_poi_over_map_description">Zuletzt gewähltes POIs Overlax auf der Karte anzeigen.</string>
+	<string name="show_poi_over_map_description">Zuletzt gewähltes POIs Overlay auf der Karte anzeigen.</string>
 	<string name="show_poi_over_map">POI Overlay anzeigen</string>
 	<string name="map_tile_source_descr">Online- oder Offline-Quelle für Karte (Kacheln).</string>
 	<string name="map_tile_source">Kartenquelle (Kacheln)</string>
@@ -1270,7 +1270,7 @@ Proportionaler Speicher %4$s MB (Android Limit %5$s MB, Dalvik %6$s MB).</string
 	<string name="routing_attr_avoid_motorway_name">Autobahnen vermeiden</string>
 	<string name="routing_attr_avoid_motorway_description">Autobahnen vermeiden</string>
 	<string name="routing_attr_weight_name">Gewichtsbeschränkung</string>
-	<string name="routing_attr_weight_description">Geben Sie das zulässige Fahrzeuggewicht auf den Routen an.</string>
+	<string name="routing_attr_weight_description">Gewicht des Fahrzeugs für Routenberechnung angeben.</string>
 	<string name="android_19_location_disabled">Seit Android 4.4 (KitKat) können neue Karten-Downloads nicht mehr am Speicherort früherer Android-Versionen gespeichert werden (%s). Alle OsmAnd-Dateien an den neuen Speicherort kopieren? 
 \n Hinweis 1: Die ursprünglichen Dateien bleiben hiervon unberührt, können aber nachfolgend manuell gelöscht werden. 
 \n Hinweis 2: Die Dateien können dann nicht mehr von OsmAnd und OsmAnd+ gemeinsam genutzt werden.</string>
@@ -1793,7 +1793,7 @@ Lon %2$s</string>
     <string name="routing_attr_avoid_stairs_description">Treppen vermeiden</string>
     <string name="routing_attr_avoid_borders_name">Grenzübertritt vermeiden</string>
     <string name="routing_attr_avoid_borders_description">Überquerung von Landesgrenzen vermeiden</string>
-	<string name="routing_attr_height_description">Höhe des Fahrzeugs für Streckenberechnung angeben.</string>
+	<string name="routing_attr_height_description">Höhe des Fahrzeugs für Routenberechnung angeben.</string>
     <string name="download_wikipedia_maps">Wikipedia</string>
     <string name="use_fast_recalculation">Schnelle Routenneuberechnung</string>
 	<string name="use_fast_recalculation_desc">Bei längeren Routen nur den Anfangsteil neu berechnen.</string>
@@ -1908,7 +1908,7 @@ Lon %2$s</string>
 	<string name="are_you_sure">Sicher?</string>
 	<string name="unsaved_changes_will_be_lost">Alle ungesicherten Änderungen gehen verloren. Fortfahren?</string>
 	<string name="roads">Straßen</string>
-    <string name="show_free_version_banner_description">Auch in OsmAnd+ das Banner der kostenlosen Version anzeigen.</string>
+    <string name="show_free_version_banner_description">Auch in OsmAnd+ oder der Unlimited Version das Banner der kostenlosen Version anzeigen.</string>
 <string name="rendering_attr_hideProposed_name">Geplante Objekte</string>
     <string name="shared_string_update">Aktualisieren</string>
 
@@ -3091,5 +3091,5 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="search_no_results_feedback">Keine Suchergebnisse?
 \nGeben Sie uns eine Rückmeldung</string>
     <string name="commiting_way">Einreichen über…</string>
-    <string name="test_voice_desrc">Tippen Sie auf eine Schaltfläche und hören Sie sich die entsprechende Sprachaufforderung an, um fehlende oder fehlerhafte Aufforderungen zu erkennen.</string>
+    <string name="test_voice_desrc">Tippen Sie auf eine Schaltfläche und hören Sie sich die entsprechende Sprachanweisung an, um fehlende oder fehlerhafte Anweisungen zu erkennen.</string>
 </resources>
