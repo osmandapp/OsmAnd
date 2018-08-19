@@ -3836,4 +3836,12 @@
 	<string name="poi_payment_contactless_yes">Ανέπαφα</string>
 	<string name="poi_payment_contactless_no">Μη αποδεκτά ανέπαφα</string>
 
+<string name="poi_hazard_nuclear">Κίνδυνος ραδιενέργειας</string>
+	<string name="poi_hazard_erosion">Κίνδυνος διάβρωσης</string>
+	<string name="poi_hazard_avalanche">Κίνδυνος κατολίσθησης</string>
+	<string name="poi_hazard_slippery_road">Ολισθηρό οδόστρωμα</string>
+	<string name="poi_hazard_flood">Κίνδυνος πλημμύρας</string>
+	<string name="poi_hazard_minefield">Ναρκοπέδιο</string>
+
+
 </resources>
