@@ -910,7 +910,7 @@ Lon %2$s</string>
     <string name="avoid_unpaved">Evitar caminos sin pavimentar</string>
     <string name="avoid_ferries">Evitar ferris</string>
     <string name="avoid_in_routing_title">Evitar…</string>
-    <string name="avoid_in_routing_descr">Evita caminos con peajes, sin pavimentar, transbordadores y otros.</string>
+    <string name="avoid_in_routing_descr">Evita caminos con peajes, sin pavimentar, transbordadores u otros.</string>
     <string name="map_widget_fluorescent">Rutas fluorescentes</string>
     <string name="map_widget_show_ruler">Escala</string>
     <string name="map_widget_view_direction">Dirección de visualización</string>
@@ -1341,7 +1341,10 @@ Lon %2$s</string>
     <string name="osmand_net_previously_installed">Todos los datos sin conexión en la versión vieja de OsmAnd son compatibles con la nueva versión, pero los puntos de Favoritos deben exportarse desde la versión vieja y luego, importarse en la nueva.</string>
     <string name="build_installed">Compilación {0} instalada ({1}).</string>
     <string name="downloading_build">Descargando compilación…</string>
-    <string name="install_selected_build">¿Instalar OsmAnd - {0} de {1} {2} MB ?</string>
+    <string name="install_selected_build">¿Instalar OsmAnd?
+\nVersión: {0}
+\nFecha: {1}
+\nTamaño: {2} MB</string>
     <string name="loading_builds_failed">Fallo al recuperar la lista de compilaciones de OsmAnd</string>
     <string name="loading_builds">Cargando compilaciones de OsmAnd…</string>
     <string name="select_build_to_install">Instalar una compilación de OsmAnd</string>
