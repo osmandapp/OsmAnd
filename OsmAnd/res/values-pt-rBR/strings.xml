@@ -2936,4 +2936,11 @@ Pôr do Sol: %2$s</string>
 \nOsmAnd é um software de código aberto desenvolvido ativamente. Todos podem contribuir para o app, reportando bugs, melhorando as traduções ou programando novas funcionalidades. Além disso, o projeto conta com as contribuições financeiras para financiar o desenvolvimento e testes de novas funcionalidades.</string>
     <string name="point_deleted">Ponto %1$s foi excluído</string>
     <string name="shared_string_world">Mundo</string>
+    <string name="thank_you_for_feedback">Obrigado por comentar</string>
+    <string name="poi_cannot_be_found">Nó ou caminho não pode ser encontrado.</string>
+    <string name="search_no_results_feedback">Nenhum resultado de pesquisa?
+\nMande-nos seu comentário</string>
+    <string name="commiting_way">Enviando caminho…</string>
+    <string name="increase_search_radius_to">Aumentar o raio de pesquisa para %1$s</string>
+    <string name="send_search_query">Enviar consulta de pesquisa?</string>
     </resources>
