@@ -83,7 +83,7 @@
 	<string name="avoid_unpaved">Αποφυγή χωματόδρομων</string>
 	<string name="avoid_ferries">Αποφυγή πορθμείων</string>
 	<string name="avoid_in_routing_title">Αποφυγή…</string>
-	<string name="avoid_in_routing_descr">Αποφυγή διοδίων, χωματόδρομων, πορθμείων.</string>
+	<string name="avoid_in_routing_descr">Αποφυγή π.χ.: διοδίων, χωματόδρομων, πορθμείων.</string>
 	<string name="map_widget_fluorescent">Φωτεινές διαδρομές</string>
 	<string name="map_widget_show_ruler">Χάρακας</string>
 	
@@ -3084,4 +3084,5 @@
     <string name="send_search_query_description">Θα στείλουμε το ερώτημα αναζήτησής σας:<b>\"%1$s\"</b>,καθώς και την τοποθεσία σας.<br/><br/> Δεν συλλέγουμε προσωπικές πληροφορίες, χρειαζόμαστε μόνο δεδομένα αναζήτησης για να βελτιώσουμε τον αλγόριθμο αναζήτησης.<br/></string>
     <string name="send_search_query">Αποστολή ερωτήματος αναζήτησης;</string>
     <string name="shared_string_world">Κόσμος</string>
-    </resources>
+    <string name="test_voice_desrc">Πιέστε ένα κουμπί και ακούστε την αντίστοιχη φωνητική προτροπή για να ταυτοποιήσετε ελλειπείς ή λανθασμένες προτροπές.</string>
+</resources>
