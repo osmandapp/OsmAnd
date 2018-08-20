@@ -56,6 +56,7 @@ public class TransportRoutePlanner {
 				continue;
 			}
 			ctx.visitedRoutesCount++;
+			System.out.println(segment);
 			ctx.visitedSegments.put(segment.getId(), segment);
 			if (segment.getDepth() > ctx.cfg.maxNumberOfChanges) {
 				continue;
@@ -96,11 +97,18 @@ public class TransportRoutePlanner {
 					rrs.walkDist = MapUtils.getDistance(rrs.getLocation(), stop.getLocation());
 					rrs.parentTravelTime = travelTime;
 					rrs.parentTravelDist = travelDist;
-
-					double walkTime = rrs.walkDist / ctx.cfg.walkSpeed + ctx.cfg.changeTime;
+					double walkTime = rrs.walkDist / ctx.cfg.walkSpeed
+							+ (ctx.cfg.getChangeTime());
 					rrs.distFromStart = segment.distFromStart + travelTime + walkTime;
-
-					queue.add(rrs);
+					if(ctx.cfg.useSchedule) {
+						int tm = (sgm.departureTime - ctx.cfg.scheduleTimeOfDay) * 10;
+						if(tm >= rrs.distFromStart) {
+							rrs.distFromStart = tm;
+							queue.add(rrs);
+						}
+					} else {
+						queue.add(rrs);
+					}
 				}
 				TransportRouteSegment f = endSegments.get(segmentId);
 				double distToEnd = MapUtils.getDistance(stop.getLocation(), end);
@@ -148,7 +156,8 @@ public class TransportRoutePlanner {
 			while (p != null) {
 				if (p.parentRoute != null) {
 					TransportRouteResultSegment sg = new TransportRouteResultSegment(p.parentRoute.road, 
-							p.parentRoute.segStart, p.parentStop, p.parentRoute.walkDist);
+							p.parentRoute.segStart, p.parentStop, p.parentRoute.walkDist, 
+							p.departureTime);
 					route.segments.add(0, sg);
 				}
 				p = p.parentRoute;
@@ -211,13 +220,32 @@ public class TransportRoutePlanner {
 		public final int start;
 		public final int end;
 		public final double walkDist ;
+		public final int depTime;
 		
-		
-		public TransportRouteResultSegment(TransportRoute route, int start, int end, double walkDist) {
+		public TransportRouteResultSegment(TransportRoute route, int start, int end, double walkDist, int depTime) {
 			this.route = route;
 			this.start = start;
 			this.end = end;
 			this.walkDist = walkDist;
+			this.depTime = depTime;
+		}
+		
+		public int getArrivalTime() {
+			if(route.getSchedule() != null && depTime != -1) {
+				int tm = depTime;
+				TIntArrayList intervals = route.getSchedule().avgStopIntervals;
+				for(int i = start; i <= end; i++) {
+					if(i == end) {
+						return tm;
+					}
+					if(intervals.size() > i) {
+						tm += intervals.get(i); 
+					} else {
+						break;
+					}
+				}
+			}
+			return -1;
 		}
 		
 		public TransportStop getStart() {
@@ -340,7 +368,7 @@ public class TransportRoutePlanner {
 				return t;
 			}
 			return getTravelDist() / cfg.travelSpeed + cfg.stopTime * getStops() + 
-					cfg.changeTime * getChanges();
+					cfg.getChangeTime() * getChanges();
 		}
 		
 		public double getWalkTime() {
@@ -359,14 +387,31 @@ public class TransportRoutePlanner {
 					getTravelDist(), getTravelTime() / 60.0));
 			for(int i = 0; i < segments.size(); i++) {
 				TransportRouteResultSegment s = segments.get(i);
-				bld.append(String.format(" %d. %s: walk %.1f m to '%s' and travel to '%s' by %s %d stops \n",
-						i + 1, s.route.getRef(), s.walkDist, s.getStart().getName(), s.getEnd().getName(), s.route.getName(),  (s.end - s.start)));
+				String time = "";
+				String arriveTime = "";
+				if(s.depTime != -1) {
+					time = String.format("at %s", formatTransporTime(s.depTime));
+				}
+				int aTime = s.getArrivalTime();
+				if(aTime != -1) {
+					arriveTime = String.format("and arrive at %s", formatTransporTime(aTime));
+				}
+				bld.append(String.format(" %d. %s: walk %.1f m to '%s' and travel %s to '%s' by %s %d stops %s\n",
+						i + 1, s.route.getRef(), s.walkDist, s.getStart().getName(), 
+						 time, s.getEnd().getName(),s.route.getName(),  (s.end - s.start), arriveTime));
 			}
 			bld.append(String.format(" F. Walk %.1f m to reach your destination", finishWalkDist));
 			return bld.toString();
 		}
-		
-		
+	}
+	
+	public static String formatTransporTime(int i) {
+		int h = i / 60 / 6;
+		int mh = i - h * 60 * 6;
+		int m = mh / 6;
+		int s = (mh - m * 6) * 10;
+		String tm = String.format("%02d:%02d:%02d ", h, m, s);
+		return tm;
 	}
 	
 	public static class TransportRouteSegment {
@@ -375,6 +420,7 @@ public class TransportRoutePlanner {
 		final TransportRoute road;
 		final int departureTime;
 		private static final int SHIFT = 10; // assume less than 1024 stops
+		private static final int SHIFT_DEPTIME = 14; // assume less than 1024 stops
 		
 		TransportRouteSegment parentRoute = null;
 		int parentStop;
@@ -409,7 +455,8 @@ public class TransportRoutePlanner {
 		
 		
 		public boolean wasVisited(TransportRouteSegment rrs) {
-			if (rrs.road.getId().longValue() == road.getId().longValue()) {
+			if (rrs.road.getId().longValue() == road.getId().longValue() && 
+					rrs.departureTime == departureTime) {
 				return true;
 			}
 			if(parentRoute != null) {
@@ -435,14 +482,24 @@ public class TransportRoutePlanner {
 		
 		
 		public long getId() {
-			long l = road.getId() << SHIFT;
+			long l = road.getId();
+			
+			l = l << SHIFT_DEPTIME;
+			if(departureTime >= (1 << SHIFT_DEPTIME)) {
+				throw new IllegalStateException("too long dep time" + departureTime);
+			}
+			l += (departureTime + 1);
+
+			l = l << SHIFT;
+			if (segStart >= (1 << SHIFT)) {
+				throw new IllegalStateException("too many stops " + road.getId() + " " + segStart);
+			}
+			l += segStart;
+			
 			if(l < 0 ) {
 				throw new IllegalStateException("too long id " + road.getId());
 			}
-			if(segStart >= (1 << SHIFT)) {
-				throw new IllegalStateException("too many stops " + road.getId() + " " + segStart);
-			}
-			return l  + segStart;
+			return l  ;
 		}
 
 		
@@ -455,7 +512,8 @@ public class TransportRoutePlanner {
 		
 		@Override
 		public String toString() {
-			return String.format("Route: %s, stop: %s", road.getName(), road.getForwardStops().get(segStart).getName());
+			return String.format("Route: %s, stop: %s %s", road.getName(), road.getForwardStops().get(segStart).getName(),
+					departureTime == -1 ? "" : formatTransporTime(departureTime) );
 		}
 
 	}
@@ -604,19 +662,7 @@ public class TransportRoutePlanner {
 						}
 						if (stopIndex != -1) {
 							if(cfg.useSchedule) {
-								if(route.getSchedule() != null) {
-									TIntArrayList ti = route.getSchedule().tripIntervals;
-									int cnt = ti.size();
-									int t = 0;
-									for(int i = 0; i < cnt; i++) {
-										t += ti.getQuick(i);
-										if(t >= cfg.scheduleTimeOfDay) {
-											TransportRouteSegment segment = new TransportRouteSegment(route, stopIndex, t);
-											lst.add(segment);
-											break;
-										}
-									}
-								}
+								loadScheduleRouteSegment(lst, route, stopIndex);
 							} else {
 								TransportRouteSegment segment = new TransportRouteSegment(route, stopIndex);
 								lst.add(segment);
@@ -625,6 +671,30 @@ public class TransportRoutePlanner {
 							System.err.println("Routing error: missing stop in route");
 						}
 						
+					}
+				}
+			}
+		}
+
+		private void loadScheduleRouteSegment(List<TransportRouteSegment> lst, TransportRoute route, int stopIndex) {
+			if(route.getSchedule() != null) {
+				TIntArrayList ti = route.getSchedule().tripIntervals;
+				int cnt = ti.size();
+				int t = 0;
+				// improve by using exact data
+				int stopTravelTime = 0;
+				TIntArrayList avgStopIntervals = route.getSchedule().avgStopIntervals;
+				for (int i = 0; i < stopIndex; i++) {
+					if (avgStopIntervals.size() > i) {
+						stopTravelTime += avgStopIntervals.getQuick(i);
+					}
+				}
+				for(int i = 0; i < cnt; i++) {
+					t += ti.getQuick(i);
+					int startTime = t + stopTravelTime;
+					if(startTime >= cfg.scheduleTimeOfDay && startTime <= cfg.scheduleTimeOfDay + cfg.scheduleMaxTime ) {
+						TransportRouteSegment segment = new TransportRouteSegment(route, stopIndex, startTime);
+						lst.add(segment);
 					}
 				}
 			}

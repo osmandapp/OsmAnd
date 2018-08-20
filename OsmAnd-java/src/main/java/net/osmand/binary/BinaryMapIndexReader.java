@@ -494,15 +494,19 @@ public class BinaryMapIndexReader {
 			TIntArrayList pointers = e.getValue();
 			pointers.sort();
 			TIntObjectHashMap<String> stringTable = new TIntObjectHashMap<String>();
+			List<TransportRoute> finishInit = new ArrayList<TransportRoute>();
+			
 			for (int i = 0; i < pointers.size(); i++) {
 				int filePointer = pointers.get(i);
 				TransportRoute transportRoute = transportAdapter.getTransportRoute(filePointer, stringTable, false);
 				result.put(filePointer, transportRoute);
+				finishInit.add(transportRoute);	
 			}
 			transportAdapter.initializeStringTable(ind, stringTable);
-			for (TransportRoute r : result.values(new TransportRoute[result.size()])) {
-				transportAdapter.initializeNames(false, r, stringTable);
+			for(TransportRoute transportRoute : finishInit ) {
+				transportAdapter.initializeNames(false, transportRoute, stringTable);
 			}
+			
 		}
 	}
 
@@ -1734,7 +1738,9 @@ public class BinaryMapIndexReader {
 			searchResults = new ArrayList<T>();
 			cacheCoordinates.clear();
 			cacheTypes.clear();
-			stringTable = null;
+			if(stringTable != null) {
+				stringTable.clear();
+			}
 			land = false;
 			ocean = false;
 			numberOfVisitedObjects = 0;
