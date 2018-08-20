@@ -53,7 +53,7 @@ object TelegramUiHelper {
 		}
 		val type = chat.type
 		if (type is TdApi.ChatTypePrivate || type is TdApi.ChatTypeSecret) {
-			val userId = getUserIdFromChatType(type)
+			val userId = helper.getUserIdFromChatType(type)
 			val chatWithBot = helper.isBot(userId)
 			res.privateChat = true
 			res.chatWithBot = chatWithBot
@@ -80,12 +80,6 @@ object TelegramUiHelper {
 		}
 
 		return res
-	}
-
-	private fun getUserIdFromChatType(type: TdApi.ChatType) = when (type) {
-		is TdApi.ChatTypePrivate -> type.userId
-		is TdApi.ChatTypeSecret -> type.userId
-		else -> 0
 	}
 
 	fun getUserName(user: TdApi.User): String {
