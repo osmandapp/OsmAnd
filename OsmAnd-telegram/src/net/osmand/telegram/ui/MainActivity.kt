@@ -271,6 +271,8 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 	fun logoutTelegram(silent: Boolean = false) {
 		if (telegramHelper.getTelegramAuthorizationState() == TelegramHelper.TelegramAuthorizationState.READY) {
 			if (app.isInternetConnectionAvailable) {
+				app.messagesDbHelper.clearMessages()
+				settings.clear()
 				telegramHelper.logout()
 			} else {
 				Toast.makeText(this, R.string.logout_no_internet_msg, Toast.LENGTH_SHORT).show()

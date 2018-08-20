@@ -162,6 +162,13 @@ class TelegramSettings(private val app: TelegramApplication) {
 
 	fun getShowOnMapChatsCount() = showOnMapChats.size
 
+	fun clear() {
+		stopSharingLocationToChats()
+		val prefs = app.getSharedPreferences(SETTINGS_NAME, Context.MODE_PRIVATE)
+		val edit = prefs.edit()
+		edit.clear().apply()
+	}
+	
 	fun save() {
 		val prefs = app.getSharedPreferences(SETTINGS_NAME, Context.MODE_PRIVATE)
 		val edit = prefs.edit()
