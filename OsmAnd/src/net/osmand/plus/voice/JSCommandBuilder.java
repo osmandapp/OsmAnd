@@ -1,6 +1,7 @@
 package net.osmand.plus.voice;
 
 import net.osmand.PlatformUtil;
+import net.osmand.plus.routing.data.StreetName;
 
 import org.apache.commons.logging.Log;
 import org.json.JSONObject;
@@ -40,8 +41,8 @@ public class JSCommandBuilder extends CommandBuilder {
         this.jsScope = jsScope;
     }
 
-    private Object convertStreetName(Map<String, String> streetName) {
-        return NativeJSON.parse(jsContext, jsScope, new JSONObject(streetName).toString(),
+    private Object convertStreetName(StreetName streetName) {
+        return NativeJSON.parse(jsContext, jsScope, new JSONObject(streetName.toMap()).toString(),
                 new NullCallable());
     }
 
@@ -70,18 +71,19 @@ public class JSCommandBuilder extends CommandBuilder {
     }
 
     public JSCommandBuilder goAhead(){
-        return goAhead(-1, new HashMap<String, String>());
+        return goAhead(-1, new StreetName());
     }
 
-    public JSCommandBuilder goAhead(double dist, Map<String, String> streetName){
+    public JSCommandBuilder goAhead(double dist, StreetName streetName){
         return addCommand(C_GO_AHEAD, dist, convertStreetName(streetName));
     }
 
+    @Override
     public JSCommandBuilder makeUTwp(){
-        return makeUT(new HashMap<String, String>());
+        return makeUT(new StreetName());
     }
 
-    public JSCommandBuilder makeUT(Map<String, String> streetName){
+    public JSCommandBuilder makeUT(StreetName streetName){
         return makeUT(-1, streetName);
     }
     @Override
@@ -101,20 +103,20 @@ public class JSCommandBuilder extends CommandBuilder {
         return addCommand(C_BACK_ON_ROUTE);
     }
 
-    public JSCommandBuilder makeUT(double dist, Map<String,String> streetName){
+    public JSCommandBuilder makeUT(double dist, StreetName streetName){
         return addCommand(C_MAKE_UT, dist, convertStreetName(streetName));
     }
 
-    public JSCommandBuilder prepareMakeUT(double dist, Map<String, String> streetName){
+    public JSCommandBuilder prepareMakeUT(double dist, StreetName streetName){
         return addCommand(C_PREPARE_MAKE_UT, dist, convertStreetName(streetName));
     }
 
 
-    public JSCommandBuilder turn(String param, Map<String, String> streetName) {
+    public JSCommandBuilder turn(String param, StreetName streetName) {
         return turn(param, -1, streetName);
     }
 
-    public JSCommandBuilder turn(String param, double dist, Map<String, String> streetName) {
+    public JSCommandBuilder turn(String param, double dist, StreetName streetName) {
         return addCommand(C_TURN, param, dist, convertStreetName(streetName));
     }
 
@@ -124,19 +126,19 @@ public class JSCommandBuilder extends CommandBuilder {
      * @param dist
      * @return
      */
-    public JSCommandBuilder prepareTurn(String param, double dist, Map<String, String> streetName){
+    public JSCommandBuilder prepareTurn(String param, double dist, StreetName streetName){
         return addCommand(C_PREPARE_TURN, param, dist, convertStreetName(streetName));
     }
 
-    public JSCommandBuilder prepareRoundAbout(double dist, int exit, Map<String, String> streetName){
+    public JSCommandBuilder prepareRoundAbout(double dist, int exit, StreetName streetName){
         return addCommand(C_PREPARE_ROUNDABOUT, dist, exit, convertStreetName(streetName));
     }
 
-    public JSCommandBuilder roundAbout(double dist, double angle, int exit, Map<String, String> streetName){
+    public JSCommandBuilder roundAbout(double dist, double angle, int exit, StreetName streetName){
         return addCommand(C_ROUNDABOUT, dist, angle, exit, convertStreetName(streetName));
     }
 
-    public JSCommandBuilder roundAbout(double angle, int exit, Map<String, String> streetName) {
+    public JSCommandBuilder roundAbout(double angle, int exit, StreetName streetName) {
         return roundAbout(-1, angle, exit, streetName);
     }
     @Override
@@ -180,11 +182,11 @@ public class JSCommandBuilder extends CommandBuilder {
         return addCommand(C_REACHED_POI, name);
     }
 
-    public JSCommandBuilder bearLeft(Map<String,String> streetName){
+    public JSCommandBuilder bearLeft(StreetName streetName){
         return addCommand(C_BEAR_LEFT, convertStreetName(streetName));
     }
 
-    public JSCommandBuilder bearRight(Map<String, String> streetName){
+    public JSCommandBuilder bearRight(StreetName streetName){
         return addCommand(C_BEAR_RIGHT, convertStreetName(streetName));
     }
 
