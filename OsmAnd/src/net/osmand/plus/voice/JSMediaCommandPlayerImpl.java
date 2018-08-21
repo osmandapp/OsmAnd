@@ -1,7 +1,5 @@
 package net.osmand.plus.voice;
 
-import android.media.MediaPlayer;
-import android.system.Os;
 
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
@@ -9,7 +7,6 @@ import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.routing.VoiceRouter;
 
-import org.apache.commons.logging.Log;
 import org.mozilla.javascript.ScriptableObject;
 
 import java.io.BufferedReader;
@@ -18,11 +15,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
-
-import static net.osmand.plus.voice.AbstractPrologCommandPlayer.DELAY_CONST;
 
 public class JSMediaCommandPlayerImpl extends MediaCommandPlayerImpl {
 
@@ -34,7 +27,6 @@ public class JSMediaCommandPlayerImpl extends MediaCommandPlayerImpl {
     public JSMediaCommandPlayerImpl(OsmandApplication ctx, ApplicationMode applicationMode, VoiceRouter vrt, String voiceProvider) throws CommandPlayerException {
         super(ctx, applicationMode, vrt, voiceProvider);
         app = ctx;
-
         org.mozilla.javascript.Context context = org.mozilla.javascript.Context.enter();
         context.setOptimizationLevel(-1);
         jsScope = context.initSafeStandardObjects();
