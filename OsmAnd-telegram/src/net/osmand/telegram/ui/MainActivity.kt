@@ -34,7 +34,7 @@ private const val LIVE_NOW_TAB_POS = 1
 
 class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListener {
 
-	private val log = PlatformUtil.getLog(TelegramHelper::class.java)
+	private val log = PlatformUtil.getLog(MainActivity::class.java)
 
 	private var telegramAuthorizationRequestHandler: TelegramAuthorizationRequestHandler? = null
 	private var paused: Boolean = false
@@ -213,15 +213,20 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 	}
 
 	override fun onTelegramChatChanged(chat: TdApi.Chat) {
+		val user = telegramHelper.getUser(telegramHelper.getUserIdFromChatType(chat.type))
+		if (user != null) {
+			app.uiUtils.checkUserGreyscaleImage(user)
+		}
 		runOnUi {
 			listeners.forEach { it.get()?.onTelegramChatChanged(chat) }
 		}
 	}
 
 	override fun onTelegramUserChanged(user: TdApi.User) {
+		app.uiUtils.checkUserGreyscaleImage(user)
 		val message = telegramHelper.getUserMessage(user)
 		if (message != null) {
-			app.showLocationHelper.addLocationToMap(message)
+			app.showLocationHelper.addOrUpdateLocationOnMap(message)
 		}
 		runOnUi {
 			listeners.forEach { it.get()?.onTelegramUserChanged(user) }

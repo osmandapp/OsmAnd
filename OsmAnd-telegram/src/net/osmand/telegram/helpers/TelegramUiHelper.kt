@@ -53,12 +53,13 @@ object TelegramUiHelper {
 		}
 		val type = chat.type
 		if (type is TdApi.ChatTypePrivate || type is TdApi.ChatTypeSecret) {
-			val userId = getUserIdFromChatType(type)
+			val userId = helper.getUserIdFromChatType(type)
 			val chatWithBot = helper.isBot(userId)
 			res.privateChat = true
 			res.chatWithBot = chatWithBot
 			if (!chatWithBot) {
 				res.userId = userId
+				val user = helper.getUser(userId)
 				val message = messages.firstOrNull { it.viaBotUserId == 0 }
 				if (message != null) {
 					res.lastUpdated = helper.getLastUpdatedTime(message)
@@ -66,6 +67,9 @@ object TelegramUiHelper {
 					if (content is TdApi.MessageLocation) {
 						res.latLon = LatLon(content.location.latitude, content.location.longitude)
 					}
+				}
+				if (user != null) {
+					res.greyScaledPhotoPath = helper.getUserGreyPhotoPath(user)
 				}
 			}
 		} else if (type is TdApi.ChatTypeBasicGroup) {
@@ -80,12 +84,6 @@ object TelegramUiHelper {
 		}
 
 		return res
-	}
-
-	private fun getUserIdFromChatType(type: TdApi.ChatType) = when (type) {
-		is TdApi.ChatTypePrivate -> type.userId
-		is TdApi.ChatTypeSecret -> type.userId
-		else -> 0
 	}
 
 	fun getUserName(user: TdApi.User): String {
@@ -143,6 +141,7 @@ object TelegramUiHelper {
 			name = TelegramUiHelper.getUserName(user)
 			latLon = LatLon(content.location.latitude, content.location.longitude)
 			photoPath = helper.getUserPhotoPath(user)
+			greyScaledPhotoPath = helper.getUserGreyPhotoPath(user)
 			placeholderId = R.drawable.img_user_picture
 			userId = message.senderUserId
 			lastUpdated = helper.getLastUpdatedTime(message)
@@ -158,6 +157,8 @@ object TelegramUiHelper {
 		var latLon: LatLon? = null
 			internal set
 		var photoPath: String? = null
+			internal set
+		var greyScaledPhotoPath: String? = null
 			internal set
 		var placeholderId: Int = 0
 			internal set
