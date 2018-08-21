@@ -988,7 +988,7 @@
 	<string name="poi_wheelchair_yes">Да</string>
 	<string name="poi_wheelchair_no">Не</string>
 	<string name="poi_wheelchair_limited">Ограничен</string>
-	<string name="poi_wholesale"/>
+	<string name="poi_wholesale">Маркет продаја</string>
 
 	<string name="poi_access_private">Приватни посед</string>
 	<string name="poi_access_no">Без приступа</string>
@@ -1770,4 +1770,86 @@
 	<string name="poi_seamark_light_vessel">Светло пловила, наутика</string>
 	<string name="poi_mooring">Усидрење</string>
 	<string name="poi_lock_basin">Водена рампа</string>
+	<string name="poi_notice">Обавештење, наутички</string>
+	<string name="poi_pile">Сидришни анкор</string>
+	<string name="poi_radar_transponder">Радарски транспондер, наутички</string>
+	<string name="poi_radio_station">Радио станица, наутички</string>
+	<string name="poi_signal_station_traffic">Сигнална станица, саобраћај</string>
+	<string name="poi_signal_station_warning">Сигнална станица, упозорење</string>
+	<string name="poi_small_craft_facility">Простор за мања пловила</string>
+	<string name="poi_topmark">Ознака на врху, наутички</string>
+	<string name="poi_seamark_rock">Стена, наутички</string>
+	<string name="poi_seamark_wreck">Олупина, наутички</string>
+
+	<string name="poi_seamark_clearance_height">Пролазна висина</string>
+	<string name="poi_seamark_clearance_height_closed">Пролазна висина (затворена)</string>
+	<string name="poi_seamark_clearance_height_open">Пролазна висина (отворена)</string>
+	<string name="poi_seamark_clearance_width">Пролазна ширина</string>
+
+	<string name="poi_military_airfield">Војни аеродром</string>
+	<string name="poi_military_range">Војно стрелиште</string>
+	<string name="poi_wiki_lang_new">Неварска википедија</string>
+	<string name="poi_wiki_lang_als">Алзашанска википедија</string>
+	<string name="poi_wiki_lang_bpy">Бишнупријска википедија</string>
+	<string name="poi_wiki_lang_fa">Фарсанска википедија</string>
+	<string name="poi_wiki_lang_fy">Фриск википедија</string>
+	<string name="poi_wiki_lang_ml">Малајаламска википедија</string>
+	<string name="poi_wiki_lang_nds">Ниско Саксонска википедија</string>
+	<string name="poi_wiki_lang_pms">Пидмонтеска википедија</string>
+	<string name="poi_wiki_lang_war">Варајска википедија</string>
+	<string name="poi_wiki_lang_min">Минангкабуска википедија</string>
+	<string name="poi_wiki_lang_kk">Казашка википедија</string>
+	<string name="poi_wiki_lang_zhminnan">Јужно Минска википедија</string>
+	<string name="poi_wiki_lang_mg">Малагасијска википедија</string>
+	<string name="poi_wiki_lang_jv">Јаванска википедија</string>
+	<string name="poi_wiki_lang_zhyue">Кантонска википедија</string>
+	<string name="poi_wiki_lang_ast">Астур-Леонезе википедија</string>
+	<string name="poi_wiki_lang_tg">Таџичка википедија</string>
+	<string name="poi_wiki_lang_ba">Башкирска википедија</string>
+	<string name="poi_wiki_lang_sco">Шкотска википедија</string>
+	<string name="poi_wiki_lang_cv">Чувашка википедија</string>
+	<string name="poi_wiki_lang_lmo">Ломбардска википедија</string>
+	<string name="poi_wiki_lang_my">Бруманска википедија</string>
+	<string name="poi_wiki_lang_yo">Јорубска википедија</string>
+	<string name="poi_wiki_lang_gu">Гуџаратска википедија</string>
+	<string name="poi_bollard">Саобраћајни стуб</string>
+	<string name="poi_cycle_barrier">Бициклистичка баријера</string>
+	<string name="poi_motorcycle_barrier">Мотоцикличка баријера</string>
+	<string name="poi_bus_trap">Бус трака</string>
+	<string name="poi_full_height_turnstile">Обртна врата пуне висине</string>
+	<string name="poi_bump_gate">Бамп пролаз</string>
+	<string name="poi_general_barrier">Општа баријера</string>
+	<string name="poi_stile">Ниска ограда</string>
+	<string name="poi_debris">Реконструкцијски шут</string>
+	<string name="poi_jersey_barrier">Улични блокови</string>
+	<string name="poi_horse_stile">Коњски пролаз</string>
+	<string name="poi_kissing_gate">Капија са рампом</string>
+	<string name="poi_sally_port">Капија на утврђењу</string>
+	<string name="poi_swing_gate">Ротациона капија</string>
+	<string name="poi_turnstile">Обртна врата</string>
+	<string name="poi_kent_carriage_gap">Капија за кочије</string>
+	<string name="poi_icn_ref">Међународни бициклистички мрежни чвор</string>
+	<string name="poi_ncn_ref">Национални бициклистички мрежни чвор</string>
+	<string name="poi_rcn_ref">Регионални бициклистички мрежни чвор</string>
+	<string name="poi_lcn_ref">Локални бициклистички мрежни чвор</string>
+	<string name="poi_iwn_ref">Међународни планинарски мрежни чвор</string>
+	<string name="poi_nwn_ref">Национални планинарски мрежни чвор</string>
+	<string name="poi_rwn_ref">Регионални планинарски мрежни чвор</string>
+	<string name="poi_lwn_ref">Локални планинарски мрежни чвор</string>
+
+	<string name="poi_route_hiking_iwn_poi">Међународна планинарска рута</string>
+	<string name="poi_route_hiking_nwn_poi">Национална планинарска рута</string>
+	<string name="poi_route_hiking_rwn_poi">Регионална планинарска рута</string>
+	<string name="poi_route_hiking_lwn_poi">Локална планинарска рута</string>
+	<string name="poi_route_hiking_ref_poi">Референца планинарске руте</string>
+
+	<string name="poi_collection_times">Колекциони периоди</string>
+	<string name="poi_access_permissive">Дозвољен приступ</string>
+	<string name="poi_content_silage">Садржај: силосни</string>
+	<string name="poi_content_slurry">Садржај: балегна земља</string>
+	<string name="poi_content_manure">Садржај: балега</string>
+	<string name="poi_content_fodder">Садржај: сточна храна</string>
+	<string name="poi_content_grain">Садржај: зоб</string>
+
+	<string name="poi_nudism_customary">Уобичајено</string>
 	</resources>
