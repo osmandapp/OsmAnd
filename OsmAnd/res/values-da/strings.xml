@@ -645,8 +645,8 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
 
     <string name="unit_of_length_descr">Ændr enhed for afstand.</string>
     <string name="unit_of_length">Længdeenheder</string>
-    <string name="si_mi_feet">Mil og fod</string>
-    <string name="si_mi_yard">Mil og yards</string>
+    <string name="si_mi_feet">Mil/fod</string>
+    <string name="si_mi_yard">Mil/yards</string>
     <string name="si_km_m">Kilometer og meter</string>
     <string name="yard">yd</string>
     <string name="foot">fod</string>
@@ -1993,10 +1993,10 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="si_mph">Mil i timen</string>
     <string name="si_m_s">Meter i sekundet</string>
     <string name="si_min_km">Minutter pr. kilometer</string>
-    <string name="si_min_m">Minutter pr. engelsk mil</string>
+    <string name="si_min_m">Minutter pr. mil</string>
     <string name="si_nm_h">Sømil i timen (knob)</string>
     <string name="nm_h">kn</string>
-    <string name="min_mile">minutter/engelsk mil</string>
+    <string name="min_mile">minutter/mil</string>
     <string name="min_km">min/km</string>
     <string name="m_s">m/s</string>
 
@@ -2372,7 +2372,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="give_permission">Giv tilladelse</string>
     <string name="allow_access_location">Tillad adgang til placering</string>
     <string name="first_usage_greeting">Få rutevejledning og opdag nye steder uden internetforbindelse</string>
-    <string name="si_mi_meters">Mil og meter</string>
+    <string name="si_mi_meters">Mil/meter</string>
     <string name="get_for">Få for %1$s</string>
     <string name="get_for_month">Få for %1$s måned</string>
     <string name="osm_live_banner_desc">Få ubegrænset hentning - og opdatering af kort mere end en gang om måneden: ugentligt, dagligt eller hver time.</string>
