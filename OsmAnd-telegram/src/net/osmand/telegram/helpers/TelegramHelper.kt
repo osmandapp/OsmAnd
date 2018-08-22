@@ -311,10 +311,10 @@ class TelegramHelper private constructor() {
 	}
 
 	fun getUserGreyPhotoPath(user: TdApi.User): String? {
-		return if (hasLocalGreyUserPhoto(user.id)) {
-			"$appDir/$PROFILE_GREY_PHOTOS_DIR${user.id}$SAVED_GREY_PHOTOS_EXT"
+		return if (hasGrayscaleUserPhoto(user.id)) {
+			"$appDir/$PROFILE_GRAYSCALE_PHOTOS_DIR${user.id}$SAVED_GRAYSCALE_PHOTOS_EXT"
 		} else {
-			getUserPhotoPath(user)
+			null
 		}
 	}
 
@@ -356,8 +356,8 @@ class TelegramHelper private constructor() {
 		updateLiveMessagesExecutor?.awaitTermination(1, TimeUnit.MINUTES)
 	}
 
-	fun hasLocalGreyUserPhoto(userId: Int): Boolean {
-		return File("$appDir/$PROFILE_GREY_PHOTOS_DIR$userId$SAVED_GREY_PHOTOS_EXT").exists()
+	fun hasGrayscaleUserPhoto(userId: Int): Boolean {
+		return File("$appDir/$PROFILE_GRAYSCALE_PHOTOS_DIR$userId$SAVED_GRAYSCALE_PHOTOS_EXT").exists()
 	}
 	
 	private fun hasLocalUserPhoto(user: TdApi.User): Boolean {

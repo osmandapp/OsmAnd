@@ -6,6 +6,7 @@ import android.graphics.drawable.Drawable
 import android.graphics.drawable.LayerDrawable
 import android.hardware.Sensor
 import android.hardware.SensorManager
+import android.os.AsyncTask
 import android.support.annotation.ColorInt
 import android.support.annotation.ColorRes
 import android.support.annotation.DrawableRes
@@ -26,14 +27,12 @@ import java.io.FileOutputStream
 import java.io.IOException
 import java.util.*
 
-const val PROFILE_GREY_PHOTOS_DIR = "profile_grey_photos/"
+const val PROFILE_GRAYSCALE_PHOTOS_DIR = "profile_grayscale_photos/"
 
-const val SAVED_GREY_PHOTOS_EXT = ".png"
+const val SAVED_GRAYSCALE_PHOTOS_EXT = ".jpeg"
 
 class UiUtils(private val app: TelegramApplication) {
 	
-	private val log = PlatformUtil.getLog(UiUtils::class.java)
-
 	private val drawableCache = LinkedHashMap<Long, Drawable>()
 	private val circleBitmapCache = LinkedHashMap<String, Bitmap>()
 
@@ -121,51 +120,17 @@ class UiUtils(private val app: TelegramApplication) {
 		val chat = app.telegramHelper.getChat(chatId)
 		val chatIconPath = chat?.photo?.small?.local?.path
 		if (chat != null && chatIconPath != null) {
-			val userId = app.telegramHelper.getUserIdFromChatType(chat.type)
-			if (userId != 0 && !app.telegramHelper.hasLocalGreyUserPhoto(userId)) {
-				convertToGrayscaleAndSave(
-					chatIconPath,
-					"${app.filesDir.absolutePath}/$PROFILE_GREY_PHOTOS_DIR$userId$SAVED_GREY_PHOTOS_EXT"
-				)
-			}
+			checkUserGreyPhoto(app.telegramHelper.getUserIdFromChatType(chat.type), chatIconPath)
 		}
 	}
-	
-	fun convertToGrayscaleAndSave(coloredImagePath: String, newFilePath: String) {
-		val currentImage = BitmapFactory.decodeFile(coloredImagePath)
-		val greyedImage = toGrayscale(currentImage)
-		saveBitmap(greyedImage, newFilePath)
-	}
 
-	private fun toGrayscale(bmpOriginal: Bitmap): Bitmap {
-		val bmpGrayscale = Bitmap.createBitmap(bmpOriginal.width, bmpOriginal.height, Bitmap.Config.ARGB_8888)
-		val c = Canvas(bmpGrayscale)
-		val paint = Paint()
-		val cm = ColorMatrix()
-		cm.setSaturation(0f)
-		val f = ColorMatrixColorFilter(cm)
-		paint.colorFilter = f
-		c.drawBitmap(bmpOriginal, 0f, 0f, paint)
-		return bmpGrayscale
-	}
-
-	private fun saveBitmap(bitmap: Bitmap, newFilePath: String) {
-		var fout: FileOutputStream? = null
-		try {
-			val file = File(newFilePath)
-			if (file.parentFile != null) {
-				file.parentFile.mkdirs()
-			}
-			fout = FileOutputStream(file)
-			bitmap.compress(Bitmap.CompressFormat.PNG, 100, fout)
-		} catch (e: Exception) {
-			log.error(e)
-		} finally {
-			try {
-				fout?.close()
-			} catch (e: IOException) {
-				log.error(e)
-			}
+	fun checkUserGreyPhoto(userId: Int, userOriginalPhotoPath: String?) {
+		if (userId != 0 && !app.telegramHelper.hasGrayscaleUserPhoto(userId)) {
+			ConvertPhotoToGrayscale().executeOnExecutor(
+				AsyncTask.THREAD_POOL_EXECUTOR,
+				userOriginalPhotoPath,
+				"${app.filesDir.absolutePath}/$PROFILE_GRAYSCALE_PHOTOS_DIR$userId$SAVED_GRAYSCALE_PHOTOS_EXT"
+			)
 		}
 	}
 	
@@ -269,5 +234,58 @@ class UiUtils(private val app: TelegramApplication) {
 	class UpdateLocationViewCache {
 		var screenOrientation: Int = 0
 		var outdatedLocation: Boolean = false
+	}
+
+	private class ConvertPhotoToGrayscale : AsyncTask<String, String, Void?>() {
+
+		private val log = PlatformUtil.getLog(ConvertPhotoToGrayscale::class.java)
+
+		override fun doInBackground(vararg params: String?): Void? {
+			val userOriginalPhotoPath = params[0]
+			val userGrayScalePhotoPath = params[1]
+			if (userOriginalPhotoPath != null && userGrayScalePhotoPath != null) {
+				convertToGrayscaleAndSave(userOriginalPhotoPath, userGrayScalePhotoPath)
+			}
+			return null
+		}
+
+		fun convertToGrayscaleAndSave(coloredImagePath: String, newFilePath: String) {
+			val currentImage = BitmapFactory.decodeFile(coloredImagePath)
+			val greyedImage = toGrayscale(currentImage)
+			saveBitmap(greyedImage, newFilePath)
+		}
+
+		private fun toGrayscale(bmpOriginal: Bitmap): Bitmap {
+			val bmpGrayscale =
+				Bitmap.createBitmap(bmpOriginal.width, bmpOriginal.height, Bitmap.Config.ARGB_8888)
+			val c = Canvas(bmpGrayscale)
+			val paint = Paint()
+			val cm = ColorMatrix()
+			cm.setSaturation(0f)
+			val f = ColorMatrixColorFilter(cm)
+			paint.colorFilter = f
+			c.drawBitmap(bmpOriginal, 0f, 0f, paint)
+			return bmpGrayscale
+		}
+
+		private fun saveBitmap(bitmap: Bitmap, newFilePath: String) {
+			var fout: FileOutputStream? = null
+			try {
+				val file = File(newFilePath)
+				if (file.parentFile != null) {
+					file.parentFile.mkdirs()
+				}
+				fout = FileOutputStream(file)
+				bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fout)
+			} catch (e: Exception) {
+				log.error(e)
+			} finally {
+				try {
+					fout?.close()
+				} catch (e: IOException) {
+					log.error(e)
+				}
+			}
+		}
 	}
 }

@@ -144,7 +144,6 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 	override fun onSendLiveLocationError(code: Int, message: String) {}
 
 	override fun onReceiveChatLocationMessages(chatId: Long, vararg messages: TdApi.Message) {
-		app.uiUtils.checkUserPhotoFromChat(chatId)
 		app.runInUIThread { updateList() }
 	}
 
@@ -313,8 +312,12 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 			val openOnMapView = holder.getOpenOnMapClickView()
 
 			val staleLocation = System.currentTimeMillis() / 1000 - item.lastUpdated > settings.staleLocTime
-			TelegramUiHelper.setupPhoto(app, holder.icon, if (staleLocation) item.greyScaledPhotoPath else item.photoPath, 
-				item.placeholderId, false)
+			if (staleLocation) {
+				TelegramUiHelper.setupPhoto(app, holder.icon, item.greyScaledPhotoPath, item.placeholderId, false)
+			} else {
+				TelegramUiHelper.setupPhoto(app, holder.icon, item.photoPath, R.drawable.img_user_picture_active, false)
+			}
+
 			holder.title?.text = item.getVisibleName()
 			openOnMapView?.isEnabled = canBeOpenedOnMap
 			if (canBeOpenedOnMap) {
@@ -322,7 +325,7 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 					if (!isOsmAndInstalled()) {
 						showOsmAndMissingDialog()
 					} else {
-						app.showLocationHelper.showLocationOnMap(item)
+						app.showLocationHelper.showLocationOnMap(item, staleLocation)
 					}
 				}
 			} else {

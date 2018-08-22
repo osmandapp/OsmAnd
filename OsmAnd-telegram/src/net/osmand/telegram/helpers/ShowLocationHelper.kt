@@ -11,6 +11,8 @@ import net.osmand.telegram.helpers.TelegramUiHelper.ListItem
 import net.osmand.telegram.utils.AndroidUtils
 import org.drinkless.td.libcore.telegram.TdApi
 import java.io.File
+import android.net.Uri
+import net.osmand.telegram.R
 
 class ShowLocationHelper(private val app: TelegramApplication) {
 
@@ -30,7 +32,7 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 		}
 	}
 
-	fun showLocationOnMap(item: ListItem) {
+	fun showLocationOnMap(item: ListItem, stale: Boolean = false) {
 		if (item.latLon == null) {
 			return
 		}
@@ -44,7 +46,7 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 				Color.WHITE,
 				ALatLon(item.latLon!!.latitude, item.latLon!!.longitude),
 				null,
-				generatePhotoParams(item.photoPath)
+				generatePhotoParams(if (stale) item.greyScaledPhotoPath else item.photoPath, stale)
 			)
 		}
 	}
@@ -53,11 +55,11 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 		execOsmandApi {
 			val messages = telegramHelper.getMessages()
 			for (message in messages) {
-				val date = telegramHelper.getLastUpdatedTime(message) * 1000L
-				val messageShowingTime = System.currentTimeMillis() - date
-				if (messageShowingTime > app.settings.locHistoryTime * 1000L) {
+				val date = telegramHelper.getLastUpdatedTime(message)
+				val messageShowingTime = System.currentTimeMillis() / 1000 - date
+				if (messageShowingTime > app.settings.locHistoryTime) {
 					removeMapPoint(message.chatId, message)
-				} else {
+				} else if (app.settings.isShowingChatOnMap(message.chatId)) {
 					addOrUpdateLocationOnMap(message, true)
 				}
 			}
@@ -72,6 +74,8 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 			if (chatTitle != null && content is TdApi.MessageLocation) {
 				var userName = ""
 				var photoPath: String? = null
+				val date = telegramHelper.getLastUpdatedTime(message) * 1000L
+				val stale = System.currentTimeMillis() - date > app.settings.staleLocTime * 1000L
 				val user = telegramHelper.getUser(message.senderUserId)
 				if (user != null) {
 					userName = "${user.firstName} ${user.lastName}".trim()
@@ -81,9 +85,7 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 					if (userName.isEmpty()) {
 						userName = user.phoneNumber
 					}
-					val date = telegramHelper.getLastUpdatedTime(message) * 1000L
-					val expired = System.currentTimeMillis() - date > app.settings.staleLocTime * 1000L
-					photoPath = if (expired) {
+					photoPath = if (stale) {
 						telegramHelper.getUserGreyPhotoPath(user)
 					} else {
 						telegramHelper.getUserPhotoPath(user)
@@ -93,7 +95,7 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 					userName = message.senderUserId.toString()
 				}
 				setupMapLayer()
-				val params = generatePhotoParams(photoPath)
+				val params = generatePhotoParams(photoPath, stale)
 				if (update) {
 					osmandAidlHelper.updateMapPoint(MAP_LAYER_ID, "${chatId}_${message.senderUserId}", userName, userName,
 						chatTitle, Color.WHITE, ALatLon(content.location.latitude, content.location.longitude), null, params)
@@ -153,11 +155,20 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 		}
 	}
 
-	private fun generatePhotoParams(photoPath: String?): Map<String, String>? {
-		if (TextUtils.isEmpty(photoPath)) {
-			return null
+	private fun generatePhotoParams(photoPath: String?, stale: Boolean = false): Map<String, String>? {
+		val photoUri = if (TextUtils.isEmpty(photoPath)) {
+			if (stale) {
+				AndroidUtils.resourceToUri(app, R.drawable.img_user_picture)
+			} else {
+				AndroidUtils.resourceToUri(app, R.drawable.img_user_picture_active)
+			}
+		} else {
+			AndroidUtils.getUriForFile(app, File(photoPath))
 		}
-		val photoUri = AndroidUtils.getUriForFile(app, File(photoPath))
+		return generatePhotoParamsFromUri(photoUri)
+	}
+	
+	private fun generatePhotoParamsFromUri(photoUri: Uri): Map<String, String>? {
 		app.grantUriPermission(
 			app.settings.appToConnectPackage,
 			photoUri,

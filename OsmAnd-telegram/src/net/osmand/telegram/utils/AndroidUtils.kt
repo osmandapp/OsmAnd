@@ -2,6 +2,7 @@ package net.osmand.telegram.utils
 
 import android.Manifest
 import android.app.Activity
+import android.content.ContentResolver
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -111,6 +112,14 @@ object AndroidUtils {
 		} else {
 			FileProvider.getUriForFile(context,  "net.osmand.telegram.fileprovider", file)
 		}
+	}
+
+	fun resourceToUri(ctx: Context, resID: Int): Uri {
+		return Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE +
+					"://${ctx.resources.getResourcePackageName(resID)}" +
+					"/${ctx.resources.getResourceTypeName(resID)}" +
+					"/${ctx.resources.getResourceEntryName(resID)}"
+		)
 	}
 
 	fun isAppInstalled(ctx: Context, appPackage: String): Boolean {
