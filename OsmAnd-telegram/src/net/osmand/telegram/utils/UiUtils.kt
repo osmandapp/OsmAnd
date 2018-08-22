@@ -32,7 +32,6 @@ const val PROFILE_GRAYSCALE_PHOTOS_DIR = "profile_grayscale_photos/"
 const val SAVED_GRAYSCALE_PHOTOS_EXT = ".jpeg"
 
 class UiUtils(private val app: TelegramApplication) {
-	
 	private val drawableCache = LinkedHashMap<Long, Drawable>()
 	private val circleBitmapCache = LinkedHashMap<String, Bitmap>()
 

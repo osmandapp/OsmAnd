@@ -74,8 +74,8 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 			if (chatTitle != null && content is TdApi.MessageLocation) {
 				var userName = ""
 				var photoPath: String? = null
-				val date = telegramHelper.getLastUpdatedTime(message) * 1000L
-				val stale = System.currentTimeMillis() - date > app.settings.staleLocTime * 1000L
+				val date = telegramHelper.getLastUpdatedTime(message)
+				val stale = System.currentTimeMillis() / 1000 - date > app.settings.staleLocTime
 				val user = telegramHelper.getUser(message.senderUserId)
 				if (user != null) {
 					userName = "${user.firstName} ${user.lastName}".trim()

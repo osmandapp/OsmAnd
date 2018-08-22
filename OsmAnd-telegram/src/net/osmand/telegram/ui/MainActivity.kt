@@ -34,7 +34,7 @@ private const val LIVE_NOW_TAB_POS = 1
 
 class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListener, TelegramIncomingMessagesListener {
 
-	private val log = PlatformUtil.getLog(MainActivity::class.java)
+	private val log = PlatformUtil.getLog(TelegramHelper::class.java)
 
 	private var telegramAuthorizationRequestHandler: TelegramAuthorizationRequestHandler? = null
 	private var paused: Boolean = false
