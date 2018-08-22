@@ -21,13 +21,14 @@ import net.osmand.data.LatLon
 import net.osmand.telegram.R
 import net.osmand.telegram.TelegramApplication
 import net.osmand.telegram.ui.views.DirectionDrawable
-import org.drinkless.td.libcore.telegram.TdApi
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
 import java.util.*
 
 const val PROFILE_GREY_PHOTOS_DIR = "profile_grey_photos/"
+
+const val SAVED_GREY_PHOTOS_EXT = ".png"
 
 class UiUtils(private val app: TelegramApplication) {
 	
@@ -116,11 +117,17 @@ class UiUtils(private val app: TelegramApplication) {
 		return getDrawable(id, if (light) R.color.icon_light else 0)
 	}
 
-	fun checkUserGreyscaleImage(user: TdApi.User) {
-		val path = user.profilePhoto?.small?.local?.path
-		if (path != null && app.telegramHelper.getUserGreyPhotoPath(user) == null) {
-			app.uiUtils.convertToGrayscaleAndSave(path,
-				"${app.filesDir.absolutePath}/$PROFILE_GREY_PHOTOS_DIR${user.id}.png")
+	fun checkUserPhotoFromChat(chatId: Long) {
+		val chat = app.telegramHelper.getChat(chatId)
+		val chatIconPath = chat?.photo?.small?.local?.path
+		if (chat != null && chatIconPath != null) {
+			val userId = app.telegramHelper.getUserIdFromChatType(chat.type)
+			if (userId != 0 && !app.telegramHelper.hasLocalGreyUserPhoto(userId)) {
+				convertToGrayscaleAndSave(
+					chatIconPath,
+					"${app.filesDir.absolutePath}/$PROFILE_GREY_PHOTOS_DIR$userId$SAVED_GREY_PHOTOS_EXT"
+				)
+			}
 		}
 	}
 	

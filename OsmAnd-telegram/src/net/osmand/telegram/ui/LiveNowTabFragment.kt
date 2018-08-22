@@ -144,6 +144,7 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 	override fun onSendLiveLocationError(code: Int, message: String) {}
 
 	override fun onReceiveChatLocationMessages(chatId: Long, vararg messages: TdApi.Message) {
+		app.uiUtils.checkUserPhotoFromChat(chatId)
 		app.runInUIThread { updateList() }
 	}
 

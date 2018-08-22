@@ -3,7 +3,7 @@ package net.osmand.telegram.helpers
 import android.text.TextUtils
 import net.osmand.PlatformUtil
 import net.osmand.telegram.helpers.TelegramHelper.TelegramAuthenticationParameterType.*
-import net.osmand.telegram.utils.PROFILE_GREY_PHOTOS_DIR
+import net.osmand.telegram.utils.*
 import org.drinkless.td.libcore.telegram.Client
 import org.drinkless.td.libcore.telegram.Client.ResultHandler
 import org.drinkless.td.libcore.telegram.TdApi
@@ -311,13 +311,10 @@ class TelegramHelper private constructor() {
 	}
 
 	fun getUserGreyPhotoPath(user: TdApi.User): String? {
-		return if (hasLocalGreyUserPhoto(user)) {
-			"$appDir/$PROFILE_GREY_PHOTOS_DIR${user.id}.png"
+		return if (hasLocalGreyUserPhoto(user.id)) {
+			"$appDir/$PROFILE_GREY_PHOTOS_DIR${user.id}$SAVED_GREY_PHOTOS_EXT"
 		} else {
-			if (!hasLocalUserPhoto(user) && hasRemoteUserPhoto(user)) {
-				requestUserPhoto(user)
-			}
-			null
+			getUserPhotoPath(user)
 		}
 	}
 
@@ -359,8 +356,8 @@ class TelegramHelper private constructor() {
 		updateLiveMessagesExecutor?.awaitTermination(1, TimeUnit.MINUTES)
 	}
 
-	private fun hasLocalGreyUserPhoto(user: TdApi.User): Boolean {
-		return File("$appDir/$PROFILE_GREY_PHOTOS_DIR${user.id}.png").exists()
+	fun hasLocalGreyUserPhoto(userId: Int): Boolean {
+		return File("$appDir/$PROFILE_GREY_PHOTOS_DIR$userId$SAVED_GREY_PHOTOS_EXT").exists()
 	}
 	
 	private fun hasLocalUserPhoto(user: TdApi.User): Boolean {
@@ -951,7 +948,6 @@ class TelegramHelper private constructor() {
 				TdApi.UpdateUser.CONSTRUCTOR -> {
 					val updateUser = obj as TdApi.UpdateUser
 					users[updateUser.user.id] = updateUser.user
-					listener?.onTelegramUserChanged(updateUser.user)
 				}
 				TdApi.UpdateUserStatus.CONSTRUCTOR -> {
 					val updateUserStatus = obj as TdApi.UpdateUserStatus

@@ -213,17 +213,12 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 	}
 
 	override fun onTelegramChatChanged(chat: TdApi.Chat) {
-		val user = telegramHelper.getUser(telegramHelper.getUserIdFromChatType(chat.type))
-		if (user != null) {
-			app.uiUtils.checkUserGreyscaleImage(user)
-		}
 		runOnUi {
 			listeners.forEach { it.get()?.onTelegramChatChanged(chat) }
 		}
 	}
 
 	override fun onTelegramUserChanged(user: TdApi.User) {
-		app.uiUtils.checkUserGreyscaleImage(user)
 		val message = telegramHelper.getUserMessage(user)
 		if (message != null) {
 			app.showLocationHelper.addOrUpdateLocationOnMap(message)
