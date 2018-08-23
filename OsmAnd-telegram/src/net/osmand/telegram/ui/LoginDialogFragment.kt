@@ -118,9 +118,13 @@ class LoginDialogFragment : DialogFragment() {
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
-		setStyle(DialogFragment.STYLE_NO_FRAME, R.style.AppTheme_NoActionbar_Translucent)
 		val activity = requireActivity()
 		val window = activity.window
+		when {
+			Build.VERSION.SDK_INT >= 23 -> setStyle(DialogFragment.STYLE_NO_FRAME, R.style.AppTheme_NoActionbar_Transparent)
+			Build.VERSION.SDK_INT >= 19 -> setStyle(DialogFragment.STYLE_NO_FRAME, R.style.AppTheme_NoActionbar_Translucent)
+			else -> setStyle(DialogFragment.STYLE_NO_FRAME, R.style.AppTheme_NoActionbar)
+		}
 		window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
 	}
 

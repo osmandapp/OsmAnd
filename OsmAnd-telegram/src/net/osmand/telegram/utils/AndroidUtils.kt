@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.res.Configuration
+import android.graphics.Color
 import android.graphics.Paint
 import android.net.Uri
 import android.os.Build
@@ -16,6 +17,7 @@ import android.support.v4.content.FileProvider
 import android.util.TypedValue
 import android.util.TypedValue.COMPLEX_UNIT_DIP
 import android.view.View
+import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import net.osmand.telegram.R
 import java.io.File
@@ -82,6 +84,22 @@ object AndroidUtils {
 			view.apply {
 				setPadding(paddingLeft, paddingTop + getStatusBarHeight(ctx), paddingRight, paddingBottom)
 			}
+		}
+	}
+
+	fun enterToTransparentFullScreen(activity: Activity) {
+		if (Build.VERSION.SDK_INT >= 23) {
+			val window = activity.window
+			window.statusBarColor = Color.TRANSPARENT
+			window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR or
+					View.SYSTEM_UI_FLAG_LAYOUT_STABLE or
+					View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+		}
+	}
+
+	fun enterToTranslucentFullScreen(activity: Activity) {
+		if (Build.VERSION.SDK_INT >= 19) {
+			activity.window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
 		}
 	}
 

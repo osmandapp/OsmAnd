@@ -1,5 +1,6 @@
 package net.osmand.telegram.ui
 
+import android.os.Build
 import android.os.Bundle
 import android.support.annotation.DrawableRes
 import android.support.annotation.StringRes
@@ -35,6 +36,11 @@ class SettingsDialogFragment : DialogFragment() {
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 		setStyle(android.support.v4.app.DialogFragment.STYLE_NO_FRAME, R.style.AppTheme_NoActionbar)
+		when {
+			Build.VERSION.SDK_INT >= 23 -> setStyle(DialogFragment.STYLE_NO_FRAME, R.style.AppTheme_NoActionbar_Transparent)
+			Build.VERSION.SDK_INT >= 19 -> setStyle(DialogFragment.STYLE_NO_FRAME, R.style.AppTheme_NoActionbar_Translucent)
+			else -> setStyle(DialogFragment.STYLE_NO_FRAME, R.style.AppTheme_NoActionbar)
+		}
 	}
 
 	override fun onCreateView(
@@ -43,6 +49,9 @@ class SettingsDialogFragment : DialogFragment() {
 		savedInstanceState: Bundle?
 	): View {
 		val mainView = inflater.inflate(R.layout.fragement_settings_dialog, parent)
+
+		val appBarLayout = mainView.findViewById<View>(R.id.app_bar_layout)
+		AndroidUtils.addStatusBarPadding19v(context!!, appBarLayout)
 
 		mainView.findViewById<Toolbar>(R.id.toolbar).apply {
 			navigationIcon = uiUtils.getThemedIcon(R.drawable.ic_arrow_back)

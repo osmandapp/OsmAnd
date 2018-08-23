@@ -1,6 +1,7 @@
 package net.osmand.telegram.ui
 
 import android.app.TimePickerDialog
+import android.os.Build
 import android.os.Bundle
 import android.support.v4.app.DialogFragment
 import android.support.v4.app.Fragment
@@ -51,7 +52,11 @@ class SetTimeDialogFragment : DialogFragment(), TelegramLocationListener, Telegr
 	
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
-		setStyle(DialogFragment.STYLE_NO_FRAME, R.style.AppTheme_NoActionbar)
+		when {
+			Build.VERSION.SDK_INT >= 23 -> setStyle(DialogFragment.STYLE_NO_FRAME, R.style.AppTheme_NoActionbar_Transparent)
+			Build.VERSION.SDK_INT >= 19 -> setStyle(DialogFragment.STYLE_NO_FRAME, R.style.AppTheme_NoActionbar_Translucent)
+			else -> setStyle(DialogFragment.STYLE_NO_FRAME, R.style.AppTheme_NoActionbar)
+		}
 	}
 
 	override fun onCreateView(
