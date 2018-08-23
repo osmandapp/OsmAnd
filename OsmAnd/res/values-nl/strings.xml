@@ -3077,4 +3077,7 @@ voor Gebied: %1$s x %2$s</string>
     <string name="send_search_query">"Zoekterm versturen? "</string>
     <string name="shared_string_world">Wereld</string>
     <string name="shared_string_gpx_files">GPX bestanden</string>
+    <string name="commiting_way">"Weg vastleggen.. ik "</string>
+    <string name="coord_input_save_as_track">Als GPX-track opslaan</string>
+    <string name="get_osmand_live">"Neem OsmAnd Live en krijg alle mogelijkheden: Dagelijjse kaartupdates en onbeperkte downloads, alle betaalde en gratis plugins, Wikipedia, Wikivoyage en nog meer. "</string>
     </resources>
