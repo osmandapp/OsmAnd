@@ -27,12 +27,19 @@ public class TransportRoutingConfiguration {
 	public boolean useSchedule;
 	
 	// 10 seconds based
-	public int scheduleTimeOfDay = 60 * 6 * 12; // 12:00 - 60*6*12
+	public int scheduleTimeOfDay = 12 * 60 * 6; // 12:00 - 60*6*12
+	
+	public int scheduleMaxTime = 50 * 6; // TODO not appropriate variable, should be dynamic
+	
+	public int scheduleMinChangeTime = 180; // 3 min
 	
 	// day since 2000
 	public int scheduleDayNumber;
 	
 	
+	public int getChangeTime() {
+		return useSchedule ? scheduleMinChangeTime : changeTime;
+	}
 	
 	public TransportRoutingConfiguration(RoutingConfiguration.Builder builder) {
 		GeneralRouter router = builder == null ? null : builder.getRouter("public_transport");
@@ -47,6 +54,7 @@ public class TransportRoutingConfiguration {
 			walkSpeed =  router.getFloatAttribute("defaultWalkSpeed", (float) walkSpeed);
 			stopTime =  router.getIntAttribute("defaultStopTime", stopTime);
 			changeTime =  router.getIntAttribute("defaultChangeTime", changeTime);
+			scheduleMinChangeTime =  router.getIntAttribute("defaultScheduleChangeTime", changeTime);
 		}
 	}
 	
