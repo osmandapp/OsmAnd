@@ -1876,4 +1876,16 @@
 	<string name="poi_tactile_paving_no">Без површне облоге</string>
 	<string name="poi_services">Услужни простор</string>
 	<string name="poi_railway_level_crossing">Пружни прелаз у нивоу</string>
+	<string name="poi_leisure_common">Заједнички простор одмора</string>
+	<string name="poi_heath">Врес</string>
+	<string name="poi_grassland">Травната земља</string>
+	<string name="poi_scrub">Жбун</string>
+	<string name="poi_farmland">Земља фарме</string>
+	<string name="poi_logging">Сеча дрвета</string>
+	<string name="poi_windfall">Опало воће</string>
+	<string name="poi_passing_place">Пролазно место</string>
+	<string name="poi_rtsa_scale">РТСА скала</string>
+
+	<string name="poi_piste_grooming_backcountry">Рурални део</string>
+	<string name="poi_payment_girocard_yes">Гирокартица</string>
 	</resources>
