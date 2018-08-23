@@ -225,7 +225,7 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 	}
 
 	override fun onTelegramUserChanged(user: TdApi.User) {
-		app.uiUtils.checkUserGreyPhoto(user.id, telegramHelper.getUserPhotoPath(user))
+		app.uiUtils.checkUserGrayPhoto(user.id, telegramHelper.getUserPhotoPath(user))
 		val message = telegramHelper.getUserMessage(user)
 		if (message != null) {
 			app.showLocationHelper.addOrUpdateLocationOnMap(message)

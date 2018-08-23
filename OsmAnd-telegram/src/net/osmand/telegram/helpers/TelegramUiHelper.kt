@@ -69,7 +69,7 @@ object TelegramUiHelper {
 					}
 				}
 				if (user != null) {
-					res.greyScaledPhotoPath = helper.getUserGreyPhotoPath(user)
+					res.grayscalePhotoPath = helper.getUserGreyPhotoPath(user)
 				}
 			}
 		} else if (type is TdApi.ChatTypeBasicGroup) {
@@ -141,7 +141,7 @@ object TelegramUiHelper {
 			name = TelegramUiHelper.getUserName(user)
 			latLon = LatLon(content.location.latitude, content.location.longitude)
 			photoPath = helper.getUserPhotoPath(user)
-			greyScaledPhotoPath = helper.getUserGreyPhotoPath(user)
+			grayscalePhotoPath = helper.getUserGreyPhotoPath(user)
 			placeholderId = R.drawable.img_user_picture
 			userId = message.senderUserId
 			lastUpdated = helper.getLastUpdatedTime(message)
@@ -158,7 +158,7 @@ object TelegramUiHelper {
 			internal set
 		var photoPath: String? = null
 			internal set
-		var greyScaledPhotoPath: String? = null
+		var grayscalePhotoPath: String? = null
 			internal set
 		var placeholderId: Int = 0
 			internal set

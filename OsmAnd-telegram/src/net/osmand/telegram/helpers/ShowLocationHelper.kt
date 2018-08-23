@@ -46,7 +46,7 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 				Color.WHITE,
 				ALatLon(item.latLon!!.latitude, item.latLon!!.longitude),
 				null,
-				generatePhotoParams(if (stale) item.greyScaledPhotoPath else item.photoPath, stale)
+				generatePhotoParams(if (stale) item.grayscalePhotoPath else item.photoPath, stale)
 			)
 		}
 	}

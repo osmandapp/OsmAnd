@@ -119,11 +119,11 @@ class UiUtils(private val app: TelegramApplication) {
 		val chat = app.telegramHelper.getChat(chatId)
 		val chatIconPath = chat?.photo?.small?.local?.path
 		if (chat != null && chatIconPath != null) {
-			checkUserGreyPhoto(app.telegramHelper.getUserIdFromChatType(chat.type), chatIconPath)
+			checkUserGrayPhoto(app.telegramHelper.getUserIdFromChatType(chat.type), chatIconPath)
 		}
 	}
 
-	fun checkUserGreyPhoto(userId: Int, userOriginalPhotoPath: String?) {
+	fun checkUserGrayPhoto(userId: Int, userOriginalPhotoPath: String?) {
 		if (userId != 0 && !app.telegramHelper.hasGrayscaleUserPhoto(userId)) {
 			ConvertPhotoToGrayscale().executeOnExecutor(
 				AsyncTask.THREAD_POOL_EXECUTOR,
@@ -250,13 +250,12 @@ class UiUtils(private val app: TelegramApplication) {
 
 		fun convertToGrayscaleAndSave(coloredImagePath: String, newFilePath: String) {
 			val currentImage = BitmapFactory.decodeFile(coloredImagePath)
-			val greyedImage = toGrayscale(currentImage)
-			saveBitmap(greyedImage, newFilePath)
+			val grayscaleImage = toGrayscale(currentImage)
+			saveBitmap(grayscaleImage, newFilePath)
 		}
 
 		private fun toGrayscale(bmpOriginal: Bitmap): Bitmap {
-			val bmpGrayscale =
-				Bitmap.createBitmap(bmpOriginal.width, bmpOriginal.height, Bitmap.Config.ARGB_8888)
+			val bmpGrayscale = Bitmap.createBitmap(bmpOriginal.width, bmpOriginal.height, Bitmap.Config.ARGB_8888)
 			val c = Canvas(bmpGrayscale)
 			val paint = Paint()
 			val cm = ColorMatrix()
