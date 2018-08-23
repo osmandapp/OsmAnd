@@ -1018,7 +1018,7 @@
 
 	<string name="poi_bicycle_parking_informal">Неформалан</string>
 
-	<string name="poi_leaf_type_broadleaved"/>
+	<string name="poi_leaf_type_broadleaved">Широколисно</string>
 	<string name="poi_trees_olive">Маслина</string>
 	<string name="poi_trees_apple">Јабука</string>
 	<string name="poi_trees_oil">Палмино уље</string>
@@ -1852,4 +1852,28 @@
 	<string name="poi_content_grain">Садржај: зоб</string>
 
 	<string name="poi_nudism_customary">Уобичајено</string>
+	<string name="poi_trade_building_supplies">Грађевинска роба</string>
+	<string name="poi_trade_plumbing">Водоводна роба</string>
+	<string name="poi_trade_wood">Дрвена роба</string>
+	<string name="poi_trade_agricultural_supplies">Пољопривредна роба</string>
+	<string name="poi_trade_tile">Роба плочица</string>
+
+	<string name="poi_bicycle_parking_anchors">Сидриште за бицикле</string>
+	<string name="poi_bicycle_parking_wall_loops">Јунициклно сидриште</string>
+	<string name="poi_bicycle_parking_rack">Оквирно сидриште</string>
+	<string name="poi_bicycle_parking_bollard">Окасто сидриште</string>
+	<string name="poi_leaf_type_needleleaved">Игличасто</string>
+	<string name="poi_leaf_type_leafless">Безлисно</string>
+	<string name="poi_enforcement_mindistance">На снази: међурастојање</string>
+	<string name="poi_enforcement_check">На снази: контрола</string>
+	<string name="poi_enforcement_access">На снази: право приступа</string>
+	<string name="poi_deadlock">Слепа улица</string>
+
+	<string name="poi_water_point">Јавна чесма</string>
+
+	<string name="poi_information_guidepost">Путоказ</string>
+	<string name="poi_toll_hgv_yes">ХГВ путарина</string>
+	<string name="poi_tactile_paving_no">Без површне облоге</string>
+	<string name="poi_services">Услужни простор</string>
+	<string name="poi_railway_level_crossing">Пружни прелаз у нивоу</string>
 	</resources>
