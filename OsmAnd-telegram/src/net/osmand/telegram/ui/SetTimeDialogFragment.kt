@@ -100,7 +100,7 @@ class SetTimeDialogFragment : DialogFragment(), TelegramLocationListener, Telegr
 				if (!AndroidUtils.isLocationPermissionAvailable(view.context)) {
 					AndroidUtils.requestLocationPermission(activity!!)
 				} else {
-					chatLivePeriods.forEach { chatId, livePeriod ->
+					chatLivePeriods.forEach { (chatId, livePeriod) ->
 						settings.shareLocationToChat(chatId, true, livePeriod)
 					}
 					app.shareLocationHelper.startSharingLocation()

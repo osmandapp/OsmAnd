@@ -558,7 +558,7 @@ class TelegramHelper private constructor() {
 	}
 
 	fun stopSendingLiveLocationMessages() {
-		chatLiveMessages.forEach { chatId, _ ->
+		chatLiveMessages.forEach { (chatId, _ )->
 			stopSendingLiveLocationToChat(chatId)
 		}
 	}
@@ -593,7 +593,7 @@ class TelegramHelper private constructor() {
 
 	private fun sendLiveLocationImpl(chatLivePeriods: Map<Long, Long>, latitude: Double, longitude: Double) {
 		val location = TdApi.Location(latitude, longitude)
-		chatLivePeriods.forEach { chatId, livePeriod ->
+		chatLivePeriods.forEach { (chatId, livePeriod) ->
 			val content = TdApi.InputMessageLocation(location, livePeriod.toInt())
 			val msgId = chatLiveMessages[chatId]?.id
 			if (msgId != null) {
