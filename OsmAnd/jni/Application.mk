@@ -11,7 +11,16 @@ APP_PLATFORM := android-14
 # NDK_TOOLCHAIN_VERSION := 4.8
 NDK_TOOLCHAIN_VERSION := clang
 
+if defined ARMV7_ONLY
+APP_ABI := armeabi-v7a
+elif defined ARMV64_ONLY
+APP_ABI := arm64-v8a
+elif defined X86_ONLY
+APP_ABI := x86
+else
 APP_ABI := x86 armeabi-v7a arm64-v8a
+endif
+
 # APP_ABI := armeabi-v7a
 ifndef OSMAND_DEBUG_NATIVE
     # Force release compilation in release optimizations, even if application is debuggable by manifest
