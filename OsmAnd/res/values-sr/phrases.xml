@@ -1888,4 +1888,41 @@
 
 	<string name="poi_piste_grooming_backcountry">Рурални део</string>
 	<string name="poi_payment_girocard_yes">Гирокартица</string>
+	<string name="poi_payment_pikepass_no">PIKEPASS се не прихвата</string>
+	<string name="poi_payment_pikepass_designated">PIKEPASS (намењено)</string>
+	<string name="poi_payment_visa_debit_yes">Виза дебитне картице</string>
+	<string name="poi_payment_visa_debit_no">Виза дебитне картице се не прихватају</string>
+	<string name="poi_payment_cryptocurrencies_no">Криптовалуте се не прихватају</string>
+	<string name="poi_payment_others_yes">Други методи</string>
+	<string name="poi_payment_others_no">Други методи плаћања се не прихватају</string>
+	<string name="poi_payment_routex_yes">Routex да</string>
+	<string name="poi_payment_routex_no">Routex кртице горива се не прихватају</string>
+	<string name="poi_payment_bancomat_yes">Bancomat да</string>
+	<string name="poi_payment_bancomat_no">Bancomat се не прихвата</string>
+	<string name="poi_payment_icsf_yes">IC Stored Fare - да</string>
+	<string name="poi_payment_wire_transfer_yes">Вајер трансфери</string>
+	<string name="poi_payment_wire_transfer_no">Вајер трансфери се не прихватају</string>
+	<string name="poi_events_venue">Места догађаја</string>
+
+	<string name="poi_diet_kosher_no">Кошер исхрана: не</string>
+	<string name="poi_diet_halal_filter_yes">Халал</string>
+	<string name="poi_diet_halal_only">Халал само</string>
+	<string name="poi_diet_halal_yes">Халал</string>
+	<string name="poi_diet_halal_no">Халал исхрана: не</string>
+	<string name="poi_diet_lactose_free_filter_yes">Без лактозе</string>
+	<string name="poi_diet_lactose_free_only">Без лактозе само</string>
+	<string name="poi_diet_lactose_free_yes">Без лактозе</string>
+	<string name="poi_diet_lactose_free_no">Без лактозе исхрана: не</string>
+	<string name="poi_diet_pescetarian_yes">Пескотеријан</string>
+
+	<string name="poi_drive_in_yes">Да</string>
+	<string name="poi_drive_in_no">Улазак колима: не</string>
+	<string name="poi_drive_through_yes">Да</string>
+	<string name="poi_drive_through_no">Пролазак кроз: не</string>
+
+	<string name="poi_brewery_additional">Име пиваре</string>
+	<string name="poi_microbrewery_yes">Микропивара</string>
+	<string name="poi_microbrewery_no">Не микропивара</string>
+
+	<string name="poi_takeaway_filter_yes">Да</string>
 	</resources>
