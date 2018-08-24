@@ -10,8 +10,6 @@ APP_PLATFORM := android-14
 # NDK_TOOLCHAIN_VERSION := 4.9
 # NDK_TOOLCHAIN_VERSION := 4.8
 NDK_TOOLCHAIN_VERSION := clang
-LOCAL_ARM_NEON  := true
-
 APP_ABI := x86 armeabi-v7a arm64-v8a
 ifdef ARMV7_ONLY
     APP_ABI := armeabi-v7a
