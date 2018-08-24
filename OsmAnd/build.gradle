@@ -31,7 +31,6 @@ task printc {
 android {
 	compileSdkVersion 27
 	buildToolsVersion "27.0.3"
-        project.ext.set("osmandAbiFilter", "")
 
 	signingConfigs {
 		development {
@@ -112,21 +111,18 @@ android {
 	productFlavors {
 		// ABI
 		armv7 {
-			osmandAbiFilter = 'armv7'
 			dimension "abi"
 			ndk {
 				abiFilter 'armeabi-v7a'
 			}
 		}
 		arm64 {
-			osmandAbiFilter =  'arm64'
 			dimension "abi"
 			ndk {
 				abiFilter 'arm64-v8a'
 			}
 		}
 		x86 {
-			osmandAbiFilter = 'x86'
 			dimension "abi"
 			ndk {
 				abiFilter 'x86'
@@ -303,10 +299,28 @@ task collectExternalResources {
 import org.apache.tools.ant.taskdefs.condition.Os
 
 task buildOsmAndCore(type: Exec) {
+	Gradle gradle = getGradle()
+	String tskReqStr = gradle.getStartParameter().getTaskRequests().toString().toLowerCase()
+	String flavour = "";
+	if(!tskReqStr.contains("fat")) {
+		if(tskReqStr.contains("arm64")) {
+			flavour = flavour.length() == 0 ? "ARM64_ONLY" : ""
+		}
+		if(tskReqStr.contains("armv7")) {
+			flavour = flavour.length() == 0 ? "ARMV7_ONLY" : ""
+		}
+		if(tskReqStr.contains("x86")) {
+			flavour = flavour.length() == 0 ? "X86_ONLY" : ""
+		}
+	}
+	
 	description "Build Legacy OsmAndCore"
 
 	if (!Os.isFamily(Os.FAMILY_WINDOWS)) {
-		commandLine "bash", file("./old-ndk-build.sh").getAbsolutePath(), project.ext.get('osmandAbiFilter')
+		if(flavour.length()  > 0) {
+			environment "$flavour", "1"
+		}
+		commandLine "bash", file("./old-ndk-build.sh").getAbsolutePath()
 	} else {
 		commandLine "cmd", "/c", "echo", "Not supported"
 	}
