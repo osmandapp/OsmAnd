@@ -112,21 +112,21 @@ android {
 	productFlavors {
 		// ABI
 		armv7 {
-			osmandAbiFilter 'armv7'
+			osmandAbiFilter = 'armv7'
 			dimension "abi"
 			ndk {
 				abiFilter 'armeabi-v7a'
 			}
 		}
 		arm64 {
-			osmandAbiFilter 'arm64'
+			osmandAbiFilter =  'arm64'
 			dimension "abi"
 			ndk {
 				abiFilter 'arm64-v8a'
 			}
 		}
 		x86 {
-			osmandAbiFilter 'x86'
+			osmandAbiFilter = 'x86'
 			dimension "abi"
 			ndk {
 				abiFilter 'x86'
