@@ -31,6 +31,7 @@ task printc {
 android {
 	compileSdkVersion 27
 	buildToolsVersion "27.0.3"
+        project.ext.set("osmandAbiFilter", "")
 
 	signingConfigs {
 		development {
@@ -111,18 +112,21 @@ android {
 	productFlavors {
 		// ABI
 		armv7 {
+			osmandAbiFilter 'armv7'
 			dimension "abi"
 			ndk {
 				abiFilter 'armeabi-v7a'
 			}
 		}
 		arm64 {
+			osmandAbiFilter 'arm64'
 			dimension "abi"
 			ndk {
 				abiFilter 'arm64-v8a'
 			}
 		}
 		x86 {
+			osmandAbiFilter 'x86'
 			dimension "abi"
 			ndk {
 				abiFilter 'x86'
@@ -302,7 +306,7 @@ task buildOsmAndCore(type: Exec) {
 	description "Build Legacy OsmAndCore"
 
 	if (!Os.isFamily(Os.FAMILY_WINDOWS)) {
-		commandLine "bash", file("./old-ndk-build.sh").getAbsolutePath()
+		commandLine "bash", file("./old-ndk-build.sh").getAbsolutePath(), project.ext.get('osmandAbiFilter')
 	} else {
 		commandLine "cmd", "/c", "echo", "Not supported"
 	}
