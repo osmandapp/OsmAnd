@@ -2,8 +2,7 @@
 
 SCRIPT_LOC="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 NAME=$(basename $(dirname "${BASH_SOURCE[0]}") )
-echo "Test param $1"
-
+env 
 if [ -d "$ANDROID_HOME" ]; then
     # for backwards compatbility
     export ANDROID_SDK=$ANDROID_HOME
