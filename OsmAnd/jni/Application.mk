@@ -15,7 +15,7 @@ APP_ABI := x86 armeabi-v7a arm64-v8a
 ifdef ARMV7_ONLY
     APP_ABI := armeabi-v7a
 endif 
-ifdef ARMV64_ONLY
+ifdef ARM64_ONLY
     APP_ABI := arm64-v8a
 endif
 ifdef X86_ONLY
