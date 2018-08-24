@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
     <string name="starting_point_too_far">Pradžios taškas yra per toli nuo artimiausio kelio.</string>
     <string name="shared_location">Bendrinta vieta</string>
     <string name="osmand_parking_warning">Dėmesio</string>
@@ -2516,7 +2517,7 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="private_access_routing_req">Jūsų kelionės tikslas yra privačioje teritorijoje. Ar norite leisti keliavimą privačiais keliais šioje kelionėje?</string>
     <string name="quick_action_showhide_osmbugs_descr">Paspaudus aktyvinimo mygtuką OSM užrašai bus parodomi ant žemėlapio arba paslepiami.</string>
     <string name="hillshade_menu_download_descr">Norėdami pamatyti kalnų reljefo šešėlių žemėlapį turite parsisiųsti kalnų šešėlių sluoksnio žemėlapį šiam regionui.</string>
-    <string name="hillshade_purchase_header">Norėdami pamatyti kalnų šešėlius ant žemėlapio turėsite nusipirkti ir įdiegti Kontūrų Linijų įskiepį</string>
+    <string name="hillshade_purchase_header">Norėdami pamatyti kalnų šešėlius žemėlapyje, turte nusipirkti ir įdiegti \"Kontūrų Linijų\" įskiepį</string>
     <string name="hide_from_zoom_level">Paslėpti mąstelį</string>
     <string name="store_tracks_in_monthly_directories">Išsaugoti įrašytas keliones mėnesiniuose segtuvuose</string>
     <string name="store_tracks_in_monthly_directories_descrp">Išsaugoti įrašytas keliones mėnesiniuose poaplankiuose (pvz. 2018-01).</string>
@@ -2702,7 +2703,7 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="shared_string_edited">Redaguota</string>
     <string name="shared_string_added">Pridėta</string>
     <string name="marker_activated">Žymeklis %s aktyvuotas.</string>
-    <string name="one_tap_active">Aktyvavimas vienu lietimu</string>
+    <string name="one_tap_active">Aktyvavimas \"vienu lietimu\"</string>
     <string name="empty_state_av_notes">Rašykite pastabas!</string>
     <string name="by_date">Pagal datą</string>
     <string name="by_type">Pagal tipą</string>
@@ -2812,8 +2813,8 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="get_unlimited_access">Gauti neribotą prieigą</string>
     <string name="welcome_to_open_beta">Sveiki atvykę į atvirą beta testavimą</string>
     <string name="wikivoyage_travel_guide">Kelionių vadovas</string>
-    <string name="monthly_map_updates">Žemėlapis atnaujinamas: <b>Kas mėnesį</b></string>
-    <string name="daily_map_updates">Žemėlapis atnaujinamas: <b>Kas valandą</b></string>
+    <string name="monthly_map_updates">Žemėlapis atnaujinamas: <b>kas mėnesį</b></string>
+    <string name="daily_map_updates">Žemėlapis atnaujinamas: <b>kas valandą</b></string>
     <string name="in_app_purchase_desc">Vienkartinis mokestis</string>
     <string name="purchase_unlim_title">Pirkti - %1$s</string>
     <string name="purchase_subscription_title">Prenumeruoti - %1$s</string>
@@ -2879,4 +2880,15 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="show_full_description">Rodyti visą aprašymą</string>
     <string name="read_wikipedia_offline">Skaityti Wikipedia atjungus internetą</string>
     <string name="maps_you_need">Jums reikalingi žemėlapiai</string>
+    <string name="increase_search_radius_to">Padidinti paieškos spindulį iki %1$s</string>
+    <string name="send_search_query">Siųsti paieškos užklausą?</string>
+    <string name="shared_string_world">Pasaulis</string>
+    <string name="coord_input_edit_point">Redaguoti tašką</string>
+    <string name="coord_input_add_point">Priddėti tašką</string>
+    <string name="open_wikipedia_link_online_description">Nuoroda bus atverta naršyklėje.</string>
+    <string name="start_editing_card_image_text">Atviras pasaulinis kelionių vadovas, kurie kiekvienas gali redaguoti.</string>
+    <string name="access_intermediate_arrival_time">Tarpinis atvykimo laikas</string>
+    <string name="map_widget_intermediate_time">Tarpinis laikas</string>
+    <string name="empty_state_my_tracks">Pridėti GPX failus</string>
+    <string name="download_wikipedia_label">Atsisiųsti Vikipedijos duomenys</string>
     </resources>
