@@ -281,24 +281,29 @@ public class ExternalApiHelper {
 					routingHelper.setRoutePlanningMode(true);
 					routingHelper.setFollowingMode(false);
 					routingHelper.setPauseNavigation(true);
+					resultCode = Activity.RESULT_OK;
 				}
 			} else if (API_CMD_RESUME_NAVIGATION.equals(cmd)) {
 				RoutingHelper routingHelper = mapActivity.getRoutingHelper();
 				if (routingHelper.isRouteCalculated() && routingHelper.isRoutePlanningMode()) {
 					routingHelper.setRoutePlanningMode(false);
 					routingHelper.setFollowingMode(true);
+					resultCode = Activity.RESULT_OK;
 				}
 			} else if (API_CMD_STOP_NAVIGATION.equals(cmd)) {
 				RoutingHelper routingHelper = mapActivity.getRoutingHelper();
 				if (routingHelper.isPauseNavigation() || routingHelper.isFollowingMode()) {
-					mapActivity.getMapLayers().getMapControlsLayer().stopNavigation();
+					mapActivity.getMapLayers().getMapControlsLayer().stopNavigationWithoutConfirm();
+					resultCode = Activity.RESULT_OK;
 				}
 			} else if (API_CMD_MUTE_NAVIGATION.equals(cmd)) {
 				mapActivity.getMyApplication().getSettings().VOICE_MUTE.set(true);
 				mapActivity.getRoutingHelper().getVoiceRouter().setMute(true);
+				resultCode = Activity.RESULT_OK;
 			} else if (API_CMD_UNMUTE_NAVIGATION.equals(cmd)) {
 				mapActivity.getMyApplication().getSettings().VOICE_MUTE.set(false);
 				mapActivity.getRoutingHelper().getVoiceRouter().setMute(false);
+				resultCode = Activity.RESULT_OK;
 			} else if (API_CMD_RECORD_AUDIO.equals(cmd)
 					|| API_CMD_RECORD_VIDEO.equals(cmd)
 					|| API_CMD_RECORD_PHOTO.equals(cmd)

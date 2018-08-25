@@ -574,7 +574,7 @@ public class OsmandAidlApi {
 			public void onReceive(Context context, Intent intent) {
 				RoutingHelper routingHelper = mapActivity.getRoutingHelper();
 				if (routingHelper.isPauseNavigation() || routingHelper.isFollowingMode()) {
-					mapActivity.getMapLayers().getMapControlsLayer().stopNavigation();
+					mapActivity.getMapLayers().getMapControlsLayer().stopNavigationWithoutConfirm();
 				}
 			}
 		};
