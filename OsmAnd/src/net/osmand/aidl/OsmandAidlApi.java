@@ -117,6 +117,11 @@ public class OsmandAidlApi {
 
 	private static final String AIDL_NAVIGATE = "aidl_navigate";
 	private static final String AIDL_NAVIGATE_GPX = "aidl_navigate_gpx";
+	private static final String AIDL_PAUSE_NAVIGATION = "pause_navigation";
+	private static final String AIDL_RESUME_NAVIGATION = "resume_navigation";
+	private static final String AIDL_STOP_NAVIGATION = "stop_navigation";
+	private static final String AIDL_MUTE_NAVIGATION = "mute_navigation";
+	private static final String AIDL_UNMUTE_NAVIGATION = "unmute_navigation";
 
 	private static final ApplicationMode DEFAULT_PROFILE = ApplicationMode.CAR;
 
@@ -155,6 +160,11 @@ public class OsmandAidlApi {
 		registerStopRecordingReceiver(mapActivity);
 		registerNavigateReceiver(mapActivity);
 		registerNavigateGpxReceiver(mapActivity);
+		registerPauseNavigationReceiver(mapActivity);
+		registerResumeNavigationReceiver(mapActivity);
+		registerStopNavigationReceiver(mapActivity);
+		registerMuteNavigationReceiver(mapActivity);
+		registerUnmuteNavigationReceiver(mapActivity);
 	}
 
 	public void onDestroyMapActivity(final MapActivity mapActivity) {
@@ -527,6 +537,70 @@ public class OsmandAidlApi {
 			app.getRoutingHelper().notifyIfRouteIsCalculated();
 			routingHelper.setCurrentLocation(app.getLocationProvider().getLastKnownLocation(), false);
 		}
+	}
+
+	private void registerPauseNavigationReceiver(final MapActivity mapActivity) {
+		BroadcastReceiver pauseNavigationReceiver = new BroadcastReceiver() {
+			@Override
+			public void onReceive(Context context, Intent intent) {
+				RoutingHelper routingHelper = mapActivity.getRoutingHelper();
+				if (routingHelper.isRouteCalculated() && !routingHelper.isRoutePlanningMode()) {
+					routingHelper.setRoutePlanningMode(true);
+					routingHelper.setFollowingMode(false);
+					routingHelper.setPauseNavigation(true);
+				}
+			}
+		};
+		registerReceiver(pauseNavigationReceiver, mapActivity, AIDL_PAUSE_NAVIGATION);
+	}
+
+	private void registerResumeNavigationReceiver(final MapActivity mapActivity) {
+		BroadcastReceiver resumeNavigationReceiver = new BroadcastReceiver() {
+			@Override
+			public void onReceive(Context context, Intent intent) {
+				RoutingHelper routingHelper = mapActivity.getRoutingHelper();
+				if (routingHelper.isRouteCalculated() && routingHelper.isRoutePlanningMode()) {
+					routingHelper.setRoutePlanningMode(false);
+					routingHelper.setFollowingMode(true);
+				}
+			}
+		};
+		registerReceiver(resumeNavigationReceiver, mapActivity, AIDL_RESUME_NAVIGATION);
+	}
+
+	private void registerStopNavigationReceiver(final MapActivity mapActivity) {
+		BroadcastReceiver stopNavigationReceiver = new BroadcastReceiver() {
+			@Override
+			public void onReceive(Context context, Intent intent) {
+				RoutingHelper routingHelper = mapActivity.getRoutingHelper();
+				if (routingHelper.isPauseNavigation() || routingHelper.isFollowingMode()) {
+					mapActivity.getMapLayers().getMapControlsLayer().stopNavigation();
+				}
+			}
+		};
+		registerReceiver(stopNavigationReceiver, mapActivity, AIDL_STOP_NAVIGATION);
+	}
+
+	private void registerMuteNavigationReceiver(final MapActivity mapActivity) {
+		BroadcastReceiver muteNavigationReceiver = new BroadcastReceiver() {
+			@Override
+			public void onReceive(Context context, Intent intent) {
+				mapActivity.getMyApplication().getSettings().VOICE_MUTE.set(true);
+				mapActivity.getRoutingHelper().getVoiceRouter().setMute(true);
+			}
+		};
+		registerReceiver(muteNavigationReceiver, mapActivity, AIDL_MUTE_NAVIGATION);
+	}
+
+	private void registerUnmuteNavigationReceiver(final MapActivity mapActivity) {
+		BroadcastReceiver unmuteNavigationReceiver = new BroadcastReceiver() {
+			@Override
+			public void onReceive(Context context, Intent intent) {
+				mapActivity.getMyApplication().getSettings().VOICE_MUTE.set(false);
+				mapActivity.getRoutingHelper().getVoiceRouter().setMute(false);
+			}
+		};
+		registerReceiver(unmuteNavigationReceiver, mapActivity, AIDL_UNMUTE_NAVIGATION);
 	}
 
 	public void registerMapLayers(MapActivity mapActivity) {
@@ -1187,6 +1261,41 @@ public class OsmandAidlApi {
 		intent.putExtra(AIDL_DEST_LON, destLon);
 		intent.putExtra(AIDL_PROFILE, profile);
 		intent.putExtra(AIDL_FORCE, force);
+		app.sendBroadcast(intent);
+		return true;
+	}
+
+	boolean pauseNavigation() {
+		Intent intent = new Intent();
+		intent.setAction(AIDL_PAUSE_NAVIGATION);
+		app.sendBroadcast(intent);
+		return true;
+	}
+
+	boolean resumeNavigation() {
+		Intent intent = new Intent();
+		intent.setAction(AIDL_RESUME_NAVIGATION);
+		app.sendBroadcast(intent);
+		return true;
+	}
+
+	boolean stopNavigation() {
+		Intent intent = new Intent();
+		intent.setAction(AIDL_STOP_NAVIGATION);
+		app.sendBroadcast(intent);
+		return true;
+	}
+
+	boolean muteNavigation() {
+		Intent intent = new Intent();
+		intent.setAction(AIDL_MUTE_NAVIGATION);
+		app.sendBroadcast(intent);
+		return true;
+	}
+
+	boolean unmuteNavigation() {
+		Intent intent = new Intent();
+		intent.setAction(AIDL_UNMUTE_NAVIGATION);
 		app.sendBroadcast(intent);
 		return true;
 	}

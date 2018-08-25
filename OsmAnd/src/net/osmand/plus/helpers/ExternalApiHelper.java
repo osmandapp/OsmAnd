@@ -47,6 +47,11 @@ public class ExternalApiHelper {
 	public static final String API_CMD_NAVIGATE_GPX = "navigate_gpx";
 
 	public static final String API_CMD_NAVIGATE = "navigate";
+	public static final String API_CMD_PAUSE_NAVIGATION = "pause_navigation";
+	public static final String API_CMD_RESUME_NAVIGATION = "resume_navigation";
+	public static final String API_CMD_STOP_NAVIGATION = "stop_navigation";
+	public static final String API_CMD_MUTE_NAVIGATION = "mute_navigation";
+	public static final String API_CMD_UNMUTE_NAVIGATION = "unmute_navigation";
 
 	public static final String API_CMD_RECORD_AUDIO = "record_audio";
 	public static final String API_CMD_RECORD_VIDEO = "record_video";
@@ -270,6 +275,30 @@ public class ExternalApiHelper {
 					}
 				}
 
+			} else if (API_CMD_PAUSE_NAVIGATION.equals(cmd)) {
+				RoutingHelper routingHelper = mapActivity.getRoutingHelper();
+				if (routingHelper.isRouteCalculated() && !routingHelper.isRoutePlanningMode()) {
+					routingHelper.setRoutePlanningMode(true);
+					routingHelper.setFollowingMode(false);
+					routingHelper.setPauseNavigation(true);
+				}
+			} else if (API_CMD_RESUME_NAVIGATION.equals(cmd)) {
+				RoutingHelper routingHelper = mapActivity.getRoutingHelper();
+				if (routingHelper.isRouteCalculated() && routingHelper.isRoutePlanningMode()) {
+					routingHelper.setRoutePlanningMode(false);
+					routingHelper.setFollowingMode(true);
+				}
+			} else if (API_CMD_STOP_NAVIGATION.equals(cmd)) {
+				RoutingHelper routingHelper = mapActivity.getRoutingHelper();
+				if (routingHelper.isPauseNavigation() || routingHelper.isFollowingMode()) {
+					mapActivity.getMapLayers().getMapControlsLayer().stopNavigation();
+				}
+			} else if (API_CMD_MUTE_NAVIGATION.equals(cmd)) {
+				mapActivity.getMyApplication().getSettings().VOICE_MUTE.set(true);
+				mapActivity.getRoutingHelper().getVoiceRouter().setMute(true);
+			} else if (API_CMD_UNMUTE_NAVIGATION.equals(cmd)) {
+				mapActivity.getMyApplication().getSettings().VOICE_MUTE.set(false);
+				mapActivity.getRoutingHelper().getVoiceRouter().setMute(false);
 			} else if (API_CMD_RECORD_AUDIO.equals(cmd)
 					|| API_CMD_RECORD_VIDEO.equals(cmd)
 					|| API_CMD_RECORD_PHOTO.equals(cmd)
