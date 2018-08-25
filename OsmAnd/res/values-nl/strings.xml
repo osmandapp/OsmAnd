@@ -3080,4 +3080,19 @@ voor Gebied: %1$s x %2$s</string>
     <string name="commiting_way">"Weg vastleggen.. ik "</string>
     <string name="coord_input_save_as_track">Als GPX-track opslaan</string>
     <string name="get_osmand_live">"Neem OsmAnd Live en krijg alle mogelijkheden: Dagelijjse kaartupdates en onbeperkte downloads, alle betaalde en gratis plugins, Wikipedia, Wikivoyage en nog meer. "</string>
-    </resources>
+    <string name="unirs_render_descr">"Wijziging van de standaard Kaartstijl met mreer constrast voor wandel-en fietspaden. Gebruikt de Mapnik-kleuren. "</string>
+    <string name="waypoints_removed_from_map_markers">"Wegpunten verwijders uit de Markeervlaggetjes "</string>
+    <string name="select_waypoints_category_description">"Voeg alle wegpunten uit de track toe, of kies een categorie. "</string>
+    <string name="one_tap_active_descr">Tik op een Markeervlaggetje om die bovenaan de actieve lijst te zetten, zonder het contextmenu te openen.</string>
+    <string name="one_tap_active">\'Eén tik\' actief</string>
+    <string name="looking_for_tracks_with_waypoints">Tracks met wegpunten zoeken</string>
+    <string name="add_track_to_markers_descr">"Kies een track, om de wegpunten daaruit aan de  Markeervlaggetjes toe te voegen."</string>
+    <string name="shared_string_gpx_waypoints">Track routepunten</string>
+    <string name="add_group_descr">"Groepen uit Favorieten of GPX-routepunte. "</string>
+    <string name="empty_state_markers_active_desc">"Tik lang of kort  ergens op de kaart en tik op het \'Markeer\'-vlaggetje. "</string>
+    <string name="empty_state_markers_groups_desc">"Importeer een Groep Favorieten of Routepunten als Markeervlaggetjes. "</string>
+    <string name="empty_state_markers_history_desc">Markeervlaggetjes die niet actief zijn, komen in dit scherm.</string>
+    <string name="show_guide_line_descr">"Toon rechte lijnen van je positie nasr de actieve Markeervlaggetjes. "</string>
+    <string name="show_arrows_descr">Toon pijlen richting de actieve Markeervlaggetjes.</string>
+    <string name="waypoints_added_to_map_markers">"Routepunten: toegevoegd aan Markeervlaggetjes "</string>
+	</resources>
