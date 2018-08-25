@@ -363,6 +363,11 @@ public class MapControlsLayer extends OsmandMapLayer {
 		}
 	}
 
+	public void stopNavigationWithoutConfirm() {
+		mapRouteInfoMenu.hide();
+		mapActivity.getMapActions().stopNavigationWithoutConfirm();
+	}
+
 	protected void clickRouteCancel() {
 		stopNavigation();
 	}
