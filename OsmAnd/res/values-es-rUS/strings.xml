@@ -2487,18 +2487,12 @@ Lon %2$s</string>
 \n • (Opcional) Muestra la velocidad y altitud
 \n • Activa la visualización de las curvas de nivel y el sombreado de colinas (mediante un complemento adicional)</string>
     <string name="osmand_plus_extended_description_part7">"Contribuye directamente con OSM 
-\n
 \n • Informa sobre problemas de datos en el mapa 
-\n
 \n • Sube trazas GPX a OSM directamente desde la aplicación 
-\n
 \n • Añade PDI y súbelos directamente a OSM (o más tarde, si no estás conectado) 
-\n
 \n • (Opcional) Grabación del viaje en modo reposo (mientras el dispositivo está bloqueado) 
-\n
 \n 
 \n  OsmAnd es un software de código abierto, activamente desarrollado. Cualquiera puede contribuir con la aplicación informando sobre errores, mejorando las traducciones o desarrollando nuevas funciones. Además, el proyecto también depende de contribuciones financieras para desarrollar y probar nuevas funcionalidades. 
-\n
 \n"</string>
     <string name="osmand_plus_extended_description_part8">Cobertura y calidad aproximada del mapa: 
 \n • Europa Occidental: **** 
