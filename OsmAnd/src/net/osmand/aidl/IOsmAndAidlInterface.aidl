@@ -55,6 +55,12 @@ import net.osmand.aidl.maplayer.point.ShowMapPointParams;
 
 import net.osmand.aidl.navdrawer.SetNavDrawerItemsParams;
 
+import net.osmand.aidl.navigation.PauseNavigationParams;
+import net.osmand.aidl.navigation.ResumeNavigationParams;
+import net.osmand.aidl.navigation.StopNavigationParams;
+import net.osmand.aidl.navigation.MuteNavigationParams;
+import net.osmand.aidl.navigation.UnmuteNavigationParams;
+
 // NOTE: Add new methods at the end of file!!!
 
 interface IOsmAndAidlInterface {
@@ -109,4 +115,10 @@ interface IOsmAndAidlInterface {
     boolean showMapPoint(in ShowMapPointParams params);
 
     boolean setNavDrawerItems(in SetNavDrawerItemsParams params);
+
+    boolean pauseNavigation(in PauseNavigationParams params);
+    boolean resumeNavigation(in ResumeNavigationParams params);
+    boolean stopNavigation(in StopNavigationParams params);
+    boolean muteNavigation(in MuteNavigationParams params);
+    boolean unmuteNavigation(in UnmuteNavigationParams params);
 }
