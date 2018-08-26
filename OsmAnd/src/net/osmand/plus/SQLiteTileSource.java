@@ -500,7 +500,7 @@ public class SQLiteTileSource implements ITileSource {
 		if(expirationTimeMillis  < 0) {
 			return -1;
 		}
-		return expirationTimeMillis / (60  * 1000);
+		return (int) expirationTimeMillis / (60  * 1000);
 	}
 	
 	public int getExpirationTimeMillis() {
