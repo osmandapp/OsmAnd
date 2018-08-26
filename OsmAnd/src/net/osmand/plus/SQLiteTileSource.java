@@ -215,7 +215,7 @@ public class SQLiteTileSource implements ITileSource {
 					if(expireminutes != -1) {
 						int minutes = (int) cursor.getInt(expireminutes);
 						if(minutes > 0) {
-							this.expirationTimeMillis = minutes * 60 * 1000;
+							this.expirationTimeMillis = minutes * 60 * 1000l;
 						}
 					} else {
 						addInfoColumn("expireminutes", "0");
@@ -503,7 +503,7 @@ public class SQLiteTileSource implements ITileSource {
 		return (int) (expirationTimeMillis / (60  * 1000));
 	}
 	
-	public int getExpirationTimeMillis() {
+	public long getExpirationTimeMillis() {
 		return expirationTimeMillis;
 	}
 	
