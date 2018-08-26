@@ -2938,11 +2938,11 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="paid_app">Placená aplikace</string>
     <string name="paid_plugin">Placený modul</string>
     <string name="travel_card_update_descr">Jsou dostupná nová data Wikivoyage, aktualizujte je na nejnovější verzi.</string>
-	<string name="wikivoyage_travel_guide">Turistický Průvodce Wikivoyage</string>
+	<string name="wikivoyage_travel_guide">Turistický průvodce Wikivoyage</string>
     <string name="wikivoyage_travel_guide_descr">Průvodce Wikivoyage Vám ukáže nejzajímavější místa planety, přímo v aplikaci OsmAnd a bez nutnosti připojení k internetu.</string>
     <string name="shared_string_gpx_files">Soubory GPX</string>
     <string name="access_intermediate_arrival_time">Čas příjezdu do mezicíle</string>
-    <string name="map_widget_intermediate_time">Do Průjezdního bodu</string>
+    <string name="map_widget_intermediate_time">Do průjezdního bodu</string>
     <string name="test_voice_desrc">Klepněte na tlačítko pro vyslechnutí odpovídajícího hlasového pokynu, aby jste zjistili chybné nebo chybějící pokyny.</string>
 <string name="nautical_render_descr">Plavební navigační styl. Klíčové vlastnosti: Bóje, majáky, plavební cesty, mořské cesty a značky, přístavy, námořní služby, plavební hloubka.</string>
     <string name="ski_map_render_descr">Zimní režim. Klíčové vlastnosti: Vykresluje sjezdovky, lyžařské vleky a další praktické objekty pro lyžaře a snowboardisty. Nedůležité objekty jsou na mapě méně výrazné.</string>
