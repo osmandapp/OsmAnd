@@ -75,7 +75,7 @@ public class MapRenderRepositories {
 	private final static int zoomToOverviewLocalNames = 6;
 	private final static Set<String> languagesNotTransliterateOnBasemap = new TreeSet<>(
 			Arrays.asList("ru", "uk", "be", "bg", "mk", "sr")
-	)
+	);
 
 	static int zoomForBaseRouteRendering  = 14;
 	private Handler handler;
