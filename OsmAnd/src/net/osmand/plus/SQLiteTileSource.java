@@ -462,8 +462,9 @@ public class SQLiteTileSource implements ITileSource {
 	public void closeDB(){
 		LOG.debug("closeDB");
 		bshInterpreter = null;
-		if(timeSupported)
+		if(timeSupported) {
 			clearOld();
+		}
 		if(db != null){
 			db.close();
 			db = null;
@@ -472,11 +473,12 @@ public class SQLiteTileSource implements ITileSource {
 
 	public void clearOld() {
 		SQLiteConnection db = getDatabase();
-		if(db == null || db.isReadOnly()){
+		long expiration = getExpirationTimeMillis();
+		if(db == null || db.isReadOnly() || expiration <= 0){
 			return;
 		}
 		String sql = "DELETE FROM tiles WHERE time < "+
-				(System.currentTimeMillis() - getExpirationTimeMillis());
+				(System.currentTimeMillis() - expiration);
 		LOG.debug(sql);
 		db.execSQL(sql);
 		db.execSQL("VACUUM");
