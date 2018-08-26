@@ -3110,4 +3110,19 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
 \nDajcie nam vodhuk</string>
     <string name="commiting_way">Fiksujecca šliach…</string>
     <string name="test_voice_desrc">Nacisnicie na knopku i pasluchajcie adpaviednuju halasavuju padkazku, kab vyznačyć adsutnyja abo paškodžanyja padkazki.</string>
-</resources>
+<string name="release_3_1">• Navihacyja: vypraŭliennie indykataru prahresu, chutkaja pieramiena pačatkovaha i kančatkovaha punktaŭ maršrutu
+\n
+\n • Markiery mapy: vypraŭliennie ŭkliučennia/adkliučennia hrup, mahčymasć chavać markiery z mapy
+\n
+\n • Redahavannie OSM: mahčymasć praŭki tehaŭ dlia niekropkavych abjektaŭ i šliachoŭ, vypraŭliennie adsutnych kamientaroŭ na natatkach, reziervovaje kapijavannie pravak
+\n
+\n • Paliapšennie razboru Wikipedia i Wikivoyage, abnoŭlienyja fajly ŭžo dastupnyja
+\n
+\n • Kantekstnaje mieniu: vypraŭliennie kolieru darožnych znakaŭ u načnym režymie, vypraŭliennie pamieraŭ dadatkovaha mieniu
+\n
+\n • Račnaja navihacyja: padtrymka farvateru
+\n
+\n • Vypraŭliennie inšych chibaŭ
+\n
+\n</string>
+    </resources>
