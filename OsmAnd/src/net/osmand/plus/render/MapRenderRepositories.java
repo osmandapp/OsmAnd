@@ -13,6 +13,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
@@ -71,6 +72,10 @@ public class MapRenderRepositories {
 	private final static Log log = PlatformUtil.getLog(MapRenderRepositories.class);
 	private final OsmandApplication context;
 	private final static int zoomOnlyForBasemaps = 11;
+	private final static int zoomToOverviewLocalNames = 6;
+	private final static Set<String> languagesNotTransliterateOnBasemap = new TreeSet<>(
+			Arrays.asList("ru", "uk", "be", "bg", "mk", "sr")
+	)
 
 	static int zoomForBaseRouteRendering  = 14;
 	private Handler handler;
@@ -730,17 +735,14 @@ public class MapRenderRepositories {
 			currentRenderingContext.width = requestedBox.getPixWidth();
 			currentRenderingContext.height = requestedBox.getPixHeight();
 			currentRenderingContext.nightMode = nightMode;
-			if(requestedBox.getZoom() <= zoomOnlyForBasemaps && 
+			if(requestedBox.getZoom() <= zoomToOverviewLocalNames &&
 					"".equals(prefs.MAP_PREFERRED_LOCALE.get())) {
 				currentRenderingContext.preferredLocale = app.getLanguage();
-				currentRenderingContext.transliterate = !"ru".equals(app.getLanguage()) && !"uk".equals(app.getLanguage()) && !"be".equals(app.getLanguage())
-					&& !"bg".equals(app.getLanguage()) && !"mk".equals(app.getLanguage()) && !"sr".equals(app.getLanguage());
+				currentRenderingContext.transliterate =
+						!languagesNotTransliterateOnBasemap.contains(app.getLanguage());
 			} else {
 				currentRenderingContext.preferredLocale = prefs.MAP_PREFERRED_LOCALE.get();
 				currentRenderingContext.transliterate = prefs.MAP_TRANSLITERATE_NAMES.get();
-				if(currentRenderingContext.preferredLocale.equals("en")) {
-					currentRenderingContext.transliterate = true;
-				}
 			}
 			final float mapDensity = (float) requestedBox.getMapDensity();
 			currentRenderingContext.setDensityValue(mapDensity);
