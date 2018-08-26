@@ -770,7 +770,7 @@ public class MapRenderRepositories {
 			this.prevBmp = this.bmp;
 			this.prevBmpLocation = this.bmpLocation;
 			// necessary for transparent, otherwise 2 times smaller 
-			Config cfg = transparent ?  Config.ARGB_8888 : Config.RGB_565;
+			Config cfg = true ?  Config.ARGB_8888 : Config.RGB_565;
 			if (reuse != null && reuse.getWidth() == currentRenderingContext.width && reuse.getHeight() == currentRenderingContext.height &&
 					cfg == reuse.getConfig()) {
 				bmp = reuse;
