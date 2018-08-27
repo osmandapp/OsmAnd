@@ -1287,7 +1287,7 @@
     
     <string name="route_descr_destination">مقصد</string>
     <string name="create_poi_link_to_osm_doc">طبقه‌بندی نقشهٔ <u>آنلاین OSM</u> همراه با تصاویر.</string>
-	<string name="app_mode_hiking">پیاده‌روی</string>
+	<string name="app_mode_hiking">پیاده‌گردی</string>
     <string name="app_mode_motorcycle">موتورسیکلت</string>
     <string name="app_mode_boat">قایق</string>
     <string name="app_mode_aircraft">هواپیما</string>
