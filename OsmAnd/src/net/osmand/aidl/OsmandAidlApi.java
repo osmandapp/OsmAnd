@@ -1,5 +1,6 @@
 package net.osmand.aidl;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -28,9 +29,11 @@ import net.osmand.aidl.maplayer.AMapLayer;
 import net.osmand.aidl.maplayer.point.AMapPoint;
 import net.osmand.aidl.mapmarker.AMapMarker;
 import net.osmand.aidl.mapwidget.AMapWidget;
+import net.osmand.aidl.search.SearchResult;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.plus.AppInitializer;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
@@ -58,6 +61,9 @@ import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry.MapWidgetRegInfo;
 import net.osmand.plus.views.mapwidgets.TextInfoWidget;
+import net.osmand.search.SearchUICore;
+import net.osmand.search.SearchUICore.SearchResultCollection;
+import net.osmand.search.core.SearchSettings;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -80,6 +86,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.concurrent.ConcurrentHashMap;
+
+import static net.osmand.search.core.ObjectType.CITY;
+import static net.osmand.search.core.ObjectType.HOUSE;
+import static net.osmand.search.core.ObjectType.POI;
+import static net.osmand.search.core.ObjectType.POSTCODE;
+import static net.osmand.search.core.ObjectType.STREET;
+import static net.osmand.search.core.ObjectType.STREET_INTERSECTION;
+import static net.osmand.search.core.ObjectType.VILLAGE;
+import static net.osmand.search.core.SearchCoreFactory.MAX_DEFAULT_SEARCH_RADIUS;
 
 
 public class OsmandAidlApi {
@@ -140,7 +155,7 @@ public class OsmandAidlApi {
 	private Map<String, TextInfoWidget> widgetControls = new ConcurrentHashMap<>();
 	private Map<String, AMapLayer> layers = new ConcurrentHashMap<>();
 	private Map<String, OsmandMapLayer> mapLayers = new ConcurrentHashMap<>();
-	private Map<String, BroadcastReceiver> receivers = new TreeMap<String, BroadcastReceiver>();
+	private Map<String, BroadcastReceiver> receivers = new TreeMap<>();
 
 
 	public OsmandAidlApi(OsmandApplication app) {
@@ -178,7 +193,7 @@ public class OsmandAidlApi {
 				LOG.error(e.getMessage(), e);
 			}
 		}
-		receivers = new TreeMap<String, BroadcastReceiver>();
+		receivers = new TreeMap<>();
 	}
 
 	private void registerRefreshMapReceiver(final MapActivity mapActivity) {
@@ -972,6 +987,7 @@ public class OsmandAidlApi {
 		return false;
 	}
 
+	@SuppressLint("StaticFieldLeak")
 	private void finishGpxImport(boolean destinationExists, File destination, String color, boolean show) {
 		int col = ConfigureMapMenu.GpxAppearanceAdapter.parseTrackColor(
 					app.getRendererRegistry().getCurrentSelectedRenderer(), color);
@@ -1113,6 +1129,7 @@ public class OsmandAidlApi {
 		return false;
 	}
 
+	@SuppressLint("StaticFieldLeak")
 	boolean showGpx(String fileName) {
 		if (!Algorithms.isEmpty(fileName)) {
 			File f = app.getAppPath(IndexConstants.GPX_INDEX_DIR + fileName);
@@ -1310,6 +1327,63 @@ public class OsmandAidlApi {
 		return true;
 	}
 
+	boolean search(final String searchQuery, final double latitude, final double longitude,
+				   final int radiusLevel, final int totalLimit, final SearchCompleteCallback callback) {
+		if (Algorithms.isEmpty(searchQuery) || latitude == 0 || longitude == 0 || callback == null) {
+			return false;
+		}
+		if (app.isApplicationInitializing()) {
+			app.getAppInitializer().addListener(new AppInitializer.AppInitializeListener() {
+				@Override
+				public void onProgress(AppInitializer init, AppInitializer.InitEvents event) {
+				}
+
+				@Override
+				public void onFinish(AppInitializer init) {
+					runSearch(searchQuery, latitude, longitude, radiusLevel, totalLimit, callback);
+				}
+			});
+		} else {
+			runSearch(searchQuery, latitude, longitude, radiusLevel, totalLimit, callback);
+		}
+		return true;
+	}
+
+	private void runSearch(String searchQuery, double latitude, double longitude, int radiusLevel, int totalLimit, final SearchCompleteCallback callback) {
+		final SearchUICore core = app.getSearchUICore().getCore();
+		core.setOnResultsComplete(new Runnable() {
+			@Override
+			public void run() {
+				List<SearchResult> resultSet = new ArrayList<>();
+				SearchResultCollection resultCollection = core.getCurrentSearchResult();
+				for (net.osmand.search.core.SearchResult r : resultCollection.getCurrentSearchResults()) {
+					SearchResult result = new SearchResult(r.location.getLatitude(), r.location.getLongitude(), r.localeName, r.alternateName, new ArrayList<>(r.otherNames));
+					resultSet.add(result);
+				}
+				callback.onSearchComplete(resultSet);
+			}
+		});
+
+		if (radiusLevel < 1) {
+			radiusLevel = 1;
+		} else if (radiusLevel > MAX_DEFAULT_SEARCH_RADIUS) {
+			radiusLevel = MAX_DEFAULT_SEARCH_RADIUS;
+		}
+		if (totalLimit <= 0) {
+			totalLimit = -1;
+		}
+
+		SearchSettings searchSettings = new SearchSettings(core.getSearchSettings())
+				.setSearchTypes(CITY, VILLAGE, POSTCODE, STREET, HOUSE, STREET_INTERSECTION, POI)
+				.setRadiusLevel(radiusLevel)
+				.setEmptyQueryAllowed(false)
+				.setSortByName(false)
+				.setOriginalLocation(new LatLon(latitude, longitude))
+				.setTotalLimit(totalLimit);
+
+		core.search(searchQuery, false, null, searchSettings);
+	}
+
 	boolean setNavDrawerItems(String appPackage, List<net.osmand.aidl.navdrawer.NavDrawerItem> items) {
 		if (!TextUtils.isEmpty(appPackage) && items != null) {
 			if (items.isEmpty()) {
@@ -1447,5 +1521,9 @@ public class OsmandAidlApi {
 			this.iconName = iconName;
 			this.flags = flags;
 		}
+	}
+
+	public interface SearchCompleteCallback {
+		void onSearchComplete(List<SearchResult> resultSet);
 	}
 }

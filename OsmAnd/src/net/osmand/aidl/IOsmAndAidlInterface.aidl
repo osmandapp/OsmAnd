@@ -61,6 +61,11 @@ import net.osmand.aidl.navigation.StopNavigationParams;
 import net.osmand.aidl.navigation.MuteNavigationParams;
 import net.osmand.aidl.navigation.UnmuteNavigationParams;
 
+import net.osmand.aidl.IOsmAndAidlCallback;
+
+import net.osmand.aidl.search.SearchResult;
+import net.osmand.aidl.search.SearchParams;
+
 // NOTE: Add new methods at the end of file!!!
 
 interface IOsmAndAidlInterface {
@@ -121,4 +126,6 @@ interface IOsmAndAidlInterface {
     boolean stopNavigation(in StopNavigationParams params);
     boolean muteNavigation(in MuteNavigationParams params);
     boolean unmuteNavigation(in UnmuteNavigationParams params);
+
+    boolean search(in SearchParams params, IOsmAndAidlCallback callback);
 }

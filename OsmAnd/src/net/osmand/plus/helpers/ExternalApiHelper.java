@@ -91,6 +91,7 @@ public class ExternalApiHelper {
 	public static final String PARAM_START_LON = "start_lon";
 	public static final String PARAM_DEST_LAT = "dest_lat";
 	public static final String PARAM_DEST_LON = "dest_lon";
+	public static final String PARAM_DEST_SEARCH_QUERY = "dest_search_query";
 	public static final String PARAM_PROFILE = "profile";
 
 	public static final String PARAM_VERSION = "version";
@@ -251,9 +252,20 @@ public class ExternalApiHelper {
 						startDesc = null;
 					}
 
-					double destLat = Double.parseDouble(uri.getQueryParameter(PARAM_DEST_LAT));
-					double destLon = Double.parseDouble(uri.getQueryParameter(PARAM_DEST_LON));
-					final LatLon dest = new LatLon(destLat, destLon);
+					String destSearchQuery = uri.getQueryParameter(PARAM_DEST_SEARCH_QUERY);
+					String destLatStr = uri.getQueryParameter(PARAM_DEST_LAT);
+					String destLonStr = uri.getQueryParameter(PARAM_DEST_LON);
+					final LatLon dest;
+					if (!Algorithms.isEmpty(destLatStr) && !Algorithms.isEmpty(destLonStr)) {
+						double destLat = Double.parseDouble(destLatStr);
+						double destLon = Double.parseDouble(destLonStr);
+						dest = new LatLon(destLat, destLon);
+					} else {
+						dest = null;
+					}
+					if (!Algorithms.isEmpty(destSearchQuery)) {
+						
+					}
 					final PointDescription destDesc = new PointDescription(PointDescription.POINT_TYPE_LOCATION, destName);
 
 					boolean force = uri.getBooleanQueryParameter(PARAM_FORCE, false);
