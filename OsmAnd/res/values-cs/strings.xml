@@ -1120,7 +1120,7 @@ Proporcionální paměť %4$s MB (limit Androidu %5$s MB, Dalvik %6$s MB).</stri
     <string name="routing_attr_avoid_toll_name">Vyhnout se placeným silnicím</string>
     <string name="routing_attr_avoid_toll_description">Vyhnout se placeným silnicím.</string>
     <string name="routing_attr_avoid_unpaved_name">Vyhnout se nezpevněným cestám</string>
-    <string name="routing_attr_avoid_unpaved_description">Povede trasu mimo nezpevněné a polní cesty.</string>
+    <string name="routing_attr_avoid_unpaved_description">Povede trasu mimo nezpevněné cesty.</string>
     <string name="routing_attr_avoid_ferries_name">Vyhnout se trajektům</string>
     <string name="routing_attr_avoid_ferries_description">Vyhnout se trajektům.</string>
     <string name="routing_attr_avoid_motorway_name">Vyhnout se dálnicím</string>
@@ -2022,7 +2022,7 @@ Délka %2$s</string>
     <string name="osm_live_not_active">Neaktivní</string>
     <string name="osm_live_enter_email">Prosím zadejte platnou e-mailovou adresu</string>
     <string name="osm_live_enter_user_name">Prosím zadejte veřejné jméno</string>
-    <string name="osm_live_thanks">Děkujeme Vám za podporu projektu OsmAnd! 
+    <string name="osm_live_thanks">Děkujeme vám za podporu projektu OsmAnd! 
 \nPro aktivování všech nových funkcí je třeba restartovat aplikaci OsmAnd.</string>
     <string name="osm_live_region_desc">Část vašeho příspěvku bude zaslána uživatelům OSM, kteří upravují mapu ve zvolené oblasti.</string>
     <string name="osm_live_subscription_settings">Nastavení předplatného</string>
@@ -2517,7 +2517,7 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="empty_state_favourites_desc">Importujte Oblíbené nebo je přidejte označením bodů na mapě.</string>
     <string name="import_track">Import souboru GPX</string>
     <string name="import_track_desc">Soubor %$1s neobsahuje body GPX trasy, chcete jej přesto importovat jako trasu?</string>
-    <string name="move_point">Přesunout Bod</string>
+    <string name="move_point">Přesunout bod</string>
     <string name="add_segment_to_the_track">Přidat do GPX souboru</string>
 <string name="move_all_to_history">Přesunout vše do historie</string>
     
@@ -2551,11 +2551,11 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="shared_string_sort">Seřadit</string>
     <string name="coordinate_input">Zadání souřadnic</string>
     <string name="is_saved">je uložen</string>
-    <string name="marker_save_as_track_descr">Vyexportuje Vaše značky do tohoto GPX souboru:</string>
+    <string name="marker_save_as_track_descr">Vyexportovat vaše značky do tohoto GPX souboru:</string>
     <string name="marker_save_as_track">Uložit jako soubor GPX</string>
     <string name="move_to_history">Přesunout do historie</string>
     <string name="group_will_be_removed_after_restart">Skupina bude odstraněna po příštím restartu aplikace.</string>
-    <string name="show_guide_line">Zobrazit vodící čáry</string>
+    <string name="show_guide_line">Zobrazit vodicí čáry</string>
     <string name="show_arrows_on_the_map">Zobrazit šipky na mapě</string>
     <string name="remove_from_map_markers">Odebrat z mapových značek</string>
     <string name="descendingly">sestupně</string>
@@ -2568,14 +2568,14 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="fast_coordinates_input_descr">Zvolte formát souřadnicového vstupu. Můžete ho kdykoli změnit klepnutím na \'Možnosti\'.</string>
     <string name="fast_coordinates_input">Rychlé zadávání souřadnic</string>
     <string name="routing_attr_avoid_ice_roads_fords_name">Vyhnout brodům a ledovým cestám</string>
-    <string name="routing_attr_avoid_ice_roads_fords_description">Povede trasu mimo brody přes vodu a mimo ledové cesty.</string>
+    <string name="routing_attr_avoid_ice_roads_fords_description">Povede trasu mimo brody a ledové cesty.</string>
     <string name="show_passed">Zobrazit prošlé</string>
     <string name="hide_passed">Skrýt prošlé</string>
     <string name="marker_show_distance_descr">Vyberte, jak ukazovat vzdálenost a směr k mapovým značkám na obrazovce mapy:</string>
     <string name="osn_modify_dialog_error">Nepodařilo se změnit poznámku</string>
     <string name="osn_modify_dialog_title">Upravit poznámku</string>
     <string name="context_menu_item_modify_note">Upravit poznámku OSM</string>
-    <string name="make_round_trip_descr">Přidat počátečního bod také jako cíl pro vytvoření okruhu.</string>
+    <string name="make_round_trip_descr">Přidat počáteční bod také jako cíl pro vytvoření okruhu.</string>
     <string name="make_round_trip">Vytvořit okružní trasu</string>
     
     <string name="import_gpx_file_description">Může být importováno jako Oblíbené nebo jako GPX soubor.</string>
@@ -2611,7 +2611,7 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="empty_state_markers_history_desc">Značky označené jako prošlé se objeví na této obrazovce.</string>
     <string name="shared_string_two">Dvě</string>
     <string name="shared_string_one">Jedna</string>
-    <string name="show_guide_line_descr">Zobrazit vodící čáry od vaší polohy k aktivním značkám.</string>
+    <string name="show_guide_line_descr">Zobrazit vodicí čáry od vaší polohy k aktivním značkám.</string>
     <string name="show_arrows_descr">Zobrazit jednu nebo dvě šipky označující směr k aktivním značkám.</string>
     <string name="distance_indication_descr">Zvolte způsob zobrazení vzdálenosti k aktivním značkám.</string>
     <string name="active_markers_descr">Zvolte, kolik ukazatelů směru se má zobrazit.</string>
@@ -2654,7 +2654,7 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="open_from">Otevřeno od</string>
     <string name="open_till">Otevřeno do</string>
     <string name="will_close_at">Zavírá v</string>
-    <string name="will_open_at">Otevírá od</string>
+    <string name="will_open_at">Otevírá v</string>
     <string name="will_open_on">Otevírá v</string>
     <string name="additional_actions">Další akce</string>
     <string name="av_locations_selected_desc">GPX soubor se souřadnicemi a daty vybraných poznámek.</string>
@@ -2663,7 +2663,7 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="winter_and_ski_renderer">Zimní</string>
     <string name="touring_view_renderer">Cestovní</string>
     <string name="nautical_renderer">Plavební</string>
-<string name="will_open_tomorrow_at">Otevírá zítra od</string>
+<string name="will_open_tomorrow_at">Otevírá zítra v</string>
     <string name="shared_string_marker">Značka</string>
     
     <string name="osm_recipient_stat">Počet úprav %1$s, součet %2$s mBTC</string>
@@ -2901,23 +2901,23 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="poi_cannot_be_found">Na Váš dotaz nebylo nic nalezeno.</string>
     <string name="search_no_results_feedback">Žádný výsledek vyhledávání?
 \nDejte nám o tom vědět, ať to můžeme zlepšit</string>
-    <string name="release_3_1">• Navigace: opravený indikátor průběhu, přidána možnost pro rychlé prohození začátku a konce trasy
-\n
-\n • Mapové značky: opravena možnost zapnutí/vypnutí skupin, nově možnost skrýt značky na mapě
-\n
-\n • Úpravy OSM: nově možnost upravovat tagy všech objektů zájmu v mapě, (nejen bodových jako dosud), opraveny chybějící komentáře v poznámkách, přidána možnost zálohy úprav
-\n
-\n • Vylepšené vykreslování článků Wikipedie a Wikivoyage, upravené soubory jsou již k dispozici ke stažení
-\n
-\n • Nabídka: opraveny barvy znaků v nočním režimu, opraveny velikosti dodatečných menu
-\n
-\n • Lodní navigace: nově podpora vodních cest
-\n
-\n • Menší opravy nahlášených chyb
+    <string name="release_3_1">• Navigace: opravený indikátor průběhu, přidána možnost pro rychlé prohození začátku a konce trasy 
+\n 
+\n • Mapové značky: opravena možnost zapnutí/vypnutí skupin, nově možnost skrýt značky na mapě 
+\n 
+\n • Úpravy OSM: nově možnost upravovat tagy všech objektů zájmu v mapě (nejen bodových jako dosud), opraveny chybějící komentáře v poznámkách, přidána možnost zálohy úprav 
+\n 
+\n • Vylepšené vykreslování článků Wikipedie a Wikivoyage, upravené soubory jsou již k dispozici ke stažení 
+\n 
+\n • Nabídka: opraveny barvy znaků v nočním režimu, opraveny velikosti dodatečných menu 
+\n 
+\n • Lodní navigace: nově podpora vodních cest 
+\n 
+\n • Menší opravy nahlášených chyb 
 \n</string>
     <string name="commiting_way">Odesílání cesty…</string>
     <string name="increase_search_radius_to">Zvětšit okruh hledání na %1$s</string>
-    <string name="send_search_query_description">Bude odeslán Váš dotaz pro vyhledávání: <b>\"%1$s\"</b>, spolu s Vaší polohou. <br/><br/> Odeslaná data jsou plně anonymní a nedocházi k žádnému shromažďování Vašich osobních údajů. Zaslaná data slouží pouze k vylepšení vyhledávacího algoritmu.<br/></string>
+    <string name="send_search_query_description">Bude odeslán váš dotaz pro vyhledávání: <b>\"%1$s\"</b> a také vaše poloha. <br/><br/> Nedochází k žádnému shromažďování osobních údajů. Zaslaná data slouží pouze k vylepšení vyhledávacího algoritmu.<br/></string>
     <string name="send_search_query">Odeslat data?</string>
     <string name="shared_string_world">Celý svět</string>
     <string name="point_deleted">Bod %1$s byl smazán</string>
@@ -2929,12 +2929,12 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="shared_string_bookmark">Záložka</string>
     <string name="off_road_render_descr">Vhodný pro off-road terénní jízdu. Vhodný pro použití se zelenými satelitními snímky použitými jako podkladová vrstva. Zmenšená tloušťka hlavních cest a naopak zvětšená tloušťka polních cest, pěšin, cyklotras a dalších cest. Založeno na \"Topo\" stylu.</string>
     <string name="open_wikipedia_link_online">Otevřít odkaz Wikipedia na internetu</string>
-    <string name="open_wikipedia_link_online_description">Odkaz bude otevřen v intenetovém prohlížeči.</string>
-    <string name="read_wikipedia_offline_description">Stahování Wikipedia a Wikivoyage článkú do zařízení pro pozdější použití bez přístupu k internetu je dostupné pouze předplatitelům OsmAnd Live.</string>
+    <string name="open_wikipedia_link_online_description">Odkaz bude otevřen v internetovém prohlížeči.</string>
+    <string name="read_wikipedia_offline_description">Stahování Wikipedia a Wikivoyage článků pro čtení offline je dostupné pouze předplatitelům OsmAnd Live.</string>
     <string name="how_to_open_link">Jak otevřít odkaz?</string>
-    <string name="read_wikipedia_offline">Číst Wikipedia bez internetu</string>
+    <string name="read_wikipedia_offline">Číst Wikipedii offline</string>
     <string name="download_all">Stáhnout vše</string>
-    <string name="purchase_cancelled_dialog_title">Zrušili jste Vaše předplatné OsmAnd Live</string>
+    <string name="purchase_cancelled_dialog_title">Zrušili jste své předplatné OsmAnd Live</string>
     <string name="paid_app">Placená aplikace</string>
     <string name="paid_plugin">Placený modul</string>
     <string name="travel_card_update_descr">Jsou dostupná nová data Wikivoyage, aktualizujte je na nejnovější verzi.</string>
