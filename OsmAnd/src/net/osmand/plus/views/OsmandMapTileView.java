@@ -573,7 +573,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		}
 		if (bufferBitmapTmp == null || tileBox.getPixHeight() != bufferBitmapTmp.getHeight()
 				|| tileBox.getPixWidth() != bufferBitmapTmp.getWidth()) {
-			bufferBitmapTmp = Bitmap.createBitmap(tileBox.getPixWidth(), tileBox.getPixHeight(), Config.RGB_565);
+			bufferBitmapTmp = Bitmap.createBitmap(tileBox.getPixWidth(), tileBox.getPixHeight(), Config.ARGB_8888);
 		}
 		long start = SystemClock.elapsedRealtime();
 		final QuadPoint c = tileBox.getCenterPixelPoint();

@@ -78,7 +78,7 @@ Lon %2$s</string>
     <string name="shared_string_help">Ayuda</string>
     <string name="shared_string_settings">Ajustes</string>
     <string name="shared_string_history">Historial</string>
-    <string name="shared_string_select_on_map">Elegir en el mapa</string>
+    <string name="shared_string_select_on_map">Marcar en el mapa</string>
     <string name="shared_string_select_all">Marcar todo</string>
     <string name="shared_string_deselect">Desmarcar</string>
     <string name="shared_string_deselect_all">Desmarcar todo</string>
@@ -219,11 +219,11 @@ Lon %2$s</string>
     <string name="traffic_warning">Aviso de tráfico</string>
     <string name="speak_favorites">Favoritos cercanos</string>
     <string name="speak_poi">PDI cercanos</string>
-    <string name="way_alarms">Avisos de tráfico</string>
+    <string name="way_alarms">Advertencias de tráfico</string>
     <string name="stop_navigation_service">Parar</string>
     <string name="confirm_every_run">Preguntar siempre</string>
     <string name="enable_sleep_mode">Activar modo reposo del GPS</string>
-    <string name="save_current_track_descr">Guardar ahora la traza actual como un archivo GPX.</string>
+    <string name="save_current_track_descr">Guarda la traza actual como archivo GPX ahora.</string>
     <string name="save_current_track">Guardar la traza actual</string>
     <string name="save_track_interval_globally">Intervalo de registro</string>
     <string name="voice_provider">Indicaciones por voz</string>
@@ -538,7 +538,7 @@ Lon %2$s</string>
     <string name="map_preferred_locale">Idioma preferido del mapa</string>
     <string name="forward">Siguiente</string>
     <string name="home">Panel de control</string>
-    <string name="live_monitoring_m_descr">Envía los datos de rastreo a un servicio web específico, si la grabación GPX está activada.</string>
+    <string name="live_monitoring_m_descr">Envía los datos de seguimiento a un servicio web específico, si la grabación GPX está activada.</string>
     <string name="live_monitoring_m">Rastreo en línea (requiere GPX)</string>
     <string name="live_monitoring_start">Iniciar rastreo en línea</string>
     <string name="live_monitoring_stop">Parar rastreo en línea</string>
@@ -641,7 +641,7 @@ Lon %2$s</string>
     <string name="edit_tilesource_url_to_load">URL</string>
     <string name="edit_tilesource_choose_existing">Elegir existente…</string>
     <string name="maps_define_edit">Definir/Editar…</string>
-    <string name="map_widget_fps_info">Info de depuración FPS</string>
+    <string name="map_widget_fps_info">Información de FPS</string>
     <string name="driving_region_descr">Región de conducción: EEUU, Europa, Reino Unido, Asia u otras.</string>
     <string name="driving_region">Región de conducción</string>
     <string name="driving_region_japan">Japón</string>
@@ -650,7 +650,7 @@ Lon %2$s</string>
     <string name="driving_region_europe_asia">Europa, Asia, Latinoamérica y similares</string>
     <string name="driving_region_uk">Reino Unido, India y similares</string>
     <string name="speak_title">Anunciar…</string>
-    <string name="speak_descr">Configura el anuncio de nombres de calles, avisos de tráfico (paradas, lomadas), radares y límites de velocidad.</string>
+    <string name="speak_descr">Configura el anuncio de nombres de calles, advertencias de tráfico (paradas, lomadas), radares y límites de velocidad.</string>
     <string name="speak_street_names">Nombres de calles (TTS)</string>
     <string name="speak_speed_limit">Límite de velocidad</string>
     <string name="speak_cameras">Radares de velocidad</string>
@@ -841,7 +841,7 @@ Lon %2$s</string>
     <string name="poi_filter_for_tourists">Para turistas</string>
     <string name="poi_filter_fuel">Combustible</string>
     <string name="show_warnings_title">Mostrar alertas…</string>
-    <string name="show_warnings_descr">Configura avisos de tráfico (límites de velocidad, paradas forzosas, lomadas, túneles), radares de velocidad, e información de carriles.</string>
+    <string name="show_warnings_descr">Configura advertencias de tráfico (límites de velocidad, paradas forzosas, lomadas, túneles), radares de velocidad, e información de carriles.</string>
     <string name="use_compass_navigation_descr">Usa la brújula cuando no se detecta la dirección.</string>
     <string name="use_compass_navigation">Usar brújula</string>
     <string name="avoid_motorway">Evitar autopistas</string>
@@ -910,7 +910,7 @@ Lon %2$s</string>
     <string name="avoid_unpaved">Evitar caminos sin pavimentar</string>
     <string name="avoid_ferries">Evitar ferris</string>
     <string name="avoid_in_routing_title">Evitar…</string>
-    <string name="avoid_in_routing_descr">Evita caminos con peajes, sin pavimentar, transbordadores u otros.</string>
+    <string name="avoid_in_routing_descr">Evita caminos con peajes, sin pavimentar, transbordadores o ferris y otros.</string>
     <string name="map_widget_fluorescent">Rutas fluorescentes</string>
     <string name="map_widget_show_ruler">Escala</string>
     <string name="map_widget_view_direction">Dirección de visualización</string>
@@ -1077,7 +1077,7 @@ Lon %2$s</string>
     <string name="direction_style_sidewise">Según el lado (8 sectores)</string>
     <string name="direction_style_clockwise">Según el reloj (12 sectores)</string>
     <string name="settings_direction_style">Estilo de dirección</string>
-    <string name="settings_direction_style_descr">Elige el estilo para expresar direcciones relativas en movimiento.</string>
+    <string name="settings_direction_style_descr">Elige el estilo para expresar direcciones relativas al moverse.</string>
     <string name="auto_announce_on">Iniciar anuncios automáticos</string>
     <string name="auto_announce_off">Parar anuncios automáticos</string>
     <string name="i_am_here">Estoy aquí</string>
@@ -1327,7 +1327,7 @@ Lon %2$s</string>
     <string name="m">m</string>
     <string name="old_map_index_is_not_supported">Formato de datos «{0}» del mapa, obsoleto e incompatible</string>
     <string name="poi_filter_closest_poi">PDI más cercanos</string>
-    <string name="poi_filter_custom_filter">Filtro propio</string>
+    <string name="poi_filter_custom_filter">Filtro personal</string>
     <string name="poi_filter_namefinder">NameFinder en línea</string>
     <string name="reading_cached_tiles">Leyendo teselas guardadas…</string>
     <string name="version_index_is_big_for_memory">La versión «{0}» de índices no cabe en memoria</string>
@@ -1345,7 +1345,7 @@ Lon %2$s</string>
 \nVersión: {0}
 \nFecha: {1}
 \nTamaño: {2} MB</string>
-    <string name="loading_builds_failed">Fallo al recuperar la lista de compilaciones de OsmAnd</string>
+    <string name="loading_builds_failed">Error al recuperar la lista de compilaciones de OsmAnd</string>
     <string name="loading_builds">Cargando compilaciones de OsmAnd…</string>
     <string name="select_build_to_install">Instalar una compilación de OsmAnd</string>
     <string name="gps_status_app_not_found">La aplicación «GPS Status» no está instalada. ¿Buscar en la tienda de aplicaciones?</string>
@@ -2045,7 +2045,7 @@ Lon %2$s</string>
     <string name="osm_editors_ranking">Clasificación de editores OSM</string>
     <string name="osm_live_subscription">Suscripción de OsmAnd Live</string>
     <string name="osm_live_subscribe_btn">Suscribirse</string>
-    <string name="osm_live_email_desc">Necesario para proporcionarte información sobre las contribuciones.</string>
+    <string name="osm_live_email_desc">Necesario para proporcionar información sobre las contribuciones.</string>
     <string name="osm_live_user_public_name">Nombre público</string>
     <string name="osm_live_hide_user_name">Ocultar mi nombre en los informes</string>
     <string name="osm_live_support_region">Región soportada</string>
@@ -2173,7 +2173,7 @@ Lon %2$s</string>
     <string name="no_inet_connection_desc_map">Necesario para descargar mapas.</string>
     <string name="search_location">Buscando la ubicación…</string>
     <string name="storage_free_space">Espacio libre</string>
-    <string name="storage_place_description">Almacenamiento de datos OsmAnd (para mapas, archivos GPX, etc.): %1$s.</string>
+    <string name="storage_place_description">Almacenamiento de datos de OsmAnd (para mapas, archivos GPX, etc.): %1$s.</string>
     <string name="give_permission">Conceder permiso</string>
     <string name="allow_access_location">Permitir el acceso a la ubicación</string>
     <string name="first_usage_greeting">Obtén direcciones y descubre lugares nuevos sin una conexión a Internet</string>
@@ -2355,7 +2355,7 @@ Lon %2$s</string>
     
     
     <string name="routing_attr_height_obstacles_name">Usar datos de elevación</string>
-    <string name="routing_attr_height_obstacles_description">Factor de elevación del terreno (según datos de SRTM, ASTER y EU-DEM).</string>
+    <string name="routing_attr_height_obstacles_description">Incluye como factor, la elevación del terreno (según datos de SRTM, ASTER y EU-DEM).</string>
 
     <string name="routing_attr_driving_style_name">Estilo de conducción</string>
     
@@ -2760,7 +2760,7 @@ Lon %2$s</string>
     <string name="shared_string_gpx_waypoints">Puntos de referencia de la traza</string>
     <string name="favourites_group">Categoría de favoritos</string>
     <string name="add_group">Añadir un grupo</string>
-    <string name="add_group_descr">Importar grupos de Favoritos o puntos de referencia GPX.</string>
+    <string name="add_group_descr">Importar grupos desde Favoritos o puntos de referencia GPX.</string>
     <string name="empty_state_markers_active">¡Crea marcadores del mapa!</string>
     <string name="empty_state_markers_active_desc">Pulsa en «Lugares» y luego pulsa la bandera del marcador.</string>
     <string name="empty_state_markers_groups">Importar grupos</string>
@@ -2789,11 +2789,11 @@ Lon %2$s</string>
     <string name="by_date">Por fecha</string>
     <string name="by_type">Por tipo</string>
     <string name="modify_the_search_query">Modificar la consulta de búsqueda.</string>
-    <string name="release_3_0">• Nuevo: Soporte de guías turísticas globales sin conexión a Internet. Las ubicaciones de referencias, están enlazadas al mapa. Datos iniciales de Wikiviajes 
+    <string name="release_3_0">• Nuevo: Soporte para guías turísticas globales sin conexión a Internet. Las ubicaciones de referencia, están vinculadas al mapa. Datos iniciales de Wikiviajes 
 \n 
 \n • Wikipedia: Nuevo aspecto, enlaces activos, ahora con soporte de imágenes 
 \n 
-\n • Interfaz de apertura de traza: Soporte para los grupos de puntos de ruta 
+\n • Interfaz de usuario de Open Tracks: Soporte para grupos de puntos de ruta 
 \n 
 \n • Marcadores del mapa: Importación de grupos elegidos desde archivos GPX, ingreso de coordenadas, nuevo aspecto 
 \n 
@@ -2824,7 +2824,7 @@ Lon %2$s</string>
     <string name="will_open_tomorrow_at">Abre mañana a las</string>
     <string name="rendering_attr_hidePOILabels_name">Etiquetas de PDI</string>
     
-    <string name="day_off_label">cerrado (día libre)</string>
+    <string name="day_off_label">cerrado</string>
     <string name="winter_and_ski_renderer">Invierno y esquí</string>
     <string name="touring_view_renderer">Vista turística</string>
     <string name="nautical_renderer">Náutico</string>
@@ -2894,7 +2894,7 @@ Lon %2$s</string>
     <string name="shared_string_do">Sí</string>
     <string name="shared_string_only_with_wifi">Sólo con Wi-Fi</string>
     <string name="wikivoyage_download_pics">Descargar imágenes</string>
-    <string name="wikivoyage_download_pics_descr">Las imágenes de los artículos pueden descargarse para su uso sin conexión. 
+    <string name="wikivoyage_download_pics_descr">Las imágenes del artículo pueden descargarse para su uso sin conexión. 
 \nSiempre disponible en «Explorar» → «Opciones».</string>
     <string name="shared_string_wifi_only">Sólo con Wi-Fi</string>
     <string name="select_travel_book">Marcar un libro de viaje</string>

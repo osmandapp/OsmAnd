@@ -1744,7 +1744,7 @@
     <string name="traffic_warning_pedestrian">گذرگاه پیاده</string>
 	<string name="show_railway_warnings">تقاطع‌های ریلی</string>
 	<string name="show_pedestrian_warnings">گذرگاه‌های پیاده</string>
-    <string name="routing_attr_no_new_routing_name">استفاده‌نکردن از قوائد مسیریابی نسخهٔ ۱٫۹</string>
+    <string name="routing_attr_no_new_routing_name">استفاده‌نکردن از قواعد مسیریابی نسخهٔ ۱٫۹</string>
     <string name="rendering_attr_transportStops_name">ایستگاه‌های حمل‌ونقل</string>
     <string name="navigate_point_northing">به‌طرف شمال</string>
     <string name="navigate_point_easting">به‌طرف شرق</string>

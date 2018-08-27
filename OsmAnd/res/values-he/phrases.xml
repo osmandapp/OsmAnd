@@ -2072,4 +2072,6 @@
 	<string name="poi_shelter_type_picnic_shelter">פיקניק</string>
 	<string name="poi_shelter_type_weather_shelter">מזג אוויר</string>
 	<string name="poi_shelter_type_lean_to">סככה פתוחה</string>
+	<string name="poi_shelter_type_basic_hut">בקתה בסיסית</string>
+	<string name="poi_shelter_type_building">בניין</string>
 	</resources>

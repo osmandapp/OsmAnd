@@ -788,7 +788,7 @@ Zachod: %2$s</string>
 	<string name="avoid_unpaved">Paźbiahać daroh biez pakryćcia</string>
 	<string name="avoid_ferries">Paźbiahać paromaŭ</string>
 	<string name="avoid_in_routing_title">Paźbiahać…</string>
-	<string name="avoid_in_routing_descr">Pazbiahać platnych i daroh biez pakryccia, paromaŭ.</string>
+	<string name="avoid_in_routing_descr">Pazbiahać, napryklad, platnych i daroh biez pakryccia, paromaŭ.</string>
 	<string name="map_widget_fluorescent">Lumіniescentnyja maršruty</string>
 	<string name="map_widget_show_ruler">Liniejka</string>
 	<string name="map_widget_view_direction">Kіrunak pohladu</string>
@@ -3071,7 +3071,7 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="select_travel_book">Abrać dzionnik padarožžaŭ</string>
     <string name="shared_string_travel_book">Dzionnik padarožžaŭ</string>
     <string name="download_images">Spampavać vyjavy</string>
-    <string name="error_notification_desc">Kali laska, adpraŭcie zdymak ekrana hetaha apaviaščennia na support@osmand.net</string>
+    <string name="error_notification_desc">Kali laska, adpraŭcie zdymak ekrana z hetym apaviaščenniem na support@osmand.net</string>
     <string name="release_3_0">"• Novaje: padtrymka svietavych aŭtanomnych turystyčnych daviednikaŭ. Spasylačnyja miasciny zviazany z mapaj. Zychodnyja danyja ad Wikivoyage. 
 \n 
 \n • Vikipiedyja: novy vyhliad, aktyŭnyja spasylki, padtrymka vyjaŭ 
@@ -3104,4 +3104,25 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
 \nRaspaviadzicie nam ab hetym.</string>
     <string name="send_search_query">Adpravić pašukovy zapyt?</string>
     <string name="increase_search_radius_to">Pavialičyć radyus pošuku da %1$s</string>
+    <string name="thank_you_for_feedback">Dziakuj vam za vodhuk</string>
+    <string name="poi_cannot_be_found">Vuziel ci šliach nie znajdzieny.</string>
+    <string name="search_no_results_feedback">Niama vynikaŭ pošuku?
+\nDajcie nam vodhuk</string>
+    <string name="commiting_way">Fiksujecca šliach…</string>
+    <string name="test_voice_desrc">Nacisnicie na knopku i pasluchajcie adpaviednuju halasavuju padkazku, kab vyznačyć adsutnyja abo paškodžanyja padkazki.</string>
+<string name="release_3_1">• Navihacyja: vypraŭliennie indykataru prahresu, chutkaja pieramiena pačatkovaha i kančatkovaha punktaŭ maršrutu
+\n
+\n • Markiery mapy: vypraŭliennie ŭkliučennia/adkliučennia hrup, mahčymasć chavać markiery z mapy
+\n
+\n • Redahavannie OSM: mahčymasć praŭki tehaŭ dlia niekropkavych abjektaŭ i šliachoŭ, vypraŭliennie adsutnych kamientaroŭ na natatkach, reziervovaje kapijavannie pravak
+\n
+\n • Paliapšennie razboru Wikipedia i Wikivoyage, abnoŭlienyja fajly ŭžo dastupnyja
+\n
+\n • Kantekstnaje mieniu: vypraŭliennie kolieru darožnych znakaŭ u načnym režymie, vypraŭliennie pamieraŭ dadatkovaha mieniu
+\n
+\n • Račnaja navihacyja: padtrymka farvateru
+\n
+\n • Vypraŭliennie inšych chibaŭ
+\n
+\n</string>
     </resources>

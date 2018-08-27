@@ -35,8 +35,13 @@ import net.osmand.aidl.mapwidget.AddMapWidgetParams;
 import net.osmand.aidl.mapwidget.RemoveMapWidgetParams;
 import net.osmand.aidl.mapwidget.UpdateMapWidgetParams;
 import net.osmand.aidl.navdrawer.SetNavDrawerItemsParams;
+import net.osmand.aidl.navigation.MuteNavigationParams;
 import net.osmand.aidl.navigation.NavigateGpxParams;
 import net.osmand.aidl.navigation.NavigateParams;
+import net.osmand.aidl.navigation.PauseNavigationParams;
+import net.osmand.aidl.navigation.ResumeNavigationParams;
+import net.osmand.aidl.navigation.StopNavigationParams;
+import net.osmand.aidl.navigation.UnmuteNavigationParams;
 import net.osmand.aidl.note.StartAudioRecordingParams;
 import net.osmand.aidl.note.StartVideoRecordingParams;
 import net.osmand.aidl.note.StopRecordingParams;
@@ -453,6 +458,56 @@ public class OsmandAidlService extends Service {
 		public boolean navigateGpx(NavigateGpxParams params) throws RemoteException {
 			try {
 				return params != null && getApi("navigateGpx").navigateGpx(params.getData(), params.getUri(), params.isForce());
+			} catch (Exception e) {
+				handleException(e);
+				return false;
+			}
+		}
+
+		@Override
+		public boolean pauseNavigation(PauseNavigationParams params) throws RemoteException {
+			try {
+				return getApi("pauseNavigation").pauseNavigation();
+			} catch (Exception e) {
+				handleException(e);
+				return false;
+			}
+		}
+
+		@Override
+		public boolean resumeNavigation(ResumeNavigationParams params) throws RemoteException {
+			try {
+				return getApi("resumeNavigation").resumeNavigation();
+			} catch (Exception e) {
+				handleException(e);
+				return false;
+			}
+		}
+
+		@Override
+		public boolean stopNavigation(StopNavigationParams params) throws RemoteException {
+			try {
+				return getApi("stopNavigation").stopNavigation();
+			} catch (Exception e) {
+				handleException(e);
+				return false;
+			}
+		}
+
+		@Override
+		public boolean muteNavigation(MuteNavigationParams params) throws RemoteException {
+			try {
+				return getApi("muteNavigation").muteNavigation();
+			} catch (Exception e) {
+				handleException(e);
+				return false;
+			}
+		}
+
+		@Override
+		public boolean unmuteNavigation(UnmuteNavigationParams params) throws RemoteException {
+			try {
+				return getApi("unmuteNavigation").unmuteNavigation();
 			} catch (Exception e) {
 				handleException(e);
 				return false;

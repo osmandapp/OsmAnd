@@ -205,7 +205,7 @@ public abstract class TilesCache<T> {
 
 	protected boolean isExpired(TileLoadDownloadRequest req, long lastModified) {
 		long time = System.currentTimeMillis();
-		int ts = req.tileSource.getExpirationTimeMillis();
+		long ts = req.tileSource.getExpirationTimeMillis();
 		return ts != -1 && req.url != null && time - lastModified > ts;
 	}
 
