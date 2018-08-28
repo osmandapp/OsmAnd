@@ -115,20 +115,12 @@ class UiUtils(private val app: TelegramApplication) {
 		return getDrawable(id, if (light) R.color.icon_light else 0)
 	}
 
-	fun checkUserPhotoFromChat(chatId: Long) {
-		val chat = app.telegramHelper.getChat(chatId)
-		val chatIconPath = chat?.photo?.small?.local?.path
-		if (chat != null && chatIconPath != null) {
-			checkUserGrayPhoto(app.telegramHelper.getUserIdFromChatType(chat.type), chatIconPath)
-		}
-	}
-
-	fun checkUserGrayPhoto(userId: Int, userOriginalPhotoPath: String?) {
-		if (userId != 0 && !app.telegramHelper.hasGrayscaleUserPhoto(userId)) {
+	fun convertAndSaveUserGrayPhoto(userOriginalPhotoPath: String, greyPhotoPath: String) {
+		if (File(userOriginalPhotoPath).exists()) {
 			ConvertPhotoToGrayscale().executeOnExecutor(
 				AsyncTask.THREAD_POOL_EXECUTOR,
 				userOriginalPhotoPath,
-				"${app.filesDir.absolutePath}/$PROFILE_GRAYSCALE_PHOTOS_DIR$userId$SAVED_GRAYSCALE_PHOTOS_EXT"
+				greyPhotoPath
 			)
 		}
 	}

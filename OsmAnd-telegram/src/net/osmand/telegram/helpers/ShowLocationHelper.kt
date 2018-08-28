@@ -157,11 +157,12 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 
 	private fun generatePhotoParams(photoPath: String?, stale: Boolean = false): Map<String, String>? {
 		val photoUri = if (TextUtils.isEmpty(photoPath)) {
-			if (stale) {
-				AndroidUtils.resourceToUri(app, R.drawable.img_user_picture)
+			val resId = if (stale) {
+				R.drawable.img_user_picture
 			} else {
-				AndroidUtils.resourceToUri(app, R.drawable.img_user_picture_active)
+				R.drawable.img_user_picture_active
 			}
+			AndroidUtils.resourceToUri(app, resId)
 		} else {
 			AndroidUtils.getUriForFile(app, File(photoPath))
 		}

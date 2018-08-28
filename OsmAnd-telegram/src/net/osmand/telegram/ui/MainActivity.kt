@@ -25,6 +25,8 @@ import net.osmand.telegram.ui.LoginDialogFragment.LoginDialogType
 import net.osmand.telegram.ui.MyLocationTabFragment.ActionButtonsListener
 import net.osmand.telegram.ui.views.LockableViewPager
 import net.osmand.telegram.utils.AndroidUtils
+import net.osmand.telegram.utils.PROFILE_GRAYSCALE_PHOTOS_DIR
+import net.osmand.telegram.utils.SAVED_GRAYSCALE_PHOTOS_EXT
 import org.drinkless.td.libcore.telegram.TdApi
 import java.lang.ref.WeakReference
 
@@ -221,8 +223,8 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 	}
 
 	override fun onTelegramChatsChanged() {
-		telegramHelper.getMessagesByChatIds().forEach {
-			app.uiUtils.checkUserPhotoFromChat(it.key)
+		telegramHelper.getMessagesByChatIds(settings.locHistoryTime).forEach {
+			checkUserPhotoFromChat(it.key)
 		}
 		runOnUi {
 			listeners.forEach { it.get()?.onTelegramChatsChanged() }
@@ -230,14 +232,17 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 	}
 
 	override fun onTelegramChatChanged(chat: TdApi.Chat) {
-		app.uiUtils.checkUserPhotoFromChat(chat.id)
+		checkUserPhotoFromChat(chat.id)
 		runOnUi {
 			listeners.forEach { it.get()?.onTelegramChatChanged(chat) }
 		}
 	}
 
 	override fun onTelegramUserChanged(user: TdApi.User) {
-		app.uiUtils.checkUserGrayPhoto(user.id, telegramHelper.getUserPhotoPath(user))
+		val photoPath = telegramHelper.getUserPhotoPath(user)
+		if (photoPath != null) {
+			checkUserGrayPhoto(user.id, photoPath)
+		}
 		val message = telegramHelper.getUserMessage(user)
 		if (message != null) {
 			app.showLocationHelper.addOrUpdateLocationOnMap(message)
@@ -263,7 +268,7 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 	}
 
 	override fun onReceiveChatLocationMessages(chatId: Long, vararg messages: TdApi.Message) {
-		app.uiUtils.checkUserPhotoFromChat(chatId)
+		checkUserPhotoFromChat(chatId)
 	}
 
 	override fun onDeleteChatLocationMessages(chatId: Long, messages: List<TdApi.Message>) {}
@@ -346,6 +351,23 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 		}
 	}
 
+	private fun checkUserPhotoFromChat(chatId: Long) {
+		val chat = app.telegramHelper.getChat(chatId)
+		val chatIconPath = chat?.photo?.small?.local?.path
+		if (chat != null && chatIconPath != null) {
+			checkUserGrayPhoto(app.telegramHelper.getUserIdFromChatType(chat.type), chatIconPath)
+		}
+	}
+
+	private fun checkUserGrayPhoto(userId: Int, userOriginalPhotoPath: String) {
+		if (userId != 0 && !app.telegramHelper.hasGrayscaleUserPhoto(userId)) {
+			app.uiUtils.convertAndSaveUserGrayPhoto(
+				userOriginalPhotoPath,
+				"${app.filesDir.absolutePath}/$PROFILE_GRAYSCALE_PHOTOS_DIR$userId$SAVED_GRAYSCALE_PHOTOS_EXT"
+			)
+		}
+	}
+	
 	private fun isOsmAndInstalled() = AndroidUtils.isAppInstalled(this, settings.appToConnectPackage)
 	
 	private fun runOnUi(action: (() -> Unit)) {
