@@ -214,7 +214,7 @@ class LoginDialogFragment : BaseDialogFragment() {
 		var focusRequested = false
 		for (t in LoginDialogType.values()) {
 			val layout: View? = view?.findViewById(t.viewId)
-			val contains = t == loginDialogActiveType && !showProgress
+			val contains = t == loginDialogActiveType
 			when {
 				contains -> {
 					if (layout != null) {

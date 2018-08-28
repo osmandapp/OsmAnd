@@ -79,11 +79,10 @@ object OsmandFormatter {
 	fun getListItemLiveTimeDescr(ctx: TelegramApplication, lastUpdated: Int, prefix: String = ""): String {
 		return if (lastUpdated > 0) {
 			val duration = System.currentTimeMillis() / 1000 - lastUpdated
-			if (duration > MIN_DURATION_FOR_DATE_FORMAT) {
-				prefix + getFormattedDate(lastUpdated.toLong())
-			} else {
-				prefix + getFormattedDuration(ctx, duration) + " " +
-						ctx.getString(R.string.time_ago)
+			when {
+				duration > MIN_DURATION_FOR_DATE_FORMAT -> prefix + getFormattedDate(lastUpdated.toLong())
+				duration > 0 -> prefix + getFormattedDuration(ctx, duration) + " " + ctx.getString(R.string.time_ago)
+				else -> ""
 			}
 		} else {
 			""

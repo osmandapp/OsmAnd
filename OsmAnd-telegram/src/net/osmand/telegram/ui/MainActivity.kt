@@ -155,8 +155,6 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 
 		if (AndroidUtils.isLocationPermissionAvailable(this)) {
 			app.locationProvider.resumeAllUpdates()
-		} else {
-			AndroidUtils.requestLocationPermission(this)
 		}
 		if (settings.hasAnyChatToShowOnMap() && !isOsmAndInstalled()) {
 			showOsmandMissingDialog()
@@ -196,7 +194,14 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 					telegramHelper.init()
 					telegramHelper.requestAuthorizationState()
 				}
-				TelegramAuthorizationState.READY -> LoginDialogFragment.dismiss(fm)
+				TelegramAuthorizationState.READY -> {
+					LoginDialogFragment.dismiss(fm)
+					if (AndroidUtils.isLocationPermissionAvailable(this)) {
+						app.locationProvider.resumeAllUpdates()
+					} else {
+						AndroidUtils.requestLocationPermission(this)
+					}
+				} 
 				else -> Unit
 			}
 
@@ -273,6 +278,8 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 	fun logoutTelegram(silent: Boolean = false) {
 		if (telegramHelper.getTelegramAuthorizationState() == TelegramHelper.TelegramAuthorizationState.READY) {
 			if (app.isInternetConnectionAvailable) {
+				app.messagesDbHelper.clearMessages()
+				settings.clear()
 				telegramHelper.logout()
 			} else {
 				Toast.makeText(this, R.string.logout_no_internet_msg, Toast.LENGTH_SHORT).show()
