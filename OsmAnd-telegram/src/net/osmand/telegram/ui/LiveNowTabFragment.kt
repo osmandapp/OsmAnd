@@ -235,7 +235,7 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 		}
 		adapter.items = res
 	}
-	
+
 	private fun convertToLocationItems(
 		chat: TdApi.Chat,
 		messages: List<TdApi.Message>,
@@ -243,7 +243,7 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 	): List<LocationItem> {
 		val res = mutableListOf<LocationItem>()
 		messages.forEach { message ->
-			if ((!addOnlyViaBotMessages || message.viaBotUserId != 0)) {
+			if (!addOnlyViaBotMessages || message.viaBotUserId != 0) {
 				TelegramUiHelper.messageToLocationItem(telegramHelper, chat, message)?.also {
 					res.add(it)
 				}
