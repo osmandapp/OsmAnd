@@ -188,7 +188,7 @@ Ehhez {1} MB helyre van szükség.
 
     <string name="shared_string_save_as_gpx">Mentés új GPX fájlként</string>
     <string name="route_successfully_saved_at">Az útvonal mentve mint \'%1$s\'.</string>
-    <string name="filename_input">Fájl neve : </string>
+    <string name="filename_input">Fájlnév:</string>
     <string name="file_with_name_already_exist">Már létezik fájl ilyen névvel.</string>
     <string name="shared_string_save">Mentés</string>
 
@@ -847,7 +847,7 @@ Proporcionális memória %4$s MB (Android korlát %5$s MB, Dalvik %6$s MB).</str
 
 
     <string name="show_cameras">Traffipaxok</string>
-    <string name="show_traffic_warnings">Sebességhatárok</string>
+    <string name="show_traffic_warnings">Forgalmi figyelmeztetések</string>
     <string name="avoid_toll_roads">Fizetős utak elkerülése</string>
 
     <string name="map_widget_top_text">Utcanév</string>
@@ -878,7 +878,7 @@ Proporcionális memória %4$s MB (Android korlát %5$s MB, Dalvik %6$s MB).</str
     <string name="bg_service_sleep_mode_off">Futtatás\n háttérben</string>
     <string name="bg_service_sleep_mode_on">Háttérben futás\n leállítása</string>
     <string name="avoid_in_routing_title">Elkerülés…</string>
-    <string name="avoid_in_routing_descr">Fizetős utak, kompok, földutak elkerülése.</string>
+    <string name="avoid_in_routing_descr">Pl. fizetős utak, kompok, földutak elkerülése.</string>
     <string name="show_warnings_title">Figyelmeztetések megjelenítése…</string>
     <string name="show_warnings_descr">Közlekedési figyelmeztetések (sebességkorlátozás, közúti ellenőrzés, fekvőrendőr, alagút), traffipaxriasztás és sávinformációk.</string>
     <string name="map_widget_fluorescent">Élénk színű utak</string>
@@ -1240,7 +1240,7 @@ Proporcionális memória %4$s MB (Android korlát %5$s MB, Dalvik %6$s MB).</str
     <string name="shared_string_and">és</string>
     <string name="shared_string_or">vagy</string>
     <string name="amenity_type_seamark">Hajózási jelzés</string>
-    <string name="app_modes_choose_descr">Milyen felhasználási módok jelenjenek meg az alkalmazásban?</string>
+    <string name="app_modes_choose_descr">Válaszd ki az alkalmazásban megjelenő profilokat.</string>
     <string name="app_modes_choose">Alkalmazás profilok</string>
     <string name="map_widget_map_rendering">Térkép megjelenítése</string>
     <string name="app_mode_hiking">Gyalogtúra</string>
@@ -1572,7 +1572,7 @@ Proporcionális memória %4$s MB (Android korlát %5$s MB, Dalvik %6$s MB).</str
     <string name="shared_string_waypoints">Útpontok</string>
     
     <string name="way_alarms">Forgalmi figyelmeztetések</string>
-    <string name="speak_favorites">Közeli kedvencek</string>
+    <string name="speak_favorites">Közeli Kedvencek</string>
     <string name="speak_poi">Közeli érdekes helyek (POI)</string>
     <string name="download_additional_maps">Letöltöd a hiányzó térképeket %1$s (%2$d MB)?</string>
     <string name="rendering_value_browse_map_name">Térképböngészés</string>
@@ -1611,7 +1611,7 @@ Proporcionális memória %4$s MB (Android korlát %5$s MB, Dalvik %6$s MB).</str
     <string name="local_index_description">Egy meglévő elem adatainak megtekintéséhez koppints rá, a deaktiváláshoz vagy törléshez nyomd meg hosszan. Jelenlegi adatok az eszközön (%1$s szabad):</string>
     <string name="speed_limit_exceed">Sebességkorlátozás-tolerancia</string>
     <string name="speed_limit_exceed_message">Válaszd ki a sebességkorlátozás toleranciájának határát, amely fölött hangos figyelmeztetést fogsz kapni.</string>
-    <string name="fav_point_emoticons_message">A kedvenc hely neve erre módosult: %1$s, hogy lehetővé váljék a hangulatjeleket tartalmazó szöveg fájlba mentése.</string>
+    <string name="fav_point_emoticons_message">A Kedvenc hely neve erre módosult: %1$s, hogy lehetővé váljék a hangulatjeleket tartalmazó szöveg fájlba mentése.</string>
     <string name="print_route">Útvonal nyomtatása</string>
     
     
@@ -1841,7 +1841,7 @@ Hosszúság: %2$s</string>
     <string name="rendering_value__name">Alapértelmezett</string>
     <string name="rendering_value_highContrastRoads_name">Nagy kontrasztú utak</string>
     <string name="index_name_netherlands">Európa – Hollandia</string>
-    <string name="application_dir_change_warning3">Az adatfájljait másoljuk az új helyre?</string>
+    <string name="application_dir_change_warning3">Az OmAnd adatfájljait másoljuk az új helyre?</string>
     <string name="rendering_attr_hideHouseNumbers_name">Házszámok</string>
     
     <string name="routing_attr_avoid_borders_description">Országhatár átlépésének elkerülése</string>
@@ -1993,7 +1993,7 @@ Hosszúság: %2$s</string>
     <string name="av_locations_descr">GPX-fájl jegyzet helyszínekkel.</string>
     <string name="av_locations">Helyszín</string>
     <string name="routing_attr_avoid_shuttle_train_name">Autószállító vonat elkerülése</string>
-    <string name="routing_attr_avoid_shuttle_train_description">Autószállító vonat elkerülése</string>
+    <string name="routing_attr_avoid_shuttle_train_description">Autószállító vonatok elkerülése</string>
     <string name="favourites_context_menu_add">Kedvenc létrehozása</string>
     <string name="show_on_start">Megjelenítés indításkor</string>
     <string name="poi_deleted_localy">A POI törölve lesz, amint feltöltöd a változtatásokat</string>
@@ -2335,7 +2335,7 @@ Jelenleg csak {2} MB érhető el.</string>
     <string name="donation_to_osm_desc">Az adományod egy részét továbbítjuk azon OSM szerkesztőknek, akik módosításokat küldtek be OpenStreetMapre. Az előfizetési díj változatlan marad.</string>
     <string name="osm_live_subscription_desc">Az előfizetés lehetővé teszi bármely térkép óránkénti, napi vagy heti frissítését, valamint korlátlan számú térkép letöltését globálisan.</string>
     <string name="get_it">Beszerzés</string>
-    <string name="osm_live_banner_desc">Szerezz korlátlan térékpletöltési és havi egynél gyakoribb térképfrissítési lehetőséget: hetente, naponta vagy óránként.</string>
+    <string name="osm_live_banner_desc">Szerezz korlátlan térképletöltési és havi egynél gyakoribb térképfrissítési lehetőséget: hetente, naponta vagy óránként.</string>
     <string name="get_for_month">Beszerzés havonta %1$s-ért</string>
     <string name="osmand_plus_banner_desc">Korlátlan számú térképletöltés és -frissítés, valamint Wikipédia-bővítmény.</string>
     <string name="si_mi_meters">Mérföld/méter</string>
@@ -2756,7 +2756,7 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="measurement_tool">Távolságmérés</string>
     <string name="osn_modify_dialog_error">Nem sikerült módosítani a jegyzetet</string>
     <string name="osn_modify_dialog_title">Jegyzet módosítása</string>
-    <string name="context_menu_item_modify_note">OSM Jegyzet módosítása</string>
+    <string name="context_menu_item_modify_note">OSM jegyzet módosítása</string>
     <string name="make_round_trip_descr">Kiindulási pont másolatának hozzáadása célpontként.</string>
     <string name="make_round_trip">Körút készítése</string>
     
@@ -2823,7 +2823,7 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="shared_string_gpx_waypoints">Nyomvonal útpontok</string>
     <string name="favourites_group">Kedvencek kategória</string>
     <string name="add_group">Csoport hozzáadása</string>
-    <string name="add_group_descr">Csoportok importálása kedvencekből vagy GPX útpontból.</string>
+    <string name="add_group_descr">Csoportok importálása Kedvencekből vagy GPX útpontból.</string>
     <string name="empty_state_markers_active">Készíts térképjelölőket!</string>
     <string name="empty_state_markers_active_desc">Koppints hosszan vagy röviden egy helyre, majd koppints a jelölőzászló gombjára.</string>
     <string name="empty_state_markers_groups">Csoportok importálása</string>
@@ -2833,7 +2833,7 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="show_guide_line_descr">Irányjelző vonalat jelenít meg az aktuális pozíciódtól az aktív térképjelölőkig.</string>
     <string name="show_arrows_descr">Egy, vagy két nyilat jelenít meg, amik az aktív jelölők irányába mutatnak.</string>
     <string name="distance_indication_descr">Válaszd ki, hogyan jelenjen meg az aktív jelölők távolsága.</string>
-    <string name="active_markers_descr">Válaszd ki a megjelenítendő aktív térképjelölők számát.</string>
+    <string name="active_markers_descr">Válaszd ki a megjelenítendő térképjelölők számát.</string>
     <string name="digits_quantity">Tizedesjegyek száma</string>
     <string name="shared_string_right">Jobb</string>
     <string name="shared_string_left">Bal</string>
@@ -2907,8 +2907,8 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="toast_empty_name_error">Névtelen hely</string>
     <string name="tunnel_warning">Alagút közeledik</string>
     <string name="show_tunnels">Alagutak</string>
-<string name="distance_farthest">Távolság: Legtávolabbi először</string>
-    <string name="distance_nearest">Távolság: Legközelebbi először</string>
+<string name="distance_farthest">Távolság: legtávolabbi először</string>
+    <string name="distance_nearest">Távolság: legközelebbi először</string>
     <string name="enter_lon">Hosszúság megadása</string>
     <string name="enter_lat">Szélesség megadása</string>
     <string name="enter_lat_and_lon">Szélesség és hosszúság megadása</string>
@@ -2991,7 +2991,7 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="download_maps_travel">Útikönyvek</string>
     <string name="shared_string_wikivoyage">Wikivoyage</string>
     <string name="article_removed">Szócikk eltávolítva</string>
-    <string name="wikivoyage_search_hint">Keresés: Ország, város, tartomány</string>
+    <string name="wikivoyage_search_hint">Keresés: ország, város, tartomány</string>
     <string name="shared_string_read">Olvasás</string>
     <string name="saved_articles">Könyvjelzőzött szócikkek</string>
     <string name="shared_string_explore">Felfedezés</string>
@@ -3035,4 +3035,8 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="poi_cannot_be_found">A pont vagy útvonal nem található.</string>
     <string name="search_no_results_feedback">Nincs találat?
 \nAdj visszajelzést</string>
+    <string name="shared_string_world">Világ</string>
+    <string name="coord_input_edit_point">Pont szerkesztése</string>
+    <string name="coord_input_add_point">Pont hozzáadása</string>
+    <string name="coord_input_save_as_track">Mentés nyomvonalként</string>
     </resources>

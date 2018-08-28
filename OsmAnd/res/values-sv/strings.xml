@@ -2997,4 +2997,7 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="search_no_results_feedback">Inga sökresultat?
 \nGe oss feedback</string>
     <string name="increase_search_radius_to">Öka sökradie till %1$s</string>
+    <string name="thank_you_for_feedback">Tack för återkoppling</string>
+    <string name="send_search_query">Skicka sökförfråga?</string>
+    <string name="shared_string_world">Värld</string>
     </resources>
