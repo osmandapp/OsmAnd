@@ -164,9 +164,7 @@ class TelegramSettings(private val app: TelegramApplication) {
 
 	fun clear() {
 		stopSharingLocationToChats()
-		val prefs = app.getSharedPreferences(SETTINGS_NAME, Context.MODE_PRIVATE)
-		val edit = prefs.edit()
-		edit.clear().apply()
+		app.getSharedPreferences(SETTINGS_NAME, Context.MODE_PRIVATE).edit().clear().apply()
 	}
 	
 	fun save() {
