@@ -5,14 +5,20 @@ import android.os.Parcelable;
 
 public class SearchParams implements Parcelable {
 
+	public static final int SEARCH_TYPE_POI = 1;
+	public static final int SEARCH_TYPE_ADDRESS = 2;
+	public static final int SEARCH_TYPE_ALL = SEARCH_TYPE_POI | SEARCH_TYPE_ADDRESS;
+
 	private String searchQuery;
+	private int searchType;
 	private double latutude;
 	private double longitude;
 	private int radiusLevel = 1;
 	private int totalLimit = -1;
 
-	public SearchParams(String searchQuery, double latutude, double longitude, int radiusLevel, int totalLimit) {
+	public SearchParams(String searchQuery, int searchType, double latutude, double longitude, int radiusLevel, int totalLimit) {
 		this.searchQuery = searchQuery;
+		this.searchType = searchType;
 		this.latutude = latutude;
 		this.longitude = longitude;
 		this.radiusLevel = radiusLevel;
@@ -39,6 +45,10 @@ public class SearchParams implements Parcelable {
 		return searchQuery;
 	}
 
+	public int getSearchType() {
+		return searchType;
+	}
+
 	public double getLatutude() {
 		return latutude;
 	}
@@ -58,6 +68,7 @@ public class SearchParams implements Parcelable {
 	@Override
 	public void writeToParcel(Parcel out, int flags) {
 		out.writeString(searchQuery);
+		out.writeInt(searchType);
 		out.writeDouble(latutude);
 		out.writeDouble(longitude);
 		out.writeInt(radiusLevel);
@@ -66,6 +77,7 @@ public class SearchParams implements Parcelable {
 
 	private void readFromParcel(Parcel in) {
 		searchQuery = in.readString();
+		searchType = in.readInt();
 		latutude = in.readDouble();
 		longitude = in.readDouble();
 		radiusLevel = in.readInt();

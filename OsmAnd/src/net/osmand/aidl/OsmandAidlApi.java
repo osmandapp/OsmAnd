@@ -29,6 +29,7 @@ import net.osmand.aidl.maplayer.AMapLayer;
 import net.osmand.aidl.maplayer.point.AMapPoint;
 import net.osmand.aidl.mapmarker.AMapMarker;
 import net.osmand.aidl.mapwidget.AMapWidget;
+import net.osmand.aidl.search.SearchParams;
 import net.osmand.aidl.search.SearchResult;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
@@ -54,6 +55,7 @@ import net.osmand.plus.dialogs.ConfigureMapMenu;
 import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.search.listitems.QuickSearchListItem;
 import net.osmand.plus.views.AidlMapLayer;
 import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.OsmandMapLayer;
@@ -63,6 +65,7 @@ import net.osmand.plus.views.mapwidgets.MapWidgetRegistry.MapWidgetRegInfo;
 import net.osmand.plus.views.mapwidgets.TextInfoWidget;
 import net.osmand.search.SearchUICore;
 import net.osmand.search.SearchUICore.SearchResultCollection;
+import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchSettings;
 import net.osmand.util.Algorithms;
 
@@ -1327,7 +1330,7 @@ public class OsmandAidlApi {
 		return true;
 	}
 
-	boolean search(final String searchQuery, final double latitude, final double longitude,
+	boolean search(final String searchQuery, final int searchType, final double latitude, final double longitude,
 				   final int radiusLevel, final int totalLimit, final SearchCompleteCallback callback) {
 		if (Algorithms.isEmpty(searchQuery) || latitude == 0 || longitude == 0 || callback == null) {
 			return false;
@@ -1340,30 +1343,17 @@ public class OsmandAidlApi {
 
 				@Override
 				public void onFinish(AppInitializer init) {
-					runSearch(searchQuery, latitude, longitude, radiusLevel, totalLimit, callback);
+					runSearch(searchQuery, searchType, latitude, longitude, radiusLevel, totalLimit, callback);
 				}
 			});
 		} else {
-			runSearch(searchQuery, latitude, longitude, radiusLevel, totalLimit, callback);
+			runSearch(searchQuery, searchType, latitude, longitude, radiusLevel, totalLimit, callback);
 		}
 		return true;
 	}
 
-	private void runSearch(String searchQuery, double latitude, double longitude, int radiusLevel, int totalLimit, final SearchCompleteCallback callback) {
-		final SearchUICore core = app.getSearchUICore().getCore();
-		core.setOnResultsComplete(new Runnable() {
-			@Override
-			public void run() {
-				List<SearchResult> resultSet = new ArrayList<>();
-				SearchResultCollection resultCollection = core.getCurrentSearchResult();
-				for (net.osmand.search.core.SearchResult r : resultCollection.getCurrentSearchResults()) {
-					SearchResult result = new SearchResult(r.location.getLatitude(), r.location.getLongitude(), r.localeName, r.alternateName, new ArrayList<>(r.otherNames));
-					resultSet.add(result);
-				}
-				callback.onSearchComplete(resultSet);
-			}
-		});
-
+	private void runSearch(String searchQuery, int searchType, double latitude, double longitude, int radiusLevel,
+						   int totalLimit, final SearchCompleteCallback callback) {
 		if (radiusLevel < 1) {
 			radiusLevel = 1;
 		} else if (radiusLevel > MAX_DEFAULT_SEARCH_RADIUS) {
@@ -1372,14 +1362,50 @@ public class OsmandAidlApi {
 		if (totalLimit <= 0) {
 			totalLimit = -1;
 		}
+		final int limit = totalLimit;
+
+		final SearchUICore core = app.getSearchUICore().getCore();
+		core.setOnResultsComplete(new Runnable() {
+			@Override
+			public void run() {
+				List<SearchResult> resultSet = new ArrayList<>();
+				SearchResultCollection resultCollection = core.getCurrentSearchResult();
+				int count = 0;
+				for (net.osmand.search.core.SearchResult r : resultCollection.getCurrentSearchResults()) {
+					String name = QuickSearchListItem.getName(app, r);
+					String typeName = QuickSearchListItem.getTypeName(app, r);
+					SearchResult result = new SearchResult(r.location.getLatitude(), r.location.getLongitude(),
+							name, typeName, r.alternateName, new ArrayList<>(r.otherNames));
+					resultSet.add(result);
+					count++;
+					if (limit != -1 && count >= limit) {
+						break;
+					}
+				}
+				callback.onSearchComplete(resultSet);
+			}
+		});
 
 		SearchSettings searchSettings = new SearchSettings(core.getSearchSettings())
-				.setSearchTypes(CITY, VILLAGE, POSTCODE, STREET, HOUSE, STREET_INTERSECTION, POI)
 				.setRadiusLevel(radiusLevel)
 				.setEmptyQueryAllowed(false)
 				.setSortByName(false)
 				.setOriginalLocation(new LatLon(latitude, longitude))
 				.setTotalLimit(totalLimit);
+
+		List<ObjectType> searchTypes = new ArrayList<>();
+		if ((searchType & SearchParams.SEARCH_TYPE_POI) != 0) {
+			searchTypes.add(POI);
+		}
+		if ((searchType & SearchParams.SEARCH_TYPE_ADDRESS) != 0) {
+			searchTypes.add(CITY);
+			searchTypes.add(VILLAGE);
+			searchTypes.add(POSTCODE);
+			searchTypes.add(STREET);
+			searchTypes.add(HOUSE);
+			searchTypes.add(STREET_INTERSECTION);
+		}
+		searchSettings = searchSettings.setSearchTypes(searchTypes.toArray(new ObjectType[searchTypes.size()]));
 
 		core.search(searchQuery, false, null, searchSettings);
 	}
