@@ -5,43 +5,6 @@
 	<!-- 	alwaysCopyOnFirstInstall - Copies file on first install, always -->
 	<!-- 	alwaysOverwriteOrCopy - Copies or overwrites file unconditionally -->
 	<!-- 	copyOnlyIfDoesNotExist - Copies file only this file is not present on target system -->
-	<asset source="voice/ar/ttsconfig.p" destination="voice/ar-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" />
-	<asset source="voice/be/ttsconfig.p" destination="voice/be-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" />
-	<asset source="voice/cs/ttsconfig.p" destination="voice/cs-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" />
-	<asset source="voice/da/ttsconfig.p" destination="voice/da-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" />
-	<asset source="voice/de/ttsconfig.p" destination="voice/de-tts/_ttsconfig.p" mode="alwaysOverwriteOrCopy" />
-	<asset source="voice/el/ttsconfig.p" destination="voice/el-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" />
-	<asset source="voice/en/ttsconfig.p" destination="voice/en-tts/_ttsconfig.p" mode="alwaysOverwriteOrCopy" />
-	<asset source="voice/en-gb/ttsconfig.p" destination="voice/en-gb-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" />
-	<asset source="voice/es/ttsconfig.p" destination="voice/es-tts/_ttsconfig.p" mode="alwaysOverwriteOrCopy" />
-	<asset source="voice/es-ar/ttsconfig.p" destination="voice/es-ar-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" />
-	<asset source="voice/et/ttsconfig.p" destination="voice/et-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" />
-	<asset source="voice/fa/ttsconfig.p" destination="voice/fa-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" />
-	<asset source="voice/fi/ttsconfig.p" destination="voice/fi-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" />
-	<asset source="voice/fr/ttsconfig.p" destination="voice/fr-tts/_ttsconfig.p" mode="alwaysOverwriteOrCopy" />
-	<asset source="voice/he/ttsconfig.p" destination="voice/he-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" />
-	<asset source="voice/hi/ttsconfig.p" destination="voice/hi-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" />
-	<asset source="voice/hr/ttsconfig.p" destination="voice/hr-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" /> 
-	<asset source="voice/hu/ttsconfig.p" destination="voice/hu-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" />
-	<asset source="voice/hu-formal/ttsconfig.p" destination="voice/hu_formal-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" />
-	<asset source="voice/it/ttsconfig.p" destination="voice/it-tts/_ttsconfig.p" mode="alwaysOverwriteOrCopy" />
-	<asset source="voice/ja/ttsconfig.p" destination="voice/ja-tts/_ttsconfig.p" mode="alwaysOverwriteOrCopy" />
-	<asset source="voice/ko/ttsconfig.p" destination="voice/ko-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" />
-	<asset source="voice/lv/ttsconfig.p" destination="voice/lv-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" />
-	<asset source="voice/nl/ttsconfig.p" destination="voice/nl-tts/_ttsconfig.p" mode="alwaysOverwriteOrCopy" />
-	<asset source="voice/pl/ttsconfig.p" destination="voice/pl-tts/_ttsconfig.p" mode="alwaysOverwriteOrCopy" />
-	<asset source="voice/pt/ttsconfig.p" destination="voice/pt-tts/_ttsconfig.p" mode="alwaysOverwriteOrCopy" />
-	<asset source="voice/pt-br/ttsconfig.p" destination="voice/pt-br-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" />
-	<asset source="voice/ro/ttsconfig.p" destination="voice/ro-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" />
-	<asset source="voice/ru/ttsconfig.p" destination="voice/ru-tts/_ttsconfig.p" mode="alwaysOverwriteOrCopy" />
-	<asset source="voice/sc/ttsconfig.p" destination="voice/sc-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" />
-	<asset source="voice/sk/ttsconfig.p" destination="voice/sk-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" />
-	<asset source="voice/sl/ttsconfig.p" destination="voice/sl-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" />
-	<asset source="voice/sv/ttsconfig.p" destination="voice/sv-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" />
-	<asset source="voice/sw/ttsconfig.p" destination="voice/sw-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" />
-	<asset source="voice/uk/ttsconfig.p" destination="voice/uk-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" />
-	<asset source="voice/zh/ttsconfig.p" destination="voice/zh-tts/_ttsconfig.p" mode="alwaysOverwriteOrCopy" />
-	<asset source="voice/zh-hk/ttsconfig.p" destination="voice/zh-hk-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" />
 
 	<!--JavaScript files-->
 	<asset source="voice/ar/ar_tts.js" destination="voice/ar-tts/ar_tts.js" mode="overwriteOnlyIfExists" />
@@ -81,14 +44,6 @@
 	<asset source="voice/uk/uk_tts.js" destination="voice/uk-tts/uk_tts.js" mode="overwriteOnlyIfExists" />
 	<asset source="voice/zh/zh_tts.js" destination="voice/zh-tts/zh_tts.js" mode="alwaysOverwriteOrCopy" />
 	<asset source="voice/zh-hk/zh-hk_tts.js" destination="voice/zh-hk-tts/zh-hk_tts.js" mode="overwriteOnlyIfExists" />
-
-	<asset source="voice/de/config.p" destination="voice/de/_config.p" mode="overwriteOnlyIfExists" />
-	<asset source="voice/en/config.p" destination="voice/en/_config.p" mode="overwriteOnlyIfExists" />
-	<asset source="voice/es/config.p" destination="voice/es/_config.p" mode="overwriteOnlyIfExists" />
-	<asset source="voice/fa/config.p" destination="voice/fa/_config.p" mode="overwriteOnlyIfExists" />
-	<asset source="voice/it/config.p" destination="voice/it/_config.p" mode="overwriteOnlyIfExists" />
-	<asset source="voice/pt/config.p" destination="voice/pt/_config.p" mode="overwriteOnlyIfExists" />
-	<asset source="voice/ru/config.p" destination="voice/ru/_config.p" mode="overwriteOnlyIfExists" />
 
 	<asset source="fonts/05_NotoSans-Regular.ttf" destination="fonts/05_NotoSans-Regular.ttf" mode="alwaysOverwriteOrCopy" />
 	<asset source="fonts/10_NotoSans-Bold.ttf" destination="fonts/10_NotoSans-Bold.ttf" mode="alwaysOverwriteOrCopy" />
