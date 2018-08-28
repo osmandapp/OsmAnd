@@ -183,9 +183,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 			setOnCheckedChangeListener { _, isChecked ->
 				if (!isChecked) {
 					sharingMode = isChecked
-					settings.stopSharingLocationToChats()
-					shareLocationHelper.stopSharingLocation()
-					telegramHelper.stopSendingLiveLocationMessages()
+					activity.stopSharingLocation()
 					updateContent()
 				}
 			}

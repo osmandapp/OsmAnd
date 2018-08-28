@@ -146,6 +146,10 @@ class TelegramSettings(private val app: TelegramApplication) {
 		this.chatShareLocStartSec.clear()
 	}
 
+	fun clearShowOnMapChats() {
+		showOnMapChats = emptySet()
+	}
+
 	fun showChatOnMap(chatId: Long, show: Boolean) {
 		val showOnMapChats = showOnMapChats.toMutableList()
 		if (show) {

@@ -288,6 +288,25 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 		settings.removeNonexistingChats(presentChatTitles)
 	}
 
+	fun stopSharingLocation() {
+		settings.stopSharingLocationToChats()
+		app.shareLocationHelper.stopSharingLocation()
+		telegramHelper.stopSendingLiveLocationMessages()
+	}
+
+	fun stopShowingChatsOnMap() {
+		settings.getShowOnMapChats().forEach { app.showLocationHelper.hideChatMessages(it) }
+		settings.clearShowOnMapChats()
+		app.showLocationHelper.stopShowingLocation()
+	}
+
+	private fun closeApp() {
+		stopSharingLocation()
+		stopShowingChatsOnMap()
+		finish()
+		android.os.Process.killProcess(android.os.Process.myPid())
+	}
+
 	fun loginTelegram() {
 		if (telegramHelper.getTelegramAuthorizationState() != TelegramAuthorizationState.CLOSED) {
 			telegramHelper.logout()
@@ -318,18 +337,17 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 		imageView.setOnClickListener { showOptionsPopupMenu(imageView) }
 	}
 
-	fun showOptionsPopupMenu(anchor: View) {
+	private fun showOptionsPopupMenu(anchor: View) {
 		val menuList = ArrayList<String>()
 		val settings = getString(R.string.shared_string_settings)
-		val logout = getString(R.string.shared_string_logout)
 		val login = getString(R.string.shared_string_login)
+		val exit = getString(R.string.shared_string_exit)
 
 		menuList.add(settings)
-		@Suppress("NON_EXHAUSTIVE_WHEN")
-		when (telegramHelper.getTelegramAuthorizationState()) {
-			TelegramHelper.TelegramAuthorizationState.READY -> menuList.add(logout)
-			TelegramHelper.TelegramAuthorizationState.CLOSED -> menuList.add(login)
+		if (telegramHelper.getTelegramAuthorizationState() == TelegramAuthorizationState.CLOSED) {
+			menuList.add(login)
 		}
+		menuList.add(exit)
 
 		ListPopupWindow(this@MainActivity).apply {
 			isModal = true
@@ -342,8 +360,8 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 					menuList.indexOf(settings) -> {
 						supportFragmentManager?.also { SettingsDialogFragment.showInstance(it) }
 					}
-					menuList.indexOf(logout) -> logoutTelegram()
 					menuList.indexOf(login) -> loginTelegram()
+					menuList.indexOf(exit) -> closeApp()
 				}
 				dismiss()
 			}
