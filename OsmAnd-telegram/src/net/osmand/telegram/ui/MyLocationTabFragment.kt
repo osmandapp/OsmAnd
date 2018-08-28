@@ -75,16 +75,6 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 	
 	private var updateEnable: Boolean = false
 
-	override fun onCreate(savedInstanceState: Bundle?) {
-		super.onCreate(savedInstanceState)
-		val activity = requireActivity()
-		if (Build.VERSION.SDK_INT >= 23) {
-			AndroidUtils.enterToTransparentFullScreen(activity)
-		} else if (Build.VERSION.SDK_INT >= 19) {
-			AndroidUtils.enterToTranslucentFullScreen(activity)
-		}
-	}
-
 	override fun onCreateView(
 		inflater: LayoutInflater,
 		container: ViewGroup?,

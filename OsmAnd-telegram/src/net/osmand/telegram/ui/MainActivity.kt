@@ -2,6 +2,7 @@ package net.osmand.telegram.ui
 
 import android.app.Dialog
 import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.DialogFragment
@@ -66,6 +67,11 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 			adapter = ViewPagerAdapter(supportFragmentManager)
 		}
 
+		if (Build.VERSION.SDK_INT >= 23) {
+			AndroidUtils.enterToTransparentFullScreen(this)
+		} else if (Build.VERSION.SDK_INT >= 19) {
+			AndroidUtils.enterToTranslucentFullScreen(this)
+		}
 		bottomNav = findViewById<BottomNavigationView>(R.id.bottom_navigation).apply {
 			setOnNavigationItemSelectedListener {
 				var pos = -1
