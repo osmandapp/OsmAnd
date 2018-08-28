@@ -57,6 +57,11 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
+		if (Build.VERSION.SDK_INT >= 23) {
+			AndroidUtils.enterToTransparentFullScreen(this)
+		} else if (Build.VERSION.SDK_INT >= 19) {
+			AndroidUtils.enterToTranslucentFullScreen(this)
+		}
 		setContentView(R.layout.activity_main)
 
 		paused = false
@@ -67,11 +72,6 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 			adapter = ViewPagerAdapter(supportFragmentManager)
 		}
 
-		if (Build.VERSION.SDK_INT >= 23) {
-			AndroidUtils.enterToTransparentFullScreen(this)
-		} else if (Build.VERSION.SDK_INT >= 19) {
-			AndroidUtils.enterToTranslucentFullScreen(this)
-		}
 		bottomNav = findViewById<BottomNavigationView>(R.id.bottom_navigation).apply {
 			setOnNavigationItemSelectedListener {
 				var pos = -1
