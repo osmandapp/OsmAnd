@@ -1,10 +1,8 @@
 package net.osmand.telegram.ui
 
-import android.os.Build
 import android.os.Bundle
 import android.support.annotation.DrawableRes
 import android.support.annotation.StringRes
-import android.support.v4.app.DialogFragment
 import android.support.v4.app.FragmentManager
 import android.support.v7.widget.ListPopupWindow
 import android.support.v7.widget.Toolbar
@@ -22,26 +20,11 @@ import net.osmand.telegram.helpers.TelegramUiHelper
 import net.osmand.telegram.utils.AndroidUtils
 import net.osmand.telegram.utils.OsmandFormatter
 
-class SettingsDialogFragment : DialogFragment() {
-
-	private val app: TelegramApplication
-		get() = activity?.application as TelegramApplication
+class SettingsDialogFragment : BaseDialogFragment() {
 
 	private val uiUtils get() = app.uiUtils
-	private val telegramHelper get() = app.telegramHelper
-	private val settings get() = app.settings
 
 	private val gpsAndLocPrefs = listOf(SendMyLocPref(), StaleLocPref(), LocHistoryPref())
-
-	override fun onCreate(savedInstanceState: Bundle?) {
-		super.onCreate(savedInstanceState)
-		setStyle(android.support.v4.app.DialogFragment.STYLE_NO_FRAME, R.style.AppTheme_NoActionbar)
-		when {
-			Build.VERSION.SDK_INT >= 23 -> setStyle(DialogFragment.STYLE_NO_FRAME, R.style.AppTheme_NoActionbar_Transparent)
-			Build.VERSION.SDK_INT >= 19 -> setStyle(DialogFragment.STYLE_NO_FRAME, R.style.AppTheme_NoActionbar_Translucent)
-			else -> setStyle(DialogFragment.STYLE_NO_FRAME, R.style.AppTheme_NoActionbar)
-		}
-	}
 
 	override fun onCreateView(
 		inflater: LayoutInflater,
