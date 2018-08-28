@@ -311,7 +311,13 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 			val canBeOpenedOnMap = item.canBeOpenedOnMap()
 			val openOnMapView = holder.getOpenOnMapClickView()
 
-			TelegramUiHelper.setupPhoto(app, holder.icon, item.photoPath, item.placeholderId, false)
+			val staleLocation = System.currentTimeMillis() / 1000 - item.lastUpdated > settings.staleLocTime
+			if (staleLocation) {
+				TelegramUiHelper.setupPhoto(app, holder.icon, item.grayscalePhotoPath, item.placeholderId, false)
+			} else {
+				TelegramUiHelper.setupPhoto(app, holder.icon, item.photoPath, R.drawable.img_user_picture_active, false)
+			}
+
 			holder.title?.text = item.getVisibleName()
 			openOnMapView?.isEnabled = canBeOpenedOnMap
 			if (canBeOpenedOnMap) {
@@ -319,7 +325,7 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 					if (!isOsmAndInstalled()) {
 						showOsmAndMissingDialog()
 					} else {
-						app.showLocationHelper.showLocationOnMap(item)
+						app.showLocationHelper.showLocationOnMap(item, staleLocation)
 					}
 				}
 			} else {
@@ -327,7 +333,7 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 			}
 			if (location != null && item.latLon != null) {
 				holder.locationViewContainer?.visibility = if (item.lastUpdated > 0) View.VISIBLE else View.GONE
-				locationViewCache.outdatedLocation = System.currentTimeMillis() / 1000  - item.lastUpdated > settings.staleLocTime
+				locationViewCache.outdatedLocation = staleLocation
 				app.uiUtils.updateLocationView(
 					holder.directionIcon,
 					holder.distanceText,

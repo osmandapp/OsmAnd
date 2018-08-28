@@ -3,6 +3,7 @@ package net.osmand.telegram.helpers
 import android.text.TextUtils
 import net.osmand.PlatformUtil
 import net.osmand.telegram.helpers.TelegramHelper.TelegramAuthenticationParameterType.*
+import net.osmand.telegram.utils.*
 import org.drinkless.td.libcore.telegram.Client
 import org.drinkless.td.libcore.telegram.Client.ResultHandler
 import org.drinkless.td.libcore.telegram.TdApi
@@ -320,6 +321,14 @@ class TelegramHelper private constructor() {
 		}
 	}
 
+	fun getUserGreyPhotoPath(user: TdApi.User): String? {
+		return if (hasGrayscaleUserPhoto(user.id)) {
+			"$appDir/$GRAYSCALE_PHOTOS_DIR${user.id}$GRAYSCALE_PHOTOS_EXT"
+		} else {
+			null
+		}
+	}
+
 	fun getOsmAndBotDeviceName(message: TdApi.Message): String {
 		var deviceName = ""
 		if (message.replyMarkup is TdApi.ReplyMarkupInlineKeyboard) {
@@ -358,6 +367,10 @@ class TelegramHelper private constructor() {
 		updateLiveMessagesExecutor?.awaitTermination(1, TimeUnit.MINUTES)
 	}
 
+	fun hasGrayscaleUserPhoto(userId: Int): Boolean {
+		return File("$appDir/$GRAYSCALE_PHOTOS_DIR$userId$GRAYSCALE_PHOTOS_EXT").exists()
+	}
+	
 	private fun hasLocalUserPhoto(user: TdApi.User): Boolean {
 		val localPhoto = user.profilePhoto?.small?.local
 		return if (localPhoto != null) {
