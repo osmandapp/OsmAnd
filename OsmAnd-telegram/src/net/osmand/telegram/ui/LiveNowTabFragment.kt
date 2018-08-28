@@ -218,46 +218,22 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 
 	private fun updateList() {
 		val res = mutableListOf<ListItem>()
-		for ((id, messages) in telegramHelper.getMessagesByChatIds()) {
+		for ((id, messages) in telegramHelper.getMessagesByChatIds(settings.locHistoryTime)) {
 			telegramHelper.getChat(id)?.also { chat ->
-				if ((telegramHelper.isPrivateChat(chat) || telegramHelper.isSecretChat(chat))
-					&& !telegramHelper.isBot(telegramHelper.getUserIdFromChatType(chat.type))
-				) {
-					if (!checkOutdatedMessage(messages.firstOrNull())) {
-						res.add(TelegramUiHelper.chatToChatItem(telegramHelper, chat, messages))
-					}
-				} else {
-					res.add(TelegramUiHelper.chatToChatItem(telegramHelper, chat, messages))
-				}
+				res.add(TelegramUiHelper.chatToChatItem(telegramHelper, chat, messages))
 				val type = chat.type
 				if (type is TdApi.ChatTypeBasicGroup || type is TdApi.ChatTypeSupergroup) {
-					checkOutdatedItems(res, convertToLocationItems(chat, messages))
+					res.addAll(convertToLocationItems(chat, messages))
 				} else if (type is TdApi.ChatTypePrivate) {
 					if (telegramHelper.isOsmAndBot(type.userId)) {
-						checkOutdatedItems(res, convertToLocationItems(chat, messages))
+						res.addAll(convertToLocationItems(chat, messages))
 					} else if (messages.firstOrNull { it.viaBotUserId != 0 } != null) {
-						checkOutdatedItems(res, convertToLocationItems(chat, messages, true))
+						res.addAll(convertToLocationItems(chat, messages, true))
 					}
 				}
 			}
 		}
 		adapter.items = res
-	}
-
-	private fun checkOutdatedItems(mainListItems: MutableList<ListItem>, groupListLocItems: List<LocationItem>) {
-		if (groupListLocItems.isNotEmpty()) {
-			mainListItems.addAll(groupListLocItems)
-		} else {
-			mainListItems.remove(mainListItems.last())
-		}
-	}
-
-	private fun checkOutdatedMessage(message: TdApi.Message?): Boolean {
-		return if (message != null) {
-			System.currentTimeMillis() / 1000 - telegramHelper.getLastUpdatedTime(message) > settings.locHistoryTime
-		} else {
-			false
-		}
 	}
 	
 	private fun convertToLocationItems(
@@ -267,7 +243,7 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 	): List<LocationItem> {
 		val res = mutableListOf<LocationItem>()
 		messages.forEach { message ->
-			if ((!addOnlyViaBotMessages || message.viaBotUserId != 0) && !checkOutdatedMessage(message)) {
+			if ((!addOnlyViaBotMessages || message.viaBotUserId != 0)) {
 				TelegramUiHelper.messageToLocationItem(telegramHelper, chat, message)?.also {
 					res.add(it)
 				}
