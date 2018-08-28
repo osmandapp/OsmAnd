@@ -25,7 +25,6 @@
 		<item name="primary_btn_bg">@drawable/primary_btn_bg_light</item>
 		<item name="primary_btn_text_color">@color/primary_btn_text_light</item>
 		<item name="secondary_btn_bg">@drawable/secondary_btn_bg_light</item>
-		<item name="android:windowTranslucentStatus">true</item>
 		<item name="windowActionBar">false</item>
 		<item name="windowNoTitle">true</item>
 		<item name="bottom_nav_shadow">@drawable/bg_bottom_bar_shadow_with_line_day</item>
@@ -39,6 +38,11 @@
 
 	<style name="AppTheme.NoActionbar.Translucent">
 		<item name="android:windowTranslucentStatus">true</item>
+	</style>
+
+	<style name="AppTheme.NoActionbar.Transparent">
+		<item name="android:statusBarColor">@android:color/transparent</item>
+		<item name="android:windowTranslucentNavigation">true</item>
 	</style>
 
 	<style name="AppTheme.BottomSheet">

@@ -6,7 +6,6 @@ import android.graphics.Rect
 import android.os.Build
 import android.os.Bundle
 import android.support.annotation.StringRes
-import android.support.v4.app.DialogFragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.AppCompatImageView
@@ -30,7 +29,7 @@ import net.osmand.telegram.utils.AndroidUtils
 import studio.carbonylgroup.textfieldboxes.ExtendedEditText
 
 
-class LoginDialogFragment : DialogFragment() {
+class LoginDialogFragment : BaseDialogFragment() {
 
 	companion object {
 
@@ -118,10 +117,7 @@ class LoginDialogFragment : DialogFragment() {
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
-		setStyle(DialogFragment.STYLE_NO_FRAME, R.style.AppTheme_NoActionbar_Translucent)
-		val activity = requireActivity()
-		val window = activity.window
-		window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
+		requireActivity().window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
 	}
 
 	override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

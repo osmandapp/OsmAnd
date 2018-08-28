@@ -5,10 +5,10 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
-	android:fitsSystemWindows="true"
 	android:orientation="vertical">
 
 	<android.support.design.widget.AppBarLayout
+		android:id="@+id/app_bar_layout"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:background="?attr/card_bg_color">

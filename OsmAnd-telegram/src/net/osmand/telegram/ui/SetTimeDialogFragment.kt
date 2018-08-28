@@ -2,7 +2,6 @@ package net.osmand.telegram.ui
 
 import android.app.TimePickerDialog
 import android.os.Bundle
-import android.support.v4.app.DialogFragment
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v7.widget.LinearLayoutManager
@@ -15,7 +14,6 @@ import android.widget.TextView
 import net.osmand.Location
 import net.osmand.data.LatLon
 import net.osmand.telegram.R
-import net.osmand.telegram.TelegramApplication
 import net.osmand.telegram.TelegramLocationProvider.TelegramLocationListener
 import net.osmand.telegram.TelegramLocationProvider.TelegramCompassListener
 import net.osmand.telegram.helpers.ShareLocationHelper
@@ -29,13 +27,7 @@ import org.drinkless.td.libcore.telegram.TdApi
 import java.util.*
 import java.util.concurrent.TimeUnit
 
-class SetTimeDialogFragment : DialogFragment(), TelegramLocationListener, TelegramCompassListener {
-
-	private val app: TelegramApplication
-		get() = activity?.application as TelegramApplication
-
-	private val telegramHelper get() = app.telegramHelper
-	private val settings get() = app.settings
+class SetTimeDialogFragment : BaseDialogFragment(), TelegramLocationListener, TelegramCompassListener {
 
 	private lateinit var locationViewCache: UiUtils.UpdateLocationViewCache
 	private val adapter = SetTimeListAdapter()
@@ -48,11 +40,6 @@ class SetTimeDialogFragment : DialogFragment(), TelegramLocationListener, Telegr
 	private var location: Location? = null
 	private var heading: Float? = null
 	private var locationUiUpdateAllowed: Boolean = true
-	
-	override fun onCreate(savedInstanceState: Bundle?) {
-		super.onCreate(savedInstanceState)
-		setStyle(DialogFragment.STYLE_NO_FRAME, R.style.AppTheme_NoActionbar)
-	}
 
 	override fun onCreateView(
 		inflater: LayoutInflater,
