@@ -144,7 +144,7 @@ class TelegramHelper private constructor() {
 
 	fun getChatLiveMessages() = chatLiveMessages
 
-	fun getMessagesByChatIds(messageExpTime: Long = 0): Map<Long, List<TdApi.Message>> {
+	fun getMessagesByChatIds(messageExpTime: Long): Map<Long, List<TdApi.Message>> {
 		val res = mutableMapOf<Long, MutableList<TdApi.Message>>()
 		for (message in usersLocationMessages.values) {
 			if (System.currentTimeMillis() / 1000 - getLastUpdatedTime(message) < messageExpTime) {
