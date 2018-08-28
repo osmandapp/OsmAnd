@@ -144,15 +144,17 @@ class TelegramHelper private constructor() {
 
 	fun getChatLiveMessages() = chatLiveMessages
 
-	fun getMessagesByChatIds(): Map<Long, List<TdApi.Message>> {
+	fun getMessagesByChatIds(messageExpTime: Long): Map<Long, List<TdApi.Message>> {
 		val res = mutableMapOf<Long, MutableList<TdApi.Message>>()
 		for (message in usersLocationMessages.values) {
-			var messages = res[message.chatId]
-			if (messages != null) {
-				messages.add(message)
-			} else {
-				messages = mutableListOf(message)
-				res[message.chatId] = messages
+			if (System.currentTimeMillis() / 1000 - getLastUpdatedTime(message) < messageExpTime) {
+				var messages = res[message.chatId]
+				if (messages != null) {
+					messages.add(message)
+				} else {
+					messages = mutableListOf(message)
+					res[message.chatId] = messages
+				}
 			}
 		}
 		return res
@@ -178,9 +180,18 @@ class TelegramHelper private constructor() {
 		return chat.type is TdApi.ChatTypeSupergroup || chat.type is TdApi.ChatTypeBasicGroup
 	}
 
-	fun getLastUpdatedTime(message: TdApi.Message) = Math.max(message.editDate, message.date)
+	fun getLastUpdatedTime(message: TdApi.Message): Int {
+		val content = message.content
+		return if (content is MessageOsmAndBotLocation) {
+			content.lastUpdated
+		} else {
+			Math.max(message.editDate, message.date)
+		}
+	} 
 
 	fun isPrivateChat(chat: TdApi.Chat): Boolean = chat.type is TdApi.ChatTypePrivate
+	
+	fun isSecretChat(chat: TdApi.Chat): Boolean = chat.type is TdApi.ChatTypeSecret
 
 	private fun isChannel(chat: TdApi.Chat): Boolean {
 		return chat.type is TdApi.ChatTypeSupergroup && (chat.type as TdApi.ChatTypeSupergroup).isChannel
@@ -322,6 +333,12 @@ class TelegramHelper private constructor() {
 		return deviceName
 	}
 
+	fun getUserIdFromChatType(type: TdApi.ChatType) = when (type) {
+		is TdApi.ChatTypePrivate -> type.userId
+		is TdApi.ChatTypeSecret -> type.userId
+		else -> 0
+	}
+	
 	fun isOsmAndBot(userId: Int) = users[userId]?.username == OSMAND_BOT_USERNAME
 
 	fun isBot(userId: Int) = users[userId]?.type is TdApi.UserTypeBot
@@ -881,8 +898,6 @@ class TelegramHelper private constructor() {
 		var lon: Double = Double.NaN
 			internal set
 		var lastUpdated: Int = 0
-			internal set
-		var created: Int = 0
 			internal set
 
 		override fun getConstructor() = -1
