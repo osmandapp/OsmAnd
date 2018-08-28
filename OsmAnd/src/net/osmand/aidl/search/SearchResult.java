@@ -11,14 +11,19 @@ public class SearchResult implements Parcelable {
 	private double latitude;
 	private double longitude;
 
-	private String localeName;
+	private String localName;
+	private String localTypeName;
+
 	private String alternateName;
 	private List<String> otherNames = new ArrayList<>();
 
-	public SearchResult(double latitude, double longitude, String localeName, String alternateName, List<String> otherNames) {
+
+	public SearchResult(double latitude, double longitude, String localName, String localTypeName,
+						String alternateName, List<String> otherNames) {
 		this.latitude = latitude;
 		this.longitude = longitude;
-		this.localeName = localeName;
+		this.localName = localName;
+		this.localTypeName = localTypeName;
 		this.alternateName = alternateName;
 		if (otherNames != null) {
 			this.otherNames = otherNames;
@@ -49,8 +54,12 @@ public class SearchResult implements Parcelable {
 		return longitude;
 	}
 
-	public String getLocaleName() {
-		return localeName;
+	public String getLocalName() {
+		return localName;
+	}
+
+	public String getLocalTypeName() {
+		return localTypeName;
 	}
 
 	public String getAlternateName() {
@@ -65,7 +74,8 @@ public class SearchResult implements Parcelable {
 	public void writeToParcel(Parcel out, int flags) {
 		out.writeDouble(latitude);
 		out.writeDouble(longitude);
-		out.writeString(localeName);
+		out.writeString(localName);
+		out.writeString(localTypeName);
 		out.writeString(alternateName);
 		out.writeStringList(otherNames);
 	}
@@ -73,7 +83,8 @@ public class SearchResult implements Parcelable {
 	private void readFromParcel(Parcel in) {
 		latitude = in.readDouble();
 		longitude = in.readDouble();
-		localeName = in.readString();
+		localName = in.readString();
+		localTypeName = in.readString();
 		alternateName = in.readString();
 		in.readStringList(otherNames);
 	}

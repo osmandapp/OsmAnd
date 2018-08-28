@@ -555,7 +555,7 @@ public class OsmandAidlService extends Service {
 		@Override
 		public boolean search(SearchParams params, final IOsmAndAidlCallback callback) throws RemoteException {
 			try {
-				return params != null && getApi("search").search(params.getSearchQuery(),
+				return params != null && getApi("search").search(params.getSearchQuery(), params.getSearchType(),
 						params.getLatutude(), params.getLongitude(), params.getRadiusLevel(), params.getTotalLimit(), new SearchCompleteCallback() {
 					@Override
 					public void onSearchComplete(List<SearchResult> resultSet) {
