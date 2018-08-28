@@ -57,13 +57,14 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
+		setContentView(R.layout.activity_main)
+
 		if (Build.VERSION.SDK_INT >= 23) {
 			AndroidUtils.enterToTransparentFullScreen(this)
 		} else if (Build.VERSION.SDK_INT >= 19) {
 			AndroidUtils.enterToTranslucentFullScreen(this)
 		}
-		setContentView(R.layout.activity_main)
-
+		
 		paused = false
 
 		val viewPager = findViewById<LockableViewPager>(R.id.view_pager).apply {
