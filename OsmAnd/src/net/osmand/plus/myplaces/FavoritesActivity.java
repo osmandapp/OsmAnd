@@ -141,9 +141,8 @@ public class FavoritesActivity extends TabActivity {
 				}
 			}
 		} else if (requestCode == IMPORT_FAVOURITES_REQUEST && resultCode == Activity.RESULT_OK) {
-			if (data != null) {
-				Uri uri = data.getData();
-				importHelper.handleFavouritesImport(uri);
+			if (data != null && data.getData() != null) {
+				importHelper.handleFavouritesImport(data.getData());
 			}
 		} else {
 			super.onActivityResult(requestCode, resultCode, data);

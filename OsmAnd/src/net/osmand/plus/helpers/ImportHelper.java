@@ -108,7 +108,7 @@ public class ImportHelper {
 		return false;
 	}
 
-	public void handleFavouritesImport(Uri uri) {
+	public void handleFavouritesImport(@NonNull Uri uri) {
 		String scheme = uri.getScheme();
 		boolean isFileIntent = "file".equals(scheme);
 		boolean isContentIntent = "content".equals(scheme);
