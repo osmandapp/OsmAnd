@@ -129,7 +129,7 @@
 					android:layout_gravity="center_vertical"
 					android:layout_marginEnd="@dimen/content_padding_standard"
 					android:layout_marginRight="@dimen/content_padding_standard"
-					android:text="@string/stop_sharing_chat"
+					android:text="@string/turn_off_location_sharing"
 					android:textColor="?attr/ctrl_active_color"
 					android:textSize="@dimen/hint_text_size"
 					app:typeface="@string/font_roboto_medium" />
@@ -147,7 +147,7 @@
 						android:textColor="?android:attr/textColorSecondary"
 						android:textSize="@dimen/hint_text_size"
 						app:typeface="@string/font_roboto_regular"
-						tools:text="@string/stop_at" />
+						tools:text="@string/expire_in" />
 
 					<net.osmand.telegram.ui.views.TextViewEx
 						android:id="@+id/ending_in_first_part"

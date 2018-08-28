@@ -212,13 +212,13 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 
 	private fun updateLocationUi() {
 		if (locationUiUpdateAllowed) {
-			app.runInUIThread { adapter.notifyDataSetChanged() }
+			app.runInUIThread { updateList() }
 		}
 	}
 
 	private fun updateList() {
 		val res = mutableListOf<ListItem>()
-		for ((id, messages) in telegramHelper.getMessagesByChatIds()) {
+		for ((id, messages) in telegramHelper.getMessagesByChatIds(settings.locHistoryTime)) {
 			telegramHelper.getChat(id)?.also { chat ->
 				res.add(TelegramUiHelper.chatToChatItem(telegramHelper, chat, messages))
 				val type = chat.type

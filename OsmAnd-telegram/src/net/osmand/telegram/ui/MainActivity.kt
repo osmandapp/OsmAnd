@@ -2,6 +2,7 @@ package net.osmand.telegram.ui
 
 import android.app.Dialog
 import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.DialogFragment
@@ -58,6 +59,12 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 		super.onCreate(savedInstanceState)
 		setContentView(R.layout.activity_main)
 
+		if (Build.VERSION.SDK_INT >= 23) {
+			AndroidUtils.enterToTransparentFullScreen(this)
+		} else if (Build.VERSION.SDK_INT >= 19) {
+			AndroidUtils.enterToTranslucentFullScreen(this)
+		}
+		
 		paused = false
 
 		val viewPager = findViewById<LockableViewPager>(R.id.view_pager).apply {
@@ -149,8 +156,6 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 
 		if (AndroidUtils.isLocationPermissionAvailable(this)) {
 			app.locationProvider.resumeAllUpdates()
-		} else {
-			AndroidUtils.requestLocationPermission(this)
 		}
 		if (settings.hasAnyChatToShowOnMap() && !isOsmAndInstalled()) {
 			showOsmandMissingDialog()
@@ -191,7 +196,14 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 					telegramHelper.init()
 					telegramHelper.requestAuthorizationState()
 				}
-				TelegramAuthorizationState.READY -> LoginDialogFragment.dismiss(fm)
+				TelegramAuthorizationState.READY -> {
+					LoginDialogFragment.dismiss(fm)
+					if (AndroidUtils.isLocationPermissionAvailable(this)) {
+						app.locationProvider.resumeAllUpdates()
+					} else {
+						AndroidUtils.requestLocationPermission(this)
+					}
+				} 
 				else -> Unit
 			}
 
@@ -281,6 +293,8 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 	fun logoutTelegram(silent: Boolean = false) {
 		if (telegramHelper.getTelegramAuthorizationState() == TelegramHelper.TelegramAuthorizationState.READY) {
 			if (app.isInternetConnectionAvailable) {
+				app.messagesDbHelper.clearMessages()
+				settings.clear()
 				telegramHelper.logout()
 			} else {
 				Toast.makeText(this, R.string.logout_no_internet_msg, Toast.LENGTH_SHORT).show()

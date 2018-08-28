@@ -1,5 +1,6 @@
 package net.osmand.aidl;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -28,9 +29,12 @@ import net.osmand.aidl.maplayer.AMapLayer;
 import net.osmand.aidl.maplayer.point.AMapPoint;
 import net.osmand.aidl.mapmarker.AMapMarker;
 import net.osmand.aidl.mapwidget.AMapWidget;
+import net.osmand.aidl.search.SearchParams;
+import net.osmand.aidl.search.SearchResult;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.plus.AppInitializer;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
@@ -51,6 +55,7 @@ import net.osmand.plus.dialogs.ConfigureMapMenu;
 import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.search.listitems.QuickSearchListItem;
 import net.osmand.plus.views.AidlMapLayer;
 import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.OsmandMapLayer;
@@ -58,6 +63,10 @@ import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry.MapWidgetRegInfo;
 import net.osmand.plus.views.mapwidgets.TextInfoWidget;
+import net.osmand.search.SearchUICore;
+import net.osmand.search.SearchUICore.SearchResultCollection;
+import net.osmand.search.core.ObjectType;
+import net.osmand.search.core.SearchSettings;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -80,6 +89,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.concurrent.ConcurrentHashMap;
+
+import static net.osmand.search.core.ObjectType.CITY;
+import static net.osmand.search.core.ObjectType.HOUSE;
+import static net.osmand.search.core.ObjectType.POI;
+import static net.osmand.search.core.ObjectType.POSTCODE;
+import static net.osmand.search.core.ObjectType.STREET;
+import static net.osmand.search.core.ObjectType.STREET_INTERSECTION;
+import static net.osmand.search.core.ObjectType.VILLAGE;
+import static net.osmand.search.core.SearchCoreFactory.MAX_DEFAULT_SEARCH_RADIUS;
 
 
 public class OsmandAidlApi {
@@ -117,6 +135,11 @@ public class OsmandAidlApi {
 
 	private static final String AIDL_NAVIGATE = "aidl_navigate";
 	private static final String AIDL_NAVIGATE_GPX = "aidl_navigate_gpx";
+	private static final String AIDL_PAUSE_NAVIGATION = "pause_navigation";
+	private static final String AIDL_RESUME_NAVIGATION = "resume_navigation";
+	private static final String AIDL_STOP_NAVIGATION = "stop_navigation";
+	private static final String AIDL_MUTE_NAVIGATION = "mute_navigation";
+	private static final String AIDL_UNMUTE_NAVIGATION = "unmute_navigation";
 
 	private static final ApplicationMode DEFAULT_PROFILE = ApplicationMode.CAR;
 
@@ -135,7 +158,7 @@ public class OsmandAidlApi {
 	private Map<String, TextInfoWidget> widgetControls = new ConcurrentHashMap<>();
 	private Map<String, AMapLayer> layers = new ConcurrentHashMap<>();
 	private Map<String, OsmandMapLayer> mapLayers = new ConcurrentHashMap<>();
-	private Map<String, BroadcastReceiver> receivers = new TreeMap<String, BroadcastReceiver>();
+	private Map<String, BroadcastReceiver> receivers = new TreeMap<>();
 
 
 	public OsmandAidlApi(OsmandApplication app) {
@@ -155,6 +178,11 @@ public class OsmandAidlApi {
 		registerStopRecordingReceiver(mapActivity);
 		registerNavigateReceiver(mapActivity);
 		registerNavigateGpxReceiver(mapActivity);
+		registerPauseNavigationReceiver(mapActivity);
+		registerResumeNavigationReceiver(mapActivity);
+		registerStopNavigationReceiver(mapActivity);
+		registerMuteNavigationReceiver(mapActivity);
+		registerUnmuteNavigationReceiver(mapActivity);
 	}
 
 	public void onDestroyMapActivity(final MapActivity mapActivity) {
@@ -168,7 +196,7 @@ public class OsmandAidlApi {
 				LOG.error(e.getMessage(), e);
 			}
 		}
-		receivers = new TreeMap<String, BroadcastReceiver>();
+		receivers = new TreeMap<>();
 	}
 
 	private void registerRefreshMapReceiver(final MapActivity mapActivity) {
@@ -527,6 +555,70 @@ public class OsmandAidlApi {
 			app.getRoutingHelper().notifyIfRouteIsCalculated();
 			routingHelper.setCurrentLocation(app.getLocationProvider().getLastKnownLocation(), false);
 		}
+	}
+
+	private void registerPauseNavigationReceiver(final MapActivity mapActivity) {
+		BroadcastReceiver pauseNavigationReceiver = new BroadcastReceiver() {
+			@Override
+			public void onReceive(Context context, Intent intent) {
+				RoutingHelper routingHelper = mapActivity.getRoutingHelper();
+				if (routingHelper.isRouteCalculated() && !routingHelper.isRoutePlanningMode()) {
+					routingHelper.setRoutePlanningMode(true);
+					routingHelper.setFollowingMode(false);
+					routingHelper.setPauseNavigation(true);
+				}
+			}
+		};
+		registerReceiver(pauseNavigationReceiver, mapActivity, AIDL_PAUSE_NAVIGATION);
+	}
+
+	private void registerResumeNavigationReceiver(final MapActivity mapActivity) {
+		BroadcastReceiver resumeNavigationReceiver = new BroadcastReceiver() {
+			@Override
+			public void onReceive(Context context, Intent intent) {
+				RoutingHelper routingHelper = mapActivity.getRoutingHelper();
+				if (routingHelper.isRouteCalculated() && routingHelper.isRoutePlanningMode()) {
+					routingHelper.setRoutePlanningMode(false);
+					routingHelper.setFollowingMode(true);
+				}
+			}
+		};
+		registerReceiver(resumeNavigationReceiver, mapActivity, AIDL_RESUME_NAVIGATION);
+	}
+
+	private void registerStopNavigationReceiver(final MapActivity mapActivity) {
+		BroadcastReceiver stopNavigationReceiver = new BroadcastReceiver() {
+			@Override
+			public void onReceive(Context context, Intent intent) {
+				RoutingHelper routingHelper = mapActivity.getRoutingHelper();
+				if (routingHelper.isPauseNavigation() || routingHelper.isFollowingMode()) {
+					mapActivity.getMapLayers().getMapControlsLayer().stopNavigationWithoutConfirm();
+				}
+			}
+		};
+		registerReceiver(stopNavigationReceiver, mapActivity, AIDL_STOP_NAVIGATION);
+	}
+
+	private void registerMuteNavigationReceiver(final MapActivity mapActivity) {
+		BroadcastReceiver muteNavigationReceiver = new BroadcastReceiver() {
+			@Override
+			public void onReceive(Context context, Intent intent) {
+				mapActivity.getMyApplication().getSettings().VOICE_MUTE.set(true);
+				mapActivity.getRoutingHelper().getVoiceRouter().setMute(true);
+			}
+		};
+		registerReceiver(muteNavigationReceiver, mapActivity, AIDL_MUTE_NAVIGATION);
+	}
+
+	private void registerUnmuteNavigationReceiver(final MapActivity mapActivity) {
+		BroadcastReceiver unmuteNavigationReceiver = new BroadcastReceiver() {
+			@Override
+			public void onReceive(Context context, Intent intent) {
+				mapActivity.getMyApplication().getSettings().VOICE_MUTE.set(false);
+				mapActivity.getRoutingHelper().getVoiceRouter().setMute(false);
+			}
+		};
+		registerReceiver(unmuteNavigationReceiver, mapActivity, AIDL_UNMUTE_NAVIGATION);
 	}
 
 	public void registerMapLayers(MapActivity mapActivity) {
@@ -898,6 +990,7 @@ public class OsmandAidlApi {
 		return false;
 	}
 
+	@SuppressLint("StaticFieldLeak")
 	private void finishGpxImport(boolean destinationExists, File destination, String color, boolean show) {
 		int col = ConfigureMapMenu.GpxAppearanceAdapter.parseTrackColor(
 					app.getRendererRegistry().getCurrentSelectedRenderer(), color);
@@ -1039,6 +1132,7 @@ public class OsmandAidlApi {
 		return false;
 	}
 
+	@SuppressLint("StaticFieldLeak")
 	boolean showGpx(String fileName) {
 		if (!Algorithms.isEmpty(fileName)) {
 			File f = app.getAppPath(IndexConstants.GPX_INDEX_DIR + fileName);
@@ -1191,6 +1285,41 @@ public class OsmandAidlApi {
 		return true;
 	}
 
+	boolean pauseNavigation() {
+		Intent intent = new Intent();
+		intent.setAction(AIDL_PAUSE_NAVIGATION);
+		app.sendBroadcast(intent);
+		return true;
+	}
+
+	boolean resumeNavigation() {
+		Intent intent = new Intent();
+		intent.setAction(AIDL_RESUME_NAVIGATION);
+		app.sendBroadcast(intent);
+		return true;
+	}
+
+	boolean stopNavigation() {
+		Intent intent = new Intent();
+		intent.setAction(AIDL_STOP_NAVIGATION);
+		app.sendBroadcast(intent);
+		return true;
+	}
+
+	boolean muteNavigation() {
+		Intent intent = new Intent();
+		intent.setAction(AIDL_MUTE_NAVIGATION);
+		app.sendBroadcast(intent);
+		return true;
+	}
+
+	boolean unmuteNavigation() {
+		Intent intent = new Intent();
+		intent.setAction(AIDL_UNMUTE_NAVIGATION);
+		app.sendBroadcast(intent);
+		return true;
+	}
+
 	boolean navigateGpx(String data, Uri uri, boolean force) {
 		Intent intent = new Intent();
 		intent.setAction(AIDL_NAVIGATE_GPX);
@@ -1199,6 +1328,86 @@ public class OsmandAidlApi {
 		intent.putExtra(AIDL_FORCE, force);
 		app.sendBroadcast(intent);
 		return true;
+	}
+
+	boolean search(final String searchQuery, final int searchType, final double latitude, final double longitude,
+				   final int radiusLevel, final int totalLimit, final SearchCompleteCallback callback) {
+		if (Algorithms.isEmpty(searchQuery) || latitude == 0 || longitude == 0 || callback == null) {
+			return false;
+		}
+		if (app.isApplicationInitializing()) {
+			app.getAppInitializer().addListener(new AppInitializer.AppInitializeListener() {
+				@Override
+				public void onProgress(AppInitializer init, AppInitializer.InitEvents event) {
+				}
+
+				@Override
+				public void onFinish(AppInitializer init) {
+					runSearch(searchQuery, searchType, latitude, longitude, radiusLevel, totalLimit, callback);
+				}
+			});
+		} else {
+			runSearch(searchQuery, searchType, latitude, longitude, radiusLevel, totalLimit, callback);
+		}
+		return true;
+	}
+
+	private void runSearch(String searchQuery, int searchType, double latitude, double longitude, int radiusLevel,
+						   int totalLimit, final SearchCompleteCallback callback) {
+		if (radiusLevel < 1) {
+			radiusLevel = 1;
+		} else if (radiusLevel > MAX_DEFAULT_SEARCH_RADIUS) {
+			radiusLevel = MAX_DEFAULT_SEARCH_RADIUS;
+		}
+		if (totalLimit <= 0) {
+			totalLimit = -1;
+		}
+		final int limit = totalLimit;
+
+		final SearchUICore core = app.getSearchUICore().getCore();
+		core.setOnResultsComplete(new Runnable() {
+			@Override
+			public void run() {
+				List<SearchResult> resultSet = new ArrayList<>();
+				SearchResultCollection resultCollection = core.getCurrentSearchResult();
+				int count = 0;
+				for (net.osmand.search.core.SearchResult r : resultCollection.getCurrentSearchResults()) {
+					String name = QuickSearchListItem.getName(app, r);
+					String typeName = QuickSearchListItem.getTypeName(app, r);
+					SearchResult result = new SearchResult(r.location.getLatitude(), r.location.getLongitude(),
+							name, typeName, r.alternateName, new ArrayList<>(r.otherNames));
+					resultSet.add(result);
+					count++;
+					if (limit != -1 && count >= limit) {
+						break;
+					}
+				}
+				callback.onSearchComplete(resultSet);
+			}
+		});
+
+		SearchSettings searchSettings = new SearchSettings(core.getSearchSettings())
+				.setRadiusLevel(radiusLevel)
+				.setEmptyQueryAllowed(false)
+				.setSortByName(false)
+				.setOriginalLocation(new LatLon(latitude, longitude))
+				.setTotalLimit(totalLimit);
+
+		List<ObjectType> searchTypes = new ArrayList<>();
+		if ((searchType & SearchParams.SEARCH_TYPE_POI) != 0) {
+			searchTypes.add(POI);
+		}
+		if ((searchType & SearchParams.SEARCH_TYPE_ADDRESS) != 0) {
+			searchTypes.add(CITY);
+			searchTypes.add(VILLAGE);
+			searchTypes.add(POSTCODE);
+			searchTypes.add(STREET);
+			searchTypes.add(HOUSE);
+			searchTypes.add(STREET_INTERSECTION);
+		}
+		searchSettings = searchSettings.setSearchTypes(searchTypes.toArray(new ObjectType[searchTypes.size()]));
+
+		core.search(searchQuery, false, null, searchSettings);
 	}
 
 	boolean setNavDrawerItems(String appPackage, List<net.osmand.aidl.navdrawer.NavDrawerItem> items) {
@@ -1338,5 +1547,9 @@ public class OsmandAidlApi {
 			this.iconName = iconName;
 			this.flags = flags;
 		}
+	}
+
+	public interface SearchCompleteCallback {
+		void onSearchComplete(List<SearchResult> resultSet);
 	}
 }

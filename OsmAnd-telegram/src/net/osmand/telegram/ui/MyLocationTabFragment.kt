@@ -578,7 +578,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 
 				holder.stopSharingDescr?.apply {
 					visibility = getStopSharingVisibility(expiresIn)
-					text = "${getText(R.string.stop_at)}:"
+					text = "${getText(R.string.expire_in)}:"
 				}
 
 				holder.stopSharingFirstPart?.apply {

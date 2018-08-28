@@ -43,7 +43,7 @@ public class SQLiteTileSource implements ITileSource {
 	private int maxZoom = 17; 
 	private boolean inversiveZoom = true; // BigPlanet
 	private boolean timeSupported = false;
-	private int expirationTimeMillis = -1; // never
+	private long expirationTimeMillis = -1; // never
 	private boolean isEllipsoid = false;
 	private String rule = null;
 	private String referer = null;
@@ -208,14 +208,14 @@ public class SQLiteTileSource implements ITileSource {
 						timeSupported = "yes".equalsIgnoreCase(cursor.getString(timecolumn));
 					} else {
 						timeSupported = hasTimeColumn();
-						addInfoColumn("timecolumn", timeSupported?"yes" : "no");
+						addInfoColumn("timecolumn", timeSupported? "yes" : "no");
 					}
 					int expireminutes = list.indexOf("expireminutes");
 					this.expirationTimeMillis = -1;
 					if(expireminutes != -1) {
 						int minutes = (int) cursor.getInt(expireminutes);
 						if(minutes > 0) {
-							this.expirationTimeMillis = minutes * 60 * 1000;
+							this.expirationTimeMillis = minutes * 60 * 1000l;
 						}
 					} else {
 						addInfoColumn("expireminutes", "0");
@@ -462,8 +462,9 @@ public class SQLiteTileSource implements ITileSource {
 	public void closeDB(){
 		LOG.debug("closeDB");
 		bshInterpreter = null;
-		if(timeSupported)
+		if(timeSupported) {
 			clearOld();
+		}
 		if(db != null){
 			db.close();
 			db = null;
@@ -472,12 +473,15 @@ public class SQLiteTileSource implements ITileSource {
 
 	public void clearOld() {
 		SQLiteConnection db = getDatabase();
-		if(db == null || db.isReadOnly()){
+		long expiration = getExpirationTimeMillis();
+		if(db == null || db.isReadOnly() || expiration <= 0){
 			return;
 		}
-		LOG.debug("DELETE FROM tiles WHERE time<" + (System.currentTimeMillis() - getExpirationTimeMillis()));
-		db.execSQL("DELETE FROM tiles WHERE time<"+(System.currentTimeMillis()-getExpirationTimeMillis()));    //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$
-		db.execSQL("VACUUM");    //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$
+		String sql = "DELETE FROM tiles WHERE time < "+
+				(System.currentTimeMillis() - expiration);
+		LOG.debug(sql);
+		db.execSQL(sql);
+		db.execSQL("VACUUM");
 	}
 
 	@Override
@@ -498,10 +502,10 @@ public class SQLiteTileSource implements ITileSource {
 		if(expirationTimeMillis  < 0) {
 			return -1;
 		}
-		return expirationTimeMillis / (60  * 1000);
+		return (int) (expirationTimeMillis / (60  * 1000));
 	}
 	
-	public int getExpirationTimeMillis() {
+	public long getExpirationTimeMillis() {
 		return expirationTimeMillis;
 	}
 	

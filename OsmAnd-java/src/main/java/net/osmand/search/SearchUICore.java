@@ -401,6 +401,10 @@ public class SearchUICore {
 	}
 
 	public void search(final String text, final boolean delayedExecution, final ResultMatcher<SearchResult> matcher) {
+		search(text, delayedExecution, matcher, searchSettings);
+	}
+
+	public void search(final String text, final boolean delayedExecution, final ResultMatcher<SearchResult> matcher, final SearchSettings searchSettings) {
 		final int request = requestNumber.incrementAndGet();
 		final SearchPhrase phrase = this.phrase.generateNewPhrase(text, searchSettings);
 		this.phrase = phrase;

@@ -2502,7 +2502,7 @@
     <string name="this_year">В этом году</string>
     <string name="plan_route">План маршрута</string>
     <string name="coordinate_input">Ввод координат</string>
-    <string name="marker_save_as_track">Сохранить как трек</string>
+    <string name="marker_save_as_track">Сохранить как GPX файл</string>
     <string name="move_to_history">Переместить в историю</string>
     <string name="group_will_be_removed_after_restart">Группа будет выключена при следующем запуске приложения.</string>
     <string name="show_arrows_on_the_map">Показывать стрелки на карте</string>
@@ -2517,7 +2517,7 @@
     <string name="my_location">Мое местоположение</string>
     <string name="shared_string_finish">Финиш</string>
     <string name="shared_string_sort">Сортировать</string>
-    <string name="marker_save_as_track_descr">Экспорт маркеров в файл можно задать здесь:</string>
+    <string name="marker_save_as_track_descr">Экспорт маркеров в следующий GPX файл:</string>
     <string name="shared_string_markers">Маркеры</string>
     <string name="osn_modify_dialog_title">Изменить заметку</string>
     <string name="context_menu_item_modify_note">Изменить заметку OSM</string>
@@ -2590,7 +2590,7 @@
     <string name="add_favourites_group_to_markers_descr">Выберите категорию избранных для добавления к маркерам.</string>
     <string name="favourites_group">Категория избранных</string>
     <string name="add_group">Добавить группу</string>
-    <string name="add_group_descr">Импортировать группу из избранных или путевых точек.</string>
+    <string name="add_group_descr">Импортировать группу из избранных или GPX путевых точек.</string>
     <string name="empty_state_markers_active">Создайте маркеры карт!</string>
     <string name="empty_state_markers_active_desc">Длинное или короткое нажатие на нужное место, а затем на флажок маркера.</string>
     <string name="empty_state_markers_groups">Импорт групп</string>
@@ -2611,14 +2611,14 @@
     <string name="tap_on_map_to_hide_interface">Полноэкранный режим</string>
     <string name="mark_passed">Отметить пройденным</string>
     <string name="import_track_desc">Файл %1$s не содержит путевых точек, импортировать его как трек?</string>
-    <string name="add_track_to_markers_descr">Путевые точки можно добавить к маркерам выбрав один из этих треков, содержащих их.</string>
+    <string name="add_track_to_markers_descr">Выберите трек, чтобы добавить свои путевые точки к маркерам.</string>
     <string name="shared_string_gpx_waypoints">Трек путевых точек</string>
     <string name="shared_string_right">Направо</string>
     <string name="shared_string_left">Налево</string>
     <string name="show_number_pad">Показать цифровую панель</string>
     <string name="tap_on_map_to_hide_interface_descr">Нажатие на карте переключает кнопки управления и виджеты.</string>
     
-    <string name="import_gpx_file_description">могут быть импортированы как избранные точки или как трек файл.</string>
+    <string name="import_gpx_file_description">могут быть импортированы как избранные точки или как GPX файл.</string>
     <string name="shared_string_more_without_dots">Больше</string>
     <string name="import_as_gpx">Импортировать как файл GPX</string>
     <string name="import_as_favorites">Импортировать как избранные</string>
@@ -2849,14 +2849,14 @@
     <string name="shared_string_travel_guides">Путеводитель</string>
     <string name="waypoints_removed_from_map_markers">Путевые точки удалены из маркеров карты</string>
     <string name="nothing_found_in_radius">Ничего не найдено:</string>
-    <string name="select_waypoints_category_description">Вы можете добавить все путевые точки трека, или выбрать отдельные категории.</string>
+    <string name="select_waypoints_category_description">Добавьте все путевые точки трека или выберите отдельные категории.</string>
     <string name="shared_string_total">Всего</string>
     <string name="shared_string_result">Результат</string>
     <string name="wikivoyage_search_hint">Поиск: страна, город, провинция</string>
     <string name="shared_string_read">Читать</string>
     <string name="saved_articles">Сохраненные статьи</string>
     <string name="shared_string_contents">Главы</string>
-    <string name="download_maps_travel">Карты путешествий</string>
+    <string name="download_maps_travel">Путеводитель</string>
     <string name="shared_string_wikivoyage">Викигид</string>
     <string name="article_removed">Статья удалена</string>
     <string name="shared_string_explore">Исследовать</string>
@@ -2865,14 +2865,14 @@
     <string name="delete_search_history">"Удалить историю поиска "</string>
     <string name="show_images">Показать изображения</string>
     <string name="shared_string_only_with_wifi">Только по WiFi</string>
-    <string name="wikivoyage_download_pics">Показывать изображения</string>
+    <string name="wikivoyage_download_pics">Загружать изображения</string>
     <string name="wikivoyage_download_pics_descr">Изображения из статей можно загрузить для использования в автономном режиме.
 \nВы всегда можете изменить настройку в \"Исследовать\" → \"Параметры\".</string>
     <string name="shared_string_wifi_only">Только WiFi</string>
     <string name="select_travel_book">Выберите дневник путешествий</string>
     <string name="shared_string_travel_book">Дневник путешествий</string>
     <string name="online_webpage_warning">Страница доступна только онлайн. Открыть ее в браузере?</string>
-    <string name="download_images">Показывать изображения</string>
+    <string name="download_images">Загружать изображения</string>
     <string name="shared_string_dont">Нет</string>
     <string name="shared_string_do">Выполнить</string>
     <string name="purchase_dialog_title">Выберите план</string>
@@ -2911,7 +2911,7 @@
     <string name="open_in_browser_wiki">Открыть статью в Интернете</string>
     <string name="open_in_browser_wiki_description">Просмотреть эту статью в браузере.</string>
     <string name="download_wiki_region_placeholder">этот регион</string>
-    <string name="wiki_article_search_text">Поиск нужной статьи в вики</string>
+    <string name="wiki_article_search_text">Поиск соответствующей статьи в вики</string>
     <string name="wiki_article_not_found">Статья не найдена</string>
     <string name="how_to_open_wiki_title">Как открыть статьи Википедии?</string>
 <string name="popular_destinations">Популярные направления</string>
@@ -2979,4 +2979,5 @@
 \n• Другие исправления ошибок
 \n</string>
     <string name="increase_search_radius_to">Увеличить радиус поиска до %1$s</string>
+    <string name="commiting_way">Фиксируется путь…</string>
     </resources>

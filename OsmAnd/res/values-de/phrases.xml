@@ -1164,7 +1164,7 @@
 
 	<string name="poi_cypress">Zypresse</string>
 	<string name="poi_bench_yes">ja</string>
-	<string name="poi_bench_no">Ohne Sitzbank</string>
+	<string name="poi_bench_no">ohne Sitzbank</string>
 	<string name="poi_bin_yes">Mit Abfalleimer</string>
 	<string name="poi_bin_no">Ohne Abfalleimer</string>
 
@@ -1400,7 +1400,7 @@
 	<string name="poi_fireplace_no">Keine Feuerstelle</string>
 
 	<string name="poi_covered_yes">ja</string>
-	<string name="poi_covered_no">offen</string>
+	<string name="poi_covered_no">nicht überdacht</string>
 
 	<string name="poi_smoking_no">Nicht erlaubt</string>
 	<string name="poi_smoking_outside">nur Außerhalb</string>

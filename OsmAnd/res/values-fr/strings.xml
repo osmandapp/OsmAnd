@@ -784,7 +784,7 @@
     <string name="transport_search_desc">Recherche de transports publics</string>
     <string name="favourites_search_desc">Recherche dans les favoris</string>
 
-    <string name="route_roundabout">Rond-point : prenez la sortie %1$d puis continuez</string>
+    <string name="route_roundabout">Giratoire : prenez la sortie %1$d puis continuez</string>
     <string name="route_kl">Serrez à gauche et continuez</string>
     <string name="route_kr">Serrez à droite et continuez</string>
     <string name="rendering_attr_noPolygons_description">Rendre invisibles les surfaces représentant des éléments de terrain.</string>

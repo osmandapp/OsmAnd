@@ -1,7 +1,6 @@
 LOCAL_PATH := $(call my-dir)
 ROOT_PATH := $(LOCAL_PATH)/../../..
 $(info OsmAnd root: $(ROOT_PATH))
-
 ifdef BUILD_ONLY_OLD_LIB
 OSMAND_MAKEFILES := \
     $(all-subdir-makefiles) \

@@ -47,6 +47,11 @@ public class ExternalApiHelper {
 	public static final String API_CMD_NAVIGATE_GPX = "navigate_gpx";
 
 	public static final String API_CMD_NAVIGATE = "navigate";
+	public static final String API_CMD_PAUSE_NAVIGATION = "pause_navigation";
+	public static final String API_CMD_RESUME_NAVIGATION = "resume_navigation";
+	public static final String API_CMD_STOP_NAVIGATION = "stop_navigation";
+	public static final String API_CMD_MUTE_NAVIGATION = "mute_navigation";
+	public static final String API_CMD_UNMUTE_NAVIGATION = "unmute_navigation";
 
 	public static final String API_CMD_RECORD_AUDIO = "record_audio";
 	public static final String API_CMD_RECORD_VIDEO = "record_video";
@@ -86,6 +91,7 @@ public class ExternalApiHelper {
 	public static final String PARAM_START_LON = "start_lon";
 	public static final String PARAM_DEST_LAT = "dest_lat";
 	public static final String PARAM_DEST_LON = "dest_lon";
+	public static final String PARAM_DEST_SEARCH_QUERY = "dest_search_query";
 	public static final String PARAM_PROFILE = "profile";
 
 	public static final String PARAM_VERSION = "version";
@@ -246,9 +252,20 @@ public class ExternalApiHelper {
 						startDesc = null;
 					}
 
-					double destLat = Double.parseDouble(uri.getQueryParameter(PARAM_DEST_LAT));
-					double destLon = Double.parseDouble(uri.getQueryParameter(PARAM_DEST_LON));
-					final LatLon dest = new LatLon(destLat, destLon);
+					String destSearchQuery = uri.getQueryParameter(PARAM_DEST_SEARCH_QUERY);
+					String destLatStr = uri.getQueryParameter(PARAM_DEST_LAT);
+					String destLonStr = uri.getQueryParameter(PARAM_DEST_LON);
+					final LatLon dest;
+					if (!Algorithms.isEmpty(destLatStr) && !Algorithms.isEmpty(destLonStr)) {
+						double destLat = Double.parseDouble(destLatStr);
+						double destLon = Double.parseDouble(destLonStr);
+						dest = new LatLon(destLat, destLon);
+					} else {
+						dest = null;
+					}
+					if (!Algorithms.isEmpty(destSearchQuery)) {
+						
+					}
 					final PointDescription destDesc = new PointDescription(PointDescription.POINT_TYPE_LOCATION, destName);
 
 					boolean force = uri.getBooleanQueryParameter(PARAM_FORCE, false);
@@ -270,6 +287,35 @@ public class ExternalApiHelper {
 					}
 				}
 
+			} else if (API_CMD_PAUSE_NAVIGATION.equals(cmd)) {
+				RoutingHelper routingHelper = mapActivity.getRoutingHelper();
+				if (routingHelper.isRouteCalculated() && !routingHelper.isRoutePlanningMode()) {
+					routingHelper.setRoutePlanningMode(true);
+					routingHelper.setFollowingMode(false);
+					routingHelper.setPauseNavigation(true);
+					resultCode = Activity.RESULT_OK;
+				}
+			} else if (API_CMD_RESUME_NAVIGATION.equals(cmd)) {
+				RoutingHelper routingHelper = mapActivity.getRoutingHelper();
+				if (routingHelper.isRouteCalculated() && routingHelper.isRoutePlanningMode()) {
+					routingHelper.setRoutePlanningMode(false);
+					routingHelper.setFollowingMode(true);
+					resultCode = Activity.RESULT_OK;
+				}
+			} else if (API_CMD_STOP_NAVIGATION.equals(cmd)) {
+				RoutingHelper routingHelper = mapActivity.getRoutingHelper();
+				if (routingHelper.isPauseNavigation() || routingHelper.isFollowingMode()) {
+					mapActivity.getMapLayers().getMapControlsLayer().stopNavigationWithoutConfirm();
+					resultCode = Activity.RESULT_OK;
+				}
+			} else if (API_CMD_MUTE_NAVIGATION.equals(cmd)) {
+				mapActivity.getMyApplication().getSettings().VOICE_MUTE.set(true);
+				mapActivity.getRoutingHelper().getVoiceRouter().setMute(true);
+				resultCode = Activity.RESULT_OK;
+			} else if (API_CMD_UNMUTE_NAVIGATION.equals(cmd)) {
+				mapActivity.getMyApplication().getSettings().VOICE_MUTE.set(false);
+				mapActivity.getRoutingHelper().getVoiceRouter().setMute(false);
+				resultCode = Activity.RESULT_OK;
 			} else if (API_CMD_RECORD_AUDIO.equals(cmd)
 					|| API_CMD_RECORD_VIDEO.equals(cmd)
 					|| API_CMD_RECORD_PHOTO.equals(cmd)
