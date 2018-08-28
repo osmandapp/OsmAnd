@@ -27,9 +27,9 @@ import java.io.FileOutputStream
 import java.io.IOException
 import java.util.*
 
-const val PROFILE_GRAYSCALE_PHOTOS_DIR = "profile_grayscale_photos/"
+const val GRAYSCALE_PHOTOS_DIR = "grayscale_photos/"
 
-const val SAVED_GRAYSCALE_PHOTOS_EXT = ".jpeg"
+const val GRAYSCALE_PHOTOS_EXT = ".jpeg"
 
 class UiUtils(private val app: TelegramApplication) {
 	private val drawableCache = LinkedHashMap<Long, Drawable>()
@@ -115,11 +115,11 @@ class UiUtils(private val app: TelegramApplication) {
 		return getDrawable(id, if (light) R.color.icon_light else 0)
 	}
 
-	fun convertAndSaveUserGrayPhoto(userOriginalPhotoPath: String, greyPhotoPath: String) {
-		if (File(userOriginalPhotoPath).exists()) {
+	fun convertAndSaveGrayPhoto(originalPhotoPath: String, greyPhotoPath: String) {
+		if (File(originalPhotoPath).exists()) {
 			ConvertPhotoToGrayscale().executeOnExecutor(
 				AsyncTask.THREAD_POOL_EXECUTOR,
-				userOriginalPhotoPath,
+				originalPhotoPath,
 				greyPhotoPath
 			)
 		}

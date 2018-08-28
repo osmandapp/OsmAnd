@@ -323,7 +323,7 @@ class TelegramHelper private constructor() {
 
 	fun getUserGreyPhotoPath(user: TdApi.User): String? {
 		return if (hasGrayscaleUserPhoto(user.id)) {
-			"$appDir/$PROFILE_GRAYSCALE_PHOTOS_DIR${user.id}$SAVED_GRAYSCALE_PHOTOS_EXT"
+			"$appDir/$GRAYSCALE_PHOTOS_DIR${user.id}$GRAYSCALE_PHOTOS_EXT"
 		} else {
 			null
 		}
@@ -368,7 +368,7 @@ class TelegramHelper private constructor() {
 	}
 
 	fun hasGrayscaleUserPhoto(userId: Int): Boolean {
-		return File("$appDir/$PROFILE_GRAYSCALE_PHOTOS_DIR$userId$SAVED_GRAYSCALE_PHOTOS_EXT").exists()
+		return File("$appDir/$GRAYSCALE_PHOTOS_DIR$userId$GRAYSCALE_PHOTOS_EXT").exists()
 	}
 	
 	private fun hasLocalUserPhoto(user: TdApi.User): Boolean {
