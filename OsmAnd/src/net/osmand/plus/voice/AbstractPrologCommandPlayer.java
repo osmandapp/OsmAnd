@@ -78,22 +78,23 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer, Stat
 		this.ctx = ctx;
 
 		this.streamType = ctx.getSettings().AUDIO_STREAM_GUIDANCE.getModeValue(applicationMode);
-		if (!ctx.getSettings().USE_JS_VOICE_GUIDANCE.get()) {
-			if (log.isInfoEnabled()) {
-				log.info("Initializing prolog system : " + (System.currentTimeMillis() - time)); //$NON-NLS-1$
-			}
-			try {
-				prologSystem = new Prolog(getLibraries());
-			} catch (InvalidLibraryException e) {
-				log.error("Initializing error", e); //$NON-NLS-1$
-				throw new RuntimeException(e);
-			}
-			init(voiceProvider, ctx.getSettings(), configFile);
-			final Term langVal = solveSimplePredicate("language");
-			if (langVal instanceof Struct) {
-				language = ((Struct) langVal).getName();
-			}
-		} else if (voiceProvider != null) {
+//		if (!ctx.getSettings().USE_JS_VOICE_GUIDANCE.get()) {
+//			if (log.isInfoEnabled()) {
+//				log.info("Initializing prolog system : " + (System.currentTimeMillis() - time)); //$NON-NLS-1$
+//			}
+//			try {
+//				prologSystem = new Prolog(getLibraries());
+//			} catch (InvalidLibraryException e) {
+//				log.error("Initializing error", e); //$NON-NLS-1$
+//				throw new RuntimeException(e);
+//			}
+//			init(voiceProvider, ctx.getSettings(), configFile);
+//			final Term langVal = solveSimplePredicate("language");
+//			if (langVal instanceof Struct) {
+//				language = ((Struct) langVal).getName();
+//			}
+//		}
+		if (voiceProvider != null) {
 			initVoiceDir(voiceProvider);
 			language = voiceProvider.replace("-tts", "").replace("-formal", "");
 		}

@@ -43,6 +43,8 @@ import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.routing.RouteProvider;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.MapControlsLayer;
+import net.osmand.plus.voice.JSMediaCommandPlayerImpl;
+import net.osmand.plus.voice.JSTTSCommandPlayerImpl;
 import net.osmand.plus.voice.MediaCommandPlayerImpl;
 import net.osmand.router.GeneralRouter;
 import net.osmand.router.GeneralRouter.RoutingParameter;
@@ -336,29 +338,16 @@ public class RoutePreferencesMenu {
 		OsmandApplication app = ((OsmandApplication) activity.getApplication());
 		File extStorage = app.getAppPath(IndexConstants.VOICE_INDEX_DIR);
 		Set<String> setFiles = new LinkedHashSet<String>();
-		boolean addJS = app.getSettings().USE_JS_VOICE_GUIDANCE.get();
 		if (extStorage.exists()) {
 			for (File f : extStorage.listFiles()) {
 				if (f.isDirectory()) {
-					if ((addJS && hasJavaScript(f)) || MediaCommandPlayerImpl.isMyData(f)) {
-						setFiles.add(f.getName());
-					} else if (!addJS) {
+					if (JSMediaCommandPlayerImpl.isMyData(f) || JSTTSCommandPlayerImpl.isMyData(f)) {
 						setFiles.add(f.getName());
 					}
-
 				}
 			}
 		}
 		return setFiles;
-	}
-
-	private static boolean hasJavaScript(File f) {
-		for (File file : f.listFiles()) {
-			if (file.getName().endsWith(IndexConstants.TTSVOICE_INDEX_EXT_JS)) {
-				return true;
-			}
-		}
-		return false;
 	}
 
 	public OnItemClickListener getItemClickListener(final ArrayAdapter<?> listAdapter) {

@@ -216,12 +216,11 @@ public class LocalIndexHelper {
 
 	private void loadVoiceData(File voiceDir, List<LocalIndexInfo> result, boolean backup, AbstractLoadLocalIndexTask loadTask) {
 		if (voiceDir.canRead()) {
-			boolean useJs = app.getSettings().USE_JS_VOICE_GUIDANCE.get();
 			//First list TTS files, they are preferred
 			for (File voiceF : listFilesSorted(voiceDir)) {
 				if (voiceF.isDirectory() && !MediaCommandPlayerImpl.isMyData(voiceF)) {
 					LocalIndexInfo info = null;
-					if ((TTSCommandPlayerImpl.isMyData(voiceF) && !useJs) || (JSTTSCommandPlayerImpl.isMyData(voiceF) && useJs)) {
+					if (JSTTSCommandPlayerImpl.isMyData(voiceF)) {
 						info = new LocalIndexInfo(LocalIndexType.TTS_VOICE_DATA, voiceF, backup, app);
 					}
 					if (info != null) {

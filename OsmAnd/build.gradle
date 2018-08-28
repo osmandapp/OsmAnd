@@ -237,7 +237,6 @@ task validateTranslate {
 task collectVoiceAssets(type: Sync) {
 	from "../../resources/voice"
 	into "assets/voice"
-	include "**/*.p"
 	include "**/*.js"
 }
 
