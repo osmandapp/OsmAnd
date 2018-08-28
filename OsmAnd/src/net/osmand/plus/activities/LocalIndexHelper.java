@@ -13,6 +13,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.SQLiteTileSource;
 import net.osmand.plus.download.ui.AbstractLoadLocalIndexTask;
+import net.osmand.plus.voice.JSMediaCommandPlayerImpl;
 import net.osmand.plus.voice.JSTTSCommandPlayerImpl;
 import net.osmand.plus.voice.MediaCommandPlayerImpl;
 import net.osmand.plus.voice.TTSCommandPlayerImpl;
@@ -218,29 +219,22 @@ public class LocalIndexHelper {
 		if (voiceDir.canRead()) {
 			//First list TTS files, they are preferred
 			for (File voiceF : listFilesSorted(voiceDir)) {
-				if (voiceF.isDirectory() && !MediaCommandPlayerImpl.isMyData(voiceF)) {
-					LocalIndexInfo info = null;
-					if (JSTTSCommandPlayerImpl.isMyData(voiceF)) {
-						info = new LocalIndexInfo(LocalIndexType.TTS_VOICE_DATA, voiceF, backup, app);
-					}
-					if (info != null) {
-						updateDescription(info);
-						result.add(info);
-						loadTask.loadFile(info);
-					}
+				if (voiceF.isDirectory() && JSTTSCommandPlayerImpl.isMyData(voiceF)) {
+					LocalIndexInfo info = new LocalIndexInfo(LocalIndexType.TTS_VOICE_DATA, voiceF, backup, app);
+					updateDescription(info);
+					result.add(info);
+					loadTask.loadFile(info);
+
 				}
 			}
 
 			//Now list recorded voices
 			for (File voiceF : listFilesSorted(voiceDir)) {
-				if (voiceF.isDirectory() && MediaCommandPlayerImpl.isMyData(voiceF)) {
-					LocalIndexInfo info = null;
-					info = new LocalIndexInfo(LocalIndexType.VOICE_DATA, voiceF, backup, app);
-					if (info != null) {
-						updateDescription(info);
-						result.add(info);
-						loadTask.loadFile(info);
-					}
+				if (voiceF.isDirectory() && JSMediaCommandPlayerImpl.isMyData(voiceF)) {
+					LocalIndexInfo info = new LocalIndexInfo(LocalIndexType.VOICE_DATA, voiceF, backup, app);
+					updateDescription(info);
+					result.add(info);
+					loadTask.loadFile(info);
 				}
 			}
 		}

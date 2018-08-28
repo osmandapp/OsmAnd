@@ -144,7 +144,6 @@ public class DownloadOsmandIndexesHelper {
 	private static void listVoiceAssets(IndexFileList result, AssetManager amanager, PackageManager pm,
 			OsmandSettings settings) {
 		try {
-			String ext = DownloadActivityType.addVersionToExt(IndexConstants.TTSVOICE_INDEX_EXT_ZIP, IndexConstants.TTSVOICE_VERSION);
 			File voicePath = settings.getContext().getAppPath(IndexConstants.VOICE_INDEX_DIR); 
 			// list = amanager.list("voice");
 			String date = "";
@@ -159,13 +158,7 @@ public class DownloadOsmandIndexesHelper {
 			Map<String, String> mapping = assetMapping(amanager);
 			for (String key : mapping.keySet()) {
 				String target = mapping.get(key);
-				if (target.endsWith("-tts/_ttsconfig.p") && target.startsWith("voice/")) {
-					String voice = target.substring("voice/".length(), target.length() - "/_ttsconfig.p".length());
-					File destFile = new File(voicePath, voice + File.separatorChar + "_ttsconfig.p");
-					
-					result.add(new AssetIndexItem(voice + ext, "voice", date, dateModified, "0.1", destFile.length(), key,
-							destFile.getPath(), DownloadActivityType.VOICE_FILE));
-				} else if (target.endsWith(IndexConstants.TTSVOICE_INDEX_EXT_JS) && target.startsWith("voice/")) {
+				if (target.endsWith(IndexConstants.TTSVOICE_INDEX_EXT_JS) && target.startsWith("voice/")) {
 					String lang = target.substring("voice/".length(), target.indexOf("-tts"));
 					File destFile = new File(voicePath, target.substring("voice/".length(),
 							target.indexOf("/", "voice/".length())) + "/" + lang + "_tts.js");
