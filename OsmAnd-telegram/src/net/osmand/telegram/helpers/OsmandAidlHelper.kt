@@ -7,6 +7,7 @@ import android.content.ServiceConnection
 import android.net.Uri
 import android.os.IBinder
 import android.os.RemoteException
+import net.osmand.aidl.IOsmAndAidlCallback
 import net.osmand.aidl.IOsmAndAidlInterface
 import net.osmand.aidl.favorite.AFavorite
 import net.osmand.aidl.favorite.AddFavoriteParams
@@ -34,12 +35,13 @@ import net.osmand.aidl.mapwidget.RemoveMapWidgetParams
 import net.osmand.aidl.mapwidget.UpdateMapWidgetParams
 import net.osmand.aidl.navdrawer.NavDrawerItem
 import net.osmand.aidl.navdrawer.SetNavDrawerItemsParams
-import net.osmand.aidl.navigation.NavigateGpxParams
-import net.osmand.aidl.navigation.NavigateParams
+import net.osmand.aidl.navigation.*
 import net.osmand.aidl.note.StartAudioRecordingParams
 import net.osmand.aidl.note.StartVideoRecordingParams
 import net.osmand.aidl.note.StopRecordingParams
 import net.osmand.aidl.note.TakePhotoNoteParams
+import net.osmand.aidl.search.SearchParams
+import net.osmand.aidl.search.SearchResult
 import net.osmand.telegram.TelegramApplication
 import java.io.File
 import java.util.*
@@ -64,6 +66,25 @@ class OsmandAidlHelper(private val app: TelegramApplication) {
 		fun onOsmandConnectionStateChanged(connected: Boolean)
 	}
 
+	private var mSearchCompleteListener: SearchCompleteListener? = null
+
+	interface SearchCompleteListener {
+		fun onSearchComplete(resultSet: List<SearchResult>)
+	}
+
+	private val mIOsmAndAidlCallback = object : IOsmAndAidlCallback.Stub() {
+		@Throws(RemoteException::class)
+		override fun onSearchComplete(resultSet: List<SearchResult>) {
+			if (mSearchCompleteListener != null) {
+				mSearchCompleteListener!!.onSearchComplete(resultSet)
+			}
+		}
+	}
+
+	fun setSearchCompleteListener(mSearchCompleteListener: SearchCompleteListener) {
+		this.mSearchCompleteListener = mSearchCompleteListener
+	}
+	
 	/**
 	 * Class for interacting with the main interface of the service.
 	 */
@@ -881,6 +902,108 @@ class OsmandAidlHelper(private val app: TelegramApplication) {
 			} catch (e: RemoteException) {
 				e.printStackTrace()
 			}
+		}
+		return false
+	}
+
+
+	/**
+	 * Put navigation on pause.
+	 */
+	fun pauseNavigation(): Boolean {
+		if (mIOsmAndAidlInterface != null) {
+			try {
+				return mIOsmAndAidlInterface!!.pauseNavigation(PauseNavigationParams())
+			} catch (e: RemoteException) {
+				e.printStackTrace()
+			}
+
+		}
+		return false
+	}
+
+	/**
+	 * Resume navigation if it was paused before.
+	 */
+	fun resumeNavigation(): Boolean {
+		if (mIOsmAndAidlInterface != null) {
+			try {
+				return mIOsmAndAidlInterface!!.resumeNavigation(ResumeNavigationParams())
+			} catch (e: RemoteException) {
+				e.printStackTrace()
+			}
+
+		}
+		return false
+	}
+
+	/**
+	 * Stop navigation. Removes target / intermediate points and route path from the map.
+	 */
+	fun stopNavigation(): Boolean {
+		if (mIOsmAndAidlInterface != null) {
+			try {
+				return mIOsmAndAidlInterface!!.stopNavigation(StopNavigationParams())
+			} catch (e: RemoteException) {
+				e.printStackTrace()
+			}
+
+		}
+		return false
+	}
+
+	/**
+	 * Mute voice guidance. Stays muted until unmute manually or via the api.
+	 */
+	fun muteNavigation(): Boolean {
+		if (mIOsmAndAidlInterface != null) {
+			try {
+				return mIOsmAndAidlInterface!!.muteNavigation(MuteNavigationParams())
+			} catch (e: RemoteException) {
+				e.printStackTrace()
+			}
+
+		}
+		return false
+	}
+
+	/**
+	 * Unmute voice guidance.
+	 */
+	fun unmuteNavigation(): Boolean {
+		if (mIOsmAndAidlInterface != null) {
+			try {
+				return mIOsmAndAidlInterface!!.unmuteNavigation(UnmuteNavigationParams())
+			} catch (e: RemoteException) {
+				e.printStackTrace()
+			}
+
+		}
+		return false
+	}
+
+	/**
+	 * Run search for POI / Address.
+	 *
+	 * @param searchQuery - search query string.
+	 * @param searchType - type of search. Values:
+	 * SearchParams.SEARCH_TYPE_ALL - all kind of search
+	 * SearchParams.SEARCH_TYPE_POI - POIs only
+	 * SearchParams.SEARCH_TYPE_ADDRESS - addresses only
+	 *
+	 * @param latitude - latitude of original search location.
+	 * @param longitude - longitude of original search location.
+	 * @param radiusLevel - value from 1 to 7. Default value = 1.
+	 * @param totalLimit - limit of returned search result rows. Default value = -1 (unlimited).
+	 */
+	fun search(searchQuery: String, searchType: Int, latitude: Double, longitude: Double, radiusLevel: Int, totalLimit: Int): Boolean {
+		if (mIOsmAndAidlInterface != null) {
+			try {
+				return mIOsmAndAidlInterface!!.search(SearchParams(searchQuery, searchType, latitude, longitude, radiusLevel, totalLimit), mIOsmAndAidlCallback)
+			} catch (e: RemoteException) {
+				e.printStackTrace()
+			}
+
 		}
 		return false
 	}
