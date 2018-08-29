@@ -54,6 +54,12 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 		}
 	}
 
+	fun clearLayer() {
+		execOsmandApi {
+			osmandAidlHelper.updateMapLayer(MAP_LAYER_ID, "Telegram", 5.5f, null)
+		}
+	}
+	
 	fun updateLocationsOnMap() {
 		execOsmandApi {
 			val messages = telegramHelper.getMessages()
@@ -164,13 +170,13 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 		}
 	}
 
-	fun deleteMessagesTask(chatId: Long, messages: List<TdApi.Message>) {
+	fun startDeleteMessagesTask(chatId: Long, messages: List<TdApi.Message>) {
 		if (app.settings.isShowingChatOnMap(chatId)) {
 			DeleteMessagesTask(app).executeOnExecutor(executor, messages)
 		}
 	}
 
-	fun updateLocationMessages() {
+	fun startUpdateMessagesTask() {
 		UpdateMessagesTask(app).executeOnExecutor(executor)
 	}
 	

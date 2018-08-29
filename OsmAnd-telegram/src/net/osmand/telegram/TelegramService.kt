@@ -253,11 +253,11 @@ class TelegramService : Service(), LocationListener, TelegramIncomingMessagesLis
 	}
 
 	override fun onDeleteChatLocationMessages(chatId: Long, messages: List<TdApi.Message>) {
-		app().showLocationHelper.deleteMessagesTask(chatId, messages)
+		app().showLocationHelper.startDeleteMessagesTask(chatId, messages)
 	}
 
 	override fun updateLocationMessages() {
-		app().showLocationHelper.updateLocationMessages()
+		app().showLocationHelper.startUpdateMessagesTask()
 	}
 
 	companion object {

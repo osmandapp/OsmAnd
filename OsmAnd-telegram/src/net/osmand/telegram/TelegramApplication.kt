@@ -9,7 +9,7 @@ import android.os.Build
 import android.os.Handler
 import net.osmand.telegram.helpers.*
 import net.osmand.telegram.helpers.OsmandAidlHelper.OsmandHelperListener
-import net.osmand.telegram.helpers.OsmandAidlHelper.RegisterUpdatesCallbackListener
+import net.osmand.telegram.helpers.OsmandAidlHelper.UpdatesListener
 import net.osmand.telegram.notifications.NotificationHelper
 import net.osmand.telegram.utils.AndroidUtils
 import net.osmand.telegram.utils.UiUtils
@@ -57,10 +57,10 @@ class TelegramApplication : Application(), OsmandHelperListener {
 				}
 			}
 		}
-		osmandAidlHelper.setRegisterUpdatesCallbackListener(object :
-			RegisterUpdatesCallbackListener {
+		osmandAidlHelper.setUpdatesListener(object : UpdatesListener {
 			override fun update() {
-				showLocationHelper.updateLocationsOnMap()
+				showLocationHelper.clearLayer()
+				showLocationHelper.startUpdateMessagesTask()
 			}
 		})
 		shareLocationHelper = ShareLocationHelper(this)

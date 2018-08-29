@@ -82,8 +82,8 @@ class OsmandAidlHelper(private val app: TelegramApplication) {
 
 		@Throws(RemoteException::class)
 		override fun update() {
-			if (mRegisterUpdatesCallbackListener != null) {
-				mRegisterUpdatesCallbackListener!!.update()
+			if (mUpdatesListener != null) {
+				mUpdatesListener!!.update()
 			}
 		}
 	}
@@ -92,14 +92,14 @@ class OsmandAidlHelper(private val app: TelegramApplication) {
 		this.mSearchCompleteListener = mSearchCompleteListener
 	}
 
-	private var mRegisterUpdatesCallbackListener: RegisterUpdatesCallbackListener? = null
+	private var mUpdatesListener: UpdatesListener? = null
 
-	interface RegisterUpdatesCallbackListener {
+	interface UpdatesListener {
 		fun update()
 	}
 
-	fun setRegisterUpdatesCallbackListener(mRegisterUpdatesCallbackListener: RegisterUpdatesCallbackListener) {
-		this.mRegisterUpdatesCallbackListener = mRegisterUpdatesCallbackListener
+	fun setUpdatesListener(mUpdatesListener: UpdatesListener) {
+		this.mUpdatesListener = mUpdatesListener
 	}
 
 	/**

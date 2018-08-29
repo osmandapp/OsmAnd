@@ -80,6 +80,8 @@ public class OsmandAidlService extends Service {
 	private ServiceHandler mHandler = null;
 	HandlerThread mHandlerThread = new HandlerThread("OsmAndAidlServiceThread");
 
+	private boolean updatesStarted = false;
+
 	OsmandApplication getApp() {
 		return (OsmandApplication) getApplication();
 	}
@@ -582,7 +584,11 @@ public class OsmandAidlService extends Service {
 		public boolean registerCallback(IOsmAndAidlCallback callback) throws RemoteException {
 			if (callback != null) {
 				callbacks.add(callback);
-				startRemoteUpdates();
+				if (!updatesStarted) {
+					startRemoteUpdates();
+					updatesStarted = true;
+				}
+				return true;
 			}
 			return false;
 		}
