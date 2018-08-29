@@ -69,6 +69,7 @@ public class OsmandAidlService extends Service {
 	private static final Log LOG = PlatformUtil.getLog(OsmandAidlService.class);
 
 	private static final int MSG_RUN_SEARCH = 53;
+	private static final int MSG_UPDATE = 54;
 	private static final String DATA_KEY_RESULT_SET = "resultSet";
 
 	private ArrayList<IOsmAndAidlCallback> mRemoteCallbacks;
@@ -570,6 +571,15 @@ public class OsmandAidlService extends Service {
 				handleException(e);
 				return false;
 			}
+		}
+
+		@Override
+		public boolean update(IOsmAndAidlCallback callback) throws RemoteException {
+			if (callback != null) {
+				getApp().showShortToastMessage(callback.toString());
+				callback.startUpdate();
+			}
+			return false;
 		}
 	};
 

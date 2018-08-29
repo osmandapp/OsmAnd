@@ -130,7 +130,11 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 			setupOptionsBtn(mainView.findViewById<ImageView>(R.id.options_title))
 		}
 		
-		imageContainer = mainView.findViewById<FrameLayout>(R.id.image_container)
+		imageContainer = mainView.findViewById<FrameLayout>(R.id.image_container).apply { 
+			setOnClickListener { 
+				app.osmandAidlHelper.update()
+			}
+		}
 		titleContainer = mainView.findViewById<LinearLayout>(R.id.title_container).apply {
 			AndroidUtils.addStatusBarPadding19v(context, this)
 		}

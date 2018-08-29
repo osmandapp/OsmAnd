@@ -1552,4 +1552,8 @@ public class OsmandAidlApi {
 	public interface SearchCompleteCallback {
 		void onSearchComplete(List<SearchResult> resultSet);
 	}
+	
+	public interface UpdateCompleteCallback {
+		void onUpdateComplete();
+	}
 }

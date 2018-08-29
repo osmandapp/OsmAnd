@@ -79,10 +79,26 @@ class OsmandAidlHelper(private val app: TelegramApplication) {
 				mSearchCompleteListener!!.onSearchComplete(resultSet)
 			}
 		}
+		@Throws(RemoteException::class)
+		override fun startUpdate() {
+			if (mUpdateCompleteListener != null) {
+				mUpdateCompleteListener!!.onUpdateComplete()
+			}
+		}
 	}
 
 	fun setSearchCompleteListener(mSearchCompleteListener: SearchCompleteListener) {
 		this.mSearchCompleteListener = mSearchCompleteListener
+	}
+	
+	private var mUpdateCompleteListener: UpdateCompleteListener? = null
+
+	interface UpdateCompleteListener {
+		fun onUpdateComplete()
+	}
+
+	fun setSearchCompleteListener(mUpdateCompleteListener: UpdateCompleteListener) {
+		this.mUpdateCompleteListener = mUpdateCompleteListener
 	}
 	
 	/**
@@ -1000,6 +1016,18 @@ class OsmandAidlHelper(private val app: TelegramApplication) {
 		if (mIOsmAndAidlInterface != null) {
 			try {
 				return mIOsmAndAidlInterface!!.search(SearchParams(searchQuery, searchType, latitude, longitude, radiusLevel, totalLimit), mIOsmAndAidlCallback)
+			} catch (e: RemoteException) {
+				e.printStackTrace()
+			}
+
+		}
+		return false
+	}
+	
+	fun update(): Boolean {
+		if (mIOsmAndAidlInterface != null) {
+			try {
+				return mIOsmAndAidlInterface!!.update(mIOsmAndAidlCallback)
 			} catch (e: RemoteException) {
 				e.printStackTrace()
 			}

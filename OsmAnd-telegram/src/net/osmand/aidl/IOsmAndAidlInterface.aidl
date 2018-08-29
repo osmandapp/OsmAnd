@@ -128,4 +128,6 @@ interface IOsmAndAidlInterface {
     boolean unmuteNavigation(in UnmuteNavigationParams params);
 
     boolean search(in SearchParams params, IOsmAndAidlCallback callback);
+    
+    boolean update(in IOsmAndAidlCallback callback);
 }
