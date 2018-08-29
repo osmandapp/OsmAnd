@@ -219,7 +219,8 @@ public class LocalIndexHelper {
 		if (voiceDir.canRead()) {
 			//First list TTS files, they are preferred
 			for (File voiceF : listFilesSorted(voiceDir)) {
-				if (voiceF.isDirectory() && JSTTSCommandPlayerImpl.isMyData(voiceF)) {
+				if (voiceF.isDirectory() && (JSTTSCommandPlayerImpl.isMyData(voiceF)
+						|| TTSCommandPlayerImpl.isMyData(voiceF))) {
 					LocalIndexInfo info = new LocalIndexInfo(LocalIndexType.TTS_VOICE_DATA, voiceF, backup, app);
 					updateDescription(info);
 					result.add(info);
@@ -230,7 +231,8 @@ public class LocalIndexHelper {
 
 			//Now list recorded voices
 			for (File voiceF : listFilesSorted(voiceDir)) {
-				if (voiceF.isDirectory() && JSMediaCommandPlayerImpl.isMyData(voiceF)) {
+				if (voiceF.isDirectory() && (JSMediaCommandPlayerImpl.isMyData(voiceF)
+						|| MediaCommandPlayerImpl.isMyData(voiceF))) {
 					LocalIndexInfo info = new LocalIndexInfo(LocalIndexType.VOICE_DATA, voiceF, backup, app);
 					updateDescription(info);
 					result.add(info);
