@@ -117,7 +117,6 @@ class OsmandAidlHelper(private val app: TelegramApplication) {
 			initialized = true
 			//Toast.makeText(app, "OsmAnd connected", Toast.LENGTH_SHORT).show()
 			listener?.onOsmandConnectionStateChanged(true)
-			registerCallback()
 		}
 
 		override fun onServiceDisconnected(className: ComponentName) {

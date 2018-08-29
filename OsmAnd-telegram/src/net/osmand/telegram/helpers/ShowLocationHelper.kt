@@ -20,6 +20,8 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 
 	companion object {
 		const val MAP_LAYER_ID = "telegram_layer"
+		
+		const val MIN_OSMAND_CALLBACK_VERSION_CODE = 320
 	}
 
 	private val telegramHelper = app.telegramHelper
@@ -51,12 +53,6 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 				null,
 				generatePhotoParams(if (stale) item.grayscalePhotoPath else item.photoPath, stale)
 			)
-		}
-	}
-
-	fun clearLayer() {
-		execOsmandApi {
-			osmandAidlHelper.updateMapLayer(MAP_LAYER_ID, "Telegram", 5.5f, null)
 		}
 	}
 	
@@ -152,8 +148,14 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 
 	fun startShowingLocation() {
 		if (!showingLocation) {
-			showingLocation = true
-			app.startUserLocationService()
+			val packageOsmAndInfo = app.packageManager.getPackageInfo(app.settings.appToConnectPackage, 0)
+			showingLocation =
+					if (packageOsmAndInfo.versionCode >= MIN_OSMAND_CALLBACK_VERSION_CODE) {
+						osmandAidlHelper.registerCallback()
+					} else {
+						app.startUserLocationService()
+						true
+					}
 		}
 	}
 

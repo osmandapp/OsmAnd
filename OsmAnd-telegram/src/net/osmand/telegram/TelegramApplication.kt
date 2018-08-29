@@ -54,12 +54,14 @@ class TelegramApplication : Application(), OsmandHelperListener {
 						listOf("ic_action_location_sharing_app"),
 						listOf(-1)
 					)
+					if (settings.hasAnyChatToShowOnMap()) {
+						showLocationHelper.startShowingLocation()
+					}
 				}
 			}
 		}
 		osmandAidlHelper.setUpdatesListener(object : UpdatesListener {
 			override fun update() {
-				showLocationHelper.clearLayer()
 				showLocationHelper.startUpdateMessagesTask()
 			}
 		})
