@@ -79,10 +79,11 @@ class OsmandAidlHelper(private val app: TelegramApplication) {
 				mSearchCompleteListener!!.onSearchComplete(resultSet)
 			}
 		}
+
 		@Throws(RemoteException::class)
-		override fun startUpdate() {
-			if (mUpdateCompleteListener != null) {
-				mUpdateCompleteListener!!.onUpdateComplete()
+		override fun update() {
+			if (mRegisterUpdatesCallbackListener != null) {
+				mRegisterUpdatesCallbackListener!!.update()
 			}
 		}
 	}
@@ -90,17 +91,17 @@ class OsmandAidlHelper(private val app: TelegramApplication) {
 	fun setSearchCompleteListener(mSearchCompleteListener: SearchCompleteListener) {
 		this.mSearchCompleteListener = mSearchCompleteListener
 	}
-	
-	private var mUpdateCompleteListener: UpdateCompleteListener? = null
 
-	interface UpdateCompleteListener {
-		fun onUpdateComplete()
+	private var mRegisterUpdatesCallbackListener: RegisterUpdatesCallbackListener? = null
+
+	interface RegisterUpdatesCallbackListener {
+		fun update()
 	}
 
-	fun setSearchCompleteListener(mUpdateCompleteListener: UpdateCompleteListener) {
-		this.mUpdateCompleteListener = mUpdateCompleteListener
+	fun setRegisterUpdatesCallbackListener(mRegisterUpdatesCallbackListener: RegisterUpdatesCallbackListener) {
+		this.mRegisterUpdatesCallbackListener = mRegisterUpdatesCallbackListener
 	}
-	
+
 	/**
 	 * Class for interacting with the main interface of the service.
 	 */
@@ -116,6 +117,7 @@ class OsmandAidlHelper(private val app: TelegramApplication) {
 			initialized = true
 			//Toast.makeText(app, "OsmAnd connected", Toast.LENGTH_SHORT).show()
 			listener?.onOsmandConnectionStateChanged(true)
+			registerCallback()
 		}
 
 		override fun onServiceDisconnected(className: ComponentName) {
@@ -1019,19 +1021,17 @@ class OsmandAidlHelper(private val app: TelegramApplication) {
 			} catch (e: RemoteException) {
 				e.printStackTrace()
 			}
-
 		}
 		return false
 	}
-	
-	fun update(): Boolean {
+
+	fun registerCallback(): Boolean {
 		if (mIOsmAndAidlInterface != null) {
 			try {
-				return mIOsmAndAidlInterface!!.update(mIOsmAndAidlCallback)
+				return mIOsmAndAidlInterface!!.registerCallback(mIOsmAndAidlCallback)
 			} catch (e: RemoteException) {
 				e.printStackTrace()
 			}
-
 		}
 		return false
 	}

@@ -5,5 +5,5 @@ import net.osmand.aidl.search.SearchResult;
 interface IOsmAndAidlCallback {
     void onSearchComplete(in List<SearchResult> resultSet);
     
-    void startUpdate();
+    void update();
 }

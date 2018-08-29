@@ -12,7 +12,9 @@ import net.osmand.telegram.utils.AndroidUtils
 import org.drinkless.td.libcore.telegram.TdApi
 import java.io.File
 import android.net.Uri
+import android.os.AsyncTask
 import net.osmand.telegram.R
+import java.util.concurrent.Executors
 
 class ShowLocationHelper(private val app: TelegramApplication) {
 
@@ -22,6 +24,7 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 
 	private val telegramHelper = app.telegramHelper
 	private val osmandAidlHelper = app.osmandAidlHelper
+	private val executor = Executors.newSingleThreadExecutor()
 
 	var showingLocation: Boolean = false
 		private set
@@ -155,6 +158,51 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 		}
 	}
 
+	fun startShowMessagesTask(chatId: Long, vararg messages: TdApi.Message) {
+		if (app.settings.isShowingChatOnMap(chatId)) {
+			ShowMessagesTask(app).executeOnExecutor(executor, *messages)
+		}
+	}
+
+	fun deleteMessagesTask(chatId: Long, messages: List<TdApi.Message>) {
+		if (app.settings.isShowingChatOnMap(chatId)) {
+			DeleteMessagesTask(app).executeOnExecutor(executor, messages)
+		}
+	}
+
+	fun updateLocationMessages() {
+		UpdateMessagesTask(app).executeOnExecutor(executor)
+	}
+	
+	private class ShowMessagesTask(private val app: TelegramApplication) : AsyncTask<TdApi.Message, Void, Void?>() {
+
+		override fun doInBackground(vararg messages: TdApi.Message): Void? {
+			for (message in messages) {
+				app.showLocationHelper.addOrUpdateLocationOnMap(message)
+			}
+			return null
+		}
+	}
+
+	private class DeleteMessagesTask(private val app: TelegramApplication) : AsyncTask<List<TdApi.Message>, Void, Void?>() {
+
+		override fun doInBackground(vararg messages: List<TdApi.Message>): Void? {
+			for (list in messages) {
+				app.showLocationHelper.hideMessages(list)
+			}
+			return null
+		}
+	}
+
+	private class UpdateMessagesTask(private val app: TelegramApplication) : AsyncTask<Void, Void, Void?>() {
+
+		override fun doInBackground(vararg params: Void?): Void? {
+			app.showLocationHelper.updateLocationsOnMap()
+			return null
+		}
+	}
+	
+	
 	private fun generatePhotoParams(photoPath: String?, stale: Boolean = false): Map<String, String>? {
 		val photoUri = if (TextUtils.isEmpty(photoPath)) {
 			val resId = if (stale) {

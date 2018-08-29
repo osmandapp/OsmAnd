@@ -62,17 +62,21 @@ import org.apache.commons.logging.Log;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class OsmandAidlService extends Service {
 	
 	private static final Log LOG = PlatformUtil.getLog(OsmandAidlService.class);
 
+	private static final int UPDATE_TIME_MIL = 5000;
+	
 	private static final int MSG_RUN_SEARCH = 53;
-	private static final int MSG_UPDATE = 54;
 	private static final String DATA_KEY_RESULT_SET = "resultSet";
 
 	private ArrayList<IOsmAndAidlCallback> mRemoteCallbacks;
+	private Set<IOsmAndAidlCallback> callbacks;
 	private ServiceHandler mHandler = null;
 	HandlerThread mHandlerThread = new HandlerThread("OsmAndAidlServiceThread");
 
@@ -100,6 +104,7 @@ public class OsmandAidlService extends Service {
 		super.onCreate();
 
 		mRemoteCallbacks = new ArrayList<>();
+		callbacks = new HashSet<>();
 	}
 
 	private final IOsmAndAidlInterface.Stub mBinder = new IOsmAndAidlInterface.Stub() {
@@ -574,15 +579,31 @@ public class OsmandAidlService extends Service {
 		}
 
 		@Override
-		public boolean update(IOsmAndAidlCallback callback) throws RemoteException {
+		public boolean registerCallback(IOsmAndAidlCallback callback) throws RemoteException {
 			if (callback != null) {
-				getApp().showShortToastMessage(callback.toString());
-				callback.startUpdate();
+				callbacks.add(callback);
+				startRemoteUpdates();
 			}
 			return false;
 		}
 	};
 
+	void startRemoteUpdates() {
+		mHandler.postDelayed((new Runnable() {
+			@Override
+			public void run() {
+				for (IOsmAndAidlCallback callback : callbacks) {
+					try {
+						callback.update();
+					} catch (RemoteException e) {
+						e.printStackTrace();
+					}
+				}
+				startRemoteUpdates();
+			}
+		}), UPDATE_TIME_MIL);
+	}
+	
 	/**
 	 * Create handler message to be sent
 	 */
