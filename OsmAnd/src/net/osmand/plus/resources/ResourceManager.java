@@ -389,6 +389,10 @@ public class ResourceManager {
 					if (f.isDirectory()) {
 						String lang = f.getName().replace("-tts", "");
 						File conf = new File(f, lang + "_" + IndexConstants.TTSVOICE_INDEX_EXT_JS);
+						if (!conf.exists()) {
+							conf = new File(f, "_config.p");
+							conf = conf.exists() ? conf : new File(f, "_ttsconfig.p");
+						}
 						if (conf.exists()) {
 							indexFileNames.put(f.getName(), dateFormat.format(conf.lastModified())); //$NON-NLS-1$
 						}

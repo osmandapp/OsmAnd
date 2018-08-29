@@ -46,6 +46,7 @@ import net.osmand.plus.views.MapControlsLayer;
 import net.osmand.plus.voice.JSMediaCommandPlayerImpl;
 import net.osmand.plus.voice.JSTTSCommandPlayerImpl;
 import net.osmand.plus.voice.MediaCommandPlayerImpl;
+import net.osmand.plus.voice.TTSCommandPlayerImpl;
 import net.osmand.router.GeneralRouter;
 import net.osmand.router.GeneralRouter.RoutingParameter;
 import net.osmand.util.Algorithms;
@@ -341,7 +342,8 @@ public class RoutePreferencesMenu {
 		if (extStorage.exists()) {
 			for (File f : extStorage.listFiles()) {
 				if (f.isDirectory()) {
-					if (JSMediaCommandPlayerImpl.isMyData(f) || JSTTSCommandPlayerImpl.isMyData(f)) {
+					if (JSMediaCommandPlayerImpl.isMyData(f) || JSTTSCommandPlayerImpl.isMyData(f)
+							|| MediaCommandPlayerImpl.isMyData(f) || TTSCommandPlayerImpl.isMyData(f)) {
 						setFiles.add(f.getName());
 					}
 				}
