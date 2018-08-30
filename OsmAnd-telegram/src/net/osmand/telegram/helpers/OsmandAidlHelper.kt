@@ -60,8 +60,6 @@ class OsmandAidlHelper(private val app: TelegramApplication) {
 	private var initialized: Boolean = false
 	private var bound: Boolean = false
 
-	private var boundPackage = ""
-
 	var listener: OsmandHelperListener? = null
 
 	interface OsmandHelperListener {
@@ -75,8 +73,6 @@ class OsmandAidlHelper(private val app: TelegramApplication) {
 	}
 
 	private val mIOsmAndAidlCallback = object : IOsmAndAidlCallback.Stub() {
-		
-		override fun getId(): Int = OSMAND_CALLBACK_ID
 
 		@Throws(RemoteException::class)
 		override fun onSearchComplete(resultSet: List<SearchResult>) {
@@ -86,11 +82,13 @@ class OsmandAidlHelper(private val app: TelegramApplication) {
 		}
 
 		@Throws(RemoteException::class)
-		override fun update() {
+		override fun onUpdate() {
 			if (mUpdatesListener != null) {
 				mUpdatesListener!!.update()
 			}
 		}
+
+		override fun getId(): Int = OSMAND_CALLBACK_ID
 	}
 
 	fun setSearchCompleteListener(mSearchCompleteListener: SearchCompleteListener) {
@@ -145,8 +143,6 @@ class OsmandAidlHelper(private val app: TelegramApplication) {
 		return mIOsmAndAidlInterface != null
 	}
 	
-	fun getOsmandBoundPackage(): String = boundPackage
-
 	/**
 	 * Get list of active GPX files.
 	 *
@@ -173,18 +169,14 @@ class OsmandAidlHelper(private val app: TelegramApplication) {
 	}
 
 	fun reconnectOsmand() {
-		if (boundPackage != app.settings.appToConnectPackage) {
-			cleanupResources()
-			connectOsmand()
-		}
+		cleanupResources()
+		connectOsmand()
 	}
 
 	fun connectOsmand() {
 		if (bindService(app.settings.appToConnectPackage)) {
-			boundPackage = app.settings.appToConnectPackage
 			bound = true
 		} else {
-			boundPackage = ""
 			bound = false
 			initialized = true
 		}
@@ -203,7 +195,7 @@ class OsmandAidlHelper(private val app: TelegramApplication) {
 	fun cleanupResources() {
 		try {
 			if (mIOsmAndAidlInterface != null) {
-				unRegisterCallback()
+				unregisterFromUpdates()
 				mIOsmAndAidlInterface = null
 				app.unbindService(mConnection)
 			}
@@ -1032,10 +1024,10 @@ class OsmandAidlHelper(private val app: TelegramApplication) {
 		return false
 	}
 
-	fun registerCallback(): Boolean {
+	fun registerForUpdates(): Boolean {
 		if (mIOsmAndAidlInterface != null) {
 			try {
-				return mIOsmAndAidlInterface!!.registerCallback(mIOsmAndAidlCallback)
+				return mIOsmAndAidlInterface!!.registerForUpdates(mIOsmAndAidlCallback)
 			} catch (e: RemoteException) {
 				e.printStackTrace()
 			}
@@ -1043,10 +1035,10 @@ class OsmandAidlHelper(private val app: TelegramApplication) {
 		return false
 	}
 	
-	fun unRegisterCallback(): Boolean {
+	fun unregisterFromUpdates(): Boolean {
 		if (mIOsmAndAidlInterface != null) {
 			try {
-				return mIOsmAndAidlInterface!!.unRegisterCallback(mIOsmAndAidlCallback)
+				return mIOsmAndAidlInterface!!.unregisterFromUpdates(mIOsmAndAidlCallback)
 			} catch (e: RemoteException) {
 				e.printStackTrace()
 			}

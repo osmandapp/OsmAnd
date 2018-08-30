@@ -82,6 +82,7 @@ public class OsmandAidlService extends Service {
 	HandlerThread mHandlerThread = new HandlerThread("OsmAndAidlServiceThread");
 
 	private boolean updatesStarted = false;
+	private boolean shouldStopUpdates = false;
 
 	OsmandApplication getApp() {
 		return (OsmandApplication) getApplication();
@@ -582,12 +583,13 @@ public class OsmandAidlService extends Service {
 		}
 
 		@Override
-		public boolean registerCallback(IOsmAndAidlCallback callback) throws RemoteException {
+		public boolean registerForUpdates(IOsmAndAidlCallback callback) throws RemoteException {
 			if (callback != null) {
 				callbacks.add(callback);
 				if (!updatesStarted) {
 					startRemoteUpdates();
 					updatesStarted = true;
+					shouldStopUpdates = false;
 				}
 				return true;
 			}
@@ -595,7 +597,7 @@ public class OsmandAidlService extends Service {
 		}
 
 		@Override
-		public boolean unRegisterCallback(IOsmAndAidlCallback callback) throws RemoteException {
+		public boolean unregisterFromUpdates(IOsmAndAidlCallback callback) throws RemoteException {
 			if (callback != null) {
 				Iterator<IOsmAndAidlCallback> i = callbacks.iterator();
 				while (i.hasNext()) {
@@ -604,6 +606,7 @@ public class OsmandAidlService extends Service {
 						i.remove();
 					}
 				}
+				shouldStopUpdates = callbacks.isEmpty();
 				return true;
 			}
 			return false;
@@ -616,12 +619,16 @@ public class OsmandAidlService extends Service {
 			public void run() {
 				for (IOsmAndAidlCallback callback : callbacks) {
 					try {
-						callback.update();
+						callback.onUpdate();
 					} catch (RemoteException e) {
 						e.printStackTrace();
 					}
 				}
-				startRemoteUpdates();
+				if (shouldStopUpdates) {
+					updatesStarted = false;
+				} else {
+					startRemoteUpdates();
+				}
 			}
 		}), UPDATE_TIME_MIL);
 	}
