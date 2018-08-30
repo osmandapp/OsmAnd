@@ -65,6 +65,7 @@ import net.osmand.aidl.IOsmAndAidlCallback;
 
 import net.osmand.aidl.search.SearchResult;
 import net.osmand.aidl.search.SearchParams;
+import net.osmand.aidl.navigation.NavigateSearchParams;
 
 // NOTE: Add new methods at the end of file!!!
 
@@ -128,4 +129,5 @@ interface IOsmAndAidlInterface {
     boolean unmuteNavigation(in UnmuteNavigationParams params);
 
     boolean search(in SearchParams params, IOsmAndAidlCallback callback);
+    boolean navigateSearch(in NavigateSearchParams params);
 }
