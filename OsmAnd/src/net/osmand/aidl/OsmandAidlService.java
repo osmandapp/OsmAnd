@@ -69,7 +69,7 @@ public class OsmandAidlService extends Service {
 	
 	private static final Log LOG = PlatformUtil.getLog(OsmandAidlService.class);
 
-	private static final int UPDATE_TIME_MS = 5000;
+	private static final int MIN_UPDATE_TIME_MS = 1000;
 	
 	private static final int MSG_RUN_SEARCH = 53;
 	private static final String DATA_KEY_RESULT_SET = "resultSet";
@@ -79,8 +79,7 @@ public class OsmandAidlService extends Service {
 	private ServiceHandler mHandler = null;
 	HandlerThread mHandlerThread = new HandlerThread("OsmAndAidlServiceThread");
 
-	private boolean updatesStarted = false;
-	private long callbackId = 0;
+	private long updateCallbackId = 0;
 
 	OsmandApplication getApp() {
 		return (OsmandApplication) getApplication();
@@ -581,15 +580,12 @@ public class OsmandAidlService extends Service {
 		}
 
 		@Override
-		public boolean registerForUpdates(IOsmAndAidlCallback callback) throws RemoteException {
-			if (callback != null) {
-				callback.setId(callbackId);
-				callbacks.put(callbackId, callback);
-				callbackId++;
-				if (!updatesStarted) {
-					startRemoteUpdates();
-					updatesStarted = true;
-				}
+		public boolean registerForUpdates(long updateTimeMS, IOsmAndAidlCallback callback) throws RemoteException {
+			if (callback != null && updateTimeMS >= MIN_UPDATE_TIME_MS) {
+				callback.setId(updateCallbackId);
+				callbacks.put(updateCallbackId, callback);
+				updateCallbackId++;
+				startRemoteUpdates(updateTimeMS, callback);
 				return true;
 			}
 			return false;
@@ -598,31 +594,29 @@ public class OsmandAidlService extends Service {
 		@Override
 		public boolean unregisterFromUpdates(IOsmAndAidlCallback callback) throws RemoteException {
 			if (callback != null) {
-				callbacks.remove(callback.getId());
+				long id = callback.getId();
+				callbacks.remove(id);
 			}
 			return false;
 		}
 	};
 
-	void startRemoteUpdates() {
+	void startRemoteUpdates(final long updateTimeMS, final IOsmAndAidlCallback callback) {
 		mHandler.postDelayed((new Runnable() {
 			@Override
 			public void run() {
 				try {
-					for (Map.Entry entry : callbacks.entrySet()) {
-						IOsmAndAidlCallback callback = (IOsmAndAidlCallback) entry.getValue();
-						callback.onUpdate();
+					if (callbacks.containsKey(callback.getId())) {
+						if (getApi("isUpdateAllowed").isUpdateAllowed()) {
+							callback.onUpdate();
+						}
+						startRemoteUpdates(updateTimeMS, callback);
 					}
 				} catch (RemoteException e) {
 					e.printStackTrace();
 				}
-				if (callbacks.isEmpty()) {
-					updatesStarted = false;
-				} else {
-					startRemoteUpdates();
-				}
 			}
-		}), UPDATE_TIME_MS);
+		}), updateTimeMS);
 	}
 	
 	/**

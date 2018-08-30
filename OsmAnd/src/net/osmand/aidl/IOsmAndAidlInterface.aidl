@@ -129,6 +129,6 @@ interface IOsmAndAidlInterface {
 
     boolean search(in SearchParams params, IOsmAndAidlCallback callback);
 
-    boolean registerForUpdates(in IOsmAndAidlCallback callback);
+    boolean registerForUpdates(in long updateTimeMS, IOsmAndAidlCallback callback);
     boolean unregisterFromUpdates(in IOsmAndAidlCallback callback);
 }

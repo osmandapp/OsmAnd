@@ -51,6 +51,8 @@ class OsmandAidlHelper(private val app: TelegramApplication) {
 	companion object {
 		const val OSMAND_FREE_PACKAGE_NAME = "net.osmand"
 		const val OSMAND_PLUS_PACKAGE_NAME = "net.osmand.plus"
+
+		const val UPDATE_TIME_MS = 5000L
 	}
 
 	private var mIOsmAndAidlInterface: IOsmAndAidlInterface? = null
@@ -1032,7 +1034,7 @@ class OsmandAidlHelper(private val app: TelegramApplication) {
 	fun registerForUpdates(): Boolean {
 		if (mIOsmAndAidlInterface != null) {
 			try {
-				return mIOsmAndAidlInterface!!.registerForUpdates(mIOsmAndAidlCallback)
+				return mIOsmAndAidlInterface!!.registerForUpdates(UPDATE_TIME_MS, mIOsmAndAidlCallback)
 			} catch (e: RemoteException) {
 				e.printStackTrace()
 			}
