@@ -1180,7 +1180,7 @@ Sólsetur: %2$s</string>
     <string name="avoid_unpaved">Forðast vegi með óbundnu slitlagi</string>
     <string name="avoid_ferries">Forðast ferjur</string>
     <string name="avoid_in_routing_title">Forðast…</string>
-    <string name="avoid_in_routing_descr">Forðast gjaldskyldu, óbundið slitlag, ferjur.</string>
+    <string name="avoid_in_routing_descr">Forðast t.d. gjaldskyldu, óbundið slitlag, ferjur.</string>
     <string name="map_widget_transparent">Gegnsæir viðmótshlutar</string>
     <string name="bg_service_sleep_mode_off">Keyra
  forrit í bakgrunni</string>
@@ -2938,19 +2938,21 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="coord_input_save_as_track_descr">Þú bættir við %1$s punktum. Settu inn heitið á skránni og vistaðu.</string>
     <string name="shared_string_world">Veröld</string>
     <string name="point_deleted">Punkti %1$s eytt</string>
-    <string name="release_3_1">• Leiðsögn: Framvindustika lagfærð, hraðari víxl á upphafi og enda leiða
+    <string name="release_3_1">"• Leiðsögn: Framvindustika lagfærð, hraðari víxl á upphafi og enda leiða 
+\n 
+\n • Kortamerki: lagfæring á að kveikja/slökkva á hópum, hægt að fela merki á korti 
+\n 
+\n • OSM-breytingar: Hægt að breyta merkjum á atriðum sem ekki eru punktar, lagfæring á þegar athugasemdir vantar á minnispunkta, öryggisafritun breytinga 
+\n 
+\n • Bæting á þáttun Wikipedia og Wikivoyage, uppfærðar skrár eru þegar tiltækar 
+\n 
+\n • Samhengisvalmynd: lagfæring á samgöngumerkingum í næturham, lagfæring á stærðum viðbótarvalmynda 
+\n 
+\n •  Siglingaleiðsögn: stuðningur við merktar siglingaleiðir
 \n
-\n • Kortamerki: lagfæring á að kveikja/slökkva á hópum, hægt að fela merki á korti
-\n
-\n • OSM-breytingar: Hægt að breyta merkjum á atriðum sem ekki eru punktar, lagfæring á þegar athugasemdir vantar á minnispunkta, öryggisafritun breytinga
-\n
-\n • Bæting á þáttun Wikipedia og Wikivoyage, uppfærðar skrár eru þegar tiltækar
-\n
-\n • Samhengisvalmynd: lagfæring á samgöngumerkingum í næturham, lagfæring á stærðum viðbótarvalmynda
-\n
-\n • Lagfæringar á öðrum göllum
-\n
-\n</string>
+\n • Lagfæringar á öðrum göllum 
+\n 
+\n"</string>
     <string name="increase_search_radius_to">Auka radíus leitar í %1$s</string>
     <string name="send_search_query_description">Við munum senda leitarfyrirspurn þína: <b>\"%1$s\"</b>, ásamt staðsetningu þinni.<br/><br/> Við söfnum ekki persónulegum upplýsingum, við þurfum einfaldlega þessi gögn til að bæta útreikninga leitarinnar.<br/></string>
     <string name="search_no_results_description">Engar niðurstöður?
@@ -2961,4 +2963,5 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="search_no_results_feedback">Engar leitarniðurstöður?
 \nLáttu okkur vita</string>
     <string name="commiting_way">Sendi leið inn…</string>
-    </resources>
+    <string name="test_voice_desrc">Bankaðu á hnapp og hlustaðu á samsvarandi raddskipun til að bera kennsl á fyrirmæli sem vantar eða sem eru skemmd.</string>
+</resources>
