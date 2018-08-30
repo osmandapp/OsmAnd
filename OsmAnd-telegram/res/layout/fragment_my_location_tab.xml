@@ -186,6 +186,7 @@
 				android:id="@+id/stop_all_sharing_row"
 				android:layout_width="match_parent"
 				android:layout_height="@dimen/action_bar_height"
+				android:background="?attr/selectableItemBackground"
 				android:gravity="center_vertical"
 				android:paddingLeft="@dimen/content_padding_standard"
 				android:paddingRight="@dimen/content_padding_standard">
@@ -207,7 +208,10 @@
 				<Switch
 					android:id="@+id/stop_all_sharing_switcher"
 					android:layout_width="wrap_content"
-					android:layout_height="wrap_content" />
+					android:layout_height="wrap_content"
+					android:background="@null"
+					android:clickable="false"
+					android:focusable="false"/>
 
 			</LinearLayout>
 

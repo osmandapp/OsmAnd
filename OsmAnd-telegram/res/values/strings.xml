@@ -1,4 +1,7 @@
 <resources>
+	<string name="disable_all_sharing_desc">It will disable sharing your location to all selected chats (%1$d).</string>
+	<string name="disable_all_sharing">Disable all sharing</string>
+	<string name="turn_off_all">Turn off all</string>
 	<string name="shared_string_exit">Exit</string>
 	<string name="time_ago">ago</string>
 	<string name="last_response">Last response</string>
