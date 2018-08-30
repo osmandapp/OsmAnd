@@ -30,7 +30,6 @@ import net.osmand.aidl.maplayer.AMapLayer;
 import net.osmand.aidl.maplayer.point.AMapPoint;
 import net.osmand.aidl.mapmarker.AMapMarker;
 import net.osmand.aidl.mapwidget.AMapWidget;
-import net.osmand.aidl.search.SearchParams;
 import net.osmand.aidl.search.SearchResult;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
