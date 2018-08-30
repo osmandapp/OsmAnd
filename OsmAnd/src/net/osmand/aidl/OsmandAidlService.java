@@ -6,9 +6,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.IBinder;
-import android.os.Looper;
-import android.os.Message;
-import android.os.Parcelable;
 import android.os.RemoteException;
 
 import net.osmand.PlatformUtil;
@@ -62,7 +59,6 @@ import net.osmand.util.Algorithms;
 import org.apache.commons.logging.Log;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -71,16 +67,16 @@ public class OsmandAidlService extends Service {
 	
 	private static final Log LOG = PlatformUtil.getLog(OsmandAidlService.class);
 
-	private static final int MIN_UPDATE_TIME_MS = 1000;
-
 	private static final String DATA_KEY_RESULT_SET = "resultSet";
 
+	private static final int MIN_UPDATE_TIME_MS = 1000;
+
 	private Map<Long, IOsmAndAidlCallback> callbacks;
-	private ServiceHandler mHandler = null;
+	private Handler mHandler = null;
 	HandlerThread mHandlerThread = new HandlerThread("OsmAndAidlServiceThread");
 
 	private long updateCallbackId = 0;
-	
+
 	OsmandApplication getApp() {
 		return (OsmandApplication) getApplication();
 	}
@@ -92,9 +88,8 @@ public class OsmandAidlService extends Service {
 
 	@Override
 	public IBinder onBind(Intent intent) {
-		// Handler Thread handling all call back methods
 		mHandlerThread.start();
-		mHandler = new ServiceHandler(mHandlerThread.getLooper());
+		mHandler = new Handler(mHandlerThread.getLooper());
 
 		// Return the interface
 		return mBinder;
@@ -566,19 +561,31 @@ public class OsmandAidlService extends Service {
 			try {
 				return params != null && getApi("search").search(params.getSearchQuery(), params.getSearchType(),
 						params.getLatitude(), params.getLongitude(), params.getRadiusLevel(), params.getTotalLimit(), new SearchCompleteCallback() {
-					@Override
-					public void onSearchComplete(List<SearchResult> resultSet) {
-						Bundle data = new Bundle();
-						if (resultSet.size() > 0) {
-							data.putParcelableArrayList(DATA_KEY_RESULT_SET, new ArrayList<>(resultSet));
-						}
-						try {
-							callback.onSearchComplete(resultSet);
-						} catch (RemoteException e) {
-							handleException(e);
-						}
-					}
-				});
+							@Override
+							public void onSearchComplete(List<SearchResult> resultSet) {
+								Bundle data = new Bundle();
+								if (resultSet.size() > 0) {
+									data.putParcelableArrayList(DATA_KEY_RESULT_SET, new ArrayList<>(resultSet));
+								}
+								try {
+									callback.onSearchComplete(resultSet);
+								} catch (RemoteException e) {
+									handleException(e);
+								}
+							}
+						});
+			} catch (Exception e) {
+				handleException(e);
+				return false;
+			}
+		}
+
+		@Override
+		public boolean navigateSearch(NavigateSearchParams params) throws RemoteException {
+			try {
+				return params != null && getApi("navigateSearch").navigateSearch(
+						params.getStartName(), params.getStartLat(), params.getStartLon(),
+						params.getSearchQuery(), params.getProfile(), params.isForce());
 			} catch (Exception e) {
 				handleException(e);
 				return false;
@@ -607,7 +614,7 @@ public class OsmandAidlService extends Service {
 	};
 
 	void startRemoteUpdates(final long updateTimeMS, final IOsmAndAidlCallback callback) {
-		mHandler.postDelayed((new Runnable() {
+		mHandler.postDelayed(new Runnable() {
 			@Override
 			public void run() {
 				try {
@@ -621,18 +628,6 @@ public class OsmandAidlService extends Service {
 					e.printStackTrace();
 				}
 			}
-		}), updateTimeMS);
+		}, updateTimeMS);
 	}
-		@Override
-		public boolean navigateSearch(NavigateSearchParams params) throws RemoteException {
-			try {
-				return params != null && getApi("navigateSearch").navigateSearch(
-						params.getStartName(), params.getStartLat(), params.getStartLon(),
-						params.getSearchQuery(), params.getProfile(), params.isForce());
-			} catch (Exception e) {
-				handleException(e);
-				return false;
-			}
-		}
-	};
 }

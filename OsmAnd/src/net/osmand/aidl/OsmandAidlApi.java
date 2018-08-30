@@ -192,11 +192,11 @@ public class OsmandAidlApi {
 		}
 		receivers = new TreeMap<>();
 	}
-	
+
 	public boolean isUpdateAllowed() {
 		return mapActivityActive;
 	}
-	
+
 	private void registerRefreshMapReceiver(MapActivity mapActivity) {
 		final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
 		BroadcastReceiver refreshMapReceiver = new BroadcastReceiver() {

@@ -915,6 +915,18 @@ class OsmandAidlHelper(private val app: TelegramApplication) {
 		return false
 	}
 
+	fun navigateSearch(startName: String, startLat: Double, startLon: Double, searchQuery: String, profile: String, force: Boolean): Boolean {
+		if (mIOsmAndAidlInterface != null) {
+			try {
+				return mIOsmAndAidlInterface!!.navigateSearch(NavigateSearchParams(startName, startLat, startLon, searchQuery, profile, force))
+			} catch (e: RemoteException) {
+				e.printStackTrace()
+			}
+
+		}
+		return false
+	}
+
 	fun setNavDrawerItems(appPackage: String, names: List<String>, uris: List<String>, iconNames: List<String>, flags: List<Int>): Boolean {
 		if (mIOsmAndAidlInterface != null) {
 			try {
