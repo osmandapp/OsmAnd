@@ -1,17 +1,23 @@
 package net.osmand.plus.helpers;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.ParcelFileDescriptor;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 
 import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
+import net.osmand.aidl.OsmandAidlApi;
+import net.osmand.aidl.search.SearchParams;
+import net.osmand.aidl.search.SearchResult;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -23,6 +29,7 @@ import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
@@ -31,14 +38,30 @@ import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
 import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.search.listitems.QuickSearchListItem;
 import net.osmand.router.TurnType;
+import net.osmand.search.SearchUICore;
+import net.osmand.search.core.ObjectType;
+import net.osmand.search.core.SearchSettings;
 import net.osmand.util.Algorithms;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileDescriptor;
 import java.io.FileInputStream;
+import java.lang.ref.WeakReference;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+
+import static net.osmand.search.core.ObjectType.CITY;
+import static net.osmand.search.core.ObjectType.HOUSE;
+import static net.osmand.search.core.ObjectType.POI;
+import static net.osmand.search.core.ObjectType.POSTCODE;
+import static net.osmand.search.core.ObjectType.STREET;
+import static net.osmand.search.core.ObjectType.STREET_INTERSECTION;
+import static net.osmand.search.core.ObjectType.VILLAGE;
+import static net.osmand.search.core.SearchCoreFactory.MAX_DEFAULT_SEARCH_RADIUS;
 
 public class ExternalApiHelper {
 	private static final org.apache.commons.logging.Log LOG = PlatformUtil.getLog(ExternalApiHelper.class);
@@ -47,6 +70,8 @@ public class ExternalApiHelper {
 	public static final String API_CMD_NAVIGATE_GPX = "navigate_gpx";
 
 	public static final String API_CMD_NAVIGATE = "navigate";
+	public static final String API_CMD_NAVIGATE_SEARCH = "navigate_search";
+
 	public static final String API_CMD_PAUSE_NAVIGATION = "pause_navigation";
 	public static final String API_CMD_RESUME_NAVIGATION = "resume_navigation";
 	public static final String API_CMD_STOP_NAVIGATION = "stop_navigation";
@@ -124,6 +149,8 @@ public class ExternalApiHelper {
 	public static final int RESULT_CODE_ERROR_PLUGIN_INACTIVE = 1003;
 	public static final int RESULT_CODE_ERROR_GPX_NOT_FOUND = 1004;
 	public static final int RESULT_CODE_ERROR_INVALID_PROFILE = 1005;
+	public static final int RESULT_CODE_ERROR_EMPTY_SEARCH_QUERY = 1006;
+	public static final int RESULT_CODE_ERROR_START_LOCATION_UNDEFINED = 1007;
 
 	private MapActivity mapActivity;
 	private int resultCode;
@@ -199,12 +226,12 @@ public class ExternalApiHelper {
 								@Override
 								public void onDismiss(DialogInterface dialog) {
 									if (!routingHelper.isFollowingMode()) {
-										startNavigation(gpxFile, null, null, null, null, null);
+										startNavigation(mapActivity, gpxFile);
 									}
 								}
 							});
 						} else {
-							startNavigation(gpx, null, null, null, null, null);
+							startNavigation(mapActivity, gpx);
 						}
 					} else {
 						app.getSelectedGpxHelper().setGpxFileToDisplay(gpx);
@@ -237,7 +264,6 @@ public class ExternalApiHelper {
 						destName = "";
 					}
 
-
 					final LatLon start;
 					final PointDescription startDesc;
 					String startLatStr = uri.getQueryParameter(PARAM_START_LAT);
@@ -252,7 +278,6 @@ public class ExternalApiHelper {
 						startDesc = null;
 					}
 
-					String destSearchQuery = uri.getQueryParameter(PARAM_DEST_SEARCH_QUERY);
 					String destLatStr = uri.getQueryParameter(PARAM_DEST_LAT);
 					String destLonStr = uri.getQueryParameter(PARAM_DEST_LON);
 					final LatLon dest;
@@ -262,9 +287,6 @@ public class ExternalApiHelper {
 						dest = new LatLon(destLat, destLon);
 					} else {
 						dest = null;
-					}
-					if (!Algorithms.isEmpty(destSearchQuery)) {
-						
 					}
 					final PointDescription destDesc = new PointDescription(PointDescription.POINT_TYPE_LOCATION, destName);
 
@@ -278,12 +300,76 @@ public class ExternalApiHelper {
 							@Override
 							public void onDismiss(DialogInterface dialog) {
 								if (!routingHelper.isFollowingMode()) {
-									startNavigation(null, start, startDesc, dest, destDesc, profile);
+									startNavigation(mapActivity, start, startDesc, dest, destDesc, profile);
 								}
 							}
 						});
 					} else {
-						startNavigation(null, start, startDesc, dest, destDesc, profile);
+						startNavigation(mapActivity, start, startDesc, dest, destDesc, profile);
+					}
+				}
+
+			} else if (API_CMD_NAVIGATE_SEARCH.equals(cmd)) {
+				String profileStr = uri.getQueryParameter(PARAM_PROFILE);
+				final ApplicationMode profile = ApplicationMode.valueOfStringKey(profileStr, DEFAULT_PROFILE);
+				boolean validProfile = false;
+				for (ApplicationMode mode : VALID_PROFILES) {
+					if (mode == profile) {
+						validProfile = true;
+						break;
+					}
+				}
+				final String searchQuery = uri.getQueryParameter(PARAM_DEST_SEARCH_QUERY);
+				if (Algorithms.isEmpty(searchQuery)) {
+					resultCode = RESULT_CODE_ERROR_EMPTY_SEARCH_QUERY;
+				} else if (!validProfile) {
+					resultCode = RESULT_CODE_ERROR_INVALID_PROFILE;
+				} else {
+					String startName = uri.getQueryParameter(PARAM_START_NAME);
+					if (Algorithms.isEmpty(startName)) {
+						startName = "";
+					}
+					final LatLon start;
+					final PointDescription startDesc;
+					String startLatStr = uri.getQueryParameter(PARAM_START_LAT);
+					String startLonStr = uri.getQueryParameter(PARAM_START_LON);
+					if (!Algorithms.isEmpty(startLatStr) && !Algorithms.isEmpty(startLonStr)) {
+						double lat = Double.parseDouble(uri.getQueryParameter(PARAM_START_LAT));
+						double lon = Double.parseDouble(uri.getQueryParameter(PARAM_START_LON));
+						start = new LatLon(lat, lon);
+						startDesc = new PointDescription(PointDescription.POINT_TYPE_LOCATION, startName);
+					} else {
+						Location location = app.getLocationProvider().getLastKnownLocation();
+						if (location != null) {
+							start = new LatLon(location.getLatitude(), location.getLongitude());
+							startDesc = new PointDescription(PointDescription.POINT_TYPE_MY_LOCATION, mapActivity.getString(R.string.shared_string_my_location));
+						} else {
+							start = null;
+							startDesc = null;
+						}
+					}
+
+					if (start == null) {
+						resultCode = RESULT_CODE_ERROR_START_LOCATION_UNDEFINED;
+					} else {
+						boolean force = uri.getBooleanQueryParameter(PARAM_FORCE, false);
+
+						final RoutingHelper routingHelper = app.getRoutingHelper();
+						if (routingHelper.isFollowingMode() && !force) {
+							AlertDialog dlg = mapActivity.getMapActions().stopNavigationActionConfirm();
+							dlg.setOnDismissListener(new DialogInterface.OnDismissListener() {
+
+								@Override
+								public void onDismiss(DialogInterface dialog) {
+									if (!routingHelper.isFollowingMode()) {
+										searchAndNavigate(mapActivity, start, startDesc, profile, searchQuery);
+									}
+								}
+							});
+						} else {
+							searchAndNavigate(mapActivity, start, startDesc, profile, searchQuery);
+						}
+						resultCode = Activity.RESULT_OK;
 					}
 				}
 
@@ -498,10 +584,23 @@ public class ExternalApiHelper {
 		mapContextMenu.show(new LatLon(lat, lon), pointDescription, object);
 	}
 
-	private void startNavigation(GPXFile gpx,
-								 LatLon from, PointDescription fromDesc,
-								 LatLon to, PointDescription toDesc,
-								 ApplicationMode mode) {
+	static public void startNavigation(MapActivity mapActivity,
+									   @NonNull GPXFile gpx) {
+		startNavigation(mapActivity, gpx, null, null, null, null, null);
+	}
+
+	static public void startNavigation(MapActivity mapActivity,
+									   @Nullable LatLon from, @Nullable PointDescription fromDesc,
+									   @Nullable LatLon to, @Nullable PointDescription toDesc,
+									   @NonNull ApplicationMode mode) {
+		startNavigation(mapActivity, null, from, fromDesc, to, toDesc, mode);
+	}
+
+	static private void startNavigation(MapActivity mapActivity,
+									   GPXFile gpx,
+									   LatLon from, PointDescription fromDesc,
+									   LatLon to, PointDescription toDesc,
+									   ApplicationMode mode) {
 		OsmandApplication app = mapActivity.getMyApplication();
 		RoutingHelper routingHelper = app.getRoutingHelper();
 		if (gpx == null) {
@@ -525,6 +624,104 @@ public class ExternalApiHelper {
 			app.getRoutingHelper().notifyIfRouteIsCalculated();
 			routingHelper.setCurrentLocation(app.getLocationProvider().getLastKnownLocation(), false);
 		}
+	}
+
+	static public void searchAndNavigate(@NonNull MapActivity mapActivity,
+										 @NonNull final LatLon from, @Nullable final PointDescription fromDesc,
+										 @NonNull final ApplicationMode mode, @NonNull final String searchQuery) {
+
+		final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
+		OsmandApplication app = mapActivity.getMyApplication();
+		ProgressDialog dlg = new ProgressDialog(mapActivity);
+		dlg.setTitle("");
+		dlg.setMessage(mapActivity.getString(R.string.searching_address));
+		dlg.show();
+		final WeakReference<ProgressDialog> dlgRef = new WeakReference<>(dlg);
+		runSearch(app, searchQuery, SearchParams.SEARCH_TYPE_ALL,
+				from.getLatitude(), from.getLongitude(), 1, 1, new OsmandAidlApi.SearchCompleteCallback() {
+					@Override
+					public void onSearchComplete(final List<SearchResult> resultSet) {
+						final MapActivity mapActivity = mapActivityRef.get();
+						if (mapActivity != null) {
+							mapActivity.getMyApplication().runInUIThread(new Runnable() {
+								@Override
+								public void run() {
+									ProgressDialog dlg = dlgRef.get();
+									if (dlg != null) {
+										dlg.dismiss();
+									}
+									if (resultSet.size() > 0) {
+										final SearchResult res = resultSet.get(0);
+										LatLon to = new LatLon(res.getLatitude(), res.getLongitude());
+										PointDescription toDesc = new PointDescription(PointDescription.POINT_TYPE_TARGET, res.getLocalName() + ", " + res.getLocalTypeName());
+										startNavigation(mapActivity, from, fromDesc, to, toDesc, mode);
+									} else {
+										mapActivity.getMyApplication().showToastMessage(mapActivity.getString(R.string.search_nothing_found));
+									}
+								}
+							});
+						}
+					}
+				});
+	}
+
+	static public void runSearch(final OsmandApplication app, String searchQuery, int searchType,
+								 double latitude, double longitude, int radiusLevel,
+								 int totalLimit, final OsmandAidlApi.SearchCompleteCallback callback) {
+		if (radiusLevel < 1) {
+			radiusLevel = 1;
+		} else if (radiusLevel > MAX_DEFAULT_SEARCH_RADIUS) {
+			radiusLevel = MAX_DEFAULT_SEARCH_RADIUS;
+		}
+		if (totalLimit <= 0) {
+			totalLimit = -1;
+		}
+		final int limit = totalLimit;
+
+		final SearchUICore core = app.getSearchUICore().getCore();
+		core.setOnResultsComplete(new Runnable() {
+			@Override
+			public void run() {
+				List<SearchResult> resultSet = new ArrayList<>();
+				SearchUICore.SearchResultCollection resultCollection = core.getCurrentSearchResult();
+				int count = 0;
+				for (net.osmand.search.core.SearchResult r : resultCollection.getCurrentSearchResults()) {
+					String name = QuickSearchListItem.getName(app, r);
+					String typeName = QuickSearchListItem.getTypeName(app, r);
+					SearchResult result = new SearchResult(r.location.getLatitude(), r.location.getLongitude(),
+							name, typeName, r.alternateName, new ArrayList<>(r.otherNames));
+					resultSet.add(result);
+					count++;
+					if (limit != -1 && count >= limit) {
+						break;
+					}
+				}
+				callback.onSearchComplete(resultSet);
+			}
+		});
+
+		SearchSettings searchSettings = new SearchSettings(core.getSearchSettings())
+				.setRadiusLevel(radiusLevel)
+				.setEmptyQueryAllowed(false)
+				.setSortByName(false)
+				.setOriginalLocation(new LatLon(latitude, longitude))
+				.setTotalLimit(totalLimit);
+
+		List<ObjectType> searchTypes = new ArrayList<>();
+		if ((searchType & SearchParams.SEARCH_TYPE_POI) != 0) {
+			searchTypes.add(POI);
+		}
+		if ((searchType & SearchParams.SEARCH_TYPE_ADDRESS) != 0) {
+			searchTypes.add(CITY);
+			searchTypes.add(VILLAGE);
+			searchTypes.add(POSTCODE);
+			searchTypes.add(STREET);
+			searchTypes.add(HOUSE);
+			searchTypes.add(STREET_INTERSECTION);
+		}
+		searchSettings = searchSettings.setSearchTypes(searchTypes.toArray(new ObjectType[searchTypes.size()]));
+
+		core.search(searchQuery, false, null, searchSettings);
 	}
 
 	public void testApi(OsmandApplication app, String command) {

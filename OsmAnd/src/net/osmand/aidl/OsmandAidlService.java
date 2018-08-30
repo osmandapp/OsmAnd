@@ -8,6 +8,7 @@ import android.os.HandlerThread;
 import android.os.IBinder;
 import android.os.Looper;
 import android.os.Message;
+import android.os.Parcelable;
 import android.os.RemoteException;
 
 import net.osmand.PlatformUtil;
@@ -44,6 +45,7 @@ import net.osmand.aidl.navdrawer.SetNavDrawerItemsParams;
 import net.osmand.aidl.navigation.MuteNavigationParams;
 import net.osmand.aidl.navigation.NavigateGpxParams;
 import net.osmand.aidl.navigation.NavigateParams;
+import net.osmand.aidl.navigation.NavigateSearchParams;
 import net.osmand.aidl.navigation.PauseNavigationParams;
 import net.osmand.aidl.navigation.ResumeNavigationParams;
 import net.osmand.aidl.navigation.StopNavigationParams;
@@ -70,17 +72,15 @@ public class OsmandAidlService extends Service {
 	private static final Log LOG = PlatformUtil.getLog(OsmandAidlService.class);
 
 	private static final int MIN_UPDATE_TIME_MS = 1000;
-	
-	private static final int MSG_RUN_SEARCH = 53;
+
 	private static final String DATA_KEY_RESULT_SET = "resultSet";
 
-	private ArrayList<IOsmAndAidlCallback> mRemoteCallbacks;
 	private Map<Long, IOsmAndAidlCallback> callbacks;
 	private ServiceHandler mHandler = null;
 	HandlerThread mHandlerThread = new HandlerThread("OsmAndAidlServiceThread");
 
 	private long updateCallbackId = 0;
-
+	
 	OsmandApplication getApp() {
 		return (OsmandApplication) getApplication();
 	}
@@ -104,7 +104,6 @@ public class OsmandAidlService extends Service {
 	public void onCreate() {
 		super.onCreate();
 
-		mRemoteCallbacks = new ArrayList<>();
 		callbacks = new HashMap<>();
 	}
 
@@ -482,7 +481,10 @@ public class OsmandAidlService extends Service {
 		@Override
 		public boolean navigate(NavigateParams params) throws RemoteException {
 			try {
-				return params != null && getApi("navigate").navigate(params.getStartName(), params.getStartLat(), params.getStartLon(), params.getDestName(), params.getDestLat(), params.getDestLon(), params.getProfile(), params.isForce());
+				return params != null && getApi("navigate").navigate(
+						params.getStartName(), params.getStartLat(), params.getStartLon(),
+						params.getDestName(), params.getDestLat(), params.getDestLon(),
+						params.getProfile(), params.isForce());
 			} catch (Exception e) {
 				handleException(e);
 				return false;
@@ -563,14 +565,18 @@ public class OsmandAidlService extends Service {
 		public boolean search(SearchParams params, final IOsmAndAidlCallback callback) throws RemoteException {
 			try {
 				return params != null && getApi("search").search(params.getSearchQuery(), params.getSearchType(),
-						params.getLatutude(), params.getLongitude(), params.getRadiusLevel(), params.getTotalLimit(), new SearchCompleteCallback() {
+						params.getLatitude(), params.getLongitude(), params.getRadiusLevel(), params.getTotalLimit(), new SearchCompleteCallback() {
 					@Override
 					public void onSearchComplete(List<SearchResult> resultSet) {
 						Bundle data = new Bundle();
 						if (resultSet.size() > 0) {
 							data.putParcelableArrayList(DATA_KEY_RESULT_SET, new ArrayList<>(resultSet));
 						}
-						sendMsgToHandler(callback, MSG_RUN_SEARCH, data);
+						try {
+							callback.onSearchComplete(resultSet);
+						} catch (RemoteException e) {
+							handleException(e);
+						}
 					}
 				});
 			} catch (Exception e) {
@@ -617,56 +623,16 @@ public class OsmandAidlService extends Service {
 			}
 		}), updateTimeMS);
 	}
-	
-	/**
-	 * Create handler message to be sent
-	 */
-	void sendMsgToHandler(IOsmAndAidlCallback callback, int flag, Bundle data) {
-
-		mRemoteCallbacks.add(callback);
-
-		Message message = mHandler.obtainMessage();
-		message.arg1 = mRemoteCallbacks.size() - 1;
-		message.setData(data);
-
-		message.what = flag;
-		mHandler.sendMessage(message);
-	}
-
-	/**
-	 * Handler class sending result in callback to respective
-	 * application
-	 */
-	private class ServiceHandler extends Handler {
-		int callbackIndex = 0;
-
-		ServiceHandler(Looper looper) {
-			super(looper);
-		}
-
 		@Override
-		public void handleMessage(Message msg) {
-			callbackIndex = msg.arg1;
-
-			switch (msg.what) {
-
-				case MSG_RUN_SEARCH:
-
-					Bundle data = msg.getData();
-					List<SearchResult> resultSet;
-					if (data.containsKey(DATA_KEY_RESULT_SET)) {
-						resultSet = data.getParcelableArrayList(DATA_KEY_RESULT_SET);
-					} else {
-						resultSet = Collections.emptyList();
-					}
-
-					try {
-						mRemoteCallbacks.get(callbackIndex).onSearchComplete(resultSet);
-					} catch (RemoteException e) {
-						LOG.error("AIDL e.getMessage()", e);
-					}
-					break;
+		public boolean navigateSearch(NavigateSearchParams params) throws RemoteException {
+			try {
+				return params != null && getApi("navigateSearch").navigateSearch(
+						params.getStartName(), params.getStartLat(), params.getStartLon(),
+						params.getSearchQuery(), params.getProfile(), params.isForce());
+			} catch (Exception e) {
+				handleException(e);
+				return false;
 			}
 		}
-	}
+	};
 }
