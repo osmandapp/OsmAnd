@@ -594,8 +594,7 @@ public class OsmandAidlService extends Service {
 		@Override
 		public boolean unregisterFromUpdates(IOsmAndAidlCallback callback) throws RemoteException {
 			if (callback != null) {
-				long id = callback.getId();
-				callbacks.remove(id);
+				callbacks.remove(callback.getId());
 			}
 			return false;
 		}
