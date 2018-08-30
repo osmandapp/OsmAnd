@@ -178,16 +178,13 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 			})
 		}
 
-		stopSharingSwitcher = mainView.findViewById<Switch>(R.id.stop_all_sharing_switcher).apply {
-			isChecked = sharingMode
-			setOnCheckedChangeListener { _, isChecked ->
-				if (!isChecked) {
-					sharingMode = isChecked
-					activity.stopSharingLocation()
-					updateContent()
-				}
+		mainView.findViewById<View>(R.id.stop_all_sharing_row).setOnClickListener {
+			fragmentManager?.also { fm ->
+				DisableSharingBottomSheet.showInstance(fm, this, adapter.chats.size)
 			}
 		}
+
+		stopSharingSwitcher = mainView.findViewById(R.id.stop_all_sharing_switcher)
 
 		startSharingBtn = mainView.findViewById<View>(R.id.start_sharing_btn).apply {
 			visibility = if (sharingMode) View.VISIBLE else View.GONE
@@ -221,10 +218,17 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 
 	override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
 		super.onActivityResult(requestCode, resultCode, data)
-		if (requestCode == SetTimeDialogFragment.LOCATION_SHARED_REQUEST_CODE) {
-			sharingMode = settings.hasAnyChatToShareLocation()
-			clearSelection()
-			updateContent()
+		when (requestCode) {
+			SetTimeDialogFragment.LOCATION_SHARED_REQUEST_CODE -> {
+				sharingMode = settings.hasAnyChatToShareLocation()
+				clearSelection()
+				updateContent()
+			}
+			DisableSharingBottomSheet.SHARING_DISABLED_REQUEST_CODE -> {
+				sharingMode = false
+				(activity as MainActivity).stopSharingLocation()
+				updateContent()
+			}
 		}
 	}
 
