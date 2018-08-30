@@ -148,7 +148,7 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 
 	fun startShowingLocation() {
 		if (!showingLocation) {
-			showingLocation = if (isOsmandUseCallback()) {
+			showingLocation = if (isUseOsmandCallback()) {
 				osmandAidlHelper.registerForUpdates()
 			} else {
 				app.startUserLocationService()
@@ -160,7 +160,7 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 	fun stopShowingLocation() {
 		if (showingLocation) {
 			showingLocation = false
-			if (isOsmandUseCallback()) {
+			if (isUseOsmandCallback()) {
 				osmandAidlHelper.unregisterFromUpdates()
 			} else {
 				app.stopUserLocationService()
@@ -168,7 +168,7 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 		}
 	}
 
-	fun isOsmandUseCallback(): Boolean {
+	fun isUseOsmandCallback(): Boolean {
 		val packageOsmAndInfo = app.packageManager.getPackageInfo(app.settings.appToConnectPackage, 0)
 		return packageOsmAndInfo.versionCode >= MIN_OSMAND_CALLBACK_VERSION_CODE
 	}

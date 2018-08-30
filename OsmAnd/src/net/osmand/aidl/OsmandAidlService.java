@@ -82,7 +82,6 @@ public class OsmandAidlService extends Service {
 	HandlerThread mHandlerThread = new HandlerThread("OsmAndAidlServiceThread");
 
 	private boolean updatesStarted = false;
-	private boolean shouldStopUpdates = false;
 
 	OsmandApplication getApp() {
 		return (OsmandApplication) getApplication();
@@ -589,7 +588,6 @@ public class OsmandAidlService extends Service {
 				if (!updatesStarted) {
 					startRemoteUpdates();
 					updatesStarted = true;
-					shouldStopUpdates = false;
 				}
 				return true;
 			}
@@ -606,7 +604,6 @@ public class OsmandAidlService extends Service {
 						i.remove();
 					}
 				}
-				shouldStopUpdates = callbacks.isEmpty();
 				return true;
 			}
 			return false;
@@ -624,7 +621,7 @@ public class OsmandAidlService extends Service {
 						e.printStackTrace();
 					}
 				}
-				if (shouldStopUpdates) {
+				if (callbacks.isEmpty()) {
 					updatesStarted = false;
 				} else {
 					startRemoteUpdates();
