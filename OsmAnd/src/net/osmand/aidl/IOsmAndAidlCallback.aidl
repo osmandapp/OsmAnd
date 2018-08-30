@@ -7,5 +7,7 @@ interface IOsmAndAidlCallback {
     
     void onUpdate();
     
-    int getId();
+    long getId();
+    
+    void setId(long id);
 }

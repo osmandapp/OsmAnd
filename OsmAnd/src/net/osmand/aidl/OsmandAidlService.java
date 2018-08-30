@@ -8,7 +8,6 @@ import android.os.HandlerThread;
 import android.os.IBinder;
 import android.os.Looper;
 import android.os.Message;
-import android.os.Parcelable;
 import android.os.RemoteException;
 
 import net.osmand.PlatformUtil;
@@ -62,26 +61,26 @@ import org.apache.commons.logging.Log;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
-import java.util.Iterator;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
+import java.util.Map;
 
 public class OsmandAidlService extends Service {
 	
 	private static final Log LOG = PlatformUtil.getLog(OsmandAidlService.class);
 
-	private static final int UPDATE_TIME_MIL = 5000;
+	private static final int UPDATE_TIME_MS = 5000;
 	
 	private static final int MSG_RUN_SEARCH = 53;
 	private static final String DATA_KEY_RESULT_SET = "resultSet";
 
 	private ArrayList<IOsmAndAidlCallback> mRemoteCallbacks;
-	private Set<IOsmAndAidlCallback> callbacks;
+	private Map<Long, IOsmAndAidlCallback> callbacks;
 	private ServiceHandler mHandler = null;
 	HandlerThread mHandlerThread = new HandlerThread("OsmAndAidlServiceThread");
 
 	private boolean updatesStarted = false;
+	private long callbackId = 0;
 
 	OsmandApplication getApp() {
 		return (OsmandApplication) getApplication();
@@ -107,7 +106,7 @@ public class OsmandAidlService extends Service {
 		super.onCreate();
 
 		mRemoteCallbacks = new ArrayList<>();
-		callbacks = new HashSet<>();
+		callbacks = new HashMap<>();
 	}
 
 	private final IOsmAndAidlInterface.Stub mBinder = new IOsmAndAidlInterface.Stub() {
@@ -584,7 +583,9 @@ public class OsmandAidlService extends Service {
 		@Override
 		public boolean registerForUpdates(IOsmAndAidlCallback callback) throws RemoteException {
 			if (callback != null) {
-				callbacks.add(callback);
+				callback.setId(callbackId);
+				callbacks.put(callbackId, callback);
+				callbackId++;
 				if (!updatesStarted) {
 					startRemoteUpdates();
 					updatesStarted = true;
@@ -597,14 +598,7 @@ public class OsmandAidlService extends Service {
 		@Override
 		public boolean unregisterFromUpdates(IOsmAndAidlCallback callback) throws RemoteException {
 			if (callback != null) {
-				Iterator<IOsmAndAidlCallback> i = callbacks.iterator();
-				while (i.hasNext()) {
-					IOsmAndAidlCallback aidlCallback = i.next();
-					if (aidlCallback.getId() == callback.getId()) {
-						i.remove();
-					}
-				}
-				return true;
+				callbacks.remove(callback.getId());
 			}
 			return false;
 		}
@@ -614,12 +608,13 @@ public class OsmandAidlService extends Service {
 		mHandler.postDelayed((new Runnable() {
 			@Override
 			public void run() {
-				for (IOsmAndAidlCallback callback : callbacks) {
-					try {
+				try {
+					for (Map.Entry entry : callbacks.entrySet()) {
+						IOsmAndAidlCallback callback = (IOsmAndAidlCallback) entry.getValue();
 						callback.onUpdate();
-					} catch (RemoteException e) {
-						e.printStackTrace();
 					}
+				} catch (RemoteException e) {
+					e.printStackTrace();
 				}
 				if (callbacks.isEmpty()) {
 					updatesStarted = false;
@@ -627,7 +622,7 @@ public class OsmandAidlService extends Service {
 					startRemoteUpdates();
 				}
 			}
-		}), UPDATE_TIME_MIL);
+		}), UPDATE_TIME_MS);
 	}
 	
 	/**

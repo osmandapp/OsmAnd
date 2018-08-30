@@ -51,14 +51,14 @@ class OsmandAidlHelper(private val app: TelegramApplication) {
 	companion object {
 		const val OSMAND_FREE_PACKAGE_NAME = "net.osmand"
 		const val OSMAND_PLUS_PACKAGE_NAME = "net.osmand.plus"
-		
-		const val OSMAND_CALLBACK_ID = 17
 	}
 
 	private var mIOsmAndAidlInterface: IOsmAndAidlInterface? = null
 
 	private var initialized: Boolean = false
 	private var bound: Boolean = false
+
+	private var osmandCallbackId: Long = 0
 
 	var listener: OsmandHelperListener? = null
 
@@ -88,7 +88,12 @@ class OsmandAidlHelper(private val app: TelegramApplication) {
 			}
 		}
 
-		override fun getId(): Int = OSMAND_CALLBACK_ID
+		override fun getId() = osmandCallbackId
+
+
+		override fun setId(id: Long) {
+			osmandCallbackId = id
+		}
 	}
 
 	fun setSearchCompleteListener(mSearchCompleteListener: SearchCompleteListener) {
