@@ -148,22 +148,29 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 
 	fun startShowingLocation() {
 		if (!showingLocation) {
-			val packageOsmAndInfo = app.packageManager.getPackageInfo(app.settings.appToConnectPackage, 0)
-			showingLocation =
-					if (packageOsmAndInfo.versionCode >= MIN_OSMAND_CALLBACK_VERSION_CODE) {
-						osmandAidlHelper.registerCallback()
-					} else {
-						app.startUserLocationService()
-						true
-					}
+			showingLocation = if (isOsmandUseCallback()) {
+				osmandAidlHelper.registerCallback()
+			} else {
+				app.startUserLocationService()
+				true
+			}
 		}
 	}
 
 	fun stopShowingLocation() {
 		if (showingLocation) {
 			showingLocation = false
-			app.stopUserLocationService()
+			if (isOsmandUseCallback()) {
+				osmandAidlHelper.unRegisterCallback()
+			} else {
+				app.stopUserLocationService()
+			}
 		}
+	}
+
+	fun isOsmandUseCallback(): Boolean {
+		val packageOsmAndInfo = app.packageManager.getPackageInfo(app.settings.appToConnectPackage, 0)
+		return packageOsmAndInfo.versionCode >= MIN_OSMAND_CALLBACK_VERSION_CODE
 	}
 
 	fun startShowMessagesTask(chatId: Long, vararg messages: TdApi.Message) {

@@ -51,6 +51,8 @@ class OsmandAidlHelper(private val app: TelegramApplication) {
 	companion object {
 		const val OSMAND_FREE_PACKAGE_NAME = "net.osmand"
 		const val OSMAND_PLUS_PACKAGE_NAME = "net.osmand.plus"
+		
+		const val OSMAND_CALLBACK_ID = 17
 	}
 
 	private var mIOsmAndAidlInterface: IOsmAndAidlInterface? = null
@@ -73,6 +75,9 @@ class OsmandAidlHelper(private val app: TelegramApplication) {
 	}
 
 	private val mIOsmAndAidlCallback = object : IOsmAndAidlCallback.Stub() {
+		
+		override fun getId(): Int = OSMAND_CALLBACK_ID
+
 		@Throws(RemoteException::class)
 		override fun onSearchComplete(resultSet: List<SearchResult>) {
 			if (mSearchCompleteListener != null) {
@@ -139,6 +144,8 @@ class OsmandAidlHelper(private val app: TelegramApplication) {
 	fun isOsmandConnected(): Boolean {
 		return mIOsmAndAidlInterface != null
 	}
+	
+	fun getOsmandBoundPackage(): String = boundPackage
 
 	/**
 	 * Get list of active GPX files.
@@ -196,6 +203,7 @@ class OsmandAidlHelper(private val app: TelegramApplication) {
 	fun cleanupResources() {
 		try {
 			if (mIOsmAndAidlInterface != null) {
+				unRegisterCallback()
 				mIOsmAndAidlInterface = null
 				app.unbindService(mConnection)
 			}
@@ -1028,6 +1036,17 @@ class OsmandAidlHelper(private val app: TelegramApplication) {
 		if (mIOsmAndAidlInterface != null) {
 			try {
 				return mIOsmAndAidlInterface!!.registerCallback(mIOsmAndAidlCallback)
+			} catch (e: RemoteException) {
+				e.printStackTrace()
+			}
+		}
+		return false
+	}
+	
+	fun unRegisterCallback(): Boolean {
+		if (mIOsmAndAidlInterface != null) {
+			try {
+				return mIOsmAndAidlInterface!!.unRegisterCallback(mIOsmAndAidlCallback)
 			} catch (e: RemoteException) {
 				e.printStackTrace()
 			}

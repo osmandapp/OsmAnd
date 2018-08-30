@@ -130,4 +130,5 @@ interface IOsmAndAidlInterface {
     boolean search(in SearchParams params, IOsmAndAidlCallback callback);
 
     boolean registerCallback(in IOsmAndAidlCallback callback);
+    boolean unRegisterCallback(in IOsmAndAidlCallback callback);
 }

@@ -70,7 +70,11 @@ class SettingsDialogFragment : BaseDialogFragment() {
 						isChecked = pack == settings.appToConnectPackage
 					}
 					setOnClickListener {
-						settings.appToConnectPackage = appConn.appPackage
+						val newAppPackage = appConn.appPackage
+						if (app.osmandAidlHelper.getOsmandBoundPackage() != newAppPackage) {
+							app.showLocationHelper.stopShowingLocation()
+						}
+						settings.appToConnectPackage = newAppPackage
 						app.osmandAidlHelper.reconnectOsmand()
 						updateSelectedAppConn()
 					}

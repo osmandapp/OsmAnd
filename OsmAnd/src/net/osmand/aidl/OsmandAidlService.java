@@ -63,6 +63,7 @@ import org.apache.commons.logging.Log;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -587,6 +588,21 @@ public class OsmandAidlService extends Service {
 				if (!updatesStarted) {
 					startRemoteUpdates();
 					updatesStarted = true;
+				}
+				return true;
+			}
+			return false;
+		}
+
+		@Override
+		public boolean unRegisterCallback(IOsmAndAidlCallback callback) throws RemoteException {
+			if (callback != null) {
+				Iterator<IOsmAndAidlCallback> i = callbacks.iterator();
+				while (i.hasNext()) {
+					IOsmAndAidlCallback aidlCallback = i.next();
+					if (aidlCallback.getId() == callback.getId()) {
+						i.remove();
+					}
 				}
 				return true;
 			}
