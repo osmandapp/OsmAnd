@@ -1005,7 +1005,7 @@ public class RouteProvider {
 		return directions;
 	}
 
-	public GPXFile createOsmandRouterGPX(RouteCalculationResult srcRoute, OsmandApplication ctx) {	
+	public GPXFile createOsmandRouterGPX(RouteCalculationResult srcRoute, OsmandApplication ctx, String name) {
 		TargetPointsHelper helper = ctx.getTargetPointsHelper();
 		int currentRoute = srcRoute.currentRoute;
 		List<Location> routeNodes = srcRoute.getImmutableAllLocations();
@@ -1015,6 +1015,7 @@ public class RouteProvider {
 		GPXFile gpx = new GPXFile();
 		gpx.author = OSMAND_ROUTER;
 		Track track = new Track();
+		track.name = name;
 		gpx.tracks.add(track);
 		TrkSegment trkSegment = new TrkSegment();
 		track.segments.add(trkSegment);
@@ -1055,6 +1056,7 @@ public class RouteProvider {
 		}
 
 		Route route = new Route();
+		route.name = name;
 		gpx.routes.add(route);
 		for (int i = cDirInfo; i < directionInfo.size(); i++) {
 			RouteDirectionInfo dirInfo = directionInfo.get(i);

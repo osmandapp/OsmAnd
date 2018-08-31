@@ -1080,8 +1080,8 @@ public class RoutingHelper {
 		return route;
 	}
 
-	public GPXFile generateGPXFileWithRoute(){
-		return provider.createOsmandRouterGPX(route, app);
+	public GPXFile generateGPXFileWithRoute(String name){
+		return provider.createOsmandRouterGPX(route, app, name);
 	}
 
 

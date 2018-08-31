@@ -74,6 +74,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import static net.osmand.plus.helpers.ImportHelper.GPX_SUFFIX;
+
 public class MapActivityActions implements DialogProvider {
 	private static final Log LOG = PlatformUtil.getLog(MapActivityActions.class);
 	public static final String KEY_LONGITUDE = "longitude";
@@ -226,8 +228,8 @@ public class MapActivityActions implements DialogProvider {
 				fileDir.mkdirs();
 				File toSave = fileDir;
 				if (name.length() > 0) {
-					if (!name.endsWith(".gpx")) {
-						name += ".gpx";
+					if (!name.endsWith(GPX_SUFFIX)) {
+						name += GPX_SUFFIX;
 					}
 					toSave = new File(fileDir, name);
 				}
@@ -263,7 +265,8 @@ public class MapActivityActions implements DialogProvider {
 		protected String doInBackground(File... params) {
 			if (params.length > 0) {
 				File file = params[0];
-				GPXFile gpx = app.getRoutingHelper().generateGPXFileWithRoute();
+				String fileName = file.getName();
+				GPXFile gpx = app.getRoutingHelper().generateGPXFileWithRoute(fileName.substring(0,fileName.length()-GPX_SUFFIX.length()));
 				GPXUtilities.writeGpxFile(file, gpx, app);
 				return app.getString(R.string.route_successfully_saved_at, file.getName());
 			}
