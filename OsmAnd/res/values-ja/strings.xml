@@ -1014,8 +1014,8 @@ POIの更新は利用できません</string>
 	
 	<string name="accessibility_mode">アクセシビリティモード</string>
 	<string name="accessibility_mode_descr">アクセシビリティ(ユーザー補助)機能を設定します</string>
-	<string name="shared_string_on">オン</string>
-	<string name="shared_string_off">オフ</string>
+	<string name="shared_string_on">有効</string>
+	<string name="shared_string_off">無効</string>
 	<string name="accessibility_default">デバイス側のユーザー補助設定に従う</string>
 	<string name="backToMenu">メニューに戻る</string>
 	<string name="zoomOut">縮小</string>
@@ -2099,7 +2099,7 @@ POIの更新は利用できません</string>
     <string name="show_on_start_description">ONでOsmAnd起動時ダッシュボードを自動的に表示します</string>
     <string name="copied_to_clipboard">クリップボードにコピーしました</string>
     
-    <string name="osm_save_offline">ｵﾌﾗｲﾝで保存</string>
+    <string name="osm_save_offline">オフラインで保存</string>
     <string name="osm_edit_modified_poi">OSMのPOIが変更されました</string>
     <string name="osm_edit_deleted_poi">OSMのPOIが削除されました</string>
     <string name="context_menu_item_open_note">OSMでの注釈を開く</string>
@@ -2284,7 +2284,7 @@ POIの更新は利用できません</string>
     <string name="begin_with_osmand_menu_group">OsmAndを初めて使う方へ</string>
     <string name="first_usage_item">使用方法の簡易説明</string>
     <string name="update">更新</string>
-    <string name="only_download_over_wifi">Wi-Fi経由でのみダウンロード</string>
+    <string name="only_download_over_wifi">Wi-Fi接続時のみダウンロード</string>
     <string name="live_update">ライブ更新</string>
     <string name="update_now">今すぐ更新</string>
     <string name="missing_write_external_storage_permission">SDカードにアクセスする権限がありません</string>
@@ -2831,7 +2831,7 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
 \n
 \nその為にはGoogle PlayからMapillaryというアプリのインストールが必要になります。</string>
     <string name="open_mapillary">Mapillaryを開く</string>
-    <string name="mapillary">Mapillary</string>
+    <string name="mapillary">Mapillary(ストリート写真)</string>
     <string name="mapillary_widget">Mapillaryウィジェット</string>
     <string name="mapillary_image">Mapillary画像</string>
     <string name="mapillary_action_descr">Mapillaryにて、この場所の路上表示に貢献します</string>
@@ -3055,4 +3055,38 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="empty_state_my_tracks_desc">GPXファイルまたは記録した経路からインポートします。</string>
     <string name="import_track">GPXファイルからインポート</string>
     <string name="access_intermediate_arrival_time">中間経由地点への到着時間</string>
+    <string name="send_search_query">検索クエリを送信しますか？</string>
+    <string name="read_wikipedia_offline_description">OsmAnd Liveサブスクリプションに登録すると、WikipediaとWikivoyageの旅行に関した各記事をオフラインで読むことができます。</string>
+    <string name="read_wikipedia_offline">オフラインでWikipedia記事を読む</string>
+    <string name="maps_you_need_descr">ブックマークした記事より、次のマップをダウンロードすることをお勧めします:</string>
+    <string name="popular_destinations">人気の目的地</string>
+    <string name="travel_card_download_descr">Wikivoyageの旅行ガイドを事前にダウンロードすれば、インターネット接続なしで世界各地の観光場所を知ることができます。</string>
+	<string name="start_editing_card_image_text">誰でも自由に編集できる世界規模の旅行ガイドです。</string>
+    <string name="welcome_to_open_beta_description">『旅行ガイド』はWikivoyageをベースとした機能です。オープンβ時に限り無料で全ての機能を利用できます。旅行ガイドは将来的にOsmAndのサブスクライブ登録者や、OsmAnd+の利用者に提供される予定です。</string>
+    <string name="start_editing_card_description">あなたもWikivoyageの記事を編集できます。場所に関する知識、旅先での経験、魅力あるスポットはもちろん注意事項なども共有できます</string>
+    <string name="start_editing">編集を開始</string>
+    <string name="get_unlimited_access">制限のないアクセス権の取得</string>
+    <string name="wikivoyage_travel_guide">旅行ガイド</string>
+    <string name="monthly_map_updates">マップ更新: <b>毎月</b></string>
+    <string name="daily_map_updates">マップ更新: <b>毎時</b></string>
+    <string name="unlimited_downloads">無制限ダウンロード</string>
+    <string name="wikipedia_offline">オフライン版Wikipedia</string>
+    <string name="purchase_dialog_travel_description">オフラインでの旅行ガイド機能を有効にするには、次のいずれかを購入してください:</string>
+    <string name="shared_string_dont">利用しない</string>
+    <string name="shared_string_only_with_wifi">Wi-Fi接続時のみ有効</string>
+    <string name="wikivoyage_download_pics">画像のダウンロード</string>
+    <string name="wikivoyage_download_pics_descr">各記事の画像をオフラインでも閲覧できるようダウンロードできます。
+\n『探索』→ 『オプション』からいつでも変更可能です。</string>
+    <string name="shared_string_wifi_only">Wi-Fi接続時のみ有効</string>
+    <string name="images_cache">画像のキャッシュ</string>
+    <string name="delete_search_history">検索履歴の削除</string>
+    <string name="download_images">画像のダウンロード</string>
+    <string name="download_maps_travel">旅行ガイド</string>
+    <string name="wikivoyage_search_hint">検索:国、都市、州 (ローマ字表記)</string>
+    <string name="saved_articles">ブックマークした記事</string>
+    <string name="shared_string_explore">探索</string>
+    <string name="shared_string_travel_guides">旅行ガイド</string>
+    <string name="index_item_world_wikivoyage">Wikivoyageの全世界記事</string>
+    <string name="mappilary_no_internet_desc">Mapillaryに登録されているストリート写真を見るためにはインターネットに接続する必要があります。</string>
+    <string name="download_wikipedia_description">%1$sに関するWikipediaの記事をダウンロードしてオフラインで読むことができます。</string>
     </resources>
