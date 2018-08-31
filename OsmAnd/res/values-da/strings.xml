@@ -1850,7 +1850,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="routing_attr_avoid_borders_description">Undgå at krydse landegrænser</string>
     <string name="routing_attr_height_name">Højdegrænse</string>
     
-    <string name="routing_attr_height_description">Køretøjets højde der tillades på ruter.</string>
+    <string name="routing_attr_height_description">Angiv køretøjets højde der tillades på ruter.</string>
     <string name="use_fast_recalculation">Smart rutegenberegning</string>
     <string name="use_fast_recalculation_desc">For lange ture, genberegn kun den indledende del af ruten.</string>
     
