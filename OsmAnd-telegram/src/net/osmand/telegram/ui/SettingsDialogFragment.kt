@@ -1,8 +1,6 @@
 package net.osmand.telegram.ui
 
 import android.os.Bundle
-import android.support.annotation.DrawableRes
-import android.support.annotation.StringRes
 import android.support.v4.app.FragmentManager
 import android.support.v7.widget.ListPopupWindow
 import android.support.v7.widget.Toolbar
@@ -14,17 +12,15 @@ import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.RadioButton
 import android.widget.TextView
-import net.osmand.telegram.*
-import net.osmand.telegram.helpers.OsmandAidlHelper
+import net.osmand.telegram.R
+import net.osmand.telegram.TelegramSettings
+import net.osmand.telegram.TelegramSettings.DurationPref
 import net.osmand.telegram.helpers.TelegramUiHelper
 import net.osmand.telegram.utils.AndroidUtils
-import net.osmand.telegram.utils.OsmandFormatter
 
 class SettingsDialogFragment : BaseDialogFragment() {
 
 	private val uiUtils get() = app.uiUtils
-
-	private val gpsAndLocPrefs = listOf(SendMyLocPref(), StaleLocPref(), LocHistoryPref())
 
 	override fun onCreateView(
 		inflater: LayoutInflater,
@@ -42,7 +38,7 @@ class SettingsDialogFragment : BaseDialogFragment() {
 		}
 
 		var container = mainView.findViewById<ViewGroup>(R.id.gps_and_loc_container)
-		for (pref in gpsAndLocPrefs) {
+		for (pref in settings.gpsAndLocPrefs) {
 			inflater.inflate(R.layout.item_with_desc_and_right_value, container, false).apply {
 				findViewById<ImageView>(R.id.icon).setImageDrawable(uiUtils.getThemedIcon(pref.iconId))
 				findViewById<TextView>(R.id.title).setText(pref.titleId)
@@ -57,7 +53,7 @@ class SettingsDialogFragment : BaseDialogFragment() {
 		}
 
 		container = mainView.findViewById(R.id.osmand_connect_container)
-		for (appConn in AppConnect.values()) {
+		for (appConn in TelegramSettings.AppConnect.values()) {
 			val pack = appConn.appPackage
 			val installed = AndroidUtils.isAppInstalled(context!!, pack)
 			inflater.inflate(R.layout.item_with_rb_and_btn, container, false).apply {
@@ -153,101 +149,6 @@ class SettingsDialogFragment : BaseDialogFragment() {
 	private fun logoutTelegram() {
 		val act = activity ?: return
 		(act as MainActivity).logoutTelegram()
-	}
-
-	private inner class SendMyLocPref : DurationPref(
-		R.drawable.ic_action_share_location,
-		R.string.send_my_location,
-		R.string.send_my_location_desc,
-		SEND_MY_LOC_VALUES_SEC
-	) {
-
-		override fun getCurrentValue() =
-			OsmandFormatter.getFormattedDuration(app, settings.sendMyLocInterval)
-
-		override fun setCurrentValue(index: Int) {
-			settings.sendMyLocInterval = values[index]
-			app.updateSendLocationInterval()
-		}
-	}
-
-	private inner class StaleLocPref : DurationPref(
-		R.drawable.ic_action_time_span,
-		R.string.stale_location,
-		R.string.stale_location_desc,
-		STALE_LOC_VALUES_SEC
-	) {
-
-		override fun getCurrentValue() =
-			OsmandFormatter.getFormattedDuration(app, settings.staleLocTime)
-
-		override fun setCurrentValue(index: Int) {
-			settings.staleLocTime = values[index]
-		}
-	}
-
-	private inner class LocHistoryPref : DurationPref(
-		R.drawable.ic_action_location_history,
-		R.string.location_history,
-		R.string.location_history_desc,
-		LOC_HISTORY_VALUES_SEC
-	) {
-
-		override fun getCurrentValue() =
-			OsmandFormatter.getFormattedDuration(app, settings.locHistoryTime)
-
-		override fun setCurrentValue(index: Int) {
-			val value = values[index]
-			settings.locHistoryTime = value
-			telegramHelper.messageActiveTimeSec = value
-		}
-	}
-
-	private abstract inner class DurationPref(
-		@DrawableRes val iconId: Int,
-		@StringRes val titleId: Int,
-		@StringRes val descriptionId: Int,
-		val values: List<Long>
-	) {
-
-		abstract fun getCurrentValue(): String
-
-		abstract fun setCurrentValue(index: Int)
-
-		fun getMenuItems() = values.map { OsmandFormatter.getFormattedDuration(app, it) }
-	}
-
-	enum class AppConnect(
-		@DrawableRes val iconId: Int,
-		@DrawableRes val whiteIconId: Int,
-		val title: String,
-		val appPackage: String
-	) {
-		OSMAND_PLUS(
-			R.drawable.ic_logo_osmand_plus,
-			R.drawable.ic_action_osmand_plus,
-			"OsmAnd+",
-			OsmandAidlHelper.OSMAND_PLUS_PACKAGE_NAME
-		),
-		OSMAND_FREE(
-			R.drawable.ic_logo_osmand_free,
-			R.drawable.ic_action_osmand_free,
-			"OsmAnd",
-			OsmandAidlHelper.OSMAND_FREE_PACKAGE_NAME
-		);
-
-		companion object {
-
-			@DrawableRes
-			fun getWhiteIconId(appPackage: String): Int {
-				for (item in values()) {
-					if (item.appPackage == appPackage) {
-						return item.whiteIconId
-					}
-				}
-				return 0
-			}
-		}
 	}
 
 	companion object {

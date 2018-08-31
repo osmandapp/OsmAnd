@@ -1,16 +1,19 @@
 package net.osmand.telegram
 
 import android.content.Context
+import android.support.annotation.DrawableRes
+import android.support.annotation.StringRes
 import net.osmand.telegram.helpers.OsmandAidlHelper
 import net.osmand.telegram.helpers.TelegramHelper
+import net.osmand.telegram.utils.OsmandFormatter
 import net.osmand.telegram.utils.OsmandFormatter.MetricsConstants
 import net.osmand.telegram.utils.OsmandFormatter.SpeedConstants
 
-val SEND_MY_LOC_VALUES_SEC =
+private val SEND_MY_LOC_VALUES_SEC =
 	listOf(1L, 2L, 3L, 5L, 10L, 15L, 30L, 60L, 90L, 2 * 60L, 3 * 60L, 5 * 60L)
-val STALE_LOC_VALUES_SEC =
+private val STALE_LOC_VALUES_SEC =
 	listOf(1 * 60L, 2 * 60L, 5 * 60L, 10 * 60L, 15 * 60L, 30 * 60L, 60 * 60L)
-val LOC_HISTORY_VALUES_SEC = listOf(
+private val LOC_HISTORY_VALUES_SEC = listOf(
 	5 * 60L,
 	15 * 60L,
 	30 * 60L,
@@ -48,7 +51,7 @@ private const val TITLES_REPLACED_WITH_IDS = "changed_to_chat_id"
 class TelegramSettings(private val app: TelegramApplication) {
 
 	private var chatLivePeriods = mutableMapOf<Long, Long>()
-	var chatShareLocStartSec = mutableMapOf<Long, Long>()
+	private var chatShareLocStartSec = mutableMapOf<Long, Long>()
 
 	private var shareLocationChats: Set<Long> = emptySet()
 	private var showOnMapChats: Set<Long> = emptySet()
@@ -61,6 +64,8 @@ class TelegramSettings(private val app: TelegramApplication) {
 	var locHistoryTime = LOC_HISTORY_VALUES_SEC[LOC_HISTORY_DEFAULT_INDEX]
 
 	var appToConnectPackage = OsmandAidlHelper.OSMAND_PLUS_PACKAGE_NAME
+
+	val gpsAndLocPrefs = listOf(SendMyLocPref(), StaleLocPref(), LocHistoryPref())
 
 	init {
 		updatePrefs()
@@ -106,7 +111,7 @@ class TelegramSettings(private val app: TelegramApplication) {
 				else -> livePeriod
 			}
 			chatLivePeriods[chatId] = lp
-			chatShareLocStartSec[chatId] = (System.currentTimeMillis()/1000)
+			chatShareLocStartSec[chatId] = (System.currentTimeMillis() / 1000)
 			shareLocationChats.add(chatId)
 		} else {
 			shareLocationChats.remove(chatId)
@@ -135,11 +140,11 @@ class TelegramSettings(private val app: TelegramApplication) {
 			0
 		}
 	}
-	
+
 	fun updateChatShareLocStartSec(chatId: Long, startTime: Long) {
 		chatShareLocStartSec[chatId] = startTime
-	} 
-	
+	}
+
 	fun stopSharingLocationToChats() {
 		this.shareLocationChats = emptySet()
 		this.chatLivePeriods.clear()
@@ -170,7 +175,7 @@ class TelegramSettings(private val app: TelegramApplication) {
 		stopSharingLocationToChats()
 		app.getSharedPreferences(SETTINGS_NAME, Context.MODE_PRIVATE).edit().clear().apply()
 	}
-	
+
 	fun save() {
 		val prefs = app.getSharedPreferences(SETTINGS_NAME, Context.MODE_PRIVATE)
 		val edit = prefs.edit()
@@ -248,6 +253,101 @@ class TelegramSettings(private val app: TelegramApplication) {
 			edit.putBoolean(TITLES_REPLACED_WITH_IDS, true)
 
 			edit.apply()
+		}
+	}
+
+	inner class SendMyLocPref : DurationPref(
+		R.drawable.ic_action_share_location,
+		R.string.send_my_location,
+		R.string.send_my_location_desc,
+		SEND_MY_LOC_VALUES_SEC
+	) {
+
+		override fun getCurrentValue() =
+			OsmandFormatter.getFormattedDuration(app, sendMyLocInterval)
+
+		override fun setCurrentValue(index: Int) {
+			sendMyLocInterval = values[index]
+			app.updateSendLocationInterval()
+		}
+	}
+
+	inner class StaleLocPref : DurationPref(
+		R.drawable.ic_action_time_span,
+		R.string.stale_location,
+		R.string.stale_location_desc,
+		STALE_LOC_VALUES_SEC
+	) {
+
+		override fun getCurrentValue() =
+			OsmandFormatter.getFormattedDuration(app, staleLocTime)
+
+		override fun setCurrentValue(index: Int) {
+			staleLocTime = values[index]
+		}
+	}
+
+	inner class LocHistoryPref : DurationPref(
+		R.drawable.ic_action_location_history,
+		R.string.location_history,
+		R.string.location_history_desc,
+		LOC_HISTORY_VALUES_SEC
+	) {
+
+		override fun getCurrentValue() =
+			OsmandFormatter.getFormattedDuration(app, locHistoryTime)
+
+		override fun setCurrentValue(index: Int) {
+			val value = values[index]
+			locHistoryTime = value
+			app.telegramHelper.messageActiveTimeSec = value
+		}
+	}
+
+	abstract inner class DurationPref(
+		@DrawableRes val iconId: Int,
+		@StringRes val titleId: Int,
+		@StringRes val descriptionId: Int,
+		val values: List<Long>
+	) {
+
+		abstract fun getCurrentValue(): String
+
+		abstract fun setCurrentValue(index: Int)
+
+		fun getMenuItems() = values.map { OsmandFormatter.getFormattedDuration(app, it) }
+	}
+
+	enum class AppConnect(
+		@DrawableRes val iconId: Int,
+		@DrawableRes val whiteIconId: Int,
+		val title: String,
+		val appPackage: String
+	) {
+		OSMAND_PLUS(
+			R.drawable.ic_logo_osmand_plus,
+			R.drawable.ic_action_osmand_plus,
+			"OsmAnd+",
+			OsmandAidlHelper.OSMAND_PLUS_PACKAGE_NAME
+		),
+		OSMAND_FREE(
+			R.drawable.ic_logo_osmand_free,
+			R.drawable.ic_action_osmand_free,
+			"OsmAnd",
+			OsmandAidlHelper.OSMAND_FREE_PACKAGE_NAME
+		);
+
+		companion object {
+
+			@DrawableRes
+			fun getWhiteIconId(appPackage: String): Int {
+				for (item in values()) {
+					if (item.appPackage == appPackage) {
+						return item.whiteIconId
+					}
+				}
+				return 0
+			}
 		}
 	}
 }

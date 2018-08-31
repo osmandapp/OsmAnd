@@ -18,6 +18,7 @@ import net.osmand.telegram.R
 import net.osmand.telegram.TelegramApplication
 import net.osmand.telegram.TelegramLocationProvider.TelegramCompassListener
 import net.osmand.telegram.TelegramLocationProvider.TelegramLocationListener
+import net.osmand.telegram.TelegramSettings
 import net.osmand.telegram.helpers.TelegramHelper.*
 import net.osmand.telegram.helpers.TelegramUiHelper
 import net.osmand.telegram.helpers.TelegramUiHelper.ChatItem
@@ -195,7 +196,7 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 	}
 
 	private fun updateOpenOsmAndIcon() {
-		val ic = SettingsDialogFragment.AppConnect.getWhiteIconId(settings.appToConnectPackage)
+		val ic = TelegramSettings.AppConnect.getWhiteIconId(settings.appToConnectPackage)
 		openOsmAndBtn.setCompoundDrawablesWithIntrinsicBounds(ic, 0, 0, 0)
 	}
 
