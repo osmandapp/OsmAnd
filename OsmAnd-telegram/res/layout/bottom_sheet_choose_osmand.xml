@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:orientation="vertical"
+	tools:layout_gravity="bottom">
+
+	<android.support.design.widget.CoordinatorLayout
+		android:id="@+id/scroll_view_container"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content">
+
+		<android.support.v4.widget.NestedScrollView
+			android:id="@+id/scroll_view"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			app:behavior_hideable="true"
+			app:behavior_peekHeight="@dimen/bottom_sheet_peek_height"
+			app:layout_behavior="@string/bottom_sheet_behavior">
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:background="?attr/card_bg_color"
+				android:orientation="vertical">
+
+				<net.osmand.telegram.ui.views.TextViewEx
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:paddingLeft="@dimen/content_padding_standard"
+					android:paddingRight="@dimen/content_padding_standard"
+					android:text="@string/choose_osmand"
+					android:textColor="?android:textColorPrimary"
+					android:textSize="@dimen/list_item_title_text_size"
+					app:firstBaselineToTopHeight="28sp"
+					app:typeface="@string/font_roboto_medium"/>
+
+				<net.osmand.telegram.ui.views.TextViewEx
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:paddingLeft="@dimen/content_padding_standard"
+					android:paddingRight="@dimen/content_padding_standard"
+					android:text="@string/choose_osmand_desc"
+					android:textColor="?android:attr/textColorSecondary"
+					android:textSize="@dimen/list_item_description_text_size"
+					app:firstBaselineToTopHeight="28sp"
+					app:lastBaselineToBottomHeight="12sp"
+					app:typeface="@string/font_roboto_regular"/>
+
+				<LinearLayout
+					android:id="@+id/items_container"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:orientation="vertical"/>
+
+			</LinearLayout>
+
+		</android.support.v4.widget.NestedScrollView>
+
+	</android.support.design.widget.CoordinatorLayout>
+
+	<FrameLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:background="?attr/card_bg_color">
+
+		<include
+			layout="@layout/secondary_btn"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_margin="@dimen/content_padding_half"/>
+
+	</FrameLayout>
+
+</LinearLayout>

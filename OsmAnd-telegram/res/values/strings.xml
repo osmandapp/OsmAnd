@@ -1,4 +1,6 @@
 <resources>
+	<string name="choose_osmand_desc">Select OsmAnd version where contacts will be displayed on the map.</string>
+	<string name="choose_osmand">Select OsmAnd version to use</string>
 	<string name="disable_all_sharing_desc">It will disable sharing your location to all selected chats (%1$d).</string>
 	<string name="disable_all_sharing">Disable all sharing</string>
 	<string name="turn_off_all">Turn off all</string>
