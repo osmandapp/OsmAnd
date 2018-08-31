@@ -2576,7 +2576,7 @@ Lon %2$s</string>
     <string name="restart_search">Reiniciar búsqueda</string>
     <string name="increase_search_radius">Aumentar radio de búsqueda</string>
     <string name="nothing_found">Nada encontrado</string>
-    <string name="nothing_found_descr">Modifica la consulta de búsqueda o aumenta el radio de búsqueda.</string>
+    <string name="nothing_found_descr">Modificar la consulta de búsqueda o aumentar el radio de búsqueda.</string>
     <string name="private_access_routing_req">El destino se ubica en un área de acceso privado. ¿Permitir el acceso a los caminos privados para este viaje?</string>
     <string name="mapillary">Mapillary</string>
     <string name="mapillary_widget">Control de Mapillary</string>
