@@ -1925,4 +1925,68 @@
 	<string name="poi_microbrewery_no">Не микропивара</string>
 
 	<string name="poi_takeaway_filter_yes">Да</string>
+	<string name="poi_takeaway_yes">За понети</string>
+	<string name="poi_takeaway_no">Не за понети</string>
+	<string name="poi_takeaway_only">Само за понети</string>
+
+	<string name="poi_delivery_filter_yes">Да</string>
+	<string name="poi_delivery_yes">Достава</string>
+	<string name="poi_delivery_no">Без доставе</string>
+	<string name="poi_delivery_only">Само достава</string>
+
+	<string name="poi_outdoor_seating_filter_yes">Да</string>
+	<string name="poi_outdoor_seating_yes">Седење напољу: да</string>
+	<string name="poi_outdoor_seating_no">Без седења напољу</string>
+	<string name="poi_outdoor_seating_terrace">Седење напољу: тараса</string>
+	<string name="poi_outdoor_seating_sidewalk">Седење напољу: тротоар</string>
+	<string name="poi_outdoor_seating_pedestrian_zone">Седење напољу: пешачка зона</string>
+	<string name="poi_outdoor_seating_garden">Седење напољу: башта</string>
+	<string name="poi_outdoor_seating_patio">Седење напољу: интерно двориште</string>
+
+	<string name="poi_cocktails_yes">Да</string>
+
+	<string name="poi_second_hand_yes">Секонд хенд роба</string>
+	<string name="poi_second_hand_no">Без секонд хенд робе</string>
+	<string name="poi_second_hand_only">Само секонд хенд роба</string>
+
+	<string name="poi_service_parts">Делови</string>
+	<string name="poi_service_dealer">Дилер</string>
+	<string name="poi_service_repair">Поправка</string>
+	<string name="poi_service_repair_no">Без поправке</string>
+	<string name="poi_service_electrical">Поправка електричних возила</string>
+	<string name="poi_motorcycle_repair">Поправка мотора</string>
+	<string name="poi_self_service_yes">Да</string>
+	<string name="poi_self_service_no">Без само-услуге</string>
+	<string name="poi_automated_yes">Да</string>
+	<string name="poi_automated_no">Не аутоматски</string>
+	<string name="poi_full_service_yes">Пуна услуга</string>
+	<string name="poi_brushless_yes">Да</string>
+	<string name="poi_brushless_no">Без четкица: не</string>
+	<string name="poi_car_wash_no">Прање кола: не</string>
+
+
+	<string name="poi_public_bath">Јавно купатило</string>
+
+	<string name="poi_male_yes">Мушкарци</string>
+	<string name="poi_male_no">Забрањено за мушкарце</string>
+	<string name="poi_female_yes">Жене</string>
+	<string name="poi_female_no">Забрањено за жене</string>
+	<string name="poi_indoor_yes">Унутар</string>
+	<string name="poi_indoor_no">Споља</string>
+	<string name="poi_toilets_yes">Да</string>
+	<string name="poi_toilets_no">Без тоалета</string>
+	<string name="poi_toilets_wheelchair_yes">Приступ тоалету за инвалидска колица: да</string>
+	<string name="poi_toilets_wheelchair_no">Приступ тоалету за инвалидска колица: не</string>
+	<string name="poi_toilets_access_customers">Приступ тоалету: купци</string>
+	<string name="poi_toilets_access_permissive">Приступ тоалету: допуштен</string>
+	<string name="poi_toilets_access_community">Приступ тоалету: заједнички</string>
+	<string name="poi_toilets_access_public">Приступ тоалету: јавни</string>
+
+	<string name="poi_vending_parcel_pickup_mail_in">Преузимање пакета и доспеле поште</string>
+	<string name="poi_vending_bicycle_tube">Бицикл вентили</string>
+	<string name="poi_vending_parcel_pickup">Преузимање пакета</string>
+	<string name="poi_vending_parcel_mail_in">Поштанска достава пакета</string>
+	<string name="poi_memorial_blue_plaque">Плави меморијал</string>
+	<string name="poi_memorial_jizo">Џизо</string>
+	<string name="poi_resource_dimension_stone">Димензиони камен</string>
 	</resources>

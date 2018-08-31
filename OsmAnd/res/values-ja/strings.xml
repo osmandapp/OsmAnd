@@ -150,9 +150,9 @@
 
      
      
-     <string name="osmand_routing_experimental">OsmAndオフライン経路案内は実験的な機能であり
-20km以上の距離では動作しません。
-\n\n経路案内サービスはオンラインのCloudMadeに自動的に切り替わります。</string>
+     <string name="osmand_routing_experimental">OsmAndオフラインルート検索エンジンは実験的な機能であり 20km以上の距離では動作しません。 
+\n
+\nルート検索エンジンはオンラインのCloudMadeに切り替わりました。</string>
      <string name="specified_dir_doesnt_exist">指定されたフォルダが見つかりません。</string>
      <string name="application_dir">データ格納フォルダ</string>
      
@@ -386,8 +386,8 @@ POIの更新は利用できません</string>
      <string name="max_level_download_tile">最大オンラインズーム</string>
      <string name="max_level_download_tile_descr">オンラインマップタイル用にダウンロードする 最大ズームレベルを選びます</string>
      <string name="route_general_information">総距離 %1$s, 移動時間 %2$d 時間 %3$d 分。</string>
-     <string name="router_service_descr">オンラインまたはオフラインで使用する経路案内方法を選択します</string>
-     <string name="router_service">経路案内サービス</string>
+     <string name="router_service_descr">オンラインまたはオフラインで使用するルート検索エンジンを選択します</string>
+     <string name="router_service">ルート検索エンジン</string>
      <string name="sd_dir_not_accessible">SDカードのデータ格納フォルダにアクセスできません！</string>
      <string name="download_question">{0} - {1}をダウンロード?</string>
      <string name="download_question_exist">{0}用のオフラインデータは
@@ -3054,4 +3054,5 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="empty_state_my_tracks">GPXファイルに追加しよう</string>
     <string name="empty_state_my_tracks_desc">GPXファイルまたは記録した経路からインポートします。</string>
     <string name="import_track">GPXファイルからインポート</string>
+    <string name="access_intermediate_arrival_time">中間経由地点への到着時間</string>
     </resources>
