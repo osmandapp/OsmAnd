@@ -618,23 +618,23 @@ public class OsmandAidlService extends Service {
 			callbacks.remove(callbackId);
 			return true;
 		}
-	};
 
-	void startRemoteUpdates(final long updateTimeMS, final long callbackId, final IOsmAndAidlCallback callback) {
-		mHandler.postDelayed(new Runnable() {
-			@Override
-			public void run() {
-				try {
-					if (callbacks.containsKey(callbackId)) {
-						if (getApi("isUpdateAllowed").isUpdateAllowed()) {
-							callback.onUpdate();
+		void startRemoteUpdates(final long updateTimeMS, final long callbackId, final IOsmAndAidlCallback callback) {
+			mHandler.postDelayed(new Runnable() {
+				@Override
+				public void run() {
+					try {
+						if (callbacks.containsKey(callbackId)) {
+							if (getApi("isUpdateAllowed").isUpdateAllowed()) {
+								callback.onUpdate();
+							}
+							startRemoteUpdates(updateTimeMS, callbackId, callback);
 						}
-						startRemoteUpdates(updateTimeMS, callbackId, callback);
+					} catch (RemoteException e) {
+						handleException(e);
 					}
-				} catch (RemoteException e) {
-					LOG.error("AIDL e.getMessage()", e);
 				}
-			}
-		}, updateTimeMS);
-	}
+			}, updateTimeMS);
+		}
+	};
 }
