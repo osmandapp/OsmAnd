@@ -59,9 +59,9 @@ import net.osmand.util.Algorithms;
 import org.apache.commons.logging.Log;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class OsmandAidlService extends Service {
 	
@@ -100,15 +100,14 @@ public class OsmandAidlService extends Service {
 	@Override
 	public void onCreate() {
 		super.onCreate();
-
-		callbacks = new HashMap<>();
+		callbacks = new ConcurrentHashMap<>();
 	}
 
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		callbacks.clear();
 		mHandlerThread.quit();
+		callbacks.clear();
 	}
 
 	private final IOsmAndAidlInterface.Stub mBinder = new IOsmAndAidlInterface.Stub() {
