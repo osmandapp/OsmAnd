@@ -67,9 +67,7 @@ class SettingsDialogFragment : BaseDialogFragment() {
 					}
 					setOnClickListener {
 						if (settings.appToConnectPackage != appConn.appPackage) {
-							app.showLocationHelper.stopShowingLocation()
-							settings.appToConnectPackage = appConn.appPackage
-							app.osmandAidlHelper.reconnectOsmand()
+							settings.updateAppToConnect(appConn.appPackage)
 							updateSelectedAppConn()
 						}
 					}

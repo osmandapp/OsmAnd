@@ -205,8 +205,7 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 		when {
 			installedApps.isEmpty() -> showOsmAndMissingDialog()
 			installedApps.size == 1 -> {
-				settings.appToConnectPackage = installedApps.first().appPackage
-				osmandAidlHelper.reconnectOsmand()
+				settings.updateAppToConnect(installedApps.first().appPackage)
 				updateOpenOsmAndIcon()
 			}
 			installedApps.size > 1 -> {

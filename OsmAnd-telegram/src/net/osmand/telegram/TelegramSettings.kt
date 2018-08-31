@@ -65,6 +65,7 @@ class TelegramSettings(private val app: TelegramApplication) {
 	var locHistoryTime = LOC_HISTORY_VALUES_SEC[LOC_HISTORY_DEFAULT_INDEX]
 
 	var appToConnectPackage = ""
+		private set
 
 	val gpsAndLocPrefs = listOf(SendMyLocPref(), StaleLocPref(), LocHistoryPref())
 
@@ -175,6 +176,12 @@ class TelegramSettings(private val app: TelegramApplication) {
 	fun clear() {
 		stopSharingLocationToChats()
 		app.getSharedPreferences(SETTINGS_NAME, Context.MODE_PRIVATE).edit().clear().apply()
+	}
+
+	fun updateAppToConnect(appToConnectPackage: String) {
+		this.appToConnectPackage = appToConnectPackage
+		app.showLocationHelper.stopShowingLocation()
+		app.osmandAidlHelper.reconnectOsmand()
 	}
 
 	fun save() {
