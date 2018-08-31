@@ -89,13 +89,6 @@ class OsmandAidlHelper(private val app: TelegramApplication) {
 				mUpdatesListener!!.update()
 			}
 		}
-
-		override fun getId() = osmandCallbackId
-
-
-		override fun setId(id: Long) {
-			osmandCallbackId = id
-		}
 	}
 
 	fun setSearchCompleteListener(mSearchCompleteListener: SearchCompleteListener) {
@@ -1046,7 +1039,8 @@ class OsmandAidlHelper(private val app: TelegramApplication) {
 	fun registerForUpdates(): Boolean {
 		if (mIOsmAndAidlInterface != null) {
 			try {
-				return mIOsmAndAidlInterface!!.registerForUpdates(UPDATE_TIME_MS, mIOsmAndAidlCallback)
+				osmandCallbackId = mIOsmAndAidlInterface!!.registerForUpdates(UPDATE_TIME_MS, mIOsmAndAidlCallback)
+				return osmandCallbackId > 0
 			} catch (e: RemoteException) {
 				e.printStackTrace()
 			}
@@ -1057,7 +1051,7 @@ class OsmandAidlHelper(private val app: TelegramApplication) {
 	fun unregisterFromUpdates(): Boolean {
 		if (mIOsmAndAidlInterface != null) {
 			try {
-				return mIOsmAndAidlInterface!!.unregisterFromUpdates(mIOsmAndAidlCallback)
+				return mIOsmAndAidlInterface!!.unregisterFromUpdates(osmandCallbackId)
 			} catch (e: RemoteException) {
 				e.printStackTrace()
 			}

@@ -70,6 +70,8 @@ public class OsmandAidlService extends Service {
 	private static final String DATA_KEY_RESULT_SET = "resultSet";
 
 	private static final int MIN_UPDATE_TIME_MS = 1000;
+	
+	private static final int MIN_UPDATE_TIME_MS_ERROR = -1;
 
 	private Map<Long, IOsmAndAidlCallback> callbacks;
 	private Handler mHandler = null;
@@ -100,6 +102,13 @@ public class OsmandAidlService extends Service {
 		super.onCreate();
 
 		callbacks = new HashMap<>();
+	}
+
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		callbacks.clear();
+		mHandlerThread.quit();
 	}
 
 	private final IOsmAndAidlInterface.Stub mBinder = new IOsmAndAidlInterface.Stub() {
@@ -593,39 +602,37 @@ public class OsmandAidlService extends Service {
 		}
 
 		@Override
-		public boolean registerForUpdates(long updateTimeMS, IOsmAndAidlCallback callback) throws RemoteException {
-			if (callback != null && updateTimeMS >= MIN_UPDATE_TIME_MS) {
-				callback.setId(updateCallbackId);
-				callbacks.put(updateCallbackId, callback);
+		public long registerForUpdates(long updateTimeMS, IOsmAndAidlCallback callback) throws RemoteException {
+			if (updateTimeMS >= MIN_UPDATE_TIME_MS) {
 				updateCallbackId++;
-				startRemoteUpdates(updateTimeMS, callback);
-				return true;
+				callbacks.put(updateCallbackId, callback);
+				startRemoteUpdates(updateTimeMS, updateCallbackId, callback);
+				return updateCallbackId;
+			} else {
+				return MIN_UPDATE_TIME_MS_ERROR;
 			}
-			return false;
 		}
 
 		@Override
-		public boolean unregisterFromUpdates(IOsmAndAidlCallback callback) throws RemoteException {
-			if (callback != null) {
-				callbacks.remove(callback.getId());
-			}
-			return false;
+		public boolean unregisterFromUpdates(long callbackId) throws RemoteException {
+			callbacks.remove(callbackId);
+			return true;
 		}
 	};
 
-	void startRemoteUpdates(final long updateTimeMS, final IOsmAndAidlCallback callback) {
+	void startRemoteUpdates(final long updateTimeMS, final long callbackId, final IOsmAndAidlCallback callback) {
 		mHandler.postDelayed(new Runnable() {
 			@Override
 			public void run() {
 				try {
-					if (callbacks.containsKey(callback.getId())) {
+					if (callbacks.containsKey(callbackId)) {
 						if (getApi("isUpdateAllowed").isUpdateAllowed()) {
 							callback.onUpdate();
 						}
-						startRemoteUpdates(updateTimeMS, callback);
+						startRemoteUpdates(updateTimeMS, callbackId, callback);
 					}
 				} catch (RemoteException e) {
-					e.printStackTrace();
+					LOG.error("AIDL e.getMessage()", e);
 				}
 			}
 		}, updateTimeMS);
