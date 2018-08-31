@@ -130,4 +130,7 @@ interface IOsmAndAidlInterface {
 
     boolean search(in SearchParams params, IOsmAndAidlCallback callback);
     boolean navigateSearch(in NavigateSearchParams params);
+
+    long registerForUpdates(in long updateTimeMS, IOsmAndAidlCallback callback);
+    boolean unregisterFromUpdates(in long callbackId);
 }

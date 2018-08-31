@@ -3,6 +3,8 @@ package net.osmand.aidl;
 import android.app.Service;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.HandlerThread;
 import android.os.IBinder;
 import android.os.RemoteException;
 
@@ -58,12 +60,24 @@ import org.apache.commons.logging.Log;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class OsmandAidlService extends Service {
 	
 	private static final Log LOG = PlatformUtil.getLog(OsmandAidlService.class);
 
 	private static final String DATA_KEY_RESULT_SET = "resultSet";
+
+	private static final int MIN_UPDATE_TIME_MS = 1000;
+	
+	private static final int MIN_UPDATE_TIME_MS_ERROR = -1;
+
+	private Map<Long, IOsmAndAidlCallback> callbacks;
+	private Handler mHandler = null;
+	HandlerThread mHandlerThread = new HandlerThread("OsmAndAidlServiceThread");
+
+	private long updateCallbackId = 0;
 
 	OsmandApplication getApp() {
 		return (OsmandApplication) getApplication();
@@ -76,8 +90,24 @@ public class OsmandAidlService extends Service {
 
 	@Override
 	public IBinder onBind(Intent intent) {
+		mHandlerThread.start();
+		mHandler = new Handler(mHandlerThread.getLooper());
+
 		// Return the interface
 		return mBinder;
+	}
+
+	@Override
+	public void onCreate() {
+		super.onCreate();
+		callbacks = new ConcurrentHashMap<>();
+	}
+
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		mHandlerThread.quit();
+		callbacks.clear();
 	}
 
 	private final IOsmAndAidlInterface.Stub mBinder = new IOsmAndAidlInterface.Stub() {
@@ -539,19 +569,19 @@ public class OsmandAidlService extends Service {
 			try {
 				return params != null && getApi("search").search(params.getSearchQuery(), params.getSearchType(),
 						params.getLatitude(), params.getLongitude(), params.getRadiusLevel(), params.getTotalLimit(), new SearchCompleteCallback() {
-					@Override
-					public void onSearchComplete(List<SearchResult> resultSet) {
-						Bundle data = new Bundle();
-						if (resultSet.size() > 0) {
-							data.putParcelableArrayList(DATA_KEY_RESULT_SET, new ArrayList<>(resultSet));
-						}
-						try {
-							callback.onSearchComplete(resultSet);
-						} catch (RemoteException e) {
-							handleException(e);
-						}
-					}
-				});
+							@Override
+							public void onSearchComplete(List<SearchResult> resultSet) {
+								Bundle data = new Bundle();
+								if (resultSet.size() > 0) {
+									data.putParcelableArrayList(DATA_KEY_RESULT_SET, new ArrayList<>(resultSet));
+								}
+								try {
+									callback.onSearchComplete(resultSet);
+								} catch (RemoteException e) {
+									handleException(e);
+								}
+							}
+						});
 			} catch (Exception e) {
 				handleException(e);
 				return false;
@@ -568,6 +598,42 @@ public class OsmandAidlService extends Service {
 				handleException(e);
 				return false;
 			}
+		}
+
+		@Override
+		public long registerForUpdates(long updateTimeMS, IOsmAndAidlCallback callback) throws RemoteException {
+			if (updateTimeMS >= MIN_UPDATE_TIME_MS) {
+				updateCallbackId++;
+				callbacks.put(updateCallbackId, callback);
+				startRemoteUpdates(updateTimeMS, updateCallbackId, callback);
+				return updateCallbackId;
+			} else {
+				return MIN_UPDATE_TIME_MS_ERROR;
+			}
+		}
+
+		@Override
+		public boolean unregisterFromUpdates(long callbackId) throws RemoteException {
+			callbacks.remove(callbackId);
+			return true;
+		}
+
+		void startRemoteUpdates(final long updateTimeMS, final long callbackId, final IOsmAndAidlCallback callback) {
+			mHandler.postDelayed(new Runnable() {
+				@Override
+				public void run() {
+					try {
+						if (callbacks.containsKey(callbackId)) {
+							if (getApi("isUpdateAllowed").isUpdateAllowed()) {
+								callback.onUpdate();
+							}
+							startRemoteUpdates(updateTimeMS, callbackId, callback);
+						}
+					} catch (RemoteException e) {
+						handleException(e);
+					}
+				}
+			}, updateTimeMS);
 		}
 	};
 }

@@ -66,9 +66,12 @@ class SettingsDialogFragment : BaseDialogFragment() {
 						isChecked = pack == settings.appToConnectPackage
 					}
 					setOnClickListener {
-						settings.appToConnectPackage = appConn.appPackage
-						app.osmandAidlHelper.reconnectOsmand()
-						updateSelectedAppConn()
+						if (settings.appToConnectPackage != appConn.appPackage) {
+							app.showLocationHelper.stopShowingLocation()
+							settings.appToConnectPackage = appConn.appPackage
+							app.osmandAidlHelper.reconnectOsmand()
+							updateSelectedAppConn()
+						}
 					}
 				} else {
 					findViewById<RadioButton>(R.id.radio_button).visibility = View.GONE

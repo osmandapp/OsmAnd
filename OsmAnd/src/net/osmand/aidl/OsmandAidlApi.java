@@ -150,12 +150,14 @@ public class OsmandAidlApi {
 	private Map<String, OsmandMapLayer> mapLayers = new ConcurrentHashMap<>();
 	private Map<String, BroadcastReceiver> receivers = new TreeMap<>();
 
+	private boolean mapActivityActive = false;
 
 	public OsmandAidlApi(OsmandApplication app) {
 		this.app = app;
 	}
 
 	public void onCreateMapActivity(MapActivity mapActivity) {
+		mapActivityActive = true;
 		registerRefreshMapReceiver(mapActivity);
 		registerSetMapLocationReceiver(mapActivity);
 		registerAddMapWidgetReceiver(mapActivity);
@@ -177,6 +179,7 @@ public class OsmandAidlApi {
 	}
 
 	public void onDestroyMapActivity(MapActivity mapActivity) {
+		mapActivityActive = false;
 		for (BroadcastReceiver b : receivers.values()) {
 			if(b == null) {
 				continue;
@@ -188,6 +191,10 @@ public class OsmandAidlApi {
 			}
 		}
 		receivers = new TreeMap<>();
+	}
+
+	public boolean isUpdateAllowed() {
+		return mapActivityActive;
 	}
 
 	private void registerRefreshMapReceiver(MapActivity mapActivity) {

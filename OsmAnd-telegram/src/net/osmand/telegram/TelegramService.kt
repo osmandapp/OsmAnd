@@ -18,13 +18,11 @@ import net.osmand.telegram.notifications.TelegramNotification.NotificationType
 import net.osmand.telegram.utils.AndroidUtils
 import org.drinkless.td.libcore.telegram.TdApi
 import java.util.*
-import java.util.concurrent.Executors
 
 class TelegramService : Service(), LocationListener, TelegramIncomingMessagesListener {
 
 	private fun app() = application as TelegramApplication
 	private val binder = LocationServiceBinder()
-	private val executor = Executors.newSingleThreadExecutor()
 	private var shouldCleanupResources: Boolean = false
 
 	var handler: Handler? = null
@@ -251,50 +249,15 @@ class TelegramService : Service(), LocationListener, TelegramIncomingMessagesLis
 	}
 
 	override fun onReceiveChatLocationMessages(chatId: Long, vararg messages: TdApi.Message) {
-		val app = app()
-		if (app.settings.isShowingChatOnMap(chatId)) {
-			ShowMessagesTask(app).executeOnExecutor(executor, *messages)
-		}
+		app().showLocationHelper.startShowMessagesTask(chatId, *messages)
 	}
 
 	override fun onDeleteChatLocationMessages(chatId: Long, messages: List<TdApi.Message>) {
-		// TODO: handle notification?
-		val app = app()
-		if (app.settings.isShowingChatOnMap(chatId)) {
-			DeleteMessagesTask(app).executeOnExecutor(executor, messages)
-		}
+		app().showLocationHelper.startDeleteMessagesTask(chatId, messages)
 	}
 
 	override fun updateLocationMessages() {
-		UpdateMessagesTask(app()).executeOnExecutor(executor)
-	}
-
-	private class ShowMessagesTask(private val app: TelegramApplication) : AsyncTask<TdApi.Message, Void, Void?>() {
-
-		override fun doInBackground(vararg messages: TdApi.Message): Void? {
-			for (message in messages) {
-				app.showLocationHelper.addOrUpdateLocationOnMap(message)
-			}
-			return null
-		}
-	}
-
-	private class DeleteMessagesTask(private val app: TelegramApplication) : AsyncTask<List<TdApi.Message>, Void, Void?>() {
-
-		override fun doInBackground(vararg messages: List<TdApi.Message>): Void? {
-			for (list in messages) {
-				app.showLocationHelper.hideMessages(list)
-			}
-			return null
-		}
-	}
-
-	private class UpdateMessagesTask(private val app: TelegramApplication) : AsyncTask<Void, Void, Void?>() {
-
-		override fun doInBackground(vararg params: Void?): Void? {
-			app.showLocationHelper.updateLocationsOnMap()
-			return null
-		}
+		app().showLocationHelper.startUpdateMessagesTask()
 	}
 
 	companion object {

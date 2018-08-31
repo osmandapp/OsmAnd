@@ -9,6 +9,7 @@ import android.os.Build
 import android.os.Handler
 import net.osmand.telegram.helpers.*
 import net.osmand.telegram.helpers.OsmandAidlHelper.OsmandHelperListener
+import net.osmand.telegram.helpers.OsmandAidlHelper.UpdatesListener
 import net.osmand.telegram.notifications.NotificationHelper
 import net.osmand.telegram.utils.AndroidUtils
 import net.osmand.telegram.utils.UiUtils
@@ -53,9 +54,17 @@ class TelegramApplication : Application(), OsmandHelperListener {
 						listOf("ic_action_location_sharing_app"),
 						listOf(-1)
 					)
+					if (settings.hasAnyChatToShowOnMap()) {
+						showLocationHelper.startShowingLocation()
+					}
 				}
 			}
 		}
+		osmandAidlHelper.setUpdatesListener(object : UpdatesListener {
+			override fun update() {
+				showLocationHelper.startUpdateMessagesTask()
+			}
+		})
 		shareLocationHelper = ShareLocationHelper(this)
 		showLocationHelper = ShowLocationHelper(this)
 		notificationHelper = NotificationHelper(this)
