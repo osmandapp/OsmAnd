@@ -1212,6 +1212,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 				TrkSegment after = editingCtx.getAfterTrkSegmentLine();
 				if (gpx == null) {
 					toSave = new File(dir, fileName);
+					String trackName = fileName.substring(0,fileName.length()-GPX_SUFFIX.length());
 					GPXFile gpx = new GPXFile();
 					if (measurementLayer != null) {
 						if (saveType == SaveType.LINE) {
@@ -1223,6 +1224,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 								segment.points.addAll(points);
 							}
 							Track track = new Track();
+							track.name = trackName;
 							track.segments.add(segment);
 							gpx.tracks.add(track);
 						} else if (saveType == SaveType.ROUTE_POINT) {
@@ -1231,10 +1233,12 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 								segment.points.addAll(before.points);
 								segment.points.addAll(after.points);
 								Track track = new Track();
+								track.name = trackName;
 								track.segments.add(segment);
 								gpx.tracks.add(track);
 							}
 							Route rt = new Route();
+							rt.name = trackName;
 							gpx.routes.add(rt);
 							rt.points.addAll(points);
 						}
