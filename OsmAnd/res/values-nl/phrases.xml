@@ -2739,12 +2739,12 @@
 
 	<string name="poi_end_date">Einddatum</string>
 
-	<string name="poi_socket_chademo_output_filter">CHAdeMO output</string>
-	<string name="poi_socket_type2_output_filter">Type 2 output</string>
-	<string name="poi_socket_type2_combo_output_filter">Type 2 combo output</string>
-	<string name="poi_socket_type3_output_filter">Type 3 output</string>
-	<string name="poi_socket_cee_blue_output_filter">CEE blue output</string>
-	<string name="poi_socket_schuko_output_filter">Schuko output</string>
+	<string name="poi_socket_chademo_output_filter">CHAdeMO uitvoer</string>
+	<string name="poi_socket_type2_output_filter">Type 2 (Mennekes) uitvoer</string>
+	<string name="poi_socket_type2_combo_output_filter">Type 2 combinatie uitvoer</string>
+	<string name="poi_socket_type3_output_filter">Type 3 (LeGrand) uitvoer</string>
+	<string name="poi_socket_cee_blue_output_filter">CEE blauw uitvoer</string>
+	<string name="poi_socket_schuko_output_filter">Schuko uitvoer</string>
 	<string name="poi_service_car">Auto service</string>
 	<string name="poi_route_subway_ref">Metro</string>
 
@@ -2856,5 +2856,12 @@
 	<string name="poi_socket_schuko_output_high">Hoog</string>
 	<string name="poi_socket_schuko_output_medium">Middel</string>
 	<string name="poi_socket_schuko_output_low">Laag</string>
+
+	<string name="poi_socket">Connector</string>
+	<string name="poi_checkpoint_type">Checkpoint type</string>
+
+<string name="poi_wiki_lang_bar">Beierse wiki</string>
+	<string name="poi_payment_contactless_yes">Contactloos</string>
+	<string name="poi_payment_contactless_no">Contactloos niet geaccepteerd</string>
 
 	</resources>
