@@ -141,6 +141,9 @@ object AndroidUtils {
 	}
 
 	fun isAppInstalled(ctx: Context, appPackage: String): Boolean {
+		if (appPackage.isEmpty()) {
+			return false
+		}
 		try {
 			ctx.packageManager.getPackageInfo(appPackage, 0)
 		} catch (e: PackageManager.NameNotFoundException) {

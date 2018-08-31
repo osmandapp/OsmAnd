@@ -5,6 +5,7 @@ import android.support.annotation.DrawableRes
 import android.support.annotation.StringRes
 import net.osmand.telegram.helpers.OsmandAidlHelper
 import net.osmand.telegram.helpers.TelegramHelper
+import net.osmand.telegram.utils.AndroidUtils
 import net.osmand.telegram.utils.OsmandFormatter
 import net.osmand.telegram.utils.OsmandFormatter.MetricsConstants
 import net.osmand.telegram.utils.OsmandFormatter.SpeedConstants
@@ -63,7 +64,7 @@ class TelegramSettings(private val app: TelegramApplication) {
 	var staleLocTime = STALE_LOC_VALUES_SEC[STALE_LOC_DEFAULT_INDEX]
 	var locHistoryTime = LOC_HISTORY_VALUES_SEC[LOC_HISTORY_DEFAULT_INDEX]
 
-	var appToConnectPackage = OsmandAidlHelper.OSMAND_PLUS_PACKAGE_NAME
+	var appToConnectPackage = ""
 
 	val gpsAndLocPrefs = listOf(SendMyLocPref(), StaleLocPref(), LocHistoryPref())
 
@@ -348,6 +349,9 @@ class TelegramSettings(private val app: TelegramApplication) {
 				}
 				return 0
 			}
+
+			fun getInstalledApps(context: Context) =
+				values().filter { AndroidUtils.isAppInstalled(context, it.appPackage) }
 		}
 	}
 }

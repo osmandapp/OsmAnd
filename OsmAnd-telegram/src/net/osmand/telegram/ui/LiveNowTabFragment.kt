@@ -81,10 +81,14 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 
 		openOsmAndBtn = mainView.findViewById<TextView>(R.id.open_osmand_btn).apply {
 			setOnClickListener {
-				activity?.packageManager?.getLaunchIntentForPackage(settings.appToConnectPackage)
-					?.also { intent ->
+				val pack = settings.appToConnectPackage
+				if (AndroidUtils.isAppInstalled(context, pack)) {
+					activity?.packageManager?.getLaunchIntentForPackage(pack)?.also { intent ->
 						startActivity(intent)
 					}
+				} else {
+					chooseOsmAnd()
+				}
 			}
 		}
 		return mainView
@@ -195,6 +199,22 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 		stopLocationUpdate()
 	}
 
+	private fun chooseOsmAnd() {
+		val ctx = context ?: return
+		val installedApps = TelegramSettings.AppConnect.getInstalledApps(ctx)
+		when {
+			installedApps.isEmpty() -> showOsmAndMissingDialog()
+			installedApps.size == 1 -> {
+				settings.appToConnectPackage = installedApps.first().appPackage
+				osmandAidlHelper.reconnectOsmand()
+				updateOpenOsmAndIcon()
+			}
+			installedApps.size > 1 -> {
+				// TODO: open "Choose OsmAnd" dialog
+			}
+		}
+	}
+
 	private fun updateOpenOsmAndIcon() {
 		val ic = TelegramSettings.AppConnect.getWhiteIconId(settings.appToConnectPackage)
 		openOsmAndBtn.setCompoundDrawablesWithIntrinsicBounds(ic, 0, 0, 0)
@@ -275,7 +295,7 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 	}
 
 	inner class LiveNowListAdapter : RecyclerView.Adapter<BaseViewHolder>() {
-		
+
 		private var lastResponseStr = getString(R.string.last_response) + ": "
 
 		private val menuList =
