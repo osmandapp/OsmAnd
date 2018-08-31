@@ -209,7 +209,7 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 				updateOpenOsmAndIcon()
 			}
 			installedApps.size > 1 -> {
-				// TODO: open "Choose OsmAnd" dialog
+				fragmentManager?.also { ChooseOsmAndBottomSheet.showInstance(it) }
 			}
 		}
 	}
