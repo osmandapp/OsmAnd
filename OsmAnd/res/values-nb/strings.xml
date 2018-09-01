@@ -79,7 +79,7 @@
     <string name="map_widget_time">Resterende tid</string>
     <string name="map_widget_next_turn">Neste sving</string>
     <string name="map_widget_next_turn_small">Neste sving (liten)</string>
-    <string name="map_widget_next_next_turn">Andre neste sving</string>
+    <string name="map_widget_next_next_turn">Påfølgende sving</string>
     <string name="map_widget_mini_route">Mini-rutekart</string>
     <string name="bg_service_screen_lock">Lås skjerm</string>
     <string name="bg_service_screen_unlock">Lås opp skjerm</string>
@@ -1264,7 +1264,7 @@
     <string name="storage_directory_default">Internminne</string>
     <string name="storage_directory">Kartlagring</string>
     <string name="shared_string_copy">Kopier</string>
-    <string name="rendering_attr_hideHouseNumbers_name">Husnumre</string>
+    <string name="rendering_attr_hideHouseNumbers_name">Husnummer</string>
     <string name="shared_string_release">Utgitt</string>
     <string name="local_index_items_backuped">%1$d av %2$d element(er) er deaktivert.</string>
     <string name="local_index_items_deleted">%1$d av %2$d element(er) er slettet.</string>
@@ -1870,7 +1870,7 @@
 	<string name="upload_osm_note_description">Last opp ditt OSM-notat anonymt eller ved å bruke din profil hos OpenStreetMap.org</string>
     <string name="gpx_no_tracks_title">Du har ingen GPX-filer enda</string>
     <string name="gpx_no_tracks_title_folder">Du kan også legge til GPX-filer i mappen</string>
-    <string name="gpx_add_track">Legg til GPX-fil</string>
+    <string name="gpx_add_track">Legg til mer…</string>
     <string name="trip_rec_notification_settings">Aktiver hurtigstart av opptak</string>
     <string name="trip_rec_notification_settings_desc">Vis et systemvarsel slik at du kan starte turopptak.</string>
     <string name="save_track_min_speed">Minimumshastighet for logging</string>
@@ -3037,19 +3037,19 @@
     <string name="search_no_results_feedback">Resultatløst?
 \nGi oss tilbakemelding</string>
     <string name="poi_cannot_be_found">Fant ikke node eller vei.</string>
-    <string name="release_3_1">• Navigering: Fiks for fremdriftsindikator, raskt bytte av start og sluttpunkt på ruten
-\n
-\n• Kartmarkører: Fiks for å slå av og på grupper, mulighet til å skjule markører fra kartet
-\n
-\n• OSM-rediger: Mulighet til å redigere koder for ikke-punktsobjekter og veier, fiks for manglende kommentarer på notater, sikkerhetskopiering av endringer
-\n
-\n• Forbedret Wikipedia- og Wikivoyage -fortolkning, oppdaterte filer er allerede tilgjengelige
-\n
-\n• Kontekstmeny: Fiks for transportskjoldsfarge i nattmodus, fiks for tilleggsmenystørrelser
-\n
+    <string name="release_3_1">• Navigering: Fiks for fremdriftsindikator, raskt bytte av start- og sluttpunkt på ruten 
+\n 
+\n• Kartmarkører: Fiks for av- og påslag grupper, mulighet til å skjule markører på kartet 
+\n 
+\n• OSM-redigering: Mulighet til å redigere koder for ikke-punktsobjekter og veier, fiks for manglende kommentarer på notater, sikkerhetskopiering av endringer 
+\n 
+\n• Forbedret Wikipedia- og Wikivoyage -fortolkning, oppdaterte filer er allerede tilgjengelige 
+\n 
+\n• Kontekstmeny: Fiks for transportskjoldsfarge i nattmodus, fiks for tilleggsmenystørrelser 
+\n 
 \n• Båtnavigasjon: Støtte for vannvei-fairway
-\n
-\n• Andre feilrettinger
+\n 
+\n• Andre feilrettinger 
 \n</string>
     <string name="commiting_way">Sender inn vei…</string>
     <string name="send_search_query_description">Ditt søk <b>\"%1$s\"</b>, vil bli sent inn sammen med din plassering.<br/><br/> Ingen personvernsinfo samles inn, søkedata trengs kun til forbedring av søket.<br/></string>
