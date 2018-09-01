@@ -368,7 +368,7 @@
   
   
   <string name="shared_string_next">Наступний</string>
-  <string name="shared_string_previous">Попередній</string>
+  <string name="shared_string_previous">Назад</string>
   <string name="unit_of_length_descr">Змінити одиниці довжини.</string>
   <string name="unit_of_length">Одиниці довжини</string>
   <string name="si_mi_feet">Милі, фути</string>
@@ -2826,7 +2826,7 @@
     <string name="shared_string_reload">Перезавантажити</string>
     <string name="mapillary_menu_descr_tile_cache">Перезавантажити тайли, щоб переглянути актуальні дані.</string>
     <string name="mapillary_menu_title_tile_cache">Тайловий кеш</string>
-    <string name="wrong_user_name">Невірне ім\'я користувача!</string>
+    <string name="wrong_user_name">Невірне ім\'я користувача</string>
     <string name="shared_string_to">до</string>
     <string name="mapillary_menu_date_from">від</string>
     <string name="mapillary_menu_descr_dates">Переглядайте лише додані зображення</string>
@@ -2837,7 +2837,7 @@
     <string name="mapillary_menu_filter_description">Ви можете відфільтрувати зображення за подавачем чи за датою. Фільтри застосовуються лише для масштабування крупним планом.</string>
     <string name="shared_string_reset">Скинути</string>
     <string name="store_tracks_in_monthly_directories">Зберігати записані треки у помісячних теках</string>
-    <string name="store_tracks_in_monthly_directories_descrp">Зберігати записані треки в підтеках за місяць запису (наприклад, 2017-01).</string>
+    <string name="store_tracks_in_monthly_directories_descrp">Зберігати записані треки в підтеках відповідно місяцю запису (наприклад, 2018-01).</string>
     <string name="average">Середнє</string>
     <string name="of">%1$d зі %2$d</string>
     <string name="ascent_descent">Підйом/спуск</string>
@@ -2847,7 +2847,7 @@
     <string name="min_max">Мін/макс</string>
     
     <string name="rendering_value_translucent_pink_name">Напівпрозорий рожевий</string>
-    <string name="quick_action_resume_pause_navigation">Відновити/призупинити навігацію</string>
+    <string name="quick_action_resume_pause_navigation">Призупинити/відновити навігацію</string>
     <string name="quick_action_resume_pause_navigation_descr">Натисніть цю кнопку, щоб призупинити або відновити навігацію.</string>
     <string name="quick_action_show_navigation_finish_dialog">Показати діалог завершення навігації</string>
     <string name="quick_action_start_stop_navigation">Почати/зупинити навігацію</string>
@@ -2880,7 +2880,7 @@
     <string name="add_point_after">Додати точку опісля</string>
     <string name="shared_string_options">Параметри</string>
     <string name="measurement_tool_snap_to_road_descr">OsmAnd з’єднає точки з маршрутами для обраного профілю.</string>
-    <string name="measurement_tool_save_as_new_track_descr">Ви може зберегти точки, як точки маршруту або як лінію.</string>
+    <string name="measurement_tool_save_as_new_track_descr">Зберегти точки, як точки маршруту або як лінію.</string>
     <string name="choose_navigation_type">Виберіть профіль навігації</string>
     <string name="add_route_points">Додати точки маршруту</string>
     <string name="add_line">Додати лінію</string>
@@ -3093,7 +3093,7 @@
     <string name="hide_full_description">Приховати повний опис</string>
     <string name="show_full_description">Показати повний опис</string>
     <string name="coord_input_save_as_track_descr">Додано точок – %1$s. Введіть назву файлу та натисніть \"Зберегти\".</string>
-    <string name="error_notification_desc">Надішліть знімок екрану цього повідомлення на support@osmand.net</string>
+    <string name="error_notification_desc">Будь ласка, надішліть знімок екрану цього повідомлення на support@osmand.net</string>
     <string name="unirs_render_descr">Змінені типові кольори для підвищення контрасту пішохідних та велодоріжок. Використовуються старі кольори Mapnik.</string>
     <string name="paid_plugin">Платний втулок</string>
     <string name="point_deleted">Точку %1$s видалено</string>
@@ -3134,11 +3134,12 @@
     <string name="wikivoyage_travel_guide">Туристичний путівник</string>
     <string name="wikivoyage_travel_guide_descr">Переглядайте путівники Вікімандів про найцікавіші місця на планеті всередині OsmAnd без підключення до інтернету.</string>
     <string name="clear_all_intermediates">Очистити усі проміжні точки</string>
-    <string name="release_3_1">• Навігація: закріплена панель поступу, швидка зміна початкової та кінцевої точок маршруту
-\n• Маркери мапи: увімкнення/вимкнення фіксованих груп, можливість сховати маркери на мапі
-\n• Редагування OSM: можливість редагування тегів для неточкових об\'єктів, виправлення відсутніх коментарів до нотаток, резервування редагувань
-\n• Поліпшено аналіз Вікіпедії та Вікімандрів, доступні оновлені файли
-\n• Контекстне меню: у нічному режимі було покращено кольори транспортних щитів, виправлено додаткові розміри меню
+    <string name="release_3_1">• Навігація: закріплена панель поступу, швидка зміна початкової та кінцевої точок маршруту 
+\n• Маркери мапи: увімкнення/вимкнення фіксованих груп, можливість сховати маркери на мапі 
+\n• Редагування OSM: можливість редагування тегів для неточкових об\'єктів та шляхів, виправлення відсутніх коментарів до нотаток, резервування редагувань 
+\n• Поліпшено аналіз Вікіпедії та Вікімандрів, доступні оновлені файли 
+\n• Контекстне меню: у нічному режимі було покращено кольори транспортних щитів, виправлено додаткові розміри меню 
+\n• Річкова навігація: підтримка фарватеру
 \n• Інші виправлення помилок</string>
     <string name="increase_search_radius_to">Збільшити радіус пошуку до %1$s</string>
     <string name="send_search_query_description">Ми відправимо Ваш пошуковий запит: <b>„%1$s“</b>, а також Ваше місце розташування. <br/> <br/> Ми не збираємо особисту інформацію, нам потрібні тільки дані пошуку, щоб поліпшити алгоритм пошуку. <br/></string>
@@ -3211,4 +3212,5 @@
     <string name="search_no_results_feedback">Немає пошукових результатів?
 \nНадішліть нам відгука</string>
     <string name="commiting_way">Створюється шлях…</string>
-    </resources>
+    <string name="test_voice_desrc">Натисніть кнопку та прослуховуйте відповідну голосову підказку, щоб визначити відсутні або хибні підказки.</string>
+</resources>
