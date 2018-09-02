@@ -2307,7 +2307,7 @@
 Частина від передплати спрямовується до спільноти OSM та виплачується кожному маперу за його внесок.
 Якщо вам подобається OsmAnd та OSM, ви можете у такий спосіб підтримати їх.</string>
     
-    <string name="upload_osm_note_description">Ви можете додати нотатку в OSM анонімно, або скориставшись вашим обліковим записом на OpenStreetMap.org.</string>
+    <string name="upload_osm_note_description">Надішліть вашу OSM-нотатку анонімно, або скориставшись обліковим записом на OpenStreetMap.org.</string>
     <string name="upload_osm_note">Надіслати нотатку в OSM</string>
     <string name="file_name_containes_illegal_char">Назва файлу містить неприпустимі символи</string>
 <string name="follow_us">Слідуйте за нами</string>
@@ -2325,13 +2325,13 @@
     <string name="lang_en_gb">Англійська (Сполучене Королівство)</string>
     <string name="lang_be_by">Білоруська (Латинка)</string>
     <string name="lang_kn">Каннада</string>
-    <string name="rendering_attr_contourDensity_description">Частота горизонталей</string>
-    <string name="rendering_attr_contourDensity_name">Частота горизонталей</string>
+    <string name="rendering_attr_contourDensity_description">Частота горизонталі</string>
+    <string name="rendering_attr_contourDensity_name">Частота горизонталі</string>
     <string name="rendering_value_high_name">Висока</string>
     <string name="rendering_value_medium_w_name">Середня</string>
     <string name="rendering_value_low_name">Низька</string>
-    <string name="rendering_attr_contourWidth_description">Товщина горизонталей</string>
-    <string name="rendering_attr_contourWidth_name">Товщина горизонталей</string>
+    <string name="rendering_attr_contourWidth_description">Товщина горизонталі</string>
+    <string name="rendering_attr_contourWidth_name">Товщина горизонталі</string>
     <string name="rendering_attr_hideWaterPolygons_description">Воду</string>
     <string name="rendering_attr_hideWaterPolygons_name">Приховати воду</string>
     <string name="legacy_search">Старий пошук</string>
@@ -2344,9 +2344,9 @@
     <string name="route_roundabout_short">Поверніть на %1$d з’їзд</string>
     <string name="upload_poi">Вивантажити POI</string>
     <string name="route_calculation">Побудова маршруту</string>
-    <string name="gpx_no_tracks_title">У вас ще немає треків</string>
-    <string name="gpx_no_tracks_title_folder">Ви також можете додати треки у теку</string>
-    <string name="gpx_add_track">Додати трек</string>
+    <string name="gpx_no_tracks_title">Ви досі не маєте жодних GPX-файлів</string>
+    <string name="gpx_no_tracks_title_folder">Ви також можете додати GPX-файли до теки</string>
+    <string name="gpx_add_track">Додати ще…</string>
     <string name="gpx_appearance">Вигляд</string>
     
     
@@ -2508,13 +2508,13 @@
     
     
     <string name="routing_attr_height_obstacles_name">Використовувати дані висоти</string>
-    <string name="routing_attr_height_obstacles_description">Використовувати дані про рельєф земної поверхні від SRTM, ASTER та EU-DEM.</string>
+    <string name="routing_attr_height_obstacles_description">Фактор висоти рельєфу земної поверхні (дані від SRTM, ASTER та EU-DEM).</string>
 
     <string name="rendering_attr_depthContours_description">Показати контури глибини і точки.</string>
     <string name="rendering_attr_depthContours_name">Контури морських глибин</string>
 	<string name="auto_split_recording_title">Авто-розрив запису після перерви</string>
 	<string name="auto_split_recording_descr">Почати новий сегмент після 6 хвилинної перерви, новий трек після 2 годинної перерви, або новий файл після тривалої перерви (якщо змінилася дата).</string>
-    <string name="select_gpx_folder">Виберіть теку GPX-треку</string>
+    <string name="select_gpx_folder">Оберіть файлову теку GPX</string>
     
 	<string name="navigate_point_olc_info_invalid">Некоректний OLC
 </string>
@@ -2560,18 +2560,18 @@
     <string name="favorite_autofill_toast_text">" було збережено до "</string>
     <string name="quick_action_add_create_items">Створення елементів</string>
     <string name="add_new_folder">Додати нову теку</string>
-    <string name="points_delete_multiple_succesful">Точку(и) успішно вилучено.</string>
+    <string name="points_delete_multiple_succesful">Точку(и) вилучено.</string>
     <string name="points_delete_multiple">"Ви збираєтеся вилучити %1$d точку(и).  Певні?"</string>
     <string name="route_points_category_name">Повороти (точки для проходження) на цьому маршруті</string>
-    <string name="track_points_category_name">Важливі точки маршруту</string>
+    <string name="track_points_category_name">Точки маршруту, цікаві місця та названі можливості</string>
     <string name="shared_string_gpx_track">Трек</string>
-    <string name="max_speed">"Макс.  швидкість"</string>
+    <string name="max_speed">Максимальна швидкість</string>
     <string name="average_speed">Середня швидкість</string>
     <string name="shared_string_time_moving">Час в русі</string>
     <string name="shared_string_time_span">Загальний час</string>
     <string name="shared_string_max">Макс.</string>
     <string name="shared_string_start_time">Час початку</string>
-    <string name="shared_string_end_time">Час закінчення</string>
+    <string name="shared_string_end_time">Час прибуття</string>
     <string name="shared_string_color">Колір</string>
     <string name="shared_string_slope">Ухил</string>
     <string name="lang_ber">Берберська</string>
@@ -2589,7 +2589,7 @@
     <string name="increase_search_radius">Збільшити радіус пошуку</string>
     <string name="nothing_found">Нічого не знайдено</string>
     <string name="private_access_routing_req">"Пункт призначення знаходиться в області з приватним доступом.  Дозволити доступ по приватних дорогах для цієї подорожі?"</string>
-    <string name="nothing_found_descr">Змініть пошуковий запит або ж розширте радіус пошуку.</string>
+    <string name="nothing_found_descr">Змініть пошуковий запит або ж розширте пошуковий радіус.</string>
     <string name="quick_action_showhide_osmbugs_title">Показати/приховати OSM-нотатки</string>
     <string name="quick_action_osmbugs_show">Показати OSM-нотатки</string>
     <string name="quick_action_osmbugs_hide">Приховати OSM-нотатки</string>
