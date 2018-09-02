@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources><string name="close_changeset">Değişiklik listesini kapat</string>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="close_changeset">Değişiklik listesini kapat</string>
 	<string name="zxing_barcode_scanner_not_found">ZXing Barcode Scanner uygulaması kurulu değil. Uygulama marketinde aramak ister misiniz?</string>
 	<string name="rendering_attr_roadColors_description">Yol renk şemasını seç:</string>
 	<string name="rendering_attr_roadColors_name">Yol renk şeması</string>
@@ -2037,7 +2038,7 @@
     <string name="add_time_span">Zaman aralığı ekle</string>
     <string name="road_blocked">Yol kapalı</string>
     <string name="shared_string_select">Seç</string>
-    <string name="switch_start_finish">Rotayı tersine çevir</string>
+    <string name="switch_start_finish">Rotayı tersine çevir.</string>
     <string name="rendering_attr_hideIcons_name">POI simgeleri</string>
     <string name="number_of_contributors">Katkıcı sayısı</string>
     <string name="number_of_edits">Değişiklik sayısı</string>
