@@ -13,6 +13,7 @@ android {
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
     }
 
     lintOptions {
@@ -47,10 +48,10 @@ android {
                 abiFilter "x86"
             }
         }
-        mips {
+        arm64 {
             dimension "abi"
             ndk {
-                abiFilter "mips"
+                abiFilter 'arm64-v8a'
             }
         }
         armv7 {
@@ -59,14 +60,11 @@ android {
                 abiFilter "armeabi-v7a"
             }
         }
-        armv5 {
-            dimension "abi"
-            ndk {
-                abiFilter "armeabi"
-            }
-        }
         fat {
             dimension "abi"
+			ndk {
+				abiFilters 'arm64-v8a', 'x86', 'armeabi-v7a'
+			}
         }
     }
 
@@ -107,6 +105,10 @@ tasks.withType(JavaCompile) {
 }
 
 repositories {
+    // Local build
+    //flatDir {
+    //    dirs 'libs'
+    //}
     ivy {
         name = "OsmAndBinariesIvy"
         url = "http://builder.osmand.net"
@@ -119,7 +121,6 @@ repositories {
 
 dependencies {
     implementation project(path: ':OsmAnd-java', configuration: 'android')
-
     implementation 'com.android.support:multidex:1.0.3'
     implementation 'com.android.support:appcompat-v7:27.1.1'
     implementation 'com.android.support:design:27.1.1'
@@ -132,4 +133,11 @@ dependencies {
     debugImplementation "net.osmand:OsmAndCore_androidNativeRelease:0.1-SNAPSHOT@aar"
     nativeDebugImplementation "net.osmand:OsmAndCore_androidNativeDebug:0.1-SNAPSHOT@aar"
     releaseImplementation "net.osmand:OsmAndCore_androidNativeRelease:0.1-SNAPSHOT@aar"
+
+    // Local build
+    //implementation 'com.vividsolutions:jts-core:1.14.0'
+    //implementation(name: 'OsmAndCore_android-release', ext: 'aar')
+    //implementation(name: 'OsmAndCore_androidNativeRelease-release', ext: 'aar')
+    //implementation files('libs/QtAndroid-bundled.jar')
+    //implementation files('libs/QtAndroidAccessibility-bundled.jar')
 }
