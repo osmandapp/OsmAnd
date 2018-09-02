@@ -134,10 +134,11 @@ dependencies {
     nativeDebugImplementation "net.osmand:OsmAndCore_androidNativeDebug:0.1-SNAPSHOT@aar"
     releaseImplementation "net.osmand:OsmAndCore_androidNativeRelease:0.1-SNAPSHOT@aar"
 
+    implementation files('libs/QtAndroid.jar')
+    implementation files('libs/QtAndroidBearer.jar')
+
     // Local build
     //implementation 'com.vividsolutions:jts-core:1.14.0'
     //implementation(name: 'OsmAndCore_android-release', ext: 'aar')
     //implementation(name: 'OsmAndCore_androidNativeRelease-release', ext: 'aar')
-    //implementation files('libs/QtAndroid-bundled.jar')
-    //implementation files('libs/QtAndroidAccessibility-bundled.jar')
 }
