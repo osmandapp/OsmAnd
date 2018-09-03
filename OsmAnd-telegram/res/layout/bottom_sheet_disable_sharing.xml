@@ -27,6 +27,26 @@
 				android:background="?attr/card_bg_color"
 				android:orientation="vertical">
 
+				<FrameLayout
+					android:layout_width="match_parent"
+					android:layout_height="@dimen/disable_sharing_image_height">
+
+					<ImageView
+						android:layout_width="match_parent"
+						android:layout_height="match_parent"
+						android:scaleType="center"
+						android:src="@drawable/img_turn_off_sharing"/>
+
+					<ImageView
+						android:id="@+id/user_icon"
+						android:layout_width="@dimen/my_location_user_icon_size"
+						android:layout_height="@dimen/my_location_user_icon_size"
+						android:layout_gravity="center_horizontal"
+						android:layout_marginTop="@dimen/disable_sharing_icon_top_margin"
+						tools:src="@drawable/img_user_picture"/>
+
+				</FrameLayout>
+
 				<net.osmand.telegram.ui.views.TextViewEx
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
