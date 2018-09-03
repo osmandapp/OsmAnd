@@ -30,6 +30,8 @@
 
 	<color name="card_divider_light">#f0f0f0</color>
 	<color name="card_divider_dark">#2d3133</color>
+	
+	<color name="app_bar_divider">#e2e2e2</color>
 
 	<color name="primary_btn_text_light">#ffffff</color>
 	<color name="primary_btn_text_dark">#cccccc</color>

@@ -1,4 +1,10 @@
 <resources>
+	<string name="shared_string_name">Name</string>
+	<string name="by_distance">By distance</string>
+	<string name="by_name">By name</string>
+	<string name="by_group">By group</string>
+	<string name="shared_string_sort">Sort</string>
+	<string name="shared_string_sort_by">Sort by</string>
 	<string name="choose_osmand_desc">Select OsmAnd version where contacts will be displayed on the map.</string>
 	<string name="choose_osmand">Select OsmAnd version to use</string>
 	<string name="disable_all_sharing_desc">It will disable sharing your location to all selected chats (%1$d).</string>

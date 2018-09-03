@@ -7,7 +7,9 @@
 	android:layout_height="wrap_content"
 	android:orientation="vertical">
 
-	<include layout="@layout/list_item_divider"/>
+	<include
+		android:id="@+id/top_divider"
+		layout="@layout/list_item_divider"/>
 
 	<LinearLayout
 		android:layout_width="match_parent"
@@ -18,7 +20,7 @@
 		<LinearLayout
 			android:id="@+id/user_row"
 			android:layout_width="match_parent"
-			android:layout_height="@dimen/list_item_height"
+			android:layout_height="wrap_content"
 			android:background="?attr/selectableItemBackground"
 			android:gravity="center_vertical">
 
@@ -48,12 +50,45 @@
 					android:maxLines="1"
 					android:textColor="?android:textColorPrimary"
 					android:textSize="@dimen/list_item_title_text_size"
+					app:firstBaselineToTopHeight="@dimen/list_item_baseline_to_top_height_big"
 					app:typeface="@string/font_roboto_regular"
 					tools:text="Share location"/>
 
 				<LinearLayout
+					android:id="@+id/group_container"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:gravity="center_vertical"
+					android:visibility="gone"
+					tools:visibility="visible">
+
+					<ImageView
+						android:id="@+id/group_icon"
+						android:layout_width="@dimen/list_item_icon_small_size"
+						android:layout_height="@dimen/list_item_icon_small_size"
+						android:layout_gravity="bottom"
+						android:layout_marginEnd="@dimen/content_padding_small"
+						android:layout_marginRight="@dimen/content_padding_small"
+						tools:src="@drawable/img_group_picture" />
+
+					<net.osmand.telegram.ui.views.TextViewEx
+						android:id="@+id/group_title"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:ellipsize="end"
+						android:maxLines="1"
+						android:textColor="?attr/android:textColorSecondary"
+						android:textSize="@dimen/list_item_description_text_size"
+						app:firstBaselineToTopHeight="@dimen/list_item_baseline_to_top_height"
+						app:typeface="@string/font_roboto_regular"
+						tools:text="@string/shared_string_group" />
+
+				</LinearLayout>
+
+				<LinearLayout
 					android:layout_width="match_parent"
-					android:layout_height="wrap_content">
+					android:layout_height="wrap_content"
+					android:paddingBottom="@dimen/content_padding_half">
 
 					<LinearLayout
 						android:id="@+id/location_view_container"
@@ -67,8 +102,9 @@
 							android:id="@+id/direction_icon"
 							android:layout_width="wrap_content"
 							android:layout_height="wrap_content"
-							android:layout_marginEnd="4dp"
-							android:layout_marginRight="4dp"
+							android:layout_gravity="bottom"
+							android:layout_marginEnd="@dimen/content_padding_small"
+							android:layout_marginRight="@dimen/content_padding_small"
 							tools:src="@drawable/ic_direction_arrow"
 							tools:tint="@color/ctrl_active_light"/>
 
@@ -78,11 +114,12 @@
 							android:layout_height="wrap_content"
 							android:maxLines="1"
 							android:textSize="@dimen/list_item_description_text_size"
+							app:firstBaselineToTopHeight="@dimen/list_item_icon_margin_right"
 							app:typeface="@string/font_roboto_medium"
 							tools:text="213 m"
 							tools:textColor="@color/ctrl_active_light"/>
 
-						<TextView
+						<net.osmand.telegram.ui.views.TextViewEx
 							android:layout_width="wrap_content"
 							android:layout_height="wrap_content"
 							android:layout_marginLeft="4dp"
@@ -90,7 +127,8 @@
 							android:text="•"
 							android:textColor="?attr/android:textColorSecondary"
 							android:textSize="@dimen/list_item_description_text_size"
-							android:visibility="visible" />
+							android:visibility="visible"
+							app:firstBaselineToTopHeight="@dimen/list_item_icon_margin_right" />
 
 					</LinearLayout>
 
@@ -103,6 +141,7 @@
 						android:maxLines="1"
 						android:textColor="?attr/android:textColorSecondary"
 						android:textSize="@dimen/list_item_description_text_size"
+						app:firstBaselineToTopHeight="@dimen/list_item_icon_margin_right"
 						app:typeface="@string/font_roboto_regular"
 						tools:text="Live: 1 • All: 36"/>
 
@@ -141,6 +180,7 @@
 				android:layout_marginRight="@dimen/content_padding_standard"
 				android:layout_weight="1"
 				android:text="@string/show_on_map"
+				app:firstBaselineToTopHeight="@dimen/list_item_baseline_to_top_height_big"
 				android:textAppearance="?attr/textAppearanceListItemSecondary"
 				android:textColor="?android:attr/textColorSecondary"
 				app:typeface="@string/font_roboto_medium"/>
@@ -149,6 +189,7 @@
 				android:id="@+id/show_on_map_state"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
+				app:firstBaselineToTopHeight="@dimen/list_item_baseline_to_top_height_big"
 				android:textAppearance="?attr/textAppearanceListItemSecondary"
 				android:textColor="?attr/ctrl_active_color"
 				app:typeface="@string/font_roboto_medium"
@@ -160,7 +201,6 @@
 			android:id="@+id/bottom_divider"
 			android:layout_width="match_parent"
 			android:layout_height="1dp"
-			android:layout_marginBottom="@dimen/card_divider_bottom_margin"
 			android:layout_marginLeft="@dimen/list_item_content_margin"
 			android:layout_marginStart="@dimen/list_item_content_margin"
 			android:background="?attr/card_divider_color"/>

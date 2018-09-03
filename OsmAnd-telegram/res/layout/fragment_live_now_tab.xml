@@ -59,6 +59,58 @@
 			android:textColor="?android:attr/textColorSecondary"
 			android:textSize="@dimen/descr_text_size" />
 
+		<View
+			android:layout_width="match_parent"
+			android:layout_height="1dp"
+			android:background="@color/app_bar_divider" />
+
+		<LinearLayout
+			android:id="@+id/sort_by_container"
+			android:layout_width="match_parent"
+			android:layout_height="@dimen/list_header_height"
+			android:background="@color/screen_bg_light"
+			android:orientation="vertical">
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:background="?attr/selectableItemBackground"
+				android:orientation="horizontal"
+				android:paddingLeft="@dimen/content_padding_standard"
+				android:paddingRight="@dimen/content_padding_standard">
+
+				<net.osmand.telegram.ui.views.TextViewEx
+					android:layout_width="wrap_content"
+					android:layout_height="match_parent"
+					android:layout_gravity="center_vertical|start"
+					android:layout_weight="0.5"
+					android:ellipsize="end"
+					android:gravity="center_vertical"
+					android:maxLines="1"
+					android:text="@string/shared_string_sort"
+					android:textColor="@color/ctrl_active_light"
+					android:textSize="@dimen/descr_text_size"
+					app:typeface="@string/font_roboto_medium" />
+
+				<net.osmand.telegram.ui.views.TextViewEx
+					android:id="@+id/sort_button"
+					android:layout_width="wrap_content"
+					android:layout_height="match_parent"
+					android:layout_gravity="center_vertical|end"
+					android:layout_weight="0.5"
+					android:drawablePadding="@dimen/content_padding_standard"
+					android:ellipsize="end"
+					android:gravity="center|end"
+					android:maxLines="1"
+					android:textColor="@color/ctrl_active_light"
+					android:textSize="@dimen/descr_text_size"
+					app:typeface="@string/font_roboto_medium"
+					tools:text="@string/by_group" />
+
+			</LinearLayout>
+
+		</LinearLayout>
+
 	</android.support.design.widget.AppBarLayout>
 
 	<FrameLayout

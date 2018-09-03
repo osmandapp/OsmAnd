@@ -29,12 +29,17 @@
 	<dimen name="list_item_height_min">48dp</dimen>
 	<dimen name="list_item_height_big">64dp</dimen>
 
+	<dimen name="list_item_icon_small_size">14dp</dimen>
 	<dimen name="list_item_icon_size">40dp</dimen>
 	<dimen name="list_item_icon_margin_left">12dp</dimen>
 	<dimen name="list_item_icon_margin_right">20dp</dimen>
 
 	<dimen name="list_item_content_margin">72dp</dimen>
 	<dimen name="list_item_bottom_margin">3dp</dimen>
+	
+	<dimen name="list_item_baseline_to_top_height_small">20dp</dimen>
+	<dimen name="list_item_baseline_to_top_height">24dp</dimen>
+	<dimen name="list_item_baseline_to_top_height_big">28dp</dimen>
 
 	<dimen name="list_view_bottom_padding">52dp</dimen>
 
