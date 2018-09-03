@@ -3089,4 +3089,24 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="index_item_world_wikivoyage">Wikivoyageの全世界記事</string>
     <string name="mappilary_no_internet_desc">Mapillaryに登録されているストリート写真を見るためにはインターネットに接続する必要があります。</string>
     <string name="download_wikipedia_description">%1$sに関するWikipediaの記事をダウンロードしてオフラインで読むことができます。</string>
+    <string name="thank_you_for_feedback">フィードバックに感謝いたします</string>
+    <string name="poi_cannot_be_found">ノードまたは通じる道が見つかりませんでした。</string>
+    <string name="search_no_results_feedback">検索結果が出ませんでしたか？
+\nよければフィードバックをお願いします</string>
+    <string name="release_3_1">• ナビゲーション:進捗バー(プログレスバー)の修正、ルートの出発地点と目的地点の高速入れ替え
+\n
+\n• マップマーカー:グループに関するオン/オフの修正、マップ上のマーカーの非表示機能の追加
+\n
+\n• OSM編集:地点に寄らないオブジェクトや道に含まれるタグを編集する機能、メモからコメントが欠落する現象の修正、編集のバックアップ機能
+\n
+\n• WikipediaとWikivoyageの解析方法の改善、更新されたファイルは現段階から利用可能
+\n
+\n• コンテキストメニュー:夜間モード時の乗換標識を修正、追加メニューのサイズを修正
+\n
+\n• ボートナビゲーション:ブイなどで指示された人工航路のサポート
+\n
+\n• その他バグ修正
+\n</string>
+    <string name="commiting_way">コミットする方法…</string>
+    <string name="increase_search_radius_to">検索半径を%1$sに増やす</string>
     </resources>
