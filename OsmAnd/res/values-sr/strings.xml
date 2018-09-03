@@ -1397,7 +1397,7 @@
     <string name="restart_search">Препокрени претрагу</string>
     <string name="increase_search_radius">Повећај област претраге</string>
     <string name="nothing_found">Нема ничег пронађеног</string>
-    <string name="nothing_found_descr">Преправите упит претраге или увећајте област претраге.</string>
+    <string name="nothing_found_descr">Преправите упит претраге или повећајте област претраге.</string>
     <string name="quick_action_showhide_osmbugs_title">Приказ/скривање белешки ОСМ-а</string>
     <string name="quick_action_osmbugs_show">Прикажи белешке ОСМ-а</string>
     <string name="quick_action_osmbugs_hide">Сакриј белешке ОСМ-а</string>
