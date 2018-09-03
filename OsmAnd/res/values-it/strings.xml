@@ -37,7 +37,7 @@
 
 
     <string name="routing_settings">Navigazione</string>
-    <string name="routing_settings_descr">Specifica le opzioni di navigazione</string>
+    <string name="routing_settings_descr">Specifica le opzioni di navigazione.</string>
     <string name="global_settings">Impostazioni globali</string>
     <string name="index_settings">Gestisci i file delle mappe</string>
     <string name="index_settings_descr">Scarica e gestisci le mappe offline archiviate sul tuo dispositivo.</string>
@@ -170,14 +170,14 @@ La memoria utilizzata è  {1} MB.
     <string name="gpx_option_from_start_point">Percorri tutta la traccia</string>
     <string name="switch_to_vector_map_to_see">Mappa vettoriale offline presente per quest\'area.\n\t\n\tPer usarla attivare \'Menu\' → \'Configura la mappa\' → \'Sorgente mappa…\' → \'Mappe vettoriali offline\'.</string>
     <string name="choose_audio_stream">Canale d\'uscita della voce guida</string>
-    <string name="choose_audio_stream_descr">Scegli il canale per la guida vocale</string>
+    <string name="choose_audio_stream_descr">Scegli il canale per la guida vocale.</string>
     <string name="voice_stream_voice_call">Audio chiamate vocali (interrompi anche la musica stereo auto BT)</string>
     <string name="voice_stream_notification">Notifiche stream</string>
     <string name="voice_stream_music">Audio media/musica</string>
     <string name="warning_tile_layer_not_downloadable">L\'applicazione non riesce a scaricare il livello della mappa %1$s, prova a reinstallarlo.</string>
     <string name="overlay_transparency_descr">Modifica trasparenza sovrapposizione</string>
     <string name="overlay_transparency">Trasparenza sovrapposizione</string>
-    <string name="map_transparency_descr">Modifica trasparenza della mappa di base</string>
+    <string name="map_transparency_descr">Modifica la trasparenza della mappa di base.</string>
     <string name="map_transparency">Trasparenza mappa di base</string>
     <string name="modify_transparency">Modifica la trasparenza (0 - trasparente, 255 - opaco)</string>
     <string name="layer_underlay">Mappa di sfondo…</string>
@@ -187,7 +187,7 @@ La memoria utilizzata è  {1} MB.
     <string name="map_overlay">Mappa sovrapposta</string>
     <string name="map_overlay_descr">Scegli la mappa sovrapposta</string>
     <string name="tile_source_already_installed">La mappa è già installata, le impostazioni verranno aggiornate</string>
-    <string name="select_tile_source_to_install">Seleziona le mappe (mattonella) da installare o aggiornare</string>
+    <string name="select_tile_source_to_install">Seleziona le mappe (mattonella) da installare o aggiornare.</string>
     <string name="internet_not_available">Una connessione internet è richiesta per questa operazione ma non è disponibile</string>
     <string name="install_more">Installa altro…</string>
 
@@ -294,14 +294,14 @@ La memoria utilizzata è  {1} MB.
     <string name="select_max_zoom_preload_area">Seleziona lo zoom massimo da precaricare</string>
     <string name="maps_could_not_be_downloaded">Non è stato possibile scaricare questa mappa</string>
     <string name="continuous_rendering">Disegno continuo</string>
-    <string name="continuous_rendering_descr">Visualizza un rendering continuo invece di una immagine istantanea</string>
+    <string name="continuous_rendering_descr">Visualizza un rendering continuo invece di una immagine alla volta.</string>
     <string name="rendering_exception">Errore nella visualizzazione dell\'area selezionata</string>
     <string name="rendering_out_of_memory">Memoria insufficiente per visualizzare l\'area selezionata</string>
     <string name="show_point_options">Utilizza la posizione …</string>
     <string name="renderer_load_sucess">Disegno caricato</string>
     <string name="renderer_load_exception">Errore: disegno non caricato</string>
     <string name="renderers">Disegno dei vettori</string>
-    <string name="renderers_descr">Scegli aspetto della mappa vettoriale (offline)</string>
+    <string name="renderers_descr">Scegli l\'aspetto della mappa.</string>
     <string name="poi_context_menu_website">Visualizza siti web PDI</string>
     <string name="poi_context_menu_call">Visualizza telefoni PDI</string>
     <string name="website">Sito web</string>
@@ -451,7 +451,7 @@ La memoria utilizzata è  {1} MB.
     <string name="max_level_download_tile">Max zoom online</string>
     <string name="max_level_download_tile_descr">Scegli il livello di zoom massimo da scaricare per le mappe online a mattonelle</string>
     <string name="route_general_information">Distanza totale %1$s, durata del viaggio %2$d h %3$d min.</string>
-    <string name="router_service_descr">Scegli un servizio online oppure offline di navigazione</string>
+    <string name="router_service_descr">Scegli un servizio online oppure offline di navigazione.</string>
     <string name="router_service">Servizio di navigazione</string>
     <string name="sd_dir_not_accessible">La cartella di salvataggio sulla SD card non è accessibile!</string>
     <string name="download_question">Scaricare {0} - {1} ?</string>
@@ -1145,7 +1145,7 @@ Memoria in proporzione %4$s MB (limite di Android %5$s MB, Dalvik %6$s MB).</str
     
 
 
-    <string name="driving_region_descr">Scegli la regione di guida: USA, Europa, UK, Asia o altre.</string>
+    <string name="driving_region_descr">Seleziona la regione di guida: USA, Europa, Regno Unito, Asia o altre.</string>
     <string name="driving_region">Regione di guida</string>
     <string name="driving_region_japan">Giappone</string>
     <string name="driving_region_us">Stati Uniti</string>
@@ -1223,7 +1223,7 @@ Memoria in proporzione %4$s MB (limite di Android %5$s MB, Dalvik %6$s MB).</str
     <string name="routing_attr_avoid_toll_name">Evita strade a pedaggio</string>
     <string name="routing_attr_avoid_toll_description">Evita strade a pedaggio</string>
     <string name="routing_attr_avoid_unpaved_name">Evita strade non pavimentate</string>
-    <string name="routing_attr_avoid_unpaved_description">Evita strade non pavimentate.</string>
+    <string name="routing_attr_avoid_unpaved_description">Evita le strade non pavimentate.</string>
     <string name="routing_attr_avoid_ferries_name">Evita i traghetti</string>
     <string name="routing_attr_avoid_ferries_description">Evita i traghetti</string>
     <string name="routing_attr_avoid_motorway_name">Evita le autostrade</string>
@@ -1306,7 +1306,7 @@ Memoria in proporzione %4$s MB (limite di Android %5$s MB, Dalvik %6$s MB).</str
     
     
     <string name="keep_informing_never">Solo manualmente (tap sulla freccia)</string>
-    <string name="keep_informing_descr">Annuncia nuovamente a intervalli regolari le indicazioni di navigazione</string>
+    <string name="keep_informing_descr">Annuncia nuovamente a intervalli regolari le indicazioni di navigazione.</string>
     <string name="keep_informing">Ripeti le istruzioni di navigazione</string>
     <string name="arrival_distance">Annuncio arrivo</string>
     <string name="arrival_distance_descr">Quanto prima vuoi l\'annuncio dell\'arrivo?</string>
@@ -1823,7 +1823,7 @@ Attivando questa vista lo stile della mappa diventerà \'Inverno e sci\', mostra
 
     <string name="routing_attr_avoid_borders_description">Evita l’attraversamento delle frontiere</string>
     <string name="routing_attr_height_name">Limite di altezza</string>
-    <string name="routing_attr_height_description">Specifica l\'altezza del veicolo che deve essere permessa nei percorsi.</string>
+    <string name="routing_attr_height_description">Specifica l\'altezza del veicolo permessa nei percorsi.</string>
     <string name="use_fast_recalculation">Ricalcolo percorso intelligente</string>
     <string name="use_fast_recalculation_desc">Ricalcola solo la prima parte del percorso per i viaggi lunghi</string>
     
@@ -1949,7 +1949,7 @@ Attivando questa vista lo stile della mappa diventerà \'Inverno e sci\', mostra
     <string name="count_of_lines">Conteggio delle linee</string>
     <string name="are_you_sure">Sei sicuro?</string>
     <string name="unsaved_changes_will_be_lost">Tutte le modifiche non salvate andranno perse. Continuare?</string>
-    <string name="simulate_your_location_stop_descr">Arresta la simulazione del percorso.</string>
+    <string name="simulate_your_location_stop_descr">Arresta la simulazione della posizione.</string>
     <string name="simulate_your_location_descr">Simula la posizione utilizzando un GPX registrato o una percorso calcolato.</string>
     <string name="downloads_left_template">%1$s download rimanenti</string>
     <string name="favourites_edit_dialog_title">Informazioni preferite</string>
@@ -2479,7 +2479,7 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="quick_action_bug_descr">Il campo commento di questo messaggio verrà autocompletato.</string>
     <string name="quick_action_bug_message">Messaggio</string>
     <string name="quick_action_category_descr">Scegli la categoria in cui salvare il preferito</string>
-    <string name="quick_action_gpx_category_descr">Scegli una categoria opzionale</string>
+    <string name="quick_action_gpx_category_descr">Scegli una categoria opzionale.</string>
     <string name="quick_action_poi_list">Lista PDI</string>
     <string name="quick_action_sh_poi_descr">Puoi aggiungere uno o più categorie PDI da mostrare sulla mappa.</string>
     <string name="quick_action_page_list_descr">Toccando il pulsante azione scorrerai attraverso la lista seguente.</string>
@@ -2553,7 +2553,7 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="do_not_show_startup_messages">Non mostrare alcun messaggio all\'avvio</string>
     <string name="do_not_show_startup_messages_desc">Elimina messaggi riguardo sconti dell\'app ed eventi speciali locali.</string>
     <string name="parking_options">Opzioni di parcheggio</string>
-    <string name="full_version_thanks">Grazie per avere acquistato la versione completa di OsmAnd!</string>
+    <string name="full_version_thanks">Grazie per avere acquistato la versione a pagamento di OsmAnd.</string>
     <string name="fonts_header">Caratteri della mappa</string>
     <string name="right_side_navigation">Guida a destra</string>
     <string name="depth_contour_descr">Mappe linee isoipse marine e i punti nautici.</string>
@@ -2919,7 +2919,7 @@ Rappresenta l\'area: %1$s x %2$s</string>
 	<string name="north_abbreviation">N</string>
 	<string name="optional_point_name">Nome del punto facoltativo</string>
     <string name="transport_nearby_routes_within">Percorsi vicini entro</string>
-    <string name="transport_nearby_routes">Entro</string>
+    <string name="transport_nearby_routes">Nel raggio di</string>
     <string name="enter_the_file_name">Digit il nome del file.</string>
     <string name="map_import_error">Errore importazione mappa</string>
     <string name="map_imported_successfully">Mappa importata</string>
@@ -3082,24 +3082,24 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="poi_cannot_be_found">Il nodo o il percorso non è stato trovato.</string>
     <string name="search_no_results_feedback">Nessun risultato di ricerca?
 \nDacci un ritorno</string>
-    <string name="release_3_1">• Navigazione: corretta la barra di avanzamento, veloce inversione dei punti d\'inizio e fine percorso
-\n
-\n • Marcatori mappa: corretto la visualizzazione o meno dei gruppi, la possibilità di non visualizzare i marcatori dalla mappa
-\n
-\n • Modifiche OSM: possibilità di modificare elementi non puntuali e segmenti, correzione di commenti mancanti nelle note, backup delle modifiche
-\n
-\n • Migliorati Wikipedia e predizione Wikivoyage, aggiornati file già disponibili
-\n
+    <string name="release_3_1">• Navigazione: corretta la barra di avanzamento, veloce inversione dei punti d\'inizio e fine percorso 
+\n 
+\n • Marcatori mappa: corretto la visualizzazione o meno dei gruppi, la possibilità di non visualizzare i marcatori dalla mappa 
+\n 
+\n • Modifiche OSM: possibilità di modificare elementi non puntuali e segmenti, correzione di commenti mancanti nelle note, backup delle modifiche 
+\n 
+\n • Migliorati Wikipedia e predizione Wikivoyage, aggiornati file già disponibili 
+\n 
 \n • Menu contestuale: corretti il colore degli scudetti nella modalità notturna e le dimensioni dei menu addizionali 
-\n
-\n • Navigazione marittima: supporto ai fiumi navigabili
-\n
-\n • Altre correzioni di errori
-\n
+\n 
+\n • Navigazione marittima: supporto alla navigazione fluviale 
+\n 
+\n • Altre correzioni di errori 
+\n 
 \n</string>
     <string name="commiting_way">Sottoponi la via…</string>
     <string name="increase_search_radius_to">Incrementa il raggio di ricerca a %1$s</string>
-    <string name="send_search_query_description">Invieremo le tue ricerche: <b>\"%1$s\"</b>, così come la tua localizzazione.<br/><br/> Non raccogliamo informazioni personali, abbiamo solo bisogno dei dati delle ricerche per migliorare l\'algoritmo di ricerca.<br/></string>
+    <string name="send_search_query_description">Invieremo le tue ricerche: <b>\"%1$s\"</b>, e la tua localizzazione.<br/><br/> Non raccogliamo informazioni personali, abbiamo solo bisogno dei dati delle ricerche per migliorare l\'algoritmo di ricerca.<br/></string>
     <string name="send_search_query">Inviare i dati delle ricerche?</string>
     <string name="shared_string_world">Mondo</string>
     <string name="point_deleted">Punto %1$s eliminato</string>
