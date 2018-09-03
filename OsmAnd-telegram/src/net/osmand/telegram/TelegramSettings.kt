@@ -348,7 +348,7 @@ class TelegramSettings(private val app: TelegramApplication) {
 			false
 		),
 		OSMAND_NIGHTLY(
-			R.drawable.ic_logo_osmand_free,
+			R.drawable.ic_logo_osmand_nightly,
 			R.drawable.ic_action_osmand_free,
 			"OsmAnd Nightly",
 			OsmandAidlHelper.OSMAND_NIGHTLY_PACKAGE_NAME,
