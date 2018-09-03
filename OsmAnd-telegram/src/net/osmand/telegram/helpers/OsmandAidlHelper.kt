@@ -51,6 +51,7 @@ class OsmandAidlHelper(private val app: TelegramApplication) {
 	companion object {
 		const val OSMAND_FREE_PACKAGE_NAME = "net.osmand"
 		const val OSMAND_PLUS_PACKAGE_NAME = "net.osmand.plus"
+		const val OSMAND_NIGHTLY_PACKAGE_NAME = "net.osmand.dev"
 
 		const val UPDATE_TIME_MS = 5000L
 	}

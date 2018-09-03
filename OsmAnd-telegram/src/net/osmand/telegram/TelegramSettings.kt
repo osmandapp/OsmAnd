@@ -330,19 +330,29 @@ class TelegramSettings(private val app: TelegramApplication) {
 		@DrawableRes val iconId: Int,
 		@DrawableRes val whiteIconId: Int,
 		val title: String,
-		val appPackage: String
+		val appPackage: String,
+		val showOnlyInstalled: Boolean
 	) {
 		OSMAND_PLUS(
 			R.drawable.ic_logo_osmand_plus,
 			R.drawable.ic_action_osmand_plus,
 			"OsmAnd+",
-			OsmandAidlHelper.OSMAND_PLUS_PACKAGE_NAME
+			OsmandAidlHelper.OSMAND_PLUS_PACKAGE_NAME,
+			false
 		),
 		OSMAND_FREE(
 			R.drawable.ic_logo_osmand_free,
 			R.drawable.ic_action_osmand_free,
 			"OsmAnd",
-			OsmandAidlHelper.OSMAND_FREE_PACKAGE_NAME
+			OsmandAidlHelper.OSMAND_FREE_PACKAGE_NAME,
+			false
+		),
+		OSMAND_NIGHTLY(
+			R.drawable.ic_logo_osmand_free,
+			R.drawable.ic_action_osmand_free,
+			"OsmAnd Nightly",
+			OsmandAidlHelper.OSMAND_NIGHTLY_PACKAGE_NAME,
+			true
 		);
 
 		companion object {

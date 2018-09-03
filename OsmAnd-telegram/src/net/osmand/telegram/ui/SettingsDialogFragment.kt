@@ -56,6 +56,9 @@ class SettingsDialogFragment : BaseDialogFragment() {
 		for (appConn in TelegramSettings.AppConnect.values()) {
 			val pack = appConn.appPackage
 			val installed = AndroidUtils.isAppInstalled(context!!, pack)
+			if (!installed && appConn.showOnlyInstalled) {
+				continue
+			}
 			inflater.inflate(R.layout.item_with_rb_and_btn, container, false).apply {
 				findViewById<ImageView>(R.id.icon).setImageDrawable(uiUtils.getIcon(appConn.iconId))
 				findViewById<TextView>(R.id.title).text = appConn.title
