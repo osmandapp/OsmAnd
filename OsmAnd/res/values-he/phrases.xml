@@ -2074,4 +2074,38 @@
 	<string name="poi_shelter_type_lean_to">סככה פתוחה</string>
 	<string name="poi_shelter_type_basic_hut">בקתה בסיסית</string>
 	<string name="poi_shelter_type_building">בניין</string>
+	<string name="poi_leaf_type_broadleaved">רחב עלים</string>
+	<string name="poi_leaf_type_needleleaved">צר עלים</string>
+	<string name="poi_leaf_type_mixed">מעורב</string>
+	<string name="poi_leaf_type_leafless">ללא עלים</string>
+	<string name="poi_species">זן</string>
+	<string name="poi_genus">סוג</string>
+	<string name="poi_taxon">טקסון</string>
+
+	<string name="poi_trees_olive">זית</string>
+	<string name="poi_trees_apple">תפוח</string>
+	<string name="poi_trees_oil">שמן דקלים</string>
+	<string name="poi_trees_orange">תפוז</string>
+	<string name="poi_trees_almond">שקד</string>
+	<string name="poi_trees_banana">בננה</string>
+	<string name="poi_trees_hazel">לוז</string>
+	<string name="poi_trees_coconut">קוקוס</string>
+	<string name="poi_trees_persimmon">אפרסמון</string>
+	<string name="poi_trees_cherry">דובדבן</string>
+	<string name="poi_trees_walnut">אגוז מלך</string>
+	<string name="poi_trees_plum">שזיף</string>
+	<string name="poi_trees_peach">אפרסק</string>
+	<string name="poi_trees_tea">תה</string>
+	<string name="poi_trees_coca">קוקה</string>
+	<string name="poi_trees_kiwi">קיוי</string>
+	<string name="poi_trees_nectorine">נקטרינה</string>
+	<string name="poi_trees_mango">מנגו</string>
+	<string name="poi_trees_rubber">גומי</string>
+	<string name="poi_trees_date">תמר</string>
+	<string name="poi_trees_coffea">קפה</string>
+	<string name="poi_trees_pomegranate">רימון</string>
+
+	<string name="poi_enforcement_traffic_signals">אכיפה: רמזור</string>
+	<string name="poi_enforcement_maxspeed">אכיפה: מהירות מרבית</string>
+	<string name="poi_enforcement_maxheight">אכיפה: גובה מרבי</string>
 	</resources>
