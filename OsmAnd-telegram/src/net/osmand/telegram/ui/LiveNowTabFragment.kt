@@ -1,5 +1,6 @@
 package net.osmand.telegram.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
@@ -111,6 +112,13 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 		stopLocationUpdate()
 	}
 
+	override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+		super.onActivityResult(requestCode, resultCode, data)
+		if (requestCode == ChooseOsmAndBottomSheet.OSMAND_CHOSEN_REQUEST_CODE) {
+			updateOpenOsmAndIcon()
+		}
+	}
+
 	override fun onTelegramStatusChanged(
 		prevTelegramAuthorizationState: TelegramAuthorizationState,
 		newTelegramAuthorizationState: TelegramAuthorizationState
@@ -209,7 +217,7 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 				updateOpenOsmAndIcon()
 			}
 			installedApps.size > 1 -> {
-				fragmentManager?.also { ChooseOsmAndBottomSheet.showInstance(it) }
+				fragmentManager?.also { ChooseOsmAndBottomSheet.showInstance(it, this) }
 			}
 		}
 	}

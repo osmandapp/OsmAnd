@@ -3,15 +3,25 @@ package net.osmand.telegram.ui
 import android.os.Bundle
 import android.support.design.widget.BottomSheetBehavior
 import android.support.v4.app.DialogFragment
+import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import net.osmand.telegram.R
+import net.osmand.telegram.TelegramApplication
+import net.osmand.telegram.TelegramSettings
 import net.osmand.telegram.ui.views.BottomSheetDialog
 
 class ChooseOsmAndBottomSheet : DialogFragment() {
+
+	private val app: TelegramApplication
+		get() = activity?.application as TelegramApplication
+
+	private val settings get() = app.settings
+	private val uiUtils get() = app.uiUtils
 
 	override fun onCreateDialog(savedInstanceState: Bundle?) = BottomSheetDialog(context!!)
 
@@ -36,7 +46,22 @@ class ChooseOsmAndBottomSheet : DialogFragment() {
 				override fun onSlide(bottomSheet: View, slideOffset: Float) {}
 			})
 
-		// TODO: inflate AppConn items
+		val itemsCont = mainView.findViewById<ViewGroup>(R.id.items_container)
+		for (appConn in TelegramSettings.AppConnect.getInstalledApps(requireContext())) {
+			inflater.inflate(R.layout.item_with_rb_and_btn, itemsCont, false).apply {
+				findViewById<ImageView>(R.id.icon).setImageDrawable(uiUtils.getIcon(appConn.iconId))
+				findViewById<TextView>(R.id.title).text = appConn.title
+				findViewById<View>(R.id.primary_btn_container).visibility = View.GONE
+				setOnClickListener {
+					settings.updateAppToConnect(appConn.appPackage)
+					targetFragment?.also { target ->
+						target.onActivityResult(targetRequestCode, OSMAND_CHOSEN_REQUEST_CODE, null)
+					}
+					dismiss()
+				}
+				itemsCont.addView(this)
+			}
+		}
 
 		mainView.findViewById<TextView>(R.id.secondary_btn).apply {
 			setText(R.string.shared_string_cancel)
@@ -48,11 +73,16 @@ class ChooseOsmAndBottomSheet : DialogFragment() {
 
 	companion object {
 
+		const val OSMAND_CHOSEN_REQUEST_CODE = 0
+
 		private const val TAG = "ChooseOsmAndBottomSheet"
 
-		fun showInstance(fm: FragmentManager): Boolean {
+		fun showInstance(fm: FragmentManager, target: Fragment): Boolean {
 			return try {
-				ChooseOsmAndBottomSheet().show(fm, TAG)
+				ChooseOsmAndBottomSheet().apply {
+					setTargetFragment(target, OSMAND_CHOSEN_REQUEST_CODE)
+					show(fm, TAG)
+				}
 				true
 			} catch (e: RuntimeException) {
 				false
