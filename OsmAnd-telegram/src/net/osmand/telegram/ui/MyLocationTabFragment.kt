@@ -49,7 +49,6 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 	private val settings get() = app.settings
 
 	private lateinit var appBarLayout: AppBarLayout
-	private lateinit var userImage: ImageView
 	private lateinit var imageContainer: FrameLayout
 	private lateinit var textContainer: LinearLayout
 	private lateinit var titleContainer: LinearLayout
@@ -120,9 +119,13 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 			})
 		}
 
-		userImage = mainView.findViewById<ImageView>(R.id.my_location_user_image).apply {
-			setImageResource(R.drawable.img_my_location_user)
-		}
+		TelegramUiHelper.setupPhoto(
+			app,
+			mainView.findViewById(R.id.user_icon),
+			telegramHelper.getUserPhotoPath(telegramHelper.getCurrentUser()),
+			R.drawable.img_user_picture,
+			false
+		)
 
 		optionsBtn = mainView.findViewById<ImageView>(R.id.options)
 		with(activity as MainActivity) {

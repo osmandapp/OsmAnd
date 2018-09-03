@@ -3,7 +3,8 @@ package net.osmand.telegram.helpers
 import android.text.TextUtils
 import net.osmand.PlatformUtil
 import net.osmand.telegram.helpers.TelegramHelper.TelegramAuthenticationParameterType.*
-import net.osmand.telegram.utils.*
+import net.osmand.telegram.utils.GRAYSCALE_PHOTOS_DIR
+import net.osmand.telegram.utils.GRAYSCALE_PHOTOS_EXT
 import org.drinkless.td.libcore.telegram.Client
 import org.drinkless.td.libcore.telegram.Client.ResultHandler
 import org.drinkless.td.libcore.telegram.TdApi
@@ -310,10 +311,10 @@ class TelegramHelper private constructor() {
 
 	fun isInit() = client != null && haveAuthorization
 
-	fun getUserPhotoPath(user: TdApi.User): String? {
-		return if (hasLocalUserPhoto(user)) {
-			user.profilePhoto?.small?.local?.path
-		} else {
+	fun getUserPhotoPath(user: TdApi.User?) = when {
+		user == null -> null
+		hasLocalUserPhoto(user) -> user.profilePhoto?.small?.local?.path
+		else -> {
 			if (hasRemoteUserPhoto(user)) {
 				requestUserPhoto(user)
 			}

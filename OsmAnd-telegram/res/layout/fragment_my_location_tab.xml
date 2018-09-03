@@ -24,13 +24,25 @@
 				android:scaleType="center"
 				android:src="@drawable/img_my_location_roadbg"/>
 
-			<ImageView
-				android:id="@+id/my_location_user_image"
+			<FrameLayout
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_gravity="center_horizontal"
-				android:paddingTop="@dimen/content_padding_standard"
-				tools:src="@drawable/img_my_location_user"/>
+				android:layout_marginTop="@dimen/content_padding_standard">
+
+				<ImageView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:src="@drawable/img_my_location_user"/>
+
+				<ImageView
+					android:id="@+id/user_icon"
+					android:layout_width="@dimen/my_location_user_icon_size"
+					android:layout_height="@dimen/my_location_user_icon_size"
+					android:layout_gravity="center"
+					tools:src="@drawable/img_user_picture"/>
+
+			</FrameLayout>
 
 		</FrameLayout>
 
