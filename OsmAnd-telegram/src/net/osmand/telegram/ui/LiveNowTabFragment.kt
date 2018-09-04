@@ -419,8 +419,13 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 			val openOnMapView = holder.getOpenOnMapClickView()
 
 			val staleLocation = System.currentTimeMillis() / 1000 - item.lastUpdated > settings.staleLocTime
-			if (staleLocation && item.userId != 0) {
-				TelegramUiHelper.setupPhoto(app, holder.icon, item.grayscalePhotoPath, item.placeholderId, false)
+			if (staleLocation) {
+				val photoPath = if (settings.liveNowSortType.isSortByGroup() && item is ChatItem && !item.privateChat) {
+						item.photoPath
+					} else {
+						item.grayscalePhotoPath
+					}
+				TelegramUiHelper.setupPhoto(app, holder.icon, photoPath, item.placeholderId, false)
 			} else {
 				TelegramUiHelper.setupPhoto(app, holder.icon, item.photoPath, R.drawable.img_user_picture_active, false)
 			}
@@ -482,7 +487,13 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 
 		private fun getChatItemDescription(item: ChatItem): String {
 			return when {
-				item.chatWithBot -> getString(R.string.shared_string_bot)
+				item.chatWithBot -> {
+					if (settings.liveNowSortType.isSortByGroup()) {
+						getString(R.string.shared_string_bot)
+					} else {
+						OsmandFormatter.getListItemLiveTimeDescr(app, item.lastUpdated, lastResponseStr)
+					}
+				}
 				item.privateChat -> OsmandFormatter.getListItemLiveTimeDescr(app, item.lastUpdated, lastResponseStr)
 				else -> {
 					if (settings.liveNowSortType.isSortByGroup()) {
