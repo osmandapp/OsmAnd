@@ -1,7 +1,6 @@
 package net.osmand.telegram.ui
 
 import android.content.Intent
-import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
@@ -384,7 +383,7 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 	}
 
 	private fun updateSortBtn() {
-		sortByBtn.text = getString(sortBy.shortTitle)
+		sortByBtn.text = getString(sortBy.shortTitleId)
 		sortByBtn.setCompoundDrawablesWithIntrinsicBounds(
 			null,
 			null,

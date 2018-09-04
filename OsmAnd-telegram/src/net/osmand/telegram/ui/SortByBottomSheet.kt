@@ -115,7 +115,7 @@ class SortByBottomSheet : DialogFragment() {
 		}
 	}
 
-	enum class SortType(@DrawableRes val iconId: Int, @StringRes val titleId: Int, @StringRes val shortTitle: Int) {
+	enum class SortType(@DrawableRes val iconId: Int, @StringRes val titleId: Int, @StringRes val shortTitleId: Int) {
 		SORT_BY_GROUP(
 			R.drawable.ic_action_sort_by_group,
 			R.string.shared_string_group,
