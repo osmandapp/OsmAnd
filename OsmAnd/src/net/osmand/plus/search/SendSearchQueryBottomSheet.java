@@ -44,7 +44,8 @@ public class SendSearchQueryBottomSheet extends MenuBottomSheetDialogFragment {
 		if (Algorithms.isEmpty(searchQuery)) {
 			return;
 		}
-		params.put(searchQuery, searchLocation);
+		params.put("query", searchQuery);
+		params.put("location", searchLocation);
 		items.add(new TitleItem(getString(R.string.send_search_query)));
 		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 		final TextView textView = (TextView) View.inflate(new ContextThemeWrapper(getContext(), themeRes),
@@ -73,7 +74,7 @@ public class SendSearchQueryBottomSheet extends MenuBottomSheetDialogFragment {
 				Toast.makeText(app, R.string.internet_not_available, Toast.LENGTH_LONG).show();
 				dismiss();
 			} else {
-				AndroidNetworkUtils.sendRequestAsync(app, "http://osmand.net/api/missing_search", params,
+				AndroidNetworkUtils.sendRequestAsync(app, "https://osmand.net/api/missing_search", params,
 						null, true, true, new AndroidNetworkUtils.OnRequestResultListener() {
 							@Override
 							public void onResult(String result) {
