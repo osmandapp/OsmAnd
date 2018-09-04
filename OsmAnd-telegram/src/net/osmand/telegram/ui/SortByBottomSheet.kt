@@ -59,17 +59,16 @@ class SortByBottomSheet : DialogFragment() {
 				findViewById<ImageView>(R.id.icon).setImageDrawable(image)
 				findViewById<TextView>(R.id.title)?.apply {
 					text = getText(sortType.titleId)
-					val color = ContextCompat.getColor(
-						app,
-						if (currentType) R.color.ctrl_active_light else R.color.primary_text_light
-					)
-					setTextColor(color)
+					val colorId = if (currentType) R.color.ctrl_active_light else R.color.primary_text_light
+					setTextColor(ContextCompat.getColor(app, colorId))
 				}
 				findViewById<View>(R.id.primary_btn_container).visibility = View.GONE
 				findViewById<View>(R.id.radio_button).visibility = View.GONE
 				setOnClickListener {
-					val intent = Intent()
-					intent.putExtra(SORT_BY_KEY, sortType.name)
+					app.settings.sortType = sortType.name
+					val intent = Intent().apply {
+						putExtra(SORT_BY_KEY, sortType.name)
+					}
 					targetFragment?.also { target ->
 						target.onActivityResult(targetRequestCode, SORT_BY_REQUEST_CODE, intent)
 					}
@@ -116,10 +115,22 @@ class SortByBottomSheet : DialogFragment() {
 		}
 	}
 
-	enum class SortType(@DrawableRes val iconId: Int, @StringRes val titleId: Int) {
-		SORT_BY_GROUP(R.drawable.ic_action_sort_by_group, R.string.shared_string_group),
-		SORT_BY_NAME(R.drawable.ic_action_sort_by_name, R.string.shared_string_name),
-		SORT_BY_DISTANCE(R.drawable.ic_action_sort_by_distance, R.string.shared_string_distance);
+	enum class SortType(@DrawableRes val iconId: Int, @StringRes val titleId: Int, @StringRes val shortTitle: Int) {
+		SORT_BY_GROUP(
+			R.drawable.ic_action_sort_by_group,
+			R.string.shared_string_group,
+			R.string.by_group
+		),
+		SORT_BY_NAME(
+			R.drawable.ic_action_sort_by_name,
+			R.string.shared_string_name,
+			R.string.by_name
+		),
+		SORT_BY_DISTANCE(
+			R.drawable.ic_action_sort_by_distance,
+			R.string.shared_string_distance,
+			R.string.by_distance
+		);
 
 		fun isSortByGroup() = this == SORT_BY_GROUP
 	}

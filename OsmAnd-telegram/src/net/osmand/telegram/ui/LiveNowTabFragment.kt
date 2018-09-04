@@ -29,9 +29,6 @@ import net.osmand.telegram.helpers.TelegramUiHelper.ChatItem
 import net.osmand.telegram.helpers.TelegramUiHelper.ListItem
 import net.osmand.telegram.helpers.TelegramUiHelper.LocationItem
 import net.osmand.telegram.ui.LiveNowTabFragment.LiveNowListAdapter.BaseViewHolder
-import net.osmand.telegram.ui.SortByBottomSheet.Companion.CURRENT_SORT_TYPE_KEY
-import net.osmand.telegram.ui.SortByBottomSheet.Companion.SORT_BY_KEY
-import net.osmand.telegram.ui.SortByBottomSheet.SortType.*
 import net.osmand.telegram.utils.AndroidUtils
 import net.osmand.telegram.utils.OsmandFormatter
 import net.osmand.telegram.utils.UiUtils.UpdateLocationViewCache
@@ -61,16 +58,14 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 	private var heading: Float? = null
 	private var locationUiUpdateAllowed: Boolean = true
 
-	private var sortBy = SORT_BY_GROUP
+	private var sortBy = SortByBottomSheet.SortType.SORT_BY_GROUP
 
 	override fun onCreateView(
 		inflater: LayoutInflater,
 		container: ViewGroup?,
 		savedInstanceState: Bundle?
 	): View? {
-		savedInstanceState?.getString(CURRENT_SORT_TYPE_KEY)?.also {
-			sortBy = valueOf(it)
-		}
+		sortBy = SortByBottomSheet.SortType.valueOf(settings.sortType)
 		val mainView = inflater.inflate(R.layout.fragment_live_now_tab, container, false)
 		val appBarLayout = mainView.findViewById<View>(R.id.app_bar_layout)
 		AndroidUtils.addStatusBarPadding19v(context!!, appBarLayout)
@@ -139,9 +134,9 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 			ChooseOsmAndBottomSheet.OSMAND_CHOSEN_REQUEST_CODE -> updateOpenOsmAndIcon()
 			SortByBottomSheet.SORT_BY_REQUEST_CODE -> {
 				if (data != null && data.extras != null) {
-					val newSortBy = data.extras.getString(SORT_BY_KEY, "")
+					val newSortBy = data.extras.getString( SortByBottomSheet.SORT_BY_KEY, "")
 					if (!newSortBy.isNullOrEmpty()) {
-						sortBy = valueOf(newSortBy)
+						sortBy = SortByBottomSheet.SortType.valueOf(newSortBy)
 						updateSortBtn()
 						updateList()
 					}
@@ -152,7 +147,7 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 
 	override fun onSaveInstanceState(outState: Bundle) {
 		super.onSaveInstanceState(outState)
-		outState.putString(CURRENT_SORT_TYPE_KEY, sortBy.toString())
+		outState.putString(SortByBottomSheet.CURRENT_SORT_TYPE_KEY, sortBy.toString())
 	}
 
 	override fun onTelegramStatusChanged(
@@ -305,7 +300,7 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 	}
 
 	private fun sortAdapterItems(list: MutableList<ListItem>): MutableList<ListItem> {
-		if (sortBy == SORT_BY_DISTANCE) {
+		if (sortBy == SortByBottomSheet.SortType.SORT_BY_DISTANCE) {
 			list.sortWith(java.util.Comparator<ListItem> { lhs, rhs ->
 				if (location == null) {
 					return@Comparator 0
@@ -315,7 +310,7 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 				val rd = MapUtils.getDistance(loc, rhs.latLon!!.latitude, rhs.latLon!!.longitude)
 				java.lang.Double.compare(ld, rd)
 			})
-		} else if (sortBy == SORT_BY_NAME) {
+		} else if (sortBy == SortByBottomSheet.SortType.SORT_BY_NAME) {
 			list.sortWith(Comparator<ListItem> { o1, o2 -> o1.name.compareTo(o2.name) })
 		}
 		return list
@@ -389,24 +384,13 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 	}
 
 	private fun updateSortBtn() {
-		var text = ""
-		var icon: Drawable? = null
-		when (sortBy) {
-			SortByBottomSheet.SortType.SORT_BY_NAME -> {
-				text = getString(R.string.by_name)
-				icon = app.uiUtils.getActiveIcon(sortBy.iconId)
-			}
-			SortByBottomSheet.SortType.SORT_BY_DISTANCE -> {
-				text = getString(R.string.by_distance)
-				icon = app.uiUtils.getActiveIcon(sortBy.iconId)
-			}
-			SortByBottomSheet.SortType.SORT_BY_GROUP -> {
-				text = getString(R.string.by_group)
-				icon = app.uiUtils.getActiveIcon(sortBy.iconId)
-			}
-		}
-		sortByBtn.text = text
-		sortByBtn.setCompoundDrawablesWithIntrinsicBounds(null, null, icon, null)
+		sortByBtn.text = getString(sortBy.shortTitle)
+		sortByBtn.setCompoundDrawablesWithIntrinsicBounds(
+			null,
+			null,
+			app.uiUtils.getActiveIcon(sortBy.iconId),
+			null
+		)
 	}
 
 	inner class LiveNowListAdapter : RecyclerView.Adapter<BaseViewHolder>() {

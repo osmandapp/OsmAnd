@@ -5,6 +5,7 @@ import android.support.annotation.DrawableRes
 import android.support.annotation.StringRes
 import net.osmand.telegram.helpers.OsmandAidlHelper
 import net.osmand.telegram.helpers.TelegramHelper
+import net.osmand.telegram.ui.SortByBottomSheet
 import net.osmand.telegram.utils.AndroidUtils
 import net.osmand.telegram.utils.OsmandFormatter
 import net.osmand.telegram.utils.OsmandFormatter.MetricsConstants
@@ -49,6 +50,8 @@ private const val DEFAULT_VISIBLE_TIME_SECONDS = 60 * 60L // 1 hour
 
 private const val TITLES_REPLACED_WITH_IDS = "changed_to_chat_id"
 
+private const val SORT_TYPE_KEY = "sort_type"
+
 class TelegramSettings(private val app: TelegramApplication) {
 
 	private var chatLivePeriods = mutableMapOf<Long, Long>()
@@ -66,6 +69,8 @@ class TelegramSettings(private val app: TelegramApplication) {
 
 	var appToConnectPackage = ""
 		private set
+
+	var sortType = ""
 
 	val gpsAndLocPrefs = listOf(SendMyLocPref(), StaleLocPref(), LocHistoryPref())
 
@@ -210,6 +215,8 @@ class TelegramSettings(private val app: TelegramApplication) {
 		edit.putLong(LOC_HISTORY_TIME_KEY, locHistoryTime)
 
 		edit.putString(APP_TO_CONNECT_PACKAGE_KEY, appToConnectPackage)
+		
+		edit.putString(SORT_TYPE_KEY, sortType)
 
 		edit.apply()
 	}
@@ -248,6 +255,8 @@ class TelegramSettings(private val app: TelegramApplication) {
 		appToConnectPackage = prefs.getString(
 			APP_TO_CONNECT_PACKAGE_KEY, OsmandAidlHelper.OSMAND_PLUS_PACKAGE_NAME
 		)
+		
+		sortType = prefs.getString(SORT_TYPE_KEY, SortByBottomSheet.SortType.SORT_BY_GROUP.name)
 	}
 
 	private fun updatePrefs() {
