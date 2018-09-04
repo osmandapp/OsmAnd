@@ -29,6 +29,7 @@ import net.osmand.telegram.helpers.TelegramUiHelper.ChatItem
 import net.osmand.telegram.helpers.TelegramUiHelper.ListItem
 import net.osmand.telegram.helpers.TelegramUiHelper.LocationItem
 import net.osmand.telegram.ui.LiveNowTabFragment.LiveNowListAdapter.BaseViewHolder
+import net.osmand.telegram.ui.SortByBottomSheet.SortType.*
 import net.osmand.telegram.utils.AndroidUtils
 import net.osmand.telegram.utils.OsmandFormatter
 import net.osmand.telegram.utils.UiUtils.UpdateLocationViewCache
@@ -37,8 +38,6 @@ import org.drinkless.td.libcore.telegram.TdApi
 
 private const val CHAT_VIEW_TYPE = 0
 private const val LOCATION_ITEM_VIEW_TYPE = 1
-
-private const val SORT_TYPE = "sort_type"
 
 class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessagesListener,
 	FullInfoUpdatesListener, TelegramLocationListener, TelegramCompassListener {
@@ -60,7 +59,7 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 	private var heading: Float? = null
 	private var locationUiUpdateAllowed: Boolean = true
 	
-	private var sortBy: Int = SORT_BY_GROUP
+	private var sortBy= SORT_BY_GROUP
 	private var sortByGroup = sortBy == SORT_BY_GROUP
 
 	override fun onCreateView(
@@ -68,8 +67,8 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 		container: ViewGroup?,
 		savedInstanceState: Bundle?
 	): View? {
-		savedInstanceState?.getInt(SORT_TYPE)?.also {
-			sortBy = it
+		savedInstanceState?.getString(CURRENT_SORT_TYPE_KEY)?.also {
+			sortBy = valueOf(it)
 			sortByGroup = sortBy == SORT_BY_GROUP
 		}
 		val mainView = inflater.inflate(R.layout.fragment_live_now_tab, container, false)
@@ -99,7 +98,7 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 		mainView.findViewById<LinearLayout>(R.id.sort_by_container).apply {
 			setOnClickListener {
 				fragmentManager?.also { fm ->
-					SortByBottomSheet.showInstance(fm, this@LiveNowTabFragment)
+					SortByBottomSheet.showInstance(fm, this@LiveNowTabFragment, sortBy)
 				}
 			}
 		}
@@ -142,9 +141,9 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 			ChooseOsmAndBottomSheet.OSMAND_CHOSEN_REQUEST_CODE -> updateOpenOsmAndIcon()
 			SortByBottomSheet.SORT_BY_REQUEST_CODE -> {
 				if (data != null && data.extras != null) {
-					val newSortBy = data.extras.getInt(SORT_BY_KEY, -1)
-					if (newSortBy != -1) {
-						sortBy = newSortBy
+					val newSortBy = data.extras.getString(SORT_BY_KEY, "")
+					if (!newSortBy.isNullOrEmpty()) {
+						sortBy = valueOf(newSortBy)
 						sortByGroup = sortBy == SORT_BY_GROUP
 						updateSortBtn()
 						updateList()
@@ -156,7 +155,7 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 
 	override fun onSaveInstanceState(outState: Bundle) {
 		super.onSaveInstanceState(outState)
-		outState.putInt(SORT_TYPE, sortBy)
+		outState.putString(CURRENT_SORT_TYPE_KEY, sortBy.toString())
 	}
 
 	override fun onTelegramStatusChanged(
@@ -398,15 +397,15 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 		var text = ""
 		var icon: Drawable? = null
 		when (sortBy) {
-			SORT_BY_NAME -> {
+			SortByBottomSheet.SortType.SORT_BY_NAME -> {
 				text = getString(R.string.by_name)
 				icon = app.uiUtils.getIcon(R.drawable.ic_action_sort_by_name, R.color.ctrl_active_light)
 			}
-			SORT_BY_DISTANCE -> {
+			SortByBottomSheet.SortType.SORT_BY_DISTANCE -> {
 				text = getString(R.string.by_distance)
 				icon = app.uiUtils.getIcon(R.drawable.ic_action_sort_by_distance, R.color.ctrl_active_light)
 			}
-			SORT_BY_GROUP -> {
+			SortByBottomSheet.SortType.SORT_BY_GROUP -> {
 				text = getString(R.string.by_group)
 				icon = app.uiUtils.getIcon(R.drawable.ic_action_sort_by_group, R.color.ctrl_active_light)
 			}

@@ -6,19 +6,14 @@ import android.content.ContentResolver
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.content.res.ColorStateList
 import android.content.res.Configuration
 import android.graphics.Color
 import android.graphics.Paint
-import android.graphics.drawable.Drawable
-import android.graphics.drawable.StateListDrawable
 import android.net.Uri
 import android.os.Build
 import android.support.annotation.AttrRes
 import android.support.annotation.ColorInt
-import android.support.annotation.ColorRes
 import android.support.v4.app.ActivityCompat
-import android.support.v4.content.ContextCompat
 import android.support.v4.content.FileProvider
 import android.util.TypedValue
 import android.util.TypedValue.COMPLEX_UNIT_DIP
@@ -143,50 +138,6 @@ object AndroidUtils {
 					"/${ctx.resources.getResourceTypeName(resID)}" +
 					"/${ctx.resources.getResourceEntryName(resID)}"
 		)
-	}
-
-	fun createPressedColorStateList(ctx: Context, @ColorRes normal: Int, @ColorRes pressed: Int): ColorStateList {
-		return createPressedColorStateList(ctx, false, normal, pressed, 0, 0)
-	}
-
-	fun createPressedColorStateList(
-		ctx: Context, night: Boolean,
-		@ColorRes lightNormal: Int, @ColorRes lightPressed: Int,
-		@ColorRes darkNormal: Int, @ColorRes darkPressed: Int
-	): ColorStateList {
-		return createColorStateList(
-			ctx, night, android.R.attr.state_pressed,
-			lightNormal, lightPressed, darkNormal, darkPressed
-		)
-	}
-
-	private fun createColorStateList(
-		ctx: Context, night: Boolean, state: Int,
-		@ColorRes lightNormal: Int, @ColorRes lightState: Int,
-		@ColorRes darkNormal: Int, @ColorRes darkState: Int
-	): ColorStateList {
-		return ColorStateList(
-			arrayOf(intArrayOf(state), intArrayOf()),
-			intArrayOf(
-				ContextCompat.getColor(ctx, if (night) darkState else lightState),
-				ContextCompat.getColor(ctx, if (night) darkNormal else lightNormal)
-			)
-		)
-	}
-
-	fun createPressedStateListDrawable(normal: Drawable, pressed: Drawable): StateListDrawable {
-		return createStateListDrawable(normal, pressed, android.R.attr.state_pressed)
-	}
-
-	private fun createStateListDrawable(
-		normal: Drawable,
-		stateDrawable: Drawable,
-		state: Int
-	): StateListDrawable {
-		val res = StateListDrawable()
-		res.addState(intArrayOf(state), stateDrawable)
-		res.addState(intArrayOf(), normal)
-		return res
 	}
 	
 	fun isAppInstalled(ctx: Context, appPackage: String): Boolean {
