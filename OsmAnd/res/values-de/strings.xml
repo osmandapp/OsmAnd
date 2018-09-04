@@ -31,7 +31,7 @@
 	<string name="speak_poi">Nahegelegene POI</string>
 	
 	<string name="confirm_every_run">Immer fragen</string>
-	<string name="save_global_track_interval_descr">Erfassungsintervall für die generelle Track-Aufnahme (via Schaltfläche \'GPX-Aufnahme\' auf dem Kartenbildschirm).</string>
+	<string name="save_global_track_interval_descr">Aufzeichnungsintervall für die generelle Track-Aufzeichnung (via Schaltfläche \'GPX-Aufzeichnung\' auf dem Kartenbildschirm).</string>
 	<string name="save_global_track_interval">Intervall für generelle Aufzeichnung</string>
 	<string name="enable_sleep_mode">GPS-Hintergrunddienst aktivieren</string>
 	<string name="sleep_mode_stop_dialog">GPS-Hintergrunddienst beenden?</string>
@@ -1040,8 +1040,8 @@ Proportionaler Speicher %4$s MB (Android Limit %5$s MB, Dalvik %6$s MB).</string
 	<string name="context_menu_item_first_intermediate_point">Als erstes Zwischenziel einfügen</string>
 	<string name="target_point">Ziel %1$s</string>
 	<string name="shared_string_target_points">Ziele</string>
-	<string name="add_as_first_destination_point">Als erstes Zwischenziel einfügen</string>
-	<string name="add_as_last_destination_point">Als letztes Zwischenziel einfügen</string>
+	<string name="add_as_first_destination_point">Als erstes Zwischenziel hinzufügen</string>
+	<string name="add_as_last_destination_point">Als letztes Zwischenziel hinzufügen</string>
 	<string name="replace_destination_point">Ziel ersetzen</string>
 	<string name="new_destination_point_dialog">Sie haben bereits ein Ziel gewählt:</string>
 	<string name="delete_target_point">Ziel löschen</string>
