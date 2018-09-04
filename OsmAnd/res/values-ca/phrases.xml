@@ -3143,4 +3143,7 @@
 	<string name="poi_socket_cee_blue_output_filter">Connector CEE blau</string>
 	<string name="poi_socket_schuko_output_filter">Connector Schuko</string>
 	<string name="poi_glacier_type">Tipus de glacera</string>
+	<string name="poi_socket">Endoll</string>
+	<string name="poi_bicycle_parking_stands">Anclatje</string>
+	<string name="poi_bicycle_parking_wall_loops">Anclatje de Pared</string>
 	</resources>
