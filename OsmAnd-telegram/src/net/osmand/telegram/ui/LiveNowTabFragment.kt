@@ -57,14 +57,11 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 	private var heading: Float? = null
 	private var locationUiUpdateAllowed: Boolean = true
 
-	private var sortBy = SortByBottomSheet.SortType.SORT_BY_GROUP
-
 	override fun onCreateView(
 		inflater: LayoutInflater,
 		container: ViewGroup?,
 		savedInstanceState: Bundle?
 	): View? {
-		sortBy = SortByBottomSheet.SortType.valueOf(settings.sortType)
 		val mainView = inflater.inflate(R.layout.fragment_live_now_tab, container, false)
 		val appBarLayout = mainView.findViewById<View>(R.id.app_bar_layout)
 		AndroidUtils.addStatusBarPadding19v(context!!, appBarLayout)
@@ -91,7 +88,7 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 
 		mainView.findViewById<LinearLayout>(R.id.sort_by_container).setOnClickListener {
 			fragmentManager?.also { fm ->
-				SortByBottomSheet.showInstance(fm, this@LiveNowTabFragment, sortBy)
+				SortByBottomSheet.showInstance(fm, this@LiveNowTabFragment)
 			}
 		}
 
@@ -132,21 +129,10 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 		when (requestCode) {
 			ChooseOsmAndBottomSheet.OSMAND_CHOSEN_REQUEST_CODE -> updateOpenOsmAndIcon()
 			SortByBottomSheet.SORT_BY_REQUEST_CODE -> {
-				if (data != null && data.extras != null) {
-					val newSortBy = data.extras.getString( SortByBottomSheet.SORT_BY_KEY, "")
-					if (!newSortBy.isNullOrEmpty()) {
-						sortBy = SortByBottomSheet.SortType.valueOf(newSortBy)
-						updateSortBtn()
-						updateList()
-					}
-				}
+				updateSortBtn()
+				updateList()
 			}
 		}
-	}
-
-	override fun onSaveInstanceState(outState: Bundle) {
-		super.onSaveInstanceState(outState)
-		outState.putString(SortByBottomSheet.CURRENT_SORT_TYPE_KEY, sortBy.toString())
 	}
 
 	override fun onTelegramStatusChanged(
@@ -278,7 +264,7 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 		val res = mutableListOf<ListItem>()
 		for ((id, messages) in telegramHelper.getMessagesByChatIds(settings.locHistoryTime)) {
 			telegramHelper.getChat(id)?.also { chat ->
-				if (sortBy.isSortByGroup()) {
+				if (settings.liveNowSortType.isSortByGroup()) {
 					res.add(TelegramUiHelper.chatToChatItem(telegramHelper, chat, messages))
 				}
 				val type = chat.type
@@ -288,7 +274,7 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 					when {
 						telegramHelper.isOsmAndBot(type.userId) -> res.addAll(convertToListItems(chat, messages))
 						messages.firstOrNull { it.viaBotUserId != 0 } != null -> res.addAll(convertToListItems(chat, messages, true))
-						!sortBy.isSortByGroup() -> res.add(TelegramUiHelper.chatToChatItem(telegramHelper, chat, messages))
+						!settings.liveNowSortType.isSortByGroup() -> res.add(TelegramUiHelper.chatToChatItem(telegramHelper, chat, messages))
 					}
 				}
 			}
@@ -299,7 +285,7 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 	}
 
 	private fun sortAdapterItems(list: MutableList<ListItem>): MutableList<ListItem> {
-		if (sortBy == SortByBottomSheet.SortType.SORT_BY_DISTANCE) {
+		if (settings.liveNowSortType == TelegramSettings.LiveNowSortType.SORT_BY_DISTANCE) {
 			list.sortWith(java.util.Comparator<ListItem> { lhs, rhs ->
 				if (location == null) {
 					return@Comparator 0
@@ -309,7 +295,7 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 				val rd = MapUtils.getDistance(loc, rhs.latLon!!.latitude, rhs.latLon!!.longitude)
 				java.lang.Double.compare(ld, rd)
 			})
-		} else if (sortBy == SortByBottomSheet.SortType.SORT_BY_NAME) {
+		} else if (settings.liveNowSortType == TelegramSettings.LiveNowSortType.SORT_BY_NAME) {
 			list.sortWith(Comparator<ListItem> { o1, o2 -> o1.name.compareTo(o2.name) })
 		}
 		return list
@@ -320,7 +306,7 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 		messages: List<TdApi.Message>,
 		addOnlyViaBotMessages: Boolean = false
 	): List<ListItem> {
-		return if (sortBy.isSortByGroup()) {
+		return if (settings.liveNowSortType.isSortByGroup()) {
 			convertToLocationItems(chat, messages, addOnlyViaBotMessages)
 		} else {
 			convertToChatItems(chat, messages, addOnlyViaBotMessages)
@@ -383,11 +369,11 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 	}
 
 	private fun updateSortBtn() {
-		sortByBtn.text = getString(sortBy.shortTitleId)
+		sortByBtn.text = getString(settings.liveNowSortType.shortTitleId)
 		sortByBtn.setCompoundDrawablesWithIntrinsicBounds(
 			null,
 			null,
-			app.uiUtils.getActiveIcon(sortBy.iconId),
+			app.uiUtils.getActiveIcon(settings.liveNowSortType.iconId),
 			null
 		)
 	}
@@ -428,6 +414,8 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 			val lastItem = position == itemCount - 1
 			val item = items[position]
 			val canBeOpenedOnMap = item.canBeOpenedOnMap()
+					&& (settings.liveNowSortType.isSortByGroup() && !telegramHelper.isBot(item.userId) 
+					|| !settings.liveNowSortType.isSortByGroup())
 			val openOnMapView = holder.getOpenOnMapClickView()
 
 			val staleLocation = System.currentTimeMillis() / 1000 - item.lastUpdated > settings.staleLocTime
@@ -437,7 +425,7 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 				TelegramUiHelper.setupPhoto(app, holder.icon, item.photoPath, R.drawable.img_user_picture_active, false)
 			}
 
-			holder.title?.text = if (sortBy.isSortByGroup()) item.getVisibleName() else item.name
+			holder.title?.text = if (settings.liveNowSortType.isSortByGroup()) item.getVisibleName() else item.name
 			openOnMapView?.isEnabled = canBeOpenedOnMap
 			if (canBeOpenedOnMap) {
 				openOnMapView?.setOnClickListener {
@@ -465,10 +453,11 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 			holder.bottomShadow?.visibility = if (lastItem) View.VISIBLE else View.GONE
 
 			if (item is ChatItem && holder is ChatViewHolder) {
-				val nextIsLocation = !lastItem && (items[position + 1] is LocationItem || !sortBy.isSortByGroup())
+				val nextIsLocation = !lastItem && (items[position + 1] is LocationItem || !settings.liveNowSortType.isSortByGroup())
 				val chatId = item.chatId
 				val stateTextInd = if (settings.isShowingChatOnMap(chatId)) 1 else 0
-				val groupDescrRowVisible = !sortBy.isSortByGroup() && (!item.privateChat || item.chatWithBot)
+				val groupDescrRowVisible = !settings.liveNowSortType.isSortByGroup()
+						&& (!item.privateChat || item.chatWithBot)
 
 				if (groupDescrRowVisible) {
 					holder.groupDescrContainer?.visibility = View.VISIBLE
@@ -483,7 +472,7 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 				holder.showOnMapRow?.setOnClickListener { showPopupMenu(holder, chatId) }
 				holder.showOnMapState?.text = menuList[stateTextInd]
 				holder.bottomDivider?.visibility = if (nextIsLocation) View.VISIBLE else View.GONE
-				holder.topDivider?.visibility = if (!sortBy.isSortByGroup() && position != 0) View.GONE else View.VISIBLE
+				holder.topDivider?.visibility = if (!settings.liveNowSortType.isSortByGroup() && position != 0) View.GONE else View.VISIBLE
 			} else if (item is LocationItem && holder is ContactViewHolder) {
 				holder.description?.text =  OsmandFormatter.getListItemLiveTimeDescr(app, item.lastUpdated, lastResponseStr)
 			}
@@ -496,7 +485,7 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 				item.chatWithBot -> getString(R.string.shared_string_bot)
 				item.privateChat -> OsmandFormatter.getListItemLiveTimeDescr(app, item.lastUpdated, lastResponseStr)
 				else -> {
-					if (sortBy.isSortByGroup()) {
+					if (settings.liveNowSortType.isSortByGroup()) {
 						val live = getString(R.string.shared_string_live)
 						val all = getString(R.string.shared_string_all)
 						val liveStr = "$live ${item.liveMembersCount}"

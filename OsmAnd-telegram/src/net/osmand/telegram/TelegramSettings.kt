@@ -50,7 +50,7 @@ private const val DEFAULT_VISIBLE_TIME_SECONDS = 60 * 60L // 1 hour
 
 private const val TITLES_REPLACED_WITH_IDS = "changed_to_chat_id"
 
-private const val SORT_TYPE_KEY = "sort_type"
+private const val LIVE_NOW_SORT_TYPE_KEY = "live_now_sort_type"
 
 class TelegramSettings(private val app: TelegramApplication) {
 
@@ -70,7 +70,7 @@ class TelegramSettings(private val app: TelegramApplication) {
 	var appToConnectPackage = ""
 		private set
 
-	var sortType = ""
+	var liveNowSortType = LiveNowSortType.SORT_BY_GROUP
 
 	val gpsAndLocPrefs = listOf(SendMyLocPref(), StaleLocPref(), LocHistoryPref())
 
@@ -216,7 +216,7 @@ class TelegramSettings(private val app: TelegramApplication) {
 
 		edit.putString(APP_TO_CONNECT_PACKAGE_KEY, appToConnectPackage)
 		
-		edit.putString(SORT_TYPE_KEY, sortType)
+		edit.putString(LIVE_NOW_SORT_TYPE_KEY, liveNowSortType.name)
 
 		edit.apply()
 	}
@@ -256,7 +256,7 @@ class TelegramSettings(private val app: TelegramApplication) {
 			APP_TO_CONNECT_PACKAGE_KEY, OsmandAidlHelper.OSMAND_PLUS_PACKAGE_NAME
 		)
 		
-		sortType = prefs.getString(SORT_TYPE_KEY, SortByBottomSheet.SortType.SORT_BY_GROUP.name)
+		liveNowSortType = LiveNowSortType.valueOf(prefs.getString(LIVE_NOW_SORT_TYPE_KEY, LiveNowSortType.SORT_BY_GROUP.name))
 	}
 
 	private fun updatePrefs() {
@@ -379,5 +379,25 @@ class TelegramSettings(private val app: TelegramApplication) {
 			fun getInstalledApps(context: Context) =
 				values().filter { AndroidUtils.isAppInstalled(context, it.appPackage) }
 		}
+	}
+
+	enum class LiveNowSortType(@DrawableRes val iconId: Int, @StringRes val titleId: Int, @StringRes val shortTitleId: Int) {
+		SORT_BY_GROUP(
+			R.drawable.ic_action_sort_by_group,
+			R.string.shared_string_group,
+			R.string.by_group
+		),
+		SORT_BY_NAME(
+			R.drawable.ic_action_sort_by_name,
+			R.string.shared_string_name,
+			R.string.by_name
+		),
+		SORT_BY_DISTANCE(
+			R.drawable.ic_action_sort_by_distance,
+			R.string.shared_string_distance,
+			R.string.by_distance
+		);
+
+		fun isSortByGroup() = this == SORT_BY_GROUP
 	}
 }

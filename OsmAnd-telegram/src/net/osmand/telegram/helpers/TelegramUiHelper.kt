@@ -252,7 +252,7 @@ object TelegramUiHelper {
 		var liveMembersCount: Int = 0
 			internal set
 
-		override fun canBeOpenedOnMap() = latLon != null && !chatWithBot
+		override fun canBeOpenedOnMap() = latLon != null
 
 		override fun getMapPointId() = "${chatId}_$userId"
 
