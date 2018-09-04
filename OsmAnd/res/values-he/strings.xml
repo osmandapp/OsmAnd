@@ -147,14 +147,14 @@
 	<string name="shared_location">מיקום משותף</string>
 	<string name="osmand_parking_event">איסוף הרכב מהחנייה</string>
 	<string name="osmand_parking_warning">אזהרה</string>
-	<string name="osmand_parking_warning_text">התרעה לאיסוף הרכב שלך נוספה ליומן שלך. ההתרעה תישאר שם עד למחיקתה ידנית.</string>    
+	<string name="osmand_parking_warning_text">נוספה התראה לאיסוף הרכב שלך ליומן שלך. ההתראה תישאר שם עד למחיקתה ידנית.</string>    
 	<string name="osmand_parking_time_limit_title">הגדרת מגבלת זמן לחנייה</string>
 	<string name="osmand_parking_delete_confirm">להסיר את סמן מיקום חניית כלי הרכב?</string>
 	<string name="osmand_parking_delete">מחיקת סמן חנייה</string>
 	<string name="osmand_parking_choose_type">נא לבחור את סוג החנייה</string>
 	<string name="osmand_parking_lim_text">מוגבלת בזמן</string>
 	<string name="osmand_parking_no_lim_text">בלתי מוגבלת בזמן</string>
-	<string name="osmand_parking_add_event">הוספת התרעה ליישומון היומן</string>
+	<string name="osmand_parking_add_event">הוספת התראה ליישומון היומן</string>
 	<string name="osmand_parking_time_limit">חנייה מוגבלת בזמן</string>
 	<string name="osmand_parking_time_no_limit">חנייה בלתי מוגבלת בזמן</string>
 	<string name="osmand_parking_position_description">מיקום חניית הרכב שלך. %1$s</string>
@@ -1231,7 +1231,7 @@
     <string name="gpx_appearance">מראה</string>
     
     <string name="shared_string_trip">נסיעה</string>
-    <string name="shared_string_notifications">הודעות</string>
+    <string name="shared_string_notifications">התראות</string>
     
     <string name="shared_string_pause">הפסקה</string>
     <string name="map_markers_other">סמנים אחרים</string>
@@ -2601,7 +2601,7 @@
     <string name="follow_us">לעקוב אחרינו</string>
     <string name="access_direction_audio_feedback">חיווי כיוון קולי</string>
     <string name="access_disable_wrong_direction_recalc">אין חישוב מסלול מחדש לכיוון ההפוך</string>
-    <string name="access_smart_autoannounce_descr">יש להודיע רק כאשר הכיוון לנקודת היעד משתנה.</string>
+    <string name="access_smart_autoannounce_descr">יש להקפיץ התראה רק כאשר הכיוון לנקודת היעד משתנה.</string>
     <string name="access_autoannounce_period">טווח הכרזה אוטומטית</string>
     <string name="access_autoannounce_period_descr">מרווח הזמן המזערי בין הכרזות.</string>
     <string name="rendering_value_fine_name">עדין</string>
@@ -2712,7 +2712,7 @@
     <string name="track_points_category_name">נקודות דרך, נקודות עניין, תכונות עם שם</string>
     <string name="shared_string_time_span">מסגרת זמן</string>
     <string name="upload_osm_note_description">ניתן להעלות את הערות ה־OSM שלך באופן אנונימי או על ידי שימוש בפרופיל שלך ב־OpenStreetMap.org.</string>
-    <string name="trip_rec_notification_settings_desc">הצגת התרעת מערכת שמאפשרת לך להתחיל הקלטת טיול.</string>
+    <string name="trip_rec_notification_settings_desc">הצגת התראת מערכת שמאפשרת לך להתחיל הקלטת טיול.</string>
     <string name="shared_string_paused">הופסק</string>
     <string name="shared_string_recorded">הוקלט</string>
     <string name="rendering_attr_contourColorScheme_description">ערכת הצבעים של קווי המתאר</string>
@@ -2907,7 +2907,7 @@
     <string name="watch">צפייה</string>
     <string name="save_global_track_interval_descr">נא לבחור מרווח בין הקלטות כלליות של מסלול (מופעל דרך וידג׳ט ה־GPX על המפה).</string>
     <string name="transport_nearby_routes_within">נתיבים קרובים בטווח של עד</string>
-    <string name="disable_recording_once_app_killed_descrp">רישום ה־GPX יושהה כאשר היישומון נסגר (דרך היישומונים האחרונים). (התרעות הרקע של OsmAnd תיעלמנה מסרגל ההודעות של Android.)</string>
+    <string name="disable_recording_once_app_killed_descrp">רישום ה־GPX יושהה כאשר היישומון ייסגר (דרך היישומונים האחרונים). (התראות הרקע של OsmAnd תיעלמנה מסרגל ההודעות של Android.)</string>
     <string name="action_create">פעולת יצירה</string>
     <string name="action_modify">פעולת שינוי</string>
     <string name="action_delete">פעולת מחיקה</string>
@@ -3055,7 +3055,7 @@
     <string name="shared_string_gpx_files">קובצי GPX</string>
     <string name="get_osmand_live">ניתן להירשם ל־OsmAnd חי כדי לקבל גישה לכל התכונות: עדכוני מפה יומיים עם מספר בלתי מוגבל של הורדות, כל התוספים בתשלום ובחינם, ויקיפדיה, ויקימסע ועוד הרבה.</string>
     <string name="quick_action_edit_actions">עריכת פעולות</string>
-    <string name="error_notification_desc">נא לשלוח צילום מסך של ההתרעה הזאת אל support@osmand.net</string>
+    <string name="error_notification_desc">נא לשלוח צילום מסך של ההתראה הזאת אל support@osmand.net</string>
     <string name="coord_input_edit_point">עריכת נקודה</string>
     <string name="coord_input_add_point">הוספת נקודה</string>
     <string name="coord_input_save_as_track">שמירה כמסלול</string>

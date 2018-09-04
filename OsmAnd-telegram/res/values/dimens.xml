@@ -51,6 +51,9 @@
 	<dimen name="my_location_text_sides_margin">32dp</dimen>
 	<dimen name="my_location_user_icon_size">60dp</dimen>
 
+	<dimen name="disable_sharing_image_height">132dp</dimen>
+	<dimen name="disable_sharing_icon_top_margin">30dp</dimen>
+
 	<dimen name="search_box_height">48dp</dimen>
 
 	<dimen name="buttons_bottom_bar_height">56dp</dimen>

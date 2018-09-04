@@ -1964,7 +1964,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="simulate_your_location_stop_descr">Arrêter de simuler votre position.</string>
     <string name="simulate_your_location_descr">Simulez votre position à partir d\'un fichier GPX ou d\'une route calculée.</string>
     <string name="are_you_sure">Etes-vous certain ?</string>
-    <string name="unsaved_changes_will_be_lost">Les modifications non enregistrées seront perdues. Souhaitez-vous poursuivre ?</string>
+    <string name="unsaved_changes_will_be_lost">Vos modifications non enregistrées seront perdues. Souhaitez-vous continuer ?</string>
     <string name="downloads_left_template">%1$s téléchargement(s) restant(s)</string>
     <string name="roads">Routes</string>
     <string name="favourites_edit_dialog_title">Propriétés du favori</string>

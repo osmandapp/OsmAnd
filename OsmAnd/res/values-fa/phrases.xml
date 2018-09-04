@@ -768,7 +768,7 @@
 	<string name="poi_fireplace">شومینه</string>
 	<string name="poi_seasonal">فصلی</string>
 	<string name="poi_water_characteristic">مشخصات آب</string>
-	<string name="poi_beach_surface_type">نوع سطح ساحل</string>
+	<string name="poi_beach_surface_type">سطح</string>
 	<string name="poi_diet">نوع خوراک</string>
 	<string name="poi_massage_type">نوع ماساژ</string>
 	<string name="poi_tents">چادر</string>
@@ -1018,4 +1018,74 @@
 
 	<string name="poi_start_date">تاریخ شروع</string>
 	<string name="poi_stars_2">۲ (استاندارد)</string>
+	<string name="poi_bench">نیمکت</string>
+	<string name="poi_fee_yes">بله</string>
+	<string name="poi_drinking_water_yes">بله</string>
+	<string name="poi_seasonal_yes">بله</string>
+	<string name="poi_seasonal_spring">چشمه</string>
+	<string name="poi_pump_yes">بله</string>
+
+	<string name="poi_fireplace_yes">بله</string>
+	<string name="poi_covered_yes">بله</string>
+	<string name="poi_covered_no">سرنپوشیده</string>
+
+	<string name="poi_tactile_paving_yes">بله</string>
+	<string name="poi_traffic_signals_sound_yes">بله</string>
+	<string name="poi_capacity_disabled_yes">بله</string>
+	<string name="poi_drive_in_yes">بله</string>
+	<string name="poi_drive_through_yes">بله</string>
+	<string name="poi_takeaway_filter_yes">بله</string>
+	<string name="poi_delivery_filter_yes">بله</string>
+	<string name="poi_outdoor_seating_filter_yes">بله</string>
+	<string name="poi_cocktails_yes">بله</string>
+
+	<string name="poi_self_service_yes">بله</string>
+	<string name="poi_automated_yes">بله</string>
+	<string name="poi_brushless_yes">بله</string>
+	<string name="poi_toilets_yes">بله</string>
+	<string name="poi_maxstay">محدودیت زمانی پارکینگ</string>
+
+	<string name="poi_vending_parking_tickets">بلیت‌های پارکینگ</string>
+	<string name="poi_bench_yes">بله</string>
+	<string name="poi_bench_no">بدون نیمکت</string>
+	<string name="poi_surface_unpaved">سطح: روسازی‌نشده</string>
+	<string name="poi_surface_paved">سطح: روسازی‌شده</string>
+	<string name="poi_surface_asphalt">سطح: آسفالت</string>
+	<string name="poi_surface_concrete">سطح: بتن</string>
+	<string name="poi_surface_sett">سطح: پاره‌سنگ</string>
+	<string name="poi_surface_cobblestone">سطح: قلوه‌سنگ</string>
+	<string name="poi_surface_paving_stones">سطح: سنگ‌فرش</string>
+	<string name="poi_surface_pebblestone">سطح: ریگ</string>
+	<string name="poi_surface_metal">سطح: فلز</string>
+	<string name="poi_surface_wood">سطح: چوب</string>
+	<string name="poi_surface_gravel">سطح: شن</string>
+	<string name="poi_surface_compacted">سطح: فشرده</string>
+	<string name="poi_surface_sand">سطح: ماسه</string>
+	<string name="poi_surface_grass">سطح: علف</string>
+	<string name="poi_surface_ground">سطح: زمین</string>
+	<string name="poi_surface_dirt">سطح: خاک</string>
+	<string name="poi_surface_mud">سطح: گِل</string>
+	<string name="poi_surface_ice">سطح: یخ</string>
+	<string name="poi_surface_salt">سطح: نمک</string>
+	<string name="poi_surface_snow">سطح: برف</string>
+
+	<string name="poi_backcountry_yes">بله</string>
+	<string name="poi_scout_yes">بله</string>
+	<string name="poi_washing_machine_yes">بله</string>
+	<string name="poi_shower_filter_yes">بله</string>
+	<string name="poi_caravans_yes">بله</string>
+	<string name="poi_power_supply_yes">بله</string>
+	<string name="poi_parking_surface">نوع: سطح</string>
+	<string name="poi_compressed_air_yes">بله</string>
+	<string name="poi_car_wash_yes">بله</string>
+
+	<string name="poi_vacuum_cleaner_yes">بله</string>
+	<string name="poi_home_visit_yes">بله</string>
+	<string name="poi_dispensing_yes">بله</string>
+	<string name="poi_fast_food_cafeteria">بله</string>
+
+	<string name="poi_parking_fee_yes">پارکینگ پولی: بله</string>
+	<string name="poi_parking_fee_no">پارکینگ پولی: خیر</string>
+	<string name="poi_parking_fee">هزینهٔ پارکینگ</string>
+
 	</resources>

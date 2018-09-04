@@ -5,7 +5,6 @@ import android.support.annotation.DrawableRes
 import android.support.annotation.StringRes
 import net.osmand.telegram.helpers.OsmandAidlHelper
 import net.osmand.telegram.helpers.TelegramHelper
-import net.osmand.telegram.ui.SortByBottomSheet
 import net.osmand.telegram.utils.AndroidUtils
 import net.osmand.telegram.utils.OsmandFormatter
 import net.osmand.telegram.utils.OsmandFormatter.MetricsConstants
@@ -252,10 +251,8 @@ class TelegramSettings(private val app: TelegramApplication) {
 		val locHistoryDef = LOC_HISTORY_VALUES_SEC[LOC_HISTORY_DEFAULT_INDEX]
 		locHistoryTime = prefs.getLong(LOC_HISTORY_TIME_KEY, locHistoryDef)
 
-		appToConnectPackage = prefs.getString(
-			APP_TO_CONNECT_PACKAGE_KEY, OsmandAidlHelper.OSMAND_PLUS_PACKAGE_NAME
-		)
-		
+		appToConnectPackage = prefs.getString(APP_TO_CONNECT_PACKAGE_KEY, "")
+
 		liveNowSortType = LiveNowSortType.valueOf(prefs.getString(LIVE_NOW_SORT_TYPE_KEY, LiveNowSortType.SORT_BY_GROUP.name))
 	}
 

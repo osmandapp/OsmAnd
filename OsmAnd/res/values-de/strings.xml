@@ -50,7 +50,7 @@
 	<string name="save_track_to_gpx_descrp">Während der Navigation wird automatisch ein GPX-Track im Track-Ordner gespeichert.</string>
 	<string name="save_track_interval_globally">Aufzeichnungsintervall</string>
 	<string name="save_track_interval">Erfassungsintervall während Navigation</string>
-	<string name="save_track_interval_descr">Intervall zwischen zwei erfassten Punkten während Navigation.</string>
+	<string name="save_track_interval_descr">Intervall für Steckenaufzeichnung zwischen zwei erfassten Punkten während Navigation.</string>
 	
 	<string name="rendering_value_browse_map_name">Karte ansehen</string>  
 	<string name="rendering_value_car_name">Auto</string>
@@ -598,7 +598,7 @@
 	<string name="renderer_load_sucess">Renderer geladen</string>
 	<string name="renderer_load_exception">Renderer konnte nicht geladen werden</string>
 	<string name="renderers">Vektor-Renderer</string>
-	<string name="renderers_descr">Wähle Anzeigemodus für Offline-Vektor-Karten.</string>
+	<string name="renderers_descr">Wähle Darstellung für Offline-Vektor-Karten.</string>
 	<string name="poi_context_menu_website">POI-Internetseite anzeigen</string>
 	<string name="poi_context_menu_call">POI-Telefon anzeigen</string>
 	<string name="website">Webseite</string>

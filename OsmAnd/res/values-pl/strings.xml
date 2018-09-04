@@ -837,7 +837,7 @@
     <string name="osmand_parking_hours">Godziny</string>
     <string name="osmand_parking_minutes">Minuty</string>
     <string name="osmand_parking_position_description_add_time">Zaparkowano samochód o</string>
-    <string name="use_compass_navigation_descr">Użyj kompasu, gdy nie zostanie wykryty inny nagłówek.</string>
+    <string name="use_compass_navigation_descr">Użyj kompasu, gdy nie zostanie wykryty kierunek.</string>
     <string name="use_compass_navigation">Użyj kompasu</string>
     <string name="route_updated_loc_found">Oczekiwanie na aktualne położenie w celu wyznaczenia trasy</string>
     <string name="continue_follow_previous_route_auto">Poprzednia trasa nie została ukończona. Kontynuować ją? (%1$s sekund)</string>

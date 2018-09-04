@@ -1,5 +1,7 @@
 package net.osmand.telegram.ui
 
+import android.graphics.ColorMatrix
+import android.graphics.ColorMatrixColorFilter
 import android.os.Bundle
 import android.support.design.widget.BottomSheetBehavior
 import android.support.v4.app.DialogFragment
@@ -8,11 +10,19 @@ import android.support.v4.app.FragmentManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import net.osmand.telegram.R
+import net.osmand.telegram.TelegramApplication
+import net.osmand.telegram.helpers.TelegramUiHelper
 import net.osmand.telegram.ui.views.BottomSheetDialog
 
 class DisableSharingBottomSheet : DialogFragment() {
+
+	private val app: TelegramApplication
+		get() = activity?.application as TelegramApplication
+
+	private val telegramHelper get() = app.telegramHelper
 
 	override fun onCreateDialog(savedInstanceState: Bundle?) = BottomSheetDialog(context!!)
 
@@ -36,6 +46,17 @@ class DisableSharingBottomSheet : DialogFragment() {
 
 				override fun onSlide(bottomSheet: View, slideOffset: Float) {}
 			})
+
+		mainView.findViewById<ImageView>(R.id.user_icon).apply {
+			colorFilter = ColorMatrixColorFilter(ColorMatrix().apply { setSaturation(0f) })
+			TelegramUiHelper.setupPhoto(
+				app,
+				this,
+				telegramHelper.getUserPhotoPath(telegramHelper.getCurrentUser()),
+				R.drawable.img_user_picture,
+				false
+			)
+		}
 
 		mainView.findViewById<TextView>(R.id.description).text =
 				getString(R.string.disable_all_sharing_desc, arguments?.getInt(CHATS_COUNT_KEY, -1))

@@ -3109,4 +3109,38 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
 \n</string>
     <string name="commiting_way">コミットする方法…</string>
     <string name="increase_search_radius_to">検索半径を%1$sに増やす</string>
+    <string name="send_search_query_description"><b>\"%1$s\"</b>とあなたの現在地を検索クエリとして送信します。<br/><br/>我々は検索アルゴリズムを改善するために検索データを必要としており個人情報の収集を目的とはしていません。<br/></string>
+    <string name="shared_string_world">世界規模</string>
+    <string name="point_deleted">%1$s地点を削除しました</string>
+    <string name="how_to_open_link">リンクを開くには？</string>
+    <string name="download_all">全てダウンロード</string>
+    <string name="shared_string_restart">アプリの再起動</string>
+    <string name="show_images">画像の表示</string>
+    <string name="purchase_cancelled_dialog_title">OsmAnd Liveのサブスクリプションを解除しました</string>
+    <string name="purchase_cancelled_dialog_descr">すべての機能を使用し続けるには、サブスクリプションを更新してください:</string>
+
+    <string name="maps_you_need">必要なマップ</string>
+    <string name="osmand_team">OsmAndチーム</string>
+    <string name="paid_app">有料アプリ</string>
+    <string name="paid_plugin">有料プラグイン</string>
+    <string name="travel_card_update_descr">Wikivoyageの最新データが利用可能になりました。更新して有効活用して下さい。</string>
+	<string name="update_is_available">更新が可能です</string>
+	<string name="download_file">ダウンロードファイル</string>
+    <string name="welcome_to_open_beta">オープンβにようこそ</string>
+    <string name="wikivoyage_travel_guide_descr">インターネットへ接続せずにOsmAnd上で地球上のあらゆる興味深いスポットのガイドを利用することができます。</string>
+    <string name="in_app_purchase">アプリ内購入</string>
+    <string name="in_app_purchase_desc">1回払い</string>
+    <string name="in_app_purchase_desc_ex">一度購入すれば、永久に利用できるようになります。</string>
+    <string name="purchase_unlim_title">購入 - %1$s</string>
+    <string name="purchase_subscription_title">サブスクライブ(定期利用契約) - %1$s</string>
+    <string name="wikivoyage_offline">Wikivoyageオフライン</string>
+    <string name="contour_lines_hillshade_maps">等高線と陰影地図</string>
+    <string name="unlock_all_features">OsmAndの全ての機能をアンロック</string>
+    <string name="purchase_dialog_title">プランの選択</string>
+    <string name="purchase_dialog_subtitle">適切な項目を選択してください:</string>
+    <string name="shared_string_do">行動</string>
+    <string name="select_travel_book">旅行ガイドの選択</string>
+    <string name="shared_string_travel_book">旅行ガイド</string>
+    <string name="online_webpage_warning">該当ページはオンラインでしか見ることができません。 ウェブブラウザで開きますか？</string>
+    <string name="shared_string_wikivoyage">Wikivoyage</string>
     </resources>
