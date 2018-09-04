@@ -95,11 +95,9 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 		sortByBtn = mainView.findViewById<TextView>(R.id.sort_button)
 		updateSortBtn()
 
-		mainView.findViewById<LinearLayout>(R.id.sort_by_container).apply {
-			setOnClickListener {
-				fragmentManager?.also { fm ->
-					SortByBottomSheet.showInstance(fm, this@LiveNowTabFragment, sortBy)
-				}
+		mainView.findViewById<LinearLayout>(R.id.sort_by_container).setOnClickListener {
+			fragmentManager?.also { fm ->
+				SortByBottomSheet.showInstance(fm, this@LiveNowTabFragment, sortBy)
 			}
 		}
 
