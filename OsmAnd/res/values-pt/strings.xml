@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources><string name="amenity_type_administrative">Administrativo</string>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="amenity_type_administrative">Administrativo</string>
   <string name="amenity_type_barrier">Barreira</string>
   <string name="amenity_type_education">Educação</string>
   <string name="amenity_type_emergency">Emergência</string>
@@ -2380,4 +2381,24 @@ Clique no widget de medição para ver mais ações.</string>
     <string name="back_to_search">Retroceder para pesquisa</string>
     <string name="confirmation_to_delete_history_items">Pretende remover os itens selecionados do histórico?</string>
     <string name="show_something_on_map">Mostrar %1$s no mapa</string>
+    <string name="poi_cannot_be_found">Nó ou caminho não pode ser encontrado.</string>
+    <string name="search_no_results_feedback">Não há resultados de pesquisa?
+\nDê-nos a sua opinião</string>
+    <string name="commiting_way">Cometendo caminho…</string>
+    <string name="increase_search_radius_to">Aumentar o raio de pesquisa para %1$s</string>
+    <string name="send_search_query_description">Enviaremos a sua consulta de pesquisa: <b>\"%1$ s\"</b>, bem como sua localização.<br/><br/> Nós não coletamos informações pessoais, nós só precisamos dados de pesquisa para melhorar o algoritmo de busca.<br/></string>
+    <string name="send_search_query">Enviar a consulta de pesquisa?</string>
+    <string name="shared_string_world">Mundo</string>
+    <string name="point_deleted">Ponto %1$s eliminado</string>
+    <string name="coord_input_edit_point">Editar o ponto</string>
+    <string name="coord_input_add_point">Adicionar ponto</string>
+    <string name="coord_input_save_as_track">Gravar como caminho</string>
+    <string name="coord_input_save_as_track_descr">Você adicionou %1$s pontos. Digite um nome de ficheiro e toque em \"Gravar\".</string>
+    <string name="error_notification_desc">Por favor envie um screenshot da notificação para support@osmand.net</string>
+    <string name="quick_action_edit_actions">Editar ações</string>
+    <string name="get_osmand_live">Obter OsmAnd Live para desbloquear todos as funcionalidades: atualizações de mapas diários com downloads ilimitados, todos os plugins pagos e gratuitos, wikipedia, Wikivoyage e muito mais.</string>
+    <string name="unirs_render_descr">A modificação do estilo padrão para aumentar o contraste de caminhos para pedestres e bicicletas. Usa codes do Mapnik legado.</string>
+    <string name="shared_string_bookmark">Marcador</string>
+    <string name="hide_full_description">Esconder descrição completa</string>
+    <string name="show_full_description">Mostrar a descrição completa</string>
     </resources>
