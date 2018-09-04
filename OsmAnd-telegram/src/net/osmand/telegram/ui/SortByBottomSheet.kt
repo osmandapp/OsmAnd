@@ -19,10 +19,6 @@ import net.osmand.telegram.TelegramApplication
 import net.osmand.telegram.ui.views.BottomSheetDialog
 
 
-const val SORT_BY_KEY = "sort_by_key"
-
-const val CURRENT_SORT_TYPE_KEY = "current_sort_type_key"
-
 class SortByBottomSheet : DialogFragment() {
 
 	override fun onCreateDialog(savedInstanceState: Bundle?) = BottomSheetDialog(context!!)
@@ -32,42 +28,11 @@ class SortByBottomSheet : DialogFragment() {
 		container: ViewGroup?,
 		savedInstanceState: Bundle?
 	): View? {
-		val mainView = inflater.inflate(R.layout.bottom_sheet_sort_by, container, false)
-		val intent = Intent()
 		val app = activity?.application as TelegramApplication
 		val currentSortType = arguments?.getString(CURRENT_SORT_TYPE_KEY)
-		val itemsCont = mainView.findViewById<ViewGroup>(R.id.items_container)
+		val mainView = inflater.inflate(R.layout.bottom_sheet_sort_by, container, false)
 
-		for (sortType in SortType.values()) {
-			inflater.inflate(R.layout.item_with_rb_and_btn, itemsCont, false).apply {
-				val isCurrentSortType = sortType.name == currentSortType
-				val image = if (isCurrentSortType) {
-					app.uiUtils.getActiveIcon(sortType.iconId)
-				} else {
-					app.uiUtils.getThemedIcon(sortType.iconId)
-				}
-				findViewById<ImageView>(R.id.icon).setImageDrawable(image)
-				findViewById<TextView>(R.id.title)?.apply {
-					text = getText(sortType.titleId)
-					setTextColor(
-						ContextCompat.getColor(
-							app,
-							if (isCurrentSortType) R.color.ctrl_active_light else R.color.primary_text_light
-						)
-					)
-				}
-				findViewById<View>(R.id.primary_btn_container).visibility = View.GONE
-				findViewById<View>(R.id.radio_button).visibility = View.GONE
-				setOnClickListener {
-					intent.putExtra(SORT_BY_KEY, sortType.name)
-					targetFragment?.also { target ->
-						target.onActivityResult(targetRequestCode, SORT_BY_REQUEST_CODE, intent)
-					}
-					dismiss()
-				}
-				itemsCont.addView(this)
-			}
-		}
+		mainView.findViewById<View>(R.id.scroll_view_container).setOnClickListener { dismiss() }
 
 		BottomSheetBehavior.from(mainView.findViewById<View>(R.id.scroll_view))
 			.setBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
@@ -81,6 +46,39 @@ class SortByBottomSheet : DialogFragment() {
 				override fun onSlide(bottomSheet: View, slideOffset: Float) {}
 			})
 
+
+		val itemsCont = mainView.findViewById<ViewGroup>(R.id.items_container)
+		for (sortType in SortType.values()) {
+			inflater.inflate(R.layout.item_with_rb_and_btn, itemsCont, false).apply {
+				val currentType = sortType.name == currentSortType
+				val image = if (currentType) {
+					app.uiUtils.getActiveIcon(sortType.iconId)
+				} else {
+					app.uiUtils.getThemedIcon(sortType.iconId)
+				}
+				findViewById<ImageView>(R.id.icon).setImageDrawable(image)
+				findViewById<TextView>(R.id.title)?.apply {
+					text = getText(sortType.titleId)
+					val color = ContextCompat.getColor(
+						app,
+						if (currentType) R.color.ctrl_active_light else R.color.primary_text_light
+					)
+					setTextColor(color)
+				}
+				findViewById<View>(R.id.primary_btn_container).visibility = View.GONE
+				findViewById<View>(R.id.radio_button).visibility = View.GONE
+				setOnClickListener {
+					val intent = Intent()
+					intent.putExtra(SORT_BY_KEY, sortType.name)
+					targetFragment?.also { target ->
+						target.onActivityResult(targetRequestCode, SORT_BY_REQUEST_CODE, intent)
+					}
+					dismiss()
+				}
+				itemsCont.addView(this)
+			}
+		}
+
 		mainView.findViewById<TextView>(R.id.secondary_btn).apply {
 			setText(R.string.shared_string_cancel)
 			setOnClickListener { dismiss() }
@@ -92,6 +90,9 @@ class SortByBottomSheet : DialogFragment() {
 	companion object {
 
 		const val SORT_BY_REQUEST_CODE = 3
+
+		const val SORT_BY_KEY = "sort_by_key"
+		const val CURRENT_SORT_TYPE_KEY = "current_sort_type_key"
 
 		private const val TAG = "SortByBottomSheet"
 
@@ -119,5 +120,7 @@ class SortByBottomSheet : DialogFragment() {
 		SORT_BY_GROUP(R.drawable.ic_action_sort_by_group, R.string.shared_string_group),
 		SORT_BY_NAME(R.drawable.ic_action_sort_by_name, R.string.shared_string_name),
 		SORT_BY_DISTANCE(R.drawable.ic_action_sort_by_distance, R.string.shared_string_distance);
+
+		fun isSortByGroup() = this == SORT_BY_GROUP
 	}
 }

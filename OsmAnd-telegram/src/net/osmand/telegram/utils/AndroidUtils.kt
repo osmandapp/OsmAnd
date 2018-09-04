@@ -139,7 +139,7 @@ object AndroidUtils {
 					"/${ctx.resources.getResourceEntryName(resID)}"
 		)
 	}
-	
+
 	fun isAppInstalled(ctx: Context, appPackage: String): Boolean {
 		if (appPackage.isEmpty()) {
 			return false
