@@ -245,9 +245,7 @@ class TelegramSettings(private val app: TelegramApplication) {
 		val locHistoryDef = LOC_HISTORY_VALUES_SEC[LOC_HISTORY_DEFAULT_INDEX]
 		locHistoryTime = prefs.getLong(LOC_HISTORY_TIME_KEY, locHistoryDef)
 
-		appToConnectPackage = prefs.getString(
-			APP_TO_CONNECT_PACKAGE_KEY, OsmandAidlHelper.OSMAND_PLUS_PACKAGE_NAME
-		)
+		appToConnectPackage = prefs.getString(APP_TO_CONNECT_PACKAGE_KEY, "")
 	}
 
 	private fun updatePrefs() {
