@@ -64,8 +64,8 @@
 
 					<ImageView
 						android:id="@+id/group_icon"
-						android:layout_width="@dimen/list_item_icon_small_size"
-						android:layout_height="@dimen/list_item_icon_small_size"
+						android:layout_width="@dimen/list_item_icon_size_small"
+						android:layout_height="@dimen/list_item_icon_size_small"
 						android:layout_gravity="bottom"
 						android:layout_marginEnd="@dimen/content_padding_small"
 						android:layout_marginRight="@dimen/content_padding_small"
@@ -114,7 +114,7 @@
 							android:layout_height="wrap_content"
 							android:maxLines="1"
 							android:textSize="@dimen/list_item_description_text_size"
-							app:firstBaselineToTopHeight="@dimen/list_item_icon_margin_right"
+							app:firstBaselineToTopHeight="@dimen/list_item_baseline_to_top_height_small"
 							app:typeface="@string/font_roboto_medium"
 							tools:text="213 m"
 							tools:textColor="@color/ctrl_active_light"/>
