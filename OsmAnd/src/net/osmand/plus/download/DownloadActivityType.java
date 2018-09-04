@@ -238,7 +238,7 @@ public class DownloadActivityType {
 		if(this == LIVE_UPDATES_FILE && fileName.length() > 16) {
 			// DATE_AND_EXT_STR_LEN = "_18_06_02.obf.gz".length()
 			String region = fileName.substring(0, fileName.length() - 16).toLowerCase();
-			url += "&region" + encode(region);
+			url += "&region=" + encode(region);
 		}
 		return url;
 	}
