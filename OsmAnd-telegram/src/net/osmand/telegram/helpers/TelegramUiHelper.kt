@@ -196,7 +196,12 @@ object TelegramUiHelper {
 			chatTitle = chat.title
 			name = TelegramUiHelper.getUserName(user)
 			latLon = LatLon(content.location.latitude, content.location.longitude)
-			photoPath = chat.photo?.small?.local?.path
+			if (helper.isGroup(chat)) {
+				photoPath = helper.getUserPhotoPath(user)
+				groupPhotoPath = chat.photo?.small?.local?.path
+			} else {
+				photoPath = chat.photo?.small?.local?.path
+			}
 			grayscalePhotoPath = helper.getUserGreyPhotoPath(user)
 			placeholderId = R.drawable.img_user_picture
 			userId = message.senderUserId
@@ -236,6 +241,8 @@ object TelegramUiHelper {
 
 	class ChatItem : ListItem() {
 
+		var groupPhotoPath: String? = null
+			internal set
 		var privateChat: Boolean = false
 			internal set
 		var chatWithBot: Boolean = false

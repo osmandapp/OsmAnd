@@ -38,6 +38,8 @@ import org.drinkless.td.libcore.telegram.TdApi
 private const val CHAT_VIEW_TYPE = 0
 private const val LOCATION_ITEM_VIEW_TYPE = 1
 
+private const val SORT_TYPE = "sort_type"
+
 class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessagesListener,
 	FullInfoUpdatesListener, TelegramLocationListener, TelegramCompassListener {
 
@@ -66,6 +68,10 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 		container: ViewGroup?,
 		savedInstanceState: Bundle?
 	): View? {
+		savedInstanceState?.getInt(SORT_TYPE)?.also {
+			sortBy = it
+			sortByGroup = sortBy == SORT_BY_GROUP
+		}
 		val mainView = inflater.inflate(R.layout.fragment_live_now_tab, container, false)
 		val appBarLayout = mainView.findViewById<View>(R.id.app_bar_layout)
 		AndroidUtils.addStatusBarPadding19v(context!!, appBarLayout)
@@ -146,6 +152,11 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 				}
 			}
 		}
+	}
+
+	override fun onSaveInstanceState(outState: Bundle) {
+		super.onSaveInstanceState(outState)
+		outState.putInt(SORT_TYPE, sortBy)
 	}
 
 	override fun onTelegramStatusChanged(
@@ -288,6 +299,8 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 						res.addAll(convertToListItems(chat, messages))
 					} else if (messages.firstOrNull { it.viaBotUserId != 0 } != null) {
 						res.addAll(convertToListItems(chat, messages, true))
+					} else if(!sortByGroup){
+						res.add(TelegramUiHelper.chatToChatItem(telegramHelper, chat, messages))
 					}
 				}
 			}
@@ -441,7 +454,7 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 			val openOnMapView = holder.getOpenOnMapClickView()
 
 			val staleLocation = System.currentTimeMillis() / 1000 - item.lastUpdated > settings.staleLocTime
-			if (staleLocation) {
+			if (staleLocation && item.userId != 0) {
 				TelegramUiHelper.setupPhoto(app, holder.icon, item.grayscalePhotoPath, item.placeholderId, false)
 			} else {
 				TelegramUiHelper.setupPhoto(app, holder.icon, item.photoPath, R.drawable.img_user_picture_active, false)
@@ -483,7 +496,7 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 				if (groupDescrRowVisible) {
 					holder.groupDescrContainer?.visibility = View.VISIBLE
 					holder.groupTitle?.text = item.getVisibleName()
-					TelegramUiHelper.setupPhoto(app, holder.groupImage, item.photoPath, item.placeholderId, false)
+					TelegramUiHelper.setupPhoto(app, holder.groupImage, item.groupPhotoPath, item.placeholderId, false)
 				} else {
 					holder.groupDescrContainer?.visibility = View.GONE
 				}

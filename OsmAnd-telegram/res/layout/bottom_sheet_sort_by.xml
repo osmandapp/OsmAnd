@@ -32,7 +32,7 @@
 					android:paddingLeft="@dimen/content_padding_standard"
 					android:paddingRight="@dimen/content_padding_standard"
 					android:text="@string/shared_string_sort_by"
-					android:textColor="?android:textColorPrimary"
+					android:textColor="?android:textColorSecondary"
 					android:textSize="@dimen/list_item_title_text_size"
 					app:firstBaselineToTopHeight="28sp"
 					app:typeface="@string/font_roboto_medium" />

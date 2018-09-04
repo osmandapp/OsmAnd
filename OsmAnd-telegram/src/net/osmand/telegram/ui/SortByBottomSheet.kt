@@ -1,7 +1,12 @@
 package net.osmand.telegram.ui
 
+import android.content.Context
 import android.content.Intent
+import android.content.res.ColorStateList
+import android.graphics.drawable.Drawable
+import android.os.Build
 import android.os.Bundle
+import android.support.annotation.DrawableRes
 import android.support.design.widget.BottomSheetBehavior
 import android.support.v4.app.DialogFragment
 import android.support.v4.app.Fragment
@@ -14,6 +19,7 @@ import android.widget.TextView
 import net.osmand.telegram.R
 import net.osmand.telegram.TelegramApplication
 import net.osmand.telegram.ui.views.BottomSheetDialog
+import net.osmand.telegram.utils.AndroidUtils
 
 
 const val SORT_BY_GROUP = 0
@@ -37,13 +43,11 @@ class SortByBottomSheet : DialogFragment() {
 		val itemsCont = mainView.findViewById<ViewGroup>(R.id.items_container)
 
 		inflater.inflate(R.layout.item_with_rb_and_btn, itemsCont, false).apply {
-			findViewById<ImageView>(R.id.icon).setImageDrawable(
-				app.uiUtils.getIcon(
-					R.drawable.ic_action_sort_by_distance,
-					R.color.ctrl_active_light
-				)
-			)
-			findViewById<TextView>(R.id.title).text = getText(R.string.shared_string_distance)
+			findViewById<ImageView>(R.id.icon).setImageDrawable(getSelectedIcon(app, R.drawable.ic_action_sort_by_distance))
+			findViewById<TextView>(R.id.title).apply {
+				text = getText(R.string.shared_string_distance)
+				setTextColor(getTextColorStateList(context))
+			}
 			findViewById<View>(R.id.primary_btn_container).visibility = View.GONE
 			findViewById<View>(R.id.radio_button).visibility = View.GONE
 			setOnClickListener {
@@ -57,13 +61,11 @@ class SortByBottomSheet : DialogFragment() {
 		}
 
 		inflater.inflate(R.layout.item_with_rb_and_btn, itemsCont, false).apply {
-			findViewById<ImageView>(R.id.icon).setImageDrawable(
-				app.uiUtils.getIcon(
-					R.drawable.ic_action_sort_by_name,
-					R.color.ctrl_active_light
-				)
-			)
-			findViewById<TextView>(R.id.title).text = getText(R.string.shared_string_name)
+			findViewById<ImageView>(R.id.icon).setImageDrawable(getSelectedIcon(app, R.drawable.ic_action_sort_by_name))
+			findViewById<TextView>(R.id.title).apply {
+				text = getText(R.string.shared_string_name)
+				setTextColor(getTextColorStateList(context))
+			}
 			findViewById<View>(R.id.primary_btn_container).visibility = View.GONE
 			findViewById<View>(R.id.radio_button).visibility = View.GONE
 			setOnClickListener {
@@ -77,13 +79,11 @@ class SortByBottomSheet : DialogFragment() {
 		}
 
 		inflater.inflate(R.layout.item_with_rb_and_btn, itemsCont, false).apply {
-			findViewById<ImageView>(R.id.icon).setImageDrawable(
-				app.uiUtils.getIcon(
-					R.drawable.ic_action_sort_by_group,
-					R.color.ctrl_active_light
-				)
-			)
-			findViewById<TextView>(R.id.title).text = getText(R.string.shared_string_group)
+			findViewById<ImageView>(R.id.icon).setImageDrawable(getSelectedIcon(app, R.drawable.ic_action_sort_by_group))
+			findViewById<TextView>(R.id.title).apply {
+				text = getText(R.string.shared_string_group)
+				setTextColor(getTextColorStateList(context))
+			}
 			findViewById<View>(R.id.primary_btn_container).visibility = View.GONE
 			findViewById<View>(R.id.radio_button).visibility = View.GONE
 			setOnClickListener {
@@ -114,6 +114,25 @@ class SortByBottomSheet : DialogFragment() {
 		}
 
 		return mainView
+	}
+
+	private fun getTextColorStateList(context: Context): ColorStateList {
+		return AndroidUtils.createPressedColorStateList(
+			context,
+			R.color.primary_text_light,
+			R.color.ctrl_active_light
+		)
+	}
+
+	private fun getSelectedIcon(app: TelegramApplication, @DrawableRes id: Int): Drawable? {
+		val normal = app.uiUtils.getThemedIcon(id)
+		if (Build.VERSION.SDK_INT >= 21) {
+			val active = app.uiUtils.getActiveIcon(id)
+			if (normal != null && active != null) {
+				return AndroidUtils.createPressedStateListDrawable(normal, active)
+			}
+		}
+		return normal
 	}
 
 	companion object {
