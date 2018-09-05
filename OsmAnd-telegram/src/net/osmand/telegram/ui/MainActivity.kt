@@ -269,6 +269,9 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 
 	override fun onReceiveChatLocationMessages(chatId: Long, vararg messages: TdApi.Message) {
 		addGrayPhoto(chatId)
+		if (!app.showLocationHelper.showingLocation && settings.hasAnyChatToShowOnMap()) {
+			app.showLocationHelper.startShowingLocation()
+		}
 	}
 
 	override fun onDeleteChatLocationMessages(chatId: Long, messages: List<TdApi.Message>) {}
@@ -294,15 +297,14 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 		telegramHelper.stopSendingLiveLocationMessages()
 	}
 
-	fun stopShowingChatsOnMap() {
+	fun stopShowingChatsOnMap(forceStop: Boolean) {
 		settings.getShowOnMapChats().forEach { app.showLocationHelper.hideChatMessages(it) }
-		settings.clearShowOnMapChats()
-		app.showLocationHelper.stopShowingLocation()
+		app.showLocationHelper.stopShowingLocation(forceStop)
 	}
 
 	private fun closeApp() {
 		stopSharingLocation()
-		stopShowingChatsOnMap()
+		stopShowingChatsOnMap(true)
 		finish()
 		android.os.Process.killProcess(android.os.Process.myPid())
 	}

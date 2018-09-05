@@ -34,7 +34,7 @@ private const val LOC_HISTORY_DEFAULT_INDEX = 2
 private const val SETTINGS_NAME = "osmand_telegram_settings"
 
 private const val SHARE_LOCATION_CHATS_KEY = "share_location_chats"
-private const val SHOW_ON_MAP_CHATS_KEY = "show_on_map_chats"
+private const val HIDDEN_ON_MAP_CHATS_KEY = "hidden_on_map_chats"
 
 private const val METRICS_CONSTANTS_KEY = "metrics_constants"
 private const val SPEED_CONSTANTS_KEY = "speed_constants"
@@ -57,7 +57,7 @@ class TelegramSettings(private val app: TelegramApplication) {
 	private var chatShareLocStartSec = mutableMapOf<Long, Long>()
 
 	private var shareLocationChats: Set<Long> = emptySet()
-	private var showOnMapChats: Set<Long> = emptySet()
+	private var hiddenOnMapChats: Set<Long> = emptySet()
 
 	var metricsConstants = MetricsConstants.KILOMETERS_AND_METERS
 	var speedConstants = SpeedConstants.KILOMETERS_PER_HOUR
@@ -82,18 +82,18 @@ class TelegramSettings(private val app: TelegramApplication) {
 
 	fun isSharingLocationToChat(chatId: Long) = shareLocationChats.contains(chatId)
 
-	fun hasAnyChatToShowOnMap() = showOnMapChats.isNotEmpty()
+	fun hasAnyChatToShowOnMap() = !hiddenOnMapChats.containsAll(getLiveNowChats())
 
-	fun isShowingChatOnMap(chatId: Long) = showOnMapChats.contains(chatId)
+	fun isShowingChatOnMap(chatId: Long) = !hiddenOnMapChats.contains(chatId)
 
 	fun removeNonexistingChats(presentChatIds: List<Long>) {
 		val shareLocationChats = shareLocationChats.toMutableList()
 		shareLocationChats.intersect(presentChatIds)
 		this.shareLocationChats = shareLocationChats.toHashSet()
 
-		val showOnMapChats = showOnMapChats.toMutableList()
-		showOnMapChats.intersect(presentChatIds)
-		this.showOnMapChats = showOnMapChats.toHashSet()
+		val hiddenChats = hiddenOnMapChats.toMutableList()
+		hiddenChats.intersect(presentChatIds)
+		hiddenOnMapChats = hiddenChats.toHashSet()
 
 		chatLivePeriods = chatLivePeriods.filter { (key, _) ->
 			presentChatIds.contains(key)
@@ -157,25 +157,21 @@ class TelegramSettings(private val app: TelegramApplication) {
 		this.chatShareLocStartSec.clear()
 	}
 
-	fun clearShowOnMapChats() {
-		showOnMapChats = emptySet()
-	}
-
 	fun showChatOnMap(chatId: Long, show: Boolean) {
-		val showOnMapChats = showOnMapChats.toMutableList()
+		val hiddenChats = hiddenOnMapChats.toMutableList()
 		if (show) {
-			showOnMapChats.add(chatId)
+			hiddenChats.remove(chatId)
 		} else {
-			showOnMapChats.remove(chatId)
+			hiddenChats.add(chatId)
 		}
-		this.showOnMapChats = showOnMapChats.toHashSet()
+		hiddenOnMapChats = hiddenChats.toHashSet()
 	}
 
 	fun getShareLocationChats() = ArrayList(shareLocationChats)
 
-	fun getShowOnMapChats() = ArrayList(showOnMapChats)
+	fun getShowOnMapChats() = getLiveNowChats().minus(hiddenOnMapChats)
 
-	fun getShowOnMapChatsCount() = showOnMapChats.size
+	fun getShowOnMapChatsCount() = getShowOnMapChats().size
 
 	fun clear() {
 		stopSharingLocationToChats()
@@ -199,12 +195,12 @@ class TelegramSettings(private val app: TelegramApplication) {
 		}
 		edit.putStringSet(SHARE_LOCATION_CHATS_KEY, shareLocationChatsSet)
 
-		val showOnMapChatsSet = mutableSetOf<String>()
-		val showOnMapChats = ArrayList(showOnMapChats)
-		for (chatId in showOnMapChats) {
-			showOnMapChatsSet.add(chatId.toString())
+		val hiddenChatsSet = mutableSetOf<String>()
+		val hiddenChats = ArrayList(hiddenOnMapChats)
+		for (chatId in hiddenChats) {
+			hiddenChatsSet.add(chatId.toString())
 		}
-		edit.putStringSet(SHOW_ON_MAP_CHATS_KEY, showOnMapChatsSet)
+		edit.putStringSet(HIDDEN_ON_MAP_CHATS_KEY, hiddenChatsSet)
 
 		edit.putString(METRICS_CONSTANTS_KEY, metricsConstants.name)
 		edit.putString(SPEED_CONSTANTS_KEY, speedConstants.name)
@@ -230,12 +226,12 @@ class TelegramSettings(private val app: TelegramApplication) {
 		}
 		this.shareLocationChats = shareLocationChats
 
-		val showOnMapChats = mutableSetOf<Long>()
-		val showOnMapChatsSet = prefs.getStringSet(SHOW_ON_MAP_CHATS_KEY, mutableSetOf())
-		for (chatId in showOnMapChatsSet) {
-			showOnMapChats.add(chatId.toLong())
+		val hiddenChats = mutableSetOf<Long>()
+		val hiddenChatsSet = prefs.getStringSet(HIDDEN_ON_MAP_CHATS_KEY, mutableSetOf())
+		for (chatId in hiddenChatsSet) {
+			hiddenChats.add(chatId.toLong())
 		}
-		this.showOnMapChats = showOnMapChats
+		hiddenOnMapChats = hiddenChats
 
 		metricsConstants = MetricsConstants.valueOf(
 			prefs.getString(METRICS_CONSTANTS_KEY, MetricsConstants.KILOMETERS_AND_METERS.name)
@@ -258,6 +254,8 @@ class TelegramSettings(private val app: TelegramApplication) {
 		)
 	}
 
+	private fun getLiveNowChats() = app.telegramHelper.getMessagesByChatIds(locHistoryTime).keys
+
 	private fun updatePrefs() {
 		val prefs = app.getSharedPreferences(SETTINGS_NAME, Context.MODE_PRIVATE)
 		val idsInUse = prefs.getBoolean(TITLES_REPLACED_WITH_IDS, false)
@@ -265,7 +263,6 @@ class TelegramSettings(private val app: TelegramApplication) {
 			val edit = prefs.edit()
 
 			edit.putStringSet(SHARE_LOCATION_CHATS_KEY, emptySet())
-			edit.putStringSet(SHOW_ON_MAP_CHATS_KEY, emptySet())
 			edit.putBoolean(TITLES_REPLACED_WITH_IDS, true)
 
 			edit.apply()
