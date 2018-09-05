@@ -214,7 +214,7 @@ class TelegramSettings(private val app: TelegramApplication) {
 		edit.putLong(LOC_HISTORY_TIME_KEY, locHistoryTime)
 
 		edit.putString(APP_TO_CONNECT_PACKAGE_KEY, appToConnectPackage)
-		
+
 		edit.putString(LIVE_NOW_SORT_TYPE_KEY, liveNowSortType.name)
 
 		edit.apply()
@@ -253,7 +253,9 @@ class TelegramSettings(private val app: TelegramApplication) {
 
 		appToConnectPackage = prefs.getString(APP_TO_CONNECT_PACKAGE_KEY, "")
 
-		liveNowSortType = LiveNowSortType.valueOf(prefs.getString(LIVE_NOW_SORT_TYPE_KEY, LiveNowSortType.SORT_BY_GROUP.name))
+		liveNowSortType = LiveNowSortType.valueOf(
+			prefs.getString(LIVE_NOW_SORT_TYPE_KEY, LiveNowSortType.SORT_BY_GROUP.name)
+		)
 	}
 
 	private fun updatePrefs() {
@@ -378,7 +380,11 @@ class TelegramSettings(private val app: TelegramApplication) {
 		}
 	}
 
-	enum class LiveNowSortType(@DrawableRes val iconId: Int, @StringRes val titleId: Int, @StringRes val shortTitleId: Int) {
+	enum class LiveNowSortType(
+		@DrawableRes val iconId: Int,
+		@StringRes val titleId: Int,
+		@StringRes val shortTitleId: Int
+	) {
 		SORT_BY_GROUP(
 			R.drawable.ic_action_sort_by_group,
 			R.string.shared_string_group,
