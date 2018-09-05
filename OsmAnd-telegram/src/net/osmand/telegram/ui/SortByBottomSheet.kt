@@ -64,7 +64,7 @@ class SortByBottomSheet : DialogFragment() {
 				setOnClickListener {
 					app.settings.liveNowSortType = sortType
 					targetFragment?.also { target ->
-						target.onActivityResult(targetRequestCode, SORT_BY_REQUEST_CODE, null)
+						target.onActivityResult(targetRequestCode, SORTING_CHANGED_REQUEST_CODE, null)
 					}
 					dismiss()
 				}
@@ -82,7 +82,7 @@ class SortByBottomSheet : DialogFragment() {
 
 	companion object {
 
-		const val SORT_BY_REQUEST_CODE = 3
+		const val SORTING_CHANGED_REQUEST_CODE = 3
 
 		private const val TAG = "SortByBottomSheet"
 
@@ -92,7 +92,7 @@ class SortByBottomSheet : DialogFragment() {
 		): Boolean {
 			return try {
 				SortByBottomSheet().apply {
-					setTargetFragment(target, SORT_BY_REQUEST_CODE)
+					setTargetFragment(target, SORTING_CHANGED_REQUEST_CODE)
 					show(fm, TAG)
 				}
 				true

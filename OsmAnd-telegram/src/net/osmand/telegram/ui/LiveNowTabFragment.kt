@@ -128,7 +128,7 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 		super.onActivityResult(requestCode, resultCode, data)
 		when (requestCode) {
 			ChooseOsmAndBottomSheet.OSMAND_CHOSEN_REQUEST_CODE -> updateOpenOsmAndIcon()
-			SortByBottomSheet.SORT_BY_REQUEST_CODE -> {
+			SortByBottomSheet.SORTING_CHANGED_REQUEST_CODE -> {
 				updateSortBtn()
 				updateList()
 			}
@@ -279,9 +279,8 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 				}
 			}
 		}
-		sortAdapterItems(res)
 
-		adapter.items = res
+		adapter.items = sortAdapterItems(res)
 	}
 
 	private fun sortAdapterItems(list: MutableList<ListItem>): MutableList<ListItem> {
@@ -413,14 +412,13 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 		override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
 			val lastItem = position == itemCount - 1
 			val item = items[position]
+			val sortByGroup = settings.liveNowSortType.isSortByGroup()
 			val canBeOpenedOnMap = item.canBeOpenedOnMap()
-					&& (settings.liveNowSortType.isSortByGroup() && !telegramHelper.isBot(item.userId) 
-					|| !settings.liveNowSortType.isSortByGroup())
 			val openOnMapView = holder.getOpenOnMapClickView()
 
 			val staleLocation = System.currentTimeMillis() / 1000 - item.lastUpdated > settings.staleLocTime
 			if (staleLocation) {
-				val photoPath = if (settings.liveNowSortType.isSortByGroup() && item is ChatItem && !item.privateChat) {
+				val photoPath = if (sortByGroup && item is ChatItem && !item.privateChat) {
 						item.photoPath
 					} else {
 						item.grayscalePhotoPath
@@ -430,7 +428,7 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 				TelegramUiHelper.setupPhoto(app, holder.icon, item.photoPath, R.drawable.img_user_picture_active, false)
 			}
 
-			holder.title?.text = if (settings.liveNowSortType.isSortByGroup()) item.getVisibleName() else item.name
+			holder.title?.text = if (sortByGroup) item.getVisibleName() else item.name
 			openOnMapView?.isEnabled = canBeOpenedOnMap
 			if (canBeOpenedOnMap) {
 				openOnMapView?.setOnClickListener {
@@ -458,10 +456,10 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 			holder.bottomShadow?.visibility = if (lastItem) View.VISIBLE else View.GONE
 
 			if (item is ChatItem && holder is ChatViewHolder) {
-				val nextIsLocation = !lastItem && (items[position + 1] is LocationItem || !settings.liveNowSortType.isSortByGroup())
+				val nextIsLocation = !lastItem && (items[position + 1] is LocationItem || !sortByGroup)
 				val chatId = item.chatId
 				val stateTextInd = if (settings.isShowingChatOnMap(chatId)) 1 else 0
-				val groupDescrRowVisible = !settings.liveNowSortType.isSortByGroup()
+				val groupDescrRowVisible = !sortByGroup
 						&& (!item.privateChat || item.chatWithBot)
 
 				if (groupDescrRowVisible) {
@@ -477,7 +475,7 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 				holder.showOnMapRow?.setOnClickListener { showPopupMenu(holder, chatId) }
 				holder.showOnMapState?.text = menuList[stateTextInd]
 				holder.bottomDivider?.visibility = if (nextIsLocation) View.VISIBLE else View.GONE
-				holder.topDivider?.visibility = if (!settings.liveNowSortType.isSortByGroup() && position != 0) View.GONE else View.VISIBLE
+				holder.topDivider?.visibility = if (!sortByGroup && position != 0) View.GONE else View.VISIBLE
 			} else if (item is LocationItem && holder is ContactViewHolder) {
 				holder.description?.text =  OsmandFormatter.getListItemLiveTimeDescr(app, item.lastUpdated, lastResponseStr)
 			}
