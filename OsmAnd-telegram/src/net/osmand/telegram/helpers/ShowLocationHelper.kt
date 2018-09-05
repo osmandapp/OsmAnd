@@ -234,7 +234,7 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 
 	private fun generatePhotoUri(photoPath: String?, stale: Boolean) =
 		if (TextUtils.isEmpty(photoPath)) {
-			val id = if (stale) R.drawable.img_user_picture else R.drawable.img_user_picture_active
+			val id = if (stale) R.drawable.img_user_placeholder_stale else R.drawable.img_user_placeholder_active
 			AndroidUtils.resourceToUri(app, id)
 		} else {
 			AndroidUtils.getUriForFile(app, File(photoPath))
