@@ -76,11 +76,11 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 			val chatId = message.chatId
 			val chatTitle = telegramHelper.getChat(message.chatId)?.title
 			val content = message.content
+			val date = telegramHelper.getLastUpdatedTime(message)
+			val stale = System.currentTimeMillis() / 1000 - date > app.settings.staleLocTime
 			if (chatTitle != null && content is TdApi.MessageLocation) {
 				var userName = ""
 				var photoPath: String? = null
-				val date = telegramHelper.getLastUpdatedTime(message)
-				val stale = System.currentTimeMillis() / 1000 - date > app.settings.staleLocTime
 				val user = telegramHelper.getUser(message.senderUserId)
 				if (user != null) {
 					userName = "${user.firstName} ${user.lastName}".trim()
@@ -113,10 +113,10 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 				setupMapLayer()
 				if (update) {
 					osmandAidlHelper.updateMapPoint(MAP_LAYER_ID, "${chatId}_$name", name, name,
-						chatTitle, Color.WHITE, ALatLon(content.lat, content.lon), null, null)
+						chatTitle, Color.WHITE, ALatLon(content.lat, content.lon), null, generatePhotoParams(null, stale))
 				} else {
 					osmandAidlHelper.addMapPoint(MAP_LAYER_ID, "${chatId}_$name", name, name,
-						chatTitle, Color.WHITE, ALatLon(content.lat, content.lon), null, null)
+						chatTitle, Color.WHITE, ALatLon(content.lat, content.lon), null, generatePhotoParams(null, stale))
 				}
 			}
 		}

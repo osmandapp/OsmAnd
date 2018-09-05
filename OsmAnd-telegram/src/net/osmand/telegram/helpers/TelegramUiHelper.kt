@@ -48,6 +48,7 @@ object TelegramUiHelper {
 		val res = ChatItem().apply {
 			chatId = chat.id
 			chatTitle = chat.title
+			name = chat.title
 			photoPath = chat.photo?.small?.local?.path
 			placeholderId = R.drawable.img_user_picture
 		}
@@ -109,6 +110,19 @@ object TelegramUiHelper {
 			else -> null
 		}
 	}
+	
+	fun messageToChatItem(
+		helper: TelegramHelper,
+		chat: TdApi.Chat,
+		message: TdApi.Message
+	): ChatItem? {
+		val content = message.content
+		return when (content) {
+			is MessageOsmAndBotLocation -> botMessageToChatItem(helper, chat, content)
+			is TdApi.MessageLocation -> locationMessageToChatItem(helper, chat, message)
+			else -> null
+		}
+	}
 
 	private fun botMessageToLocationItem(
 		chat: TdApi.Chat,
@@ -148,11 +162,62 @@ object TelegramUiHelper {
 		}
 	}
 
+	private fun botMessageToChatItem(
+		helper: TelegramHelper,
+		chat: TdApi.Chat,
+		content: MessageOsmAndBotLocation
+	): ChatItem? {
+		return if (content.isValid()) {
+			ChatItem().apply {
+				chatId = chat.id
+				chatTitle = chat.title
+				name = content.name
+				latLon = LatLon(content.lat, content.lon)
+				photoPath = chat.photo?.small?.local?.path
+				placeholderId = R.drawable.img_user_picture
+				privateChat = helper.isPrivateChat(chat) || helper.isSecretChat(chat)
+				lastUpdated = content.lastUpdated
+				chatWithBot = true
+			}
+		} else {
+			null
+		}
+	}
+
+	private fun locationMessageToChatItem(
+		helper: TelegramHelper,
+		chat: TdApi.Chat,
+		message: TdApi.Message
+	): ChatItem? {
+		val user = helper.getUser(message.senderUserId) ?: return null
+		val content = message.content as TdApi.MessageLocation
+		return ChatItem().apply {
+			chatId = chat.id
+			chatTitle = chat.title
+			name = TelegramUiHelper.getUserName(user)
+			latLon = LatLon(content.location.latitude, content.location.longitude)
+			if (helper.isGroup(chat)) {
+				photoPath = helper.getUserPhotoPath(user)
+				groupPhotoPath = chat.photo?.small?.local?.path
+			} else {
+				photoPath = chat.photo?.small?.local?.path
+			}
+			grayscalePhotoPath = helper.getUserGreyPhotoPath(user)
+			placeholderId = R.drawable.img_user_picture
+			userId = message.senderUserId
+			privateChat = helper.isPrivateChat(chat) || helper.isSecretChat(chat)
+			chatWithBot = helper.isBot(userId)
+			lastUpdated = helper.getLastUpdatedTime(message)
+		}
+	}
+
 	abstract class ListItem {
 
 		var chatId: Long = 0
 			internal set
 		var chatTitle: String = ""
+			internal set
+		var name: String = ""
 			internal set
 		var latLon: LatLon? = null
 			internal set
@@ -176,6 +241,8 @@ object TelegramUiHelper {
 
 	class ChatItem : ListItem() {
 
+		var groupPhotoPath: String? = null
+			internal set
 		var privateChat: Boolean = false
 			internal set
 		var chatWithBot: Boolean = false
@@ -185,7 +252,7 @@ object TelegramUiHelper {
 		var liveMembersCount: Int = 0
 			internal set
 
-		override fun canBeOpenedOnMap() = latLon != null && !chatWithBot
+		override fun canBeOpenedOnMap() = latLon != null
 
 		override fun getMapPointId() = "${chatId}_$userId"
 
@@ -193,9 +260,6 @@ object TelegramUiHelper {
 	}
 
 	class LocationItem : ListItem() {
-
-		var name: String = ""
-			internal set
 
 		override fun canBeOpenedOnMap() = latLon != null
 
