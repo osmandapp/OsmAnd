@@ -2386,7 +2386,7 @@ Clique no widget de medição para ver mais ações.</string>
 \nDê-nos a sua opinião</string>
     <string name="commiting_way">Cometendo caminho…</string>
     <string name="increase_search_radius_to">Aumentar o raio de pesquisa para %1$s</string>
-    <string name="send_search_query_description">Enviaremos a sua consulta de pesquisa: <b>\"%1$ s\"</b>, bem como sua localização.<br/><br/> Nós não coletamos informações pessoais, nós só precisamos dados de pesquisa para melhorar o algoritmo de busca.<br/></string>
+    <string name="send_search_query_description">Enviaremos a sua consulta de pesquisa: <b>\"%1$s\"</b>, bem como sua localização.<br/><br/> Nós não coletamos informações pessoais, nós só precisamos dados de pesquisa para melhorar o algoritmo de busca.<br/></string>
     <string name="send_search_query">Enviar a consulta de pesquisa?</string>
     <string name="shared_string_world">Mundo</string>
     <string name="point_deleted">Ponto %1$s eliminado</string>
