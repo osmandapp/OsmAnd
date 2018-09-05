@@ -336,10 +336,8 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 		val res = mutableListOf<ChatItem>()
 		messages.forEach { message ->
 			if (!addOnlyViaBotMessages || message.viaBotUserId != 0) {
-				TelegramUiHelper.messageToChatItem(telegramHelper, chat, message).also {
-					if (it != null) {
-						res.add(it)
-					}
+				TelegramUiHelper.messageToChatItem(telegramHelper, chat, message)?.also {
+					res.add(it)
 				}
 			}
 		}
