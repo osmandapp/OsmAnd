@@ -3174,4 +3174,14 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="first_intermediate_dest_description">最初の中間経由地点として追加</string>
     <string name="show_closed_notes">閉じたメモの表示</string>
     <string name="switch_osm_notes_visibility_desc">マップ上にあるOSMメモの表示/非表示を切り替えます。</string>
+    <string name="gpx_file_desc">GPX - JOSMまたは他のOSMエディタへ適したエクスポート形式です。</string>
+    <string name="osc_file_desc">OSC - OpenStreetMapの利用に適したエクスポート形式です。</string>
+    <string name="shared_string_gpx_file">GPXファイル</string>
+    <string name="osc_file">OSCファイル</string>
+    <string name="choose_file_type">タイプを選択</string>
+    <string name="osm_edits_export_desc">OSMメモ、POI、またはその両方をエクスポートする際のタイプを選択します。</string>
+    <string name="all_data">全てのデータ</string>
+    <string name="osm_notes">OSMメモ</string>
+    <string name="will_open_tomorrow_at">明日開く</string>
+    <string name="shared_string_without_name">名無し</string>
     </resources>
