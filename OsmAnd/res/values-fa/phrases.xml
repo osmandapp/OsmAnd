@@ -715,7 +715,7 @@
 	<string name="poi_delivery">تحویل</string>
 	<string name="poi_drive_in">رانندگی در</string>
 	<string name="poi_drive_through">‎روش رانندگی</string>
-	<string name="poi_takeaway">‌بیرونی</string>
+	<string name="poi_takeaway">‌بیرون‌بر</string>
 	<string name="poi_cocktails">کوکتل</string>
 	<string name="poi_microbrewery">میکروبیچر</string>
 	<string name="poi_beauty_salon_service">آرایشگاه</string>
@@ -1087,5 +1087,9 @@
 	<string name="poi_parking_fee_yes">پارکینگ پولی: بله</string>
 	<string name="poi_parking_fee_no">پارکینگ پولی: خیر</string>
 	<string name="poi_parking_fee">هزینهٔ پارکینگ</string>
+
+	<string name="poi_takeaway_yes">بیرون‌بر دارد</string>
+	<string name="poi_takeaway_no">بیرون‌بر ندارد</string>
+	<string name="poi_takeaway_only">فقط بیرون‌بر</string>
 
 	</resources>
