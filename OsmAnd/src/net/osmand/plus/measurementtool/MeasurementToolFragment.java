@@ -44,6 +44,7 @@ import net.osmand.plus.GPXUtilities.TrkSegment;
 import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TrackActivity;
@@ -63,7 +64,6 @@ import net.osmand.plus.measurementtool.command.ClearPointsCommand;
 import net.osmand.plus.measurementtool.command.MovePointCommand;
 import net.osmand.plus.measurementtool.command.RemovePointCommand;
 import net.osmand.plus.measurementtool.command.ReorderPointCommand;
-import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
 
@@ -75,8 +75,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import static net.osmand.plus.OsmandSettings.LANDSCAPE_MIDDLE_RIGHT_CONSTANT;
-import static net.osmand.plus.OsmandSettings.MIDDLE_TOP_CONSTANT;
 import static net.osmand.plus.helpers.ImportHelper.GPX_SUFFIX;
 
 public class MeasurementToolFragment extends BaseOsmAndFragment {
@@ -107,7 +105,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 	private Boolean saved;
 	private boolean portrait;
 	private boolean nightMode;
-	private int previousMapPosition;
+	private int cachedMapPosition;
 	private boolean gpxPointsAdded;
 
 	private MeasurementEditingContext editingCtx = new MeasurementEditingContext();
@@ -464,6 +462,14 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 	public void onResume() {
 		super.onResume();
 		getMapActivity().getMapLayers().getMapControlsLayer().showMapControlsIfHidden();
+		cachedMapPosition = getMapActivity().getMapView().getMapPosition();
+		setDefaultMapPosition();
+	}
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		setMapPosition(cachedMapPosition);
 	}
 
 	@Override
@@ -639,7 +645,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 
 			@Override
 			public void onCloseMenu() {
-				setPreviousMapPosition();
+				setDefaultMapPosition();
 			}
 
 			@Override
@@ -713,12 +719,9 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 					if (pointsListOpened) {
 						hidePointsList();
 					}
-					OsmandMapTileView tileView = mapActivity.getMapView();
 					if (portrait) {
-						previousMapPosition = tileView.getMapPosition();
-						tileView.setMapPosition(MIDDLE_TOP_CONSTANT);
+						setMapPosition(OsmandSettings.MIDDLE_TOP_CONSTANT);
 					}
-					mapActivity.refreshMap();
 					measurementLayer.moveMapToPoint(position);
 					measurementLayer.selectPoint(position);
 				}
@@ -1011,14 +1014,9 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 			} else {
 				showPointsListFragment();
 			}
-			OsmandMapTileView tileView = mapActivity.getMapView();
-			previousMapPosition = tileView.getMapPosition();
-			if (portrait) {
-				tileView.setMapPosition(MIDDLE_TOP_CONSTANT);
-			} else {
-				tileView.setMapPosition(LANDSCAPE_MIDDLE_RIGHT_CONSTANT);
-			}
-			mapActivity.refreshMap();
+			setMapPosition(portrait
+					? OsmandSettings.MIDDLE_TOP_CONSTANT
+					: OsmandSettings.LANDSCAPE_MIDDLE_RIGHT_CONSTANT);
 		}
 	}
 
@@ -1030,7 +1028,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 		} else {
 			hidePointsListFragment();
 		}
-		setPreviousMapPosition();
+		setDefaultMapPosition();
 	}
 
 	private void hidePointsListIfNoPoints() {
@@ -1077,10 +1075,14 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 		}
 	}
 
-	private void setPreviousMapPosition() {
+	private void setDefaultMapPosition() {
+		setMapPosition(OsmandSettings.CENTER_CONSTANT);
+	}
+
+	private void setMapPosition(int position) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			mapActivity.getMapView().setMapPosition(previousMapPosition);
+			mapActivity.getMapView().setMapPosition(position);
 			mapActivity.refreshMap();
 		}
 	}
