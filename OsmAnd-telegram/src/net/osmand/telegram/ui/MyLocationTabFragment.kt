@@ -123,7 +123,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 			app,
 			mainView.findViewById(R.id.user_icon),
 			telegramHelper.getUserPhotoPath(telegramHelper.getCurrentUser()),
-			R.drawable.img_user_picture,
+			R.drawable.img_user_placeholder,
 			false
 		)
 
