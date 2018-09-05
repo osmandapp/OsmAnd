@@ -2,18 +2,18 @@ package net.osmand.telegram.helpers
 
 import android.content.Intent
 import android.graphics.Color
+import android.net.Uri
+import android.os.AsyncTask
 import android.text.TextUtils
 import net.osmand.aidl.map.ALatLon
 import net.osmand.aidl.maplayer.point.AMapPoint
+import net.osmand.telegram.R
 import net.osmand.telegram.TelegramApplication
 import net.osmand.telegram.helpers.TelegramHelper.MessageOsmAndBotLocation
 import net.osmand.telegram.helpers.TelegramUiHelper.ListItem
 import net.osmand.telegram.utils.AndroidUtils
 import org.drinkless.td.libcore.telegram.TdApi
 import java.io.File
-import android.net.Uri
-import android.os.AsyncTask
-import net.osmand.telegram.R
 import java.util.concurrent.Executors
 
 class ShowLocationHelper(private val app: TelegramApplication) {
@@ -30,6 +30,8 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 
 	var showingLocation: Boolean = false
 		private set
+
+	private var forcedStop: Boolean = false
 
 	fun setupMapLayer() {
 		execOsmandApi {
@@ -147,7 +149,7 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 	}
 
 	fun startShowingLocation() {
-		if (!showingLocation) {
+		if (!showingLocation && !forcedStop) {
 			showingLocation = if (isUseOsmandCallback()) {
 				osmandAidlHelper.registerForUpdates()
 			} else {
@@ -157,7 +159,8 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 		}
 	}
 
-	fun stopShowingLocation() {
+	fun stopShowingLocation(force: Boolean = false) {
+		forcedStop = force
 		if (showingLocation) {
 			showingLocation = false
 			if (isUseOsmandCallback()) {
