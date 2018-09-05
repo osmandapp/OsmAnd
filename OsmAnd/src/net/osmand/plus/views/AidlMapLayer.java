@@ -57,6 +57,7 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 	private Bitmap circle;
 	private Bitmap smallIconBg;
 	private Bitmap bigIconBg;
+	private Bitmap bigIconBgStale;
 	private Bitmap placeholder;
 
 	private int smallIconSize;
@@ -103,6 +104,8 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 				? R.drawable.map_pin_user_location_small_night : R.drawable.map_pin_user_location_small_day);
 		bigIconBg = BitmapFactory.decodeResource(res, night
 				? R.drawable.map_pin_user_location_night : R.drawable.map_pin_user_location_day);
+		bigIconBgStale = BitmapFactory.decodeResource(res, night
+				? R.drawable.map_pin_user_stale_location_night : R.drawable.map_pin_user_stale_location_day);
 		placeholder = BitmapFactory.decodeResource(res, R.drawable.img_user_picture);
 
 		smallIconSize = AndroidUtils.dpToPx(map, SMALL_ICON_SIZE_DP);
@@ -173,9 +176,10 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 			canvas.drawBitmap(image, null, getDstRect(x, y, smallIconSize / 2), bitmapPaint);
 		} else if (pointsType == PointsType.BIG_ICON) {
 			bitmapPaint.setColorFilter(null);
-			float vOffset = bigIconBg.getHeight() * 0.91f;
-			int imageCenterY = (int) (y - vOffset + bigIconBg.getHeight() / 2);
-			canvas.drawBitmap(bigIconBg, x - bigIconBg.getWidth() / 2, y - vOffset, bitmapPaint);
+			Bitmap bg = isStale(point) ? bigIconBgStale : bigIconBg;
+			float vOffset = bg.getHeight() * 0.91f;
+			int imageCenterY = (int) (y - vOffset + bg.getHeight() / 2);
+			canvas.drawBitmap(bg, x - bg.getWidth() / 2, y - vOffset, bitmapPaint);
 			canvas.drawBitmap(image, null, getDstRect(x, imageCenterY, bigIconSize / 2), bitmapPaint);
 		}
 	}
@@ -192,6 +196,10 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 		rect.right = centerX + offset;
 		rect.bottom = centerY + offset;
 		return rect;
+	}
+
+	private boolean isStale(AMapPoint point) {
+		return Boolean.parseBoolean(point.getParams().get(AMapPoint.POINT_STALE_LOC_PARAM));
 	}
 
 	@Override

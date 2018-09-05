@@ -2,7 +2,6 @@ package net.osmand.telegram.helpers
 
 import android.content.Intent
 import android.graphics.Color
-import android.net.Uri
 import android.os.AsyncTask
 import android.text.TextUtils
 import net.osmand.aidl.map.ALatLon
@@ -53,7 +52,7 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 				Color.WHITE,
 				ALatLon(item.latLon!!.latitude, item.latLon!!.longitude),
 				null,
-				generatePhotoParams(if (stale) item.grayscalePhotoPath else item.photoPath, stale)
+				generatePointParams(if (stale) item.grayscalePhotoPath else item.photoPath, stale)
 			)
 		}
 	}
@@ -102,7 +101,7 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 					userName = message.senderUserId.toString()
 				}
 				setupMapLayer()
-				val params = generatePhotoParams(photoPath, stale)
+				val params = generatePointParams(photoPath, stale)
 				if (update) {
 					osmandAidlHelper.updateMapPoint(MAP_LAYER_ID, "${chatId}_${message.senderUserId}", userName, userName,
 						chatTitle, Color.WHITE, ALatLon(content.location.latitude, content.location.longitude), null, params)
@@ -115,10 +114,10 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 				setupMapLayer()
 				if (update) {
 					osmandAidlHelper.updateMapPoint(MAP_LAYER_ID, "${chatId}_$name", name, name,
-						chatTitle, Color.WHITE, ALatLon(content.lat, content.lon), null, generatePhotoParams(null, stale))
+						chatTitle, Color.WHITE, ALatLon(content.lat, content.lon), null, generatePointParams(null, stale))
 				} else {
 					osmandAidlHelper.addMapPoint(MAP_LAYER_ID, "${chatId}_$name", name, name,
-						chatTitle, Color.WHITE, ALatLon(content.lat, content.lon), null, generatePhotoParams(null, stale))
+						chatTitle, Color.WHITE, ALatLon(content.lat, content.lon), null, generatePointParams(null, stale))
 				}
 			}
 		}
@@ -219,30 +218,27 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 			return null
 		}
 	}
-	
-	
-	private fun generatePhotoParams(photoPath: String?, stale: Boolean = false): Map<String, String>? {
-		val photoUri = if (TextUtils.isEmpty(photoPath)) {
-			val resId = if (stale) {
-				R.drawable.img_user_picture
-			} else {
-				R.drawable.img_user_picture_active
-			}
-			AndroidUtils.resourceToUri(app, resId)
-		} else {
-			AndroidUtils.getUriForFile(app, File(photoPath))
-		}
-		return generatePhotoParamsFromUri(photoUri)
-	}
-	
-	private fun generatePhotoParamsFromUri(photoUri: Uri): Map<String, String>? {
+
+	private fun generatePointParams(photoPath: String?, stale: Boolean): Map<String, String> {
+		val photoUri = generatePhotoUri(photoPath, stale)
 		app.grantUriPermission(
 			app.settings.appToConnectPackage,
 			photoUri,
 			Intent.FLAG_GRANT_READ_URI_PERMISSION
 		)
-		return mapOf(AMapPoint.POINT_IMAGE_URI_PARAM to photoUri.toString())
+		return mapOf(
+			AMapPoint.POINT_IMAGE_URI_PARAM to photoUri.toString(),
+			AMapPoint.POINT_STALE_LOC_PARAM to stale.toString()
+		)
 	}
+
+	private fun generatePhotoUri(photoPath: String?, stale: Boolean) =
+		if (TextUtils.isEmpty(photoPath)) {
+			val id = if (stale) R.drawable.img_user_picture else R.drawable.img_user_picture_active
+			AndroidUtils.resourceToUri(app, id)
+		} else {
+			AndroidUtils.getUriForFile(app, File(photoPath))
+		}
 
 	private fun removeMapPoint(chatId: Long, message: TdApi.Message) {
 		val content = message.content
