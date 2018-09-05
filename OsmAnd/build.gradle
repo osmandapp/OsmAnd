@@ -391,7 +391,7 @@ dependencies {
 	qtcoredebugImplementation "net.osmand:OsmAndCore_android:0.1-SNAPSHOT@aar"
 	qtcoreImplementation "net.osmand:OsmAndCore_androidNativeRelease:0.1-SNAPSHOT@aar"
 	qtcoreImplementation "net.osmand:OsmAndCore_android:0.1-SNAPSHOT@aar"
-	implementation ("com.getkeepsafe.taptargetview:taptargetview:1.6.1"){
+	implementation ("com.getkeepsafe.taptargetview:taptargetview:1.12.0"){
 		exclude group: 'com.android.support'
 	}
 	implementation 'com.github.PhilJay:MPAndroidChart:v3.0.1'
