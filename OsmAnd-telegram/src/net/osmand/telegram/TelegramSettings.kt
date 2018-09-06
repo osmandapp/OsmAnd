@@ -179,8 +179,8 @@ class TelegramSettings(private val app: TelegramApplication) {
 	}
 
 	fun updateAppToConnect(appToConnectPackage: String) {
-		this.appToConnectPackage = appToConnectPackage
 		app.showLocationHelper.stopShowingLocation()
+		this.appToConnectPackage = appToConnectPackage
 		app.osmandAidlHelper.reconnectOsmand()
 	}
 
