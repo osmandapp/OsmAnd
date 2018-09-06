@@ -24,7 +24,8 @@ class LocationNotification(app: TelegramApplication) : TelegramNotification(app,
 		}
 
 	override val isEnabled: Boolean
-		get() = app.settings.hasAnyChatToShareLocation() || app.settings.hasAnyChatToShowOnMap()
+		get() = app.settings.hasAnyChatToShareLocation()
+				|| (!app.showLocationHelper.isUseOsmandCallback() && app.settings.hasAnyChatToShowOnMap())
 
 	override val telegramNotificationId: Int
 		get() = TelegramNotification.LOCATION_NOTIFICATION_SERVICE_ID
