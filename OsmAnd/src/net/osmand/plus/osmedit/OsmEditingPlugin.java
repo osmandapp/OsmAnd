@@ -222,7 +222,8 @@ public class OsmEditingPlugin extends OsmandPlugin {
 			final PoiType poiType = amenity.getType().getPoiTypeByKeyName(amenity.getSubType());
 			isEditable = !amenity.getType().isWiki() && poiType !=null && !poiType.isNotEditableOsm();
 		} else if (selectedObj instanceof MapObject) {
-			isEditable = true;
+			Long objectId = ((MapObject) selectedObj).getId();
+			isEditable = objectId != null && objectId > 0 && (objectId % 2 == 1 || (objectId >> 7) < Integer.MAX_VALUE);
 		}
 		if (isEditable) {
 			adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.poi_context_menu_modify, mapActivity)

@@ -416,6 +416,10 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 		long objectId = object.getId();
 		boolean isWay = objectId % 2 == 1;// check if mapObject is a way
 		long entityId;
+		if (!(objectId > 0 && (objectId % 2 == 1 || (objectId >> 7) < Integer.MAX_VALUE))) {
+			return null;
+		}
+
 		if (object instanceof Amenity) {
 			entityId = objectId >> 1;
 		} else {
