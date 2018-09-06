@@ -2559,7 +2559,7 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="depth_contour_descr">Mappe linee isoipse marine e i punti nautici.</string>
     <string name="sea_depth_thanks">Grazie per avere acquistato le \'Linee isoipse nautiche\'</string>
     <string name="index_item_depth_contours_osmand_ext">Isoipse nautiche</string>
-    <string name="index_item_depth_points_southern_hemisphere">Punti nautici sotto il livello del mare dell\'emisfero Australe</string>
+    <string name="index_item_depth_points_southern_hemisphere">Punti nautici sotto il livello del mare dell\'emisfero australe</string>
     <string name="index_item_depth_points_northern_hemisphere">Punti nautici sotto il livello del mare dell\'emisfero boreale</string>
     <string name="download_depth_countours">Linee isoipse marine</string>
     <string name="nautical_maps">Mappe nautiche</string>
@@ -2567,7 +2567,7 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="shared_string_visible">Visibile</string>
     <string name="restore_purchases">Ripristina gli acquisti fatti</string>
     <string name="subscribe_email_error">Errore</string>
-    <string name="subscribe_email_desc">Sottoscrivi la mailing list della nostra applicazione e otterrai ulteriori 3 download di mappe!</string>
+    <string name="subscribe_email_desc">Sottoscrivi la mailing list delle offerte dell\'applicazione e otterrai ulteriori 3 download di mappe!</string>
     <string name="quick_action_auto_zoom">Zoom della mappa automatico acceso/spento</string>
     <string name="quick_action_auto_zoom_desc">Toccando il pulsante azione si accende o spegne lo zoom automatico della mappa in base alla tua velocità.</string>
     <string name="quick_action_auto_zoom_on">Abilita lo zoom automatico della mappa</string>
@@ -2577,7 +2577,7 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="quick_action_add_first_intermediate">Aggiungi il primo intermedio</string>
     <string name="quick_action_add_destination_desc">Toccando il pulsante azione il centro dello schermo diviene la destinazione del percorso, la destinazione impostata in precedenza diverrà l\'ultimo punto intermedio.</string>
     <string name="quick_action_replace_destination_desc">Toccando il pulsante azione sostituirai la destinazione con la posizione al centro dello schermo.</string>
-    <string name="quick_action_add_first_intermediate_desc">Toccando il pulsante azione aggiungerai un primo punto intermedio nella posizione al centro dello schermo.</string>
+    <string name="quick_action_add_first_intermediate_desc">Toccando il pulsante azione renderai il centro dello schermo il primo punto intermedio.</string>
     <string name="no_overlay">Nessun stato sovrapposto</string>
     <string name="no_underlay">Nessun strato di sfondo</string>
     <string name="shared_string_paused">In pausa</string>
