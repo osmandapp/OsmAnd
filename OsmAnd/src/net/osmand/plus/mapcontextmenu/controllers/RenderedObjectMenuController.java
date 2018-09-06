@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 
 import net.osmand.NativeLibrary.RenderedObject;
 import net.osmand.data.LatLon;
+import net.osmand.data.MapObject;
 import net.osmand.data.PointDescription;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
@@ -115,14 +116,15 @@ public class RenderedObjectMenuController extends MenuController {
 			boolean osmEditingEnabled = OsmandPlugin.getEnabledPlugin(OsmEditingPlugin.class) != null;
 			if (osmEditingEnabled && renderedObject.getId() != null
 					&& renderedObject.getId() > 0 &&
-					(renderedObject.getId() % 2 == 1 || (renderedObject.getId() >> 7) < Integer.MAX_VALUE)) {
+					(renderedObject.getId() % 2 == MapObject.AMENITY_ID_RIGHT_SHIFT 
+							|| (renderedObject.getId() >> MapObject.NON_AMENITY_ID_RIGHT_SHIFT) < Integer.MAX_VALUE)) {
 				String link;
-				if ((renderedObject.getId() >> 6) % 2 == 1) {
+				if ((renderedObject.getId() >> 6) % 2 == MapObject.WAY_MODULO_REMAINDER) {
 					link = "https://www.openstreetmap.org/node/";
 				} else {
 					link = "https://www.openstreetmap.org/way/";
 				}
-				addPlainMenuItem(R.drawable.ic_action_info_dark, null, link + (renderedObject.getId() >> 7), true, true, null);
+				addPlainMenuItem(R.drawable.ic_action_info_dark, null, link + (renderedObject.getId() >> MapObject.NON_AMENITY_ID_RIGHT_SHIFT), true, true, null);
 			}
 			addMyLocationToPlainItems(latLon);
 		}

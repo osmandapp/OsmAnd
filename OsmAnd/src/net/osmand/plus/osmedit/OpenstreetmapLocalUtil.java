@@ -83,17 +83,18 @@ public class OpenstreetmapLocalUtil implements OpenstreetmapUtil {
 	@Override
 	public Entity loadEntity(MapObject mapObject) {
 		Long objectId = mapObject.getId();
-		if (!(objectId != null && objectId > 0 && (objectId % 2 == 1 || (objectId >> 7) < Integer.MAX_VALUE))) {
+		if (!(objectId != null && objectId > 0 && (objectId % 2 == MapObject.AMENITY_ID_RIGHT_SHIFT
+				|| (objectId >> MapObject.NON_AMENITY_ID_RIGHT_SHIFT) < Integer.MAX_VALUE))) {
 			return null;
 		}
 		Amenity amenity = null;
 		long entityId;
-		boolean isWay = objectId % 2 == 1; // check if mapObject is a way
+		boolean isWay = objectId % 2 == MapObject.WAY_MODULO_REMAINDER; // check if mapObject is a way
 		if (mapObject instanceof Amenity) {
 			amenity = (Amenity) mapObject;
-			entityId = mapObject.getId() >> 1;
+			entityId = mapObject.getId() >> MapObject.AMENITY_ID_RIGHT_SHIFT;
 		} else {
-			entityId = mapObject.getId() >> 7;
+			entityId = mapObject.getId() >> MapObject.NON_AMENITY_ID_RIGHT_SHIFT;
 		}
 		PoiType poiType = null;
 		if (amenity != null) {
