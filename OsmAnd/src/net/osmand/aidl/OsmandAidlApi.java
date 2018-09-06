@@ -3,6 +3,7 @@ package net.osmand.aidl;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -176,6 +177,7 @@ public class OsmandAidlApi {
 		registerStopNavigationReceiver(mapActivity);
 		registerMuteNavigationReceiver(mapActivity);
 		registerUnmuteNavigationReceiver(mapActivity);
+		initOsmandTelegram();
 	}
 
 	public void onDestroyMapActivity(MapActivity mapActivity) {
@@ -195,6 +197,15 @@ public class OsmandAidlApi {
 
 	public boolean isUpdateAllowed() {
 		return mapActivityActive;
+	}
+
+	private void initOsmandTelegram() {
+		String[] packages = new String[]{"net.osmand.telegram", "net.osmand.telegram.debug"};
+		Intent intent = new Intent("net.osmand.telegram.InitApp");
+		for (String pack : packages) {
+			intent.setComponent(new ComponentName(pack, "net.osmand.telegram.InitAppBroadcastReceiver"));
+			app.sendBroadcast(intent);
+		}
 	}
 
 	private void registerRefreshMapReceiver(MapActivity mapActivity) {
