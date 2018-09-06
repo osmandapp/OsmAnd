@@ -79,23 +79,24 @@ public class OpenstreetmapLocalUtil implements OpenstreetmapUtil {
 		}
 		return newEntity;
 	}
-	
+
 	@Override
 	public Entity loadEntity(MapObject mapObject) {
-		boolean amenity = mapObject instanceof Amenity;
-		PoiType poiType = null;
-		if (amenity) {
-			poiType = ((Amenity) mapObject).getType().getPoiTypeByKeyName(((Amenity) mapObject).getSubType());
-		}
-		boolean isWay = mapObject.getId() % 2 == 1; // check if amenity is a way
-		if (poiType == null && amenity) {
-			return null;
-		}
+		Amenity amenity = null;
 		long entityId;
+		boolean isWay = mapObject.getId() % 2 == 1; // check if mapObject is a way
 		if (mapObject instanceof Amenity) {
+			amenity = (Amenity) mapObject;
 			entityId = mapObject.getId() >> 1;
 		} else {
 			entityId = mapObject.getId() >> 7;
+		}
+		PoiType poiType = null;
+		if (amenity != null) {
+			poiType = amenity.getType().getPoiTypeByKeyName(amenity.getSubType());
+		}
+		if (poiType == null && mapObject instanceof Amenity) {
+			return null;
 		}
 
 		Entity entity;
@@ -124,11 +125,11 @@ public class OpenstreetmapLocalUtil implements OpenstreetmapUtil {
 		if (!Algorithms.isEmpty(mapObject.getName())) {
 			entity.putTagNoLC(OSMTagKey.NAME.getValue(), mapObject.getName());
 		}
-		if (amenity) {
-			if (!Algorithms.isEmpty(((Amenity) mapObject).getOpeningHours())) {
-				entity.putTagNoLC(OSMTagKey.OPENING_HOURS.getValue(), ((Amenity) mapObject).getOpeningHours());
+		if (amenity != null) {
+			if (!Algorithms.isEmpty(amenity.getOpeningHours())) {
+				entity.putTagNoLC(OSMTagKey.OPENING_HOURS.getValue(), amenity.getOpeningHours());
 			}
-			for (Map.Entry<String, String> entry : ((Amenity) mapObject).getAdditionalInfo().entrySet()) {
+			for (Map.Entry<String, String> entry : amenity.getAdditionalInfo().entrySet()) {
 				AbstractPoiType abstractPoi = MapPoiTypes.getDefault().getAnyPoiAdditionalTypeByKey(entry.getKey());
 				if (abstractPoi != null && abstractPoi instanceof PoiType) {
 					PoiType p = (PoiType) abstractPoi;
@@ -140,7 +141,7 @@ public class OpenstreetmapLocalUtil implements OpenstreetmapUtil {
 		}
 
 		// check whether this is node (because id of node could be the same as relation)
-		if (entity instanceof Node && MapUtils.getDistance(entity.getLatLon(), mapObject.getLocation()) < 50) {
+		if (entity instanceof Node && MapUtils.getDistance(entity.getLatLon(), loc) < 50) {
 			return entity;
 		} else if (entity instanceof Way) {
 			return entity;
