@@ -3370,4 +3370,5 @@
 	<string name="poi_generator_output_biogas">Puissance de sortie du biogaz</string>
 	<string name="poi_generator_output_biogas_yes">Sortie : biogaz</string>
 
+	<string name="poi_crossing_supervision_attendant">Passage surveillé: personne physique</string>
 	</resources>
