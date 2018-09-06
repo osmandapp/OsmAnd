@@ -53,6 +53,15 @@
 
         <receiver android:name=".OnTelegramServiceAlarmReceiver" />
 
+        <receiver
+            android:name=".InitAppBroadcastReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="net.osmand.telegram.InitApp"/>
+            </intent-filter>
+        </receiver>
+
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="net.osmand.telegram.fileprovider"
