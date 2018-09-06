@@ -1,7 +1,11 @@
 package net.osmand.plus.osmedit;
 
+import net.osmand.NativeLibrary;
 import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
+import net.osmand.data.Building;
+import net.osmand.data.LatLon;
+import net.osmand.data.MapObject;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiType;
@@ -75,48 +79,74 @@ public class OpenstreetmapLocalUtil implements OpenstreetmapUtil {
 		}
 		return newEntity;
 	}
-	
+
 	@Override
-	public Entity loadEntity(Amenity n) {
-		PoiType poiType = n.getType().getPoiTypeByKeyName(n.getSubType());
-		boolean isWay = n.getId() % 2 == 1; // check if amenity is a way
-		if (poiType == null) {
+	public Entity loadEntity(MapObject mapObject) {
+		Long objectId = mapObject.getId();
+		if (!(objectId != null && objectId > 0 && (objectId % 2 == MapObject.AMENITY_ID_RIGHT_SHIFT
+				|| (objectId >> MapObject.NON_AMENITY_ID_RIGHT_SHIFT) < Integer.MAX_VALUE))) {
 			return null;
 		}
-		long entityId = n.getId() >> 1;
-
-//		EntityId id = new Entity.EntityId(EntityType.NODE, entityId);
-		Entity entity;
-		if (isWay) {
-			entity = new Way(entityId, null, n.getLocation().getLatitude(), n.getLocation().getLongitude());
+		Amenity amenity = null;
+		long entityId;
+		boolean isWay = objectId % 2 == MapObject.WAY_MODULO_REMAINDER; // check if mapObject is a way
+		if (mapObject instanceof Amenity) {
+			amenity = (Amenity) mapObject;
+			entityId = mapObject.getId() >> MapObject.AMENITY_ID_RIGHT_SHIFT;
 		} else {
-			entity = new Node(n.getLocation().getLatitude(),
-					n.getLocation().getLongitude(),
-					entityId);
+			entityId = mapObject.getId() >> MapObject.NON_AMENITY_ID_RIGHT_SHIFT;
 		}
-		entity.putTagNoLC(EditPoiData.POI_TYPE_TAG, poiType.getTranslation());
-		if(poiType.getOsmTag2() != null) {
-			entity.putTagNoLC(poiType.getOsmTag2(), poiType.getOsmValue2());
+		PoiType poiType = null;
+		if (amenity != null) {
+			poiType = amenity.getType().getPoiTypeByKeyName(amenity.getSubType());
 		}
-		if(!Algorithms.isEmpty(n.getName())) {
-			entity.putTagNoLC(OSMTagKey.NAME.getValue(), n.getName());
-		}
-		if(!Algorithms.isEmpty(n.getOpeningHours())) {
-			entity.putTagNoLC(OSMTagKey.OPENING_HOURS.getValue(), n.getOpeningHours());
+		if (poiType == null && mapObject instanceof Amenity) {
+			return null;
 		}
 
-		for (Map.Entry<String, String> entry : n.getAdditionalInfo().entrySet()) {
-			AbstractPoiType abstractPoi = MapPoiTypes.getDefault().getAnyPoiAdditionalTypeByKey(entry.getKey());
-			if (abstractPoi != null && abstractPoi instanceof PoiType) {
-				PoiType p = (PoiType) abstractPoi;
-				if (!p.isNotEditableOsm() && !Algorithms.isEmpty(p.getEditOsmTag())) {
-					entity.putTagNoLC(p.getEditOsmTag(), entry.getValue());
+		Entity entity;
+		LatLon loc = mapObject.getLocation();
+		if (loc == null) {
+			if (mapObject instanceof NativeLibrary.RenderedObject) {
+				loc = ((NativeLibrary.RenderedObject) mapObject).getLabelLatLon();
+			} else if (mapObject instanceof Building) {
+				loc = ((Building) mapObject).getLatLon2();
+			}
+		}
+		if (loc == null) {
+			return null;
+		}
+		if (isWay) {
+			entity = new Way(entityId, null, loc.getLatitude(), loc.getLongitude());
+		} else {
+			entity = new Node(loc.getLatitude(), loc.getLongitude(), entityId);
+		}
+		if (poiType != null) {
+			entity.putTagNoLC(EditPoiData.POI_TYPE_TAG, poiType.getTranslation());
+			if (poiType.getOsmTag2() != null) {
+				entity.putTagNoLC(poiType.getOsmTag2(), poiType.getOsmValue2());
+			}
+		}
+		if (!Algorithms.isEmpty(mapObject.getName())) {
+			entity.putTagNoLC(OSMTagKey.NAME.getValue(), mapObject.getName());
+		}
+		if (amenity != null) {
+			if (!Algorithms.isEmpty(amenity.getOpeningHours())) {
+				entity.putTagNoLC(OSMTagKey.OPENING_HOURS.getValue(), amenity.getOpeningHours());
+			}
+			for (Map.Entry<String, String> entry : amenity.getAdditionalInfo().entrySet()) {
+				AbstractPoiType abstractPoi = MapPoiTypes.getDefault().getAnyPoiAdditionalTypeByKey(entry.getKey());
+				if (abstractPoi != null && abstractPoi instanceof PoiType) {
+					PoiType p = (PoiType) abstractPoi;
+					if (!p.isNotEditableOsm() && !Algorithms.isEmpty(p.getEditOsmTag())) {
+						entity.putTagNoLC(p.getEditOsmTag(), entry.getValue());
+					}
 				}
 			}
 		}
 
 		// check whether this is node (because id of node could be the same as relation)
-		if (entity instanceof Node && MapUtils.getDistance(entity.getLatLon(), n.getLocation()) < 50) {
+		if (entity instanceof Node && MapUtils.getDistance(entity.getLatLon(), loc) < 50) {
 			return entity;
 		} else if (entity instanceof Way) {
 			return entity;

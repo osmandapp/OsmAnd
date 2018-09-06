@@ -51,6 +51,7 @@ import net.osmand.CallbackWithObject;
 import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
+import net.osmand.data.MapObject;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
 import net.osmand.osm.edit.Entity;
@@ -682,7 +683,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 		return editPoiDialogFragment;
 	}
 
-	public static void showEditInstance(final Amenity amenity,
+	public static void showEditInstance(final MapObject mapObject,
 										final AppCompatActivity activity) {
 		final OsmandSettings settings = ((OsmandApplication) activity.getApplication())
 				.getSettings();
@@ -697,7 +698,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 		new AsyncTask<Void, Void, Entity>() {
 			@Override
 			protected Entity doInBackground(Void... params) {
-				return openstreetmapUtilToLoad.loadEntity(amenity);
+				return openstreetmapUtilToLoad.loadEntity(mapObject);
 			}
 
 			protected void onPostExecute(Entity entity) {

@@ -2,7 +2,7 @@ package net.osmand.plus.osmedit;
 
 import android.support.annotation.Nullable;
 
-import net.osmand.data.Amenity;
+import net.osmand.data.MapObject;
 import net.osmand.osm.edit.Entity;
 import net.osmand.osm.edit.EntityInfo;
 
@@ -16,5 +16,5 @@ public interface OpenstreetmapUtil {
 
 	void closeChangeSet();
 
-	Entity loadEntity(Amenity n);
+	Entity loadEntity(MapObject mapObject);
 }

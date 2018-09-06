@@ -3,9 +3,12 @@ package net.osmand.plus.osmedit;
 import android.util.Xml;
 import android.widget.Toast;
 
+import net.osmand.NativeLibrary;
 import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
+import net.osmand.data.Building;
 import net.osmand.data.LatLon;
+import net.osmand.data.MapObject;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
 import net.osmand.osm.edit.Entity;
@@ -409,9 +412,19 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 	}
 
 	@Override
-	public Entity loadEntity(Amenity n) {
-		boolean isWay = n.getId() % 2 == 1;// check if amenity is a way
-		long entityId = n.getId() >> 1;
+	public Entity loadEntity(MapObject object) {
+		Long objectId = object.getId();
+		if (!(objectId != null && objectId > 0 && (objectId % 2 == MapObject.AMENITY_ID_RIGHT_SHIFT
+				|| (objectId >> MapObject.NON_AMENITY_ID_RIGHT_SHIFT) < Integer.MAX_VALUE))) {
+			return null;
+		}
+		boolean isWay = objectId % 2 == MapObject.WAY_MODULO_REMAINDER;// check if mapObject is a way
+		long entityId;
+		if (object instanceof Amenity) {
+			entityId = objectId >> MapObject.AMENITY_ID_RIGHT_SHIFT;
+		} else {
+			entityId = objectId >> MapObject.NON_AMENITY_ID_RIGHT_SHIFT;
+		}
 		try {
 			String api = isWay ? "api/0.6/way/" : "api/0.6/node/";
 			String res = sendRequest(getSiteApi() + api + entityId, "GET", null,
@@ -427,14 +440,32 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 				if (entity != null) {
 					if (!isWay && entity instanceof Node) {
 						// check whether this is node (because id of node could be the same as relation)
-						if (MapUtils.getDistance(entity.getLatLon(), n.getLocation()) < 50) {
-							return replaceEditOsmTags(n, entity);
+						if (MapUtils.getDistance(entity.getLatLon(), object.getLocation()) < 50) {
+							if (object instanceof Amenity) {
+								return replaceEditOsmTags((Amenity) object, entity);
+							} else {
+								return entity;
+							}
 						}
 					} else if (isWay && entity instanceof Way) {
-						LatLon loc = n.getLocation();
+						LatLon loc = object.getLocation();
+						if (loc == null) {
+							if (object instanceof NativeLibrary.RenderedObject) {
+								loc = ((NativeLibrary.RenderedObject) object).getLabelLatLon();
+							} else if (object instanceof Building) {
+								loc = ((Building) object).getLatLon2();
+							}
+						}
+						if (loc == null) {
+							return null;
+						}
 						entity.setLatitude(loc.getLatitude());
 						entity.setLongitude(loc.getLongitude());
-						return replaceEditOsmTags(n, entity);
+						if (object instanceof Amenity) {
+							return replaceEditOsmTags((Amenity) object, entity);
+						} else {
+							return entity;
+						}
 					}
 				}
 				return null;
