@@ -263,7 +263,7 @@
 	<string name="poi_playground">Terrain de jeux pour enfants</string>
 	<string name="poi_craft_plumber">Plombier</string>
 	<string name="poi_police">Police</string>
-	<string name="poi_post_box">Boite aux lettres; Boîte aux lettres</string>
+	<string name="poi_post_box">Boîte aux lettres</string>
 	<string name="poi_post_office">Bureau de poste</string>
 	<string name="poi_power_generator">Générateur électrique</string>
 	<string name="poi_power_substation">Poste électrique</string>
@@ -3125,7 +3125,7 @@
 	<string name="poi_operational_status">État opérationnel</string>
 	<string name="poi_water_supply_type">Mode de distribution de l\'eau</string>
 	<string name="poi_amperage">Ampérage</string>
-	<string name="poi_letter_box">Boite aux lettres privée; Boîte aux lettres privée</string>
+	<string name="poi_letter_box">Boîte aux lettres privée</string>
 	<string name="poi_post_street">Rue</string>
 	<string name="poi_post_flats">Plat</string>
 
@@ -3331,4 +3331,43 @@
 	<string name="poi_shop_fireplace">Vente de cheminée</string>
 
 	<string name="poi_amusement_arcade">Salle d\'arcade</string>
+	<string name="poi_checkpoint_type">Type de point de contrôle</string>
+
+<string name="poi_protection_title">Titre de protection</string>
+	<string name="poi_fire_hydrant_pressure">Pression</string>
+	<string name="poi_fire_hydrant_flow_capacity">Débit</string>
+	<string name="poi_fire_hydrant_style_water_source_main">Principal</string>
+	<string name="poi_fire_hydrant_style_water_source_pond">Étang</string>
+	<string name="poi_fire_hydrant_style_water_source_stream">Cours d\'eau</string>
+	<string name="poi_fire_hydrant_style_water_source_cistern">Citerne</string>
+	<string name="poi_crossing_activation_automatic">Activation du passage: automatique</string>
+	<string name="poi_crossing_activation_local">Activation du passage: local</string>
+	<string name="poi_crossing_activation_remote">Activation du passage: à distance</string>
+	<string name="poi_crossing_barrier_no">Barrière de franchissement: non</string>
+	<string name="poi_crossing_barrier_yes">Barrière de franchissement</string>
+	<string name="poi_crossing_barrier_full">Barrière de franchissement: total</string>
+	<string name="poi_crossing_barrier_half">Barrière de franchissement: moitié</string>
+	<string name="poi_crossing_barrier_double_half">Barrière de franchissement: double moitié</string>
+	<string name="poi_crossing_bell_yes">Signal sonore</string>
+	<string name="poi_crossing_bell_no">Signal sonore: non</string>
+	<string name="poi_crossing_light_yes">Signal lumineux</string>
+	<string name="poi_crossing_light_no">Signal lumineux: non</string>
+	<string name="poi_crossing_on_demand_yes">Passage à la demande</string>
+	<string name="poi_crossing_on_demand_no">Passage à la demande: non</string>
+	<string name="poi_crossing_supervision_yes">Passage surveillé</string>
+	<string name="poi_crossing_supervision_no">Passage surveillé: non</string>
+	<string name="poi_crossing_supervision_camera">Passage surveillé: caméra</string>
+
+	<string name="poi_dispensing_no">Distribution de médicaments: non</string>
+
+	<string name="poi_generator_output_hot_water_yes">Sortie: eau chaude</string>
+	<string name="poi_generator_output_steam_yes">Sortie: vapeur</string>
+	<string name="poi_generator_output_hot_air_yes">Sortie: air chaud</string>
+	<string name="poi_generator_output_cold_water_yes">Sortie: eau froide</string>
+	<string name="poi_generator_output_compressed_air">Puissance de sortie de l\'air comprimé</string>
+	<string name="poi_generator_output_compressed_air_yes">Sortie: air comprimé</string>
+	<string name="poi_generator_output_vacuum_yes">Sortie: vide</string>
+	<string name="poi_generator_output_biogas">Puissance de sortie du biogaz</string>
+	<string name="poi_generator_output_biogas_yes">Sortie: biogaz</string>
+
 	</resources>
