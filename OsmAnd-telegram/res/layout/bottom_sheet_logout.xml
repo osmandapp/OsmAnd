@@ -44,12 +44,12 @@
 					android:layout_height="wrap_content"
 					android:paddingLeft="@dimen/content_padding_standard"
 					android:paddingRight="@dimen/content_padding_standard"
+					android:text="@string/logout_from_osmand_telegram_descr"
 					android:textColor="?android:attr/textColorSecondary"
 					android:textSize="@dimen/list_item_description_text_size"
 					app:firstBaselineToTopHeight="28sp"
 					app:lastBaselineToBottomHeight="16sp"
-					app:typeface="@string/font_roboto_regular"
-					tools:text="@string/logout_from_osmand_telegram_descr" />
+					app:typeface="@string/font_roboto_regular" />
 
 			</LinearLayout>
 

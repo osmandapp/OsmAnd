@@ -37,9 +37,6 @@ class LogoutBottomSheet : DialogFragment() {
 				override fun onSlide(bottomSheet: View, slideOffset: Float) {}
 			})
 
-		mainView.findViewById<TextView>(R.id.description).text =
-				getString(R.string.logout_from_osmand_telegram_descr)
-
 		mainView.findViewById<TextView>(R.id.secondary_btn).apply {
 			setText(R.string.shared_string_cancel)
 			setOnClickListener { dismiss() }
