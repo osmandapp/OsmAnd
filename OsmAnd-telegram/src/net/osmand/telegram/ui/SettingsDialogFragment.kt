@@ -1,5 +1,6 @@
 package net.osmand.telegram.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.FragmentManager
 import android.support.v7.widget.ListPopupWindow
@@ -108,8 +109,10 @@ class SettingsDialogFragment : BaseDialogFragment() {
 		}
 
 		mainView.findViewById<View>(R.id.logout_btn).setOnClickListener {
-			logoutTelegram()
-			dismiss()
+			fragmentManager?.also { fm ->
+				LogoutBottomSheet.showInstance(fm, this)
+			}
+
 		}
 
 		mainView.findViewById<ImageView>(R.id.help_icon)
@@ -121,6 +124,16 @@ class SettingsDialogFragment : BaseDialogFragment() {
 		return mainView
 	}
 
+	override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+		super.onActivityResult(requestCode, resultCode, data)
+		when (requestCode) {
+			LogoutBottomSheet.LOGOUT_REQUEST_CODE -> {
+				logoutTelegram()
+				dismiss()
+			}
+		}
+	}
+	
 	private fun showPopupMenu(pref: DurationPref, valueView: TextView) {
 		val menuList = pref.getMenuItems()
 		val ctx = valueView.context

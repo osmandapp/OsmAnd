@@ -327,16 +327,23 @@ class LoginDialogFragment : BaseDialogFragment() {
 		val cancelButton: AppCompatImageView? = view?.findViewById(R.id.back_button)
 		cancelButton?.visibility = if (showWelcomeDialog) View.INVISIBLE else View.VISIBLE
 		cancelButton?.setOnClickListener {
-			if (loginDialogActiveType == LoginDialogType.ENTER_PHONE_NUMBER) {
-				showWelcomeDialog = true
-				val focusedView = dialog.currentFocus
-				if (focusedView != null) {
-					AndroidUtils.hideSoftKeyboard(activity!!, focusedView)
+			when (loginDialogActiveType) {
+				LoginDialogType.ENTER_PHONE_NUMBER -> {
+					showWelcomeDialog = true
+					val focusedView = dialog.currentFocus
+					if (focusedView != null) {
+						AndroidUtils.hideSoftKeyboard(activity!!, focusedView)
+					}
+					buildDialog(view)
 				}
-				buildDialog(view)
-			} else {
-				showProgress()
-				getMainActivity()?.loginTelegram()
+				LoginDialogType.GET_TELEGRAM -> {
+					this.loginDialogActiveType = LoginDialogType.ENTER_PHONE_NUMBER
+					buildDialog(view)
+				}
+				else -> {
+					showProgress()
+					getMainActivity()?.loginTelegram()
+				}
 			}
 		}
 	}
