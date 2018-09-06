@@ -3353,21 +3353,21 @@
 	<string name="poi_crossing_light_yes">Signal lumineux</string>
 	<string name="poi_crossing_light_no">Signal lumineux: non</string>
 	<string name="poi_crossing_on_demand_yes">Passage à la demande</string>
-	<string name="poi_crossing_on_demand_no">Passage à la demande: non</string>
+	<string name="poi_crossing_on_demand_no">Passage à la demande : non</string>
 	<string name="poi_crossing_supervision_yes">Passage surveillé</string>
 	<string name="poi_crossing_supervision_no">Passage surveillé: non</string>
-	<string name="poi_crossing_supervision_camera">Passage surveillé: caméra</string>
+	<string name="poi_crossing_supervision_camera">Passage surveillé : caméra</string>
 
-	<string name="poi_dispensing_no">Distribution de médicaments: non</string>
+	<string name="poi_dispensing_no">Distribution de médicaments : non</string>
 
 	<string name="poi_generator_output_hot_water_yes">Sortie: eau chaude</string>
-	<string name="poi_generator_output_steam_yes">Sortie: vapeur</string>
-	<string name="poi_generator_output_hot_air_yes">Sortie: air chaud</string>
+	<string name="poi_generator_output_steam_yes">Sortie : vapeur</string>
+	<string name="poi_generator_output_hot_air_yes">Sortie : air chaud</string>
 	<string name="poi_generator_output_cold_water_yes">Sortie : eau froide</string>
 	<string name="poi_generator_output_compressed_air">Puissance de sortie de l\'air comprimé</string>
-	<string name="poi_generator_output_compressed_air_yes">Sortie: air comprimé</string>
-	<string name="poi_generator_output_vacuum_yes">Sortie: vide</string>
+	<string name="poi_generator_output_compressed_air_yes">Sortie : air comprimé</string>
+	<string name="poi_generator_output_vacuum_yes">Sortie : vide</string>
 	<string name="poi_generator_output_biogas">Puissance de sortie du biogaz</string>
-	<string name="poi_generator_output_biogas_yes">Sortie: biogaz</string>
+	<string name="poi_generator_output_biogas_yes">Sortie : biogaz</string>
 
 	</resources>
