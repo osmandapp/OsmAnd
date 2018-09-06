@@ -3363,7 +3363,7 @@
 	<string name="poi_generator_output_hot_water_yes">Sortie: eau chaude</string>
 	<string name="poi_generator_output_steam_yes">Sortie: vapeur</string>
 	<string name="poi_generator_output_hot_air_yes">Sortie: air chaud</string>
-	<string name="poi_generator_output_cold_water_yes">Sortie: eau froide</string>
+	<string name="poi_generator_output_cold_water_yes">Sortie : eau froide</string>
 	<string name="poi_generator_output_compressed_air">Puissance de sortie de l\'air comprimé</string>
 	<string name="poi_generator_output_compressed_air_yes">Sortie: air comprimé</string>
 	<string name="poi_generator_output_vacuum_yes">Sortie: vide</string>
