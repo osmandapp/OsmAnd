@@ -413,13 +413,12 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 
 	@Override
 	public Entity loadEntity(MapObject object) {
-		long objectId = object.getId();
-		boolean isWay = objectId % 2 == 1;// check if mapObject is a way
-		long entityId;
-		if (!(objectId > 0 && (objectId % 2 == 1 || (objectId >> 7) < Integer.MAX_VALUE))) {
+		Long objectId = object.getId();
+		if (!(objectId != null && objectId > 0 && (objectId % 2 == 1 || (objectId >> 7) < Integer.MAX_VALUE))) {
 			return null;
 		}
-
+		boolean isWay = objectId % 2 == 1;// check if mapObject is a way
+		long entityId;
 		if (object instanceof Amenity) {
 			entityId = objectId >> 1;
 		} else {
