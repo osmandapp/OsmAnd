@@ -3184,4 +3184,36 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="osm_notes">OSMメモ</string>
     <string name="will_open_tomorrow_at">明日開く</string>
     <string name="shared_string_without_name">名無し</string>
+    <string name="release_3_2_pre">• 非ラテン文字を使用したマップを開いた場合にクラッシュしていた問題を修正
+\n
+\n• Android 8.0デバイスでのレンダリング速度を改善
+\n
+\n• ポリゴン(トイレや給水所など公共施設を除く)オブジェクトの編集をサポート
+\n</string>
+    <string name="what_is_here">要項:</string>
+    <string name="parked_at">駐車した場所</string>
+    <string name="pick_up_till">以下までに回収</string>
+    <string name="without_time_limit">時間制限なし</string>
+    <string name="context_menu_read_full_article">記事の全文を読む</string>
+    <string name="open_from">開店時間</string>
+    <string name="open_till">以下時間まで営業</string>
+    <string name="will_close_at">閉店時間</string>
+    <string name="will_open_at">開店予定時間</string>
+    <string name="will_open_on">営業予定時刻</string>
+    <string name="empty_state_markers_active">マップマーカーを作成しよう！</string>
+    <string name="empty_state_markers_history_desc">通過した地点のマーカーと通過予定地点のマーカーがこの画面に表示されます。</string>
+    <string name="shared_string_right">右</string>
+    <string name="shared_string_left">左</string>
+    <string name="show_number_pad">数字キーパッドの表示</string>
+    <string name="shared_string_paste">貼り付け</string>
+    <string name="coordinate_input_accuracy">%1$d桁</string>
+    <string name="rename_marker">マーカー名の変更</string>
+    <string name="import_gpx_file_description">お気に入りもしくはGPXファイルとしてインポートが可能です。</string>
+    <string name="import_as_favorites">お気に入りとしてインポート</string>
+    <string name="import_file">インポートファイル</string>
+	<string name="use_location">現在地の使用</string>
+    <string name="passed">最後に使用: %1$s</string>
+    <string name="shared_string_in_name">%1$s内</string>
+    <string name="lang_lo">ラーオ語</string>
+    <string name="shared_string_gpx_files">GPXファイル</string>
     </resources>

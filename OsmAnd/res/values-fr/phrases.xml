@@ -3299,7 +3299,7 @@
 	<string name="poi_socket_type2_combo_output_high">Élevé</string>
 	<string name="poi_fortification_type_ring_ditch">Type de fortification : fossé circulaire</string>
 
-	<string name="poi_conveying_yes">Transport mécanisé : oui</string>
+	<string name="poi_conveying_yes">Convoyeur : oui</string>
 
 	<string name="poi_forestry_compartment">Panneau : parcelle forestière</string>
 	<string name="poi_forestry_allotment">Panneau : propriété de parcelle forestière</string>
@@ -3341,26 +3341,26 @@
 	<string name="poi_fire_hydrant_style_water_source_stream">Cours d\'eau</string>
 	<string name="poi_fire_hydrant_style_water_source_cistern">Citerne</string>
 	<string name="poi_crossing_activation_automatic">Activation du passage: automatique</string>
-	<string name="poi_crossing_activation_local">Activation du passage: local</string>
-	<string name="poi_crossing_activation_remote">Activation du passage: à distance</string>
-	<string name="poi_crossing_barrier_no">Barrière de franchissement: non</string>
+	<string name="poi_crossing_activation_local">Activation du passage : local</string>
+	<string name="poi_crossing_activation_remote">Activation du passage : à distance</string>
+	<string name="poi_crossing_barrier_no">Barrière de franchissement : non</string>
 	<string name="poi_crossing_barrier_yes">Barrière de franchissement</string>
-	<string name="poi_crossing_barrier_full">Barrière de franchissement: total</string>
-	<string name="poi_crossing_barrier_half">Barrière de franchissement: moitié</string>
-	<string name="poi_crossing_barrier_double_half">Barrière de franchissement: double moitié</string>
+	<string name="poi_crossing_barrier_full">Barrière de franchissement : complète</string>
+	<string name="poi_crossing_barrier_half">Barrière de franchissement : moitié</string>
+	<string name="poi_crossing_barrier_double_half">Barrière de franchissement : double moitié</string>
 	<string name="poi_crossing_bell_yes">Signal sonore</string>
-	<string name="poi_crossing_bell_no">Signal sonore: non</string>
+	<string name="poi_crossing_bell_no">Signal sonore : non</string>
 	<string name="poi_crossing_light_yes">Signal lumineux</string>
-	<string name="poi_crossing_light_no">Signal lumineux: non</string>
+	<string name="poi_crossing_light_no">Signal lumineux : non</string>
 	<string name="poi_crossing_on_demand_yes">Passage à la demande</string>
 	<string name="poi_crossing_on_demand_no">Passage à la demande : non</string>
 	<string name="poi_crossing_supervision_yes">Passage surveillé</string>
-	<string name="poi_crossing_supervision_no">Passage surveillé: non</string>
+	<string name="poi_crossing_supervision_no">Passage surveillé : non</string>
 	<string name="poi_crossing_supervision_camera">Passage surveillé : caméra</string>
 
 	<string name="poi_dispensing_no">Distribution de médicaments : non</string>
 
-	<string name="poi_generator_output_hot_water_yes">Sortie: eau chaude</string>
+	<string name="poi_generator_output_hot_water_yes">Sortie : eau chaude</string>
 	<string name="poi_generator_output_steam_yes">Sortie : vapeur</string>
 	<string name="poi_generator_output_hot_air_yes">Sortie : air chaud</string>
 	<string name="poi_generator_output_cold_water_yes">Sortie : eau froide</string>
@@ -3370,5 +3370,7 @@
 	<string name="poi_generator_output_biogas">Puissance de sortie du biogaz</string>
 	<string name="poi_generator_output_biogas_yes">Sortie : biogaz</string>
 
-	<string name="poi_crossing_supervision_attendant">Passage surveillé: personne physique</string>
+	<string name="poi_crossing_supervision_attendant">Passage surveillé : personne physique</string>
+	<string name="poi_display_sundial_yes">Cadran solaire</string>
+
 	</resources>

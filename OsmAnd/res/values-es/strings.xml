@@ -2986,4 +2986,10 @@
 \nDenos su opinión</string>
     <string name="commiting_way">Enviando vía…</string>
     <string name="test_voice_desrc">Pulsa un botón y escucha el aviso de voz correspondiente para identificar las indicaciones que faltan o son defectuosas.</string>
-</resources>
+<string name="release_3_2_pre">• Corregido el fallo en el inicio que se producía con los mapas no latinos
+\n
+\n • Mejora en los problemas de velocidad de renderizado en dispositivos Android 8.0
+\n
+\n • Soporte para la edición de objetos poligonales (no servicios)
+\n</string>
+    </resources>

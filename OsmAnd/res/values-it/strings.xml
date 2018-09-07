@@ -3108,4 +3108,11 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="coord_input_save_as_track">Salva come traccia</string>
     <string name="coord_input_save_as_track_descr">Hai aggiunto %1$s punti. Digita il nome del file e tappa su \"Salva\".</string>
     <string name="test_voice_desrc">Tap sul pulsante e ascolta l\'avviso vocale corrispondente per identificare gli avvisi errati o mancanti</string>
-</resources>
+<string name="release_3_2_pre">• Corretto l\'arresto in avvio con le mappe non latine
+\n
+\n • Migliorati i problemi di velocità di disegno nei dispositivi Android 8.0
+\n
+\n • Supporto alla modifica degli oggetti poligonali (non amenità)
+\n
+\n</string>
+    </resources>
