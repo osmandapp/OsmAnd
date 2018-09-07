@@ -165,6 +165,7 @@ public class BasicEditPoiFragment extends BaseOsmAndFragment
 		if (data == null) {
 			return;
 		}
+		basicTagsInitialized = false;
 		Map<String, String> tagValues = data.getTagValues();
 		streetEditText.setText(tagValues.get(OSMSettings.OSMTagKey.ADDR_STREET.getValue()));
 		houseNumberEditText.setText(tagValues.get(OSMSettings.OSMTagKey.ADDR_HOUSE_NUMBER.getValue()));
