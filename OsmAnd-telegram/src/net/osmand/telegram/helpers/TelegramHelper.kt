@@ -496,7 +496,13 @@ class TelegramHelper private constructor() {
 						listener?.onTelegramError(error.code, error.message)
 					}
 				}
-				TdApi.User.CONSTRUCTOR -> currentUser = obj as TdApi.User
+				TdApi.User.CONSTRUCTOR -> {
+					val currUser = obj as TdApi.User
+					currentUser = currUser
+					if (!hasLocalUserPhoto(currUser) && hasRemoteUserPhoto(currUser)) {
+						requestUserPhoto(currUser)
+					}
+				}
 			}
 		}
 	}
@@ -1219,7 +1225,6 @@ class TelegramHelper private constructor() {
 								chat.photo?.small = updateFile.file
 							}
 							listener?.onTelegramChatChanged(chat)
-							return
 						}
 						val user = downloadUserFilesMap.remove(remoteId)
 						if (user != null) {
@@ -1227,7 +1232,6 @@ class TelegramHelper private constructor() {
 								user.profilePhoto?.small = updateFile.file
 							}
 							listener?.onTelegramUserChanged(user)
-							return
 						}
 					}
 				}

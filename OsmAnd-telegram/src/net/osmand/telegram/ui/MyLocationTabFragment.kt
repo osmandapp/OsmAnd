@@ -50,6 +50,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 
 	private lateinit var appBarLayout: AppBarLayout
 	private lateinit var imageContainer: FrameLayout
+	private lateinit var currentUserIcon: ImageView
 	private lateinit var textContainer: LinearLayout
 	private lateinit var titleContainer: LinearLayout
 	private lateinit var optionsBtn: ImageView
@@ -119,13 +120,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 			})
 		}
 
-		TelegramUiHelper.setupPhoto(
-			app,
-			mainView.findViewById(R.id.user_icon),
-			telegramHelper.getUserPhotoPath(telegramHelper.getCurrentUser()),
-			R.drawable.img_user_placeholder,
-			false
-		)
+		currentUserIcon = mainView.findViewById(R.id.user_icon)
 
 		optionsBtn = mainView.findViewById<ImageView>(R.id.options)
 		with(activity as MainActivity) {
@@ -203,6 +198,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 
 	override fun onResume() {
 		super.onResume()
+		updateCurrentUserPhoto()
 		telegramHelper.getActiveLiveLocationMessages(null)
 		updateContent()
 		updateEnable = true
@@ -265,6 +261,9 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 	}
 
 	override fun onTelegramUserChanged(user: TdApi.User) {
+		if (user.id == telegramHelper.getCurrentUser()?.id) {
+			updateCurrentUserPhoto()
+		}
 		updateContent()
 	}
 
@@ -287,6 +286,16 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 			sharingMode = true
 			updateContent()
 		}
+	}
+
+	private fun updateCurrentUserPhoto() {
+		TelegramUiHelper.setupPhoto(
+			app,
+			currentUserIcon,
+			telegramHelper.getUserPhotoPath(telegramHelper.getCurrentUser()),
+			R.drawable.img_user_placeholder,
+			false
+		)
 	}
 
 	private fun startHandler() {
