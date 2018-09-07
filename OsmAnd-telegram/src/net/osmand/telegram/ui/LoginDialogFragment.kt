@@ -87,7 +87,7 @@ class LoginDialogFragment : BaseDialogFragment() {
 		fun dismiss(fragmentManager: FragmentManager) {
 			val loginDialogFragment = getFragment(fragmentManager)
 			loginDialogFragment?.dismissedManually = true
-			loginDialogFragment?.dismiss()
+			loginDialogFragment?.dismissAllowingStateLoss()
 		}
 
 		private fun getFragment(fragmentManager: FragmentManager): LoginDialogFragment? {
