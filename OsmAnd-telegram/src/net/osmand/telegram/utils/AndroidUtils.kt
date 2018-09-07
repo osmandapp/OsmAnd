@@ -116,6 +116,10 @@ object AndroidUtils {
 		return 0
 	}
 
+	fun getPopupMenuHeight(ctx: Context): Int {
+		return ctx.resources.getDimensionPixelSize(R.dimen.list_popup_window_height)
+	}
+
 	@ColorInt
 	fun getAttrColor(ctx: Context, @AttrRes attrId: Int, @ColorInt defaultColor: Int = 0): Int {
 		val ta = ctx.theme.obtainStyledAttributes(intArrayOf(attrId))

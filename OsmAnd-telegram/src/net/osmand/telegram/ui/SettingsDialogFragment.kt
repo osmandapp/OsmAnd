@@ -141,6 +141,7 @@ class SettingsDialogFragment : BaseDialogFragment() {
 			isModal = true
 			anchorView = valueView
 			setContentWidth(AndroidUtils.getPopupMenuWidth(ctx, menuList))
+			height = AndroidUtils.getPopupMenuHeight(ctx)
 			setDropDownGravity(Gravity.END or Gravity.TOP)
 			setAdapter(ArrayAdapter(ctx, R.layout.popup_list_text_item, menuList))
 			setOnItemClickListener { _, _, position, _ ->
