@@ -144,6 +144,12 @@ object AndroidUtils {
 		)
 	}
 
+	fun getAppVersionCode(ctx: Context, appPackage: String) = try {
+		ctx.packageManager.getPackageInfo(appPackage, 0).versionCode
+	} catch (e: PackageManager.NameNotFoundException) {
+		-1
+	}
+
 	fun isAppInstalled(ctx: Context, appPackage: String): Boolean {
 		if (appPackage.isEmpty()) {
 			return false

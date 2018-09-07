@@ -171,8 +171,8 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 	}
 
 	fun isUseOsmandCallback(): Boolean {
-		val packageOsmAndInfo = app.packageManager.getPackageInfo(app.settings.appToConnectPackage, 0)
-		return packageOsmAndInfo.versionCode >= MIN_OSMAND_CALLBACK_VERSION_CODE
+		val version = AndroidUtils.getAppVersionCode(app, app.settings.appToConnectPackage)
+		return version >= MIN_OSMAND_CALLBACK_VERSION_CODE
 	}
 
 	fun startShowMessagesTask(chatId: Long, vararg messages: TdApi.Message) {

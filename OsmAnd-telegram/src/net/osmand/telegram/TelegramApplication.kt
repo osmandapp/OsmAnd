@@ -79,6 +79,8 @@ class TelegramApplication : Application(), OsmandHelperListener {
 		telegramHelper.close()
 	}
 
+	fun isOsmAndInstalled() = AndroidUtils.isAppInstalled(this, settings.appToConnectPackage)
+
 	val isWifiConnected: Boolean
 		get() {
 			val mgr = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager

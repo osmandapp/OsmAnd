@@ -360,11 +360,6 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 			.start()
 	}
 
-	private fun isOsmAndInstalled(): Boolean {
-		val ctx = context ?: return false
-		return AndroidUtils.isAppInstalled(ctx, settings.appToConnectPackage)
-	}
-
 	private fun updateSortBtn() {
 		sortByBtn.text = getString(settings.liveNowSortType.shortTitleId)
 		sortByBtn.setCompoundDrawablesWithIntrinsicBounds(
@@ -430,7 +425,7 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 			openOnMapView?.isEnabled = canBeOpenedOnMap
 			if (canBeOpenedOnMap) {
 				openOnMapView?.setOnClickListener {
-					if (!isOsmAndInstalled()) {
+					if (!app.isOsmAndInstalled()) {
 						showOsmAndMissingDialog()
 					} else {
 						app.showLocationHelper.showLocationOnMap(item, staleLocation)
@@ -518,7 +513,7 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 
 					settings.showChatOnMap(chatId, allSelected)
 					if (settings.hasAnyChatToShowOnMap()) {
-						if (!isOsmAndInstalled()) {
+						if (!app.isOsmAndInstalled()) {
 							if (allSelected) {
 								showOsmAndMissingDialog()
 							}
