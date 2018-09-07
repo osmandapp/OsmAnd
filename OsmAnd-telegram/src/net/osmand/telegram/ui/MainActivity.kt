@@ -1,6 +1,7 @@
 package net.osmand.telegram.ui
 
 import android.app.Dialog
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
@@ -29,6 +30,8 @@ import net.osmand.telegram.utils.GRAYSCALE_PHOTOS_DIR
 import net.osmand.telegram.utils.GRAYSCALE_PHOTOS_EXT
 import org.drinkless.td.libcore.telegram.TdApi
 import java.lang.ref.WeakReference
+
+const val OPEN_MY_LOCATION_TAB_KEY = "open_my_location_tab"
 
 private const val PERMISSION_REQUEST_LOCATION = 1
 
@@ -185,6 +188,14 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 
 		if (app.telegramService == null) {
 			app.cleanupResources()
+		}
+	}
+
+	override fun onNewIntent(intent: Intent) {
+		super.onNewIntent(intent)
+		if (intent.getBooleanExtra(OPEN_MY_LOCATION_TAB_KEY, false)) {
+			AndroidUtils.dismissAllDialogs(supportFragmentManager)
+			bottomNav.selectedItemId = R.id.action_my_location
 		}
 	}
 

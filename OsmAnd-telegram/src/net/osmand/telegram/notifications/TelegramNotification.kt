@@ -7,6 +7,7 @@ import android.support.v4.app.NotificationCompat
 import android.support.v4.app.NotificationManagerCompat
 import net.osmand.telegram.TelegramApplication
 import net.osmand.telegram.ui.MainActivity
+import net.osmand.telegram.ui.OPEN_MY_LOCATION_TAB_KEY
 
 
 abstract class TelegramNotification(protected var app: TelegramApplication, val groupName: String) {
@@ -45,6 +46,7 @@ abstract class TelegramNotification(protected var app: TelegramApplication, val 
 	@SuppressLint("InlinedApi")
 	protected fun createBuilder(wearable: Boolean): NotificationCompat.Builder {
 		val contentIntent = Intent(app, MainActivity::class.java)
+		contentIntent.putExtra(OPEN_MY_LOCATION_TAB_KEY, true)
 		val contentPendingIntent = PendingIntent.getActivity(app, 0, contentIntent,
 				PendingIntent.FLAG_UPDATE_CURRENT)
 		if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {

@@ -14,6 +14,8 @@ import android.os.Build
 import android.support.annotation.AttrRes
 import android.support.annotation.ColorInt
 import android.support.v4.app.ActivityCompat
+import android.support.v4.app.DialogFragment
+import android.support.v4.app.FragmentManager
 import android.support.v4.content.FileProvider
 import android.util.TypedValue
 import android.util.TypedValue.COMPLEX_UNIT_DIP
@@ -50,6 +52,15 @@ object AndroidUtils {
 					inputMethodManager.hideSoftInputFromWindow(windowToken, 0)
 				}
 			}
+		}
+	}
+
+	fun dismissAllDialogs(fm: FragmentManager) {
+		for (fragment in fm.fragments) {
+			if (fragment is DialogFragment) {
+				fragment.dismissAllowingStateLoss()
+			}
+			dismissAllDialogs(fragment.childFragmentManager)
 		}
 	}
 
