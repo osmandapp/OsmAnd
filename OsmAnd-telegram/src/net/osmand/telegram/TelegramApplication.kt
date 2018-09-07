@@ -79,6 +79,12 @@ class TelegramApplication : Application(), OsmandHelperListener {
 		telegramHelper.close()
 	}
 
+	fun stopSharingLocation() {
+		settings.stopSharingLocationToChats()
+		shareLocationHelper.stopSharingLocation()
+		telegramHelper.stopSendingLiveLocationMessages()
+	}
+
 	fun isOsmAndInstalled() = AndroidUtils.isAppInstalled(this, settings.appToConnectPackage)
 
 	val isWifiConnected: Boolean

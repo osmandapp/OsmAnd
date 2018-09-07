@@ -225,7 +225,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 			}
 			DisableSharingBottomSheet.SHARING_DISABLED_REQUEST_CODE -> {
 				sharingMode = false
-				(activity as MainActivity).stopSharingLocation()
+				app.stopSharingLocation()
 				updateContent()
 			}
 		}

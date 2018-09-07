@@ -5,8 +5,8 @@ import android.app.PendingIntent
 import android.content.Intent
 import android.support.v4.app.NotificationCompat
 import android.support.v4.app.NotificationManagerCompat
-import net.osmand.telegram.ui.MainActivity
 import net.osmand.telegram.TelegramApplication
+import net.osmand.telegram.ui.MainActivity
 
 
 abstract class TelegramNotification(protected var app: TelegramApplication, val groupName: String) {
@@ -21,6 +21,10 @@ abstract class TelegramNotification(protected var app: TelegramApplication, val 
 	protected var ongoing = true
 	protected var color: Int = 0
 	protected var icon: Int = 0
+
+	protected var actionIconId: Int = 0
+	protected var actionTextId: Int = 0
+	protected var actionIntent: PendingIntent? = null
 
 	abstract val type: NotificationType
 
@@ -58,6 +62,9 @@ abstract class TelegramNotification(protected var app: TelegramApplication, val 
 		}
 		if (icon != 0) {
 			builder.setSmallIcon(icon)
+		}
+		if (actionTextId != 0 && actionIntent != null) {
+			builder.addAction(actionIconId, app.getString(actionTextId), actionIntent)
 		}
 
 		return builder

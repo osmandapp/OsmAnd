@@ -291,19 +291,13 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 		settings.removeNonexistingChats(presentChatTitles)
 	}
 
-	fun stopSharingLocation() {
-		settings.stopSharingLocationToChats()
-		app.shareLocationHelper.stopSharingLocation()
-		telegramHelper.stopSendingLiveLocationMessages()
-	}
-
 	fun stopShowingChatsOnMap(forceStop: Boolean) {
 		settings.getShowOnMapChats().forEach { app.showLocationHelper.hideChatMessages(it) }
 		app.showLocationHelper.stopShowingLocation(forceStop)
 	}
 
 	private fun closeApp() {
-		stopSharingLocation()
+		app.stopSharingLocation()
 		stopShowingChatsOnMap(true)
 		finish()
 		android.os.Process.killProcess(android.os.Process.myPid())

@@ -1,5 +1,10 @@
 package net.osmand.telegram.notifications
 
+import android.app.PendingIntent
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
 import android.support.v4.app.NotificationCompat
 import android.support.v4.content.ContextCompat
 import net.osmand.telegram.R
@@ -8,8 +13,17 @@ import net.osmand.telegram.utils.OsmandFormatter
 import net.osmand.util.Algorithms
 
 private const val GROUP_NAME = "share_location"
+private const val DISABLE_SHARING_ACTION = "disable_sharing_action"
 
 class LocationNotification(app: TelegramApplication) : TelegramNotification(app, GROUP_NAME) {
+
+	init {
+		app.registerReceiver(object : BroadcastReceiver() {
+			override fun onReceive(context: Context?, intent: Intent?) {
+				app.stopSharingLocation()
+			}
+		}, IntentFilter(DISABLE_SHARING_ACTION))
+	}
 
 	override val type: TelegramNotification.NotificationType
 		get() = TelegramNotification.NotificationType.LOCATION
@@ -39,11 +53,18 @@ class LocationNotification(app: TelegramApplication) : TelegramNotification(app,
 		if (shareLocationHelper.sharingLocation) {
 			val sharedDistance = shareLocationHelper.distance.toFloat()
 			color = ContextCompat.getColor(app, R.color.osmand_orange)
-			icon = R.drawable.ic_action_polygom_dark
+			icon = R.drawable.ic_action_share_location
 			notificationTitle = (app.getString(R.string.sharing_location) + " • "
 					+ Algorithms.formatDuration((shareLocationHelper.duration / 1000).toInt(), true))
 			notificationText = (app.getString(R.string.shared_string_distance)
 					+ ": " + OsmandFormatter.getFormattedDistance(sharedDistance, app))
+			actionTextId = R.string.disable_all_sharing
+			actionIntent = PendingIntent.getBroadcast(
+				app,
+				0,
+				Intent(DISABLE_SHARING_ACTION),
+				PendingIntent.FLAG_UPDATE_CURRENT
+			)
 		} else {
 			notificationTitle = app.getString(R.string.show_users_on_map)
 			notificationText = app.getString(R.string.active_chats) + ": " + app.settings.getShowOnMapChatsCount()
