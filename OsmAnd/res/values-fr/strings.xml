@@ -2106,7 +2106,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="dashboard_or_drawer_description">Une option permettant de définir le comportement du bouton Menu : lancement du Tableau de bord ou du Menu statique ? Ce paramètre peut être modifié par la suite dans les préférences.</string>
     <string name="access_from_map_description">Le bouton Menu affiche le tableau de bord (plutôt que le menu)</string>
     <string name="access_from_map">Accès depuis la carte</string>
-    <string name="please_specify_poi_type_only_from_list">Indiquez un type pour ce point d\'intérêt ou ignorez</string>
+    <string name="please_specify_poi_type_only_from_list">Indiquez un type pour ce point d\'intérêt ou ignorez.</string>
     <string name="routing_attr_avoid_stairs_name">Éviter les escaliers</string>
 	<string name="routing_attr_avoid_borders_name">Éviter le franchissement de frontières</string>
 	<string name="routing_attr_avoid_stairs_description">Éviter les escaliers</string>
@@ -2160,11 +2160,11 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="starting_point">Point de départ</string>
     <string name="rec_split">Intervalle d\'enregistrement</string>
     <string name="rec_split_title">Définir un intervalle d\'enregistrement</string>
-    <string name="rec_split_desc">Écraser les enregistrements quand l\'espace utilisé dépasse la capacité de stockage</string>
+    <string name="rec_split_desc">Écraser les enregistrements quand l\'espace utilisé dépasse la capacité de stockage.</string>
     <string name="rec_split_clip_length">Durée de l\'enregistrement</string>
     <string name="rec_split_clip_length_desc">Durée maximale d\'enregistrement.</string>
     <string name="rec_split_storage_size">Taille de l\'espace de stockage</string>
-    <string name="rec_split_storage_size_desc">Espace maximum autorisé pour tous les enregistrements</string>
+    <string name="rec_split_storage_size_desc">Espace maximum autorisé pour tous les enregistrements.</string>
     <string name="shared_string_type">Type</string>
     <string name="switch_start_finish">Inverser Départ et Destination</string>
     <string name="rendering_attr_hideIcons_name">Icônes des points d\'intérêt</string>
@@ -3178,4 +3178,5 @@ représentant la zone : %1$s x %2$s</string>
 \n • Support de la modification des polygones (greffon de Contribution à OSM)
 \n
 \n</string>
+    <string name="commiting_way">Envoi de la direction…</string>
     </resources>
