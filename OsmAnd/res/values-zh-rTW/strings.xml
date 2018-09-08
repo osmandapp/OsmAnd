@@ -2177,7 +2177,7 @@
     <string name="download_files_error_not_enough_space">沒有足夠的空間！
 存儲需要 {3} MB 的暫存空間，{1} MB 的永久空間。
 可用空間只有 {2} MB 。</string>
-    <string name="download_files_question_space_with_temp">要下載 {0} 個檔案嗎？ 存儲空間會使用 {3} MB 的暫存空間，{1} MB 的永久空間。({2} MB 的可用空間。)</string>
+    <string name="download_files_question_space_with_temp">要下載 {0} 個檔案嗎？存儲空間會使用 {3} MB 的暫存空間，{1} MB 的永久空間。({2} MB 的可用空間。)</string>
     <string name="upload_osm_note">上傳 OSM 附註</string>
     <string name="upload_anonymously">匿名上傳</string>
 <string name="select_map_marker">選擇地圖標記</string>
