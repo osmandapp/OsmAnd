@@ -587,7 +587,7 @@
     <string name="distance_measurement_finish_subtrack">شروع‌کردن یک زیرمسیر جدید</string>
     <string name="use_kalman_filter_compass_descr">اغتشاشات قطب‌نما را کاهش می‌دهد اما اینرسی را بیشتر می‌کند.</string>
     <string name="monitoring_settings">ضبط سفر</string>
-    <string name="monitoring_settings_descr">چگونگی ضبط سفرتان را تنظیم کنید.</string>
+    <string name="monitoring_settings_descr">چگونگی ضبط سفرهای خود را تنظیم کنید.</string>
     
     <string name="shared_string_more_actions">عملیات‌های بیشتر</string>
     
@@ -679,7 +679,7 @@
 	<string name="save_current_track_descr">مسیر جاری را همین حالا در قالب فایل GPX ذخیره کن.</string>
 	<string name="save_current_track">ذخیرهٔ مسیر جاری</string>
 	<string name="save_track_interval">بازهٔ زمانی ثبت داده‌ها در هنگام راهبری</string>
-	<string name="save_track_interval_descr">مشخص کنید برای ضبط مسیر در هنگام راهبری، داده‌ها با چه فاصلهٔ زمانی از هم دریافت شوند.</string>
+	<string name="save_track_interval_descr">مشخص کنید برای ضبط مسیر در هنگام راهبری، داده‌ها با چه فاصلهٔ زمانی از هم ثبت شوند.</string>
 	<string name="save_track_to_gpx_descrp">هنگام راهبری، مسیر GPX به‌صورت خودکار ضبط و در پوشهٔ مسیرها (tracks) ذخیره می‌شود.</string>
 	
 	<string name="osm_settings_descr">تنظیمات لازم برای ارتباط با (OpenStreetMap.org (OSM را مشخص کنید.</string>
@@ -769,7 +769,8 @@
 	<string name="osmand_service_descr">زمانی که صفحه خاموش است OsmAnd در پس‌زمینه کار می‌کند.</string>
 	
 	<string name="download_files_not_enough_space">فضای کافی برای دانلود %1$s مگابایت وجود ندارد (فضای خالی: %2$s).</string>
-	<string name="download_files_question_space">آیا {0} فایل را دانلود می‌کنید؟ حافظهٔ استفاده شده {1} مگابایت است. (حافظهٔ قابل‌استفاده {2} مگابایت است.)</string>
+	<string name="download_files_question_space">آیا {0} فایل را دانلود می‌کنید؟
+\nحافظهٔ استفاده شده {1} مگابایت است. (حافظهٔ قابل‌استفاده {2} مگابایت است.)</string>
 	
 	<string name="use_transparent_map_theme">پوستهٔ شفاف</string>
 	<string name="native_library_not_supported">کتابخانهٔ بومی بر روی این دستگاه پشتیبانی نمی‌شود.</string>
@@ -1217,7 +1218,7 @@
 	<string name="transport_to_go_after">مسافت قبلی</string>
 	<string name="transport_to_go_before">مسافت بعدی</string>
 	<string name="update_poi_is_not_available_for_zoom">با بزرگ‌نمایی بیشتر می‌توانید POIها را به‌روز کنید</string>
-	<string name="commiting_node">ثبت نقطه…</string>
+	<string name="commiting_node">در حال ثبت نقطه…</string>
 	<string name="poi">POI</string>
 	<string name="navigate_point_format_D">DDD.DD</string>
 	<string name="navigate_point_format_DM">DDD MM.MM</string>
@@ -1400,12 +1401,12 @@
     <string name="misc_pref_title">متفرقه</string>
     <string name="localization_pref_title">بومی‌سازی</string>
     
-    <string name="interrupt_music_descr">هنگام بیان پیام‌های گفتاری، پخش موسیقی نگه داشته شود، نه اینکه فقط آهسته شود.</string>
+    <string name="interrupt_music_descr">هنگام بیان پیام‌های گفتاری، پخش موسیقی را نگه دار، نه اینکه فقط آهسته شود.</string>
 	<string name="interrupt_music">مکث موسیقی</string>
 	<string name="share_route_as_gpx">اشتراک‌گذاری مسیر در قالب فایل GPX</string>
 	<string name="share_route_subject">مسیر از طریق OsmAnd به‌اشتراک گذاشته شد</string>
 	<string name="keep_informing_never">دستی (روی فِلِش بزنید)</string>
-    <string name="keep_informing_descr">دستورات راهبری در فواصل منظم دوباره اعلام می‌شود.</string>
+    <string name="keep_informing_descr">دستورات راهبری در بازه‌های منظم بازگو می‌شود.</string>
     <string name="keep_informing">تکرار دستورات راهبری</string>
 	<string name="navigation_intent_invalid">قالب نامعتبر: %s</string>
 <string name="arrival_distance">اعلام رسیدن</string>
@@ -1755,7 +1756,7 @@
     <string name="use_opengl_render">استفاده از رندرگیری OpenGL</string>
     <string name="use_opengl_render_descr">از رندرگیری سرعت‌یافتهٔ سخت‌افزاری OpenGL استفاده کن (شاید مصرف باتری افزایش یابد یا روی دستگاه‌های خیلی قدیمی کار نکند).</string>
     <string name="lock_screen_request_explanation">%1$s به این مجوز نیاز دارد تا برای صرفه‌جویی در انرژی، بتواند نمایشگر را خاموش کند.</string>
-    <string name="wake_on_voice_descr">قبل از رسیدن به پیچ، نمایشگر روشن شود (اگر خاموش است).</string>
+    <string name="wake_on_voice_descr">هنگام نزدیک‌شدن به پیچ، نمایشگر روشن شود (اگر خاموش است).</string>
     <string name="shared_string_never">هرگز</string>
     <string name="rendering_attr_trolleybusRoutes_name">مسیرهای اتوبوس برقی</string>
     <string name="rendering_attr_busRoutes_name">مسیرهای اتوبوس</string>
@@ -1808,7 +1809,7 @@
 	
 	<string name="local_osm_changes_upload_all_confirm">دارید %1$d تغییر را به OSM ارسال می‌کنید. مطمئن هستید؟</string>
     <string name="confirmation_to_clear_history">سوابق را پاک می‌کنید؟</string>
-    <string name="delay_to_start_navigation_descr">زمان انتظار برای باقی‌ماندن در صفحهٔ طراحی مسیر را مشخص کنید.</string>
+    <string name="delay_to_start_navigation_descr">مدت‌زمان ماندن در صفحهٔ طراحی مسیر تا شروع راهبری را مشخص کنید.</string>
     <string name="delay_to_start_navigation">مسیریابی مرحله‌به‌مرحله را بعد از … شروع کن</string>
     <string name="shared_string_go">برو</string>
 	<string name="osmand_parking_overdue">تأخیر دارید</string>
@@ -2226,7 +2227,8 @@
     <string name="map_markers_other">نشانه‌های دیگر</string>
     <string name="upload_anonymously">آپلود به‌صورت ناشناس</string>
     <string name="show_transparency_seekbar">نوار تنظیم شفافیت را نشان بده</string>
-    <string name="download_files_error_not_enough_space">فضای ذخیره‌سازی ناکافی است! {3} مگابایت برای ذخیره‌سازی موقت و {1} مگابایت برای ذخیره‌سازی دائمی لازم است. فضای موجود فقط {2} مگابایت است.</string>
+    <string name="download_files_error_not_enough_space">فضای ذخیره‌سازی ناکافی است! 
+\n{3} مگابایت برای ذخیره‌سازی موقت و {1} مگابایت برای ذخیره‌سازی دائمی لازم است. فضای موجود فقط {2} مگابایت است.</string>
     <string name="upload_osm_note">آپلود توضیح ویرایشی OSM</string>
     <string name="map_marker_1st">اولین نشانهٔ نقشه</string>
     <string name="map_marker_2nd">دومین نشانهٔ نقشه</string>
@@ -2445,7 +2447,7 @@
     <string name="downloads">دانلودها</string>
     <string name="confirm_download_roadmaps">نقشهٔ فقط-جاده لازم نیست، زیرا نقشهٔ استاندارد (کامل) را دارید. هنوز مایلید که دانلودش کنید؟</string>
     <string name="value_downloaded_of_max">%1$.1f از %2$.1f مگابایت</string>
-    <string name="file_size_in_mb">%.1f مگابایت</string>
+    <string name="file_size_in_mb">%.1f م‌بـ</string>
     <string name="update_all">به‌روزرسانی همه (%1$s مگابایت)</string>
     <string name="free_downloads_used">دانلودهای رایگان استفاده‌شده</string>
     <string name="free_downloads_used_description">تعداد دانلودهای رایگان باقیمانده را نشان می‌دهد.</string>
@@ -3199,4 +3201,5 @@
 \n • پشتیبانی از ویرایش اشیای چندضلعی (non-amenity) 
 \n
 \n</string>
+    <string name="commiting_way">در حال ثبت راه…</string>
     </resources>
