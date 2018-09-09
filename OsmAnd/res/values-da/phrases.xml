@@ -3957,4 +3957,5 @@
 	<string name="poi_hazard_minefield">Minefelt</string>
 
 
-</resources>
+<string name="poi_car_pooling">Samkørsel sted</string>
+	</resources>
