@@ -150,7 +150,7 @@
 	<string name="poi_fog_signal">Tåkesignal</string>
 	<string name="poi_harbour_basin">Havnebasseng</string>
 	<string name="poi_seamark_harbour">Havn</string>
-	<string name="poi_fuel">Bensinstasjon</string>
+	<string name="poi_fuel">Bensinstasjon;Fyllestasjon;Brensel</string>
 	<string name="poi_convenience">Dagligvarebutikk</string>
 	<string name="poi_mall">Kjøpesenter</string>
 	<string name="poi_farm">Gårdsbutikk</string>
@@ -940,7 +940,7 @@
 	<string name="poi_club_cinema">Filmklubb</string>
 	<string name="poi_library">Bibliotek</string>
 	<string name="poi_casino">Kasino</string>
-	<string name="poi_nightclub">Nattklubb</string>
+	<string name="poi_nightclub">Nattklubb;Disko;Disco</string>
 	<string name="poi_stripclub">Strippeklubb</string>
 	<string name="poi_bar">Bar</string>
 	<string name="poi_pub">Pub</string>
