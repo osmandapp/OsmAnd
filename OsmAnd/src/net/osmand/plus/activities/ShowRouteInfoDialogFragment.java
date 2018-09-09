@@ -65,8 +65,11 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import static net.osmand.binary.RouteDataObject.HEIGHT_UNDEFINED;
 
@@ -439,7 +442,8 @@ public class ShowRouteInfoDialogFragment extends DialogFragment {
 		shareRoute.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				final GPXFile gpx = helper.generateGPXFileWithRoute();
+				final String trackName = new SimpleDateFormat("yyyy-MM-dd_HH-mm_EEE", Locale.US).format(new Date());
+				final GPXFile gpx = helper.generateGPXFileWithRoute(trackName);
 				final Uri fileUri = AndroidUtils.getUriForFile(getMyApplication(), new File(gpx.path));
 				File dir = new File(getActivity().getCacheDir(), "share");
 				if (!dir.exists()) {
