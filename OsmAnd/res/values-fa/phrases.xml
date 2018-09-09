@@ -114,13 +114,13 @@
 <string name="poi_lift_gate">دروازه آسانسور</string>
 <string name="poi_toll_booth">غرفه تلفن</string>
 <string name="poi_border_control">کنترل مرزی</string>
-<string name="poi_traffic_calming_bump">دست انداز جاده</string>
-<string name="poi_traffic_calming_hump">سرعت گیر</string>
-<string name="poi_traffic_calming_cushion">سرعت گیر ترافیکی</string>
-<string name="poi_traffic_calming_chicane"/>
-<string name="poi_traffic_calming_rumble_strip">رامبل جاده ای</string>
-<string name="poi_traffic_calming_table">جدول</string>
-<string name="poi_traffic_calming_choker">خفه کن حاده ای</string>
+<string name="poi_traffic_calming_bump">سرعت‌گیر</string>
+<string name="poi_traffic_calming_hump">سرعتکاه قوسی</string>
+<string name="poi_traffic_calming_cushion">سرعتکاه صفحه‌ای</string>
+<string name="poi_traffic_calming_chicane">پیچانه</string>
+<string name="poi_traffic_calming_rumble_strip">زبرهٔ نواری</string>
+<string name="poi_traffic_calming_table">سرعتکاه تخت</string>
+<string name="poi_traffic_calming_choker">نقطهٔ گازانبری</string>
 <string name="poi_traffic_signals">چراغ راهنما</string>
 
 <string name="poi_car_repair">میکانیکی</string>
@@ -367,7 +367,7 @@
 
 <string name="poi_museum">موزه</string>
 <string name="poi_memorial">بنای یادبود</string>
-<string name="poi_artwork">آثار هنری</string>
+<string name="poi_artwork">اثر هنری</string>
 <string name="poi_archaeological_site">مرکز باستان شناسی</string>
 <string name="poi_battlefield">میدان جنگ</string>
 <string name="poi_boundary_stone">سنگ یادبود</string>
@@ -593,8 +593,8 @@
 <string name="poi_island">جزیره</string>
 <string name="poi_islet">جزیره کوچک</string>
 
-<string name="poi_anchorage">لنگر گاه دریایی</string>
-<string name="poi_anchor_berth">اسکله لنگر دریایی</string>
+<string name="poi_anchorage">لنگرگاه</string>
+<string name="poi_anchor_berth">حوزهٔ لنگراندازی</string>
 <string name="poi_beacon">فانوس دریایی</string>
 <string name="poi_beacon_cardinal">فانوس دریایی اصلی</string>
 <string name="poi_beacon_lateral">فانوس دریایی جانبی</string>
@@ -1092,4 +1092,19 @@
 	<string name="poi_takeaway_no">بیرون‌بر ندارد</string>
 	<string name="poi_takeaway_only">فقط بیرون‌بر</string>
 
+	<string name="poi_shop_craft">فروشگاه لوازم صنایع دستی و هنری</string>
+	<string name="poi_traffic_calming_island">جزیرهٔ ترافیکی</string>
+	<string name="poi_apartment">آپارتمان</string>
+	<string name="poi_gallery">گالری هنری</string>
+	<string name="poi_water">آب</string>
+	<string name="poi_wood">درختستان</string>
+	<string name="poi_tree">درخت</string>
+	<string name="poi_artwork_type_sculpture">نوع اثر هنری: مجسمه</string>
+	<string name="poi_artwork_type_statue">نوع اثر هنری: تندیس</string>
+	<string name="poi_artwork_type_mural">نوع اثر هنری: نقاشی دیواری</string>
+	<string name="poi_artwork_type_architecture">نوع اثر هنری: معماری</string>
+	<string name="poi_artwork_type_painting">نوع اثر هنری: نقاشی</string>
+	<string name="poi_artwork_type_stone">نوع اثر هنری: تخته سنگ</string>
+	<string name="poi_artwork_type_bust">نوع اثر هنری: تندیس نیم‌تنه</string>
+	<string name="poi_artwork_type_installation">نوع اثر هنری: چیدمان</string>
 	</resources>
