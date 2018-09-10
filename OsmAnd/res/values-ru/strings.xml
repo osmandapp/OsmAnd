@@ -2980,4 +2980,10 @@
 \n</string>
     <string name="increase_search_radius_to">Увеличить радиус поиска до %1$s</string>
     <string name="commiting_way">Фиксируется путь…</string>
+    <string name="release_3_2_pre">• Исправлено аварийное завершение приложения при запуске с нелатинскими картами
+\n
+\n• Повышена скорость рендеринга на устройствах с Android 8.0
+\n
+\n• Поддержка редактирования объектов многоугольников (не amenity)
+\n</string>
     </resources>

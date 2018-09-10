@@ -2401,4 +2401,12 @@ Clique no widget de medição para ver mais ações.</string>
     <string name="shared_string_bookmark">Marcador</string>
     <string name="hide_full_description">Esconder descrição completa</string>
     <string name="show_full_description">Mostrar a descrição completa</string>
+    <string name="thank_you_for_feedback">Obrigado pelo feedback</string>
+    <string name="release_3_2_pre">• A falha na inicialização que ocorreu com mapas não-latinos corrigida
+\n
+\n• Melhorar problemas de velocidade em dispositivos com 8.0 Android 
+\n
+\n• Suporte para editar objetos de polígono de renderização (não-cortesia)
+\n
+\n</string>
     </resources>
