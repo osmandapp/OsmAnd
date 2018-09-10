@@ -1203,17 +1203,17 @@ class TelegramHelper private constructor() {
 						//listener?.onTelegramChatsChanged()
 					}
 				}
-				TdApi.UpdateNotificationSettings.CONSTRUCTOR -> {
-					val update = obj as TdApi.UpdateNotificationSettings
-					if (update.scope is TdApi.NotificationSettingsScopeChat) {
-						val chat = chats[(update.scope as TdApi.NotificationSettingsScopeChat).chatId]
-						if (chat != null) {
-							synchronized(chat) {
-								chat.notificationSettings = update.notificationSettings
-							}
-						}
-					}
-				}
+//				TdApi.UpdateNotificationSettings.CONSTRUCTOR -> {
+//					val update = obj as TdApi.UpdateNotificationSettings
+//					if (update.scope is TdApi.NotificationSettingsScopeChat) {
+//						val chat = chats[(update.scope as TdApi.NotificationSettingsScopeChat).chatId]
+//						if (chat != null) {
+//							synchronized(chat) {
+//								chat.notificationSettings = update.notificationSettings
+//							}
+//						}
+//					}
+//				}
 
 				TdApi.UpdateFile.CONSTRUCTOR -> {
 					val updateFile = obj as TdApi.UpdateFile
