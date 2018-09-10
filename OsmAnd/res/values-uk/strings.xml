@@ -1859,7 +1859,7 @@
 \n 
 \nУ разі активації цього виду, стиль мапи змінюється на „Winter and ski“, показуючи усі деталі пейзажу так, як вони виглядають взимку. Цей (зимовий) вид може бути де-активований тут, або якщо ви поміняєте „Стиль мапи“ в меню „Налаштування мапи“ на бажаний вид.</string>
 	<string name="rendering_attr_hideHouseNumbers_name">Номери будинків</string>
-    <string name="application_dir_change_warning3">Ви хочете, щоб OsmAnd також перемістив свої файли даних по новому призначенню?</string>
+    <string name="application_dir_change_warning3">Скопіювати файли даних OsmAnd в нове місце?</string>
     <string name="specified_directiory_not_writeable">Не вдалося створити мапи у вказаній теці</string>
 	<string name="copying_osmand_file_failed">Не вдалося скопіювати файли</string>    
     <string name="storage_directory_external">Зовнішнє сховище</string>
@@ -1899,7 +1899,7 @@
     <string name="rendering_value_translucent_blue_name">Напівпрозорий синій</string>
     <string name="rendering_value_purple_name">Пурпурний</string>
     <string name="rendering_value_translucent_purple_name">Напівпрозорий пурпурний</string>
-    <string name="restart_is_required">Для того, щоб повністю застосувати зміни, потрібно перезавантажити застосунок.</string>
+    <string name="restart_is_required">Перезавантажте застосунок вручну, щоб застосувати усі зміни.</string>
     <string name="lang_bn">Бенгальська</string>
     <string name="lang_tl">Тагальська</string>
     <string name="lang_sh">Сербсько-Хорватьська</string>
@@ -1918,20 +1918,20 @@
     <string name="lang_os">Осетинський</string>
     <string name="lang_eo">Есперанто</string>
     <string name="lang_es_ar">Іспанська (Аргентина)</string>
-    <string name="lang_nb">Норвезька (Букмол)</string>
+    <string name="lang_nb">Норвезька Букмол</string>
     <string name="lang_vo">Волапюк</string>
     <string name="lang_th">Тайська</string>
     <string name="lang_te">Телугу</string>
-    <string name="lang_nn">Норвезька (Нюнорськ)</string>
+    <string name="lang_nn">Норвезька Нюнорськ</string>
     <string name="lang_new">Невар / непал-бхаса</string>
     <string name="lang_ms">Малазійська</string>
     <string name="lang_ht">Гаїтянська</string>
     <string name="lang_gl">Галійська</string>
     <string name="lang_et">Естонська</string>
     <string name="lang_ceb">Себуанська</string>
-    <string name="archive_wikipedia_data">У Вас завантажені старі, несумісні дані з Вікіпедії, Ви хочете їх заархівувати?</string>
-    <string name="download_wikipedia_files">Ви хочете звантажити додаткові дані з Вікіпедії (%1$s Мб)?</string>
-    <string name="gps_network_not_enabled">Сервіс локації вимкнений. Бажаєте його ввімкнути?</string>
+    <string name="archive_wikipedia_data">У Вас є старі несумісні дані з Вікіпедії. Заархівувати їх?</string>
+    <string name="download_wikipedia_files">Звантажити додаткові дані з Вікіпедії (%1$s Мб)?</string>
+    <string name="gps_network_not_enabled">Служба визначення місцезнаходження вимкнена. Увімкнути?</string>
     <string name="disable_recording_once_app_killed">Запобігти самостійному логуваню</string>
     <string name="disable_recording_once_app_killed_descrp">Логування GPX буде призупинено коли додаток буде закрито (через недавні додатки). (Фоновий індикатор OsmAnd зникне з панелі сповіщень Android\'а)</string>
     <string name="shared_string_import2osmand">Імпортувати до OsmAnd</string>
@@ -3210,4 +3210,7 @@
 \nНадішліть нам відгука</string>
     <string name="commiting_way">Створюється шлях…</string>
     <string name="test_voice_desrc">Натисніть кнопку та прослуховуйте відповідну голосову підказку, щоб визначити відсутні або хибні підказки.</string>
-</resources>
+<string name="release_3_2_pre">• Виправлено аварійне завершення програми при запуску з нелатинськими мапами
+\n• Підвищено швидкість промальовки на пристроях з Android 8.0
+\n• Підтримка редагування полігональних об\'єктів (крім amenity)</string>
+    </resources>
