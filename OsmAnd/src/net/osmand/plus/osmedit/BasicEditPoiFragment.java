@@ -46,6 +46,8 @@ public class BasicEditPoiFragment extends BaseOsmAndFragment
 	private EditText webSiteEditText;
 	private EditText descriptionEditText;
 	OpeningHoursAdapter mOpeningHoursAdapter;
+	
+	private boolean basicTagsInitialized = false;
 
 	@Nullable
 	@Override
@@ -130,7 +132,7 @@ public class BasicEditPoiFragment extends BaseOsmAndFragment
 				if (data != null && !data.isInEdit()) {
 					if (!TextUtils.isEmpty(s)) {
 						data.putTag(tag, s.toString());
-					} else {
+					} else if (basicTagsInitialized && isResumed()) {
 						data.removeTag(tag);
 					}
 				}
@@ -163,6 +165,7 @@ public class BasicEditPoiFragment extends BaseOsmAndFragment
 		if (data == null) {
 			return;
 		}
+		basicTagsInitialized = false;
 		Map<String, String> tagValues = data.getTagValues();
 		streetEditText.setText(tagValues.get(OSMSettings.OSMTagKey.ADDR_STREET.getValue()));
 		houseNumberEditText.setText(tagValues.get(OSMSettings.OSMTagKey.ADDR_HOUSE_NUMBER.getValue()));
@@ -178,6 +181,7 @@ public class BasicEditPoiFragment extends BaseOsmAndFragment
 		}
 		mOpeningHoursAdapter.replaceOpeningHours(openingHours);
 		mOpeningHoursAdapter.updateViews();
+		basicTagsInitialized = true;
 	}
 
 	private class OpeningHoursAdapter {
@@ -223,7 +227,7 @@ public class BasicEditPoiFragment extends BaseOsmAndFragment
 						data.putTag(OSMSettings.OSMTagKey.OPENING_HOURS.getValue(),
 								openingHoursString);
 					}
-				} else {
+				} else if (basicTagsInitialized && isResumed()) {
 					data.removeTag(OSMSettings.OSMTagKey.OPENING_HOURS.getValue());
 				}
 			}
