@@ -867,7 +867,7 @@
 	<string name="poi_denomination_pentecostal">Pünkösdista</string>
 	<string name="poi_denomination_mormon">Mormon</string>
 	<string name="poi_denomination_jehovahs_witness">Jehova tanúi</string>
-	<string name="poi_denomination_greek_orthodox">Görögkeleti</string>
+	<string name="poi_denomination_greek_orthodox">Görög ortodox</string>
 	<string name="poi_denomination_reformed">Református</string>
 	<string name="poi_denomination_seventh_day_adventist">Hetednapi adventista</string>
 	<string name="poi_denomination_new_apostolic">Új Apostoli Egyház</string>
@@ -3884,4 +3884,7 @@
 	<string name="poi_hazard_minefield">Aknamező</string>
 
 
-</resources>
+<string name="poi_car_pooling">Telekocsihely</string>
+	<string name="poi_course">Turistaút</string>
+
+	</resources>
