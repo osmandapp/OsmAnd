@@ -814,8 +814,8 @@
     <string name="save_current_track_descr">現在把目前的軌跡存為 GPX 檔案。</string>
     <string name="save_current_track">儲存目前的軌跡</string>
     <string name="save_track_interval">在導航期間的記錄間隔</string>
-    <string name="save_track_interval_descr">在整個導航期間，為軌跡錄製選取記錄間隔。</string>
-    <string name="save_track_to_gpx_descrp">在導航期間時，GPX 軌跡會自動儲存在 track 資料夾。</string>
+    <string name="save_track_interval_descr">在整個導航期間，為軌跡錄製挑選記錄間隔。</string>
+    <string name="save_track_to_gpx_descrp">在導航期間，GPX 軌跡會自動儲存在 track 資料夾。</string>
     <string name="save_track_to_gpx">導航期間自動記錄軌跡</string>
     <string name="update_tile">更新地圖</string>
     <string name="reload_tile">重新載入圖磚</string>
@@ -1524,7 +1524,7 @@
     <string name="rendering_attr_publicTransportMode_name">公車、無軌電車，班車路線</string>
     <string name="save_track_to_gpx_globally">記錄軌跡成 GPX 檔案</string>
     <string name="save_track_interval_globally">記錄間隔</string>
-    <string name="save_track_to_gpx_globally_descr">通常位置記錄到一個 GPX 檔案，在地圖畫面上使用 GPX 記錄小工具，可以開啟或關閉。</string>
+    <string name="save_track_to_gpx_globally_descr">通常位置記錄成一個 GPX 檔案，在地圖畫面上使用 GPX 記錄小工具，可以開啟或關閉。</string>
     <string name="confirm_every_run">始終詢問</string>
     <string name="save_global_track_interval_descr">為通常的軌跡記錄選擇錄製間隔（透過在地圖上的 GPX 記錄小工具啟用）。</string>
     <string name="save_global_track_interval">通常的記錄間隔</string>
@@ -1572,7 +1572,7 @@
     <string name="rendering_attr_tramTrainRoutes_name">有軌電車和火車路線</string>
     <string name="rendering_category_hide">隱藏</string>
     <string name="wake_on_voice">將螢幕開啟</string>
-    <string name="wake_on_voice_descr">當接近轉彎時，開啟裝置螢幕 (螢幕關閉時)。</string>
+    <string name="wake_on_voice_descr">當接近轉彎時，開啟裝置螢幕 (如果螢幕關閉)。</string>
     <string name="lock_screen_request_explanation">為了節電作用 %1$s 需要此許可權才能關閉螢幕。</string>
     
     
@@ -1626,7 +1626,7 @@
     <string name="proxy_host_descr">組態您代理伺服器的主機名稱 (例如 127.0.0.1)。</string>
     <string name="proxy_port_title">代理伺服器埠</string>
     <string name="proxy_port_descr">組態您代理伺服器的埠號 (例如 8118)。</string>
-    <string name="version_settings_descr">下載 nightly builds 版。</string>
+    <string name="version_settings_descr">下載 nightly builds 版本。</string>
     <string name="version_settings">建構</string>
     <string name="shared_string_gpx_points">點</string>
 
@@ -1762,7 +1762,7 @@
     <string name="action_modify">修改動作</string>
     <string name="action_delete">刪除動作</string>
     <string name="osmand_parking_overdue">已過時</string>
-    <string name="delay_to_start_navigation_descr">在導航規劃螢幕上，指示剩餘等待時間。</string>
+    <string name="delay_to_start_navigation_descr">在路線規劃螢幕上，指示剩餘等待時間。</string>
     <string name="delay_to_start_navigation">導航後開始轉向建議…</string>
     <string name="shared_string_go">執行</string>
 
@@ -1935,7 +1935,7 @@
     <string name="are_you_sure">您確定嗎？</string>
     <string name="unsaved_changes_will_be_lost">任何未儲存的變更將會失去。要繼續嗎?</string>
     <string name="simulate_your_location_stop_descr">停止模擬您的位置。</string>
-    <string name="simulate_your_location_descr">模擬您的位置使用在計算路線或記錄成一個 GPX 軌跡。</string>
+    <string name="simulate_your_location_descr">模擬您的位置以使用在計算路線或記錄成 GPX 軌跡。</string>
     <string name="downloads_left_template">%1$s 次下載剩餘</string>
     <string name="favourites_edit_dialog_title">我的收藏資訊</string>
     <string name="favourites_context_menu_add">增加到我的收藏</string>
@@ -1943,7 +1943,7 @@
     <string name="shared_string_trip_recording">旅程錄製</string>
     <string name="shared_string_navigation">導航</string>
     <string name="osmand_running_in_background">在背景執行</string>
-    <string name="default_speed_system_descr">定義速度的單位。</string>
+    <string name="default_speed_system_descr">定義速度單位。</string>
     <string name="default_speed_system">速度的單位</string>
     <string name="si_nm">浬</string>
     <string name="nm">浬</string>
@@ -2431,7 +2431,7 @@
     <string name="quick_action_add_navigation">導航</string>
     <string name="quick_action_bug_message">訊息</string>
     <string name="quick_action_category_descr">選擇類別以儲存我的收藏。</string>
-    <string name="quick_action_gpx_category_descr">選定可供選擇的類別。</string>
+    <string name="quick_action_gpx_category_descr">選取可供選擇的類別。</string>
     <string name="quick_action_poi_list">POI 清單</string>
     <string name="quick_action_sh_poi_descr">增加一個或是更多的 POI 類別顯示在地圖上。</string>
     <string name="quick_action_map_style_action">增加一個地圖樣式</string>
@@ -2530,7 +2530,7 @@
     <string name="routing_attr_driving_style_balance_name">均衡</string>
     <string name="routing_attr_driving_style_safety_name">較喜歡小路</string>
     <string name="relief_smoothness_factor_descr">偏愛的地形：平地或丘陵。</string>
-    <string name="full_version_thanks">感謝您購買付費版本的 OsmAnd。</string>
+    <string name="full_version_thanks">感謝您購買 OsmAnd 的付費版本。</string>
     <string name="routing_attr_relief_smoothness_factor_name">選擇高度起伏</string>
     <string name="parking_options">停車選項</string>
     <string name="do_not_send_anonymous_app_usage">不要傳送匿名的應用程式使用統計</string>
