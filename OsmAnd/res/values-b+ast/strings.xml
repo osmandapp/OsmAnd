@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
 	<string name="av_locations">Allugamientos</string>
 	<string name="plugin_settings">Complementos</string>
 	<string name="no_updates_available">Nun hai anovamientos disponibles</string>
@@ -1068,4 +1069,5 @@ Puntos</string>
     <string name="show_guide_line_descr">Amosar llinies de direición dende la to posición a les de marcadores activos.</string>
     <string name="show_arrows_descr">Ver una o dos fleches qu\'indiquen la direición a los marcadores activos.</string>
     <string name="osmand_parking_am">AM</string>
+    <string name="thank_you_for_feedback">Gracies pola to opinión</string>
     </resources>
