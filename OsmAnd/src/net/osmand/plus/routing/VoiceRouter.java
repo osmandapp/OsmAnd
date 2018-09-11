@@ -721,7 +721,7 @@ public class VoiceRouter {
 	
 	private void playAndArriveAtDestination(NextDirectionInfo info) {
 		if (isTargetPoint(info)) {
-			String pointName = info == null ? "" : info.pointName;
+			String pointName = (info == null || info.pointName == null) ? "" : info.pointName;
 			CommandBuilder play = getNewCommandPlayerToPlay();
 			if (play != null) {
 				notifyOnVoiceMessage();
