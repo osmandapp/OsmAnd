@@ -14,6 +14,7 @@ import android.os.ParcelFileDescriptor;
 import android.provider.OpenableColumns;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.SpannableStringBuilder;
@@ -135,6 +136,8 @@ public class ImportHelper {
 			handleKmzImport(intentUri, fileName, saveFile, useImportDir);
 		} else if (fileName != null && fileName.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)) {
 			handleObfImport(intentUri, fileName);
+		} else if (fileName != null && fileName.endsWith(IndexConstants.SQLITE_EXT)) {
+			handleSqliteTileImport(intentUri, fileName);
 		} else {
 			handleFavouritesImport(intentUri, fileName, saveFile, useImportDir, false);
 		}
@@ -394,51 +397,13 @@ public class ImportHelper {
 
 			@Override
 			protected String doInBackground(Void... voids) {
-				File dest = getObfDestFile(name);
-				if (dest.exists()) {
-					return app.getString(R.string.file_with_name_already_exists);
+				String error = copyFile(getObfDestFile(name), obfFile);
+				if (error == null) {
+					app.getResourceManager().reloadIndexes(IProgress.EMPTY_PROGRESS, new ArrayList<String>());
+					app.getDownloadThread().updateLoadedFiles();
+					return app.getString(R.string.map_imported_successfully);
 				}
-				String message = app.getString(R.string.map_imported_successfully);
-				InputStream in = null;
-				OutputStream out = null;
-				try {
-					final ParcelFileDescriptor pFD = app.getContentResolver().openFileDescriptor(obfFile, "r");
-					if (pFD != null) {
-						in = new FileInputStream(pFD.getFileDescriptor());
-						out = new FileOutputStream(dest);
-						Algorithms.streamCopy(in, out);
-						app.getResourceManager().reloadIndexes(IProgress.EMPTY_PROGRESS, new ArrayList<String>());
-						app.getDownloadThread().updateLoadedFiles();
-						try {
-							pFD.close();
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
-					}
-				} catch (FileNotFoundException e) {
-					e.printStackTrace();
-					message = app.getString(R.string.map_import_error) + ": " + e.getMessage();
-				} catch (IOException e) {
-					e.printStackTrace();
-					message = app.getString(R.string.map_import_error) + ": " + e.getMessage();
-				} finally {
-					if (in != null) {
-						try {
-							in.close();
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
-					}
-					if (out != null) {
-						try {
-							out.close();
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
-					}
-				}
-
-				return message;
+				return app.getString(R.string.map_import_error) + ": " + error;
 			}
 
 			@Override
@@ -446,7 +411,7 @@ public class ImportHelper {
 				if (isActivityNotDestroyed(activity)) {
 					progress.dismiss();
 				}
-				Toast.makeText(activity, message, Toast.LENGTH_SHORT).show();
+				Toast.makeText(app, message, Toast.LENGTH_SHORT).show();
 			}
 		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
@@ -459,6 +424,81 @@ public class ImportHelper {
 			return app.getAppPath(IndexConstants.WIKI_INDEX_DIR + name);
 		}
 		return app.getAppPath(name);
+	}
+
+	@Nullable
+	private String copyFile(@NonNull File dest, @NonNull Uri uri) {
+		if (dest.exists()) {
+			return app.getString(R.string.file_with_name_already_exists);
+		}
+		String error = null;
+		InputStream in = null;
+		OutputStream out = null;
+		try {
+			final ParcelFileDescriptor pFD = app.getContentResolver().openFileDescriptor(uri, "r");
+			if (pFD != null) {
+				in = new FileInputStream(pFD.getFileDescriptor());
+				out = new FileOutputStream(dest);
+				Algorithms.streamCopy(in, out);
+				try {
+					pFD.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			error = e.getMessage();
+		} catch (IOException e) {
+			e.printStackTrace();
+			error = e.getMessage();
+		} finally {
+			if (in != null) {
+				try {
+					in.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			if (out != null) {
+				try {
+					out.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return error;
+	}
+
+	@SuppressLint("StaticFieldLeak")
+	private void handleSqliteTileImport(final Uri uri, final String name) {
+		new AsyncTask<Void, Void, String>() {
+
+			ProgressDialog progress;
+
+			@Override
+			protected void onPreExecute() {
+				progress = ProgressDialog.show(activity, app.getString(R.string.loading_smth, ""), app.getString(R.string.loading_data));
+			}
+
+			@Override
+			protected String doInBackground(Void... voids) {
+				return copyFile(app.getAppPath(IndexConstants.TILES_INDEX_DIR + name), uri);
+			}
+
+			@Override
+			protected void onPostExecute(String error) {
+				if (isActivityNotDestroyed(activity)) {
+					progress.dismiss();
+				}
+				if (error == null) {
+					Toast.makeText(app, app.getString(R.string.map_imported_successfully), Toast.LENGTH_SHORT).show();
+				} else {
+					Toast.makeText(app, app.getString(R.string.map_import_error) + ": " + error, Toast.LENGTH_SHORT).show();
+				}
+			}
+		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
 	private boolean isActivityNotDestroyed(Activity activity) {
