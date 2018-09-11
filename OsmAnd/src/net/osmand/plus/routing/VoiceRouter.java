@@ -259,7 +259,7 @@ public class VoiceRouter {
 		double[] dist = new double[1];
 		makeSound();
 		String text = getText(location, points, dist);
-		p.goAhead(dist[0], null).andArriveAtWayPoint(text).play();
+		p.goAhead(dist[0], new StreetName()).andArriveAtWayPoint(text).play();
 	}
 
 	public void approachFavorite(Location location, List<LocationPointWrapper> points) {
@@ -271,7 +271,7 @@ public class VoiceRouter {
 		double[] dist = new double[1];
 		makeSound();
 		String text = getText(location, points, dist);
-		p.goAhead(dist[0], null).andArriveAtFavorite(text).play();
+		p.goAhead(dist[0], new StreetName()).andArriveAtFavorite(text).play();
 	}
 	
 	public void approachPoi(Location location, List<LocationPointWrapper> points) {
@@ -283,7 +283,7 @@ public class VoiceRouter {
 		notifyOnVoiceMessage();
 		double[] dist = new double[1];
 		String text = getText(location, points,  dist);
-		p.goAhead(dist[0], null).andArriveAtPoi(text).play();
+		p.goAhead(dist[0], new StreetName()).andArriveAtPoi(text).play();
 	}
 
 	public void announceWaypoint(List<LocationPointWrapper> points) {
@@ -721,7 +721,7 @@ public class VoiceRouter {
 	
 	private void playAndArriveAtDestination(NextDirectionInfo info) {
 		if (isTargetPoint(info)) {
-			String pointName = info == null ? "" : info.pointName;
+			String pointName = (info == null || info.pointName == null) ? "" : info.pointName;
 			CommandBuilder play = getNewCommandPlayerToPlay();
 			if (play != null) {
 				notifyOnVoiceMessage();
