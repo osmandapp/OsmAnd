@@ -333,7 +333,8 @@ public class RulerControlLayer extends OsmandMapLayer {
 	}
 
 	private void updateData(RotatedTileBox tb, QuadPoint center) {
-		if (tb.getPixHeight() > 0 && tb.getPixWidth() > 0 && maxRadiusInDp > 0) {
+		if (tb.getPixHeight() > 0 && tb.getPixWidth() > 0 && maxRadiusInDp > 0
+				&& !Double.isNaN(tb.getLatitude()) && !Double.isNaN(tb.getLongitude())) {
 			if (cacheCenter.y != center.y || cacheCenter.x != center.x) {
 				cacheCenter = center;
 				updateCenter(tb, center);
