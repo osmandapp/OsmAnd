@@ -20,7 +20,6 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemTitleWithDescrAndButton;
-import net.osmand.plus.dashboard.DashLocationFragment;
 import net.osmand.util.MapUtils;
 
 import java.text.Collator;
@@ -58,7 +57,10 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 		if (savedInstanceState != null && savedInstanceState.getBoolean(IS_SORTED)) {
 			sortByDist = savedInstanceState.getBoolean(SORTED_BY_TYPE);
 		}
-		favouritePoints = getMyApplication().getFavorites().getFavouritePoints();
+		favouritePoints = getMyApplication().getFavorites().getVisibleFavouritePoints();
+		if (favouritePoints.isEmpty()) {
+			favouritePoints = getMyApplication().getFavorites().getFavouritePoints();
+		}
 		recyclerView = new RecyclerView(getContext());
 		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 		recyclerView = (RecyclerView) View.inflate(new ContextThemeWrapper(getContext(), themeRes),
