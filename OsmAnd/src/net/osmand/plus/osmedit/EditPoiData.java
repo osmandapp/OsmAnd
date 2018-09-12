@@ -31,6 +31,7 @@ public class EditPoiData {
 	private boolean hasChangesBeenMade = false;
 	private Map<String, PoiType> allTranslatedSubTypes;
 	private PoiCategory category;
+	private PoiType currentPoiType;
 
 	private Set<String> changedTags = new HashSet<>();
 	
@@ -57,6 +58,11 @@ public class EditPoiData {
 	@Nullable
 	public PoiCategory getPoiCategory() {
 		return category;
+	}
+	
+	@Nullable
+	public PoiType getCurrentPoiType() {
+		return currentPoiType;
 	}
 	
 	public PoiType getPoiTypeDefined() {
@@ -199,20 +205,50 @@ public class EditPoiData {
 	}
 
 	public void updateTypeTag(String string, boolean userChanges) {
-		tagValues.put(POI_TYPE_TAG, string);
-		if (userChanges) {
-			changedTags.add(POI_TYPE_TAG);
+		checkNotInEdit();
+		try {
+			tagValues.put(POI_TYPE_TAG, string);
+			if (userChanges) {
+				changedTags.add(POI_TYPE_TAG);
+			}
+			retrieveType();
+			PoiType pt = getPoiTypeDefined();
+			if (pt != null) {
+				removeTypeTagWithPrefix(!tagValues.containsKey(REMOVE_TAG_PREFIX + pt.getEditOsmTag()));
+				currentPoiType = pt;
+				tagValues.put(pt.getEditOsmTag(), pt.getEditOsmValue());
+				if (userChanges) {
+					changedTags.add(pt.getEditOsmTag());
+				}
+				category = pt.getCategory();
+			} else if (currentPoiType != null) {
+				removeTypeTagWithPrefix(true);
+				category = currentPoiType.getCategory();
+			}
+			notifyDatasetChanged(POI_TYPE_TAG);
+		} finally {
+			isInEdit = false;
 		}
-		retrieveType();
-		PoiType pt = getPoiTypeDefined();
-		if(pt != null) {
-			tagValues.put(REMOVE_TAG_PREFIX+pt.getEditOsmTag(), REMOVE_TAG_VALUE);
-			tagValues.put(REMOVE_TAG_PREFIX+pt.getOsmTag2(), REMOVE_TAG_VALUE);
-			tagValues.remove(pt.getEditOsmTag());
-			tagValues.remove(pt.getOsmTag2());
-			changedTags.removeAll(Arrays.asList(pt.getEditOsmTag(), pt.getOsmTag2()));
-			category = pt.getCategory();
+	}
+
+	private void removeTypeTagWithPrefix(boolean needRemovePrefix) {
+		if (currentPoiType != null) {
+			if (needRemovePrefix) {
+				tagValues.put(REMOVE_TAG_PREFIX + currentPoiType.getEditOsmTag(), REMOVE_TAG_VALUE);
+				tagValues.put(REMOVE_TAG_PREFIX + currentPoiType.getOsmTag2(), REMOVE_TAG_VALUE);
+			} else {
+				tagValues.remove(REMOVE_TAG_PREFIX + currentPoiType.getEditOsmTag());
+				tagValues.remove(REMOVE_TAG_PREFIX + currentPoiType.getOsmTag2());
+			}
+			removeCurrentTypeTag();
 		}
-		notifyDatasetChanged(POI_TYPE_TAG);
+	}
+
+	private void removeCurrentTypeTag() {
+		if (currentPoiType != null) {
+			tagValues.remove(currentPoiType.getEditOsmTag());
+			tagValues.remove(currentPoiType.getOsmTag2());
+			changedTags.removeAll(Arrays.asList(currentPoiType.getEditOsmTag(), currentPoiType.getOsmTag2()));
+		}
 	}
 }
