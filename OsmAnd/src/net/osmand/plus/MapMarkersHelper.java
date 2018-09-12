@@ -1411,12 +1411,12 @@ public class MapMarkersHelper {
 			return pointDescription;
 		}
 
-		public String getOnlyName() {
-			return pointDescription == null ? "" : pointDescription.getName();
+		public void setOriginalPointDescription(PointDescription pointDescription) {
+			this.pointDescription = pointDescription;
 		}
 
-		public void setName(String name) {
-			pointDescription.setName(name);
+		public String getOnlyName() {
+			return pointDescription == null ? "" : pointDescription.getName();
 		}
 
 		public double getLatitude() {

@@ -22,6 +22,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 
 import net.osmand.AndroidUtils;
+import net.osmand.data.PointDescription;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -82,7 +83,8 @@ public class RenameMarkerBottomSheetDialogFragment extends BottomSheetDialogFrag
 			public void onClick(View view) {
 				String name = nameEditText.getText().toString();
 				if (name.replaceAll("\\s", "").length() > 0) {
-					marker.setName(name);
+					PointDescription pd = new PointDescription(PointDescription.POINT_TYPE_MAP_MARKER, name);
+					marker.setOriginalPointDescription(pd);
 					mapActivity.getMyApplication().getMapMarkersHelper().updateMapMarker(marker, true);
 					dismiss();
 				} else {
