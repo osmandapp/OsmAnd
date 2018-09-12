@@ -3,6 +3,7 @@ package net.osmand.plus.activities;
 
 import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.AdapterView;
@@ -434,7 +435,7 @@ public class MapActivityLayers {
 		adapter.addItem(builder.createItem());
 	}
 
-	public void selectMapLayer(final OsmandMapTileView mapView, final ContextMenuItem it, final ArrayAdapter<ContextMenuItem> adapter) {
+	public void selectMapLayer(final OsmandMapTileView mapView, @Nullable final ContextMenuItem it, @Nullable final ArrayAdapter<ContextMenuItem> adapter) {
 		if (OsmandPlugin.getEnabledPlugin(OsmandRasterMapsPlugin.class) == null) {
 			Toast.makeText(activity, R.string.map_online_plugin_is_not_installed, Toast.LENGTH_LONG).show();
 			return;
@@ -492,8 +493,7 @@ public class MapActivityLayers {
 					case layerOsmVector:
 						settings.MAP_ONLINE_DATA.set(false);
 						updateMapSource(mapView, null);
-						it.setDescription(null);
-						adapter.notifyDataSetChanged();
+						updateItem(it, adapter, null);
 						break;
 					case layerEditInstall:
 						OsmandRasterMapsPlugin.defineNewEditLayer(activity, new ResultMatcher<TileSourceTemplate>() {
@@ -527,8 +527,7 @@ public class MapActivityLayers {
 									if (count == 1) {
 										settings.MAP_TILE_SOURCES.set(template.getName());
 										settings.MAP_ONLINE_DATA.set(true);
-										it.setDescription(template.getName());
-										adapter.notifyDataSetChanged();
+										updateItem(it, adapter, template.getName());
 										updateMapSource(mapView, settings.MAP_TILE_SOURCES);
 									} else {
 										selectMapLayer(mapView, it, adapter);
@@ -549,8 +548,7 @@ public class MapActivityLayers {
 					default:
 						settings.MAP_TILE_SOURCES.set(layerKey);
 						settings.MAP_ONLINE_DATA.set(true);
-						it.setDescription(layerKey);
-						adapter.notifyDataSetChanged();
+						updateItem(it, adapter, layerKey);
 						updateMapSource(mapView, settings.MAP_TILE_SOURCES);
 						break;
 				}
@@ -561,6 +559,17 @@ public class MapActivityLayers {
 		});
 		builder.setNegativeButton(R.string.shared_string_dismiss, null);
 		builder.show();
+	}
+
+	private void updateItem(@Nullable ContextMenuItem item,
+							@Nullable ArrayAdapter<ContextMenuItem> adapter,
+							@Nullable String description) {
+		if (item != null) {
+			item.setDescription(description);
+		}
+		if (adapter != null) {
+			adapter.notifyDataSetChanged();
+		}
 	}
 
 
