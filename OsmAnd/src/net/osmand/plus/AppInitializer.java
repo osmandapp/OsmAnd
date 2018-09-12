@@ -148,7 +148,7 @@ public class AppInitializer implements IProgress {
 	}
 
 
-	@SuppressLint("CommitPrefEdits")
+	@SuppressLint({"CommitPrefEdits", "ApplySharedPref"})
 	public void initVariables() {
 		if(initSettings) {
 			return;
@@ -180,6 +180,7 @@ public class AppInitializer implements IProgress {
 			if(prevAppVersion < VERSION_2_3) {
 				startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, VERSION_2_3).commit();
 			} else if (prevAppVersion < VERSION_3_2) {
+				app.getSettings().BILLING_PURCHASE_TOKEN_SENT.set(false);
 				startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, VERSION_3_2).commit();
 			}
 			startPrefs.edit().putString(VERSION_INSTALLED, Version.getFullVersion(app)).commit();
