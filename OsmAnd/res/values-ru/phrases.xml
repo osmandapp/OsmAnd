@@ -3825,5 +3825,6 @@
 	<string name="poi_hazard_flood">Опасность затопления</string>
 	<string name="poi_hazard_minefield">Минное поле</string>
 
+	<string name="poi_ruins">Развалины</string>
 
 </resources>
