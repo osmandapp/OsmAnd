@@ -757,7 +757,7 @@
     <string name="max_level_download_tile">線上最大縮放比</string>
     <string name="max_level_download_tile_descr">不要瀏覽超出此範圍縮放級別的線上地圖圖磚。</string>
     <string name="route_general_information">總距離 %1$s，行駛時間 %2$d 小時 %3$d 分。</string>
-    <string name="router_service_descr">選擇線上或是離線的導航服務。</string>
+    <string name="router_service_descr">選擇線上或是離線導航服務。</string>
     <string name="router_service">導航服務</string>
     <string name="sd_dir_not_accessible">該資料在記憶卡上的存儲資料夾無法存取！</string>
     <string name="download_question">下載 {0} - {1}？</string>
