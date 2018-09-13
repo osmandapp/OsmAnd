@@ -24,13 +24,13 @@
 	<string name="connected_account">Connected account</string>
 	<string name="shared_string_account">Account</string>
 	<string name="in_time">in %1$s</string>
-	<string name="osmand_connect_desc">Choose the OsmAnd version to which OsmAnd location sharing will refer for displaying the position.</string>
+	<string name="osmand_connect_desc">Choose the OsmAnd version to which OsmAnd Telegram will refer for displaying the position on the map.</string>
 	<string name="osmand_connect">OsmAnd connect</string>
-	<string name="location_history_desc">Hide contacts that are not updated their location after the specified period of time.</string>
+	<string name="location_history_desc">Hide the contacts that had not updated their location after the specified period of time.</string>
 	<string name="location_history">Location history</string>
-	<string name="stale_location_desc">Time when contact last time sent an update to its location.</string>
+	<string name="stale_location_desc">The last time when a contact sent an update to their location.</string>
 	<string name="stale_location">Stale location</string>
-	<string name="send_my_location_desc">Set minimum interval for location sharing.</string>
+	<string name="send_my_location_desc">Set the minimum interval for location sharing.</string>
 	<string name="send_my_location">Send my location</string>
 	<string name="gps_and_location">GPS &amp; location</string>
 	<string name="sharing_time">Sharing time</string>
