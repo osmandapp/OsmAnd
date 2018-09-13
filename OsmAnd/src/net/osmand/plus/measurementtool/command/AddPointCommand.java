@@ -1,23 +1,40 @@
 package net.osmand.plus.measurementtool.command;
 
+import net.osmand.data.LatLon;
 import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.measurementtool.MeasurementToolLayer;
 
 public class AddPointCommand extends MeasurementModeCommand {
 
-	private final int position;
+	private int position;
 	private WptPt point;
-	private final boolean center;
+	private boolean center;
 
 	public AddPointCommand(MeasurementToolLayer measurementLayer, boolean center) {
+		init(measurementLayer, null, center);
+	}
+
+	public AddPointCommand(MeasurementToolLayer measurementLayer, LatLon latLon) {
+		init(measurementLayer, latLon, false);
+	}
+
+	private void init(MeasurementToolLayer measurementLayer, LatLon latLon, boolean center) {
 		this.measurementLayer = measurementLayer;
+		if (latLon != null) {
+			point = new WptPt();
+			point.lat = latLon.getLatitude();
+			point.lon = latLon.getLongitude();
+		}
 		this.center = center;
 		position = measurementLayer.getEditingCtx().getPointsCount();
 	}
 
 	@Override
 	public boolean execute() {
-		if (center) {
+		if (point != null) {
+			measurementLayer.getEditingCtx().addPoint(point);
+			measurementLayer.moveMapToPoint(position);
+		} else if (center) {
 			point = measurementLayer.addCenterPoint();
 		} else {
 			point = measurementLayer.addPoint();

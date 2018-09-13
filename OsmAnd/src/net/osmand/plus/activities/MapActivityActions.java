@@ -90,6 +90,7 @@ public class MapActivityActions implements DialogProvider {
 	public static final int CHANGE_POSITION_ITEM_ORDER = 3000;
 	public static final int EDIT_GPX_WAYPOINT_ITEM_ORDER = 9000;
 	public static final int ADD_GPX_WAYPOINT_ITEM_ORDER = 9000;
+	public static final int MEASURE_DISTANCE_ITEM_ORDER = 13000;
 
 	private static final int DIALOG_ADD_FAVORITE = 100;
 	private static final int DIALOG_REPLACE_FAVORITE = 101;
@@ -327,6 +328,12 @@ public class MapActivityActions implements DialogProvider {
 					.setListener(listener).createItem());
 		}
 
+		adapter.addItem(itemBuilder
+				.setTitleId(R.string.measurement_tool, mapActivity)
+				.setIcon(R.drawable.ic_action_ruler)
+				.setOrder(MEASURE_DISTANCE_ITEM_ORDER)
+				.createItem());
+
 		adapter.sortItemsByOrder();
 
 		final ArrayAdapter<ContextMenuItem> listAdapter =
@@ -355,6 +362,9 @@ public class MapActivityActions implements DialogProvider {
 						getMyApplication().getTargetPointsHelper().setStartPoint(new LatLon(latitude, longitude),
 								true, mapActivity.getContextMenu().getPointDescription());
 					}
+				} else if (standardId == R.string.measurement_tool) {
+					mapActivity.getContextMenu().close();
+					MeasurementToolFragment.showInstance(mapActivity.getSupportFragmentManager(), new LatLon(latitude, longitude));
 				}
 			}
 		});

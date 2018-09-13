@@ -35,6 +35,7 @@ import android.widget.Toast;
 import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
 import net.osmand.IndexConstants;
+import net.osmand.data.LatLon;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
@@ -110,6 +111,8 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 
 	private MeasurementEditingContext editingCtx = new MeasurementEditingContext();
 
+	private LatLon initialPoint;
+
 	private enum SaveType {
 		ROUTE_POINT,
 		LINE
@@ -117,6 +120,10 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 
 	private void setEditingCtx(MeasurementEditingContext editingCtx) {
 		this.editingCtx = editingCtx;
+	}
+
+	private void setInitialPoint(LatLon initialPoint) {
+		this.initialPoint = initialPoint;
 	}
 
 	@Nullable
@@ -464,6 +471,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 		getMapActivity().getMapLayers().getMapControlsLayer().showMapControlsIfHidden();
 		cachedMapPosition = getMapActivity().getMapView().getMapPosition();
 		setDefaultMapPosition();
+		addInitialPoint();
 	}
 
 	@Override
@@ -976,6 +984,17 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 				R.id.distance_to_center_text_view,
 				R.id.up_down_button,
 				R.id.measure_mode_controls);
+	}
+
+	private void addInitialPoint() {
+		if (initialPoint != null) {
+			MeasurementToolLayer layer = getMeasurementLayer();
+			if (layer != null) {
+				editingCtx.getCommandManager().execute(new AddPointCommand(layer, initialPoint));
+				doAddOrMovePointCommonStuff();
+				initialPoint = null;
+			}
+		}
 	}
 
 	private void addPoint() {
@@ -1508,23 +1527,24 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 		}
 	}
 
+	public static boolean showInstance(FragmentManager fragmentManager, LatLon initialPoint) {
+		MeasurementToolFragment fragment = new MeasurementToolFragment();
+		fragment.setInitialPoint(initialPoint);
+		return showFragment(fragment, fragmentManager);
+	}
+
 	public static boolean showInstance(FragmentManager fragmentManager, MeasurementEditingContext editingCtx) {
-		try {
-			MeasurementToolFragment fragment = new MeasurementToolFragment();
-			fragment.setEditingCtx(editingCtx);
-			fragment.setRetainInstance(true);
-			fragmentManager.beginTransaction()
-					.add(R.id.bottomFragmentContainer, fragment, MeasurementToolFragment.TAG)
-					.commitAllowingStateLoss();
-			return true;
-		} catch (Exception e) {
-			return false;
-		}
+		MeasurementToolFragment fragment = new MeasurementToolFragment();
+		fragment.setEditingCtx(editingCtx);
+		return showFragment(fragment, fragmentManager);
 	}
 
 	public static boolean showInstance(FragmentManager fragmentManager) {
+		return showFragment(new MeasurementToolFragment(), fragmentManager);
+	}
+
+	private static boolean showFragment(MeasurementToolFragment fragment, FragmentManager fragmentManager) {
 		try {
-			MeasurementToolFragment fragment = new MeasurementToolFragment();
 			fragment.setRetainInstance(true);
 			fragmentManager.beginTransaction()
 					.add(R.id.bottomFragmentContainer, fragment, MeasurementToolFragment.TAG)
