@@ -311,32 +311,21 @@ public class AmenityMenuController extends MenuController {
 		Collection<TransportRoute> rts = t.getRouteForStop(s);
 		if (rts != null) {
 			for (TransportRoute rs : rts) {
-				if (!containsRef(rs)) {
-					TransportStopType type = TransportStopType.findType(rs.getType());
-					if (isSubwayEntrance && type != TransportStopType.SUBWAY && dist > 150) {
-						continue;
-					}
-					TransportStopRoute r = new TransportStopRoute();
-					r.type = type;
-					r.desc = useEnglishNames ? rs.getEnName(true) : rs.getName();
-					r.route = rs;
-					r.stop = s;
-					if (amenity.getLocation().equals(s.getLocation()) || (isSubwayEntrance && type == TransportStopType.SUBWAY)) {
-						r.refStop = s;
-					}
-					r.distance = dist;
-					this.routes.add(r);
+				TransportStopType type = TransportStopType.findType(rs.getType());
+				if (isSubwayEntrance && type != TransportStopType.SUBWAY && dist > 150) {
+					continue;
 				}
+				TransportStopRoute r = new TransportStopRoute();
+				r.type = type;
+				r.desc = useEnglishNames ? rs.getEnName(true) : rs.getName();
+				r.route = rs;
+				r.stop = s;
+				if (amenity.getLocation().equals(s.getLocation()) || (isSubwayEntrance && type == TransportStopType.SUBWAY)) {
+					r.refStop = s;
+				}
+				r.distance = dist;
+				this.routes.add(r);
 			}
 		}
-	}
-
-	private boolean containsRef(TransportRoute transportRoute) {
-		for (TransportStopRoute route : routes) {
-			if (route.route.getRef().equals(transportRoute.getRef())) {
-				return true;
-			}
-		}
-		return false;
 	}
 }

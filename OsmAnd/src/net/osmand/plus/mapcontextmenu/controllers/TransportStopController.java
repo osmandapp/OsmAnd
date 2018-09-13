@@ -73,6 +73,22 @@ public class TransportStopController extends MenuController {
 	}
 
 	@Override
+	protected List<TransportStopRoute> getSubTransportStopRoutes(boolean nearby) {
+		List<TransportStopRoute> allRoutes = getTransportStopRoutes();
+		if (allRoutes != null) {
+			List<TransportStopRoute> res = new ArrayList<>();
+			for (TransportStopRoute route : allRoutes) {
+				boolean isCurrentRouteNearby = route.stop != null && !route.stop.equals(transportStop);
+				if ((nearby && isCurrentRouteNearby) || (!nearby && !isCurrentRouteNearby)) {
+					res.add(route);
+				}
+			}
+			return res;
+		}
+		return null;
+	}
+	
+	@Override
 	public boolean needStreetName() {
 		return Algorithms.isEmpty(getNameStr());
 	}
@@ -151,27 +167,16 @@ public class TransportStopController extends MenuController {
 				if (topType == null && type != null && type.isTopType()) {
 					topType = type;
 				}
-				if (!containsRef(routes, rs)) {
-					TransportStopRoute r = new TransportStopRoute();
-					r.type = type;
-					r.desc = useEnglishNames ? rs.getEnName(true) : rs.getName();
-					r.route = rs;
-					r.refStop = refStop;
-					r.stop = s;
-					r.distance = dist;
-					routes.add(r);
-				}
+				TransportStopRoute r = new TransportStopRoute();
+				r.type = type;
+				r.desc = useEnglishNames ? rs.getEnName(true) : rs.getName();
+				r.route = rs;
+				r.refStop = refStop;
+				r.stop = s;
+				r.distance = dist;
+				routes.add(r);
 			}
 		}
-	}
-
-	private boolean containsRef(List<TransportStopRoute> routes, TransportRoute transportRoute) {
-		for (TransportStopRoute route : routes) {
-			if (route.route.getRef().equals(transportRoute.getRef())) {
-				return true;
-			}
-		}
-		return false;
 	}
 
 	@Override

@@ -554,17 +554,6 @@ public abstract class MenuController extends BaseMenuController implements Colla
 
 	@Nullable
 	protected List<TransportStopRoute> getSubTransportStopRoutes(boolean nearby) {
-		List<TransportStopRoute> allRoutes = getTransportStopRoutes();
-		if (allRoutes != null) {
-			List<TransportStopRoute> res = new ArrayList<>();
-			for (TransportStopRoute route : allRoutes) {
-				boolean isCurrentRouteNearby = route.refStop != null && !route.refStop.getName().equals(route.stop.getName());
-				if ((nearby && isCurrentRouteNearby) || (!nearby && !isCurrentRouteNearby)) {
-					res.add(route);
-				}
-			}
-			return res;
-		}
 		return null;
 	}
 
