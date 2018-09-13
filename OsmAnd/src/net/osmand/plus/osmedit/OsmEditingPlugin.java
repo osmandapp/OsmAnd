@@ -498,6 +498,35 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		return (osmPoint.getGroup() == OsmPoint.Group.POI ? "POI" : "Bug") + " id: " + osmPoint.getId() + " ";
 	}
 
+	public static String getDescription(OsmPoint osmPoint, Context context, boolean needPrefix) {
+		String action = "";
+		if (osmPoint.getAction() == OsmPoint.Action.CREATE) {
+			action = context.getString(R.string.shared_string_added);
+		} else if (osmPoint.getAction() == OsmPoint.Action.MODIFY) {
+			action = context.getString(R.string.shared_string_edited);
+		} else if (osmPoint.getAction() == OsmPoint.Action.DELETE) {
+			action = context.getString(R.string.shared_string_deleted);
+		} else if (osmPoint.getAction() == OsmPoint.Action.REOPEN) {
+			action = context.getString(R.string.shared_string_edited);
+		}
+
+		String category = getCategory(osmPoint, context);
+
+		String description = "";
+		if (!Algorithms.isEmpty(action)) {
+			description += action + " • ";
+		}
+		if (!Algorithms.isEmpty(category)) {
+			description += category;
+		}
+		if (needPrefix) {
+			String prefix = getPrefix(osmPoint);
+			description += " • " + prefix;
+		}
+
+		return description;
+	}
+
 	@Override
 	public DashFragmentData getCardFragment() {
 		return DashOsmEditsFragment.FRAGMENT_DATA;

@@ -1,6 +1,7 @@
 package net.osmand.plus.osmedit;
 
 import android.content.DialogInterface;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 
@@ -21,7 +22,7 @@ public class EditPOIMenuController extends MenuController {
 
 	private OsmPoint osmPoint;
 	private OsmEditingPlugin plugin;
-	private String category;
+	private String categoryDescr;
 	private String actionStr;
 
 	public EditPOIMenuController(@NonNull MapActivity mapActivity, @NonNull PointDescription pointDescription, @NonNull OsmPoint osmPoint) {
@@ -80,7 +81,7 @@ public class EditPOIMenuController extends MenuController {
 		rightTitleButtonController.caption = mapActivity.getString(R.string.shared_string_delete);
 		rightTitleButtonController.updateStateListDrawableIcon(R.drawable.ic_action_delete_dark, true);
 
-		category = getCategory();
+		categoryDescr = getCategoryDescr();
 
 		if (osmPoint.getGroup() == OsmPoint.Group.POI) {
 			if (osmPoint.getAction() == Action.DELETE) {
@@ -108,7 +109,7 @@ public class EditPOIMenuController extends MenuController {
 	@NonNull
 	@Override
 	public String getTypeStr() {
-		return category;
+		return categoryDescr;
 	}
 
 	@Override
@@ -129,7 +130,7 @@ public class EditPOIMenuController extends MenuController {
 
 	@Override
 	public boolean needTypeStr() {
-		return !Algorithms.isEmpty(category);
+		return !Algorithms.isEmpty(categoryDescr);
 	}
 
 	@Override
@@ -187,6 +188,16 @@ public class EditPOIMenuController extends MenuController {
 	}
 
 	@Override
+	public Drawable getRightIcon() {
+		int iconResId = getRightIconId();
+		if (iconResId != 0) {
+			return getIcon(iconResId, getAdditionalInfoColorId());
+		} else {
+			return null;
+		}
+	}
+	
+	@Override
 	public int getAdditionalInfoIconRes() {
 		if (osmPoint.getAction() == Action.DELETE) {
 			return R.drawable.ic_action_type_delete_16;
@@ -202,7 +213,7 @@ public class EditPOIMenuController extends MenuController {
 		return false;
 	}
 
-	private String getCategory() {
-		return OsmEditingPlugin.getCategory(osmPoint, getMapActivity());
+	private String getCategoryDescr() {
+		return OsmEditingPlugin.getDescription(osmPoint, getMapActivity(), false);
 	}
 }
