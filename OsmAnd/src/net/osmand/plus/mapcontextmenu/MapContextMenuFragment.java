@@ -669,7 +669,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 	private List<TransportStopRoute> filterTransportRoutes(List<TransportStopRoute> routes) {
 		List<TransportStopRoute> filteredRoutes = new ArrayList<>();
 		for (TransportStopRoute route : routes) {
-			if (!containsRef(filteredRoutes, route.route) && filteredRoutes.size() < 6) {
+			if (filteredRoutes.size() < 6 && !containsRef(filteredRoutes, route.route)) {
 				filteredRoutes.add(route);
 			}
 		}
