@@ -29,6 +29,7 @@ public class FavouritePointMenuController extends MenuController {
 	private FavouritePoint fav;
 	private MapMarker mapMarker;
 	private List<TransportStopRoute> routes = new ArrayList<>();
+	private TransportStopController transportStopController;
 
 	public FavouritePointMenuController(@NonNull MapActivity mapActivity, @NonNull PointDescription pointDescription, final @NonNull FavouritePoint fav) {
 		super(new FavouritePointMenuBuilder(mapActivity, fav), pointDescription, mapActivity);
@@ -47,7 +48,7 @@ public class FavouritePointMenuController extends MenuController {
 		}
 		if (getObject() instanceof TransportStop) {
 			TransportStop stop = (TransportStop) getObject();
-			TransportStopController transportStopController = new TransportStopController(getMapActivity(), pointDescription, stop);
+			transportStopController = new TransportStopController(mapActivity, pointDescription, stop);
 			routes = transportStopController.processTransportStop();
 			builder.setRoutes(routes);
 		}
@@ -73,6 +74,14 @@ public class FavouritePointMenuController extends MenuController {
 	@Override
 	public List<TransportStopRoute> getTransportStopRoutes() {
 		return routes;
+	}
+
+	@Override
+	protected List<TransportStopRoute> getSubTransportStopRoutes(boolean nearby) {
+		if (transportStopController != null) {
+			return transportStopController.getSubTransportStopRoutes(nearby);
+		}
+		return null;
 	}
 
 	@Override
