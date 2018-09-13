@@ -665,8 +665,14 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 			gpxFile.updateWptPt(objectInMotion, position.getLatitude(),
 					position.getLongitude(), System.currentTimeMillis(), objectInMotion.desc,
 					objectInMotion.name, objectInMotion.category, objectInMotion.getColor());
-			new SaveGpxFileAsyncTask(view.getApplication(), callback, objectInMotion).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, gpxFile);
 			syncGpx(gpxFile);
+			if (gpxFile.showCurrentTrack) {
+				if (callback != null) {
+					callback.onApplyMovedObject(true, objectInMotion);
+				}
+			} else {
+				new SaveGpxFileAsyncTask(view.getApplication(), callback, objectInMotion).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, gpxFile);
+			}
 		} else if (callback != null) {
 			callback.onApplyMovedObject(false, o);
 		}
