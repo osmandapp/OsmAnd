@@ -79,6 +79,8 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 	public static final int ZOOM_IN_STANDARD = 17;
 
 	public static final int CURRENT_Y_UNDEFINED = Integer.MAX_VALUE;
+	
+	private static final int MAX_TRANSPORT_ROUTES_BADGES = 6;
 
 	private View view;
 	private InterceptorLinearLayout mainView;
@@ -669,8 +671,11 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 	private List<TransportStopRoute> filterTransportRoutes(List<TransportStopRoute> routes) {
 		List<TransportStopRoute> filteredRoutes = new ArrayList<>();
 		for (TransportStopRoute route : routes) {
-			if (filteredRoutes.size() < 6 && !containsRef(filteredRoutes, route.route)) {
+			if (!containsRef(filteredRoutes, route.route)) {
 				filteredRoutes.add(route);
+			}
+			if (filteredRoutes.size() >= MAX_TRANSPORT_ROUTES_BADGES) {
+				break;
 			}
 		}
 		return filteredRoutes;
