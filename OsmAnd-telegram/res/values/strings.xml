@@ -1,4 +1,5 @@
 <resources>
+	<string name="live_now_description">Contacts and groups who share their location with you.</string>
 	<string name="logout_from_osmand_telegram_descr">Are you sure you want to log out of OsmAnd Telegram? After that, you will not be able to send your position and see the locations of your contacts on the map in OsmAnd.</string>
 	<string name="logout_from_osmand_telegram">Logout from OsmAnd Telegram?</string>
 	<string name="shared_string_name">Name</string>

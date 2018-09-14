@@ -55,7 +55,7 @@
 			android:layout_marginBottom="@dimen/action_bar_descr_bottom_margin"
 			android:paddingLeft="@dimen/content_padding_standard"
 			android:paddingRight="@dimen/content_padding_standard"
-			android:text="@string/set_time_description"
+			android:text="@string/live_now_description"
 			android:textColor="?android:attr/textColorSecondary"
 			android:textSize="@dimen/descr_text_size" />
 
