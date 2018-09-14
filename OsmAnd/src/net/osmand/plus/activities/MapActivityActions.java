@@ -1,5 +1,6 @@
 package net.osmand.plus.activities;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -7,6 +8,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
@@ -83,6 +85,8 @@ public class MapActivityActions implements DialogProvider {
 	public static final String KEY_NAME = "name";
 
 	public static final String KEY_ZOOM = "zoom";
+	
+	public static final int REQUEST_LOCATION_FOR_DIRECTIONS_NAVIGATION_PERMISSION = 203;
 
 	// Constants for determining the order of items in the additional actions context menu
 	public static final int DIRECTIONS_FROM_ITEM_ORDER = 1000;
@@ -351,16 +355,12 @@ public class MapActivityActions implements DialogProvider {
 				} else if (standardId == R.string.context_menu_item_search) {
 					mapActivity.showQuickSearch(latitude, longitude);
 				} else if (standardId == R.string.context_menu_item_directions_from) {
-					mapActivity.getContextMenu().hide();
-					if (getMyApplication().getTargetPointsHelper().getPointToNavigate() == null) {
-						setFirstMapMarkerAsTarget();
-					}
-					if (!mapActivity.getRoutingHelper().isFollowingMode() && !mapActivity.getRoutingHelper().isRoutePlanningMode()) {
-						enterRoutePlanningMode(new LatLon(latitude, longitude),
-								mapActivity.getContextMenu().getPointDescription());
+					if (OsmAndLocationProvider.isLocationPermissionAvailable(mapActivity)) {
+						enterDirectionsFromPoint(latitude, longitude);
+					} else if (!ActivityCompat.shouldShowRequestPermissionRationale(mapActivity, Manifest.permission.ACCESS_FINE_LOCATION)) {
+						mapActivity.getMyApplication().showToastMessage(R.string.ask_for_location_permission);
 					} else {
-						getMyApplication().getTargetPointsHelper().setStartPoint(new LatLon(latitude, longitude),
-								true, mapActivity.getContextMenu().getPointDescription());
+						ActivityCompat.requestPermissions(mapActivity, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION_FOR_DIRECTIONS_NAVIGATION_PERMISSION);
 					}
 				} else if (standardId == R.string.measurement_tool) {
 					mapActivity.getContextMenu().close();
@@ -369,6 +369,20 @@ public class MapActivityActions implements DialogProvider {
 			}
 		});
 		actionsBottomSheetDialogFragment.show(mapActivity.getSupportFragmentManager(), AdditionalActionsBottomSheetDialogFragment.TAG);
+	}
+
+	public void enterDirectionsFromPoint(final double latitude, final double longitude) {
+		mapActivity.getContextMenu().hide();
+		if (getMyApplication().getTargetPointsHelper().getPointToNavigate() == null) {
+			setFirstMapMarkerAsTarget();
+		}
+		if (!mapActivity.getRoutingHelper().isFollowingMode() && !mapActivity.getRoutingHelper().isRoutePlanningMode()) {
+			enterRoutePlanningMode(new LatLon(latitude, longitude),
+					mapActivity.getContextMenu().getPointDescription());
+		} else {
+			getMyApplication().getTargetPointsHelper().setStartPoint(new LatLon(latitude, longitude),
+					true, mapActivity.getContextMenu().getPointDescription());
+		}
 	}
 
 	public void setGPXRouteParams(GPXFile result) {

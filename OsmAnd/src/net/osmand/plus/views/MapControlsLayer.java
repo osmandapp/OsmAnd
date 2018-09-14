@@ -442,6 +442,8 @@ public class MapControlsLayer extends OsmandMapLayer {
 		this.hasTargets = hasTargets;
 		if (OsmAndLocationProvider.isLocationPermissionAvailable(mapActivity)) {
 			onNavigationClick();
+		} else if (!ActivityCompat.shouldShowRequestPermissionRationale(mapActivity, Manifest.permission.ACCESS_FINE_LOCATION)) {
+			app.showToastMessage(R.string.ask_for_location_permission);
 		} else {
 			ActivityCompat.requestPermissions(mapActivity,
 					new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
@@ -1310,18 +1312,22 @@ public class MapControlsLayer extends OsmandMapLayer {
 	}
 
 	public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-		if (requestCode == REQUEST_LOCATION_FOR_NAVIGATION_PERMISSION
-				&& grantResults.length > 0
-				&& grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-			onNavigationClick();
-		} else if (requestCode == REQUEST_LOCATION_FOR_NAVIGATION_FAB_PERMISSION
-				&& grantResults.length > 0
-				&& grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-			navigateButton();
-		} else if (requestCode == REQUEST_LOCATION_FOR_ADD_DESTINATION_PERMISSION
-				&& grantResults.length > 0
-				&& grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-			addDestination(requestedLatLon);
+		if (grantResults.length > 0) {
+			if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+				switch (requestCode) {
+					case REQUEST_LOCATION_FOR_NAVIGATION_PERMISSION:
+						onNavigationClick();
+						break;
+					case REQUEST_LOCATION_FOR_NAVIGATION_FAB_PERMISSION:
+						navigateButton();
+						break;
+					case REQUEST_LOCATION_FOR_ADD_DESTINATION_PERMISSION:
+						addDestination(requestedLatLon);
+						break;
+				}
+			} else if (grantResults[0] == PackageManager.PERMISSION_DENIED) {
+				app.showToastMessage(R.string.ask_for_location_permission);
+			}
 		}
 	}
 }
