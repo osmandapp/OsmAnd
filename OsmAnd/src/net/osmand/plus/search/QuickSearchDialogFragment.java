@@ -2153,12 +2153,29 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 	private void updateFab() {
 		fab.setVisibility(fabVisible ? View.VISIBLE : View.GONE);
+		updateFabHeight();
+	}
+
+	private void updateFabHeight() {
+		if (fabVisible) {
+			int bottomMargin;
+			if (sendEmptySearchBottomBarVisible) {
+				bottomMargin = app.getResources().getDimensionPixelSize(R.dimen.fab_margin_bottom_big);
+			} else {
+				bottomMargin = app.getResources().getDimensionPixelSize(R.dimen.fab_margin_right);
+			}
+			FrameLayout.LayoutParams parameter = (FrameLayout.LayoutParams) fab.getLayoutParams();
+			parameter.setMargins(parameter.leftMargin, parameter.topMargin, parameter.rightMargin, bottomMargin);
+			fab.setLayoutParams(parameter);
+		}
 	}
 
 	private void updateSendEmptySearchBottomBar(boolean sendSearchQueryVisible) {
 		sendEmptySearchView.setVisibility(sendSearchQueryVisible ? View.VISIBLE : View.GONE);
 		sendEmptySearchText.setVisibility(sendSearchQueryVisible ? View.VISIBLE : View.GONE);
 		sendEmptySearchButton.setVisibility(sendSearchQueryVisible ? View.VISIBLE : View.GONE);
+		sendEmptySearchBottomBarVisible = sendSearchQueryVisible;
+		updateFabHeight();
 	}
 
 	public interface SearchResultListener {

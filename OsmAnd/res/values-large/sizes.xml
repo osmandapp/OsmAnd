@@ -87,6 +87,7 @@
 
 	<dimen name="fab_size_with_shadow">90dp</dimen>
 	<dimen name="fab_margin_right">18dp</dimen>
+	<dimen name="fab_margin_bottom_big">108dp</dimen>
 
 	<!-- General -->
 	

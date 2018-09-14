@@ -172,6 +172,7 @@
 
 	<dimen name="fab_size_with_shadow">62dp</dimen>
     <dimen name="fab_margin_right">12dp</dimen>
+    <dimen name="fab_margin_bottom_big">72dp</dimen>
 
     <!-- TextSizes -->
     <dimen name="default_list_text_size_large">19sp</dimen>
