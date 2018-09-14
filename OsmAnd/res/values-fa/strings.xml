@@ -3174,7 +3174,7 @@
 \nدر این باره با ما صحبت کنید.</string>
     <string name="send_search_query">عبارت جست‌وجویتان ارسال شود؟</string>
     <string name="increase_search_radius_to">افزایش شعاع جست‌وجو به %1$s</string>
-    <string name="thank_you_for_feedback">بابت بازخوردتان سپاسگزاریم</string>
+    <string name="thank_you_for_feedback">ممنون که نظر دادید</string>
     <string name="poi_cannot_be_found">گره یا راه پیدا نمی‌شود.</string>
     <string name="search_no_results_feedback">چیزی پیدا نشد؟
 \nنظرتان را به ما بگویید</string>
@@ -3202,4 +3202,5 @@
 \n
 \n</string>
     <string name="commiting_way">در حال ثبت راه…</string>
+    <string name="ask_for_location_permission">برای ادامه، لطفاً به OsmAnd اجازهٔ دسترسی به موقعیت مکانی را بدهید.</string>
     </resources>
