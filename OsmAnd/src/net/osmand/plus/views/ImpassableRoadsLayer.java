@@ -3,12 +3,13 @@ package net.osmand.plus.views;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.ColorMatrix;
+import android.graphics.ColorMatrixColorFilter;
 import android.graphics.Paint;
 import android.graphics.PointF;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-import net.osmand.Location;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -16,27 +17,25 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.helpers.AvoidSpecificRoads;
 import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidSpecificRoadsCallback;
 import net.osmand.plus.views.ContextMenuLayer.ApplyMovedObjectCallback;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 public class ImpassableRoadsLayer extends OsmandMapLayer implements
 		ContextMenuLayer.IContextMenuProvider, ContextMenuLayer.IMoveObjectProvider {
 
-	private static final int startZoom = 10;
-	private final MapActivity activity;
-	private Bitmap roadWorkIcon;
-	private Paint paint;
-	private Map<Long, Location> impassableRoadLocations;
-	private List<RouteDataObject> impassableRoads;
+	private static final int START_ZOOM = 10;
 
+	private final MapActivity activity;
+	private AvoidSpecificRoads avoidSpecificRoads;
 	private ContextMenuLayer contextMenuLayer;
 
-	private Set<StoredRoadDataObject> storedRoadDataObjects;
+	private Bitmap roadWorkIcon;
+	private Paint activePaint;
+	private Paint paint;
 
 	public ImpassableRoadsLayer(MapActivity activity) {
 		this.activity = activity;
@@ -44,76 +43,55 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements
 
 	@Override
 	public void initLayer(OsmandMapTileView view) {
-		roadWorkIcon = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_pin_avoid_road);
-		paint = new Paint();
-
+		avoidSpecificRoads = activity.getMyApplication().getAvoidSpecificRoads();
 		contextMenuLayer = view.getLayerByClass(ContextMenuLayer.class);
-
-		List<LatLon> impassibleRoads = activity.getMyApplication().getSettings().getImpassableRoadPoints();
-		storedRoadDataObjects = new HashSet<>(impassibleRoads.size());
-		for (LatLon impassibleRoad : impassibleRoads) {
-			storedRoadDataObjects.add(new StoredRoadDataObject(impassibleRoad));
-		}
+		roadWorkIcon = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_pin_avoid_road);
+		activePaint = new Paint();
+		ColorMatrix matrix = new ColorMatrix();
+		matrix.setSaturation(0);
+		paint = new Paint();
+		paint.setColorFilter(new ColorMatrixColorFilter(matrix));
 	}
 
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
 		if (contextMenuLayer.getMoveableObject() instanceof RouteDataObject) {
 			PointF pf = contextMenuLayer.getMovableCenterPoint(tileBox);
-			drawPoint(canvas, pf.x, pf.y);
+			drawPoint(canvas, pf.x, pf.y, true);
 		}
 	}
 
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
-		if (tileBox.getZoom() >= startZoom) {
-			for (long id : getImpassableRoadLocations().keySet()) {
-				if (contextMenuLayer.getMoveableObject() instanceof RouteDataObject) {
+		if (tileBox.getZoom() >= START_ZOOM) {
+			for (Map.Entry<LatLon, RouteDataObject> entry : avoidSpecificRoads.getImpassableRoads().entrySet()) {
+				LatLon location = entry.getKey();
+				RouteDataObject road = entry.getValue();
+				if (road != null && contextMenuLayer.getMoveableObject() instanceof RouteDataObject) {
 					RouteDataObject object = (RouteDataObject) contextMenuLayer.getMoveableObject();
-					if (object.id == id) {
+					if (object.id == road.id) {
 						continue;
 					}
 				}
-				Location location = getImpassableRoadLocations().get(id);
 				final double latitude = location.getLatitude();
 				final double longitude = location.getLongitude();
 				if (tileBox.containsLatLon(latitude, longitude)) {
-					drawPoint(canvas, tileBox, latitude, longitude);
-				}
-			}
-			for (StoredRoadDataObject storedRoadDataObject : storedRoadDataObjects) {
-				final LatLon latLon = storedRoadDataObject.getLatLon();
-				if (tileBox.containsLatLon(latLon)) {
-					drawPoint(canvas, tileBox, latLon.getLatitude(), latLon.getLongitude());
+					drawPoint(canvas, tileBox, latitude, longitude, road != null);
 				}
 			}
 		}
 	}
 
-	private void drawPoint(Canvas canvas, RotatedTileBox tileBox, double latitude, double longitude) {
+	private void drawPoint(Canvas canvas, RotatedTileBox tileBox, double latitude, double longitude, boolean active) {
 		float x = tileBox.getPixXFromLatLon(latitude, longitude);
 		float y = tileBox.getPixYFromLatLon(latitude, longitude);
-		drawPoint(canvas, x, y);
+		drawPoint(canvas, x, y, active);
 	}
 
-	private void drawPoint(Canvas canvas, float x, float y) {
+	private void drawPoint(Canvas canvas, float x, float y, boolean active) {
 		float left = x - roadWorkIcon.getWidth() / 2;
 		float top = y - roadWorkIcon.getHeight();
-		canvas.drawBitmap(roadWorkIcon, left, top, paint);
-	}
-
-	private Map<Long, Location> getImpassableRoadLocations() {
-		if (impassableRoadLocations == null) {
-			impassableRoadLocations = activity.getMyApplication().getDefaultRoutingConfig().getImpassableRoadLocations();
-		}
-		return impassableRoadLocations;
-	}
-
-	private List<RouteDataObject> getImpassableRoads() {
-		if (impassableRoads == null) {
-			impassableRoads = activity.getMyApplication().getDefaultRoutingConfig().getImpassableRoads();
-		}
-		return impassableRoads;
+		canvas.drawBitmap(roadWorkIcon, left, top, active ? activePaint : paint);
 	}
 
 	@Override
@@ -128,7 +106,7 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements
 
 	private int getRadiusPoi(RotatedTileBox tb) {
 		int r;
-		if (tb.getZoom() < startZoom) {
+		if (tb.getZoom() < START_ZOOM) {
 			r = 0;
 		} else {
 			r = 15;
@@ -162,15 +140,16 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements
 
 	@Override
 	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> o, boolean unknownLocation) {
-		if (tileBox.getZoom() >= startZoom) {
+		if (tileBox.getZoom() >= START_ZOOM) {
 			int ex = (int) point.x;
 			int ey = (int) point.y;
 			int compare = getRadiusPoi(tileBox);
 			int radius = compare * 3 / 2;
 
-			for (RouteDataObject road : getImpassableRoads()) {
-				Location location = getImpassableRoadLocations().get(road.getId());
-				if (location != null) {
+			for (Map.Entry<LatLon, RouteDataObject> entry : avoidSpecificRoads.getImpassableRoads().entrySet()) {
+				LatLon location = entry.getKey();
+				RouteDataObject road = entry.getValue();
+				if (location != null && road != null) {
 					int x = (int) tileBox.getPixXFromLatLon(location.getLatitude(), location.getLongitude());
 					int y = (int) tileBox.getPixYFromLatLon(location.getLatitude(), location.getLongitude());
 					if (calculateBelongs(ex, ey, x, y, compare)) {
@@ -180,18 +159,12 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements
 				}
 			}
 		}
-		if (!storedRoadDataObjects.isEmpty()) {
-			activity.getMyApplication().getAvoidSpecificRoads().initPreservedData();
-			storedRoadDataObjects.clear();
-		}
 	}
 
 	@Override
 	public LatLon getObjectLocation(Object o) {
 		if (o instanceof RouteDataObject) {
-			RouteDataObject route = (RouteDataObject) o;
-			Location location = impassableRoadLocations.get(route.getId());
-			return new LatLon(location.getLatitude(), location.getLongitude());
+			return avoidSpecificRoads.getLocation((RouteDataObject) o);
 		}
 		return null;
 	}
@@ -230,18 +203,6 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements
 					return callback != null && callback.isCancelled();
 				}
 			});
-		}
-	}
-
-	private static class StoredRoadDataObject {
-		private final LatLon latLon;
-
-		private StoredRoadDataObject(LatLon latLon) {
-			this.latLon = latLon;
-		}
-
-		public LatLon getLatLon() {
-			return latLon;
 		}
 	}
 }
