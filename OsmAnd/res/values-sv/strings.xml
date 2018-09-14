@@ -3000,4 +3000,6 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="thank_you_for_feedback">Tack för återkoppling</string>
     <string name="send_search_query">Skicka sökförfråga?</string>
     <string name="shared_string_world">Värld</string>
+    <string name="ask_for_location_permission">Ge OsmAnd tillstånd för plats för att fortsätta.</string>
+    <string name="send_search_query_description">Vi skickar din sökfråga: <b>\"%1$s\"</b>, såväl som din plats.<br/><br/> Vi samlar inte in personlig information, vi behöver bara sökdata för att förbättra sökalgoritmen.<br/></string>
     </resources>
