@@ -11,6 +11,7 @@
 	Thx - Hardy
 -->
 
+    <string name="ask_for_location_permission">Please give OsmAnd permission for location to continue.</string>
     <string name="thank_you_for_feedback">Thank you for feedback</string>
     <string name="poi_cannot_be_found">Node or way cannot be found.</string>
     <string name="search_no_results_feedback">No search results?\nGive us feedback</string>
