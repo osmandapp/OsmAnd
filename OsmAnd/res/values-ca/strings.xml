@@ -1606,7 +1606,7 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     
     <string name="local_osm_changes_upload_all_confirm">"Esteu a punt de pujar %1$d modificacio(ns)  a OSM. N\'esteu segur?"</string>
     <string name="confirmation_to_clear_history">Voleu esborrar l\'historial?</string>
-    <string name="delay_to_start_navigation_descr">Indiqueu el temps d\'espera sense canvis per tancar la pantalla de planificació de la ruta.</string>
+    <string name="delay_to_start_navigation_descr">Indiqueu el temps màxim d\'espera en la pantalla de planificació de la ruta.</string>
     <string name="delay_to_start_navigation">Inici de navegació gir a gir després de…</string>
     <string name="shared_string_go">Vés</string>
     <string name="osmand_parking_overdue">obsolet</string>
