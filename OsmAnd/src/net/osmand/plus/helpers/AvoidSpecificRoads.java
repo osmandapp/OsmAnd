@@ -211,7 +211,7 @@ public class AvoidSpecificRoads {
 		ll.setLongitude(loc.getLongitude());
 		ApplicationMode appMode = app.getRoutingHelper().getAppMode();
 
-		app.getLocationProvider().getRouteSegment(ll, appMode, new ResultMatcher<RouteDataObject>() {
+		app.getLocationProvider().getRouteSegment(ll, appMode, false, new ResultMatcher<RouteDataObject>() {
 
 			@Override
 			public boolean publish(RouteDataObject object) {
@@ -246,7 +246,7 @@ public class AvoidSpecificRoads {
 		ll.setLongitude(newLoc.getLongitude());
 		ApplicationMode appMode = app.getRoutingHelper().getAppMode();
 
-		app.getLocationProvider().getRouteSegment(ll, appMode, new ResultMatcher<RouteDataObject>() {
+		app.getLocationProvider().getRouteSegment(ll, appMode, false, new ResultMatcher<RouteDataObject>() {
 
 			@Override
 			public boolean publish(RouteDataObject object) {
