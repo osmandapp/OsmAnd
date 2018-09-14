@@ -44,7 +44,7 @@ public class AvoidSpecificRoads {
 	public void initPreservedData() {
 		List<LatLon> impassibleRoads = app.getSettings().getImpassableRoadPoints();
 		for (LatLon impassibleRoad : impassibleRoads) {
-			addImpassableRoad(null, impassibleRoad, false, null, true);
+			addImpassableRoad(null, impassibleRoad, false, true);
 		}
 	}
 
@@ -152,7 +152,7 @@ public class AvoidSpecificRoads {
 
 			@Override
 			public boolean processResult(LatLon result) {
-				addImpassableRoad(mapActivity, result, true, null, false);
+				addImpassableRoad(mapActivity, result, true, false);
 				return true;
 			}
 
@@ -162,7 +162,6 @@ public class AvoidSpecificRoads {
 	public void addImpassableRoad(@Nullable final MapActivity activity,
 								  @NonNull final LatLon loc,
 								  final boolean showDialog,
-								  @Nullable final AvoidSpecificRoadsCallback callback,
 								  final boolean skipWritingSettings) {
 		final Location ll = new Location("");
 		ll.setLatitude(loc.getLatitude());
@@ -177,22 +176,15 @@ public class AvoidSpecificRoads {
 					if (activity != null) {
 						Toast.makeText(activity, R.string.error_avoid_specific_road, Toast.LENGTH_LONG).show();
 					}
-					if (callback != null) {
-						callback.onAddImpassableRoad(false, null);
-					}
 				} else {
 					addImpassableRoadInternal(object, ll, showDialog, activity, loc);
-
-					if (callback != null) {
-						callback.onAddImpassableRoad(true, object);
-					}
 				}
 				return true;
 			}
 
 			@Override
 			public boolean isCancelled() {
-				return callback != null && callback.isCancelled();
+				return false;
 			}
 
 		});
