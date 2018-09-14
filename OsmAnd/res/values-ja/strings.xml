@@ -3216,4 +3216,25 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="shared_string_in_name">%1$s内</string>
     <string name="lang_lo">ラーオ語</string>
     <string name="shared_string_gpx_files">GPXファイル</string>
+    <string name="retry">再試行</string>
+    <string name="add_route_points">ルートポイントの追加</string>
+    <string name="save_gpx_waypoint">GPX経由地点の追加</string>
+    <string name="save_route_point">ルートポイントの保存</string>
+    <string name="waypoint_one">経由地点 1</string>
+    <string name="route_point_one">ルートポイント 1</string>
+    <string name="empty_state_favourites">お気に入りの追加</string>
+    <string name="empty_state_favourites_desc">お気に入りのインポート、またはマップ上でマークした地点を追加します。</string>
+    <string name="move_point">ポイントの移動</string>
+    <string name="total_donations">寄付総額</string>
+    <string name="day_off_label">オフ</string>
+    <string name="winter_and_ski_renderer">冬期およびスキー</string>
+    <string name="touring_view_renderer">ツーリングビュー</string>
+    <string name="nautical_renderer">海洋</string>
+    <string name="copy_location_name">ポイント/POI名称のコピー</string>
+    <string name="toast_empty_name_error">名前の付けられていない場所</string>
+    <string name="tunnel_warning">前方にトンネル有り</string>
+    <string name="download_wikipedia_label">Wikipediaデータのダウンロード</string>
+    <string name="open_in_browser_wiki">記事をオンラインで開く</string>
+    <string name="open_in_browser_wiki_description">ウェブブラウザで記事を閲覧します。</string>
+    <string name="download_wiki_region_placeholder">当該地域</string>
     </resources>
