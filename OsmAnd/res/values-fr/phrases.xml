@@ -3383,4 +3383,121 @@
 	<string name="poi_hazard_minefield">Champ de mines</string>
 
 
-</resources>
+<string name="poi_pump_status_ok">État de la pompe : ok</string>
+	<string name="poi_pump_status_broken">État de la pompe : cassé</string>
+	<string name="poi_pump_status_locked">État de la pompe : bloqué</string>
+
+	<string name="poi_passenger_information_display_yes">Affichage d\'informations aux passagers : oui</string>
+	<string name="poi_passenger_information_display_no">Affichage d\'informations aux passagers : non</string>
+
+	<string name="poi_cuisine_canteen">Cantine</string>
+	<string name="poi_electronics_repair_computer">Réparation d\'appareils électroniques : ordinateurs</string>
+	<string name="poi_electronics_repair_appliance">Réparation d\'appareils électroniques : instrument</string>
+	<string name="poi_electronics_repair_phone">Réparation d\'appareils électroniques : téléphone</string>
+	<string name="poi_electronics_repair_tv">Réparation d\'appareils électroniques : télévision</string>
+
+	<string name="poi_zoo_aviary">Volière</string>
+	<string name="poi_zoo_falconry">Fauconnerie</string>
+	<string name="poi_zoo_reptile">Reptile</string>
+
+	<string name="poi_motorcycle_sales_yes">Ventes</string>
+	<string name="poi_motorcycle_sales_no">Vente : non</string>
+	<string name="poi_motorcycle_sales_yes_used">Vente : oui, occasion</string>
+	<string name="poi_motorcycle_sales_used">Vente : occasion</string>
+	<string name="poi_motorcycle_clothes_yes">Vêtements pour motards</string>
+	<string name="poi_motorcycle_clothes_no">Vêtements de motard : non</string>
+	<string name="poi_motorcycle_type_scooter">Scooter</string>
+	<string name="poi_direction_n">Direction : nord</string>
+	<string name="poi_direction_ne">Direction : nord-est</string>
+	<string name="poi_direction_e">Direction : est</string>
+	<string name="poi_direction_se">Direction : sud-est</string>
+	<string name="poi_direction_s">Direction : sud</string>
+	<string name="poi_direction_sw">Direction : sud-ouest</string>
+	<string name="poi_direction_w">Direction : ouest</string>
+	<string name="poi_direction_nw">Direction : nord -ouest</string>
+	<string name="poi_direction_forward">Direction : en avant</string>
+	<string name="poi_direction_backward">Direction : en arrière</string>
+	<string name="poi_direction_up">Direction : en haut</string>
+	<string name="poi_direction_down">Direction : en bas</string>
+	<string name="poi_boat_motorboat_rental_yes">Bateaux à moteur : oui</string>
+	<string name="poi_boat_motorboat_rental_no">Bateaux à moteur : non</string>
+	<string name="poi_boat_pedalboat_rental_yes">Pédalo : oui</string>
+	<string name="poi_boat_pedalboat_rental_no">Pédalo : non</string>
+	<string name="poi_boat_jetski_rental_yes">"Jetskis :  oui"</string>
+	<string name="poi_boat_jetski_rental_no">"Jetskis :  non"</string>
+	<string name="poi_boat_kayak_rental_rental_yes">Kayaks : oui</string>
+	<string name="poi_boat_kayak_rental_rental_no">Kayaks : non</string>
+	<string name="poi_boat_canoe_rental_rental_yes">Canoë : oui</string>
+	<string name="poi_boat_canoe_rental_rental_no">Canoë : non</string>
+
+	<string name="poi_government_ministry">Ministère</string>
+	<string name="poi_government_social_security">Sécurité sociale</string>
+	<string name="poi_government_social_services">Services sociaux</string>
+	<string name="poi_government_treasury">Trésorerie</string>
+	<string name="poi_operational_status_restricted">Restreint</string>
+	<string name="poi_water_supply_running_water">Eau courante</string>
+	<string name="poi_water_supply_water_tank">Réservoir d\'eau</string>
+	<string name="poi_water_supply_bottled_water">Eau en bouteilles</string>
+
+	<string name="poi_water_place_access_community">Communauté</string>
+	<string name="poi_water_place_access_family">Famille</string>
+	<string name="poi_scooter_yes">Scooter : oui</string>
+	<string name="poi_scooter_no">Scooter : non</string>
+	<string name="poi_climbing_trad_yes">Traditionnel : oui</string>
+	<string name="poi_climbing_trad_no">Traditionnel : non</string>
+	<string name="poi_climbing_ice_yes">Glace : oui</string>
+	<string name="poi_climbing_ice_no">Glace : non</string>
+	<string name="poi_climbing_mixed_yes">Mélangé : oui</string>
+	<string name="poi_climbing_mixed_no">Mélangé : non</string>
+	<string name="poi_shop_boat">Shipchandler</string>
+
+	<string name="poi_socket_type1_yes">Type 1</string>
+	<string name="poi_socket_type2_yes">Type 2</string>
+	<string name="poi_socket_type3_yes">Type 3</string>
+	<string name="poi_pottery">Poterie</string>
+
+	<string name="poi_service_vehicle_used_car_sales_yes">Vente de véhicules d\'occasion</string>
+	<string name="poi_service_vehicle_brakes_yes">Freins</string>
+	<string name="poi_service_vehicle_new_car_sales_yes">Vente de véhicules neufs</string>
+	<string name="poi_service_vehicle_diagnostics_yes">Diagnostics</string>
+	<string name="poi_service_vehicle_car_parts_yes">Pièces détachées automobiles</string>
+	<string name="poi_service_vehicle_batteries_yes">Batteries</string>
+	<string name="poi_service_vehicle_air_conditioning_yes">Air conditionnée</string>
+	<string name="poi_service_vehicle_motor_yes">Moteur</string>
+	<string name="poi_service_vehicle_insurance_yes">Assurance</string>
+	<string name="poi_service_vehicle_tyres_yes">Pneumatiques</string>
+
+	<string name="poi_via_ferrata">Via ferrata</string>
+	<string name="poi_via_ferrata_scale">Difficulté</string>
+
+	<string name="poi_glacier_type_icecap">Calotte glacière</string>
+	<string name="poi_glacier_type_icefield">Champ de glace</string>
+	<string name="poi_glacier_type_plateau">Plateau</string>
+	<string name="poi_glacier_type_valley">Vallée</string>
+	<string name="poi_glacier_type_tidewater">Marée</string>
+	<string name="poi_glacier_type_mountain">Montagne</string>
+	<string name="poi_glacier_type_icefall">Cascade de glace</string>
+	<string name="poi_glacier_type_rock">Roche</string>
+	<string name="poi_glacier_type_shelf">Étagère</string>
+	<string name="poi_glacier_type_remnant">Débris</string>
+	<string name="poi_glacier_type_ice_tongue">Langue de glace</string>
+
+	<string name="poi_glacier_ele_top">Point le plus élevé</string>
+	<string name="poi_glacier_ele_bottom">Point le plus bas</string>
+	<string name="poi_glacier_slope">Pente moyenne</string>
+
+	<string name="poi_rock">Roche</string>
+
+	<string name="poi_end_date">Date de fin</string>
+
+	<string name="poi_payment_contactless_yes">Sans contact</string>
+	<string name="poi_payment_contactless_no">Sans contact non accepté</string>
+
+	<string name="poi_hazard_nuclear">Risque nucléaire</string>
+	<string name="poi_hazard_erosion">Risque d\'érosion</string>
+	<string name="poi_hazard_avalanche">Risque d\'avalanche</string>
+	<string name="poi_hazard_slippery_road">Route glissante</string>
+	<string name="poi_hazard_flood">Risque d\'inondation</string>
+	<string name="poi_ruins">Ruines</string>
+
+	</resources>
