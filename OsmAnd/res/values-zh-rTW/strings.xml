@@ -3148,10 +3148,11 @@
     <string name="search_no_results_feedback">沒有搜尋結果？
 \n向我們反映</string>
     <string name="test_voice_desrc">輕點按鈕並聽取相應的語音提示，以確認遺漏或錯誤的提示。</string>
-<string name="release_3_2_pre">• 修復了非拉丁地圖啟動時的崩潰問題
-\n
-\n• 改善 Android 8.0 裝置上的繪製速度問題
-\n
-\n• 支援多邊形 (非生活環境) 的物件編輯
+<string name="release_3_2_pre">• 修復了在非拉丁地圖啟動時的崩潰問題 
+\n 
+\n• 改善 Android 8.0 裝置上的繪製速度問題 
+\n 
+\n• 支援多邊形 (非生活環境) 的物件編輯 
 \n</string>
+    <string name="ask_for_location_permission">請準許 OsmAnd 位置以繼續。</string>
     </resources>
