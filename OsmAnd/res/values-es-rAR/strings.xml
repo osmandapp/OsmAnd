@@ -3010,4 +3010,5 @@ Lon %2$s</string>
 \n
 \n • Soporte para la edición de objetos poligonales (no servicios)
 \n</string>
+    <string name="ask_for_location_permission">Para continuar, debe permitir la ubicación a OsmAnd.</string>
     </resources>
