@@ -3151,4 +3151,5 @@ Area honi dagokio: %1$s x %2$s</string>
 \n • Poligono objektuak editatzeko euskarria (Ez-zerbitzua)
 \n
 \n</string>
+    <string name="ask_for_location_permission">Eman OsmAnd-i kokalekua eskuratzeko baimena jarraitzeko.</string>
     </resources>
