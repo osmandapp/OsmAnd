@@ -3689,4 +3689,8 @@
 
 
 <string name="poi_car_pooling">Punto para vehículos compartidos</string>
-	</resources>
+	<string name="poi_ruins">Ruinas</string>
+
+	<string name="poi_license_classes">Clases de licencia</string>
+
+</resources>
