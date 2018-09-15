@@ -2186,7 +2186,7 @@ Pôr do Sol: %2$s</string>
     <string name="store_tracks_in_monthly_directories_descrp">Armazenar trilhas gravadas em subpastas por mês (ex.: 2018-01).</string>
     <string name="shared_string_reset">Redefinir</string>
     <string name="shared_string_reload">Recarregar</string>
-    <string name="mapillary_menu_descr_tile_cache">Recarregar ladrilhos para visualizar dados atualizados.</string>
+    <string name="mapillary_menu_descr_tile_cache">Recarregar quadrículas para ver dados atualizados.</string>
     <string name="wrong_user_name">Nome de usuário errado</string>
     <string name="shared_string_to">Para</string>
     <string name="mapillary_menu_date_from">De</string>
@@ -2943,4 +2943,5 @@ Pôr do Sol: %2$s</string>
     <string name="commiting_way">Enviando caminho…</string>
     <string name="increase_search_radius_to">Aumentar o raio de pesquisa para %1$s</string>
     <string name="send_search_query">Enviar consulta de pesquisa?</string>
+    <string name="ask_for_location_permission">Por favor, dê permissão ao OsmAnd a localização para continuar.</string>
     </resources>
