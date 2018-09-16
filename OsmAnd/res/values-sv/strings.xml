@@ -2448,7 +2448,7 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="driving_region_automatic">Automatisk</string>
     <string name="do_not_send_anonymous_app_usage">Skicka inte anonym appanvändningsstatistik</string>
     <string name="do_not_show_startup_messages">Visa inga meddelanden vid uppstart</string>
-    <string name="do_not_show_startup_messages_desc">Visa inga apprabatter eller meddelanden om speciella lokala evenemang.</string>
+    <string name="do_not_show_startup_messages_desc">Visa inga apprabatter och meddelanden om speciella lokala evenemang.</string>
     <string name="parking_options">Parkeringsalternativ</string>
     <string name="fonts_header">Teckensnitt för kartan</string>
     <string name="select_street">Välj gator</string>
