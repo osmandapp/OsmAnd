@@ -2943,5 +2943,5 @@ Pôr do Sol: %2$s</string>
     <string name="commiting_way">Enviando caminho…</string>
     <string name="increase_search_radius_to">Aumentar o raio de pesquisa para %1$s</string>
     <string name="send_search_query">Enviar consulta de pesquisa?</string>
-    <string name="ask_for_location_permission">Por favor, dê permissão ao OsmAnd a localização para continuar.</string>
+    <string name="ask_for_location_permission">Por favor, dê permissão ao OsmAnd para ver a sua localização para continuar.</string>
     </resources>
