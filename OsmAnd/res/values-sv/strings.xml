@@ -136,11 +136,11 @@
 
     <string name="unknown_from_location">Startpunkten är ännu inte bestämd</string>
     <string name="unknown_location">Positionen är ännu inte känd</string>
-    <string name="confirm_interrupt_download">Vill du avbryta nedladdningen av filen?</string>
+    <string name="confirm_interrupt_download">Avbryt filhämtningen?</string>
     <string name="local_indexes_cat_tile">Online-kartor och mellanlagrade kartbitar (tiles)</string>
     <string name="local_indexes_cat_map">Standardkartor (vektor)</string>
 
-    <string name="index_settings_descr">Ladda ner och hantera offline-kartor lagrade på din enhet.</string>
+    <string name="index_settings_descr">Hämta och hantera offline-kartor lagrade på din enhet.</string>
     <string name="shared_string_online_maps">Online-kartor</string>
     <string name="osmand_accessibility_description">Denna modul gör så att inställningarna för att aktivera speciella tillgänglighetsfunktioner blir direkt åtkomliga i OsmAnd och underlättar t.ex. justering av talhastigheten för TTS-röster, konfigurering av skärmnavigering med hjälp av en styrkula för zoomkontroll eller användande av återkoppling med text-till-tal, t.ex. för att meddela din position automatiskt.</string>
 
@@ -215,17 +215,19 @@ Du hittar din parkeringsplats och -tid på instrumentbrädan och i widgeten på 
 
     <string name="modify_transparency">Ändra transparens (0 - transparent, 255 - ogenomskinlig)</string>
     <string name="first_time_msg">Tack för att du använder OsmAnd. För många funktioner i programmet behöver du vissa regionala offline-data som du kan ladda ner via \'Inställningar\' -&gt; \'Hantera kartfiler\'. Därefter kommer du att kunna se kartor, hitta adresser, leta efter intressepunkter och hitta kollektivtrafik.</string>
-    <string name="basemap_was_selected_to_download">Baskarta har valts för nedladdning för att appen ska fungera.</string>
+    <string name="basemap_was_selected_to_download">Baskarta har valts för hämtning för att appen ska fungera.</string>
     <string name="select_index_file_to_download">Hittade ingenting. Om du inte kan hitta din region, kan du skapa den själv (se http://osmand.net).</string>
     <string name="map_online_plugin_is_not_installed">Aktivera modulen online-kartor för att välja olika kartkällor</string>
     <string name="map_online_data">Online-kartor och kartbitar (tiles)</string>
-    <string name="map_online_data_descr">Använd online-kartor (ladda ner och cacha kartbitar på SD-kortet).</string>
+    <string name="map_online_data_descr">Använd online-kartor (hämta och cacha kartbitar på SD-kortet).</string>
     <string name="online_map_settings_descr">Konfigurera online- eller cachade källor för kartbitar.</string>
 
 
-<string name="osmand_rastermaps_plugin_description">"Med denna modul får man tillgång till många typer av online-kartor, från fördefinierade Openstreetmap-rutor (som Mapnik) till satellitbilder och speciella lager såsom väderkartor, klimatkartor, geologiska kartor, reliefkartor etc.
-\n\nDessa kartor kan användas antingen som huvudkarta (baskarta) och visas på kartskärmen i OsmAnd eller som ett över- eller underlägg till en annan baskarta (som OsmAnds vanliga offline-kartor). För att göra en underliggande karta tydligare kan vissa element i OsmAnds vektorkartor lätt döljas via menyn \'Konfigurera karta\'.
-\n\nKartbitar (tile maps) kan hämtas direkt online eller förberedas för användning offline (och kopieras manuellt till OsmAnds datamapp) som en SQLite-databas som kan skapas med olika tredjepartsverktyg. "</string>
+<string name="osmand_rastermaps_plugin_description">"Med denna modul får man tillgång till många typer av online-kartor, från fördefinierade Openstreetmap-rutor (som Mapnik) till satellitbilder och speciella lager såsom väderkartor, klimatkartor, geologiska kartor, reliefkartor o.s.v. 
+\n
+\nDessa kartor kan användas antingen som huvudkarta (baskarta) och visas på kartskärmen i OsmAnd eller som ett över- eller underlägg till en annan baskarta (som OsmAnds vanliga offline-kartor). För att göra en underliggande karta tydligare kan vissa element i OsmAnds vektorkartor lätt döljas via menyn \'Konfigurera karta\'. 
+\n
+\nKartbitar (tile maps) kan hämtas direkt på nätet eller förberedas för användning frånkopplad (och kopieras manuellt till OsmAnds datamapp) som en SQLite-databas som kan skapas med olika tredjepartsverktyg. "</string>
     <string name="osmand_background_plugin_description">Visa inställningarna för att aktivera spårning och navigering i bakgrundsläge (skärm av) genom att periodvis väcka GPS-enheten.</string>
 
     <string name="osmand_development_plugin_description">Denna modul visar inställningarna för utvecklings- och felsökningsfunktioner som rutt-testning och -simulering eller visning av renderingsprestanda eller röststyrning. Dessa inställningar är avsedda för utvecklare och behövs inte för den vanliga användaren.</string>
@@ -246,15 +248,15 @@ Du hittar din parkeringsplats och -tid på instrumentbrädan och i widgeten på 
     <string name="vector_maps_may_display_faster_on_some_devices">Vektorkartor ritas sannolikt upp snabbare. Fungerar kanske inte så bra på vissa enheter.</string>
     <string name="play_commands_of_currently_selected_voice">Spela upp kommandon med vald röst</string>
     <string name="test_voice_prompts">Test av röstmeddelanden</string>
-    <string name="switch_to_raster_map_to_see">Det finns ingen offline vektorkarta för den här platsen. Du kan ladda ner en i Inställningar (Hantera kartfiler) eller byta till online-kartor (aktivera modulen för online-kartor för detta).</string>
+    <string name="switch_to_raster_map_to_see">Det finns ingen offline vektorkarta för den här platsen. Du kan hämta en i Inställningar (Hantera kartfiler) eller byta till online-kartor (aktivera modulen för online-kartor för detta).</string>
 
-    <string name="osmand_long_description_1000_chars">"OsmAnd (Open Street Maps Automated Navigation Directions)
-\n
-\nOsmAnd är ett öppen källkodsprogram med tillgång till ett brett utbud av global OpenStreetMap-data. Alla kartdata (vektor- eller rasterkartor) kan lagras i telefonens minneskort för offlineanvändning. OsmAnd erbjuder även navigering offline och online, inklusive röstguidning. Några av de viktigaste funktionerna: - Komplett offline-funktionalitet (lagra nedladdade vektorkartor eller kartbitar på enheten) - Kompakta offline-vektorkartor för hela världen finns tillgängliga - Nedladdning av land- eller regionkartor direkt från appen - Överlägg av flera kartlager möjligt, som GPX- eller navigationsspår, sevärdheter, favoriter, höjddata, offentliga hållplatser, extra kartor med anpassningsbara transparens - Sökning offline efter adresser och platser (POIs) - Offline-dirigering för medellånga sträckor (experimentell) - Bil-, cykel- och fotgängarlägen med: - Tillval automatisk växling mellan dag- och nattvisning - Tillval hastighetsberoende zoomning - Valfri inställningen enligt kompass eller färdriktningen - Frivillig körfältsvägledning, visning av hastighetsgräns, inspelade röster samt TTS-röster
-\n
-\nBegränsningar i denna gratisversion av OsmAnd: - Antalet nedladdningar av kartor är begränsat - Ingen tillgång till Wikipedia offline POIs
-\n
-\nOsmAnd utvecklas aktivt och vårt projekt och dess fortsatta framsteg bygger på ekonomiska bidrag för att finansiera utveckling och testning av ny funktionalitet. Vänligen överväg att köpa OsmAnd+, finansiera specifika nya funktioner eller göra en allmän donation på osmand.net.
+    <string name="osmand_long_description_1000_chars">"OsmAnd (Open Street Maps Automated Navigation Directions) 
+\n 
+\nOsmAnd är ett öppen källkodsprogram med tillgång till ett brett utbud av global OpenStreetMap-data. Alla kartdata (vektor- eller rasterkartor) kan lagras i telefonens minneskort för offlineanvändning. OsmAnd erbjuder även navigering offline och online, inklusive röstguidning. Några av de viktigaste funktionerna: - Komplett offline-funktionalitet (lagra nedladdade vektorkartor eller kartbitar på enheten) - Kompakta offline-vektorkartor för hela världen finns tillgängliga - Nedladdning av land- eller regionkartor direkt från appen - Överlägg av flera kartlager möjligt, som GPX- eller navigationsspår, sevärdheter, favoriter, höjddata, offentliga hållplatser, extra kartor med anpassningsbara transparens - Sökning offline efter adresser och platser (POIs) - Offline-dirigering för medellånga sträckor (experimentell) - Bil-, cykel- och fotgängarlägen med: - Tillval automatisk växling mellan dag- och nattvisning - Tillval hastighetsberoende zoomning - Valfri inställningen enligt kompass eller färdriktningen - Frivillig körfältsvägledning, visning av hastighetsgräns, inspelade röster samt TTS-röster 
+\n 
+\nBegränsningar i denna gratisversion av OsmAnd: - Antalet hämtningar av kartor är begränsat - Ingen tillgång till Wikipedia offline POIs 
+\n 
+\nOsmAnd utvecklas aktivt och vårt projekt och dess fortsatta framsteg bygger på ekonomiska bidrag för att finansiera utveckling och testning av ny funktionalitet. Vänligen överväg att köpa OsmAnd+, finansiera specifika nya funktioner eller göra en allmän donation på osmand.net. 
 \n "</string>
     <string name="native_rendering">Inbyggd rendering</string>
     <string name="default_buttons_support">Support</string>
@@ -301,7 +303,7 @@ Du hittar din parkeringsplats och -tid på instrumentbrädan och i widgeten på 
     <string name="gpx_monitoring_disabled_warn">Logga spår med GPX-widget eller via inställningen \'Trippinspelning\'.</string>
     <string name="show_current_gpx_title">Visa aktuellt spår</string>
 
-    <string name="free_version_message">Denna gratisversion av OsmAnd är begränsad till %1$s nedladdningar (för att lägga till eller uppdatera kartor) och stöder inte Wikipedia-artiklar offline.</string>
+    <string name="free_version_message">Denna gratisversion av OsmAnd är begränsad till %1$s hämtningar (för att lägga till eller uppdatera kartor) och stöder inte Wikipedia-artiklar offline.</string>
     <string name="free_version_title">Gratisversion</string>
     <string name="poi_context_menu_showdescription">Visa POI-beskrivning.</string>
     <string name="index_name_north_america">Nordamerika</string>
@@ -339,7 +341,7 @@ Du hittar din parkeringsplats och -tid på instrumentbrädan och i widgeten på 
     <string name="osmand_service_descr">OsmAnd körs i bakgrunden medan skärmen är avstängd.</string>
 
 
-    <string name="download_files_not_enough_space">Det finns inte tillräckligt med ledigt utrymme för att ladda ner %1$s MB (ledigt: %2$s).</string>
+    <string name="download_files_not_enough_space">Det finns inte tillräckligt med ledigt utrymme för att hämta %1$s MB (ledigt: %2$s).</string>
     <string name="download_files_question_space">Hämta {0} fil(er)?
 Nyttjat utrymme är {1} MB.
 (Tillgängligt utrymme är {2} MB.)</string>
@@ -376,7 +378,7 @@ Nyttjat utrymme är {1} MB.
     <string name="old_poi_file_should_be_deleted">POI-datafilen \'%1$s\' är överflödig och kan tas bort.</string>
     <string name="update_poi_file_not_found">Lokal fil att upprätthålla POI förändringar inte hittas och kunde inte skapas.</string>
     <string name="button_upgrade_osmandplus">Uppgradera OsmAnd+</string>
-    <string name="map_version_changed_info">Ladda ner den nya versionen av appen för att kunna använda de nya kartfilerna.</string>
+    <string name="map_version_changed_info">Hämta den nya versionen av appen för att kunna använda de nya kartfilerna.</string>
     <string name="search_position_current_location_search">Söker plats …</string>
     <string name="search_position_current_location_found">Min position (hittad)</string>
     <string name="search_position_address">Adresser …</string>
@@ -405,7 +407,7 @@ Nyttjat utrymme är {1} MB.
     <string name="favourites_edit_dialog_category">Kategori</string>
     <string name="shared_string_no_thanks">Nej, tack</string>
     <string name="basemap_missing">Basvärldskarta (som omfattar hela världen i låg inzoomning) saknas. Hämta gärna World_basemap_x.obf för en global översikt.</string>
-    <string name="vector_data_missing">Ladda ner offline-data för att använda kartor offline.</string>
+    <string name="vector_data_missing">Hämta offline-data för att använda kartor offline.</string>
     <string name="local_index_gpx_info_show">\n\nTryck och håll för alternativ</string>
 
     <string name="local_index_installed">Lokal version</string>
@@ -568,7 +570,7 @@ Nyttjat utrymme är {1} MB.
     <string name="downloading_build">Laddar ner kompilering …</string>
     <string name="install_selected_build">Vill du installera OsmAnd - {0} av {1}{2} MB?</string>
     <string name="loading_builds_failed">Hämtar en lista över misslyckade OsmAnd-byggen</string>
-    <string name="loading_builds">Laddar OsmAnd-kompileringar …</string>
+    <string name="loading_builds">Läser in OsmAnd-kompileringar…</string>
     <string name="select_build_to_install">Välj en OsmAnd-kompilering att installera</string>
     <string name="contribution_activity">Särskild aktivitet för bidragsversionen</string>
     <string name="gps_status_app_not_found">Appen GPS-status är inte installerad. Vill du söka på Play Butik?</string>
@@ -580,14 +582,14 @@ Nyttjat utrymme är {1} MB.
     <string name="daynight_mode_sensor">Ljussensor</string>
     <string name="daynight_descr">Välj regel för byte mellan dag- och nattläge.</string>
     <string name="daynight">Dag-/nattläge</string>
-    <string name="download_files_question">Ladda ner {0} fil(er) ({1} MB)?</string>
+    <string name="download_files_question">Hämta {0} fil(er) ({1} MB)?</string>
     <string name="items_were_selected">{0} post(er) markerad(e)</string>
     <string name="filter_existing_indexes">Visa nerladdat</string>
 
     <string name="fast_route_mode">Snabbaste vägen</string>
     <string name="fast_route_mode_descr">Aktivera för att beräkna den snabbaste vägen eller inaktivera för den bränslesnålaste vägen.</string>
     <string name="tiles_to_download_estimated_size">Vid zoom {0} hämta {1} kartbitar ({2} MB)</string>
-    <string name="shared_string_download_map">Ladda ner karta</string>
+    <string name="shared_string_download_map">Hämta karta</string>
     <string name="poi_filter_sightseeing">Sevärdheter</string>
     <string name="index_settings">Hantera kartfiler</string>
 
@@ -597,7 +599,7 @@ Nyttjat utrymme är {1} MB.
     <string name="continuous_rendering_descr">Visa kontinuerlig rendering istället för direkt-bild.</string>
     <string name="rendering_exception">Ett fel uppstod vid renderingen av valt område</string>
     <string name="show_point_options">Använd platsen …</string>
-    <string name="renderer_load_sucess">Renderaren laddades utan problem</string>
+    <string name="renderer_load_sucess">Renderaren lästes in</string>
     <string name="renderer_load_exception">Kunde inte läsa in renderaren</string>
     <string name="renderers">Vektorrenderare</string>
     <string name="renderers_descr">Välj renderingsutseende.</string>
@@ -619,7 +621,7 @@ Nyttjat utrymme är {1} MB.
     <string name="transport_search_again">Återställ transportsökning</string>
 
     <string name="voice">Inspelad röst</string>
-    <string name="no_vector_map_loaded">Vektorkartorna laddades inte</string>
+    <string name="no_vector_map_loaded">Vektorkartorna lästes inte in</string>
     
     <string name="gpx_files_not_found">Hittar inga GPX-filer i spårmappen</string>
     <string name="layer_gpx_layer">GPX-spår …</string>
@@ -687,7 +689,8 @@ Nyttjat utrymme är {1} MB.
     <string name="voice_data_unavailable">Valda röstdata är inte tillgängliga</string>
 
     <string name="sd_unmounted">SD-kortet är inte tillgängligt.\nDu kommer inte att kunna se kartor eller hitta saker.</string>
-    <string name="sd_mounted_ro">SD-kortet är skrivskyddat.\nDu kan bara se den förinstallerade kartan och kan inte ladda ner från Internet.</string>
+    <string name="sd_mounted_ro">SD-kortet är skrivskyddat.
+\nDu kan bara se den förinstallerade kartan och kan inte hämta från Internet.</string>
     <string name="unzipping_file">Packar upp filen …</string>
     <string name="route_tr">Sväng höger och kör</string>
     <string name="route_tshr">Sväng skarpt höger och kör</string>
@@ -697,7 +700,7 @@ Nyttjat utrymme är {1} MB.
     <string name="route_tsll">Sväng något vänster och kör</string>
     <string name="route_tu">Gör en U-sväng och kör</string>
     <string name="first_time_continue">Senare</string>
-    <string name="first_time_download">Ladda ner regioner</string>
+    <string name="first_time_download">Hämta regioner</string>
     <string name="search_poi_location">Söker efter signal …</string>
     <string name="search_near_map">Sök i närheten av aktuell kartmitt</string>
     <string name="search_nearby">Sök i närheten</string>
@@ -747,7 +750,7 @@ Nyttjat utrymme är {1} MB.
     <string name="router_service_descr">Välj en online- eller offline-navigeringstjänst.</string>
     <string name="router_service">Navigeringstjänst</string>
     <string name="sd_dir_not_accessible">Datalagringsmappen på minneskortet är inte tillgänglig!</string>
-    <string name="download_question">Ladda ner {0} - {1}?</string>
+    <string name="download_question">Hämta {0} - {1}?</string>
     <string name="download_question_exist">Offline-data för {0} finns redan ({1}). Uppdatera dem ({2})?</string>
     <string name="address">Adresser</string>
     <string name="downloading_list_indexes">Hämtar lista över tillgängliga regioner …</string>
@@ -767,14 +770,14 @@ Nyttjat utrymme är {1} MB.
     <string name="mark_final_location_first">Välj en destination först</string>
 
     <string name="opening_hours">Öppettider</string>
-    <string name="loading_poi_obj">Laddar intressepunkt …</string>
-    <string name="loading_streets_buildings">Laddar gator/byggnader …</string>
-    <string name="loading_postcodes">Laddar postnummer …</string>
-    <string name="loading_streets">Laddar gator …</string>
-    <string name="loading_cities">Laddar städer …</string>
+    <string name="loading_poi_obj">Läser in POI…</string>
+    <string name="loading_streets_buildings">Läser in gator/byggnader…</string>
+    <string name="loading_postcodes">Läser in postnummer…</string>
+    <string name="loading_streets">Läser in gator…</string>
+    <string name="loading_cities">Läser in städer…</string>
     <string name="poi">POI</string>
     <string name="arrived_at_destination">Du har anlänt till din destination</string>
-    <string name="loading_data">Läser in data …</string>
+    <string name="loading_data">Läser in data…</string>
     <string name="reading_indexes">Läser lokala data …</string>
     <string name="zxing_barcode_scanner_not_found">Appen ZXing Barcode Scanner är inte installerad. Vill du söka på Google Play?</string>
     <string name="rendering_attr_roadColors_description">Välj färgschema för vägar:</string>
@@ -801,7 +804,7 @@ Nyttjat utrymme är {1} MB.
     <string name="background_service_is_enabled_question">Bakgrundstjänsten körs fortfarande. Vill du stoppa den också?</string>
 
     <string name="edit_filter_create_message">Filter {0} har skapats</string>
-    <string name="poi_error_info_not_loaded">Info om noden laddades inte</string>
+    <string name="poi_error_info_not_loaded">Info om noden lästes inte in</string>
     <string name="poi_action_change">ändra</string>
     <string name="poi_action_succeded_template">Åtgärden {0} slutfördes.</string>
     <string name="poi_error_unexpected_template">Ett oväntat fel uppstod vid åtgärden {0}.</string>
@@ -927,7 +930,7 @@ Nyttjat utrymme är {1} MB.
     <string name="use_online_routing_descr">Använd Internet för att beräkna en rutt.</string>
     <string name="use_online_routing">Använd online-navigering</string>
     <string name="osm_settings_descr">Ange inställningar för OpenStreetMap.org (OSM) som behövs för bidrag till OSM.</string>
-    <string name="data_settings_descr">Ange språk, ladda ner/om data.</string>
+    <string name="data_settings_descr">Ange språk, hämta/uppdatera data.</string>
     <string name="data_settings">Data</string>
 
     <string name="osm_settings">Redigera OSM</string>
@@ -1015,12 +1018,12 @@ Nyttjat utrymme är {1} MB.
     <string name="use_magnetic_sensor">Använd magnetisk sensor (kompass)</string>
     <string name="other_location">Annan</string>
     <string name="files_limit">%1$d filer kvar</string>
-    <string name="available_downloads_left">Du har %1$d filer kvar att ladda ner</string>
+    <string name="available_downloads_left">Du har %1$d filer kvar att hämta</string>
     <string name="install_paid">Fullversion</string>
     <string name="cancel_route">Avbryt rutten</string>
     <string name="cancel_navigation">Avbryt navigeringen</string>
     <string name="clear_destination">Ta bort destinationen</string>
-    <string name="download_using_mobile_internet">Wi-Fi är för tillfället inte anslutet. Vill du ladda ned med din nuvarande anslutning till Internet?</string>
+    <string name="download_using_mobile_internet">Wi-Fi är för tillfället inte anslutet. Vill du hämta med din nuvarande anslutning till Internet?</string>
     <string name="street_name">Gatunamn</string>
     <string name="hno">Husnummer</string>
 
@@ -1347,7 +1350,7 @@ Nyttjat utrymme är {1} MB.
     
     
     <string name="gpx_file_is_empty">GPX-spåret är tomt</string>
-    <string name="loading_smth">Laddar %1$s …</string>
+    <string name="loading_smth">Läser in %1$s …</string>
     <string name="map_widget_plain_time">Aktuell tid</string>
     <string name="shared_string_waypoint">Waypoint</string>
     <string name="selected_gpx_info_show">"
@@ -1470,7 +1473,7 @@ Nyttjat utrymme är {1} MB.
     <string name="rendering_value_bicycle_name">Cykel</string>
     <string name="rendering_value_pedestrian_name">Fotgängare</string>
     <string name="rendering_value_browse_map_name">Titta på kartan</string>
-    <string name="download_additional_maps">Ladda ner kartor som saknas %1$s (%2$d MB)?</string>
+    <string name="download_additional_maps">Hämta kartor som saknas %1$s (%2$d MB)?</string>
 
     <string name="shared_string_waypoints">Waypoints</string>
     
@@ -1550,7 +1553,7 @@ Nyttjat utrymme är {1} MB.
     <string name="everything_up_to_date">Alla filer är uppdaterade</string>
     <string name="use_opengl_render">Använd OpenGL-rendering</string>
     <string name="use_opengl_render_descr">Använd hårdvaruaccelererad OpenGL-rendering (fungerar kanske inte på vissa enheter).</string>
-    <string name="no_internet_connection">Kan inte ladda ner; kontrollera din internetsanslutning.</string>
+    <string name="no_internet_connection">Kan inte hämta; kontrollera din internetsanslutning.</string>
     <string name="rendering_attr_roadStyle_name">Vägtyp</string>
     <string name="rendering_value_default_name">Standard</string>
     <string name="rendering_value_orange_name">Brandgul</string>
@@ -1595,7 +1598,7 @@ Nyttjat utrymme är {1} MB.
     <string name="parking_place">P-plats</string>
     <string name="remove_the_tag">TA BORT TAGGEN</string>
     <string name="gps_status">GPS-status</string>
-    <string name="version_settings_descr">Hämta \"nattversioner\".</string>
+    <string name="version_settings_descr">Hämta betaversioner.</string>
     <string name="version_settings">Versioner</string>
     <string name="shared_string_gpx_points">Punkter</string>
 
@@ -1731,7 +1734,7 @@ Long %2$s</string>
     <string name="confirm_usage_speed_cameras">I många länder (Tyskland, Frankrike, Italien och andra) är det inte tillåtet att använda varningar för hastighetskameror. OsmAnd tar inget ansvar om du bryter mot lagen. Tryck på Ja endast om du får använda denna funktion.</string>
     <string name="welmode_download_maps">Hämta kartor</string>
     <string name="welcome_select_region">För att avspegla dina trafiksignaler och -förordningar på ett korrekt sätt, välj den region du kör i:</string>
-    <string name="welcome_text">OsmAnd erbjuder bläddring i globala offline-kartor och fullständig global navigering offline!</string>
+    <string name="welcome_text">OsmAnd erbjuder bläddring i globala foffline-kartor och global navigering frånkopplad!</string>
     <string name="welcome_header">Välkommen</string>
     <string name="agps_info">A-GPS-info</string>
     <string name="shared_string_message">Meddelande</string>
@@ -2118,9 +2121,7 @@ Long %2$s</string>
     <string name="download_files_error_not_enough_space">Inte tillräckligt med utrymme!
 Detta skulle kräva {3} MB temporärt och {1} MB permanent.
 Tillgängligt utrymme är blott {2} MB.</string>
-    <string name="download_files_question_space_with_temp">Hämta {0} fil(er)?
-Detta kräver {3} MB temporärt och {1} MB permanent.
-(Tillgängligt utrymme är {2} MB.)</string>
+    <string name="download_files_question_space_with_temp">Hämta {0} fil(er)? Nyttjat utrymme är {3} MB temporärt och {1} MB permanent. (Tillgängligt utrymme är {2} MB.)</string>
     <string name="upload_osm_note">Ladda upp OSM-anteckning</string>
     <string name="upload_anonymously">Ladda upp anonymt</string>
 <string name="select_map_marker">Välj kartmarkör</string>
@@ -2255,10 +2256,10 @@ Om du tycker om OsmAnd och OSM och vill stödja dem så är detta ett utmärkt s
     <string name="search_another_country">Välj en annan region</string>
     <string name="osmand_plus_banner_desc">Obegränsade nedladdningar av kartor, uppdateringar och Wikipedia-plugin.</string>
     <string name="si_mi_meters">Mil/metrar</string>
-    <string name="first_usage_wizard_desc">Låt OsmAnd avgöra din plats och föreslå kartor att ladda ner för den regionen.</string>
+    <string name="first_usage_wizard_desc">Låt OsmAnd avgöra din plats och föreslå kartor att hämta för den regionen.</string>
     <string name="location_not_found">Platsen hittades inte</string>
     <string name="no_inet_connection">Ingen Internetanslutning</string>
-    <string name="no_inet_connection_desc_map">Krävs för att ladda ner kartor.</string>
+    <string name="no_inet_connection_desc_map">Krävs för att hämta kartor.</string>
     <string name="search_location">Söker plats…</string>
     <string name="storage_free_space">Oanvänt utrymme</string>
     <string name="storage_place_description">OsmAnds lagringsplats för data (för kartor, GPX-filer, o.s.v.): %1$s.</string>
@@ -2277,7 +2278,7 @@ Om du tycker om OsmAnd och OSM och vill stödja dem så är detta ett utmärkt s
     <string name="get_it">Skaffa det</string>
     <string name="get_for">Skaffa för %1$s</string>
     <string name="get_for_month">Skaffa för %1$s månad</string>
-    <string name="skip_map_downloading_desc">"Du har inte några offline-kartor installerade. Du kan välja en karta från listan eller hämta kartor senare via menyn  - %1$s."</string>
+    <string name="skip_map_downloading_desc">"Du har inte några offline-kartor installerade. Du kan välja en karta från listan eller hämta kartor senare via \'Meny  - %1$s\'."</string>
     <string name="search_map">Söker efter kartor …</string>
     <string name="first_usage_greeting">Få anvisningar och upptäck nya platser utan Internetuppkoppling</string>
     <string name="search_my_location">Sök efter min plats</string>
@@ -2713,10 +2714,10 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="mapillary_descr">Online gatunivåbilder för alla. Upptäck platser, samarbeta, fånga världen.</string>
     <string name="plugin_mapillary_descr">Gatunivå bilder för alla. Upptäck platser, samarbeta, fånga världen.</string>
     <string name="private_access_routing_req">Din destination är belägen i ett område med privat tillträde. Tillåt tillgång till privata vägar för denna resa?</string>
-    <string name="hillshade_menu_download_descr">För att se relief-höjdskuggning på kartan, ladda ner höjdskuggskartan för denna region.</string>
+    <string name="hillshade_menu_download_descr">För att se relief-höjdskuggning på kartan, hämta höjdskuggskartan för denna region.</string>
     <string name="hillshade_purchase_header">För att se höjdskuggningsrelief på kartan, behöver du köpa och installera insticksmodulen \'Konturlinjer\'</string>
     <string name="hide_from_zoom_level">Dölja från zoom-nivå</string>
-    <string name="srtm_menu_download_descr">Ladda ner \'konturlinjekarta\' över denna region.</string>
+    <string name="srtm_menu_download_descr">Hämta \'konturlinjekarta\' över denna region.</string>
     <string name="srtm_purchase_header">För att se höjdkurvor på kartan, behöver du köpa och installera insticksmodulen \'Konturlinjer\'</string>
     <string name="show_from_zoom_level">Visa från zoom-nivå</string>
     <string name="routing_attr_allow_private_name">Tillåt privat åtkomst</string>
@@ -2738,7 +2739,7 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="index_item_depth_points_southern_hemisphere">Nautiska djuppunkter södra halvklotet</string>
     <string name="index_item_depth_points_northern_hemisphere">Nautiska djuppoäng norra halvklotet</string>
     <string name="download_depth_countours">Nautiska djupkonturer</string>
-    <string name="do_not_send_anonymous_app_usage_desc">OsmAnd samlar in information om vilka delar av appen du öppnar. Din plats skickas aldrig, inte heller någonting du anger i appen eller detaljer om områden du visar, söker eller laddar ner.</string>
+    <string name="do_not_send_anonymous_app_usage_desc">OsmAnd samlar in information om vilka delar av appen du öppnar. Din plats skickas aldrig, inte heller någonting du anger i appen eller detaljer om områden du visar, söker eller hämtar.</string>
     <string name="routing_attr_relief_smoothness_factor_name">Välj höjdfluktuation</string>
     
     
@@ -2783,8 +2784,18 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="osmand_extended_description_part7">Bidra till OSM • Rapportera databuggar • Ladda upp GPX-spår till OSM direkt från appen • Lägg till POI och ladda upp dem direkt till OSM (eller senare om offline)</string>
     <string name="clear_all_intermediates">Rensa alla mellanliggande punkter</string>
     <string name="rendering_attr_whiteWaterSports_name">Strömsporter</string>
-    <string name="osmand_extended_description_part8">OsmAnd är open-source och är utvecklas aktivt. Alla kan bidra till appen genom att rapportera buggar, förbättra översättningar eller programmera nya funktioner. Projektet är i ett dynamiskt tillstånd av kontinuerlig förbättring av alla dessa former genom utvecklare och interaktion med användare. Projektet är också beroende av ekonomiska bidrag för att finansiera kodning och testning av nya funktioner. Ungefärlig karttäckning och kvalitet: • Västeuropa: **** • Östeuropa: *** • Ryssland: *** • Nordamerika: *** • Sydamerika: ** • Asien: ** • Japan &amp; Korea: *** • Mellanöstern: ** • Afrika: ** • Antarktis: * De flesta länder runt om i världen finns tillgängliga för nedladdning! Få en tillförlitlig navigator i ditt land - det kan vara Tyskland, Frankrike, Mexiko, Storbritannien, Spanien, Nederländerna, USA, Ryssland, Brasilien eller något annat.</string>
-    <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OSM Automated Navigation Directions) OsmAnd+ är ett open source-navigationsapp med tillgång till ett brett utbud av global OpenStreetMap(OSM)-data. Alla kartdata (vektor- eller rasterkartor) kan sparas på telefonens minneskort för användning offline. OsmAnd erbjuder även offline och online-ruttunktioner, inklusive turn-by-turn röstguidning. OsmAnd+ är den betalversionenen av appeb, genom att köpa det stödjer du projektet, finansierar utveckling av nya funktioner, och får de senaste uppdateringarna. Några av de centrala funktionerna: - Komplett offline-funktionalitet (spara vektor- eller rasterkartor i enhetens lagring) - Kompakta offline vektorkartor för hela världen finns tillgängliga - Obegränsad nedladdning av land- eller regionkartor direkt från appen - Offline Wikipedia-artiklar (ladda ner Wikipedia POI), utmärkt för sightseeing - Överlagring av flera kartskikt är möjligt, som GPX eller navigeringsspår, Punkter av Intresse, favoriter, höjdkurvor, hållplatser för kollektivtrafiken, fler kartor med anpassningsbar genomskinlighet- Offlinesökning efter adresser och intressepunkter (POI) - Offline routing för mediumdistansavstånd - Bil-, cykel- och fotgängarelägen med: - tillval automatiskt byte av dag/nattläge - valfri hastighetsbunden kartzoom - valfri kartjustering enligt kompass eller riktning - som tillval körfältsguide, hastighetsgräns visas, inspelade- och TTS-röster</string>
+    <string name="osmand_extended_description_part8">OsmAnd är open-source och är utvecklas aktivt. Alla kan bidra till appen genom att rapportera buggar, förbättra översättningar eller programmera nya funktioner. Projektet är i ett dynamiskt tillstånd av kontinuerlig förbättring av alla dessa former genom utvecklare och interaktion med användare. Projektet är också beroende av ekonomiska bidrag för att finansiera kodning och testning av nya funktioner. Ungefärlig karttäckning och kvalitet: • Västeuropa: **** • Östeuropa: *** • Ryssland: *** • Nordamerika: *** • Sydamerika: ** • Asien: ** • Japan &amp; Korea: *** • Mellanöstern: ** • Afrika: ** • Antarktis: * De flesta länder runt om i världen finns tillgängliga för hämtning! Få en tillförlitlig navigator i ditt land - det kan vara Tyskland, Frankrike, Mexiko, Storbritannien, Spanien, Nederländerna, USA, Ryssland, Brasilien eller något annat.</string>
+    <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OSM Automated Navigation Directions)
+\n
+\nOsmAnd+ är ett open source-navigationsapp med tillgång till ett brett utbud av global OpenStreetMap(OSM)-data. Alla kartdata (vektor- eller rasterkartor) kan sparas på telefonens minneskort för användning offline. OsmAnd erbjuder även offline och online-ruttunktioner, inklusive turn-by-turn röstguidning.
+\n
+\nOsmAnd+ är den betalversionenen av appeb, genom att köpa det stödjer du projektet, finansierar utveckling av nya funktioner, och får de senaste uppdateringarna.
+\n
+\nNågra av de centrala funktionerna: - Komplett offline-funktionalitet (spara vektor- eller rasterkartor i enhetens lagring) - Kompakta offline vektorkartor för hela världen finns tillgängliga - Obegränsad hämtning av land- eller regionkartor direkt från appen - Offline Wikipedia-artiklar (hämta Wikipedia-POI), utmärkt för sightseeing 
+\n
+\n - Överlagring av flera kartskikt är möjligt, som GPX eller navigeringsspår, Punkter av Intresse, favoriter, höjdkurvor, hållplatser för kollektivtrafiken, fler kartor med anpassningsbar genomskinlighet- Offlinesökning efter adresser och intressepunkter (POI) - Offline routing för mediumdistansavstånd - Bil-, cykel- och fotgängarelägen med: - tillval automatiskt byte av dag/nattläge - 
+\n
+\n - Valfri hastighetsbunden kartzoom - valfri kartjustering enligt kompass eller riktning - som tillval körfältsguide, hastighetsgräns visas, inspelade- och TTS-röster</string>
     <string name="nothing_found_in_radius">Kunde inte hitta något inom:</string>
     <string name="select_waypoints_category_description">Lägg till alla spårens vägpunkter, eller välj separata kategorier.</string>
     <string name="shared_string_total">Totalt</string>
@@ -2834,25 +2845,25 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="default_render_descr">Stil för allmänna ändamål. Förenklad återgivning i tätbefolkade städer. Viktiga funktioner: höjdkurvor, rutter, ytkvalitet, tillträdeskontroll, farthinder, stigrendering enligt SAC-skala, vattensporter.</string>
     <string name="open_wikipedia_link_online">Öppna Wikipedia-länk på nätet</string>
     <string name="open_wikipedia_link_online_description">Länken kommer att öppnas i en webbläsare.</string>
-    <string name="read_wikipedia_offline_description">Skaffa OsmAnd Live-prenumeration för att läsa Wikipedia och Wikipedia-artiklar offline.</string>
+    <string name="read_wikipedia_offline_description">Skaffa OsmAnd Live-prenumeration för att läsa Wikipedia och Wikipedia-artiklar frånkopplad.</string>
     <string name="how_to_open_link">Hur öppnar man länken?</string>
-    <string name="read_wikipedia_offline">Läs Wikipedia offline</string>
-    <string name="download_all">Ladda ner alla</string>
+    <string name="read_wikipedia_offline">Läs Wikipedia frånkopplad</string>
+    <string name="download_all">Hämta alla</string>
     <string name="shared_string_restart">Starta om</string>
     <string name="show_images">Visa bilder</string>
     <string name="purchase_cancelled_dialog_title">Du har annullerat ditt OsmAnd Live-abonnemang</string>
     <string name="purchase_cancelled_dialog_descr">Förnya abonnemanget för att fortsätta använda alla funktioner:</string>
 
-    <string name="maps_you_need_descr">Baserat på de artiklar som du bokmärkt, följande kartor rekommenderas för dig att ladda ner:</string>
+    <string name="maps_you_need_descr">Baserat på de artiklar som du bokmärkt, följande kartor rekommenderas för dig att hämta:</string>
     <string name="maps_you_need">Kartor du behöver</string>
     <string name="osmand_team">OsmAnd team</string>
     <string name="popular_destinations">Populära destinationer</string>
     <string name="paid_app">Betald app</string>
     <string name="paid_plugin">Betald plugin</string>
     <string name="travel_card_update_descr">Nya Wikivoyage-data tillgängliga, uppdatera för att njuta.</string>
-	<string name="travel_card_download_descr">Ladda ner dessa Wikivoyage-reseguider för att visa artiklar om platser runt om i världen utan en internetanslutning.</string>
+	<string name="travel_card_download_descr">Hämta dessa Wikivoyage-reseguider för att visa artiklar om platser runt om i världen utan en internetanslutning.</string>
 	<string name="update_is_available">Uppdatering tillgänglig</string>
-	<string name="download_file">Ladda ned fil</string>
+	<string name="download_file">Hämta fil</string>
     <string name="start_editing_card_image_text">Den fria, världsomspännande reseguiden som alla kan redigera.</string>
     <string name="welcome_to_open_beta_description">Reseguider är baserade på Wikivoyage. Testa alla funktioner under öppnen beta-testning gratis. Efteråt kommer resor att vara tillgängliga för prenumeranter av OsmAnd Unlimited och ägare av OsmAnd+.</string>
     <string name="start_editing_card_description">Du kan och bör redigera en artikel på Wikivoyage. Dela med dig av kunskap, erfarenhet, talang och din kännedom</string>
@@ -2869,21 +2880,21 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="purchase_unlim_title">Köp - %1$s</string>
     <string name="purchase_subscription_title">Prenumerera - %1$s</string>
 
-    <string name="wikivoyage_offline">Wikivoyage offline</string>
+    <string name="wikivoyage_offline">Wikivoyage frånkopplad</string>
 
     <string name="unlimited_downloads">Obegränsat antal nedladdningar</string>
-    <string name="wikipedia_offline">Wikipedia offline</string>
+    <string name="wikipedia_offline">Wikipedia frånkopplad</string>
     <string name="contour_lines_hillshade_maps">Höjdkurvor &amp; höjdreliefer</string>
     <string name="unlock_all_features">Låsa upp alla OsmAnd-funktioner</string>
 
     <string name="purchase_dialog_title">Välj abonnemang</string>
-    <string name="purchase_dialog_travel_description">Köp något av följande för att läsa researtiklar offline:</string>
+    <string name="purchase_dialog_travel_description">Köp något av följande för att läsa researtiklar frånkopplad:</string>
     <string name="purchase_dialog_subtitle">Välj lämpligt val:</string>
     <string name="shared_string_dont">Gör inte</string>
     <string name="shared_string_do">Gör</string>
     <string name="shared_string_only_with_wifi">Endast på Wi-Fi</string>
     <string name="wikivoyage_download_pics">Hämta bilder</string>
-    <string name="wikivoyage_download_pics_descr">Bilder från artiklar kan laddas ner för användning offline.
+    <string name="wikivoyage_download_pics_descr">Bilder från artiklar kan laddas ner för användning frånkopplad. 
 \nDu kan alltid ändra inställningen i \"Utforska\" → \"Alternativ\".</string>
     <string name="shared_string_wifi_only">Endast på Wi-Fi</string>
     <string name="select_travel_book">Välj en resebok</string>
@@ -2981,17 +2992,17 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="get_osmand_live">Skaffa OsmAnd Live för att låsa upp alla features: Dagliga kartuppdateringar med obegränsat antal nedladdningar, alla betal-och gratistillägg, Wikipedia, Wikivoyage och mycket mer.</string>
     <string name="unirs_render_descr">Ändring av standardstilen för att öka kontrasten av gång och cykelvägar. Använder färger från tidigare versioner av Mapink.</string>
     <string name="shared_string_gpx_files">GPX-filer</string>
-    <string name="release_3_0">• Nyhet: Stöd för globala offline reseguider. Refererade platser är länkade till kartan. Datan kommer initialt från Wikivoyage.
-\n
-\n • Wikipedia: Nytt utseende, aktiva länkar, stöd för bilder
-\n
-\n • Open Track UI: Stöd för waypoint-grupper
-\n
-\n • Kartmarkörer: Importering av valda grupper från GPX-filer, koordinatinmatning, nytt utseende
-\n
-\n • OsmAnd Live-prenumeration stödjer nu alla OsmAnd features
-\n
-\n</string>
+    <string name="release_3_0">"• Nyhet: Stöd för globala frånkopplade  reseguider. Refererade platser är länkade till kartan. Datan kommer initialt från Wikivoyage. 
+\n 
+\n • Wikipedia: Nytt utseende, aktiva länkar, stöd för bilder 
+\n 
+\n • Open Track UI: Stöd för waypoint-grupper 
+\n 
+\n • Kartmarkörer: Importering av valda grupper från GPX-filer, koordinatinmatning, nytt utseende 
+\n 
+\n • OsmAnd Live-prenumeration stödjer nu alla OsmAnd funktioner
+\n 
+\n"</string>
     <string name="quick_action_page_list_descr">Att trycka på denna åtgärdsknapp bläddrar genom listan nedan.</string>
     <string name="poi_cannot_be_found">Nod eller väg kan inte hittas.</string>
     <string name="search_no_results_feedback">Inga sökresultat?
