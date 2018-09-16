@@ -2126,7 +2126,7 @@ Detta kräver {3} MB temporärt och {1} MB permanent.
     <string name="upload_anonymously">Ladda upp anonymt</string>
 <string name="select_map_marker">Välj kartmarkör</string>
     <string name="map_markers_other">Andra markörer</string>
-    <string name="upload_osm_note_description">Du kan ladda upp din OSM-anteckning anonymt eller använda din profil på OpenStreetMap.org.</string>
+    <string name="upload_osm_note_description">Ladda upp din OSM-anteckning anonymt eller använd din profil på OpenStreetMap.org.</string>
     <string name="donations">Donationer</string>
     <string name="number_of_recipients">Antal mottagare</string>
     <string name="osm_user_stat">Redigeringar %1$s, rang %2$s, redigeringar totalt %3$s</string>
@@ -2250,7 +2250,7 @@ Om du tycker om OsmAnd och OSM och vill stödja dem så är detta ett utmärkt s
     <string name="save_filter">Spara filter</string>
     <string name="delete_filter">Ta bort filter</string>
     <string name="new_filter">Nytt filter</string>
-    <string name="new_filter_desc">Ange ett namn på det nya filtret. Det kommer att finnas på kategorifliken.</string>
+    <string name="new_filter_desc">Ange ett namn på det nya filtret. Det kommer att läggas till på fliken ’Kategorier’.</string>
     <string name="translit_name_if_miss">"Transkribera om  %1$s namn saknas"</string>
     <string name="skip_map_downloading">Hoppa över nerladdning av kartor</string>
     <string name="search_another_country">Välj en annan region</string>
@@ -2262,7 +2262,7 @@ Om du tycker om OsmAnd och OSM och vill stödja dem så är detta ett utmärkt s
     <string name="no_inet_connection_desc_map">Krävs för att ladda ner kartor.</string>
     <string name="search_location">Söker plats…</string>
     <string name="storage_free_space">Oanvänt utrymme</string>
-    <string name="storage_place_description">OsmAnd\'s lagringsplats för data (för kartor, spår, osv.): %1$s.</string>
+    <string name="storage_place_description">OsmAnds lagringsplats för data (för kartor, GPX-filer, osv.): %1$s.</string>
     <string name="give_permission">Ge tillåtelse</string>
     <string name="allow_access_location">Tillåt åtkomst till plats</string>
     <string name="no_update_info">Visa inte uppdateringar</string>
@@ -2273,7 +2273,7 @@ Om du tycker om OsmAnd och OSM och vill stödja dem så är detta ett utmärkt s
     <string name="get_started">Kom igång</string>
     <string name="replace_favorite_confirmation">Är du säker på att du vill ersätta favoriten %1$s?</string>
     <string name="clear_tile_data">Rensa alla brickor</string>
-    <string name="search_hint">Skriv in stad, adress och POI-namn</string>
+    <string name="search_hint">Ange stad, adress och POI-namn</string>
     <string name="donation_to_osm">Donation till OpenStreetMap-gemenskapen</string>
     <string name="get_it">Skaffa det</string>
     <string name="get_for">Skaffa för %1$s</string>
@@ -2309,9 +2309,9 @@ Om du tycker om OsmAnd och OSM och vill stödja dem så är detta ett utmärkt s
     <string name="route_roundabout_short">Tag den %1$d avfarten och kör</string>
     <string name="upload_poi">Ladda upp POI</string>
     <string name="route_calculation">Ruttberäkning</string>
-    <string name="gpx_no_tracks_title">Du har inga spår än</string>
-    <string name="gpx_no_tracks_title_folder">Du kan också lägga till spår i mappen</string>
-    <string name="gpx_add_track">Lägg till spår</string>
+    <string name="gpx_no_tracks_title">Du har inga GPX-filer ännu</string>
+    <string name="gpx_no_tracks_title_folder">Du kan också lägga till GPX-filer i mappen</string>
+    <string name="gpx_add_track">Lägg till fler...</string>
     <string name="gpx_appearance">Utseende</string>
     
     
@@ -2321,7 +2321,7 @@ Om du tycker om OsmAnd och OSM och vill stödja dem så är detta ett utmärkt s
     <string name="christmas_desc">Med tanke på den kommande julen och nyåret så kan du välja att visa POI som har med julen att göra: julgranar, julmarknader med mera.</string>
     <string name="rendering_attr_contourWidth_name">Bredd på konturlinjer</string>
     <string name="rendering_attr_hideWaterPolygons_description">Vatten</string>
-    <string name="osm_live_payment_desc">Prenumerationsavgiften kommer att faktureras varje månad. Du kan när som helst avbryta din prenumeration i Google Play.</string>
+    <string name="osm_live_payment_desc">Prenumerationsavgiften faktureras varje månad. Avbryt den när som helst i Google Play.</string>
     <string name="donation_to_osm_desc">En del av din donation kommer att skickas till OSM-användare som skickar in ändringar till OpenStreetMap. Prenumerationens kostnad fortsätter att vara densamma.</string>
     <string name="osm_live_subscription_desc">En prenumeration aktiverar uppdateringar varje timme, dag eller vecka och obegränsade nedladdningar av alla kartor globalt.</string>
     <string name="osm_live_banner_desc">Erhåll obegränsade nedladdningar av kartor samt kartuppdateringar oftare än en gång i månaden: varje vecka, varje dag eller varje timme.</string>
@@ -2393,7 +2393,7 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="shared_string_start_time">Starttid</string>
     <string name="shared_string_end_time">Sluttid</string>
     <string name="shared_string_color">Färg</string>
-    <string name="select_gpx_folder">Välj GPX-mapp</string>
+    <string name="select_gpx_folder">Välj mapp för GPX-filer</string>
     <string name="average_speed">Medelhastighet</string>
     <string name="shared_string_time_moving">Tid i rörelse</string>
     <string name="max_speed">Maxhastighet</string>
@@ -2437,7 +2437,7 @@ Vänligen tillhandahåll fullständig kod</string>
     
     
     <string name="relief_smoothness_factor_descr">Favoritterräng: slätt eller kuperat.</string>
-    <string name="full_version_thanks">Tack för att du köpt den fullständiga versionen av OsmAnd!</string>
+    <string name="full_version_thanks">Tack för att du köpt betalversionen av OsmAnd!</string>
     <string name="routing_attr_relief_smoothness_factor_hills_name">Kuperat</string>
     <string name="routing_attr_relief_smoothness_factor_plains_name">Mindre kuperat</string>
     <string name="routing_attr_relief_smoothness_factor_more_plains_name">Slätt</string>
