@@ -2448,7 +2448,7 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="driving_region_automatic">Automatisk</string>
     <string name="do_not_send_anonymous_app_usage">Skicka inte anonym appanvändningsstatistik</string>
     <string name="do_not_show_startup_messages">Visa inga meddelanden vid uppstart</string>
-    <string name="do_not_show_startup_messages_desc">Döljer visning av apprabatter och speciella lokala evenemangmeddelanden.</string>
+    <string name="do_not_show_startup_messages_desc">Visa inga apprabatter eller meddelanden om speciella lokala evenemang.</string>
     <string name="parking_options">Parkeringsalternativ</string>
     <string name="fonts_header">Teckensnitt för kartan</string>
     <string name="select_street">Välj gator</string>
@@ -2671,7 +2671,7 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="one_tap_active">\'Ett tryck\' aktiv</string>
     <string name="empty_state_av_notes_desc">Lägg till ljud-, video- eller fotonotering för varje punkt på kartan, med hjälp av widgeten eller menyn.</string>
     <string name="add_track_to_markers_descr">Välj ett spår för att lägga till dess waypoints till markörer.</string>
-    <string name="add_favourites_group_to_markers_descr">Välj en favoritkategori för att lägga till markörer.</string>
+    <string name="add_favourites_group_to_markers_descr">Välj en favoritkategori att lägga till markörerna.</string>
     <string name="shared_string_gpx_waypoints">Spåra waypoints</string>
     <string name="favourites_group">Kategorin Favoriter</string>
     <string name="add_group">Lägg till en grupp</string>
@@ -2685,7 +2685,7 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="shared_string_one">En</string>
     <string name="show_guide_line_descr">Visa styrlinjer från din position till de aktiva markörlägena.</string>
     <string name="show_arrows_descr">Visa en eller två pilar som anger riktningen till de aktiva markörerna.</string>
-    <string name="distance_indication_descr">Välj hur du vill visa avståndet till aktiva markörer.</string>
+    <string name="distance_indication_descr">Välj hur avståndet till aktiva markörer ska visas.</string>
     <string name="active_markers_descr">Välj hur många riktningsindikatorer som ska visas.</string>
     <string name="digits_quantity">Antal decimaler</string>
     <string name="shared_string_right">Höger</string>
@@ -2700,7 +2700,7 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="tap_on_map_to_hide_interface">Helskärmsläge</string>
     <string name="mark_passed">Markör godkänd</string>
     <string name="show_guide_line">Visa riktlinjer</string>
-    <string name="marker_show_distance_descr">Välj hur du vill ange avstånd och riktning till kartmarkörer på kartan:</string>
+    <string name="marker_show_distance_descr">Välj hur avstånd och riktning till kartmarkörer ska anges på kartan:</string>
     <string name="map_orientation_change_in_accordance_with_speed">Kartorienteringströskel</string>
     <string name="map_orientation_change_in_accordance_with_speed_descr">Välj nedan vilken hastighet kartläget växlar från \"riktning\" till \"kompass\".</string>
     <string name="show_direction">Avståndsindikering</string>
@@ -2739,7 +2739,7 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="index_item_depth_points_southern_hemisphere">Nautiska djuppunkter södra halvklotet</string>
     <string name="index_item_depth_points_northern_hemisphere">Nautiska djuppoäng norra halvklotet</string>
     <string name="download_depth_countours">Nautiska djupkonturer</string>
-    <string name="do_not_send_anonymous_app_usage_desc">OsmAnd samlar in information om vilka delar av programmet som du öppnar. Din plats skickas aldrig, inte heller någonting du anger i appen eller detaljer om områden du visar, söker eller laddar ner.</string>
+    <string name="do_not_send_anonymous_app_usage_desc">OsmAnd samlar in information om vilka delar av appen du öppnar. Din plats skickas aldrig, inte heller någonting du anger i appen eller detaljer om områden du visar, söker eller laddar ner.</string>
     <string name="routing_attr_relief_smoothness_factor_name">Välj höjdfluktuation</string>
     
     
@@ -2835,7 +2835,7 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="open_wikipedia_link_online">Öppna Wikipedia-länk på nätet</string>
     <string name="open_wikipedia_link_online_description">Länken kommer att öppnas i en webbläsare.</string>
     <string name="read_wikipedia_offline_description">Skaffa OsmAnd Live-prenumeration för att läsa Wikipedia och Wikipedia-artiklar offline.</string>
-    <string name="how_to_open_link">Hur man öppnar länken?</string>
+    <string name="how_to_open_link">Hur öppnar man länken?</string>
     <string name="read_wikipedia_offline">Läs Wikipedia offline</string>
     <string name="download_all">Ladda ner alla</string>
     <string name="shared_string_restart">Starta om</string>
@@ -2855,7 +2855,7 @@ Vänligen tillhandahåll fullständig kod</string>
 	<string name="download_file">Ladda ned fil</string>
     <string name="start_editing_card_image_text">Den fria, världsomspännande reseguiden som alla kan redigera.</string>
     <string name="welcome_to_open_beta_description">Reseguider är baserade på Wikivoyage. Testa alla funktioner under öppnen beta-testning gratis. Efteråt kommer resor att vara tillgängliga för prenumeranter av OsmAnd Unlimited och ägare av OsmAnd+.</string>
-    <string name="start_editing_card_description">Du kan och borde redigera en artikel på Wikivoyage. Dela med sig av kunskap, erfarenhet, talang och din kännedom</string>
+    <string name="start_editing_card_description">Du kan och bör redigera en artikel på Wikivoyage. Dela med dig av kunskap, erfarenhet, talang och din kännedom</string>
     <string name="start_editing">Börja redigera</string>
     <string name="get_unlimited_access">Få obegränsad tillgång</string>
     <string name="welcome_to_open_beta">Välkommen till öppen beta</string>
