@@ -599,7 +599,7 @@ Nyttjat utrymme är {1} MB.
     <string name="rendering_exception">Ett fel uppstod vid renderingen av valt område</string>
     <string name="show_point_options">Använd platsen …</string>
     <string name="renderer_load_sucess">Renderaren laddades utan problem</string>
-    <string name="renderer_load_exception">Ett undantagsfel inträffade: renderaren laddades inte</string>
+    <string name="renderer_load_exception">Kunde inte läsa in renderaren</string>
     <string name="renderers">Vektorrenderare</string>
     <string name="renderers_descr">Välj renderingsutseende.</string>
     <string name="poi_context_menu_website">Visa POI-webbplats</string>
@@ -640,7 +640,7 @@ Nyttjat utrymme är {1} MB.
     <string name="fav_file_to_load_not_found">GPX-fil med favoriter finns inte på {0}</string>
     <string name="fav_saved_sucessfully">Favoriterna sparade utan problem i {0}</string>
     <string name="no_fav_to_save">Inga favoritpunkter att spara</string>
-    <string name="error_occurred_loading_gpx">Ett fel uppstod vid inläsning av GPX</string>
+    <string name="error_occurred_loading_gpx">Kunde inte läsa in GPX</string>
     <string name="send_report">Skicka rapport</string>
     <string name="none_region_found">Hittar inga offline-data för regioner på SD-kortet. Ladda ner regioner från Internet.</string>
     <string name="poi_namefinder_query_empty">Ange sökfråga för att hitta POI</string>
@@ -2262,7 +2262,7 @@ Om du tycker om OsmAnd och OSM och vill stödja dem så är detta ett utmärkt s
     <string name="no_inet_connection_desc_map">Krävs för att ladda ner kartor.</string>
     <string name="search_location">Söker plats…</string>
     <string name="storage_free_space">Oanvänt utrymme</string>
-    <string name="storage_place_description">OsmAnds lagringsplats för data (för kartor, GPX-filer, osv.): %1$s.</string>
+    <string name="storage_place_description">OsmAnds lagringsplats för data (för kartor, GPX-filer, o.s.v.): %1$s.</string>
     <string name="give_permission">Ge tillåtelse</string>
     <string name="allow_access_location">Tillåt åtkomst till plats</string>
     <string name="no_update_info">Visa inte uppdateringar</string>
