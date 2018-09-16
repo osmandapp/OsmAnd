@@ -104,8 +104,7 @@
     <string name="select_animate_speedup">Välj animerad ruttacceleration</string>
     <string name="global_app_allocated_memory_descr">Allokerat minne %1$s MB (Android-gräns %2$s MB, Dalvik %3$s MB).</string>
     <string name="global_app_allocated_memory">Allokerat minne</string>
-    <string name="native_app_allocated_memory_descr">Totalt inbyggt minne tilldelat av appen %1$s MB (Dalvik %2$s MB, annat %3$s MB).
-Proportionellt minne %4$s MB (Android-gräns %5$s MB, Dalvik %6$s MB).</string>
+    <string name="native_app_allocated_memory_descr">Totalt inbyggt minne allokerat av appen %1$s MB (Dalvik %2$s MB, övrigt %3$s MB). Proportionellt minne %4$s MB (Android-gräns %5$s MB, Dalvik %6$s MB).</string>
     <string name="native_app_allocated_memory">Totalt inbyggt minne</string>
 
     <string name="starting_point_too_far">Startpunkten ligger för långt från närmaste väg.</string>
@@ -119,7 +118,7 @@ Proportionellt minne %4$s MB (Android-gräns %5$s MB, Dalvik %6$s MB).</string>
     <string name="osmand_parking_choose_type">Välj typ av parkering</string>
     <string name="osmand_parking_lim_text">Tidsbegränsad</string>
     <string name="osmand_parking_no_lim_text">Ej tidsbegränsad</string>
-    <string name="osmand_parking_add_event">Lägg till ett meddelande i kalenderprogrammet</string>
+    <string name="osmand_parking_add_event">Lägg till ett meddelande i appen Kalender</string>
     <string name="gpxup_public">Offentlig</string>
     <string name="gpxup_private">Privat</string>
     <string name="gpxup_identifiable">Identifierbar</string>
@@ -216,7 +215,7 @@ Du hittar din parkeringsplats och -tid på instrumentbrädan och i widgeten på 
 
     <string name="modify_transparency">Ändra transparens (0 - transparent, 255 - ogenomskinlig)</string>
     <string name="first_time_msg">Tack för att du använder OsmAnd. För många funktioner i programmet behöver du vissa regionala offline-data som du kan ladda ner via \'Inställningar\' -&gt; \'Hantera kartfiler\'. Därefter kommer du att kunna se kartor, hitta adresser, leta efter intressepunkter och hitta kollektivtrafik.</string>
-    <string name="basemap_was_selected_to_download">En baskarta krävs för att appen ska fungera korrekt och den har markerats för nedladdning.</string>
+    <string name="basemap_was_selected_to_download">Baskarta har valts för nedladdning för att appen ska fungera.</string>
     <string name="select_index_file_to_download">Hittade ingenting. Om du inte kan hitta din region, kan du skapa den själv (se http://osmand.net).</string>
     <string name="map_online_plugin_is_not_installed">Aktivera modulen online-kartor för att välja olika kartkällor</string>
     <string name="map_online_data">Online-kartor och kartbitar (tiles)</string>
@@ -283,7 +282,7 @@ Du hittar din parkeringsplats och -tid på instrumentbrädan och i widgeten på 
     <string name="offline_edition">Offline-redigering</string>
     <string name="offline_edition_descr">Använd alltid offline-redigering.</string>
 
-    <string name="update_poi_does_not_change_indexes">POI-förändringar inom programmet påverkar inte nedladdade kartfiler; förändringar sparas till en lokal fil istället.</string>
+    <string name="update_poi_does_not_change_indexes">POI-förändringar inom appen påverkar inte nedladdade kartfiler; ändringar sparas istället till en lokal fil.</string>
     <string name="local_openstreetmap_uploading">Laddar upp …</string>
     <string name="local_openstreetmap_were_uploaded">{0} POI/Anteckningar laddades upp</string>
     <string name="local_openstreetmap_uploadall">Ladda upp alla</string>
@@ -406,7 +405,7 @@ Nyttjat utrymme är {1} MB.
     <string name="favourites_edit_dialog_category">Kategori</string>
     <string name="shared_string_no_thanks">Nej, tack</string>
     <string name="basemap_missing">Basvärldskarta (som omfattar hela världen i låg inzoomning) saknas. Hämta gärna World_basemap_x.obf för en global översikt.</string>
-    <string name="vector_data_missing">Offline-data saknas på SD-kortet. Det kan vara klokt att ladda ner detta för att kunna använda kartor offline.</string>
+    <string name="vector_data_missing">Ladda ner offline-data för att använda kartor offline.</string>
     <string name="local_index_gpx_info_show">\n\nTryck och håll för alternativ</string>
 
     <string name="local_index_installed">Lokal version</string>
@@ -524,7 +523,7 @@ Nyttjat utrymme är {1} MB.
     <string name="km">km</string>
     <string name="km_h">km/h</string>
     <string name="m">m</string>
-    <string name="old_map_index_is_not_supported">Det föråldrade kartdataformatet \"{0}\" stöds inte</string>
+    <string name="old_map_index_is_not_supported">Föråldrat kartdataformat \"{0}\", stöds inte</string>
     <string name="poi_filter_car_aid">Bilhjälp</string>
     <string name="poi_filter_closest_poi">Närmaste intressepunkter</string>
     <string name="poi_filter_custom_filter">Anpassat filter</string>
@@ -564,7 +563,7 @@ Nyttjat utrymme är {1} MB.
 
     <string name="application_dir">Datalagringsmapp</string>
 
-    <string name="osmand_net_previously_installed">En tidigare OsmAnd-version är installerad. Alla offline-data kommer att stödjas av den nya appen. Men favoritpunkter bör exporteras från den gamla appen och senare importeras i den nya.</string>
+    <string name="osmand_net_previously_installed">Alla offline-data från den tidigare installationen stöds av den nya appen. Men favoritpunkter måste exporteras från den gamla appen och sedan importeras i den nya.</string>
     <string name="build_installed">Bygge {0} installerades korrekt ({1}).</string>
     <string name="downloading_build">Laddar ner kompilering …</string>
     <string name="install_selected_build">Vill du installera OsmAnd - {0} av {1}{2} MB?</string>
@@ -624,7 +623,7 @@ Nyttjat utrymme är {1} MB.
     
     <string name="gpx_files_not_found">Hittar inga GPX-filer i spårmappen</string>
     <string name="layer_gpx_layer">GPX-spår …</string>
-    <string name="error_reading_gpx">Fel vid läsning av GPX-data</string>
+    <string name="error_reading_gpx">Kunde inte läsa GPX-data</string>
     <string name="vector_data">Offline vektorkartor</string>
     <string name="transport_context_menu">Sök transport vid stopp</string>
 
@@ -683,8 +682,8 @@ Nyttjat utrymme är {1} MB.
 
     <string name="voice_provider">Röstvägledning</string>
     <string name="voice_data_initializing">Initierar röstdata …</string>
-    <string name="voice_data_not_supported">Version som inte stöds av röstdata</string>
-    <string name="voice_data_corrupted">Specificerade röstdata är skadade</string>
+    <string name="voice_data_not_supported">Version av röstdata som inte stöds</string>
+    <string name="voice_data_corrupted">Angivna röstdata är skadade</string>
     <string name="voice_data_unavailable">Valda röstdata är inte tillgängliga</string>
 
     <string name="sd_unmounted">SD-kortet är inte tillgängligt.\nDu kommer inte att kunna se kartor eller hitta saker.</string>
@@ -725,9 +724,9 @@ Nyttjat utrymme är {1} MB.
     <string name="show_transport_over_map_description">Visa hållplatser för kollektivtrafik på kartan.</string>
     <string name="show_transport_over_map">Visa hållplatser</string>
     <string name="hello">Navigationsappen OsmAnd</string>
-    <string name="update_poi_success">POI-data har uppdaterats utan problem ({0} laddades)</string>
+    <string name="update_poi_success">POI-data uppdaterades ({0} lästes in)</string>
     <string name="update_poi_error_local">Fel vid uppdatering av lokal POI-lista</string>
-    <string name="update_poi_error_loading">Fel vid laddning av data från servern</string>
+    <string name="update_poi_error_loading">Kunde inte läsa in data från servern</string>
     <string name="update_poi_no_offline_poi_index">Inga offline POI-data tillgängliga för detta område</string>
     <string name="update_poi_is_not_available_for_zoom">Det går inte att uppdatera POI för små zoomnivåer</string>
     <string name="context_menu_item_update_poi">Uppdatera intressepunkt</string>
@@ -749,7 +748,7 @@ Nyttjat utrymme är {1} MB.
     <string name="router_service">Navigeringstjänst</string>
     <string name="sd_dir_not_accessible">Datalagringsmappen på minneskortet är inte tillgänglig!</string>
     <string name="download_question">Ladda ner {0} - {1}?</string>
-    <string name="download_question_exist">Offline-data för {0} finns redan ({1}). Vill du uppdatera den ({2})?</string>
+    <string name="download_question_exist">Offline-data för {0} finns redan ({1}). Uppdatera dem ({2})?</string>
     <string name="address">Adresser</string>
     <string name="downloading_list_indexes">Hämtar lista över tillgängliga regioner …</string>
     <string name="list_index_files_was_not_loaded">Listan över regioner hämtades inte från osmand.net.</string>
@@ -775,7 +774,7 @@ Nyttjat utrymme är {1} MB.
     <string name="loading_cities">Laddar städer …</string>
     <string name="poi">POI</string>
     <string name="arrived_at_destination">Du har anlänt till din destination</string>
-    <string name="loading_data">Laddar data …</string>
+    <string name="loading_data">Läser in data …</string>
     <string name="reading_indexes">Läser lokala data …</string>
     <string name="zxing_barcode_scanner_not_found">Appen ZXing Barcode Scanner är inte installerad. Vill du söka på Google Play?</string>
     <string name="rendering_attr_roadColors_description">Välj färgschema för vägar:</string>
@@ -796,9 +795,9 @@ Nyttjat utrymme är {1} MB.
     <string name="download_roads_only_item">"Vägar "</string>
     <string name="download_regular_maps">Standardkartor</string>
     <string name="download_roads_only_maps">Karta med enbart vägar</string>
-    <string name="safe_mode_description">Kör program i felsäkert läge (för långsammare Android istället för inbyggd kod).</string>
+    <string name="safe_mode_description">Kör appen i felsäkert läge (för långsammare Android istället för intern kod).</string>
     <string name="safe_mode">Felsäkert läge</string>
-    <string name="native_library_not_running">Programmet körs i felsäkert läge (inaktivera det i Inställningar).</string>
+    <string name="native_library_not_running">Appen körs i felsäkert läge (inaktivera det i \'Inställningar\').</string>
     <string name="background_service_is_enabled_question">Bakgrundstjänsten körs fortfarande. Vill du stoppa den också?</string>
 
     <string name="edit_filter_create_message">Filter {0} har skapats</string>
@@ -990,7 +989,7 @@ Nyttjat utrymme är {1} MB.
     <string name="download_hillshade_maps">Skuggad relief</string>
 
     <string name="av_use_external_camera_descr">Andvänd systemappen för foton.</string>
-    <string name="av_use_external_camera">Använd kamera-app</string>
+    <string name="av_use_external_camera">Använd kameraappen</string>
     <string name="max_speed_none">Ingen</string>
     <string name="prefer_motorways">Föredra motorvägar</string>
     <string name="prefer_in_routing_title">Föredra …</string>
@@ -1031,7 +1030,7 @@ Nyttjat utrymme är {1} MB.
     <string name="use_kalman_filter_compass_descr">Minskar kompassmissvisningen men blir trögare.</string>
     <string name="use_kalman_filter_compass">Använd Kalman-filter</string>
     <string name="choose_osmand_theme">App-tema</string>
-    <string name="choose_osmand_theme_descr">Välj tema för applikationen.</string>
+    <string name="choose_osmand_theme_descr">Välj utseende för appen.</string>
     <string name="use_magnetic_sensor_descr">Använd magnetisk sensor för att bestämma kompassvärde i stället för orienteringssensor.</string>
     <string name="accessibility_options">Tillgänglighetsalternativ</string>
     <string name="select_address_activity">Välj adress</string>
@@ -1419,7 +1418,7 @@ Nyttjat utrymme är {1} MB.
     <string name="lang_he">Hebreiska</string>
     <string name="forward">Framåt</string>
     <string name="home">Panelen</string>
-    <string name="live_monitoring_m_descr">Skicka spårningsdata till en specificerad webbtjänst om GPX-loggning är aktiverad.</string>
+    <string name="live_monitoring_m_descr">Skicka spårningsdata till en angiven webbtjänst om GPX-loggning är aktiverad.</string>
     <string name="live_monitoring_m">Online-spårning (GPX krävs)</string>
     <string name="live_monitoring_start">Starta online-spårning</string>
     <string name="live_monitoring_stop">Stoppa online-spårning</string>
@@ -1831,7 +1830,7 @@ Long %2$s</string>
     <string name="rendering_value_translucent_blue_name">Genomskinlig blå</string>
     <string name="rendering_value_purple_name">Purpur</string>
     <string name="rendering_value_translucent_purple_name">Genomskinlig purpur</string>
-    <string name="restart_is_required">För att verkställa ändringarna fullständigt måste appen startas om.</string>
+    <string name="restart_is_required">Starta om appen manuellt för att ändringarna ska börja gälla.</string>
     <string name="rendering_attr_currentTrackColor_name">GPX-färg</string>
     <string name="rendering_value_yellow_name">Gul</string>
     <string name="rendering_value_default13_name">Standard (13)</string>
@@ -1844,7 +1843,7 @@ Long %2$s</string>
     <string name="user_hates_app_get_feedback_long">Berätta för oss vad du vill förändra i denna app.</string>
     <string name="download_live_updates">Liveuppdateringar</string>
     <string name="failed_to_upload">Uppladdningen misslyckades</string>
-    <string name="delete_change">Ta bort ändringarna</string>
+    <string name="delete_change">Ta bort ändring</string>
     <string name="successfully_uploaded_pattern">Laddade upp {0}/{1} utan problem</string>
     <string name="try_again">Försök igen</string>
     <string name="error_message_pattern">Fel: {0}</string>
@@ -1884,7 +1883,7 @@ Long %2$s</string>
     <string name="poi_action_delete">ta bort</string>
     <string name="saved_at_time">Sparades utan problem kl. %1$s</string>
     <string name="poi_deleted_localy">POI tas bort så snart du laddat upp dina ändringar</string>
-    <string name="show_gpx">Visa GPX</string>
+    <string name="show_gpx">Visa GPX-data</string>
     <string name="show_on_start">Visa vid start</string>
     <string name="are_you_sure">Är du säker?</string>
     <string name="unsaved_changes_will_be_lost">Alla osparade ändringar kommer att förloras. Fortsätta ändå?</string>
@@ -1941,7 +1940,7 @@ Long %2$s</string>
 
     <string name="share_geo">geo:</string>
 
-    <string name="application_dir_description">Välj var du vill spara kartfilerna och andra datafiler.</string>
+    <string name="application_dir_description">Välj var du vill spara kartor och andra datafiler.</string>
     <string name="share_menu_location">Dela platsen</string>
     <string name="shared_string_send">Sänd</string>
     <string name="hillshade_layer_disabled">Skuggad relief-lager inaktiverat</string>
@@ -2799,7 +2798,8 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="save_poi_too_many_uppercase">Namnet innehåller för många versaler. Vill du fortsätta?</string>
     <string name="quick_action_add_gpx_descr">Knackning på åtgärdsknappen kommer att lägga till en GPX-punkt vid skärmens mitt.</string>
     <string name="quick_action_take_audio_note_descr">Knackning på åtgärdsknappen kommer att lägga en ljudanteckning vid skärmens mitt.</string>
-    <string name="quick_action_take_video_note_descr">Knacka på åtgärdsknappen kommer att lägga en videoanteckning på skärmen center plats.</string>
+    <string name="quick_action_take_video_note_descr">Att trycka på denna åtgärdsknapp lägger
+\ntill en videoanteckning mitt på skärmen.</string>
     <string name="quick_action_take_photo_note_descr">Knackning på åtgärdsknappen kommer att lägga till en fotoanteckning vid skärmens mitt.</string>
     <string name="quick_action_add_osm_bug_descr">Knackning på åtgärdsknappen kommer att lägga till en OSM-anteckning vid skärmens mitt.</string>
     <string name="quick_action_add_poi_descr">Knackning på åtgärdsknappen kommer att lägga till en Intressepunkt vid skärmens mitt.</string>
@@ -2970,7 +2970,7 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="download_wiki_region_placeholder">denna region</string>
     <string name="wiki_article_search_text">Söka efter motsvarande wiki-artikel</string>
     <string name="wiki_article_not_found">Artikeln hittades inte</string>
-    <string name="how_to_open_wiki_title">Hur man öppnar Wikipedia-artiklar?</string>
+    <string name="how_to_open_wiki_title">Hur öppnar man Wikipedia-artiklar?</string>
 <string name="point_deleted">Punkt %1$s borttagen</string>
     <string name="coord_input_edit_point">Redigera punkt</string>
     <string name="coord_input_add_point">Lägg till punkt</string>
