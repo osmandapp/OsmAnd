@@ -2100,7 +2100,7 @@ Lon %2$s</string>
     <string name="shared_string_save_changes">Änderungen speichern</string>
     <string name="shared_string_email_address">E-Mail-Adresse speichern</string>
     <string name="find_parking">Parkplatz finden</string>
-    <string name="show_polygons">Polygone anzeigen</string>
+    <string name="show_polygons">Flächen anzeigen</string>
     
     <string name="rendering_attr_showMtbRoutes_name">MTB-Routen anzeigen</string>
     <string name="shared_string_reverse_order">Reihenfolge umkehren</string>
@@ -2116,7 +2116,7 @@ Lon %2$s</string>
     <string name="active_markers">Aktive Kartenmarkierungen</string>
     <string name="map_markers">Kartenmarkierungen</string>
     <string name="map_marker">Kartenmarkierung</string>
-    <string name="consider_turning_polygons_off">Es wird empfohlen, das Rendern von Polygonen zu deaktivieren.</string>
+    <string name="consider_turning_polygons_off">Es wird empfohlen, das Rendern von Flächen zu deaktivieren.</string>
     
     <string name="shared_string_widgets">Steuerelemente</string>
     <string name="download_files_error_not_enough_space">Nicht genug Speicher!
@@ -3092,12 +3092,12 @@ Abgedeckte Fläche: %1$s x %2$s</string>
 \nGeben Sie uns eine Rückmeldung</string>
     <string name="commiting_way">Übermitteln via …</string>
     <string name="test_voice_desrc">Tippen Sie auf eine Schaltfläche und hören Sie sich die entsprechende Sprachanweisung an, um fehlende oder fehlerhafte Anweisungen zu erkennen.</string>
-<string name="release_3_2_pre">- Absturz beim Start von nicht-lateinischen Karten behoben
-\n
-\n - Verbesserte Rendering-Geschwindigkeit auf Android 8.0-Geräten
-\n
-\n - Unterstützung für die Bearbeitung von Polygon-(Nicht-Einrichtungs-)Objekten
-\n
+<string name="release_3_2_pre">• Absturz beim Start von nicht-lateinischen Karten behoben 
+\n 
+\n • Verbesserte Rendering-Geschwindigkeit auf Android 8.0-Geräten 
+\n 
+\n • Unterstützung für die Bearbeitung von Flächen
+\n 
 \n</string>
     <string name="ask_for_location_permission">Bitte lassen Sie zu, dass OsmAnd auf den Standort zugreifen darf.</string>
     </resources>
