@@ -233,11 +233,12 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadEv
 			final DownloadIndexesThread downloadThread = app.getDownloadThread();
 
 			boolean outdated = mainIndexItem != null && mainIndexItem.isOutdated();
+			boolean needsDownloading = mainIndexItem != null && !mainIndexItem.isDownloaded();
 			File selectedTravelBook = app.getTravelDbHelper().getSelectedTravelBook();
 
-			if (selectedTravelBook == null || (outdated && app.getSettings().SHOW_TRAVEL_UPDATE_CARD.get())) {
+			if (selectedTravelBook == null || needsDownloading || (outdated && app.getSettings().SHOW_TRAVEL_UPDATE_CARD.get())) {
 				boolean showOtherMaps = false;
-				if (selectedTravelBook == null) {
+				if (needsDownloading) {
 					List<IndexItem> items = downloadThread.getIndexes().getWikivoyageItems();
 					showOtherMaps = items != null && items.size() > 1;
 				}
@@ -341,9 +342,10 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadEv
 
 	@NonNull
 	private String getWikivoyageFileName() {
-		OsmandApplication app = getMyApplication();
-		File selectedTravelBook = app != null ? app.getTravelDbHelper().getSelectedTravelBook() : null;
-		return selectedTravelBook == null ? WORLD_WIKIVOYAGE_FILE_NAME : selectedTravelBook.getName();
+//		OsmandApplication app = getMyApplication();
+//		File selectedTravelBook = app != null ? app.getTravelDbHelper().getSelectedTravelBook() : null;
+//		return selectedTravelBook == null ? WORLD_WIKIVOYAGE_FILE_NAME : selectedTravelBook.getName();
+		return WORLD_WIKIVOYAGE_FILE_NAME;
 	}
 
 	private void removeDownloadUpdateCard() {
