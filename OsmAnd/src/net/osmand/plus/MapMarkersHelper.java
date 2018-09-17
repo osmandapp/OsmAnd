@@ -6,9 +6,11 @@ import android.support.annotation.IntDef;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
+
 import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
+import net.osmand.core.jni.MapMarker;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.LocationPoint;
@@ -20,10 +22,12 @@ import net.osmand.plus.GeocodingLookupService.AddressLookupRequest;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.mapmarkers.MapMarkersDbHelper;
 import net.osmand.plus.mapmarkers.MarkersPlanRouteContext;
-import net.osmand.plus.wikivoyage.data.TravelDbHelper;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
+import net.osmand.plus.wikivoyage.data.TravelDbHelper;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
+
+import org.apache.commons.logging.Log;
 
 import java.io.File;
 import java.lang.annotation.Retention;
@@ -38,8 +42,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-
-import org.apache.commons.logging.Log;
 
 import static net.osmand.data.PointDescription.POINT_TYPE_MAP_MARKER;
 
@@ -134,6 +136,15 @@ public class MapMarkersHelper {
 		Map<String, MapMarkersGroup> groupsMap = markersDbHelper.getAllGroupsMap();
 		List<MapMarker> allMarkers = new ArrayList<>(mapMarkers);
 		allMarkers.addAll(mapMarkersHistory);
+
+		Iterator<Map.Entry<String, MapMarkersGroup>> iterator = groupsMap.entrySet().iterator();
+		while (iterator.hasNext()) {
+			MapMarkersGroup group = iterator.next().getValue();
+			if (group.getType() == MapMarkersGroup.GPX_TYPE && !new File(group.getId()).exists()) {
+				markersDbHelper.removeMarkersGroup(group.getId());
+				iterator.remove();
+			}
+		}
 
 		MapMarkersGroup noGroup = null;
 
