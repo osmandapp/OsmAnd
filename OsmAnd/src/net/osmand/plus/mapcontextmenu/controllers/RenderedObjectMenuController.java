@@ -119,10 +119,10 @@ public class RenderedObjectMenuController extends MenuController {
 					(renderedObject.getId() % 2 == MapObject.AMENITY_ID_RIGHT_SHIFT 
 							|| (renderedObject.getId() >> MapObject.NON_AMENITY_ID_RIGHT_SHIFT) < Integer.MAX_VALUE)) {
 				String link;
-				if ((renderedObject.getId() >> 6) % 2 == MapObject.WAY_MODULO_REMAINDER) {
-					link = "https://www.openstreetmap.org/node/";
-				} else {
+				if ((renderedObject.getId()) % 2 == MapObject.WAY_MODULO_REMAINDER) {
 					link = "https://www.openstreetmap.org/way/";
+				} else {
+					link = "https://www.openstreetmap.org/node/";
 				}
 				addPlainMenuItem(R.drawable.ic_action_info_dark, null, link + (renderedObject.getId() >> MapObject.NON_AMENITY_ID_RIGHT_SHIFT), true, true, null);
 			}
