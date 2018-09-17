@@ -159,8 +159,8 @@ public class LiveUpdatesHelper {
 		}
 	}
 
-	public static void runLiveUpdate(Context context, final String fileName, boolean forceUpdate) {
+	public static void runLiveUpdate(Context context, final String fileName, boolean userRequested) {
 		final String fnExt = Algorithms.getFileNameWithoutExtension(new File(fileName));
-		new PerformLiveUpdateAsyncTask(context, fileName, forceUpdate).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, fnExt);
+		new PerformLiveUpdateAsyncTask(context, fileName, userRequested).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, fnExt);
 	}
 }
