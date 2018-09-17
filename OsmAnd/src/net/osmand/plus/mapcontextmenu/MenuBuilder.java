@@ -1012,7 +1012,7 @@ public class MenuBuilder {
 					new BinaryMapIndexReader.SearchPoiTypeFilter() {
 						@Override
 						public boolean accept(PoiCategory type, String subcategory) {
-							return type.isWiki();
+							return type != null && type.isWiki();
 						}
 
 						@Override
