@@ -111,7 +111,9 @@ public class DashTrackFragment extends DashBaseFragment {
 				}
 			}
 		}
-		int totalCount = 3 + list.size() / 2;
+		// 10 is the maximum length of the list. The actual length is determined later by
+		// DashboardOnMap.handleNumberOfRows()
+		int totalCount = 10;
 		if(app.getSettings().SAVE_GLOBAL_TRACK_TO_GPX.get()) {
 			totalCount --;
 		}
