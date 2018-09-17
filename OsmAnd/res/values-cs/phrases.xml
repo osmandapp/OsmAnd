@@ -3653,7 +3653,6 @@
 	<string name="poi_checkpoint_type_code">Stanoviště s kódem</string>
 	<string name="poi_checkpoint_type_notebook">Stanoviště se zápisníkem</string>
 	<string name="poi_checkpoint_type_needler">Stanoviště s děrovacím zařízením</string>
-	<string name="poi_checkpoint_type_quize">Stanoviště s kvízem</string>
 	<string name="poi_checkpoint_type_electronic">Stanoviště elektronické</string>
 	<string name="poi_course">Turistická trasa</string>
 

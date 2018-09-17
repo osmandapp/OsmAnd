@@ -3309,7 +3309,6 @@
 	<string name="poi_checkpoint_type_code">Kodea</string>
 	<string name="poi_checkpoint_type_notebook">Koadernoa</string>
 	<string name="poi_checkpoint_type_needler">Zulatzailea</string>
-	<string name="poi_checkpoint_type_quize">Galdetegia</string>
 	<string name="poi_checkpoint_type_electronic">Elektronikoa</string>
 	<string name="poi_course">Zirkuitoa</string>
 
