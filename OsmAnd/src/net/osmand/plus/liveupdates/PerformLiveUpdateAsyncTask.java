@@ -9,6 +9,7 @@ import android.support.annotation.NonNull;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.R;
 import net.osmand.plus.download.AbstractDownloadActivity;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadIndexesThread;
@@ -30,14 +31,14 @@ public class PerformLiveUpdateAsyncTask
 	private final Context context;
 	@NonNull
 	private final String localIndexFileName;
-	private final boolean forceUpdate;
+	private final boolean userRequested;
 
 	public PerformLiveUpdateAsyncTask(@NonNull Context context,
 									  @NonNull String localIndexFileName,
-									  boolean forceUpdate) {
+									  boolean userRequested) {
 		this.context = context;
 		this.localIndexFileName = localIndexFileName;
-		this.forceUpdate = forceUpdate;
+		this.userRequested = userRequested;
 	}
 
 	@Override
@@ -76,6 +77,9 @@ public class PerformLiveUpdateAsyncTask
 		final OsmandSettings settings = application.getSettings();
 		if (result.errorMessage != null) {
 			LOG.info(result.errorMessage);
+			if (userRequested) {
+				application.showShortToastMessage(result.errorMessage);
+			}
 			tryRescheduleDownload(context, settings, localIndexFileName);
 		} else {
 			settings.LIVE_UPDATES_RETRIES.resetToDefault();
@@ -95,7 +99,7 @@ public class PerformLiveUpdateAsyncTask
 				boolean downloadViaWiFi =
 						LiveUpdatesHelper.preferenceDownloadViaWiFi(localIndexFileName, settings).get();
 				if (getMyApplication().getSettings().isInternetConnectionAvailable()) {
-					if (forceUpdate || settings.isWifiConnected() || !downloadViaWiFi) {
+					if (userRequested || settings.isWifiConnected() || !downloadViaWiFi) {
 						long szLong = 0;
 						int i = 0;
 						for (IndexItem es : downloadThread.getCurrentDownloadingItems()) {
@@ -122,6 +126,9 @@ public class PerformLiveUpdateAsyncTask
 			} else {
 				if (context instanceof DownloadIndexesThread.DownloadEvents) {
 					((DownloadIndexesThread.DownloadEvents) context).downloadInProgress();
+					if (userRequested && context instanceof OsmLiveActivity) {
+						application.showShortToastMessage(R.string.no_updates_available);
+					}
 				}
 			}
 		}

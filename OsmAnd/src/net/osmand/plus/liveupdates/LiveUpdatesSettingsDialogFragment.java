@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -50,11 +51,16 @@ public class LiveUpdatesSettingsDialogFragment extends DialogFragment {
 	private static final Log LOG = PlatformUtil.getLog(LiveUpdatesSettingsDialogFragment.class);
 	private static final String LOCAL_INDEX_FILE_NAME = "local_index_file_name";
 
+	private TextView sizeTextView;
+	
+	private String fileName;
+	private String fileNameWithoutExtension;
+	
 	@NonNull
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-		final String fileName = getArguments().getString(LOCAL_INDEX_FILE_NAME);
+		fileName = getArguments().getString(LOCAL_INDEX_FILE_NAME);
 		assert fileName != null;
 
 		View view = LayoutInflater.from(getActivity())
@@ -67,11 +73,10 @@ public class LiveUpdatesSettingsDialogFragment extends DialogFragment {
 		final Spinner updateFrequencySpinner = (Spinner) view.findViewById(R.id.updateFrequencySpinner);
 		final Spinner updateTimesOfDaySpinner = (Spinner) view.findViewById(R.id.updateTimesOfDaySpinner);
 		final View updateTimesOfDayLayout = view.findViewById(R.id.updateTimesOfDayLayout);
-		final TextView sizeTextView = (TextView) view.findViewById(R.id.sizeTextView);
+		sizeTextView = (TextView) view.findViewById(R.id.sizeTextView);
 
 		regionNameTextView.setText(getNameToDisplay(fileName, getMyActivity()));
-		final String fileNameWithoutExtension =
-				Algorithms.getFileNameWithoutExtension(new File(fileName));
+		fileNameWithoutExtension = Algorithms.getFileNameWithoutExtension(new File(fileName));
 		final IncrementalChangesManager changesManager = getMyApplication().getResourceManager().getChangesManager();
 		final long timestamp = changesManager.getTimestamp(fileNameWithoutExtension);
 		String lastUpdateDate = formatDateTime(getActivity(), timestamp);
@@ -171,14 +176,30 @@ public class LiveUpdatesSettingsDialogFragment extends DialogFragment {
 					}
 				})
 				.setNegativeButton(R.string.shared_string_cancel, null)
-				.setNeutralButton(R.string.update_now, new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						runLiveUpdate(getActivity(), fileName, true);
-						sizeTextView.setText(getUpdatesSize(fileNameWithoutExtension, changesManager));
-					}
-				});
+				.setNeutralButton(R.string.update_now, null);
 		return builder.create();
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		final AlertDialog dialog = (AlertDialog) getDialog();
+		if (dialog != null) {
+			Button neutralButton = (Button) dialog.getButton(Dialog.BUTTON_NEUTRAL);
+			neutralButton.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					if (!getSettings().isInternetConnectionAvailable()) {
+						getMyApplication().showShortToastMessage(R.string.no_internet_connection);
+					} else {
+						runLiveUpdate(getActivity(), fileName, true);
+						final IncrementalChangesManager changesManager = getMyApplication().getResourceManager().getChangesManager();
+						sizeTextView.setText(getUpdatesSize(fileNameWithoutExtension, changesManager));
+						dialog.dismiss();
+					}
+				}
+			});
+		}
 	}
 
 	private void refreshTimeOfDayLayout(UpdateFrequency updateFrequency, View updateTimesOfDayLayout) {
