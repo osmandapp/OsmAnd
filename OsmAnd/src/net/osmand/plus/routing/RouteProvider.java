@@ -45,10 +45,6 @@ import net.osmand.util.MapUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Document;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 import java.io.BufferedReader;
@@ -65,8 +61,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.FactoryConfigurationError;
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -80,7 +74,6 @@ public class RouteProvider {
 
 	public enum RouteService {
 		OSMAND("OsmAnd (offline)"),
-		YOURS("YOURS"),
 		//ORS("OpenRouteService"), // disable ors due to no public rest service (testing2015 doesn't seem stable)
 		OSRM("OSRM (only car)"),
 		BROUTER("BRouter (offline)"),
@@ -313,8 +306,6 @@ public class RouteProvider {
 					res = findVectorMapsRoute(params, calcGPXRoute);
 				} else if (params.type == RouteService.BROUTER) {
 					res = findBROUTERRoute(params);
-				} else if (params.type == RouteService.YOURS) {
-					res = findYOURSRoute(params);
 //				} else if (params.type == RouteService.ORS) {
 //					res = findORSRoute(params);
 				} else if (params.type == RouteService.OSRM) {
@@ -596,66 +587,6 @@ public class RouteProvider {
 			return ""; //$NON-NLS-1$
 		}
 		return ctx.getString(resId);
-	}
-
-	protected RouteCalculationResult findYOURSRoute(RouteCalculationParams params) throws MalformedURLException, IOException,
-			ParserConfigurationException, FactoryConfigurationError, SAXException {
-		List<Location> res = new ArrayList<Location>();
-		StringBuilder uri = new StringBuilder();
-		uri.append("http://www.yournavigation.org/api/1.0/gosmore.php?format=kml"); //$NON-NLS-1$
-		uri.append("&flat=").append(params.start.getLatitude()); //$NON-NLS-1$
-		uri.append("&flon=").append(params.start.getLongitude()); //$NON-NLS-1$
-		uri.append("&tlat=").append(params.end.getLatitude()); //$NON-NLS-1$
-		uri.append("&tlon=").append(params.end.getLongitude()); //$NON-NLS-1$
-		if (params.mode.isDerivedRoutingFrom(ApplicationMode.BICYCLE)) {
-			uri.append("&v=bicycle") ; //$NON-NLS-1$
-		} else if (params.mode.isDerivedRoutingFrom(ApplicationMode.PEDESTRIAN)) {
-			uri.append("&v=foot") ; //$NON-NLS-1$
-		} else if(params.mode.isDerivedRoutingFrom(ApplicationMode.CAR)){
-			uri.append("&v=motorcar"); //$NON-NLS-1$
-		} else {
-			return applicationModeNotSupported(params);
-		}
-		uri.append("&fast=").append(params.fast ? "1" : "0").append("&layer=mapnik"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
-		log.info("URL route " + uri);
-		URLConnection connection = NetworkUtils.getHttpURLConnection(uri.toString());
-		connection.setRequestProperty("User-Agent", Version.getFullVersion(params.ctx));
-		DocumentBuilder dom = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-		Document doc = dom.parse(new InputSource(new InputStreamReader(connection.getInputStream())));
-		NodeList list = doc.getElementsByTagName("coordinates"); //$NON-NLS-1$
-		for(int i=0; i<list.getLength(); i++){
-			Node item = list.item(i);
-			String str = item.getFirstChild().getNodeValue();
-			if(str == null){
-				continue;
-			}
-			int st = 0;
-			int next = 0;
-			while((next = str.indexOf('\n', st)) != -1){
-				String coordinate = str.substring(st, next + 1);
-				int s = coordinate.indexOf(',');
-				if (s != -1) {
-					try {
-						double lon = Double.parseDouble(coordinate.substring(0, s));
-						double lat = Double.parseDouble(coordinate.substring(s + 1));
-						Location l = new Location("router"); //$NON-NLS-1$
-						l.setLatitude(lat);
-						l.setLongitude(lon);
-						res.add(l);
-					} catch (NumberFormatException e) {
-					}
-				}
-				st = next + 1;
-			}
-		}
-		if(list.getLength() == 0){
-			if(doc.getChildNodes().getLength() == 1){
-				Node item = doc.getChildNodes().item(0);
-				return new RouteCalculationResult(item.getNodeValue());
-			}
-		}
-		params.intermediates = null;
-		return new RouteCalculationResult(res, null, params, null, true);
 	}
 
 	protected RouteCalculationResult findVectorMapsRoute(final RouteCalculationParams params, boolean calcGPXRoute) throws IOException {
