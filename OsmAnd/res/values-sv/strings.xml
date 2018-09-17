@@ -396,7 +396,7 @@ Nyttjat utrymme är {1} MB.
     <string name="local_index_items_uploaded">%1$d av %2$d post(er) har överförts utan problem.</string>
     <string name="local_index_mi_upload_gpx">Skicka till OSM</string>
     <string name="show_more_map_detail">Visa mer kartdetaljer</string>
-    <string name="show_more_map_detail_descr">Visa några vektor-kartdetaljer (vägar, etc.) vid lägre zoom.</string>
+    <string name="show_more_map_detail_descr">Visa några vektor-kartdetaljer (vägar, o.s.v.) vid lägre zoom.</string>
     <string name="favourites_delete_multiple_succesful">Favoritpunkt(er) har tagits bort utan problem.</string>
     <string name="favorite_delete_multiple">Du håller på att ta bort %1$d favorit(er) och %2$d favoritgrupp(er). Är du säker?</string>
     <string name="favorite_home_category">Hem</string>
@@ -1482,8 +1482,9 @@ Nyttjat utrymme är {1} MB.
     <string name="speak_poi">Närbelägna intresssepunkter</string>
     <string name="index_tours">Rundturer</string>
     <string name="shared_string_all">Alla</string>
-    <string name="record_plugin_description">"Denna modul aktiverar funktionen att antingen spela in och spara dina spår genom att du trycker på widgeten GPX-loggning på kartskärmen eller att alla dina rutter sparas automatiskt i en GPX-fil.
-\n\nInspelade spår kan delas ut till vänner eller användas som bidrag till OSM. Idrottsmän kan använda inspelade spår för att följa sin träning. Viss grundläggande spåranalys kan göras direkt i OsmAnd, såsom varvtider, genomsnittshastighet etc och spår kan givetvis också analyseras i efterhand i speciella analysverktyg från tredje part. "</string>
+    <string name="record_plugin_description">"Denna modul aktiverar funktionen att antingen spela in och spara dina spår genom att du trycker på widgeten GPX-loggning på kartskärmen eller att alla dina rutter sparas automatiskt i en GPX-fil. 
+\n
+\nInspelade spår kan delas ut till vänner eller användas som bidrag till OSM. Idrottsmän kan använda inspelade spår för att följa sin träning. Viss grundläggande spåranalys kan göras direkt i OsmAnd, såsom varvtider, genomsnittshastighet o.s.v. och spår kan givetvis också analyseras i efterhand i speciella analysverktyg från tredje part. "</string>
     <string name="record_plugin_name">Inspelning av resor</string>
     <string name="int_hour">h</string>
     <string name="duration">Längd</string>
@@ -1574,7 +1575,7 @@ Nyttjat utrymme är {1} MB.
     <string name="navigate_point_zone">Zon</string>
     <string name="navigate_point_northing">Nordlig (y-koord.)</string>
     <string name="navigate_point_easting">Östlig (x-koord.)</string>
-    <string name="download_tab_downloads">Alla kartor etc</string>
+    <string name="download_tab_downloads">Alla hämtningar</string>
     <string name="download_tab_updates">Uppdateringar</string>
     <string name="download_tab_local">Hämtat</string>
     <string name="route_descr_destination">Destination</string>
@@ -2262,7 +2263,7 @@ Om du tycker om OsmAnd och OSM och vill stödja dem så är detta ett utmärkt s
     <string name="no_inet_connection_desc_map">Krävs för att hämta kartor.</string>
     <string name="search_location">Söker plats…</string>
     <string name="storage_free_space">Oanvänt utrymme</string>
-    <string name="storage_place_description">OsmAnds lagringsplats för data (för kartor, GPX-filer, o.s.v.): %1$s.</string>
+    <string name="storage_place_description">OsmAnds lagringsplats för data (för kartor, GPX-filer med mera): %1$s.</string>
     <string name="give_permission">Ge tillåtelse</string>
     <string name="allow_access_location">Tillåt åtkomst till plats</string>
     <string name="no_update_info">Visa inte uppdateringar</string>
