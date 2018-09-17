@@ -79,14 +79,16 @@ public class RouteProvider {
 	private static final int MIN_DISTANCE_FOR_INSERTING_ROUTE_SEGMENT = 60;
 
 	public enum RouteService {
-			OSMAND("OsmAnd (offline)"), YOURS("YOURS"), 
-//			ORS("OpenRouteService"), // disable ors due to no public rest service (testing2015 doesn't seem stable) 
-			OSRM("OSRM (only car)"),
-			BROUTER("BRouter (offline)"), STRAIGHT("Straight line");
+		OSMAND("OsmAnd (offline)"),
+		YOURS("YOURS"),
+		//ORS("OpenRouteService"), // disable ors due to no public rest service (testing2015 doesn't seem stable)
+		OSRM("OSRM (only car)"),
+		BROUTER("BRouter (offline)"),
+		STRAIGHT("Straight line");
 
 		private final String name;
 
-		private RouteService(String name) {
+		RouteService(String name) {
 			this.name = name;
 		}
 
@@ -106,8 +108,8 @@ public class RouteProvider {
 		}
 
 		public static RouteService[] getAvailableRouters(OsmandApplication ctx) {
-			List<RouteService> list = new ArrayList<RouteProvider.RouteService>();
-			for(RouteService r : values()) {
+			List<RouteService> list = new ArrayList<>();
+			for (RouteService r : values()) {
 				if (r.isAvailable(ctx)) {
 					list.add(r);
 				}
