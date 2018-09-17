@@ -284,6 +284,12 @@ task copyStyleIcons(type: Copy) {
 	include "**/*.png"
 }
 
+task copyWidgetIcons(type: Exec) {
+	if (!Os.isFamily(Os.FAMILY_WINDOWS)) {
+		commandLine 'sh', file("./copy_widget_icons.sh").getAbsolutePath()
+	}
+}
+
 task collectExternalResources {
 	dependsOn collectVoiceAssets,
 		collectFonts,
@@ -291,7 +297,8 @@ task collectExternalResources {
 		collectHelpContentsStyle,
 		copyStyleIcons,
 		updateNoTranslate,
-		validateTranslate
+		validateTranslate,
+		copyWidgetIcons
 }
 
 // Legacy core build
