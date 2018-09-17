@@ -51,9 +51,9 @@ public class CurrentPositionHelper {
 
 	public boolean getRouteSegment(Location loc,
 								   @Nullable ApplicationMode appMode,
-								   boolean filterFrequentRequests,
+								   boolean cancelPreviousSearch,
 								   ResultMatcher<RouteDataObject> result) {
-		return scheduleRouteSegmentFind(loc, false, true, filterFrequentRequests, null, result, appMode);
+		return scheduleRouteSegmentFind(loc, false, true, cancelPreviousSearch, null, result, appMode);
 	}
 
 	public boolean getGeocodingResult(Location loc, ResultMatcher<GeocodingResult> result) {
@@ -92,7 +92,7 @@ public class CurrentPositionHelper {
 	private boolean scheduleRouteSegmentFind(final Location loc,
 											 final boolean storeFound,
 											 final boolean allowEmptyNames,
-											 final boolean filterFrequentRequests,
+											 final boolean cancelPreviousSearch,
 											 @Nullable final ResultMatcher<GeocodingResult> geoCoding,
 											 @Nullable final ResultMatcher<RouteDataObject> result,
 											 @Nullable final ApplicationMode appMode) {
@@ -109,7 +109,7 @@ public class CurrentPositionHelper {
 			singleThreadExecutor.submit(new Runnable() {
 				@Override
 				public void run() {
-					processGeocoding(loc, geoCoding, storeFound, allowEmptyNames, result, appMode, request, finalRequestNumber, filterFrequentRequests);
+					processGeocoding(loc, geoCoding, storeFound, allowEmptyNames, result, appMode, request, finalRequestNumber, cancelPreviousSearch);
 				}
 			});
 			res = true;
@@ -159,9 +159,9 @@ public class CurrentPositionHelper {
 											   @Nullable ApplicationMode appMode,
 											   int request,
 											   @NonNull AtomicInteger requestNumber,
-											   boolean filterFrequentRequests) {
+											   boolean cancelPreviousSearch) {
 
-		if (filterFrequentRequests && request != requestNumber.get()) {
+		if (cancelPreviousSearch && request != requestNumber.get()) {
 			return;
 		}
 

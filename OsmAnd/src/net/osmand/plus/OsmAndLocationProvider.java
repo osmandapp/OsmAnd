@@ -857,9 +857,9 @@ public class OsmAndLocationProvider implements SensorEventListener {
 
 	public boolean getRouteSegment(net.osmand.Location loc,
 								   @Nullable ApplicationMode appMode,
-								   boolean filterFrequentRequests,
+								   boolean cancelPreviousSearch,
 								   ResultMatcher<RouteDataObject> result) {
-		return currentPositionHelper.getRouteSegment(loc, appMode, filterFrequentRequests, result);
+		return currentPositionHelper.getRouteSegment(loc, appMode, cancelPreviousSearch, result);
 	}
 	
 	public boolean getGeocodingResult(net.osmand.Location loc, ResultMatcher<GeocodingResult> result) {
