@@ -13,10 +13,8 @@ import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Stack;
 
@@ -56,8 +54,7 @@ public class RoutingConfiguration {
 		private Map<String, GeneralRouter> routers = new LinkedHashMap<String, GeneralRouter>();
 		private Map<String, String> attributes = new LinkedHashMap<String, String>();
 		private HashMap<Long, Location> impassableRoadLocations = new HashMap<Long, Location>();
-		private List<RouteDataObject> impassableRoads = new ArrayList<RouteDataObject>();  
-		
+
 		// Example
 //		{
 //			impassableRoadLocations.add(23000069L);
@@ -104,11 +101,6 @@ public class RoutingConfiguration {
 			return i;
 		}
 		
-
-		public List<RouteDataObject> getImpassableRoads() {
-			return impassableRoads;
-		}
-		
 		public Map<Long, Location> getImpassableRoadLocations() {
 			return impassableRoadLocations;
 		}
@@ -116,7 +108,6 @@ public class RoutingConfiguration {
 		public boolean addImpassableRoad(RouteDataObject route, Location location) {
 			if (!impassableRoadLocations.containsKey(route.id)){
 				impassableRoadLocations.put(route.id, location);
-				impassableRoads.add(route);
 				return true;
 			}
 			return false;
@@ -142,7 +133,6 @@ public class RoutingConfiguration {
 
 		public void removeImpassableRoad(RouteDataObject obj) {
 			impassableRoadLocations.remove(obj.id);
-			impassableRoads.remove(obj);
 		}
 	}
 

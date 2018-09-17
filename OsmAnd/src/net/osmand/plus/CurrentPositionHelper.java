@@ -49,13 +49,15 @@ public class CurrentPositionHelper {
 		this.app = app;
 	}
 
-	public boolean getRouteSegment(Location loc, @Nullable ApplicationMode appMode,
+	public boolean getRouteSegment(Location loc,
+								   @Nullable ApplicationMode appMode,
+								   boolean cancelPreviousSearch,
 								   ResultMatcher<RouteDataObject> result) {
-		return scheduleRouteSegmentFind(loc, false, true, null, result, appMode);
+		return scheduleRouteSegmentFind(loc, false, true, cancelPreviousSearch, null, result, appMode);
 	}
-	
+
 	public boolean getGeocodingResult(Location loc, ResultMatcher<GeocodingResult> result) {
-		return scheduleRouteSegmentFind(loc, false, false, result, null, null);
+		return scheduleRouteSegmentFind(loc, false, false, true, result, null, null);
 	}
 	
 	public RouteDataObject getLastKnownRouteSegment(Location loc) {
@@ -68,12 +70,12 @@ public class CurrentPositionHelper {
 			return r;
 		}
 		if (r == null) {
-			scheduleRouteSegmentFind(loc, true, false, null, null, null);
+			scheduleRouteSegmentFind(loc, true, false, true, null, null, null);
 			return null;
 		}
 		double d = getOrthogonalDistance(r, loc);
 		if (d > 15) {
-			scheduleRouteSegmentFind(loc, true, false, null, null, null);
+			scheduleRouteSegmentFind(loc, true, false, true, null, null, null);
 		}
 		if (d < 70) {
 			return r;
@@ -90,6 +92,7 @@ public class CurrentPositionHelper {
 	private boolean scheduleRouteSegmentFind(final Location loc,
 											 final boolean storeFound,
 											 final boolean allowEmptyNames,
+											 final boolean cancelPreviousSearch,
 											 @Nullable final ResultMatcher<GeocodingResult> geoCoding,
 											 @Nullable final ResultMatcher<RouteDataObject> result,
 											 @Nullable final ApplicationMode appMode) {
@@ -106,7 +109,7 @@ public class CurrentPositionHelper {
 			singleThreadExecutor.submit(new Runnable() {
 				@Override
 				public void run() {
-					processGeocoding(loc, geoCoding, storeFound, allowEmptyNames, result, appMode, request, finalRequestNumber);
+					processGeocoding(loc, geoCoding, storeFound, allowEmptyNames, result, appMode, request, finalRequestNumber, cancelPreviousSearch);
 				}
 			});
 			res = true;
@@ -155,9 +158,10 @@ public class CurrentPositionHelper {
 											   @Nullable final ResultMatcher<RouteDataObject> result,
 											   @Nullable ApplicationMode appMode,
 											   int request,
-											   @NonNull AtomicInteger requestNumber) {
+											   @NonNull AtomicInteger requestNumber,
+											   boolean cancelPreviousSearch) {
 
-		if (request != requestNumber.get()) {
+		if (cancelPreviousSearch && request != requestNumber.get()) {
 			return;
 		}
 
