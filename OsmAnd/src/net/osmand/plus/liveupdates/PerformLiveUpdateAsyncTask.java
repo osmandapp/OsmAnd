@@ -9,6 +9,7 @@ import android.support.annotation.NonNull;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.R;
 import net.osmand.plus.download.AbstractDownloadActivity;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadIndexesThread;
@@ -76,6 +77,9 @@ public class PerformLiveUpdateAsyncTask
 		final OsmandSettings settings = application.getSettings();
 		if (result.errorMessage != null) {
 			LOG.info(result.errorMessage);
+			if (forceUpdate) {
+				application.showShortToastMessage(result.errorMessage);
+			}
 			tryRescheduleDownload(context, settings, localIndexFileName);
 		} else {
 			settings.LIVE_UPDATES_RETRIES.resetToDefault();
@@ -122,6 +126,9 @@ public class PerformLiveUpdateAsyncTask
 			} else {
 				if (context instanceof DownloadIndexesThread.DownloadEvents) {
 					((DownloadIndexesThread.DownloadEvents) context).downloadInProgress();
+					if (forceUpdate && context instanceof OsmLiveActivity) {
+						application.showShortToastMessage(R.string.no_updates_available);
+					}
 				}
 			}
 		}
