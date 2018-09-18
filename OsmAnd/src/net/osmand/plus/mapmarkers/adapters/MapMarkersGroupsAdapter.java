@@ -17,6 +17,7 @@ import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.GPXUtilities;
+import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.GroupHeader;
@@ -27,7 +28,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities.UpdateLocationViewCache;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.dashboard.DashLocationFragment;
 import net.osmand.plus.mapmarkers.SelectWptCategoriesBottomSheetDialogFragment;
 import net.osmand.plus.wikivoyage.article.WikivoyageArticleDialogFragment;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
@@ -38,7 +38,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
@@ -318,19 +317,13 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 			if (markerInHistory || createdEarly) {
 				itemViewHolder.point.setVisibility(View.VISIBLE);
 				itemViewHolder.description.setVisibility(View.VISIBLE);
-				Date date;
+				long date;
 				if (markerInHistory) {
-					date = new Date(marker.visitedDate);
+					date = marker.visitedDate;
 				} else {
-					date = new Date(marker.creationDate);
+					date = marker.creationDate;
 				}
-				String month = new SimpleDateFormat("MMM", Locale.getDefault()).format(date);
-				if (month.length() > 1) {
-					month = Character.toUpperCase(month.charAt(0)) + month.substring(1);
-				}
-				month = month.replaceAll("\\.", "");
-				String day = new SimpleDateFormat("d", Locale.getDefault()).format(date);
-				itemViewHolder.description.setText(app.getString(R.string.passed, month + " " + day));
+				itemViewHolder.description.setText(app.getString(R.string.passed, OsmAndFormatter.getFormattedDate(app, date)));
 			} else {
 				itemViewHolder.point.setVisibility(View.GONE);
 				itemViewHolder.description.setVisibility(View.GONE);
