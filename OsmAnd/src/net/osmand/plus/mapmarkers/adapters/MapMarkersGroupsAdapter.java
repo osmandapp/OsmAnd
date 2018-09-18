@@ -2,6 +2,7 @@ package net.osmand.plus.mapmarkers.adapters;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
@@ -464,13 +465,13 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 							if (disabled) {
 								if (selectedGpxFile != null) {
 									gpxFile[0] = selectedGpxFile.getGpxFile();
-									switchGpxVisibility(gpxFile[0], false);
+									switchGpxVisibility(gpxFile[0], selectedGpxFile, false);
 								}	
 							} else {
 								if (selectedGpxFile == null) {
 									// TODO IO load in another thread ?
 									gpxFile[0] = GPXUtilities.loadGPXFile(app, new File(gpxPath));
-									switchGpxVisibility(gpxFile[0], true);
+									switchGpxVisibility(gpxFile[0], null, true);
 								}
 							}
 						}
@@ -487,7 +488,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 										@Override
 										public void onClick(View view) {
 											if (group.getType() == MapMarkersGroup.GPX_TYPE && gpxFile[0] != null) {
-												switchGpxVisibility(gpxFile[0], true);
+												switchGpxVisibility(gpxFile[0], null, true);
 											}
 											mapMarkersHelper.enableGroup(group);
 										}
@@ -557,9 +558,12 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 		}
 	}
 
-	private void switchGpxVisibility(@NonNull GPXFile gpxFile, boolean visible) {
+	private void switchGpxVisibility(@NonNull GPXFile gpxFile, @Nullable SelectedGpxFile selectedGpxFile, boolean visible) {
 		GpxSelectionHelper gpxHelper = app.getSelectedGpxHelper();
-		gpxHelper.selectGpxFile(gpxFile, visible, false, false);
+		if (!visible && selectedGpxFile != null && selectedGpxFile.selectedByUser) {
+			return;
+		}
+		gpxHelper.selectGpxFile(gpxFile, visible, false, false, false);
 	}
 
 	public void hideSnackbar() {
