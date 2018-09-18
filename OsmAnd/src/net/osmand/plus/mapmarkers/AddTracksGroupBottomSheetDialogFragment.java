@@ -16,8 +16,6 @@ import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.plus.GpxSelectionHelper;
-import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
-import net.osmand.plus.MapMarkersHelper.MapMarkersGroup;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.mapmarkers.adapters.GroupsAdapter;
@@ -68,14 +66,20 @@ public class AddTracksGroupBottomSheetDialogFragment extends AddGroupBottomSheet
 			fragment.setArguments(args);
 			fragment.setUsedOnMap(false);
 			fragment.show(getParentFragment().getChildFragmentManager(), SelectWptCategoriesBottomSheetDialogFragment.TAG);
-			dismiss();
-		} else if(dataItem.getFile() != null) {
-			getMyApplication().getMapMarkersHelper().addOrEnableGpxGroup(dataItem.getFile());
-			dismiss();
+		} else {
+			OsmandApplication app = getMyApplication();
+			if (app != null) {
+				GpxSelectionHelper selectionHelper = app.getSelectedGpxHelper();
+				File gpx = dataItem.getFile();
+				if (selectionHelper.getSelectedFileByPath(gpx.getAbsolutePath()) == null) {
+					GPXFile res = GPXUtilities.loadGPXFile(app, gpx);
+					selectionHelper.selectGpxFile(res, true, false, false, false);
+				}
+				app.getMapMarkersHelper().addOrEnableGpxGroup(gpx);
+			}
 		}
+		dismiss();
 	}
-
-	
 
 	@SuppressLint("StaticFieldLeak")
 	public class ProcessGpxTask extends AsyncTask<Void, GpxDataItem, Void> {

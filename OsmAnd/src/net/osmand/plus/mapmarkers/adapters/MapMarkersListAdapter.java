@@ -24,12 +24,9 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.util.MapUtils;
 
-import java.text.SimpleDateFormat;
 import java.util.Collections;
-import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemViewHolder>
@@ -203,13 +200,7 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemVie
 					descr = mapActivity.getString(R.string.shared_string_favorites);
 				}
 			} else {
-				Date date = new Date(marker.creationDate);
-				String month = new SimpleDateFormat("MMM", Locale.getDefault()).format(date);
-				if (month.length() > 1) {
-					month = Character.toUpperCase(month.charAt(0)) + month.substring(1);
-				}
-				String day = new SimpleDateFormat("d", Locale.getDefault()).format(date);
-				descr = month + " " + day;
+				descr = OsmAndFormatter.getFormattedDate(app, marker.creationDate);
 			}
 			holder.description.setText(descr);
 		}

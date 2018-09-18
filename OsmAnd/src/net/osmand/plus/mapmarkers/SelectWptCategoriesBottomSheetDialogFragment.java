@@ -136,7 +136,7 @@ public class SelectWptCategoriesBottomSheetDialogFragment extends MenuBottomShee
 
 		SelectedGpxFile selectedGpxFile = gpxSelectionHelper.getSelectedFileByPath(gpxFile.path);
 		if (selectedGpxFile == null) {
-			gpxSelectionHelper.selectGpxFile(gpxFile, true, false);
+			gpxSelectionHelper.selectGpxFile(gpxFile, true, false, false, false);
 		}
 		MapMarkersGroup group = mapMarkersHelper.getMarkersGroup(gpxFile);
 		if (group == null) {

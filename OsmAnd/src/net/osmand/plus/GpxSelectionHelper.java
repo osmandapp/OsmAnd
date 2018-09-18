@@ -36,6 +36,7 @@ public class GpxSelectionHelper {
 	private static final String CURRENT_TRACK = "currentTrack";
 	private static final String FILE = "file";
 	private static final String COLOR = "color";
+	private static final String SELECTED_BY_USER = "selected_by_user";
 	private OsmandApplication app;
 	@NonNull
 	private List<SelectedGpxFile> selectedGPXFiles = new java.util.ArrayList<>();
@@ -410,7 +411,7 @@ public class GpxSelectionHelper {
 	public void setGpxFileToDisplay(GPXFile... gpxs) {
 		// special case for gpx current route
 		for (GPXFile gpx : gpxs) {
-			selectGpxFileImpl(gpx, true, false, true);
+			selectGpxFileImpl(gpx, true, false, true, true);
 		}
 		saveCurrentSelections();
 	}
@@ -423,6 +424,7 @@ public class GpxSelectionHelper {
 				boolean save = false;
 				for (int i = 0; i < ar.length(); i++) {
 					JSONObject obj = ar.getJSONObject(i);
+					boolean selectedByUser = obj.optBoolean(SELECTED_BY_USER, true);
 					if (obj.has(FILE)) {
 						File fl = new File(obj.getString(FILE));
 						if (p != null) {
@@ -436,10 +438,12 @@ public class GpxSelectionHelper {
 						if (gpx.warning != null) {
 							save = true;
 						} else {
-							selectGpxFile(gpx, true, false);
+							selectGpxFile(gpx, true, false, true, selectedByUser);
 						}
 					} else if (obj.has(CURRENT_TRACK)) {
-						selectedGPXFiles.add(savingTrackHelper.getCurrentTrack());
+						SelectedGpxFile file = savingTrackHelper.getCurrentTrack();
+						file.selectedByUser = selectedByUser;
+						selectedGPXFiles.add(file);
 					}
 				}
 				processSplit();
@@ -467,6 +471,7 @@ public class GpxSelectionHelper {
 							obj.put(COLOR, Algorithms.colorToString(s.gpxFile.getColor(0)));
 						}
 					}
+					obj.put(SELECTED_BY_USER, s.selectedByUser);
 				} catch (JSONException e) {
 					e.printStackTrace();
 				}
@@ -476,13 +481,16 @@ public class GpxSelectionHelper {
 		app.getSettings().SELECTED_GPX.set(ar.toString());
 	}
 
-	private SelectedGpxFile selectGpxFileImpl(GPXFile gpx, boolean show, boolean notShowNavigationDialog, boolean syncGroup) {
+	private SelectedGpxFile selectGpxFileImpl(GPXFile gpx, boolean show, boolean notShowNavigationDialog, boolean syncGroup, boolean selectedByUser) {
 		boolean displayed;
 		SelectedGpxFile sf;
 		if (gpx != null && gpx.showCurrentTrack) {
 			sf = savingTrackHelper.getCurrentTrack();
 			sf.notShowNavigationDialog = notShowNavigationDialog;
 			displayed = selectedGPXFiles.contains(sf);
+			if (!displayed && show) {
+				sf.selectedByUser = selectedByUser;
+			}
 		} else {
 			assert gpx != null;
 			sf = getSelectedFileByPath(gpx.path);
@@ -491,6 +499,7 @@ public class GpxSelectionHelper {
 				sf = new SelectedGpxFile();
 				sf.setGpxFile(gpx);
 				sf.notShowNavigationDialog = notShowNavigationDialog;
+				sf.selectedByUser = selectedByUser;
 			}
 		}
 		if (displayed != show) {
@@ -507,11 +516,11 @@ public class GpxSelectionHelper {
 	}
 
 	public SelectedGpxFile selectGpxFile(GPXFile gpx, boolean show, boolean notShowNavigationDialog) {
-		return selectGpxFile(gpx, show, notShowNavigationDialog, true);
+		return selectGpxFile(gpx, show, notShowNavigationDialog, true, true);
 	}
 
-	public SelectedGpxFile selectGpxFile(GPXFile gpx, boolean show, boolean notShowNavigationDialog, boolean syncGroup) {
-		SelectedGpxFile sf = selectGpxFileImpl(gpx, show, notShowNavigationDialog, syncGroup);
+	public SelectedGpxFile selectGpxFile(GPXFile gpx, boolean show, boolean notShowNavigationDialog, boolean syncGroup, boolean selectedByUser) {
+		SelectedGpxFile sf = selectGpxFileImpl(gpx, show, notShowNavigationDialog, syncGroup, selectedByUser);
 		saveCurrentSelections();
 		return sf;
 	}
@@ -549,6 +558,7 @@ public class GpxSelectionHelper {
 
 	public static class SelectedGpxFile {
 		public boolean notShowNavigationDialog = false;
+		public boolean selectedByUser = true;
 
 		private boolean showCurrentTrack;
 		private GPXFile gpxFile;

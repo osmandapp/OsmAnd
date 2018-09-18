@@ -21,7 +21,6 @@ import net.osmand.ResultMatcher;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.plus.AppInitializer;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
@@ -47,34 +46,13 @@ public class AvoidSpecificRoads {
 		for (LatLon latLon : app.getSettings().getImpassableRoadPoints()) {
 			impassableRoads.put(latLon, null);
 		}
-		if (app.isApplicationInitializing()) {
-			app.runInUIThread(new Runnable() {
-				@Override
-				public void run() {
-					app.getAppInitializer().addListener(new AppInitializer.AppInitializeListener() {
-						@Override
-						public void onProgress(AppInitializer init, AppInitializer.InitEvents event) {
-
-						}
-
-						@Override
-						public void onFinish(AppInitializer init) {
-							initRouteObjects();
-							init.removeListener(this);
-						}
-					});
-				}
-			});
-		} else {
-			initRouteObjects();
-		}
 	}
 
 	public Map<LatLon, RouteDataObject> getImpassableRoads() {
 		return impassableRoads;
 	}
 
-	private void initRouteObjects() {
+	public void initRouteObjects() {
 		for (LatLon latLon : impassableRoads.keySet()) {
 			addImpassableRoad(null, latLon, false, true);
 		}

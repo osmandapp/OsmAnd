@@ -950,6 +950,7 @@
     <string name="rendering_value_pink_name">Pink</string>
     <string name="rendering_value_translucent_pink_name">Translucent pink</string>
     <string name="rendering_value_brown_name">Brown</string>
+    <string name="rendering_value_black_name">Black</string>
     <string name="rendering_value_translucent_purple_name">Translucent purple</string>
     <string name="restart_is_required">Restart the app manually to apply all changes.</string>
     <string name="light_theme">Light</string>

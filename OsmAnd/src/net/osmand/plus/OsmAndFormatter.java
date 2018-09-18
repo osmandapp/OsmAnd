@@ -1,6 +1,7 @@
 package net.osmand.plus;
 
 import android.content.Context;
+import android.text.format.DateUtils;
 
 import net.osmand.data.Amenity;
 import net.osmand.data.City.CityType;
@@ -52,6 +53,10 @@ public class OsmAndFormatter {
 		return hours + ":" + (minutes < 10 ? "0" + minutes : minutes) + ":" + (sec < 10 ? "0" + sec : sec);
 	}
 
+	public static String getFormattedDate(Context context, long milliseconds) {
+		return DateUtils.formatDateTime(context, milliseconds, DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_ABBREV_ALL);
+	}
+	
 	public static double calculateRoundedDist(double distInMeters, OsmandApplication ctx) {
 		OsmandSettings settings = ctx.getSettings();
 		MetricsConstants mc = settings.METRIC_SYSTEM.get();

@@ -1481,6 +1481,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 						LOG.error("error", e);
 					}
 				}
+				setIntent(null);
 			}
 		}
 	}
