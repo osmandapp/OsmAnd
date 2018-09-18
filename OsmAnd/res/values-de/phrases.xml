@@ -3817,12 +3817,12 @@
 	<string name="poi_service_vehicle_tyres_yes">Reifen</string>
 
 <string name="poi_service_vehicle_muffler_yes">Schalldämpfer</string>
-	<string name="poi_climbing_adventure">Kletterabenteuer</string>
+	<string name="poi_climbing_adventure">Kletterpark</string>
 
 <string name="poi_aerialway_zip_line">Seilrutsche</string>
 
 	<string name="poi_via_ferrata">Klettersteig</string>
-	<string name="poi_cable_number">Kabelnummer</string>
+	<string name="poi_cable_number">Kabel Anzahl</string>
 	<string name="poi_via_ferrata_scale">Schwierigkeitsgrad</string>
 
 <string name="poi_glacier_type">Gletschertyp</string>
@@ -3859,14 +3859,14 @@
 
 	<string name="poi_end_date">Enddatum</string>
 
-<string name="poi_appliance">Appliance-Store</string>
+<string name="poi_appliance">Haushaltsgeräte-Geschäft</string>
 
 	<string name="poi_outcrop">Aufschluss</string>
 
 <string name="poi_payment_contactless_yes">Kontaktlos</string>
 	<string name="poi_payment_contactless_no">Kontaktlos nicht akzeptiert</string>
 
-<string name="poi_hazard_nuclear">nukleare Gefahr</string>
+<string name="poi_hazard_nuclear">Nukleare Gefahr</string>
 	<string name="poi_hazard_erosion">Erosionsgefahr</string>
 	<string name="poi_hazard_avalanche">Lawinengefahr</string>
 	<string name="poi_hazard_slippery_road">Rutschgefahr</string>

@@ -2012,7 +2012,7 @@
 	<string name="poi_social_facility_for_migrant">Migrants</string>
 	<string name="poi_social_facility_for_drug_addicted">Drogués</string>
 	<string name="poi_social_facility_for_unemployed">Sans emploi</string>
-	<string name="poi_social_facility_for_child_juvenile">Enfants, adolescents</string>
+	<string name="poi_social_facility_for_child_juvenile">Enfants adolescents</string>
 
 	<string name="poi_social_facility_for_mental_health">Patients avec handicaps mentaux</string>
 	<string name="poi_social_facility_for_juvenile">Adolescents</string>
@@ -3499,5 +3499,9 @@
 	<string name="poi_hazard_slippery_road">Route glissante</string>
 	<string name="poi_hazard_flood">Risque d\'inondation</string>
 	<string name="poi_ruins">Ruines</string>
+
+	<string name="poi_service_car">Service automobile</string>
+	<string name="poi_service_vehicle_car_repair_yes">Réparation de véhicules</string>
+	<string name="poi_appliance">Magasin d\'électroménager</string>
 
 	</resources>

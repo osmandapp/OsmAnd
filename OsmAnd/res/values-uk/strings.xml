@@ -251,7 +251,7 @@
   <string name="search_position_map_view">Поточний центр мапи</string>
   <string name="select_search_position">Початок:</string>
   <string name="context_menu_item_search">Шукати поруч</string>
-  <string name="shared_string_save_as_gpx">Зберегти як новий GPX-трек</string>
+  <string name="shared_string_save_as_gpx">Зберегти як новий GPX-файл</string>
   <string name="route_successfully_saved_at">Маршрут успішно збережено в \'%1$s\'.</string>
   <string name="filename_input">Ім’я файлу: </string>
   <string name="file_with_name_already_exist">Файл з таким ім’ям вже існує.</string>
@@ -624,7 +624,7 @@
   <string name="download_question">Завантажити {0} - {1} ?</string>
   <string name="download_question_exist">Оффлайн мапа для {0} вже існує ({1}). Хочете її оновити ({2}) ?</string>
   <string name="address">Адреса</string>
-  <string name="shared_string_download_successful">Успішно завантажена</string>
+  <string name="shared_string_download_successful">Звантажено</string>
   
   
   
@@ -959,7 +959,7 @@
     <string name="recording_description">Запис %1$s %3$s %2$s</string>
     <string name="osmand_srtm_long_description_1000_chars">Цей втулок показує як ізолінії висот так і рельєф на стандартних мапах OsmAnd. Ці можливості стануть в нагоді для спортсменів, туристів, мандрівників та для будь-кого, хто цікавиться структурою рельєфу місцевості. 
 \n 
-\nГлобальні дані (між 70 градусами на півночі і 70 градусами на півдні) базуються на вимірюваннях SRTM (Shuttle Radar Topography Mission) і ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), даних інструменту візуалізації Terra, флагманського супутника системи спостереження Землі від NASA. ASTER — це результат спільної роботи NASA, міністерства економіки Японії, міністерства торгівлі і промисловості Японії (METI), агенції космічних систем Японії (J-spacesystems).</string>
+\nГлобальні дані (між 70° на півночі і 70° на півдні) базуються на вимірюваннях SRTM (Shuttle Radar Topography Mission) і ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), даних інструменту візуалізації Terra, флагманського супутника системи спостереження Землі від NASA. ASTER — це результат спільної роботи NASA, міністерства економіки Японії, міністерства торгівлі і промисловості Японії (METI), агенції космічних систем Японії (J-spacesystems).</string>
     
     
     <string name="map_widget_distancemeasurement">Вимірювання відстаней</string>
@@ -970,7 +970,7 @@
     <string name="index_srtm_ele">Ізолінії висот</string>
     <string name="srtm_plugin_description">Цей втулок показує як ізолінії висот так і рельєф на стандартних мапах OsmAnd. Ці можливості стануть в нагоді для спортсменів, туристів, мандрівників та для будь-кого, хто цікавиться структурою рельєфу місцевості. 
 \n 
-\nГлобальні дані (між 70 градусами на півночі і 70 градусами на півдні) базуються на вимірюваннях SRTM (Shuttle Radar Topography Mission) і ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), даних інструменту візуалізації Terra, флагманського супутника системи спостереження Землі від NASA. ASTER — це результат спільної роботи NASA, міністерства економіки Японії, міністерства торгівлі і промисловості Японії (METI), агенції космічних систем Японії (J-spacesystems).</string>
+\nГлобальні дані (між 70° на півночі і 70° на півдні) базуються на вимірюваннях SRTM (Shuttle Radar Topography Mission) і ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), даних інструменту візуалізації Terra, флагманського супутника системи спостереження Землі від NASA. ASTER — це результат спільної роботи NASA, міністерства економіки Японії, міністерства торгівлі і промисловості Японії (METI), агенції космічних систем Японії (J-spacesystems).</string>
     <string name="srtm_plugin_name">Ізолінії висот</string>
     <string name="download_select_map_types">Інші мапи</string>
     <string name="download_roads_only_item">Тільки дороги</string>
@@ -1184,7 +1184,7 @@
     <string name="local_osm_changes_backup_successful">Файл змін OSM успішно створений в %1$s</string>
     <string name="osmand_distance_planning_plugin_name">Інструмент підрахунку відстані і планування</string>
     <string name="please_select_address">Виберіть місто або вулицю</string>
-    <string name="osmand_distance_planning_plugin_description">Цей втулок активує віджет для створення маршрутів натисканням на мапі (чи використати наявний GPX-файл) для підрахунку відстані між точками. Результат може бути збережений як GPX для подальшого використання.</string>
+    <string name="osmand_distance_planning_plugin_description">Втулок додає віджет на екран мапи, що дозволяє створювати маршрути, натиснувши на мапі, а також використовувати або змінювати існуючі файли GPX, планувати поїздку і вимірювати відстань між точками. Результати можуть бути збережені у вигляді файлу GPX, який згодом може бути використаний для навігації.</string>
     <string name="distance_measurement_finish_subtrack">Виміряти нову ділянку</string>
     
     
@@ -1561,7 +1561,7 @@
     <string name="animate_routing_route_not_calculated">Будь ласка, розрахуйте маршрут спершу</string>
     <string name="animate_routing_route">Моделювати за допомогою розрахованого маршруту</string>
     <string name="animate_routing_gpx">Моделювати за допомогою записаного треку GPX</string>
-    <string name="shared_string_remember_my_choice">Запам’ятати мій вибір</string>
+    <string name="shared_string_remember_my_choice">Запам’ятати вибір</string>
     
     <string name="shared_string_and">та</string>
     <string name="shared_string_or">або</string>
@@ -1803,7 +1803,7 @@
 	<string name="shared_string_selected">Вибрані</string>
 	<string name="shared_string_deselect">Зняти виділення</string>
 	<string name="shared_string_deselect_all">Зняти виділення для всіх</string>
-	<string name="shared_string_unexpected_error">Сталася неочікувана помилка</string>
+	<string name="shared_string_unexpected_error">Неочікувана помилка</string>
 	<string name="shared_string_action_template">Дія {0}</string>
 	<string name="shared_string_collapse">Згорнути</string>
 	<string name="shared_string_currently_recording_track">Поточний трек, що записується</string>
@@ -1819,7 +1819,7 @@
 	<string name="location_on_map">Координати:↵\n Шир %1$s↵\n Дов %2$s</string>
 	<string name="shared_string_release">Дата випуску</string>
 	<string name="local_osm_changes_upload_all_confirm">Ви збираєтесь вивантажити %1$d змін до OSM. Ви впевнені?</string>
-    <string name="confirmation_to_clear_history">Бажаєте очистити історію?</string>
+    <string name="confirmation_to_clear_history">Очистити історію?</string>
     <string name="delay_to_start_navigation_descr">Вкажіть час очікування для перебування на екрані планування маршруту.</string>
     <string name="shared_string_is_open">Відкрито</string>
     <string name="rendering_attr_OSMMapperAssistant_name">Помічник мапера OSM</string>
@@ -3213,4 +3213,5 @@
 <string name="release_3_2_pre">• Виправлено аварійне завершення програми при запуску з нелатинськими мапами
 \n• Підвищено швидкість промальовки на пристроях з Android 8.0
 \n• Підтримка редагування полігональних об\'єктів (крім amenity)</string>
+    <string name="ask_for_location_permission">Будь ласка, щоб продовжити, надайте OsmAnd дозвіл на місцезнаходження.</string>
     </resources>

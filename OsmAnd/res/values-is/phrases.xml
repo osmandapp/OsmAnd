@@ -3854,4 +3854,13 @@
 	<string name="poi_hazard_minefield">Jarðsprengjusvæði</string>
 
 
+<string name="poi_car_pooling">Biðstöð fyrir samnýtingu bíla</string>
+	<string name="poi_checkpoint_type_needler">Gatari</string>
+	<string name="poi_outcrop">Klettamyndun</string>
+
+	<string name="poi_hazard_erosion">Rofhætta</string>
+	<string name="poi_ruins">Rústir</string>
+
+	<string name="poi_license_classes">Flokkar notkunarleyfa</string>
+
 </resources>

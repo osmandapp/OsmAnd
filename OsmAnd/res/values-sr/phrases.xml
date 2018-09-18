@@ -1992,4 +1992,52 @@
 	<string name="poi_health_amenity_type_first_aid_kit">Прибор за прву помоћ</string>
 	<string name="poi_health_amenity_type_scales">Јавне ваге</string>
 
+	<string name="poi_car_pooling">Ауто зауставно место</string>
+	<string name="poi_wetland_marsh">Отворена нешумовита мочвара</string>
+	<string name="poi_wetland_reedbed">Затворена нешумовита мочвара</string>
+	<string name="poi_wetland_saltern">Солана</string>
+	<string name="poi_wetland_tidalflat">Плимски део</string>
+	<string name="poi_wetland_saltmarsh">Плимска мочвара</string>
+	<string name="poi_wetland_string_bog">Пругаста мочвара</string>
+	<string name="poi_wetland_fen">Мочварна пољана</string>
+	<string name="poi_wetland_palsa_bog">Палса мочвара</string>
+	<string name="poi_beach_shingle">Каменити насип</string>
+	<string name="poi_beach_rocky">Каменита</string>
+
+	<string name="poi_chimney">Димњак</string>
+	<string name="poi_palm">Палма</string>
+	<string name="poi_cypress">Чемпрес</string>
+	<string name="poi_flagpole">Стуб заставе</string>
+
+	<string name="poi_bench_yes">Да</string>
+	<string name="poi_bench_no">Без клупе</string>
+	<string name="poi_bin_yes">Са корпом</string>
+	<string name="poi_bin_no">Без корпе</string>
+
+	<string name="poi_shelter_type_public_transport">Јавни превоз</string>
+	<string name="poi_shelter_type_picnic_shelter">Пикник</string>
+	<string name="poi_shelter_type_weather_shelter">Време</string>
+	<string name="poi_shelter_type_lean_to">Надстрешница</string>
+	<string name="poi_shelter_type_basic_hut">Проста колиба</string>
+	<string name="poi_shelter_type_building">Зграда</string>
+	<string name="poi_shelter_type_wildlife_hide">Посматрачка колиба</string>
+	<string name="poi_shelter_type_rock_shelter">Каменито склониште</string>
+	<string name="poi_shelter_type_sun_shelter">Склониште од сунца</string>
+	<string name="poi_shelter_type_field_shelter">Пољско склониште</string>
+	<string name="poi_shelter_type_tent">Тип склоништа: шатор</string>
+	<string name="poi_shelter_type_abandoned">Тип склоништа: напуштено</string>
+
+	<string name="poi_internet_access_type_wlan">Вај-Фај</string>
+	<string name="poi_internet_access_type_terminal">Терминал</string>
+	<string name="poi_internet_access_type_wired">Кабловски</string>
+	<string name="poi_internet_access_type_public">Тип приступа интернету: јавни</string>
+	<string name="poi_internet_access_type_service">Тип приступа интернету: услужни</string>
+	<string name="poi_internet_access_type_no">Без приступа интернету</string>
+	<string name="poi_internet_access_type_yes">Са приступом интернету</string>
+
+	<string name="poi_maxwidth">Максимална ширина</string>
+	<string name="poi_iata">ИАТА код</string>
+	<string name="poi_icao">ИЦАО код</string>
+	<string name="poi_faa">ФАА код</string>
+	
 	</resources>

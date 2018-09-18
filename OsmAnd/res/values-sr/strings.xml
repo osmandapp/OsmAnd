@@ -3000,4 +3000,5 @@
 \n • Подршка за измену полигонских објеката
 \n
 \n</string>
+    <string name="ask_for_location_permission">Молим дајте ОсмАнду дозволу приступа локацији ради наставка.</string>
     </resources>
