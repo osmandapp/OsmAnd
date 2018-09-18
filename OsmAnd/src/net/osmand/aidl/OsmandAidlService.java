@@ -593,7 +593,8 @@ public class OsmandAidlService extends Service {
 			try {
 				return params != null && getApi("navigateSearch").navigateSearch(
 						params.getStartName(), params.getStartLat(), params.getStartLon(),
-						params.getSearchQuery(), params.getProfile(), params.isForce());
+						params.getSearchQuery(), params.getSearchLat(), params.getSearchLon(),
+						params.getProfile(), params.isForce());
 			} catch (Exception e) {
 				handleException(e);
 				return false;

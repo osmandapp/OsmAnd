@@ -32,6 +32,7 @@ import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.MapActivity.ShowQuickSearchMode;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
@@ -117,6 +118,9 @@ public class ExternalApiHelper {
 	public static final String PARAM_DEST_LAT = "dest_lat";
 	public static final String PARAM_DEST_LON = "dest_lon";
 	public static final String PARAM_DEST_SEARCH_QUERY = "dest_search_query";
+	public static final String PARAM_SEARCH_LAT = "search_lat";
+	public static final String PARAM_SEARCH_LON = "search_lon";
+	public static final String PARAM_SHOW_SEARCH_RESULTS = "show_search_results";
 	public static final String PARAM_PROFILE = "profile";
 
 	public static final String PARAM_VERSION = "version";
@@ -150,7 +154,7 @@ public class ExternalApiHelper {
 	public static final int RESULT_CODE_ERROR_GPX_NOT_FOUND = 1004;
 	public static final int RESULT_CODE_ERROR_INVALID_PROFILE = 1005;
 	public static final int RESULT_CODE_ERROR_EMPTY_SEARCH_QUERY = 1006;
-	public static final int RESULT_CODE_ERROR_START_LOCATION_UNDEFINED = 1007;
+	public static final int RESULT_CODE_ERROR_SEARCH_LOCATION_UNDEFINED = 1007;
 
 	private MapActivity mapActivity;
 	private int resultCode;
@@ -269,8 +273,8 @@ public class ExternalApiHelper {
 					String startLatStr = uri.getQueryParameter(PARAM_START_LAT);
 					String startLonStr = uri.getQueryParameter(PARAM_START_LON);
 					if (!Algorithms.isEmpty(startLatStr) && !Algorithms.isEmpty(startLonStr)) {
-						double lat = Double.parseDouble(uri.getQueryParameter(PARAM_START_LAT));
-						double lon = Double.parseDouble(uri.getQueryParameter(PARAM_START_LON));
+						double lat = Double.parseDouble(startLatStr);
+						double lon = Double.parseDouble(startLonStr);
 						start = new LatLon(lat, lon);
 						startDesc = new PointDescription(PointDescription.POINT_TYPE_LOCATION, startName);
 					} else {
@@ -319,6 +323,7 @@ public class ExternalApiHelper {
 						break;
 					}
 				}
+				final boolean showSearchResults = uri.getBooleanQueryParameter(PARAM_SHOW_SEARCH_RESULTS, false);
 				final String searchQuery = uri.getQueryParameter(PARAM_DEST_SEARCH_QUERY);
 				if (Algorithms.isEmpty(searchQuery)) {
 					resultCode = RESULT_CODE_ERROR_EMPTY_SEARCH_QUERY;
@@ -334,23 +339,27 @@ public class ExternalApiHelper {
 					String startLatStr = uri.getQueryParameter(PARAM_START_LAT);
 					String startLonStr = uri.getQueryParameter(PARAM_START_LON);
 					if (!Algorithms.isEmpty(startLatStr) && !Algorithms.isEmpty(startLonStr)) {
-						double lat = Double.parseDouble(uri.getQueryParameter(PARAM_START_LAT));
-						double lon = Double.parseDouble(uri.getQueryParameter(PARAM_START_LON));
+						double lat = Double.parseDouble(startLatStr);
+						double lon = Double.parseDouble(startLonStr);
 						start = new LatLon(lat, lon);
 						startDesc = new PointDescription(PointDescription.POINT_TYPE_LOCATION, startName);
 					} else {
-						Location location = app.getLocationProvider().getLastKnownLocation();
-						if (location != null) {
-							start = new LatLon(location.getLatitude(), location.getLongitude());
-							startDesc = new PointDescription(PointDescription.POINT_TYPE_MY_LOCATION, mapActivity.getString(R.string.shared_string_my_location));
-						} else {
-							start = null;
-							startDesc = null;
-						}
+						start = null;
+						startDesc = null;
+					}
+					final LatLon searchLocation;
+					String searchLatStr = uri.getQueryParameter(PARAM_SEARCH_LAT);
+					String searchLonStr = uri.getQueryParameter(PARAM_SEARCH_LON);
+					if (!Algorithms.isEmpty(searchLatStr) && !Algorithms.isEmpty(searchLonStr)) {
+						double lat = Double.parseDouble(searchLatStr);
+						double lon = Double.parseDouble(searchLonStr);
+						searchLocation = new LatLon(lat, lon);
+					} else {
+						searchLocation = null;
 					}
 
-					if (start == null) {
-						resultCode = RESULT_CODE_ERROR_START_LOCATION_UNDEFINED;
+					if (searchLocation == null) {
+						resultCode = RESULT_CODE_ERROR_SEARCH_LOCATION_UNDEFINED;
 					} else {
 						boolean force = uri.getBooleanQueryParameter(PARAM_FORCE, false);
 
@@ -362,12 +371,12 @@ public class ExternalApiHelper {
 								@Override
 								public void onDismiss(DialogInterface dialog) {
 									if (!routingHelper.isFollowingMode()) {
-										searchAndNavigate(mapActivity, start, startDesc, profile, searchQuery);
+										searchAndNavigate(mapActivity, searchLocation, start, startDesc, profile, searchQuery, showSearchResults);
 									}
 								}
 							});
 						} else {
-							searchAndNavigate(mapActivity, start, startDesc, profile, searchQuery);
+							searchAndNavigate(mapActivity, searchLocation, start, startDesc, profile, searchQuery, showSearchResults);
 						}
 						resultCode = Activity.RESULT_OK;
 					}
@@ -626,43 +635,60 @@ public class ExternalApiHelper {
 		}
 	}
 
-	static public void searchAndNavigate(@NonNull MapActivity mapActivity,
-										 @NonNull final LatLon from, @Nullable final PointDescription fromDesc,
-										 @NonNull final ApplicationMode mode, @NonNull final String searchQuery) {
+	static public void searchAndNavigate(@NonNull MapActivity mapActivity, @NonNull final LatLon searchLocation,
+										 @Nullable final LatLon from, @Nullable final PointDescription fromDesc,
+										 @NonNull final ApplicationMode mode, @NonNull final String searchQuery,
+										 final boolean showSearchResults) {
 
 		final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
 		OsmandApplication app = mapActivity.getMyApplication();
-		ProgressDialog dlg = new ProgressDialog(mapActivity);
-		dlg.setTitle("");
-		dlg.setMessage(mapActivity.getString(R.string.searching_address));
-		dlg.show();
-		final WeakReference<ProgressDialog> dlgRef = new WeakReference<>(dlg);
-		runSearch(app, searchQuery, SearchParams.SEARCH_TYPE_ALL,
-				from.getLatitude(), from.getLongitude(), 1, 1, new OsmandAidlApi.SearchCompleteCallback() {
-					@Override
-					public void onSearchComplete(final List<SearchResult> resultSet) {
-						final MapActivity mapActivity = mapActivityRef.get();
-						if (mapActivity != null) {
-							mapActivity.getMyApplication().runInUIThread(new Runnable() {
-								@Override
-								public void run() {
-									ProgressDialog dlg = dlgRef.get();
-									if (dlg != null) {
-										dlg.dismiss();
+		if (showSearchResults) {
+			RoutingHelper routingHelper = app.getRoutingHelper();
+			if (!routingHelper.isFollowingMode() && !routingHelper.isRoutePlanningMode()) {
+				mapActivity.getMapActions().enterRoutePlanningMode(from, fromDesc);
+			} else {
+				mapActivity.getRoutingHelper().setRoutePlanningMode(true);
+				TargetPointsHelper targets = app.getTargetPointsHelper();
+				targets.setStartPoint(from, false, fromDesc);
+				mapActivity.getMapViewTrackingUtilities().switchToRoutePlanningMode();
+				mapActivity.refreshMap();
+			}
+			mapActivity.showQuickSearch(ShowQuickSearchMode.DESTINATION_SELECTION_AND_START, true, searchQuery, searchLocation);
+		} else {
+			ProgressDialog dlg = new ProgressDialog(mapActivity);
+			dlg.setTitle("");
+			dlg.setMessage(mapActivity.getString(R.string.searching_address));
+			dlg.show();
+			final WeakReference<ProgressDialog> dlgRef = new WeakReference<>(dlg);
+			runSearch(app, searchQuery, SearchParams.SEARCH_TYPE_ALL,
+					searchLocation.getLatitude(), searchLocation.getLongitude(),
+					1, 1, new OsmandAidlApi.SearchCompleteCallback() {
+						@Override
+						public void onSearchComplete(final List<SearchResult> resultSet) {
+							final MapActivity mapActivity = mapActivityRef.get();
+							if (mapActivity != null) {
+								mapActivity.getMyApplication().runInUIThread(new Runnable() {
+									@Override
+									public void run() {
+										ProgressDialog dlg = dlgRef.get();
+										if (dlg != null) {
+											dlg.dismiss();
+										}
+										if (resultSet.size() > 0) {
+											final SearchResult res = resultSet.get(0);
+											LatLon to = new LatLon(res.getLatitude(), res.getLongitude());
+											PointDescription toDesc = new PointDescription(
+													PointDescription.POINT_TYPE_TARGET, res.getLocalName() + ", " + res.getLocalTypeName());
+											startNavigation(mapActivity, from, fromDesc, to, toDesc, mode);
+										} else {
+											mapActivity.getMyApplication().showToastMessage(mapActivity.getString(R.string.search_nothing_found));
+										}
 									}
-									if (resultSet.size() > 0) {
-										final SearchResult res = resultSet.get(0);
-										LatLon to = new LatLon(res.getLatitude(), res.getLongitude());
-										PointDescription toDesc = new PointDescription(PointDescription.POINT_TYPE_TARGET, res.getLocalName() + ", " + res.getLocalTypeName());
-										startNavigation(mapActivity, from, fromDesc, to, toDesc, mode);
-									} else {
-										mapActivity.getMyApplication().showToastMessage(mapActivity.getString(R.string.search_nothing_found));
-									}
-								}
-							});
+								});
+							}
 						}
-					}
-				});
+					});
+		}
 	}
 
 	static public void runSearch(final OsmandApplication app, String searchQuery, int searchType,

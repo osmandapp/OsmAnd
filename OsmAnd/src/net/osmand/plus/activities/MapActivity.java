@@ -20,6 +20,7 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityCompat.OnRequestPermissionsResultCallback;
 import android.support.v4.app.DialogFragment;
@@ -1837,6 +1838,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	public void showQuickSearch(ShowQuickSearchMode mode, boolean showCategories) {
+		showQuickSearch(mode, showCategories, "", null);
+	}
+
+	public void showQuickSearch(@NonNull ShowQuickSearchMode mode, boolean showCategories,
+								@NonNull String searchQuery, @Nullable LatLon searchLocation) {
 		if (mode == ShowQuickSearchMode.CURRENT) {
 			mapContextMenu.close();
 		} else {
@@ -1844,33 +1850,36 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		}
 		QuickSearchDialogFragment fragment = getQuickSearchDialogFragment();
 		if (mode == ShowQuickSearchMode.START_POINT_SELECTION || mode == ShowQuickSearchMode.DESTINATION_SELECTION
-				|| mode == ShowQuickSearchMode.INTERMEDIATE_SELECTION) {
+				|| mode == ShowQuickSearchMode.DESTINATION_SELECTION_AND_START || mode == ShowQuickSearchMode.INTERMEDIATE_SELECTION) {
 			if (fragment != null) {
 				fragment.dismiss();
 			}
 			if (mode == ShowQuickSearchMode.INTERMEDIATE_SELECTION) {
-				QuickSearchDialogFragment.showInstance(this, "", null,
-						QuickSearchType.INTERMEDIATE, showCategories ? QuickSearchTab.CATEGORIES : QuickSearchTab.ADDRESS, null);
+				QuickSearchDialogFragment.showInstance(this, searchQuery, null,
+						QuickSearchType.INTERMEDIATE, showCategories ? QuickSearchTab.CATEGORIES : QuickSearchTab.ADDRESS, searchLocation);
 			} else if (mode == ShowQuickSearchMode.START_POINT_SELECTION) {
-				QuickSearchDialogFragment.showInstance(this, "", null,
-						QuickSearchType.START_POINT, showCategories ? QuickSearchTab.CATEGORIES : QuickSearchTab.ADDRESS, null);
+				QuickSearchDialogFragment.showInstance(this, searchQuery, null,
+						QuickSearchType.START_POINT, showCategories ? QuickSearchTab.CATEGORIES : QuickSearchTab.ADDRESS, searchLocation);
+			} else if (mode == ShowQuickSearchMode.DESTINATION_SELECTION) {
+				QuickSearchDialogFragment.showInstance(this, searchQuery, null,
+						QuickSearchType.DESTINATION, showCategories ? QuickSearchTab.CATEGORIES : QuickSearchTab.ADDRESS, searchLocation);
 			} else {
-				QuickSearchDialogFragment.showInstance(this, "", null,
-						QuickSearchType.DESTINATION, showCategories ? QuickSearchTab.CATEGORIES : QuickSearchTab.ADDRESS, null);
+				QuickSearchDialogFragment.showInstance(this, searchQuery, null,
+						QuickSearchType.DESTINATION_AND_START, showCategories ? QuickSearchTab.CATEGORIES : QuickSearchTab.ADDRESS, searchLocation);
 			}
 		} else if (fragment != null) {
 			if (mode == ShowQuickSearchMode.NEW
 					|| (mode == ShowQuickSearchMode.NEW_IF_EXPIRED && fragment.isExpired())) {
 				fragment.dismiss();
-				QuickSearchDialogFragment.showInstance(this, "", null,
-						QuickSearchType.REGULAR, showCategories ? QuickSearchTab.CATEGORIES : QuickSearchTab.HISTORY, null);
+				QuickSearchDialogFragment.showInstance(this, searchQuery, null,
+						QuickSearchType.REGULAR, showCategories ? QuickSearchTab.CATEGORIES : QuickSearchTab.HISTORY, searchLocation);
 			} else {
 				fragment.show();
 			}
 			refreshMap();
 		} else {
-			QuickSearchDialogFragment.showInstance(this, "", null,
-					QuickSearchType.REGULAR, showCategories ? QuickSearchTab.CATEGORIES : QuickSearchTab.HISTORY, null);
+			QuickSearchDialogFragment.showInstance(this, searchQuery, null,
+					QuickSearchType.REGULAR, showCategories ? QuickSearchTab.CATEGORIES : QuickSearchTab.HISTORY, searchLocation);
 		}
 	}
 
@@ -1941,6 +1950,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		CURRENT,
 		START_POINT_SELECTION,
 		DESTINATION_SELECTION,
+		DESTINATION_SELECTION_AND_START,
 		INTERMEDIATE_SELECTION
 	}
 }

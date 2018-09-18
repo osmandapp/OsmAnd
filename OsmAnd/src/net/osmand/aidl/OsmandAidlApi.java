@@ -20,7 +20,6 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 
 import net.osmand.IndexConstants;
-import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.aidl.favorite.AFavorite;
 import net.osmand.aidl.favorite.group.AFavoriteGroup;
@@ -49,7 +48,6 @@ import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.dialogs.ConfigureMapMenu;
@@ -109,6 +107,8 @@ public class OsmandAidlApi {
 	private static final String AIDL_URI = "aidl_uri";
 	private static final String AIDL_FORCE = "aidl_force";
 	private static final String AIDL_SEARCH_QUERY = "aidl_search_query";
+	private static final String AIDL_SEARCH_LAT = "aidl_search_lat";
+	private static final String AIDL_SEARCH_LON = "aidl_search_lon";
 
 	private static final String AIDL_OBJECT_ID = "aidl_object_id";
 
@@ -541,17 +541,20 @@ public class OsmandAidlApi {
 						start = new LatLon(startLat, startLon);
 						startDesc = new PointDescription(PointDescription.POINT_TYPE_LOCATION, startName);
 					} else {
-						Location location = app.getLocationProvider().getLastKnownLocation();
-						if (location != null) {
-							start = new LatLon(location.getLatitude(), location.getLongitude());
-							startDesc = new PointDescription(PointDescription.POINT_TYPE_MY_LOCATION, mapActivity.getString(R.string.shared_string_my_location));
-						} else {
-							start = null;
-							startDesc = null;
-						}
+						start = null;
+						startDesc = null;
 					}
 
-					if (start != null) {
+					final LatLon searchLocation;
+					double searchLat = intent.getDoubleExtra(AIDL_SEARCH_LAT, 0);
+					double searchLon = intent.getDoubleExtra(AIDL_SEARCH_LON, 0);
+					if (searchLat != 0 && searchLon != 0) {
+						searchLocation = new LatLon(searchLat, searchLon);
+					} else {
+						searchLocation = null;
+					}
+
+					if (searchLocation != null) {
 						final RoutingHelper routingHelper = app.getRoutingHelper();
 						boolean force = intent.getBooleanExtra(AIDL_FORCE, true);
 						if (routingHelper.isFollowingMode() && !force) {
@@ -562,12 +565,12 @@ public class OsmandAidlApi {
 								public void onDismiss(DialogInterface dialog) {
 									MapActivity mapActivity = mapActivityRef.get();
 									if (mapActivity != null && !routingHelper.isFollowingMode()) {
-										ExternalApiHelper.searchAndNavigate(mapActivity, start, startDesc, profile, searchQuery);
+										ExternalApiHelper.searchAndNavigate(mapActivity, searchLocation, start, startDesc, profile, searchQuery, false);
 									}
 								}
 							});
 						} else {
-							ExternalApiHelper.searchAndNavigate(mapActivity, start, startDesc, profile, searchQuery);
+							ExternalApiHelper.searchAndNavigate(mapActivity, searchLocation, start, startDesc, profile, searchQuery, false);
 						}
 					}
 				}
@@ -1365,7 +1368,9 @@ public class OsmandAidlApi {
 		return true;
 	}
 
-	boolean navigate(String startName, double startLat, double startLon, String destName, double destLat, double destLon, String profile, boolean force) {
+	boolean navigate(String startName, double startLat, double startLon,
+					 String destName, double destLat, double destLon,
+					 String profile, boolean force) {
 		Intent intent = new Intent();
 		intent.setAction(AIDL_NAVIGATE);
 		intent.putExtra(AIDL_START_NAME, startName);
@@ -1380,13 +1385,17 @@ public class OsmandAidlApi {
 		return true;
 	}
 
-	boolean navigateSearch(String startName, double startLat, double startLon, String searchQuery, String profile, boolean force) {
+	boolean navigateSearch(String startName, double startLat, double startLon,
+						   String searchQuery, double searchLat, double searchLon,
+						   String profile, boolean force) {
 		Intent intent = new Intent();
 		intent.setAction(AIDL_NAVIGATE_SEARCH);
 		intent.putExtra(AIDL_START_NAME, startName);
 		intent.putExtra(AIDL_START_LAT, startLat);
 		intent.putExtra(AIDL_START_LON, startLon);
 		intent.putExtra(AIDL_SEARCH_QUERY, searchQuery);
+		intent.putExtra(AIDL_SEARCH_LAT, searchLat);
+		intent.putExtra(AIDL_SEARCH_LON, searchLon);
 		intent.putExtra(AIDL_PROFILE, profile);
 		intent.putExtra(AIDL_FORCE, force);
 		app.sendBroadcast(intent);

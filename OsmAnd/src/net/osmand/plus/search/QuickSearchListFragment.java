@@ -299,6 +299,7 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 								 PointDescription pointDescription, Object object) {
 		if (mapActivity != null) {
 			OsmandApplication app = mapActivity.getMyApplication();
+			boolean targetPoint = false;
 			switch (dialogFragment.getSearchType()) {
 				case REGULAR: {
 					app.getSettings().setMapLocationToShow(latitude, longitude, zoom, pointDescription, true, object);
@@ -310,20 +311,28 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 					mapActivity.getMapLayers().getMapControlsLayer().selectAddress(
 							pointDescription != null ? pointDescription.getName() : null,
 							latitude, longitude, false, false);
+					targetPoint = true;
 					break;
 				}
-				case DESTINATION: {
+				case DESTINATION:
+				case DESTINATION_AND_START: {
 					mapActivity.getMapLayers().getMapControlsLayer().selectAddress(
 							pointDescription != null ? pointDescription.getName() : null,
 							latitude, longitude, true, false);
+					targetPoint = true;
 					break;
 				}
 				case INTERMEDIATE: {
 					mapActivity.getMapLayers().getMapControlsLayer().selectAddress(
 							pointDescription != null ? pointDescription.getName() : null,
 							latitude, longitude, false, true);
+					targetPoint = true;
 					break;
 				}
+			}
+			if (targetPoint) {
+				dialogFragment.dismiss();
+				mapActivity.getMapLayers().getMapControlsLayer().doNavigate();
 			}
 		}
 	}
