@@ -3201,4 +3201,5 @@ Repræsenterer område: %1$s x %2$s</string>
 \n
 \n  • Understøtter redigering af polygonobjekter (ikke-facilitet)</string>
     <string name="ask_for_location_permission">Giv OsmAnd tilladelse til placering for at fortsætte.</string>
+    <string name="rendering_value_black_name">Sort</string>
     </resources>
