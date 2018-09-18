@@ -16,9 +16,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.views.DirectionDrawable;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
 
 public class MapMarkerDialogHelper {
 
@@ -101,14 +98,7 @@ public class MapMarkerDialogHelper {
 
 		descText.setVisibility(View.GONE);
 
-		Date date = new Date(marker.creationDate);
-		String month = new SimpleDateFormat("MMM", Locale.getDefault()).format(date);
-		if (month.length() > 1) {
-			month = Character.toUpperCase(month.charAt(0)) + month.substring(1);
-		}
-		month = month.replaceAll("\\.", "");
-		String day = new SimpleDateFormat("d", Locale.getDefault()).format(date);
-		String desc = month + " " + day;
+		String desc = OsmAndFormatter.getFormattedDate(app, marker.creationDate);
 		String markerGroupName = marker.groupName;
 		if (markerGroupName != null) {
 			if (markerGroupName.equals("")) {

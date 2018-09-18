@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import net.osmand.AndroidUtils;
+import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.OsmandApplication;
@@ -122,14 +123,7 @@ public class MapMarkersHistoryAdapter extends RecyclerView.Adapter<RecyclerView.
 
 			itemViewHolder.title.setText(marker.getName(app));
 
-			Date date = new Date(marker.visitedDate);
-			String month = new SimpleDateFormat("MMM", Locale.getDefault()).format(date);
-			if (month.length() > 1) {
-				month = Character.toUpperCase(month.charAt(0)) + month.substring(1);
-			}
-			month = month.replaceAll("\\.", "");
-			String day = new SimpleDateFormat("d", Locale.getDefault()).format(date);
-			String desc = app.getString(R.string.passed, month + " " + day);
+			String desc = app.getString(R.string.passed, OsmAndFormatter.getFormattedDate(app, marker.visitedDate));
 			String markerGroupName = marker.groupName;
 			if (markerGroupName != null) {
 				if (markerGroupName.equals("")) {

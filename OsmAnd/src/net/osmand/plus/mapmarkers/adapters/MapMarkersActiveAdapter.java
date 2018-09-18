@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import net.osmand.AndroidUtils;
 import net.osmand.data.LatLon;
+import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
@@ -18,14 +19,10 @@ import net.osmand.plus.MapMarkersHelper.MapMarkersGroup;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities.UpdateLocationViewCache;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.dashboard.DashLocationFragment;
 import net.osmand.util.Algorithms;
 
-import java.text.SimpleDateFormat;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemViewHolder>
 		implements MapMarkersItemTouchHelperCallback.ItemTouchHelperAdapter {
@@ -136,14 +133,7 @@ public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemV
 				descr = mapActivity.getString(R.string.shared_string_favorites);
 			}
 		} else {
-			Date date = new Date(marker.creationDate);
-			String month = new SimpleDateFormat("MMM", Locale.getDefault()).format(date);
-			if (month.length() > 1) {
-				month = Character.toUpperCase(month.charAt(0)) + month.substring(1);
-			}
-			month = month.replaceAll("\\.", "");
-			String day = new SimpleDateFormat("d", Locale.getDefault()).format(date);
-			descr = month + " " + day;
+			descr = OsmAndFormatter.getFormattedDate(mapActivity, marker.creationDate);
 		}
 		if (marker.wptPt != null && !Algorithms.isEmpty(marker.wptPt.category)) {
 			descr = marker.wptPt.category + ", " + descr;
