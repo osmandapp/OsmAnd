@@ -124,7 +124,6 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 	private OsmandMapTileView map;
 	private LatLon mapCenter;
-	private int mapZoom;
 	private int origMarkerX;
 	private int origMarkerY;
 	private boolean customMapCenter;
@@ -201,10 +200,6 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			mapCenter = menu.getMapCenter();
 			origMarkerX = box.getCenterPixelX();
 			origMarkerY = box.getCenterPixelY();
-		}
-		mapZoom = menu.getMapZoom();
-		if (mapZoom == 0) {
-			mapZoom = map.getZoom();
 		}
 
 		// Left title button
@@ -1247,13 +1242,8 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		super.onDestroyView();
 		if (!menu.isActive()) {
 			if (mapCenter != null) {
-				if (mapZoom == 0) {
-					mapZoom = map.getZoom();
-				}
-				//map.setLatLon(mapCenter.getLatitude(), mapCenter.getLongitude());
-				//map.setIntZoom(mapZoom);
 				AnimateDraggingMapThread thread = map.getAnimatedDraggingThread();
-				thread.startMoving(mapCenter.getLatitude(), mapCenter.getLongitude(), mapZoom, true);
+				thread.startMoving(mapCenter.getLatitude(), mapCenter.getLongitude(), map.getZoom(), true);
 			}
 		}
 		menu.setMapCenter(null);
