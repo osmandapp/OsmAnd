@@ -38,7 +38,8 @@ public class ColorDialogs {
 			R.string.rendering_value_blue_name,
 			R.string.rendering_value_purple_name,
 			R.string.rendering_value_pink_name,
-			R.string.rendering_value_brown_name
+			R.string.rendering_value_brown_name,
+			R.string.rendering_value_black_name
 	};
 
 	public static int[] pallette = new int[] {
@@ -52,7 +53,8 @@ public class ColorDialogs {
 			0xb41010a0,
 			0xb4a71de1,
 			0xb4e044bb,
-			0xb48e2512
+			0xb48e2512,
+			0xff000001
 	};
 
 	public static String[] paletteColorTags = new String[] {
@@ -66,7 +68,8 @@ public class ColorDialogs {
 			"blue",
 			"purple",
 			"pink",
-			"brown"
+			"brown",
+			"black"
 	};
 
 	private static double getDistanceBetweenColors(int color1, int color2) {
