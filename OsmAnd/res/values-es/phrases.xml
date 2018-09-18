@@ -3910,4 +3910,6 @@
 	<string name="poi_hazard_minefield">Campo de minas</string>
 
 
-</resources>
+<string name="poi_ruins">Ruinas</string>
+
+	</resources>
