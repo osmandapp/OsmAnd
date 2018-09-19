@@ -2965,11 +2965,13 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="commiting_way">Sendi leið inn…</string>
     <string name="test_voice_desrc">Bankaðu á hnapp og hlustaðu á samsvarandi raddskipun til að bera kennsl á fyrirmæli sem vantar eða sem eru skemmd.</string>
 <string name="ask_for_location_permission">Gefðu OsmAnd heimild til að sjá staðsetningar til að halda áfram.</string>
-    <string name="release_3_2_pre">• Lagað hrun í ræsingu sem til kom á ekki-latneskt kóðuðum kortum
+    <string name="release_3_2_pre">• Lagað hrun í ræsingu sem til kom á ekki-latneskt kóðuðum kortum 
+\n 
+\n • Bættur hraði við myndgerð á Android 8.0 tækjum 
+\n 
+\n • Stuðningur við breytingar á flákahlutum (ekki-aðstaða) 
 \n
-\n • Bættur hraði við myndgerð á Android 8.0 tækjum
-\n
-\n • Stuðningur við breytingar á flakahlutum (ekki-aðstaða)
+\n• Mæling vegalengda: \'Mæla\' færslu bætt víð aðgerðir í samhengisvalmynd
 \n
 \n</string>
     <string name="rendering_value_black_name">Svart</string>
