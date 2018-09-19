@@ -2987,4 +2987,5 @@
 \n• Поддержка редактирования объектов многоугольников (не amenity)
 \n</string>
     <string name="ask_for_location_permission">Пожалуйста, для продолжения дайте OsmAnd разрешение на определение местоположения.</string>
+    <string name="rendering_value_black_name">Чёрный</string>
     </resources>

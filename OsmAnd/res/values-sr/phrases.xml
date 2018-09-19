@@ -2040,4 +2040,44 @@
 	<string name="poi_icao">ИЦАО код</string>
 	<string name="poi_faa">ФАА код</string>
 	
+	<string name="poi_artwork_type_sculpture">Тип дела: скулптура</string>
+	<string name="poi_artwork_type_statue">Тип дела: статуа</string>
+	<string name="poi_artwork_type_mural">Тип дела: мурал</string>
+	<string name="poi_artwork_type_architecture">Тип дела: арихитектура</string>
+	<string name="poi_artwork_type_painting">Тип дела: слика</string>
+	<string name="poi_artwork_type_stone">Тип дела: камено</string>
+	<string name="poi_artwork_type_bust">Тип дела: биста</string>
+	<string name="poi_artwork_type_installation">Тип дела: инсталациа</string>
+	<string name="poi_artwork_type_mosaic">Тип дела: мозаик</string>
+	<string name="poi_artwork_type_relief">Тип дела: рељеф</string>
+	<string name="poi_artwork_type_graffiti">Тип дела: графити</string>
+	<string name="poi_artwork_type_stele">Тип дела: споменик</string>
+	<string name="poi_artwork_type_fountain">Тип дела: фонтана</string>
+
+	<string name="poi_width">Ширина</string>
+
+	<string name="poi_architect_name">Архитекта</string>
+
+	<string name="poi_architecture_modern">Архитектура: модерна</string>
+	<string name="poi_architecture_stalinist_neoclassicism">Архитектура: стаљинистички неокласицизам</string>
+	<string name="poi_architecture_eclectic">Архитектура: еклектична</string>
+	<string name="poi_architecture_new_objectivity">Архитектура: нова објективност</string>
+	<string name="poi_architecture_contemporary">Архитектура: савремена</string>
+	<string name="poi_architecture_constructivism">Архитектура: конструктивизам</string>
+	<string name="poi_architecture_umgebinde">Архитектура: околна</string>
+	<string name="poi_architecture_timber_frame">Архитектура: оквирна дрветом</string>
+	<string name="poi_architecture_art_nouveau">Архитектура: нова уметност</string>
+	<string name="poi_architecture_neoclassicism">Архитектура: неокласицизам</string>
+	<string name="poi_architecture_victorian">Архитектура: викторијанска</string>
+	<string name="poi_architecture_brutalism">Архитектура: брутализам</string>
+	<string name="poi_architecture_classicism">Архитектура: класицизам</string>
+	<string name="poi_architecture_gothic">Архитектура: готска</string>
+	<string name="poi_architecture_oldrussian">Архитектура: староруска</string>
+	<string name="poi_architecture_baroque">Архитектура: барокна</string>
+	<string name="poi_architecture_postconstructivism">Архитектура: постконструктивизам</string>
+	<string name="poi_architecture_wilhelminian_style">Архитектура: вилхелмински стил</string>
+	<string name="poi_architecture_renaissance">Архитектура: ренесансна</string>
+	<string name="poi_architecture_romanesque">Архитектура: романска</string>
+
+	<string name="poi_tunnel_waterway">Водени тунел</string>
 	</resources>

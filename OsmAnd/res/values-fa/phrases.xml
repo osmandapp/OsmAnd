@@ -1107,4 +1107,6 @@
 	<string name="poi_artwork_type_stone">نوع اثر هنری: تخته سنگ</string>
 	<string name="poi_artwork_type_bust">نوع اثر هنری: تندیس نیم‌تنه</string>
 	<string name="poi_artwork_type_installation">نوع اثر هنری: چیدمان</string>
+	<string name="poi_highway_steps">پلکان</string>
+	<string name="poi_step_count">تعداد پله</string>
 	</resources>

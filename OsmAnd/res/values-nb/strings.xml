@@ -3061,4 +3061,5 @@
 \n • Støtte for redigering av polygoner (ikke-omgivelsesforhold)
 \n</string>
     <string name="ask_for_location_permission">Gi OsmAnd tilgang til plassering for å fortsette.</string>
+    <string name="rendering_value_black_name">Svart</string>
     </resources>

@@ -2993,4 +2993,5 @@
 \n • Soporte para la edición de objetos poligonales (no servicios)
 \n</string>
     <string name="ask_for_location_permission">Para continuar, debe permitir la ubicación a OsmAnd.</string>
+    <string name="rendering_value_black_name">Negro</string>
     </resources>

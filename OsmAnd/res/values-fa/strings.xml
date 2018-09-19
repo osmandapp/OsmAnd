@@ -3203,4 +3203,5 @@
 \n</string>
     <string name="commiting_way">در حال ثبت راه…</string>
     <string name="ask_for_location_permission">برای ادامه، لطفاً به OsmAnd اجازهٔ دسترسی به موقعیت مکانی را بدهید.</string>
+    <string name="rendering_value_black_name">سیاه</string>
     </resources>
