@@ -3914,4 +3914,9 @@
 
 
 	<string name="poi_glacier_type_outlet">Адток</string>
-	</resources>
+	<string name="poi_car_pooling">Пункт карпулінгу</string>
+	<string name="poi_ruins">Руіны</string>
+
+	<string name="poi_license_classes">Аўтакласы</string>
+
+</resources>
