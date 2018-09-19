@@ -1,24 +1,5 @@
 package net.osmand.plus.search;
 
-import static android.text.InputType.TYPE_CLASS_PHONE;
-import static android.text.InputType.TYPE_CLASS_TEXT;
-import static android.text.InputType.TYPE_TEXT_FLAG_CAP_CHARACTERS;
-import static android.text.InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS;
-import static android.text.InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD;
-import net.osmand.LocationConvert;
-import net.osmand.data.LatLon;
-import net.osmand.data.PointDescription;
-import net.osmand.plus.OsmAndFormatter;
-import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
-import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
-import net.osmand.plus.UiUtilities.UpdateLocationViewCache;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.util.Algorithms;
-import net.osmand.util.MapUtils;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -45,6 +26,27 @@ import android.widget.TextView.OnEditorActionListener;
 import com.google.openlocationcode.OpenLocationCode;
 import com.jwetherell.openmap.common.LatLonPoint;
 import com.jwetherell.openmap.common.UTMPoint;
+
+import net.osmand.LocationConvert;
+import net.osmand.data.LatLon;
+import net.osmand.data.PointDescription;
+import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
+import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
+import net.osmand.plus.UiUtilities.UpdateLocationViewCache;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.util.Algorithms;
+import net.osmand.util.MapUtils;
+
+import static android.text.InputType.TYPE_CLASS_PHONE;
+import static android.text.InputType.TYPE_CLASS_TEXT;
+import static android.text.InputType.TYPE_TEXT_FLAG_CAP_CHARACTERS;
+import static android.text.InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS;
+import static android.text.InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD;
 
 public class QuickSearchCoordinatesFragment extends DialogFragment implements OsmAndCompassListener, OsmAndLocationListener {
 
@@ -500,12 +502,13 @@ public class QuickSearchCoordinatesFragment extends DialogFragment implements Os
 			final EditText lonEdit = ((EditText) view.findViewById(R.id.longitudeEditText));
             setInputTypeDependingOnFormat(new EditText[]{latEdit, lonEdit});
             updateControlsVisibility();
+            final LatLon latLon = currentLatLon;
 			if (currentFormat == PointDescription.UTM_FORMAT) {
 				final EditText northingEdit = ((EditText) view.findViewById(R.id.northingEditText));
 				final EditText eastingEdit = ((EditText) view.findViewById(R.id.eastingEditText));
 				final EditText zoneEdit = ((EditText) view.findViewById(R.id.zoneEditText));
-				if (currentLatLon != null) {
-					UTMPoint pnt = new UTMPoint(new LatLonPoint(currentLatLon.getLatitude(), currentLatLon.getLongitude()));
+				if (latLon != null) {
+					UTMPoint pnt = new UTMPoint(new LatLonPoint(latLon.getLatitude(), latLon.getLongitude()));
 					zoneEdit.setText(pnt.zone_number + "" + pnt.zone_letter);
 					northingEdit.setText(((long) pnt.northing) + "");
 					eastingEdit.setText(((long) pnt.easting) + "");
@@ -519,8 +522,8 @@ public class QuickSearchCoordinatesFragment extends DialogFragment implements Os
 					eastingEdit.setText("");
 				}
 			} else if (currentFormat == PointDescription.OLC_FORMAT) {
-				if (currentLatLon != null) {
-					String olc = OpenLocationCode.encode(currentLatLon.getLatitude(), currentLatLon.getLongitude());
+				if (latLon != null) {
+					String olc = OpenLocationCode.encode(latLon.getLatitude(), latLon.getLongitude());
 					olcEdit.setText(olc);
 					olcInfo.setText(provideOlcInfo(olc));
 				} else if (prevFormat == PointDescription.UTM_FORMAT) {
@@ -531,9 +534,9 @@ public class QuickSearchCoordinatesFragment extends DialogFragment implements Os
 					olcInfo.setText(provideOlcInfo(olcEdit.getText().toString()));
 				}
 			} else {
-				if (currentLatLon != null) {
-					latEdit.setText(LocationConvert.convert(MapUtils.checkLatitude(currentLatLon.getLatitude()), currentFormat));
-					lonEdit.setText(LocationConvert.convert(MapUtils.checkLongitude(currentLatLon.getLongitude()), currentFormat));
+				if (latLon != null) {
+					latEdit.setText(LocationConvert.convert(MapUtils.checkLatitude(latLon.getLatitude()), currentFormat));
+					lonEdit.setText(LocationConvert.convert(MapUtils.checkLongitude(latLon.getLongitude()), currentFormat));
 				} else if (prevFormat == PointDescription.UTM_FORMAT) {
 					latEdit.setText(zoneEdit.getText());
 					lonEdit.setText("");
@@ -542,7 +545,7 @@ public class QuickSearchCoordinatesFragment extends DialogFragment implements Os
 					lonEdit.setText("");
 				}
 			}
-			return currentLatLon != null;
+			return latLon != null;
 		} else {
 			return false;
 		}
