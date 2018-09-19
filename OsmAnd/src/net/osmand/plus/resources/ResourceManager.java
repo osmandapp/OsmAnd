@@ -497,7 +497,7 @@ public class ResourceManager {
 	
 	private void copyPoiTypes() {
 		try {
-			File file = context.getAppPath("poi_types.xml");
+			File file = context.getAppPath(IndexConstants.SETTINGS_DIR + "poi_types.xml");
 			if (file != null) {
 				FileOutputStream fout = new FileOutputStream(file);
 				Algorithms.streamCopy(MapPoiTypes.class.getResourceAsStream("poi_types.xml"), fout);
