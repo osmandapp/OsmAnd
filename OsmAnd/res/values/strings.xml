@@ -19,6 +19,7 @@
     • Fixed crash on startup that occurred with non-latin maps\n\n
     • Improve rendering speed issues on Android 8.0 devices\n\n
     • Support for polygon (non-amenity) objects editing\n\n
+    • Measure distance: add Measure button to Actions in the context menu\n\n
     </string>
     <string name="release_3_1">
     • Navigation: Fix progress bar, fast swapping of the start and end point of the route\n\n
