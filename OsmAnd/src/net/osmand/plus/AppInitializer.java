@@ -335,7 +335,7 @@ public class AppInitializer implements IProgress {
 	}
 
 	private void initPoiTypes() {
-		if(app.getAppPath("poi_types.xml").exists()) {
+		if (app.getAppPath(IndexConstants.SETTINGS_DIR + "poi_types.xml").exists()) {
 			app.poiTypes.init(app.getAppPath("poi_types.xml").getAbsolutePath());
 		} else {
 			app.poiTypes.init();
