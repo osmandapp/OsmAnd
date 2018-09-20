@@ -20,7 +20,7 @@
 	
 	<string name="local_index_tile_data_expire">Истиче(минута): %1$s</string>
     <string name="local_index_tile_data_maxzoom">Максимално увеличање: %1$s</string>
-    <string name="edit_tilesource_elliptic_tile">Еклиптични приказ земљине кугле</string>
+    <string name="edit_tilesource_elliptic_tile">Елиптични приказ земљине кугле</string>
     <string name="edit_tilesource_maxzoom">Максимално увеличање</string>
     <string name="edit_tilesource_minzoom">Минимално увеличање</string>
     <string name="edit_tilesource_url_to_load">URL</string>
@@ -1107,7 +1107,7 @@
     <string name="route_calculation">Прорачун путање</string>
     <string name="gpx_no_tracks_title">Још увек немате ниједан GPX фајл</string>
     <string name="gpx_no_tracks_title_folder">Такође, можете додати GPX фајлове у фасциклу</string>
-    <string name="gpx_add_track">И још…</string>
+    <string name="gpx_add_track">Додај још…</string>
     <string name="gpx_appearance">Приказ</string>
     
     
@@ -2993,11 +2993,13 @@
 \n</string>
     <string name="commiting_way">Предајем пут…</string>
     <string name="test_voice_desrc">Кликните дугме и слушајте одговарајуће гласовно навођење да би препознали недостајајућа или погрешна навођења.</string>
-<string name="release_3_2_pre">• Исправљено рушење апликације при стартовању које се дешавало са не-латиничним картама
-\n
-\n • Убрзано исцртавање на Андроид 8.0 уређајима
-\n
-\n • Подршка за измену полигонских објеката
+<string name="release_3_2_pre">• Исправљено рушење апликације при стартовању које се дешавало са не-латиничним картама 
+\n 
+\n • Убрзано исцртавање на Андроид 8.0 уређајима 
+\n 
+\n • Подршка за измену полигонских објеката 
+\n 
+\n • Мерење растојања: додај Измери дугме Акцијама у помоћном менију
 \n
 \n</string>
     <string name="ask_for_location_permission">Молим дајте ОсмАнду дозволу приступа локацији ради наставка.</string>
