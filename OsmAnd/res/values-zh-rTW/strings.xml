@@ -3153,6 +3153,9 @@
 \n• 改善 Android 8.0 裝置上的繪製速度問題 
 \n 
 \n• 支援多邊形 (非生活環境) 的物件編輯 
+\n
+\n• 測量距離：在快顯選單中為動作增加了測量按鈕
 \n</string>
     <string name="ask_for_location_permission">請準許 OsmAnd 位置以繼續。</string>
+    <string name="rendering_value_black_name">黑色</string>
     </resources>
