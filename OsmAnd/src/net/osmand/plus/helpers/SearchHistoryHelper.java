@@ -124,13 +124,22 @@ public class SearchHistoryHelper {
 		public String getSerializedName() {
 			return PointDescription.serializeToString(name);
 		}
+
+		@Override
+		public int getType() {
+			return POINT_TYPE;
+		}
 	}
 
-	private static class HistoryEntry {
+	private static abstract class HistoryEntry {
+
+		static final int POINT_TYPE = 0;
 
 		protected long lastAccessedTime;
 		private int[] intervals = new int[0];
 		private double[] intervalValues = new double[0];
+
+		public abstract int getType();
 
 		private double rankFunction(double cf, double timeDiff) {
 			if (timeDiff <= 0) {
@@ -247,7 +256,7 @@ public class SearchHistoryHelper {
 	private class HistoryItemDBHelper {
 
 		private static final String DB_NAME = "search_history";
-		private static final int DB_VERSION = 2;
+		private static final int DB_VERSION = 3;
 
 		private static final String HISTORY_TABLE_NAME = "history_recents";
 		private static final String HISTORY_COL_NAME = "name";
@@ -256,6 +265,7 @@ public class SearchHistoryHelper {
 		private static final String HISTORY_COL_FREQ_VALUES = "freq_values";
 		private static final String HISTORY_COL_LAT = "latitude";
 		private static final String HISTORY_COL_LON = "longitude";
+		private static final String HISTORY_COL_TYPE = "type";
 
 		private static final String HISTORY_TABLE_CREATE = "CREATE TABLE IF NOT EXISTS " +
 				HISTORY_TABLE_NAME + " (" +
@@ -264,7 +274,8 @@ public class SearchHistoryHelper {
 				HISTORY_COL_FREQ_INTERVALS + " TEXT, " +
 				HISTORY_COL_FREQ_VALUES + " TEXT, " +
 				HISTORY_COL_LAT + " double, " +
-				HISTORY_COL_LON + " double);";
+				HISTORY_COL_LON + " double, " +
+				HISTORY_COL_TYPE + "int);";
 
 		private static final String HISTORY_TABLE_SELECT = "SELECT " +
 				HISTORY_COL_NAME + ", " +
@@ -272,7 +283,8 @@ public class SearchHistoryHelper {
 				HISTORY_COL_FREQ_INTERVALS + ", " +
 				HISTORY_COL_FREQ_VALUES + ", " +
 				HISTORY_COL_LAT + ", " +
-				HISTORY_COL_LON +
+				HISTORY_COL_LON + ", " +
+				HISTORY_COL_TYPE +
 				" FROM " + HISTORY_TABLE_NAME;
 
 		private SQLiteConnection openConnection(boolean readonly) {
@@ -301,6 +313,12 @@ public class SearchHistoryHelper {
 			if (oldVersion < 2) {
 				db.execSQL("DROP TABLE IF EXISTS " + HISTORY_TABLE_NAME);
 				onCreate(db);
+			}
+			if (oldVersion < 3) {
+				db.execSQL("ALTER TABLE " + HISTORY_TABLE_NAME + " ADD " + HISTORY_COL_TYPE + " int");
+				db.execSQL("UPDATE " + HISTORY_TABLE_NAME +
+						" SET " + HISTORY_COL_TYPE + " = ? " +
+						"WHERE " + HISTORY_COL_TYPE + " IS NULL", new Object[]{HistoryEntry.POINT_TYPE});
 			}
 		}
 
@@ -364,9 +382,9 @@ public class SearchHistoryHelper {
 		}
 
 		private void insert(PointHistoryEntry e, SQLiteConnection db) {
-			db.execSQL("INSERT INTO " + HISTORY_TABLE_NAME + " VALUES (?, ?, ?, ?, ?, ?)",
-					new Object[]{e.getSerializedName(), e.lastAccessedTime,
-							e.getIntervals(), e.getIntervalsValues(), e.getLat(), e.getLon()});
+			db.execSQL("INSERT INTO " + HISTORY_TABLE_NAME + " VALUES (?, ?, ?, ?, ?, ?, ?)",
+					new Object[]{e.getSerializedName(), e.lastAccessedTime, e.getIntervals(),
+							e.getIntervalsValues(), e.getLat(), e.getLon(), e.getType()});
 		}
 
 		public List<PointHistoryEntry> getPoints() {
@@ -379,22 +397,25 @@ public class SearchHistoryHelper {
 					if (query != null && query.moveToFirst()) {
 						boolean reinsert = false;
 						do {
-							String name = query.getString(0);
-							long lastAccessed = query.getLong(1);
-							String intervals = query.getString(2);
-							String values = query.getString(3);
-							double lat = query.getDouble(4);
-							double lon = query.getDouble(5);
+							int type = query.getInt(6);
+							if (type == HistoryEntry.POINT_TYPE) {
+								String name = query.getString(0);
+								long lastAccessed = query.getLong(1);
+								String intervals = query.getString(2);
+								String values = query.getString(3);
+								double lat = query.getDouble(4);
+								double lon = query.getDouble(5);
 
-							PointDescription pd = PointDescription.deserializeFromString(name, new LatLon(lat, lon));
-							PointHistoryEntry e = new PointHistoryEntry(lat, lon, pd);
-							e.lastAccessedTime = lastAccessed;
-							e.setFrequency(intervals, values);
-							if (st.containsKey(pd)) {
-								reinsert = true;
+								PointDescription pd = PointDescription.deserializeFromString(name, new LatLon(lat, lon));
+								PointHistoryEntry e = new PointHistoryEntry(lat, lon, pd);
+								e.lastAccessedTime = lastAccessed;
+								e.setFrequency(intervals, values);
+								if (st.containsKey(pd)) {
+									reinsert = true;
+								}
+								res.add(e);
+								st.put(pd, e);
 							}
-							res.add(e);
-							st.put(pd, e);
 						} while (query.moveToNext());
 
 						if (reinsert) {
