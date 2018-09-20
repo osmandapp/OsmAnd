@@ -18,6 +18,11 @@ import java.util.Map;
 public class SearchHistoryHelper {
 
 	private static final int HISTORY_LIMIT = 1500;
+	private static final int[] DEF_INTERVALS_MIN = new int[]{
+			5, 60, 60 * 24, 5 * 60 * 24, 10 * 60 * 24, 30 * 60 * 24
+	};
+
+	private static SearchHistoryHelper instance = null;
 
 	private OsmandApplication context;
 	private List<HistoryEntry> loadedEntries = null;
@@ -27,8 +32,6 @@ public class SearchHistoryHelper {
 		this.context = context;
 	}
 
-	private static SearchHistoryHelper instance = null;
-
 	public static SearchHistoryHelper getInstance(OsmandApplication context) {
 		if (instance == null) {
 			instance = new SearchHistoryHelper(context);
@@ -36,18 +39,62 @@ public class SearchHistoryHelper {
 		return instance;
 	}
 
-	private static final int[] DEF_INTERVALS_MIN = new int[]{
-			5, 60, 60 * 24, 5 * 60 * 24, 10 * 60 * 24, 30 * 60 * 24
-	};
+	public void addNewItemToHistory(double latitude, double longitude, PointDescription pointDescription) {
+		addNewItemToHistory(new HistoryEntry(latitude, longitude, pointDescription));
+	}
 
-	private static class HistoryEntryComparator implements Comparator<HistoryEntry> {
-		long time = System.currentTimeMillis();
+	public List<HistoryEntry> getHistoryEntries() {
+		if (loadedEntries == null) {
+			checkLoadedEntries();
+		}
+		return new ArrayList<>(loadedEntries);
+	}
 
-		@Override
-		public int compare(HistoryEntry lhs, HistoryEntry rhs) {
-			double l = lhs.getRank(time);
-			double r = rhs.getRank(time);
-			return -Double.compare(l, r);
+	public void remove(HistoryEntry model) {
+		HistoryItemDBHelper helper = checkLoadedEntries();
+		if (helper.remove(model)) {
+			loadedEntries.remove(model);
+			mp.remove(model.getName());
+		}
+	}
+
+	public void removeAll() {
+		HistoryItemDBHelper helper = checkLoadedEntries();
+		if (helper.removeAll()) {
+			loadedEntries.clear();
+			mp.clear();
+		}
+	}
+
+	private HistoryItemDBHelper checkLoadedEntries() {
+		HistoryItemDBHelper helper = new HistoryItemDBHelper();
+		if (loadedEntries == null) {
+			loadedEntries = helper.getEntries();
+			Collections.sort(loadedEntries, new HistoryEntryComparator());
+			for (HistoryEntry he : loadedEntries) {
+				mp.put(he.getName(), he);
+			}
+		}
+		return helper;
+	}
+
+	private void addNewItemToHistory(HistoryEntry model) {
+		HistoryItemDBHelper helper = checkLoadedEntries();
+		if (mp.containsKey(model.getName())) {
+			model = mp.get(model.getName());
+			model.markAsAccessed(System.currentTimeMillis());
+			helper.update(model);
+		} else {
+			loadedEntries.add(model);
+			mp.put(model.getName(), model);
+			model.markAsAccessed(System.currentTimeMillis());
+			helper.add(model);
+		}
+		Collections.sort(loadedEntries, new HistoryEntryComparator());
+		if (loadedEntries.size() > HISTORY_LIMIT) {
+			if (helper.remove(loadedEntries.get(loadedEntries.size() - 1))) {
+				loadedEntries.remove(loadedEntries.size() - 1);
+			}
 		}
 	}
 
@@ -191,61 +238,16 @@ public class SearchHistoryHelper {
 
 	}
 
-	public List<HistoryEntry> getHistoryEntries() {
-		if (loadedEntries == null) {
-			checkLoadedEntries();
-		}
-		return new ArrayList<>(loadedEntries);
-	}
+	private static class HistoryEntryComparator implements Comparator<HistoryEntry> {
+		long time = System.currentTimeMillis();
 
-	private HistoryItemDBHelper checkLoadedEntries() {
-		HistoryItemDBHelper helper = new HistoryItemDBHelper();
-		if (loadedEntries == null) {
-			loadedEntries = helper.getEntries();
-			Collections.sort(loadedEntries, new HistoryEntryComparator());
-			for (HistoryEntry he : loadedEntries) {
-				mp.put(he.getName(), he);
-			}
-		}
-		return helper;
-	}
-
-	public void remove(HistoryEntry model) {
-		HistoryItemDBHelper helper = checkLoadedEntries();
-		if (helper.remove(model)) {
-			loadedEntries.remove(model);
-			mp.remove(model.getName());
+		@Override
+		public int compare(HistoryEntry lhs, HistoryEntry rhs) {
+			double l = lhs.getRank(time);
+			double r = rhs.getRank(time);
+			return -Double.compare(l, r);
 		}
 	}
-
-	public void removeAll() {
-		HistoryItemDBHelper helper = checkLoadedEntries();
-		if (helper.removeAll()) {
-			loadedEntries.clear();
-			mp.clear();
-		}
-	}
-
-	private void addNewItemToHistory(HistoryEntry model) {
-		HistoryItemDBHelper helper = checkLoadedEntries();
-		if (mp.containsKey(model.getName())) {
-			model = mp.get(model.getName());
-			model.markAsAccessed(System.currentTimeMillis());
-			helper.update(model);
-		} else {
-			loadedEntries.add(model);
-			mp.put(model.getName(), model);
-			model.markAsAccessed(System.currentTimeMillis());
-			helper.add(model);
-		}
-		Collections.sort(loadedEntries, new HistoryEntryComparator());
-		if (loadedEntries.size() > HISTORY_LIMIT) {
-			if (helper.remove(loadedEntries.get(loadedEntries.size() - 1))) {
-				loadedEntries.remove(loadedEntries.size() - 1);
-			}
-		}
-	}
-
 
 	private class HistoryItemDBHelper {
 
@@ -455,11 +457,5 @@ public class SearchHistoryHelper {
 			}
 			return entries;
 		}
-
-	}
-
-	public void addNewItemToHistory(double latitude, double longitude, PointDescription pointDescription) {
-		addNewItemToHistory(new HistoryEntry(latitude, longitude, pointDescription));
-
 	}
 }
