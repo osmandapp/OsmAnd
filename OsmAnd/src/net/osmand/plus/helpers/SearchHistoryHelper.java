@@ -25,7 +25,6 @@ public class SearchHistoryHelper {
 
 	private OsmandApplication context;
 	private List<PointHistoryEntry> loadedPoints = null;
-	private Map<PointDescription, PointHistoryEntry> mp = new HashMap<>();
 
 	private SearchHistoryHelper(OsmandApplication context) {
 		this.context = context;
@@ -53,7 +52,6 @@ public class SearchHistoryHelper {
 		HistoryItemDBHelper helper = checkLoadedEntries();
 		if (helper.remove(point)) {
 			loadedPoints.remove(point);
-			mp.remove(point.getName());
 		}
 	}
 
@@ -61,7 +59,6 @@ public class SearchHistoryHelper {
 		HistoryItemDBHelper helper = checkLoadedEntries();
 		if (helper.removeAll()) {
 			loadedPoints.clear();
-			mp.clear();
 		}
 	}
 
@@ -70,22 +67,19 @@ public class SearchHistoryHelper {
 		if (loadedPoints == null) {
 			loadedPoints = helper.getPoints();
 			Collections.sort(loadedPoints, new HistoryEntryComparator());
-			for (PointHistoryEntry he : loadedPoints) {
-				mp.put(he.getName(), he);
-			}
 		}
 		return helper;
 	}
 
 	private void addPointToHistory(PointHistoryEntry point) {
 		HistoryItemDBHelper helper = checkLoadedEntries();
-		if (mp.containsKey(point.getName())) {
-			point = mp.get(point.getName());
+		int index = loadedPoints.indexOf(point);
+		if (index != -1) {
+			point = loadedPoints.get(index);
 			point.markAsAccessed(System.currentTimeMillis());
 			helper.update(point);
 		} else {
 			loadedPoints.add(point);
-			mp.put(point.getName(), point);
 			point.markAsAccessed(System.currentTimeMillis());
 			helper.add(point);
 		}
@@ -128,6 +122,28 @@ public class SearchHistoryHelper {
 		@Override
 		public int getType() {
 			return POINT_TYPE;
+		}
+
+		@Override
+		public boolean equals(Object o) {
+			if (this == o) return true;
+			if (o == null || getClass() != o.getClass()) return false;
+			PointHistoryEntry that = (PointHistoryEntry) o;
+			if (Double.compare(that.lat, lat) != 0) return false;
+			if (Double.compare(that.lon, lon) != 0) return false;
+			return name != null ? name.equals(that.name) : that.name == null;
+		}
+
+		@Override
+		public int hashCode() {
+			int result;
+			long temp;
+			temp = Double.doubleToLongBits(lat);
+			result = (int) (temp ^ (temp >>> 32));
+			temp = Double.doubleToLongBits(lon);
+			result = 31 * result + (int) (temp ^ (temp >>> 32));
+			result = 31 * result + (name != null ? name.hashCode() : 0);
+			return result;
 		}
 	}
 
