@@ -3,7 +3,6 @@ package net.osmand.plus.helpers;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
 import net.osmand.util.Algorithms;
@@ -272,7 +271,7 @@ public class SearchHistoryHelper {
 			if (conn.getVersion() == 0 || DB_VERSION != conn.getVersion()) {
 				if (readonly) {
 					conn.close();
-					conn = context.getSQLiteAPI().getOrCreateDatabase(DB_NAME, readonly);
+					conn = context.getSQLiteAPI().getOrCreateDatabase(DB_NAME, false);
 				}
 				if (conn.getVersion() == 0) {
 					onCreate(conn);
@@ -289,11 +288,9 @@ public class SearchHistoryHelper {
 		}
 
 		public void onUpgrade(SQLiteConnection db, int oldVersion, int newVersion) {
-			if (newVersion == 2) {
-				db.execSQL(HISTORY_TABLE_CREATE);
-				for (PointHistoryEntry he : getLegacyEntries(db)) {
-					insert(he, db);
-				}
+			if (oldVersion < 2) {
+				db.execSQL("DROP TABLE IF EXISTS " + HISTORY_TABLE_NAME);
+				onCreate(db);
 			}
 		}
 
@@ -365,46 +362,6 @@ public class SearchHistoryHelper {
 					"INSERT INTO " + HISTORY_TABLE_NAME + " VALUES (?, ?, ?, ?, ?, ?)",
 					new Object[]{e.getSerializedName(), e.lastAccessedTime,
 							e.getIntervals(), e.getIntervalsValues(), e.getLat(), e.getLon()});
-		}
-
-		List<PointHistoryEntry> getLegacyEntries(SQLiteConnection db) {
-			List<PointHistoryEntry> entries = new ArrayList<>();
-			if (db != null) {
-				// LEGACY QUERY !!
-				SQLiteCursor query = db.rawQuery(
-						"SELECT name, latitude, longitude, time FROM history ORDER BY time DESC", null);
-				if (query != null && query.moveToFirst()) {
-					do {
-						String name = query.getString(0);
-						String type = PointDescription.POINT_TYPE_MARKER;
-						// make it proper name with type
-						if (name.contains(context.getString(R.string.favorite))) {
-							type = PointDescription.POINT_TYPE_FAVORITE;
-						} else if (name.contains(context.getString(R.string.search_address_building))) {
-							type = PointDescription.POINT_TYPE_ADDRESS;
-						} else if (name.contains(context.getString(R.string.search_address_city))) {
-							type = PointDescription.POINT_TYPE_ADDRESS;
-						} else if (name.contains(context.getString(R.string.search_address_street))) {
-							type = PointDescription.POINT_TYPE_ADDRESS;
-						} else if (name.contains(context.getString(R.string.search_address_street_option))) {
-							type = PointDescription.POINT_TYPE_ADDRESS;
-						} else if (name.contains(context.getString(R.string.poi))) {
-							type = PointDescription.POINT_TYPE_POI;
-						}
-						if (name.contains(":")) {
-							name = name.substring(name.indexOf(':') + 1);
-						}
-						PointHistoryEntry e = new PointHistoryEntry(query.getDouble(1), query.getDouble(2), new PointDescription(
-								type, name));
-						e.markAsAccessed(query.getLong(3));
-						entries.add(e);
-					} while (query.moveToNext());
-				}
-				if (query != null) {
-					query.close();
-				}
-			}
-			return entries;
 		}
 
 		public List<PointHistoryEntry> getEntries() {
