@@ -3010,12 +3010,14 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="search_no_results_feedback">Cap resultat en la cerca?
 \nComenteu-nos-ho</string>
     <string name="test_voice_desrc">Premeu un botó i escolteu la corresponent descripció de veu per identificar les descripcions pendents o errònies.</string>
-<string name="release_3_2_pre">• S\'ha corregit el bloqueig d\'entrada si alfabets no llatins als mapes
-\n
-\n • Millora dels problemes de velocitat de renderització a dispositius Android 8.0
-\n
-\n • Suport a l\'edició d\'objectes poligonals (fora de serveis)
-\n
-\n</string>
+<string name="release_3_2_pre">"• S\'ha corregit el bloqueig d\'entrada si alfabets no llatins als mapes 
+\n 
+\n • Millora dels problemes de velocitat de renderització a dispositius Android 8.0 
+\n 
+\n • Suport a l\'edició d\'objectes poligonals (fora de serveis) 
+\n 
+\n • Mesura de distàncies: s\'ha afegit el botó Mesura dins Accions en el menú contextual  
+\n "</string>
     <string name="ask_for_location_permission">Per continuar cal que doneu a OsmAnd accés a la ubicació.</string>
+    <string name="rendering_value_black_name">Negre</string>
     </resources>

@@ -3004,11 +3004,13 @@ Lon %2$s</string>
     <string name="search_no_results_feedback">¿Sin resultados de búsqueda?
 \nDanos tu opinión</string>
     <string name="test_voice_desrc">Pulsa un botón y escucha el aviso de voz correspondiente para identificar avisos faltantes o defectuosos.</string>
-<string name="release_3_2_pre">• Corregido el fallo en el inicio que se producía con los mapas no latinos
+<string name="release_3_2_pre">• Corregido el fallo en el inicio que se producía con los mapas no latinos 
+\n 
+\n • Mejora en los problemas de velocidad de renderizado en dispositivos Android 8.0 
+\n 
+\n • Soporte para la edición de objetos poligonales (no servicios) 
 \n
-\n • Mejora en los problemas de velocidad de renderizado en dispositivos Android 8.0
-\n
-\n • Soporte para la edición de objetos poligonales (no servicios)
+\n • Medir distancia: puedes añadir el botón de «Medir distancia» a las acciones en el menú contextual
 \n</string>
     <string name="ask_for_location_permission">Para continuar, debe permitir la ubicación a OsmAnd.</string>
     <string name="rendering_value_black_name">Negro</string>

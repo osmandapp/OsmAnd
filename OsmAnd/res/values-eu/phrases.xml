@@ -3866,4 +3866,8 @@
 
 
 <string name="poi_car_pooling">Kotxea partekatzeko tokia</string>
-	</resources>
+	<string name="poi_ruins">Hondakinak</string>
+
+	<string name="poi_license_classes">Lizentzia klaseak</string>
+
+</resources>

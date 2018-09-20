@@ -3144,12 +3144,14 @@ Area honi dagokio: %1$s x %2$s</string>
 \n</string>
     <string name="commiting_way">Bidea betetzen…</string>
     <string name="test_voice_desrc">Sakatu botoi bat eta entzun dagokion ahots-deskripzioa falta diren edo gaizki dauden deskripzioan antzemateko.</string>
-<string name="release_3_2_pre">• Karaktere mapa ez latinoetan gertatzen zen kraskatzea konponduta
+<string name="release_3_2_pre">• Karaktere mapa ez latinoetan gertatzen zen kraskatzea konponduta 
+\n 
+\n • Android 8.0 gailuetan gertatzen ziren errendatze abiadura arazoak konponduta 
+\n 
+\n • Poligono objektuak editatzeko euskarria (Ez-zerbitzua) 
 \n
-\n • Android 8.0 gailuetan gertatzen ziren errendatze abiadura arazoak konponduta
-\n
-\n • Poligono objektuak editatzeko euskarria (Ez-zerbitzua)
-\n
+\n• Distantziaren neurketa: Neurketa botoia gehitu da laster-menuko ekintzetara
 \n</string>
     <string name="ask_for_location_permission">Eman OsmAnd-i kokalekua eskuratzeko baimena jarraitzeko.</string>
+    <string name="rendering_value_black_name">Beltza</string>
     </resources>
