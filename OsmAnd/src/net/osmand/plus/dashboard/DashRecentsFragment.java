@@ -1,6 +1,5 @@
 package net.osmand.plus.dashboard;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -11,16 +10,14 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import net.osmand.data.LatLon;
-import net.osmand.plus.OsmAndAppCustomization;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.activities.search.SearchHistoryFragment;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.helpers.SearchHistoryHelper;
-import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
+import net.osmand.plus.helpers.SearchHistoryHelper.PointHistoryEntry;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +30,7 @@ public class DashRecentsFragment extends DashLocationFragment {
 	public static final int TITLE_ID = R.string.shared_string_history;
 
 	private List<ImageView> arrows = new ArrayList<ImageView>();
-	List<HistoryEntry> points = new ArrayList<HistoryEntry>();
+	List<PointHistoryEntry> points = new ArrayList<>();
 	private static final String ROW_NUMBER_TAG = TAG + "_row_number";
 	private static final DashFragmentData.ShouldShowFunction SHOULD_SHOW_FUNCTION =
 			new DashboardOnMap.DefaultShouldShow() {
@@ -69,7 +66,7 @@ public class DashRecentsFragment extends DashLocationFragment {
 		View mainView = getView();
 		SearchHistoryHelper helper = SearchHistoryHelper.getInstance((OsmandApplication) getActivity()
 				.getApplicationContext());
-		points = helper.getHistoryEntries();
+		points = helper.getHistoryPoints();
 		arrows.clear();
 		if (points.size() == 0) {
 			(mainView.findViewById(R.id.main_fav)).setVisibility(View.GONE);
@@ -83,31 +80,31 @@ public class DashRecentsFragment extends DashLocationFragment {
 		DashboardOnMap.handleNumberOfRows(points, getMyApplication().getSettings(), ROW_NUMBER_TAG);
 		LatLon loc = getDefaultLocation();
 		List<DashLocationView> distances = new ArrayList<DashLocationFragment.DashLocationView>();
-		for (final HistoryEntry historyEntry : points) {
+		for (final PointHistoryEntry point : points) {
 			LayoutInflater inflater = getActivity().getLayoutInflater();
 			View view = inflater.inflate(R.layout.search_history_list_item, null, false);
-			SearchHistoryFragment.udpateHistoryItem(historyEntry, view, loc, getActivity(), getMyApplication());
+			SearchHistoryFragment.udpateHistoryItem(point, view, loc, getActivity(), getMyApplication());
 			view.findViewById(R.id.divider).setVisibility(View.VISIBLE);
 			view.findViewById(R.id.navigate_to).setVisibility(View.VISIBLE);
 			((ImageView) view.findViewById(R.id.navigate_to)).setImageDrawable(getMyApplication().getUIUtilities().getThemedIcon(R.drawable.ic_action_gdirections_dark));
 			view.findViewById(R.id.navigate_to).setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
-					DirectionsDialogs.directionsToDialogAndLaunchMap(getActivity(), historyEntry.getLat(),
-							historyEntry.getLon(), historyEntry.getName());
+					DirectionsDialogs.directionsToDialogAndLaunchMap(getActivity(), point.getLat(),
+							point.getLon(), point.getName());
 				}
 			});
 			view.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
-					getMyApplication().getSettings().setMapLocationToShow(historyEntry.getLat(), historyEntry.getLon(),
-							15, historyEntry.getName(), true, historyEntry); //$NON-NLS-1$
+					getMyApplication().getSettings().setMapLocationToShow(point.getLat(), point.getLon(),
+							15, point.getName(), true, point); //$NON-NLS-1$
 					MapActivity.launchMapActivityMoveToTop(getActivity());
 				}
 			});
 			DashLocationView dv = new DashLocationView((ImageView) view.findViewById(R.id.direction),
-					(TextView) view.findViewById(R.id.distance), new LatLon(historyEntry.getLat(),
-							historyEntry.getLon()));
+					(TextView) view.findViewById(R.id.distance), new LatLon(point.getLat(),
+							point.getLon()));
 			distances.add(dv);
 			recents.addView(view);
 		}

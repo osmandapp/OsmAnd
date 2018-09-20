@@ -7,43 +7,43 @@ import net.osmand.data.PointDescription;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.search.SearchHistoryFragment;
-import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
+import net.osmand.plus.helpers.SearchHistoryHelper.PointHistoryEntry;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.util.Algorithms;
 
 public class HistoryMenuController extends MenuController {
 
-	private HistoryEntry entry;
+	private PointHistoryEntry point;
 	private boolean hasTypeInDescription;
 
-	public HistoryMenuController(@NonNull MapActivity mapActivity, @NonNull PointDescription pointDescription, final @NonNull HistoryEntry entry) {
+	public HistoryMenuController(@NonNull MapActivity mapActivity, @NonNull PointDescription pointDescription, final @NonNull PointHistoryEntry point) {
 		super(new MenuBuilder(mapActivity), pointDescription, mapActivity);
-		this.entry = entry;
+		this.point = point;
 		builder.setShowNearestWiki(true);
 		initData();
 	}
 
 	private void initData() {
-		hasTypeInDescription = !Algorithms.isEmpty(entry.getName().getTypeName());
+		hasTypeInDescription = !Algorithms.isEmpty(point.getName().getTypeName());
 	}
 
 	@Override
 	protected void setObject(Object object) {
-		if (object instanceof HistoryEntry) {
-			this.entry = (HistoryEntry) object;
+		if (object instanceof PointHistoryEntry) {
+			this.point = (PointHistoryEntry) object;
 			initData();
 		}
 	}
 
 	@Override
 	protected Object getObject() {
-		return entry;
+		return point;
 	}
 
 	@Override
 	public boolean displayStreetNameInTitle() {
-		return entry.getName().isLocation();
+		return point.getName().isLocation();
 	}
 
 	@Override
@@ -53,7 +53,7 @@ public class HistoryMenuController extends MenuController {
 
 	@Override
 	public Drawable getRightIcon() {
-		return getIcon(SearchHistoryFragment.getItemIcon(entry.getName()));
+		return getIcon(SearchHistoryFragment.getItemIcon(point.getName()));
 	}
 
 	@Override
@@ -69,7 +69,7 @@ public class HistoryMenuController extends MenuController {
 	@Override
 	public String getTypeStr() {
 		if (hasTypeInDescription) {
-			return entry.getName().getTypeName();
+			return point.getName().getTypeName();
 		} else {
 			return "";
 		}
@@ -88,6 +88,6 @@ public class HistoryMenuController extends MenuController {
 
 	@Override
 	public boolean needStreetName() {
-		return !entry.getName().isAddress();
+		return !point.getName().isAddress();
 	}
 }

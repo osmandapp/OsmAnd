@@ -1745,7 +1745,7 @@ public class OsmandSettings {
 		edit.commit();
 		objectToShow = toShow;
 		if (addToHistory) {
-			SearchHistoryHelper.getInstance(ctx).addNewItemToHistory(latitude, longitude, pointDescription);
+			SearchHistoryHelper.getInstance(ctx).addPointToHistory(latitude, longitude, pointDescription);
 		}
 	}
 
@@ -1972,7 +1972,7 @@ public class OsmandSettings {
 			ps.add(index, new LatLon(latitude, longitude));
 			ds.add(index, PointDescription.serializeToString(historyDescription));
 			if (historyDescription != null && !historyDescription.isSearchingAddress(ctx)) {
-				SearchHistoryHelper.getInstance(ctx).addNewItemToHistory(latitude, longitude, historyDescription);
+				SearchHistoryHelper.getInstance(ctx).addPointToHistory(latitude, longitude, historyDescription);
 			}
 			return savePoints(ps, ds);
 		}
@@ -1984,7 +1984,7 @@ public class OsmandSettings {
 			if (i != -1) {
 				ds.set(i, PointDescription.serializeToString(historyDescription));
 				if (historyDescription != null && !historyDescription.isSearchingAddress(ctx)) {
-					SearchHistoryHelper.getInstance(ctx).addNewItemToHistory(latitude, longitude, historyDescription);
+					SearchHistoryHelper.getInstance(ctx).addPointToHistory(latitude, longitude, historyDescription);
 				}
 				return savePoints(ps, ds);
 			} else {
@@ -2095,7 +2095,7 @@ public class OsmandSettings {
 		settingsAPI.edit(globalPreferences).putString(POINT_NAVIGATE_DESCRIPTION, PointDescription.serializeToString(p)).commit();
 		if (add) {
 			if (p != null && !p.isSearchingAddress(ctx)) {
-				SearchHistoryHelper.getInstance(ctx).addNewItemToHistory(latitude, longitude, p);
+				SearchHistoryHelper.getInstance(ctx).addPointToHistory(latitude, longitude, p);
 			}
 		}
 		backupTargetPoints();

@@ -19,6 +19,7 @@ import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.SearchHistoryHelper;
+import net.osmand.plus.helpers.SearchHistoryHelper.PointHistoryEntry;
 import net.osmand.plus.poi.NominatimPoiFilter;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.poi.PoiUIFilter;
@@ -396,9 +397,9 @@ public class QuickSearchHelper implements ResourceListener {
 		@Override
 		public boolean search(SearchPhrase phrase, SearchResultMatcher resultMatcher) throws IOException {
 			SearchHistoryHelper helper = SearchHistoryHelper.getInstance(app);
-			List<SearchHistoryHelper.HistoryEntry> points = helper.getHistoryEntries();
+			List<PointHistoryEntry> points = helper.getHistoryPoints();
 			int p = 0;
-			for (SearchHistoryHelper.HistoryEntry point : points) {
+			for (PointHistoryEntry point : points) {
 				SearchResult sr = new SearchResult(phrase);
 				sr.localeName = point.getName().getName();
 				sr.object = point;

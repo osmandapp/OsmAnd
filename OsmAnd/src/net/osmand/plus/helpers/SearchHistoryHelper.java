@@ -25,10 +25,10 @@ public class SearchHistoryHelper {
 	private static SearchHistoryHelper instance = null;
 
 	private OsmandApplication context;
-	private List<HistoryEntry> loadedEntries = null;
-	private Map<PointDescription, HistoryEntry> mp = new HashMap<>();
+	private List<PointHistoryEntry> loadedPoints = null;
+	private Map<PointDescription, PointHistoryEntry> mp = new HashMap<>();
 
-	public SearchHistoryHelper(OsmandApplication context) {
+	private SearchHistoryHelper(OsmandApplication context) {
 		this.context = context;
 	}
 
@@ -39,78 +39,99 @@ public class SearchHistoryHelper {
 		return instance;
 	}
 
-	public void addNewItemToHistory(double latitude, double longitude, PointDescription pointDescription) {
-		addNewItemToHistory(new HistoryEntry(latitude, longitude, pointDescription));
+	public void addPointToHistory(double latitude, double longitude, PointDescription pointDescription) {
+		addPointToHistory(new PointHistoryEntry(latitude, longitude, pointDescription));
 	}
 
-	public List<HistoryEntry> getHistoryEntries() {
-		if (loadedEntries == null) {
+	public List<PointHistoryEntry> getHistoryPoints() {
+		if (loadedPoints == null) {
 			checkLoadedEntries();
 		}
-		return new ArrayList<>(loadedEntries);
+		return new ArrayList<>(loadedPoints);
 	}
 
-	public void remove(HistoryEntry model) {
+	public void remove(PointHistoryEntry point) {
 		HistoryItemDBHelper helper = checkLoadedEntries();
-		if (helper.remove(model)) {
-			loadedEntries.remove(model);
-			mp.remove(model.getName());
+		if (helper.remove(point)) {
+			loadedPoints.remove(point);
+			mp.remove(point.getName());
 		}
 	}
 
 	public void removeAll() {
 		HistoryItemDBHelper helper = checkLoadedEntries();
 		if (helper.removeAll()) {
-			loadedEntries.clear();
+			loadedPoints.clear();
 			mp.clear();
 		}
 	}
 
 	private HistoryItemDBHelper checkLoadedEntries() {
 		HistoryItemDBHelper helper = new HistoryItemDBHelper();
-		if (loadedEntries == null) {
-			loadedEntries = helper.getEntries();
-			Collections.sort(loadedEntries, new HistoryEntryComparator());
-			for (HistoryEntry he : loadedEntries) {
+		if (loadedPoints == null) {
+			loadedPoints = helper.getEntries();
+			Collections.sort(loadedPoints, new HistoryEntryComparator());
+			for (PointHistoryEntry he : loadedPoints) {
 				mp.put(he.getName(), he);
 			}
 		}
 		return helper;
 	}
 
-	private void addNewItemToHistory(HistoryEntry model) {
+	private void addPointToHistory(PointHistoryEntry point) {
 		HistoryItemDBHelper helper = checkLoadedEntries();
-		if (mp.containsKey(model.getName())) {
-			model = mp.get(model.getName());
-			model.markAsAccessed(System.currentTimeMillis());
-			helper.update(model);
+		if (mp.containsKey(point.getName())) {
+			point = mp.get(point.getName());
+			point.markAsAccessed(System.currentTimeMillis());
+			helper.update(point);
 		} else {
-			loadedEntries.add(model);
-			mp.put(model.getName(), model);
-			model.markAsAccessed(System.currentTimeMillis());
-			helper.add(model);
+			loadedPoints.add(point);
+			mp.put(point.getName(), point);
+			point.markAsAccessed(System.currentTimeMillis());
+			helper.add(point);
 		}
-		Collections.sort(loadedEntries, new HistoryEntryComparator());
-		if (loadedEntries.size() > HISTORY_LIMIT) {
-			if (helper.remove(loadedEntries.get(loadedEntries.size() - 1))) {
-				loadedEntries.remove(loadedEntries.size() - 1);
+		Collections.sort(loadedPoints, new HistoryEntryComparator());
+		if (loadedPoints.size() > HISTORY_LIMIT) {
+			if (helper.remove(loadedPoints.get(loadedPoints.size() - 1))) {
+				loadedPoints.remove(loadedPoints.size() - 1);
 			}
 		}
 	}
 
-	public static class HistoryEntry {
-		double lat;
-		double lon;
-		PointDescription name;
-		private long lastAccessedTime;
-		private int[] intervals = new int[0];
-		private double[] intervalValues = new double[0];
+	public static class PointHistoryEntry extends HistoryEntry {
 
-		HistoryEntry(double lat, double lon, PointDescription name) {
+		private double lat;
+		private double lon;
+		private PointDescription name;
+
+		PointHistoryEntry(double lat, double lon, PointDescription name) {
 			this.lat = lat;
 			this.lon = lon;
 			this.name = name;
 		}
+
+		public double getLat() {
+			return lat;
+		}
+
+		public double getLon() {
+			return lon;
+		}
+
+		public PointDescription getName() {
+			return name;
+		}
+
+		public String getSerializedName() {
+			return PointDescription.serializeToString(name);
+		}
+	}
+
+	private static class HistoryEntry {
+
+		protected long lastAccessedTime;
+		private int[] intervals = new int[0];
+		private double[] intervalValues = new double[0];
 
 		private double rankFunction(double cf, double timeDiff) {
 			if (timeDiff <= 0) {
@@ -137,22 +158,6 @@ public class SearchHistoryHelper {
 			return rnk;
 		}
 
-		public PointDescription getName() {
-			return name;
-		}
-
-		public String getSerializedName() {
-			return PointDescription.serializeToString(name);
-		}
-
-		public double getLat() {
-			return lat;
-		}
-
-		public double getLon() {
-			return lon;
-		}
-
 		public void markAsAccessed(long time) {
 			int[] nintervals = new int[DEF_INTERVALS_MIN.length];
 			double[] nintervalValues = new double[DEF_INTERVALS_MIN.length];
@@ -165,7 +170,7 @@ public class SearchHistoryHelper {
 			this.lastAccessedTime = time;
 		}
 
-		double getUsageLastTime(long time, int days, int hours, int minutes) {
+		private double getUsageLastTime(long time, int days, int hours, int minutes) {
 			long mins = (minutes + (hours + 24 * days) * 60);
 			long timeInPast = time - mins * 60 * 1000;
 			if (this.lastAccessedTime <= timeInPast) {
@@ -206,10 +211,6 @@ public class SearchHistoryHelper {
 			}
 		}
 
-		public long getLastAccessTime() {
-			return lastAccessedTime;
-		}
-
 		public String getIntervalsValues() {
 			StringBuilder s = new StringBuilder();
 			for (int i = 0; i < intervalValues.length; i++) {
@@ -231,11 +232,6 @@ public class SearchHistoryHelper {
 			}
 			return s.toString();
 		}
-
-		public void setLastAccessTime(long time) {
-			this.lastAccessedTime = time;
-		}
-
 	}
 
 	private static class HistoryEntryComparator implements Comparator<HistoryEntry> {
@@ -295,13 +291,13 @@ public class SearchHistoryHelper {
 		public void onUpgrade(SQLiteConnection db, int oldVersion, int newVersion) {
 			if (newVersion == 2) {
 				db.execSQL(HISTORY_TABLE_CREATE);
-				for (HistoryEntry he : getLegacyEntries(db)) {
+				for (PointHistoryEntry he : getLegacyEntries(db)) {
 					insert(he, db);
 				}
 			}
 		}
 
-		public boolean remove(HistoryEntry e) {
+		public boolean remove(PointHistoryEntry e) {
 			SQLiteConnection db = openConnection(false);
 			if (db != null) {
 				try {
@@ -332,7 +328,7 @@ public class SearchHistoryHelper {
 			return false;
 		}
 
-		public boolean update(HistoryEntry e) {
+		public boolean update(PointHistoryEntry e) {
 			SQLiteConnection db = openConnection(false);
 			if (db != null) {
 				try {
@@ -341,7 +337,7 @@ public class SearchHistoryHelper {
 									", " + HISTORY_COL_FREQ_INTERVALS + " = ? " +
 									", " + HISTORY_COL_FREQ_VALUES + "= ? WHERE " +
 									HISTORY_COL_NAME + " = ?",
-							new Object[]{e.getLastAccessTime(), e.getIntervals(), e.getIntervalsValues(),
+							new Object[]{e.lastAccessedTime, e.getIntervals(), e.getIntervalsValues(),
 									e.getSerializedName()});
 				} finally {
 					db.close();
@@ -351,7 +347,7 @@ public class SearchHistoryHelper {
 			return false;
 		}
 
-		public boolean add(HistoryEntry e) {
+		public boolean add(PointHistoryEntry e) {
 			SQLiteConnection db = openConnection(false);
 			if (db != null) {
 				try {
@@ -364,15 +360,15 @@ public class SearchHistoryHelper {
 			return false;
 		}
 
-		private void insert(HistoryEntry e, SQLiteConnection db) {
+		private void insert(PointHistoryEntry e, SQLiteConnection db) {
 			db.execSQL(
 					"INSERT INTO " + HISTORY_TABLE_NAME + " VALUES (?, ?, ?, ?, ?, ?)",
-					new Object[]{e.getSerializedName(), e.getLastAccessTime(),
+					new Object[]{e.getSerializedName(), e.lastAccessedTime,
 							e.getIntervals(), e.getIntervalsValues(), e.getLat(), e.getLon()});
 		}
 
-		List<HistoryEntry> getLegacyEntries(SQLiteConnection db) {
-			List<HistoryEntry> entries = new ArrayList<>();
+		List<PointHistoryEntry> getLegacyEntries(SQLiteConnection db) {
+			List<PointHistoryEntry> entries = new ArrayList<>();
 			if (db != null) {
 				// LEGACY QUERY !!
 				SQLiteCursor query = db.rawQuery(
@@ -398,7 +394,7 @@ public class SearchHistoryHelper {
 						if (name.contains(":")) {
 							name = name.substring(name.indexOf(':') + 1);
 						}
-						HistoryEntry e = new HistoryEntry(query.getDouble(1), query.getDouble(2), new PointDescription(
+						PointHistoryEntry e = new PointHistoryEntry(query.getDouble(1), query.getDouble(2), new PointDescription(
 								type, name));
 						e.markAsAccessed(query.getLong(3));
 						entries.add(e);
@@ -411,8 +407,8 @@ public class SearchHistoryHelper {
 			return entries;
 		}
 
-		public List<HistoryEntry> getEntries() {
-			List<HistoryEntry> entries = new ArrayList<>();
+		public List<PointHistoryEntry> getEntries() {
+			List<PointHistoryEntry> entries = new ArrayList<>();
 			SQLiteConnection db = openConnection(true);
 			if (db != null) {
 				try {
@@ -420,16 +416,15 @@ public class SearchHistoryHelper {
 							"SELECT " + HISTORY_COL_NAME + ", " + HISTORY_COL_LAT + "," + HISTORY_COL_LON + ", " +
 									HISTORY_COL_TIME + ", " + HISTORY_COL_FREQ_INTERVALS + ", " + HISTORY_COL_FREQ_VALUES +
 									" FROM " + HISTORY_TABLE_NAME, null);
-					Map<PointDescription, HistoryEntry> st = new HashMap<>();
+					Map<PointDescription, PointHistoryEntry> st = new HashMap<>();
 					if (query != null && query.moveToFirst()) {
 						boolean reinsert = false;
 						do {
 							String name = query.getString(0);
 							PointDescription p = PointDescription.deserializeFromString(name, new LatLon(query.getDouble(1), query.getDouble(2)));
-							HistoryEntry e = new HistoryEntry(query.getDouble(1), query.getDouble(2),
+							PointHistoryEntry e = new PointHistoryEntry(query.getDouble(1), query.getDouble(2),
 									p);
-							long time = query.getLong(3);
-							e.setLastAccessTime(time);
+							e.lastAccessedTime = query.getLong(3);
 							e.setFrequency(query.getString(4), query.getString(5));
 							if (st.containsKey(p)) {
 								reinsert = true;
@@ -442,7 +437,7 @@ public class SearchHistoryHelper {
 							db.execSQL("DELETE FROM " + HISTORY_TABLE_NAME);
 							entries.clear();
 							entries.addAll(st.values());
-							for (HistoryEntry he : entries) {
+							for (PointHistoryEntry he : entries) {
 								insert(he, db);
 							}
 

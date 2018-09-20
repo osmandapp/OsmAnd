@@ -25,7 +25,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.search.SearchHistoryFragment;
 import net.osmand.plus.base.FavoriteImageDrawable;
-import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
+import net.osmand.plus.helpers.SearchHistoryHelper.PointHistoryEntry;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.search.core.CustomSearchPoiFilter;
 import net.osmand.search.core.SearchResult;
@@ -96,8 +96,8 @@ public class QuickSearchListItem {
 				}
 				break;
 			case RECENT_OBJ:
-				HistoryEntry historyEntry = (HistoryEntry) searchResult.object;
-				PointDescription pd = historyEntry.getName();
+				PointHistoryEntry historyPoint = (PointHistoryEntry) searchResult.object;
+				PointDescription pd = historyPoint.getName();
 				return pd.getSimpleName(app, false);
 			case LOCATION:
 				LatLon latLon = searchResult.location;
@@ -222,7 +222,7 @@ public class QuickSearchListItem {
 				System.out.println(binaryMapIndexReader.getFile().getAbsolutePath() + " " + binaryMapIndexReader.getCountryName());
 				break;
 			case RECENT_OBJ:
-				HistoryEntry entry = (HistoryEntry) searchResult.object;
+				PointHistoryEntry entry = (PointHistoryEntry) searchResult.object;
 				boolean hasTypeInDescription = !Algorithms.isEmpty(entry.getName().getTypeName());
 				if (hasTypeInDescription) {
 					return entry.getName().getTypeName();
@@ -258,7 +258,7 @@ public class QuickSearchListItem {
 			case FAVORITE_GROUP:
 				return app.getUIUtilities().getThemedIcon(R.drawable.ic_small_group);
 			case RECENT_OBJ:
-				HistoryEntry historyEntry = (HistoryEntry) searchResult.object;
+				PointHistoryEntry historyEntry = (PointHistoryEntry) searchResult.object;
 				String typeName = historyEntry.getName().getTypeName();
 				if (typeName != null && !typeName.isEmpty()) {
 					return app.getUIUtilities().getThemedIcon(R.drawable.ic_small_group);
@@ -363,7 +363,7 @@ public class QuickSearchListItem {
 			case REGION:
 				return getIcon(app, R.drawable.ic_world_globe_dark);
 			case RECENT_OBJ:
-				HistoryEntry entry = (HistoryEntry) searchResult.object;
+				PointHistoryEntry entry = (PointHistoryEntry) searchResult.object;
 				if (entry.getName() != null && !Algorithms.isEmpty(entry.getName().getIconName())) {
 					String iconName = entry.getName().getIconName();
 					if (RenderingIcons.containsBigIcon(iconName)) {
