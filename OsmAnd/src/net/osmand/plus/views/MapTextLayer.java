@@ -22,6 +22,7 @@ public class MapTextLayer extends OsmandMapLayer {
 
 	private static final int TEXT_WRAP = 15;
 	private static final int TEXT_LINES = 3;
+	private static final int TEXT_SIZE = 13;
 
 	private Map<OsmandMapLayer, Collection<?>> textObjects = new LinkedHashMap<>();
 	private Paint paintTextIcon;
@@ -62,6 +63,7 @@ public class MapTextLayer extends OsmandMapLayer {
 				continue;
 			}
 
+			updateTextSize();
 			paintTextIcon.setFakeBoldText(provider.isFakeBoldText());
 			for (Object o : textObjects.get(l)) {
 				LatLon loc = provider.getTextLocation(o);
@@ -158,7 +160,7 @@ public class MapTextLayer extends OsmandMapLayer {
 	public void initLayer(OsmandMapTileView v) {
 		this.view = v;
 		paintTextIcon = new Paint();
-		paintTextIcon.setTextSize(13 * v.getDensity());
+		updateTextSize();
 		paintTextIcon.setTextAlign(Align.CENTER);
 		paintTextIcon.setAntiAlias(true);
 		Map<OsmandMapLayer, Collection<?>> textObjectsLoc = new TreeMap<>(new Comparator<OsmandMapLayer>() {
@@ -187,5 +189,13 @@ public class MapTextLayer extends OsmandMapLayer {
 	@Override
 	public boolean drawInScreenPixels() {
 		return true;
+	}
+
+	private void updateTextSize() {
+		float scale = view.getApplication().getSettings().TEXT_SCALE.get();
+		float textSize = scale * TEXT_SIZE * view.getDensity();
+		if (paintTextIcon.getTextSize() != textSize) {
+			paintTextIcon.setTextSize(textSize);
+		}
 	}
 }
