@@ -186,7 +186,7 @@ public class SearchHistoryFragment extends OsmAndListFragment implements SearchA
 	}
 
 	private void selectModel(final PointHistoryEntry point) {
-		PointDescription name = point.getName();
+		PointDescription name = point.getPointDescription();
 		OsmandSettings settings = ((OsmandApplication) getActivity().getApplication()).getSettings();
 
 		LatLon location = new LatLon(point.getLat(), point.getLon());
@@ -269,12 +269,12 @@ public class SearchHistoryFragment extends OsmAndListFragment implements SearchA
 			distance = OsmAndFormatter.getFormattedDistance(dist, (OsmandApplication) activity.getApplication()) + "  ";
 		}
 		distanceText.setText(distance);
-		PointDescription pd = point.getName();
+		PointDescription pd = point.getPointDescription();
 		nameText.setText(pd.getSimpleName(activity, false), BufferType.SPANNABLE);
 		ImageView icon = ((ImageView) row.findViewById(R.id.icon));
-		icon.setImageDrawable(ic.getThemedIcon(getItemIcon(point.getName())));
+		icon.setImageDrawable(ic.getThemedIcon(getItemIcon(pd)));
 
-		String typeName = point.getName().getTypeName();
+		String typeName = pd.getTypeName();
 		if (typeName != null && !typeName.isEmpty()) {
 			ImageView group = (ImageView) row.findViewById(R.id.type_name_icon);
 			group.setVisibility(View.VISIBLE);

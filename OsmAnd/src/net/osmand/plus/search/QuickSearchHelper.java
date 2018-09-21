@@ -401,7 +401,7 @@ public class QuickSearchHelper implements ResourceListener {
 			int p = 0;
 			for (PointHistoryEntry point : points) {
 				SearchResult sr = new SearchResult(phrase);
-				sr.localeName = point.getName().getName();
+				sr.localeName = point.getPointDescription().getName();
 				sr.object = point;
 				sr.priority = SEARCH_HISTORY_OBJECT_PRIORITY + (p++);
 				sr.objectType = ObjectType.RECENT_OBJ;

@@ -210,9 +210,9 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 					break;
 				case RECENT_OBJ:
 					PointHistoryEntry point = (PointHistoryEntry) object;
-					pointDescription = point.getName();
+					pointDescription = point.getPointDescription();
 					if (pointDescription.isPoi()) {
-						Amenity amenity = app.getSearchUICore().findAmenity(point.getName().getName(), point.getLat(), point.getLon(), lang, transliterate);
+						Amenity amenity = app.getSearchUICore().findAmenity(pointDescription.getName(), point.getLat(), point.getLon(), lang, transliterate);
 						if (amenity != null) {
 							object = amenity;
 							pointDescription = new PointDescription(PointDescription.POINT_TYPE_POI,

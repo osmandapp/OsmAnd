@@ -25,7 +25,7 @@ public class HistoryMenuController extends MenuController {
 	}
 
 	private void initData() {
-		hasTypeInDescription = !Algorithms.isEmpty(point.getName().getTypeName());
+		hasTypeInDescription = !Algorithms.isEmpty(point.getPointDescription().getTypeName());
 	}
 
 	@Override
@@ -43,7 +43,7 @@ public class HistoryMenuController extends MenuController {
 
 	@Override
 	public boolean displayStreetNameInTitle() {
-		return point.getName().isLocation();
+		return point.getPointDescription().isLocation();
 	}
 
 	@Override
@@ -53,7 +53,7 @@ public class HistoryMenuController extends MenuController {
 
 	@Override
 	public Drawable getRightIcon() {
-		return getIcon(SearchHistoryFragment.getItemIcon(point.getName()));
+		return getIcon(SearchHistoryFragment.getItemIcon(point.getPointDescription()));
 	}
 
 	@Override
@@ -69,7 +69,7 @@ public class HistoryMenuController extends MenuController {
 	@Override
 	public String getTypeStr() {
 		if (hasTypeInDescription) {
-			return point.getName().getTypeName();
+			return point.getPointDescription().getTypeName();
 		} else {
 			return "";
 		}
@@ -88,6 +88,6 @@ public class HistoryMenuController extends MenuController {
 
 	@Override
 	public boolean needStreetName() {
-		return !point.getName().isAddress();
+		return !point.getPointDescription().isAddress();
 	}
 }

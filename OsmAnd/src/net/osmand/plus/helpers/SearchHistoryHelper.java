@@ -95,12 +95,12 @@ public class SearchHistoryHelper {
 
 		private double lat;
 		private double lon;
-		private PointDescription name;
+		private PointDescription pointDescription;
 
-		PointHistoryEntry(double lat, double lon, PointDescription name) {
+		PointHistoryEntry(double lat, double lon, PointDescription pointDescription) {
 			this.lat = lat;
 			this.lon = lon;
-			this.name = name;
+			this.pointDescription = pointDescription;
 		}
 
 		public double getLat() {
@@ -111,12 +111,12 @@ public class SearchHistoryHelper {
 			return lon;
 		}
 
-		public PointDescription getName() {
-			return name;
+		public PointDescription getPointDescription() {
+			return pointDescription;
 		}
 
 		public String getSerializedName() {
-			return PointDescription.serializeToString(name);
+			return PointDescription.serializeToString(pointDescription);
 		}
 
 		@Override
@@ -131,7 +131,7 @@ public class SearchHistoryHelper {
 			PointHistoryEntry that = (PointHistoryEntry) o;
 			if (Double.compare(that.lat, lat) != 0) return false;
 			if (Double.compare(that.lon, lon) != 0) return false;
-			return name != null ? name.equals(that.name) : that.name == null;
+			return pointDescription != null ? pointDescription.equals(that.pointDescription) : that.pointDescription == null;
 		}
 
 		@Override
@@ -142,7 +142,7 @@ public class SearchHistoryHelper {
 			result = (int) (temp ^ (temp >>> 32));
 			temp = Double.doubleToLongBits(lon);
 			result = 31 * result + (int) (temp ^ (temp >>> 32));
-			result = 31 * result + (name != null ? name.hashCode() : 0);
+			result = 31 * result + (pointDescription != null ? pointDescription.hashCode() : 0);
 			return result;
 		}
 	}

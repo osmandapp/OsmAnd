@@ -2099,10 +2099,11 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 						WptPt pt = new WptPt();
 						pt.lat = h.getLat();
 						pt.lon = h.getLon();
-						pt.name = h.getName().getName();
-						boolean hasTypeInDescription = !Algorithms.isEmpty(h.getName().getTypeName());
-						if (hasTypeInDescription) {
-							pt.desc = h.getName().getTypeName();
+						PointDescription pd = h.getPointDescription();
+						pt.name = pd.getName();
+						String typeName = pd.getTypeName();
+						if (!Algorithms.isEmpty(typeName)) {
+							pt.desc = typeName;
 						}
 						gpx.addPoint(pt);
 					}

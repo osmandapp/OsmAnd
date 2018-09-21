@@ -91,14 +91,14 @@ public class DashRecentsFragment extends DashLocationFragment {
 				@Override
 				public void onClick(View view) {
 					DirectionsDialogs.directionsToDialogAndLaunchMap(getActivity(), point.getLat(),
-							point.getLon(), point.getName());
+							point.getLon(), point.getPointDescription());
 				}
 			});
 			view.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
 					getMyApplication().getSettings().setMapLocationToShow(point.getLat(), point.getLon(),
-							15, point.getName(), true, point); //$NON-NLS-1$
+							15, point.getPointDescription(), true, point); //$NON-NLS-1$
 					MapActivity.launchMapActivityMoveToTop(getActivity());
 				}
 			});
