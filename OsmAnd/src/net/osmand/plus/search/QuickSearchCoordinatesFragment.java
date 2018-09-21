@@ -20,6 +20,7 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 
@@ -27,7 +28,19 @@ import com.google.openlocationcode.OpenLocationCode;
 import com.jwetherell.openmap.common.LatLonPoint;
 import com.jwetherell.openmap.common.UTMPoint;
 
+import java.lang.ref.WeakReference;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
+import net.osmand.Collator;
+import net.osmand.CollatorStringMatcher;
 import net.osmand.LocationConvert;
+import net.osmand.OsmAndCollator;
+import net.osmand.ResultMatcher;
+import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmAndFormatter;
@@ -39,6 +52,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.UiUtilities.UpdateLocationViewCache;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.search.core.SearchPhrase;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -75,6 +89,7 @@ public class QuickSearchCoordinatesFragment extends DialogFragment implements Os
 	private EditText olcEdit;
 	private TextView olcInfo;
 	private EditText formatEdit;
+	private ProgressBar searchProgressBar;
 	private int currentFormat = PointDescription.FORMAT_DEGREES;
 
 	private net.osmand.Location myLocation = null;
@@ -82,6 +97,8 @@ public class QuickSearchCoordinatesFragment extends DialogFragment implements Os
 	private boolean paused;
 	private LatLon currentLatLon;
 	private UpdateLocationViewCache updateLocationViewCache;
+
+	private ProcessIndexItemsTask parseOlcCodeTask = null;
 
 	public QuickSearchCoordinatesFragment() {
 	}
@@ -130,6 +147,7 @@ public class QuickSearchCoordinatesFragment extends DialogFragment implements Os
 		olcEdit = ((EditText) view.findViewById(R.id.olcEditText));
 		olcInfo = ((TextView) view.findViewById(R.id.olcInfoTextView));
 		formatEdit = ((EditText) view.findViewById(R.id.formatEditText));
+		searchProgressBar = ((ProgressBar) view.findViewById(R.id.searchProgressBar));
 
 		String defaultLat = "";
 		String defaultZone = "";
@@ -360,6 +378,7 @@ public class QuickSearchCoordinatesFragment extends DialogFragment implements Os
 	public void onPause() {
 		super.onPause();
 		paused = true;
+		stopSearchAsyncTask();
 		stopLocationUpdate();
 	}
 
@@ -566,9 +585,7 @@ public class QuickSearchCoordinatesFragment extends DialogFragment implements Os
 			} else if (currentFormat == LocationConvert.OLC_FORMAT) {
 				String olcText = olcEdit.getText().toString();
 				olcInfo.setText(provideOlcInfo(olcText));
-				// can throw exception for invalid OLC string
-				OpenLocationCode.CodeArea codeArea = OpenLocationCode.decode(olcText);
-				loc = new LatLon(codeArea.getCenterLatitude(), codeArea.getCenterLongitude());
+				loc = parseOlcCode(olcText);
 			} else {
 				double lat = LocationConvert.convert(latEdit.getText().toString(), true);
 				double lon = LocationConvert.convert(lonEdit.getText().toString(), true);
@@ -579,6 +596,179 @@ public class QuickSearchCoordinatesFragment extends DialogFragment implements Os
 			currentLatLon = null;
 		}
 		updateLocationCell(currentLatLon);
+	}
+
+	private LatLon parseOlcCode(String olcText) {
+		LatLon loc = null;
+		stopSearchAsyncTask();
+		updateProgressBar(false);
+		String olcTextCode;
+		String cityName = "";
+		String[] olcTextParts = olcText.split(" ");
+		if (olcTextParts.length > 1) {
+			olcTextCode = olcTextParts[0];
+			cityName = olcTextParts[1];
+		} else {
+			olcTextCode = olcText;
+		}
+		OpenLocationCode.CodeArea codeArea = null;
+		if (OpenLocationCode.isFullCode(olcTextCode)) {
+			codeArea = OpenLocationCode.decode(olcTextCode);
+		} else if (OpenLocationCode.isShortCode(olcTextCode)) {
+			OpenLocationCode code = new OpenLocationCode(olcTextCode);
+			LatLon mapLocation = getMapActivity().getMapLocation();
+			if (cityName.isEmpty()) {
+				if (mapLocation != null) {
+					OpenLocationCode newCode = code.recover(mapLocation.getLatitude(), mapLocation.getLongitude());
+					codeArea = code.recover(mapLocation.getLatitude(), mapLocation.getLongitude()).decode();
+					olcInfo.setText(provideOlcInfo(newCode.getCode()));
+				}
+			} else {
+				parseOlcCodeTask = new ProcessIndexItemsTask(this, cityName, olcTextCode, mapLocation);
+				parseOlcCodeTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+			}
+		}
+		if (codeArea != null) {
+			loc = new LatLon(codeArea.getCenterLatitude(), codeArea.getCenterLongitude());
+		}
+
+		return loc;
+	}
+
+	public void stopSearchAsyncTask() {
+		if (parseOlcCodeTask != null && parseOlcCodeTask.getStatus() == AsyncTask.Status.RUNNING) {
+			parseOlcCodeTask.cancel(true);
+		}
+	}
+
+	private static class ProcessIndexItemsTask extends AsyncTask<Void, Void, List<Amenity>> {
+
+		private OsmandApplication app;
+		private WeakReference<QuickSearchCoordinatesFragment> weakFragment;
+		private final List<String> citySubTypes = Arrays.asList("city", "town");
+
+		private final LatLon searchLocation;
+		private final String region;
+		private final String olcText;
+		private final int searchCityLimit = 100;
+
+
+		ProcessIndexItemsTask(QuickSearchCoordinatesFragment fragment, String region, String olcText, LatLon searchLocation) {
+			app = fragment.getMyApplication();
+			weakFragment = new WeakReference<>(fragment);
+			this.region = region;
+			this.olcText = olcText;
+			this.searchLocation = searchLocation;
+		}
+
+		@Override
+		protected void onPreExecute() {
+			super.onPreExecute();
+			QuickSearchCoordinatesFragment fragment = weakFragment.get();
+			if (fragment != null && fragment.isResumed()) {
+				fragment.updateProgressBar(true);
+			}
+		}
+
+		@Override
+		protected List<Amenity> doInBackground(Void... voids) {
+			List<Amenity> results = new ArrayList<>(searchCities(app, region));
+			sortCities(results);
+			return results;
+		}
+
+		@Override
+		protected void onPostExecute(List<Amenity> regions) {
+			if (isCancelled()) {
+				return;
+			}
+			QuickSearchCoordinatesFragment fragment = weakFragment.get();
+			if (fragment != null && fragment.isResumed()) {
+				fragment.updateProgressBar(false);
+				if (!regions.isEmpty() && OpenLocationCode.isValidCode(olcText)) {
+					LatLon latLon = regions.get(0).getLocation();
+					OpenLocationCode code = new OpenLocationCode(olcText);
+					OpenLocationCode newCode = code.recover(latLon.getLatitude(), latLon.getLongitude());
+					OpenLocationCode.CodeArea codeArea = newCode.decode();
+					fragment.updateCurrentLocation(new LatLon(codeArea.getCenterLatitude(), codeArea.getCenterLongitude()), newCode.getCode());
+				}
+			}
+		}
+
+		private List<Amenity> searchCities(final OsmandApplication app, final String text) {
+			final SearchPhrase.NameStringMatcher nm = new SearchPhrase.NameStringMatcher(
+					text, CollatorStringMatcher.StringMatcherMode.CHECK_STARTS_FROM_SPACE);
+			final String lang = app.getSettings().MAP_PREFERRED_LOCALE.get();
+			final boolean transliterate = app.getSettings().MAP_TRANSLITERATE_NAMES.get();
+			final List<Amenity> amenities = new ArrayList<>();
+			double lat = 0;
+			double lon = 0;
+			if (searchLocation != null) {
+				lat = searchLocation.getLatitude();
+				lon = searchLocation.getLongitude();
+			}
+			app.getResourceManager().searchAmenitiesByName(region, MapUtils.MAX_LATITUDE,
+					MapUtils.MIN_LONGITUDE, MapUtils.MIN_LATITUDE, MapUtils.MAX_LONGITUDE, lat, lon, new ResultMatcher<Amenity>() {
+						int count = 0;
+
+						@Override
+						public boolean publish(Amenity amenity) {
+							if (count++ > searchCityLimit) {
+								return false;
+							}
+							List<String> otherNames = amenity.getAllNames(true);
+							String localeName = amenity.getName(lang, transliterate);
+							String subType = amenity.getSubType();
+							if (!citySubTypes.contains(subType)
+									|| (!nm.matches(localeName) && !nm.matches(otherNames))) {
+								return false;
+							}
+							amenities.add(amenity);
+							return false;
+						}
+
+						@Override
+						public boolean isCancelled() {
+							return count > searchCityLimit || ProcessIndexItemsTask.this.isCancelled();
+						}
+					});
+
+			return amenities;
+		}
+
+		private void sortCities(List<Amenity> cities) {
+			final Collator collator = OsmAndCollator.primaryCollator();
+			Collections.sort(cities, new Comparator<Object>() {
+				@Override
+				public int compare(Object obj1, Object obj2) {
+					String str1;
+					String str2;
+					Amenity a = ((Amenity) obj1);
+					if ("city".equals(a.getSubType())) {
+						str1 = "!" + ((Amenity) obj1).getName();
+					} else {
+						str1 = ((Amenity) obj1).getName();
+					}
+					Amenity b = ((Amenity) obj2);
+					if ("city".equals(b.getSubType())) {
+						str2 = "!" + ((Amenity) obj2).getName();
+					} else {
+						str2 = ((Amenity) obj2).getName();
+					}
+					return collator.compare(str1, str2);
+				}
+			});
+		}
+	}
+
+	private void updateProgressBar(boolean visible) {
+		searchProgressBar.setVisibility(visible ? View.VISIBLE : View.GONE);
+	}
+
+	private void updateCurrentLocation(final LatLon latLon, String olcText) {
+		currentLatLon = latLon;
+		updateLocationCell(currentLatLon);
+		olcInfo.setText(provideOlcInfo(olcText));
 	}
 
 	private void updateLocationCell(final LatLon latLon) {

@@ -1196,7 +1196,8 @@ public class SearchCoreFactory {
 
 		private void parseLocation(SearchPhrase phrase, SearchResultMatcher resultMatcher) {
 			String lw = phrase.getUnknownSearchPhrase();
-			LatLon l = LocationParser.parseLocation(lw);
+			LatLon searchLocation = phrase.getLastTokenLocation();
+			LatLon l = LocationParser.parseLocation(lw, searchLocation);
 			if (l != null) {
 				if (phrase.isSearchTypeAllowed(ObjectType.LOCATION)) {
 					SearchResult sp = new SearchResult(phrase);

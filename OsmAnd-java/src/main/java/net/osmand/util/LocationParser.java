@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LocationParser {
-	public static LatLon parseLocation(String locPhrase) {
+	public static LatLon parseLocation(String locPhrase, LatLon searchLocation) {
 		locPhrase = locPhrase.trim();
 		// detect OLC first
 		// avoid throwing exceptions by carefully checking exceptions
@@ -18,6 +18,9 @@ public class LocationParser {
 			OpenLocationCode olc = new OpenLocationCode(locPhrase);
 			if (olc.isFull()) {
 				OpenLocationCode.CodeArea codeArea = olc.decode();
+				return new LatLon(codeArea.getCenterLatitude(), codeArea.getCenterLongitude());
+			} else if (olc.isShort() && searchLocation != null) {
+				OpenLocationCode.CodeArea codeArea = olc.recover(searchLocation.getLatitude(), searchLocation.getLongitude()).decode();
 				return new LatLon(codeArea.getCenterLatitude(), codeArea.getCenterLongitude());
 			}
 		}
