@@ -3195,11 +3195,14 @@ Repræsenterer område: %1$s x %2$s</string>
 \nGiv tilbagemelding</string>
     <string name="test_voice_desrc">Tryk på en knap og lyt til den tilsvarende talemeddelelse for at identificere manglende eller fejlagtige meddelelser.</string>
 <string name="commiting_way">Indsendelsesmåde…</string>
-    <string name="release_3_2_pre">• Løst nedbrud ved opstart, som fandt sted med ikke-latinske kort
+    <string name="release_3_2_pre">• Løst nedbrud ved opstart, som fandt sted med ikke-latinske kort 
+\n 
+\n  • Forbedret renderingshastighed på Android 8.0 enheder 
+\n 
+\n  • Understøtter redigering af polygonobjekter (ikke-facilitet)
 \n
-\n  • Forbedret renderingshastighed på Android 8.0 enheder
-\n
-\n  • Understøtter redigering af polygonobjekter (ikke-facilitet)</string>
+\n  • Afstandsmåling: tilføjet knap til afstandsmåling i handlinger i kontekstmenuen
+\n</string>
     <string name="ask_for_location_permission">Giv OsmAnd tilladelse til placering for at fortsætte.</string>
     <string name="rendering_value_black_name">Sort</string>
     </resources>

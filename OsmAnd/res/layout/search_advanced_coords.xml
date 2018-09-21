@@ -40,6 +40,15 @@
                     android:textColor="@color/color_white"
                     android:textSize="@dimen/default_list_text_size_large"/>
 
+                <ProgressBar
+                    android:id="@+id/searchProgressBar"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:indeterminate="true"
+                    android:visibility="gone" />
+
             </LinearLayout>
 
         </android.support.v7.widget.Toolbar>

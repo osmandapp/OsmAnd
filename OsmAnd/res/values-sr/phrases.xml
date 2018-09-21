@@ -2080,4 +2080,12 @@
 	<string name="poi_architecture_romanesque">Архитектура: романска</string>
 
 	<string name="poi_tunnel_waterway">Водени тунел</string>
+	<string name="poi_tunnel_car">Тунел путнички</string>
+	<string name="poi_tunnel_pedestrian">Тунел пешачки</string>
+	<string name="poi_tunnel_railway">Тунел железнички</string>
+	<string name="poi_bridge_car">Мост путнички</string>
+	<string name="poi_bridge_pedestrian">Мост пешачки</string>
+	<string name="poi_bridge_bicycle">Мост бициклистички</string>
+	<string name="poi_bridge_railway">Мост железнички</string>
+	<string name="poi_bridge_waterway">Мост воденог пута</string>
 	</resources>

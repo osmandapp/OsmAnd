@@ -520,7 +520,10 @@ public class SearchPhrase {
 			}
 		}
 		// last token or myLocationOrVisibleMap if not selected 
-		return settings.getOriginalLocation();
+		if (settings != null) {
+			return settings.getOriginalLocation();
+		}
+		return null;
 	}
 
 	public void selectFile(BinaryMapIndexReader object) {
