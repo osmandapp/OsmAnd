@@ -1,5 +1,7 @@
 package net.osmand.plus.helpers;
 
+import android.support.annotation.NonNull;
+
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
@@ -37,7 +39,7 @@ public class SearchHistoryHelper {
 		return instance;
 	}
 
-	public void addPointToHistory(double latitude, double longitude, PointDescription pointDescription) {
+	public void addPointToHistory(double latitude, double longitude, @NonNull PointDescription pointDescription) {
 		addHistoryEntry(new PointHistoryEntry(latitude, longitude, pointDescription));
 	}
 
@@ -101,9 +103,10 @@ public class SearchHistoryHelper {
 
 		private double lat;
 		private double lon;
+		@NonNull
 		private PointDescription pointDescription;
 
-		PointHistoryEntry(double lat, double lon, PointDescription pointDescription) {
+		PointHistoryEntry(double lat, double lon, @NonNull PointDescription pointDescription) {
 			this.lat = lat;
 			this.lon = lon;
 			this.pointDescription = pointDescription;
@@ -117,6 +120,7 @@ public class SearchHistoryHelper {
 			return lon;
 		}
 
+		@NonNull
 		public PointDescription getPointDescription() {
 			return pointDescription;
 		}
@@ -126,6 +130,7 @@ public class SearchHistoryHelper {
 			return POINT_TYPE;
 		}
 
+		@NonNull
 		@Override
 		protected String getName() {
 			return PointDescription.serializeToString(pointDescription);
@@ -138,7 +143,7 @@ public class SearchHistoryHelper {
 			PointHistoryEntry that = (PointHistoryEntry) o;
 			if (Double.compare(that.lat, lat) != 0) return false;
 			if (Double.compare(that.lon, lon) != 0) return false;
-			return pointDescription != null ? pointDescription.equals(that.pointDescription) : that.pointDescription == null;
+			return pointDescription.equals(that.pointDescription);
 		}
 
 		@Override
@@ -149,7 +154,7 @@ public class SearchHistoryHelper {
 			result = (int) (temp ^ (temp >>> 32));
 			temp = Double.doubleToLongBits(lon);
 			result = 31 * result + (int) (temp ^ (temp >>> 32));
-			result = 31 * result + (pointDescription != null ? pointDescription.hashCode() : 0);
+			result = 31 * result + pointDescription.hashCode();
 			return result;
 		}
 	}
@@ -164,6 +169,7 @@ public class SearchHistoryHelper {
 
 		public abstract int getType();
 
+		@NonNull
 		protected abstract String getName();
 
 		private double rankFunction(double cf, double timeDiff) {
