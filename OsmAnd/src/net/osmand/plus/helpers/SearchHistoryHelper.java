@@ -24,7 +24,7 @@ public class SearchHistoryHelper {
 	private static SearchHistoryHelper instance = null;
 
 	private OsmandApplication context;
-	private List<PointHistoryEntry> loadedPoints = null;
+	private List<HistoryEntry> loadedEntries = null;
 
 	private SearchHistoryHelper(OsmandApplication context) {
 		this.context = context;
@@ -38,55 +38,61 @@ public class SearchHistoryHelper {
 	}
 
 	public void addPointToHistory(double latitude, double longitude, PointDescription pointDescription) {
-		addPointToHistory(new PointHistoryEntry(latitude, longitude, pointDescription));
+		addHistoryEntry(new PointHistoryEntry(latitude, longitude, pointDescription));
 	}
 
 	public List<PointHistoryEntry> getHistoryPoints() {
-		if (loadedPoints == null) {
+		if (loadedEntries == null) {
 			checkLoadedEntries();
 		}
-		return new ArrayList<>(loadedPoints);
+		List<PointHistoryEntry> res = new ArrayList<>();
+		for (HistoryEntry entry : loadedEntries) {
+			if (entry.getType() == HistoryEntry.POINT_TYPE) {
+				res.add((PointHistoryEntry) entry);
+			}
+		}
+		return res;
 	}
 
-	public void remove(PointHistoryEntry point) {
+	public void remove(HistoryEntry entry) {
 		HistoryItemDBHelper helper = checkLoadedEntries();
-		if (helper.remove(point)) {
-			loadedPoints.remove(point);
+		if (helper.remove(entry)) {
+			loadedEntries.remove(entry);
 		}
 	}
 
 	public void removeAll() {
 		HistoryItemDBHelper helper = checkLoadedEntries();
 		if (helper.removeAll()) {
-			loadedPoints.clear();
+			loadedEntries.clear();
 		}
 	}
 
 	private HistoryItemDBHelper checkLoadedEntries() {
 		HistoryItemDBHelper helper = new HistoryItemDBHelper();
-		if (loadedPoints == null) {
-			loadedPoints = helper.getPoints();
-			Collections.sort(loadedPoints, new HistoryEntryComparator());
+		if (loadedEntries == null) {
+			loadedEntries = helper.getEntries();
+			Collections.sort(loadedEntries, new HistoryEntryComparator());
 		}
 		return helper;
 	}
 
-	private void addPointToHistory(PointHistoryEntry point) {
+	private void addHistoryEntry(HistoryEntry entry) {
 		HistoryItemDBHelper helper = checkLoadedEntries();
-		int index = loadedPoints.indexOf(point);
+		int index = loadedEntries.indexOf(entry);
 		if (index != -1) {
-			point = loadedPoints.get(index);
-			point.markAsAccessed(System.currentTimeMillis());
-			helper.update(point);
+			entry = loadedEntries.get(index);
+			entry.markAsAccessed(System.currentTimeMillis());
+			helper.update(entry);
 		} else {
-			loadedPoints.add(point);
-			point.markAsAccessed(System.currentTimeMillis());
-			helper.add(point);
+			loadedEntries.add(entry);
+			entry.markAsAccessed(System.currentTimeMillis());
+			helper.add(entry);
 		}
-		Collections.sort(loadedPoints, new HistoryEntryComparator());
-		if (loadedPoints.size() > HISTORY_LIMIT) {
-			if (helper.remove(loadedPoints.get(loadedPoints.size() - 1))) {
-				loadedPoints.remove(loadedPoints.size() - 1);
+		Collections.sort(loadedEntries, new HistoryEntryComparator());
+		if (loadedEntries.size() > HISTORY_LIMIT) {
+			if (helper.remove(loadedEntries.get(loadedEntries.size() - 1))) {
+				loadedEntries.remove(loadedEntries.size() - 1);
 			}
 		}
 	}
@@ -115,13 +121,14 @@ public class SearchHistoryHelper {
 			return pointDescription;
 		}
 
-		public String getSerializedName() {
-			return PointDescription.serializeToString(pointDescription);
-		}
-
 		@Override
 		public int getType() {
 			return POINT_TYPE;
+		}
+
+		@Override
+		protected String getName() {
+			return PointDescription.serializeToString(pointDescription);
 		}
 
 		@Override
@@ -156,6 +163,8 @@ public class SearchHistoryHelper {
 		private double[] intervalValues = new double[0];
 
 		public abstract int getType();
+
+		protected abstract String getName();
 
 		private double rankFunction(double cf, double timeDiff) {
 			if (timeDiff <= 0) {
@@ -338,12 +347,12 @@ public class SearchHistoryHelper {
 			}
 		}
 
-		public boolean remove(PointHistoryEntry e) {
+		public boolean remove(HistoryEntry e) {
 			SQLiteConnection db = openConnection(false);
 			if (db != null) {
 				try {
 					db.execSQL("DELETE FROM " + HISTORY_TABLE_NAME + " WHERE " + HISTORY_COL_NAME + " = ?",
-							new Object[]{e.getSerializedName()});
+							new Object[]{e.getName()});
 				} finally {
 					db.close();
 				}
@@ -365,7 +374,7 @@ public class SearchHistoryHelper {
 			return false;
 		}
 
-		public boolean update(PointHistoryEntry e) {
+		public boolean update(HistoryEntry e) {
 			SQLiteConnection db = openConnection(false);
 			if (db != null) {
 				try {
@@ -375,7 +384,7 @@ public class SearchHistoryHelper {
 									HISTORY_COL_FREQ_VALUES + " = ? WHERE " +
 									HISTORY_COL_NAME + " = ?",
 							new Object[]{e.lastAccessedTime, e.getIntervals(), e.getIntervalsValues(),
-									e.getSerializedName()});
+									e.getName()});
 				} finally {
 					db.close();
 				}
@@ -384,11 +393,13 @@ public class SearchHistoryHelper {
 			return false;
 		}
 
-		public boolean add(PointHistoryEntry e) {
+		public boolean add(HistoryEntry e) {
 			SQLiteConnection db = openConnection(false);
 			if (db != null) {
 				try {
-					insert(e, db);
+					if (e.getType() == HistoryEntry.POINT_TYPE) {
+						insert((PointHistoryEntry) e, db);
+					}
 				} finally {
 					db.close();
 				}
@@ -399,12 +410,12 @@ public class SearchHistoryHelper {
 
 		private void insert(PointHistoryEntry e, SQLiteConnection db) {
 			db.execSQL("INSERT INTO " + HISTORY_TABLE_NAME + " VALUES (?, ?, ?, ?, ?, ?, ?)",
-					new Object[]{e.getSerializedName(), e.lastAccessedTime, e.getIntervals(),
+					new Object[]{e.getName(), e.lastAccessedTime, e.getIntervals(),
 							e.getIntervalsValues(), e.getLat(), e.getLon(), e.getType()});
 		}
 
-		public List<PointHistoryEntry> getPoints() {
-			List<PointHistoryEntry> res = new ArrayList<>();
+		public List<HistoryEntry> getEntries() {
+			List<HistoryEntry> res = new ArrayList<>();
 			SQLiteConnection db = openConnection(true);
 			if (db != null) {
 				try {
@@ -439,8 +450,10 @@ public class SearchHistoryHelper {
 							db.execSQL("DELETE FROM " + HISTORY_TABLE_NAME);
 							res.clear();
 							res.addAll(st.values());
-							for (PointHistoryEntry he : res) {
-								insert(he, db);
+							for (HistoryEntry he : res) {
+								if (he.getType() == HistoryEntry.POINT_TYPE) {
+									insert((PointHistoryEntry) he, db);
+								}
 							}
 						}
 					}
