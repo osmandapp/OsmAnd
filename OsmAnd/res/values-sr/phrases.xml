@@ -2088,4 +2088,106 @@
 	<string name="poi_bridge_bicycle">Мост бициклистички</string>
 	<string name="poi_bridge_railway">Мост железнички</string>
 	<string name="poi_bridge_waterway">Мост воденог пута</string>
+	<string name="poi_bridge_structure_beam">Структура моста: прави</string>
+	<string name="poi_bridge_structure_simple_suspension">Структура моста: проста суспензија</string>
+	<string name="poi_bridge_structure_suspension">Структура моста: суспензија</string>
+	<string name="poi_bridge_structure_arch">Структура моста: лучни</string>
+	<string name="poi_bridge_structure_truss">Структура моста: везана</string>
+	<string name="poi_bridge_structure_floating">Структура моста: плутајућа</string>
+	<string name="poi_bridge_structure_humpback">Структура моста: грбава</string>
+	<string name="poi_bridge_structure_cable_stayed">Структура моста: кабло-стојећи</string>
+	<string name="poi_bridge_structure_boardwalk">Структура моста: шетачка</string>
+	<string name="poi_bridge_structure_simple_wooden">Структура моста: просто дрвена</string>
+	<string name="poi_bridge_structure_viaduct">Структура моста: вијадукт</string>
+	<string name="poi_bridge_structure_aqueduct">Структура моста: аквадукт</string>
+	<string name="poi_bridge_structure_log">Структура моста: брвнаста</string>
+	<string name="poi_bridge_type_movable">Тип моста: покретан</string>
+	<string name="poi_bridge_movable_bascule">Тип покретног моста: баскул</string>
+	<string name="poi_bridge_movable_swing">Тип покретног моста: окретни</string>
+	<string name="poi_bridge_movable_lift">Тип покретног моста: вертикални</string>
+	<string name="poi_bridge_movable_drawbridge">Тип покретног моста: ланчани</string>
+	<string name="poi_bridge_movable_submersible">Тип покретног моста: потопљујући</string>
+	<string name="poi_bridge_movable_transporter">Тип покретног моста: транспортер</string>
+	<string name="poi_bridge_movable_retractable">Тип покретног моста: увучећи</string>
+
+	<string name="poi_lit_yes">Осветљена: да</string>
+	<string name="poi_lit_no">Осветљена: не</string>
+
+	<string name="poi_surface_unpaved">Површина: непоплочана</string>
+	<string name="poi_surface_paved">Површина: поплочана</string>
+	<string name="poi_surface_asphalt">Површина: асфалт</string>
+	<string name="poi_surface_concrete">Површина: бетонска</string>
+	<string name="poi_surface_sett">Површина: разређена kaldrma</string>
+	<string name="poi_surface_cobblestone">Површина: округла калдрма</string>
+	<string name="poi_surface_paving_stones">Површина: обрађена коцка</string>
+	<string name="poi_surface_pebblestone">Површина: округла ризла</string>
+	<string name="poi_surface_stone">Површина: камена</string>
+	<string name="poi_surface_metal">Површина: метална</string>
+	<string name="poi_surface_wood">Површина: дрвена</string>
+	<string name="poi_surface_gravel">Површина: ризлана</string>
+	<string name="poi_surface_fine_gravel">Површина: фино ризлана</string>
+	<string name="poi_surface_compacted">Површина: компактована</string>
+	<string name="poi_surface_sand">Површина: песак</string>
+	<string name="poi_surface_grass">Површина: трава</string>
+	<string name="poi_surface_grass_paver">Површина: шупља калдрма</string>
+	<string name="poi_surface_ground">Површина: општа</string>
+	<string name="poi_surface_dirt">Површина: земља</string>
+	<string name="poi_surface_mud">Површина: блато</string>
+	<string name="poi_surface_ice">Површина: лед</string>
+	<string name="poi_surface_salt">Површина: со</string>
+	<string name="poi_surface_snow">Површина: снег</string>
+
+	<string name="poi_route_bus_ref">Аутобус</string>
+	<string name="poi_route_share_taxi_ref">Дељени такси</string>
+	<string name="poi_route_trolleybus_ref">Тролејбус</string>
+	<string name="poi_route_tram_ref">Трамвај</string>
+	<string name="poi_route_train_ref">Воз</string>
+	<string name="poi_route_light_rail_ref">Лака пруга</string>
+	<string name="poi_route_monorail_ref">Монопруга</string>
+	<string name="poi_route_funicular_ref">Успенска железница</string>
+	<string name="poi_route_ferry_ref">Трајект</string>
+	<string name="poi_route_subway_ref">Метро</string>
+
+	<string name="poi_route_railway_ref">Рута пруге</string>
+
+	<string name="poi_historic_yes">Историјски објекат</string>
+	<string name="poi_surveillance_yes">Надзор: да</string>
+	<string name="poi_shop_additional_yes">Са продавницом</string>
+
+	<string name="poi_service_bicycle_retail_yes">Малопродаја</string>
+	<string name="poi_service_bicycle_retail_no">Малопродаја бицикла: не</string>
+	<string name="poi_service_bicycle_repair_yes">Поправка</string>
+	<string name="poi_service_bicycle_repair_no">Поправка бицикла: не</string>
+	<string name="poi_service_bicycle_rental_yes">Изнајмљивање</string>
+	<string name="poi_service_bicycle_rental_no">Изнајмљивање бицикла: не</string>
+	<string name="poi_service_bicycle_pump_yes">Пумпа</string>
+	<string name="poi_service_bicycle_pump_no">Бицикл пумпа: не</string>
+	<string name="poi_service_bicycle_diy_yes">Алати за самопоправку</string>
+	<string name="poi_service_bicycle_diy_no">Алати за самопоправку бицикла: не</string>
+	<string name="poi_service_bicycle_cleaning_yes">Чишћење</string>
+	<string name="poi_service_bicycle_cleaning_no">Чишћење бицикла: не</string>
+	<string name="poi_service_bicycle_chaintool_yes">Алат ланца</string>
+	<string name="poi_service_bicycle_chaintool_no">Алат ланца за бицикл: не</string>
+	<string name="poi_service_bicycle_second_hand_yes">Малопродаја половних бицикла</string>
+	<string name="poi_service_bicycle_second_hand_no">Малопродаја половних бицикла: не</string>
+	<string name="poi_service_bicycle_charging_yes">Наплата: да</string>
+	<string name="poi_service_bicycle_charging_no">Наплата: не</string>
+	<string name="poi_bicycle_repair_station">Станица за самопоправку бицикла</string>
+
+	<string name="poi_wildlife_hide">Место погледа дивљег света</string>
+
+	<string name="poi_training_language">Тренинг: језик</string>
+	<string name="poi_training_music">Тренинг: музика</string>
+	<string name="poi_training_dance">Тренинг: играње</string>
+	<string name="poi_training_sport">Тренинг: спорт</string>
+	<string name="poi_training_art">Тренинг: уметност</string>
+	<string name="poi_training_cooking">Тренинг: кување</string>
+	<string name="poi_training_computer">Тренинг: рачунар</string>
+	<string name="poi_training_yoga">Тренинг: јога</string>
+	<string name="poi_training_martial_art">Тренинг: борилачке вештине</string>
+	<string name="poi_training_aviation">Тренинг: авијација</string>
+	<string name="poi_training_hairdressing">Тренинг: шишање</string>
+
+	<string name="poi_monument_yes">Монументални објекат</string>
+
 	</resources>
