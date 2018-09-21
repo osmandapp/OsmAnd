@@ -2712,7 +2712,7 @@
     <string name="passed">آخرین استفاده: %1$s</string>
     <string name="save_as_line">ذخیره‌کردن به‌عنوان خط</string>
     <string name="store_tracks_in_monthly_directories">ذخیرهٔ مسیرهای ضبط‌شده در پوشه‌های ماهانه</string>
-    <string name="store_tracks_in_monthly_directories_descrp">"مسیرهای ضبط‌شده در هر ماه را در پوشهٔ همان ماه ذخیره کن (مثلاً  ‎۲۰۱۸-۰۱)."</string>
+    <string name="store_tracks_in_monthly_directories_descrp">"مسیرهای ضبط‌شده را در زیرپوشه‌های ماهانه ذخیره می‌کند (مثلاً  ‎۲۰۱۸-۰۱)."</string>
     <string name="display_zoom_level">زوم نمایش: %1$s</string>
     <string name="gpx_no_tracks_title">هنوز فایل GPXای ندارید</string>
     <string name="gpx_no_tracks_title_folder">همچنین می‌توانید فایل‌های GPX را در این پوشه قرار دهید</string>
@@ -3194,11 +3194,13 @@
 \n
 \n"</string>
     <string name="test_voice_desrc">روی یکی از دکمه‌ها بزنید و فرمان گفتاری متناظر با آن را بشنوید تا فرمان‌های مشکل‌دار یا ناموجود را شناسایی کنید.</string>
-<string name="release_3_2_pre">• حل مشکل متوقف‌شدن برنامه هنگام بازکردن آن که برای نقشه‌های غیرلاتین پس می‌آمد.
-\n
-\n • بهبودهایی برای مشکل سرعت پرداخت نقشه (map render) روی دستگاه‌های دارای اندروید ۸٫۰.
-\n
+<string name="release_3_2_pre">• حل مشکل متوقف‌شدن هنگام بازکردن برنامه که برای نقشه‌های غیرلاتین پیش می‌آمد. 
+\n 
+\n • بهبودهایی برای مشکل سرعت پرداخت نقشه (map render) روی دستگاه‌های دارای اندروید ۸٫۰. 
+\n 
 \n • پشتیبانی از ویرایش اشیای چندضلعی (non-amenity) 
+\n 
+\n• اندازه‌گیری مسافت: اضافه‌شدن دکمهٔ اندازه‌گیری به عملیات‌ها در منوی زمینه
 \n
 \n</string>
     <string name="commiting_way">در حال ثبت راه…</string>
