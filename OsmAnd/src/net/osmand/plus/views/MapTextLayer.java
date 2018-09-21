@@ -22,6 +22,7 @@ public class MapTextLayer extends OsmandMapLayer {
 
 	private static final int TEXT_WRAP = 15;
 	private static final int TEXT_LINES = 3;
+	private static final int TEXT_SIZE = 13;
 
 	private Map<OsmandMapLayer, Collection<?>> textObjects = new LinkedHashMap<>();
 	private Paint paintTextIcon;
@@ -192,7 +193,7 @@ public class MapTextLayer extends OsmandMapLayer {
 
 	private void updateTextSize() {
 		float scale = view.getApplication().getSettings().TEXT_SCALE.get();
-		float textSize = scale * 13 * view.getDensity();
+		float textSize = scale * TEXT_SIZE * view.getDensity();
 		if (paintTextIcon.getTextSize() != textSize) {
 			paintTextIcon.setTextSize(textSize);
 		}
