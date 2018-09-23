@@ -354,7 +354,7 @@
     <string name="app_mode_truck">Caminhão</string>
     <string name="auto_zoom_far">Visão intermediária</string>
 	<string name="local_index_tile_data_minzoom">Zoom mínimo: %1$s</string>
-    <string name="edit_tilesource_successfully">A fonte da quadrícula %1$s foi salva com sucesso</string>
+    <string name="edit_tilesource_successfully">A fonte da quadrícula %1$s foi salva</string>
     <string name="speak_traffic_warnings">Moderadores de tráfego</string>
     <string name="context_menu_item_directions_from">Rota a partir daqui</string>
     <string name="app_mode_default">Explorar</string>
@@ -2186,7 +2186,7 @@ Pôr do Sol: %2$s</string>
     <string name="store_tracks_in_monthly_directories_descrp">Armazenar trilhas gravadas em subpastas por mês (ex.: 2018-01).</string>
     <string name="shared_string_reset">Redefinir</string>
     <string name="shared_string_reload">Recarregar</string>
-    <string name="mapillary_menu_descr_tile_cache">Recarregar quadrículas para ver dados atualizados.</string>
+    <string name="mapillary_menu_descr_tile_cache">Recarregar para ver dados atualizados.</string>
     <string name="wrong_user_name">Nome de usuário errado</string>
     <string name="shared_string_to">Para</string>
     <string name="mapillary_menu_date_from">De</string>
