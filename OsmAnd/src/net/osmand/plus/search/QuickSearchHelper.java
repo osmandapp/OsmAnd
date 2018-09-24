@@ -19,6 +19,7 @@ import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.SearchHistoryHelper;
+import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
 import net.osmand.plus.poi.NominatimPoiFilter;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.poi.PoiUIFilter;
@@ -395,17 +396,25 @@ public class QuickSearchHelper implements ResourceListener {
 
 		@Override
 		public boolean search(SearchPhrase phrase, SearchResultMatcher resultMatcher) throws IOException {
-			SearchHistoryHelper helper = SearchHistoryHelper.getInstance(app);
-			List<SearchHistoryHelper.HistoryEntry> points = helper.getHistoryEntries();
 			int p = 0;
-			for (SearchHistoryHelper.HistoryEntry point : points) {
+			for (HistoryEntry point : SearchHistoryHelper.getInstance(app).getHistoryEntries()) {
 				SearchResult sr = new SearchResult(phrase);
-				sr.localeName = point.getName().getName();
-				sr.object = point;
+				if (point.getName().isPoiType()) {
+					AbstractPoiType pt = MapPoiTypes.getDefault().getAnyPoiTypeByKey(point.getName().getName());
+					if (pt != null) {
+						sr.localeName = pt.getTranslation();
+						sr.object = pt;
+						sr.priorityDistance = 0;
+						sr.objectType = ObjectType.POI_TYPE;
+					}
+				} else {
+					sr.localeName = point.getName().getName();
+					sr.object = point;
+					sr.objectType = ObjectType.RECENT_OBJ;
+					sr.location = new LatLon(point.getLat(), point.getLon());
+					sr.preferredZoom = 17;
+				}
 				sr.priority = SEARCH_HISTORY_OBJECT_PRIORITY + (p++);
-				sr.objectType = ObjectType.RECENT_OBJ;
-				sr.location = new LatLon(point.getLat(), point.getLon());
-				sr.preferredZoom = 17;
 				if (phrase.getUnknownSearchWordLength() <= 1 && phrase.isNoSelectedType()) {
 					resultMatcher.publish(sr);
 				} else if (phrase.getNameStringMatcher().matches(sr.localeName)) {
