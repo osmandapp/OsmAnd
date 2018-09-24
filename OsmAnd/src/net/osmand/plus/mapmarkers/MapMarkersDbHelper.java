@@ -328,7 +328,7 @@ public class MapMarkersDbHelper {
 		PointDescription pointDescription = marker.getOriginalPointDescription();
 		if (pointDescription != null && !pointDescription.isSearchingAddress(context)) {
 			SearchHistoryHelper.getInstance(context)
-					.addNewItemToHistory(marker.getLatitude(), marker.getLongitude(), pointDescription);
+					.addPointToHistory(marker.getLatitude(), marker.getLongitude(), pointDescription);
 		}
 
 		if (!marker.history) {

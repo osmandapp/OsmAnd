@@ -25,7 +25,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.search.SearchHistoryFragment;
 import net.osmand.plus.base.FavoriteImageDrawable;
-import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
+import net.osmand.plus.helpers.SearchHistoryHelper.PointHistoryEntry;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.search.core.CustomSearchPoiFilter;
 import net.osmand.search.core.SearchResult;
@@ -96,8 +96,8 @@ public class QuickSearchListItem {
 				}
 				break;
 			case RECENT_OBJ:
-				HistoryEntry historyEntry = (HistoryEntry) searchResult.object;
-				PointDescription pd = historyEntry.getName();
+				PointHistoryEntry historyPoint = (PointHistoryEntry) searchResult.object;
+				PointDescription pd = historyPoint.getPointDescription();
 				return pd.getSimpleName(app, false);
 			case LOCATION:
 				LatLon latLon = searchResult.location;
@@ -222,10 +222,10 @@ public class QuickSearchListItem {
 				System.out.println(binaryMapIndexReader.getFile().getAbsolutePath() + " " + binaryMapIndexReader.getCountryName());
 				break;
 			case RECENT_OBJ:
-				HistoryEntry entry = (HistoryEntry) searchResult.object;
-				boolean hasTypeInDescription = !Algorithms.isEmpty(entry.getName().getTypeName());
-				if (hasTypeInDescription) {
-					return entry.getName().getTypeName();
+				PointHistoryEntry entry = (PointHistoryEntry) searchResult.object;
+				String typeName = entry.getPointDescription().getTypeName();
+				if (!Algorithms.isEmpty(typeName)) {
+					return typeName;
 				} else {
 					return "";
 				}
@@ -258,8 +258,8 @@ public class QuickSearchListItem {
 			case FAVORITE_GROUP:
 				return app.getUIUtilities().getThemedIcon(R.drawable.ic_small_group);
 			case RECENT_OBJ:
-				HistoryEntry historyEntry = (HistoryEntry) searchResult.object;
-				String typeName = historyEntry.getName().getTypeName();
+				PointHistoryEntry historyEntry = (PointHistoryEntry) searchResult.object;
+				String typeName = historyEntry.getPointDescription().getTypeName();
 				if (typeName != null && !typeName.isEmpty()) {
 					return app.getUIUtilities().getThemedIcon(R.drawable.ic_small_group);
 				} else {
@@ -363,9 +363,10 @@ public class QuickSearchListItem {
 			case REGION:
 				return getIcon(app, R.drawable.ic_world_globe_dark);
 			case RECENT_OBJ:
-				HistoryEntry entry = (HistoryEntry) searchResult.object;
-				if (entry.getName() != null && !Algorithms.isEmpty(entry.getName().getIconName())) {
-					String iconName = entry.getName().getIconName();
+				PointHistoryEntry entry = (PointHistoryEntry) searchResult.object;
+				PointDescription pd = entry.getPointDescription();
+				if (pd != null && !Algorithms.isEmpty(pd.getIconName())) {
+					String iconName = pd.getIconName();
 					if (RenderingIcons.containsBigIcon(iconName)) {
 						iconId = RenderingIcons.getBigIconResourceId(iconName);
 					} else {
@@ -373,12 +374,12 @@ public class QuickSearchListItem {
 					}
 				}
 				if (iconId <= 0) {
-					iconId = SearchHistoryFragment.getItemIcon(entry.getName());
+					iconId = SearchHistoryFragment.getItemIcon(pd);
 				}
 				try {
 					return getIcon(app, iconId);
 				} catch (Exception e) {
-					return getIcon(app, SearchHistoryFragment.getItemIcon(entry.getName()));
+					return getIcon(app, SearchHistoryFragment.getItemIcon(pd));
 				}
 			case WPT:
 				WptPt wpt = (WptPt) searchResult.object;

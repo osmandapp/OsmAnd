@@ -1,22 +1,5 @@
 package net.osmand.plus.activities.search;
 
-import java.util.List;
-
-import net.osmand.data.LatLon;
-import net.osmand.data.PointDescription;
-import net.osmand.plus.OsmAndFormatter;
-import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
-import net.osmand.plus.UiUtilities.UpdateLocationViewCache;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.search.SearchActivity.SearchActivityChild;
-import net.osmand.plus.base.OsmAndListFragment;
-import net.osmand.plus.helpers.SearchHistoryHelper;
-import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
-import net.osmand.util.MapUtils;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -40,6 +23,24 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.TextView.BufferType;
+
+import net.osmand.data.LatLon;
+import net.osmand.data.PointDescription;
+import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
+import net.osmand.plus.UiUtilities.UpdateLocationViewCache;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.search.SearchActivity.SearchActivityChild;
+import net.osmand.plus.base.OsmAndListFragment;
+import net.osmand.plus.helpers.SearchHistoryHelper;
+import net.osmand.plus.helpers.SearchHistoryHelper.PointHistoryEntry;
+import net.osmand.util.MapUtils;
+
+import java.util.List;
 
 
 public class SearchHistoryFragment extends OsmAndListFragment implements SearchActivityChild, OsmAndCompassListener  {
@@ -111,7 +112,7 @@ public class SearchHistoryFragment extends OsmAndListFragment implements SearchA
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		historyAdapter = new HistoryAdapter(helper.getHistoryEntries());
+		historyAdapter = new HistoryAdapter(helper.getHistoryPoints());
 		setListAdapter(historyAdapter);
 		setHasOptionsMenu(true);
 	}
@@ -138,8 +139,8 @@ public class SearchHistoryFragment extends OsmAndListFragment implements SearchA
 			updateLocationViewCache.specialFrom = ((SearchActivity) activity).getSearchPoint();
 		}
 		historyAdapter.clear();
-		for (HistoryEntry entry : helper.getHistoryEntries()) {
-			historyAdapter.add(entry);
+		for (PointHistoryEntry point : helper.getHistoryPoints()) {
+			historyAdapter.add(point);
 		}
 		locationUpdate(location);
 		clearButton.setVisibility(historyAdapter.isEmpty() ? View.GONE : View.VISIBLE);
@@ -180,25 +181,25 @@ public class SearchHistoryFragment extends OsmAndListFragment implements SearchA
 
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
-		HistoryEntry model = ((HistoryAdapter) getListAdapter()).getItem(position);
-		selectModel(model);
+		PointHistoryEntry point = ((HistoryAdapter) getListAdapter()).getItem(position);
+		selectModel(point);
 	}
 
-	private void selectModel(final HistoryEntry model) {
-		PointDescription name = model.getName();
+	private void selectModel(final PointHistoryEntry point) {
+		PointDescription name = point.getPointDescription();
 		OsmandSettings settings = ((OsmandApplication) getActivity().getApplication()).getSettings();
 
-		LatLon location = new LatLon(model.getLat(), model.getLon());
+		LatLon location = new LatLon(point.getLat(), point.getLon());
 
 		settings.setMapLocationToShow(location.getLatitude(), location.getLongitude(),
 				settings.getLastKnownMapZoom(),
 				name,
 				true,
-				model); //$NON-NLS-1$
+				point); //$NON-NLS-1$
 		MapActivity.launchMapActivityMoveToTop(getActivity());
 	}
 
-	private void selectModelOptions(final HistoryEntry model, View v) {
+	private void selectModelOptions(final PointHistoryEntry point, View v) {
 		final PopupMenu optionsMenu = new PopupMenu(getActivity(), v);
 		MenuItem item = optionsMenu.getMenu().add(
 				R.string.shared_string_remove).setIcon(
@@ -206,22 +207,22 @@ public class SearchHistoryFragment extends OsmAndListFragment implements SearchA
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
-				helper.remove(model);
-				historyAdapter.remove(model);
+				helper.remove(point);
+				historyAdapter.remove(point);
 				return true;
 			}
 		});
 		optionsMenu.show();
 	}
 
-	class HistoryAdapter extends ArrayAdapter<HistoryEntry> {
+	class HistoryAdapter extends ArrayAdapter<PointHistoryEntry> {
 		
 
 		public void updateLocation() {
 			notifyDataSetChanged();
 		}
 
-		public HistoryAdapter(List<HistoryEntry> list) {
+		public HistoryAdapter(List<PointHistoryEntry> list) {
 			super(getActivity(), R.layout.search_history_list_item, list);
 		}
 
@@ -232,20 +233,20 @@ public class SearchHistoryFragment extends OsmAndListFragment implements SearchA
 				LayoutInflater inflater = getActivity().getLayoutInflater();
 				row = inflater.inflate(R.layout.search_history_list_item, parent, false);
 			}
-			final HistoryEntry historyEntry = getItem(position);
-			udpateHistoryItem(historyEntry, row, location, getActivity(), getMyApplication());
+			final PointHistoryEntry point = getItem(position);
+			udpateHistoryItem(point, row, location, getActivity(), getMyApplication());
 			TextView distanceText = (TextView) row.findViewById(R.id.distance);
 			ImageView direction = (ImageView) row.findViewById(R.id.direction);
 			getMyApplication().getUIUtilities().updateLocationView(updateLocationViewCache, 
-					direction, distanceText, historyEntry.getLat(),
-					historyEntry.getLon());
+					direction, distanceText, point.getLat(),
+					point.getLon());
 			ImageButton options = (ImageButton) row.findViewById(R.id.options);
 			options.setImageDrawable(getMyApplication().getUIUtilities().getThemedIcon(R.drawable.ic_overflow_menu_white));
 			options.setVisibility(View.VISIBLE);
 			options.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					selectModelOptions(historyEntry, v);
+					selectModelOptions(point, v);
 				}
 			});
 			if (getActivity() instanceof SearchActivity)
@@ -255,7 +256,7 @@ public class SearchHistoryFragment extends OsmAndListFragment implements SearchA
 	}
 	
 				
-	public static void udpateHistoryItem(final HistoryEntry historyEntry, View row,
+	public static void udpateHistoryItem(final PointHistoryEntry point, View row,
 			LatLon location, Activity activity, OsmandApplication app) {
 		TextView nameText = (TextView) row.findViewById(R.id.name);
 		TextView distanceText = (TextView) row.findViewById(R.id.distance);
@@ -264,16 +265,16 @@ public class SearchHistoryFragment extends OsmAndListFragment implements SearchA
 		direction.setImageDrawable(ic.getIcon(R.drawable.ic_direction_arrow, R.color.color_distance));
 		String distance = "";
 		if (location != null) {
-			int dist = (int) (MapUtils.getDistance(location, historyEntry.getLat(), historyEntry.getLon()));
+			int dist = (int) (MapUtils.getDistance(location, point.getLat(), point.getLon()));
 			distance = OsmAndFormatter.getFormattedDistance(dist, (OsmandApplication) activity.getApplication()) + "  ";
 		}
 		distanceText.setText(distance);
-		PointDescription pd = historyEntry.getName();
+		PointDescription pd = point.getPointDescription();
 		nameText.setText(pd.getSimpleName(activity, false), BufferType.SPANNABLE);
 		ImageView icon = ((ImageView) row.findViewById(R.id.icon));
-		icon.setImageDrawable(ic.getThemedIcon(getItemIcon(historyEntry.getName())));
+		icon.setImageDrawable(ic.getThemedIcon(getItemIcon(pd)));
 
-		String typeName = historyEntry.getName().getTypeName();
+		String typeName = pd.getTypeName();
 		if (typeName != null && !typeName.isEmpty()) {
 			ImageView group = (ImageView) row.findViewById(R.id.type_name_icon);
 			group.setVisibility(View.VISIBLE);
@@ -339,8 +340,8 @@ public class SearchHistoryFragment extends OsmAndListFragment implements SearchA
 				try {
 					int position = getListView().getPositionForView(selected);
 					if ((position != AdapterView.INVALID_POSITION) && (position >= getListView().getHeaderViewsCount())) {
-						HistoryEntry historyEntry = historyAdapter.getItem(position - getListView().getHeaderViewsCount());
-						LatLon location = new LatLon(historyEntry.getLat(), historyEntry.getLon());
+						PointHistoryEntry point = historyAdapter.getItem(position - getListView().getHeaderViewsCount());
+						LatLon location = new LatLon(point.getLat(), point.getLon());
 						((SearchActivity)activity).getNavigationInfo().updateTargetDirection(location, heading.floatValue());
 					}
 				} catch (Exception e) {

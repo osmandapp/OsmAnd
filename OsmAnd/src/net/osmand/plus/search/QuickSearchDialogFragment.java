@@ -12,7 +12,6 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
@@ -68,15 +67,13 @@ import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivity.ShowQuickSearchMode;
 import net.osmand.plus.helpers.SearchHistoryHelper;
-import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
+import net.osmand.plus.helpers.SearchHistoryHelper.PointHistoryEntry;
 import net.osmand.plus.poi.PoiUIFilter;
-import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.resources.RegionAddressRepository;
 import net.osmand.plus.search.QuickSearchHelper.SearchHistoryAPI;
 import net.osmand.plus.search.listitems.QuickSearchButtonListItem;
@@ -465,14 +462,14 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 				new OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						List<HistoryEntry> historyEntries = new ArrayList<HistoryEntry>();
+						List<PointHistoryEntry> historyPoints = new ArrayList<>();
 						List<QuickSearchListItem> selectedItems = historySearchFragment.getListAdapter().getSelectedItems();
 						for (QuickSearchListItem searchListItem : selectedItems) {
-							HistoryEntry historyEntry = (HistoryEntry) searchListItem.getSearchResult().object;
-							historyEntries.add(historyEntry);
+							PointHistoryEntry historyEntry = (PointHistoryEntry) searchListItem.getSearchResult().object;
+							historyPoints.add(historyEntry);
 						}
-						if (historyEntries.size() > 0) {
-							shareHistory(historyEntries);
+						if (historyPoints.size() > 0) {
+							shareHistory(historyPoints);
 							enableSelectionMode(false, -1);
 						}
 					}
@@ -1776,6 +1773,10 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	}
 
 	public void completeQueryWithObject(SearchResult sr) {
+		if (sr.object instanceof AbstractPoiType) {
+			SearchHistoryHelper.getInstance(app).addCategoryToHistory((AbstractPoiType) sr.object);
+			reloadHistory();
+		}
 		if (sr.object instanceof PoiType && ((PoiType) sr.object).isAdditional()) {
 			PoiType additional = (PoiType) sr.object;
 			AbstractPoiType parent = additional.getParentType();
@@ -2091,20 +2092,22 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		}
 	}
 
-	private void shareHistory(final List<HistoryEntry> historyEntries) {
-		if (!historyEntries.isEmpty()) {
+	@SuppressLint("StaticFieldLeak")
+	private void shareHistory(final List<PointHistoryEntry> historyPoints) {
+		if (!historyPoints.isEmpty()) {
 			final AsyncTask<Void, Void, GPXFile> exportTask = new AsyncTask<Void, Void, GPXFile>() {
 				@Override
 				protected GPXFile doInBackground(Void... params) {
 					GPXFile gpx = new GPXFile();
-					for (HistoryEntry h : historyEntries) {
+					for (PointHistoryEntry h : historyPoints) {
 						WptPt pt = new WptPt();
 						pt.lat = h.getLat();
 						pt.lon = h.getLon();
-						pt.name = h.getName().getName();
-						boolean hasTypeInDescription = !Algorithms.isEmpty(h.getName().getTypeName());
-						if (hasTypeInDescription) {
-							pt.desc = h.getName().getTypeName();
+						PointDescription pd = h.getPointDescription();
+						pt.name = pd.getName();
+						String typeName = pd.getTypeName();
+						if (!Algorithms.isEmpty(typeName)) {
+							pt.desc = typeName;
 						}
 						gpx.addPoint(pt);
 					}
@@ -2349,7 +2352,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 								QuickSearchDialogFragment parentFragment = (QuickSearchDialogFragment) getParentFragment();
 								SearchHistoryHelper helper = SearchHistoryHelper.getInstance(parentFragment.getMyApplication());
 								for (QuickSearchListItem searchListItem : selectedItems) {
-									HistoryEntry historyEntry = (HistoryEntry) searchListItem.getSearchResult().object;
+									PointHistoryEntry historyEntry = (PointHistoryEntry) searchListItem.getSearchResult().object;
 									helper.remove(historyEntry);
 								}
 								parentFragment.reloadHistory();

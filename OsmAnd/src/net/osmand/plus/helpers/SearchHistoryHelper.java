@@ -1,9 +1,11 @@
 package net.osmand.plus.helpers;
 
+import android.support.annotation.NonNull;
+
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.osm.AbstractPoiType;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
 import net.osmand.util.Algorithms;
@@ -26,9 +28,8 @@ public class SearchHistoryHelper {
 
 	private OsmandApplication context;
 	private List<HistoryEntry> loadedEntries = null;
-	private Map<PointDescription, HistoryEntry> mp = new HashMap<>();
 
-	public SearchHistoryHelper(OsmandApplication context) {
+	private SearchHistoryHelper(OsmandApplication context) {
 		this.context = context;
 	}
 
@@ -39,8 +40,12 @@ public class SearchHistoryHelper {
 		return instance;
 	}
 
-	public void addNewItemToHistory(double latitude, double longitude, PointDescription pointDescription) {
-		addNewItemToHistory(new HistoryEntry(latitude, longitude, pointDescription));
+	public void addPointToHistory(double latitude, double longitude, @NonNull PointDescription pointDescription) {
+		addHistoryEntry(new PointHistoryEntry(latitude, longitude, pointDescription));
+	}
+
+	public void addCategoryToHistory(AbstractPoiType pt) {
+		addHistoryEntry(new CategoryHistoryEntry(pt.getKeyName()));
 	}
 
 	public List<HistoryEntry> getHistoryEntries() {
@@ -50,11 +55,23 @@ public class SearchHistoryHelper {
 		return new ArrayList<>(loadedEntries);
 	}
 
-	public void remove(HistoryEntry model) {
+	public List<PointHistoryEntry> getHistoryPoints() {
+		if (loadedEntries == null) {
+			checkLoadedEntries();
+		}
+		List<PointHistoryEntry> res = new ArrayList<>();
+		for (HistoryEntry entry : loadedEntries) {
+			if (entry.getType() == HistoryEntry.POINT_TYPE) {
+				res.add((PointHistoryEntry) entry);
+			}
+		}
+		return res;
+	}
+
+	public void remove(HistoryEntry entry) {
 		HistoryItemDBHelper helper = checkLoadedEntries();
-		if (helper.remove(model)) {
-			loadedEntries.remove(model);
-			mp.remove(model.getName());
+		if (helper.remove(entry)) {
+			loadedEntries.remove(entry);
 		}
 	}
 
@@ -62,7 +79,6 @@ public class SearchHistoryHelper {
 		HistoryItemDBHelper helper = checkLoadedEntries();
 		if (helper.removeAll()) {
 			loadedEntries.clear();
-			mp.clear();
 		}
 	}
 
@@ -71,24 +87,21 @@ public class SearchHistoryHelper {
 		if (loadedEntries == null) {
 			loadedEntries = helper.getEntries();
 			Collections.sort(loadedEntries, new HistoryEntryComparator());
-			for (HistoryEntry he : loadedEntries) {
-				mp.put(he.getName(), he);
-			}
 		}
 		return helper;
 	}
 
-	private void addNewItemToHistory(HistoryEntry model) {
+	private void addHistoryEntry(HistoryEntry entry) {
 		HistoryItemDBHelper helper = checkLoadedEntries();
-		if (mp.containsKey(model.getName())) {
-			model = mp.get(model.getName());
-			model.markAsAccessed(System.currentTimeMillis());
-			helper.update(model);
+		int index = loadedEntries.indexOf(entry);
+		if (index != -1) {
+			entry = loadedEntries.get(index);
+			entry.markAsAccessed(System.currentTimeMillis());
+			helper.update(entry);
 		} else {
-			loadedEntries.add(model);
-			mp.put(model.getName(), model);
-			model.markAsAccessed(System.currentTimeMillis());
-			helper.add(model);
+			loadedEntries.add(entry);
+			entry.markAsAccessed(System.currentTimeMillis());
+			helper.add(entry);
 		}
 		Collections.sort(loadedEntries, new HistoryEntryComparator());
 		if (loadedEntries.size() > HISTORY_LIMIT) {
@@ -98,19 +111,113 @@ public class SearchHistoryHelper {
 		}
 	}
 
-	public static class HistoryEntry {
-		double lat;
-		double lon;
-		PointDescription name;
-		private long lastAccessedTime;
+	public static class CategoryHistoryEntry extends HistoryEntry {
+
+		@NonNull
+		private String name;
+
+		CategoryHistoryEntry(@NonNull String name) {
+			this.name = name;
+		}
+
+		@Override
+		public int getType() {
+			return CATEGORY_TYPE;
+		}
+
+		@NonNull
+		@Override
+		public String getName() {
+			return name;
+		}
+
+		@Override
+		public boolean equals(Object o) {
+			if (this == o) return true;
+			if (o == null || getClass() != o.getClass()) return false;
+			CategoryHistoryEntry that = (CategoryHistoryEntry) o;
+			return name.equals(that.name);
+		}
+
+		@Override
+		public int hashCode() {
+			return name.hashCode();
+		}
+	}
+
+	public static class PointHistoryEntry extends HistoryEntry {
+
+		private double lat;
+		private double lon;
+		@NonNull
+		private PointDescription pointDescription;
+
+		PointHistoryEntry(double lat, double lon, @NonNull PointDescription pointDescription) {
+			this.lat = lat;
+			this.lon = lon;
+			this.pointDescription = pointDescription;
+		}
+
+		public double getLat() {
+			return lat;
+		}
+
+		public double getLon() {
+			return lon;
+		}
+
+		@NonNull
+		public PointDescription getPointDescription() {
+			return pointDescription;
+		}
+
+		@Override
+		public int getType() {
+			return POINT_TYPE;
+		}
+
+		@NonNull
+		@Override
+		public String getName() {
+			return PointDescription.serializeToString(pointDescription);
+		}
+
+		@Override
+		public boolean equals(Object o) {
+			if (this == o) return true;
+			if (o == null || getClass() != o.getClass()) return false;
+			PointHistoryEntry that = (PointHistoryEntry) o;
+			if (Double.compare(that.lat, lat) != 0) return false;
+			if (Double.compare(that.lon, lon) != 0) return false;
+			return pointDescription.equals(that.pointDescription);
+		}
+
+		@Override
+		public int hashCode() {
+			int result;
+			long temp;
+			temp = Double.doubleToLongBits(lat);
+			result = (int) (temp ^ (temp >>> 32));
+			temp = Double.doubleToLongBits(lon);
+			result = 31 * result + (int) (temp ^ (temp >>> 32));
+			result = 31 * result + pointDescription.hashCode();
+			return result;
+		}
+	}
+
+	public static abstract class HistoryEntry {
+
+		public static final int POINT_TYPE = 0;
+		public static final int CATEGORY_TYPE = 1;
+
+		protected long lastAccessedTime;
 		private int[] intervals = new int[0];
 		private double[] intervalValues = new double[0];
 
-		HistoryEntry(double lat, double lon, PointDescription name) {
-			this.lat = lat;
-			this.lon = lon;
-			this.name = name;
-		}
+		public abstract int getType();
+
+		@NonNull
+		public abstract String getName();
 
 		private double rankFunction(double cf, double timeDiff) {
 			if (timeDiff <= 0) {
@@ -137,22 +244,6 @@ public class SearchHistoryHelper {
 			return rnk;
 		}
 
-		public PointDescription getName() {
-			return name;
-		}
-
-		public String getSerializedName() {
-			return PointDescription.serializeToString(name);
-		}
-
-		public double getLat() {
-			return lat;
-		}
-
-		public double getLon() {
-			return lon;
-		}
-
 		public void markAsAccessed(long time) {
 			int[] nintervals = new int[DEF_INTERVALS_MIN.length];
 			double[] nintervalValues = new double[DEF_INTERVALS_MIN.length];
@@ -165,7 +256,7 @@ public class SearchHistoryHelper {
 			this.lastAccessedTime = time;
 		}
 
-		double getUsageLastTime(long time, int days, int hours, int minutes) {
+		private double getUsageLastTime(long time, int days, int hours, int minutes) {
 			long mins = (minutes + (hours + 24 * days) * 60);
 			long timeInPast = time - mins * 60 * 1000;
 			if (this.lastAccessedTime <= timeInPast) {
@@ -206,10 +297,6 @@ public class SearchHistoryHelper {
 			}
 		}
 
-		public long getLastAccessTime() {
-			return lastAccessedTime;
-		}
-
 		public String getIntervalsValues() {
 			StringBuilder s = new StringBuilder();
 			for (int i = 0; i < intervalValues.length; i++) {
@@ -231,11 +318,6 @@ public class SearchHistoryHelper {
 			}
 			return s.toString();
 		}
-
-		public void setLastAccessTime(long time) {
-			this.lastAccessedTime = time;
-		}
-
 	}
 
 	private static class HistoryEntryComparator implements Comparator<HistoryEntry> {
@@ -252,7 +334,8 @@ public class SearchHistoryHelper {
 	private class HistoryItemDBHelper {
 
 		private static final String DB_NAME = "search_history";
-		private static final int DB_VERSION = 2;
+		private static final int DB_VERSION = 3;
+
 		private static final String HISTORY_TABLE_NAME = "history_recents";
 		private static final String HISTORY_COL_NAME = "name";
 		private static final String HISTORY_COL_TIME = "time";
@@ -260,44 +343,60 @@ public class SearchHistoryHelper {
 		private static final String HISTORY_COL_FREQ_VALUES = "freq_values";
 		private static final String HISTORY_COL_LAT = "latitude";
 		private static final String HISTORY_COL_LON = "longitude";
-		private static final String HISTORY_TABLE_CREATE = "CREATE TABLE IF NOT EXISTS " + HISTORY_TABLE_NAME + " (" +
+		private static final String HISTORY_COL_TYPE = "type";
+
+		private static final String HISTORY_TABLE_CREATE = "CREATE TABLE IF NOT EXISTS " +
+				HISTORY_TABLE_NAME + " (" +
 				HISTORY_COL_NAME + " TEXT, " +
 				HISTORY_COL_TIME + " long, " +
 				HISTORY_COL_FREQ_INTERVALS + " TEXT, " +
 				HISTORY_COL_FREQ_VALUES + " TEXT, " +
-				HISTORY_COL_LAT + " double, " + HISTORY_COL_LON + " double);";
+				HISTORY_COL_LAT + " double, " +
+				HISTORY_COL_LON + " double, " +
+				HISTORY_COL_TYPE + "int);";
 
-
-		HistoryItemDBHelper() {
-		}
+		private static final String HISTORY_TABLE_SELECT = "SELECT " +
+				HISTORY_COL_NAME + ", " +
+				HISTORY_COL_TIME + ", " +
+				HISTORY_COL_FREQ_INTERVALS + ", " +
+				HISTORY_COL_FREQ_VALUES + ", " +
+				HISTORY_COL_LAT + ", " +
+				HISTORY_COL_LON + ", " +
+				HISTORY_COL_TYPE +
+				" FROM " + HISTORY_TABLE_NAME;
 
 		private SQLiteConnection openConnection(boolean readonly) {
 			SQLiteConnection conn = context.getSQLiteAPI().getOrCreateDatabase(DB_NAME, readonly);
-			if (conn.getVersion() == 0 || DB_VERSION != conn.getVersion()) {
+			int version = conn.getVersion();
+			if (version == 0 || DB_VERSION != version) {
 				if (readonly) {
 					conn.close();
-					conn = context.getSQLiteAPI().getOrCreateDatabase(DB_NAME, readonly);
+					conn = context.getSQLiteAPI().getOrCreateDatabase(DB_NAME, false);
 				}
-				if (conn.getVersion() == 0) {
+				if (version == 0) {
 					onCreate(conn);
 				} else {
-					onUpgrade(conn, conn.getVersion(), DB_VERSION);
+					onUpgrade(conn, version, DB_VERSION);
 				}
 				conn.setVersion(DB_VERSION);
 			}
 			return conn;
 		}
 
-		public void onCreate(SQLiteConnection db) {
+		private void onCreate(SQLiteConnection db) {
 			db.execSQL(HISTORY_TABLE_CREATE);
 		}
 
-		public void onUpgrade(SQLiteConnection db, int oldVersion, int newVersion) {
-			if (newVersion == 2) {
-				db.execSQL(HISTORY_TABLE_CREATE);
-				for (HistoryEntry he : getLegacyEntries(db)) {
-					insert(he, db);
-				}
+		private void onUpgrade(SQLiteConnection db, int oldVersion, int newVersion) {
+			if (oldVersion < 2) {
+				db.execSQL("DROP TABLE IF EXISTS " + HISTORY_TABLE_NAME);
+				onCreate(db);
+			}
+			if (oldVersion < 3) {
+				db.execSQL("ALTER TABLE " + HISTORY_TABLE_NAME + " ADD " + HISTORY_COL_TYPE + " int");
+				db.execSQL("UPDATE " + HISTORY_TABLE_NAME +
+						" SET " + HISTORY_COL_TYPE + " = ? " +
+						"WHERE " + HISTORY_COL_TYPE + " IS NULL", new Object[]{HistoryEntry.POINT_TYPE});
 			}
 		}
 
@@ -305,18 +404,14 @@ public class SearchHistoryHelper {
 			SQLiteConnection db = openConnection(false);
 			if (db != null) {
 				try {
-					removeQuery(e.getSerializedName(), db);
+					db.execSQL("DELETE FROM " + HISTORY_TABLE_NAME + " WHERE " + HISTORY_COL_NAME + " = ?",
+							new Object[]{e.getName()});
 				} finally {
 					db.close();
 				}
 				return true;
 			}
 			return false;
-		}
-
-		private void removeQuery(String name, SQLiteConnection db) {
-			db.execSQL("DELETE FROM " + HISTORY_TABLE_NAME + " WHERE " + HISTORY_COL_NAME + " = ?",
-					new Object[]{name});
 		}
 
 		public boolean removeAll() {
@@ -336,13 +431,13 @@ public class SearchHistoryHelper {
 			SQLiteConnection db = openConnection(false);
 			if (db != null) {
 				try {
-					db.execSQL(
-							"UPDATE " + HISTORY_TABLE_NAME + " SET " + HISTORY_COL_TIME + "= ? " +
-									", " + HISTORY_COL_FREQ_INTERVALS + " = ? " +
-									", " + HISTORY_COL_FREQ_VALUES + "= ? WHERE " +
+					db.execSQL("UPDATE " + HISTORY_TABLE_NAME +
+									" SET " + HISTORY_COL_TIME + " = ?, " +
+									HISTORY_COL_FREQ_INTERVALS + " = ?, " +
+									HISTORY_COL_FREQ_VALUES + " = ? WHERE " +
 									HISTORY_COL_NAME + " = ?",
-							new Object[]{e.getLastAccessTime(), e.getIntervals(), e.getIntervalsValues(),
-									e.getSerializedName()});
+							new Object[]{e.lastAccessedTime, e.getIntervals(), e.getIntervalsValues(),
+									e.getName()});
 				} finally {
 					db.close();
 				}
@@ -355,7 +450,11 @@ public class SearchHistoryHelper {
 			SQLiteConnection db = openConnection(false);
 			if (db != null) {
 				try {
-					insert(e, db);
+					if (e.getType() == HistoryEntry.POINT_TYPE) {
+						insert((PointHistoryEntry) e, db);
+					} else if (e.getType() == HistoryEntry.CATEGORY_TYPE) {
+						insert((CategoryHistoryEntry) e, db);
+					}
 				} finally {
 					db.close();
 				}
@@ -364,88 +463,71 @@ public class SearchHistoryHelper {
 			return false;
 		}
 
-		private void insert(HistoryEntry e, SQLiteConnection db) {
-			db.execSQL(
-					"INSERT INTO " + HISTORY_TABLE_NAME + " VALUES (?, ?, ?, ?, ?, ?)",
-					new Object[]{e.getSerializedName(), e.getLastAccessTime(),
-							e.getIntervals(), e.getIntervalsValues(), e.getLat(), e.getLon()});
+		private void insert(PointHistoryEntry e, SQLiteConnection db) {
+			db.execSQL("INSERT INTO " + HISTORY_TABLE_NAME + " VALUES (?, ?, ?, ?, ?, ?, ?)",
+					new Object[]{e.getName(), e.lastAccessedTime, e.getIntervals(),
+							e.getIntervalsValues(), e.getLat(), e.getLon(), e.getType()});
 		}
 
-		List<HistoryEntry> getLegacyEntries(SQLiteConnection db) {
-			List<HistoryEntry> entries = new ArrayList<>();
-			if (db != null) {
-				// LEGACY QUERY !!
-				SQLiteCursor query = db.rawQuery(
-						"SELECT name, latitude, longitude, time FROM history ORDER BY time DESC", null);
-				if (query != null && query.moveToFirst()) {
-					do {
-						String name = query.getString(0);
-						String type = PointDescription.POINT_TYPE_MARKER;
-						// make it proper name with type
-						if (name.contains(context.getString(R.string.favorite))) {
-							type = PointDescription.POINT_TYPE_FAVORITE;
-						} else if (name.contains(context.getString(R.string.search_address_building))) {
-							type = PointDescription.POINT_TYPE_ADDRESS;
-						} else if (name.contains(context.getString(R.string.search_address_city))) {
-							type = PointDescription.POINT_TYPE_ADDRESS;
-						} else if (name.contains(context.getString(R.string.search_address_street))) {
-							type = PointDescription.POINT_TYPE_ADDRESS;
-						} else if (name.contains(context.getString(R.string.search_address_street_option))) {
-							type = PointDescription.POINT_TYPE_ADDRESS;
-						} else if (name.contains(context.getString(R.string.poi))) {
-							type = PointDescription.POINT_TYPE_POI;
-						}
-						if (name.contains(":")) {
-							name = name.substring(name.indexOf(':') + 1);
-						}
-						HistoryEntry e = new HistoryEntry(query.getDouble(1), query.getDouble(2), new PointDescription(
-								type, name));
-						e.markAsAccessed(query.getLong(3));
-						entries.add(e);
-					} while (query.moveToNext());
-				}
-				if (query != null) {
-					query.close();
-				}
+		private void insert(CategoryHistoryEntry e, SQLiteConnection db) {
+			db.execSQL("INSERT INTO " + HISTORY_TABLE_NAME + " VALUES (?, ?, ?, ?, ?, ?, ?)",
+					new Object[]{e.getName(), e.lastAccessedTime, e.getIntervals(),
+							e.getIntervalsValues(), 0, 0, e.getType()});
+		}
+
+		private HistoryEntry readItem(SQLiteCursor query) {
+			String name = query.getString(0);
+			long lastAccessed = query.getLong(1);
+			String intervals = query.getString(2);
+			String values = query.getString(3);
+			double lat = query.getDouble(4);
+			double lon = query.getDouble(5);
+			int type = query.getInt(6);
+
+			HistoryEntry entry;
+			if (type == HistoryEntry.POINT_TYPE) {
+				PointDescription pd = PointDescription.deserializeFromString(name, new LatLon(lat, lon));
+				entry = new PointHistoryEntry(lat, lon, pd);
+			} else {
+				entry = new CategoryHistoryEntry(name);
 			}
-			return entries;
+			entry.lastAccessedTime = lastAccessed;
+			entry.setFrequency(intervals, values);
+
+			return entry;
 		}
 
 		public List<HistoryEntry> getEntries() {
-			List<HistoryEntry> entries = new ArrayList<>();
+			List<HistoryEntry> res = new ArrayList<>();
 			SQLiteConnection db = openConnection(true);
 			if (db != null) {
 				try {
-					SQLiteCursor query = db.rawQuery(
-							"SELECT " + HISTORY_COL_NAME + ", " + HISTORY_COL_LAT + "," + HISTORY_COL_LON + ", " +
-									HISTORY_COL_TIME + ", " + HISTORY_COL_FREQ_INTERVALS + ", " + HISTORY_COL_FREQ_VALUES +
-									" FROM " + HISTORY_TABLE_NAME, null);
-					Map<PointDescription, HistoryEntry> st = new HashMap<>();
+					SQLiteCursor query = db.rawQuery(HISTORY_TABLE_SELECT, null);
+					Map<String, HistoryEntry> st = new HashMap<>();
 					if (query != null && query.moveToFirst()) {
 						boolean reinsert = false;
 						do {
-							String name = query.getString(0);
-							PointDescription p = PointDescription.deserializeFromString(name, new LatLon(query.getDouble(1), query.getDouble(2)));
-							HistoryEntry e = new HistoryEntry(query.getDouble(1), query.getDouble(2),
-									p);
-							long time = query.getLong(3);
-							e.setLastAccessTime(time);
-							e.setFrequency(query.getString(4), query.getString(5));
-							if (st.containsKey(p)) {
+							HistoryEntry entry = readItem(query);
+							String name = entry.getName();
+							if (st.containsKey(name)) {
 								reinsert = true;
 							}
-							entries.add(e);
-							st.put(p, e);
+							res.add(entry);
+							st.put(name, entry);
 						} while (query.moveToNext());
+
 						if (reinsert) {
 							System.err.println("Reinsert all values for search history");
 							db.execSQL("DELETE FROM " + HISTORY_TABLE_NAME);
-							entries.clear();
-							entries.addAll(st.values());
-							for (HistoryEntry he : entries) {
-								insert(he, db);
+							res.clear();
+							res.addAll(st.values());
+							for (HistoryEntry he : res) {
+								if (he.getType() == HistoryEntry.POINT_TYPE) {
+									insert((PointHistoryEntry) he, db);
+								} else if (he.getType() == HistoryEntry.CATEGORY_TYPE) {
+									insert((CategoryHistoryEntry) he, db);
+								}
 							}
-
 						}
 					}
 					if (query != null) {
@@ -455,7 +537,7 @@ public class SearchHistoryHelper {
 					db.close();
 				}
 			}
-			return entries;
+			return res;
 		}
 	}
 }

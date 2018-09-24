@@ -24,8 +24,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.OsmAndListFragment;
-import net.osmand.plus.dashboard.DashLocationFragment;
-import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
+import net.osmand.plus.helpers.SearchHistoryHelper.PointHistoryEntry;
 import net.osmand.plus.search.listitems.QuickSearchBottomShadowListItem;
 import net.osmand.plus.search.listitems.QuickSearchButtonListItem;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
@@ -210,10 +209,10 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 					pointDescription.setIconName(QuickSearchListItem.getAmenityIconName(app, a));
 					break;
 				case RECENT_OBJ:
-					HistoryEntry entry = (HistoryEntry) object;
-					pointDescription = entry.getName();
+					PointHistoryEntry point = (PointHistoryEntry) object;
+					pointDescription = point.getPointDescription();
 					if (pointDescription.isPoi()) {
-						Amenity amenity = app.getSearchUICore().findAmenity(entry.getName().getName(), entry.getLat(), entry.getLon(), lang, transliterate);
+						Amenity amenity = app.getSearchUICore().findAmenity(pointDescription.getName(), point.getLat(), point.getLon(), lang, transliterate);
 						if (amenity != null) {
 							object = amenity;
 							pointDescription = new PointDescription(PointDescription.POINT_TYPE_POI,
@@ -221,7 +220,7 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 							pointDescription.setIconName(QuickSearchListItem.getAmenityIconName(app, amenity));
 						}
 					} else if (pointDescription.isFavorite()) {
-						LatLon entryLatLon = new LatLon(entry.getLat(), entry.getLon());
+						LatLon entryLatLon = new LatLon(point.getLat(), point.getLon());
 						List<FavouritePoint> favs = app.getFavorites().getFavouritePoints();
 						for (FavouritePoint f : favs) {
 							if (entryLatLon.equals(new LatLon(f.getLatitude(), f.getLongitude()))
