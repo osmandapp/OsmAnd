@@ -39,7 +39,7 @@
     
     
     <string name="stop_routing_confirm">آیا مسیریابی را قطع می‌کنید؟</string>
-    <string name="clear_dest_confirm">آیا از پاک‌کردن مقصد (و مقصدهای بین‌راهی) مطمئن هستید؟</string>
+    <string name="clear_dest_confirm">آیا از پاک‌کردن مقصد (و مقصدهای میانی) مطمئن هستید؟</string>
     <string name="intermediate_points_change_order">تغییر ترتیب</string>
     <string name="av_def_action_video">ضبط ویدئو</string>
     <string name="av_def_action_audio">ضبط صدا</string>
@@ -1225,9 +1225,9 @@
 	<string name="navigate_point_format_DMS">DDD MM SS.SS</string>
 	<string name="poi_error_poi_not_found">نقطه پیدا نشد، یا مکان از چند نقطه تشکیل شده است که فعلاً پشتیبانی نمی‌شود.</string>
         <string name="osb_author_or_password_not_specified">لطفاً نام کاربری و رمز عبورتان برای سایت OSM را در قسمت تنظیمات وارد کنید</string>
-	<string name="clear_intermediate_points">پاک‌کردن مقصدهای بین‌راهی</string>
-	<string name="keep_intermediate_points">نگه‌داشتن مقصدهای بین‌راهی</string>
-	<string name="new_directions_point_dialog">مقصدهای بین‌راهی را قبلاً چیده‌اید.</string>
+	<string name="clear_intermediate_points">پاک‌کردن مقصدهای میانی</string>
+	<string name="keep_intermediate_points">نگه‌داشتن مقصدهای میانی</string>
+	<string name="new_directions_point_dialog">مقصدهای میانی را قبلاً چیده‌اید.</string>
 	<string name="context_menu_item_directions_to">مسیریابی به اینجا</string>
 	<string name="context_menu_item_directions_from">مسیریابی از اینجا</string>
 	<string name="route_descr_map_location">نقشه: </string>
@@ -1488,7 +1488,7 @@
     
     
     
-	<string name="import_file_favourites">آیا داده‌ها را به‌صورت فایل GPX ذخیره می‌کنید یا نقاط بین‌راهی را به نقاط برگزیده وارد می‌کنید؟</string>
+	<string name="import_file_favourites">آیا داده‌ها را به‌صورت فایل GPX ذخیره می‌کنید یا نقاط بین‌راهی را به برگزیده‌ها وارد می‌کنید؟</string>
 	
 	<string name="gpx_file_is_empty">فایل GPX خالی</string>
     
@@ -2124,7 +2124,7 @@
     <string name="shared_string_overview">مرور کلی</string>
     <string name="nearest_cities">نزدیکترین شهرها</string>
     <string name="quick_action_auto_zoom_desc">با لمس این دکمهٔ عملیاتی، زوم خودکار وابسته به سرعت را روشن/خاموش کنید.</string>
-    <string name="quick_action_add_first_intermediate">افزودن اولین بین‌راهی</string>
+    <string name="quick_action_add_first_intermediate">افزودن اولین میانی</string>
     <string name="subscribe_email_desc">مشترک خبرنامهٔ ایمیلی ما شوید و ۳ نقشهٔ دیگر دانلود کنید!</string>
     <string name="index_item_depth_contours_osmand_ext">منحنی‌های تراز عمق دریا</string>
     <string name="index_item_depth_points_southern_hemisphere">نقاط عمقی دریا در نیمکرهٔ جنوبی</string>
@@ -2135,7 +2135,7 @@
     <string name="relief_smoothness_factor_descr">اولویت ساختار زمین: هموار یا پرتپه.</string>
     <string name="shared_string_slope">شیب</string>
     <string name="points_delete_multiple">دارید %1$d نقطه را حذف می‌کنید؛ مطمئن هستید؟</string>
-    <string name="track_points_category_name">نقاط میانی، نقاط محبوب (POI)، عارضه‌های دارای نام</string>
+    <string name="track_points_category_name">نقاط بین‌راهی، نقاط محبوب (POI)، عارضه‌های دارای نام</string>
     <string name="shared_string_gpx_track">مسیر</string>
     <string name="shared_string_time_span">مدت‌زمان</string>
     <string name="select_gpx_folder">پوشهٔ فایل GPX را انتخاب کنید</string>
@@ -2652,7 +2652,7 @@
     <string name="change_color">تغییر رنگ</string>
     <string name="edit_name">اصلاح نام</string>
     <string name="animate_my_location">موقعیت من را نشان بده</string>
-    <string name="quick_action_add_destination_desc">با لمس این دکمهٔ عملیاتی مکان موجود در مرکز صفحه به‌عنوان مقصد در نظر گرفته می‌شود. اگر قبلاً مقصدی انتخاب کرده باشید تبدیل می‌شود به آخرین مقصد میانی.</string>
+    <string name="quick_action_add_destination_desc">با لمس این دکمهٔ عملیاتی مکان موجود در مرکز صفحه به‌عنوان مقصد در نظر گرفته می‌شود. مقصد قبلی می‌شود آخرین مقصد میانی.</string>
     <string name="quick_action_replace_destination_desc">این دکمهٔ عملیاتی را لمس کنید تا مکان موجود در مرکز صفحه جایگزین مقصد شود.</string>
     <string name="quick_action_add_first_intermediate_desc">این دکمهٔ عملیاتی را لمس کنید تا مکان موجود در مرکز صفحه به‌عنوان اولین نقطهٔ میانی در نظر گرفته شود.</string>
     <string name="no_overlay">بدون لایهٔ رویی</string>
@@ -2712,7 +2712,7 @@
     <string name="passed">آخرین استفاده: %1$s</string>
     <string name="save_as_line">ذخیره‌کردن به‌عنوان خط</string>
     <string name="store_tracks_in_monthly_directories">ذخیرهٔ مسیرهای ضبط‌شده در پوشه‌های ماهانه</string>
-    <string name="store_tracks_in_monthly_directories_descrp">"مسیرهای ضبط‌شده در هر ماه را در پوشهٔ همان ماه ذخیره کن (مثلاً  ‎۲۰۱۸-۰۱)."</string>
+    <string name="store_tracks_in_monthly_directories_descrp">"مسیرهای ضبط‌شده را در زیرپوشه‌های ماهانه ذخیره می‌کند (مثلاً  ‎۲۰۱۸-۰۱)."</string>
     <string name="display_zoom_level">زوم نمایش: %1$s</string>
     <string name="gpx_no_tracks_title">هنوز فایل GPXای ندارید</string>
     <string name="gpx_no_tracks_title_folder">همچنین می‌توانید فایل‌های GPX را در این پوشه قرار دهید</string>
@@ -3194,11 +3194,13 @@
 \n
 \n"</string>
     <string name="test_voice_desrc">روی یکی از دکمه‌ها بزنید و فرمان گفتاری متناظر با آن را بشنوید تا فرمان‌های مشکل‌دار یا ناموجود را شناسایی کنید.</string>
-<string name="release_3_2_pre">• حل مشکل متوقف‌شدن برنامه هنگام بازکردن آن که برای نقشه‌های غیرلاتین پس می‌آمد.
-\n
-\n • بهبودهایی برای مشکل سرعت پرداخت نقشه (map render) روی دستگاه‌های دارای اندروید ۸٫۰.
-\n
+<string name="release_3_2_pre">• حل مشکل متوقف‌شدن هنگام بازکردن برنامه که برای نقشه‌های غیرلاتین پیش می‌آمد. 
+\n 
+\n • بهبودهایی برای مشکل سرعت پرداخت نقشه (map render) روی دستگاه‌های دارای اندروید ۸٫۰. 
+\n 
 \n • پشتیبانی از ویرایش اشیای چندضلعی (non-amenity) 
+\n 
+\n• اندازه‌گیری مسافت: اضافه‌شدن دکمهٔ اندازه‌گیری به عملیات‌ها در منوی زمینه
 \n
 \n</string>
     <string name="commiting_way">در حال ثبت راه…</string>

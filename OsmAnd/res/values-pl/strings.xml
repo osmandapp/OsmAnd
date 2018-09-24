@@ -3175,6 +3175,9 @@ Reprezentuje obszar: %1$s x %2$s</string>
 \n 
 \n• Poprawiono renderowanie na urządzeniach z Androidem 8.0
 \n 
-\n• Wsparcie dla edycji obiektów wieloboku (brak udogodnień)
+\n• Obsługa edycji obiektów wielobokowych (nieoryginalnych)
+\n
+\n• Mierz odległość: dodaj przycisk Mierz do akcji w menu kontekstowym
 \n</string>
+    <string name="rendering_value_black_name">Czarny</string>
     </resources>
