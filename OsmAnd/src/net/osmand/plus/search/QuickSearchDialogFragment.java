@@ -1773,6 +1773,10 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	}
 
 	public void completeQueryWithObject(SearchResult sr) {
+		if (sr.object instanceof AbstractPoiType) {
+			SearchHistoryHelper.getInstance(app).addCategoryToHistory((AbstractPoiType) sr.object);
+			reloadHistory();
+		}
 		if (sr.object instanceof PoiType && ((PoiType) sr.object).isAdditional()) {
 			PoiType additional = (PoiType) sr.object;
 			AbstractPoiType parent = additional.getParentType();

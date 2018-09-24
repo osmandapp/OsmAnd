@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.osm.AbstractPoiType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
@@ -41,6 +42,17 @@ public class SearchHistoryHelper {
 
 	public void addPointToHistory(double latitude, double longitude, @NonNull PointDescription pointDescription) {
 		addHistoryEntry(new PointHistoryEntry(latitude, longitude, pointDescription));
+	}
+
+	public void addCategoryToHistory(AbstractPoiType pt) {
+		addHistoryEntry(new CategoryHistoryEntry(pt.getKeyName()));
+	}
+
+	public List<HistoryEntry> getHistoryEntries() {
+		if (loadedEntries == null) {
+			checkLoadedEntries();
+		}
+		return new ArrayList<>(loadedEntries);
 	}
 
 	public List<PointHistoryEntry> getHistoryPoints() {
@@ -99,6 +111,40 @@ public class SearchHistoryHelper {
 		}
 	}
 
+	public static class CategoryHistoryEntry extends HistoryEntry {
+
+		@NonNull
+		private String name;
+
+		CategoryHistoryEntry(@NonNull String name) {
+			this.name = name;
+		}
+
+		@Override
+		public int getType() {
+			return CATEGORY_TYPE;
+		}
+
+		@NonNull
+		@Override
+		public String getName() {
+			return name;
+		}
+
+		@Override
+		public boolean equals(Object o) {
+			if (this == o) return true;
+			if (o == null || getClass() != o.getClass()) return false;
+			CategoryHistoryEntry that = (CategoryHistoryEntry) o;
+			return name.equals(that.name);
+		}
+
+		@Override
+		public int hashCode() {
+			return name.hashCode();
+		}
+	}
+
 	public static class PointHistoryEntry extends HistoryEntry {
 
 		private double lat;
@@ -132,7 +178,7 @@ public class SearchHistoryHelper {
 
 		@NonNull
 		@Override
-		protected String getName() {
+		public String getName() {
 			return PointDescription.serializeToString(pointDescription);
 		}
 
@@ -159,9 +205,10 @@ public class SearchHistoryHelper {
 		}
 	}
 
-	private static abstract class HistoryEntry {
+	public static abstract class HistoryEntry {
 
-		static final int POINT_TYPE = 0;
+		public static final int POINT_TYPE = 0;
+		public static final int CATEGORY_TYPE = 1;
 
 		protected long lastAccessedTime;
 		private int[] intervals = new int[0];
@@ -170,7 +217,7 @@ public class SearchHistoryHelper {
 		public abstract int getType();
 
 		@NonNull
-		protected abstract String getName();
+		public abstract String getName();
 
 		private double rankFunction(double cf, double timeDiff) {
 			if (timeDiff <= 0) {
@@ -405,6 +452,8 @@ public class SearchHistoryHelper {
 				try {
 					if (e.getType() == HistoryEntry.POINT_TYPE) {
 						insert((PointHistoryEntry) e, db);
+					} else if (e.getType() == HistoryEntry.CATEGORY_TYPE) {
+						insert((CategoryHistoryEntry) e, db);
 					}
 				} finally {
 					db.close();
@@ -420,35 +469,51 @@ public class SearchHistoryHelper {
 							e.getIntervalsValues(), e.getLat(), e.getLon(), e.getType()});
 		}
 
+		private void insert(CategoryHistoryEntry e, SQLiteConnection db) {
+			db.execSQL("INSERT INTO " + HISTORY_TABLE_NAME + " VALUES (?, ?, ?, ?, ?, ?, ?)",
+					new Object[]{e.getName(), e.lastAccessedTime, e.getIntervals(),
+							e.getIntervalsValues(), 0, 0, e.getType()});
+		}
+
+		private HistoryEntry readItem(SQLiteCursor query) {
+			String name = query.getString(0);
+			long lastAccessed = query.getLong(1);
+			String intervals = query.getString(2);
+			String values = query.getString(3);
+			double lat = query.getDouble(4);
+			double lon = query.getDouble(5);
+			int type = query.getInt(6);
+
+			HistoryEntry entry;
+			if (type == HistoryEntry.POINT_TYPE) {
+				PointDescription pd = PointDescription.deserializeFromString(name, new LatLon(lat, lon));
+				entry = new PointHistoryEntry(lat, lon, pd);
+			} else {
+				entry = new CategoryHistoryEntry(name);
+			}
+			entry.lastAccessedTime = lastAccessed;
+			entry.setFrequency(intervals, values);
+
+			return entry;
+		}
+
 		public List<HistoryEntry> getEntries() {
 			List<HistoryEntry> res = new ArrayList<>();
 			SQLiteConnection db = openConnection(true);
 			if (db != null) {
 				try {
 					SQLiteCursor query = db.rawQuery(HISTORY_TABLE_SELECT, null);
-					Map<PointDescription, PointHistoryEntry> st = new HashMap<>();
+					Map<String, HistoryEntry> st = new HashMap<>();
 					if (query != null && query.moveToFirst()) {
 						boolean reinsert = false;
 						do {
-							int type = query.getInt(6);
-							if (type == HistoryEntry.POINT_TYPE) {
-								String name = query.getString(0);
-								long lastAccessed = query.getLong(1);
-								String intervals = query.getString(2);
-								String values = query.getString(3);
-								double lat = query.getDouble(4);
-								double lon = query.getDouble(5);
-
-								PointDescription pd = PointDescription.deserializeFromString(name, new LatLon(lat, lon));
-								PointHistoryEntry e = new PointHistoryEntry(lat, lon, pd);
-								e.lastAccessedTime = lastAccessed;
-								e.setFrequency(intervals, values);
-								if (st.containsKey(pd)) {
-									reinsert = true;
-								}
-								res.add(e);
-								st.put(pd, e);
+							HistoryEntry entry = readItem(query);
+							String name = entry.getName();
+							if (st.containsKey(name)) {
+								reinsert = true;
 							}
+							res.add(entry);
+							st.put(name, entry);
 						} while (query.moveToNext());
 
 						if (reinsert) {
@@ -459,6 +524,8 @@ public class SearchHistoryHelper {
 							for (HistoryEntry he : res) {
 								if (he.getType() == HistoryEntry.POINT_TYPE) {
 									insert((PointHistoryEntry) he, db);
+								} else if (he.getType() == HistoryEntry.CATEGORY_TYPE) {
+									insert((CategoryHistoryEntry) he, db);
 								}
 							}
 						}
