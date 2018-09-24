@@ -1776,6 +1776,9 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		if (sr.object instanceof AbstractPoiType) {
 			SearchHistoryHelper.getInstance(app).addNewItemToHistory((AbstractPoiType) sr.object);
 			reloadHistory();
+		} else if (sr.object instanceof PoiUIFilter) {
+			SearchHistoryHelper.getInstance(app).addNewItemToHistory((PoiUIFilter) sr.object);
+			reloadHistory();
 		}
 		if (sr.object instanceof PoiType && ((PoiType) sr.object).isAdditional()) {
 			PoiType additional = (PoiType) sr.object;

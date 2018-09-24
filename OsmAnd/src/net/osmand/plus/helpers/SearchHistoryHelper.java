@@ -6,6 +6,7 @@ import net.osmand.osm.AbstractPoiType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
+import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -45,6 +46,11 @@ public class SearchHistoryHelper {
 
 	public void addNewItemToHistory(AbstractPoiType pt) {
 		PointDescription pd = new PointDescription(PointDescription.POINT_TYPE_POI_TYPE, pt.getKeyName());
+		addNewItemToHistory(new HistoryEntry(0, 0, pd));
+	}
+
+	public void addNewItemToHistory(PoiUIFilter filter) {
+		PointDescription pd = new PointDescription(PointDescription.POINT_TYPE_CUSTOM_POI_FILTER, filter.getFilterId());
 		addNewItemToHistory(new HistoryEntry(0, 0, pd));
 	}
 

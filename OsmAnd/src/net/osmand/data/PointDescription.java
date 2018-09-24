@@ -48,6 +48,7 @@ public class PointDescription {
 	public static final String POINT_TYPE_TRANSPORT_STOP = "transport_stop";
 	public static final String POINT_TYPE_MAPILLARY_IMAGE = "mapillary_image";
 	public static final String POINT_TYPE_POI_TYPE = "poi_type";
+	public static final String POINT_TYPE_CUSTOM_POI_FILTER = "custom_poi_filter";
 
 
 	public static final PointDescription LOCATION_POINT = new PointDescription(POINT_TYPE_LOCATION, "");
@@ -257,6 +258,10 @@ public class PointDescription {
 
 	public boolean isPoiType() {
 		return POINT_TYPE_POI_TYPE.equals(type);
+	}
+
+	public boolean isCustomPoiFilter() {
+		return POINT_TYPE_CUSTOM_POI_FILTER.equals(type);
 	}
 
 	@Override

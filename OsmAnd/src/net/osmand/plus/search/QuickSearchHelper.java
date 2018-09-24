@@ -7,6 +7,7 @@ import net.osmand.binary.BinaryMapIndexReader.SearchPoiTypeFilter;
 import net.osmand.data.Amenity;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
+import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
@@ -399,16 +400,24 @@ public class QuickSearchHelper implements ResourceListener {
 			int p = 0;
 			for (HistoryEntry point : SearchHistoryHelper.getInstance(app).getHistoryEntries()) {
 				SearchResult sr = new SearchResult(phrase);
-				if (point.getName().isPoiType()) {
-					AbstractPoiType pt = MapPoiTypes.getDefault().getAnyPoiTypeByKey(point.getName().getName());
+				PointDescription pd = point.getName();
+				if (pd.isPoiType()) {
+					AbstractPoiType pt = MapPoiTypes.getDefault().getAnyPoiTypeByKey(pd.getName());
 					if (pt != null) {
 						sr.localeName = pt.getTranslation();
 						sr.object = pt;
 						sr.priorityDistance = 0;
 						sr.objectType = ObjectType.POI_TYPE;
 					}
+				} else if (pd.isCustomPoiFilter()) {
+					PoiUIFilter filter = app.getPoiFilters().getFilterById(pd.getName());
+					if (filter != null) {
+						sr.localeName = filter.getName();
+						sr.object = filter;
+						sr.objectType = ObjectType.POI_TYPE;
+					}
 				} else {
-					sr.localeName = point.getName().getName();
+					sr.localeName = pd.getName();
 					sr.object = point;
 					sr.objectType = ObjectType.RECENT_OBJ;
 					sr.location = new LatLon(point.getLat(), point.getLon());
