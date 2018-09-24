@@ -2,6 +2,7 @@ package net.osmand.plus.helpers;
 
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.osm.AbstractPoiType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
@@ -40,6 +41,11 @@ public class SearchHistoryHelper {
 
 	public void addNewItemToHistory(double latitude, double longitude, PointDescription pointDescription) {
 		addNewItemToHistory(new HistoryEntry(latitude, longitude, pointDescription));
+	}
+
+	public void addNewItemToHistory(AbstractPoiType pt) {
+		PointDescription pd = new PointDescription(PointDescription.POINT_TYPE_POI_TYPE, pt.getKeyName());
+		addNewItemToHistory(new HistoryEntry(0, 0, pd));
 	}
 
 	public List<HistoryEntry> getHistoryEntries() {

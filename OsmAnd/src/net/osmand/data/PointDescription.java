@@ -1,10 +1,5 @@
 package net.osmand.data;
 
-import net.osmand.LocationConvert;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.R;
-import net.osmand.util.Algorithms;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -12,6 +7,12 @@ import android.support.annotation.Nullable;
 import com.google.openlocationcode.OpenLocationCode;
 import com.jwetherell.openmap.common.LatLonPoint;
 import com.jwetherell.openmap.common.UTMPoint;
+
+import net.osmand.LocationConvert;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.R;
+import net.osmand.util.Algorithms;
 
 public class PointDescription {
 	private String type = "";
@@ -46,6 +47,7 @@ public class PointDescription {
 	public static final String POINT_TYPE_TRANSPORT_ROUTE = "transport_route";
 	public static final String POINT_TYPE_TRANSPORT_STOP = "transport_stop";
 	public static final String POINT_TYPE_MAPILLARY_IMAGE = "mapillary_image";
+	public static final String POINT_TYPE_POI_TYPE = "poi_type";
 
 
 	public static final PointDescription LOCATION_POINT = new PointDescription(POINT_TYPE_LOCATION, "");
@@ -251,6 +253,10 @@ public class PointDescription {
 
 	public boolean isMyLocation() {
 		return POINT_TYPE_MY_LOCATION.equals(type);
+	}
+
+	public boolean isPoiType() {
+		return POINT_TYPE_POI_TYPE.equals(type);
 	}
 
 	@Override
