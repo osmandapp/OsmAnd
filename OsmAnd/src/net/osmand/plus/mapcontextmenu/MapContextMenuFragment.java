@@ -1341,6 +1341,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			}
 			nearbyTransportStopRoutesGrid.setAdapter(adapter);
 			nearbyTransportStopRoutesGrid.setVisibility(View.VISIBLE);
+			nearbyRoutesLayout.setVisibility(View.VISIBLE);
 		} else {
 			nearbyRoutesLayout.setVisibility(View.GONE);
 		}

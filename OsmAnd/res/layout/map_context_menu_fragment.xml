@@ -113,7 +113,8 @@
                     android:layout_marginTop="@dimen/context_menu_padding_margin_tiny"
                     android:gravity="top"
                     android:orientation="horizontal"
-                    android:paddingTop="3dp">
+                    android:paddingTop="3dp"
+                    android:visibility="gone">
 
                     <net.osmand.plus.widgets.TextViewEx
                         android:id="@+id/nearby_routes_within_text_view"
