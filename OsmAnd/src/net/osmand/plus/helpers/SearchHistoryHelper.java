@@ -54,11 +54,18 @@ public class SearchHistoryHelper {
 		addNewItemToHistory(new HistoryEntry(0, 0, pd));
 	}
 
-	public List<HistoryEntry> getHistoryEntries() {
+	public List<HistoryEntry> getHistoryEntries(boolean onlyPoints) {
 		if (loadedEntries == null) {
 			checkLoadedEntries();
 		}
-		return new ArrayList<>(loadedEntries);
+		List<HistoryEntry> res = new ArrayList<>();
+		for (HistoryEntry entry : loadedEntries) {
+			PointDescription pd = entry.getName();
+			if (!onlyPoints || (!pd.isPoiType() && !pd.isCustomPoiFilter())) {
+				res.add(entry);
+			}
+		}
+		return res;
 	}
 
 	public void remove(HistoryEntry model) {

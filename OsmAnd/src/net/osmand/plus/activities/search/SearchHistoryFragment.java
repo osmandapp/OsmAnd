@@ -111,7 +111,7 @@ public class SearchHistoryFragment extends OsmAndListFragment implements SearchA
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		historyAdapter = new HistoryAdapter(helper.getHistoryEntries());
+		historyAdapter = new HistoryAdapter(helper.getHistoryEntries(true));
 		setListAdapter(historyAdapter);
 		setHasOptionsMenu(true);
 	}
@@ -138,7 +138,7 @@ public class SearchHistoryFragment extends OsmAndListFragment implements SearchA
 			updateLocationViewCache.specialFrom = ((SearchActivity) activity).getSearchPoint();
 		}
 		historyAdapter.clear();
-		for (HistoryEntry entry : helper.getHistoryEntries()) {
+		for (HistoryEntry entry : helper.getHistoryEntries(true)) {
 			historyAdapter.add(entry);
 		}
 		locationUpdate(location);
