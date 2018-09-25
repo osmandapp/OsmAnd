@@ -894,16 +894,65 @@ public class SearchCoreFactory {
 
 		@Override
 		public int getSearchPriority(SearchPhrase p) {
-			if (p.isLastWord(ObjectType.POI_TYPE) &&
+			if ((p.isLastWord(ObjectType.POI_TYPE) || containsPOICatergories(p)) &&
 					p.getLastTokenLocation() != null) {
 				return SEARCH_AMENITY_BY_TYPE_PRIORITY;
 			}
 			return -1;
 		}
 
+		private boolean containsPOICatergories(SearchPhrase p) {
+			Map<String, PoiType> translatedNames = types.getAllTranslatedNames(false);
+			List<PoiFilter> topVisibleFilters = types.getTopVisibleFilters();
+			List<PoiCategory> categories = types.getCategories(false);
+			NameStringMatcher stringMatcher = new NameStringMatcher(p.getUnknownSearchWord(), StringMatcherMode.CHECK_CONTAINS);
+			List<AbstractPoiType> results = new ArrayList<>();
+			for (PoiFilter pf : topVisibleFilters) {
+				if (!p.isUnknownSearchWordPresent()
+						|| stringMatcher.matches(pf.getTranslation())
+						|| stringMatcher.matches(pf.getEnTranslation())
+						|| stringMatcher.matches(pf.getSynonyms())) {
+					results.add(pf);
+				}
+			}
+			if (p.isUnknownSearchWordPresent()) {
+				for (PoiCategory c : categories) {
+					if (!results.contains(c)
+							&& (stringMatcher.matches(c.getTranslation())
+							|| stringMatcher.matches(c.getEnTranslation())
+							|| stringMatcher.matches(c.getSynonyms()))) {
+						results.add(c);
+					}
+				}
+				Iterator<Entry<String, PoiType>> it = translatedNames.entrySet().iterator();
+				while (it.hasNext()) {
+					Entry<String, PoiType> e = it.next();
+					PoiType pt = e.getValue();
+					if (pt.getCategory() != types.getOtherMapCategory()) {
+						if (!results.contains(pt)
+								&& (stringMatcher.matches(pt.getEnTranslation())
+								|| stringMatcher.matches(pt.getTranslation())
+								|| stringMatcher.matches(pt.getSynonyms()))) {
+							results.add(pt);
+						}
+						List<PoiType> additionals = pt.getPoiAdditionals();
+						if (additionals != null) {
+							for (PoiType a : additionals) {
+								if (!a.isReference() && !results.contains(a)
+										&& (stringMatcher.matches(a.getEnTranslation())
+										|| stringMatcher.matches(a.getTranslation())
+										|| stringMatcher.matches(a.getSynonyms()))) {
+									results.add(a);
+								}
+							}
+						}
+					}
+				}
+			}
+			return !results.isEmpty();
+		}
+
 	}
-
-
 
 	public static class SearchStreetByCityAPI extends SearchBaseAPI {
 
