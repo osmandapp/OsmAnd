@@ -344,6 +344,13 @@ public class AndroidUtils {
 				: ctx.getResources().getColor(R.color.secondary_text_light));
 	}
 
+
+	public static int getTextWidth(float textSize, String text) {
+		Paint paint = new Paint();
+		paint.setTextSize(textSize);
+		return (int) paint.measureText(text);
+	}
+	
 	public static int dpToPx(Context ctx, float dp) {
 		Resources r = ctx.getResources();
 		return (int) TypedValue.applyDimension(
