@@ -1287,12 +1287,18 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 	private void createTransportBadges() {
 		if (!transportBadgesCreated) {
-			List<TransportStopRoute> localTransportStopRoutes = filterTransportRoutes(menu.getLocalTransportStopRoutes());
-			List<TransportStopRoute> nearbyTransportStopRoutes = filterTransportRoutes(menu.getNearbyTransportStopRoutes());
+			List<TransportStopRoute> localTransportStopRoutes = menu.getLocalTransportStopRoutes();
+			List<TransportStopRoute> nearbyTransportStopRoutes = menu.getNearbyTransportStopRoutes();
 			int localColumnsPerRow = getRoutesBadgesColumnsPerRow(null);
-			int maxLocalRows = (int) Math.round(Math.ceil((double) localTransportStopRoutes.size() / localColumnsPerRow));
-			updateLocalRoutesBadges(localTransportStopRoutes, localColumnsPerRow);
-			updateNearbyRoutesBadges(maxLocalRows, nearbyTransportStopRoutes);
+			int maxLocalRows = 0;
+			if (localTransportStopRoutes != null) {
+				List<TransportStopRoute> localFilteredTransportStopRoutes = filterTransportRoutes(localTransportStopRoutes);
+				maxLocalRows = (int) Math.round(Math.ceil((double) localFilteredTransportStopRoutes.size() / localColumnsPerRow));
+				updateLocalRoutesBadges(localFilteredTransportStopRoutes, localColumnsPerRow);
+			}
+			if (nearbyTransportStopRoutes != null) {
+				updateNearbyRoutesBadges(maxLocalRows, filterTransportRoutes(nearbyTransportStopRoutes));
+			}
 			transportBadgesCreated = true;
 		}
 	}
@@ -1341,18 +1347,22 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 	}
 
 	private int getRoutesBadgesColumnsPerRow(@Nullable String nearInDistance) {
-		double badgeWidth = getResources().getDimension(R.dimen.context_menu_transport_grid_item_width);
-		double gridSpacing = getResources().getDimension(R.dimen.context_menu_transport_grid_spacing);
-		double gridPadding = getResources().getDimension(R.dimen.context_menu_padding_margin_default);
-		int availableSpace;
-		if (nearInDistance == null) {
-			availableSpace = (int) (routesBadgesContainer.getWidth() - gridPadding * 2);
-		} else {
-			int textWidth = AndroidUtils.getTextWidth(getResources().getDimensionPixelSize(R.dimen.default_sub_text_size), nearInDistance);
-			double paddingTv = getResources().getDimension(R.dimen.context_menu_padding_margin_small);
-			availableSpace = (int) (routesBadgesContainer.getWidth() - gridPadding * 2 - paddingTv - textWidth);
+		try {
+			double badgeWidth = getResources().getDimension(R.dimen.context_menu_transport_grid_item_width);
+			double gridSpacing = getResources().getDimension(R.dimen.context_menu_transport_grid_spacing);
+			double gridPadding = getResources().getDimension(R.dimen.context_menu_padding_margin_default);
+			int availableSpace;
+			if (nearInDistance == null) {
+				availableSpace = (int) (routesBadgesContainer.getWidth() - gridPadding * 2);
+			} else {
+				int textWidth = AndroidUtils.getTextWidth(getResources().getDimensionPixelSize(R.dimen.default_sub_text_size), nearInDistance);
+				double paddingTv = getResources().getDimension(R.dimen.context_menu_padding_margin_small);
+				availableSpace = (int) (routesBadgesContainer.getWidth() - gridPadding * 2 - paddingTv - textWidth);
+			}
+			return (int) ((availableSpace + gridSpacing) / (badgeWidth + gridSpacing));
+		} catch (Resources.NotFoundException e) {
+			return -1;
 		}
-		return (int) ((availableSpace + gridSpacing) / (badgeWidth + gridSpacing));
 	}
 	
 	@TargetApi(Build.VERSION_CODES.JELLY_BEAN)
