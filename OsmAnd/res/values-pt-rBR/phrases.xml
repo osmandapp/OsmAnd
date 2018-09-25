@@ -1787,8 +1787,8 @@
 	<string name="poi_bin_no">Sem lixeira</string>
 
 	<string name="poi_shelter_type_public_transport">Transporte público</string>
-	<string name="poi_shelter_type_picnic_shelter">Tipo de abrigo: abrigo de piquenique</string>
-	<string name="poi_shelter_type_weather_shelter">Tipo de abrigo: abrigo do tempo</string>
+	<string name="poi_shelter_type_picnic_shelter">Piquenique</string>
+	<string name="poi_shelter_type_weather_shelter">Contra intempéries</string>
 	<string name="poi_piste_grooming_scooter">Scooter</string>
 	<string name="poi_piste_grooming_skating">Skating</string>
 	<string name="poi_piste_grooming_no">Não</string>
@@ -1814,13 +1814,13 @@
 
 	<string name="poi_flagpole">Mastro de bandeira</string>
 
-	<string name="poi_shelter_type_lean_to">Tipo de abrigo: alpendre</string>
-	<string name="poi_shelter_type_basic_hut">Tipo de abrigo: cabana básica</string>
-	<string name="poi_shelter_type_building">Tipo de abrigo: edifício</string>
-	<string name="poi_shelter_type_wildlife_hide">Tipo de abrigo: esconderijo para animais selvagens</string>
-	<string name="poi_shelter_type_rock_shelter">Tipo de abrigo: rocha</string>
-	<string name="poi_shelter_type_sun_shelter">Tipo de abrigo: abrigo do sol</string>
-	<string name="poi_shelter_type_field_shelter">Tipo de abrigo: abrigo de campo</string>
+	<string name="poi_shelter_type_lean_to">Alpendre</string>
+	<string name="poi_shelter_type_basic_hut">Cabana básica</string>
+	<string name="poi_shelter_type_building">Edifício</string>
+	<string name="poi_shelter_type_wildlife_hide">Esconderijo para observar vida silvestre</string>
+	<string name="poi_shelter_type_rock_shelter">Rocha</string>
+	<string name="poi_shelter_type_sun_shelter">Abrigo do sol</string>
+	<string name="poi_shelter_type_field_shelter">Abrigo de campo</string>
 	<string name="poi_shelter_type_tent">Tipo de abrigo: tenda</string>
 	<string name="poi_shelter_type_abandoned">Tipo de abrigo: abandonado</string>
 
