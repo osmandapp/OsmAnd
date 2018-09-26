@@ -429,11 +429,11 @@ public abstract class ImageCard extends AbstractCard {
 			List<ImageCard> result = new ArrayList<>();
 			try {
 				final Map<String, String> pms = new LinkedHashMap<>();
-				pms.put("lat", "" + latLon.getLatitude());
-				pms.put("lon", "" + latLon.getLongitude());
+				pms.put("lat", "" + (float) latLon.getLatitude());
+				pms.put("lon", "" + (float) latLon.getLongitude());
 				Location myLocation = app.getLocationProvider().getLastKnownLocation();
 				if (myLocation != null) {
-					pms.put("myLocation", "" + myLocation.getLatitude() + "," + myLocation.getLongitude());
+					pms.put("mloc", "" + (float) myLocation.getLatitude() + "," + (float) myLocation.getLongitude());
 				}
 				pms.put("app", Version.isPaidVersion(app) ? "paid" : "free");
 				String preferredLang = app.getSettings().MAP_PREFERRED_LOCALE.get();

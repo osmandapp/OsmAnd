@@ -250,10 +250,11 @@
                 <LinearLayout
                     android:id="@+id/title_button_view"
                     android:layout_width="0dp"
-                    android:layout_height="@dimen/context_menu_controller_height"
+                    android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/context_menu_padding_margin_small"
                     android:layout_marginRight="@dimen/context_menu_padding_margin_small"
                     android:layout_weight="1"
+                    android:minHeight="@dimen/context_menu_controller_height"
                     android:orientation="horizontal"
                     tools:background="?attr/ctx_menu_controller_bg">
 
@@ -285,10 +286,11 @@
                 <LinearLayout
                     android:id="@+id/title_button_right_view"
                     android:layout_width="0dp"
-                    android:layout_height="@dimen/context_menu_controller_height"
+                    android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/context_menu_padding_margin_small"
                     android:layout_marginRight="@dimen/context_menu_padding_margin_small"
                     android:layout_weight="1"
+                    android:minHeight="@dimen/context_menu_controller_height"
                     android:orientation="horizontal"
                     tools:background="?attr/ctx_menu_controller_bg">
 
@@ -320,14 +322,15 @@
                 android:visibility="gone"
                 tools:visibility="visible">
 
-                <LinearLayout
-                    android:id="@+id/download_button_left_view"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/context_menu_controller_height"
-                    android:layout_marginLeft="@dimen/context_menu_padding_margin_small"
-                    android:layout_marginRight="@dimen/context_menu_padding_margin_small"
-                    android:layout_weight="1"
-                    tools:background="?attr/ctx_menu_controller_bg">
+				<LinearLayout
+					android:id="@+id/download_button_left_view"
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:layout_marginLeft="@dimen/context_menu_padding_margin_small"
+					android:layout_marginRight="@dimen/context_menu_padding_margin_small"
+					android:layout_weight="1"
+					android:minHeight="@dimen/context_menu_controller_height"
+					tools:background="?attr/ctx_menu_controller_bg">
 
                     <net.osmand.plus.widgets.TextViewEx
                         android:id="@+id/download_button_left"
@@ -345,14 +348,15 @@
 
                 </LinearLayout>
 
-                <LinearLayout
-                    android:id="@+id/download_button_right_view"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/context_menu_controller_height"
-                    android:layout_marginLeft="@dimen/context_menu_padding_margin_small"
-                    android:layout_marginRight="@dimen/context_menu_padding_margin_small"
-                    android:layout_weight="1"
-                    tools:background="?attr/ctx_menu_controller_bg">
+				<LinearLayout
+					android:id="@+id/download_button_right_view"
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:layout_marginLeft="@dimen/context_menu_padding_margin_small"
+					android:layout_marginRight="@dimen/context_menu_padding_margin_small"
+					android:layout_weight="1"
+					android:minHeight="@dimen/context_menu_controller_height"
+					tools:background="?attr/ctx_menu_controller_bg">
 
                     <net.osmand.plus.widgets.TextViewEx
                         android:id="@+id/download_button_right"
@@ -382,14 +386,15 @@
                 android:visibility="gone"
                 tools:visibility="visible">
 
-                <LinearLayout
-                    android:id="@+id/title_button_bottom_view"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/context_menu_controller_height"
-                    android:layout_marginLeft="@dimen/context_menu_padding_margin_small"
-                    android:layout_marginRight="@dimen/context_menu_padding_margin_small"
-                    android:layout_weight="1"
-                    tools:background="?attr/ctx_menu_controller_bg">
+				<LinearLayout
+					android:id="@+id/title_button_bottom_view"
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:layout_marginLeft="@dimen/context_menu_padding_margin_small"
+					android:layout_marginRight="@dimen/context_menu_padding_margin_small"
+					android:layout_weight="1"
+					android:minHeight="@dimen/context_menu_controller_height"
+					tools:background="?attr/ctx_menu_controller_bg">
 
                     <net.osmand.plus.widgets.TextViewEx
                         android:id="@+id/title_button_bottom"

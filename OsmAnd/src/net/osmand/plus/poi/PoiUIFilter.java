@@ -65,6 +65,8 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 	protected String savedFilterByName = null;
 	protected List<Amenity> currentSearchResult = null;
 
+	private boolean deleted;
+
 	// constructor for standard filters
 	public PoiUIFilter(AbstractPoiType type, OsmandApplication application, String idSuffix) {
 		this.app = application;
@@ -118,6 +120,14 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 		combineWithPoiFilters(filtersToMerge);
 		filterId = PoiUIFilter.STD_PREFIX + "combined";
 		name = app.getPoiFilters().getFiltersName(filtersToMerge);
+	}
+
+	public boolean isDeleted() {
+		return deleted;
+	}
+
+	public void setDeleted(boolean deleted) {
+		this.deleted = deleted;
 	}
 
 	public String getFilterByName() {
@@ -495,6 +505,17 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 			}
 		}
 		return res.toString();
+	}
+
+	public String getTypesName() {
+		StringBuilder sb = new StringBuilder();
+		for (PoiCategory p : acceptedTypes.keySet()) {
+			if (sb.length() > 0) {
+				sb.append(", ");
+			}
+			sb.append(p.getTranslation());
+		}
+		return sb.toString();
 	}
 
 	/**

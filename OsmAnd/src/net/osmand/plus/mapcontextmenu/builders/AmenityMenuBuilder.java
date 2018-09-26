@@ -43,6 +43,8 @@ import net.osmand.plus.wikipedia.WikipediaDialogFragment;
 import net.osmand.util.Algorithms;
 import net.osmand.util.OpeningHoursParser;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -51,6 +53,7 @@ import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 public class AmenityMenuBuilder extends MenuBuilder {
@@ -367,6 +370,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			boolean isText = false;
 			boolean isDescription = false;
 			boolean needLinks = !("population".equals(key) || "height".equals(key));
+			boolean needIntFormatting = "population".equals(key);
 			boolean isPhoneNumber = false;
 			boolean isUrl = false;
 			boolean isCuisine = false;
@@ -496,6 +500,9 @@ public class AmenityMenuBuilder extends MenuBuilder {
 						isDescription = iconId == R.drawable.ic_action_note_dark;
 						textPrefix = pType.getTranslation();
 						vl = amenity.unzipContent(e.getValue());
+						if (needIntFormatting) {
+							vl = getFormattedInt(vl);
+						}
 					}
 					if (!isDescription && icon == null) {
 						icon = getRowIcon(view.getContext(), pType.getIconKeyName());
@@ -652,6 +659,19 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		buildRow(view, R.drawable.ic_action_get_my_location, null, PointDescription.getLocationName(app,
 				amenity.getLocation().getLatitude(), amenity.getLocation().getLongitude(), true)
 				.replaceAll("\n", " "), 0, false, null, false, 0, false, null, false);
+	}
+
+	private String getFormattedInt(String value) {
+		try {
+			int number = Integer.parseInt(value);
+			DecimalFormat formatter = (DecimalFormat) DecimalFormat.getInstance(Locale.US);
+			DecimalFormatSymbols symbols = formatter.getDecimalFormatSymbols();
+			symbols.setGroupingSeparator(' ');
+			formatter.setDecimalFormatSymbols(symbols);
+			return formatter.format(number);
+		} catch (NumberFormatException e) {
+			return value;
+		}
 	}
 
 	public void buildAmenityRow(View view, AmenityInfoRow info) {

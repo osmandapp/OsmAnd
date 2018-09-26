@@ -102,7 +102,7 @@ public class QuickSearchHelper implements ResourceListener {
 	public void refreshCustomPoiFilters() {
 		core.clearCustomSearchPoiFilters();
 		PoiFiltersHelper poiFilters = app.getPoiFilters();
-		for (CustomSearchPoiFilter udf : poiFilters.getUserDefinedPoiFilters()) {
+		for (CustomSearchPoiFilter udf : poiFilters.getUserDefinedPoiFilters(false)) {
 			core.addCustomSearchPoiFilter(udf, 0);
 		}
 		PoiUIFilter localWikiPoiFilter = poiFilters.getLocalWikiPOIFilter();
@@ -399,6 +399,7 @@ public class QuickSearchHelper implements ResourceListener {
 		public boolean search(SearchPhrase phrase, SearchResultMatcher resultMatcher) throws IOException {
 			int p = 0;
 			for (HistoryEntry point : SearchHistoryHelper.getInstance(app).getHistoryEntries(false)) {
+				boolean publish = false;
 				SearchResult sr = new SearchResult(phrase);
 				PointDescription pd = point.getName();
 				if (pd.isPoiType()) {
@@ -408,13 +409,15 @@ public class QuickSearchHelper implements ResourceListener {
 						sr.object = pt;
 						sr.priorityDistance = 0;
 						sr.objectType = ObjectType.POI_TYPE;
+						publish = true;
 					}
 				} else if (pd.isCustomPoiFilter()) {
-					PoiUIFilter filter = app.getPoiFilters().getFilterById(pd.getName());
+					PoiUIFilter filter = app.getPoiFilters().getFilterById(pd.getName(), true);
 					if (filter != null) {
 						sr.localeName = filter.getName();
 						sr.object = filter;
 						sr.objectType = ObjectType.POI_TYPE;
+						publish = true;
 					}
 				} else {
 					sr.localeName = pd.getName();
@@ -422,12 +425,15 @@ public class QuickSearchHelper implements ResourceListener {
 					sr.objectType = ObjectType.RECENT_OBJ;
 					sr.location = new LatLon(point.getLat(), point.getLon());
 					sr.preferredZoom = 17;
+					publish = true;
 				}
-				sr.priority = SEARCH_HISTORY_OBJECT_PRIORITY + (p++);
-				if (phrase.getUnknownSearchWordLength() <= 1 && phrase.isNoSelectedType()) {
-					resultMatcher.publish(sr);
-				} else if (phrase.getNameStringMatcher().matches(sr.localeName)) {
-					resultMatcher.publish(sr);
+				if (publish) {
+					sr.priority = SEARCH_HISTORY_OBJECT_PRIORITY + (p++);
+					if (phrase.getUnknownSearchWordLength() <= 1 && phrase.isNoSelectedType()) {
+						resultMatcher.publish(sr);
+					} else if (phrase.getNameStringMatcher().matches(sr.localeName)) {
+						resultMatcher.publish(sr);
+					}
 				}
 			}
 			return true;
