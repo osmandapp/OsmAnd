@@ -3,7 +3,7 @@
     <string name="av_locations_selected_desc">Файл GPX с координатами и данными выбранных заметок.</string>
     <string name="av_locations_all_desc">Файл GPX с координатами и данными всех заметок.</string>
     <string name="favorite_empty_place_name">Место</string>
-    <string name="private_access_routing_req">Ваш пункт назначения находится на частной территории. Вы хотите разрешить доступ к частным дорогам для этой поездки?</string>
+    <string name="private_access_routing_req">Ваш пункт назначения находится на частной территории. Разрешить доступ к частным дорогам для этой поездки?</string>
     <string name="restart_search">Искать снова</string>
     <string name="increase_search_radius">Увеличить радиус поиска</string>
     <string name="nothing_found">Ничего не найдено</string>
@@ -14,8 +14,8 @@
     <string name="quick_action_showhide_osmbugs_descr">Нажатие на кнопку действия отобразит или скроет заметки OSM на карте.</string>
     <string name="sorted_by_distance">Отсортировано по расстоянию</string>
     <string name="search_favorites">Поиск в избранных</string>
-    <string name="hillshade_menu_download_descr">Скачайте карту \"Затенение рельефа\" для затенения этого региона.</string>
-    <string name="hillshade_purchase_header">Установите плагин «Линии высот», чтобы показать их на карте</string>
+    <string name="hillshade_menu_download_descr">Чтобы увидеть теневую отмывку рельефа, скачайте карту «Затенение рельефа» этого региона.</string>
+    <string name="hillshade_purchase_header">Чтобы увидеть на карте теневую отмывку рельефа, вам необходимо купить и установить плагин «Линии высот»</string>
     <string name="srtm_menu_download_descr">Скачайте карту \"Контурные линии\" для использования в этом регионе.</string>
     <string name="shared_string_plugin">Плагин</string>
     <string name="srtm_purchase_header">Для того, чтобы отобразить линии контуров рельефа, вам нужно приобрести и установить плагин \"Линии высот\"</string>
@@ -90,7 +90,7 @@
     <string name="points_delete_multiple_succesful">Точка(-и) удалены.</string>
     <string name="points_delete_multiple">Вы собираетесь удалить %1$d точку(и). Вы уверены?</string>
     <string name="route_points_category_name">Повороты на маршруте</string>
-    <string name="track_points_category_name">Важные точки на этом маршруте</string>
+    <string name="track_points_category_name">Путевые точки, точки интереса, именованные элементы</string>
     <string name="shared_string_gpx_track">Трек</string>
     <string name="max_speed">Макс. скорость</string>
     <string name="average_speed">Средняя скорость</string>
@@ -100,7 +100,7 @@
     <string name="shared_string_start_time">Отправление</string>
     <string name="shared_string_end_time">Прибытие</string>
     <string name="shared_string_color">Цвет</string>
-    <string name="select_gpx_folder">Выберите папку для треков</string>
+    <string name="select_gpx_folder">Выберите папку для GPX файла</string>
     <string name="shared_string_move">Переместить</string>
     <string name="shared_string_gpx_tracks">Треки</string>
     <string name="altitude_descent">Спуск</string>
@@ -2980,11 +2980,13 @@
 \n</string>
     <string name="increase_search_radius_to">Увеличить радиус поиска до %1$s</string>
     <string name="commiting_way">Фиксируется путь…</string>
-    <string name="release_3_2_pre">• Исправлено аварийное завершение приложения при запуске с нелатинскими картами
+    <string name="release_3_2_pre">• Исправлено аварийное завершение приложения при запуске с нелатинскими картами 
+\n 
+\n• Повышена скорость рендеринга на устройствах с Android 8.0 
+\n 
+\n• Поддержка редактирования объектов полигонов (не amenity) 
 \n
-\n• Повышена скорость рендеринга на устройствах с Android 8.0
-\n
-\n• Поддержка редактирования объектов многоугольников (не amenity)
+\n• Измерить расстояние: добавлена кнопка «Измерить» в пункт «Действия» контекстного меню
 \n</string>
     <string name="ask_for_location_permission">Пожалуйста, для продолжения дайте OsmAnd разрешение на определение местоположения.</string>
     <string name="rendering_value_black_name">Чёрный</string>
