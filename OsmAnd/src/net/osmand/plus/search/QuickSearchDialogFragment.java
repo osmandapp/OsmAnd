@@ -728,7 +728,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 				if (!Algorithms.isEmpty(filter.getFilterByName())) {
 					nFilter.setSavedFilterByName(filter.getFilterByName());
 				}
-				if (app.getPoiFilters().createPoiFilter(nFilter)) {
+				if (app.getPoiFilters().createPoiFilter(nFilter, false)) {
 					Toast.makeText(getContext(), MessageFormat.format(getContext().getText(R.string.edit_filter_create_message).toString(),
 							editText.getText().toString()), Toast.LENGTH_SHORT).show();
 					app.getSearchUICore().refreshCustomPoiFilters();
@@ -2151,6 +2151,14 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			fabVisible = true;
 			poiFilterApplied = true;
 			updateFab();
+
+			PoiUIFilter nFilter = new PoiUIFilter(filter.getTypesName(), null, filter.getAcceptedTypes(), app);
+			if (!Algorithms.isEmpty(filter.getFilterByName())) {
+				nFilter.setSavedFilterByName(filter.getFilterByName());
+			}
+			app.getPoiFilters().createPoiFilter(nFilter, true);
+			SearchHistoryHelper.getInstance(app).addNewItemToHistory(nFilter);
+			reloadHistory();
 		}
 
 		SearchResult sr = new SearchResult(searchUICore.getPhrase());

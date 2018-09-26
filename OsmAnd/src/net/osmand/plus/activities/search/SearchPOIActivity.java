@@ -938,7 +938,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 				if (searchFilter.getText().toString().length() > 0) {
 					nFilter.setSavedFilterByName(searchFilter.getText().toString());
 				}
-				if (app.getPoiFilters().createPoiFilter(nFilter)) {
+				if (app.getPoiFilters().createPoiFilter(nFilter, false)) {
 					Toast.makeText(
 							SearchPOIActivity.this,
 							MessageFormat.format(SearchPOIActivity.this.getText(R.string.edit_filter_create_message).toString(),

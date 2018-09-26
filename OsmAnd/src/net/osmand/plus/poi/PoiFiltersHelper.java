@@ -58,6 +58,9 @@ public class PoiFiltersHelper {
 
 	public PoiFiltersHelper(OsmandApplication application) {
 		this.application = application;
+		PoiFilterDbHelper helper = openDbHelperNoPois();
+		helper.doDeletion();
+		helper.close();
 	}
 
 	public NominatimPoiFilter getNominatimPOIFilter() {
@@ -121,6 +124,18 @@ public class PoiFiltersHelper {
 		return showAllPOIFilter;
 	}
 
+	public void markHistory(String filterId, boolean history) {
+		PoiFilterDbHelper helper = openDbHelperNoPois();
+		helper.markHistory(filterId, history);
+		helper.close();
+	}
+
+	public void clearHistory() {
+		PoiFilterDbHelper helper = openDbHelperNoPois();
+		helper.clearHistory();
+		helper.close();
+	}
+
 
 	private PoiUIFilter getFilterById(String filterId, PoiUIFilter... filters) {
 		for (PoiUIFilter pf : filters) {
@@ -132,10 +147,14 @@ public class PoiFiltersHelper {
 	}
 
 	public PoiUIFilter getFilterById(String filterId) {
+		return getFilterById(filterId, false);
+	}
+
+	public PoiUIFilter getFilterById(String filterId, boolean includeDeleted) {
 		if (filterId == null) {
 			return null;
 		}
-		for (PoiUIFilter f : getTopDefinedPoiFilters()) {
+		for (PoiUIFilter f : getTopDefinedPoiFilters(includeDeleted)) {
 			if (f.getFilterId().equals(filterId)) {
 				return f;
 			}
@@ -176,11 +195,11 @@ public class PoiFiltersHelper {
 		getTopDefinedPoiFilters();
 	}
 
-	public List<PoiUIFilter> getUserDefinedPoiFilters() {
+	public List<PoiUIFilter> getUserDefinedPoiFilters(boolean includeDeleted) {
 		ArrayList<PoiUIFilter> userDefinedFilters = new ArrayList<>();
 		PoiFilterDbHelper helper = openDbHelper();
 		if (helper != null) {
-			List<PoiUIFilter> userDefined = helper.getFilters(helper.getReadableDatabase());
+			List<PoiUIFilter> userDefined = helper.getFilters(helper.getReadableDatabase(), includeDeleted);
 			userDefinedFilters.addAll(userDefined);
 			helper.close();
 		}
@@ -200,10 +219,14 @@ public class PoiFiltersHelper {
 	}
 
 	public List<PoiUIFilter> getTopDefinedPoiFilters() {
+		return getTopDefinedPoiFilters(false);
+	}
+
+	public List<PoiUIFilter> getTopDefinedPoiFilters(boolean includeDeleted) {
 		if (cacheTopStandardFilters == null) {
 			List<PoiUIFilter> top = new ArrayList<>();
 			// user defined
-			top.addAll(getUserDefinedPoiFilters());
+			top.addAll(getUserDefinedPoiFilters(true));
 			if (getLocalWikiPOIFilter() != null) {
 				top.add(getLocalWikiPOIFilter());
 			}
@@ -216,9 +239,18 @@ public class PoiFiltersHelper {
 			Collections.sort(top);
 			cacheTopStandardFilters = top;
 		}
-		List<PoiUIFilter> result = new ArrayList<>(cacheTopStandardFilters);
+		List<PoiUIFilter> result = new ArrayList<>();
+		for (PoiUIFilter filter : cacheTopStandardFilters) {
+			if (includeDeleted || !filter.isDeleted()) {
+				result.add(filter);
+			}
+		}
 		result.add(getShowAllPOIFilter());
 		return result;
+	}
+
+	private PoiFilterDbHelper openDbHelperNoPois() {
+		return new PoiFilterDbHelper(null, application);
 	}
 
 	private PoiFilterDbHelper openDbHelper() {
@@ -238,29 +270,24 @@ public class PoiFiltersHelper {
 		if (helper == null) {
 			return false;
 		}
-		boolean res = helper.deleteFilter(helper.getWritableDatabase(), filter);
-		if (res) {
-			ArrayList<PoiUIFilter> copy = new ArrayList<>(cacheTopStandardFilters);
-			copy.remove(filter);
-			cacheTopStandardFilters = copy;
-		}
+		boolean res = helper.deleteFilter(helper.getWritableDatabase(), filter, false);
 		helper.close();
 		return res;
 	}
 
-	public boolean createPoiFilter(PoiUIFilter filter) {
+	public boolean createPoiFilter(PoiUIFilter filter, boolean forHistory) {
 		PoiFilterDbHelper helper = openDbHelper();
 		if (helper == null) {
 			return false;
 		}
-		boolean res = helper.deleteFilter(helper.getWritableDatabase(), filter);
+		helper.deleteFilter(helper.getWritableDatabase(), filter, true);
 		Iterator<PoiUIFilter> it = cacheTopStandardFilters.iterator();
 		while (it.hasNext()) {
 			if (it.next().getFilterId().equals(filter.getFilterId())) {
 				it.remove();
 			}
 		}
-		res = helper.addFilter(filter, helper.getWritableDatabase(), false);
+		boolean res = helper.addFilter(filter, helper.getWritableDatabase(), false, forHistory);
 		if (res) {
 			ArrayList<PoiUIFilter> copy = new ArrayList<>(cacheTopStandardFilters);
 			copy.add(filter);
@@ -362,19 +389,26 @@ public class PoiFiltersHelper {
 
 	public class PoiFilterDbHelper {
 
+		private static final int TRUE_INT = 1;
+		private static final int FALSE_INT = 0;
+
 		public static final String DATABASE_NAME = "poi_filters";
-		private static final int DATABASE_VERSION = 5;
+		private static final int DATABASE_VERSION = 6;
 
 		private static final String FILTER_NAME = "poi_filters";
 		private static final String FILTER_COL_NAME = "name";
 		private static final String FILTER_COL_ID = "id";
 		private static final String FILTER_COL_FILTERBYNAME = "filterbyname";
+		private static final String FILTER_COL_HISTORY = "history";
+		private static final String FILTER_COL_DELETED = "deleted";
 
 		private static final String FILTER_TABLE_CREATE = "CREATE TABLE " +
 				FILTER_NAME + " (" +
 				FILTER_COL_NAME + ", " +
 				FILTER_COL_ID + ", " +
-				FILTER_COL_FILTERBYNAME + ");";
+				FILTER_COL_FILTERBYNAME + ", " +
+				FILTER_COL_HISTORY + ", " +
+				FILTER_COL_DELETED + ");";
 
 		private static final String CATEGORIES_NAME = "categories";
 		private static final String CATEGORIES_FILTER_ID = "filter_id";
@@ -439,19 +473,61 @@ public class PoiFiltersHelper {
 			if (newVersion <= 5) {
 				deleteOldFilters(conn);
 			}
+			if (oldVersion < 6) {
+				conn.execSQL("ALTER TABLE " + FILTER_NAME + " ADD " + FILTER_COL_HISTORY + " int DEFAULT " + FALSE_INT);
+				conn.execSQL("ALTER TABLE " + FILTER_NAME + " ADD " + FILTER_COL_DELETED + " int DEFAULT " + FALSE_INT);
+			}
 			conn.setVersion(newVersion);
 		}
 
 		private void deleteOldFilters(SQLiteConnection conn) {
-			for (String toDel : DEL) {
-				deleteFilter(conn, "user_" + toDel);
+			if (conn != null) {
+				for (String toDel : DEL) {
+					deleteFilter(conn, "user_" + toDel);
+				}
 			}
 		}
 
-		protected boolean addFilter(PoiUIFilter p, SQLiteConnection db, boolean addOnlyCategories) {
+		void doDeletion() {
+			SQLiteConnection conn = getWritableDatabase();
+			if (conn != null) {
+				String query = "SELECT " + FILTER_COL_ID + ", " + FILTER_COL_HISTORY + ", " + FILTER_COL_DELETED + " FROM " + FILTER_NAME;
+				SQLiteCursor cursor = conn.rawQuery(query, null);
+				if (cursor != null) {
+					if (cursor.moveToFirst()) {
+						do {
+							if (cursor.getInt(1) == FALSE_INT && cursor.getInt(2) == TRUE_INT) {
+								deleteFilter(conn, cursor.getString(0));
+							}
+						} while (cursor.moveToNext());
+					}
+					cursor.close();
+				}
+			}
+		}
+
+		void markHistory(String filterId, boolean history) {
+			SQLiteConnection conn = getWritableDatabase();
+			if (conn != null) {
+				conn.execSQL("UPDATE " + FILTER_NAME + " SET " + FILTER_COL_HISTORY + " = ? WHERE " + FILTER_COL_ID + " = ?",
+						new Object[]{history ? TRUE_INT : FALSE_INT, filterId});
+			}
+		}
+
+		void clearHistory() {
+			SQLiteConnection conn = getWritableDatabase();
+			if (conn != null) {
+				conn.execSQL("UPDATE " + FILTER_NAME + " SET " + FILTER_COL_HISTORY + " = ?", new Object[]{FALSE_INT});
+			}
+		}
+
+		protected boolean addFilter(PoiUIFilter p, SQLiteConnection db, boolean addOnlyCategories, boolean forHistory) {
 			if (db != null) {
 				if (!addOnlyCategories) {
-					db.execSQL("INSERT INTO " + FILTER_NAME + " VALUES (?, ?, ?)", new Object[]{p.getName(), p.getFilterId(), p.getFilterByName()});
+					p.setDeleted(forHistory);
+					int value = forHistory ? TRUE_INT : FALSE_INT;
+					db.execSQL("INSERT INTO " + FILTER_NAME + " VALUES (?, ?, ?, ?, ?)",
+							new Object[]{p.getName(), p.getFilterId(), p.getFilterByName(), value, value});
 				}
 				Map<PoiCategory, LinkedHashSet<String>> types = p.getAcceptedTypes();
 				SQLiteStatement insertCategories = db.compileStatement("INSERT INTO " + CATEGORIES_NAME + " VALUES (?, ?, ?)");
@@ -476,7 +552,7 @@ public class PoiFiltersHelper {
 			return false;
 		}
 
-		protected List<PoiUIFilter> getFilters(SQLiteConnection conn) {
+		protected List<PoiUIFilter> getFilters(SQLiteConnection conn, boolean includeDeleted) {
 			ArrayList<PoiUIFilter> list = new ArrayList<>();
 			if (conn != null) {
 				SQLiteCursor query = conn.rawQuery("SELECT " + CATEGORIES_FILTER_ID + ", " + CATEGORIES_COL_CATEGORY + "," + CATEGORIES_COL_SUBCATEGORY + " FROM " +
@@ -505,15 +581,21 @@ public class PoiFiltersHelper {
 					query.close();
 				}
 
-				query = conn.rawQuery("SELECT " + FILTER_COL_ID + ", " + FILTER_COL_NAME + "," + FILTER_COL_FILTERBYNAME + " FROM " +
-						FILTER_NAME, null);
+				query = conn.rawQuery("SELECT " +
+						FILTER_COL_ID + ", " +
+						FILTER_COL_NAME + ", " +
+						FILTER_COL_FILTERBYNAME + ", " +
+						FILTER_COL_DELETED +
+						" FROM " + FILTER_NAME, null);
 				if (query != null && query.moveToFirst()) {
 					do {
 						String filterId = query.getString(0);
-						if (map.containsKey(filterId)) {
+						boolean deleted = query.getInt(3) == TRUE_INT;
+						if (map.containsKey(filterId) && (includeDeleted || !deleted)) {
 							PoiUIFilter filter = new PoiUIFilter(query.getString(1), filterId,
 									map.get(filterId), application);
 							filter.setSavedFilterByName(query.getString(2));
+							filter.setDeleted(deleted);
 							list.add(filter);
 						}
 					} while (query.moveToNext());
@@ -529,7 +611,7 @@ public class PoiFiltersHelper {
 			if (conn != null) {
 				conn.execSQL("DELETE FROM " + CATEGORIES_NAME + " WHERE " + CATEGORIES_FILTER_ID + " = ?",
 						new Object[]{filter.getFilterId()});
-				addFilter(filter, conn, true);
+				addFilter(filter, conn, true, false);
 				updateName(conn, filter);
 				return true;
 			}
@@ -541,19 +623,22 @@ public class PoiFiltersHelper {
 					+ FILTER_COL_ID + "= ?", new Object[]{filter.getFilterByName(), filter.getName(), filter.getFilterId()});
 		}
 
-		protected boolean deleteFilter(SQLiteConnection db, PoiUIFilter p) {
-			String key = p.getFilterId();
-			return deleteFilter(db, key);
-		}
-
-		private boolean deleteFilter(SQLiteConnection db, String key) {
+		protected boolean deleteFilter(SQLiteConnection db, PoiUIFilter p, boolean force) {
 			if (db != null) {
-				db.execSQL("DELETE FROM " + FILTER_NAME + " WHERE " + FILTER_COL_ID + " = ?", new Object[]{key});
-				db.execSQL(
-						"DELETE FROM " + CATEGORIES_NAME + " WHERE " + CATEGORIES_FILTER_ID + " = ?", new Object[]{key});
+				if (force) {
+					deleteFilter(db, p.getFilterId());
+				} else {
+					db.execSQL("UPDATE " + FILTER_NAME + " SET " + FILTER_COL_DELETED + " = ? WHERE " + FILTER_COL_ID + " = ?",
+							new Object[]{TRUE_INT, p.getFilterId()});
+				}
 				return true;
 			}
 			return false;
+		}
+
+		private void deleteFilter(@NonNull SQLiteConnection db, String key) {
+			db.execSQL("DELETE FROM " + FILTER_NAME + " WHERE " + FILTER_COL_ID + " = ?", new Object[]{key});
+			db.execSQL("DELETE FROM " + CATEGORIES_NAME + " WHERE " + CATEGORIES_FILTER_ID + " = ?", new Object[]{key});
 		}
 	}
 }
