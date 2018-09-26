@@ -813,6 +813,7 @@ public class SearchCoreFactory {
 						performSearch(searchPhrase, resultMatcher);
 					}
 					searchedCategories.clear();
+					USE_AMENITY_BY_NAME = true;
 				}
 			}
 			return true;
