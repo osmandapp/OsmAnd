@@ -95,10 +95,11 @@
                         android:layout_height="wrap_content">
 
                         <LinearLayout
-                            android:background="?attr/selectableItemBackground"
                             android:id="@+id/FromLayout"
-                            android:layout_width="fill_parent"
-                            android:layout_height="@dimen/list_item_height"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="?attr/selectableItemBackground"
+                            android:minHeight="@dimen/list_item_height"
                             android:orientation="horizontal">
 
                             <ImageView
@@ -156,10 +157,11 @@
                             android:focusable="false"/>
 
                         <LinearLayout
-                            android:background="?attr/selectableItemBackground"
                             android:id="@+id/ViaLayout"
                             android:layout_width="match_parent"
-                            android:layout_height="@dimen/list_item_height"
+                            android:layout_height="wrap_content"
+                            android:background="?attr/selectableItemBackground"
+                            android:minHeight="@dimen/list_item_height"
                             android:orientation="horizontal">
 
                             <ImageView
@@ -212,10 +214,11 @@
                             android:focusable="false"/>
 
                         <LinearLayout
-                            android:background="?attr/selectableItemBackground"
                             android:id="@+id/ToLayout"
-                            android:layout_width="fill_parent"
-                            android:layout_height="@dimen/list_item_height"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="?attr/selectableItemBackground"
+                            android:minHeight="@dimen/list_item_height"
                             android:orientation="horizontal">
 
                             <ImageView

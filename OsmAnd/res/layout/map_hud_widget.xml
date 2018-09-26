@@ -39,7 +39,8 @@
     <LinearLayout
         android:id="@+id/widget_bottom_layout"
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/map_widget_height"
+        android:layout_height="wrap_content"
+        android:minHeight="@dimen/map_widget_height"
         android:orientation="horizontal">
 
         <ImageView
