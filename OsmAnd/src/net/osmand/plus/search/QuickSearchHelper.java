@@ -398,7 +398,7 @@ public class QuickSearchHelper implements ResourceListener {
 		@Override
 		public boolean search(SearchPhrase phrase, SearchResultMatcher resultMatcher) throws IOException {
 			int p = 0;
-			for (HistoryEntry point : SearchHistoryHelper.getInstance(app).getHistoryEntries()) {
+			for (HistoryEntry point : SearchHistoryHelper.getInstance(app).getHistoryEntries(false)) {
 				SearchResult sr = new SearchResult(phrase);
 				PointDescription pd = point.getName();
 				if (pd.isPoiType()) {
