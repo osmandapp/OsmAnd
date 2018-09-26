@@ -115,14 +115,6 @@ public class FavoriteImageDrawable extends Drawable {
 		}
 	}
 
-	public void drawBitmapInCenter(Canvas canvas, int x, int y) {
-		int dx = x - getIntrinsicWidth() / 2;
-		int dy = y - getIntrinsicHeight() / 2;
-		canvas.translate(dx, dy);
-		draw(canvas);
-		canvas.translate(-dx, -dy);
-	}
-
 	public void drawBitmapInCenter(Canvas canvas, float x, float y) {
 		float dx = x - getIntrinsicWidth() / 2f;
 		float dy = y - getIntrinsicHeight() / 2f;
