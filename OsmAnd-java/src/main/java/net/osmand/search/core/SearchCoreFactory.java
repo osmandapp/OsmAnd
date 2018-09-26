@@ -24,7 +24,6 @@ import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiFilter;
 import net.osmand.osm.PoiType;
-import net.osmand.search.SearchUICore;
 import net.osmand.search.SearchUICore.SearchResultMatcher;
 import net.osmand.search.core.SearchPhrase.NameStringMatcher;
 import net.osmand.search.core.SearchPhrase.SearchPhraseDataType;
@@ -674,8 +673,7 @@ public class SearchCoreFactory {
 			return true;
 		}
 
-		protected static List<AbstractPoiType> matchSearchedCategories(SearchPhrase phrase,
-																	   NameStringMatcher nm,
+		protected static List<AbstractPoiType> matchSearchedCategories(SearchPhrase phrase, NameStringMatcher nm,
 																	   List<PoiFilter> topVisibleFilters,
 																	   List<PoiCategory> categories,
 																	   Map<String, PoiType> translatedNames,
