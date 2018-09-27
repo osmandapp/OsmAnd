@@ -24,12 +24,12 @@ public class LocationParser {
 				return new LatLon(codeArea.getCenterLatitude(), codeArea.getCenterLongitude());
 			}
 		}
-		boolean valid = validate(locPhrase);
+		boolean valid = isValidLocPhrase(locPhrase);
 		if (!valid) {
 			String[] split = locPhrase.split(" ");
-			if (split.length == 4) {
+			if (split.length == 4 && split[1].contains(".") && split[3].contains(".")) {
 				locPhrase = split[1] + " " + split[3];
-				valid = validate(locPhrase);
+				valid = isValidLocPhrase(locPhrase);
 			}
 		}
 		if (!valid) {
@@ -48,7 +48,7 @@ public class LocationParser {
 			if (Character.isLetter(ch)) {
 				UTMPoint upoint = new UTMPoint(d.get(2), d.get(1), d.get(0).intValue(), ch);
 				LatLonPoint ll = upoint.toLatLonPoint();
-				return new LatLon(ll.getLatitude(), ll.getLongitude());
+				return validOrNull(new LatLon(ll.getLatitude(), ll.getLongitude()));
 			}
 		}
 
@@ -62,7 +62,7 @@ public class LocationParser {
 					UTMPoint upoint = new UTMPoint(Double.parseDouble(north), Double.parseDouble(east), d.get(0)
 							.intValue(), ch);
 					LatLonPoint ll = upoint.toLatLonPoint();
-					return new LatLon(ll.getLatitude(), ll.getLongitude());
+					return validOrNull(new LatLon(ll.getLatitude(), ll.getLongitude()));
 				} catch (NumberFormatException e) {
 				}
 			}
@@ -130,10 +130,10 @@ public class LocationParser {
 		if (split != -1) {
 			double lat = parse1Coordinate(all, 0, split);
 			double lon = parse1Coordinate(all, split, all.size());
-			return new LatLon(lat, lon);
+			return validOrNull(new LatLon(lat, lon));
 		}
 		if (d.size() == 2) {
-			return new LatLon(d.get(0), d.get(1));
+			return validOrNull(new LatLon(d.get(0), d.get(1)));
 		}
 		// simple url case
 		if (locPhrase.contains("://")) {
@@ -152,7 +152,7 @@ public class LocationParser {
 				}
 			}
 			if (lat != 0 && lon != 0 && only2decimals) {
-				return new LatLon(lat, lon);
+				return validOrNull(new LatLon(lat, lon));
 			}
 		}
 		// split by equal number of digits
@@ -171,13 +171,25 @@ public class LocationParser {
 			if (splitEq != -1) {
 				double lat = parse1Coordinate(all, 0, splitEq);
 				double lon = parse1Coordinate(all, splitEq, all.size());
-				return new LatLon(lat, lon);
+				return validOrNull(new LatLon(lat, lon));
 			}
 		}
 		return null;
 	}
 
-	private static boolean validate(String locPhrase) {
+	private static LatLon validOrNull(LatLon latLon) {
+		if (isValidCoordinate(latLon.getLatitude()) && isValidCoordinate(latLon.getLongitude())) {
+			return latLon;
+		}
+		return null;
+	}
+
+	private static boolean isValidCoordinate(double coordinate) {
+		double coord = Math.abs(coordinate);
+		return 0 <= coord && coord <= 180;
+	}
+
+	private static boolean isValidLocPhrase(String locPhrase) {
 		if (!locPhrase.isEmpty()) {
 			char ch = Character.toLowerCase(locPhrase.charAt(0));
 			return ch == '-' || Character.isDigit(ch) || ch == 's' || ch == 'n' || locPhrase.contains("://");
