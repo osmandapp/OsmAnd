@@ -193,6 +193,15 @@ public class DirectionIndicationDialogFragment extends BaseOsmAndDialogFragment 
 			}
 		});
 
+		final CompoundButton keepPassedToggle = (CompoundButton) mainView.findViewById(R.id.keep_passed_switch);
+		keepPassedToggle.setChecked(settings.KEEP_PASSED_MARKERS_ON_MAP.get());
+		mainView.findViewById(R.id.keep_passed_row).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				updateChecked(settings.KEEP_PASSED_MARKERS_ON_MAP, keepPassedToggle);
+			}
+		});
+
 		return mainView;
 	}
 
