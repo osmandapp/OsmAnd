@@ -2371,4 +2371,71 @@
 
 	<string name="poi_bandstand">Полигонална бина</string>
 	<string name="poi_kiln">Затворени лонац</string>
+	<string name="poi_product_brick">Производ: цигла</string>
+	<string name="poi_product_quicklime">Производ: негашен креч</string>
+	<string name="poi_product_leather">Производ: кожа</string>
+	<string name="poi_product_lime">Производ: креч</string>
+	<string name="poi_product_beer">Производ: пиво</string>
+	<string name="poi_product_charcoal">Производ: ћумур</string>
+	<string name="poi_product_meat">Производ: месо</string>
+
+	<string name="poi_wheelchair_description">Опис за кориснике инвалидских колица</string>
+	<string name="poi_blind_description">Опис за слепе</string>
+	<string name="poi_deaf_description">Опис за глуве</string>
+
+	<string name="poi_highway_steps">Степенице</string>
+	<string name="poi_handrail_yes">Рукохват: да</string>
+	<string name="poi_handrail_no">Рукохват: не</string>
+	<string name="poi_ramp_yes">Рампа: да</string>
+	<string name="poi_ramp_no">Рампа: не</string>
+	<string name="poi_ramp_wheelchair_yes">Рампа за инвалидска колица: да</string>
+	<string name="poi_ramp_wheelchair_no">Рампа за инвалидска колица: не</string>
+	<string name="poi_ramp_stroller_yes">Рампа (са степеницама): да</string>
+	<string name="poi_ramp_stroller_no">Рампа (са степеницама): не</string>
+	<string name="poi_ramp_bicycle_yes">Рампа за бицикле: да</string>
+	<string name="poi_ramp_bicycle_no">Рампа за бицикле: не</string>
+	<string name="poi_ramp_luggage_yes">Рампа за пртљаг: да</string>
+	<string name="poi_ramp_luggage_no">Рампа за пртљаг: не</string>
+	<string name="poi_step_count">Број степеника</string>
+	<string name="poi_step_condition_even">Стање степеника: исто</string>
+	<string name="poi_step_condition_uneven">Стање степеника: различито</string>
+	<string name="poi_step_condition_rough">Стање степеника: грубо</string>
+
+	<string name="poi_cairn">Гомила камења</string>
+
+	<string name="poi_defibrillator">Дефибрилатор</string>
+	<string name="poi_defibrillator_yes">Дефибрилатор: да</string>
+
+	<string name="poi_tomb_war_grave">Тип: ратно гробље</string>
+	<string name="poi_tomb_tumulus">Тип: хумка</string>
+	<string name="poi_tomb_rock_cut">Тип: у стени</string>
+	<string name="poi_tomb_hypogeum">Тип: подземна</string>
+	<string name="poi_tomb_vault">Тип: комора</string>
+	<string name="poi_tomb_columbarium">Тип: колумбаријум</string>
+	<string name="poi_tomb_mausoleum">Тип: маузолеј</string>
+	<string name="poi_tomb_sarcophagus">Тип: саркофаг</string>
+	<string name="poi_tomb_crypt">Тип: крипта</string>
+	<string name="poi_tomb_pyramid">Тип: пирамида</string>
+
+	<string name="poi_historic_civilization_ancient_roman">Цивилизација: староримска (753.г. пре.Х - 284.г. посл.Х)</string>
+	<string name="poi_historic_civilization_nuragic">Цивилизација: нурагска (18. в.пре.Х - 2. в.посл.Х)</string>
+	<string name="poi_historic_civilization_etruscan">Цивилизација: етрурска (12. в. - 6. в.посл.Х)</string>
+	<string name="poi_historic_civilization_prehistoric">Цивилизација: праисторијска</string>
+	<string name="poi_historic_civilization_ancient_greek">Цивилизација: старогрчка</string>
+	<string name="poi_historic_civilization_roman">Цивилизација: римска</string>
+	<string name="poi_historic_civilization_byzantine">Цивилизација: византијска (285.г. посл.Х - 1453.г. посл.Х)</string>
+	<string name="poi_historic_civilization_imperial_chinese">Цивилизација: империјалнокинеска (221.г. пре.Х - 1911.г. посл.Х)</string>
+	<string name="poi_historic_civilization_ancient_egyptian">Цивилизација: староегипадска (до 332.г. пре.Х)</string>
+	<string name="poi_historic_civilization_celtic">Цивилизација: келтска</string>
+	<string name="poi_historic_civilization_western_roman">Цивилизација: западноримска (285.г. посл.Х - 476.г. посл.Х)</string>
+	<string name="poi_historic_civilization_mycenaean">Цивилизација: микенска</string>
+	<string name="poi_historic_civilization_dacian">Цивилизација: дачанска</string>
+	<string name="poi_historic_civilization_hernici">Цивилизација: херничка</string>
+	<string name="poi_historic_civilization_greek_egyptian">Цивилизација: грчко египадска (332.г. пре.Х - 30.г. пре.Х)</string>
+	<string name="poi_historic_civilization_roman_and_byzantine_egyptian">Цивилизација: римско и византијско египадска</string>
+	<string name="poi_historic_civilization_helladic">Цивилизација: еладска</string>
+	<string name="poi_historic_civilization_cycladic">Цивилизација: цикладска</string>
+	<string name="poi_historic_civilization_minoan">Цивилизација: минонска</string>
+	<string name="poi_historic_civilization_tiahuanacota">Цивилизација: тиахунакотска</string>
+
 	</resources>
