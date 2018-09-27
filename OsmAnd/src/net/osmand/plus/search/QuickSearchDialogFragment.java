@@ -1255,6 +1255,9 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 			@Override
 			public boolean searchFinished(SearchPhrase phrase) {
+				if (SearchUICore.isDebugMode()) {
+					LOG.info("UI >> Nearest cities found: " + getSearchResultCollectionFormattedSize(getResultCollection()));
+				}
 				updateCitiesItems();
 				return true;
 			}
@@ -1264,9 +1267,6 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 	private void updateCitiesItems() {
 		SearchResultCollection res = getResultCollection();
-		if (SearchUICore.isDebugMode()) {
-			LOG.info("UI >> Nearest cities found: " + getSearchResultCollectionFormattedSize(res));
-		}
 
 		final OsmandSettings settings = app.getSettings();
 		List<QuickSearchListItem> rows = new ArrayList<>();
