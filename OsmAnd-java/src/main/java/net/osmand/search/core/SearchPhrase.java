@@ -9,6 +9,7 @@ import net.osmand.binary.CommonWords;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
+import net.osmand.osm.AbstractPoiType;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -31,6 +32,7 @@ public class SearchPhrase {
 	private List<SearchWord> words = new ArrayList<>();
 	private List<String> unknownWords = new ArrayList<>();
 	private List<NameStringMatcher> unknownWordsMatcher = new ArrayList<>();
+	private List<AbstractPoiType> matchedPoiTypes = new ArrayList<>();
 	private String unknownSearchWordTrim;
 	private String unknownSearchPhrase = "";
 	
@@ -108,8 +110,7 @@ public class SearchPhrase {
 		conjunctions.add("dr");
 		conjunctions.add("y");
 	}
-	
-	
+
 	public enum SearchPhraseDataType {
 		MAP, ADDRESS, ROUTING, POI
 	}
@@ -724,5 +725,15 @@ public class SearchPhrase {
 		return wordToSearch;
 	}
 
-	
+	public void setMatchedPoiTypes(List<AbstractPoiType> matchedPoiTypes) {
+		this.matchedPoiTypes = matchedPoiTypes;
+	}
+
+	public List<AbstractPoiType> getMatchedPoiTypes() {
+		return matchedPoiTypes;
+	}
+
+	public boolean hasMatchedPoiTypes() {
+		return !matchedPoiTypes.isEmpty();
+	}
 }
