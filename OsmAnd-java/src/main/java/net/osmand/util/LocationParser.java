@@ -24,10 +24,15 @@ public class LocationParser {
 				return new LatLon(codeArea.getCenterLatitude(), codeArea.getCenterLongitude());
 			}
 		}
-		if (locPhrase.length() == 0 || !(locPhrase.charAt(0) == '-' || Character.isDigit(locPhrase.charAt(0))
-				|| locPhrase.charAt(0) == 'S' || locPhrase.charAt(0) == 's'
-				|| locPhrase.charAt(0) == 'N' || locPhrase.charAt(0) == 'n'
-				|| locPhrase.contains("://"))) {
+		boolean valid = validate(locPhrase);
+		if (!valid) {
+			String[] split = locPhrase.split(" ");
+			if (split.length == 4) {
+				locPhrase = split[1] + " " + split[3];
+				valid = validate(locPhrase);
+			}
+		}
+		if (!valid) {
 			return null;
 		}
 		List<Double> d = new ArrayList<>();
@@ -170,6 +175,14 @@ public class LocationParser {
 			}
 		}
 		return null;
+	}
+
+	private static boolean validate(String locPhrase) {
+		if (!locPhrase.isEmpty()) {
+			char ch = Character.toLowerCase(locPhrase.charAt(0));
+			return ch == '-' || Character.isDigit(ch) || ch == 's' || ch == 'n' || locPhrase.contains("://");
+		}
+		return false;
 	}
 
 	public static double parse1Coordinate(List<Object> all, int begin, int end) {
