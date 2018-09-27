@@ -509,7 +509,7 @@ public class SearchCoreFactory {
 
 		@Override
 		public boolean search(final SearchPhrase phrase, final SearchResultMatcher resultMatcher) throws IOException {
-			if(!phrase.isUnknownSearchWordPresent()) {
+			if(!phrase.isUnknownSearchWordPresent() || !USE_AMENITY_BY_NAME) {
 				return false;
 			}
 			final BinaryMapIndexReader[] currentFile = new BinaryMapIndexReader[1];
@@ -586,7 +586,7 @@ public class SearchCoreFactory {
 					!p.isUnknownSearchWordPresent()) {
 				return -1;
 			}
-			if (p.hasObjectType(ObjectType.POI_TYPE) || !USE_AMENITY_BY_NAME) {
+			if (p.hasObjectType(ObjectType.POI_TYPE)) {
 				return -1;
 			}
 			if (p.getUnknownSearchWordLength() >= 3 || p.getRadiusLevel() > 1) {
@@ -809,11 +809,20 @@ public class SearchCoreFactory {
 						res.priority = SEARCH_AMENITY_BY_TYPE_PRIORITY;
 						res.priorityDistance = 0;
 						res.objectType = ObjectType.POI_TYPE;
-						SearchPhrase searchPhrase = phrase.selectWord(res, phrase.getUnknownSearchWords(), false);
+						List<String> words = phrase.getUnknownSearchWords();
+						List<String> unknownWords = new ArrayList<>();
+						for (String word : words) {
+							if (!pt.getTranslation().toLowerCase().contains(word)) {
+								unknownWords.add(word);
+							}
+						}
+						if (unknownWords.isEmpty()) {
+							unknownWords.add("");
+						}
+						SearchPhrase searchPhrase = phrase.selectWord(res, unknownWords, false);
 						performSearch(searchPhrase, resultMatcher);
 					}
 					searchedCategories.clear();
-					USE_AMENITY_BY_NAME = true;
 				}
 			}
 			return true;
