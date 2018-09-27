@@ -1259,6 +1259,9 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 					LOG.info("UI >> Nearest cities found: " + getSearchResultCollectionFormattedSize(getResultCollection()));
 				}
 				updateCitiesItems();
+				if (SearchUICore.isDebugMode()) {
+					LOG.info("UI >> Nearest cities loaded");
+				}
 				return true;
 			}
 		});
@@ -1397,9 +1400,6 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			}
 		}
 		addressSearchFragment.updateListAdapter(rows, false);
-		if (SearchUICore.isDebugMode()) {
-			LOG.info("UI >> Nearest cities loaded");
-		}
 	}
 
 	public void reloadHistory() {
