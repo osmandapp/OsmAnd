@@ -106,6 +106,8 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 	private int visitedColor;
 	@ColorInt
 	private int defPointColor;
+	@ColorInt
+	private int grayColor;
 
 	@Override
 	public void initLayer(OsmandMapTileView view) {
@@ -174,6 +176,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 
 		visitedColor = ContextCompat.getColor(view.getApplication(), R.color.color_ok);
 		defPointColor = ContextCompat.getColor(view.getApplication(), R.color.gpx_color_point);
+		grayColor = ContextCompat.getColor(view.getApplication(), R.color.color_favorite_gray);
 	}
 
 	@Override
@@ -381,8 +384,13 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 
 						if (intersects(boundIntersections, x, y, iconSize, iconSize)) {
 							@ColorInt
-							int pointColor = getPointColor(o, fileColor);
-							paintIcon.setColorFilter(new PorterDuffColorFilter(pointColor, PorterDuff.Mode.MULTIPLY));
+							int color;
+							if (marker != null && marker.history) {
+								color = grayColor;
+							} else {
+								color = getPointColor(o, fileColor);
+							}
+							paintIcon.setColorFilter(new PorterDuffColorFilter(color, PorterDuff.Mode.MULTIPLY));
 							canvas.drawBitmap(pointSmall, x - pointSmall.getWidth() / 2, y - pointSmall.getHeight() / 2, paintIcon);
 							smallObjectsLatLon.add(new LatLon(o.lat, o.lon));
 						} else {
@@ -464,12 +472,14 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 	private void drawBigPoint(Canvas canvas, WptPt o, int fileColor, float x, float y, @Nullable MapMarker marker) {
 		int pointColor = getPointColor(o, fileColor);
 		FavoriteImageDrawable fid;
+		boolean history = false;
 		if (marker != null) {
 			fid = FavoriteImageDrawable.getOrCreateSyncedIcon(view.getContext(), pointColor);
+			history = marker.history;
 		} else {
 			fid = FavoriteImageDrawable.getOrCreate(view.getContext(), pointColor, true);
 		}
-		fid.drawBitmapInCenter(canvas, x, y);
+		fid.drawBitmapInCenter(canvas, x, y, history);
 	}
 
 	@ColorInt

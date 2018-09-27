@@ -580,7 +580,7 @@ public class MapMarkersHelper {
 
 	@Nullable
 	public MapMarker getMapMarker(WptPt wptPt) {
-		for (MapMarker marker : mapMarkers) {
+		for (MapMarker marker : getMarkers()) {
 			if (marker.wptPt == wptPt) {
 				return marker;
 			}
@@ -590,7 +590,7 @@ public class MapMarkersHelper {
 
 	@Nullable
 	public MapMarker getMapMarker(FavouritePoint favouritePoint) {
-		for (MapMarker marker : mapMarkers) {
+		for (MapMarker marker : getMarkers()) {
 			if (marker.favouritePoint == favouritePoint) {
 				return marker;
 			}
@@ -600,12 +600,20 @@ public class MapMarkersHelper {
 
 	@Nullable
 	public MapMarker getMapMarker(@NonNull LatLon latLon) {
-		for (MapMarker marker : mapMarkers) {
+		for (MapMarker marker : getMarkers()) {
 			if (marker.point != null && marker.point.equals(latLon)) {
 				return marker;
 			}
 		}
 		return null;
+	}
+
+	private List<MapMarker> getMarkers() {
+		List<MapMarker> res = new ArrayList<>(mapMarkers);
+		if (settings.KEEP_PASSED_MARKERS_ON_MAP.get()) {
+			res.addAll(mapMarkersHistory);
+		}
+		return res;
 	}
 
 	@Nullable

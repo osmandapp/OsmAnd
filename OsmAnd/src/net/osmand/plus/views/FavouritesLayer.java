@@ -46,7 +46,10 @@ public class FavouritesLayer extends OsmandMapLayer implements ContextMenuLayer.
 	private MapTextLayer textLayer;
 	private Paint paintIcon;
 	private Bitmap pointSmall;
+	@ColorInt
 	private int defaultColor;
+	@ColorInt
+	private int grayColor;
 
 	private OsmandSettings settings;
 
@@ -70,6 +73,7 @@ public class FavouritesLayer extends OsmandMapLayer implements ContextMenuLayer.
 		paintIcon = new Paint();
 		pointSmall = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_white_shield_small);
 		defaultColor = ContextCompat.getColor(view.getContext(), R.color.color_favorite);
+		grayColor = ContextCompat.getColor(view.getContext(), R.color.color_favorite_gray);
 		contextMenuLayer = view.getLayerByClass(ContextMenuLayer.class);
 	}
 	
@@ -135,8 +139,13 @@ public class FavouritesLayer extends OsmandMapLayer implements ContextMenuLayer.
 
 							if (intersects(boundIntersections, x, y, iconSize, iconSize)) {
 								@ColorInt
-								int col = o.getColor() == 0 || o.getColor() == Color.BLACK ? defaultColor : o.getColor();
-								paintIcon.setColorFilter(new PorterDuffColorFilter(col, PorterDuff.Mode.MULTIPLY));
+								int color;
+								if (marker != null && marker.history) {
+									color = grayColor;
+								} else {
+									color = o.getColor() == 0 || o.getColor() == Color.BLACK ? defaultColor : o.getColor();
+								}
+								paintIcon.setColorFilter(new PorterDuffColorFilter(color, PorterDuff.Mode.MULTIPLY));
 								canvas.drawBitmap(pointSmall, x - pointSmall.getWidth() / 2, y - pointSmall.getHeight() / 2, paintIcon);
 								smallObjectsLatLon.add(new LatLon(lat, lon));
 							} else {
@@ -164,12 +173,14 @@ public class FavouritesLayer extends OsmandMapLayer implements ContextMenuLayer.
 
 	private void drawBigPoint(Canvas canvas, FavouritePoint o, float x, float y, @Nullable MapMarker marker) {
 		FavoriteImageDrawable fid;
+		boolean history = false;
 		if (marker != null) {
 			fid = FavoriteImageDrawable.getOrCreateSyncedIcon(view.getContext(), o.getColor());
+			history = marker.history;
 		} else {
 			fid = FavoriteImageDrawable.getOrCreate(view.getContext(), o.getColor(), true);
 		}
-		fid.drawBitmapInCenter(canvas, x, y);
+		fid.drawBitmapInCenter(canvas, x, y, history);
 	}
 	
 	
