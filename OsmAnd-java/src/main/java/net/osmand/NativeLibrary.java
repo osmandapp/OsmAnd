@@ -117,7 +117,7 @@ public class NativeLibrary {
 	}
 
 	public boolean initMapFile(String filePath, boolean useLive) {
-        return initBinaryMapFile(filePath, useLive);
+        return initBinaryMapFile(filePath, useLive, false);
 	}
 
 	public boolean initCacheMapFile(String filePath) {
@@ -160,7 +160,7 @@ public class NativeLibrary {
 
 	protected static native void deleteSearchResult(long searchResultHandle);
 
-	protected static native boolean initBinaryMapFile(String filePath, boolean useLive);
+	protected static native boolean initBinaryMapFile(String filePath, boolean useLive, boolean routingOnly);
 
 	protected static native boolean initCacheMapFiles(String filePath);
 

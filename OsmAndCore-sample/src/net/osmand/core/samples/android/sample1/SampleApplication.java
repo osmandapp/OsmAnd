@@ -75,14 +75,23 @@ public class SampleApplication extends Application {
 		resourceManager = new ResourceManager(this);
 		regions = new OsmandRegions();
 		updateRegionVars();
-		indexRegionsBoundaries();
 
 		uiHandler = new Handler();
 
 		poiTypes = MapPoiTypes.getDefaultNoInit();
 		if(ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
 				== PackageManager.PERMISSION_GRANTED) {
-			initPoiTypes();
+			new Thread(new Runnable() { //$NON-NLS-1$
+				@Override
+				public void run() {
+					try {
+						indexRegionsBoundaries();
+						initPoiTypes();
+					} finally {
+						//applicationBgInitializing = false;
+					}
+				}
+			}, "Initializing app").start();
 		}
 
 		// Initialize native core
