@@ -10,6 +10,9 @@
 	- For wording and consistency, please note https://osmand.net/help-online?id=technical-articles#Creating_a_Consistent_User_Experience
 	Thx - Hardy
 -->
+
+    <string name="search_street">Search street</string>
+    <string name="start_search_from_city">Start search from city</string>
     <string name="shared_string_restore">Restore</string>
     <string name="keep_passed_markers_descr">Markers added as a group of Favorites or GPX waypoints marked "Passed" will remain on the map. If the group is not active, the markers will disappear from the map.</string>
     <string name="keep_passed_markers">Keep passed markers on the map</string>
