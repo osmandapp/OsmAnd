@@ -97,7 +97,6 @@ class SettingsDialogFragment : BaseDialogFragment() {
 			val user = telegramHelper.getCurrentUser()
 			if (user != null) {
 				settings.addSharingDevice(TelegramUiHelper.getUserName(user))
-//				settings.currentSharingMode = TelegramUiHelper.getUserName(user)
 			}
 		}
 		val user = telegramHelper.getCurrentUser()
