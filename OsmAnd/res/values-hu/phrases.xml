@@ -3887,4 +3887,8 @@
 <string name="poi_car_pooling">Telekocsihely</string>
 	<string name="poi_course">Turistaút</string>
 
-	</resources>
+	<string name="poi_ruins">Romok</string>
+
+	<string name="poi_license_classes">Jogosítványkategóriák</string>
+
+</resources>
