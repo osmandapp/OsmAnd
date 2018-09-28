@@ -97,9 +97,10 @@ class SettingsDialogFragment : BaseDialogFragment() {
 			val user = telegramHelper.getCurrentUser()
 			if (user != null) {
 				settings.addSharingDevice(TelegramUiHelper.getUserName(user))
-				settings.currentSharingMode = TelegramUiHelper.getUserName(user)
+//				settings.currentSharingMode = TelegramUiHelper.getUserName(user)
 			}
 		}
+		val user = telegramHelper.getCurrentUser()
 		settings.shareDevicesIds.forEach {
 			val title = it
 			inflater.inflate(R.layout.item_with_rb_and_btn, container, false).apply {
@@ -110,7 +111,11 @@ class SettingsDialogFragment : BaseDialogFragment() {
 					isChecked = it == settings.currentSharingMode
 				}
 				setOnClickListener {
-					settings.currentSharingMode = title
+					if (user != null && TelegramUiHelper.getUserName(user) == title) {
+						settings.currentSharingMode = null
+					} else {
+						settings.currentSharingMode = title
+					}
 					updateSelectedSharingMode()
 				}
 				tag = it
@@ -125,7 +130,6 @@ class SettingsDialogFragment : BaseDialogFragment() {
 			}
 		}
 
-		val user = telegramHelper.getCurrentUser()
 		if (user != null) {
 			TelegramUiHelper.setupPhoto(
 				app,
