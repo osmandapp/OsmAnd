@@ -9,10 +9,7 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.ImageView
-import android.widget.RadioButton
-import android.widget.TextView
+import android.widget.*
 import net.osmand.telegram.R
 import net.osmand.telegram.TelegramSettings
 import net.osmand.telegram.TelegramSettings.DurationPref
@@ -22,13 +19,14 @@ import net.osmand.telegram.utils.AndroidUtils
 class SettingsDialogFragment : BaseDialogFragment() {
 
 	private val uiUtils get() = app.uiUtils
+	private lateinit var mainView: View
 
 	override fun onCreateView(
 		inflater: LayoutInflater,
 		parent: ViewGroup?,
 		savedInstanceState: Bundle?
 	): View {
-		val mainView = inflater.inflate(R.layout.fragement_settings_dialog, parent)
+		mainView = inflater.inflate(R.layout.fragement_settings_dialog, parent)
 
 		val appBarLayout = mainView.findViewById<View>(R.id.app_bar_layout)
 		AndroidUtils.addStatusBarPadding19v(context!!, appBarLayout)
@@ -94,6 +92,39 @@ class SettingsDialogFragment : BaseDialogFragment() {
 		}
 		updateSelectedAppConn()
 
+		container = mainView.findViewById(R.id.share_as_container)
+		if (settings.shareDevicesIds.isEmpty()) {
+			val user = telegramHelper.getCurrentUser()
+			if (user != null) {
+				settings.addSharingDevice(TelegramUiHelper.getUserName(user))
+				settings.currentSharingMode = TelegramUiHelper.getUserName(user)
+			}
+		}
+		settings.shareDevicesIds.forEach {
+			val title = it
+			inflater.inflate(R.layout.item_with_rb_and_btn, container, false).apply {
+				findViewById<TextView>(R.id.title).text = title
+				findViewById<View>(R.id.primary_btn).visibility = View.GONE
+				findViewById<RadioButton>(R.id.radio_button).apply {
+					visibility = View.VISIBLE
+					isChecked = it == settings.currentSharingMode
+				}
+				setOnClickListener {
+					settings.currentSharingMode = title
+					updateSelectedSharingMode()
+				}
+				tag = it
+				container.addView(this)
+			}
+		}
+
+		mainView.findViewById<TextView>(R.id.add_device).setOnClickListener {
+			val fm = fragmentManager
+			if (fm != null) {
+				AddDeviceBottomSheet.showInstance(fm, this)
+			}
+		}
+
 		val user = telegramHelper.getCurrentUser()
 		if (user != null) {
 			TelegramUiHelper.setupPhoto(
@@ -131,6 +162,11 @@ class SettingsDialogFragment : BaseDialogFragment() {
 				logoutTelegram()
 				dismiss()
 			}
+			AddDeviceBottomSheet.ADD_DEVICE_REQUEST_CODE -> {
+				if (data != null && data.hasExtra(AddDeviceBottomSheet.NEW_DEVICE_ID)) {
+					addNewSharingDevice(data.getStringExtra(AddDeviceBottomSheet.NEW_DEVICE_ID))
+				}
+			}
 		}
 	}
 	
@@ -161,6 +197,36 @@ class SettingsDialogFragment : BaseDialogFragment() {
 							tag == settings.appToConnectPackage
 				}
 			}
+		}
+	}
+
+	private fun updateSelectedSharingMode() {
+		view?.findViewById<ViewGroup>(R.id.share_as_container)?.apply {
+			for (i in 0 until childCount) {
+				getChildAt(i).apply {
+					findViewById<RadioButton>(R.id.radio_button).isChecked =
+							tag == settings.currentSharingMode
+				}
+			}
+		}
+	}
+
+	private fun addNewSharingDevice(title: String) {
+		val inflater = LayoutInflater.from(context)
+		val container = mainView.findViewById<ViewGroup>(R.id.share_as_container)
+		inflater.inflate(R.layout.item_with_rb_and_btn, null, false).apply {
+			findViewById<TextView>(R.id.title).text = title
+			findViewById<View>(R.id.primary_btn).visibility = View.GONE
+			findViewById<RadioButton>(R.id.radio_button).apply {
+				visibility = View.VISIBLE
+				isChecked = title == settings.currentSharingMode
+			}
+			setOnClickListener {
+				settings.currentSharingMode = title
+				updateSelectedSharingMode()
+			}
+			tag = title
+			container.addView(this)
 		}
 	}
 

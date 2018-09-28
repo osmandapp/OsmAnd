@@ -36,6 +36,9 @@ private const val SETTINGS_NAME = "osmand_telegram_settings"
 private const val SHARE_LOCATION_CHATS_KEY = "share_location_chats"
 private const val HIDDEN_ON_MAP_CHATS_KEY = "hidden_on_map_chats"
 
+private const val ADDED_DEVICES_IDS_KEY = "added_devices_ids"
+private const val SHARING_MODE_KEY = "current_sharing_mode"
+
 private const val METRICS_CONSTANTS_KEY = "metrics_constants"
 private const val SPEED_CONSTANTS_KEY = "speed_constants"
 
@@ -59,6 +62,9 @@ class TelegramSettings(private val app: TelegramApplication) {
 	private var shareLocationChats: Set<Long> = emptySet()
 	private var hiddenOnMapChats: Set<Long> = emptySet()
 
+	var shareDevicesIds: Set<String> = emptySet()
+	var currentSharingMode = ""
+	
 	var metricsConstants = MetricsConstants.KILOMETERS_AND_METERS
 	var speedConstants = SpeedConstants.KILOMETERS_PER_HOUR
 
@@ -167,6 +173,12 @@ class TelegramSettings(private val app: TelegramApplication) {
 		hiddenOnMapChats = hiddenChats.toHashSet()
 	}
 
+	fun addSharingDevice(deviceId: String) {
+		val shareDevices = shareDevicesIds.toMutableList()
+		shareDevices.add(deviceId)
+		shareDevicesIds = shareDevices.toHashSet()
+	}
+
 	fun getShareLocationChats() = ArrayList(shareLocationChats)
 
 	fun getShowOnMapChats() = getLiveNowChats().minus(hiddenOnMapChats)
@@ -202,6 +214,14 @@ class TelegramSettings(private val app: TelegramApplication) {
 		}
 		edit.putStringSet(HIDDEN_ON_MAP_CHATS_KEY, hiddenChatsSet)
 
+		val shareDevicesSet = mutableSetOf<String>()
+		val shareDevices = ArrayList(shareDevicesIds)
+		for (device in shareDevices) {
+			shareDevicesSet.add(device)
+		}
+		edit.putStringSet(ADDED_DEVICES_IDS_KEY, shareDevicesSet)
+		edit.putString(SHARING_MODE_KEY, currentSharingMode)
+
 		edit.putString(METRICS_CONSTANTS_KEY, metricsConstants.name)
 		edit.putString(SPEED_CONSTANTS_KEY, speedConstants.name)
 
@@ -233,6 +253,13 @@ class TelegramSettings(private val app: TelegramApplication) {
 		}
 		hiddenOnMapChats = hiddenChats
 
+		val shareDevices = mutableSetOf<String>()
+		val shareDevicesSet = prefs.getStringSet(ADDED_DEVICES_IDS_KEY, mutableSetOf())
+		for (deviceId in shareDevicesSet) {
+			shareDevices.add(deviceId.toString())
+		}
+		shareDevicesIds = shareDevices
+
 		metricsConstants = MetricsConstants.valueOf(
 			prefs.getString(METRICS_CONSTANTS_KEY, MetricsConstants.KILOMETERS_AND_METERS.name)
 		)
@@ -246,6 +273,8 @@ class TelegramSettings(private val app: TelegramApplication) {
 		staleLocTime = prefs.getLong(STALE_LOC_TIME_KEY, staleLocDef)
 		val locHistoryDef = LOC_HISTORY_VALUES_SEC[LOC_HISTORY_DEFAULT_INDEX]
 		locHistoryTime = prefs.getLong(LOC_HISTORY_TIME_KEY, locHistoryDef)
+
+		currentSharingMode = prefs.getString(SHARING_MODE_KEY, "")
 
 		appToConnectPackage = prefs.getString(APP_TO_CONNECT_PACKAGE_KEY, "")
 

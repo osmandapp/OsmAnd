@@ -88,6 +88,71 @@
 					android:maxLines="1"
 					android:paddingLeft="@dimen/content_padding_standard"
 					android:paddingRight="@dimen/content_padding_standard"
+					android:text="@string/share_location_as"
+					android:textColor="?android:textColorPrimary"
+					android:textSize="@dimen/list_item_title_text_size"
+					app:firstBaselineToTopHeight="25sp"
+					app:typeface="@string/font_roboto_medium" />
+
+				<net.osmand.telegram.ui.views.TextViewEx
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:paddingLeft="@dimen/content_padding_standard"
+					android:paddingRight="@dimen/content_padding_standard"
+					android:text="@string/share_location_as_descr"
+					android:textColor="?android:attr/textColorSecondary"
+					android:textSize="@dimen/list_item_description_text_size"
+					app:firstBaselineToTopHeight="20sp"
+					app:lastBaselineToBottomHeight="16sp"
+					app:typeface="@string/font_roboto_regular" />
+
+				<View
+					android:layout_width="wrap_content"
+					android:layout_height="1dp"
+					android:layout_marginStart="@dimen/content_padding_standard"
+					android:layout_marginLeft="@dimen/content_padding_standard"
+					android:layout_marginBottom="@dimen/content_padding_half"
+					android:background="?attr/card_divider_color" />
+
+				<LinearLayout
+					android:id="@+id/share_as_container"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:orientation="vertical" />
+
+				<net.osmand.telegram.ui.views.TextViewEx
+					android:id="@+id/add_device"
+					android:layout_width="match_parent"
+					android:layout_height="@dimen/list_header_height"
+					android:layout_gravity="center_vertical"
+					android:background="?attr/selectableItemBackground"
+					android:ellipsize="end"
+					android:gravity="center_vertical"
+					android:maxLines="1"
+					android:paddingLeft="@dimen/dialog_padding_horizontal"
+					android:paddingRight="@dimen/dialog_padding_horizontal"
+					android:text="@string/add_device"
+					android:textColor="?attr/ctrl_active_color"
+					app:typeface="@string/font_roboto_medium" />
+
+			</LinearLayout>
+
+			<include layout="@layout/list_item_divider" />
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:background="?attr/card_bg_color"
+				android:orientation="vertical">
+
+				<net.osmand.telegram.ui.views.TextViewEx
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:ellipsize="end"
+					android:gravity="center_vertical"
+					android:maxLines="1"
+					android:paddingLeft="@dimen/content_padding_standard"
+					android:paddingRight="@dimen/content_padding_standard"
 					android:text="@string/osmand_connect"
 					android:textColor="?android:textColorPrimary"
 					android:textSize="@dimen/list_item_title_text_size"
