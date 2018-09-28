@@ -3,10 +3,8 @@ package net.osmand.search.core;
 import com.jwetherell.openmap.common.LatLonPoint;
 import com.jwetherell.openmap.common.UTMPoint;
 
-import net.osmand.CollatorStringMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.ResultMatcher;
-import net.osmand.StringMatcher;
 import net.osmand.binary.BinaryMapAddressReaderAdapter;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapIndexReader.SearchPoiTypeFilter;
@@ -691,11 +689,11 @@ public class SearchCoreFactory {
 		}
 
 		private List<AbstractPoiType> matchSearchedCategories(SearchPhrase phrase, NameStringMatcher nm) {
-            if (translatedNames.isEmpty()) {
-                translatedNames = types.getAllTranslatedNames(false);
-                topVisibleFilters = types.getTopVisibleFilters();
-                categories = types.getCategories(false);
-            }
+			if (translatedNames.isEmpty()) {
+				translatedNames = types.getAllTranslatedNames(false);
+				topVisibleFilters = types.getTopVisibleFilters();
+				categories = types.getCategories(false);
+			}
 			List<AbstractPoiType> results = new ArrayList<>();
 			for (PoiFilter pf : topVisibleFilters) {
 				if (!phrase.isUnknownSearchWordPresent()
