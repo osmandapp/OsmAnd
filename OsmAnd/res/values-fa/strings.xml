@@ -3206,4 +3206,9 @@
     <string name="commiting_way">در حال ثبت راه…</string>
     <string name="ask_for_location_permission">برای ادامه، لطفاً به OsmAnd اجازهٔ دسترسی به موقعیت مکانی را بدهید.</string>
     <string name="rendering_value_black_name">سیاه</string>
+    <string name="search_street">جست‌وجوی خیابان</string>
+    <string name="start_search_from_city">آغاز جست‌وجو از شهر</string>
+    <string name="shared_string_restore">بازیابی</string>
+    <string name="keep_passed_markers_descr">نشانه‌هایی که در قالب گروهی از برگزیده‌ها یا نقاط بین‌راهی GPX وارد شده‌اند و از آن‌ها عبور کرده‌اید روی نقشه باقی می‌مانند. اگر گروه مربوط به آن‌ها را غیرفعال کنید، نشانه‌ها از روی نقشه محو می‌شوند.</string>
+    <string name="keep_passed_markers">نشانه‌های پشت سر گذاشته را روی نقشه نگه دار</string>
     </resources>
