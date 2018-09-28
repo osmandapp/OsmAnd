@@ -649,8 +649,9 @@ public class SearchCoreFactory {
 					wordsMatch = matchedCategories.isEmpty() ? wordsMatch : ++wordsMatch;
 					categories.addAll(matchedCategories);
 				}
-				List<AbstractPoiType> lastWordMatch = getMatchedEqualPoi(phrase, lastWord);
-				if (wordsMatch == searchWords.size() && lastWordMatch.isEmpty()) {
+				SearchPhrase lastWordPhrase = phrase.generateNewPhrase(lastWord, phrase.getSettings());
+				if (wordsMatch == searchWords.size() &&
+						matchSearchedCategories(lastWordPhrase, lastWordPhrase.getNameStringMatcher()).isEmpty()) {
 				    phrase.setMatchedPoiTypes(new ArrayList<>(categories));
 				    return false;
 				}
