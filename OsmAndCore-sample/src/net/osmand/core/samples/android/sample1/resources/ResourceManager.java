@@ -4,6 +4,7 @@ package net.osmand.core.samples.android.sample1.resources;
 import net.osmand.IndexConstants;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.binary.CachedOsmandIndexes;
 import net.osmand.core.samples.android.sample1.SampleApplication;
 import net.osmand.core.samples.android.sample1.SampleUtils;
 import net.osmand.data.Amenity;
@@ -33,10 +34,18 @@ public class ResourceManager {
 		SampleUtils.collectFiles(appPath, IndexConstants.BINARY_MAP_INDEX_EXT, files);
 		SampleUtils.collectFiles(app.getAppPath(IndexConstants.WIKI_INDEX_DIR), IndexConstants.BINARY_MAP_INDEX_EXT, files);
 
+		CachedOsmandIndexes cachedOsmandIndexes = new CachedOsmandIndexes();
+		File indCache = app.getAppPath("ind_core.cache");
+		if (indCache.exists()) {
+			try {
+				cachedOsmandIndexes.readFromFile(indCache, CachedOsmandIndexes.VERSION);
+			} catch (Exception e) {
+			}
+		}
+
 		for (File f : files) {
 			try {
-				RandomAccessFile mf = new RandomAccessFile(f.getPath(), "r");
-				BinaryMapIndexReader reader = new BinaryMapIndexReader(mf, f);
+				BinaryMapIndexReader reader = cachedOsmandIndexes.getReader(f);
 				if (reader.containsPoiData()) {
 					amenityRepositories.put(f.getName(), new AmenityIndexRepositoryBinary(reader));
 				}

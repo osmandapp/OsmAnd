@@ -458,6 +458,65 @@
 
                 <include layout="@layout/list_item_divider"/>
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/bg_color"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:id="@+id/keep_passed_row"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/bottom_sheet_title_height"
+                        android:background="?attr/selectableItemBackground"
+                        android:paddingLeft="@dimen/content_padding"
+                        android:paddingRight="@dimen/content_padding">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:ellipsize="end"
+                            android:maxLines="1"
+                            android:text="@string/keep_passed_markers"
+                            android:textAppearance="@style/TextAppearance.ListItemTitle"/>
+
+                        <android.support.v7.widget.SwitchCompat
+                            android:id="@+id/keep_passed_switch"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical|end"
+                            android:layout_marginLeft="@dimen/bottom_sheet_content_margin_small"
+                            android:layout_marginStart="@dimen/bottom_sheet_content_margin_small"
+                            android:background="@null"
+                            android:clickable="false"
+                            android:focusable="false"
+                            android:focusableInTouchMode="false"/>
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginLeft="@dimen/content_padding"
+                        android:layout_marginStart="@dimen/content_padding"
+                        android:background="?attr/dashboard_divider"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/content_padding"
+                        android:layout_marginRight="@dimen/content_padding"
+                        android:paddingBottom="@dimen/content_padding_small"
+                        android:paddingTop="@dimen/content_padding_small"
+                        android:text="@string/keep_passed_markers_descr"
+                        android:textColor="?android:textColorSecondary"
+                        android:textSize="@dimen/default_desc_text_size"/>
+
+                </LinearLayout>
+
+                <include layout="@layout/list_item_divider"/>
+
             </LinearLayout>
 
         </com.github.ksoichiro.android.observablescrollview.ObservableScrollView>

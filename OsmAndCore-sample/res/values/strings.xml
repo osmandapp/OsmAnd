@@ -36,8 +36,8 @@
     <string name="install_osmand_title">Install OsmAnd</string>
     <string name="install_osmand_q">The OsmAnd application not found. Please install OsmAnd and download maps.</string>
     <string name="install_osmand_note">NOTE: After OsmAnd will be installed, you need to set OsmAnd General settings > Data storage folder to Shared memory</string>
-    <string name="app_name">OsmAnd Core API sample 1 for Android OS</string>
-    <string name="title_activity_main">OsmAnd Core Sample 1</string>
+    <string name="app_name">OsmAnd API Sample</string>
+    <string name="title_activity_main">OsmAnd Sample</string>
     <string name="zoomIn">Zoom in</string>
     <string name="zoomOut">Zoom out</string>
     <string name="search_hint">Type and Search</string>

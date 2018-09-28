@@ -38,35 +38,42 @@ public class MapMarkerMenuController extends MenuController {
 				MapActivity activity = getMapActivity();
 				if (activity != null) {
 					MapMarkersHelper markersHelper = activity.getMyApplication().getMapMarkersHelper();
-					markersHelper.moveMapMarkerToHistory(getMapMarker());
+					MapMarker marker = getMapMarker();
+					if (marker.history) {
+						markersHelper.restoreMarkerFromHistory(marker, 0);
+					} else {
+						markersHelper.moveMapMarkerToHistory(marker);
+					}
 					activity.getContextMenu().close();
 				}
 			}
 		};
-		leftTitleButtonController.caption = mapActivity.getString(R.string.mark_passed);
+		leftTitleButtonController.caption = mapActivity.getString(mapMarker.history ? R.string.shared_string_restore : R.string.mark_passed);
 		leftTitleButtonController.leftIcon = useStateList ? createStateListPassedIcon()
 				: createPassedIcon(getPassedIconBgNormalColorId(), 0);
 
-		rightTitleButtonController = new TitleButtonController() {
-			@Override
-			public void buttonPressed() {
-				MapActivity activity = getMapActivity();
-				if (activity != null) {
-					OsmandSettings.OsmandPreference<Boolean> indication
-							= activity.getMyApplication().getSettings().MARKERS_DISTANCE_INDICATION_ENABLED;
-					if (!indication.get()) {
-						indication.set(true);
-						activity.getMapLayers().getMapWidgetRegistry().updateMapMarkersMode(activity);
+		if (!mapMarker.history) {
+			rightTitleButtonController = new TitleButtonController() {
+				@Override
+				public void buttonPressed() {
+					MapActivity activity = getMapActivity();
+					if (activity != null) {
+						OsmandSettings.OsmandPreference<Boolean> indication
+								= activity.getMyApplication().getSettings().MARKERS_DISTANCE_INDICATION_ENABLED;
+						if (!indication.get()) {
+							indication.set(true);
+							activity.getMapLayers().getMapWidgetRegistry().updateMapMarkersMode(activity);
+						}
+						MapMarkersHelper markersHelper = activity.getMyApplication().getMapMarkersHelper();
+						markersHelper.moveMarkerToTop(getMapMarker());
+						activity.getContextMenu().close();
 					}
-					MapMarkersHelper markersHelper = activity.getMyApplication().getMapMarkersHelper();
-					markersHelper.moveMarkerToTop(getMapMarker());
-					activity.getContextMenu().close();
 				}
-			}
-		};
-		rightTitleButtonController.caption = mapActivity.getString(R.string.make_active);
-		rightTitleButtonController.leftIcon = useStateList ? createStateListShowOnTopbarIcon()
-				: createShowOnTopbarIcon(getDeviceTopNormalColorId(), R.color.dashboard_blue);
+			};
+			rightTitleButtonController.caption = mapActivity.getString(R.string.make_active);
+			rightTitleButtonController.leftIcon = useStateList ? createStateListShowOnTopbarIcon()
+					: createShowOnTopbarIcon(getDeviceTopNormalColorId(), R.color.dashboard_blue);
+		}
 	}
 
 	private int getPassedIconBgNormalColorId() {

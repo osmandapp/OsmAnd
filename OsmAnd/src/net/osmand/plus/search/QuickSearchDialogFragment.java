@@ -1255,140 +1255,10 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 			@Override
 			public boolean searchFinished(SearchPhrase phrase) {
-				SearchResultCollection res = getResultCollection();
 				if (SearchUICore.isDebugMode()) {
-					LOG.info("UI >> Nearest cities found: " + getSearchResultCollectionFormattedSize(res));
+					LOG.info("UI >> Nearest cities found: " + getSearchResultCollectionFormattedSize(getResultCollection()));
 				}
-
-				final OsmandSettings settings = app.getSettings();
-				List<QuickSearchListItem> rows = new ArrayList<>();
-
-				if (SearchUICore.isDebugMode()) {
-					LOG.info("UI >> Start last city searching (within nearests)");
-				}
-				SearchResult lastCity = null;
-				if (res != null) {
-					citiesLoaded = res.getCurrentSearchResults().size() > 0;
-					final long lastCityId = settings.getLastSearchedCity();
-					for (SearchResult sr : res.getCurrentSearchResults()) {
-						if (sr.objectType == ObjectType.CITY && ((City) sr.object).getId() == lastCityId) {
-							lastCity = sr;
-							break;
-						}
-					}
-				}
-				if (SearchUICore.isDebugMode()) {
-					LOG.info("UI >> Last city found: " + (lastCity != null ? lastCity.localeName : "-"));
-				}
-
-				final String lastCityName = lastCity == null ? settings.getLastSearchedCityName() : lastCity.localeName;
-				if (!Algorithms.isEmpty(lastCityName)) {
-					String selectStreets = app.getString(R.string.select_street);
-					String inCityName = app.getString(R.string.shared_string_in_name, lastCityName);
-					Spannable spannable = new SpannableString(selectStreets + " " + inCityName);
-					boolean light = settings.isLightContent();
-					spannable.setSpan(new ForegroundColorSpan(getResources().getColor(light ? R.color.icon_color : R.color.color_white)),
-							selectStreets.length() + 1, spannable.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-
-					final SearchResult lastCityFinal = lastCity;
-					rows.add(new QuickSearchButtonListItem(app, R.drawable.ic_action_street_name,
-							spannable, new OnClickListener() {
-						@Override
-						public void onClick(View v) {
-							if (lastCityFinal == null) {
-								final long lastCityId = settings.getLastSearchedCity();
-								final LatLon lastCityPoint = settings.getLastSearchedPoint();
-								if (lastCityId != -1 && lastCityPoint != null) {
-									startLastCitySearch(lastCityPoint);
-									if (SearchUICore.isDebugMode()) {
-										LOG.info("UI >> Start last city searching (standalone)");
-									}
-									runCoreSearch("", false, false, new SearchResultListener() {
-
-										boolean cityFound = false;
-
-										@Override
-										public void publish(SearchResultCollection res, boolean append) {
-											if (res != null) {
-												for (SearchResult sr : res.getCurrentSearchResults()) {
-													if (sr.objectType == ObjectType.CITY && ((City) sr.object).getId() == lastCityId) {
-														if (SearchUICore.isDebugMode()) {
-															LOG.info("UI >> Last city found: " + sr.localeName);
-														}
-														cityFound = true;
-														completeQueryWithObject(sr);
-														break;
-													}
-												}
-											}
-										}
-
-										@Override
-										public void searchStarted(SearchPhrase phrase) {
-										}
-
-										@Override
-										public boolean searchFinished(SearchPhrase phrase) {
-											if (!cityFound) {
-												replaceQueryWithText(lastCityName + " ");
-											}
-											return false;
-										}
-									});
-									restoreSearch();
-								} else {
-									replaceQueryWithText(lastCityName + " ");
-								}
-							} else {
-								completeQueryWithObject(lastCityFinal);
-							}
-							openKeyboard();
-						}
-					}));
-				}
-				rows.add(new QuickSearchButtonListItem(app, R.drawable.ic_action_building_number,
-						app.getString(R.string.select_city), new OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						searchEditText.setHint(R.string.type_city_town);
-						startCitySearch();
-						updateTabbarVisibility(false);
-						runCoreSearch("", false, false);
-						openKeyboard();
-					}
-				}));
-				rows.add(new QuickSearchButtonListItem(app, R.drawable.ic_action_postcode,
-						app.getString(R.string.select_postcode), new OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						searchEditText.setHint(R.string.type_postcode);
-						startPostcodeSearch();
-						mainSearchFragment.getAdapter().clear();
-						updateTabbarVisibility(false);
-						openKeyboard();
-					}
-				}));
-				rows.add(new QuickSearchButtonListItem(app, R.drawable.ic_action_marker_dark,
-						app.getString(R.string.coords_search), new OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						LatLon latLon = searchUICore.getSearchSettings().getOriginalLocation();
-						QuickSearchCoordinatesFragment.showDialog(QuickSearchDialogFragment.this,
-								latLon.getLatitude(), latLon.getLongitude());
-					}
-				}));
-
-				if (res != null) {
-					rows.add(new QuickSearchHeaderListItem(app, app.getString(R.string.nearest_cities), true));
-					int limit = 15;
-					for (SearchResult sr : res.getCurrentSearchResults()) {
-						if (limit > 0) {
-							rows.add(new QuickSearchListItem(app, sr));
-						}
-						limit--;
-					}
-				}
-				addressSearchFragment.updateListAdapter(rows, false);
+				updateCitiesItems();
 				if (SearchUICore.isDebugMode()) {
 					LOG.info("UI >> Nearest cities loaded");
 				}
@@ -1396,6 +1266,140 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			}
 		});
 		restoreSearch();
+	}
+
+	private void updateCitiesItems() {
+		SearchResultCollection res = getResultCollection();
+
+		final OsmandSettings settings = app.getSettings();
+		List<QuickSearchListItem> rows = new ArrayList<>();
+
+		if (SearchUICore.isDebugMode()) {
+			LOG.info("UI >> Start last city searching (within nearests)");
+		}
+		SearchResult lastCity = null;
+		if (res != null) {
+			citiesLoaded = res.getCurrentSearchResults().size() > 0;
+			final long lastCityId = settings.getLastSearchedCity();
+			for (SearchResult sr : res.getCurrentSearchResults()) {
+				if (sr.objectType == ObjectType.CITY && ((City) sr.object).getId() == lastCityId) {
+					lastCity = sr;
+					break;
+				}
+			}
+		}
+		if (SearchUICore.isDebugMode()) {
+			LOG.info("UI >> Last city found: " + (lastCity != null ? lastCity.localeName : "-"));
+		}
+
+		final String lastCityName = lastCity == null ? settings.getLastSearchedCityName() : lastCity.localeName;
+		if (!Algorithms.isEmpty(lastCityName)) {
+			String selectStreets = app.getString(R.string.search_street);
+			String inCityName = app.getString(R.string.shared_string_in_name, lastCityName);
+			Spannable spannable = new SpannableString(selectStreets + " " + inCityName);
+			boolean light = settings.isLightContent();
+			spannable.setSpan(new ForegroundColorSpan(getResources().getColor(light ? R.color.icon_color : R.color.color_white)),
+					selectStreets.length() + 1, spannable.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+			final SearchResult lastCityFinal = lastCity;
+			rows.add(new QuickSearchButtonListItem(app, R.drawable.ic_action_street_name,
+					spannable, new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					if (lastCityFinal == null) {
+						final long lastCityId = settings.getLastSearchedCity();
+						final LatLon lastCityPoint = settings.getLastSearchedPoint();
+						if (lastCityId != -1 && lastCityPoint != null) {
+							startLastCitySearch(lastCityPoint);
+							if (SearchUICore.isDebugMode()) {
+								LOG.info("UI >> Start last city searching (standalone)");
+							}
+							runCoreSearch("", false, false, new SearchResultListener() {
+
+								boolean cityFound = false;
+
+								@Override
+								public void publish(SearchResultCollection res, boolean append) {
+									if (res != null) {
+										for (SearchResult sr : res.getCurrentSearchResults()) {
+											if (sr.objectType == ObjectType.CITY && ((City) sr.object).getId() == lastCityId) {
+												if (SearchUICore.isDebugMode()) {
+													LOG.info("UI >> Last city found: " + sr.localeName);
+												}
+												cityFound = true;
+												completeQueryWithObject(sr);
+												break;
+											}
+										}
+									}
+								}
+
+								@Override
+								public void searchStarted(SearchPhrase phrase) {
+								}
+
+								@Override
+								public boolean searchFinished(SearchPhrase phrase) {
+									if (!cityFound) {
+										replaceQueryWithText(lastCityName + " ");
+									}
+									return false;
+								}
+							});
+							restoreSearch();
+						} else {
+							replaceQueryWithText(lastCityName + " ");
+						}
+					} else {
+						completeQueryWithObject(lastCityFinal);
+					}
+					openKeyboard();
+				}
+			}));
+		}
+		rows.add(new QuickSearchButtonListItem(app, R.drawable.ic_action_building_number,
+				app.getString(R.string.start_search_from_city), new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				searchEditText.setHint(R.string.type_city_town);
+				startCitySearch();
+				updateTabbarVisibility(false);
+				runCoreSearch("", false, false);
+				openKeyboard();
+			}
+		}));
+		rows.add(new QuickSearchButtonListItem(app, R.drawable.ic_action_postcode,
+				app.getString(R.string.select_postcode), new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				searchEditText.setHint(R.string.type_postcode);
+				startPostcodeSearch();
+				mainSearchFragment.getAdapter().clear();
+				updateTabbarVisibility(false);
+				openKeyboard();
+			}
+		}));
+		rows.add(new QuickSearchButtonListItem(app, R.drawable.ic_action_marker_dark,
+				app.getString(R.string.coords_search), new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				LatLon latLon = searchUICore.getSearchSettings().getOriginalLocation();
+				QuickSearchCoordinatesFragment.showDialog(QuickSearchDialogFragment.this,
+						latLon.getLatitude(), latLon.getLongitude());
+			}
+		}));
+
+		if (res != null) {
+			rows.add(new QuickSearchHeaderListItem(app, app.getString(R.string.nearest_cities), true));
+			int limit = 15;
+			for (SearchResult sr : res.getCurrentSearchResults()) {
+				if (limit > 0) {
+					rows.add(new QuickSearchListItem(app, sr));
+				}
+				limit--;
+			}
+		}
+		addressSearchFragment.updateListAdapter(rows, false);
 	}
 
 	public void reloadHistory() {
@@ -1804,14 +1808,19 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		if (addressSearch) {
 			startAddressSearch();
 			if (sr.objectType == ObjectType.CITY) {
-				if (sr.relatedObject != null && sr.relatedObject instanceof BinaryMapIndexReader) {
+				if (sr.relatedObject instanceof BinaryMapIndexReader) {
 					File f = ((BinaryMapIndexReader) sr.relatedObject).getFile();
 					if (f != null) {
 						RegionAddressRepository region = app.getResourceManager().getRegionRepository(f.getName());
 						if (region != null) {
-							app.getSettings().setLastSearchedRegion(region.getFileName(), region.getEstimatedRegionCenter());
 							City city = (City) sr.object;
-							app.getSettings().setLastSearchedCity(city.getId(), sr.localeName, city.getLocation());
+							String lastSearchedRegion = app.getSettings().getLastSearchedRegion();
+							long lastCityId = app.getSettings().getLastSearchedCity();
+							if (!lastSearchedRegion.equals(region.getFileName()) || city.getId() != lastCityId) {
+								app.getSettings().setLastSearchedRegion(region.getFileName(), region.getEstimatedRegionCenter());
+								app.getSettings().setLastSearchedCity(city.getId(), sr.localeName, city.getLocation());
+								updateCitiesItems();
+							}
 						}
 					}
 				}
