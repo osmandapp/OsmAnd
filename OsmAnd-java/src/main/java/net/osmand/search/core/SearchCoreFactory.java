@@ -3,8 +3,10 @@ package net.osmand.search.core;
 import com.jwetherell.openmap.common.LatLonPoint;
 import com.jwetherell.openmap.common.UTMPoint;
 
+import net.osmand.CollatorStringMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.ResultMatcher;
+import net.osmand.StringMatcher;
 import net.osmand.binary.BinaryMapAddressReaderAdapter;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapIndexReader.SearchPoiTypeFilter;
@@ -637,9 +639,26 @@ public class SearchCoreFactory {
 
 		@Override
 		public boolean search(SearchPhrase phrase, SearchResultMatcher resultMatcher) throws IOException {
+			if(phrase.getSearchPhraseSize() > 1) {
+				List<String> searchWords = new ArrayList<>();
+				searchWords.add(phrase.getUnknownSearchWord());
+				searchWords.addAll(phrase.getUnknownSearchWords());
+				String lastWord = searchWords.remove(searchWords.size() - 1);
+				Set<AbstractPoiType> categories = new HashSet<>();
+				int wordsMatch = 0;
+				for (String word : searchWords) {
+					List<AbstractPoiType> matchedCategories = getMatchedEqualPoi(phrase, word);
+					wordsMatch = matchedCategories.isEmpty() ? wordsMatch : ++wordsMatch;
+					categories.addAll(matchedCategories);
+				}
+				List<AbstractPoiType> lastWordMatch = getMatchedEqualPoi(phrase, lastWord);
+				if (wordsMatch == searchWords.size() && lastWordMatch.isEmpty()) {
+				    phrase.setMatchedPoiTypes(new ArrayList<>(categories));
+				    return false;
+				}
+			}
 			NameStringMatcher nm = phrase.getNameStringMatcher();
 			List<AbstractPoiType> results = matchSearchedCategories(phrase, nm);
-			phrase.setMatchedPoiTypes(results);
 			for (AbstractPoiType pt : results) {
 				SearchResult res = new SearchResult(phrase);
 				res.localeName = pt.getTranslation();
@@ -663,6 +682,12 @@ public class SearchCoreFactory {
 			}
 
 			return true;
+		}
+
+		private List<AbstractPoiType> getMatchedEqualPoi(SearchPhrase phrase, String word) {
+			SearchPhrase subPhrase = phrase.generateNewPhrase(word, phrase.getSettings());
+			NameStringMatcher nm = new NameStringMatcher(word, StringMatcherMode.CHECK_EQUALS_FROM_SPACE);
+			return matchSearchedCategories(subPhrase, nm);
 		}
 
 		private List<AbstractPoiType> matchSearchedCategories(SearchPhrase phrase, NameStringMatcher nm) {
@@ -790,7 +815,7 @@ public class SearchCoreFactory {
 			if (phrase.isLastWord(ObjectType.POI_TYPE)) {
 				performSearch(phrase, resultMatcher);
 			} else if (phrase.hasMatchedPoiTypes()) {
-                List<AbstractPoiType> matchedPoiTypes = filterMatchedTypes(phrase);
+                List<AbstractPoiType> matchedPoiTypes = phrase.getMatchedPoiTypes();
                 for (AbstractPoiType pt : matchedPoiTypes) {
                     SearchResult res = new SearchResult(phrase);
                     res.localeName = pt.getTranslation();
@@ -920,19 +945,6 @@ public class SearchCoreFactory {
 					return set.contains(subtype);
 				}
 			};
-		}
-
-		private List<AbstractPoiType> filterMatchedTypes(SearchPhrase phrase) {
-			List<AbstractPoiType> result = new ArrayList<>();
-			List<AbstractPoiType> matchedPoiTypes = phrase.getMatchedPoiTypes();
-			NameStringMatcher matcher = new NameStringMatcher(phrase.getUnknownSearchWord(),
-					StringMatcherMode.CHECK_EQUALS_FROM_SPACE);
-			for (AbstractPoiType matchedType : matchedPoiTypes) {
-				if (matcher.matches(matchedType.getEnTranslation()) || matcher.matches(matchedType.getTranslation())) {
-					result.add(matchedType);
-				}
-			}
-			return result;
 		}
 
 		@Override

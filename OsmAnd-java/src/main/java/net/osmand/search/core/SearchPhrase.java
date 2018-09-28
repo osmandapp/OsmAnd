@@ -736,4 +736,8 @@ public class SearchPhrase {
 	public boolean hasMatchedPoiTypes() {
 		return !matchedPoiTypes.isEmpty();
 	}
+
+	public int getSearchPhraseSize() {
+		return unknownWords.size() + (unknownSearchWordTrim.isEmpty() ? 0 : 1);
+	}
 }
