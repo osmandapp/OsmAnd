@@ -63,7 +63,7 @@ class TelegramSettings(private val app: TelegramApplication) {
 	private var hiddenOnMapChats: Set<Long> = emptySet()
 
 	var shareDevicesIds: Set<String> = emptySet()
-	var currentSharingMode = ""
+	var currentSharingMode: String? = null
 	
 	var metricsConstants = MetricsConstants.KILOMETERS_AND_METERS
 	var speedConstants = SpeedConstants.KILOMETERS_PER_HOUR
