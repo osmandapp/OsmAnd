@@ -301,12 +301,12 @@
 	<string name="poi_lift_gate">Lift gate</string>
 	<string name="poi_toll_booth">Toll booth</string>
 	<string name="poi_border_control">Border control</string>
-	<string name="poi_traffic_calming_bump">Bump</string>
-	<string name="poi_traffic_calming_hump">Hump</string>
-	<string name="poi_traffic_calming_cushion">Cushion</string>
+	<string name="poi_traffic_calming_bump">Speed Bump</string>
+	<string name="poi_traffic_calming_hump">Speed Hump</string>
+	<string name="poi_traffic_calming_cushion">Speed Cushion</string>
 	<string name="poi_traffic_calming_chicane">Chicane</string>
 	<string name="poi_traffic_calming_rumble_strip">Rumble strip</string>
-	<string name="poi_traffic_calming_table">Table</string>
+	<string name="poi_traffic_calming_table">Speed Table</string>
 	<string name="poi_traffic_calming_choker">Choker</string>
 	<string name="poi_traffic_calming_island">Traffic island</string>
 	<string name="poi_traffic_signals">Stop light</string>
