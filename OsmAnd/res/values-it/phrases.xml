@@ -673,7 +673,7 @@
 	<string name="poi_water_transport">Trasporto navale</string>
 		<string name="poi_bicycle_transport">Trasporto in bici</string>
 		<string name="poi_aerialway_transport">Trasporto a fune</string>
-		<string name="poi_node_networks">Nodo ciclistico/pedonale</string>
+		<string name="poi_node_networks">Nodo di rete ciclistico/pedonale</string>
 		<string name="poi_hiking_routes">Percorso escursionistico</string>
 		<string name="poi_power">Energia</string>
 		<string name="poi_communication">Comunicazioni</string>
@@ -2529,4 +2529,7 @@
 	<string name="poi_boat_kayak_rental_rental_yes">Kayak: sì</string>
 	<string name="poi_boat_kayak_rental_rental_no">Kayak: no</string>
 	<string name="poi_surface_tartan">"Tartan "</string>
+	<string name="poi_checkpoint_type">Tipo Checkpoint</string>
+
+<string name="poi_bowls">Ciotole</string>
 	</resources>
