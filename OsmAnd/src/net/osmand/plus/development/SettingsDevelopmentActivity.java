@@ -40,55 +40,42 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 		super.onCreate(savedInstanceState);
 		getToolbar().setTitle(R.string.debugging_and_development);
 		PreferenceScreen cat = getPreferenceScreen();
-		
-		
-		CheckBoxPreference dbg = createCheckBoxPreference(settings.DEBUG_RENDERING_INFO,
-				R.string.trace_rendering, R.string.trace_rendering_descr);
-		cat.addPreference(dbg);
+		Preference pref;
 
-		cat.addPreference(createCheckBoxPreference(settings.DISABLE_COMPLEX_ROUTING,
-				R.string.disable_complex_routing, R.string.disable_complex_routing_descr));
-
-		cat.addPreference(createCheckBoxPreference(settings.USE_FAST_RECALCULATION,
-				R.string.use_fast_recalculation, R.string.use_fast_recalculation_desc));
-
-		final CheckBoxPreference openGlRender = createCheckBoxPreference(settings.USE_OPENGL_RENDER, R.string.use_opengl_render,R.string.use_opengl_render_descr);
-		cat.addPreference(openGlRender);
-
-		cat.addPreference(createCheckBoxPreference(settings.USE_OSM_LIVE_FOR_ROUTING,
-				R.string.use_osm_live_routing,
-				R.string.use_osm_live_routing_description));
+		// 2 should be in main settings
+		cat.addPreference(createCheckBoxPreference(settings.USE_OPENGL_RENDER,
+				R.string.use_opengl_render,R.string.use_opengl_render_descr));
 
 		cat.addPreference(createCheckBoxPreference(settings.ANIMATE_MY_LOCATION,
-				R.string.animate_my_location,
-				R.string.animate_my_location_desc));
+				R.string.animate_my_location, R.string.animate_my_location_desc));
 
-		final Preference firstRunPreference = new Preference(this);
-		firstRunPreference.setTitle(R.string.simulate_initial_startup);
-		firstRunPreference.setSummary(R.string.simulate_initial_startup_descr);
-		firstRunPreference.setSelectable(true);
-		firstRunPreference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+		pref = new Preference(this);
+		pref.setTitle(R.string.app_modes_choose);
+		pref.setSummary(R.string.app_modes_choose_descr);
+		pref.setKey("available_application_modes");
+		pref.setOnPreferenceClickListener(new OnPreferenceClickListener() {
 			@Override
 			public boolean onPreferenceClick(Preference preference) {
-				getMyApplication().getAppInitializer().resetFirstTimeRun();
-				OsmandSettings settings = getMyApplication().getSettings();
-				settings.FIRST_MAP_IS_DOWNLOADED.set(false);
-				settings.MAPILLARY_FIRST_DIALOG_SHOWN.set(false);
-				settings.WEBGL_SUPPORTED.set(true);
-				settings.METRIC_SYSTEM_CHANGED_MANUALLY.set(false);
-				settings.WIKI_ARTICLE_SHOW_IMAGES_ASKED.set(false);
-
-				getMyApplication().showToastMessage(R.string.shared_string_ok);
+				availableProfileDialog();
 				return true;
 			}
 		});
-		cat.addPreference(firstRunPreference);
-		
-		cat.addPreference(createCheckBoxPreference(settings.SHOULD_SHOW_FREE_VERSION_BANNER,
-				R.string.show_free_version_banner,
-				R.string.show_free_version_banner_description));
-		
-		Preference pref = new Preference(this);
+		cat.addPreference(pref);
+
+		PreferenceCategory navigation = new PreferenceCategory(this);
+		navigation.setTitle(R.string.routing_settings);
+		cat.addPreference(navigation);
+		navigation.addPreference(createCheckBoxPreference(settings.DISABLE_COMPLEX_ROUTING,
+				R.string.disable_complex_routing, R.string.disable_complex_routing_descr));
+
+		navigation.addPreference(createCheckBoxPreference(settings.USE_FAST_RECALCULATION,
+				R.string.use_fast_recalculation, R.string.use_fast_recalculation_desc));
+
+		navigation.addPreference(createCheckBoxPreference(settings.USE_OSM_LIVE_FOR_ROUTING,
+				R.string.use_osm_live_routing,
+				R.string.use_osm_live_routing_description));
+
+		pref = new Preference(this);
 		final Preference simulate = pref;
 		final OsmAndLocationSimulation sim = getMyApplication().getLocationProvider().getLocationSimulation();
 		final Runnable updateTitle = new Runnable(){
@@ -110,7 +97,43 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 				return true;
 			}
 		});
-		cat.addPreference(pref);
+		navigation.addPreference(pref);
+
+		PreferenceCategory debug = new PreferenceCategory(this);
+		debug.setTitle(R.string.debugging_and_development);
+		cat.addPreference(debug);
+
+		CheckBoxPreference dbg = createCheckBoxPreference(settings.DEBUG_RENDERING_INFO,
+				R.string.trace_rendering, R.string.trace_rendering_descr);
+		debug.addPreference(dbg);
+
+
+		final Preference firstRunPreference = new Preference(this);
+		firstRunPreference.setTitle(R.string.simulate_initial_startup);
+		firstRunPreference.setSummary(R.string.simulate_initial_startup_descr);
+		firstRunPreference.setSelectable(true);
+		firstRunPreference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+			@Override
+			public boolean onPreferenceClick(Preference preference) {
+				getMyApplication().getAppInitializer().resetFirstTimeRun();
+				OsmandSettings settings = getMyApplication().getSettings();
+				settings.FIRST_MAP_IS_DOWNLOADED.set(false);
+				settings.MAPILLARY_FIRST_DIALOG_SHOWN.set(false);
+				settings.WEBGL_SUPPORTED.set(true);
+				settings.METRIC_SYSTEM_CHANGED_MANUALLY.set(false);
+				settings.WIKI_ARTICLE_SHOW_IMAGES_ASKED.set(false);
+
+				getMyApplication().showToastMessage(R.string.shared_string_ok);
+				return true;
+			}
+		});
+		debug.addPreference(firstRunPreference);
+
+		debug.addPreference(createCheckBoxPreference(settings.SHOULD_SHOW_FREE_VERSION_BANNER,
+				R.string.show_free_version_banner,
+				R.string.show_free_version_banner_description));
+		
+
 		
 
 
@@ -122,19 +145,6 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 			@Override
 			public boolean onPreferenceClick(Preference preference) {
 				startActivity(new Intent(SettingsDevelopmentActivity.this, TestVoiceActivity.class));
-				return true;
-			}
-		});
-		cat.addPreference(pref);
-
-		pref = new Preference(this);
-		pref.setTitle(R.string.app_modes_choose);
-		pref.setSummary(R.string.app_modes_choose_descr);
-		pref.setKey("available_application_modes");
-		pref.setOnPreferenceClickListener(new OnPreferenceClickListener() {
-			@Override
-			public boolean onPreferenceClick(Preference preference) {
-				availableProfileDialog();
 				return true;
 			}
 		});
