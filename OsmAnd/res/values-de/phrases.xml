@@ -956,7 +956,7 @@
 	<string name="poi_shower">Dusche</string>
 	<string name="poi_email">E-Mail</string>
 	<string name="poi_fax">Fax</string>
-	<string name="facebook">Facebook</string>
+	<string name="facebook">"Facebook "</string>
 	<string name="poi_mobile">Handy</string>
 	<string name="poi_fee_no">nein</string>
 	<string name="poi_drinking_water_yes">ja</string>
@@ -1008,7 +1008,7 @@
 	<string name="poi_animal_shelter_bird">Vögel</string>
 
 <string name="poi_mill_pond">Mühlenteich</string>
-	<string name="twitter">Twitter</string>
+	<string name="twitter">"Twitter "</string>
 	<string name="poi_skype">Skype</string>
 	<string name="poi_youtube">Youtube</string>
 	<string name="poi_instagram">Instagram</string>
