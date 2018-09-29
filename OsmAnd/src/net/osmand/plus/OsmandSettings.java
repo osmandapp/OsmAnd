@@ -1192,7 +1192,6 @@ public class OsmandSettings {
 	}
 
 
-	public final OsmandPreference<Boolean> NO_DISCOUNT_INFO = new BooleanPreference("no_discount_info", false).makeGlobal();
 
 	public final OsmandPreference<Boolean> SHOW_LEGACY_SEARCH = new BooleanPreference("show_legacy_search", false).makeGlobal();
 

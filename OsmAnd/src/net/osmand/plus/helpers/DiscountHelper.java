@@ -52,8 +52,7 @@ public class DiscountHelper {
 			showDiscountBanner(mapActivity, mTitle, mDescription, mIcon, mUrl);
 		}
 		if (System.currentTimeMillis() - mLastCheckTime < 1000 * 60 * 60 * 24
-				|| !settings.isInternetConnectionAvailable()
-				|| settings.NO_DISCOUNT_INFO.get()) {
+				|| !settings.isInternetConnectionAvailable()) {
 			return;
 		}
 		mLastCheckTime = System.currentTimeMillis();

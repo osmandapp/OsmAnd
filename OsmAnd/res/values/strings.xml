@@ -615,8 +615,6 @@
     <string name="allow_access_location">Allow location access</string>
     <string name="first_usage_greeting">Get directions and discover new places without an Internet connection</string>
     <string name="search_my_location">Find my position</string>
-    <string name="no_update_info_desc">Do not check for new versions or OsmAnd related discounts.</string>
-    <string name="no_update_info">Do not show new versions</string>
     <string name="update_all_maps_now">Update all maps now?</string>
     <string name="clear_tile_data">Clear all tiles</string>
     <string name="routing_attr_short_way_name">Fuel-efficient way</string>
