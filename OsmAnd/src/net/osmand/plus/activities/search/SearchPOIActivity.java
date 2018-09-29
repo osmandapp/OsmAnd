@@ -868,7 +868,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 		switch (itemId) {
 			case android.R.id.home:
 				if (getIntent().hasExtra(MapActivity.INTENT_KEY_PARENT_MAP_ACTIVITY)) {
-					Intent newIntent = new Intent(this, app.getAppCustomization().getSearchActivity());
+					Intent newIntent = new Intent(this, SearchActivity.class);
 					if (location != null) {
 						newIntent.putExtra(SearchActivity.SEARCH_LAT, location.getLatitude());
 						newIntent.putExtra(SearchActivity.SEARCH_LON, location.getLongitude());
