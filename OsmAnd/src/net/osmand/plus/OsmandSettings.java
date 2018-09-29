@@ -1192,9 +1192,6 @@ public class OsmandSettings {
 	}
 
 
-
-	public final OsmandPreference<Boolean> SHOW_LEGACY_SEARCH = new BooleanPreference("show_legacy_search", false).makeGlobal();
-
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<Boolean> DEBUG_RENDERING_INFO = new BooleanPreference("debug_rendering", false).makeGlobal();
 

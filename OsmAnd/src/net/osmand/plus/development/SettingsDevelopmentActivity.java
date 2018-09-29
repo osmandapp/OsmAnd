@@ -88,11 +88,6 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 				R.string.show_free_version_banner,
 				R.string.show_free_version_banner_description));
 		
-
-		cat.addPreference(createCheckBoxPreference(settings.SHOW_LEGACY_SEARCH,
-				R.string.show_legacy_search, R.string.show_legacy_search_desc));
-
-
 		Preference pref = new Preference(this);
 		final Preference simulate = pref;
 		final OsmAndLocationSimulation sim = getMyApplication().getLocationProvider().getLocationSimulation();

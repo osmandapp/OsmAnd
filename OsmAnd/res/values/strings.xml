@@ -529,8 +529,6 @@
     <string name="rendering_attr_hideWaterPolygons_description">Water</string>
     <string name="rendering_attr_hideWaterPolygons_name">Hide water</string>
     <string name="legacy_search">Legacy search</string>
-    <string name="show_legacy_search">Show legacy search</string>
-    <string name="show_legacy_search_desc">Add the legacy search to the drawer list.</string>
     <string name="routing_attr_allow_motorway_name">Allow motorways</string>
     <string name="routing_attr_allow_motorway_description">Allow motorways.</string>
     <string name="upload_osm_note_description">Upload your OSM Note anonymously or by using your OpenStreetMap.org profile.</string>
