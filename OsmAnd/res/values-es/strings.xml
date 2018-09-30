@@ -2986,12 +2986,19 @@
 \nDenos su opinión</string>
     <string name="commiting_way">Enviando vía…</string>
     <string name="test_voice_desrc">Pulsa un botón y escucha el aviso de voz correspondiente para identificar las indicaciones que faltan o son defectuosas.</string>
-<string name="release_3_2_pre">• Corregido el fallo en el inicio que se producía con los mapas no latinos
+<string name="release_3_2_pre">"• Corregido el fallo en el inicio que se producía con los mapas no latinos 
+\n 
+\n • Mejora en los problemas de velocidad de renderizado en dispositivos Android 8.0 
+\n 
+\n • Soporte para la edición de objetos poligonales (no servicios) 
 \n
-\n • Mejora en los problemas de velocidad de renderizado en dispositivos Android 8.0
-\n
-\n • Soporte para la edición de objetos poligonales (no servicios)
-\n</string>
+\n • Medir distancia: agregar botón Medir en Acciones en el menú contextual "</string>
     <string name="ask_for_location_permission">Para continuar, debe permitir la ubicación a OsmAnd.</string>
     <string name="rendering_value_black_name">Negro</string>
+    <string name="search_street">Buscar calle</string>
+    <string name="start_search_from_city">Iniciar búsqueda desde ciudad</string>
+    <string name="shared_string_restore">Restaurar</string>
+    <string name="keep_passed_markers_descr">Los marcadores añadidos como un grupo de Favoritos o puntos de ruta GPX marcados como Pasados permanecerán en el mapa. Si el grupo no está activo, los marcadores desaparecerán del mapa.</string>
+    <string name="keep_passed_markers">Mantener marcadores pasados en el mapa</string>
+    <string name="more_transport_on_stop_hint">Hay más transporte en esta parada.</string>
     </resources>
