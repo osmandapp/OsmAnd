@@ -218,8 +218,8 @@
 	<string name="poi_lift_gate">Капија лифта</string>
 	<string name="poi_toll_booth">Телефонска говорница</string>
 	<string name="poi_border_control">Пасошка контрола</string>
-	<string name="poi_traffic_calming_bump">Лежећи</string>
-	<string name="poi_traffic_calming_cushion">Јастуче</string>
+	<string name="poi_traffic_calming_bump">Лежећи полицајац</string>
+	<string name="poi_traffic_calming_cushion">Јастуче (брзинско)</string>
 	<string name="poi_traffic_calming_chicane">Шикана</string>
 	<string name="poi_traffic_calming_island">Саобраћајно острво</string>
 	<string name="poi_traffic_signals">Стоп светло</string>
@@ -1570,9 +1570,9 @@
 	<string name="poi_fire_water_pond">Противпожарни базен</string>
 	<string name="poi_grit_bin">Сандук соли</string>
 	<string name="poi_ford_stepping_stones">Пешачки камени мост</string>
-	<string name="poi_traffic_calming_hump">Испупчење</string>
+	<string name="poi_traffic_calming_hump">Испупчење (брзинско)</string>
 	<string name="poi_traffic_calming_rumble_strip">Трака неравнине</string>
-	<string name="poi_traffic_calming_table">Успоривачки сто</string>
+	<string name="poi_traffic_calming_table">Успоривачки прелаз</string>
 	<string name="poi_traffic_calming_choker">Потискивач</string>
 	<string name="poi_public_transport_stop_position">Стоп позиција јавног превоза</string>
 	<string name="poi_railway_platform">Перон пруге</string>
@@ -2471,4 +2471,14 @@
 	<string name="poi_historic_period_ptolemaic_egypt">Историјски период: птоломејско египадски (305 пре.Х - 30 пре.Х)</string>
 	<string name="poi_historic_period_christian_egypt">Историјски период: хришћанско египадски</string>
 	<string name="poi_historic_period_byzantine_egypt">Историјски период: византијско египадски (30 пре.Х - 641 посл.Х)</string>
+	<string name="poi_historic_period_persian_occupation">Историјски период: персијска окупација</string>
+	<string name="poi_historic_period_greek_dark_ages">Историјски период: Грчки Средњи Век (1100 - 800 пре.Х)</string>
+	<string name="poi_historic_period_roman_greece">Историјски период: Римско Грчки (146 пре.Х - 330 посл.Х)</string>
+	<string name="poi_historic_period_roman_kingdom">Историјски период: Римско царство (753.г. пре.Х - 509.г. пре.Х)</string>
+	<string name="poi_historic_period_dominate">Историјски период: доминирајући (285.г. посл.Х - 476.г. посл.Х)</string>
+	<string name="poi_historic_period_villager">Историјски период: сељачки (епоха 1., 2., 1580 пре.Х - 133 посл.Х)</string>
+	<string name="poi_historic_period_urban">Историјски период: урбански (епоха 3., 133 посл.Х - 374 посл.Х)</string>
+	<string name="poi_historic_period_classical">Историјски период: класични (епоха 4., 374 посл.Х - 900 посл.Х)</string>
+	<string name="poi_historic_period_imperial">Историјски период: иперијални (епоха 5., 900 посл.Х - 1200 посл.Х)</string>
+
 	</resources>
