@@ -3103,4 +3103,10 @@ Abgedeckte Fläche: %1$s x %2$s</string>
 \n</string>
     <string name="ask_for_location_permission">Bitte lassen Sie zu, dass OsmAnd auf den Standort zugreifen darf.</string>
     <string name="rendering_value_black_name">Schwarz</string>
+    <string name="search_street">Straße suchen</string>
+    <string name="start_search_from_city">Suche von der Stadt aus starten</string>
+    <string name="shared_string_restore">Wiederherstellen</string>
+    <string name="keep_passed_markers_descr">Markierungen, die als Gruppe von Favoriten oder GPX-Wegpunkten hinzugefügt wurden, die als \'Passiert\' markiert sind, bleiben auf der Karte erhalten. Wenn die Gruppe nicht aktiv ist, verschwinden die Marker von der Karte.</string>
+    <string name="keep_passed_markers">Passierte Markierungen auf der Karte behalten</string>
+    <string name="more_transport_on_stop_hint">An dieser Haltestelle gibt es mehrere Verbindungen.</string>
     </resources>

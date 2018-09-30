@@ -2854,7 +2854,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="shared_string_groups">Groupes</string>
     <string name="last_seven_days">Ces 7 derniers jours</string>
     <string name="this_year">Cette année</string>
-    <string name="make_active">Activer la marque</string>
+    <string name="make_active">Activer cette marque</string>
     
     <string name="remove_from_map_markers">Supprimer des marques</string>
     <string name="descendingly">Ordre décroissant</string>
@@ -2949,9 +2949,9 @@ représentant la zone : %1$s x %2$s</string>
     <string name="shared_string_deleted">Supprimé</string>
     <string name="shared_string_edited">Modifié</string>
     <string name="shared_string_added">Ajouté</string>
-    <string name="marker_activated">Marque %s activée.</string>
-    <string name="one_tap_active_descr">Appuyez sur une marque de la carte pour la déplacer en première position des marques actives sans ouvrir le menu contextuel.</string>
-    <string name="one_tap_active">\'Appui simple\' activé</string>
+    <string name="marker_activated">Marque %s activée</string>
+    <string name="one_tap_active_descr">Appuyez sur une marque de la carte pour qu\'elle devienne immédiatement la première marque active sans utiliser le menu contextuel.</string>
+    <string name="one_tap_active">Appui court sur une marque</string>
     <string name="empty_state_av_notes">Prenez des notes !</string>
     <string name="empty_state_av_notes_desc">Associez des notes sonore, vidéo ou photo à n\'importe quel point de la carte depuis le gadget ou le menu contextuel.</string>
     <string name="notes_by_date">Notes par date</string>
@@ -3144,7 +3144,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="quick_action_edit_actions">Modifier les actions</string>
     <string name="error_notification_desc">Merci d\'envoyer une capture écran de cette notification à support@osmand.net</string>
     <string name="coord_input_edit_point">Modifier le point</string>
-    <string name="coord_input_add_point">Ajouter point</string>
+    <string name="coord_input_add_point">Ajouter un point</string>
     <string name="coord_input_save_as_track">Enregistrer comme trace</string>
     <string name="coord_input_save_as_track_descr">Vous avez ajouté %1$s points. Donnez un nom au fichier et cliquez sur Enregistrer.</string>
     <string name="point_deleted">Point %1$s supprimé</string>
@@ -3183,7 +3183,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="rendering_value_black_name">Noir</string>
     <string name="more_transport_on_stop_hint">Il y a d\'autres moyens de transport à cet arrêt.</string>
     <string name="search_street">Rechercher une rue</string>
-    <string name="start_search_from_city">Démarrer la recherche depuis la ville</string>
+    <string name="start_search_from_city">Démarrer la recherche à partir de la ville</string>
     <string name="shared_string_restore">Restaurer</string>
     <string name="keep_passed_markers_descr">Les marques visitées resteront affichées sur la carte, que les marques appartiennent à un groupe de favoris ou qu\'il s\'agisse de points de passage GPX. Ces marques ne disparaîtront que lorsque le groupe ou la trace sera désactivé.</string>
     <string name="keep_passed_markers">Afficher sur la carte les marques visitées</string>
