@@ -269,7 +269,7 @@
 	<string name="poi_ford_stepping_stones">Stiklubrú</string>
 	<string name="poi_mountain_pass">Fjallaskarð</string>
 	<string name="poi_city_wall">Borgarmúr</string>
-	<string name="poi_traffic_calming_table">Pallur</string>
+	<string name="poi_traffic_calming_table">Hraðahindrun - Pallur</string>
 	<string name="poi_traffic_calming_island">Umferðareyja</string>
 	<string name="poi_traffic_signals">Umferðarljós</string>
 
@@ -1820,7 +1820,7 @@
 	<string name="poi_fire_hydrant">Brunahani</string>
 	<string name="poi_fire_hose">Brunaslanga</string>
 	<string name="poi_ambulance_station">Sjúkrabílastöð</string>
-	<string name="poi_traffic_calming_bump">Ójafna</string>
+	<string name="poi_traffic_calming_bump">Hraðahindrun - Ójafna</string>
 	<string name="poi_car_repair">Bílaviðgerðir</string>
 	<string name="poi_vehicle_inspection">Bifreiðaskoðun</string>
 	<string name="poi_fuel_gtl_diesel">GTL-dísel</string>
@@ -1974,9 +1974,9 @@
 	<string name="poi_public_transport_platform_trolleybus">Biðstöð rafknúinna strætisvagna</string>
 	<string name="poi_railway_platform">Brautarpallur</string>
 	<string name="poi_lift_gate">Bómuhlið</string>
-	<string name="poi_traffic_calming_hump">Alda</string>
-	<string name="poi_traffic_calming_cushion">Koddi</string>
-	<string name="poi_traffic_calming_chicane">Hliðrun</string>
+	<string name="poi_traffic_calming_hump">Hraðahindrun - Alda</string>
+	<string name="poi_traffic_calming_cushion">Hraðahindrun - Koddi</string>
+	<string name="poi_traffic_calming_chicane">Hraðahindrun - Hliðrun</string>
 	<string name="poi_traffic_calming_rumble_strip">Hvinrendur</string>
 	<string name="poi_traffic_calming_choker">Þrenging</string>
 	<string name="poi_railway_buffer_stop">Járnbrautarstuðpúði</string>
