@@ -2148,7 +2148,7 @@ Lon %2$s</string>
     <string name="dist_away_from_my_location">Buscar en %1$s alrededor</string>
     <string name="confirmation_to_delete_history_items">¿Quitar elementos marcados del «Historial»?</string>
     <string name="back_to_search">Volver a la búsqueda</string>
-    <string name="coords_search">Búsqueda de coordenadas</string>
+    <string name="coords_search">Buscar coordenadas</string>
     <string name="advanced_coords_search">Búsqueda avanzada de coordenadas</string>
     <string name="route_stops_before">%1$s parada(s) anterior(es)</string>
     <string name="rendering_attr_hideOverground_name">Objetos en superficie</string>
@@ -2542,8 +2542,8 @@ Lon %2$s</string>
     <string name="type_city_town">Escribe la ciudad o pueblo</string>
     <string name="type_postcode">Escribe el código postal</string>
     <string name="nearest_cities">Ciudades cercanas</string>
-    <string name="select_city">Elegir ciudad o pueblo</string>
-    <string name="select_postcode">Elegir código postal</string>
+    <string name="select_city">Elegir la ciudad o pueblo</string>
+    <string name="select_postcode">Elegir el código postal</string>
     <string name="type_address">Escribe la dirección</string>
     <string name="select_street">Elegir la calle</string>
     <string name="shared_string_in_name">en %1$s</string>
@@ -3015,8 +3015,8 @@ Lon %2$s</string>
     <string name="ask_for_location_permission">Para continuar, debe permitir la ubicación a OsmAnd.</string>
     <string name="rendering_value_black_name">Negro</string>
     <string name="more_transport_on_stop_hint">Hay más transportes en esta parada.</string>
-    <string name="search_street">Buscar calle</string>
-    <string name="start_search_from_city">Iniciar la búsqueda desde la ciudad</string>
+    <string name="search_street">Buscar la calle</string>
+    <string name="start_search_from_city">Elegir la ciudad o pueblo</string>
     <string name="shared_string_restore">Restaurar</string>
     <string name="keep_passed_markers_descr">Los marcadores añadidos como un grupo de Favoritos o puntos de ruta GPX marcados como «Usados», permanecerán en el mapa. Si el grupo no está activo, los marcadores desaparecerán del mapa.</string>
     <string name="keep_passed_markers">Mantener en el mapa los marcadores ya usados</string>
