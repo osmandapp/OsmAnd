@@ -3159,4 +3159,9 @@
     <string name="ask_for_location_permission">請準許 OsmAnd 位置以繼續。</string>
     <string name="rendering_value_black_name">黑色</string>
     <string name="more_transport_on_stop_hint">在此停靠站有更多的交通工具。</string>
+    <string name="search_street">搜尋街道</string>
+    <string name="start_search_from_city">從城市開始搜尋</string>
+    <string name="shared_string_restore">還原</string>
+    <string name="keep_passed_markers_descr">標記已加入群組作為我的收藏或 GPX 航點標記為已經過的將維持在地圖上。如果該群組未處於活動狀態，則標記將從地圖上消失。</string>
+    <string name="keep_passed_markers">在地圖上保留已經過的標記</string>
     </resources>
