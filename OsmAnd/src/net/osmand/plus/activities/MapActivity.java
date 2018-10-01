@@ -1367,19 +1367,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				uiHandler.sendMessageDelayed(msg, LONG_KEYPRESS_DELAY);
 			}
 			return true;
-		} else if (keyCode == KeyEvent.KEYCODE_SEARCH && event.getRepeatCount() == 0) {
-			Intent newIntent = new Intent(MapActivity.this, getMyApplication().getAppCustomization()
-					.getSearchActivity());
-			// causes wrong position caching: newIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-			LatLon loc = getMapLocation();
-			newIntent.putExtra(SearchActivity.SEARCH_LAT, loc.getLatitude());
-			newIntent.putExtra(SearchActivity.SEARCH_LON, loc.getLongitude());
-			if (mapViewTrackingUtilities.isMapLinkedToLocation()) {
-				newIntent.putExtra(SearchActivity.SEARCH_NEARBY, true);
-			}
-			startActivity(newIntent);
-			newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			return true;
 		}
 		return super.onKeyDown(keyCode, event);
 	}

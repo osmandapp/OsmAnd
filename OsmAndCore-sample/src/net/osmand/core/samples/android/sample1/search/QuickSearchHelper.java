@@ -2,6 +2,7 @@ package net.osmand.core.samples.android.sample1.search;
 
 import net.osmand.IndexConstants;
 import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.binary.CachedOsmandIndexes;
 import net.osmand.core.samples.android.sample1.SampleApplication;
 import net.osmand.core.samples.android.sample1.SampleUtils;
 import net.osmand.search.SearchUICore;
@@ -51,11 +52,18 @@ public class QuickSearchHelper {
 		SampleUtils.collectFiles(appPath, IndexConstants.BINARY_MAP_INDEX_EXT, files);
 		SampleUtils.collectFiles(app.getAppPath(IndexConstants.WIKI_INDEX_DIR), IndexConstants.BINARY_MAP_INDEX_EXT, files);
 
+		CachedOsmandIndexes cachedOsmandIndexes = new CachedOsmandIndexes();
+		File indCache = app.getAppPath("ind_core.cache");
+		if (indCache.exists()) {
+			try {
+				cachedOsmandIndexes.readFromFile(indCache, CachedOsmandIndexes.VERSION);
+			} catch (Exception e) {
+			}
+		}
 		List<BinaryMapIndexReader> readers = new ArrayList<>();
 		for (File f : files) {
 			try {
-				RandomAccessFile mf = new RandomAccessFile(f.getPath(), "r");
-				BinaryMapIndexReader reader = new BinaryMapIndexReader(mf, f);
+				BinaryMapIndexReader reader = cachedOsmandIndexes.getReader(f);
 				readers.add(reader);
 			} catch (IOException e) {
 				e.printStackTrace();

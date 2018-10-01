@@ -389,9 +389,11 @@ public class GeneralRouter implements VehicleRouter {
 	public double getRightTurn() {
 		return rightTurn;
 	}
+	
 	public double getRoundaboutTurn() {
 		return roundaboutTurn;
 	}
+	
 	@Override
 	public double calculateTurnTime(RouteSegment segment, int segmentEnd, RouteSegment prev, int prevSegmentEnd) {
 		float ts = getPenaltyTransition(segment.getRoad());

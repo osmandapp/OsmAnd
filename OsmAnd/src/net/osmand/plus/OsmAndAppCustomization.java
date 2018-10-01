@@ -56,10 +56,6 @@ public class OsmAndAppCustomization {
 		return MapActivity.class;
 	}
 	
-	public Class<SearchActivity> getSearchActivity(){
-		return SearchActivity.class;
-	}
-	
 	public Class<TrackActivity> getTrackActivity(){
 		return TrackActivity.class;
 	}

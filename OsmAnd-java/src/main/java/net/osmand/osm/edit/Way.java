@@ -152,6 +152,7 @@ public class Way extends Entity {
 		}
 	}
 
+	// Returns top - as maximum latitude, bottom as minimum
 	public QuadRect getLatLonBBox() {
 		QuadRect qr = null;
 		if (nodes != null) {

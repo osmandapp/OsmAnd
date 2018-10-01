@@ -3020,4 +3020,10 @@ Abasta l\'àrea: %1$s x %2$s</string>
 \n "</string>
     <string name="ask_for_location_permission">Per continuar cal que doneu a OsmAnd accés a la ubicació.</string>
     <string name="rendering_value_black_name">Negre</string>
+    <string name="search_street">Cerca un carrer</string>
+    <string name="start_search_from_city">Comença la cerca des de la ciutat</string>
+    <string name="shared_string_restore">Restaura</string>
+    <string name="keep_passed_markers_descr">Els marcadors afegits a un grup de Preferits i les fites GPX ja assolides romandran al mapa. Si el grup no estigués activat, els marcadors no apareixerien al mapa.</string>
+    <string name="keep_passed_markers">Manté al mapa les fites assolides</string>
+    <string name="more_transport_on_stop_hint">Hi ha altres mitjans de transport en aquesta parada.</string>
     </resources>

@@ -218,8 +218,8 @@
 	<string name="poi_lift_gate">Капија лифта</string>
 	<string name="poi_toll_booth">Телефонска говорница</string>
 	<string name="poi_border_control">Пасошка контрола</string>
-	<string name="poi_traffic_calming_bump">Лежећи</string>
-	<string name="poi_traffic_calming_cushion">Јастуче</string>
+	<string name="poi_traffic_calming_bump">Лежећи полицајац</string>
+	<string name="poi_traffic_calming_cushion">Јастуче (брзинско)</string>
 	<string name="poi_traffic_calming_chicane">Шикана</string>
 	<string name="poi_traffic_calming_island">Саобраћајно острво</string>
 	<string name="poi_traffic_signals">Стоп светло</string>
@@ -1570,9 +1570,9 @@
 	<string name="poi_fire_water_pond">Противпожарни базен</string>
 	<string name="poi_grit_bin">Сандук соли</string>
 	<string name="poi_ford_stepping_stones">Пешачки камени мост</string>
-	<string name="poi_traffic_calming_hump">Испупчење</string>
+	<string name="poi_traffic_calming_hump">Испупчење (брзинско)</string>
 	<string name="poi_traffic_calming_rumble_strip">Трака неравнине</string>
-	<string name="poi_traffic_calming_table">Успоривачки сто</string>
+	<string name="poi_traffic_calming_table">Успоривачки прелаз</string>
 	<string name="poi_traffic_calming_choker">Потискивач</string>
 	<string name="poi_public_transport_stop_position">Стоп позиција јавног превоза</string>
 	<string name="poi_railway_platform">Перон пруге</string>
@@ -2437,5 +2437,48 @@
 	<string name="poi_historic_civilization_cycladic">Цивилизација: цикладска</string>
 	<string name="poi_historic_civilization_minoan">Цивилизација: минонска</string>
 	<string name="poi_historic_civilization_tiahuanacota">Цивилизација: тиахунакотска</string>
+
+	<string name="poi_animal_training">Тренинг животиња</string>
+	<string name="poi_animal_training_dog">Пас</string>
+	<string name="poi_animal_training_horse">Коњ</string>
+
+	<string name="poi_horse_yes">Дозвољено коњима</string>
+	<string name="poi_horse_no">Недозвољено коњима</string>
+	<string name="poi_animal_yes">Дозвољено животињама</string>
+	<string name="poi_animal_no">Недозвољено животињама</string>
+
+	<string name="poi_historic_period_nuragic">Историјски период: нурагски</string>
+	<string name="poi_historic_period_stone_bronze_undetermined">Историјски период: камено доба / бронзано доба (неодређено)</string>
+	<string name="poi_historic_period_bronze_age">Историјски период: бронзано доба</string>
+	<string name="poi_historic_period_principate">Историјски период: принципат (27.г. пре.Х - 284.г. посл.Х)</string>
+	<string name="poi_historic_period_classical_greece">Историјски период: класично грчки (5.в. - 4.в. пре.Х)</string>
+	<string name="poi_historic_period_archaic_greece">Историјски период: архаично грчки</string>
+	<string name="poi_historic_period_iron_age">Историјски период: гвоздено доба</string>
+	<string name="poi_historic_period_roman_republic">Историјски период: Римска република (508.г. пре.Х - 27.г. пре.Х)</string>
+	<string name="poi_historic_period_hellenistic_greece">Историјски период: хеленско грчки</string>
+	<string name="poi_historic_period_new_kingdom">Историјски период: ново царство (1550 - 1069 пре.Х)</string>
+	<string name="poi_historic_period_middle_kingdom">Историјски период: средње царство (2055 - 1650 пре.Х)</string>
+	<string name="poi_historic_period_predynastic_egypt">Историјски период: прединастијско египадски</string>
+	<string name="poi_historic_period_early_dynastic_period">Историјски период: рано династијски период (3100 - 2686 пре.Х)</string>
+	<string name="poi_historic_period_old_kingdom">Историјски период: старо царство (2686 - 2181 пре.Х)</string>
+	<string name="poi_historic_period_first_intermediate_period">Историјски период: први међупериод (2181 - 2055 пре.Х)</string>
+	<string name="poi_historic_period_second_intermediate_period">Историјски период: други међупериод (1650 - 1550 пре.Х)</string>
+	<string name="poi_historic_period_third_intermediate_period">Историјски период: трећи међупериод (1069 - 664 пре.Х)</string>
+	<string name="poi_historic_period_first_persian_period">Историјски период: први персијски период</string>
+	<string name="poi_historic_period_late_period">Историјски период: касни период (664 - 332 пре.Х)</string>
+	<string name="poi_historic_period_second_persian_period">Историјски период: други персијски период</string>
+	<string name="poi_historic_period_alexander_the_great">Историјски период: Александра Великог</string>
+	<string name="poi_historic_period_ptolemaic_egypt">Историјски период: птоломејско египадски (305 пре.Х - 30 пре.Х)</string>
+	<string name="poi_historic_period_christian_egypt">Историјски период: хришћанско египадски</string>
+	<string name="poi_historic_period_byzantine_egypt">Историјски период: византијско египадски (30 пре.Х - 641 посл.Х)</string>
+	<string name="poi_historic_period_persian_occupation">Историјски период: персијска окупација</string>
+	<string name="poi_historic_period_greek_dark_ages">Историјски период: Грчки Средњи Век (1100 - 800 пре.Х)</string>
+	<string name="poi_historic_period_roman_greece">Историјски период: Римско Грчки (146 пре.Х - 330 посл.Х)</string>
+	<string name="poi_historic_period_roman_kingdom">Историјски период: Римско царство (753.г. пре.Х - 509.г. пре.Х)</string>
+	<string name="poi_historic_period_dominate">Историјски период: доминирајући (285.г. посл.Х - 476.г. посл.Х)</string>
+	<string name="poi_historic_period_villager">Историјски период: сељачки (епоха 1., 2., 1580 пре.Х - 133 посл.Х)</string>
+	<string name="poi_historic_period_urban">Историјски период: урбански (епоха 3., 133 посл.Х - 374 посл.Х)</string>
+	<string name="poi_historic_period_classical">Историјски период: класични (епоха 4., 374 посл.Х - 900 посл.Х)</string>
+	<string name="poi_historic_period_imperial">Историјски период: иперијални (епоха 5., 900 посл.Х - 1200 посл.Х)</string>
 
 	</resources>

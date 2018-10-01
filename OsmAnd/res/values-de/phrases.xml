@@ -541,13 +541,13 @@
 	<string name="poi_townhall">Rathaus</string>
 	<string name="poi_toys">Spielwarenhandlung</string>
 	<string name="poi_trade">Baustoffhandlung</string>
-	<string name="poi_traffic_calming_bump">Bodenwelle</string>
+	<string name="poi_traffic_calming_bump">Bodenschwelle</string>
 	<string name="poi_traffic_calming_chicane">Schikane</string>
 	<string name="poi_traffic_calming_choker">Fahrbahnverengung</string>
 	<string name="poi_traffic_calming_cushion">Bodenwelle</string>
 	<string name="poi_traffic_calming_hump">Bodenwelle</string>
 	<string name="poi_traffic_calming_rumble_strip">Holperstreifen</string>
-	<string name="poi_traffic_calming_table">Bodenwelle</string>
+	<string name="poi_traffic_calming_table">Geschwindigkeitstabelle</string>
 	<string name="poi_traffic_signals">Ampel</string>
 	<string name="poi_tram_stop">Straßenbahnhaltestelle</string>
 	<string name="poi_travel_agent">Reisebüro</string>

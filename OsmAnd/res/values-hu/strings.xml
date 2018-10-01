@@ -60,7 +60,7 @@
     <string name="i_am_here">Itt vagyok</string>
     <string name="zoom_by_trackball_descr">Térképnagyítás vízszintes \'trackball\' mozgatással.</string>
     <string name="zoom_by_trackball">\'trackball\' használata térképnagyításhoz</string>
-    <string name="accessibility_preferences_descr">Akadálymentesítéssel kapcsolatos beállítások.</string>
+    <string name="accessibility_preferences_descr">Akadálymentességgel kapcsolatos beállítások.</string>
     <string name="shared_string_accessibility">Akadálymentesítés</string>
     <string name="rendering_out_of_memory">Nincs elég folyamatmemória a kijelölt terület megjelenítéséhez</string>
     <string name="use_fluorescent_overlays">Fluoreszkáló rátétrétegek</string>
@@ -1090,8 +1090,8 @@ Proporcionális memória %4$s MB (Android korlát %5$s MB, Dalvik %6$s MB).</str
     <string name="av_use_external_camera">Kamera alkalmazás használata</string>
     <string name="index_name_openmaps">OpenMaps EU</string>
     <string name="max_speed_none">nincs</string>
-    <string name="prefer_motorways">Autópályák preferálása</string>
-    <string name="prefer_in_routing_title">Preferálás…</string>
+    <string name="prefer_motorways">Autópályák előnyben részesítése</string>
+    <string name="prefer_in_routing_title">A következők előnyben részesítése…</string>
     <string name="prefer_in_routing_descr">Autópályák előnyben részesítése.</string>
     <string name="access_arrival_time">Érkezési idő</string>
     <string name="item_checked">kijelölt</string>
@@ -1263,10 +1263,10 @@ Proporcionális memória %4$s MB (Android korlát %5$s MB, Dalvik %6$s MB).</str
     <string name="route_descr_select_destination">Célpont kijelölése</string>
     <string name="shared_string_select_on_map">Kijelölése a térképen</string>
     <string name="shared_string_favorite">Kedvenc</string>
-    <string name="route_preferences">Útvonal beállítások</string>
+    <string name="route_preferences">Útvonal-beállítások</string>
     <string name="route_info">Útvonal információ</string>
-    <string name="routing_attr_prefer_motorway_name">Autópályák preferálása</string>
-    <string name="routing_attr_prefer_motorway_description">Autópályák preferálása</string>
+    <string name="routing_attr_prefer_motorway_name">Autópályák előnyben részesítése</string>
+    <string name="routing_attr_prefer_motorway_description">Autópályák előnyben részesítése</string>
     
     
     <string name="routing_attr_avoid_toll_name">Fizetős utak elkerülése</string>
@@ -1289,7 +1289,7 @@ Proporcionális memória %4$s MB (Android korlát %5$s MB, Dalvik %6$s MB).</str
     <string name="calculate_osmand_route_gpx">Offline OsmAnd útvonaltervezés</string>
     <string name="app_mode_truck">Teherautó</string>
     <string name="guidance_preferences_descr">Navigációs beállítások</string>
-    <string name="routing_preferences_descr">Útvonaltervezési beállítások</string>
+    <string name="routing_preferences_descr">Útvonal-tervezési beállítások</string>
     <string name="speech_rate_descr">TTS beszédsebesség megadása.</string>
     <string name="speech_rate">Beszédsebesség</string>
 
@@ -1493,7 +1493,7 @@ Proporcionális memória %4$s MB (Android korlát %5$s MB, Dalvik %6$s MB).</str
     <string name="gps_wake_up_timer">GPS felébresztési intervallum</string>
     <string name="sleep_mode_stop_dialog">Leállítod a GPS háttér módot?</string>
     <string name="map_preferred_locale_descr">A térképfeliratok előnyben részesített nyelve (ha nem elérhető, angolul vagy a helyi nyelven fogja mutatni).</string>
-    <string name="map_preferred_locale">Térkép preferált nyelve</string>
+    <string name="map_preferred_locale">Térkép előnyben részesített nyelve</string>
     <string name="local_map_names">Helyi név</string>
     <string name="lang_sw">szuahéli</string>
     <string name="lang_he">héber</string>
@@ -1582,7 +1582,7 @@ Proporcionális memória %4$s MB (Android korlát %5$s MB, Dalvik %6$s MB).</str
     <string name="record_plugin_description">Ez a bővítmény aktiválja a nyomvonalak rögzítésének és mentésének lehetőségét, ha megnyomod a GPX naplózó gombot a térkép képernyőn, valamint képes minden navigációs útvonalat automatikusan egy GPX fájlba naplózni.
 \n 
 \nA rögzített nyomvonalak megoszthatók az ismerősökkel, vagy használhatók az OSM hozzájárulásoknál. A sportolók a rögzített nyomvonalakat az edzéseik megfigyeléséhez használhatják. Néhány alapvető nyomvonalelemzés közvetlenül az OsmAnd programon belül is végrehajtható, mint például köridők, átlagsebesség, stb., és természetesen a nyomvonalak később harmadik féltől származó elemzőeszközökkel is elemezhetők.</string>
-    <string name="record_plugin_name">Útvonal rögzítése</string>
+    <string name="record_plugin_name">Útvonalrögzítés</string>
     <string name="int_hour">ó</string>
     <string name="duration">Időtartam</string>
     <string name="distance">Távolság</string>
@@ -1680,9 +1680,9 @@ Proporcionális memória %4$s MB (Android korlát %5$s MB, Dalvik %6$s MB).</str
     <string name="rendering_value_default_name">Alapértelmezett</string>
     <string name="rendering_value_orange_name">Narancs</string>
     <string name="rendering_value_germanRoadAtlas_name">Német autós atlasz</string>
-    <string name="traffic_warning_railways">Vasúti kereszteződés</string>
+    <string name="traffic_warning_railways">Vasúti átjáró</string>
     <string name="traffic_warning_pedestrian">Gyalogátkelőhely</string>
-    <string name="show_railway_warnings">Vasúti kereszteződések</string>
+    <string name="show_railway_warnings">Vasúti átjárók</string>
     <string name="show_pedestrian_warnings">Gyalogátkelőhelyek</string>
     <string name="rendering_value_americanRoadAtlas_name">Amerikai autós atlasz</string>
     <string name="routing_attr_no_new_routing_name">Nincsenek v1.9-es útvonalszabályok</string>
@@ -2391,11 +2391,11 @@ Jelenleg csak {2} MB érhető el.</string>
     <string name="shared_string_trip">Túra</string>
     <string name="shared_string_recorded">Felvett</string>
     <string name="shared_string_record">Felvétel</string>
-    <string name="save_track_min_speed">Rögzítési minimum sebesség</string>
+    <string name="save_track_min_speed">Legkisebb naplózási sebesség</string>
     <string name="save_track_min_speed_descr">Szűrő: Ez alatti sebességnél nem rögzít pontot.</string>
-    <string name="save_track_min_distance">Rögzítési minimális elmozdulás</string>
+    <string name="save_track_min_distance">Legkisebb naplózási elmozdulás</string>
     <string name="save_track_min_distance_descr">Szűrő: Az előző ponttól mért legkisebb távolság, aminél új pontot fog rögzíteni.</string>
-    <string name="save_track_precision">Rögzítési minimum pontosság</string>
+    <string name="save_track_precision">Legkisebb naplózási pontosság</string>
     <string name="save_track_precision_descr">Szűrő: Nem rögzít, amíg el nem éri ezt a vételi pontosságot.</string>
     <string name="christmas_poi">Karácsonyi POI</string>
     <string name="christmas_desc">A karácsonyra és újévi ünnepekre készülve bekapcsolhatod a karácsonyi POI-k megjelenítését: karácsonyfák, vásárok, stb.</string>
@@ -2547,14 +2547,14 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="routing_attr_relief_smoothness_factor_more_plains_name">Sík</string>
     <string name="routing_attr_driving_style_speed_name">Rövidebb útvonal</string>
     <string name="routing_attr_driving_style_balance_name">Kiegyensúlyozott</string>
-    <string name="routing_attr_driving_style_safety_name">Mellékutak preferálása</string>
+    <string name="routing_attr_driving_style_safety_name">Mellékutak előnyben részesítése</string>
     <string name="relief_smoothness_factor_descr">Előnyben részesített terep: sík vagy dombos.</string>
     <string name="shared_string_slope">Lejtő</string>
     <string name="add_new_folder">Új könyvtár létrehozása</string>
     <string name="points_delete_multiple_succesful">Pont(ok) törölve.</string>
     <string name="points_delete_multiple">%1$d pont törlésére készülsz. Biztosan vagy benne?</string>
     <string name="route_points_category_name">Érintendő fordulók az útvonalon</string>
-    <string name="track_points_category_name">Útpontok és érdekes, vagy elnevezett helyek</string>
+    <string name="track_points_category_name">Útpontok, érdekes pontok (POI-k) és elnevezett helyek</string>
     <string name="shared_string_gpx_track">Nyomvonal</string>
     <string name="lang_ber">berber</string>
     <string name="do_not_send_anonymous_app_usage">Ne küldjön anonim használati statisztikát</string>
@@ -2701,7 +2701,7 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="shared_string_markers">Jelölők</string>
     <string name="coordinates_format">Koordinátaformátum</string>
     <string name="use_system_keyboard">Rendszer billentyűzetének használata</string>
-    <string name="fast_coordinates_input_descr">Koordinátabeviteli formátum kiválasztása. Bármikor megváltoztathatod az „Beállítások”-ra koppintva.</string>
+    <string name="fast_coordinates_input_descr">Koordinátabeviteli formátum kiválasztása. Bármikor megváltoztatható a „Beállítások”-ra koppintva.</string>
     <string name="fast_coordinates_input">Gyors koordinátabevitel</string>
     <string name="routing_attr_avoid_ice_roads_fords_name">Jeges utak, gázlók elkerülése</string>
     <string name="routing_attr_avoid_ice_roads_fords_description">Jeges utak és gázlók elkerülése.</string>
@@ -2818,16 +2818,16 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="looking_for_tracks_with_waypoints">Útpontokat tartalmazó nyomvonalak keresése</string>
     <string name="shared_string_more_without_dots">Többi</string>
     <string name="appearance_on_the_map">Megjelenítés a térképen</string>
-    <string name="add_track_to_markers_descr">Válassz egy nyomvonalat, aminek útpontjaiból a jelölők készüljenek.</string>
+    <string name="add_track_to_markers_descr">Nyomvonal kijelölése ahhoz, hogy útpontjai a jelölők közé kerüljenek.</string>
     <string name="add_favourites_group_to_markers_descr">Válassz egy kedvencek kategóriát, amikből jelölőt készítenél.</string>
-    <string name="shared_string_gpx_waypoints">Nyomvonal útpontok</string>
+    <string name="shared_string_gpx_waypoints">Nyomvonal útpontjai</string>
     <string name="favourites_group">Kedvencek kategória</string>
     <string name="add_group">Csoport hozzáadása</string>
-    <string name="add_group_descr">Csoportok importálása Kedvencekből vagy GPX útpontból.</string>
+    <string name="add_group_descr">Csoportok importálása Kedvencekből vagy GPX útpontokból.</string>
     <string name="empty_state_markers_active">Készíts térképjelölőket!</string>
     <string name="empty_state_markers_active_desc">Koppints hosszan vagy röviden egy helyre, majd koppints a jelölőzászló gombjára.</string>
     <string name="empty_state_markers_groups">Csoportok importálása</string>
-    <string name="empty_state_markers_groups_desc">Jelölők importálása kedvencek csoportokból, vagy útpontokból.</string>
+    <string name="empty_state_markers_groups_desc">Jelölők importálása a Kedvencek csoportokból, vagy útpontokból.</string>
     <string name="shared_string_two">Kettő</string>
     <string name="shared_string_one">Egy</string>
     <string name="show_guide_line_descr">Irányjelző vonalat jelenít meg az aktuális pozíciódtól az aktív térképjelölőkig.</string>
@@ -2962,8 +2962,8 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="purchase_dialog_title">Konstrukció kiválasztása</string>
     <string name="shared_string_only_with_wifi">Csak Wi-Fi</string>
     <string name="wikivoyage_download_pics">Képek letöltése</string>
-    <string name="wikivoyage_download_pics_descr">A cikkekben szereplő képek letölthetőek offline használatra. 
-\n Később itt éred el: „Felfedezés” → „Beállítások”.</string>
+    <string name="wikivoyage_download_pics_descr">A cikkekben szereplő képek letölthetőek offline használatra.
+\nKésőbb itt éred el: „Felfedezés” → „Beállítások”.</string>
     <string name="shared_string_wifi_only">Csak Wi-Fin</string>
     <string name="select_travel_book">Útikönyv kiválasztása</string>
     <string name="shared_string_travel_book">Útikönyv</string>
@@ -3001,7 +3001,7 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="shared_string_travel_guides">Utazás</string>
     <string name="waypoints_removed_from_map_markers">Útpontok eltávolítva a térképjelölők közül</string>
     <string name="nothing_found_in_radius">Nincs találat:</string>
-    <string name="select_waypoints_category_description">A nyomvonal összes útpontjának hozzáadása, vagy válassz külön kategóriát.</string>
+    <string name="select_waypoints_category_description">A nyomvonal összes útpontjának hozzáadása vagy külön kategóriák kijelölése.</string>
     <string name="clear_all_intermediates">Összes köztes pont törlése</string>
     <string name="group_deleted">Csoport törölve</string>
     <string name="rendering_attr_whiteWaterSports_name">Vadvízi sportok</string>
@@ -3032,11 +3032,12 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="shared_string_dont">Nem</string>
     <string name="shared_string_do">Igen</string>
     <string name="shared_string_total">Összesen</string>
-    <string name="poi_cannot_be_found">A pont vagy útvonal nem található.</string>
+    <string name="poi_cannot_be_found">A pont vagy vonal nem található.</string>
     <string name="search_no_results_feedback">Nincs találat?
 \nAdj visszajelzést</string>
     <string name="shared_string_world">Világ</string>
     <string name="coord_input_edit_point">Pont szerkesztése</string>
     <string name="coord_input_add_point">Pont hozzáadása</string>
     <string name="coord_input_save_as_track">Mentés nyomvonalként</string>
+    <string name="more_transport_on_stop_hint">Ebben a megállóban több közlekedési eszköz is előfordul.</string>
     </resources>

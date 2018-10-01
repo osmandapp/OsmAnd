@@ -277,7 +277,7 @@
 	<string name="poi_tattoo">Tatuatore</string>
 	<string name="poi_massage">Centro massaggi</string>
 	<string name="poi_hairdresser">Parrucchiere</string>
-	<string name="poi_beauty_salon_nails">Centro unghie</string>
+	<string name="poi_beauty_salon_nails">"Manicure "</string>
 	<string name="poi_beauty">Salone di bellezza</string>
 	<string name="poi_craft_window_construction">Costruzione finestre</string>
 
@@ -424,7 +424,7 @@
 	<string name="poi_club_game">Club giochi</string>
 	<string name="poi_club_automobile">Club automobilistico</string>
 	<string name="poi_club_chess">Club scacchistico</string>
-	<string name="poi_club_cinema">Club cinefili</string>
+	<string name="poi_club_cinema">Cineclub</string>
 	<string name="poi_club_fan">Fan club</string>
 	<string name="poi_club_fishing">Club di pesca</string>
 	<string name="poi_club_veterans">Club di veterani</string>
@@ -532,7 +532,7 @@
 	<string name="poi_ice_stock">Stock sport</string>
 	<string name="poi_korfbal">Korfball</string>
 	<string name="poi_orienteering">Orientamento</string>
-	<string name="poi_paddle_tennis">Paddle tennis</string>
+	<string name="poi_paddle_tennis">"Paddle tennis "</string>
 	<string name="poi_surfing">Surf</string>
 	<string name="poi_artwork">Opera d\'arte</string>
 	<string name="poi_historic_cannon">Cannone storico</string>
@@ -546,7 +546,7 @@
 	<string name="poi_arts_centre">Centro artistico</string>
 	<string name="poi_leisure_fishing">Postazione di pesca</string>
 	<string name="poi_harbour">Porto</string>
-	<string name="poi_biergarten">Biergarten</string>
+	<string name="poi_biergarten">"Biergarten "</string>
 	<string name="poi_craft_agricultural_engines">Motori agricoli</string>
 	<string name="poi_craft_basket_maker">Cestaio</string>
 	<string name="poi_cape">Capo</string>
@@ -673,7 +673,7 @@
 	<string name="poi_water_transport">Trasporto navale</string>
 		<string name="poi_bicycle_transport">Trasporto in bici</string>
 		<string name="poi_aerialway_transport">Trasporto a fune</string>
-		<string name="poi_node_networks">Nodo ciclistico/pedonale</string>
+		<string name="poi_node_networks">Nodo di rete ciclistico/pedonale</string>
 		<string name="poi_hiking_routes">Percorso escursionistico</string>
 		<string name="poi_power">Energia</string>
 		<string name="poi_communication">Comunicazioni</string>
@@ -759,7 +759,7 @@
 	<string name="poi_parking_type">Tipo</string>
 	<string name="poi_covered">Coperto</string>
 	<string name="poi_subway_station_filter">Stazione della metropolitana</string>
-	<string name="poi_ferry_terminal_cargo">Cargo</string>
+	<string name="poi_ferry_terminal_cargo">"Cargo "</string>
 	<string name="poi_bicycle_parking_type">Tipo</string>
 	<string name="poi_aerialway_bicycle">Trasporto di biciclette</string>
 	<string name="poi_aerialway_heating">Riscaldamento</string>
@@ -786,7 +786,7 @@
 	<string name="poi_fee">Costi</string>
 	<string name="poi_smoking">Fumatori</string>
 	<string name="poi_delivery">Consegna</string>
-	<string name="poi_drive_in">Drive in</string>
+	<string name="poi_drive_in">"Drive in "</string>
 	<string name="poi_takeaway">A portar via</string>
 	<string name="poi_cocktails">Cocktail</string>
 	<string name="poi_microbrewery">Microbirrificio</string>
@@ -904,7 +904,7 @@
 	<string name="poi_mast">Palo</string>
 	<string name="poi_reservoir">Serbatoio</string>
 	<string name="poi_gasometer">Gasometro</string>
-	<string name="poi_silo">Silo</string>
+	<string name="poi_silo">"Silo "</string>
 	<string name="poi_pension_fund">Fondo pensione</string>
 	<string name="poi_quarter">Quartiere</string>
 	<string name="poi_residential">Area residenziale</string>
@@ -967,8 +967,8 @@
 	<string name="poi_collection_times">Tempi di raccolta</string>
 	<string name="poi_email">Email</string>
 	<string name="poi_fax">Fax</string>
-	<string name="facebook">Facebook</string>
-	<string name="twitter">Twitter</string>
+	<string name="facebook">"Facebook "</string>
+	<string name="twitter">"Twitter "</string>
 	<string name="poi_skype">Skype</string>
 	<string name="poi_youtube">YouTube</string>
 	<string name="poi_instagram">Instagram</string>
@@ -1054,7 +1054,7 @@
 	<string name="poi_trees_plum">Prugna</string>
 	<string name="poi_trees_peach">Pesca</string>
 	<string name="poi_trees_tea">Tè</string>
-	<string name="poi_trees_coca">Coca</string>
+	<string name="poi_trees_coca">"Coca "</string>
 	<string name="poi_trees_kiwi">Kiwi</string>
 	<string name="poi_trees_nectorine">Nettarina</string>
 	<string name="poi_trees_mango">Mango</string>
@@ -1220,23 +1220,23 @@
 	<string name="poi_payment_account_cards_yes">Schede conto</string>
 	<string name="poi_payment_maestro_yes">Maestro</string>
 	<string name="poi_payment_maestro_no">Maestro non accettato</string>
-	<string name="poi_payment_american_express_yes">American Express (AMEX)</string>
+	<string name="poi_payment_american_express_yes">"American Express (AMEX) "</string>
 	<string name="poi_payment_american_express_no">American Express (AMEX) non accettato</string>
-	<string name="poi_payment_diners_club_yes">Diners Club</string>
+	<string name="poi_payment_diners_club_yes">"Diners Club "</string>
 	<string name="poi_payment_diners_club_no">Diners Club non accettate</string>
 	<string name="poi_payment_dkv_yes">DKV</string>
 	<string name="poi_payment_dkv_no">DKV non accettato</string>
 	<string name="poi_payment_uta_yes">UTA</string>
 	<string name="poi_payment_uta_no">Carte UTA non accettato</string>
-	<string name="poi_payment_efectivo_yes">Efectivo</string>
+	<string name="poi_payment_efectivo_yes">"Efectivo "</string>
 	<string name="poi_payment_efectivo_no">Efectivo non accettato</string>
-	<string name="poi_payment_girocard_yes">Girocard</string>
+	<string name="poi_payment_girocard_yes">"Girocard "</string>
 	<string name="poi_payment_girocard_no">Girocard non accettato</string>
-	<string name="poi_payment_discover_card_yes">Discover Card</string>
+	<string name="poi_payment_discover_card_yes">"Discover Card "</string>
 	<string name="poi_payment_discover_card_no">Discover Card non accettata</string>
-	<string name="poi_payment_visa_electron_yes">Visa Electron</string>
+	<string name="poi_payment_visa_electron_yes">"Visa Electron "</string>
 	<string name="poi_payment_visa_electron_no">Visa Electron non accettato</string>
-	<string name="poi_payment_litecoin_yes">Litecoin</string>
+	<string name="poi_payment_litecoin_yes">"Litecoin "</string>
 	<string name="poi_payment_litecoin_no">Litecoin non accettato</string>
 	<string name="poi_payment_cheque_yes">Assegni</string>
 	<string name="poi_payment_pikepass_yes">PIKEPASS</string>
@@ -1247,19 +1247,19 @@
 	<string name="poi_payment_cryptocurrencies_no">Cryptomonete non accettate</string>
 	<string name="poi_payment_others_yes">Altro</string>
 	<string name="poi_payment_others_no">Altri metodi di pagamento non accettati</string>
-	<string name="poi_payment_routex_yes">Routex</string>
+	<string name="poi_payment_routex_yes">"Routex "</string>
 	<string name="poi_payment_bancomat_yes">Bancomat</string>
 	<string name="poi_payment_bancomat_no">Bancomat non accettato</string>
 	<string name="poi_payment_prepaid_ticket_yes">Biglietti prepagati</string>
 	<string name="poi_payment_jcb_yes">JCB</string>
-	<string name="poi_payment_ep_quick_yes">Quick</string>
-	<string name="poi_payment_eurowag_yes">Eurowag</string>
-	<string name="poi_payment_e_zpass_yes">E‑ZPass</string>
+	<string name="poi_payment_ep_quick_yes">"Quick "</string>
+	<string name="poi_payment_eurowag_yes">"Eurowag "</string>
+	<string name="poi_payment_e_zpass_yes">"E‑ZPass "</string>
 	<string name="poi_payment_e_zpass_no">E‑ZPass non accettato</string>
 	<string name="poi_payment_euroshell_yes">EuroShell</string>
-	<string name="poi_payment_kitcard_yes">KITCard</string>
+	<string name="poi_payment_kitcard_yes">"KITCard "</string>
 	<string name="poi_payment_kitcard_no">KITCard non accettato</string>
-	<string name="poi_payment_westfalen_card_yes">Westfalen</string>
+	<string name="poi_payment_westfalen_card_yes">"Westfalen "</string>
 	<string name="poi_payment_wire_transfer_yes">Bonifici</string>
 	<string name="poi_payment_wire_transfer_no">Bonifici non accettati</string>
 	<string name="poi_payment_sms_yes">Pagamenti tramite SMS</string>
@@ -1302,7 +1302,7 @@
 	<string name="poi_recycling_plasterboard">Cartongesso</string>
 	<string name="poi_monitoring_station">Stazione di monitoraggio</string>
 	<string name="poi_country">Paese</string>
-	<string name="poi_base">Base jumping</string>
+	<string name="poi_base">"Base jumping "</string>
 	<string name="poi_religion_jain">Giainismo</string>
 	<string name="poi_religion_bahai">Bahaismo</string>
 	<string name="poi_religion_scientologist">Scientologismo</string>
@@ -1402,41 +1402,41 @@
 	<string name="poi_payment_electronic_purses_no">Portafogli elettronici non accettati</string>
 	<string name="poi_payment_laser_yes">Laser</string>
 	<string name="poi_payment_v_pay_yes">V PAY</string>
-	<string name="poi_payment_dogecoin_yes">Dogecoin</string>
+	<string name="poi_payment_dogecoin_yes">"Dogecoin "</string>
 	<string name="poi_payment_dogecoin_no">Dogecoin non accettato</string>
-	<string name="poi_payment_cibus_yes">Cibus</string>
+	<string name="poi_payment_cibus_yes">"Cibus "</string>
 	<string name="poi_payment_ep_avant_yes">AvantCard</string>
 	<string name="poi_payment_ep_avant_no">AvantCard non accettato</string>
 	<string name="poi_payment_ep_mep_yes">MEP</string>
 	<string name="poi_payment_ep_mep_no">MEP non accettato</string>
-	<string name="poi_payment_ep_minipay_yes">Minipay</string>
+	<string name="poi_payment_ep_minipay_yes">"Minipay "</string>
 	<string name="poi_payment_ep_minipay_no">Minipay non accettato</string>
 	<string name="poi_payment_ep_minicash_yes">MiniCash</string>
 	<string name="poi_payment_ep_minicash_no">MiniCash non accettato</string>
-	<string name="poi_payment_ep_moneo_yes">Moneo</string>
+	<string name="poi_payment_ep_moneo_yes">"Moneo "</string>
 	<string name="poi_payment_ep_moneo_no">Moneo non accettato</string>
-	<string name="poi_payment_ep_monedero4b_yes">Monedero 4B</string>
+	<string name="poi_payment_ep_monedero4b_yes">"Monedero 4B "</string>
 	<string name="poi_payment_ep_monedero4b_no">Monedero 4B non accettato</string>
-	<string name="poi_payment_ep_monedero_yes">Monedero</string>
+	<string name="poi_payment_ep_monedero_yes">"Monedero "</string>
 	<string name="poi_payment_ep_monedero_no">Monedero non accettato</string>
-	<string name="poi_payment_bankaxess_yes">BankAxess</string>
+	<string name="poi_payment_bankaxess_yes">"BankAxess "</string>
 	<string name="poi_payment_bankaxess_no">BankAxess non accettato</string>
-	<string name="poi_payment_coinkite_yes">Coinkite</string>
+	<string name="poi_payment_coinkite_yes">"Coinkite "</string>
 	<string name="poi_payment_coinkite_no">Coinkite non accettato</string>
-	<string name="poi_payment_roadrunner_yes">Roadrunner</string>
+	<string name="poi_payment_roadrunner_yes">"Roadrunner "</string>
 	<string name="poi_payment_svg_yes">SVG</string>
 	<string name="poi_payment_svg_no">SVG non accettato</string>
-	<string name="poi_payment_ov_chipkaart_yes">OV-Chipkaart</string>
+	<string name="poi_payment_ov_chipkaart_yes">"OV-Chipkaart "</string>
 	<string name="poi_payment_ov_chipkaart_no">OV-Chipkaart non accettato</string>
-	<string name="poi_payment_oyster_yes">Oyster</string>
+	<string name="poi_payment_oyster_yes">"Oyster "</string>
 	<string name="poi_payment_sube_yes">SUBE</string>
-	<string name="poi_payment_via_verde_yes">Via Verde</string>
+	<string name="poi_payment_via_verde_yes">"Via Verde "</string>
 	<string name="poi_payment_via_verde_no">Via Verde non accettato</string>
 	<string name="poi_payment_meal_voucher_yes">Buoni pasto</string>
 	<string name="poi_payment_meal_voucher_no">Buoni pasto non accettati</string>
-	<string name="poi_payment_u_key_yes">U-Key</string>
+	<string name="poi_payment_u_key_yes">"U-Key "</string>
 	<string name="poi_payment_u_key_no">U-Key non accettato</string>
-	<string name="poi_payment_pro100_yes">"PRO100 "</string>
+	<string name="poi_payment_pro100_yes">"PRO100  "</string>
 	<string name="poi_payment_yandexmoney_yes">Yandex. Money</string>
 	<string name="poi_payment_yandexmoney_no">Yandex. Money non accettato</string>
 	<string name="poi_diet_vegetarian_filter_yes">Vegetariana</string>
@@ -1448,7 +1448,7 @@
 	<string name="poi_diet_gluten_free_yes">Senza glutine</string>
 	<string name="poi_diet_gluten_free_no">Dieta senza glutine: no</string>
 	<string name="poi_drive_in_yes">Sì</string>
-	<string name="poi_drive_in_no">Drive-in: no</string>
+	<string name="poi_drive_in_no">"Drive-in: no "</string>
 	<string name="poi_drive_through_yes">Sì</string>
 	<string name="poi_microbrewery_yes">Microbirrificio</string>
 	<string name="poi_takeaway_filter_yes">Sì</string>
@@ -1533,7 +1533,7 @@
 	<string name="poi_resource_coal">Carbone</string>
 	<string name="poi_resource_copper">Rame</string>
 	<string name="poi_resource_diamond">Diamante</string>
-	<string name="poi_resource_dolomite">Dolomite</string>
+	<string name="poi_resource_dolomite">"Dolomite "</string>
 	<string name="poi_resource_gas">Gas</string>
 	<string name="poi_resource_gold">Oro</string>
 	<string name="poi_resource_graphite">Grafite</string>
@@ -1641,7 +1641,7 @@
 
 	<string name="poi_route_bus_ref">Autobus</string>
 	<string name="poi_route_trolleybus_ref">Filobus</string>
-	<string name="poi_route_tram_ref">Tram</string>
+	<string name="poi_route_tram_ref">"Tram "</string>
 	<string name="poi_route_train_ref">Treno</string>
 	<string name="poi_route_funicular_ref">Funicolare</string>
 	<string name="poi_route_ferry_ref">Traghetto</string>
@@ -1662,7 +1662,7 @@
 	<string name="poi_service_bicycle_cleaning_yes">Pulizia</string>
 	<string name="poi_service_bicycle_cleaning_no">Pulizia biciclette: no</string>
 	<string name="poi_service_bicycle_charging_yes">Ricarica biciclette: Sì</string>
-	<string name="poi_service_bicycle_charging_no">Ricarica biciclette: no</string>
+	<string name="poi_service_bicycle_charging_no">Ricarica: no</string>
 	<string name="poi_wildlife_hide">Posto per osservare la fauna selvatica</string>
 
 	<string name="poi_monument_yes">Oggetto monumentale</string>
@@ -1690,7 +1690,7 @@
 	<string name="poi_office_forestry">Ufficio forestale</string>
 	<string name="poi_fuel_91ul">Carburante 91UL</string>
 	<string name="poi_fuel_100ll">Carburante 100LL</string>
-	<string name="poi_fuel_autogas">Autogas</string>
+	<string name="poi_fuel_autogas">"Autogas "</string>
 	<string name="poi_fuel_jeta1">Carburante Jet A-1</string>
 	<string name="poi_fuel_adblue">Carburante AdBlue</string>
 
@@ -1749,7 +1749,7 @@
 	<string name="poi_openfire_yes">Caminetto ammessi</string>
 	<string name="poi_openfire_no">Caminetto non ammessi</string>
 	<string name="poi_backcountry_yes">Sì</string>
-	<string name="poi_backcountry_no">No</string>
+	<string name="poi_backcountry_no">"No "</string>
 	<string name="poi_washing_machine_yes">Sì</string>
 	<string name="poi_washing_machine_no">Lavatrice: no</string>
 	<string name="poi_shower_filter_yes">Sì</string>
@@ -1781,12 +1781,12 @@
 	<string name="poi_social_facility_for_homeless">Senzatetto</string>
 	<string name="poi_social_facility_for_migrant">Migranti</string>
 	<string name="poi_social_facility_for_unemployed">Disoccupati</string>
-	<string name="poi_social_facility_for_child_juvenile">Bambini; giovanile</string>
+	<string name="poi_social_facility_for_child_juvenile">Bambini giovanile</string>
 
 	<string name="poi_theatre_genre_philharmonic">Filarmonica</string>
 	<string name="poi_theatre_genre_drama">Dramma</string>
 	<string name="poi_theatre_genre_opera">Opera</string>
-	<string name="poi_theatre_genre_cabaret">Cabaret</string>
+	<string name="poi_theatre_genre_cabaret">"Cabaret "</string>
 	<string name="poi_theatre_genre_comedy">Commedia</string>
 	<string name="poi_theatre_genre_marionette">Marionetta</string>
 	<string name="poi_theatre_genre_ballet">Balletto</string>
@@ -1843,7 +1843,7 @@
 	<string name="poi_material_brick">Materiale: mattoni</string>
 	<string name="poi_material_plastic">Materiale: plastica</string>
 	<string name="poi_material_granite_stone">Materiale: granito</string>
-	<string name="poi_material_metal_wood">Materiale: metallo; legno</string>
+	<string name="poi_material_metal_wood">Materiale: metallo, legno</string>
 	<string name="poi_material_glass">Materiale: vetro</string>
 	<string name="poi_material_bronze">Materiale: bronzo</string>
 	<string name="poi_material_earth">Materiale: terra</string>
@@ -1880,8 +1880,8 @@
 	<string name="poi_concentration_camp_gulag">Tipo: gulag</string>
 
 	<string name="poi_temperature">Temperatura</string>
-	<string name="poi_bridge_ref">Nr ponte</string>
-	<string name="poi_tunnel_ref">Nr tunnel</string>
+	<string name="poi_bridge_ref">Nr° ponte</string>
+	<string name="poi_tunnel_ref">Nr° tunnel</string>
 
 	<string name="poi_ref">Nr</string>
 
@@ -1891,7 +1891,7 @@
 	<string name="poi_aerialway_length">Lunghezza</string>
 
 	<string name="poi_fitness_centre">Centro fitness</string>
-	<string name="poi_fitness">Fitness</string>
+	<string name="poi_fitness">"Fitness "</string>
 
 	<string name="poi_billiards">Biliardo</string>
 
@@ -1901,11 +1901,11 @@
 	<string name="poi_water_heater_no">Riscaldatore di acqua: no</string>
 
 	<string name="poi_parking_surface">Tipo: superficie</string>
-	<string name="poi_dojo">Dojo</string>
+	<string name="poi_dojo">"Dojo "</string>
 
 	<string name="poi_gaelic_games">Giochi Gaelic</string>
-	<string name="poi_netball">Netball</string>
-	<string name="poi_judo">Judo</string>
+	<string name="poi_netball">"Netball "</string>
+	<string name="poi_judo">"Judo "</string>
 	<string name="poi_disc_golf">Disc golf</string>
 	<string name="poi_boxing">Boxe</string>
 
@@ -1938,7 +1938,7 @@
 	<string name="poi_button_operated_yes">Sgancio a pulsante: Sì</string>
 	<string name="poi_button_operated_no">Sgancio a pulsante: no</string>
 
-	<string name="poi_tanning_salon">Solarium</string>
+	<string name="poi_tanning_salon">"Solarium "</string>
 
 	<string name="poi_fire_hydrant_type_pillar">Pilastro</string>
 	<string name="poi_fire_hydrant_type_pond">Stagno</string>
@@ -1952,8 +1952,8 @@
 	<string name="poi_home_visit_no">Visita a domicilio: no</string>
 
 	<string name="poi_fire_hydrant_diameter">Diametro idrante</string>
-	<string name="poi_fire_hydrant_position_sidewalk">Posizione idrante: marciapiede</string>
-	<string name="poi_fire_hydrant_position_street">Posizione idrante: strada</string>
+	<string name="poi_fire_hydrant_position_sidewalk">Marciapiede</string>
+	<string name="poi_fire_hydrant_position_street">Strada</string>
 	<string name="poi_fire_hydrant_style_water_source_cistern">Cisterna</string>
 	<string name="poi_in_service_yes">In servizio: Sì</string>
 
@@ -1980,13 +1980,13 @@
 
 	<string name="poi_ventilation_shaft">Pozzo di ventilazione</string>
 
-	<string name="poi_payment_troika_yes">Troika</string>
+	<string name="poi_payment_troika_yes">"Troika "</string>
 	<string name="poi_payment_troika_no">Carta Troika non accettata</string>
 
 	<string name="poi_telescope">Telescopio</string>
-	<string name="poi_telescope_type_optical">Telescopio: ottico</string>
-	<string name="poi_telescope_type_radio">Telescopio: radio</string>
-	<string name="poi_telescope_type_gamma">Telescopio: gamma</string>
+	<string name="poi_telescope_type_optical">Ottico</string>
+	<string name="poi_telescope_type_radio">Radio</string>
+	<string name="poi_telescope_type_gamma">"Gamma "</string>
 	<string name="poi_telescope_diameter">Diametro</string>
 	<string name="poi_telescope_usage_espionage">Utilizzo: spionaggio</string>
 	<string name="poi_observatory_type_espionage">Utilizzo: spionaggio</string>
@@ -2055,28 +2055,28 @@
 	<string name="poi_cuisine_seafood">Frutti di mare</string>
 	<string name="poi_cuisine_breakfast">Colazione</string>
 	<string name="poi_cuisine_steak">Bistecca</string>
-	<string name="poi_cuisine_tapas">Tapas</string>
-	<string name="poi_cuisine_heuriger">Heuriger</string>
+	<string name="poi_cuisine_tapas">"Tapas "</string>
+	<string name="poi_cuisine_heuriger">"Heuriger "</string>
 	<string name="poi_cuisine_curry">Curry</string>
-	<string name="poi_cuisine_buschenschank">Buschenschank</string>
+	<string name="poi_cuisine_buschenschank">"Buschenschank "</string>
 	<string name="poi_cuisine_grill">Griglia</string>
 	<string name="poi_cuisine_bagel">Bagel</string>
-	<string name="poi_cuisine_pasta">Pasta</string>
+	<string name="poi_cuisine_pasta">"Pasta "</string>
 	<string name="poi_cuisine_juice">Succo di frutta</string>
 	<string name="poi_cuisine_tea">Tè</string>
 	<string name="poi_cuisine_tea_shop">Negozio tè</string>
 	<string name="poi_cuisine_soup">Zuppa</string>
 	<string name="poi_cuisine_hotdog">Hot Dog</string>
 	<string name="poi_cuisine_salad">Insalata</string>
-	<string name="poi_cuisine_bistro">Bistro</string>
+	<string name="poi_cuisine_bistro">"Bistro "</string>
 	<string name="poi_cuisine_couscous">Cous cous</string>
 	<string name="poi_cuisine_fried_chicken">Pollo fritto</string>
-	<string name="poi_cuisine_dessert">Dessert</string>
+	<string name="poi_cuisine_dessert">"Dessert "</string>
 	<string name="poi_cuisine_canteen">Mensa</string>
-	<string name="poi_cuisine_tacos">Tacos</string>
-	<string name="poi_cuisine_falafel">Falafel</string>
-	<string name="poi_cuisine_smoothie">Smoothie</string>
-	<string name="poi_cuisine_gyros">Gyros</string>
+	<string name="poi_cuisine_tacos">"Tacos "</string>
+	<string name="poi_cuisine_falafel">"Falafel "</string>
+	<string name="poi_cuisine_smoothie">"Smoothie "</string>
+	<string name="poi_cuisine_gyros">"Gyros "</string>
 	<string name="poi_cuisine_crepes">Crepes</string>
 	<string name="poi_cuisine_meat">Carne</string>
 	<string name="poi_cuisine_chocolate">Cioccolato</string>
@@ -2127,14 +2127,14 @@
 	<string name="poi_cuisine_irish">Irlandese</string>
 	<string name="poi_cuisine_ethiopian">Etiope</string>
 	<string name="poi_cuisine_hungarian">Ungherese</string>
-	<string name="poi_cuisine_lao">Lao</string>
+	<string name="poi_cuisine_lao">Laotiano</string>
 	<string name="poi_cuisine_european">Europeo</string>
 	<string name="poi_cuisine_uzbek">Uzbeco</string>
 	<string name="poi_cuisine_czech">Ceco</string>
 	<string name="poi_cuisine_cuban">Cubano</string>
 	<string name="poi_cuisine_british">Britannico</string>
 	<string name="poi_cuisine_latin_american">Latino-americana</string>
-	<string name="poi_cuisine_nepalese">Nepalese</string>
+	<string name="poi_cuisine_nepalese">"Nepalese "</string>
 	<string name="poi_cuisine_mongolian">Mongolo</string>
 	<string name="poi_cuisine_middle_eastern">Mediorientale</string>
 	<string name="poi_cuisine_ukrainian">Ucraino</string>
@@ -2150,12 +2150,12 @@
 	<string name="poi_cuisine_english">Inglese</string>
 	<string name="poi_cuisine_pakistani">Pakistano</string>
 	<string name="poi_cuisine_taiwanese">Taiwan</string>
-	<string name="poi_cuisine_tex_mex">Tex-mex</string>
+	<string name="poi_cuisine_tex_mex">"Tex-mex "</string>
 	<string name="poi_cuisine_dutch">Olandese</string>
 	<string name="poi_cuisine_syrian">Siriano</string>
 	<string name="poi_cuisine_australian">Australiano</string>
 	<string name="poi_cuisine_egyptian">Egiziano</string>
-	<string name="poi_cuisine_senegalese">Senegalese</string>
+	<string name="poi_cuisine_senegalese">"Senegalese "</string>
 	<string name="poi_cuisine_jewish">Ebraico</string>
 	<string name="poi_cuisine_bulgarian">Bulgaro</string>
 	<string name="poi_cuisine_tibetan">Tibetano</string>
@@ -2431,7 +2431,7 @@
 	<string name="poi_socket_schuko_output_filter">Uscita Schuko</string>
 
 <string name="poi_operational_status">Stato delle operazioni</string>
-	<string name="poi_via_ferrata">Via ferrata</string>
+	<string name="poi_via_ferrata">"Via ferrata "</string>
 	<string name="poi_via_ferrata_scale">Difficoltà</string>
 
 <string name="poi_boat_sharing">Condivisione di barche</string>
@@ -2464,14 +2464,14 @@
 	<string name="poi_lodging">Alloggio</string>
 	<string name="poi_hunting_lodge">Alloggio di caccia</string>
 
-	<string name="poi_religion_tenrikyo">Tenrikyo</string>
+	<string name="poi_religion_tenrikyo">"Tenrikyo "</string>
 	<string name="poi_denomination_united">Unito</string>
 	<string name="poi_denomination_bulgarian_orthodox">Ortodosso bulgaro</string>
 	<string name="poi_denomination_armenian_apostolic">Apostolico armeno</string>
 	<string name="poi_denomination_coptic_orthodox">Ortodosso copto</string>
 	<string name="poi_anchor_berth">Ormeggio ancoraggio</string>
 	<string name="poi_berth">Ormeggio</string>
-	<string name="poi_wiki_lang_af">Africaans wiki</string>
+	<string name="poi_wiki_lang_af">"Africaans wiki "</string>
 	<string name="poi_full_height_turnstile">Tornello a tutta altezza</string>
 	<string name="poi_stile">Scaletta</string>
 	<string name="poi_aerialway_pylon">Pilone di sollevamento aereo</string>
@@ -2529,4 +2529,82 @@
 	<string name="poi_boat_kayak_rental_rental_yes">Kayak: sì</string>
 	<string name="poi_boat_kayak_rental_rental_no">Kayak: no</string>
 	<string name="poi_surface_tartan">"Tartan "</string>
-	</resources>
+	<string name="poi_checkpoint_type">Tipo Checkpoint</string>
+
+<string name="poi_bowls">Ciotole</string>
+	<string name="poi_water_place_access">Posto accesso all\'acqua</string>
+	<string name="poi_resort">"Resort "</string>
+	<string name="poi_recreation_ground">Terreno ricreativo</string>
+	<string name="poi_cuisine_donut">"Donut "</string>
+	<string name="poi_cuisine_crepe">"Crepe "</string>
+	<string name="poi_cuisine_bakery">Panificio</string>
+	<string name="poi_cuisine_snack">Spuntino</string>
+	<string name="poi_cuisine_yogurt">"Yogurt "</string>
+	<string name="poi_cuisine_cajun">"Cajun "</string>
+	<string name="poi_motorcycle_type_standard">"Standard "</string>
+
+	<string name="poi_surface_clay">Argilla</string>
+	<string name="poi_operational_status_needs_maintenance">Necessità di manutenzione</string>
+
+	<string name="poi_water_supply_pump">Pompa</string>
+	<string name="poi_socket_schuko">Presa: Schuko</string>
+	<string name="poi_car_yes">Auto: sì</string>
+	<string name="poi_car_no">Auto: no</string>
+	<string name="poi_bicycle_yes">Bicicletta: sì</string>
+	<string name="poi_bicycle_no">Bicicletta: no</string>
+	<string name="poi_truck_yes">Camion: sì</string>
+	<string name="poi_truck_no">Camion: no</string>
+
+	<string name="poi_parking_fee_yes">Parcheggio a pagamento: sì</string>
+	<string name="poi_parking_fee_no">Parcheggio a pagamento: no</string>
+	<string name="poi_parking_fee">Parcheggio a pagamento</string>
+
+	<string name="poi_amperage">Amperaggio</string>
+	<string name="poi_charging_station_filter">Stazione di ricarica</string>
+
+	<string name="poi_post_street">Strada</string>
+	<string name="poi_post_housenumber">Numero civico</string>
+	<string name="poi_ref_post">Codice postale</string>
+
+	<string name="poi_climbing_ice_yes">Ghiaccio: sì</string>
+	<string name="poi_climbing_ice_no">Ghiaccio: no</string>
+	<string name="poi_frozen_food">Alimenti surgelati</string>
+
+	<string name="poi_socket_chademo_yes">"CHAdeMO "</string>
+	<string name="poi_socket_schuko_yes">"Schuko "</string>
+	<string name="poi_socket_chademo_output_low">Bassa</string>
+	<string name="poi_socket_type2_output_medium">Medio</string>
+	<string name="poi_barbecue_grill">Griglia barbecue: Sì</string>
+
+	<string name="poi_service_vehicle_oil_change_yes">Cambio olio</string>
+	<string name="poi_service_vehicle_used_car_sales_yes">Vendita auto usate</string>
+	<string name="poi_service_vehicle_brakes_yes">Freni</string>
+	<string name="poi_service_vehicle_new_car_sales_yes">Vendita auto nuove</string>
+	<string name="poi_service_vehicle_diagnostics_yes">Diagnostica</string>
+	<string name="poi_service_vehicle_batteries_yes">Batterie</string>
+	<string name="poi_service_vehicle_air_conditioning_yes">Aria condizionata</string>
+	<string name="poi_service_vehicle_wheels_yes">Ruote</string>
+	<string name="poi_service_vehicle_glass_yes">Vetro</string>
+	<string name="poi_service_vehicle_truck_repair_yes">Riparazione di camion</string>
+	<string name="poi_service_vehicle_motor_yes">Motore</string>
+	<string name="poi_service_vehicle_insurance_yes">Assicurazione</string>
+	<string name="poi_service_vehicle_tyres_yes">Pneumatici</string>
+
+	<string name="poi_cable_number">Numero cavi</string>
+	<string name="poi_glacier_type_valley">Valle</string>
+	<string name="poi_glacier_type_mountain">Montagna</string>
+	<string name="poi_glacier_type_rock">Roccia</string>
+	<string name="poi_checkpoint_type_code">Codice</string>
+	<string name="poi_rock">Roccia</string>
+
+	<string name="poi_end_date">Data di fine</string>
+
+	<string name="poi_payment_contactless_yes">Senza contatto</string>
+	<string name="poi_hazard_avalanche">Pericolo valanghe</string>
+	<string name="poi_hazard_minefield">Campo minato</string>
+
+	<string name="poi_ruins">Rovine</string>
+
+	<string name="poi_license_classes">Classi di licenza</string>
+
+</resources>

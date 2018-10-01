@@ -8,6 +8,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
+import net.osmand.binary.CachedOsmandIndexes;
 import net.osmand.binary.GeocodingUtilities;
 import net.osmand.binary.GeocodingUtilities.GeocodingResult;
 import net.osmand.binary.RouteDataObject;
@@ -48,14 +49,28 @@ public class CurrentPositionHelper {
 		File appPath = app.getAppPath(null);
 		SampleUtils.collectFiles(appPath, IndexConstants.BINARY_MAP_INDEX_EXT, files);
 
+		CachedOsmandIndexes cachedOsmandIndexes = new CachedOsmandIndexes();
+		File indCache = app.getAppPath("ind_core.cache");
+		if (indCache.exists()) {
+			try {
+				cachedOsmandIndexes.readFromFile(indCache, CachedOsmandIndexes.VERSION);
+			} catch (Exception e) {
+			}
+		}
 		readers.clear();
 		for (File f : files) {
 			try {
-				RandomAccessFile mf = new RandomAccessFile(f.getPath(), "r");
-				BinaryMapIndexReader reader = new BinaryMapIndexReader(mf, f);
+				BinaryMapIndexReader reader = cachedOsmandIndexes.getReader(f);
 				readers.add(reader);
 			} catch (IOException e) {
 				e.printStackTrace();
+			}
+		}
+		if (files.size() > 0 && (!indCache.exists() || indCache.canWrite())) {
+			try {
+				cachedOsmandIndexes.writeToFile(indCache);
+			} catch (Exception e) {
+				log.error("Index file could not be written", e);
 			}
 		}
 	}

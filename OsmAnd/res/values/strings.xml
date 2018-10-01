@@ -528,9 +528,6 @@
     <string name="rendering_attr_contourWidth_name">Contour line width</string>
     <string name="rendering_attr_hideWaterPolygons_description">Water</string>
     <string name="rendering_attr_hideWaterPolygons_name">Hide water</string>
-    <string name="legacy_search">Legacy search</string>
-    <string name="show_legacy_search">Show legacy search</string>
-    <string name="show_legacy_search_desc">Add the legacy search to the drawer list.</string>
     <string name="routing_attr_allow_motorway_name">Allow motorways</string>
     <string name="routing_attr_allow_motorway_description">Allow motorways.</string>
     <string name="upload_osm_note_description">Upload your OSM Note anonymously or by using your OpenStreetMap.org profile.</string>
@@ -615,8 +612,6 @@
     <string name="allow_access_location">Allow location access</string>
     <string name="first_usage_greeting">Get directions and discover new places without an Internet connection</string>
     <string name="search_my_location">Find my position</string>
-    <string name="no_update_info_desc">Do not check for new versions or OsmAnd related discounts.</string>
-    <string name="no_update_info">Do not show new versions</string>
     <string name="update_all_maps_now">Update all maps now?</string>
     <string name="clear_tile_data">Clear all tiles</string>
     <string name="routing_attr_short_way_name">Fuel-efficient way</string>

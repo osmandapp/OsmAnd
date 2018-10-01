@@ -393,6 +393,9 @@ dependencies {
 // implementation 'com.ibm.icu:icu4j:50.1' 
 // implementation 'net.sf.trove4j:trove4j:3.0.3'
 
+	qtcoreImplementation fileTree(include:  ['QtAndroid.jar', 'QtAndroidBearer.jar'], dir: 'libs')
+	qtcoredebugImplementation fileTree(include:  ['QtAndroid.jar', 'QtAndroidBearer.jar'], dir: 'libs')
+
 	legacyImplementation "net.osmand:OsmAndCore_android:0.1-SNAPSHOT@jar"
 	qtcoredebugImplementation "net.osmand:OsmAndCore_androidNativeDebug:0.1-SNAPSHOT@aar"
 	qtcoredebugImplementation "net.osmand:OsmAndCore_android:0.1-SNAPSHOT@aar"
