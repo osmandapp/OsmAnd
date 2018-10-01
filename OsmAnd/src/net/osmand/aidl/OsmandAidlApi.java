@@ -13,6 +13,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.ParcelFileDescriptor;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
@@ -150,6 +151,7 @@ public class OsmandAidlApi {
 	private Map<String, AMapLayer> layers = new ConcurrentHashMap<>();
 	private Map<String, OsmandMapLayer> mapLayers = new ConcurrentHashMap<>();
 	private Map<String, BroadcastReceiver> receivers = new TreeMap<>();
+	private Map<String, ConnectedApp> connectedApps = new ConcurrentHashMap<>();
 
 	private boolean mapActivityActive = false;
 
@@ -1586,6 +1588,62 @@ public class OsmandAidlApi {
 			e.printStackTrace();
 		}
 		return res;
+	}
+
+	boolean isAppEnabled(@NonNull String pack) {
+		ConnectedApp app = connectedApps.get(pack);
+		if (app == null) {
+			app = new ConnectedApp("", true);
+			connectedApps.put(pack, app);
+			saveConnectedApps();
+		}
+		return app.enabled;
+	}
+
+	private void saveConnectedApps() {
+		try {
+			JSONObject apps = new JSONObject();
+			for (Map.Entry<String, ConnectedApp> entry : connectedApps.entrySet()) {
+				ConnectedApp app = entry.getValue();
+				JSONObject obj = new JSONObject();
+				obj.put(ConnectedApp.DESCRIPTION_KEY, app.description);
+				obj.put(ConnectedApp.ENABLED_KEY, app.enabled);
+				apps.put(entry.getKey(), obj);
+			}
+			app.getSettings().API_CONNECTED_APPS_JSON.set(apps.toString());
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+	}
+
+	void loadConnectedApps() {
+		try {
+			JSONObject apps = new JSONObject(app.getSettings().API_CONNECTED_APPS_JSON.get());
+			for (Iterator<String> it = apps.keys(); it.hasNext(); ) {
+				String pack = it.next();
+				JSONObject app = apps.getJSONObject(pack);
+				connectedApps.put(pack, new ConnectedApp(
+						app.optString(ConnectedApp.DESCRIPTION_KEY, ""),
+						app.optBoolean(ConnectedApp.ENABLED_KEY, true)
+				));
+			}
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private static class ConnectedApp {
+
+		static final String DESCRIPTION_KEY = "description";
+		static final String ENABLED_KEY = "enabled";
+
+		private String description;
+		private boolean enabled;
+
+		ConnectedApp(String description, boolean enabled) {
+			this.description = description;
+			this.enabled = enabled;
+		}
 	}
 
 	private static class NavDrawerItem {
