@@ -186,7 +186,7 @@
 
 <string name="poi_water_well">آب آشامیدنی</string>
 <string name="poi_standpipe">پایه لوله</string>
-<string name="poi_water_works">فواره</string>
+<string name="poi_water_works">سیستم آبرسانی</string>
 <string name="poi_boatyard">تعمیرگاه قایق</string>
 <string name="poi_wastewater_plant">کارخانه فاضلابب</string>
 <string name="poi_water_tower">مخزن آب</string>
@@ -418,7 +418,7 @@
 <string name="poi_historic_monastery">صومعه تاریخی</string>
 <string name="poi_wayside_cross"/>
 <string name="poi_wayside_shrine">زیارتگاه بین راهی</string>
-<string name="poi_information">اطلاعات گردشگری</string>
+<string name="poi_information">اطلاعات</string>
 <string name="poi_clock">ساعت</string>
 <string name="poi_travel_agent">آژانس مسافرتی</string>
 <string name="poi_viewpoint">نقشه</string>
@@ -456,7 +456,7 @@
 <string name="poi_club_photography">کلوپ عکاسی</string>
 <string name="poi_club_hunting">کلوپ شکار</string>
 <string name="poi_club_shooting">کلوپ تیراندازی</string>
-<string name="poi_club_tourism">کلوپ گردشگری</string>
+<string name="poi_club_tourism">باشگاه گردشگری</string>
 <string name="poi_club_charity">کلوپ خیریه</string>
 
 <string name="poi_library">کتابخانه</string>
@@ -696,7 +696,7 @@
 	<string name="poi_resort_type">نوع بازدید</string>
 	<string name="poi_piste_difficulty">سختی پیست</string>
 	<string name="poi_theatre_genre">ژانر تئاتر</string>
-	<string name="poi_fee">قیمت</string>
+	<string name="poi_fee">پولی</string>
 	<string name="poi_recycling_type">نوع</string>
 	<string name="poi_shelter_type">نوع</string>
 	<string name="poi_religion_voodoo">وودو</string>
@@ -745,7 +745,7 @@
 	<string name="poi_access_agricultural">دسترسی کشاورزی</string>
 
 	<string name="poi_aerialway_occupancy">ظرفیت اتاقک/صندلی/ماشین</string>
-	<string name="poi_aerialway_capacity">ظرفیت در ساعت</string>
+	<string name="poi_aerialway_capacity">ظرفیت در هر ساعت</string>
 	<string name="poi_aerialway_duration">متوسط زمان سفر، دقیقه</string>
 	<string name="poi_aerialway_heating_yes">بله</string>
 	<string name="poi_aerialway_heating_no">بدون سیستم گرمایشی</string>
@@ -1113,4 +1113,37 @@
 	<string name="poi_step_condition_uneven">وضعیت پله: ناصاف</string>
 	<string name="poi_step_condition_rough">وضعیت پله: ناهموار</string>
 
+	<string name="poi_supervised_yes">نظارت</string>
+	<string name="poi_supervised_no">بدون نظارت</string>
+	<string name="poi_population">جمعیت</string>
+	<string name="poi_capacity">ظرفیت</string>
+	<string name="poi_capacity_disabled_no">بدون مکان اختصاصی برای ناتوانان جسمی</string>
+	<string name="poi_capacity_disabled">مکان اختصاصی برای ناتوانان جسمی</string>
+	<string name="poi_capacity_women_yes">مکان اختصاصی برای بانوان</string>
+	<string name="poi_capacity_women_no">بدون مکان اختصاصی برای بانوان</string>
+	<string name="poi_capacity_women">مکان اختصاصی برای بانوان</string>
+	<string name="poi_capacity_pupils">مکان اختصاصی برای دانش‌آموزان</string>
+	<string name="poi_capacity_teachers">مکان اختصاصی برای معلمان</string>
+	<string name="poi_capacity_parent_yes">مکان اختصاصی برای والدین</string>
+	<string name="poi_capacity_parent_no">بدون مکان اختصاصی برای والدین</string>
+	<string name="poi_capacity_parent">مکان اختصاصی برای والدین</string>
+
+	<string name="poi_capacity_beds">ظرفیت (تخت‌ها)</string>
+
+	<string name="poi_cuisine">خوراک</string>
+	<string name="poi_cuisine_pizza">پیتزا</string>
+	<string name="poi_cuisine_burger">برگر</string>
+	<string name="poi_cuisine_coffee">قهوه</string>
+	<string name="poi_cuisine_sandwich">ساندویچ</string>
+	<string name="poi_cuisine_kebab">کباب</string>
+	<string name="poi_cuisine_doner">کباب ترکی (شاورما)</string>
+	<string name="poi_cuisine_chicken">جوجه</string>
+	<string name="poi_cuisine_ice_cream">بستنی</string>
+	<string name="poi_cuisine_sushi">سوشی</string>
+	<string name="poi_cuisine_fish_and_chips">ماهی و سیب‌زمینی سرخ‌شده</string>
+	<string name="poi_cuisine_seafood">غذای دریایی</string>
+	<string name="poi_cuisine_barbecue">کباب سیخی</string>
+	<string name="poi_cuisine_grill">توری</string>
+	<string name="poi_cuisine_tea">چای</string>
+	<string name="poi_cuisine_soup">سوپ</string>
 	</resources>
