@@ -198,25 +198,6 @@ class SettingsDialogFragment : BaseDialogFragment() {
 		}
 	}
 
-	private fun addNewSharingDevice(title: String) {
-		val inflater = LayoutInflater.from(context)
-		val container = mainView.findViewById<ViewGroup>(R.id.share_as_container)
-		inflater.inflate(R.layout.item_with_rb_and_btn, null, false).apply {
-			findViewById<TextView>(R.id.title).text = title
-			findViewById<View>(R.id.primary_btn).visibility = View.GONE
-			findViewById<RadioButton>(R.id.radio_button).apply {
-				visibility = View.VISIBLE
-				isChecked = title == settings.currentSharingMode
-			}
-			setOnClickListener {
-				settings.currentSharingMode = title
-				updateSelectedSharingMode()
-			}
-			tag = title
-			container.addView(this)
-		}
-	}
-
 	private fun logoutTelegram() {
 		val act = activity ?: return
 		(act as MainActivity).logoutTelegram()
