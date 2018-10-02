@@ -31,6 +31,7 @@ class TelegramHelper private constructor() {
 		private const val DEVICE_PREFIX = "Device: "
 		private const val LOCATION_PREFIX = "Location: "
 		private const val LAST_LOCATION_PREFIX = "Last location: "
+		private const val UPDATED_PREFIX = "Updated: "
 
 		private const val FEW_SECONDS_AGO = "few seconds ago"
 		private const val SECONDS_AGO_SUFFIX = " seconds ago"
@@ -796,7 +797,11 @@ class TelegramHelper private constructor() {
 	}
 
 	private fun TdApi.Message.isAppropriate(): Boolean {
-		if (isOutgoing || isChannelPost) {
+		if (isChannelPost) {
+			return false
+		}
+		val isOsmAndBot = isOsmAndBot(senderUserId) || isOsmAndBot(viaBotUserId)
+		if (isOutgoing && !isOsmAndBot) {
 			return false
 		}
 		val lastEdited = Math.max(date, editDate)
@@ -806,8 +811,7 @@ class TelegramHelper private constructor() {
 		val content = content
 		return when (content) {
 			is TdApi.MessageLocation -> true
-			is TdApi.MessageText -> (isOsmAndBot(senderUserId) || isOsmAndBot(viaBotUserId))
-					&& content.text.text.startsWith(DEVICE_PREFIX)
+			is TdApi.MessageText -> (isOsmAndBot) && content.text.text.startsWith(DEVICE_PREFIX)
 			else -> false
 		}
 	}
@@ -868,6 +872,13 @@ class TelegramHelper private constructor() {
 						} catch (e: Exception) {
 							e.printStackTrace()
 						}
+					}
+				}
+				s.startsWith(UPDATED_PREFIX) -> {
+					if (res.lastUpdated == 0) {
+						val updatedStr = s.removePrefix(UPDATED_PREFIX)
+						val updatedS = updatedStr.substring(0, updatedStr.indexOf("("))
+						res.lastUpdated = (parseTime(updatedS.trim()) / 1000).toInt()
 					}
 				}
 			}
@@ -1203,15 +1214,15 @@ class TelegramHelper private constructor() {
 						//listener?.onTelegramChatsChanged()
 					}
 				}
-				TdApi.UpdateChatNotificationSettings.CONSTRUCTOR -> {
-					val update = obj as TdApi.UpdateChatNotificationSettings
-					val chat = chats[update.chatId]
-					if (chat != null) {
-						synchronized(chat) {
-							chat.notificationSettings = update.notificationSettings
-						}
-					}
-				}
+//				TdApi.UpdateChatNotificationSettings.CONSTRUCTOR -> {
+//					val update = obj as TdApi.UpdateChatNotificationSettings
+//					val chat = chats[update.chatId]
+//					if (chat != null) {
+//						synchronized(chat) {
+//							chat.notificationSettings = update.notificationSettings
+//						}
+//					}
+//				}
 
 				TdApi.UpdateFile.CONSTRUCTOR -> {
 					val updateFile = obj as TdApi.UpdateFile

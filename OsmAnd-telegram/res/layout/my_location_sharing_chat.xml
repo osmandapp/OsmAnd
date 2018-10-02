@@ -147,7 +147,7 @@
 						android:textColor="?android:attr/textColorSecondary"
 						android:textSize="@dimen/hint_text_size"
 						app:typeface="@string/font_roboto_regular"
-						tools:text="@string/expire_in" />
+						tools:text="@string/expire_at" />
 
 					<net.osmand.telegram.ui.views.TextViewEx
 						android:id="@+id/ending_in_first_part"
