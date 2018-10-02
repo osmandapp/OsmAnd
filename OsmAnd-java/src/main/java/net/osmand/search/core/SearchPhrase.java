@@ -28,25 +28,25 @@ import java.util.regex.Pattern;
 
 //immutable object
 public class SearchPhrase {
-	
+
 	private List<SearchWord> words = new ArrayList<>();
 	private List<String> unknownWords = new ArrayList<>();
     private List<AbstractPoiType> matchedPoiTypes = new ArrayList<>();
 	private List<NameStringMatcher> unknownWordsMatcher = new ArrayList<>();
 	private String unknownSearchWordTrim;
 	private String unknownSearchPhrase = "";
-	
+
 	private NameStringMatcher sm;
 	private SearchSettings settings;
 	private List<BinaryMapIndexReader> indexes;
-	
+
 	private QuadRect cache1kmRect;
 	private boolean lastUnknownSearchWordComplete;
 	private static final String DELIMITER = " ";
 	private static final String ALLDELIMITERS = "\\s|,";
 	private static final Pattern reg = Pattern.compile(ALLDELIMITERS);
 	private Collator clt;
-	
+
 	private static Set<String> conjunctions = new TreeSet<>();
 	static {
 		// the
@@ -66,7 +66,7 @@ public class SearchPhrase {
 		conjunctions.add("et");
 		conjunctions.add("y");
 		conjunctions.add("и");
-		// short 
+		// short
 		conjunctions.add("f");
 		conjunctions.add("u");
 		conjunctions.add("jl.");
@@ -88,7 +88,7 @@ public class SearchPhrase {
 		conjunctions.add("ct");
 		conjunctions.add("e.");
 		conjunctions.add("dr.");
-		conjunctions.add("j.");		
+		conjunctions.add("j.");
 		conjunctions.add("in");
 		conjunctions.add("al");
 		conjunctions.add("út");
@@ -115,17 +115,17 @@ public class SearchPhrase {
 	public enum SearchPhraseDataType {
 		MAP, ADDRESS, ROUTING, POI
 	}
-	
-	
+
+
 	public SearchPhrase(SearchSettings settings, Collator clt) {
 		this.settings = settings;
 		this.clt = clt;
 	}
-	
+
 	public Collator getCollator() {
 		return clt;
 	}
-	
+
 	public SearchPhrase generateNewPhrase(String text, SearchSettings settings) {
 		SearchPhrase sp = new SearchPhrase(settings, this.clt);
 		String restText = text;
@@ -148,7 +148,7 @@ public class SearchPhrase {
 		sp.unknownSearchPhrase = restText;
 		sp.unknownWords.clear();
 		sp.unknownWordsMatcher.clear();
-		
+
 		if (!reg.matcher(restText).find()) {
 			sp.unknownSearchWordTrim = sp.unknownSearchPhrase.trim();
 		} else {
@@ -173,20 +173,20 @@ public class SearchPhrase {
 			sp.lastUnknownSearchWordComplete = ch == ' ' || ch == ',' || ch == '\r' || ch == '\n'
 					|| ch == ';';
 		}
-		
+
 		return sp;
 	}
-	
+
 
 	public List<SearchWord> getWords() {
 		return words;
 	}
-	
+
 
 	public boolean isUnknownSearchWordComplete() {
 		return lastUnknownSearchWordComplete || unknownWords.size() > 0;
 	}
-	
+
 	public boolean isLastUnknownSearchWordComplete() {
 		return lastUnknownSearchWordComplete;
 	}
@@ -195,7 +195,7 @@ public class SearchPhrase {
 	public List<String> getUnknownSearchWords() {
 		return unknownWords;
 	}
-	
+
 	public List<String> getUnknownSearchWords(Collection<String> exclude) {
 		if(exclude == null || unknownWords.size() == 0 || exclude.size() == 0) {
 			return unknownWords;
@@ -208,25 +208,25 @@ public class SearchPhrase {
 		}
 		return l;
 	}
-	
-	
+
+
 	public String getUnknownSearchWord() {
 		return unknownSearchWordTrim;
 	}
-	
+
 	public String getUnknownSearchPhrase() {
 		return unknownSearchPhrase;
 	}
-	
+
 	public boolean isUnknownSearchWordPresent() {
 		return unknownSearchWordTrim.length() > 0;
 	}
-	
+
 	public int getUnknownSearchWordLength() {
 		return unknownSearchWordTrim.length() ;
 	}
-	
-	
+
+
 	public QuadRect getRadiusBBoxToSearch(int radius) {
 		int radiusInMeters = getRadiusSearch(radius);
 		QuadRect cache1kmRect = get1km31Rect();
@@ -242,7 +242,7 @@ public class SearchPhrase {
 		double bottomRightY = Math.min(max, cache1kmRect.bottom + dy);
 		return new QuadRect(topLeftX, topLeftY, bottomRightX, bottomRightY);
 	}
-	
+
 	public QuadRect get1km31Rect() {
 		if(cache1kmRect != null) {
 			return cache1kmRect;
@@ -263,12 +263,12 @@ public class SearchPhrase {
 		cache1kmRect = new QuadRect(topLeftX * pw, topLeftY * pw, bottomRightX * pw, bottomRightY * pw);
 		return cache1kmRect;
 	}
-	
-	
+
+
 	public Iterator<BinaryMapIndexReader> getRadiusOfflineIndexes(int meters, final SearchPhraseDataType dt) {
 		final QuadRect rect = meters > 0 ? getRadiusBBoxToSearch(meters) : null;
 		return getOfflineIndexes(rect, dt);
-		
+
 	}
 
 	public Iterator<BinaryMapIndexReader> getOfflineIndexes(final QuadRect rect, final SearchPhraseDataType dt) {
@@ -287,7 +287,7 @@ public class SearchPhrase {
 							}
 						} else if(dt == SearchPhraseDataType.ADDRESS) {
 							// containsAddressData not all maps supported
-							if(next.containsPoiData((int)rect.left, (int)rect.top, (int)rect.right, (int)rect.bottom) && 
+							if(next.containsPoiData((int)rect.left, (int)rect.top, (int)rect.right, (int)rect.bottom) &&
 									next.containsAddressData()) {
 								return true;
 							}
@@ -317,19 +317,19 @@ public class SearchPhrase {
 			}
 		};
 	}
-	
+
 	public List<BinaryMapIndexReader> getOfflineIndexes() {
 		if(indexes != null) {
-			return indexes; 
+			return indexes;
 		}
 		return settings.getOfflineIndexes();
 	}
-	
+
 	public SearchSettings getSettings() {
 		return settings;
 	}
-	
-	
+
+
 	public int getRadiusLevel() {
 		return settings.getRadiusLevel();
 	}
@@ -370,7 +370,7 @@ public class SearchPhrase {
 	public SearchPhrase selectWord(SearchResult res) {
 		return selectWord(res, null, false);
 	}
-	
+
 	public SearchPhrase selectWord(SearchResult res, List<String> unknownWords, boolean lastComplete) {
 		SearchPhrase sp = new SearchPhrase(this.settings, this.clt);
 		addResult(res, sp);
@@ -379,7 +379,7 @@ public class SearchPhrase {
 			addResult(prnt, sp);
 			prnt = prnt.parentSearchResult;
 		}
-		sp.words.addAll(0, this.words);	
+		sp.words.addAll(0, this.words);
 		if(unknownWords != null) {
 			sp.lastUnknownSearchWordComplete = lastComplete;
 			for (int i = 0; i < unknownWords.size(); i++) {
@@ -397,7 +397,7 @@ public class SearchPhrase {
 		SearchWord sw = new SearchWord(res.wordsSpan != null ? res.wordsSpan : res.localeName.trim(), res);
 		sp.words.add(0, sw);
 	}
-	
+
 	public boolean isLastWord(ObjectType... p) {
 		for (int i = words.size() - 1; i >= 0; i--) {
 			SearchWord sw = words.get(i);
@@ -428,15 +428,15 @@ public class SearchPhrase {
 		sm = getNameStringMatcher(unknownSearchWordTrim, lastUnknownSearchWordComplete);
 		return sm;
 	}
-	
-	
+
+
 	public NameStringMatcher getNameStringMatcher(String word, boolean complete) {
-		return new NameStringMatcher(word, 
-				(complete ?  
-					StringMatcherMode.CHECK_EQUALS_FROM_SPACE : 
+		return new NameStringMatcher(word,
+				(complete ?
+					StringMatcherMode.CHECK_EQUALS_FROM_SPACE :
 					StringMatcherMode.CHECK_STARTS_FROM_SPACE));
 	}
-	
+
 	public boolean hasObjectType(ObjectType p) {
 		for(SearchWord s : words) {
 			if(s.getType() == p) {
@@ -483,7 +483,7 @@ public class SearchPhrase {
 		sb.append(unknownSearchPhrase);
 		return sb.toString();
 	}
-	
+
 	@Override
 	public String toString() {
 		return getStringRerpresentation();
@@ -503,7 +503,7 @@ public class SearchPhrase {
 		}
 		return words.get(words.size() - 1);
 	}
-	
+
 	public LatLon getWordLocation() {
 		for(int i = words.size() - 1; i >= 0; i--) {
 			SearchWord sw = words.get(i);
@@ -513,7 +513,7 @@ public class SearchPhrase {
 		}
 		return null;
 	}
-	
+
 	public LatLon getLastTokenLocation() {
 		for(int i = words.size() - 1; i >= 0; i--) {
 			SearchWord sw = words.get(i);
@@ -521,7 +521,7 @@ public class SearchPhrase {
 				return sw.getLocation();
 			}
 		}
-		// last token or myLocationOrVisibleMap if not selected 
+		// last token or myLocationOrVisibleMap if not selected
 		if (settings != null) {
 			return settings.getOriginalLocation();
 		}
@@ -616,7 +616,7 @@ public class SearchPhrase {
 		public NameStringMatcher(String lastWordTrim, StringMatcherMode mode) {
 			sm = new CollatorStringMatcher(lastWordTrim, mode);
 		}
-		
+
 		public boolean matches(Collection<String> map) {
 			if(map == null) {
 				return false;
@@ -633,18 +633,18 @@ public class SearchPhrase {
 		public boolean matches(String name) {
 			return sm.matches(name);
 		}
-		
+
 	}
-	
+
 	public void countUnknownWordsMatch(SearchResult sr) {
 		countUnknownWordsMatch(sr, sr.localeName, sr.otherNames);
 	}
-	
+
 	public void countUnknownWordsMatch(SearchResult sr, String localeName, Collection<String> otherNames) {
 		if(unknownWords.size() > 0) {
 			for(int i = 0; i < unknownWords.size(); i++) {
 				if(unknownWordsMatcher.size() == i) {
-					unknownWordsMatcher.add(new NameStringMatcher(unknownWords.get(i), 
+					unknownWordsMatcher.add(new NameStringMatcher(unknownWords.get(i),
 							i < unknownWords.size() - 1 ? StringMatcherMode.CHECK_EQUALS_FROM_SPACE :
 								StringMatcherMode.CHECK_STARTS_FROM_SPACE));
 				}
@@ -659,15 +659,15 @@ public class SearchPhrase {
 		}
 		if(!sr.firstUnknownWordMatches) {
 			sr.firstUnknownWordMatches = localeName.equals(getUnknownSearchWord()) ||
-					getNameStringMatcher().matches(localeName) || 
-					getNameStringMatcher().matches(otherNames);	
+					getNameStringMatcher().matches(localeName) ||
+					getNameStringMatcher().matches(otherNames);
 		}
-		
+
 	}
 	public int getRadiusSearch(int meters) {
 		return (1 << (getRadiusLevel() - 1)) * meters;
 	}
-	
+
 	public int getNextRadiusSearch(int meters) {
 		return (1 << (getRadiusLevel())) * meters;
 	}
@@ -675,7 +675,7 @@ public class SearchPhrase {
 	public static int icompare(int x, int y) {
         return (x < y) ? -1 : ((x == y) ? 0 : 1);
     }
-	
+
 	public String getUnknownWordToSearchBuilding() {
 		List<String> unknownSearchWords = getUnknownSearchWords();
 		if(unknownSearchWords.size() > 0 && Algorithms.extractFirstIntegerNumber(getUnknownSearchWord()) == 0) {
@@ -687,10 +687,10 @@ public class SearchPhrase {
 		}
 		return getUnknownSearchWord();
 	}
-	
+
 	public String getUnknownWordToSearch() {
 		List<String> unknownSearchWords = getUnknownSearchWords();
-		
+
 		String wordToSearch = getUnknownSearchWord();
 		if (unknownSearchWords.size() > 0) {
 			List<String> searchWords = new ArrayList<>(unknownSearchWords);
@@ -701,14 +701,14 @@ public class SearchPhrase {
 					int len = 0;
 					for(int k = 0; k < s.length(); k++) {
 						if(s.charAt(k) >= '0' && s.charAt(k) <= '9') {
-							
+
 						} else {
 							len++;
 						}
 					}
 					return len;
 				}
-				
+
 				@Override
 				public int compare(String o1, String o2) {
 					int i1 = CommonWords.getCommonSearch(o1.toLowerCase());
@@ -719,7 +719,7 @@ public class SearchPhrase {
 					// compare length without numbers to not include house numbers
 					return -icompare(lengthWithoutNumbers(o1), lengthWithoutNumbers(o2));
 				}
-			});						
+			});
 			wordToSearch = searchWords.get(0);
 		}
 
