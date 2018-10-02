@@ -31,7 +31,7 @@ public class SearchPhrase {
 	
 	private List<SearchWord> words = new ArrayList<>();
 	private List<String> unknownWords = new ArrayList<>();
-    private List<AbstractPoiType> matchedPoiTypes = new ArrayList<>();
+	private List<AbstractPoiType> matchedPoiTypes = new ArrayList<>();
 	private List<NameStringMatcher> unknownWordsMatcher = new ArrayList<>();
 	private String unknownSearchWordTrim;
 	private String unknownSearchPhrase = "";
