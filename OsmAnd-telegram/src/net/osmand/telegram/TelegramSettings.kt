@@ -134,6 +134,7 @@ class TelegramSettings(private val app: TelegramApplication) {
 	}
 
 	fun updateShareDevicesIds(list: List<DeviceBot>) {
+		shareDevicesIds.clear()
 		list.forEach {
 			shareDevicesIds[it.externalId] = it.deviceName
 		}
@@ -177,10 +178,6 @@ class TelegramSettings(private val app: TelegramApplication) {
 			hiddenChats.add(chatId)
 		}
 		hiddenOnMapChats = hiddenChats.toHashSet()
-	}
-
-	fun addSharingDevice(deviceId: String) {
-		shareDevicesIds[deviceId] = deviceId
 	}
 
 	fun getShareLocationChats() = ArrayList(shareLocationChats)

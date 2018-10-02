@@ -94,6 +94,12 @@ class SettingsDialogFragment : BaseDialogFragment() {
 
 		container = mainView.findViewById(R.id.share_as_container)
 		val user = telegramHelper.getCurrentUser()
+		if (user != null) {
+			val name = TelegramUiHelper.getUserName(user)
+			if (!settings.shareDevicesIds.containsKey(name)) {
+				settings.shareDevicesIds[name] = name
+			}
+		}
 		settings.shareDevicesIds.forEach {
 			val title = it.key
 			inflater.inflate(R.layout.item_with_rb_and_btn, container, false).apply {
@@ -104,22 +110,11 @@ class SettingsDialogFragment : BaseDialogFragment() {
 					isChecked = title == settings.currentSharingMode
 				}
 				setOnClickListener {
-					if (user != null && TelegramUiHelper.getUserName(user) == title) {
-						settings.currentSharingMode = null
-					} else {
-						settings.currentSharingMode = title
-					}
+					settings.currentSharingMode = title
 					updateSelectedSharingMode()
 				}
 				tag = title
 				container.addView(this)
-			}
-		}
-
-		mainView.findViewById<TextView>(R.id.add_device).setOnClickListener {
-			val fm = fragmentManager
-			if (fm != null) {
-				AddDeviceBottomSheet.showInstance(fm, this)
 			}
 		}
 
@@ -158,11 +153,6 @@ class SettingsDialogFragment : BaseDialogFragment() {
 			LogoutBottomSheet.LOGOUT_REQUEST_CODE -> {
 				logoutTelegram()
 				dismiss()
-			}
-			AddDeviceBottomSheet.ADD_DEVICE_REQUEST_CODE -> {
-				if (data != null && data.hasExtra(AddDeviceBottomSheet.NEW_DEVICE_ID)) {
-					addNewSharingDevice(data.getStringExtra(AddDeviceBottomSheet.NEW_DEVICE_ID))
-				}
 			}
 		}
 	}
