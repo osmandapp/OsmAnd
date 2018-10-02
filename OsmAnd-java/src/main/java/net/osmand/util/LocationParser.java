@@ -48,7 +48,7 @@ public class LocationParser {
 			if (Character.isLetter(ch)) {
 				UTMPoint upoint = new UTMPoint(d.get(2), d.get(1), d.get(0).intValue(), ch);
 				LatLonPoint ll = upoint.toLatLonPoint();
-				return createLatLon(ll.getLatitude(), ll.getLongitude());
+				return validateAndCreateLatLon(ll.getLatitude(), ll.getLongitude());
 			}
 		}
 
@@ -62,7 +62,7 @@ public class LocationParser {
 					UTMPoint upoint = new UTMPoint(Double.parseDouble(north), Double.parseDouble(east), d.get(0)
 							.intValue(), ch);
 					LatLonPoint ll = upoint.toLatLonPoint();
-					return createLatLon(ll.getLatitude(), ll.getLongitude());
+					return validateAndCreateLatLon(ll.getLatitude(), ll.getLongitude());
 				} catch (NumberFormatException e) {
 				}
 			}
@@ -130,10 +130,10 @@ public class LocationParser {
 		if (split != -1) {
 			double lat = parse1Coordinate(all, 0, split);
 			double lon = parse1Coordinate(all, split, all.size());
-			return createLatLon(lat, lon);
+			return validateAndCreateLatLon(lat, lon);
 		}
 		if (d.size() == 2) {
-			return createLatLon(d.get(0), d.get(1));
+			return validateAndCreateLatLon(d.get(0), d.get(1));
 		}
 		// simple url case
 		if (locPhrase.contains("://")) {
@@ -152,7 +152,7 @@ public class LocationParser {
 				}
 			}
 			if (lat != 0 && lon != 0 && only2decimals) {
-				return createLatLon(lat, lon);
+				return validateAndCreateLatLon(lat, lon);
 			}
 		}
 		// split by equal number of digits
@@ -171,13 +171,13 @@ public class LocationParser {
 			if (splitEq != -1) {
 				double lat = parse1Coordinate(all, 0, splitEq);
 				double lon = parse1Coordinate(all, splitEq, all.size());
-				return createLatLon(lat, lon);
+				return validateAndCreateLatLon(lat, lon);
 			}
 		}
 		return null;
 	}
 
-	private static LatLon createLatLon(double lat, double lon) {
+	private static LatLon validateAndCreateLatLon(double lat, double lon) {
 		if (isValidCoordinate(lat) && isValidCoordinate(lon)) {
 			return new LatLon(lat, lon);
 		}
@@ -185,8 +185,7 @@ public class LocationParser {
 	}
 
 	private static boolean isValidCoordinate(double coordinate) {
-		double coord = Math.abs(coordinate);
-		return 0 <= coord && coord <= 180;
+		return Math.abs(coordinate) <= 180;
 	}
 
 	private static boolean isValidLocPhrase(String locPhrase) {
