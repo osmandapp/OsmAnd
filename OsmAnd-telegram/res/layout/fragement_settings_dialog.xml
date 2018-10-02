@@ -120,21 +120,6 @@
 					android:layout_height="wrap_content"
 					android:orientation="vertical" />
 
-				<net.osmand.telegram.ui.views.TextViewEx
-					android:id="@+id/add_device"
-					android:layout_width="match_parent"
-					android:layout_height="@dimen/list_header_height"
-					android:layout_gravity="center_vertical"
-					android:background="?attr/selectableItemBackground"
-					android:ellipsize="end"
-					android:gravity="center_vertical"
-					android:maxLines="1"
-					android:paddingLeft="@dimen/dialog_padding_horizontal"
-					android:paddingRight="@dimen/dialog_padding_horizontal"
-					android:text="@string/add_device"
-					android:textColor="?attr/ctrl_active_color"
-					app:typeface="@string/font_roboto_medium" />
-
 			</LinearLayout>
 
 			<include layout="@layout/list_item_divider" />
