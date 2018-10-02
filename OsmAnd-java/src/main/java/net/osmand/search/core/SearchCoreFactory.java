@@ -650,8 +650,8 @@ public class SearchCoreFactory {
 					categories.addAll(matchedCategories);
 				}
 				SearchPhrase lastWordPhrase = phrase.generateNewPhrase(lastWord, phrase.getSettings());
-				if (wordsMatch == searchWords.size() &&
-						getMatchedEqualPoi(lastWordPhrase, lastWord).isEmpty()) {
+				if (wordsMatch == searchWords.size() && !lastWordSameCategory(
+						matchSearchedCategories(lastWordPhrase, lastWordPhrase.getNameStringMatcher()), categories)) {
 					phrase.setMatchedPoiTypes(new ArrayList<>(categories));
 					return false;
 				}
@@ -687,6 +687,15 @@ public class SearchCoreFactory {
 			SearchPhrase subPhrase = phrase.generateNewPhrase(word, phrase.getSettings());
 			NameStringMatcher nm = new NameStringMatcher(word, StringMatcherMode.CHECK_EQUALS_FROM_SPACE);
 			return matchSearchedCategories(subPhrase, nm);
+		}
+
+		private boolean lastWordSameCategory(List<AbstractPoiType> abstractPoiTypes, Set<AbstractPoiType> previousResults) {
+			for (AbstractPoiType abstractPoiType : abstractPoiTypes) {
+				if (previousResults.contains(abstractPoiType)) {
+					return true;
+				}
+			}
+			return false;
 		}
 
 		private List<AbstractPoiType> matchSearchedCategories(SearchPhrase phrase, NameStringMatcher nm) {
