@@ -93,21 +93,15 @@ class SettingsDialogFragment : BaseDialogFragment() {
 		updateSelectedAppConn()
 
 		container = mainView.findViewById(R.id.share_as_container)
-		if (settings.shareDevicesIds.isEmpty()) {
-			val user = telegramHelper.getCurrentUser()
-			if (user != null) {
-				settings.addSharingDevice(TelegramUiHelper.getUserName(user))
-			}
-		}
 		val user = telegramHelper.getCurrentUser()
 		settings.shareDevicesIds.forEach {
-			val title = it
+			val title = it.key
 			inflater.inflate(R.layout.item_with_rb_and_btn, container, false).apply {
-				findViewById<TextView>(R.id.title).text = title
+				findViewById<TextView>(R.id.title).text = it.value
 				findViewById<View>(R.id.primary_btn).visibility = View.GONE
 				findViewById<RadioButton>(R.id.radio_button).apply {
 					visibility = View.VISIBLE
-					isChecked = it == settings.currentSharingMode
+					isChecked = title == settings.currentSharingMode
 				}
 				setOnClickListener {
 					if (user != null && TelegramUiHelper.getUserName(user) == title) {
@@ -117,7 +111,7 @@ class SettingsDialogFragment : BaseDialogFragment() {
 					}
 					updateSelectedSharingMode()
 				}
-				tag = it
+				tag = title
 				container.addView(this)
 			}
 		}

@@ -62,9 +62,9 @@ class TelegramSettings(private val app: TelegramApplication) {
 	private var shareLocationChats: Set<Long> = emptySet()
 	private var hiddenOnMapChats: Set<Long> = emptySet()
 
-	var shareDevicesIds: Set<String> = emptySet()
+	var shareDevicesIds = mutableMapOf<String, String>()
 	var currentSharingMode: String? = null
-	
+
 	var metricsConstants = MetricsConstants.KILOMETERS_AND_METERS
 	var speedConstants = SpeedConstants.KILOMETERS_PER_HOUR
 
@@ -133,6 +133,12 @@ class TelegramSettings(private val app: TelegramApplication) {
 		this.shareLocationChats = shareLocationChats.toHashSet()
 	}
 
+	fun updateShareDevicesIds(list: List<DeviceBot>) {
+		list.forEach {
+			shareDevicesIds[it.externalId] = it.deviceName
+		}
+	}
+	
 	fun getChatLivePeriod(chatId: Long) = chatLivePeriods[chatId]
 
 	fun getChatLivePeriods(): Map<Long, Long> {
@@ -174,9 +180,7 @@ class TelegramSettings(private val app: TelegramApplication) {
 	}
 
 	fun addSharingDevice(deviceId: String) {
-		val shareDevices = shareDevicesIds.toMutableList()
-		shareDevices.add(deviceId)
-		shareDevicesIds = shareDevices.toHashSet()
+		shareDevicesIds[deviceId] = deviceId
 	}
 
 	fun getShareLocationChats() = ArrayList(shareLocationChats)
@@ -214,12 +218,6 @@ class TelegramSettings(private val app: TelegramApplication) {
 		}
 		edit.putStringSet(HIDDEN_ON_MAP_CHATS_KEY, hiddenChatsSet)
 
-		val shareDevicesSet = mutableSetOf<String>()
-		val shareDevices = ArrayList(shareDevicesIds)
-		for (device in shareDevices) {
-			shareDevicesSet.add(device)
-		}
-		edit.putStringSet(ADDED_DEVICES_IDS_KEY, shareDevicesSet)
 		edit.putString(SHARING_MODE_KEY, currentSharingMode)
 
 		edit.putString(METRICS_CONSTANTS_KEY, metricsConstants.name)
@@ -252,13 +250,6 @@ class TelegramSettings(private val app: TelegramApplication) {
 			hiddenChats.add(chatId.toLong())
 		}
 		hiddenOnMapChats = hiddenChats
-
-		val shareDevices = mutableSetOf<String>()
-		val shareDevicesSet = prefs.getStringSet(ADDED_DEVICES_IDS_KEY, mutableSetOf())
-		for (deviceId in shareDevicesSet) {
-			shareDevices.add(deviceId.toString())
-		}
-		shareDevicesIds = shareDevices
 
 		metricsConstants = MetricsConstants.valueOf(
 			prefs.getString(METRICS_CONSTANTS_KEY, MetricsConstants.KILOMETERS_AND_METERS.name)
@@ -428,5 +419,14 @@ class TelegramSettings(private val app: TelegramApplication) {
 		);
 
 		fun isSortByGroup() = this == SORT_BY_GROUP
+	}
+
+	class DeviceBot {
+		var id: Long = -1
+		var userId: Long = -1
+		var chatId: Long = -1
+		var deviceName: String = ""
+		var externalId: String = ""
+		var data: String = ""
 	}
 }

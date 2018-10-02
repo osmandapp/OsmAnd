@@ -47,7 +47,7 @@ class ShareLocationHelper(private val app: TelegramApplication) {
 					chatLivePeriods.forEach { (chatId, livePeriod) ->
 						val deviceId = app.settings.currentSharingMode
 						val url = "https://live.osmand.net/device/$deviceId/send?lat=${location.latitude}&lon=${location.longitude}"
-						AndroidNetworkUtils.sendRequestAsync(app, url)
+						AndroidNetworkUtils.sendRequestAsync(url, null)
 					}
 				}
 			}
