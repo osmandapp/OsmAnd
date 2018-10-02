@@ -35,7 +35,7 @@
 	<string name="send_my_location">Send my location</string>
 	<string name="gps_and_location">GPS &amp; location</string>
 	<string name="sharing_time">Sharing time</string>
-	<string name="expire_in">Expire at</string>
+	<string name="expire_at">Expire at</string>
 	<string name="stop_sharing_all">Sharing is enabled (disable)</string>
 	<string name="turn_off_location_sharing">Turn off location sharing</string>
 	<string name="open_osmand">Open OsmAnd</string>
