@@ -950,7 +950,7 @@ public class SearchCoreFactory {
 		@Override
 		public int getSearchPriority(SearchPhrase p) {
 			if ((p.isLastWord(ObjectType.POI_TYPE) && p.getLastTokenLocation() != null)
-					|| (p.isNoSelectedType() && p.isUnknownSearchWordComplete() && searchAmenityTypesAPI.hasFoundPoiTypes())) {
+					|| (p.isNoSelectedType() && p.isUnknownSearchWordComplete())) {
 				return SEARCH_AMENITY_BY_TYPE_PRIORITY;
 			}
 			return -1;
