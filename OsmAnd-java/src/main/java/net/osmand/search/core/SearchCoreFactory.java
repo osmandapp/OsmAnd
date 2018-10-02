@@ -651,7 +651,7 @@ public class SearchCoreFactory {
 				}
 				SearchPhrase lastWordPhrase = phrase.generateNewPhrase(lastWord, phrase.getSettings());
 				if (wordsMatch == searchWords.size() &&
-						matchSearchedCategories(lastWordPhrase, lastWordPhrase.getNameStringMatcher()).isEmpty()) {
+						getMatchedEqualPoi(lastWordPhrase, lastWord).isEmpty()) {
 					phrase.setMatchedPoiTypes(new ArrayList<>(categories));
 					return false;
 				}
