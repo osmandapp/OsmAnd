@@ -178,14 +178,10 @@ public class LocationParser {
 	}
 
 	private static LatLon validateAndCreateLatLon(double lat, double lon) {
-		if (isValidCoordinate(lat) && isValidCoordinate(lon)) {
+		if (Math.abs(lat) <= 90 && Math.abs(lon) <= 180) {
 			return new LatLon(lat, lon);
 		}
 		return null;
-	}
-
-	private static boolean isValidCoordinate(double coordinate) {
-		return Math.abs(coordinate) <= 180;
 	}
 
 	private static boolean isValidLocPhrase(String locPhrase) {
