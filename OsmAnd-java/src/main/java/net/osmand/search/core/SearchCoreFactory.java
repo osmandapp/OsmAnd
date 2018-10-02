@@ -507,7 +507,7 @@ public class SearchCoreFactory {
 
 		@Override
 		public boolean search(final SearchPhrase phrase, final SearchResultMatcher resultMatcher) throws IOException {
-			if(!phrase.isUnknownSearchWordPresent()) {
+			if(!phrase.isUnknownSearchWordPresent() || phrase.hasMatchedPoiTypes()) {
 				return false;
 			}
 			final BinaryMapIndexReader[] currentFile = new BinaryMapIndexReader[1];
@@ -637,14 +637,65 @@ public class SearchCoreFactory {
 
 		@Override
 		public boolean search(SearchPhrase phrase, SearchResultMatcher resultMatcher) throws IOException {
+			if(phrase.getSearchPhraseSize() > 1) {
+				List<String> searchWords = new ArrayList<>();
+				searchWords.add(phrase.getUnknownSearchWord());
+				searchWords.addAll(phrase.getUnknownSearchWords());
+				String lastWord = searchWords.remove(searchWords.size() - 1);
+				Set<AbstractPoiType> categories = new HashSet<>();
+				int wordsMatch = 0;
+				for (String word : searchWords) {
+					List<AbstractPoiType> matchedCategories = getMatchedEqualPoi(phrase, word);
+					wordsMatch = matchedCategories.isEmpty() ? wordsMatch : ++wordsMatch;
+					categories.addAll(matchedCategories);
+				}
+				SearchPhrase lastWordPhrase = phrase.generateNewPhrase(lastWord, phrase.getSettings());
+				if (wordsMatch == searchWords.size() &&
+						matchSearchedCategories(lastWordPhrase, lastWordPhrase.getNameStringMatcher()).isEmpty()) {
+					phrase.setMatchedPoiTypes(new ArrayList<>(categories));
+					return false;
+				}
+			}
+			NameStringMatcher nm = phrase.getNameStringMatcher();
+			List<AbstractPoiType> results = matchSearchedCategories(phrase, nm);
+			for (AbstractPoiType pt : results) {
+				SearchResult res = new SearchResult(phrase);
+				res.localeName = pt.getTranslation();
+				res.object = pt;
+				res.priority = SEARCH_AMENITY_TYPE_PRIORITY;
+				res.priorityDistance = 0;
+				res.objectType = ObjectType.POI_TYPE;
+				resultMatcher.publish(res);
+			}
+			for (int i = 0; i < customPoiFilters.size(); i++) {
+				CustomSearchPoiFilter csf = customPoiFilters.get(i);
+				int p = customPoiFiltersPriorites.get(i);
+				if (!phrase.isUnknownSearchWordPresent() || nm.matches(csf.getName())) {
+					SearchResult res = new SearchResult(phrase);
+					res.localeName = csf.getName();
+					res.object = csf;
+					res.priority = SEARCH_AMENITY_TYPE_PRIORITY + p;
+					res.objectType = ObjectType.POI_TYPE;
+					resultMatcher.publish(res);
+				}
+			}
+
+			return true;
+		}
+
+		private List<AbstractPoiType> getMatchedEqualPoi(SearchPhrase phrase, String word) {
+			SearchPhrase subPhrase = phrase.generateNewPhrase(word, phrase.getSettings());
+			NameStringMatcher nm = new NameStringMatcher(word, StringMatcherMode.CHECK_EQUALS_FROM_SPACE);
+			return matchSearchedCategories(subPhrase, nm);
+		}
+
+		private List<AbstractPoiType> matchSearchedCategories(SearchPhrase phrase, NameStringMatcher nm) {
 			if (translatedNames.isEmpty()) {
 				translatedNames = types.getAllTranslatedNames(false);
 				topVisibleFilters = types.getTopVisibleFilters();
 				categories = types.getCategories(false);
 			}
-//			results.clear();
-			List<AbstractPoiType> results = new ArrayList<AbstractPoiType>();
-			NameStringMatcher nm = phrase.getNameStringMatcher();
+			List<AbstractPoiType> results = new ArrayList<>();
 			for (PoiFilter pf : topVisibleFilters) {
 				if (!phrase.isUnknownSearchWordPresent()
 						|| nm.matches(pf.getTranslation())
@@ -687,29 +738,7 @@ public class SearchCoreFactory {
 					}
 				}
 			}
-			for (AbstractPoiType pt : results) {
-				SearchResult res = new SearchResult(phrase);
-				res.localeName = pt.getTranslation();
-				res.object = pt;
-				res.priority = SEARCH_AMENITY_TYPE_PRIORITY;
-				res.priorityDistance = 0;
-				res.objectType = ObjectType.POI_TYPE;
-				resultMatcher.publish(res);
-			}
-			for (int i = 0; i < customPoiFilters.size(); i++) {
-				CustomSearchPoiFilter csf = customPoiFilters.get(i);
-				int p = customPoiFiltersPriorites.get(i);
-				if (!phrase.isUnknownSearchWordPresent() || nm.matches(csf.getName())) {
-					SearchResult res = new SearchResult(phrase);
-					res.localeName = csf.getName();
-					res.object = csf;
-					res.priority = SEARCH_AMENITY_TYPE_PRIORITY + p;
-					res.objectType = ObjectType.POI_TYPE;
-					resultMatcher.publish(res);
-				}
-			}
-
-			return true;
+			return results;
 		}
 
 		@Override
