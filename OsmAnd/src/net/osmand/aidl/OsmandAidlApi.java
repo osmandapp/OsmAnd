@@ -1614,7 +1614,7 @@ public class OsmandAidlApi {
 	boolean isAppEnabled(@NonNull String pack) {
 		ConnectedApp app = connectedApps.get(pack);
 		if (app == null) {
-			app = new ConnectedApp(true, pack);
+			app = new ConnectedApp(pack, true);
 			connectedApps.put(pack, app);
 			saveConnectedApps();
 		}
@@ -1623,14 +1623,14 @@ public class OsmandAidlApi {
 
 	private void saveConnectedApps() {
 		try {
-			JSONObject apps = new JSONObject();
-			for (Map.Entry<String, ConnectedApp> entry : connectedApps.entrySet()) {
-				ConnectedApp app = entry.getValue();
+			JSONArray array = new JSONArray();
+			for (ConnectedApp app : connectedApps.values()) {
 				JSONObject obj = new JSONObject();
 				obj.put(ConnectedApp.ENABLED_KEY, app.enabled);
-				apps.put(entry.getKey(), obj);
+				obj.put(ConnectedApp.PACK_KEY, app.pack);
+				array.put(obj);
 			}
-			app.getSettings().API_CONNECTED_APPS_JSON.set(apps.toString());
+			app.getSettings().API_CONNECTED_APPS_JSON.set(array.toString());
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
@@ -1638,14 +1638,12 @@ public class OsmandAidlApi {
 
 	private void loadConnectedApps() {
 		try {
-			JSONObject apps = new JSONObject(app.getSettings().API_CONNECTED_APPS_JSON.get());
-			for (Iterator<String> it = apps.keys(); it.hasNext(); ) {
-				String pack = it.next();
-				JSONObject app = apps.getJSONObject(pack);
-				connectedApps.put(pack, new ConnectedApp(
-						app.optBoolean(ConnectedApp.ENABLED_KEY, true),
-						pack
-				));
+			JSONArray array = new JSONArray(app.getSettings().API_CONNECTED_APPS_JSON.get());
+			for (int i = 0; i < array.length(); i++) {
+				JSONObject obj = array.getJSONObject(i);
+				String pack = obj.optString(ConnectedApp.PACK_KEY, "");
+				boolean enabled = obj.optBoolean(ConnectedApp.ENABLED_KEY, true);
+				connectedApps.put(pack, new ConnectedApp(pack, enabled));
 			}
 		} catch (JSONException e) {
 			e.printStackTrace();
@@ -1654,32 +1652,21 @@ public class OsmandAidlApi {
 
 	public static class ConnectedApp implements Comparable<ConnectedApp> {
 
+		static final String PACK_KEY = "pack";
 		static final String ENABLED_KEY = "enabled";
 
-		private boolean enabled;
 		private String pack;
+		private boolean enabled;
 		private String name;
 		private Drawable icon;
 
-		ConnectedApp(boolean enabled, String pack) {
-			this.enabled = enabled;
+		ConnectedApp(String pack, boolean enabled) {
 			this.pack = pack;
-		}
-
-		@Override
-		public int compareTo(@NonNull ConnectedApp app) {
-			if (name != null && app.name != null) {
-				return name.compareTo(app.name);
-			}
-			return 0;
+			this.enabled = enabled;
 		}
 
 		public boolean isEnabled() {
 			return enabled;
-		}
-
-		public String getPack() {
-			return pack;
 		}
 
 		public String getName() {
@@ -1688,6 +1675,14 @@ public class OsmandAidlApi {
 
 		public Drawable getIcon() {
 			return icon;
+		}
+
+		@Override
+		public int compareTo(@NonNull ConnectedApp app) {
+			if (name != null && app.name != null) {
+				return name.compareTo(app.name);
+			}
+			return 0;
 		}
 	}
 
