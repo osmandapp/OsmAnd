@@ -2370,8 +2370,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 								QuickSearchDialogFragment parentFragment = (QuickSearchDialogFragment) getParentFragment();
 								SearchHistoryHelper helper = SearchHistoryHelper.getInstance(parentFragment.getMyApplication());
 								for (QuickSearchListItem searchListItem : selectedItems) {
-									HistoryEntry historyEntry = (HistoryEntry) searchListItem.getSearchResult().object;
-									helper.remove(historyEntry);
+									helper.remove(searchListItem.getSearchResult().object);
 								}
 								parentFragment.reloadHistory();
 								parentFragment.enableSelectionMode(false, -1);

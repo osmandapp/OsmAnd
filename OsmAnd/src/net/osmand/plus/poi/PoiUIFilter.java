@@ -509,13 +509,27 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 
 	public String getTypesName() {
 		StringBuilder sb = new StringBuilder();
-		for (PoiCategory p : acceptedTypes.keySet()) {
-			if (sb.length() > 0) {
-				sb.append(", ");
+		for (Map.Entry<PoiCategory, LinkedHashSet<String>> entry : acceptedTypes.entrySet()) {
+			LinkedHashSet<String> set = entry.getValue();
+			if (set != null && !set.isEmpty()) {
+				for (String key : set) {
+					PoiType pt = poiTypes.getPoiTypeByKey(key);
+					if (pt != null) {
+						appendWithSeparator(sb, pt.getTranslation());
+					}
+				}
+			} else {
+				appendWithSeparator(sb, entry.getKey().getTranslation());
 			}
-			sb.append(p.getTranslation());
 		}
 		return sb.toString();
+	}
+
+	private void appendWithSeparator(StringBuilder sb, String s) {
+		if (sb.length() > 0) {
+			sb.append(", ");
+		}
+		sb.append(s);
 	}
 
 	/**
