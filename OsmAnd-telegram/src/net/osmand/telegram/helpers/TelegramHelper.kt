@@ -1214,15 +1214,15 @@ class TelegramHelper private constructor() {
 						//listener?.onTelegramChatsChanged()
 					}
 				}
-//				TdApi.UpdateChatNotificationSettings.CONSTRUCTOR -> {
-//					val update = obj as TdApi.UpdateChatNotificationSettings
-//					val chat = chats[update.chatId]
-//					if (chat != null) {
-//						synchronized(chat) {
-//							chat.notificationSettings = update.notificationSettings
-//						}
-//					}
-//				}
+				TdApi.UpdateChatNotificationSettings.CONSTRUCTOR -> {
+					val update = obj as TdApi.UpdateChatNotificationSettings
+					val chat = chats[update.chatId]
+					if (chat != null) {
+						synchronized(chat) {
+							chat.notificationSettings = update.notificationSettings
+						}
+					}
+				}
 
 				TdApi.UpdateFile.CONSTRUCTOR -> {
 					val updateFile = obj as TdApi.UpdateFile
