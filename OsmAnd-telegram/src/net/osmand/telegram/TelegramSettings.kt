@@ -26,6 +26,7 @@ private val LOC_HISTORY_VALUES_SEC = listOf(
 	12 * 60 * 60L,
 	24 * 60 * 60L
 )
+private val MESSAGE_ADD_ACTIVE_TIME_VALUES_SEC = listOf(15 * 60L, 30 * 60L, 60 * 60L, 180 * 60L)
 
 private const val SEND_MY_LOC_DEFAULT_INDEX = 6
 private const val STALE_LOC_DEFAULT_INDEX = 4
@@ -55,6 +56,8 @@ class TelegramSettings(private val app: TelegramApplication) {
 
 	private var chatLivePeriods = mutableMapOf<Long, Long>()
 	private var chatShareLocStartSec = mutableMapOf<Long, Long>()
+	
+	private var chatShareAddActiveTime = mutableMapOf<Long, Long>()
 
 	private var shareLocationChats: Set<Long> = emptySet()
 	private var hiddenOnMapChats: Set<Long> = emptySet()
@@ -99,6 +102,10 @@ class TelegramSettings(private val app: TelegramApplication) {
 			presentChatIds.contains(key)
 		}.toMutableMap()
 
+		chatShareAddActiveTime = chatShareAddActiveTime.filter { (key, _) ->
+			presentChatIds.contains(key)
+		}.toMutableMap()
+
 		chatShareLocStartSec = chatShareLocStartSec.filter { (key, _) ->
 			presentChatIds.contains(key)
 		}.toMutableMap()
@@ -107,7 +114,8 @@ class TelegramSettings(private val app: TelegramApplication) {
 	fun shareLocationToChat(
 		chatId: Long,
 		share: Boolean,
-		livePeriod: Long = DEFAULT_VISIBLE_TIME_SECONDS
+		livePeriod: Long = DEFAULT_VISIBLE_TIME_SECONDS,
+		addActiveTime: Long = MESSAGE_ADD_ACTIVE_TIME_VALUES_SEC[0]
 	) {
 		val shareLocationChats = shareLocationChats.toMutableList()
 		if (share) {
@@ -118,16 +126,33 @@ class TelegramSettings(private val app: TelegramApplication) {
 			}
 			chatLivePeriods[chatId] = lp
 			chatShareLocStartSec[chatId] = (System.currentTimeMillis() / 1000)
+			chatShareAddActiveTime[chatId] = addActiveTime
 			shareLocationChats.add(chatId)
 		} else {
 			shareLocationChats.remove(chatId)
 			chatLivePeriods.remove(chatId)
 			chatShareLocStartSec.remove(chatId)
+			chatShareAddActiveTime.remove(chatId)
 		}
 		this.shareLocationChats = shareLocationChats.toHashSet()
 	}
 
 	fun getChatLivePeriod(chatId: Long) = chatLivePeriods[chatId]
+
+	fun getChatAddActiveTime(chatId: Long) = chatShareAddActiveTime[chatId] ?: MESSAGE_ADD_ACTIVE_TIME_VALUES_SEC[0]
+
+	fun getChatNextAddActiveTime(chatId: Long): Long {
+		return if (chatShareAddActiveTime.containsKey(chatId)) {
+			var index = MESSAGE_ADD_ACTIVE_TIME_VALUES_SEC.indexOf(chatShareAddActiveTime[chatId])
+			if (MESSAGE_ADD_ACTIVE_TIME_VALUES_SEC.lastIndex > index) {
+				MESSAGE_ADD_ACTIVE_TIME_VALUES_SEC[++index]
+			} else {
+				MESSAGE_ADD_ACTIVE_TIME_VALUES_SEC[index]
+			}
+		} else {
+			MESSAGE_ADD_ACTIVE_TIME_VALUES_SEC[0]
+		}
+	}
 
 	fun getChatLivePeriods(): Map<Long, Long> {
 		return chatLivePeriods.filter {
@@ -151,10 +176,15 @@ class TelegramSettings(private val app: TelegramApplication) {
 		chatShareLocStartSec[chatId] = startTime
 	}
 
+	fun updateChatAddActiveTime(chatId: Long, newTime: Long) {
+		chatShareAddActiveTime[chatId] = newTime
+	}
+	
 	fun stopSharingLocationToChats() {
 		this.shareLocationChats = emptySet()
 		this.chatLivePeriods.clear()
 		this.chatShareLocStartSec.clear()
+		this.chatShareAddActiveTime.clear()
 	}
 
 	fun showChatOnMap(chatId: Long, show: Boolean) {
