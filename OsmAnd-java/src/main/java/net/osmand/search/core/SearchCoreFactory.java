@@ -1271,6 +1271,6 @@ public class SearchCoreFactory {
 			return SEARCH_LOCATION_PRIORITY;
 		}
 	}
-	
-	
+
+
 }
