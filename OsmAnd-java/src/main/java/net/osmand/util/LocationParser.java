@@ -24,10 +24,15 @@ public class LocationParser {
 				return new LatLon(codeArea.getCenterLatitude(), codeArea.getCenterLongitude());
 			}
 		}
-		if (locPhrase.length() == 0 || !(locPhrase.charAt(0) == '-' || Character.isDigit(locPhrase.charAt(0))
-				|| locPhrase.charAt(0) == 'S' || locPhrase.charAt(0) == 's'
-				|| locPhrase.charAt(0) == 'N' || locPhrase.charAt(0) == 'n'
-				|| locPhrase.contains("://"))) {
+		boolean valid = isValidLocPhrase(locPhrase);
+		if (!valid) {
+			String[] split = locPhrase.split(" ");
+			if (split.length == 4 && split[1].contains(".") && split[3].contains(".")) {
+				locPhrase = split[1] + " " + split[3];
+				valid = isValidLocPhrase(locPhrase);
+			}
+		}
+		if (!valid) {
 			return null;
 		}
 		List<Double> d = new ArrayList<>();
@@ -43,7 +48,7 @@ public class LocationParser {
 			if (Character.isLetter(ch)) {
 				UTMPoint upoint = new UTMPoint(d.get(2), d.get(1), d.get(0).intValue(), ch);
 				LatLonPoint ll = upoint.toLatLonPoint();
-				return new LatLon(ll.getLatitude(), ll.getLongitude());
+				return validateAndCreateLatLon(ll.getLatitude(), ll.getLongitude());
 			}
 		}
 
@@ -57,7 +62,7 @@ public class LocationParser {
 					UTMPoint upoint = new UTMPoint(Double.parseDouble(north), Double.parseDouble(east), d.get(0)
 							.intValue(), ch);
 					LatLonPoint ll = upoint.toLatLonPoint();
-					return new LatLon(ll.getLatitude(), ll.getLongitude());
+					return validateAndCreateLatLon(ll.getLatitude(), ll.getLongitude());
 				} catch (NumberFormatException e) {
 				}
 			}
@@ -125,10 +130,10 @@ public class LocationParser {
 		if (split != -1) {
 			double lat = parse1Coordinate(all, 0, split);
 			double lon = parse1Coordinate(all, split, all.size());
-			return new LatLon(lat, lon);
+			return validateAndCreateLatLon(lat, lon);
 		}
 		if (d.size() == 2) {
-			return new LatLon(d.get(0), d.get(1));
+			return validateAndCreateLatLon(d.get(0), d.get(1));
 		}
 		// simple url case
 		if (locPhrase.contains("://")) {
@@ -147,7 +152,7 @@ public class LocationParser {
 				}
 			}
 			if (lat != 0 && lon != 0 && only2decimals) {
-				return new LatLon(lat, lon);
+				return validateAndCreateLatLon(lat, lon);
 			}
 		}
 		// split by equal number of digits
@@ -166,10 +171,25 @@ public class LocationParser {
 			if (splitEq != -1) {
 				double lat = parse1Coordinate(all, 0, splitEq);
 				double lon = parse1Coordinate(all, splitEq, all.size());
-				return new LatLon(lat, lon);
+				return validateAndCreateLatLon(lat, lon);
 			}
 		}
 		return null;
+	}
+
+	private static LatLon validateAndCreateLatLon(double lat, double lon) {
+		if (Math.abs(lat) <= 90 && Math.abs(lon) <= 180) {
+			return new LatLon(lat, lon);
+		}
+		return null;
+	}
+
+	private static boolean isValidLocPhrase(String locPhrase) {
+		if (!locPhrase.isEmpty()) {
+			char ch = Character.toLowerCase(locPhrase.charAt(0));
+			return ch == '-' || Character.isDigit(ch) || ch == 's' || ch == 'n' || locPhrase.contains("://");
+		}
+		return false;
 	}
 
 	public static double parse1Coordinate(List<Object> all, int begin, int end) {
