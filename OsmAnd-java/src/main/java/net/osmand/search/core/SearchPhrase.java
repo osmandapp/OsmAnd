@@ -31,6 +31,7 @@ public class SearchPhrase {
 	
 	private List<SearchWord> words = new ArrayList<>();
 	private List<String> unknownWords = new ArrayList<>();
+    private List<AbstractPoiType> matchedPoiTypes = new ArrayList<>();
 	private List<NameStringMatcher> unknownWordsMatcher = new ArrayList<>();
 	private String unknownSearchWordTrim;
 	private String unknownSearchPhrase = "";
@@ -38,7 +39,6 @@ public class SearchPhrase {
 	private NameStringMatcher sm;
 	private SearchSettings settings;
 	private List<BinaryMapIndexReader> indexes;
-	private List<AbstractPoiType> matchedPoiTypes;
 	
 	private QuadRect cache1kmRect;
 	private boolean lastUnknownSearchWordComplete;
@@ -741,5 +741,5 @@ public class SearchPhrase {
 	public int getSearchPhraseSize() {
 		return unknownWords.size() + (unknownSearchWordTrim.isEmpty() ? 0 : 1);
 	}
-	
+
 }
