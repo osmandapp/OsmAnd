@@ -1614,7 +1614,7 @@ public class OsmandAidlApi {
 	boolean isAppEnabled(@NonNull String pack) {
 		ConnectedApp app = connectedApps.get(pack);
 		if (app == null) {
-			app = new ConnectedApp("", true, pack);
+			app = new ConnectedApp(true, pack);
 			connectedApps.put(pack, app);
 			saveConnectedApps();
 		}
@@ -1627,7 +1627,6 @@ public class OsmandAidlApi {
 			for (Map.Entry<String, ConnectedApp> entry : connectedApps.entrySet()) {
 				ConnectedApp app = entry.getValue();
 				JSONObject obj = new JSONObject();
-				obj.put(ConnectedApp.DESCRIPTION_KEY, app.description);
 				obj.put(ConnectedApp.ENABLED_KEY, app.enabled);
 				apps.put(entry.getKey(), obj);
 			}
@@ -1644,7 +1643,6 @@ public class OsmandAidlApi {
 				String pack = it.next();
 				JSONObject app = apps.getJSONObject(pack);
 				connectedApps.put(pack, new ConnectedApp(
-						app.optString(ConnectedApp.DESCRIPTION_KEY, ""),
 						app.optBoolean(ConnectedApp.ENABLED_KEY, true),
 						pack
 				));
@@ -1656,17 +1654,14 @@ public class OsmandAidlApi {
 
 	public static class ConnectedApp implements Comparable<ConnectedApp> {
 
-		static final String DESCRIPTION_KEY = "description";
 		static final String ENABLED_KEY = "enabled";
 
-		private String description;
 		private boolean enabled;
 		private String pack;
 		private String name;
 		private Drawable icon;
 
-		ConnectedApp(String description, boolean enabled, String pack) {
-			this.description = description;
+		ConnectedApp(boolean enabled, String pack) {
 			this.enabled = enabled;
 			this.pack = pack;
 		}
@@ -1677,6 +1672,22 @@ public class OsmandAidlApi {
 				return name.compareTo(app.name);
 			}
 			return 0;
+		}
+
+		public boolean isEnabled() {
+			return enabled;
+		}
+
+		public String getPack() {
+			return pack;
+		}
+
+		public String getName() {
+			return name;
+		}
+
+		public Drawable getIcon() {
+			return icon;
 		}
 	}
 

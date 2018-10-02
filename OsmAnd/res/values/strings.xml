@@ -11,6 +11,7 @@
 	Thx - Hardy
 -->
 
+    <string name="third_party_application">Third-party application</string>
     <string name="search_street">Search street</string>
     <string name="start_search_from_city">Start search from city</string>
     <string name="shared_string_restore">Restore</string>

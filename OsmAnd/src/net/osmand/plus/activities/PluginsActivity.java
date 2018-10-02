@@ -15,9 +15,12 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import net.osmand.aidl.OsmandAidlApi.ConnectedApp;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
+
+import java.util.ArrayList;
 
 public class PluginsActivity extends OsmandListActivity {
 
@@ -27,7 +30,7 @@ public class PluginsActivity extends OsmandListActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		((OsmandApplication) getApplication()).applyTheme(this);
+		getMyApplication().applyTheme(this);
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.plugins);
 		getSupportActionBar().setTitle(R.string.plugins_screen);
@@ -56,7 +59,7 @@ public class PluginsActivity extends OsmandListActivity {
 	}
 
 	private void enableDisablePlugin(OsmandPlugin plugin, boolean enable) {
-		OsmandApplication app = (OsmandApplication) getApplication();
+		OsmandApplication app = getMyApplication();
 		if (OsmandPlugin.enablePlugin(this, app, plugin, enable)) {
 			if (!listModified) {
 				setResult(ACTIVE_PLUGINS_LIST_MODIFIED);
@@ -66,10 +69,12 @@ public class PluginsActivity extends OsmandListActivity {
 		}
 	}
 
-	protected class PluginsListAdapter extends ArrayAdapter<OsmandPlugin> {
+	protected class PluginsListAdapter extends ArrayAdapter<Object> {
 
 		PluginsListAdapter() {
-			super(PluginsActivity.this, R.layout.plugins_list_item, OsmandPlugin.getVisiblePlugins());
+			super(PluginsActivity.this, R.layout.plugins_list_item, new ArrayList<>());
+			addAll(getMyApplication().getAidlApi().getConnectedApps());
+			addAll(OsmandPlugin.getVisiblePlugins());
 		}
 
 		@NonNull
@@ -80,50 +85,75 @@ public class PluginsActivity extends OsmandListActivity {
 				view = getLayoutInflater().inflate(R.layout.plugins_list_item, parent, false);
 			}
 
-			final OsmandPlugin plugin = getItem(position);
+			final Object item = getItem(position);
 
-			view.setTag(plugin);
+			boolean active = false;
+			int logoContDescId = R.string.shared_string_disable;
+			String name = "";
+			String description = "";
 
 			ImageButton pluginLogo = (ImageButton) view.findViewById(R.id.plugin_logo);
-			pluginLogo.setImageResource(plugin.getLogoResourceId());
-			if (plugin.isActive()) {
+			ImageView pluginOptions = (ImageView) view.findViewById(R.id.plugin_options);
+
+			if (item instanceof ConnectedApp) {
+				final ConnectedApp app = (ConnectedApp) item;
+				active = app.isEnabled();
+				if (!active) {
+					logoContDescId = R.string.shared_string_enable;
+				}
+				name = app.getName();
+				description = getString(R.string.third_party_application);
+				pluginLogo.setImageDrawable(app.getIcon());
+				pluginLogo.setOnClickListener(null);
+				pluginOptions.setVisibility(View.GONE);
+				pluginOptions.setOnClickListener(null);
+				view.setTag(null);
+			} else if (item instanceof OsmandPlugin) {
+				final OsmandPlugin plugin = (OsmandPlugin) item;
+				active = plugin.isActive();
+				if (!active) {
+					logoContDescId = plugin.needsInstallation()
+							? R.string.access_shared_string_not_installed : R.string.shared_string_enable;
+				}
+				name = plugin.getName();
+				description = plugin.getDescription();
+				pluginLogo.setImageResource(plugin.getLogoResourceId());
+				pluginLogo.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						if (plugin.isActive() || !plugin.needsInstallation()) {
+							enableDisablePlugin(plugin, !plugin.isActive());
+						}
+					}
+				});
+				pluginOptions.setVisibility(View.VISIBLE);
+				pluginOptions.setImageDrawable(getMyApplication().getUIUtilities().getThemedIcon(R.drawable.ic_overflow_menu_white));
+				pluginOptions.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						showOptionsMenu(v, plugin);
+					}
+				});
+				view.setTag(plugin);
+			}
+
+			pluginLogo.setContentDescription(getString(logoContDescId));
+			if (active) {
 				pluginLogo.setBackgroundResource(R.drawable.bg_plugin_logo_enabled);
-				pluginLogo.setContentDescription(getString(R.string.shared_string_disable));
 			} else {
-				TypedArray attributes = getTheme().obtainStyledAttributes(
-						new int[]{R.attr.bg_plugin_logo_disabled});
+				TypedArray attributes = getTheme().obtainStyledAttributes(new int[]{R.attr.bg_plugin_logo_disabled});
 				pluginLogo.setBackgroundDrawable(attributes.getDrawable(0));
-				pluginLogo.setContentDescription(getString(plugin.needsInstallation() ? R.string.access_shared_string_not_installed : R.string.shared_string_enable));
 				attributes.recycle();
 			}
-			pluginLogo.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					if (!plugin.isActive() && plugin.needsInstallation()) {
-						// nothing
-					} else {
-						enableDisablePlugin(plugin, !plugin.isActive());
-					}
-				}
-			});
 
 			TextView pluginName = (TextView) view.findViewById(R.id.plugin_name);
-			pluginName.setText(plugin.getName());
-			pluginName.setContentDescription(plugin.getName() + " " + getString(plugin.isActive()
+			pluginName.setText(name);
+			pluginName.setContentDescription(name + " " + getString(active
 					? R.string.item_checked
 					: R.string.item_unchecked));
 
 			TextView pluginDescription = (TextView) view.findViewById(R.id.plugin_description);
-			pluginDescription.setText(plugin.getDescription());
-
-			ImageView pluginOptions = (ImageView) view.findViewById(R.id.plugin_options);
-			pluginOptions.setImageDrawable(getMyApplication().getUIUtilities().getThemedIcon(R.drawable.ic_overflow_menu_white));
-			pluginOptions.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					showOptionsMenu(v, plugin);
-				}
-			});
+			pluginDescription.setText(description);
 
 			return view;
 		}

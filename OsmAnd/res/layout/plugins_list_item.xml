@@ -12,10 +12,12 @@
         android:id="@+id/plugin_logo"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        android:layout_margin="8dp"
-        android:background="@drawable/bg_plugin_logo_enabled"
         android:layout_gravity="center"
-        android:scaleType="center"
+        android:layout_margin="8dp"
+        android:adjustViewBounds="true"
+        android:background="@drawable/bg_plugin_logo_enabled"
+        android:padding="12dp"
+        android:scaleType="fitCenter"
         tools:src="@drawable/ic_extension_dark" />
 
     <LinearLayout
