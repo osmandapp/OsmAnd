@@ -90,10 +90,10 @@ public class PluginsActivity extends OsmandListActivity {
 			boolean active = false;
 			int logoContDescId = R.string.shared_string_disable;
 			String name = "";
-			String description = "";
 
 			ImageButton pluginLogo = (ImageButton) view.findViewById(R.id.plugin_logo);
 			ImageView pluginOptions = (ImageView) view.findViewById(R.id.plugin_options);
+			TextView pluginDescription = (TextView) view.findViewById(R.id.plugin_description);
 
 			if (item instanceof ConnectedApp) {
 				final ConnectedApp app = (ConnectedApp) item;
@@ -102,7 +102,7 @@ public class PluginsActivity extends OsmandListActivity {
 					logoContDescId = R.string.shared_string_enable;
 				}
 				name = app.getName();
-				description = getString(R.string.third_party_application);
+				pluginDescription.setText(R.string.third_party_application);
 				pluginLogo.setImageDrawable(app.getIcon());
 				pluginLogo.setOnClickListener(null);
 				pluginOptions.setVisibility(View.GONE);
@@ -116,7 +116,7 @@ public class PluginsActivity extends OsmandListActivity {
 							? R.string.access_shared_string_not_installed : R.string.shared_string_enable;
 				}
 				name = plugin.getName();
-				description = plugin.getDescription();
+				pluginDescription.setText(plugin.getDescription());
 				pluginLogo.setImageResource(plugin.getLogoResourceId());
 				pluginLogo.setOnClickListener(new View.OnClickListener() {
 					@Override
@@ -151,9 +151,6 @@ public class PluginsActivity extends OsmandListActivity {
 			pluginName.setContentDescription(name + " " + getString(active
 					? R.string.item_checked
 					: R.string.item_unchecked));
-
-			TextView pluginDescription = (TextView) view.findViewById(R.id.plugin_description);
-			pluginDescription.setText(description);
 
 			return view;
 		}
