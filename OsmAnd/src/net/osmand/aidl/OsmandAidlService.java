@@ -108,7 +108,6 @@ public class OsmandAidlService extends Service {
 	@Override
 	public void onCreate() {
 		super.onCreate();
-		getApp().getAidlApi().loadConnectedApps();
 		callbacks = new ConcurrentHashMap<>();
 	}
 

@@ -8,7 +8,9 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -80,6 +82,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -157,6 +160,7 @@ public class OsmandAidlApi {
 
 	public OsmandAidlApi(OsmandApplication app) {
 		this.app = app;
+		loadConnectedApps();
 	}
 
 	public void onCreateMapActivity(MapActivity mapActivity) {
@@ -319,7 +323,7 @@ public class OsmandAidlApi {
 				}
 			}
 		};
-		registerReceiver(removeMapWidgetReceiver, mapActivity, AIDL_REMOVE_MAP_WIDGET);	
+		registerReceiver(removeMapWidgetReceiver, mapActivity, AIDL_REMOVE_MAP_WIDGET);
 	}
 
 	public void registerWidgetControls(MapActivity mapActivity) {
@@ -1590,10 +1594,27 @@ public class OsmandAidlApi {
 		return res;
 	}
 
+	public List<ConnectedApp> getConnectedApps() {
+		List<ConnectedApp> res = new ArrayList<>(connectedApps.size());
+		PackageManager pm = app.getPackageManager();
+		for (ConnectedApp app : connectedApps.values()) {
+			try {
+				ApplicationInfo ai = pm.getPackageInfo(app.pack, 0).applicationInfo;
+				app.name = ai.loadLabel(pm).toString();
+				app.icon = ai.loadIcon(pm);
+				res.add(app);
+			} catch (PackageManager.NameNotFoundException e) {
+				// ignore
+			}
+		}
+		Collections.sort(res);
+		return res;
+	}
+
 	boolean isAppEnabled(@NonNull String pack) {
 		ConnectedApp app = connectedApps.get(pack);
 		if (app == null) {
-			app = new ConnectedApp("", true);
+			app = new ConnectedApp("", true, pack);
 			connectedApps.put(pack, app);
 			saveConnectedApps();
 		}
@@ -1616,7 +1637,7 @@ public class OsmandAidlApi {
 		}
 	}
 
-	void loadConnectedApps() {
+	private void loadConnectedApps() {
 		try {
 			JSONObject apps = new JSONObject(app.getSettings().API_CONNECTED_APPS_JSON.get());
 			for (Iterator<String> it = apps.keys(); it.hasNext(); ) {
@@ -1624,7 +1645,8 @@ public class OsmandAidlApi {
 				JSONObject app = apps.getJSONObject(pack);
 				connectedApps.put(pack, new ConnectedApp(
 						app.optString(ConnectedApp.DESCRIPTION_KEY, ""),
-						app.optBoolean(ConnectedApp.ENABLED_KEY, true)
+						app.optBoolean(ConnectedApp.ENABLED_KEY, true),
+						pack
 				));
 			}
 		} catch (JSONException e) {
@@ -1632,17 +1654,29 @@ public class OsmandAidlApi {
 		}
 	}
 
-	private static class ConnectedApp {
+	public static class ConnectedApp implements Comparable<ConnectedApp> {
 
 		static final String DESCRIPTION_KEY = "description";
 		static final String ENABLED_KEY = "enabled";
 
 		private String description;
 		private boolean enabled;
+		private String pack;
+		private String name;
+		private Drawable icon;
 
-		ConnectedApp(String description, boolean enabled) {
+		ConnectedApp(String description, boolean enabled, String pack) {
 			this.description = description;
 			this.enabled = enabled;
+			this.pack = pack;
+		}
+
+		@Override
+		public int compareTo(@NonNull ConnectedApp app) {
+			if (name != null && app.name != null) {
+				return name.compareTo(app.name);
+			}
+			return 0;
 		}
 	}
 
