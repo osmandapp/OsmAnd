@@ -581,10 +581,10 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 					setOnClickListener {
 						val chatNextAddTime = settings.getChatNextAddActiveTime(chat.id)
 						val newLivePeriod = settings.getChatLiveMessageExpireTime(chat.id) + settings.getChatAddActiveTime(chat.id)
-						settings.shareLocationToChat(chat.id, false)
-						telegramHelper.stopSendingLiveLocationToChat(chat.id)
 						settings.shareLocationToChat(chat.id, true, newLivePeriod, chatNextAddTime)
-						app.forceUpdateMyLocation()
+						telegramHelper.pauseSendingLiveLocationToChat(chat.id)
+						telegramHelper.deleteLiveLocationMessage(chat.id)
+						telegramHelper.resumeSendingLiveLocationToChat(chat.id)
 						notifyItemChanged(position)
 					}
 				}
