@@ -94,8 +94,7 @@ class SettingsDialogFragment : BaseDialogFragment() {
 		container = mainView.findViewById(R.id.share_as_container)
 		val user = telegramHelper.getCurrentUser()
 		if (user != null) {
-			val name = TelegramUiHelper.getUserName(user)
-			addItemToContainer(inflater, container, name, name)
+			addItemToContainer(inflater, container, user.id.toString(),  TelegramUiHelper.getUserName(user))
 		}
 		settings.shareDevicesIds.forEach {
 			addItemToContainer(inflater, container, it.key, it.value)

@@ -43,7 +43,7 @@ class ShareLocationHelper(private val app: TelegramApplication) {
 			if (chatLivePeriods.isNotEmpty()) {
 				val user = app.telegramHelper.getCurrentUser()
 				val sharingMode = app.settings.currentSharingMode
-				if (user != null && sharingMode == TelegramUiHelper.getUserName(user)) {
+				if (user != null && sharingMode == user.id.toString()) {
 					app.telegramHelper.sendLiveLocationMessage(chatLivePeriods, location.latitude, location.longitude)
 				} else if (sharingMode.isNotEmpty()) {
 					val url = "https://live.osmand.net/device/$sharingMode/send?lat=${location.latitude}&lon=${location.longitude}"

@@ -22,7 +22,6 @@ import net.osmand.telegram.TelegramApplication
 import net.osmand.telegram.helpers.OsmandAidlHelper
 import net.osmand.telegram.helpers.TelegramHelper
 import net.osmand.telegram.helpers.TelegramHelper.*
-import net.osmand.telegram.helpers.TelegramUiHelper
 import net.osmand.telegram.ui.LoginDialogFragment.LoginDialogType
 import net.osmand.telegram.ui.MyLocationTabFragment.ActionButtonsListener
 import net.osmand.telegram.ui.views.LockableViewPager
@@ -219,7 +218,7 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 					if (user != null) {
 						OsmandApiUtils.updateSharingDevices(app, user.id)
 						if (settings.currentSharingMode.isEmpty()) {
-							settings.currentSharingMode = TelegramUiHelper.getUserName(user)
+							settings.currentSharingMode = user.id.toString()
 						}
 					}
 				}
