@@ -2481,4 +2481,13 @@
 	<string name="poi_historic_period_classical">Историјски период: класични (епоха 4., 374 посл.Х - 900 посл.Х)</string>
 	<string name="poi_historic_period_imperial">Историјски период: иперијални (епоха 5., 900 посл.Х - 1200 посл.Х)</string>
 
+	<string name="poi_historic_era_paleolithic">Историјска епоха: палеолитска (2,6 милиона год. - 10000 БП)</string>
+	<string name="poi_historic_era_mesolithic">Историјска епоха: мезолитска</string>
+	<string name="poi_historic_era_neolithic">Историјска епоха: неолитска</string>
+	<string name="poi_historic_era_chalcolithic">Историјска епоха: бакарно доба (4. - 3. миленијум пре.Х)</string>
+
+	<string name="poi_historic_stone">Историјски камен</string>
+	<string name="poi_stone_type_conciliation_cross">Тип: крст помирења</string>
+	<string name="poi_stone_type_coat_of_arms">Тип: грб</string>
+
 	</resources>
