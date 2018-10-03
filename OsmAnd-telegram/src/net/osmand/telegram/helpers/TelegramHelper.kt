@@ -614,7 +614,7 @@ class TelegramHelper private constructor() {
 		if (msgId != null && msgId != 0L) {
 			val array = LongArray(1)
 			array[0] = msgId
-			client?.send(TdApi.DeleteMessages(chatId, arrayOf(msgId), true), UpdatesHandler())
+			client?.send(TdApi.DeleteMessages(chatId, array, true), UpdatesHandler())
 		}
 		needRefreshActiveLiveLocationMessages = true
 	}
