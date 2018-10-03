@@ -626,6 +626,7 @@ public class SearchCoreFactory {
 		private TIntArrayList customPoiFiltersPriorites = new TIntArrayList();
 		private MapPoiTypes types;
 		private List<AbstractPoiType> foundPoiTypes = new ArrayList<>();
+		private SearchPhrase lastSearchedPhrase;
 
 		public SearchAmenityTypesAPI(MapPoiTypes types) {
 			super(ObjectType.POI_TYPE);
@@ -638,6 +639,14 @@ public class SearchCoreFactory {
 
 		public boolean hasFoundPoiTypes() {
 			return foundPoiTypes.size() > 0;
+		}
+
+		public SearchPhrase getLastSearchedPhrase() {
+			return lastSearchedPhrase;
+		}
+
+		public void setLastSearchedPhrase(SearchPhrase lastSearchedPhrase) {
+			this.lastSearchedPhrase = lastSearchedPhrase;
 		}
 
 		public void clearCustomFilters() {
@@ -702,29 +711,31 @@ public class SearchCoreFactory {
 				}
 			}
 			foundPoiTypes = new ArrayList<>(results);
+			lastSearchedPhrase = phrase;
 
-			for (AbstractPoiType pt : results) {
-				SearchResult res = new SearchResult(phrase);
-				res.localeName = pt.getTranslation();
-				res.object = pt;
-				res.priority = SEARCH_AMENITY_TYPE_PRIORITY;
-				res.priorityDistance = 0;
-				res.objectType = ObjectType.POI_TYPE;
-				resultMatcher.publish(res);
-			}
-			for (int i = 0; i < customPoiFilters.size(); i++) {
-				CustomSearchPoiFilter csf = customPoiFilters.get(i);
-				int p = customPoiFiltersPriorites.get(i);
-				if (!phrase.isUnknownSearchWordPresent() || nm.matches(csf.getName())) {
+			if (resultMatcher != null) {
+				for (AbstractPoiType pt : results) {
 					SearchResult res = new SearchResult(phrase);
-					res.localeName = csf.getName();
-					res.object = csf;
-					res.priority = SEARCH_AMENITY_TYPE_PRIORITY + p;
+					res.localeName = pt.getTranslation();
+					res.object = pt;
+					res.priority = SEARCH_AMENITY_TYPE_PRIORITY;
+					res.priorityDistance = 0;
 					res.objectType = ObjectType.POI_TYPE;
 					resultMatcher.publish(res);
 				}
+				for (int i = 0; i < customPoiFilters.size(); i++) {
+					CustomSearchPoiFilter csf = customPoiFilters.get(i);
+					int p = customPoiFiltersPriorites.get(i);
+					if (!phrase.isUnknownSearchWordPresent() || nm.matches(csf.getName())) {
+						SearchResult res = new SearchResult(phrase);
+						res.localeName = csf.getName();
+						res.object = csf;
+						res.priority = SEARCH_AMENITY_TYPE_PRIORITY + p;
+						res.objectType = ObjectType.POI_TYPE;
+						resultMatcher.publish(res);
+					}
+				}
 			}
-
 			return true;
 		}
 
@@ -810,54 +821,42 @@ public class SearchCoreFactory {
 				} else {
 					throw new UnsupportedOperationException();
 				}
-				QuadRect bbox = phrase.getRadiusBBoxToSearch(BBOX_RADIUS);
-				List<BinaryMapIndexReader> oo = phrase.getOfflineIndexes();
-				Set<String> searchedPois = new TreeSet<>();
-				for (BinaryMapIndexReader o : oo) {
-					ResultMatcher<Amenity> rm = getResultMatcher(phrase, resultMatcher, null, o, searchedPois);
-					if (obj instanceof CustomSearchPoiFilter) {
-						rm = ((CustomSearchPoiFilter) obj).wrapResultMatcher(rm);
-					}
-					searchPoi(phrase, resultMatcher, ptf, bbox, o, rm);
+				searchPoi(phrase, resultMatcher, obj, null, ptf);
+			} else if (searchAmenityTypesAPI != null) {
+				if (searchAmenityTypesAPI.lastSearchedPhrase == null
+						|| !searchAmenityTypesAPI.lastSearchedPhrase.getUnknownSearchPhrase().equals(phrase.getUnknownSearchPhrase())) {
+					searchAmenityTypesAPI.search(phrase, null);
 				}
-			} else {
 				List<AbstractPoiType> poiTypes = searchAmenityTypesAPI.getFoundPoiTypes();
 				for (AbstractPoiType pt : poiTypes) {
 					SearchPoiTypeFilter ptf = getPoiTypeFilter(pt);
-					QuadRect bbox = phrase.getRadiusBBoxToSearch(BBOX_RADIUS);
-					String customName = null;
-					NameStringMatcher nm = phrase.getNameStringMatcher(phrase.getUnknownSearchWord(), true);
-					String unknownSearchPhrase = phrase.getUnknownSearchPhrase();
-					String enTranslation = pt.getEnTranslation();
-					String translation = pt.getTranslation();
-					String synonyms = pt.getSynonyms();
-					if (unknownSearchPhrase.length() > enTranslation.length() && nm.matches(enTranslation)) {
-						customName = unknownSearchPhrase.substring(enTranslation.length()).trim();
-					} else if (unknownSearchPhrase.length() > translation.length() && nm.matches(translation)) {
-						customName = unknownSearchPhrase.substring(translation.length()).trim();
-					} else if (unknownSearchPhrase.length() > synonyms.length() && nm.matches(synonyms)) {
-						customName = unknownSearchPhrase.substring(synonyms.length()).trim();
-					}
-					if (!Algorithms.isEmpty(customName)) {
-						List<BinaryMapIndexReader> oo = phrase.getOfflineIndexes();
-						Set<String> searchedPois = new TreeSet<>();
-						for (BinaryMapIndexReader o : oo) {
-							ResultMatcher<Amenity> rm = getResultMatcher(phrase, resultMatcher, customName, o, searchedPois);
-							searchPoi(phrase, resultMatcher, ptf, bbox, o, rm);
-						}
+					String customName = phrase.getPoiNameFilter(pt);
+					if (customName != null) {
+						phrase.setUnknownSearchWordPoiType(pt);
+						searchPoi(phrase, resultMatcher, null, customName, ptf);
+						break;
 					}
 				}
 			}
 			return true;
 		}
 
-		private void searchPoi(SearchPhrase phrase, SearchResultMatcher resultMatcher, SearchPoiTypeFilter ptf, QuadRect bbox, BinaryMapIndexReader o, ResultMatcher<Amenity> rm) throws IOException {
-			SearchRequest<Amenity> req = BinaryMapIndexReader.buildSearchPoiRequest(
-					(int) bbox.left, (int) bbox.right,
-					(int) bbox.top, (int) bbox.bottom, -1, ptf,
-					rm);
-			o.searchPoi(req);
-			resultMatcher.apiSearchRegionFinished(this, o, phrase);
+		private void searchPoi(SearchPhrase phrase, SearchResultMatcher resultMatcher, Object obj, String customName, SearchPoiTypeFilter ptf) throws IOException {
+			QuadRect bbox = phrase.getRadiusBBoxToSearch(BBOX_RADIUS);
+			List<BinaryMapIndexReader> oo = phrase.getOfflineIndexes();
+			Set<String> searchedPois = new TreeSet<>();
+			for (BinaryMapIndexReader o : oo) {
+				ResultMatcher<Amenity> rm = getResultMatcher(phrase, resultMatcher, customName, o, searchedPois);
+				if (obj instanceof CustomSearchPoiFilter) {
+					rm = ((CustomSearchPoiFilter) obj).wrapResultMatcher(rm);
+				}
+				SearchRequest<Amenity> req = BinaryMapIndexReader.buildSearchPoiRequest(
+						(int) bbox.left, (int) bbox.right,
+						(int) bbox.top, (int) bbox.bottom, -1, ptf,
+						rm);
+				o.searchPoi(req);
+				resultMatcher.apiSearchRegionFinished(this, o, phrase);
+			}
 		}
 
 		private ResultMatcher<Amenity> getResultMatcher(final SearchPhrase phrase, final SearchResultMatcher resultMatcher,

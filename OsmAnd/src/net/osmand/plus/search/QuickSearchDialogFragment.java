@@ -342,6 +342,13 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 									filter = app.getPoiFilters().getNominatimPOIFilter();
 									filter.setFilterByName(searchPhrase.getUnknownSearchPhrase());
 									filter.clearCurrentResults();
+								} else if (searchPhrase.hasUnknownSearchWordPoiType()) {
+									AbstractPoiType pt = searchPhrase.getUnknownSearchWordPoiType();
+									filter = new PoiUIFilter(pt, app, "");
+									String customName = searchPhrase.getPoiNameFilter();
+									if (!Algorithms.isEmpty(customName)) {
+										filter.setFilterByName(customName);
+									}
 								} else {
 									filter = app.getPoiFilters().getSearchByNamePOIFilter();
 									if (!Algorithms.isEmpty(searchPhrase.getUnknownSearchWord())) {
