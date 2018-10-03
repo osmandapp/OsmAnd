@@ -95,40 +95,10 @@ class SettingsDialogFragment : BaseDialogFragment() {
 		val user = telegramHelper.getCurrentUser()
 		if (user != null) {
 			val name = TelegramUiHelper.getUserName(user)
-			inflater.inflate(R.layout.item_with_rb_and_btn, container, false).apply {
-				findViewById<TextView>(R.id.title).text = name
-				findViewById<View>(R.id.primary_btn).visibility = View.GONE
-				if (settings.currentSharingMode.isEmpty()) {
-					settings.currentSharingMode = name
-				}
-				findViewById<RadioButton>(R.id.radio_button).apply {
-					visibility = View.VISIBLE
-					isChecked = name == settings.currentSharingMode
-				}
-				setOnClickListener {
-					settings.currentSharingMode = name
-					updateSelectedSharingMode()
-				}
-				tag = name
-				container.addView(this)
-			}
+			addItemToContainer(inflater, container, name, name)
 		}
 		settings.shareDevicesIds.forEach {
-			val title = it.key
-			inflater.inflate(R.layout.item_with_rb_and_btn, container, false).apply {
-				findViewById<TextView>(R.id.title).text = it.value
-				findViewById<View>(R.id.primary_btn).visibility = View.GONE
-				findViewById<RadioButton>(R.id.radio_button).apply {
-					visibility = View.VISIBLE
-					isChecked = title == settings.currentSharingMode
-				}
-				setOnClickListener {
-					settings.currentSharingMode = title
-					updateSelectedSharingMode()
-				}
-				tag = title
-				container.addView(this)
-			}
+			addItemToContainer(inflater, container, it.key, it.value)
 		}
 
 		if (user != null) {
@@ -167,6 +137,23 @@ class SettingsDialogFragment : BaseDialogFragment() {
 				logoutTelegram()
 				dismiss()
 			}
+		}
+	}
+
+	private fun addItemToContainer(inflater: LayoutInflater, container: ViewGroup, tag: String, title: String) {
+		inflater.inflate(R.layout.item_with_rb_and_btn, container, false).apply {
+			findViewById<TextView>(R.id.title).text = title
+			findViewById<View>(R.id.primary_btn).visibility = View.GONE
+			findViewById<RadioButton>(R.id.radio_button).apply {
+				visibility = View.VISIBLE
+				isChecked = tag == settings.currentSharingMode
+			}
+			setOnClickListener {
+				settings.currentSharingMode = tag
+				updateSelectedSharingMode()
+			}
+			this.tag = tag
+			container.addView(this)
 		}
 	}
 	
