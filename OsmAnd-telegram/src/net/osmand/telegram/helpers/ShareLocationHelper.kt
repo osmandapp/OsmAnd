@@ -3,6 +3,7 @@ package net.osmand.telegram.helpers
 import net.osmand.Location
 import net.osmand.telegram.TelegramApplication
 import net.osmand.telegram.notifications.TelegramNotification.NotificationType
+import net.osmand.telegram.utils.AndroidNetworkUtils
 
 class ShareLocationHelper(private val app: TelegramApplication) {
 
@@ -40,7 +41,14 @@ class ShareLocationHelper(private val app: TelegramApplication) {
 		if (location != null && app.isInternetConnectionAvailable) {
 			val chatLivePeriods = app.settings.getChatLivePeriods()
 			if (chatLivePeriods.isNotEmpty()) {
-				app.telegramHelper.sendLiveLocationMessage(chatLivePeriods, location.latitude, location.longitude)
+				val user = app.telegramHelper.getCurrentUser()
+				val sharingMode = app.settings.currentSharingMode
+				if (user != null && sharingMode == user.id.toString()) {
+					app.telegramHelper.sendLiveLocationMessage(chatLivePeriods, location.latitude, location.longitude)
+				} else if (sharingMode.isNotEmpty()) {
+					val url = "https://live.osmand.net/device/$sharingMode/send?lat=${location.latitude}&lon=${location.longitude}"
+					AndroidNetworkUtils.sendRequestAsync(url, null)
+				}
 			}
 			lastLocationMessageSentTime = System.currentTimeMillis()
 		}

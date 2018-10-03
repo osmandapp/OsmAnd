@@ -37,6 +37,8 @@ private const val SETTINGS_NAME = "osmand_telegram_settings"
 private const val SHARE_LOCATION_CHATS_KEY = "share_location_chats"
 private const val HIDDEN_ON_MAP_CHATS_KEY = "hidden_on_map_chats"
 
+private const val SHARING_MODE_KEY = "current_sharing_mode"
+
 private const val METRICS_CONSTANTS_KEY = "metrics_constants"
 private const val SPEED_CONSTANTS_KEY = "speed_constants"
 
@@ -61,6 +63,9 @@ class TelegramSettings(private val app: TelegramApplication) {
 
 	private var shareLocationChats: Set<Long> = emptySet()
 	private var hiddenOnMapChats: Set<Long> = emptySet()
+
+	var shareDevicesIds = mutableMapOf<String, String>()
+	var currentSharingMode = ""
 
 	var metricsConstants = MetricsConstants.KILOMETERS_AND_METERS
 	var speedConstants = SpeedConstants.KILOMETERS_PER_HOUR
@@ -137,6 +142,13 @@ class TelegramSettings(private val app: TelegramApplication) {
 		this.shareLocationChats = shareLocationChats.toHashSet()
 	}
 
+	fun updateShareDevicesIds(list: List<DeviceBot>) {
+		shareDevicesIds.clear()
+		list.forEach {
+			shareDevicesIds[it.externalId] = it.deviceName
+		}
+	}
+	
 	fun getChatLivePeriod(chatId: Long) = chatLivePeriods[chatId]
 
 	fun getChatAddActiveTime(chatId: Long) = chatShareAddActiveTime[chatId] ?: MESSAGE_ADD_ACTIVE_TIME_VALUES_SEC[0]
@@ -232,6 +244,8 @@ class TelegramSettings(private val app: TelegramApplication) {
 		}
 		edit.putStringSet(HIDDEN_ON_MAP_CHATS_KEY, hiddenChatsSet)
 
+		edit.putString(SHARING_MODE_KEY, currentSharingMode)
+
 		edit.putString(METRICS_CONSTANTS_KEY, metricsConstants.name)
 		edit.putString(SPEED_CONSTANTS_KEY, speedConstants.name)
 
@@ -276,6 +290,8 @@ class TelegramSettings(private val app: TelegramApplication) {
 		staleLocTime = prefs.getLong(STALE_LOC_TIME_KEY, staleLocDef)
 		val locHistoryDef = LOC_HISTORY_VALUES_SEC[LOC_HISTORY_DEFAULT_INDEX]
 		locHistoryTime = prefs.getLong(LOC_HISTORY_TIME_KEY, locHistoryDef)
+
+		currentSharingMode = prefs.getString(SHARING_MODE_KEY, "")
 
 		appToConnectPackage = prefs.getString(APP_TO_CONNECT_PACKAGE_KEY, "")
 
@@ -429,5 +445,14 @@ class TelegramSettings(private val app: TelegramApplication) {
 		);
 
 		fun isSortByGroup() = this == SORT_BY_GROUP
+	}
+
+	class DeviceBot {
+		var id: Long = -1
+		var userId: Long = -1
+		var chatId: Long = -1
+		var deviceName: String = ""
+		var externalId: String = ""
+		var data: String = ""
 	}
 }

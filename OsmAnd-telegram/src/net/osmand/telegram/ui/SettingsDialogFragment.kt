@@ -9,10 +9,7 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.ImageView
-import android.widget.RadioButton
-import android.widget.TextView
+import android.widget.*
 import net.osmand.telegram.R
 import net.osmand.telegram.TelegramSettings
 import net.osmand.telegram.TelegramSettings.DurationPref
@@ -94,7 +91,15 @@ class SettingsDialogFragment : BaseDialogFragment() {
 		}
 		updateSelectedAppConn()
 
+		container = mainView.findViewById(R.id.share_as_container)
 		val user = telegramHelper.getCurrentUser()
+		if (user != null) {
+			addItemToContainer(inflater, container, user.id.toString(),  TelegramUiHelper.getUserName(user))
+		}
+		settings.shareDevicesIds.forEach {
+			addItemToContainer(inflater, container, it.key, it.value)
+		}
+
 		if (user != null) {
 			TelegramUiHelper.setupPhoto(
 				app,
@@ -133,6 +138,23 @@ class SettingsDialogFragment : BaseDialogFragment() {
 			}
 		}
 	}
+
+	private fun addItemToContainer(inflater: LayoutInflater, container: ViewGroup, tag: String, title: String) {
+		inflater.inflate(R.layout.item_with_rb_and_btn, container, false).apply {
+			findViewById<TextView>(R.id.title).text = title
+			findViewById<View>(R.id.primary_btn).visibility = View.GONE
+			findViewById<RadioButton>(R.id.radio_button).apply {
+				visibility = View.VISIBLE
+				isChecked = tag == settings.currentSharingMode
+			}
+			setOnClickListener {
+				settings.currentSharingMode = tag
+				updateSelectedSharingMode()
+			}
+			this.tag = tag
+			container.addView(this)
+		}
+	}
 	
 	private fun showPopupMenu(pref: DurationPref, valueView: TextView) {
 		val menuList = pref.getMenuItems()
@@ -159,6 +181,17 @@ class SettingsDialogFragment : BaseDialogFragment() {
 				getChildAt(i).apply {
 					findViewById<RadioButton>(R.id.radio_button).isChecked =
 							tag == settings.appToConnectPackage
+				}
+			}
+		}
+	}
+
+	private fun updateSelectedSharingMode() {
+		view?.findViewById<ViewGroup>(R.id.share_as_container)?.apply {
+			for (i in 0 until childCount) {
+				getChildAt(i).apply {
+					findViewById<RadioButton>(R.id.radio_button).isChecked =
+							tag == settings.currentSharingMode
 				}
 			}
 		}

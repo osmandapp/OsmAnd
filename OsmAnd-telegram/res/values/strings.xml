@@ -1,4 +1,10 @@
 <resources>
+	<string name="shared_string_save">Save</string>
+	<string name="add_device_descr">Enter your device id that you can find at https://live.osmand.net/device/ID</string>
+	<string name="device_id">Device id</string>
+	<string name="add_device">Add device</string>
+	<string name="share_location_as_descr">The option allow you to share this device location, or location of custom added via API devices.</string>
+	<string name="share_location_as">Share location as</string>
 	<string name="live_now_description">Contacts and groups who share their location with you.</string>
 	<string name="logout_from_osmand_telegram_descr">Are you sure you want to log out of OsmAnd Telegram? After that, you will not be able to send your position and see the locations of your contacts on the map in OsmAnd.</string>
 	<string name="logout_from_osmand_telegram">Logout from OsmAnd Telegram?</string>
