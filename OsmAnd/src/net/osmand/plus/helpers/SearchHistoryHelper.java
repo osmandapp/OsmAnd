@@ -45,15 +45,12 @@ public class SearchHistoryHelper {
 	}
 
 	public void addNewItemToHistory(AbstractPoiType pt) {
-		PointDescription pd = new PointDescription(PointDescription.POINT_TYPE_POI_TYPE, pt.getKeyName());
-		addNewItemToHistory(new HistoryEntry(0, 0, pd));
+		addNewItemToHistory(new HistoryEntry(0, 0, createPointDescription(pt)));
 	}
 
 	public void addNewItemToHistory(PoiUIFilter filter) {
-		String filterId = filter.getFilterId();
-		PointDescription pd = new PointDescription(PointDescription.POINT_TYPE_CUSTOM_POI_FILTER, filterId);
-		addNewItemToHistory(new HistoryEntry(0, 0, pd));
-		context.getPoiFilters().markHistory(filterId, true);
+		addNewItemToHistory(new HistoryEntry(0, 0, createPointDescription(filter)));
+		context.getPoiFilters().markHistory(filter.getFilterId(), true);
 	}
 
 	public List<HistoryEntry> getHistoryEntries(boolean onlyPoints) {
@@ -70,15 +67,36 @@ public class SearchHistoryHelper {
 		return res;
 	}
 
-	public void remove(HistoryEntry model) {
-		HistoryItemDBHelper helper = checkLoadedEntries();
-		if (helper.remove(model)) {
-			PointDescription pd = model.getName();
+	private PointDescription createPointDescription(AbstractPoiType pt) {
+		return new PointDescription(PointDescription.POINT_TYPE_POI_TYPE, pt.getKeyName());
+	}
+
+	private PointDescription createPointDescription(PoiUIFilter filter) {
+		return new PointDescription(PointDescription.POINT_TYPE_CUSTOM_POI_FILTER, filter.getFilterId());
+	}
+
+	public void remove(Object item) {
+		PointDescription pd = null;
+		if (item instanceof HistoryEntry) {
+			pd = ((HistoryEntry) item).getName();
+		} else if (item instanceof AbstractPoiType) {
+			pd = createPointDescription((AbstractPoiType) item);
+		} else if (item instanceof PoiUIFilter) {
+			pd = createPointDescription((PoiUIFilter) item);
+		}
+		if (pd != null) {
+			remove(pd);
+		}
+	}
+
+	private void remove(PointDescription pd) {
+		HistoryEntry model = mp.get(pd);
+		if (model != null && checkLoadedEntries().remove(model)) {
 			if (pd.isCustomPoiFilter()) {
 				context.getPoiFilters().markHistory(pd.getName(), false);
 			}
 			loadedEntries.remove(model);
-			mp.remove(model.getName());
+			mp.remove(pd);
 		}
 	}
 

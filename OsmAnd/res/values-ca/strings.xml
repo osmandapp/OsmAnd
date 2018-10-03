@@ -1883,10 +1883,10 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="help_us_to_improve_menu_group">Ajudeu a millorar OsmAnd</string>
     <string name="other_menu_group">Altres</string>
     <string name="plugins_menu_group">Connectors</string>
-    <string name="first_usage_item">Primer ús</string>
+    <string name="first_usage_item">Primera utilització</string>
     <string name="first_usage_item_description">Com baixar mapes i fixar la configuració bàsica.</string>
     <string name="navigation_item_description">Configuració de la navegació.</string>
-    <string name="planning_trip_item">Planeja un viatge</string>
+    <string name="planning_trip_item">Planificació d\'un viatge</string>
     <string name="faq_item">PMF</string>
     <string name="faq_item_description">Preguntes més freqüents</string>
     <string name="map_viewing_item">Visualització del mapa</string>

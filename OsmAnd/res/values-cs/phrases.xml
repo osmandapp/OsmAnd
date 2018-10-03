@@ -3783,4 +3783,56 @@
 	<string name="poi_climbing_length">Délka lezení</string>
 	<string name="poi_climbing_length_min">Lezení min. délka</string>
 	<string name="poi_climbing_length_max">Lezení max. délka</string>
+	<string name="poi_climbing_mixed_yes">Smíšené: ano</string>
+	<string name="poi_climbing_mixed_no">Smíšené: ne</string>
+	<string name="poi_climbing_rock_limestone">Lezecká skála: vápenec</string>
+	<string name="poi_climbing_rock_granite">Lezecká skála: žula</string>
+	<string name="poi_climbing_rock_sandstone">Lezecká skála: pískovec</string>
+	<string name="poi_climbing_rock_quartzite">Lezecká skála: křemenec</string>
+	<string name="poi_climbing_rock_gneiss">Lezecká skála: rula</string>
+	<string name="poi_climbing_rock_porphyry">Lezecká skála: porfyr</string>
+	<string name="poi_climbing_quality_solid">Kvalita skály: pevná</string>
+	<string name="poi_climbing_quality_fragile">Kvalita skály: křehká</string>
+	<string name="poi_climbing_orientation_n">Orientace stěny: S</string>
+	<string name="poi_climbing_orientation_ne">Orientace stěny: SV</string>
+	<string name="poi_climbing_orientation_e">Orientace stěny: V</string>
+	<string name="poi_climbing_orientation_se">Orientace stěny: JV</string>
+	<string name="poi_climbing_orientation_s">Orientace stěny: J</string>
+	<string name="poi_climbing_orientation_sw">Orientace stěny: JZ</string>
+	<string name="poi_climbing_orientation_w">Orientace stěny: Z</string>
+	<string name="poi_climbing_orientation_nw">Orientace stěny: SZ</string>
+	<string name="poi_climbing_routes">Lezecké trasy</string>
+
+	<string name="poi_circumference">Obvod</string>
+	<string name="poi_diameter_crown">Průměr koruny</string>
+
+	<string name="poi_meadow_agricultural">Typ: zemědělská</string>
+	<string name="poi_meadow_perpetual">Typ: stálá</string>
+	<string name="poi_meadow_transitional">Typ: přechodná</string>
+	<string name="poi_meadow_pasture">Typ: pastvina</string>
+
+	<string name="poi_frozen_food">Mražené potraviny</string>
+
+	<string name="poi_cannabis">Prodej konopí</string>
+
+	<string name="poi_flooring">Podlahy</string>
+	<string name="poi_pottery">Hrnčířství</string>
+
+	<string name="poi_whitewater_rapid_name">Název peřejí</string>
+
+	<string name="poi_outpost">Výdejna zboží</string>
+
+	<string name="poi_barbecue_grill">Gril: ano</string>
+
+	<string name="poi_amusement_arcade">Herní automaty</string>
+	<string name="poi_adult_gaming_centre">Herna</string>
+
+	<string name="poi_climbing_adventure">Lezecký park</string>
+
+	<string name="poi_via_ferrata">Zajištěná cesta (ferrata)</string>
+	<string name="poi_cable_number">Počet lan</string>
+	<string name="poi_glacier_type_icefall">Ledopád</string>
+	<string name="poi_glacier_type_remnant">Pozůstatek</string>
+	<string name="poi_ruins">Ruiny</string>
+
 	</resources>

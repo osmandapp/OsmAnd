@@ -1070,4 +1070,31 @@ Puntos</string>
     <string name="show_arrows_descr">Ver una o dos fleches qu\'indiquen la direición a los marcadores activos.</string>
     <string name="osmand_parking_am">AM</string>
     <string name="thank_you_for_feedback">Gracies pola to opinión</string>
+    <string name="search_street">Buscar una rúa</string>
+    <string name="start_search_from_city">Principiar la gueta dende la ciudá</string>
+    <string name="shared_string_restore">Restaurar</string>
+    <string name="keep_passed_markers_descr">Los marcadores añadíos como grupu de Favoritos o puntos de ruta GPX marcaos como Pasaos remanecerán nel mapa. Si\'l grupu nun ta activu, los marcadores desapaecerán del mapa.</string>
+    <string name="keep_passed_markers">Caltener los marcadores pasaos nel mapa</string>
+    <string name="more_transport_on_stop_hint">Hai más tresportes nesta parada.</string>
+    <string name="ask_for_location_permission">Pa siguir fai falta permitir a OsmAnd l\'accesu al allugamientu.</string>
+    <string name="poi_cannot_be_found">Nun pudo alcontrase\'l nodiu o la vía.</string>
+    <string name="search_no_results_feedback">¿Ensin resultaos na gueta? 
+\nComéntanoslo</string>
+    <string name="release_3_2_pre">"• Iguáu el fallu nel aniciu qu\'asocedía colos mapes en caráuteres non llatinos 
+\n 
+\n • Ameyoramientu nos problemes de velocidá de renderizáu nos preseos Android 8.0 
+\n 
+\n • Encontu pa editar oxetos poligonales (non servicios) 
+\n
+\n • Midir distancies: añadíu\'l botón Midir en Aiciones en el menú contestual "</string>
+    <string name="commiting_way">Unviando vía…</string>
+    <string name="increase_search_radius_to">Aumentar el radiu de gueta a %1$s</string>
+    <string name="send_search_query_description">Unviaremos la consulta de gueta: <b>«%1$s»</b>, asina como l\'allugamientu.<br/><br/> Nun collechamos información personal, sólo necesitamos datos de la gueta p\'ameyorar l\' algoritmu de la mesma.<br/></string>
+    <string name="send_search_query">¿Unviar la consulta de la gueta?</string>
+    <string name="shared_string_world">Mundu</string>
+    <string name="point_deleted">El puntu %1$s desanicióse</string>
+    <string name="coord_input_edit_point">Editar puntu</string>
+    <string name="coord_input_add_point">Añadir un puntu</string>
+    <string name="coord_input_save_as_track">Guardar como traza</string>
+    <string name="coord_input_save_as_track_descr">Añadisti %1$s puntos. Escribe un nome de ficheru y pulsia en «Guardar».</string>
     </resources>

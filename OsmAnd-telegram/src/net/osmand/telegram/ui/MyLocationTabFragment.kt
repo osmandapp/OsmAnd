@@ -30,8 +30,6 @@ private const val DEFAULT_CHAT = 0
 
 private const val ADAPTER_UPDATE_INTERVAL_MIL = 5 * 1000L // 5 sec
 
-private const val MESSAGE_ADD_ACTIVE_TIME_SEC = 30 * 60L // 30 min
-
 class MyLocationTabFragment : Fragment(), TelegramListener {
 
 	private var textMarginSmall: Int = 0
@@ -578,13 +576,14 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 				
 				holder.textInArea?.apply {
 					visibility = View.VISIBLE
-					text = "${getText(R.string.plus)} ${OsmandFormatter.getFormattedDuration(context!!,
-						MESSAGE_ADD_ACTIVE_TIME_SEC)}"
+					text = "${getText(R.string.plus)} ${OsmandFormatter.getFormattedDuration(
+						context!!, settings.getChatAddActiveTime(chat.id))}"
 					setOnClickListener {
-						val newLivePeriod = settings.getChatLiveMessageExpireTime(chat.id) + MESSAGE_ADD_ACTIVE_TIME_SEC
+						val chatNextAddTime = settings.getChatNextAddActiveTime(chat.id)
+						val newLivePeriod = settings.getChatLiveMessageExpireTime(chat.id) + settings.getChatAddActiveTime(chat.id)
 						settings.shareLocationToChat(chat.id, false)
 						telegramHelper.stopSendingLiveLocationToChat(chat.id)
-						settings.shareLocationToChat(chat.id, true, newLivePeriod)
+						settings.shareLocationToChat(chat.id, true, newLivePeriod, chatNextAddTime)
 						app.forceUpdateMyLocation()
 						notifyItemChanged(position)
 					}
@@ -592,7 +591,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 
 				holder.stopSharingDescr?.apply {
 					visibility = getStopSharingVisibility(expiresIn)
-					text = "${getText(R.string.expire_in)}:"
+					text = getText(R.string.expire_at)
 				}
 
 				holder.stopSharingFirstPart?.apply {
