@@ -667,7 +667,8 @@ public class SearchCoreFactory {
 				categories = types.getCategories(false);
 			}
 			List<AbstractPoiType> results = new ArrayList<AbstractPoiType>();
-			NameStringMatcher nm = phrase.getNameStringMatcher();
+			NameStringMatcher nm =
+					new NameStringMatcher(phrase.getUnknownSearchPhrase(), StringMatcherMode.CHECK_ONLY_STARTS_WITH_TRIM);
 			for (PoiFilter pf : topVisibleFilters) {
 				if (!phrase.isUnknownSearchWordPresent()
 						|| nm.matches(pf.getTranslation())
@@ -900,7 +901,7 @@ public class SearchCoreFactory {
 					res.preferredZoom = 17;
 					res.file = selected;
 					res.location = object.getLocation();
-					res.priority = hasCustomName ? SEARCH_AMENITY_TYPE_PRIORITY - 1 : SEARCH_AMENITY_BY_TYPE_PRIORITY;
+					res.priority = SEARCH_AMENITY_BY_TYPE_PRIORITY;
 					res.priorityDistance = 1;
 					res.objectType = ObjectType.POI;
 					resultMatcher.publish(res);
