@@ -71,6 +71,8 @@ class TelegramHelper private constructor() {
 	private val chats = ConcurrentHashMap<Long, TdApi.Chat>()
 	private val chatList = TreeSet<OrderedChat>()
 	private val chatLiveMessages = ConcurrentHashMap<Long, TdApi.Message>()
+	
+	private val pausedLiveMessages = mutableListOf<Long>()
 
 	private val downloadChatFilesMap = ConcurrentHashMap<String, TdApi.Chat>()
 	private val downloadUserFilesMap = ConcurrentHashMap<String, TdApi.User>()
@@ -97,6 +99,7 @@ class TelegramHelper private constructor() {
 	private var haveAuthorization = false
 
 	private val defaultHandler = DefaultHandler()
+	private val updatesHandler = UpdatesHandler()
 	private val liveLocationMessageUpdatesHandler = LiveLocationMessageUpdatesHandler()
 
 	private var updateLiveMessagesExecutor: ScheduledExecutorService? = null
@@ -295,7 +298,7 @@ class TelegramHelper private constructor() {
 	fun init(): Boolean {
 		return if (libraryLoaded) {
 			// create client
-			client = Client.create(UpdatesHandler(), null, null)
+			client = Client.create(updatesHandler, null, null)
 			true
 		} else {
 			false
@@ -595,6 +598,28 @@ class TelegramHelper private constructor() {
 		needRefreshActiveLiveLocationMessages = true
 	}
 
+	fun pauseSendingLiveLocationToChat(chatId: Long) {
+		synchronized(pausedLiveMessages) {
+			pausedLiveMessages.add(chatId)
+		}
+	}
+
+	fun resumeSendingLiveLocationToChat(chatId: Long) {
+		synchronized(pausedLiveMessages) {
+			pausedLiveMessages.remove(chatId)
+		}
+	}
+
+	fun deleteLiveLocationMessage(chatId: Long) {
+		val msgId = chatLiveMessages[chatId]?.id
+		if (msgId != null && msgId != 0L) {
+			val array = LongArray(1)
+			array[0] = msgId
+			client?.send(TdApi.DeleteMessages(chatId, array, true), updatesHandler)
+		}
+		needRefreshActiveLiveLocationMessages = true
+	}
+
 	fun stopSendingLiveLocationMessages() {
 		chatLiveMessages.forEach { (chatId, _ )->
 			stopSendingLiveLocationToChat(chatId)
@@ -632,6 +657,11 @@ class TelegramHelper private constructor() {
 	private fun sendLiveLocationImpl(chatLivePeriods: Map<Long, Long>, latitude: Double, longitude: Double) {
 		val location = TdApi.Location(latitude, longitude)
 		chatLivePeriods.forEach { (chatId, livePeriod) ->
+			synchronized(pausedLiveMessages) {
+				if (pausedLiveMessages.contains(chatId)) {
+					return
+				}
+			}
 			val content = TdApi.InputMessageLocation(location, livePeriod.toInt())
 			val msgId = chatLiveMessages[chatId]?.id
 			if (msgId != null) {
