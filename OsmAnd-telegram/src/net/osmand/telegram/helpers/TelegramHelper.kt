@@ -72,7 +72,7 @@ class TelegramHelper private constructor() {
 	private val chatList = TreeSet<OrderedChat>()
 	private val chatLiveMessages = ConcurrentHashMap<Long, TdApi.Message>()
 	
-	private val pausedLiveMessages = mutableListOf<Long>()
+	private val pausedLiveChats = mutableListOf<Long>()
 
 	private val downloadChatFilesMap = ConcurrentHashMap<String, TdApi.Chat>()
 	private val downloadUserFilesMap = ConcurrentHashMap<String, TdApi.User>()
@@ -598,14 +598,14 @@ class TelegramHelper private constructor() {
 	}
 
 	fun pauseSendingLiveLocationToChat(chatId: Long) {
-		synchronized(pausedLiveMessages) {
-			pausedLiveMessages.add(chatId)
+		synchronized(pausedLiveChats) {
+			pausedLiveChats.add(chatId)
 		}
 	}
 
 	fun resumeSendingLiveLocationToChat(chatId: Long) {
-		synchronized(pausedLiveMessages) {
-			pausedLiveMessages.remove(chatId)
+		synchronized(pausedLiveChats) {
+			pausedLiveChats.remove(chatId)
 		}
 	}
 
@@ -656,8 +656,8 @@ class TelegramHelper private constructor() {
 	private fun sendLiveLocationImpl(chatLivePeriods: Map<Long, Long>, latitude: Double, longitude: Double) {
 		val location = TdApi.Location(latitude, longitude)
 		chatLivePeriods.forEach { (chatId, livePeriod) ->
-			synchronized(pausedLiveMessages) {
-				if (pausedLiveMessages.contains(chatId)) {
+			synchronized(pausedLiveChats) {
+				if (pausedLiveChats.contains(chatId)) {
 					return@forEach
 				}
 			}
