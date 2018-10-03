@@ -120,23 +120,28 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 
 	@Override
 	public void updateCompassValue(float val) {
+		Float prevHeading = heading;
 		heading = val;
+		boolean headingChanged = prevHeading == null;
+		if (!headingChanged) {
+			headingChanged = Math.abs(MapUtils.degreesDiff(prevHeading, heading)) > 1.0;
+		}
 		if (mapView != null) {
 			float speedForDirectionOfMovement = settings.SWITCH_MAP_DIRECTION_TO_COMPASS.get();
 			boolean smallSpeedForDirectionOfMovement = speedForDirectionOfMovement != 0 && 
 					myLocation != null && isSmallSpeedForDirectionOfMovement(myLocation, speedForDirectionOfMovement);
 			if ((settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_COMPASS || (settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_BEARING && smallSpeedForDirectionOfMovement)) && !routePlanningMode) {
-				if (Math.abs(MapUtils.degreesDiff(mapView.getRotate(), -val)) > 1) {
+				if (Math.abs(MapUtils.degreesDiff(mapView.getRotate(), -val)) > 1.0) {
 					mapView.setRotate(-val);
 				}
-			} else if (showViewAngle) {
+			} else if (showViewAngle && headingChanged) {
 				mapView.refreshMap();
 			}
 		}
-		if(dashboard != null) {
+		if (dashboard != null && headingChanged) {
 			dashboard.updateCompassValue(val);
 		}
-		if(contextMenu != null) {
+		if (contextMenu != null && headingChanged) {
 			contextMenu.updateCompassValue(val);
 		}
 	}
