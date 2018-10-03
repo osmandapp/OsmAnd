@@ -42,11 +42,11 @@ class ShareLocationHelper(private val app: TelegramApplication) {
 			val chatLivePeriods = app.settings.getChatLivePeriods()
 			if (chatLivePeriods.isNotEmpty()) {
 				val user = app.telegramHelper.getCurrentUser()
-				if (user != null && app.settings.currentSharingMode == TelegramUiHelper.getUserName(user)) {
+				val sharingMode = app.settings.currentSharingMode
+				if (user != null && sharingMode == TelegramUiHelper.getUserName(user)) {
 					app.telegramHelper.sendLiveLocationMessage(chatLivePeriods, location.latitude, location.longitude)
-				} else {
-					val deviceId = app.settings.currentSharingMode
-					val url = "https://live.osmand.net/device/$deviceId/send?lat=${location.latitude}&lon=${location.longitude}"
+				} else if (sharingMode.isNotEmpty()) {
+					val url = "https://live.osmand.net/device/$sharingMode/send?lat=${location.latitude}&lon=${location.longitude}"
 					AndroidNetworkUtils.sendRequestAsync(url, null)
 				}
 			}

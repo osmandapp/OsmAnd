@@ -19,14 +19,13 @@ import net.osmand.telegram.utils.AndroidUtils
 class SettingsDialogFragment : BaseDialogFragment() {
 
 	private val uiUtils get() = app.uiUtils
-	private lateinit var mainView: View
 
 	override fun onCreateView(
 		inflater: LayoutInflater,
 		parent: ViewGroup?,
 		savedInstanceState: Bundle?
 	): View {
-		mainView = inflater.inflate(R.layout.fragement_settings_dialog, parent)
+		val mainView = inflater.inflate(R.layout.fragement_settings_dialog, parent)
 
 		val appBarLayout = mainView.findViewById<View>(R.id.app_bar_layout)
 		AndroidUtils.addStatusBarPadding19v(context!!, appBarLayout)
@@ -96,8 +95,22 @@ class SettingsDialogFragment : BaseDialogFragment() {
 		val user = telegramHelper.getCurrentUser()
 		if (user != null) {
 			val name = TelegramUiHelper.getUserName(user)
-			if (!settings.shareDevicesIds.containsKey(name)) {
-				settings.shareDevicesIds[name] = name
+			inflater.inflate(R.layout.item_with_rb_and_btn, container, false).apply {
+				findViewById<TextView>(R.id.title).text = name
+				findViewById<View>(R.id.primary_btn).visibility = View.GONE
+				if (settings.currentSharingMode.isEmpty()) {
+					settings.currentSharingMode = name
+				}
+				findViewById<RadioButton>(R.id.radio_button).apply {
+					visibility = View.VISIBLE
+					isChecked = name == settings.currentSharingMode
+				}
+				setOnClickListener {
+					settings.currentSharingMode = name
+					updateSelectedSharingMode()
+				}
+				tag = name
+				container.addView(this)
 			}
 		}
 		settings.shareDevicesIds.forEach {

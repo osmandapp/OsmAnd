@@ -36,7 +36,6 @@ private const val SETTINGS_NAME = "osmand_telegram_settings"
 private const val SHARE_LOCATION_CHATS_KEY = "share_location_chats"
 private const val HIDDEN_ON_MAP_CHATS_KEY = "hidden_on_map_chats"
 
-private const val ADDED_DEVICES_IDS_KEY = "added_devices_ids"
 private const val SHARING_MODE_KEY = "current_sharing_mode"
 
 private const val METRICS_CONSTANTS_KEY = "metrics_constants"
@@ -63,7 +62,7 @@ class TelegramSettings(private val app: TelegramApplication) {
 	private var hiddenOnMapChats: Set<Long> = emptySet()
 
 	var shareDevicesIds = mutableMapOf<String, String>()
-	var currentSharingMode: String? = null
+	var currentSharingMode = ""
 
 	var metricsConstants = MetricsConstants.KILOMETERS_AND_METERS
 	var speedConstants = SpeedConstants.KILOMETERS_PER_HOUR

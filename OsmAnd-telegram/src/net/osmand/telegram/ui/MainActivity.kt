@@ -19,21 +19,14 @@ import android.widget.*
 import net.osmand.PlatformUtil
 import net.osmand.telegram.R
 import net.osmand.telegram.TelegramApplication
-import net.osmand.telegram.TelegramSettings
 import net.osmand.telegram.helpers.OsmandAidlHelper
 import net.osmand.telegram.helpers.TelegramHelper
 import net.osmand.telegram.helpers.TelegramHelper.*
 import net.osmand.telegram.ui.LoginDialogFragment.LoginDialogType
 import net.osmand.telegram.ui.MyLocationTabFragment.ActionButtonsListener
 import net.osmand.telegram.ui.views.LockableViewPager
-import net.osmand.telegram.utils.AndroidNetworkUtils
-import net.osmand.telegram.utils.AndroidUtils
-import net.osmand.telegram.utils.GRAYSCALE_PHOTOS_DIR
-import net.osmand.telegram.utils.GRAYSCALE_PHOTOS_EXT
+import net.osmand.telegram.utils.*
 import org.drinkless.td.libcore.telegram.TdApi
-import org.json.JSONArray
-import org.json.JSONException
-import org.json.JSONObject
 import java.lang.ref.WeakReference
 
 const val OPEN_MY_LOCATION_TAB_KEY = "open_my_location_tab"
@@ -223,15 +216,7 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 					}
 					val user = telegramHelper.getCurrentUser()
 					if (user != null) {
-						AndroidNetworkUtils.sendRequestAsync(
-							"https://osmand.net/device/send-devices?uid=${user.id}",
-							object : AndroidNetworkUtils.OnRequestResultListener {
-								override fun onResult(result: String) {
-									val list = parseJsonContents(result)
-									settings.updateShareDevicesIds(list)
-								}
-							}
-						)
+						OsmandApiUtils.updateSharingDevices(app, user.id)
 					}
 				}
 				else -> Unit
@@ -241,30 +226,6 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 				it.get()?.onTelegramStatusChanged(prevTelegramAuthorizationState, newTelegramAuthorizationState)
 			}
 		}
-	}
-
-	fun parseJsonContents(contentsJson: String): List<TelegramSettings.DeviceBot> {
-		val list = mutableListOf<TelegramSettings.DeviceBot>()
-		val jArray: JSONArray
-		val reader: JSONObject
-		try {
-			reader = JSONObject(contentsJson)
-			jArray = reader.getJSONArray("devices")
-			for (i in 0 until jArray.length()) {
-				val deviceJSON: JSONObject = jArray.getJSONObject(i)
-				val deviceBot = TelegramSettings.DeviceBot()
-				deviceBot.id = deviceJSON.getLong("id")
-				deviceBot.userId = deviceJSON.getLong("userId")
-				deviceBot.chatId = deviceJSON.getLong("chatId")
-				deviceBot.deviceName = deviceJSON.getString("deviceName")
-				deviceBot.externalId = deviceJSON.getString("externalId")
-				deviceBot.data = deviceJSON.getString("data")
-				list.add(deviceBot)
-			}
-		} catch (e: JSONException) {
-
-		}
-		return list
 	}
 	
 	override fun onTelegramChatsRead() {
