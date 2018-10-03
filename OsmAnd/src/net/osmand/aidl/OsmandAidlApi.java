@@ -1611,6 +1611,11 @@ public class OsmandAidlApi {
 		return res;
 	}
 
+	public void switchEnabled(@NonNull ConnectedApp app) {
+		app.enabled = !app.enabled;
+		saveConnectedApps();
+	}
+
 	boolean isAppEnabled(@NonNull String pack) {
 		ConnectedApp app = connectedApps.get(pack);
 		if (app == null) {

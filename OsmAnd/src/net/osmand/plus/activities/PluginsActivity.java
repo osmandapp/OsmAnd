@@ -49,6 +49,8 @@ public class PluginsActivity extends OsmandListActivity {
 			Intent intent = new Intent(this, PluginActivity.class);
 			intent.putExtra(PluginActivity.EXTRA_PLUGIN_ID, ((OsmandPlugin) tag).getId());
 			startActivity(intent);
+		} else if (tag instanceof ConnectedApp) {
+			switchEnabled((ConnectedApp) tag);
 		}
 	}
 
@@ -67,6 +69,11 @@ public class PluginsActivity extends OsmandListActivity {
 			}
 			getListAdapter().notifyDataSetChanged();
 		}
+	}
+
+	private void switchEnabled(@NonNull ConnectedApp app) {
+		getMyApplication().getAidlApi().switchEnabled(app);
+		getListAdapter().notifyDataSetChanged();
 	}
 
 	protected class PluginsListAdapter extends ArrayAdapter<Object> {
@@ -104,10 +111,15 @@ public class PluginsActivity extends OsmandListActivity {
 				name = app.getName();
 				pluginDescription.setText(R.string.third_party_application);
 				pluginLogo.setImageDrawable(app.getIcon());
-				pluginLogo.setOnClickListener(null);
+				pluginLogo.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						switchEnabled(app);
+					}
+				});
 				pluginOptions.setVisibility(View.GONE);
 				pluginOptions.setOnClickListener(null);
-				view.setTag(null);
+				view.setTag(app);
 			} else if (item instanceof OsmandPlugin) {
 				final OsmandPlugin plugin = (OsmandPlugin) item;
 				active = plugin.isActive();
