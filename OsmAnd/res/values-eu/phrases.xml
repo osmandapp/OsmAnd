@@ -309,9 +309,9 @@
 	<string name="poi_gate">Atea</string>
 	<string name="poi_toll_booth">Bidesari-kabina</string>
 	<string name="poi_border_control">Mugako kontrola</string>
-	<string name="poi_traffic_calming_bump">Koskorra</string>
-	<string name="poi_traffic_calming_hump">Konkorra</string>
-	<string name="poi_traffic_calming_cushion">Kuxina</string>
+	<string name="poi_traffic_calming_bump">Moteltzeko koxkorra</string>
+	<string name="poi_traffic_calming_hump">Moteltzeko konkorra</string>
+	<string name="poi_traffic_calming_cushion">Moteltzeko kuxina</string>
 	<string name="poi_traffic_calming_rumble_strip">Burrunba-banda</string>
 	<string name="poi_car_repair">Kotxe konponketa</string>
 	<string name="poi_vehicle_inspection">Ibilgailuen azterketa</string>
@@ -486,7 +486,7 @@
 	<string name="poi_ses_station">Segurtasun eta babes zibilaren estazioa</string>
 	<string name="poi_lift_gate">Ate altxagarria</string>
 	<string name="poi_traffic_calming_chicane">Txikanea</string>
-	<string name="poi_traffic_calming_table">Plataforma</string>
+	<string name="poi_traffic_calming_table">Moteltzeko plataforma</string>
 	<string name="poi_slipway">Itsasbidea</string>
 	<string name="poi_turning_circle">Biratze zirkulua</string>
 	<string name="poi_standpipe">Suteetako ur-hargunea</string>
