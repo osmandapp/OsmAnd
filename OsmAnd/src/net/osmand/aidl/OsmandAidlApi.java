@@ -8,11 +8,14 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.ParcelFileDescriptor;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
@@ -79,6 +82,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -150,11 +154,13 @@ public class OsmandAidlApi {
 	private Map<String, AMapLayer> layers = new ConcurrentHashMap<>();
 	private Map<String, OsmandMapLayer> mapLayers = new ConcurrentHashMap<>();
 	private Map<String, BroadcastReceiver> receivers = new TreeMap<>();
+	private Map<String, ConnectedApp> connectedApps = new ConcurrentHashMap<>();
 
 	private boolean mapActivityActive = false;
 
 	public OsmandAidlApi(OsmandApplication app) {
 		this.app = app;
+		loadConnectedApps();
 	}
 
 	public void onCreateMapActivity(MapActivity mapActivity) {
@@ -317,7 +323,7 @@ public class OsmandAidlApi {
 				}
 			}
 		};
-		registerReceiver(removeMapWidgetReceiver, mapActivity, AIDL_REMOVE_MAP_WIDGET);	
+		registerReceiver(removeMapWidgetReceiver, mapActivity, AIDL_REMOVE_MAP_WIDGET);
 	}
 
 	public void registerWidgetControls(MapActivity mapActivity) {
@@ -1586,6 +1592,103 @@ public class OsmandAidlApi {
 			e.printStackTrace();
 		}
 		return res;
+	}
+
+	public List<ConnectedApp> getConnectedApps() {
+		List<ConnectedApp> res = new ArrayList<>(connectedApps.size());
+		PackageManager pm = app.getPackageManager();
+		for (ConnectedApp app : connectedApps.values()) {
+			try {
+				ApplicationInfo ai = pm.getPackageInfo(app.pack, 0).applicationInfo;
+				app.name = ai.loadLabel(pm).toString();
+				app.icon = ai.loadIcon(pm);
+				res.add(app);
+			} catch (PackageManager.NameNotFoundException e) {
+				// ignore
+			}
+		}
+		Collections.sort(res);
+		return res;
+	}
+
+	public void switchEnabled(@NonNull ConnectedApp app) {
+		app.enabled = !app.enabled;
+		saveConnectedApps();
+	}
+
+	boolean isAppEnabled(@NonNull String pack) {
+		ConnectedApp app = connectedApps.get(pack);
+		if (app == null) {
+			app = new ConnectedApp(pack, true);
+			connectedApps.put(pack, app);
+			saveConnectedApps();
+		}
+		return app.enabled;
+	}
+
+	private void saveConnectedApps() {
+		try {
+			JSONArray array = new JSONArray();
+			for (ConnectedApp app : connectedApps.values()) {
+				JSONObject obj = new JSONObject();
+				obj.put(ConnectedApp.ENABLED_KEY, app.enabled);
+				obj.put(ConnectedApp.PACK_KEY, app.pack);
+				array.put(obj);
+			}
+			app.getSettings().API_CONNECTED_APPS_JSON.set(array.toString());
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void loadConnectedApps() {
+		try {
+			JSONArray array = new JSONArray(app.getSettings().API_CONNECTED_APPS_JSON.get());
+			for (int i = 0; i < array.length(); i++) {
+				JSONObject obj = array.getJSONObject(i);
+				String pack = obj.optString(ConnectedApp.PACK_KEY, "");
+				boolean enabled = obj.optBoolean(ConnectedApp.ENABLED_KEY, true);
+				connectedApps.put(pack, new ConnectedApp(pack, enabled));
+			}
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static class ConnectedApp implements Comparable<ConnectedApp> {
+
+		static final String PACK_KEY = "pack";
+		static final String ENABLED_KEY = "enabled";
+
+		private String pack;
+		private boolean enabled;
+		private String name;
+		private Drawable icon;
+
+		ConnectedApp(String pack, boolean enabled) {
+			this.pack = pack;
+			this.enabled = enabled;
+		}
+
+		public boolean isEnabled() {
+			return enabled;
+		}
+
+		public String getName() {
+			return name;
+		}
+
+		public Drawable getIcon() {
+			return icon;
+		}
+
+		@Override
+		public int compareTo(@NonNull ConnectedApp app) {
+			if (name != null && app.name != null) {
+				return name.compareTo(app.name);
+			}
+			return 0;
+		}
 	}
 
 	private static class NavDrawerItem {
