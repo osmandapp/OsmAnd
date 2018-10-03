@@ -22,6 +22,9 @@
     <string name="poi_cannot_be_found">Node or way cannot be found.</string>
     <string name="search_no_results_feedback">No search results?\nGive us feedback</string>
     <string name="release_3_2_pre">
+    • Fixed crash on startup that occurred on some devices\n\n
+    • New Markers feature: display the markers that have already been traversed\n\n 
+    • Search history now shows the categories you have searched for previously\n\n
     • Fixed crash on startup that occurred with non-latin maps\n\n
     • Improve rendering speed issues on Android 8.0 devices\n\n
     • Support for polygon (non-amenity) objects editing\n\n
