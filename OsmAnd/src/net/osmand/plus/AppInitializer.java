@@ -425,7 +425,7 @@ public class AppInitializer implements IProgress {
 					Field f = R.string.class.getField("poi_" + keyName);
 					if (f != null) {
 						Integer in = (Integer) f.get(null);
-						String val = app.getString(in);
+						String val = en.getString(in);
 						if(val != null) {
 							int ind = val.indexOf(';');
 							if(ind > 0) {
