@@ -54,6 +54,7 @@ public class LocationSearchTest {
 		search("5:1#1 3#1", new LatLon(5 + 1/60f + 1/3600f, 3 + 1/60f));
 		search("5#1#1 3#1", new LatLon(5 + 1/60f + 1/3600f, 3 + 1/60f));
 		search("5'1'1 3'1", new LatLon(5 + 1/60f + 1/3600f, 3 + 1/60f));
+		search("Lat: 5.0 Lon: 3.0", new LatLon(5, 3));
 	}
 	
 	@Test
