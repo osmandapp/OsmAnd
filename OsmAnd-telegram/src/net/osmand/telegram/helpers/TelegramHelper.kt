@@ -99,7 +99,6 @@ class TelegramHelper private constructor() {
 	private var haveAuthorization = false
 
 	private val defaultHandler = DefaultHandler()
-	private val updatesHandler = UpdatesHandler()
 	private val liveLocationMessageUpdatesHandler = LiveLocationMessageUpdatesHandler()
 
 	private var updateLiveMessagesExecutor: ScheduledExecutorService? = null
@@ -298,7 +297,7 @@ class TelegramHelper private constructor() {
 	fun init(): Boolean {
 		return if (libraryLoaded) {
 			// create client
-			client = Client.create(updatesHandler, null, null)
+			client = Client.create(UpdatesHandler(), null, null)
 			true
 		} else {
 			false
@@ -615,7 +614,7 @@ class TelegramHelper private constructor() {
 		if (msgId != null && msgId != 0L) {
 			val array = LongArray(1)
 			array[0] = msgId
-			client?.send(TdApi.DeleteMessages(chatId, array, true), updatesHandler)
+			client?.send(TdApi.DeleteMessages(chatId, array, true), UpdatesHandler())
 		}
 		needRefreshActiveLiveLocationMessages = true
 	}
@@ -659,7 +658,7 @@ class TelegramHelper private constructor() {
 		chatLivePeriods.forEach { (chatId, livePeriod) ->
 			synchronized(pausedLiveMessages) {
 				if (pausedLiveMessages.contains(chatId)) {
-					return
+					return@forEach
 				}
 			}
 			val content = TdApi.InputMessageLocation(location, livePeriod.toInt())
