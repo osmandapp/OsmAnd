@@ -1,11 +1,14 @@
 package net.osmand.telegram.utils
 
+import net.osmand.PlatformUtil
 import net.osmand.telegram.TelegramApplication
 import net.osmand.telegram.TelegramSettings
 import org.json.JSONException
 import org.json.JSONObject
 
 object OsmandApiUtils {
+
+	private val log = PlatformUtil.getLog(OsmandApiUtils::class.java)
 
 	fun updateSharingDevices(app: TelegramApplication, userId: Int) {
 		AndroidNetworkUtils.sendRequestAsync(
@@ -36,7 +39,7 @@ object OsmandApiUtils {
 				list.add(deviceBot)
 			}
 		} catch (e: JSONException) {
-
+			log.error(e.message, e)
 		}
 		return list
 	}

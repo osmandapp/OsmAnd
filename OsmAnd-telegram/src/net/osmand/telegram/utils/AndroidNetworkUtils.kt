@@ -27,6 +27,7 @@ object AndroidNetworkUtils {
 			return try {
 				sendRequest(urlText)
 			} catch (e: Exception) {
+				log.error(e.message, e)
 				null
 			}
 		}
@@ -54,8 +55,7 @@ object AndroidNetworkUtils {
 			val responseBody = StringBuilder()
 			responseBody.setLength(0)
 			if (inputStream != null) {
-				val bufferedInput =
-					BufferedReader(InputStreamReader(inputStream, "UTF-8"))
+				val bufferedInput = BufferedReader(InputStreamReader(inputStream, "UTF-8"))
 				var s = bufferedInput.readLine()
 				var first = true
 				while (s != null) {
