@@ -524,9 +524,11 @@ public class SearchUICore {
 	public int getMinimalSearchRadius(SearchPhrase phrase) {
 		int radius = Integer.MAX_VALUE;
 		for (SearchCoreAPI api : apis) {
-			int apiMinimalRadius = api.getMinimalSearchRadius(phrase);
-			if (apiMinimalRadius > 0 && apiMinimalRadius < radius) {
-				radius = apiMinimalRadius;
+			if (api.isSearchAvailable(phrase) && api.getSearchPriority(phrase) != -1) {
+				int apiMinimalRadius = api.getMinimalSearchRadius(phrase);
+				if (apiMinimalRadius > 0 && apiMinimalRadius < radius) {
+					radius = apiMinimalRadius;
+				}
 			}
 		}
 		return radius;
@@ -535,9 +537,11 @@ public class SearchUICore {
 	public int getNextSearchRadius(SearchPhrase phrase) {
 		int radius = Integer.MAX_VALUE;
 		for (SearchCoreAPI api : apis) {
-			int apiNextSearchRadius = api.getNextSearchRadius(phrase);
-			if (apiNextSearchRadius > 0 && apiNextSearchRadius < radius) {
-				radius = apiNextSearchRadius;
+			if (api.isSearchAvailable(phrase) && api.getSearchPriority(phrase) != -1) {
+				int apiNextSearchRadius = api.getNextSearchRadius(phrase);
+				if (apiNextSearchRadius > 0 && apiNextSearchRadius < radius) {
+					radius = apiNextSearchRadius;
+				}
 			}
 		}
 		return radius;
