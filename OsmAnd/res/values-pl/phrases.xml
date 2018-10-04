@@ -110,8 +110,8 @@
 	<string name="poi_lift_gate">Podnoszona bramka</string>
 	<string name="poi_toll_booth">Punkt poboru opłat</string>
 	<string name="poi_border_control">Kontrola graniczna</string>
-	<string name="poi_traffic_calming_bump">Krótki próg zwalniający</string>
-	<string name="poi_traffic_calming_hump">Długi próg zwalniający</string>
+	<string name="poi_traffic_calming_bump">Próg zwalniający</string>
+	<string name="poi_traffic_calming_hump">Próg zwalniający</string>
 	<string name="poi_traffic_calming_cushion">Wysepka zwalniająca</string>
 	<string name="poi_traffic_calming_chicane">Szykana</string>
 	<string name="poi_traffic_calming_rumble_strip">Pasek ostrzegawczy</string>
@@ -3902,5 +3902,7 @@
 	<string name="poi_ruins">Ruiny</string>
 
 	<string name="poi_license_classes">Nauka jazdy</string>
+
+<string name="poi_hill">Wzgórze</string>
 
 </resources>
