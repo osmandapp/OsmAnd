@@ -154,6 +154,10 @@ public abstract class PointEditorFragment extends BaseOsmAndFragment {
 		return view;
 	}
 
+	protected EditText getNameEdit() {
+		return nameEdit;
+	}
+
 	protected DialogFragment createSelectCategoryDialog() {
 		return SelectCategoryDialogFragment.createInstance(getEditor().getFragmentTag());
 	}
