@@ -10,7 +10,8 @@
 	- For wording and consistency, please note https://osmand.net/help-online?id=technical-articles#Creating_a_Consistent_User_Experience
 	Thx - Hardy
 -->
-
+    <string name="markers_remove_dialog_msg">Delete Map marker \'%s\'?</string>
+    <string name="edit_map_marker">Edit map marker</string>
     <string name="third_party_application">Third-party application</string>
     <string name="search_street">Search street</string>
     <string name="start_search_from_city">Start search from city</string>

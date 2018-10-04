@@ -39,13 +39,12 @@ import net.osmand.plus.mapcontextmenu.MenuController.TitleButtonController;
 import net.osmand.plus.mapcontextmenu.MenuController.TitleProgressController;
 import net.osmand.plus.mapcontextmenu.controllers.MapDataMenuController;
 import net.osmand.plus.mapcontextmenu.editors.FavoritePointEditor;
+import net.osmand.plus.mapcontextmenu.editors.MapMarkerEditor;
 import net.osmand.plus.mapcontextmenu.editors.PointEditor;
 import net.osmand.plus.mapcontextmenu.editors.RtePtEditor;
 import net.osmand.plus.mapcontextmenu.editors.WptPtEditor;
 import net.osmand.plus.mapcontextmenu.other.MapMultiSelectionMenu;
 import net.osmand.plus.mapcontextmenu.other.ShareMenu;
-import net.osmand.plus.mapmarkers.MapMarkersDialogFragment;
-import net.osmand.plus.mapmarkers.RenameMarkerBottomSheetDialogFragment;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.transport.TransportStopRoute;
@@ -70,6 +69,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 	private FavoritePointEditor favoritePointEditor;
 	private WptPtEditor wptPtEditor;
 	private RtePtEditor rtePtEditor;
+	private MapMarkerEditor mapMarkerEditor;
 
 	private boolean active;
 	private LatLon latLon;
@@ -165,6 +165,9 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		if (rtePtEditor != null) {
 			rtePtEditor.setMapActivity(mapActivity);
 		}
+		if (mapMarkerEditor != null) {
+			mapMarkerEditor.setMapActivity(mapActivity);
+		}
 
 		if (active && mapActivity != null) {
 			acquireMenuController(false);
@@ -221,6 +224,13 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		return rtePtEditor;
 	}
 
+	public MapMarkerEditor getMapMarkerEditor() {
+		if (mapMarkerEditor == null) {
+			mapMarkerEditor = new MapMarkerEditor(mapActivity);
+		}
+		return mapMarkerEditor;
+	}
+
 	public PointEditor getPointEditor(String tag) {
 		if (favoritePointEditor != null && favoritePointEditor.getFragmentTag().equals(tag)) {
 			return favoritePointEditor;
@@ -228,6 +238,8 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 			return wptPtEditor;
 		} else if (rtePtEditor != null && rtePtEditor.getFragmentTag().equals(tag)) {
 			return rtePtEditor;
+		} else if (mapMarkerEditor != null && mapMarkerEditor.getFragmentTag().equals(tag)) {
+			return mapMarkerEditor;
 		}
 		return null;
 	}
@@ -869,12 +881,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		if (mapActivity != null) {
 			MapMarker marker = getMapMarker();
 			if (marker != null) {
-				RenameMarkerBottomSheetDialogFragment
-						.showInstance(mapActivity.getSupportFragmentManager(), marker);
-			} else if (pointDescription.isMapMarker()) {
-				hide();
-				MapActivity.clearPrevActivityIntent();
-				MapMarkersDialogFragment.showInstance(mapActivity);
+				getMapMarkerEditor().edit(marker);
 			} else {
 				String mapObjectName = null;
 				if (object instanceof Amenity) {
@@ -883,8 +890,8 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 				}
 				mapActivity.getMapActions().addMapMarker(latLon.getLatitude(), latLon.getLongitude(),
 						getPointDescriptionForMarker(), mapObjectName);
+				close();
 			}
-			close();
 		}
 	}
 
