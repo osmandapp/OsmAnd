@@ -3004,13 +3004,19 @@ Lon %2$s</string>
     <string name="search_no_results_feedback">¿Sin resultados de búsqueda?
 \nDanos tu opinión</string>
     <string name="test_voice_desrc">Pulsa un botón y escucha el aviso de voz correspondiente para identificar avisos faltantes o defectuosos.</string>
-<string name="release_3_2_pre">• Corregido el fallo en el inicio que se producía con los mapas no latinos 
+<string name="release_3_2_pre">• Corregido el fallo en el inicio que se producía en algunos dispositivos
+\n
+\n • Nueva función de marcadores: muestra los marcadores que ya han sido atravesados.
+\n
+\n • El historial de búsqueda muestra ahora las categorías buscadas anteriormente 
+\n
+\n • Corregido el fallo en el inicio que se producía con los mapas no latinos 
 \n 
 \n • Mejora en los problemas de velocidad de renderizado en dispositivos Android 8.0 
 \n 
 \n • Soporte para la edición de objetos poligonales (no servicios) 
-\n
-\n • Medir distancia: puedes añadir el botón de «Medir distancia» a las acciones en el menú contextual
+\n 
+\n • Medir distancia: puedes añadir el botón de «Medir distancia» a las acciones en el menú contextual 
 \n</string>
     <string name="ask_for_location_permission">Para continuar, debe permitir la ubicación a OsmAnd.</string>
     <string name="rendering_value_black_name">Negro</string>
@@ -3020,4 +3026,7 @@ Lon %2$s</string>
     <string name="shared_string_restore">Restaurar</string>
     <string name="keep_passed_markers_descr">Los marcadores añadidos como un grupo de Favoritos o puntos de ruta GPX marcados como «Usados», permanecerán en el mapa. Si el grupo no está activo, los marcadores desaparecerán del mapa.</string>
     <string name="keep_passed_markers">Mantener en el mapa los marcadores ya usados</string>
+    <string name="markers_remove_dialog_msg">¿Borrar marcador del mapa «%s»\?</string>
+    <string name="edit_map_marker">Editar marcador del mapa</string>
+    <string name="third_party_application">Aplicación de terceros</string>
     </resources>
