@@ -40,11 +40,25 @@ class ShareLocationHelper(private val app: TelegramApplication) {
 
 		if (location != null && app.isInternetConnectionAvailable) {
 			val chatLivePeriods = app.settings.getChatLivePeriods()
+			val updatedLivePeriods = mutableMapOf<Long, Long>()
 			if (chatLivePeriods.isNotEmpty()) {
+				chatLivePeriods.forEach { (chatId, livePeriod) ->
+					if (livePeriod > TelegramHelper.MAX_LOCATION_MESSAGE_LIVE_PERIOD_SEC) {
+						val startTime = app.settings.getChatShareLocStartSec(chatId)
+						val currTime = (System.currentTimeMillis() / 1000)
+						if (startTime != null && startTime + TelegramHelper.MAX_LOCATION_MESSAGE_LIVE_PERIOD_SEC < currTime) {
+							app.settings.shareLocationToChat(chatId, true, livePeriod - TelegramHelper.MAX_LOCATION_MESSAGE_LIVE_PERIOD_SEC)
+						} else if (startTime != null) {
+							updatedLivePeriods[chatId] = TelegramHelper.MAX_LOCATION_MESSAGE_LIVE_PERIOD_SEC.toLong()
+						}
+					} else {
+						updatedLivePeriods[chatId] = livePeriod
+					}
+				}
 				val user = app.telegramHelper.getCurrentUser()
 				val sharingMode = app.settings.currentSharingMode
 				if (user != null && sharingMode == user.id.toString()) {
-					app.telegramHelper.sendLiveLocationMessage(chatLivePeriods, location.latitude, location.longitude)
+					app.telegramHelper.sendLiveLocationMessage(updatedLivePeriods, location.latitude, location.longitude)
 				} else if (sharingMode.isNotEmpty()) {
 					val url = "https://live.osmand.net/device/$sharingMode/send?lat=${location.latitude}&lon=${location.longitude}"
 					AndroidNetworkUtils.sendRequestAsync(url, null)

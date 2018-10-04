@@ -126,7 +126,6 @@ class TelegramSettings(private val app: TelegramApplication) {
 		if (share) {
 			val lp: Long = when {
 				livePeriod < TelegramHelper.MIN_LOCATION_MESSAGE_LIVE_PERIOD_SEC -> TelegramHelper.MIN_LOCATION_MESSAGE_LIVE_PERIOD_SEC.toLong()
-				livePeriod > TelegramHelper.MAX_LOCATION_MESSAGE_LIVE_PERIOD_SEC -> TelegramHelper.MAX_LOCATION_MESSAGE_LIVE_PERIOD_SEC.toLong()
 				else -> livePeriod
 			}
 			chatLivePeriods[chatId] = lp
