@@ -2964,13 +2964,19 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="search_no_results_feedback">Neniuj serĉ-rezultoj?
 \nSciigu nin</string>
     <string name="test_voice_desrc">Premu butonon kaj aŭskultu rilatan voĉan sciigon por identigi mankajn aŭ erarajn sciigojn.</string>
-<string name="release_3_2_pre">• riparita paneo je starto, kiu okazis dum vidigi nelatinajn signojn 
+<string name="release_3_2_pre">• riparita paneo je starto, kiu okazis ĉe kelkaj aparatoj
+\n
+\n• nova eblo de markoj: montri map-markojn, kiuj estis jam pasigitaj
+\n
+\n• serĉ-historio montras kategoriojn, kiujn vi antaŭe serĉis
+\n
+\n• riparita paneo je starto, kiu okazis dum vidigi nelatinajn signojn 
 \n 
 \n• plirapidigita bildigado de mapo ĉe Android 8.0 
 \n 
-\n• subteno por redakti plurangulajn objektojn (sed ne por interesejoj)
-\n
-\n• mezuri distancon: aldonis ag-butonon al la kunteksta menuo
+\n• subteno por redakti plurangulajn objektojn (sed ne por interesejoj) 
+\n 
+\n• mezuri distancon: aldonis ag-butonon al la kunteksta menuo 
 \n</string>
     <string name="ask_for_location_permission">Permesu al OsmAnd aliron al pozicio por pluigi.</string>
     <string name="rendering_value_black_name">Nigra</string>
@@ -2980,4 +2986,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="shared_string_restore">Restarigi</string>
     <string name="keep_passed_markers_descr">Markoj aldonitaj kiel grupo de ŝatataj aŭ pasigitaj GPX-navigadpunktoj restos sur la mapo. Se la grupo estas malaktiva, ĝiaj markoj malaperos de la mapo.</string>
     <string name="keep_passed_markers">Ne kaŝi pasigitajn map-markojn de la mapo</string>
+    <string name="markers_remove_dialog_msg">Ĉu forigi map-markon “%s”\?</string>
+    <string name="edit_map_marker">Redakti map-markon</string>
+    <string name="third_party_application">Aplikaĵo de ekstera firmao</string>
     </resources>
