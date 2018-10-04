@@ -158,7 +158,7 @@
 	<string name="poi_medical_supply">Медичне постачання</string>
 	<string name="poi_photo">Фотомагазин</string>
 	<string name="poi_traffic_calming_bump">Лежачий поліцейський</string>
-	<string name="poi_traffic_calming_hump">Горб</string>
+	<string name="poi_traffic_calming_hump">Штучне підвищення</string>
 	<string name="poi_traffic_calming_chicane">Шикана</string>
 	<string name="poi_leather">Магазин шкіри, галантарея</string>
 	<string name="poi_music">Музичний магазин</string>
@@ -3861,4 +3861,7 @@
 	<string name="poi_hazard_minefield">Мінне поле</string>
 
 
-</resources>
+<string name="poi_car_pooling">Місце об\'єднання автомобілів</string>
+	<string name="poi_ruins">Руїни</string>
+
+	</resources>
