@@ -3063,4 +3063,12 @@
     <string name="ask_for_location_permission">Gi OsmAnd tilgang til plassering for å fortsette.</string>
     <string name="rendering_value_black_name">Svart</string>
     <string name="more_transport_on_stop_hint">Det er mer transport på dette stoppet.</string>
+    <string name="markers_remove_dialog_msg">Slett kartmarkør \"%s\"\?</string>
+    <string name="edit_map_marker">Rediger kartmarkør</string>
+    <string name="third_party_application">Tredjepartsprogram</string>
+    <string name="search_street">Gatesøk</string>
+    <string name="start_search_from_city">Start søk fra by</string>
+    <string name="shared_string_restore">Gjenopprett</string>
+    <string name="keep_passed_markers_descr">Markører lagt til som favorittgrupper eller GPX-veipunkter markert som passert vil forbli på kartet. Hvis gruppen ikke er aktiv, vil markørene forsvinne fra kartet.</string>
+    <string name="keep_passed_markers">Behold passerte markører på kartet</string>
     </resources>
