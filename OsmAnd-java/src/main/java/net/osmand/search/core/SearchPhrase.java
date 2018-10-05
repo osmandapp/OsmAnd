@@ -679,7 +679,7 @@ public class SearchPhrase {
 			for(int i = 0; i < unknownWords.size(); i++) {
 				if(unknownWordsMatcher.size() == i) {
 					unknownWordsMatcher.add(new NameStringMatcher(unknownWords.get(i), 
-							i < unknownWords.size() - 1 ? StringMatcherMode.CHECK_EQUALS_FROM_SPACE :
+							i < unknownWords.size() - 1 || isLastUnknownSearchWordComplete() ? StringMatcherMode.CHECK_EQUALS_FROM_SPACE :
 								StringMatcherMode.CHECK_STARTS_FROM_SPACE));
 				}
 				NameStringMatcher ms = unknownWordsMatcher.get(i);
