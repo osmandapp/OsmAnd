@@ -2409,4 +2409,10 @@ Clique no widget de medição para ver mais ações.</string>
 \n• Suporte para editar objetos de polígono de renderização (não-cortesia)
 \n
 \n</string>
+    <string name="search_street"></string>
+    <string name="shared_string_restore"></string>
+    <string name="keep_passed_markers_descr"></string>
+    <string name="keep_passed_markers"></string>
+    <string name="more_transport_on_stop_hint"></string>
+    <string name="ask_for_location_permission"></string>
     </resources>

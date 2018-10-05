@@ -3187,4 +3187,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="shared_string_restore">Restaurer</string>
     <string name="keep_passed_markers_descr">Les marques visitées resteront affichées sur la carte, que les marques appartiennent à un groupe de favoris ou qu\'il s\'agisse de points de passage GPX. Ces marques ne disparaîtront que lorsque le groupe ou la trace sera désactivé.</string>
     <string name="keep_passed_markers">Afficher sur la carte les marques visitées</string>
+    <string name="markers_remove_dialog_msg">Supprimer la marque \'%s\' \?</string>
+    <string name="edit_map_marker">Modifier la marque</string>
+    <string name="third_party_application">Application tierce</string>
     </resources>

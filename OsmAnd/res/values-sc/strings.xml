@@ -3148,4 +3148,7 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="shared_string_restore">Riprìstina</string>
     <string name="keep_passed_markers_descr">Sos marcadores annantos comente grupu de Preferidos e sos puntos de coladòrgiu GPX sinnados comente colados ant a abarrare in sa mapa. Si su grupu no est ativu, sos marcadores ant a isparèssere dae sa mapa.</string>
     <string name="keep_passed_markers">Mantene sos marcadores colados in sa mapa</string>
+    <string name="markers_remove_dialog_msg">Iscantzellare su marcadore mapa \'%s\'\?</string>
+    <string name="edit_map_marker">Modìfica su marcadore mapa</string>
+    <string name="third_party_application">Aplicatzione de tertza parte</string>
     </resources>

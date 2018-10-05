@@ -341,7 +341,7 @@
 	<string name="poi_town">Ville</string>
 	<string name="poi_toys">Magasin de jouets</string>
 	<string name="poi_leisure_track">Piste de sport</string>
-	<string name="poi_traffic_calming_bump">Ralentisseur (dos d\'âne)</string>
+	<string name="poi_traffic_calming_bump">Ralentisseur</string>
 	<string name="poi_traffic_calming_chicane">Ralentisseur (chicane)</string>
 	<string name="poi_traffic_calming_choker">Ralentisseur (écluse)</string>
 	<string name="poi_traffic_calming_cushion">Ralentisseur (coussin berlinois)</string>

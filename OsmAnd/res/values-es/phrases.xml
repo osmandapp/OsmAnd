@@ -114,7 +114,7 @@
 	<string name="poi_lift_gate">Barrera levadiza</string>
 	<string name="poi_toll_booth">Cabina de peaje</string>
 	<string name="poi_border_control">Control fronterizo</string>
-	<string name="poi_traffic_calming_bump">Badén (pequeño)</string>
+	<string name="poi_traffic_calming_bump">Badén (pequeño); Lomada (pequeña)</string>
 	<string name="poi_traffic_signals">Semáforo</string>
 
 	<string name="poi_car_repair">Taller mecánico</string>
@@ -406,7 +406,7 @@
 	<string name="poi_sewing">Tienda de telas</string>
 
 	<string name="poi_grit_bin">Contenedor de arena</string>
-	<string name="poi_traffic_calming_cushion">Cojín</string>
+	<string name="poi_traffic_calming_cushion">Cojín berlinés</string>
 	<string name="poi_traffic_calming_rumble_strip">Banda sonora</string>
 	<string name="poi_traffic_calming_choker">Gargantilla</string>
 	<string name="poi_service_tyres">Neumáticos</string>
@@ -447,9 +447,9 @@
 	<string name="poi_fire_flapper">Batefuegos</string>
 	<string name="poi_fire_water_pond">Estanque de agua contra incendios</string>
 	<string name="poi_ford">Vado</string>
-	<string name="poi_traffic_calming_hump">Badén (grande)</string>
+	<string name="poi_traffic_calming_hump">Badén (grande); Lomada (grande); Resalte (grande)</string>
 	<string name="poi_traffic_calming_chicane">Chicana</string>
-	<string name="poi_traffic_calming_table">Plataforma elevada</string>
+	<string name="poi_traffic_calming_table">Plataforma elevada;Peatonal elevada;Paso de peatones elevado</string>
 	<string name="poi_fuel_hgv_diesel">Diésel de vehículos pesados</string>
 	<string name="poi_fuel_lpg">GPL</string>
 	<string name="poi_fuel_1_50">Combustible 1:50</string>
@@ -3912,4 +3912,9 @@
 
 <string name="poi_ruins">Ruinas</string>
 
-	</resources>
+	<string name="poi_car_pooling">Punto para vehículos compartidos</string>
+	<string name="poi_license_classes">Clases de licencia</string>
+
+	<string name="poi_hill">Colina</string>
+
+</resources>

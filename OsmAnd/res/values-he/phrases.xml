@@ -2120,4 +2120,86 @@
 
 	<string name="poi_ruins">חורבות</string>
 
+	<string name="poi_opening_hours">שעות הפתיחה</string>
+	<string name="poi_collection_times">מועדי איסוף</string>
+	<string name="poi_description">תיאור</string>
+	<string name="poi_phone">טלפון</string>
+	<string name="poi_website">אתר</string>
+	<string name="poi_email">דוא״ל</string>
+	<string name="poi_fax">פקס</string>
+	<string name="facebook">פייסבוק</string>
+	<string name="twitter">טוויטר</string>
+	<string name="poi_skype">סקייפ</string>
+	<string name="poi_youtube">יוטיוב</string>
+	<string name="poi_instagram">אינסטגרם</string>
+	<string name="vk">VKontakte</string>
+	<string name="poi_google_plus">Google+‎</string>
+	<string name="poi_mobile">נייד</string>
+	<string name="poi_service_times">זמני שירות</string>
+	<string name="poi_maxheight">גובה מרבי</string>
+	<string name="poi_maxweight">משקל מרבי</string>
+	<string name="poi_height">גובה</string>
+	<string name="poi_ele">גובה מעל פני הים</string>
+	<string name="poi_abandoned">נטוש</string>
+	<string name="poi_abandoned_poi">חפץ נטוש</string>
+	<string name="poi_operator">מפעיל</string>
+	<string name="poi_brand">מותג</string>
+	<string name="poi_fee_yes">כן</string>
+	<string name="poi_fee_no">לא</string>
+	<string name="poi_drinking_water_yes">כן</string>
+	<string name="poi_drinking_water_no">לא</string>
+	<string name="poi_supervised_yes">בפיקוח</string>
+	<string name="poi_supervised_no">ללא פיקוח</string>
+	<string name="poi_seasonal_yes">כן</string>
+	<string name="poi_seasonal_no">לא</string>
+	<string name="poi_seasonal_dry_season">העונה היבשה</string>
+	<string name="poi_seasonal_wet_season">העונה הרטובה</string>
+	<string name="poi_seasonal_spring">אביב</string>
+	<string name="poi_seasonal_summer">קיץ</string>
+	<string name="poi_seasonal_autumn">סתיו</string>
+	<string name="poi_seasonal_winter">חורף</string>
+	<string name="poi_crossing_traffic_signals">עם רמזורים</string>
+	<string name="poi_crossing_unmarked">ללא סימון</string>
+	<string name="poi_start_date">מועד התחלה</string>
+	<string name="poi_wheelchair_accessibility">נגישות לנכים</string>
+	<string name="poi_wheelchair_yes">כן</string>
+	<string name="poi_wheelchair_no">לא</string>
+	<string name="poi_wheelchair_limited">מוגבלת</string>
+	<string name="poi_wholesale">סיטונאות</string>
+
+	<string name="poi_access_private">גישה פרטית</string>
+	<string name="poi_access_no">אין גישה</string>
+	<string name="poi_access_destination">גישה ליעד</string>
+	<string name="poi_access_permissive">גישה מתירנית</string>
+	<string name="poi_access_customers">גישה ללקוחות</string>
+	<string name="poi_access_delivery">גישה למשלוחים</string>
+	<string name="poi_access_agricultural">גישה חקלאית</string>
+
+	<string name="poi_content_silage">תוכן: תחמיץ</string>
+	<string name="poi_content_water">תוכן: מים</string>
+	<string name="poi_content_oil">תוכן: שמן</string>
+	<string name="poi_content_fuel">תוכן: דלק</string>
+	<string name="poi_content_wine">תוכן: יין</string>
+	<string name="poi_content_sewage">תוכן: ביוב</string>
+	<string name="poi_content_gas">תוכן: גז</string>
+	<string name="poi_content_biomass">תוכן: ביומסה</string>
+	<string name="poi_content_wastewater">תוכן: שפכים</string>
+	<string name="poi_content_crop">תוכן: יבול</string>
+	<string name="poi_content_fodder">תוכן: מספוא</string>
+	<string name="poi_content_beer">תוכן: בירה</string>
+	<string name="poi_content_salt">תוכן: מלח</string>
+	<string name="poi_content_grain">תוכן: דגן</string>
+
+	<string name="poi_nudism_yes">מותר</string>
+	<string name="poi_nudism_no">אסור</string>
+	<string name="poi_nudism_obligatory">חובה</string>
+	<string name="poi_nudism_customary">נהוג</string>
+	<string name="poi_nudism_permissive">מתירני</string>
+
+	<string name="poi_trade_building_supplies">חומרי בניין</string>
+	<string name="poi_trade_plumbing">ציוד אינסטלציה</string>
+	<string name="poi_trade_wood">ציוד עץ</string>
+	<string name="poi_trade_agricultural_supplies">אספקה חקלאית</string>
+	<string name="poi_trade_tile">ציוד ריצוף</string>
+
 	</resources>
