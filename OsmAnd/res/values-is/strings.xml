@@ -2539,7 +2539,7 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="audionotes_plugin_description">Viðbótin fyrir hljóð/myndskeiðs-minnispunkta virkjar eiginleikann til að taka upp minnispunkta með hljóði/ljósmyndum/myndskeiðum á meðan ferðalagi stendur, annað hvort með því að nota hnapp á kortaskjánum eða beint í samhengisvalmynd fyrir hvaða staðsetningu sem er á kortinu.</string>
     <string name="osmand_parking_plugin_description">Viðbótin fyrir staðsetningu bílastæðis gerir þér kleift að skrá hvar bílnum þínum var lagt og hve langur tími er til stefnu áður en stöðumælir rennur út (ef um tímamörk er að ræða). 
 \nBæði staðurinn og tíminn eru sýnileg á stjórnborði OsmAnd rétt eins og í sérstökum viðmótshluta kortaskjásins. Hægt er að bæta áminningu inn í Android dagatalið.</string>
-    <string name="empty_state_markers_active_desc">Ýta og halda eða stutt bank á \'Staðir\', banka síðan á hnappinn í merkiflagginu.</string>
+    <string name="empty_state_markers_active_desc">Ýta og halda eða stutt bank á \'Staðir\', ýttu síðan á hnappinn í merkiflagginu.</string>
     <string name="tap_on_map_to_hide_interface_descr">Bank á kortið víxlar stjórnhnöppum og viðmótshlutum af eða á.</string>
     <string name="fast_coordinates_input_descr">Veldu inntakssnið hnita. Þú getur alltaf breytt því í stillingunum.</string>
     <string name="quick_action_resume_pause_navigation_descr">Bankaðu á þennan hnapp til að setja leiðsögn í bið eða halda áfram með hana.</string>
@@ -2840,7 +2840,7 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="shared_string_explore">Uppgötva</string>
     <string name="wikivoyage_search_hint">Leita: Land, borg/sveitarfélag, hérað/sýsla</string>
     <string name="shared_string_read">Lesið</string>
-    <string name="shared_string_contents">Innihald</string>
+    <string name="shared_string_contents">Efni</string>
     <string name="download_maps_travel">Ferðaleiðbeiningar</string>
     <string name="shared_string_wikivoyage">Wikivoyage</string>
     <string name="article_removed">Grein fjarlægð</string>
@@ -2965,14 +2965,20 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="commiting_way">Sendi leið inn…</string>
     <string name="test_voice_desrc">Bankaðu á hnapp og hlustaðu á samsvarandi raddskipun til að bera kennsl á fyrirmæli sem vantar eða sem eru skemmd.</string>
 <string name="ask_for_location_permission">Gefðu OsmAnd heimild til að sjá staðsetningar til að halda áfram.</string>
-    <string name="release_3_2_pre">• Lagað hrun í ræsingu sem til kom á ekki-latneskt kóðuðum kortum 
+    <string name="release_3_2_pre">• Lagað hrun í ræsingu sem kom fyrir á sumum tækjum
+\n
+\n • Nýr kortamerkjaeiginleiki: birting merkja sem þegar hefur verið farið um
+\n
+\n • Leitarferilsskrá sýnir núna flokkana sem áður hefur verið leitað að
+\n
+\n • Lagað hrun í ræsingu sem til kom á ekki-latneskt kóðuðum kortum 
 \n 
 \n • Bættur hraði við myndgerð á Android 8.0 tækjum 
 \n 
 \n • Stuðningur við breytingar á flákahlutum (ekki-aðstaða) 
-\n
-\n• Mæling vegalengda: \'Mæla\' færslu bætt víð aðgerðir í samhengisvalmynd
-\n
+\n 
+\n• Mæling vegalengda: \'Mæla\' færslu bætt víð aðgerðir í samhengisvalmynd 
+\n 
 \n</string>
     <string name="rendering_value_black_name">Svart</string>
     <string name="search_street">Leita að götu</string>
@@ -2981,4 +2987,7 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="keep_passed_markers_descr">Kortamerki sem bætt er inn sem hópi eftirlæta eða sem GPX-ferli og sem þegar hefur verið farið um, verða áfram á kortinu. Ef hópurinn er ekki virkur, munu kortamerkin hverfa.</string>
     <string name="keep_passed_markers">Halda merkjum sem þegar hefur verið farið um á kortinu</string>
     <string name="more_transport_on_stop_hint">Það eru fleiri samgöngumátar á þessari biðstöð.</string>
+    <string name="markers_remove_dialog_msg">Eyða kortamerkinu \'%s\'\?</string>
+    <string name="edit_map_marker">Breyta kortamerki</string>
+    <string name="third_party_application">Utanaðkomandi forrit</string>
     </resources>
