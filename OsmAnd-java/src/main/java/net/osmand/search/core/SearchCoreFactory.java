@@ -500,6 +500,7 @@ public class SearchCoreFactory {
 		private static final int LIMIT = 10000;
 		private static final int BBOX_RADIUS = 500 * 1000;
 		private static final int BBOX_RADIUS_INSIDE = 10000 * 1000; // to support city search for basemap
+		private static final int FIRST_WORD_MIN_LENGTH = 3;
 		private SearchAmenityTypesAPI searchAmenityTypesAPI;
 
 		public SearchAmenityByNameAPI(SearchAmenityTypesAPI searchAmenityTypesAPI) {
@@ -519,12 +520,24 @@ public class SearchCoreFactory {
 			final BinaryMapIndexReader[] currentFile = new BinaryMapIndexReader[1];
 			Iterator<BinaryMapIndexReader> offlineIterator = phrase.getRadiusOfflineIndexes(BBOX_RADIUS,
 					SearchPhraseDataType.POI);
-			final NameStringMatcher nm = phrase.getNameStringMatcher();
+			String searchWord = phrase.getUnknownSearchWord();
+			if (searchWord.length() < FIRST_WORD_MIN_LENGTH && phrase.getUnknownSearchWords().size() > 0) {
+				for (String unknownSearchWord : phrase.getUnknownSearchWords()) {
+					if (unknownSearchWord.length() >= FIRST_WORD_MIN_LENGTH) {
+						searchWord = unknownSearchWord;
+						break;
+					}
+				}
+			}
+			if (searchWord.length() < FIRST_WORD_MIN_LENGTH) {
+				return false;
+			}
+			final NameStringMatcher nm = phrase.getNameStringMatcher(searchWord, phrase.isUnknownSearchWordComplete());
 			QuadRect bbox = phrase.getRadiusBBoxToSearch(BBOX_RADIUS_INSIDE);
 			final Set<String> ids = new HashSet<String>();
 			SearchRequest<Amenity> req = BinaryMapIndexReader.buildSearchPoiRequest(
 					(int)bbox.centerX(), (int)bbox.centerY(),
-					phrase.getUnknownSearchWord(),
+					searchWord,
 					(int)bbox.left, (int)bbox.right,
 					(int)bbox.top, (int)bbox.bottom,
 					new ResultMatcher<Amenity>() {
@@ -593,7 +606,9 @@ public class SearchCoreFactory {
 			if (p.hasObjectType(ObjectType.POI_TYPE)) {
 				return -1;
 			}
-			if (p.getUnknownSearchWordLength() >= 3 || p.getRadiusLevel() > 1) {
+			if (p.getUnknownSearchWordLength() >= FIRST_WORD_MIN_LENGTH
+					|| p.getUnknownSearchWords().size() > 0
+					|| p.getRadiusLevel() > 1) {
 				return SEARCH_AMENITY_BY_NAME_API_PRIORITY_IF_3_CHAR;
 			}
 			return -1;
