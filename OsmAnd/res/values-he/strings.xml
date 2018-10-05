@@ -3085,15 +3085,19 @@
     <string name="search_no_results_feedback">אין תוצאות חיפוש?
 \nנשמח לקבל משוב</string>
     <string name="test_voice_desrc">יש ללחוץ על הכפתור ולהאזין להנחיה הקולית כדי לזהות הנחיות חסרות או שגויות.</string>
-<string name="release_3_2_pre">"• תוקנה קריסה בהפעלה שקרתה עקב מפות עם סוגי כתב שאינם לטיניים 
-\n 
+<string name="release_3_2_pre">"• תוקנה קריסה בהפעלה שקרתה בחלק מהמכשירים
+\n
+\n • תכונת סמנים חדשה: הצגת הסמנים שכבר נחצו
+\n
+\n • היסטוריית החיפוש מציגה כעת את הקטגוריות אחריהן חיפשת בעבר
+\n
+\n • תוקנה קריסה בהפעלה שקרתה עקב מפות עם סוגי כתב שאינם לטיניים 
+\n
 \n • שיפור מהירות העיבוד במכשירי Android  בגרסה 8.0 
-\n 
+\n
 \n • תמיכה בעריכת עצמים מצולעים (שאינם מבני קהילה) 
-\n 
-\n • מדידת מרחק: הוספת כפתור מדידה לפעולות בתפריט ההקשר
 \n
-\n
+\n • מדידת מרחק: הוספת כפתור מדידה לפעולות בתפריט ההקשר 
 \n"</string>
     <string name="ask_for_location_permission">נא לאפשר ל־OsmAnd לגשת למיקום כדי להמשיך.</string>
     <string name="rendering_value_black_name">שחור</string>
@@ -3103,4 +3107,7 @@
     <string name="shared_string_restore">שחזור</string>
     <string name="keep_passed_markers_descr">סמנים נוספים כקבוצות של מועדפים או נקודות דרך GPX שמסומנות ככאלו שעברת יישארו על המפה. אם הקבוצה אינה פעילה, הסמנים ייעלמו מהמפה.</string>
     <string name="keep_passed_markers">להשאיר סמנים שעברת בהם על המפה</string>
+    <string name="markers_remove_dialog_msg">למחוק את סמן המפה ‚%s’\?</string>
+    <string name="edit_map_marker">עריכת סמן מפה</string>
+    <string name="third_party_application">יישום צד שלישי</string>
     </resources>
