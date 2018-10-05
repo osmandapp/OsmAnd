@@ -664,7 +664,7 @@
 	<string name="poi_entrance_main">Aðalinngangur</string>
 	<string name="poi_entrance">Inngangur</string>
 	<string name="poi_height">Hæð</string>
-	<string name="poi_operator">Virki</string>
+	<string name="poi_operator">Stýring</string>
 	<string name="poi_seasonal_spring">Vor</string>
 	<string name="poi_loc_name">Staðvært heiti</string>
 	<string name="poi_pump_manual">Handvirkt</string>
@@ -1726,7 +1726,7 @@
 	<string name="poi_ferry_terminal_cargo">Fragt</string>
 	<string name="poi_aerialway_heating">Upphitun</string>
 	<string name="poi_city_capital">Höfuðborg</string>
-	<string name="poi_information_contents">Innihald</string>
+	<string name="poi_information_contents">Efni</string>
 	<string name="poi_clock_option">Viðbótar</string>
 	<string name="poi_scout_camp">Skátatjaldsvæði</string>
 	<string name="poi_outdoor_seating">Sæti utandyra</string>
@@ -3862,5 +3862,7 @@
 	<string name="poi_ruins">Rústir</string>
 
 	<string name="poi_license_classes">Flokkar notkunarleyfa</string>
+
+<string name="poi_hill">Hæð</string>
 
 </resources>
