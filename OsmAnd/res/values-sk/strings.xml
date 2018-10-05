@@ -2990,13 +2990,19 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="search_no_results_feedback">Žiadne výsledky vyhľadávania?
 \nDajte nám spätnú väzbu</string>
     <string name="test_voice_desrc">Stlačte tlačidlo pre vypočutie hlasového povelu, aby ste identifikovali chýbajúce či chybné povely.</string>
-<string name="release_3_2_pre">• Opravený pád pri štarte s ne-latinskými mapami 
-\n 
+<string name="release_3_2_pre">• Opravený pád pri štarte na niektorých zariadeniach
+\n
+\n • Nová funkcia značiek: zobrazenie značiek, ktoré už boli prejdené
+\n
+\n • História vyhľadávania zobrazuje aj minule hľadané kategórie
+\n
+\n • Opravený pád pri štarte s mapami v inej ako latinskej abecede
+\n
 \n • Zlepšenie problému pomalého vykresľovania na zariadeniach s Android 8.0 
 \n 
 \n • Podpora pre editovanie plošných objektov 
 \n 
-\n • Meranie vzdialenosti: tlačidlo merania pridané do akcií v kontextovom menu
+\n • Meranie vzdialenosti: tlačidlo merania pridané do akcií v kontextovom menu 
 \n</string>
     <string name="ask_for_location_permission">Prosím udeľte OsmAnd oprávnenie na prístup k polohe, aby mohol pokračovať.</string>
     <string name="rendering_value_black_name">Čierna</string>
@@ -3006,4 +3012,7 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="shared_string_restore">Obnoviť</string>
     <string name="keep_passed_markers_descr">Značky pridané ako skupina Obľúbených alebo bodov GPX, označené ako Prejdené, zostanú na mape. Ak skupina nie je aktívna, značky zmiznú z mapy.</string>
     <string name="keep_passed_markers">Ponechať prejdené značky na mape</string>
+    <string name="markers_remove_dialog_msg">Odstrániť mapovú značku \'%s\'\?</string>
+    <string name="edit_map_marker">Upraviť mapovú značku</string>
+    <string name="third_party_application">Aplikácia tretej strany</string>
     </resources>
