@@ -959,7 +959,7 @@
 	<string name="poi_monitoring_station">Станцыя назіраньня</string>
 	<string name="poi_email">Эл. пошта</string>
 	<string name="poi_fax">Факс</string>
-	<string name="facebook">Фэйсбук</string>
+	<string name="facebook">Facebook</string>
 	<string name="poi_mobile">Сотавы тэлефон</string>
 	<string name="poi_animal_shelter_dog">Сабакі</string>
 	<string name="poi_animal_shelter_cat">Каты</string>
@@ -3918,5 +3918,7 @@
 	<string name="poi_ruins">Руіны</string>
 
 	<string name="poi_license_classes">Аўтакласы</string>
+
+<string name="poi_hill">Узгорак</string>
 
 </resources>
