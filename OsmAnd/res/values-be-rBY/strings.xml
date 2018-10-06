@@ -840,8 +840,8 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
 	<string name="osmand_parking_warning">Papiaredžańnie</string>
 	<string name="osmand_parking_warning_text">Napamin ab abmiežavanni času parkoŭki aŭtamabilia ŭžo dadadzieny ŭ kaliandar. Vam budzie nieabchodna jaho vydalić ŭručnuju.</string>    
 	<string name="osmand_parking_time_limit_title">Zadajcie abmiežavannie času stajanki</string>
-	<string name="osmand_parking_delete_confirm">Vydalić markier pryparkavanaha aŭtamabilia?</string>
-	<string name="osmand_parking_delete">Vydalić markier stajankі</string>
+	<string name="osmand_parking_delete_confirm">Vydalić paznaku pryparkavanaha aŭtamabilia\?</string>
+	<string name="osmand_parking_delete">Vydalić paznaku stajanki</string>
 	<string name="osmand_parking_choose_type">Vybierycie typ parkoŭkі</string>
 	<string name="osmand_parking_lim_text">Z abmiežavańniem pa časie</string>
 	<string name="osmand_parking_no_lim_text">Biez abmiežavańnia pa časie</string>
@@ -1670,8 +1670,8 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     
 
 	<string name="map_widget_battery">Zarad batareі</string>
-    <string name="change_markers_position">Zmianić pazicyju markiera</string>
-    <string name="move_marker_bottom_sheet_title">Pierasuńcie mapu, kab zmianić pazicyju markiera</string>
+    <string name="change_markers_position">Zmianić pazicyju paznaki</string>
+    <string name="move_marker_bottom_sheet_title">Pierasuńcie mapu, kab zmianić pazicyju paznaki</string>
     <!-- string name="lat_lon_pattern">Šyr: %1$.5f Daŭ: %2$.5f</string -->
     <string name="follow_us">Sačycie za namі</string>
     <string name="access_direction_audio_feedback">Hukavaja napramki</string>
@@ -1709,7 +1709,7 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="rendering_value_thin_name">Tonkі</string>
     <string name="rendering_value_medium_name">Siarednі</string>
     <string name="rendering_value_bold_name">Toŭsty</string>
-    <string name="no_map_markers_found">Kali łaska, dadajcie markiery praz ekran mapy</string>
+    <string name="no_map_markers_found">Kali laska, dadajcie paznaki praz ekran mapy</string>
     <string name="no_waypoints_found">Nie znajšłosia šlachavych punktaŭ</string>
     <string name="report">Spravazdača</string>
     
@@ -1749,8 +1749,8 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
 
     <string name="osm_live_header">Hetaja padpiska dazvaliaje atrymlivać štohadzinnaje abnaŭlieńnie dlia ŭsich mapaŭ śvietu. Častka dachodaŭ pieradajecca ŭ OSM-supoĺnaść i vyplačvajecca za kožny ŭniosak u OSM. U vypadku, kali vy liubicie OsmAnd i OSM, i chočacie padtrymać i być padtrymanym imi, heta ideaĺny sposab zrabić heta.</string>
     
-    <string name="select_map_marker">Vybierycie markier</string>
-    <string name="map_markers_other">Іnšyja markiery</string>
+    <string name="select_map_marker">Vybierycie paznaku</string>
+    <string name="map_markers_other">Inšyja paznaki</string>
     <string name="upload_anonymously">Adasłać ananіmna</string>
     <string name="show_transparency_seekbar">Pakazać prazrystuju pošukavuju panel</string>
     <string name="download_files_error_not_enough_space">Niedastatkova pamiaci!
@@ -1759,20 +1759,20 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="download_files_question_space_with_temp">Spampavać {0} fajl(aŭ)? Vykarystoŭvajecca {3} MB časovaj i {1} MB stalaj pamiaci. (Svabodna {2} MB prastory.)</string>
     <string name="upload_osm_note_description">Adaslać Vašu OSM-natatku ananimna aĺbo praz svoj profiĺ OpenStreetMap.org.</string>
     <string name="upload_osm_note">Adasłać OSM zaŭvahu</string>
-    <string name="map_marker_1st">Pieršy markier</string>
-    <string name="map_marker_2nd">Druhі markier</string>
+    <string name="map_marker_1st">Pieršaja paznaka</string>
+    <string name="map_marker_2nd">Druhaja paznaka</string>
     <string name="shared_string_toolbar">Panel іnstrumentaŭ</string>
     <string name="shared_string_widgets">Vіdžety</string>
-    <string name="add_points_to_map_markers_q">Dadać usie kropki jak markiery mapy?</string>
-    <string name="shared_string_add_to_map_markers">Dadać da markieraŭ mapy</string>
-    <string name="select_map_markers">Abiarycie markiery</string>
+    <string name="add_points_to_map_markers_q">Dadać usie kropki jak paznaki mapy\?</string>
+    <string name="shared_string_add_to_map_markers">Dadać da paznakaŭ mapy</string>
+    <string name="select_map_markers">Abiarycie paznaki</string>
     <string name="shared_string_reverse_order">Zvarotny paradak</string>
-    <string name="show_map_markers_description">Aktyvuje funkcyju markieraŭ mapy.</string>
-    <string name="clear_active_markers_q">Vydalić usie aktyŭnyja markiery?</string>
-    <string name="clear_markers_history_q">Ačyścić historyju markieraŭ mapy?</string>
-    <string name="active_markers">Aktyŭnyja markiery</string>
-    <string name="map_markers">Markiery</string>
-    <string name="map_marker">Markier</string>
+    <string name="show_map_markers_description">Aktyvuje funkcyju paznakaŭ mapy.</string>
+    <string name="clear_active_markers_q">Vydalić usie aktyŭnyja paznaki\?</string>
+    <string name="clear_markers_history_q">Ačyścić historyju paznakaŭ mapy\?</string>
+    <string name="active_markers">Aktyŭnyja paznaki</string>
+    <string name="map_markers">Paznaki</string>
+    <string name="map_marker">Paznaka mapy</string>
     <string name="consider_turning_polygons_off">Rekamendujecca adkliučyć admalioŭku palihonaŭ.</string>
     <string name="rendering_attr_showMtbRoutes_name">Adlustroŭvać MTB maršruty</string>
     <string name="show_polygons">Pakazvać palihony</string>
@@ -2436,7 +2436,7 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="configure_screen_quick_action">Chutkaje dziejańnie</string>
     <string name="quick_action_item_action">Dziejańnie %d</string>
     <string name="quick_action_item_screen">Ekran %d</string>
-    <string name="quick_action_add_marker">Dadać markier na mapu</string>
+    <string name="quick_action_add_marker">Dadać paznaku</string>
     <string name="quick_action_add_poi">Dadać POI</string>
     <string name="quick_action_map_style">Zmianić styl mapy</string>
     <string name="quick_action_map_style_switch">Styl mapy byŭ zmienieny na \"%s\".</string>
@@ -2688,7 +2688,7 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="save_poi_too_many_uppercase">Nazva zmiaščaje zanadta šmat vialikich litar. Pradoŭžyć?</string>
     <string name="quick_favorites_show_favorites_dialog">Pakazać dyjaloh upadabanych</string>
     <string name="quick_favorites_name_preset">Nazva pieradustaloŭki</string>
-    <string name="quick_action_add_marker_descr">Nacisk na hetuju knopku dadasć markier na mapu ŭ centry ekrana.</string>
+    <string name="quick_action_add_marker_descr">Nacisk na hetuju knopku dadasć paznaku mapy ŭ centry ekrana.</string>
     <string name="quick_action_add_gpx_descr">Nacisk na hetuju knopku dadaść GPX-kropku ŭ siaredzinie ekrana.</string>
     <string name="quick_action_take_audio_note_descr">Nacisk na hetuju knopku dadasć aŭdyjanatatku na mapu ŭ siaredzinie ekrana.</string>
     <string name="quick_action_take_video_note_descr">Nacisk na hetuju knopku dadasć videanatatku na mapu ŭ siaredzinie ekrana.</string>
@@ -2794,12 +2794,12 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="show_direction">Indykacyja adlehłaści</string>
     <string name="sort_by">Sartavać pa</string>
     
-    <string name="marker_show_distance_descr">Vybierycie, jak pakazvać adlehłasć i napramak da markieraŭ na ekranie mapy:</string>
+    <string name="marker_show_distance_descr">Abiarycie, jak pakazvać adliehlaść i napramak da paznak na ekranie mapy:</string>
     <string name="map_orientation_change_in_accordance_with_speed">Paroh aryjentacyi mapy</string>
     <string name="map_orientation_change_in_accordance_with_speed_descr">Abiarycie chutkasć, na jakoj aryjentacyja mapy pierakliučajecca z «Napramku ruchu» na «Pa kompasu».</string>
-    <string name="all_markers_moved_to_history">Usie markiery pieraniesieny ŭ historyju</string>
-    <string name="marker_moved_to_history">Markier mapy pieraniesieny ŭ historyju</string>
-    <string name="marker_moved_to_active">Markier mapy staŭ aktyŭnym</string>
+    <string name="all_markers_moved_to_history">Usie paznaki pieraniesieny ŭ historyju</string>
+    <string name="marker_moved_to_history">Paznaka mapy pieraniesienaja ŭ historyju</string>
+    <string name="marker_moved_to_active">Paznaka mapy stala aktyŭnaj</string>
     <string name="shared_string_list">Śpis</string>
     <string name="shared_string_groups">Hrupy</string>
     <string name="passed">Apošniaje vykarystannie: %1$s</string>
@@ -2810,7 +2810,7 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="this_year">Sioleta</string>
     
     
-    <string name="remove_from_map_markers">Vydalić z markieraŭ mapy</string>
+    <string name="remove_from_map_markers">Vydalić z paznakaŭ mapy</string>
     <string name="descendingly">pa źmianšeńni</string>
     <string name="ascendingly">pa ŭzrastańni</string>
     <string name="date_added">Data dadavańnia</string>
@@ -2827,11 +2827,11 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="shared_string_sort">Sartavać</string>
     <string name="coordinate_input">Uvod kaardynat</string>
     <string name="is_saved">zachavany</string>
-    <string name="marker_save_as_track_descr">Ekspartavać vašy markiery ŭ nastupny GPX-fajl:</string>
+    <string name="marker_save_as_track_descr">Ekspartavać vašy paznaki ŭ nastupny GPX-fajl:</string>
     <string name="marker_save_as_track">Zachavać jak GPX-fajl</string>
     <string name="move_to_history">Pieramiaścić u historyju</string>
     <string name="group_will_be_removed_after_restart">Hrupy ŭžo nie budzie paslia nastupnaha pierazapusku prahramy.</string>
-    <string name="shared_string_markers">Markiery</string>
+    <string name="shared_string_markers">Paznaki</string>
     <string name="coordinates_format">Farmat kaardynat</string>
     <string name="use_system_keyboard">Vykarystoŭvać systemnuju klavijaturu</string>
     <string name="fast_coordinates_input_descr">Abrać farmat uvodu kaardynat. Vy zaŭsiody možacie źmianić jaho, nacisnuŭšy «Nalady».</string>
@@ -2850,13 +2850,13 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="show_map">Pakazać mapu</string>
     <string name="route_is_calculated">Maršrut različany</string>
     <string name="round_trip">Padarožža</string>
-    <string name="plan_route_no_markers_toast">Vam nieabchodna dadać pa mienšaj miery adzin markier, kab vykarystoŭvać hetuju funkcyju.</string>
+    <string name="plan_route_no_markers_toast">Vam nieabchodna dadać pa mienšaj miery adnu paznaku, kab vykarystoŭvać hetuju funkcyju.</string>
     <string name="wrong_format">Drenny farmat</string>
     <string name="wrong_input">Drenny ŭvod</string>
 	<string name="enter_new_name">Uviadzicie novaje imia</string>
 	<string name="shared_string_back">Nazad</string>
 	<string name="shared_string_view">Prahladzieć</string>
-	<string name="waypoints_added_to_map_markers">Kropki maršruta dadadzienyja ŭ markiery mapy</string>
+	<string name="waypoints_added_to_map_markers">Kropki maršruta dadadzienyja ŭ paznaki mapy</string>
 	<string name="import_gpx_file_description">mohuć być impartavanyja jak «Upadabanyja» ci jak GPX-fajl.</string>
     <string name="import_as_gpx">Impartavać jak GPX-fajł</string>
     <string name="import_as_favorites">Impartavać jak upadabanyja</string>
@@ -2865,21 +2865,21 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="tap_on_map_to_hide_interface">Poŭnyekranny režym</string>
     
     <string name="mark_passed">Adznačyć prajdzienyja</string>
-    <string name="add_favourites_group_to_markers_descr">Abiarycie katehoryju ŭpadabanych, kab dadać da markieraŭ.</string>
+    <string name="add_favourites_group_to_markers_descr">Abiarycie katehoryju ŭpadabanych, kab dadać da paznak.</string>
     <string name="shared_string_gpx_waypoints">Kropki sliedu</string>
     <string name="favourites_group">Katehoryja ŭlubionych</string>
     <string name="add_group">Dadać hrupu</string>
     <string name="add_group_descr">Impartavać hrupy z upadabanych ci GPX-kropak.</string>
-    <string name="empty_state_markers_active">Stvarycie markiery mapy!</string>
-    <string name="empty_state_markers_active_desc">Dakraniciesia miesca i potym nacisnicie knopku markiera.</string>
+    <string name="empty_state_markers_active">Stvarycie paznaki mapy!</string>
+    <string name="empty_state_markers_active_desc">Dakraniciesia miesca i potym nacisnicie knopku paznaki.</string>
     <string name="empty_state_markers_groups">Impartavać hrupy</string>
-    <string name="empty_state_markers_groups_desc">Impartavać hrupy ŭpadabanych ci šliachavyja kropki jak markiery.</string>
-    <string name="empty_state_markers_history_desc">Markiery, paznačanyja jak projdziennyja, z\'javiacca na hetym ekranie.</string>
+    <string name="empty_state_markers_groups_desc">Impartavać hrupy ŭpadabanych ci šliachavyja kropki jak paznaki.</string>
+    <string name="empty_state_markers_history_desc">Paznaki, adznačanyja jak projdziennyja, zjaviacca na hetym ekranie.</string>
     <string name="shared_string_two">Dva</string>
     <string name="shared_string_one">Adzin</string>
-    <string name="show_guide_line_descr">Pakazvaje linii kirunku ad vašaha stanovišča da aktyŭnaha markiera.</string>
-    <string name="show_arrows_descr">Pakazvaje adnu ci dźvie strelki, jakija pakazvajuć kirunak da aktyŭnych markieraŭ.</string>
-    <string name="distance_indication_descr">Vybierycie, jak adlustroŭvać adlehłaść da aktyŭnych markieraŭ.</string>
+    <string name="show_guide_line_descr">Pakazvaje linii kirunku ad vašaha stanovišča da aktyŭnaj paznaki.</string>
+    <string name="show_arrows_descr">Pakazvaje adnu ci dźvie strelki, jakija pakazvajuć kirunak da aktyŭnych paznak.</string>
+    <string name="distance_indication_descr">Abiarycie, jak adliustroŭvać adliehlaść da aktyŭnych paznak.</string>
     <string name="active_markers_descr">Abiarycie, koĺki ŭkazaĺnikaŭ napramku adliustroŭvać.</string>
     <string name="digits_quantity">Kolkaść dziesiatkovych ličbaŭ</string>
     <string name="show_number_pad">Pakazać ličbavuju paneĺ</string>
@@ -2887,9 +2887,9 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="coordinate_input_accuracy_description">Aŭtamatyčna pieraklučycca ŭ nastupnaje pole paśla ŭvodu %1$d dziesiatkovych ličbaŭ.</string>
     <string name="coordinate_input_accuracy">%1$d ličbaŭ</string>
     <string name="go_to_next_field">Nastupnaje polie</string>
-    <string name="rename_marker">Pierajmienavać markier</string>
+    <string name="rename_marker">Pierajmienavać paznaku</string>
     <string name="appearance_on_the_map">Źniešni vyhlad na mapie</string>
-    <string name="add_track_to_markers_descr">Abrać slied kab dadać jaho šliachavyje kropki ŭ markiery.</string>
+    <string name="add_track_to_markers_descr">Abrać slied kab dadać jaho šliachavyje kropki ŭ paznaki.</string>
     <string name="shared_string_right">Naprava</string>
     <string name="shared_string_left">Nalieva</string>
     <string name="shared_string_more_without_dots">Bolš</string>
@@ -2899,11 +2899,11 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="shared_string_deleted">Vydalena</string>
     <string name="shared_string_edited">Adredahavana</string>
     <string name="shared_string_added">Dadadziena</string>
-    <string name="marker_activated">Markier %s aktyvavany.</string>
+    <string name="marker_activated">Paznaka %s aktyvavanaja.</string>
     <string name="notes_by_date">Natatki pa dacie</string>
     <string name="by_date">Pa dacie</string>
     <string name="by_type">Pa typu</string>
-    <string name="one_tap_active_descr">Nacisk na markier na mapie pieramiescić hety markier na pieršaje miesca ŭ spisie aktyŭnych markieraŭ, nie adkryvajučy kantekstnaje mieniu.</string>
+    <string name="one_tap_active_descr">Nacisk na paznaku na mapie pieramiescić hetuju paznaku na pieršaje miesca ŭ spisie aktyŭnych paznakaŭ biez adkryccia kantekstnaha mieniu.</string>
     <string name="one_tap_active">Aktyvacyja adnym naciskam</string>
     <string name="empty_state_av_notes">Rabi natatki!</string>
     <string name="empty_state_av_notes_desc">Dadajcie aŭdyjo-, videa- ci fotanatatku na lubuju kropku na mapie, vykarystoŭvajučy vidžet ci kantekstnaje mieniu.</string>
@@ -2924,7 +2924,7 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="av_locations_selected_desc">GPX-fajl z kaardynatami i danymi vybranych natatak.</string>
     <string name="av_locations_all_desc">GPX-fajl z kaardynatami i danymi ŭsich natatak.</string>
     <string name="shared_string_actions">Dziejanni</string>
-    <string name="shared_string_marker">Markier</string>
+    <string name="shared_string_marker">Paznaka</string>
     <string name="osm_recipient_stat">Zmien %1$s, suma %2$s mBTC</string>
     <string name="osm_recipients_label">OSM-atrymaĺniki</string>
     <string name="total_donations">Usiaho achviaravanniaŭ</string>
@@ -2998,7 +2998,7 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="shared_string_result">Vynik</string>
     <string name="use_two_digits_longitude">Vykarystoŭvać dźvie ličby daŭhaty</string>
     <string name="shared_string_travel_guides">Padarožža</string>
-    <string name="waypoints_removed_from_map_markers">Šlachavyja kropki vydalenyaja ź markieraŭ mapy</string>
+    <string name="waypoints_removed_from_map_markers">Šliachavyja kropki vydalienyja z paznakaŭ mapy</string>
     <string name="index_item_world_wikivoyage">Suśvietnyja artykuły Wikivoyage</string>
     <string name="online_webpage_warning">Staronka dastupnaja toĺki anlajn. Adkryć ŭ veb-braŭziery?</string>
     <string name="images_cache">Keš vyjaŭ</string>
@@ -3072,16 +3072,17 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="shared_string_travel_book">Dzionnik padarožžaŭ</string>
     <string name="download_images">Spampavać vyjavy</string>
     <string name="error_notification_desc">Kali laska, adpraŭcie zdymak ekrana z hetym apaviaščenniem na support@osmand.net</string>
-    <string name="release_3_0">"• Novaje: padtrymka svietavych aŭtanomnych turystyčnych daviednikaŭ. Spasylačnyja miasciny zviazany z mapaj. Zychodnyja danyja ad Wikivoyage. 
+    <string name="release_3_0">• Novaje: padtrymka svietavych aŭtanomnych turystyčnych daviednikaŭ. Spasylačnyja miasciny zviazany z mapaj. Zychodnyja danyja ad Wikivoyage. 
 \n 
 \n • Vikipiedyja: novy vyhliad, aktyŭnyja spasylki, padtrymka vyjaŭ 
 \n 
 \n • Open Track UI: padtrymka hrup šliachavych kropak 
 \n 
-\n • Markiery mapy: impart abranych hrup z GPX-fajlaŭ, uvod kaardynat, novy vyhliad 
+\n • Paznaki mapy: impart abranych hrup z GPX-fajlaŭ, uvod kaardynat, novy vyhliad 
 \n 
 \n • Padpiska OsmAnd Live ciapier padtrymlivaje ŭsie funkcyi OsmAnd 
-\n "</string>
+\n 
+\n</string>
     <string name="shared_string_gpx_files">GPX-fajly</string>
     <string name="access_intermediate_arrival_time">Pramiežkavy čas prybyccia</string>
     <string name="map_widget_intermediate_time">Pramiežkavy čas</string>
@@ -3110,19 +3111,45 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
 \nDajcie nam vodhuk</string>
     <string name="commiting_way">Fiksujecca šliach…</string>
     <string name="test_voice_desrc">Nacisnicie na knopku i pasluchajcie adpaviednuju halasavuju padkazku, kab vyznačyć adsutnyja abo paškodžanyja padkazki.</string>
-<string name="release_3_1">• Navihacyja: vypraŭliennie indykataru prahresu, chutkaja pieramiena pačatkovaha i kančatkovaha punktaŭ maršrutu
+<string name="release_3_1">• Navihacyja: vypraŭliennie indykataru prahresu, chutkaja pieramiena pačatkovaha i kančatkovaha punktaŭ maršrutu 
+\n 
+\n • Paznaki mapy: vypraŭliennie ŭkliučennia/adkliučennia hrup, mahčymasć chavać paznaki z mapy 
+\n 
+\n • Redahavannie OSM: mahčymasć praŭki tehaŭ dlia niekropkavych abjektaŭ i šliachoŭ, vypraŭliennie adsutnych kamientaroŭ na natatkach, reziervovaje kapijavannie pravak 
+\n 
+\n • Paliapšennie razboru Wikipedia i Wikivoyage, abnoŭlienyja fajly ŭžo dastupnyja 
+\n 
+\n • Kantekstnaje mieniu: vypraŭliennie kolieru darožnych znakaŭ u načnym režymie, vypraŭliennie pamieraŭ dadatkovaha mieniu 
+\n 
+\n • Račnaja navihacyja: padtrymka farvateru 
+\n 
+\n • Vypraŭliennie inšych chibaŭ 
+\n 
+\n</string>
+    <string name="markers_remove_dialog_msg">Vydalić paznaku mapy «%s»\?</string>
+    <string name="edit_map_marker">Redahavać paznaku mapy</string>
+    <string name="third_party_application">Staronniaje prykladannie</string>
+    <string name="search_street">Pošuk vulicy</string>
+    <string name="start_search_from_city">Pačać pošuk z horada</string>
+    <string name="shared_string_restore">Adnavić</string>
+    <string name="keep_passed_markers_descr">Paznaki, dadanyja jak hrupa uliublionych ci projdienych maršrutnych GPX-kropak, zastanucca na mapie. Kali hrupa nieaktyŭnaja, paznaki zniknuć z mapy.</string>
+    <string name="keep_passed_markers">Pakinuć projdzienyja paknaki na mapie</string>
+    <string name="more_transport_on_stop_hint">Na hetym prypynku josć boĺš hramadskaha transpartu.</string>
+    <string name="ask_for_location_permission">Kali laska, dajcie OsmAnd dazvol na vyznačennia miescaznachodžannia.</string>
+    <string name="release_3_2_pre">• Vypraŭlieny vyliet pry zapusku, što adbyvaŭsia na niekatorych pryladach
 \n
-\n • Markiery mapy: vypraŭliennie ŭkliučennia/adkliučennia hrup, mahčymasć chavać markiery z mapy
+\n • Novyja funkcyi paznak: pakazvajucca projdziennyja paznaki
 \n
-\n • Redahavannie OSM: mahčymasć praŭki tehaŭ dlia niekropkavych abjektaŭ i šliachoŭ, vypraŭliennie adsutnych kamientaroŭ na natatkach, reziervovaje kapijavannie pravak
+\n • Historyja pošuku zaraz pakazvaje katehoryi, što vy šukali raniej
 \n
-\n • Paliapšennie razboru Wikipedia i Wikivoyage, abnoŭlienyja fajly ŭžo dastupnyja
+\n • Vypraŭlieny vyliet pry zapusku, što adbyvaŭsia z nielacinskimi kartami
 \n
-\n • Kantekstnaje mieniu: vypraŭliennie kolieru darožnych znakaŭ u načnym režymie, vypraŭliennie pamieraŭ dadatkovaha mieniu
+\n • Paliapšennie chutkasci admalioŭki na pryladach z Android 8.0
 \n
-\n • Račnaja navihacyja: padtrymka farvateru
+\n • Padtrymka redahavannia palihonnych abjektaŭ (nie zručnasciej)
 \n
-\n • Vypraŭliennie inšych chibaŭ
+\n • Vymiarennie dystancyj: dadadziena knopka «Vymiarennie» ŭ «Dziejanni» kantekstnaha mieniu
 \n
 \n</string>
+    <string name="rendering_value_black_name">Čorny</string>
     </resources>
