@@ -387,8 +387,8 @@
 	<string name="osmand_parking_warning">Папярэджаньне</string>
 	<string name="osmand_parking_warning_text">Напамін аб абмежаванні часу паркоўкі аўтамабіля ўжо дададзены ў каляндар. Вам будзе неабходна яго выдаліць ўручную.</string>    
 	<string name="osmand_parking_time_limit_title">Задайце абмежаванне часу стаянкі</string>
-	<string name="osmand_parking_delete_confirm">Выдаліць маркер прыпаркаванага аўтамабіля?</string>
-	<string name="osmand_parking_delete">Выдаліць маркер стаянкі</string>
+	<string name="osmand_parking_delete_confirm">Выдаліць пазнаку прыпаркаванага аўтамабіля\?</string>
+	<string name="osmand_parking_delete">Выдаліць пазнаку стаянкі</string>
 	<string name="osmand_parking_choose_type">Выберыце тып паркоўкі</string>
 	<string name="osmand_parking_lim_text">З абмежаваньнем па часе</string>
 	<string name="osmand_parking_no_lim_text">Без абмежаваньня па часе</string>
@@ -1743,7 +1743,7 @@
 	<string name="shared_string_io_error">Памылка ўводу/вываду</string>
 	<string name="shared_string_unexpected_error">Нечаканая памылка</string>
 	<string name="shared_string_action_template">"Дзеяньне {0}"</string>
-	<string name="shared_string_close">Зачыніць</string>
+	<string name="shared_string_close">Закрыць</string>
 	<string name="shared_string_exit">Выхад</string>
 	<string name="shared_string_show">Паказаць</string>
 	<string name="shared_string_show_all">Паказаць усе</string>
@@ -2204,23 +2204,23 @@
 
     <string name="osm_live_header">Гэтая падпіска дазваляе атрымліваць штогадзіннае абнаўленьне для ўсіх мапаў сьвету. Частка даходаў перадаецца ў OSM-супольнасьць і выплачваецца за кожны ўнёсак у OSM. У выпадку, калі вы любіце OsmAnd і OSM, і хочаце падтрымаць і быць падтрыманым імі, гэта ідэальны спосаб зрабіць гэта.</string>
     
-    <string name="select_map_marker">Выберыце маркер</string>
-    <string name="map_markers_other">Іншыя маркеры</string>
+    <string name="select_map_marker">Выберыце пазнаку</string>
+    <string name="map_markers_other">Іншыя пазнакі</string>
     <string name="upload_anonymously">Адаслаць ананімна</string>
     <string name="download_files_error_not_enough_space">Недастаткова памяці!
  Патрабуецца {3} МБ часовай і {1} МБ сталай памяці.
  Даступна толькі {2} МБ.</string>
     <string name="download_files_question_space_with_temp">Спампаваць {0} файл(аў)? Выкарыстоўваецца {3} МБ часовай і {1} МБ сталай памяці. (Свабодна {2} МБ прасторы.)</string>
-    <string name="map_marker_1st">Першы маркер</string>
-    <string name="map_marker_2nd">Другі маркер</string>
+    <string name="map_marker_1st">Першая пазнака</string>
+    <string name="map_marker_2nd">Другая пазнака</string>
     <string name="shared_string_toolbar">Панэль інструмэнтаў</string>
     <string name="shared_string_widgets">Віджэты</string>
     <string name="shared_string_reverse_order">Зваротны парадак</string>
-    <string name="clear_active_markers_q">Выдаліць усе актыўныя маркеры?</string>
-    <string name="clear_markers_history_q">Ачысьціць гісторыю маркераў мапы?</string>
-    <string name="active_markers">Актыўныя маркеры</string>
-    <string name="map_markers">Маркеры</string>
-    <string name="map_marker">Маркер</string>
+    <string name="clear_active_markers_q">Выдаліць усе актыўныя пазнакі\?</string>
+    <string name="clear_markers_history_q">Ачысьціць гісторыю пазнакаў мапы\?</string>
+    <string name="active_markers">Актыўныя пазнакі</string>
+    <string name="map_markers">Пазнакі</string>
+    <string name="map_marker">Пазнака мапы</string>
     <string name="consider_turning_polygons_off">Рэкамэндуецца адключыць адмалёўку палігонаў.</string>
     <string name="osm_live_subscription">Падпіска OsmAnd Live</string>
     <string name="osm_live_active">Актыўны</string>
@@ -2246,19 +2246,19 @@
     <string name="osm_live_user_public_name">Публічнае імя</string>
     <string name="osm_live_support_region">Падтрымоўваны рэгіён</string>
     <string name="osm_live_enter_user_name">Калі ласка, ўвядзіце публічнае імя</string>
-    <string name="select_map_markers">Абярыце маркеры</string>
+    <string name="select_map_markers">Абярыце пазнакі</string>
     <string name="file_name_containes_illegal_char">Назва файлу зьмяшчае недапушчальны сымбаль</string>
 <string name="rendering_value_thin_name">Тонкі</string>
     <string name="rendering_value_medium_name">Сярэдні</string>
     <string name="rendering_value_bold_name">Тоўсты</string>
     <string name="map_mode">Рэжым мапы</string>
     <string name="number_of_gpx_files_selected_pattern">Абрана %s GPX файлаў</string>
-    <string name="add_points_to_map_markers_q">Дадаць усе кропкі як маркеры мапы?</string>
-    <string name="shared_string_add_to_map_markers">Дадаць да маркераў мапы</string>
-    <string name="no_map_markers_found">Калі ласка, дадайце маркеры праз экран мапы</string>
+    <string name="add_points_to_map_markers_q">Дадаць усе кропкі як пазнакі мапы\?</string>
+    <string name="shared_string_add_to_map_markers">Дадаць да пазнакаў мапы</string>
+    <string name="no_map_markers_found">Калі ласка, дадайце пазнакі праз экран мапы</string>
     <string name="storage_directory_readonly_desc">Пераключыліся на ўнутраную памяць, бо абраны каталог для захоўвання дадзеных толькі для чытання. Калі ласка, абярыце перазапісвальны каталог.</string>
     <string name="osm_live_email_desc">Неабходна, каб даць вам інфармацыю аб удзеле.</string>
-    <string name="show_map_markers_description">Актывуе функцыю маркераў мапы.</string>
+    <string name="show_map_markers_description">Актывуе функцыю пазнакаў мапы.</string>
     <string name="no_waypoints_found">Не знайшлося шляхавых пунктаў</string>
     <string name="access_default_color">Колер па змаўчаньні</string>
     <string name="access_category_choice">Выберыце катэгорыю</string>
@@ -2294,8 +2294,8 @@
     <string name="map_widget_battery">Зарад батарэі</string>
     <!-- string name="lat_lon_pattern">Шыр: %1$.5f Даў: %2$.5f</string -->
     <string name="lang_hu_formal">Вугорская (афіцыйная)</string>
-    <string name="move_marker_bottom_sheet_title">Перасуньце мапу, каб змяніць пазіцыю маркера</string>
-    <string name="change_markers_position">Змяніць пазіцыю маркера</string>
+    <string name="move_marker_bottom_sheet_title">Перасуньце мапу, каб змяніць пазіцыю пазнакі</string>
+    <string name="change_markers_position">Змяніць пазіцыю пазнакі</string>
     <string name="lang_be_by">Беларуская лацінка</string>
     <string name="lang_es_us">Гішпанская (ЗША)</string>
     <string name="lang_en_gb">Ангельская (Вялікабрытанія)</string>
@@ -2426,7 +2426,7 @@
     <string name="rendering_value_low_name">Нізкая</string>
     <string name="rendering_attr_hideWaterPolygons_name">Схаваць ваду</string>
     <string name="quick_action_item_screen">Экран %d</string>
-    <string name="quick_action_add_marker">Дадаць маркер на мапу</string>
+    <string name="quick_action_add_marker">Дадаць пазнаку</string>
     <string name="quick_action_add_poi">Дадаць POI</string>
     <string name="quick_action_map_style">Зьмяніць стыль мапы</string>
     <string name="quick_action_map_style_switch">Стыль мапы быў зьменены на \"%s\".</string>
@@ -2524,7 +2524,7 @@
     <string name="quick_action_navigation_voice">Голас укл/адкл</string>
     <string name="quick_favorites_show_favorites_dialog">Паказаць дыялог упадабаных</string>
     <string name="quick_favorites_name_preset">Назва перадусталёўкі</string>
-    <string name="quick_action_add_marker_descr">Націск на гэтую кнопку дадасць маркер на мапу ў цэнтры экрана.</string>
+    <string name="quick_action_add_marker_descr">Націск на гэтую кнопку дадасць пазнаку мапы ў цэнтры экрана.</string>
     <string name="quick_action_add_gpx_descr">Націск на гэтую кнопку дадасьць GPX-кропку ў сярэдзіне экрана.</string>
     <string name="quick_action_take_audio_note_descr">Націск на гэтую кнопку дадасць аўдыянататку на мапу ў сярэдзіне экрана.</string>
     <string name="quick_action_take_video_note_descr">Націск на гэтую кнопку дадасць відэанататку на мапу ў сярэдзіне экрана.</string>
@@ -2846,12 +2846,12 @@
     <string name="show_direction">Індыкацыя адлегласьці</string>
     <string name="sort_by">Сартаваць па</string>
     
-    <string name="marker_show_distance_descr">Выберыце, як паказваць адлегласьць і напрамак да маркераў на экране мапы:</string>
+    <string name="marker_show_distance_descr">Абярыце, як паказваць адлегласьць і напрамак да пазнак на экране мапы:</string>
     <string name="map_orientation_change_in_accordance_with_speed">Парог арыентацыі мапы</string>
     <string name="map_orientation_change_in_accordance_with_speed_descr">Абярыце хуткасць, на якой арыентацыя мапы пераключаецца з «Напрамку руху» на «Па компасу».</string>
-    <string name="all_markers_moved_to_history">Усе маркеры перанесены ў гісторыю</string>
-    <string name="marker_moved_to_history">Маркер мапы перанесены ў гісторыю</string>
-    <string name="marker_moved_to_active">Маркер мапы стаў актыўным</string>
+    <string name="all_markers_moved_to_history">Усе пазнакі перанесены ў гісторыю</string>
+    <string name="marker_moved_to_history">Пазнака мапы перанесеная ў гісторыю</string>
+    <string name="marker_moved_to_active">Пазнака мапы стала актыўнай</string>
     <string name="shared_string_list">Сьпіс</string>
     <string name="shared_string_groups">Групы</string>
     <string name="passed">Апошняе выкарыстанне: %1$s</string>
@@ -2862,7 +2862,7 @@
     <string name="this_year">Сёлета</string>
     
     
-    <string name="remove_from_map_markers">Выдаліць з маркераў мапы</string>
+    <string name="remove_from_map_markers">Выдаліць з пазнакаў мапы</string>
     <string name="descendingly">па зьмяншэньні</string>
     <string name="ascendingly">па ўзрастаньні</string>
     <string name="date_added">Дата дадаваньня</string>
@@ -2879,11 +2879,11 @@
     <string name="shared_string_sort">Сартаваць</string>
     <string name="coordinate_input">Увод каардынат</string>
     <string name="is_saved">захаваны</string>
-    <string name="marker_save_as_track_descr">Экспартаваць вашы маркеры ў наступны GPX-файл:</string>
+    <string name="marker_save_as_track_descr">Экспартаваць вашы пазнакі ў наступны GPX-файл:</string>
     <string name="marker_save_as_track">Захаваць як GPX-файл</string>
     <string name="move_to_history">Перамясьціць у гісторыю</string>
     <string name="group_will_be_removed_after_restart">Групы ўжо не будзе пасля наступнага перазапуску праграмы.</string>
-    <string name="shared_string_markers">Маркеры</string>
+    <string name="shared_string_markers">Пазнакі</string>
     <string name="coordinates_format">Фармат каардынат</string>
     <string name="use_system_keyboard">Выкарыстоўваць сыстэмную клявіятуру</string>
     <string name="fast_coordinates_input_descr">Абраць фармат уводу каардынат. Вы заўсёды можаце зьмяніць яго, націснуўшы «Налады».</string>
@@ -2901,14 +2901,14 @@
     <string name="show_map">Паказаць мапу</string>
     <string name="route_is_calculated">Маршрут разлічаны</string>
     <string name="round_trip">Падарожжа</string>
-    <string name="plan_route_no_markers_toast">Вам неабходна дадаць па меншай меры адзін маркер, каб выкарыстоўваць гэтую функцыю.</string>
+    <string name="plan_route_no_markers_toast">Вам неабходна дадаць па меншай меры адну пазнаку, каб выкарыстоўваць гэтую функцыю.</string>
     <string name="shared_string_road">Дарога</string>
     <string name="wrong_format">Дрэнны фармат</string>
     <string name="wrong_input">Дрэнны ўвод</string>
 	<string name="enter_new_name">Увядзіце новае імя</string>
 	<string name="shared_string_back">Назад</string>
 	<string name="shared_string_view">Праглядзець</string>
-	<string name="waypoints_added_to_map_markers">Кропкі маршрута дададзеныя ў маркеры мапы</string>
+	<string name="waypoints_added_to_map_markers">Кропкі маршрута дададзеныя ў пазнакі мапы</string>
 	<string name="import_gpx_file_description">могуць быць імпартаваныя як «Упадабаныя» ці як GPX-файл.</string>
     <string name="import_as_gpx">Імпартаваць як GPX-файл</string>
     <string name="import_as_favorites">Імпартаваць як упадабаныя</string>
@@ -2923,25 +2923,25 @@
     <string name="coordinate_input_accuracy_description">Аўтаматычна пераключыцца ў наступнае поле пасьля ўводу %1$d дзесятковых лічбаў.</string>
     <string name="coordinate_input_accuracy">%1$d лічбаў</string>
     <string name="go_to_next_field">Наступнае поле</string>
-    <string name="rename_marker">Перайменаваць маркер</string>
+    <string name="rename_marker">Перайменаваць пазнаку</string>
     <string name="shared_string_two">Два</string>
     <string name="shared_string_one">Адзін</string>
-    <string name="add_favourites_group_to_markers_descr">Абярыце катэгорыю ўпадабаных, каб дадаць да маркераў.</string>
+    <string name="add_favourites_group_to_markers_descr">Абярыце катэгорыю ўпадабаных, каб дадаць да пазнак.</string>
     <string name="shared_string_gpx_waypoints">Кропкі следу</string>
     <string name="favourites_group">Катэгорыя ўпадабаных</string>
     <string name="add_group">Дадаць групу</string>
     <string name="add_group_descr">Імпартаваць групы з упадабаных ці GPX-кропак.</string>
-    <string name="empty_state_markers_active">Стварыце маркеры мапы!</string>
-    <string name="empty_state_markers_active_desc">Дакраніцеся месца і потым націсніце кнопку маркера.</string>
+    <string name="empty_state_markers_active">Стварыце пазнакі мапы!</string>
+    <string name="empty_state_markers_active_desc">Дакраніцеся месца і потым націсніце кнопку пазнакі.</string>
     <string name="empty_state_markers_groups">Імпартаваць групы</string>
-    <string name="empty_state_markers_groups_desc">Імпартаваць групы ўпадабаных ці шляхавыя кропкі як маркеры.</string>
-    <string name="empty_state_markers_history_desc">Маркеры, пазначаныя як пройдзенныя, з\'явяцца на гэтым экране.</string>
-    <string name="show_guide_line_descr">Паказвае лініі кірунку ад вашага становішча да актыўнага маркера.</string>
-    <string name="show_arrows_descr">Паказвае адну ці дзьве стрэлкі, якія паказваюць кірунак да актыўных маркераў.</string>
-    <string name="distance_indication_descr">Выберыце, як адлюстроўваць адлегласьць да актыўных маркераў.</string>
+    <string name="empty_state_markers_groups_desc">Імпартаваць групы ўпадабаных ці шляхавыя кропкі як пазнакі.</string>
+    <string name="empty_state_markers_history_desc">Пазнакі, адзначаныя як пройдзенныя, з\'явяцца на гэтым экране.</string>
+    <string name="show_guide_line_descr">Паказвае лініі кірунку ад вашага становішча да актыўнай пазнакі.</string>
+    <string name="show_arrows_descr">Паказвае адну ці дзьве стрэлкі, якія паказваюць кірунак да актыўных пазнак.</string>
+    <string name="distance_indication_descr">Абярыце, як адлюстроўваць адлегласьць да актыўных пазнак.</string>
     <string name="active_markers_descr">Абярыце, колькі ўказальнікаў напрамку адлюстроўваць.</string>
     <string name="appearance_on_the_map">Зьнешні выгляд на мапе</string>
-    <string name="add_track_to_markers_descr">Абраць след каб дадаць яго шляхавые кропкі ў маркеры.</string>
+    <string name="add_track_to_markers_descr">Абраць след каб дадаць яго шляхавые кропкі ў пазнакі.</string>
     <string name="shared_string_right">Направа</string>
     <string name="shared_string_left">Налева</string>
     <string name="shared_string_more_without_dots">Больш</string>
@@ -2949,13 +2949,13 @@
     <string name="empty_state_osm_edits">Стварыць або зьмяніць OSM аб’екты</string>
     <string name="shared_string_deleted">Выдалена</string>
     <string name="shared_string_edited">Адрэдагавана</string>
-    <string name="marker_activated">Маркер %s актываваны.</string>
+    <string name="marker_activated">Пазнака %s актываваная.</string>
     <string name="notes_by_date">Нататкі па даце</string>
     <string name="by_date">Па даце</string>
     <string name="by_type">Па тыпу</string>
     <string name="empty_state_osm_edits_descr">Стварайце або зьмяняйце OSM POI, адкрывайце або камэнтуйце OSM-нататкі, а таксама адсылайце запісаныя GPX-файлы.</string>
     <string name="shared_string_added">Дададзена</string>
-    <string name="one_tap_active_descr">Націск на маркер на мапе перамесціць гэты маркер на першае месца ў спісе актыўных маркераў, не адкрываючы кантэкстнае меню.</string>
+    <string name="one_tap_active_descr">Націск на пазнаку на мапе перамесціць гэтую пазнаку на першае месца ў спісе актыўных пазнакаў без адкрыцця кантэкстнага меню.</string>
     <string name="one_tap_active">Актывацыя адным націскам</string>
     <string name="empty_state_av_notes">Рабі нататкі!</string>
     <string name="empty_state_av_notes_desc">Дадайце аўдыё-, відэа- ці фотанататку на любую кропку на мапе, выкарыстоўваючы віджэт ці кантэкстнае меню.</string>
@@ -2971,7 +2971,7 @@
     <string name="av_locations_selected_desc">GPX-файл з каардынатамі і данымі выбраных нататак.</string>
     <string name="av_locations_all_desc">GPX-файл з каардынатамі і данымі ўсіх нататак.</string>
     <string name="shared_string_actions">Дзеянні</string>
-    <string name="shared_string_marker">Маркер</string>
+    <string name="shared_string_marker">Пазнака</string>
     <string name="osm_recipient_stat">Змен %1$s, сума %2$s mBTC</string>
     <string name="osm_recipients_label">OSM-атрымальнікі</string>
     <string name="total_donations">Усяго ахвяраванняў</string>
@@ -3035,7 +3035,7 @@
     <string name="shared_string_total">Усяго</string>
     <string name="nothing_found_in_radius">Нічога не знойдзена:</string>
     <string name="shared_string_travel_guides">Падарожжа</string>
-    <string name="waypoints_removed_from_map_markers">Шляхавыя кропкі выдаленыя з маркераў мапы</string>
+    <string name="waypoints_removed_from_map_markers">Шляхавыя кропкі выдаленыя з пазнакаў мапы</string>
     <string name="shared_string_result">Вынік</string>
     <string name="use_two_digits_longitude">Выкарыстоўваць дзьве лічбы даўгаты</string>
     <string name="saved_articles">Закладзеныя артыкулы</string>
@@ -3132,16 +3132,16 @@
     <string name="get_osmand_live">Атрымайце OsmAnd Live, каб разблакаваць усе функцыі: штодзённыя абнаўленні мап з неабмежаванай спампоўкай, усе платныя і бясплатныя дадаткі, Вікіпедыю, Вікігід і шмат іншага.</string>
     <string name="shared_string_gpx_files">GPX-файлы</string>
     <string name="quick_action_edit_actions">Рэдагаваць дзеянні</string>
-    <string name="release_3_0">• Новае: падтрымка светавых аўтаномных турыстычных даведнікаў. Спасылачныя мясціны звязаны з мапай. Зыходныя даныя ад Wikivoyage.
-\n
-\n • Вікіпедыя: новы выгляд, актыўныя спасылкі, падтрымка выяў
-\n
-\n • Open Track UI: падтрымка груп шляхавых кропак
-\n
-\n • Маркеры мапы: імпарт абраных груп з GPX-файлаў, увод каардынат, новы выгляд
-\n
-\n • Падпіска OsmAnd Live цяпер падтрымлівае ўсе функцыі OsmAnd
-\n
+    <string name="release_3_0">• Новае: падтрымка светавых аўтаномных турыстычных даведнікаў. Спасылачныя мясціны звязаны з мапай. Зыходныя даныя ад Wikivoyage. 
+\n 
+\n • Вікіпедыя: новы выгляд, актыўныя спасылкі, падтрымка выяў 
+\n 
+\n • Open Track UI: падтрымка груп шляхавых кропак 
+\n 
+\n • Пазнакі мапы: імпарт абраных груп з GPX-файлаў, увод каардынат, новы выгляд 
+\n 
+\n • Падпіска OsmAnd Live цяпер падтрымлівае ўсе функцыі OsmAnd 
+\n 
 \n</string>
     <string name="error_notification_desc">Калі ласка, адпраўце здымак экрана з гэтым апавяшчэннем на support@osmand.net</string>
     <string name="coord_input_edit_point">Рэдагаваць кропку</string>
@@ -3161,19 +3161,45 @@
 \nДайце нам водгук</string>
     <string name="commiting_way">Фіксуецца шлях…</string>
     <string name="test_voice_desrc">Націсніце на кнопку і паслухайце адпаведную галасавую падказку, каб вызначыць адсутныя або пашкоджаныя падказкі.</string>
-<string name="release_3_1">• Навігацыя: выпраўленне індыкатару прагрэсу, хуткая перамена пачатковага і канчатковага пунктаў маршруту
+<string name="release_3_1">• Навігацыя: выпраўленне індыкатару прагрэсу, хуткая перамена пачатковага і канчатковага пунктаў маршруту 
+\n 
+\n • Пазнакі мапы: выпраўленне ўключэння/адключэння груп, магчымасць хаваць пазнакі з мапы 
+\n 
+\n • Рэдагаванне OSM: магчымасць праўкі тэгаў для некропкавых аб\'ектаў і шляхоў, выпраўленне адсутных каментароў на нататках, рэзервовае капіяванне правак 
+\n 
+\n • Паляпшэнне разбору Wikipedia і Wikivoyage, абноўленыя файлы ўжо даступныя 
+\n 
+\n • Кантэкстнае меню: выпраўленне колеру дарожных знакаў у начным рэжыме, выпраўленне памераў дадатковага меню 
+\n 
+\n • Рачная навігацыя: падтрымка фарватэру 
+\n 
+\n • Выпраўленне іншых хібаў 
+\n 
+\n</string>
+    <string name="markers_remove_dialog_msg">Выдаліць пазнаку мапы «%s»\?</string>
+    <string name="edit_map_marker">Рэдагаваць пазнаку мапы</string>
+    <string name="third_party_application">Старонняе прыкладанне</string>
+    <string name="search_street">Пошук вуліцы</string>
+    <string name="start_search_from_city">Пачаць пошук з горада</string>
+    <string name="shared_string_restore">Аднавіць</string>
+    <string name="keep_passed_markers_descr">Пазнакі, даданыя як група улюблёных ці пройденых маршрутных GPX-кропак, застануцца на мапе. Калі група неактыўная, пазнакі знікнуць з мапы.</string>
+    <string name="keep_passed_markers">Пакінуць пройдзеныя пакнакі на мапе</string>
+    <string name="more_transport_on_stop_hint">На гэтым прыпынку ёсць больш грамадскага транспарту.</string>
+    <string name="ask_for_location_permission">Калі ласка, дайце OsmAnd дазвол на вызначэння месцазнаходжання.</string>
+    <string name="release_3_2_pre">• Выпраўлены вылет пры запуску, што адбываўся на некаторых прыладах
 \n
-\n • Маркеры мапы: выпраўленне ўключэння/адключэння груп, магчымасць хаваць маркеры з мапы
+\n • Новыя функцыі пазнак: паказваюцца пройдзенныя пазнакі
 \n
-\n • Рэдагаванне OSM: магчымасць праўкі тэгаў для некропкавых аб\'ектаў і шляхоў, выпраўленне адсутных каментароў на нататках, рэзервовае капіяванне правак
+\n • Гісторыя пошуку зараз паказвае катэгорыі, што вы шукалі раней
 \n
-\n • Паляпшэнне разбору Wikipedia і Wikivoyage, абноўленыя файлы ўжо даступныя
+\n • Выпраўлены вылет пры запуску, што адбываўся з нелацінскімі картамі
 \n
-\n • Кантэкстнае меню: выпраўленне колеру дарожных знакаў у начным рэжыме, выпраўленне памераў дадатковага меню
+\n • Паляпшэнне хуткасці адмалёўкі на прыладах з Android 8.0
 \n
-\n • Рачная навігацыя: падтрымка фарватэру
+\n • Падтрымка рэдагавання палігонных аб\'ектаў (не зручнасцей)
 \n
-\n • Выпраўленне іншых хібаў
+\n • Вымярэнне дыстанцый: дададзена кнопка «Вымярэнне» ў «Дзеянні» кантэкстнага меню
 \n
 \n</string>
+    <string name="rendering_value_black_name">Чорны</string>
     </resources>
