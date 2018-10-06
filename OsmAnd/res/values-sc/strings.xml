@@ -3131,14 +3131,20 @@ Pro praghere iscrie su còdighe intreu</string>
 \nDaghe·nos s\'opinione tua</string>
     <string name="commiting_way">Imbiende sa bia…</string>
     <string name="test_voice_desrc">Toca unu butone e ascurta s\'annùntziu vocale chi li currispondet, pro identificare sos annùntzios chi mancant o chi sunt isballiados.</string>
-<string name="release_3_2_pre">• Errore de istudada a s\'allughidura cun mapas cun caràteres non latinos curretu 
+<string name="release_3_2_pre">• Curretu s\'errore de istudada a s\'allughidura chi bi fiat pro carchi dispositivu 
+\n 
+\n • Funtzionalidae noa pro sos marcadores: ammustra sos marcadores chi as giai coladu 
+\n 
+\n • Sa cronologia de sas chircas como ammustrat sas categorias chi as chircadu in antis 
+\n
+\n • Errore de istudada a s\'allughidura cun mapas cun caràteres non latinos curretu 
 \n 
 \n • Lestresa de sa renderizatzione in sos dispositivos Android 8.0 megiorada 
 \n 
 \n • Suportu a sa modìfica de ogetos poligonales (non amenidades) 
-\n
-\n • Medida de distàntzias: butone pro sas medidas annantu a su butone de sas atziones in su menù de cuntestu
-\n
+\n 
+\n • Medida de distàntzias: butone pro sas medidas annantu a su butone de sas atziones in su menù de cuntestu 
+\n 
 \n</string>
     <string name="ask_for_location_permission">Pro praghere permite a OsmAnd de atzèdere a sa positzione pro sighire.</string>
     <string name="rendering_value_black_name">Nieddu</string>
