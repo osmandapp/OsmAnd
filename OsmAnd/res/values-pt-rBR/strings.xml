@@ -1006,7 +1006,7 @@ Pôr do Sol: %2$s</string>
 	<string name="confirm_interrupt_download">Você quer cancelar a transferência do arquivo?</string>
 	<string name="basemap_was_selected_to_download">O Mapa Base é necessário para o funcionamento adequado do aplicativo e foi selecionado para baixar.</string>
 	<string name="local_indexes_cat_tile">Quadrículas de mapa online e em cache</string>
-	<string name="local_indexes_cat_map">Mapa padrão (vectorial)</string>
+	<string name="local_indexes_cat_map">Mapa padrão (vetorial)</string>
 	<string name="map_online_plugin_is_not_installed">Ative o plugin \'Mapas on-line\' para selecionar diferentes fontes de mapa</string>
 	<string name="map_online_data">Mapas e quadrículas on-line</string>
 	<string name="map_online_data_descr">Usar mapas on-line (baixar e armazenar quadrículas)</string>
