@@ -840,9 +840,9 @@
 	<string name="poi_piste_downhill">Skivojo alpa (malsuprenira)</string>
 	<string name="poi_piste_nordic">Skivojo nordia (skikurada)</string>
 	<string name="poi_piste_skitour">Skivojo ski-ekskursuma</string>
-	<string name="poi_piste_hike">Skivojo skikurada</string>
-	<string name="poi_piste_sleigh">Skivojo glitveturila</string>
-	<string name="poi_piste_sled">Skivojo glitveturila (tirata de hundoj)</string>
+	<string name="poi_piste_hike">Skivojo marŝada</string>
+	<string name="poi_piste_sleigh">Skivojo glitveturila (tirata de hundoj)</string>
+	<string name="poi_piste_sled">Skivojo glitveturila</string>
 	<string name="poi_piste_snow_park">Skivojo neĝ-parka</string>
 	<string name="poi_piste_playground">Skivojo infanludeja</string>
 	<string name="poi_piste_ice_skate">Skivojo glitkurada</string>
