@@ -956,7 +956,7 @@
 	<string name="poi_shower">Dusche</string>
 	<string name="poi_email">E-Mail</string>
 	<string name="poi_fax">Fax</string>
-	<string name="facebook">Facebook</string>
+	<string name="facebook">"Facebook "</string>
 	<string name="poi_mobile">Handy</string>
 	<string name="poi_fee_no">nein</string>
 	<string name="poi_drinking_water_yes">ja</string>
@@ -1203,7 +1203,7 @@
 	<string name="poi_fuel_100ll">Avgas 100 LL</string>
 	<string name="poi_fuel_autogas">Autogas</string>
 	<string name="poi_fuel_jeta1">Flugzeug A-1 Kraftstoff</string>
-	<string name="poi_fuel_adblue">AdBlue (Harnstoff)</string>
+	<string name="poi_fuel_adblue">AdBlue</string>
 
 	<string name="poi_fuel_wood">Kraftstoff: Holz</string>
 	<string name="poi_street_lamp">Straßenlaterne</string>
