@@ -3148,13 +3148,19 @@
     <string name="search_no_results_feedback">沒有搜尋結果？
 \n向我們反映</string>
     <string name="test_voice_desrc">輕點按鈕並聽取相應的語音提示，以確認遺漏或錯誤的提示。</string>
-<string name="release_3_2_pre">• 修復了在非拉丁地圖啟動時的崩潰問題 
+<string name="release_3_2_pre">• 修正了在某些裝置上發生的啟動故障
+\n
+\n• 新標記功能：顯示已經過的標記
+\n
+\n• 搜尋歷史記錄現在顯示您之前搜尋過的類別
+\n
+\n• 修復了在非拉丁地圖啟動時的崩潰問題 
 \n 
 \n• 改善 Android 8.0 裝置上的繪製速度問題 
 \n 
 \n• 支援多邊形 (非生活環境) 的物件編輯 
-\n
-\n• 測量距離：在快顯選單中為動作增加了測量按鈕
+\n 
+\n• 測量距離：在快顯選單中為動作增加了測量按鈕 
 \n</string>
     <string name="ask_for_location_permission">請準許 OsmAnd 位置以繼續。</string>
     <string name="rendering_value_black_name">黑色</string>
@@ -3164,4 +3170,7 @@
     <string name="shared_string_restore">還原</string>
     <string name="keep_passed_markers_descr">標記已加入群組作為我的收藏或 GPX 航點標記為已經過的將維持在地圖上。如果該群組未處於活動狀態，則標記將從地圖上消失。</string>
     <string name="keep_passed_markers">在地圖上保留已經過的標記</string>
+    <string name="markers_remove_dialog_msg">刪除地圖標記「%s」？</string>
+    <string name="edit_map_marker">編輯地圖標記</string>
+    <string name="third_party_application">第三方應用程式</string>
     </resources>
