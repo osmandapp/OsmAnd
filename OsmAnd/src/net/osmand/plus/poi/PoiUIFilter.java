@@ -246,6 +246,21 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 		return amenityList;
 	}
 
+	public double getSearchRadius(int radius) {
+		if (radius < 0) {
+			distanceInd = 0;
+		} else if (radius < distanceToSearchValues.length) {
+			distanceInd = radius;
+		} else {
+			distanceInd = distanceToSearchValues.length - 1;
+		}
+		return distanceToSearchValues[distanceInd] * 1000;
+	}
+
+	public int getMaxSearchRadiusIndex() {
+		return distanceToSearchValues.length - 1;
+	}
+
 	public boolean isAutomaticallyIncreaseSearch() {
 		return true;
 	}
