@@ -2,7 +2,7 @@
 <resources>
   <string name="asap">Швидко</string>
   
-  <string name="route_roundabout">Круговий рух : Візьміть %1$d з’їзд та продовжуйте рух</string>
+  <string name="route_roundabout">Круговий рух : Прямуйте до %1$d з’їзду та продовжуйте рух</string>
   <string name="route_kl">Тримайтесь ліворуч</string>
   <string name="route_kr">Тримайтесь праворуч</string>
   <string name="rendering_attr_noPolygons_description">Відображати тільки контури, без заливки.</string>
@@ -1824,7 +1824,7 @@
     <string name="confirm_usage_speed_cameras">У багатьох країнах (Німеччина, Франція, Італія та інші) використання детекторів камер контролю швидкості не дозволено законом. OsmAnd не несе ніякої відповідальності, якщо Ви порушите закон. Будь ласка, натисніть кнопку „Так“, тільки якщо ви маєте право використовувати цю функцію.</string>
 	<string name="welmode_download_maps">Звантаження мап</string>
 	<string name="welcome_select_region">Щоб правильно показувати дорожні знаки та правила дорожнього руху, будь ласка, виберіть ваш регіон:</string>
-	<string name="welcome_text">OsmAnd забезпечує повністю автономний (оффлайн) перегляд мап і навігацію!</string>
+	<string name="welcome_text">OsmAnd забезпечує перегляд глобальної автономної (офлайн-) мапи і автономну навігацію.</string>
 	<string name="welcome_header">Ласкаво просимо</string>
     <string name="current_route">Поточний маршрут</string>
     <string name="osm_changes_added_to_local_edits">Зміни OSM додані до локального набору змін</string>
@@ -2221,7 +2221,7 @@
     <string name="download_files_error_not_enough_space">Недостатньо пам\'яті!
  Необхідно {3} МБ тимчасової та {1} МБ постійної пам\'яті.
  На разі доступно лише {2} МБ.</string>
-    <string name="download_files_question_space_with_temp">Звантажити {0} файл(їв)? Використовується {3} МБ тимчасової та {1} МБ постійної пам’яті (наразі вільно лише {2} МБ).</string>
+    <string name="download_files_question_space_with_temp">Звантажити {0} файл(ів)\? Використовується {3} Мб тимчасової та {1} Мб постійної пам’яті (наразі вільно лише {2} Мб)</string>
     <string name="donations">Пожертвування</string>
     <string name="osm_live_subscribe_btn">Підписатися</string>
     <string name="osm_live_hide_user_name">Не показувати моє ім\'я у звітах</string>
@@ -3180,14 +3180,19 @@
 \nНадішліть нам відгук</string>
     <string name="commiting_way">Створюється шлях…</string>
     <string name="test_voice_desrc">Натисніть кнопку та прослуховуйте відповідну голосову підказку, щоб визначити відсутні або хибні підказки.</string>
-<string name="release_3_2_pre">• Виправлено аварійне завершення програми при запуску з нелатинськими мапами
+<string name="release_3_2_pre">• Виправлено аварійне завершення програми при запуску, що траплялося на деяких пристроях
+\n
+\n• Нова можливість Позначок: відображати пройдені позначки
+\n
+\n• Історія пошуку тепер показує категорії, які ви раніше шукали
+\n
+\n• Виправлено аварійне завершення програми при запуску з нелатинськими мапами
 \n
 \n• Підвищено швидкість промальовки на пристроях з Android 8.0
 \n
 \n• Підтримка редагування полігональних (не-amenity) об\'єктів
 \n
 \n• Вимірювання відстані: додано кнопку «Виміряти» до Дій у контекстному меню
-\n
 \n</string>
     <string name="ask_for_location_permission">Будь ласка, надайте OsmAnd дозвіл визначати місцезнаходження для того, щоб продовжити.</string>
     <string name="rendering_value_black_name">Чорний</string>
@@ -3197,4 +3202,7 @@
     <string name="keep_passed_markers_descr">Позначки, додані як група Закладок або маршрутних точок GPX і позначені пройденими, залишаться на мапі. Якщо група неактивна, позначки зникнуть з мапи.</string>
     <string name="keep_passed_markers">Залишити пройдені позначки на мапі</string>
     <string name="more_transport_on_stop_hint">На цій зупинці є інші транспортні засоби.</string>
+    <string name="markers_remove_dialog_msg">Видалити позначку мапи \'%s\'\?</string>
+    <string name="edit_map_marker">Редагувати позначку мапи</string>
+    <string name="third_party_application">Стороння програма</string>
     </resources>
