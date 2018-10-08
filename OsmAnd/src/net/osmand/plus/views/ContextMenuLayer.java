@@ -613,8 +613,8 @@ public class ContextMenuLayer extends OsmandMapLayer {
 						billboardMapSymbol = null;
 					}
 					if (billboardMapSymbol != null) {
-						double lat = MapUtils.get31LatitudeY(billboardMapSymbol.getPosition31().getY());
-						double lon = MapUtils.get31LongitudeX(billboardMapSymbol.getPosition31().getX());
+						double lat = Utilities.get31LatitudeY(billboardMapSymbol.getPosition31().getY());
+						double lon = Utilities.get31LongitudeX(billboardMapSymbol.getPosition31().getX());
 						objectLatLon = new LatLon(lat, lon);
 
 						AdditionalBillboardSymbolInstanceParameters billboardAdditionalParams;
