@@ -520,18 +520,7 @@ public class SearchCoreFactory {
 			final BinaryMapIndexReader[] currentFile = new BinaryMapIndexReader[1];
 			Iterator<BinaryMapIndexReader> offlineIterator = phrase.getRadiusOfflineIndexes(BBOX_RADIUS,
 					SearchPhraseDataType.POI);
-			String searchWord = phrase.getUnknownSearchWord();
-			if (searchWord.length() < FIRST_WORD_MIN_LENGTH && phrase.getUnknownSearchWords().size() > 0) {
-				for (String unknownSearchWord : phrase.getUnknownSearchWords()) {
-					if (unknownSearchWord.length() >= FIRST_WORD_MIN_LENGTH) {
-						searchWord = unknownSearchWord;
-						break;
-					}
-				}
-			}
-			if (searchWord.length() < FIRST_WORD_MIN_LENGTH) {
-				return false;
-			}
+			String searchWord = phrase.getUnknownWordToSearch();
 			final NameStringMatcher nm = phrase.getNameStringMatcher(searchWord, phrase.isUnknownSearchWordComplete());
 			QuadRect bbox = phrase.getRadiusBBoxToSearch(BBOX_RADIUS_INSIDE);
 			final Set<String> ids = new HashSet<String>();
@@ -606,9 +595,7 @@ public class SearchCoreFactory {
 			if (p.hasObjectType(ObjectType.POI_TYPE)) {
 				return -1;
 			}
-			if (p.getUnknownSearchWordLength() >= FIRST_WORD_MIN_LENGTH
-					|| p.getUnknownSearchWords().size() > 0
-					|| p.getRadiusLevel() > 1) {
+			if (p.getUnknownWordToSearch().length() >= FIRST_WORD_MIN_LENGTH || p.getRadiusLevel() > 1) {
 				return SEARCH_AMENITY_BY_NAME_API_PRIORITY_IF_3_CHAR;
 			}
 			return -1;
