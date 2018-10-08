@@ -644,8 +644,8 @@
 	<string name="poi_chalet">Domek letniskowy</string>
 	<string name="poi_apartment">Apartament</string>
 	<string name="poi_piste_hike">Trasa piesza</string>
-	<string name="poi_piste_sleigh">Trasa saneczkarska</string>
-	<string name="poi_piste_sled">Trasa saneczkarska (zaprzęgi)</string>
+	<string name="poi_piste_sleigh">Trasa saneczkarska (zaprzęgi)</string>
+	<string name="poi_piste_sled">Trasa saneczkarska</string>
 	<string name="poi_piste_playground">Trasa dla dzieci</string>
 	<string name="poi_stripclub">Klub ze striptizem</string>
 	<string name="poi_beach_resort">Ośrodek nadmorski</string>
