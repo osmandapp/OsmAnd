@@ -82,7 +82,7 @@ class TelegramApplication : Application(), OsmandHelperListener {
 	fun stopSharingLocation() {
 		settings.stopSharingLocationToChats()
 		shareLocationHelper.stopSharingLocation()
-		telegramHelper.stopSendingLiveLocationMessages()
+		telegramHelper.stopSendingLiveLocationMessages(settings)
 	}
 
 	fun isOsmAndInstalled() = AndroidUtils.isAppInstalled(this, settings.appToConnectPackage)

@@ -4,8 +4,16 @@ import net.osmand.Location
 import net.osmand.telegram.TelegramApplication
 import net.osmand.telegram.notifications.TelegramNotification.NotificationType
 import net.osmand.telegram.utils.AndroidNetworkUtils
+import java.util.concurrent.Executors
+import java.util.concurrent.ScheduledExecutorService
+import java.util.concurrent.TimeUnit
+
+private const val UPDATE_LIVE_MESSAGES_INTERVAL_SEC = 10L // 10 sec
+private const val USER_SET_LIVE_PERIOD_DELAY_MIL = 5000 // 5 sec
 
 class ShareLocationHelper(private val app: TelegramApplication) {
+
+	private var updateLiveMessagesExecutor: ScheduledExecutorService? = null
 
 	var sharingLocation: Boolean = false
 		private set
@@ -38,35 +46,50 @@ class ShareLocationHelper(private val app: TelegramApplication) {
 	fun updateLocation(location: Location?) {
 		lastLocation = location
 
-		if (location != null && app.isInternetConnectionAvailable) {
-			val chatLivePeriods = app.settings.getChatLivePeriods()
-			val updatedLivePeriods = mutableMapOf<Long, Long>()
-			if (chatLivePeriods.isNotEmpty()) {
-				chatLivePeriods.forEach { (chatId, livePeriod) ->
-					if (livePeriod > TelegramHelper.MAX_LOCATION_MESSAGE_LIVE_PERIOD_SEC) {
-						val startTime = app.settings.getChatShareLocStartSec(chatId)
-						val currTime = (System.currentTimeMillis() / 1000)
-						if (startTime != null && startTime + TelegramHelper.MAX_LOCATION_MESSAGE_LIVE_PERIOD_SEC < currTime) {
-							app.settings.shareLocationToChat(chatId, true, livePeriod - TelegramHelper.MAX_LOCATION_MESSAGE_LIVE_PERIOD_SEC)
-						} else if (startTime != null) {
-							updatedLivePeriods[chatId] = TelegramHelper.MAX_LOCATION_MESSAGE_LIVE_PERIOD_SEC.toLong()
-						}
-					} else {
-						updatedLivePeriods[chatId] = livePeriod
-					}
-				}
-				val user = app.telegramHelper.getCurrentUser()
-				val sharingMode = app.settings.currentSharingMode
-				if (user != null && sharingMode == user.id.toString()) {
-					app.telegramHelper.sendLiveLocationMessage(updatedLivePeriods, location.latitude, location.longitude)
-				} else if (sharingMode.isNotEmpty()) {
-					val url = "https://live.osmand.net/device/$sharingMode/send?lat=${location.latitude}&lon=${location.longitude}"
-					AndroidNetworkUtils.sendRequestAsync(url, null)
-				}
+		if (location != null) {
+			val user = app.telegramHelper.getCurrentUser()
+			val sharingMode = app.settings.currentSharingMode
+			if (user != null && sharingMode == user.id.toString()) {
+				app.telegramHelper.sendLiveLocationMessage(app.settings, location.latitude, location.longitude)
+			} else if (sharingMode.isNotEmpty()) {
+				val url = "https://live.osmand.net/device/$sharingMode/send?lat=${location.latitude}&lon=${location.longitude}"
+				AndroidNetworkUtils.sendRequestAsync(url, null)
 			}
 			lastLocationMessageSentTime = System.currentTimeMillis()
 		}
 		refreshNotification()
+	}
+
+	fun updateSendLiveMessages() {
+		app.settings.getChatsShareInfo().forEach { chatId, shareInfo ->
+			val currentTime = System.currentTimeMillis() / 1000
+			when {
+				app.settings.getChatLiveMessageExpireTime(chatId) <= 0 -> app.settings.shareLocationToChat(
+					chatId,
+					false
+				)
+				currentTime > shareInfo.currentMessageLimit -> {
+					val newLivePeriod =
+						shareInfo.livePeriod - TelegramHelper.MAX_LOCATION_MESSAGE_LIVE_PERIOD_SEC
+					shareInfo.livePeriod = newLivePeriod
+					shareInfo.shouldDeletePreviousMessage = true
+					shareInfo.currentMessageLimit = currentTime + Math.min(
+						newLivePeriod,
+						TelegramHelper.MAX_LOCATION_MESSAGE_LIVE_PERIOD_SEC.toLong()
+					)
+				}
+				shareInfo.userSetLivePeriod != shareInfo.livePeriod
+						&& (shareInfo.userSetLivePeriodStart + USER_SET_LIVE_PERIOD_DELAY_MIL) > currentTime -> {
+					shareInfo.livePeriod = shareInfo.userSetLivePeriod
+					shareInfo.shouldDeletePreviousMessage = true
+					shareInfo.currentMessageLimit = currentTime + Math.min(
+						shareInfo.livePeriod,
+						TelegramHelper.MAX_LOCATION_MESSAGE_LIVE_PERIOD_SEC.toLong()
+					)
+				}
+			}
+
+		}
 	}
 
 	fun startSharingLocation() {
@@ -74,17 +97,29 @@ class ShareLocationHelper(private val app: TelegramApplication) {
 			sharingLocation = true
 
 			app.startMyLocationService()
-
+			startLiveMessagesUpdates(UPDATE_LIVE_MESSAGES_INTERVAL_SEC)
 			refreshNotification()
 		} else {
 			app.forceUpdateMyLocation()
 		}
 	}
 
+	fun startLiveMessagesUpdates(interval: Long) {
+		stopLiveMessagesUpdates()
+
+		updateLiveMessagesExecutor = Executors.newSingleThreadScheduledExecutor()
+		updateLiveMessagesExecutor?.scheduleWithFixedDelay({ updateSendLiveMessages() }, interval, interval, TimeUnit.SECONDS)
+	}
+
+	fun stopLiveMessagesUpdates() {
+		updateLiveMessagesExecutor?.shutdown()
+		updateLiveMessagesExecutor?.awaitTermination(1, TimeUnit.MINUTES)
+	}
+
 	fun stopSharingLocation() {
 		if (sharingLocation) {
 			sharingLocation = false
-
+			stopLiveMessagesUpdates()
 			app.stopMyLocationService()
 			lastLocation = null
 			lastTimeInMillis = 0L

@@ -13,13 +13,15 @@ import android.os.*
 import android.util.Log
 import android.widget.Toast
 import net.osmand.PlatformUtil
+import net.osmand.telegram.helpers.TelegramHelper.TelegramOutgoingMessagesListener
 import net.osmand.telegram.helpers.TelegramHelper.TelegramIncomingMessagesListener
 import net.osmand.telegram.notifications.TelegramNotification.NotificationType
 import net.osmand.telegram.utils.AndroidUtils
 import org.drinkless.td.libcore.telegram.TdApi
 import java.util.*
 
-class TelegramService : Service(), LocationListener, TelegramIncomingMessagesListener {
+class TelegramService : Service(), LocationListener, TelegramIncomingMessagesListener,
+	TelegramOutgoingMessagesListener {
 
 	private fun app() = application as TelegramApplication
 	private val binder = LocationServiceBinder()
@@ -77,6 +79,7 @@ class TelegramService : Service(), LocationListener, TelegramIncomingMessagesLis
 
 		app.telegramService = this
 		app.telegramHelper.addIncomingMessagesListener(this)
+		app.telegramHelper.addOutgoingMessagesListener(this)
 
 		if (isUsedByMyLocation(usedBy)) {
 			initLocationUpdates()
@@ -107,6 +110,7 @@ class TelegramService : Service(), LocationListener, TelegramIncomingMessagesLis
 		val app = app()
 		app.telegramHelper.stopLiveMessagesUpdates()
 		app.telegramHelper.removeIncomingMessagesListener(this)
+		app.telegramHelper.removeOutgoingMessagesListener(this)
 		app.telegramService = null
 
 		usedBy = 0
@@ -258,6 +262,20 @@ class TelegramService : Service(), LocationListener, TelegramIncomingMessagesLis
 
 	override fun updateLocationMessages() {
 		app().showLocationHelper.startUpdateMessagesTask()
+	}
+
+	override fun onUpdateMessages(messages: List<TdApi.Message>) {
+		messages.forEach {
+			app().settings.updateShareInfo(it)
+		}
+	}
+
+	override fun onUpdateMessage(message: TdApi.Message) {
+		app().settings.updateShareInfo(message)
+	}
+
+	override fun onDeleteMessages(chatId: Long, messages: List<Long>) {
+		app().settings.onDeleteLiveMessages(chatId, messages)
 	}
 
 	companion object {
