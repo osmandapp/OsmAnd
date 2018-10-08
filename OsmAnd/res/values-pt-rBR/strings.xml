@@ -2235,7 +2235,7 @@ Pôr do Sol: %2$s</string>
     <string name="routing_attr_avoid_ice_roads_fords_name">Evitar estradas de gelo, vaus</string>
     <string name="routing_attr_avoid_ice_roads_fords_description">Evitar estradas de gelo e vaus.</string>
     <string name="map_orientation_change_in_accordance_with_speed">Limite para orientação do mapa</string>
-    <string name="quick_action_show_navigation_finish_dialog">Mostrar diálogo \'Navegação finalizada\'</string>
+    <string name="quick_action_show_navigation_finish_dialog">Mostrar \'Navegação finalizada\'</string>
     <string name="mapillary_menu_title_tile_cache">Cache de quadrícula</string>
     <string name="map_widget_ruler_control">Régua de raio</string>
     <string name="show_from_zoom_level">Exibir a partir do nível de zoom</string>
