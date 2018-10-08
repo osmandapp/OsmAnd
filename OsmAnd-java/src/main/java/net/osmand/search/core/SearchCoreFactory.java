@@ -962,6 +962,7 @@ public class SearchCoreFactory {
 
 
 	public static class SearchStreetByCityAPI extends SearchBaseAPI {
+		private static final int DEFAULT_ADDRESS_BBOX_RADIUS = 100 * 1000;
 
 		private SearchBaseAPI streetsAPI;
 		public SearchStreetByCityAPI(SearchBuildingAndIntersectionsByStreetAPI streetsAPI) {
@@ -973,6 +974,16 @@ public class SearchCoreFactory {
 		public boolean isSearchMoreAvailable(SearchPhrase phrase) {
 			// case when street is not found for given city is covered here
 			return phrase.getRadiusLevel() == 1 && getSearchPriority(phrase) != -1;
+		}
+
+		@Override
+		public int getMinimalSearchRadius(SearchPhrase phrase) {
+			return phrase.getRadiusSearch(DEFAULT_ADDRESS_BBOX_RADIUS);
+		}
+
+		@Override
+		public int getNextSearchRadius(SearchPhrase phrase) {
+			return phrase.getNextRadiusSearch(DEFAULT_ADDRESS_BBOX_RADIUS);
 		}
 
 		private static int LIMIT = 10000;
