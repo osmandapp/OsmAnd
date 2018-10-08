@@ -2202,4 +2202,20 @@
 	<string name="poi_trade_agricultural_supplies">אספקה חקלאית</string>
 	<string name="poi_trade_tile">ציוד ריצוף</string>
 
+	<string name="poi_smoking_separated">בחדר נפרד</string>
+	<string name="poi_smoking_isolated">בחדר מבודד</string>
+	<string name="poi_smoking_dedicated">מוקדש למעשנים</string>
+
+	<string name="poi_toll_yes">אגרה</string>
+	<string name="poi_toll_no">ללא אגרה</string>
+	<string name="poi_toll_hgv_yes">אגרה למשאיות</string>
+	<string name="poi_tactile_paving_yes">כן</string>
+	<string name="poi_traffic_signals_sound_yes">כן</string>
+	<string name="poi_traffic_signals_sound_no">לא</string>
+	<string name="poi_traffic_signals_sound_walk">רק כאשר מותר לחצות</string>
+
+	<string name="poi_rescue_station">תחנת הצלה</string>
+
+	<string name="poi_services">אזור שירות</string>
+	<string name="poi_mini_roundabout">כיכר מזערית</string>
 	</resources>
