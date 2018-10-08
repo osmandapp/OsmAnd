@@ -581,15 +581,15 @@ class TelegramHelper private constructor() {
 	 * @latitude Latitude of the location
 	 * @longitude Longitude of the location
 	 */
-	fun sendLiveLocationMessage(settings: TelegramSettings, latitude: Double, longitude: Double): Boolean {
+	fun sendLiveLocationMessage(chatsShareInfo:Map<Long, TelegramSettings.ShareChatInfo>, latitude: Double, longitude: Double): Boolean {
 		if (!requestingActiveLiveLocationMessages && haveAuthorization) {
 			if (needRefreshActiveLiveLocationMessages) {
 				getActiveLiveLocationMessages {
-					sendLiveLocationImpl(settings, latitude, longitude)
+					sendLiveLocationImpl(chatsShareInfo, latitude, longitude)
 				}
 				needRefreshActiveLiveLocationMessages = false
 			} else {
-				sendLiveLocationImpl(settings, latitude, longitude)
+				sendLiveLocationImpl(chatsShareInfo, latitude, longitude)
 			}
 			return true
 		}
@@ -606,8 +606,8 @@ class TelegramHelper private constructor() {
 		needRefreshActiveLiveLocationMessages = true
 	}
 
-	fun stopSendingLiveLocationMessages(settings: TelegramSettings) {
-		settings.getChatsShareInfo().forEach { (chatId, chatInfo) ->
+	fun stopSendingLiveLocationMessages(chatsShareInfo: Map<Long, TelegramSettings.ShareChatInfo>) {
+		chatsShareInfo.forEach { (chatId, chatInfo) ->
 			stopSendingLiveLocationToChat(chatId, chatInfo.currentMessageId)
 		}
 	}
@@ -663,18 +663,18 @@ class TelegramHelper private constructor() {
 
 	private fun sendNewLiveLocationMessage(chatId: Long, content: TdApi.InputMessageLocation) {
 		needRefreshActiveLiveLocationMessages = true
-		log.info("SendMessage")
+		log.info("sendNewLiveLocationMessage")
 		client?.send(
 			TdApi.SendMessage(chatId, 0, false, true, null, content),
 			liveLocationMessageUpdatesHandler
 		)
 	}
 
-	private fun sendLiveLocationImpl(settings: TelegramSettings, latitude: Double, longitude: Double) {
+	private fun sendLiveLocationImpl(chatsShareInfo: Map<Long, TelegramSettings.ShareChatInfo>, latitude: Double, longitude: Double) {
 		val location = TdApi.Location(latitude, longitude)
-		settings.getChatsShareInfo().forEach { (chatId, shareInfo) ->
+		chatsShareInfo.forEach { (chatId, shareInfo) ->
 			val livePeriod =
-				if (shareInfo.currentMessageLimit > (System.currentTimeMillis() / 1000 + MAX_LOCATION_MESSAGE_LIVE_PERIOD_SEC)) {
+				if (shareInfo.currentMessageLimit > (shareInfo.start + MAX_LOCATION_MESSAGE_LIVE_PERIOD_SEC)) {
 					MAX_LOCATION_MESSAGE_LIVE_PERIOD_SEC
 				} else {
 					shareInfo.livePeriod.toInt()

@@ -47,15 +47,18 @@ class ShareLocationHelper(private val app: TelegramApplication) {
 		lastLocation = location
 
 		if (location != null) {
-			val user = app.telegramHelper.getCurrentUser()
-			val sharingMode = app.settings.currentSharingMode
-			if (user != null && sharingMode == user.id.toString()) {
-				app.telegramHelper.sendLiveLocationMessage(app.settings, location.latitude, location.longitude)
-			} else if (sharingMode.isNotEmpty()) {
-				val url = "https://live.osmand.net/device/$sharingMode/send?lat=${location.latitude}&lon=${location.longitude}"
-				AndroidNetworkUtils.sendRequestAsync(url, null)
+			val chatsShareInfo = app.settings.getChatsShareInfo()
+			if (chatsShareInfo.isNotEmpty()) {
+				val user = app.telegramHelper.getCurrentUser()
+				val sharingMode = app.settings.currentSharingMode
+				if (user != null && sharingMode == user.id.toString()) {
+					app.telegramHelper.sendLiveLocationMessage(chatsShareInfo, location.latitude, location.longitude)
+				} else if (sharingMode.isNotEmpty()) {
+					val url = "https://live.osmand.net/device/$sharingMode/send?lat=${location.latitude}&lon=${location.longitude}"
+					AndroidNetworkUtils.sendRequestAsync(url, null)
+				}
+				lastLocationMessageSentTime = System.currentTimeMillis()
 			}
-			lastLocationMessageSentTime = System.currentTimeMillis()
 		}
 		refreshNotification()
 	}
@@ -70,7 +73,11 @@ class ShareLocationHelper(private val app: TelegramApplication) {
 				)
 				currentTime > shareInfo.currentMessageLimit -> {
 					val newLivePeriod =
-						shareInfo.livePeriod - TelegramHelper.MAX_LOCATION_MESSAGE_LIVE_PERIOD_SEC
+						if (shareInfo.livePeriod > TelegramHelper.MAX_LOCATION_MESSAGE_LIVE_PERIOD_SEC) {
+							shareInfo.livePeriod - TelegramHelper.MAX_LOCATION_MESSAGE_LIVE_PERIOD_SEC
+						} else {
+							shareInfo.livePeriod
+						}
 					shareInfo.livePeriod = newLivePeriod
 					shareInfo.shouldDeletePreviousMessage = true
 					shareInfo.currentMessageLimit = currentTime + Math.min(
@@ -80,8 +87,10 @@ class ShareLocationHelper(private val app: TelegramApplication) {
 				}
 				shareInfo.userSetLivePeriod != shareInfo.livePeriod
 						&& (shareInfo.userSetLivePeriodStart + USER_SET_LIVE_PERIOD_DELAY_MIL) > currentTime -> {
+					if (shareInfo.livePeriod <= TelegramHelper.MAX_LOCATION_MESSAGE_LIVE_PERIOD_SEC) {
+						shareInfo.shouldDeletePreviousMessage = true
+					}
 					shareInfo.livePeriod = shareInfo.userSetLivePeriod
-					shareInfo.shouldDeletePreviousMessage = true
 					shareInfo.currentMessageLimit = currentTime + Math.min(
 						shareInfo.livePeriod,
 						TelegramHelper.MAX_LOCATION_MESSAGE_LIVE_PERIOD_SEC.toLong()
