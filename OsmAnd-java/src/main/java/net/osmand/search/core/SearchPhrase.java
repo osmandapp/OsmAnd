@@ -33,6 +33,7 @@ public class SearchPhrase {
 	private List<String> unknownWords = new ArrayList<>();
 	private List<NameStringMatcher> unknownWordsMatcher = new ArrayList<>();
 	private String unknownSearchWordTrim;
+	private String rawUnknownSearchPhrase = "";
 	private String unknownSearchPhrase = "";
 	private AbstractPoiType unknownSearchWordPoiType;
 
@@ -145,6 +146,7 @@ public class SearchPhrase {
 				break;
 			}
 		}
+		sp.rawUnknownSearchPhrase = text;
 		sp.unknownSearchPhrase = restText;
 		sp.unknownWords.clear();
 		sp.unknownWordsMatcher.clear();
@@ -213,7 +215,11 @@ public class SearchPhrase {
 	public String getUnknownSearchWord() {
 		return unknownSearchWordTrim;
 	}
-	
+
+	public String getRawUnknownSearchPhrase() {
+		return rawUnknownSearchPhrase;
+	}
+
 	public String getUnknownSearchPhrase() {
 		return unknownSearchPhrase;
 	}

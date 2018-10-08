@@ -339,7 +339,7 @@ public class QuickSearchHelper implements ResourceListener {
 		public boolean search(SearchPhrase phrase, SearchResultMatcher matcher) throws IOException {
 			double lat = phrase.getSettings().getOriginalLocation().getLatitude();
 			double lon = phrase.getSettings().getOriginalLocation().getLongitude();
-			String text = phrase.getUnknownSearchPhrase();
+			String text = phrase.getRawUnknownSearchPhrase();
 			filter.setFilterByName(text);
 			publishAmenities(phrase, matcher, filter.initializeNewSearch(lat, lon,
 					-1, null, phrase.getRadiusLevel() + 3));
