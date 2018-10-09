@@ -244,7 +244,6 @@ class TelegramHelper private constructor() {
 	}
 
 	interface TelegramOutgoingMessagesListener {
-		fun onUpdateMessage(message: TdApi.Message)
 		fun onUpdateMessages(messages: List<TdApi.Message>)
 		fun onDeleteMessages(chatId: Long, messages: List<Long>)
 	}
@@ -769,7 +768,7 @@ class TelegramHelper private constructor() {
 							listener?.onSendLiveLocationError(-1, "Live location message ${obj.id} failed to send")
 						} else {
 							outgoingMessagesListeners.forEach {
-								it.onUpdateMessage(obj)
+								it.onUpdateMessages(listOf(obj))
 							}
 						}
 					}

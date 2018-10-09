@@ -270,10 +270,6 @@ class TelegramService : Service(), LocationListener, TelegramIncomingMessagesLis
 		}
 	}
 
-	override fun onUpdateMessage(message: TdApi.Message) {
-		app().settings.updateShareInfo(message)
-	}
-
 	override fun onDeleteMessages(chatId: Long, messages: List<Long>) {
 		app().settings.onDeleteLiveMessages(chatId, messages)
 	}

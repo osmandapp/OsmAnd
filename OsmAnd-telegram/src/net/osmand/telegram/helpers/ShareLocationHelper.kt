@@ -9,7 +9,7 @@ import java.util.concurrent.ScheduledExecutorService
 import java.util.concurrent.TimeUnit
 
 private const val UPDATE_LIVE_MESSAGES_INTERVAL_SEC = 10L // 10 sec
-private const val USER_SET_LIVE_PERIOD_DELAY_MIL = 5000 // 5 sec
+private const val USER_SET_LIVE_PERIOD_DELAY_MS = 5000 // 5 sec
 
 class ShareLocationHelper(private val app: TelegramApplication) {
 
@@ -67,37 +67,35 @@ class ShareLocationHelper(private val app: TelegramApplication) {
 		app.settings.getChatsShareInfo().forEach { chatId, shareInfo ->
 			val currentTime = System.currentTimeMillis() / 1000
 			when {
-				app.settings.getChatLiveMessageExpireTime(chatId) <= 0 -> app.settings.shareLocationToChat(
-					chatId,
-					false
-				)
+				app.settings.getChatLiveMessageExpireTime(chatId) <= 0 ->
+					app.settings.shareLocationToChat(chatId, false)
 				currentTime > shareInfo.currentMessageLimit -> {
-					val newLivePeriod =
-						if (shareInfo.livePeriod > TelegramHelper.MAX_LOCATION_MESSAGE_LIVE_PERIOD_SEC) {
-							shareInfo.livePeriod - TelegramHelper.MAX_LOCATION_MESSAGE_LIVE_PERIOD_SEC
-						} else {
-							shareInfo.livePeriod
-						}
-					shareInfo.livePeriod = newLivePeriod
-					shareInfo.shouldDeletePreviousMessage = true
-					shareInfo.currentMessageLimit = currentTime + Math.min(
-						newLivePeriod,
-						TelegramHelper.MAX_LOCATION_MESSAGE_LIVE_PERIOD_SEC.toLong()
-					)
+					shareInfo.apply {
+						val newLivePeriod =
+							if (livePeriod > TelegramHelper.MAX_LOCATION_MESSAGE_LIVE_PERIOD_SEC) {
+								livePeriod - TelegramHelper.MAX_LOCATION_MESSAGE_LIVE_PERIOD_SEC
+							} else {
+								livePeriod
+							}
+						livePeriod = newLivePeriod
+						shouldDeletePreviousMessage = true
+						currentMessageLimit = currentTime + Math.min(
+							newLivePeriod, TelegramHelper.MAX_LOCATION_MESSAGE_LIVE_PERIOD_SEC.toLong())
+					}
 				}
 				shareInfo.userSetLivePeriod != shareInfo.livePeriod
-						&& (shareInfo.userSetLivePeriodStart + USER_SET_LIVE_PERIOD_DELAY_MIL) > currentTime -> {
-					if (shareInfo.livePeriod <= TelegramHelper.MAX_LOCATION_MESSAGE_LIVE_PERIOD_SEC) {
-						shareInfo.shouldDeletePreviousMessage = true
+						&& (shareInfo.userSetLivePeriodStart + USER_SET_LIVE_PERIOD_DELAY_MS) > currentTime -> {
+					shareInfo.apply {
+						if (livePeriod <= TelegramHelper.MAX_LOCATION_MESSAGE_LIVE_PERIOD_SEC) {
+							shouldDeletePreviousMessage = true
+						}
+						livePeriod = shareInfo.userSetLivePeriod
+						currentMessageLimit = currentTime + Math.min(
+							livePeriod, TelegramHelper.MAX_LOCATION_MESSAGE_LIVE_PERIOD_SEC.toLong()
+						)
 					}
-					shareInfo.livePeriod = shareInfo.userSetLivePeriod
-					shareInfo.currentMessageLimit = currentTime + Math.min(
-						shareInfo.livePeriod,
-						TelegramHelper.MAX_LOCATION_MESSAGE_LIVE_PERIOD_SEC.toLong()
-					)
 				}
 			}
-
 		}
 	}
 
