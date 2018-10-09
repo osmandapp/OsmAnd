@@ -3079,12 +3079,12 @@ Rappresenta l\'area: %1$s x %2$s</string>
 \n"</string>
     <string name="quick_action_edit_actions">Modifica le azioni</string>
     <string name="error_notification_desc">Per favore invia una schermata di questa notifica a support@osmand.net</string>
-    <string name="poi_cannot_be_found">Il nodo o il percorso non è stato trovato.</string>
-    <string name="search_no_results_feedback">Nessun risultato di ricerca?
-\nDacci un ritorno</string>
+    <string name="poi_cannot_be_found">Non è possibile trovare il nodo o il percorso.</string>
+    <string name="search_no_results_feedback">Nessun risultato\? 
+\nDacci un feedback</string>
     <string name="release_3_1">• Navigazione: corretta la barra di avanzamento, veloce inversione dei punti d\'inizio e fine percorso 
 \n 
-\n • Marcatori mappa: corretto la visualizzazione o meno dei gruppi, la possibilità di non visualizzare i marcatori dalla mappa 
+\n • Marcatori mappa: corretto la visualizzazione o meno dei gruppi, aggiunta la possibilità di non visualizzare i marcatori dalla mappa 
 \n 
 \n • Modifiche OSM: possibilità di modificare elementi non puntuali e segmenti, correzione di commenti mancanti nelle note, backup delle modifiche 
 \n 
@@ -3098,8 +3098,8 @@ Rappresenta l\'area: %1$s x %2$s</string>
 \n 
 \n</string>
     <string name="commiting_way">Sottoponi la via…</string>
-    <string name="increase_search_radius_to">Incrementa il raggio di ricerca a %1$s</string>
-    <string name="send_search_query_description">Invieremo le tue ricerche: <b>\"%1$s\"</b>, e la tua localizzazione.<br/><br/> Non raccogliamo informazioni personali, abbiamo solo bisogno dei dati delle ricerche per migliorare l\'algoritmo di ricerca.<br/></string>
+    <string name="increase_search_radius_to">Aumenta il raggio di ricerca a %1$s</string>
+    <string name="send_search_query_description">Invieremo la tua ricerca <b>\"%1$s\"</b> oltre alla tua localizzazione.<br/><br/> Non raccogliamo informazioni personali, abbiamo solo bisogno dei dati delle ricerche per migliorare l\'algoritmo di ricerca.<br/></string>
     <string name="send_search_query">Inviare i dati delle ricerche?</string>
     <string name="shared_string_world">Mondo</string>
     <string name="point_deleted">Punto %1$s eliminato</string>
@@ -3108,21 +3108,30 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="coord_input_save_as_track">Salva come traccia</string>
     <string name="coord_input_save_as_track_descr">Hai aggiunto %1$s punti. Digita il nome del file e tappa su \"Salva\".</string>
     <string name="test_voice_desrc">Tap sul pulsante e ascolta l\'avviso vocale corrispondente per identificare gli avvisi errati o mancanti</string>
-<string name="release_3_2_pre">• Corretto l\'arresto in avvio con le mappe non latine 
-\n 
-\n• Migliorati i problemi di velocità di disegno nei dispositivi Android 8.0 
-\n 
-\n• Supporto alla modifica degli oggetti poligonali (non amenità) 
-\n 
+<string name="release_3_2_pre">• Sistemato il crash all\'avvio che avveniva con alcuni dispositivi
 \n
+\n • Nuova funzione Marcatori: mostra i marcatori che sono stati già superati
+\n
+\n • Cerca per cronologia ora mostra le categorie che si sono cercate precedentemente
+\n
+\n • Corretto l\'arresto in avvio con le mappe non latine
+\n
+\n • Migliorati i problemi di velocità di disegno nei dispositivi Android 8.0
+\n
+\n • Supporto alla modifica degli oggetti poligonali (non amenità)
+\n
+\n • Misuratore di distanze: aggiunto il bottone Misura la distanza alle azioni nel menù laterale
 \n</string>
-    <string name="ask_for_location_permission">Per favore dai OsmAnd il permesso alla localizzazione per continuare.</string>
+    <string name="ask_for_location_permission">Per favore concedi il permesso a OsmAnd di accedere alla geolocalizzazione per continuare.</string>
     <string name="thank_you_for_feedback">Grazie per il feedback</string>
-    <string name="search_street">Ricerca per strada</string>
+    <string name="search_street">Ricerca strada</string>
     <string name="start_search_from_city">Inizia la ricerca dalla città</string>
     <string name="shared_string_restore">Ripristina</string>
-    <string name="keep_passed_markers">Tenere passati marcatori sulla mappa</string>
+    <string name="keep_passed_markers">Tenere i marcatori superati sulla mappa</string>
     <string name="more_transport_on_stop_hint">C\'è più trasporto su questa fermata.</string>
-    <string name="keep_passed_markers_descr">Marcatori aggiunti come gruppo di Preferiti o come punti GPX marcati come Superati rimarranno sulla mappa. Se il gruppo non è attivo i marcatori spariranno dalla mappa.</string>
+    <string name="keep_passed_markers_descr">I marcatori aggiunti come gruppo di Preferiti o come punti GPX marcati come Superati rimarranno sulla mappa. Se il gruppo non è attivo i marcatori spariranno dalla mappa.</string>
     <string name="rendering_value_black_name">Nero</string>
+    <string name="markers_remove_dialog_msg">Eliminare il marcatore \'%s\'\?</string>
+    <string name="edit_map_marker">Modifica marcatore</string>
+    <string name="third_party_application">Applicazione di terze parti</string>
     </resources>
