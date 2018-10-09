@@ -20,12 +20,17 @@ import net.osmand.telegram.utils.AndroidUtils
 import org.drinkless.td.libcore.telegram.TdApi
 import java.util.*
 
+private const val UPDATE_LIVE_MESSAGES_INTERVAL_MS = 10000L // 10 sec
+
 class TelegramService : Service(), LocationListener, TelegramIncomingMessagesListener,
 	TelegramOutgoingMessagesListener {
 
 	private fun app() = application as TelegramApplication
 	private val binder = LocationServiceBinder()
 	private var shouldCleanupResources: Boolean = false
+
+	private var updateShareInfoHandler: Handler? = null
+	private var mHandlerThread = HandlerThread("SharingServiceThread")
 
 	var handler: Handler? = null
 		private set
@@ -44,6 +49,12 @@ class TelegramService : Service(), LocationListener, TelegramIncomingMessagesLis
 	private var pendingIntent: PendingIntent? = null
 
 	class LocationServiceBinder : Binder()
+
+	override fun onCreate() {
+		super.onCreate()
+		mHandlerThread.start()
+		updateShareInfoHandler = Handler(mHandlerThread.looper)
+	}
 
 	override fun onBind(intent: Intent): IBinder? {
 		return binder
@@ -83,6 +94,7 @@ class TelegramService : Service(), LocationListener, TelegramIncomingMessagesLis
 
 		if (isUsedByMyLocation(usedBy)) {
 			initLocationUpdates()
+			startShareInfoUpdates()
 		}
 		if (isUsedByUsersLocations(usedBy)) {
 			app.telegramHelper.startLiveMessagesUpdates(app.settings.sendMyLocInterval)
@@ -112,6 +124,7 @@ class TelegramService : Service(), LocationListener, TelegramIncomingMessagesLis
 		app.telegramHelper.removeIncomingMessagesListener(this)
 		app.telegramHelper.removeOutgoingMessagesListener(this)
 		app.telegramService = null
+		mHandlerThread.quit()
 
 		usedBy = 0
 
@@ -163,6 +176,15 @@ class TelegramService : Service(), LocationListener, TelegramIncomingMessagesLis
 		}
 	}
 
+	private fun startShareInfoUpdates() {
+		updateShareInfoHandler?.postDelayed({
+			if (isUsedByMyLocation(usedBy)) {
+				app().shareLocationHelper.updateSendLiveMessages()
+				startShareInfoUpdates()
+			}
+		}, UPDATE_LIVE_MESSAGES_INTERVAL_MS)
+	}
+	
 	@SuppressLint("MissingPermission")
 	private fun getFirstTimeRunDefaultLocation(): net.osmand.Location? {
 		val app = app()

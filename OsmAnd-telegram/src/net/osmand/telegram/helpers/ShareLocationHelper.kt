@@ -1,19 +1,16 @@
 package net.osmand.telegram.helpers
 
 import net.osmand.Location
+import net.osmand.PlatformUtil
 import net.osmand.telegram.TelegramApplication
 import net.osmand.telegram.notifications.TelegramNotification.NotificationType
 import net.osmand.telegram.utils.AndroidNetworkUtils
-import java.util.concurrent.Executors
-import java.util.concurrent.ScheduledExecutorService
-import java.util.concurrent.TimeUnit
 
-private const val UPDATE_LIVE_MESSAGES_INTERVAL_SEC = 10L // 10 sec
 private const val USER_SET_LIVE_PERIOD_DELAY_MS = 5000 // 5 sec
 
 class ShareLocationHelper(private val app: TelegramApplication) {
 
-	private var updateLiveMessagesExecutor: ScheduledExecutorService? = null
+	private val log = PlatformUtil.getLog(ShareLocationHelper::class.java)
 
 	var sharingLocation: Boolean = false
 		private set
@@ -64,6 +61,7 @@ class ShareLocationHelper(private val app: TelegramApplication) {
 	}
 
 	fun updateSendLiveMessages() {
+		log.info("updateSendLiveMessages")
 		app.settings.getChatsShareInfo().forEach { chatId, shareInfo ->
 			val currentTime = System.currentTimeMillis() / 1000
 			when {
@@ -102,29 +100,17 @@ class ShareLocationHelper(private val app: TelegramApplication) {
 			sharingLocation = true
 
 			app.startMyLocationService()
-			startLiveMessagesUpdates(UPDATE_LIVE_MESSAGES_INTERVAL_SEC)
+
 			refreshNotification()
 		} else {
 			app.forceUpdateMyLocation()
 		}
 	}
 
-	fun startLiveMessagesUpdates(interval: Long) {
-		stopLiveMessagesUpdates()
-
-		updateLiveMessagesExecutor = Executors.newSingleThreadScheduledExecutor()
-		updateLiveMessagesExecutor?.scheduleWithFixedDelay({ updateSendLiveMessages() }, interval, interval, TimeUnit.SECONDS)
-	}
-
-	fun stopLiveMessagesUpdates() {
-		updateLiveMessagesExecutor?.shutdown()
-		updateLiveMessagesExecutor?.awaitTermination(1, TimeUnit.MINUTES)
-	}
-
 	fun stopSharingLocation() {
 		if (sharingLocation) {
 			sharingLocation = false
-			stopLiveMessagesUpdates()
+
 			app.stopMyLocationService()
 			lastLocation = null
 			lastTimeInMillis = 0L
