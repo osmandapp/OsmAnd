@@ -838,7 +838,7 @@
     <string name="auto_zoom_map">Автомасштаб</string>
     <string name="additional_settings">Дополнительные настройки</string>
     <string name="save_current_track_descr">Сохранить текущий трек как файл GPX.</string>
-    <string name="save_current_track">Сохранить текущий трек GPX</string>
+    <string name="save_current_track">Сохранить текущий трек</string>
     <string name="save_track_interval_descr">Выберите интервал для записи трека во время навигации.</string>
     <string name="save_track_interval">Интервал записи во время навигации</string>
     <string name="save_track_to_gpx_descrp">Во время навигации треки GPX будут автоматически сохранены в папку с треками.</string>
