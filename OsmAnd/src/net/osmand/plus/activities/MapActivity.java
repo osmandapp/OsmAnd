@@ -373,7 +373,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 					if (tn != null) {
 						((TextView) findViewById(R.id.ProgressMessage)).setText(tn);
 					}
-					if (event == InitEvents.NATIVE_INITIALIZED) {
+					boolean openGlInitialized = event == InitEvents.NATIVE_OPEN_GLINITIALIZED && NativeCoreContext.isInit();
+					if ((openGlInitialized || event == InitEvents.NATIVE_INITIALIZED) && !openGlSetup) {
 						setupOpenGLView(false);
 						openGlSetup = true;
 					}

@@ -626,8 +626,6 @@ public class AppInitializer implements IProgress {
 	private void startApplicationBackground() {
 		try {
 			startBgTime = System.currentTimeMillis();
-			app.favorites.loadFavorites();
-			notifyEvent(InitEvents.FAVORITES_INITIALIZED);
 			// init poi types before indexes and before POI
 			initPoiTypes();
 			notifyEvent(InitEvents.POI_TYPES_INITIALIZED);
@@ -639,6 +637,8 @@ public class AppInitializer implements IProgress {
 			initNativeCore();
 			notifyEvent(InitEvents.NATIVE_INITIALIZED);
 
+			app.favorites.loadFavorites();
+			notifyEvent(InitEvents.FAVORITES_INITIALIZED);
 			app.poiFilters.reloadAllPoiFilters();
 			app.poiFilters.loadSelectedPoiFilters();
 			notifyEvent(InitEvents.POI_TYPES_INITIALIZED);
@@ -753,6 +753,7 @@ public class AppInitializer implements IProgress {
 					osmandSettings.OPENGL_RENDER_FAILED.set(false);
 					warnings.add("Native OpenGL library is not supported. Please try again after exit");
 				}
+				notifyEvent(InitEvents.NATIVE_OPEN_GLINITIALIZED);
 			}
 			if (osmandSettings.NATIVE_RENDERING_FAILED.get()) {
 				osmandSettings.SAFE_MODE.set(true);
