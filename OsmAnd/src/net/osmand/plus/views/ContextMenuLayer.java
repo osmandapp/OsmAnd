@@ -60,6 +60,7 @@ import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.plus.resources.TransportIndexRepository;
 import net.osmand.plus.views.AddGpxPointBottomSheetHelper.NewGpxPoint;
+import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -597,7 +598,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		LatLon pointLatLon = tileBox.getLatLonFromPixel(point.x, point.y);
 		OsmandApplication app = activity.getMyApplication();
 		IContextMenuProvider poiMenuProvider = activity.getMapLayers().getPoiMapLayer();
-		if (app.getSettings().USE_OPENGL_RENDER.get()) {
+		if (app.getSettings().USE_OPENGL_RENDER.get() && NativeCoreContext.isInit()) {
 			MapRendererView rendererView = view.getMapRenderer();
 			if (rendererView != null) {
 				int delta = 20;
