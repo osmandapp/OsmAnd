@@ -2518,7 +2518,7 @@
     <string name="quick_action_duplicate">Виявлено дублікат імені</string>
     <string name="quick_action_showhide_poi_descr">Натискання на цю кнопку показує або приховує POI на мапі.</string>
     <string name="quick_action_gpx_category_descr">Виберіть категорію (опціонально).</string>
-    <string name="quick_action_page_list_descr">Натискання на цю кнопку циклічно перемикає елементи списку нижче.</string>
+    <string name="quick_action_page_list_descr">Натискання на цю кнопку циклічно гортає елементи списку нижче.</string>
     <string name="quick_action_map_overlay">Змінити мапу покриття</string>
     <string name="quick_action_map_overlay_title">Мапи покриття</string>
     <string name="quick_action_map_overlay_action">Додати мапу покриття</string>
