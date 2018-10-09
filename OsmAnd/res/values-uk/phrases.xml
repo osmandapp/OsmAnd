@@ -157,8 +157,8 @@
 	<string name="poi_charity">Благодійний магазин</string>
 	<string name="poi_medical_supply">Медичне постачання</string>
 	<string name="poi_photo">Фотомагазин</string>
-	<string name="poi_traffic_calming_bump">Лежачий поліцейський</string>
-	<string name="poi_traffic_calming_hump">Штучне підвищення</string>
+	<string name="poi_traffic_calming_bump">Штучна дорожня нерівність</string>
+	<string name="poi_traffic_calming_hump">\"Лежачий поліцейський\"</string>
 	<string name="poi_traffic_calming_chicane">Шикана</string>
 	<string name="poi_leather">Магазин шкіри, галантарея</string>
 	<string name="poi_music">Музичний магазин</string>
@@ -173,9 +173,9 @@
 	<string name="poi_pyrotechnics">Піротехніка</string>
 	<string name="poi_weapons">Магазин зброї</string>
 
-	<string name="poi_traffic_calming_cushion">Декілька лежачих поліцейських</string>
+	<string name="poi_traffic_calming_cushion">\"Берлінська подушка\"</string>
 	<string name="poi_traffic_calming_rumble_strip">Шумові полоси</string>
-	<string name="poi_traffic_calming_table">Довгий лежачий поліцейський</string>
+	<string name="poi_traffic_calming_table">Підвищений пішохідний перехід</string>
 	<string name="poi_traffic_calming_choker">Звуження дороги</string>
 	<string name="poi_traffic_signals">Світлофор</string>
 
@@ -264,7 +264,7 @@
 	<string name="poi_rest_area">Зона відпочинку</string>
 
 	<string name="poi_water_well">Криниця</string>
-	<string name="poi_standpipe">Напірна труба</string>
+	<string name="poi_standpipe">Водорозбірна колонка</string>
 	<string name="poi_highway_crossing">Пішохідний перехід</string>
 
 <string name="poi_energy">Енергетичний магазин</string>
@@ -1269,7 +1269,7 @@
 	<string name="poi_email">Електронна пошта</string>
 	<string name="poi_fax">Факс</string>
 	<string name="facebook">Фейсбук</string>
-	<string name="twitter">Твіттер</string>
+	<string name="twitter">Twitter</string>
 	<string name="poi_skype">Скайп</string>
 	<string name="poi_youtube">Ютюб</string>
 	<string name="poi_instagram">Інстаграм</string>
@@ -1761,7 +1761,7 @@
 	<string name="poi_summit_cross">Хрест на вершині: є</string>
 
 	<string name="poi_medical_system_mongolian_yes">Традиційна монгольська</string>
-	<string name="poi_payment_coins_0.5">Монети по 0,5$</string>
+	<string name="poi_payment_coins_0.5">Монети по $0,5</string>
 	<string name="poi_prison_camp">Колишній тюремний табір</string>
 	<string name="poi_medical_system_tibetan_yes">Традиційна тибетська</string>
 	<string name="poi_payment_coins_50c12">Монети по 50c, 1€ й 2€</string>
@@ -1878,7 +1878,7 @@
 	<string name="poi_payment_uta_no">Картки UTA не приймаються</string>
 	<string name="poi_health_specialty_surgery_yes">Загальна хірургія</string>
 	<string name="poi_fire_hydrant_type_pond">Ставок</string>
-	<string name="poi_payment_efectivo_yes">Efectivo</string>
+	<string name="poi_payment_efectivo_yes">Готівка</string>
 	<string name="poi_health_specialty_radiology_yes">Радіологія</string>
 	<string name="poi_fire_hydrant_type_wall">Пожежний кран</string>
 
@@ -2150,7 +2150,7 @@
 	<string name="poi_crossing_barrier_half">Бар\'єр на переїзді: половинний</string>
 	<string name="poi_payment_ep_avant_yes">AvantCard</string>
 	<string name="poi_architecture_constructivism">Архітектурний стиль: конструктивізм</string>
-	<string name="poi_historic_civilization_nuragic">Цивілізація: нурагічна (18 ст. до н.е. - 2 ст. н.е.)</string>
+	<string name="poi_historic_civilization_nuragic">Цивілізація: нурагічна (18 ст. до н.е. – 2 ст. н.е.)</string>
 	<string name="poi_crossing_barrier_double_half">Бар\'єр на переїзді: подвійний половинний</string>
 	<string name="poi_architecture_umgebinde">Архітектурний стиль: umgebinde</string>
 	<string name="poi_historic_civilization_etruscan">Цивілізація: етруски (XII - VI ст. до н.е.)</string>
@@ -3191,7 +3191,7 @@
 	<string name="poi_motorcycle_repair">Ремонт мотоциклів</string>
 	<string name="poi_resource_mercury">Ртуть</string>
 	<string name="poi_route_trolleybus_ref">Тролейбус</string>
-	<string name="poi_crop_poultry">Вирощується культура: кормова рослина</string>
+	<string name="poi_crop_poultry">Вирощується культура: свійська птиця</string>
 	<string name="poi_health_specialty_depth_psychology_yes">Глибинна психологія</string>
 	<string name="poi_nuclear_explosion_purpose_industrial_application_seismic_sounding">Мета вибуху: промислове застосування, сейсмічне зондування</string>
 	<string name="poi_treat_inpatient_no">Обслуговування в стаціонарі: ні</string>
@@ -3861,7 +3861,11 @@
 	<string name="poi_hazard_minefield">Мінне поле</string>
 
 
-<string name="poi_car_pooling">Місце об\'єднання автомобілів</string>
+<string name="poi_car_pooling">Точка кар-шерінгу</string>
 	<string name="poi_ruins">Руїни</string>
 
-	</resources>
+	<string name="poi_license_classes">Ліцензійні класи</string>
+
+	<string name="poi_hill">Пагорб</string>
+
+</resources>
