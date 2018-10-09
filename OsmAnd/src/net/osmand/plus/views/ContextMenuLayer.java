@@ -25,6 +25,20 @@ import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
 import net.osmand.NativeLibrary.RenderedObject;
 import net.osmand.RenderingContext;
+import net.osmand.core.android.MapRendererView;
+import net.osmand.core.jni.AmenitySymbolsProvider.AmenitySymbolsGroup;
+import net.osmand.core.jni.AreaI;
+import net.osmand.core.jni.IBillboardMapSymbol;
+import net.osmand.core.jni.IMapRenderer.MapSymbolInformation;
+import net.osmand.core.jni.MapObject;
+import net.osmand.core.jni.MapObjectsSymbolsProvider.MapObjectSymbolsGroup;
+import net.osmand.core.jni.MapSymbolInformationList;
+import net.osmand.core.jni.MapSymbolsGroup.AdditionalBillboardSymbolInstanceParameters;
+import net.osmand.core.jni.ObfMapObject;
+import net.osmand.core.jni.PointI;
+import net.osmand.core.jni.QStringList;
+import net.osmand.core.jni.QStringStringHash;
+import net.osmand.core.jni.Utilities;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -46,6 +60,7 @@ import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.plus.resources.TransportIndexRepository;
 import net.osmand.plus.views.AddGpxPointBottomSheetHelper.NewGpxPoint;
+import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -56,6 +71,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import gnu.trove.list.array.TIntArrayList;
 
@@ -64,6 +80,7 @@ import static net.osmand.plus.mapcontextmenu.controllers.TransportStopController
 public class ContextMenuLayer extends OsmandMapLayer {
 	//private static final Log LOG = PlatformUtil.getLog(ContextMenuLayer.class);
 	public static final int VIBRATE_SHORT = 100;
+	private static final int AMENITY_SEARCH_RADIUS = 50;
 
 	private OsmandMapTileView view;
 
@@ -579,8 +596,83 @@ public class ContextMenuLayer extends OsmandMapLayer {
 				= selectObjectsForContextMenu(tileBox, point, false, showUnknownLocation);
 		NativeOsmandLibrary nativeLib = NativeOsmandLibrary.getLoadedLibrary();
 		LatLon pointLatLon = tileBox.getLatLonFromPixel(point.x, point.y);
-		if (nativeLib != null) {
-			MapRenderRepositories maps = activity.getMyApplication().getResourceManager().getRenderer();
+		OsmandApplication app = activity.getMyApplication();
+		IContextMenuProvider poiMenuProvider = activity.getMapLayers().getPoiMapLayer();
+		if (app.getSettings().USE_OPENGL_RENDER.get() && NativeCoreContext.isInit()) {
+			MapRendererView rendererView = view.getMapRenderer();
+			if (rendererView != null) {
+				int delta = 20;
+				PointI tl = new PointI((int) point.x - delta, (int) point.y - delta);
+				PointI br = new PointI((int) point.x + delta, (int) point.y + delta);
+				MapSymbolInformationList symbols = rendererView.getSymbolsIn(new AreaI(tl, br), false);
+				for (int i = 0; i < symbols.size(); i++) {
+					MapSymbolInformation symbolInfo = symbols.get(i);
+					IBillboardMapSymbol billboardMapSymbol;
+					try {
+						billboardMapSymbol = IBillboardMapSymbol.dynamic_pointer_cast(symbolInfo.getMapSymbol());
+					} catch (Exception eBillboard) {
+						billboardMapSymbol = null;
+					}
+					if (billboardMapSymbol != null) {
+						double lat = Utilities.get31LatitudeY(billboardMapSymbol.getPosition31().getY());
+						double lon = Utilities.get31LongitudeX(billboardMapSymbol.getPosition31().getX());
+						objectLatLon = new LatLon(lat, lon);
+
+						AdditionalBillboardSymbolInstanceParameters billboardAdditionalParams;
+						try {
+							billboardAdditionalParams = AdditionalBillboardSymbolInstanceParameters
+									.dynamic_pointer_cast(symbolInfo.getInstanceParameters());
+						} catch (Exception eBillboardParams) {
+							billboardAdditionalParams = null;
+						}
+						if (billboardAdditionalParams != null && billboardAdditionalParams.getOverridesPosition31()) {
+							lat = Utilities.get31LatitudeY(billboardAdditionalParams.getPosition31().getY());
+							lon = Utilities.get31LongitudeX(billboardAdditionalParams.getPosition31().getX());
+							objectLatLon = new LatLon(lat, lon);
+						}
+
+						Amenity amenity = null;
+						net.osmand.core.jni.Amenity jniAmenity;
+						try {
+							jniAmenity = AmenitySymbolsGroup.dynamic_cast(symbolInfo.getMapSymbol().getGroupPtr()).getAmenity();
+						} catch (Exception eAmenity) {
+							jniAmenity = null;
+						}
+						if (jniAmenity != null) {
+							List<String> names = getValues(jniAmenity.getLocalizedNames());
+							names.add(jniAmenity.getNativeName());
+							long id = jniAmenity.getId().getId().longValue() >> 7;
+							amenity = findAmenity(app, id, names, objectLatLon, AMENITY_SEARCH_RADIUS);
+						} else {
+							MapObject mapObject;
+							try {
+								mapObject = MapObjectSymbolsGroup.dynamic_cast(symbolInfo.getMapSymbol().getGroupPtr()).getMapObject();
+							} catch (Exception eMapObject) {
+								mapObject = null;
+							}
+							if (mapObject != null) {
+								ObfMapObject obfMapObject;
+								try {
+									obfMapObject = ObfMapObject.dynamic_pointer_cast(mapObject);
+								} catch (Exception eObfMapObject) {
+									obfMapObject = null;
+								}
+								if (obfMapObject != null) {
+									List<String> names = getValues(obfMapObject.getCaptionsInAllLanguages());
+									names.add(obfMapObject.getCaptionInNativeLanguage());
+									long id = obfMapObject.getId().getId().longValue() >> 7;
+									amenity = findAmenity(app, id, names, objectLatLon, AMENITY_SEARCH_RADIUS);
+								}
+							}
+						}
+						if (amenity != null && isUnique(selectedObjects.keySet(), amenity)) {
+							selectedObjects.put(amenity, poiMenuProvider);
+						}
+					}
+				}
+			}
+		} else if (nativeLib != null) {
+			MapRenderRepositories maps = app.getResourceManager().getRenderer();
 			RenderingContext rc = maps.getVisibleRenderingContext();
 			RenderedObject[] renderedObjects = null;
 			if (rc != null && rc.zoom == tileBox.getZoom()) {
@@ -593,7 +685,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			if (renderedObjects != null) {
 				int TILE_SIZE = 256;
 				double cosRotateTileSize = Math.cos(Math.toRadians(rc.rotate)) * TILE_SIZE;
-				double sinRotateTileSize  = Math.sin(Math.toRadians(rc.rotate)) * TILE_SIZE;
+				double sinRotateTileSize = Math.sin(Math.toRadians(rc.rotate)) * TILE_SIZE;
 				for (RenderedObject r : renderedObjects) {
 					double cx = r.getBbox().centerX();
 					double cy = r.getBbox().centerY();
@@ -605,7 +697,6 @@ public class ContextMenuLayer extends OsmandMapLayer {
 					double lon = MapUtils.get31LongitudeX(x31);
 					r.setLabelLatLon(new LatLon(lat, lon));
 				}
-				IContextMenuProvider poiMenuProvider = activity.getMapLayers().getPoiMapLayer();
 				for (RenderedObject renderedObject : renderedObjects) {
 					if (renderedObject.getX() != null && renderedObject.getX().size() == 1
 							&& renderedObject.getY() != null && renderedObject.getY().size() == 1) {
@@ -620,38 +711,24 @@ public class ContextMenuLayer extends OsmandMapLayer {
 							names.add(renderedObject.getName());
 						}
 						for (Entry<String, String> entry : renderedObject.getTags().entrySet()) {
-							if (entry.getKey().startsWith("name:") && !entry.getValue().equals("")) {
-								names.add(entry.getValue());
-							}
-							if (entry.getKey().equals("name") && !entry.getValue().equals("")) {
-								names.add(entry.getValue());
+							String key = entry.getKey();
+							String value = entry.getValue();
+							if ((key.startsWith("name:") || key.equals("name")) && !value.isEmpty()) {
+								names.add(value);
 							}
 						}
 						LatLon searchLatLon = objectLatLon;
 						if (searchLatLon == null) {
 							searchLatLon = pointLatLon;
 						}
-						Amenity amenity = findAmenity(activity.getMyApplication(), renderedObject.getId() >> 7, names, searchLatLon, 50);
+						Amenity amenity = findAmenity(app, renderedObject.getId() >> 7, names, searchLatLon, AMENITY_SEARCH_RADIUS);
 						if (amenity != null) {
 							if (renderedObject.getX() != null && renderedObject.getX().size() > 1
 									&& renderedObject.getY() != null && renderedObject.getY().size() > 1) {
 								amenity.getX().addAll(renderedObject.getX());
 								amenity.getY().addAll(renderedObject.getY());
 							}
-							boolean exists = false;
-							for (Object o : selectedObjects.keySet()) {
-								if (o instanceof Amenity && ((Amenity) o).compareTo(amenity) == 0) {
-									exists = true;
-									break;
-								} else if (o instanceof TransportStop) {
-									TransportStop transportStop = (TransportStop) o;
-									if (transportStop.getName().startsWith(amenity.getName())) {
-										exists = true;
-										break;
-									}
-								}
-							}
-							if (!exists) {
+							if (isUnique(selectedObjects.keySet(), amenity)) {
 								selectedObjects.put(amenity, poiMenuProvider);
 							}
 							continue;
@@ -709,6 +786,28 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			return true;
 		}
 		return false;
+	}
+
+	private List<String> getValues(@Nullable QStringStringHash set) {
+		List<String> res = new ArrayList<>();
+		if (set != null) {
+			QStringList keys = set.keys();
+			for (int i = 0; i < keys.size(); i++) {
+				res.add(set.get(keys.get(i)));
+			}
+		}
+		return res;
+	}
+
+	private boolean isUnique(@NonNull Set<Object> set, @NonNull Amenity amenity) {
+		for (Object o : set) {
+			if (o instanceof Amenity && ((Amenity) o).compareTo(amenity) == 0) {
+				return false;
+			} else if (o instanceof TransportStop && ((TransportStop) o).getName().startsWith(amenity.getName())) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 	public boolean disableSingleTap() {
