@@ -3964,4 +3964,5 @@
 
 <string name="poi_hill">Bakke</string>
 
-</resources>
+<string name="poi_atm">Pengeautomat</string>
+	</resources>
