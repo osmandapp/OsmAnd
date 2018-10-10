@@ -2390,7 +2390,7 @@ Se ami OsmAnd e OSM e vuoi sostenerli, questo è un modo perfetto per farlo.</st
     <string name="route_calculation">Calcolo del percorso</string>
     <string name="gpx_no_tracks_title">Non hai ancora nessun file GPX</string>
     <string name="gpx_no_tracks_title_folder">È inoltre possibile aggiungere file GPX alla cartella</string>
-    <string name="gpx_add_track">Aggiungi traccia</string>
+    <string name="gpx_add_track">Aggiungi altri…</string>
     <string name="gpx_appearance">Aspetto</string>
     
     

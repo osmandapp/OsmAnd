@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
     <string name="search_button">Poišči</string>
     <string name="search_activity">Iskanje podatkov</string>
 
@@ -364,7 +365,7 @@ Sorazmerna velikost pomnilnika je %4$s MB (omejitev na androidu je %5$s MB, na d
     <string name="osmand_parking_event">Odpeljite vozilo s parkirišča</string>
     <string name="osmand_parking_warning_text">Obvestilo, da odpeljite vozilo s parkirišča, je bilo dodano v koledar. Ostalo bo zapisano, dokler ga ne izbrišete ročno.</string>
     <string name="osmand_parking_time_limit_title">Nastavi časovno omejitev parkiranja</string>
-    <string name="osmand_parking_delete_confirm">Ali želite izbrisati označbo mesta, kjer je vozilo parkirano?</string>
+    <string name="osmand_parking_delete_confirm">Ali želite izbrisati označbo mesta parkiranja\?</string>
     <string name="osmand_parking_delete">Izbriši označbo mesta parkiranja</string>
     <string name="osmand_parking_choose_type">Izbor vrste parkiranja</string>
     <string name="osmand_parking_lim_text">Časovno omejeno</string>
@@ -2129,7 +2130,7 @@ Omogoča tudi dodajanje opomb v koledar za prikaz opomnikov ob daljših časih p
     
     <string name="show_map_markers_description">Omogoči možnosti označb zemljevida.</string>
     <string name="clear_active_markers_q">Ali želite odstraniti vse dejavne označbe?</string>
-    <string name="clear_markers_history_q">Ali res želite počistiti zgodovino označbe?</string>
+    <string name="clear_markers_history_q">Ali želite počistiti zgodovino označb\?</string>
     <string name="active_markers">Dejavne označbe</string>
     <string name="map_markers">Označbe zemljevida</string>
     <string name="map_marker">Označba zemljevida</string>
@@ -2440,7 +2441,7 @@ Koda predstavlja območje: %1$s x %2$s</string>
     
 	<string name="auto_split_recording_title">Samodejno razdeli beleženje po vmesnih točkah</string>
 	<string name="auto_split_recording_descr">Začne z novim odsekom po 6-minutnem premoru, novo sled po 2-urnem premoru oziroma s povsem novo datoteko beleženja, če je zamik čez datumsko mejo.</string>
-    <string name="quick_action_add_marker_descr">S pritiskom na gumb dejanja bo dodana označba na zemljevid na trenutno sredinsko točko na zaslonu.</string>
+    <string name="quick_action_add_marker_descr">S pritiskom na gumb dejanja bo dodana označba na trenutno sredinsko točko.</string>
     <string name="quick_action_add_gpx_descr">S pritiskom na gumb dejanja bo dodana vmesna točka GPX na trenutno sredinsko točko na zaslonu.</string>
     <string name="quick_action_take_audio_note_descr">S pritiskom na gumb dejanja bo dodano zvočno sporočilo na trenutno sredinsko točko na zaslonu.</string>
     <string name="quick_action_take_video_note_descr">S pritiskom na gumb dejanja bo dodano video sporočilo na trenutno sredinsko točko na zaslonu.</string>
@@ -2987,4 +2988,12 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="wiki_article_search_text">Iskanje pripadajočega prispevka na Wikipediji</string>
     <string name="wiki_article_not_found">Prispevka ni mogoče najti</string>
     <string name="how_to_open_wiki_title">Kako odpreti prispevek na Wikipediji?</string>
-</resources>
+<string name="markers_remove_dialog_msg">Ali res želite izbrisati označbo »%s«\'\?</string>
+    <string name="edit_map_marker">Uredi označbo zemljevida</string>
+    <string name="third_party_application">Programi tretjih oseb</string>
+    <string name="search_street">Iskanje ulice</string>
+    <string name="start_search_from_city">Začni z iskanjem mesta</string>
+    <string name="shared_string_restore">Obnovi</string>
+    <string name="thank_you_for_feedback">Zahvaljujemo se vam za vaš odziv</string>
+    <string name="shared_string_world">Svet</string>
+    </resources>
