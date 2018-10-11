@@ -473,7 +473,7 @@
 	
 	<string name="rendering_value_pink_name">rosa</string>
 	
-	<string name="rendering_value_brown_name">marrom</string>
+	<string name="rendering_value_brown_name">Marrom</string>
 	
 	
 	
@@ -2944,4 +2944,11 @@ Pôr do Sol: %2$s</string>
     <string name="increase_search_radius_to">Aumentar o raio de pesquisa para %1$s</string>
     <string name="send_search_query">Enviar consulta de pesquisa?</string>
     <string name="ask_for_location_permission">Por favor, dê permissão ao OsmAnd para ver a sua localização para continuar.</string>
+    <string name="markers_remove_dialog_msg">Apagar marcador de mapa \'%s\'\?</string>
+    <string name="edit_map_marker">Editar marcador de mapa</string>
+    <string name="third_party_application">Aplicativo de terceiros</string>
+    <string name="search_street">Pesquisar rua</string>
+    <string name="start_search_from_city">Iniciar pesquisa a partir da cidade</string>
+    <string name="shared_string_restore">Restaurar</string>
+    <string name="rendering_value_black_name">Preto</string>
     </resources>

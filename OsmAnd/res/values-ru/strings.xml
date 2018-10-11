@@ -372,11 +372,11 @@
     <string name="native_rendering">Быстрый рендеринг</string>
     <string name="test_voice_prompts">Тест голосовых подсказок</string>
     <string name="switch_to_raster_map_to_see">Для этой местности отсутствует векторная карта. Загрузите ее с помощью меню \"Скачать карты\" или переключитесь на плагин \"Онлайн карты\".</string>
-    <string name="send_files_to_osm">Отправить GPX файлы в OSM?</string>
+    <string name="send_files_to_osm">Отправить файлы GPX в OSM\?</string>
     <string name="gpx_visibility_txt">Видимость</string>
     <string name="gpx_tags_txt">Теги</string>
     <string name="gpx_description_txt">Описание</string>
-    <string name="validate_gpx_upload_name_pwd">Пожалуйста, укажите имя и пароль пользователя OSM для выгрузки GPX файлов.</string>
+    <string name="validate_gpx_upload_name_pwd">Пожалуйста, укажите имя и пароль пользователя OSM для выгрузки файлов GPX.</string>
     <string name="default_buttons_support">Поддержка</string>
     <string name="support_new_features">Поддержать разработку новых функций</string>
     <string name="show_ruler_level">Показывать масштаб</string>
@@ -398,7 +398,7 @@
     <string name="live_monitoring_interval">Интервал онлайн слежения</string>
     <string name="live_monitoring_url_descr">Укажите веб-адрес со следующими параметрами: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}.</string>
     <string name="live_monitoring_url">Web адрес онлайн слежения</string>
-    <string name="gpx_monitoring_disabled_warn">Записать трек можно с помощью GPX виджета или выбрав \"Запись поездки\" в Настройках.</string>
+    <string name="gpx_monitoring_disabled_warn">Записать трек можно с помощью виджета GPX или выбрав \"Запись поездки\" в Настройках.</string>
     <string name="show_current_gpx_title">Показывать текущий путь</string>
     <string name="free_version_message">Бесплатная версия OsmAnd ограничена %1$s загрузками (добавлениями или обновлениями карт) и не поддерживает геостатьи из Википедии.</string>
     <string name="free_version_title">Бесплатная версия</string>
@@ -437,7 +437,7 @@
     <string name="auto_follow_route_navigation">Автовозврат карты только при следовании по маршруту</string>
     <string name="auto_follow_route_navigation_descr">Возвращать карту в текущее положение только при следовании по маршруту.</string>
     <string name="auto_follow_location_enabled">Привязка карты к местоположению включена.</string>
-    <string name="shared_string_gpx_route">GPX маршрут</string>
+    <string name="shared_string_gpx_route">"Маршрут  GPX"</string>
     <string name="poi_query_by_name_matches_categories">Некоторые категории POI соответствуют запросу, можете использовать их для создания фильтра:</string>
     <string name="data_to_search_poi_not_available">Локальные данные для поиска POI по имени не найдены.</string>
     <string name="poi_filter_by_name">Поиск по имени</string>
@@ -458,7 +458,7 @@
     <string name="route_successfully_saved_at">Маршрут успешно сохранен в \"%1$s\".</string>
     <string name="filename_input">Имя файла: </string>
     <string name="file_with_name_already_exist">Файл с таким именем уже существует.</string>
-    <string name="local_index_upload_gpx_description">Выгрузить GPX файлы в сообщество OSM. Они будут использованы для улучшения карты.</string>
+    <string name="local_index_upload_gpx_description">Выгрузить файлы GPX в сообщество OSM. Они будут использованы для улучшения карты.</string>
     <string name="local_index_items_uploaded">%1$d из %2$d объект(ов) успешно загружены.</string>
     <string name="local_index_mi_upload_gpx">Отправить в OSM</string>
     <string name="show_more_map_detail">Детализированная карта</string>
@@ -554,9 +554,9 @@
     <string name="send_location_email_pattern">Чтобы увидеть местоположение следуйте ссылке %1$s или android ссылке %2$s</string>
     <string name="send_location">Отправить местоположение</string>
     <string name="context_menu_item_share_location">Поделиться местоположением</string>
-    <string name="add_waypoint_dialog_added">Точка GPX \"{0}\" была успешно добавлена</string>
-    <string name="add_waypoint_dialog_title">Добавить точку к записанному треку</string>
-    <string name="context_menu_item_add_waypoint">Добавить точку к треку</string>
+    <string name="add_waypoint_dialog_added">"Путевая точка GPX \"{0}\"  добавлена"</string>
+    <string name="add_waypoint_dialog_title">Добавить путевую точку к записанному треку GPX</string>
+    <string name="context_menu_item_add_waypoint">Добавить путевую точку GPX</string>
     <string name="amenity_type_administrative">Административное</string>
     <string name="amenity_type_barrier">Препятствие</string>
     <string name="amenity_type_education">Образование</string>
@@ -657,7 +657,7 @@
     <string name="no_vector_map_loaded">Векторные карты не загружены в приложение</string>
     
     <string name="gpx_files_not_found">Файлы GPX не найдены в папке с треками</string>
-    <string name="layer_gpx_layer">Трек GPX…</string>
+    <string name="layer_gpx_layer">Файлы GPX…</string>
     <string name="error_reading_gpx">Не удалось прочитать данные GPX</string>
     <string name="vector_data">Локальные векторные карты</string>
     
@@ -670,7 +670,7 @@
     <string name="rotate_map_to_bearing">Ориентация карты</string>
     <string name="show_route">Показать маршрут</string>
     <string name="fav_imported_sucessfully">Избранные точки успешно импортированы</string>
-    <string name="fav_file_to_load_not_found">Файл GPX, содержащий точки, не был найден в {0}</string>
+    <string name="fav_file_to_load_not_found">Файл GPX, содержащий избранные точки, не был найден в {0}</string>
     <string name="fav_saved_sucessfully">Избранные точки сохранены в {0}</string>
     <string name="no_fav_to_save">Нет избранных точек для сохранения</string>
     <string name="error_occurred_loading_gpx">Не удалось загрузить GPX</string>
@@ -813,7 +813,7 @@
     <string name="loading_streets">Загружаются улицы…</string>
     <string name="loading_cities">Загружаются города…</string>
     <string name="poi">POI</string>
-    <string name="error_occurred_saving_gpx">Не удалось сохранить GPX трек</string>
+    <string name="error_occurred_saving_gpx">Не удалось сохранить файл GPX</string>
     <string name="error_calculating_route">Не удалось рассчитать маршрут</string>
     <string name="error_calculating_route_occured">Не удалось рассчитать маршрут</string>
     <string name="empty_route_calculated">Невозможно построить маршрут</string>
@@ -824,7 +824,7 @@
     <string name="loading_data">Загрузка данных…</string>
     <string name="reading_indexes">Чтение локальных данных…</string>
     <string name="previous_run_crashed">Приложение завершилось некорректно. Лог-файл в {0}. Сообщите разработчику об ошибке и приложите лог-файл.</string>
-    <string name="saving_gpx_tracks">Сохранение треков GPX на SD-карту…</string>
+    <string name="saving_gpx_tracks">Сохранение файла GPX…</string>
     <string name="finished_task">Окончен</string>
     <string name="use_online_routing_descr">Использовать Интернет-сервис для прокладки маршрута.</string>
     <string name="use_online_routing">Онлайн маршрутизация</string>
@@ -1278,10 +1278,10 @@
     <string name="available_downloads_left">Доступно %1$d файлов для скачивания</string>
     <string name="files_limit">осталось %1$d файлов</string>
     <string name="wait_current_task_finished">Пожалуйста, подождите, пока завершится текущая операция</string>
-    <string name="distance_measurement_load_gpx">Открыть существующий GPX трек</string>
+    <string name="distance_measurement_load_gpx">Открыть существующий файл GPX</string>
     <string name="distance_measurement_finish_subtrack">Начать новый подтрек</string>
     <string name="gpx_file_name">Имя файла GPX</string>
-    <string name="gpx_saved_sucessfully">Файл GPX успешно сохранен в {0}</string>
+    <string name="gpx_saved_sucessfully">Файл GPX сохранен в {0}</string>
     <string name="osmand_distance_planning_plugin_name">Инструмент расчета дистанции и планирования</string>
     <string name="intermediate_items_sort_return">Промежуточные пункты выстроены в оптимальный маршрут от текущего местоположения до пункта назначения.</string>
     <string name="local_osm_changes_backup_failed">Не удалось выполнить резервное копирование изменений OSM</string>
@@ -1526,7 +1526,7 @@
     <string name="osmo_connect_menu">Соединение</string>
     
     
-    <string name="import_file_favourites">Сохранить данные как файл GPX или импортировать путевые точки в избранное?</string>
+    <string name="import_file_favourites">Сохранить данные как файл GPX или импортировать путевые точки в избранные\?</string>
     
     <string name="rendering_value_pink_name">Розовый</string>
     
@@ -1545,7 +1545,7 @@
     
     
     
-    <string name="gpx_file_is_empty">Трек GPX пуст</string>
+    <string name="gpx_file_is_empty">Пустой файл GPX</string>
     
     
     
@@ -1588,7 +1588,7 @@
     <string name="sort_by_distance">Сортировать по дистанции</string>
     <string name="sort_by_name">Сортировать по имени</string>
     <string name="osmo_edit_color">Цвет метки</string>
-    <string name="none_selected_gpx">Нет выбранных файлов GPX. Используйте длительное нажатие для выбора доступного трека.</string>
+    <string name="none_selected_gpx">Нет выбранных файлов GPX. Выберите один путем длительного нажатия.</string>
     <string name="local_index_select_gpx_file">Выбрать для отображения</string>
     
     <string name="rendering_attr_hideBuildings_name">Строения</string>
@@ -2049,7 +2049,7 @@
     <string name="favourites">Избранные</string>
     <string name="saved_at_time">Успешно сохранен в: %1$s</string>
     <string name="poi_deleted_localy">POI будут удалены после того как вы загрузите ваши изменения</string>
-    <string name="show_gpx">Показать GPX</string>
+    <string name="show_gpx">Показать данные GPX</string>
     <string name="poi_action_delete">удалить</string>
     <string name="recent_places">Недавние места</string>
     <string name="count_of_lines">Количество строк</string>
@@ -2391,7 +2391,7 @@
     <string name="quick_action_add_poi">Добавить POI</string>
     <string name="quick_action_map_style">Изменить стиль карты</string>
     <string name="quick_action_map_style_switch">Стиль карты был изменен на \"%s\".</string>
-    <string name="quick_action_add_gpx">Добавить точку GPX</string>
+    <string name="quick_action_add_gpx">Добавить путевую точку GPX</string>
     <string name="quick_action_add_parking">Добавить место парковки</string>
     <string name="quick_action_new_action">Добавить действие</string>
     <string name="quick_action_edit_action">Редактировать действие</string>
@@ -2648,9 +2648,9 @@
 \n
 \nЭтот вид может быть отменен путем деактивации его здесь или путем изменения «Стиля карты» в разделе «Настройки карты» по желанию.</string>
     <string name="navigate_point_olc">Открытый код местоположения (OLC)</string>
-    <string name="osmand_extended_description_part1">OsmAnd (OSM Automated Navigation Directions) - картографическая и навигационная программа с доступом к свободным, мировым и высококачественным данным OpenStreetMap (OSM).
-\n
-\nПолучайте наслаждение от голосовой и визуальной навигации, просматривайте точки интереса (англ. POI, points of interest), создавайте и управляйте GPX треками, используйте визуализацию контурных линий и данных высот (через плагин), переключайтесь между режимами автомобиль, велосипед и пешеход, редактируйте OSM данные и многое другое.</string>
+    <string name="osmand_extended_description_part1">OsmAnd (OSM Automated Navigation Directions) - картографическая и навигационная программа с доступом к свободным, мировым и высококачественным данным OpenStreetMap (OSM). 
+\n 
+\nПолучайте наслаждение от голосовой и визуальной навигации, просматривайте точки интереса (англ. POI, points of interest), создавайте и управляйте треками GPX, используйте визуализацию контурных линий и данных высот (через плагин), переключайтесь между режимами автомобиль, велосипед и пешеход, редактируйте OSM данные и многое другое.</string>
     <string name="osmand_extended_description_part2">GPS-навигация
 \n• Вы можете выбрать между автономным режимом (без платы за роуминг) и через Интернет (быстрее)
 \n• Пошаговые голосовые подсказки (записанные или синтезированные голоса) доставят вас к месту назначения
@@ -2662,37 +2662,37 @@
 \n• Вы можете искать места по адресу, типу (паркинг, ресторан, отель, заправка, музей и т.д.) или географическим координатам
 \n• Поддержка промежуточных точек маршрута
 \n• Вы можете записать собственный GPX трек или загрузить готовый и придерживаться его</string>
-    <string name="osmand_extended_description_part3">Карта
-\n• Отображает POI (точки интереса) около вас
-\n• Адаптирует карту в направлении вашего движения (или компаса)
-\n• Показывает, где вы находитесь и куда вы смотрите
-\n• Делитесь своим расположением, чтобы друзья смогли найти вас
-\n• Сохраняет ваши самые важные места в избранных
-\n• Позволяет вам выбрать как отображать названия на карте: на английском, местным или с фонетическим написанием
-\n• Отображает специальные онлайн тайлы, спутниковые снимки (с Bing), различные метки, как туристические/навигационные GPX треки и дополнительные слои с настраиваемой прозрачностью</string>
+    <string name="osmand_extended_description_part3">Карта 
+\n• Отображает POI (точки интереса) около вас 
+\n• Адаптирует карту в направлении вашего движения (или компаса) 
+\n• Показывает, где вы находитесь и куда вы смотрите 
+\n• Делитесь своим расположением, чтобы друзья смогли найти вас 
+\n• Сохраняет ваши самые важные места в избранных 
+\n• Позволяет вам выбрать как отображать названия на карте: на английском, местным или с фонетическим написанием 
+\n• Отображает специальные онлайн тайлы, спутниковые снимки (с Bing), различные метки, как туристические/навигационные треки GPX и дополнительные слои с настраиваемой прозрачностью</string>
     <string name="osmand_extended_description_part4">Катание на лыжах
 \n• OsmAnd плагин лыжные карты позволяет видеть лыжные трассы с уровнем сложности и некоторой дополнительной информацией, как расположение подъемников и других объектов.</string>
     <string name="osmand_extended_description_part5">Езда на велосипеде 
 \n• Поиск велосипедных дорожек на карте 
 \n• GPS навигация в велосипедном режиме строит маршрут используя велосипедные дорожки 
 \n• Просмотр вашей скорости и высоты над уровнем моря 
-\n• Опция GPX записи позволяет вам записывать ваше путешествие и делиться им 
+\n• Опция записи GPX позволяет вам записывать ваше путешествие и делиться им 
 \n• Через приложение вы можете включить отображение контурных линий и затемнение рельефа</string>
     <string name="osmand_extended_description_part6">Прогулки, походы, экскурсии 
 \n• Карта показывает пешеходные и треккинговые тропы 
 \n• Википедия на предпочитаемом вами языке может многое рассказать вам во время экскурсии по городу 
 \n• Остановки общественного транспорта (автобус, трамвай, поезд), включая названия маршрутов, помогут ориентироваться в новом городе 
 \n• GPS навигация в пешеходном режиме высчитывает маршрут, используя пешеходные тропы 
-\n• Загрузите и следуйте по GPX маршруту или запишите и поделитесь своим собственным</string>
-    <string name="osmand_extended_description_part7">Внесение вклада в OSM
-\n• Сообщения об ошибках
-\n• Загрузка GPX треков в OSM напрямую из программы
+\n• Загрузите и следуйте по маршруту GPX или запишите и поделитесь своим собственным</string>
+    <string name="osmand_extended_description_part7">Внесение вклада в OSM 
+\n• Сообщения об ошибках 
+\n• Загрузка треков GPX в OSM напрямую из программы 
 \n• Добавление точек интереса (POI) и загрузка их в OSM (или позже, если оффлайн)</string>
-    <string name="osmand_plus_extended_description_part1">"OsmAnd+ (OSM Automated Navigation Directions) - картографическая и навигационная программа с доступом к свободным, мировым и высококачественным данным OpenStreetMap (OSM).
-\n Получайте наслаждение от голосовой и визуальной навигации, просматривайте точки интереса  (англ. POI, points of interest), создавайте и управляйте GPX треками, используйте визуализацию контурных линий и данных высот, переключайтесь между режимами автомобиль, велосипед и пешеход, редактируйте OSM данные и многое другое.
-\n
-\n OsmAnd + - платная версия программы. При приобретении, вы поддержите проект, финансируете разработку новых возможностей и получите последние обновления.
-\n
+    <string name="osmand_plus_extended_description_part1">"OsmAnd+ (OSM Automated Navigation Directions) - картографическая и навигационная программа с доступом к свободным, мировым и высококачественным данным OpenStreetMap (OSM). 
+\n Получайте наслаждение от голосовой и визуальной навигации, просматривайте точки интереса  (англ. POI, points of interest), создавайте и управляйте треками GPX, используйте визуализацию контурных линий и данных высот, переключайтесь между режимами автомобиль, велосипед и пешеход, редактируйте OSM данные и многое другое. 
+\n 
+\n OsmAnd + - платная версия программы. При приобретении, вы поддержите проект, финансируете разработку новых возможностей и получите последние обновления. 
+\n 
 \n Некоторые из главных возможностей:"</string>
     <string name="osmand_plus_extended_description_part2">Навигация
 \n• Работает через Интернет (быстрее) или автономно (без платы за роуминг за границей)
@@ -2706,7 +2706,7 @@
 \n• Возможность ориентирования карты по компасу или по направлению вашего движения 
 \n• Сохранение ваших самых важных мест в качестве избранных 
 \n• Отображение POI (точек интереса) вокруг вас 
-\n• Отображение специализированных онлайн тайлов, спутниковые снимки (от Bing), различные наложения, такие как туристические/навигационные GPX треки и дополнительные слои с настраиваемой прозрачностью
+\n• Отображение специализированных онлайн тайлов, спутниковые снимки (от Bing), различные наложения, такие как туристические/навигационные треки GPX и дополнительные слои с настраиваемой прозрачностью 
 \n• Возможность отображения географических названий на английском, местном или фонетическом написании</string>
     <string name="quick_action_item_screen">Экран %d</string>
     <string name="quick_favorites_show_favorites_dialog">Показать диалог избранных</string>
@@ -2716,17 +2716,17 @@
     <string name="add_route_points">Добавить точки маршрута</string>
     <string name="add_waypoint">Добавить путевую точку</string>
     <string name="add_line">Добавить линию</string>
-    <string name="save_gpx_waypoint">Сохранить GPX путевую точку</string>
+    <string name="save_gpx_waypoint">Сохранить путевую точку GPX</string>
     <string name="save_route_point">Сохранить точку маршрута</string>
     <string name="waypoint_one">Путевая точка 1</string>
     <string name="route_point_one">Точка маршрута 1</string>
-    <string name="empty_state_my_tracks">Добавить и записать треки</string>
-    <string name="empty_state_my_tracks_desc">Запись или импорт треков для просмотра.</string>
+    <string name="empty_state_my_tracks">Добавить файлы GPX</string>
+    <string name="empty_state_my_tracks_desc">Импорт файлов GPX, или запись треков.</string>
     <string name="empty_state_favourites">Добавить избранные</string>
     <string name="empty_state_favourites_desc">Добавить избранные на карту или импортировать из файла.</string>
-    <string name="import_track">Импортировать трек</string>
+    <string name="import_track">Импортировать файл GPX</string>
     <string name="move_point">Переместить точку</string>
-    <string name="add_segment_to_the_track">Добавить в GPX трек</string>
+    <string name="add_segment_to_the_track">Добавить в файл GPX</string>
 <string name="osmand_plus_extended_description_part4">Используйте данные OSM и Википедии
 \n• Высококачественная информация из лучших совместных проектов мира
 \n• Данные OSM доступны по каждой стране или региону
@@ -2743,7 +2743,7 @@
 \n• Просмотр пешеходных, туристических и велосипедных дорожек, прекрасно подходит для активного отдыха 
 \n• Специальный режимы маршрутизации и отображения для велосипедистов и пешеходов 
 \n• Опционально остановки общественного транспорта (автобус, трамвай, поезд), включая названия маршрутов 
-\n• Возможность записи путешествие в локальный GPX файл или Интернет-сервис 
+\n• Возможность записи путешествие в локальный файл GPX или Интернет-сервис 
 \n• Возможность отображения скорости и высоты 
 \n• Отображение контурных линий и затенения высот (через дополнительный плагин)</string>
     <string name="osmand_plus_extended_description_part7">Непосредственный вклад в OSM
