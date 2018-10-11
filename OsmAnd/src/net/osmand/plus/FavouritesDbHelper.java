@@ -50,6 +50,7 @@ public class FavouritesDbHelper {
 	protected static final String HIDDEN = "HIDDEN";
 	private static final String DELIMETER = "__";
 
+	private boolean favoritesLoaded;
 
 	public FavouritesDbHelper(OsmandApplication context) {
 		this.context = context;
@@ -91,12 +92,15 @@ public class FavouritesDbHelper {
 			saveCurrentPointsIntoFile();
 		}
 		favouritesUpdated();
-
+		favoritesLoaded = true;
 	}
 
 	private void favouritesUpdated() {
 	}
 
+	public boolean isFavoritesLoaded() {
+		return favoritesLoaded;
+	}
 
 	private boolean merge(Map<String, FavouritePoint> source, Map<String, FavouritePoint> destination) {
 		boolean changed = false;
