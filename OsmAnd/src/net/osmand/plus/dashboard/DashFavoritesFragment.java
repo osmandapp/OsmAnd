@@ -14,6 +14,7 @@ import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.FavouritesDbHelper;
+import net.osmand.plus.FavouritesDbHelper.FavoritesListener;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.FavoriteImageDrawable;
@@ -47,6 +48,8 @@ public class DashFavoritesFragment extends DashLocationFragment {
 	public static final DashFragmentData FRAGMENT_DATA =
 			new DashFragmentData(TAG, DashFavoritesFragment.class, SHOULD_SHOW_FUNCTION, 90, ROW_NUMBER_TAG);
 
+	private FavoritesListener favoritesListener;
+
 	@Override
 	public View initView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		View view = getActivity().getLayoutInflater().inflate(R.layout.dash_common_fragment, container, false);
@@ -62,7 +65,26 @@ public class DashFavoritesFragment extends DashLocationFragment {
 
 	@Override
 	public void onOpenDash() {
-		setupFavorites();
+		FavouritesDbHelper helper = getMyApplication().getFavorites();
+		if (helper.isFavoritesLoaded()) {
+			setupFavorites();
+		} else {
+			helper.addListener(favoritesListener = new FavoritesListener() {
+				@Override
+				public void onFavoritesLoaded() {
+					setupFavorites();
+				}
+			});
+		}
+	}
+
+	@Override
+	public void onCloseDash() {
+		super.onCloseDash();
+		if (favoritesListener != null) {
+			getMyApplication().getFavorites().removeListener(favoritesListener);
+			favoritesListener = null;
+		}
 	}
 
 	public void setupFavorites() {
