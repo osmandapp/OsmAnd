@@ -20,7 +20,7 @@ public class SearchResult {
 	public SearchResult parentSearchResult;
 	public Collection<String> otherWordsMatch = null;
 	public boolean firstUnknownWordMatches = true;
-	
+	public boolean unknownPhraseMatches = false;
 	
 	
 	public SearchResult(SearchPhrase sp) {
@@ -31,6 +31,9 @@ public class SearchResult {
 		int inc = 0;
 		if(firstUnknownWordMatches) {
 			inc = 1;
+		}
+		if (unknownPhraseMatches) {
+			inc += 1000;
 		}
 		if(otherWordsMatch != null) {
 			inc += otherWordsMatch.size();

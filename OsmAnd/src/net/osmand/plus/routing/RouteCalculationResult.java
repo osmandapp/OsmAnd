@@ -404,7 +404,7 @@ public class RouteCalculationResult {
 			}
 			
 			
-			if(delta > 45 && delta < 315){
+			if(delta > 30 && delta < 330){
 				
 				if(delta < 60){
 					type = TurnType.valueOf(TurnType.TSLL, leftSide);

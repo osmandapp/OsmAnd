@@ -636,6 +636,7 @@ public class OpeningHoursParser {
 		 * Day number 0 is MONDAY
 		 */
 		private boolean[] days = new boolean[7];
+		private boolean hasDays = false;
 
 		/**
 		 * represents the list on which month it is open.
@@ -646,7 +647,8 @@ public class OpeningHoursParser {
 		/**
 		 * represents the list on which day it is open.
 		 */
-		private boolean[] dayMonths = new boolean[31];
+		private boolean[][] dayMonths = new boolean[12][31];
+		private boolean hasDayMonths = false;
 
 		/**
 		 * lists of equal size representing the start and end times
@@ -694,8 +696,12 @@ public class OpeningHoursParser {
 		/**
 		 * @return the day months of the rule
 		 */
-		public boolean[] getDayMonths() {
+		public boolean[][] getDayMonths() {
 			return dayMonths;
+		}
+
+		public boolean[] getDayMonths(int month) {
+			return dayMonths[month];
 		}
 
 		/**
@@ -982,20 +988,108 @@ public class OpeningHoursParser {
 					break;
 				}
 			}
-			// Month
-			if (!allMonths) {
+			boolean allDays = !hasDayMonths;
+			if (!allDays) {
+				boolean dash = false;
+				boolean first = true;
+				int monthAdded = -1;
+				int excludedMonthEnd = -1;
+				int excludedDayEnd = -1;
+				int excludedMonthStart = -1;
+				int excludedDayStart = -1;
+				if (dayMonths[0][0] && dayMonths[11][30]) {
+					int prevMonth = 0;
+					int prevDay = 0;
+					for (int month = 0; month < dayMonths.length; month++) {
+						for (int day = 0; day < dayMonths[month].length; day++) {
+							if (day == 1) {
+								prevMonth = month;
+							}
+							if (!dayMonths[month][day]) {
+								excludedMonthEnd = prevMonth;
+								excludedDayEnd = prevDay;
+								break;
+							}
+							prevDay = day;
+						}
+						if (excludedDayEnd != -1) {
+							break;
+						}
+					}
+					prevMonth = dayMonths.length - 1;
+					prevDay = dayMonths[prevMonth].length - 1;
+					for (int month = dayMonths.length - 1; month >= 0; month--) {
+						for (int day = dayMonths[month].length - 1; day >= 0; day--) {
+							if (day == dayMonths[month].length - 2) {
+								prevMonth = month;
+							}
+							if (!dayMonths[month][day]) {
+								excludedMonthStart = prevMonth;
+								excludedDayStart = prevDay;
+								break;
+							}
+							prevDay = day;
+						}
+						if (excludedDayStart != -1) {
+							break;
+						}
+					}
+				}
+				for (int month = 0; month < dayMonths.length; month++) {
+					for (int day = 0; day < dayMonths[month].length; day++) {
+						if (excludedDayStart != -1 && excludedDayEnd != -1) {
+							if (month < excludedMonthEnd || (month == excludedMonthEnd && day <= excludedDayEnd)) {
+								continue;
+							} else if (month > excludedMonthStart || (month == excludedMonthStart && day >= excludedDayStart)) {
+								continue;
+							}
+						}
+						if (dayMonths[month][day]) {
+							if (day == 0 && dash) {
+								continue;
+							}
+							if (day > 0 && dayMonths[month][day - 1]
+									&& ((day < dayMonths[month].length - 1 && dayMonths[month][day + 1]) || (day == dayMonths[month].length - 1 && month < dayMonths.length - 1 && dayMonths[month + 1][0]))) {
+								if (!dash) {
+									dash = true;
+									if (!first) {
+										b.append("-");
+									}
+								}
+								continue;
+							}
+							if (first) {
+								first = false;
+							} else if (!dash) {
+								b.append(", ");
+								monthAdded = -1;
+							}
+							if (monthAdded != month) {
+								b.append(monthNames[month]).append(" ");
+								monthAdded = month;
+							}
+							b.append(day + 1);
+							dash = false;
+						}
+					}
+				}
+				if (excludedDayStart != -1 && excludedDayEnd != -1) {
+					if (first) {
+						first = false;
+					} else if (!dash) {
+						b.append(", ");
+					}
+					b.append(monthNames[excludedMonthStart]).append(" ").append(excludedDayStart + 1)
+							.append("-")
+							.append(monthNames[excludedMonthEnd]).append(" ").append(excludedDayEnd + 1);
+				}
+				if (!first) {
+					b.append(" ");
+				}
+			} else if (!allMonths) {
 				addArray(months, monthNames, b);
 			}
-			boolean allDays = true;
-			for (int i = 0; i < dayMonths.length; i++) {
-				if (!dayMonths[i]) {
-					allDays = false;
-					break;
-				}
-			}
-			if (!allDays) {
-				addArray(dayMonths, null, b);
-			}
+
 			// Day
 			appendDaysString(b, dayNames);
 			// Time
@@ -1312,9 +1406,21 @@ public class OpeningHoursParser {
 			int i = cal.get(Calendar.DAY_OF_WEEK);
 			int day = (i + 5) % 7;
 			int previous = (day + 6) % 7;
-			boolean thisDay = days[day] || dayMonths[dmonth];
+			boolean thisDay = hasDays || hasDayMonths;
+			if (thisDay && hasDayMonths) {
+				thisDay = dayMonths[month][dmonth];
+			}
+			if (thisDay && hasDays) {
+				thisDay = days[day];
+			}
 			// potential error for Dec 31 12:00-01:00
-			boolean previousDay = days[previous] || (dmonth > 0 && dayMonths[dmonth - 1]);
+			boolean previousDay = hasDays || hasDayMonths;
+			if (previousDay && hasDayMonths && dmonth > 0) {
+				previousDay = dayMonths[month][dmonth - 1];
+			}
+			if (previousDay && hasDays) {
+				previousDay = days[previous];
+			}
 			if (!thisDay && !previousDay) {
 				return 0;
 			}
@@ -1462,13 +1568,23 @@ public class OpeningHoursParser {
 			} catch(NumberFormatException e){
 			}
 		}
+		public Token(TokenType tokenType, int tokenMainNumber) {
+			type = tokenType;
+			mainNumber = tokenMainNumber;
+			text = Integer.toString(mainNumber);
+		}
 		int mainNumber = -1;
 		TokenType type;
 		String text;
-		
+		Token parent;
+
 		@Override
 		public String toString() {
-			return text + " [" + type + "] ";
+			if (parent != null) {
+				return parent.text + " [" + parent.type + "] (" + text + " [" + type + "]) ";
+			} else {
+				return text + " [" + type + "] ";
+			}
 		}
 	}
 
@@ -1503,9 +1619,10 @@ public class OpeningHoursParser {
 		basic.setComment(comment);
 		boolean[] days = basic.getDays();
 		boolean[] months = basic.getMonths();
-		boolean[] dayMonths = basic.getDayMonths();
+		//boolean[][] dayMonths = basic.getDayMonths();
 		if ("24/7".equals(localRuleString)) {
 			Arrays.fill(days, true);
+			basic.hasDays = true;
 			Arrays.fill(months, true);
 			basic.addTimeRange(0, 24 * 60);
 			rules.add(basic);
@@ -1598,10 +1715,12 @@ public class OpeningHoursParser {
 	private static void buildRule(BasicOpeningHourRule basic, List<Token> tokens, List<OpeningHoursRule> rules) {
 		// order MONTH MONTH_DAY DAY_WEEK HOUR_MINUTE OPEN_OFF
 		TokenType currentParse = TokenType.TOKEN_UNKNOWN;
+		TokenType currentParseParent = TokenType.TOKEN_UNKNOWN;
 		List<Token[]> listOfPairs = new ArrayList<>();
 		Set<TokenType> presentTokens = new HashSet<>();
 		Token[] currentPair = new Token[2];
 		listOfPairs.add(currentPair);
+		Token prevToken = null;
 		int indexP = 0;
 		for(int i = 0; i <= tokens.size(); i++) {
 			Token t = i == tokens.size() ? null : tokens.get(i);
@@ -1614,22 +1733,48 @@ public class OpeningHoursParser {
 				if (currentParse == TokenType.TOKEN_MONTH || currentParse == TokenType.TOKEN_DAY_MONTH
 						|| currentParse == TokenType.TOKEN_DAY_WEEK || currentParse == TokenType.TOKEN_HOLIDAY) {
 
+					boolean tokenDayMonth = currentParse == TokenType.TOKEN_DAY_MONTH;
 					boolean[] array = (currentParse == TokenType.TOKEN_MONTH) ? basic.getMonths()
-							: (currentParse == TokenType.TOKEN_DAY_MONTH) ? basic.getDayMonths() : basic.getDays();
+							: tokenDayMonth ? null : basic.getDays();
 					for (Token[] pair : listOfPairs) {
 						if (pair[0] != null && pair[1] != null) {
-							if (pair[0].mainNumber <= pair[1].mainNumber) {
-								for (int j = pair[0].mainNumber; j <= pair[1].mainNumber && j < array.length; j++) {
-									array[j] = true;
+							Token firstMonthToken = pair[0].parent;
+							Token lastMonthToken = pair[1].parent;
+							if (tokenDayMonth && firstMonthToken != null) {
+								if (lastMonthToken != null && lastMonthToken.mainNumber != firstMonthToken.mainNumber) {
+									Token[] p = new Token[]{firstMonthToken, lastMonthToken};
+									fillRuleArray(basic.getMonths(), p);
+
+									Token t1 = new Token(TokenType.TOKEN_DAY_MONTH, pair[0].mainNumber);
+									Token t2 = new Token(TokenType.TOKEN_DAY_MONTH, 30);
+									p = new Token[]{t1, t2};
+									array = basic.getDayMonths(firstMonthToken.mainNumber);
+									fillRuleArray(array, p);
+
+									t1 = new Token(TokenType.TOKEN_DAY_MONTH, 0);
+									t2 = new Token(TokenType.TOKEN_DAY_MONTH, pair[1].mainNumber);
+									p = new Token[]{t1, t2};
+									array = basic.getDayMonths(lastMonthToken.mainNumber);
+									fillRuleArray(array, p);
+
+									if (firstMonthToken.mainNumber <= lastMonthToken.mainNumber) {
+										for (int month = firstMonthToken.mainNumber + 1; month < lastMonthToken.mainNumber; month++) {
+											Arrays.fill(basic.getDayMonths(month), true);
+										}
+									} else {
+										for (int month = firstMonthToken.mainNumber + 1; month < 12; month++) {
+											Arrays.fill(basic.getDayMonths(month), true);
+										}
+										for (int month = 0; month < lastMonthToken.mainNumber; month++) {
+											Arrays.fill(basic.getDayMonths(month), true);
+										}
+									}
+								} else {
+									array = basic.getDayMonths(firstMonthToken.mainNumber);
+									fillRuleArray(array, pair);
 								}
-							} else {
-								// overflow
-								for (int j = pair[0].mainNumber; j < array.length; j++) {
-									array[j] = true;
-								}
-								for (int j = 0; j <= pair[1].mainNumber; j++) {
-									array[j] = true;
-								}
+							} else if (array != null) {
+								fillRuleArray(array, pair);
 							}
 						} else if (pair[0] != null) {
 							if (pair[0].type == TokenType.TOKEN_HOLIDAY) {
@@ -1641,7 +1786,13 @@ public class OpeningHoursParser {
 									basic.easter = true;
 								}
 							} else if (pair[0].mainNumber >= 0) {
-								array[pair[0].mainNumber] = true;
+								Token firstMonthToken = pair[0].parent;
+								if (tokenDayMonth && firstMonthToken != null) {
+									array = basic.getDayMonths(firstMonthToken.mainNumber);
+								}
+								if (array != null) {
+									array[pair[0].mainNumber] = true;
+								}
 							}
 						}
 					}
@@ -1664,14 +1815,19 @@ public class OpeningHoursParser {
 				currentPair[indexP++] = t;
 				if (t != null) {
 					currentParse = t.type;
+					currentParseParent = currentParse;
+					if (t.type == TokenType.TOKEN_DAY_MONTH && prevToken != null && prevToken.type == TokenType.TOKEN_MONTH) {
+						t.parent = prevToken;
+						currentParseParent = prevToken.type;
+					}
 				}
-			} else if (t.type.ord() < currentParse.ord() && indexP == 0 && tokens.size() > i) {
+			} else if (t.type.ord() < currentParseParent.ord() && indexP == 0 && tokens.size() > i) {
 				BasicOpeningHourRule newRule = new BasicOpeningHourRule(basic.getSequenceIndex());
 				newRule.setComment(basic.getComment());
 				buildRule(newRule, tokens.subList(i, tokens.size()), rules);
 				tokens = tokens.subList(0, i + 1);
 			} else if (t.type == TokenType.TOKEN_COMMA) {
-				if (tokens.size() > i + 1 && tokens.get(i + 1) != null && tokens.get(i + 1).type.ord() < currentParse.ord()) {
+				if (tokens.size() > i + 1 && tokens.get(i + 1) != null && tokens.get(i + 1).type.ord() < currentParseParent.ord()) {
 					indexP = 0;
 				} else {
 					currentPair = new Token[2];
@@ -1681,19 +1837,46 @@ public class OpeningHoursParser {
 			} else if (t.type == TokenType.TOKEN_DASH) {
 
 			} else if (t.type.ord() == currentParse.ord()) {
-				if(indexP < 2) {
+				if (indexP < 2) {
 					currentPair[indexP++] = t;
+					if (t.type == TokenType.TOKEN_DAY_MONTH && prevToken != null && prevToken.type == TokenType.TOKEN_MONTH) {
+						t.parent = prevToken;
+					}
 				}
 			}
+			prevToken = t;
 		}
-		if(!presentTokens.contains(TokenType.TOKEN_MONTH)) {
+		if (!presentTokens.contains(TokenType.TOKEN_MONTH)) {
 			Arrays.fill(basic.getMonths(), true);
+		} else {
+			if (presentTokens.contains(TokenType.TOKEN_DAY_MONTH)) {
+				basic.hasDayMonths = true;
+			}
 		}
-		if(!presentTokens.contains(TokenType.TOKEN_DAY_WEEK) && !presentTokens.contains(TokenType.TOKEN_HOLIDAY) &&
+		if (!presentTokens.contains(TokenType.TOKEN_DAY_WEEK) && !presentTokens.contains(TokenType.TOKEN_HOLIDAY) &&
 				!presentTokens.contains(TokenType.TOKEN_DAY_MONTH)) {
 			Arrays.fill(basic.getDays(), true);
+			basic.hasDays = true;
+		} else if (presentTokens.contains(TokenType.TOKEN_DAY_WEEK)) {
+			basic.hasDays = true;
 		}
 		rules.add(0, basic);
+	}
+
+	private static void fillRuleArray(boolean[] array, Token[] pair) {
+		if (pair[0].mainNumber <= pair[1].mainNumber) {
+			for (int j = pair[0].mainNumber; j <= pair[1].mainNumber && j < array.length; j++) {
+				array[j] = true;
+			}
+		} else {
+			// overflow
+			for (int j = pair[0].mainNumber; j < array.length; j++) {
+				array[j] = true;
+			}
+			for (int j = 0; j <= pair[1].mainNumber; j++) {
+				array[j] = true;
+			}
+		}
 	}
 
 	private static void findInArray(Token t, String[] list, TokenType tokenType) {

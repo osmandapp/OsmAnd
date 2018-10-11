@@ -22,7 +22,8 @@ public class CollatorStringMatcher implements StringMatcher {
 		CHECK_STARTS_FROM_SPACE_NOT_BEGINNING,
 		CHECK_EQUALS_FROM_SPACE,
 		CHECK_CONTAINS,
-		CHECK_ONLY_STARTS_WITH_TRIM
+		CHECK_ONLY_STARTS_WITH_TRIM,
+		CHECK_EQUALS,
 	}
 
 	public CollatorStringMatcher(String part, StringMatcherMode mode) {
@@ -55,6 +56,8 @@ public class CollatorStringMatcher implements StringMatcher {
 			return cstartsWith(collator, base, part, true, false, false, false);
 		case CHECK_ONLY_STARTS_WITH_TRIM:
 			return cstartsWith(collator, base, part, true, false, false, true);
+		case CHECK_EQUALS:
+			return cstartsWith(collator, base, part, false, false, true, false);
 		}
 		return false;
 	}
@@ -159,6 +162,9 @@ public class CollatorStringMatcher implements StringMatcher {
 					}
 				}
 			}
+		}
+		if (!checkBeginning && !checkSpaces && equals) {
+			return collator.equals(searchIn, theStart);
 		}
 		return false;
 	}

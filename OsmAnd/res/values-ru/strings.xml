@@ -100,7 +100,7 @@
     <string name="shared_string_start_time">Отправление</string>
     <string name="shared_string_end_time">Прибытие</string>
     <string name="shared_string_color">Цвет</string>
-    <string name="select_gpx_folder">Выберите папку для GPX файла</string>
+    <string name="select_gpx_folder">Выберите папку для файла GPX</string>
     <string name="shared_string_move">Переместить</string>
     <string name="shared_string_gpx_tracks">Треки</string>
     <string name="altitude_descent">Спуск</string>
@@ -168,8 +168,8 @@
     <string name="upload_poi">Выгрузить POI</string>
     <string name="route_calculation">Построение маршрута</string>
 
-    <string name="gpx_no_tracks_title">У вас пока нет треков</string>
-    <string name="gpx_no_tracks_title_folder">Вы также можете добавить треки в папку</string>
+    <string name="gpx_no_tracks_title">У вас пока нет файлов GPX</string>
+    <string name="gpx_no_tracks_title_folder">Вы также можете добавить файлы GPX в папку</string>
     <string name="gpx_add_track">Добавить</string>
     <string name="gpx_appearance">Вид</string>
 
@@ -215,7 +215,7 @@
     <string name="save_filter">Сохранить фильтр</string>
     <string name="delete_filter">Удалить фильтр</string>
     <string name="new_filter">Новый фильтр</string>
-    <string name="number_of_gpx_files_selected_pattern">%s GPX трека(ов) выбрано</string>
+    <string name="number_of_gpx_files_selected_pattern">%s файла(ов) GPX выбрано</string>
     <string name="change_markers_position">Изменить положение маркера</string>
     <string name="current_track">Текущий путь</string>
     <string name="use_osm_live_routing">Навигация OsmAnd Live</string>
@@ -365,7 +365,7 @@
     <string name="plugins_screen">Плагины</string>
     <string name="prefs_plugins_descr">Плагины активируют дополнительные возможности приложения.</string>
     <string name="prefs_plugins">Плагины</string>
-    <string name="osm_editing_plugin_description">С помощью этого плагина OsmAnd может быть использован для улучшения OSM через создание или изменение объектов OSM POI, открытие или комментирование OSM заметок, а также отправку записанные GPX файлов. OSM развивается обществом, глобальный проект создания карты общей собственности. Для получения дополнительной информации, пожалуйста, обращайтесь на https://openstreetmap.org. Активное участие ценится, и взносы могут быть сделаны непосредственно через OsmAnd, если вы укажете свои учетные данные OSM в настройках.</string>
+    <string name="osm_editing_plugin_description">С помощью этого плагина OsmAnd может быть использован для улучшения OSM через создание или изменение объектов OSM POI, открытие или комментирование OSM заметок, а также отправку записанных файлов GPX. OSM развивается обществом, глобальный проект создания карты общей собственности. Для получения дополнительной информации, пожалуйста, обращайтесь на https://openstreetmap.org. Активное участие ценится, и взносы могут быть сделаны непосредственно через OsmAnd, если вы укажете свои учетные данные OSM в настройках.</string>
     <string name="vector_maps_may_display_faster_on_some_devices">Векторные карты могут отображаться быстрее. Поддерживается не всеми устройствами.</string>
     <string name="play_commands_of_currently_selected_voice">Воспроизвести команды выбранным голосом</string>
     <string name="debugging_and_development">Отладка и разработка</string>
@@ -837,8 +837,8 @@
     <string name="auto_zoom_map_descr">Автоматически изменять масштаб карты при изменении скорости (пока карта синхронизирована с текущим положением).</string>
     <string name="auto_zoom_map">Автомасштаб</string>
     <string name="additional_settings">Дополнительные настройки</string>
-    <string name="save_current_track_descr">Сохранить текущий трек на SD-карту сейчас.</string>
-    <string name="save_current_track">Сохранить текущий трек GPX</string>
+    <string name="save_current_track_descr">Сохранить текущий трек как файл GPX.</string>
+    <string name="save_current_track">Сохранить текущий трек</string>
     <string name="save_track_interval_descr">Выберите интервал для записи трека во время навигации.</string>
     <string name="save_track_interval">Интервал записи во время навигации</string>
     <string name="save_track_to_gpx_descrp">Во время навигации треки GPX будут автоматически сохранены в папку с треками.</string>
@@ -1679,7 +1679,7 @@
     <string name="duration">Продолжительность</string>
     <string name="save_track_to_gpx_globally">Запись трека в файл GPX</string>
     <string name="save_track_interval_globally">Интервал записи</string>
-    <string name="save_track_to_gpx_globally_descr">Общая запись местоположения в файл GPX может быть включена или выключена с помощью виджета записи GPX на экране карты.</string>
+    <string name="save_track_to_gpx_globally_descr">Ведение записи местоположения в файл GPX можно включить или выключить с помощью виджета записи GPX на экране карты.</string>
     <string name="record_plugin_description">"Плагин активирует функции для записи и сохранения ваших треков вручную нажатием на виджет записи GPX на экране карты, или также автоматически записывает все ваши маршруты навигации в файл GPX. 
 \n
 \nЗаписанными треками можно поделиться с вашими друзьями или использовать их для вклада в OSM. Спортсмены могут использовать записанные треки для контроля за тренировками. Некоторый базовый анализ треков может быть выполнен непосредственно в OsmAnd, например, время прохождения круга, средняя скорость и т.д., треки, конечно, позднее также могут быть проанализированы в специальных инструментах анализа  сторонних производителей."</string>
@@ -1814,7 +1814,7 @@
     <string name="shared_string_select_all">Выбрать все</string>
     <string name="shared_string_clear">Очистить</string>
     <string name="shared_string_save">Сохранить</string>
-    <string name="shared_string_save_as_gpx">Сохранить как новый GPX трек</string>
+    <string name="shared_string_save_as_gpx">Сохранить как новый файл GPX</string>
     <string name="shared_string_rename">Переименовать</string>
     <string name="shared_string_delete">Удалить</string>
     <string name="shared_string_delete_all">Удалить все</string>
@@ -2056,7 +2056,7 @@
     <string name="show_on_start">Показывать при запуске</string>
     <string name="are_you_sure">Вы уверены?</string>
     <string name="unsaved_changes_will_be_lost">Все несохраненные изменения будут потеряны. Продолжить?</string>
-    <string name="simulate_your_location_descr">Моделировать ваше местоположение, используя рассчитанный маршрут или записанный GPX.</string>
+    <string name="simulate_your_location_descr">Моделировать ваше местоположение, используя рассчитанный маршрут или записанный трек GPX.</string>
     <string name="simulate_your_location_stop_descr">Остановить моделирование своего местоположения.</string>
     <string name="favorite_category_add_new">Добавить новую</string>
     <string name="favorite_category_select">Выберите категорию</string>
@@ -2150,8 +2150,8 @@
     <string name="route_duration">Время:</string>
     <string name="access_from_map_description">Кнопка меню открывает панель управления, а не меню</string>
     <string name="access_from_map">Доступ с карты</string>
-    <string name="context_menu_item_delete_waypoint">Удалить точку GPX?</string>
-    <string name="context_menu_item_edit_waypoint">Редактировать точку GPX</string>
+    <string name="context_menu_item_delete_waypoint">Удалить путевую точку GPX\?</string>
+    <string name="context_menu_item_edit_waypoint">Редактировать путевую точку GPX</string>
     <string name="routing_attr_avoid_stairs_name">Избегать лестниц</string>
     <string name="routing_attr_avoid_stairs_description">Избегать лестниц</string>
     <string name="routing_attr_avoid_borders_name">Избегать пересечения границы</string>
@@ -2346,7 +2346,7 @@
     <string name="first_usage_greeting">Прокладывайте маршруты и открывайте новые для себя места без подключения к Интернету</string>
     <string name="allow_access_location">Разрешить доступ к местоположению</string>
     <string name="give_permission">Дать разрешение</string>
-    <string name="storage_place_description">OsmAnd будет хранить данные (карты, маршруты и пр.) в %1$s.</string>
+    <string name="storage_place_description">Хранилище данных OsmAnd (для карт, файлов GPX и пр.): %1$s.</string>
     <string name="storage_free_space">Свободное место</string>
     <string name="search_location">Определение местоположения…</string>
     <string name="no_inet_connection_desc_map">Требуется загрузить карты</string>
@@ -2464,7 +2464,7 @@
     <string name="distance_moving">Откорректированное расстояние</string>
     <string name="improve_coverage_install_mapillary_desc">Установите Mapillary, чтобы добавить одну или несколько фотографий к этому месту на карте.</string>
     <string name="route_altitude">Высота маршрута</string>
-    <string name="enter_gpx_name">Имя GPX файла:</string>
+    <string name="enter_gpx_name">Имя файла GPX:</string>
     <string name="show_on_map_after_saving">Показать на карте после сохранения</string>
     <string name="measurement_tool_action_bar">Просмотрите карту и добавьте точки</string>
     <string name="measurement_tool">Измерить расстояние</string>
@@ -2502,7 +2502,7 @@
     <string name="this_year">В этом году</string>
     <string name="plan_route">План маршрута</string>
     <string name="coordinate_input">Ввод координат</string>
-    <string name="marker_save_as_track">Сохранить как GPX файл</string>
+    <string name="marker_save_as_track">Сохранить как файл GPX</string>
     <string name="move_to_history">Переместить в историю</string>
     <string name="group_will_be_removed_after_restart">Группа будет выключена при следующем запуске приложения.</string>
     <string name="show_arrows_on_the_map">Показывать стрелки на карте</string>
@@ -2517,7 +2517,7 @@
     <string name="my_location">Мое местоположение</string>
     <string name="shared_string_finish">Финиш</string>
     <string name="shared_string_sort">Сортировать</string>
-    <string name="marker_save_as_track_descr">Экспорт маркеров в следующий GPX файл:</string>
+    <string name="marker_save_as_track_descr">Экспорт маркеров в следующий файл GPX:</string>
     <string name="shared_string_markers">Маркеры</string>
     <string name="osn_modify_dialog_title">Изменить заметку</string>
     <string name="context_menu_item_modify_note">Изменить заметку OSM</string>
@@ -2531,8 +2531,8 @@
     <string name="map_orientation_change_in_accordance_with_speed">Смена ориентации карты</string>
     <string name="map_orientation_change_in_accordance_with_speed_descr">Выберите ниже скорость, при которой переключается ориентация карты с \"По направлению движения\" на \"По направлению компаса\".</string>
     <string name="all_markers_moved_to_history">Все маркеры перемещены в историю</string>
-    <string name="marker_moved_to_history">Маркер карты перемещен в историю</string>
-    <string name="marker_moved_to_active">Маркер карты перемещен в действующие</string>
+    <string name="marker_moved_to_history">Маркер перемещен в историю</string>
+    <string name="marker_moved_to_active">Маркер перемещен в действующие</string>
     <string name="show_direction">Указатель расстояния</string>
     
     
@@ -2590,7 +2590,7 @@
     <string name="add_favourites_group_to_markers_descr">Выберите категорию избранных для добавления к маркерам.</string>
     <string name="favourites_group">Категория избранных</string>
     <string name="add_group">Добавить группу</string>
-    <string name="add_group_descr">Импортировать группу из избранных или GPX путевых точек.</string>
+    <string name="add_group_descr">Импортировать группу из избранных или путевых точек GPX.</string>
     <string name="empty_state_markers_active">Создайте маркеры карт!</string>
     <string name="empty_state_markers_active_desc">Длинное или короткое нажатие на нужное место, а затем на флажок маркера.</string>
     <string name="empty_state_markers_groups">Импорт групп</string>
@@ -2618,7 +2618,7 @@
     <string name="show_number_pad">Показать цифровую панель</string>
     <string name="tap_on_map_to_hide_interface_descr">Нажатие на карте переключает кнопки управления и виджеты.</string>
     
-    <string name="import_gpx_file_description">могут быть импортированы как избранные точки или как GPX файл.</string>
+    <string name="import_gpx_file_description">могут быть импортированы как избранные точки или как файл GPX.</string>
     <string name="shared_string_more_without_dots">Больше</string>
     <string name="import_as_gpx">Импортировать как файл GPX</string>
     <string name="import_as_favorites">Импортировать как избранные</string>
@@ -2813,7 +2813,7 @@
     <string name="switch_osm_notes_visibility_desc">Показать/скрыть заметки OSM на карте.</string>
     <string name="gpx_file_desc">GPX - подходит для экспорта в JOSM и другие OSM редакторы.</string>
     <string name="osc_file_desc">OSC - подходит для экспорта в OpenStreetMap.</string>
-    <string name="shared_string_gpx_file">GPX файл</string>
+    <string name="shared_string_gpx_file">Файл GPX</string>
     <string name="osc_file">OSC файл</string>
     <string name="choose_file_type">Выберите тип файла</string>
     <string name="osm_edits_export_desc">Выберите тип экспорта: заметки OSM, POI или оба.</string>
@@ -2993,7 +2993,10 @@
     <string name="search_street">Поиск улицы</string>
     <string name="start_search_from_city">Начать поиск с города</string>
     <string name="shared_string_restore">Восстановить</string>
-    <string name="keep_passed_markers_descr">Маркеры, добавленные как группа избранных или GPX путевых точек и отмеченные как пройденные, останутся на карте. Если группа не активна, маркеры исчезнут с карты.</string>
+    <string name="keep_passed_markers_descr">Маркеры, добавленные как группа избранных или путевых точек GPX и отмеченные как пройденные, останутся на карте. Если группа не активна, маркеры исчезнут с карты.</string>
     <string name="keep_passed_markers">Оставить пройденные маркеры на карте</string>
     <string name="more_transport_on_stop_hint">На этой остановке есть другие транспортные средства.</string>
+    <string name="markers_remove_dialog_msg">Удалить маркер \'%s\'\?</string>
+    <string name="edit_map_marker">Редактировать маркер</string>
+    <string name="third_party_application">Стороннее приложение</string>
     </resources>

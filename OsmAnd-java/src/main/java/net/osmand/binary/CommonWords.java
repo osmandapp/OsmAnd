@@ -5,10 +5,13 @@ import java.util.Map;
 
 public class CommonWords {
 	private static Map<String, Integer> commonWordsDictionary = new LinkedHashMap<>();
+	private static Map<String, Integer> frequentlyUsedWordsDictionary = new LinkedHashMap<>();
 	private static void addCommon(String string) {
 		commonWordsDictionary.put(string, commonWordsDictionary.size());
 	}
-	
+	private static void addFrequentlyUsed(String string) {
+		frequentlyUsedWordsDictionary.put(string, frequentlyUsedWordsDictionary.size());
+	}
 	public static int getCommon(String name) {
 //		if(true) {
 //			// not ready for old versions yet
@@ -17,10 +20,15 @@ public class CommonWords {
 		Integer i = commonWordsDictionary.get(name);
 		return i == null ? -1 : i.intValue();
 	}
-	
+
+	public static int getFrequentlyUsed(String name) {
+		Integer i = frequentlyUsedWordsDictionary.get(name);
+		return i == null ? -1 : i.intValue();
+	}
+
 	public static int getCommonSearch(String name) {
 		Integer i = commonWordsDictionary.get(name);
-		return i == null ? -1 : i.intValue();
+		return i == null ? getFrequentlyUsed(name) : i.intValue();
 	}
 	
 	public static int getCommonGeocoding(String name) {
@@ -29,6 +37,8 @@ public class CommonWords {
 	}
 	
 	static {
+		addFrequentlyUsed("santa");
+
 		addCommon("la");
 		addCommon("via");
 		addCommon("rua");

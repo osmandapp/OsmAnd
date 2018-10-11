@@ -514,7 +514,8 @@ public class SearchUICore {
 
 	public boolean isSearchMoreAvailable(SearchPhrase phrase) {
 		for (SearchCoreAPI api : apis) {
-			if (api.getSearchPriority(phrase) >= 0 && api.isSearchMoreAvailable(phrase)) {
+			if (api.isSearchAvailable(phrase) && api.getSearchPriority(phrase) >= 0
+					&& api.isSearchMoreAvailable(phrase)) {
 				return true;
 			}
 		}

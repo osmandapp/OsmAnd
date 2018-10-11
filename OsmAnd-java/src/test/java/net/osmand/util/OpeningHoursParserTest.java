@@ -1,25 +1,14 @@
 package net.osmand.util;
 
-import java.io.Serializable;
-import java.text.DateFormatSymbols;
-import java.text.MessageFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Set;
+import net.osmand.util.OpeningHoursParser.OpeningHours;
 
 import org.junit.Test;
 
-import net.osmand.util.OpeningHoursParser.OpeningHours;
-import junit.framework.Assert;
-import gnu.trove.list.array.TIntArrayList;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.List;
+import java.util.Locale;
 
 /**
  * Class used to parse opening hours
@@ -121,14 +110,65 @@ public class OpeningHoursParserTest {
 
 	@Test
 	public void testOpeningHours() throws ParseException {
-		// 0. not supported MON DAY-MON DAY (only supported Feb 2-14 or Feb-Oct: 09:00-17:30)
-		// parseOpenedHours("Feb 16-Oct 15: 09:00-18:30; Oct 16-Nov 15: 09:00-17:30; Nov 16-Feb 15: 09:00-16:30");
-		
-		// 1. not properly supported
+		// 0. not properly supported
 		// hours = parseOpenedHours("Mo-Su (sunrise-00:30)-(sunset+00:30)");
-		
+
+		OpeningHours hours = parseOpenedHours("Apr 05-Oct 24: Fr 08:00-16:00");
+		System.out.println(hours);
+		testOpened("26.08.2018 15:00", hours, false);
+		testOpened("29.03.2019 15:00", hours, false);
+		testOpened("05.04.2019 11:00", hours, true);
+
+		hours = parseOpenedHours("Oct 24-Apr 05: Fr 08:00-16:00");
+		System.out.println(hours);
+		testOpened("26.08.2018 15:00", hours, false);
+		testOpened("29.03.2019 15:00", hours, true);
+		testOpened("26.04.2019 11:00", hours, false);
+
+		hours = parseOpenedHours("Oct 24-Apr 05, Jun 10-Jun 20, Jul 6-12: Fr 08:00-16:00");
+		System.out.println(hours);
+		testOpened("26.08.2018 15:00", hours, false);
+		testOpened("02.01.2019 15:00", hours, false);
+		testOpened("29.03.2019 15:00", hours, true);
+		testOpened("26.04.2019 11:00", hours, false);
+
+		hours = parseOpenedHours("Apr 05-24: Fr 08:00-16:00");
+		System.out.println(hours);
+		testOpened("12.10.2018 11:00", hours, false);
+		testOpened("12.04.2019 15:00", hours, true);
+		testOpened("27.04.2019 15:00", hours, false);
+
+		hours = parseOpenedHours("Apr 5: Fr 08:00-16:00");
+		System.out.println(hours);
+		testOpened("05.04.2019 15:00", hours, true);
+		testOpened("06.04.2019 15:00", hours, false);
+
+		hours = parseOpenedHours("Apr 24-05: Fr 08:00-16:00");
+		System.out.println(hours);
+		testOpened("12.10.2018 11:00", hours, false);
+		testOpened("12.04.2018 15:00", hours, false);
+
+		hours = parseOpenedHours("Apr: Fr 08:00-16:00");
+		System.out.println(hours);
+		testOpened("12.10.2018 11:00", hours, false);
+		testOpened("12.04.2019 15:00", hours, true);
+
+		hours = parseOpenedHours("Apr-Oct: Fr 08:00-16:00");
+		System.out.println(hours);
+		testOpened("09.11.2018 11:00", hours, false);
+		testOpened("12.10.2018 11:00", hours, true);
+		testOpened("24.08.2018 15:00", hours, true);
+		testOpened("09.03.2018 15:00", hours, false);
+
+		hours = parseOpenedHours("Apr, Oct: Fr 08:00-16:00");
+		System.out.println(hours);
+		testOpened("09.11.2018 11:00", hours, false);
+		testOpened("12.10.2018 11:00", hours, true);
+		testOpened("24.08.2018 15:00", hours, false);
+		testOpened("12.04.2019 15:00", hours, true);
+
 		// test basic case
-		OpeningHours hours = parseOpenedHours("Mo-Fr 08:30-14:40"); //$NON-NLS-1$
+		hours = parseOpenedHours("Mo-Fr 08:30-14:40"); //$NON-NLS-1$
 		System.out.println(hours);
 		testOpened("09.08.2012 11:00", hours, true);
 		testOpened("09.08.2012 16:00", hours, false);

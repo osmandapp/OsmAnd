@@ -324,6 +324,7 @@ public class QuickSearchHelper implements ResourceListener {
 	}
 
 	public static class SearchOnlineApi extends SearchBaseAPI {
+		private static final int SEARCH_RADIUS_INCREMENT = 3;
 
 		private OsmandApplication app;
 		private NominatimPoiFilter filter;
@@ -338,7 +339,7 @@ public class QuickSearchHelper implements ResourceListener {
 		public boolean search(SearchPhrase phrase, SearchResultMatcher matcher) throws IOException {
 			double lat = phrase.getSettings().getOriginalLocation().getLatitude();
 			double lon = phrase.getSettings().getOriginalLocation().getLongitude();
-			String text = phrase.getUnknownSearchPhrase();
+			String text = phrase.getRawUnknownSearchPhrase();
 			filter.setFilterByName(text);
 			publishAmenities(phrase, matcher, filter.initializeNewSearch(lat, lon,
 					-1, null, phrase.getRadiusLevel() + 3));
@@ -378,6 +379,21 @@ public class QuickSearchHelper implements ResourceListener {
 			sr.location = amenity.getLocation();
 			sr.preferredZoom = 17;
 			return sr;
+		}
+
+		@Override
+		public int getMinimalSearchRadius(SearchPhrase phrase) {
+			return (int)filter.getSearchRadius(phrase.getRadiusLevel() + SEARCH_RADIUS_INCREMENT);
+		}
+
+		@Override
+		public int getNextSearchRadius(SearchPhrase phrase) {
+			return (int)filter.getSearchRadius(phrase.getRadiusLevel() + SEARCH_RADIUS_INCREMENT + 1);
+		}
+
+		@Override
+		public boolean isSearchMoreAvailable(SearchPhrase phrase) {
+			return phrase.getRadiusLevel() + SEARCH_RADIUS_INCREMENT < filter.getMaxSearchRadiusIndex();
 		}
 	}
 

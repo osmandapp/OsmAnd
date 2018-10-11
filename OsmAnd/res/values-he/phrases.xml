@@ -2202,4 +2202,65 @@
 	<string name="poi_trade_agricultural_supplies">אספקה חקלאית</string>
 	<string name="poi_trade_tile">ציוד ריצוף</string>
 
-	</resources>
+	<string name="poi_smoking_separated">בחדר נפרד</string>
+	<string name="poi_smoking_isolated">בחדר מבודד</string>
+	<string name="poi_smoking_dedicated">מוקדש למעשנים</string>
+
+	<string name="poi_toll_yes">אגרה</string>
+	<string name="poi_toll_no">ללא אגרה</string>
+	<string name="poi_toll_hgv_yes">אגרה למשאיות</string>
+	<string name="poi_tactile_paving_yes">כן</string>
+	<string name="poi_traffic_signals_sound_yes">כן</string>
+	<string name="poi_traffic_signals_sound_no">לא</string>
+	<string name="poi_traffic_signals_sound_walk">רק כאשר מותר לחצות</string>
+
+	<string name="poi_rescue_station">תחנת הצלה</string>
+
+	<string name="poi_services">אזור שירות</string>
+	<string name="poi_mini_roundabout">כיכר מזערית</string>
+	<string name="poi_internet_access_type_wlan">רשת אלחוטית</string>
+	<string name="poi_internet_access_type_terminal">מסוף</string>
+	<string name="poi_internet_access_type_wired">חיבור קווי</string>
+	<string name="poi_internet_access_type_public">סוג הגישה לאינטרנט: ציבורית</string>
+	<string name="poi_internet_access_type_service">סוג הגישה לאינטרנט: שירות</string>
+	<string name="poi_internet_access_type_no">אין גישה לאינטרנט</string>
+	<string name="poi_internet_access_type_yes">יש גישה לאינטרנט</string>
+
+	<string name="poi_maxwidth">רוחב מרבי</string>
+	<string name="poi_iata">קוד IATA</string>
+	<string name="poi_icao">קוד ICAO</string>
+	<string name="poi_faa">קוד FAA</string>
+	
+	<string name="poi_artwork_type_sculpture">סוג יצירת האומנות: מוצג תלת ממדי</string>
+	<string name="poi_artwork_type_statue">סוג יצירת האומנות: פיסול</string>
+	<string name="poi_artwork_type_mural">סוג יצירת האומנות: ציור קיר</string>
+	<string name="poi_artwork_type_architecture">סוג יצירת האומנות: אדריכלות</string>
+	<string name="poi_artwork_type_painting">סוג יצירת האומנות: ציור</string>
+	<string name="poi_artwork_type_stone">סוג יצירת האומנות: אבן</string>
+	<string name="poi_artwork_type_bust">סוג יצירת האומנות: פסל ראש וכתפיים (פרוטומה/בוסטה)</string>
+	<string name="poi_artwork_type_installation">סוג יצירת האומנות: מיצב</string>
+	<string name="poi_artwork_type_mosaic">סוג יצירת האומנות: פסיפס</string>
+	<string name="poi_artwork_type_relief">סוג יצירת האומנות: תבליט</string>
+	<string name="poi_artwork_type_graffiti">סוג יצירת האומנות: גרפיטי</string>
+	<string name="poi_artwork_type_fountain">סוג יצירת האומנות: מזרקה</string>
+
+	<string name="poi_width">רוחב</string>
+
+	<string name="poi_architect_name">אדריכל/ית</string>
+
+	<string name="poi_architecture_modern">אדריכלות: מודרנית</string>
+	<string name="poi_architecture_stalinist_neoclassicism">אדריכלות: נאוקלסיציזם סטליניסטי</string>
+	<string name="poi_aerodrome_type_international">בינלאומי</string>
+	<string name="poi_aerodrome_type_regional">אזורי</string>
+	<string name="poi_aerodrome_type_public">ציבורי</string>
+	<string name="poi_aerodrome_type_military">צבאי</string>
+	<string name="poi_aerodrome_type_military_public">צבאי/ציבורי</string>
+	<string name="poi_aerodrome_type_private">פרטי</string>
+
+	<string name="poi_ventilation_shaft">פיר אוורור</string>
+
+	<string name="poi_license_classes">סוגי רישיונות נהיגה</string>
+
+	<string name="poi_hill">גבעה</string>
+
+</resources>

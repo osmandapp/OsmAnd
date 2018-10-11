@@ -27,10 +27,10 @@ public class ApplicationMode {
 	public static final ApplicationMode CAR = create(R.string.app_mode_car, "car").speed(15.3f, 35).carLocation().
 			icon(R.drawable.map_action_car_dark, R.drawable.ic_action_car_dark).reg();
 
-	public static final ApplicationMode BICYCLE = create(R.string.app_mode_bicycle, "bicycle").speed(5.5f, 15).arrivalDistance(60).bicycleLocation().
+	public static final ApplicationMode BICYCLE = create(R.string.app_mode_bicycle, "bicycle").speed(5.5f, 15).arrivalDistance(60).offRouteDistance(50).bicycleLocation().
 			icon(R.drawable.map_action_bicycle_dark, R.drawable.ic_action_bicycle_dark).reg();
 
-	public static final ApplicationMode PEDESTRIAN = create(R.string.app_mode_pedestrian, "pedestrian").speed(1.5f, 5).arrivalDistance(45).
+	public static final ApplicationMode PEDESTRIAN = create(R.string.app_mode_pedestrian, "pedestrian").speed(1.5f, 5).arrivalDistance(45).offRouteDistance(20).
 			icon(R.drawable.map_action_pedestrian_dark, R.drawable.ic_action_pedestrian_dark).reg();
 
 	public static final ApplicationMode AIRCRAFT = create(R.string.app_mode_aircraft, "aircraft").speed(40f, 100).carLocation().
@@ -167,6 +167,11 @@ public class ApplicationMode {
 
 		public ApplicationModeBuilder arrivalDistance(int arrivalDistance) {
 			applicationMode.arrivalDistance = arrivalDistance;
+			return this;
+		}
+
+		public ApplicationModeBuilder offRouteDistance(int offRouteDistance) {
+			applicationMode.offRouteDistance = offRouteDistance;
 			return this;
 		}
 	}
@@ -361,6 +366,10 @@ public class ApplicationMode {
 		return arrivalDistance;
 	}
 
+	public int getOffRouteDistance() {
+		return offRouteDistance;
+	}
+
 	public boolean isDerivedRoutingFrom(ApplicationMode mode) {
 		return this == mode || getParent() == mode;
 	}
@@ -374,6 +383,7 @@ public class ApplicationMode {
 	private float defaultSpeed = 10f;
 	private int minDistanceForTurn = 50;
 	private int arrivalDistance = 90;
+	private int offRouteDistance = 350;
 	private int bearingIconDay = R.drawable.map_pedestrian_bearing;
 	private int bearingIconNight = R.drawable.map_pedestrian_bearing_night;
 	private int headingIconDay = R.drawable.map_pedestrian_location_view_angle;
