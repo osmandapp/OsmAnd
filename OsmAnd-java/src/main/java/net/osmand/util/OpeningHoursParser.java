@@ -647,8 +647,7 @@ public class OpeningHoursParser {
 		/**
 		 * represents the list on which day it is open.
 		 */
-		private boolean[][] dayMonths = new boolean[12][31];
-		private boolean hasDayMonths = false;
+		private boolean[][] dayMonths = null;
 
 		/**
 		 * lists of equal size representing the start and end times
@@ -696,12 +695,14 @@ public class OpeningHoursParser {
 		/**
 		 * @return the day months of the rule
 		 */
-		public boolean[][] getDayMonths() {
-			return dayMonths;
-		}
-
 		public boolean[] getDayMonths(int month) {
+			if (dayMonths == null) {
+				dayMonths = new boolean[12][31];
+			}
 			return dayMonths[month];
+		}
+		public boolean hasDayMonths() {
+			return dayMonths != null;
 		}
 
 		/**
@@ -988,7 +989,7 @@ public class OpeningHoursParser {
 					break;
 				}
 			}
-			boolean allDays = !hasDayMonths;
+			boolean allDays = !hasDayMonths();
 			if (!allDays) {
 				boolean dash = false;
 				boolean first = true;
@@ -1406,16 +1407,16 @@ public class OpeningHoursParser {
 			int i = cal.get(Calendar.DAY_OF_WEEK);
 			int day = (i + 5) % 7;
 			int previous = (day + 6) % 7;
-			boolean thisDay = hasDays || hasDayMonths;
-			if (thisDay && hasDayMonths) {
+			boolean thisDay = hasDays || hasDayMonths();
+			if (thisDay && hasDayMonths()) {
 				thisDay = dayMonths[month][dmonth];
 			}
 			if (thisDay && hasDays) {
 				thisDay = days[day];
 			}
 			// potential error for Dec 31 12:00-01:00
-			boolean previousDay = hasDays || hasDayMonths;
-			if (previousDay && hasDayMonths && dmonth > 0) {
+			boolean previousDay = hasDays || hasDayMonths();
+			if (previousDay && hasDayMonths() && dmonth > 0) {
 				previousDay = dayMonths[month][dmonth - 1];
 			}
 			if (previousDay && hasDays) {
@@ -1848,10 +1849,6 @@ public class OpeningHoursParser {
 		}
 		if (!presentTokens.contains(TokenType.TOKEN_MONTH)) {
 			Arrays.fill(basic.getMonths(), true);
-		} else {
-			if (presentTokens.contains(TokenType.TOKEN_DAY_MONTH)) {
-				basic.hasDayMonths = true;
-			}
 		}
 		if (!presentTokens.contains(TokenType.TOKEN_DAY_WEEK) && !presentTokens.contains(TokenType.TOKEN_HOLIDAY) &&
 				!presentTokens.contains(TokenType.TOKEN_DAY_MONTH)) {
