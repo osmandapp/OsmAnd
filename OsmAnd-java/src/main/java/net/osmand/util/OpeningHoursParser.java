@@ -1619,7 +1619,7 @@ public class OpeningHoursParser {
 		basic.setComment(comment);
 		boolean[] days = basic.getDays();
 		boolean[] months = basic.getMonths();
-		boolean[][] dayMonths = basic.getDayMonths();
+		//boolean[][] dayMonths = basic.getDayMonths();
 		if ("24/7".equals(localRuleString)) {
 			Arrays.fill(days, true);
 			basic.hasDays = true;
