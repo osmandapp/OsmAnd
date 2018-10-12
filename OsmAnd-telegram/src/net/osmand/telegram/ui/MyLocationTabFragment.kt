@@ -546,13 +546,9 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 					visibility = View.VISIBLE
 					text = "${getText(R.string.plus)} ${OsmandFormatter.getFormattedDuration(context!!, time)}"
 					setOnClickListener {
-						if (shareInfo != null) {
-							val newLivePeriod = settings.getChatLiveMessageExpireTime(chat.id) + shareInfo.additionalActiveTime
-							settings.shareLocationToChat(chat.id, true, newLivePeriod, shareInfo.getNextAdditionalActiveTime())
-						} else {
-							val newLivePeriod = settings.getChatLiveMessageExpireTime(chat.id) + ADDITIONAL_ACTIVE_TIME_VALUES_SEC[0]
-							settings.shareLocationToChat(chat.id, true, newLivePeriod, ADDITIONAL_ACTIVE_TIME_VALUES_SEC[1])
-						}
+						val newLivePeriod = settings.getChatLiveMessageExpireTime(chat.id) + (shareInfo?.additionalActiveTime ?: ADDITIONAL_ACTIVE_TIME_VALUES_SEC[0])
+						val nextAdditionalActiveTime = shareInfo?.getNextAdditionalActiveTime() ?: ADDITIONAL_ACTIVE_TIME_VALUES_SEC[1]
+						settings.shareLocationToChat(chat.id, true, newLivePeriod, nextAdditionalActiveTime)
 						notifyItemChanged(position)
 					}
 				}
