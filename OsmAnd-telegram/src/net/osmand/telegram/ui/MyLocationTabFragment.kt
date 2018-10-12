@@ -15,6 +15,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.*
 import android.view.animation.LinearInterpolator
 import android.widget.*
+import net.osmand.telegram.ADDITIONAL_ACTIVE_TIME_VALUES_SEC
 import net.osmand.telegram.R
 import net.osmand.telegram.TelegramApplication
 import net.osmand.telegram.helpers.TelegramHelper
@@ -300,24 +301,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 		val updateAdapter = Handler()
 		updateAdapter.postDelayed({
 			if (updateEnable) {
-				if (sharingMode) {
-					updateExistingLiveMessages()
-					val iterator = adapter.chats.iterator()
-					while (iterator.hasNext()) {
-						val chat = iterator.next()
-						if (settings.getChatLiveMessageExpireTime(chat.id) <= 0) {
-							settings.shareLocationToChat(chat.id, false)
-							iterator.remove()
-						}
-					}
-					if (adapter.chats.isNotEmpty()) {
-						adapter.chats = sortAdapterItems(adapter.chats)
-						adapter.notifyDataSetChanged()
-					} else {
-						sharingMode = false
-						updateContent()
-					}
-				}
+				updateContent()
 				startHandler()
 			}
 		}, ADAPTER_UPDATE_INTERVAL_MIL)
@@ -436,15 +420,8 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 		for (chatId in chatList) {
 			val chat = telegramHelper.getChat(chatId)
 			if (chat != null) {
-				if (settings.isSharingLocationToChat(chatId)) {
-					if (sharingMode) {
-						val message = telegramHelper.getChatLiveMessages()[chat.id]
-						if (message != null) {
-//							settings.updateChatShareLocStartSec(chatId, message.date.toLong())
-						}
-					} else {
-						continue
-					}
+				if (!sharingMode && settings.isSharingLocationToChat(chatId)) {
+					continue
 				} else if (telegramHelper.isPrivateChat(chat)) {
 					if ((chat.type as TdApi.ChatTypePrivate).userId == currentUser?.id) {
 						continue
@@ -457,20 +434,6 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 			adapter.chats = sortAdapterItems(chats)
 		} else {
 			adapter.chats = chats
-		}
-	}
-
-	private fun updateExistingLiveMessages() {
-		telegramHelper.getChatLiveMessages().values.forEach {
-			if (settings.isSharingLocationToChat(it.chatId)
-				&& (settings.getChatShareLocStartSec(it.chatId) == null || settings.getChatLivePeriod(it.chatId) == null)) {
-				settings.shareLocationToChat(it.chatId, true, (it.content as TdApi.MessageLocation).livePeriod.toLong())
-//				settings.updateChatShareLocStartSec(it.chatId, it.date.toLong())
-			}
-		}
-		sharingMode = settings.hasAnyChatToShareLocation()
-		if (!shareLocationHelper.sharingLocation && sharingMode && AndroidUtils.isLocationPermissionAvailable(app)) {
-			shareLocationHelper.startSharingLocation()
 		}
 	}
 
@@ -516,6 +479,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 			val lastItem = position == itemCount - 1
 			val placeholderId = if (telegramHelper.isGroup(chat)) R.drawable.img_group_picture else R.drawable.img_user_picture
 			val live = settings.isSharingLocationToChat(chat.id)
+			val shareInfo = settings.getChatsShareInfo()[chat.id]
 
 			TelegramUiHelper.setupPhoto(app, holder.icon, chat.photo?.small?.local?.path, placeholderId, false)
 			holder.title?.text = chat.title
@@ -556,14 +520,17 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 					isChecked = live
 					setOnCheckedChangeListener { _, isChecked ->
 						if (!isChecked) {
+							val currentMessageId = shareInfo?.currentMessageId
 							settings.shareLocationToChat(chat.id, false)
-							telegramHelper.stopSendingLiveLocationToChat(chat.id)
+							if (currentMessageId != null) {
+								telegramHelper.stopSendingLiveLocationToChat(chat.id, currentMessageId)
+							}
 							removeItem(chat)
 						}
 					}
 				}
 
-				val duration = settings.getChatLivePeriod(chat.id)
+				val duration = shareInfo?.userSetLivePeriod
 				if (duration != null && duration > 0) {
 					holder.descriptionDuration?.text = OsmandFormatter.getFormattedDuration(context!!, duration)
 					holder.description?.apply {
@@ -575,18 +542,13 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 				val expiresIn = settings.getChatLiveMessageExpireTime(chat.id)
 				
 				holder.textInArea?.apply {
+					val time = shareInfo?.additionalActiveTime ?: ADDITIONAL_ACTIVE_TIME_VALUES_SEC[0]
 					visibility = View.VISIBLE
-					text = "${getText(R.string.plus)} ${OsmandFormatter.getFormattedDuration(
-						context!!, settings.getChatAddActiveTime(chat.id))}"
+					text = "${getText(R.string.plus)} ${OsmandFormatter.getFormattedDuration(context!!, time)}"
 					setOnClickListener {
-						val chatNextAddTime = settings.getChatNextAddActiveTime(chat.id)
-						val newLivePeriod = settings.getChatLiveMessageExpireTime(chat.id) + settings.getChatAddActiveTime(chat.id)
-						settings.shareLocationToChat(chat.id, true, newLivePeriod, chatNextAddTime)
-						if (app.isInternetConnectionAvailable) {
-							telegramHelper.pauseSendingLiveLocationToChat(chat.id)
-							telegramHelper.deleteLiveLocationMessage(chat.id)
-							telegramHelper.resumeSendingLiveLocationToChat(chat.id)
-						}
+						val newLivePeriod = settings.getChatLiveMessageExpireTime(chat.id) + (shareInfo?.additionalActiveTime ?: ADDITIONAL_ACTIVE_TIME_VALUES_SEC[0])
+						val nextAdditionalActiveTime = shareInfo?.getNextAdditionalActiveTime() ?: ADDITIONAL_ACTIVE_TIME_VALUES_SEC[1]
+						settings.shareLocationToChat(chat.id, true, newLivePeriod, nextAdditionalActiveTime)
 						notifyItemChanged(position)
 					}
 				}

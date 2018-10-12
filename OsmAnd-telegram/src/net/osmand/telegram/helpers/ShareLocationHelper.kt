@@ -1,11 +1,16 @@
 package net.osmand.telegram.helpers
 
 import net.osmand.Location
+import net.osmand.PlatformUtil
 import net.osmand.telegram.TelegramApplication
 import net.osmand.telegram.notifications.TelegramNotification.NotificationType
 import net.osmand.telegram.utils.AndroidNetworkUtils
 
+private const val USER_SET_LIVE_PERIOD_DELAY_MS = 5000 // 5 sec
+
 class ShareLocationHelper(private val app: TelegramApplication) {
+
+	private val log = PlatformUtil.getLog(ShareLocationHelper::class.java)
 
 	var sharingLocation: Boolean = false
 		private set
@@ -38,35 +43,56 @@ class ShareLocationHelper(private val app: TelegramApplication) {
 	fun updateLocation(location: Location?) {
 		lastLocation = location
 
-		if (location != null && app.isInternetConnectionAvailable) {
-			val chatLivePeriods = app.settings.getChatLivePeriods()
-			val updatedLivePeriods = mutableMapOf<Long, Long>()
-			if (chatLivePeriods.isNotEmpty()) {
-				chatLivePeriods.forEach { (chatId, livePeriod) ->
-					if (livePeriod > TelegramHelper.MAX_LOCATION_MESSAGE_LIVE_PERIOD_SEC) {
-						val startTime = app.settings.getChatShareLocStartSec(chatId)
-						val currTime = (System.currentTimeMillis() / 1000)
-						if (startTime != null && startTime + TelegramHelper.MAX_LOCATION_MESSAGE_LIVE_PERIOD_SEC < currTime) {
-							app.settings.shareLocationToChat(chatId, true, livePeriod - TelegramHelper.MAX_LOCATION_MESSAGE_LIVE_PERIOD_SEC)
-						} else if (startTime != null) {
-							updatedLivePeriods[chatId] = TelegramHelper.MAX_LOCATION_MESSAGE_LIVE_PERIOD_SEC.toLong()
-						}
-					} else {
-						updatedLivePeriods[chatId] = livePeriod
-					}
-				}
+		if (location != null) {
+			val chatsShareInfo = app.settings.getChatsShareInfo()
+			if (chatsShareInfo.isNotEmpty()) {
 				val user = app.telegramHelper.getCurrentUser()
 				val sharingMode = app.settings.currentSharingMode
 				if (user != null && sharingMode == user.id.toString()) {
-					app.telegramHelper.sendLiveLocationMessage(updatedLivePeriods, location.latitude, location.longitude)
+					app.telegramHelper.sendLiveLocationMessage(chatsShareInfo, location.latitude, location.longitude)
 				} else if (sharingMode.isNotEmpty()) {
 					val url = "https://live.osmand.net/device/$sharingMode/send?lat=${location.latitude}&lon=${location.longitude}"
 					AndroidNetworkUtils.sendRequestAsync(url, null)
 				}
+				lastLocationMessageSentTime = System.currentTimeMillis()
 			}
-			lastLocationMessageSentTime = System.currentTimeMillis()
 		}
 		refreshNotification()
+	}
+
+	fun updateSendLiveMessages() {
+		log.info("updateSendLiveMessages")
+		app.settings.getChatsShareInfo().forEach { chatId, shareInfo ->
+			val currentTime = System.currentTimeMillis() / 1000
+			when {
+				app.settings.getChatLiveMessageExpireTime(chatId) <= 0 ->
+					app.settings.shareLocationToChat(chatId, false)
+				currentTime > shareInfo.currentMessageLimit -> {
+					shareInfo.apply {
+						val newLivePeriod =
+							if (livePeriod > TelegramHelper.MAX_LOCATION_MESSAGE_LIVE_PERIOD_SEC) {
+								livePeriod - TelegramHelper.MAX_LOCATION_MESSAGE_LIVE_PERIOD_SEC
+							} else {
+								livePeriod
+							}
+						livePeriod = newLivePeriod
+						shouldDeletePreviousMessage = true
+						currentMessageLimit = currentTime + Math.min(
+							newLivePeriod, TelegramHelper.MAX_LOCATION_MESSAGE_LIVE_PERIOD_SEC.toLong())
+					}
+				}
+				shareInfo.userSetLivePeriod != shareInfo.livePeriod
+						&& (shareInfo.userSetLivePeriodStart + USER_SET_LIVE_PERIOD_DELAY_MS) > currentTime -> {
+					shareInfo.apply {
+						shouldDeletePreviousMessage = true
+						livePeriod = shareInfo.userSetLivePeriod
+						currentMessageLimit = currentTime + Math.min(
+							livePeriod, TelegramHelper.MAX_LOCATION_MESSAGE_LIVE_PERIOD_SEC.toLong()
+						)
+					}
+				}
+			}
+		}
 	}
 
 	fun startSharingLocation() {

@@ -2,6 +2,7 @@ package net.osmand.telegram.helpers
 
 import android.text.TextUtils
 import net.osmand.PlatformUtil
+import net.osmand.telegram.TelegramSettings
 import net.osmand.telegram.helpers.TelegramHelper.TelegramAuthenticationParameterType.*
 import net.osmand.telegram.utils.GRAYSCALE_PHOTOS_DIR
 import net.osmand.telegram.utils.GRAYSCALE_PHOTOS_EXT
@@ -70,9 +71,6 @@ class TelegramHelper private constructor() {
 
 	private val chats = ConcurrentHashMap<Long, TdApi.Chat>()
 	private val chatList = TreeSet<OrderedChat>()
-	private val chatLiveMessages = ConcurrentHashMap<Long, TdApi.Message>()
-	
-	private val pausedLiveChatIds = mutableListOf<Long>()
 
 	private val downloadChatFilesMap = ConcurrentHashMap<String, TdApi.Chat>()
 	private val downloadUserFilesMap = ConcurrentHashMap<String, TdApi.User>()
@@ -105,6 +103,7 @@ class TelegramHelper private constructor() {
 
 	var listener: TelegramListener? = null
 	private val incomingMessagesListeners = HashSet<TelegramIncomingMessagesListener>()
+	private val outgoingMessagesListeners = HashSet<TelegramOutgoingMessagesListener>()
 	private val fullInfoUpdatesListeners = HashSet<FullInfoUpdatesListener>()
 
 	fun addIncomingMessagesListener(listener: TelegramIncomingMessagesListener) {
@@ -113,6 +112,14 @@ class TelegramHelper private constructor() {
 
 	fun removeIncomingMessagesListener(listener: TelegramIncomingMessagesListener) {
 		incomingMessagesListeners.remove(listener)
+	}
+
+	fun addOutgoingMessagesListener(listener: TelegramOutgoingMessagesListener) {
+		outgoingMessagesListeners.add(listener)
+	}
+
+	fun removeOutgoingMessagesListener(listener: TelegramOutgoingMessagesListener) {
+		outgoingMessagesListeners.remove(listener)
 	}
 
 	fun addFullInfoUpdatesListener(listener: FullInfoUpdatesListener) {
@@ -146,8 +153,6 @@ class TelegramHelper private constructor() {
 		usersLocationMessages.values.filter { it.chatId == chatId }
 
 	fun getMessages() = usersLocationMessages.values.toList()
-
-	fun getChatLiveMessages() = chatLiveMessages
 
 	fun getMessagesByChatIds(messageExpTime: Long): Map<Long, List<TdApi.Message>> {
 		val res = mutableMapOf<Long, MutableList<TdApi.Message>>()
@@ -236,6 +241,11 @@ class TelegramHelper private constructor() {
 		fun onReceiveChatLocationMessages(chatId: Long, vararg messages: TdApi.Message)
 		fun onDeleteChatLocationMessages(chatId: Long, messages: List<TdApi.Message>)
 		fun updateLocationMessages()
+	}
+
+	interface TelegramOutgoingMessagesListener {
+		fun onUpdateMessages(messages: List<TdApi.Message>)
+		fun onDeleteMessages(chatId: Long, messages: List<Long>)
 	}
 
 	interface FullInfoUpdatesListener {
@@ -570,58 +580,34 @@ class TelegramHelper private constructor() {
 	 * @latitude Latitude of the location
 	 * @longitude Longitude of the location
 	 */
-	fun sendLiveLocationMessage(chatLivePeriods: Map<Long, Long>, latitude: Double, longitude: Double): Boolean {
+	fun sendLiveLocationMessage(chatsShareInfo:Map<Long, TelegramSettings.ShareChatInfo>, latitude: Double, longitude: Double): Boolean {
 		if (!requestingActiveLiveLocationMessages && haveAuthorization) {
 			if (needRefreshActiveLiveLocationMessages) {
 				getActiveLiveLocationMessages {
-					sendLiveLocationImpl(chatLivePeriods, latitude, longitude)
+					sendLiveLocationImpl(chatsShareInfo, latitude, longitude)
 				}
 				needRefreshActiveLiveLocationMessages = false
 			} else {
-				sendLiveLocationImpl(chatLivePeriods, latitude, longitude)
+				sendLiveLocationImpl(chatsShareInfo, latitude, longitude)
 			}
 			return true
 		}
 		return false
 	}
 
-	fun stopSendingLiveLocationToChat(chatId: Long) {
-		val msgId = chatLiveMessages[chatId]?.id
-		if (msgId != null && msgId != 0L) {
+	fun stopSendingLiveLocationToChat(chatId: Long, msgId: Long) {
+		if (msgId != -1L) {
 			client?.send(
 				TdApi.EditMessageLiveLocation(chatId, msgId, null, null),
 				liveLocationMessageUpdatesHandler
 			)
 		}
-		chatLiveMessages.remove(chatId)
 		needRefreshActiveLiveLocationMessages = true
 	}
 
-	fun pauseSendingLiveLocationToChat(chatId: Long) {
-		synchronized(pausedLiveChatIds) {
-			pausedLiveChatIds.add(chatId)
-		}
-	}
-
-	fun resumeSendingLiveLocationToChat(chatId: Long) {
-		synchronized(pausedLiveChatIds) {
-			pausedLiveChatIds.remove(chatId)
-		}
-	}
-
-	fun deleteLiveLocationMessage(chatId: Long) {
-		val msgId = chatLiveMessages[chatId]?.id
-		if (msgId != null && msgId != 0L) {
-			val array = LongArray(1)
-			array[0] = msgId
-			client?.send(TdApi.DeleteMessages(chatId, array, true), UpdatesHandler())
-		}
-		needRefreshActiveLiveLocationMessages = true
-	}
-
-	fun stopSendingLiveLocationMessages() {
-		chatLiveMessages.forEach { (chatId, _ )->
-			stopSendingLiveLocationToChat(chatId)
+	fun stopSendingLiveLocationMessages(chatsShareInfo: Map<Long, TelegramSettings.ShareChatInfo>) {
+		chatsShareInfo.forEach { (chatId, chatInfo) ->
+			stopSendingLiveLocationToChat(chatId, chatInfo.currentMessageId)
 		}
 	}
 	
@@ -638,11 +624,9 @@ class TelegramHelper private constructor() {
 				}
 				TdApi.Messages.CONSTRUCTOR -> {
 					val messages = (obj as TdApi.Messages).messages
-					chatLiveMessages.clear()
 					if (messages.isNotEmpty()) {
-						for (msg in messages) {
-							val chatId = msg.chatId
-							chatLiveMessages[chatId] = msg
+						outgoingMessagesListeners.forEach {
+							it.onUpdateMessages(messages.asList())
 						}
 					}
 					onComplete?.invoke()
@@ -653,28 +637,63 @@ class TelegramHelper private constructor() {
 		}
 	}
 
-	private fun sendLiveLocationImpl(chatLivePeriods: Map<Long, Long>, latitude: Double, longitude: Double) {
-		val location = TdApi.Location(latitude, longitude)
-		chatLivePeriods.forEach { (chatId, livePeriod) ->
-			synchronized(pausedLiveChatIds) {
-				if (pausedLiveChatIds.contains(chatId)) {
-					return@forEach
+	private fun recreateLiveLocationMessage(chatId: Long, msgId: Long, content: TdApi.InputMessageLocation) {
+		if (msgId != -1L) {
+			log.info("recreateLiveLocationMessage - $msgId")
+			val array = LongArray(1)
+			array[0] = msgId
+			client?.send(TdApi.DeleteMessages(chatId, array, true)) { obj ->
+				when (obj.constructor) {
+					TdApi.Ok.CONSTRUCTOR -> {
+						sendNewLiveLocationMessage(chatId, content)
+					}
+					TdApi.Error.CONSTRUCTOR -> {
+						val error = obj as TdApi.Error
+						if (error.code != IGNORED_ERROR_CODE) {
+							needRefreshActiveLiveLocationMessages = true
+							listener?.onSendLiveLocationError(error.code, error.message)
+						}
+					}
 				}
 			}
-			val content = TdApi.InputMessageLocation(location, livePeriod.toInt())
-			val msgId = chatLiveMessages[chatId]?.id
-			if (msgId != null) {
-				if (msgId != 0L) {
+		}
+		needRefreshActiveLiveLocationMessages = true
+	}
+
+	private fun sendNewLiveLocationMessage(chatId: Long, content: TdApi.InputMessageLocation) {
+		needRefreshActiveLiveLocationMessages = true
+		log.info("sendNewLiveLocationMessage")
+		client?.send(
+			TdApi.SendMessage(chatId, 0, false, true, null, content),
+			liveLocationMessageUpdatesHandler
+		)
+	}
+
+	private fun sendLiveLocationImpl(chatsShareInfo: Map<Long, TelegramSettings.ShareChatInfo>, latitude: Double, longitude: Double) {
+		val location = TdApi.Location(latitude, longitude)
+		chatsShareInfo.forEach { (chatId, shareInfo) ->
+			val livePeriod =
+				if (shareInfo.currentMessageLimit > (shareInfo.start + MAX_LOCATION_MESSAGE_LIVE_PERIOD_SEC)) {
+					MAX_LOCATION_MESSAGE_LIVE_PERIOD_SEC
+				} else {
+					shareInfo.livePeriod.toInt()
+				}
+			val content = TdApi.InputMessageLocation(location, livePeriod)
+			val msgId = shareInfo.currentMessageId
+			if (msgId != -1L) {
+				if (shareInfo.shouldDeletePreviousMessage) {
+					recreateLiveLocationMessage(chatId, msgId, content)
+					shareInfo.shouldDeletePreviousMessage = false
+					shareInfo.currentMessageId = -1
+				} else {
+					log.info("EditMessageLiveLocation - $msgId")
 					client?.send(
 						TdApi.EditMessageLiveLocation(chatId, msgId, null, location),
 						liveLocationMessageUpdatesHandler
 					)
 				}
 			} else {
-				client?.send(
-					TdApi.SendMessage(chatId, 0, false, true, null, content),
-					liveLocationMessageUpdatesHandler
-				)
+				sendNewLiveLocationMessage(chatId, content)
 			}
 		}
 	}
@@ -742,12 +761,14 @@ class TelegramHelper private constructor() {
 						listener?.onSendLiveLocationError(error.code, error.message)
 					}
 				}
-				else -> {
+				TdApi.Message.CONSTRUCTOR -> {
 					if (obj is TdApi.Message) {
-						when (obj.sendingState?.constructor) {
-							TdApi.MessageSendingStateFailed.CONSTRUCTOR -> {
-								needRefreshActiveLiveLocationMessages = true
-								listener?.onSendLiveLocationError(-1, "Live location message ${obj.id} failed to send")
+						if (obj.sendingState?.constructor == TdApi.MessageSendingStateFailed.CONSTRUCTOR) {
+							needRefreshActiveLiveLocationMessages = true
+							listener?.onSendLiveLocationError(-1, "Live location message ${obj.id} failed to send")
+						} else {
+							outgoingMessagesListeners.forEach {
+								it.onUpdateMessages(listOf(obj))
 							}
 						}
 					}
@@ -1199,22 +1220,17 @@ class TelegramHelper private constructor() {
 				TdApi.UpdateMessageSendFailed.CONSTRUCTOR -> {
 					needRefreshActiveLiveLocationMessages = true
 				}
-				TdApi.UpdateMessageSendSucceeded.CONSTRUCTOR -> {
-					val updateMessageSendSucceeded = obj as TdApi.UpdateMessageSendSucceeded
-					val message = updateMessageSendSucceeded.message
-					chatLiveMessages[message.chatId] = message
-				}
 				TdApi.UpdateDeleteMessages.CONSTRUCTOR -> {
 					val updateDeleteMessages = obj as TdApi.UpdateDeleteMessages
 					if (updateDeleteMessages.isPermanent) {
 						val chatId = updateDeleteMessages.chatId
 						val deletedMessages = mutableListOf<TdApi.Message>()
 						for (messageId in updateDeleteMessages.messageIds) {
-							if (chatLiveMessages[chatId]?.id == messageId) {
-								chatLiveMessages.remove(chatId)
-							}
 							usersLocationMessages.remove(messageId)
 								?.also { deletedMessages.add(it) }
+						}
+						outgoingMessagesListeners.forEach {
+							it.onDeleteMessages(chatId, updateDeleteMessages.messageIds.toList())
 						}
 						if (deletedMessages.isNotEmpty()) {
 							incomingMessagesListeners.forEach {
