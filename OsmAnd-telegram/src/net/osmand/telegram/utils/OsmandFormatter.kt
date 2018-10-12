@@ -21,7 +21,7 @@ object OsmandFormatter {
 	private val fixed1 = DecimalFormat("0.0")
 	
 	private const val SHORT_TIME_FORMAT = "%02d:%02d"
-	private const val SIMPLE_TIME_OF_DAY_FORMAT = "HH:mm"
+	private const val SIMPLE_TIME_OF_DAY_FORMAT = "HH:mm:ss"
 	private const val SIMPLE_DATE_FORMAT = "dd MMM HH:mm:ss"
 
 	private const val MIN_DURATION_FOR_DATE_FORMAT = 48 * 60 * 60
@@ -62,9 +62,13 @@ object OsmandFormatter {
 		}
 	}
 
-	fun getFormattedTime(seconds: Long): String {
+	fun getFormattedTime(milliseconds: Long, useCurrentTime: Boolean = true): String {
 		val calendar = Calendar.getInstance()
-		calendar.timeInMillis = System.currentTimeMillis() + (seconds * 1000)
+		if (useCurrentTime) {
+			calendar.timeInMillis = System.currentTimeMillis() + milliseconds
+		} else {
+			calendar.timeInMillis = milliseconds
+		}
 		return if (isSameDay(calendar, Calendar.getInstance())) {
 			SimpleDateFormat(SIMPLE_TIME_OF_DAY_FORMAT, Locale.getDefault()).format(calendar.time)
 		} else {

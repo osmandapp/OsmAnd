@@ -180,6 +180,7 @@ class TelegramService : Service(), LocationListener, TelegramIncomingMessagesLis
 		updateShareInfoHandler?.postDelayed({
 			if (isUsedByMyLocation(usedBy)) {
 				app().shareLocationHelper.updateSendLiveMessages()
+				app().settings.updateSharingStatusHistory()
 				startShareInfoUpdates()
 			}
 		}, UPDATE_LIVE_MESSAGES_INTERVAL_MS)
@@ -294,6 +295,10 @@ class TelegramService : Service(), LocationListener, TelegramIncomingMessagesLis
 
 	override fun onDeleteMessages(chatId: Long, messages: List<Long>) {
 		app().settings.onDeleteLiveMessages(chatId, messages)
+	}
+
+	override fun onSendLiveLocationError(code: Int, message: String) {
+		Log.d(PlatformUtil.TAG, "Send live location error: $code - $message")
 	}
 
 	companion object {

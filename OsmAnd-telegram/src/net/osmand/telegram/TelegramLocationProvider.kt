@@ -45,6 +45,9 @@ class TelegramLocationProvider(private val app: TelegramApplication) : SensorEve
 	var lastKnownLocation: net.osmand.Location? = null
 		private set
 
+	var lastKnownLocationTime: Long? = null
+		private set
+
 	val gpsInfo = GPSInfo()
 
 	private val locationListeners = ArrayList<TelegramLocationListener>()
@@ -432,6 +435,7 @@ class TelegramLocationProvider(private val app: TelegramApplication) : SensorEve
 			updateGPSInfo(null)
 		}
 		if (location != null) {
+			lastKnownLocationTime = location.time
 			if (gpsSignalLost) {
 				gpsSignalLost = false
 			}

@@ -12,6 +12,8 @@ import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.text.SpannableString
+import android.text.style.ForegroundColorSpan
 import android.view.*
 import android.view.animation.LinearInterpolator
 import android.widget.*
@@ -57,6 +59,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 	private lateinit var description: TextView
 	private lateinit var searchBox: FrameLayout
 	private lateinit var stopSharingSwitcher: Switch
+	private lateinit var sharingStatusDescription: TextView
 	private lateinit var startSharingBtn: View
 
 	private lateinit var searchBoxBg: GradientDrawable
@@ -71,7 +74,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 	private var actionButtonsListener: ActionButtonsListener? = null
 
 	private var sharingMode = false
-	
+
 	private var updateEnable: Boolean = false
 
 	override fun onCreateView(
@@ -90,7 +93,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 		searchBoxSidesMargin = resources.getDimensionPixelSize(R.dimen.content_padding_half)
 
 		sharingMode = settings.hasAnyChatToShareLocation()
-				
+
 		savedInstanceState?.apply {
 			selectedChats.addAll(getLongArray(SELECTED_CHATS_KEY).toSet())
 			if (selectedChats.isNotEmpty()) {
@@ -130,6 +133,14 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 		imageContainer = mainView.findViewById<FrameLayout>(R.id.image_container)
 		titleContainer = mainView.findViewById<LinearLayout>(R.id.title_container).apply {
 			AndroidUtils.addStatusBarPadding19v(context, this)
+		}
+
+		mainView.findViewById<TextView>(R.id.status_title).apply {
+			val sharingStatus = getString(R.string.sharing_enabled)
+			val spannable = SpannableString(sharingStatus)
+			spannable.setSpan(ForegroundColorSpan(app.uiUtils.getActiveColor()),
+				sharingStatus.indexOf(" "), sharingStatus.length, 0)
+			text = spannable
 		}
 
 		textContainer = mainView.findViewById<LinearLayout>(R.id.text_container).apply {
@@ -181,7 +192,16 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 			}
 		}
 
+		mainView.findViewById<View>(R.id.sharing_status_container).setOnClickListener {
+			settings.updateSharingStatusHistory()
+			fragmentManager?.also { fm ->
+				SharingStatusBottomSheet.showInstance(fm, this)
+			}
+		}
+
 		stopSharingSwitcher = mainView.findViewById(R.id.stop_all_sharing_switcher)
+
+		sharingStatusDescription = mainView.findViewById(R.id.sharing_status_description)
 
 		startSharingBtn = mainView.findViewById<View>(R.id.start_sharing_btn).apply {
 			visibility = if (sharingMode) View.VISIBLE else View.GONE
@@ -191,7 +211,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 				updateContent()
 			}
 		}
-		
+
 		return mainView
 	}
 
@@ -208,7 +228,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 		super.onPause()
 		updateEnable = false
 	}
-	
+
 	override fun onSaveInstanceState(outState: Bundle) {
 		super.onSaveInstanceState(outState)
 		outState.putLongArray(SELECTED_CHATS_KEY, selectedChats.toLongArray())
@@ -269,9 +289,6 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 	override fun onTelegramError(code: Int, message: String) {
 	}
 
-	override fun onSendLiveLocationError(code: Int, message: String) {
-	}
-
 	fun onPrimaryBtnClick() {
 		if (selectedChats.isNotEmpty()) {
 			val fm = fragmentManager ?: return
@@ -306,7 +323,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 			}
 		}, ADAPTER_UPDATE_INTERVAL_MIL)
 	}
-	
+
 	private fun animateStartSharingBtn(show: Boolean) {
 		if (startSharingBtn.visibility == View.VISIBLE) {
 			val scale = if (show) 1f else 0f
@@ -318,7 +335,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 				.start()
 		}
 	}
-	
+
 	private fun clearSelection() {
 		selectedChats.clear()
 		adapter.notifyDataSetChanged()
@@ -394,6 +411,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 	}
 
 	private fun updateContent() {
+		updateSharingStatus()
 		updateSharingMode()
 		updateList()
 	}
@@ -407,6 +425,15 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 		headerParams.scrollFlags = if (sharingMode) 0 else AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL
 		stopSharingSwitcher.isChecked = true
 		appBarScrollRange = -1
+	}
+
+	private fun updateSharingStatus() {
+		if (sharingMode) {
+			if (settings.sharingStatusChanges.isEmpty()) {
+				settings.updateSharingStatusHistory()
+			}
+			sharingStatusDescription.text = settings.sharingStatusChanges.last().getDescription(app)
+		}
 	}
 
 	private fun updateList() {
@@ -441,7 +468,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 		list.sortWith(Comparator<TdApi.Chat> { o1, o2 -> o1.title.compareTo(o2.title) })
 		return list
 	}
-	
+
 	inner class MyLocationListAdapter : RecyclerView.Adapter<MyLocationListAdapter.BaseViewHolder>() {
 		var chats = mutableListOf<TdApi.Chat>()
 			set(value) {
@@ -540,7 +567,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 				}
 
 				val expiresIn = settings.getChatLiveMessageExpireTime(chat.id)
-				
+
 				holder.textInArea?.apply {
 					val time = shareInfo?.additionalActiveTime ?: ADDITIONAL_ACTIVE_TIME_VALUES_SEC[0]
 					visibility = View.VISIBLE

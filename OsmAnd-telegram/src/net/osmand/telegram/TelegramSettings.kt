@@ -1,8 +1,11 @@
 package net.osmand.telegram
 
 import android.content.Context
+import android.support.annotation.ColorRes
 import android.support.annotation.DrawableRes
 import android.support.annotation.StringRes
+import android.text.SpannableStringBuilder
+import android.text.style.ForegroundColorSpan
 import net.osmand.data.LatLon
 import net.osmand.telegram.helpers.OsmandAidlHelper
 import net.osmand.telegram.helpers.TelegramHelper
@@ -14,6 +17,8 @@ import org.drinkless.td.libcore.telegram.TdApi
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
+import java.util.concurrent.ConcurrentHashMap
+import java.util.concurrent.ConcurrentLinkedQueue
 
 val ADDITIONAL_ACTIVE_TIME_VALUES_SEC = listOf(15 * 60L, 30 * 60L, 60 * 60L, 180 * 60L)
 
@@ -64,8 +69,10 @@ private const val SHARE_CHATS_INFO_KEY = "share_chats_info"
 
 class TelegramSettings(private val app: TelegramApplication) {
 
-	private var shareChatsInfo = mutableMapOf<Long, ShareChatInfo>()
+	private var shareChatsInfo = ConcurrentHashMap<Long, ShareChatInfo>()
 	private var hiddenOnMapChats: Set<Long> = emptySet()
+
+	var sharingStatusChanges = ConcurrentLinkedQueue<SharingStatus>()
 
 	var shareDevicesIds = mutableMapOf<String, String>()
 	var currentSharingMode = ""
@@ -91,7 +98,7 @@ class TelegramSettings(private val app: TelegramApplication) {
 
 	fun hasAnyChatToShareLocation() = shareChatsInfo.isNotEmpty()
 
-	fun isSharingLocationToChat(chatId: Long) = shareChatsInfo.contains(chatId)
+	fun isSharingLocationToChat(chatId: Long) = shareChatsInfo.containsKey(chatId)
 
 	fun hasAnyChatToShowOnMap() = !hiddenOnMapChats.containsAll(getLiveNowChats())
 
@@ -102,9 +109,9 @@ class TelegramSettings(private val app: TelegramApplication) {
 		hiddenChats.intersect(presentChatIds)
 		hiddenOnMapChats = hiddenChats.toHashSet()
 
-		shareChatsInfo = shareChatsInfo.filter { (key, _) ->
+		shareChatsInfo = ConcurrentHashMap(shareChatsInfo.filter { (key, _) ->
 			presentChatIds.contains(key)
-		}.toMutableMap()
+		})
 	}
 
 	fun shareLocationToChat(
@@ -123,6 +130,7 @@ class TelegramSettings(private val app: TelegramApplication) {
 				shareChatInfo = ShareChatInfo()
 			}
 			val currentTime = System.currentTimeMillis() / 1000
+			shareChatInfo.chatId = chatId
 			shareChatInfo.start = currentTime
 			if (shareChatInfo.livePeriod == -1L) {
 				shareChatInfo.livePeriod = lp
@@ -148,6 +156,8 @@ class TelegramSettings(private val app: TelegramApplication) {
 	fun getChatLivePeriod(chatId: Long) = shareChatsInfo[chatId]?.livePeriod
 
 	fun getChatsShareInfo() = shareChatsInfo
+
+	fun getLastSuccessfulSendTime() = shareChatsInfo.values.maxBy { it.lastSuccessfulSendTimeMs }?.lastSuccessfulSendTimeMs ?: -1
 
 	fun getChatLiveMessageExpireTime(chatId: Long): Long {
 		val shareInfo = shareChatsInfo[chatId]
@@ -195,7 +205,56 @@ class TelegramSettings(private val app: TelegramApplication) {
 		if (shareChatInfo != null && content is TdApi.MessageLocation) {
 			shareChatInfo.currentMessageId = message.id
 			shareChatInfo.lastSuccessfulLocation = LatLon(content.location.latitude, content.location.longitude)
-			shareChatInfo.lastSuccessfulSendTime = Math.max(message.editDate, message.date).toLong()
+			shareChatInfo.lastSuccessfulSendTimeMs = Math.max(message.editDate, message.date) *
+					1000L
+		}
+	}
+
+	fun updateSharingStatusHistory() {
+		val newSharingStatus = SharingStatus().apply {
+			statusChangeTime = System.currentTimeMillis()
+			statusType = if (!app.isInternetConnectionAvailable) {
+				SharingStatusType.NO_INTERNET
+			} else if (app.locationProvider.lastKnownLocation == null || !app.locationProvider.gpsInfo.fixed) {
+				SharingStatusType.NO_GPS
+			} else {
+				var sendChatErrors = false
+				shareChatsInfo.forEach { _, shareInfo ->
+					if ((statusChangeTime - shareInfo.lastSuccessfulSendTimeMs) > (sendMyLocInterval * 2) * 1000) {
+						sendChatErrors = true
+						locationTime = shareInfo.lastSuccessfulSendTimeMs
+						val title = app.telegramHelper.getChat(shareInfo.chatId)?.title
+						if (title != null) {
+							chatsTitles.add(title)
+						}
+					}
+				}
+				if (sendChatErrors) {
+					SharingStatusType.NOT_POSSIBLE_TO_SENT_TO_CHATS
+				} else {
+					SharingStatusType.SUCCESSFULLY_SENT
+				}
+			}
+			if (statusType == SharingStatusType.NO_INTERNET || statusType == SharingStatusType.SUCCESSFULLY_SENT) {
+				locationTime = getLastSuccessfulSendTime()
+			} else if (statusType == SharingStatusType.NO_GPS) {
+				locationTime = app.locationProvider.lastKnownLocationTime ?: -1
+			}
+		}
+
+		if (sharingStatusChanges.isNotEmpty()) {
+			val lastSharingStatus = sharingStatusChanges.last()
+			if (lastSharingStatus.statusType != newSharingStatus.statusType) {
+				sharingStatusChanges.add(newSharingStatus)
+			} else {
+				lastSharingStatus.apply {
+					statusChangeTime = newSharingStatus.statusChangeTime
+					locationTime = newSharingStatus.locationTime
+					chatsTitles = newSharingStatus.chatsTitles
+				}
+			}
+		} else {
+			sharingStatusChanges.add(newSharingStatus)
 		}
 	}
 
@@ -453,6 +512,43 @@ class TelegramSettings(private val app: TelegramApplication) {
 		fun isSortByGroup() = this == SORT_BY_GROUP
 	}
 
+	enum class SharingStatusType(
+		@DrawableRes val iconId: Int,
+		@ColorRes val iconColorRes: Int,
+		@StringRes val titleId: Int,
+		@StringRes val descriptionId: Int,
+		val canResendLocation: Boolean
+	) {
+		NO_INTERNET(
+			R.drawable.ic_action_wifi_off,
+			R.color.sharing_status_icon_error,
+			R.string.no_internet_connection,
+			R.string.last_sent_location,
+			true
+		),
+		SUCCESSFULLY_SENT(
+			R.drawable.ic_action_share_location,
+			R.color.sharing_status_icon_success,
+			R.string.sharing_success,
+			R.string.last_sent_location,
+			false
+		),
+		NOT_POSSIBLE_TO_SENT_TO_CHATS(
+			R.drawable.ic_action_message_send_error,
+			R.color.sharing_status_icon_error,
+			R.string.not_possible_to_send_to_chats,
+			R.string.last_sent_location,
+			true
+		),
+		NO_GPS(
+			R.drawable.ic_action_location_off,
+			R.color.sharing_status_icon_error,
+			R.string.no_gps_connection,
+			R.string.last_available_location,
+			false
+		);
+	}
+
 	class DeviceBot {
 		var id: Long = -1
 		var userId: Long = -1
@@ -460,6 +556,35 @@ class TelegramSettings(private val app: TelegramApplication) {
 		var deviceName: String = ""
 		var externalId: String = ""
 		var data: String = ""
+	}
+
+	class SharingStatus {
+		var locationTime: Long = -1
+		var statusChangeTime: Long = -1
+		var chatsTitles: MutableList<String> = mutableListOf()
+		lateinit var statusType: SharingStatusType
+
+		fun getDescription(app: TelegramApplication): CharSequence {
+			return if (statusType != SharingStatusType.NOT_POSSIBLE_TO_SENT_TO_CHATS || chatsTitles.isEmpty()) {
+				app.getString(statusType.titleId)
+			} else {
+				val spannableString = SpannableStringBuilder(app.getString(statusType.titleId))
+				val iterator = chatsTitles.iterator()
+				while (iterator.hasNext()) {
+					val chatTitle = iterator.next()
+					val start = spannableString.length
+					val newSpannable = if (iterator.hasNext()) " @$chatTitle," else " @$chatTitle."
+					spannableString.append(newSpannable)
+					spannableString.setSpan(
+						ForegroundColorSpan(app.uiUtils.getActiveColor()),
+						start,
+						spannableString.length - 1,
+						0
+					)
+				}
+				spannableString
+			}
+		}
 	}
 
 	class ShareChatInfo {
@@ -472,7 +597,7 @@ class TelegramSettings(private val app: TelegramApplication) {
 		var userSetLivePeriod = -1L
 		var userSetLivePeriodStart = -1L
 		var lastSuccessfulLocation: LatLon? = null
-		var lastSuccessfulSendTime = -1L
+		var lastSuccessfulSendTimeMs = -1L
 		var shouldDeletePreviousMessage = false
 		var additionalActiveTime = ADDITIONAL_ACTIVE_TIME_VALUES_SEC[0]
 		

@@ -234,7 +234,6 @@ class TelegramHelper private constructor() {
 		fun onTelegramChatChanged(chat: TdApi.Chat)
 		fun onTelegramUserChanged(user: TdApi.User)
 		fun onTelegramError(code: Int, message: String)
-		fun onSendLiveLocationError(code: Int, message: String)
 	}
 
 	interface TelegramIncomingMessagesListener {
@@ -246,6 +245,7 @@ class TelegramHelper private constructor() {
 	interface TelegramOutgoingMessagesListener {
 		fun onUpdateMessages(messages: List<TdApi.Message>)
 		fun onDeleteMessages(chatId: Long, messages: List<Long>)
+		fun onSendLiveLocationError(code: Int, message: String)
 	}
 
 	interface FullInfoUpdatesListener {
@@ -619,7 +619,9 @@ class TelegramHelper private constructor() {
 					val error = obj as TdApi.Error
 					if (error.code != IGNORED_ERROR_CODE) {
 						needRefreshActiveLiveLocationMessages = true
-						listener?.onSendLiveLocationError(error.code, error.message)
+						outgoingMessagesListeners.forEach {
+							it.onSendLiveLocationError(error.code, error.message)
+						}
 					}
 				}
 				TdApi.Messages.CONSTRUCTOR -> {
@@ -631,7 +633,9 @@ class TelegramHelper private constructor() {
 					}
 					onComplete?.invoke()
 				}
-				else -> listener?.onSendLiveLocationError(-1, "Receive wrong response from TDLib: $obj")
+				else -> outgoingMessagesListeners.forEach {
+					it.onSendLiveLocationError(-1, "Receive wrong response from TDLib: $obj")
+				}
 			}
 			requestingActiveLiveLocationMessages = false
 		}
@@ -651,7 +655,9 @@ class TelegramHelper private constructor() {
 						val error = obj as TdApi.Error
 						if (error.code != IGNORED_ERROR_CODE) {
 							needRefreshActiveLiveLocationMessages = true
-							listener?.onSendLiveLocationError(error.code, error.message)
+							outgoingMessagesListeners.forEach {
+								it.onSendLiveLocationError(error.code, error.message)
+							}
 						}
 					}
 				}
@@ -758,14 +764,18 @@ class TelegramHelper private constructor() {
 					val error = obj as TdApi.Error
 					if (error.code != IGNORED_ERROR_CODE) {
 						needRefreshActiveLiveLocationMessages = true
-						listener?.onSendLiveLocationError(error.code, error.message)
+						outgoingMessagesListeners.forEach {
+							it.onSendLiveLocationError(error.code, error.message)
+						}
 					}
 				}
 				TdApi.Message.CONSTRUCTOR -> {
 					if (obj is TdApi.Message) {
 						if (obj.sendingState?.constructor == TdApi.MessageSendingStateFailed.CONSTRUCTOR) {
 							needRefreshActiveLiveLocationMessages = true
-							listener?.onSendLiveLocationError(-1, "Live location message ${obj.id} failed to send")
+							outgoingMessagesListeners.forEach {
+								it.onSendLiveLocationError(-1, "Live location message ${obj.id} failed to send")
+							}
 						} else {
 							outgoingMessagesListeners.forEach {
 								it.onUpdateMessages(listOf(obj))
