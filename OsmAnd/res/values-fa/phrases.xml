@@ -116,9 +116,9 @@
 <string name="poi_border_control">کنترل مرزی</string>
 <string name="poi_traffic_calming_bump">سرعت‌گیر</string>
 <string name="poi_traffic_calming_hump">سرعتکاه قوسی</string>
-<string name="poi_traffic_calming_cushion">سرعتکاه صفحه‌ای</string>
+<string name="poi_traffic_calming_cushion">بالشتک سرعتکاه</string>
 <string name="poi_traffic_calming_chicane">پیچانه</string>
-<string name="poi_traffic_calming_rumble_strip">زبرهٔ نواری</string>
+<string name="poi_traffic_calming_rumble_strip">نوارهٔ لرزاننده</string>
 <string name="poi_traffic_calming_table">سرعتکاه تخت</string>
 <string name="poi_traffic_calming_choker">نقطهٔ گازانبری</string>
 <string name="poi_traffic_signals">چراغ راهنما</string>
