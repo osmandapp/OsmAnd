@@ -15,6 +15,8 @@ import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
 
+val ADDITIONAL_ACTIVE_TIME_VALUES_SEC = listOf(15 * 60L, 30 * 60L, 60 * 60L, 180 * 60L)
+
 private val SEND_MY_LOC_VALUES_SEC =
 	listOf(1L, 2L, 3L, 5L, 10L, 15L, 30L, 60L, 90L, 2 * 60L, 3 * 60L, 5 * 60L)
 private val STALE_LOC_VALUES_SEC =
@@ -31,7 +33,6 @@ private val LOC_HISTORY_VALUES_SEC = listOf(
 	12 * 60 * 60L,
 	24 * 60 * 60L
 )
-private val ADDITIONAL_ACTIVE_TIME_VALUES_SEC = listOf(15 * 60L, 30 * 60L, 60 * 60L, 180 * 60L)
 
 private const val SEND_MY_LOC_DEFAULT_INDEX = 6
 private const val STALE_LOC_DEFAULT_INDEX = 4
@@ -147,23 +148,6 @@ class TelegramSettings(private val app: TelegramApplication) {
 	fun getChatLivePeriod(chatId: Long) = shareChatsInfo[chatId]?.livePeriod
 
 	fun getChatsShareInfo() = shareChatsInfo
-
-	fun getAdditionalActiveTime(chatId: Long) =
-		shareChatsInfo[chatId]?.additionalActiveTime ?: ADDITIONAL_ACTIVE_TIME_VALUES_SEC[0]
-
-	fun getNextAdditionalActiveTime(chatId: Long): Long {
-		return if (shareChatsInfo.containsKey(chatId)) {
-			var index =
-				ADDITIONAL_ACTIVE_TIME_VALUES_SEC.indexOf(shareChatsInfo[chatId]?.additionalActiveTime)
-			if (ADDITIONAL_ACTIVE_TIME_VALUES_SEC.lastIndex > index) {
-				ADDITIONAL_ACTIVE_TIME_VALUES_SEC[++index]
-			} else {
-				ADDITIONAL_ACTIVE_TIME_VALUES_SEC[index]
-			}
-		} else {
-			ADDITIONAL_ACTIVE_TIME_VALUES_SEC[0]
-		}
-	}
 
 	fun getChatLiveMessageExpireTime(chatId: Long): Long {
 		val shareInfo = shareChatsInfo[chatId]
@@ -491,7 +475,16 @@ class TelegramSettings(private val app: TelegramApplication) {
 		var lastSuccessfulSendTime = -1L
 		var shouldDeletePreviousMessage = false
 		var additionalActiveTime = ADDITIONAL_ACTIVE_TIME_VALUES_SEC[0]
-
+		
+		fun getNextAdditionalActiveTime(): Long {
+			var index = ADDITIONAL_ACTIVE_TIME_VALUES_SEC.indexOf(additionalActiveTime)
+			return if (ADDITIONAL_ACTIVE_TIME_VALUES_SEC.lastIndex > index) {
+				ADDITIONAL_ACTIVE_TIME_VALUES_SEC[++index]
+			} else {
+				ADDITIONAL_ACTIVE_TIME_VALUES_SEC[index]
+			}
+		}
+		
 		companion object {
 
 			internal const val CHAT_ID_KEY = "chatId"

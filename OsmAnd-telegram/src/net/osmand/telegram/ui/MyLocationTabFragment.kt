@@ -15,6 +15,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.*
 import android.view.animation.LinearInterpolator
 import android.widget.*
+import net.osmand.telegram.ADDITIONAL_ACTIVE_TIME_VALUES_SEC
 import net.osmand.telegram.R
 import net.osmand.telegram.TelegramApplication
 import net.osmand.telegram.helpers.TelegramHelper
@@ -541,12 +542,17 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 				val expiresIn = settings.getChatLiveMessageExpireTime(chat.id)
 				
 				holder.textInArea?.apply {
+					val time = shareInfo?.additionalActiveTime ?: ADDITIONAL_ACTIVE_TIME_VALUES_SEC[0]
 					visibility = View.VISIBLE
-					text = "${getText(R.string.plus)} ${OsmandFormatter.getFormattedDuration(
-						context!!, settings.getAdditionalActiveTime(chat.id))}"
+					text = "${getText(R.string.plus)} ${OsmandFormatter.getFormattedDuration(context!!, time)}"
 					setOnClickListener {
-						val newLivePeriod = settings.getChatLiveMessageExpireTime(chat.id) + settings.getAdditionalActiveTime(chat.id)
-						settings.shareLocationToChat(chat.id, true, newLivePeriod, settings.getNextAdditionalActiveTime(chat.id))
+						if (shareInfo != null) {
+							val newLivePeriod = settings.getChatLiveMessageExpireTime(chat.id) + shareInfo.additionalActiveTime
+							settings.shareLocationToChat(chat.id, true, newLivePeriod, shareInfo.getNextAdditionalActiveTime())
+						} else {
+							val newLivePeriod = settings.getChatLiveMessageExpireTime(chat.id) + ADDITIONAL_ACTIVE_TIME_VALUES_SEC[0]
+							settings.shareLocationToChat(chat.id, true, newLivePeriod, ADDITIONAL_ACTIVE_TIME_VALUES_SEC[1])
+						}
 						notifyItemChanged(position)
 					}
 				}
