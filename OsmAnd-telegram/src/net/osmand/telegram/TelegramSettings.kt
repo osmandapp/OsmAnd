@@ -31,7 +31,7 @@ private val LOC_HISTORY_VALUES_SEC = listOf(
 	12 * 60 * 60L,
 	24 * 60 * 60L
 )
-private val MESSAGE_ADD_ACTIVE_TIME_VALUES_SEC = listOf(15 * 60L, 30 * 60L, 60 * 60L, 180 * 60L)
+private val ADDITIONAL_ACTIVE_TIME_VALUES_SEC = listOf(15 * 60L, 30 * 60L, 60 * 60L, 180 * 60L)
 
 private const val SEND_MY_LOC_DEFAULT_INDEX = 6
 private const val STALE_LOC_DEFAULT_INDEX = 4
@@ -63,7 +63,6 @@ private const val SHARE_CHATS_INFO_KEY = "share_chats_info"
 
 class TelegramSettings(private val app: TelegramApplication) {
 
-	private var chatShareAddActiveTime = mutableMapOf<Long, Long>()
 	private var shareChatsInfo = mutableMapOf<Long, ShareChatInfo>()
 	private var hiddenOnMapChats: Set<Long> = emptySet()
 
@@ -102,10 +101,6 @@ class TelegramSettings(private val app: TelegramApplication) {
 		hiddenChats.intersect(presentChatIds)
 		hiddenOnMapChats = hiddenChats.toHashSet()
 
-		chatShareAddActiveTime = chatShareAddActiveTime.filter { (key, _) ->
-			presentChatIds.contains(key)
-		}.toMutableMap()
-
 		shareChatsInfo = shareChatsInfo.filter { (key, _) ->
 			presentChatIds.contains(key)
 		}.toMutableMap()
@@ -115,7 +110,7 @@ class TelegramSettings(private val app: TelegramApplication) {
 		chatId: Long,
 		share: Boolean,
 		livePeriod: Long = DEFAULT_VISIBLE_TIME_SECONDS,
-		addActiveTime: Long = MESSAGE_ADD_ACTIVE_TIME_VALUES_SEC[0]
+		addActiveTime: Long = ADDITIONAL_ACTIVE_TIME_VALUES_SEC[0]
 	) {
 		if (share) {
 			val lp: Long = when {
@@ -133,11 +128,11 @@ class TelegramSettings(private val app: TelegramApplication) {
 			}
 			shareChatInfo.userSetLivePeriod = lp
 			shareChatInfo.userSetLivePeriodStart = currentTime
-			shareChatInfo.currentMessageLimit = currentTime + Math.min(lp, TelegramHelper.MAX_LOCATION_MESSAGE_LIVE_PERIOD_SEC.toLong())
-			chatShareAddActiveTime[chatId] = addActiveTime
+			shareChatInfo.currentMessageLimit = currentTime +
+					Math.min(lp, TelegramHelper.MAX_LOCATION_MESSAGE_LIVE_PERIOD_SEC.toLong())
+			shareChatInfo.additionalActiveTime = addActiveTime
 			shareChatsInfo[chatId] = shareChatInfo
 		} else {
-			chatShareAddActiveTime.remove(chatId)
 			shareChatsInfo.remove(chatId)
 		}
 	}
@@ -153,18 +148,20 @@ class TelegramSettings(private val app: TelegramApplication) {
 
 	fun getChatsShareInfo() = shareChatsInfo
 
-	fun getChatAddActiveTime(chatId: Long) = chatShareAddActiveTime[chatId] ?: MESSAGE_ADD_ACTIVE_TIME_VALUES_SEC[0]
+	fun getAdditionalActiveTime(chatId: Long) =
+		shareChatsInfo[chatId]?.additionalActiveTime ?: ADDITIONAL_ACTIVE_TIME_VALUES_SEC[0]
 
-	fun getChatNextAddActiveTime(chatId: Long): Long {
-		return if (chatShareAddActiveTime.containsKey(chatId)) {
-			var index = MESSAGE_ADD_ACTIVE_TIME_VALUES_SEC.indexOf(chatShareAddActiveTime[chatId])
-			if (MESSAGE_ADD_ACTIVE_TIME_VALUES_SEC.lastIndex > index) {
-				MESSAGE_ADD_ACTIVE_TIME_VALUES_SEC[++index]
+	fun getNextAdditionalActiveTime(chatId: Long): Long {
+		return if (shareChatsInfo.containsKey(chatId)) {
+			var index =
+				ADDITIONAL_ACTIVE_TIME_VALUES_SEC.indexOf(shareChatsInfo[chatId]?.additionalActiveTime)
+			if (ADDITIONAL_ACTIVE_TIME_VALUES_SEC.lastIndex > index) {
+				ADDITIONAL_ACTIVE_TIME_VALUES_SEC[++index]
 			} else {
-				MESSAGE_ADD_ACTIVE_TIME_VALUES_SEC[index]
+				ADDITIONAL_ACTIVE_TIME_VALUES_SEC[index]
 			}
 		} else {
-			MESSAGE_ADD_ACTIVE_TIME_VALUES_SEC[0]
+			ADDITIONAL_ACTIVE_TIME_VALUES_SEC[0]
 		}
 	}
 
@@ -178,7 +175,6 @@ class TelegramSettings(private val app: TelegramApplication) {
 	}
 
 	fun stopSharingLocationToChats() {
-		this.chatShareAddActiveTime.clear()
 		shareChatsInfo.clear()
 	}
 
@@ -215,7 +211,7 @@ class TelegramSettings(private val app: TelegramApplication) {
 		if (shareChatInfo != null && content is TdApi.MessageLocation) {
 			shareChatInfo.currentMessageId = message.id
 			shareChatInfo.lastSuccessfulLocation = LatLon(content.location.latitude, content.location.longitude)
-			shareChatInfo.lastSuccessfulSendTime = Math.max(message.editDate, message.date)
+			shareChatInfo.lastSuccessfulSendTime = Math.max(message.editDate, message.date).toLong()
 		}
 	}
 
@@ -491,9 +487,10 @@ class TelegramSettings(private val app: TelegramApplication) {
 		var currentMessageId = -1L
 		var userSetLivePeriod = -1L
 		var userSetLivePeriodStart = -1L
-		var lastSuccessfulLocation:LatLon? = null
-		var lastSuccessfulSendTime = -1
+		var lastSuccessfulLocation: LatLon? = null
+		var lastSuccessfulSendTime = -1L
 		var shouldDeletePreviousMessage = false
+		var additionalActiveTime = ADDITIONAL_ACTIVE_TIME_VALUES_SEC[0]
 
 		companion object {
 
