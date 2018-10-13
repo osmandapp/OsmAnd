@@ -2733,7 +2733,7 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="quick_action_add_destination_desc">Knackning på åtgärdsknappen kommer att lägga till en destination från skärmens mitt. Tidigare inställda destinationen blir den sista mellanliggande destinationen.</string>
     <string name="quick_action_replace_destination_desc">Knackning på åtgärdsknappen kommer att ersätta destinationen med skärmens mittläge.</string>
     <string name="quick_action_add_first_intermediate_desc">Knackning på åtgärdsknappen kommer att lägga en första mellanliggande punkt från skärmens mittpunkt.</string>
-    <string name="subscribe_email_desc">Prenumerera på vår e-postlista om apprabatter och få 3 fler kartnedladdningar!</string>
+    <string name="subscribe_email_desc">Anmäl dig till vår e-postlista om apprabatter och få 3 extra kartnedladdningar!</string>
     <string name="depth_contour_descr">Kartor som innehåller havsdjupskonturer och nautiska punkter.</string>
     <string name="sea_depth_thanks">Tack för att du köpt nautiska djupkonturer!</string>
     <string name="index_item_depth_contours_osmand_ext">Nautiska djupkonturer</string>
