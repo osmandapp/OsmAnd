@@ -2287,7 +2287,7 @@ Lon %2$s</string>
     <string name="access_disable_wrong_direction_recalc_descr">Evitar calcular de xeito automático a rota de novo cando se estea movendo na dirección errada.</string>
     <string name="map_widget_magnetic_bearing">Rumbo magnético</string>
     <string name="map_widget_bearing">Rumbo relativo</string>
-    <string name="rendering_attr_surfaceIntegrity_name">Estado do pavimento</string>
+    <string name="rendering_attr_surfaceIntegrity_name">Integridade da calzada</string>
     <string name="translit_name_if_miss">Transliterar se falta o nome en %1$s</string>
     <string name="osm_live_banner_desc">Obteña descargas de mapas sen límites e actualizacións de mapas máis de unha vez ao mes: cada semana, día ou hora.</string>
     <string name="no_inet_connection_desc_map">Obrigatorio para descargar mapas.</string>
