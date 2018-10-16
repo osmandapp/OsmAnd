@@ -457,10 +457,11 @@ public class TileSourceManager {
 		return MAPILLARY_VECTOR_SOURCE;
 	}
 
-	public static List<TileSourceTemplate> downloadTileSourceTemplates(String versionAsUrl) {
+	public static List<TileSourceTemplate> downloadTileSourceTemplates(String versionAsUrl, boolean https) {
 		final List<TileSourceTemplate> templates = new ArrayList<TileSourceTemplate>();
 		try {
-			URLConnection connection = NetworkUtils.getHttpURLConnection("https://osmand.net/tile_sources?" + versionAsUrl);
+			URLConnection connection = NetworkUtils.getHttpURLConnection((https ? "https" : "http")
+					+ "://osmand.net/tile_sources?" + versionAsUrl);
 			XmlPullParser parser = PlatformUtil.newXMLPullParser();
 			parser.setInput(connection.getInputStream(), "UTF-8");
 			int tok;
