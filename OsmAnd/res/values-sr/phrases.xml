@@ -2490,4 +2490,33 @@
 	<string name="poi_stone_type_conciliation_cross">Тип: крст помирења</string>
 	<string name="poi_stone_type_coat_of_arms">Тип: грб</string>
 
+	<string name="poi_atm">АТМ</string>
+	<string name="poi_material_wood">Материјал: дрво</string>
+	<string name="poi_material_metal">Материјал: метал</string>
+	<string name="poi_material_reinforced_concrete">Материјал: ојачани бетон</string>
+	<string name="poi_material_concrete">Материјал: бетон</string>
+	<string name="poi_material_steel">Материјал: челик</string>
+	<string name="poi_material_stone">Материјал: камен</string>
+	<string name="poi_material_masonry">Материјал: зидарски</string>
+	<string name="poi_material_brick">Материјал: цигла</string>
+	<string name="poi_material_plastic">Материјал: пластика</string>
+	<string name="poi_material_sandstone">Материјал: камени песак</string>
+	<string name="poi_material_granite_stone">Материјал: гранитни камен</string>
+	<string name="poi_material_metal_wood">Материјал: метал, дрво</string>
+	<string name="poi_material_glass">Материјал: стакло</string>
+	<string name="poi_material_bronze">Материјал: бронза</string>
+	<string name="poi_material_earth">Материјал: земља</string>
+	<string name="poi_material_composite">Материјал: композит</string>
+	<string name="poi_material_limestone">Материјал: кречњак</string>
+	<string name="poi_material_marble">Материјал: мермер</string>
+	<string name="poi_material_aluminium">Материјал: алуминијум</string>
+
+	<string name="poi_site_type_megalith">Мегалит</string>
+	<string name="poi_site_type_tumulus">Хумка</string>
+	<string name="poi_site_type_fortification">Утврђење</string>
+	<string name="poi_site_type_settlement">Насеље</string>
+	<string name="poi_site_type_city">Велеград</string>
+	<string name="poi_site_type_hut_circle">Круг кућишта</string>
+	<string name="poi_site_type_petroglyph">Петроглиф</string>
+	<string name="poi_site_type_earthwork">Земљана баријера</string>
 	</resources>
