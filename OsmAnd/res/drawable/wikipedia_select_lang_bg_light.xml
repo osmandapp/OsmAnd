@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:drawable="@drawable/wikipedia_select_lang_bg_light_p" android:state_pressed="true"/>
-    <item android:drawable="@drawable/wikipedia_select_lang_bg_light_n"/>
-</selector>
