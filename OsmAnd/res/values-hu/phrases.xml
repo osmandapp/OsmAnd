@@ -788,7 +788,7 @@
 	<string name="poi_it">IT-iroda</string>
 	<string name="poi_newspaper">Újságszerkesztőség</string>
 	<string name="poi_architect">Építésziroda</string>
-	<string name="poi_advertising_agency">Hirdetési ügynökség</string>
+	<string name="poi_advertising_agency">Reklámügynökség</string>
 	<string name="poi_educational_institution">Oktatási intézmény irodája</string>
 	<string name="poi_studio">Stúdió</string>
 	<string name="poi_bookmaker">Fogadóiroda</string>
@@ -3890,5 +3890,8 @@
 	<string name="poi_ruins">Romok</string>
 
 	<string name="poi_license_classes">Jogosítványkategóriák</string>
+
+<string name="poi_atm">Bankautomata</string>
+	<string name="poi_hill">Domb</string>
 
 </resources>
