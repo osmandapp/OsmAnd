@@ -387,6 +387,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 						app.getTargetPointsHelper().lookupAddessAll();
 						app.getMapMarkersHelper().lookupAddressAll();
 					}
+					if (event == InitEvents.FAVORITES_INITIALIZED) {
+						refreshMap();
+					}
 				}
 
 				@Override
