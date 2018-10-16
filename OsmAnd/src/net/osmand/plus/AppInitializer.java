@@ -631,15 +631,13 @@ public class AppInitializer implements IProgress {
 			// native depends on renderers
 			initOpenGl();
 			notifyEvent(InitEvents.NATIVE_OPEN_GLINITIALIZED);
+			initNativeCore();
+			notifyEvent(InitEvents.NATIVE_INITIALIZED);
 
 			// init poi types before indexes and before POI
 			initPoiTypes();
 			notifyEvent(InitEvents.POI_TYPES_INITIALIZED);
 			app.resourceManager.reloadIndexesOnStart(this, warnings);
-
-			// native depends on renderers
-			initNativeCore();
-			notifyEvent(InitEvents.NATIVE_INITIALIZED);
 
 			app.favorites.loadFavorites();
 			notifyEvent(InitEvents.FAVORITES_INITIALIZED);
