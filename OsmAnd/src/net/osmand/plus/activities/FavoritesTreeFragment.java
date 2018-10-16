@@ -37,8 +37,8 @@ import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
+import net.osmand.plus.FavouritesDbHelper.FavoritesListener;
 import net.osmand.plus.MapMarkersHelper;
-import net.osmand.plus.MapMarkersHelper.MapMarkersGroup;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
@@ -90,13 +90,24 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 	private HashMap<String, OsmandSettings.OsmandPreference<Boolean>> preferenceCache = new HashMap<>();
 	private View footerView;
 
+	private FavoritesListener favoritesListener;
+
 	@Override
 	public void onAttach(Context context) {
 		super.onAttach(context);
 		this.app = (OsmandApplication) getActivity().getApplication();
 
 		helper = getMyApplication().getFavorites();
-		favouritesAdapter.synchronizeGroups();
+		if (helper.isFavoritesLoaded()) {
+			favouritesAdapter.synchronizeGroups();
+		} else {
+			helper.addListener(favoritesListener = new FavoritesListener() {
+				@Override
+				public void onFavoritesLoaded() {
+					favouritesAdapter.synchronizeGroups();
+				}
+			});
+		}
 		setAdapter(favouritesAdapter);
 
 		boolean light = getMyApplication().getSettings().isLightContent();
@@ -232,6 +243,10 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 		super.onPause();
 		if (actionMode != null) {
 			actionMode.finish();
+		}
+		if (favoritesListener != null) {
+			helper.removeListener(favoritesListener);
+			favoritesListener = null;
 		}
 	}
 
