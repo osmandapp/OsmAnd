@@ -3865,4 +3865,7 @@
 
 <string name="poi_hill">Hæð</string>
 
+<string name="poi_atm">Hraðbanki</string>
+	<string name="poi_shoe_repair">Skóviðgerðir</string>
+
 </resources>
