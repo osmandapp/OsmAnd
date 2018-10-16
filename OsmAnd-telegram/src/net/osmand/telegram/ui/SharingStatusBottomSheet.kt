@@ -12,7 +12,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import net.osmand.telegram.R
 import net.osmand.telegram.TelegramApplication
-import net.osmand.telegram.TelegramSettings
 import net.osmand.telegram.ui.views.BottomSheetDialog
 import net.osmand.telegram.utils.OsmandFormatter
 
@@ -24,17 +23,16 @@ class SharingStatusBottomSheet : DialogFragment() {
 
 	override fun onCreateDialog(savedInstanceState: Bundle?) = BottomSheetDialog(context!!)
 
-	override fun onCreateView(
-		inflater: LayoutInflater,
-		container: ViewGroup?,
-		savedInstanceState: Bundle?
-	): View? {
+	override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 		val mainView = inflater.inflate(R.layout.bottom_sheet_sharing_status, container, false)
 		mainView.findViewById<View>(R.id.scroll_view_container).setOnClickListener { dismiss() }
 		BottomSheetBehavior.from(mainView.findViewById<View>(R.id.scroll_view))
 			.setBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
 				override fun onStateChanged(bottomSheet: View, newState: Int) {
 					if (newState == BottomSheetBehavior.STATE_HIDDEN) {
+						targetFragment?.also { target ->
+							target.onActivityResult(targetRequestCode, SHARING_STATUS_REQUEST_CODE, null)
+						}
 						dismiss()
 					}
 				}
@@ -44,7 +42,7 @@ class SharingStatusBottomSheet : DialogFragment() {
 
 		val itemsCont = mainView.findViewById<ViewGroup>(R.id.items_container)
 		settings.sharingStatusChanges.reversed().forEach { sharingStatus ->
-			inflater.inflate(R.layout.item_with_four_text_lines, itemsCont, false).apply {
+			inflater.inflate(R.layout.item_with_three_text_lines, itemsCont, false).apply {
 				val sharingStatusType = sharingStatus.statusType
 				findViewById<ImageView>(R.id.icon).setImageDrawable(uiUtils.getIcon(sharingStatusType.iconId, sharingStatusType.iconColorRes))
 				findViewById<TextView>(R.id.title).text = sharingStatus.getDescription(app)
@@ -71,10 +69,14 @@ class SharingStatusBottomSheet : DialogFragment() {
 				itemsCont.addView(this)
 			}
 		}
-
 		mainView.findViewById<TextView>(R.id.secondary_btn).apply {
 			setText(R.string.shared_string_close)
-			setOnClickListener { dismiss() }
+			setOnClickListener {
+				targetFragment?.also { target ->
+					target.onActivityResult(targetRequestCode, SHARING_STATUS_REQUEST_CODE, null)
+				}
+				dismiss()
+			}
 		}
 		return mainView
 	}

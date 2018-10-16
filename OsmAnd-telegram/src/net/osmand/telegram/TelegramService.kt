@@ -180,7 +180,6 @@ class TelegramService : Service(), LocationListener, TelegramIncomingMessagesLis
 		updateShareInfoHandler?.postDelayed({
 			if (isUsedByMyLocation(usedBy)) {
 				app().shareLocationHelper.updateSendLiveMessages()
-				app().settings.updateSharingStatusHistory()
 				startShareInfoUpdates()
 			}
 		}, UPDATE_LIVE_MESSAGES_INTERVAL_MS)
@@ -233,26 +232,24 @@ class TelegramService : Service(), LocationListener, TelegramIncomingMessagesLis
 	}
 
 	override fun onLocationChanged(l: Location?) {
-		if (l != null) {
-			val location = convertLocation(l)
-			if (!isContinuous()) {
-				// unregister listener and wait next time
-				val locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
-				try {
-					locationManager.removeUpdates(this)
-				} catch (e: Throwable) {
-					Log.d(PlatformUtil.TAG, "Location service permission not granted") //$NON-NLS-1$
-				}
-
-				val lock = getLock(this)
-				if (lock.isHeld) {
-					lock.release()
-				}
-				app().shareLocationHelper.updateLocation(location)
-			} else if (System.currentTimeMillis() - lastLocationSentTime > sendLocationInterval * 1000) {
-				lastLocationSentTime = System.currentTimeMillis()
-				app().shareLocationHelper.updateLocation(location)
+		val location = convertLocation(l)
+		if (!isContinuous()) {
+			// unregister listener and wait next time
+			val locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
+			try {
+				locationManager.removeUpdates(this)
+			} catch (e: Throwable) {
+				Log.d(PlatformUtil.TAG, "Location service permission not granted") //$NON-NLS-1$
 			}
+
+			val lock = getLock(this)
+			if (lock.isHeld) {
+				lock.release()
+			}
+			app().shareLocationHelper.updateLocation(location)
+		} else if (System.currentTimeMillis() - lastLocationSentTime > sendLocationInterval * 1000) {
+			lastLocationSentTime = System.currentTimeMillis()
+			app().shareLocationHelper.updateLocation(location)
 		}
 	}
 

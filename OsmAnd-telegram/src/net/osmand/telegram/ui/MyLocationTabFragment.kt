@@ -74,7 +74,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 	private var actionButtonsListener: ActionButtonsListener? = null
 
 	private var sharingMode = false
-
+	
 	private var updateEnable: Boolean = false
 
 	override fun onCreateView(
@@ -93,7 +93,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 		searchBoxSidesMargin = resources.getDimensionPixelSize(R.dimen.content_padding_half)
 
 		sharingMode = settings.hasAnyChatToShareLocation()
-
+				
 		savedInstanceState?.apply {
 			selectedChats.addAll(getLongArray(SELECTED_CHATS_KEY).toSet())
 			if (selectedChats.isNotEmpty()) {
@@ -193,7 +193,6 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 		}
 
 		mainView.findViewById<View>(R.id.sharing_status_container).setOnClickListener {
-			settings.updateSharingStatusHistory()
 			fragmentManager?.also { fm ->
 				SharingStatusBottomSheet.showInstance(fm, this)
 			}
@@ -211,7 +210,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 				updateContent()
 			}
 		}
-
+		
 		return mainView
 	}
 
@@ -228,7 +227,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 		super.onPause()
 		updateEnable = false
 	}
-
+	
 	override fun onSaveInstanceState(outState: Bundle) {
 		super.onSaveInstanceState(outState)
 		outState.putLongArray(SELECTED_CHATS_KEY, selectedChats.toLongArray())
@@ -246,6 +245,9 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 				sharingMode = false
 				app.stopSharingLocation()
 				updateContent()
+			}
+			SharingStatusBottomSheet.SHARING_STATUS_REQUEST_CODE -> {
+				updateSharingStatus()
 			}
 		}
 	}
@@ -323,7 +325,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 			}
 		}, ADAPTER_UPDATE_INTERVAL_MIL)
 	}
-
+	
 	private fun animateStartSharingBtn(show: Boolean) {
 		if (startSharingBtn.visibility == View.VISIBLE) {
 			val scale = if (show) 1f else 0f
@@ -335,7 +337,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 				.start()
 		}
 	}
-
+	
 	private fun clearSelection() {
 		selectedChats.clear()
 		adapter.notifyDataSetChanged()
@@ -429,17 +431,16 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 
 	private fun updateSharingStatus() {
 		if (sharingMode) {
-			if (settings.sharingStatusChanges.isEmpty()) {
-				settings.updateSharingStatusHistory()
+			if (settings.sharingStatusChanges.isNotEmpty()) {
+				sharingStatusDescription.text = settings.sharingStatusChanges.last().getDescription(app)
 			}
-			sharingStatusDescription.text = settings.sharingStatusChanges.last().getDescription(app)
 		}
 	}
 
 	private fun updateList() {
 		val chats: MutableList<TdApi.Chat> = mutableListOf()
 		val currentUser = telegramHelper.getCurrentUser()
-		val chatList = if (sharingMode && settings.hasAnyChatToShareLocation()) {
+		val chatList = if (sharingMode) {
 			settings.getShareLocationChats()
 		} else {
 			telegramHelper.getChatListIds()
@@ -468,7 +469,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 		list.sortWith(Comparator<TdApi.Chat> { o1, o2 -> o1.title.compareTo(o2.title) })
 		return list
 	}
-
+	
 	inner class MyLocationListAdapter : RecyclerView.Adapter<MyLocationListAdapter.BaseViewHolder>() {
 		var chats = mutableListOf<TdApi.Chat>()
 			set(value) {
@@ -547,10 +548,9 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 					isChecked = live
 					setOnCheckedChangeListener { _, isChecked ->
 						if (!isChecked) {
-							val currentMessageId = shareInfo?.currentMessageId
 							settings.shareLocationToChat(chat.id, false)
-							if (currentMessageId != null) {
-								telegramHelper.stopSendingLiveLocationToChat(chat.id, currentMessageId)
+							if (shareInfo != null) {
+								telegramHelper.stopSendingLiveLocationToChat(shareInfo)
 							}
 							removeItem(chat)
 						}
@@ -567,7 +567,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 				}
 
 				val expiresIn = settings.getChatLiveMessageExpireTime(chat.id)
-
+				
 				holder.textInArea?.apply {
 					val time = shareInfo?.additionalActiveTime ?: ADDITIONAL_ACTIVE_TIME_VALUES_SEC[0]
 					visibility = View.VISIBLE

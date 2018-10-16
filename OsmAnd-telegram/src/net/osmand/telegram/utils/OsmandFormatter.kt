@@ -19,9 +19,9 @@ object OsmandFormatter {
 	val FEET_IN_ONE_METER = YARDS_IN_ONE_METER * 3f
 	private val fixed2 = DecimalFormat("0.00")
 	private val fixed1 = DecimalFormat("0.0")
-	
+
 	private const val SHORT_TIME_FORMAT = "%02d:%02d"
-	private const val SIMPLE_TIME_OF_DAY_FORMAT = "HH:mm:ss"
+	private const val SIMPLE_TIME_OF_DAY_FORMAT = "HH:mm"
 	private const val SIMPLE_DATE_FORMAT = "dd MMM HH:mm:ss"
 
 	private const val MIN_DURATION_FOR_DATE_FORMAT = 48 * 60 * 60

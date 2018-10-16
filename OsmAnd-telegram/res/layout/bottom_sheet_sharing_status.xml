@@ -36,13 +36,13 @@
 					android:textColor="?android:textColorPrimary"
 					android:textSize="@dimen/list_item_title_text_size"
 					app:firstBaselineToTopHeight="28sp"
-					app:typeface="@string/font_roboto_medium"/>
+					app:typeface="@string/font_roboto_medium" />
 
 				<LinearLayout
 					android:id="@+id/items_container"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
-					android:orientation="vertical"/>
+					android:orientation="vertical" />
 
 			</LinearLayout>
 
@@ -60,7 +60,7 @@
 			layout="@layout/secondary_btn"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:layout_margin="@dimen/content_padding_half"/>
+			android:layout_margin="@dimen/content_padding_half" />
 
 	</FrameLayout>
 

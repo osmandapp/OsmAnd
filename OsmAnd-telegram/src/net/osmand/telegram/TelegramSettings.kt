@@ -205,8 +205,7 @@ class TelegramSettings(private val app: TelegramApplication) {
 		if (shareChatInfo != null && content is TdApi.MessageLocation) {
 			shareChatInfo.currentMessageId = message.id
 			shareChatInfo.lastSuccessfulLocation = LatLon(content.location.latitude, content.location.longitude)
-			shareChatInfo.lastSuccessfulSendTimeMs = Math.max(message.editDate, message.date) *
-					1000L
+			shareChatInfo.lastSuccessfulSendTimeMs = Math.max(message.editDate, message.date) * 1000L
 		}
 	}
 
@@ -214,14 +213,16 @@ class TelegramSettings(private val app: TelegramApplication) {
 		val newSharingStatus = SharingStatus().apply {
 			statusChangeTime = System.currentTimeMillis()
 			statusType = if (!app.isInternetConnectionAvailable) {
+				locationTime = getLastSuccessfulSendTime()
 				SharingStatusType.NO_INTERNET
-			} else if (app.locationProvider.lastKnownLocation == null || !app.locationProvider.gpsInfo.fixed) {
+			} else if (app.shareLocationHelper.lastLocation == null) {
+				locationTime = app.shareLocationHelper.lastLocationMessageSentTime
 				SharingStatusType.NO_GPS
 			} else {
-				var sendChatErrors = false
+				var sendChatsErrors = false
 				shareChatsInfo.forEach { _, shareInfo ->
-					if ((statusChangeTime - shareInfo.lastSuccessfulSendTimeMs) > (sendMyLocInterval * 2) * 1000) {
-						sendChatErrors = true
+					if (shareInfo.hasSharingError) {
+						sendChatsErrors = true
 						locationTime = shareInfo.lastSuccessfulSendTimeMs
 						val title = app.telegramHelper.getChat(shareInfo.chatId)?.title
 						if (title != null) {
@@ -229,16 +230,12 @@ class TelegramSettings(private val app: TelegramApplication) {
 						}
 					}
 				}
-				if (sendChatErrors) {
+				if (sendChatsErrors) {
 					SharingStatusType.NOT_POSSIBLE_TO_SENT_TO_CHATS
 				} else {
+					locationTime = getLastSuccessfulSendTime()
 					SharingStatusType.SUCCESSFULLY_SENT
 				}
-			}
-			if (statusType == SharingStatusType.NO_INTERNET || statusType == SharingStatusType.SUCCESSFULLY_SENT) {
-				locationTime = getLastSuccessfulSendTime()
-			} else if (statusType == SharingStatusType.NO_GPS) {
-				locationTime = app.locationProvider.lastKnownLocationTime ?: -1
 			}
 		}
 
@@ -575,12 +572,7 @@ class TelegramSettings(private val app: TelegramApplication) {
 					val start = spannableString.length
 					val newSpannable = if (iterator.hasNext()) " @$chatTitle," else " @$chatTitle."
 					spannableString.append(newSpannable)
-					spannableString.setSpan(
-						ForegroundColorSpan(app.uiUtils.getActiveColor()),
-						start,
-						spannableString.length - 1,
-						0
-					)
+					spannableString.setSpan(ForegroundColorSpan(app.uiUtils.getActiveColor()), start, spannableString.length - 1, 0)
 				}
 				spannableString
 			}
@@ -600,7 +592,8 @@ class TelegramSettings(private val app: TelegramApplication) {
 		var lastSuccessfulSendTimeMs = -1L
 		var shouldDeletePreviousMessage = false
 		var additionalActiveTime = ADDITIONAL_ACTIVE_TIME_VALUES_SEC[0]
-		
+		var hasSharingError = false
+
 		fun getNextAdditionalActiveTime(): Long {
 			var index = ADDITIONAL_ACTIVE_TIME_VALUES_SEC.indexOf(additionalActiveTime)
 			return if (ADDITIONAL_ACTIVE_TIME_VALUES_SEC.lastIndex > index) {

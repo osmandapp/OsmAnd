@@ -23,9 +23,7 @@ class ShareLocationHelper(private val app: TelegramApplication) {
 
 	var lastLocationMessageSentTime: Long = 0
 
-	private var lastTimeInMillis: Long = 0L
-
-	private var lastLocation: Location? = null
+	var lastLocation: Location? = null
 		set(value) {
 			if (lastTimeInMillis == 0L) {
 				lastTimeInMillis = System.currentTimeMillis()
@@ -39,6 +37,8 @@ class ShareLocationHelper(private val app: TelegramApplication) {
 			}
 			field = value
 		}
+
+	private var lastTimeInMillis: Long = 0L
 
 	fun updateLocation(location: Location?) {
 		lastLocation = location
@@ -54,9 +54,10 @@ class ShareLocationHelper(private val app: TelegramApplication) {
 					val url = "https://live.osmand.net/device/$sharingMode/send?lat=${location.latitude}&lon=${location.longitude}"
 					AndroidNetworkUtils.sendRequestAsync(url, null)
 				}
-				lastLocationMessageSentTime = System.currentTimeMillis()
 			}
+			lastLocationMessageSentTime = System.currentTimeMillis()
 		}
+		app.settings.updateSharingStatusHistory()
 		refreshNotification()
 	}
 

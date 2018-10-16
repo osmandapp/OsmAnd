@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
@@ -15,7 +16,6 @@
 			android:id="@+id/image_container"
 			android:layout_width="match_parent"
 			android:layout_height="@dimen/my_location_image_height"
-			android:visibility="gone"
 			app:layout_scrollFlags="scroll">
 
 			<ImageView
@@ -54,8 +54,7 @@
 			android:animateLayoutChanges="true"
 			android:orientation="vertical"
 			android:paddingLeft="@dimen/my_location_text_sides_margin"
-			android:paddingRight="@dimen/my_location_text_sides_margin"
-			android:visibility="gone">
+			android:paddingRight="@dimen/my_location_text_sides_margin">
 
 			<LinearLayout
 				android:layout_width="match_parent"
@@ -171,7 +170,7 @@
 					android:textColor="@color/app_bar_title_light"
 					android:textSize="@dimen/title_text_size"
 					app:typeface="@string/font_roboto_mono_bold"
-					tools:text="@string/sharing_enabled"/>
+					tools:text="@string/sharing_enabled" />
 
 				<ImageView
 					android:id="@+id/options_title"
@@ -182,7 +181,7 @@
 					android:paddingRight="@dimen/content_padding_standard"
 					tools:src="@drawable/ic_action_other_menu"
 					tools:tint="@color/icon_light"
-					tools:visibility="visible"/>
+					tools:visibility="visible" />
 
 			</LinearLayout>
 
@@ -192,7 +191,7 @@
 				android:layout_height="1dp"
 				android:layout_marginLeft="@dimen/content_padding_standard"
 				android:layout_marginStart="@dimen/content_padding_standard"
-				android:background="?attr/card_divider_color"/>
+				android:background="?attr/card_divider_color" />
 
 			<LinearLayout
 				android:id="@+id/stop_all_sharing_row"
@@ -224,7 +223,7 @@
 						android:textColor="?attr/ctrl_active_color"
 						android:textSize="@dimen/hint_text_size"
 						app:lastBaselineToBottomHeight="24dp"
-						app:typeface="@string/font_roboto_medium"/>
+						app:typeface="@string/font_roboto_medium" />
 
 					<Switch
 						android:id="@+id/stop_all_sharing_switcher"
@@ -233,7 +232,7 @@
 						android:layout_gravity="end|center_vertical"
 						android:background="@null"
 						android:clickable="false"
-						android:focusable="false"/>
+						android:focusable="false" />
 
 				</LinearLayout>
 
@@ -241,7 +240,7 @@
 					android:id="@+id/appbar_divider2"
 					android:layout_width="1dp"
 					android:layout_height="match_parent"
-					android:background="?attr/card_divider_color"/>
+					android:background="?attr/card_divider_color" />
 
 				<LinearLayout
 					android:id="@+id/sharing_status_container"
@@ -261,7 +260,7 @@
 						android:layout_marginRight="@dimen/content_padding_standard"
 						android:layout_marginTop="@dimen/content_padding_standard"
 						android:src="@drawable/ic_action_live_now"
-						android:tint="@color/ctrl_active_light"/>
+						android:tint="@color/ctrl_active_light" />
 
 					<LinearLayout
 						android:layout_width="match_parent"
@@ -275,7 +274,7 @@
 							android:text="@string/shared_string_status"
 							android:textColor="?android:attr/textColorSecondary"
 							android:textSize="@dimen/list_item_description_text_size"
-							app:typeface="@string/font_roboto_regular"/>
+							app:typeface="@string/font_roboto_regular" />
 
 						<net.osmand.telegram.ui.views.TextViewEx
 							android:id="@+id/sharing_status_description"
@@ -287,7 +286,7 @@
 							android:textSize="@dimen/hint_text_size"
 							app:lastBaselineToBottomHeight="@dimen/content_padding_standard"
 							app:typeface="@string/font_roboto_medium"
-							tools:text="@string/no_gps_connection"/>
+							tools:text="@string/no_gps_connection" />
 
 					</LinearLayout>
 
@@ -302,8 +301,7 @@
 	<FrameLayout
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
-		app:layout_behavior="@string/appbar_scrolling_view_behavior"
-		tools:visibility="gone">
+		app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
 		<android.support.v7.widget.RecyclerView
 			android:id="@+id/recycler_view"
@@ -328,8 +326,8 @@
 			android:textColor="@color/white"
 			android:visibility="gone"
 			app:typeface="@string/font_roboto_medium"
-			tools:visibility="visible"/>
+			tools:visibility="visible" />
 
 	</FrameLayout>
-
+	
 </android.support.design.widget.CoordinatorLayout>
