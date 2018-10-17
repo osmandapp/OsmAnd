@@ -676,6 +676,9 @@ class TelegramHelper private constructor() {
 	private fun sendLiveLocationImpl(chatsShareInfo: Map<Long, TelegramSettings.ShareChatInfo>, latitude: Double, longitude: Double) {
 		val location = TdApi.Location(latitude, longitude)
 		chatsShareInfo.forEach { (chatId, shareInfo) ->
+			if (shareInfo.getChatLiveMessageExpireTime() <= 0) {
+				return@forEach
+			}
 			val livePeriod =
 				if (shareInfo.currentMessageLimit > (shareInfo.start + MAX_LOCATION_MESSAGE_LIVE_PERIOD_SEC)) {
 					MAX_LOCATION_MESSAGE_LIVE_PERIOD_SEC
@@ -823,21 +826,15 @@ class TelegramHelper private constructor() {
 			}
 			TdApi.AuthorizationStateWaitPhoneNumber.CONSTRUCTOR -> {
 				log.info("Request phone number")
-				telegramAuthorizationRequestHandler?.telegramAuthorizationRequestListener?.onRequestTelegramAuthenticationParameter(
-					PHONE_NUMBER
-				)
+				telegramAuthorizationRequestHandler?.telegramAuthorizationRequestListener?.onRequestTelegramAuthenticationParameter(PHONE_NUMBER)
 			}
 			TdApi.AuthorizationStateWaitCode.CONSTRUCTOR -> {
 				log.info("Request code")
-				telegramAuthorizationRequestHandler?.telegramAuthorizationRequestListener?.onRequestTelegramAuthenticationParameter(
-					CODE
-				)
+				telegramAuthorizationRequestHandler?.telegramAuthorizationRequestListener?.onRequestTelegramAuthenticationParameter(CODE)
 			}
 			TdApi.AuthorizationStateWaitPassword.CONSTRUCTOR -> {
 				log.info("Request password")
-				telegramAuthorizationRequestHandler?.telegramAuthorizationRequestListener?.onRequestTelegramAuthenticationParameter(
-					PASSWORD
-				)
+				telegramAuthorizationRequestHandler?.telegramAuthorizationRequestListener?.onRequestTelegramAuthenticationParameter(PASSWORD)
 			}
 			TdApi.AuthorizationStateReady.CONSTRUCTOR -> {
 				log.info("Ready")
@@ -854,8 +851,7 @@ class TelegramHelper private constructor() {
 			else -> log.error("Unsupported authorization state: " + this.authorizationState!!)
 		}
 		val wasAuthorized = haveAuthorization
-		haveAuthorization = this.authorizationState?.constructor ==
-				TdApi.AuthorizationStateReady.CONSTRUCTOR
+		haveAuthorization = this.authorizationState?.constructor == TdApi.AuthorizationStateReady.CONSTRUCTOR
 		if (wasAuthorized != haveAuthorization) {
 			needRefreshActiveLiveLocationMessages = true
 			if (haveAuthorization) {

@@ -259,8 +259,8 @@
 						android:layout_marginEnd="@dimen/content_padding_standard"
 						android:layout_marginRight="@dimen/content_padding_standard"
 						android:layout_marginTop="@dimen/content_padding_standard"
-						android:src="@drawable/ic_action_live_now"
-						android:tint="@color/ctrl_active_light" />
+						tools:src="@drawable/ic_action_live_now"
+						tools:tint="@color/ctrl_active_light" />
 
 					<LinearLayout
 						android:layout_width="match_parent"

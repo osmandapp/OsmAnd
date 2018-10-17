@@ -137,8 +137,7 @@ class TelegramSettings(private val app: TelegramApplication) {
 			}
 			shareChatInfo.userSetLivePeriod = lp
 			shareChatInfo.userSetLivePeriodStart = currentTime
-			shareChatInfo.currentMessageLimit = currentTime +
-					Math.min(lp, TelegramHelper.MAX_LOCATION_MESSAGE_LIVE_PERIOD_SEC.toLong())
+			shareChatInfo.currentMessageLimit = currentTime + Math.min(lp, TelegramHelper.MAX_LOCATION_MESSAGE_LIVE_PERIOD_SEC.toLong())
 			shareChatInfo.additionalActiveTime = addActiveTime
 			shareChatsInfo[chatId] = shareChatInfo
 		} else {
@@ -158,15 +157,6 @@ class TelegramSettings(private val app: TelegramApplication) {
 	fun getChatsShareInfo() = shareChatsInfo
 
 	fun getLastSuccessfulSendTime() = shareChatsInfo.values.maxBy { it.lastSuccessfulSendTimeMs }?.lastSuccessfulSendTimeMs ?: -1
-
-	fun getChatLiveMessageExpireTime(chatId: Long): Long {
-		val shareInfo = shareChatsInfo[chatId]
-		return if (shareInfo != null) {
-			shareInfo.userSetLivePeriod - ((System.currentTimeMillis() / 1000) - shareInfo.start)
-		} else {
-			0
-		}
-	}
 
 	fun stopSharingLocationToChats() {
 		shareChatsInfo.clear()
@@ -203,6 +193,7 @@ class TelegramSettings(private val app: TelegramApplication) {
 		val shareChatInfo = shareChatsInfo[message.chatId]
 		val content = message.content
 		if (shareChatInfo != null && content is TdApi.MessageLocation) {
+			shareChatInfo.start = message.date.toLong()
 			shareChatInfo.currentMessageId = message.id
 			shareChatInfo.lastSuccessfulLocation = LatLon(content.location.latitude, content.location.longitude)
 			shareChatInfo.lastSuccessfulSendTimeMs = Math.max(message.editDate, message.date) * 1000L
@@ -602,7 +593,11 @@ class TelegramSettings(private val app: TelegramApplication) {
 				ADDITIONAL_ACTIVE_TIME_VALUES_SEC[index]
 			}
 		}
-		
+
+		fun getChatLiveMessageExpireTime(): Long {
+			return userSetLivePeriod - ((System.currentTimeMillis() / 1000) - start)
+		}
+
 		companion object {
 
 			internal const val CHAT_ID_KEY = "chatId"

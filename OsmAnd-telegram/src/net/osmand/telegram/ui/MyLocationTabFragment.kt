@@ -143,6 +143,8 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 			text = spannable
 		}
 
+		mainView.findViewById<ImageView>(R.id.sharing_status_icon).setImageDrawable(app.uiUtils.getActiveIcon(R.drawable.ic_action_live_now))
+
 		textContainer = mainView.findViewById<LinearLayout>(R.id.text_container).apply {
 			if (Build.VERSION.SDK_INT >= 16) {
 				layoutTransition.enableTransitionType(LayoutTransition.CHANGING)
@@ -413,6 +415,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 	}
 
 	private fun updateContent() {
+		sharingMode = sharingMode && settings.hasAnyChatToShareLocation()
 		updateSharingStatus()
 		updateSharingMode()
 		updateList()
@@ -430,10 +433,8 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 	}
 
 	private fun updateSharingStatus() {
-		if (sharingMode) {
-			if (settings.sharingStatusChanges.isNotEmpty()) {
-				sharingStatusDescription.text = settings.sharingStatusChanges.last().getDescription(app)
-			}
+		if (sharingMode && settings.sharingStatusChanges.isNotEmpty()) {
+			sharingStatusDescription.text = settings.sharingStatusChanges.last().getDescription(app)
 		}
 	}
 
@@ -566,14 +567,15 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 					}
 				}
 
-				val expiresIn = settings.getChatLiveMessageExpireTime(chat.id)
+				val expiresIn = shareInfo?.getChatLiveMessageExpireTime() ?: 0
 				
 				holder.textInArea?.apply {
 					val time = shareInfo?.additionalActiveTime ?: ADDITIONAL_ACTIVE_TIME_VALUES_SEC[0]
 					visibility = View.VISIBLE
 					text = "${getText(R.string.plus)} ${OsmandFormatter.getFormattedDuration(context!!, time)}"
 					setOnClickListener {
-						val newLivePeriod = settings.getChatLiveMessageExpireTime(chat.id) + (shareInfo?.additionalActiveTime ?: ADDITIONAL_ACTIVE_TIME_VALUES_SEC[0])
+						val expireTime = shareInfo?.getChatLiveMessageExpireTime() ?: 0
+						val newLivePeriod = expireTime + (shareInfo?.additionalActiveTime ?: ADDITIONAL_ACTIVE_TIME_VALUES_SEC[0])
 						val nextAdditionalActiveTime = shareInfo?.getNextAdditionalActiveTime() ?: ADDITIONAL_ACTIVE_TIME_VALUES_SEC[1]
 						settings.shareLocationToChat(chat.id, true, newLivePeriod, nextAdditionalActiveTime)
 						notifyItemChanged(position)
