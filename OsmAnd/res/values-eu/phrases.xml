@@ -3872,4 +3872,7 @@
 
 <string name="poi_hill">Muinoa</string>
 
+<string name="poi_atm">Kutxazain automatikoa</string>
+	<string name="poi_shoe_repair">Zapaten konponketa</string>
+
 </resources>
