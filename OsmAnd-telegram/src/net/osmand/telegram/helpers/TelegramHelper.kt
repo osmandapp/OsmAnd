@@ -813,10 +813,7 @@ class TelegramHelper private constructor() {
 					parameters.applicationVersion = "1.0"
 					parameters.enableStorageOptimizer = true
 
-					client!!.send(
-						TdApi.SetTdlibParameters(parameters),
-						AuthorizationRequestHandler()
-					)
+					client!!.send(TdApi.SetTdlibParameters(parameters), AuthorizationRequestHandler())
 				}
 			}
 			TdApi.AuthorizationStateWaitEncryptionKey.CONSTRUCTOR -> {

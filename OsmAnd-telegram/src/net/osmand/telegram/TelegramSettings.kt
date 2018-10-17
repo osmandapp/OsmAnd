@@ -109,9 +109,7 @@ class TelegramSettings(private val app: TelegramApplication) {
 		hiddenChats.intersect(presentChatIds)
 		hiddenOnMapChats = hiddenChats.toHashSet()
 
-		shareChatsInfo = ConcurrentHashMap(shareChatsInfo.filter { (key, _) ->
-			presentChatIds.contains(key)
-		})
+		shareChatsInfo = ConcurrentHashMap(shareChatsInfo.filter { (key, _) -> presentChatIds.contains(key) })
 	}
 
 	fun shareLocationToChat(

@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import net.osmand.telegram.R
 import net.osmand.telegram.TelegramApplication
@@ -44,17 +45,17 @@ class SharingStatusBottomSheet : DialogFragment() {
 		settings.sharingStatusChanges.reversed().forEach { sharingStatus ->
 			inflater.inflate(R.layout.item_with_three_text_lines, itemsCont, false).apply {
 				val sharingStatusType = sharingStatus.statusType
+				val time = sharingStatus.locationTime
+
 				findViewById<ImageView>(R.id.icon).setImageDrawable(uiUtils.getIcon(sharingStatusType.iconId, sharingStatusType.iconColorRes))
 				findViewById<TextView>(R.id.title).text = sharingStatus.getDescription(app)
-				findViewById<TextView>(R.id.status_change_time).text =
-						OsmandFormatter.getFormattedTime(sharingStatus.statusChangeTime, false)
-				val time = sharingStatus.locationTime
+				findViewById<TextView>(R.id.status_change_time).text = OsmandFormatter.getFormattedTime(sharingStatus.statusChangeTime, false)
 				findViewById<TextView>(R.id.last_location_line).text = getString(sharingStatusType.descriptionId)
+
 				if (time > 0) {
-					val sentTime = OsmandFormatter.getFormattedTime(time, false)
-					findViewById<TextView>(R.id.last_location_line_time).text = sentTime
+					findViewById<TextView>(R.id.last_location_line_time).text = OsmandFormatter.getFormattedTime(time, false)
 				} else {
-					findViewById<TextView>(R.id.last_location_line_time).text = "-"
+					findViewById<LinearLayout>(R.id.description_container).visibility = View.INVISIBLE
 				}
 				if (sharingStatusType.canResendLocation) {
 					findViewById<TextView>(R.id.re_send_location).apply {
