@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<ImageButton android:id="@+id/map_compass_button"
-             xmlns:android="http://schemas.android.com/apk/res/android"
-             android:layout_width="@dimen/map_small_button_size"
-             android:layout_height="@dimen/map_small_button_size"
-             android:background="@drawable/btn_inset_circle_trans"
-             android:contentDescription="@string/map_widget_compass"/>

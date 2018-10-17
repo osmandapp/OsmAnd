@@ -626,19 +626,21 @@ public class AppInitializer implements IProgress {
 	private void startApplicationBackground() {
 		try {
 			startBgTime = System.currentTimeMillis();
-			app.favorites.loadFavorites();
-			notifyEvent(InitEvents.FAVORITES_INITIALIZED);
+			app.getRendererRegistry().initRenderers(this);
+			notifyEvent(InitEvents.INIT_RENDERERS);
+			// native depends on renderers
+			initOpenGl();
+			notifyEvent(InitEvents.NATIVE_OPEN_GLINITIALIZED);
+			initNativeCore();
+			notifyEvent(InitEvents.NATIVE_INITIALIZED);
+
 			// init poi types before indexes and before POI
 			initPoiTypes();
 			notifyEvent(InitEvents.POI_TYPES_INITIALIZED);
 			app.resourceManager.reloadIndexesOnStart(this, warnings);
 
-			app.getRendererRegistry().initRenderers(this);
-			notifyEvent(InitEvents.INIT_RENDERERS);
-			// native depends on renderers
-			initNativeCore();
-			notifyEvent(InitEvents.NATIVE_INITIALIZED);
-
+			app.favorites.loadFavorites();
+			notifyEvent(InitEvents.FAVORITES_INITIALIZED);
 			app.poiFilters.reloadAllPoiFilters();
 			app.poiFilters.loadSelectedPoiFilters();
 			notifyEvent(InitEvents.POI_TYPES_INITIALIZED);
@@ -735,8 +737,7 @@ public class AppInitializer implements IProgress {
 		}
 	}
 
-
-	private void initNativeCore() {
+	private void initOpenGl() {
 		if (!"qnx".equals(System.getProperty("os.name"))) {
 			OsmandSettings osmandSettings = app.getSettings();
 			if (osmandSettings.USE_OPENGL_RENDER.get()) {
@@ -754,6 +755,12 @@ public class AppInitializer implements IProgress {
 					warnings.add("Native OpenGL library is not supported. Please try again after exit");
 				}
 			}
+		}
+	}
+
+	private void initNativeCore() {
+		if (!"qnx".equals(System.getProperty("os.name"))) {
+			OsmandSettings osmandSettings = app.getSettings();
 			if (osmandSettings.NATIVE_RENDERING_FAILED.get()) {
 				osmandSettings.SAFE_MODE.set(true);
 				osmandSettings.NATIVE_RENDERING_FAILED.set(false);

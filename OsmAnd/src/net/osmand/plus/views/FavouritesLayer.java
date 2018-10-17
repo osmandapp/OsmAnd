@@ -108,7 +108,7 @@ public class FavouritesLayer extends OsmandMapLayer implements ContextMenuLayer.
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
 		cache.clear();
-		if (this.settings.SHOW_FAVORITES.get()) {
+		if (this.settings.SHOW_FAVORITES.get() && favorites.isFavoritesLoaded()) {
 			if (tileBox.getZoom() >= startZoom) {
 				float iconSize = FavoriteImageDrawable.getOrCreate(view.getContext(), 0,
 						 true).getIntrinsicWidth() * 3 / 2.5f;

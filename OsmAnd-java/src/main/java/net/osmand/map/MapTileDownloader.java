@@ -52,6 +52,7 @@ public class MapTileDownloader {
 
 	private int currentErrors = 0;
 	private long timeForErrorCounter = 0;
+	private boolean noHttps;
 
 
 	public static MapTileDownloader getInstance(String userAgent) {
@@ -88,7 +89,7 @@ public class MapTileDownloader {
 		public final int zoom;
 		public final int xTile;
 		public final int yTile;
-		public final String url;
+		public String url;
 		public String referer = null;
 		public boolean error;
 
@@ -136,6 +137,10 @@ public class MapTileDownloader {
 		pendingToDownload = Collections.synchronizedSet(new HashSet<File>());
 		currentlyDownloaded = Collections.synchronizedSet(new HashSet<File>());
 
+	}
+	
+	public void setNoHttps(boolean noHttps) {
+		this.noHttps = noHttps;
 	}
 
 	protected BlockingQueue<Runnable> createQueue() {
@@ -227,7 +232,9 @@ public class MapTileDownloader {
 		if (request.url == null) {
 			return;
 		}
-
+		if(noHttps) {
+			request.url = request.url.replace("https://", "http://");
+		}
 		if (!isFileCurrentlyDownloaded(request.fileToSave)
 				&& !isFilePendingToDownload(request.fileToSave)) {
 			pendingToDownload.add(request.fileToSave);
@@ -307,5 +314,7 @@ public class MapTileDownloader {
 			}
 		}
 	}
+
+	
 	
 }

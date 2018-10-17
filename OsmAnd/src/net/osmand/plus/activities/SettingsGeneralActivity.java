@@ -88,7 +88,7 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 		for (int i = 0; i < entries.length; i++) {
 			entries[i] = appModes[i].toHumanString(getMyApplication());
 		}
-		registerListPreference(settings.APPLICATION_MODE, screen, entries, appModes);
+		registerListPreference(settings.DEFAULT_APPLICATION_MODE, screen, entries, appModes);
 
 		// List preferences
 		registerListPreference(settings.ROTATE_MAP, screen,
@@ -105,7 +105,7 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 		addProxyPrefs((PreferenceGroup) screen.findPreference("proxy"));
 		addMiscPreferences((PreferenceGroup) screen.findPreference("misc"));
 
-		applicationModePreference = (ListPreference) screen.findPreference(settings.APPLICATION_MODE.getId());
+		applicationModePreference = (ListPreference) screen.findPreference(settings.DEFAULT_APPLICATION_MODE.getId());
 		applicationModePreference.setOnPreferenceChangeListener(this);
 	}
 
@@ -527,8 +527,8 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 			}
 		} else if (preference == applicationDir) {
 			return false;
-		} else if (id.equals(settings.APPLICATION_MODE.getId())) {
-			settings.DEFAULT_APPLICATION_MODE.set(settings.APPLICATION_MODE.get());
+		} else if (id.equals(settings.DEFAULT_APPLICATION_MODE.getId())) {
+			settings.APPLICATION_MODE.set(settings.DEFAULT_APPLICATION_MODE.get());
 			updateAllSettings();
 		} else if (id.equals(settings.PREFERRED_LOCALE.getId())) {
 			// restart application to update locale

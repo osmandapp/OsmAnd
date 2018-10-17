@@ -396,7 +396,7 @@ public class BinaryRoutePlanner {
 		final RouteDataObject road = segment.road;
 		boolean initDirectionAllowed = checkIfInitialMovementAllowedOnSegment(ctx, reverseWaySearch, visitedSegments, segment, road);
 		if (TEST_SPECIFIC && road.getId() >> 6 == TEST_ID) {
-			printRoad(" ! " + +segment.distanceFromStart + " ", segment, reverseWaySearch);
+			printRoad(" ! "  + segment.distanceFromStart + " ", segment, reverseWaySearch);
 		}
 		boolean directionAllowed = initDirectionAllowed;
 		if (!directionAllowed) {
@@ -514,9 +514,11 @@ public class BinaryRoutePlanner {
 				directionAllowed = oneway >= 0;
 			}
 		}
-
-		if (directionAllowed && visitedSegments.containsKey(calculateRoutePointId(segment, segment.isPositive()))) {
-			directionAllowed = false;
+		RouteSegment visitedSegment = visitedSegments.get(calculateRoutePointId(segment, segment.isPositive()));
+		if (directionAllowed && visitedSegment != null) {
+			if (visitedSegment.distanceFromStart <= segment.distanceFromStart) {
+				directionAllowed = false;
+			}
 		}
 		return directionAllowed;
 	}
