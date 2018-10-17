@@ -170,8 +170,6 @@ class LiveNowTabFragment : Fragment(), TelegramListener, TelegramIncomingMessage
 
 	override fun onTelegramError(code: Int, message: String) {}
 
-	override fun onSendLiveLocationError(code: Int, message: String) {}
-
 	override fun onReceiveChatLocationMessages(chatId: Long, vararg messages: TdApi.Message) {
 		app.runInUIThread { updateList() }
 	}
