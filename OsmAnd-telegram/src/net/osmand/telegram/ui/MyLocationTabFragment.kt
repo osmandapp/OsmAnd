@@ -197,6 +197,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 
 		mainView.findViewById<View>(R.id.sharing_status_container).setOnClickListener {
 			settings.updateSharingStatusHistory()
+			updateSharingStatus()
 			fragmentManager?.also { fm ->
 				SharingStatusBottomSheet.showInstance(fm, this)
 			}
