@@ -2373,14 +2373,15 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 					.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
-							if (getParentFragment() instanceof QuickSearchDialogFragment) {
-								QuickSearchDialogFragment parentFragment = (QuickSearchDialogFragment) getParentFragment();
-								SearchHistoryHelper helper = SearchHistoryHelper.getInstance(parentFragment.getMyApplication());
+							Fragment parentFragment = getParentFragment();
+							if (parentFragment instanceof QuickSearchDialogFragment) {
+								QuickSearchDialogFragment searchDialogFragment = (QuickSearchDialogFragment) parentFragment;
+								SearchHistoryHelper helper = SearchHistoryHelper.getInstance(searchDialogFragment.getMyApplication());
 								for (QuickSearchListItem searchListItem : selectedItems) {
 									helper.remove(searchListItem.getSearchResult().object);
 								}
-								parentFragment.reloadHistory();
-								parentFragment.enableSelectionMode(false, -1);
+								searchDialogFragment.reloadHistory();
+								searchDialogFragment.enableSelectionMode(false, -1);
 							}
 						}
 					})
