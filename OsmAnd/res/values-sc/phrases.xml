@@ -3899,4 +3899,6 @@
 <string name="poi_hill">Montigru</string>
 
 <string name="poi_atm">Bancomat</string>
-	</resources>
+	<string name="poi_shoe_repair">Acontzu de iscarpas</string>
+
+</resources>

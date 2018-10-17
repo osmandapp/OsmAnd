@@ -970,7 +970,7 @@
     <string name="subscribe_email_desc">Proqramın endirimləri haqqında e-poçt siyahımıza abunə olun və əlavə 3 xəritə endirməsi əldə edin!</string>
     <string name="sea_depth_thanks">“Dəniz dərinliyi konturları”nı aldığınız üçün təşəkkür edirik</string>
     <string name="index_item_depth_contours_osmand_ext">Dəniz dərinliyi konturları</string>
-    <string name="index_item_depth_points_southern_hemisphere">Dəniz dərinliyi cənub yarımkürəsində göstərilir</string>
+    <string name="index_item_depth_points_southern_hemisphere">Cənub yarımkürəsinin dəniz dərinliyi nöqtələri</string>
     <string name="download_depth_countours">Dəniz dərinliyi konturları</string>
     <string name="nautical_maps">Dəniz xəritələri</string>
     <string name="do_not_send_anonymous_app_usage">Anonim proqram istifadəsi statistikalarını göndərmə</string>
@@ -1018,7 +1018,7 @@
     <string name="shared_string_target_points">Təyinat nöqtələri</string>
     <string name="amenity_type_user_defined">İstifadəçi müəyyənləşdirib</string>
     <string name="mapillary">Mapillary</string>
-    <string name="private_access_routing_req">Təyinat nöqtəniz xüsusi girişi olan ərazidə yerləşir. Bu səyahət üçün xüsusi yollara giriş icazəsi vermək istəyirsiniz?</string>
+    <string name="private_access_routing_req">Təyinat nöqtəniz xüsusi girişi olan ərazidə yerləşir. Bu səyahət üçün xüsusi yollara girişə icazə verilsin\?</string>
     <string name="shared_string_plugin">Qoşma</string>
     <string name="srtm_purchase_header">Xəritədə kontur xətlərini görmək üçün “Kontur xətləri” qoşmasını alıb quraşdırmalısınız</string>
     <string name="plugin_settings">Qoşmalar</string>
@@ -1552,7 +1552,7 @@
     <string name="accessibility_options">Xüsusi imkanlar seçimləri</string>
     <string name="accessibility_mode">Xüsusi imkanlar rejimi</string>
     <string name="accessibility_mode_descr">Xüsusi imkanlar xüsusiyyətlərini aktivləşdirir.</string>
-    <string name="index_item_depth_points_northern_hemisphere">Dəniz dərinliyi şimal yarımkürəsində göstərilir</string>
+    <string name="index_item_depth_points_northern_hemisphere">Şimal yarımkürəsinin dəniz dərinliyi nöqtələri</string>
     <string name="no_waypoints_found">Yol nöqtələri tapılmadı</string>
     <string name="context_menu_item_delete_waypoint">GPX yol nöqtəsi silinsin?</string>
     <string name="context_menu_item_edit_waypoint">GPX nöqtəsinə düzəliş et</string>
@@ -1781,7 +1781,7 @@
     <string name="go_to_next_field">Növbəti sahə</string>
     <string name="rename_marker">İşarəni yenidən adlandır</string>
     <string name="import_as_gpx">GPX fayl kimi idxal et</string>
-    <string name="import_as_favorites">Favorit kimi idxal et</string>
+    <string name="import_as_favorites">Favoritlər kimi idxal et</string>
     <string name="import_file">Fayl idxal et</string>
 	<string name="wrong_input">Yanlış daxiletmə</string>
 	<string name="waypoints_added_to_map_markers">Yol nöqtələri xəritə işarələrinə əlavə edildi</string>
@@ -1894,7 +1894,7 @@
     <string name="poi_namefinder_query_empty">POI tapmaq üçün yazın</string>
     <string name="quick_action_category_descr">Favoriti yadda saxlamaq üçün kateqoriya seçin.</string>
     <string name="quick_action_sh_poi_descr">Xəritədə göstərmək üçün bir və ya bir neçə POI kateqoriyası əlavə edin.</string>
-    <string name="quick_action_empty_param_error">Parametrlər boş olmamalıdır</string>
+    <string name="quick_action_empty_param_error">Bütün parametrləri doldurun</string>
     <string name="quick_action_map_overlay">Xəritə örtüyünü dəyiş</string>
     <string name="quick_action_map_overlay_title">Xəritə örtükləri</string>
     <string name="quick_action_map_overlay_action">Örtük əlavə et</string>
@@ -1978,7 +1978,7 @@
     <string name="map_imported_successfully">Xəritə idxal edildi</string>
     <string name="empty_state_my_tracks">GPX faylları əlavə et</string>
     <string name="empty_state_my_tracks_desc">GPX faylları idxal edin və ya izlər qeyd edin.</string>
-    <string name="enter_the_file_name">Fayl adını daxil edin.</string>
+    <string name="enter_the_file_name">Fayl adını yazın.</string>
     <string name="distance_indication_descr">Aktiv işarələrə qədər məsafənin necə göstəriləcəyini seçin.</string>
     <string name="tunnel_warning">İrəlidə tunel</string>
     <string name="show_guide_line_descr">Mövqeyinizdən aktiv işarə məkanlarına istiqamət xəttini göstər.</string>
