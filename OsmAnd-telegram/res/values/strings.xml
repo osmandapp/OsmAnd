@@ -1,4 +1,6 @@
 <resources>
+	<string name="not_sent_yet">Not sent yet</string>
+	<string name="not_found_yet">Not found yet</string>
 	<string name="re_send_location">Re-send location</string>
 	<string name="last_sent_location">Last sent location</string>
 	<string name="last_available_location">Last available location</string>

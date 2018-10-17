@@ -60,6 +60,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 	private lateinit var searchBox: FrameLayout
 	private lateinit var stopSharingSwitcher: Switch
 	private lateinit var sharingStatusDescription: TextView
+	private lateinit var sharingStatusIcon: ImageView
 	private lateinit var startSharingBtn: View
 
 	private lateinit var searchBoxBg: GradientDrawable
@@ -143,7 +144,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 			text = spannable
 		}
 
-		mainView.findViewById<ImageView>(R.id.sharing_status_icon).setImageDrawable(app.uiUtils.getActiveIcon(R.drawable.ic_action_live_now))
+		sharingStatusIcon = mainView.findViewById<ImageView>(R.id.sharing_status_icon)
 
 		textContainer = mainView.findViewById<LinearLayout>(R.id.text_container).apply {
 			if (Build.VERSION.SDK_INT >= 16) {
@@ -195,6 +196,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 		}
 
 		mainView.findViewById<View>(R.id.sharing_status_container).setOnClickListener {
+			settings.updateSharingStatusHistory()
 			fragmentManager?.also { fm ->
 				SharingStatusBottomSheet.showInstance(fm, this)
 			}
@@ -433,8 +435,11 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 	}
 
 	private fun updateSharingStatus() {
-		if (sharingMode && settings.sharingStatusChanges.isNotEmpty()) {
-			sharingStatusDescription.text = settings.sharingStatusChanges.last().getDescription(app)
+		if (sharingMode) {
+			settings.updateSharingStatusHistory()
+			val sharingStatus = settings.sharingStatusChanges.last()
+			sharingStatusDescription.text = sharingStatus.getDescription(app)
+			sharingStatusIcon.setImageDrawable(app.uiUtils.getIcon(sharingStatus.statusType.iconId, sharingStatus.statusType.iconColorRes))
 		}
 	}
 
@@ -589,7 +594,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 
 				holder.stopSharingFirstPart?.apply {
 					visibility = getStopSharingVisibility(expiresIn)
-					text = OsmandFormatter.getFormattedTime(expiresIn)
+					text = OsmandFormatter.getFormattedTime(expiresIn * 1000)
 				}
 
 				holder.stopSharingSecondPart?.apply {

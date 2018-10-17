@@ -191,7 +191,6 @@ class TelegramSettings(private val app: TelegramApplication) {
 		val shareChatInfo = shareChatsInfo[message.chatId]
 		val content = message.content
 		if (shareChatInfo != null && content is TdApi.MessageLocation) {
-			shareChatInfo.start = message.date.toLong()
 			shareChatInfo.currentMessageId = message.id
 			shareChatInfo.lastSuccessfulLocation = LatLon(content.location.latitude, content.location.longitude)
 			shareChatInfo.lastSuccessfulSendTimeMs = Math.max(message.editDate, message.date) * 1000L
@@ -210,7 +209,7 @@ class TelegramSettings(private val app: TelegramApplication) {
 			} else {
 				var sendChatsErrors = false
 				shareChatsInfo.forEach { _, shareInfo ->
-					if (shareInfo.hasSharingError) {
+					if (shareInfo.hasSharingError || shareInfo.lastSuccessfulSendTimeMs == -1L) {
 						sendChatsErrors = true
 						locationTime = shareInfo.lastSuccessfulSendTimeMs
 						val title = app.telegramHelper.getChat(shareInfo.chatId)?.title

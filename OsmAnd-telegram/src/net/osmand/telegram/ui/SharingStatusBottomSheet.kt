@@ -5,14 +5,15 @@ import android.support.design.widget.BottomSheetBehavior
 import android.support.v4.app.DialogFragment
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
+import android.support.v4.content.ContextCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.TextView
 import net.osmand.telegram.R
 import net.osmand.telegram.TelegramApplication
+import net.osmand.telegram.TelegramSettings
 import net.osmand.telegram.ui.views.BottomSheetDialog
 import net.osmand.telegram.utils.OsmandFormatter
 
@@ -42,7 +43,9 @@ class SharingStatusBottomSheet : DialogFragment() {
 			})
 
 		val itemsCont = mainView.findViewById<ViewGroup>(R.id.items_container)
-		settings.sharingStatusChanges.reversed().forEach { sharingStatus ->
+		val items = settings.sharingStatusChanges.toArray().reversed()
+		for (i in items.indices) {
+			val sharingStatus = items[i] as TelegramSettings.SharingStatus
 			inflater.inflate(R.layout.item_with_three_text_lines, itemsCont, false).apply {
 				val sharingStatusType = sharingStatus.statusType
 				val time = sharingStatus.locationTime
@@ -52,20 +55,30 @@ class SharingStatusBottomSheet : DialogFragment() {
 				findViewById<TextView>(R.id.status_change_time).text = OsmandFormatter.getFormattedTime(sharingStatus.statusChangeTime, false)
 				findViewById<TextView>(R.id.last_location_line).text = getString(sharingStatusType.descriptionId)
 
-				if (time > 0) {
-					findViewById<TextView>(R.id.last_location_line_time).text = OsmandFormatter.getFormattedTime(time, false)
-				} else {
-					findViewById<LinearLayout>(R.id.description_container).visibility = View.INVISIBLE
+				val descriptionTime = when {
+					time > 0 -> OsmandFormatter.getFormattedTime(time, false)
+					sharingStatusType == TelegramSettings.SharingStatusType.NO_GPS -> getString(R.string.not_found_yet)
+					else -> getString(R.string.not_sent_yet)
 				}
-				if (sharingStatusType.canResendLocation) {
-					findViewById<TextView>(R.id.re_send_location).apply {
-						setOnClickListener {
-							app.forceUpdateMyLocation()
-							dismiss()
+
+				findViewById<TextView>(R.id.last_location_line_time).text = descriptionTime
+
+				findViewById<TextView>(R.id.re_send_location).apply {
+					if (sharingStatusType.canResendLocation) {
+						if (i == 0) {
+							setOnClickListener {
+								app.forceUpdateMyLocation()
+								dismiss()
+							}
+						} else {
+							setTextColor(ContextCompat.getColor(context!!, R.color.secondary_text_light))
 						}
+					} else {
+						visibility = View.GONE
 					}
-				} else {
-					findViewById<TextView>(R.id.re_send_location).visibility = View.GONE
+				}
+				if (i == items.size - 1) {
+					findViewById<View>(R.id.bottom_divider).visibility = View.GONE
 				}
 				itemsCont.addView(this)
 			}
