@@ -38,4 +38,7 @@
 
 	<color name="app_bar_title_light">#333333</color>
 
+	<color name="sharing_status_icon_error">#ee5622</color>
+	<color name="sharing_status_icon_success">#78cc5c</color>
+
 </resources>

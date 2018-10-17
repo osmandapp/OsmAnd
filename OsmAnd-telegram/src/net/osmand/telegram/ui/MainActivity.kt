@@ -275,14 +275,6 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 		}
 	}
 
-	override fun onSendLiveLocationError(code: Int, message: String) {
-		log.error("Send live location error: $code - $message")
-		app.isInternetConnectionAvailable(true)
-		runOnUi {
-			listeners.forEach { it.get()?.onSendLiveLocationError(code, message) }
-		}
-	}
-
 	override fun onReceiveChatLocationMessages(chatId: Long, vararg messages: TdApi.Message) {
 		addGrayPhoto(chatId)
 		if (!app.showLocationHelper.showingLocation && settings.hasAnyChatToShowOnMap()) {
