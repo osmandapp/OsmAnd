@@ -1,6 +1,7 @@
 package net.osmand.plus.views.mapwidgets;
 
 import android.graphics.drawable.Drawable;
+import android.support.annotation.ColorInt;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
 import android.support.v4.content.ContextCompat;
@@ -233,6 +234,10 @@ public class MapInfoWidgetsFactory {
 		int backBtnIconClrLightId = R.color.icon_color;
 		@ColorRes
 		int backBtnIconClrDarkId = 0;
+		@ColorInt
+		int backBtnIconClrLight = -1;
+		@ColorInt
+		int backBtnIconClrDark = -1;
 
 		@DrawableRes
 		int closeBtnIconLightId = R.drawable.ic_action_remove_dark;
@@ -330,6 +335,11 @@ public class MapInfoWidgetsFactory {
 		public void setBackBtnIconClrIds(int backBtnIconClrLightId, int backBtnIconClrDarkId) {
 			this.backBtnIconClrLightId = backBtnIconClrLightId;
 			this.backBtnIconClrDarkId = backBtnIconClrDarkId;
+		}
+
+		public void setBackBtnIconClrs(int backBtnIconClrLight, int backBtnIconClrDark) {
+			this.backBtnIconClrLight = backBtnIconClrLight;
+			this.backBtnIconClrDark = backBtnIconClrDark;
 		}
 
 		public void setCloseBtnIconIds(int closeBtnIconLightId, int closeBtnIconDarkId) {
@@ -622,7 +632,11 @@ public class MapInfoWidgetsFactory {
 				if (controller.backBtnIconDarkId == 0) {
 					backButton.setImageDrawable(null);
 				} else {
-					backButton.setImageDrawable(app.getUIUtilities().getIcon(controller.backBtnIconDarkId, controller.backBtnIconClrDarkId));
+					if (controller.backBtnIconClrDark != -1) {
+						backButton.setImageDrawable(app.getUIUtilities().getPaintedIcon(controller.backBtnIconDarkId, controller.backBtnIconClrDark));
+					} else {
+						backButton.setImageDrawable(app.getUIUtilities().getIcon(controller.backBtnIconDarkId, controller.backBtnIconClrDarkId));
+					}
 				}
 				if (controller.closeBtnIconDarkId == 0) {
 					closeButton.setImageDrawable(null);
@@ -644,7 +658,11 @@ public class MapInfoWidgetsFactory {
 				if (controller.backBtnIconLightId == 0) {
 					backButton.setImageDrawable(null);
 				} else {
-					backButton.setImageDrawable(app.getUIUtilities().getIcon(controller.backBtnIconLightId, controller.backBtnIconClrLightId));
+					if (controller.backBtnIconClrLight != -1) {
+						backButton.setImageDrawable(app.getUIUtilities().getPaintedIcon(controller.backBtnIconLightId, controller.backBtnIconClrLight));
+					} else {
+						backButton.setImageDrawable(app.getUIUtilities().getIcon(controller.backBtnIconLightId, controller.backBtnIconClrLightId));
+					}
 				}
 				if (controller.closeBtnIconLightId == 0) {
 					closeButton.setImageDrawable(null);
