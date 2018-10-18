@@ -74,9 +74,9 @@
 	<string name="poi_garages">Garaxes</string>
 
 	<string name="poi_public_transport_platform">Paraxe de transporte público</string>
-	<string name="poi_public_transport_platform_bus">Paraxe de autobús</string>
-	<string name="poi_public_transport_platform_trolleybus">Paraxe de trolebús</string>
-	<string name="poi_public_transport_platform_tram">Paraxe de tranvía</string>
+	<string name="poi_public_transport_platform_bus">Paraxe de bus</string>
+	<string name="poi_public_transport_platform_trolleybus">Paraxe de trolebus</string>
+	<string name="poi_public_transport_platform_tram">Paraxe do tranvía</string>
 	<string name="poi_public_transport_station">Estación de transporte público</string>
 	<string name="poi_subway_entrance">Entrada de metro</string>
 	<string name="poi_subway_station">Estación de metro</string>
@@ -447,8 +447,8 @@
 	<string name="poi_fuel_methanol">Metanol</string>
 	<string name="poi_fuel_lh2">Hidróxeno líquido</string>
 	<string name="poi_fuel_electricity">Electricidade</string>
-	<string name="poi_bus_stop">Paraxe de autobús</string>
-	<string name="poi_tram_stop">Paraxe de tranvía</string>
+	<string name="poi_bus_stop">Paraxe de bus</string>
+	<string name="poi_tram_stop">Paraxe do tranvía</string>
 	<string name="poi_bus_station">Estación de autobuses</string>
 	<string name="poi_railway_station">Estación de trens</string>
 	<string name="poi_ferry_terminal">Terminal dos ferris</string>
@@ -503,7 +503,7 @@
 	<string name="poi_industrial">Área industrial</string>
 	<string name="poi_man_made">Artificial</string>
 		<string name="poi_water_supply">Subministro de auga</string>
-		<string name="poi_emergency_access_point">Punto de acceso de emerxencia</string>
+		<string name="poi_emergency_access_point">Punto do acceso de emerxencia</string>
 
 	<string name="poi_recycling_fridge_and_freezer">Neveira e conxelador</string>
 	<string name="poi_meadow">Lameiro</string>
@@ -843,7 +843,7 @@
 
 	<string name="poi_archery">Tiro con arco</string>
 	<string name="poi_shooting">Salón de tiro</string>
-	<string name="poi_tourism_yes">Obxecto turístico</string>
+	<string name="poi_tourism_yes">Atracción turística</string>
 	<string name="poi_attraction_animal">Animal (atracción)</string>
 	<string name="poi_attraction_water_slide">Tobogán de auga</string>
 
@@ -1788,5 +1788,11 @@
 	<string name="poi_socket_type2_combo_yes">Tipo 2 combinado</string>
 	<string name="poi_socket_type3_yes">Tipo 3</string>
 	<string name="poi_payment_contactless_no">Non se admiten tarxetas sen contacto (Contactless)</string>
+
+	<string name="poi_health_specialty_emergency_medicine_yes">Medicina de urxencia</string>
+	<string name="poi_health_specialty_emergency_medicine_no">Especialidade en saúde: sen medicina de urxencia</string>
+	<string name="poi_emergency_yes">Urxencias: si</string>
+	<string name="poi_emergency_no">Urxencias: non</string>
+	<string name="poi_water_place_durability_emergency">Durabilidade da fonte de auga: emerxencia</string>
 
 	</resources>
