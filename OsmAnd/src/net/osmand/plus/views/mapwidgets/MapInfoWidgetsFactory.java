@@ -4,6 +4,7 @@ import android.graphics.drawable.Drawable;
 import android.support.annotation.ColorInt;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
+import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.widget.SwitchCompat;
@@ -225,6 +226,14 @@ public class MapInfoWidgetsFactory {
 		int bgLightLandId = R.drawable.btn_round;
 		@DrawableRes
 		int bgDarkLandId = R.drawable.btn_round_night;
+		@Nullable
+		Drawable bgLight = null;
+		@Nullable
+		Drawable bgDark = null;
+		@Nullable
+		Drawable bgLightLand = null;
+		@Nullable
+		Drawable bgDarkLand = null;
 
 		@DrawableRes
 		int backBtnIconLightId = R.drawable.ic_arrow_back;
@@ -333,6 +342,13 @@ public class MapInfoWidgetsFactory {
 			this.bgDarkId = bgDarkId;
 			this.bgLightLandId = bgLightLandId;
 			this.bgDarkLandId = bgDarkLandId;
+		}
+
+		public void setBgs(Drawable bgLight, Drawable bgDark, Drawable bgLightLand, Drawable bgDarkLand) {
+			this.bgLight = bgLight;
+			this.bgDark = bgDark;
+			this.bgLightLand = bgLightLand;
+			this.bgDarkLand = bgDarkLand;
 		}
 
 		public void setBackBtnIconIds(int backBtnIconLightId, int backBtnIconDarkId) {
@@ -646,8 +662,13 @@ public class MapInfoWidgetsFactory {
 			OsmandApplication app = map.getMyApplication();
 			controller.nightMode = nightMode;
 
-			int bgId = nightMode ? controller.bgDarkId : controller.bgLightId;
-			int bgLandId = nightMode ? controller.bgDarkLandId : controller.bgLightLandId;
+			boolean portrait = AndroidUiHelper.isOrientationPortrait(map);
+			int bgId = portrait
+					? nightMode ? controller.bgDarkId : controller.bgLightId
+					: nightMode ? controller.bgDarkLandId : controller.bgLightLandId;
+			Drawable bg = portrait
+					? nightMode ? controller.bgDark : controller.bgLight
+					: nightMode ? controller.bgDarkLand : controller.bgLightLand;
 			int backBtnIconId = nightMode ? controller.backBtnIconDarkId : controller.backBtnIconLightId;
 			int backBtnIconClr = nightMode ? controller.backBtnIconClrDark : controller.backBtnIconClrLight;
 			int backBtnIconClrId = nightMode ? controller.backBtnIconClrDarkId : controller.backBtnIconClrLightId;
@@ -660,7 +681,11 @@ public class MapInfoWidgetsFactory {
 			int descrTextClr = nightMode ? controller.descrTextClrDark : controller.descrTextClrLight;
 			int descrTextClrId = nightMode ? controller.descrTextClrDarkId : controller.descrTextClrLightId;
 
-			topBarLayout.setBackgroundResource(AndroidUiHelper.isOrientationPortrait(map) ? bgId : bgLandId);
+			if (bg != null) {
+				topBarLayout.setBackgroundDrawable(bg);
+			} else {
+				topBarLayout.setBackgroundResource(bgId);
+			}
 			if (backBtnIconId == 0) {
 				backButton.setImageDrawable(null);
 			} else {
