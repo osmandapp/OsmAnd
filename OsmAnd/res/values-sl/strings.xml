@@ -2571,7 +2571,7 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="mapillary_widget_descr">Omogoča hitre prispevke v Mapillary.</string>
     <string name="mapillary_descr">Spletne fotografije ulic za vsakogar. Odkrijte mesta, sodelujte in zajemite svet.</string>
     <string name="plugin_mapillary_descr">Fotografije ulic za vsakogar. Odkrijte mesta, sodelujte in zajemite svet.</string>
-    <string name="private_access_routing_req">Ciljno mesto je znotraj območja z zasebnim dostopom. Ali želite dovoliti prehod tudi prek zasebnih poti?</string>
+    <string name="private_access_routing_req">Ciljno mesto je znotraj območja z zasebnim dostopom. Ali naj se za prehod upoštevajo tudi zasebne poti\?</string>
     <string name="quick_action_showhide_osmbugs_descr">S pritiskom na ta gumb se pokažejo ali skrijejo opombe OSM na zemljevidu.</string>
     <string name="animate_my_location">Animiraj trenutno mesto</string>
     <string name="animate_my_location_desc">Omogoči animiranje trenutnega mesta med navigacijo.</string>
@@ -2589,7 +2589,7 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="hillshade_menu_download_descr">Za prikaz senčenja reliefa na zemljevidu je treba namestiti prekrivno plast senčenja za to območje.</string>
     <string name="hillshade_purchase_header">Za prikaz senčenja reliefa na zemljevidu, je treba kupiti in namestiti vstavek Izohipse.</string>
     <string name="hide_from_zoom_level">Skrij od ravni približanja</string>
-    <string name="srtm_menu_download_descr">Za prikaz izohips reliefa na zemljevidu, je treba prejeti zemljevid reliefa za to območje.</string>
+    <string name="srtm_menu_download_descr">Orejmi zemljevid reliefa za to območje.</string>
     <string name="srtm_purchase_header">Za prikaz reliefa na zemljevidu, je treba kupiti in namestiti vstavek »Izohipse«.</string>
     <string name="show_from_zoom_level">Prikaži od ravni približanja</string>
     <string name="display_zoom_level">Raven približanja: %1$s</string>
@@ -2623,7 +2623,7 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="mapillary_menu_edit_text_hint">Uporabniško ime</string>
     <string name="mapillary_menu_descr_username">Pogled le dodane s strani</string>
     <string name="mapillary_menu_title_username">Uporabniško ime</string>
-    <string name="mapillary_menu_filter_description">Slike je mogoče filtrirati po datumu in uporabniku. Filtri so dejavni le pri največji povečavi.</string>
+    <string name="mapillary_menu_filter_description">Filtriranje slik po datumu in uporabniku. Filtri so dejavni le pri največji povečavi.</string>
     <string name="store_tracks_in_monthly_directories">Shrani zabeležene sledi v mapah, razdeljenih po mesecih</string>
     <string name="store_tracks_in_monthly_directories_descrp">Sledi so shranjene v podmape, poimenovane po mesecu zapisa (npr. 2018-01).</string>
     <string name="average">Povprečje</string>
@@ -2834,7 +2834,7 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="show_guide_line_descr">Pokaži vodilne črte od trenutnega mesta do mest dejavnih označb.</string>
     <string name="show_arrows_descr">Pokaži eno ali dve črti, ki določata smer do dejavnih označb.</string>
     <string name="distance_indication_descr">Izbor načina za prikaz razdalje do dejavnih označb.</string>
-    <string name="active_markers_descr">Izbor števila prikazanih dejavnih označb.</string>
+    <string name="active_markers_descr">Izbor števila prikazanih oznak smeri.</string>
     <string name="rename_marker">Preimenuj označbo</string>
     <string name="mark_passed">Označba je dosežena</string>
     <string name="waypoints_added_to_map_markers">Vmesne točke so dodane med označbe zemljevida.</string>
