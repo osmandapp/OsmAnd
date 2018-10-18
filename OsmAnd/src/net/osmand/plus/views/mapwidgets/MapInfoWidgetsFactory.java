@@ -645,68 +645,48 @@ public class MapInfoWidgetsFactory {
 		public void updateColors(TopToolbarController controller) {
 			OsmandApplication app = map.getMyApplication();
 			controller.nightMode = nightMode;
-			if (nightMode) {
-				topBarLayout.setBackgroundResource(AndroidUiHelper.isOrientationPortrait(map) ? controller.bgDarkId : controller.bgDarkLandId);
-				if (controller.backBtnIconDarkId == 0) {
-					backButton.setImageDrawable(null);
-				} else {
-					if (controller.backBtnIconClrDark != -1) {
-						backButton.setImageDrawable(app.getUIUtilities().getPaintedIcon(controller.backBtnIconDarkId, controller.backBtnIconClrDark));
-					} else {
-						backButton.setImageDrawable(app.getUIUtilities().getIcon(controller.backBtnIconDarkId, controller.backBtnIconClrDarkId));
-					}
-				}
-				if (controller.closeBtnIconDarkId == 0) {
-					closeButton.setImageDrawable(null);
-				} else {
-					closeButton.setImageDrawable(app.getUIUtilities().getIcon(controller.closeBtnIconDarkId, controller.closeBtnIconClrDarkId));
-				}
-				if (controller.refreshBtnIconDarkId == 0) {
-					refreshButton.setImageDrawable(null);
-				} else {
-					refreshButton.setImageDrawable(app.getUIUtilities().getIcon(controller.refreshBtnIconDarkId, controller.refreshBtnIconClrDarkId));
-				}
-				int titleColor = controller.titleTextClrDark != -1 ? controller.titleTextClrDark
-						: map.getResources().getColor(controller.titleTextClrDarkId);
-				int descrColor = controller.descrTextClrDark != -1 ? controller.descrTextClrDark
-						: map.getResources().getColor(controller.descrTextClrDarkId);
-				titleView.setTextColor(titleColor);
-				descrView.setTextColor(descrColor);
-				saveView.setTextColor(titleColor);
+
+			int bgId = nightMode ? controller.bgDarkId : controller.bgLightId;
+			int bgLandId = nightMode ? controller.bgDarkLandId : controller.bgLightLandId;
+			int backBtnIconId = nightMode ? controller.backBtnIconDarkId : controller.backBtnIconLightId;
+			int backBtnIconClr = nightMode ? controller.backBtnIconClrDark : controller.backBtnIconClrLight;
+			int backBtnIconClrId = nightMode ? controller.backBtnIconClrDarkId : controller.backBtnIconClrLightId;
+			int closeBtnIconId = nightMode ? controller.closeBtnIconDarkId : controller.closeBtnIconLightId;
+			int closeBtnIconClrId = nightMode ? controller.closeBtnIconClrDarkId : controller.closeBtnIconClrLightId;
+			int refreshBtnIconId = nightMode ? controller.refreshBtnIconDarkId : controller.refreshBtnIconLightId;
+			int refreshBtnIconClrId = nightMode ? controller.refreshBtnIconClrDarkId : controller.refreshBtnIconClrLightId;
+			int titleTextClr = nightMode ? controller.titleTextClrDark : controller.titleTextClrLight;
+			int titleTextClrId = nightMode ? controller.titleTextClrDarkId : controller.titleTextClrLightId;
+			int descrTextClr = nightMode ? controller.descrTextClrDark : controller.descrTextClrLight;
+			int descrTextClrId = nightMode ? controller.descrTextClrDarkId : controller.descrTextClrLightId;
+
+			topBarLayout.setBackgroundResource(AndroidUiHelper.isOrientationPortrait(map) ? bgId : bgLandId);
+			if (backBtnIconId == 0) {
+				backButton.setImageDrawable(null);
 			} else {
-				topBarLayout.setBackgroundResource(AndroidUiHelper.isOrientationPortrait(map) ? controller.bgLightId : controller.bgLightLandId);
-				if (controller.backBtnIconLightId == 0) {
-					backButton.setImageDrawable(null);
+				if (backBtnIconClr != -1) {
+					backButton.setImageDrawable(app.getUIUtilities().getPaintedIcon(backBtnIconId, backBtnIconClr));
 				} else {
-					if (controller.backBtnIconClrLight != -1) {
-						backButton.setImageDrawable(app.getUIUtilities().getPaintedIcon(controller.backBtnIconLightId, controller.backBtnIconClrLight));
-					} else {
-						backButton.setImageDrawable(app.getUIUtilities().getIcon(controller.backBtnIconLightId, controller.backBtnIconClrLightId));
-					}
+					backButton.setImageDrawable(app.getUIUtilities().getIcon(backBtnIconId, backBtnIconClrId));
 				}
-				if (controller.closeBtnIconLightId == 0) {
-					closeButton.setImageDrawable(null);
-				} else {
-					closeButton.setImageDrawable(app.getUIUtilities().getIcon(controller.closeBtnIconLightId, controller.closeBtnIconClrLightId));
-				}
-				if (controller.refreshBtnIconLightId == 0) {
-					refreshButton.setImageDrawable(null);
-				} else {
-					refreshButton.setImageDrawable(app.getUIUtilities().getIcon(controller.refreshBtnIconLightId, controller.refreshBtnIconClrLightId));
-				}
-				int titleColor = controller.titleTextClrLight != -1 ? controller.titleTextClrLight
-						: map.getResources().getColor(controller.titleTextClrLightId);
-				int descrColor = controller.descrTextClrLight != -1 ? controller.descrTextClrLight
-						: map.getResources().getColor(controller.descrTextClrLightId);
-				titleView.setTextColor(titleColor);
-				descrView.setTextColor(descrColor);
-				saveView.setTextColor(titleColor);
 			}
-			if (controller.singleLineTitle) {
-				titleView.setSingleLine(true);
+			if (closeBtnIconId == 0) {
+				closeButton.setImageDrawable(null);
 			} else {
-				titleView.setSingleLine(false);
+				closeButton.setImageDrawable(app.getUIUtilities().getIcon(closeBtnIconId, closeBtnIconClrId));
 			}
+			if (refreshBtnIconId == 0) {
+				refreshButton.setImageDrawable(null);
+			} else {
+				refreshButton.setImageDrawable(app.getUIUtilities().getIcon(refreshBtnIconId, refreshBtnIconClrId));
+			}
+			int titleColor = titleTextClr != -1 ? titleTextClr : map.getResources().getColor(titleTextClrId);
+			int descrColor = descrTextClr != -1 ? descrTextClr : map.getResources().getColor(descrTextClrId);
+			titleView.setTextColor(titleColor);
+			descrView.setTextColor(descrColor);
+			saveView.setTextColor(titleColor);
+
+			titleView.setSingleLine(controller.singleLineTitle);
 
 			if (controller.closeBtnVisible) {
 				if (closeButton.getVisibility() == View.GONE) {
