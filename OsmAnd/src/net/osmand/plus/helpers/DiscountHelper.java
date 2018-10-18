@@ -166,15 +166,18 @@ public class DiscountHelper {
 		return result;
 	}
 
-	private static void showDiscountBanner(final MapActivity mapActivity, final String title,
-										   final String description, final String icon, final String url) {
+	private static void showDiscountBanner(final MapActivity mapActivity,
+										   final String title,
+										   final String description,
+										   final String icon,
+										   final String url) {
+		int iconId = mapActivity.getResources().getIdentifier(icon, "drawable", mapActivity.getMyApplication().getPackageName());
 		final DiscountBarController toolbarController = new DiscountBarController();
 		toolbarController.setTitle(title);
 		toolbarController.setDescription(description);
-		int iconId = mapActivity.getResources().getIdentifier(icon, "drawable", mapActivity.getMyApplication().getPackageName());
 		toolbarController.setBackBtnIconIds(iconId, iconId);
 		if (!Algorithms.isEmpty(url)) {
-			toolbarController.setOnBackButtonClickListener(new View.OnClickListener() {
+			View.OnClickListener clickListener = new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
 					mapActivity.getMyApplication().logEvent(mapActivity, "motd_click");
@@ -182,16 +185,9 @@ public class DiscountHelper {
 					mapActivity.hideTopToolbar(toolbarController);
 					openUrl(mapActivity, url);
 				}
-			});
-			toolbarController.setOnTitleClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					mapActivity.getMyApplication().logEvent(mapActivity, "motd_click");
-					mBannerVisible = false;
-					mapActivity.hideTopToolbar(toolbarController);
-					openUrl(mapActivity, url);
-				}
-			});
+			};
+			toolbarController.setOnBackButtonClickListener(clickListener);
+			toolbarController.setOnTitleClickListener(clickListener);
 		}
 		toolbarController.setOnCloseButtonClickListener(new View.OnClickListener() {
 			@Override
