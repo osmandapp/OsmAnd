@@ -2,7 +2,7 @@
 <resources><string name="poi_palaeontological_site">Xacemento paleontolóxico</string>
 
 	<string name="poi_bakery">Panadaría</string>
-	<string name="poi_alcohol">Tenda de licores</string>
+	<string name="poi_alcohol">Tenda de bebidas alcólicas</string>
 	<string name="poi_mall">Centro comercial</string>
 	<string name="poi_beverages">Tenda de bebidas</string>
 	<string name="poi_butcher">Carnizaría</string>
@@ -27,7 +27,7 @@
 	<string name="poi_florist">Floraría</string>
 	<string name="poi_furniture">Moblaría</string>
 	<string name="poi_garden_centre">Tenda para o xardín</string>
-	<string name="poi_gift">Tenda de regalos</string>
+	<string name="poi_gift">Tenda de agasallos</string>
 	<string name="poi_hunting">Equipamento para a caza</string>
 	<string name="poi_interior_decoration">Tenda de decoración interior</string>
 	<string name="poi_jewelry">Xoiaría</string>
@@ -108,7 +108,7 @@
 	<string name="poi_power_generator">Xerador eléctrico</string>
 
 	<string name="poi_post_office">Oficina de correos</string>
-	<string name="poi_post_box">Caixa de correo</string>
+	<string name="poi_post_box">Caixa do correo</string>
 	<string name="poi_telephone">Teléfono</string>
 	<string name="poi_communication_tower">Torre de telecomunicacións</string>
 	<string name="poi_recycling">Reciclaxe</string>
@@ -340,7 +340,7 @@
 	<string name="poi_brothel">Prostíbulo</string>
 	<string name="poi_mortuary">Tanatorio</string>
 	<string name="poi_crematorium">Crematorio</string>
-	<string name="poi_internet_cafe">Internet café</string>
+	<string name="poi_internet_cafe">Cibercafé</string>
 
 	<string name="poi_bank">Banco</string>
 	<string name="poi_amenity_atm">Caixeiro automático</string>
@@ -394,8 +394,8 @@
 		<string name="poi_water_transport">Transporte acuático</string>
 		<string name="poi_bicycle_transport">Transporte en bicicleta</string>
 		<string name="poi_aerialway_transport">Teleférico</string>
-		<string name="poi_node_networks">Nodos de rede de sendeiros/bicicletas</string>
-		<string name="poi_hiking_routes">Rutas de sendeirismo</string>
+		<string name="poi_node_networks">Nós da rede de sendeiros/bicicletas</string>
+		<string name="poi_hiking_routes">Roteiros de sendeirismo</string>
 		<string name="poi_power">Enerxía</string>
 		<string name="poi_communication">Comunicación</string>
 		<string name="poi_education">Educación</string>
@@ -409,7 +409,7 @@
 	<string name="poi_entertainment">Lecer</string>
 		<string name="poi_club">Club</string>
 	<string name="poi_sustenance">Comida</string>
-	<string name="poi_cafe_and_restaurant">Café e restaurante</string>
+	<string name="poi_cafe_and_restaurant">Cafetaría e restaurante</string>
 	<string name="poi_finance">Finanzas</string>
 	<string name="poi_natural">Natureza</string>
 	<string name="poi_seamark">Náutico</string>
@@ -418,7 +418,7 @@
 
 	<string name="poi_cheese">Tenda de queixos</string>
 	<string name="poi_chocolate">Chocolataría</string>
-	<string name="poi_coffee">Cafetaría</string>
+	<string name="poi_coffee">Tenda de café</string>
 	<string name="poi_pasta">Tenda de pasta</string>
 	<string name="poi_camera">Cámaras e lentes</string>
 	<string name="poi_fashion">Tenda de moda</string>
@@ -742,7 +742,7 @@
 	<string name="poi_crossing_traffic_signals">Con semáforos</string>
 	<string name="poi_crossing_uncontrolled">Sen semáforo</string>
 	<string name="poi_crossing_unmarked">Sen marcas</string>
-	<string name="poi_start_date">Data de inicio</string>
+	<string name="poi_start_date">Data de comezo</string>
 	<string name="poi_wheelchair_yes">Cadeira de rodas</string>
 
 	<string name="poi_access_private">Acceso privado</string>
@@ -790,7 +790,7 @@
 	<string name="poi_railway_platform">Plataforma de trens</string>
 	<string name="poi_recycling_electrical_items">Aparellos eléctricos</string>
 	<string name="poi_orchard">Pomar</string>
-	<string name="poi_monitoring_station">Estación de seguimento</string>
+	<string name="poi_monitoring_station">Estación de seguemento</string>
 	<string name="poi_attraction_big_wheel">Nora</string>
 	<string name="poi_attraction_train">Tren (atracción)</string>
 	<string name="poi_internet_access_yes">Acceso á Internet: si</string>
@@ -807,7 +807,7 @@
 	<string name="poi_accomodation">Aloxamento</string>
 		<string name="poi_farm">Produtos agrícolas polos labregos</string>
 	<string name="poi_greengrocer">Froitaría</string>
-	<string name="poi_confectionery">Pastelaría</string>
+	<string name="poi_confectionery">Dozaría ou confeitaría</string>
 	<string name="poi_pastry">Confeitaría</string>
 	<string name="poi_vending_machine">Máquina vendedora</string>
 	<string name="poi_baby_goods">Produtos de bebés</string>
@@ -871,7 +871,7 @@
 	<string name="poi_nudism_yes">Nudismo: permitido</string>
 	<string name="poi_nudism_no">Nudismo: prohibido</string>
 	<string name="poi_nudism_obligatory">Nudismo: obrigatorio</string>
-	<string name="poi_nudism_customary">Nudismo: tradicional</string>
+	<string name="poi_nudism_customary">Costume</string>
 	<string name="poi_nudism_permissive">Nudismo: permisivo</string>
 
 	<string name="poi_population">Poboación</string>
@@ -897,7 +897,7 @@
 	<string name="poi_trees_nectorine">Nectarina</string>
 	<string name="poi_trees_mango">Mango</string>
 	<string name="poi_trees_rubber">Goma</string>
-	<string name="poi_trees_date">Dátil</string>
+	<string name="poi_trees_date">Data</string>
 	<string name="poi_trees_coffea">Café</string>
 	<string name="poi_trees_pomegranate">Granada</string>
 
@@ -1794,5 +1794,50 @@
 	<string name="poi_emergency_yes">Urxencias: si</string>
 	<string name="poi_emergency_no">Urxencias: non</string>
 	<string name="poi_water_place_durability_emergency">Durabilidade da fonte de auga: emerxencia</string>
+
+	<string name="poi_foundation">Fundación</string>
+	<string name="poi_icn_ref">Nó da rede internacional de ciclismo</string>
+	<string name="poi_ncn_ref">Nó da rede nacional de ciclismo</string>
+	<string name="poi_rcn_ref">Nó da rede rexional de ciclismo</string>
+	<string name="poi_lcn_ref">Nó da rede local de ciclismo</string>
+	<string name="poi_iwn_ref">Nó da rede internacional de sendeirismo</string>
+	<string name="poi_nwn_ref">Nó da rede nacional de sendeirismo</string>
+	<string name="poi_rwn_ref">Nó da rede rexional de sendeirismo</string>
+	<string name="poi_lwn_ref">Nó da rede local de sendeirismo</string>
+
+	<string name="poi_architecture_brutalism">Arquitectura: brutalista</string>
+	<string name="poi_surface_unpaved">Superficie: sen pavimento</string>
+	<string name="poi_surface_paved">Superficie: pavimento</string>
+	<string name="poi_surface_asphalt">Superficie: asfalto</string>
+	<string name="poi_surface_concrete">Superficie: cimento</string>
+	<string name="poi_surface_sett">Superficie: lastro</string>
+	<string name="poi_surface_cobblestone">Superficie: pelouro ou croio</string>
+	<string name="poi_surface_paving_stones">Superficie: lastros prefabricados</string>
+	<string name="poi_surface_pebblestone">Superficie: seixo ou xoga</string>
+	<string name="poi_surface_stone">Superficie: pedra</string>
+	<string name="poi_surface_metal">Superficie: metal</string>
+	<string name="poi_surface_wood">Superficie: madeira</string>
+	<string name="poi_surface_gravel">Superficie: grixo ou pedregullo</string>
+	<string name="poi_surface_fine_gravel">Superficie: grixo ou pedregullo finos</string>
+	<string name="poi_surface_compacted">Superficie: chan compactado</string>
+	<string name="poi_surface_sand">Superficie: area</string>
+	<string name="poi_surface_grass">Superficie: céspede</string>
+	<string name="poi_surface_grass_paver">Superficie: chan de céspede</string>
+	<string name="poi_surface_ground">Superficie: chan (de terra)</string>
+	<string name="poi_surface_dirt">Superficie: terra</string>
+	<string name="poi_surface_mud">Superficie: lama</string>
+	<string name="poi_surface_ice">Superficie: xeo</string>
+	<string name="poi_surface_salt">Superficie: sal</string>
+	<string name="poi_surface_snow">Superficie: neve</string>
+
+	<string name="poi_consulting">Oficina de consultoría</string>
+	<string name="poi_nuclear_explosion_date_utc">Data da explosión (UTC)</string>
+	<string name="poi_date_yes">Amosado da data</string>
+	<string name="poi_date_no">Amosado da data: non</string>
+
+	<string name="poi_network">Rede</string>
+
+	<string name="poi_amusement_arcade">Centro recreativo</string>
+	<string name="poi_end_date">Data do remate</string>
 
 	</resources>
