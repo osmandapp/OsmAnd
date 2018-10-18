@@ -1196,6 +1196,17 @@ public class OpeningHoursParser {
 			return false;
 		}
 
+		public boolean isOpenedEveryDay() {
+			boolean openedEveryDay = true;
+			for (int i = 0; i < 7; i++) {
+				if (!days[i]) {
+					openedEveryDay = false;
+					break;
+				}
+			}
+			return openedEveryDay;
+		}
+
 		@Override
 		public String getTime(Calendar cal, boolean checkAnotherDay, int limit, boolean opening) {
 			StringBuilder sb = new StringBuilder();
