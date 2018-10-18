@@ -2,9 +2,15 @@ package net.osmand.plus.helpers;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.LayerDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.provider.Settings.Secure;
+import android.support.annotation.ColorInt;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
 
@@ -161,9 +167,20 @@ public class DiscountHelper {
 	private static void showDiscountBanner(final MapActivity mapActivity, final ControllerData data) {
 		int iconId = mapActivity.getResources().getIdentifier(data.iconId, "drawable", mapActivity.getMyApplication().getPackageName());
 		final DiscountBarController toolbarController = new DiscountBarController();
+		if (data.bgColor != -1) {
+			LayerDrawable bgLand = (LayerDrawable) ContextCompat.getDrawable(mapActivity, R.drawable.discount_bar_bg_land);
+			if (bgLand != null) {
+				((GradientDrawable) bgLand.findDrawableByLayerId(R.id.color_bg)).setColor(data.bgColor);
+			}
+			ColorDrawable bg = new ColorDrawable(data.bgColor);
+			toolbarController.setBgs(bg, bg, bgLand, bgLand);
+		}
 		toolbarController.setTitle(data.message);
+		toolbarController.setTitleTextClrs(data.titleColor, data.titleColor);
 		toolbarController.setDescription(data.description);
+		toolbarController.setDescrTextClrs(data.descrColor, data.descrColor);
 		toolbarController.setBackBtnIconIds(iconId, iconId);
+		toolbarController.setBackBtnIconClrs(data.iconColor, data.iconColor);
 		if (!Algorithms.isEmpty(data.url)) {
 			View.OnClickListener clickListener = new View.OnClickListener() {
 				@Override
@@ -218,13 +235,34 @@ public class DiscountHelper {
 		String iconId;
 		String url;
 
+		@ColorInt
+		int iconColor = -1;
+		@ColorInt
+		int bgColor = -1;
+		@ColorInt
+		int titleColor = -1;
+		@ColorInt
+		int descrColor = -1;
+
 		static ControllerData parse(OsmandApplication app, JSONObject obj) throws JSONException {
 			ControllerData res = new ControllerData();
 			res.message = obj.getString("message");
 			res.description = obj.getString("description");
 			res.iconId = obj.getString("icon");
 			res.url = parseUrl(app, obj.getString("url"));
+			res.iconColor = parseColor("icon_color", obj);
+			res.bgColor = parseColor("bg_color", obj);
+			res.titleColor = parseColor("title_color", obj);
+			res.descrColor = parseColor("description_color", obj);
 			return res;
+		}
+
+		private static int parseColor(String key, JSONObject obj) {
+			String color = obj.optString(key);
+			if (!color.isEmpty()) {
+				return Color.parseColor(color);
+			}
+			return -1;
 		}
 	}
 
