@@ -689,6 +689,9 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 	}
 
 	private List<TransportStopRoute> filterNearbyTransportRoutes(List<TransportStopRoute> routes, List<TransportStopRoute> filterFromRoutes) {
+		if (filterFromRoutes == null) {
+			return routes;
+		}
 		List<TransportStopRoute> filteredRoutes = new ArrayList<>();
 		for (TransportStopRoute route : routes) {
 			if (!containsRef(filterFromRoutes, route.route)) {
